@@ -6,20 +6,23 @@
  */
 
 import { fixture, html, oneEvent, expect } from '@open-wc/testing';
-import { SIDE_PANEL_PLACEMENT, SIDE_PANEL_SIZE } from '../defs.js';
-import { prefix } from '../../../globals/settings.js';
-import '../index.js';
-import CDSSidePanel from '../side-panel.js';
+import {
+  SIDE_PANEL_PLACEMENT,
+  SIDE_PANEL_SIZE,
+} from '@carbon/web-components/es/components/side-panel/defs.js';
+import { prefix } from '@carbon/web-components/es/globals/settings.js';
+import '@carbon/web-components/es/components/side-panel/index.js';
+import CDSSidePanel from '@carbon/web-components/es/components/side-panel/side-panel.js';
 import {
   getActionItems,
   getActionToolbarItems,
   getContent,
   getSlug,
   getSubTitle,
-} from '../_story-assets/index.js';
+} from '@carbon/web-components/es/components/side-panel/_story-assets/index.js';
 
-import '../../text-input/index.js';
-import '../../slug/index.js';
+import '@carbon/web-components/es/components/text-input/index.js';
+import '@carbon/web-components/es/components/slug/index.js';
 
 const defaultProps = {
   animateTitle: true,
@@ -225,8 +228,9 @@ describe('cds-side-panel', () => {
 
   it('should render subtitle text', async () => {
     const sidePanel = await fixture(template(defaultProps, getSubTitle(1)));
+    await sidePanel.updateComplete;
 
-    const subTitleText = sidePanel.querySelector(
+    const subTitleText = sidePanel.shadowRoot?.querySelector(
       `.${prefix}--side-panel__subtitle-text`
     );
     expect(subTitleText).to.exist;
@@ -474,9 +478,5 @@ describe('cds-side-panel', () => {
         value: originalInnerWidth,
       });
     });
-  });
-
-  afterEach(() => {
-    document.body.innerHTML = '';
   });
 });

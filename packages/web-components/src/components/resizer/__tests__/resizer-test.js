@@ -6,7 +6,7 @@
  */
 
 import { html, fixture, expect, oneEvent, aTimeout } from '@open-wc/testing';
-import '../index';
+import '@carbon/web-components/es/components/resizer/index.js';
 
 describe('cds-resizer-grid', function () {
   it('should render cds-resizer-grid', async () => {

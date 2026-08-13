@@ -453,23 +453,17 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
       '#nav-back-button, #close-button'
     );
 
-    let iconButtonSize = 'sm';
+    const actions = this?.querySelectorAll?.(
+      `${prefix}-button[slot='actions']`
+    );
+    const shouldUpgrade = actions?.length && /l/.test(this.size);
 
-    if (slug || otherButtons?.length) {
-      const actions = this?.querySelectorAll?.(
-        `${prefix}-button[slot='actions']`
-      );
-
-      if (actions?.length && /l/.test(this.size)) {
-        iconButtonSize = 'md';
-      }
-    }
-
-    if (slug) {
-      slug?.setAttribute('size', iconButtonSize);
+    if (slug && shouldUpgrade) {
+      slug.setAttribute('size', 'md');
     }
 
     if (otherButtons) {
+      const iconButtonSize = shouldUpgrade ? 'md' : 'sm';
       [...otherButtons].forEach((btn) => {
         btn.setAttribute('size', iconButtonSize);
       });

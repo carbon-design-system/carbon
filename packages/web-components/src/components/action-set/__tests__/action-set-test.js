@@ -6,7 +6,7 @@
  */
 
 import '@carbon/web-components/es/components/button/index.js';
-import '../index.js';
+import '@carbon/web-components/es/components/action-set/index.js';
 import { fixture, html, expect, elementUpdated } from '@open-wc/testing';
 
 const prefix = 'cds';
@@ -295,16 +295,18 @@ describe('cds-action-set', () => {
 
   describe('Validation warnings', () => {
     let consoleWarnStub;
+    let originalWarn;
 
     beforeEach(() => {
       consoleWarnStub = [];
-      sinon.stub(console, 'warn').callsFake((...args) => {
+      originalWarn = console.warn;
+      console.warn = (...args) => {
         consoleWarnStub.push(args.join(' '));
-      });
+      };
     });
 
     afterEach(() => {
-      console.warn.restore();
+      console.warn = originalWarn;
     });
 
     it('warns when more than 4 actions are provided', async () => {
