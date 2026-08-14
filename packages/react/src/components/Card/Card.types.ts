@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 
 /**
  * Base props shared across card components
@@ -26,17 +26,29 @@ export interface CardBaseProps {
  */
 export interface CardProps extends CardBaseProps {
   /**
-   * Makes the entire card clickable
+   * The underlying element or component to render the card as.
+   * Defaults to `'div'`. Use `'a'` or a router Link component for
+   * navigation cards when combined with `clickable`.
+   * @example <Card as="a" clickable href="/dashboard">...</Card>
+   * @example <Card as={RouterLink} clickable to="/dashboard">...</Card>
+   */
+  as?: React.ElementType;
+  /**
+   * Makes the entire card clickable. When true, the card gains interactive
+   * styles (hover, focus, active) and renders a built-in footer affordance
+   * with an arrow icon. Use `onClick` for action cards or `as="a"` with
+   * `href` for navigation cards.
    */
   clickable?: boolean;
   /**
-   * Click handler for clickable cards
+   * Click handler for clickable cards. Only has effect when `clickable`
+   * is true.
    */
-  onClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
+  onClick?: (event: React.MouseEvent) => void;
   /**
-   * Keyboard event handler for clickable cards
+   * Keyboard event handler. Only has effect when `clickable` is true.
    */
-  onKeyDown?: (event: React.KeyboardEvent<HTMLDivElement>) => void;
+  onKeyDown?: (event: React.KeyboardEvent) => void;
   /**
    * Disables the card and all interactive elements
    */
@@ -55,6 +67,13 @@ export interface CardProps extends CardBaseProps {
    * header/body/footer stacked vertically on the right.
    */
   horizontal?: boolean;
+  /**
+   * Icon rendered in the built-in footer affordance of a clickable card.
+   * Only has effect when `clickable` is true. Defaults to ArrowRight.
+   * Pass any icon component from `@carbon/icons-react`.
+   * @example <Card clickable renderFooterIcon={Launch}>...</Card>
+   */
+  renderFooterIcon?: React.ElementType;
 }
 
 /**
@@ -65,7 +84,14 @@ export type CardHeaderProps = CardBaseProps;
 /**
  * Props for CardBody component
  */
-export type CardBodyProps = CardBaseProps;
+export interface CardBodyProps extends CardBaseProps {
+  /**
+   * When true, removes all padding so content fills the body edge-to-edge.
+   * Use when the body contains a component (e.g. a table, chart, or image)
+   * that manages its own internal spacing.
+   */
+  isFlush?: boolean;
+}
 
 /**
  * Props for CardFooter component
@@ -92,4 +118,9 @@ export interface CardContextValue {
    * Whether the card is in horizontal layout mode
    */
   horizontal?: boolean;
+  /**
+   * Click handler forwarded from the Card root, available to child components
+   * (e.g. the built-in clickable footer affordance).
+   */
+  onClick?: (event: React.MouseEvent) => void;
 }
