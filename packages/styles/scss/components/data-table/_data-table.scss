@@ -770,9 +770,9 @@
 
   .#{$prefix}--data-table--sticky-header {
     display: block;
-    overflow-y: scroll;
     inline-size: fit-content;
     min-inline-size: 100%;
+    overflow-y: scroll;
 
     thead,
     tbody,
