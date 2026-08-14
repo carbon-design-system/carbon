@@ -103,10 +103,6 @@
     }
   }
 
-  .#{$prefix}--file-browse-btn--disabled .#{$prefix}--file__drop-container {
-    border: 1px dashed button.$button-disabled;
-  }
-
   .#{$prefix}--label-description {
     @include reset;
     @include type-style('body-compact-01');
@@ -416,6 +412,12 @@
     padding: $spacing-05;
     border: 1px dashed $border-strong;
     block-size: convert.to-rem(96px);
+  }
+
+  .#{$prefix}--file-browse-btn--disabled.#{$prefix}--file__drop-container,
+  .#{$prefix}--file-browse-btn--disabled .#{$prefix}--file__drop-container {
+    border: 1px dashed button.$button-disabled;
+    cursor: no-drop;
   }
 
   .#{$prefix}--file__drop-container--drag-over {
