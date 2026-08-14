@@ -285,7 +285,7 @@ const meta = {
     chromatic: { disableSnapshot: true },
   },
   tags: [
-    '!dev', // uncomment to hide from the sidebar
+    // '!dev', // uncomment to hide from the sidebar
     '!autodocs',
   ],
 };
