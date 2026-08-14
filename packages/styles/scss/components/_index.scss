@@ -6,11 +6,13 @@
 //
 
 @use 'accordion';
+@use 'action-set';
 @use 'ai-label';
 @use 'aspect-ratio';
 @use 'badge-indicator';
 @use 'breadcrumb';
 @use 'button';
+@use 'card';
 @use 'chat-button';
 @use 'checkbox';
 @use 'code-snippet';
@@ -42,6 +44,7 @@
 @use 'form';
 @use 'icon-indicator';
 @use 'inline-loading';
+@use 'InterstitialScreen';
 @use 'link';
 @use 'list';
 @use 'list-box';
@@ -60,6 +63,8 @@
 @use 'progress-bar';
 @use 'progress-indicator';
 @use 'radio-button';
+@use 'resizer';
+@use 'side-panel';
 @use 'search';
 @use 'select';
 @use 'shape-indicator';
@@ -78,4 +83,5 @@
 @use 'toggle';
 @use 'tooltip';
 @use 'treeview';
+@use 'truncated-text';
 @use 'ui-shell';
