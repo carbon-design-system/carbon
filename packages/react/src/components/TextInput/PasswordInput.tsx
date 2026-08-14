@@ -349,10 +349,10 @@ const PasswordInput = forwardRef<unknown, PasswordInputProps>(
       align = tooltipPosition;
     }
     if (!hidePasswordLabel || hidePasswordLabel.trim() === '') {
-      // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
+      // eslint-disable-next-line no-console
       console.warn('Warning: The "hidePasswordLabel" should not be blank.');
     } else if (!showPasswordLabel || showPasswordLabel.trim() === '') {
-      // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
+      // eslint-disable-next-line no-console
       console.warn('Warning: The "showPasswordLabel" should not be blank.');
     }
     const input = (

@@ -23,7 +23,8 @@ $css--plex: true !default;
   @extend .#{$prefix}--date-picker;
 
   #floating-menu-container {
-    position: absolute;
+    position: fixed;
+    z-index: z('dropdown');
     inline-size: 100%;
   }
 
@@ -182,4 +183,10 @@ $css--plex: true !default;
 :host(#{$prefix}-date-picker-input[ai-label])
   .#{$prefix}--date-picker__input--decorator {
   @include ai-gradient;
+}
+
+.#{$prefix}--form-requirement {
+  box-sizing: border-box;
+  inline-size: 0;
+  min-inline-size: 100%;
 }

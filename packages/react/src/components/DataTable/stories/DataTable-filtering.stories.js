@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -26,7 +26,7 @@ import DataTable, {
   TableSelectAll,
   TableSelectRow,
 } from '..';
-import { rows, headers } from './shared';
+import { dataTableArgs, dataTableArgTypes, rows, headers } from './shared';
 import mdx from '../DataTable.mdx';
 import TableToolbarFilter from './examples/TableToolbarFilter';
 import './datatable-story.scss';
@@ -49,19 +49,8 @@ export default {
     TableHeader,
     TableRow,
   },
-  argTypes: {
-    size: {
-      options: ['xs', 'sm', 'md', 'lg', 'xl'],
-      control: { type: 'select' },
-    },
-    useZebraStyles: {
-      control: { type: 'boolean' },
-    },
-  },
-  args: {
-    size: 'lg',
-    useZebraStyles: false,
-  },
+  argTypes: dataTableArgTypes,
+  args: dataTableArgs,
   parameters: {
     docs: {
       page: mdx,
@@ -111,11 +100,12 @@ export const Default = (args) => {
         getHeaderProps,
         getRowProps,
         getTableProps,
+        getToolbarProps,
         onInputChange,
         getCellProps,
       }) => (
         <TableContainer title="DataTable" description="With filtering">
-          <TableToolbar>
+          <TableToolbar {...getToolbarProps()}>
             <TableToolbarContent>
               {/* pass in `onInputChange` change here to make filtering work */}
               <TableToolbarSearch

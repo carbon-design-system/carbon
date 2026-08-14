@@ -51,6 +51,19 @@
     - new
     - additional
     - add
+- name: add-comments--mobile
+  friendly_name: Add comments mobile
+  aliases:
+    - comments
+    - new
+    - additional
+    - add
+    - plus
+    - plus sign
+    - mobile
+    - phone
+    - device
+    - message
 - name: advanced--fraud--protection
   friendly_name: Advanced fraud protection
   aliases:
@@ -1583,6 +1596,13 @@
     - cheese
     - food
     - snack
+- name: chennai
+  friendly_name: Chennai
+  aliases:
+    - chennai
+    - landmark
+    - landscape
+    - city
 - name: cherries
   friendly_name: Cherries
   aliases:
@@ -2245,6 +2265,21 @@
     - commercial financing 02
     - financing
     - finance
+- name: complete-work--technician
+  friendly_name: Complete work technician
+  aliases:
+    - done
+    - complete
+    - finished
+    - checkmark
+    - work
+    - work order
+    - technician
+    - man
+    - person
+    - mobile
+    - phone
+    - device
 - name: compliant
   friendly_name: Compliant
   aliases:
@@ -2582,6 +2617,18 @@
     - sea
     - marine life
     - animal
+- name: create-work
+  friendly_name: Create work
+  aliases:
+    - clipboard
+    - work
+    - create
+    - create work
+    - work order
+    - new work
+    - plus
+    - plus sign
+    - add
 - name: credit--card
   friendly_name: Credit card
   aliases:
@@ -2935,6 +2982,13 @@
     - delivery
     - manufacturing
     - workplace
+- name: denver
+  friendly_name: Denver
+  aliases:
+    - denver
+    - landmark
+    - landscape
+    - city
 - name: deploying-containers
   friendly_name: Deploying containers
   aliases:
@@ -4076,6 +4130,12 @@
   friendly_name: Flashing content
   aliases:
     - flashing content
+    - content
+    - container
+    - window
+    - play
+    - play button
+    - video
 - name: flexibility
   friendly_name: Flexibility
   aliases:
@@ -4229,6 +4289,13 @@
   aliases:
     - fragile
     - packaging
+- name: frankfurt
+  friendly_name: Frankfurt
+  aliases:
+    - frankfurt
+    - landmark
+    - landscape
+    - city
 - name: free--trial
   friendly_name: Free trial
   aliases:
@@ -5139,6 +5206,17 @@
     - investments
     - financial
     - insights
+- name: ibm--atx-office
+  friendly_name: IBM® ATX office
+  aliases:
+    - austin
+    - ibm
+    - atx
+    - texas
+    - office
+    - location
+    - work
+    - building
 - name: ibm--automation-platform
   friendly_name: IBM Automation platform
   aliases:
@@ -5865,6 +5943,13 @@
     - lantern
     - light
     - celebration
+- name: laptop
+  friendly_name: Laptop
+  aliases:
+    - laptop
+    - computer
+    - notebook
+    - PC
 - name: launch
   friendly_name: Launch
   aliases:
@@ -6051,6 +6136,21 @@
     - listen
     - ADA
     - deaf
+- name: los-angeles
+  friendly_name: Los Angeles
+  aliases:
+    - los angeles
+    - landmark
+    - landscape
+    - city
+- name: lotus--flower
+  friendly_name: Lotus flower
+  aliases:
+    - meditation
+    - relaxation
+    - lotus
+    - flower
+    - nature
 - name: love
   friendly_name: Love
   aliases:
@@ -6391,6 +6491,13 @@
     - memory
     - RAM
     - cloud
+- name: men--showers
+  friendly_name: Men showers
+  aliases:
+    - person
+    - shower
+    - shower head
+    - bathroom
 - name: messaging--01
   friendly_name: Messaging 01
   aliases:
@@ -6444,6 +6551,13 @@
     - museum
     - city
     - cities
+- name: miami
+  friendly_name: Miami
+  aliases:
+    - miami
+    - landmark
+    - landscape
+    - city
 - name: micro
   friendly_name: Micro
   aliases:
@@ -7220,6 +7334,13 @@
     - Japan
     - Tsutenkaku Tower
     - landmark
+- name: oslo
+  friendly_name: Oslo
+  aliases:
+    - oslo
+    - landmark
+    - landscape
+    - city
 - name: osprey
   friendly_name: Osprey
   aliases:
@@ -7513,6 +7634,13 @@
     - insights
     - watson
     - AI
+- name: perth
+  friendly_name: Perth
+  aliases:
+    - perth
+    - landmark
+    - landscape
+    - city
 - name: peru--machu-picchu
   friendly_name: Peru Machu Picchu
   aliases:
@@ -8287,6 +8415,18 @@
     - data
     - analytics
     - chart
+- name: report-time--technician
+  friendly_name: Report time technician
+  aliases:
+    - time
+    - time card
+    - timesheet
+    - entry
+    - report
+    - technician
+    - man
+    - person
+    - clock
 - name: research
   friendly_name: Research
   aliases:
@@ -8371,6 +8511,16 @@
     - rank
     - watson
     - AI
+- name: review-checklist
+  friendly_name: Review checklist
+  aliases:
+    - checklist
+    - checkbox
+    - clipboard
+    - tasks
+    - items
+    - review
+    - review checklist
 - name: rich--text--format
   friendly_name: Rich text format
   aliases:
@@ -8486,6 +8636,13 @@
     - San Francisco
     - city
     - cities
+- name: san-jose
+  friendly_name: San Jose
+  aliases:
+    - san jose
+    - landmark
+    - landscape
+    - city
 - name: san-francisco--fog
   friendly_name: San Francisco fog
   aliases:
@@ -9219,6 +9376,22 @@
   aliases:
     - start-ups
     - cloud
+- name: start-work--technician
+  friendly_name: Start work technician
+  aliases:
+    - begin
+    - start
+    - in progress
+    - play
+    - play button
+    - work
+    - work order
+    - technician
+    - man
+    - person
+    - mobile
+    - phone
+    - device
 - name: station--hydration
   friendly_name: Hydration station
   aliases:
@@ -9410,6 +9583,32 @@
     - weather
     - sky
     - forecast
+- name: supervisor
+  friendly_name: Supervisor
+  aliases:
+    - supervisor
+    - field
+    - dispatcher
+    - work
+    - man
+    - person
+    - helmet
+- name: supervisor-close--work
+  friendly_name: Supervisor close work
+  aliases:
+    - supervisor
+    - close work
+    - manage work
+    - checkmark
+    - dashboard
+    - graph
+    - kpi
+    - field
+    - dispatcher
+    - work
+    - man
+    - person
+    - helmet
 - name: supply--chain--optimization--01
   friendly_name: Supply chain optimization 01
   aliases:
@@ -9641,6 +9840,13 @@
     - tags
     - retail
     - label
+- name: taipei
+  friendly_name: Taipei
+  aliases:
+    - taipei
+    - landmark
+    - landscape
+    - city
 - name: taipei--bubble-tea
   friendly_name: Taipei bubble tea
   aliases:
@@ -9722,6 +9928,18 @@
     - education
     - technique
     - security
+- name: technology-zone--finger
+  friendly_name: Technology Zone finger
+  aliases:
+    - finger
+    - touch
+    - gesture
+    - interaction
+    - technology
+    - TechZone
+    - IBM Technology Zone
+    - hand
+    - tap
 - name: tel-aviv
   friendly_name: Tel Aviv
   aliases:
@@ -11088,6 +11306,13 @@
     - modem
     - wireless
     - home
+- name: women--showers
+  friendly_name: Women showers
+  aliases:
+    - person
+    - shower
+    - shower head
+    - bathroom
 - name: word--cloud
   friendly_name: Word cloud
   aliases:

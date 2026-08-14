@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -48,6 +48,8 @@ class CDSDefinitionTooltip extends LitElement {
   @state()
   open = false;
 
+  private _tooltipId = `${prefix}--definition-tooltip-${Math.random().toString(16).slice(2)}`;
+
   connectedCallback() {
     super.connectedCallback();
 
@@ -69,18 +71,25 @@ class CDSDefinitionTooltip extends LitElement {
   protected _handleKeyDown(event: KeyboardEvent) {
     const { key } = event;
 
-    if (this.open && (key === 'Esc' || key === 'Escape')) {
-      event.stopPropagation();
-      this.open = false;
+    if (key === 'Esc' || key === 'Escape') {
+      if (this.open) {
+        event.stopPropagation();
+        this.open = false;
+      }
+    } else if (key === ' ' || key === 'Enter') {
+      event.preventDefault();
+      this.open = !this.open;
     }
   }
 
-  protected _handleHover() {
-    if (this.openOnHover && !this.open) {
+  protected _handleMouseEnter() {
+    if (this.openOnHover) {
       this.open = true;
-    } else {
-      this.open = false;
     }
+  }
+
+  protected _handleMouseLeave() {
+    this.open = false;
   }
 
   protected _handleFocus() {
@@ -88,14 +97,15 @@ class CDSDefinitionTooltip extends LitElement {
   }
 
   render() {
-    const { align, open } = this;
+    const { align, open, _tooltipId } = this;
 
     return html`
       <cds-popover
-        @mouseenter=${this._handleHover}
-        @mouseleave=${this._handleHover}
+        @mouseenter=${this._handleMouseEnter}
+        @mouseleave=${this._handleMouseLeave}
         highContrast
-        dropShadow=${false}
+        ?autoalign=${this.autoalign}
+        .dropShadow=${false}
         align=${align}
         .open=${open}>
         <button
@@ -103,12 +113,14 @@ class CDSDefinitionTooltip extends LitElement {
           @blur=${this._handleBlur}
           @mousedown=${this._handleMouseDown}
           @keydown=${this._handleKeyDown}
+          aria-controls=${_tooltipId}
+          aria-describedby=${_tooltipId}
           aria-expanded=${open}
           part="definition-term"
           class="${prefix}--definition-term">
           <slot></slot>
         </button>
-        <cds-popover-content>
+        <cds-popover-content id=${_tooltipId}>
           <slot name="definition"></slot>
         </cds-popover-content>
       </cds-popover>

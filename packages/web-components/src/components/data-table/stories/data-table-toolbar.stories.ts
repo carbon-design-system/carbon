@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -13,6 +13,7 @@ import OverflowMenuVertical16 from '@carbon/icons/es/overflow-menu--vertical/16.
 import storyDocs from './data-table.mdx';
 import '../index';
 import { iconLoader } from '../../../globals/internal/icon-loader';
+import '../../overflow-menu/';
 
 const sizes = {
   [`xs (${TABLE_SIZE.XS})`]: TABLE_SIZE.XS,
@@ -26,8 +27,10 @@ const defaultArgs = {
   isSortable: false,
   locale: 'en',
   overflowMenuOnHover: false,
+  persistent: false,
   radio: false,
   size: TABLE_SIZE.LG,
+  useStaticWidth: false,
   useZebraStyles: false,
 };
 
@@ -44,6 +47,10 @@ const controls = {
     control: 'boolean',
     description: 'Overflow menu on hover',
   },
+  persistent: {
+    control: 'boolean',
+    description: 'Keep the toolbar search expanded.',
+  },
   radio: {
     control: 'boolean',
     description: 'Radio',
@@ -52,6 +59,10 @@ const controls = {
     control: 'select',
     description: 'Size',
     options: sizes,
+  },
+  useStaticWidth: {
+    control: 'boolean',
+    description: 'Use static width',
   },
   useZebraStyles: {
     control: 'boolean',
@@ -68,7 +79,9 @@ export const Default = {
     locale,
     radio,
     overflowMenuOnHover,
+    persistent,
     size,
+    useStaticWidth,
     useZebraStyles,
   }) => html`
     <cds-table
@@ -77,6 +90,7 @@ export const Default = {
       ?overflow-menu-on-hover=${overflowMenuOnHover}
       ?radio=${radio}
       size="${size}"
+      ?use-static-width=${useStaticWidth}
       ?use-zebra-styles="${useZebraStyles}">
       <cds-table-header-title slot="title">DataTable</cds-table-header-title>
       <cds-table-header-description slot="description"
@@ -86,6 +100,7 @@ export const Default = {
       <cds-table-toolbar slot="toolbar">
         <cds-table-toolbar-content ?has-batch-actions="true">
           <cds-table-toolbar-search
+            ?persistent=${persistent}
             placeholder="Filter table"></cds-table-toolbar-search>
           <cds-overflow-menu toolbar-action>
             ${iconLoader(Settings16, {
@@ -258,8 +273,29 @@ export const Default = {
 };
 
 export const PersistentToolbar = {
-  render: () => html`
-    <cds-table>
+  args: { persistent: true },
+  argTypes: {
+    persistent: { table: { readonly: true } },
+    radio: { control: false },
+  },
+  render: ({
+    isSortable,
+    locale,
+    overflowMenuOnHover,
+    persistent,
+    radio,
+    size,
+    useStaticWidth,
+    useZebraStyles,
+  }) => html`
+    <cds-table
+      ?is-sortable=${isSortable}
+      locale="${locale}"
+      ?overflow-menu-on-hover=${overflowMenuOnHover}
+      ?radio=${radio}
+      size="${size}"
+      ?use-static-width=${useStaticWidth}
+      ?use-zebra-styles=${useZebraStyles}>
       <cds-table-header-title slot="title">DataTable</cds-table-header-title>
       <cds-table-header-description slot="description"
         >With toolbar</cds-table-header-description
@@ -268,7 +304,7 @@ export const PersistentToolbar = {
       <cds-table-toolbar slot="toolbar">
         <cds-table-toolbar-content>
           <cds-table-toolbar-search
-            persistent
+            ?persistent=${persistent}
             placeholder="Filter table"></cds-table-toolbar-search>
           <cds-overflow-menu toolbar-action>
             ${iconLoader(Settings16, {
@@ -361,8 +397,30 @@ export const PersistentToolbar = {
 };
 
 export const SmallPersistentToolbar = {
-  render: () => html`
-    <cds-table size="sm">
+  args: { persistent: true, size: TABLE_SIZE.SM },
+  argTypes: {
+    persistent: { table: { readonly: true } },
+    radio: { control: false },
+    size: { table: { readonly: true } },
+  },
+  render: ({
+    isSortable,
+    locale,
+    overflowMenuOnHover,
+    persistent,
+    radio,
+    size,
+    useStaticWidth,
+    useZebraStyles,
+  }) => html`
+    <cds-table
+      ?is-sortable=${isSortable}
+      locale="${locale}"
+      ?overflow-menu-on-hover=${overflowMenuOnHover}
+      ?radio=${radio}
+      size="${size}"
+      ?use-static-width=${useStaticWidth}
+      ?use-zebra-styles=${useZebraStyles}>
       <cds-table-header-title slot="title">DataTable</cds-table-header-title>
       <cds-table-header-description slot="description"
         >With toolbar</cds-table-header-description
@@ -371,7 +429,7 @@ export const SmallPersistentToolbar = {
       <cds-table-toolbar slot="toolbar">
         <cds-table-toolbar-content>
           <cds-table-toolbar-search
-            persistent
+            ?persistent=${persistent}
             placeholder="Filter table"></cds-table-toolbar-search>
           <cds-overflow-menu toolbar-action>
             ${iconLoader(Settings16, {
@@ -458,8 +516,25 @@ export const SmallPersistentToolbar = {
 };
 
 export const WithOverflowMenu = {
-  render: () => html`
-    <cds-table>
+  argTypes: { radio: { control: false } },
+  render: ({
+    isSortable,
+    locale,
+    overflowMenuOnHover,
+    persistent,
+    radio,
+    size,
+    useStaticWidth,
+    useZebraStyles,
+  }) => html`
+    <cds-table
+      ?is-sortable=${isSortable}
+      locale="${locale}"
+      ?overflow-menu-on-hover=${overflowMenuOnHover}
+      ?radio=${radio}
+      size="${size}"
+      ?use-static-width=${useStaticWidth}
+      ?use-zebra-styles=${useZebraStyles}>
       <cds-table-header-title slot="title">DataTable</cds-table-header-title>
       <cds-table-header-description slot="description"
         >With toolbar</cds-table-header-description
@@ -468,6 +543,7 @@ export const WithOverflowMenu = {
       <cds-table-toolbar slot="toolbar">
         <cds-table-toolbar-content>
           <cds-table-toolbar-search
+            ?persistent=${persistent}
             placeholder="Filter table"></cds-table-toolbar-search>
           <cds-overflow-menu toolbar-action>
             ${iconLoader(Settings16, {
@@ -652,6 +728,8 @@ export const WithOverflowMenu = {
 
 const meta = {
   title: 'Components/DataTable/Toolbar',
+  args: defaultArgs,
+  argTypes: controls,
   parameters: {
     docs: {
       page: storyDocs,

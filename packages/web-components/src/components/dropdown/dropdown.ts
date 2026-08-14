@@ -35,6 +35,7 @@ import {
 import CDSDropdownItem from './dropdown-item';
 import styles from './dropdown.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import CDSAILabel from '../ai-label/ai-label';
 
 export {
   DROPDOWN_KEYBOARD_ACTION,
@@ -135,6 +136,18 @@ class CDSDropdown extends ValidityMixin(
    */
   @query('slot[name="title-text"]')
   protected _slotTitleTextNode!: HTMLSlotElement;
+
+  /**
+   * The `<slot>` element for the AI label in the shadow DOM.
+   */
+  @query("slot[name='ai-label']")
+  private _slotAILabelNode!: HTMLSlotElement;
+
+  /**
+   * The `<slot>` element for the slug in the shadow DOM.
+   */
+  @query("slot[name='slug']")
+  private _slotSlugNode!: HTMLSlotElement;
 
   /**
    * @param itemToSelect A dropdown item. Absense of this argument means clearing selection.
@@ -433,6 +446,9 @@ class CDSDropdown extends ValidityMixin(
    * Handles keypress events (Space, Enter)
    */
   protected _handleKeypressInner(event: KeyboardEvent) {
+    if (event.target instanceof CDSAILabel) {
+      return;
+    }
     const { key } = event;
     const action = (this.constructor as typeof CDSDropdown).getAction(key);
     // When closed
@@ -1070,7 +1086,7 @@ class CDSDropdown extends ValidityMixin(
    * The value of the selected item.
    */
   @property({ reflect: true })
-  value = '';
+  accessor value = '';
 
   /**
    * Specify whether the control is currently in warning state
@@ -1145,19 +1161,17 @@ class CDSDropdown extends ValidityMixin(
       this.removeAttribute('ai-label');
     }
 
-    const label = this.shadowRoot?.querySelector("slot[name='ai-label']");
+    const label = this._slotAILabelNode;
     if (label) {
       label?.classList.toggle(
         `${prefix}--slug--revert`,
         this.querySelector(`${prefix}-ai-label`)?.hasAttribute('revert-active')
       );
     } else {
-      this.shadowRoot
-        ?.querySelector("slot[name='slug']")
-        ?.classList.toggle(
-          `${prefix}--slug--revert`,
-          this.querySelector(`${prefix}-slug`)?.hasAttribute('revert-active')
-        );
+      this._slotSlugNode?.classList.toggle(
+        `${prefix}--slug--revert`,
+        this.querySelector(`${prefix}-slug`)?.hasAttribute('revert-active')
+      );
     }
 
     if (
@@ -1256,6 +1270,7 @@ class CDSDropdown extends ValidityMixin(
       [`${prefix}--list-box--inline`]: inline,
       [`${prefix}--list-box--expanded`]: open,
       [`${prefix}--list-box--${size}`]: size,
+      [`${prefix}--layout--size-${size}`]: size,
       [`${prefix}--dropdown--invalid`]: normalizedProps.invalid,
       [`${prefix}--dropdown--warn`]: normalizedProps.warn,
       [`${prefix}--dropdown--inline`]: inline,

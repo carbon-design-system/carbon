@@ -11,18 +11,23 @@ import { render } from '@testing-library/react';
 
 describe('SwitcherDivider', () => {
   describe('renders as expected - Component API', () => {
-    it('should spread extra props onto outermost element', () => {
+    it('should spread extra props onto the separator element', () => {
       const { container } = render(<SwitcherDivider data-testid="test-id" />);
 
-      expect(container.firstChild).toHaveAttribute('data-testid', 'test-id');
+      // SwitcherDivider renders as `li > hr`, so assert against the separator.
+      expect(container.firstChild.firstChild).toHaveAttribute(
+        'data-testid',
+        'test-id'
+      );
     });
 
-    it('should support a custom `className` prop on the outermost element', () => {
+    it('should support a custom `className` prop on the separator element', () => {
       const { container } = render(
         <SwitcherDivider className="custom-class" />
       );
 
-      expect(container.firstChild).toHaveClass('custom-class');
+      // SwitcherDivider renders as `li > hr`, so assert against the separator.
+      expect(container.firstChild.firstChild).toHaveClass('custom-class');
     });
   });
 });

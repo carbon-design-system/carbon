@@ -146,7 +146,7 @@ function Tabs({
 }: TabsProps) {
   const baseId = useId('ccs');
   if (dismissable && !onTabCloseRequest) {
-    // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
+    // eslint-disable-next-line no-console
     console.error(
       'dismissable property specified without also providing an onTabCloseRequest property.'
     );
@@ -436,6 +436,14 @@ export interface TabListProps extends DivAttributes {
    * on component rerender
    */
   scrollIntoView?: boolean;
+
+  /**
+   * Specify the size of the tabs.
+   *
+   * Supports `sm` and `md` for line tabs.
+   * Supports `sm`, `md`, and `lg` for contained tabs.
+   */
+  size?: 'sm' | 'md' | 'lg';
 }
 type TabElement = HTMLElement & { disabled?: boolean };
 
@@ -452,6 +460,7 @@ function TabList({
   rightOverflowButtonProps,
   scrollDebounceWait = 200,
   scrollIntoView,
+  size,
   ...rest
 }: TabListProps) {
   const {
@@ -462,6 +471,7 @@ function TabList({
     dismissable,
   } = React.useContext(TabsContext);
   const prefix = usePrefix();
+  const containerRef = useRef<HTMLDivElement>(null);
   const ref = useRef<HTMLDivElement>(null);
   const previousButton = useRef<HTMLButtonElement>(null);
   const nextButton = useRef<HTMLButtonElement>(null);
@@ -492,6 +502,10 @@ function TabList({
       [`${prefix}--tabs__icon--default`]: iconSize === 'default',
       [`${prefix}--tabs__icon--lg`]: iconSize === 'lg', // TODO: V12 - Remove this class
       [`${prefix}--layout--size-lg`]: iconSize === 'lg',
+      [`${prefix}--layout--size-${size}`]:
+        size &&
+        !hasSecondaryLabelTabs &&
+        (contained || size === 'sm' || size === 'md'),
       [`${prefix}--tabs--tall`]: hasSecondaryLabelTabs,
       [`${prefix}--tabs--full-width`]: distributeWidth,
       [`${prefix}--tabs--dismissable`]: dismissable,
@@ -514,6 +528,22 @@ function TabList({
       : false
   );
 
+  const updateOverflowState = useCallback(() => {
+    if (!containerRef.current || !ref.current) {
+      return;
+    }
+
+    // adding 1 in calculations for Firefox support
+    const hasOverflow =
+      ref.current.scrollWidth > containerRef.current.clientWidth + 1;
+    setIsNextButtonVisible(
+      hasOverflow &&
+        ref.current.scrollLeft + ref.current.clientWidth + 1 <
+          ref.current.scrollWidth
+    );
+    setIsScrollable(hasOverflow);
+  }, []);
+
   const isPreviousButtonVisible = ref.current
     ? isScrollable && scrollLeft > 0
     : false;
@@ -533,14 +563,28 @@ function TabList({
   );
 
   const tabs = useRef<TabElement[]>([]);
-  const debouncedOnScroll = useCallback(() => {
-    const updateScroll = debounce(() => {
-      if (ref.current) {
-        setScrollLeft(ref.current.scrollLeft);
-      }
-    }, scrollDebounceWait);
-    updateScroll();
-  }, [scrollDebounceWait]);
+  const debouncedUpdateScroll = useMemo(
+    () =>
+      debounce(() => {
+        if (ref.current) {
+          setScrollLeft(ref.current.scrollLeft);
+        }
+      }, scrollDebounceWait),
+    [scrollDebounceWait]
+  );
+
+  useEffect(() => {
+    return () => {
+      debouncedUpdateScroll.cancel();
+    };
+  }, [debouncedUpdateScroll]);
+
+  const handleScroll = useCallback(() => {
+    // Keep the overflow controls in sync with smooth scrolling while the
+    // scroll position state continues to respect scrollDebounceWait.
+    updateOverflowState();
+    debouncedUpdateScroll();
+  }, [debouncedUpdateScroll, updateOverflowState]);
 
   function onKeyDown(event: KeyboardEvent) {
     if (
@@ -628,18 +672,8 @@ function TabList({
   }, []);
 
   useEffect(() => {
-    // adding 1 in calculation for firefox support
-    setIsNextButtonVisible(
-      ref.current
-        ? scrollLeft + ref.current.clientWidth + 1 < ref.current.scrollWidth
-        : false
-    );
-
-    if (dismissable && ref.current) {
-      // adding 1 in calculation for firefox support
-      setIsScrollable(ref.current.scrollWidth > ref.current.clientWidth + 1);
-    }
-  }, [children, dismissable, scrollLeft]);
+    updateOverflowState();
+  }, [children, scrollLeft, updateOverflowState]);
 
   useEffect(() => {
     if (tabs.current[selectedIndex]?.disabled) {
@@ -656,25 +690,20 @@ function TabList({
   }, []);
 
   useIsomorphicEffect(() => {
-    if (ref.current) {
-      // adding 1 in calculation for firefox support
-      setIsScrollable(ref.current.scrollWidth > ref.current.clientWidth + 1);
+    const element = containerRef.current;
+    if (!element) {
+      return;
     }
 
-    function handler() {
-      if (ref.current) {
-        // adding 1 in calculation for firefox support
-        setIsScrollable(ref.current.scrollWidth > ref.current.clientWidth + 1);
-      }
-    }
+    updateOverflowState();
 
-    const debouncedHandler = debounce(handler, 200);
-    window.addEventListener('resize', debouncedHandler);
+    const resizeObserver = new ResizeObserver(updateOverflowState);
+    resizeObserver.observe(element);
+
     return () => {
-      debouncedHandler.cancel();
-      window.removeEventListener('resize', debouncedHandler);
+      resizeObserver.disconnect();
     };
-  }, []);
+  }, [updateOverflowState]);
 
   // updates scroll location for all scroll behavior.
   useIsomorphicEffect(() => {
@@ -732,7 +761,7 @@ function TabList({
   });
 
   return (
-    <div className={className}>
+    <div ref={containerRef} className={className}>
       <button
         aria-hidden="true"
         tabIndex={-1}
@@ -750,7 +779,7 @@ function TabList({
         ref={ref}
         role="tablist"
         className={`${prefix}--tab--list`}
-        onScroll={debouncedOnScroll}
+        onScroll={handleScroll}
         onKeyDown={onKeyDown}
         onBlur={handleBlur}>
         {Children.map(children, (child, index) => {
@@ -856,6 +885,14 @@ TabList.propTypes = {
    * to newly selected tabs on component rerender
    */
   scrollIntoView: PropTypes.bool,
+
+  /**
+   * Specify the size of the tabs.
+   *
+   * Supports `sm` and `md` for line tabs.
+   * Supports `sm`, `md`, and `lg` for contained tabs.
+   */
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
 };
 
 /**
@@ -891,6 +928,11 @@ export interface TabListVerticalProps extends DivAttributes {
    * on component rerender
    */
   scrollIntoView?: boolean;
+
+  /**
+   * Specify the size of the tabs.
+   */
+  size?: 'sm' | 'md' | 'lg' | 'xl';
 }
 // type TabElement = HTMLElement & { disabled?: boolean };
 
@@ -900,6 +942,7 @@ function TabListVertical({
   children,
   className: customClassName,
   scrollIntoView,
+  size,
   ...rest
 }: TabListVerticalProps) {
   const { activeIndex, selectedIndex, setSelectedIndex, setActiveIndex } =
@@ -915,6 +958,9 @@ function TabListVertical({
     `${prefix}--tabs`,
     `${prefix}--tabs--vertical`,
     `${prefix}--tabs--contained`,
+    {
+      [`${prefix}--layout--size-${size}`]: size,
+    },
     customClassName
   );
 
@@ -1034,7 +1080,11 @@ function TabListVertical({
 
   if (isSm) {
     return (
-      <TabList {...rest} aria-label={label} contained>
+      <TabList
+        {...rest}
+        aria-label={label}
+        contained
+        size={size === 'xl' ? 'lg' : size}>
         {children}
       </TabList>
     );
@@ -1102,6 +1152,11 @@ TabListVertical.propTypes = {
    * Specify an optional className to be added to the container node
    */
   className: PropTypes.string,
+
+  /**
+   * Specify the size of the tabs.
+   */
+  size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
 };
 
 /**
@@ -1749,7 +1804,9 @@ function TabPanels({ children }: TabPanelsProps) {
 
     // Should only apply same height to vertical Tab Panels without a given height
     if (isVertical && !parentHasHeight) {
-      hiddenStates.current = refs.current.map((ref) => ref?.hidden || false);
+      hiddenStates.current = refs.current.map(
+        (ref) => ref?.hasAttribute('hidden') || false
+      );
 
       // un-hide hidden Tab Panels to get heights
       refs.current.forEach((ref) => {

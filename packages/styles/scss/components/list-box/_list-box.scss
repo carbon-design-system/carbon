@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2025
+// Copyright IBM Corp. 2016, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -16,6 +16,7 @@
 @use '../../spacing' as *;
 @use '../../motion' as *;
 @use '../../layer' as *;
+@use '../../utilities/layout';
 @use '../../utilities/ai-gradient' as *;
 @use '../../utilities/box-shadow' as *;
 @use '../../utilities/button-reset';
@@ -82,16 +83,17 @@ $list-box-menu-width: convert.to-rem(300px);
 
   .#{$prefix}--list-box {
     @include reset;
+    @include layout.use('size', $default: 'md', $min: 'xs', $max: 'lg');
 
     position: relative;
     border: none;
     background-color: $field;
-    block-size: convert.to-rem(40px);
+    block-size: layout.size('height');
     border-block-end: 1px solid $border-strong;
     color: $text-primary;
     cursor: pointer;
     inline-size: $list-box-width;
-    max-block-size: convert.to-rem(40px);
+    max-block-size: layout.size('height');
     transition: all $duration-fast-01 motion(standard, productive);
 
     &:hover {
@@ -101,16 +103,6 @@ $list-box-menu-width: convert.to-rem(300px);
 
   .#{$prefix}--multi-select.#{$prefix}--multi-select--readonly.#{$prefix}--list-box {
     cursor: default;
-  }
-
-  .#{$prefix}--list-box--lg {
-    block-size: convert.to-rem(48px);
-    max-block-size: convert.to-rem(48px);
-  }
-
-  .#{$prefix}--list-box--sm {
-    block-size: convert.to-rem(32px);
-    max-block-size: convert.to-rem(32px);
   }
 
   .#{$prefix}--list-box--expanded {
@@ -548,20 +540,8 @@ $list-box-menu-width: convert.to-rem(300px);
 
   .#{$prefix}--list-box--expanded .#{$prefix}--list-box__menu {
     display: block;
-    // 40px item height * 5.5 items shown
-    max-block-size: convert.to-rem(220px);
-  }
-
-  .#{$prefix}--list-box--expanded.#{$prefix}--list-box--lg
-    .#{$prefix}--list-box__menu {
-    // 48px item height * 5.5 items shown
-    max-block-size: convert.to-rem(264px);
-  }
-
-  .#{$prefix}--list-box--expanded.#{$prefix}--list-box--sm
-    .#{$prefix}--list-box__menu {
-    // 32px item height * 5.5 items shown
-    max-block-size: convert.to-rem(176px);
+    // item height * 5.5 items shown
+    max-block-size: calc(layout.size('height') * 5.5);
   }
 
   // Descendant of a `list-box__menu` that represents a selection for a control
@@ -569,7 +549,7 @@ $list-box-menu-width: convert.to-rem(300px);
     @include type-style('body-compact-01');
 
     position: relative;
-    block-size: convert.to-rem(40px);
+    block-size: layout.size('height');
     color: $text-secondary;
     cursor: pointer;
     transition: background $duration-fast-01 motion(standard, productive);
@@ -587,14 +567,6 @@ $list-box-menu-width: convert.to-rem(300px);
   // V11: Possibly deprecate
   .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item:hover {
     background-color: $layer-hover;
-  }
-
-  .#{$prefix}--list-box--sm .#{$prefix}--list-box__menu-item {
-    block-size: convert.to-rem(32px);
-  }
-
-  .#{$prefix}--list-box--lg .#{$prefix}--list-box__menu-item {
-    block-size: convert.to-rem(48px);
   }
 
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-item:hover {
@@ -670,9 +642,9 @@ $list-box-menu-width: convert.to-rem(300px);
 
     display: block;
     overflow: hidden;
-    padding: convert.to-rem(11px) 0;
+    padding: calc((layout.size('height') - 1rem) / 2 - 1px) 0;
     margin: 0 $spacing-05;
-    block-size: convert.to-rem(40px);
+    block-size: layout.size('height');
     border-block-end: 1px solid transparent;
     border-block-start: 1px solid transparent;
     border-block-start-color: $border-subtle-01;
@@ -690,7 +662,7 @@ $list-box-menu-width: convert.to-rem(300px);
     &:focus {
       @include focus-outline('outline');
 
-      padding: convert.to-rem(11px) convert.to-rem(16px);
+      padding: calc((layout.size('height') - 1rem) / 2) convert.to-rem(16px);
       border-color: transparent;
       margin: 0;
     }
@@ -699,16 +671,6 @@ $list-box-menu-width: convert.to-rem(300px);
       border-color: transparent;
       color: $text-primary;
     }
-  }
-
-  .#{$prefix}--list-box--sm .#{$prefix}--list-box__menu-item__option {
-    block-size: convert.to-rem(32px);
-    padding-block: convert.to-rem(7px) convert.to-rem(7px);
-  }
-
-  .#{$prefix}--list-box--lg .#{$prefix}--list-box__menu-item__option {
-    block-size: convert.to-rem(48px);
-    padding-block: convert.to-rem(15px) convert.to-rem(15px);
   }
 
   .#{$prefix}--list-box--disabled
@@ -863,27 +825,7 @@ $list-box-menu-width: convert.to-rem(300px);
 
   // Dropdown top orientation modifiers
   .#{$prefix}--list-box--up .#{$prefix}--list-box__menu {
-    inset-block-end: 2.5rem;
-  }
-
-  .#{$prefix}--list-box--up.#{$prefix}--dropdown--sm
-    .#{$prefix}--list-box__menu,
-  .#{$prefix}--list-box--up.#{$prefix}--list-box--sm
-    .#{$prefix}--list-box__menu,
-  .#{$prefix}--list-box--up
-    .#{$prefix}--list-box--sm
-    .#{$prefix}--list-box__menu {
-    inset-block-end: 2rem;
-  }
-
-  .#{$prefix}--list-box--up.#{$prefix}--dropdown--lg
-    .#{$prefix}--list-box__menu,
-  .#{$prefix}--list-box--up.#{$prefix}--list-box--lg
-    .#{$prefix}--list-box__menu,
-  .#{$prefix}--list-box--up
-    .#{$prefix}--list-box--lg
-    .#{$prefix}--list-box__menu {
-    inset-block-end: 3rem;
+    inset-block-end: layout.size('height');
   }
 
   // Tweaks for descendants

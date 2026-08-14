@@ -41,6 +41,13 @@
     fill: theme.$icon-primary;
   }
 
+  @media screen and (-ms-high-contrast: active), (forced-colors: active) {
+    .#{$prefix}--toggletip-button:hover svg,
+    .#{$prefix}--toggletip--open .#{$prefix}--toggletip-button svg {
+      fill: Highlight;
+    }
+  }
+
   .#{$prefix}--toggletip-button:focus {
     @include focus-outline.focus-outline;
   }

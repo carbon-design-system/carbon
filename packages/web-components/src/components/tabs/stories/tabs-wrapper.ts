@@ -7,19 +7,44 @@
 
 import { LitElement, html } from 'lit';
 import { property, state } from 'lit/decorators.js';
+import { carbonElement as customElement } from '../../../globals/decorators/carbon-element';
 import { prefix } from '../../../globals/settings';
 import { TABS_TYPE } from '../tabs';
+import { TABS_SIZE } from '../defs';
+import { iconLoader } from '../../../globals/internal/icon-loader';
+import Dashboard16 from '@carbon/icons/es/dashboard/16.js';
+import CloudMonitoring16 from '@carbon/icons/es/cloud--monitoring/16.js';
+import Activity16 from '@carbon/icons/es/activity/16.js';
+import Settings16 from '@carbon/icons/es/settings/16.js';
 import '../../button';
 
 /**
  * Wrapper component for dismissable tabs story with state management
  */
+@customElement('tabs-story-wrapper')
 export class DismissableTabsWrapper extends LitElement {
+  /**
+   * Whether to render tabs with icons
+   */
+  @property({ type: Boolean, attribute: 'with-icons' })
+  withIcons = false;
+
   private _defaultTabs = [
-    { id: 'all', label: 'Dashboard', value: 'all' },
-    { id: 'cloudFoundry', label: 'Monitoring', value: 'cloudFoundry' },
-    { id: 'staging', label: 'Activity', value: 'staging' },
-    { id: 'dea', label: 'Settings', value: 'dea', disabled: true },
+    { id: 'all', label: 'Dashboard', value: 'all', icon: Dashboard16 },
+    {
+      id: 'cloudFoundry',
+      label: 'Monitoring',
+      value: 'cloudFoundry',
+      icon: CloudMonitoring16,
+    },
+    { id: 'staging', label: 'Activity', value: 'staging', icon: Activity16 },
+    {
+      id: 'dea',
+      label: 'Settings',
+      value: 'dea',
+      disabled: true,
+      icon: Settings16,
+    },
   ];
   /**
    * Array of tab configurations
@@ -57,6 +82,12 @@ export class DismissableTabsWrapper extends LitElement {
   selectedIndex = 0;
 
   /**
+   * Size of the tabs
+   */
+  @property({ reflect: true })
+  size?: TABS_SIZE;
+
+  /**
    * Handle tab dismissed event
    */
   private _handleDismissed(event: CustomEvent) {
@@ -79,6 +110,9 @@ export class DismissableTabsWrapper extends LitElement {
 
   render() {
     const { resetTabs } = this;
+    const size =
+      this.size || (this.contained ? TABS_SIZE.LARGE : TABS_SIZE.MEDIUM);
+
     return html`
       <cds-button style="margin-bottom: 3rem" @click="${resetTabs}">
         Reset
@@ -89,6 +123,7 @@ export class DismissableTabsWrapper extends LitElement {
         selected-index="${this.selectedIndex}"
         type="${this.contained ? TABS_TYPE.CONTAINED : TABS_TYPE.REGULAR}"
         ?dismissable="${this.dismissable}"
+        size="${size}"
         value="all"
         @cds-tab-closed="${this._handleDismissed}"
         @cds-tabs-beingselected="${this._handleBeforeSelected}">
@@ -99,7 +134,7 @@ export class DismissableTabsWrapper extends LitElement {
               target="panel-${tab.id}"
               value="${tab.value}"
               ?disabled="${tab.disabled}">
-              ${tab.label}
+              ${this.withIcons ? iconLoader(tab.icon) : ''} ${tab.label}
             </cds-tab>
           `
         )}
@@ -127,7 +162,3 @@ export class DismissableTabsWrapper extends LitElement {
     return this;
   }
 }
-
-customElements.define('tabs-story-wrapper', DismissableTabsWrapper);
-
-// Made with Bob

@@ -161,13 +161,13 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
   value!: string;
 
   /**
-   * Specify whether the Checkbox is in a warn state
+   * Specify whether the Checkbox is in a warning state.
    */
   @property({ type: Boolean, reflect: true })
   warn = false;
 
   /**
-   * Provide the text that is displayed when the Checkbox is in a warn state
+   * Provide the text displayed when the Checkbox is in a warning state.
    */
   @property({ type: String, attribute: 'warn-text' })
   warnText = false;

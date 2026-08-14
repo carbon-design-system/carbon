@@ -85,6 +85,11 @@ describe('Button', () => {
     expect(screen.getByRole('button')).toBeInTheDocument();
   });
 
+  it('should not pass tooltipPosition to the button element when hasIconOnly=false', () => {
+    render(<Button tooltipPosition="bottom" />);
+    expect(screen.getByRole('button')).not.toHaveAttribute('tooltipposition');
+  });
+
   it.each([
     ['primary', 'cds--btn'],
     ['secondary', 'cds--btn--secondary'],
@@ -101,6 +106,18 @@ describe('Button', () => {
       expect(screen.getByText('test')).toHaveClass(className);
     }
   );
+
+  it('does not render danger assistive text when dangerDescription is empty', () => {
+    render(
+      <Button kind="danger" dangerDescription="">
+        Delete
+      </Button>
+    );
+
+    expect(screen.getByRole('button', { name: 'Delete' })).not.toHaveAttribute(
+      'aria-describedby'
+    );
+  });
 
   it.each([
     ['xs', 'cds--btn--xs'],

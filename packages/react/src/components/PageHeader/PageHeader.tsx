@@ -4,6 +4,10 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+/**
+ * @deprecated PageHeader has moved to Carbon for IBM Products.
+ * See https://github.com/carbon-design-system/carbon/issues/21926
+ */
 import React, {
   useEffect,
   useState,
@@ -31,6 +35,19 @@ import { Popover, PopoverContent } from '../Popover';
 import { useId } from '../../internal/useId';
 import { Grid, Column } from '../Grid';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
+import { deprecateComponent } from '../../prop-types/deprecateComponent';
+
+const pageHeaderDeprecationMessage = (componentName: string) =>
+  `The \`${componentName}\` component in \`@carbon/react\` has been deprecated and moved to \`@carbon/ibm-products\`. See https://github.com/carbon-design-system/carbon/issues/21926`;
+
+const usePageHeaderDeprecation = (componentName: string) => {
+  useEffect(() => {
+    deprecateComponent(
+      componentName,
+      pageHeaderDeprecationMessage(componentName)
+    );
+  }, [componentName]);
+};
 
 /**
  * ----------
@@ -43,6 +60,7 @@ interface PageHeaderProps {
 }
 const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
   ({ className, children, ...other }: PageHeaderProps, ref) => {
+    usePageHeaderDeprecation('PageHeader');
     const prefix = usePrefix();
     const classNames = classnames(
       {
@@ -110,6 +128,7 @@ const PageHeaderBreadcrumbBar = React.forwardRef<
     }: PageHeaderBreadcrumbBarProps,
     ref
   ) => {
+    usePageHeaderDeprecation('PageHeaderBreadcrumbBar');
     const prefix = usePrefix();
     const classNames = classnames(
       {
@@ -199,6 +218,7 @@ const PageHeaderContent = React.forwardRef<
     }: PageHeaderContentProps,
     ref
   ) => {
+    usePageHeaderDeprecation('PageHeaderContent');
     const prefix = usePrefix();
     const classNames = classnames(
       {
@@ -330,6 +350,7 @@ const PageHeaderContentPageActions = ({
   actions,
   ...other
 }: PageHeaderContentPageActionsProps) => {
+  usePageHeaderDeprecation('PageHeaderContentPageActions');
   const prefix = usePrefix();
   const classNames = classnames(
     {
@@ -460,6 +481,7 @@ const PageHeaderContentText = ({
   subtitle,
   ...other
 }: PageHeaderContentTextProps) => {
+  usePageHeaderDeprecation('PageHeaderContentText');
   const prefix = usePrefix();
   const classNames = classnames(
     {
@@ -516,6 +538,7 @@ const PageHeaderHeroImage = ({
   children,
   ...other
 }: PageHeaderHeroImageProps) => {
+  usePageHeaderDeprecation('PageHeaderHeroImage');
   const prefix = usePrefix();
   const classNames = classnames(
     {
@@ -571,6 +594,7 @@ const PageHeaderTabBar = React.forwardRef<
     { className, children, tags = [], ...other }: PageHeaderTabBarProps,
     ref
   ) => {
+    usePageHeaderDeprecation('PageHeaderTabBar');
     const prefix = usePrefix();
     const classNames = classnames(
       {

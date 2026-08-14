@@ -334,6 +334,35 @@ describe('Dialog', () => {
       caf.mockRestore();
     });
 
+    it('does not add a default danger description to `DialogFooter` primary actions', () => {
+      render(
+        <Dialog open>
+          <DialogFooter danger primaryButtonText="Delete" />
+        </Dialog>
+      );
+
+      expect(
+        screen.getByRole('button', { name: 'Delete' })
+      ).not.toHaveAttribute('aria-describedby');
+    });
+
+    it('allows a localized danger description for `DialogFooter` primary actions', () => {
+      render(
+        <Dialog open>
+          <DialogFooter
+            danger
+            primaryButtonText="Delete"
+            dangerDescription="gefahr"
+          />
+        </Dialog>
+      );
+
+      expect(
+        screen.getByRole('button', { name: 'gefahr Delete' })
+      ).toHaveAttribute('aria-describedby');
+      expect(screen.getByText('gefahr', { hidden: true })).toBeInTheDocument();
+    });
+
     it('prefers aria-label prop over deprecated ariaLabel prop', () => {
       render(<Dialog open aria-label="label" ariaLabel="deprecated label" />);
 

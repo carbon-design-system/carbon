@@ -1,12 +1,11 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import { html } from 'lit';
-import { ifDefined } from 'lit/directives/if-defined.js';
 import { OVERFLOW_MENU_SIZE } from './overflow-menu';
 import './overflow-menu-body';
 import './overflow-menu-item';
@@ -57,56 +56,48 @@ const argTypes = {
   },
 };
 
-export const Default = {
-  args,
-  argTypes,
-  render: (args) => {
-    const { flipped, iconDescription, open, index, size } = args ?? {};
-    return html`
-      <cds-overflow-menu ?open="${open}" size="${size}" index=${index}>
-        ${iconLoader(OverflowMenuVertical16, {
-          class: `${prefix}--overflow-menu__icon`,
-          slot: 'icon',
-        })}
-        <span slot="tooltip-content"> ${iconDescription} </span>
-        <cds-overflow-menu-body ?flipped="${ifDefined(flipped)}">
-          <cds-overflow-menu-item>Stop app</cds-overflow-menu-item>
-          <cds-overflow-menu-item>Restart app</cds-overflow-menu-item>
-          <cds-overflow-menu-item>Rename app</cds-overflow-menu-item>
-          <cds-overflow-menu-item disabled
-            >Clone and move app</cds-overflow-menu-item
-          >
-          <cds-overflow-menu-item
-            >Edit routes and access</cds-overflow-menu-item
-          >
-          <cds-overflow-menu-item divider danger>
-            Delete app
-          </cds-overflow-menu-item>
-        </cds-overflow-menu-body>
-      </cds-overflow-menu>
-    `;
-  },
+const defaultMenu = html`
+  <cds-overflow-menu-item>Stop app</cds-overflow-menu-item>
+  <cds-overflow-menu-item>Restart app</cds-overflow-menu-item>
+  <cds-overflow-menu-item>Rename app</cds-overflow-menu-item>
+  <cds-overflow-menu-item disabled>Clone and move app</cds-overflow-menu-item>
+  <cds-overflow-menu-item>Edit routes and access</cds-overflow-menu-item>
+  <cds-overflow-menu-item divider danger>Delete app</cds-overflow-menu-item>
+`;
+
+const filterMenu = html`
+  <cds-overflow-menu-item>Filter A</cds-overflow-menu-item>
+  <cds-overflow-menu-item>Filter B</cds-overflow-menu-item>
+`;
+
+const renderOverflowMenu = (args, icon, menu = defaultMenu) => {
+  const { flipped, iconDescription, open, index, size } = args ?? {};
+  return html`
+    <cds-overflow-menu ?open="${open}" size="${size}" index=${index}>
+      ${iconLoader(icon, {
+        class: `${prefix}--overflow-menu__icon`,
+        slot: 'icon',
+      })}
+      <span slot="tooltip-content"> ${iconDescription} </span>
+      <cds-overflow-menu-body ?flipped="${flipped}">
+        ${menu}
+      </cds-overflow-menu-body>
+    </cds-overflow-menu>
+  `;
 };
+
+export const Default = {
+  render: (args) => renderOverflowMenu(args, OverflowMenuVertical16),
+};
+
 export const RenderCustomIcon = {
-  render: () => {
-    return html`
-      <cds-overflow-menu>
-        ${iconLoader(Filter16, {
-          class: `${prefix}--overflow-menu__icon`,
-          slot: 'icon',
-        })}
-        <span slot="tooltip-content">Options</span>
-        <cds-overflow-menu-body>
-          <cds-overflow-menu-item>Filter A</cds-overflow-menu-item>
-          <cds-overflow-menu-item>Filter B</cds-overflow-menu-item>
-        </cds-overflow-menu-body>
-      </cds-overflow-menu>
-    `;
-  },
+  render: (args) => renderOverflowMenu(args, Filter16, filterMenu),
 };
 
 const meta = {
-  title: 'Components/Overflow Menu',
+  title: 'Components/OverflowMenu',
+  args,
+  argTypes,
 };
 
 export default meta;

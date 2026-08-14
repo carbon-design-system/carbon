@@ -37,7 +37,7 @@ class CDSLink extends FocusMixin(LitElement) {
   /**
    * `true` if there is an icon.
    */
-  private _hasIcon = false;
+  protected _hasIcon = false;
 
   /**
    * Handles `slotchange` event.
@@ -196,7 +196,7 @@ class CDSLink extends FocusMixin(LitElement) {
   type!: string;
 
   /**
-   * `true` if the link has been visited.
+   * When enabled, applies Carbon's visited-link styles to browser-controlled :visited link state.
    */
   @property({ type: Boolean, reflect: true })
   visited = false;

@@ -6,9 +6,7 @@
  */
 
 import type { CompareItems, SortItemsOptions } from '../MultiSelectPropTypes';
-
-const isSelectAllItem = (item: unknown): item is { isSelectAll?: boolean } =>
-  typeof item === 'object' && item !== null && 'isSelectAll' in item;
+import { isSelectAllItem } from './isSelectAllItem';
 
 /**
  * Use `localeCompare` with the `numeric` option enabled to sort two

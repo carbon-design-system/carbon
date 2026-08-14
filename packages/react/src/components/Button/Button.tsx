@@ -170,7 +170,7 @@ const Button: ButtonComponent = React.forwardRef(
     } = props;
 
     if (ButtonImageElement && !children && !iconDescription) {
-      // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
+      // eslint-disable-next-line no-console
       console.error(
         'Button: renderIcon property specified without also providing an iconDescription property. ' +
           'This may impact accessibility for screen reader users.'
@@ -180,8 +180,15 @@ const Button: ButtonComponent = React.forwardRef(
     const iconOnlyImage = !ButtonImageElement ? null : <ButtonImageElement />;
 
     if (!isIconOnlyButton(hasIconOnly, kind)) {
-      const { tooltipAlignment, ...propsWithoutTooltipAlignment } = props;
-      return <ButtonBase ref={ref} {...propsWithoutTooltipAlignment} />;
+      const {
+        autoAlign,
+        tooltipAlignment,
+        tooltipDropShadow,
+        tooltipHighContrast,
+        tooltipPosition,
+        ...propsWithoutIconOnlyTooltipProps
+      } = props;
+      return <ButtonBase ref={ref} {...propsWithoutIconOnlyTooltipProps} />;
     } else {
       let align: PopoverAlignment | undefined = undefined;
 

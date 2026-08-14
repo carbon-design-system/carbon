@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -48,12 +48,12 @@ const StoryContent = ({ useResponsiveOffset = true }) => {
             <h2 style="margin: 0 0 30px">Purpose and function</h2>
             <p>
               The shell is perhaps the most crucial piece of any UI built with
-              <a href="www.carbondesignsystem.com"> Carbon</a>. It contains the
-              shared navigation framework for the entire design system and ties
-              the products in IBM’s portfolio together in a cohesive and elegant
-              way. The shell is the home of the topmost navigation, where users
-              can quickly and dependably gain their bearings and move between
-              pages.
+              <a href="https://www.carbondesignsystem.com/">Carbon</a>. It
+              contains the shared navigation framework for the entire design
+              system and ties the products in IBM’s portfolio together in a
+              cohesive and elegant way. The shell is the home of the topmost
+              navigation, where users can quickly and dependably gain their
+              bearings and move between pages.
               <br />
               <br />
               The shell was designed with maximum flexibility built in, to serve
@@ -120,7 +120,7 @@ const StoryContent = ({ useResponsiveOffset = true }) => {
 };
 
 export const FixedSideNav = {
-  name: 'Fixed SideNav',
+  name: 'Fixed Side Nav',
   render: () => {
     const result = html`
       <style>
@@ -187,7 +187,7 @@ export const FixedSideNav = {
 };
 
 export const FixedSideNavDivider = {
-  name: 'Fixed SideNav w/Divider',
+  name: 'Fixed Side Nav with Divider',
   render: () => {
     const result = html`
       <style>
@@ -253,7 +253,7 @@ export const FixedSideNavDivider = {
 };
 
 export const FixedSideNavIcons = {
-  name: 'Fixed SideNav w/ Icons',
+  name: 'Fixed Side Nav with Icons',
   render: () => {
     const result = html`
       <style>
@@ -335,7 +335,7 @@ export const HeaderBase = {
 };
 
 export const HeaderBaseWActions = {
-  name: 'Header Base w/ Actions',
+  name: 'Header Base with Actions',
   render: () =>
     html` <style>
         ${styles}
@@ -364,7 +364,7 @@ export const HeaderBaseWActions = {
 };
 
 export const HeaderBaseWActionsRightPanel = {
-  name: 'Header Base w/ Actions and Right Panel',
+  name: 'Header Base with Actions and Right Panel',
   argTypes: {
     badgeCount: {
       control: 'number',
@@ -411,7 +411,7 @@ export const HeaderBaseWActionsRightPanel = {
 };
 
 export const HeaderBaseWActionsSwitcher = {
-  name: 'Header Base w/ Actions and Switcher',
+  name: 'Header Base with Actions and Switcher',
   render: () =>
     html` <style>
         ${styles}
@@ -467,7 +467,7 @@ export const HeaderBaseWActionsSwitcher = {
 };
 
 export const HeaderBaseWNavigationActionsAndSideNav = {
-  name: 'Header Base w/ Navigation, Actions and SideNav',
+  name: 'Header Base with Navigation, Actions and Side Nav',
   render: () =>
     html` <style>
         ${styles}
@@ -594,7 +594,7 @@ export const HeaderBaseWNavigationActionsAndSideNav = {
 };
 
 export const HeaderBaseWNavigationActions = {
-  name: 'Header Base w/ Navigation and Actions',
+  name: 'Header Base with Navigation and Actions',
   render: () =>
     html` <style>
         ${styles}
@@ -678,7 +678,7 @@ export const HeaderBaseWNavigationActions = {
 };
 
 export const HeaderBaseWNavigation = {
-  name: 'Header Base w/ Navigation',
+  name: 'Header Base with Navigation',
   render: () =>
     html` <style>
         ${styles}
@@ -743,7 +743,7 @@ export const HeaderBaseWNavigation = {
 };
 
 export const HeaderBaseWSideNav = {
-  name: 'Header Base w/ SideNav',
+  name: 'Header Base with Side Nav',
   render: () => {
     const result = html`
       <style>
@@ -821,7 +821,7 @@ export const HeaderBaseWSideNav = {
 };
 
 export const HeaderBaseWSkipToContent = {
-  name: 'Header Base w/ SkipToContent',
+  name: 'Header Base with SkipToContent',
   render: () =>
     html` <style>
         ${styles}
@@ -852,7 +852,7 @@ export const HeaderBaseWSkipToContent = {
 };
 
 export const SideNavRail = {
-  name: 'SideNav Rail',
+  name: 'Side Nav Rail',
   render: () =>
     html` <style>
         ${styles}
@@ -916,7 +916,7 @@ export const SideNavRail = {
 };
 
 export const SideNavRailWHeader = {
-  name: 'SideNav Rail w/ Header',
+  name: 'Side Nav Rail with Header',
   render: () =>
     html` <style>
         ${styles}
@@ -1026,7 +1026,7 @@ export const SideNavRailWHeader = {
 };
 
 export const SideNavWLargeSideNavItems = {
-  name: 'SideNav w/ large side nav items',
+  name: 'Side Nav with Large Side Nav Items',
   render: () => {
     const result = html`
       <style>
@@ -1052,7 +1052,7 @@ export const SideNavWLargeSideNavItems = {
           <cds-side-nav-link large href="javascript:void(0)"
             >Large link</cds-side-nav-link
           >
-          <cds-side-nav-menu large title="Large menu w/icon"
+          <cds-side-nav-menu large title="Large menu with icon"
             >${iconLoader(Fade16, { slot: 'title-icon' })}
             <cds-side-nav-menu-item href="${linksHref}">
               Menu 1
@@ -1065,8 +1065,8 @@ export const SideNavWLargeSideNavItems = {
             </cds-side-nav-menu-item>
           </cds-side-nav-menu>
           <cds-side-nav-link large href="javascript:void(0)">
-            ${iconLoader(Fade16, { slot: 'title-icon' })} Large link
-            w/icon</cds-side-nav-link
+            ${iconLoader(Fade16, { slot: 'title-icon' })} Large link with
+            icon</cds-side-nav-link
           >
         </cds-side-nav-items>
       </cds-side-nav>

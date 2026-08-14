@@ -98,7 +98,7 @@ class CDSPasswordInput extends CDSTextInput {
     attribute: 'tooltip-alignment',
     reflect: true,
   })
-  tooltipAlignment = INPUT_TOOLTIP_ALIGNMENT.CENTER;
+  tooltipAlignment = INPUT_TOOLTIP_ALIGNMENT.END;
 
   /**
    * Set to true to use the fluid version.
@@ -143,6 +143,7 @@ class CDSPasswordInput extends CDSTextInput {
       warn,
       warnText,
       _handleInput: handleInput,
+      _handleChange: handleChange,
       _handleSlotChange: handleSlotChange,
     } = this;
 
@@ -311,7 +312,8 @@ class CDSPasswordInput extends CDSTextInput {
               ?required="${required}"
               type="${ifNonEmpty(type)}"
               .value="${this._value}"
-              @input="${handleInput}" />
+              @input="${handleInput}"
+              @change="${handleChange}" />
             <slot name="slug" @slotchange="${handleSlotChange}"></slot>
             <cds-tooltip
               align="${align}"

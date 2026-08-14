@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,27 +11,43 @@ import { fileURLToPath } from 'node:url';
 
 import remarkGfm from 'remark-gfm';
 import glob from 'fast-glob';
+import babel from '@rolldown/plugin-babel';
 import react from '@vitejs/plugin-react';
 import { mergeConfig } from 'vite';
 
+import { productMigratedStoryGlobs } from '../product-migrated-components.mjs';
+
 const configDir = fileURLToPath(new URL('.', import.meta.url));
 
-// We can't use .mdx files in conjuction with `storyStoreV7`, which we are using to preload stories for CI purposes only.
-// MDX files are fine to ignore in CI mode since they don't make a difference for VRT testing
+// Keep top level MDX docs pages in Storybook, but exclude component level docs
+// directories from story discovery because those pages are referenced through
+// colocated component docs instead of the main stories index.
+//
+// TODO: Remove `*.js` story support once React stories have been migrated to
+// TypeScript.
 const storyGlobs = [
   './Welcome/Welcome.mdx',
   '../src/**/*.stories.js',
+  '../src/**/*.stories.tsx',
   '../src/**/*.mdx',
   '../src/components/Tile/Tile.mdx',
   '../src/**/next/*.stories.js',
+  '../src/**/next/*.stories.tsx',
   '../src/**/next/**/*.stories.js',
+  '../src/**/next/**/*.stories.tsx',
   '../src/**/next/*.mdx',
   '../src/**/*-story.js',
+  '../src/**/*-story.tsx',
   './Preview/Preview.mdx',
 ];
 
 const stories = glob.sync(storyGlobs, {
-  ignore: ['../src/**/docs/*.mdx', '../src/**/next/docs/*.mdx'],
+  ignore: [
+    '../src/**/docs/*.mdx',
+    '../src/**/next/docs/*.mdx',
+    // ibm-products components in migration are v12-only; exclude from v11 Storybook
+    ...productMigratedStoryGlobs,
+  ],
   cwd: configDir,
 });
 
@@ -67,11 +83,6 @@ const config: StorybookConfig = {
   },
   async viteFinal(config) {
     return mergeConfig(config, {
-      esbuild: {
-        include: /\.[jt]sx?$/,
-        exclude: [],
-        loader: 'tsx',
-      },
       css: {
         preprocessorOptions: {
           scss: {
@@ -90,20 +101,24 @@ const config: StorybookConfig = {
         },
       },
       optimizeDeps: {
-        esbuildOptions: {
-          loader: {
+        exclude: ['@carbon/motion'],
+        rolldownOptions: {
+          moduleTypes: {
             '.js': 'jsx',
           },
         },
       },
       plugins: [
         react({
-          include: '**/*.{jsx,js,ts,tsx}',
-          babel: {
-            presets: ['babel-preset-carbon'],
-            babelrc: false,
-            configFile: false,
-          },
+          // use a regex instead of a glob.Vite 8 (Rolldown)
+          // globs `**/*.{jsx,js,ts,tsx}` seem to mishandle the transform
+          // filter and ends up matching `package.json`, which then fails to
+          // parse as JS. using regex matches the same set of files (and the
+          // plugin's own default) without that bug
+          include: /\.[jt]sx?$/,
+        }),
+        babel({
+          presets: ['babel-preset-carbon'],
         }),
       ],
       resolve: {

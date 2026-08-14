@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -58,7 +58,7 @@ test.describe('@avt FluidMultiSelect', () => {
       expanded: false,
     });
     const selection = page.getByRole('button', {
-      name: 'Clear all selected items',
+      name: 'Clear selected items',
     });
     const menu = page.getByRole('listbox');
 
@@ -153,7 +153,7 @@ test.describe('@avt FluidMultiSelect', () => {
       expanded: false,
     });
     const selection = page.getByRole('button', {
-      name: 'Clear all selected items',
+      name: 'Clear selected items',
     });
     const menu = page.getByRole('listbox');
 

@@ -24,4 +24,16 @@ describe('scss/components/tabs', () => {
       `);
     expect(unwrap('mixin')).toBe(true);
   });
+
+  test('honours $prefix in vertical tabs nav-item-label line-height', async () => {
+    const { result } = await render(`
+        @use '../../config' with ($prefix: 'test');
+        @use '../tabs';
+
+        @include tabs.tabs;
+      `);
+    const cssText = result.css.toString();
+    expect(cssText).toContain('var(--test-body-compact-01-line-height)');
+    expect(cssText).not.toContain('var(--cds-body-compact-01-line-height)');
+  });
 });

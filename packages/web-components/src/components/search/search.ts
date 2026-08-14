@@ -7,7 +7,7 @@
 
 import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
-import { property } from 'lit/decorators.js';
+import { property, query } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import Search16 from '@carbon/icons/es/search/16.js';
 import Close16 from '@carbon/icons/es/close/16.js';
@@ -36,6 +36,18 @@ export { SEARCH_SIZE };
  */
 @customElement(`${prefix}-search`)
 class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
+  /**
+   * The input element
+   */
+  @query('input')
+  private _inputElement?: HTMLInputElement;
+
+  /**
+   * The search magnifier element
+   */
+  @query(`.${prefix}--search-magnifier`)
+  private _magnifierElement?: HTMLElement;
+
   /**
    * Handles `input` event on the `<input>` in the shadow DOM.
    */
@@ -73,9 +85,7 @@ class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
       this.value = '';
 
       // set focus on back to input once search is cleared
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-      const input = this.shadowRoot!.querySelector('input');
-      (input as HTMLElement).focus();
+      this._inputElement?.focus();
     }
   }
 
@@ -195,14 +205,11 @@ class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
    * Adds tabindex="-1" if it is not focusable yet.
    */
   private _focusMagnifier() {
-    const magnifier = this.shadowRoot?.querySelector<HTMLElement>(
-      `.${prefix}--search-magnifier`
-    );
-    if (magnifier) {
-      if (!magnifier.hasAttribute('tabindex')) {
-        magnifier.tabIndex = -1;
+    if (this._magnifierElement) {
+      if (!this._magnifierElement.hasAttribute('tabindex')) {
+        this._magnifierElement.tabIndex = -1;
       }
-      magnifier.focus();
+      this._magnifierElement.focus();
     }
   }
 
@@ -212,6 +219,12 @@ class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
    */
   @property({ attribute: 'autocomplete' })
   autoComplete = 'off';
+
+  /**
+   * Sets the input to be focussed automatically on page load. Defaults to false
+   */
+  @property({ type: Boolean })
+  autofocus = false;
 
   /**
    * Specify a label to be read by screen readers on the "close" button
@@ -285,6 +298,7 @@ class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
   render() {
     const {
       autoComplete,
+      autofocus,
       closeButtonLabelText,
       disabled,
       hasCustomIcon,
@@ -319,6 +333,7 @@ class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
       </label>
       <input
         autocomplete="${autoComplete}"
+        ?autofocus="${autofocus}"
         id="input"
         part="input"
         type="${ifNonEmpty(type)}"

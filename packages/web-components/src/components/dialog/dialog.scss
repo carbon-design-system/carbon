@@ -17,10 +17,6 @@
 @use '@carbon/styles/scss/components/button' as *;
 @use '@carbon/styles/scss/utilities/focus-outline' as *;
 
-:host(#{$prefix}-dialog) dialog {
-  @extend .#{$prefix}--dialog;
-}
-
 :host(#{$prefix}-dialog[has-scrolling-content])
   ::slotted(#{$prefix}-dialog-body),
 :host(#{$prefix}-dialog) ::slotted(#{$prefix}-dialog-body[is-scrollable]) {
@@ -90,6 +86,9 @@
   ::slotted(#{$prefix}-dialog-footer-button) {
     flex: 0 1 25%;
   }
+  ::slotted(#{$prefix}-inline-loading) {
+    flex: 0 1 25%;
+  }
 }
 
 :host(#{$prefix}-dialog-footer-button:first-of-type) .#{$prefix}--btn {
@@ -111,6 +110,13 @@
         inset 0 0 0 $button-border-width $background;
     }
   }
+}
+
+:host(#{$prefix}-dialog-footer) ::slotted(#{$prefix}-inline-loading) {
+  flex: 0 1 50%;
+  cursor: not-allowed;
+  padding-block: $spacing-05 $spacing-07;
+  padding-inline-start: $spacing-05;
 }
 
 :host(#{$prefix}-dialog-footer) ::slotted(#{$prefix}-button),

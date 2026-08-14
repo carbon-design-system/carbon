@@ -35,7 +35,8 @@ const ValidityMixin = <T extends Constructor<HTMLElement>>(
     required: boolean;
     requiredValidityMessage: string;
     validityMessage: string;
-    value: string;
+    get value(): string;
+    set value(v: string);
     checkValidity(): boolean;
     setCustomValidity(validityMessage: string): void;
   };

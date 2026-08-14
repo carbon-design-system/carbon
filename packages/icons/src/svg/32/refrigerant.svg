@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <path id="refrigerant" d="M23,30h-14c-1.103,0-2-.8975-2-2V10c0-1.103.897-2,2-2h2v-3h-2v-2h2c1.103,0,2,.897,2,2v3h2v-3h2v3h2v-3c0-1.103.8975-2,2-2h2v2h-2v3h2c1.1025,0,2,.897,2,2v18c0,1.1025-.8975,2-2,2ZM9,10v18h14V10h-14ZM19,22h-2v-2h-2v-2h-2v-2h2v2h2v2h2v2ZM15,22h-2v-2h2v2ZM19,18h-2v-2h2v2Z"/>
+  <rect id="Transparent_Rectangle" data-name="Transparent Rectangle" class="cls-1" width="32" height="32"/>
+</svg>

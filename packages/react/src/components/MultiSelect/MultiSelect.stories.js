@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -34,7 +34,7 @@ export default {
   },
   argTypes: {
     size: {
-      options: ['sm', 'md', 'lg'],
+      options: ['xs', 'sm', 'md', 'lg'],
       control: { type: 'select' },
     },
     light: {
@@ -171,6 +171,28 @@ const items = [
   },
 ];
 
+const customSearchItems = [
+  {
+    id: 'custom-search-item-0',
+    text: 'Apple',
+    searchTerms: ['fruit', 'red'],
+  },
+  {
+    id: 'custom-search-item-1',
+    text: 'Orange',
+    searchTerms: ['fruit', 'orange'],
+  },
+  {
+    id: 'custom-search-item-2',
+    text: 'Broccoli',
+    searchTerms: ['vegetable', 'green'],
+  },
+];
+
+function preserveCustomSearchResults(items) {
+  return items;
+}
+
 const sharedArgs = {
   size: 'md',
   autoAlign: false,
@@ -191,12 +213,6 @@ const sharedArgs = {
 };
 
 const filterableArgTypes = {
-  label: {
-    control: false,
-    table: {
-      disable: true,
-    },
-  },
   placeholder: {
     control: {
       type: 'text',
@@ -380,6 +396,11 @@ FilterableWithSelectAll.args = { ...sharedArgs };
 FilterableWithSelectAll.argTypes = {
   ...filterableArgTypes,
 };
+FilterableWithSelectAll.parameters = {
+  controls: {
+    exclude: ['label'],
+  },
+};
 Filterable.argTypes = {
   ...filterableArgTypes,
   onChange: {
@@ -387,6 +408,53 @@ Filterable.argTypes = {
   },
   onMenuChange: {
     action: 'onMenuChange',
+  },
+};
+Filterable.parameters = {
+  controls: {
+    exclude: ['label'],
+  },
+};
+
+export const FilterableWithCustomSearch = (args) => {
+  const [searchResults, setSearchResults] = useState(customSearchItems);
+
+  function handleInputValueChange(changes) {
+    action('onInputValueChange')(changes);
+    const query = changes.inputValue?.trim().toLocaleLowerCase();
+
+    setSearchResults(
+      query
+        ? customSearchItems.filter((item) => {
+            return item.searchTerms.some((term) => term.includes(query));
+          })
+        : customSearchItems
+    );
+  }
+
+  return (
+    <div style={{ width: 300 }}>
+      <FilterableMultiSelect
+        {...args}
+        id="carbon-multiselect-custom-search"
+        titleText="Filter by category or color"
+        helperText='Try searching for "fruit" or "green"'
+        items={searchResults}
+        itemToString={(item) => (item ? item.text : '')}
+        filterItems={preserveCustomSearchResults}
+        onInputValueChange={handleInputValueChange}
+      />
+    </div>
+  );
+};
+
+FilterableWithCustomSearch.args = { ...sharedArgs };
+FilterableWithCustomSearch.argTypes = {
+  ...filterableArgTypes,
+};
+FilterableWithCustomSearch.parameters = {
+  controls: {
+    exclude: ['label'],
   },
 };
 
@@ -431,6 +499,11 @@ _FilterableWithLayer.args = { ...sharedArgs };
 
 _FilterableWithLayer.argTypes = {
   ...filterableArgTypes,
+};
+_FilterableWithLayer.parameters = {
+  controls: {
+    exclude: ['label'],
+  },
 };
 export const _Controlled = (args) => {
   const [selectedItems, setSelectedItems] = useState(
@@ -600,6 +673,11 @@ export const FilterableWithAILabel = (args) => (
 FilterableWithAILabel.args = { ...sharedArgs };
 FilterableWithAILabel.argTypes = {
   ...filterableArgTypes,
+};
+FilterableWithAILabel.parameters = {
+  controls: {
+    exclude: ['label'],
+  },
 };
 export const ExperimentalAutoAlign = (args) => {
   const ref = useRef();

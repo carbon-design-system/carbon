@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import clipboard from 'clipboardy';
+import { writeText } from 'tinyclip';
 import inquirer from 'inquirer';
 import { generate } from '../changelog.js';
 import { fetchLatestFromUpstream } from '../git.js';
@@ -60,7 +60,7 @@ async function changelog({ range, noPrompt = false }) {
   }
 
   if (response?.copy) {
-    clipboard.writeSync(changelog);
+    await writeText(changelog);
     console.log('Done!');
   } else {
     console.log(changelog);

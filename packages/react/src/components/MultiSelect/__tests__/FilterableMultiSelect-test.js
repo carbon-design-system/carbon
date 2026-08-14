@@ -7,6 +7,7 @@
 
 import React, { StrictMode } from 'react';
 import { act, render, screen } from '@testing-library/react';
+import { useCombobox } from 'downshift';
 import { getByText } from '@carbon/test-utils/dom';
 import userEvent from '@testing-library/user-event';
 import { FilterableMultiSelect } from '../';
@@ -370,7 +371,7 @@ describe('FilterableMultiSelect', () => {
     await waitForPosition();
 
     expect(
-      screen.getAllByRole('button', { name: 'Clear all selected items' })
+      screen.getAllByRole('button', { name: 'Clear selected items' })
     ).toHaveLength(1);
     expect(screen.getByText('2')).toBeInTheDocument();
   });
@@ -435,6 +436,70 @@ describe('FilterableMultiSelect', () => {
     );
   });
 
+  it('should support items filtered by an external search', async () => {
+    const externallyFilteredItems = [
+      { id: 'external-result', label: 'Server result' },
+    ];
+
+    function CustomSearchMultiSelect() {
+      const [items, setItems] = React.useState(mockProps.items);
+
+      return (
+        <FilterableMultiSelect
+          {...mockProps}
+          items={items}
+          filterItems={(items) => items}
+          onInputValueChange={({ inputValue }) => {
+            if (inputValue === 'remote') {
+              setItems(externallyFilteredItems);
+            }
+          }}
+        />
+      );
+    }
+
+    render(<CustomSearchMultiSelect />);
+    await waitForPosition();
+
+    await openMenu();
+    await userEvent.type(screen.getByRole('combobox'), 'remote');
+
+    expect(screen.getByText('Server result')).toBeInTheDocument();
+    expect(screen.queryByText('Item 0')).not.toBeInTheDocument();
+  });
+
+  it('should call onInputValueChange with empty string when clear button is clicked', async () => {
+    const onInputValueChange = jest.fn();
+    render(
+      <FilterableMultiSelect
+        {...mockProps}
+        placeholder="test"
+        onInputValueChange={onInputValueChange}
+      />
+    );
+    await waitForPosition();
+
+    const input = screen.getByPlaceholderText('test');
+
+    await openMenu();
+    await userEvent.type(input, 'abc');
+    expect(input).toHaveDisplayValue('abc');
+
+    onInputValueChange.mockClear();
+
+    const clearButton = screen.getByRole('button', {
+      name: 'Clear selected item',
+    });
+    await userEvent.click(clearButton);
+
+    expect(input).toHaveDisplayValue('');
+    expect(onInputValueChange).toHaveBeenCalledWith({
+      inputValue: '',
+      type: useCombobox.stateChangeTypes.FunctionSetInputValue,
+    });
+    expect(onInputValueChange).toHaveBeenCalledTimes(1);
+  });
+
   it('should clear all selections when clicking clear all button', async () => {
     const initialSelectedItems = [mockProps.items[0], mockProps.items[1]];
     render(
@@ -446,7 +511,7 @@ describe('FilterableMultiSelect', () => {
     await waitForPosition();
 
     await userEvent.click(
-      screen.getByRole('button', { name: 'Clear all selected items' })
+      screen.getByRole('button', { name: 'Clear selected items' })
     );
 
     expect(mockProps.onChange).toHaveBeenCalledWith({ selectedItems: [] });
@@ -877,7 +942,7 @@ describe('FilterableMultiSelect', () => {
     await waitForPosition();
 
     const clearButton = screen.getByRole('button', {
-      name: /Clear all selected items/i,
+      name: 'Clear selected item',
     });
     await user.click(clearButton);
 
@@ -900,7 +965,7 @@ describe('FilterableMultiSelect', () => {
 
     // Remove all selected items
     const clearButton = screen.getByRole('button', {
-      name: /Clear all selected items/i,
+      name: 'Clear selected items',
     });
     await user.click(clearButton);
 
@@ -918,7 +983,7 @@ describe('FilterableMultiSelect', () => {
     await waitForPosition();
 
     // Get the selected item element (the tag/chip showing the selection)
-    const selectionElement = screen.getByLabelText('Clear all selected items');
+    const selectionElement = screen.getByLabelText('Clear selected item');
     await userEvent.type(selectionElement, '{Backspace}');
 
     expect(mockProps.onChange).toHaveBeenCalledWith({ selectedItems: [] });
@@ -934,7 +999,7 @@ describe('FilterableMultiSelect', () => {
     );
     await waitForPosition();
 
-    const selectionElement = screen.getByLabelText('Clear all selected items');
+    const selectionElement = screen.getByLabelText('Clear selected item');
     await userEvent.type(selectionElement, '{Delete}');
 
     expect(mockProps.onChange).toHaveBeenCalledWith({ selectedItems: [] });
@@ -978,7 +1043,7 @@ describe('FilterableMultiSelect', () => {
     );
     await waitForPosition();
 
-    const clearButton = screen.getByLabelText('Clear all selected items');
+    const clearButton = screen.getByLabelText('Clear selected item');
     await userEvent.click(clearButton);
 
     expect(mockProps.onChange).toHaveBeenCalledWith({ selectedItems: [] });

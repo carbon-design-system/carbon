@@ -697,6 +697,30 @@ describe('cds-multi-select', function () {
       expect(listbox).to.exist;
     });
 
+    it('should set autocomplete attribute on filterable input', async () => {
+      const el = await fixture(html`
+        <cds-multi-select label="test-label" filterable>
+          <cds-multi-select-item value="apple">Apple</cds-multi-select-item>
+        </cds-multi-select>
+      `);
+
+      const input = el.shadowRoot.querySelector('input');
+      expect(input).to.exist;
+      expect(input.getAttribute('autocomplete')).to.equal('off');
+    });
+
+    it('should allow custom autocomplete value', async () => {
+      const el = await fixture(html`
+        <cds-multi-select label="test-label" filterable autocomplete="on">
+          <cds-multi-select-item value="apple">Apple</cds-multi-select-item>
+        </cds-multi-select>
+      `);
+
+      const input = el.shadowRoot.querySelector('input');
+      expect(input).to.exist;
+      expect(input.getAttribute('autocomplete')).to.equal('on');
+    });
+
     it('should clear input on Escape', async () => {
       const el = await fixture(html`
         <cds-multi-select label="test-label" filterable>
@@ -2012,6 +2036,82 @@ describe('cds-multi-select', function () {
         itemTexts = Array.from(items).map((item) => item.textContent.trim());
         // Mango should move back to original position
         expect(itemTexts).to.deep.equal(['Apple', 'Banana', 'Mango', 'Zebra']);
+      });
+    });
+
+    describe('AI Label interaction', () => {
+      it('should not trigger multi-select actions when keydown events originate from AI Label', async () => {
+        const el = await fixture(html`
+          <cds-multi-select label="Test label">
+            <cds-multi-select-item value="item-0">Item 0</cds-multi-select-item>
+            <cds-multi-select-item value="item-1">Item 1</cds-multi-select-item>
+            <cds-ai-label slot="ai-label">AI</cds-ai-label>
+          </cds-multi-select>
+        `);
+
+        const aiLabel = el.querySelector('cds-ai-label');
+        expect(aiLabel).to.exist;
+
+        // Open the multi-select first
+        const trigger = el.shadowRoot.querySelector('.cds--list-box__field');
+        trigger.click();
+        expect(el.open).to.be.true;
+
+        // Simulate keydown event from AI Label (Escape key)
+        const escapeEvent = new KeyboardEvent('keydown', {
+          key: 'Escape',
+          bubbles: true,
+        });
+        Object.defineProperty(escapeEvent, 'target', {
+          value: aiLabel,
+          enumerable: true,
+        });
+
+        el.dispatchEvent(escapeEvent);
+
+        // Multi-select should remain open (event should be ignored)
+        expect(el.open).to.be.true;
+      });
+
+      it('should not trigger multi-select actions when keypress events originate from AI Label', async () => {
+        const el = await fixture(html`
+          <cds-multi-select label="Test label">
+            <cds-multi-select-item value="item-0">Item 0</cds-multi-select-item>
+            <cds-multi-select-item value="item-1">Item 1</cds-multi-select-item>
+            <cds-ai-label slot="ai-label">AI</cds-ai-label>
+          </cds-multi-select>
+        `);
+
+        const aiLabel = el.querySelector('cds-ai-label');
+        expect(aiLabel).to.exist;
+
+        // Simulate keypress event from AI Label (Space key)
+        const spaceEvent = new KeyboardEvent('keypress', {
+          key: ' ',
+          bubbles: true,
+        });
+        Object.defineProperty(spaceEvent, 'target', {
+          value: aiLabel,
+          enumerable: true,
+        });
+
+        el.dispatchEvent(spaceEvent);
+        // Multi-select should remain closed
+        expect(el.open).to.be.false;
+
+        // Simulate keypress event from AI Label (Enter key)
+        const enterEvent = new KeyboardEvent('keypress', {
+          key: 'Enter',
+          bubbles: true,
+        });
+        Object.defineProperty(enterEvent, 'target', {
+          value: aiLabel,
+          enumerable: true,
+        });
+
+        el.dispatchEvent(enterEvent);
+        // Multi-select should still remain closed
+        expect(el.open).to.be.false;
       });
     });
   });

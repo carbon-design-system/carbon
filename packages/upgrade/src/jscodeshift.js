@@ -11,12 +11,15 @@ export async function run(options) {
   const {
     dry,
     parser = 'babylon',
+    decoratorsBeforeExport = false,
     paths,
     print = dry,
     transform,
     verbose,
+    ...transformOptions
   } = options;
   await Runner.run(transform, paths, {
+    ...transformOptions,
     dry,
     parser,
     parserConfig: {
@@ -42,7 +45,7 @@ export async function run(options) {
         'dynamicImport',
         'nullishCoalescingOperator',
         'optionalChaining',
-        ['decorators', { decoratorsBeforeExport: false }],
+        ['decorators', { decoratorsBeforeExport }],
       ],
     },
     print,

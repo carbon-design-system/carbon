@@ -34,6 +34,8 @@ export default {
 };
 
 const sharedArgTypes = {
+  allowEmpty: { control: { type: 'boolean' } },
+  disableWheel: { control: { type: 'boolean' } },
   min: { control: { type: 'number' } },
   max: { control: { type: 'number' } },
   step: { control: { type: 'number' } },
@@ -48,6 +50,26 @@ const sharedArgTypes = {
   },
   label: { control: { type: 'text' } },
   helperText: { control: { type: 'text' } },
+  hideLabel: { control: { type: 'boolean' } },
+  hideSteppers: { control: { type: 'boolean' } },
+  inputMode: {
+    options: [
+      'none',
+      'text',
+      'tel',
+      'url',
+      'email',
+      'numeric',
+      'decimal',
+      'search',
+    ],
+    control: { type: 'select' },
+  },
+  readOnly: { control: { type: 'boolean' } },
+  type: {
+    options: ['number', 'text'],
+    control: { type: 'select' },
+  },
 };
 
 const reusableProps = {
@@ -55,6 +77,46 @@ const reusableProps = {
   max: 100000000,
 };
 
+const sharedArgs = {
+  allowEmpty: false,
+  disableWheel: false,
+  disabled: false,
+  helperText: 'Optional helper text.',
+  invalid: false,
+  invalidText: 'Number is not valid.',
+  label: 'NumberInput label',
+  hideLabel: false,
+  hideSteppers: false,
+  inputMode: 'decimal',
+  readOnly: false,
+  size: 'md',
+  step: 1,
+  type: 'number',
+  warn: false,
+  warnText:
+    'Warning message that is really long can wrap to more lines but should not be excessively long.',
+};
+
+const textArgs = {
+  ...sharedArgs,
+  formatOptions: {},
+  inputMode: 'decimal',
+  locale: 'en-US',
+  max: reusableProps.max,
+  min: reusableProps.min,
+  stepStartValue: 0,
+  type: 'text',
+};
+
+const sharedControls = Object.keys(sharedArgTypes);
+const textControls = [
+  ...sharedControls,
+  'formatOptions',
+  'locale',
+  'stepStartValue',
+];
+
+// TODO: Potential opportunity to differentiate between controlled and uncontrolled stories
 export const Default = (args) => {
   const [value, setValue] = React.useState(50);
 
@@ -65,11 +127,7 @@ export const Default = (args) => {
   return (
     <NumberInput
       id="default-number-input"
-      min={-100}
-      max={100}
       value={value}
-      label="NumberInput label"
-      helperText="Optional helper text."
       onChange={handleChange}
       {...args}
     />
@@ -77,18 +135,19 @@ export const Default = (args) => {
 };
 
 Default.args = {
-  step: 1,
-  disabled: false,
-  invalid: false,
+  ...sharedArgs,
+  max: 100,
+  min: -100,
   invalidText: `Number is not valid. Must be between -100 and 100`,
-  helperText: 'Optional helper text.',
-  warn: false,
-  warnText:
-    'Warning message that is really long can wrap to more lines but should not be excessively long.',
-  size: 'md',
 };
 
 Default.argTypes = { ...sharedArgTypes };
+
+Default.parameters = {
+  controls: {
+    include: sharedControls,
+  },
+};
 
 export const withAILabel = (args) => {
   const aiLabel = (
@@ -124,50 +183,42 @@ export const withAILabel = (args) => {
 
   return (
     <div style={{ width: 400 }}>
-      <NumberInput
-        min={reusableProps.min}
-        max={reusableProps.max}
-        value={50}
-        label="NumberInput label"
-        helperText="Optional helper text."
-        invalidText="Number is not valid"
-        decorator={aiLabel}
-        {...args}
-      />
+      <NumberInput defaultValue={50} decorator={aiLabel} {...args} />
     </div>
   );
 };
 
 withAILabel.argTypes = { ...sharedArgTypes };
 
+withAILabel.args = {
+  ...sharedArgs,
+  invalidText: 'Number is not valid',
+  max: reusableProps.max,
+  min: reusableProps.min,
+};
+
+withAILabel.parameters = {
+  controls: {
+    include: sharedControls,
+  },
+};
+
 export const WithTypeOfText = (args) => {
   const locale = useDocumentLang();
+  const { locale: localeArg, ...inputArgs } = args;
 
   return (
     <NumberInput
       id="default-number-input"
-      min={reusableProps.min}
-      max={reusableProps.max}
-      inputMode="decimal"
       defaultValue={50}
-      label="NumberInput label"
-      helperText="Optional helper text."
-      {...args}
-      locale={locale}
+      {...inputArgs}
+      locale={localeArg || locale}
     />
   );
 };
 WithTypeOfText.args = {
-  step: 1,
-  disabled: false,
-  invalid: false,
+  ...textArgs,
   invalidText: `Number is not valid. Must be between ${reusableProps.min} and ${reusableProps.max}`,
-  helperText: 'Optional helper text.',
-  warn: false,
-  warnText:
-    'Warning message that is really long can wrap to more lines but should not be excessively long.',
-  size: 'md',
-  type: 'text',
 };
 WithTypeOfText.argTypes = {
   locale: { control: { type: 'text' } },
@@ -175,23 +226,23 @@ WithTypeOfText.argTypes = {
   formatOptions: { control: { type: 'object' } },
   ...sharedArgTypes,
 };
+WithTypeOfText.parameters = {
+  controls: {
+    include: textControls,
+  },
+};
 
 export const WithTypeOfTextControlled = (args) => {
   const locale = useDocumentLang();
   const [value, setValue] = useState(NaN);
+  const { locale: localeArg, ...inputArgs } = args;
 
   return (
     <>
       <NumberInput
         id="default-number-input"
-        min={reusableProps.min}
-        max={reusableProps.max}
-        type="text"
-        inputMode="decimal"
-        label="NumberInput label"
-        helperText="Optional helper text."
-        {...args}
-        locale={locale}
+        {...inputArgs}
+        locale={localeArg || locale}
         value={value}
         onChange={(event, state) => {
           setValue(state.value);
@@ -209,40 +260,33 @@ export const WithTypeOfTextControlled = (args) => {
   );
 };
 WithTypeOfTextControlled.args = {
-  step: 1,
-  disabled: false,
-  invalid: false,
+  ...textArgs,
   invalidText: `Number is not valid. Must be between ${reusableProps.min} and ${reusableProps.max}`,
-  helperText: 'Optional helper text.',
-  warn: false,
-  warnText:
-    'Warning message that is really long can wrap to more lines but should not be excessively long.',
-  size: 'md',
-  type: 'text',
 };
 WithTypeOfTextControlled.argTypes = {
   locale: { control: { type: 'text' } },
   formatOptions: { control: { type: 'object' } },
   ...sharedArgTypes,
 };
+WithTypeOfTextControlled.parameters = {
+  controls: {
+    include: textControls,
+  },
+};
 
 export const WithTypeOfCustomValidation = (args) => {
   const locale = useDocumentLang();
   const [value, setValue] = useState(NaN);
+  const { locale: localeArg, ...inputArgs } = args;
 
   return (
     <>
       <NumberInput
         id="default-number-input"
-        type="text"
-        inputMode="decimal"
-        label="NumberInput label"
-        helperText="Optional helper text."
         validate={validateNumberSeparators}
-        {...args}
-        locale={locale}
+        {...inputArgs}
+        locale={localeArg || locale}
         value={value}
-        allowEmpty
         onChange={(event, state) => {
           setValue(state.value);
         }}
@@ -258,21 +302,19 @@ export const WithTypeOfCustomValidation = (args) => {
   );
 };
 WithTypeOfCustomValidation.args = {
-  step: 1,
-  disabled: false,
-  invalid: false,
+  ...textArgs,
+  allowEmpty: true,
   invalidText: `Number is not valid. Must be between ${reusableProps.min} and ${reusableProps.max}`,
-  helperText: 'Optional helper text.',
-  warn: false,
-  warnText:
-    'Warning message that is really long can wrap to more lines but should not be excessively long.',
-  size: 'md',
-  type: 'text',
 };
 WithTypeOfCustomValidation.argTypes = {
   locale: { control: { type: 'text' } },
   formatOptions: { control: { type: 'object' } },
   ...sharedArgTypes,
+};
+WithTypeOfCustomValidation.parameters = {
+  controls: {
+    include: textControls,
+  },
 };
 
 export const Skeleton = (args) => {

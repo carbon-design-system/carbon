@@ -9,6 +9,7 @@ import { CaretLeft, CaretRight } from '@carbon/icons-react';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 import { IconButton } from '../IconButton';
+import { clamp } from '../../internal/clamp';
 import PropTypes from 'prop-types';
 import Select from '../Select';
 import SelectItem from '../SelectItem';
@@ -33,6 +34,11 @@ export interface PaginationProps
   backwardText?: string;
 
   /**
+   * The tooltip position for the backward button.
+   */
+  backwardTextTooltipPosition?: 'top' | 'right' | 'bottom' | 'left';
+
+  /**
    * The CSS class names.
    */
   className?: string;
@@ -46,6 +52,11 @@ export interface PaginationProps
    * The description for the forward icon.
    */
   forwardText?: string;
+
+  /**
+   * The tooltip position for the forward button.
+   */
+  forwardTextTooltipPosition?: 'top' | 'right' | 'bottom' | 'left';
 
   /**
    * The unique ID of this component instance.
@@ -107,6 +118,23 @@ export interface PaginationProps
   pageSelectLabelText?: (total: number) => string;
 
   /**
+   * Provide a custom render function for the page-selection control.
+   * When provided, the default `<Select>` is replaced with the returned node.
+   */
+  renderPageSelect?: (props: {
+    /** The currently active page. */
+    currentPage: number;
+    /** Total number of pages derived from `totalItems` and `pageSize`. */
+    totalPages: number;
+    /** Current page size. */
+    currentPageSize: number;
+    /** The computed accessible label for the page-selection control. */
+    pageSelectLabelText: string;
+    /** Sets the active page. */
+    onSetPage: (page: number | string) => void;
+  }) => React.ReactNode;
+
+  /**
    * The number dictating how many items a page contains.
    */
   pageSize?: number;
@@ -127,7 +155,8 @@ export interface PaginationProps
   pageText?: (page: number, pagesUnknown?: boolean) => string;
 
   /**
-   * `true` if the total number of items is unknown.
+   * `true` when the total number of pages is unknown. Hides the page selection
+   * control.
    */
   pagesUnknown?: boolean;
 
@@ -183,9 +212,11 @@ const Pagination = React.forwardRef(
   (
     {
       backwardText = 'Previous page',
+      backwardTextTooltipPosition = 'top',
       className: customClassName = '',
       disabled = false,
       forwardText = 'Next page',
+      forwardTextTooltipPosition = 'top',
       id,
       isLastPage = false,
       itemText = (min, max) => `${min}–${max} items`,
@@ -199,6 +230,7 @@ const Pagination = React.forwardRef(
         `Page of ${total} ${total === 1 ? 'page' : 'pages'}`,
       page: controlledPage = 1,
       pageInputDisabled,
+      renderPageSelect,
       pageSize: controlledPageSize,
       pageSizeInputDisabled,
       pageSizes: controlledPageSizes,
@@ -257,7 +289,7 @@ const Pagination = React.forwardRef(
       [`${prefix}--pagination__button--forward`]: true,
       [`${prefix}--pagination__button--no-index`]: forwardButtonDisabled,
     });
-    const selectItems = renderSelectItems(totalPages);
+    const selectItems = renderPageSelect ? [] : renderSelectItems(totalPages);
 
     const focusMap = {
       backward: backBtnRef,
@@ -399,6 +431,18 @@ const Pagination = React.forwardRef(
       }
     }
 
+    function handleSetPage(nextPage: number | string) {
+      if (disabled || pageInputDisabled) return;
+      const numericPage = Number(nextPage);
+      if (!Number.isInteger(numericPage)) return;
+      const clamped = clamp(numericPage, 1, totalPages);
+      if (clamped === page) return;
+      setPage(clamped);
+      if (onChange) {
+        onChange({ page: clamped, pageSize });
+      }
+    }
+
     function incrementPage() {
       const nextPage = page + 1;
       setPage(nextPage);
@@ -489,18 +533,28 @@ const Pagination = React.forwardRef(
             </span>
           ) : (
             <>
-              <Select
-                id={`${prefix}-pagination-select-${inputId}-right`}
-                className={`${prefix}--select__page-number`}
-                labelText={pageSelectLabelText(totalPages)}
-                inline
-                hideLabel
-                onChange={handlePageInputChange}
-                value={page}
-                key={page}
-                disabled={pageInputDisabled || disabled}>
-                {selectItems}
-              </Select>
+              {renderPageSelect ? (
+                renderPageSelect({
+                  currentPage: page,
+                  totalPages,
+                  currentPageSize: pageSize,
+                  pageSelectLabelText: pageSelectLabelText(totalPages),
+                  onSetPage: handleSetPage,
+                })
+              ) : (
+                <Select
+                  id={`${prefix}-pagination-select-${inputId}-right`}
+                  className={`${prefix}--select__page-number`}
+                  labelText={pageSelectLabelText(totalPages)}
+                  inline
+                  hideLabel
+                  onChange={handlePageInputChange}
+                  value={page}
+                  key={page}
+                  disabled={pageInputDisabled || disabled}>
+                  {selectItems}
+                </Select>
+              )}
               <span className={`${prefix}--pagination__text`}>
                 {pageRangeText(page, totalPages)}
               </span>
@@ -508,7 +562,7 @@ const Pagination = React.forwardRef(
           )}
           <div className={`${prefix}--pagination__control-buttons`}>
             <IconButton
-              align="top"
+              align={backwardTextTooltipPosition}
               disabled={backButtonDisabled}
               kind="ghost"
               className={backButtonClasses}
@@ -519,7 +573,7 @@ const Pagination = React.forwardRef(
               <CaretLeft />
             </IconButton>
             <IconButton
-              align="top"
+              align={forwardTextTooltipPosition}
               disabled={forwardButtonDisabled || isLastPage}
               kind="ghost"
               className={forwardButtonClasses}
@@ -543,6 +597,16 @@ Pagination.propTypes = {
   backwardText: PropTypes.string,
 
   /**
+   * The tooltip position for the backward button.
+   */
+  backwardTextTooltipPosition: PropTypes.oneOf([
+    'top',
+    'right',
+    'bottom',
+    'left',
+  ]),
+
+  /**
    * The CSS class names.
    */
   className: PropTypes.string,
@@ -556,6 +620,16 @@ Pagination.propTypes = {
    * The description for the forward icon.
    */
   forwardText: PropTypes.string,
+
+  /**
+   * The tooltip position for the forward button.
+   */
+  forwardTextTooltipPosition: PropTypes.oneOf([
+    'top',
+    'right',
+    'bottom',
+    'left',
+  ]),
 
   /**
    * The unique ID of this component instance.
@@ -610,6 +684,12 @@ Pagination.propTypes = {
    * A function returning the label for the page select.
    */
   pageSelectLabelText: PropTypes.func,
+
+  /**
+   * Provide a custom render function for the page-selection control.
+   * When provided, the default `<Select>` is replaced with the returned node.
+   */
+  renderPageSelect: PropTypes.func,
 
   /**
    * The number dictating how many items a page contains.

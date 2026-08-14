@@ -58,6 +58,8 @@ const actions = html`
 `;
 
 const sizes = {
+  [`Extra small size (${DROPDOWN_SIZE.EXTRA_SMALL})`]:
+    DROPDOWN_SIZE.EXTRA_SMALL,
   [`Small size (${DROPDOWN_SIZE.SMALL})`]: DROPDOWN_SIZE.SMALL,
   [`Medium size (${DROPDOWN_SIZE.MEDIUM})`]: DROPDOWN_SIZE.MEDIUM,
   [`Large size (${DROPDOWN_SIZE.LARGE})`]: DROPDOWN_SIZE.LARGE,
@@ -102,6 +104,7 @@ const args = {
 };
 
 const filterableArgs = {
+  autocomplete: 'off',
   clearSelectionDescription: 'Total items selected: ',
   clearSelectionText: 'To clear selection, press Delete or Backspace.',
   disabled: false,
@@ -122,6 +125,11 @@ const filterableArgs = {
 };
 
 const argTypes = {
+  autocomplete: {
+    control: 'text',
+    description:
+      'Specify the autocomplete behavior of the filterable input. Defaults to "off".',
+  },
   clearSelectionDescription: {
     control: 'text',
     description:
@@ -206,7 +214,15 @@ const argTypes = {
   },
 };
 
+/** Stories without `filterable`: omit `autocomplete` from the Controls panel. */
+const nonFilterableParameters = {
+  controls: {
+    exclude: ['autocomplete'],
+  },
+};
+
 export const Default = {
+  parameters: nonFilterableParameters,
   args,
   argTypes,
   decorators: [(story) => html` <div style="width:300px">${story()}</div> `],
@@ -268,6 +284,7 @@ export const Default = {
 };
 
 export const Controlled = {
+  parameters: nonFilterableParameters,
   args,
   argTypes,
   decorators: [(story) => html` <div style="width:300px">${story()}</div> `],
@@ -378,6 +395,7 @@ export const Filterable = {
   decorators: [(story) => html` <div style="width:300px">${story()}</div> `],
   render: (args) => {
     const {
+      autocomplete,
       clearSelectionLabel,
       direction,
       disabled,
@@ -398,6 +416,7 @@ export const Filterable = {
     } = args ?? {};
     return html`
       <cds-multi-select
+        autocomplete=${ifDefined(autocomplete)}
         direction=${ifDefined(direction)}
         ?disabled=${disabled}
         ?invalid=${invalid}
@@ -440,6 +459,7 @@ export const FilterableWithSelectAll = {
   decorators: [(story) => html` <div style="width:300px">${story()}</div> `],
   render: (args) => {
     const {
+      autocomplete,
       clearSelectionLabel,
       direction,
       disabled,
@@ -460,6 +480,7 @@ export const FilterableWithSelectAll = {
     } = args ?? {};
     return html`
       <cds-multi-select
+        autocomplete=${ifDefined(autocomplete)}
         direction=${ifDefined(direction)}
         ?disabled=${disabled}
         ?invalid=${invalid}
@@ -497,6 +518,7 @@ export const FilterableWithAILabel = {
   argTypes,
   render: (args) => {
     const {
+      autocomplete,
       clearSelectionLabel,
       direction,
       disabled,
@@ -518,6 +540,7 @@ export const FilterableWithAILabel = {
     return html`
       <div style="width: 400px">
         <cds-multi-select
+          autocomplete=${ifDefined(autocomplete)}
           direction=${ifDefined(direction)}
           ?disabled=${disabled}
           ?invalid=${invalid}
@@ -567,6 +590,7 @@ export const FilterableWithLayer = {
   argTypes,
   render: (args) => {
     const {
+      autocomplete,
       clearSelectionLabel,
       direction,
       disabled,
@@ -588,6 +612,7 @@ export const FilterableWithLayer = {
     return html`
       <div style="width:300px">
         <cds-multi-select
+          autocomplete=${ifDefined(autocomplete)}
           direction=${ifDefined(direction)}
           ?disabled=${disabled}
           ?invalid=${invalid}
@@ -626,6 +651,7 @@ export const FilterableWithLayer = {
 };
 
 export const SelectAll = {
+  parameters: nonFilterableParameters,
   args,
   argTypes,
   decorators: [(story) => html` <div style="width:400px">${story()}</div> `],
@@ -693,6 +719,7 @@ export const SelectAll = {
 };
 
 export const SelectAllWithDynamicItems = {
+  parameters: nonFilterableParameters,
   args,
   argTypes,
   decorators: [(story) => html` <div style="width:400px">${story()}</div> `],
@@ -778,6 +805,7 @@ export const SelectAllWithDynamicItems = {
 };
 
 export const WithAILabel = {
+  parameters: nonFilterableParameters,
   args,
   argTypes,
   render: (args) => {
@@ -843,6 +871,7 @@ export const WithAILabel = {
 };
 
 export const WithInitialSelectedItems = {
+  parameters: nonFilterableParameters,
   args,
   argTypes,
   decorators: [(story) => html` <div style="width:300px">${story()}</div> `],
@@ -909,6 +938,7 @@ export const WithLayer = {
   decorators: [withLayers],
   parameters: {
     layout: 'fullscreen',
+    ...nonFilterableParameters,
   },
   args,
   argTypes,
@@ -972,6 +1002,7 @@ export const WithLayer = {
 };
 
 export const WithToggletipLabel = {
+  parameters: nonFilterableParameters,
   args,
   argTypes,
   render: (args) => {
@@ -1049,6 +1080,7 @@ export const WithToggletipLabel = {
 };
 
 export const WithCustomSorting = {
+  parameters: nonFilterableParameters,
   args: {
     ...args,
     titleText: 'With Custom Sorting',

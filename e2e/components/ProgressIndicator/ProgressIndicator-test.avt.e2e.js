@@ -54,7 +54,7 @@ test.describe('@avt ProgressIndicator', () => {
     });
 
     // Checking if the 'complete' prop is adding the correct class
-    expect(page.locator('.cds--progress-step--complete')).toBeTruthy();
+    await expect(page.locator('.cds--progress-step--complete')).toBeVisible();
   });
 
   test('@avt-advanced-states', async ({ page }) => {
@@ -67,7 +67,7 @@ test.describe('@avt ProgressIndicator', () => {
     });
 
     // Checking if the 'current' prop is adding the correct class
-    expect(page.locator('.cds--progress-step--current')).toBeTruthy();
+    await expect(page.locator('.cds--progress-step--current')).toBeVisible();
   });
 
   test('@avt-advanced-states - interactive onHover', async ({ page }) => {

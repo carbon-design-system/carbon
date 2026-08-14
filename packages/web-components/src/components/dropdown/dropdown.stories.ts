@@ -27,6 +27,8 @@ const directionOptions = {
 };
 
 const sizes = {
+  [`Extra small size (${DROPDOWN_SIZE.EXTRA_SMALL})`]:
+    DROPDOWN_SIZE.EXTRA_SMALL,
   [`Small size (${DROPDOWN_SIZE.SMALL})`]: DROPDOWN_SIZE.SMALL,
   [`Medium size (${DROPDOWN_SIZE.MEDIUM})`]: DROPDOWN_SIZE.MEDIUM,
   [`Large size (${DROPDOWN_SIZE.LARGE})`]: DROPDOWN_SIZE.LARGE,
@@ -170,6 +172,23 @@ const controls = {
   warnText: {
     control: 'text',
     description: `Provide the text that is displayed when the control is in warning state`,
+  },
+};
+
+const skeletonArgs = {
+  hideLabel: false,
+  size: DROPDOWN_SIZE.MEDIUM,
+};
+
+const skeletonControls = {
+  hideLabel: {
+    control: 'boolean',
+    description: 'Specify whether the label should be hidden, or not.',
+  },
+  size: {
+    control: 'select',
+    options: sizes,
+    description: 'Specify the size of the ListBox.',
   },
 };
 
@@ -417,9 +436,13 @@ export const InlineWithLayer = {
 };
 
 export const Skeleton = {
-  argTypes: controls,
-  args: defaultArgs,
-  render: () => html` <cds-dropdown-skeleton></cds-dropdown-skeleton> `,
+  argTypes: skeletonControls,
+  args: skeletonArgs,
+  render: ({ hideLabel, size }) => html`
+    <cds-dropdown-skeleton
+      ?hide-label=${hideLabel}
+      size=${size}></cds-dropdown-skeleton>
+  `,
 };
 
 const content = html`
@@ -596,6 +619,7 @@ export const WithToggletipLabel = {
     open,
     direction,
     disabled,
+    helperText,
     hideLabel,
     invalid,
     invalidText,
@@ -614,6 +638,7 @@ export const WithToggletipLabel = {
       ?open=${open}
       ?disabled="${disabled}"
       ?hide-label=${hideLabel}
+      helper-text=${helperText}
       ?invalid=${invalid}
       ?read-only=${readOnly}
       invalid-text=${invalidText}
