@@ -1,4 +1,4 @@
-import { Controls, Canvas, Story, Meta } from '@storybook/addon-docs/blocks';
+import { Controls, Canvas, Meta } from '@storybook/addon-docs/blocks';
 import * as GuidebannerStories from '../Guidebanner.stories';
 
 <Meta isTemplate />
@@ -26,21 +26,15 @@ be expanded or collapsed to show or hide detailed content.
 
 ### Default
 
-<Canvas>
-  <Story of={GuidebannerStories.Default} />
-</Canvas>
+<Canvas of={GuidebannerStories.Default} />
 
 ### Collapsible
 
-<Canvas>
-  <Story of={GuidebannerStories.Collapsible} />
-</Canvas>
+<Canvas of={GuidebannerStories.Collapsible} />
 
 ### Few insights
 
-<Canvas>
-  <Story of={GuidebannerStories.FewInsights} />
-</Canvas>
+<Canvas of={GuidebannerStories.FewInsights} />
 
 ## Component API
 

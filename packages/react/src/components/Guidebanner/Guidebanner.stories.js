@@ -19,7 +19,7 @@ import mdx from './docs/overview.mdx';
 const storyClass = 'guidebanner-stories';
 
 export default {
-  title: 'Preview/Guidebanner',
+  title: 'Preview/Onboarding/preview__Guidebanner',
   component: Guidebanner,
   parameters: {
     layout: 'fullscreen',
@@ -151,19 +151,27 @@ export const Collapsible = (args) => {
   );
 };
 
-export const FewInsights = (args) => (
-  <div className={`${storyClass}__viewport`}>
-    <Guidebanner {...args} onClose={() => action('onClose()')()}>
-      <GuidebannerElement
-        title="Use-case specific heading"
-        description="Use-case specific content related to the heading that explains the concept or adds context. Use-case specific content related to the heading that explains the concept or adds context."
-        button={<DefaultButtonLarge />}
-      />
-      <GuidebannerElement
-        title="Use-case specific heading"
-        description="Use-case specific content related to the heading that explains the concept or adds context."
-        button={<DefaultLink />}
-      />
-    </Guidebanner>
-  </div>
-);
+export const FewInsights = (args) => {
+  const [open, setOpen] = useState(true);
+  return (
+    <div className={`${storyClass}__viewport`}>
+      <Guidebanner
+        {...args}
+        collapsible
+        open={open}
+        onChange={setOpen}
+        onClose={() => action('onClose()')()}>
+        <GuidebannerElement
+          title="Use-case specific heading"
+          description="Use-case specific content related to the heading that explains the concept or adds context. Use-case specific content related to the heading that explains the concept or adds context."
+          button={<DefaultButtonLarge />}
+        />
+        <GuidebannerElement
+          title="Use-case specific heading"
+          description="Use-case specific content related to the heading that explains the concept or adds context."
+          button={<DefaultLink />}
+        />
+      </Guidebanner>
+    </div>
+  );
+};
