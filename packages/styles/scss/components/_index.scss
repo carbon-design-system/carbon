@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2018, 2025
+// Copyright IBM Corp. 2018, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -12,6 +12,7 @@
 @use 'badge-indicator';
 @use 'breadcrumb';
 @use 'button';
+@use 'card';
 @use 'chat-button';
 @use 'checkbox';
 @use 'code-snippet';
@@ -43,6 +44,7 @@
 @use 'form';
 @use 'icon-indicator';
 @use 'inline-loading';
+@use 'InterstitialScreen';
 @use 'link';
 @use 'list';
 @use 'list-box';
@@ -83,3 +85,4 @@
 @use 'treeview';
 @use 'truncated-text';
 @use 'ui-shell';
+@use 'user-avatar';
