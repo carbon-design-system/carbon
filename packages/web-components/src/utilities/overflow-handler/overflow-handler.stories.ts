@@ -145,9 +145,11 @@ const renderInstance = (args: StoryArgs) => {
   return html`
     <div class="overflow-handler-instance">
       <div
-        class="overflow-handler-container ${containerModifier}${
-          args.gap > 0 ? ' overflow-handler-show-gap' : ''
-        }${args.offsetValue > 0 ? ' overflow-handler-show-offset-value' : ''}"
+        class="overflow-handler-container ${containerModifier}${args.gap > 0
+          ? ' overflow-handler-show-gap'
+          : ''}${args.offsetValue > 0
+          ? ' overflow-handler-show-offset-value'
+          : ''}"
         style="gap: ${args.gap}px; --overflow-handler-gap: ${args.gap}px; --overflow-handler-offset-value: ${args.offsetValue}px"
         ${ref(attachInstance(args))}>
         ${Array.from({ length: args.itemCount }, (_, i) => {
@@ -224,53 +226,51 @@ export const Default = {
   argTypes: controls,
   render: (args: StoryArgs) => html`
     <div class="overflow-handler-demo">
-    <div class="overflow-handler-legend">
-      <span>
-        <span
-          class="overflow-handler-swatch overflow-handler-swatch-regular"></span>
-        regular item
-      </span>
-      ${args.fixedIndex > 0
-        ? html`
-            <span>
-              <span
-                class="overflow-handler-swatch overflow-handler-swatch-fixed"></span>
-              fixed item (<code>data-fixed</code>)
-            </span>
-          `
-        : ''}
-      <span class="overflow-handler-legend-offset">
-        <span
-          class="overflow-handler-swatch overflow-handler-swatch-offset"></span>
-        offset item (<code>data-offset</code>)
-      </span>
-      <span>
-        <span
-          class="overflow-handler-swatch overflow-handler-swatch-available"></span>
-        available space
-      </span>
-      ${args.gap > 0
-        ? html`
-            <span>
-              <span
-                class="overflow-handler-swatch overflow-handler-swatch-gap"></span>
-              gap
-            </span>
-          `
-        : ''}
-      ${args.offsetValue > 0
-        ? html`
-            <span>
-              <span
-                class="overflow-handler-swatch overflow-handler-swatch-offset-value"></span>
-              offset value
-            </span>
-          `
-        : ''}
-    </div>
-    ${Array.from({ length: args.instanceCount }, () =>
-      renderInstance(args)
-    )}
+      <div class="overflow-handler-legend">
+        <span>
+          <span
+            class="overflow-handler-swatch overflow-handler-swatch-regular"></span>
+          regular item
+        </span>
+        ${args.fixedIndex > 0
+          ? html`
+              <span>
+                <span
+                  class="overflow-handler-swatch overflow-handler-swatch-fixed"></span>
+                fixed item (<code>data-fixed</code>)
+              </span>
+            `
+          : ''}
+        <span class="overflow-handler-legend-offset">
+          <span
+            class="overflow-handler-swatch overflow-handler-swatch-offset"></span>
+          offset item (<code>data-offset</code>)
+        </span>
+        <span>
+          <span
+            class="overflow-handler-swatch overflow-handler-swatch-available"></span>
+          available space
+        </span>
+        ${args.gap > 0
+          ? html`
+              <span>
+                <span
+                  class="overflow-handler-swatch overflow-handler-swatch-gap"></span>
+                gap
+              </span>
+            `
+          : ''}
+        ${args.offsetValue > 0
+          ? html`
+              <span>
+                <span
+                  class="overflow-handler-swatch overflow-handler-swatch-offset-value"></span>
+                offset value
+              </span>
+            `
+          : ''}
+      </div>
+      ${Array.from({ length: args.instanceCount }, () => renderInstance(args))}
     </div>
     <style>
       ${styles}

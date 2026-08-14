@@ -107,8 +107,8 @@ dynamically.
 ## Using `gap`
 
 Pass the container's `column-gap` (for `width`) or `row-gap` (for `height`) as
-the `gap` option. CSS gap is only between items, so the handler does not count
-a gap after the last visible item.
+the `gap` option. CSS gap is only between items, so the handler does not count a
+gap after the last visible item.
 
 ```ts
 handler = createOverflowHandler({
@@ -142,8 +142,8 @@ and render them elsewhere, such as a modal or popover.
 
 ## Re-initialization guidelines
 
-The handler needs to be re-initialized whenever items are added or removed.
-Item sizes are remeasured on each update, so a container resize is enough after
+The handler needs to be re-initialized whenever items are added or removed. Item
+sizes are remeasured on each update, so a container resize is enough after
 padding, margin, gap, or offset size changes. If those change without a resize,
 call `disconnect()` and create a new handler.
 
