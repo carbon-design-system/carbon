@@ -84,7 +84,6 @@ const sharedArgTypes = {
 };
 
 const sharedArgs = {
-  className: '',
   disabled: false,
   helperText: 'Select the region where your resources will be hosted.',
   hideLabel: false,
