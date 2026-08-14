@@ -46,6 +46,7 @@ const sharedArgs = {
   isInset: false,
   kind: 'on-page',
   label: 'List title',
+  size: 'lg',
 };
 
 const sharedArgTypes = {
@@ -96,7 +97,6 @@ export const Default = DefaultStory.bind({});
 
 Default.args = {
   ...sharedArgs,
-  size: 'lg',
 };
 Default.argTypes = sharedArgTypes;
 Default.parameters = sharedParameters;
