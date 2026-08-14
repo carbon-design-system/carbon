@@ -47,7 +47,7 @@ test.describe('@avt Card', () => {
   test('@avt-advanced-states with AI label', async ({ page }) => {
     await visitStory(page, {
       component: 'Card',
-      id: 'preview-preview-card--with-a-i-label',
+      id: 'preview-preview-card--with-ai-label',
       globals: {
         theme: 'white',
       },
@@ -90,7 +90,7 @@ test.describe('@avt Card', () => {
 
     // Tab into the first clickable card (role="button")
     await page.keyboard.press('Tab');
-    const card = page.getByRole('button', { name: 'View analytics report' });
+    const card = page.getByRole('button', { name: 'Usage report' });
     await expect(card).toBeFocused();
 
     // Enter activates it — browser alert fires; dismiss so the test can continue
