@@ -44,9 +44,6 @@ export default {
 };
 
 const sharedArgTypes = {
-  className: {
-    control: 'text',
-  },
   disabled: {
     control: 'boolean',
   },
