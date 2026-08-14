@@ -52,11 +52,11 @@ test.describe('@avt RadioButton', () => {
         theme: 'white',
       },
     });
-    await expect(page.locator('input#radio-1')).toBeVisible();
+    await expect(page.locator('input#radio-email')).toBeVisible();
     await page.keyboard.press('Tab');
-    await expect(page.locator('input#radio-1')).toBeVisible();
+    await expect(page.locator('input#radio-email')).toBeVisible();
     await page.keyboard.press('ArrowDown');
-    await expect(page.locator('input#radio-2')).toBeVisible();
+    await expect(page.locator('input#radio-sms')).toBeVisible();
   });
 
   test('@avt-advanced-states - invalid state', async ({ page }) => {
@@ -105,7 +105,7 @@ test.describe('@avt RadioButton', () => {
       },
     });
 
-    await expect(page.locator('input#radio-1')).toBeDisabled();
+    await expect(page.locator('input#radio-email')).toBeDisabled();
     await expect(page).toHaveNoACViolations('RadioButton-disabled');
   });
 
@@ -121,8 +121,8 @@ test.describe('@avt RadioButton', () => {
       },
     });
 
-    const inputElement = await page.locator('input#radio-1').isChecked();
-    expect(inputElement).toBeFalsy();
+    const inputElement = await page.locator('input#radio-email').isChecked();
+    expect(inputElement).toBeTruthy();
     await expect(page).toHaveNoACViolations('RadioButton-read-only');
   });
 });
