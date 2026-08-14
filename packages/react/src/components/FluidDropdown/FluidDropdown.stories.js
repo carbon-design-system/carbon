@@ -22,6 +22,13 @@ import mdx from './FluidDropdown.mdx';
 export default {
   title: 'Components/Fluid Components/FluidDropdown',
   component: FluidDropdown,
+  decorators: [
+    (Story) => (
+      <div style={{ width: 400 }}>
+        <Story />
+      </div>
+    ),
+  ],
   parameters: {
     docs: {
       page: mdx,
@@ -145,35 +152,28 @@ const sharedArgs = {
 };
 
 const sharedControls = Object.keys(sharedArgTypes);
-const widthArgType = {
-  control: { type: 'range', min: 300, max: 800, step: 50 },
-};
 
-export const Default = ({ defaultWidth, ...dropdownArgs }) => (
-  <div style={{ width: defaultWidth }}>
-    <FluidDropdown
-      id="default"
-      titleText="Label"
-      label="Choose an option"
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
-      {...dropdownArgs}
-    />
-  </div>
+export const Default = (dropdownArgs) => (
+  <FluidDropdown
+    id="default"
+    titleText="Label"
+    label="Choose an option"
+    items={items}
+    itemToString={(item) => (item ? item.text : '')}
+    {...dropdownArgs}
+  />
 );
 
 Default.args = {
   ...sharedArgs,
-  defaultWidth: 400,
 };
 
 Default.argTypes = {
   ...sharedArgTypes,
-  defaultWidth: widthArgType,
 };
 
 Default.parameters = {
-  controls: { include: [...sharedControls, 'defaultWidth'] },
+  controls: { include: sharedControls },
 };
 
 const ToggleTip = (
@@ -190,28 +190,24 @@ const ToggleTip = (
   </>
 );
 
-export const Condensed = ({ defaultWidth, ...dropdownArgs }) => (
-  <div style={{ width: defaultWidth }}>
-    <FluidDropdown
-      id="default"
-      titleText="Label"
-      label="Choose an option"
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
-      {...dropdownArgs}
-    />
-  </div>
+export const Condensed = (dropdownArgs) => (
+  <FluidDropdown
+    id="default"
+    titleText="Label"
+    label="Choose an option"
+    items={items}
+    itemToString={(item) => (item ? item.text : '')}
+    {...dropdownArgs}
+  />
 );
 
 Condensed.args = {
   ...sharedArgs,
-  defaultWidth: 400,
   isCondensed: true,
 };
 
 Condensed.argTypes = {
   ...sharedArgTypes,
-  defaultWidth: widthArgType,
   isCondensed: {
     ...sharedArgTypes.isCondensed,
     table: { readonly: true },
@@ -219,7 +215,7 @@ Condensed.argTypes = {
 };
 
 Condensed.parameters = {
-  controls: { include: [...sharedControls, 'defaultWidth'] },
+  controls: { include: sharedControls },
 };
 
 const aiLabel = (
@@ -253,49 +249,29 @@ const aiLabel = (
   </AILabel>
 );
 
-export const withAILabel = ({ defaultWidth, ...dropdownArgs }) => (
-  <div style={{ width: defaultWidth }}>
-    <FluidDropdown
-      initialSelectedItem={items[2]}
-      id="default"
-      titleText="Label"
-      label="Choose an option"
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
-      decorator={aiLabel}
-      {...dropdownArgs}
-    />
-  </div>
+export const withAILabel = (dropdownArgs) => (
+  <FluidDropdown
+    initialSelectedItem={items[2]}
+    id="default"
+    titleText="Label"
+    label="Choose an option"
+    items={items}
+    itemToString={(item) => (item ? item.text : '')}
+    decorator={aiLabel}
+    {...dropdownArgs}
+  />
 );
 
 withAILabel.args = {
   ...sharedArgs,
-  defaultWidth: 400,
 };
 
 withAILabel.argTypes = {
   ...sharedArgTypes,
-  defaultWidth: widthArgType,
 };
 
 withAILabel.parameters = {
-  controls: { include: [...sharedControls, 'defaultWidth'] },
+  controls: { include: sharedControls },
 };
 
-export const Skeleton = ({ defaultWidth }) => (
-  <div style={{ width: defaultWidth }}>
-    <FluidDropdownSkeleton />
-  </div>
-);
-
-Skeleton.args = {
-  defaultWidth: 400,
-};
-
-Skeleton.argTypes = {
-  defaultWidth: widthArgType,
-};
-
-Skeleton.parameters = {
-  controls: { include: ['defaultWidth'] },
-};
+export const Skeleton = () => <FluidDropdownSkeleton />;
