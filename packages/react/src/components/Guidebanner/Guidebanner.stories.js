@@ -111,7 +111,7 @@ export const Default = (args) => (
   </div>
 );
 
-export const Collapsible = (args) => {
+export const ManyInsights = (args) => {
   const [open, setOpen] = useState(true);
   return (
     <div className={`${storyClass}__viewport`}>
@@ -151,7 +151,7 @@ export const Collapsible = (args) => {
   );
 };
 
-export const FewInsights = (args) => {
+export const Collapsible = (args) => {
   const [open, setOpen] = useState(true);
   return (
     <div className={`${storyClass}__viewport`}>
