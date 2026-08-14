@@ -33,14 +33,18 @@ test.describe('@avt Toggletip', () => {
 
     // Checking first Toggletip interaction
     await page.keyboard.press('Tab');
-    await expect(page.getByLabel('Show information').first()).toBeFocused();
+    await expect(
+      page.getByLabel('Show account balance details').first()
+    ).toBeFocused();
     await page.keyboard.press('Enter');
     await expect(page.locator('.cds--popover--open')).toBeVisible();
     // Tabbing inside the popover
     await page.keyboard.press('Tab');
     await expect(page.locator('.cds--link').first()).toBeFocused();
     await page.keyboard.press('Tab');
-    await expect(page.getByRole('button', { name: 'Button' })).toBeFocused();
+    await expect(
+      page.getByRole('button', { name: 'View balance' })
+    ).toBeFocused();
     await page.keyboard.press('Tab');
     await expect(page.locator('.cds--popover--open')).toBeHidden();
   });
