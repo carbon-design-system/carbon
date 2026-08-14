@@ -13,16 +13,21 @@ import {
   MenuItemRadioGroup,
   MenuItemSelectable,
 } from '../Menu';
-import { OverflowMenu } from './';
+import { OverflowMenu } from './next';
 import { WithFeatureFlags } from '../../../.storybook/templates/WithFeatureFlags';
 import { FeatureFlags } from '../FeatureFlags';
 
 const args = {
   autoAlign: false,
+  disabled: false,
   label: 'Options',
   menuAlignment: 'bottom-start',
   size: 'md',
   tooltipAlignment: 'top',
+  tooltipAutoAlign: false,
+  tooltipDefaultOpen: false,
+  tooltipEnterDelayMs: '0',
+  tooltipLeaveDelayMs: '0',
 };
 
 const tooltipAlignmentOptions = [
@@ -43,6 +48,12 @@ const tooltipAlignmentOptions = [
 const argTypes = {
   autoAlign: {
     control: { type: 'boolean' },
+    description:
+      'Will attempt to automatically align the menu with the trigger button to avoid collisions with the viewport',
+  },
+  disabled: {
+    control: { type: 'boolean' },
+    description: 'Specify whether the trigger button should be disabled',
   },
   label: {
     control: { type: 'text' },
@@ -51,7 +62,7 @@ const argTypes = {
     options: ['bottom-start', 'bottom-end', 'top-start', 'top-end'],
     control: { type: 'select' },
     description:
-      'Specify how the menu should align with the button element `bottom-start` `bottom-end` `top-start` `top-end`',
+      'Specify how the menu should align with the trigger button `bottom-start` `bottom-end` `top-start` `top-end`',
   },
   size: {
     options: ['xs', 'sm', 'md', 'lg'],
@@ -60,6 +71,28 @@ const argTypes = {
   tooltipAlignment: {
     options: tooltipAlignmentOptions,
     control: { type: 'select' },
+    description:
+      'Specify how the tooltip on the trigger button should be aligned',
+  },
+  tooltipAutoAlign: {
+    control: { type: 'boolean' },
+    description:
+      'Will attempt to automatically align the tooltip on the trigger button to avoid collisions with the viewport',
+  },
+  tooltipDefaultOpen: {
+    control: { type: 'boolean' },
+    description:
+      'Specify whether the tooltip on the trigger button should be open when it first renders',
+  },
+  tooltipEnterDelayMs: {
+    control: { type: 'number' },
+    description:
+      'Specify the duration in milliseconds to delay before displaying the tooltip on the trigger button',
+  },
+  tooltipLeaveDelayMs: {
+    control: { type: 'number' },
+    description:
+      'Specify the duration in milliseconds to delay before hiding the tooltip on the trigger button',
   },
 };
 
@@ -73,95 +106,7 @@ export default {
     MenuItemRadioGroup,
     MenuItemDivider,
   },
-  parameters: {
-    controls: {
-      exclude: [
-        'align',
-        'aria-label',
-        'direction',
-        'flipped',
-        'focusTrap',
-        'iconClass',
-        'iconDescription',
-        'light',
-        'menuOffset',
-        'menuOffsetFlip',
-        'menuOptionsClass',
-        'open',
-        'selectorPrimaryFocus',
-      ],
-    },
-  },
-  args: {
-    label: 'Options',
-  },
-  argTypes: {
-    autoAlign: {
-      control: { type: 'boolean' },
-      description:
-        'Will attempt to automatically align the floating element to avoid collisions with the viewport and being clipped by ancestor elements',
-    },
-    disabled: {
-      control: { type: 'boolean' },
-      description: 'Specify whether the trigger button should be disabled',
-    },
-    label: {
-      control: { type: 'text' },
-      description:
-        "A label describing the options available. Is used in the trigger tooltip and as the menu's accessible label",
-    },
-    menuAlignment: {
-      options: ['bottom-start', 'bottom-end', 'top-start', 'top-end'],
-      control: { type: 'select' },
-      description:
-        'Specify how the menu should align with the button element `bottom-start` `bottom-end` `top-start` `top-end`',
-      default: 'bottom-start',
-    },
-    size: {
-      options: ['xs', 'sm', 'md', 'lg'],
-      control: { type: 'select' },
-      description:
-        'Specify the size of the menu, from a list of available sizes',
-    },
-    tooltipAlignment: {
-      options: [
-        'top',
-        'top-start',
-        'top-end',
-        'bottom',
-        'bottom-start',
-        'bottom-end',
-        'left',
-        'left-start',
-        'left-end',
-        'right',
-        'right-start',
-        'right-end',
-      ],
-      control: { type: 'select' },
-      description: 'Specify how the trigger tooltip should be aligned',
-    },
-    tooltipAutoAlign: {
-      control: { type: 'boolean' },
-      description:
-        'Will attempt to automatically align the tooltip on the trigger button to avoid collisions with the viewport',
-    },
-    tooltipDefaultOpen: {
-      control: { type: 'boolean' },
-      description:
-        'Specify whether the tooltip on the trigger button should be open when it first renders',
-    },
-    tooltipEnterDelayMs: {
-      control: { type: 'number' },
-      description:
-        'Specify the duration in milliseconds to delay before displaying the tooltip on the trigger button',
-    },
-    tooltipLeaveDelayMs: {
-      control: { type: 'number' },
-      description:
-        'Specify the duration in milliseconds to delay before hiding the tooltip on the trigger button',
-    },
-  },
+  tags: ['!autodocs'],
   decorators: [
     (Story) => (
       <WithFeatureFlags>
@@ -169,7 +114,13 @@ export default {
       </WithFeatureFlags>
     ),
   ],
-  tags: ['!autodocs'],
+  args,
+  argTypes,
+  parameters: {
+    controls: {
+      exclude: ['renderIcon', 'menuTarget'],
+    },
+  },
 };
 
 export const AutoAlign = (args) => {
@@ -199,6 +150,16 @@ export const AutoAlign = (args) => {
       </div>
     </div>
   );
+};
+
+AutoAlign.args = {
+  autoAlign: true,
+};
+
+AutoAlign.argTypes = {
+  autoAlign: {
+    table: { readonly: true },
+  },
 };
 
 export const Nested = (args) => {
@@ -287,6 +248,12 @@ export const WithMenuAlignment = (args) => {
   );
 };
 
+WithMenuAlignment.parameters = {
+  controls: {
+    include: ['autoAlign', 'label', 'size'],
+  },
+};
+
 export const FloatingStyles = (args) => {
   return (
     <div>
@@ -313,8 +280,4 @@ export const Default = (args) => {
       <MenuItem label="Delete app" kind="danger" />
     </OverflowMenu>
   );
-};
-
-AutoAlign.args = {
-  autoAlign: 'true',
 };
