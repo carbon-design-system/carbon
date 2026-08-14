@@ -39,6 +39,8 @@ export * from './components/DatePicker';
 export * from './components/DatePickerInput';
 export * as preview__DatePicker from './components/DatePicker/next';
 export * from './components/Dropdown';
+// TODO: uncomment in v12 — also remove from excludeProductsComponents
+// export * from './components/EditInPlace';
 export * from './components/ErrorBoundary';
 export * from './components/ExpandableSearch';
 export {
@@ -738,6 +740,7 @@ export type { SwitcherItemProps } from './components/UIShell/SwitcherItem';
 // TODO: ibm-products migration in progress — re-enable when component is ready
 // export { TruncatedText } from './components/TruncatedText';
 // export type { TruncatedTextProps } from './components/TruncatedText';
+// export * from './components/UserAvatar';
 
 //unordered list
 export type { UnorderedListProps } from './components/UnorderedList/UnorderedList';
