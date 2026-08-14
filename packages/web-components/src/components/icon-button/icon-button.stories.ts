@@ -50,7 +50,7 @@ const args = {
   kind: BUTTON_KIND.PRIMARY,
   label: 'Custom label',
   leaveDelayMs: 100,
-  size: ICON_BUTTON_SIZE.MEDIUM,
+  size: ICON_BUTTON_SIZE.LARGE,
 };
 
 const argTypes = {
@@ -104,7 +104,7 @@ const argTypes = {
   },
   size: {
     control: 'select',
-    description: 'Specify the size of the Button. Defaults to <code>md</code>.',
+    description: 'Specify the size of the Button. Defaults to <code>lg</code>.',
     options: ICON_BUTTON_SIZE,
   },
 };

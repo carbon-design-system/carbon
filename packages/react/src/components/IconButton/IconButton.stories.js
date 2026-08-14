@@ -76,7 +76,7 @@ Default.args = {
   label: 'Custom label',
   kind: 'primary',
   leaveDelayMs: 100,
-  size: 'md',
+  size: 'lg',
 };
 
 Default.argTypes = {
@@ -188,7 +188,6 @@ withBadgeIndicator.args = {
   autoAlign: true,
   badgeCount: 4,
   closeOnActivation: true,
-  defaultOpen: true,
   disabled: false,
   dropShadow: false,
   enterDelayMs: 100,
