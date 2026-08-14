@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -23,6 +23,11 @@ export default {
     },
   },
   args: {
+    actionButtonLabel: 'Action',
+    inline: false,
+    closeOnEscape: true,
+    title: 'Notification title',
+    subtitle: 'Subtitle text goes here',
     kind: 'error',
     lowContrast: false,
     hideCloseButton: false,
@@ -32,27 +37,27 @@ export default {
     onCloseButtonClick: action('onCloseButtonClick'),
     onActionButtonClick: action('onActionButtonClick'),
   },
+  argTypes: {
+    onActionButtonClick: {
+      action: 'onActionButtonClick',
+    },
+    onClose: {
+      action: 'onClose',
+    },
+    onCloseButtonClick: {
+      action: 'onCloseButtonClick',
+    },
+  },
 };
 
 export const Default = (args) => (
   <ActionableNotification {...args}></ActionableNotification>
 );
 
-Default.argTypes = {
-  onActionButtonClick: {
-    action: 'onActionButtonClick',
+export const Inline = {
+  ...Default,
+  args: {
+    inline: true,
   },
-  onClose: {
-    action: 'onClose',
-  },
-  onCloseButtonClick: {
-    action: 'onCloseButtonClick',
-  },
-};
-Default.args = {
-  actionButtonLabel: 'Action',
-  inline: false,
-  closeOnEscape: true,
-  title: 'Notification title',
-  subtitle: 'Subtitle text goes here',
+  tags: ['!dev', '!autodocs'],
 };

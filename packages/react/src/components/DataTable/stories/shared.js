@@ -1,12 +1,53 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 import React from 'react';
-import { action } from 'storybook/actions';
 import Link from '../../Link';
+
+export const dataTableArgs = {
+  isSortable: false,
+  locale: 'en',
+  size: 'lg',
+  stickyHeader: false,
+  useStaticWidth: false,
+  useZebraStyles: false,
+};
+
+export const dataTableArgTypes = {
+  filterRows: { control: false },
+  headers: { control: false },
+  isSortable: {
+    control: 'boolean',
+    description: 'Enable sorting for the table headers.',
+  },
+  locale: {
+    control: 'text',
+    description: 'Provide a locale for the table.',
+  },
+  rows: { control: false },
+  size: {
+    control: 'select',
+    options: ['xs', 'sm', 'md', 'lg', 'xl'],
+    description: 'Change the row height of the table.',
+  },
+  sortRow: { control: false },
+  stickyHeader: {
+    control: 'boolean',
+    description: 'Keep the table header visible while scrolling.',
+  },
+  translateWithId: { control: false },
+  useStaticWidth: {
+    control: 'boolean',
+    description: 'Use a width of auto instead of 100%.',
+  },
+  useZebraStyles: {
+    control: 'boolean',
+    description: 'Add zebra striping to the table rows.',
+  },
+};
 
 export const rows = [
   {
@@ -100,5 +141,7 @@ export const headers = [
   },
 ];
 
-export const batchActionClick = (selectedRows) => () =>
-  action('Batch action click')(selectedRows);
+export const batchActionClick =
+  (selectedRows, onClick = () => {}) =>
+  () =>
+    onClick(selectedRows);

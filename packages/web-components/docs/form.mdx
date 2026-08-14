@@ -4,13 +4,19 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 # Having components participate in form
 
-Though form elements in `@carbon/web-components` (e.g. `<cds-text-input>`) are not native form elements like `<input>`, they have some extra APIs that align well with web/framework standards.
+Though form elements in `@carbon/web-components` (e.g. `<cds-text-input>`) are
+not native form elements like `<input>`, they have some extra APIs that align
+well with web/framework standards.
 
 ## `formdata` event
 
-Browsers supporting [`formdata` event](https://www.chromestatus.com/feature/5662230242656256) fire that event when the user clicks on `<button type="submit">` in `<form>`. Our form components listen to that event to add their values to the `<form>`.
+Browsers supporting
+[`formdata` event](https://www.chromestatus.com/feature/5662230242656256) fire
+that event when the user clicks on `<button type="submit">` in `<form>`. Our
+form components listen to that event to add their values to the `<form>`.
 
-To support other browsers, you can use a regular `<button>` and manually fire a custom event with the same name (`formdata`), like below:
+To support other browsers, you can use a regular `<button>` and manually fire a
+custom event with the same name (`formdata`), like below:
 
 ```javascript
 const form = document.querySelector('form');
@@ -29,4 +35,5 @@ button.addEventListener('click', () => {
 });
 ```
 
-Stackblitz example [here](https://stackblitz.com/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/stackblitz/form/basic?embed=1&file=src%2Findex.js&hideExplorer=1&hideNavigation=1&theme=light&terminalHeight=0&hidedevtools=1)
+Stackblitz example
+[here](https://stackblitz.com/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/stackblitz/form/basic?embed=1&file=src%2Findex.js&hideExplorer=1&hideNavigation=1&theme=light&terminalHeight=0&hidedevtools=1)

@@ -14,7 +14,7 @@ const path = require('path');
 const ts = require('typescript');
 
 const BANNER = `/**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -65,6 +65,10 @@ async function compileIconComponent(outDir, moduleKind) {
     esModuleInterop: true,
     target: ts.ScriptTarget.ES2015,
     moduleResolution: ts.ModuleResolutionKind.NodeJs,
+    // `moduleResolution: node10` (NodeJs) is deprecated in TS 6.x and will be
+    // removed in TS 7.0. It's intentional for this declaration-only emit, so
+    // opt into keeping it without the deprecation error until we migrate.
+    ignoreDeprecations: '6.0',
     lib: ['lib.es2015.d.ts', 'lib.dom.d.ts'],
     types: ['react'],
   };
@@ -136,8 +140,9 @@ async function generateIndexTypes(outDir) {
   const indexContent = await fs.readFile(indexJsPath, 'utf8');
 
   const bucketExports = [];
-  const esmRegex = /from '\.\/(__generated__\/bucket-\d+)\.js'/g;
-  const cjsRegex = /require\('\.\/(__generated__\/bucket-\d+)\.js'\)/g;
+  // Support both rollup (single-quoted) and tsdown (double-quoted) output.
+  const esmRegex = /from ['"]\.\/(__generated__\/bucket-\d+)\.js['"]/g;
+  const cjsRegex = /require\(['"]\.\/(__generated__\/bucket-\d+)\.js['"]\)/g;
 
   let match;
   while ((match = esmRegex.exec(indexContent)) !== null) {

@@ -6,7 +6,7 @@
  */
 
 import { render, screen } from '@testing-library/react';
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { Popover, PopoverContent } from '../../Popover';
 import userEvent from '@testing-library/user-event';
 import { waitForPosition } from '../../ListBox/test-helpers';
@@ -17,6 +17,11 @@ import { default as Checkbox } from '../../Checkbox';
 const prefix = 'cds';
 
 describe('Popover', () => {
+  const TriggerWithPopoverContentDisplayName = forwardRef((props, ref) => (
+    <button type="button" ref={ref} {...props} />
+  ));
+  TriggerWithPopoverContentDisplayName.displayName = 'PopoverContent';
+
   it('should support a ref on the outermost element', () => {
     const ref = jest.fn();
     const { container } = render(
@@ -110,6 +115,24 @@ describe('Popover', () => {
       const caretContainer =
         screen.getByTestId('test').lastChild.lastChild.firstChild;
       expect(caretContainer).toHaveStyle({ left: '0px', top: '-7px' });
+    });
+
+    it('should auto align when trigger component shares `PopoverContent` `displayName`', async () => {
+      render(
+        <Popover open align="bottom" data-testid="test" autoAlign>
+          <TriggerWithPopoverContentDisplayName>
+            Settings
+          </TriggerWithPopoverContentDisplayName>
+          <PopoverContent />
+        </Popover>
+      );
+
+      await waitForPosition();
+
+      const caretContainer =
+        screen.getByTestId('test').lastChild.lastChild.firstChild;
+
+      expect(caretContainer).toHaveStyle({ left: '0px', top: '-6px' });
     });
 
     it('should forward additional props on the outermost element', () => {
@@ -352,6 +375,100 @@ describe('Popover', () => {
 
       expect(onRequestClose).toHaveBeenCalled();
     });
+
+    it('should call onRequestClose when pressing Escape while the popover content is focused', async () => {
+      const onRequestClose = jest.fn();
+      render(
+        <Popover open onRequestClose={() => onRequestClose()}>
+          <button type="button" data-testid="trigger">
+            Settings
+          </button>
+          <PopoverContent>
+            <button data-testid="inside-button">Inside Button</button>
+          </PopoverContent>
+        </Popover>
+      );
+
+      screen.getByTestId('inside-button').focus();
+      await userEvent.keyboard('{Escape}');
+
+      expect(onRequestClose).toHaveBeenCalled();
+
+      // focus should return to trigger
+      expect(screen.getByTestId('trigger')).toHaveFocus();
+    });
+
+    it('should NOT call onRequestClose when pressing Escape while the trigger is focused', async () => {
+      const onRequestClose = jest.fn();
+      render(
+        <Popover open onRequestClose={() => onRequestClose()}>
+          <button type="button" data-testid="trigger">
+            Settings
+          </button>
+          <PopoverContent>test</PopoverContent>
+        </Popover>
+      );
+
+      screen.getByTestId('trigger').focus();
+      await userEvent.keyboard('{Escape}');
+
+      expect(onRequestClose).not.toHaveBeenCalled();
+
+      // focus should remain on trigger
+      expect(screen.getByTestId('trigger')).toHaveFocus();
+    });
+
+    it('should NOT call onRequestClose when a control inside the content handles Escape via preventDefault', async () => {
+      const onRequestClose = jest.fn();
+      render(
+        <Popover open onRequestClose={() => onRequestClose()}>
+          <button type="button" data-testid="trigger">
+            Settings
+          </button>
+          <PopoverContent>
+            <button
+              data-testid="inside-button"
+              onKeyDown={(event) => {
+                if (event.key === 'Escape') {
+                  event.preventDefault();
+                }
+              }}>
+              Inside Button
+            </button>
+          </PopoverContent>
+        </Popover>
+      );
+
+      screen.getByTestId('inside-button').focus();
+      await userEvent.keyboard('{Escape}');
+
+      expect(onRequestClose).not.toHaveBeenCalled();
+    });
+
+    it('should only call onRequestClose for the innermost nested popover on Escape', async () => {
+      const onOuterRequestClose = jest.fn();
+      const onInnerRequestClose = jest.fn();
+
+      render(
+        <Popover open onRequestClose={onOuterRequestClose}>
+          <button>Outer trigger</button>
+          <PopoverContent>
+            <Popover open onRequestClose={onInnerRequestClose}>
+              <button>Inner trigger</button>
+              <PopoverContent>
+                <button data-testid="inner-button">Inner button</button>
+              </PopoverContent>
+            </Popover>
+          </PopoverContent>
+        </Popover>
+      );
+
+      screen.getByTestId('inner-button').focus();
+      await userEvent.keyboard('{Escape}');
+
+      expect(onInnerRequestClose).toHaveBeenCalled();
+      expect(onOuterRequestClose).not.toHaveBeenCalled();
+    });
   });
 
   it('should NOT call onRequestClose when clicking inside the popover content', async () => {
@@ -435,5 +552,109 @@ describe('Popover', () => {
 
     await userEvent.click(screen.getByTestId('tabtip-checkbox'));
     expect(onRequestClose).not.toHaveBeenCalled();
+  });
+
+  it('should NOT call onRequestClose when clicking DatePicker calendar rendered in body', async () => {
+    const onRequestClose = jest.fn();
+    render(
+      <Popover open autoAlign onRequestClose={onRequestClose}>
+        <button type="button">Open</button>
+        <PopoverContent>
+          <input id="date-picker-input" aria-label="Date input" readOnly />
+        </PopoverContent>
+      </Popover>
+    );
+
+    const input = screen.getByLabelText('Date input');
+    const calendar = document.createElement('div');
+    calendar.className = 'flatpickr-calendar open';
+    calendar.innerHTML = '<span class="flatpickr-day">26</span>';
+    document.body.appendChild(calendar);
+
+    try {
+      Object.defineProperty(input, '_flatpickr', {
+        value: { calendarContainer: calendar },
+        configurable: true,
+      });
+
+      await userEvent.click(calendar.querySelector('.flatpickr-day'));
+
+      expect(onRequestClose).not.toHaveBeenCalled();
+    } finally {
+      document.body.removeChild(calendar);
+    }
+  });
+
+  it('should NOT call onRequestClose when focus moves to DatePicker calendar', async () => {
+    const onRequestClose = jest.fn();
+    const { container } = render(
+      <Popover open autoAlign onRequestClose={onRequestClose}>
+        <button type="button">Open</button>
+        <PopoverContent>
+          <input id="date-picker-input" aria-label="Date input" readOnly />
+        </PopoverContent>
+      </Popover>
+    );
+
+    const input = screen.getByLabelText('Date input');
+    const calendar = document.createElement('div');
+    calendar.className = 'flatpickr-calendar open';
+    calendar.innerHTML = '<span class="flatpickr-day" tabindex="0">26</span>';
+    document.body.appendChild(calendar);
+
+    try {
+      Object.defineProperty(input, '_flatpickr', {
+        value: { calendarContainer: calendar },
+        configurable: true,
+      });
+
+      input.focus();
+      const popoverEl = container.firstChild;
+      const focusoutEvent = new FocusEvent('focusout', {
+        bubbles: true,
+        relatedTarget: calendar.querySelector('.flatpickr-day'),
+      });
+      popoverEl.dispatchEvent(focusoutEvent);
+
+      expect(onRequestClose).not.toHaveBeenCalled();
+    } finally {
+      document.body.removeChild(calendar);
+    }
+  });
+
+  it('should call onRequestClose when clicking DatePicker calendar outside popover', async () => {
+    const onRequestClose = jest.fn();
+    render(
+      <Popover open autoAlign onRequestClose={onRequestClose}>
+        <button type="button">Open</button>
+        <PopoverContent>
+          <input id="popover-input" aria-label="Popover input" readOnly />
+        </PopoverContent>
+      </Popover>
+    );
+
+    const outsideInput = document.createElement('input');
+    outsideInput.setAttribute('aria-label', 'Outside input');
+    outsideInput.readOnly = true;
+    document.body.appendChild(outsideInput);
+
+    const calendar = document.createElement('div');
+    calendar.className = 'flatpickr-calendar open';
+    calendar.innerHTML = '<span class="flatpickr-day">26</span>';
+    document.body.appendChild(calendar);
+
+    try {
+      Object.defineProperty(outsideInput, '_flatpickr', {
+        value: { calendarContainer: calendar },
+        configurable: true,
+      });
+
+      await userEvent.click(calendar.querySelector('.flatpickr-day'));
+
+      expect(onRequestClose).toHaveBeenCalled();
+    } finally {
+      document.body.removeChild(calendar);
+      document.body.removeChild(outsideInput);
+    }
   });
 });

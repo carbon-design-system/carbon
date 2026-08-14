@@ -7,7 +7,7 @@
 
 @use '../config';
 @use './src';
-@use './unicode';
+@use './unicode/serif' as unicode;
 
 $font-family: 'IBM Plex Serif';
 $name: 'IBM-Plex-Serif';

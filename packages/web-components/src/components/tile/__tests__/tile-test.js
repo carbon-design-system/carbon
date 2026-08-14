@@ -6,6 +6,7 @@
  */
 import { expect, fixture, html, oneEvent } from '@open-wc/testing';
 import '@carbon/web-components/es/components/tile/index.js';
+import '@carbon/web-components/es/components/feature-flags/index.js';
 
 describe('cds-tile', function () {
   const tile = html`<cds-tile>Default tile</cds-tile>`;
@@ -164,6 +165,68 @@ describe('cds-clickable-tile', () => {
 
     expect(el.hasAttribute('slug')).to.be.true;
     expect(el.hasAttribute('ai-label')).to.be.true;
+  });
+
+  describe('enable-v12-tile-default-icons feature flag', () => {
+    it('should render ArrowRight icon when flag is enabled', async () => {
+      const el = await fixture(html`
+        <feature-flags enable-v12-tile-default-icons>
+          <cds-clickable-tile href="https://www.carbondesignsystem.com/">
+            Clickable Tile
+          </cds-clickable-tile>
+        </feature-flags>
+      `);
+
+      const tile = el.querySelector('cds-clickable-tile');
+      await tile.updateComplete;
+
+      const icon = tile.shadowRoot.querySelector('.cds--tile--icon');
+      expect(icon).to.exist;
+    });
+
+    it('should render Error icon when flag is enabled and tile is disabled', async () => {
+      const el = await fixture(html`
+        <feature-flags enable-v12-tile-default-icons>
+          <cds-clickable-tile
+            disabled
+            href="https://www.carbondesignsystem.com/">
+            Clickable Tile
+          </cds-clickable-tile>
+        </feature-flags>
+      `);
+
+      const tile = el.querySelector('cds-clickable-tile');
+      await tile.updateComplete;
+
+      const icon = tile.shadowRoot.querySelector('.cds--tile--disabled-icon');
+      expect(icon).to.exist;
+    });
+
+    it('should not render default icon when flag is not enabled', async () => {
+      const el = await fixture(html`
+        <cds-clickable-tile href="https://www.carbondesignsystem.com/">
+          Clickable Tile
+        </cds-clickable-tile>
+      `);
+
+      await el.updateComplete;
+
+      const icon = el.shadowRoot.querySelector('.cds--tile--icon');
+      expect(icon).to.not.exist;
+    });
+
+    it('should not render disabled icon when flag is not enabled', async () => {
+      const el = await fixture(html`
+        <cds-clickable-tile disabled href="https://www.carbondesignsystem.com/">
+          Clickable Tile
+        </cds-clickable-tile>
+      `);
+
+      await el.updateComplete;
+
+      const icon = el.shadowRoot.querySelector('.cds--tile--disabled-icon');
+      expect(icon).to.not.exist;
+    });
   });
 });
 

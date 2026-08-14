@@ -2,7 +2,6 @@ import { useCallback } from 'react';
 
 /**
  * @param {Intl.Collator} collator The ECMA402 collator.
- * @returns {(a: any, b: any) => boolean} The comparator.
  */
 const useCollator = (collator) =>
   useCallback(

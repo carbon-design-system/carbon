@@ -1,0 +1,207 @@
+/**
+ * Copyright IBM Corp. 2018, 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import { unstable_tokens } from './tokens';
+
+export { unstable_tokens };
+
+export type BreakpointName = 'sm' | 'md' | 'lg' | 'xlg' | 'max';
+export type Breakpoint = {
+  width: string;
+  columns: number;
+  margin: string;
+};
+export type SizeName =
+  | 'XSmall'
+  | 'Small'
+  | 'Medium'
+  | 'Large'
+  | 'XLarge'
+  | '2XLarge';
+export type BorderRadiusToken =
+  | 'border-radius-00'
+  | 'border-radius-02'
+  | 'border-radius-04'
+  | 'border-radius-08'
+  | 'border-radius-16'
+  | 'border-radius-24'
+  | 'border-radius-max';
+
+// Convert
+// Default, Use with em() and rem() functions
+export const baseFontSize = 16;
+
+export const rem = (px: number) => {
+  return `${px / baseFontSize}rem`;
+};
+
+export const em = (px: number) => {
+  return `${px / baseFontSize}em`;
+};
+
+export const px = (value: number) => {
+  return `${value}px`;
+};
+
+// Breakpoint
+// Initial map of our breakpoints and their values
+export const breakpoints: Record<BreakpointName, Breakpoint> = {
+  sm: {
+    width: /*#__PURE__*/ rem(320),
+    columns: 4,
+    margin: '0',
+  },
+  md: {
+    width: /*#__PURE__*/ rem(672),
+    columns: 8,
+    margin: /*#__PURE__*/ rem(16),
+  },
+  lg: {
+    width: /*#__PURE__*/ rem(1056),
+    columns: 16,
+    margin: /*#__PURE__*/ rem(16),
+  },
+  xlg: {
+    width: /*#__PURE__*/ rem(1312),
+    columns: 16,
+    margin: /*#__PURE__*/ rem(16),
+  },
+  max: {
+    width: /*#__PURE__*/ rem(1584),
+    columns: 16,
+    margin: /*#__PURE__*/ rem(24),
+  },
+};
+
+export const breakpointUp = (name: BreakpointName) => {
+  return `@media (min-width: ${breakpoints[name].width})`;
+};
+
+export const breakpointDown = (name: BreakpointName) => {
+  return `@media (max-width: ${breakpoints[name].width})`;
+};
+
+export const breakpoint = breakpointUp;
+
+// Mini-unit
+export const miniUnit = 8;
+
+export const miniUnits = (count: number) => {
+  return rem(miniUnit * count);
+};
+
+// Spacing
+export const spacing01 = /*#__PURE__*/ miniUnits(0.25);
+export const spacing02 = /*#__PURE__*/ miniUnits(0.5);
+export const spacing03 = /*#__PURE__*/ miniUnits(1);
+export const spacing04 = /*#__PURE__*/ miniUnits(1.5);
+export const spacing05 = /*#__PURE__*/ miniUnits(2);
+export const spacing06 = /*#__PURE__*/ miniUnits(3);
+export const spacing07 = /*#__PURE__*/ miniUnits(4);
+export const spacing08 = /*#__PURE__*/ miniUnits(5);
+export const spacing09 = /*#__PURE__*/ miniUnits(6);
+export const spacing10 = /*#__PURE__*/ miniUnits(8);
+export const spacing11 = /*#__PURE__*/ miniUnits(10);
+export const spacing12 = /*#__PURE__*/ miniUnits(12);
+export const spacing13 = /*#__PURE__*/ miniUnits(20);
+export const spacing = [
+  spacing01,
+  spacing02,
+  spacing03,
+  spacing04,
+  spacing05,
+  spacing06,
+  spacing07,
+  spacing08,
+  spacing09,
+  spacing10,
+  spacing11,
+  spacing12,
+  spacing13,
+];
+
+// Fluid spacing
+export const fluidSpacing01 = 0;
+export const fluidSpacing02 = '2vw';
+export const fluidSpacing03 = '5vw';
+export const fluidSpacing04 = '10vw';
+export const fluidSpacing = [
+  fluidSpacing01,
+  fluidSpacing02,
+  fluidSpacing03,
+  fluidSpacing04,
+];
+
+// Layout
+// Deprecated
+export const layout01 = /*#__PURE__*/ miniUnits(2);
+export const layout02 = /*#__PURE__*/ miniUnits(3);
+export const layout03 = /*#__PURE__*/ miniUnits(4);
+export const layout04 = /*#__PURE__*/ miniUnits(6);
+export const layout05 = /*#__PURE__*/ miniUnits(8);
+export const layout06 = /*#__PURE__*/ miniUnits(12);
+export const layout07 = /*#__PURE__*/ miniUnits(20);
+export const layout = [
+  layout01,
+  layout02,
+  layout03,
+  layout04,
+  layout05,
+  layout06,
+  layout07,
+];
+
+// Container
+export const container01 = /*#__PURE__*/ miniUnits(3);
+export const container02 = /*#__PURE__*/ miniUnits(4);
+export const container03 = /*#__PURE__*/ miniUnits(5);
+export const container04 = /*#__PURE__*/ miniUnits(6);
+export const container05 = /*#__PURE__*/ miniUnits(8);
+export const container = [
+  container01,
+  container02,
+  container03,
+  container04,
+  container05,
+];
+export const sizeXSmall = /*#__PURE__*/ rem(24);
+export const sizeSmall = /*#__PURE__*/ rem(32);
+export const sizeMedium = /*#__PURE__*/ rem(40);
+export const sizeLarge = /*#__PURE__*/ rem(48);
+export const sizeXLarge = /*#__PURE__*/ rem(64);
+export const size2XLarge = /*#__PURE__*/ rem(80);
+export const sizes: Record<SizeName, string> = {
+  XSmall: sizeXSmall,
+  Small: sizeSmall,
+  Medium: sizeMedium,
+  Large: sizeLarge,
+  XLarge: sizeXLarge,
+  '2XLarge': size2XLarge,
+};
+
+// Icon
+export const iconSize01 = '1rem';
+export const iconSize02 = '1.25rem';
+export const iconSize = [iconSize01, iconSize02];
+
+// Border radius
+export const borderRadius00 = '0px';
+export const borderRadius02 = rem(2);
+export const borderRadius04 = rem(4);
+export const borderRadius08 = rem(8);
+export const borderRadius16 = rem(16);
+export const borderRadius24 = rem(24);
+export const borderRadiusMax = '999999px';
+export const borderRadius: Record<BorderRadiusToken, string> = {
+  'border-radius-00': borderRadius00,
+  'border-radius-02': borderRadius02,
+  'border-radius-04': borderRadius04,
+  'border-radius-08': borderRadius08,
+  'border-radius-16': borderRadius16,
+  'border-radius-24': borderRadius24,
+  'border-radius-max': borderRadiusMax,
+};

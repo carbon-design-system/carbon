@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,10 +8,6 @@
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import './index';
-import { iconLoader } from '../../globals/internal/icon-loader';
-import View16 from '@carbon/icons/es/view/16.js';
-import FolderOpen16 from '@carbon/icons/es/folder--open/16.js';
-import Folders16 from '@carbon/icons/es/folders/16.js';
 import '../form/form-item';
 import '../icon-button';
 import {
@@ -20,23 +16,8 @@ import {
   INPUT_TOOLTIP_DIRECTION,
 } from './password-input';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-const actions = html`
-  <cds-icon-button kind="ghost" slot="actions" size="lg">
-    ${iconLoader(View16, { slot: 'icon' })}
-    <span slot="tooltip-content"> View </span>
-  </cds-icon-button>
-  <cds-icon-button kind="ghost" slot="actions" size="lg">
-    ${iconLoader(FolderOpen16, { slot: 'icon' })}
-    <span slot="tooltip-content"> Open folder</span>
-  </cds-icon-button>
-  <cds-icon-button kind="ghost" slot="actions" size="lg">
-    ${iconLoader(Folders16, { slot: 'icon' })}
-    <span slot="tooltip-content"> Folders </span>
-  </cds-icon-button>
-`;
-
 const sizes = {
+  [`Extra small size (${INPUT_SIZE.EXTRA_SMALL})`]: INPUT_SIZE.EXTRA_SMALL,
   [`Small size (${INPUT_SIZE.SMALL})`]: INPUT_SIZE.SMALL,
   [`Medium size (${INPUT_SIZE.MEDIUM})`]: INPUT_SIZE.MEDIUM,
   [`Large size (${INPUT_SIZE.LARGE})`]: INPUT_SIZE.LARGE,
@@ -45,14 +26,14 @@ const sizes = {
 const args = {
   defaultWidth: 300,
   disabled: false,
-  helperText: 'Optional help text',
+  helperText: 'Use at least 8 characters',
   hideLabel: false,
   hidePasswordLabel: 'Hide password',
   inline: false,
   invalid: false,
-  invalidText: 'Error message goes here',
-  labelText: 'Text input label',
-  placeholder: 'Placeholder text',
+  invalidText: 'Password must be at least 8 characters',
+  labelText: 'Password',
+  placeholder: 'Enter your password',
   readonly: false,
   showPasswordLabel: 'Show password',
   size: INPUT_SIZE.MEDIUM,
@@ -61,8 +42,7 @@ const args = {
   type: 'password',
   value: '',
   warn: false,
-  warnText:
-    'Warning message that is really long can wrap to more lines but should not be excessively long.',
+  warnText: 'Password strength is low',
 };
 
 const argTypes = {
@@ -107,6 +87,9 @@ const argTypes = {
     control: 'text',
     description:
       'Provide the text that will be read by a screen reader when visiting this control',
+  },
+  onInput: {
+    action: 'input',
   },
   placeholder: {
     control: 'text',
@@ -158,8 +141,6 @@ const argTypes = {
 };
 
 export const Default = {
-  args,
-  argTypes,
   render: ({
     defaultWidth,
     disabled,
@@ -170,6 +151,7 @@ export const Default = {
     invalid,
     invalidText,
     labelText,
+    onInput,
     placeholder,
     readonly,
     showPasswordLabel,
@@ -198,9 +180,10 @@ export const Default = {
         tooltip-alignment="${ifDefined(tooltipAlignment)}"
         tooltip-position="${ifDefined(tooltipPosition)}"
         type="${ifDefined(type)}"
-        value="${ifDefined(value)}"
+        .value="${ifDefined(value)}"
         ?warn="${ifDefined(warn)}"
-        warn-text="${ifDefined(warnText)}">
+        warn-text="${ifDefined(warnText)}"
+        @input="${onInput}">
       </cds-password-input>
     </div>
   `,
@@ -209,4 +192,6 @@ export const Default = {
 export default {
   title: 'Components/Password Input',
   actions: { argTypesRegex: '^on.*' },
+  args,
+  argTypes,
 };

@@ -21,16 +21,16 @@ figma.connect(
       }),
       invalidText: figma.string('Error text'),
       warnText: figma.string('Warning text'),
-      disabled: figma.enum('Status', {
+      disabled: figma.enum('State', {
         Disabled: true,
       }),
-      invalid: figma.enum('Status', {
+      invalid: figma.enum('State', {
         Error: true,
       }),
-      readOnly: figma.enum('Status', {
+      readOnly: figma.enum('State', {
         'Read-only': true,
       }),
-      warn: figma.enum('Status', {
+      warn: figma.enum('State', {
         Warning: true,
       }),
       textInput: figma.nestedProps('Text input - Default', {
@@ -58,8 +58,6 @@ figma.connect(
         false: true,
         true: false,
       }),
-      invalidText: figma.string('Error text'),
-      warnText: figma.string('Warning text'),
       disabled: figma.enum('State', {
         Disabled: true,
       }),
@@ -81,17 +79,17 @@ figma.connect(
   }
 );
 
-//single
+// single skeleton
 figma.connect(
   SliderSkeleton,
   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=3673-40574&m=dev',
   {
-    variant: { Status: 'Skeleton' },
+    variant: { State: 'Skeleton' },
     example: () => <SliderSkeleton />,
   }
 );
 
-//two handle
+// two handle skeleton
 figma.connect(
   SliderSkeleton,
   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=41061-1531&m=dev',

@@ -5,6 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { translationIds } from './defs';
+
+export type TranslationKey = keyof typeof translationIds;
+
 interface CarouselStackHistory {
   id: number;
   elem: HTMLElement;
@@ -27,6 +31,7 @@ export type Config = {
   onViewChangeEnd?: (args: CarouselResponse) => void;
   excludeSwipeSupport?: boolean;
   useMaxHeight?: boolean;
+  translateWithId?: (messageId: TranslationKey) => string;
 };
 
 interface InitCarousel {

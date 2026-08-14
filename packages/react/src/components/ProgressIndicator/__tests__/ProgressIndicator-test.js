@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -68,6 +68,50 @@ describe('ProgressIndicator', () => {
       );
 
       expect(screen.getAllByRole('listitem')[0]).toHaveClass(
+        'cds--progress-step--current'
+      );
+    });
+
+    it('should update current step when currentIndex changes', () => {
+      const { rerender } = render(
+        <ProgressIndicator currentIndex={0}>
+          <ProgressStep
+            label="First step"
+            description="Step 1: Getting started with Carbon Design System"
+            secondaryLabel="Optional label"
+          />
+          <ProgressStep
+            label="Second step with tooltip"
+            description="Step 2: Getting started with Carbon Design System"
+          />
+        </ProgressIndicator>
+      );
+
+      expect(screen.getAllByRole('listitem')[0]).toHaveClass(
+        'cds--progress-step--current'
+      );
+      expect(screen.getAllByRole('listitem')[1]).not.toHaveClass(
+        'cds--progress-step--current'
+      );
+
+      rerender(
+        <ProgressIndicator currentIndex={1}>
+          <ProgressStep
+            label="First step"
+            description="Step 1: Getting started with Carbon Design System"
+            secondaryLabel="Optional label"
+          />
+          <ProgressStep
+            label="Second step with tooltip"
+            description="Step 2: Getting started with Carbon Design System"
+          />
+        </ProgressIndicator>
+      );
+
+      expect(screen.getAllByRole('listitem')[1]).toHaveClass(
+        'cds--progress-step--current'
+      );
+      expect(screen.getAllByRole('listitem')[0]).not.toHaveClass(
         'cds--progress-step--current'
       );
     });

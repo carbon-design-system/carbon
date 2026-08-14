@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,6 +12,10 @@ import OverflowMenu from './OverflowMenu';
 import OverflowMenuItem from '../OverflowMenuItem';
 import React from 'react';
 import userEvent from '@testing-library/user-event';
+
+const MenuDivider = React.forwardRef(function MenuDivider(_props, ref) {
+  return <li ref={ref} data-testid="menu-divider" role="separator" />;
+});
 
 describe('OverflowMenu', () => {
   describe('Renders as expected', () => {
@@ -200,7 +204,8 @@ describe('OverflowMenu', () => {
           );
 
           expect(screen.getByRole('button')).toHaveClass(
-            `cds--overflow-menu--${size}`
+            `cds--overflow-menu--${size}`, // TODO: V12 - Remove this check
+            `cds--layout--size-${size}`
           );
         });
       });
@@ -249,6 +254,18 @@ describe('OverflowMenu', () => {
 
       // Check that the click handler was called only once
       expect(handleClick).toHaveBeenCalledTimes(1);
+    });
+
+    it('should render custom child components alongside OverflowMenuItem children', () => {
+      render(
+        <OverflowMenu open aria-label="Overflow menu" className="extra-class">
+          <OverflowMenuItem itemText="one" />
+          <MenuDivider />
+          <OverflowMenuItem itemText="two" />
+        </OverflowMenu>
+      );
+
+      expect(screen.getByTestId('menu-divider')).toBeInTheDocument();
     });
   });
   it('should not open menu when disabled', async () => {

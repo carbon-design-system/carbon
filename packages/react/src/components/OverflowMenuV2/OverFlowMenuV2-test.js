@@ -11,7 +11,6 @@ import { FeatureFlags } from '../FeatureFlags';
 import { MenuItem } from '../Menu';
 import { OverflowMenuV2 } from './';
 import React from 'react';
-import { action } from 'storybook/actions';
 import userEvent from '@testing-library/user-event';
 
 describe('<OverflowMenuV2 />', () => {
@@ -27,7 +26,7 @@ describe('<OverflowMenuV2 />', () => {
   });
 
   it('should log the deprecation warning when rendering OverflowMenuV2', () => {
-    const onClick = action('onClick (MenuItem)');
+    const onClick = jest.fn();
 
     render(
       <OverflowMenuV2>

@@ -90,7 +90,7 @@ const OverflowMenuItem = frFn((props, ref) => {
   const {
     className,
     closeMenu,
-    dangerDescription = 'danger',
+    dangerDescription = '',
     disabled = false,
     handleOverflowMenuItemFocus,
     hasDivider = false,
@@ -151,6 +151,7 @@ const OverflowMenuItem = frFn((props, ref) => {
   );
 
   const TagToUse = href ? 'a' : 'button';
+  const hasDangerDescription = isDelete && Boolean(dangerDescription);
 
   const assistiveId = useId('danger-description');
 
@@ -163,7 +164,7 @@ const OverflowMenuItem = frFn((props, ref) => {
         <div className={`${prefix}--overflow-menu-options__option-content`}>
           {itemText}
         </div>
-        {isDelete && (
+        {hasDangerDescription && (
           <span id={assistiveId} className={`${prefix}--visually-hidden`}>
             {dangerDescription}
           </span>

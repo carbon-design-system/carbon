@@ -4,6 +4,10 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+/**
+ * @deprecated PageHeader has moved to Carbon for IBM Products.
+ * See https://github.com/carbon-design-system/carbon/issues/21926
+ */
 
 import { expect, fixture, html } from '@open-wc/testing';
 import Bee32 from '@carbon/icons/es/bee/32.js';

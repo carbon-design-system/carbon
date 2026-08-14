@@ -6,9 +6,9 @@
  */
 
 export * from '@internationalized/number';
-export type * from '@internationalized/number';
 export * from './carousel';
 export * from './datePartsOrder';
 export * from './dateTimeFormat';
 export * from './documentLang';
+export * from './makeDraggable';
 export * from './overflowHandler';

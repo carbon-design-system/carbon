@@ -10,17 +10,22 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
   forwardRef,
+  useEffect,
   useContext,
+  useRef,
   useState,
+  type LiHTMLAttributes,
+  type KeyboardEvent,
   type ReactNode,
   type Ref,
 } from 'react';
 import SideNavIcon from './SideNavIcon';
 import { keys, match } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
+import { composeEventHandlers } from '../../tools/events';
 import { SideNavContext } from './SideNavContext';
 
-export interface SideNavMenuProps {
+export interface SideNavMenuProps extends LiHTMLAttributes<HTMLLIElement> {
   /**
    * An optional CSS class to apply to the component.
    */
@@ -79,6 +84,8 @@ const SideNavMenu = forwardRef<HTMLElement, SideNavMenuProps>(
       isSideNavExpanded,
       tabIndex,
       title,
+      onKeyDown,
+      ...rest
     },
     ref
   ) => {
@@ -88,7 +95,7 @@ const SideNavMenu = forwardRef<HTMLElement, SideNavMenuProps>(
       isSideNavExpanded ?? contextIsSideNavExpanded;
     const prefix = usePrefix();
     const [isExpanded, setIsExpanded] = useState<boolean>(defaultExpanded);
-    const [prevExpanded, setPrevExpanded] = useState<boolean>(defaultExpanded);
+    const prevExpandedRef = useRef(false);
     const className = cx({
       [`${prefix}--side-nav__item`]: true,
       [`${prefix}--side-nav__item--active`]:
@@ -98,23 +105,30 @@ const SideNavMenu = forwardRef<HTMLElement, SideNavMenuProps>(
       [customClassName as string]: !!customClassName,
     });
 
-    if (!currentIsSideNavExpanded && isExpanded && isRail) {
-      setIsExpanded(false);
-      setPrevExpanded(true);
-    } else if (currentIsSideNavExpanded && prevExpanded && isRail) {
-      setIsExpanded(true);
-      setPrevExpanded(false);
-    }
+    useEffect(() => {
+      if (!isRail) return;
+
+      if (!currentIsSideNavExpanded && isExpanded) {
+        setIsExpanded(false);
+        prevExpandedRef.current = true;
+      } else if (currentIsSideNavExpanded && prevExpandedRef.current) {
+        setIsExpanded(true);
+        prevExpandedRef.current = false;
+      }
+    }, [currentIsSideNavExpanded, isExpanded, isRail]);
+
+    const handleOnKeyDown = (event: KeyboardEvent<HTMLLIElement>) => {
+      if (match(event, keys.Escape)) {
+        setIsExpanded(false);
+      }
+    };
 
     return (
       // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
       <li
+        {...rest}
         className={className}
-        onKeyDown={(event) => {
-          if (match(event, keys.Escape)) {
-            setIsExpanded(false);
-          }
-        }}>
+        onKeyDown={composeEventHandlers([onKeyDown, handleOnKeyDown])}>
         <button
           aria-expanded={isExpanded}
           className={`${prefix}--side-nav__submenu`}

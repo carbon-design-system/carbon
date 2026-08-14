@@ -94,11 +94,12 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
    * @returns The effective date picker mode, determined by the child `<cds-date-picker-input>`.
    */
   private get _mode() {
-    const { selectorInputTo } = this.constructor as typeof CDSDatePicker;
+    const { selectorInputTo, selectorInputSingle } = this
+      .constructor as typeof CDSDatePicker;
     if (this.querySelector(selectorInputTo)) {
       return DATE_PICKER_MODE.RANGE;
     }
-    if (this.querySelector(`${prefix}-date-picker-input[kind="single"]`)) {
+    if (this.querySelector(selectorInputSingle)) {
       return DATE_PICKER_MODE.SINGLE;
     }
     return DATE_PICKER_MODE.SIMPLE;
@@ -202,6 +203,8 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
       : enabledRange.split('/');
     return {
       allowInput: this.allowInput,
+      ariaDateFormat: (this.constructor as typeof CDSDatePicker)
+        .defaultAriaDateFormat,
       closeOnSelect: this.closeOnSelect,
       dateFormat:
         this.dateFormat ??
@@ -664,6 +667,11 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
   static classNoBorder = 'no-border';
 
   /**
+   * The default aria date format.
+   */
+  static defaultAriaDateFormat = 'l, F j, Y';
+
+  /**
    * The default date format.
    */
   static defaultDateFormat = 'm/d/Y';
@@ -685,6 +693,15 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
    */
   static get selectorInputTo() {
     return `${prefix}-date-picker-input[kind="to"]`;
+  }
+
+  /**
+   * A selector that will return the single date input.
+   * Extracted from _mode getter so subclasses can override it
+   * to match their own input element names (e.g. fluid variant).
+   */
+  static get selectorInputSingle() {
+    return `${prefix}-date-picker-input[kind="single"]`;
   }
 
   /**

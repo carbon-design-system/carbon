@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,11 +10,6 @@ import React, { ElementType, ReactNode } from 'react';
 import { LayoutDirectionContext } from './LayoutDirectionContext';
 
 type Direction = 'ltr' | 'rtl';
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-interface LayoutDirectionContextValue {
-  direction: Direction;
-}
 
 export interface LayoutDirectionProps {
   /**

@@ -493,4 +493,55 @@ describe('cds-slider', () => {
     await el.updateComplete;
     expect(tooltip?.open).to.equal(false);
   });
+
+  it('should correctly initialize with value 0 and respond to track click', async () => {
+    const el = await fixture(html`
+      <cds-slider
+        label-text="Slider Label"
+        min="-10"
+        max="10"
+        step="1"
+        value="0">
+        <cds-slider-input
+          aria-label="Slider value"
+          type="number"></cds-slider-input>
+      </cds-slider>
+    `);
+    await el.updateComplete;
+    expect(el.value).to.equal(0);
+    const track = el.shadowRoot.querySelector('#track');
+    const slider = el.shadowRoot.querySelector('.cds--slider');
+    const thumbWrapper = el.shadowRoot.querySelector(
+      '.cds--slider__thumb-wrapper'
+    );
+    track.getBoundingClientRect = () => ({
+      left: 0,
+      width: 100,
+      top: 0,
+      right: 100,
+      bottom: 0,
+      height: 0,
+      x: 0,
+      y: 0,
+      toJSON: () => {},
+    });
+
+    const thumb = el.shadowRoot.querySelector('#thumb');
+    expect(thumb).to.exist;
+    expect(thumb.getAttribute('aria-valuenow')).to.equal('0');
+    expect(thumbWrapper.style.left).to.equal('50%');
+
+    slider.dispatchEvent(
+      new MouseEvent('click', { clientX: 50, bubbles: true })
+    );
+    await el.updateComplete;
+    expect(el.value).to.equal(0);
+
+    slider.dispatchEvent(
+      new MouseEvent('click', { clientX: 90, bubbles: true })
+    );
+    await el.updateComplete;
+    const expectedValue = -10 + (90 / 100) * (10 - -10);
+    expect(el.value).to.equal(expectedValue);
+  });
 });

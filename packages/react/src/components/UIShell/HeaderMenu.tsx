@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,26 +11,24 @@ import React, {
   Children,
   cloneElement,
   forwardRef,
-  isValidElement,
   useContext,
   useRef,
   useState,
-  type ComponentProps,
   type FocusEvent,
   type KeyboardEvent,
   type MouseEvent,
-  type ReactElement,
   type ReactNode,
   type Ref,
 } from 'react';
 import PropTypes from 'prop-types';
 import { keys, matches } from '../../internal/keyboard';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
+import { isComponentElement } from '../../internal';
 import { PrefixContext } from '../../internal/usePrefix';
 import { deprecate } from '../../prop-types/deprecate';
 import { composeEventHandlers } from '../../tools/events';
 import { useMergedRefs } from '../../internal/useMergedRefs';
-import type HeaderMenuItem from './HeaderMenuItem';
+import HeaderMenuItem from './HeaderMenuItem';
 
 export interface HeaderMenuProps {
   /**
@@ -201,7 +199,7 @@ export const HeaderMenu = frFn((props, ref) => {
 
   const hasActiveDescendant = (childrenArg: ReactNode): boolean =>
     Children.toArray(childrenArg).some((child) => {
-      if (!isValidElement<ComponentProps<typeof HeaderMenuItem>>(child)) {
+      if (!isComponentElement(child, HeaderMenuItem)) {
         return false;
       }
 
@@ -221,9 +219,8 @@ export const HeaderMenu = frFn((props, ref) => {
    * sequence when they might not want to go through all the items.
    */
   const renderMenuItem = (item: ReactNode, index: number): ReactNode => {
-    if (isValidElement(item)) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-      return cloneElement(item as ReactElement<any>, {
+    if (isComponentElement(item, HeaderMenuItem)) {
+      return cloneElement(item, {
         ref: handleItemRef(index),
       });
     }

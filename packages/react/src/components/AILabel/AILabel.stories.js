@@ -12,6 +12,7 @@ import { action } from 'storybook/actions';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import Button from '../Button';
 import { IconButton } from '../IconButton';
+import { Link } from '../Link';
 import mdx from './AILabel.mdx';
 import './ailabel-story.scss';
 
@@ -136,6 +137,10 @@ export const Default = (args) => {
       <hr />
       <p className="secondary">Model type</p>
       <p className="bold">Foundation model</p>
+      <a href="#" style={{ marginRight: '12px' }}>
+        normal link
+      </a>
+      <Link href="#">cds link</Link>
     </div>
   );
 
@@ -146,13 +151,16 @@ export const Default = (args) => {
           <AILabelContent>
             {aiContent}
             <AILabelActions>
-              <IconButton kind="ghost" label="View">
+              <IconButton kind="ghost" label="View" aria-label="View">
                 <View />
               </IconButton>
-              <IconButton kind="ghost" label="Open Folder">
+              <IconButton
+                kind="ghost"
+                label="Open Folder"
+                aria-label="Open Folder">
                 <FolderOpen />
               </IconButton>
-              <IconButton kind="ghost" label="Folders">
+              <IconButton kind="ghost" label="Folders" aria-label="Folders">
                 <Folders />
               </IconButton>
               <Button>View details</Button>
@@ -188,13 +196,16 @@ export const Inline = (args) => {
           <AILabelContent>
             {aiContent}
             <AILabelActions>
-              <IconButton kind="ghost" label="View">
+              <IconButton kind="ghost" label="View" aria-label="View">
                 <View />
               </IconButton>
-              <IconButton kind="ghost" label="Open Folder">
+              <IconButton
+                kind="ghost"
+                label="Open Folder"
+                aria-label="Open Folder">
                 <FolderOpen />
               </IconButton>
-              <IconButton kind="ghost" label="Folders">
+              <IconButton kind="ghost" label="Folders" aria-label="Folders">
                 <Folders />
               </IconButton>
               <Button>View details</Button>
@@ -263,13 +274,16 @@ export const InlineWithContent = (args) => {
           <AILabelContent>
             {aiContent}
             <AILabelActions>
-              <IconButton kind="ghost" label="View">
+              <IconButton kind="ghost" label="View" aria-label="View">
                 <View />
               </IconButton>
-              <IconButton kind="ghost" label="Open Folder">
+              <IconButton
+                kind="ghost"
+                label="Open Folder"
+                aria-label="Open Folder">
                 <FolderOpen />
               </IconButton>
-              <IconButton kind="ghost" label="Folders">
+              <IconButton kind="ghost" label="Folders" aria-label="Folders">
                 <Folders />
               </IconButton>
               <Button>View details</Button>

@@ -11,8 +11,15 @@ import { selectorTabbable } from '../settings';
  * @param Base The base class.
  * @returns A mix-in implementing `.focus()` method that focuses on the first focusable element in the shadow DOM.
  */
-const FocusMixin = <T extends Constructor<HTMLElement>>(Base: T) =>
-  class extends Base {
+const FocusMixin = <T extends Constructor<HTMLElement>>(
+  Base: T
+): {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  new (...args: any[]): {
+    focus(): void;
+  };
+} & T => {
+  return class extends Base {
     /**
      * Focuses on the first focusable element in the shadow DOM.
      */
@@ -32,6 +39,8 @@ const FocusMixin = <T extends Constructor<HTMLElement>>(Base: T) =>
         }
       }
     }
-  };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } as any;
+};
 
 export default FocusMixin;

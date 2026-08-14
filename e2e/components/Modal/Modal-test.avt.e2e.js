@@ -115,4 +115,52 @@ test.describe('@avt Modal', () => {
     await page.keyboard.press('Tab');
     await expect(page.getByRole('button', { name: 'close' })).toBeFocused();
   });
+
+  test('@avt-keyboard-nav should only scrollIntoView interactive elements if necessary', async ({
+    page,
+  }) => {
+    await visitStory(page, {
+      component: 'Modal',
+      id: 'components-modal--with-scrolling-content',
+      globals: {
+        theme: 'white',
+      },
+    });
+
+    const primaryInput = page.getByRole('textbox', { name: 'Domain name' });
+    await expect(primaryInput).toBeFocused();
+
+    const modalContent = page.locator('.cds--modal-content');
+    await expect(modalContent).toHaveClass(/cds--modal-scroll-content/);
+
+    const isScrollable = await modalContent.evaluate(
+      (node) => node.scrollHeight > node.clientHeight
+    );
+    expect(isScrollable).toBe(true);
+
+    const initialScrollTop = await modalContent.evaluate(
+      (node) => node.scrollTop
+    );
+
+    await page.keyboard.press('Tab');
+    await expect(page.getByRole('combobox', { name: 'Region' })).toBeFocused();
+
+    // scrollIntoView should only run when needed, not on every tab stop.
+    const scrollTopAfterFirstTab = await modalContent.evaluate(
+      (node) => node.scrollTop
+    );
+    expect(scrollTopAfterFirstTab).toBe(initialScrollTop);
+
+    await page.keyboard.press('Tab');
+    await expect(
+      page.getByRole('combobox', {
+        name: 'Permissions (Example of Floating UI)',
+      })
+    ).toBeFocused();
+
+    const scrollTopAfterSecondTab = await modalContent.evaluate(
+      (node) => node.scrollTop
+    );
+    expect(scrollTopAfterSecondTab).toBe(initialScrollTop);
+  });
 });

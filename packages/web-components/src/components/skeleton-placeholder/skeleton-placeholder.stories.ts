@@ -9,12 +9,45 @@ import { html } from 'lit';
 import './skeleton-placeholder';
 
 export const Default = {
-  parameters: {
-    percy: {
-      skip: true,
+  argTypes: {
+    height: {
+      control: {
+        type: 'range',
+        min: 16,
+        max: 400,
+        step: 4,
+      },
+    },
+    optionalClasses: {
+      control: {
+        type: 'text',
+      },
+    },
+    width: {
+      control: {
+        type: 'range',
+        min: 16,
+        max: 400,
+        step: 4,
+      },
     },
   },
-  render: () => html`<cds-skeleton-placeholder></cds-skeleton-placeholder>`,
+  args: {
+    height: 100,
+    optionalClasses: '',
+    width: 100,
+  },
+  render: ({ height, optionalClasses, width }) => html`
+    <style>
+      #skeleton-placeholder-story::part(placeholder) {
+        block-size: ${height}px;
+        inline-size: ${width}px;
+      }
+    </style>
+    <cds-skeleton-placeholder
+      id="skeleton-placeholder-story"
+      optional-classes=${optionalClasses}></cds-skeleton-placeholder>
+  `,
 };
 
 const meta = {

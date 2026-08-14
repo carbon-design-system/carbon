@@ -37,7 +37,6 @@ figma.connect(
       }),
       // information: figma.instance('Information'), look at this once icons are connected
     },
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
     example: ({ align, toggletip }) => (
       <>
         <ToggletipLabel>Toggletip label</ToggletipLabel>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <path id="collapse--tile-2" d="M26,28h-13v-2h13V6H6v13h-2V6c0-1.103.897-2,2-2h20c1.1025,0,2,.897,2,2v20c0,1.1025-.8975,2-2,2ZM7.707,25.707l-1.4141-1.4141,7.293-7.293h-5.5859v-2h9v9h-2v-5.5859l-7.293,7.293Z"/>
+  <rect id="Transparent_Rectangle" data-name="Transparent Rectangle" class="cls-1" width="32" height="32"/>
+</svg>

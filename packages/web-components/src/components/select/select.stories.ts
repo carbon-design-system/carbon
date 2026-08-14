@@ -21,8 +21,8 @@ import '../form/form-item';
 import '../layer';
 import '../ai-label';
 import '../icon-button';
-import '../../../.storybook/templates/with-layer';
 import { iconLoader } from '../../globals/internal/icon-loader';
+import { withLayers } from '../../../.storybook/decorators/with-layers';
 
 const content = html`
   <div slot="body-text">
@@ -56,6 +56,7 @@ const actions = html`
 `;
 
 const sizes = {
+  [`Extra small size (${INPUT_SIZE.EXTRA_SMALL})`]: INPUT_SIZE.EXTRA_SMALL,
   [`Small size (${INPUT_SIZE.SMALL})`]: INPUT_SIZE.SMALL,
   [`Medium size (${INPUT_SIZE.MEDIUM})`]: INPUT_SIZE.MEDIUM,
   [`Large size (${INPUT_SIZE.LARGE})`]: INPUT_SIZE.LARGE,
@@ -65,9 +66,11 @@ const args = {
   disabled: false,
   helperText: 'Optional helper text',
   hideLabel: false,
+  id: 'select',
   inline: false,
   invalid: false,
   invalidText: 'Error message',
+  labelStylesDisable: false,
   labelText: 'Select an option',
   placeholder: '',
   size: INPUT_SIZE.MEDIUM,
@@ -105,6 +108,10 @@ const argTypes = {
     control: 'boolean',
     description: 'Specify whether you want the inline version of this control.',
   },
+  id: {
+    control: 'text',
+    description: 'Specify the id for the label.',
+  },
   invalid: {
     control: 'boolean',
     description: 'Specify if the currently value is invalid.',
@@ -112,6 +119,10 @@ const argTypes = {
   invalidText: {
     control: 'text',
     description: 'Message which is displayed if the value is invalid.',
+  },
+  labelStylesDisable: {
+    control: 'boolean',
+    description: 'Specify if you want to disable the default label styling',
   },
   labelText: {
     control: 'text',
@@ -160,9 +171,11 @@ export const Default = {
       disabled,
       helperText,
       hideLabel,
+      id,
       inline,
       invalid,
       invalidText,
+      labelStylesDisable,
       labelText,
       name,
       placeholder,
@@ -177,12 +190,14 @@ export const Default = {
     return html`
       <cds-form-item>
         <cds-select
+          id="${id}"
           ?inline="${inline}"
           ?disabled="${disabled}"
           helper-text="${ifDefined(helperText)}"
           ?hide-label="${hideLabel}"
           ?invalid="${invalid}"
           invalid-text="${ifDefined(invalidText)}"
+          ?label-styles-disable="${labelStylesDisable}"
           label-text="${ifDefined(labelText)}"
           name="${ifDefined(name)}"
           placeholder="${ifDefined(placeholder)}"
@@ -219,9 +234,11 @@ export const Inline = {
       disabled,
       helperText,
       hideLabel,
+      id,
       inline,
       invalid,
       invalidText,
+      labelStylesDisable,
       labelText,
       name,
       placeholder,
@@ -236,12 +253,14 @@ export const Inline = {
     return html`
       <cds-form-item>
         <cds-select
+          id="${id}"
           ?inline="${inline}"
           ?disabled="${disabled}"
           helper-text="${ifDefined(helperText)}"
           ?hide-label="${hideLabel}"
           ?invalid="${invalid}"
           invalid-text="${ifDefined(invalidText)}"
+          ?label-styles-disable="${labelStylesDisable}"
           label-text="${ifDefined(labelText)}"
           name="${ifDefined(name)}"
           placeholder="${ifDefined(placeholder)}"
@@ -259,11 +278,6 @@ export const Inline = {
 };
 
 export const Skeleton = {
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
   render: () => html` <cds-select-skeleton></cds-select-skeleton> `,
 };
 
@@ -281,8 +295,10 @@ export const WithAILabel = {
       disabled,
       helperText,
       hideLabel,
+      id,
       invalid,
       invalidText,
+      labelStylesDisable,
       labelText,
       name,
       placeholder,
@@ -297,12 +313,14 @@ export const WithAILabel = {
 
     return html` <div style="width: 400px">
       <cds-select
+        id="${id}"
         ?inline="${false}"
         ?disabled="${disabled}"
         helper-text="${ifDefined(helperText)}"
         ?hide-label="${hideLabel}"
         ?invalid="${invalid}"
         invalid-text="${ifDefined(invalidText)}"
+        ?label-styles-disable="${labelStylesDisable}"
         label-text="${ifDefined(labelText)}"
         name="${ifDefined(name)}"
         placeholder="${ifDefined(placeholder)}"
@@ -322,6 +340,10 @@ export const WithAILabel = {
 };
 
 export const WithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
   args,
   argTypes: {
     ...argTypes,
@@ -335,8 +357,10 @@ export const WithLayer = {
       disabled,
       helperText,
       hideLabel,
+      id,
       invalid,
       invalidText,
+      labelStylesDisable,
       labelText,
       name,
       placeholder,
@@ -350,26 +374,26 @@ export const WithLayer = {
     } = args ?? {};
 
     return html`
-      <sb-template-layers>
-        <cds-select
-          ?inline="${false}"
-          ?disabled="${disabled}"
-          helper-text="${ifDefined(helperText)}"
-          ?hide-label="${hideLabel}"
-          ?invalid="${invalid}"
-          invalid-text="${ifDefined(invalidText)}"
-          label-text="${ifDefined(labelText)}"
-          name="${ifDefined(name)}"
-          placeholder="${ifDefined(placeholder)}"
-          size="${ifDefined(size)}"
-          ?readonly="${readOnly}"
-          ?warn="${warn}"
-          warn-text="${ifDefined(warnText)}"
-          value="${ifDefined(value)}"
-          @cds-select-selected="${ifDefined(onInput)}">
-          ${children}
-        </cds-select>
-      </sb-template-layers>
+      <cds-select
+        id="${id}"
+        ?inline="${false}"
+        ?disabled="${disabled}"
+        helper-text="${ifDefined(helperText)}"
+        ?hide-label="${hideLabel}"
+        ?invalid="${invalid}"
+        invalid-text="${ifDefined(invalidText)}"
+        ?label-styles-disable="${labelStylesDisable}"
+        label-text="${ifDefined(labelText)}"
+        name="${ifDefined(name)}"
+        placeholder="${ifDefined(placeholder)}"
+        size="${ifDefined(size)}"
+        ?readonly="${readOnly}"
+        ?warn="${warn}"
+        warn-text="${ifDefined(warnText)}"
+        value="${ifDefined(value)}"
+        @cds-select-selected="${ifDefined(onInput)}">
+        ${children}
+      </cds-select>
     `;
   },
 };

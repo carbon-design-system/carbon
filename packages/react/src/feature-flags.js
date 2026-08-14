@@ -11,6 +11,7 @@ merge({
   'enable-css-custom-properties': true,
   'enable-css-grid': true,
   'enable-v11-release': true,
+  'enable-v12-release': false,
   'enable-experimental-tile-contrast': false,
   'enable-tile-contrast': false,
   'enable-v12-tile-radio-icons': false,

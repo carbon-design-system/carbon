@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -56,13 +56,13 @@ const StoryContent = ({ useResponsiveOffset = true }) => {
         <div className={classNameFirstColumn}>
           <h2 style={{ margin: '0 0 30px' }}>Purpose and function</h2>
           <p>
-            The shell is perhaps the most crucial piece of any UI built with
-            <a href="www.carbondesignsystem.com"> Carbon</a>. It contains the
-            shared navigation framework for the entire design system and ties
-            the products in IBM’s portfolio together in a cohesive and elegant
-            way. The shell is the home of the topmost navigation, where users
-            can quickly and dependably gain their bearings and move between
-            pages.
+            The shell is perhaps the most crucial piece of any UI built with{' '}
+            <a href="https://www.carbondesignsystem.com/">Carbon</a>. It
+            contains the shared navigation framework for the entire design
+            system and ties the products in IBM’s portfolio together in a
+            cohesive and elegant way. The shell is the home of the topmost
+            navigation, where users can quickly and dependably gain their
+            bearings and move between pages.
             <br />
             <br />
             The shell was designed with maximum flexibility built in, to serve
@@ -220,7 +220,7 @@ export const HeaderWNavigation = () => (
   />
 );
 
-HeaderWNavigation.storyName = 'Header w/ Navigation';
+HeaderWNavigation.storyName = 'Header with Navigation';
 
 export const HeaderWNavigationAndActions = () => (
   <HeaderContainer
@@ -290,7 +290,7 @@ export const HeaderWNavigationAndActions = () => (
   />
 );
 
-HeaderWNavigationAndActions.storyName = 'Header w/ Navigation and Actions';
+HeaderWNavigationAndActions.storyName = 'Header with Navigation and Actions';
 
 export const HeaderWNavigationActionsAndSideNav = () => (
   <HeaderContainer
@@ -417,7 +417,7 @@ export const HeaderWNavigationActionsAndSideNav = () => (
 );
 
 HeaderWNavigationActionsAndSideNav.storyName =
-  'Header w/ Navigation, Actions and SideNav';
+  'Header with Navigation, Actions and Side Nav';
 
 export const HeaderWSideNav = () => (
   <HeaderContainer
@@ -497,7 +497,7 @@ export const HeaderWSideNav = () => (
   />
 );
 
-HeaderWSideNav.storyName = 'Header w/ SideNav';
+HeaderWSideNav.storyName = 'Header with Side Nav';
 
 export const HeaderWActionsAndRightPanel = (args) => {
   // Add state to control panel expansion
@@ -559,7 +559,7 @@ export const HeaderWActionsAndRightPanel = (args) => {
   );
 };
 
-HeaderWActionsAndRightPanel.storyName = 'Header w/ Actions and Right Panel';
+HeaderWActionsAndRightPanel.storyName = 'Header with Actions and Right Panel';
 
 HeaderWActionsAndRightPanel.argTypes = {
   badgeCount: {
@@ -642,4 +642,4 @@ export const HeaderWActionsAndSwitcher = () => (
   />
 );
 
-HeaderWActionsAndSwitcher.storyName = 'Header w/ Actions and Switcher';
+HeaderWActionsAndSwitcher.storyName = 'Header with Actions and Switcher';

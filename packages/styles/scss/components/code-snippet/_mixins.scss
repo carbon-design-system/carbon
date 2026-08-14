@@ -19,4 +19,6 @@
   background-color: $layer;
   inline-size: 100%;
   max-inline-size: convert.to-rem(768px);
+  // Allow shrinking in grid/flex parents (e.g. Stack) so long pre content does not force layout width
+  min-inline-size: 0;
 }

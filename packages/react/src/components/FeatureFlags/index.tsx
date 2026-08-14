@@ -8,6 +8,7 @@
 import {
   FeatureFlags as GlobalFeatureFlags,
   createScope,
+  notifyAvailableFlag,
 } from '@carbon/feature-flags';
 import PropTypes from 'prop-types';
 import React, {
@@ -20,24 +21,116 @@ import { deprecate } from '../../prop-types/deprecate';
 
 export interface FeatureFlagsProps {
   children?: ReactNode;
+
+  /**
+   * Provide the feature flags to enable or disable in the current React tree.
+   *
+   * @deprecated Use the individual boolean props instead. Run the
+   * `featureflag-deprecate-flags-prop` codemod to migrate:
+   * `npx @carbon/upgrade migrate featureflag-deprecate-flags-prop --write`
+   */
   flags?: Record<string, boolean>;
+
+  /**
+   * Enable the features and functionality for the v12 Release.
+   *
+   * Enabling this turns on every `enableV12*` flag at once, as well as
+   * `enableFocusWrapWithoutSentinels`.
+   */
+  enableV12Release?: boolean;
+
+  /**
+   * Enable rendering of default icons in the tile components.
+   *
+   * Becomes the default behavior in v12.
+   */
   enableV12TileDefaultIcons?: boolean;
+
+  /**
+   * Enable rendering of radio icons in the `RadioTile` component.
+   *
+   * Becomes the default behavior in v12.
+   */
   enableV12TileRadioIcons?: boolean;
+
+  /**
+   * Enable the use of the v12 `OverflowMenu` leveraging the `Menu`
+   * subcomponents.
+   *
+   * Becomes the default behavior in v12.
+   */
   enableV12Overflowmenu?: boolean;
+
+  /**
+   * Enable the new `TreeView` controllable API.
+   */
   enableTreeviewControllable?: boolean;
+
+  /**
+   * Enable the new focus wrap behavior that doesn't use sentinel nodes.
+   *
+   * @deprecated Use `enableFocusWrapWithoutSentinels` instead.
+   */
   enableExperimentalFocusWrapWithoutSentinels?: boolean;
+
+  /**
+   * Enable the new focus wrap behavior that doesn't use sentinel nodes.
+   */
   enableFocusWrapWithoutSentinels?: boolean;
+
+  /**
+   * Enable components to utilize the native `dialog` element.
+   */
   enableDialogElement?: boolean;
+
+  /**
+   * Enable dynamic setting of floating styles for components like `Popover`,
+   * `Tooltip`, etc.
+   *
+   * Becomes the default behavior in v12.
+   */
   enableV12DynamicFloatingStyles?: boolean;
+
+  /**
+   * Enable enhanced functionality for the `FileUploader` component, including
+   * richer callback data and expanded trigger events for `onChange` and
+   * `onDelete`.
+   */
   enableEnhancedFileUploader?: boolean;
+
+  /**
+   * Enable components to remain unmounted in closed state and mount in open
+   * state.
+   */
   enablePresence?: boolean;
 }
+
+// Reuse the runtime scope shape from `@carbon/feature-flags` directly. A local
+// recursive interface here creates a second incompatible `FeatureFlagScope`
+// during declaration emit.
+type FeatureFlagScope = typeof GlobalFeatureFlags;
 
 /**
  * Our FeatureFlagContext is used alongside the FeatureFlags component to enable
  * or disable feature flags in a given React tree
  */
-const FeatureFlagContext = createContext(GlobalFeatureFlags);
+const FeatureFlagContext = createContext<FeatureFlagScope>(GlobalFeatureFlags);
+
+// Maps each camelCase prop name to its kebab-case feature flag key.
+const PROP_TO_FLAG: Record<string, string> = {
+  enableV12Release: 'enable-v12-release',
+  enableV12TileDefaultIcons: 'enable-v12-tile-default-icons',
+  enableV12TileRadioIcons: 'enable-v12-tile-radio-icons',
+  enableV12Overflowmenu: 'enable-v12-overflowmenu',
+  enableTreeviewControllable: 'enable-treeview-controllable',
+  enableExperimentalFocusWrapWithoutSentinels:
+    'enable-experimental-focus-wrap-without-sentinels',
+  enableFocusWrapWithoutSentinels: 'enable-focus-wrap-without-sentinels',
+  enableDialogElement: 'enable-dialog-element',
+  enableV12DynamicFloatingStyles: 'enable-v12-dynamic-floating-styles',
+  enableEnhancedFileUploader: 'enable-enhanced-file-uploader',
+  enablePresence: 'enable-presence',
+};
 
 /**
  * Supports an object of feature flag values with the `flags` prop, merging them
@@ -46,40 +139,56 @@ const FeatureFlagContext = createContext(GlobalFeatureFlags);
  */
 export const FeatureFlags = ({
   children,
-  flags = {},
-  enableV12TileDefaultIcons = false,
-  enableV12TileRadioIcons = false,
-  enableV12Overflowmenu = false,
-  enableTreeviewControllable = false,
-  enableExperimentalFocusWrapWithoutSentinels = false,
-  enableFocusWrapWithoutSentinels = false,
-  enableDialogElement = false,
-  enableV12DynamicFloatingStyles = false,
-  enableEnhancedFileUploader = false,
-  enablePresence = false,
+  flags,
+  enableV12Release,
+  enableV12TileDefaultIcons,
+  enableV12TileRadioIcons,
+  enableV12Overflowmenu,
+  enableTreeviewControllable,
+  enableExperimentalFocusWrapWithoutSentinels,
+  enableFocusWrapWithoutSentinels,
+  enableDialogElement,
+  enableV12DynamicFloatingStyles,
+  enableEnhancedFileUploader,
+  enablePresence,
 }: FeatureFlagsProps) => {
   const parentScope = useContext(FeatureFlagContext);
 
   const scope = useMemo(() => {
-    const combinedFlags = {
-      'enable-v12-tile-default-icons': enableV12TileDefaultIcons,
-      'enable-v12-tile-radio-icons': enableV12TileRadioIcons,
-      'enable-v12-overflowmenu': enableV12Overflowmenu,
-      'enable-treeview-controllable': enableTreeviewControllable,
-      'enable-experimental-focus-wrap-without-sentinels':
-        enableExperimentalFocusWrapWithoutSentinels,
-      'enable-focus-wrap-without-sentinels': enableFocusWrapWithoutSentinels,
-      'enable-dialog-element': enableDialogElement,
-      'enable-v12-dynamic-floating-styles': enableV12DynamicFloatingStyles,
-      'enable-enhanced-file-uploader': enableEnhancedFileUploader,
-      'enable-presence': enablePresence,
-      ...flags,
+    // Only include flags that were explicitly provided (not undefined). This
+    // ensures that unspecified props do not shadow flags set by a parent
+    // FeatureFlags scope, which is the correct behaviour for nested scopes.
+    const flagProps = {
+      enableV12Release,
+      enableV12TileDefaultIcons,
+      enableV12TileRadioIcons,
+      enableV12Overflowmenu,
+      enableTreeviewControllable,
+      enableExperimentalFocusWrapWithoutSentinels,
+      enableFocusWrapWithoutSentinels,
+      enableDialogElement,
+      enableV12DynamicFloatingStyles,
+      enableEnhancedFileUploader,
+      enablePresence,
     };
+    const explicitFlags: Record<string, boolean> = {};
 
-    const scope = createScope(combinedFlags);
+    for (const [prop, flagKey] of Object.entries(PROP_TO_FLAG)) {
+      const value = (flagProps as Record<string, boolean | undefined>)[prop];
+      if (value !== undefined) {
+        explicitFlags[flagKey] = value;
+      }
+    }
+
+    if (flags) {
+      Object.assign(explicitFlags, flags);
+    }
+
+    const scope = createScope(explicitFlags);
     scope.mergeWithScope(parentScope);
     return scope;
   }, [
+    enableV12Release,
     enableV12TileDefaultIcons,
     enableV12TileRadioIcons,
     enableV12Overflowmenu,
@@ -112,6 +221,7 @@ FeatureFlags.propTypes = {
       'been deprecated. Please run the `featureflag-deprecate-flags-prop` codemod to migrate to individual boolean props.' +
       `npx @carbon/upgrade migrate featureflag-deprecate-flags-prop --write`
   ),
+  enableV12Release: PropTypes.bool,
   enableV12TileDefaultIcons: PropTypes.bool,
   enableV12TileRadioIcons: PropTypes.bool,
   enableV12Overflowmenu: PropTypes.bool,
@@ -130,7 +240,13 @@ FeatureFlags.propTypes = {
  */
 export const useFeatureFlag = (flag: string) => {
   const scope = useContext(FeatureFlagContext);
-  return scope.enabled(flag);
+  const enabled = scope.enabled(flag);
+
+  if (process.env.NODE_ENV !== 'production') {
+    notifyAvailableFlag(flag, enabled);
+  }
+
+  return enabled;
 };
 
 /**

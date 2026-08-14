@@ -1,5 +1,5 @@
 import { ArgTypes, Meta, Canvas } from '@storybook/addon-docs/blocks';
-import * as MenuButtonStories from "./MenuButton.stories.js"
+import * as MenuButtonStories from './MenuButton.stories.js';
 import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
@@ -13,9 +13,9 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 ## Table of Contents
 
 - [Overview](#overview)
-    - [With Danger](#with-danger)
-    - [With Dividers](#with-dividers)
-    - [With Icons](#with-icons)
+  - [With Danger](#with-danger)
+  - [With Dividers](#with-dividers)
+  - [With Icons](#with-icons)
 - [Menu Alignment](#menu-alignment)
 - [menuTarget Prop](#menutarget-prop)
 - [Managing the `menuTarget` prop with React refs](#managing-the-menutarget-prop-with-react-refs)
@@ -38,6 +38,7 @@ passed as `props.label`.
   <MenuItem label="Third action" />
 </MenuButton>
 ```
+
 <Canvas
   of={MenuButtonStories.Default}
   additionalActions={[
@@ -102,7 +103,8 @@ understand the `menuAlignment` prop.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(MenuButtonStories.WithMenuAlignment),
+      onClick: () =>
+        stackblitzPrefillConfig(MenuButtonStories.WithMenuAlignment),
     },
   ]}
 />
@@ -118,8 +120,10 @@ Pass the `menuTarget` prop to render the `Menu` inside the modal or any specific
 element where you want it to render:
 
 ## Managing the `menuTarget` prop with React refs
+
 Because React does not trigger re-renders when a ref's `.current` value changes,
 you must capture the ref value in state to update the `menuTarget` prop.
+
 ```tsx
 const Component = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -146,7 +150,8 @@ const Component = () => {
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(MenuButtonStories.ExperimentalAutoAlign),
+      onClick: () =>
+        stackblitzPrefillConfig(MenuButtonStories.ExperimentalAutoAlign),
     },
   ]}
 />

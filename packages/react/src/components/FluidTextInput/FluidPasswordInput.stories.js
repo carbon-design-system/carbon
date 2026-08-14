@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -24,28 +24,25 @@ export default {
   },
 };
 
-export const Default = (args) => (
-  <div style={{ width: args.defaultWidth }}>
-    <FluidPasswordInput
-      {...args}
-      id="input-1"
-      labelText="Label"
-      placeholder="Placeholder text"
-    />
+export const Default = ({ defaultWidth, ...passwordInputArgs }) => (
+  <div style={{ width: defaultWidth }}>
+    <FluidPasswordInput {...passwordInputArgs} />
   </div>
 );
 
 Default.args = {
+  className: '',
   defaultWidth: 300,
-  placeholder: 'Placeholder text',
-  showPasswordLabel: 'Show password',
-  hidePasswordLabel: 'Hide password',
-  onTogglePasswordVisibility: true,
+  disabled: false,
+  id: 'input-1',
   invalid: false,
   invalidText:
     'Error message that is really long can wrap to more lines but should not be excessively long.',
-  disabled: false,
   labelText: 'Label',
+  placeholder: 'Placeholder text',
+  readOnly: false,
+  showPasswordLabel: 'Show password',
+  hidePasswordLabel: 'Hide password',
   warn: false,
   warnText:
     'Warning message that is really long can wrap to more lines but should not be excessively long.',
@@ -61,15 +58,12 @@ Default.argTypes = {
     },
   },
   showPasswordLabel: {
-    description: 'Show password" tooltip text on password visibility toggle',
+    control: 'text',
+    description: '"Show password" tooltip text on password visibility toggle',
   },
   hidePasswordLabel: {
-    description: 'Hide password" tooltip text on password visibility toggle',
-  },
-  defaultValue: {
-    control: {
-      type: 'text',
-    },
+    control: 'text',
+    description: '"Hide password" tooltip text on password visibility toggle',
   },
   placeholder: {
     control: {
@@ -86,13 +80,19 @@ Default.argTypes = {
       type: 'text',
     },
   },
+  id: {
+    control: 'text',
+  },
+  onChange: {
+    action: 'onChange',
+  },
+  onClick: {
+    action: 'onClick',
+  },
   onTogglePasswordVisibility: {
-    table: {
-      disable: false,
-    },
-    control: false,
+    action: 'onTogglePasswordVisibility',
     description:
-      'Callback function that is called whenever the toggle password visibility button is clicked `(evt) => void`      ',
+      'Callback function that is called whenever the toggle password visibility button is clicked `(evt) => void`',
   },
   disabled: {
     control: {
@@ -104,17 +104,15 @@ Default.argTypes = {
       type: 'text',
     },
   },
+  readOnly: {
+    control: 'boolean',
+  },
   warn: {
     control: {
       type: 'boolean',
     },
   },
   warnText: {
-    control: {
-      type: 'text',
-    },
-  },
-  value: {
     control: {
       type: 'text',
     },

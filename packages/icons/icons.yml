@@ -333,6 +333,26 @@
     - tracking
   sizes:
     - 32
+- name: activity--task
+  friendly_name: Activity task
+  aliases:
+    - activity
+    - rectangle
+    - task
+    - process
+    - workflow
+  sizes:
+    - 32
+- name: adapter-notification
+  friendly_name: Adapter notification
+  aliases:
+    - notify
+    - alert
+    - flow
+    - service
+    - data
+  sizes:
+    - 32
 - name: add
   friendly_name: Add
   aliases:
@@ -404,6 +424,15 @@
     - software
   sizes:
     - 32
+- name: add--server
+  friendly_name: Add server
+  aliases:
+    - add
+    - server
+    - add server
+    - plus
+  sizes:
+    - 32
 - name: add-comment
   friendly_name: Add comment
   aliases:
@@ -429,7 +458,7 @@
   sizes:
     - 32
 - name: aggregator--count-rows
-  friendly_name: aggregator count rows
+  friendly_name: Aggregator count rows
   aliases:
     - DataStage
     - Transform
@@ -441,7 +470,7 @@
   sizes:
     - 32
 - name: aggregator--recalculation
-  friendly_name: aggregator recalculation
+  friendly_name: Aggregator recalculation
   aliases:
     - DataStage
     - Transform
@@ -1446,6 +1475,14 @@
     - booleans
   sizes:
     - 32
+- name: array--date-time
+  friendly_name: Array of date/time
+  aliases:
+    - array
+    - date
+    - time
+  sizes:
+    - 32
 - name: array--dates
   friendly_name: Array of dates
   aliases:
@@ -1474,6 +1511,14 @@
     - letters
     - characters
     - strings array
+  sizes:
+    - 32
+- name: array--time
+  friendly_name: Array of time
+  aliases:
+    - array
+    - time
+    - clock
   sizes:
     - 32
 - name: array-decimal
@@ -1782,7 +1827,7 @@
   sizes:
     - 32
 - name: async
-  friendly_name: async
+  friendly_name: Async
   aliases:
     - asynchrononous
     - arrows
@@ -1934,6 +1979,16 @@
     - suitcase
     - travel
     - airport
+  sizes:
+    - 32
+- name: bank--vault
+  friendly_name: Bank vault
+  aliases:
+    - bank
+    - vault
+    - security
+    - secure
+    - safe
   sizes:
     - 32
 - name: bar
@@ -2572,7 +2627,7 @@
   sizes:
     - 32
 - name: box--large
-  friendly_name: Box extra large
+  friendly_name: Box large
   aliases:
     - systems
     - box
@@ -2724,6 +2779,20 @@
     - outline
   sizes:
     - 32
+- name: brainstorm
+  friendly_name: Brainstorm
+  aliases:
+    - brainstorm
+    - sticker
+  sizes:
+    - 32
+- name: brainstorm--filled
+  friendly_name: Brainstorm filled
+  aliases:
+    - brainstorm
+    - sticker
+  sizes:
+    - 32
 - name: branch
   friendly_name: Branch
   aliases:
@@ -2845,6 +2914,18 @@
     - commerce
     - highrise
     - building
+  sizes:
+    - 32
+- name: building--electrical
+  friendly_name: Building electrical
+  aliases:
+    - building
+    - architecture
+    - office
+    - commerce
+    - highrise
+    - electrical
+    - lightning
   sizes:
     - 32
 - name: building--insights-1
@@ -3561,6 +3642,15 @@
     - publish
   sizes:
     - 32
+- name: categorical-palette
+  friendly_name: Categorical palette
+  aliases:
+    - categorical color palette
+    - qualitative palette
+    - data
+    - color palette
+  sizes:
+    - 32
 - name: categories
   friendly_name: Categories
   aliases:
@@ -3758,13 +3848,27 @@
     - certificate
     - certificate check
     - checkmark
-- name: change-catalog
+- name: change--catalog
   friendly_name: Change catalog
   aliases:
-    - change-catalog
+    - change
+    - catalog
     - change catalog
     - edit
     - edit catalog
+  sizes:
+    - 32
+- name: change--circle
+  friendly_name: Change circle
+  aliases:
+    - change
+    - circle
+    - change circle
+    - update
+    - refresh
+    - modify
+    - adjust
+    - tilde
   sizes:
     - 32
 - name: channels
@@ -3986,7 +4090,7 @@
     - bubble chart
     - chart
 - name: chart--bubble-packed
-  friendly_name: Chart Bubble-packed
+  friendly_name: Chart bubble packed
   aliases:
     - graph
     - bar
@@ -4484,6 +4588,17 @@
     - graph
     - chart
     - data
+  sizes:
+    - 32
+- name: chart--performance
+  friendly_name: Chart performance
+  aliases:
+    - chart
+    - performance
+    - graph
+    - data
+    - trend
+    - arrow
   sizes:
     - 32
 - name: chat
@@ -5159,6 +5274,26 @@
     - classify
   sizes:
     - 32
+- name: classification--groups
+  friendly_name: Classification groups
+  aliases:
+    - classification
+    - group
+    - hierarchy
+    - primary
+    - primary hierarchy
+    - reporting
+    - enterprise reporting
+    - location
+    - location grouping
+    - full inclusion
+    - file
+    - document
+    - tag
+    - tagging
+    - frame
+  sizes:
+    - 32
 - name: classifier--language
   friendly_name: Classifier language
   sizes:
@@ -5594,12 +5729,43 @@
     - collapse
   sizes:
     - 32
+- name: collapse--stripe
+  friendly_name: Collapse stripe
+  aliases:
+    - stripe
+    - collapse
+  sizes:
+    - 32
+- name: collapse--title
+  friendly_name: Collapse title
+  aliases:
+    - title
+    - card
+    - collapse
+  sizes:
+    - 32
+- name: collapse--title-2
+  friendly_name: Collapse title 2
+  aliases:
+    - title
+    - card
+    - collapse
+  sizes:
+    - 32
 - name: color-palette
   friendly_name: Color palette
   aliases:
     - paint palette
     - paint
     - palette
+  sizes:
+    - 32
+- name: color-picker
+  friendly_name: Color picker
+  aliases:
+    - color picker
+    - sample
+    - color
   sizes:
     - 32
 - name: color-switch
@@ -5782,6 +5948,18 @@
     - target
   sizes:
     - 32
+- name: connection
+  friendly_name: Connection
+  aliases:
+    - connection
+    - connect
+    - receive
+    - diagram
+    - relationship
+    - flow
+    - node
+  sizes:
+    - 32
 - name: connection--receive
   friendly_name: Connection receive
   aliases:
@@ -5798,6 +5976,21 @@
     - send
     - outgoing
     - output
+  sizes:
+    - 32
+- name: connection--signal--alt
+  friendly_name: Connection signal alt
+  aliases:
+    - connection
+    - connect
+    - receive
+    - signal
+    - tower
+    - service
+    - station
+    - radio
+    - wireless
+    - network
   sizes:
     - 32
 - name: connection--two-way
@@ -6210,10 +6403,28 @@
     - coughing
   sizes:
     - 32
+- name: coupling-facility
+  friendly_name: Coupling Facility
+  aliases:
+    - coupling facility
+    - coupling
+    - facility
+    - clustering
+    - connection
+    - triangle
+  sizes:
+    - 32
 - name: coupling-facility-encryption
   friendly_name: Coupling Facility Encryption
   aliases:
     - coupling facility encryption
+    - coupling
+    - facility
+    - encryption
+    - clustering
+    - connection
+    - triangle
+    - lock
     - IBM Z Batch Network Analyzer
     - z/OS
   sizes:
@@ -6565,6 +6776,19 @@
     - headset
   sizes:
     - 32
+- name: customer-service--filled
+  friendly_name: Customer service filled
+  aliases:
+    - customer
+    - inquiry
+    - phone
+    - support
+    - chat
+    - client
+    - person
+    - headset
+  sizes:
+    - 32
 - name: cut
   friendly_name: Cut
   aliases:
@@ -6660,6 +6884,24 @@
     - numbers
     - metrics
     - characters
+- name: data--add
+  friendly_name: Data add
+  sizes:
+    - 32
+  aliases:
+    - data
+    - add
+    - connection
+    - stack
+- name: data--alert
+  friendly_name: Data alert
+  sizes:
+    - 32
+  aliases:
+    - data
+    - alert
+    - connection
+    - stack
 - name: data--base
   friendly_name: Data base
   sizes:
@@ -7089,6 +7331,24 @@
     - dots
   sizes:
     - 32
+- name: database--backups
+  friendly_name: Database backups
+  aliases:
+    - database
+    - backup
+    - independent backup
+    - automatic backup
+    - on-demand backup
+    - hub
+    - backup hub
+    - server
+    - stack
+    - cloud
+    - recover
+    - data
+    - recover data
+  sizes:
+    - 32
 - name: database--datastax
   friendly_name: IBM Cloud® Databases for DataStax
   aliases:
@@ -7275,6 +7535,28 @@
     - hierarchy
   sizes:
     - 32
+- name: decline
+  friendly_name: Decline
+  aliases:
+    - decline
+    - decrease
+    - negative
+    - trend
+    - negative trend
+    - drop
+  sizes:
+    - 32
+- name: delay
+  friendly_name: Delay
+  aliases:
+    - clock
+    - hour
+    - minute
+    - watch
+    - time
+    - delay
+  sizes:
+    - 32
 - name: delete
   friendly_name: Delete
   aliases:
@@ -7333,6 +7615,16 @@
     - policies
     - timeouts
     - configurations
+  sizes:
+    - 32
+- name: delivery--time
+  friendly_name: Delivery time
+  aliases:
+    - delivery
+    - delivery time
+    - time
+    - duration
+    - expectation
   sizes:
     - 32
 - name: delivery-truck
@@ -7930,6 +8222,17 @@
     - domain
   sizes:
     - 32
+- name: disable-step
+  friendly_name: Disable step
+  aliases:
+    - disable
+    - step
+    - flow
+    - editor
+    - debug
+    - test
+  sizes:
+    - 32
 - name: distribute--horizontal-center
   friendly_name: Distribute horizontal center
   sizes:
@@ -8382,6 +8685,34 @@
     - double axis
   sizes:
     - 32
+- name: double-chevron--left
+  friendly_name: Double chevron left
+  sizes:
+    - 32
+  aliases:
+    - open
+    - close
+    - expand
+    - collapse
+    - chevron
+    - chevron left
+    - left chevron
+    - double chevron
+    - navigation
+- name: double-chevron--right
+  friendly_name: Double chevron right
+  sizes:
+    - 32
+  aliases:
+    - open
+    - close
+    - expand
+    - collapse
+    - chevron
+    - chevron right
+    - right chevron
+    - double chevron
+    - navigation
 - name: double-integer
   friendly_name: Double integer
   aliases:
@@ -8823,12 +9154,52 @@
     - mail
   sizes:
     - 32
+- name: email--user
+  friendly_name: Email user
+  aliases:
+    - mail
+    - contact
+    - envelope
+    - post
+    - send
+    - user
+    - conversation
+  sizes:
+    - 32
+- name: emissions
+  friendly_name: Emissions
+  aliases:
+    - emissions
+    - sustainability
+    - chemicals
+    - chemical plant
+    - smoke
+    - gas
+    - flue
+    - flue gas
+    - stack
+    - chimney
+    - smoke stack
+    - chimney stack
+  sizes:
+    - 32
 - name: emissions-management
   friendly_name: Emissions management
   aliases:
     - emissions management
     - sustainability
     - graph with sapling
+  sizes:
+    - 32
+- name: enable-step
+  friendly_name: Enable step
+  aliases:
+    - enable
+    - step
+    - flow
+    - editor
+    - debug
+    - test
   sizes:
     - 32
 - name: encryption
@@ -8841,6 +9212,20 @@
     - secure
   sizes:
     - 32
+- name: end-to-end--monitoring
+  friendly_name: End-to-end monitoring
+  aliases:
+    - end-to-end
+    - monitoring
+    - observability
+    - tracing
+    - distributed tracing
+    - flow
+    - transaction flow
+    - integration
+    - integration monitoring
+  sizes:
+    - 32
 - name: energy--renewable
   friendly_name: Energy renewable
   aliases:
@@ -8850,6 +9235,27 @@
     - weather
     - green
     - resource
+  sizes:
+    - 32
+- name: energy--report
+  friendly_name: Energy report
+  aliases:
+    - clipboard
+    - paper
+    - report
+    - energy
+    - lightning
+    - summary
+  sizes:
+    - 32
+- name: energy--waste
+  friendly_name: Energy waste
+  aliases:
+    - energy
+    - waste
+    - bin
+    - trash
+    - lightning
   sizes:
     - 32
 - name: enterprise
@@ -8995,6 +9401,17 @@
     - star
   sizes:
     - 32
+- name: event--number
+  friendly_name: Event number
+  sizes:
+    - 32
+  aliases:
+    - calendar
+    - pound sign
+    - hashtag
+    - date
+    - number
+    - schedule
 - name: event--schedule
   friendly_name: Event schedule
   sizes:
@@ -9057,6 +9474,17 @@
     - software
   sizes:
     - 32
+- name: execution-history
+  friendly_name: Execution history
+  aliases:
+    - history
+    - result
+    - status
+    - past
+    - action
+    - flow
+  sizes:
+    - 32
 - name: exit
   friendly_name: Exit
   aliases:
@@ -9080,6 +9508,24 @@
     - opertions
     - expand
     - categories
+  sizes:
+    - 32
+- name: expand-screen
+  friendly_name: Expand screen
+  aliases:
+    - picture-in-picture
+    - video
+    - expand
+    - minimize
+  sizes:
+    - 32
+- name: expand-screen--filled
+  friendly_name: Expand screen filled
+  aliases:
+    - picture-in-picture
+    - video
+    - expand
+    - minimize
   sizes:
     - 32
 - name: explore
@@ -9361,6 +9807,59 @@
     - face wink filled
     - person
     - people
+- name: facility--group
+  friendly_name: Facility group
+  aliases:
+    - facility
+    - group
+    - place
+    - locate
+    - gps
+    - destination
+    - map
+    - pin
+    - site
+    - area
+    - legend
+    - location
+    - travel
+  sizes:
+    - 32
+- name: facility--groups
+  friendly_name: Facility groups
+  aliases:
+    - facility
+    - group
+    - grouping
+    - optional grouping
+    - virtual meters
+    - location
+    - location grouping
+    - reporting
+    - facility reporting
+    - pin
+    - place
+  sizes:
+    - 32
+- name: facility--group--alternate
+  friendly_name: Facility group alternate
+  aliases:
+    - facility
+    - group
+    - alternate
+    - place
+    - locate
+    - gps
+    - destination
+    - map
+    - pin
+    - site
+    - area
+    - legend
+    - location
+    - travel
+  sizes:
+    - 32
 - name: factor
   friendly_name: Factor
   aliases:
@@ -9483,13 +9982,52 @@
     - cloud upload
   sizes:
     - 32
-- name: file-storage
+- name: file--change
+  friendly_name: File change
+  aliases:
+    - file
+    - change
+    - file change
+    - updated
+    - edited
+    - modified
+    - revision
+    - tilde
+  sizes:
+    - 32
+- name: file--diff
+  friendly_name: File diff
+  aliases:
+    - file
+    - diff
+    - file diff
+    - code diff
+    - code
+    - comparison
+    - version
+    - change
+    - modification
+  sizes:
+    - 32
+- name: file--storage
   friendly_name: File storage
   aliases:
     - file
     - storage
     - repository
     - systems
+  sizes:
+    - 32
+- name: file--x
+  friendly_name: File X
+  aliases:
+    - file
+    - x
+    - file x
+    - delete
+    - invalid
+    - remove
+    - error
   sizes:
     - 32
 - name: filter
@@ -10172,7 +10710,7 @@
   sizes:
     - 32
 - name: friendship
-  friendly_name: friendship
+  friendly_name: Friendship
   aliases:
     - people
     - friends
@@ -10190,6 +10728,21 @@
     - commerce
     - fruit
     - bowl
+  sizes:
+    - 32
+- name: fuel-can
+  friendly_name: Fuel can
+  aliases:
+    - fuel
+    - can
+    - container
+    - combustible
+    - gas
+    - gasoline
+    - petrol
+    - oil
+    - diesel
+    - inflamable
   sizes:
     - 32
 - name: function
@@ -10223,7 +10776,7 @@
   sizes:
     - 32
 - name: funnel--sequence
-  friendly_name: funnel sequence
+  friendly_name: Funnel sequence
   aliases:
     - funnel
     - sequence
@@ -10235,7 +10788,7 @@
   sizes:
     - 32
 - name: funnel--sort
-  friendly_name: funnel sort
+  friendly_name: Funnel sort
   aliases:
     - funnel
     - sort
@@ -10301,6 +10854,34 @@
     - fuel
   sizes:
     - 32
+- name: gas-station--diesel
+  friendly_name: Gas station diesel
+  aliases:
+    - gas station
+    - gas
+    - gasoline
+    - diesel
+    - fueling station
+    - fuel
+    - pump
+    - combustible
+    - inflamable
+  sizes:
+    - 32
+- name: gas-station--eco
+  friendly_name: Gas station eco
+  aliases:
+    - gas station
+    - gas
+    - gasoline
+    - eco
+    - fueling station
+    - fuel
+    - pump
+    - combustible
+    - inflamable
+  sizes:
+    - 32
 - name: gas-station--filled
   friendly_name: Gas station filled
   aliases:
@@ -10328,6 +10909,67 @@
     - app
   sizes:
     - 32
+- name: gateway--exclusive
+  friendly_name: Gateway exclusive
+  aliases:
+    - gateway
+    - exclusive
+    - path
+    - singular
+    - split
+    - routing
+    - decision
+    - point
+    - decision point
+    - conditional
+    - branch
+    - conditional branch
+    - process
+    - process branching
+    - diamond
+    - cross
+  sizes:
+    - 32
+- name: gateway--inclusive
+  friendly_name: Gateway inclusive
+  aliases:
+    - gateway
+    - inclusive
+    - split
+    - routing
+    - decision
+    - point
+    - decision point
+    - conditional
+    - branch
+    - conditional branch
+    - process
+    - process branching
+    - diamond
+    - circle
+  sizes:
+    - 32
+- name: gateway--inclusive--alt
+  friendly_name: Gateway inclusive alt
+  aliases:
+    - gateway
+    - inclusive
+    - patch
+    - combination
+    - split
+    - routing
+    - decision
+    - point
+    - decision point
+    - conditional
+    - branch
+    - conditional branch
+    - process
+    - process branching
+    - diamond
+    - circle
+  sizes:
+    - 32
 - name: gateway--mail
   friendly_name: Gateway mail
   aliases:
@@ -10336,6 +10978,38 @@
     - mail
     - send
     - message
+  sizes:
+    - 32
+- name: gateway--parallel
+  friendly_name: Gateway parallel
+  aliases:
+    - gateway
+    - parallel
+    - path
+    - simultaneous
+    - split
+    - routing
+    - decision
+    - point
+    - decision point
+    - diamond
+    - plus
+  sizes:
+    - 32
+- name: gateway--parallel--alt
+  friendly_name: Gateway parallel alt
+  aliases:
+    - gateway
+    - parallel
+    - path
+    - simultaneous
+    - split
+    - routing
+    - decision
+    - point
+    - decision point
+    - diamond
+    - plus
   sizes:
     - 32
 - name: gateway--public
@@ -10439,8 +11113,8 @@
     - user
   sizes:
     - 32
-- name: generate-pdf
-  friendly_name: Generate pdf
+- name: generate--pdf
+  friendly_name: Generate PDF
   aliases:
     - generate pdf
     - create pdf
@@ -10465,6 +11139,20 @@
     - wrapped box
   sizes:
     - 32
+- name: git--repo
+  friendly_name: Git repo
+  aliases:
+    - git
+    - github
+    - repo
+    - repository
+    - version
+    - version control
+    - source
+    - source control
+    - code
+  sizes:
+    - 32
 - name: global-filters
   friendly_name: Global filters
   aliases:
@@ -10483,6 +11171,7 @@
     - trial
   sizes:
     - 32
+
 - name: globe
   friendly_name: Globe
   aliases:
@@ -10492,6 +11181,19 @@
     - map
     - orb
     - globe
+  sizes:
+    - 32
+- name: globe--private
+  friendly_name: Globe private
+  aliases:
+    - globe
+    - private
+    - privacy
+    - restricted
+    - restricted access
+    - network
+    - private network
+    - limited visibility
   sizes:
     - 32
 - name: gradient
@@ -10868,6 +11570,17 @@
     - airplane
   sizes:
     - 32
+- name: helmet
+  friendly_name: Helmet
+  aliases:
+    - helmet
+    - hard hat
+    - protection
+    - equipment
+    - construction
+    - construction site
+  sizes:
+    - 32
 - name: help
   friendly_name: Help
   aliases:
@@ -10987,6 +11700,17 @@
     - hole filling
     - health
     - digital imaging
+  sizes:
+    - 32
+- name: history
+  friendly_name: History
+  aliases:
+    - history
+    - clock
+    - hour
+    - minute
+    - watch
+    - timeline
   sizes:
     - 32
 - name: home
@@ -11257,10 +11981,13 @@
     - Data migration
   sizes:
     - 32
-- name: ibm--bluepay
-  friendly_name: Unassigned
+- name: payment--methods
+  friendly_name: Payment methods
   aliases:
-    - IBM Bluepay
+    - pay
+    - payment
+    - methods
+    - payment methods
   sizes:
     - 32
 - name: ibm--cloudant
@@ -11274,11 +12001,14 @@
     - storage
   sizes:
     - 32
-- name: ibm--content-services
-  friendly_name: IBM® Content Services
+- name: ibm--content-cortex-repository
+  friendly_name: IBM Content Cortex Repository
   aliases:
-    - content management
-    - SaaS
+    - object store
+    - content services
+    - library
+    - document storage
+    - object storage
   sizes:
     - 32
 - name: ibm--data-power
@@ -12064,10 +12794,27 @@
     - remote
   sizes:
     - 32
-- name: ibm--tenet
-  friendly_name: Unassigned
+- name: portfolio--groups
+  friendly_name: Portfolio groups
   aliases:
-    - IBM Tenet
+    - portfolio
+    - group
+    - hierarchy
+    - secondary hierarchy
+    - locations
+    - subset
+    - percentages
+    - reporting
+    - briefcase
+    - frame
+  sizes:
+    - 32
+- name: portfolio--management
+  friendly_name: Portfolio management
+  aliases:
+    - portfolio
+    - management
+    - portfolio management
   sizes:
     - 32
 - name: ibm--test-accelerator-for-z
@@ -13946,7 +14693,7 @@
   sizes:
     - 32
 - name: iD
-  friendly_name: ID
+  friendly_name: iD
   aliases:
     - identification
     - identity
@@ -14004,6 +14751,20 @@
     - branch
     - condition node
     - branching logic
+  sizes:
+    - 32
+- name: if--else
+  friendly_name: If else
+  aliases:
+    - if else
+    - if
+    - conditional
+    - flow
+    - flow control
+    - branch
+    - condition node
+    - branching logic
+    - service
   sizes:
     - 32
 - name: image
@@ -14934,6 +15695,19 @@
     - build
   sizes:
     - 32
+- name: key--values
+  friendly_name: Key values
+  aliases:
+    - key
+    - values
+    - key values
+    - key-value
+    - key-value pairs
+    - configuration
+    - credentials
+    - settings
+  sizes:
+    - 32
 - name: keyboard
   friendly_name: Keyboard
   aliases:
@@ -14944,6 +15718,19 @@
     - computer
     - word processor
     - write
+  sizes:
+    - 32
+- name: keychain
+  friendly_name: Keychain
+  aliases:
+    - key
+    - keys
+    - keychain
+    - system
+    - save
+    - retain
+    - secure
+    - security
   sizes:
     - 32
 - name: keyboard--off
@@ -15814,6 +16601,23 @@
     - filled
   sizes:
     - 32
+- name: location--group
+  friendly_name: Location group
+  aliases:
+    - location
+    - group
+    - place
+    - locate
+    - gps
+    - destination
+    - map
+    - pin
+    - site
+    - area
+    - legend
+    - travel
+  sizes:
+    - 32
 - name: location--hazard
   friendly_name: Location hazard
   aliases:
@@ -15991,6 +16795,24 @@
     - travel
   sizes:
     - 32
+- name: location--supplier
+  friendly_name: Location supplier
+  aliases:
+    - location
+    - supplier
+    - place
+    - locate
+    - gps
+    - destination
+    - map
+    - pin
+    - arrow
+    - site
+    - area
+    - legend
+    - travel
+  sizes:
+    - 32
 - name: location--star--filled
   friendly_name: Location star filled
   aliases:
@@ -16007,6 +16829,22 @@
     - star
     - travel
     - filled
+  sizes:
+    - 32
+- name: location--switch
+  friendly_name: Location switch
+  aliases:
+    - location
+    - pin
+    - place
+    - switch
+    - hierarchy
+    - location hierarchy
+    - change
+    - switch location
+    - cange location
+    - change parent location
+    - Maximo
   sizes:
     - 32
 - name: locked
@@ -16868,6 +17706,40 @@
     - graph
   sizes:
     - 32
+- name: mapping--clear
+  friendly_name: Mapping clear
+  aliases:
+    - show
+    - view
+    - delete
+    - hide
+    - mask
+    - map
+    - trash
+    - remove
+    - flow
+  sizes:
+    - 32
+- name: mapping--hide
+  friendly_name: Mapping hide
+  aliases:
+    - show
+    - view
+    - hide
+    - mask
+    - map
+    - flow
+  sizes:
+    - 32
+- name: mapping--show
+  friendly_name: Mapping show
+  aliases:
+    - show
+    - view
+    - map
+    - flow
+  sizes:
+    - 32
 - name: map-boundary
   friendly_name: Map boundary
   aliases:
@@ -17246,6 +18118,43 @@
   sizes:
     - 16
     - 32
+- name: minus--plus
+  friendly_name: Minus-plus
+  aliases:
+    - minus
+    - plus
+    - minus-plus
+    - add
+    - remove
+    - add/remove
+    - expand
+    - expand
+    - expand/collapse
+    - toggle
+    - modify
+  sizes:
+    - 32
+- name: unassigned--work-order
+  friendly_name: Unassigned work order
+  aliases:
+    - unassigned
+    - work
+    - order
+    - user
+    - task
+    - unassigned task
+    - clipboard
+    - exclamation mark
+  sizes:
+    - 32
+- name: missing-data--warning
+  friendly_name: Missing data warning
+  aliases:
+    - missing data warning
+    - status
+    - warning
+  sizes:
+    - 32
 - name: misuse
   friendly_name: Misuse
   aliases:
@@ -17470,6 +18379,24 @@
     - construct
   sizes:
     - 32
+- name: model--content--doc
+  friendly_name: Document model reference
+  aliases:
+    - model
+    - citation
+    - search result
+    - knowledge
+    - AI response
+    - watsonx
+    - reference
+    - documentation
+    - content grounded answering
+    - conversational search
+    - large language model
+    - llm
+    - base llm
+  sizes:
+    - 32
 - name: model--foundation
   friendly_name: Foundation model
   aliases:
@@ -17586,7 +18513,7 @@
   sizes:
     - 32
 - name: moonset
-  friendly_name: moonset
+  friendly_name: Moonset
   aliases:
     - moonset
     - phase
@@ -17762,7 +18689,7 @@
   sizes:
     - 32
 - name: navaid--civil
-  friendly_name: Navaid civil
+  friendly_name: NAVAID civil
   aliases:
     - travel
     - navigation
@@ -17771,7 +18698,7 @@
   sizes:
     - 32
 - name: navaid--dme
-  friendly_name: Navaid dme
+  friendly_name: NAVAID DME
   aliases:
     - travel
     - navigation
@@ -17780,7 +18707,7 @@
   sizes:
     - 32
 - name: navaid--helipad
-  friendly_name: Navaid helipad
+  friendly_name: NAVAID helipad
   aliases:
     - travel
     - navigation
@@ -17789,7 +18716,7 @@
   sizes:
     - 32
 - name: navaid--military
-  friendly_name: Navaid military
+  friendly_name: NAVAID military
   aliases:
     - travel
     - navigation
@@ -17798,7 +18725,7 @@
   sizes:
     - 32
 - name: navaid--military-civil
-  friendly_name: Navaid military civil
+  friendly_name: NAVAID military civil
   aliases:
     - travel
     - navigation
@@ -17808,7 +18735,7 @@
   sizes:
     - 32
 - name: navaid--ndb
-  friendly_name: Navaid ndb
+  friendly_name: NAVAID NDB
   aliases:
     - travel
     - navigation
@@ -17817,7 +18744,7 @@
   sizes:
     - 32
 - name: navaid--ndb-dme
-  friendly_name: Navaid ndb dme
+  friendly_name: NAVAID NDB/DME
   aliases:
     - travel
     - navigation
@@ -17827,7 +18754,7 @@
   sizes:
     - 32
 - name: navaid--private
-  friendly_name: Navaid private
+  friendly_name: NAVAID private
   aliases:
     - travel
     - navigation
@@ -17836,7 +18763,7 @@
   sizes:
     - 32
 - name: navaid--seaplane
-  friendly_name: Navaid seaplane
+  friendly_name: NAVAID seaplane
   aliases:
     - travel
     - navigation
@@ -17845,7 +18772,7 @@
   sizes:
     - 32
 - name: navaid--tacan
-  friendly_name: Navaid tacan
+  friendly_name: NAVAID TACAN
   aliases:
     - travel
     - navigation
@@ -17854,7 +18781,7 @@
   sizes:
     - 32
 - name: navaid--vhfor
-  friendly_name: Navaid vhfor
+  friendly_name: NAVAID VHFOR
   aliases:
     - travel
     - navigation
@@ -17863,7 +18790,7 @@
   sizes:
     - 32
 - name: navaid--vor
-  friendly_name: Navaid vor
+  friendly_name: NAVAID VOR
   aliases:
     - travel
     - navigation
@@ -17871,8 +18798,8 @@
     - vor
   sizes:
     - 32
-- name: navaid--vordme
-  friendly_name: Navaid vordme
+- name: navaid--vor-dme
+  friendly_name: NAVAID VOR/DME
   aliases:
     - travel
     - navigation
@@ -17880,8 +18807,8 @@
     - vordme
   sizes:
     - 32
-- name: navaid--vortac
-  friendly_name: Navaid vortac
+- name: navaid--vor-tac
+  friendly_name: NAVAID VOR/TAC
   aliases:
     - travel
     - navigation
@@ -18507,6 +19434,15 @@
     - warning
   sizes:
     - 32
+- name: offset--environmental
+  friendly_name: Offset environmental
+  aliases:
+    - offset
+    - environment
+    - sustainability
+    - arrow
+  sizes:
+    - 32
 - name: omega
   friendly_name: Omega
   aliases:
@@ -18524,6 +19460,14 @@
     - color
     - gradient
     - formatting
+  sizes:
+    - 32
+- name: open--stripe
+  friendly_name: Open stripe
+  aliases:
+    - stripe
+    - open
+    - arrow
   sizes:
     - 32
 - name: open-panel--bottom
@@ -18677,6 +19621,32 @@
     - scheduling
     - provisioning
     - deployment
+  sizes:
+    - 32
+- name: order--server
+  friendly_name: Order server
+  aliases:
+    - order
+    - server
+    - shopping cart
+  sizes:
+    - 32
+- name: order--storm
+  friendly_name: Order storm
+  aliases:
+    - order
+    - storm
+    - server
+    - shopping cart
+  sizes:
+    - 32
+- name: order--stratus
+  friendly_name: Order stratus
+  aliases:
+    - order
+    - stratus
+    - server
+    - shopping cart
   sizes:
     - 32
 - name: order-details
@@ -19023,6 +19993,17 @@
     - people
     - business
     - user
+  sizes:
+    - 32
+- name: party-popper
+  friendly_name: Party popper
+  aliases:
+    - party
+    - popper
+    - event
+    - tada
+    - celebrate
+    - celebration
   sizes:
     - 32
 - name: passenger--drinks
@@ -19667,7 +20648,7 @@
   sizes:
     - 32
 - name: pivot--horizontal
-  friendly_name: pivot horizontal
+  friendly_name: Pivot horizontal
   aliases:
     - pivot
     - horizontal
@@ -19679,7 +20660,7 @@
   sizes:
     - 32
 - name: pivot--vertical
-  friendly_name: pivot vertical
+  friendly_name: Pivot vertical
   aliases:
     - pivot
     - vertical
@@ -20026,6 +21007,15 @@
     - file
   sizes:
     - 32
+- name: pre-prod-environment
+  friendly_name: Pre-prod environment
+  aliases:
+    - staging
+    - testing
+    - alpha
+    - beta
+  sizes:
+    - 32
 - name: presentation-file
   friendly_name: Presentation file
   aliases:
@@ -20126,6 +21116,24 @@
     - paper
   sizes:
     - 32
+- name: priority--high
+  friendly_name: Priority high
+  aliases:
+    - priority
+    - high
+    - arrow
+    - up
+  sizes:
+    - 32
+- name: priority--low
+  friendly_name: Priority low
+  aliases:
+    - priority
+    - low
+    - arrow
+    - down
+  sizes:
+    - 32
 - name: private-network
   friendly_name: Private network
   aliases:
@@ -20166,6 +21174,66 @@
   friendly_name: Product
   aliases:
     - product
+  sizes:
+    - 32
+- name: product-categories
+  friendly_name: Product categories
+  aliases:
+    - product
+    - category
+    - scope
+    - scope 3
+    - classification
+    - label
+    - taxonomy
+    - supply chain
+    - supply chain taxonomy
+    - box
+    - container
+    - label
+    - tag
+  sizes:
+    - 32
+- name: production-environment
+  friendly_name: Production environment
+  aliases:
+    - configuration
+    - deployment
+    - verification
+    - GA
+    - general availability
+    - live
+    - public
+  sizes:
+    - 32
+- name: production-service
+  friendly_name: Production service
+  aliases:
+    - catalog
+    - service
+    - GA
+    - general availability
+    - live
+    - public
+  sizes:
+    - 32
+- name: program
+  friendly_name: Program
+  aliases:
+    - program
+    - container
+    - data
+    - lines
+  sizes:
+    - 32
+- name: program--action
+  friendly_name: Program action
+  aliases:
+    - program
+    - action
+    - container
+    - data
+    - lines
   sizes:
     - 32
 - name: progress-bar
@@ -20255,6 +21323,22 @@
     - card
     - credit card
     - debit
+  sizes:
+    - 32
+- name: purchasing-organizations
+  friendly_name: Purchasing organizations
+  aliases:
+    - purchase
+    - organization
+    - entity
+    - buying entity
+    - procurement
+    - procurement organization
+    - process
+    - flow
+    - pin
+    - place
+    - location
   sizes:
     - 32
 - name: QC-launch
@@ -20501,6 +21585,17 @@
     - total
   sizes:
     - 32
+- name: receipt--verification
+  friendly_name: Receipt verification
+  aliases:
+    - check
+    - bill
+    - total
+    - receipt
+    - verification
+    - checkmark
+  sizes:
+    - 32
 - name: recently-viewed
   friendly_name: Recently viewed
   aliases:
@@ -20582,7 +21677,7 @@
   sizes:
     - 32
 - name: ref-evapotranspiration
-  friendly_name: Ref evapotranspiration
+  friendly_name: Reference evapotranspiration
   aliases:
     - weather
     - ref
@@ -20610,6 +21705,18 @@
     - reflect vertical
     - reflect
     - formatting
+  sizes:
+    - 32
+- name: refrigerant
+  friendly_name: Refrigerant
+  aliases:
+    - refrigerant
+    - fridge
+    - can
+    - container
+    - coolant
+    - gas
+    - inflamable
   sizes:
     - 32
 - name: region-analysis--area
@@ -20663,6 +21770,16 @@
     - refresh
     - replay
     - restart
+    - arrow
+  sizes:
+    - 32
+- name: renew--alt
+  friendly_name: Renew alt
+  aliases:
+    - refresh
+    - replay
+    - restart
+    - arrow
   sizes:
     - 32
 - name: repeat
@@ -20735,6 +21852,16 @@
     - summary
   sizes:
     - 32
+- name: report--chart
+  friendly_name: Report chart
+  aliases:
+    - clipboard
+    - paper
+    - chart
+    - pie
+    - summary
+  sizes:
+    - 32
 - name: report--data
   friendly_name: Report data
   sizes:
@@ -20744,6 +21871,17 @@
     - paper
     - chart
     - summary
+- name: report--growth
+  friendly_name: Report growth
+  aliases:
+    - clipboard
+    - paper
+    - chart
+    - growth
+    - arrow
+    - summary
+  sizes:
+    - 32
 - name: request-quote
   friendly_name: Request quote
   aliases:
@@ -21922,6 +23060,18 @@
     - email
   sizes:
     - 32
+- name: sensor
+  friendly_name: Sensor
+  aliases:
+    - sensor
+    - receiver
+    - input
+    - output
+    - signal
+    - wave
+    - wireless
+  sizes:
+    - 32
 - name: send--alt
   friendly_name: Send alt
   sizes:
@@ -22001,6 +23151,16 @@
     - arrange
   sizes:
     - 32
+- name: sequential-palette
+  friendly_name: Sequential palette
+  aliases:
+    - sequential color palette
+    - monochromatic palette
+    - data
+    - color
+    - palette
+  sizes:
+    - 32
 - name: server--dns
   friendly_name: Server DNS
   aliases:
@@ -22025,6 +23185,15 @@
   aliases:
     - server
     - time
+    - clock
+  sizes:
+    - 32
+- name: server--time--usage
+  friendly_name: Server time usage
+  aliases:
+    - server
+    - time
+    - usage
     - clock
   sizes:
     - 32
@@ -22205,6 +23374,18 @@
     - connect
   sizes:
     - 32
+- name: shield--alert
+  friendly_name: Shield alert
+  aliases:
+    - shield
+    - alert
+    - security
+    - warning
+    - threat
+    - vulnerability
+    - protection
+  sizes:
+    - 32
 - name: share-knowledge
   friendly_name: Share knowledge
   aliases:
@@ -22216,6 +23397,17 @@
     - thinking
     - knowledge
     - exchange
+  sizes:
+    - 32
+- name: shipment--delivery
+  friendly_name: Shipment delivery
+  aliases:
+    - shipment
+    - delivery
+    - truck
+    - time
+    - shipment delivery
+    - time delivery
   sizes:
     - 32
 - name: shopping--bag
@@ -22714,7 +23906,7 @@
   sizes:
     - 32
 - name: slisor
-  friendly_name: slicestor
+  friendly_name: Slicestor
   aliases:
     - analysis
     - slisor
@@ -22828,6 +24020,17 @@
     - football
   sizes:
     - 32
+- name: socket
+  friendly_name: Socket
+  aliases:
+    - socket
+    - plug
+    - connection
+    - network
+    - endpoint
+    - interface
+  sizes:
+    - 32
 - name: software-resource
   friendly_name: Software resource
   aliases:
@@ -22847,7 +24050,7 @@
     - cluster
   sizes:
     - 32
-- name: software-resource--resource
+- name: software-resource--reference
   friendly_name: Software resource reference
   aliases:
     - software
@@ -23111,6 +24314,19 @@
     - rectangle
     - shape
     - geometry
+  sizes:
+    - 32
+- name: square--slash
+  friendly_name: Square slash
+  aliases:
+    - search
+    - shortcut
+    - search shortcut
+    - hotkey
+    - command
+    - command key
+    - quick search
+    - search
   sizes:
     - 32
 - name: square--solid
@@ -23412,6 +24628,17 @@
     - buy
   sizes:
     - 32
+- name: storm
+  friendly_name: Storm
+  aliases:
+    - storm
+    - order
+    - server
+    - deal
+    - storm order
+    - storm deal
+  sizes:
+    - 32
 - name: storm-tracker
   friendly_name: Storm tracker
   aliases:
@@ -23428,6 +24655,17 @@
     - X
     - O
     - arrows
+  sizes:
+    - 32
+- name: stratus
+  friendly_name: Stratus
+  aliases:
+    - stratus
+    - order
+    - deal
+    - server
+    - stratus order
+    - stratus deal
   sizes:
     - 32
 - name: strawberry
@@ -23609,6 +24847,22 @@
     - hierarchy
   sizes:
     - 32
+- name: subprocess
+  friendly_name: Subprocess
+  aliases:
+    - subprocess
+    - process
+    - secondary
+    - workflow
+    - folder
+    - process folder
+    - group process
+    - nested process
+    - rectangle
+    - add
+    - plus
+  sizes:
+    - 32
 - name: subtract
   friendly_name: Subtract
   aliases:
@@ -23735,7 +24989,7 @@
   sizes:
     - 32
 - name: surrogate--key-database
-  friendly_name: surrogate key database
+  friendly_name: Surrogate key database
   aliases:
     - surrogate
     - key database
@@ -23747,7 +25001,7 @@
   sizes:
     - 32
 - name: surrogate--key-flat-file
-  friendly_name: surrogate key flat file
+  friendly_name: Surrogate key flat file
   aliases:
     - surrogate
     - key flat file
@@ -23792,6 +25046,14 @@
     - swimlane
   sizes:
     - 32
+- name: switch
+  friendly_name: Switch
+  aliases:
+    - flow
+    - switch
+    - branch
+  sizes:
+    - 32
 - name: switch-layer-2
   friendly_name: Switch layer 2
   aliases:
@@ -23811,6 +25073,20 @@
   aliases:
     - switcher
     - selector
+  sizes:
+    - 32
+- name: swot
+  friendly_name: SWOT
+  aliases:
+    - swot
+    - diagram
+  sizes:
+    - 32
+- name: swot--filled
+  friendly_name: SWOT filled
+  aliases:
+    - swot
+    - diagram
   sizes:
     - 32
 - name: sync-settings
@@ -24034,6 +25310,18 @@
     - vehicle
   sizes:
     - 32
+- name: target
+  friendly_name: Target
+  aliases:
+    - target
+    - crosshair
+    - bullseye
+    - mark
+    - objective
+    - goal
+    - center
+  sizes:
+    - 32
 - name: task
   friendly_name: Task
   aliases:
@@ -24079,6 +25367,18 @@
     - asset-view
   sizes:
     - 32
+- name: task--blank
+  friendly_name: Task blank
+  aliases:
+    - task
+    - clipboard
+    - to do list
+    - list
+    - chore
+    - paper
+    - blank
+  sizes:
+    - 32
 - name: task--complete
   friendly_name: Task complete
   aliases:
@@ -24090,6 +25390,32 @@
     - complete
   sizes:
     - 32
+- name: task--edit
+  friendly_name: Task edit
+  aliases:
+    - task
+    - clipboard
+    - to do list
+    - list
+    - chore
+    - paper
+    - pencil
+    - edit
+  sizes:
+    - 32
+- name: task--hold
+  friendly_name: Task hold
+  aliases:
+    - task
+    - clipboard
+    - to do list
+    - list
+    - chore
+    - paper
+    - pause
+    - hold
+  sizes:
+    - 32
 - name: task--location
   friendly_name: Task location
   aliases:
@@ -24098,6 +25424,18 @@
     - clipboard
     - pin
     - location
+  sizes:
+    - 32
+- name: task--progress
+  friendly_name: Task progress
+  aliases:
+    - task
+    - clipboard
+    - to do list
+    - list
+    - chore
+    - paper
+    - progress
   sizes:
     - 32
 - name: task--remove
@@ -24908,6 +26246,31 @@
   sizes:
     - 20
     - 32
+- name: tilde
+  friendly_name: Tilde
+  aliases:
+    - tilde
+    - change
+    - update
+    - updated
+    - edited
+    - modified
+    - revision
+  sizes:
+    - 32
+- name: tilde--large
+  friendly_name: Tilde large
+  aliases:
+    - tilde
+    - large
+    - change
+    - update
+    - updated
+    - edited
+    - modified
+    - revision
+  sizes:
+    - 32
 - name: time--filled
   friendly_name: Time filled
   aliases:
@@ -24922,6 +26285,18 @@
   aliases:
     - time plot
     - data
+  sizes:
+    - 32
+- name: timeline
+  friendly_name: Timeline
+  aliases:
+    - timeline
+    - time
+    - stream
+    - flow
+    - sequence
+    - progression
+    - roadmap
   sizes:
     - 32
 - name: timer
@@ -25303,6 +26678,18 @@
     - list
   sizes:
     - 32
+- name: transform--pipeline
+  friendly_name: Transform pipeline
+  aliases:
+    - map
+    - modify
+    - data
+    - functions
+    - transforms
+    - pipeline
+    - flow
+  sizes:
+    - 32
 - name: transgender
   friendly_name: Transgender
   aliases:
@@ -25539,7 +26926,7 @@
   sizes:
     - 32
 - name: tropical-storm--tracks
-  friendly_name: tropical-storm--tracks
+  friendly_name: Tropical storm tracks
   aliases:
     - tropical storm
     - precipitation
@@ -25557,6 +26944,18 @@
     - warning
     - weather
     - storm
+  sizes:
+    - 32
+- name: try-catch
+  friendly_name: Try Catch
+  aliases:
+    - error
+    - handling
+    - catch
+    - try
+    - block
+    - flow
+    - service
   sizes:
     - 32
 - name: tsq
@@ -25691,6 +27090,14 @@
     - back
   sizes:
     - 32
+- name: unfold--open
+  friendly_name: Unfold open
+  aliases:
+    - unfold
+    - open
+    - unfold open
+  sizes:
+    - 32
 - name: ungroup-objects
   friendly_name: Ungroup objects
   aliases:
@@ -25727,6 +27134,16 @@
     - opened
   sizes:
     - 16
+    - 32
+- name: unplug
+  friendly_name: Unplug
+  aliases:
+    - deregister
+    - detach
+    - remove
+    - runtime
+    - management
+  sizes:
     - 32
 - name: unsaved
   friendly_name: Unsaved
@@ -26106,6 +27523,21 @@
     - military
   sizes:
     - 32
+- name: user--minus
+  friendly_name: User minus
+  aliases:
+    - person
+    - avatar
+    - man
+    - woman
+    - figure
+    - profile
+    - account
+    - user
+    - minus
+    - remove
+  sizes:
+    - 32
 - name: user--multiple
   friendly_name: User multiple
   aliases:
@@ -26223,7 +27655,7 @@
   sizes:
     - 32
 - name: user--x-ray
-  friendly_name: User x-ray
+  friendly_name: User X-ray
   sizes:
     - 32
   aliases:
@@ -26235,6 +27667,18 @@
     - profile
     - account
     - my account
+- name: utility--expense
+  friendly_name: Utility expense
+  aliases:
+    - check
+    - bill
+    - total
+    - utility
+    - expense
+    - lightning
+    - currency
+  sizes:
+    - 32
 - name: user-profile--alt
   friendly_name: User profile alt
   sizes:
@@ -26891,6 +28335,17 @@
     - exclamation point
     - warning
     - caution
+  sizes:
+    - 32
+- name: warning--diamond-fill
+  friendly_name: Warning diamond fill
+  aliases:
+    - warning
+    - diamond
+    - alert
+    - critical
+    - high-priority
+    - error
   sizes:
     - 32
 - name: warning--filled
@@ -27677,6 +29132,17 @@
     - secure
     - scalable
     - operating system
+  sizes:
+    - 32
+- name: zos--partition
+  friendly_name: z/OS® partition
+  aliases:
+    - z/OS
+    - systems
+    - partition
+    - virtual machine
+    - LPAR
+    - z/OS LPAR
   sizes:
     - 32
 - name: zos--sysplex

@@ -10,7 +10,9 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/components/file-uploader/file-uploader' as *;
-@use '@carbon/styles/scss/layout' as *;
+@use '@carbon/styles/scss/utilities/layout' as *;
+
+@include emit-layout-context-classes();
 
 // https://github.com/carbon-design-system/carbon/issues/11408
 @include file-uploader;
@@ -43,6 +45,10 @@
   .#{$prefix}--form-requirement__supplement {
     margin: 0;
   }
+}
+
+:host(#{$prefix}-file-uploader-item[disabled]) {
+  @extend .#{$prefix}--file__selected-file--disabled;
 }
 
 :host(#{$prefix}-file-uploader-item[size='md']) {

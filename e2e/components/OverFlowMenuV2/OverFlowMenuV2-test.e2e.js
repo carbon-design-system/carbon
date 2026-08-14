@@ -7,22 +7,9 @@
 
 'use strict';
 const { expect, test } = require('@playwright/test');
-const { themes } = require('../../test-utils/env');
-const { snapshotStory, visitStory } = require('../../test-utils/storybook');
+const { visitStory } = require('../../test-utils/storybook');
 
 test.describe('OverFlowMenuV2', () => {
-  themes.forEach((theme) => {
-    test.describe(theme, () => {
-      test('Over Flow Menu V2 @vrt', async ({ page }) => {
-        await snapshotStory(page, {
-          component: 'OverFlowMenuV2',
-          id: 'preview-preview-overflowmenuv2--overflow-menu-v-2',
-          theme,
-        });
-      });
-    });
-  });
-
   test('accessibility-checker @avt', async ({ page }) => {
     await visitStory(page, {
       component: 'OverFlowMenuV2',

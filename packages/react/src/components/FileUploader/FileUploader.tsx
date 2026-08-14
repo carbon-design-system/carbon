@@ -27,6 +27,7 @@ interface FileItem {
   name: string;
   uuid: string;
   file: File & { invalidFileType?: boolean };
+  disabled?: boolean;
 }
 
 export interface FileChangeData {
@@ -163,6 +164,11 @@ export interface FileUploaderHandle {
    * Get current files (only available when 'enable-enhanced-file-uploader' feature flag is enabled)
    */
   getCurrentFiles?: () => FileItem[];
+
+  /**
+   * Set current files (only available when 'enable-enhanced-file-uploader' feature flag is enabled)
+   */
+  setCurrentFiles?: (files: FileItem[]) => void;
 }
 
 const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
@@ -417,6 +423,9 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
           getCurrentFiles() {
             return [...fileItems];
           },
+          setCurrentFiles: (files) => {
+            setFileItems(files);
+          },
         }),
       }),
       [enhancedFileUploaderEnabled, fileItems, onChange]
@@ -431,14 +440,19 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
         [`${prefix}--label-description--disabled`]: disabled,
       });
 
-    const selectedFileClasses = classNames(`${prefix}--file__selected-file`, {
-      [`${prefix}--file__selected-file--md`]: size === 'field' || size === 'md',
-      [`${prefix}--file__selected-file--sm`]: size === 'small' || size === 'sm',
-    });
+    const getSelectedFileClasses = (file) =>
+      classNames(`${prefix}--file__selected-file`, {
+        [`${prefix}--file__selected-file--md`]:
+          size === 'field' || size === 'md',
+        [`${prefix}--file__selected-file--sm`]:
+          size === 'small' || size === 'sm',
+        [`${prefix}--file__selected-file--disabled`]: file.disabled,
+      });
 
     const displayFiles = enhancedFileUploaderEnabled
       ? fileItems.map((item, index) => ({
           name: item.name,
+          disabled: item.disabled,
           key: item.uuid,
           index,
         }))
@@ -478,7 +492,7 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
             : displayFiles.map((file) => (
                 <span
                   key={file.key}
-                  className={selectedFileClasses}
+                  className={getSelectedFileClasses(file)}
                   ref={(node) => {
                     nodes[file.index] = node as HTMLSpanElement;
                   }}
@@ -496,6 +510,7 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
                   <span className={`${prefix}--file__state-container`}>
                     <Filename
                       name={file.name}
+                      disabled={file.disabled}
                       iconDescription={iconDescription}
                       status={filenameStatus}
                       onKeyDown={(evt) => {

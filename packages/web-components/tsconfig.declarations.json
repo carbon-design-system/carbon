@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.json",
+  "include": ["src/**/*.ts"],
+  "exclude": [
+    "src/**/*.stories.ts",
+    "src/globals/internal/storybook-cdn.ts",
+    "src/polyfills/**",
+    "tests/**",
+    ".storybook/**"
+  ]
+}

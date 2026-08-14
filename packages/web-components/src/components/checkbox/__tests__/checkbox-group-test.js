@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025, 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -27,6 +27,23 @@ describe('cds-checkbox-group', function () {
     expect(helperText.textContent.trim()).to.equal('Helper text');
   });
 
+  it('should display helper-text when invalid is true but disabled', async () => {
+    const group = html` <cds-checkbox-group
+      invalid
+      disabled
+      helper-text="Helper text"
+      legend-text="Checkbox heading">
+      <cds-checkbox default-checked>Checkbox label</cds-checkbox>
+      <cds-checkbox>Checkbox label</cds-checkbox>
+    </cds-checkbox-group>`;
+    const el = await fixture(group);
+
+    const helperText = el.shadowRoot.querySelector('.cds--form__helper-text');
+
+    expect(helperText).to.exist;
+    expect(helperText.textContent.trim()).to.equal('Helper text');
+  });
+
   it('should set data-invalid when invalid attribute is true', async () => {
     const group = html` <cds-checkbox-group
       invalid
@@ -38,6 +55,34 @@ describe('cds-checkbox-group', function () {
 
     const fieldsetElement = el.shadowRoot.querySelector('fieldset');
     expect(fieldsetElement.hasAttribute('data-invalid')).to.be.true;
+  });
+
+  it('should not set data-invalid when invalid attribute is true but readOnly', async () => {
+    const group = html` <cds-checkbox-group
+      invalid
+      readOnly
+      legend-text="Checkbox heading">
+      <cds-checkbox default-checked>Checkbox label</cds-checkbox>
+      <cds-checkbox>Checkbox label</cds-checkbox>
+    </cds-checkbox-group>`;
+    const el = await fixture(group);
+
+    const fieldsetElement = el.shadowRoot.querySelector('fieldset');
+    expect(fieldsetElement.hasAttribute('data-invalid')).to.be.false;
+  });
+
+  it('should not set data-invalid when invalid attribute is true but disabled', async () => {
+    const group = html` <cds-checkbox-group
+      invalid
+      disabled
+      legend-text="Checkbox heading">
+      <cds-checkbox default-checked>Checkbox label</cds-checkbox>
+      <cds-checkbox>Checkbox label</cds-checkbox>
+    </cds-checkbox-group>`;
+    const el = await fixture(group);
+
+    const fieldsetElement = el.shadowRoot.querySelector('fieldset');
+    expect(fieldsetElement.hasAttribute('data-invalid')).to.be.false;
   });
 
   it('should display invalid-text if invalid attribute is true', async () => {
@@ -54,6 +99,58 @@ describe('cds-checkbox-group', function () {
 
     expect(invalidText).to.exist;
     expect(invalidText.textContent.trim()).to.equal('Invalid text');
+  });
+
+  it('should clear child invalid-group state when group is disabled', async () => {
+    const group = html` <cds-checkbox-group
+      invalid
+      legend-text="Checkbox heading">
+      <cds-checkbox default-checked>Checkbox label</cds-checkbox>
+      <cds-checkbox>Checkbox label</cds-checkbox>
+    </cds-checkbox-group>`;
+    const el = await fixture(group);
+
+    await el.updateComplete;
+
+    const [firstCheckbox] = el.querySelectorAll('cds-checkbox');
+    expect(firstCheckbox.hasAttribute('invalid-group')).to.be.true;
+
+    el.disabled = true;
+    await el.updateComplete;
+
+    expect(firstCheckbox.hasAttribute('invalid-group')).to.be.false;
+  });
+
+  it('should not display invalid-text if invalid attribute is true but readOnly', async () => {
+    const group = html` <cds-checkbox-group
+      invalid
+      readOnly
+      invalid-text="Invalid text"
+      legend-text="Checkbox heading">
+      <cds-checkbox default-checked>Checkbox label</cds-checkbox>
+      <cds-checkbox>Checkbox label</cds-checkbox>
+    </cds-checkbox-group>`;
+    const el = await fixture(group);
+
+    const invalidText = el.shadowRoot.querySelector('.cds--form-requirement');
+
+    expect(invalidText).not.to.exist;
+  });
+
+  it('should not display invalid-text if invalid attribute is true but disabled', async () => {
+    const group = html` <cds-checkbox-group
+      invalid
+      disabled
+      invalid-text="Invalid text"
+      legend-text="Checkbox heading">
+      <cds-checkbox default-checked>Checkbox label</cds-checkbox>
+      <cds-checkbox>Checkbox label</cds-checkbox>
+    </cds-checkbox-group>`;
+    const el = await fixture(group);
+
+    const invalidText = el.shadowRoot.querySelector('.cds--form-requirement');
+
+    expect(invalidText).not.to.exist;
   });
 
   it('should render legend-text', async () => {
@@ -107,6 +204,38 @@ describe('cds-checkbox-group', function () {
 
     expect(warnText).to.exist;
     expect(warnText.textContent.trim()).to.equal('Warn text');
+  });
+
+  it('should not display warn-text if warn attribute is true but readOnly', async () => {
+    const group = html` <cds-checkbox-group
+      legend-text="Checkbox heading"
+      readOnly
+      warn
+      warn-text="Warn text">
+      <cds-checkbox default-checked>Checkbox label</cds-checkbox>
+      <cds-checkbox>Checkbox label</cds-checkbox>
+    </cds-checkbox-group>`;
+    const el = await fixture(group);
+
+    const warnText = el.shadowRoot.querySelector('.cds--form-requirement');
+
+    expect(warnText).not.to.exist;
+  });
+
+  it('should not display warn-text if warn attribute is true but disabled', async () => {
+    const group = html` <cds-checkbox-group
+      legend-text="Checkbox heading"
+      disabled
+      warn
+      warn-text="Warn text">
+      <cds-checkbox default-checked>Checkbox label</cds-checkbox>
+      <cds-checkbox>Checkbox label</cds-checkbox>
+    </cds-checkbox-group>`;
+    const el = await fixture(group);
+
+    const warnText = el.shadowRoot.querySelector('.cds--form-requirement');
+
+    expect(warnText).not.to.exist;
   });
 
   it('should respect deprecated slug prop', async () => {

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023, 2025
+ * Copyright IBM Corp. 2023, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,19 +7,26 @@
 
 import { createContext, KeyboardEvent, RefObject } from 'react';
 
-type ActionType = {
-  type: 'enableIcons' | 'enableSelectableItems' | 'registerItem';
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  payload: any;
+type RegisterItemPayload = {
+  ref: RefObject<HTMLLIElement | null>;
+  disabled: boolean;
 };
+
+type ActionType =
+  | {
+      type: 'enableIcons' | 'enableSelectableItems';
+    }
+  | {
+      type: 'registerItem';
+      payload: RegisterItemPayload;
+    };
 
 type StateType = {
   isRoot: boolean;
   hasIcons: boolean;
   hasSelectableItems: boolean;
   size: 'xs' | 'sm' | 'md' | 'lg' | null;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  items: any[];
+  items: RegisterItemPayload[];
   requestCloseRoot: (e: Pick<KeyboardEvent<HTMLUListElement>, 'type'>) => void;
 };
 
@@ -55,24 +62,15 @@ function menuReducer(state: StateType, action: ActionType) {
   }
 }
 
-type DispatchFuncProps = {
-  type: ActionType['type'];
-  payload: {
-    ref: RefObject<HTMLLIElement | null>;
-    disabled: boolean;
-  };
-};
-
 type MenuContextProps = {
   state: StateType;
-  dispatch: (props: DispatchFuncProps) => void;
+  dispatch: (props: ActionType) => void;
 };
 
 const MenuContext = createContext<MenuContextProps>({
   state: menuDefaultState,
   // 'dispatch' is populated by the root menu
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-  dispatch: (_: DispatchFuncProps) => {},
+  dispatch: () => {},
 });
 
 export { MenuContext, menuReducer };

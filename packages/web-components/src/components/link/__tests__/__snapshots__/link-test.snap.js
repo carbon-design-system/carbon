@@ -19,13 +19,13 @@ snapshots['cds-link should render an <a> element'] = `<a
 >
   <slot>
   </slot>
-  <div
+  <span
     class="cds--link__icon"
     hidden=""
   >
     <slot name="icon">
     </slot>
-  </div>
+  </span>
 </a>
 `;
 /* end snapshot cds-link should render an <a> element */
@@ -46,15 +46,13 @@ snapshots['cds-link should support being disabled'] = `<p
 >
   <slot>
   </slot>
-</p>
-<div
-  class="cds--link__icon"
-  hidden=""
->
-  <slot name="icon">
-  </slot>
-</div>
-<p>
+  <span
+    class="cds--link__icon"
+    hidden=""
+  >
+    <slot name="icon">
+    </slot>
+  </span>
 </p>
 `;
 /* end snapshot cds-link should support being disabled */
@@ -68,13 +66,13 @@ snapshots['cds-link should support the inline link variant'] = `<a
 >
   <slot>
   </slot>
-  <div
+  <span
     class="cds--link__icon"
     hidden=""
   >
     <slot name="icon">
     </slot>
-  </div>
+  </span>
 </a>
 `;
 /* end snapshot cds-link should support the inline link variant */
@@ -88,13 +86,13 @@ snapshots['cds-link should support the sm size variant'] = `<a
 >
   <slot>
   </slot>
-  <div
+  <span
     class="cds--link__icon"
     hidden=""
   >
     <slot name="icon">
     </slot>
-  </div>
+  </span>
 </a>
 `;
 /* end snapshot cds-link should support the sm size variant */
@@ -108,13 +106,13 @@ snapshots['cds-link should support the md size variant'] = `<a
 >
   <slot>
   </slot>
-  <div
+  <span
     class="cds--link__icon"
     hidden=""
   >
     <slot name="icon">
     </slot>
-  </div>
+  </span>
 </a>
 `;
 /* end snapshot cds-link should support the md size variant */
@@ -128,13 +126,13 @@ snapshots['cds-link should support the lg size variant'] = `<a
 >
   <slot>
   </slot>
-  <div
+  <span
     class="cds--link__icon"
     hidden=""
   >
     <slot name="icon">
     </slot>
-  </div>
+  </span>
 </a>
 `;
 /* end snapshot cds-link should support the lg size variant */

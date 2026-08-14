@@ -37,17 +37,20 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 />
 
 ## Interactive
+
 <Canvas
   of={ProgressIndicatorStories.Interactive}
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(ProgressIndicatorStories.Interactive),
+      onClick: () =>
+        stackblitzPrefillConfig(ProgressIndicatorStories.Interactive),
     },
   ]}
 />
 
 ## Skeleton
+
 <Canvas
   of={ProgressIndicatorStories.Skeleton}
   additionalActions={[

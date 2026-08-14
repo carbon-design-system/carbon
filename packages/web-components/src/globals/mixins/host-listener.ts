@@ -18,7 +18,23 @@ const EVENT_NAME_FORMAT =
  * @param Base The base class.
  * @returns A mix-in that sets up and cleans up event listeners defined by `@HostListener` decorator.
  */
-const HostListenerMixin = <T extends Constructor<HTMLElement>>(Base: T) => {
+const HostListenerMixin = <T extends Constructor<HTMLElement>>(
+  Base: T
+): {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  new (...args: any[]): {
+    _handles: Set<Handle>;
+    connectedCallback(): void;
+    disconnectedCallback(): void;
+  };
+  _hostListeners: {
+    [listenerName: string]: {
+      [type: string]: {
+        options?: boolean | AddEventListenerOptions;
+      };
+    };
+  };
+} & T => {
   /**
    * A mix-in class that sets up and cleans up event listeners defined by `@HostListener` decorator.
    */
@@ -90,7 +106,8 @@ const HostListenerMixin = <T extends Constructor<HTMLElement>>(Base: T) => {
     } = {}; // Not using TypeScript `private` due to: microsoft/TypeScript#17744
   }
 
-  return HostListenerMixinImpl;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return HostListenerMixinImpl as any;
 };
 
 export default HostListenerMixin;

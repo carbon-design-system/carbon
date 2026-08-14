@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -39,6 +39,30 @@ import {
   Restart,
   Icon,
 } from '@carbon/icons-react';
+
+const lineTabsSizeArgType = {
+  size: {
+    control: { type: 'select' },
+    options: ['sm', 'md'],
+    description: 'Specify the size of the tabs',
+  },
+};
+
+const tabsSizeArgType = {
+  size: {
+    control: { type: 'select' },
+    options: ['sm', 'md', 'lg'],
+    description: 'Specify the size of the tabs',
+  },
+};
+
+const containedTabsSizeArgs = {
+  size: 'lg',
+};
+
+const lineTabsSizeArgs = {
+  size: 'md',
+};
 
 export default {
   title: 'Components/Tabs',
@@ -87,6 +111,7 @@ export const Default = (args) => {
 Default.args = {
   contained: false,
   dismissable: false,
+  ...lineTabsSizeArgs,
   scrollDebounceWait: 200,
 };
 
@@ -127,9 +152,10 @@ Default.argTypes = {
       type: 'boolean',
     },
   },
+  ...lineTabsSizeArgType,
 };
 
-export const Dismissable = () => {
+export const Dismissable = (args) => {
   const tabs = [
     {
       label: 'Dashboard',
@@ -187,7 +213,7 @@ export const Dismissable = () => {
         onChange={handleTabChange}
         dismissable
         onTabCloseRequest={handleCloseTabRequest}>
-        <TabList>
+        <TabList size={args.size}>
           {renderedTabs.map((tab, index) => (
             <Tab key={index} disabled={tab.disabled}>
               {tab.label}
@@ -199,7 +225,10 @@ export const Dismissable = () => {
     </>
   );
 };
-export const DismissableContained = () => {
+
+Dismissable.argTypes = lineTabsSizeArgType;
+Dismissable.args = lineTabsSizeArgs;
+export const DismissableContained = (args) => {
   const tabs = [
     {
       label: 'Dashboard',
@@ -257,7 +286,7 @@ export const DismissableContained = () => {
         onChange={handleTabChange}
         dismissable
         onTabCloseRequest={handleCloseTabRequest}>
-        <TabList contained>
+        <TabList contained size={args.size}>
           {renderedTabs.map((tab, index) => (
             <Tab key={index} disabled={tab.disabled}>
               {tab.label}
@@ -270,7 +299,10 @@ export const DismissableContained = () => {
   );
 };
 
-export const DismissableWithIcons = ({ contained }) => {
+DismissableContained.argTypes = tabsSizeArgType;
+DismissableContained.args = containedTabsSizeArgs;
+
+export const DismissableWithIcons = ({ contained, size }) => {
   const tabs = [
     {
       label: 'Dashboard',
@@ -330,7 +362,7 @@ export const DismissableWithIcons = ({ contained }) => {
         onChange={handleTabChange}
         dismissable
         onTabCloseRequest={handleCloseTabRequest}>
-        <TabList contained={contained}>
+        <TabList contained={contained} size={size}>
           {renderedTabs.map((tab, index) => (
             <Tab key={index} disabled={tab.disabled} renderIcon={icons[index]}>
               {tab.label}
@@ -343,10 +375,13 @@ export const DismissableWithIcons = ({ contained }) => {
   );
 };
 
-export const WithIcons = () => {
+DismissableWithIcons.argTypes = lineTabsSizeArgType;
+DismissableWithIcons.args = lineTabsSizeArgs;
+
+export const WithIcons = (args) => {
   return (
     <Tabs>
-      <TabList activation="manual">
+      <TabList activation="manual" size={args.size}>
         <Tab renderIcon={Dashboard}>Dashboard</Tab>
         <Tab renderIcon={CloudMonitoring}>Monitoring</Tab>
         <Tab renderIcon={Activity}>Activity</Tab>
@@ -381,6 +416,9 @@ export const WithIcons = () => {
     </Tabs>
   );
 };
+
+WithIcons.argTypes = lineTabsSizeArgType;
+WithIcons.args = lineTabsSizeArgs;
 
 export const Manual = () => {
   return (
@@ -458,7 +496,7 @@ Icon20Only.argTypes = {
 export const IconOnly = (args) => {
   return (
     <Tabs>
-      <TabList iconSize="default">
+      <TabList iconSize="default" size={args.size}>
         <IconTab label="Analyze" disabled>
           <IbmWatsonDiscovery aria-label="Analyze" />
         </IconTab>
@@ -483,6 +521,7 @@ export const IconOnly = (args) => {
 };
 
 IconOnly.argTypes = {
+  ...lineTabsSizeArgType,
   badgeIndicator: {
     description: '**Experimental**: Display an empty dot badge on the Tab.',
     control: {
@@ -490,11 +529,12 @@ IconOnly.argTypes = {
     },
   },
 };
+IconOnly.args = lineTabsSizeArgs;
 
-export const Contained = () => {
+export const Contained = (args) => {
   return (
     <Tabs>
-      <TabList contained>
+      <TabList contained size={args.size}>
         <Tab>Dashboard</Tab>
         <Tab>Monitoring</Tab>
         <Tab>Activity</Tab>
@@ -529,10 +569,13 @@ export const Contained = () => {
   );
 };
 
-export const ContainedWithIcons = () => {
+Contained.argTypes = tabsSizeArgType;
+Contained.args = containedTabsSizeArgs;
+
+export const ContainedWithIcons = (args) => {
   return (
     <Tabs>
-      <TabList contained>
+      <TabList contained size={args.size}>
         <Tab renderIcon={Dashboard}>Dashboard</Tab>
         <Tab renderIcon={CloudMonitoring}>Monitoring</Tab>
         <Tab renderIcon={Activity}>Activity</Tab>
@@ -568,6 +611,9 @@ export const ContainedWithIcons = () => {
     </Tabs>
   );
 };
+
+ContainedWithIcons.argTypes = tabsSizeArgType;
+ContainedWithIcons.args = containedTabsSizeArgs;
 
 export const ContainedWithSecondaryLabels = () => {
   return (
@@ -613,7 +659,7 @@ export const ContainedWithSecondaryLabelsAndIcons = () => {
   return (
     <Tabs>
       <TabList contained>
-        <Tab renderIcon={Task} secondaryLabel="(21/25">
+        <Tab renderIcon={Task} secondaryLabel="(21/25)">
           Engage
         </Tab>
         <Tab renderIcon={IbmWatsonDiscovery} secondaryLabel="(12/16)">
@@ -657,12 +703,12 @@ export const ContainedWithSecondaryLabelsAndIcons = () => {
   );
 };
 
-export const ContainedFullWidth = () => {
+export const ContainedFullWidth = (args) => {
   return (
     <Grid condensed>
       <Column lg={16} md={8} sm={4}>
         <Tabs>
-          <TabList contained fullWidth>
+          <TabList contained fullWidth size={args.size}>
             <Tab>TLS</Tab>
             <Tab>Origin</Tab>
             <Tab disabled>Rate limiting</Tab>
@@ -706,9 +752,10 @@ export const ContainedFullWidth = () => {
 };
 
 export const Vertical = (args) => {
+  const { size, ...tabsVerticalArgs } = args;
   return (
-    <TabsVertical {...args}>
-      <TabListVertical>
+    <TabsVertical {...tabsVerticalArgs}>
+      <TabListVertical size={size}>
         <Tab>Dashboard</Tab>
         <Tab>
           Extra long label that will go two lines then truncate when it goes
@@ -768,6 +815,7 @@ export const Vertical = (args) => {
 
 Vertical.args = {
   height: '',
+  size: 'xl',
 };
 
 Vertical.argTypes = {
@@ -775,6 +823,11 @@ Vertical.argTypes = {
     control: {
       type: 'text',
     },
+  },
+  size: {
+    control: { type: 'select' },
+    options: ['sm', 'md', 'lg', 'xl'],
+    description: 'Specify the size of the vertical tabs',
   },
 };
 
@@ -875,3 +928,6 @@ IconOnlyVisualSnapshots.play = async ({ userEvent }) => {
 };
 
 IconOnlyVisualSnapshots.tags = ['!dev', '!autodocs'];
+
+ContainedFullWidth.argTypes = tabsSizeArgType;
+ContainedFullWidth.args = containedTabsSizeArgs;

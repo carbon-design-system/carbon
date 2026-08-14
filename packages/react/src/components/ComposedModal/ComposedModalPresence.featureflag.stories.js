@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -96,41 +96,21 @@ export const EnablePresence = (args) => {
   );
 };
 EnablePresence.storyName = 'enable-presence';
+EnablePresence.parameters = {
+  controls: {
+    exclude: [
+      'containerClassName',
+      'launcherButtonRef',
+      'selectorPrimaryFocus',
+      'selectorsFloatingMenus',
+    ],
+  },
+};
 EnablePresence.argTypes = {
-  children: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
-  containerClassName: {
-    table: {
-      disable: true,
-    },
-  },
-  launcherButtonRef: {
-    table: {
-      disable: true,
-    },
-  },
   onClose: {
     action: 'onClose',
   },
   onKeyDown: {
     action: 'onKeyDown',
-  },
-  selectorPrimaryFocus: {
-    table: {
-      disable: true,
-    },
-  },
-  selectorsFloatingMenus: {
-    table: {
-      disable: true,
-    },
   },
 };

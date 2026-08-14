@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,105 +8,70 @@
 import React from 'react';
 import { PasswordInput } from '../PasswordInput';
 
-export default {
-  title: 'Components/PasswordInput',
-  component: PasswordInput,
-  argTypes: {
-    light: {
-      table: {
-        disable: true,
-      },
-    },
-  },
-};
-
-export const Default = (args) => {
-  return (
-    <div style={{ width: args.defaultWidth }}>
-      <PasswordInput
-        {...args}
-        id="text-input-1"
-        labelText="Text input label"
-        helperText="Optional help text"
-        autoComplete="true"
-      />
-    </div>
-  );
-};
-
-Default.args = {
+const args = {
+  autoComplete: 'current-password',
+  className: '',
+  defaultValue: '',
   defaultWidth: 300,
-  className: 'input-test-class',
-  placeholder: 'Placeholder text',
-  invalid: false,
-  invalidText: 'Error message goes here',
   disabled: false,
-  labelText: 'Label text',
-  helperText: 'Helper text',
-  warn: false,
-  warnText:
-    'Warning message that is really long can wrap to more lines but should not be excessively long.',
+  helperText: 'Use at least 8 characters',
+  hideLabel: false,
+  hidePasswordLabel: 'Hide password',
+  id: 'password-input-1',
+  inline: false,
+  invalid: false,
+  invalidText: 'Password must be at least 8 characters',
+  labelText: 'Password',
+  placeholder: 'Enter your password',
+  readOnly: false,
+  showPasswordLabel: 'Show password',
   size: 'md',
+  tooltipAlignment: 'end',
+  tooltipPosition: 'bottom',
+  type: 'password',
+  warn: false,
+  warnText: 'Password strength is low',
 };
 
-Default.argTypes = {
+const argTypes = {
+  autoComplete: {
+    control: { type: 'text' },
+  },
+  className: {
+    control: { type: 'text' },
+  },
+  defaultValue: {
+    control: { type: 'text' },
+  },
   defaultWidth: {
     control: { type: 'range', min: 300, max: 800, step: 50 },
   },
-  className: {
-    control: {
-      type: 'text',
-    },
-  },
-  defaultValue: {
-    control: {
-      type: 'text',
-    },
-  },
-  placeholder: {
-    control: {
-      type: 'text',
-    },
-  },
-  invalid: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  invalidText: {
-    control: {
-      type: 'text',
-    },
-  },
   disabled: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  labelText: {
-    control: {
-      type: 'text',
-    },
+    control: { type: 'boolean' },
   },
   helperText: {
-    control: {
-      type: 'text',
-    },
+    control: { type: 'text' },
   },
-  warn: {
-    control: {
-      type: 'boolean',
-    },
+  hideLabel: {
+    control: { type: 'boolean' },
   },
-  warnText: {
-    control: {
-      type: 'text',
-    },
+  hidePasswordLabel: {
+    control: { type: 'text' },
   },
-  value: {
-    control: {
-      type: 'text',
-    },
+  id: {
+    control: { type: 'text' },
+  },
+  inline: {
+    control: { type: 'boolean' },
+  },
+  invalid: {
+    control: { type: 'boolean' },
+  },
+  invalidText: {
+    control: { type: 'text' },
+  },
+  labelText: {
+    control: { type: 'text' },
   },
   onChange: {
     action: 'onChange',
@@ -114,10 +79,56 @@ Default.argTypes = {
   onClick: {
     action: 'onClick',
   },
+  onTogglePasswordVisibility: {
+    action: 'onTogglePasswordVisibility',
+  },
+  placeholder: {
+    control: { type: 'text' },
+  },
+  readOnly: {
+    control: { type: 'boolean' },
+  },
+  showPasswordLabel: {
+    control: { type: 'text' },
+  },
   size: {
-    options: ['sm', 'md', 'lg', 'xl'],
-    control: {
-      type: 'select',
+    options: ['xs', 'sm', 'md', 'lg'],
+    control: { type: 'select' },
+  },
+  tooltipAlignment: {
+    options: ['start', 'center', 'end'],
+    control: { type: 'radio' },
+  },
+  tooltipPosition: {
+    options: ['top', 'right', 'bottom', 'left'],
+    control: { type: 'radio' },
+  },
+  type: {
+    options: ['password', 'text'],
+    control: { type: 'radio' },
+  },
+  warn: {
+    control: { type: 'boolean' },
+  },
+  warnText: {
+    control: { type: 'text' },
+  },
+};
+
+export default {
+  title: 'Components/PasswordInput',
+  component: PasswordInput,
+  args,
+  argTypes,
+  parameters: {
+    controls: {
+      include: Object.keys(argTypes),
     },
   },
 };
+
+export const Default = ({ defaultWidth, ...passwordInputArgs }) => (
+  <div style={{ width: defaultWidth }}>
+    <PasswordInput {...passwordInputArgs} />
+  </div>
+);

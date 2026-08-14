@@ -1,7 +1,7 @@
-import { ArgTypes, Meta, Canvas } from '@storybook/addon-docs/blocks';
+import { ArgTypes, Meta, Canvas, Unstyled } from '@storybook/addon-docs/blocks';
 import Select from './';
 import SelectItem from '../SelectItem';
-import * as SelectStories from './Select.stories'
+import * as SelectStories from './Select.stories';
 import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
@@ -53,14 +53,20 @@ used option that is on the list.
 To get a default empty selection on your select, make the first child in your
 `Select` component a `SelectItem` with empty `text` and `value` props.
 
-<Select
-  id={`select-1`}
-  labelText="Select an option"
-  helperText="Optional helper text">
-  <SelectItem value="" text="" />
-  <SelectItem value="option-1" text="Option 1" />
-  <SelectItem value="option-2" text="Option 2" />
-</Select>
+<Unstyled
+  style={{
+    padding: '1rem',
+    background: 'var(--cds-background)',
+  }}>
+  <Select
+    id={`select-1`}
+    labelText="Select an option"
+    helperText="Optional helper text">
+    <SelectItem value="" text="" />
+    <SelectItem value="option-1" text="Option 1" />
+    <SelectItem value="option-2" text="Option 2" />
+  </Select>
+</Unstyled>
 
 ```jsx
 <Select
@@ -81,14 +87,20 @@ Carbon's design guidance is to present select options in alphabetical order. If
 you need an option pre-selected that isn't displayed in first place, see
 [Custom option default](#custom-option-default)
 
-<Select
-  id={`select-2`}
-  labelText="Select an option"
-  helperText="Optional helper text">
-  <SelectItem value="option-1" text="Option 1" />
-  <SelectItem value="option-2" text="Option 2" />
-  <SelectItem value="option-3" text="Option 3" />
-</Select>
+<Unstyled
+  style={{
+    padding: '1rem',
+    background: 'var(--cds-background)',
+  }}>
+  <Select
+    id={`select-2`}
+    labelText="Select an option"
+    helperText="Optional helper text">
+    <SelectItem value="option-1" text="Option 1" />
+    <SelectItem value="option-2" text="Option 2" />
+    <SelectItem value="option-3" text="Option 3" />
+  </Select>
+</Unstyled>
 
 ```jsx
 <Select
@@ -107,15 +119,21 @@ To have a custom option from the select's option list be selected by default,
 simply set a `defaultValue` on the `Select` component equal to the value of the
 desired option.
 
-<Select
-  id={`select-3`}
-  labelText="Select an option"
-  helperText="Optional helper text"
-  defaultValue="option-3">
-  <SelectItem value="option-1" text="Option 1" />
-  <SelectItem value="option-2" text="Option 2" />
-  <SelectItem value="option-3" text="Option 3" />
-</Select>
+<Unstyled
+  style={{
+    padding: '1rem',
+    background: 'var(--cds-background)',
+  }}>
+  <Select
+    id={`select-3`}
+    labelText="Select an option"
+    helperText="Optional helper text"
+    defaultValue="option-3">
+    <SelectItem value="option-1" text="Option 1" />
+    <SelectItem value="option-2" text="Option 2" />
+    <SelectItem value="option-3" text="Option 3" />
+  </Select>
+</Unstyled>
 
 ```jsx
 <Select

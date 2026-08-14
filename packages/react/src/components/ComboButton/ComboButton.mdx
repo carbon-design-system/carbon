@@ -1,5 +1,5 @@
 import { ArgTypes, Meta, Canvas } from '@storybook/addon-docs/blocks';
-import * as ComboButtonStories from './ComboButton.stories.js'
+import * as ComboButtonStories from './ComboButton.stories.js';
 import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
@@ -84,23 +84,15 @@ to display the Menu in case the provided `menuAlignment` obscures it.
 We encourage you to play around in the Storybook Default stories to better
 understand the `menuAlignment` prop.
 
-<Canvas
-  of={ComboButtonStories.WithMenuAlignment}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(ComboButtonStories.WithMenuAlignment),
-    },
-  ]}
-/>
-
 ## Experimental Auto Align
+
 <Canvas
   of={ComboButtonStories.ExperimentalAutoAlign}
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(ComboButtonStories.ExperimentalAutoAlign),
+      onClick: () =>
+        stackblitzPrefillConfig(ComboButtonStories.ExperimentalAutoAlign),
     },
   ]}
 />

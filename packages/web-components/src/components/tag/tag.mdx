@@ -45,8 +45,8 @@ Dismissible tags are used to remove tags that can be filtered out by the user.
 
 When to use:
 
-- Use `cds-disimissible-tag` when you want to allow users to easily clear or dismiss
-  specific filters applied to items.
+- Use `cds-disimissible-tag` when you want to allow users to easily clear or
+  dismiss specific filters applied to items.
 
 <Canvas of={TagStories.Dismissible} />
 
@@ -176,33 +176,36 @@ When not to use:
 
 ## With AI Label
 
-`<cds-tag>` with AI label is now stable for Read Only tags. This addition changes the
-visual appearance of the component and introduces an AI explainability feature
-when AI is present in the component.
+`<cds-tag>` with AI label is now stable for Read Only tags. This addition
+changes the visual appearance of the component and introduces an AI
+explainability feature when AI is present in the component.
 
 <Canvas of={TagStories.WithAILabel} />
 
 ## Skeleton
 
-<Canvas
-  of={TagStories.Skeleton}
-/>
+<Canvas of={TagStories.Skeleton} />
 
 ## Component API
 
 ## `cds-tag`
+
 <ArgTypes of="cds-tag" />
 
 ## `cds-dismissible-tag`
+
 <ArgTypes of="cds-dismissible-tag" />
 
 ## `cds-selectable-tag`
+
 <ArgTypes of="cds-selectable-tag" />
 
 ## `cds-operational-tag`
+
 <ArgTypes of="cds-operational-tag" />
 
 ## `cds-tag-skeleton`
+
 <ArgTypes of="cds-tag-skeleton" />
 
 <Markdown>{`${cdnJs({ components: ['tag'] })}`}</Markdown>

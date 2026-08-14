@@ -8,6 +8,11 @@
 export { FORM_ELEMENT_COLOR_SCHEME as NUMBER_INPUT_COLOR_SCHEME } from '../../globals/shared-enums';
 
 /**
+ * Number input step direction
+ */
+export type NUMBER_INPUT_STEP_DIRECTION = 'down' | 'up';
+
+/**
  * Works in conjunction with VALIDATION_STATUS
  */
 export enum NUMBER_INPUT_VALIDATION_STATUS {

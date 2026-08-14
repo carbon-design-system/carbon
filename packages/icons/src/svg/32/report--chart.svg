@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <path id="report--chart" d="M25,30H7c-1.103,0-2-.8975-2-2V7c0-1.103.897-2,2-2h3v-1c0-1.103.897-2,2-2h8c1.1025,0,2,.897,2,2v1h3c1.1025,0,2,.897,2,2v21c0,1.1025-.8975,2-2,2ZM7,7v21h18V7h-3v3h-12v-3h-3ZM12,8h8v-4h-8v4ZM16,26c-3.8599,0-7-3.1406-7-7s3.1401-7,7-7,7,3.1401,7,7-3.1406,7-7,7ZM15,14.1006c-2.2793.4644-4,2.4849-4,4.8994,0,2.7568,2.2432,5,5,5,2.415,0,4.4346-1.7207,4.8994-4h-3.8994c-1.103,0-2-.8975-2-2v-3.8994ZM17,14.1006v3.8994h3.8994c-.3984-1.9561-1.9434-3.501-3.8994-3.8994Z"/>
+  <rect id="Transparent_Rectangle" data-name="Transparent Rectangle" class="cls-1" width="32" height="32"/>
+</svg>

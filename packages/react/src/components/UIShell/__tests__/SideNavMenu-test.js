@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { SideNavMenu, SideNavMenuItem } from '../';
@@ -100,7 +100,28 @@ describe('SideNavMenu', () => {
     expect(ref).toHaveBeenCalledWith(screen.getByRole('button'));
   });
 
-  it('sets isExpanded and prevExpanded when sideNav is not expanded and isRail is true', () => {
+  it('should spread extra props onto the outermost element', () => {
+    const { container } = render(
+      <SideNavMenu
+        title="test-title"
+        data-testid="custom-sidenav-menu"
+        data-analytics="menu-analytics">
+        <SideNavMenuItem>a</SideNavMenuItem>
+        <SideNavMenuItem>b</SideNavMenuItem>
+        <SideNavMenuItem>c</SideNavMenuItem>
+      </SideNavMenu>
+    );
+    expect(container.firstChild).toHaveAttribute(
+      'data-testid',
+      'custom-sidenav-menu'
+    );
+    expect(container.firstChild).toHaveAttribute(
+      'data-analytics',
+      'menu-analytics'
+    );
+  });
+
+  it('should collapse the menu when the rail side nav collapses', () => {
     render(
       <SideNavContext.Provider value={{ isRail: true }}>
         <SideNavMenu
@@ -119,8 +140,8 @@ describe('SideNavMenu', () => {
     );
   });
 
-  it('sets isExpanded and prevExpanded when sideNav is expanded, prevExpanded is true and isRail is true', () => {
-    render(
+  it('should restore expanded menu state when the rail side nav re-expands', () => {
+    const { rerender } = render(
       <SideNavContext.Provider value={{ isRail: true }}>
         <SideNavMenu
           isSideNavExpanded={true}
@@ -132,10 +153,100 @@ describe('SideNavMenu', () => {
         </SideNavMenu>
       </SideNavContext.Provider>
     );
+
+    expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
+
+    rerender(
+      <SideNavContext.Provider value={{ isRail: true }}>
+        <SideNavMenu
+          isSideNavExpanded={false}
+          defaultExpanded={true}
+          title="test-title">
+          <SideNavMenuItem>a</SideNavMenuItem>
+          <SideNavMenuItem>b</SideNavMenuItem>
+          <SideNavMenuItem>c</SideNavMenuItem>
+        </SideNavMenu>
+      </SideNavContext.Provider>
+    );
+
+    expect(screen.getByRole('button')).toHaveAttribute(
+      'aria-expanded',
+      'false'
+    );
+
+    rerender(
+      <SideNavContext.Provider value={{ isRail: true }}>
+        <SideNavMenu
+          isSideNavExpanded={true}
+          defaultExpanded={true}
+          title="test-title">
+          <SideNavMenuItem>a</SideNavMenuItem>
+          <SideNavMenuItem>b</SideNavMenuItem>
+          <SideNavMenuItem>c</SideNavMenuItem>
+        </SideNavMenu>
+      </SideNavContext.Provider>
+    );
+
     expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
   });
 
-  it('closes sideNav on escape key press', async () => {
+  it('should not auto-expand if it was not expanded before the rail collapse', () => {
+    const { rerender } = render(
+      <SideNavContext.Provider value={{ isRail: true }}>
+        <SideNavMenu
+          isSideNavExpanded={true}
+          defaultExpanded={false}
+          title="test-title">
+          <SideNavMenuItem>a</SideNavMenuItem>
+          <SideNavMenuItem>b</SideNavMenuItem>
+          <SideNavMenuItem>c</SideNavMenuItem>
+        </SideNavMenu>
+      </SideNavContext.Provider>
+    );
+
+    expect(screen.getByRole('button')).toHaveAttribute(
+      'aria-expanded',
+      'false'
+    );
+
+    rerender(
+      <SideNavContext.Provider value={{ isRail: true }}>
+        <SideNavMenu
+          isSideNavExpanded={false}
+          defaultExpanded={false}
+          title="test-title">
+          <SideNavMenuItem>a</SideNavMenuItem>
+          <SideNavMenuItem>b</SideNavMenuItem>
+          <SideNavMenuItem>c</SideNavMenuItem>
+        </SideNavMenu>
+      </SideNavContext.Provider>
+    );
+
+    expect(screen.getByRole('button')).toHaveAttribute(
+      'aria-expanded',
+      'false'
+    );
+
+    rerender(
+      <SideNavContext.Provider value={{ isRail: true }}>
+        <SideNavMenu
+          isSideNavExpanded={true}
+          defaultExpanded={false}
+          title="test-title">
+          <SideNavMenuItem>a</SideNavMenuItem>
+          <SideNavMenuItem>b</SideNavMenuItem>
+          <SideNavMenuItem>c</SideNavMenuItem>
+        </SideNavMenu>
+      </SideNavContext.Provider>
+    );
+
+    expect(screen.getByRole('button')).toHaveAttribute(
+      'aria-expanded',
+      'false'
+    );
+  });
+
+  it('should close the side nav on Escape key press', async () => {
     render(
       <SideNavContext.Provider value={{ isRail: true }}>
         <SideNavMenu
@@ -156,6 +267,53 @@ describe('SideNavMenu', () => {
       'aria-expanded',
       'false'
     );
+  });
+
+  it('should call consumer-provided onKeyDown handler', () => {
+    const onKeyDown = jest.fn();
+    const { container } = render(
+      <SideNavMenu
+        title="test-title"
+        defaultExpanded={true}
+        onKeyDown={onKeyDown}>
+        <SideNavMenuItem>a</SideNavMenuItem>
+        <SideNavMenuItem>b</SideNavMenuItem>
+        <SideNavMenuItem>c</SideNavMenuItem>
+      </SideNavMenu>
+    );
+
+    // Trigger keydown on the li element
+    fireEvent.keyDown(container.firstChild, { key: 'Escape' });
+
+    expect(onKeyDown).toHaveBeenCalled();
+    // Verify internal handler still works (menu collapses)
+    expect(screen.getByRole('button')).toHaveAttribute(
+      'aria-expanded',
+      'false'
+    );
+  });
+
+  it('should not collapse the menu when consumer `onKeyDown` prevents default', () => {
+    const onKeyDown = jest.fn((event) => {
+      event.preventDefault();
+    });
+
+    const { container } = render(
+      <SideNavMenu
+        title="test-title"
+        defaultExpanded={true}
+        onKeyDown={onKeyDown}>
+        <SideNavMenuItem>a</SideNavMenuItem>
+        <SideNavMenuItem>b</SideNavMenuItem>
+        <SideNavMenuItem>c</SideNavMenuItem>
+      </SideNavMenu>
+    );
+
+    fireEvent.keyDown(container.firstChild, { key: 'Escape' });
+
+    expect(onKeyDown).toHaveBeenCalled();
+    // Menu should remain expanded because consumer prevented default
+    expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
   });
 });
 

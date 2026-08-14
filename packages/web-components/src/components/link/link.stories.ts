@@ -39,7 +39,7 @@ const controls = {
   },
   visited: {
     control: 'boolean',
-    description: `Specify whether you want the link to receive visited styles after the link has been clicked`,
+    description: `When enabled, applies Carbon's visited-link styles to browser-controlled :visited link state.`,
   },
 };
 

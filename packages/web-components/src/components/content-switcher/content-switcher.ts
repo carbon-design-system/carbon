@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -145,7 +145,7 @@ class CDSContentSwitcher extends LitElement {
    */
   protected _handleUserInitiatedSelectItem(
     item: CDSContentSwitcherItem,
-    interactionType?: 'mouse' | 'keyboard' | undefined
+    interactionType?: 'mouse' | 'keyboard' | 'activation' | undefined
   ) {
     if (
       (item && !item.disabled && item.value !== this.value) ||
@@ -153,38 +153,48 @@ class CDSContentSwitcher extends LitElement {
         interactionType === 'keyboard' &&
         !item.disabled)
     ) {
-      const init = {
-        bubbles: true,
-        composed: true,
-        detail: {
-          item,
-        },
-      };
-      const constructor = this.constructor as typeof CDSContentSwitcher;
-      const beforeSelectEvent = new CustomEvent(constructor.eventBeforeSelect, {
-        ...init,
-        cancelable: true,
-      });
-      if (this.dispatchEvent(beforeSelectEvent)) {
-        this._selectionDidChange(item, interactionType);
-
-        // Add extra event details (index, name, text) to match the React `onChange`
-        const items = this.querySelectorAll(constructor.selectorItem);
-        const index = Array.from(items).indexOf(item);
-        const name = item.getAttribute('name') ?? undefined;
-        const text = item.textContent?.trim() ?? undefined;
-
-        const afterSelectEvent = new CustomEvent(constructor.eventSelect, {
+      if (this.selectionMode !== 'manual' || interactionType !== 'keyboard') {
+        const init = {
           bubbles: true,
           composed: true,
           detail: {
             item,
-            index,
-            name,
-            text,
           },
-        });
-        this.dispatchEvent(afterSelectEvent);
+        };
+        const constructor = this.constructor as typeof CDSContentSwitcher;
+        const beforeSelectEvent = new CustomEvent(
+          constructor.eventBeforeSelect,
+          {
+            ...init,
+            cancelable: true,
+          }
+        );
+        if (this.dispatchEvent(beforeSelectEvent)) {
+          this._selectionDidChange(item, interactionType);
+
+          // Add extra event details (index, name, text) to match the React `onChange`
+          const items = this.querySelectorAll(constructor.selectorItem);
+          const index = Array.from(items).indexOf(item);
+          const name = item.getAttribute('name') ?? undefined;
+          const text =
+            item.textContent?.trim() ||
+            item.getAttribute('aria-label')?.trim() ||
+            undefined;
+
+          const afterSelectEvent = new CustomEvent(constructor.eventSelect, {
+            bubbles: true,
+            composed: true,
+            detail: {
+              item,
+              index,
+              name,
+              text,
+            },
+          });
+          this.dispatchEvent(afterSelectEvent);
+        }
+      } else {
+        this._selectionDidChange(item, interactionType);
       }
     }
   }
@@ -218,7 +228,7 @@ class CDSContentSwitcher extends LitElement {
 
   protected _selectionDidChange(
     itemToSelect: CDSContentSwitcherItem,
-    interactionType?: 'mouse' | 'keyboard' | undefined
+    interactionType?: 'mouse' | 'keyboard' | 'activation' | undefined
   ) {
     if (this.selectionMode === 'manual' && interactionType === 'keyboard') {
       // In manual mode, only focus the item without changing the selection
@@ -311,7 +321,7 @@ class CDSContentSwitcher extends LitElement {
       const itemToSelect = items[this.selectedIndex] as CDSContentSwitcherItem;
       this._selectionDidChange(
         itemToSelect,
-        this.selectionMode === 'manual' ? 'keyboard' : 'mouse'
+        this.selectionMode === 'manual' ? 'activation' : 'mouse'
       );
     }
   }

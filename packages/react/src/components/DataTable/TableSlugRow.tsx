@@ -1,12 +1,17 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import PropTypes from 'prop-types';
-import React, { ReactNode, useEffect } from 'react';
+import React, {
+  cloneElement,
+  isValidElement,
+  useEffect,
+  type ReactNode,
+} from 'react';
 import classNames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import { deprecateComponent } from '../../prop-types/deprecateComponent';
@@ -39,13 +44,11 @@ const TableSlugRow = ({ className, slug }: TableSlugRowProps) => {
   });
 
   // Slug is always size `mini`
-  let normalizedSlug;
-  if (slug) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-    normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
-      size: 'mini',
-    });
-  }
+  const normalizedSlug = isValidElement<{ size?: string }>(slug)
+    ? cloneElement(slug, {
+        size: 'mini',
+      })
+    : undefined;
 
   return <td className={TableSlugRowClasses}>{normalizedSlug}</td>;
 };

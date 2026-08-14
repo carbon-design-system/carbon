@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -14,9 +14,6 @@ import RadioButtonGroup from '../RadioButtonGroup';
 import { default as Checkbox } from '../Checkbox';
 import mdx from './Popover.mdx';
 import { Settings } from '@carbon/icons-react';
-import { keys, match } from '../../internal/keyboard';
-import OverflowMenu from '../OverflowMenu/OverflowMenu';
-import OverflowMenuItem from '../OverflowMenuItem';
 
 const prefix = 'cds';
 
@@ -80,11 +77,6 @@ export const TabTip = (args) => {
       <Popover
         align={align}
         open={open}
-        onKeyDown={(evt) => {
-          if (match(evt, keys.Escape)) {
-            setOpen(false);
-          }
-        }}
         isTabTip
         onRequestClose={() => setOpen(false)}
         {...args}>
@@ -161,26 +153,9 @@ export const TabTip = (args) => {
   );
 };
 
-TabTip.argTypes = {
-  align: {
-    table: {
-      disable: true,
-    },
-  },
-  autoAlign: {
-    table: {
-      disable: true,
-    },
-  },
-  highContrast: {
-    table: {
-      disable: true,
-    },
-  },
-  caret: {
-    table: {
-      disable: true,
-    },
+TabTip.parameters = {
+  controls: {
+    exclude: ['align', 'autoAlign', 'caret', 'highContrast'],
   },
 };
 
@@ -192,13 +167,13 @@ Default.args = {
   highContrast: false,
   open: true,
 };
+Default.parameters = {
+  controls: {
+    exclude: ['isTabTip'],
+  },
+};
 
 Default.argTypes = {
-  isTabTip: {
-    table: {
-      disable: true,
-    },
-  },
   align: {
     options: [
       'top',
@@ -255,21 +230,6 @@ Default.story = {
 };
 
 const autoAlignArgTypes = {
-  autoAlign: {
-    table: {
-      disable: true,
-    },
-  },
-  highContrast: {
-    table: {
-      disable: true,
-    },
-  },
-  isTabTip: {
-    table: {
-      disable: true,
-    },
-  },
   caret: {
     control: {
       type: 'boolean',
@@ -350,6 +310,11 @@ export const ExperimentalAutoAlign = (args) => {
 };
 
 ExperimentalAutoAlign.argTypes = autoAlignArgTypes;
+ExperimentalAutoAlign.parameters = {
+  controls: {
+    exclude: ['autoAlign', 'highContrast', 'isTabTip'],
+  },
+};
 export const ExperimentalAutoAlignBoundary = (args) => {
   const [open, setOpen] = useState(true);
   const ref = useRef();
@@ -369,7 +334,7 @@ export const ExperimentalAutoAlignBoundary = (args) => {
         height: '500px',
         border: '1px',
         borderStyle: 'dashed',
-        borderColor: 'black',
+        borderColor: 'var(--cds-border-strong, #8d8d8d)',
         margin: '0 auto',
       }}
       ref={setBoundary}>
@@ -424,6 +389,11 @@ export const ExperimentalAutoAlignBoundary = (args) => {
 };
 
 ExperimentalAutoAlignBoundary.argTypes = autoAlignArgTypes;
+ExperimentalAutoAlignBoundary.parameters = {
+  controls: {
+    exclude: ['autoAlign', 'highContrast', 'isTabTip'],
+  },
+};
 
 export const TabTipExperimentalAutoAlign = () => {
   const [open, setOpen] = useState(true);

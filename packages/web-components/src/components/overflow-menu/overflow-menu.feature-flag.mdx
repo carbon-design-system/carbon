@@ -1,0 +1,107 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Components/OverflowMenu/Feature Flag" name="Flag details" />
+
+# OverflowMenu
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/overflow-menu)
+
+{/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Menu Alignment](#menu-alignment)
+- [menuTarget Prop](#menutarget-prop)
+- [Dynamically set floating styles](#dynamically-set-floating-styles)
+- [Enable dynamic setting of floating styles](#enable-dynamic-setting-of-floating-styles)
+- [Feedback](#feedback)
+
+{/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
+
+## Overview
+
+This version of `cds-overflow-menu` can be enabled by using the
+`enable-v12-overflowmenu` feature flag and supports the same `cds-menu`
+composition patterns used by `cds-menu-button` and `cds-combo-button`.
+
+When the flag is enabled, `cds-overflow-menu` expects a direct `cds-menu` child.
+
+```html
+import '@carbon/web-components/es/components/feature-flags/index.js'; import
+'@carbon/web-components/es/components/overflow-menu/index.js';
+
+<feature-flags enable-v12-overflowmenu="true">
+  <cds-overflow-menu label="Primary action">
+    <cds-menu>
+      <cds-menu-item label="Stop app"></cds-menu-item>
+      <cds-menu-item label="Restart app"></cds-menu-item>
+      <cds-menu-item label="Rename app"></cds-menu-item>
+      <cds-menu-item label="Edit routes and access"></cds-menu-item>
+      <cds-menu-item-divider></cds-menu-item-divider>
+      <cds-menu-item label="Delete app" kind="danger"></cds-menu-item>
+    </cds-menu>
+  </cds-overflow-menu>
+</feature-flags>
+```
+
+## Menu Alignment
+
+The `menu-alignment` prop enables you to define the preferred placement of the
+Menu in relation to `cds-overflow-menu`.
+
+For instance, setting `menu-alignment="top-start"` on `cds-overflow-menu` will
+prefer rendering the Menu above the trigger.
+
+If it seems your specified `menu-alignment` is not being used exactly, it's
+because we prioritize keeping the Menu visible when positioning is computed.
+
+## menuTarget Prop
+
+React's `menuTarget` prop is not applicable to the Web Components
+implementation.
+
+In Web Components, `cds-menu` remains a direct child of `cds-overflow-menu` and
+positioning is handled by the FloatingUI controller relative to the trigger.
+
+## Dynamically set floating styles
+
+Components with `autoalign` use the
+[`floating-ui`](https://github.com/floating-ui/floating-ui) library to handle
+the dynamic positioning of floating elements relative to their trigger / anchor
+element. This also includes collision detection that repositions the floating
+element as necessary to keep it visible within the viewport.
+
+The `enable-v12-dynamic-floating-styles` flag enables this dynamic floating
+styling without collision detection.
+
+**Note**: The flag has no effect when used with `autoalign` because `autoalign`
+includes both dynamic floating styles and collision detection.
+
+## Enable dynamic setting of floating styles
+
+```html
+import '@carbon/web-components/es/components/feature-flags/index.js'; import
+'@carbon/web-components/es/components/overflow-menu/index.js';
+
+<feature-flags
+  enable-v12-overflowmenu="true"
+  enable-v12-dynamic-floating-styles="true">
+  <cds-overflow-menu label="Options">
+    <cds-menu>
+      <cds-menu-item label="Stop app"></cds-menu-item>
+      <cds-menu-item label="Restart app"></cds-menu-item>
+      <cds-menu-item label="Rename app"></cds-menu-item>
+      <cds-menu-item label="Edit routes and access"></cds-menu-item>
+      <cds-menu-item-divider></cds-menu-item-divider>
+      <cds-menu-item label="Delete app" kind="danger"></cds-menu-item>
+    </cds-menu>
+  </cds-overflow-menu>
+</feature-flags>
+```
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/overflow-menu/overflow-menu.feature-flag.mdx).

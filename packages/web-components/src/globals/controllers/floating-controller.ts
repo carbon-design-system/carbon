@@ -24,13 +24,14 @@ type FloatingControllerOptions = {
   alignment: string;
 
   arrowElement?: HTMLElement | undefined;
-  flipArguments?: object;
+  flipArguments?: Parameters<typeof flip>[0];
   caret?: boolean;
 
   styleElement?: HTMLElement;
   matchWidth?: boolean;
   open: boolean;
   alignmentAxisOffset?: number;
+  mainAxisOffset?: number;
   autoAlignBoundary?: Boundary;
   isTabTip?: boolean;
 };
@@ -64,6 +65,7 @@ export default class FloatingController implements ReactiveController {
   async setPlacement(options: FloatingControllerOptions = this.options) {
     this.options = options;
     const { trigger, target } = options;
+    this.cleanup?.();
     this.cleanup = autoUpdate(trigger, target, this.updatePlacement);
   }
 
@@ -82,8 +84,10 @@ export default class FloatingController implements ReactiveController {
       matchWidth,
       open,
       alignmentAxisOffset,
+      mainAxisOffset,
       autoAlignBoundary,
       isTabTip,
+      flipArguments,
     } = this.options;
 
     const isListBox = target?.role === 'listbox';
@@ -137,8 +141,9 @@ export default class FloatingController implements ReactiveController {
         !isTabTip
           ? {
               alignmentAxis: alignmentAxisOffset,
-              // Use 4px spacing when no caret, otherwise use the caret offset
-              mainAxis: caret ? offsetPx : 4,
+              // Allow callers to override default trigger-to-surface spacing.
+              // Fallback remains 4px for non-caret overlays.
+              mainAxis: mainAxisOffset ?? (caret ? offsetPx : 4),
             }
           : 0
       ),
@@ -182,6 +187,7 @@ export default class FloatingController implements ReactiveController {
         fallbackStrategy: 'initialPlacement',
         fallbackAxisSideDirection: 'start',
         boundary: autoAlignBoundary,
+        ...flipArguments,
       }),
       ...(matchWidth && (shimmedAlign === 'bottom' || shimmedAlign === 'top')
         ? [

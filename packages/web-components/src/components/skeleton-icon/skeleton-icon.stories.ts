@@ -9,15 +9,29 @@ import { html } from 'lit';
 import './skeleton-icon';
 
 export const Default = {
-  parameters: {
-    percy: {
-      skip: true,
+  argTypes: {
+    className: {
+      control: {
+        type: 'text',
+      },
+    },
+    size: {
+      control: {
+        type: 'range',
+        min: 16,
+        max: 64,
+        step: 1,
+      },
     },
   },
-  render: () =>
-    html`<cds-skeleton-icon style="margin: 50px"></cds-skeleton-icon
-      ><cds-skeleton-icon
-        style="margin: 50px; width: 24px; height: 24px;"></cds-skeleton-icon>`,
+  args: {
+    className: '',
+    size: 16,
+  },
+  render: ({ className, size }) =>
+    html`<cds-skeleton-icon
+      class=${className}
+      style="margin: 50px; width: ${size}px; height: ${size}px;"></cds-skeleton-icon>`,
 };
 
 const meta = {

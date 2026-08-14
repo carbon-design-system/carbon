@@ -133,11 +133,6 @@ export const Default = {
 };
 
 export const Skeleton = {
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
   render: () => html`
     <div style="width:300px;">
       <cds-fluid-time-picker-skeleton> </cds-fluid-time-picker-skeleton>

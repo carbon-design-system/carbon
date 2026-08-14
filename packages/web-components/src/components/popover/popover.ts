@@ -150,6 +150,62 @@ class CDSPopover extends HostListenerMixin(LitElement) {
     } else {
       this._tabKeyPressed = false;
     }
+
+    if (event.key === 'Escape') {
+      if (event.defaultPrevented) {
+        return;
+      }
+
+      // Esc should only close the popover if focus is inside the popover content
+      const selectorPopoverContent = (this.constructor as typeof CDSPopover)
+        .selectorPopoverContent;
+
+      const parentPopoverContent = event
+        .composedPath()
+        .find(
+          (node) =>
+            node instanceof Element && node.matches(selectorPopoverContent)
+        );
+
+      if (parentPopoverContent !== this.querySelector(selectorPopoverContent)) {
+        return;
+      }
+
+      if (
+        this.dispatchEvent(
+          new CustomEvent(
+            (this.constructor as typeof CDSPopover).eventBeforeClose,
+            {
+              bubbles: true,
+              cancelable: true,
+              composed: true,
+              detail: {
+                triggeredBy: event.target,
+              },
+            }
+          )
+        )
+      ) {
+        this.open = false;
+        this.dispatchEvent(
+          new CustomEvent(
+            (this.constructor as typeof CDSPopover).eventOnClose,
+            {
+              bubbles: true,
+              composed: true,
+            }
+          )
+        );
+
+        // return focus to the trigger
+        const trigger = this._triggerSlotNode.assignedElements({
+          flatten: true,
+        })[0];
+        if (trigger instanceof HTMLElement) {
+          trigger.focus();
+        }
+      }
+    }
   }
 
   @HostListener('focusout')
@@ -263,6 +319,7 @@ class CDSPopover extends HostListenerMixin(LitElement) {
 
   /**
    * This function resolves the string passed in for `autoAlignBoundary` to either:
+   * The viewport (default)
    * "clippingAncestors"
    * An element (found via #id)
    * An array of elements (found via #id1, #id2, #id3, separated by ",")
@@ -271,8 +328,10 @@ class CDSPopover extends HostListenerMixin(LitElement) {
   private _resolveAutoAlignBoundary(): Boundary {
     const raw = (this.autoAlignBoundary ?? '').trim();
 
-    // Default to 'clippingAncestors'
-    if (!raw) return 'clippingAncestors';
+    if (!raw) {
+      // Default to viewport
+      return this._getViewportRect();
+    }
     if (raw === 'clippingAncestors') return 'clippingAncestors';
 
     // regex match for: rect(x,y,width,height)
@@ -311,6 +370,30 @@ class CDSPopover extends HostListenerMixin(LitElement) {
 
     // default fallback
     return 'clippingAncestors';
+  }
+
+  /**
+   * Gets the viewport rectangle for use as the default autoalign boundary.
+   */
+  private _getViewportRect(): Rect {
+    // Use the Visual Viewport API when available for accurate viewport dimensions
+    if (window.visualViewport) {
+      const viewport = window.visualViewport;
+      return {
+        x: viewport.offsetLeft,
+        y: viewport.offsetTop,
+        width: viewport.width,
+        height: viewport.height,
+      };
+    }
+
+    // Fallback for browsers not suporting Visual Viewport API
+    return {
+      x: 0,
+      y: 0,
+      width: window.innerWidth,
+      height: window.innerHeight,
+    };
   }
 
   updated(changedProperties) {

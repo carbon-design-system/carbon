@@ -68,10 +68,20 @@ const plugins = [
             if (node.name === 'rect') {
               const width = node.attributes?.width;
               const height = node.attributes?.height;
+              const x = node.attributes?.x;
+              const y = node.attributes?.y;
+              const rx = node.attributes?.rx;
+              const ry = node.attributes?.ry;
+              const isZeroOrMissing = (value) =>
+                value === undefined || Number(value) === 0;
               if (
                 sizes.includes(width) &&
                 sizes.includes(height) &&
-                width === height
+                width === height &&
+                isZeroOrMissing(x) &&
+                isZeroOrMissing(y) &&
+                isZeroOrMissing(rx) &&
+                isZeroOrMissing(ry)
               ) {
                 if (parentNode && parentNode.children) {
                   parentNode.children = parentNode.children.filter(

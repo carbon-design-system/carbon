@@ -8,6 +8,8 @@
 import { render } from '@testing-library/react';
 import React, { useRef } from 'react';
 import {
+  getInteractiveContent,
+  getRoleContent,
   useInteractiveChildrenNeedDescription,
   useNoInteractiveChildren,
 } from '../useNoInteractiveChildren';
@@ -82,6 +84,29 @@ describe('useInteractiveChildrenNeedDescription', () => {
     expect(() => {
       render(<TestComponent />);
     }).toThrow();
+  });
+});
+
+describe('getInteractiveContent', () => {
+  it('should return a nested interactive element', () => {
+    const container = document.createElement('div');
+    const wrapper = document.createElement('div');
+    const button = document.createElement('button');
+
+    wrapper.append(button);
+    container.append(wrapper);
+
+    expect(getInteractiveContent(container)).toBe(button);
+  });
+});
+
+describe('getRoleContent', () => {
+  it('should return the current element when it has a role', () => {
+    const element = document.createElement('div');
+
+    element.setAttribute('role', 'status');
+
+    expect(getRoleContent(element)).toBe(element);
   });
 });
 

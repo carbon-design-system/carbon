@@ -55,8 +55,11 @@ const args = {
   invalid: false,
   invalidText:
     'Error message that is really long can wrap to more lines but should not be excessively long',
+  id: 'select-1',
   labelText: 'Select an option',
+  name: 'fluid-select',
   readOnly: false,
+  value: '',
   warn: false,
   warnText:
     'Warning message that is really long can wrap to more lines but should not be excessively long.',
@@ -78,10 +81,18 @@ const argTypes = {
     control: 'text',
     description: 'Message which is displayed if the value is invalid.',
   },
+  id: {
+    control: 'text',
+    description: 'Specify the id for the label and select.',
+  },
   labelText: {
     control: 'text',
     description:
       'Provide label text to be read by screen readers when interacting with the control.',
+  },
+  name: {
+    control: 'text',
+    description: 'Specify the name used when submitting form data.',
   },
   readOnly: {
     control: 'boolean',
@@ -96,6 +107,13 @@ const argTypes = {
     description:
       'Provide the text that is displayed when the control is in warning state.',
   },
+  value: {
+    control: 'text',
+    description: 'Specify the selected value.',
+  },
+  onInput: {
+    action: 'select',
+  },
 };
 
 export const Default = {
@@ -105,6 +123,7 @@ export const Default = {
     const {
       defaultWidth,
       disabled,
+      id,
       invalid,
       invalidText,
       labelText,
@@ -112,10 +131,13 @@ export const Default = {
       readOnly,
       warn,
       warnText,
+      value,
+      onInput,
     } = args ?? {};
     return html`
       <div style="width:${defaultWidth}px;">
         <cds-fluid-select
+          id="${id}"
           ?disabled="${disabled}"
           ?invalid="${invalid}"
           invalid-text="${ifDefined(invalidText)}"
@@ -123,7 +145,9 @@ export const Default = {
           name="${ifDefined(name)}"
           ?readonly="${readOnly}"
           ?warn="${warn}"
-          warn-text="${ifDefined(warnText)}">
+          warn-text="${ifDefined(warnText)}"
+          value="${ifDefined(value)}"
+          @cds-select-selected="${onInput}">
           <cds-select-item value=""></cds-select-item>
           <cds-select-item value="option-1">Option 1</cds-select-item>
           <cds-select-item value="option-2">Option 2</cds-select-item>
@@ -137,10 +161,39 @@ export const Default = {
 };
 
 export const WithToggletip = {
-  render: () => {
+  args,
+  argTypes,
+  parameters: {
+    controls: {
+      exclude: ['labelText'],
+    },
+  },
+  render: ({
+    defaultWidth,
+    disabled,
+    id,
+    invalid,
+    invalidText,
+    name,
+    readOnly,
+    warn,
+    warnText,
+    value,
+    onInput,
+  }) => {
     return html`
-      <div style="width:400px;">
-        <cds-fluid-select>
+      <div style="width:${defaultWidth}px;">
+        <cds-fluid-select
+          id="${id}"
+          ?disabled="${disabled}"
+          ?invalid="${invalid}"
+          invalid-text="${ifDefined(invalidText)}"
+          name="${ifDefined(name)}"
+          ?readonly="${readOnly}"
+          ?warn="${warn}"
+          warn-text="${ifDefined(warnText)}"
+          value="${ifDefined(value)}"
+          @cds-select-selected="${onInput}">
           <cds-toggletip autoAlign="true" slot="label-text">
             Label
             <p slot="body-text">Additional field information here.</p>
@@ -162,15 +215,15 @@ export const WithToggletip = {
 };
 
 export const Skeleton = {
-  parameters: {
-    percy: {
-      skip: true,
-    },
+  args: {
+    defaultWidth: 400,
   },
-  render: () =>
-    html` <div style="width:400px;">
+  argTypes: {
+    defaultWidth: argTypes.defaultWidth,
+  },
+  render: ({ defaultWidth }) =>
+    html` <div style="width:${defaultWidth}px;">
       <cds-fluid-select-skeleton></cds-fluid-select-skeleton>
-      <div style="width:400px;"></div>
     </div>`,
 };
 
@@ -182,6 +235,7 @@ export const WithAILabel = {
   render: (args) => {
     const {
       disabled,
+      id,
       invalid,
       invalidText,
       labelText,
@@ -190,10 +244,13 @@ export const WithAILabel = {
       warn,
       warnText,
       defaultWidth,
+      value,
+      onInput,
     } = args ?? {};
 
     return html` <div style="width:${defaultWidth}px;">
       <cds-fluid-select
+        id="${id}"
         ?disabled="${disabled}"
         ?invalid="${invalid}"
         invalid-text="${ifDefined(invalidText)}"
@@ -201,7 +258,9 @@ export const WithAILabel = {
         name="${ifDefined(name)}"
         ?readonly="${readOnly}"
         ?warn="${warn}"
-        warn-text="${ifDefined(warnText)}">
+        warn-text="${ifDefined(warnText)}"
+        value="${ifDefined(value)}"
+        @cds-select-selected="${onInput}">
         <cds-ai-label alignment="bottom-left">
           ${content}${actions}</cds-ai-label
         >
@@ -219,11 +278,6 @@ export const WithAILabel = {
 };
 
 const meta = {
-  decorators: [
-    (story) => {
-      return html`<div style="width: 400px">${story()}</div>`;
-    },
-  ],
   title: 'Components/Fluid Components/FluidSelect',
 };
 

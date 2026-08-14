@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -34,7 +34,14 @@ export default {
       page: mdx,
     },
     controls: {
-      exclude: ['hasScrollingContent', 'modal', 'open', 'focusAfterCloseRef'],
+      exclude: [
+        'hasScrollingContent',
+        'modal',
+        'open',
+        'focusAfterCloseRef',
+        'ariaDescribedBy',
+        'ariaLabelledBy',
+      ],
     },
   },
 };
@@ -64,11 +71,7 @@ export const Modal = ({ open: _open, ...args }) => {
       <Button type="button" onClick={toggleDialog}>
         Toggle open
       </Button>
-      <Dialog
-        {...args}
-        open={open}
-        onRequestClose={handleRequestClose}
-        aria-labelledby="title">
+      <Dialog {...args} open={open} onRequestClose={handleRequestClose}>
         <DialogHeader>
           <DialogSubtitle>Configure dialog settings</DialogSubtitle>
           <DialogTitle id="title">Modal Dialog Example</DialogTitle>
@@ -182,11 +185,7 @@ export const NonModal = ({ open: _open, ...args }) => {
       <Button type="button" onClick={toggleDialog}>
         Toggle open
       </Button>
-      <Dialog
-        {...args}
-        open={open}
-        onRequestClose={handleRequestClose}
-        aria-label="Dialog Title">
+      <Dialog {...args} open={open} onRequestClose={handleRequestClose}>
         <DialogHeader>
           <DialogSubtitle>Non-modal dialog example Subtitle</DialogSubtitle>
           <DialogTitle>Non-Modal Dialog</DialogTitle>
@@ -259,11 +258,7 @@ export const WithScrollingContent = ({ open: _open, ...args }) => {
       <Button type="button" onClick={toggleDialog}>
         Toggle open
       </Button>
-      <Dialog
-        {...args}
-        open={open}
-        onRequestClose={handleRequestClose}
-        aria-label="Dialog Title">
+      <Dialog {...args} open={open} onRequestClose={handleRequestClose}>
         <DialogHeader>
           <DialogSubtitle>Configure dialog settings</DialogSubtitle>
           <DialogTitle>Modal Dialog Example</DialogTitle>
@@ -373,12 +368,7 @@ export const PassiveDialog = ({ open: _open, ...args }) => {
       <Button type="button" onClick={toggleDialog}>
         Toggle open
       </Button>
-      <Dialog
-        {...args}
-        open={open}
-        modal
-        onRequestClose={handleRequestClose}
-        aria-label="Dialog Title">
+      <Dialog {...args} open={open} modal onRequestClose={handleRequestClose}>
         <DialogHeader>
           <DialogTitle>Information Message</DialogTitle>
           <DialogControls>

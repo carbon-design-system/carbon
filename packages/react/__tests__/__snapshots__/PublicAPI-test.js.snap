@@ -160,7 +160,7 @@ Map {
     "render": [Function],
   },
   "AILabelActions" => {
-    "$$typeof": Symbol(react.forward_ref),
+    "displayName": "AILabelActions",
     "propTypes": {
       "children": {
         "type": "node",
@@ -169,10 +169,9 @@ Map {
         "type": "string",
       },
     },
-    "render": [Function],
   },
   "AILabelContent" => {
-    "$$typeof": Symbol(react.forward_ref),
+    "displayName": "AILabelContent",
     "propTypes": {
       "children": {
         "type": "node",
@@ -181,7 +180,6 @@ Map {
         "type": "string",
       },
     },
-    "render": [Function],
   },
   "AISkeletonIcon" => {
     "propTypes": {
@@ -1519,6 +1517,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -2446,6 +2445,7 @@ Map {
         "size": {
           "args": [
             [
+              "xs",
               "sm",
               "lg",
             ],
@@ -2506,6 +2506,17 @@ Map {
           ],
           "type": "oneOfType",
         },
+        "size": {
+          "args": [
+            [
+              "xs",
+              "sm",
+              "md",
+              "lg",
+            ],
+          ],
+          "type": "oneOf",
+        },
       },
     },
     "TableToolbarSearch": {
@@ -2561,6 +2572,7 @@ Map {
         "size": {
           "args": [
             [
+              "xs",
               "sm",
               "md",
               "lg",
@@ -2745,9 +2757,7 @@ Map {
       "allowInput": {
         "type": "bool",
       },
-      "appendTo": {
-        "type": "object",
-      },
+      "appendTo": [Function],
       "children": {
         "type": "node",
       },
@@ -2770,20 +2780,11 @@ Map {
         ],
         "type": "oneOf",
       },
-      "disable": {
-        "type": "array",
-      },
-      "enable": {
-        "type": "array",
-      },
-      "inline": {
-        "type": "bool",
-      },
+      "disable": [Function],
+      "enable": [Function],
+      "inline": [Function],
       "invalid": {
         "type": "bool",
-      },
-      "invalidText": {
-        "type": "node",
       },
       "light": [Function],
       "locale": {
@@ -2902,9 +2903,7 @@ Map {
       "onOpen": {
         "type": "func",
       },
-      "parseDate": {
-        "type": "func",
-      },
+      "parseDate": [Function],
       "prevMonthAriaLabel": {
         "type": "string",
       },
@@ -2963,9 +2962,6 @@ Map {
       },
       "warn": {
         "type": "bool",
-      },
-      "warnText": {
-        "type": "node",
       },
     },
     "render": [Function],
@@ -3322,6 +3318,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -3366,6 +3363,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -3464,6 +3462,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -3564,6 +3563,9 @@ Map {
         "type": "bool",
       },
       "enableV12Overflowmenu": {
+        "type": "bool",
+      },
+      "enableV12Release": {
         "type": "bool",
       },
       "enableV12TileDefaultIcons": {
@@ -4093,6 +4095,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -4160,6 +4163,9 @@ Map {
         "type": "bool",
       },
       "narrow": {
+        "type": "bool",
+      },
+      "withRowGap": {
         "type": "bool",
       },
     },
@@ -5354,6 +5360,9 @@ Map {
       "onChange": {
         "type": "func",
       },
+      "readOnly": {
+        "type": "bool",
+      },
     },
     "render": [Function],
   },
@@ -5492,6 +5501,9 @@ Map {
         "type": "bool",
       },
       "narrow": {
+        "type": "bool",
+      },
+      "withRowGap": {
         "type": "bool",
       },
     },
@@ -5872,6 +5884,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -6012,6 +6025,46 @@ Map {
         "type": "string",
       },
     },
+  },
+  "InlineCheckbox" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": {
+      "aria-label": {
+        "isRequired": true,
+        "type": "string",
+      },
+      "ariaLabel": [Function],
+      "checked": {
+        "type": "bool",
+      },
+      "disabled": {
+        "type": "bool",
+      },
+      "id": {
+        "isRequired": true,
+        "type": "string",
+      },
+      "indeterminate": {
+        "type": "bool",
+      },
+      "name": {
+        "isRequired": true,
+        "type": "string",
+      },
+      "onChange": {
+        "type": "func",
+      },
+      "onClick": {
+        "type": "func",
+      },
+      "onKeyDown": {
+        "type": "func",
+      },
+      "title": {
+        "type": "string",
+      },
+    },
+    "render": [Function],
   },
   "InlineLoading" => {
     "propTypes": {
@@ -6244,6 +6297,9 @@ Map {
       },
       "label": {
         "type": "string",
+      },
+      "legacyAutoalign": {
+        "type": "bool",
       },
       "menuAlignment": {
         "type": "string",
@@ -6530,6 +6586,9 @@ Map {
       "danger": {
         "type": "bool",
       },
+      "dangerDescription": {
+        "type": "string",
+      },
       "decorator": {
         "type": "node",
       },
@@ -6669,7 +6728,12 @@ Map {
   "ModalBody" => {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": {
-      "aria-label": [Function],
+      "aria-label": {
+        "type": "string",
+      },
+      "aria-labelledby": {
+        "type": "string",
+      },
       "children": {
         "type": "node",
       },
@@ -6699,6 +6763,9 @@ Map {
       },
       "danger": {
         "type": "bool",
+      },
+      "dangerDescription": {
+        "type": "string",
       },
       "inputref": {
         "args": [
@@ -7001,6 +7068,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -7727,6 +7795,17 @@ Map {
       "backwardText": {
         "type": "string",
       },
+      "backwardTextTooltipPosition": {
+        "args": [
+          [
+            "top",
+            "right",
+            "bottom",
+            "left",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "className": {
         "type": "string",
       },
@@ -7735,6 +7814,17 @@ Map {
       },
       "forwardText": {
         "type": "string",
+      },
+      "forwardTextTooltipPosition": {
+        "args": [
+          [
+            "top",
+            "right",
+            "bottom",
+            "left",
+          ],
+        ],
+        "type": "oneOf",
       },
       "id": {
         "args": [
@@ -7829,9 +7919,13 @@ Map {
       "pagesUnknown": {
         "type": "bool",
       },
+      "renderPageSelect": {
+        "type": "func",
+      },
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -7983,6 +8077,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -8637,6 +8732,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -8668,9 +8764,18 @@ Map {
       "className": {
         "type": "string",
       },
-      "small": {
-        "type": "bool",
+      "size": {
+        "args": [
+          [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
       },
+      "small": [Function],
     },
   },
   "SecondaryButton" => {},
@@ -8745,6 +8850,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -9785,6 +9891,16 @@ Map {
       "scrollIntoView": {
         "type": "bool",
       },
+      "size": {
+        "args": [
+          [
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
+      },
     },
   },
   "TabListVertical" => {
@@ -9806,6 +9922,17 @@ Map {
       },
       "className": {
         "type": "string",
+      },
+      "size": {
+        "args": [
+          [
+            "sm",
+            "md",
+            "lg",
+            "xl",
+          ],
+        ],
+        "type": "oneOf",
       },
     },
   },
@@ -10268,6 +10395,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "lg",
           ],
@@ -10328,6 +10456,17 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "size": {
+        "args": [
+          [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
+      },
     },
   },
   "TableToolbarSearch" => {
@@ -10383,6 +10522,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -10726,6 +10866,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -10766,6 +10907,17 @@ Map {
       },
       "hideLabel": {
         "type": "bool",
+      },
+      "size": {
+        "args": [
+          [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
       },
     },
   },
@@ -11687,6 +11839,9 @@ Map {
       "enableV12Overflowmenu": {
         "type": "bool",
       },
+      "enableV12Release": {
+        "type": "bool",
+      },
       "enableV12TileDefaultIcons": {
         "type": "bool",
       },
@@ -11982,6 +12137,68 @@ Map {
       },
     },
   },
+  "preview__Card" => {
+    "Card": {
+      "$$typeof": Symbol(react.forward_ref),
+      "Action": [Function],
+      "Actions": [Function],
+      "Body": {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      },
+      "Footer": {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      },
+      "Header": {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      },
+      "HeaderMedia": [Function],
+      "Media": [Function],
+      "Title": {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      },
+      "TitleMedia": {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      },
+      "render": [Function],
+    },
+    "CardAction": {
+      "displayName": "Card.Action",
+    },
+    "CardActions": {
+      "displayName": "Card.Actions",
+    },
+    "CardBody": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "CardFooter": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "CardHeader": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "CardHeaderMedia": {
+      "displayName": "Card.HeaderMedia",
+    },
+    "CardMedia": {
+      "displayName": "Card.Media",
+    },
+    "CardTitle": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "CardTitleMedia": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+  },
   "preview__ChatButton" => {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": {
@@ -12055,19 +12272,32 @@ Map {
       },
     },
   },
+  "preview__DatePicker" => {
+    "DatePicker": {
+      "displayName": "DatePicker",
+    },
+    "DatePickerInput": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "DatePickerSkeleton": {},
+  },
   "preview__Dialog" => {
     "Dialog": {
       "$$typeof": Symbol(react.forward_ref),
       "propTypes": {
+        "aria-describedby": {
+          "type": "string",
+        },
         "aria-label": {
           "type": "string",
         },
         "aria-labelledby": {
           "type": "string",
         },
-        "ariaDescribedBy": {
-          "type": "string",
-        },
+        "ariaDescribedBy": [Function],
+        "ariaLabel": [Function],
+        "ariaLabelledBy": [Function],
         "children": {
           "type": "node",
         },
@@ -12159,6 +12389,9 @@ Map {
         },
         "danger": {
           "type": "bool",
+        },
+        "dangerDescription": {
+          "type": "string",
         },
         "loadingDescription": {
           "type": "string",
@@ -13341,6 +13574,9 @@ Map {
       "onChange": {
         "type": "func",
       },
+      "readOnly": {
+        "type": "bool",
+      },
     },
     "render": [Function],
   },
@@ -13357,7 +13593,35 @@ Map {
   "preview__IconIndicator" => {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": {
+      "align": {
+        "args": [
+          [
+            "top",
+            "top-start",
+            "top-end",
+            "bottom",
+            "bottom-start",
+            "bottom-end",
+            "left",
+            "left-start",
+            "left-end",
+            "right",
+            "right-start",
+            "right-end",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "autoAlign": {
+        "type": "bool",
+      },
       "className": {
+        "type": "string",
+      },
+      "compact": {
+        "type": "bool",
+      },
+      "iconDescription": {
         "type": "string",
       },
       "kind": {
@@ -13605,8 +13869,33 @@ Map {
   "preview__ShapeIndicator" => {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": {
+      "align": {
+        "args": [
+          [
+            "top",
+            "top-start",
+            "top-end",
+            "bottom",
+            "bottom-start",
+            "bottom-end",
+            "left",
+            "left-start",
+            "left-end",
+            "right",
+            "right-start",
+            "right-end",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "autoAlign": {
+        "type": "bool",
+      },
       "className": {
         "type": "string",
+      },
+      "compact": {
+        "type": "bool",
       },
       "kind": {
         "args": [
@@ -13629,6 +13918,9 @@ Map {
       },
       "label": {
         "isRequired": true,
+        "type": "string",
+      },
+      "shapeDescription": {
         "type": "string",
       },
       "textSize": {
@@ -13801,7 +14093,7 @@ Map {
     "render": [Function],
   },
   "preview__SlugActions" => {
-    "$$typeof": Symbol(react.forward_ref),
+    "displayName": "AILabelActions",
     "propTypes": {
       "children": {
         "type": "node",
@@ -13810,10 +14102,9 @@ Map {
         "type": "string",
       },
     },
-    "render": [Function],
   },
   "preview__SlugContent" => {
-    "$$typeof": Symbol(react.forward_ref),
+    "displayName": "AILabelContent",
     "propTypes": {
       "children": {
         "type": "node",
@@ -13822,7 +14113,6 @@ Map {
         "type": "string",
       },
     },
-    "render": [Function],
   },
   "preview_useFeatureFlag" => {},
   "preview_useFeatureFlags" => {},
@@ -13854,6 +14144,9 @@ Map {
         "type": "bool",
       },
       "enableV12Overflowmenu": {
+        "type": "bool",
+      },
+      "enableV12Release": {
         "type": "bool",
       },
       "enableV12TileDefaultIcons": {
@@ -15323,6 +15616,9 @@ Map {
       "onChange": {
         "type": "func",
       },
+      "readOnly": {
+        "type": "bool",
+      },
     },
     "render": [Function],
   },
@@ -15339,7 +15635,35 @@ Map {
   "unstable__IconIndicator" => {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": {
+      "align": {
+        "args": [
+          [
+            "top",
+            "top-start",
+            "top-end",
+            "bottom",
+            "bottom-start",
+            "bottom-end",
+            "left",
+            "left-start",
+            "left-end",
+            "right",
+            "right-start",
+            "right-end",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "autoAlign": {
+        "type": "bool",
+      },
       "className": {
+        "type": "string",
+      },
+      "compact": {
+        "type": "bool",
+      },
+      "iconDescription": {
         "type": "string",
       },
       "kind": {
@@ -15587,8 +15911,33 @@ Map {
   "unstable__ShapeIndicator" => {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": {
+      "align": {
+        "args": [
+          [
+            "top",
+            "top-start",
+            "top-end",
+            "bottom",
+            "bottom-start",
+            "bottom-end",
+            "left",
+            "left-start",
+            "left-end",
+            "right",
+            "right-start",
+            "right-end",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "autoAlign": {
+        "type": "bool",
+      },
       "className": {
         "type": "string",
+      },
+      "compact": {
+        "type": "bool",
       },
       "kind": {
         "args": [
@@ -15611,6 +15960,9 @@ Map {
       },
       "label": {
         "isRequired": true,
+        "type": "string",
+      },
+      "shapeDescription": {
         "type": "string",
       },
       "textSize": {
@@ -15783,7 +16135,7 @@ Map {
     "render": [Function],
   },
   "unstable__SlugActions" => {
-    "$$typeof": Symbol(react.forward_ref),
+    "displayName": "AILabelActions",
     "propTypes": {
       "children": {
         "type": "node",
@@ -15792,10 +16144,9 @@ Map {
         "type": "string",
       },
     },
-    "render": [Function],
   },
   "unstable__SlugContent" => {
-    "$$typeof": Symbol(react.forward_ref),
+    "displayName": "AILabelContent",
     "propTypes": {
       "children": {
         "type": "node",
@@ -15804,7 +16155,6 @@ Map {
         "type": "string",
       },
     },
-    "render": [Function],
   },
   "unstable_useFeatureFlag" => {},
   "unstable_useFeatureFlags" => {},

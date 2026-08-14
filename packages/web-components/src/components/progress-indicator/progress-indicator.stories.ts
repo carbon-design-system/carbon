@@ -99,9 +99,6 @@ export const Interactive = {
 };
 
 export const Skeleton = {
-  parameters: {
-    percy: { skip: true },
-  },
   render: () => html`
     <cds-progress-indicator-skeleton>
       <cds-progress-step-skeleton></cds-progress-step-skeleton>

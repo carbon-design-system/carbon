@@ -31,13 +31,21 @@ import DataTable, {
 
 import { Toggletip, ToggletipButton, ToggletipContent } from '../../Toggletip';
 
-import { batchActionClick, rows, headers } from './shared';
+import {
+  batchActionClick,
+  dataTableArgs,
+  dataTableArgTypes,
+  rows,
+  headers,
+} from './shared';
 import mdx from '../DataTable.mdx';
 import Link from '../../Link';
 
 export default {
   title: 'Components/DataTable/Batch Actions',
   component: DataTable,
+  args: dataTableArgs,
+  argTypes: dataTableArgTypes,
   subcomponents: {
     TableBatchAction,
     TableBatchActions,
@@ -89,19 +97,28 @@ export const Default = (args) => (
               <TableBatchAction
                 tabIndex={batchActionProps.shouldShowBatchActions ? 0 : -1}
                 renderIcon={TrashCan}
-                onClick={batchActionClick(selectedRows)}>
+                onClick={batchActionClick(
+                  selectedRows,
+                  action('Batch action click')
+                )}>
                 Delete
               </TableBatchAction>
               <TableBatchAction
                 tabIndex={batchActionProps.shouldShowBatchActions ? 0 : -1}
                 renderIcon={Save}
-                onClick={batchActionClick(selectedRows)}>
+                onClick={batchActionClick(
+                  selectedRows,
+                  action('Batch action click')
+                )}>
                 Save
               </TableBatchAction>
               <TableBatchAction
                 tabIndex={batchActionProps.shouldShowBatchActions ? 0 : -1}
                 renderIcon={Download}
-                onClick={batchActionClick(selectedRows)}>
+                onClick={batchActionClick(
+                  selectedRows,
+                  action('Batch action click')
+                )}>
                 Download
               </TableBatchAction>
             </TableBatchActions>

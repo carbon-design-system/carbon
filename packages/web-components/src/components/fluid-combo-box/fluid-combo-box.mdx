@@ -1,0 +1,49 @@
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
+import * as FluidComboBoxStories from './fluid-combo-box.stories';
+
+<Meta of={FluidComboBoxStories} />
+
+# Fluid Combo Box
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/fluid-combo-box)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Skeleton](#skeleton)
+- [Condensed](#condensed)
+- [With AI Label](#with-ai-label)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
+
+## Overview
+
+<Canvas of={FluidComboBoxStories.Default} />
+
+## Skeleton
+
+<Canvas of={FluidComboBoxStories.Skeleton} />
+
+## Condensed
+
+<Canvas of={FluidComboBoxStories.Condensed} />
+
+## With AI Label
+
+<Canvas of={FluidComboBoxStories.WithAILabel} />
+
+## Component API
+
+## `cds-fluid-combo-box`
+
+<ArgTypes of="cds-combo-box" />
+
+<Markdown>{`${cdnJs({ components: ['fluid-combo-box'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/fluid-combo-box/fluid-combo-box.mdx).

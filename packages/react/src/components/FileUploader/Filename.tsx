@@ -13,7 +13,7 @@ import { usePrefix } from '../../internal/usePrefix';
 
 export type FilenameStatus = 'edit' | 'complete' | 'uploading';
 
-type SVGAttr = React.SVGAttributes<React.ReactSVGElement>;
+type SVGAttr = React.SVGAttributes<SVGSVGElement>;
 
 export interface FilenameProps
   extends Omit<HTMLAttributes<HTMLElement> & SVGAttr, 'tabIndex' | 'type'> {
@@ -26,6 +26,11 @@ export interface FilenameProps
    * Provide a description of the SVG icon to denote file upload status
    */
   iconDescription?: string;
+
+  /**
+   * Specify whether the file uploader item is disabled
+   */
+  disabled?: boolean;
 
   /**
    * Specify if the file is invalid
@@ -52,6 +57,7 @@ function Filename({
   iconDescription = 'Uploading file',
   status = 'uploading',
   invalid,
+  disabled,
   name,
   tabIndex = 0,
   ['aria-describedby']: ariaDescribedBy,
@@ -73,6 +79,7 @@ function Filename({
         <>
           {invalid && <WarningFilled className={`${prefix}--file-invalid`} />}
           <button
+            disabled={disabled}
             aria-label={`${iconDescription} - ${name}`}
             className={`${prefix}--file-close`}
             type="button"

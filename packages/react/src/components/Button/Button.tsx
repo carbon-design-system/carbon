@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -133,8 +133,9 @@ export type ButtonComponent = <T extends React.ElementType = 'button'>(
 
 function isIconOnlyButton(
   hasIconOnly: ButtonBaseProps['hasIconOnly'],
-  _kind: ButtonBaseProps['kind']
-): _kind is IconButtonKind {
+  kind: ButtonBaseProps['kind']
+): kind is IconButtonKind;
+function isIconOnlyButton(hasIconOnly: ButtonBaseProps['hasIconOnly']) {
   if (hasIconOnly === true) {
     return true;
   }
@@ -169,7 +170,7 @@ const Button: ButtonComponent = React.forwardRef(
     } = props;
 
     if (ButtonImageElement && !children && !iconDescription) {
-      // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
+      // eslint-disable-next-line no-console
       console.error(
         'Button: renderIcon property specified without also providing an iconDescription property. ' +
           'This may impact accessibility for screen reader users.'
@@ -179,9 +180,15 @@ const Button: ButtonComponent = React.forwardRef(
     const iconOnlyImage = !ButtonImageElement ? null : <ButtonImageElement />;
 
     if (!isIconOnlyButton(hasIconOnly, kind)) {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { tooltipAlignment, ...propsWithoutTooltipAlignment } = props;
-      return <ButtonBase ref={ref} {...propsWithoutTooltipAlignment} />;
+      const {
+        autoAlign,
+        tooltipAlignment,
+        tooltipDropShadow,
+        tooltipHighContrast,
+        tooltipPosition,
+        ...propsWithoutIconOnlyTooltipProps
+      } = props;
+      return <ButtonBase ref={ref} {...propsWithoutIconOnlyTooltipProps} />;
     } else {
       let align: PopoverAlignment | undefined = undefined;
 

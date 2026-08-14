@@ -19,21 +19,17 @@ export const useOutsideClick = <T extends HTMLElement | null>(
     savedCallback.current = callback;
   }, [callback]);
 
-  // We conditionally guard the `useEvent` hook for SSR. `canUseDOM` can be
-  // treated as a constant as it will be false when executed in a Node.js
-  // environment and true when executed in the browser
-  if (canUseDOM) {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useWindowEvent('click', (event) => {
-      const { target } = event;
+  useWindowEvent('click', (event) => {
+    if (!canUseDOM) return;
 
-      if (
-        target instanceof Node &&
-        ref.current &&
-        !ref.current.contains(target)
-      ) {
-        savedCallback.current(event);
-      }
-    });
-  }
+    const { target } = event;
+
+    if (
+      target instanceof Node &&
+      ref.current &&
+      !ref.current.contains(target)
+    ) {
+      savedCallback.current(event);
+    }
+  });
 };

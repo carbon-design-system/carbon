@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -23,34 +23,6 @@ import {
 import { IconButton } from '../IconButton';
 import mdx from './Dropdown.mdx';
 import Link from '../Link';
-
-export default {
-  title: 'Components/Dropdown',
-  component: Dropdown,
-  subcomponents: {
-    DropdownSkeleton,
-  },
-  argTypes: {
-    light: {
-      table: {
-        disable: true,
-      },
-    },
-    slug: {
-      table: {
-        disable: true,
-      },
-    },
-  },
-  parameters: {
-    docs: {
-      page: mdx,
-    },
-    controls: {
-      exclude: ['items', 'initialSelectedItem', 'itemToElement', 'id'],
-    },
-  },
-};
 
 const items = [
   {
@@ -84,70 +56,106 @@ const items = [
 ];
 
 const sharedArgs = {
+  'aria-label': '',
+  autoAlign: false,
+  direction: 'bottom',
+  disabled: false,
+  helperText: 'Helper text',
+  hideLabel: false,
   invalid: false,
   invalidText: 'Error message goes here',
-  disabled: false,
-  hideLabel: false,
   label: 'Choose an option',
-  warn: false,
-  warnText: 'Warning message goes here',
+  readOnly: false,
+  size: 'md',
   titleText: 'Label',
   type: 'default',
+  warn: false,
+  warnText: 'Warning message goes here',
 };
 
 const sharedArgTypes = {
+  'aria-label': {
+    control: 'text',
+  },
+  autoAlign: {
+    control: 'boolean',
+  },
+  direction: {
+    control: 'select',
+    options: ['top', 'bottom'],
+  },
   invalid: {
-    control: {
-      type: 'boolean',
-    },
+    control: 'boolean',
   },
   invalidText: {
-    control: {
-      type: 'text',
-    },
+    control: 'text',
   },
   disabled: {
-    control: {
-      type: 'boolean',
-    },
+    control: 'boolean',
   },
   hideLabel: {
-    control: {
-      type: 'boolean',
-    },
+    control: 'boolean',
   },
   helperText: {
-    control: {
-      type: 'text',
-    },
+    control: 'text',
   },
   label: {
-    control: {
-      type: 'text',
-    },
+    control: 'text',
+  },
+  onChange: {
+    action: 'onChange',
+  },
+  readOnly: {
+    control: 'boolean',
   },
   warn: {
-    control: {
-      type: 'boolean',
-    },
+    control: 'boolean',
   },
   warnText: {
-    control: {
-      type: 'text',
-    },
+    control: 'text',
   },
   titleText: {
-    control: {
-      type: 'text',
+    control: 'text',
+    type: {
+      required: true,
     },
   },
   size: {
-    options: ['sm', 'md', 'lg'],
-    control: { type: 'select' },
+    options: ['xs', 'sm', 'md', 'lg'],
+    control: 'select',
   },
   type: {
-    control: { type: 'select' },
+    control: 'select',
     options: ['default', 'inline'],
+  },
+};
+
+const skeletonArgs = {
+  hideLabel: false,
+  size: 'md',
+};
+
+const skeletonArgTypes = {
+  hideLabel: { control: 'boolean' },
+  size: {
+    control: 'select',
+    options: ['xs', 'sm', 'md', 'lg'],
+  },
+};
+
+export default {
+  title: 'Components/Dropdown',
+  component: Dropdown,
+  subcomponents: {
+    DropdownSkeleton,
+  },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+    controls: {
+      include: Object.keys(sharedArgTypes),
+    },
   },
 };
 
@@ -262,10 +270,10 @@ ExperimentalAutoAlign.argTypes = {
 };
 
 ExperimentalAutoAlign.args = {
-  invalid: false,
-  invalidText: 'Error message goes here',
-  warn: false,
-  warnText: 'Warning message goes here',
+  ...sharedArgs,
+  autoAlign: true,
+  direction: 'top',
+  label: 'Option 1',
 };
 
 export const Inline = (args) => {
@@ -317,6 +325,17 @@ export const Inline = (args) => {
 
 Inline.argTypes = {
   ...sharedArgTypes,
+  type: {
+    ...sharedArgTypes.type,
+    table: { readonly: true },
+  },
+};
+
+Inline.args = {
+  ...sharedArgs,
+  helperText: '',
+  label: 'Option 1',
+  type: 'inline',
 };
 
 export const _WithLayer = (args) => (
@@ -343,10 +362,8 @@ _WithLayer.argTypes = {
 };
 
 _WithLayer.args = {
-  invalid: false,
-  invalidText: 'Error message goes here',
-  warn: false,
-  warnText: 'Warning message goes here',
+  ...sharedArgs,
+  label: 'Option 1',
 };
 
 export const InlineWithLayer = (args) => (
@@ -370,14 +387,31 @@ export const InlineWithLayer = (args) => (
 
 InlineWithLayer.argTypes = {
   ...sharedArgTypes,
+  type: {
+    ...sharedArgTypes.type,
+    table: { readonly: true },
+  },
 };
 
-export const Skeleton = () => {
+InlineWithLayer.args = {
+  ...sharedArgs,
+  helperText: '',
+  label: 'Option 1',
+  type: 'inline',
+};
+
+export const Skeleton = (args) => {
   return (
     <div style={{ width: 300 }}>
-      <DropdownSkeleton />
+      <DropdownSkeleton {...args} />
     </div>
   );
+};
+
+Skeleton.args = { ...skeletonArgs };
+Skeleton.argTypes = { ...skeletonArgTypes };
+Skeleton.parameters = {
+  controls: { include: Object.keys(skeletonArgTypes) },
 };
 
 export const withAILabel = (args) => {
@@ -464,22 +498,20 @@ withAILabel.argTypes = {
 };
 
 withAILabel.args = {
-  invalid: false,
-  invalidText: 'Error message goes here',
-  warn: false,
-  warnText: 'Warning message goes here',
+  ...sharedArgs,
+  label: 'Option 1',
 };
 
-export const withToggletipLabel = () => {
+export const withToggletipLabel = ({ titleText, ...args }) => {
   return (
     <div style={{ width: 400 }}>
       <Dropdown
-        label="placeholder"
+        {...args}
         id="dropdown"
         items={[]}
         titleText={
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            <ToggletipLabel>Label</ToggletipLabel>
+            <ToggletipLabel>{titleText}</ToggletipLabel>
             <Toggletip>
               <ToggletipButton label="Show information">
                 <Information />
@@ -502,6 +534,13 @@ export const withToggletipLabel = () => {
     </div>
   );
 };
+
+withToggletipLabel.args = {
+  ...sharedArgs,
+  helperText: '',
+  label: 'placeholder',
+};
+withToggletipLabel.argTypes = { ...sharedArgTypes };
 
 // Hidden Test-Only Story. This story tests for a bug where the invalid-text would overlap with components below it. #19960
 export const TestInvalidTextNoOverlap = () => {

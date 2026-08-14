@@ -275,6 +275,16 @@ class CDSTable extends HostListenerMixin(LitElement) {
     this.updateExpandable();
   }
 
+  /**
+   * Normalizes table size to toolbar size.
+   * Toolbar only supports `xs`, `sm`, and `lg`.
+   * `md` and `xl` table sizes are mapped to `lg`.
+   */
+  private normalizeToolbarSize(size: TABLE_SIZE) {
+    if (size === TABLE_SIZE.XS || size === TABLE_SIZE.SM) return size;
+    return 'lg';
+  }
+
   private _handleSortAction(columnIndex, sortDirection) {
     const rows = [...this._tableRows];
 
@@ -806,12 +816,13 @@ class CDSTable extends HostListenerMixin(LitElement) {
           elem.setAttribute('size', this.size);
         }
       );
-      this._tableToolbar?.setAttribute('size', this.size);
+      const normalizedSize = this.normalizeToolbarSize(this.size);
+      this._tableToolbar?.setAttribute('size', normalizedSize);
       const batchActions = this.querySelector(
         (this.constructor as typeof CDSTable).selectorTableBatchActions
       );
       if (batchActions) {
-        batchActions.setAttribute('size', this.size);
+        batchActions.setAttribute('size', normalizedSize);
       }
     }
 

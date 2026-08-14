@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -130,4 +130,126 @@ export const Fluid = {
 Fluid.args = {
   fluid: true,
   Buttons: 8,
+};
+
+// ButtonSet Fluid hidden stories for Chromatic VRT
+
+export const FluidOneWide = {
+  ...Fluid,
+  args: {
+    ...Fluid.args,
+    Buttons: 1, // One button
+    'Container width': 800,
+  },
+  tags: ['!dev', '!autodocs'],
+};
+
+export const FluidOneWideGhost = {
+  ...Fluid,
+  args: {
+    ...Fluid.args,
+    Buttons: 3, // A ghost button
+    'Container width': 800,
+  },
+  tags: ['!dev', '!autodocs'],
+};
+
+export const FluidOneNarrow = {
+  ...Fluid,
+  args: {
+    ...Fluid.args,
+    Buttons: 1, // One button
+    'Container width': 280,
+  },
+  tags: ['!dev', '!autodocs'],
+};
+
+export const FluidTwoWide = {
+  ...Fluid,
+  args: {
+    ...Fluid.args,
+    Buttons: 4, // Two buttons
+    'Container width': 800,
+  },
+  tags: ['!dev', '!autodocs'],
+};
+
+export const FluidTwoWideGhost = {
+  ...Fluid,
+  args: {
+    ...Fluid.args,
+    Buttons: 5, // Two buttons with one ghost
+    'Container width': 800,
+  },
+  tags: ['!dev', '!autodocs'],
+};
+
+export const FluidTwoNarrow = {
+  ...Fluid,
+  args: {
+    ...Fluid.args,
+    Buttons: 4, // Two buttons
+    'Container width': 320,
+  },
+  tags: ['!dev', '!autodocs'],
+};
+
+export const FluidThreeWide = {
+  ...Fluid,
+  args: {
+    ...Fluid.args,
+    Buttons: 6, // Three buttons
+    'Container width': 800,
+  },
+  tags: ['!dev', '!autodocs'],
+};
+
+export const FluidThreeWideGhost = {
+  ...Fluid,
+  args: {
+    ...Fluid.args,
+    Buttons: 7, // Three buttons with one ghost
+    'Container width': 800,
+  },
+  tags: ['!dev', '!autodocs'],
+};
+
+export const FluidThreeNarrow = {
+  ...Fluid,
+  args: {
+    ...Fluid.args,
+    Buttons: 6, // Three buttons
+    'Container width': 500,
+  },
+  tags: ['!dev', '!autodocs'],
+};
+
+export const FluidFourWide = {
+  ...Fluid,
+  args: {
+    ...Fluid.args,
+    Buttons: 9, // Four buttons
+    'Container width': 1000,
+  },
+  tags: ['!dev', '!autodocs'],
+};
+
+export const FluidFourWideGhost = {
+  ...Fluid,
+  args: {
+    ...Fluid.args,
+    Buttons: 10, // Four buttons with one ghost
+    'Container width': 1000,
+  },
+  tags: ['!dev', '!autodocs'],
+};
+
+export const FluidFourNarrow = {
+  ...Fluid,
+  args: {
+    ...Fluid.args,
+    Buttons: 9, // Four buttons
+    'Container width': 600,
+  },
+  tags: ['!dev', '!autodocs'],
 };

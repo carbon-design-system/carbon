@@ -25,7 +25,7 @@ const colorNameLookup = Object.keys(colors).reduce(
 
 const tokens = meta.colors.flatMap((color) => color.tokens);
 
-export default function IndexPage() {
+export default function IndexPage({ lastBuiltOn }) {
   return (
     <React.Fragment>
       <div className="bx--grid">
@@ -34,6 +34,7 @@ export default function IndexPage() {
             <h1>
               <code>v10 @carbon/themes</code>
             </h1>
+            <p>Last built on {lastBuiltOn}</p>
           </div>
         </div>
         <div className="bx--row">
@@ -238,6 +239,14 @@ $custom-theme: map-merge(
       </section>
     </React.Fragment>
   );
+}
+
+export async function getStaticProps() {
+  return {
+    props: {
+      lastBuiltOn: new Date().toISOString(),
+    },
+  };
 }
 
 function ThemeSwitcher() {

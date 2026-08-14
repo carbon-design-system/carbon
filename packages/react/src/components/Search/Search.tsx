@@ -10,6 +10,7 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
   useContext,
+  useEffect,
   useRef,
   useState,
   type ChangeEvent,
@@ -112,7 +113,7 @@ export interface SearchProps extends InputPropsBase {
   /**
    * Specify the size of the Search
    */
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'md' | 'lg';
 
   /**
    * Specify the type of the `<input>`
@@ -134,6 +135,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
       defaultValue,
       disabled,
       isExpanded = true,
+      inert,
       id,
       labelText,
       // @ts-expect-error: deprecated prop
@@ -145,7 +147,8 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
       placeholder = 'Search',
       renderIcon,
       role,
-      size = 'md',
+      size,
+      tabIndex,
       type = 'search',
       value,
       ...rest
@@ -163,13 +166,12 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
     const uniqueId = id || inputId;
     const searchId = `${uniqueId}-search`;
     const [hasContent, setHasContent] = useState(hasPropValue || false);
-    const [prevValue, setPrevValue] = useState(value);
+    const isExpandableCollapsed = !!onExpand && !isExpanded;
     const searchClasses = cx(
       {
         [`${prefix}--search`]: true,
-        [`${prefix}--search--sm`]: size === 'sm',
-        [`${prefix}--search--md`]: size === 'md',
-        [`${prefix}--search--lg`]: size === 'lg',
+        [`${prefix}--search--${size}`]: size, // TODO: V12 - Remove this class
+        [`${prefix}--layout--size-${size}`]: size,
         [`${prefix}--search--light`]: light,
         [`${prefix}--search--disabled`]: disabled,
         [`${prefix}--search--fluid`]: isFluid,
@@ -182,10 +184,12 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
       [`${prefix}--search-close--hidden`]: !hasContent || !isExpanded,
     });
 
-    if (value !== prevValue) {
-      setHasContent(isSearchValuePresent(value));
-      setPrevValue(value);
-    }
+    useEffect(() => {
+      // Sync content state when used as a controlled input.
+      if (typeof value !== 'undefined') {
+        setHasContent(isSearchValuePresent(value));
+      }
+    }, [value]);
 
     function clearInput() {
       if (!value && inputRef.current) {
@@ -253,7 +257,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
         className={`${prefix}--search-magnifier`}
         onClick={onExpand}
         onKeyDown={handleExpandButtonKeyDown}
-        tabIndex={onExpand && !isExpanded ? 0 : -1}
+        tabIndex={isExpandableCollapsed ? 0 : -1}
         ref={expandButtonRef}
         aria-expanded={
           onExpand && isExpanded
@@ -271,7 +275,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
     const magnifierWithTooltip =
       onExpand && !isExpanded ? (
         <Tooltip
-          className={`${prefix}--search-tooltip ${prefix}--search-magnifier-tooltip`}
+          className={`${prefix}--search-tooltip ${prefix}--search-magnifier-tooltip ${prefix}--icon-tooltip`}
           align="top"
           label="Search">
           {magnifierButton}
@@ -281,7 +285,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
       );
 
     return (
-      <div role="search" aria-label={placeholder} className={searchClasses}>
+      <div role="search" aria-labelledby={searchId} className={searchClasses}>
         {magnifierWithTooltip}
         {/* the magnifier is used in ExpandableSearch as a click target to expand,
       however, it does not need a keyboard event bc the input element gets focus on keyboard nav and expands that way*/}
@@ -302,8 +306,9 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
           placeholder={placeholder}
           type={type}
           value={value}
-          tabIndex={onExpand && !isExpanded ? -1 : undefined}
           {...rest}
+          inert={isExpandableCollapsed ? true : inert}
+          tabIndex={isExpandableCollapsed ? -1 : tabIndex}
         />
         <button
           aria-label={closeButtonLabelText}
@@ -416,7 +421,7 @@ Search.propTypes = {
   /**
    * Specify the size of the Search
    */
-  size: PropTypes.oneOf(['sm', 'md', 'lg']),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
 
   /**
    * Specify the type of the `<input>`

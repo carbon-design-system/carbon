@@ -5,39 +5,33 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-let aCheckerPromise = null;
+import * as aChecker from 'accessibility-checker';
+
+const aCheckerPromise = (async () => {
+  const denylist = new Set([
+    'html_lang_exists',
+    'page_title_exists',
+    'skip_main_exists',
+    'html_skipnav_exists',
+    'aria_content_in_landmark',
+    'aria_child_tabbable',
+  ]);
+  const ruleset = await aChecker.getRuleset('IBM_Accessibility');
+  const customRuleset = JSON.parse(JSON.stringify(ruleset));
+
+  customRuleset.id = 'Custom_Ruleset';
+  customRuleset.checkpoints = customRuleset.checkpoints.map((checkpoint) => {
+    checkpoint.rules = checkpoint.rules.filter((rule) => {
+      return !denylist.has(rule.id);
+    });
+    return checkpoint;
+  });
+
+  aChecker.addRuleset(customRuleset);
+  return aChecker;
+})();
 
 async function toHaveNoACViolations(node, label) {
-  if (aCheckerPromise === null) {
-    aCheckerPromise = (async () => {
-      const aChecker = await import('accessibility-checker');
-
-      const denylist = new Set([
-        'html_lang_exists',
-        'page_title_exists',
-        'skip_main_exists',
-        'html_skipnav_exists',
-        'aria_content_in_landmark',
-        'aria_child_tabbable',
-      ]);
-      const ruleset = await aChecker.getRuleset('IBM_Accessibility');
-      const customRuleset = JSON.parse(JSON.stringify(ruleset));
-
-      customRuleset.id = 'Custom_Ruleset';
-      customRuleset.checkpoints = customRuleset.checkpoints.map(
-        (checkpoint) => {
-          checkpoint.rules = checkpoint.rules.filter((rule) => {
-            return !denylist.has(rule.id);
-          });
-          return checkpoint;
-        }
-      );
-
-      aChecker.addRuleset(customRuleset);
-      return aChecker;
-    })();
-  }
-
   const aChecker = await aCheckerPromise;
   let results = await aChecker.getCompliance(node, label);
   if (aChecker.assertCompliance(results.report) === 0) {

@@ -18,10 +18,8 @@ const states = {
 const noop = () => {};
 const defaultArgs = {
   description: 'Loading data...',
-  assistiveText: 'Loading',
   iconDescription: 'Loading',
   status: INLINE_LOADING_STATE.ACTIVE,
-  successDelay: 2000,
 };
 
 const getControls = ({ disableControl }) => {
@@ -40,25 +38,17 @@ const getControls = ({ disableControl }) => {
       description: 'Specify the loading status.',
       options: states,
     },
-    successDelay: {
-      control: disableControl,
-      description: 'Provide a delay for the setTimeout for success',
-    },
   };
 };
 
 export const Default = {
   args: defaultArgs,
   argTypes: getControls({ disableControl: false }),
-  parameters: {
-    percy: { skip: true },
-  },
-  render: ({ assistiveText, description, status, iconDescription }) => {
+  render: ({ description, status, iconDescription }) => {
     return html`
       <cds-inline-loading
         status="${status}"
         success-delay=${2000}
-        assistive-text=${assistiveText}
         icon-description=${iconDescription}
         }>
         ${description}
@@ -73,10 +63,6 @@ export const UxExample = {
   decorators: [
     (story) => html`<div style="display:flex;width:300px">${story()}</div>`,
   ],
-
-  parameters: {
-    percy: { skip: true },
-  },
   render: ({ onSuccess = noop }) => {
     const onSubmit = () => {
       const submit = document.querySelector('#submit');

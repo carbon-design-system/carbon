@@ -607,11 +607,120 @@ describe('Tab', () => {
     expect(onTabCloseRequest).toHaveBeenCalledTimes(1);
   });
 
-  it('should hide next overflow button when only 1px remains in the overflow threshold', async () => {
+  it('should keep next overflow button visible when the last tab is partially visible', () => {
+    jest.useFakeTimers();
     const clientWidthSpy = jest
       .spyOn(HTMLElement.prototype, 'clientWidth', 'get')
       .mockImplementation(function () {
-        return this.getAttribute?.('role') === 'tablist' ? 100 : 0;
+        return this.getAttribute?.('role') === 'tablist' ||
+          this.classList?.contains(`${prefix}--tabs`)
+          ? 100
+          : 0;
+      });
+    const scrollWidthSpy = jest
+      .spyOn(HTMLElement.prototype, 'scrollWidth', 'get')
+      .mockImplementation(function () {
+        return this.getAttribute?.('role') === 'tablist' ? 200 : 0;
+      });
+
+    try {
+      render(
+        <Tabs>
+          <TabList aria-label="List of tabs" />
+        </Tabs>
+      );
+
+      const tablist = screen.getByRole('tablist');
+      Object.defineProperty(tablist, 'scrollLeft', {
+        configurable: true,
+        writable: true,
+        value: 55,
+      });
+
+      fireEvent.scroll(tablist);
+      act(() => {
+        jest.advanceTimersByTime(250);
+      });
+
+      expect(screen.getByLabelText('Scroll right')).toHaveClass(
+        `${prefix}--tab--overflow-nav-button`,
+        `${prefix}--tab--overflow-nav-button--next`,
+        { exact: true }
+      );
+    } finally {
+      clientWidthSpy.mockRestore();
+      scrollWidthSpy.mockRestore();
+      jest.useRealTimers();
+    }
+  });
+
+  it('should recalculate overflow when the tabs container width changes', () => {
+    let resizeCallback;
+    let containerWidth = 0;
+    let tabListWidth = 0;
+    const originalResizeObserver = window.ResizeObserver;
+    const clientWidthSpy = jest
+      .spyOn(HTMLElement.prototype, 'clientWidth', 'get')
+      .mockImplementation(function () {
+        if (this.classList?.contains(`${prefix}--tabs`)) {
+          return containerWidth;
+        }
+        return this.getAttribute?.('role') === 'tablist' ? tabListWidth : 0;
+      });
+    const scrollWidthSpy = jest
+      .spyOn(HTMLElement.prototype, 'scrollWidth', 'get')
+      .mockImplementation(function () {
+        return this.getAttribute?.('role') === 'tablist' ? 200 : 0;
+      });
+    window.ResizeObserver = jest.fn((callback) => {
+      resizeCallback = callback;
+      return {
+        observe: jest.fn(),
+        disconnect: jest.fn(),
+      };
+    });
+
+    try {
+      render(
+        <Tabs>
+          <TabList aria-label="List of tabs">
+            <Tab>Tab Label 1</Tab>
+            <Tab>Tab Label 2</Tab>
+          </TabList>
+        </Tabs>
+      );
+
+      expect(screen.getByLabelText('Scroll right')).not.toHaveClass(
+        `${prefix}--tab--overflow-nav-button--hidden`
+      );
+
+      // The tabs fit within the full container, even though the visible
+      // overflow buttons reduce the tab list's own available width.
+      containerWidth = 300;
+      tabListWidth = 150;
+      act(() => {
+        resizeCallback();
+      });
+
+      expect(screen.getByLabelText('Scroll right')).toHaveClass(
+        `${prefix}--tab--overflow-nav-button--hidden`
+      );
+    } finally {
+      window.ResizeObserver = originalResizeObserver;
+      clientWidthSpy.mockRestore();
+      scrollWidthSpy.mockRestore();
+    }
+  });
+
+  it('should hide next overflow button when only 1px remains in the overflow threshold', () => {
+    jest.useFakeTimers();
+    const clientWidthSpy = jest
+      .spyOn(HTMLElement.prototype, 'clientWidth', 'get')
+      .mockImplementation(function () {
+        return this.getAttribute?.('role') === 'tablist' ||
+          this.classList?.contains(`${prefix}--tabs`)
+          ? 100
+          : 0;
       });
     const scrollWidthSpy = jest
       .spyOn(HTMLElement.prototype, 'scrollWidth', 'get')
@@ -626,14 +735,70 @@ describe('Tab', () => {
         </Tabs>
       );
 
-      await waitFor(() => {
-        expect(screen.getByLabelText('Scroll right')).toHaveClass(
-          `${prefix}--tab--overflow-nav-button--hidden`
-        );
+      const tablist = screen.getByRole('tablist');
+      Object.defineProperty(tablist, 'scrollLeft', {
+        configurable: true,
+        writable: true,
+        value: 44,
       });
+
+      fireEvent.scroll(tablist);
+      act(() => {
+        jest.advanceTimersByTime(250);
+      });
+
+      expect(screen.getByLabelText('Scroll right')).toHaveClass(
+        `${prefix}--tab--overflow-nav-button`,
+        `${prefix}--tab--overflow-nav-button--next`,
+        `${prefix}--tab--overflow-nav-button--hidden`,
+        { exact: true }
+      );
     } finally {
       clientWidthSpy.mockRestore();
       scrollWidthSpy.mockRestore();
+      jest.useRealTimers();
+    }
+  });
+
+  it('should hide next overflow button immediately when scrolling reaches the end', () => {
+    jest.useFakeTimers();
+    const clientWidthSpy = jest
+      .spyOn(HTMLElement.prototype, 'clientWidth', 'get')
+      .mockImplementation(function () {
+        return this.getAttribute?.('role') === 'tablist' ||
+          this.classList?.contains(`${prefix}--tabs`)
+          ? 100
+          : 0;
+      });
+    const scrollWidthSpy = jest
+      .spyOn(HTMLElement.prototype, 'scrollWidth', 'get')
+      .mockImplementation(function () {
+        return this.getAttribute?.('role') === 'tablist' ? 200 : 0;
+      });
+
+    try {
+      render(
+        <Tabs>
+          <TabList aria-label="List of tabs" />
+        </Tabs>
+      );
+
+      const tablist = screen.getByRole('tablist');
+      Object.defineProperty(tablist, 'scrollLeft', {
+        configurable: true,
+        writable: true,
+        value: 100,
+      });
+
+      fireEvent.scroll(tablist);
+
+      expect(screen.getByLabelText('Scroll right')).toHaveClass(
+        `${prefix}--tab--overflow-nav-button--hidden`
+      );
+    } finally {
+      clientWidthSpy.mockRestore();
+      scrollWidthSpy.mockRestore();
+      jest.useRealTimers();
     }
   });
 
@@ -666,7 +831,10 @@ describe('Tab', () => {
     const clientWidthSpy = jest
       .spyOn(HTMLElement.prototype, 'clientWidth', 'get')
       .mockImplementation(function () {
-        return this.getAttribute?.('role') === 'tablist' ? 100 : 0;
+        return this.getAttribute?.('role') === 'tablist' ||
+          this.classList?.contains(`${prefix}--tabs`)
+          ? 100
+          : 0;
       });
     const scrollWidthSpy = jest
       .spyOn(HTMLElement.prototype, 'scrollWidth', 'get')
@@ -944,6 +1112,86 @@ describe('TabPanel', () => {
 });
 
 describe('TabList', () => {
+  it('should apply a layout size class for line tabs when size is provided', () => {
+    jest.spyOn(hooks, 'useMatchMedia').mockImplementation(() => true);
+    const { container } = render(
+      <Tabs>
+        <TabList aria-label="List of tabs" size="sm">
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab>Tab Label 3</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </Tabs>
+    );
+
+    expect(container.firstChild).toHaveClass(`${prefix}--layout--size-sm`);
+  });
+
+  it('should not apply large layout size for line tabs', () => {
+    jest.spyOn(hooks, 'useMatchMedia').mockImplementation(() => true);
+    const { container } = render(
+      <Tabs>
+        <TabList aria-label="List of tabs" size="lg">
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab>Tab Label 3</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </Tabs>
+    );
+
+    expect(container.firstChild).not.toHaveClass(`${prefix}--layout--size-lg`);
+  });
+
+  it('should apply large layout size for contained tabs', () => {
+    jest.spyOn(hooks, 'useMatchMedia').mockImplementation(() => true);
+    const { container } = render(
+      <Tabs>
+        <TabList aria-label="List of tabs" contained size="lg">
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab>Tab Label 3</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </Tabs>
+    );
+
+    expect(container.firstChild).toHaveClass(`${prefix}--layout--size-lg`);
+  });
+
+  it('should ignore size class for contained tabs with secondary labels', () => {
+    jest.spyOn(hooks, 'useMatchMedia').mockImplementation(() => true);
+    const { container } = render(
+      <Tabs>
+        <TabList aria-label="List of tabs" contained size="sm">
+          <Tab secondaryLabel="(1/3)">Tab Label 1</Tab>
+          <Tab secondaryLabel="(2/3)">Tab Label 2</Tab>
+          <Tab secondaryLabel="(3/3)">Tab Label 3</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </Tabs>
+    );
+
+    expect(container.firstChild).not.toHaveClass(`${prefix}--layout--size-sm`);
+  });
+
   it('should span fullWidth if lg and fullWidth prop is passed in', () => {
     jest.spyOn(hooks, 'useMatchMedia').mockImplementation(() => true);
     const { container } = render(
@@ -1077,5 +1325,207 @@ describe('TabListVertical', () => {
     );
 
     expect(container.firstChild).toHaveAttribute('style', 'height: 100px;');
+  });
+
+  it('should keep hidden panels hidden after auto-height effect runs', () => {
+    const { container } = render(
+      <TabsVertical defaultSelectedIndex={1}>
+        <TabListVertical aria-label="List of tabs">
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab>Tab Label 3</Tab>
+          <Tab>Tab Label 4</Tab>
+        </TabListVertical>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+          <TabPanel>Tab Panel 4</TabPanel>
+        </TabPanels>
+      </TabsVertical>
+    );
+
+    expect(screen.getByRole('tablist').parentElement.style.height).toMatch(
+      /^\d+px$/
+    );
+
+    const tabpanels = screen.getAllByRole('tabpanel', { hidden: true });
+    expect(tabpanels).toHaveLength(4);
+
+    const activeTabpanel = tabpanels[1];
+    expect(activeTabpanel).not.toHaveAttribute('hidden');
+
+    const hiddenTabpanels = tabpanels.filter(
+      (panel) => panel !== activeTabpanel
+    );
+    expect(hiddenTabpanels.every((panel) => panel.hasAttribute('hidden'))).toBe(
+      true
+    );
+  });
+
+  it('should apply size sm class when size prop is sm', () => {
+    const { container } = render(
+      <TabsVertical>
+        <TabListVertical aria-label="List of tabs" size="sm">
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab>Tab Label 3</Tab>
+        </TabListVertical>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </TabsVertical>
+    );
+
+    expect(container.querySelector(`.${prefix}--tabs`)).toHaveClass(
+      `${prefix}--layout--size-sm`
+    );
+  });
+
+  it('should apply size md class when size prop is md', () => {
+    const { container } = render(
+      <TabsVertical>
+        <TabListVertical aria-label="List of tabs" size="md">
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab>Tab Label 3</Tab>
+        </TabListVertical>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </TabsVertical>
+    );
+
+    expect(container.querySelector(`.${prefix}--tabs`)).toHaveClass(
+      `${prefix}--layout--size-md`
+    );
+  });
+
+  it('should apply size lg class when size prop is lg', () => {
+    const { container } = render(
+      <TabsVertical>
+        <TabListVertical aria-label="List of tabs" size="lg">
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab>Tab Label 3</Tab>
+        </TabListVertical>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </TabsVertical>
+    );
+
+    expect(container.querySelector(`.${prefix}--tabs`)).toHaveClass(
+      `${prefix}--layout--size-lg`
+    );
+  });
+
+  it('should apply size xl class when size prop is xl', () => {
+    const { container } = render(
+      <TabsVertical>
+        <TabListVertical aria-label="List of tabs" size="xl">
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab>Tab Label 3</Tab>
+        </TabListVertical>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </TabsVertical>
+    );
+
+    expect(container.querySelector(`.${prefix}--tabs`)).toHaveClass(
+      `${prefix}--layout--size-xl`
+    );
+  });
+
+  it('should not apply size class when size prop is not provided', () => {
+    const { container } = render(
+      <TabsVertical>
+        <TabListVertical aria-label="List of tabs">
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab>Tab Label 3</Tab>
+        </TabListVertical>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </TabsVertical>
+    );
+
+    expect(container.querySelector(`.${prefix}--tabs`)).not.toHaveClass(
+      `${prefix}--layout--size-sm`
+    );
+    expect(container.querySelector(`.${prefix}--tabs`)).not.toHaveClass(
+      `${prefix}--layout--size-md`
+    );
+    expect(container.querySelector(`.${prefix}--tabs`)).not.toHaveClass(
+      `${prefix}--layout--size-lg`
+    );
+    expect(container.querySelector(`.${prefix}--tabs`)).not.toHaveClass(
+      `${prefix}--layout--size-xl`
+    );
+  });
+
+  it('should inherit size from parent layout context when no size prop is provided', () => {
+    const { container } = render(
+      <div className={`${prefix}--layout ${prefix}--layout--size-lg`}>
+        <TabsVertical>
+          <TabListVertical aria-label="List of tabs">
+            <Tab>Tab Label 1</Tab>
+            <Tab>Tab Label 2</Tab>
+            <Tab>Tab Label 3</Tab>
+          </TabListVertical>
+          <TabPanels>
+            <TabPanel>Tab Panel 1</TabPanel>
+            <TabPanel>Tab Panel 2</TabPanel>
+            <TabPanel>Tab Panel 3</TabPanel>
+          </TabPanels>
+        </TabsVertical>
+      </div>
+    );
+
+    expect(container.querySelector(`.${prefix}--layout`)).toHaveClass(
+      `${prefix}--layout--size-lg`
+    );
+    expect(container.querySelector(`.${prefix}--tabs`)).not.toHaveClass(
+      `${prefix}--layout--size-lg`
+    );
+  });
+
+  it('should override parent layout context when size prop is provided', () => {
+    const { container } = render(
+      <div className={`${prefix}--layout ${prefix}--layout--size-lg`}>
+        <TabsVertical>
+          <TabListVertical aria-label="List of tabs" size="sm">
+            <Tab>Tab Label 1</Tab>
+            <Tab>Tab Label 2</Tab>
+            <Tab>Tab Label 3</Tab>
+          </TabListVertical>
+          <TabPanels>
+            <TabPanel>Tab Panel 1</TabPanel>
+            <TabPanel>Tab Panel 2</TabPanel>
+            <TabPanel>Tab Panel 3</TabPanel>
+          </TabPanels>
+        </TabsVertical>
+      </div>
+    );
+
+    expect(container.querySelector(`.${prefix}--layout`)).toHaveClass(
+      `${prefix}--layout--size-lg`
+    );
+    expect(container.querySelector(`.${prefix}--tabs`)).toHaveClass(
+      `${prefix}--layout--size-sm`
+    );
   });
 });

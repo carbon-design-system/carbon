@@ -7,7 +7,7 @@
 
 const path = require('path');
 
-// Mirror of: https://github.com/rollup/rollup-plugin-virtual without the \0
+// Mirror of: virtual module plugin behavior without the \0
 // prefix which noops in a lot of plugins
 const PREFIX = 'virtual:';
 

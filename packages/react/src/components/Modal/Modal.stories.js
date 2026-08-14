@@ -57,6 +57,9 @@ export default {
     modalLabel: {
       control: 'text',
     },
+    dangerDescription: {
+      control: 'text',
+    },
     numberOfButtons: {
       description: 'Count of Footer Buttons',
       options: Object.keys(buttons),

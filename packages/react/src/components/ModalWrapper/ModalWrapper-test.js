@@ -1,16 +1,35 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import ModalWrapper from '../ModalWrapper';
 
 describe('ModalWrapper', () => {
+  it('should log the deprecation warning when rendering `ModalWrapper`', () => {
+    const consoleWarnSpy = jest
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {});
+
+    render(
+      <ModalWrapper buttonTriggerText="Launch modal">
+        <p>zoom zoom</p>
+      </ModalWrapper>
+    );
+
+    expect(consoleWarnSpy).toHaveBeenCalledTimes(1);
+    expect(consoleWarnSpy).toHaveBeenCalledWith(
+      'Warning: `<ModalWrapper>` has been deprecated in favor of `<ComposedModal/>` and will be removed in the next major version, `@carbon/react@v2.x`'
+    );
+
+    consoleWarnSpy.mockRestore();
+  });
+
   it('should default to primary button', () => {
     render(
       <ModalWrapper
@@ -189,6 +208,7 @@ describe('ModalWrapper', () => {
         modalHeading="Modal heading"
         modalLabel="Label"
         handleSubmit={handleSubmit}
+        shouldCloseAfterSubmit
         open>
         <p>Modal content here</p>
       </ModalWrapper>
@@ -196,11 +216,11 @@ describe('ModalWrapper', () => {
 
     const triggerBtn = screen.getByText('Launch modal');
     const submitBtn = screen.getByText('Save');
-    await userEvent.click(submitBtn);
 
+    await userEvent.click(triggerBtn);
+    expect(submitBtn).toHaveFocus();
+    await userEvent.click(submitBtn);
+    expect(triggerBtn).toHaveFocus();
     expect(handleSubmit).toHaveBeenCalled();
-    setTimeout(() => {
-      expect(triggerBtn).toHaveFocus();
-    }, 0);
   });
 });

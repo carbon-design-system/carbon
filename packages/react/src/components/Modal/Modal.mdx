@@ -128,14 +128,15 @@ const ModalStateManager = ({
     title="Warning"
     className="sb-notification">
     <CodeSnippet type="inline" hideCopyButton>
-      Modal
+      {'Modal'}
     </CodeSnippet>
-    and
+    {' and '}
     <CodeSnippet type="inline" hideCopyButton>
-      ComposedModal
+      {'ComposedModal'}
     </CodeSnippet>
-    have to be put at the top level in a React tree. The easiest way to ensure
-    that is using a React portal, as shown in the example above.
+    {
+      ' have to be put at the top level in a React tree. The easiest way to ensure that is using a React portal, as shown in the example above.'
+    }
   </InlineNotification>
 </Unstyled>
 
@@ -262,16 +263,17 @@ With `<ComposedModal>`, you can control the buttons with the following code.
     kind="warning"
     title="Warning"
     className="sb-notification">
-    As the instructions for the three buttons imply,
+    {'As the instructions for the three buttons imply, '}
     <CodeSnippet type="inline" hideCopyButton>
-      ModalFooter
+      {'ModalFooter'}
     </CodeSnippet>
-    is flexible with the buttons you render using
+    {' is flexible with the buttons you render using '}
     <CodeSnippet type="inline" hideCopyButton>
-      Button
+      {'Button'}
     </CodeSnippet>
-    components. In this case, your application code is responsible for handling
-    button actions, such as closing the modal.
+    {
+      ' components. In this case, your application code is responsible for handling button actions, such as closing the modal.'
+    }
   </InlineNotification>
 </Unstyled>
 

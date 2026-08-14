@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <path id="collapse--stripe" d="M28,28H4c-1.103,0-2-.8975-2-2V6c0-1.103.897-2,2-2h24c1.1025,0,2,.897,2,2v20c0,1.1025-.8975,2-2,2ZM4,6v20h24V6H4ZM18.293,21.707l-5.707-5.707,5.707-5.707,1.4141,1.4141-3.293,3.293h9.5859v2h-9.5859l3.293,3.293-1.4141,1.4141Z"/>
+  <rect id="Transparent_Rectangle" data-name="Transparent Rectangle" class="cls-1" width="32" height="32"/>
+</svg>

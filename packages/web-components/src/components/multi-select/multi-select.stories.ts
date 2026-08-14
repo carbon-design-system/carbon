@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -23,8 +23,8 @@ import '../button';
 import '../toggle-tip';
 import '../icon-button';
 import '../link';
-import '../../../.storybook/templates/with-layer';
 import { iconLoader } from '../../globals/internal/icon-loader';
+import { withLayers } from '../../../.storybook/decorators/with-layers';
 
 const content = html`
   <div slot="body-text">
@@ -58,6 +58,8 @@ const actions = html`
 `;
 
 const sizes = {
+  [`Extra small size (${DROPDOWN_SIZE.EXTRA_SMALL})`]:
+    DROPDOWN_SIZE.EXTRA_SMALL,
   [`Small size (${DROPDOWN_SIZE.SMALL})`]: DROPDOWN_SIZE.SMALL,
   [`Medium size (${DROPDOWN_SIZE.MEDIUM})`]: DROPDOWN_SIZE.MEDIUM,
   [`Large size (${DROPDOWN_SIZE.LARGE})`]: DROPDOWN_SIZE.LARGE,
@@ -90,18 +92,19 @@ const args = {
   hideLabel: false,
   locale: 'en',
   invalid: false,
-  invalidText: 'whoopsie!',
-  titleText: 'This is a MultiSelect Title',
+  invalidText: 'Error message goes here',
+  warnText: 'Warning message goes here',
+  titleText: 'Label',
   label: 'This is a label',
   size: DROPDOWN_SIZE.MEDIUM,
   selectionFeedback: SELECTION_FEEDBACK_OPTION.TOP_AFTER_REOPEN,
   readOnly: false,
   type: null,
   warn: false,
-  warnText: 'whoopsie!',
 };
 
 const filterableArgs = {
+  autocomplete: 'off',
   clearSelectionDescription: 'Total items selected: ',
   clearSelectionText: 'To clear selection, press Delete or Backspace.',
   disabled: false,
@@ -110,7 +113,8 @@ const filterableArgs = {
   hideLabel: false,
   locale: 'en',
   invalid: false,
-  invalidText: 'whoopsie!',
+  invalidText: 'Error message goes here',
+  warnText: 'Warning message goes here',
   titleText: 'FilterableMultiSelect title',
   label: '',
   size: DROPDOWN_SIZE.MEDIUM,
@@ -118,10 +122,14 @@ const filterableArgs = {
   readOnly: false,
   type: null,
   warn: false,
-  warnText: 'whoopsie!',
 };
 
 const argTypes = {
+  autocomplete: {
+    control: 'text',
+    description:
+      'Specify the autocomplete behavior of the filterable input. Defaults to "off".',
+  },
   clearSelectionDescription: {
     control: 'text',
     description:
@@ -206,7 +214,15 @@ const argTypes = {
   },
 };
 
+/** Stories without `filterable`: omit `autocomplete` from the Controls panel. */
+const nonFilterableParameters = {
+  controls: {
+    exclude: ['autocomplete'],
+  },
+};
+
 export const Default = {
+  parameters: nonFilterableParameters,
   args,
   argTypes,
   decorators: [(story) => html` <div style="width:300px">${story()}</div> `],
@@ -268,6 +284,7 @@ export const Default = {
 };
 
 export const Controlled = {
+  parameters: nonFilterableParameters,
   args,
   argTypes,
   decorators: [(story) => html` <div style="width:300px">${story()}</div> `],
@@ -378,6 +395,7 @@ export const Filterable = {
   decorators: [(story) => html` <div style="width:300px">${story()}</div> `],
   render: (args) => {
     const {
+      autocomplete,
       clearSelectionLabel,
       direction,
       disabled,
@@ -398,6 +416,7 @@ export const Filterable = {
     } = args ?? {};
     return html`
       <cds-multi-select
+        autocomplete=${ifDefined(autocomplete)}
         direction=${ifDefined(direction)}
         ?disabled=${disabled}
         ?invalid=${invalid}
@@ -440,6 +459,7 @@ export const FilterableWithSelectAll = {
   decorators: [(story) => html` <div style="width:300px">${story()}</div> `],
   render: (args) => {
     const {
+      autocomplete,
       clearSelectionLabel,
       direction,
       disabled,
@@ -460,6 +480,7 @@ export const FilterableWithSelectAll = {
     } = args ?? {};
     return html`
       <cds-multi-select
+        autocomplete=${ifDefined(autocomplete)}
         direction=${ifDefined(direction)}
         ?disabled=${disabled}
         ?invalid=${invalid}
@@ -497,6 +518,7 @@ export const FilterableWithAILabel = {
   argTypes,
   render: (args) => {
     const {
+      autocomplete,
       clearSelectionLabel,
       direction,
       disabled,
@@ -518,6 +540,7 @@ export const FilterableWithAILabel = {
     return html`
       <div style="width: 400px">
         <cds-multi-select
+          autocomplete=${ifDefined(autocomplete)}
           direction=${ifDefined(direction)}
           ?disabled=${disabled}
           ?invalid=${invalid}
@@ -559,10 +582,15 @@ export const FilterableWithAILabel = {
 };
 
 export const FilterableWithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
   args: filterableArgs,
   argTypes,
   render: (args) => {
     const {
+      autocomplete,
       clearSelectionLabel,
       direction,
       disabled,
@@ -582,50 +610,48 @@ export const FilterableWithLayer = {
       warnText,
     } = args ?? {};
     return html`
-      <sb-template-layers>
-        <div style="width:300px">
-          <cds-multi-select
-            direction=${ifDefined(direction)}
-            ?disabled=${disabled}
-            ?invalid=${invalid}
-            invalid-text=${ifDefined(invalidText)}
-            clear-selection-label=${ifDefined(clearSelectionLabel)}
-            helper-text=${ifDefined(helperText)}
-            ?hide-label=${hideLabel}
-            locale=${ifDefined(locale)}
-            ?read-only=${readOnly}
-            title-text=${ifDefined(titleText)}
-            selection-feedback=${ifDefined(selectionFeedback)}
-            size=${ifDefined(size)}
-            ?warn=${warn}
-            warn-text=${ifDefined(warnText)}
-            label=${ifDefined(label)}
-            type=${ifDefined(type)}
-            value="${ifDefined(value)}"
-            filterable="true">
-            <cds-multi-select-item value="example"
-              >An example option that is really long to show what should be done
-              to handle long text</cds-multi-select-item
-            >
-            <cds-multi-select-item value="all">Option 1</cds-multi-select-item>
-            <cds-multi-select-item value="cloudFoundry"
-              >Option 2</cds-multi-select-item
-            >
-            <cds-multi-select-item disabled value="staging"
-              >Option 3 - a disabled item</cds-multi-select-item
-            >
-            <cds-multi-select-item value="dea">Option 4</cds-multi-select-item>
-            <cds-multi-select-item value="router"
-              >Option 5</cds-multi-select-item
-            >
-          </cds-multi-select>
-        </div>
-      </sb-template-layers>
+      <div style="width:300px">
+        <cds-multi-select
+          autocomplete=${ifDefined(autocomplete)}
+          direction=${ifDefined(direction)}
+          ?disabled=${disabled}
+          ?invalid=${invalid}
+          invalid-text=${ifDefined(invalidText)}
+          clear-selection-label=${ifDefined(clearSelectionLabel)}
+          helper-text=${ifDefined(helperText)}
+          ?hide-label=${hideLabel}
+          locale=${ifDefined(locale)}
+          ?read-only=${readOnly}
+          title-text=${ifDefined(titleText)}
+          selection-feedback=${ifDefined(selectionFeedback)}
+          size=${ifDefined(size)}
+          ?warn=${warn}
+          warn-text=${ifDefined(warnText)}
+          label=${ifDefined(label)}
+          type=${ifDefined(type)}
+          value="${ifDefined(value)}"
+          filterable="true">
+          <cds-multi-select-item value="example"
+            >An example option that is really long to show what should be done
+            to handle long text</cds-multi-select-item
+          >
+          <cds-multi-select-item value="all">Option 1</cds-multi-select-item>
+          <cds-multi-select-item value="cloudFoundry"
+            >Option 2</cds-multi-select-item
+          >
+          <cds-multi-select-item disabled value="staging"
+            >Option 3 - a disabled item</cds-multi-select-item
+          >
+          <cds-multi-select-item value="dea">Option 4</cds-multi-select-item>
+          <cds-multi-select-item value="router">Option 5</cds-multi-select-item>
+        </cds-multi-select>
+      </div>
     `;
   },
 };
 
 export const SelectAll = {
+  parameters: nonFilterableParameters,
   args,
   argTypes,
   decorators: [(story) => html` <div style="width:400px">${story()}</div> `],
@@ -693,6 +719,7 @@ export const SelectAll = {
 };
 
 export const SelectAllWithDynamicItems = {
+  parameters: nonFilterableParameters,
   args,
   argTypes,
   decorators: [(story) => html` <div style="width:400px">${story()}</div> `],
@@ -778,6 +805,7 @@ export const SelectAllWithDynamicItems = {
 };
 
 export const WithAILabel = {
+  parameters: nonFilterableParameters,
   args,
   argTypes,
   render: (args) => {
@@ -843,6 +871,7 @@ export const WithAILabel = {
 };
 
 export const WithInitialSelectedItems = {
+  parameters: nonFilterableParameters,
   args,
   argTypes,
   decorators: [(story) => html` <div style="width:300px">${story()}</div> `],
@@ -906,6 +935,11 @@ export const WithInitialSelectedItems = {
 };
 
 export const WithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+    ...nonFilterableParameters,
+  },
   args,
   argTypes,
   render: (args) => {
@@ -929,49 +963,46 @@ export const WithLayer = {
       warnText,
     } = args ?? {};
     return html`
-      <sb-template-layers>
-        <div style="width:300px">
-          <cds-multi-select
-            direction=${ifDefined(direction)}
-            ?disabled=${disabled}
-            ?invalid=${invalid}
-            invalid-text=${ifDefined(invalidText)}
-            clear-selection-label=${ifDefined(clearSelectionLabel)}
-            helper-text=${ifDefined(helperText)}
-            ?hide-label=${hideLabel}
-            locale=${ifDefined(locale)}
-            ?read-only=${readOnly}
-            title-text=${ifDefined(titleText)}
-            selection-feedback=${ifDefined(selectionFeedback)}
-            size=${ifDefined(size)}
-            ?warn=${warn}
-            warn-text=${ifDefined(warnText)}
-            label=${ifDefined(label)}
-            type=${ifDefined(type)}
-            value="${ifDefined(value)}">
-            <cds-multi-select-item value="example"
-              >An example option that is really long to show what should be done
-              to handle long text</cds-multi-select-item
-            >
-            <cds-multi-select-item value="all">Option 1</cds-multi-select-item>
-            <cds-multi-select-item value="cloudFoundry"
-              >Option 2</cds-multi-select-item
-            >
-            <cds-multi-select-item disabled value="staging"
-              >Option 3 - a disabled item</cds-multi-select-item
-            >
-            <cds-multi-select-item value="dea">Option 4</cds-multi-select-item>
-            <cds-multi-select-item value="router"
-              >Option 5</cds-multi-select-item
-            >
-          </cds-multi-select>
-        </div>
-      </sb-template-layers>
+      <div style="width:300px">
+        <cds-multi-select
+          direction=${ifDefined(direction)}
+          ?disabled=${disabled}
+          ?invalid=${invalid}
+          invalid-text=${ifDefined(invalidText)}
+          clear-selection-label=${ifDefined(clearSelectionLabel)}
+          helper-text=${ifDefined(helperText)}
+          ?hide-label=${hideLabel}
+          locale=${ifDefined(locale)}
+          ?read-only=${readOnly}
+          title-text=${ifDefined(titleText)}
+          selection-feedback=${ifDefined(selectionFeedback)}
+          size=${ifDefined(size)}
+          ?warn=${warn}
+          warn-text=${ifDefined(warnText)}
+          label=${ifDefined(label)}
+          type=${ifDefined(type)}
+          value="${ifDefined(value)}">
+          <cds-multi-select-item value="example"
+            >An example option that is really long to show what should be done
+            to handle long text</cds-multi-select-item
+          >
+          <cds-multi-select-item value="all">Option 1</cds-multi-select-item>
+          <cds-multi-select-item value="cloudFoundry"
+            >Option 2</cds-multi-select-item
+          >
+          <cds-multi-select-item disabled value="staging"
+            >Option 3 - a disabled item</cds-multi-select-item
+          >
+          <cds-multi-select-item value="dea">Option 4</cds-multi-select-item>
+          <cds-multi-select-item value="router">Option 5</cds-multi-select-item>
+        </cds-multi-select>
+      </div>
     `;
   },
 };
 
 export const WithToggletipLabel = {
+  parameters: nonFilterableParameters,
   args,
   argTypes,
   render: (args) => {
@@ -1044,6 +1075,106 @@ export const WithToggletipLabel = {
           <cds-multi-select-item value="router">Option 5</cds-multi-select-item>
         </cds-multi-select>
       </div>
+    `;
+  },
+};
+
+export const WithCustomSorting = {
+  parameters: nonFilterableParameters,
+  args: {
+    ...args,
+    titleText: 'With Custom Sorting',
+    helperText: 'Selected items appear at the bottom',
+  },
+  argTypes,
+  decorators: [(story) => html` <div style="width:300px">${story()}</div> `],
+  render: (args) => {
+    const {
+      clearSelectionLabel,
+      direction,
+      disabled,
+      helperText,
+      hideLabel,
+      locale,
+      invalid,
+      invalidText,
+      readOnly,
+      titleText,
+      selectionFeedback,
+      size,
+      label,
+      type,
+      value,
+      warn,
+      warnText,
+    } = args ?? {};
+
+    const getItemValue = (item: Node) =>
+      item instanceof Element ? (item.getAttribute('value') ?? '') : '';
+
+    const customSortItems = (
+      menuItems: NodeList,
+      {
+        values,
+        compareItems,
+        locale,
+      }: {
+        values: string[];
+        compareItems: (
+          itemA: string,
+          itemB: string,
+          options: { locale: string }
+        ) => number;
+        locale: string;
+      }
+    ) => {
+      const menuItemsArray = Array.from(menuItems);
+
+      return menuItemsArray.sort((itemA, itemB) => {
+        const hasItemA = values.includes(getItemValue(itemA));
+        const hasItemB = values.includes(getItemValue(itemB));
+
+        if (hasItemA && !hasItemB) {
+          return 1;
+        }
+        if (hasItemB && !hasItemA) {
+          return -1;
+        }
+
+        return compareItems(
+          itemA.textContent?.trim() ?? '',
+          itemB.textContent?.trim() ?? '',
+          { locale }
+        );
+      });
+    };
+
+    return html`
+      <cds-multi-select
+        direction=${ifDefined(direction)}
+        ?disabled=${disabled}
+        ?invalid=${invalid}
+        invalid-text=${ifDefined(invalidText)}
+        clear-selection-label=${ifDefined(clearSelectionLabel)}
+        helper-text=${ifDefined(helperText)}
+        ?hide-label=${hideLabel}
+        locale=${ifDefined(locale)}
+        ?read-only=${readOnly}
+        title-text=${ifDefined(titleText)}
+        selection-feedback=${ifDefined(selectionFeedback)}
+        size=${ifDefined(size)}
+        ?warn=${warn}
+        warn-text=${ifDefined(warnText)}
+        label=${ifDefined(label)}
+        type=${ifDefined(type)}
+        value="${ifDefined(value)}"
+        .sortItems=${customSortItems}>
+        <cds-multi-select-item value="5">Option 5</cds-multi-select-item>
+        <cds-multi-select-item value="2">Option 2</cds-multi-select-item>
+        <cds-multi-select-item value="1">Option 1</cds-multi-select-item>
+        <cds-multi-select-item value="4">Option 4</cds-multi-select-item>
+        <cds-multi-select-item value="3">Option 3</cds-multi-select-item>
+      </cds-multi-select>
     `;
   },
 };

@@ -129,6 +129,12 @@ export interface ModalFooterProps {
   danger?: boolean;
 
   /**
+   * Specify the message read by screen readers for the danger primary button.
+   * Defaults to an empty string; provide localized text to opt in.
+   */
+  dangerDescription?: string;
+
+  /**
    * The `ref` callback for the primary button.
    */
   inputref?: Ref<HTMLButtonElement>;
@@ -204,6 +210,7 @@ export const ModalFooter = React.forwardRef<HTMLElement, ModalFooterProps>(
       className: customClassName,
       closeModal = noopFn,
       danger,
+      dangerDescription = '',
       inputref,
       onRequestClose = noopFn,
       onRequestSubmit = noopFn,
@@ -259,6 +266,7 @@ export const ModalFooter = React.forwardRef<HTMLElement, ModalFooterProps>(
             onClick={onRequestSubmit}
             className={primaryButtonClass}
             disabled={loadingActive || primaryButtonDisabled}
+            dangerDescription={dangerDescription}
             kind={danger ? 'danger' : 'primary'}
             ref={inputref}>
             {loadingStatus === 'inactive' ? (
@@ -301,6 +309,12 @@ ModalFooter.propTypes = {
    * Note that this prop is not applied if you render primary/danger button by yourself
    */
   danger: PropTypes.bool,
+
+  /**
+   * Specify the message read by screen readers for the danger primary button.
+   * Defaults to an empty string; provide localized text to opt in.
+   */
+  dangerDescription: PropTypes.string,
 
   /**
    * The `ref` callback for the primary button.

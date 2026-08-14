@@ -14,11 +14,11 @@ $animateTime: $duration-moderate-02 !default;
 @mixin keyframes {
   @keyframes out-to-active {
     from {
-      transform: translateX(0);
+      transform: translateX(-100%);
     }
 
     to {
-      transform: translateX(-100%);
+      transform: translateX(-200%);
     }
   }
 
@@ -81,8 +81,40 @@ $animateTime: $duration-moderate-02 !default;
   }
 }
 
+@mixin a11yStyles {
+  :host(.#{$prefix}__live-region),
+  .#{$prefix}__live-region {
+    position: absolute;
+    overflow: hidden;
+    padding: 0;
+    border: 0;
+    margin: -1px;
+    block-size: 1px;
+    clip: rect(0 0 0 0);
+    -webkit-clip-path: inset(50%);
+    clip-path: inset(50%);
+    inline-size: 1px;
+    white-space: nowrap;
+  }
+
+  :host(.#{$prefix}__view),
+  .#{$prefix}__view {
+    visibility: hidden;
+  }
+
+  :host(.#{$prefix}__view-active),
+  .#{$prefix}__view-active,
+  :host(.#{$prefix}__view-recycle-out),
+  .#{$prefix}__view-recycle-out,
+  :host(.#{$prefix}__view-recycle-in),
+  .#{$prefix}__view-recycle-in {
+    visibility: visible;
+  }
+}
+
 /// Main styles for view states
 @mixin viewStyles {
+  @include a11yStyles;
   @include keyframes;
   @include viewBase('#{$prefix}__view', 80, translateX(0));
   @include viewBase('#{$prefix}__view-active', 100, translateX(-100%));

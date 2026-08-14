@@ -64,9 +64,7 @@ yarn storybook
 ```
 
 Once the storybook is loaded, you can run tests against it using the storybook
-test-utils found in `e2e/test-utils/storybook`. A common use-case for testing a
-component is to use Percy to take a snapshot of a component in a particular
-theme from a specific story in storybook.
+test-utils found in `e2e/test-utils/storybook`.
 
 You can do this by writing the following:
 
@@ -77,35 +75,15 @@ You can do this by writing the following:
 
 const { test } = require('@playwright/test');
 const { themes } = require('../../test-utils/env');
-const { snapshotStory } = require('../../test-utils/storybook');
-
-test('component-name @vrt', ({ page }) => {
-  await snapshotStory(page, {
-    component: 'component',
-    story: 'story-name',
-    theme: 'white',
-  });
-});
-```
-
-You can test this component in multiple themes by writing the following:
-
-```js
-// e2e/components/component/component-test.e2e.js
-
-'use strict';
-
-const { test } = require('@playwright/test');
-const { themes } = require('../../test-utils/env');
-const { snapshotStory } = require('../../test-utils/storybook');
+const { visitStory } = require('../../test-utils/storybook');
 
 test.describe('component-name @vrt', () => {
   themes.forEach((theme) => {
     test(theme, async ({ page }) => {
-      await snapshotStory(page, {
+      await visitStory(page, {
         component: 'component',
         story: 'story-name',
-        theme,
+        globals: { theme },
       });
     });
   });
@@ -119,26 +97,42 @@ test step-by-step to debug what's going on. It will also allow you to interact
 with the page to quickly find selectors you can use to find items to run tests
 against.
 
-#### Working with snapshots locally
+#### Chromatic Visual Regression Testing
 
-Sometimes you'll want to debug snapshots locally instead of relying on an
-external service to get feedback. To do so, you can use the
-`ENABLE_LOCAL_SNAPSHOTS` environment variable to store snapshots locally. Almost
-any playwright command you run can be prefixed with this value in order to store
-screenshots locally.
+Chromatic is used for visual regression testing of Storybook stories. By
+default, stories are tested in the following modes:
 
-```bash
-ENABLE_LOCAL_SNAPSHOTS=1 yarn playwright test --project chromium --grep @vrt component-test.e2e.js
+- `g10` theme
+- `g100` theme
+- `breakpoint-sm` viewport
+
+The `g90` theme is intentionally excluded from global Chromatic coverage to
+reduce snapshot volume. However, individual stories can opt into g90 coverage
+when needed.
+
+##### Opting a Story into g90 Coverage
+
+To include g90 theme snapshots for a specific story, import `allModes` from the
+Storybook modes configuration and add it to the story's parameters:
+
+```js
+import { allModes } from '../../.storybook/modes';
+
+export const MyStory = {
+  parameters: {
+    chromatic: {
+      modes: {
+        g10: allModes['g10'],
+        g90: allModes['g90'], // Opt into g90 coverage
+        g100: allModes['g100'],
+      },
+    },
+  },
+};
 ```
 
-**Note: it's important to narrow down tests in order to not generate a lot of
-screenshots locally**
-
-The first time you'll run this command, it will need to generate the baseline
-snapshots for this component. The second time you run it, it will compare the
-snapshots for the current page with what is stored in the screenshot. If the two
-do not match, Playwright will report a failure and will provide a link to the
-diff image on your machine.
+This approach allows targeted g90 coverage for stories where it's specifically
+needed, such as when addressing theme-specific bugs or visual regressions.
 
 ## FAQ
 

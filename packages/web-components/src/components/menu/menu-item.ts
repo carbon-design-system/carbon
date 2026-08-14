@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { LitElement, PropertyValues, html } from 'lit';
+import { LitElement, html } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import styles from './menu-item.scss?lit';
@@ -67,7 +67,7 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
    * Specify the message read by screen readers for the danger menu item variant
    */
   @property({ type: String, attribute: 'danger-description' })
-  dangerDescription = 'danger';
+  dangerDescription = '';
 
   /**
    * Whether the menu submen for an item is open or not.
@@ -173,8 +173,7 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
     this._parentMenuObserver?.disconnect();
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-  updated(_changedProperties: PropertyValues): void {
+  updated(): void {
     if (this.hasSubmenu) {
       this.setAttribute('aria-expanded', this.hasSubmenu + '');
     } else {
@@ -187,6 +186,13 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
   @HostListener('click', { capture: true })
   handleClick(event: MouseEvent) {
     this._handleClick(event);
+  }
+
+  @HostListener('mousedown')
+  handleMouseDown(event: MouseEvent) {
+    if (this.disabled) {
+      event.preventDefault();
+    }
   }
 
   @HostListener('mouseenter')
@@ -220,6 +226,7 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
     } = this;
 
     const isDanger = kind === MENU_ITEM_KIND.DANGER && !this.hasSubmenu;
+    const hasDangerDescription = isDanger && Boolean(dangerDescription);
 
     const menuClassName = this.context?.hasSelectableItems
       ? `${prefix}--menu--with-selectable-items`
@@ -234,7 +241,7 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
         <slot name="render-icon"></slot>
       </div>
       <div class="${prefix}--menu-item__label">${label}</div>
-      ${isDanger
+      ${hasDangerDescription
         ? html`<span id="danger-description" class="${prefix}--visually-hidden"
             >${dangerDescription}</span
           >`
@@ -264,6 +271,10 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
   }
 
   _handleClick = (e: MouseEvent | KeyboardEvent): void => {
+    if (this.disabled) {
+      return;
+    }
+
     if (this.hasSubmenu) {
       this._openSubmenu();
       return;
