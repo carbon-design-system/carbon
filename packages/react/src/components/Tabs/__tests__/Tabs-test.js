@@ -712,6 +712,88 @@ describe('Tab', () => {
     }
   });
 
+  it('should defer overflow layout changes until after ResizeObserver delivery', () => {
+    let resizeCallback;
+    let queuedResizeUpdate;
+    let containerWidth = 300;
+    const originalResizeObserver = window.ResizeObserver;
+    const originalRequestAnimationFrame = window.requestAnimationFrame;
+    const originalCancelAnimationFrame = window.cancelAnimationFrame;
+    const clientWidthSpy = jest
+      .spyOn(HTMLElement.prototype, 'clientWidth', 'get')
+      .mockImplementation(function () {
+        if (this.classList.contains(`${prefix}--tabs`)) return containerWidth;
+
+        return this.getAttribute('role') === 'tablist' ? containerWidth : 0;
+      });
+    const scrollWidthSpy = jest
+      .spyOn(HTMLElement.prototype, 'scrollWidth', 'get')
+      .mockImplementation(function () {
+        return this.getAttribute('role') === 'tablist' ? 190 : 0;
+      });
+
+    window.ResizeObserver = jest.fn((callback) => {
+      resizeCallback = callback;
+
+      return {
+        observe: jest.fn(),
+        disconnect: jest.fn(),
+      };
+    });
+    window.requestAnimationFrame = jest.fn((callback) => {
+      queuedResizeUpdate = callback;
+
+      return 1;
+    });
+    window.cancelAnimationFrame = jest.fn();
+
+    try {
+      render(
+        <Tabs>
+          <TabList aria-label="List of tabs">
+            <Tab>Tab Label 1</Tab>
+            <Tab>Tab Label 2</Tab>
+          </TabList>
+        </Tabs>
+      );
+
+      const nextButton = screen.getByLabelText('Scroll right');
+
+      expect(nextButton).toHaveClass(
+        `${prefix}--tab--overflow-nav-button--hidden`
+      );
+
+      // Shrinking the container turns overflow on. The resize callback should
+      // not update the overflow button layout during the same `ResizeObserver`
+      // delivery, and should instead wait until the queued animation frame.
+      containerWidth = 180;
+      const classNameBeforeResize = nextButton.className;
+
+      act(() => {
+        resizeCallback();
+      });
+
+      expect(nextButton.className).toBe(classNameBeforeResize);
+      expect(nextButton).toHaveClass(
+        `${prefix}--tab--overflow-nav-button--hidden`
+      );
+
+      act(() => {
+        queuedResizeUpdate();
+      });
+
+      expect(nextButton).not.toHaveClass(
+        `${prefix}--tab--overflow-nav-button--hidden`
+      );
+    } finally {
+      window.ResizeObserver = originalResizeObserver;
+      window.requestAnimationFrame = originalRequestAnimationFrame;
+      window.cancelAnimationFrame = originalCancelAnimationFrame;
+      clientWidthSpy.mockRestore();
+      scrollWidthSpy.mockRestore();
+    }
+  });
+
   it('should hide next overflow button when only 1px remains in the overflow threshold', () => {
     jest.useFakeTimers();
     const clientWidthSpy = jest
