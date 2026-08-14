@@ -156,15 +156,6 @@ const sharedArgTypes = {
   },
 };
 
-const sharedControls = Object.keys(sharedArgTypes);
-const nonInlineArgTypes = {
-  ...sharedArgTypes,
-  inline: {
-    ...sharedArgTypes.inline,
-    table: { readonly: true },
-  },
-};
-
 const selectItems = html`
   <cds-select-item value="">Choose a region</cds-select-item>
   <cds-select-item value="us-south">Dallas (us-south)</cds-select-item>
@@ -177,7 +168,7 @@ export const Default = {
   args: sharedArgs,
   argTypes: sharedArgTypes,
   parameters: {
-    controls: { include: sharedControls },
+    controls: { exclude: ['onInput'] },
   },
   render: (args) => {
     const {
@@ -239,7 +230,7 @@ export const Inline = {
     },
   },
   parameters: {
-    controls: { include: sharedControls },
+    controls: { exclude: ['onInput'] },
   },
   render: (args) => {
     const {
@@ -305,9 +296,9 @@ export const Skeleton = {
 
 export const WithAILabel = {
   args: sharedArgs,
-  argTypes: nonInlineArgTypes,
+  argTypes: sharedArgTypes,
   parameters: {
-    controls: { include: sharedControls },
+    controls: { exclude: ['onInput'] },
   },
   render: (args) => {
     const {
@@ -361,10 +352,10 @@ export const WithLayer = {
   decorators: [withLayers],
   parameters: {
     layout: 'fullscreen',
-    controls: { include: sharedControls },
+    controls: { exclude: ['onInput'] },
   },
   args: sharedArgs,
-  argTypes: nonInlineArgTypes,
+  argTypes: sharedArgTypes,
   render: (args) => {
     const {
       disabled,

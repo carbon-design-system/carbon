@@ -98,13 +98,6 @@ const sharedArgs = {
 };
 
 const sharedControls = Object.keys(sharedArgTypes);
-const nonInlineArgTypes = {
-  ...sharedArgTypes,
-  inline: {
-    ...sharedArgTypes.inline,
-    table: { readonly: true },
-  },
-};
 
 const selectItems = (
   <>
@@ -176,7 +169,7 @@ _WithLayer.args = {
 };
 
 _WithLayer.argTypes = {
-  ...nonInlineArgTypes,
+  ...sharedArgTypes,
 };
 
 _WithLayer.parameters = {
@@ -229,7 +222,7 @@ withAILabel.args = {
 };
 
 withAILabel.argTypes = {
-  ...nonInlineArgTypes,
+  ...sharedArgTypes,
 };
 
 withAILabel.parameters = {
