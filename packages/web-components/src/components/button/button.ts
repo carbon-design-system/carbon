@@ -294,9 +294,7 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
 
     const isIconOnly = hasIcon && !hasMainContent;
     const isGhostIconOnly = isIconOnly && kind === BUTTON_KIND.GHOST;
-    const ariaPressed = isGhostIconOnly
-      ? String(Boolean(isSelected))
-      : undefined;
+    const ariaPressed = isGhostIconOnly && isSelected ? true : undefined;
 
     let defaultClasses = {
       [`${prefix}--btn`]: true,
