@@ -143,6 +143,7 @@ const sharedArgs = {
     'Error message that is really long can wrap to more lines but should not be excessively long.',
   isCondensed: false,
   label: 'Choose an option',
+  onChange: () => {},
   readOnly: false,
   titleText: 'Label',
   warn: false,
