@@ -794,6 +794,66 @@ describe('Tab', () => {
     }
   });
 
+  it('should cancel a pending resize animation frame on unmount', () => {
+    let resizeCallback;
+    let containerWidth = 300;
+    const originalResizeObserver = window.ResizeObserver;
+    const originalRequestAnimationFrame = window.requestAnimationFrame;
+    const originalCancelAnimationFrame = window.cancelAnimationFrame;
+    const clientWidthSpy = jest
+      .spyOn(HTMLElement.prototype, 'clientWidth', 'get')
+      .mockImplementation(function () {
+        if (this.classList.contains(`${prefix}--tabs`)) return containerWidth;
+
+        return this.getAttribute('role') === 'tablist' ? containerWidth : 0;
+      });
+    const scrollWidthSpy = jest
+      .spyOn(HTMLElement.prototype, 'scrollWidth', 'get')
+      .mockImplementation(function () {
+        return this.getAttribute('role') === 'tablist' ? 190 : 0;
+      });
+
+    window.ResizeObserver = jest.fn((callback) => {
+      resizeCallback = callback;
+
+      return {
+        observe: jest.fn(),
+        disconnect: jest.fn(),
+      };
+    });
+    window.requestAnimationFrame = jest.fn(() => 1);
+    window.cancelAnimationFrame = jest.fn();
+
+    try {
+      const { unmount } = render(
+        <Tabs>
+          <TabList aria-label="List of tabs">
+            <Tab>Tab Label 1</Tab>
+            <Tab>Tab Label 2</Tab>
+          </TabList>
+        </Tabs>
+      );
+
+      containerWidth = 180;
+
+      act(() => {
+        resizeCallback();
+      });
+
+      expect(window.cancelAnimationFrame).not.toHaveBeenCalled();
+
+      unmount();
+
+      expect(window.cancelAnimationFrame).toHaveBeenCalledWith(1);
+    } finally {
+      window.ResizeObserver = originalResizeObserver;
+      window.requestAnimationFrame = originalRequestAnimationFrame;
+      window.cancelAnimationFrame = originalCancelAnimationFrame;
+      clientWidthSpy.mockRestore();
+      scrollWidthSpy.mockRestore();
+    }
+  });
+
   it('should hide next overflow button when only 1px remains in the overflow threshold', () => {
     jest.useFakeTimers();
     const clientWidthSpy = jest
