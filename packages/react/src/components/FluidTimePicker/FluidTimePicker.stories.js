@@ -47,12 +47,8 @@ const ToggleTip = (
   </>
 );
 
-const widthArgType = {
-  control: { type: 'range', min: 300, max: 800, step: 50 },
-};
-
-export const Skeleton = ({ defaultWidth }) => (
-  <div style={{ width: defaultWidth }}>
+export const Skeleton = () => (
+  <div style={{ width: 300 }}>
     <FluidTimePickerSkeleton />
     <br />
     <br />
@@ -60,13 +56,9 @@ export const Skeleton = ({ defaultWidth }) => (
   </div>
 );
 
-Skeleton.args = { defaultWidth: 300 };
-Skeleton.argTypes = { defaultWidth: widthArgType };
-Skeleton.parameters = { controls: { include: ['defaultWidth'] } };
-
-export const Default = ({ defaultWidth, ...timePickerArgs }) => {
+export const Default = (timePickerArgs) => {
   return (
-    <div style={{ width: defaultWidth }}>
+    <div style={{ width: 350 }}>
       <FluidTimePicker id="time-picker-1" {...timePickerArgs}>
         <FluidTimePickerSelect id="select-1" labelText={ToggleTip}>
           <SelectItem value="am" text="AM" />
@@ -97,7 +89,6 @@ export const Default = ({ defaultWidth, ...timePickerArgs }) => {
 
 Default.args = {
   className: 'test-class',
-  defaultWidth: 350,
   disabled: false,
   invalid: false,
   labelText: 'Time',
@@ -117,7 +108,6 @@ Default.argTypes = {
   defaultValue: {
     control: { type: 'text' },
   },
-  defaultWidth: widthArgType,
   disabled: {
     control: { type: 'boolean' },
   },

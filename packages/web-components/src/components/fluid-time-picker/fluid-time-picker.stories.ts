@@ -14,7 +14,6 @@ import './fluid-time-picker-select';
 import './fluid-time-picker-skeleton';
 
 const args = {
-  defaultWidth: 350,
   disabled: false,
   hideLabel: false,
   invalid: false,
@@ -33,9 +32,6 @@ const args = {
 };
 
 const argTypes = {
-  defaultWidth: {
-    control: { type: 'range', min: 300, max: 800, step: 50 },
-  },
   disabled: {
     control: 'boolean',
     description: 'Specify whether the `<input>` should be disabled.',
@@ -116,7 +112,6 @@ export const Default = {
   args,
   argTypes,
   render: ({
-    defaultWidth,
     disabled,
     hideLabel,
     invalid,
@@ -134,7 +129,7 @@ export const Default = {
     warning,
     warningText,
   }) => html`
-    <div style="width:${defaultWidth}px;">
+    <div style="width:350px;">
       <cds-fluid-time-picker
         id="time-picker-1"
         ?disabled="${disabled}"
@@ -201,10 +196,8 @@ export const Default = {
 };
 
 export const Skeleton = {
-  args: { defaultWidth: 300 },
-  argTypes: { defaultWidth: argTypes.defaultWidth },
-  render: ({ defaultWidth }) => html`
-    <div style="width:${defaultWidth}px;">
+  render: () => html`
+    <div style="width:300px;">
       <cds-fluid-time-picker-skeleton> </cds-fluid-time-picker-skeleton>
       <br />
       <br />
