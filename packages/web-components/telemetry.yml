@@ -20,6 +20,7 @@ collect:
         - alignment-axis-offset
         - allow-custom-value
         - allow-empty
+        - allow-input
         - aria-current
         - aria-label
         - aria-labelledby
@@ -50,6 +51,7 @@ collect:
         - close-icon-description
         - close-on-activation
         - close-on-escape
+        - close-on-select
         - collapse-mode
         - color-scheme
         - cols
@@ -59,6 +61,7 @@ collect:
         - counter-mode
         - danger-description
         - data-table
+        - date-format
         - decrement-button-assistive-text
         - default-checked
         - default-open
@@ -74,6 +77,7 @@ collect:
         - enable-counter
         - enable-dialog-element
         - enable-v12-overflowmenu
+        - enabled-range
         - enter-delay-ms
         - even
         - expandable
@@ -120,6 +124,7 @@ collect:
         - is-active
         - is-condensed
         - is-expressive
+        - is-fluid
         - is-not-child-of-header
         - is-selectable
         - is-sortable
@@ -145,9 +150,11 @@ collect:
         - low-contrast
         - max
         - max-count
+        - max-date
         - max-length
         - menu-alignment
         - min
+        - min-date
         - multiple
         - name
         - nested
@@ -159,6 +166,8 @@ collect:
         - oncds-combo-box-toggled
         - oncds-content-switcher-beingselected
         - oncds-content-switcher-selected
+        - oncds-date-picker-changed
+        - oncds-date-picker-flatpickr-error
         - oncds-dropdown-beingselected
         - oncds-dropdown-beingtoggled
         - oncds-dropdown-selected
@@ -227,6 +236,7 @@ collect:
         - selection-name
         - selection-value
         - selector-initial-focus
+        - short
         - shortcut
         - should-filter-item
         - show-password-label
@@ -316,17 +326,6 @@ collect:
         - oncds-contained-list-item-click
         # cds-copy-button
         - autoAlign
-        # cds-date-picker
-        - allow-input
-        - close-on-select
-        - date-format
-        - enabled-range
-        - max-date
-        - min-date
-        - oncds-date-picker-changed
-        - oncds-date-picker-flatpickr-error
-        # cds-date-picker-input
-        - short
         # cds-definition-tooltip
         - open-on-hover
         # cds-dialog
@@ -357,6 +356,8 @@ collect:
         - error-subject
         - oncds-file-uploader-item-beingdeleted
         - oncds-file-uploader-item-deleted
+        # cds-fluid-date-picker-skeleton
+        - date-picker-type
         # cds-fluid-time-picker-skeleton
         - is-only-two
         # cds-form-group
@@ -450,6 +451,19 @@ collect:
         - items-shown
         - loop
         - oncds-page-changed
+        # cds-preview-date-picker
+        - oncds-preview-date-picker-changed
+        - oncds-preview-date-picker-error
+        # cds-preview-date-picker-calendar
+        - dateFormat
+        - focusedDate
+        - maxDate
+        - minDate
+        - oncds-preview-date-picker-calendar-date-select
+        - oncds-preview-date-picker-calendar-month-change
+        - rangeMode
+        - selectedDates
+        - viewDate
         # cds-progress-indicator
         - current-index
         - ononChange
@@ -634,6 +648,10 @@ collect:
         # General - type
         - number
         - text
+        # cds-fluid-date-picker-skeleton - date-picker-type
+        - range
+        - simple
+        - single
         # cds-layout - density
         - condensed
         - normal
