@@ -12,31 +12,55 @@
  * Drag the resize handle (bottom-right of the container) to change width/height.
  */
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { createOverflowHandler } from '@carbon/utilities/overflowHandler';
 import './OverflowHandler.stories.scss';
 
 export default {
   title: 'Utilities/OverflowHandler',
-  parameters: { layout: 'padded' },
+  parameters: {
+    layout: 'padded',
+    chromatic: { disableSnapshot: true },
+  },
+  tags: [
+    // '!dev', // uncomment to hide from the sidebar
+    '!autodocs',
+  ],
 };
 
-/** Formats the visible/hidden node arrays into a human-readable string. */
+const ITEM_LABELS = [
+  'All',
+  'Dashboard',
+  'Notifications',
+  'Account settings',
+  'Help',
+  'Privacy',
+  'Organization access',
+  'Docs',
+  'Billing and usage',
+  'API',
+  'Integrations',
+  'Audit log',
+  'OK',
+  'Experimental features',
+  'Sign out',
+];
+
+const labelFor = (index) =>
+  ITEM_LABELS[(index - 1) % ITEM_LABELS.length] +
+  (index > ITEM_LABELS.length
+    ? ` ${Math.ceil(index / ITEM_LABELS.length)}`
+    : '');
+
 const fmt = (visible, hidden) =>
   `visible : [${visible.map((n) => n.textContent?.trim()).join(', ')}]\n` +
   `hidden  : [${hidden.map((n) => n.textContent?.trim()).join(', ')}]`;
-
-/** Live log panel rendered beneath the story. */
-function Log({ text }) {
-  return <pre className="overflow-handler-log">{text}</pre>;
-}
 
 /**
  * A single self-contained overflow handler instance with its own state and
  * handler lifecycle. Accepts the same options as `createOverflowHandler`.
  */
 function OverflowInstance({
-  index,
   itemCount,
   maxVisibleItems,
   offsetValue,
@@ -45,15 +69,39 @@ function OverflowInstance({
   dimension,
 }) {
   const ref = useRef(null);
-  const [{ hiddenItems, log }, setState] = useState({
-    hiddenItems: [],
-    log: '',
-  });
+  const logRef = useRef(null);
 
-  // Re-create the handler whenever any option changes.
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    // `resize` writes inline width/height. Clear them when the axis changes so
+    // the horizontal/vertical class sizes apply instead of the previous drag.
+    el.style.removeProperty('width');
+    el.style.removeProperty('height');
+  }, [dimension]);
+
+  // Re-create the handler whenever any option changes.
+  // onChange updates the offset label and log via the DOM so React does not
+  // re-render the items and strip `data-hidden` attributes the handler sets.
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const offsetEl = el.querySelector('[data-offset]');
+    const writeLog = (text) => {
+      if (logRef.current) {
+        logRef.current.textContent = text;
+      }
+    };
+
+    let hiddenLabels = [];
+    const onOffsetClick = () => {
+      if (hiddenLabels.length === 0) {
+        return;
+      }
+      alert(hiddenLabels.join(', '));
+    };
+    offsetEl?.addEventListener('click', onOffsetClick);
 
     let handler;
     try {
@@ -64,14 +112,20 @@ function OverflowInstance({
         offsetValue,
         ...(maxVisibleItems > 0 ? { maxVisibleItems } : {}),
         onChange(visible, hidden) {
-          setState({ hiddenItems: hidden, log: fmt(visible, hidden) });
+          hiddenLabels = hidden.map((n) => n.textContent?.trim() ?? '');
+          if (offsetEl) {
+            offsetEl.textContent =
+              hidden.length > 0 ? `+${hidden.length} more` : '+0 more';
+          }
+          writeLog(fmt(visible, hidden));
         },
       });
     } catch (err) {
-      setState({ hiddenItems: [], log: `ERROR: ${err.message}` });
+      writeLog(`ERROR: ${err.message}`);
     }
 
     return () => {
+      offsetEl?.removeEventListener('click', onOffsetClick);
       handler?.disconnect();
     };
   }, [itemCount, maxVisibleItems, offsetValue, gap, fixedIndex, dimension]);
@@ -85,11 +139,16 @@ function OverflowInstance({
   // stylesheet, so it remains as a single targeted inline style here.
   return (
     <div className="overflow-handler-instance">
-      <p className="overflow-handler-instance-label">Instance {index + 1}</p>
       <div
         ref={ref}
-        className={`overflow-handler-container ${containerModifier}`}
-        style={{ gap }}>
+        className={`overflow-handler-container ${containerModifier}${
+          gap > 0 ? ' overflow-handler-show-gap' : ''
+        }${offsetValue > 0 ? ' overflow-handler-show-offset-value' : ''}`}
+        style={{
+          gap,
+          '--overflow-handler-gap': `${gap}px`,
+          '--overflow-handler-offset-value': `${offsetValue}px`,
+        }}>
         {Array.from({ length: itemCount }, (_, i) => {
           const n = i + 1;
           const isFixed = fixedIndex > 0 && n === fixedIndex;
@@ -98,20 +157,19 @@ function OverflowInstance({
               key={`item${n}`}
               {...(isFixed ? { 'data-fixed': '' } : {})}
               className={`overflow-handler-item${isFixed ? ' overflow-handler-item-fixed' : ''}`}>
-              Item {n}
-              {isFixed ? ' ★' : ''}
+              {labelFor(n)}
             </div>
           );
         })}
-        <div
+        <button
+          type="button"
           data-offset
           data-hidden
-          title={hiddenItems.map((n) => n.textContent?.trim()).join(', ')}
           className="overflow-handler-offset">
-          {hiddenItems.length > 0 ? `+${hiddenItems.length} more` : '+0 more'}
-        </div>
+          +0 more
+        </button>
       </div>
-      <Log text={log} />
+      <pre ref={logRef} className="overflow-handler-log" />
     </div>
   );
 }
@@ -150,7 +208,7 @@ export const Default = {
     fixedIndex: {
       control: { type: 'number', min: 0, max: 16, step: 1 },
       description:
-        'Mark item N as data-fixed (always visible). 0 = none. E.g. 3 → Item 3 gets data-fixed.',
+        'Mark item N as data-fixed (always visible). 0 = none. E.g. 3 → Item 3 gets data-fixed. `data-fixed` can be added to multiple items.',
     },
     dimension: {
       control: { type: 'radio' },
@@ -168,26 +226,43 @@ export const Default = {
     dimension,
   }) {
     return (
-      <>
+      <div className="overflow-handler-demo">
         <div className="overflow-handler-legend">
           <span>
             <span className="overflow-handler-swatch overflow-handler-swatch-regular" />
             regular item
           </span>
-          <span>
-            <span className="overflow-handler-swatch overflow-handler-swatch-fixed" />
-            fixed item ★ (<code>data-fixed</code>)
-          </span>
-          <span>
+          {fixedIndex > 0 && (
+            <span>
+              <span className="overflow-handler-swatch overflow-handler-swatch-fixed" />
+              fixed item (<code>data-fixed</code>)
+            </span>
+          )}
+          <span className="overflow-handler-legend-offset">
             <span className="overflow-handler-swatch overflow-handler-swatch-offset" />
             offset item (<code>data-offset</code>)
           </span>
+          <span>
+            <span className="overflow-handler-swatch overflow-handler-swatch-available" />
+            available space
+          </span>
+          {gap > 0 && (
+            <span>
+              <span className="overflow-handler-swatch overflow-handler-swatch-gap" />
+              gap
+            </span>
+          )}
+          {offsetValue > 0 && (
+            <span>
+              <span className="overflow-handler-swatch overflow-handler-swatch-offset-value" />
+              offset value
+            </span>
+          )}
         </div>
 
         {Array.from({ length: instanceCount }, (_, i) => (
           <OverflowInstance
             key={i}
-            index={i}
             itemCount={itemCount}
             maxVisibleItems={maxVisibleItems}
             offsetValue={offsetValue}
@@ -196,11 +271,7 @@ export const Default = {
             dimension={dimension}
           />
         ))}
-      </>
+      </div>
     );
   },
-};
-Default.tags = ['!dev', '!autodocs']; // remove this to enable story - is still available in slug /utilities-overflowhandler--default
-Default.parameters = {
-  chromatic: { disableSnapshot: true }, // remove this to enable snapshots
 };

@@ -28,16 +28,6 @@ const setContainerDimension = (container, dimension, value) => {
     configurable: true,
     writable: true,
   });
-  // updateOverflowHandler now uses getBoundingClientRect instead of clientWidth/Height
-  // so we also need to stub it on the container element.
-  Object.defineProperty(container, 'getBoundingClientRect', {
-    value: () => ({
-      width: dimension === 'width' ? value : 0,
-      height: dimension === 'height' ? value : 0,
-    }),
-    configurable: true,
-    writable: true,
-  });
 };
 
 // getComputedStyle returns zero padding/margin by default so item sizes equal
@@ -370,7 +360,7 @@ describe('createOverflowHandler', () => {
       });
 
       it('should not overflow when container is large enough to absorb gaps', () => {
-        // 3 × (40 + 8) = 144; available = 200 + 8 = 208; all fit
+        // 3 × 40 + 2 × 8 = 136 ≤ 200; all fit
         container.append(...createItems(Array(3).fill(40), 'width'));
         setContainerDimension(container, 'width', 200);
         handler = createOverflowHandler({
@@ -379,6 +369,26 @@ describe('createOverflowHandler', () => {
           onChange: mockOnChange,
         });
         expect(mockOnChange).not.toHaveBeenCalled();
+      });
+
+      it('should not count a trailing gap when deciding whether items fit', () => {
+        // 3 × 40 + 2 × 10 = 140. Per-item gap sum is 150, which would overflow
+        // a 145px container one gap too early if the trailing gap is kept.
+        container.append(...createItems(Array(3).fill(40), 'width'));
+        const offset = document.createElement('div');
+        offset.setAttribute('data-offset', '');
+        Object.defineProperty(offset, 'getBoundingClientRect', {
+          value: () => ({ width: 40 }),
+        });
+        container.append(offset);
+        setContainerDimension(container, 'width', 145);
+        handler = createOverflowHandler({
+          container,
+          gap: 10,
+          onChange: mockOnChange,
+        });
+        expect(mockOnChange).not.toHaveBeenCalled();
+        expect(offset.hasAttribute('data-hidden')).toBe(true);
       });
     });
 
@@ -617,6 +627,25 @@ describe('updateOverflowHandler', () => {
     });
 
     expect(offset.hasAttribute('data-hidden')).toBe(true);
+  });
+
+  it('should hide the offset on the initial all-visible pass without calling onChange', () => {
+    const items = makeItems(3); // 3 × 40 = 120 ≤ 200, all fit
+    const offset = document.createElement('div');
+
+    updateOverflowHandler({
+      container,
+      items,
+      offset,
+      sizes: Array(3).fill(40),
+      fixedSizes: [],
+      offsetSize: 0,
+      dimension: 'width',
+      onChange: mockOnChange,
+    });
+
+    expect(offset.hasAttribute('data-hidden')).toBe(true);
+    expect(mockOnChange).not.toHaveBeenCalled();
   });
 
   it('should remove data-hidden from the offset element when items are hidden', () => {

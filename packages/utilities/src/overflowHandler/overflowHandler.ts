@@ -5,15 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// Note: there is a hidden story for this utility. for testing purposes.
+
 /**
  * Calculates the size (width or height) of a given HTML element.
  *
- * This function performs an expensive calculation by temporarily changing the
- * display style of the element if it is not currently visible. It then uses
- * `getBoundingClientRect` to retrieve the size of the element.
- *
- * An optional `gap` value can be supplied to account for the spacing between
- * siblings in a flex/grid container.
+ * Temporarily sets `display` if the element is not currently visible so hidden
+ * items can still be measured. Adds margin and an optional `gap`.
  *
  * @param el - The HTML element whose size is to be calculated. Returns 0 if
  *   `null` or `undefined` is passed.
@@ -28,22 +26,19 @@ export function getSize(
 ): number {
   if (!el) return 0;
   const originalDisplay = el.style.display;
-  if (!el.offsetParent && getComputedStyle(el).display === 'none') {
+  const styles = getComputedStyle(el);
+  if (!el.offsetParent && styles.display === 'none') {
     el.style.display = 'inline-block';
   }
-  let size = el.getBoundingClientRect()[dimension];
+  const size = el.getBoundingClientRect()[dimension];
   el.style.display = originalDisplay;
-  const computedStyles = getComputedStyle(el);
-  size =
+  const margin =
     dimension === 'width'
-      ? size +
-        parseInt(computedStyles.marginLeft) +
-        parseInt(computedStyles.marginRight)
-      : size +
-        parseInt(computedStyles.marginTop) +
-        parseInt(computedStyles.marginBottom);
-  size += gap;
-  return size;
+      ? (parseFloat(styles.marginLeft) || 0) +
+        (parseFloat(styles.marginRight) || 0)
+      : (parseFloat(styles.marginTop) || 0) +
+        (parseFloat(styles.marginBottom) || 0);
+  return size + margin + gap;
 }
 
 /**
@@ -106,8 +101,10 @@ export function updateOverflowHandler({
 
   const totalSize = sizes.reduce((sum, size) => sum + size, 0);
   const totalFixedSize = fixedSizes.reduce((sum, size) => sum + size, 0);
+  // sizes include a gap after every item, but CSS gap is only between items.
+  const trailingGap = sizes.length + fixedSizes.length > 0 ? gap : 0;
 
-  if (totalSize + totalFixedSize <= containerSize - offsetValue) {
+  if (totalSize + totalFixedSize - trailingGap <= containerSize - offsetValue) {
     visibleItems = maxVisibleItems
       ? items.slice(0, maxVisibleItems)
       : [...items];
@@ -136,6 +133,13 @@ export function updateOverflowHandler({
     hiddenItems = items.slice(breakIndex);
   }
 
+  visibleItems.forEach((item) => item.removeAttribute('data-hidden'));
+  hiddenItems.forEach((item) => item.setAttribute('data-hidden', ''));
+
+  if (offset) {
+    offset.toggleAttribute('data-hidden', hiddenItems.length === 0);
+  }
+
   if (
     previousHiddenItems.length === hiddenItems.length &&
     previousHiddenItems.every((item, index) => item === hiddenItems[index])
@@ -143,12 +147,6 @@ export function updateOverflowHandler({
     return previousHiddenItems;
   }
 
-  visibleItems.forEach((item) => item.removeAttribute('data-hidden'));
-  hiddenItems.forEach((item) => item.setAttribute('data-hidden', ''));
-
-  if (offset) {
-    offset.toggleAttribute('data-hidden', hiddenItems.length === 0);
-  }
   onChange(visibleItems, hiddenItems);
   return hiddenItems;
 }
@@ -205,7 +203,6 @@ export function createOverflowHandler({
   offsetValue,
   gap,
 }: OverflowHandlerOptions): OverflowHandler {
-  // Error handling
   if (!(container instanceof HTMLElement)) {
     throw new Error('container must be an HTMLElement');
   }
@@ -226,20 +223,22 @@ export function createOverflowHandler({
     (item) => item !== offset && !fixedItems.includes(item)
   );
 
-  const fixedSizes = fixedItems.map((item) => getSize(item, dimension, gap));
-  const sizes = items.map((item) => getSize(item, dimension, gap));
-  const offsetSize = getSize(offset, dimension, gap);
-
   let previousHiddenItems: HTMLElement[] = [];
+  let rafId: number | undefined;
+  let disconnected = false;
 
-  function update() {
+  const update = () => {
+    if (disconnected) {
+      return;
+    }
+    rafId = undefined;
     previousHiddenItems = updateOverflowHandler({
       container,
       items,
       offset,
-      sizes,
-      fixedSizes,
-      offsetSize,
+      sizes: items.map((item) => getSize(item, dimension, gap)),
+      fixedSizes: fixedItems.map((item) => getSize(item, dimension, gap)),
+      offsetSize: getSize(offset, dimension, gap),
       maxVisibleItems,
       dimension,
       onChange,
@@ -247,18 +246,27 @@ export function createOverflowHandler({
       offsetValue,
       gap,
     });
-  }
+  };
 
-  const resizeObserver = new ResizeObserver(() =>
-    requestAnimationFrame(update)
-  );
+  const scheduleUpdate = () => {
+    if (disconnected || rafId !== undefined) {
+      return;
+    }
+    rafId = requestAnimationFrame(update);
+  };
+
+  const resizeObserver = new ResizeObserver(scheduleUpdate);
   resizeObserver.observe(container);
-
-  requestAnimationFrame(update); // Initial update
+  scheduleUpdate();
+  document.fonts?.ready?.then(scheduleUpdate);
 
   return {
     disconnect() {
+      disconnected = true;
       resizeObserver.disconnect();
+      if (rafId !== undefined) {
+        cancelAnimationFrame(rafId);
+      }
     },
   };
 }
