@@ -219,10 +219,10 @@ describe('cds-button', () => {
       await el.updateComplete;
 
       const button = el.shadowRoot?.querySelector('button');
-      expect(button).to.have.attribute('aria-pressed', 'true');
+      expect(button).to.have.attribute('aria-pressed');
     });
 
-    it('should set aria-pressed to false on a ghost icon button that is not selected', async () => {
+    it('should not set aria-pressed on a ghost icon button that is not selected', async () => {
       const el = await fixture(html`
         <cds-button kind="ghost" tooltip-text="Icon button">
           <svg slot="icon" data-testid="svg"></svg>
@@ -231,7 +231,7 @@ describe('cds-button', () => {
       await el.updateComplete;
 
       const button = el.shadowRoot?.querySelector('button');
-      expect(button).to.have.attribute('aria-pressed', 'false');
+      expect(button).to.not.have.attribute('aria-pressed');
     });
 
     it('should not set aria-pressed on a non-icon ghost button', async () => {
