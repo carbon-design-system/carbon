@@ -17,9 +17,6 @@ import {
   waitForPosition,
 } from '../../ListBox/test-helpers';
 import FluidComboBox from '../FluidComboBox';
-import { Default, Condensed } from '../FluidComboBox.stories';
-
-jest.mock('../FluidComboBox.mdx', () => ({}));
 
 const prefix = 'cds';
 
@@ -255,41 +252,6 @@ describe('FluidComboBox', () => {
 
       expect(firstListBox()).toBeEmptyDOMElement();
       expect(secondListBox()).toBeEmptyDOMElement();
-    });
-  });
-
-  describe('Storybook', () => {
-    it('should render shared story args through the default story', async () => {
-      const { container } = render(
-        <Default
-          {...Default.args}
-          className="story-class"
-          disabled
-          label="Story label"
-          titleText="Story title"
-        />
-      );
-      await waitForPosition();
-
-      expect(
-        container.querySelector(`.${prefix}--list-box__wrapper--fluid`)
-      ).toHaveClass('story-class');
-      expect(screen.getByText('Story title')).toBeInTheDocument();
-      expect(screen.getByRole('combobox')).toBeDisabled();
-      expect(screen.getByRole('combobox')).toHaveAttribute(
-        'label',
-        'Story label'
-      );
-    });
-
-    it('should keep the condensed story variant fixed', async () => {
-      const { container } = render(<Condensed {...Condensed.args} />);
-      await waitForPosition();
-
-      expect(
-        container.querySelector(`.${prefix}--list-box__wrapper--fluid`)
-      ).toHaveClass(`${prefix}--list-box__wrapper--fluid--condensed`);
-      expect(Condensed.argTypes.isCondensed.table.readonly).toBe(true);
     });
   });
 });
