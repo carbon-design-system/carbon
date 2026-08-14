@@ -82,16 +82,69 @@ Cards support two density variants via the `density` prop:
 
 ## Clickable cards
 
-Pass `clickable` and `onClick` to make the entire card interactive. The card
-renders as a `<button>` and gains focus/hover styles. Interactive elements
-inside a clickable card should call `e.stopPropagation()` to prevent the card
-click from firing.
+A clickable card turns the entire surface into a single action target. Pass
+`clickable` to enable interactive styles (hover, focus, active states) and a
+built-in footer affordance with an arrow icon.
+
+Every clickable card **must have an accessible name** via `aria-label` or
+`aria-labelledby` — a `console.error` is raised at runtime if this is missing.
+
+`Card.Footer` is not supported inside a clickable card and will render nothing.
+The footer affordance is managed by the card itself.
+
+### Action card (onClick)
+
+Use `onClick` when the card triggers an in-page action such as opening a modal,
+selecting an item, or expanding a panel.
 
 ```jsx
-<Card clickable onClick={() => navigate('/detail')}>
+<Card clickable onClick={() => openModal()} aria-label="View analytics report">
+  <Card.Header>
+    <Card.Title>Usage report</Card.Title>
+  </Card.Header>
   <Card.Body>Content</Card.Body>
 </Card>
 ```
+
+### Navigation card (as="a")
+
+Use `as="a"` with `href` when the card navigates to another page. This renders a
+native `<a>` element giving users right-click, Cmd+click, and screen-reader link
+semantics.
+
+```jsx
+<Card clickable as="a" href="/dashboard" aria-label="Go to dashboard">
+  <Card.Header>
+    <Card.Title>Dashboard</Card.Title>
+  </Card.Header>
+  <Card.Body>Content</Card.Body>
+</Card>
+```
+
+Use any router's Link component the same way:
+
+```jsx
+// React Router
+<Card clickable as={Link} to="/dashboard" aria-label="Go to dashboard">
+  ...
+</Card>
+```
+
+### Custom footer icon
+
+Override the default `ArrowRight` icon using `renderFooterIcon`:
+
+```jsx
+<Card
+  clickable
+  onClick={handleClick}
+  renderFooterIcon={Launch}
+  aria-label="Launch application">
+  ...
+</Card>
+```
+
+<Canvas of={CardStories.Clickable} />
 
 ## Disabled state
 
