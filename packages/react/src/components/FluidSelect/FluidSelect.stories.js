@@ -69,6 +69,14 @@ const sharedArgTypes = {
       type: 'text',
     },
   },
+  onChange: {
+    action: 'onChange',
+  },
+  readOnly: {
+    control: {
+      type: 'boolean',
+    },
+  },
   warn: {
     control: {
       type: 'boolean',
@@ -79,6 +87,24 @@ const sharedArgTypes = {
       type: 'text',
     },
   },
+};
+
+const sharedArgs = {
+  className: 'test-class',
+  disabled: false,
+  invalid: false,
+  invalidText:
+    'Error message that is really long can wrap to more lines but should not be excessively long.',
+  labelText: 'Select an option',
+  readOnly: false,
+  warn: false,
+  warnText:
+    'Warning message that is really long can wrap to more lines but should not be excessively long.',
+};
+
+const sharedControls = Object.keys(sharedArgTypes);
+const widthArgType = {
+  control: { type: 'range', min: 300, max: 800, step: 50 },
 };
 
 const ToggleTip = (
@@ -108,23 +134,18 @@ export const Default = ({ defaultWidth, ...selectArgs }) => (
 );
 
 Default.args = {
-  labelText: ToggleTip,
+  ...sharedArgs,
   defaultWidth: 400,
-  className: 'test-class',
-  disabled: false,
-  invalid: false,
-  invalidText:
-    'Error message that is really long can wrap to more lines but should not be excessively long.',
-  warn: false,
-  warnText:
-    'Warning message that is really long can wrap to more lines but should not be excessively long.',
+  labelText: ToggleTip,
 };
 
 Default.argTypes = {
   ...sharedArgTypes,
-  defaultWidth: {
-    control: { type: 'range', min: 300, max: 800, step: 50 },
-  },
+  defaultWidth: widthArgType,
+};
+
+Default.parameters = {
+  controls: { include: [...sharedControls, 'defaultWidth'] },
 };
 
 const aiLabel = (
@@ -158,13 +179,13 @@ const aiLabel = (
   </AILabel>
 );
 
-export const withAILabel = (args) => (
-  <div style={{ width: 400 }}>
+export const withAILabel = ({ defaultWidth, ...selectArgs }) => (
+  <div style={{ width: defaultWidth }}>
     <FluidSelect
       id="select-1"
       labelText="Select an option"
       decorator={aiLabel}
-      {...args}>
+      {...selectArgs}>
       <SelectItem value="" text="" />
       <SelectItem
         value="An example option that is really long to show what should be done to handle long text"
@@ -177,10 +198,34 @@ export const withAILabel = (args) => (
   </div>
 );
 
-withAILabel.argTypes = { ...sharedArgTypes };
+withAILabel.args = {
+  ...sharedArgs,
+  defaultWidth: 400,
+};
 
-export const Skeleton = () => (
-  <div style={{ width: 400 }}>
+withAILabel.argTypes = {
+  ...sharedArgTypes,
+  defaultWidth: widthArgType,
+};
+
+withAILabel.parameters = {
+  controls: { include: [...sharedControls, 'defaultWidth'] },
+};
+
+export const Skeleton = ({ defaultWidth }) => (
+  <div style={{ width: defaultWidth }}>
     <FluidSelectSkeleton />
   </div>
 );
+
+Skeleton.args = {
+  defaultWidth: 400,
+};
+
+Skeleton.argTypes = {
+  defaultWidth: widthArgType,
+};
+
+Skeleton.parameters = {
+  controls: { include: ['defaultWidth'] },
+};

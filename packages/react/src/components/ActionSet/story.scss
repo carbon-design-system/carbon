@@ -1,0 +1,31 @@
+//
+// Copyright IBM Corp. 2021, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+
+// Wrapper that makes the ActionSet boundary visible in Storybook.
+// Width is driven by the containerWidth story control (inline style).
+.sb-action-set-story {
+  position: relative;
+  display: inline-block;
+  padding-block-start: $spacing-05;
+  border-block-start: 1px solid $border-subtle-01;
+  min-block-size: $spacing-10;
+
+  // Width label shown above the component
+  &::before {
+    @include type.type-style('helper-text-01');
+
+    content: attr(style);
+    position: absolute;
+    inset-block-start: $spacing-01;
+    color: $text-helper;
+    white-space: nowrap;
+  }
+}
