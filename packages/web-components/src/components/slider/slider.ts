@@ -118,16 +118,30 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
   }
 
   /**
+   * Returns the decimal precision needed to represent the slider's valid value
+   * space without floating point artifacts.
+   */
+  private _getSliderPrecision() {
+    return Math.max(
+      this._getNumericPrecision(this.step),
+      this._getNumericPrecision(this.min),
+      this._getNumericPrecision(this.max)
+    );
+  }
+
+  /**
    * Rounds a number using the slider precision derived from `step`, `min`, and `max`.
    */
   private _normalizeValue(value: number) {
     const step = Number(this.step);
     const min = Number(this.min);
+    const max = Number(this.max);
 
-    const precision = this._getNumericPrecision(step);
+    const precision = this._getSliderPrecision();
     const snapped = min + Math.round((value - min) / step) * step;
+    const clamped = Math.min(max, Math.max(min, snapped));
 
-    return Number(snapped.toFixed(precision));
+    return Number(clamped.toFixed(precision));
   }
 
   /**
@@ -1159,10 +1173,6 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
                       aria-valuemax="${max}"
                       aria-valuemin="${min}"
                       aria-valuenow="${unstable_valueUpper}"
-                      aria-valuetext="${formatLabel(
-                        Number(unstable_valueUpper),
-                        undefined
-                      )}"
                       aria-valuetext="${formatLabel(valueUpper, undefined)}"
                       @pointerdown="${onDrag}">
                       <svg

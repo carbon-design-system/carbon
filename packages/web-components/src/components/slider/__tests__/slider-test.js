@@ -529,9 +529,98 @@ describe('cds-slider', () => {
     );
     await el.updateComplete;
 
+    const thumb = el?.shadowRoot?.querySelector('#thumb');
     const tooltipContent = el?.shadowRoot?.querySelector('cds-tooltip-content');
-    const displayedValue = Number(tooltipContent?.textContent.trim());
-    expect(displayedValue).to.equal(8.7);
+    expect(el.value).to.equal(8.7);
+    expect(thumb).to.have.attribute('aria-valuenow', '8.7');
+    expect(thumb).to.have.attribute('aria-valuetext', '8.7');
+    expect(tooltipContent?.textContent.trim()).to.equal('8.7');
+  });
+
+  it('should preserve decimal precision from min for hidden-input tooltip content', async () => {
+    const el = await fixture(
+      html` <cds-slider
+        label-text="Slider Label"
+        max="10.5"
+        min="0.5"
+        step="1"
+        value="5.5"
+        hide-text-input>
+        <cds-slider-input
+          aria-label="Slider value"
+          type="number"></cds-slider-input>
+      </cds-slider>`
+    );
+    await el.updateComplete;
+
+    const slider = el?.shadowRoot?.querySelector('.cds--slider');
+    const track = el?.shadowRoot?.querySelector('#track');
+    track.getBoundingClientRect = () => ({
+      left: 0,
+      width: 100,
+      top: 0,
+      right: 100,
+      bottom: 0,
+      height: 0,
+      x: 0,
+      y: 0,
+      toJSON: () => {},
+    });
+
+    slider?.dispatchEvent(
+      new MouseEvent('click', { clientX: 0, bubbles: true })
+    );
+    await el.updateComplete;
+
+    const thumb = el?.shadowRoot?.querySelector('#thumb');
+    const tooltipContent = el?.shadowRoot?.querySelector('cds-tooltip-content');
+    expect(el.value).to.equal(0.5);
+    expect(thumb).to.have.attribute('aria-valuenow', '0.5');
+    expect(thumb).to.have.attribute('aria-valuetext', '0.5');
+    expect(tooltipContent?.textContent.trim()).to.equal('0.5');
+  });
+
+  it('should preserve decimal precision from max for hidden-input tooltip content', async () => {
+    const el = await fixture(
+      html` <cds-slider
+        label-text="Slider Label"
+        max="10.5"
+        min="0"
+        step="1"
+        value="5"
+        hide-text-input>
+        <cds-slider-input
+          aria-label="Slider value"
+          type="number"></cds-slider-input>
+      </cds-slider>`
+    );
+    await el.updateComplete;
+
+    const slider = el?.shadowRoot?.querySelector('.cds--slider');
+    const track = el?.shadowRoot?.querySelector('#track');
+    track.getBoundingClientRect = () => ({
+      left: 0,
+      width: 100,
+      top: 0,
+      right: 100,
+      bottom: 0,
+      height: 0,
+      x: 0,
+      y: 0,
+      toJSON: () => {},
+    });
+
+    slider?.dispatchEvent(
+      new MouseEvent('click', { clientX: 100, bubbles: true })
+    );
+    await el.updateComplete;
+
+    const thumb = el?.shadowRoot?.querySelector('#thumb');
+    const tooltipContent = el?.shadowRoot?.querySelector('cds-tooltip-content');
+    expect(el.value).to.equal(10.5);
+    expect(thumb).to.have.attribute('aria-valuenow', '10.5');
+    expect(thumb).to.have.attribute('aria-valuetext', '10.5');
+    expect(tooltipContent?.textContent.trim()).to.equal('10.5');
   });
 
   it('should normalize decimal values for hidden-input tooltip content with step 0.7384', async () => {
@@ -569,9 +658,12 @@ describe('cds-slider', () => {
     );
     await el.updateComplete;
 
+    const thumb = el?.shadowRoot?.querySelector('#thumb');
     const tooltipContent = el?.shadowRoot?.querySelector('cds-tooltip-content');
-    const displayedValue = Number(tooltipContent?.textContent.trim());
-    expect(displayedValue).to.equal(8.8608);
+    expect(el.value).to.equal(8.8608);
+    expect(thumb).to.have.attribute('aria-valuenow', '8.8608');
+    expect(thumb).to.have.attribute('aria-valuetext', '8.8608');
+    expect(tooltipContent?.textContent.trim()).to.equal('8.8608');
   });
 
   it('should normalize decimal values for negative hidden-input tooltip content', async () => {
@@ -609,9 +701,12 @@ describe('cds-slider', () => {
     );
     await el.updateComplete;
 
+    const thumb = el?.shadowRoot?.querySelector('#thumb');
     const tooltipContent = el?.shadowRoot?.querySelector('cds-tooltip-content');
-    const displayedValue = Number(tooltipContent?.textContent.trim());
-    expect(displayedValue).to.equal(-8.7);
+    expect(el.value).to.equal(-8.7);
+    expect(thumb).to.have.attribute('aria-valuenow', '-8.7');
+    expect(thumb).to.have.attribute('aria-valuetext', '-8.7');
+    expect(tooltipContent?.textContent.trim()).to.equal('-8.7');
   });
 
   it('should correctly initialize with value 0 and respond to track click', async () => {
