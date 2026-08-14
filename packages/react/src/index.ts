@@ -19,6 +19,7 @@ export * from './components/AspectRatio';
 export * from './components/Breadcrumb';
 export * from './components/Button';
 export * from './components/ButtonSet';
+export * as preview__Card from './components/Card';
 export * from './components/Checkbox';
 export * from './components/CheckboxGroup';
 export * from './components/ClassPrefix';
@@ -38,6 +39,8 @@ export * from './components/DatePicker';
 export * from './components/DatePickerInput';
 export * as preview__DatePicker from './components/DatePicker/next';
 export * from './components/Dropdown';
+// TODO: uncomment in v12 — also remove from excludeProductsComponents
+// export * from './components/EditInPlace';
 export * from './components/ErrorBoundary';
 export * from './components/ExpandableSearch';
 export {
@@ -62,6 +65,8 @@ export * from './components/Icon/Icon.Skeleton';
 export * from './components/IdPrefix';
 export { InlineCheckbox } from './components/InlineCheckbox';
 export * from './components/InlineLoading';
+// TODO: uncomment in v12 — also remove from excludeProductsComponents
+// export * from './components/InterstitialScreen';
 export * from './components/Link';
 export * from './components/ListItem';
 export * from './components/Loading';
@@ -735,6 +740,7 @@ export type { SwitcherItemProps } from './components/UIShell/SwitcherItem';
 // TODO: ibm-products migration in progress — re-enable when component is ready
 // export { TruncatedText } from './components/TruncatedText';
 // export type { TruncatedTextProps } from './components/TruncatedText';
+// export * from './components/UserAvatar';
 
 //unordered list
 export type { UnorderedListProps } from './components/UnorderedList/UnorderedList';
