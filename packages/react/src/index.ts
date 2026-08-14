@@ -738,6 +738,7 @@ export type { SwitcherItemProps } from './components/UIShell/SwitcherItem';
 // TODO: ibm-products migration in progress — re-enable when component is ready
 // export { TruncatedText } from './components/TruncatedText';
 // export type { TruncatedTextProps } from './components/TruncatedText';
+// export * from './components/UserAvatar';
 
 //unordered list
 export type { UnorderedListProps } from './components/UnorderedList/UnorderedList';
