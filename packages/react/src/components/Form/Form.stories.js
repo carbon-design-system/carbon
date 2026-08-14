@@ -219,6 +219,23 @@ const formShellStyle = {
   minWidth: 0,
 };
 
+function formAccessibleName(prefix, name = 'new project setup') {
+  return prefix ? `${prefix} ${name}` : name;
+}
+
+function uniqueGroupName(label, prefix) {
+  if (!prefix) {
+    return label;
+  }
+
+  return (
+    <>
+      {label}
+      <span className="cds--visually-hidden">{` (${prefix})`}</span>
+    </>
+  );
+}
+
 export const Default = (args) => {
   const {
     skeleton,
@@ -232,6 +249,7 @@ export const Default = (args) => {
     invalidText,
     warn,
     warnText,
+    accessibleNamePrefix,
   } = args;
 
   const [modalOpen, setModalOpen] = useState(false);
@@ -290,7 +308,7 @@ export const Default = (args) => {
   };
 
   const formContent = skeleton ? (
-    <Form aria-label="new project setup">
+    <Form aria-label={formAccessibleName(accessibleNamePrefix)}>
       <Stack gap={5}>
         <SearchSkeleton />
         <div style={formRowStyle}>
@@ -333,7 +351,7 @@ export const Default = (args) => {
       </Stack>
     </Form>
   ) : (
-    <Form aria-label="new project setup">
+    <Form aria-label={formAccessibleName(accessibleNamePrefix)}>
       <Stack gap={5}>
         <Search
           size={size}
@@ -469,7 +487,7 @@ export const Default = (args) => {
         <RadioButtonGroup
           name="project-visibility"
           defaultSelected="private"
-          legendText="Visibility"
+          legendText={uniqueGroupName('Visibility', accessibleNamePrefix)}
           helperText="Who can see and access this project."
           disabled={disabled}
           readOnly={readOnly}>
@@ -512,7 +530,8 @@ export const Default = (args) => {
           {...listBoxProps}
         />
 
-        <FormGroup legendText="Features">
+        <FormGroup
+          legendText={uniqueGroupName('Features', accessibleNamePrefix)}>
           <Checkbox
             id="feat-issues"
             labelText="Issue tracking"
@@ -555,7 +574,8 @@ export const Default = (args) => {
           {...sharedProps}
         />
 
-        <FormGroup legendText="Project assets">
+        <FormGroup
+          legendText={uniqueGroupName('Project assets', accessibleNamePrefix)}>
           <FileUploader
             id="file-assets"
             role="button"
@@ -622,6 +642,9 @@ Default.argTypes = {
     description:
       'Size of all form inputs. xs is supported by TextInput, Select and Search; other components clamp to sm.',
   },
+  accessibleNamePrefix: {
+    table: { disable: true },
+  },
 };
 
 export const Fluid = (args) => {
@@ -636,6 +659,7 @@ export const Fluid = (args) => {
     invalidText,
     warn,
     warnText,
+    accessibleNamePrefix,
   } = args;
 
   const [modalOpen, setModalOpen] = useState(false);
@@ -686,7 +710,7 @@ export const Fluid = (args) => {
   };
 
   const fluidContent = skeleton ? (
-    <FluidForm aria-label="new project setup">
+    <FluidForm aria-label={formAccessibleName(accessibleNamePrefix)}>
       <Stack gap={5}>
         <FluidSearchSkeleton />
         <div style={formRowStyle}>
@@ -751,7 +775,7 @@ export const Fluid = (args) => {
       </Stack>
     </FluidForm>
   ) : (
-    <FluidForm aria-label="new project setup">
+    <FluidForm aria-label={formAccessibleName(accessibleNamePrefix)}>
       <Stack gap={5}>
         <FluidSearch
           id="f-search-members"
@@ -876,7 +900,7 @@ export const Fluid = (args) => {
         <RadioButtonGroup
           name="f-project-visibility"
           defaultSelected="private"
-          legendText="Visibility"
+          legendText={uniqueGroupName('Visibility', accessibleNamePrefix)}
           helperText="Who can see and access this project."
           disabled={disabled}
           readOnly={readOnly}>
@@ -917,7 +941,8 @@ export const Fluid = (args) => {
           {...sharedProps}
         />
 
-        <FormGroup legendText="Features">
+        <FormGroup
+          legendText={uniqueGroupName('Features', accessibleNamePrefix)}>
           <Checkbox
             id="f-feat-issues"
             labelText="Issue tracking"
@@ -958,7 +983,8 @@ export const Fluid = (args) => {
           {...sharedProps}
         />
 
-        <FormGroup legendText="Project assets">
+        <FormGroup
+          legendText={uniqueGroupName('Project assets', accessibleNamePrefix)}>
           <FileUploader
             id="f-file-assets"
             role="button"
@@ -1022,6 +1048,9 @@ Fluid.argTypes = {
     // Fluid components do not support a size prop — hide this control
     table: { disable: true },
   },
+  accessibleNamePrefix: {
+    table: { disable: true },
+  },
 };
 
 export const withAILabel = (args) => {
@@ -1036,11 +1065,11 @@ export const withAILabel = (args) => {
       }}>
       <div style={{ minWidth: 0, maxWidth: '100%' }}>
         <p style={{ marginBottom: '1rem', fontWeight: 600 }}>Default</p>
-        <Default {...mergedArgs} />
+        <Default {...mergedArgs} accessibleNamePrefix="Default" />
       </div>
       <div style={{ minWidth: 0, maxWidth: '100%' }}>
         <p style={{ marginBottom: '1rem', fontWeight: 600 }}>Fluid</p>
-        <Fluid {...mergedArgs} />
+        <Fluid {...mergedArgs} accessibleNamePrefix="Fluid" />
       </div>
     </div>
   );

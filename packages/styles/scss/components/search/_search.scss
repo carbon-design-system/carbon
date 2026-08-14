@@ -271,7 +271,8 @@
 
   .#{$prefix}--search--expandable:not(.#{$prefix}--search--expanded)
     .#{$prefix}--search-input {
-    visibility: hidden;
+    border: 0;
+    background: none;
   }
 
   .#{$prefix}--search--expandable .#{$prefix}--search-input {

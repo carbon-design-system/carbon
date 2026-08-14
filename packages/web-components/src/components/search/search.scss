@@ -43,7 +43,8 @@ $css--plex: true !default;
 
 :host(#{$prefix}-search[expandable]:not([expanded])) {
   .#{$prefix}--search-input {
-    visibility: hidden;
+    border: 0;
+    background: none;
   }
 }
 
