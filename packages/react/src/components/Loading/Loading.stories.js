@@ -31,7 +31,7 @@ Default.args = {
   active: true,
   withOverlay: false,
   small: false,
-  description: 'Loading',
+  description: 'Loading account settings',
 };
 
 Default.argTypes = {
