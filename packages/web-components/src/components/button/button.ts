@@ -385,7 +385,7 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
               tabindex="${tabIndex}"
               type="${ifDefined(type)}"
               aria-label="${ifDefined(tooltipText)}"
-              aria-pressed="${ifDefined(ariaPressed)}"
+              ?aria-pressed="${ifDefined(ariaPressed)}"
               aria-describedby="badge-indicator">
               <slot @slotchange="${handleSlotChange}"></slot>
               <slot name="icon" @slotchange="${handleSlotChange}"></slot>
