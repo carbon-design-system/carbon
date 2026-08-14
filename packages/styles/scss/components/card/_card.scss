@@ -24,33 +24,53 @@
   // ─── Base ────────────────────────────────────────────────────────────
   .#{$prefix}--card {
     position: relative;
-    border: 1px solid $border-subtle-01;
-    background-color: $layer-01;
+    background-color: $layer;
     color: $text-primary;
   }
 
   // ─── Clickable ───────────────────────────────────────────────────────
   .#{$prefix}--card--clickable {
+    display: block;
+    border: 1px solid $border-tile-01;
     cursor: pointer;
+    // Reset anchor defaults when card is rendered as <a>
+    text-decoration: none;
     transition: background-color $duration-fast-02 motion(standard, productive);
 
     &:hover {
-      background-color: $layer-hover-01;
+      background-color: $layer-hover;
     }
 
     &:focus {
       @include focus-outline('outline');
+
+      outline-offset: 0;
     }
 
     &:active {
-      background-color: $layer-active-01;
+      background-color: $layer-active;
     }
+  }
+
+  // ─── Clickable footer affordance ─────────────────────────────────────
+  // Auto-rendered by Card when clickable is true.
+  .#{$prefix}--card__clickable-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: $spacing-05;
+    color: $icon-interactive;
+  }
+
+  // Disabled state: mute the footer icon
+  .#{$prefix}--card--disabled .#{$prefix}--card__clickable-footer {
+    color: $icon-disabled;
   }
 
   // ─── Disabled ────────────────────────────────────────────────────────
   .#{$prefix}--card--disabled {
     border-color: $border-disabled;
-    background-color: $layer-01;
+    background-color: $layer;
     color: $text-disabled;
     cursor: not-allowed;
     pointer-events: none;
@@ -71,14 +91,12 @@
   .#{$prefix}--card__body {
     @include type-style('body-compact-01');
 
-    margin-block: $spacing-05;
-    margin-block-start: 0;
-    margin-inline: $spacing-05;
+    padding-block: $spacing-05;
+    padding-inline: $spacing-05;
   }
 
-  // When body is the first child (no header), restore top padding
-  .#{$prefix}--card > .#{$prefix}--card__body:first-child {
-    margin-block-start: $spacing-05;
+  .#{$prefix}--card__body--flush {
+    padding: 0;
   }
 
   // ─── Footer ──────────────────────────────────────────────────────────
@@ -231,6 +249,10 @@
     color: $text-secondary;
   }
 
+  .#{$prefix}--card--disabled .#{$prefix}--card__label {
+    color: $text-disabled;
+  }
+
   .#{$prefix}--card__label--truncate {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -250,7 +272,6 @@
     display: flex;
     overflow: hidden;
     flex-direction: column;
-    color: $text-primary;
     // 2px between label / text-row / description
     gap: $spacing-01;
     margin-inline: $spacing-05;
@@ -323,6 +344,10 @@
     @include type-style('label-01');
 
     color: $text-secondary;
+  }
+
+  .#{$prefix}--card--disabled .#{$prefix}--card__description {
+    color: $text-disabled;
   }
 
   .#{$prefix}--card__description--truncate {
