@@ -90,7 +90,7 @@ test.describe('@avt Card', () => {
 
     // Tab into the first clickable card (role="button")
     await page.keyboard.press('Tab');
-    const card = page.getByRole('button', { name: 'Usage report' });
+    const card = page.getByRole('button', { name: 'Analytics Usage report' });
     await expect(card).toBeFocused();
 
     // Enter activates it — browser alert fires; dismiss so the test can continue
@@ -112,7 +112,9 @@ test.describe('@avt Card', () => {
       },
     });
 
-    const disabledCard = page.getByRole('button', { name: 'Disabled card' });
+    const disabledCard = page.getByRole('button', {
+      name: 'Status Disabled card',
+    });
 
     // The disabled card has tabIndex="-1" so Tab should never land on it
     await expect(disabledCard).toHaveAttribute('tabindex', '-1');

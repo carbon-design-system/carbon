@@ -198,7 +198,9 @@ export const Clickable = () => (
           <img src={placeholder16x9} alt="" width="100%" />
         </Card.Media>
         <Card.Header>
-          <Card.Title id="clickable-title-usage">Usage report</Card.Title>
+          <Card.Title id="clickable-title-usage" label="Analytics">
+            Usage report
+          </Card.Title>
         </Card.Header>
         <Card.Body>
           Click anywhere on this card to trigger the action.
@@ -218,13 +220,13 @@ export const Clickable = () => (
           <img src={placeholder16x9} alt="" width="100%" />
         </Card.Media>
         <Card.Header>
-          <Card.Title id="clickable-title-carbon">
+          <Card.Title id="clickable-title-carbon" label="External link">
             Carbon Design System
           </Card.Title>
         </Card.Header>
         <Card.Body>
-          This card renders as an anchor element for true navigation semantics.
-          Right-click or Cmd+click to open in a new tab.
+          This card renders as an <code>&lt;a&gt;</code> element for true
+          navigation semantics. Right-click or Cmd+click to open in a new tab.
         </Card.Body>
       </Card>
     </Column>
@@ -237,11 +239,13 @@ export const Clickable = () => (
         renderFooterIcon={Share}
         aria-labelledby="clickable-title-share">
         <Card.Header>
-          <Card.Title id="clickable-title-share">Share report</Card.Title>
+          <Card.Title id="clickable-title-share" label="Share">
+            Share report
+          </Card.Title>
         </Card.Header>
         <Card.Body>
-          Pass renderFooterIcon to replace the default arrow with any icon from
-          @carbon/icons-react.
+          Pass <code>renderFooterIcon</code> to replace the default arrow with
+          any icon from <code>@carbon/icons-react</code>.
         </Card.Body>
       </Card>
     </Column>
@@ -254,11 +258,13 @@ export const Clickable = () => (
         onClick={() => alert('Should not fire')}
         aria-labelledby="clickable-title-disabled">
         <Card.Header>
-          <Card.Title id="clickable-title-disabled">Disabled card</Card.Title>
+          <Card.Title id="clickable-title-disabled" label="Status">
+            Disabled card
+          </Card.Title>
         </Card.Header>
         <Card.Body>
-          When disabled is true the card is not interactive and the footer
-          affordance is visually muted.
+          When <code>disabled</code> is true the card is not interactive and the
+          footer affordance is visually muted.
         </Card.Body>
       </Card>
     </Column>
@@ -274,7 +280,9 @@ export const Clickable = () => (
           <img src={placeholder16x9} alt="" width="100%" />
         </Card.Media>
         <Card.Header>
-          <Card.Title id="clickable-title-launch">Product launch</Card.Title>
+          <Card.Title id="clickable-title-launch" label="Featured">
+            Product launch
+          </Card.Title>
         </Card.Header>
         <Card.Body>Clickable card in expressive density.</Card.Body>
       </Card>
@@ -289,13 +297,13 @@ export const Clickable = () => (
         href="#"
         aria-labelledby="clickable-title-quarterly">
         <Card.Header>
-          <Card.Title id="clickable-title-quarterly">
+          <Card.Title id="clickable-title-quarterly" label="Report">
             Quarterly review
           </Card.Title>
         </Card.Header>
         <Card.Body>
-          Use as="a" with density="expressive" for navigation cards in an
-          editorial layout.
+          Use <code>as="a"</code> with <code>density="expressive"</code> for
+          navigation cards in an editorial layout.
         </Card.Body>
       </Card>
     </Column>
