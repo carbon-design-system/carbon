@@ -1,0 +1,421 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../../config' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../utilities/ai-gradient' as *;
+@use '../../utilities/convert' as *;
+@use '../../utilities/skeleton' as *;
+
+/// Shared v12 date-picker rules for both React and Web Components. Each one
+/// scopes them differently so they don't clash with the v11 date picker:
+///   - React nests them under `.#{$prefix}--date-picker--next` (via the
+///     `date-picker-next` mixin) so they only apply to the next date picker.
+///   - Web Components uses them as-is and `@extend` them onto their shadow
+///     `:host()`. Shadow DOM keeps them scoped to the next date picker's own
+///     elements, so they never reach the v11 date picker.
+
+// =============================================================================
+// SHARED FRAMEWORK-AGNOSTIC STYLES
+// These styles work for both Web Components and React
+// =============================================================================
+/// @access public
+/// @group date-picker
+
+@mixin date-picker-next-rules {
+  // Input wrapper needs relative positioning for icon placement
+  .#{$prefix}--date-picker-input__wrapper {
+    position: relative;
+    anchor-name: --date-picker-input;
+  }
+
+  // Enable pointer events on the calendar icon button
+  // Carbon sets pointer-events: none by default, but we need clicks to work
+  .#{$prefix}--date-picker__icon {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: $icon-primary;
+    cursor: pointer;
+    inset-block-start: 50%;
+    inset-inline-end: 1rem;
+    pointer-events: auto;
+    transform: translateY(-50%);
+
+    // Remove focus outline, border, and background
+    &:focus {
+      border: none;
+      background: transparent;
+      outline: none;
+    }
+
+    // Remove any hover/active borders and backgrounds
+    &:hover,
+    &:active {
+      border: none;
+      background: transparent;
+    }
+  }
+
+  // Popover API styling with CSS anchor positioning
+  .#{$prefix}--date-picker__calendar-popover {
+    // Position using CSS anchor positioning
+    position: absolute;
+    z-index: 9000;
+
+    // Reset popover defaults
+    padding: 0;
+    border: none;
+    margin: 0;
+    background: transparent;
+
+    // Remove focus outline from popover
+    &:focus {
+      outline: none;
+    }
+
+    inset-area: block-end span-inline-start;
+    margin-block-start: $spacing-02;
+    position-anchor: --date-picker-input;
+
+    // Fallback positioning for browsers without anchor positioning
+    @supports not (inset-area: block-end) {
+      position: absolute;
+      inset-block-start: anchor(bottom);
+      inset-inline-start: anchor(left);
+      margin-block-start: $spacing-02;
+    }
+
+    // Handle viewport overflow
+    position-try-options: --bottom-left, --top-left, --bottom-right, --top-right;
+
+    @position-try --bottom-left {
+      inset-area: block-end span-inline-start;
+      margin-block-start: $spacing-02;
+    }
+
+    @position-try --top-left {
+      inset-area: block-start span-inline-start;
+      margin-block-end: $spacing-02;
+    }
+
+    @position-try --bottom-right {
+      inset-area: block-end span-inline-end;
+      margin-block-start: $spacing-02;
+    }
+
+    @position-try --top-right {
+      inset-area: block-start span-inline-end;
+      margin-block-end: $spacing-02;
+    }
+  }
+
+  .#{$prefix}--date-picker__calendar.open {
+    margin-block-start: 0;
+  }
+
+  // Remove focus outline from calendar container
+  // Calendar container styling
+  .#{$prefix}--date-picker__calendar-container {
+    position: absolute;
+    z-index: 9000;
+    display: block;
+    inset-block-start: 100%;
+    inset-inline-start: 0;
+    margin-block-start: 0;
+  }
+
+  // DATE PICKER INPUT STYLES
+  .#{$prefix}--date-picker-container {
+    outline: none;
+
+    .#{$prefix}--form-requirement[hidden] {
+      display: none;
+    }
+  }
+
+  .#{$prefix}--date-picker-container--warn:not(
+      .#{$prefix}--date-picker-container--invalid
+    ) {
+    .#{$prefix}--form-requirement {
+      color: $text-primary;
+    }
+  }
+
+  // Simple date picker sizing
+  .#{$prefix}--date-picker-container--simple {
+    .#{$prefix}--date-picker__input {
+      inline-size: rem(120px);
+    }
+
+    .#{$prefix}--date-picker__input--invalid,
+    .#{$prefix}--date-picker__input--warn {
+      inline-size: rem(152px);
+    }
+  }
+
+  .#{$prefix}--date-picker-container--short {
+    &.#{$prefix}--date-picker-container--simple {
+      .#{$prefix}--date-picker__input {
+        inline-size: rem(90px);
+      }
+    }
+  }
+
+  // Single date picker sizing
+  .#{$prefix}--date-picker-container--single {
+    max-inline-size: rem(288px);
+
+    .#{$prefix}--date-picker__input {
+      inline-size: rem(288px);
+    }
+  }
+
+  // Range date picker sizing
+  .#{$prefix}--date-picker-container--from {
+    margin-inline-end: rem(1px);
+  }
+
+  .#{$prefix}--date-picker-container--from,
+  .#{$prefix}--date-picker-container--to {
+    inline-size: rem(143.5px);
+
+    .#{$prefix}--date-picker__input {
+      inline-size: rem(143.5px);
+    }
+  }
+
+  // AI label decorator
+  .#{$prefix}--date-picker-container--ai-label {
+    .#{$prefix}--date-picker__input--decorator {
+      @include ai-gradient;
+    }
+  }
+
+  // =============================================================================
+  // SKELETON STYLES
+  // =============================================================================
+
+  .#{$prefix}--date-picker-input-skeleton {
+    display: inline-block;
+
+    .#{$prefix}--label {
+      @include skeleton;
+
+      block-size: rem(14px);
+      inline-size: rem(75px);
+    }
+
+    .#{$prefix}--date-picker-input-skeleton-container {
+      display: inline-block;
+    }
+  }
+
+  .#{$prefix}--date-picker-input-skeleton--range {
+    .#{$prefix}--date-picker-input-skeleton-container {
+      inline-size: rem(143.5px);
+
+      .#{$prefix}--date-picker__input {
+        inline-size: rem(143.5px);
+      }
+    }
+  }
+  // New skeleton styles for DatePickerSkeleton component
+  .#{$prefix}--date-picker.#{$prefix}--skeleton {
+    .#{$prefix}--date-picker__input.#{$prefix}--skeleton {
+      @include skeleton;
+
+      position: relative;
+      overflow: hidden;
+      border: none;
+      block-size: rem(40px);
+      cursor: default;
+      inline-size: 100%;
+      pointer-events: none;
+    }
+
+    .#{$prefix}--date-picker__icon.#{$prefix}--skeleton {
+      display: none;
+    }
+  }
+
+  // =============================================================================
+  // CALENDAR COMPONENT STYLES
+  // =============================================================================
+
+  .#{$prefix}--date-picker__calendar {
+    display: block;
+    padding: $spacing-03;
+    border: none;
+    background-color: $layer;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+    inline-size: rem(288px);
+    max-inline-size: rem(288px);
+    outline: none;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  // Month header styling
+  .#{$prefix}--date-picker__month {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-block-end: $spacing-03;
+  }
+
+  .#{$prefix}--date-picker__month-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background-color: transparent;
+    block-size: rem(40px);
+    cursor: pointer;
+    inline-size: rem(40px);
+
+    &:hover {
+      background-color: $layer-hover;
+    }
+
+    &:focus {
+      outline: 2px solid $focus;
+      outline-offset: -2px;
+    }
+
+    svg {
+      fill: $icon-primary;
+    }
+  }
+
+  .#{$prefix}--date-picker__current-month {
+    flex: 1;
+    color: $text-primary;
+    font-size: rem(14px);
+    font-weight: 600;
+    text-align: center;
+  }
+
+  // Weekdays grid - 7 columns
+  .#{$prefix}--date-picker__weekdays {
+    display: grid;
+    gap: 0;
+    grid-template-columns: repeat(7, 1fr);
+    margin-block-end: $spacing-02;
+  }
+
+  .#{$prefix}--date-picker__weekday {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    block-size: rem(40px);
+    color: $text-primary;
+    font-size: rem(12px);
+    font-weight: 600;
+    // Remove fixed width to allow grid to distribute space evenly
+    // inline-size: rem(40px);
+  }
+
+  // Days grid - 7 columns, 6 rows
+  .#{$prefix}--date-picker__days {
+    display: grid;
+    gap: 0;
+    grid-template-columns: repeat(7, 1fr);
+  }
+
+  .#{$prefix}--date-picker__day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background-color: transparent;
+    block-size: rem(40px);
+    color: $text-primary;
+    cursor: pointer;
+    font-size: rem(14px);
+    // Remove fixed width to allow grid to distribute space evenly
+    // inline-size: rem(40px);
+    &:hover:not(:disabled, .selected) {
+      background-color: $layer-hover;
+    }
+
+    &:focus {
+      outline: 2px solid $focus;
+      outline-offset: -2px;
+    }
+
+    // Selected date - white text on blue background (no hover state)
+    &.selected {
+      background-color: $interactive;
+      color: $text-inverse;
+    }
+
+    // Today's date - blue dot indicator
+    &.today:not(.selected) {
+      position: relative;
+      color: $text-primary;
+      font-weight: 600;
+
+      // Blue dot below the date number
+      &::after {
+        position: absolute;
+        border-radius: 50%;
+        background-color: $interactive;
+        block-size: 4px;
+        content: '';
+        inline-size: 4px;
+        inset-block-end: 4px;
+        inset-inline-start: 50%;
+        transform: translateX(-50%);
+      }
+    }
+
+    // Date in selected range (for range picker)
+    &.inRange:not(.selected) {
+      background-color: $highlight;
+    }
+
+    // Dates from other months (but not if selected)
+    &.prevMonthDay:not(.selected),
+    &.nextMonthDay:not(.selected) {
+      color: $text-secondary;
+    }
+
+    // Disabled dates
+    &.disabled {
+      color: $text-disabled;
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    // Keyboard focus state (different from browser :focus)
+    &.focused:not(.selected) {
+      background-color: $layer-hover;
+      outline: 2px solid $focus;
+      outline-offset: -2px;
+    }
+  }
+}
+
+/// React scoping: nest the next rules under `.#{$prefix}--date-picker--next`
+/// so they only apply to the next date picker and stay isolated from v11.
+/// @access public
+/// @group date-picker
+@mixin date-picker-next {
+  .#{$prefix}--date-picker--next {
+    position: relative;
+
+    @include date-picker-next-rules;
+  }
+}
