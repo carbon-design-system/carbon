@@ -1675,7 +1675,7 @@ const IconTab = React.forwardRef<HTMLDivElement, IconTabProps>(
           className={`${prefix}--icon-tooltip`}
           enterDelayMs={enterDelayMs}
           label={label}
-          leaveDelayMs={leaveDelayMs}>
+          leaveDelayMs={leaveDelayMs ?? 0}>
           <Tab className={classNames} ref={ref} {...rest}>
             {children}
           </Tab>

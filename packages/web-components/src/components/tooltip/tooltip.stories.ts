@@ -24,7 +24,7 @@ const defaultArgs = {
   dropShadow: false,
   enterDelayMs: 100,
   label: 'Options',
-  leaveDelayMs: 0,
+  leaveDelayMs: 300,
 };
 
 const controls = {
