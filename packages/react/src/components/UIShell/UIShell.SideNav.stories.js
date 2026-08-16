@@ -130,6 +130,52 @@ const StoryContent = ({ useResponsiveOffset = true }) => {
   );
 };
 
+const headerArgs = {
+  headerAriaLabel: 'IBM Cloud',
+  platformName: 'Cloud console',
+  platformPrefix: 'IBM',
+};
+
+const headerArgTypes = {
+  headerAriaLabel: {
+    control: 'text',
+    description: 'Provide an accessible label for the header.',
+    table: { category: 'Header' },
+  },
+  platformName: {
+    control: 'text',
+    description: 'Specify the product name displayed in the header.',
+    table: { category: 'HeaderName' },
+  },
+  platformPrefix: {
+    control: 'text',
+    description: 'Specify the prefix displayed before the product name.',
+    table: { category: 'HeaderName' },
+  },
+};
+
+const sideNavArgs = {
+  expanded: true,
+  sideNavAriaLabel: 'Side navigation',
+};
+
+const sideNavAriaLabelArgType = {
+  sideNavAriaLabel: {
+    control: 'text',
+    description: 'Provide an accessible label for the side navigation.',
+    table: { category: 'SideNav' },
+  },
+};
+
+const sideNavArgTypes = {
+  expanded: {
+    control: 'boolean',
+    description: 'Specify whether the side navigation is expanded.',
+    table: { category: 'SideNav' },
+  },
+  ...sideNavAriaLabelArgType,
+};
+
 // eslint-disable-next-line storybook/csf-component
 export default {
   title: 'Components/UI Shell/SideNav',
@@ -164,62 +210,68 @@ export default {
       hideNoControlsWarning: true,
     },
   },
+  argTypes: {
+    'aria-label': { control: false },
+    'aria-labelledby': { control: false },
+    children: { control: false },
+    className: { control: false },
+  },
 };
 
-export const FixedSideNav = () => (
+export const FixedSideNav = (args) => (
   <>
-    <Header aria-label="IBM Platform Name">
+    <Header aria-label={args.headerAriaLabel}>
       <SkipToContent />
-      <HeaderName href="#" prefix="IBM">
-        [Platform]
+      <HeaderName href="#" prefix={args.platformPrefix}>
+        {args.platformName}
       </HeaderName>
     </Header>
     <SideNav
       isFixedNav
-      expanded={true}
+      expanded={args.expanded}
       isChildOfHeader={false}
-      aria-label="Side navigation">
+      aria-label={args.sideNavAriaLabel}>
       <SideNavItems>
-        <SideNavMenu title="L0 menu">
+        <SideNavMenu title="Compute">
           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-            L0 menu item
+            Virtual server instances
           </SideNavMenuItem>
           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-            L0 menu item
+            Kubernetes clusters
           </SideNavMenuItem>
           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-            L0 menu item
+            Container registries
           </SideNavMenuItem>
         </SideNavMenu>
-        <SideNavMenu title="L0 menu" isActive={true}>
+        <SideNavMenu title="Manage" isActive={true}>
           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-            L0 menu item
+            Users
           </SideNavMenuItem>
           <SideNavMenuItem
             aria-current="page"
             href="https://www.carbondesignsystem.com/">
-            L0 menu item
+            Access groups
           </SideNavMenuItem>
           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-            L0 menu item
+            API keys
           </SideNavMenuItem>
         </SideNavMenu>
-        <SideNavMenu title="L0 menu">
+        <SideNavMenu title="Storage">
           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-            L0 menu item
+            Object storage
           </SideNavMenuItem>
           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-            L0 menu item
+            File storage
           </SideNavMenuItem>
           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-            L0 menu item
+            Block storage
           </SideNavMenuItem>
         </SideNavMenu>
         <SideNavLink href="https://www.carbondesignsystem.com/">
-          L0 link
+          Billing
         </SideNavLink>
         <SideNavLink href="https://www.carbondesignsystem.com/">
-          L0 link
+          Support
         </SideNavLink>
       </SideNavItems>
     </SideNav>
@@ -229,64 +281,74 @@ export const FixedSideNav = () => (
 
 FixedSideNav.storyName = 'Fixed Side Nav';
 
-export const FixedSideNavWIcons = () => (
+FixedSideNav.args = {
+  ...headerArgs,
+  ...sideNavArgs,
+};
+
+FixedSideNav.argTypes = {
+  ...headerArgTypes,
+  ...sideNavArgTypes,
+};
+
+export const FixedSideNavWIcons = (args) => (
   <>
-    <Header aria-label="IBM Platform Name">
+    <Header aria-label={args.headerAriaLabel}>
       <SkipToContent />
-      <HeaderName href="#" prefix="IBM">
-        [Platform]
+      <HeaderName href="#" prefix={args.platformPrefix}>
+        {args.platformName}
       </HeaderName>
     </Header>
     <SideNav
       isFixedNav
-      expanded={true}
+      expanded={args.expanded}
       isChildOfHeader={false}
-      aria-label="Side navigation">
+      aria-label={args.sideNavAriaLabel}>
       <SideNavItems>
-        <SideNavMenu renderIcon={Fade} title="Category title">
+        <SideNavMenu renderIcon={Fade} title="Compute">
           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-            Link
+            Virtual server instances
           </SideNavMenuItem>
           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-            Link
+            Kubernetes clusters
           </SideNavMenuItem>
           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-            Link
+            Container registries
           </SideNavMenuItem>
         </SideNavMenu>
-        <SideNavMenu renderIcon={Fade} title="Category title" isActive={true}>
+        <SideNavMenu renderIcon={Fade} title="Manage" isActive={true}>
           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-            Link
+            Users
           </SideNavMenuItem>
           <SideNavMenuItem
             aria-current="page"
             href="https://www.carbondesignsystem.com/">
-            Link
+            Access groups
           </SideNavMenuItem>
           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-            Link
+            API keys
           </SideNavMenuItem>
         </SideNavMenu>
-        <SideNavMenu renderIcon={Fade} title="Category title">
+        <SideNavMenu renderIcon={Fade} title="Storage">
           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-            Link
+            Object storage
           </SideNavMenuItem>
           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-            Link
+            File storage
           </SideNavMenuItem>
           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-            Link
+            Block storage
           </SideNavMenuItem>
         </SideNavMenu>
         <SideNavLink
           renderIcon={Fade}
           href="https://www.carbondesignsystem.com/">
-          Link
+          Billing
         </SideNavLink>
         <SideNavLink
           renderIcon={Fade}
           href="https://www.carbondesignsystem.com/">
-          Link
+          Support
         </SideNavLink>
       </SideNavItems>
     </SideNav>
@@ -296,61 +358,71 @@ export const FixedSideNavWIcons = () => (
 
 FixedSideNavWIcons.storyName = 'Fixed Side Nav with Icons';
 
-export const FixedSideNavWDivider = () => (
+FixedSideNavWIcons.args = {
+  ...headerArgs,
+  ...sideNavArgs,
+};
+
+FixedSideNavWIcons.argTypes = {
+  ...headerArgTypes,
+  ...sideNavArgTypes,
+};
+
+export const FixedSideNavWDivider = (args) => (
   <>
-    <Header aria-label="IBM Platform Name">
+    <Header aria-label={args.headerAriaLabel}>
       <SkipToContent />
-      <HeaderName href="#" prefix="IBM">
-        [Platform]
+      <HeaderName href="#" prefix={args.platformPrefix}>
+        {args.platformName}
       </HeaderName>
     </Header>
     <SideNav
       isFixedNav
-      expanded={true}
+      expanded={args.expanded}
       isChildOfHeader={false}
-      aria-label="Side navigation">
+      aria-label={args.sideNavAriaLabel}>
       <SideNavItems>
-        <SideNavMenu title="L0 menu">
+        <SideNavMenu title="Compute">
           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-            L0 menu item
+            Virtual server instances
           </SideNavMenuItem>
           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-            L0 menu item
+            Kubernetes clusters
           </SideNavMenuItem>
           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-            L0 menu item
+            Container registries
           </SideNavMenuItem>
         </SideNavMenu>
-        <SideNavMenu title="L0 menu" isActive={true}>
+        <SideNavMenu title="Manage" isActive={true}>
           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-            L0 menu item
+            Users
           </SideNavMenuItem>
           <SideNavMenuItem
             aria-current="page"
             href="https://www.carbondesignsystem.com/">
-            L0 menu item
+            Access groups
           </SideNavMenuItem>
           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-            L0 menu item
+            API keys
           </SideNavMenuItem>
         </SideNavMenu>
-        <SideNavMenu title="L0 menu">
+        <SideNavMenu title="Storage">
           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-            L0 menu item
+            Object storage
           </SideNavMenuItem>
           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-            L0 menu item
+            File storage
           </SideNavMenuItem>
           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-            L0 menu item
+            Block storage
           </SideNavMenuItem>
         </SideNavMenu>
         <SideNavDivider />
         <SideNavLink href="https://www.carbondesignsystem.com/">
-          L0 link
+          Billing
         </SideNavLink>
         <SideNavLink href="https://www.carbondesignsystem.com/">
-          L0 link
+          Support
         </SideNavLink>
       </SideNavItems>
     </SideNav>
@@ -360,130 +432,154 @@ export const FixedSideNavWDivider = () => (
 
 FixedSideNavWDivider.storyName = 'Fixed Side Nav with Divider';
 
-export const SideNavRailWHeader = (args) => (
-  <HeaderContainer
-    render={({ isSideNavExpanded, onClickSideNavExpand }) => (
-      <>
-        <Header aria-label="IBM Platform Name">
-          <SkipToContent />
-          <HeaderMenuButton
-            aria-label={isSideNavExpanded ? 'Close menu' : 'Open menu'}
-            onClick={onClickSideNavExpand}
-            isActive={isSideNavExpanded}
-            aria-expanded={isSideNavExpanded}
-          />
-          <HeaderName href="#" prefix="IBM">
-            [Platform]
-          </HeaderName>
-          <HeaderNavigation aria-label="IBM [Platform]">
-            <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
-            <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
-            <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
-            <HeaderMenu aria-label="Link 4" menuLinkName="Link 4">
-              <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
-              <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
-              <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
-            </HeaderMenu>
-          </HeaderNavigation>
-          <HeaderGlobalBar>
-            <HeaderGlobalAction
-              aria-label="Search"
-              onClick={action('search click')}>
-              <Search size={20} />
-            </HeaderGlobalAction>
-            <HeaderGlobalAction
-              aria-label="Notifications"
-              onClick={action('notification click')}>
-              <Notification size={20} />
-            </HeaderGlobalAction>
-            <HeaderGlobalAction
-              aria-label="App Switcher"
-              onClick={action('app-switcher click')}
-              tooltipAlignment="end">
-              <SwitcherIcon size={20} />
-            </HeaderGlobalAction>
-          </HeaderGlobalBar>
-          <SideNav
-            aria-label="Side navigation"
-            expanded={isSideNavExpanded}
-            onOverlayClick={onClickSideNavExpand}
-            href="#main-content"
-            onSideNavBlur={onClickSideNavExpand}
-            isRail
-            {...args}>
-            <SideNavItems>
-              {isSideNavExpanded && (
-                <HeaderSideNavItems hasDivider={true}>
-                  <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
-                  <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
-                  <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
-                  <HeaderMenu aria-label="Link 4" menuLinkName="Link 4">
-                    <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
-                    <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
-                    <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
-                  </HeaderMenu>
-                </HeaderSideNavItems>
-              )}
-              <SideNavMenu renderIcon={Fade} title="Category title">
-                <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-                  Link
-                </SideNavMenuItem>
-                <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-                  Link
-                </SideNavMenuItem>
-                <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-                  Link
-                </SideNavMenuItem>
-              </SideNavMenu>
-              <SideNavMenu renderIcon={Fade} title="Category title">
-                <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-                  Link
-                </SideNavMenuItem>
-                <SideNavMenuItem
-                  aria-current="page"
+FixedSideNavWDivider.args = {
+  ...headerArgs,
+  ...sideNavArgs,
+};
+
+FixedSideNavWDivider.argTypes = {
+  ...headerArgTypes,
+  ...sideNavArgTypes,
+};
+
+export const SideNavRailWHeader = (args) => {
+  const {
+    enterDelayMs,
+    headerAriaLabel,
+    isFixedNav,
+    isRail,
+    platformName,
+    platformPrefix,
+    sideNavAriaLabel,
+  } = args;
+
+  return (
+    <HeaderContainer
+      render={({ isSideNavExpanded, onClickSideNavExpand }) => (
+        <>
+          <Header aria-label={headerAriaLabel}>
+            <SkipToContent />
+            <HeaderMenuButton
+              aria-label={isSideNavExpanded ? 'Close menu' : 'Open menu'}
+              onClick={onClickSideNavExpand}
+              isActive={isSideNavExpanded}
+              aria-expanded={isSideNavExpanded}
+            />
+            <HeaderName href="#" prefix={platformPrefix}>
+              {platformName}
+            </HeaderName>
+            <HeaderNavigation aria-label={headerAriaLabel}>
+              <HeaderMenuItem href="#">Overview</HeaderMenuItem>
+              <HeaderMenuItem href="#">Activity</HeaderMenuItem>
+              <HeaderMenuItem href="#">Resource list</HeaderMenuItem>
+              <HeaderMenu aria-label="Manage" menuLinkName="Manage">
+                <HeaderMenuItem href="#">Users</HeaderMenuItem>
+                <HeaderMenuItem href="#">Access groups</HeaderMenuItem>
+                <HeaderMenuItem href="#">API keys</HeaderMenuItem>
+              </HeaderMenu>
+            </HeaderNavigation>
+            <HeaderGlobalBar>
+              <HeaderGlobalAction
+                aria-label="Search"
+                onClick={action('search click')}>
+                <Search size={20} />
+              </HeaderGlobalAction>
+              <HeaderGlobalAction
+                aria-label="Notifications"
+                onClick={action('notification click')}>
+                <Notification size={20} />
+              </HeaderGlobalAction>
+              <HeaderGlobalAction
+                aria-label="App Switcher"
+                onClick={action('app-switcher click')}
+                tooltipAlignment="end">
+                <SwitcherIcon size={20} />
+              </HeaderGlobalAction>
+            </HeaderGlobalBar>
+            <SideNav
+              aria-label={sideNavAriaLabel}
+              expanded={isSideNavExpanded}
+              onOverlayClick={onClickSideNavExpand}
+              href="#main-content"
+              onSideNavBlur={onClickSideNavExpand}
+              isRail={isRail}
+              isFixedNav={isFixedNav}
+              enterDelayMs={enterDelayMs}>
+              <SideNavItems>
+                {isSideNavExpanded && (
+                  <HeaderSideNavItems hasDivider={true}>
+                    <HeaderMenuItem href="#">Overview</HeaderMenuItem>
+                    <HeaderMenuItem href="#">Activity</HeaderMenuItem>
+                    <HeaderMenuItem href="#">Resource list</HeaderMenuItem>
+                    <HeaderMenu aria-label="Manage" menuLinkName="Manage">
+                      <HeaderMenuItem href="#">Users</HeaderMenuItem>
+                      <HeaderMenuItem href="#">Access groups</HeaderMenuItem>
+                      <HeaderMenuItem href="#">API keys</HeaderMenuItem>
+                    </HeaderMenu>
+                  </HeaderSideNavItems>
+                )}
+                <SideNavMenu renderIcon={Fade} title="Compute">
+                  <SideNavMenuItem href="https://www.carbondesignsystem.com/">
+                    Virtual server instances
+                  </SideNavMenuItem>
+                  <SideNavMenuItem href="https://www.carbondesignsystem.com/">
+                    Kubernetes clusters
+                  </SideNavMenuItem>
+                  <SideNavMenuItem href="https://www.carbondesignsystem.com/">
+                    Container registries
+                  </SideNavMenuItem>
+                </SideNavMenu>
+                <SideNavMenu renderIcon={Fade} title="Manage">
+                  <SideNavMenuItem href="https://www.carbondesignsystem.com/">
+                    Users
+                  </SideNavMenuItem>
+                  <SideNavMenuItem
+                    aria-current="page"
+                    href="https://www.carbondesignsystem.com/">
+                    Access groups
+                  </SideNavMenuItem>
+                  <SideNavMenuItem href="https://www.carbondesignsystem.com/">
+                    API keys
+                  </SideNavMenuItem>
+                </SideNavMenu>
+                <SideNavMenu renderIcon={Fade} title="Storage">
+                  <SideNavMenuItem href="https://www.carbondesignsystem.com/">
+                    Object storage
+                  </SideNavMenuItem>
+                  <SideNavMenuItem href="https://www.carbondesignsystem.com/">
+                    File storage
+                  </SideNavMenuItem>
+                  <SideNavMenuItem href="https://www.carbondesignsystem.com/">
+                    Block storage
+                  </SideNavMenuItem>
+                </SideNavMenu>
+                <SideNavLink
+                  renderIcon={Fade}
                   href="https://www.carbondesignsystem.com/">
-                  Link
-                </SideNavMenuItem>
-                <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-                  Link
-                </SideNavMenuItem>
-              </SideNavMenu>
-              <SideNavMenu renderIcon={Fade} title="Category title">
-                <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-                  Link
-                </SideNavMenuItem>
-                <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-                  Link
-                </SideNavMenuItem>
-                <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-                  Link
-                </SideNavMenuItem>
-              </SideNavMenu>
-              <SideNavLink
-                renderIcon={Fade}
-                href="https://www.carbondesignsystem.com/">
-                Link
-              </SideNavLink>
-              <SideNavLink
-                renderIcon={Fade}
-                href="https://www.carbondesignsystem.com/">
-                Link
-              </SideNavLink>
-            </SideNavItems>
-          </SideNav>
-        </Header>
-        <StoryContent />
-      </>
-    )}
-  />
-);
+                  Billing
+                </SideNavLink>
+                <SideNavLink
+                  renderIcon={Fade}
+                  href="https://www.carbondesignsystem.com/">
+                  Support
+                </SideNavLink>
+              </SideNavItems>
+            </SideNav>
+          </Header>
+          <StoryContent />
+        </>
+      )}
+    />
+  );
+};
 
 SideNavRailWHeader.argTypes = {
+  ...headerArgTypes,
+  ...sideNavAriaLabelArgType,
   isRail: {
     control: {
       type: 'boolean',
     },
-    defaultValue: true,
     table: {
       defaultValue: { summary: true },
     },
@@ -494,7 +590,6 @@ SideNavRailWHeader.argTypes = {
     control: {
       type: 'boolean',
     },
-    defaultValue: false,
     table: {
       defaultValue: { summary: false },
     },
@@ -508,57 +603,64 @@ SideNavRailWHeader.argTypes = {
     table: {
       defaultValue: { summary: 100 },
     },
-    defaultValue: 100,
     description:
       'Specify the duration in milliseconds to delay before displaying the sidenav',
   },
 };
 
+SideNavRailWHeader.args = {
+  ...headerArgs,
+  enterDelayMs: 100,
+  isFixedNav: false,
+  isRail: true,
+  sideNavAriaLabel: sideNavArgs.sideNavAriaLabel,
+};
+
 SideNavRailWHeader.storyName = 'Side Nav Rail with Header';
 
-export const SideNavWLargeSideNavItems = () => (
+export const SideNavWLargeSideNavItems = (args) => (
   <>
-    <Header aria-label="IBM Platform Name">
+    <Header aria-label={args.headerAriaLabel}>
       <SkipToContent />
-      <HeaderName href="#" prefix="IBM">
-        [Platform]
+      <HeaderName href="#" prefix={args.platformPrefix}>
+        {args.platformName}
       </HeaderName>
     </Header>
     <SideNav
-      expanded={true}
+      expanded={args.expanded}
       isChildOfHeader={false}
-      aria-label="Side navigation">
+      aria-label={args.sideNavAriaLabel}>
       <SideNavItems>
-        <SideNavMenu title="Large menu" large>
+        <SideNavMenu title="Compute" large>
           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-            Menu 1
+            Virtual server instances
           </SideNavMenuItem>
           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-            Menu 2
+            Kubernetes clusters
           </SideNavMenuItem>
           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-            Menu 3
+            Container registries
           </SideNavMenuItem>
         </SideNavMenu>
         <SideNavLink href="https://www.carbondesignsystem.com/" large>
-          Large link
+          Billing
         </SideNavLink>
-        <SideNavMenu renderIcon={Fade} title="Large menu with icon" large>
+        <SideNavMenu renderIcon={Fade} title="Manage" large>
           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-            Menu 1
+            Users
           </SideNavMenuItem>
           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-            Menu 2
+            Access groups
           </SideNavMenuItem>
           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-            Menu 3
+            API keys
           </SideNavMenuItem>
         </SideNavMenu>
         <SideNavLink
           renderIcon={Fade}
           href="https://www.carbondesignsystem.com/"
           large>
-          Large link with icon
+          Support
         </SideNavLink>
       </SideNavItems>
     </SideNav>
@@ -567,3 +669,13 @@ export const SideNavWLargeSideNavItems = () => (
 );
 
 SideNavWLargeSideNavItems.storyName = 'Side Nav with Large Side Nav Items';
+
+SideNavWLargeSideNavItems.args = {
+  ...headerArgs,
+  ...sideNavArgs,
+};
+
+SideNavWLargeSideNavItems.argTypes = {
+  ...headerArgTypes,
+  ...sideNavArgTypes,
+};
