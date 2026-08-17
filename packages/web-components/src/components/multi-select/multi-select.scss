@@ -493,14 +493,33 @@ $css--plex: true !default;
   }
 }
 
-// When select all is turned on, the first item in the listbox
-// is always the "Select all" option and gets special border
-// treatment
-:host(#{$prefix}-multi-select-item[is-select-all]) {
-  .#{$prefix}--list-box__menu-item__option {
-    padding: 0.6875rem $spacing-05;
-    margin: 0;
-    border-block-end: 1px solid $border-subtle-01;
+@if flags.enabled('enable-v12-release') {
+  // When select all is turned on, the "Select all" option is separated from
+  // the rest of the options by a divider
+  :host(#{$prefix}-multi-select-item[is-select-all]) {
+    position: relative;
+
+    // spacing-02 margin * 2 + 1px divider
+    margin-block-end: calc(#{$spacing-02} * 2 + 1px);
+
+    .#{$prefix}--list-box__menu-divider {
+      position: absolute;
+      background-color: $border-subtle;
+      block-size: convert.to-rem(1px);
+      inset-block-start: calc(100% + #{$spacing-02});
+      inset-inline: -$spacing-02;
+    }
+  }
+} @else {
+  // When select all is turned on, the first item in the listbox
+  // is always the "Select all" option and gets special border
+  // treatment
+  :host(#{$prefix}-multi-select-item[is-select-all]) {
+    .#{$prefix}--list-box__menu-item__option {
+      padding: 0.6875rem $spacing-05;
+      margin: 0;
+      border-block-end: 1px solid $border-subtle-01;
+    }
   }
 }
 
