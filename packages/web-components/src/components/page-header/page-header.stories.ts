@@ -12,6 +12,8 @@
 import { html } from 'lit';
 
 export const Default = {
+  args: {},
+  argTypes: {},
   render: () => html`
     This component has been deprecated in
     <code>@carbon/web-components</code> and will instead be maintained in
@@ -30,6 +32,11 @@ export const Default = {
 const meta = {
   title: 'Deprecated/PageHeader',
   tags: ['!autodocs'],
+  parameters: {
+    controls: {
+      hideNoControlsWarning: true,
+    },
+  },
 };
 
 export default meta;
