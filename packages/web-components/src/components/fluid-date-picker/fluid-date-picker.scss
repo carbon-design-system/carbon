@@ -90,7 +90,8 @@ $css--plex: true !default;
   @extend .#{$prefix}--date-picker--fluid--warn;
 }
 
-:host(#{$prefix}-fluid-date-picker[readonly]) {
+:host(#{$prefix}-fluid-date-picker[readonly]),
+:host(#{$prefix}-fluid-date-picker[data-input-readonly]) {
   @if not flags.enabled('enable-v12-release') {
     @extend .#{$prefix}--date-picker--fluid--readonly;
   }
@@ -123,7 +124,11 @@ $css--plex: true !default;
 }
 
 @if flags.enabled('enable-v12-release') {
-  :host(#{$prefix}-fluid-date-picker:not([disabled]):not([readonly])) {
+  :host(
+      #{$prefix}-fluid-date-picker:not([disabled]):not([readonly]):not(
+          [data-input-disabled]
+        ):not([data-input-readonly])
+    ) {
     border-radius: $border-radius-04;
     // (gray-20 → gray-50)
     background:

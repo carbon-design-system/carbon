@@ -62,11 +62,13 @@ export const Simple = {
   }) => {
     return html`
       <div style="width:288px;">
-        <cds-fluid-date-picker ?disabled="${disabled}" ?readonly="${readonly}">
+        <cds-fluid-date-picker>
           <cds-fluid-date-picker-input
             kind="simple"
+            ?disabled="${disabled}"
             label-text="Label"
             placeholder="${placeholder}"
+            ?readonly="${readonly}"
             ?invalid="${invalid}"
             invalid-text="${invalidText}"
             ?warn="${warn}"
