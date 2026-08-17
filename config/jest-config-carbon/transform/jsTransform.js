@@ -18,24 +18,36 @@ const babelOptions = {
         },
       },
     ],
+    () => ({
+      plugins: ['@babel/plugin-transform-class-properties'],
+    }),
     [
-      '@babel/preset-react',
-      {
-        runtime: 'classic',
-      },
+      '@babel/preset-typescript',
+      // Babel 8 defaults this to true, which keeps `import { Type }` as a
+      // runtime require. Carbon does not use verbatimModuleSyntax.
+      { onlyRemoveTypeImports: false },
     ],
-    '@babel/preset-typescript',
+  ],
+  // Skip JSX parsing on `.ts` files so generic params like `<T>` are not
+  // treated as JSX. Babel 8's preset-react default runtime is `"automatic"`;
+  // keep `"classic"` (`React.createElement`) for Carbon's existing output.
+  overrides: [
+    {
+      test: /\.(js|jsx|tsx)$/,
+      presets: [
+        [
+          '@babel/preset-react',
+          {
+            runtime: 'classic',
+          },
+        ],
+      ],
+    },
   ],
   plugins: [
     '@babel/plugin-proposal-export-default-from',
-    '@babel/plugin-transform-class-properties',
     '@babel/plugin-transform-export-namespace-from',
-    [
-      '@babel/plugin-transform-runtime',
-      {
-        regenerator: true,
-      },
-    ],
+    '@babel/plugin-transform-runtime',
   ],
 };
 

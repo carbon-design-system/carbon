@@ -9,9 +9,6 @@
 
 module.exports = () => {
   return {
-    // Presets run last-to-first, so TypeScript must be listed after
-    // class-properties. Top-level plugins run before presets, which would
-    // transform `declare` fields too early.
     presets: [
       [
         '@babel/preset-env',
@@ -25,7 +22,12 @@ module.exports = () => {
       () => ({
         plugins: ['@babel/plugin-transform-class-properties'],
       }),
-      '@babel/preset-typescript',
+      [
+        '@babel/preset-typescript',
+        // Babel 8 defaults this to true, which keeps `import { Type }` as a
+        // runtime require. Carbon does not use verbatimModuleSyntax.
+        { onlyRemoveTypeImports: false },
+      ],
     ],
     // Skip JSX parsing on `.ts` files so generic params like `<T>` are not
     // treated as JSX. Babel 8's preset-react default runtime is `"automatic"`;

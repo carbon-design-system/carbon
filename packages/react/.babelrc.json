@@ -11,12 +11,24 @@
       }
     ],
     [
-      "@babel/preset-react",
+      "@babel/preset-typescript",
       {
-        "runtime": "classic"
+        "onlyRemoveTypeImports": false
       }
-    ],
-    "@babel/preset-typescript"
+    ]
+  ],
+  "overrides": [
+    {
+      "test": ["./**/*.js", "./**/*.jsx", "./**/*.tsx"],
+      "presets": [
+        [
+          "@babel/preset-react",
+          {
+            "runtime": "classic"
+          }
+        ]
+      ]
+    }
   ],
   "plugins": [
     "dev-expression",
