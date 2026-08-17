@@ -22,7 +22,9 @@ $css--plex: true !default;
 // ── Fluid date picker (wrapper) ──────────────────────────────────────────────
 
 :host(#{$prefix}-fluid-date-picker) {
-  @extend .#{$prefix}--date-picker--fluid;
+  @if not flags.enabled('enable-v12-release') {
+    @extend .#{$prefix}--date-picker--fluid;
+  }
   @include emit-layout-tokens();
 
   display: inline-flex;
@@ -74,6 +76,10 @@ $css--plex: true !default;
       }
     }
   }
+
+  @if flags.enabled('enable-v12-release') {
+    border: 1px solid transparent;
+  }
 }
 
 :host(#{$prefix}-fluid-date-picker[invalid]) {
@@ -117,7 +123,8 @@ $css--plex: true !default;
 }
 
 @if flags.enabled('enable-v12-release') {
-  :host(#{$prefix}-fluid-date-picker-input:not([disabled]):not([readonly])) {
+  :host(#{$prefix}-fluid-date-picker:not([disabled]):not([readonly])) {
+    border-radius: $border-radius-04;
     // (gray-20 → gray-50)
     background:
       linear-gradient($field, $field) padding-box,
@@ -147,6 +154,14 @@ $css--plex: true !default;
 
   :host(#{$prefix}-fluid-date-picker-input:focus-within) {
     @include focus-outline('outline');
+
+    z-index: 1;
+    outline-offset: convert.to-rem(-1.5px);
+  }
+
+  :host(#{$prefix}-fluid-date-picker:focus-within)
+    ::slotted(#{$prefix}-fluid-date-picker-input[kind='to']) {
+    border-inline-start-color: transparent;
   }
 }
 
@@ -160,8 +175,10 @@ $css--plex: true !default;
       )
   ) {
   block-size: auto;
-  border-block-end: none;
   min-block-size: convert.to-rem(64px);
+  @if not flags.enabled('enable-v12-release') {
+    border-block-end: none;
+  }
 }
 
 // Divider between input area and error/warn message
@@ -225,10 +242,22 @@ $css--plex: true !default;
   .#{$prefix}--date-picker__input {
     inline-size: convert.to-rem(143.5px);
   }
+
+  @if flags.enabled('enable-v12-release') {
+    min-inline-size: 0;
+
+    .#{$prefix}--date-picker__input {
+      inline-size: 100%;
+    }
+  }
 }
 
 :host(#{$prefix}-fluid-date-picker-input[kind='to']) {
   border-inline-start: 1px solid $border-strong;
+
+  @if flags.enabled('enable-v12-release') {
+    border-inline-start-color: $border-subtle;
+  }
 }
 
 :host(#{$prefix}-fluid-date-picker-input[kind='to'][disabled]),
@@ -241,6 +270,10 @@ $css--plex: true !default;
   ) {
   @extend .#{$prefix}--date-picker--fluid--invalid;
   @include focus-outline('invalid');
+
+  @if flags.enabled('enable-v12-release') {
+    outline-offset: convert.to-rem(-0.5px);
+  }
 }
 
 :host(#{$prefix}-fluid-date-picker-input[warn]:not([invalid])) {

@@ -48,7 +48,7 @@
 
       &:focus-within {
         .#{$prefix}--date-picker__input {
-          outline-offset: -1px;
+          outline-offset: convert.to-rem(-1.5px);
         }
       }
     }
@@ -192,18 +192,32 @@
     border-inline-start: 1px solid $border-strong;
 
     @if enabled('enable-v12-release') {
-      &[disabled] {
-        border-inline-start-color: $border-subtle;
-      }
+      border-inline-start-color: $border-subtle;
+    }
+  }
+
+  @if enabled('enable-v12-release') {
+    .#{$prefix}--date-picker--fluid:focus-within
+      .#{$prefix}--date-picker--range
+      > .#{$prefix}--date-picker-container:last-child
+      .#{$prefix}--date-picker__input {
+      border-inline-start-color: transparent;
     }
   }
 
   // Invalid
   // Entire input
-  .#{$prefix}--date-picker--fluid.#{$prefix}--date-picker--fluid--invalid,
+
+  @if enabled('enable-v12-release') {
+    .#{$prefix}--date-picker--fluid.#{$prefix}--date-picker--fluid--invalid {
+      @include focus-outline('invalid');
+    }
+  } @else {
+    .#{$prefix}--date-picker--fluid.#{$prefix}--date-picker--fluid--invalid,
   // Just one input invalid
   .#{$prefix}--date-picker-container.#{$prefix}--date-picker--fluid--invalid {
-    @include focus-outline('invalid');
+      @include focus-outline('invalid');
+    }
   }
 
   .#{$prefix}--date-picker--fluid
@@ -271,18 +285,35 @@
     > .#{$prefix}--date-picker-container:first-child::after,
   .#{$prefix}--date-picker--fluid
     .#{$prefix}--date-picker--range
-    .#{$prefix}--date-picker--fluid--warn.#{$prefix}--date-picker-container:first-child::after,
-  .#{$prefix}--date-picker--fluid
-    .#{$prefix}--date-picker--range
-    .#{$prefix}--date-picker--fluid--warn.#{$prefix}--date-picker-container:last-child::after {
+    .#{$prefix}--date-picker--fluid--warn.#{$prefix}--date-picker-container:first-child::after {
     position: absolute;
     display: block;
-    background: $border-strong;
     block-size: calc(100% - 1rem);
     content: '';
     inline-size: 1px;
     inset-block-start: convert.to-rem(8px);
     inset-inline-end: 0;
+
+    @if enabled('enable-v12-release') {
+      background: $border-subtle;
+    } @else {
+      background: $border-strong;
+    }
+  }
+
+  @if not enabled('enable-v12-release') {
+    .#{$prefix}--date-picker--fluid
+      .#{$prefix}--date-picker--range
+      .#{$prefix}--date-picker--fluid--warn.#{$prefix}--date-picker-container:last-child::after {
+      position: absolute;
+      display: block;
+      background: $border-strong;
+      block-size: calc(100% - 1rem);
+      content: '';
+      inline-size: 1px;
+      inset-block-start: convert.to-rem(8px);
+      inset-inline-end: 0;
+    }
   }
 
   .#{$prefix}--date-picker--fluid
