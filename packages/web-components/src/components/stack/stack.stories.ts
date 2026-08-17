@@ -15,44 +15,62 @@ const orientationOptions = {
 };
 
 const defaultArgs = {
-  gap: '0',
+  gap: '6',
   orientation: STACK_ORIENTATION.VERTICAL,
+  useCustomGapValue: false,
 };
 
 const controls = {
   gap: {
-    control: 'select',
-    description: 'gap',
-    options: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+    control: 'text',
+    description:
+      'Provide either a spacing scale step or, when enabled, a custom gap value.',
   },
   orientation: {
     control: 'select',
-    description: 'orientation',
+    description: 'Specify the orientation of the items in the Stack.',
     options: orientationOptions,
+  },
+  useCustomGapValue: {
+    control: 'boolean',
+    description: 'Use a custom CSS value for the gap, such as `2rem`.',
   },
 };
 
+const renderStack = ({ gap, orientation, useCustomGapValue }) =>
+  html` <cds-stack
+    gap="${gap}"
+    orientation="${orientation}"
+    ?use-custom-gap-value="${useCustomGapValue}">
+    <div>Account settings</div>
+    <div>Billing details</div>
+    <div>Notification preferences</div>
+  </cds-stack>`;
+
 export const Default = {
-  args: defaultArgs,
-  argTypes: controls,
-  render: ({ gap, orientation }) =>
-    html` <cds-stack gap="${gap}" orientation="${orientation}">
-      <div>Item 1</div>
-      <div>Item 2</div>
-      <div>Item 3</div>
-    </cds-stack>`,
+  render: renderStack,
 };
+
 export const Horizontal = {
-  render: () =>
-    html` <cds-stack gap="6" orientation="horizontal">
-      <div>Item 1</div>
-      <div>Item 2</div>
-      <div>Item 3</div>
-    </cds-stack>`,
+  args: {
+    orientation: STACK_ORIENTATION.HORIZONTAL,
+  },
+  argTypes: {
+    orientation: {
+      ...controls.orientation,
+      table: {
+        readonly: true,
+      },
+    },
+  },
+  render: renderStack,
 };
 
 const meta = {
   title: 'Layout/Stack',
+  component: 'cds-stack',
+  args: defaultArgs,
+  argTypes: controls,
 };
 
 export default meta;
