@@ -31,12 +31,6 @@ const args = {
 };
 
 const argTypes = {
-  as: {
-    control: { type: 'text' },
-  },
-  className: {
-    control: { type: 'text' },
-  },
   condensed: {
     control: { type: 'boolean' },
   },
