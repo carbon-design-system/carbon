@@ -53,6 +53,8 @@ export {
   useFeatureFlags as preview_useFeatureFlags, // this export can be removed in v12
 } from './components/FeatureFlags';
 export * from './components/FileUploader';
+// TODO: uncomment in v12 — also remove from excludeProductsComponents
+// export * from './components/FullPageError';
 export * from './components/FluidForm';
 export * from './components/Form';
 export * from './components/FormGroup';
