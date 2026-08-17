@@ -471,6 +471,7 @@ function TabList({
     dismissable,
   } = React.useContext(TabsContext);
   const prefix = usePrefix();
+  const containerRef = useRef<HTMLDivElement>(null);
   const ref = useRef<HTMLDivElement>(null);
   const previousButton = useRef<HTMLButtonElement>(null);
   const nextButton = useRef<HTMLButtonElement>(null);
@@ -527,6 +528,22 @@ function TabList({
       : false
   );
 
+  const updateOverflowState = useCallback(() => {
+    if (!containerRef.current || !ref.current) {
+      return;
+    }
+
+    // adding 1 in calculations for Firefox support
+    const hasOverflow =
+      ref.current.scrollWidth > containerRef.current.clientWidth + 1;
+    setIsNextButtonVisible(
+      hasOverflow &&
+        ref.current.scrollLeft + ref.current.clientWidth + 1 <
+          ref.current.scrollWidth
+    );
+    setIsScrollable(hasOverflow);
+  }, []);
+
   const isPreviousButtonVisible = ref.current
     ? isScrollable && scrollLeft > 0
     : false;
@@ -546,14 +563,28 @@ function TabList({
   );
 
   const tabs = useRef<TabElement[]>([]);
-  const debouncedOnScroll = useCallback(() => {
-    const updateScroll = debounce(() => {
-      if (ref.current) {
-        setScrollLeft(ref.current.scrollLeft);
-      }
-    }, scrollDebounceWait);
-    updateScroll();
-  }, [scrollDebounceWait]);
+  const debouncedUpdateScroll = useMemo(
+    () =>
+      debounce(() => {
+        if (ref.current) {
+          setScrollLeft(ref.current.scrollLeft);
+        }
+      }, scrollDebounceWait),
+    [scrollDebounceWait]
+  );
+
+  useEffect(() => {
+    return () => {
+      debouncedUpdateScroll.cancel();
+    };
+  }, [debouncedUpdateScroll]);
+
+  const handleScroll = useCallback(() => {
+    // Keep the overflow controls in sync with smooth scrolling while the
+    // scroll position state continues to respect scrollDebounceWait.
+    updateOverflowState();
+    debouncedUpdateScroll();
+  }, [debouncedUpdateScroll, updateOverflowState]);
 
   function onKeyDown(event: KeyboardEvent) {
     if (
@@ -641,18 +672,8 @@ function TabList({
   }, []);
 
   useEffect(() => {
-    // adding 1 in calculation for firefox support
-    setIsNextButtonVisible(
-      ref.current
-        ? scrollLeft + ref.current.clientWidth + 1 < ref.current.scrollWidth
-        : false
-    );
-
-    if (dismissable && ref.current) {
-      // adding 1 in calculation for firefox support
-      setIsScrollable(ref.current.scrollWidth > ref.current.clientWidth + 1);
-    }
-  }, [children, dismissable, scrollLeft]);
+    updateOverflowState();
+  }, [children, scrollLeft, updateOverflowState]);
 
   useEffect(() => {
     if (tabs.current[selectedIndex]?.disabled) {
@@ -669,25 +690,20 @@ function TabList({
   }, []);
 
   useIsomorphicEffect(() => {
-    if (ref.current) {
-      // adding 1 in calculation for firefox support
-      setIsScrollable(ref.current.scrollWidth > ref.current.clientWidth + 1);
+    const element = containerRef.current;
+    if (!element) {
+      return;
     }
 
-    function handler() {
-      if (ref.current) {
-        // adding 1 in calculation for firefox support
-        setIsScrollable(ref.current.scrollWidth > ref.current.clientWidth + 1);
-      }
-    }
+    updateOverflowState();
 
-    const debouncedHandler = debounce(handler, 200);
-    window.addEventListener('resize', debouncedHandler);
+    const resizeObserver = new ResizeObserver(updateOverflowState);
+    resizeObserver.observe(element);
+
     return () => {
-      debouncedHandler.cancel();
-      window.removeEventListener('resize', debouncedHandler);
+      resizeObserver.disconnect();
     };
-  }, []);
+  }, [updateOverflowState]);
 
   // updates scroll location for all scroll behavior.
   useIsomorphicEffect(() => {
@@ -745,7 +761,7 @@ function TabList({
   });
 
   return (
-    <div className={className}>
+    <div ref={containerRef} className={className}>
       <button
         aria-hidden="true"
         tabIndex={-1}
@@ -763,7 +779,7 @@ function TabList({
         ref={ref}
         role="tablist"
         className={`${prefix}--tab--list`}
-        onScroll={debouncedOnScroll}
+        onScroll={handleScroll}
         onKeyDown={onKeyDown}
         onBlur={handleBlur}>
         {Children.map(children, (child, index) => {

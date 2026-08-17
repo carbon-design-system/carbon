@@ -1,8 +1,10 @@
+# Purpose: Collect visual design defects as formal Bugs. The shared Bug
+# metadata plugin handles severity and Project 39 defaults for this form too.
 name: Design defect 🎨
 description: Report a visual design issue for an existing component or pattern.
 title: '[Bug]: '
 type: 'bug'
-labels: ['type: bug 🐛', 'status: needs triage :female_detective:']
+labels: ['type: bug 🐛']
 body:
   - type: markdown
     attributes:
@@ -80,6 +82,29 @@ body:
       description:
         'How do we reproduce the problem displayed in the screenshots above?'
     validations:
+      required: true
+  - type: dropdown
+    id: severity
+    # The automation reads the "Suggested Severity" heading and the numeric
+    # value in each option. Keep both stable if the surrounding copy changes.
+    attributes:
+      label: Suggested Severity
+      description:
+        'Read more to understand our [severity
+        levels](https://github.com/carbon-design-system/carbon/blob/main/docs/guides/support.md#severity)'
+      options:
+        - 'Critical (Severity 1) = Must be fixed ASAP. The response must be
+          swift. Someone from the team must drop all current work and be
+          immediately reassigned to address the issue.'
+        - 'High (Severity 2) = User cannot complete task, and/or no workaround
+          within the user experience of a given component.'
+        - 'Medium (Severity 3) = User can complete task, and/or has a workaround
+          within the user experience of a given component.'
+        - 'Low (Severity 4) = Unrelated to a user task, has a workaround or does
+          not need a workaround.'
+    validations:
+      # Every new Bug needs a reporter-provided suggestion; maintainers can
+      # still change the resulting issue field during triage.
       required: true
   - type: checkboxes
     id: terms
