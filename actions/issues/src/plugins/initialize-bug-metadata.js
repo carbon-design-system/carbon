@@ -8,7 +8,8 @@
 /**
  * Idempotent metadata initialization for formal Bug issues. It copies a
  * reporter's required severity suggestion only into an empty issue field,
- * ensures Project 39 defaults, and adds community-help metadata for Medium/Low.
+ * waits for Project 39 automation before applying defaults, and adds
+ * community-help metadata for Medium/Low.
  */
 import * as core from '@actions/core';
 import { events, or } from '../conditions.js';
@@ -24,7 +25,7 @@ const AREA_FIELD_NAME = 'Area';
 const EFFORT_FIELD_NAME = 'Effort';
 const SUPPORT_AREA_NAME = 'Support';
 const DEFAULT_EFFORT = 3;
-const MAX_PROJECT_LOOKUPS = 3;
+const MAX_PROJECT_LOOKUPS = 5;
 const COMMUNITY_CONTRIBUTION_LABELS = [
   'status: help wanted 👐',
   'needs: community contribution',
@@ -101,19 +102,6 @@ const PROJECT_STATE_QUERY = `
             }
           }
         }
-      }
-    }
-  }
-`;
-
-// Used only when Project 39 auto-add has not created an item yet.
-const ADD_PROJECT_ITEM_MUTATION = `
-  mutation AddBugToProject($projectId: ID!, $contentId: ID!) {
-    addProjectV2ItemById(
-      input: { projectId: $projectId, contentId: $contentId }
-    ) {
-      item {
-        id
       }
     }
   }
@@ -236,12 +224,7 @@ function hasProjectFieldValue(item, fieldId) {
   return item.fieldValues.nodes.some((value) => value?.field?.id === fieldId);
 }
 
-/** Recognize the expected error when GitHub's auto-add races this plugin. */
-function isDuplicateProjectItemError(error) {
-  return /already exists|already.*project|content.*exists/i.test(error.message);
-}
-
-/** Injectable delay used by project-race retries and replaced by a mock in tests. */
+/** Injectable delay used while waiting for Project 39's workflow automation. */
 function wait(milliseconds) {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
 }
@@ -251,7 +234,15 @@ async function getProjectState(octokit, variables) {
   core.info(
     `[bug-metadata] Loading Project ${PROJECT_NUMBER} state for issue #${variables.issueNumber}`
   );
-  const data = await octokit.graphql(PROJECT_STATE_QUERY, variables);
+  let data;
+  try {
+    data = await octokit.graphql(PROJECT_STATE_QUERY, variables);
+  } catch (error) {
+    core.error(
+      `[bug-metadata] Could not read Project ${PROJECT_NUMBER} state. Verify that the Carbon Automation GitHub App has Organization permissions > Projects set to Read and write. GitHub response: ${error.message}`
+    );
+    throw error;
+  }
   const project = data.organization?.projectV2;
   const issue = data.repository?.issue;
 
@@ -337,10 +328,11 @@ async function ensureSeverity(context, octokit, suggestedSeverity) {
 }
 
 /**
- * Return the existing Project 39 item or add one. If repository auto-add wins
- * the race, retry the query briefly until GitHub exposes the resulting item.
+ * Return the existing Project 39 item after the project's workflow automation
+ * adds it. This plugin deliberately does not add membership itself: doing so
+ * races the project workflow and can surface a misleading integration error.
  */
-async function ensureProjectItem(
+async function waitForProjectItem(
   octokit,
   variables,
   project,
@@ -356,34 +348,13 @@ async function ensureProjectItem(
   }
 
   core.info(
-    `[bug-metadata] Issue is not in Project ${PROJECT_NUMBER}; adding it now`
+    `[bug-metadata] Issue is not yet visible in Project ${PROJECT_NUMBER}; waiting for the project's auto-add workflow instead of issuing a duplicate membership mutation`
   );
-  try {
-    const data = await octokit.graphql(ADD_PROJECT_ITEM_MUTATION, {
-      projectId: project.id,
-      contentId: issue.id,
-    });
-    const item = {
-      ...data.addProjectV2ItemById.item,
-      fieldValues: { nodes: [] },
-    };
-    core.info(
-      `[bug-metadata] Added issue to Project ${PROJECT_NUMBER} as item ${item.id}`
-    );
-    return item;
-  } catch (error) {
-    if (!isDuplicateProjectItemError(error)) {
-      throw error;
-    }
-    core.info(
-      `[bug-metadata] Project auto-add won the membership race: ${error.message}`
-    );
-  }
 
   for (let attempt = 1; attempt <= MAX_PROJECT_LOOKUPS; attempt++) {
-    // Short linear backoff gives ProjectV2 time to reach read-after-write
-    // consistency without making the workflow wait for many seconds.
-    const delayMilliseconds = attempt * 250;
+    // A short linear backoff handles both workflow scheduling and ProjectV2
+    // read-after-write propagation while keeping the total wait bounded.
+    const delayMilliseconds = attempt * 1000;
     core.info(
       `[bug-metadata] Waiting ${delayMilliseconds}ms before project lookup ${attempt}/${MAX_PROJECT_LOOKUPS}`
     );
@@ -392,7 +363,7 @@ async function ensureProjectItem(
     const item = findProjectItem(nextState.issue, nextState.project.id);
     if (item) {
       core.info(
-        `[bug-metadata] Found auto-added project item ${item.id} on lookup ${attempt}`
+        `[bug-metadata] Project automation item ${item.id} became visible on lookup ${attempt}/${MAX_PROJECT_LOOKUPS}`
       );
       return item;
     }
@@ -401,9 +372,9 @@ async function ensureProjectItem(
     );
   }
 
-  throw new Error(
-    `Issue was added to project ${PROJECT_NUMBER}, but its item was not found`
-  );
+  const message = `Project ${PROJECT_NUMBER} automation did not expose an item for issue #${variables.issueNumber} after ${MAX_PROJECT_LOOKUPS} lookups. Verify the project's auto-add workflow and that the Carbon Automation GitHub App has Organization permissions > Projects set to Read and write.`;
+  core.error(`[bug-metadata] ${message}`);
+  throw new Error(message);
 }
 
 /**
@@ -437,7 +408,7 @@ async function ensureProjectMetadata(context, octokit, delay) {
     `[bug-metadata] Resolved project fields: Area=${areaField.id}; Support=${supportOption.id}; Effort=${effortField.id}`
   );
 
-  const item = await ensureProjectItem(
+  const item = await waitForProjectItem(
     octokit,
     variables,
     project,
@@ -445,36 +416,45 @@ async function ensureProjectMetadata(context, octokit, delay) {
     delay
   );
 
-  if (!hasProjectFieldValue(item, areaField.id)) {
-    core.info(
-      `[bug-metadata] Area is empty on item ${item.id}; setting it to Support`
-    );
-    await octokit.graphql(UPDATE_SINGLE_SELECT_MUTATION, {
-      projectId: project.id,
-      itemId: item.id,
-      fieldId: areaField.id,
-      optionId: supportOption.id,
-    });
-    core.info(`[bug-metadata] Area set to Support on item ${item.id}`);
-  } else {
-    core.info(`[bug-metadata] Area already has a value on item ${item.id}`);
-  }
+  try {
+    if (!hasProjectFieldValue(item, areaField.id)) {
+      core.info(
+        `[bug-metadata] Area is empty on item ${item.id}; setting it to Support`
+      );
+      await octokit.graphql(UPDATE_SINGLE_SELECT_MUTATION, {
+        projectId: project.id,
+        itemId: item.id,
+        fieldId: areaField.id,
+        optionId: supportOption.id,
+      });
+      core.info(`[bug-metadata] Area set to Support on item ${item.id}`);
+    } else {
+      core.info(`[bug-metadata] Area already has a value on item ${item.id}`);
+    }
 
-  if (!hasProjectFieldValue(item, effortField.id)) {
-    core.info(
-      `[bug-metadata] Effort is empty on item ${item.id}; setting it to ${DEFAULT_EFFORT}`
+    if (!hasProjectFieldValue(item, effortField.id)) {
+      core.info(
+        `[bug-metadata] Effort is empty on item ${item.id}; setting it to ${DEFAULT_EFFORT}`
+      );
+      await octokit.graphql(UPDATE_NUMBER_MUTATION, {
+        projectId: project.id,
+        itemId: item.id,
+        fieldId: effortField.id,
+        value: DEFAULT_EFFORT,
+      });
+      core.info(
+        `[bug-metadata] Effort set to ${DEFAULT_EFFORT} on item ${item.id}`
+      );
+    } else {
+      core.info(`[bug-metadata] Effort already has a value on item ${item.id}`);
+    }
+  } catch (error) {
+    // GraphQL does not return an accepted-permissions header, so put the exact
+    // installation permission beside the failing metadata mutation.
+    core.error(
+      `[bug-metadata] Could not update Project ${PROJECT_NUMBER} metadata. Verify that the Carbon Automation GitHub App has Organization permissions > Projects set to Read and write. GitHub response: ${error.message}`
     );
-    await octokit.graphql(UPDATE_NUMBER_MUTATION, {
-      projectId: project.id,
-      itemId: item.id,
-      fieldId: effortField.id,
-      value: DEFAULT_EFFORT,
-    });
-    core.info(
-      `[bug-metadata] Effort set to ${DEFAULT_EFFORT} on item ${item.id}`
-    );
-  } else {
-    core.info(`[bug-metadata] Effort already has a value on item ${item.id}`);
+    throw error;
   }
 }
 
