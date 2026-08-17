@@ -84,7 +84,7 @@ const javascriptBanner = `/**
 `;
 function buildJavaScriptModule(featureFlags) {
   const t = babelTypes;
-  const tmpl = babelTemplate.default(`
+  const tmpl = babelTemplate(`
     if (process.env.%%env%%) {
       if (process.env.%%env%% === 'true') {
         enabled.%%key%% = true;
@@ -95,7 +95,7 @@ function buildJavaScriptModule(featureFlags) {
       enabled.%%key%% = %%defaultEnabled%%;
     }
   `);
-  const fallback = babelTemplate.default(`enabled.%%key%% = %%enabled%%;`);
+  const fallback = babelTemplate(`enabled.%%key%% = %%enabled%%;`);
 
   const file = t.file(
     t.program([
@@ -154,7 +154,7 @@ function buildJavaScriptModule(featureFlags) {
       ),
     ])
   );
-  const { code } = generator.default(file);
+  const { code } = generator(file);
 
   return `${javascriptBanner}${code}`;
 }

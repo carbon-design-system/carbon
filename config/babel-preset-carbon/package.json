@@ -24,6 +24,7 @@
     "@babel/plugin-transform-react-constant-elements": "^8.0.0",
     "@babel/preset-env": "^8.0.0",
     "@babel/preset-react": "^8.0.0",
+    "@babel/preset-typescript": "^8.0.0",
     "babel-plugin-dev-expression": "^0.2.3",
     "browserslist-config-carbon": "^11.2.0"
   }

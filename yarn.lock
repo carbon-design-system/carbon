@@ -9071,6 +9071,7 @@ __metadata:
     "@babel/plugin-transform-react-constant-elements": "npm:^8.0.0"
     "@babel/preset-env": "npm:^8.0.0"
     "@babel/preset-react": "npm:^8.0.0"
+    "@babel/preset-typescript": "npm:^8.0.0"
     babel-plugin-dev-expression: "npm:^0.2.3"
     browserslist-config-carbon: "npm:^11.2.0"
   languageName: unknown
