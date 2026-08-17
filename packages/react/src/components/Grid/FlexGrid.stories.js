@@ -24,6 +24,7 @@ DemoContent.propTypes = {
 };
 
 const args = {
+  align: 'center',
   condensed: false,
   fullWidth: false,
   narrow: false,
@@ -31,6 +32,10 @@ const args = {
 };
 
 const argTypes = {
+  align: {
+    control: { type: 'select' },
+    options: ['start', 'center', 'end'],
+  },
   condensed: {
     control: { type: 'boolean' },
   },
@@ -45,7 +50,7 @@ const argTypes = {
   },
 };
 
-const gridContainerControls = ['fullWidth', 'withRowGap'];
+const gridContainerControls = ['align', 'fullWidth', 'withRowGap'];
 
 export default {
   title: 'Elements/FlexGrid',
