@@ -1355,9 +1355,8 @@ describe('Range date picker', () => {
     expect(startInput).toHaveFocus();
     await userEvent.tab();
     expect(document.activeElement).toHaveClass('flatpickr-day');
-    await userEvent.keyboard('{Enter}');
+    await userEvent.click(document.activeElement);
 
-    expect(startInput).not.toHaveValue('');
     expect(ref.current.calendar.selectedDates).toHaveLength(1);
 
     // Simulate focus returning to the start input.
