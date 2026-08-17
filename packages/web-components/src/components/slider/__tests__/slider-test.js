@@ -2,6 +2,20 @@ import { fixture, html, expect } from '@open-wc/testing';
 import '@carbon/web-components/es/components/slider/index.js';
 
 describe('cds-slider', () => {
+  const setTrackRect = (track, width = 100) => {
+    track.getBoundingClientRect = () => ({
+      left: 0,
+      width,
+      top: 0,
+      right: width,
+      bottom: 0,
+      height: 0,
+      x: 0,
+      y: 0,
+      toJSON: () => {},
+    });
+  };
+
   it('should display invalid state and message', async () => {
     const el = await fixture(
       html` <cds-slider
@@ -510,31 +524,53 @@ describe('cds-slider', () => {
     );
     await el.updateComplete;
 
-    const slider = el?.shadowRoot?.querySelector('.cds--slider');
-    const track = el?.shadowRoot?.querySelector('#track');
-    track.getBoundingClientRect = () => ({
-      left: 0,
-      width: 100,
-      top: 0,
-      right: 100,
-      bottom: 0,
-      height: 0,
-      x: 0,
-      y: 0,
-      toJSON: () => {},
-    });
+    const slider = el.shadowRoot.querySelector('.cds--slider');
+    const track = el.shadowRoot.querySelector('#track');
+    expect(slider).to.exist;
+    expect(track).to.exist;
+    setTrackRect(track);
 
-    slider?.dispatchEvent(
+    slider.dispatchEvent(
       new MouseEvent('click', { clientX: 87, bubbles: true })
     );
     await el.updateComplete;
 
-    const thumb = el?.shadowRoot?.querySelector('#thumb');
-    const tooltipContent = el?.shadowRoot?.querySelector('cds-tooltip-content');
+    const thumb = el.shadowRoot.querySelector('#thumb');
+    const tooltipContent = el.shadowRoot.querySelector('cds-tooltip-content');
+    expect(thumb).to.exist;
+    expect(tooltipContent).to.exist;
     expect(el.value).to.equal(8.7);
     expect(thumb).to.have.attribute('aria-valuenow', '8.7');
     expect(thumb).to.have.attribute('aria-valuetext', '8.7');
-    expect(tooltipContent?.textContent.trim()).to.equal('8.7');
+    expect(tooltipContent.textContent.trim()).to.equal('8.7');
+  });
+
+  it('should preserve programmatic values while clamping the visual rate', async () => {
+    const el = await fixture(
+      html` <cds-slider
+        label-text="Slider Label"
+        max="10"
+        min="0"
+        step="0.1"
+        value="0"
+        hide-text-input>
+        <cds-slider-input
+          aria-label="Slider value"
+          type="number"></cds-slider-input>
+      </cds-slider>`
+    );
+    await el.updateComplete;
+
+    el.value = 12.34;
+    await el.updateComplete;
+
+    const tooltip = el.shadowRoot.querySelector('cds-tooltip');
+    const tooltipContent = el.shadowRoot.querySelector('cds-tooltip-content');
+    expect(tooltip).to.exist;
+    expect(tooltipContent).to.exist;
+    expect(el.value).to.equal(12.34);
+    expect(tooltip.style.left).to.equal('100%');
+    expect(tooltipContent.textContent.trim()).to.equal('12.34');
   });
 
   it('should preserve decimal precision from min for hidden-input tooltip content', async () => {
@@ -553,31 +589,25 @@ describe('cds-slider', () => {
     );
     await el.updateComplete;
 
-    const slider = el?.shadowRoot?.querySelector('.cds--slider');
-    const track = el?.shadowRoot?.querySelector('#track');
-    track.getBoundingClientRect = () => ({
-      left: 0,
-      width: 100,
-      top: 0,
-      right: 100,
-      bottom: 0,
-      height: 0,
-      x: 0,
-      y: 0,
-      toJSON: () => {},
-    });
+    const slider = el.shadowRoot.querySelector('.cds--slider');
+    const track = el.shadowRoot.querySelector('#track');
+    expect(slider).to.exist;
+    expect(track).to.exist;
+    setTrackRect(track);
 
-    slider?.dispatchEvent(
+    slider.dispatchEvent(
       new MouseEvent('click', { clientX: 0, bubbles: true })
     );
     await el.updateComplete;
 
-    const thumb = el?.shadowRoot?.querySelector('#thumb');
-    const tooltipContent = el?.shadowRoot?.querySelector('cds-tooltip-content');
+    const thumb = el.shadowRoot.querySelector('#thumb');
+    const tooltipContent = el.shadowRoot.querySelector('cds-tooltip-content');
+    expect(thumb).to.exist;
+    expect(tooltipContent).to.exist;
     expect(el.value).to.equal(0.5);
     expect(thumb).to.have.attribute('aria-valuenow', '0.5');
     expect(thumb).to.have.attribute('aria-valuetext', '0.5');
-    expect(tooltipContent?.textContent.trim()).to.equal('0.5');
+    expect(tooltipContent.textContent.trim()).to.equal('0.5');
   });
 
   it('should preserve decimal precision from max for hidden-input tooltip content', async () => {
@@ -596,31 +626,25 @@ describe('cds-slider', () => {
     );
     await el.updateComplete;
 
-    const slider = el?.shadowRoot?.querySelector('.cds--slider');
-    const track = el?.shadowRoot?.querySelector('#track');
-    track.getBoundingClientRect = () => ({
-      left: 0,
-      width: 100,
-      top: 0,
-      right: 100,
-      bottom: 0,
-      height: 0,
-      x: 0,
-      y: 0,
-      toJSON: () => {},
-    });
+    const slider = el.shadowRoot.querySelector('.cds--slider');
+    const track = el.shadowRoot.querySelector('#track');
+    expect(slider).to.exist;
+    expect(track).to.exist;
+    setTrackRect(track);
 
-    slider?.dispatchEvent(
+    slider.dispatchEvent(
       new MouseEvent('click', { clientX: 100, bubbles: true })
     );
     await el.updateComplete;
 
-    const thumb = el?.shadowRoot?.querySelector('#thumb');
-    const tooltipContent = el?.shadowRoot?.querySelector('cds-tooltip-content');
+    const thumb = el.shadowRoot.querySelector('#thumb');
+    const tooltipContent = el.shadowRoot.querySelector('cds-tooltip-content');
+    expect(thumb).to.exist;
+    expect(tooltipContent).to.exist;
     expect(el.value).to.equal(10.5);
     expect(thumb).to.have.attribute('aria-valuenow', '10.5');
     expect(thumb).to.have.attribute('aria-valuetext', '10.5');
-    expect(tooltipContent?.textContent.trim()).to.equal('10.5');
+    expect(tooltipContent.textContent.trim()).to.equal('10.5');
   });
 
   it('should normalize decimal values for hidden-input tooltip content with step 0.7384', async () => {
@@ -639,31 +663,25 @@ describe('cds-slider', () => {
     );
     await el.updateComplete;
 
-    const slider = el?.shadowRoot?.querySelector('.cds--slider');
-    const track = el?.shadowRoot?.querySelector('#track');
-    track.getBoundingClientRect = () => ({
-      left: 0,
-      width: 100,
-      top: 0,
-      right: 100,
-      bottom: 0,
-      height: 0,
-      x: 0,
-      y: 0,
-      toJSON: () => {},
-    });
+    const slider = el.shadowRoot.querySelector('.cds--slider');
+    const track = el.shadowRoot.querySelector('#track');
+    expect(slider).to.exist;
+    expect(track).to.exist;
+    setTrackRect(track);
 
-    slider?.dispatchEvent(
+    slider.dispatchEvent(
       new MouseEvent('click', { clientX: 87, bubbles: true })
     );
     await el.updateComplete;
 
-    const thumb = el?.shadowRoot?.querySelector('#thumb');
-    const tooltipContent = el?.shadowRoot?.querySelector('cds-tooltip-content');
+    const thumb = el.shadowRoot.querySelector('#thumb');
+    const tooltipContent = el.shadowRoot.querySelector('cds-tooltip-content');
+    expect(thumb).to.exist;
+    expect(tooltipContent).to.exist;
     expect(el.value).to.equal(8.8608);
     expect(thumb).to.have.attribute('aria-valuenow', '8.8608');
     expect(thumb).to.have.attribute('aria-valuetext', '8.8608');
-    expect(tooltipContent?.textContent.trim()).to.equal('8.8608');
+    expect(tooltipContent.textContent.trim()).to.equal('8.8608');
   });
 
   it('should normalize decimal values for negative hidden-input tooltip content', async () => {
@@ -682,31 +700,25 @@ describe('cds-slider', () => {
     );
     await el.updateComplete;
 
-    const slider = el?.shadowRoot?.querySelector('.cds--slider');
-    const track = el?.shadowRoot?.querySelector('#track');
-    track.getBoundingClientRect = () => ({
-      left: 0,
-      width: 200,
-      top: 0,
-      right: 200,
-      bottom: 0,
-      height: 0,
-      x: 0,
-      y: 0,
-      toJSON: () => {},
-    });
+    const slider = el.shadowRoot.querySelector('.cds--slider');
+    const track = el.shadowRoot.querySelector('#track');
+    expect(slider).to.exist;
+    expect(track).to.exist;
+    setTrackRect(track, 200);
 
-    slider?.dispatchEvent(
+    slider.dispatchEvent(
       new MouseEvent('click', { clientX: 13, bubbles: true })
     );
     await el.updateComplete;
 
-    const thumb = el?.shadowRoot?.querySelector('#thumb');
-    const tooltipContent = el?.shadowRoot?.querySelector('cds-tooltip-content');
+    const thumb = el.shadowRoot.querySelector('#thumb');
+    const tooltipContent = el.shadowRoot.querySelector('cds-tooltip-content');
+    expect(thumb).to.exist;
+    expect(tooltipContent).to.exist;
     expect(el.value).to.equal(-8.7);
     expect(thumb).to.have.attribute('aria-valuenow', '-8.7');
     expect(thumb).to.have.attribute('aria-valuetext', '-8.7');
-    expect(tooltipContent?.textContent.trim()).to.equal('-8.7');
+    expect(tooltipContent.textContent.trim()).to.equal('-8.7');
   });
 
   it('should correctly initialize with value 0 and respond to track click', async () => {

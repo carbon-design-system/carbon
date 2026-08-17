@@ -80,11 +80,6 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
   private _stepMultiplier = '4';
 
   /**
-   * The internal value of `value` property.
-   */
-  private _value;
-
-  /**
    * The handle for the throttled listener of `pointermove` event.
    */
   private _throttledHandlePointermoveImpl:
@@ -649,7 +644,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
       : '';
     if (intermediate !== value) {
       if (eventContainer === 'upper') {
-        this.unstable_valueUpper = this._normalizeValue(value);
+        this.unstable_valueUpper = value;
       } else {
         this.value = value;
       }
@@ -833,15 +828,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
    * The value.
    */
   @property({ type: Number })
-  get value() {
-    return this._value;
-  }
-
-  set value(value) {
-    const { value: oldValue } = this;
-    this._value = this._normalizeValue(value);
-    this.requestUpdate('value', oldValue);
-  }
+  value;
 
   /**
    * is slide input valid
