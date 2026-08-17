@@ -24,8 +24,6 @@ DemoContent.propTypes = {
 };
 
 const args = {
-  as: 'div',
-  className: '',
   condensed: false,
   fullWidth: false,
   narrow: false,
