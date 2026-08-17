@@ -45,7 +45,7 @@ const argTypes = {
   },
 };
 
-const gridContainerControls = ['as', 'className', 'fullWidth', 'withRowGap'];
+const gridContainerControls = ['fullWidth', 'withRowGap'];
 
 export default {
   title: 'Elements/FlexGrid',
