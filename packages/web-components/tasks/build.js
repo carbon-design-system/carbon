@@ -9,6 +9,7 @@
 
 import { fileURLToPath } from 'url';
 import { globby } from 'globby';
+import { reporter } from '@carbon/cli-reporter';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 import fs from 'fs-extra';
@@ -197,6 +198,35 @@ async function postBuild() {
         const updatedContent = content.replace(/(?<!--)cds/g, 'cds-custom');
         await fs.promises.writeFile(file, updatedContent);
       })
+    );
+
+    // Deprecate the `es-custom` build. It will be removed in v3.0.0, replaced by
+    // custom tag names, a build-time prefixed build, and scoped registries.
+    const noticeTarget = path.resolve(
+      targetDir,
+      'globals/decorators/carbon-element.js'
+    );
+    if (await fs.pathExists(noticeTarget)) {
+      const notice = [
+        '',
+        '// @deprecated The `es-custom` build is deprecated and will be removed in v3.0.0.',
+        'if (typeof console !== "undefined" && !globalThis.__CDS_ES_CUSTOM_DEPRECATED__) {',
+        '  globalThis.__CDS_ES_CUSTOM_DEPRECATED__ = true;',
+        '  console.warn(',
+        '    "[@carbon/web-components] The \\"es-custom\\" build (cds-custom-* elements) is deprecated and will be removed in v3.0.0. " +',
+        '    "See the v3 migration guide: " +',
+        '    "https://github.com/carbon-design-system/carbon/blob/main/docs/guides/cwc-v3-migration.md#the-es-custom-build-is-removed"',
+        '  );',
+        '}',
+        '',
+      ].join('\n');
+      await fs.promises.appendFile(noticeTarget, notice);
+    }
+
+    reporter.warn(
+      'The `es-custom` build is deprecated and will be removed in v3.0.0. ' +
+        'See the v3 migration guide: ' +
+        'https://github.com/carbon-design-system/carbon/blob/main/docs/guides/cwc-v3-migration.md#the-es-custom-build-is-removed'
     );
   }
 }

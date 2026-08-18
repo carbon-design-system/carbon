@@ -64,7 +64,7 @@
     "test": "web-test-runner \"src/components/**/__tests__/**/*.js\" --node-resolve --concurrency=1",
     "test:updateSnapshots": "yarn test --update-snapshots",
     "typecheck": "tsc --noEmit -p tsconfig.json",
-    "wca": "web-component-analyzer analyze src --outFile custom-elements.json",
+    "wca": "web-component-analyzer analyze src --outFile custom-elements.json && node tasks/wca-deprecation.mjs",
     "telemetry:config": "npx -y @ibm/telemetry-js-config-generator generate --wc --id 8cf8b3b8-a121-47d3-9eec-e4bea0ff23f5 --endpoint https://www-api.ibm.com/ibm-telemetry/v1/metrics --files ./src/components"
   },
   "dependencies": {
@@ -80,6 +80,7 @@
     "tslib": "^2.6.3"
   },
   "devDependencies": {
+    "@carbon/cli-reporter": "^10.8.0",
     "@carbon/layout": "^11.56.0",
     "@carbon/motion": "^11.49.0",
     "@juggle/resize-observer": "^3.4.0",
