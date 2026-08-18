@@ -260,6 +260,7 @@ const DatePickerInput = frFn((props, ref) => {
     ...datePickerInputProps,
     className: inputClasses,
     disabled: normalizedProps.disabled,
+    readOnly,
     ref,
     ['aria-describedby']: ariaDescribedBy,
   };

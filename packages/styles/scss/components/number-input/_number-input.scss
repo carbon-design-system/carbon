@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2025
+// Copyright IBM Corp. 2016, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -599,10 +599,6 @@
     .#{$prefix}--number__control-btn::before {
     display: block;
     inset-inline-end: $spacing-08;
-
-    @if enabled('enable-v12-release') {
-      display: none;
-    }
   }
 
   .#{$prefix}--number__input-wrapper--decorator
@@ -707,6 +703,8 @@
     padding-inline-end: convert.to-rem(145px);
 
     @if enabled('enable-v12-release') {
+      border: 1px solid transparent;
+      border-radius: $border-radius-04;
       // Reset the bottom-edge color override from @include ai-gradient so the
       // border-box gradient layer controls all four sides uniformly.
       background:
