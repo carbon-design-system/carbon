@@ -87,7 +87,7 @@ onwards.
 | 4   | Composable card     | `Card`                                                  | Replaces the expressive/productive card split, which will be deprecated and left in c4ip. Unlike other migrating components, this will be visible in the Carbon core Storybook and exported from `@carbon/react` **before v12** as a preview component                                                                                                                                                                                                                  |
 | 5   | Condition builder   | `ConditionBuilder`                                      | Currently a preview candidate in c4ip with ~5 product adoptions and strong expressed potential. Accessibility and composability reviews must be completed before moving to core. Moves to core as **preview**. No web components equivalent exists yet — WC port is a follow-up                                                                                                                                                                                         |
 | 6   | Full-page error     | `FullPageError`                                         | Looks more like a pattern but has high adoption and is composable. Migrating to core as **stable**                                                                                                                                                                                                                                                                                                                                                                      |
-| 7   | Guide banner        | `GuideBanner`                                           | Moves to core as a stable. Post-v12, a composable api can be explored                                                                                                                                                                                                                                                                                                                                                                           |
+| 7   | Guide banner        | `GuideBanner`                                           | Moves to core as a stable. Post-v12, a composable api can be explored                                                                                                                                                                                                                                                                                                                                                                                                   |
 | 8   | Inline edit         | `EditInPlace`                                           | Moves to core as stable.                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | 9   | Interstitial screen | `InterstitialScreen`                                    | Already re-implemented as a stable composable component in c4ip. Migrating to core as **stable**                                                                                                                                                                                                                                                                                                                                                                        |
 | 10  | Notifications panel | `NotificationsPanel`                                    | Moves to core as stable (non-composable). Post-v12, a composable redesign will be developed and delivered as preview → stable — at which point the legacy import will be deprecated. See [migration strategy discussion](#non-composable-component-migration-strategy) below                                                                                                                                                                                            |
@@ -443,8 +443,9 @@ The migration work is tracked in
 
 High-level sequence:
 
-1. Bootstrap the first components in this fork (`ActionSet`, `SidePanel`,
-   `TruncatedText` are already in progress).
+1. Bootstrap foundational dependency components first (internal utilities and
+   sub-components that higher-level components depend on), then migrate
+   higher-level dependents in dependency order.
 2. Per-component migration follows a consistent checklist: React component +
    types → Sass styles → internal hooks → Storybook → tests → exports →
    web-components port.
@@ -470,15 +471,6 @@ the migration set until they are publicly exported. The deprecation of c4ip is
 also reversible up to the point where the minimal maintenance announcement is
 made publicly.
 
-## Risks and Mitigations
-
-| Risk | Mitigation |
-| ---- | ---------- |
-| Adopter confusion during the v11–v12 transition window | Publish a clear migration guide with automated codemods; maintain deprecation warnings in c4ip for migrated components pointing to the new import path |
-| Audit list becomes stale as c4ip receives new components | Maintain the audit as a living document; re-evaluate new c4ip components against migration criteria before each release cycle |
-| Circular imports when migrated components reference `@carbon/react` | All cross-component imports inside the monorepo must use relative paths rather than the package name; enforced through lint and code review |
-| Package size regression for existing `@carbon/react` adopters | Monitor bundle-size CI checks; ensure components are tree-shakeable and not included in the default build unless imported |
-
 ## References
 
 - Implementation tracking issue (epic):
@@ -487,8 +479,6 @@ made publicly.
   [carbon#22866](https://github.com/carbon-design-system/carbon/issues/22866)
 - Storybook organisation for migrated components:
   [carbon#22641](https://github.com/carbon-design-system/carbon/issues/22641)
-- Migration guide (this fork):
-  [`ibm-products-carbon-migration-guide.html`](../../ibm-products-carbon-migration-guide.html)
 - Dual-flagship model: [`AGENTS.md`](../../AGENTS.md)
 - Developer handbook: [`docs/developer-handbook.md`](../developer-handbook.md)
 - Storybook organisation standards: [ADR 0006](./0006-storybook-organization.md)
