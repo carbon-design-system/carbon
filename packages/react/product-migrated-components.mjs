@@ -13,6 +13,7 @@
  */
 export const productMigratedStoryGlobs = [
   '../src/components/ActionSet/ActionSet.stories.js',
+  '../src/components/OptionsTile/OptionsTile.stories.js',
   '../src/components/InterstitialScreen/InterstitialScreen.stories.js',
   '../src/components/Resizer/Resizer.stories.js',
   '../src/components/SidePanel/SidePanel.stories.js',
@@ -34,6 +35,7 @@ export const productMigratedStoryGlobs = [
  */
 export const excludeProductsComponents = [
   'src/components/ActionSet/**/*',
+  'src/components/OptionsTile/**/*',
   'src/components/InterstitialScreen/**/*',
   'src/components/Resizer/**/*',
   'src/components/SidePanel/**/*',
