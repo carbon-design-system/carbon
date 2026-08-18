@@ -166,7 +166,7 @@ This was discussed and three approaches were evaluated:
 #### Approach 1 — Move to core as-is, composable implementation follows (selected)
 
 Non-composable component moves to `@carbon/react` as **stable** at v12.
-Composable redesign is developed post-v12 , shipped as preview
+Composable redesign is developed post-v12, shipped as preview
 (`preview__SidePanel`, etc.), and eventually promoted to stable while the legacy
 export is deprecated.
 
