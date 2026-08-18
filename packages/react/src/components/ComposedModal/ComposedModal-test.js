@@ -405,10 +405,6 @@ describe.each([
 
       await userEvent.click(closeButton);
 
-      // After closing, the focused element must not be a descendant of the
-      // overlay. If it were, the browser would emit the "Blocked aria-hidden"
-      // warning. In the non-presence path the overlay stays mounted with
-      // aria-hidden="true"; presence variants unmount or keep aria-hidden="false".
       if (!isPresence) {
         expect(overlay).toHaveAttribute('aria-hidden', 'true');
       }
