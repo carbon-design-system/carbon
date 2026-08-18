@@ -166,7 +166,7 @@ npx @carbon/upgrade migrate enable-v12-overflowmenu --write
 2. API migration only (for apps already using FeatureFlags at the root):
 
 ```bash
-npx @carbon/upgrade migrate enable-v12-overflowmenu --wrap=false --write
+npx @carbon/upgrade migrate enable-v12-overflowmenu --wrapWithFeatureFlag=false --write
 ```
 
 This codemod:
@@ -272,6 +272,20 @@ This codemod:
   </StructuredListRow>
 </StructuredListWrapper>
 ```
+
+### Known limitations
+
+- The tile default icons, tile radio icons, and OverflowMenu codemods generate a
+  `FeatureFlags` import from `@carbon/feature-flags`. The JSX component is
+  exported by `@carbon/react`; correct the generated import before using the
+  result.
+- The tile default icons codemod targets `Tile`, while the v12 default icon
+  behavior affects `ClickableTile`. Review its target coverage before using it.
+- The OverflowMenu codemod updates item components and item props, but it does
+  not update parent props such as `aria-label` to `label`. Review each migrated
+  `OverflowMenu` against the v12 API.
+- The structured list codemod changes React markup only. It does not update the
+  application's Sass feature flag configuration.
 
 ## Other V12 Codemods
 
