@@ -80,7 +80,6 @@
     "tslib": "^2.6.3"
   },
   "devDependencies": {
-    "@carbon/cli-reporter": "^10.8.0",
     "@carbon/layout": "^11.57.0",
     "@carbon/motion": "^11.50.0",
     "@juggle/resize-observer": "^3.4.0",

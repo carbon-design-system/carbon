@@ -9,7 +9,6 @@
 
 import { fileURLToPath } from 'url';
 import { globby } from 'globby';
-import { reporter } from '@carbon/cli-reporter';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 import fs from 'fs-extra';
@@ -222,12 +221,6 @@ async function postBuild() {
       ].join('\n');
       await fs.promises.appendFile(noticeTarget, notice);
     }
-
-    reporter.warn(
-      'The `es-custom` build is deprecated and will be removed in v3.0.0. ' +
-        'See the v3 migration guide: ' +
-        'https://github.com/carbon-design-system/carbon/blob/main/docs/guides/cwc-v3-migration.md#the-es-custom-build-is-removed'
-    );
   }
 }
 

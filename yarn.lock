@@ -1703,7 +1703,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/cli-reporter@npm:^10.8.0, @carbon/cli-reporter@npm:^10.9.0, @carbon/cli-reporter@workspace:packages/cli-reporter":
+"@carbon/cli-reporter@npm:^10.9.0, @carbon/cli-reporter@workspace:packages/cli-reporter":
   version: 0.0.0-use.local
   resolution: "@carbon/cli-reporter@workspace:packages/cli-reporter"
   dependencies:
@@ -2186,7 +2186,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@carbon/web-components@workspace:packages/web-components"
   dependencies:
-    "@carbon/cli-reporter": "npm:^10.8.0"
     "@carbon/icon-helpers": "npm:10.47.0"
     "@carbon/icons": "npm:^11.86.0"
     "@carbon/layout": "npm:^11.57.0"

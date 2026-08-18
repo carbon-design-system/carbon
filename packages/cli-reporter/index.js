@@ -43,10 +43,6 @@ class ConsoleReporter {
     this._logCategory('success', 'bgGreen', message);
   }
 
-  warn(message) {
-    this._logCategory('warn', 'bgYellow', message);
-  }
-
   _logCategory(category, color, message) {
     const block = this.format[color](
       ` ${chalk.black(category.toUpperCase())} `
