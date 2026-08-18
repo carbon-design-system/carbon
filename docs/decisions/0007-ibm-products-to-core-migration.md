@@ -472,19 +472,12 @@ made publicly.
 
 ## Risks and Mitigations
 
-| Risk                                                   | Mitigation                                                                                                                                             |
-| ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Risk | Mitigation |
+| ---- | ---------- |
 | Adopter confusion during the v11–v12 transition window | Publish a clear migration guide with automated codemods; maintain deprecation warnings in c4ip for migrated components pointing to the new import path |
-
-|  
-| Audit list becomes stale as c4ip receives new components | Maintain the audit
-as a living document; re-evaluate new c4ip components against migration criteria
-before each release cycle | | Circular imports when migrated components
-reference `@carbon/react` | All cross-component imports inside the monorepo must
-use relative paths rather than the package name; enforced through lint and code
-review | | Package size regression for existing `@carbon/react` adopters |
-Monitor bundle-size CI checks; ensure components are tree-shakeable and not
-included in the default build unless imported |
+| Audit list becomes stale as c4ip receives new components | Maintain the audit as a living document; re-evaluate new c4ip components against migration criteria before each release cycle |
+| Circular imports when migrated components reference `@carbon/react` | All cross-component imports inside the monorepo must use relative paths rather than the package name; enforced through lint and code review |
+| Package size regression for existing `@carbon/react` adopters | Monitor bundle-size CI checks; ensure components are tree-shakeable and not included in the default build unless imported |
 
 ## References
 
