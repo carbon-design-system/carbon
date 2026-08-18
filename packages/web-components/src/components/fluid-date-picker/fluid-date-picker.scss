@@ -146,15 +146,15 @@ $css--plex: true !default;
   }
 
   :host(#{$prefix}-fluid-date-picker-input[kind='from']) {
-    border-end-end-radius: 0;
+    border-end-end-radius: $border-radius-00;
     border-inline-end: none;
-    border-start-end-radius: 0;
+    border-start-end-radius: $border-radius-00;
   }
 
   :host(#{$prefix}-fluid-date-picker-input[kind='to']) {
-    border-end-start-radius: 0;
+    border-end-start-radius: $border-radius-00;
     border-inline-start: none;
-    border-start-start-radius: 0;
+    border-start-start-radius: $border-radius-00;
   }
 
   :host(#{$prefix}-fluid-date-picker-input:focus-within) {

@@ -104,7 +104,7 @@
 
       .#{$prefix}--text-input {
         border: none;
-        border-radius: 0;
+        border-radius: $border-radius-00;
         background: transparent;
       }
     }

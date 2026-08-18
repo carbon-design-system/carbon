@@ -106,7 +106,7 @@
     input[type='text'] {
     @if enabled('enable-v12-release') {
       border: none;
-      border-radius: 0;
+      border-radius: $border-radius-00;
       background: transparent;
     }
   }

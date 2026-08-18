@@ -137,17 +137,17 @@ $css--plex: true !default;
 @if flags.enabled('enable-v12-release') {
   :host(#{$prefix}-date-picker-input[kind='from']) {
     .#{$prefix}--date-picker__input {
-      border-end-end-radius: 0;
+      border-end-end-radius: $border-radius-00;
       border-inline-end: none;
-      border-start-end-radius: 0;
+      border-start-end-radius: $border-radius-00;
     }
   }
 
   :host(#{$prefix}-date-picker-input[kind='to']) {
     .#{$prefix}--date-picker__input {
-      border-end-start-radius: 0;
+      border-end-start-radius: $border-radius-00;
       border-inline-start: none;
-      border-start-start-radius: 0;
+      border-start-start-radius: $border-radius-00;
     }
   }
 }
@@ -213,14 +213,14 @@ $css--plex: true !default;
 
     .#{$prefix}--date-picker-input-skeleton-container:first-of-type
       .#{$prefix}--date-picker__input {
-      border-end-end-radius: 0;
-      border-start-end-radius: 0;
+      border-end-end-radius: $border-radius-00;
+      border-start-end-radius: $border-radius-00;
     }
 
     .#{$prefix}--date-picker-input-skeleton-container:last-of-type
       .#{$prefix}--date-picker__input {
-      border-end-start-radius: 0;
-      border-start-start-radius: 0;
+      border-end-start-radius: $border-radius-00;
+      border-start-start-radius: $border-radius-00;
     }
   }
 }
