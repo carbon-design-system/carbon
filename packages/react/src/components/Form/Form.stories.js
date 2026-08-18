@@ -6,6 +6,7 @@
  */
 
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import Checkbox from '../Checkbox';
 import Form from './Form';
 import FormGroup from '../FormGroup';
@@ -39,50 +40,6 @@ import '../AILabel/ailabel-story.scss';
 
 import mdx from './Form.mdx';
 
-const numberInputProps = {
-  className: 'some-class',
-  id: 'number-input-1',
-  label: 'Number Input',
-  min: 0,
-  max: 100,
-  value: 50,
-  step: 10,
-  iconDescription: 'Add/decrement number',
-};
-
-const TextInputProps = {
-  className: 'some-class',
-  id: 'test2',
-  labelText: 'Text Input label',
-  placeholder: 'Placeholder text',
-};
-
-const PasswordProps = {
-  className: 'some-class',
-  id: 'test3',
-  labelText: 'Password',
-};
-
-const InvalidPasswordProps = {
-  className: 'some-class',
-  id: 'test4',
-  labelText: 'Password',
-  invalid: true,
-  invalidText: 'Invalid password.',
-};
-
-const textareaProps = {
-  labelText: 'Text Area label',
-  className: 'some-class',
-  placeholder: 'Placeholder text',
-  id: 'test5',
-  rows: 4,
-};
-
-const buttonEvents = {
-  className: 'some-class',
-};
-
 export default {
   title: 'Components/Form',
   component: Form,
@@ -93,6 +50,7 @@ export default {
   },
   // ── Shared controls inherited by every story ──────────────────────────────
   args: {
+    className: 'some-class',
     skeleton: false,
     aiLabel: false,
     revertActive: false,
@@ -105,6 +63,13 @@ export default {
     warnText: 'Warning message.',
   },
   argTypes: {
+    className: {
+      control: { type: 'text' },
+      description: 'Specify a custom className to be applied to the form',
+    },
+    onSubmit: {
+      action: 'onSubmit',
+    },
     skeleton: {
       control: { type: 'boolean' },
       description: 'Render all form inputs as skeleton loaders simultaneously',
@@ -212,6 +177,8 @@ const formShellStyle = {
 
 export const Default = (args) => {
   const {
+    className,
+    onSubmit,
     skeleton,
     size,
     showInModal,
@@ -226,6 +193,11 @@ export const Default = (args) => {
   } = args;
 
   const [modalOpen, setModalOpen] = useState(false);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    onSubmit?.(event);
+  };
 
   // xs is only valid for TextInput, Select, Search — clamp to sm for list-box components
   const listBoxSize = size === 'xs' ? 'sm' : size;
@@ -281,7 +253,10 @@ export const Default = (args) => {
   };
 
   const formContent = skeleton ? (
-    <Form aria-label="new project setup">
+    <Form
+      aria-label="new project setup"
+      className={className}
+      onSubmit={handleSubmit}>
       <Stack gap={5}>
         <SearchSkeleton />
         <div style={formRowStyle}>
@@ -331,7 +306,10 @@ export const Default = (args) => {
       </Stack>
     </Form>
   ) : (
-    <Form aria-label="new project setup">
+    <Form
+      aria-label="new project setup"
+      className={className}
+      onSubmit={handleSubmit}>
       <Stack gap={5}>
         <Search
           size={size}
@@ -622,6 +600,11 @@ export const Default = (args) => {
 Default.args = {
   size: 'md',
   showInModal: false,
+};
+
+Default.propTypes = {
+  className: PropTypes.string,
+  onSubmit: PropTypes.func,
 };
 
 Default.argTypes = {

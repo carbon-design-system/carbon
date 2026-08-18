@@ -156,6 +156,7 @@ const dateSimpleCol = (children) => html`
 `;
 
 const sharedArgs = {
+  onSubmit: () => {},
   skeleton: false,
   aiLabel: false,
   revertActive: false,
@@ -169,6 +170,9 @@ const sharedArgs = {
 };
 
 const sharedArgTypes = {
+  onSubmit: {
+    action: 'onSubmit',
+  },
   skeleton: {
     control: { type: 'boolean' },
     description: 'Render all form inputs as skeleton loaders simultaneously',
@@ -295,6 +299,7 @@ const renderDefaultForm = (args) => {
     invalidText,
     warn,
     warnText,
+    onSubmit,
   } = args ?? {};
 
   const listBoxSize = size === 'xs' ? 'sm' : size;
@@ -302,10 +307,29 @@ const renderDefaultForm = (args) => {
   const dateHelper = (text) =>
     invalid || warn ? nothing : html`<span slot="helper-text">${text}</span>`;
 
+  const handleSubmit = () => {
+    const form =
+      (document
+        .getElementById('test-form')
+        ?.shadowRoot?.querySelector('form') as HTMLFormElement) || null;
+    if (!form) return;
+
+    const hasInvalidRequired = Array.from(
+      document.querySelectorAll('[required]')
+    ).some((el: Element) => {
+      const input = el.shadowRoot?.querySelector('input');
+      return input ? !input.reportValidity() : false;
+    });
+    if (hasInvalidRequired) return;
+
+    form.requestSubmit();
+    onSubmit?.();
+  };
+
   if (skeleton) {
     return wrapForm(
       html`
-        <cds-form aria-label="new project setup">
+        <cds-form id="test-form" aria-label="new project setup">
           <cds-stack gap="5">
             <cds-search-skeleton></cds-search-skeleton>
             ${row(html`
@@ -350,7 +374,7 @@ const renderDefaultForm = (args) => {
 
   return wrapForm(
     html`
-      <cds-form aria-label="new project setup">
+      <cds-form id="test-form" aria-label="new project setup">
         <cds-stack gap="5">
           <cds-search
             size="${ifDefined(size)}"
@@ -678,7 +702,9 @@ const renderDefaultForm = (args) => {
             </cds-file-uploader>
           </cds-form-group>
 
-          <cds-button type="submit">Create project</cds-button>
+          <cds-button type="submit" @click=${handleSubmit}
+            >Create project</cds-button
+          >
         </cds-stack>
       </cds-form>
     `,

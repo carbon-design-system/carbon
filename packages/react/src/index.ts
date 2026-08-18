@@ -39,6 +39,8 @@ export * from './components/DatePicker';
 export * from './components/DatePickerInput';
 export * as preview__DatePicker from './components/DatePicker/next';
 export * from './components/Dropdown';
+// TODO: uncomment in v12 — also remove from excludeProductsComponents
+// export * from './components/EditInPlace';
 export * from './components/ErrorBoundary';
 export * from './components/ExpandableSearch';
 export {
