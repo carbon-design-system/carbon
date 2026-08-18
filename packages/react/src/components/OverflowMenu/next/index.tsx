@@ -100,6 +100,11 @@ interface OverflowMenuProps {
   tooltipAutoAlign?: boolean;
 
   /**
+   * Specify the tab index of the trigger button.
+   */
+  tabIndex?: number;
+
+  /**
    * Specify a DOM node where the Menu should be rendered in. Defaults to document.body.
    */
   menuTarget?: Element;
@@ -122,6 +127,7 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
       menuAlignment = 'bottom-start',
       tooltipAlignment,
       tooltipAutoAlign = false,
+      tabIndex = 0,
       menuTarget,
       ...rest
     },
@@ -238,6 +244,7 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
           label={label}
           leaveDelayMs={tooltipLeaveDelayMs}
           ref={floatingRef}
+          tabIndex={tabIndex}
           onClick={handleTriggerClick}
           onMouseDown={handleMousedown}
           aria-controls={open ? id : undefined}
@@ -388,6 +395,11 @@ OverflowMenu.propTypes = {
    * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   tooltipAutoAlign: PropTypes.bool,
+
+  /**
+   * Specify the tab index of the trigger button.
+   */
+  tabIndex: PropTypes.number,
 
   /**
    * Specify a DOM node where the Menu should be rendered in. Defaults to document.body.

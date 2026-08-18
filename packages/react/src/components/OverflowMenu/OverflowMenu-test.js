@@ -43,7 +43,11 @@ describe('OverflowMenu', () => {
 
     it('should spread extra props on the button element', () => {
       render(
-        <OverflowMenu data-testid="test" className="extra-class" disabled>
+        <OverflowMenu
+          data-testid="test"
+          className="extra-class"
+          disabled
+          tabIndex={-1}>
           <OverflowMenuItem className="test-child" itemText="one" />
           <OverflowMenuItem className="test-child" itemText="two" />
         </OverflowMenu>
@@ -53,6 +57,7 @@ describe('OverflowMenu', () => {
       expect(button).toHaveAttribute('data-testid', 'test');
       expect(button).toHaveClass('extra-class');
       expect(button).toHaveClass('cds--btn--disabled');
+      expect(button).toHaveAttribute('tabIndex', '-1');
     });
 
     it('should apply disabled styling to icon', () => {

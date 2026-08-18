@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2023, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -106,6 +106,7 @@ describe('OverflowMenu (enable-v12-overflowmenu)', () => {
       <OverflowMenu
         label="Options"
         renderIcon={() => <Filter aria-label="filter icon" />}
+        tabIndex={-1}
         tooltipDefaultOpen>
         <MenuItem label="item" className="test-child">
           one
@@ -121,6 +122,8 @@ describe('OverflowMenu (enable-v12-overflowmenu)', () => {
     expect(tooltip).toHaveTextContent('Options');
 
     const button = screen.getByRole('button');
+    expect(button).toHaveAttribute('tabIndex', '-1');
+
     const icon = button.querySelector('svg');
     expect(icon).toHaveAttribute('aria-label', 'filter icon');
   });
