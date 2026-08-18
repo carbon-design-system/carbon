@@ -80,6 +80,73 @@
     position: relative;
     display: flex;
     inline-size: 100%;
+
+    &#{&}--motion {
+      // Animated hover border: left + right sides (revealed bottom to top)
+      &::before {
+        position: absolute;
+        border-inline-end: 1px solid $border-strong;
+        border-inline-start: 1px solid $border-strong;
+        // Hidden at rest: clipped and transparent
+        clip-path: inset(100% 0 0 0);
+        content: '';
+        inset: 0;
+        opacity: 0;
+        pointer-events: none;
+        // Exit: fade out together (no delay)
+        transition:
+          opacity $duration-fast-01 motion(standard, productive),
+          clip-path 0s $duration-fast-01;
+
+        @media screen and (prefers-reduced-motion: reduce) {
+          transition: none;
+        }
+      }
+
+      // Animated hover border: top side (appears after left/right reach the top)
+      &::after {
+        position: absolute;
+        border-block-start: 1px solid $border-strong;
+        content: '';
+        inset: 0;
+        opacity: 0;
+        pointer-events: none;
+        // Exit: fade out together (no delay)
+        transition: opacity $duration-fast-01 motion(standard, productive);
+
+        @media screen and (prefers-reduced-motion: reduce) {
+          transition: none;
+        }
+      }
+
+      &:hover:not([data-invalid]):not(
+          .#{$prefix}--text-input__field-wrapper--warning
+        ) {
+        // Entrance: clip rises bottom to top, then opacity snaps to 1
+        &::before {
+          clip-path: inset(0 0 0 0);
+          opacity: 1;
+          transition:
+            clip-path $duration-fast-02 motion(standard, productive),
+            opacity 0s;
+
+          @media screen and (prefers-reduced-motion: reduce) {
+            transition: none;
+          }
+        }
+
+        // Entrance: top border fades in after left/right are up
+        &::after {
+          opacity: 1;
+          transition: opacity $duration-fast-01 motion(standard, productive)
+            $duration-fast-02;
+
+          @media screen and (prefers-reduced-motion: reduce) {
+            transition: none;
+          }
+        }
+      }
+    }
   }
 
   .#{$prefix}--text-input__invalid-icon {
