@@ -7,6 +7,7 @@
 
 import React, { forwardRef, isValidElement, useCallback, useMemo } from 'react';
 import cx from 'classnames';
+import { ArrowRight } from '@carbon/icons-react';
 import { AILabel } from '../AILabel';
 import { CardProps } from './Card.types';
 import { CardContext } from './CardContext';
@@ -33,6 +34,7 @@ const componentName = 'Card';
 const CardComponent = forwardRef<HTMLDivElement, CardProps>(
   (
     {
+      as,
       clickable = false,
       onClick,
       onKeyDown,
@@ -40,6 +42,7 @@ const CardComponent = forwardRef<HTMLDivElement, CardProps>(
       density = 'productive',
       decorator,
       horizontal = false,
+      renderFooterIcon: FooterIcon = ArrowRight,
       className,
       children,
       ...rest
@@ -55,36 +58,54 @@ const CardComponent = forwardRef<HTMLDivElement, CardProps>(
       [decorator]
     );
 
-    // Create context value
+    // Warn when clickable-only props are used without clickable.
+    if (FooterIcon !== ArrowRight && !clickable) {
+      // eslint-disable-next-line no-console
+      console.error(
+        '[Card] `renderFooterIcon` only has effect when `clickable` is true.'
+      );
+    }
+
+    // Warn when a clickable card has no accessible name.
+    if (clickable && !rest['aria-label'] && !rest['aria-labelledby']) {
+      // eslint-disable-next-line no-console
+      console.error(
+        '[Card] A clickable card must have an accessible name. ' +
+          'Pass `aria-label` or `aria-labelledby` to the Card.'
+      );
+    }
+
+    // Create context value — include onClick so CardFooter can detect misuse.
     const contextValue = useMemo(
       () => ({
         clickable,
         disabled,
         decorator,
         horizontal,
+        onClick,
       }),
-      [clickable, disabled, decorator, horizontal]
+      [clickable, disabled, decorator, horizontal, onClick]
     );
 
-    // Handle keyboard interaction for clickable cards
+    // Handle keyboard interaction for clickable cards (not needed for native <a>).
     const handleKeyDown = useCallback(
-      (event: React.KeyboardEvent<HTMLDivElement>) => {
+      (event: React.KeyboardEvent) => {
         if (
           clickable &&
           !disabled &&
           (event.key === 'Enter' || event.key === ' ')
         ) {
           event.preventDefault();
-          onClick?.(event as unknown as React.MouseEvent<HTMLDivElement>);
+          onClick?.(event as unknown as React.MouseEvent);
         }
         onKeyDown?.(event);
       },
       [clickable, disabled, onClick, onKeyDown]
     );
 
-    // Handle click for clickable cards
+    // Handle click for clickable cards.
     const handleClick = useCallback(
-      (event: React.MouseEvent<HTMLDivElement>) => {
+      (event: React.MouseEvent) => {
         if (!disabled) {
           onClick?.(event);
         }
@@ -100,16 +121,31 @@ const CardComponent = forwardRef<HTMLDivElement, CardProps>(
       [`${blockClass}--horizontal`]: horizontal,
     });
 
+    // Resolve the root element: adopt the `as` prop, fall back to 'div'.
+    const BaseComponent = (as ?? 'div') as React.ElementType;
+
+    // For non-anchor elements the card needs role/keyboard props when clickable.
+    // Native <a> handles click and keyboard natively — no role override needed.
+    const isAnchor = BaseComponent === 'a';
+
     const cardProps = {
       ...rest,
       ref,
       className: cardClasses,
       ...(clickable && {
-        role: 'button',
-        tabIndex: disabled ? -1 : 0,
-        onClick: handleClick,
-        onKeyDown: handleKeyDown,
-        'aria-disabled': disabled,
+        ...(isAnchor
+          ? {
+              // Native anchor: keyboard + click handled by the browser.
+              onClick: handleClick,
+            }
+          : {
+              // Non-anchor interactive surface.
+              role: 'button',
+              tabIndex: disabled ? -1 : 0,
+              onClick: handleClick,
+              onKeyDown: handleKeyDown,
+              'aria-disabled': disabled,
+            }),
       }),
     };
 
@@ -157,7 +193,16 @@ const CardComponent = forwardRef<HTMLDivElement, CardProps>(
 
     return (
       <CardContext.Provider value={contextValue}>
-        <div {...cardProps}>{renderedChildren}</div>
+        <BaseComponent {...cardProps}>
+          {renderedChildren}
+          {clickable && (
+            <div
+              className={`${blockClass}__clickable-footer`}
+              aria-hidden="true">
+              <FooterIcon aria-hidden="true" />
+            </div>
+          )}
+        </BaseComponent>
       </CardContext.Provider>
     );
   }
