@@ -81,6 +81,44 @@ The following codemods help you adopt changes introduced by feature flags in
 preparation for Carbon v12. Each codemod transforms your code to work with
 specific feature flags enabled.
 
+### Enable v12 release
+
+Enables the complete Carbon v12 experience for a React application.
+
+**Usage:**
+
+```bash
+npx @carbon/upgrade migrate enable-v12-release --write
+```
+
+This codemod wraps the application passed to a React root with
+`<FeatureFlags enableV12Release>` and adds or updates the necessary
+`@carbon/react` import. It supports modern `createRoot` and `hydrateRoot` entry
+points as well as legacy `ReactDOM.render`.
+
+**Example:**
+
+```jsx
+// Before
+import { createRoot } from 'react-dom/client';
+import App from './App';
+
+const root = createRoot(document.getElementById('root'));
+root.render(<App />);
+
+// After
+import { createRoot } from 'react-dom/client';
+import { FeatureFlags } from '@carbon/react';
+import App from './App';
+
+const root = createRoot(document.getElementById('root'));
+root.render(
+  <FeatureFlags enableV12Release>
+    <App />
+  </FeatureFlags>
+);
+```
+
 ### Enable v12 tile default icons
 
 Enables default icons for Tile components.
@@ -128,7 +166,7 @@ npx @carbon/upgrade migrate enable-v12-overflowmenu --write
 2. API migration only (for apps already using FeatureFlags at the root):
 
 ```bash
-npx @carbon/upgrade migrate enable-v12-overflowmenu --wrap=false --write
+npx @carbon/upgrade migrate enable-v12-overflowmenu --wrapWithFeatureFlag=false --write
 ```
 
 This codemod:
@@ -234,6 +272,20 @@ This codemod:
   </StructuredListRow>
 </StructuredListWrapper>
 ```
+
+### Known limitations
+
+- The tile default icons, tile radio icons, and OverflowMenu codemods generate a
+  `FeatureFlags` import from `@carbon/feature-flags`. The JSX component is
+  exported by `@carbon/react`; correct the generated import before using the
+  result.
+- The tile default icons codemod targets `Tile`, while the v12 default icon
+  behavior affects `ClickableTile`. Review its target coverage before using it.
+- The OverflowMenu codemod updates item components and item props, but it does
+  not update parent props such as `aria-label` to `label`. Review each migrated
+  `OverflowMenu` against the v12 API.
+- The structured list codemod changes React markup only. It does not update the
+  application's Sass feature flag configuration.
 
 ## Other V12 Codemods
 

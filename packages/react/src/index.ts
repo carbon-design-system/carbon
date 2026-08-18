@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,11 +12,14 @@ import './feature-flags';
 import './internal/warnAboutDeprecatedReactVersion';
 
 export * from './components/Accordion';
+// export { ActionSet } from './components/ActionSet';
+// export type { ActionSetProps } from './components/ActionSet';
 export * from './components/AccordionItem';
 export * from './components/AspectRatio';
 export * from './components/Breadcrumb';
 export * from './components/Button';
 export * from './components/ButtonSet';
+export * as preview__Card from './components/Card';
 export * from './components/Checkbox';
 export * from './components/CheckboxGroup';
 export * from './components/ClassPrefix';
@@ -34,7 +37,10 @@ export * from './components/DataTable';
 export * from './components/DataTableSkeleton';
 export * from './components/DatePicker';
 export * from './components/DatePickerInput';
+export * as preview__DatePicker from './components/DatePicker/next';
 export * from './components/Dropdown';
+// TODO: uncomment in v12 — also remove from excludeProductsComponents
+// export * from './components/EditInPlace';
 export * from './components/ErrorBoundary';
 export * from './components/ExpandableSearch';
 export {
@@ -59,6 +65,8 @@ export * from './components/Icon/Icon.Skeleton';
 export * from './components/IdPrefix';
 export { InlineCheckbox } from './components/InlineCheckbox';
 export * from './components/InlineLoading';
+// TODO: uncomment in v12 — also remove from excludeProductsComponents
+// export * from './components/InterstitialScreen';
 export * from './components/Link';
 export * from './components/ListItem';
 export * from './components/Loading';
@@ -70,6 +78,8 @@ export * from './components/MultiSelect';
 export * from './components/Notification';
 export * from './components/NumberInput';
 export * from './components/OrderedList';
+// TODO: uncomment in v12 — also remove from excludeProductsComponents
+// export * from './components/OptionsTile';
 export * from './components/OverflowMenu';
 export * from './components/OverflowMenuItem';
 export * as unstable__PageHeader from './components/PageHeader';
@@ -536,6 +546,9 @@ export type { NumberInputSkeletonProps } from './components/NumberInput/NumberIn
 //ordered list
 export type { OrderedListProps } from './components/OrderedList/OrderedList';
 
+//options tile (migrated from @carbon/ibm-products)
+// export type { OptionsTileProps } from './components/OptionsTile';
+
 //overflow menu
 export type { OverflowMenuProps } from './components/OverflowMenu/OverflowMenu';
 export type { OverflowMenuItemProps } from './components/OverflowMenuItem/OverflowMenuItem';
@@ -591,6 +604,10 @@ export type { RadioTileProps } from './components/RadioTile/RadioTile';
 //search
 export type { SearchProps } from './components/Search/Search';
 export type { SearchSkeletonProps } from './components/Search/Search.Skeleton';
+
+//side panel (migrated from @carbon/ibm-products)
+// export { SidePanel } from './components/SidePanel';
+// export type { SidePanelProps } from './components/SidePanel';
 
 //select
 export type { SelectProps } from './components/Select/Select';
@@ -724,6 +741,11 @@ export type { SkipToContentProps } from './components/UIShell/SkipToContent';
 export type { BaseSwitcherProps } from './components/UIShell/Switcher';
 export type { SwitcherDividerProps } from './components/UIShell/SwitcherDivider';
 export type { SwitcherItemProps } from './components/UIShell/SwitcherItem';
+
+// TODO: ibm-products migration in progress — re-enable when component is ready
+// export { TruncatedText } from './components/TruncatedText';
+// export type { TruncatedTextProps } from './components/TruncatedText';
+// export * from './components/UserAvatar';
 
 //unordered list
 export type { UnorderedListProps } from './components/UnorderedList/UnorderedList';
