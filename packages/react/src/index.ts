@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -38,6 +38,7 @@ export * from './components/DatePicker';
 export * from './components/DatePickerInput';
 export * as preview__DatePicker from './components/DatePicker/next';
 export * from './components/Dropdown';
+export * from './components/EmptyState';
 export * from './components/ErrorBoundary';
 export * from './components/ExpandableSearch';
 export {

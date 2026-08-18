@@ -10,7 +10,10 @@ import React, { useMemo, useState } from 'react';
 import Button from '../../Button';
 import { DataTable } from '..';
 import Pagination from '../../Pagination';
+import { EmptyState } from '../../EmptyState';
 import { headers } from './shared';
+import mdx from '../DataTable.mdx';
+import './datatable-story.scss';
 
 const {
   Table,
@@ -27,8 +30,17 @@ const {
   TableToolbarSearch,
 } = DataTable;
 
-import mdx from '../DataTable.mdx';
-import './datatable-story.scss';
+const VisualInspectionPictogram = (props) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 32 32"
+    aria-hidden="true"
+    focusable="false"
+    {...props}>
+    <path d="M16,26.3604c-6.8062,0-12.1055-3.5283-15.3242-10.2041-.0479-.0986-.0479-.2139,0-.3125,3.2188-6.6753,8.5181-10.2036,15.3242-10.2036s12.1064,3.5283,15.3242,10.2036l-.6484.3125c-3.1338-6.5005-8.0713-9.7964-14.6758-9.7964-6.5503,0-11.4614,3.2432-14.5996,9.6401,3.1382,6.3965,8.0493,9.6396,14.5996,9.6396v.7207ZM23.7451,24.2549l-4.2197-4.2207c-.9434.8252-2.1768,1.3262-3.5254,1.3262-2.9556,0-5.3599-2.4053-5.3599-5.3604s2.4043-5.3599,5.3599-5.3599,5.3604,2.4043,5.3604,5.3599c0,1.3486-.501,2.582-1.3262,3.5254l4.2207,4.2197-.5098.5098ZM16,11.3599c-2.5586,0-4.6401,2.0815-4.6401,4.6401s2.0815,4.6396,4.6401,4.6396,4.6396-2.0811,4.6396-4.6396-2.0811-4.6401-4.6396-4.6401Z" />
+    <rect style={{ fill: 'none' }} width="32" height="32" />
+  </svg>
+);
 
 export default {
   title: 'Components/DataTable/Pagination',
@@ -105,20 +117,13 @@ export const Default = (args) => {
 
   const filteredRows = allRows.filter((row) => {
     const search = searchValue.trim().toLowerCase();
-
-    if (search === '') {
-      return true;
-    }
-
+    if (search === '') return true;
     return Object.values(row).some((value) =>
       String(value).toLowerCase().includes(search)
     );
   });
 
-  const handlePaginationChange = ({ page, pageSize }) => {
-    setPage(page);
-    setPageSize(pageSize);
-  };
+  const showEmptyState = filteredRows.length === 0;
 
   const handleSearchChange = (event) => {
     action('toolbar search input')(event);
@@ -126,17 +131,23 @@ export const Default = (args) => {
     setPage(1);
   };
 
-  // Calculate the rows to display for the current page
+  const handlePaginationChange = ({ page, pageSize }) => {
+    setPage(page);
+    setPageSize(pageSize);
+  };
+
   const startIndex = (page - 1) * pageSize;
   const endIndex = startIndex + pageSize;
-  const paginatedRows = filteredRows.slice(startIndex, endIndex);
+  const paginatedRows = showEmptyState
+    ? []
+    : filteredRows.slice(startIndex, endIndex);
 
   return (
     <>
       <DataTable rows={paginatedRows} headers={headers} {...args}>
         {({
-          rows,
-          headers,
+          rows: tableRows,
+          headers: tableHeaders,
           getHeaderProps,
           getRowProps,
           getTableProps,
@@ -166,7 +177,7 @@ export const Default = (args) => {
             <Table {...getTableProps()} aria-label="paginated table">
               <TableHead>
                 <TableRow>
-                  {headers.map((header) => (
+                  {tableHeaders.map((header) => (
                     <TableHeader
                       key={header.key}
                       {...getHeaderProps({ header })}>
@@ -176,28 +187,50 @@ export const Default = (args) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows.map((row) => (
-                  <TableRow key={row.id} {...getRowProps({ row })}>
-                    {row.cells.map((cell) => (
-                      <TableCell key={cell.id} {...getCellProps({ cell })}>
-                        {cell.value}
-                      </TableCell>
+                {showEmptyState
+                  ? null
+                  : tableRows.map((row) => (
+                      <TableRow key={row.id} {...getRowProps({ row })}>
+                        {row.cells.map((cell) => (
+                          <TableCell key={cell.id} {...getCellProps({ cell })}>
+                            {cell.value}
+                          </TableCell>
+                        ))}
+                      </TableRow>
                     ))}
-                  </TableRow>
-                ))}
               </TableBody>
             </Table>
+            {showEmptyState && (
+              <div style={{ padding: '2rem 1rem' }}>
+                <EmptyState
+                  illustration={VisualInspectionPictogram}
+                  illustrationDescription="Visual inspection pictogram"
+                  title="No results match the current search"
+                  subtitle="Clear the search field to see all results, or try a different search term."
+                  action={{
+                    text: 'Clear search',
+                    kind: 'tertiary',
+                    onClick: () => {
+                      setSearchValue('');
+                      setPage(1);
+                    },
+                  }}
+                />
+              </div>
+            )}
           </TableContainer>
         )}
       </DataTable>
-      <Pagination
-        page={page}
-        pageSize={pageSize}
-        pageSizes={[10, 20, 30, 40, 50]}
-        totalItems={filteredRows.length}
-        onChange={handlePaginationChange}
-        size={paginationSize}
-      />
+      {!showEmptyState && (
+        <Pagination
+          page={page}
+          pageSize={pageSize}
+          pageSizes={[10, 20, 30, 40, 50]}
+          totalItems={filteredRows.length}
+          onChange={handlePaginationChange}
+          size={paginationSize}
+        />
+      )}
     </>
   );
 };
