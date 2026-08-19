@@ -62,7 +62,15 @@
         }
       }
 
-      border-radius: $border-radius-04;
+      &:not(
+          :has(
+              .#{$prefix}--dropdown--readonly,
+              .#{$prefix}--combo-box--readonly,
+              .#{$prefix}--multi-select--readonly
+            )
+        ) {
+        border-radius: $border-radius-04;
+      }
     }
   }
 

@@ -19,6 +19,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/utilities/ai-gradient' as *;
 @use '@carbon/styles/scss/utilities/convert' as convert;
 @use '@carbon/styles/scss/layout' as *;
+@use '@carbon/styles/scss/border-radius' as *;
 @use '@carbon/styles/scss/feature-flags' as flags;
 
 // https://github.com/carbon-design-system/carbon/issues/11408
@@ -98,6 +99,11 @@ $css--plex: true !default;
   .#{$prefix}--list-box {
     background-color: transparent;
     border-block-end-color: $border-subtle;
+
+    @if flags.enabled('enable-v12-release') {
+      border-radius: $border-radius-00;
+      background: none;
+    }
   }
 }
 

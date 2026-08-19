@@ -134,7 +134,13 @@ $list-box-menu-width: convert.to-rem(300px);
     .#{$prefix}--combo-box--readonly,
     .#{$prefix}--multi-select--readonly,
     .#{$prefix}--dropdown--readonly {
+      border-radius: $border-radius-00;
       border-block-end-color: $border-subtle;
+    }
+
+    .#{$prefix}--combo-box--readonly .#{$prefix}--text-input,
+    .#{$prefix}--multi-select--readonly .#{$prefix}--text-input {
+      border-radius: $border-radius-00;
     }
   }
 

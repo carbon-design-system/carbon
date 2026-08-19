@@ -200,7 +200,10 @@ $css--plex: true !default;
     pointer-events: none;
   }
   @if flags.enabled('enable-v12-release') {
+    border-radius: $border-radius-00;
+
     .#{$prefix}--list-box {
+      border-radius: $border-radius-00;
       background: $field;
       border-block-end-color: $border-subtle;
     }

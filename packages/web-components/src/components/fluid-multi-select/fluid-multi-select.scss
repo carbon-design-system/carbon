@@ -58,7 +58,6 @@ $css--plex: true !default;
     @extend .#{$prefix}--multi-select--filterable--input-focused;
 
     @if flags.enabled('enable-v12-release') {
-      border-radius: $border-radius-04;
       outline-offset: -1px;
     }
   }
@@ -76,6 +75,13 @@ $css--plex: true !default;
 
   .#{$prefix}--list-box__selection--multi::after {
     display: none;
+  }
+}
+
+@if flags.enabled('enable-v12-release') {
+  :host(#{$prefix}-fluid-multi-select:not([read-only]))
+    .#{$prefix}--list-box__field:focus-within {
+    border-radius: $border-radius-04;
   }
 }
 
@@ -172,7 +178,6 @@ $css--plex: true !default;
     outline-offset: -#{$spacing-01};
 
     @if flags.enabled('enable-v12-release') {
-      border-radius: $border-radius-04;
       outline-offset: -1px;
     }
   }

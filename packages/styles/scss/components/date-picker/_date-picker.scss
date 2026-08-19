@@ -305,6 +305,10 @@
     background: transparent;
     border-block-end-color: $border-subtle;
     cursor: text;
+
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-00;
+    }
   }
 
   .#{$prefix}--date-picker__input[readonly] + .#{$prefix}--date-picker__icon {

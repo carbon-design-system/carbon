@@ -319,6 +319,14 @@
     border-block-end-color: $border-subtle;
   }
 
+  @if enabled('enable-v12-release') {
+    .#{$prefix}--text-input-wrapper--readonly .#{$prefix}--text-input,
+    .#{$prefix}--text-input-wrapper--readonly
+      .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger {
+      border-radius: $border-radius-00;
+    }
+  }
+
   // Styles for AILabel rendered inside TextInput
   .#{$prefix}--text-input__field-wrapper--decorator
     .#{$prefix}--text-input__field-inner-wrapper--decorator

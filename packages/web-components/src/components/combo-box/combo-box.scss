@@ -93,6 +93,14 @@ $css--plex: true !default;
     background-color: transparent;
   }
 
+  .#{$prefix}--list-box {
+    @if flags.enabled('enable-v12-release') {
+      border-radius: $border-radius-00;
+      background: none;
+      border-block-end-color: $border-subtle;
+    }
+  }
+
   .#{$prefix}--text-input {
     border-block-end-color: $border-subtle;
   }

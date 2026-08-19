@@ -26,9 +26,9 @@
 
     @if enabled('enable-v12-release') {
       border: 1px solid transparent;
-      border-radius: $border-radius-04;
 
       &:not(.#{$prefix}--date-picker--fluid--readonly) {
+        border-radius: $border-radius-04;
         // (gray-20 → gray-50)
         &:not([disabled]) {
           background:

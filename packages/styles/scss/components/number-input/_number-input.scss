@@ -492,11 +492,19 @@
   .#{$prefix}--number--readonly input[type='text'] {
     background: transparent;
     border-block-end-color: $border-subtle;
+
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-00;
+    }
   }
 
   .#{$prefix}--number--readonly .#{$prefix}--number__control-btn {
     color: $icon-disabled;
     pointer-events: none;
+
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-00;
+    }
 
     &:hover {
       background-color: transparent;

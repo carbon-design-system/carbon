@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2024
+// Copyright IBM Corp. 2019, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -12,6 +12,8 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/slider';
 @use '@carbon/styles/scss/type' as type;
 @use '@carbon/styles/scss/utilities/layout' as *;
+@use '@carbon/styles/scss/border-radius' as *;
+@use '@carbon/styles/scss/feature-flags' as flags;
 
 :host(#{$prefix}-slider),
 :host(#{$prefix}-slider-skeleton) {
@@ -80,6 +82,10 @@ $css--plex: true !default;
   input {
     background: transparent;
     border-block-end-color: var(--cds-border-subtle);
+
+    @if flags.enabled('enable-v12-release') {
+      border-radius: $border-radius-00;
+    }
   }
 }
 .#{$prefix}--slider__thumb-wrapper:focus-within .#{$prefix}--slider__thumb-icon,

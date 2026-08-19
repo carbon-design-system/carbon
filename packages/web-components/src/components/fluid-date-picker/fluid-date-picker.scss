@@ -111,9 +111,14 @@ $css--plex: true !default;
 
   @if flags.enabled('enable-v12-release') {
     border: 1px solid transparent;
-    border-radius: $border-radius-04;
   } @else {
     border-block-end: 1px solid $border-strong;
+  }
+}
+
+@if flags.enabled('enable-v12-release') {
+  :host(#{$prefix}-fluid-date-picker-input:not([readonly])) {
+    border-radius: $border-radius-04;
   }
 }
 

@@ -39,8 +39,9 @@
 
       &:has(.#{$prefix}--number--readonly),
       &.#{$prefix}--number-input--fluid--readonly {
-        border: 1px solid $border-subtle;
-        background: $field;
+        border-radius: $border-radius-00;
+        background: transparent;
+        border-block-end-color: $border-subtle;
       }
     }
   }

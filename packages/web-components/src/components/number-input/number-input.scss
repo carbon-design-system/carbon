@@ -45,7 +45,11 @@ $css--plex: true !default;
 .#{$prefix}--number--readonly {
   .#{$prefix}--number__controls {
     .#{$prefix}--number__control-btn {
-      border-block-end: 0;
+      @if flags.enabled('enable-v12-release') {
+        border-block-end-color: transparent;
+      } @else {
+        border-block-end: 0;
+      }
     }
   }
 }
