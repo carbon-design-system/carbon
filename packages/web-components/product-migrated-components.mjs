@@ -20,6 +20,8 @@ export const productMigratedStoryGlobs = [
   '../src/components/resizer/*.mdx',
   '../src/components/side-panel/side-panel.stories.ts',
   '../src/components/side-panel/*.mdx',
+  '../src/components/user-avatar/user-avatar.stories.ts',
+  '../src/components/user-avatar/*.mdx',
 ];
 
 /**
@@ -39,4 +41,5 @@ export const excludeProductsComponents = [
   'src/components/action-set/**/*',
   'src/components/truncated-text/**/*',
   'src/components/side-panel/**/*',
+  'src/components/user-avatar/**/*',
 ];
