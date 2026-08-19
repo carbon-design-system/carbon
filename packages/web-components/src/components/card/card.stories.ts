@@ -142,7 +142,7 @@ export const Default = {
     <style>
       ${styles}
     </style>
-    <cds-grid>
+    <cds-grid with-row-gap>
       <cds-column lg="4" md="4" sm="4">
         <cds-card
           density=${ifDefined(cardArgs.density || undefined)}
@@ -174,7 +174,7 @@ export const Clickable = {
     <style>
       ${styles}
     </style>
-    <cds-grid>
+    <cds-grid with-row-gap>
       <!-- Action card — click handler -->
       <cds-column lg="4" md="4" sm="4">
         <cds-card clickable aria-label="View analytics report">
@@ -280,7 +280,7 @@ export const Disabled = {
     <style>
       ${styles}
     </style>
-    <cds-grid>
+    <cds-grid with-row-gap>
       <cds-column lg="4" md="4" sm="4">
         <cds-card disabled>
           <cds-card-header>
@@ -312,7 +312,7 @@ export const Minimal = {
     <style>
       ${styles}
     </style>
-    <cds-grid>
+    <cds-grid with-row-gap>
       <cds-column lg="4" md="4" sm="4">
         <cds-card>
           <cds-card-body>A minimal card with just body content.</cds-card-body>
@@ -342,7 +342,7 @@ export const ProductiveAndExpressive = {
     <style>
       ${styles}
     </style>
-    <cds-grid>
+    <cds-grid with-row-gap>
       <cds-column lg="4" md="4" sm="4">
         <cds-card>
           <cds-card-header>
@@ -386,7 +386,7 @@ export const WithAILabel = {
     <style>
       ${styles}
     </style>
-    <cds-grid>
+    <cds-grid with-row-gap>
       <!-- Simple AI label card -->
       <cds-column lg="4" md="4" sm="4">
         <cds-card>
@@ -479,7 +479,7 @@ export const WithFlushBody = {
     <style>
       ${styles}
     </style>
-    <cds-grid>
+    <cds-grid with-row-gap>
       <!-- Default — 16px padding -->
       <cds-column lg="4" md="4" sm="4">
         <cds-card>
@@ -519,7 +519,7 @@ export const WithHeaderActions = {
     <style>
       ${styles}
     </style>
-    <cds-grid>
+    <cds-grid with-row-gap>
       <!-- Two header icon actions + footer actions -->
       <cds-column lg="4" md="4" sm="4">
         <cds-card>
@@ -732,7 +732,7 @@ export const WithHeaderMedia = {
     <style>
       ${styles}
     </style>
-    <cds-grid>
+    <cds-grid with-row-gap>
       <!-- Icon + actions -->
       <cds-column lg="4" md="4" sm="4">
         <cds-card>
@@ -812,7 +812,7 @@ export const WithHorizontalMedia = {
     <style>
       ${styles}
     </style>
-    <cds-grid>
+    <cds-grid with-row-gap>
       <!-- Media start (default) + footer button -->
       <cds-column lg="8" md="4" sm="4">
         <cds-card horizontal>
@@ -929,7 +929,7 @@ export const WithIcon = {
     <style>
       ${styles}
     </style>
-    <cds-grid>
+    <cds-grid with-row-gap>
       <!-- Header media icon + footer with mixed actions -->
       <cds-column lg="4" md="4" sm="4">
         <cds-card>
@@ -996,7 +996,7 @@ export const WithMedia = {
     <style>
       ${styles}
     </style>
-    <cds-grid>
+    <cds-grid with-row-gap>
       <!-- 16x9 media + footer with status + icon action -->
       <cds-column lg="4" md="4" sm="4">
         <cds-card>
@@ -1065,7 +1065,7 @@ export const WithTitleLeadingIcon = {
     <style>
       ${styles}
     </style>
-    <cds-grid>
+    <cds-grid with-row-gap>
       <!-- Productive density — 16px icon -->
       <cds-column lg="4" md="4" sm="4">
         <cds-card>
@@ -1121,7 +1121,7 @@ export const WithTitleMedia = {
     <style>
       ${styles}
     </style>
-    <cds-grid>
+    <cds-grid with-row-gap>
       <!-- 48px image -->
       <cds-column lg="4" md="4" sm="4">
         <cds-card>
@@ -1250,7 +1250,7 @@ export const WithTitleTrailingIcon = {
     <style>
       ${styles}
     </style>
-    <cds-grid>
+    <cds-grid with-row-gap>
       <!-- Productive density — 16px icon -->
       <cds-column lg="4" md="4" sm="4">
         <cds-card>
@@ -1306,7 +1306,7 @@ export const WithTruncatedTitle = {
     <style>
       ${styles}
     </style>
-    <cds-grid>
+    <cds-grid with-row-gap>
       <!-- Single-line ellipsis truncation -->
       <cds-column lg="4" md="4" sm="4">
         <cds-card>
@@ -1371,7 +1371,7 @@ export const WithVideo = {
     <style>
       ${styles}
     </style>
-    <cds-grid>
+    <cds-grid with-row-gap>
       <!-- Native video element above header -->
       <cds-column lg="4" md="4" sm="4">
         <cds-card>

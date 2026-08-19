@@ -227,6 +227,26 @@ $css--plex: true !default;
   display: block;
 }
 
+// ─── Reset <a> underline for link cards ──────────────────────────────────────
+// When CDSCard renders with href it delegates to CDSLink._renderLink(), which
+// wraps the card in an <a class="cds--link">.  Browser UA styles give every <a>
+// text-decoration: underline, and that propagates to all shadow-DOM descendants.
+// .cds--card--clickable { text-decoration: none } in the shared mixin resets it
+// on the inner div, but the <a> itself still carries the underline.
+// Targeting the inner <a> via the shadow-part resets it at the source.
+
+:host(#{$prefix}-card) a[part='link'] {
+  color: inherit;
+  text-decoration: none;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
 :host(#{$prefix}-card-header) {
   display: block;
 }
