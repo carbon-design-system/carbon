@@ -108,17 +108,16 @@ export const ExperimentalAutoAlign = (args) => {
     ref?.current?.scrollIntoView({ block: 'center', inline: 'center' });
   });
   return (
-    <div style={{ width: '5000px', height: '5000px' }}>
-      <div
-        style={{
-          position: 'absolute',
-          top: '2500px',
-          left: '2500px',
-        }}>
-        <Tooltip label={tooltipLabel} align="top" autoAlign {...args}>
-          <Button ref={ref}>This button has a tooltip</Button>
-        </Tooltip>
-      </div>
+    <div
+      style={{
+        display: 'grid',
+        placeItems: 'center',
+        width: '5000px',
+        height: '5000px',
+      }}>
+      <Tooltip label={tooltipLabel} align="top" autoAlign {...args}>
+        <Button ref={ref}>This button has a tooltip</Button>
+      </Tooltip>
     </div>
   );
 };

@@ -196,23 +196,20 @@ export const ExperimentalAutoAlign = {
       });
     });
     return html`
-      <div style="width: 5000px; height: 5000px;">
-        <div
-          style="position: absolute; top: 2500px;
-          left: 2500px; padding-right: 2500px;">
-          <cds-tooltip
-            ?defaultOpen=${defaultOpen}
-            .dropShadow=${dropShadow}
-            autoalign
-            enter-delay-ms=${enterDelayMs}
-            leave-delay-ms=${leaveDelayMs}
-            ?closeOnActivation=${closeOnActivation}>
-            <cds-button role="button" aria-labelledby="content">
-              This button has a tooltip
-            </cds-button>
-            <cds-tooltip-content id="content">${label}</cds-tooltip-content>
-          </cds-tooltip>
-        </div>
+      <div
+        style="display: grid; place-items: center; width: 5000px; height: 5000px;">
+        <cds-tooltip
+          ?defaultOpen=${defaultOpen}
+          .dropShadow=${dropShadow}
+          autoalign
+          enter-delay-ms=${enterDelayMs}
+          leave-delay-ms=${leaveDelayMs}
+          ?closeOnActivation=${closeOnActivation}>
+          <cds-button role="button" aria-labelledby="content">
+            This button has a tooltip
+          </cds-button>
+          <cds-tooltip-content id="content">${label}</cds-tooltip-content>
+        </cds-tooltip>
       </div>
     `;
   },

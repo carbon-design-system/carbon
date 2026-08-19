@@ -200,39 +200,36 @@ export const ExperimentalAutoAlign = {
       <style>
         ${styles}
       </style>
-      <div style="width: 5000px; height: 5000px;">
-        <div
-          style="position: absolute; top: 2500px;
-          left: 2500px; padding-right: 2500px;">
-          <cds-popover
-            ?open=${args.open}
-            ?caret=${args.caret}
-            ?highContrast=${args.highContrast}
-            autoalign
-            ?dropShadow=${args.dropShadow}
-            ?border=${args.border}
-            backgroundToken=${args.backgroundToken}>
-            <button
-              class="playground-trigger"
-              aria-label="Checkbox"
-              type="button"
-              aria-expanded=${open}
-              @click="${() => handleClick()}">
-              ${iconLoader(Checkbox16)}
-            </button>
-            <cds-popover-content>
-              <div class="p-3">
-                <p class="popover-title">This popover uses autoAlign</p>
-                <p class="popover-details">
-                  Scroll the container up, down, left or right to observe how
-                  the popover will automatically change its position in attempt
-                  to stay within the viewport. This works on initial render in
-                  addition to on scroll.
-                </p>
-              </div>
-            </cds-popover-content>
-          </cds-popover>
-        </div>
+      <div
+        style="display: grid; place-items: center; width: 5000px; height: 5000px;">
+        <cds-popover
+          ?open=${args.open}
+          ?caret=${args.caret}
+          ?highContrast=${args.highContrast}
+          autoalign
+          ?dropShadow=${args.dropShadow}
+          ?border=${args.border}
+          backgroundToken=${args.backgroundToken}>
+          <button
+            class="playground-trigger"
+            aria-label="Checkbox"
+            type="button"
+            aria-expanded=${open}
+            @click="${() => handleClick()}">
+            ${iconLoader(Checkbox16)}
+          </button>
+          <cds-popover-content>
+            <div class="p-3">
+              <p class="popover-title">This popover uses autoAlign</p>
+              <p class="popover-details">
+                Scroll the container up, down, left or right to observe how the
+                popover will automatically change its position in attempt to
+                stay within the viewport. This works on initial render in
+                addition to on scroll.
+              </p>
+            </div>
+          </cds-popover-content>
+        </cds-popover>
       </div>
     `;
   },
@@ -485,37 +482,34 @@ export const TabTipExperimentalAutoAlign = {
       <style>
         ${styles}
       </style>
-      <div style="width: 5000px; height: 5000px;">
-        <div
-          style="position: absolute; top: 2500px;
-          left: 2500px; padding-right: 2500px;">
-          <cds-popover
-            ?open=${args.open}
-            ?highContrast=${args.highContrast}
-            autoalign
-            tabTip
-            ?dropShadow=${args.dropShadow}>
-            <div
-              class="playground-trigger"
-              aria-expanded=${open}
-              @click="${() => handleClick()}">
-              ${iconLoader(Checkbox16)}
+      <div
+        style="display: grid; place-items: center; width: 5000px; height: 5000px;">
+        <cds-popover
+          ?open=${args.open}
+          ?highContrast=${args.highContrast}
+          autoalign
+          tabTip
+          ?dropShadow=${args.dropShadow}>
+          <div
+            class="playground-trigger"
+            aria-expanded=${open}
+            @click="${() => handleClick()}">
+            ${iconLoader(Checkbox16)}
+          </div>
+          <cds-popover-content>
+            <div class="p-3">
+              <p class="popover-title">
+                This popover uses autoAlign with tabTip
+              </p>
+              <p class="popover-details">
+                Scroll the container up, down, left or right to observe how the
+                popover will automatically change its position in attempt to
+                stay within the viewport. This works on initial render in
+                addition to on scroll.
+              </p>
             </div>
-            <cds-popover-content>
-              <div class="p-3">
-                <p class="popover-title">
-                  This popover uses autoAlign with tabTip
-                </p>
-                <p class="popover-details">
-                  Scroll the container up, down, left or right to observe how
-                  the popover will automatically change its position in attempt
-                  to stay within the viewport. This works on initial render in
-                  addition to on scroll.
-                </p>
-              </div>
-            </cds-popover-content>
-          </cds-popover>
-        </div>
+          </cds-popover-content>
+        </cds-popover>
       </div>
     `;
   },
