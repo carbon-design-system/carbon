@@ -1,0 +1,116 @@
+/\*\*
+
+- @license
+-
+- Copyright IBM Corp. 2026
+-
+- This source code is licensed under the Apache-2.0 license found in the
+- LICENSE file in the root directory of this source tree. \*/
+
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as EditInPlaceStories from './edit-in-place.stories';
+
+<Meta of={EditInPlaceStories} />
+
+# Edit in place
+
+The Edit in place component allows users to edit text inline with save and
+cancel actions.
+
+## Getting started
+
+### Import
+
+```javascript
+import '@carbon/web-components/es/components/edit-in-place/index.js';
+```
+
+### HTML
+
+```html
+<cds-edit-in-place
+  id="my-edit"
+  value="Edit me"
+  label-text="Editable field"
+  edit-label="Edit"
+  save-label="Save"
+  cancel-label="Cancel"></cds-edit-in-place>
+```
+
+### Events
+
+```javascript
+const editInPlace = document.querySelector('cds-edit-in-place');
+
+editInPlace.addEventListener('cds-edit-in-place-change', (event) => {
+  console.log('Value changed:', event.detail.value);
+});
+
+editInPlace.addEventListener('cds-edit-in-place-save', (event) => {
+  console.log('Saved:', event.detail.value);
+});
+
+editInPlace.addEventListener('cds-edit-in-place-cancel', (event) => {
+  console.log('Cancelled:', event.detail.value);
+});
+```
+
+## Examples
+
+### Default
+
+<Canvas of={EditInPlaceStories.Default} />
+
+### Invalid
+
+<Canvas of={EditInPlaceStories.Invalid} />
+
+### Custom blur function
+
+<Canvas of={EditInPlaceStories.CustomBlurFunction} />
+
+### Read only
+
+<Canvas of={EditInPlaceStories.ReadOnly} />
+
+## Component API
+
+### Properties
+
+| Property                | Attribute                  | Type                                                                                                     | Default                                          | Description                                                                   |
+| ----------------------- | -------------------------- | -------------------------------------------------------------------------------------------------------- | ------------------------------------------------ | ----------------------------------------------------------------------------- |
+| `cancelLabel`           | `cancel-label`             | `string`                                                                                                 | `'Cancel'`                                       | Label for the cancel button                                                   |
+| `defaultValue`          | `default-value`            | `string`                                                                                                 | `''`                                             | Default value for uncontrolled mode                                           |
+| `editAlwaysVisible`     | `edit-always-visible`      | `boolean`                                                                                                | `false`                                          | Always show the edit icon instead of only on hover                            |
+| `editLabel`             | `edit-label`               | `string`                                                                                                 | `'Edit'`                                         | Label for the edit button                                                     |
+| `id`                    | `id`                       | `string`                                                                                                 | `''`                                             | Specify a custom id for the input                                             |
+| `inheritTypography`     | `inherit-typography`       | `boolean`                                                                                                | `false`                                          | Causes the text entry field to inherit typography settings from the container |
+| `invalid`               | `invalid`                  | `boolean`                                                                                                | `false`                                          | Determines if the input is invalid                                            |
+| `invalidText`           | `invalid-text`             | `string`                                                                                                 | `''`                                             | Text that is displayed if the input is invalid                                |
+| `labelText`             | `label-text`               | `string`                                                                                                 | `''`                                             | Text that will be read by a screen reader when visiting this control          |
+| `placeholder`           | `placeholder`              | `string`                                                                                                 | `''`                                             | Placeholder text for the input                                                |
+| `readOnly`              | `read-only`                | `boolean`                                                                                                | `false`                                          | Determines if the input is in read-only mode                                  |
+| `readOnlyLabel`         | `read-only-label`          | `string`                                                                                                 | `'Edit off'`                                     | Label for the read-only icon button                                           |
+| `readOnlyToggleTipText` | `read-only-toggletip-text` | `string`                                                                                                 | `'This field is read-only and cannot be edited'` | Text for the tooltip shown in read-only mode                                  |
+| `saveLabel`             | `save-label`               | `string`                                                                                                 | `'Save'`                                         | Label for the save button                                                     |
+| `size`                  | `size`                     | `'sm' \| 'md' \| 'lg'`                                                                                   | `'sm'`                                           | Vertical size of the control                                                  |
+| `toggleTipAlignment`    | `toggletip-alignment`      | `'top' \| 'top-left' \| 'top-right' \| 'bottom' \| 'bottom-left' \| 'bottom-right' \| 'left' \| 'right'` | `'bottom'`                                       | Tooltip alignment in read-only mode                                           |
+| `tooltipAlignment`      | `tooltip-alignment`        | `'top' \| 'top-left' \| 'top-right' \| 'bottom' \| 'bottom-left' \| 'bottom-right' \| 'left' \| 'right'` | `'top'`                                          | Tooltip alignment for buttons                                                 |
+| `value`                 | `value`                    | `string`                                                                                                 | `''`                                             | Current value of the input                                                    |
+
+### Events
+
+| Event                      | Description                        | Detail              |
+| -------------------------- | ---------------------------------- | ------------------- |
+| `cds-edit-in-place-change` | Fired when the input value changes | `{ value: string }` |
+| `cds-edit-in-place-save`   | Fired when save is triggered       | `{ value: string }` |
+| `cds-edit-in-place-cancel` | Fired when cancel is triggered     | `{ value: string }` |
+| `cds-edit-in-place-blur`   | Fired when the input loses focus   | `{ value: string }` |
+
+### CSS parts
+
+| Part           | Description                 |
+| -------------- | --------------------------- |
+| `input`        | The input element           |
+| `actions`      | The button container        |
+| `invalid-text` | The error message container |
