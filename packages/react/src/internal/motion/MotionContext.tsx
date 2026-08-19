@@ -41,6 +41,14 @@ export function useMotionContext(): MotionContextValue | undefined {
 export interface MotionContextProps {
   /** Delay between each child animation start, in milliseconds. */
   stagger: number;
+  /**
+   * Explicit baseline delay in milliseconds before the first child starts
+   * animating. When provided, this takes precedence over any `settle` value
+   * inherited from a parent context. Use this to offset the stagger past a
+   * known enclosing transition (e.g. `settle={110}` to wait for an accordion
+   * panel's expand before staggering its rows in).
+   */
+  settle?: number;
   children: ReactNode;
 }
 
@@ -67,13 +75,16 @@ export interface MotionContextProps {
  */
 export function MotionContext({
   stagger: staggerMs,
+  settle,
   children,
 }: MotionContextProps) {
   const parent = useContext(MotionContextInternal);
   const motionEnabled = useMotionEnabled();
 
   const enabled = parent?.enabled ?? motionEnabled;
-  const parentSettle = parent?.settle ?? 0;
+  // Explicit `settle` prop takes precedence over an inherited parent value,
+  // which in turn falls back to 0 when there is no enclosing context.
+  const parentSettle = settle ?? parent?.settle ?? 0;
 
   if (!enabled) {
     return <>{children}</>;

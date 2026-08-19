@@ -33,7 +33,6 @@ Two surface kinds are defined:
 | ------------ | ---------------- | ------------- | --------------------------------------------------------- |
 | `disclosure` | `reveal`         | `moderate-01` | Accordion, table row expand — reveal in place             |
 | `contextual` | `reveal`         | `fast-02`     | Icon → tooltip / popover                                  |
-| `stretch`    | `reveal`         | `slow-01`     | Component reveal stretching from the vertical axis        |
 | `expand`     | `shared-element` | `moderate-02` | Card / tile → side-panel / tearsheet                      |
 | `invoke`     | `shared-element` | `moderate-02` | Button → modal / menu / popover (morphs from the trigger) |
 
@@ -50,9 +49,9 @@ from `@carbon/motion` and drives enter/exit animation via `motion/react`. It
 renders its children only while `open` is `true` and calls `onExitComplete` once
 the exit animation finishes.
 
-- For **`reveal`** surfaces (`disclosure`, `contextual`, `stretch`): no
-  `surfaceId` is needed. The component animates between the surface's `enter`
-  and `exit` keyframes.
+- For **`reveal`** surfaces (`disclosure` and `contextual`): no `surfaceId` is
+  needed. The component animates between the surface's `enter` and `exit`
+  keyframes.
 - For **`shared-element`** surfaces (`expand`, `invoke`): a `surfaceId` is
   required and must match the `surfaceId` on a paired `MotionSurfaceOrigin`.
   Motion then morphs between the two elements.
@@ -86,10 +85,10 @@ a plain `<div>` with immediate mount/unmount — no Motion runs at all.
 
 ### Native CSS
 
-`reveal` surfaces (`disclosure`, `contextual`, `stretch`) can be driven entirely
-with CSS — no JavaScript animation library required. The `@carbon/motion`
-package exposes a `surface()` Sass mixin that writes all enter/exit styles,
-transitions, and `@starting-style` rules from the shared surface map.
+`reveal` surfaces (`disclosure` and `contextual`) can be driven entirely with
+CSS — no JavaScript animation library required. The `@carbon/motion` package
+exposes a `surface()` Sass mixin that writes all enter/exit styles, transitions,
+and `@starting-style` rules from the shared surface map.
 
 **`shared-element` surfaces (`expand`, `invoke`) currently don't have no
 CSS-only form** — they require the Motion library. The mixin will throw a Sass
@@ -103,8 +102,8 @@ Apply the mixin to the element you want to animate, scoped to a
 ```scss
 @use '@carbon/styles/scss/motion' as motion;
 
-[data-carbon-surface='stretch'] {
-  @include motion.surface(stretch);
+[data-carbon-surface='disclosure'] {
+  @include motion.surface(disclosure);
 }
 ```
 
@@ -127,7 +126,7 @@ transition:
 
 ```jsx
 <div
-  data-carbon-surface="stretch"
+  data-carbon-surface="disclosure"
   data-carbon-surface-state={open ? 'enter' : 'exit'}>
   {/* content */}
 </div>
@@ -161,7 +160,7 @@ const handleTransitionEnd = (event) => {
 return (
   present && (
     <div
-      data-carbon-surface="stretch"
+      data-carbon-surface="disclosure"
       data-carbon-surface-state={open ? 'enter' : 'exit'}
       onTransitionEnd={handleTransitionEnd}>
       {/* content */}
