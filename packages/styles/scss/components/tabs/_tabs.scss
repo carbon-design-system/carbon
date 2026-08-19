@@ -207,6 +207,33 @@
           $background
         );
       }
+
+      // In RTL the buttons swap sides via logical inset properties, so the
+      // gradients must also flip to keep fading toward the button.
+      [dir='rtl'] & {
+        .#{$prefix}--tab--overflow-nav-button--next::before {
+          background: linear-gradient(
+            to left,
+            rgba(255, 255, 255, 0),
+            $background
+          );
+        }
+        .#{$prefix}--tab--overflow-nav-button--previous::before {
+          background: linear-gradient(
+            to right,
+            rgba(255, 255, 255, 0),
+            $background
+          );
+        }
+      }
+    }
+
+    // In RTL the chevron icons must also mirror so the arrow always points
+    // toward the content they reveal (matching the Pagination pattern).
+    [dir='rtl'] & {
+      .#{$prefix}--tab--overflow-nav-button svg {
+        transform: rotate(0.5turn);
+      }
     }
 
     .#{$prefix}--tab--overflow-nav-button--previous {

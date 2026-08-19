@@ -1529,3 +1529,382 @@ describe('TabListVertical', () => {
     );
   });
 });
+
+describe('RTL scroll support', () => {
+  // Helpers that mock the DOM geometry needed to make the tab list scrollable.
+  // scrollWidth > clientWidth triggers isScrollable / overflow buttons.
+  const SCROLL_WIDTH = 400;
+  const CLIENT_WIDTH = 200;
+  const MAX_SCROLL = SCROLL_WIDTH - CLIENT_WIDTH; // 200
+
+  function setupScrollMocks() {
+    const clientWidthSpy = jest
+      .spyOn(HTMLElement.prototype, 'clientWidth', 'get')
+      .mockImplementation(function () {
+        return this.getAttribute?.('role') === 'tablist' ||
+          this.classList?.contains(`${prefix}--tabs`)
+          ? CLIENT_WIDTH
+          : 0;
+      });
+    const scrollWidthSpy = jest
+      .spyOn(HTMLElement.prototype, 'scrollWidth', 'get')
+      .mockImplementation(function () {
+        return this.getAttribute?.('role') === 'tablist' ? SCROLL_WIDTH : 0;
+      });
+    return { clientWidthSpy, scrollWidthSpy };
+  }
+
+  function renderTabs() {
+    return render(
+      <Tabs>
+        <TabList aria-label="List of tabs">
+          <Tab>Tab 1</Tab>
+          <Tab>Tab 2</Tab>
+          <Tab>Tab 3</Tab>
+          <Tab>Tab 4</Tab>
+          <Tab>Tab 5</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Panel 1</TabPanel>
+          <TabPanel>Panel 2</TabPanel>
+          <TabPanel>Panel 3</TabPanel>
+          <TabPanel>Panel 4</TabPanel>
+          <TabPanel>Panel 5</TabPanel>
+        </TabPanels>
+      </Tabs>
+    );
+  }
+
+  beforeEach(() => {
+    jest.useFakeTimers();
+    jest.spyOn(hooks, 'useMatchMedia').mockImplementation(() => true);
+  });
+
+  afterEach(() => {
+    document.documentElement.removeAttribute('dir');
+    jest.useRealTimers();
+  });
+
+  describe('Blink RTL (scrollLeft goes negative)', () => {
+    beforeEach(() => {
+      document.documentElement.dir = 'rtl';
+    });
+
+    it('should detect isRtl as true when document dir is rtl', () => {
+      const { clientWidthSpy, scrollWidthSpy } = setupScrollMocks();
+      try {
+        renderTabs();
+        // The component reads document.dir on mount via useIsomorphicEffect.
+        // We can confirm RTL behaviour by verifying subsequent scroll checks
+        // treat a negative scrollLeft as "has scrolled" (previous button visible).
+        const tablist = screen.getByRole('tablist');
+
+        // Blink RTL: start position is 0, scrolling moves it negative
+        Object.defineProperty(tablist, 'scrollLeft', {
+          configurable: true,
+          writable: true,
+          value: -80,
+        });
+
+        fireEvent.scroll(tablist);
+        act(() => {
+          jest.advanceTimersByTime(250);
+        });
+
+        // After scrolling (negative value = has scrolled from logical start),
+        // the previous button should be visible.
+        expect(screen.getByLabelText('Scroll left')).not.toHaveClass(
+          `${prefix}--tab--overflow-nav-button--hidden`
+        );
+      } finally {
+        clientWidthSpy.mockRestore();
+        scrollWidthSpy.mockRestore();
+      }
+    });
+
+    it('should show next button at logical start (scrollLeft = 0 in Blink RTL)', () => {
+      const { clientWidthSpy, scrollWidthSpy } = setupScrollMocks();
+      try {
+        renderTabs();
+        const tablist = screen.getByRole('tablist');
+
+        // At logical start in Blink RTL, scrollLeft is 0
+        Object.defineProperty(tablist, 'scrollLeft', {
+          configurable: true,
+          writable: true,
+          value: 0,
+        });
+
+        fireEvent.scroll(tablist);
+        act(() => {
+          jest.advanceTimersByTime(250);
+        });
+
+        // Has not scrolled yet — the --next button (toward logical end) must be visible
+        // and --previous (toward logical start) must be hidden.
+        // In RTL the classes are swapped to the opposite physical button, so
+        // query by class rather than aria-label.
+        expect(
+          // eslint-disable-next-line testing-library/no-node-access
+          document.querySelector(`.${prefix}--tab--overflow-nav-button--next`)
+        ).not.toHaveClass(`${prefix}--tab--overflow-nav-button--hidden`);
+        expect(
+          // eslint-disable-next-line testing-library/no-node-access
+          document.querySelector(
+            `.${prefix}--tab--overflow-nav-button--previous`
+          )
+        ).toHaveClass(`${prefix}--tab--overflow-nav-button--hidden`);
+      } finally {
+        clientWidthSpy.mockRestore();
+        scrollWidthSpy.mockRestore();
+      }
+    });
+
+    it('should hide next button when scrollLeft reaches -(maxScroll) in Blink RTL', () => {
+      const { clientWidthSpy, scrollWidthSpy } = setupScrollMocks();
+      try {
+        renderTabs();
+        const tablist = screen.getByRole('tablist');
+
+        // Fully scrolled to logical end in Blink RTL: scrollLeft = -(MAX_SCROLL)
+        Object.defineProperty(tablist, 'scrollLeft', {
+          configurable: true,
+          writable: true,
+          value: -MAX_SCROLL,
+        });
+
+        fireEvent.scroll(tablist);
+
+        // Immediately (no debounce needed for updateOverflowState path).
+        // The --next button (physical left in RTL) must be hidden at logical end.
+        expect(
+          // eslint-disable-next-line testing-library/no-node-access
+          document.querySelector(`.${prefix}--tab--overflow-nav-button--next`)
+        ).toHaveClass(`${prefix}--tab--overflow-nav-button--hidden`);
+      } finally {
+        clientWidthSpy.mockRestore();
+        scrollWidthSpy.mockRestore();
+      }
+    });
+
+    it('should show both buttons when partially scrolled in Blink RTL', () => {
+      const { clientWidthSpy, scrollWidthSpy } = setupScrollMocks();
+      try {
+        renderTabs();
+        const tablist = screen.getByRole('tablist');
+
+        // Partially scrolled: -80 means 80px into logical content, 120px remaining
+        Object.defineProperty(tablist, 'scrollLeft', {
+          configurable: true,
+          writable: true,
+          value: -80,
+        });
+
+        fireEvent.scroll(tablist);
+        act(() => {
+          jest.advanceTimersByTime(250);
+        });
+
+        expect(screen.getByLabelText('Scroll left')).not.toHaveClass(
+          `${prefix}--tab--overflow-nav-button--hidden`
+        );
+        expect(screen.getByLabelText('Scroll right')).not.toHaveClass(
+          `${prefix}--tab--overflow-nav-button--hidden`
+        );
+      } finally {
+        clientWidthSpy.mockRestore();
+        scrollWidthSpy.mockRestore();
+      }
+    });
+  });
+
+  describe('Firefox/Safari RTL (scrollLeft goes from maxScroll toward 0)', () => {
+    beforeEach(() => {
+      document.documentElement.dir = 'rtl';
+    });
+
+    it('should show next button at logical start (scrollLeft = maxScroll in Firefox RTL)', () => {
+      const { clientWidthSpy, scrollWidthSpy } = setupScrollMocks();
+      try {
+        renderTabs();
+        const tablist = screen.getByRole('tablist');
+
+        // At logical start in Firefox/Safari RTL, scrollLeft = MAX_SCROLL (positive)
+        Object.defineProperty(tablist, 'scrollLeft', {
+          configurable: true,
+          writable: true,
+          value: MAX_SCROLL, // 200 — positive, triggers Firefox RTL branch
+        });
+
+        fireEvent.scroll(tablist);
+        act(() => {
+          jest.advanceTimersByTime(250);
+        });
+
+        // Normalises to 0: has not scrolled — --next visible, --previous hidden.
+        // In RTL the classes are swapped to the opposite physical button.
+        expect(
+          // eslint-disable-next-line testing-library/no-node-access
+          document.querySelector(`.${prefix}--tab--overflow-nav-button--next`)
+        ).not.toHaveClass(`${prefix}--tab--overflow-nav-button--hidden`);
+        expect(
+          // eslint-disable-next-line testing-library/no-node-access
+          document.querySelector(
+            `.${prefix}--tab--overflow-nav-button--previous`
+          )
+        ).toHaveClass(`${prefix}--tab--overflow-nav-button--hidden`);
+      } finally {
+        clientWidthSpy.mockRestore();
+        scrollWidthSpy.mockRestore();
+      }
+    });
+
+    it('should hide previous button at logical start (scrollLeft = maxScroll) in Firefox RTL', () => {
+      const { clientWidthSpy, scrollWidthSpy } = setupScrollMocks();
+      try {
+        renderTabs();
+        const tablist = screen.getByRole('tablist');
+
+        // In Firefox RTL, scrollLeft = MAX_SCROLL means logical position 0 (start).
+        // The previous button (toward logical start) must be hidden because the user
+        // has not yet scrolled away from the start.
+        Object.defineProperty(tablist, 'scrollLeft', {
+          configurable: true,
+          writable: true,
+          value: MAX_SCROLL, // positive — Firefox RTL branch: normalises to 0
+        });
+
+        fireEvent.scroll(tablist);
+        act(() => {
+          jest.advanceTimersByTime(250);
+        });
+
+        // --previous (toward logical start) must be hidden at position 0.
+        // In RTL it is on the physical right button, so query by class.
+        expect(
+          // eslint-disable-next-line testing-library/no-node-access
+          document.querySelector(
+            `.${prefix}--tab--overflow-nav-button--previous`
+          )
+        ).toHaveClass(`${prefix}--tab--overflow-nav-button--hidden`);
+      } finally {
+        clientWidthSpy.mockRestore();
+        scrollWidthSpy.mockRestore();
+      }
+    });
+
+    it('should show both buttons when partially scrolled in Firefox RTL', () => {
+      const { clientWidthSpy, scrollWidthSpy } = setupScrollMocks();
+      try {
+        renderTabs();
+        const tablist = screen.getByRole('tablist');
+
+        // In Firefox RTL, partially scrolled: scrollLeft = MAX_SCROLL - 80 = 120
+        // normalises to 80 logical px from start
+        Object.defineProperty(tablist, 'scrollLeft', {
+          configurable: true,
+          writable: true,
+          value: MAX_SCROLL - 80, // 120 — positive, triggers Firefox RTL branch
+        });
+
+        fireEvent.scroll(tablist);
+        act(() => {
+          jest.advanceTimersByTime(250);
+        });
+
+        expect(screen.getByLabelText('Scroll left')).not.toHaveClass(
+          `${prefix}--tab--overflow-nav-button--hidden`
+        );
+        expect(screen.getByLabelText('Scroll right')).not.toHaveClass(
+          `${prefix}--tab--overflow-nav-button--hidden`
+        );
+      } finally {
+        clientWidthSpy.mockRestore();
+        scrollWidthSpy.mockRestore();
+      }
+    });
+  });
+
+  describe('LTR behaviour is unchanged', () => {
+    it('should show next button at start (scrollLeft = 0) in LTR', () => {
+      const { clientWidthSpy, scrollWidthSpy } = setupScrollMocks();
+      try {
+        renderTabs();
+        const tablist = screen.getByRole('tablist');
+
+        Object.defineProperty(tablist, 'scrollLeft', {
+          configurable: true,
+          writable: true,
+          value: 0,
+        });
+
+        fireEvent.scroll(tablist);
+        act(() => {
+          jest.advanceTimersByTime(250);
+        });
+
+        expect(screen.getByLabelText('Scroll right')).not.toHaveClass(
+          `${prefix}--tab--overflow-nav-button--hidden`
+        );
+        expect(screen.getByLabelText('Scroll left')).toHaveClass(
+          `${prefix}--tab--overflow-nav-button--hidden`
+        );
+      } finally {
+        clientWidthSpy.mockRestore();
+        scrollWidthSpy.mockRestore();
+      }
+    });
+
+    it('should hide next button when scrollLeft reaches maxScroll in LTR', () => {
+      const { clientWidthSpy, scrollWidthSpy } = setupScrollMocks();
+      try {
+        renderTabs();
+        const tablist = screen.getByRole('tablist');
+
+        Object.defineProperty(tablist, 'scrollLeft', {
+          configurable: true,
+          writable: true,
+          value: MAX_SCROLL,
+        });
+
+        fireEvent.scroll(tablist);
+
+        expect(screen.getByLabelText('Scroll right')).toHaveClass(
+          `${prefix}--tab--overflow-nav-button--hidden`
+        );
+      } finally {
+        clientWidthSpy.mockRestore();
+        scrollWidthSpy.mockRestore();
+      }
+    });
+
+    it('should show both buttons when partially scrolled in LTR', () => {
+      const { clientWidthSpy, scrollWidthSpy } = setupScrollMocks();
+      try {
+        renderTabs();
+        const tablist = screen.getByRole('tablist');
+
+        Object.defineProperty(tablist, 'scrollLeft', {
+          configurable: true,
+          writable: true,
+          value: 80,
+        });
+
+        fireEvent.scroll(tablist);
+        act(() => {
+          jest.advanceTimersByTime(250);
+        });
+
+        expect(screen.getByLabelText('Scroll left')).not.toHaveClass(
+          `${prefix}--tab--overflow-nav-button--hidden`
+        );
+        expect(screen.getByLabelText('Scroll right')).not.toHaveClass(
+          `${prefix}--tab--overflow-nav-button--hidden`
+        );
+      } finally {
+        clientWidthSpy.mockRestore();
+        scrollWidthSpy.mockRestore();
+      }
+    });
+  });
+});
