@@ -1,0 +1,264 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type' as *;
+// `@use` runs the module's `_index.scss` once, which already includes the
+// `card.card` mixin — do not `@include` it again here or every rule from
+// the shared @carbon/styles card mixin gets emitted twice.
+@use '@carbon/styles/scss/components/card' as card;
+
+// =============================================================================
+// Shadow-boundary overrides
+// =============================================================================
+//
+// The @carbon/styles card mixin was written for a single DOM tree (React).
+// Every rule of the form `.cds--card-X .cds--card__Y` assumes X and Y share
+// the same shadow root — or that there is no shadow root at all. In Web
+// Components each custom element is its own shadow root, so descendant
+// selectors never cross shadow boundaries.
+//
+// Strategy for every broken rule:
+//   A. Ancestor lives in a DIFFERENT shadow root than the target class
+//      → re-declare using :host-context() (checks light-DOM ancestors)
+//        or :host() (checks the host element itself) targeting a reflected
+//        HTML attribute that the ancestor sets.
+//   B. The target class IS the host element of a child custom element
+//      → target the custom element tag directly with ::slotted() or as a
+//        :host() selector in that element's own block.
+//   C. Both ancestor and target live in the SAME shadow root but the
+//      ancestor is a host element that sits outside (i.e. the parent
+//      custom element's host)
+//      → use :host-context() from the child's stylesheet.
+//
+// Broken selector inventory (all 15 affected rules):
+//
+//  [1]  .cds--card__header > .cds--card__title { margin-block }
+//       header (.cds--card__header) in cds-card-header shadow
+//       title  (.cds--card__title)  in cds-card-title shadow        ✗ cross
+//
+//  [2]  .cds--card--expressive .cds--card__title-text-row
+//  [3]  .cds--card--productive .cds--card__title-text-row
+//       card modifier in cds-card shadow
+//       text-row in cds-card-title shadow                           ✗ cross
+//
+//  [4]  .cds--card__title > .cds--card__label   { type + color }
+//  [5]  .cds--card__title > .cds--card__description { type + color }
+//       both .cds--card__label and .cds--card__description ARE
+//       inside cds-card-title shadow — same shadow as .cds--card__title
+//       BUT the "> child" combinator requires a direct DOM parent-child
+//       relationship; in the shadow DOM these divs are all inside the
+//       same .cds--card__title wrapper div so this DOES work. ✓ safe
+//
+//  [6]  .cds--card--disabled .cds--card__label   { color }
+//  [7]  .cds--card--disabled .cds--card__description { color }
+//       disabled modifier on .cds--card in cds-card shadow
+//       label/description in cds-card-title shadow                  ✗ cross
+//
+//  [8]  .cds--card--disabled .cds--card__clickable-footer
+//       clickable-footer is inside cds-card shadow — SAME            ✓ safe
+//
+//  [9]  .cds--card--horizontal > .cds--card__content { flex }
+//       both in cds-card shadow — SAME                               ✓ safe
+//
+//  [10] .cds--card--horizontal > .cds--card__content > .cds--card__body
+//       __content in cds-card shadow; __body in cds-card-body shadow ✗ cross
+//
+//  [11] .cds--card--horizontal > .cds--card__content > .cds--card__footer
+//       __content in cds-card shadow; __footer in cds-card-footer shadow ✗ cross
+//
+//  [12] .cds--card--has-ai-label .cds--card__title { padding }
+//  [13] .cds--card--has-ai-label .cds--card__label { padding }
+//  [14] .cds--card--has-ai-label .cds--card__description { padding }
+//       has-ai-label on .cds--card in cds-card shadow
+//       title/label/description all in cds-card-title shadow        ✗ cross
+//
+//  [15] .cds--card--has-ai-label:has(.cds--card__actions) .cds--card__title
+//       .cds--card--has-ai-label:has(.cds--card__actions) .cds--card__label
+//       .cds--card--has-ai-label:has(.cds--card__actions) .cds--card__description
+//       same as [12-14] AND :has() cannot pierce shadow boundaries   ✗ cross × 2
+//
+//  [16] .cds--card__header:has(> .cds--card__title-media) > .cds--card__title
+//       __header in cds-card-header shadow
+//       :has(> .cds--card__title-media) — title-media is in its own shadow  ✗ cross
+//       .cds--card__title is in cds-card-title shadow               ✗ cross
+//
+//  [17] .cds--card__footer :has / > .cds--card__action selectors
+//       __footer in cds-card-footer shadow; __action in cds-card-action shadow ✗ cross
+//
+// =============================================================================
+
+// ─── [1] Title margin-block (header → title cross boundary) ──────────────────
+// Original: .cds--card__header > .cds--card__title { margin-block: $spacing-05 }
+// Fix: apply from cds-card-title host, using :host-context to detect it is
+//      inside a cds-card-header.
+
+:host-context(#{$prefix}-card-header) .#{$prefix}--card__title {
+  margin-block: $spacing-05;
+}
+
+// ─── [2,3] Density typography (card → title-text-row cross boundary) ─────────
+// Original: .cds--card--productive / --expressive .cds--card__title-text-row
+// Fix: :host-context on the reflected density attribute of cds-card.
+
+:host(#{$prefix}-card-title) .#{$prefix}--card__title-text-row {
+  // Base / fallback — productive is the default density.
+  @include type-style('heading-compact-02');
+}
+
+:host-context(#{$prefix}-card[density='productive'])
+  .#{$prefix}--card__title-text-row {
+  @include type-style('heading-compact-02');
+}
+
+:host-context(#{$prefix}-card[density='expressive'])
+  .#{$prefix}--card__title-text-row {
+  @include type-style('heading-03');
+}
+
+// ─── [6,7] Disabled colour (card → label/description cross boundary) ─────────
+// Original: .cds--card--disabled .cds--card__label / __description { color }
+// Fix: :host-context on the reflected disabled attribute of cds-card.
+
+:host-context(#{$prefix}-card[disabled]) .#{$prefix}--card__label {
+  color: $text-disabled;
+}
+
+:host-context(#{$prefix}-card[disabled]) .#{$prefix}--card__description {
+  color: $text-disabled;
+}
+
+// ─── [10] Horizontal body flex (card → card-body cross boundary) ──────────────
+// Original: .cds--card--horizontal > .cds--card__content > .cds--card__body
+// Fix: :host-context on the reflected horizontal attribute of cds-card.
+// The > combinator is irrelevant once we are inside the shadow root.
+
+:host-context(#{$prefix}-card[horizontal]) .#{$prefix}--card__body {
+  flex: 1 0 auto;
+}
+
+// ─── [11] Horizontal footer push (card → card-footer cross boundary) ──────────
+// Original: .cds--card--horizontal > .cds--card__content > .cds--card__footer
+// Fix: same approach as [10].
+
+:host-context(#{$prefix}-card[horizontal]) .#{$prefix}--card__footer {
+  margin-block-start: auto;
+}
+
+// ─── [12] AI label title padding (card → card-title cross boundary) ──────────
+// Original: .cds--card--has-ai-label .cds--card__title { padding-inline-end }
+// Fix: :host-context on the reflected has-ai-label attribute.
+
+:host-context(#{$prefix}-card[has-ai-label]) .#{$prefix}--card__title {
+  padding-inline-end: calc($spacing-07 + $spacing-05);
+}
+
+// ─── [13] AI label label padding ─────────────────────────────────────────────
+
+:host-context(#{$prefix}-card[has-ai-label]) .#{$prefix}--card__label {
+  padding-inline-end: calc($spacing-07 + $spacing-05);
+}
+
+// ─── [14] AI label description padding ───────────────────────────────────────
+
+:host-context(#{$prefix}-card[has-ai-label]) .#{$prefix}--card__description {
+  padding-inline-end: calc($spacing-07 + $spacing-05);
+}
+
+// ─── [15] AI label + actions compound padding ────────────────────────────────
+// Original used :has(.cds--card__actions) which cannot pierce shadow boundaries.
+// cds-card reflects `has-actions` when cds-card-actions is slotted — we add
+// that reflected attribute in card.ts (see companion JS change) so we can key
+// off it here without any cross-boundary :has().
+
+:host-context(#{$prefix}-card[has-ai-label][has-actions])
+  .#{$prefix}--card__title {
+  padding-inline-end: $spacing-13;
+}
+
+:host-context(#{$prefix}-card[has-ai-label][has-actions])
+  .#{$prefix}--card__label {
+  padding-inline-end: $spacing-13;
+}
+
+:host-context(#{$prefix}-card[has-ai-label][has-actions])
+  .#{$prefix}--card__description {
+  padding-inline-end: $spacing-13;
+}
+
+// ─── [16] Title-media grid column (header → title-media/title cross boundary) ─
+// Original: .cds--card__header:has(> .cds--card__title-media) > .cds--card__title
+// :has() cannot see into cds-card-title-media's shadow root.
+// cds-card-header reflects `has-title-media` when cds-card-title-media is
+// slotted (see companion JS change). Key off that attribute.
+
+:host-context(#{$prefix}-card-header[has-title-media])
+  .#{$prefix}--card__title {
+  grid-column: 2;
+  margin-inline-start: 0;
+}
+
+// ─── [17] Footer action-set layout (footer → card-action cross boundary) ──────
+// Original: .cds--card__footer:has(> .cds--card__action) { padding:0 ... }
+//           .cds--card__footer > .cds--card__action:not(:has(...)) { flex }
+//           .cds--card__footer > .cds--card__action:has(.cds--btn--icon-only) { flex }
+// :has() cannot pierce cds-card-action's shadow root.
+// cds-card-footer reflects `has-actions` when cds-card-action elements are
+// slotted (see companion JS change). Key off that attribute.
+
+:host(#{$prefix}-card-footer[has-actions]) .#{$prefix}--card__footer {
+  overflow: hidden;
+  padding: 0;
+  border-block-start: 1px solid $border-subtle;
+  gap: 1px;
+}
+
+// ─── Host-level display ───────────────────────────────────────────────────────
+
+:host(#{$prefix}-card) {
+  display: block;
+}
+
+:host(#{$prefix}-card-header) {
+  display: block;
+}
+
+:host(#{$prefix}-card-body) {
+  display: block;
+}
+
+:host(#{$prefix}-card-footer) {
+  display: block;
+}
+
+:host(#{$prefix}-card-media) {
+  display: block;
+}
+
+:host(#{$prefix}-card-header-media) {
+  display: block;
+}
+
+:host(#{$prefix}-card-title) {
+  display: block;
+}
+
+:host(#{$prefix}-card-title-media) {
+  display: block;
+}
+
+:host(#{$prefix}-card-actions) {
+  display: block;
+}
+
+:host(#{$prefix}-card-action) {
+  display: block;
+}

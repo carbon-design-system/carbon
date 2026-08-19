@@ -23,6 +23,16 @@ export { default as CDSBreadcrumbItem } from './components/breadcrumb/breadcrumb
 export { default as CDSBreadcrumbLink } from './components/breadcrumb/breadcrumb-link';
 export { default as CDSBreadcrumbOverflowMenu } from './components/breadcrumb/breadcrumb-overflow-menu';
 export { default as CDSBreadcrumbSkeleton } from './components/breadcrumb/breadcrumb-skeleton';
+export { default as CDSCard } from './components/card/card';
+export { default as CDSCardAction } from './components/card/card-action';
+export { default as CDSCardActions } from './components/card/card-actions';
+export { default as CDSCardBody } from './components/card/card-body';
+export { default as CDSCardFooter } from './components/card/card-footer';
+export { default as CDSCardHeader } from './components/card/card-header';
+export { default as CDSCardHeaderMedia } from './components/card/card-header-media';
+export { default as CDSCardMedia } from './components/card/card-media';
+export { default as CDSCardTitle } from './components/card/card-title';
+export { default as CDSCardTitleMedia } from './components/card/card-title-media';
 export { default as CDSChatButton } from './components/chat-button/chat-button';
 export { default as CDSChatButtonSkeleton } from './components/chat-button/chat-button-skeleton';
 export { default as CDSCheckbox } from './components/checkbox/checkbox';

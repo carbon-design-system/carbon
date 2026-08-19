@@ -243,7 +243,10 @@
   }
 
   // ─── Label (nested inside __title via label prop on CardTitle) ─────────
-  .#{$prefix}--card__title > .#{$prefix}--card__label {
+  // Descendant (not child) selector — the label div can be rendered inside
+  // a <slot name="label"> as fallback content, so it is not always a direct
+  // child of __title.
+  .#{$prefix}--card__title .#{$prefix}--card__label {
     @include type-style('label-01');
 
     color: $text-secondary;
@@ -340,7 +343,10 @@
   }
 
   // ─── Description (nested inside __title via description prop) ──────────
-  .#{$prefix}--card__title > .#{$prefix}--card__description {
+  // Descendant (not child) selector — the description div can be rendered
+  // inside a <slot name="description"> as fallback content, so it is not
+  // always a direct child of __title.
+  .#{$prefix}--card__title .#{$prefix}--card__description {
     @include type-style('label-01');
 
     color: $text-secondary;
