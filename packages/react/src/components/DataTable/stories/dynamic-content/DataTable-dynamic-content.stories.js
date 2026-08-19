@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -32,7 +32,12 @@ import DataTable, {
   TableToolbarSearch,
   TableToolbarMenu,
 } from '../..';
-import { batchActionClick, headers } from '../shared';
+import {
+  batchActionClick,
+  dataTableArgs,
+  dataTableArgTypes,
+  headers,
+} from '../shared';
 import IconIndicator from '../../../IconIndicator';
 
 const VisualInspectionPictogram = (props) => (
@@ -309,6 +314,8 @@ class DynamicRows extends React.Component {
 export default {
   title: 'Components/DataTable/Dynamic',
   component: DataTable,
+  args: dataTableArgs,
+  argTypes: dataTableArgTypes,
 };
 
 export const Default = (args) => {

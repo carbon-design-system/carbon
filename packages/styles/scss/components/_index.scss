@@ -12,6 +12,7 @@
 @use 'badge-indicator';
 @use 'breadcrumb';
 @use 'button';
+@use 'card';
 @use 'chat-button';
 @use 'checkbox';
 @use 'code-snippet';
@@ -44,6 +45,7 @@
 @use 'form';
 @use 'icon-indicator';
 @use 'inline-loading';
+@use 'InterstitialScreen';
 @use 'link';
 @use 'list';
 @use 'list-box';
@@ -55,6 +57,7 @@
 @use 'notification';
 @use 'number-input';
 @use 'overflow-menu';
+@use 'OptionsTile';
 @use 'page-header';
 @use 'pagination';
 @use 'pagination-nav';
@@ -84,3 +87,5 @@
 @use 'treeview';
 @use 'truncated-text';
 @use 'ui-shell';
+@use 'EditInPlace';
+@use 'user-avatar';

@@ -11,9 +11,9 @@ import Button from '../../Button';
 import { DataTable } from '..';
 import Pagination from '../../Pagination';
 import { EmptyState } from '../../EmptyState';
-import { headers } from './shared';
 import mdx from '../DataTable.mdx';
 import './datatable-story.scss';
+import { dataTableArgs, dataTableArgTypes, headers } from './shared';
 
 const {
   Table,
@@ -45,6 +45,8 @@ const VisualInspectionPictogram = (props) => (
 export default {
   title: 'Components/DataTable/Pagination',
   component: DataTable,
+  args: dataTableArgs,
+  argTypes: dataTableArgTypes,
   subcomponents: {
     TableContainer,
     Table,

@@ -31,8 +31,18 @@ import DataTable, {
 
 import { Toggletip, ToggletipButton, ToggletipContent } from '../../Toggletip';
 
+
 import { EmptyState } from '../../EmptyState';
-import { batchActionClick, rows, headers } from './shared';
+import {
+  batchActionClick,
+  dataTableArgs,
+  dataTableArgTypes,
+  rows,
+  headers,
+} from './shared';
+import mdx from '../DataTable.mdx';
+import Link from '../../Link';
+
 
 const VisualInspectionPictogram = (props) => (
   <svg
@@ -45,12 +55,12 @@ const VisualInspectionPictogram = (props) => (
     <rect style={{ fill: 'none' }} width="32" height="32" />
   </svg>
 );
-import mdx from '../DataTable.mdx';
-import Link from '../../Link';
 
 export default {
   title: 'Components/DataTable/Batch Actions',
   component: DataTable,
+  args: dataTableArgs,
+  argTypes: dataTableArgTypes,
   subcomponents: {
     TableBatchAction,
     TableBatchActions,
