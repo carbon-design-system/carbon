@@ -11,7 +11,11 @@
     "directory": "packages/web-components"
   },
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "bin": {
+    "create-prefixed-build": "./bin/create-prefixed-build.js"
+  },
   "files": [
+    "bin/**/*",
     "custom-elements.json",
     "es/**/*",
     "es-custom/**/*",

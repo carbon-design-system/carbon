@@ -2226,6 +2226,8 @@ __metadata:
     typescript-config-carbon: "workspace:^0.11.0"
     vite: "npm:^8.0.0"
     web-component-analyzer: "npm:2.0.0"
+  bin:
+    create-prefixed-build: ./bin/create-prefixed-build.js
   languageName: unknown
   linkType: soft
 
