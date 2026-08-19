@@ -20,6 +20,8 @@ export * from './components/Breadcrumb';
 export * from './components/Button';
 export * from './components/ButtonSet';
 export * as preview__Card from './components/Card';
+// TODO: uncomment in v12 — also remove from excludeProductsComponents
+// export * from './components/Coachmark';
 export * from './components/Checkbox';
 export * from './components/CheckboxGroup';
 export * from './components/ClassPrefix';
