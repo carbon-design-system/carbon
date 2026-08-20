@@ -30,8 +30,9 @@
     "ci-check": "carbon-cli check \"scss/**/*.scss\" -i \"**/generated/**\" -i \"**/compat/**\"",
     "clean": "rimraf es lib umd scss/compat/generated scss/generated js/generated",
     "build:types": "tsc -p tsconfig.types.json",
-    "build:js-tokens": "babel-node --extensions '.js,.ts' --presets '@babel/preset-env,@babel/preset-typescript' tasks/generate-js-tokens.js",
-    "build": "yarn clean && yarn build:js-tokens && carbon-cli bundle src/index.ts --name CarbonThemes && babel-node --extensions '.js,.ts' --presets '@babel/preset-env,@babel/preset-typescript' tasks/build.js && yarn build:types && carbon-cli check \"scss/*.scss\"",
+    "babel-node": "node ../../node_modules/@babel/node/lib/babel-node.js",
+    "build:js-tokens": "yarn babel-node --extensions '.js,.ts' --presets '@babel/preset-env,@babel/preset-typescript' tasks/generate-js-tokens.js",
+    "build": "yarn clean && yarn build:js-tokens && carbon-cli bundle src/index.ts --name CarbonThemes && yarn babel-node --extensions '.js,.ts' --presets '@babel/preset-env,@babel/preset-typescript' tasks/build.js && yarn build:types && carbon-cli check \"scss/*.scss\"",
     "postinstall": "ibmtelemetry --config=telemetry.yml"
   },
   "dependencies": {
@@ -42,8 +43,8 @@
     "color": "^4.0.0"
   },
   "devDependencies": {
-    "@babel/node": "^7.27.1",
-    "@babel/preset-env": "^7.27.2",
+    "@babel/node": "^8.0.0",
+    "@babel/preset-env": "^8.0.0",
     "@carbon/cli": "^11.48.0",
     "@carbon/cli-reporter": "^10.9.0",
     "@carbon/scss-generator": "^10.20.0",
