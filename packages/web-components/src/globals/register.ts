@@ -65,6 +65,11 @@ export interface DefineCustomElementOptions {
 
 /**
  * Register a custom element class, under `options.name` in `options.registry`.
+ *
+ * `clazz` only needs to be a custom element constructor. `static is` is how a
+ * class carries its own tag (see {@link CarbonCustomElementConstructor}), but a
+ * class without one can still be registered by passing `options.name` — which
+ * is how an existing class is put on a second tag.
  * Called by the registering barrels so importing a class stays pure.
  *
  * Re-registering the same class under the same tag is a no-op. If the tag is
@@ -82,7 +87,9 @@ export interface DefineCustomElementOptions {
  *   except in the subclass case above, where it is the subclass that was
  *   actually registered under `options.name`.
  */
-export const defineCustomElement = <T extends CarbonCustomElementConstructor>(
+export const defineCustomElement = <
+  T extends CustomElementConstructor & { is?: string },
+>(
   clazz: T,
   options: DefineCustomElementOptions = {}
 ): T => {
