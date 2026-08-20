@@ -44,9 +44,9 @@ export default {
 export const Horizontal = (args) => {
   return (
     <Stack {...args}>
-      <div>Account settings</div>
-      <div>Billing details</div>
-      <div>Notification preferences</div>
+      <div>Item 1</div>
+      <div>Item 2</div>
+      <div>Item 3</div>
     </Stack>
   );
 };
@@ -67,9 +67,9 @@ Horizontal.argTypes = {
 export const Default = (args) => {
   return (
     <Stack {...args}>
-      <div>Account settings</div>
-      <div>Billing details</div>
-      <div>Notification preferences</div>
+      <div>Item 1</div>
+      <div>Item 2</div>
+      <div>Item 3</div>
     </Stack>
   );
 };

@@ -42,9 +42,9 @@ const renderStack = ({ gap, orientation, useCustomGapValue }) =>
     gap="${gap}"
     orientation="${orientation}"
     ?use-custom-gap-value="${useCustomGapValue}">
-    <div>Account settings</div>
-    <div>Billing details</div>
-    <div>Notification preferences</div>
+    <div>Item 1</div>
+    <div>Item 2</div>
+    <div>Item 3</div>
   </cds-stack>`;
 
 export const Default = {
