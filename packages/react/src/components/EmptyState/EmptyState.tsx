@@ -35,13 +35,6 @@ export interface EmptyStateProps {
   className?: string;
 
   /**
-   * Override the heading element level. Use `"h1"` when `EmptyState` is the
-   * top-level heading on a full page. Normally you don't need this — the
-   * component picks the right level automatically via `Section`/`Heading`.
-   */
-  headingAs?: ElementType;
-
-  /**
    * Illustration to display. Pass an image `src` string, or a React component
    * (e.g. a Carbon pictogram or a custom SVG component).
    */
@@ -68,17 +61,11 @@ export interface EmptyStateProps {
   title: ReactNode;
 }
 
-/**
- * `EmptyState` is a pattern-level component for displaying empty, zero-data,
- * or error states. It composes a heading, subtitle, optional illustration,
- * optional action button, and optional link.
- */
 export const EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(
   function EmptyState(
     {
       action,
       className,
-      headingAs,
       illustration,
       illustrationDescription,
       link,
@@ -125,17 +112,15 @@ export const EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(
       }
     }
 
-    const HeadingComponent = headingAs ?? Heading;
-
     const contentNode = (
       <Section className={`${blockClass}__content`}>
-        <HeadingComponent
+        <Heading
           className={cx(
             `${blockClass}__heading`,
             `${blockClass}__heading--${size}`
           )}>
           {title}
-        </HeadingComponent>
+        </Heading>
         {subtitle && (
           <p
             className={cx(`${blockClass}__subtitle`, {
@@ -183,9 +168,6 @@ EmptyState.propTypes = {
 
   /** Optional class name applied to the root element. */
   className: PropTypes.string,
-
-  /** Override the heading element level. */
-  headingAs: PropTypes.elementType,
 
   /** Illustration src string or component. */
   illustration: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
