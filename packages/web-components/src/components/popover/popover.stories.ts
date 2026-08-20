@@ -17,6 +17,10 @@ import '../checkbox';
 import { iconLoader } from '../../globals/internal/icon-loader';
 
 import styles from './popover-story.scss?lit';
+
+const autoAlignStoryContainerStyle =
+  'display: grid; place-items: center; width: 200vw; min-width: 1200px; height: 200vh; min-height: 1200px;';
+
 const sharedArgTypes = {
   align: {
     control: 'select',
@@ -200,8 +204,7 @@ export const ExperimentalAutoAlign = {
       <style>
         ${styles}
       </style>
-      <div
-        style="display: grid; place-items: center; width: 5000px; height: 5000px;">
+      <div style="${autoAlignStoryContainerStyle}">
         <cds-popover
           ?open=${args.open}
           ?caret=${args.caret}
@@ -482,8 +485,7 @@ export const TabTipExperimentalAutoAlign = {
       <style>
         ${styles}
       </style>
-      <div
-        style="display: grid; place-items: center; width: 5000px; height: 5000px;">
+      <div style="${autoAlignStoryContainerStyle}">
         <cds-popover
           ?open=${args.open}
           ?highContrast=${args.highContrast}

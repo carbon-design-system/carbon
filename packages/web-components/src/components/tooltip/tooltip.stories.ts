@@ -17,6 +17,9 @@ import styles from './tooltip-story.scss?lit';
 import OverflowMenuVertical16 from '@carbon/icons/es/overflow-menu--vertical/16.js';
 import '../button';
 
+const autoAlignStoryContainerStyle =
+  'display: grid; place-items: center; width: 200vw; min-width: 1200px; height: 200vh; min-height: 1200px;';
+
 const defaultArgs = {
   align: POPOVER_ALIGNMENT.TOP,
   closeOnActivation: false,
@@ -196,8 +199,7 @@ export const ExperimentalAutoAlign = {
       });
     });
     return html`
-      <div
-        style="display: grid; place-items: center; width: 5000px; height: 5000px;">
+      <div style="${autoAlignStoryContainerStyle}">
         <cds-tooltip
           ?defaultOpen=${defaultOpen}
           .dropShadow=${dropShadow}

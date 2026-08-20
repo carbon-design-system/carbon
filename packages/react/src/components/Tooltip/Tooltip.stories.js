@@ -99,6 +99,15 @@ export const Alignment = (args) => {
   );
 };
 
+const autoAlignStoryContainerStyle = {
+  display: 'grid',
+  placeItems: 'center',
+  width: '200vw',
+  minWidth: '1200px',
+  height: '200vh',
+  minHeight: '1200px',
+};
+
 export const ExperimentalAutoAlign = (args) => {
   const ref = useRef();
   const tooltipLabel =
@@ -108,13 +117,7 @@ export const ExperimentalAutoAlign = (args) => {
     ref?.current?.scrollIntoView({ block: 'center', inline: 'center' });
   });
   return (
-    <div
-      style={{
-        display: 'grid',
-        placeItems: 'center',
-        width: '5000px',
-        height: '5000px',
-      }}>
+    <div style={autoAlignStoryContainerStyle}>
       <Tooltip label={tooltipLabel} align="top" autoAlign {...args}>
         <Button ref={ref}>This button has a tooltip</Button>
       </Tooltip>

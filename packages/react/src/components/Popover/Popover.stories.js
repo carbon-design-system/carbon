@@ -259,6 +259,15 @@ const autoAlignArgTypes = {
   },
 };
 
+const autoAlignStoryContainerStyle = {
+  display: 'grid',
+  placeItems: 'center',
+  width: '200vw',
+  minWidth: '1200px',
+  height: '200vh',
+  minHeight: '1200px',
+};
+
 export const ExperimentalAutoAlign = (args) => {
   const [open, setOpen] = useState(true);
   const ref = useRef();
@@ -268,13 +277,7 @@ export const ExperimentalAutoAlign = (args) => {
   });
 
   return (
-    <div
-      style={{
-        display: 'grid',
-        placeItems: 'center',
-        width: '5000px',
-        height: '5000px',
-      }}>
+    <div style={autoAlignStoryContainerStyle}>
       <Popover
         open={open}
         align="top"
@@ -403,13 +406,7 @@ export const TabTipExperimentalAutoAlign = () => {
   });
 
   return (
-    <div
-      style={{
-        display: 'grid',
-        placeItems: 'center',
-        width: '5000px',
-        height: '5000px',
-      }}>
+    <div style={autoAlignStoryContainerStyle}>
       <Popover open={open} align="bottom-right" autoAlign ref={ref} isTabTip>
         <div className="playground-trigger">
           <CheckboxIcon
