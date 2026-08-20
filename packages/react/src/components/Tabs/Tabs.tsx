@@ -479,6 +479,14 @@ function TabList({
   const [isScrollable, setIsScrollable] = useState(false);
   const [scrollLeft, setScrollLeft] = useState<number>(0);
 
+  // Read the document direction live at each call site so the component
+  // works correctly regardless of when dir is set relative to mount.
+  const getIsRtl = useCallback(
+    () =>
+      typeof document !== 'undefined' && document.documentElement.dir === 'rtl',
+    []
+  );
+
   const hasSecondaryLabelTabs =
     contained &&
     Children.toArray(children).some(
@@ -517,17 +525,19 @@ function TabList({
   // Previous Button
   // VISIBLE IF:
   //   SCROLLABLE
-  //   AND SCROLL_LEFT > 0
+  //   AND normalised SCROLL_LEFT > 0  (i.e. not at the logical start)
   //
   // Next Button
   // VISIBLE IF:
   //   SCROLLABLE
-  //   AND SCROLL_LEFT + CLIENT_WIDTH < SCROLL_WIDTH
+  //   AND normalised SCROLL_LEFT + CLIENT_WIDTH < SCROLL_WIDTH  (i.e. not at the logical end)
   const [isNextButtonVisible, setIsNextButtonVisible] = useState(
     ref.current
       ? scrollLeft + ref.current.clientWidth < ref.current.scrollWidth
       : false
   );
+
+  const [isPreviousButtonVisible, setIsPreviousButtonVisible] = useState(false);
 
   const updateOverflowState = useCallback(() => {
     if (!containerRef.current || !ref.current) {
@@ -537,17 +547,17 @@ function TabList({
     // adding 1 in calculations for Firefox support
     const hasOverflow =
       ref.current.scrollWidth > containerRef.current.clientWidth + 1;
+    const normalizedLeft = getNormalizedScrollLeft(ref.current, getIsRtl());
     setIsNextButtonVisible(
       hasOverflow &&
-        ref.current.scrollLeft + ref.current.clientWidth + 1 <
-          ref.current.scrollWidth
+        normalizedLeft + ref.current.clientWidth + 1 < ref.current.scrollWidth
     );
+    // Use the live normalised position (not debounced scrollLeft state) so
+    // the previous button reacts immediately during trackpad scrolling.
+    setIsPreviousButtonVisible(hasOverflow && normalizedLeft > 0);
     setIsScrollable(hasOverflow);
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const isPreviousButtonVisible = ref.current
-    ? isScrollable && scrollLeft > 0
-    : false;
   const previousButtonClasses = cx(
     `${prefix}--tab--overflow-nav-button`,
     `${prefix}--tab--overflow-nav-button--previous`,
@@ -564,28 +574,22 @@ function TabList({
   );
 
   const tabs = useRef<TabElement[]>([]);
-  const debouncedUpdateScroll = useMemo(
-    () =>
-      debounce(() => {
-        if (ref.current) {
-          setScrollLeft(ref.current.scrollLeft);
-        }
-      }, scrollDebounceWait),
+  const debouncedUpdateOverflow = useMemo(
+    () => debounce(updateOverflowState, scrollDebounceWait),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [scrollDebounceWait]
   );
 
   useEffect(() => {
     return () => {
-      debouncedUpdateScroll.cancel();
+      debouncedUpdateOverflow.cancel();
     };
-  }, [debouncedUpdateScroll]);
+  }, [debouncedUpdateOverflow]);
 
   const handleScroll = useCallback(() => {
-    // Keep the overflow controls in sync with smooth scrolling while the
-    // scroll position state continues to respect scrollDebounceWait.
     updateOverflowState();
-    debouncedUpdateScroll();
-  }, [debouncedUpdateScroll, updateOverflowState]);
+    debouncedUpdateOverflow();
+  }, [debouncedUpdateOverflow, updateOverflowState]);
 
   function onKeyDown(event: KeyboardEvent) {
     if (
@@ -640,23 +644,40 @@ function TabList({
       // The width of the "scroll buttons"
       const { width: tabWidth } = tab.getBoundingClientRect();
 
-      // The start and end position of the selected tab
-      const start = tab.offsetLeft;
-      const end = tab.offsetLeft + tabWidth;
+      // The logical (normalised) scroll position, always in [0, maxScroll]
+      const normalizedLeft = getNormalizedScrollLeft(ref.current, getIsRtl());
+
+      // The start and end position of the selected tab.
+      // In RTL, tabs are laid out from the right, so offsetLeft for a tab
+      // near the logical "start" is large. We convert to a logical offset
+      // measured from the logical start (right edge in RTL).
+      let start: number;
+      let end: number;
+      if (getIsRtl()) {
+        // offsetLeft is measured from the physical left edge.
+        // logical start offset = container scrollWidth - (offsetLeft + tabWidth)
+        start = ref.current.scrollWidth - (tab.offsetLeft + tabWidth);
+        end = start + tabWidth;
+      } else {
+        start = tab.offsetLeft;
+        end = tab.offsetLeft + tabWidth;
+      }
 
       // The start and end of the visible area for the tabs
-      const visibleStart = ref.current.scrollLeft + buttonWidth;
-      const visibleEnd =
-        ref.current.scrollLeft + ref.current.clientWidth - buttonWidth;
+      const visibleStart = normalizedLeft + buttonWidth;
+      const visibleEnd = normalizedLeft + ref.current.clientWidth - buttonWidth;
+      const maxScroll = getMaxScroll(ref.current);
 
       // The beginning of the tab is clipped and not visible
       if (start < visibleStart) {
-        setScrollLeft(start - buttonWidth);
+        setScrollLeft(Math.max(start - buttonWidth, 0));
       }
 
       // The end of the tab is clipped and not visible
       if (end > visibleEnd) {
-        setScrollLeft(end + buttonWidth - ref.current.clientWidth);
+        setScrollLeft(
+          Math.min(end + buttonWidth - ref.current.clientWidth, maxScroll)
+        );
       }
     }
   }
@@ -726,9 +747,9 @@ function TabList({
   // updates scroll location for all scroll behavior.
   useIsomorphicEffect(() => {
     if (scrollLeft !== null && ref.current) {
-      ref.current.scrollLeft = scrollLeft;
+      setNormalizedScrollLeft(ref.current, scrollLeft, getIsRtl());
     }
-  }, [scrollLeft]);
+  }, [scrollLeft]);  
 
   // scroll manual tabs when active index changes (focus outline movement)
   useIsomorphicEffect(() => {
@@ -749,6 +770,7 @@ function TabList({
   usePressable(previousButton, {
     onPress({ longPress }) {
       if (!longPress && ref.current) {
+        // scrollLeft state is a normalised [0, maxScroll] value; clamp to 0.
         setScrollLeft(
           Math.max(
             scrollLeft - (ref.current.scrollWidth / tabs.current.length) * 1.5,
@@ -758,25 +780,41 @@ function TabList({
       }
     },
     onLongPress() {
-      return createLongPressBehavior(ref, 'backward', setScrollLeft);
+      return createLongPressBehavior(
+        ref,
+        'backward',
+        setScrollLeft,
+        getIsRtl()
+      );
     },
   });
 
   usePressable(nextButton, {
     onPress({ longPress }) {
       if (!longPress && ref.current) {
+        // scrollLeft state is a normalised [0, maxScroll] value; clamp to maxScroll.
         setScrollLeft(
           Math.min(
             scrollLeft + (ref.current.scrollWidth / tabs.current.length) * 1.5,
-            ref.current.scrollWidth - ref.current.clientWidth
+            getMaxScroll(ref.current)
           )
         );
       }
     },
     onLongPress() {
-      return createLongPressBehavior(ref, 'forward', setScrollLeft);
+      return createLongPressBehavior(ref, 'forward', setScrollLeft, getIsRtl());
     },
   });
+
+  // In RTL the --previous button is physically on the right (inset-inline-start)
+  // and --next is on the left (inset-inline-end). Swap the classes so the
+  // correct hidden/visible state is applied to the correct physical button.
+  const leftButtonClasses = getIsRtl()
+    ? nextButtonClasses
+    : previousButtonClasses;
+  const rightButtonClasses = getIsRtl()
+    ? previousButtonClasses
+    : nextButtonClasses;
 
   return (
     <div ref={containerRef} className={className}>
@@ -785,7 +823,7 @@ function TabList({
         tabIndex={-1}
         aria-label="Scroll left"
         ref={previousButton}
-        className={previousButtonClasses}
+        className={leftButtonClasses}
         type="button"
         {...leftOverflowButtonProps}>
         <ChevronLeft />
@@ -824,7 +862,7 @@ function TabList({
         tabIndex={-1}
         aria-label="Scroll right"
         ref={nextButton}
-        className={nextButtonClasses}
+        className={rightButtonClasses}
         type="button"
         {...rightOverflowButtonProps}>
         <ChevronRight />
@@ -1177,6 +1215,45 @@ TabListVertical.propTypes = {
   size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
 };
 
+// In RTL mode, browsers disagree on the sign/direction of scrollLeft:
+//   - Chrome/Edge (Blink): starts at 0, goes negative toward -(maxScroll)
+//   - Firefox/Safari:      starts at maxScroll, goes toward 0
+// We normalise to a logical [0, maxScroll] range throughout so all
+// scroll arithmetic can be written once, direction-agnostic.
+function getMaxScroll(el: HTMLElement) {
+  return el.scrollWidth - el.clientWidth;
+}
+
+function getNormalizedScrollLeft(el: HTMLElement, isRtl: boolean) {
+  const raw = el.scrollLeft;
+  if (!isRtl) return raw;
+  // Blink RTL: scrollLeft is 0 or negative
+  if (raw <= 0) return -raw;
+  // Firefox/Safari RTL: scrollLeft runs from maxScroll down to 0
+  return getMaxScroll(el) - raw;
+}
+
+function setNormalizedScrollLeft(
+  el: HTMLElement,
+  value: number,
+  isRtl: boolean
+) {
+  if (!isRtl) {
+    el.scrollLeft = value;
+    return;
+  }
+  // Detect convention by checking current scrollLeft sign.
+  // When value === 0 both conventions produce el.scrollLeft = 0, so the
+  // branch doesn't matter; for any positive value the sign disambiguates.
+  if (el.scrollLeft <= 0) {
+    // Blink: expects negative values
+    el.scrollLeft = -value;
+  } else {
+    // Firefox/Safari: expects (maxScroll - value)
+    el.scrollLeft = getMaxScroll(el) - value;
+  }
+}
+
 /**
  * Helper function to set up the behavior when a button is "long pressed".
  * This function will take a ref to the tablist, a direction, and a setter
@@ -1188,7 +1265,8 @@ TabListVertical.propTypes = {
 function createLongPressBehavior(
   ref: RefObject<HTMLElement | null>,
   direction: 'forward' | 'backward',
-  setScrollLeft
+  setScrollLeft,
+  isRtl = false
 ) {
   const node = ref.current;
   if (!node) {
@@ -1200,7 +1278,16 @@ function createLongPressBehavior(
   const defaultScrollBehavior = node?.style['scroll-behavior'];
   node.style['scroll-behavior'] = 'auto';
 
-  const scrollDelta = direction === 'forward' ? 5 : -5;
+  // In RTL/Blink, scrollLeft is 0 at the logical start and goes negative
+  // toward -(maxScroll), so "forward" needs a negative delta.
+  // In LTR (and Firefox/Safari RTL), forward is always positive.
+  const isBlinkRtl = isRtl && node.scrollLeft <= 0;
+  let scrollDelta: number;
+  if (direction === 'forward') {
+    scrollDelta = isBlinkRtl ? -5 : 5;
+  } else {
+    scrollDelta = isBlinkRtl ? 5 : -5;
+  }
   let frameId: number | null = null;
 
   function tick() {
@@ -1218,9 +1305,16 @@ function createLongPressBehavior(
     // Restore the previous scroll behavior
     node.style['scroll-behavior'] = defaultScrollBehavior;
 
-    // Make sure that our `scrollLeft` value is in sync with the existing
-    // `ref` after our requestAnimationFrame loop above
-    setScrollLeft(node.scrollLeft);
+    // Sync the normalised scrollLeft state with the DOM after the rAF loop.
+    // getNormalizedScrollLeft logic inlined here to avoid a closure dependency.
+    const raw = node.scrollLeft;
+    const maxScroll = node.scrollWidth - node.clientWidth;
+    const normalized = isRtl
+      ? raw <= 0
+        ? -raw // Blink RTL
+        : maxScroll - raw // Firefox/Safari RTL
+      : raw;
+    setScrollLeft(normalized);
 
     if (frameId) {
       cancelAnimationFrame(frameId);
