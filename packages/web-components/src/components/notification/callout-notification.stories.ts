@@ -65,8 +65,6 @@ const argTypes = {
 };
 
 export const Default = {
-  args,
-  argTypes,
   render: (args) => {
     const {
       actionButtonLabel,
@@ -97,18 +95,36 @@ export const Default = {
 };
 
 export const WithInteractiveElements = {
-  render: () => {
+  args: {
+    actionButtonLabel: '',
+    kind: NOTIFICATION_KIND.INFO,
+    lowContrast: true,
+    statusIconDescription: 'notification',
+    title: 'Notification title',
+    titleId: 'callout-title-interactive',
+  },
+  parameters: {
+    controls: {
+      include: [
+        'kind',
+        'lowContrast',
+        'statusIconDescription',
+        'title',
+        'titleId',
+      ],
+    },
+  },
+  render: ({ kind, lowContrast, statusIconDescription, title, titleId }) => {
     return html`
       <cds-callout-notification
-        kind="${NOTIFICATION_KIND.INFO}"
-        title="Notification title"
-        title-id="callout-title-interactive"
-        ?low-contrast="${true}">
+        kind="${ifDefined(kind)}"
+        title="${ifDefined(title)}"
+        title-id="${ifDefined(titleId)}"
+        status-icon-description="${ifDefined(statusIconDescription)}"
+        ?low-contrast="${lowContrast}">
         <div class="${prefix}--actionable-notification__subtitle">
           Additional text can describe the notification, or a link to
-          <a href="#" aria-describedby="callout-title-interactive"
-            >learn more</a
-          >
+          <a href="#" aria-describedby="${ifDefined(titleId)}">learn more</a>
         </div>
       </cds-callout-notification>
     `;
@@ -117,6 +133,8 @@ export const WithInteractiveElements = {
 
 const meta = {
   title: 'Components/Notifications/Callout',
+  args,
+  argTypes,
   parameters: {
     docs: {
       page: storyDocs,
