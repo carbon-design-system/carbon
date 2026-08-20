@@ -46,8 +46,10 @@ $css--plex: true !default;
     cursor: not-allowed;
     opacity: 0.5;
 
-    &:hover {
-      background: transparent;
+    @media (any-hover: hover) {
+      &:hover {
+        background: transparent;
+      }
     }
   }
 
@@ -60,9 +62,11 @@ $css--plex: true !default;
       opacity: 0.5;
     }
 
-    &:hover {
-      svg {
-        fill: $layer-selected-inverse;
+    @media (any-hover: hover) {
+      &:hover {
+        svg {
+          fill: $layer-selected-inverse;
+        }
       }
     }
   }
