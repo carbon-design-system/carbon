@@ -10,6 +10,7 @@
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import type { Args, Meta } from '@storybook/web-components';
+import { action } from 'storybook/actions';
 import './index';
 import styles from './story-styles.scss?lit';
 import {
@@ -133,6 +134,24 @@ const meta: Meta = {
   component: 'cds-edit-in-place',
   argTypes,
   render,
+  decorators: [
+    (story) => html`
+      <style>
+        ${styles}
+      </style>
+      <div class="ccs-sb--display-box ${storyClass}__viewport">
+        <div class="ccs-sb--display-box__indicator">
+          <div class="ccs-sb--display-box__message">
+            width available to component<br />(use containerWidth control to
+            adjust)
+          </div>
+          <div class="ccs-sb--display-box__indicator--left"></div>
+          <div class="ccs-sb--display-box__indicator--right"></div>
+        </div>
+        ${story()}
+      </div>
+    `,
+  ],
 };
 
 export default meta;
@@ -150,6 +169,47 @@ export const Invalid = {
 
 export const CustomBlurFunction = {
   args: defaultArgs,
+  render: (args: Args) => {
+    return html`
+      <style>
+        ${styles}
+      </style>
+      <div
+        class="${storyClass}__viewport"
+        style="width: ${args.containerWidth}px;">
+        <cds-edit-in-place
+          id=${ifDefined(args.id)}
+          cancel-label=${ifDefined(args.cancelLabel)}
+          ?edit-always-visible=${args.editAlwaysVisible}
+          edit-label=${ifDefined(args.editLabel)}
+          ?inherit-typography=${args.inheritTypography}
+          ?invalid=${args.invalid}
+          invalid-text=${ifDefined(args.invalidText)}
+          label-text=${ifDefined(args.labelText)}
+          placeholder=${ifDefined(args.placeholder)}
+          ?read-only=${args.readOnly}
+          read-only-label=${ifDefined(args.readOnlyLabel)}
+          read-only-toggletip-text=${ifDefined(args.readOnlyToggleTipText)}
+          save-label=${ifDefined(args.saveLabel)}
+          size=${ifDefined(args.size)}
+          toggletip-alignment=${ifDefined(args.toggleTipAlignment)}
+          tooltip-alignment=${ifDefined(args.tooltipAlignment)}
+          value=${ifDefined(args.value)}
+          @cds-edit-in-place-change=${action('cds-edit-in-place-change')}
+          @cds-edit-in-place-save=${action('cds-edit-in-place-save')}
+          @cds-edit-in-place-cancel=${action('cds-edit-in-place-cancel')}
+          @cds-edit-in-place-blur=${(e: CustomEvent) => {
+            const shouldSaveValue = false;
+            if (shouldSaveValue) {
+              action('cds-edit-in-place-save')(e.detail);
+            } else {
+              action('cds-edit-in-place-cancel')(e.detail);
+            }
+            action('cds-edit-in-place-blur')(e.detail);
+          }}></cds-edit-in-place>
+      </div>
+    `;
+  },
 };
 
 export const ReadOnly = {
