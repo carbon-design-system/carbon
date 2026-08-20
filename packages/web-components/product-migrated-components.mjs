@@ -14,12 +14,14 @@
 export const productMigratedStoryGlobs = [
   '../src/components/action-set/action-set.stories.ts',
   '../src/components/action-set/*.mdx',
-  '../src/components/truncated-text/truncated-text.stories.ts',
-  '../src/components/truncated-text/*.mdx',
+  '../src/components/coachmark/coachmark.stories.ts',
+  '../src/components/coachmark/*.mdx',
   '../src/components/resizer/resizer.stories.ts',
   '../src/components/resizer/*.mdx',
   '../src/components/side-panel/side-panel.stories.ts',
   '../src/components/side-panel/*.mdx',
+  '../src/components/truncated-text/truncated-text.stories.ts',
+  '../src/components/truncated-text/*.mdx',
 ];
 
 /**
@@ -35,6 +37,7 @@ export const productMigratedStoryGlobs = [
  *   2. Uncomment its export in src/index.ts.
  */
 export const excludeProductsComponents = [
+  'src/components/coachmark/**/*',
   'src/components/resizer/**/*',
   'src/components/action-set/**/*',
   'src/components/truncated-text/**/*',
