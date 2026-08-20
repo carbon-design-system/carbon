@@ -422,6 +422,8 @@ class CDSEditInPlace extends HostListenerMixin(LitElement) {
    * Handle clicks outside the component
    */
   @HostListener('document:click')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
+  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleDocumentClick = (e: MouseEvent) => {
     // Only handle if we're in focused mode
     if (!this._focused) {
