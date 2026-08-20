@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2018, 2025
+// Copyright IBM Corp. 2018, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -13,6 +13,7 @@
 @use 'breadcrumb';
 @use 'button';
 @use 'card';
+@use 'coachmark';
 @use 'chat-button';
 @use 'checkbox';
 @use 'code-snippet';
@@ -57,6 +58,7 @@
 @use 'notification';
 @use 'number-input';
 @use 'overflow-menu';
+@use 'OptionsTile';
 @use 'page-header';
 @use 'pagination';
 @use 'pagination-nav';
@@ -86,3 +88,5 @@
 @use 'treeview';
 @use 'truncated-text';
 @use 'ui-shell';
+@use 'EditInPlace';
+@use 'user-avatar';
