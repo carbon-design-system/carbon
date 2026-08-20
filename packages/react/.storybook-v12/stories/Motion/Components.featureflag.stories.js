@@ -8,6 +8,7 @@
 import React, { useState } from 'react';
 import { Information } from '@carbon/icons-react';
 import Button from '../../../src/components/Button';
+import Dropdown from '../../../src/components/Dropdown';
 import { FeatureFlags } from '../../../src/components/FeatureFlags';
 import { Popover, PopoverContent } from '../../../src/components/Popover';
 import { TextInput } from '../../../src/components/TextInput';
@@ -30,10 +31,18 @@ export default {
   },
 };
 
+const dropdownItems = [
+  { id: 'option-1', text: 'Option 1' },
+  { id: 'option-2', text: 'Option 2' },
+  { id: 'option-3', text: 'Option 3' },
+  { id: 'option-4', text: 'Option 4' },
+  { id: 'option-5', text: 'Option 5' },
+];
+
 /**
- * All four components that have motion wired under `enable-v12-motion`:
- * TextInput, Popover, ToggleTip, and Tooltip — shown together in a single
- * story so reviewers can exercise them side by side.
+ * All five components that have motion wired under `enable-v12-motion`:
+ * TextInput, Dropdown, Popover, ToggleTip, and Tooltip — shown together in a
+ * single story so reviewers can exercise them side by side.
  */
 export const AllComponents = () => {
   const [popoverOpen, setPopoverOpen] = useState(false);
@@ -61,6 +70,26 @@ export const AllComponents = () => {
             id="motion-text-input"
             labelText="Label"
             placeholder="Placeholder text"
+            helperText="Helper text"
+          />
+        </div>
+
+        {/* Dropdown */}
+        <div style={{ maxInlineSize: '32rem' }}>
+          <h4
+            style={{
+              marginBlockEnd: '0.75rem',
+              fontSize: '0.875rem',
+              fontWeight: 600,
+            }}>
+            Dropdown
+          </h4>
+          <Dropdown
+            id="motion-dropdown"
+            titleText="Label"
+            label="Choose an option"
+            items={dropdownItems}
+            itemToString={(item) => (item ? item.text : '')}
             helperText="Helper text"
           />
         </div>
@@ -158,4 +187,4 @@ export const AllComponents = () => {
 };
 
 AllComponents.storyName =
-  'TextInput, Popover, Toggletip, Tooltip — enable-v12-motion';
+  'TextInput, Dropdown, Popover, Toggletip, Tooltip — enable-v12-motion';

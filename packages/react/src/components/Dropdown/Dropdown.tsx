@@ -57,6 +57,8 @@ import {
   size as floatingSize,
 } from '@floating-ui/react';
 import { useFeatureFlag } from '../FeatureFlags';
+import { MotionItem, MotionSurface } from '../../internal/motion/MotionSurface';
+import { MotionContext } from '../../internal/motion/MotionContext';
 import { AILabel } from '../AILabel';
 import {
   defaultItemToString,
@@ -325,7 +327,7 @@ const Dropdown = React.forwardRef(
     const enableFloatingStyles = useFeatureFlag(
       'enable-v12-dynamic-floating-styles'
     );
-
+    const enableMotion = useFeatureFlag('enable-v12-motion');
     const { refs, floatingStyles, middlewareData } = useFloating(
       enableFloatingStyles || autoAlign
         ? {
@@ -694,33 +696,94 @@ const Dropdown = React.forwardRef(
           ) : (
             ''
           )}
-          <ListBox.Menu {...menuProps}>
-            {isOpen &&
-              items.map((item, index) => {
-                const itemProps = getItemProps({
-                  item,
-                  index,
-                });
-                const title = itemToString(item);
+          {enableMotion ? (
+            <MotionSurface
+              style={{
+                position: 'absolute',
+                insetInline: 0,
+                zIndex: 9100,
+                transformOrigin: 'top left',
+              }}
+              initial={{ scaleX: 0, scaleY: 0 }}
+              animate={{
+                scaleX: 1,
+                scaleY: 1,
+                transition: {
+                  duration: 0.24,
+                  ease: [0, 0, 0.3, 1] as [number, number, number, number],
+                },
+              }}
+              exit={{
+                scaleX: 0,
+                scaleY: 0,
+                transition: {
+                  duration: 0.11,
+                  ease: [0.4, 0.14, 1, 1] as [number, number, number, number],
+                },
+              }}
+              open={isOpen}>
+              <ListBox.Menu {...menuProps} style={{ position: 'static' }}>
+                <MotionContext stagger={30} settle={80}>
+                  {items.map((item, index) => {
+                    const itemProps = getItemProps({
+                      item,
+                      index,
+                    });
+                    const title = itemToString(item);
 
-                return (
-                  <ListBox.MenuItem
-                    key={itemProps.id}
-                    isActive={selectedItem === item}
-                    isHighlighted={highlightedIndex === index}
-                    title={title}
-                    disabled={itemProps['aria-disabled']}
-                    {...itemProps}>
-                    {itemToElement ? itemToElement(item) : itemToString(item)}
-                    {selectedItem === item && (
-                      <Checkmark
-                        className={`${prefix}--list-box__menu-item__selected-icon`}
-                      />
-                    )}
-                  </ListBox.MenuItem>
-                );
-              })}
-          </ListBox.Menu>
+                    return (
+                      <ListBox.MenuItem
+                        key={itemProps.id}
+                        isActive={selectedItem === item}
+                        isHighlighted={highlightedIndex === index}
+                        title={title}
+                        disabled={itemProps['aria-disabled']}
+                        {...itemProps}>
+                        <MotionItem surface="disclosure">
+                          {itemToElement
+                            ? itemToElement(item)
+                            : itemToString(item)}
+                          {selectedItem === item && (
+                            <Checkmark
+                              className={`${prefix}--list-box__menu-item__selected-icon`}
+                            />
+                          )}
+                        </MotionItem>
+                      </ListBox.MenuItem>
+                    );
+                  })}
+                </MotionContext>
+              </ListBox.Menu>
+            </MotionSurface>
+          ) : (
+            <ListBox.Menu {...menuProps}>
+              {isOpen &&
+                items.map((item, index) => {
+                  const itemProps = getItemProps({
+                    item,
+                    index,
+                  });
+                  const title = itemToString(item);
+
+                  return (
+                    <ListBox.MenuItem
+                      key={itemProps.id}
+                      isActive={selectedItem === item}
+                      isHighlighted={highlightedIndex === index}
+                      title={title}
+                      disabled={itemProps['aria-disabled']}
+                      {...itemProps}>
+                      {itemToElement ? itemToElement(item) : itemToString(item)}
+                      {selectedItem === item && (
+                        <Checkmark
+                          className={`${prefix}--list-box__menu-item__selected-icon`}
+                        />
+                      )}
+                    </ListBox.MenuItem>
+                  );
+                })}
+            </ListBox.Menu>
+          )}
         </ListBox>
         {!inline && !isFluid && !normalizedProps.validation && helper}
       </div>
