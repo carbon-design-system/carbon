@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2023
+// Copyright IBM Corp. 2016, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -10,6 +10,8 @@
 @use '../../type' as *;
 @use '../../motion' as *;
 @use '../../config' as *;
+@use '../../border-radius' as *;
+@use '../../feature-flags' as *;
 @use '../../utilities/component-tokens' as *;
 @use '../../utilities/convert';
 @use '../../utilities/high-contrast-mode' as *;
@@ -54,6 +56,10 @@
     padding-inline: $spacing-03;
     vertical-align: middle;
     word-break: break-word;
+
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-04;
+    }
 
     &.#{$prefix}--tag--lg {
       padding-inline-start: $spacing-04;
@@ -314,6 +320,10 @@
       background-color $duration-fast-01 motion(standard, productive),
       box-shadow $duration-fast-01 motion(standard, productive);
 
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-04;
+    }
+
     svg {
       fill: currentColor;
     }
@@ -341,7 +351,6 @@
 
   .#{$prefix}--tag__close-icon:focus {
     z-index: 99999;
-    border-radius: 50%;
     box-shadow: inset 0 0 0 1px $focus;
     outline: none;
   }
@@ -365,6 +374,18 @@
 
   .#{$prefix}--tag--sm .#{$prefix}--tag__close-icon {
     margin-inline-start: convert.to-rem(5px);
+  }
+
+  @if enabled('enable-v12-release') {
+    .#{$prefix}--tag--sm,
+    .#{$prefix}--tag.#{$prefix}--layout--size-sm {
+      border-radius: $border-radius-02;
+    }
+
+    .#{$prefix}--tag--sm .#{$prefix}--tag__close-icon,
+    .#{$prefix}--tag.#{$prefix}--layout--size-sm .#{$prefix}--tag__close-icon {
+      border-radius: $border-radius-02;
+    }
   }
 
   // Skeleton state
