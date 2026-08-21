@@ -22,7 +22,7 @@ const defaultArgs = {
 
 const controls = {
   gap: {
-    control: 'text',
+    control: 'select',
     description:
       'Provide either a spacing scale step or, when enabled, a custom gap value.',
   },
