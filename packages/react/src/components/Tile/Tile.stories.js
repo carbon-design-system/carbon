@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -30,13 +30,189 @@ import {
   View,
   FolderOpen,
   Folders,
-  Information,
 } from '@carbon/icons-react';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
-import { Tooltip } from '../Tooltip';
+import { action } from 'storybook/actions';
 
 import mdx from './Tile.mdx';
+
+const tileArgs = {
+  light: false,
+  onClick: action('onClick'),
+};
+
+const tileArgTypes = {
+  light: {
+    control: 'boolean',
+  },
+  onClick: {
+    action: 'onClick',
+  },
+};
+
+const tileControls = Object.keys(tileArgTypes);
+
+const clickableArgs = {
+  clicked: false,
+  disabled: false,
+  href: 'https://www.carbondesignsystem.com/',
+  light: false,
+  rel: '',
+  title: '',
+  onClick: action('onClick'),
+  onKeyDown: action('onKeyDown'),
+};
+
+const clickableArgTypes = {
+  clicked: {
+    control: 'boolean',
+  },
+  disabled: {
+    control: 'boolean',
+  },
+  href: {
+    control: 'text',
+  },
+  light: {
+    control: 'boolean',
+  },
+  rel: {
+    control: 'text',
+  },
+  title: {
+    control: 'text',
+  },
+  onClick: {
+    action: 'onClick',
+  },
+  onKeyDown: {
+    action: 'onKeyDown',
+  },
+};
+
+const clickableControls = Object.keys(clickableArgTypes);
+
+const selectableArgs = {
+  disabled: false,
+  light: false,
+  selected: false,
+  tabIndex: 0,
+  title: 'Selectable tile',
+  onChange: action('onChange'),
+  onClick: action('onClick'),
+  onKeyDown: action('onKeyDown'),
+};
+
+const selectableArgTypes = {
+  disabled: {
+    control: 'boolean',
+  },
+  light: {
+    control: 'boolean',
+  },
+  selected: {
+    control: 'boolean',
+  },
+  tabIndex: {
+    control: 'number',
+  },
+  title: {
+    control: 'text',
+  },
+  onChange: {
+    action: 'onChange',
+  },
+  onClick: {
+    action: 'onClick',
+  },
+  onKeyDown: {
+    action: 'onKeyDown',
+  },
+};
+
+const selectableControls = Object.keys(selectableArgTypes);
+
+const radioArgs = {
+  disabled: false,
+  legend: 'Radio Tile Group',
+  name: 'radio tile group',
+  required: false,
+  valueSelected: 'default-selected',
+  onChange: action('onChange'),
+};
+
+const radioArgTypes = {
+  disabled: {
+    control: 'boolean',
+  },
+  legend: {
+    control: 'text',
+  },
+  name: {
+    control: 'text',
+  },
+  required: {
+    control: 'boolean',
+  },
+  valueSelected: {
+    control: 'select',
+    options: ['standard', 'default-selected', 'selected'],
+  },
+  onChange: {
+    action: 'onChange',
+  },
+};
+
+const radioControls = Object.keys(radioArgTypes);
+
+const expandableArgs = {
+  expanded: false,
+  light: false,
+  tileCollapsedIconText: 'Interact to expand tile',
+  tileCollapsedLabel: '',
+  tileExpandedIconText: 'Interact to collapse tile',
+  tileExpandedLabel: '',
+  tileMaxHeight: 0,
+  tilePadding: 0,
+  onClick: action('onClick'),
+  onKeyUp: action('onKeyUp'),
+};
+
+const expandableArgTypes = {
+  expanded: {
+    control: 'boolean',
+  },
+  light: {
+    control: 'boolean',
+  },
+  tileCollapsedIconText: {
+    control: 'text',
+  },
+  tileCollapsedLabel: {
+    control: 'text',
+  },
+  tileExpandedIconText: {
+    control: 'text',
+  },
+  tileExpandedLabel: {
+    control: 'text',
+  },
+  tileMaxHeight: {
+    control: 'number',
+  },
+  tilePadding: {
+    control: 'number',
+  },
+  onClick: {
+    action: 'onClick',
+  },
+  onKeyUp: {
+    action: 'onKeyUp',
+  },
+};
+
+const expandableControls = Object.keys(expandableArgTypes);
 
 export default {
   title: 'Components/Tile',
@@ -49,48 +225,6 @@ export default {
     TileGroup,
     TileAboveTheFoldContent,
     TileBelowTheFoldContent,
-  },
-  argTypes: {
-    light: {
-      control: {
-        type: 'boolean',
-      },
-      description: 'Light variant',
-      table: {
-        defaultValue: { summary: 'false' },
-      },
-    },
-    slug: {
-      table: {
-        disable: true,
-      },
-    },
-    decorator: {
-      table: {
-        disable: true,
-      },
-    },
-    href: {
-      control: { type: 'text' },
-    },
-    clicked: {
-      control: { type: 'boolean' },
-    },
-    disabled: {
-      control: {
-        type: 'boolean',
-      },
-    },
-    selected: {
-      control: {
-        type: 'boolean',
-      },
-    },
-    title: {
-      control: {
-        type: 'text',
-      },
-    },
   },
   parameters: {
     docs: {
@@ -111,13 +245,15 @@ export const Default = (args) => {
 };
 
 Default.args = {
-  light: false,
-  clicked: false,
-  disabled: false,
-  hasRoundedCorners: false,
-  href: '',
-  selected: false,
-  title: '',
+  ...tileArgs,
+};
+
+Default.argTypes = tileArgTypes;
+
+Default.parameters = {
+  controls: {
+    include: tileControls,
+  },
 };
 
 export const DefaultWithLayer = (args) => (
@@ -134,7 +270,15 @@ export const DefaultWithLayer = (args) => (
 );
 
 DefaultWithLayer.args = {
-  ...Default.args,
+  ...tileArgs,
+};
+
+DefaultWithLayer.argTypes = tileArgTypes;
+
+DefaultWithLayer.parameters = {
+  controls: {
+    include: tileControls,
+  },
 };
 
 export const Clickable = (args) => {
@@ -146,10 +290,15 @@ export const Clickable = (args) => {
 };
 
 Clickable.args = {
-  ...Default.args,
-  href: 'https://www.carbondesignsystem.com/',
-  disabled: false,
-  clicked: false,
+  ...clickableArgs,
+};
+
+Clickable.argTypes = clickableArgTypes;
+
+Clickable.parameters = {
+  controls: {
+    include: clickableControls,
+  },
 };
 
 export const ClickableWithCustomIcon = (args) => {
@@ -161,7 +310,15 @@ export const ClickableWithCustomIcon = (args) => {
 };
 
 ClickableWithCustomIcon.args = {
-  ...Clickable.args,
+  ...clickableArgs,
+};
+
+ClickableWithCustomIcon.argTypes = clickableArgTypes;
+
+ClickableWithCustomIcon.parameters = {
+  controls: {
+    include: clickableControls,
+  },
 };
 
 export const ClickableWithLayer = (args) => (
@@ -175,7 +332,15 @@ export const ClickableWithLayer = (args) => (
 );
 
 ClickableWithLayer.args = {
-  ...Clickable.args,
+  ...clickableArgs,
+};
+
+ClickableWithLayer.argTypes = clickableArgTypes;
+
+ClickableWithLayer.parameters = {
+  controls: {
+    include: clickableControls,
+  },
 };
 
 export const Selectable = (args) => {
@@ -187,10 +352,15 @@ export const Selectable = (args) => {
 };
 
 Selectable.args = {
-  ...Default.args,
-  selected: false,
-  disabled: false,
-  title: 'title',
+  ...selectableArgs,
+};
+
+Selectable.argTypes = selectableArgTypes;
+
+Selectable.parameters = {
+  controls: {
+    include: selectableControls,
+  },
 };
 
 export const MultiSelect = (args) => {
@@ -210,16 +380,20 @@ export const MultiSelect = (args) => {
 };
 
 MultiSelect.args = {
-  ...Selectable.args,
+  ...selectableArgs,
+};
+
+MultiSelect.argTypes = selectableArgTypes;
+
+MultiSelect.parameters = {
+  controls: {
+    include: selectableControls,
+  },
 };
 
 export const Radio = (args) => {
   return (
-    <TileGroup
-      defaultSelected="default-selected"
-      legend="Radio Tile Group"
-      name="radio tile group"
-      {...args}>
+    <TileGroup {...args}>
       <RadioTile
         id="radio-tile-1"
         value="standard"
@@ -240,25 +414,21 @@ export const Radio = (args) => {
 };
 
 Radio.args = {
-  disabled: false,
+  ...radioArgs,
 };
 
-Radio.argTypes = {
-  disabled: {
-    control: {
-      type: 'boolean',
-    },
+Radio.argTypes = radioArgTypes;
+
+Radio.parameters = {
+  controls: {
+    include: radioControls,
   },
 };
 
 export const RadioWithLayer = (args) => (
   <WithLayer>
     {(layer) => (
-      <TileGroup
-        defaultSelected="default-selected"
-        legend="Radio Tile Group"
-        name={`radio tile group ${layer}`}
-        {...args}>
+      <TileGroup {...args}>
         <RadioTile
           id={`radio-tile-${layer}-1`}
           value="standard"
@@ -274,7 +444,21 @@ export const RadioWithLayer = (args) => (
 );
 
 RadioWithLayer.args = {
-  disabled: false,
+  ...radioArgs,
+};
+
+RadioWithLayer.argTypes = {
+  ...radioArgTypes,
+  valueSelected: {
+    ...radioArgTypes.valueSelected,
+    options: ['standard', 'default-selected'],
+  },
+};
+
+RadioWithLayer.parameters = {
+  controls: {
+    include: radioControls,
+  },
 };
 
 export const Expandable = (args) => {
@@ -293,25 +477,21 @@ export const Expandable = (args) => {
 };
 
 Expandable.args = {
-  ...Default.args,
-  expanded: false,
-  tileCollapsedIconText: 'Interact to Expand tile',
-  tileExpandedIconText: 'Interact to Collapse tile',
+  ...expandableArgs,
 };
 
-Expandable.argTypes = {
-  expanded: { control: 'boolean' },
-  tileCollapsedIconText: { control: 'text' },
-  tileExpandedIconText: { control: 'text' },
+Expandable.argTypes = expandableArgTypes;
+
+Expandable.parameters = {
+  controls: {
+    include: expandableControls,
+  },
 };
 
 export const ExpandableWithInteractive = (args) => {
   return (
     <div style={{ width: '400px' }}>
-      <ExpandableTile
-        onClick={() => console.log('click')}
-        id="expandable-tile-1"
-        {...args}>
+      <ExpandableTile id="expandable-tile-1" {...args}>
         <TileAboveTheFoldContent>
           <div style={{ height: '200px', width: '200px' }}>
             Above the fold content here
@@ -332,11 +512,15 @@ export const ExpandableWithInteractive = (args) => {
 };
 
 ExpandableWithInteractive.args = {
-  ...Expandable.args,
+  ...expandableArgs,
 };
 
-ExpandableWithInteractive.argTypes = {
-  ...Expandable.argTypes,
+ExpandableWithInteractive.argTypes = expandableArgTypes;
+
+ExpandableWithInteractive.parameters = {
+  controls: {
+    include: expandableControls,
+  },
 };
 
 export const ExpandableWithLayer = (args) => {
@@ -359,7 +543,15 @@ export const ExpandableWithLayer = (args) => {
 };
 
 ExpandableWithLayer.args = {
-  ...Expandable.args,
+  ...expandableArgs,
+};
+
+ExpandableWithLayer.argTypes = expandableArgTypes;
+
+ExpandableWithLayer.parameters = {
+  controls: {
+    include: expandableControls,
+  },
 };
 
 const aiLabel = (
@@ -394,15 +586,17 @@ const aiLabel = (
 );
 
 export const withAILabel = {
+  args: {
+    hasRoundedCorners: false,
+  },
   argTypes: {
     hasRoundedCorners: {
-      control: {
-        type: 'boolean',
-      },
+      control: 'boolean',
     },
-    decorator: {
-      description:
-        '**Experimental**: Provide a `decorator` component to be rendered inside the component',
+  },
+  parameters: {
+    controls: {
+      include: ['hasRoundedCorners'],
     },
   },
   render: (args) => (
