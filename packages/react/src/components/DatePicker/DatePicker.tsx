@@ -690,6 +690,19 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
       }
 
       if (match(event, keys.Tab)) {
+        if (
+          !event.shiftKey &&
+          datePickerType === 'range' &&
+          event.target === startInputField.current &&
+          calendar.selectedDates.length === 1 &&
+          endInputField.current
+        ) {
+          event.preventDefault();
+          endInputField.current.focus();
+          lastFocusedField.current = endInputField.current;
+          return;
+        }
+
         if (!event.shiftKey) {
           event.preventDefault();
           calendarContainer.classList.add('open');
