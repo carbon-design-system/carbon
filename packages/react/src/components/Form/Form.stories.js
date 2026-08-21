@@ -6,6 +6,7 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import Checkbox from '../Checkbox';
 import Form from './Form';
 import FormGroup from '../FormGroup';
@@ -60,21 +61,6 @@ const TextInputProps = {
   placeholder: 'Placeholder text',
 };
 
-const PasswordProps = {
-  className: 'some-class',
-  id: 'test3',
-  labelText: 'Password',
-};
-
-const InvalidPasswordProps = {
-  className: 'some-class',
-  id: 'test4',
-  labelText: 'Password',
-  invalid: true,
-  invalidText:
-    'Your password must be at least 6 characters as well as contain at least one uppercase, one lowercase, and one number.',
-};
-
 const textareaProps = {
   labelText: 'Text Area label',
   className: 'some-class',
@@ -97,9 +83,30 @@ export default {
   },
 };
 
-export const Default = () => {
+const formArgs = {
+  className: 'some-class',
+};
+
+const formArgTypes = {
+  className: {
+    control: { type: 'text' },
+  },
+  onSubmit: {
+    action: 'onSubmit',
+  },
+};
+
+export const Default = ({ className, onSubmit }) => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    onSubmit?.(event);
+  };
+
   return (
-    <Form aria-label="sample form">
+    <Form
+      aria-label="sample form"
+      className={className}
+      onSubmit={handleSubmit}>
       <Stack gap={7}>
         <FormGroup className="some-class" legendText="Checkbox heading">
           <Checkbox defaultChecked labelText="Checkbox label" id="checkbox-0" />
@@ -234,6 +241,16 @@ export const Default = () => {
   );
 };
 
+Default.args = formArgs;
+Default.propTypes = {
+  className: PropTypes.string,
+  onSubmit: PropTypes.func,
+};
+Default.argTypes = formArgTypes;
+Default.parameters = {
+  controls: { include: Object.keys(formArgTypes) },
+};
+
 const items = [
   {
     id: 'option-0',
@@ -263,7 +280,11 @@ const items = [
 ];
 
 export const withAILabel = (args) => {
-  const { revertActive, ...rest } = args;
+  const { className, onSubmit, revertActive, ...rest } = args;
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    onSubmit?.(event);
+  };
   const aiLabel = (
     <AILabel className="ai-label-container" revertActive={revertActive}>
       <AILabelContent>
@@ -296,7 +317,10 @@ export const withAILabel = (args) => {
   );
   return (
     <Stack gap={7} className="form-example">
-      <Form aria-label="sample form" className="ai-label-form">
+      <Form
+        aria-label="sample form"
+        className={['ai-label-form', className].filter(Boolean).join(' ')}
+        onSubmit={handleSubmit}>
         <Stack gap={7}>
           <NumberInput {...numberInputProps} decorator={aiLabel} {...rest} />
           <DatePicker datePickerType="single">
@@ -374,7 +398,10 @@ export const withAILabel = (args) => {
         </Stack>
       </Form>
 
-      <FluidForm aria-label="sample ai form" className="fluid-ai-label-form">
+      <FluidForm
+        aria-label="sample ai form"
+        className={['fluid-ai-label-form', className].filter(Boolean).join(' ')}
+        onSubmit={handleSubmit}>
         <div style={{ display: 'flex' }}>
           <FluidDatePicker datePickerType="single" style={{ width: '100%' }}>
             <FluidDatePickerInput
@@ -485,6 +512,7 @@ export const withAILabel = (args) => {
 };
 
 withAILabel.args = {
+  ...formArgs,
   revertActive: false,
   invalid: false,
   invalidText:
@@ -496,6 +524,7 @@ withAILabel.args = {
 };
 
 withAILabel.argTypes = {
+  ...formArgTypes,
   disabled: {
     control: {
       type: 'boolean',
