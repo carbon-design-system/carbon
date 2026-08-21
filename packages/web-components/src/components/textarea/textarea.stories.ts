@@ -301,6 +301,33 @@ export const WithLayer = {
   `,
 };
 
+// TODO: Remove this test story before merging.
+export const TestFlexGrow = {
+  parameters: {
+    controls: {
+      disable: true,
+    },
+  },
+  render: () => html`
+    <div
+      style="display: flex; flex-direction: column; block-size: 24rem; inline-size: 24rem;">
+      <div
+        style="flex: 0 0 auto; padding: 0.5rem 0; border-block-end: 1px solid var(--cds-border-subtle);">
+        Top
+      </div>
+      <cds-textarea
+        hide-label
+        label="Notes"
+        helper-text="The native textarea should fill the remaining vertical space."
+        style="flex: 1 1 auto;"></cds-textarea>
+      <div
+        style="flex: 0 0 auto; padding: 0.5rem 0; border-block-start: 1px solid var(--cds-border-subtle);">
+        Bottom
+      </div>
+    </div>
+  `,
+};
+
 export default {
   title: 'Components/Text Area',
 };
