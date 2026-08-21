@@ -51,7 +51,7 @@ export default {
     '/es/',
     '/lib/',
     '/umd/',
-    '[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$',
+    '[/\\\\]node_modules[/\\\\](?!lodash-es|nanoid|chalk|@babel/).+\\.(js|jsx)$',
   ],
   watchPathIgnorePatterns: [
     '/.avt/',
