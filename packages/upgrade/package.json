@@ -40,7 +40,7 @@
   },
   "devDependencies": {
     "chalk": "^6.0.0",
-    "execa": "^9.6.0",
+    "execa": "^10.0.0",
     "fast-glob": "^3.3.3",
     "fs-extra": "^11.0.0",
     "inquirer": "^12.5.0",
