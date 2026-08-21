@@ -206,4 +206,29 @@ describe('ExpandableSearch', () => {
       );
     });
   });
+
+  describe('expandButtonLabelText', () => {
+    it('renders the custom label on the collapsed tooltip', () => {
+      const { container } = render(
+        <ExpandableSearch
+          labelText="test-search"
+          expandButtonLabelText="Suche"
+        />
+      );
+
+      expect(
+        container.querySelector('.cds--tooltip-content')
+      ).toHaveTextContent('Suche');
+    });
+
+    it('defaults to "Search" when expandButtonLabelText is not provided', () => {
+      const { container } = render(
+        <ExpandableSearch labelText="test-search" />
+      );
+
+      expect(
+        container.querySelector('.cds--tooltip-content')
+      ).toHaveTextContent('Search');
+    });
+  });
 });
