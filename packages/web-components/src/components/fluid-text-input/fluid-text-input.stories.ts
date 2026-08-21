@@ -16,7 +16,6 @@ const args = {
   helperText: '',
   hideLabel: false,
   inline: false,
-  id: 'input-1',
   placeholder: 'Placeholder text',
   invalid: false,
   invalidText:
@@ -40,7 +39,6 @@ const argTypes = {
   helperText: { control: 'text' },
   hideLabel: { control: 'boolean' },
   inline: { control: 'boolean' },
-  id: { control: 'text' },
   placeholder: {
     control: { type: 'text' },
   },
@@ -96,7 +94,6 @@ const renderTextInput = (
     helperText,
     hideLabel,
     inline,
-    id,
     invalid,
     invalidText,
     labelText,
@@ -118,7 +115,7 @@ const renderTextInput = (
     helper-text="${ifDefined(helperText)}"
     ?hide-label="${hideLabel}"
     ?inline="${inline}"
-    id="${ifDefined(id)}"
+    id="input-1"
     ?invalid="${invalid}"
     invalid-text="${ifDefined(invalidText)}"
     label="${ifDefined(labelText)}"
@@ -158,7 +155,7 @@ export const DefaultWithToggletip = {
     <div style="width:${defaultWidth}px;">
       ${renderTextInput(
         textInputArgs,
-        html`<cds-toggletip autoAlign="true" slot="label-text">
+        html`<cds-toggletip autoalign="true" slot="label-text">
           Label
           <p slot="body-text">Additional field information here.</p>
         </cds-toggletip>`
