@@ -13,6 +13,7 @@
 @use 'breadcrumb';
 @use 'button';
 @use 'card';
+@use 'coachmark';
 @use 'chat-button';
 @use 'checkbox';
 @use 'code-snippet';
@@ -43,6 +44,7 @@
 @use 'fluid-time-picker';
 @use 'form';
 @use 'guidebanner';
+@use 'FullPageError';
 @use 'icon-indicator';
 @use 'inline-loading';
 @use 'InterstitialScreen';
@@ -57,6 +59,7 @@
 @use 'notification';
 @use 'number-input';
 @use 'overflow-menu';
+@use 'OptionsTile';
 @use 'page-header';
 @use 'pagination';
 @use 'pagination-nav';
@@ -86,4 +89,5 @@
 @use 'treeview';
 @use 'truncated-text';
 @use 'ui-shell';
+@use 'EditInPlace';
 @use 'user-avatar';

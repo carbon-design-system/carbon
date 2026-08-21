@@ -31,6 +31,8 @@ export * from './components/Breadcrumb';
 export * from './components/Button';
 export * from './components/ButtonSet';
 export * as preview__Card from './components/Card';
+// TODO: uncomment in v12 — also remove from excludeProductsComponents
+// export * from './components/Coachmark';
 export * from './components/Checkbox';
 export * from './components/CheckboxGroup';
 export * from './components/ClassPrefix';
@@ -50,6 +52,8 @@ export * from './components/DatePicker';
 export * from './components/DatePickerInput';
 export * as preview__DatePicker from './components/DatePicker/next';
 export * from './components/Dropdown';
+// TODO: uncomment in v12 — also remove from excludeProductsComponents
+// export * from './components/EditInPlace';
 export * from './components/ErrorBoundary';
 export * from './components/ExpandableSearch';
 export {
@@ -64,6 +68,8 @@ export {
   useFeatureFlags as preview_useFeatureFlags, // this export can be removed in v12
 } from './components/FeatureFlags';
 export * from './components/FileUploader';
+// TODO: uncomment in v12 — also remove from excludeProductsComponents
+// export * from './components/FullPageError';
 export * from './components/FluidForm';
 export * from './components/Form';
 export * from './components/FormGroup';
@@ -87,6 +93,8 @@ export * from './components/MultiSelect';
 export * from './components/Notification';
 export * from './components/NumberInput';
 export * from './components/OrderedList';
+// TODO: uncomment in v12 — also remove from excludeProductsComponents
+// export * from './components/OptionsTile';
 export * from './components/OverflowMenu';
 export * from './components/OverflowMenuItem';
 export * as unstable__PageHeader from './components/PageHeader';
@@ -552,6 +560,9 @@ export type { NumberInputSkeletonProps } from './components/NumberInput/NumberIn
 
 //ordered list
 export type { OrderedListProps } from './components/OrderedList/OrderedList';
+
+//options tile (migrated from @carbon/ibm-products)
+// export type { OptionsTileProps } from './components/OptionsTile';
 
 //overflow menu
 export type { OverflowMenuProps } from './components/OverflowMenu/OverflowMenu';
