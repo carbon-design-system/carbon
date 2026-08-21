@@ -64,6 +64,19 @@ const lineTabsSizeArgs = {
   size: 'md',
 };
 
+const iconStoriesArgs = {
+  badgeIndicator: false,
+};
+
+const iconStoriesArgTypes = {
+  badgeIndicator: {
+    description: '**Experimental**: Display an empty dot badge on the Tab.',
+    control: {
+      type: 'boolean',
+    },
+  },
+};
+
 export default {
   title: 'Components/Tabs',
   component: Tabs,
@@ -302,7 +315,7 @@ export const DismissableContained = (args) => {
 DismissableContained.argTypes = tabsSizeArgType;
 DismissableContained.args = containedTabsSizeArgs;
 
-export const DismissableWithIcons = ({ contained, size }) => {
+export const DismissableWithIcons = ({ size }) => {
   const tabs = [
     {
       label: 'Dashboard',
@@ -362,7 +375,7 @@ export const DismissableWithIcons = ({ contained, size }) => {
         onChange={handleTabChange}
         dismissable
         onTabCloseRequest={handleCloseTabRequest}>
-        <TabList contained={contained} size={size}>
+        <TabList size={size}>
           {renderedTabs.map((tab, index) => (
             <Tab key={index} disabled={tab.disabled} renderIcon={icons[index]}>
               {tab.label}
@@ -420,10 +433,10 @@ export const WithIcons = (args) => {
 WithIcons.argTypes = lineTabsSizeArgType;
 WithIcons.args = lineTabsSizeArgs;
 
-export const Manual = () => {
+export const Manual = (args) => {
   return (
     <Tabs>
-      <TabList activation="manual">
+      <TabList activation="manual" size={args.size}>
         <Tab>Dashboard</Tab>
         <Tab>Monitoring</Tab>
         <Tab title="Tab label 4">Activity</Tab>
@@ -457,6 +470,9 @@ export const Manual = () => {
   );
 };
 
+Manual.argTypes = lineTabsSizeArgType;
+Manual.args = lineTabsSizeArgs;
+
 export const Icon20Only = (args) => {
   return (
     <Tabs>
@@ -484,14 +500,8 @@ export const Icon20Only = (args) => {
   );
 };
 
-Icon20Only.argTypes = {
-  badgeIndicator: {
-    description: '**Experimental**: Display an empty dot badge on the Tab.',
-    control: {
-      type: 'boolean',
-    },
-  },
-};
+Icon20Only.argTypes = iconStoriesArgTypes;
+Icon20Only.args = iconStoriesArgs;
 
 export const IconOnly = (args) => {
   return (
@@ -522,14 +532,12 @@ export const IconOnly = (args) => {
 
 IconOnly.argTypes = {
   ...lineTabsSizeArgType,
-  badgeIndicator: {
-    description: '**Experimental**: Display an empty dot badge on the Tab.',
-    control: {
-      type: 'boolean',
-    },
-  },
+  ...iconStoriesArgTypes,
 };
-IconOnly.args = lineTabsSizeArgs;
+IconOnly.args = {
+  ...lineTabsSizeArgs,
+  ...iconStoriesArgs,
+};
 
 export const Contained = (args) => {
   return (
@@ -615,10 +623,10 @@ export const ContainedWithIcons = (args) => {
 ContainedWithIcons.argTypes = tabsSizeArgType;
 ContainedWithIcons.args = containedTabsSizeArgs;
 
-export const ContainedWithSecondaryLabels = () => {
+export const ContainedWithSecondaryLabels = (args) => {
   return (
     <Tabs>
-      <TabList contained>
+      <TabList contained size={args.size}>
         <Tab secondaryLabel="(21/25)">Engage</Tab>
         <Tab secondaryLabel="(12/16)">Analyze</Tab>
         <Tab secondaryLabel="(0/7)">Remediate</Tab>
@@ -655,10 +663,13 @@ export const ContainedWithSecondaryLabels = () => {
   );
 };
 
-export const ContainedWithSecondaryLabelsAndIcons = () => {
+ContainedWithSecondaryLabels.argTypes = tabsSizeArgType;
+ContainedWithSecondaryLabels.args = containedTabsSizeArgs;
+
+export const ContainedWithSecondaryLabelsAndIcons = (args) => {
   return (
     <Tabs>
-      <TabList contained>
+      <TabList contained size={args.size}>
         <Tab renderIcon={Task} secondaryLabel="(21/25)">
           Engage
         </Tab>
@@ -702,6 +713,9 @@ export const ContainedWithSecondaryLabelsAndIcons = () => {
     </Tabs>
   );
 };
+
+ContainedWithSecondaryLabelsAndIcons.argTypes = tabsSizeArgType;
+ContainedWithSecondaryLabelsAndIcons.args = containedTabsSizeArgs;
 
 export const ContainedFullWidth = (args) => {
   return (
@@ -837,12 +851,24 @@ Vertical.parameters = {
   },
 };
 
-export const Skeleton = () => {
+export const Skeleton = (args) => {
   return (
     <div style={{ maxWidth: '100%' }}>
-      <TabsSkeleton />
+      <TabsSkeleton contained={args.contained} />
     </div>
   );
+};
+
+Skeleton.argTypes = {
+  contained: {
+    control: {
+      type: 'boolean',
+    },
+    description: 'Specify whether the skeleton is for contained tabs',
+  },
+};
+Skeleton.args = {
+  contained: false,
 };
 
 export const Icon20OnlyVisualSnapshots = (args) => {
@@ -872,14 +898,8 @@ export const Icon20OnlyVisualSnapshots = (args) => {
   );
 };
 
-Icon20OnlyVisualSnapshots.argTypes = {
-  badgeIndicator: {
-    description: '**Experimental**: Display an empty dot badge on the Tab.',
-    control: {
-      type: 'boolean',
-    },
-  },
-};
+Icon20OnlyVisualSnapshots.argTypes = iconStoriesArgTypes;
+Icon20OnlyVisualSnapshots.args = iconStoriesArgs;
 
 Icon20OnlyVisualSnapshots.play = async ({ userEvent }) => {
   await userEvent.keyboard('{Tab}');
@@ -914,14 +934,8 @@ export const IconOnlyVisualSnapshots = (args) => {
   );
 };
 
-IconOnlyVisualSnapshots.argTypes = {
-  badgeIndicator: {
-    description: '**Experimental**: Display an empty dot badge on the Tab.',
-    control: {
-      type: 'boolean',
-    },
-  },
-};
+IconOnlyVisualSnapshots.argTypes = iconStoriesArgTypes;
+IconOnlyVisualSnapshots.args = iconStoriesArgs;
 
 IconOnlyVisualSnapshots.play = async ({ userEvent }) => {
   await userEvent.keyboard('{Tab}');

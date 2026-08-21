@@ -69,7 +69,7 @@ const lineTabsSizeArgType = {
 const tabsSizeArgType = {
   size: {
     control: { type: 'select' },
-    options: ['sm', 'md', 'lg', 'xl'],
+    options: ['sm', 'md', 'lg'],
     description: 'Specify the size of the tabs',
   },
 };
@@ -470,13 +470,16 @@ export const ContainedWithIcons = {
 };
 
 export const ContainedWithSecondaryLabels = {
-  render: () => html`
+  args: containedTabsSizeArgs,
+  argTypes: tabsSizeArgType,
+  render: ({ size }) => html`
     <style>
       ${styles}
     </style>
     <cds-tabs
       value="engage"
       type="${TABS_TYPE.CONTAINED}"
+      size="${ifDefined(size)}"
       @cds-tabs-beingselected="${onTabsBeingSelected}"
       @cds-tabs-selected="${onTabsSelected}">
       <cds-tab
@@ -571,13 +574,16 @@ export const ContainedWithSecondaryLabels = {
 };
 
 export const ContainedWithSecondaryLabelsAndIcons = {
-  render: () => html`
+  args: containedTabsSizeArgs,
+  argTypes: tabsSizeArgType,
+  render: ({ size }) => html`
     <style>
       ${styles}
     </style>
     <cds-tabs
       value="engage"
       type="${TABS_TYPE.CONTAINED}"
+      size="${ifDefined(size)}"
       @cds-tabs-beingselected="${onTabsBeingSelected}"
       @cds-tabs-selected="${onTabsSelected}">
       <cds-tab
@@ -934,7 +940,9 @@ export const IconOnly = {
 };
 
 export const Manual = {
-  render: () => {
+  args: lineTabsSizeArgs,
+  argTypes: lineTabsSizeArgType,
+  render: ({ size }) => {
     return html`
       <style>
         ${styles}
@@ -942,6 +950,7 @@ export const Manual = {
       <cds-tabs
         value="all"
         selection-mode="manual"
+        size="${ifDefined(size)}"
         @cds-tabs-beingselected="${onTabsBeingSelected}"
         @cds-tabs-selected="${onTabsSelected}">
         <cds-tab id="tab-all" target="panel-all" value="all">Dashboard</cds-tab>
@@ -1008,8 +1017,17 @@ export const Manual = {
 };
 
 export const skeleton = {
-  render: () => html`
-    <cds-tabs-skeleton>
+  args: {
+    contained: false,
+  },
+  argTypes: {
+    contained: {
+      control: 'boolean',
+      description: 'Specify whether the skeleton is for contained tabs',
+    },
+  },
+  render: ({ contained }) => html`
+    <cds-tabs-skeleton ?contained="${contained}">
       <cds-tab-skeleton></cds-tab-skeleton>
       <cds-tab-skeleton></cds-tab-skeleton>
       <cds-tab-skeleton></cds-tab-skeleton>
