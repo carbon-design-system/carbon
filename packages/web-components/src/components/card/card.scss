@@ -221,6 +221,37 @@ $css--plex: true !default;
   gap: 1px;
 }
 
+// Text/secondary actions: stretch to fill available width
+// Original: .cds--card__footer > .cds--card__action:not(:has(.cds--btn--icon-only))
+// :has() cannot pierce cds-card-action's shadow root → key off the reflected
+// `icon-only` attribute that cds-card-action sets on slot change.
+
+:host(#{$prefix}-card-action:not([icon-only])) {
+  flex: 1 0 0;
+  min-inline-size: 0;
+
+  .#{$prefix}--card__action > ::slotted(*) {
+    inline-size: 100%;
+    max-inline-size: none;
+  }
+}
+
+// Icon-only actions: fixed width, pushed to the trailing edge
+// Original: .cds--card__footer > .cds--card__action:has(.cds--btn--icon-only)
+
+:host(#{$prefix}-card-action[icon-only]) {
+  flex: 0 0 auto;
+  margin-inline-start: auto;
+}
+
+// Consecutive icon-only actions: only the first one gets the auto margin
+// Original: .cds--card__footer > .cds--card__action:has(...) + .cds--card__action:has(...)
+// Adjacent-sibling selectors work in light DOM between cds-card-action hosts.
+
+#{$prefix}-card-action[icon-only] + #{$prefix}-card-action[icon-only] {
+  margin-inline-start: 0;
+}
+
 // ─── Host-level display ───────────────────────────────────────────────────────
 
 :host(#{$prefix}-card) {

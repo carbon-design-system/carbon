@@ -28,8 +28,23 @@ class CDSCardAction extends LitElement {
   @property({ type: String, reflect: true })
   label!: string;
 
+  private _handleSlotChange({ target }: Event) {
+    const slot = target as HTMLSlotElement;
+    const hasIconOnly = slot
+      .assignedElements({ flatten: true })
+      .some((el) => el.matches(`${prefix}-icon-button`));
+
+    if (hasIconOnly) {
+      this.setAttribute('icon-only', '');
+    } else {
+      this.removeAttribute('icon-only');
+    }
+  }
+
   render() {
-    return html`<div class="${prefix}--card__action"><slot></slot></div>`;
+    return html`<div class="${prefix}--card__action">
+      <slot @slotchange=${this._handleSlotChange}></slot>
+    </div>`;
   }
 
   static styles = styles;

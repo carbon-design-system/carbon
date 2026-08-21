@@ -30,11 +30,15 @@ import '../grid/index';
 import '../icon-button';
 import storyDocs from './card.mdx';
 import styles from './card-story.scss?lit';
+import illustration1 from './_story-assets/illustration-img-1.png';
+import placeholder16x9Src from './_story-assets/placeholder-16x9.svg';
+import placeholder1x1Src from './_story-assets/placeholder-1x1.svg';
+import rebusClassic from './_story-assets/classic-rebus.png';
 
 // ─── Shared content helpers ──────────────────────────────────────────────────
 
-const placeholder16x9 = 'https://picsum.photos/seed/carbon/640/360?grayscale';
-const placeholder1x1 = 'https://picsum.photos/seed/ibm/400/400?grayscale';
+const placeholder16x9 = placeholder16x9Src;
+const placeholder1x1 = placeholder1x1Src;
 
 const aiLabelContent = html`
   <p class="secondary">AI Explained</p>
@@ -771,7 +775,7 @@ export const WithHeaderMedia = {
           <cds-card-header>
             <cds-card-header-media>
               <img
-                src=${placeholder1x1}
+                src=${illustration1}
                 alt="A sample illustration"
                 style="width:48px;height:48px;border-radius:4px;display:block" />
             </cds-card-header-media>
@@ -1128,8 +1132,8 @@ export const WithTitleMedia = {
           <cds-card-header>
             <cds-card-title-media>
               <img
-                src=${placeholder1x1}
-                alt="Logo"
+                src=${rebusClassic}
+                alt="IBM Classic Rebus logo"
                 style="width:48px;height:48px;display:block" />
             </cds-card-title-media>
             <cds-card-title
@@ -1151,8 +1155,8 @@ export const WithTitleMedia = {
           <cds-card-header>
             <cds-card-title-media>
               <img
-                src=${placeholder1x1}
-                alt="Logo"
+                src=${rebusClassic}
+                alt="IBM Classic Rebus logo"
                 style="width:64px;height:64px;display:block" />
             </cds-card-title-media>
             <cds-card-title
@@ -1173,8 +1177,8 @@ export const WithTitleMedia = {
           <cds-card-header>
             <cds-card-title-media>
               <img
-                src=${placeholder1x1}
-                alt="Logo"
+                src=${rebusClassic}
+                alt="IBM Classic Rebus logo"
                 style="width:48px;height:48px;display:block" />
             </cds-card-title-media>
             <cds-card-title
@@ -1210,8 +1214,8 @@ export const WithTitleMedia = {
           <cds-card-header>
             <cds-card-title-media>
               <img
-                src=${placeholder1x1}
-                alt="Logo"
+                src=${rebusClassic}
+                alt="IBM Classic Rebus logo"
                 style="width:48px;height:48px;display:block" />
             </cds-card-title-media>
             <cds-card-title
