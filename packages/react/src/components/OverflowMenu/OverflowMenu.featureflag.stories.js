@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023
+ * Copyright IBM Corp. 2023, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -13,16 +13,21 @@ import {
   MenuItemRadioGroup,
   MenuItemSelectable,
 } from '../Menu';
-import { OverflowMenu } from './';
+import { OverflowMenu } from './next';
 import { WithFeatureFlags } from '../../../.storybook/templates/WithFeatureFlags';
 import { FeatureFlags } from '../FeatureFlags';
 
 const args = {
   autoAlign: false,
+  disabled: false,
   label: 'Options',
   menuAlignment: 'bottom-start',
   size: 'md',
   tooltipAlignment: 'top',
+  tooltipAutoAlign: false,
+  tooltipDefaultOpen: false,
+  tooltipEnterDelayMs: '0',
+  tooltipLeaveDelayMs: '0',
 };
 
 const tooltipAlignmentOptions = [
@@ -43,6 +48,12 @@ const tooltipAlignmentOptions = [
 const argTypes = {
   autoAlign: {
     control: { type: 'boolean' },
+    description:
+      'Will attempt to automatically align the menu with the trigger button to avoid collisions with the viewport',
+  },
+  disabled: {
+    control: { type: 'boolean' },
+    description: 'Specify whether the trigger button should be disabled',
   },
   label: {
     control: { type: 'text' },
@@ -51,7 +62,7 @@ const argTypes = {
     options: ['bottom-start', 'bottom-end', 'top-start', 'top-end'],
     control: { type: 'select' },
     description:
-      'Specify how the menu should align with the button element `bottom-start` `bottom-end` `top-start` `top-end`',
+      'Specify how the menu should align with the trigger button `bottom-start` `bottom-end` `top-start` `top-end`',
   },
   size: {
     options: ['xs', 'sm', 'md', 'lg'],
@@ -60,6 +71,28 @@ const argTypes = {
   tooltipAlignment: {
     options: tooltipAlignmentOptions,
     control: { type: 'select' },
+    description:
+      'Specify how the tooltip on the trigger button should be aligned',
+  },
+  tooltipAutoAlign: {
+    control: { type: 'boolean' },
+    description:
+      'Will attempt to automatically align the tooltip on the trigger button to avoid collisions with the viewport',
+  },
+  tooltipDefaultOpen: {
+    control: { type: 'boolean' },
+    description:
+      'Specify whether the tooltip on the trigger button should be open when it first renders',
+  },
+  tooltipEnterDelayMs: {
+    control: { type: 'number' },
+    description:
+      'Specify the duration in milliseconds to delay before displaying the tooltip on the trigger button',
+  },
+  tooltipLeaveDelayMs: {
+    control: { type: 'number' },
+    description:
+      'Specify the duration in milliseconds to delay before hiding the tooltip on the trigger button',
   },
 };
 
