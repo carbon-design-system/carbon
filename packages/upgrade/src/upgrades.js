@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -335,6 +335,50 @@ export const upgrades = [
             transform,
             paths,
             verbose: options.verbose,
+          });
+        },
+      },
+      {
+        name: 'enable-v12-release',
+        description: `
+          Wrap the application rendered by ReactDOM with FeatureFlags enableV12Release.
+
+          Transforms:
+          root.render(<App />);
+
+          Into:
+          root.render(
+            <FeatureFlags enableV12Release>
+              <App />
+            </FeatureFlags>
+          );
+        `,
+        migrate: async (options) => {
+          const transform = path.join(TRANSFORM_DIR, 'enable-v12-release.js');
+          const paths =
+            Array.isArray(options.paths) && options.paths.length > 0
+              ? options.paths
+              : await glob(['**/*.{js,jsx,ts,tsx}'], {
+                  cwd: options.workspaceDir,
+                  ignore: [
+                    '**/es/**',
+                    '**/lib/**',
+                    '**/umd/**',
+                    '**/node_modules/**',
+                    '**/storybook-static/**',
+                    '**/dist/**',
+                    '**/build/**',
+                    '**/*.d.ts',
+                    '**/coverage/**',
+                  ],
+                });
+
+          await runCodemod(options, {
+            dry: !options.write,
+            transform,
+            paths,
+            verbose: options.verbose,
+            parser: 'tsx',
           });
         },
       },
@@ -771,6 +815,37 @@ export const upgrades = [
           const transform = path.join(
             TRANSFORM_DIR,
             'ibm-products-update-pdlc-status.js'
+          );
+          const paths =
+            Array.isArray(options.paths) && options.paths.length > 0
+              ? options.paths
+              : await glob(['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'], {
+                  cwd: options.workspaceDir,
+                  ignore: [
+                    '**/es/**',
+                    '**/lib/**',
+                    '**/umd/**',
+                    '**/node_modules/**',
+                    '**/storybook-static/**',
+                  ],
+                });
+
+          await runCodemod(options, {
+            dry: !options.write,
+            transform,
+            paths,
+            verbose: options.verbose,
+          });
+        },
+      },
+      {
+        name: 'ibm-products-update-tearsheet',
+        description:
+          'Updates Tearsheet component to use preview__Tearsheet with composable API',
+        migrate: async (options) => {
+          const transform = path.join(
+            TRANSFORM_DIR,
+            'ibm-products-update-tearsheet.js'
           );
           const paths =
             Array.isArray(options.paths) && options.paths.length > 0

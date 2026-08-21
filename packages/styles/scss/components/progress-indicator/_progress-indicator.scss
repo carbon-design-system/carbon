@@ -105,10 +105,12 @@ $progress-indicator-bar-width: 1px inset transparent !default;
     }
   }
 
-  .#{$prefix}--progress-label:hover {
-    box-shadow: 0 convert.to-rem(1px) $link-primary-hover;
-    color: $link-primary-hover;
-    cursor: pointer;
+  @media (any-hover: hover) {
+    .#{$prefix}--progress-label:hover {
+      box-shadow: 0 convert.to-rem(1px) $link-primary-hover;
+      color: $link-primary-hover;
+      cursor: pointer;
+    }
   }
 
   .#{$prefix}--progress--space-equal .#{$prefix}--progress-label {
@@ -228,18 +230,20 @@ $progress-indicator-bar-width: 1px inset transparent !default;
     outline: none;
   }
 
-  .#{$prefix}--progress-step-button--unclickable
-    .#{$prefix}--progress-label:hover {
-    box-shadow: none;
-    color: $text-primary;
-    cursor: default;
-  }
+  @media (any-hover: hover) {
+    .#{$prefix}--progress-step-button--unclickable
+      .#{$prefix}--progress-label:hover {
+      box-shadow: none;
+      color: $text-primary;
+      cursor: default;
+    }
 
-  .#{$prefix}--progress-step-button--unclickable
-    .#{$prefix}--tooltip__label:hover {
-    box-shadow: 0 convert.to-rem(1px) $link-primary;
-    color: $link-primary;
-    cursor: pointer;
+    .#{$prefix}--progress-step-button--unclickable
+      .#{$prefix}--tooltip__label:hover {
+      box-shadow: 0 convert.to-rem(1px) $link-primary;
+      color: $link-primary;
+      cursor: pointer;
+    }
   }
 
   //DISABLED STYLING
@@ -252,11 +256,18 @@ $progress-indicator-bar-width: 1px inset transparent !default;
       fill: $icon-disabled;
     }
 
-    .#{$prefix}--progress-label,
-    .#{$prefix}--progress-label:hover {
+    .#{$prefix}--progress-label {
       box-shadow: none;
       color: $text-disabled;
       cursor: not-allowed;
+    }
+
+    @media (any-hover: hover) {
+      .#{$prefix}--progress-label:hover {
+        box-shadow: none;
+        color: $text-disabled;
+        cursor: not-allowed;
+      }
     }
 
     .#{$prefix}--progress-line {
