@@ -13,9 +13,9 @@
  */
 export const productMigratedStoryGlobs = [
   '../src/components/ActionSet/ActionSet.stories.js',
+  '../src/components/Guidebanner/Guidebanner.stories.js',
   '../src/components/FullPageError/FullPageError.stories.js',
   '../src/components/Coachmark/Coachmark.stories.js',
-  '../src/components/TruncatedText/TruncatedText.stories.js',
   '../src/components/OptionsTile/OptionsTile.stories.js',
   '../src/components/InterstitialScreen/InterstitialScreen.stories.js',
   '../src/components/Resizer/Resizer.stories.js',
@@ -37,8 +37,8 @@ export const productMigratedStoryGlobs = [
  *   2. Add its export to src/index.ts.
  */
 export const excludeProductsComponents = [
+  'src/components/Guidebanner/**/*',
   'src/components/Coachmark/**/*',
-  'src/components/Resizer/**/*',
   'src/components/ActionSet/**/*',
   'src/components/FullPageError/**/*',
   'src/components/OptionsTile/**/*',
