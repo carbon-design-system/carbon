@@ -18,6 +18,8 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 ## Table of Contents
 
 - [Overview](#overview)
+- [Overlay loading](#overlay-loading)
+  - [Overlay loading behind a modal](#overlay-loading-behind-a-modal)
 - [Component API](#component-api)
 - [Feedback](#feedback)
 
@@ -31,6 +33,47 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
     {
       title: 'Open in Stackblitz',
       onClick: () => stackblitzPrefillConfig(LoadingStories.Default),
+    },
+  ]}
+/>
+
+## Overlay loading
+
+Setting `withOverlay` renders the indicator on top of a full-screen overlay that
+blocks interaction with the content behind it. Because that content is
+unavailable, focus moves to the overlay while it is active and stays there, so
+keyboard and screen reader users cannot navigate into a page that is not ready
+yet. When loading finishes, focus returns to the element that was focused before
+the overlay appeared.
+
+Select **Start** to trigger a two second loading state.
+
+<Canvas
+  of={LoadingStories.OverlayLoading}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(LoadingStories.OverlayLoading),
+    },
+  ]}
+/>
+
+### Overlay loading behind a modal
+
+If a modal is already layered on top of the overlay, the overlay leaves focus
+alone. The dialog closest to the user keeps control of focus.
+
+Open the modal and select **Save** to trigger a two second loading state behind
+it. Focus stays on **Save**, and Tab keeps cycling through the modal rather than
+moving to the overlay underneath.
+
+<Canvas
+  of={LoadingStories.OverlayLoadingBehindModal}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig(LoadingStories.OverlayLoadingBehindModal),
     },
   ]}
 />
