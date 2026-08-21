@@ -881,5 +881,22 @@ describe('Pagination', () => {
 
       expect(screen.getByText('1–10 of 350 items')).toBeInTheDocument();
     });
+
+    it('should preserve a controlled pageSize when pageSizes is removed', () => {
+      const { rerender } = render(
+        <Pagination
+          totalItems={350}
+          pageSizes={[20, 50]}
+          pageSize={20}
+          page={1}
+        />
+      );
+
+      expect(screen.getByText('1–20 of 350 items')).toBeInTheDocument();
+
+      rerender(<Pagination totalItems={350} pageSize={20} page={1} />);
+
+      expect(screen.getByText('1–20 of 350 items')).toBeInTheDocument();
+    });
   });
 });

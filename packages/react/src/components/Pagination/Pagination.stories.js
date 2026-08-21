@@ -220,7 +220,6 @@ WithoutPageSizes.parameters = {
  */
 export const WithRenderPageSelect = (args) => (
   <Pagination
-    {...props()}
     totalItems={350}
     pageSizes={[10, 20, 30]}
     {...args}

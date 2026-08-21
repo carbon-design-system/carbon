@@ -342,8 +342,10 @@ const Pagination = React.forwardRef(
       }
 
       if (!normalizedControlledPageSizes) {
+        const nextPageSize = getPageSize(undefined, controlledPageSize);
+
         setPageSizes(undefined);
-        setPageSize(DEFAULT_PAGE_SIZE);
+        setPageSize(nextPageSize);
         return;
       }
 
