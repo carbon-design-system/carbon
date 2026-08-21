@@ -131,7 +131,7 @@ export const Duration = (args) => {
       autoAlign
       label="Label one"
       enterDelayMs={0}
-      leaveDelayMs={0}
+      leaveDelayMs={300}
       {...args}>
       <Button>This button has a tooltip</Button>
     </Tooltip>
