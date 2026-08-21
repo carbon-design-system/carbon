@@ -17,7 +17,6 @@
  */
 
 const path = require('path');
-const fs = require('fs-extra');
 const { default: StyleDictionary } = require('style-dictionary');
 
 const scssFormats = require('./formats/scss-layout');
@@ -98,9 +97,6 @@ function createInstance() {
 
 // ── run ───────────────────────────────────────────────────────────────────────
 async function run() {
-  fs.ensureDirSync(SCSS_GENERATED);
-  fs.ensureDirSync(JS_GENERATED);
-
   const sd = await createInstance().extend(config);
   await sd.buildAllPlatforms();
 }
