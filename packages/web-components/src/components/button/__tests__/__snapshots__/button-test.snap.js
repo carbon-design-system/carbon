@@ -582,7 +582,6 @@ snapshots['cds-button Icon Button variant should set the icon-only class'] =
 
 snapshots['cds-button Icon Button variant should support badge indicator'] =
   `<button
-  aria-pressed="false"
   class="cds--btn cds--btn--ghost cds--btn--icon-only cds--btn--lg cds--layout--size-lg cds-ce--btn--has-icon"
   id="button"
   part="button"
@@ -605,7 +604,6 @@ snapshots['cds-button Icon Button variant should support badge indicator'] =
 snapshots[
   'cds-button Icon Button variant should support badge indicator and truncate'
 ] = `<button
-  aria-pressed="false"
   class="cds--btn cds--btn--ghost cds--btn--icon-only cds--btn--lg cds--layout--size-lg cds-ce--btn--has-icon"
   id="button"
   part="button"
