@@ -63,6 +63,17 @@ xdescribe('cds-textarea', () => {
       });
     });
 
+    it('Should associate the helper text with the textarea via aria-describedby', async () => {
+      render(template({ helperText: 'helper-text-foo' }), document.body);
+      await Promise.resolve();
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
+      const textarea = document.body
+        .querySelector('cds-textarea')!
+        .shadowRoot!.querySelector('textarea');
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
+      expect(textarea!.getAttribute('aria-describedby')).toBe('helper-text');
+    });
+
     it('Should reflect value in DOM', async () => {
       render(
         template({
