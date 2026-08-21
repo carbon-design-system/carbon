@@ -545,7 +545,7 @@
     - Audio data
     - cloud
 - name: audit-trail
-  friendly_name: Audit Trail
+  friendly_name: Audit trail
   aliases:
     - audit trail
     - cloud
@@ -3710,10 +3710,10 @@
   aliases:
     - event driven
     - cloud
-- name: expand--horz
-  friendly_name: Expand horz
+- name: expand--horizontal
+  friendly_name: Expand horizontal
   aliases:
-    - expand horz
+    - expand horizontal
     - expand
     - horizontal
 - name: expand--user
@@ -3722,10 +3722,10 @@
     - expand user
     - expand
     - user
-- name: expand--vert
-  friendly_name: Expand vert
+- name: expand--vertical
+  friendly_name: Expand vertical
   aliases:
-    - expand vert
+    - expand vertical
     - expand
     - vertical
 - name: expansion
@@ -4348,7 +4348,7 @@
     - functions-as-a-service
     - cloud
 - name: gastro-health
-  friendly_name: Gastro Health
+  friendly_name: Gastro health
   aliases:
     - intestines
     - gastro health
@@ -5692,6 +5692,20 @@
     - communication
     - entry
     - security
+- name: international--standard
+  friendly_name: International standard
+  aliases:
+    - standard
+    - standardization
+    - cohesion
+    - consistency
+    - norm
+    - international
+    - organization
+    - globe
+    - nodes
+    - medal
+    - badge
 - name: internet-of-things
   friendly_name: Internet of things (IoT)
   aliases:
@@ -6317,7 +6331,7 @@
     - management
     - cloud
 - name: managing--containers
-  friendly_name: Managing Containers
+  friendly_name: Managing containers
   aliases:
     - managing containers
     - Cloud
@@ -7770,7 +7784,7 @@
     - security
     - people
 - name: popsicle
-  friendly_name: popsicle
+  friendly_name: Popsicle
   aliases:
     - popsicle
     - sweet
@@ -10665,6 +10679,23 @@
     - endpoint
     - management
     - security
+- name: union
+  friendly_name: Union
+  aliases:
+    - union
+    - globe
+    - people
+    - unity
+- name: union--act
+  friendly_name: Act of union
+  aliases:
+    - union
+    - act
+    - globe
+    - people
+    - document
+    - treaty
+    - agreement
 - name: united-governance
   friendly_name: United governance
   aliases:
