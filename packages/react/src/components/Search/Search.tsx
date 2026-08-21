@@ -50,6 +50,12 @@ export interface SearchProps extends InputPropsBase {
   closeButtonLabelText?: string;
 
   /**
+   * Specify the label for the expand button in ExpandableSearch (collapsed state tooltip).
+   * Use this prop to provide a localised string in place of the default "Search" label.
+   */
+  expandButtonLabelText?: string;
+
+  /**
    * Optionally provide the default value of the `<input>`
    */
   defaultValue?: string | number;
@@ -132,6 +138,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
       autoComplete = 'off',
       className,
       closeButtonLabelText = 'Clear search input',
+      expandButtonLabelText = 'Search',
       defaultValue,
       disabled,
       isExpanded = true,
@@ -277,7 +284,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
         <Tooltip
           className={`${prefix}--search-tooltip ${prefix}--search-magnifier-tooltip ${prefix}--icon-tooltip`}
           align="top"
-          label="Search">
+          label={expandButtonLabelText}>
           {magnifierButton}
         </Tooltip>
       ) : (
@@ -341,6 +348,12 @@ Search.propTypes = {
    * Specify a label to be read by screen readers on the "close" button
    */
   closeButtonLabelText: PropTypes.string,
+
+  /**
+   * Specify the label for the expand button in ExpandableSearch (collapsed state tooltip).
+   * Use this prop to provide a localised string in place of the default "Search" label.
+   */
+  expandButtonLabelText: PropTypes.string,
 
   /**
    * Optionally provide the default value of the `<input>`

@@ -165,6 +165,35 @@ describe('Search', () => {
       expect(onExpand).toHaveBeenCalledTimes(3);
     });
 
+    it('should respect expandButtonLabelText prop', () => {
+      const { container } = render(
+        <Search
+          labelText="test-search"
+          onExpand={() => {}}
+          isExpanded={false}
+          expandButtonLabelText="Suche"
+        />
+      );
+
+      expect(
+        container.querySelector('.cds--tooltip-content')
+      ).toHaveTextContent('Suche');
+    });
+
+    it('should default expandButtonLabelText to "Search"', () => {
+      const { container } = render(
+        <Search
+          labelText="test-search"
+          onExpand={() => {}}
+          isExpanded={false}
+        />
+      );
+
+      expect(
+        container.querySelector('.cds--tooltip-content')
+      ).toHaveTextContent('Search');
+    });
+
     it('should call onKeyDown when expected', async () => {
       const onKeyDown = jest.fn();
       render(<Search labelText="test-search" onKeyDown={onKeyDown} />);

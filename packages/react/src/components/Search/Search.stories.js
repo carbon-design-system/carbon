@@ -88,7 +88,7 @@ export default {
 
 const defaultParameters = {
   controls: {
-    exclude: ['isExpanded', 'renderIcon', 'role'],
+    exclude: ['isExpanded', 'renderIcon', 'role', 'expandButtonLabelText'],
   },
 };
 
