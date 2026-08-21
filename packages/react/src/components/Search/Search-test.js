@@ -77,6 +77,49 @@ describe('Search', () => {
       expect(screen.getByLabelText('clear')).toBeInTheDocument();
     });
 
+    it('should support translating the clear button label via translateWithId', () => {
+      const translateWithId = jest.fn((id) => {
+        if (id === 'carbon.search.clear') {
+          return 'test-clear';
+        }
+        if (id === 'carbon.search.expand') {
+          return 'test-expand';
+        }
+        throw new Error(`Unsupported id: ${id}`);
+      });
+
+      render(
+        <Search labelText="test-search" translateWithId={translateWithId} />
+      );
+
+      expect(screen.getByLabelText('test-clear')).toBeInTheDocument();
+    });
+
+    it('should support translating the expand button tooltip via translateWithId', () => {
+      const translateWithId = jest.fn((id) => {
+        if (id === 'carbon.search.clear') {
+          return 'test-clear';
+        }
+        if (id === 'carbon.search.expand') {
+          return 'test-expand';
+        }
+        throw new Error(`Unsupported id: ${id}`);
+      });
+
+      const { container } = render(
+        <Search
+          labelText="test-search"
+          onExpand={() => {}}
+          isExpanded={false}
+          translateWithId={translateWithId}
+        />
+      );
+
+      expect(
+        container.querySelector('.cds--tooltip-content')
+      ).toHaveTextContent('test-expand');
+    });
+
     it('should respect defaultValue prop', () => {
       render(<Search labelText="test-search" defaultValue="test-value" />);
 
