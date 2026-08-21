@@ -206,4 +206,29 @@ describe('ExpandableSearch', () => {
       );
     });
   });
+
+  describe('translateWithId', () => {
+    it('should support translating the expand button tooltip', () => {
+      const translateWithId = jest.fn((id) => {
+        if (id === 'carbon.search.expand') {
+          return 'test-expand';
+        }
+        if (id === 'carbon.search.clear') {
+          return 'test-clear';
+        }
+        throw new Error(`Unsupported id: ${id}`);
+      });
+
+      const { container } = render(
+        <ExpandableSearch
+          labelText="test-search"
+          translateWithId={translateWithId}
+        />
+      );
+
+      expect(
+        container.querySelector('.cds--tooltip-content')
+      ).toHaveTextContent('test-expand');
+    });
+  });
 });

@@ -3400,9 +3400,7 @@ Map {
       "className": {
         "type": "string",
       },
-      "closeButtonLabelText": {
-        "type": "string",
-      },
+      "closeButtonLabelText": [Function],
       "defaultValue": {
         "args": [
           [
@@ -3469,6 +3467,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "translateWithId": {
+        "type": "func",
       },
       "type": {
         "type": "string",
@@ -5005,9 +5006,7 @@ Map {
       "className": {
         "type": "string",
       },
-      "closeButtonLabelText": {
-        "type": "string",
-      },
+      "closeButtonLabelText": [Function],
       "defaultValue": {
         "args": [
           [
@@ -5045,6 +5044,9 @@ Map {
       },
       "role": {
         "type": "string",
+      },
+      "translateWithId": {
+        "type": "func",
       },
       "type": {
         "type": "string",
@@ -8662,9 +8664,7 @@ Map {
       "className": {
         "type": "string",
       },
-      "closeButtonLabelText": {
-        "type": "string",
-      },
+      "closeButtonLabelText": [Function],
       "defaultValue": {
         "args": [
           [
@@ -8731,6 +8731,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "translateWithId": {
+        "type": "func",
       },
       "type": {
         "type": "string",
@@ -13211,9 +13214,7 @@ Map {
       "className": {
         "type": "string",
       },
-      "closeButtonLabelText": {
-        "type": "string",
-      },
+      "closeButtonLabelText": [Function],
       "defaultValue": {
         "args": [
           [
@@ -13251,6 +13252,9 @@ Map {
       },
       "role": {
         "type": "string",
+      },
+      "translateWithId": {
+        "type": "func",
       },
       "type": {
         "type": "string",
@@ -15253,9 +15257,7 @@ Map {
       "className": {
         "type": "string",
       },
-      "closeButtonLabelText": {
-        "type": "string",
-      },
+      "closeButtonLabelText": [Function],
       "defaultValue": {
         "args": [
           [
@@ -15293,6 +15295,9 @@ Map {
       },
       "role": {
         "type": "string",
+      },
+      "translateWithId": {
+        "type": "func",
       },
       "type": {
         "type": "string",
