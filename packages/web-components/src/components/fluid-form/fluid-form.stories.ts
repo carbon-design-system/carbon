@@ -5,219 +5,638 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit';
-import spread from '../../globals/directives/spread';
+import { html, nothing } from 'lit';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import { iconLoader } from '../../globals/internal/icon-loader';
+import View16 from '@carbon/icons/es/view/16.js';
+import FolderOpen16 from '@carbon/icons/es/folder--open/16.js';
+import Folders16 from '@carbon/icons/es/folders/16.js';
 import './index';
-import '../fluid-text-input';
-import '../fluid-textarea';
-import '../fluid-number-input';
-import '../fluid-select';
-import '../fluid-time-picker';
-import '../fluid-password-input';
-import '../button';
-import '../modal';
-import '../fluid-search';
-import '../fluid-password-input';
+import '../stack/index';
+import '../ai-label/index';
+import '../icon-button/index';
+import '../radio-button/index';
+import '../checkbox/index';
+import '../form-group/index';
+import '../file-uploader/index';
+import '../button/index';
+import '../modal/index';
+import '../fluid-text-input/index';
+import '../fluid-password-input/index';
+import '../fluid-textarea/index';
+import '../fluid-number-input/index';
+import '../fluid-select/index';
+import '../fluid-search/index';
+import '../fluid-dropdown/index';
+import '../fluid-combo-box/index';
+import '../fluid-multi-select/index';
+import '../fluid-date-picker/index';
 
-const additionalProps = {
-  class: 'some-class',
-  'aria-label': 'sample form',
+const items = [
+  {
+    value: 'option-0',
+    text: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
+  },
+  {
+    value: 'option-1',
+    text: 'Option 1',
+  },
+  {
+    value: 'option-2',
+    text: 'Option 2',
+  },
+  {
+    value: 'option-3',
+    text: 'Option 3 - a disabled item',
+    disabled: true,
+  },
+  {
+    value: 'option-4',
+    text: 'Option 4',
+  },
+  {
+    value: 'option-5',
+    text: 'Option 5',
+  },
+];
+
+const renderAILabelContent = () => html`
+  <div slot="body-text">
+    <p class="secondary">AI Explained</p>
+    <h2 class="ai-label-heading">84%</h2>
+    <p class="secondary bold">Confidence score</p>
+    <p class="secondary">
+      Lorem ipsum dolor sit amet, di os consectetur adipisicing elit, sed do
+      eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+    </p>
+    <hr />
+    <p class="secondary">Model type</p>
+    <p class="bold">Foundation model</p>
+  </div>
+`;
+
+const renderAILabelActions = () => html`
+  <cds-icon-button kind="ghost" slot="actions" size="lg">
+    ${iconLoader(View16, { slot: 'icon' })}
+    <span slot="tooltip-content"> View </span>
+  </cds-icon-button>
+  <cds-icon-button kind="ghost" slot="actions" size="lg">
+    ${iconLoader(FolderOpen16, { slot: 'icon' })}
+    <span slot="tooltip-content"> Open Folder </span>
+  </cds-icon-button>
+  <cds-icon-button kind="ghost" slot="actions" size="lg">
+    ${iconLoader(Folders16, { slot: 'icon' })}
+    <span slot="tooltip-content"> Folders </span>
+  </cds-icon-button>
+  <cds-ai-label-action-button>View details</cds-ai-label-action-button>
+`;
+
+const renderAILabel = (revertActive) =>
+  html`<cds-ai-label
+    alignment="bottom-left"
+    autoalign
+    ?revert-active="${revertActive}">
+    ${renderAILabelContent()}${renderAILabelActions()}
+  </cds-ai-label>`;
+
+const dropdownItems = () =>
+  items.map(
+    (item) => html`
+      <cds-dropdown-item
+        value="${item.value}"
+        ?disabled="${Boolean(item.disabled)}"
+        >${item.text}</cds-dropdown-item
+      >
+    `
+  );
+
+const comboBoxItems = () =>
+  items.map(
+    (item) => html`
+      <cds-combo-box-item
+        value="${item.value}"
+        ?disabled="${Boolean(item.disabled)}"
+        >${item.text}</cds-combo-box-item
+      >
+    `
+  );
+
+const multiSelectItems = () =>
+  items.map(
+    (item) => html`
+      <cds-multi-select-item
+        value="${item.value}"
+        ?disabled="${Boolean(item.disabled)}"
+        >${item.text}</cds-multi-select-item
+      >
+    `
+  );
+
+const row = (children) => html`
+  <div style="display: flex; flex-wrap: wrap; gap: 1rem;">${children}</div>
+`;
+
+const col = (children) => html`
+  <div style="flex: 1 1 12rem; min-width: 0;">${children}</div>
+`;
+
+const dateRow = (children) => html`
+  <div
+    style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: flex-start;">
+    ${children}
+  </div>
+`;
+
+const dateRangeCol = (children) => html`
+  <div style="flex: 0 1 auto;">${children}</div>
+`;
+
+const dateSimpleCol = (children) => html`
+  <div style="flex: 0 1 auto;">${children}</div>
+`;
+
+const aiLabelStoryStyles = `
+  cds-ai-label p {
+    font-size: var(--cds-body-compact-01-font-size, 0.875rem);
+    font-weight: var(--cds-body-compact-01-font-weight, 400);
+    line-height: var(--cds-body-compact-01-line-height, 1.28572);
+    letter-spacing: var(--cds-body-compact-01-letter-spacing, 0.16px);
+  }
+
+  cds-ai-label .bold {
+    font-weight: 600;
+  }
+
+  cds-ai-label .secondary {
+    color: var(--cds-text-secondary, #525252);
+  }
+
+  cds-ai-label .ai-label-heading {
+    font-size: 2.625rem;
+    font-weight: 300;
+    margin-block-end: 1rem;
+  }
+
+  cds-ai-label hr {
+    border: 0;
+    background: var(--cds-border-subtle, #c6c6c6);
+    block-size: 1px;
+    margin-block: 2rem;
+  }
+`;
+
+const wrapForm = (content, { showInModal, modalId }) => {
+  if (!showInModal) {
+    return html`<div style="width: 100%; max-width: 600px; min-width: 0;">
+      <style>
+        ${aiLabelStoryStyles}
+      </style>
+      ${content}
+    </div>`;
+  }
+
+  const openModal = () => {
+    document.getElementById(modalId)?.toggleAttribute('open');
+  };
+
+  return html`
+    <style>
+      ${aiLabelStoryStyles}
+    </style>
+    <cds-button @click="${openModal}">Open form</cds-button>
+    <cds-modal id="${modalId}" size="md" prevent-close-on-click-outside>
+      <cds-modal-header>
+        <cds-modal-close-button></cds-modal-close-button>
+        <cds-modal-heading>Create project</cds-modal-heading>
+      </cds-modal-header>
+      <cds-modal-body has-scrolling-content>
+        <div style="padding: 1rem;">${content}</div>
+      </cds-modal-body>
+      <cds-modal-footer>
+        <cds-modal-footer-button kind="secondary" data-modal-close>
+          Cancel
+        </cds-modal-footer-button>
+        <cds-modal-footer-button kind="primary" data-modal-close>
+          Create project
+        </cds-modal-footer-button>
+      </cds-modal-footer>
+    </cds-modal>
+  `;
 };
 
-const TextInputProps = {
-  class: 'some-class',
-  id: 'test2',
-  label: 'Text Input label',
-  placeholder: 'Placeholder text',
-};
+const renderDefaultForm = (args) => {
+  const {
+    skeleton,
+    showInModal,
+    aiLabel,
+    revertActive,
+    disabled,
+    readOnly,
+    invalid,
+    invalidText,
+    warn,
+    warnText,
+  } = args ?? {};
 
-const TextAreaProps = {
-  class: 'some-class',
-  id: 'test3',
-  label: 'Text Area label',
-  placeholder: 'Placeholder text',
-};
+  const decorator = () => (aiLabel ? renderAILabel(revertActive) : nothing);
 
-const PasswordInputProps = {
-  class: 'some-class',
-  id: 'test4',
-  label: 'Password',
-  value: '0000',
+  if (skeleton) {
+    return wrapForm(
+      html`
+        <cds-fluid-form aria-label="new project setup">
+          <cds-stack gap="5">
+            <cds-fluid-search-skeleton></cds-fluid-search-skeleton>
+            ${row(html`
+              ${col(
+                html`<cds-fluid-text-input-skeleton></cds-fluid-text-input-skeleton>`
+              )}
+              ${col(
+                html`<cds-fluid-text-input-skeleton></cds-fluid-text-input-skeleton>`
+              )}
+            `)}
+            ${row(html`
+              ${col(
+                html`<cds-fluid-dropdown-skeleton></cds-fluid-dropdown-skeleton>`
+              )}
+              ${col(
+                html`<cds-fluid-combo-box-skeleton></cds-fluid-combo-box-skeleton>`
+              )}
+            `)}
+            <cds-fluid-multi-select-skeleton></cds-fluid-multi-select-skeleton>
+            ${row(html`
+              <div style="flex: 2 1 16rem; min-width: 0;">
+                <cds-fluid-date-picker-skeleton
+                  date-picker-type="range"></cds-fluid-date-picker-skeleton>
+              </div>
+              <div style="flex: 1 1 8rem; min-width: 0;">
+                <cds-fluid-date-picker-skeleton
+                  date-picker-type="simple"></cds-fluid-date-picker-skeleton>
+              </div>
+            `)}
+            ${row(html`
+              ${col(
+                html`<cds-fluid-number-input-skeleton></cds-fluid-number-input-skeleton>`
+              )}
+              ${col(
+                html`<cds-fluid-select-skeleton></cds-fluid-select-skeleton>`
+              )}
+            `)}
+            <cds-fluid-dropdown-skeleton></cds-fluid-dropdown-skeleton>
+            <cds-fluid-multi-select-skeleton></cds-fluid-multi-select-skeleton>
+            <cds-fluid-textarea-skeleton></cds-fluid-textarea-skeleton>
+            <cds-fluid-text-input-skeleton></cds-fluid-text-input-skeleton>
+            <cds-fluid-text-input-skeleton></cds-fluid-text-input-skeleton>
+          </cds-stack>
+        </cds-fluid-form>
+      `,
+      { showInModal, modalId: 'fluid-form-default-modal' }
+    );
+  }
+
+  return wrapForm(
+    html`
+      <cds-fluid-form aria-label="new project setup">
+        <cds-stack gap="5">
+          <cds-fluid-search
+            id="search-members"
+            label-text="Search members"
+            placeholder="e.g. Jane Smith"
+            ?disabled="${disabled}"></cds-fluid-search>
+
+          ${row(html`
+            ${col(html`
+              <cds-fluid-text-input
+                id="project-name"
+                label="Project name"
+                placeholder="e.g. Carbon Design System"
+                ?disabled="${disabled}"
+                ?readonly="${readOnly}"
+                ?invalid="${invalid}"
+                invalid-text="${ifDefined(invalidText)}"
+                ?warn="${warn}"
+                warn-text="${ifDefined(warnText)}">
+                ${decorator()}
+              </cds-fluid-text-input>
+            `)}
+            ${col(html`
+              <cds-fluid-text-input
+                id="project-id"
+                label="Project ID"
+                placeholder="e.g. carbon-design-system"
+                ?disabled="${disabled}"
+                ?readonly="${readOnly}"
+                ?invalid="${invalid}"
+                invalid-text="${ifDefined(invalidText)}"
+                ?warn="${warn}"
+                warn-text="${ifDefined(warnText)}">
+                ${decorator()}
+              </cds-fluid-text-input>
+            `)}
+          `)}
+          ${row(html`
+            ${col(html`
+              <cds-fluid-dropdown
+                id="workspace"
+                title-text="Workspace"
+                label="Select workspace"
+                value="option-1"
+                ?disabled="${disabled}"
+                ?read-only="${readOnly}"
+                ?invalid="${invalid}"
+                invalid-text="${ifDefined(invalidText)}"
+                ?warn="${warn}"
+                warn-text="${ifDefined(warnText)}">
+                ${decorator()} ${dropdownItems()}
+              </cds-fluid-dropdown>
+            `)}
+            ${col(html`
+              <cds-fluid-combo-box
+                id="project-lead"
+                title-text="Project lead"
+                placeholder="Search members..."
+                ?disabled="${disabled}"
+                ?read-only="${readOnly}"
+                ?invalid="${invalid}"
+                invalid-text="${ifDefined(invalidText)}"
+                ?warn="${warn}"
+                warn-text="${ifDefined(warnText)}">
+                ${decorator()} ${comboBoxItems()}
+              </cds-fluid-combo-box>
+            `)}
+          `)}
+
+          <cds-fluid-multi-select
+            id="team-members"
+            title-text="Team members"
+            label="Select members"
+            selection-feedback="top-after-reopen"
+            ?disabled="${disabled}"
+            ?read-only="${readOnly}"
+            ?invalid="${invalid}"
+            invalid-text="${ifDefined(invalidText)}"
+            ?warn="${warn}"
+            warn-text="${ifDefined(warnText)}">
+            ${decorator()} ${multiSelectItems()}
+          </cds-fluid-multi-select>
+
+          ${dateRow(html`
+            ${dateRangeCol(html`
+              <cds-fluid-date-picker
+                ?disabled="${disabled}"
+                ?readonly="${readOnly}">
+                <cds-fluid-date-picker-input
+                  kind="from"
+                  id="start-date"
+                  placeholder="mm/dd/yyyy"
+                  label-text="Start date"
+                  ?disabled="${disabled}"
+                  ?readonly="${readOnly}"
+                  ?invalid="${invalid}"
+                  invalid-text="${ifDefined(invalidText)}"
+                  ?warn="${warn}"
+                  warn-text="${ifDefined(warnText)}">
+                  ${decorator()}
+                </cds-fluid-date-picker-input>
+                <cds-fluid-date-picker-input
+                  kind="to"
+                  id="end-date"
+                  placeholder="mm/dd/yyyy"
+                  label-text="End date"
+                  ?disabled="${disabled}"
+                  ?readonly="${readOnly}"
+                  ?invalid="${invalid}"
+                  invalid-text="${ifDefined(invalidText)}"
+                  ?warn="${warn}"
+                  warn-text="${ifDefined(warnText)}">
+                  ${decorator()}
+                </cds-fluid-date-picker-input>
+              </cds-fluid-date-picker>
+            `)}
+            ${dateSimpleCol(html`
+              <cds-fluid-date-picker
+                ?disabled="${disabled}"
+                ?readonly="${readOnly}">
+                <cds-fluid-date-picker-input
+                  kind="simple"
+                  id="deadline"
+                  placeholder="mm/dd/yyyy"
+                  label-text="Deadline"
+                  ?disabled="${disabled}"
+                  ?readonly="${readOnly}"
+                  ?invalid="${invalid}"
+                  invalid-text="${ifDefined(invalidText)}"
+                  ?warn="${warn}"
+                  warn-text="${ifDefined(warnText)}">
+                  ${decorator()}
+                </cds-fluid-date-picker-input>
+              </cds-fluid-date-picker>
+            `)}
+          `)}
+          ${row(html`
+            ${col(html`
+              <cds-fluid-number-input
+                id="budget"
+                label="Budget"
+                min="0"
+                max="10000000"
+                value="5000"
+                step="500"
+                icon-description="Adjust budget"
+                ?disabled="${disabled}"
+                ?readonly="${readOnly}"
+                ?invalid="${invalid}"
+                invalid-text="${ifDefined(invalidText)}"
+                ?warn="${warn}"
+                warn-text="${ifDefined(warnText)}">
+                ${decorator()}
+              </cds-fluid-number-input>
+            `)}
+            ${col(html`
+              <cds-fluid-select
+                id="currency"
+                label-text="Currency"
+                value="usd"
+                ?disabled="${disabled}"
+                ?readonly="${readOnly}"
+                ?invalid="${invalid}"
+                invalid-text="${ifDefined(invalidText)}"
+                ?warn="${warn}"
+                warn-text="${ifDefined(warnText)}">
+                ${decorator()}
+                <cds-select-item value="usd">USD – US Dollar</cds-select-item>
+                <cds-select-item value="eur">EUR – Euro</cds-select-item>
+                <cds-select-item value="gbp"
+                  >GBP – British Pound</cds-select-item
+                >
+                <cds-select-item value="jpy"
+                  >JPY – Japanese Yen</cds-select-item
+                >
+              </cds-fluid-select>
+            `)}
+          `)}
+
+          <cds-radio-button-group
+            name="project-visibility"
+            value="private"
+            legend-text="Visibility"
+            helper-text="Who can see and access this project."
+            ?disabled="${disabled}"
+            ?readonly="${readOnly}">
+            <cds-radio-button
+              value="private"
+              id="vis-private"
+              label-text="Private – only invited members"></cds-radio-button>
+            <cds-radio-button
+              value="internal"
+              id="vis-internal"
+              label-text="Internal – everyone in the org"></cds-radio-button>
+            <cds-radio-button
+              value="public"
+              id="vis-public"
+              label-text="Public – anyone with the link"></cds-radio-button>
+          </cds-radio-button-group>
+
+          <cds-fluid-dropdown
+            id="project-type"
+            title-text="Project type"
+            label="Select type"
+            value="option-2"
+            ?disabled="${disabled}"
+            ?read-only="${readOnly}"
+            ?invalid="${invalid}"
+            invalid-text="${ifDefined(invalidText)}"
+            ?warn="${warn}"
+            warn-text="${ifDefined(warnText)}">
+            ${decorator()} ${dropdownItems()}
+          </cds-fluid-dropdown>
+
+          <cds-fluid-multi-select
+            id="tags"
+            filterable
+            title-text="Tags"
+            placeholder="Filter"
+            selection-feedback="top-after-reopen"
+            ?disabled="${disabled}"
+            ?read-only="${readOnly}"
+            ?invalid="${invalid}"
+            invalid-text="${ifDefined(invalidText)}"
+            ?warn="${warn}"
+            warn-text="${ifDefined(warnText)}">
+            ${decorator()} ${multiSelectItems()}
+          </cds-fluid-multi-select>
+
+          <cds-form-group legend-text="Features">
+            <cds-checkbox
+              id="feat-issues"
+              default-checked
+              ?disabled="${disabled}"
+              >Issue tracking</cds-checkbox
+            >
+            <cds-checkbox id="feat-wiki" default-checked ?disabled="${disabled}"
+              >Wiki</cds-checkbox
+            >
+            <cds-checkbox id="feat-ci" ?disabled="${disabled}"
+              >CI / CD pipeline</cds-checkbox
+            >
+            <cds-checkbox id="feat-releases" ?disabled="${disabled}"
+              >Releases</cds-checkbox
+            >
+          </cds-form-group>
+
+          <cds-fluid-textarea
+            id="project-description"
+            label="Description"
+            placeholder="What is this project about?"
+            rows="4"
+            ?disabled="${disabled}"
+            ?readonly="${readOnly}"
+            ?invalid="${invalid}"
+            invalid-text="${ifDefined(invalidText)}"
+            ?warn="${warn}"
+            warn-text="${ifDefined(warnText)}">
+            ${decorator()}
+          </cds-fluid-textarea>
+
+          <cds-fluid-text-input
+            id="repo-url"
+            label="Repository URL"
+            placeholder="https://github.com/org/repo"
+            ?disabled="${disabled}"
+            ?readonly="${readOnly}"
+            ?invalid="${invalid}"
+            invalid-text="${ifDefined(invalidText)}"
+            ?warn="${warn}"
+            warn-text="${ifDefined(warnText)}">
+            ${decorator()}
+          </cds-fluid-text-input>
+
+          <cds-fluid-password-input
+            id="repo-password"
+            label="Password"
+            placeholder="Enter password"
+            required
+            pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,}$"
+            ?disabled="${disabled}"
+            ?readonly="${readOnly}"
+            ?invalid="${invalid}"
+            invalid-text="Your password must be at least 6 characters as well as contain at least one uppercase, one lowercase, and one number."
+            ?warn="${warn}"
+            warn-text="${ifDefined(warnText)}">
+          </cds-fluid-password-input>
+
+          <cds-form-group legend-text="Project assets">
+            <cds-file-uploader
+              id="file-assets"
+              label-description="Max 25 MB per file."
+              icon-description="Remove file"
+              ?disabled="${disabled}">
+              <cds-file-uploader-button
+                accept=".pdf,.png,.jpg,.fig,.sketch"
+                button-kind="primary"
+                size="md"
+                multiple>
+                Add files
+              </cds-file-uploader-button>
+            </cds-file-uploader>
+          </cds-form-group>
+
+          <cds-button type="submit">Create project</cds-button>
+        </cds-stack>
+      </cds-fluid-form>
+    `,
+    { showInModal, modalId: 'fluid-form-default-modal' }
+  );
 };
 
 export const Default = {
-  render: (args) => {
-    const { disabled, readonly, invalid, invalidText, warn, warnText } = args;
-    const toggleButton = () => {
-      document.querySelector('cds-modal')?.toggleAttribute('open');
-    };
-    return html`
-      <cds-fluid-form ...=${spread(additionalProps)}>
-        <div style="display: flex;">
-          <cds-fluid-time-picker
-            id="time-picker-1"
-            label-text="Time"
-            placeholder="hh:mm"
-            ?disabled="${disabled}"
-            ?readonly="${readonly}"
-            ?invalid="${invalid}"
-            invalid-text="${invalidText}"
-            ?warning="${warn}"
-            warning-text="${warnText}">
-            <cds-fluid-time-picker-select
-              id="select-01"
-              label-text="Clock"
-              default-value="am">
-              <cds-select-item value="am">AM</cds-select-item>
-              <cds-select-item value="pm">PM</cds-select-item>
-            </cds-fluid-time-picker-select>
-            <cds-fluid-time-picker-select
-              id="select-02"
-              label-text="Timezone"
-              default-value="et">
-              <cds-select-item value="et">Eastern Time (ET)</cds-select-item>
-              <cds-select-item value="ct">Central Time (CT)</cds-select-item>
-              <cds-select-item value="mt">Mountain Time (MT)</cds-select-item>
-              <cds-select-item value="pt">Pacific Time (PT)</cds-select-item>
-            </cds-fluid-time-picker-select>
-          </cds-fluid-time-picker>
-          <!-- TODO: cds-fluid-date-picker should go here, once it is implemented -->
-          <cds-fluid-select
-            id="select-1"
-            label-text="Choose an option"
-            placeholder="Choose an option"
-            ?disabled="${disabled}"
-            ?readonly="${readonly}"
-            ?invalid="${invalid}"
-            invalid-text="${invalidText}"
-            ?warn="${warn}"
-            warn-text="${warnText}">
-            <cds-select-item value="placeholder-item" disabled hidden
-              >Choose an option</cds-select-item
-            >
-            <cds-select-item-group label="Category 1">
-              <cds-select-item value="option-1">Option 1</cds-select-item>
-              <cds-select-item value="option-2">Option 2</cds-select-item>
-            </cds-select-item-group>
-            <cds-select-item-group label="Category 2">
-              <cds-select-item value="option-3">Option 3</cds-select-item>
-              <cds-select-item value="option-4">Option 4</cds-select-item>
-            </cds-select-item-group>
-          </cds-fluid-select>
-        </div>
-
-        <div style="display: flex;">
-          <cds-fluid-text-input
-            ...=${spread(TextInputProps)}
-            ?disabled="${disabled}"
-            ?readonly="${readonly}"
-            ?invalid="${invalid}"
-            invalid-text="${invalidText}"
-            ?warn="${warn}"
-            warn-text="${warnText}">
-          </cds-fluid-text-input>
-          <cds-fluid-number-input
-            label="Number Input Label"
-            id="input-default"
-            step="10"
-            min="0"
-            max="100"
-            value="50"
-            ?disabled="${disabled}"
-            ?readonly="${readonly}"
-            ?invalid="${invalid}"
-            invalid-text="${invalidText}"
-            ?warn="${warn}"
-            warn-text="${warnText}">
-          </cds-fluid-number-input>
-        </div>
-
-        <cds-fluid-password-input
-          ...=${spread(PasswordInputProps)}
-          ?disabled="${disabled}"
-          ?readonly="${readonly}"
-          ?invalid="${invalid}"
-          invalid-text="${invalidText}"
-          ?warn="${warn}"
-          warn-text="${warnText}">
-        </cds-fluid-password-input>
-
-        <cds-fluid-textarea
-          ...=${spread(TextAreaProps)}
-          ?disabled="${disabled}"
-          ?readonly="${readonly}"
-          ?invalid="${invalid}"
-          invalid-text="${invalidText}"
-          ?warn="${warn}"
-          warn-text="${warnText}">
-        </cds-fluid-textarea>
-      </cds-fluid-form>
-
-      <br />
-
-      <cds-modal size="md" prevent-close-on-click-outside>
-        <cds-modal-header>
-          <cds-modal-close-button></cds-modal-close-button>
-          <cds-modal-label>Label</cds-modal-label>
-          <cds-modal-heading>Modal heading</cds-modal-heading>
-        </cds-modal-header>
-        <cds-modal-body has-scrolling-content>
-          <cds-fluid-form ...=${spread(additionalProps)}>
-            <cds-fluid-text-input
-              class="${TextInputProps.class}"
-              id="modal-test2"
-              label="${TextInputProps.label}"
-              placeholder="${TextInputProps.placeholder}"
-              ?disabled="${disabled}"
-              ?readonly="${readonly}"
-              ?invalid="${invalid}"
-              invalid-text="${invalidText}"
-              ?warn="${warn}"
-              warn-text="${warnText}">
-            </cds-fluid-text-input>
-            <cds-fluid-password-input
-              class="${PasswordInputProps.class}"
-              id="modal-test4"
-              label="${PasswordInputProps.label}"
-              value="${PasswordInputProps.value}"
-              ?disabled="${disabled}"
-              ?readonly="${readonly}"
-              ?invalid="${invalid}"
-              invalid-text="${invalidText}"
-              ?warn="${warn}"
-              warn-text="${warnText}">
-            </cds-fluid-password-input>
-            <cds-fluid-textarea
-              class="${TextAreaProps.class}"
-              id="modal-test3"
-              label="${TextAreaProps.label}"
-              placeholder="${TextAreaProps.placeholder}"
-              ?disabled="${disabled}"
-              ?readonly="${readonly}"
-              ?invalid="${invalid}"
-              invalid-text="${invalidText}"
-              ?warn="${warn}"
-              warn-text="${warnText}">
-            </cds-fluid-textarea>
-          </cds-fluid-form>
-        </cds-modal-body>
-        <cds-modal-footer>
-          <cds-modal-footer-button kind="secondary" data-modal-close>
-            Cancel
-          </cds-modal-footer-button>
-          <cds-modal-footer-button kind="primary">
-            Save
-          </cds-modal-footer-button>
-        </cds-modal-footer>
-      </cds-modal>
-      <cds-button @click="${toggleButton}">Fluid form in modal</cds-button>
-    `;
+  args: {
+    skeleton: false,
+    aiLabel: false,
+    revertActive: false,
+    showInModal: false,
+    disabled: false,
+    readOnly: false,
+    invalid: false,
+    invalidText: 'Error message.',
+    warn: false,
+    warnText: 'Warning message.',
   },
-};
-
-const meta = {
-  title: 'Components/Fluid Components/FluidForm',
   argTypes: {
+    skeleton: {
+      control: { type: 'boolean' },
+      description: 'Render all form inputs as skeleton loaders simultaneously',
+    },
+    aiLabel: {
+      table: { disable: true },
+    },
+    revertActive: {
+      table: { disable: true },
+    },
+    showInModal: {
+      control: { type: 'boolean' },
+      description:
+        'Render the entire form inside a ComposedModal with a trigger button',
+    },
     disabled: {
       control: 'boolean',
       description: 'Specify whether the fluid form inputs should be disabled',
@@ -241,20 +660,15 @@ const meta = {
         'Specify whether the fluid form inputs should display a warning',
     },
     warnText: {
-      control: 'text',
+      control: { type: 'text' },
       description: 'Provide the text for the warning state',
     },
   },
-  args: {
-    disabled: false,
-    readonly: false,
-    invalid: false,
-    invalidText:
-      'Error message that is really long can wrap to more lines but should not be excessively long.',
-    warn: false,
-    warnText:
-      'Warning message that is really long can wrap to more lines but should not be excessively long.',
-  },
+  render: renderDefaultForm,
+};
+
+const meta = {
+  title: 'Components/Fluid Components/FluidForm',
 };
 
 export default meta;

@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2026
+// Copyright IBM Corp. 2019, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -8,6 +8,7 @@
 $css--plex: true !default;
 
 @use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/feature-flags' as flags;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/utilities' as *;
@@ -36,8 +37,11 @@ $css--plex: true !default;
   }
 
   .#{$prefix}--list-box__menu {
-    inset-block-start: 100%;
-    margin-block-start: 1px;
+    @if not flags.enabled('enable-v12-release') {
+      inset-block-start: 100%;
+      margin-block-start: 1px;
+    }
+
     outline: none;
   }
 
@@ -57,8 +61,10 @@ $css--plex: true !default;
     color: $text-disabled;
   }
 
-  .#{$prefix}--list-box__field:focus {
-    @extend .#{$prefix}--multi-select--filterable--input-focused;
+  @if not flags.enabled('enable-v12-release') {
+    .#{$prefix}--list-box__field:focus {
+      @extend .#{$prefix}--multi-select--filterable--input-focused;
+    }
   }
 
   /* stylelint-disable declaration-no-important */
@@ -68,9 +74,11 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-multi-select[filterable]) {
-  .#{$prefix}--list-box__field:focus-within {
-    outline: $spacing-01 solid $focus;
-    outline-offset: -#{$spacing-01};
+  @if not flags.enabled('enable-v12-release') {
+    .#{$prefix}--list-box__field:focus-within {
+      outline: $spacing-01 solid $focus;
+      outline-offset: -#{$spacing-01};
+    }
   }
   .#{$prefix}--list-box {
     .#{$prefix}--list-box__field {
@@ -78,6 +86,52 @@ $css--plex: true !default;
     }
   }
 }
+@if flags.enabled('enable-v12-release') {
+  // Default: full outline on trigger, none when navigating items, thin
+  // when something is selected
+  :host(#{$prefix}-multi-select:not([filterable]):not([item-clicked])) {
+    .#{$prefix}--list-box:focus-within:not(
+        :has([aria-activedescendant]:not([aria-activedescendant='']))
+      ):not(
+        .#{$prefix}--list-box--expanded.#{$prefix}--multi-select--selected
+      ) {
+      @include focus-outline('outline');
+    }
+  }
+
+  :host(#{$prefix}-multi-select:not([filterable])) {
+    .#{$prefix}--list-box--expanded.#{$prefix}--multi-select--selected:focus-within {
+      @include focus-outline('outline');
+
+      outline-offset: rem(-1px);
+      outline-width: rem(1px);
+    }
+  }
+
+  // Filterable: full outline on trigger, thin whenever an option is
+  // active or anything is selected
+  :host(#{$prefix}-multi-select[filterable]) {
+    .#{$prefix}--list-box:focus-within {
+      @include focus-outline('outline');
+    }
+
+    .#{$prefix}--list-box:focus-within:has(
+        [aria-activedescendant]:not([aria-activedescendant=''])
+      ),
+    .#{$prefix}--list-box.#{$prefix}--multi-select--selected:focus-within {
+      outline-offset: rem(-1px);
+      outline-width: rem(1px);
+    }
+  }
+
+  :host(#{$prefix}-multi-select[filterable][item-clicked]) {
+    .#{$prefix}--list-box:focus-within {
+      outline-offset: rem(-1px);
+      outline-width: rem(1px);
+    }
+  }
+}
+
 :host(#{$prefix}-multi-select[filterable][has-value])
   .#{$prefix}--list-box__field
   ~ ::slotted(#{$prefix}-ai-label) {
@@ -439,14 +493,33 @@ $css--plex: true !default;
   }
 }
 
-// When select all is turned on, the first item in the listbox
-// is always the "Select all" option and gets special border
-// treatment
-:host(#{$prefix}-multi-select-item[is-select-all]) {
-  .#{$prefix}--list-box__menu-item__option {
-    padding: 0.6875rem $spacing-05;
-    margin: 0;
-    border-block-end: 1px solid $border-subtle-01;
+@if flags.enabled('enable-v12-release') {
+  // When select all is turned on, the "Select all" option is separated from
+  // the rest of the options by a divider
+  :host(#{$prefix}-multi-select-item[is-select-all]) {
+    position: relative;
+
+    // spacing-02 margin * 2 + 1px divider
+    margin-block-end: calc(#{$spacing-02} * 2 + 1px);
+
+    .#{$prefix}--list-box__menu-divider {
+      position: absolute;
+      background-color: $border-subtle;
+      block-size: convert.to-rem(1px);
+      inset-block-start: calc(100% + #{$spacing-02});
+      inset-inline: -$spacing-02;
+    }
+  }
+} @else {
+  // When select all is turned on, the first item in the listbox
+  // is always the "Select all" option and gets special border
+  // treatment
+  :host(#{$prefix}-multi-select-item[is-select-all]) {
+    .#{$prefix}--list-box__menu-item__option {
+      padding: 0.6875rem $spacing-05;
+      margin: 0;
+      border-block-end: 1px solid $border-subtle-01;
+    }
   }
 }
 
@@ -470,14 +543,39 @@ $css--plex: true !default;
 :host(#{$prefix}-multi-select[ai-label])
   .#{$prefix}--list-box__wrapper--decorator {
   @include ai-gradient;
+
+  @if flags.enabled('enable-v12-release') {
+    // Reset the bottom-edge color override from @include ai-gradient so the
+    // border-box gradient layer controls all four sides uniformly.
+    background:
+      linear-gradient(
+          0deg,
+          $ai-aura-start-sm 0%,
+          15%,
+          $ai-aura-end 50%,
+          transparent 100%
+        )
+        padding-box,
+      linear-gradient($field, $field) padding-box,
+      // (ai-border-start → ai-border-end), mirroring the default v12 border gradient
+      linear-gradient(
+          to bottom,
+          $ai-border-start calc(100% - 4px),
+          $ai-border-strong 100%
+        )
+        border-box;
+    border-block-end-color: transparent;
+  }
 }
 
-:host(#{$prefix}-multi-select[item-clicked]),
-:host(#{$prefix}-multi-select[has-value]) {
-  .#{$prefix}--list-box__field,
-  .#{$prefix}--multi-select--invalid {
-    outline: 1px solid $focus !important;
-    outline-offset: -1px !important;
+@if not flags.enabled('enable-v12-release') {
+  :host(#{$prefix}-multi-select[item-clicked]),
+  :host(#{$prefix}-multi-select[has-value]) {
+    .#{$prefix}--list-box__field,
+    .#{$prefix}--multi-select--invalid {
+      outline: 1px solid $focus !important;
+      outline-offset: -1px !important;
+    }
   }
 }
 

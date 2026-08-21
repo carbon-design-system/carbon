@@ -9,6 +9,8 @@
 @use '../text-input';
 @use '../tag';
 @use '../tag/mixins' as *;
+@use '../../border-radius' as *;
+@use '../../feature-flags' as *;
 @use '../../config' as *;
 @use '../../colors' as *;
 @use '../../theme' as *;
@@ -99,22 +101,65 @@ $list-box-menu-width: convert.to-rem(300px);
     &:hover {
       background-color: $field-hover;
     }
+
+    @if enabled('enable-v12-release') {
+      border: 1px solid transparent;
+      border-radius: $border-radius-04;
+      transition: background $duration-fast-01 motion(standard, productive);
+
+      &:not(
+          .#{$prefix}--list-box--inline,
+          .#{$prefix}--dropdown--inline,
+          .#{$prefix}--multi-select--inline,
+          .#{$prefix}--list-box--disabled,
+          .#{$prefix}--dropdown--disabled,
+          .#{$prefix}--dropdown--readonly,
+          .#{$prefix}--combo-box--readonly,
+          .#{$prefix}--multi-select--readonly
+        ) {
+        // (gray-20 → gray-50)
+        background:
+          linear-gradient($field, $field) padding-box,
+          linear-gradient(
+              to bottom,
+              $border-subtle calc(100% - 4px),
+              $border-strong 100%
+            )
+            border-box;
+      }
+    }
+  }
+
+  @if enabled('enable-v12-release') {
+    .#{$prefix}--combo-box--readonly,
+    .#{$prefix}--multi-select--readonly,
+    .#{$prefix}--dropdown--readonly {
+      border-radius: $border-radius-00;
+      border-block-end-color: $border-subtle;
+    }
+
+    .#{$prefix}--combo-box--readonly .#{$prefix}--text-input,
+    .#{$prefix}--multi-select--readonly .#{$prefix}--text-input {
+      border-radius: $border-radius-00;
+    }
   }
 
   .#{$prefix}--multi-select.#{$prefix}--multi-select--readonly.#{$prefix}--list-box {
     cursor: default;
   }
 
-  .#{$prefix}--list-box--expanded {
-    border-block-end-color: $border-subtle-01;
-  }
+  @if not enabled('enable-v12-release') {
+    .#{$prefix}--list-box--expanded {
+      border-block-end-color: $border-subtle-01;
+    }
 
-  .#{$prefix}--layer-two .#{$prefix}--list-box--expanded {
-    border-block-end-color: $border-subtle-02;
-  }
+    .#{$prefix}--layer-two .#{$prefix}--list-box--expanded {
+      border-block-end-color: $border-subtle-02;
+    }
 
-  .#{$prefix}--layer-three .#{$prefix}--list-box--expanded {
-    border-block-end-color: $border-subtle-03;
+    .#{$prefix}--layer-three .#{$prefix}--list-box--expanded {
+      border-block-end-color: $border-subtle-03;
+    }
   }
 
   .#{$prefix}--list-box--expanded:hover {
@@ -317,10 +362,27 @@ $list-box-menu-width: convert.to-rem(300px);
     text-overflow: ellipsis;
     vertical-align: top;
     white-space: nowrap;
+
+    @if enabled('enable-v12-release') {
+      block-size: 100%;
+    }
   }
 
   .#{$prefix}--list-box__field:focus {
     @include focus-outline('outline');
+  }
+
+  @if enabled('enable-v12-release') {
+    // v12: focus outline needs to go on the list-box component itself, instead
+    // of the text-input
+    .#{$prefix}--list-box
+      .#{$prefix}--combo-box--input--focus.#{$prefix}--text-input {
+      outline: transparent;
+    }
+
+    .#{$prefix}--list-box:has(.#{$prefix}--combo-box--input--focus) {
+      @include focus-outline('outline');
+    }
   }
 
   .#{$prefix}--list-box__field[disabled] {
@@ -519,6 +581,13 @@ $list-box-menu-width: convert.to-rem(300px);
     overflow-y: auto;
     transition: max-height $duration-fast-02 motion(standard, productive);
 
+    @if enabled('enable-v12-release') {
+      box-sizing: border-box;
+      padding: $spacing-02;
+      border-radius: $border-radius-08;
+      margin-block-start: $spacing-02;
+    }
+
     &:focus {
       // remove default browser focus in firefox
       @include focus-outline('border');
@@ -561,6 +630,10 @@ $list-box-menu-width: convert.to-rem(300px);
 
     &:active {
       background-color: $layer-selected;
+    }
+
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-04;
     }
   }
 
@@ -665,6 +738,12 @@ $list-box-menu-width: convert.to-rem(300px);
       padding: calc((layout.size('height') - 1rem) / 2) convert.to-rem(16px);
       border-color: transparent;
       margin: 0;
+    }
+
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-04;
+      border-block-end: none;
+      border-block-start: none;
     }
 
     &:hover {
@@ -836,6 +915,12 @@ $list-box-menu-width: convert.to-rem(300px);
     background-color: inherit;
     min-inline-size: 0;
     text-overflow: ellipsis;
+
+    // prevent nested borders
+    @if enabled('enable-v12-release') {
+      border: 0;
+      background: none;
+    }
   }
 
   // AILabel styles
@@ -933,6 +1018,28 @@ $list-box-menu-width: convert.to-rem(300px);
       :has(.#{$prefix}--slug--revert)
     ) {
     @include ai-gradient;
+
+    @if enabled('enable-v12-release') {
+      // Reset the bottom-edge color override from @include ai-gradient so the
+      // border-box gradient layer controls all four sides uniformly.
+      background:
+        linear-gradient(
+            0deg,
+            $ai-aura-start-sm 0%,
+            15%,
+            $ai-aura-end 50%,
+            transparent 100%
+          )
+          padding-box,
+        linear-gradient($field, $field) padding-box,
+        // (ai-border-start → ai-border-end), mirroring the default v12 border gradient
+        linear-gradient(
+            to bottom,
+            $ai-border-start calc(100% - 4px),
+            $ai-border-strong 100%
+          )
+          border-box;
+    }
   }
 
   .#{$prefix}--list-box__wrapper--decorator

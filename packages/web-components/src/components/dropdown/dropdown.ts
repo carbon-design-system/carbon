@@ -1306,13 +1306,6 @@ class CDSDropdown extends ValidityMixin(
     const inline = type === DROPDOWN_TYPE.INLINE;
     const normalizedProps = this._normalizedProps;
 
-    let activeDescendantFallback: string | undefined;
-    if (open && !activeDescendant) {
-      const constructor = this.constructor as typeof CDSDropdown;
-      const items = this.querySelectorAll(constructor.selectorItem);
-      activeDescendantFallback = items[0]?.id;
-    }
-
     const helperClasses = classMap({
       [`${prefix}--form__helper-text`]: true,
       [`${prefix}--form__helper-text--disabled`]: normalizedProps.disabled,
@@ -1397,7 +1390,7 @@ class CDSDropdown extends ValidityMixin(
             !shouldTriggerBeFocusable
               ? undefined
               : open
-                ? (activeDescendant ?? activeDescendantFallback)
+                ? (activeDescendant ?? '')
                 : ''
           )}">
           ${this._renderPrecedingLabel()}${this._renderLabel()}${this._renderFollowingLabel()}
