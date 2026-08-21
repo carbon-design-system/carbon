@@ -59,8 +59,20 @@ const actions = html`
   <cds-ai-label-action-button>View details</cds-ai-label-action-button>
 `;
 
+const args = {
+  onSubmit: () => {},
+};
+
+const argTypes = {
+  onSubmit: {
+    action: 'onSubmit',
+  },
+};
+
 export const Default = {
-  render: () => {
+  args,
+  argTypes,
+  render: ({ onSubmit }) => {
     const handleSubmit = () => {
       const form =
         (document
@@ -77,6 +89,7 @@ export const Default = {
       if (invalid) return;
 
       form.requestSubmit();
+      onSubmit();
     };
 
     return html`
@@ -179,6 +192,7 @@ export const Default = {
 
 export const WithAILabel = {
   args: {
+    ...args,
     revertActive: false,
     invalid: false,
     invalidText:
@@ -189,6 +203,7 @@ export const WithAILabel = {
       'Warning message that is really long can wrap to more lines but should not be excessively long.',
   },
   argTypes: {
+    ...argTypes,
     revertActive: {
       control: 'boolean',
     },
@@ -206,8 +221,15 @@ export const WithAILabel = {
     },
   },
   render: (args) => {
-    const { revertActive, invalid, invalidText, disabled, warn, warnText } =
-      args ?? {};
+    const {
+      revertActive,
+      invalid,
+      invalidText,
+      disabled,
+      warn,
+      warnText,
+      onSubmit,
+    } = args ?? {};
     const aiLabel = html` <cds-ai-label
       alignment="bottom-left"
       ?revert-active="${revertActive}">
@@ -221,6 +243,7 @@ export const WithAILabel = {
           ?.shadowRoot?.querySelector('form') as HTMLFormElement) || null;
       if (!form) return;
       form.requestSubmit();
+      onSubmit();
     };
     return html`
       <cds-form id="test-form"
