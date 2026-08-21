@@ -368,6 +368,49 @@ describe.each([
       expect(button).toHaveFocus();
     });
 
+    it('should blur focused modal descendants before aria-hidden is applied on close', async () => {
+      const ComposedModalExample = () => {
+        const buttonRef = useRef(null);
+        const [isOpen, setIsOpen] = useState(false);
+
+        return (
+          <>
+            <button
+              ref={buttonRef}
+              type="button"
+              onClick={() => setIsOpen(true)}>
+              Launch modal
+            </button>
+            <Component
+              launcherButtonRef={buttonRef}
+              open={isOpen}
+              onClose={() => setIsOpen(false)}>
+              <ModalHeader>Header</ModalHeader>
+              <ModalFooter
+                primaryButtonText="Add"
+                secondaryButtonText="Cancel"
+              />
+            </Component>
+          </>
+        );
+      };
+      render(<ComposedModalExample />);
+
+      await userEvent.click(
+        screen.getByRole('button', { name: /Launch modal/ })
+      );
+
+      const overlay = screen.getByRole('presentation', { hidden: true });
+      const closeButton = screen.getByRole('button', { name: /Close/ });
+
+      await userEvent.click(closeButton);
+
+      if (!isPresence) {
+        expect(overlay).toHaveAttribute('aria-hidden', 'true');
+      }
+      expect(overlay.contains(document.activeElement)).toBe(false);
+    });
+
     it('should change size based on size prop', () => {
       render(
         <Component open size="lg">
