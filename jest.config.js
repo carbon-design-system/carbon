@@ -35,11 +35,16 @@ export default {
     'packages/scss-generator/*',
   ],
   transformIgnorePatterns: [
-    '<rootDir>/node_modules/(?!lodash-es|nanoid|chalk)',
+    '<rootDir>/node_modules/(?!lodash-es|nanoid|chalk|@babel/)',
   ],
   moduleNameMapper: {
     // Jest uses identity-obj-proxy to mock CSS/SCSS imports.
     '\\.(css|scss)$': 'identity-obj-proxy',
+    // Some packages (e.g. @carbon/utilities) write relative imports with an
+    // explicit `.js` extension that resolves to a `.ts` source file (valid
+    // under "moduleResolution": "bundler"). Jest resolves `.js` literally, so
+    // strip it and let `moduleFileExtensions` fall back to `.ts`/`.tsx`.
+    '^(\\.{1,2}/.*)\\.js$': '$1',
   },
   reporters: ['default', 'jest-junit'],
   extensionsToTreatAsEsm: ['.jsx', '.ts', '.tsx'],
