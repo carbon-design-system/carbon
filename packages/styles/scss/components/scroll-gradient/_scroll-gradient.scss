@@ -84,34 +84,6 @@
     inset-inline-end: 0;
   }
 
-  .#{$prefix}--scroll-gradient--y-started.#{$prefix}--scroll-gradient--y-scrollable
-    .#{$prefix}--scroll-gradient__start-vertical,
-  .#{$prefix}--scroll-gradient--y-end.#{$prefix}--scroll-gradient--y-scrollable
-    .#{$prefix}--scroll-gradient__start-vertical {
-    display: block;
-  }
-
-  .#{$prefix}--scroll-gradient--y-initial.#{$prefix}--scroll-gradient--y-scrollable
-    .#{$prefix}--scroll-gradient__end-vertical,
-  .#{$prefix}--scroll-gradient--y-started.#{$prefix}--scroll-gradient--y-scrollable
-    .#{$prefix}--scroll-gradient__end-vertical {
-    display: block;
-  }
-
-  .#{$prefix}--scroll-gradient--x-started.#{$prefix}--scroll-gradient--x-scrollable
-    .#{$prefix}--scroll-gradient__start-horizontal,
-  .#{$prefix}--scroll-gradient--x-end.#{$prefix}--scroll-gradient--x-scrollable
-    .#{$prefix}--scroll-gradient__start-horizontal {
-    display: block;
-  }
-
-  .#{$prefix}--scroll-gradient--x-initial.#{$prefix}--scroll-gradient--x-scrollable
-    .#{$prefix}--scroll-gradient__end-horizontal,
-  .#{$prefix}--scroll-gradient--x-started.#{$prefix}--scroll-gradient--x-scrollable
-    .#{$prefix}--scroll-gradient__end-horizontal {
-    display: block;
-  }
-
   .#{$prefix}--scroll-gradient [data-start-vertical],
   .#{$prefix}--scroll-gradient [data-end-vertical] {
     block-size: $intersection-value;

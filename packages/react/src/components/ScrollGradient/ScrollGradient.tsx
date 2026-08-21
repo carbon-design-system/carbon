@@ -5,11 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { forwardRef, useState, useRef, useEffect } from 'react';
+import React, { forwardRef, useRef, useEffect } from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
-import { ScrollStates, useIsOverflow } from './constants';
+import { useIsOverflow } from './constants';
 
 export interface ScrollGradientProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -68,9 +68,6 @@ export const ScrollGradient = forwardRef<HTMLDivElement, ScrollGradientProps>(
     const startHorizontalRef = useRef<HTMLDivElement>(null);
     const endVerticalRef = useRef<HTMLDivElement>(null);
     const endHorizontalRef = useRef<HTMLDivElement>(null);
-
-    const [verticalPosition] = useState(ScrollStates.NONE);
-    const [horizontalPosition] = useState(ScrollStates.NONE);
 
     const gradientRight =
       yScrollable && scrollContainer.current && contentChildrenContainer.current
@@ -177,8 +174,6 @@ export const ScrollGradient = forwardRef<HTMLDivElement, ScrollGradientProps>(
         {...rest}
         className={cx(
           blockClass,
-          `${blockClass}--x-${horizontalPosition.toLowerCase()}`,
-          `${blockClass}--y-${verticalPosition.toLowerCase()}`,
           {
             [`${blockClass}--x-scrollable`]: xScrollable,
             [`${blockClass}--y-scrollable`]: yScrollable,

@@ -8,19 +8,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 
-export const ScrollStates = {
-  // No scrolling required because content fits within container.
-  NONE: 'NONE',
-  // Scroll position is at the start of the scrollable content.
-  INITIAL: 'INITIAL',
-  // Scroll position is neither at start nor end of scrollable content.
-  STARTED: 'STARTED',
-  // Scroll position is at the end of the scrollable content.
-  END: 'END',
-} as const;
-
-export type ScrollState = (typeof ScrollStates)[keyof typeof ScrollStates];
-
 export function useIsOverflow(ref: React.RefObject<HTMLDivElement | null>): {
   xScrollable: boolean | undefined;
   yScrollable: boolean | undefined;
