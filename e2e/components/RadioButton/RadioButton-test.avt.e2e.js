@@ -68,11 +68,10 @@ test.describe('@avt RadioButton', () => {
       },
       args: {
         invalid: 'true',
-        invalidText: 'Invalid selection',
       },
     });
 
-    await expect(page.getByText('Invalid selection')).toBeVisible();
+    await expect(page.getByText('Choose a notification method.')).toBeVisible();
     await expect(page).toHaveNoACViolations('RadioButton-invalid');
   });
 
@@ -85,11 +84,12 @@ test.describe('@avt RadioButton', () => {
       },
       args: {
         warn: 'true',
-        warnText: 'Please notice the warning',
       },
     });
 
-    await expect(page.getByText('Please notice the warning')).toBeVisible();
+    await expect(
+      page.getByText('Review your notification preference before continuing.')
+    ).toBeVisible();
     await expect(page).toHaveNoACViolations('RadioButton-warn');
   });
 
