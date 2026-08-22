@@ -9613,7 +9613,7 @@ __metadata:
     eslint-plugin-testing-library: "npm:^7.6.6"
     fs-extra: "npm:^11.0.0"
     glob: "npm:^13.0.0"
-    globals: "npm:17.10.0"
+    globals: "npm:17.11.0"
     husky: "npm:^9.0.0"
     jest: "npm:^30.2.0"
     jest-junit: "npm:^17.0.0"
@@ -13651,10 +13651,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"globals@npm:17.10.0":
-  version: 17.10.0
-  resolution: "globals@npm:17.10.0"
-  checksum: 10/4ed760ab72d359e5668f2297d5d6c369a32a5c58e1f5d7514d18e8b963aa69a899a83c8f4322028bb869be141c33e41fc1f77a94e7a83467e12ada6f5f9915e7
+"globals@npm:17.11.0":
+  version: 17.11.0
+  resolution: "globals@npm:17.11.0"
+  checksum: 10/9cff5b8099b585862ab0d31e8b93dc1c3e7b59239dc58b59447a38709715751df8794ee0d28f434f8e421b01aee3cc10051e2455b5c967d960e79f882e68aa0f
   languageName: node
   linkType: hard
 
