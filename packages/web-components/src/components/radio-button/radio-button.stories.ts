@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -17,6 +17,7 @@ import './index';
 import '../ai-label';
 import '../icon-button';
 import { iconLoader } from '../../globals/internal/icon-loader';
+import { useArgs } from 'storybook/preview-api';
 
 const content = html`
   <div slot="body-text">
@@ -24,12 +25,12 @@ const content = html`
     <h2 class="ai-label-heading">84%</h2>
     <p class="secondary bold">Confidence score</p>
     <p class="secondary">
-      Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
-      eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+      This recommendation is based on your notification activity from the last
+      30 days.
     </p>
     <hr />
     <p class="secondary">Model type</p>
-    <p class="bold">Foundation model</p>
+    <p class="bold">Notification preference model</p>
   </div>
 `;
 
@@ -63,236 +64,368 @@ const labelPositions = {
     RADIO_BUTTON_LABEL_POSITION.RIGHT,
 };
 
-const args = {
+const radioButtonOptions = [
+  { label: 'Email notifications', value: 'email' },
+  { label: 'SMS notifications', value: 'sms' },
+  { label: 'Push notifications', value: 'push' },
+];
+
+const groupArgs = {
   disabled: false,
   readOnly: false,
-  helperText: 'Helper text',
+  helperText: 'Choose how you want to receive account updates.',
   invalid: false,
-  invalidText: 'Invalid selection',
+  invalidText: 'Choose a notification method.',
   labelPosition: RADIO_BUTTON_LABEL_POSITION.RIGHT,
   orientation: RADIO_BUTTON_ORIENTATION.HORIZONTAL,
-  name: 'radio-group',
+  legendText: 'Preferred notification method',
+  name: 'notification-method',
   required: false,
-  value: 'radio-2',
+  value: radioButtonOptions[0].value,
   warn: false,
-  warnText: 'Please notice the warning',
-  checked: false,
+  warnText: 'Review your notification preference before continuing.',
   hideLabel: false,
-  labelText: 'Radio button label',
+  labelText: radioButtonOptions[0].label,
 };
 
-const argTypes = {
+const groupArgTypes = {
   disabled: {
     control: 'boolean',
-    description: 'Disabled (disabled)',
+    description: 'Specify whether the radio button group is disabled.',
   },
   readOnly: {
     control: 'boolean',
-    description: 'read only (readOnly)',
+    description: 'Specify whether the radio button group is read-only.',
   },
   required: {
     control: 'boolean',
-    description: 'Required (required)',
+    description: 'Specify whether a radio button selection is required.',
   },
   helperText: {
     control: 'text',
-    description: 'Helper text (helper-text)',
+    description: 'Provide text for the radio button group for additional help.',
   },
   invalid: {
     control: 'boolean',
-    description: 'Invalid (invalid)',
+    description: 'Specify whether the radio button group is invalid.',
   },
   invalidText: {
     control: 'text',
-    description: 'Invalid text (invalid-text)',
+    description:
+      'Provide the text displayed when the group is in an invalid state.',
   },
   labelPosition: {
     control: 'select',
-    description: 'Label position (label-position)',
+    description: 'Provide where radio button labels should be placed.',
     options: labelPositions,
+  },
+  legendText: {
+    control: 'text',
+    description: 'Provide the text rendered inside the fieldset legend.',
   },
   orientation: {
     control: 'select',
-    description: 'Orientation (orientation)',
+    description: 'Provide how radio buttons should be displayed.',
     options: orientations,
   },
   name: {
     control: 'text',
-    description: 'Name (name)',
+    description: 'Provide a name for the underlying radio button inputs.',
   },
   value: {
-    control: 'text',
-    description: 'Value (value)',
+    control: 'select',
+    description: 'Specify the selected radio button.',
+    options: radioButtonOptions.map(({ value }) => value),
   },
   warn: {
     control: 'boolean',
-    description: 'Warn (warn)',
+    description: 'Specify whether the group is currently in a warning state.',
   },
   warnText: {
     control: 'text',
-    description: 'Warn text (warn-text)',
-  },
-  checked: {
-    control: 'boolean',
-    description: 'Checked (checked)',
+    description:
+      'Provide the text displayed when the group is in a warning state.',
   },
   hideLabel: {
     control: 'boolean',
-    description: 'Hide label (hide-label)',
+    description:
+      'Specify whether radio button labels are visually hidden but still available to screen readers.',
   },
   labelText: {
     control: 'text',
-    description: 'Label text (label-text)',
+    description: 'Provide the label text for the first radio button.',
   },
   onChange: {
     action: `${prefix}-radio-button-group-changed`,
   },
 };
 
+const groupControls = Object.keys(groupArgTypes);
+
+const GroupStory = (args) => {
+  const [{ value }, updateArgs] = useArgs();
+  const {
+    disabled,
+    readOnly,
+    helperText,
+    invalid,
+    invalidText,
+    labelPosition,
+    legendText,
+    orientation,
+    name,
+    warn,
+    warnText,
+    onChange,
+    hideLabel,
+    labelText,
+    required,
+  } = args;
+
+  const handleChange = (event) => {
+    updateArgs({ value: event.detail.value });
+    onChange?.(event);
+  };
+
+  return html`
+    <cds-radio-button-group
+      ?readOnly="${readOnly}"
+      ?disabled="${disabled}"
+      helper-text="${ifDefined(helperText)}"
+      ?invalid="${invalid}"
+      invalid-text="${ifDefined(invalidText)}"
+      label-position="${ifDefined(labelPosition)}"
+      legend-text="${ifDefined(legendText)}"
+      orientation="${ifDefined(orientation)}"
+      name="${ifDefined(name)}"
+      .value="${value}"
+      ?required="${required}"
+      ?warn="${warn}"
+      warn-text="${ifDefined(warnText)}"
+      @cds-radio-button-group-changed="${handleChange}">
+      ${radioButtonOptions.map(
+        (option, index) => html`
+          <cds-radio-button
+            ?hide-label="${hideLabel}"
+            label-text="${ifDefined(index === 0 ? labelText : option.label)}"
+            value="${option.value}"></cds-radio-button>
+        `
+      )}
+    </cds-radio-button-group>
+  `;
+};
+
+const VerticalStory = (args) => {
+  const [{ value }, updateArgs] = useArgs();
+  const {
+    disabled,
+    readOnly,
+    helperText,
+    invalid,
+    invalidText,
+    labelPosition,
+    legendText,
+    orientation,
+    name,
+    warn,
+    warnText,
+    onChange,
+    hideLabel,
+    labelText,
+    required,
+  } = args;
+
+  const handleChange = (event) => {
+    updateArgs({ value: event.detail.value });
+    onChange?.(event);
+  };
+
+  return html`
+    <cds-radio-button-group
+      ?readOnly="${readOnly}"
+      ?disabled="${disabled}"
+      helper-text="${ifDefined(helperText)}"
+      ?invalid="${invalid}"
+      invalid-text="${ifDefined(invalidText)}"
+      label-position="${ifDefined(labelPosition)}"
+      legend-text="${ifDefined(legendText)}"
+      orientation="${ifDefined(orientation)}"
+      name="${ifDefined(name)}"
+      .value="${value}"
+      ?required="${required}"
+      ?warn="${warn}"
+      warn-text="${ifDefined(warnText)}"
+      @cds-radio-button-group-changed="${handleChange}">
+      ${radioButtonOptions.map(
+        (option, index) => html`
+          <cds-radio-button
+            ?hide-label="${hideLabel}"
+            label-text="${ifDefined(index === 0 ? labelText : option.label)}"
+            .disabledItem="${index === 2}"
+            value="${option.value}"></cds-radio-button>
+        `
+      )}
+    </cds-radio-button-group>
+  `;
+};
+
 export const Default = {
-  args,
-  argTypes,
-  render: (args) => {
-    const {
-      disabled,
-      readOnly,
-      helperText,
-      invalid,
-      invalidText,
-      labelPosition,
-      orientation,
-      name,
-      value = 'radio-2',
-      warn,
-      warnText,
-      onChange,
-      checked,
-      hideLabel,
-      labelText,
-      required = false,
-    } = args ?? {};
-    return html`
-      <cds-radio-button-group
-        ?readOnly="${readOnly}"
-        ?disabled="${disabled}"
-        helper-text="${ifDefined(helperText)}"
-        ?invalid="${invalid}"
-        invalid-text="${ifDefined(invalidText)}"
-        label-position="${ifDefined(labelPosition)}"
-        legend-text="Radio Button group"
-        orientation="${ifDefined(orientation)}"
-        name="${ifDefined(name)}"
-        value="${ifDefined(value)}"
-        ?required="${required}"
-        ?warn="${warn}"
-        warn-text="${ifDefined(warnText)}"
-        @cds-radio-button-group-changed="${onChange}">
-        <cds-radio-button
-          ?checked="${checked}"
-          ?hide-label="${hideLabel}"
-          label-text="${ifDefined(labelText)}"
-          value="radio-1"></cds-radio-button>
-        <cds-radio-button
-          ?hide-label="${hideLabel}"
-          label-text="${ifDefined(labelText)}"
-          value="radio-2"></cds-radio-button>
-        <cds-radio-button
-          ?hide-label="${hideLabel}"
-          label-text="${ifDefined(labelText)}"
-          value="radio-3"></cds-radio-button>
-      </cds-radio-button-group>
-    `;
+  args: groupArgs,
+  argTypes: groupArgTypes,
+  parameters: {
+    controls: {
+      include: groupControls,
+    },
   },
+  render: GroupStory,
 };
 
 export const Vertical = {
-  render: () => {
-    return html`
-      <cds-radio-button-group
-        legend-text="Group label"
-        name="radio-group"
-        value="radio-1"
-        orientation="vertical">
-        <cds-radio-button
-          label-text="Radio button label"
-          value="radio-1"></cds-radio-button>
-        <cds-radio-button
-          label-text="Radio button label"
-          value="radio-2"></cds-radio-button>
-        <cds-radio-button
-          label-text="Radio button label"
-          value="radio-3"
-          disabledItem></cds-radio-button>
-      </cds-radio-button-group>
-    `;
+  args: {
+    ...groupArgs,
+    orientation: RADIO_BUTTON_ORIENTATION.VERTICAL,
   },
+  argTypes: {
+    ...groupArgTypes,
+    orientation: {
+      ...groupArgTypes.orientation,
+      table: {
+        readonly: true,
+      },
+    },
+  },
+  parameters: {
+    controls: {
+      include: groupControls,
+    },
+  },
+  render: VerticalStory,
 };
 
 export const Skeleton = {
-  render: () => html`<cds-radio-button-skeleton></cds-radio-button-skeleton>`,
+  args: {
+    class: '',
+  },
+  argTypes: {
+    class: {
+      control: 'text',
+      description: 'Specify an optional class name to add to the skeleton.',
+    },
+  },
+  parameters: {
+    controls: {
+      include: ['class'],
+    },
+  },
+  render: ({ class: className }) => html`
+    <cds-radio-button-skeleton class="${className}"></cds-radio-button-skeleton>
+  `,
 };
 
 export const WithAILabel = {
-  render: () => {
+  args: {
+    ...groupArgs,
+    orientation: RADIO_BUTTON_ORIENTATION.VERTICAL,
+  },
+  argTypes: {
+    ...groupArgTypes,
+    orientation: {
+      ...groupArgTypes.orientation,
+      table: {
+        readonly: true,
+      },
+    },
+    value: {
+      table: {
+        disable: true,
+      },
+    },
+  },
+  parameters: {
+    controls: {
+      include: groupControls.filter((control) => control !== 'value'),
+    },
+  },
+  render: ({
+    disabled,
+    readOnly,
+    helperText,
+    invalid,
+    invalidText,
+    labelPosition,
+    legendText,
+    orientation,
+    name,
+    warn,
+    warnText,
+    onChange,
+    hideLabel,
+    labelText,
+    required,
+  }) => {
+    const renderRadioButton = (option, index, aiLabel) => html`
+      <cds-radio-button
+        ?hide-label="${hideLabel}"
+        label-text="${ifDefined(index === 0 ? labelText : option.label)}"
+        value="${option.value}">
+        ${aiLabel}
+      </cds-radio-button>
+    `;
+    const renderGroup = (groupNumber, aiLabels, groupAILabel) => {
+      return html`
+        <cds-radio-button-group
+          ?readOnly="${readOnly}"
+          ?disabled="${disabled}"
+          helper-text="${ifDefined(helperText)}"
+          ?invalid="${invalid}"
+          invalid-text="${ifDefined(invalidText)}"
+          label-position="${ifDefined(labelPosition)}"
+          legend-text="${ifDefined(legendText)}"
+          orientation="${ifDefined(orientation)}"
+          name="${name}-group-${groupNumber}"
+          value="${radioButtonOptions[0].value}"
+          ?required="${required}"
+          ?warn="${warn}"
+          warn-text="${ifDefined(warnText)}"
+          @cds-radio-button-group-changed="${onChange}">
+          ${groupAILabel}
+          ${radioButtonOptions.map((option, index) =>
+            renderRadioButton(option, index, aiLabels[index])
+          )}
+        </cds-radio-button-group>
+      `;
+    };
+
     return html`
-      <cds-radio-button-group
-        legend-text="Group label"
-        name="radio-group"
-        value="radio-1"
-        orientation="vertical">
-        <cds-ai-label alignment="bottom-left"
+      ${renderGroup(
+        1,
+        {},
+        html`<cds-ai-label alignment="bottom-left"
           >${content}${actions}</cds-ai-label
-        >
-        <cds-radio-button
-          label-text="Radio button label"
-          value="radio-1"></cds-radio-button>
-        <cds-radio-button
-          label-text="Radio button label"
-          value="radio-2"></cds-radio-button>
-        <cds-radio-button
-          label-text="Radio button label"
-          value="radio-3"></cds-radio-button>
-      </cds-radio-button-group>
-
-      <cds-radio-button-group
-        legend-text="Group label"
-        name="radio-group-2"
-        value="radio-4"
-        orientation="vertical">
-        <cds-radio-button label-text="Radio button label" value="radio-4"
-          ><cds-ai-label alignment="bottom-left"
-            >${content}${actions}</cds-ai-label
-          ></cds-radio-button
-        >
-        <cds-radio-button label-text="Radio button label" value="radio-5"
-          ><cds-ai-label alignment="bottom-left"
-            >${content}${actions}</cds-ai-label
-          ></cds-radio-button
-        >
-        <cds-radio-button
-          label-text="Radio button label"
-          value="radio-6"></cds-radio-button>
-      </cds-radio-button-group>
-
-      <cds-radio-button-group
-        legend-text="Group label"
-        name="radio-group-3"
-        value="radio-7"
-        orientation="vertical">
-        <cds-radio-button label-text="Radio button label" value="radio-7"
-          ><cds-ai-label slot="ai-label" alignment="bottom-left" kind="inline"
-            >${content}${actions}</cds-ai-label
-          ></cds-radio-button
-        >
-        <cds-radio-button label-text="Radio button label" value="radio-8"
-          ><cds-ai-label slot="ai-label" alignment="bottom-left" kind="inline"
-            >${content}${actions}</cds-ai-label
-          ></cds-radio-button
-        >
-        <cds-radio-button
-          label-text="Radio button label"
-          value="radio-9"></cds-radio-button>
-      </cds-radio-button-group>
+        >`
+      )}
+      ${renderGroup(2, {
+        0: html`<cds-ai-label alignment="bottom-left"
+          >${content}${actions}</cds-ai-label
+        >`,
+        1: html`<cds-ai-label alignment="bottom-left"
+          >${content}${actions}</cds-ai-label
+        >`,
+      })}
+      ${renderGroup(3, {
+        0: html`<cds-ai-label
+          slot="ai-label"
+          alignment="bottom-left"
+          kind="inline"
+          >${content}${actions}</cds-ai-label
+        >`,
+        1: html`<cds-ai-label
+          slot="ai-label"
+          alignment="bottom-left"
+          kind="inline"
+          >${content}${actions}</cds-ai-label
+        >`,
+      })}
     `;
   },
 };
