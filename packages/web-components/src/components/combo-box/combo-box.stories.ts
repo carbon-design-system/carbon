@@ -20,28 +20,28 @@ import { withLayers } from '../../../.storybook/decorators/with-layers';
 const items = [
   {
     value: 'option-0',
-    text: 'An example option that is really long to show what should be done to handle long text',
+    text: 'North America (United States, Canada, and Mexico)',
   },
   {
     value: 'option-1',
-    text: 'Option 1',
+    text: 'Europe',
   },
   {
     value: 'option-2',
-    text: 'Option 2',
+    text: 'Asia Pacific',
   },
   {
     value: 'option-3',
-    text: 'Option 3',
+    text: 'South America',
     disabled: true,
   },
   {
     value: 'option-4',
-    text: 'Option 4',
+    text: 'Middle East',
   },
   {
     value: 'option-5',
-    text: 'Option 5',
+    text: 'Africa',
   },
 ];
 
@@ -63,17 +63,17 @@ const defaultArgs = {
   autoalign: false,
   allowCustomValue: false,
   disabled: false,
-  helperText: 'Helper text',
+  helperText: 'Choose the region where your resources will be hosted.',
   invalid: false,
-  invalidText: 'Error message goes here',
-  label: '',
+  invalidText: 'Select a deployment region.',
+  label: 'Select a region',
   readOnly: false,
   size: null,
-  titleText: 'Label',
+  titleText: 'Deployment region',
   typeahead: false,
   value: '',
   warn: false,
-  warnText: 'Warning message goes here',
+  warnText: 'Confirm that this region meets your data residency requirements.',
   inputProps: undefined,
 };
 
@@ -151,8 +151,6 @@ export const Default = {
   argTypes: controls,
   args: {
     ...defaultArgs,
-    helperText: 'Helper text',
-    titleText: 'Label',
     inputProps: {},
   },
   render: (args) => {
@@ -212,12 +210,12 @@ const content = html`
     <h2 class="ai-label-heading">84%</h2>
     <p class="secondary bold">Confidence score</p>
     <p class="secondary">
-      Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
-      eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+      This recommendation is based on service availability, latency, and your
+      organization&apos;s data residency requirements.
     </p>
     <hr />
     <p class="secondary">Model type</p>
-    <p class="bold">Foundation model</p>
+    <p class="bold">Regional placement model</p>
   </div>
 `;
 
@@ -238,12 +236,21 @@ const actions = html`
 `;
 
 export const AllowCustomValue = {
-  argTypes: controls,
+  argTypes: {
+    ...controls,
+    allowCustomValue: {
+      ...controls.allowCustomValue,
+      table: {
+        readonly: true,
+      },
+    },
+  },
   args: {
     ...defaultArgs,
-    helperText: 'Helper text',
-    titleText: 'Label',
     allowCustomValue: true,
+    helperText: 'Enter a fruit or choose one from the list.',
+    label: 'Select or enter a fruit',
+    titleText: 'Favorite fruit',
   },
   render: (args) => {
     const {
@@ -299,11 +306,20 @@ export const AllowCustomValue = {
 };
 
 export const AutocompleteWithTypeahead = {
-  argTypes: controls,
+  argTypes: {
+    ...controls,
+    typeahead: {
+      ...controls.typeahead,
+      table: {
+        readonly: true,
+      },
+    },
+  },
   args: {
     ...defaultArgs,
-    helperText: 'Helper text',
-    titleText: 'Label',
+    helperText: 'Start typing to narrow the available fruits.',
+    label: 'Search fruits',
+    titleText: 'Fruit',
     typeahead: true,
   },
   render: (args) => {
@@ -360,13 +376,19 @@ export const AutocompleteWithTypeahead = {
 };
 
 export const ExperimentalAutoAlign = {
-  argTypes: controls,
+  argTypes: {
+    ...controls,
+    autoalign: {
+      ...controls.autoalign,
+      table: {
+        readonly: true,
+      },
+    },
+  },
   args: {
     ...defaultArgs,
     autoalign: true,
     direction: DROPDOWN_DIRECTION.BOTTOM,
-    helperText: 'Combobox helper text',
-    titleText: 'ComboBox title',
   },
   render: (args) => {
     const {
@@ -431,8 +453,6 @@ export const Controlled = {
   argTypes: controls,
   args: {
     ...defaultArgs,
-    helperText: 'Helper text',
-    titleText: 'Label',
     value: 'option-1',
   },
   render: (args) => {
@@ -513,17 +533,21 @@ export const Controlled = {
         ?typeahead=${typeahead}
         @cds-combo-box-beingselected=${handleBeforeSelected}
         @cds-combo-box-selected=${handleSelected}>
-        <cds-combo-box-item value="option-1">Option 1</cds-combo-box-item>
-        <cds-combo-box-item value="option-2">Option 2</cds-combo-box-item>
-        <cds-combo-box-item value="option-3">Option 3</cds-combo-box-item>
+        <cds-combo-box-item value="option-1">Europe</cds-combo-box-item>
+        <cds-combo-box-item value="option-2">Asia Pacific</cds-combo-box-item>
+        <cds-combo-box-item value="option-3">Middle East</cds-combo-box-item>
       </cds-combo-box>
 
       <div
         style="display: flex; align-items: center; justify-content: space-between;">
         <cds-button @click=${() => setValue('')}> Clear </cds-button>
-        <cds-button @click=${() => setValue('option-1')}> Option 1 </cds-button>
-        <cds-button @click=${() => setValue('option-2')}> Option 2 </cds-button>
-        <cds-button @click=${() => setValue('option-3')}> Option 3 </cds-button>
+        <cds-button @click=${() => setValue('option-1')}> Europe </cds-button>
+        <cds-button @click=${() => setValue('option-2')}>
+          Asia Pacific
+        </cds-button>
+        <cds-button @click=${() => setValue('option-3')}>
+          Middle East
+        </cds-button>
       </div>
     `;
   },
@@ -533,8 +557,6 @@ export const WithAILabel = {
   argTypes: controls,
   args: {
     ...defaultArgs,
-    helperText: 'Helper text',
-    titleText: 'Label',
   },
   render: (args) => {
     const {
@@ -601,8 +623,6 @@ export const WithLayer = {
   argTypes: controls,
   args: {
     ...defaultArgs,
-    helperText: 'Helper text',
-    titleText: 'Label',
   },
   render: (args) => {
     const {
