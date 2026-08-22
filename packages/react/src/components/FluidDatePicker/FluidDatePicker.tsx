@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2025
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -21,6 +21,10 @@ export interface FluidDatePickerProps {
    * Specify an optional className to be applied to the outer FluidForm wrapper
    */
   className?: string;
+  /**
+   * Specify whether the `<input>` should be disabled
+   */
+  disabled?: boolean;
   /**
    * Specify whether or not the control is invalid
    */
@@ -54,6 +58,7 @@ const FluidDatePicker = React.forwardRef<
   const classNames = classnames(className, {
     [`${prefix}--date-picker--fluid`]: true,
     [`${prefix}--date-picker--fluid--invalid`]: invalid,
+    [`${prefix}--date-picker--fluid--disabled`]: other.disabled,
     [`${prefix}--date-picker--fluid--readonly`]: readOnly,
     [`${prefix}--date-picker--fluid--warn`]: warn,
   });
