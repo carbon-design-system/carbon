@@ -1,2 +1,4 @@
+js/generated
 scss
 index.scss
+src/colors.ts
