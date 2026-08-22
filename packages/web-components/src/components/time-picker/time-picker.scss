@@ -33,11 +33,11 @@ $css--plex: true !default;
   @extend .#{$prefix}--select--disabled;
 }
 
-:host(#{$prefix}-time-picker-select[readonly]) {
+:host(#{$prefix}-time-picker-select[readonly]:not([disabled])) {
   @extend .#{$prefix}--select--readonly;
 }
 
-:host(#{$prefix}-time-picker-select[readonly]) select {
+:host(#{$prefix}-time-picker-select[readonly]:not([disabled])) select {
   pointer-events: none;
 }
 

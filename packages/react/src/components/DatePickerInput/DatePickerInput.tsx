@@ -222,13 +222,14 @@ const DatePickerInput = frFn((props, ref) => {
   const labelClasses = cx(`${prefix}--label`, {
     [`${prefix}--visually-hidden`]: hideLabel,
     [`${prefix}--label--disabled`]: normalizedProps.disabled,
-    [`${prefix}--label--readonly`]: readOnly,
+    [`${prefix}--label--readonly`]: readOnly && !normalizedProps.disabled,
   });
   const helperTextClasses = cx(`${prefix}--form__helper-text`, {
     [`${prefix}--form__helper-text--disabled`]: normalizedProps.disabled,
   });
   const inputClasses = cx(`${prefix}--date-picker__input`, {
     [`${prefix}--date-picker__input--${size}`]: size,
+    [`${prefix}--date-picker__input--disabled`]: normalizedProps.disabled,
     [`${prefix}--date-picker__input--invalid`]: normalizedProps.invalid,
     [`${prefix}--date-picker__input--warn`]: normalizedProps.warn,
   });
@@ -261,6 +262,10 @@ const DatePickerInput = frFn((props, ref) => {
     ref,
     ['aria-describedby']: ariaDescribedBy,
   };
+
+  if (readOnly && !normalizedProps.disabled) {
+    inputProps.readOnly = true;
+  }
   if (normalizedProps.invalid) {
     inputProps['data-invalid'] = true;
     inputProps['aria-invalid'] = true;

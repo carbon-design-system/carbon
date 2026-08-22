@@ -466,7 +466,7 @@ class CDSComboBox extends CDSDropdown {
         aria-activedescendant="${ifDefined(
           open ? (activeDescendant ?? activeDescendantFallback) : ''
         )}"
-        ?readonly=${readOnly}
+        ?readonly=${readOnly && !disabled}
         @input=${handleInput}
         @keydown=${handleInputKeydown}
         ...="${spread(this._normalizeInputProps(inputProps))}" />

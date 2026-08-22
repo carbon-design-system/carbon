@@ -401,4 +401,20 @@ describe('cds-select', () => {
       expect(slugSlot.classList.contains('cds--slug--revert')).to.be.true;
     });
   });
+
+  it('should prioritize disabled over readOnly when both are true', async () => {
+    const el = await fixture(html`
+      <cds-select disabled readonly label-text="Select">
+        <option value="option-1">Option 1</option>
+      </cds-select>
+    `);
+    await el.updateComplete;
+
+    const select = el.shadowRoot.querySelector('select');
+
+    expect(select.hasAttribute('disabled')).to.be.true;
+    expect(select.hasAttribute('readonly')).to.be.false;
+    expect(select.disabled).to.be.true;
+    expect(select.getAttribute('aria-readonly')).to.be.null;
+  });
 });
