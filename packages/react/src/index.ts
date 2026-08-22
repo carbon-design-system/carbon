@@ -605,6 +605,10 @@ export type { RadioButtonSkeletonProps } from './components/RadioButton/RadioBut
 export type { RadioButtonGroupProps } from './components/RadioButtonGroup/RadioButtonGroup';
 export type { RadioTileProps } from './components/RadioTile/RadioTile';
 
+// TODO: uncomment in v12 — also remove from excludeProductsComponents (migrated from @carbon/ibm-products)
+// export { ScrollGradient } from './components/ScrollGradient';
+// export type { ScrollGradientProps } from './components/ScrollGradient';
+
 //search
 export type { SearchProps } from './components/Search/Search';
 export type { SearchSkeletonProps } from './components/Search/Search.Skeleton';
