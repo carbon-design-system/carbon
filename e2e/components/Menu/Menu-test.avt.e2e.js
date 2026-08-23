@@ -19,10 +19,19 @@ test.describe('@avt Menu', () => {
         theme: 'white',
       },
     });
+
+    const actionButton = page.getByRole('button', { name: 'Actions' });
+    const menu = page.getByRole('menu', { name: 'Actions' });
+
+    await expect(actionButton).toBeVisible();
+    await expect(menu).toBeHidden();
+
+    await actionButton.click();
+    await expect(page.getByRole('menuitem').first()).toBeFocused();
     await expect(page).toHaveNoACViolations('Menu @avt-default-state');
   });
 
-  test.fixme('@avt-keyboard-nav Menu', async ({ page }) => {
+  test('@avt-keyboard-nav Menu', async ({ page }) => {
     await visitStory(page, {
       component: 'Menu',
       id: 'components-menu--default',
@@ -31,22 +40,36 @@ test.describe('@avt Menu', () => {
       },
     });
 
-    const firstItem = await page.getByRole('menuitem', { name: 'Share with' });
-    const LastItem = await page.getByRole('menuitem', { name: 'Delete' });
-    const nestedMenu = await page.getByRole('menu', { name: 'Share with' });
-    const nestedMenuItem = await page
+    const actionButton = page.getByRole('button', { name: 'Actions' });
+    const menu = page.getByRole('menu', { name: 'Actions' });
+    const firstItem = page.getByRole('menuitem', { name: /Share with/ });
+    const lastItem = page.getByRole('menuitem', { name: /Delete/ });
+    const nestedMenu = page.getByRole('menu', { name: 'Share with' });
+    const nestedMenuItem = page
       .getByRole('menuitemradio')
       .filter({ hasText: 'None' })
       .nth(0);
 
+    await page.keyboard.press('Tab');
+    await expect(actionButton).toBeFocused();
+    await expect(menu).toBeHidden();
+
+    await page.keyboard.press('Enter');
     await expect(firstItem).toBeVisible();
-    await expect(LastItem).toBeVisible();
+    await expect(lastItem).toBeVisible();
     await expect(nestedMenu).toBeHidden();
+    await expect(firstItem).toBeFocused();
+
+    await page.keyboard.press('Escape');
+    await expect(menu).toBeHidden();
+    await expect(actionButton).toBeFocused();
+
+    await page.keyboard.press('Enter');
     await expect(firstItem).toBeFocused();
 
     // Should go to last item when focused on the first item and arrow up is pressed
     await page.keyboard.press('ArrowUp');
-    await expect(LastItem).toBeFocused();
+    await expect(lastItem).toBeFocused();
 
     // Should open menu with ArrowRight and focus on first item
     await page.keyboard.press('ArrowDown');
@@ -66,17 +89,24 @@ test.describe('@avt Menu', () => {
     // avoid flaky test failures from the keyboard press happening too quickly
     // this retries the keypress along with the focus assertion until it passes
     await expect(async () => {
-      // Should select item with enter key
-      await page.keyboard.press('Enter');
-      await expect(nestedMenuItem).toHaveAttribute('aria-checked', 'true');
+      // Should close menu with ArrowLeft
+      await page.keyboard.press('ArrowLeft');
+      await expect(nestedMenu).toBeHidden();
+      await expect(firstItem).toBeFocused();
     }).toPass();
 
     // avoid flaky test failures from the keyboard press happening too quickly
     // this retries the keypress along with the focus assertion until it passes
     await expect(async () => {
-      // Should close menu with ArrowLeft
-      await page.keyboard.press('ArrowLeft');
-      await expect(nestedMenu).toBeHidden();
+      await page.keyboard.press('ArrowRight');
+      expect(nestedMenuItem).toBeFocused();
     }).toPass();
+
+    await expect(nestedMenuItem).toHaveAttribute('aria-checked', 'false');
+
+    // Should select item with enter key and close the root menu
+    await page.keyboard.press('Enter');
+    await expect(menu).toBeHidden();
+    await expect(actionButton).toBeFocused();
   });
 });

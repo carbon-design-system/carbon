@@ -250,11 +250,41 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
     }
   }
 
-  function focusItem(e?: React.KeyboardEvent<HTMLUListElement>) {
-    const validItems = focusableItems?.filter((item) => item?.ref?.current);
+  function handleKeyDownCapture(e: React.KeyboardEvent<HTMLUListElement>) {
+    if (match(e, keys.ArrowUp) || match(e, keys.ArrowDown)) {
+      focusItem(e);
+      e.stopPropagation();
+    }
+  }
+
+  function focusItem(
+    e?: React.KeyboardEvent<HTMLUListElement> | KeyboardEvent
+  ) {
+    let validItems = focusableItems?.filter((item) => item?.ref?.current);
+
+    if (!validItems?.length && menu.current) {
+      validItems = Array.from(
+        menu.current.querySelectorAll<HTMLLIElement>(
+          '[role="menuitem"], [role="menuitemcheckbox"], [role="menuitemradio"]'
+        )
+      )
+        .filter((item) => {
+          return (
+            item.closest('[role="menu"]') === menu.current &&
+            item.getAttribute('aria-disabled') !== 'true'
+          );
+        })
+        .map((item) => ({
+          disabled: false,
+          ref: {
+            current: item,
+          },
+        }));
+    }
+
     if (!validItems?.length) return;
 
-    const currentItem = focusableItems.findIndex((item) =>
+    const currentItem = validItems.findIndex((item) =>
       item.ref?.current?.contains(document.activeElement)
     );
     let indexToFocus = currentItem;
@@ -428,6 +458,41 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   }, [open, focusableItems, isRoot, position]);
 
   useEffect(() => {
+    if (!open || !menu.current) {
+      return;
+    }
+
+    const { defaultView } = menu.current.ownerDocument;
+
+    function handleNativeKeyDownCapture(e: KeyboardEvent) {
+      if (!match(e, keys.ArrowUp) && !match(e, keys.ArrowDown)) {
+        return;
+      }
+
+      const activeElement = menu.current?.ownerDocument.activeElement;
+
+      if (activeElement?.closest?.('[role="menu"]') === menu.current) {
+        requestAnimationFrame(() => {
+          focusItem(e);
+        });
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }
+
+    defaultView?.addEventListener('keydown', handleNativeKeyDownCapture, true);
+
+    return () => {
+      defaultView?.removeEventListener(
+        'keydown',
+        handleNativeKeyDownCapture,
+        true
+      );
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open, focusableItems]);
+
+  useEffect(() => {
     if (open) {
       handleOpen();
     } else {
@@ -471,6 +536,7 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
         ref={ref}
         aria-label={label}
         tabIndex={-1}
+        onKeyDownCapture={handleKeyDownCapture}
         onKeyDown={handleKeyDown}
         onBlur={handleBlur}>
         {children}
