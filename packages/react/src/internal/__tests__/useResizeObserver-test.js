@@ -22,6 +22,8 @@ const ResizeTest = ({ onResize }) => {
 const defaultSize = 100;
 describe('useResizeObserver', () => {
   let savedObserverCb;
+  const originalRequestAnimationFrame = window.requestAnimationFrame;
+  const originalCancelAnimationFrame = window.cancelAnimationFrame;
 
   beforeEach(() => {
     window.ResizeObserver = jest.fn().mockImplementation((cb) => {
@@ -36,6 +38,8 @@ describe('useResizeObserver', () => {
 
   afterEach(() => {
     jest.clearAllMocks();
+    window.requestAnimationFrame = originalRequestAnimationFrame;
+    window.cancelAnimationFrame = originalCancelAnimationFrame;
   });
 
   /** Triggers resize from the saved resize observer callback */
@@ -91,5 +95,50 @@ describe('useResizeObserver', () => {
       screen.getByText(`width: ${defaultSize}, height: ${defaultSize}`)
     ).toBeInTheDocument();
     expect(resizeFn).toHaveBeenCalledTimes(3);
+  });
+
+  it('does not update state or call onResize when dimensions are unchanged', async () => {
+    const resizeFn = jest.fn();
+    render(<ResizeTest onResize={resizeFn} />);
+    const element = screen.getByTestId('observed-element');
+
+    await triggerResize(element);
+    expect(resizeFn).toHaveBeenCalledTimes(1);
+
+    await triggerResize(element);
+    expect(resizeFn).toHaveBeenCalledTimes(1);
+  });
+
+  it('coalesces multiple resize entries into one animation frame', () => {
+    const animationFrameCallbacks = [];
+    window.requestAnimationFrame = jest.fn((callback) => {
+      animationFrameCallbacks.push(callback);
+      return animationFrameCallbacks.length;
+    });
+    window.cancelAnimationFrame = jest.fn();
+
+    const resizeFn = jest.fn();
+    render(<ResizeTest onResize={resizeFn} />);
+    const element = screen.getByTestId('observed-element');
+
+    act(() => {
+      savedObserverCb([
+        { target: element, contentRect: { width: 200, height: 300 } },
+      ]);
+      savedObserverCb([
+        { target: element, contentRect: { width: 400, height: 500 } },
+      ]);
+    });
+
+    expect(window.requestAnimationFrame).toHaveBeenCalledTimes(1);
+    expect(resizeFn).not.toHaveBeenCalled();
+
+    act(() => {
+      animationFrameCallbacks[0]();
+    });
+
+    expect(screen.getByText('width: 400, height: 500')).toBeInTheDocument();
+    expect(resizeFn).toHaveBeenCalledTimes(1);
+    expect(resizeFn).toHaveBeenLastCalledWith({ width: 400, height: 500 });
   });
 });
