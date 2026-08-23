@@ -25,12 +25,12 @@ const content = html`
     <h2 class="ai-label-heading">84%</h2>
     <p class="secondary bold">Confidence score</p>
     <p class="secondary">
-      This recommendation is based on your notification activity from the last
-      30 days.
+      Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
+      eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
     </p>
     <hr />
     <p class="secondary">Model type</p>
-    <p class="bold">Notification preference model</p>
+    <p class="bold">Foundation model</p>
   </div>
 `;
 
@@ -65,25 +65,25 @@ const labelPositions = {
 };
 
 const radioButtonOptions = [
-  { label: 'Email notifications', value: 'email' },
-  { label: 'SMS notifications', value: 'sms' },
-  { label: 'Push notifications', value: 'push' },
+  { label: 'Radio button label', value: 'radio-1' },
+  { label: 'Radio button label', value: 'radio-2' },
+  { label: 'Radio button label', value: 'radio-3' },
 ];
 
 const groupArgs = {
   disabled: false,
   readOnly: false,
-  helperText: 'Choose how you want to receive account updates.',
+  helperText: 'Helper text',
   invalid: false,
-  invalidText: 'Choose a notification method.',
+  invalidText: 'Invalid selection',
   labelPosition: RADIO_BUTTON_LABEL_POSITION.RIGHT,
   orientation: RADIO_BUTTON_ORIENTATION.HORIZONTAL,
-  legendText: 'Preferred notification method',
-  name: 'notification-method',
+  legendText: 'Radio Button group',
+  name: 'radio-group',
   required: false,
-  value: radioButtonOptions[0].value,
+  value: radioButtonOptions[1].value,
   warn: false,
-  warnText: 'Review your notification preference before continuing.',
+  warnText: 'Please notice the warning',
   hideLabel: false,
   labelText: radioButtonOptions[0].label,
 };
@@ -283,7 +283,9 @@ export const Default = {
 export const Vertical = {
   args: {
     ...groupArgs,
+    legendText: 'Group label',
     orientation: RADIO_BUTTON_ORIENTATION.VERTICAL,
+    value: radioButtonOptions[0].value,
   },
   argTypes: {
     ...groupArgTypes,
@@ -325,7 +327,9 @@ export const Skeleton = {
 export const WithAILabel = {
   args: {
     ...groupArgs,
+    legendText: 'Group label',
     orientation: RADIO_BUTTON_ORIENTATION.VERTICAL,
+    value: radioButtonOptions[0].value,
   },
   argTypes: {
     ...groupArgTypes,

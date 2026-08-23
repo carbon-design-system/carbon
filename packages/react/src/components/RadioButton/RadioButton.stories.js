@@ -31,27 +31,27 @@ export default {
 };
 
 const radioButtonOptions = [
-  { id: 'radio-email', label: 'Email notifications', value: 'email' },
-  { id: 'radio-sms', label: 'SMS notifications', value: 'sms' },
-  { id: 'radio-push', label: 'Push notifications', value: 'push' },
+  { id: 'radio-1', label: 'Radio button label', value: 'radio-1' },
+  { id: 'radio-2', label: 'Radio button label', value: 'radio-2' },
+  { id: 'radio-3', label: 'Radio button label', value: 'radio-3' },
 ];
 
 const groupArgs = {
   disabled: false,
-  helperText: 'Choose how you want to receive account updates.',
+  helperText: 'Helper text',
   hideLabel: false,
   invalid: false,
-  invalidText: 'Choose a notification method.',
+  invalidText: 'Invalid selection',
   labelPosition: 'right',
   labelText: radioButtonOptions[0].label,
-  legendText: 'Preferred notification method',
-  name: 'notification-method',
+  legendText: 'Radio Button group',
+  name: 'radio-button-default-group',
   orientation: 'horizontal',
   readOnly: false,
   required: false,
-  valueSelected: radioButtonOptions[0].value,
+  valueSelected: radioButtonOptions[1].value,
   warn: false,
-  warnText: 'Review your notification preference before continuing.',
+  warnText: 'Please notice the warning',
 };
 
 const groupArgTypes = {
@@ -223,7 +223,10 @@ export const Vertical = (args) => {
 
 Vertical.args = {
   ...groupArgs,
+  legendText: 'Group label',
+  name: 'radio-button-vertical-group',
   orientation: 'vertical',
+  valueSelected: radioButtonOptions[0].value,
 };
 
 Vertical.argTypes = {
@@ -272,12 +275,12 @@ export const withAILabel = (args) => {
           <h2 className="ai-label-heading">84%</h2>
           <p className="secondary bold">Confidence score</p>
           <p className="secondary">
-            This recommendation is based on your notification activity from the
-            last 30 days.
+            Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
           </p>
           <hr />
           <p className="secondary">Model type</p>
-          <p className="bold">Notification preference model</p>
+          <p className="bold">Foundation model</p>
         </div>
         <AILabelActions>
           <IconButton kind="ghost" label="View">
@@ -360,7 +363,10 @@ export const withAILabel = (args) => {
 
 withAILabel.args = {
   ...groupArgs,
+  legendText: 'Group label',
+  name: 'radio-button-group',
   orientation: 'vertical',
+  valueSelected: radioButtonOptions[0].value,
 };
 
 withAILabel.argTypes = {
