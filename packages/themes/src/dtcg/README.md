@@ -21,6 +21,98 @@ dtcg/
     └── content-switcher.json  # Content switcher tokens
 ```
 
+## Token categories in each theme file
+
+Each theme JSON is organised into top-level groups. When searching for a token,
+start with the group that matches the first segment of its name:
+
+| Top-level key | Token name prefix examples                                  |
+| ------------- | ----------------------------------------------------------- |
+| `ai`          | `ai-aura-*`, `ai-popover-*`, `ai-skeleton-*`                |
+| `background`  | `background`, `background-active`, `background-hover`       |
+| `border`      | `border-subtle-*`, `border-strong-*`, `border-tile-*`       |
+| `button`      | _(component tokens — see `components/button.json` instead)_ |
+| `field`       | `field-01`, `field-02`, `field-hover-01`                    |
+| `focus`       | `focus`, `focus-inset`, `focus-inverse`                     |
+| `icon`        | `icon-primary`, `icon-on-color`, `icon-disabled`            |
+| `layer`       | `layer-01`, `layer-active-01`, `layer-hover-01`             |
+| `link`        | `link-primary`, `link-visited`, `link-inverse`              |
+| `overlay`     | `overlay`                                                   |
+| `skeleton`    | `skeleton-background`, `skeleton-element`                   |
+| `support`     | `support-error`, `support-warning`, `support-success`       |
+| `text`        | `text-primary`, `text-on-color`, `text-disabled`            |
+
+> **Note:** Component tokens (`button`, `tag`, etc.) live in
+> `components/<name>.json`, **not** in the theme files.
+
+## Nested key → flat token name mapping
+
+Token names in Carbon use a hyphenated convention (e.g. `border-subtle-02`,
+`text-on-color-disabled`). In the DTCG JSON files these are represented as
+**nested objects**, where each hyphen-separated segment becomes a JSON key
+level:
+
+| Flat token name          | JSON path                            |
+| ------------------------ | ------------------------------------ |
+| `border-subtle-02`       | `border` → `subtle` → `02`           |
+| `text-on-color-disabled` | `text` → `on-color` → `disabled`     |
+| `layer-accent-active-03` | `layer` → `accent` → `active` → `03` |
+
+> **Tip for agents:** Do not `grep` for the full hyphenated name — it will not
+> match. Instead grep for the last segment (`"02"`, `"disabled"`) and navigate
+> up the JSON hierarchy to confirm the full path, or read the surrounding
+> context to resolve ambiguity when short keys like `"01"` or `"02"` appear in
+> multiple token groups.
+
+## Contextual layer tokens (`$layer-*` without numbers)
+
+In component styles (e.g. `$layer-accent`, `$layer-hover`, `$field`,
+`$border-subtle`), you will often see unnumbered tokens used. These are
+**dynamic layer-set tokens** defined in
+`packages/styles/scss/layer/_layer-sets.scss`.
+
+In DTCG JSON, tokens only exist as explicit numbered levels (`01`, `02`, `03`):
+
+- `layer.01` / `layer.02` / `layer.03`
+- `layer.accent.01` / `layer.accent.02` / `layer.accent.03`
+- `layer.accent.active.01` / `layer.accent.active.02` / `layer.accent.active.03`
+
+At runtime or inside a `<Layer>` component context, Carbon automatically
+resolves the unnumbered token (e.g. `$layer-accent`) to its corresponding
+numbered tier (`01`, `02`, or `03`) based on container nesting depth.
+
+## Dual-role nodes (tokens that are also groups)
+
+Some tokens are simultaneously a value **and** a group of related tokens. For
+example, `background` has its own `$value` but also has children like
+`background-active` and `background-hover`. In the JSON these look like:
+
+```json
+"background": {
+  "$type": "color",
+  "$value": "{gray.10}",
+  "active": { "$type": "color", "$value": "{gray.50}" },
+  "hover":  { "$type": "color", "$value": "{gray.50}" }
+}
+```
+
+The flat names generated are `background`, `background-active`,
+`background-hover` — all siblings in the output even though they are
+parent/child in the source JSON.
+
+> **Tip for agents:** If you read a node and it has both a `$value` and non-`$`
+> children, both the node itself **and** every child are valid tokens. Do not
+> assume a node with children is only a group.
+
+## `$value` references and `color-palette.json`
+
+Token `$value` fields use curly-brace alias syntax referencing the color
+palette, e.g. `"{blue.60}"` or `"{gray.20}"`. These references are resolved
+during the build against `packages/themes/src/dtcg/color-palette.json`, which
+contains the full Carbon color ramp (`gray.10` … `gray.100`, `blue.10` …
+`blue.100`, etc.) with their hex values. If you need the actual hex for a
+`$value` alias, look it up in that file.
+
 ## Token Format
 
 All tokens follow the DTCG specification with a structured format using specific
@@ -47,75 +139,76 @@ keys:
 #### Optional Keys
 
 - **`$extensions`** - Custom metadata and vendor-specific information. Carbon
-  uses this for:
+  uses two namespaces — see the dedicated sections below for full details.
 
-  - **`carbon.themes`** - Theme-specific values for component tokens:
-    ```json
+## `$extensions["org.carbon"].alphaModifier` — semi-transparent tokens
+
+Some tokens are a base color with an opacity applied. Instead of hardcoding an
+`rgba()` value, the source JSON stores the opaque palette reference in `$value`
+and the opacity multiplier in `$extensions["org.carbon"].alphaModifier`:
+
+```json
+"background-hover": {
+  "$type": "color",
+  "$value": "{gray.50}",
+  "$description": "Background color for hover state.",
+  "$extensions": {
+    "org.carbon": { "alphaModifier": 0.12 }
+  }
+}
+```
+
+During the build the `carbon/alpha-modifier` Style Dictionary transform resolves
+`{gray.50}` to its hex (`#8d8d8d`) and then emits `rgba(141, 141, 141, 0.12)`.
+
+> **Reading the source:** When you see `alphaModifier` on a token, the `$value`
+> field alone does **not** tell you the final color. The real output value is
+> `rgba(<palette hex at $value>, <alphaModifier>)`. Check `color-palette.json`
+> for the hex, then apply the multiplier mentally.
+
+> **`alphaModifier: 0`** means fully transparent (`rgba(…, 0)`). This is used
+> for gradient "fade to transparent" endpoints (e.g. `ai-aura-end`).
+
+## Component tokens — `$extensions["carbon.themes"]`
+
+Theme tokens (in `white.json` etc.) have a single `$value` per file because the
+file itself represents one theme. Component tokens are different: a single
+component token file covers **all four themes at once**, with per-theme values
+stored inside `$extensions["carbon.themes"]` instead of `$value`:
+
+```json
+"button": {
+  "danger-secondary": {
+    "$type": "color",
+    "$description": "Border and text color for secondary danger buttons.",
     "$extensions": {
       "carbon.themes": {
-        "white": "{blue.60}",
-        "g10": "{blue.60}",
-        "g90": "{blue.60}",
-        "g100": "{blue.60}"
-      }
-    }
-    ```
-  - **`org.carbon`** - Carbon-specific metadata like alpha modifiers:
-    ```json
-    "$extensions": {
-      "org.carbon": {
-        "alphaModifier": 0.5,
-        "color-scheme": "light"
-      }
-    }
-    ```
-
-### Example: Theme Token
-
-```json
-{
-  "$schema": "https://tr.designtokens.org/format/",
-  "$description": "White theme - Light theme with high contrast",
-  "background": {
-    "$type": "color",
-    "$value": "{white.default}",
-    "$description": "Default page background color. Use as the base surface for the entire application."
-  },
-  "background-hover": {
-    "$type": "color",
-    "$value": "{gray.50}",
-    "$description": "Background color for hover state. Use when user hovers over interactive elements.",
-    "$extensions": {
-      "org.carbon": {
-        "alphaModifier": 0.12
+        "white": "{red.60}",
+        "g10":   "{red.60}",
+        "g90":   "{red.40}",
+        "g100":  "{red.50}"
       }
     }
   }
 }
 ```
 
-### Example: Component Token
+Key differences from theme tokens:
 
-```json
-{
-  "$schema": "https://tr.designtokens.org/format/",
-  "$description": "Button component color tokens",
-  "button": {
-    "primary": {
-      "$type": "color",
-      "$description": "Background color for primary buttons in default state.",
-      "$extensions": {
-        "carbon.themes": {
-          "white": "{blue.60}",
-          "g10": "{blue.60}",
-          "g90": "{blue.60}",
-          "g100": "{blue.60}"
-        }
-      }
-    }
-  }
-}
-```
+|               | Theme token (e.g. `white.json`)           | Component token (e.g. `components/button.json`)                  |
+| ------------- | ----------------------------------------- | ---------------------------------------------------------------- |
+| File scope    | One theme                                 | All four themes                                                  |
+| Value field   | `$value`                                  | `$extensions["carbon.themes"]["<theme>"]`                        |
+| Grepping      | Navigate nested keys                      | Same nesting rules apply                                         |
+| Alpha opacity | `$extensions["org.carbon"].alphaModifier` | `$extensions["org.carbon"].alphaModifiers.<theme>` (note plural) |
+
+The `carbon/component-tokens` preprocessor expands this shape into per-theme
+leaf tokens before Style Dictionary processes them. The generated output lives
+in `scss/generated/_<component>-tokens.scss`.
+
+> **Reading component token values:** Look up the token name in
+> `components/<component>.json`, navigate to the nested key, and read the value
+> for the theme you care about from the `carbon.themes` map.
 
 ## Theme Tokens
 

@@ -617,7 +617,7 @@
     "02": {
       "$type": "color",
       "$value": "{gray.10}",
-      "$description": "02. Token for 02 in the design system."
+      "$description": "Secondary layer background"
     },
     "03": {
       "$type": "color",
