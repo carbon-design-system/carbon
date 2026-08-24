@@ -16,6 +16,13 @@ import mdx from './FluidDropdown.mdx';
 export default {
   title: 'Components/Fluid Components/FluidDropdown',
   component: FluidDropdown,
+  decorators: [
+    (Story) => (
+      <div style={{ width: 400 }}>
+        <Story />
+      </div>
+    ),
+  ],
   parameters: {
     docs: {
       page: mdx,
@@ -55,6 +62,11 @@ const items = [
 ];
 
 const sharedArgTypes = {
+  autoAlign: {
+    control: {
+      type: 'boolean',
+    },
+  },
   className: {
     control: {
       type: 'text',
@@ -70,6 +82,12 @@ const sharedArgTypes = {
       type: 'boolean',
     },
   },
+  direction: {
+    control: {
+      type: 'select',
+    },
+    options: ['top', 'bottom'],
+  },
   invalid: {
     control: {
       type: 'boolean',
@@ -83,6 +101,14 @@ const sharedArgTypes = {
   label: {
     control: {
       type: 'text',
+    },
+  },
+  onChange: {
+    action: 'onChange',
+  },
+  readOnly: {
+    control: {
+      type: 'boolean',
     },
   },
   titleText: {
@@ -102,53 +128,89 @@ const sharedArgTypes = {
   },
 };
 
-export const Default = ({ defaultWidth, ...dropdownArgs }) => (
-  <div style={{ width: defaultWidth }}>
-    <FluidDropdown
-      id="default"
-      titleText="Label"
-      label="Choose an option"
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
-      {...dropdownArgs}
-    />
-  </div>
-);
-
-Default.args = {
-  defaultWidth: 400,
+const sharedArgs = {
+  autoAlign: false,
   className: 'test-class',
-  isCondensed: false,
+  direction: 'bottom',
   disabled: false,
   invalid: false,
   invalidText:
     'Error message that is really long can wrap to more lines but should not be excessively long.',
+  isCondensed: false,
   label: 'Choose an option',
+  readOnly: false,
   titleText: 'Label',
   warn: false,
   warnText:
     'Warning message that is really long can wrap to more lines but should not be excessively long.',
 };
 
+const sharedControls = Object.keys(sharedArgTypes);
+
+export const Default = (dropdownArgs) => (
+  <FluidDropdown
+    id="default"
+    titleText="Label"
+    label="Choose an option"
+    items={items}
+    itemToString={(item) => (item ? item.text : '')}
+    {...dropdownArgs}
+  />
+);
+
+Default.args = {
+  ...sharedArgs,
+};
+
 Default.argTypes = {
   ...sharedArgTypes,
-  defaultWidth: {
-    control: { type: 'range', min: 300, max: 800, step: 50 },
+};
+
+Default.parameters = {
+  controls: { include: sharedControls },
+};
+
+const ToggleTip = (
+  <>
+    <ToggletipLabel>Label</ToggletipLabel>
+    <Toggletip align="top-left">
+      <ToggletipButton label="Show information">
+        <Information />
+      </ToggletipButton>
+      <ToggletipContent>
+        <p>Additional field information here.</p>
+      </ToggletipContent>
+    </Toggletip>
+  </>
+);
+
+export const Condensed = (dropdownArgs) => (
+  <FluidDropdown
+    id="default"
+    titleText="Label"
+    label="Choose an option"
+    items={items}
+    itemToString={(item) => (item ? item.text : '')}
+    {...dropdownArgs}
+  />
+);
+
+Condensed.args = {
+  ...sharedArgs,
+  isCondensed: true,
+};
+
+Condensed.argTypes = {
+  ...sharedArgTypes,
+  isCondensed: {
+    ...sharedArgTypes.isCondensed,
+    table: { readonly: true },
   },
 };
 
-export const Condensed = () => (
-  <div style={{ width: '400px' }}>
-    <FluidDropdown
-      id="default"
-      isCondensed
-      titleText="Label"
-      label="Choose an option"
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
-    />
-  </div>
-);
+Condensed.parameters = {
+  controls: { include: sharedControls },
+};
 
 const aiLabel = (
   <AILabel className="ai-label-container">
@@ -181,27 +243,29 @@ const aiLabel = (
   </AILabel>
 );
 
-export const withAILabel = (args) => (
-  <div style={{ width: '400px' }}>
-    <FluidDropdown
-      initialSelectedItem={items[2]}
-      id="default"
-      titleText="Label"
-      label="Choose an option"
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
-      decorator={aiLabel}
-      {...args}
-    />
-  </div>
+export const withAILabel = (dropdownArgs) => (
+  <FluidDropdown
+    initialSelectedItem={items[2]}
+    id="default"
+    titleText="Label"
+    label="Choose an option"
+    items={items}
+    itemToString={(item) => (item ? item.text : '')}
+    decorator={aiLabel}
+    {...dropdownArgs}
+  />
 );
+
+withAILabel.args = {
+  ...sharedArgs,
+};
 
 withAILabel.argTypes = {
   ...sharedArgTypes,
 };
 
-export const Skeleton = () => (
-  <div style={{ width: 400 }}>
-    <FluidDropdownSkeleton />
-  </div>
-);
+withAILabel.parameters = {
+  controls: { include: sharedControls },
+};
+
+export const Skeleton = () => <FluidDropdownSkeleton />;

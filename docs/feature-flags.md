@@ -1,4 +1,5 @@
 <!-- NOTE: This file is used in the generation of storybook docs page(s). -->
+<!-- Any changes/additions made to the headings/sections in this file should be followed with an update to the 'Table of Contents' section in the storybook docs page(s) -->
 
 ## About feature flags
 
