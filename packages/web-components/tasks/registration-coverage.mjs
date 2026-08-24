@@ -48,7 +48,9 @@ const declaredIn = (text) =>
 function resolveImport(fromFile, specifier) {
   if (!specifier.startsWith('.')) return null;
   const base = path.resolve(path.dirname(fromFile), specifier);
-  for (const candidate of [`${base}.ts`, path.join(base, 'index.ts')]) {
+  // TS ESM specifiers name the emitted `.js`; the source next to it is `.ts`.
+  const stem = base.replace(/\.m?js$/, '');
+  for (const candidate of [`${stem}.ts`, path.join(stem, 'index.ts')]) {
     if (fs.existsSync(candidate)) return candidate;
   }
   return null;
