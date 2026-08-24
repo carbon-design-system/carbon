@@ -728,15 +728,15 @@ Pagination.propTypes = {
   /**
    * The choices for `pageSize`.
    */
-  pageSizes: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.number.isRequired),
-    PropTypes.arrayOf(
+  pageSizes: PropTypes.arrayOf(
+    PropTypes.oneOfType([
+      PropTypes.number,
       PropTypes.shape({
         text: PropTypes.string.isRequired,
         value: PropTypes.number.isRequired,
-      }).isRequired
-    ),
-  ]),
+      }),
+    ])
+  ),
 
   /**
    * The translatable text showing the current page.
