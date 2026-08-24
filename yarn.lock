@@ -10012,14 +10012,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chardet@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "chardet@npm:2.1.0"
-  checksum: 10/8085fd8e5b1234fafacb279b4dab84dc127f512f953441daf09fc71ade70106af0dff28e86bfda00bab0de61fb475fa9003c87f82cbad3da02a4f299bfd427da
-  languageName: node
-  linkType: hard
-
-"chardet@npm:^2.1.1":
+"chardet@npm:^2.1.0, chardet@npm:^2.1.1":
   version: 2.2.0
   resolution: "chardet@npm:2.2.0"
   checksum: 10/78d1e5ba7bdc7db23511a194eedca805918df90a511f9c57f9cc7c1fc03702ed4ad053e485a766ace930362869269c4a731feaf460ae24bd3ed7d190cde8087d
