@@ -193,7 +193,5 @@ export { default as CDSLayout } from './components/layout/layout';
 export { default as CDSLayoutConstraint } from './components/layout/layout-constraint';
 // export { default as CDSTruncatedText } from './components/truncated-text/truncated-text';
 // export { default as CDSActionSet } from './components/action-set/action-set';
-// TODO: uncomment in v12 — remove from product-migrated-components.mjs too
-// export { default as CDSEditInPlace } from
-//   './components/edit-in-place/edit-in-place';
+// export { default as CDSEditInPlace } from './components/edit-in-place/edit-in-place';
 // export { default as CDSSidePanel } from './components/side-panel/side-panel';

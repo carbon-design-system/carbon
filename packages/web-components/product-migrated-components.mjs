@@ -37,9 +37,9 @@ export const productMigratedStoryGlobs = [
  *   2. Uncomment its export in src/index.ts.
  */
 export const excludeProductsComponents = [
-  'src/components/resizer/**/*',
   'src/components/action-set/**/*',
   'src/components/edit-in-place/**/*',
-  'src/components/truncated-text/**/*',
+  'src/components/resizer/**/*',
   'src/components/side-panel/**/*',
+  'src/components/truncated-text/**/*',
 ];

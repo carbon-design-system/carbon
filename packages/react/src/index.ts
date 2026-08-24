@@ -14,6 +14,11 @@ import './internal/warnAboutDeprecatedReactVersion';
 export * from './components/Accordion';
 // export { ActionSet } from './components/ActionSet';
 // export type { ActionSetProps } from './components/ActionSet';
+// export {
+//   BigNumber as preview__BigNumber,
+//   BigNumberSkeleton as preview__BigNumberSkeleton,
+// } from './components/BigNumber';
+export type { BigNumberProps as preview__BigNumberProps } from './components/BigNumber';
 export * from './components/AccordionItem';
 export * from './components/AspectRatio';
 export * from './components/Breadcrumb';
@@ -604,6 +609,10 @@ export type { RadioButtonProps } from './components/RadioButton/RadioButton';
 export type { RadioButtonSkeletonProps } from './components/RadioButton/RadioButton.Skeleton';
 export type { RadioButtonGroupProps } from './components/RadioButtonGroup/RadioButtonGroup';
 export type { RadioTileProps } from './components/RadioTile/RadioTile';
+
+// TODO: uncomment in v12 — also remove from excludeProductsComponents (migrated from @carbon/ibm-products)
+// export { ScrollGradient } from './components/ScrollGradient';
+// export type { ScrollGradientProps } from './components/ScrollGradient';
 
 //search
 export type { SearchProps } from './components/Search/Search';
