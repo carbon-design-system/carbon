@@ -176,9 +176,7 @@ const mapPageSizesToObject = (
 ): PaginationPageSize[] | undefined =>
   sizes && sizes.length
     ? sizes.map((size) =>
-        typeof size === 'object'
-          ? size
-          : { text: String(size), value: size }
+        typeof size === 'object' ? size : { text: String(size), value: size }
       )
     : undefined;
 
