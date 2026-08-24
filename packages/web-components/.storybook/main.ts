@@ -12,6 +12,7 @@ import { mergeConfig } from 'vite';
 import { litStyleLoader, litTemplateLoader } from '@mordech/vite-lit-loader';
 import glob from 'fast-glob';
 import remarkGfm from 'remark-gfm';
+import { productMigratedStoryGlobs } from '../product-migrated-components.mjs';
 
 const configDir = fileURLToPath(new URL('.', import.meta.url));
 
@@ -24,7 +25,11 @@ const stories = glob.sync(
     './**/*.stories.@(js|jsx|ts|tsx)',
   ],
   {
-    ignore: ['../src/**/docs/*.mdx'],
+    ignore: [
+      '../src/**/docs/*.mdx',
+      // ibm-products components in migration are v12-only; exclude from v11 Storybook
+      ...productMigratedStoryGlobs,
+    ],
     cwd: configDir,
   }
 );

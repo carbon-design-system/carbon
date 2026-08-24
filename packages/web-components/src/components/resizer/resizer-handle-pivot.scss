@@ -1,0 +1,39 @@
+/**
+ * Copyright IBM Corp. 2026, 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+:host {
+  position: absolute;
+  display: block;
+  background: currentColor;
+  block-size: max(1px, var(--resizer-thickness));
+  cursor: all-scroll;
+  inline-size: max(1px, var(--resizer-thickness));
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  &::before {
+    position: absolute;
+    z-index: 1;
+    background-color: var(--resizer-grab-color);
+    block-size: calc(
+      max(1px, var(--resizer-thickness)) +
+        max(0px, var(--resizer-grab-thickness))
+    );
+    content: '';
+    inline-size: calc(
+      max(1px, var(--resizer-thickness)) +
+        max(0px, var(--resizer-grab-thickness))
+    );
+    margin-block-start: calc(-1 * max(0px, var(--resizer-grab-thickness)) / 2);
+    margin-inline-start: calc(-1 * max(0px, var(--resizer-grab-thickness)) / 2);
+  }
+}
+
+:host([position='start']) {
+  margin-inline-start: calc(-1 * max(1px, var(--resizer-thickness)));
+}

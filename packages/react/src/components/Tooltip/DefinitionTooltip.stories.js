@@ -37,13 +37,49 @@ const deprecatedAlignOptions = [
   'right-top',
 ];
 
+const defaultArgs = {
+  align: 'bottom-start',
+  autoAlign: false,
+  defaultOpen: false,
+  definition:
+    'Uniform Resource Locator; the address of a resource (such as a document or website) on the Internet.',
+  openOnHover: true,
+};
+
+const argTypes = {
+  align: {
+    options: alignOptions,
+    control: 'select',
+  },
+  alignDeprecated: {
+    name: 'align (deprecated)',
+    options: deprecatedAlignOptions,
+    control: 'select',
+    table: {
+      category: 'Deprecated',
+    },
+  },
+  autoAlign: {
+    control: 'boolean',
+  },
+  definition: {
+    control: 'text',
+  },
+  defaultOpen: {
+    control: 'boolean',
+  },
+  openOnHover: {
+    control: 'boolean',
+  },
+};
+
 export default {
   title: 'Components/DefinitionTooltip',
   component: DefinitionTooltip,
   parameters: {
     controls: {
       hideNoControlsWarning: true,
-      exclude: ['id', 'tooltipText', 'triggerClassName'],
+      include: Object.keys(argTypes),
     },
     docs: {
       page: mdx,
@@ -59,19 +95,13 @@ export default {
   ],
 };
 export const Default = (args) => {
-  const definition =
-    'Uniform Resource Locator; the address of a resource (such as a document or website) on the Internet.';
   const { align, alignDeprecated, ...rest } = args;
   const resolvedAlign = alignDeprecated || align;
   return (
     <p>
       Custom domains direct requests for your apps in this Cloud Foundry
       organization to a{' '}
-      <DefinitionTooltip
-        openOnHover
-        definition={definition}
-        align={resolvedAlign}
-        {...rest}>
+      <DefinitionTooltip openOnHover align={resolvedAlign} {...rest}>
         URL
       </DefinitionTooltip>{' '}
       that you own. A custom domain can be a shared domain, a shared subdomain,
@@ -80,55 +110,17 @@ export const Default = (args) => {
   );
 };
 
-Default.args = {
-  align: 'bottom-left',
-  defaultOpen: false,
-  definition: 'Example definition',
-  openOnHover: true,
-};
-
-Default.argTypes = {
-  align: {
-    options: alignOptions,
-    control: {
-      type: 'select',
-    },
-  },
-  alignDeprecated: {
-    name: 'align (deprecated)',
-    options: deprecatedAlignOptions,
-    control: {
-      type: 'select',
-    },
-    table: {
-      category: 'Deprecated',
-    },
-  },
-  definition: {
-    control: {
-      type: 'text',
-    },
-  },
-  openOnHover: {
-    control: {
-      type: 'boolean',
-    },
-  },
-};
+Default.args = { ...defaultArgs };
+Default.argTypes = { ...argTypes };
 
 export const WithLargeText = (args) => {
-  const definition = 'Example definition';
   const { align, alignDeprecated, ...rest } = args;
   const resolvedAlign = alignDeprecated || align;
   return (
     <p>
       Custom domains direct requests for your apps in this Cloud Foundry
       organization to a{' '}
-      <DefinitionTooltip
-        openOnHover
-        definition={definition}
-        align={resolvedAlign}
-        {...rest}>
+      <DefinitionTooltip openOnHover align={resolvedAlign} {...rest}>
         URL that you own. A custom domain can be a shared domain,
       </DefinitionTooltip>{' '}
       a shared subdomain, or a shared domain and host.
@@ -136,38 +128,5 @@ export const WithLargeText = (args) => {
   );
 };
 
-WithLargeText.args = {
-  align: 'bottom-left',
-  defaultOpen: false,
-  definition: 'Example definition',
-  openOnHover: true,
-};
-
-WithLargeText.argTypes = {
-  align: {
-    options: alignOptions,
-    control: {
-      type: 'select',
-    },
-  },
-  alignDeprecated: {
-    name: 'align (deprecated)',
-    options: deprecatedAlignOptions,
-    control: {
-      type: 'select',
-    },
-    table: {
-      category: 'Deprecated',
-    },
-  },
-  definition: {
-    control: {
-      type: 'text',
-    },
-  },
-  openOnHover: {
-    control: {
-      type: 'boolean',
-    },
-  },
-};
+WithLargeText.args = { ...defaultArgs };
+WithLargeText.argTypes = { ...argTypes };
