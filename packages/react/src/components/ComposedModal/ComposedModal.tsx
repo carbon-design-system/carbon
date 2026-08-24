@@ -459,16 +459,17 @@ const ComposedModalDialog = React.forwardRef<
   }
 
   function closeModal(evt) {
-    // Move focus out of the modal before aria-hidden="true" is applied on
-    // re-render, otherwise the browser will warn about aria-hidden being set
-    // on an ancestor of the focused element.
-    if (
-      document.activeElement instanceof HTMLElement &&
-      innerModal.current?.contains(document.activeElement)
-    ) {
-      document.activeElement.blur();
-    }
     if (!onClose || onClose(evt) !== false) {
+      // Move focus out of the modal before aria-hidden="true" is applied on
+      // re-render, otherwise the browser will warn about aria-hidden being set
+      // on an ancestor of the focused element.
+      if (
+        document.activeElement instanceof HTMLElement &&
+        innerModal.current?.contains(document.activeElement)
+      ) {
+        document.activeElement.blur();
+      }
+
       setIsOpen(false);
     }
   }
