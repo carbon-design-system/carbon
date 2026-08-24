@@ -409,4 +409,4 @@ OverflowMenu.propTypes = {
   ) as PropTypes.Validator<Element | null | undefined>,
 };
 
-export { OverflowMenu };
+export { OverflowMenu, type OverflowMenuProps };

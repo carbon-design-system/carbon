@@ -617,7 +617,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
               >
                 <svg
                   aria-label="Settings"
-                  class="cds--overflow-menu__icon"
+                  class="cds--overflow-menu__icon cds--btn__icon"
                   fill="currentColor"
                   focusable="false"
                   height="16"
@@ -1067,7 +1067,7 @@ exports[`DataTable renders as expected - Component API should render and match s
               >
                 <svg
                   aria-label="Settings"
-                  class="cds--overflow-menu__icon"
+                  class="cds--overflow-menu__icon cds--btn__icon"
                   fill="currentColor"
                   focusable="false"
                   height="16"
