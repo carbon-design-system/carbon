@@ -1332,11 +1332,12 @@ class CDSDropdown extends ValidityMixin(
           class: `${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`,
           'aria-label': toggleLabel,
         });
-    const helperMessage = normalizedProps.invalid
+    const validationMessage = normalizedProps.invalid
       ? invalidText
       : normalizedProps.warn
         ? warnText
-        : helperText;
+        : undefined;
+    const helperMessage = validationMessage ?? helperText;
     const menuBody = html`
       <div
         aria-labelledby="${ifDefined(ariaLabel ? undefined : 'dropdown-label')}"
@@ -1405,15 +1406,21 @@ class CDSDropdown extends ValidityMixin(
         <slot name="slug" @slotchange=${handleAILabelSlotChange}></slot>
         ${menuBody}
       </div>
-      <div
-        part="helper-text"
-        class="${helperClasses}"
-        ?hidden="${(inline && !this.warn && !normalizedProps.invalid) ||
-        !hasHelperText}">
-        <slot name="helper-text" @slotchange="${handleSlotchangeHelperText}"
-          >${helperMessage}</slot
-        >
-      </div>
+      ${this.isFluid
+        ? validationMessage
+          ? html`<div part="helper-text" class="${helperClasses}">
+              ${validationMessage}
+            </div>`
+          : null
+        : html`<div
+            part="helper-text"
+            class="${helperClasses}"
+            ?hidden="${(inline && !this.warn && !normalizedProps.invalid) ||
+            !hasHelperText}">
+            <slot name="helper-text" @slotchange="${handleSlotchangeHelperText}"
+              >${helperMessage}</slot
+            >
+          </div>`}
     `;
   }
 
