@@ -39,7 +39,7 @@
     "child-process-promise": "^2.2.1",
     "fast-glob": "^3.3.3",
     "fs-extra": "^11.2.0",
-    "inquirer": "^12.5.0",
+    "inquirer": "^14.0.0",
     "klaw-sync": "^6.0.0",
     "lodash": "^4.17.21",
     "prettier": "^3.3.3",
