@@ -294,8 +294,6 @@ const TearsheetInternal: React.ForwardRefExoticComponent<
           `${verticalGap}`
         );
       }
-
-       
     }, [
       isSm,
       decorator,
@@ -316,7 +314,6 @@ const TearsheetInternal: React.ForwardRefExoticComponent<
       return () => {
         notifyStack?.(id, false, null);
       };
-       
     }, [localRef.current, open]);
 
     // Apply stacking CSS variables whenever the stack changes

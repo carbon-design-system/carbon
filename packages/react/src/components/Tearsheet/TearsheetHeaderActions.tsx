@@ -100,7 +100,6 @@ export const TearsheetHeaderActions = forwardRef<
         }
       },
     });
-     
   }, [containerRef.current]);
 
   return (
