@@ -1,0 +1,11 @@
+//
+// Copyright IBM Corp. 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Load the Resizer component styles directly for Storybook.
+// The global bundle (@carbon/styles) has this commented out while the
+// component is still in migration, so we load it explicitly here.
+@use '@carbon/styles/scss/components/resizer';
