@@ -475,6 +475,7 @@ function TabList({
   const ref = useRef<HTMLDivElement>(null);
   const previousButton = useRef<HTMLButtonElement>(null);
   const nextButton = useRef<HTMLButtonElement>(null);
+  const resizeAnimationFrame = useRef<number>(null);
   const [isScrollable, setIsScrollable] = useState(false);
   const [scrollLeft, setScrollLeft] = useState<number>(0);
 
@@ -697,10 +698,27 @@ function TabList({
 
     updateOverflowState();
 
-    const resizeObserver = new ResizeObserver(updateOverflowState);
+    const resizeObserver = new ResizeObserver(() => {
+      if (resizeAnimationFrame.current !== null) {
+        cancelAnimationFrame(resizeAnimationFrame.current);
+      }
+
+      resizeAnimationFrame.current = requestAnimationFrame(() => {
+        resizeAnimationFrame.current = null;
+
+        updateOverflowState();
+      });
+    });
+
     resizeObserver.observe(element);
 
     return () => {
+      if (resizeAnimationFrame.current !== null) {
+        cancelAnimationFrame(resizeAnimationFrame.current);
+
+        resizeAnimationFrame.current = null;
+      }
+
       resizeObserver.disconnect();
     };
   }, [updateOverflowState]);
