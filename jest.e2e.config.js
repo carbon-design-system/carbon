@@ -20,7 +20,7 @@ export default {
     '/packages/react/',
   ],
   transformIgnorePatterns: [
-    '<rootDir>/node_modules/(?!lodash-es|nanoid|chalk)',
+    '<rootDir>/node_modules/(?!lodash-es|nanoid|chalk|@babel/)',
   ],
   reporters: ['default', 'jest-junit'],
 };

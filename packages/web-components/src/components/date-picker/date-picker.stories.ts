@@ -8,7 +8,7 @@
 import { html } from 'lit';
 import { prefix } from '../../globals/settings';
 import { iconLoader } from '../../globals/internal/icon-loader';
-import { INPUT_SIZE } from '../text-input/text-input';
+import { INPUT_SIZE } from './defs';
 import View16 from '@carbon/icons/es/view/16.js';
 import FolderOpen16 from '@carbon/icons/es/folder--open/16.js';
 import Folders16 from '@carbon/icons/es/folders/16.js';
