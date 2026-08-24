@@ -11,7 +11,7 @@ import {
   StepGroup,
   StepProvider,
   useStepContext,
-} from '@carbon/utilities-react';
+} from '../../../../utilities-react/src/StepFlow';
 import { Tearsheet } from '.';
 import Button from '../Button';
 import CodeSnippet from '../CodeSnippet';
