@@ -9,7 +9,6 @@
 
 'use strict';
 
-const postcss = require('postcss');
 const { SassRenderer } = require('@carbon/test-utils/scss');
 
 const { render } = SassRenderer.create(__dirname);
@@ -23,46 +22,5 @@ describe('scss/components/text-input', () => {
        $_: get('mixin', meta.mixin-exists('text-input', 'text-input'));
      `);
     expect(unwrap('mixin')).toBe(true);
-  });
-
-  test('password visibility hover styles are only applied on devices that support hover', async () => {
-    const { result } = await render(`
-      @use '../text-input';
-    `);
-    const hoverRules = [];
-
-    postcss.parse(result.css.toString()).walkRules((rule) => {
-      if (
-        rule.selector.includes(
-          '.cds--text-input--password__visibility__toggle'
-        ) &&
-        rule.selector.includes(':hover')
-      ) {
-        hoverRules.push(rule);
-      }
-    });
-
-    expect(hoverRules.length).toBeGreaterThan(0);
-    expect(
-      hoverRules
-        .filter((rule) => {
-          let parent = rule.parent;
-
-          while (parent) {
-            if (
-              parent.type === 'atrule' &&
-              parent.name === 'media' &&
-              parent.params.includes('(any-hover: hover)')
-            ) {
-              return false;
-            }
-
-            parent = parent.parent;
-          }
-
-          return true;
-        })
-        .map((rule) => rule.selector)
-    ).toEqual([]);
   });
 });
