@@ -112,6 +112,8 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
     const [submenuOpen, setSubmenuOpen] = useState(false);
     const [rtl, setRtl] = useState(false);
 
+    const hasChildren = React.Children.toArray(children).length > 0;
+
     const {
       refs,
       floatingStyles,
@@ -162,7 +164,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
     const { getReferenceProps, getFloatingProps } = useInteractions([
       useHover(floatingContext, {
         delay: 100,
-        enabled: true,
+        enabled: hasChildren,
         handleClose: safePolygon({
           requireIntent: false,
         }),
@@ -174,8 +176,6 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
 
     const menuItem = useRef<HTMLLIElement>(null);
     const ref = useMergedRefs([forwardRef, menuItem, refs.setReference]);
-
-    const hasChildren = React.Children.toArray(children).length > 0;
 
     const isDisabled = disabled && !hasChildren;
     const isDanger = kind === 'danger' && !hasChildren;
