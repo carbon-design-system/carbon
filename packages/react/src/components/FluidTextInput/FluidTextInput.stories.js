@@ -119,7 +119,7 @@ Default.argTypes = {
 };
 
 export const DefaultWithToggletip = () => (
-  <div className="fluid-text-input-story" style={{ width: '300px' }}>
+  <div className="fluid-text-input-story">
     <FluidTextInput labelText="Label" placeholder="Placeholder text" />
     <LabelToggletip />
   </div>

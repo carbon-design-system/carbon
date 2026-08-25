@@ -26,8 +26,18 @@ export default {
 };
 
 export const Default = ({ defaultWidth, ...numberInputArgs }) => (
-  <div style={{ width: defaultWidth }}>
+  <div className="fluid-number-input-story" style={{ width: defaultWidth }}>
     <FluidNumberInput {...numberInputArgs} />
+    <span className="fluid-number-input-story__toggletip">
+      <Toggletip align="top-left">
+        <ToggletipButton label="Show information">
+          <Information />
+        </ToggletipButton>
+        <ToggletipContent>
+          <p>Additional field information here.</p>
+        </ToggletipContent>
+      </Toggletip>
+    </span>
   </div>
 );
 
@@ -88,30 +98,6 @@ Default.argTypes = {
       type: 'text',
     },
   },
-};
-
-export const DefaultWithToggletip = ({ defaultWidth, ...numberInputArgs }) => (
-  <div className="fluid-number-input-story" style={{ width: defaultWidth }}>
-    <FluidNumberInput {...numberInputArgs} />
-    <span className="fluid-number-input-story__toggletip">
-      <Toggletip align="top-left">
-        <ToggletipButton label="Show information">
-          <Information />
-        </ToggletipButton>
-        <ToggletipContent>
-          <p>Additional field information here.</p>
-        </ToggletipContent>
-      </Toggletip>
-    </span>
-  </div>
-);
-
-DefaultWithToggletip.args = {
-  ...Default.args,
-};
-
-DefaultWithToggletip.argTypes = {
-  ...Default.argTypes,
 };
 
 export const Skeleton = () => (

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -29,15 +29,6 @@ export default {
   },
 };
 
-export const Skeleton = () => (
-  <div style={{ width: '300px' }}>
-    <FluidTimePickerSkeleton />
-    <br />
-    <br />
-    <FluidTimePickerSkeleton isOnlyTwo />
-  </div>
-);
-
 const ClockToggletip = ({ className }) => (
   <span className={`fluid-time-picker-story__toggletip ${className}`}>
     <Toggletip align="top-left">
@@ -51,71 +42,16 @@ const ClockToggletip = ({ className }) => (
   </span>
 );
 
+export const Skeleton = () => (
+  <div style={{ width: '300px' }}>
+    <FluidTimePickerSkeleton />
+    <br />
+    <br />
+    <FluidTimePickerSkeleton isOnlyTwo />
+  </div>
+);
+
 export const Default = (args) => {
-  return (
-    <div style={{ width: '350px' }}>
-      <FluidTimePicker id="time-picker-1" {...args}>
-        <FluidTimePickerSelect id="select-1" labelText="Clock">
-          <SelectItem value="am" text="AM" />
-          <SelectItem value="pm" text="PM" />
-        </FluidTimePickerSelect>
-        <FluidTimePickerSelect id="select-2" labelText="Timezone">
-          <SelectItem value="et" text="Eastern Time (ET)" />
-          <SelectItem value="ct" text="Central Time (CT)" />
-          <SelectItem value="mt" text="Mountain Time (MT)" />
-          <SelectItem value="pt" text="Pacific Time (PT)" />
-        </FluidTimePickerSelect>
-      </FluidTimePicker>
-      <br />
-      <br />
-      <FluidTimePicker
-        id="time-picker-2"
-        labelText="Time"
-        placeholder="hh:mm"
-        {...args}>
-        <FluidTimePickerSelect id="select-3" labelText="Clock">
-          <SelectItem value="am" text="AM" />
-          <SelectItem value="pm" text="PM" />
-        </FluidTimePickerSelect>
-      </FluidTimePicker>
-    </div>
-  );
-};
-
-Default.args = {
-  labelText: 'Time',
-  invalidText:
-    'Error message that is really long can wrap to more lines but should not be excessively long.',
-  placeholder: 'hh:mm',
-  warnText:
-    'Warning message that is really long can wrap to more lines but should not be excessively long.',
-};
-
-Default.argTypes = {
-  disabled: {
-    control: { type: 'boolean' },
-  },
-  labelText: {
-    control: { type: 'string' },
-  },
-  invalid: {
-    control: { type: 'boolean' },
-  },
-  invalidText: {
-    control: { type: 'text' },
-  },
-  placeholder: {
-    control: { type: 'text' },
-  },
-  warn: {
-    control: { type: 'boolean' },
-  },
-  warnText: {
-    control: { type: 'text' },
-  },
-};
-
-export const DefaultWithToggletip = (args) => {
   return (
     <div style={{ width: '350px' }}>
       <div className="fluid-time-picker-story">
@@ -152,10 +88,35 @@ export const DefaultWithToggletip = (args) => {
   );
 };
 
-DefaultWithToggletip.args = {
-  ...Default.args,
+Default.args = {
+  labelText: 'Time',
+  invalidText:
+    'Error message that is really long can wrap to more lines but should not be excessively long.',
+  placeholder: 'hh:mm',
+  warnText:
+    'Warning message that is really long can wrap to more lines but should not be excessively long.',
 };
 
-DefaultWithToggletip.argTypes = {
-  ...Default.argTypes,
+Default.argTypes = {
+  disabled: {
+    control: { type: 'boolean' },
+  },
+  labelText: {
+    control: { type: 'string' },
+  },
+  invalid: {
+    control: { type: 'boolean' },
+  },
+  invalidText: {
+    control: { type: 'text' },
+  },
+  placeholder: {
+    control: { type: 'text' },
+  },
+  warn: {
+    control: { type: 'boolean' },
+  },
+  warnText: {
+    control: { type: 'text' },
+  },
 };
