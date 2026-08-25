@@ -170,20 +170,6 @@ Default.parameters = {
   controls: { include: sharedControls },
 };
 
-const ToggleTip = (
-  <>
-    <ToggletipLabel>Label</ToggletipLabel>
-    <Toggletip align="top-left">
-      <ToggletipButton label="Show information">
-        <Information />
-      </ToggletipButton>
-      <ToggletipContent>
-        <p>Additional field information here.</p>
-      </ToggletipContent>
-    </Toggletip>
-  </>
-);
-
 export const Condensed = (dropdownArgs) => (
   <FluidDropdown
     id="default"
