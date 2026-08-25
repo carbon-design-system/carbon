@@ -223,7 +223,7 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
    * Specify the size of the button, from the following list of sizes: `xs`, `sm`, `md`, `lg`, `xl`, `2xl`
    */
   @property({ type: String, reflect: true })
-  size = 'lg';
+  size?: BUTTON_SIZE | string = 'lg';
 
   /**
    * Optional prop to specify the tabIndex of the Button
@@ -292,6 +292,10 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
       _handleSlotChange: handleSlotChange,
     } = this;
 
+    const isIconOnly = hasIcon && !hasMainContent;
+    const isGhostIconOnly = isIconOnly && kind === BUTTON_KIND.GHOST;
+    const ariaPressed = isGhostIconOnly && isSelected ? true : undefined;
+
     let defaultClasses = {
       [`${prefix}--btn`]: true,
       [`${prefix}--btn--${kind}`]: kind,
@@ -299,12 +303,12 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
         kind === BUTTON_KIND.DANGER_TERTIARY,
       [`${prefix}--btn--danger--ghost`]: kind === BUTTON_KIND.DANGER_GHOST,
       [`${prefix}--btn--disabled`]: disabled,
-      [`${prefix}--btn--icon-only`]: hasIcon && !hasMainContent,
-      [`${prefix}--btn--${size}`]: size,
-      [`${prefix}--layout--size-${size}`]: size,
+      [`${prefix}--btn--icon-only`]: isIconOnly,
+      [`${prefix}--btn--${size}`]: !!size,
+      [`${prefix}--layout--size-${size}`]: !!size,
       [`${prefix}-ce--btn--has-icon`]: hasIcon,
       [`${prefix}--btn--expressive`]: isExpressive,
-      [`${prefix}--btn--selected`]: isSelected && kind === 'ghost',
+      [`${prefix}--btn--selected`]: isGhostIconOnly && isSelected,
     };
 
     if (buttonClassName) {
@@ -379,6 +383,7 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
               tabindex="${tabIndex}"
               type="${ifDefined(type)}"
               aria-label="${ifDefined(tooltipText)}"
+              ?aria-pressed="${ariaPressed}"
               aria-describedby="badge-indicator">
               <slot @slotchange="${handleSlotChange}"></slot>
               <slot name="icon" @slotchange="${handleSlotChange}"></slot>
@@ -404,6 +409,7 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
             tabindex="${tabIndex}"
             type="${ifDefined(type)}"
             aria-label="${ifDefined(tooltipText)}"
+            ?aria-pressed="${ariaPressed}"
             aria-describedby="${ifDefined(
               hasDangerDescription ? 'danger-description' : undefined
             )}">

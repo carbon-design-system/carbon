@@ -12,8 +12,6 @@ import Downshift, {
   useMultipleSelection,
   type UseComboboxProps,
   type UseMultipleSelectionProps,
-  UseComboboxInterface,
-  UseComboboxStateChangeTypes,
   UseMultipleSelectionInterface,
 } from 'downshift';
 import isEqual from 'react-fast-compare';
@@ -89,9 +87,8 @@ const {
   InputChange,
   InputKeyDownEscape,
   FunctionSetHighlightedIndex,
-} = useCombobox.stateChangeTypes as UseComboboxInterface['stateChangeTypes'] & {
-  ToggleButtonClick: UseComboboxStateChangeTypes.ToggleButtonClick;
-};
+  FunctionSetInputValue,
+} = useCombobox.stateChangeTypes;
 
 const {
   SelectedItemKeyDownBackspace,
@@ -245,8 +242,7 @@ export interface FilterableMultiSelectProps<ItemType>
   onChange?(changes: { selectedItems: ItemType[] }): void;
 
   /**
-   * A utility for this controlled component
-   * to communicate to the currently typed input.
+   * Called whenever the input value changes.
    */
   onInputValueChange?: UseComboboxProps<ItemType>['onInputValueChange'];
 
@@ -679,6 +675,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     menuId,
     inputId,
     inputValue,
+    onInputValueChange,
     stateReducer,
     isItemDisabled,
   });
@@ -728,9 +725,6 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
           highlightedIndex: controlledSelectedItems.length > 0 ? 0 : -1,
         };
       case InputChange:
-        if (onInputValueChange) {
-          onInputValueChange(changes);
-        }
         setInputValue(changes.inputValue ?? '');
         setIsOpen(true);
         return { ...changes, highlightedIndex: 0 };
@@ -817,11 +811,14 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     event?: KeyboardEvent<Element> | MouseEvent<HTMLButtonElement>
   ) {
     const value = textInput.current?.value;
-    if (
-      value?.length === 1 ||
-      (event && 'key' in event && match(event, keys.Escape))
-    ) {
+    const isEscape = event && 'key' in event && match(event, keys.Escape);
+    const isClick = value && !(event && 'key' in event);
+    if (value?.length === 1 || isEscape || isClick) {
       setInputValue('');
+      onInputValueChange?.({
+        inputValue: '',
+        type: FunctionSetInputValue,
+      });
     } else {
       setInputValue(value ?? '');
     }
@@ -1045,6 +1042,9 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
               disabled={disabled}
               translateWithId={translateWithId}
               readOnly={readOnly}
+              onMouseDown={(event) => {
+                event.preventDefault();
+              }}
               onMouseUp={(event: MouseEvent) => {
                 // If we do not stop this event from propagating,
                 // it seems like Downshift takes our event and
@@ -1290,8 +1290,7 @@ FilterableMultiSelect.propTypes = {
   onChange: PropTypes.func,
 
   /**
-   * `onInputValueChange` is a utility for this controlled component to communicate to
-   * the currently typed input.
+   * Called whenever the input value changes.
    */
   onInputValueChange: PropTypes.func,
 

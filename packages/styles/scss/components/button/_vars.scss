@@ -6,6 +6,7 @@
 //
 
 @use '../../spacing' as *;
+@use '../../utilities/convert';
 
 /// @type Number
 /// @access public
@@ -77,3 +78,12 @@ $button-border-width: 2px !default;
 /// @access public
 /// @group button
 $button-outline-width: 1px !default;
+
+/// Minimum inline size of a fluid button. Used as the container-query threshold
+/// for stacking fluid button sets. Contexts with more buttons or narrower
+/// containers (e.g. Tearsheet at 540px with 4 buttons) should lower this value
+/// via `@use … with ($button-min-inline-size: <value>)`.
+/// @type Number
+/// @access public
+/// @group button
+$button-min-inline-size: convert.to-rem(176px) !default;

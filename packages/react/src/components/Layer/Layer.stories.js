@@ -21,14 +21,23 @@ export default {
       page: mdx,
     },
   },
-  args: {
-    level: 0,
+};
+
+const contentArgTypes = {
+  label: {
+    control: { type: 'text' },
   },
 };
 
-export const Default = () => {
+const contentParameters = {
+  controls: {
+    include: ['label'],
+  },
+};
+
+export const Default = ({ label }) => {
   function TestComponent() {
-    return <div className="example-layer-test-component">Test component</div>;
+    return <div className="example-layer-test-component">{label}</div>;
   }
 
   return (
@@ -44,12 +53,16 @@ export const Default = () => {
   );
 };
 
-export const withBackground = () => {
+Default.args = {
+  label: 'Workspace settings',
+};
+Default.argTypes = contentArgTypes;
+Default.parameters = contentParameters;
+
+export const withBackground = ({ label }) => {
   function TestComponent() {
     return (
-      <div className="example-layer-test-component-no-background">
-        Test component
-      </div>
+      <div className="example-layer-test-component-no-background">{label}</div>
     );
   }
 
@@ -66,28 +79,47 @@ export const withBackground = () => {
   );
 };
 
-export const CustomLevel = (args) => {
+withBackground.args = {
+  label: 'Workspace settings',
+};
+withBackground.argTypes = contentArgTypes;
+withBackground.parameters = contentParameters;
+
+export const CustomLevel = ({ label, level }) => {
   function TestComponent() {
-    return <div className="example-layer-test-component">Test component</div>;
+    return <div className="example-layer-test-component">{label}</div>;
   }
 
   return (
-    <Layer level={2} {...args}>
+    <Layer level={level}>
       <TestComponent />
     </Layer>
   );
 };
 
 CustomLevel.args = {
+  label: 'Workspace settings',
   level: 2,
 };
+CustomLevel.argTypes = {
+  ...contentArgTypes,
+  level: {
+    control: { type: 'select' },
+    options: [0, 1, 2],
+  },
+};
+CustomLevel.parameters = {
+  controls: {
+    include: ['label', 'level'],
+  },
+};
 
-export const UseLayer = () => {
+export const UseLayer = ({ label }) => {
   function ExampleComponent() {
     const { level } = useLayer();
     return (
       <div style={{ padding: '1rem', background: 'var(--cds-layer)' }}>
-        The current layer level is: {level}
+        {label}: {level}
       </div>
     );
   }
@@ -101,6 +133,12 @@ export const UseLayer = () => {
     </>
   );
 };
+
+UseLayer.args = {
+  label: 'Current layer level',
+};
+UseLayer.argTypes = contentArgTypes;
+UseLayer.parameters = contentParameters;
 
 UseLayer.story = {
   name: 'useLayer',
