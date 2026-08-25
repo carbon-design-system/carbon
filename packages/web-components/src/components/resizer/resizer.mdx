@@ -1,0 +1,285 @@
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
+import * as ResizerStories from './resizer.stories';
+
+<Meta of={ResizerStories} />
+
+# Resizer
+
+A set of web components for creating resizable panels with support for both
+declarative (zero-setup) and programmatic (event-driven) usage modes. The
+Resizer components enable you to create flexible, resizable layouts in your web
+applications, supporting both horizontal and vertical resizing with optional
+pivot handles for advanced corner resizing.
+
+## Two panels (vertical)
+
+<Canvas of={ResizerStories.TwoPanelsVertical} />
+
+## Two panels (horizontal)
+
+<Canvas of={ResizerStories.TwoPanelsHorizontal} />
+
+## Nested
+
+<Canvas of={ResizerStories.Nested} />
+
+## With pivot handle
+
+<Canvas of={ResizerStories.WithPivotHandle} />
+
+## Single panel — no boundaries
+
+<Canvas of={ResizerStories.SinglePanelNoBoundaries} />
+
+## Single panel — bounded
+
+<Canvas of={ResizerStories.SinglePanelBounded} />
+
+## Single panel — overlay
+
+<Canvas of={ResizerStories.SinglePanelOverlay} />
+
+## With custom handles
+
+<Canvas of={ResizerStories.WithCustomHandles} />
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/web-components/es/components/resizer/index.js';
+```
+
+### HTML
+
+```html
+<cds-resizer-grid>
+  <cds-resizer-panel>
+    <div>Panel 1 content</div>
+  </cds-resizer-panel>
+  <cds-resizer-handle></cds-resizer-handle>
+  <cds-resizer-panel>
+    <div>Panel 2 content</div>
+  </cds-resizer-panel>
+</cds-resizer-grid>
+```
+
+## Components
+
+- **`cds-resizer-grid`** — Container that manages the CSS grid layout for
+  resizable panels
+- **`cds-resizer-panel`** — Individual resizable content area
+- **`cds-resizer-handle`** — Drag handle positioned between panels
+- **`cds-resizer-handle-pivot`** — Corner pivot for simultaneous two-axis
+  resizing
+
+## Usage
+
+### Declarative mode (zero-setup)
+
+Use components purely via HTML — resizing works out of the box with no
+JavaScript required.
+
+#### Horizontal layout (left / right)
+
+```html
+<cds-resizer-grid axis="x">
+  <cds-resizer-panel slot="left">Left panel content</cds-resizer-panel>
+
+  <cds-resizer-handle slot="handle-horizontal"></cds-resizer-handle>
+
+  <cds-resizer-panel slot="right">Right panel content</cds-resizer-panel>
+</cds-resizer-grid>
+```
+
+#### Vertical layout (top / bottom)
+
+```html
+<cds-resizer-grid axis="y">
+  <cds-resizer-panel slot="top">Top panel content</cds-resizer-panel>
+
+  <cds-resizer-handle slot="handle-vertical"></cds-resizer-handle>
+
+  <cds-resizer-panel slot="bottom">Bottom panel content</cds-resizer-panel>
+</cds-resizer-grid>
+```
+
+#### With pivot handle
+
+```html
+<cds-resizer-grid axis="x">
+  <cds-resizer-panel slot="left">
+    Left panel content
+    <cds-resizer-handle slot="handle-horizontal">
+      <cds-resizer-handle-pivot></cds-resizer-handle-pivot>
+    </cds-resizer-handle>
+  </cds-resizer-panel>
+
+  <cds-resizer-panel slot="right">Right panel content</cds-resizer-panel>
+</cds-resizer-grid>
+```
+
+### Programmatic mode (event-driven)
+
+`cds-resizer-handle` can be used standalone — without a grid — by listening to
+its custom events. This lets you apply custom resize logic in any framework.
+
+#### Events
+
+- `resize-start` — Fired when dragging begins
+
+  - `detail.axis` — The resize axis (`'x'` or `'y'`)
+  - `detail.startPosition` — Starting pointer position `{ x, y }`
+
+- `resize-drag` — Fired continuously during dragging
+
+  - `detail.axis` — The resize axis (`'x'` or `'y'`)
+  - `detail.delta` — Movement delta in pixels since drag started
+  - `detail.position` — Current pointer position `{ x, y }`
+
+- `resize-end` — Fired when dragging ends
+
+  - `detail.axis` — The resize axis (`'x'` or `'y'`)
+  - `detail.delta` — Total movement delta in pixels
+  - `detail.position` — Final pointer position `{ x, y }`
+
+- `resize-reset` — Fired on double-tap / double-click
+
+#### Single panel example
+
+```html
+<div class="container">
+  <div class="panel" id="myPanel">Panel content</div>
+  <cds-resizer-handle></cds-resizer-handle>
+</div>
+
+<script>
+  const handle = document.querySelector('cds-resizer-handle');
+  const panel = document.getElementById('myPanel');
+  let initialHeight = 0;
+
+  handle.addEventListener('resize-start', () => {
+    initialHeight = panel.offsetHeight;
+  });
+
+  handle.addEventListener('resize-drag', (e) => {
+    const newHeight = initialHeight + e.detail.delta;
+    panel.style.height = `${Math.max(48, newHeight)}px`;
+  });
+</script>
+```
+
+#### Bounded resize example
+
+```html
+<div class="container" style="height: 400px">
+  <div class="panel" id="boundedPanel">Panel content</div>
+  <cds-resizer-handle></cds-resizer-handle>
+</div>
+
+<script>
+  const handle = document.querySelector('cds-resizer-handle');
+  const panel = document.getElementById('boundedPanel');
+  const container = document.querySelector('.container');
+  let initialHeight = 0;
+
+  handle.addEventListener('resize-start', () => {
+    initialHeight = panel.offsetHeight;
+  });
+
+  handle.addEventListener('resize-drag', (e) => {
+    const newHeight = initialHeight + e.detail.delta;
+    const constrainedHeight = Math.max(
+      48,
+      Math.min(newHeight, container.offsetHeight - 20)
+    );
+    panel.style.height = `${constrainedHeight}px`;
+  });
+</script>
+```
+
+## CSS custom properties
+
+| Property                   | Default       | Description                                            |
+| -------------------------- | ------------- | ------------------------------------------------------ |
+| `--resizer-thickness`      | `4px`         | Visible thickness of the handle bar                    |
+| `--resizer-grab-thickness` | `8px`         | Extra invisible grab area around the handle            |
+| `--resizer-grab-color`     | `transparent` | Background of the grab area (use a token to reveal it) |
+
+## Accessibility
+
+### Keyboard navigation
+
+| Key                        | Action                                           |
+| -------------------------- | ------------------------------------------------ |
+| `ArrowLeft` / `ArrowRight` | Resize horizontal handle by 5px                  |
+| `ArrowUp` / `ArrowDown`    | Resize vertical handle by 5px                    |
+| `Shift` + Arrow            | Resize in 25px increments                        |
+| `Home`                     | Collapse start panel to minimum (grid mode only) |
+| `End`                      | Expand start panel to maximum (grid mode only)   |
+| Double-click / Double-tap  | Reset panels to default sizes                    |
+
+### ARIA attributes
+
+#### Grid-based usage (automatic)
+
+When `cds-resizer-handle` is placed inside a `cds-resizer-grid`, these
+attributes are managed automatically:
+
+- `role="separator"` — Identifies the element as a separator
+- `aria-orientation` — `"vertical"` or `"horizontal"` based on axis
+- `aria-valuenow` — Current split percentage (0–100)
+- `aria-valuemin="0"` / `aria-valuemax="100"`
+- `aria-valuetext` — Human-readable split ratio, e.g. `"60% / 40%"`
+- `aria-live="assertive"` — Announces changes to screen readers
+
+#### Standalone usage (manual)
+
+When using `cds-resizer-handle` without a grid you must manage ARIA attributes
+yourself:
+
+```html
+<div class="container">
+  <div class="panel" id="myPanel">Panel content</div>
+  <cds-resizer-handle
+    aria-valuenow="50"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuetext="Panel height: 200px"></cds-resizer-handle>
+</div>
+
+<script>
+  const handle = document.querySelector('cds-resizer-handle');
+  const panel = document.getElementById('myPanel');
+  let initialHeight = 0;
+
+  handle.addEventListener('resize-start', () => {
+    initialHeight = panel.offsetHeight;
+  });
+
+  handle.addEventListener('resize-drag', (e) => {
+    const constrainedHeight = Math.max(48, initialHeight + e.detail.delta);
+    panel.style.height = `${constrainedHeight}px`;
+
+    // Keep ARIA in sync
+    const percentage = Math.round((constrainedHeight / 400) * 100);
+    handle.setAttribute('aria-valuenow', percentage.toString());
+    handle.setAttribute(
+      'aria-valuetext',
+      `Panel height: ${constrainedHeight}px`
+    );
+  });
+</script>
+```
+
+> **Note:** `role="separator"` requires `aria-valuenow` to be present for
+> accessibility compliance. Always update it during resize when using standalone
+> handles.
+
+## `<cds-resizer-handle>` attributes and properties
+
+<ArgTypes of="cds-resizer-handle" />
