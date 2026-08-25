@@ -16,6 +16,42 @@ import { FormContext } from '../FluidForm';
 const prefix = 'cds';
 
 describe('DatePicker', () => {
+  it('should not allow interactive content in DatePickerInput labelText', () => {
+    const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+    expect(() => {
+      render(
+        <DatePickerInput
+          id="date-picker-input-id"
+          labelText={
+            <>
+              Date Picker label <button type="button">Help</button>
+            </>
+          }
+        />
+      );
+    }).toThrow(
+      'The DatePickerInput component `labelText` prop must have no interactive content'
+    );
+
+    spy.mockRestore();
+  });
+
+  it('should allow non-interactive content in DatePickerInput labelText', () => {
+    expect(() => {
+      render(
+        <DatePickerInput
+          id="date-picker-input-id"
+          labelText={
+            <>
+              Date Picker label <span>additional label content</span>
+            </>
+          }
+        />
+      );
+    }).not.toThrow();
+  });
+
   it('should add extra classes that are passed via className', () => {
     render(
       <DatePicker

@@ -38,6 +38,44 @@ describe('FormGroup', () => {
     expect(screen.queryByText('legendtest')).toBeInTheDocument();
   });
 
+  it('should not allow interactive content in legendText', () => {
+    const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+    expect(() => {
+      render(
+        <FormGroup
+          legendId="legend-testid"
+          legendText={
+            <>
+              FormGroup legend <button type="button">Help</button>
+            </>
+          }>
+          FormGroup Test
+        </FormGroup>
+      );
+    }).toThrow(
+      'The FormGroup component `legendText` prop must have no interactive content'
+    );
+
+    spy.mockRestore();
+  });
+
+  it('should allow non-interactive content in legendText', () => {
+    expect(() => {
+      render(
+        <FormGroup
+          legendId="legend-testid"
+          legendText={
+            <>
+              FormGroup legend <span>additional legend content</span>
+            </>
+          }>
+          FormGroup Test
+        </FormGroup>
+      );
+    }).not.toThrow();
+  });
+
   it('should set the id for legend based on legendId', () => {
     render(
       <FormGroup legendId="legend-testid" legendText="legendtest">
