@@ -97,8 +97,8 @@ export const AllComponents = () => {
         {/* Popover · Toggletip · Tooltip — horizontal row */}
         <div
           style={{
-            display: 'flex',
-            flexWrap: 'wrap',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, minmax(16rem, max-content))',
             gap: '3rem',
             alignItems: 'flex-start',
           }}>

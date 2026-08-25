@@ -723,7 +723,7 @@ const Dropdown = React.forwardRef(
               }}
               open={isOpen}>
               <ListBox.Menu {...menuProps} style={{ position: 'static' }}>
-                <MotionContext stagger={30} settle={80}>
+                <MotionContext stagger={25} settle={80}>
                   {items.map((item, index) => {
                     const itemProps = getItemProps({
                       item,
