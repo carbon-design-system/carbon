@@ -79,6 +79,14 @@ const sharedArgTypes = {
       type: 'boolean',
     },
   },
+  cols: {
+    control: {
+      type: 'number',
+    },
+  },
+  defaultWidth: {
+    control: { type: 'range', min: 300, max: 800, step: 50 },
+  },
   enableCounter: {
     control: {
       type: 'boolean',
@@ -91,7 +99,23 @@ const sharedArgTypes = {
   },
   maxCount: {
     control: {
-      type: 'text',
+      type: 'number',
+    },
+  },
+  onChange: {
+    action: 'onChange',
+  },
+  onClick: {
+    action: 'onClick',
+  },
+  readOnly: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  rows: {
+    control: {
+      type: 'number',
     },
   },
   warn: {
@@ -106,6 +130,24 @@ const sharedArgTypes = {
   },
 };
 
+const sharedArgs = {
+  className: 'test-class',
+  cols: 40,
+  defaultWidth: 300,
+  disabled: false,
+  enableCounter: false,
+  invalid: false,
+  invalidText:
+    'Error message that is really long can wrap to more lines but should not be excessively long.',
+  labelText: 'Text Area label',
+  maxCount: 500,
+  placeholder: 'Placeholder text',
+  readOnly: false,
+  rows: 4,
+  warn: false,
+  warnText: 'This is a warning message.',
+};
+
 export const Default = ({ defaultWidth, ...textAreaArgs }) => (
   <div style={{ width: defaultWidth }}>
     <FluidTextArea {...textAreaArgs} />
@@ -113,38 +155,30 @@ export const Default = ({ defaultWidth, ...textAreaArgs }) => (
 );
 
 Default.args = {
-  defaultWidth: 300,
-  className: 'test-class',
-  placeholder: 'Placeholder text',
-  invalid: false,
-  invalidText:
-    'Error message that is really long can wrap to more lines but should not be excessively long.',
-  disabled: false,
-  enableCounter: false,
-  labelText: 'Text Area label',
-  maxCount: 500,
-  warn: false,
-  warnText: 'This is a warning message.',
+  ...sharedArgs,
 };
 
 Default.argTypes = {
   ...sharedArgTypes,
-  defaultWidth: {
-    control: { type: 'range', min: 300, max: 800, step: 50 },
-  },
 };
 
-export const DefaultWithLayers = () => (
+export const DefaultWithLayers = ({ defaultWidth, ...textAreaArgs }) => (
   <WithLayer>
     {(layer) => (
-      <FluidTextArea
-        labelText="Text Area label"
-        placeholder="Placeholder text"
-        id={`text-area-${layer}`}
-      />
+      <div style={{ width: defaultWidth }}>
+        <FluidTextArea {...textAreaArgs} id={`text-area-${layer}`} />
+      </div>
     )}
   </WithLayer>
 );
+
+DefaultWithLayers.args = {
+  ...sharedArgs,
+};
+
+DefaultWithLayers.argTypes = {
+  ...sharedArgTypes,
+};
 
 const ToggleTip = (
   <>
@@ -160,12 +194,32 @@ const ToggleTip = (
   </>
 );
 
-export const DefaultWithToggletip = () => (
-  <FluidTextArea labelText={ToggleTip} placeholder="Placeholder text" />
+export const DefaultWithToggletip = ({ defaultWidth, ...textAreaArgs }) => (
+  <div style={{ width: defaultWidth }}>
+    <FluidTextArea {...textAreaArgs} labelText={ToggleTip} />
+  </div>
 );
 
-export const Skeleton = () => (
-  <div style={{ width: '300px' }}>
+DefaultWithToggletip.args = {
+  ...sharedArgs,
+};
+
+DefaultWithToggletip.argTypes = {
+  ...sharedArgTypes,
+};
+
+DefaultWithToggletip.parameters = {
+  controls: {
+    exclude: ['id', 'value', 'defaultValue', 'labelText'],
+  },
+};
+
+export const Skeleton = ({ defaultWidth }) => (
+  <div style={{ width: defaultWidth }}>
     <FluidTextAreaSkeleton />
   </div>
 );
+
+Skeleton.args = { defaultWidth: sharedArgs.defaultWidth };
+Skeleton.argTypes = { defaultWidth: sharedArgTypes.defaultWidth };
+Skeleton.parameters = { controls: { include: ['defaultWidth'] } };

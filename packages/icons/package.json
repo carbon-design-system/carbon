@@ -1,8 +1,9 @@
 {
   "name": "@carbon/icons",
   "description": "Icons for digital and software products using the Carbon Design System",
-  "version": "11.85.0-rc.0",
+  "version": "11.87.0-rc.0",
   "license": "Apache-2.0",
+  "sideEffects": false,
   "main": "lib/index.js",
   "module": "es/index.js",
   "repository": {
@@ -41,8 +42,8 @@
     "postinstall": "ibmtelemetry --config=telemetry.yml"
   },
   "devDependencies": {
-    "@carbon/cli": "^11.47.0-rc.0",
-    "@carbon/icon-build-helpers": "^1.62.0-rc.0",
+    "@carbon/cli": "^11.49.0-rc.0",
+    "@carbon/icon-build-helpers": "^1.64.0-rc.0",
     "rimraf": "^6.0.1"
   },
   "dependencies": {

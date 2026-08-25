@@ -1,7 +1,7 @@
 {
   "name": "@carbon/cli",
   "description": "Task automation for working with the Carbon Design System",
-  "version": "11.47.0-rc.0",
+  "version": "11.49.0-rc.0",
   "license": "Apache-2.0",
   "type": "module",
   "bin": {
@@ -28,20 +28,19 @@
     "postinstall": "ibmtelemetry --config=telemetry.yml"
   },
   "dependencies": {
-    "@babel/core": "^7.27.3",
-    "@carbon/cli-reporter": "^10.8.0",
+    "@babel/core": "^8.0.0",
+    "@carbon/cli-reporter": "^10.9.0",
     "@ibm/telemetry-js": "^1.5.0",
     "@octokit/plugin-retry": "^3.0.7",
     "@octokit/plugin-throttling": "^4.0.0",
     "@octokit/rest": "^22.0.0",
-    "chalk": "^5.4.1",
+    "chalk": "^6.0.0",
     "change-case-all": "^2.1.0",
     "child-process-promise": "^2.2.1",
-    "enquirer": "^2.4.1",
     "fast-glob": "^3.3.3",
     "fs-extra": "^11.2.0",
     "inquirer": "^12.5.0",
-    "klaw-sync": "^6.0.0",
+    "klaw-sync": "^8.0.0",
     "lodash": "^4.17.21",
     "prettier": "^3.3.3",
     "prettier-config-carbon": "^0.12.0",
