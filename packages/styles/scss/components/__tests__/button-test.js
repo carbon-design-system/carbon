@@ -40,6 +40,7 @@ describe('scss/components/button', () => {
   "button-padding-ghost-sm",
   "button-border-width",
   "button-outline-width",
+  "button-min-inline-size",
   "button-separator",
   "button-primary",
   "button-secondary",

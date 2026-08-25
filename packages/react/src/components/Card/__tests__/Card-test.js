@@ -1,0 +1,1001 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  CardTitle,
+  CardMedia,
+  CardHeaderMedia,
+  CardTitleMedia,
+  CardActions,
+  CardAction,
+} from '..';
+
+// ---------------------------------------------------------------------------
+// Card (root)
+// ---------------------------------------------------------------------------
+
+describe('Card', () => {
+  it('renders card with children', () => {
+    render(
+      <Card>
+        <CardHeader>Header</CardHeader>
+        <CardBody>Body</CardBody>
+        <CardFooter>Footer</CardFooter>
+      </Card>
+    );
+
+    expect(screen.getByText('Header')).toBeInTheDocument();
+    expect(screen.getByText('Body')).toBeInTheDocument();
+    expect(screen.getByText('Footer')).toBeInTheDocument();
+  });
+
+  it('applies custom className', () => {
+    const { container } = render(
+      <Card className="custom-class">
+        <CardBody>Content</CardBody>
+      </Card>
+    );
+
+    const card = container.firstChild;
+    expect(card).toHaveClass('custom-class');
+  });
+
+  it('handles click events when clickable', async () => {
+    const handleClick = jest.fn();
+    const user = userEvent.setup();
+
+    render(
+      <Card clickable onClick={handleClick} aria-label="Clickable card">
+        <CardBody>Clickable content</CardBody>
+      </Card>
+    );
+
+    const card = screen.getByRole('button');
+    await user.click(card);
+
+    expect(handleClick).toHaveBeenCalledTimes(1);
+  });
+
+  it('handles keyboard events when clickable', async () => {
+    const handleClick = jest.fn();
+    const user = userEvent.setup();
+
+    render(
+      <Card clickable onClick={handleClick} aria-label="Clickable card">
+        <CardBody>Clickable content</CardBody>
+      </Card>
+    );
+
+    const card = screen.getByRole('button');
+    card.focus();
+    await user.keyboard('{Enter}');
+
+    expect(handleClick).toHaveBeenCalledTimes(1);
+  });
+
+  it('triggers onClick via Space key when clickable', async () => {
+    const handleClick = jest.fn();
+    const user = userEvent.setup();
+
+    render(
+      <Card clickable onClick={handleClick} aria-label="Clickable card">
+        <CardBody>Clickable content</CardBody>
+      </Card>
+    );
+
+    const card = screen.getByRole('button');
+    card.focus();
+    await user.keyboard(' ');
+
+    expect(handleClick).toHaveBeenCalledTimes(1);
+  });
+
+  it('does not handle clicks when disabled', async () => {
+    const handleClick = jest.fn();
+    const user = userEvent.setup();
+
+    const { container } = render(
+      <Card clickable disabled onClick={handleClick} aria-label="Disabled card">
+        <CardBody>Disabled content</CardBody>
+      </Card>
+    );
+
+    const card = container.firstChild;
+    await user.click(card);
+
+    expect(handleClick).not.toHaveBeenCalled();
+  });
+
+  it('does not fire onClick via keyboard when disabled', async () => {
+    const handleClick = jest.fn();
+    const user = userEvent.setup();
+
+    render(
+      <Card clickable disabled onClick={handleClick} aria-label="Disabled card">
+        <CardBody>Disabled content</CardBody>
+      </Card>
+    );
+
+    const card = screen.getByRole('button');
+    card.focus();
+    await user.keyboard('{Enter}');
+
+    expect(handleClick).not.toHaveBeenCalled();
+  });
+
+  it('applies disabled styles', () => {
+    const { container } = render(
+      <Card disabled>
+        <CardBody>Disabled content</CardBody>
+      </Card>
+    );
+
+    const card = container.firstChild;
+    expect(card).toHaveClass('cds--card--disabled');
+  });
+
+  it('applies expressive density class', () => {
+    const { container } = render(
+      <Card density="expressive">
+        <CardBody>Content</CardBody>
+      </Card>
+    );
+    expect(container.firstChild).toHaveClass('cds--card--expressive');
+  });
+
+  it('calls custom onKeyDown handler alongside internal keyboard handling', async () => {
+    const handleKeyDown = jest.fn();
+    const user = userEvent.setup();
+
+    render(
+      <Card clickable onKeyDown={handleKeyDown} aria-label="Clickable card">
+        <CardBody>Content</CardBody>
+      </Card>
+    );
+
+    const card = screen.getByRole('button');
+    card.focus();
+    await user.keyboard('{Enter}');
+
+    expect(handleKeyDown).toHaveBeenCalledTimes(1);
+  });
+
+  it('sets tabIndex to -1 on a disabled clickable card', () => {
+    render(
+      <Card clickable disabled aria-label="Disabled card">
+        <CardBody>Content</CardBody>
+      </Card>
+    );
+    expect(screen.getByRole('button')).toHaveAttribute('tabindex', '-1');
+  });
+
+  it('sets aria-disabled on a disabled clickable card', () => {
+    render(
+      <Card clickable disabled aria-label="Disabled card">
+        <CardBody>Content</CardBody>
+      </Card>
+    );
+    expect(screen.getByRole('button')).toHaveAttribute('aria-disabled', 'true');
+  });
+
+  it('renders horizontal layout: media before content when CardMedia comes first', () => {
+    const { container } = render(
+      <Card horizontal>
+        <CardMedia ratio="16x9">
+          <img src="img.png" alt="" />
+        </CardMedia>
+        <CardBody>Content</CardBody>
+      </Card>
+    );
+    // Content wrapper should be present
+    expect(container.querySelector('.cds--card__content')).toBeInTheDocument();
+  });
+
+  it('renders horizontal layout: content before media when CardMedia comes last', () => {
+    const { container } = render(
+      <Card horizontal>
+        <CardBody>Content</CardBody>
+        <CardMedia ratio="16x9">
+          <img src="img.png" alt="" />
+        </CardMedia>
+      </Card>
+    );
+    expect(container.querySelector('.cds--card__content')).toBeInTheDocument();
+  });
+
+  it('renders as an <a> element when as="a" is passed', () => {
+    const { container } = render(
+      <Card clickable as="a" href="/dashboard" aria-label="Dashboard">
+        <CardBody>Content</CardBody>
+      </Card>
+    );
+    expect(container.firstChild.tagName).toBe('A');
+  });
+
+  it('renders as a custom component when as prop is provided', () => {
+    const CustomEl = React.forwardRef((props, ref) => (
+      <section ref={ref} {...props} />
+    ));
+    const { container } = render(
+      <Card as={CustomEl} aria-label="Custom">
+        <CardBody>Content</CardBody>
+      </Card>
+    );
+    expect(container.firstChild.tagName).toBe('SECTION');
+  });
+
+  it('does not apply role="button" when as="a" and clickable', () => {
+    const { container } = render(
+      <Card clickable as="a" href="/dashboard" aria-label="Dashboard">
+        <CardBody>Content</CardBody>
+      </Card>
+    );
+    expect(container.firstChild).not.toHaveAttribute('role', 'button');
+  });
+
+  it('renders the built-in clickable footer affordance when clickable', () => {
+    const { container } = render(
+      <Card clickable onClick={() => {}} aria-label="Test card">
+        <CardBody>Content</CardBody>
+      </Card>
+    );
+    expect(
+      container.querySelector('.cds--card__clickable-footer')
+    ).toBeInTheDocument();
+  });
+
+  it('does not render the built-in clickable footer when not clickable', () => {
+    const { container } = render(
+      <Card>
+        <CardBody>Content</CardBody>
+      </Card>
+    );
+    expect(
+      container.querySelector('.cds--card__clickable-footer')
+    ).not.toBeInTheDocument();
+  });
+
+  it('renders the default ArrowRight icon in clickable footer', () => {
+    const { container } = render(
+      <Card clickable onClick={() => {}} aria-label="Test card">
+        <CardBody>Content</CardBody>
+      </Card>
+    );
+    const footer = container.querySelector('.cds--card__clickable-footer');
+    expect(footer).toBeInTheDocument();
+    // Footer should contain an SVG (the icon)
+    expect(footer.querySelector('svg')).toBeInTheDocument();
+  });
+
+  it('renders a custom icon in clickable footer via renderFooterIcon', () => {
+    const CustomIcon = () => <svg data-testid="custom-icon" />;
+    render(
+      <Card
+        clickable
+        onClick={() => {}}
+        renderFooterIcon={CustomIcon}
+        aria-label="Test card">
+        <CardBody>Content</CardBody>
+      </Card>
+    );
+    expect(screen.getByTestId('custom-icon')).toBeInTheDocument();
+  });
+
+  it('marks the clickable footer as aria-hidden', () => {
+    const { container } = render(
+      <Card clickable onClick={() => {}} aria-label="Test card">
+        <CardBody>Content</CardBody>
+      </Card>
+    );
+    expect(
+      container.querySelector('.cds--card__clickable-footer')
+    ).toHaveAttribute('aria-hidden', 'true');
+  });
+
+  it('warns when renderFooterIcon is used without clickable', () => {
+    const consoleSpy = jest
+      .spyOn(console, 'error')
+      .mockImplementation(() => {});
+    const CustomIcon = () => <svg />;
+    render(
+      <Card renderFooterIcon={CustomIcon}>
+        <CardBody>Content</CardBody>
+      </Card>
+    );
+    expect(consoleSpy).toHaveBeenCalledWith(
+      expect.stringContaining(
+        '`renderFooterIcon` only has effect when `clickable` is true'
+      )
+    );
+    consoleSpy.mockRestore();
+  });
+
+  it('warns when a clickable card has no accessible name', () => {
+    const consoleSpy = jest
+      .spyOn(console, 'error')
+      .mockImplementation(() => {});
+    render(
+      <Card clickable onClick={() => {}}>
+        <CardBody>Content</CardBody>
+      </Card>
+    );
+    expect(consoleSpy).toHaveBeenCalledWith(
+      expect.stringContaining('A clickable card must have an accessible name')
+    );
+    consoleSpy.mockRestore();
+  });
+
+  it('supports a ref placed on the root element', () => {
+    const ref = jest.fn();
+    const { container } = render(
+      <Card ref={ref}>
+        <CardBody>Content</CardBody>
+      </Card>
+    );
+    expect(ref).toHaveBeenCalledWith(container.firstChild);
+  });
+
+  it('spreads extra props onto the root element', () => {
+    const { container } = render(
+      <Card data-testid="my-card">
+        <CardBody>Content</CardBody>
+      </Card>
+    );
+    expect(container.firstChild).toHaveAttribute('data-testid', 'my-card');
+  });
+
+  it('renders decorator in CardHeader when decorator prop is provided', () => {
+    const Decorator = () => <span data-testid="decorator-node" />;
+    render(
+      <Card decorator={<Decorator />}>
+        <CardHeader>Header</CardHeader>
+        <CardBody>Content</CardBody>
+      </Card>
+    );
+    expect(screen.getByTestId('decorator-node')).toBeInTheDocument();
+  });
+
+  it('does not fire card onClick when the decorator is clicked', async () => {
+    const handleClick = jest.fn();
+    const user = userEvent.setup();
+    const Decorator = () => <span data-testid="decorator-node">AI</span>;
+
+    render(
+      <Card
+        clickable
+        onClick={handleClick}
+        aria-label="Clickable card"
+        decorator={<Decorator />}>
+        <CardHeader>Header</CardHeader>
+        <CardBody>Content</CardBody>
+      </Card>
+    );
+
+    await user.click(screen.getByTestId('decorator-node'));
+    expect(handleClick).not.toHaveBeenCalled();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// CardHeader
+// ---------------------------------------------------------------------------
+
+describe('CardHeader', () => {
+  it('renders header content', () => {
+    render(
+      <Card>
+        <CardHeader>Header Content</CardHeader>
+      </Card>
+    );
+
+    expect(screen.getByText('Header Content')).toBeInTheDocument();
+  });
+
+  it('applies custom className', () => {
+    const { container } = render(
+      <Card>
+        <CardHeader className="custom-header">Header</CardHeader>
+      </Card>
+    );
+    expect(container.querySelector('.custom-header')).toBeInTheDocument();
+  });
+
+  it('supports a ref placed on the header element', () => {
+    const ref = jest.fn();
+    render(
+      <Card>
+        <CardHeader ref={ref}>Header</CardHeader>
+      </Card>
+    );
+    expect(ref).toHaveBeenCalledWith(expect.any(HTMLElement));
+  });
+});
+
+// ---------------------------------------------------------------------------
+// CardBody
+// ---------------------------------------------------------------------------
+
+describe('CardBody', () => {
+  it('renders body content', () => {
+    render(
+      <Card>
+        <CardBody>Body Content</CardBody>
+      </Card>
+    );
+
+    expect(screen.getByText('Body Content')).toBeInTheDocument();
+  });
+
+  it('applies custom className', () => {
+    const { container } = render(
+      <Card>
+        <CardBody className="custom-body">Content</CardBody>
+      </Card>
+    );
+    expect(container.querySelector('.custom-body')).toBeInTheDocument();
+  });
+
+  it('supports a ref placed on the body element', () => {
+    const ref = jest.fn();
+    render(
+      <Card>
+        <CardBody ref={ref}>Content</CardBody>
+      </Card>
+    );
+    expect(ref).toHaveBeenCalledWith(expect.any(HTMLElement));
+  });
+
+  it('spreads extra props onto the root element', () => {
+    render(
+      <Card>
+        <CardBody data-testid="my-body">Content</CardBody>
+      </Card>
+    );
+    expect(screen.getByTestId('my-body')).toBeInTheDocument();
+  });
+
+  it('applies flush modifier when isFlush is true', () => {
+    const { container } = render(
+      <Card>
+        <CardBody isFlush>Body Content</CardBody>
+      </Card>
+    );
+
+    expect(container.querySelector('.cds--card__body')).toHaveClass(
+      'cds--card__body--flush'
+    );
+  });
+
+  it('does not apply flush modifier by default', () => {
+    const { container } = render(
+      <Card>
+        <CardBody>Body Content</CardBody>
+      </Card>
+    );
+
+    expect(container.querySelector('.cds--card__body')).not.toHaveClass(
+      'cds--card__body--flush'
+    );
+  });
+});
+
+// ---------------------------------------------------------------------------
+// CardFooter
+// ---------------------------------------------------------------------------
+
+describe('CardFooter', () => {
+  it('renders footer content', () => {
+    render(
+      <Card>
+        <CardFooter>Footer Content</CardFooter>
+      </Card>
+    );
+
+    expect(screen.getByText('Footer Content')).toBeInTheDocument();
+  });
+
+  it('applies the base footer class', () => {
+    const { container } = render(
+      <Card>
+        <CardFooter>Footer</CardFooter>
+      </Card>
+    );
+    expect(container.querySelector('.cds--card__footer')).toBeInTheDocument();
+  });
+
+  it('supports a ref placed on the footer element', () => {
+    const ref = jest.fn();
+    render(
+      <Card>
+        <CardFooter ref={ref}>Footer</CardFooter>
+      </Card>
+    );
+    expect(ref).toHaveBeenCalledWith(expect.any(HTMLElement));
+  });
+
+  it('applies custom className', () => {
+    const { container } = render(
+      <Card>
+        <CardFooter className="my-footer">Footer</CardFooter>
+      </Card>
+    );
+    expect(container.querySelector('.my-footer')).toBeInTheDocument();
+  });
+
+  it('renders nothing and warns when used inside a clickable card', () => {
+    const consoleSpy = jest
+      .spyOn(console, 'error')
+      .mockImplementation(() => {});
+    const { container } = render(
+      <Card clickable onClick={() => {}} aria-label="Test card">
+        <CardFooter>Footer</CardFooter>
+      </Card>
+    );
+    // Footer content should not be rendered
+    expect(screen.queryByText('Footer')).not.toBeInTheDocument();
+    // Warning should be fired
+    expect(consoleSpy).toHaveBeenCalledWith(
+      expect.stringContaining(
+        '`Card.Footer` cannot be used inside a `clickable` card'
+      )
+    );
+    consoleSpy.mockRestore();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// CardTitle
+// ---------------------------------------------------------------------------
+
+describe('CardTitle', () => {
+  it('renders title text (children)', () => {
+    render(
+      <Card>
+        <CardHeader>
+          <CardTitle>My Title</CardTitle>
+        </CardHeader>
+      </Card>
+    );
+    expect(screen.getByText('My Title')).toBeInTheDocument();
+  });
+
+  it('renders label when provided', () => {
+    render(
+      <Card>
+        <CardHeader>
+          <CardTitle label="Category">Title</CardTitle>
+        </CardHeader>
+      </Card>
+    );
+    expect(screen.getByText('Category')).toBeInTheDocument();
+  });
+
+  it('does not render label element when label prop is absent', () => {
+    const { container } = render(
+      <Card>
+        <CardHeader>
+          <CardTitle>Title</CardTitle>
+        </CardHeader>
+      </Card>
+    );
+    expect(
+      container.querySelector('.cds--card__label')
+    ).not.toBeInTheDocument();
+  });
+
+  it('applies single-line label truncation class', () => {
+    const { container } = render(
+      <Card>
+        <CardHeader>
+          <CardTitle label="Long label" labelTruncate>
+            Title
+          </CardTitle>
+        </CardHeader>
+      </Card>
+    );
+    expect(
+      container.querySelector('.cds--card__label--truncate')
+    ).toBeInTheDocument();
+  });
+
+  it('applies multi-line label truncation class when labelTruncate is a number', () => {
+    const { container } = render(
+      <Card>
+        <CardHeader>
+          <CardTitle label="Long label" labelTruncate={2}>
+            Title
+          </CardTitle>
+        </CardHeader>
+      </Card>
+    );
+    expect(
+      container.querySelector('.cds--card__label--truncate-multi')
+    ).toBeInTheDocument();
+  });
+
+  it('renders description when provided', () => {
+    render(
+      <Card>
+        <CardHeader>
+          <CardTitle description="A description">Title</CardTitle>
+        </CardHeader>
+      </Card>
+    );
+    expect(screen.getByText('A description')).toBeInTheDocument();
+  });
+
+  it('does not render description element when description prop is absent', () => {
+    const { container } = render(
+      <Card>
+        <CardHeader>
+          <CardTitle>Title</CardTitle>
+        </CardHeader>
+      </Card>
+    );
+    expect(
+      container.querySelector('.cds--card__description')
+    ).not.toBeInTheDocument();
+  });
+
+  it('applies single-line description truncation class', () => {
+    const { container } = render(
+      <Card>
+        <CardHeader>
+          <CardTitle description="Long desc" descriptionTruncate>
+            Title
+          </CardTitle>
+        </CardHeader>
+      </Card>
+    );
+    expect(
+      container.querySelector('.cds--card__description--truncate')
+    ).toBeInTheDocument();
+  });
+
+  it('applies multi-line description truncation class when descriptionTruncate is a number', () => {
+    const { container } = render(
+      <Card>
+        <CardHeader>
+          <CardTitle description="Long desc" descriptionTruncate={3}>
+            Title
+          </CardTitle>
+        </CardHeader>
+      </Card>
+    );
+    expect(
+      container.querySelector('.cds--card__description--truncate-multi')
+    ).toBeInTheDocument();
+  });
+
+  it('applies single-line title truncation class', () => {
+    const { container } = render(
+      <Card>
+        <CardHeader>
+          <CardTitle titleTruncate>Title</CardTitle>
+        </CardHeader>
+      </Card>
+    );
+    expect(
+      container.querySelector('.cds--card__title-text-row--truncate')
+    ).toBeInTheDocument();
+  });
+
+  it('applies multi-line title truncation class when titleTruncate is a number', () => {
+    const { container } = render(
+      <Card>
+        <CardHeader>
+          <CardTitle titleTruncate={2}>Title</CardTitle>
+        </CardHeader>
+      </Card>
+    );
+    expect(
+      container.querySelector('.cds--card__title-text-row--truncate-multi')
+    ).toBeInTheDocument();
+  });
+
+  it('renders titleStart icon slot', () => {
+    render(
+      <Card>
+        <CardHeader>
+          <CardTitle titleStart={<span data-testid="start-icon" />}>
+            Title
+          </CardTitle>
+        </CardHeader>
+      </Card>
+    );
+    expect(screen.getByTestId('start-icon')).toBeInTheDocument();
+  });
+
+  it('renders titleEnd icon slot', () => {
+    render(
+      <Card>
+        <CardHeader>
+          <CardTitle titleEnd={<span data-testid="end-icon" />}>
+            Title
+          </CardTitle>
+        </CardHeader>
+      </Card>
+    );
+    expect(screen.getByTestId('end-icon')).toBeInTheDocument();
+  });
+
+  it('does not render titleStart wrapper when prop is absent', () => {
+    const { container } = render(
+      <Card>
+        <CardHeader>
+          <CardTitle>Title</CardTitle>
+        </CardHeader>
+      </Card>
+    );
+    expect(
+      container.querySelector('.cds--card__title-start-icon')
+    ).not.toBeInTheDocument();
+  });
+
+  it('does not render titleEnd wrapper when prop is absent', () => {
+    const { container } = render(
+      <Card>
+        <CardHeader>
+          <CardTitle>Title</CardTitle>
+        </CardHeader>
+      </Card>
+    );
+    expect(
+      container.querySelector('.cds--card__title-end-icon')
+    ).not.toBeInTheDocument();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// CardMedia
+// ---------------------------------------------------------------------------
+
+describe('CardMedia', () => {
+  it('renders children in vertical (default) mode via AspectRatio', () => {
+    render(
+      <Card>
+        <CardMedia ratio="16x9">
+          <img src="img.png" alt="media" />
+        </CardMedia>
+      </Card>
+    );
+    expect(screen.getByAltText('media')).toBeInTheDocument();
+  });
+
+  it('renders children in horizontal mode as a plain div', () => {
+    render(
+      <Card horizontal>
+        <CardMedia ratio="16x9">
+          <img src="img.png" alt="horizontal-media" />
+        </CardMedia>
+        <CardBody>Content</CardBody>
+      </Card>
+    );
+    expect(screen.getByAltText('horizontal-media')).toBeInTheDocument();
+  });
+
+  it('applies custom className in vertical mode', () => {
+    const { container } = render(
+      <Card>
+        <CardMedia className="my-media" ratio="16x9">
+          <span />
+        </CardMedia>
+      </Card>
+    );
+    expect(container.querySelector('.my-media')).toBeInTheDocument();
+  });
+
+  it('applies horizontal media class in horizontal mode', () => {
+    const { container } = render(
+      <Card horizontal>
+        <CardMedia ratio="16x9">
+          <span />
+        </CardMedia>
+        <CardBody>Content</CardBody>
+      </Card>
+    );
+    expect(
+      container.querySelector('.cds--card__media--horizontal')
+    ).toBeInTheDocument();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// CardHeaderMedia
+// ---------------------------------------------------------------------------
+
+describe('CardHeaderMedia', () => {
+  it('renders children', () => {
+    render(
+      <Card>
+        <CardHeader>
+          <CardHeaderMedia>
+            <img src="header.png" alt="header media" />
+          </CardHeaderMedia>
+        </CardHeader>
+      </Card>
+    );
+    expect(screen.getByAltText('header media')).toBeInTheDocument();
+  });
+
+  it('applies custom className', () => {
+    const { container } = render(
+      <Card>
+        <CardHeader>
+          <CardHeaderMedia className="custom-header-media">
+            <span />
+          </CardHeaderMedia>
+        </CardHeader>
+      </Card>
+    );
+    expect(container.querySelector('.custom-header-media')).toBeInTheDocument();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// CardTitleMedia
+// ---------------------------------------------------------------------------
+
+describe('CardTitleMedia', () => {
+  it('renders children', () => {
+    render(
+      <Card>
+        <CardHeader>
+          <CardTitleMedia>
+            <span data-testid="title-media-icon" />
+          </CardTitleMedia>
+        </CardHeader>
+      </Card>
+    );
+    expect(screen.getByTestId('title-media-icon')).toBeInTheDocument();
+  });
+
+  it('applies custom className', () => {
+    const { container } = render(
+      <Card>
+        <CardHeader>
+          <CardTitleMedia className="custom-title-media">
+            <span />
+          </CardTitleMedia>
+        </CardHeader>
+      </Card>
+    );
+    expect(container.querySelector('.custom-title-media')).toBeInTheDocument();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// CardAction
+// ---------------------------------------------------------------------------
+
+describe('CardAction', () => {
+  it('renders children inside the action wrapper', () => {
+    render(
+      <Card>
+        <CardHeader>
+          <CardActions>
+            <CardAction>
+              <button type="button">Delete</button>
+            </CardAction>
+          </CardActions>
+        </CardHeader>
+      </Card>
+    );
+    expect(screen.getByRole('button', { name: 'Delete' })).toBeInTheDocument();
+  });
+
+  it('applies custom className to the action wrapper', () => {
+    const { container } = render(
+      <Card>
+        <CardHeader>
+          <CardActions>
+            <CardAction className="my-action">
+              <button type="button">Save</button>
+            </CardAction>
+          </CardActions>
+        </CardHeader>
+      </Card>
+    );
+    expect(container.querySelector('.my-action')).toBeInTheDocument();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// CardActions
+// ---------------------------------------------------------------------------
+
+describe('CardActions', () => {
+  it('renders action buttons', () => {
+    render(
+      <Card>
+        <CardHeader>
+          <CardActions>
+            <CardAction>
+              <button type="button">Action 1</button>
+            </CardAction>
+            <CardAction>
+              <button type="button">Action 2</button>
+            </CardAction>
+          </CardActions>
+        </CardHeader>
+      </Card>
+    );
+    expect(
+      screen.getByRole('button', { name: 'Action 1' })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: 'Action 2' })
+    ).toBeInTheDocument();
+  });
+
+  it('applies custom className to the container', () => {
+    const { container } = render(
+      <Card>
+        <CardHeader>
+          <CardActions className="my-actions">
+            <CardAction>
+              <button type="button">Act</button>
+            </CardAction>
+          </CardActions>
+        </CardHeader>
+      </Card>
+    );
+    expect(container.querySelector('.my-actions')).toBeInTheDocument();
+  });
+
+  it('renders without children', () => {
+    const { container } = render(
+      <Card>
+        <CardHeader>
+          <CardActions />
+        </CardHeader>
+      </Card>
+    );
+    expect(container.querySelector('.cds--card__actions')).toBeInTheDocument();
+  });
+
+  it('renders the overflow menu button', () => {
+    // OverflowMenu/next uses a tooltip for its accessible name ("Options").
+    // Verify the overflow trigger is always present in the DOM.
+    const { container } = render(
+      <Card>
+        <CardHeader>
+          <CardActions overflowMenuLabel="Card options">
+            <CardAction label="Edit">
+              <button type="button">Edit</button>
+            </CardAction>
+          </CardActions>
+        </CardHeader>
+      </Card>
+    );
+    expect(container.querySelector('.cds--overflow-menu')).toBeInTheDocument();
+  });
+
+  it('resolves action label from CardAction label prop without throwing', () => {
+    // Exercises the label resolution path in the actionItems useMemo.
+    // The overflow menu trigger is always rendered regardless of overflow state.
+    const { container } = render(
+      <Card>
+        <CardHeader>
+          <CardActions>
+            <CardAction label="Custom Label">
+              <button type="button">Custom action</button>
+            </CardAction>
+          </CardActions>
+        </CardHeader>
+      </Card>
+    );
+    expect(container.querySelector('.cds--overflow-menu')).toBeInTheDocument();
+  });
+});

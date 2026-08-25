@@ -32,7 +32,9 @@ collect:
         - backgroundToken
         - border
         - buttonKind
+        - buttonProps
         - caption
+        - caret
         - checked
         - children
         - className
@@ -40,6 +42,7 @@ collect:
         - clearSelectionDescription
         - clearSelectionText
         - closeButtonLabelText
+        - closeIconDescription
         - closeModal
         - closeOnActivation
         - cols
@@ -243,6 +246,7 @@ collect:
         - tooltipDropShadow
         - tooltipHighContrast
         - tooltipPosition
+        - tooltipText
         - totalItems
         - translateWithId
         - type
@@ -280,6 +284,16 @@ collect:
         - style
         # AspectRatio
         - ratio
+        # BigNumber
+        - forceShowTotal
+        - fractionDigits
+        - iconButton
+        - loading
+        - percentage
+        - tooltipDescription
+        - total
+        - trending
+        - truncate
         # ButtonSet
         - fluid
         - stacked
@@ -287,10 +301,31 @@ collect:
         - context
         - onDateSelect
         - onNavigate
+        # Card
+        - clickable
+        - horizontal
+        - renderFooterIcon
+        # CardActions
+        - overflowMenuLabel
+        # CardMedia
+        - mediaWidth
+        # CardTitle
+        - descriptionTruncate
+        - labelTruncate
+        - maxWidth
+        - titleEnd
+        - titleStart
+        - titleTruncate
         # ChatButton
         - isQuickAction
         # ClickableTile
         - clicked
+        # Coachmark
+        - floating
+        - position
+        # CoachmarkContentHeader
+        - dragAriaLabel
+        - dragIconDescription
         # CodeSnippet
         - copyButtonDescription
         - copyText
@@ -339,10 +374,11 @@ collect:
         - onIconClick
         # DatePickerSkeleton
         - range
+        # Default
+        - onSubmit
         # DefinitionTooltip
         - definition
         - openOnHover
-        - tooltipText
         - triggerClassName
         # Dialog
         - ariaDescribedBy
@@ -353,6 +389,17 @@ collect:
         - dismissTooltipAlignment
         - dismissTooltipLabel
         - tagTitle
+        # EditInPlace
+        - cancelLabel
+        - editAlwaysVisible
+        - editLabel
+        - inheritTypography
+        - invalidLabel
+        - onSave
+        - readOnlyLabel
+        - readOnlyToggleTipText
+        - saveLabel
+        - toggleTipAlignment
         # ErrorBoundary
         - fallback
         # ExpandableTile
@@ -417,6 +464,25 @@ collect:
         # InlineLoading
         - onSuccess
         - successDelay
+        # InterstitialScreen
+        - isFullScreen
+        # InterstitialScreenBody
+        - contentRenderer
+        # InterstitialScreenFooter
+        - actionButtonRenderer
+        - nextButtonLabel
+        - onAction
+        - previousButtonLabel
+        - skipButtonLabel
+        - startButtonLabel
+        # InterstitialScreenHeader
+        - headerSubTitle
+        - headerTitle
+        - hideProgressIndicator
+        # InterstitialScreenView
+        - stepTitle
+        # InterstitialScreenViewModule
+        - disableActionButton
         # Layer
         - withBackground
         # LinkBase
@@ -482,6 +548,11 @@ collect:
         - onStepperBlur
         - stepStartValue
         - validate
+        # OptionsTile
+        - enabled
+        - locked
+        - lockedText
+        - summary
         # OrderedList
         - native
         # OverflowMenuItem
@@ -529,7 +600,6 @@ collect:
         # Popover
         - alignmentAxisOffset
         - autoAlignBoundary
-        - caret
         - isTabTip
         # ProgressIndicator
         - currentIndex
@@ -544,6 +614,12 @@ collect:
         - onResize
         - onResizeEnd
         - thickness
+        # ScrollGradient
+        - color
+        - getScrollElementRef
+        - hideStartGradient
+        - onScroll
+        - scrollElementClassName
         # Select
         - noLabel
         # SelectItem
@@ -566,7 +642,6 @@ collect:
         - actionToolbarButtons
         - aiLabel
         - animateTitle
-        - closeIconDescription
         - closeIconTooltipAlignment
         - condensedActions
         - currentStep
@@ -673,6 +748,8 @@ collect:
         - collapseLabel
         - expandLabel
         - lines
+        # UserAvatar
+        - backgroundColor
         # WithCustomContext
         - onLog
         # React
@@ -732,7 +809,9 @@ collect:
         - single
         # General - density
         - condensed
+        - expressive
         - normal
+        - productive
         # General - dir
         - auto
         - ltr
@@ -750,10 +829,13 @@ collect:
         - text
         - url
         # General - kind
+        - "403"
+        - "404"
         - caution-major
         - caution-minor
         - cautious
         - critical
+        - custom
         - danger
         - default
         - disclosed
@@ -971,6 +1053,15 @@ collect:
         - top
         - top-end
         - top-start
+        # EditInPlace - toggleTipAlignment
+        - bottom
+        - bottom-left
+        - bottom-right
+        - left
+        - right
+        - top
+        - top-left
+        - top-right
         # FileUploader - filenameStatus
         - complete
         - edit
@@ -1023,6 +1114,19 @@ collect:
         # TextArea - counterMode
         - character
         - word
+        # UserAvatar - backgroundColor
+        - order-1-cyan
+        - order-10-magenta
+        - order-11-purple
+        - order-12-teal
+        - order-2-gray
+        - order-3-green
+        - order-4-magenta
+        - order-5-purple
+        - order-6-teal
+        - order-7-cyan
+        - order-8-gray
+        - order-9-green
   npm:
     dependencies: null
   js:
