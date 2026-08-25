@@ -59,12 +59,12 @@ Select **Start** to trigger a two second loading state.
 
 ### Overlay loading behind a modal
 
-If a modal is already layered on top of the overlay, the overlay leaves focus
-alone. The dialog closest to the user keeps control of focus.
+When a modal dialog is already active above the loading overlay, the overlay
+does not take focus from the modal.
 
 Open the modal and select **Save** to trigger a two second loading state behind
-it. Focus stays on **Save**, and Tab keeps cycling through the modal rather than
-moving to the overlay underneath.
+it. Focus remains on **Save**, and `Tab` continues cycling through the modal
+instead of moving to the overlay underneath.
 
 <Canvas
   of={LoadingStories.OverlayLoadingBehindModal}
