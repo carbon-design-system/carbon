@@ -6,7 +6,7 @@
  */
 
 import { LitElement, html } from 'lit';
-import { property } from 'lit/decorators.js';
+import { property, query } from 'lit/decorators.js';
 import { breakpoints } from '@carbon/layout';
 import { prefix } from '../../globals/settings';
 import styles from './tabs.scss?lit';
@@ -34,6 +34,12 @@ export default class CDSTabsVertical extends LitElement {
    */
   @property({ attribute: 'custom-height' })
   customHeight?: string;
+
+  /**
+   * The panel slot element in the shadow DOM.
+   */
+  @query('slot[name="panel"]')
+  private _panelSlot?: HTMLSlotElement;
 
   private _mediaQueryList: MediaQueryList | null = null;
 
@@ -68,8 +74,7 @@ export default class CDSTabsVertical extends LitElement {
       this._applyHeight();
     });
 
-    const panelSlot = this.shadowRoot?.querySelector('slot[name="panel"]');
-    panelSlot?.addEventListener('slotchange', () => {
+    this._panelSlot?.addEventListener('slotchange', () => {
       this._applyHeight();
     });
   }

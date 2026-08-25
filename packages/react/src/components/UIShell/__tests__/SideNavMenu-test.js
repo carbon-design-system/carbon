@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { SideNavMenu, SideNavMenuItem } from '../';
@@ -98,6 +98,27 @@ describe('SideNavMenu', () => {
       </SideNavMenu>
     );
     expect(ref).toHaveBeenCalledWith(screen.getByRole('button'));
+  });
+
+  it('should spread extra props onto the outermost element', () => {
+    const { container } = render(
+      <SideNavMenu
+        title="test-title"
+        data-testid="custom-sidenav-menu"
+        data-analytics="menu-analytics">
+        <SideNavMenuItem>a</SideNavMenuItem>
+        <SideNavMenuItem>b</SideNavMenuItem>
+        <SideNavMenuItem>c</SideNavMenuItem>
+      </SideNavMenu>
+    );
+    expect(container.firstChild).toHaveAttribute(
+      'data-testid',
+      'custom-sidenav-menu'
+    );
+    expect(container.firstChild).toHaveAttribute(
+      'data-analytics',
+      'menu-analytics'
+    );
   });
 
   it('should collapse the menu when the rail side nav collapses', () => {
@@ -246,6 +267,53 @@ describe('SideNavMenu', () => {
       'aria-expanded',
       'false'
     );
+  });
+
+  it('should call consumer-provided onKeyDown handler', () => {
+    const onKeyDown = jest.fn();
+    const { container } = render(
+      <SideNavMenu
+        title="test-title"
+        defaultExpanded={true}
+        onKeyDown={onKeyDown}>
+        <SideNavMenuItem>a</SideNavMenuItem>
+        <SideNavMenuItem>b</SideNavMenuItem>
+        <SideNavMenuItem>c</SideNavMenuItem>
+      </SideNavMenu>
+    );
+
+    // Trigger keydown on the li element
+    fireEvent.keyDown(container.firstChild, { key: 'Escape' });
+
+    expect(onKeyDown).toHaveBeenCalled();
+    // Verify internal handler still works (menu collapses)
+    expect(screen.getByRole('button')).toHaveAttribute(
+      'aria-expanded',
+      'false'
+    );
+  });
+
+  it('should not collapse the menu when consumer `onKeyDown` prevents default', () => {
+    const onKeyDown = jest.fn((event) => {
+      event.preventDefault();
+    });
+
+    const { container } = render(
+      <SideNavMenu
+        title="test-title"
+        defaultExpanded={true}
+        onKeyDown={onKeyDown}>
+        <SideNavMenuItem>a</SideNavMenuItem>
+        <SideNavMenuItem>b</SideNavMenuItem>
+        <SideNavMenuItem>c</SideNavMenuItem>
+      </SideNavMenu>
+    );
+
+    fireEvent.keyDown(container.firstChild, { key: 'Escape' });
+
+    expect(onKeyDown).toHaveBeenCalled();
+    // Menu should remain expanded because consumer prevented default
+    expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
   });
 });
 

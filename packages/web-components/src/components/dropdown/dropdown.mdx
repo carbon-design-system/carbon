@@ -1,4 +1,10 @@
-import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import {
+  ArgTypes,
+  Canvas,
+  Markdown,
+  Meta,
+  Unstyled,
+} from '@storybook/addon-docs/blocks';
 import { cdnJs } from '../../globals/internal/storybook-cdn';
 import * as DropdownStories from './dropdown.stories';
 
@@ -70,11 +76,17 @@ to be fetched from an external API.
 When a dropdown is near the bottom of a page, you may want to render the menu to
 the top of the screen. To do this, specify `direction="top"`
 
-<cds-dropdown direction="top" label="Select an option...">
-  <cds-dropdown-item value="0">Option 1</cds-dropdown-item>
-  <cds-dropdown-item value="1">Option 2</cds-dropdown-item>
-  <cds-dropdown-item value="2">Option 3</cds-dropdown-item>
-</cds-dropdown>
+<Unstyled
+  style={{
+    padding: '1rem',
+    background: 'var(--cds-background)',
+  }}>
+  <cds-dropdown direction="top" label="Select an option...">
+    <cds-dropdown-item value="0">Option 1</cds-dropdown-item>
+    <cds-dropdown-item value="1">Option 2</cds-dropdown-item>
+    <cds-dropdown-item value="2">Option 3</cds-dropdown-item>
+  </cds-dropdown>
+</Unstyled>
 
 ```html
 <cds-dropdown direction="top" label="Select an option...">
@@ -90,11 +102,17 @@ If you want the dropdown to render with an option already selected, but do not
 want to fully control the component, you can set the dropdown `value` to the
 option you want selected.
 
-<cds-dropdown value="option-0">
-  <cds-dropdown-item value="option-0">Initially selected</cds-dropdown-item>
-  <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
-  <cds-dropdown-item value="option-2">Option 2</cds-dropdown-item>
-</cds-dropdown>
+<Unstyled
+  style={{
+    padding: '1rem',
+    background: 'var(--cds-background)',
+  }}>
+  <cds-dropdown value="option-0">
+    <cds-dropdown-item value="option-0">Initially selected</cds-dropdown-item>
+    <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+    <cds-dropdown-item value="option-2">Option 2</cds-dropdown-item>
+  </cds-dropdown>
+</Unstyled>
 
 ```html
 <cds-dropdown value="option-0">
@@ -108,20 +126,26 @@ option you want selected.
 
 There are three sizes of dropdown available: `sm`, `md` (the default), and `lg`.
 
-<cds-dropdown label="Small [sm]" size="sm" title-text="Label">
-  <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
-  <cds-dropdown-item value="option-2">Option 2</cds-dropdown-item>
-</cds-dropdown>
-<br />
-<cds-dropdown label="Medium [md]" size="md" title-text="Label">
-  <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
-  <cds-dropdown-item value="option-2">Option 2</cds-dropdown-item>
-</cds-dropdown>
-<br />
-<cds-dropdown label="Large [lg]" size="lg" title-text="Label">
-  <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
-  <cds-dropdown-item value="option-2">Option 2</cds-dropdown-item>
-</cds-dropdown>
+<Unstyled
+  style={{
+    padding: '1rem',
+    background: 'var(--cds-background)',
+  }}>
+  <cds-dropdown label="Small [sm]" size="sm" title-text="Label">
+    <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+    <cds-dropdown-item value="option-2">Option 2</cds-dropdown-item>
+  </cds-dropdown>
+  <br />
+  <cds-dropdown label="Medium [md]" size="md" title-text="Label">
+    <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+    <cds-dropdown-item value="option-2">Option 2</cds-dropdown-item>
+  </cds-dropdown>
+  <br />
+  <cds-dropdown label="Large [lg]" size="lg" title-text="Label">
+    <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+    <cds-dropdown-item value="option-2">Option 2</cds-dropdown-item>
+  </cds-dropdown>
+</Unstyled>
 
 ```html
 <cds-dropdown label="Dropdown label" size="sm" title-text="Label">
@@ -154,10 +178,16 @@ This is the text that will be used as a label for the dropdown.
 Sometimes you will need to place a dropdown inline with other content. To do
 that, add `type="inline"` to the dropdown.
 
-<cds-dropdown type="inline" label="Inline" title-text="Label">
-  <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
-  <cds-dropdown-item value="option-2">Option 2</cds-dropdown-item>
-</cds-dropdown>
+<Unstyled
+  style={{
+    padding: '1rem',
+    background: 'var(--cds-background)',
+  }}>
+  <cds-dropdown type="inline" label="Inline" title-text="Label">
+    <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+    <cds-dropdown-item value="option-2">Option 2</cds-dropdown-item>
+  </cds-dropdown>
+</Unstyled>
 
 ```html
 <cds-dropdown type="inline" label="Inline" title-text="Label">

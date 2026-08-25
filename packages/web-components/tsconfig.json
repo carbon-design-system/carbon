@@ -4,6 +4,7 @@
     "module": "esnext",
     "moduleResolution": "bundler",
     "lib": ["es2017", "esnext.array", "dom", "dom.iterable"],
+    "types": ["node"],
     "typeRoots": [
       "src/typings",
       "tests/typings",

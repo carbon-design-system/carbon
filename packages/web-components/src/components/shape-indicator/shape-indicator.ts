@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025, 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,6 +10,8 @@ import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { iconLoader } from '../../globals/internal/icon-loader';
+import { POPOVER_ALIGNMENT } from '../popover/defs';
+import '../tooltip/definition-tooltip';
 import styles from './shape-indicator.scss?lit';
 
 // Import Carbon icons
@@ -23,7 +25,8 @@ import CircleStroke from '@carbon/icons/es/circle-stroke/index.js';
 import { SHAPE_INDICATOR_KIND } from './defs';
 
 /**
- * Custom incomplete icon implementation
+ * Custom incomplete icon implementation.
+ * TODO: update to import '@carbon/icons' https://github.com/carbon-design-system/carbon/issues/18630
  */
 const IncompleteIcon = `<svg
   xmlns="http://www.w3.org/2000/svg"
@@ -65,6 +68,31 @@ const shapeMap = {
 @customElement(`${prefix}-shape-indicator`)
 class CDSShapeIndicator extends LitElement {
   /**
+   * Specify how the tooltip should align with the shape in compact mode
+   */
+  @property({ reflect: true })
+  align: POPOVER_ALIGNMENT = POPOVER_ALIGNMENT.RIGHT;
+
+  /**
+   * Will auto-align the tooltip in compact mode
+   */
+  @property({ type: Boolean, reflect: false })
+  autoalign = false;
+
+  /**
+   * When true, displays only the shape with the label in a tooltip
+   */
+  @property({ type: Boolean, reflect: true })
+  compact = false;
+
+  /**
+   * Description for the shape announced to screen readers in compact mode.
+   * Defaults to `label` when not provided.
+   */
+  @property({ attribute: 'shape-description' })
+  shapeDescription?: string;
+
+  /**
    * Shape indicator size (12 or 14)
    */
   @property({ attribute: 'text-size' })
@@ -90,11 +118,27 @@ class CDSShapeIndicator extends LitElement {
     }
 
     // Handle custom SVG string vs Carbon icon descriptor
-    if (typeof shape === 'string') {
-      return html` ${iconLoader(null, {}, shape)} ${this.label} `;
+    const shapeElement =
+      typeof shape === 'string'
+        ? iconLoader(null, {}, shape)
+        : iconLoader(shape);
+
+    if (this.compact) {
+      return html`
+        <cds-definition-tooltip
+          align=${this.align}
+          ?autoalign=${this.autoalign}
+          open-on-hover>
+          ${shapeElement}
+          <span class="${prefix}--visually-hidden"
+            >${this.shapeDescription ?? this.label}</span
+          >
+          <span slot="definition">${this.label}</span>
+        </cds-definition-tooltip>
+      `;
     }
 
-    return html` ${iconLoader(shape)} ${this.label} `;
+    return html`${shapeElement}${this.label}`;
   }
 
   /**

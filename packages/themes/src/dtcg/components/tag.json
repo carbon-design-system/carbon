@@ -1,0 +1,486 @@
+{
+  "$schema": "https://tr.designtokens.org/format/",
+  "$description": "Tag component color tokens for all tag color variants and states.",
+  "tag": {
+    "background-blue": {
+      "$type": "color",
+      "$description": "Background color for blue tags. Use for informational tags or to categorize content with blue semantic meaning.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{blue.20}",
+          "g10": "{blue.20}",
+          "g90": "{blue.70}",
+          "g100": "{blue.70}"
+        }
+      }
+    },
+    "background-cool-gray": {
+      "$type": "color",
+      "$description": "Background color for cool gray tags. Use for neutral categorization or when color semantics are not needed.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{coolGray.20}",
+          "g10": "{coolGray.20}",
+          "g90": "{coolGray.70}",
+          "g100": "{coolGray.70}"
+        }
+      }
+    },
+    "background-cyan": {
+      "$type": "color",
+      "$description": "Background color for cyan tags. Use for tags related to data, analytics, or technical information.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{cyan.20}",
+          "g10": "{cyan.20}",
+          "g90": "{cyan.70}",
+          "g100": "{cyan.70}"
+        }
+      }
+    },
+    "background-gray": {
+      "$type": "color",
+      "$description": "Background color for gray tags. Use for default or neutral tags without specific semantic meaning.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{gray.20}",
+          "g10": "{gray.20}",
+          "g90": "{gray.70}",
+          "g100": "{gray.70}"
+        }
+      }
+    },
+    "background-green": {
+      "$type": "color",
+      "$description": "Background color for green tags. Use for success states, positive indicators, or approved/active status.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{green.20}",
+          "g10": "{green.20}",
+          "g90": "{green.70}",
+          "g100": "{green.70}"
+        }
+      }
+    },
+    "background-magenta": {
+      "$type": "color",
+      "$description": "Background color for magenta tags. Use for creative, design-related, or special category tags.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{magenta.20}",
+          "g10": "{magenta.20}",
+          "g90": "{magenta.70}",
+          "g100": "{magenta.70}"
+        }
+      }
+    },
+    "background-purple": {
+      "$type": "color",
+      "$description": "Background color for purple tags. Use for premium features, special status, or priority indicators.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{purple.20}",
+          "g10": "{purple.20}",
+          "g90": "{purple.70}",
+          "g100": "{purple.70}"
+        }
+      }
+    },
+    "background-red": {
+      "$type": "color",
+      "$description": "Background color for red tags. Use for error states, critical issues, or urgent/high-priority items.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{red.20}",
+          "g10": "{red.20}",
+          "g90": "{red.70}",
+          "g100": "{red.70}"
+        }
+      }
+    },
+    "background-teal": {
+      "$type": "color",
+      "$description": "Background color for teal tags. Use for tags related to support, help, or secondary informational content.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{teal.20}",
+          "g10": "{teal.20}",
+          "g90": "{teal.70}",
+          "g100": "{teal.70}"
+        }
+      }
+    },
+    "background-warm-gray": {
+      "$type": "color",
+      "$description": "Background color for warm gray tags. Use for neutral categorization with a warmer tone than cool gray.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{warmGray.20}",
+          "g10": "{warmGray.20}",
+          "g90": "{warmGray.70}",
+          "g100": "{warmGray.70}"
+        }
+      }
+    },
+    "border-blue": {
+      "$type": "color",
+      "$description": "Border color for blue tags. Provides visual definition and contrast for blue tag variants.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{blue.40}",
+          "g10": "{blue.40}",
+          "g90": "{blue.50}",
+          "g100": "{blue.50}"
+        }
+      }
+    },
+    "border-cool-gray": {
+      "$type": "color",
+      "$description": "Border color for cool gray tags. Provides visual definition and contrast for cool gray tag variants.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{coolGray.40}",
+          "g10": "{coolGray.40}",
+          "g90": "{coolGray.50}",
+          "g100": "{coolGray.50}"
+        }
+      }
+    },
+    "border-cyan": {
+      "$type": "color",
+      "$description": "Border color for cyan tags. Provides visual definition and contrast for cyan tag variants.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{cyan.40}",
+          "g10": "{cyan.40}",
+          "g90": "{cyan.50}",
+          "g100": "{cyan.50}"
+        }
+      }
+    },
+    "border-gray": {
+      "$type": "color",
+      "$description": "Border color for gray tags. Provides visual definition and contrast for gray tag variants.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{gray.40}",
+          "g10": "{gray.40}",
+          "g90": "{gray.50}",
+          "g100": "{gray.50}"
+        }
+      }
+    },
+    "border-green": {
+      "$type": "color",
+      "$description": "Border color for green tags. Provides visual definition and contrast for green tag variants.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{green.40}",
+          "g10": "{green.40}",
+          "g90": "{green.50}",
+          "g100": "{green.50}"
+        }
+      }
+    },
+    "border-magenta": {
+      "$type": "color",
+      "$description": "Border color for magenta tags. Provides visual definition and contrast for magenta tag variants.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{magenta.40}",
+          "g10": "{magenta.40}",
+          "g90": "{magenta.50}",
+          "g100": "{magenta.50}"
+        }
+      }
+    },
+    "border-purple": {
+      "$type": "color",
+      "$description": "Border color for purple tags. Provides visual definition and contrast for purple tag variants.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{purple.40}",
+          "g10": "{purple.40}",
+          "g90": "{purple.50}",
+          "g100": "{purple.50}"
+        }
+      }
+    },
+    "border-red": {
+      "$type": "color",
+      "$description": "Border color for red tags. Provides visual definition and contrast for red tag variants.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{red.40}",
+          "g10": "{red.40}",
+          "g90": "{red.50}",
+          "g100": "{red.50}"
+        }
+      }
+    },
+    "border-teal": {
+      "$type": "color",
+      "$description": "Border color for teal tags. Provides visual definition and contrast for teal tag variants.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{teal.40}",
+          "g10": "{teal.40}",
+          "g90": "{teal.50}",
+          "g100": "{teal.50}"
+        }
+      }
+    },
+    "border-warm-gray": {
+      "$type": "color",
+      "$description": "Border color for warm gray tags. Provides visual definition and contrast for warm gray tag variants.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{warmGray.40}",
+          "g10": "{warmGray.40}",
+          "g90": "{warmGray.50}",
+          "g100": "{warmGray.50}"
+        }
+      }
+    },
+    "color-blue": {
+      "$type": "color",
+      "$description": "Text color for blue tags. Ensures readable contrast against blue tag backgrounds.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{blue.70}",
+          "g10": "{blue.70}",
+          "g90": "{blue.20}",
+          "g100": "{blue.20}"
+        }
+      }
+    },
+    "color-cool-gray": {
+      "$type": "color",
+      "$description": "Text color for cool gray tags. Ensures readable contrast against cool gray tag backgrounds.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{coolGray.100}",
+          "g10": "{coolGray.100}",
+          "g90": "{coolGray.10}",
+          "g100": "{coolGray.10}"
+        }
+      }
+    },
+    "color-cyan": {
+      "$type": "color",
+      "$description": "Text color for cyan tags. Ensures readable contrast against cyan tag backgrounds.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{cyan.70}",
+          "g10": "{cyan.70}",
+          "g90": "{cyan.20}",
+          "g100": "{cyan.20}"
+        }
+      }
+    },
+    "color-gray": {
+      "$type": "color",
+      "$description": "Text color for gray tags. Ensures readable contrast against gray tag backgrounds.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{gray.100}",
+          "g10": "{gray.100}",
+          "g90": "{gray.10}",
+          "g100": "{gray.10}"
+        }
+      }
+    },
+    "color-green": {
+      "$type": "color",
+      "$description": "Text color for green tags. Ensures readable contrast against green tag backgrounds.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{green.70}",
+          "g10": "{green.70}",
+          "g90": "{green.20}",
+          "g100": "{green.20}"
+        }
+      }
+    },
+    "color-magenta": {
+      "$type": "color",
+      "$description": "Text color for magenta tags. Ensures readable contrast against magenta tag backgrounds.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{magenta.70}",
+          "g10": "{magenta.70}",
+          "g90": "{magenta.20}",
+          "g100": "{magenta.20}"
+        }
+      }
+    },
+    "color-purple": {
+      "$type": "color",
+      "$description": "Text color for purple tags. Ensures readable contrast against purple tag backgrounds.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{purple.70}",
+          "g10": "{purple.70}",
+          "g90": "{purple.20}",
+          "g100": "{purple.20}"
+        }
+      }
+    },
+    "color-red": {
+      "$type": "color",
+      "$description": "Text color for red tags. Ensures readable contrast against red tag backgrounds.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{red.70}",
+          "g10": "{red.70}",
+          "g90": "{red.20}",
+          "g100": "{red.20}"
+        }
+      }
+    },
+    "color-teal": {
+      "$type": "color",
+      "$description": "Text color for teal tags. Ensures readable contrast against teal tag backgrounds.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{teal.70}",
+          "g10": "{teal.70}",
+          "g90": "{teal.20}",
+          "g100": "{teal.20}"
+        }
+      }
+    },
+    "color-warm-gray": {
+      "$type": "color",
+      "$description": "Text color for warm gray tags. Ensures readable contrast against warm gray tag backgrounds.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{warmGray.100}",
+          "g10": "{warmGray.100}",
+          "g90": "{warmGray.10}",
+          "g100": "{warmGray.10}"
+        }
+      }
+    },
+    "hover-blue": {
+      "$type": "color",
+      "$description": "Background color for blue tags on hover. Use when blue tags are interactive or dismissible.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{blue.20Hover}",
+          "g10": "{blue.20Hover}",
+          "g90": "{blue.70Hover}",
+          "g100": "{blue.70Hover}"
+        }
+      }
+    },
+    "hover-cool-gray": {
+      "$type": "color",
+      "$description": "Background color for cool gray tags on hover. Use when cool gray tags are interactive or dismissible.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{coolGray.20Hover}",
+          "g10": "{coolGray.20Hover}",
+          "g90": "{coolGray.70Hover}",
+          "g100": "{coolGray.70Hover}"
+        }
+      }
+    },
+    "hover-cyan": {
+      "$type": "color",
+      "$description": "Background color for cyan tags on hover. Use when cyan tags are interactive or dismissible.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{cyan.20Hover}",
+          "g10": "{cyan.20Hover}",
+          "g90": "{cyan.70Hover}",
+          "g100": "{cyan.70Hover}"
+        }
+      }
+    },
+    "hover-gray": {
+      "$type": "color",
+      "$description": "Background color for gray tags on hover. Use when gray tags are interactive or dismissible.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{gray.20Hover}",
+          "g10": "{gray.20Hover}",
+          "g90": "{gray.70Hover}",
+          "g100": "{gray.70Hover}"
+        }
+      }
+    },
+    "hover-green": {
+      "$type": "color",
+      "$description": "Background color for green tags on hover. Use when green tags are interactive or dismissible.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{green.20Hover}",
+          "g10": "{green.20Hover}",
+          "g90": "{green.70Hover}",
+          "g100": "{green.70Hover}"
+        }
+      }
+    },
+    "hover-magenta": {
+      "$type": "color",
+      "$description": "Background color for magenta tags on hover. Use when magenta tags are interactive or dismissible.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{magenta.20Hover}",
+          "g10": "{magenta.20Hover}",
+          "g90": "{magenta.70Hover}",
+          "g100": "{magenta.70Hover}"
+        }
+      }
+    },
+    "hover-purple": {
+      "$type": "color",
+      "$description": "Background color for purple tags on hover. Use when purple tags are interactive or dismissible.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{purple.20Hover}",
+          "g10": "{purple.20Hover}",
+          "g90": "{purple.70Hover}",
+          "g100": "{purple.70Hover}"
+        }
+      }
+    },
+    "hover-red": {
+      "$type": "color",
+      "$description": "Background color for red tags on hover. Use when red tags are interactive or dismissible.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{red.20Hover}",
+          "g10": "{red.20Hover}",
+          "g90": "{red.70Hover}",
+          "g100": "{red.70Hover}"
+        }
+      }
+    },
+    "hover-teal": {
+      "$type": "color",
+      "$description": "Background color for teal tags on hover. Use when teal tags are interactive or dismissible.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{teal.20Hover}",
+          "g10": "{teal.20Hover}",
+          "g90": "{teal.70Hover}",
+          "g100": "{teal.70Hover}"
+        }
+      }
+    },
+    "hover-warm-gray": {
+      "$type": "color",
+      "$description": "Background color for warm gray tags on hover. Use when warm gray tags are interactive or dismissible.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{warmGray.20Hover}",
+          "g10": "{warmGray.20Hover}",
+          "g90": "{warmGray.70Hover}",
+          "g100": "{warmGray.70Hover}"
+        }
+      }
+    }
+  }
+}

@@ -1,4 +1,5 @@
 <!-- NOTE: This file is used in the generation of storybook docs page(s). -->
+<!-- Any changes/additions made to the headings/sections in this file should be followed with an update to the 'Table of Contents' section in the storybook docs page(s) -->
 
 ## About feature flags
 
@@ -13,6 +14,10 @@ A feature flag can be available in react, web components, sass, or any mix of
 these. Flags may also have a related codemod to help migration faster and
 easier.
 
+This document is the source of truth for flag names, package availability, and
+associated codemods. Detailed codemod usage and known limitations live in the
+[`@carbon/upgrade` README](../packages/upgrade/README.md#feature-flag-codemods).
+
 ## Current feature flags
 
 Flags prefixed with `enable-*` contain features we'd like consuming projects to
@@ -20,37 +25,43 @@ test and give us feedback on. They're generally stable and unlikely to change
 but can change based on your feedback.
 
 Flags prefixed with `enable-v12-*` are stable and won't change. They will be
-marked as `true` or "on" by default in the next major version, v12.
+marked as `true` or "on" by default in the next major version, v12. Use
+`enable-v12-release` to enable all `enable-v12-*` flags.
+
+After enabling v12, see the [v12 migration impact](migration/v12.md) for
+package-specific changes, cross-package relationships, and areas to review when
+moving an application from v11.
 
 For more details on this naming convention, see the
 [section below](#feature-flag-naming-convention).
 
 Unless otherwise specified, flags are `false` by default.
 
-| Flag                                               | Description                                                                          | Availability | Codemod                                                                                                                                                        |
-| -------------------------------------------------- | ------------------------------------------------------------------------------------ | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `enable-dialog-element`                            | Enable components to utilize the native dialog element                               | React, Sass  |                                                                                                                                                                |
-| `enable-enhanced-file-uploader`                    | Enable enhanced FileUploader callbacks with richer data and expanded triggers.       | React        |                                                                                                                                                                |
-| `enable-focus-wrap-without-sentinels`              | Enable the new focus wrap behavior that doesn't use sentinel nodes                   | React        |                                                                                                                                                                |
-| `enable-presence`                                  | Enable components to remain unmounted in closed state and mount in open state.       | React, Sass  |                                                                                                                                                                |
-| `enable-tile-contrast`                             | Enable the improved styling for tiles that provides better contrast                  | Sass         |                                                                                                                                                                |
-| `enable-treeview-controllable`                     | Enable the new TreeView controllable API                                             | React        |                                                                                                                                                                |
-| `enable-v12-dynamic-floating-styles`               | Enable dynamic setting of floating styles for components like Popover, Tooltip, etc. | React        |                                                                                                                                                                |
-| `enable-v12-overflowmenu`                          | Enable the use of the v12 OverflowMenu leveraging the Menu subcomponents             | React        | [enable-v12-overflowmenu](https://github.com/carbon-design-system/carbon/tree/main/packages/upgrade#enable-v12-overflowmenu)                                   |
-| `enable-v12-structured-list-visible-icons`         | Enable icon components within StructuredList to always be visible                    | Sass         | [enable-v12-structured-list-visible-icons](https://github.com/carbon-design-system/carbon/tree/main/packages/upgrade#enable-v12-structured-list-visible-icons) |
-| `enable-v12-tile-default-icons`                    | Enable default icons for Tile components                                             | React        | [enable-v12-tile-default-icons](https://github.com/carbon-design-system/carbon/tree/main/packages/upgrade#enable-v12-tile-default-icons)                       |
-| `enable-v12-tile-radio-icons`                      | Enable rendering of updated radio icon in the tile components                        | React, Sass  | [enable-v12-tile-radio-icons](https://github.com/carbon-design-system/carbon/tree/main/packages/upgrade#enable-v12-tile-radio-icons)                           |
-| `enable-v12-toggle-reduced-label-spacing`          | Enable a reduced spacing between the toggle control and its label                    | Sass         |                                                                                                                                                                |
-| **Deprecated flags**                               |                                                                                      |              |                                                                                                                                                                |
-| `enable-experimental-tile-contrast`                | Deprecated, use `enable-tile-contrast` instead                                       | Sass         |                                                                                                                                                                |
-| `enable-experimental-focus-wrap-without-sentinels` | Deprecated, use `enable-focus-wrap-without-sentinels` instead                        | React        |                                                                                                                                                                |
+| Flag                                               | Description                                                                          | Availability                | Codemod                                                                                                                                                        |
+| -------------------------------------------------- | ------------------------------------------------------------------------------------ | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `enable-dialog-element`                            | Enable components to utilize the native dialog element                               | React, Sass                 |                                                                                                                                                                |
+| `enable-enhanced-file-uploader`                    | Enable enhanced FileUploader callbacks with richer data and expanded triggers.       | React                       |                                                                                                                                                                |
+| `enable-focus-wrap-without-sentinels`              | Enable the new focus wrap behavior that doesn't use sentinel nodes                   | React                       |                                                                                                                                                                |
+| `enable-presence`                                  | Enable components to remain unmounted in closed state and mount in open state.       | React, Sass                 |                                                                                                                                                                |
+| `enable-tile-contrast`                             | Enable the improved styling for tiles that provides better contrast                  | Sass                        |                                                                                                                                                                |
+| `enable-treeview-controllable`                     | Enable the new TreeView controllable API                                             | React                       |                                                                                                                                                                |
+| `enable-v12-dynamic-floating-styles`               | Enable dynamic setting of floating styles for components like Popover, Tooltip, etc. | React, Web Components       |                                                                                                                                                                |
+| `enable-v12-overflowmenu`                          | Enable the use of the v12 OverflowMenu leveraging the Menu subcomponents             | React, Web Components       | [enable-v12-overflowmenu](https://github.com/carbon-design-system/carbon/tree/main/packages/upgrade#enable-v12-overflowmenu)                                   |
+| `enable-v12-release`                               | Enable all v12 feature flags                                                         | React, Sass, Web Components |                                                                                                                                                                |
+| `enable-v12-structured-list-visible-icons`         | Enable icon components within StructuredList to always be visible                    | Sass                        | [enable-v12-structured-list-visible-icons](https://github.com/carbon-design-system/carbon/tree/main/packages/upgrade#enable-v12-structured-list-visible-icons) |
+| `enable-v12-tile-default-icons`                    | Enable default icons for Tile components                                             | React, Web Components       | [enable-v12-tile-default-icons](https://github.com/carbon-design-system/carbon/tree/main/packages/upgrade#enable-v12-tile-default-icons)                       |
+| `enable-v12-tile-radio-icons`                      | Enable rendering of updated radio icon in the tile components                        | React, Sass, Web Components | [enable-v12-tile-radio-icons](https://github.com/carbon-design-system/carbon/tree/main/packages/upgrade#enable-v12-tile-radio-icons)                           |
+| `enable-v12-toggle-reduced-label-spacing`          | Enable a reduced spacing between the toggle control and its label                    | Sass, Web Components        |                                                                                                                                                                |
+| **Deprecated flags**                               |                                                                                      |                             |                                                                                                                                                                |
+| `enable-experimental-tile-contrast`                | Deprecated, use `enable-tile-contrast` instead                                       | Sass                        |                                                                                                                                                                |
+| `enable-experimental-focus-wrap-without-sentinels` | Deprecated, use `enable-focus-wrap-without-sentinels` instead                        | React                       |                                                                                                                                                                |
 
 ## Documentation
 
-In addition to this document, within each storybook there are "Feature flags"
-folders for some components. Docs page(s) within this folder cover the flag
-specifics and usage. The stories within in the folder showcase the impact of
-when the flag(s) are turned on.
+In addition to this document, some components include `Feature flags` folders
+within Storybook. Those docs pages cover package-specific configuration and
+usage, while the stories demonstrate the impact of turning flags on. The
+inventory, availability, and codemod associations above remain authoritative.
 
 ## Using Codemods for Migration
 
@@ -58,6 +69,9 @@ Codemods are code modification scripts that automate the necessary changes when
 migrating to new components and APIs. They reduce the manual effort required
 when adopting new features. Carbon provides codemods to help you enable feature
 flags and migrate to the new APIs these flags provide.
+
+The v12 codemods listed in the table above target React source unless explicitly
+documented otherwise. Web Components and Sass migrations are currently manual.
 
 A flag may not have a codemod when:
 
@@ -99,7 +113,7 @@ All feature flags follow a prefix naming convention that indicate status.
 - Are generally stable and unlikely to change but may change based on user
   feedback
 - May require some manual migration or code changes within your project
-- Are documented in storybook
+- Are documented in Storybook
 - May not be documented on https://www.carbondesignsystem.com
 - Need user feedback to ensure we've met all concerns relating to this feature
 

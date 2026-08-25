@@ -20,6 +20,7 @@ collect:
         - alignment-axis-offset
         - allow-custom-value
         - allow-empty
+        - allow-input
         - aria-current
         - aria-label
         - aria-labelledby
@@ -50,14 +51,18 @@ collect:
         - close-icon-description
         - close-on-activation
         - close-on-escape
+        - close-on-select
+        - collapse-label
         - collapse-mode
         - color-scheme
         - cols
+        - compact
         - condensed
         - contained
         - counter-mode
         - danger-description
         - data-table
+        - date-format
         - decrement-button-assistive-text
         - default-checked
         - default-open
@@ -71,9 +76,12 @@ collect:
         - download
         - dropShadow
         - enable-counter
+        - enable-dialog-element
         - enable-v12-overflowmenu
+        - enabled-range
         - enter-delay-ms
         - even
+        - expand-label
         - expandable
         - expanded
         - feedback
@@ -118,6 +126,7 @@ collect:
         - is-active
         - is-condensed
         - is-expressive
+        - is-fluid
         - is-not-child-of-header
         - is-selectable
         - is-sortable
@@ -134,6 +143,7 @@ collect:
         - legend-id
         - legend-text
         - lineCount
+        - lines
         - link-role
         - loading-description
         - loading-icon-description
@@ -143,9 +153,11 @@ collect:
         - low-contrast
         - max
         - max-count
+        - max-date
         - max-length
         - menu-alignment
         - min
+        - min-date
         - multiple
         - name
         - nested
@@ -157,6 +169,8 @@ collect:
         - oncds-combo-box-toggled
         - oncds-content-switcher-beingselected
         - oncds-content-switcher-selected
+        - oncds-date-picker-changed
+        - oncds-date-picker-flatpickr-error
         - oncds-dropdown-beingselected
         - oncds-dropdown-beingtoggled
         - oncds-dropdown-selected
@@ -186,6 +200,8 @@ collect:
         - oncds-tag-closed
         - onchange
         - onClick
+        - onfocus
+        - onfocusout
         - oninput
         - oninvalid
         - open
@@ -223,6 +239,7 @@ collect:
         - selection-name
         - selection-value
         - selector-initial-focus
+        - short
         - shortcut
         - should-filter-item
         - show-password-label
@@ -272,6 +289,10 @@ collect:
         # cds-accordion-item
         - oncds-accordion-item-beingtoggled
         - oncds-accordion-item-toggled
+        # cds-action-set
+        - actions
+        - button-size
+        - disable-stacking
         # cds-ai-skeleton-icon
         - custom-styles
         # cds-badge-indicator
@@ -312,17 +333,6 @@ collect:
         - oncds-contained-list-item-click
         # cds-copy-button
         - autoAlign
-        # cds-date-picker
-        - allow-input
-        - close-on-select
-        - date-format
-        - enabled-range
-        - max-date
-        - min-date
-        - oncds-date-picker-changed
-        - oncds-date-picker-flatpickr-error
-        # cds-date-picker-input
-        - short
         # cds-definition-tooltip
         - open-on-hover
         # cds-dialog
@@ -353,6 +363,8 @@ collect:
         - error-subject
         - oncds-file-uploader-item-beingdeleted
         - oncds-file-uploader-item-deleted
+        # cds-fluid-date-picker-skeleton
+        - date-picker-type
         # cds-fluid-time-picker-skeleton
         - is-only-two
         # cds-form-group
@@ -407,7 +419,6 @@ collect:
         - renderIcon
         # cds-modal
         - container-class
-        - enable-dialog-element
         - has-scrolling-content
         - oncds-modal-beingclosed
         - oncds-modal-closed
@@ -447,6 +458,19 @@ collect:
         - items-shown
         - loop
         - oncds-page-changed
+        # cds-preview-date-picker
+        - oncds-preview-date-picker-changed
+        - oncds-preview-date-picker-error
+        # cds-preview-date-picker-calendar
+        - dateFormat
+        - focusedDate
+        - maxDate
+        - minDate
+        - oncds-preview-date-picker-calendar-date-select
+        - oncds-preview-date-picker-calendar-month-change
+        - rangeMode
+        - selectedDates
+        - viewDate
         # cds-progress-indicator
         - current-index
         - ononChange
@@ -464,10 +488,17 @@ collect:
         - oncds-radio-button-group-changed
         # cds-radio-tile
         - oncds-radio-tile-selected
+        # cds-resizer-handle
+        - axis
+        - onresize-drag
+        - onresize-end
+        - onresize-reset
+        - onresize-start
         # cds-selectable-tag
         - oncds-selectable-tag-beforeselected
         - oncds-selectable-tag-selected
         # cds-shape-indicator
+        - shape-description
         - text-size
         # cds-side-nav
         - is-not-persistent
@@ -477,6 +508,7 @@ collect:
         - oncds-side-nav-menu-toggled
         # cds-side-panel
         - animate-title
+        - close-icon-tooltip-alignment
         - condensed-actions
         - current-step
         - include-overlay
@@ -485,6 +517,7 @@ collect:
         - oncds-side-panel-closed
         - oncds-side-panel-navigate-back
         - placement
+        - resizable
         - selector-page-content
         - slide-in
         # cds-skip-to-content
@@ -582,74 +615,24 @@ collect:
         - is-expanded
         - oneventSelected
         - oneventToggled
+        # feature-flags
+        - enable-experimental-focus-wrap-without-sentinels
+        - enable-focus-wrap-without-sentinels
+        - enable-treeview-controllable
+        - enable-v12-dynamic-floating-styles
+        - enable-v12-release
+        - enable-v12-tile-default-icons
+        - enable-v12-tile-radio-icons
+        - enable-v12-toggle-reduced-label-spacing
         # tabs-story-wrapper
         - with-icons
       allowedAttributeStringValues:
         # General - boolean attributes
         - "true"
         - "false"
-        # General - align
-        - bottom
-        - bottom-end
-        - bottom-left
-        - bottom-right
-        - bottom-start
-        - left
-        - left-bottom
-        - left-end
-        - left-start
-        - left-top
-        - right
-        - right-bottom
-        - right-end
-        - right-start
-        - right-top
-        - top
-        - top-end
-        - top-left
-        - top-right
-        - top-start
-        # General - alignment
-        - bottom
-        - bottom-end
-        - bottom-left
-        - bottom-right
-        - bottom-start
-        - END
-        - left
-        - left-bottom
-        - left-end
-        - left-start
-        - left-top
-        - right
-        - right-bottom
-        - right-end
-        - right-start
-        - right-top
-        - start
-        - top
-        - top-end
-        - top-left
-        - top-right
-        - top-start
-        # General - backgroundToken
-        - background
-        - layer
-        # General - collapse-mode
-        - fixed
-        - rail
-        - responsive
-        # General - color-scheme
-        - ""
-        - light
         # General - counter-mode
         - character
         - word
-        # General - direction
-        - bottom
-        - left
-        - right
-        - top
         # General - input-mode
         - decimal
         - email
@@ -660,179 +643,38 @@ collect:
         - text
         - url
         # General - kind
-        - ""
-        - caution-major
-        - caution-minor
-        - cautious
-        - critical
-        - danger
-        - danger-ghost
-        - danger-primary
-        - danger-tertiary
-        - default
         - disclosed
-        - draft
-        - error
-        - failed
-        - from
-        - ghost
-        - high
-        - in-progress
-        - incomplete
-        - info
-        - info-square
-        - informative
-        - inline
-        - low
-        - medium
-        - normal
-        - not-started
         - on-page
-        - pending
-        - primary
-        - secondary
-        - simple
-        - single
-        - stable
-        - succeeded
-        - success
-        - tertiary
-        - to
-        - undefined
-        - unknown
-        - warning
-        - warning-alt
-        # General - label-position
-        - left
-        - right
         # General - loading-status
         - active
         - error
         - finished
         - inactive
-        # General - menu-alignment
-        - bottom
-        - bottom-end
-        - bottom-left
-        - bottom-right
-        - bottom-start
-        - left
-        - left-bottom
-        - left-end
-        - left-start
-        - left-top
-        - right
-        - right-bottom
-        - right-end
-        - right-start
-        - right-top
-        - top
-        - top-end
-        - top-left
-        - top-right
-        - top-start
-        # General - orientation
-        - horizontal
-        - vertical
         # General - role
         - alertdialog
         - dialog
-        # General - selection-feedback
-        - fixed
-        - top
-        - top-after-reopen
         # General - size
-        - ""
         - 2xl
-        - 2xs
-        - big
         - lg
         - md
-        - mini
         - sm
-        - small
         - xl
         - xs
-        # General - state
-        - complete
-        - current
-        - edit
-        - incomplete
-        - invalid
-        - uploading
-        # General - status
-        - active
-        - error
-        - finished
-        - inactive
-        # General - tooltip-alignment
-        - ""
-        - bottom
-        - bottom-left
-        - bottom-right
-        - center
-        - end
-        - left
-        - right
-        - start
-        - top
-        - top-left
-        - top-right
-        # General - tooltip-position
-        - bottom
-        - left
-        - right
-        - top
-        # General - tooltipAlignment
-        - center
-        - end
-        - start
-        # General - tooltipDirection
-        - bottom
-        - left
-        - right
-        - top
         # General - type
-        - ""
-        - blue
-        - button
-        - contained
-        - container
-        - cool-gray
-        - cyan
-        - default
-        - email
-        - gray
-        - green
-        - heading
-        - indented
-        - inline
-        - magenta
-        - multi
+        - expand
         - number
-        - password
-        - purple
-        - red
-        - reset
-        - single
-        - submit
-        - teal
-        - tel
         - text
-        - url
-        - warm-gray
-        # General - width
-        - narrow
-        - wide
-        # cds-file-uploader-button - button-kind
-        - danger
-        - danger-ghost
-        - danger-primary
-        - danger-tertiary
-        - ghost
-        - primary
-        - secondary
-        - tertiary
+        - tooltip
+        # cds-action-set - button-size
+        - 2xl
+        - lg
+        - md
+        - sm
+        - xl
+        # cds-fluid-date-picker-skeleton - date-picker-type
+        - range
+        - simple
+        - single
         # cds-layout - density
         - condensed
         - normal
@@ -857,28 +699,9 @@ collect:
         - sm
         - xl
         - xs
-        # cds-menu-button - menu-background-token
-        - background
-        - layer
-        # cds-pagination - backward-text-tooltip-position
-        - bottom
-        - left
-        - right
-        - top
-        # cds-pagination - forward-text-tooltip-position
-        - bottom
-        - left
-        - right
-        - top
-        # cds-side-panel - placement
-        - left
-        - right
-        # cds-tearsheet - influencer-placement
-        - left
-        - right
-        # cds-tearsheet - influencer-width
-        - narrow
-        - wide
+        # cds-resizer-handle - axis
+        - x
+        - y
   npm:
     dependencies: null
   js:
