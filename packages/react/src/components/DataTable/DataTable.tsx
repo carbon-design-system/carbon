@@ -368,6 +368,7 @@ export const DataTable = <RowType, ColTypes extends any[]>(
     radio,
     rows,
   } = props;
+
   const instanceId = useMemo(() => getInstanceId(), []);
 
   const [state, setState] = useState<DataTableState<ColTypes>>(() => ({
@@ -847,6 +848,7 @@ export const DataTable = <RowType, ColTypes extends any[]>(
 
     setState((prev) => ({ ...prev, filterInputValue: value }));
   };
+
   const renderProps: RenderProps = {
     // Data derived from state
     rows: denormalize(filteredRowIds, state.rowsById, state.cellsById),
