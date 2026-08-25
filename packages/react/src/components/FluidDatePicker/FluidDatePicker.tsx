@@ -90,6 +90,11 @@ FluidDatePicker.propTypes = {
   className: PropTypes.string,
 
   /**
+   * Specify whether or not the control is disabled
+   */
+  disabled: PropTypes.bool,
+
+  /**
    * Specify whether or not the control is invalid
    */
   invalid: PropTypes.bool,
