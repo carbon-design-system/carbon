@@ -333,6 +333,7 @@ interface DataTableState<ColTypes extends any[]> {
   isExpandedAll: boolean;
   rowIds: string[];
   rowsById: Record<string, DataTableRow<ColTypes>>;
+  headers: DataTableHeader[];
   shouldShowBatchActions: boolean;
   sortDirection: DataTableSortState;
   sortHeaderKey: string | null;
@@ -367,7 +368,6 @@ export const DataTable = <RowType, ColTypes extends any[]>(
     radio,
     rows,
   } = props;
-
   const instanceId = useMemo(() => getInstanceId(), []);
 
   const [state, setState] = useState<DataTableState<ColTypes>>(() => ({
@@ -380,10 +380,10 @@ export const DataTable = <RowType, ColTypes extends any[]>(
     const nextRowIds = rows.map((row) => row.id);
     const nextHeaders = headers.map((header) => header.key);
     const hasRowIdsChanged = !isEqual(nextRowIds, state.rowIds);
-    const currentHeaders = Array.from(
-      new Set(Object.keys(state.cellsById).map((id) => id.split(':')[1]))
+    const hasHeadersChanged = !isEqual(
+      nextHeaders,
+      state.headers.map((h) => h.key)
     );
-    const hasHeadersChanged = !isEqual(nextHeaders, currentHeaders);
     const currentRows = state.rowIds.map((id) => {
       const row = state.rowsById[id];
       return {
@@ -653,7 +653,7 @@ export const DataTable = <RowType, ColTypes extends any[]>(
       ? filterRows({
           cellsById: state.cellsById,
           getCellId,
-          headers,
+          headers: state.headers,
           inputValue: state.filterInputValue,
           rowIds: state.rowIds,
         })
@@ -847,11 +847,10 @@ export const DataTable = <RowType, ColTypes extends any[]>(
 
     setState((prev) => ({ ...prev, filterInputValue: value }));
   };
-
   const renderProps: RenderProps = {
     // Data derived from state
     rows: denormalize(filteredRowIds, state.rowsById, state.cellsById),
-    headers: headers,
+    headers: state.headers,
     selectedRows: denormalize(selectedRows, state.rowsById, state.cellsById),
 
     // Prop accessors/getters

@@ -33,6 +33,31 @@ describe('getDerivedStateFromProps', () => {
     );
   });
 
+  it('stores headers from props in state', () => {
+    const headers = [{ key: 'name', header: 'Name' }];
+    const props = { rows: [], headers };
+    const state = getDerivedStateFromProps(props, {});
+    expect(state.headers).toBe(headers);
+  });
+
+  it('updates headers in state when props.headers changes', () => {
+    const headersA = [{ key: 'name', header: 'Name' }];
+    const headersB = [
+      { key: 'col1', header: 'Column 1' },
+      { key: 'col2', header: 'Column 2' },
+    ];
+    const stateA = getDerivedStateFromProps(
+      { rows: [], headers: headersA },
+      {}
+    );
+    expect(stateA.headers).toBe(headersA);
+    const stateB = getDerivedStateFromProps(
+      { rows: [], headers: headersB },
+      stateA
+    );
+    expect(stateB.headers).toBe(headersB);
+  });
+
   describe('with previous state', () => {
     let mockProps;
 
