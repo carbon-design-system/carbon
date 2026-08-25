@@ -52,11 +52,15 @@ export default {
 };
 
 export const Default = (args) => {
-  const { align, alignDeprecated, ...rest } = args;
+  const { align, alignDeprecated, defaultOpen, ...rest } = args;
   const resolvedAlign = alignDeprecated || align;
   return (
     <div style={{ margin: '3rem' }}>
-      <IconButton align={resolvedAlign} {...rest}>
+      <IconButton
+        key={defaultOpen ? 'open' : 'closed'}
+        align={resolvedAlign}
+        defaultOpen={defaultOpen}
+        {...rest}>
         <Edit />
       </IconButton>
     </div>
