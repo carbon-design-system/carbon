@@ -143,68 +143,6 @@ export default {
   },
 };
 
-export const ExperimentalAutoAlign = (args) => {
-  const ref = useRef();
-  useEffect(() => {
-    ref?.current?.scrollIntoView({ block: 'center', inline: 'center' });
-  });
-
-  const {
-    align,
-    alignDeprecated,
-    bodyText,
-    buttonLabel,
-    buttonText,
-    defaultOpen,
-    labelText,
-    linkText,
-    ...rest
-  } = args;
-  const resolvedAlign = alignDeprecated || align;
-
-  return (
-    <div style={{ width: '5000px', height: '5000px' }}>
-      <div
-        style={{
-          position: 'absolute',
-          top: '2500px',
-          left: '2500px',
-          inlineSize: '8rem',
-        }}>
-        <ToggletipLabel>{labelText}</ToggletipLabel>
-        <Toggletip
-          key={defaultOpen ? 'open' : 'closed'}
-          align={resolvedAlign}
-          defaultOpen={defaultOpen}
-          {...rest}>
-          <ToggletipButton label={buttonLabel}>
-            <Information ref={ref} />
-          </ToggletipButton>
-          <ToggletipContent>
-            <p>{bodyText}</p>
-            <ToggletipActions>
-              <Link href="#">{linkText}</Link>
-              <Button size="sm">{buttonText}</Button>
-            </ToggletipActions>
-          </ToggletipContent>
-        </Toggletip>
-      </div>
-    </div>
-  );
-};
-
-ExperimentalAutoAlign.args = {
-  ...defaultArgs,
-  autoAlign: true,
-  bodyText:
-    'Scroll the container to observe how the toggletip automatically changes position to stay within the viewport.',
-  buttonLabel: 'Show auto-alignment details',
-  buttonText: 'View details',
-  defaultOpen: true,
-  labelText: 'Automatic alignment',
-};
-ExperimentalAutoAlign.argTypes = experimentalArgTypes;
-
 // Note: autoAlign is used here only to make tooltips visible in StackBlitz,
 // autoAlign is in preview and not part of the actual implementation.
 export const Default = (args) => {
@@ -259,3 +197,67 @@ Default.story = {
     ),
   ],
 };
+
+export const ExperimentalAutoAlign = (args) => {
+  const ref = useRef();
+  useEffect(() => {
+    ref?.current?.scrollIntoView({ block: 'center', inline: 'center' });
+  });
+
+  const {
+    align,
+    alignDeprecated,
+    bodyText,
+    buttonLabel,
+    buttonText,
+    defaultOpen,
+    labelText,
+    linkText,
+    ...rest
+  } = args;
+  const resolvedAlign = alignDeprecated || align;
+
+  return (
+    <div style={{ width: '5000px', height: '5000px' }}>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          inlineSize: 'max-content',
+          position: 'absolute',
+          top: '2500px',
+          left: '2500px',
+        }}>
+        <ToggletipLabel>{labelText}</ToggletipLabel>
+        <Toggletip
+          key={defaultOpen ? 'open' : 'closed'}
+          align={resolvedAlign}
+          defaultOpen={defaultOpen}
+          {...rest}>
+          <ToggletipButton label={buttonLabel}>
+            <Information ref={ref} />
+          </ToggletipButton>
+          <ToggletipContent>
+            <p>{bodyText}</p>
+            <ToggletipActions>
+              <Link href="#">{linkText}</Link>
+              <Button size="sm">{buttonText}</Button>
+            </ToggletipActions>
+          </ToggletipContent>
+        </Toggletip>
+      </div>
+    </div>
+  );
+};
+
+ExperimentalAutoAlign.args = {
+  ...defaultArgs,
+  autoAlign: true,
+  bodyText:
+    'Scroll the container to observe how the toggletip automatically changes position to stay within the viewport.',
+  buttonLabel: 'Show auto-alignment details',
+  buttonText: 'View details',
+  defaultOpen: true,
+  labelText: 'Automatic alignment',
+};
+ExperimentalAutoAlign.argTypes = experimentalArgTypes;

@@ -169,10 +169,12 @@ export const ExperimentalAutoAlign = {
     <div style="width: 5000px; height: 5000px;">
       <div
         style="
+          display: flex;
+          align-items: center;
+          inline-size: max-content;
           position: absolute;
           top: 2500px;
           left: 2500px;
-          inline-size: 8rem;
         ">
         ${keyed(
           defaultOpen,
