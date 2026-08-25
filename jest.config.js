@@ -37,7 +37,7 @@ export default {
     '<rootDir>/e2e/',
   ],
   transformIgnorePatterns: [
-    '<rootDir>/node_modules/(?!lodash-es|nanoid|chalk|@babel/)',
+    '<rootDir>/node_modules/(?!lodash-es|nanoid|chalk|@babel/|temporal-polyfill|temporal-utils)',
   ],
   moduleNameMapper: {
     // Jest uses identity-obj-proxy to mock CSS/SCSS imports.

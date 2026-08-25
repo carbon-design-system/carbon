@@ -47,7 +47,15 @@ declare global {
       compare(one: PlainYearMonth, two: PlainYearMonth): number;
     }
 
-    const PlainYearMonth: PlainYearMonthConstructor;
+    /**
+     * Usages of `var` and `namespace`, instead of const, are intentional. TS 6
+     * ships built-in types for the Temporal API in `lib.esnext.temporal.d.ts`
+     * using these forms. Declaration merging only works when the shapes match.
+     * Matching them prevents collisions and tsc errors for TS 6 consumers,
+     * and for TS 5 consumers nothing changes, they still get these types
+     */
+    // eslint-disable-next-line no-var
+    var PlainYearMonth: PlainYearMonthConstructor;
 
     interface PlainDateConstructor {
       from(
@@ -56,13 +64,13 @@ declare global {
       compare(one: PlainDate, two: PlainDate): number;
     }
 
-    const PlainDate: PlainDateConstructor;
+    // eslint-disable-next-line no-var
+    var PlainDate: PlainDateConstructor;
 
-    interface Now {
-      plainDateISO(): PlainDate;
+    // eslint-disable-next-line @typescript-eslint/no-namespace
+    namespace Now {
+      function plainDateISO(): PlainDate;
     }
-
-    const Now: Now;
   }
 }
 
