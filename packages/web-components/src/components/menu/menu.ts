@@ -19,6 +19,7 @@ import {
   type MenuContextUpdate,
 } from './menu-context';
 import CDSmenuItem, { MENU_CLOSE_ROOT_EVENT } from './menu-item';
+import { isFeatureFlagEnabled } from '../feature-flags';
 import { consume, provide } from '@lit/context';
 import { MENU_BACKGROUND_TOKEN, MENU_SIZE } from './defs';
 
@@ -346,13 +347,18 @@ class CDSMenu extends HostListenerMixin(LitElement) {
       this._menuElement ?? this
     ).getBoundingClientRect();
     const alignment = isRoot ? 'vertical' : 'horizontal';
+
+    // Adjust the offset with respect to the menu's padding ($spacing-02 = 4px).
+    const submenuOffset =
+      !isRoot && isFeatureFlagEnabled('enable-v12-release', this) ? -6 : -2;
+
     const axes = {
       x: {
         max: window.innerWidth,
         size: width,
         anchor: alignment === 'horizontal' ? range[1] : range[0],
         reversedAnchor: alignment === 'horizontal' ? range[0] : range[1],
-        offset: 0,
+        offset: submenuOffset,
       },
       y: {
         max: window.innerHeight,
