@@ -8,6 +8,7 @@
   - [Surface definitions](#surface-definitions)
 - [Usage](#usage)
   - [Motion surface wrappers](#motion-surface-wrappers)
+  - [Staggered content with `MotionContext`](#staggered-content-with-motioncontext)
   - [Native CSS](#native-css)
 
 {/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
@@ -82,6 +83,95 @@ mounting/unmounting.
 
 When the user has `prefers-reduced-motion` enabled, both components fall back to
 a plain `<div>` with immediate mount/unmount — no Motion runs at all.
+
+### Staggered content with `MotionContext`
+
+Some UI regions reveal a group of children at once and those children should
+animate in one after another rather than all at the same time.
+**`MotionContext`** coordinates that stagger.
+
+It distributes a unique **`settle`** delay (in milliseconds) to each **direct
+child**. Children read that value via **`useMotionContext()`** and apply it as
+the delay on their own enter animation. **`MotionItem`** does this
+automatically; custom animated children can call the hook directly.
+
+`MotionContext` adds no DOM nodes — each child is wrapped only in a React
+context provider.
+
+#### Props
+
+| Prop      | Type     | Description                                                                                                                                                                                                                                                           |
+| --------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `stagger` | `number` | Delay between each child's animation start, in milliseconds.                                                                                                                                                                                                          |
+| `settle`  | `number` | Optional baseline delay before the first child starts. Offsets the stagger past a known parent transition (e.g. `settle={110}` to wait for an accordion panel expand before rows animate in). Defaults to `0`, or inherits from a parent `MotionContext` when nested. |
+
+Each direct child receives:
+
+```
+childSettle[i] = parentSettle + stagger(staggerMs / 1000)(i, total) × 1000
+```
+
+#### Basic usage with `MotionItem`
+
+Wrap a list of `MotionItem` children in `MotionContext`. Each item picks up its
+stagger delay and runs the named reveal surface on mount:
+
+```jsx
+import { MotionContext } from '../../internal/motion/MotionContext';
+import { MotionItem } from '../../internal/motion/MotionSurface';
+
+<MotionContext stagger={50}>
+  <MotionItem surface="contextual">Row one</MotionItem>
+  <MotionItem surface="contextual">Row two</MotionItem>
+  <MotionItem surface="contextual">Row three</MotionItem>
+</MotionContext>;
+```
+
+With `stagger={50}`, the three items start at **0 ms**, **50 ms**, and **100
+ms**.
+
+#### Offsetting past a parent animation
+
+When children appear inside a component that has its own enter transition, set
+`settle` so the stagger starts after that transition finishes. The Dropdown menu
+waits **80 ms** for the menu container to open, then staggers each option by
+**25 ms**:
+
+```jsx
+<MotionContext stagger={25} settle={80}>
+  {items.map((item) => (
+    <ListBox.MenuItem key={item.id}>
+      <MotionItem surface="disclosure">{item.text}</MotionItem>
+    </ListBox.MenuItem>
+  ))}
+</MotionContext>
+```
+
+#### Re-triggering the stagger
+
+`MotionContext` runs its children's enter animations when they **mount**. To
+replay the stagger each time a region becomes visible again, remount the context
+with a changing `key`:
+
+```jsx
+// Tabs — remount when this panel becomes active
+<MotionContext key={selectedIndex} stagger={50}>
+  {panel.rows.map((row) => (
+    <MotionItem key={row.label} surface="contextual">
+      {/* row content */}
+    </MotionItem>
+  ))}
+</MotionContext>
+
+// Accordion — increment a counter on each open
+<MotionContext key={openCount} settle={110} stagger={50}>
+  {rows.map((row) => (
+    <MotionItem key={row.label} surface="contextual">
+      {/* row content */}
+    </MotionItem>
+  ))}
+</MotionContext>
+```
 
 ### Native CSS
 
