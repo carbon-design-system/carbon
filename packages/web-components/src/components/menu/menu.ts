@@ -350,7 +350,7 @@ class CDSMenu extends HostListenerMixin(LitElement) {
 
     // Adjust the offset with respect to the menu's padding ($spacing-02 = 4px).
     const submenuOffset =
-      !isRoot && isFeatureFlagEnabled('enable-v12-release', this) ? -6 : -2;
+      !isRoot && isFeatureFlagEnabled('enable-v12-release', this) ? -6 : 0;
 
     const axes = {
       x: {
