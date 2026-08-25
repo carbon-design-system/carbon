@@ -204,7 +204,13 @@ jobs:
           token: ${{ github.token }}
           filters: |
             e2e:
-              - 'e2e/**'
+              # Only the dirs jest.e2e.config.js actually matches. The rest of
+              # e2e/ is Playwright AVT (`*.avt.e2e.js`), which this job can't run
+              - 'e2e/icons/**'
+              - 'e2e/icons-react/**'
+              - 'e2e/icons-vue/**'
+              - 'e2e/pictograms/**'
+              - 'e2e/pictograms-react/**'
               - 'packages/icons/**'
               - 'packages/icons-react/**'
               - 'packages/icons-vue/**'
@@ -243,9 +249,10 @@ jobs:
           --scope='@carbon/icons-react' --scope='@carbon/icons-vue'
           --scope='@carbon/pictograms' --scope='@carbon/pictograms-react'
           --include-dependencies
+      # Cap concurrency to keep runners from going OOM
       - name: Run e2e tests
         if: ${{ steps.filter.outputs.e2e == 'true' }}
-        run: yarn test:e2e
+        run: yarn test:e2e --maxWorkers=2
 
   avt-build:
     runs-on: ubuntu-latest
