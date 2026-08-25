@@ -121,6 +121,52 @@ describe('FileUploader', () => {
 
     expect(onDelete).toHaveBeenCalledTimes(1);
   });
+
+  it('should remove an uploaded file when clicking the delete button', async () => {
+    const { container } = render(
+      <FileUploader {...requiredProps} filenameStatus="edit" />
+    );
+
+    const input = container.querySelector('input');
+    const file = new File(['test'], 'test.png', { type: 'image/png' });
+
+    await userEvent.upload(input, file);
+
+    expect(screen.getByText('test.png')).toBeInTheDocument();
+
+    await userEvent.click(
+      screen.getByRole('button', { name: 'test description - test.png' })
+    );
+
+    expect(screen.queryByText('test.png')).not.toBeInTheDocument();
+  });
+
+  it.each([
+    ['Enter', '{Enter}'],
+    ['Space', ' '],
+  ])(
+    'should remove an uploaded file with the %s key from the delete button',
+    async (_, key) => {
+      const { container } = render(
+        <FileUploader {...requiredProps} filenameStatus="edit" />
+      );
+
+      const input = container.querySelector('input');
+      const file = new File(['test'], 'test.png', { type: 'image/png' });
+
+      await userEvent.upload(input, file);
+
+      const removeFileButton = screen.getByRole('button', {
+        name: 'test description - test.png',
+      });
+      removeFileButton.focus();
+
+      await userEvent.keyboard(key);
+
+      expect(screen.queryByText('test.png')).not.toBeInTheDocument();
+    }
+  );
+
   it('should trigger `onChange` when files are selected', async () => {
     const onChange = jest.fn();
     const { container } = render(
