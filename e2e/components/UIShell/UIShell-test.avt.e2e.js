@@ -45,12 +45,12 @@ test.describe('@avt UIShell', () => {
     });
 
     await expect(
-      page.getByRole('button', { name: 'Compute' }).first()
+      page.getByRole('button', { name: 'Category title' }).first()
     ).toBeVisible();
 
     // open a category within the menu
     page
-      .getByRole('button', { name: 'Compute' })
+      .getByRole('button', { name: 'Category title' })
       .first()
       // The overlay causes the actionability checks to fail, so use `force` to bypass the checks
       .click({ force: true });
@@ -69,10 +69,10 @@ test.describe('@avt UIShell', () => {
         theme: 'white',
       },
     });
-    await expect(page.getByRole('link', { name: 'Manage' })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Link 4' })).toBeVisible();
     // open the header link dropdown
     page
-      .getByRole('link', { name: 'Manage' })
+      .getByRole('link', { name: 'Link 4' })
       // The overlay causes the actionability checks to fail, so use `force` to bypass the checks
       .click({ force: true });
     await expect(page).toHaveNoACViolations(
@@ -102,24 +102,24 @@ test.describe('@avt UIShell', () => {
     await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');
-    await expect(page.getByRole('link', { name: 'Manage' })).toBeFocused();
+    await expect(page.getByRole('link', { name: 'Link 4' })).toBeFocused();
     // open the sublinks menu
     await page.keyboard.press('Space');
-    await expect(page.getByRole('link', { name: 'Users' })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Sub-link 1' })).toBeVisible();
     // tab through the sublinks menu
     await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');
-    await expect(page.getByRole('link', { name: 'API keys' })).toBeFocused();
+    await expect(page.getByRole('link', { name: 'Sub-link 3' })).toBeFocused();
     // tab once more and the sublinks menu should close
     await page.keyboard.press('Tab');
-    await expect(page.getByRole('link', { name: 'Users' })).toBeHidden();
+    await expect(page.getByRole('link', { name: 'Sub-link 1' })).toBeHidden();
     // tab through to open the sidenav
     await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');
     await expect(
-      page.getByRole('button', { name: 'Compute' }).first()
+      page.getByRole('button', { name: 'Category title' }).first()
     ).toBeFocused();
     // tab through the rest of the sidenav menu
     await page.keyboard.press('Tab');
@@ -142,14 +142,12 @@ test.describe('@avt UIShell', () => {
       },
     });
 
-    await page.getByRole('button', { name: 'Compute' }).first().focus();
+    await page.getByRole('button', { name: 'Category title' }).first().focus();
     await expect(
-      page.getByRole('button', { name: 'Compute' }).first()
+      page.getByRole('button', { name: 'Category title' }).first()
     ).toBeFocused();
     await page.keyboard.press('Enter');
     await page.keyboard.press('Tab');
-    await expect(
-      page.getByRole('link', { name: 'Virtual server instances' })
-    ).toBeFocused();
+    await expect(page.getByRole('link', { name: 'Link 5' })).toBeFocused();
   });
 });

@@ -131,8 +131,8 @@ const StoryContent = ({ useResponsiveOffset = true }) => {
 };
 
 const headerArgs = {
-  headerAriaLabel: 'IBM Cloud',
-  platformName: 'Cloud console',
+  headerAriaLabel: 'IBM Platform Name',
+  platformName: '[Platform]',
   platformPrefix: 'IBM',
 };
 
@@ -155,8 +155,8 @@ const headerArgTypes = {
 };
 
 const navigationArgs = {
-  navigationAriaLabel: 'IBM Cloud',
-  navigationMenuLabel: 'Manage',
+  navigationAriaLabel: 'IBM [Platform]',
+  navigationMenuLabel: 'Link 4',
 };
 
 const navigationArgTypes = {
@@ -242,17 +242,17 @@ export const HeaderWNavigation = (args) => (
             {args.platformName}
           </HeaderName>
           <HeaderNavigation aria-label={args.navigationAriaLabel}>
-            <HeaderMenuItem href="#">Overview</HeaderMenuItem>
-            <HeaderMenuItem href="#">Activity</HeaderMenuItem>
-            <HeaderMenuItem href="#">Resource list</HeaderMenuItem>
+            <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
+            <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
+            <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
             <HeaderMenu
               aria-label={args.navigationMenuLabel}
               menuLinkName={args.navigationMenuLabel}>
-              <HeaderMenuItem href="#">Users</HeaderMenuItem>
+              <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
               <HeaderMenuItem isActive href="#">
-                Access groups
+                Sub-link 2
               </HeaderMenuItem>
-              <HeaderMenuItem href="#">API keys</HeaderMenuItem>
+              <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
             </HeaderMenu>
           </HeaderNavigation>
           <SideNav
@@ -262,17 +262,17 @@ export const HeaderWNavigation = (args) => (
             onSideNavBlur={onClickSideNavExpand}>
             <SideNavItems>
               <HeaderSideNavItems>
-                <HeaderMenuItem href="#">Overview</HeaderMenuItem>
-                <HeaderMenuItem href="#">Activity</HeaderMenuItem>
-                <HeaderMenuItem href="#">Resource list</HeaderMenuItem>
+                <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
+                <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
+                <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
                 <HeaderMenu
                   aria-label={args.navigationMenuLabel}
                   menuLinkName={args.navigationMenuLabel}>
-                  <HeaderMenuItem href="#">Users</HeaderMenuItem>
+                  <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
                   <HeaderMenuItem isActive href="#">
-                    Access groups
+                    Sub-link 2
                   </HeaderMenuItem>
-                  <HeaderMenuItem href="#">API keys</HeaderMenuItem>
+                  <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
                 </HeaderMenu>
               </HeaderSideNavItems>
             </SideNavItems>
@@ -314,16 +314,16 @@ export const HeaderWNavigationAndActions = (args) => (
             {args.platformName}
           </HeaderName>
           <HeaderNavigation aria-label={args.navigationAriaLabel}>
-            <HeaderMenuItem href="#">Overview</HeaderMenuItem>
-            <HeaderMenuItem href="#">Activity</HeaderMenuItem>
-            <HeaderMenuItem href="#">Resource list</HeaderMenuItem>
+            <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
+            <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
+            <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
             <HeaderMenu
               isActive
               aria-label={args.navigationMenuLabel}
               menuLinkName={args.navigationMenuLabel}>
-              <HeaderMenuItem href="#">Users</HeaderMenuItem>
-              <HeaderMenuItem href="#">Access groups</HeaderMenuItem>
-              <HeaderMenuItem href="#">API keys</HeaderMenuItem>
+              <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
+              <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
+              <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
             </HeaderMenu>
           </HeaderNavigation>
           <HeaderGlobalBar>
@@ -351,15 +351,15 @@ export const HeaderWNavigationAndActions = (args) => (
             onSideNavBlur={onClickSideNavExpand}>
             <SideNavItems>
               <HeaderSideNavItems>
-                <HeaderMenuItem href="#">Overview</HeaderMenuItem>
-                <HeaderMenuItem href="#">Activity</HeaderMenuItem>
-                <HeaderMenuItem href="#">Resource list</HeaderMenuItem>
+                <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
+                <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
+                <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
                 <HeaderMenu
                   aria-label={args.navigationMenuLabel}
                   menuLinkName={args.navigationMenuLabel}>
-                  <HeaderMenuItem href="#">Users</HeaderMenuItem>
-                  <HeaderMenuItem href="#">Access groups</HeaderMenuItem>
-                  <HeaderMenuItem href="#">API keys</HeaderMenuItem>
+                  <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
+                  <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
+                  <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
                 </HeaderMenu>
               </HeaderSideNavItems>
             </SideNavItems>
@@ -401,17 +401,15 @@ export const HeaderWNavigationActionsAndSideNav = (args) => (
             {args.platformName}
           </HeaderName>
           <HeaderNavigation aria-label={args.navigationAriaLabel}>
-            <HeaderMenuItem href="#">Overview</HeaderMenuItem>
-            <HeaderMenuItem href="#">Activity</HeaderMenuItem>
-            <HeaderMenuItem href="#">Resource list</HeaderMenuItem>
+            <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
+            <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
+            <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
             <HeaderMenu
               aria-label={args.navigationMenuLabel}
               menuLinkName={args.navigationMenuLabel}>
-              <HeaderMenuItem href="#users">Users</HeaderMenuItem>
-              <HeaderMenuItem href="#access-groups">
-                Access groups
-              </HeaderMenuItem>
-              <HeaderMenuItem href="#api-keys">API keys</HeaderMenuItem>
+              <HeaderMenuItem href="#one">Sub-link 1</HeaderMenuItem>
+              <HeaderMenuItem href="#two">Sub-link 2</HeaderMenuItem>
+              <HeaderMenuItem href="#three">Sub-link 3</HeaderMenuItem>
             </HeaderMenu>
           </HeaderNavigation>
           <HeaderGlobalBar>
@@ -440,65 +438,71 @@ export const HeaderWNavigationActionsAndSideNav = (args) => (
             href="#main-content">
             <SideNavItems>
               <HeaderSideNavItems hasDivider={true}>
-                <HeaderMenuItem href="#">Overview</HeaderMenuItem>
-                <HeaderMenuItem href="#">Activity</HeaderMenuItem>
-                <HeaderMenuItem href="#">Resource list</HeaderMenuItem>
+                <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
+                <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
+                <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
                 <HeaderMenu
                   aria-label={args.navigationMenuLabel}
                   menuLinkName={args.navigationMenuLabel}>
-                  <HeaderMenuItem href="#">Users</HeaderMenuItem>
-                  <HeaderMenuItem href="#">Access groups</HeaderMenuItem>
-                  <HeaderMenuItem href="#">API keys</HeaderMenuItem>
+                  <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
+                  <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
+                  <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
                 </HeaderMenu>
               </HeaderSideNavItems>
-              <SideNavMenu renderIcon={Fade} title="Compute" tabIndex={0}>
+              <SideNavMenu
+                renderIcon={Fade}
+                title="Category title"
+                tabIndex={0}>
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-                  Virtual server instances
+                  Link 5
                 </SideNavMenuItem>
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-                  Kubernetes clusters
+                  Link 6
                 </SideNavMenuItem>
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-                  Container registries
-                </SideNavMenuItem>
-              </SideNavMenu>
-              <SideNavMenu renderIcon={Fade} title="Storage" tabIndex={0}>
-                <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-                  Object storage
-                </SideNavMenuItem>
-                <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-                  File storage
-                </SideNavMenuItem>
-                <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-                  Block storage
+                  Link 7
                 </SideNavMenuItem>
               </SideNavMenu>
               <SideNavMenu
                 renderIcon={Fade}
-                title="Manage"
+                title="Category title"
+                tabIndex={0}>
+                <SideNavMenuItem href="https://www.carbondesignsystem.com/">
+                  Link 8
+                </SideNavMenuItem>
+                <SideNavMenuItem href="https://www.carbondesignsystem.com/">
+                  Link 9
+                </SideNavMenuItem>
+                <SideNavMenuItem href="https://www.carbondesignsystem.com/">
+                  Link 10
+                </SideNavMenuItem>
+              </SideNavMenu>
+              <SideNavMenu
+                renderIcon={Fade}
+                title="Category title"
                 isActive={true}
                 tabIndex={0}>
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-                  Users
+                  Link 11
                 </SideNavMenuItem>
                 <SideNavMenuItem
                   aria-current="page"
                   href="https://www.carbondesignsystem.com/">
-                  Access groups
+                  Link 12
                 </SideNavMenuItem>
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-                  API keys
+                  Link 13
                 </SideNavMenuItem>
               </SideNavMenu>
               <SideNavLink
                 renderIcon={Fade}
                 href="https://www.carbondesignsystem.com/">
-                Billing
+                Link
               </SideNavLink>
               <SideNavLink
                 renderIcon={Fade}
                 href="https://www.carbondesignsystem.com/">
-                Support
+                Link
               </SideNavLink>
             </SideNavItems>
           </SideNav>
@@ -545,50 +549,53 @@ export const HeaderWSideNav = (args) => (
             onSideNavBlur={onClickSideNavExpand}
             href="#main-content">
             <SideNavItems>
-              <SideNavMenu renderIcon={Fade} title="Compute">
+              <SideNavMenu renderIcon={Fade} title="Category title">
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-                  Virtual server instances
+                  Link
                 </SideNavMenuItem>
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-                  Kubernetes clusters
+                  Link
                 </SideNavMenuItem>
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-                  Container registries
+                  Link
                 </SideNavMenuItem>
               </SideNavMenu>
-              <SideNavMenu renderIcon={Fade} title="Manage" isActive={true}>
+              <SideNavMenu
+                renderIcon={Fade}
+                title="Category title"
+                isActive={true}>
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-                  Users
+                  Link
                 </SideNavMenuItem>
                 <SideNavMenuItem
                   aria-current="page"
                   href="https://www.carbondesignsystem.com/">
-                  Access groups
+                  Link
                 </SideNavMenuItem>
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-                  API keys
+                  Link
                 </SideNavMenuItem>
               </SideNavMenu>
-              <SideNavMenu renderIcon={Fade} title="Storage">
+              <SideNavMenu renderIcon={Fade} title="Category title">
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-                  Object storage
+                  Link
                 </SideNavMenuItem>
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-                  File storage
+                  Link
                 </SideNavMenuItem>
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-                  Block storage
+                  Link
                 </SideNavMenuItem>
               </SideNavMenu>
               <SideNavLink
                 renderIcon={Fade}
                 href="https://www.carbondesignsystem.com/">
-                Billing
+                Link
               </SideNavLink>
               <SideNavLink
                 renderIcon={Fade}
                 href="https://www.carbondesignsystem.com/">
-                Support
+                Link
               </SideNavLink>
             </SideNavItems>
           </SideNav>
@@ -727,25 +734,25 @@ export const HeaderWActionsAndSwitcher = (args) => (
             <Switcher
               aria-label="Switcher Container"
               expanded={isSideNavExpanded}>
-              <SwitcherItem aria-label="Catalog" href="#">
-                Catalog
+              <SwitcherItem aria-label="Link 1" href="#">
+                Link 1
               </SwitcherItem>
               <SwitcherDivider />
-              <SwitcherItem href="#" aria-label="Resource list">
-                Resource list
+              <SwitcherItem href="#" aria-label="Link 2">
+                Link 2
               </SwitcherItem>
-              <SwitcherItem href="#" aria-label="Observability">
-                Observability
+              <SwitcherItem href="#" aria-label="Link 3">
+                Link 3
               </SwitcherItem>
-              <SwitcherItem href="#" aria-label="Security">
-                Security
+              <SwitcherItem href="#" aria-label="Link 4">
+                Link 4
               </SwitcherItem>
-              <SwitcherItem href="#" aria-label="Billing">
-                Billing
+              <SwitcherItem href="#" aria-label="Link 5">
+                Link 5
               </SwitcherItem>
               <SwitcherDivider />
-              <SwitcherItem href="#" aria-label="Support">
-                Support
+              <SwitcherItem href="#" aria-label="Link 6">
+                Link 6
               </SwitcherItem>
             </Switcher>
           </HeaderPanel>
