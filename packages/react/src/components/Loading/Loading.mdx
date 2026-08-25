@@ -40,11 +40,10 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 ## Overlay loading
 
 Setting `withOverlay` renders the indicator on top of a full-screen overlay that
-blocks interaction with the content behind it. Because that content is
-unavailable, focus moves to the overlay while it is active and stays there, so
-keyboard and screen reader users cannot navigate into a page that is not ready
-yet. When loading finishes, focus returns to the element that was focused before
-the overlay appeared.
+blocks interaction with the content behind it. When the overlay is active and no
+recognized modal is layered above it, focus moves to the loading dialog and
+stays there. When loading finishes, focus returns to the previously focused
+element when it is still available, or to a suitable fallback when possible.
 
 Select **Start** to trigger a two second loading state.
 
