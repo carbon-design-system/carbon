@@ -273,5 +273,27 @@ describe('TableHeader', () => {
       await userEvent.click(screen.getByRole('button'), 'test');
       expect(onClick).toHaveBeenCalled();
     });
+
+    it('should not call onClick when clicking the decorator', async () => {
+      const onClick = jest.fn();
+      render(
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableHeader decorator={<AILabel />} isSortable onClick={onClick}>
+                Header
+              </TableHeader>
+            </TableRow>
+          </TableHead>
+        </Table>
+      );
+
+      await userEvent.click(
+        screen.getByRole('button', {
+          name: 'AI Show information',
+        })
+      );
+      expect(onClick).not.toHaveBeenCalled();
+    });
   });
 });
