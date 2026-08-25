@@ -119,6 +119,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
     // from the menu's edge by the menu's inline padding ($spacing-02 = 4px).
     // Adjust the offset accordingly (by 4px).
     const submenuMainAxisOffset = enableV12Release ? -2 : -6;
+    const submenuLeftMainAxisOffset = enableV12Release ? 14 : 10;
 
     const {
       refs,
@@ -161,7 +162,9 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
       middleware: [
         flip(),
         offset(({ placement }) => ({
-          mainAxis: placement.startsWith('left') ? 10 : submenuMainAxisOffset,
+          mainAxis: placement.startsWith('left')
+            ? submenuLeftMainAxisOffset
+            : submenuMainAxisOffset,
           crossAxis: -6,
         })),
       ],
