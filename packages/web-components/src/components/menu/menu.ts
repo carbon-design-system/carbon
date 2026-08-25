@@ -348,7 +348,6 @@ class CDSMenu extends HostListenerMixin(LitElement) {
     ).getBoundingClientRect();
     const alignment = isRoot ? 'vertical' : 'horizontal';
 
-    // Adjust the offset with respect to the menu's padding ($spacing-02 = 4px).
     const submenuOffset =
       !isRoot && isFeatureFlagEnabled('enable-v12-release', this) ? -6 : 0;
 
