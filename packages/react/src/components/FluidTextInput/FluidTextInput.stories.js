@@ -8,14 +8,10 @@
 import React from 'react';
 import FluidTextInput from '../FluidTextInput';
 import FluidTextInputSkeleton from './FluidTextInput.Skeleton';
-import {
-  ToggletipLabel,
-  Toggletip,
-  ToggletipButton,
-  ToggletipContent,
-} from '../Toggletip';
+import { Toggletip, ToggletipButton, ToggletipContent } from '../Toggletip';
 import { Information } from '@carbon/icons-react';
 import './test.scss';
+import './fluid-text-input-story.scss';
 import mdx from './FluidTextInput.mdx';
 
 export default {
@@ -34,9 +30,14 @@ export default {
   },
 };
 
-const ToggleTip = (
-  <>
-    <ToggletipLabel>Label</ToggletipLabel>
+export const Default = ({ defaultWidth, ...textInputArgs }) => (
+  <div style={{ width: defaultWidth }}>
+    <FluidTextInput {...textInputArgs} />
+  </div>
+);
+
+const LabelToggletip = () => (
+  <span className="fluid-text-input-story__toggletip">
     <Toggletip align="top-left">
       <ToggletipButton label="Show information">
         <Information />
@@ -45,13 +46,7 @@ const ToggleTip = (
         <p>Additional field information here.</p>
       </ToggletipContent>
     </Toggletip>
-  </>
-);
-
-export const Default = ({ defaultWidth, ...textInputArgs }) => (
-  <div style={{ width: defaultWidth }}>
-    <FluidTextInput {...textInputArgs} />
-  </div>
+  </span>
 );
 
 Default.args = {
@@ -124,7 +119,10 @@ Default.argTypes = {
 };
 
 export const DefaultWithToggletip = () => (
-  <FluidTextInput labelText={ToggleTip} placeholder="Placeholder text" />
+  <div className="fluid-text-input-story" style={{ width: '300px' }}>
+    <FluidTextInput labelText="Label" placeholder="Placeholder text" />
+    <LabelToggletip />
+  </div>
 );
 
 export const Skeleton = () => (

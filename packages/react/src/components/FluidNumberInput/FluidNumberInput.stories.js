@@ -7,13 +7,9 @@
 
 import React from 'react';
 import { FluidNumberInput, FluidNumberInputSkeleton } from '.';
-import {
-  ToggletipLabel,
-  Toggletip,
-  ToggletipButton,
-  ToggletipContent,
-} from '../Toggletip';
+import { Toggletip, ToggletipButton, ToggletipContent } from '../Toggletip';
 import { Information } from '@carbon/icons-react';
+import './fluid-number-input-story.scss';
 import mdx from './FluidNumberInput.mdx';
 
 export default {
@@ -28,20 +24,6 @@ export default {
     FluidNumberInputSkeleton,
   },
 };
-
-const ToggleTip = (
-  <>
-    <ToggletipLabel>Label</ToggletipLabel>
-    <Toggletip align="top-left">
-      <ToggletipButton label="Show information">
-        <Information />
-      </ToggletipButton>
-      <ToggletipContent>
-        <p>Additional field information here.</p>
-      </ToggletipContent>
-    </Toggletip>
-  </>
-);
 
 export const Default = ({ defaultWidth, ...numberInputArgs }) => (
   <div style={{ width: defaultWidth }}>
@@ -61,7 +43,7 @@ Default.args = {
   invalidText:
     'Error message that is really long can wrap to more lines but should not be excessively long.',
   disabled: false,
-  label: ToggleTip,
+  label: 'Label',
   warn: false,
   warnText:
     'Warning message that is really long can wrap to more lines but should not be excessively long.',
@@ -106,6 +88,30 @@ Default.argTypes = {
       type: 'text',
     },
   },
+};
+
+export const DefaultWithToggletip = ({ defaultWidth, ...numberInputArgs }) => (
+  <div className="fluid-number-input-story" style={{ width: defaultWidth }}>
+    <FluidNumberInput {...numberInputArgs} />
+    <span className="fluid-number-input-story__toggletip">
+      <Toggletip align="top-left">
+        <ToggletipButton label="Show information">
+          <Information />
+        </ToggletipButton>
+        <ToggletipContent>
+          <p>Additional field information here.</p>
+        </ToggletipContent>
+      </Toggletip>
+    </span>
+  </div>
+);
+
+DefaultWithToggletip.args = {
+  ...Default.args,
+};
+
+DefaultWithToggletip.argTypes = {
+  ...Default.argTypes,
 };
 
 export const Skeleton = () => (

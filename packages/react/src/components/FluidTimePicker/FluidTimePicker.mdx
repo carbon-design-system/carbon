@@ -14,6 +14,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 - [Overview](#overview)
   - [Skeleton](#skeleton)
+  - [Default With Toggletip](#default-with-toggletip)
 - [Accessibility Considerations](#accessibility-considerations)
   - [Accessible Name](#accessible-name)
 - [Component API](#component-api)
@@ -41,6 +42,19 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
     {
       title: 'Open in Stackblitz',
       onClick: () => stackblitzPrefillConfig(FluidTimePickerStories.Skeleton),
+    },
+  ]}
+/>
+
+### Default With Toggletip
+
+<Canvas
+  of={FluidTimePickerStories.DefaultWithToggletip}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig(FluidTimePickerStories.DefaultWithToggletip),
     },
   ]}
 />

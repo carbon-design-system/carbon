@@ -10,13 +10,9 @@ import FluidTimePicker from '../FluidTimePicker';
 import FluidTimePickerSelect from '../FluidTimePickerSelect';
 import FluidTimePickerSkeleton from './FluidTimePicker.Skeleton';
 import SelectItem from '../SelectItem';
-import {
-  ToggletipLabel,
-  Toggletip,
-  ToggletipButton,
-  ToggletipContent,
-} from '../Toggletip';
+import { Toggletip, ToggletipButton, ToggletipContent } from '../Toggletip';
 import { Information } from '@carbon/icons-react';
+import './fluid-time-picker-story.scss';
 import mdx from './FluidTimePicker.mdx';
 
 export default {
@@ -33,20 +29,6 @@ export default {
   },
 };
 
-const ToggleTip = (
-  <>
-    <ToggletipLabel>Clock</ToggletipLabel>
-    <Toggletip align="top-left">
-      <ToggletipButton label="Show information">
-        <Information />
-      </ToggletipButton>
-      <ToggletipContent>
-        <p>Additional field information here.</p>
-      </ToggletipContent>
-    </Toggletip>
-  </>
-);
-
 export const Skeleton = () => (
   <div style={{ width: '300px' }}>
     <FluidTimePickerSkeleton />
@@ -56,11 +38,24 @@ export const Skeleton = () => (
   </div>
 );
 
+const ClockToggletip = ({ className }) => (
+  <span className={`fluid-time-picker-story__toggletip ${className}`}>
+    <Toggletip align="top-left">
+      <ToggletipButton label="Show information">
+        <Information />
+      </ToggletipButton>
+      <ToggletipContent>
+        <p>Additional field information here.</p>
+      </ToggletipContent>
+    </Toggletip>
+  </span>
+);
+
 export const Default = (args) => {
   return (
     <div style={{ width: '350px' }}>
       <FluidTimePicker id="time-picker-1" {...args}>
-        <FluidTimePickerSelect id="select-1" labelText={ToggleTip}>
+        <FluidTimePickerSelect id="select-1" labelText="Clock">
           <SelectItem value="am" text="AM" />
           <SelectItem value="pm" text="PM" />
         </FluidTimePickerSelect>
@@ -78,7 +73,7 @@ export const Default = (args) => {
         labelText="Time"
         placeholder="hh:mm"
         {...args}>
-        <FluidTimePickerSelect id="select-3" labelText={ToggleTip}>
+        <FluidTimePickerSelect id="select-3" labelText="Clock">
           <SelectItem value="am" text="AM" />
           <SelectItem value="pm" text="PM" />
         </FluidTimePickerSelect>
@@ -118,4 +113,49 @@ Default.argTypes = {
   warnText: {
     control: { type: 'text' },
   },
+};
+
+export const DefaultWithToggletip = (args) => {
+  return (
+    <div style={{ width: '350px' }}>
+      <div className="fluid-time-picker-story">
+        <FluidTimePicker id="time-picker-1" {...args}>
+          <FluidTimePickerSelect id="select-1" labelText="Clock">
+            <SelectItem value="am" text="AM" />
+            <SelectItem value="pm" text="PM" />
+          </FluidTimePickerSelect>
+          <FluidTimePickerSelect id="select-2" labelText="Timezone">
+            <SelectItem value="et" text="Eastern Time (ET)" />
+            <SelectItem value="ct" text="Central Time (CT)" />
+            <SelectItem value="mt" text="Mountain Time (MT)" />
+            <SelectItem value="pt" text="Pacific Time (PT)" />
+          </FluidTimePickerSelect>
+        </FluidTimePicker>
+        <ClockToggletip className="fluid-time-picker-story__toggletip--three-inputs" />
+      </div>
+      <br />
+      <br />
+      <div className="fluid-time-picker-story">
+        <FluidTimePicker
+          id="time-picker-2"
+          labelText="Time"
+          placeholder="hh:mm"
+          {...args}>
+          <FluidTimePickerSelect id="select-3" labelText="Clock">
+            <SelectItem value="am" text="AM" />
+            <SelectItem value="pm" text="PM" />
+          </FluidTimePickerSelect>
+        </FluidTimePicker>
+        <ClockToggletip className="fluid-time-picker-story__toggletip--two-inputs" />
+      </div>
+    </div>
+  );
+};
+
+DefaultWithToggletip.args = {
+  ...Default.args,
+};
+
+DefaultWithToggletip.argTypes = {
+  ...Default.argTypes,
 };

@@ -8,16 +8,12 @@
 import React from 'react';
 import { FluidSelect, FluidSelectSkeleton } from '.';
 import SelectItem from '../SelectItem';
-import {
-  ToggletipLabel,
-  Toggletip,
-  ToggletipButton,
-  ToggletipContent,
-} from '../Toggletip';
+import { Toggletip, ToggletipButton, ToggletipContent } from '../Toggletip';
 import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { Information, View, FolderOpen, Folders } from '@carbon/icons-react';
+import './fluid-select-story.scss';
 import mdx from './FluidSelect.mdx';
 
 export default {
@@ -107,22 +103,8 @@ const widthArgType = {
   control: { type: 'range', min: 300, max: 800, step: 50 },
 };
 
-const ToggleTip = (
-  <>
-    <ToggletipLabel>Select an option</ToggletipLabel>
-    <Toggletip align="top-left">
-      <ToggletipButton label="Show information">
-        <Information />
-      </ToggletipButton>
-      <ToggletipContent>
-        <p>Additional field information here.</p>
-      </ToggletipContent>
-    </Toggletip>
-  </>
-);
-
 export const Default = ({ defaultWidth, ...selectArgs }) => (
-  <div style={{ width: defaultWidth }}>
+  <div className="fluid-select-story" style={{ width: defaultWidth }}>
     <FluidSelect {...selectArgs} id="select-1">
       <SelectItem value="" text="" />
       <SelectItem value="option-1" text="Option 1" />
@@ -130,13 +112,22 @@ export const Default = ({ defaultWidth, ...selectArgs }) => (
       <SelectItem value="option-3" text="Option 3" />
       <SelectItem value="option-4" text="Option 4" />
     </FluidSelect>
+    <span className="fluid-select-story__toggletip">
+      <Toggletip align="top-left">
+        <ToggletipButton label="Show information">
+          <Information />
+        </ToggletipButton>
+        <ToggletipContent>
+          <p>Additional field information here.</p>
+        </ToggletipContent>
+      </Toggletip>
+    </span>
   </div>
 );
 
 Default.args = {
   ...sharedArgs,
   defaultWidth: 400,
-  labelText: ToggleTip,
 };
 
 Default.argTypes = {
