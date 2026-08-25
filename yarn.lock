@@ -2046,7 +2046,7 @@ __metadata:
     prettier-config-carbon: "npm:^0.12.0"
     progress-estimator: "npm:^0.3.0"
     remark: "npm:^15.0.1"
-    replace-in-file: "npm:^8.3.0"
+    replace-in-file: "npm:^9.0.0"
     sass: "npm:^1.77.7"
     tinyclip: "npm:^0.1.12"
     tsdown: "npm:^0.22.0"
@@ -13554,7 +13554,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"glob@npm:^10.4.2, glob@npm:^10.5.0":
+"glob@npm:^10.5.0":
   version: 10.5.0
   resolution: "glob@npm:10.5.0"
   dependencies:
@@ -20520,16 +20520,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"replace-in-file@npm:^8.3.0":
-  version: 8.3.0
-  resolution: "replace-in-file@npm:8.3.0"
+"replace-in-file@npm:^9.0.0":
+  version: 9.0.0
+  resolution: "replace-in-file@npm:9.0.0"
   dependencies:
-    chalk: "npm:^5.3.0"
-    glob: "npm:^10.4.2"
-    yargs: "npm:^17.7.2"
+    chalk: "npm:^6.0.0"
+    glob: "npm:^13.0.6"
+    yargs: "npm:^18.1.0"
   bin:
-    replace-in-file: bin/cli.js
-  checksum: 10/9d5641019d26602a59cecc38883c157fa3008722e1f88e2f15b4c5bbf298a373745aad19a383d75c7788c100395c5b7469eec7d6b9e14fdc1d6732ddefffebfd
+    replace-in-file: dist/bin/cli.js
+  checksum: 10/cf3fc5ba78e03981a388f142e0bf966ce11d06cd90d3e05707ba02e623c2771eb832d1aade63f84ed8352e66451f5ea82ef053cd0855c9bab76358a87cd1a602
   languageName: node
   linkType: hard
 
@@ -21838,6 +21838,16 @@ __metadata:
     get-east-asian-width: "npm:^1.5.0"
     strip-ansi: "npm:^7.1.2"
   checksum: 10/c4f62877ec08fca155e84a260eb4f58f473cfe5169bd1c1e21ffb563d8e0b7f6d705cc3d250f2ed6bb4f30ee9732ad026f54afaac77aa487e3d1dc1b1969e51b
+  languageName: node
+  linkType: hard
+
+"string-width@npm:^8.2.1":
+  version: 8.2.2
+  resolution: "string-width@npm:8.2.2"
+  dependencies:
+    get-east-asian-width: "npm:^1.5.0"
+    strip-ansi: "npm:^7.1.2"
+  checksum: 10/18da8c8e5247bedd8a379272b9fccebd16ec22132486344a4a5bf3bd2acf4b12fda9b2be9192eba59c5dc1484f2d36dbfb5fd5e66950fe7167fa00876078196f
   languageName: node
   linkType: hard
 
@@ -24564,6 +24574,20 @@ __metadata:
     y18n: "npm:^5.0.5"
     yargs-parser: "npm:^22.0.0"
   checksum: 10/5af36234871390386b31cac99f00e79fcbc2ead858a61b30a8ca381c5fde5df8af0b407c36b000d3f774bcbe4aec5833f2f1c915f6ddc49ce97b78176b651801
+  languageName: node
+  linkType: hard
+
+"yargs@npm:^18.1.0":
+  version: 18.1.0
+  resolution: "yargs@npm:18.1.0"
+  dependencies:
+    cliui: "npm:^9.0.1"
+    escalade: "npm:^3.1.1"
+    get-caller-file: "npm:^2.0.5"
+    string-width: "npm:^8.2.1"
+    y18n: "npm:^5.0.5"
+    yargs-parser: "npm:^22.0.0"
+  checksum: 10/b26d477c3f62b0a031d8f3fea16325e286375e6039e5fca5efb1ec1d64eab3cfe136edb2887e4f2e2c9a5e004d0eca735079ea0be4ca34273c6e949639c6177b
   languageName: node
   linkType: hard
 
