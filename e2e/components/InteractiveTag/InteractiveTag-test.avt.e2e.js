@@ -7,8 +7,29 @@
 
 'use strict';
 
-import { expect, test } from '@playwright/test';
+import { devices, expect, test } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
+
+const selectableTagStory = {
+  component: 'Tag',
+  id: 'components-tag--selectable',
+  globals: {
+    theme: 'white',
+  },
+};
+
+const selectableTagName = /Tag content with a long text description/;
+
+async function getBackgroundColor(locator) {
+  return await locator.evaluate((element) => {
+    return getComputedStyle(element).backgroundColor;
+  });
+}
+
+async function hover(locator, page) {
+  const box = await locator.boundingBox();
+  await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+}
 
 test.describe('@avt InteractiveTag', () => {
   test('@avt-advanced-states DismissibleTag', async ({ page }) => {
@@ -35,14 +56,57 @@ test.describe('@avt InteractiveTag', () => {
   });
 
   test('@avt-advanced-states SelectableTag', async ({ page }) => {
-    await visitStory(page, {
-      component: 'Tag',
-      id: 'components-tag--selectable',
-      globals: {
-        theme: 'white',
-      },
-    });
+    await visitStory(page, selectableTagStory);
     await expect(page).toHaveNoACViolations('SelectableTag');
+  });
+
+  test('@avt-advanced-states SelectableTag hover styles are only applied on devices that support hover', async ({
+    browser,
+    page,
+  }, testInfo) => {
+    await visitStory(page, selectableTagStory);
+    await expect(
+      page.getByRole('button', { name: selectableTagName }).first()
+    ).toBeVisible();
+    expect(
+      await page.evaluate(() => matchMedia('(any-hover: hover)').matches)
+    ).toBe(true);
+
+    const tag = page.getByRole('button', { name: selectableTagName }).first();
+    const backgroundColor = await getBackgroundColor(tag);
+
+    await hover(tag, page);
+    await expect
+      .poll(async () => await getBackgroundColor(tag))
+      .not.toBe(backgroundColor);
+
+    const touchContext = await browser.newContext({
+      ...devices['iPhone 13'],
+      baseURL: testInfo.project.use.baseURL,
+    });
+    const touchPage = await touchContext.newPage();
+
+    try {
+      await visitStory(touchPage, selectableTagStory);
+      await expect(
+        touchPage.getByRole('button', { name: selectableTagName }).first()
+      ).toBeVisible();
+      expect(
+        await touchPage.evaluate(() => matchMedia('(any-hover: hover)').matches)
+      ).toBe(false);
+
+      const touchTag = touchPage
+        .getByRole('button', { name: selectableTagName })
+        .first();
+      const touchBackgroundColor = await getBackgroundColor(touchTag);
+
+      await hover(touchTag, touchPage);
+      await expect
+        .poll(async () => await getBackgroundColor(touchTag))
+        .toBe(touchBackgroundColor);
+    } finally {
+      await touchContext.close();
+    }
   });
 
   test('@avt-keyboard-nav DismissibleTag', async ({ page }) => {
@@ -115,13 +179,7 @@ test.describe('@avt InteractiveTag', () => {
   });
 
   test('@avt-keyboard-nav SelectableTag', async ({ page }) => {
-    await visitStory(page, {
-      component: 'Tag',
-      id: 'components-tag--selectable',
-      globals: {
-        theme: 'white',
-      },
-    });
+    await visitStory(page, selectableTagStory);
     const tag = page.getByRole('button').first();
     await expect(tag).toBeVisible();
     await page.keyboard.press('Tab');
