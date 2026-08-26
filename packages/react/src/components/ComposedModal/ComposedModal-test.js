@@ -162,11 +162,13 @@ describe.each([
         </Component>
       );
 
-      await userEvent.click(screen.getByLabelText('Close'));
+      const closeButton = screen.getByLabelText('Close');
+      await userEvent.click(closeButton);
 
       expect(screen.getByRole('presentation', { hidden: true })).toHaveClass(
         'is-visible'
       );
+      expect(closeButton).toHaveFocus();
     });
 
     it('should focus selector on open', async () => {
@@ -384,7 +386,13 @@ describe.each([
             <Component
               launcherButtonRef={buttonRef}
               open={isOpen}
-              onClose={() => setIsOpen(false)}>
+              onClose={() => {
+                const overlay = screen.getByRole('presentation', {
+                  hidden: true,
+                });
+                expect(overlay.contains(document.activeElement)).toBe(false);
+                setIsOpen(false);
+              }}>
               <ModalHeader>Header</ModalHeader>
               <ModalFooter
                 primaryButtonText="Add"
