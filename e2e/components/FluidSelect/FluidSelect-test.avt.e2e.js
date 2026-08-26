@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -45,6 +45,14 @@ test.describe('@avt FluidSelect', () => {
     const select = page.getByRole('combobox').first();
     await expect(select).toBeVisible();
 
+    // Tab to Select
+    await page.keyboard.press('Tab');
+    await expect(select).toBeFocused();
+    await expect(select).toHaveValue('');
+    // Select Option 4
+    await select.selectOption('option-4');
+    await expect(select).toHaveValue('option-4');
+
     // Focus on label additional information
     await page.keyboard.press('Tab');
     await expect(
@@ -54,13 +62,5 @@ test.describe('@avt FluidSelect', () => {
     await expect(
       page.getByText('Additional field information here.').first()
     ).toBeVisible();
-
-    // Tab to Select
-    await page.keyboard.press('Tab');
-    await expect(select).toBeFocused();
-    await expect(select).toHaveValue('');
-    // Select Option 4
-    await select.selectOption('option-4');
-    await expect(select).toHaveValue('option-4');
   });
 });

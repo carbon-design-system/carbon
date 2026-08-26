@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -88,6 +88,10 @@ test.describe('@avt FluidTextInput', () => {
     const input = page.getByRole('textbox');
     await expect(input).toBeVisible();
 
+    // Check the focus
+    await page.keyboard.press('Tab');
+    await expect(input).toBeFocused();
+
     // Check toggletip visibility
     await page.keyboard.press('Tab');
     await expect(page.getByLabel('Show information')).toBeFocused();
@@ -96,11 +100,8 @@ test.describe('@avt FluidTextInput', () => {
       page.getByText('Additional field information here.')
     ).toBeVisible();
 
-    // Check the focus
-    await page.keyboard.press('Tab');
-    await expect(input).toBeFocused();
-
     // Check input interaction
+    await input.focus();
     await input.fill('Text');
     await expect(input).toHaveValue('Text');
     await page.keyboard.press('Backspace');
