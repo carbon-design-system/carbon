@@ -116,7 +116,8 @@
     }
 
     // Handle viewport overflow
-    position-try-options: --bottom-left, --top-left, --bottom-right, --top-right;
+    position-try-fallbacks: --bottom-left, --top-left, --bottom-right,
+      --top-right;
   }
 
   .#{$prefix}--date-picker__calendar.open {

@@ -156,8 +156,8 @@
     // On focus/hover use a keyframe animation to mimic transition
     opacity: 1;
     // overwrite default nowrap behavior
+    overflow-wrap: anywhere;
     white-space: normal;
-    word-break: break-word;
   }
 
   // content box
@@ -198,7 +198,7 @@
     + .#{$prefix}--assistive-text {
       overflow: visible;
       margin: auto;
-      clip: auto;
+      clip-path: none;
     }
 
     .#{$prefix}--assistive-text,
@@ -213,7 +213,7 @@
   &.#{$prefix}--tooltip--hidden + .#{$prefix}--assistive-text {
     overflow: hidden;
     margin: -1px;
-    clip: rect(0, 0, 0, 0);
+    clip-path: inset(50%);
   }
 
   &.#{$prefix}--tooltip--hidden.#{$prefix}--tooltip--a11y::before {

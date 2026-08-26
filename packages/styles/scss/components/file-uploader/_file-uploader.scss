@@ -154,7 +154,7 @@
     margin-block-end: $spacing-03;
     max-inline-size: convert.to-rem(320px);
     min-block-size: $spacing-09;
-    word-break: break-word;
+    overflow-wrap: anywhere;
 
     &:last-child {
       margin-block-end: 0;

@@ -223,8 +223,7 @@ $input-label-weight: 400 !default;
     overflow: hidden;
     margin: $spacing-02 0 0;
     max-block-size: 0;
-    overflow-wrap: break-word;
-    word-break: break-word;
+    overflow-wrap: anywhere;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--form__helper-text {

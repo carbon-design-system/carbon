@@ -202,7 +202,7 @@
     border: 0;
     margin: -1px;
     block-size: 1px;
-    clip: rect(0, 0, 0, 0);
+    clip-path: inset(50%);
     inline-size: 1px;
   }
 
@@ -353,8 +353,7 @@
   .#{$prefix}--text-input-wrapper .#{$prefix}--label--inline {
     flex: 0 1 auto;
     margin: 0;
-    overflow-wrap: break-word;
-    word-break: break-word;
+    overflow-wrap: anywhere;
   }
 
   .#{$prefix}--text-input__label-helper-wrapper {

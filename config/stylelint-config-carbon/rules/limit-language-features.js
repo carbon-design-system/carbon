@@ -62,6 +62,8 @@ export default {
     // Property
     // Specify a blacklist of disallowed properties.
     'property-disallowed-list': OFF,
+    // Disallow deprecated properties.
+    'property-no-deprecated': true,
     // Disallow vendor prefixes for properties.
     'property-no-vendor-prefix': OFF,
     // Specify a whitelist of allowed properties.
@@ -84,6 +86,8 @@ export default {
     // Specify a whitelist of allowed property and value pairs within
     // declarations.
     'declaration-property-value-allowed-list': OFF,
+    // Disallow deprecated property value keywords.
+    'declaration-property-value-keyword-no-deprecated': true,
 
     // Declaration block
     // Limit the number of declaration within single line declaration blocks.

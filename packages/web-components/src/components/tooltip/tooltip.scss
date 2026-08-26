@@ -41,7 +41,7 @@
 }
 
 :host(#{$prefix}-tooltip-content) {
-  word-break: break-word;
+  overflow-wrap: anywhere;
 
   ::slotted(.#{$prefix}-tooltip-content) {
     @extend .#{$prefix}--tooltip-content;

@@ -296,7 +296,7 @@
   .#{$prefix}--inline-notification__subtitle {
     @include type-style('body-compact-01');
 
-    word-break: break-word;
+    overflow-wrap: anywhere;
   }
 
   .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost {

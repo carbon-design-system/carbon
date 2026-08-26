@@ -113,7 +113,7 @@ $copy-btn-feedback: $background-inverse !default;
       overflow: visible;
       box-sizing: content-box;
       margin: auto;
-      clip: auto;
+      clip-path: none;
     }
   }
 
@@ -233,8 +233,8 @@ $copy-btn-feedback: $background-inverse !default;
   }
 
   .#{$prefix}--snippet--multi.#{$prefix}--snippet--wraptext pre {
+    overflow-wrap: anywhere;
     white-space: pre-wrap;
-    word-wrap: break-word;
   }
 
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre {

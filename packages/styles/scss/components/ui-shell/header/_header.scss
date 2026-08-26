@@ -440,7 +440,7 @@
     border: 0;
     margin: -1px;
     block-size: 1px;
-    clip: rect(0, 0, 0, 0);
+    clip-path: inset(50%);
     inline-size: 1px;
     visibility: inherit;
     white-space: nowrap;
@@ -454,7 +454,7 @@
     border: 4px solid $focus;
     background-color: $background;
     block-size: 3rem;
-    clip: auto;
+    clip-path: none;
     color: $text-secondary;
     inline-size: auto;
     inset-block-start: 0;

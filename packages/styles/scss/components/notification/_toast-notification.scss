@@ -268,7 +268,7 @@
 
     font-weight: 600;
     margin-block-start: $spacing-05;
-    word-break: break-word;
+    overflow-wrap: anywhere;
   }
 
   .#{$prefix}--toast-notification__subtitle {
@@ -276,7 +276,7 @@
 
     color: $text-inverse;
     margin-block: 0 $spacing-05;
-    word-break: break-word;
+    overflow-wrap: anywhere;
   }
 
   .#{$prefix}--toast-notification__caption {

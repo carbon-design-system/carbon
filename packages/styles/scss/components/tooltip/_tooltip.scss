@@ -64,8 +64,8 @@ $tooltip-padding-inline: custom-property.get-var(
 
     padding: convert.to-rem(8px) convert.to-rem(16px);
     max-inline-size: convert.to-rem(176px);
+    overflow-wrap: anywhere;
     text-wrap: auto;
-    word-break: break-word;
   }
 }
 

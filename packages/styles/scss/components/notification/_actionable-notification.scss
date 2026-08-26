@@ -344,7 +344,7 @@
 
     display: flex;
     flex-wrap: wrap;
-    word-break: break-word;
+    overflow-wrap: anywhere;
   }
 
   .#{$prefix}--actionable-notification--toast
@@ -357,7 +357,7 @@
 
     font-weight: 600;
     margin-inline-end: $spacing-02;
-    word-break: break-word;
+    overflow-wrap: anywhere;
   }
 
   .#{$prefix}--actionable-notification--toast
@@ -370,7 +370,7 @@
 
     color: $text-inverse;
     margin-block-start: 0;
-    word-break: break-word;
+    overflow-wrap: anywhere;
   }
 
   .#{$prefix}--actionable-notification__caption {

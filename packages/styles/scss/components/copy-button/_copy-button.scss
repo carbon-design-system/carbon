@@ -53,7 +53,7 @@
       overflow: visible;
       box-sizing: content-box;
       margin: auto;
-      clip: auto;
+      clip-path: none;
     }
 
     &:focus {

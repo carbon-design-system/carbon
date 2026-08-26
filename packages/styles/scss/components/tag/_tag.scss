@@ -51,9 +51,9 @@
     min-block-size: layout.size('height');
     // ensures tag stays pill shaped;
     min-inline-size: convert.to-rem(32px);
+    overflow-wrap: anywhere;
     padding-inline: $spacing-03;
     vertical-align: middle;
-    word-break: break-word;
 
     &.#{$prefix}--tag--lg {
       padding-inline-start: $spacing-04;
