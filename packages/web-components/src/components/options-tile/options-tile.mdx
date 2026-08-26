@@ -1,24 +1,10 @@
 import { ArgTypes, Markdown, Meta, Canvas } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 import * as OptionsTileStories from './options-tile.stories';
-import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
-import helperSource from './option-tile-helpers.ts?raw';
-
-export const customFunctionArr = [
-  helperSource
-    .replace(/import\s+.*?from\s+['"].*?['"];?\s*/g, '')
-    .replace(/export\s+/g, '')
-    .replace(/\/\*\*[\s\S]*?\*\//g, '')
-    .trim(),
-];
 
 <Meta of={OptionsTileStories} />
 
 # OptionsTile
-
-> 💡 Check our [Stackblitz](#) example implementation.
-
-[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/options-tile)
 
 An options tile can contain information, controls or tables which, when
 collapsed, are summarized. It can be paired with a toggle to quickly enable or
@@ -36,19 +22,7 @@ import '@carbon/web-components/es/components/options-tile/index.js';
 
 ### Example Usage
 
-<Canvas
-  of={OptionsTileStories.Default}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig({
-          story: OptionsTileStories.Default,
-          customFunctionDefs: customFunctionArr,
-          componentName: 'options-tile',
-        }),
-    },
-  ]}></Canvas>
+<Canvas of={OptionsTileStories.Default}></Canvas>
 
 ### HTML
 

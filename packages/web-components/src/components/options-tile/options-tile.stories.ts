@@ -85,71 +85,73 @@ export const Default = {
         ${styles}
       </style>
       <div class="${blockClass}__wrapper">
-        <cds-options-tile
-          class=${blockClass}
-          ?defaultOpen=${args.defaultOpen}
-          id="my-tile"
-          size=${args.size}
-          titleId=${args.titleId}
-          titleText=${args.titleText}
-          ?locked=${args.locked}
-          lockedText=${args.lockedText}
-          ?warn=${args.warn}
-          warnText=${args.warnText}
-          @cds-options-tile-open=${() => {
-            // eslint-disable-next-line no-console
-            console.log('open option tile');
-          }}
-          @cds-options-tile-close=${() => {
-            // eslint-disable-next-line no-console
-            console.log('close option tile');
-          }}>
-          <div slot="summary">
-            <span>English | Locale: English</span>
-          </div>
-          ${args.enabled
-            ? html`
-                <div slot="toggle">
-                  <cds-toggle
-                    id="my-toggle"
-                    size="sm"
-                    hideLabel
-                    ?disabled=${args.locked}></cds-toggle>
+        <div class="${blockClass}__viewport">
+          <cds-options-tile
+            class=${blockClass}
+            ?defaultOpen=${args.defaultOpen}
+            id="my-tile"
+            size=${args.size}
+            titleId=${args.titleId}
+            titleText=${args.titleText}
+            ?locked=${args.locked}
+            lockedText=${args.lockedText}
+            ?warn=${args.warn}
+            warnText=${args.warnText}
+            @cds-options-tile-open=${() => {
+              // eslint-disable-next-line no-console
+              console.log('open option tile');
+            }}
+            @cds-options-tile-close=${() => {
+              // eslint-disable-next-line no-console
+              console.log('close option tile');
+            }}>
+            <div slot="summary">
+              <span>English | Locale: English</span>
+            </div>
+            ${args.enabled
+              ? html`
+                  <div slot="toggle">
+                    <cds-toggle
+                      id="my-toggle"
+                      size="sm"
+                      hideLabel
+                      ?disabled=${args.locked}></cds-toggle>
+                  </div>
+                `
+              : ''}
+            <div slot="body">
+              <div class=${`${blockClass}__body`}>
+                <p>
+                  User interface defines the language the application is
+                  displayed in. Locale sets the regional display formats for
+                  information like time, date, currency and decimal delimiters.
+                </p>
+                <div class=${`${blockClass}__dropdown`}>
+                  <cds-dropdown
+                    title-text="User interface"
+                    value="${languages[0].value}">
+                    ${languages.map(
+                      (lang) =>
+                        html`<cds-dropdown-item value="${lang.value}"
+                          >${lang.label}</cds-dropdown-item
+                        >`
+                    )}
+                  </cds-dropdown>
                 </div>
-              `
-            : ''}
-          <div slot="body">
-            <div class=${`${blockClass}__body`}>
-              <p>
-                User interface defines the language the application is displayed
-                in. Locale sets the regional display formats for information
-                like time, date, currency and decimal delimiters.
-              </p>
-              <div class=${`${blockClass}__dropdown`}>
-                <cds-dropdown
-                  title-text="User interface"
-                  value="${languages[0].value}">
-                  ${languages.map(
-                    (lang) =>
-                      html`<cds-dropdown-item value="${lang.value}"
-                        >${lang.label}</cds-dropdown-item
-                      >`
-                  )}
-                </cds-dropdown>
-              </div>
-              <div class=${`${blockClass}__dropdown`}>
-                <cds-dropdown title-text="Locale" value="${locales[0].value}">
-                  ${locales.map(
-                    (locale) =>
-                      html`<cds-dropdown-item value="${locale.value}"
-                        >${locale.label}</cds-dropdown-item
-                      >`
-                  )}
-                </cds-dropdown>
+                <div class=${`${blockClass}__dropdown`}>
+                  <cds-dropdown title-text="Locale" value="${locales[0].value}">
+                    ${locales.map(
+                      (locale) =>
+                        html`<cds-dropdown-item value="${locale.value}"
+                          >${locale.label}</cds-dropdown-item
+                        >`
+                    )}
+                  </cds-dropdown>
+                </div>
               </div>
             </div>
-          </div>
-        </cds-options-tile>
+          </cds-options-tile>
+        </div>
       </div>
     `;
   },
@@ -174,20 +176,22 @@ export const StaticOptionsTile = {
         ${styles}
       </style>
       <div class="${blockClass}__wrapper">
-        <cds-options-tile
-          class=${blockClass}
-          id="my-tile-static"
-          size=${args.size}
-          titleId=${args.titleId}
-          titleText=${args.titleText}
-          ?locked=${args.locked}
-          lockedText=${args.lockedText}
-          ?warn=${args.warn}
-          warnText=${args.warnText}>
-          <div slot="summary">
-            <span>English | Locale: English</span>
-          </div>
-        </cds-options-tile>
+        <div class="${blockClass}__viewport">
+          <cds-options-tile
+            class=${blockClass}
+            id="my-tile-static"
+            size=${args.size}
+            titleId=${args.titleId}
+            titleText=${args.titleText}
+            ?locked=${args.locked}
+            lockedText=${args.lockedText}
+            ?warn=${args.warn}
+            warnText=${args.warnText}>
+            <div slot="summary">
+              <span>English | Locale: English</span>
+            </div>
+          </cds-options-tile>
+        </div>
       </div>
     `;
   },
