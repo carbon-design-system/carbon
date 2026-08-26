@@ -348,8 +348,11 @@ class CDSMenu extends HostListenerMixin(LitElement) {
     ).getBoundingClientRect();
     const alignment = isRoot ? 'vertical' : 'horizontal';
 
-    const submenuOffset =
-      !isRoot && isFeatureFlagEnabled('enable-v12-release', this) ? -6 : 0;
+    const submenuOffset = isRoot
+      ? 0
+      : isFeatureFlagEnabled('enable-v12-release', this)
+        ? -6
+        : -2;
 
     const axes = {
       x: {
