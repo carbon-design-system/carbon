@@ -370,7 +370,7 @@ export const MultiSelect = React.forwardRef(
 
             // The floating element is positioned relative to its nearest
             // containing block (usually the viewport). It will in many cases also
-            // “break” the floating element out of a clipping ancestor.
+            // "break" the floating element out of a clipping ancestor.
             // https://floating-ui.com/docs/misc#clipping
             strategy: 'fixed',
 
@@ -390,6 +390,32 @@ export const MultiSelect = React.forwardRef(
           }
         : {}
     );
+    // React 19: refs.setFloating / refs.setReference are useState setters.
+    // Passing them as ref callbacks causes setState during commit → crash.
+    // Capture the node in a ref and forward it in a passive effect (after commit).
+    const pendingFloatingNodeRef = useRef(null);
+    const setFloatingSafe = useCallback((node) => {
+      pendingFloatingNodeRef.current = node;
+    }, []);
+    useEffect(() => {
+      if (pendingFloatingNodeRef.current !== null) {
+        const node = pendingFloatingNodeRef.current;
+        pendingFloatingNodeRef.current = null;
+        refs.setFloating(node);
+      }
+    });
+
+    const pendingReferenceNodeRef = useRef(null);
+    const setReferenceSafe = useCallback((node) => {
+      pendingReferenceNodeRef.current = node;
+    }, []);
+    useEffect(() => {
+      if (pendingReferenceNodeRef.current !== null) {
+        const node = pendingReferenceNodeRef.current;
+        pendingReferenceNodeRef.current = null;
+        refs.setReference(node);
+      }
+    });
 
     useIsomorphicEffect(() => {
       if (enableFloatingStyles) {
@@ -713,10 +739,10 @@ export const MultiSelect = React.forwardRef(
     const menuProps = useMemo(
       () =>
         getMenuProps({
-          ref: enableFloatingStyles ? refs.setFloating : null,
+          ref: enableFloatingStyles ? setFloatingSafe : null,
           hidden: !isOpen,
         }),
-      [enableFloatingStyles, getMenuProps, isOpen, refs.setFloating]
+      [enableFloatingStyles, getMenuProps, isOpen, setFloatingSafe]
     );
 
     const allLabelProps = getLabelProps();
@@ -790,7 +816,7 @@ export const MultiSelect = React.forwardRef(
           )}
           <div
             className={multiSelectFieldWrapperClasses}
-            ref={enableFloatingStyles ? refs.setReference : null}>
+            ref={enableFloatingStyles ? setReferenceSafe : null}>
             {selectedItems.length > 0 && (
               <ListBox.Selection
                 readOnly={readOnly}

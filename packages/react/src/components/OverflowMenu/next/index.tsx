@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useEffect, useRef, type ElementType } from 'react';
+import React, { useCallback, useEffect, useRef, type ElementType } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { OverflowMenuVertical } from '@carbon/icons-react';
@@ -129,6 +129,33 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
       // enabled, floating-ui will not be used
     );
 
+    // React 19: refs.setFloating / refs.setReference are useState setters.
+    // Passing them as ref callbacks causes setState during commit → crash.
+    // Capture the node in a ref and forward it in a passive effect (after commit).
+    const pendingFloatingNodeRef = useRef(null);
+    const setFloatingSafe = useCallback((node) => {
+      pendingFloatingNodeRef.current = node;
+    }, []);
+    useEffect(() => {
+      if (pendingFloatingNodeRef.current !== null) {
+        const node = pendingFloatingNodeRef.current;
+        pendingFloatingNodeRef.current = null;
+        refs.setFloating(node);
+      }
+    });
+
+    const pendingReferenceNodeRef = useRef(null);
+    const setReferenceSafe = useCallback((node) => {
+      pendingReferenceNodeRef.current = node;
+    }, []);
+    useEffect(() => {
+      if (pendingReferenceNodeRef.current !== null) {
+        const node = pendingReferenceNodeRef.current;
+        pendingReferenceNodeRef.current = null;
+        refs.setReference(node);
+      }
+    });
+
     const id = useId('overflowmenu');
     const prefix = usePrefix();
 
@@ -184,7 +211,7 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
       size !== defaultSize && `${prefix}--layout--size-${size}`
     );
 
-    const floatingRef = mergeRefs(triggerRef, refs.setReference);
+    const floatingRef = mergeRefs(triggerRef, setReferenceSafe);
 
     return (
       <div
@@ -207,7 +234,7 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
         </IconButton>
         <Menu
           containerRef={triggerRef}
-          ref={refs.setFloating}
+          ref={setFloatingSafe}
           menuAlignment={menuAlignment}
           className={menuClasses}
           id={id}

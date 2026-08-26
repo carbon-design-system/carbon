@@ -9,6 +9,7 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
   forwardRef,
+  useCallback,
   useContext,
   useEffect,
   useRef,
@@ -159,6 +160,33 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
       ],
       strategy: 'fixed',
     });
+    // React 19: refs.setFloating / refs.setReference are useState setters.
+    // Passing them as ref callbacks causes setState during commit → crash.
+    // Capture the node in a ref and forward it in a passive effect (after commit).
+    const pendingFloatingNodeRef = useRef(null);
+    const setFloatingSafe = useCallback((node) => {
+      pendingFloatingNodeRef.current = node;
+    }, []);
+    useEffect(() => {
+      if (pendingFloatingNodeRef.current !== null) {
+        const node = pendingFloatingNodeRef.current;
+        pendingFloatingNodeRef.current = null;
+        refs.setFloating(node);
+      }
+    });
+
+    const pendingReferenceNodeRef = useRef(null);
+    const setReferenceSafe = useCallback((node) => {
+      pendingReferenceNodeRef.current = node;
+    }, []);
+    useEffect(() => {
+      if (pendingReferenceNodeRef.current !== null) {
+        const node = pendingReferenceNodeRef.current;
+        pendingReferenceNodeRef.current = null;
+        refs.setReference(node);
+      }
+    });
+
     const { getReferenceProps, getFloatingProps } = useInteractions([
       useHover(floatingContext, {
         delay: 100,
@@ -173,7 +201,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
     const context = useContext(MenuContext);
 
     const menuItem = useRef<HTMLLIElement>(null);
-    const ref = useMergedRefs([forwardRef, menuItem, refs.setReference]);
+    const ref = useMergedRefs([forwardRef, menuItem, setReferenceSafe]);
 
     const hasChildren = React.Children.toArray(children).length > 0;
 
@@ -345,7 +373,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
                   closeSubmenu();
                   menuItem.current?.focus();
                 }}
-                ref={refs.setFloating}
+                ref={setFloatingSafe}
                 {...getFloatingProps()}>
                 {children}
               </Menu>

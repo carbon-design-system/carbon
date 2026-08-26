@@ -451,7 +451,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
 
           // The floating element is positioned relative to its nearest
           // containing block (usually the viewport). It will in many cases also
-          // “break” the floating element out of a clipping ancestor.
+          // "break" the floating element out of a clipping ancestor.
           // https://floating-ui.com/docs/misc#clipping
           strategy: 'fixed',
 
@@ -471,6 +471,32 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
         }
       : {}
   );
+  // React 19: refs.setFloating / refs.setReference are useState setters.
+  // Passing them as ref callbacks causes setState during commit → crash.
+  // Capture the node in a ref and forward it in a passive effect (after commit).
+  const pendingFloatingNodeRef = useRef(null);
+  const setFloatingSafe = useCallback((node) => {
+    pendingFloatingNodeRef.current = node;
+  }, []);
+  useEffect(() => {
+    if (pendingFloatingNodeRef.current !== null) {
+      const node = pendingFloatingNodeRef.current;
+      pendingFloatingNodeRef.current = null;
+      refs.setFloating(node);
+    }
+  });
+
+  const pendingReferenceNodeRef = useRef(null);
+  const setReferenceSafe = useCallback((node) => {
+    pendingReferenceNodeRef.current = node;
+  }, []);
+  useEffect(() => {
+    if (pendingReferenceNodeRef.current !== null) {
+      const node = pendingReferenceNodeRef.current;
+      pendingReferenceNodeRef.current = null;
+      refs.setReference(node);
+    }
+  });
 
   useIsomorphicEffect(() => {
     if (autoAlign) {
@@ -947,12 +973,12 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     () =>
       getMenuProps(
         {
-          ref: autoAlign ? refs.setFloating : null,
+          ref: autoAlign ? setFloatingSafe : null,
           hidden: !isOpen,
         },
         { suppressRefError: true }
       ),
-    [autoAlign, getMenuProps, isOpen, refs.setFloating]
+    [autoAlign, getMenuProps, isOpen, setFloatingSafe]
   );
 
   const mergedRef = mergeRefs(textInput, inputProp.ref);
@@ -1006,7 +1032,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
         size={size}>
         <div
           className={`${prefix}--list-box__field`}
-          ref={autoAlign ? refs.setReference : null}>
+          ref={autoAlign ? setReferenceSafe : null}>
           {controlledSelectedItems.length > 0 && (
             <ListBoxSelection
               readOnly={readOnly}
