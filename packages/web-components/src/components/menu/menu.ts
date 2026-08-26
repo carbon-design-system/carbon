@@ -348,6 +348,9 @@ class CDSMenu extends HostListenerMixin(LitElement) {
     ).getBoundingClientRect();
     const alignment = isRoot ? 'vertical' : 'horizontal';
 
+    // The submenu is positioned against the menu item, which in v12 is inset
+    // from the menu's edge by the menu's inline padding ($spacing-02 = 4px).
+    // Adjust the offset accordingly (by 4px).
     const submenuOffset = isRoot
       ? 0
       : isFeatureFlagEnabled('enable-v12-release', this)
