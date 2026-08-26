@@ -194,5 +194,4 @@ export { default as CDSLayoutConstraint } from './components/layout/layout-const
 // export { default as CDSTruncatedText } from './components/truncated-text/truncated-text';
 // export { default as CDSActionSet } from './components/action-set/action-set';
 // export { default as CDSSidePanel } from './components/side-panel/side-panel';
-// TODO: uncomment in v12 — remove from product-migrated-components.mjs too
 // export { default as CDSOptionsTile } from './components/options-tile/options-tile';
