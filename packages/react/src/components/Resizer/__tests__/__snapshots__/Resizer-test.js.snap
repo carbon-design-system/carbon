@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Resizer renders as expected - Component API should match snapshot 1`] = `
+<div>
+  <div
+    aria-live="assertive"
+    aria-orientation="vertical"
+    class="cds--resizer cds--resizer--vertical"
+    data-component-name="Resizer"
+    data-testid="resizer"
+    role="separator"
+    style="inline-size: 0.25rem;"
+    tabindex="0"
+  >
+    <span
+      class="cds--visually-hidden"
+    >
+      Use arrow keys to resize, hold Shift for larger steps. Double-click to reset.
+    </span>
+  </div>
+</div>
+`;

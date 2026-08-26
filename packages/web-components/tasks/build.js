@@ -75,8 +75,10 @@ async function build() {
       // breaking downstream consumers
       dts: false,
       entry: format.inputs.map((input) => path.resolve(packageRoot, input)),
-      external,
-      failOnWarn: false,
+      deps: {
+        neverBundle: external,
+      },
+      failOnWarn: true,
       format: format.type,
       inputOptions: withInputCompatibilityAndPlugins,
       logLevel: 'warn',
@@ -254,7 +256,7 @@ async function emitDeclarations(tsconfigPath, outDir) {
   }
 
   if (diagnostics.length > 0) {
-    console.warn(formatDiagnostics(diagnostics));
+    throw new Error(formatDiagnostics(diagnostics));
   }
 }
 
