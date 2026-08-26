@@ -233,8 +233,8 @@ $copy-btn-feedback: $background-inverse !default;
   }
 
   .#{$prefix}--snippet--multi.#{$prefix}--snippet--wraptext pre {
+    overflow-wrap: break-word;
     white-space: pre-wrap;
-    word-wrap: break-word;
   }
 
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre {

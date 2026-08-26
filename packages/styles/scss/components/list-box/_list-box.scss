@@ -59,7 +59,7 @@ $list-box-menu-width: convert.to-rem(300px);
   .#{$prefix}--list-box__wrapper--inline {
     display: inline-grid;
     align-items: center;
-    grid-gap: convert.to-rem(4px);
+    gap: convert.to-rem(4px);
     grid-template: auto auto / auto auto;
 
     .#{$prefix}--label {

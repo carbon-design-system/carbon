@@ -33,7 +33,7 @@ $popover-caret-height: custom-property.get-var(
 // The drop shadow value used for the popover container
 $popover-drop-shadow: custom-property.get-var(
   'popover-drop-shadow',
-  drop-shadow(0 $spacing-01 $spacing-01 rgba(0, 0, 0, 0.2))
+  drop-shadow(0 $spacing-01 $spacing-01 rgb(0, 0, 0, 0.2))
 );
 
 // The border value used for the popover container
@@ -82,7 +82,7 @@ $popover-border-color: custom-property.get-var(
 :host(#{$prefix}-popover[tabTip][open]) {
   ::slotted(.#{$prefix}--popover--tab-tip__button) {
     background: theme.$layer !important; /* stylelint-disable-line declaration-no-important */
-    box-shadow: 0 $spacing-01 $spacing-01 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 $spacing-01 $spacing-01 rgb(0, 0, 0, 0.2);
   }
 }
 
