@@ -69,7 +69,7 @@ const selectionFeedbackOptions = {
 };
 
 const args = {
-  'auto-align': false,
+  autoalign: false,
   defaultWidth: 400,
   clearSelectionLabel: 'Clear all selected items',
   clearSelectionDescription: 'Total items selected: ',
@@ -98,7 +98,7 @@ const filterableArgs = {
 };
 
 const argTypes = {
-  'auto-align': {
+  autoalign: {
     control: 'boolean',
     description:
       'Will auto-align the multi-select to avoid viewport collisions.',
@@ -158,7 +158,7 @@ const argTypes = {
   },
   size: {
     control: 'select',
-    options: ['sm', 'md', 'lg'],
+    options: ['xs', 'sm', 'md', 'lg'],
     description: 'Specify the size of the multi-select.',
   },
   readOnly: {
@@ -193,7 +193,7 @@ export const Default = {
   argTypes,
   render: (args) => {
     const {
-      'auto-align': autoAlign,
+      autoalign,
       clearSelectionLabel,
       clearSelectionDescription,
       clearSelectionText,
@@ -216,7 +216,7 @@ export const Default = {
     return html`
       <div style="width:${defaultWidth}px">
         <cds-fluid-multi-select
-          ?auto-align=${autoAlign}
+          ?autoalign=${autoalign}
           direction=${ifDefined(direction)}
           ?disabled=${disabled}
           ?invalid=${invalid}
@@ -267,7 +267,7 @@ export const Condensed = {
   },
   render: (args) => {
     const {
-      'auto-align': autoAlign,
+      autoalign,
       clearSelectionLabel,
       clearSelectionDescription,
       clearSelectionText,
@@ -291,7 +291,7 @@ export const Condensed = {
     return html`
       <div style="width:${defaultWidth}px">
         <cds-fluid-multi-select
-          ?auto-align=${autoAlign}
+          ?autoalign=${autoalign}
           direction=${ifDefined(direction)}
           ?is-condensed="${isCondensed}"
           ?disabled=${disabled}
@@ -333,7 +333,7 @@ export const Filterable = {
   argTypes,
   render: (args) => {
     const {
-      'auto-align': autoAlign,
+      autoalign,
       clearSelectionLabel,
       clearSelectionDescription,
       clearSelectionText,
@@ -356,7 +356,7 @@ export const Filterable = {
     return html`
       <div style="width:${defaultWidth}px">
         <cds-fluid-multi-select
-          ?auto-align=${autoAlign}
+          ?autoalign=${autoalign}
           direction=${ifDefined(direction)}
           filterable="true"
           ?is-condensed="${isCondensed}"
@@ -403,7 +403,7 @@ export const FilterableWithLayer = {
   argTypes,
   render: (args) => {
     const {
-      'auto-align': autoAlign,
+      autoalign,
       clearSelectionLabel,
       clearSelectionDescription,
       clearSelectionText,
@@ -426,7 +426,7 @@ export const FilterableWithLayer = {
     return html`
       <div style="width:${defaultWidth}px">
         <cds-fluid-multi-select
-          ?auto-align=${autoAlign}
+          ?autoalign=${autoalign}
           direction=${ifDefined(direction)}
           ?disabled=${disabled}
           ?is-condensed=${isCondensed}
@@ -489,7 +489,7 @@ export const WithAILabel = {
   },
   render: (args) => {
     const {
-      'auto-align': autoAlign,
+      autoalign,
       clearSelectionDescription,
       clearSelectionLabel,
       clearSelectionText,
@@ -512,7 +512,7 @@ export const WithAILabel = {
 
     return html` <div style="width:${defaultWidth}px;">
       <cds-fluid-multi-select
-        ?auto-align=${autoAlign}
+        ?autoalign=${autoalign}
         clear-selection-description=${ifDefined(clearSelectionDescription)}
         clear-selection-label=${ifDefined(clearSelectionLabel)}
         clear-selection-text=${ifDefined(clearSelectionText)}
