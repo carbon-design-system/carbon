@@ -252,7 +252,7 @@ jobs:
       # Cap concurrency to keep runners from going OOM
       - name: Run e2e tests
         if: ${{ steps.filter.outputs.e2e == 'true' }}
-        run: yarn test:e2e --maxWorkers=2
+        run: yarn test:e2e --maxWorkers=2 --workerIdleMemoryLimit=2048MB
 
   avt-build:
     runs-on: ubuntu-latest
