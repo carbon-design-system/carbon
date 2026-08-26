@@ -14,7 +14,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/colors' as *;
 @use '@carbon/styles/scss/type';
-@use '@carbon/styles/scss/components/OptionsTile' as component-styles;
+@use '@carbon/styles/scss/components/options-tile' as component-styles;
 
 // Emit Carbon core options-tile class rules
 @include component-styles.options-tile;
