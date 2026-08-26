@@ -15,12 +15,13 @@ import { usePrefix } from '../../../src/internal/usePrefix';
 /**
  * Story-only dialog chrome for the surface demos.
  *
- * The overlay reuses the stock modal classes so the backdrop fade (and its
- * reduced-motion handling) comes from the existing Carbon CSS.
+ * Reuses stock modal class names for header/content/footer chrome. Overlay
+ * positioning and the backdrop live in `surfaces.stories.scss` under
+ * `motion-surface-demo__modal` so the demos stay self-contained in the v12
+ * Storybook (classic `.cds--modal` overlay styles are gated off there).
  *
- * For `contextual`, defaults to native CSS (data attributes + `surface`
- * mixin) unless `useMotion` is set. Shared-element surfaces (`expand`,
- * `invoke`) always use `MotionSurface`.
+ * Shared-element surfaces (`expand`, `invoke`) always use `MotionSurface`.
+ * Reveal surfaces can opt into native CSS via `useNativeCSS`.
  */
 export function DemoDialog({
   surface,
@@ -65,9 +66,9 @@ export function DemoDialog({
   return (
     <div
       role="presentation"
-      className={cx(`${prefix}--modal`, {
+      className={cx(`${prefix}--modal`, 'motion-surface-demo__modal', {
         'is-visible': open,
-        // Skip stock modal fade/slide so the CSS surface reveal can run
+        // Skip overlay fade so the CSS surface reveal can run alone
         'motion-surface-demo__modal--css': useNativeCSS,
       })}
       onClick={(event) => {

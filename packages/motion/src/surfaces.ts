@@ -13,17 +13,40 @@ import {
   type EasingName,
 } from './tokens';
 
-// easing curve token names
+// Built-in surface definitions are generated from src/dtcg/surfaces.json by
+// `yarn build:tokens` (tasks/build.js) and written to js/generated/surfaces.js
+// before this file is bundled. Run `yarn build` to regenerate them.
+//
+// The generated `getMotionSurface` looks up a built-in name and nothing else.
+// It is wrapped below so the same entry point also accepts a custom surface.
+import {
+  surfaces,
+  getMotionSurface as getBuiltInSurface,
+} from '../js/generated/surfaces.js';
+
+export { surfaces };
+
+// ── TypeScript types ─────────────────────────────────────────────────────────
+// Hand-authored here rather than generated because they describe the
+// Carbon-specific structure of a surface recipe and are referenced by consumers
+// who need to type-check against the surface API.
+
+/**
+ * Which easing curve to use, given as token names rather than raw values.
+ *
+ * The parts are named instead of ordered. As a plain two item list this was
+ * both harder to read — nothing told you what the second slot was for — and
+ * easy to break: reformatting a hand-written Sass `(entrance expressive)` into
+ * `(entrance expressive,)` quietly turns it into a list of one. Naming the
+ * parts fixes both. A map means the same thing however it is formatted.
+ */
 interface MotionEasing {
   name: EasingName;
   mode: EasingMode;
 }
 
-/**
- * from/to styles for reveal surface - plain CSS property/value pairs
- * keep values engine-neutral so CSS, WAAPI, and Motion can all consume
- * them
- */
+// from/to styles for reveal surface - plain CSS property/value pairs
+// keep values engine-neutral so CSS, WAAPI, and Motion can all consume them
 type RevealKeyframe = Record<string, string | number>;
 
 interface MotionSurfaceBase {
@@ -54,52 +77,6 @@ interface SharedElementSurface extends MotionSurfaceBase {
 
 export type MotionSurfaceDefinition = SharedElementSurface | RevealSurface;
 
-/**
- * Named motion intents. These definitions are engine and framework agnostic.
- *
- * `prefers-reduced-motion` is intentionally not represented here: surfaces
- * never animate when the users request reduced motion. Framework adapters
- * bail before running, and the Sass output is wrapped in a
- * `prefers-reduced-motion: no-preference` media query
- */
-export const surfaces = {
-  // Accordion, table-row expand - reveal in place
-  disclosure: {
-    kind: 'reveal',
-    duration: 'moderate-01',
-    enter: { blockSize: 'auto', opacity: 1 },
-    exit: { blockSize: 0, opacity: 0 },
-    enterEasing: { name: 'entrance', mode: 'productive' },
-    exitEasing: { name: 'exit', mode: 'productive' },
-  },
-  // Icon > tooltip/popover
-  contextual: {
-    kind: 'reveal',
-    duration: 'fast-02',
-    enter: { opacity: 1, transform: 'scale(1)' },
-    exit: { opacity: 0, transform: 'scale(0.96)' },
-    enterEasing: { name: 'entrance', mode: 'expressive' },
-    exitEasing: { name: 'exit', mode: 'expressive' },
-  },
-  // Card/tile > side-panel/tearsheet
-  expand: {
-    kind: 'shared-element',
-    duration: 'moderate-02',
-    enter: { opacity: 1, transform: 'scale(1)' },
-    exit: { opacity: 0, transform: 'scale(0.96)' },
-    enterEasing: { name: 'standard', mode: 'productive' },
-    exitEasing: { name: 'standard', mode: 'productive' },
-  },
-  // Button > modal/menu/popover - morphs from the trigger
-  invoke: {
-    kind: 'shared-element',
-    origin: 'trigger',
-    duration: 'moderate-02',
-    enterEasing: { name: 'standard', mode: 'expressive' },
-    exitEasing: { name: 'standard', mode: 'expressive' },
-  },
-} as const satisfies Record<string, MotionSurfaceDefinition>;
-
 export type MotionSurfaceName = keyof typeof surfaces;
 
 /**
@@ -115,8 +92,8 @@ const isSurfaceDefinition = (
 ): surface is MotionSurfaceDefinition => typeof surface === 'object';
 
 /**
- * Name a surface for error messages, so a mistake in an inline definition is
- * not reported as a problem with a catalog name.
+ * Name a surface for error messages, so a mistake in a custom surface is not
+ * reported as a problem with a built-in name.
  */
 export const describeSurface = (surface: MotionSurfaceInput) =>
   isSurfaceDefinition(surface) ? 'custom surface' : `\`${surface}\` surface`;
@@ -128,12 +105,11 @@ const isKeyframe = (value: unknown) =>
  * Assert that a definition carries every key its `kind` requires, with values
  * the token system recognizes.
  *
- * Catalog entries are generated and so are always well formed, but inline
- * definitions are user-defined and several mistakes are otherwise silent: a
- * reveal missing `enter` resolves to an empty keyframe and animates nothing,
- * and a missing `kind` falls through to the shared-element path. Token names
- * are checked by `resolveDuration`/`resolveEasing`, which raise their own
- * errors.
+ * Built-in surfaces are generated and so are always well formed, but custom
+ * surfaces are user-defined and several mistakes are otherwise silent: a reveal
+ * missing `enter` resolves to an empty keyframe and animates nothing, and a
+ * missing `kind` falls through to the shared-element path. Token names are
+ * checked by `resolveDuration`/`resolveEasing`, which raise their own errors.
  */
 const validateSurface = (
   definition: MotionSurfaceDefinition,
@@ -203,8 +179,8 @@ export const defineMotionSurface = <T extends MotionSurfaceDefinition>(
 ): T => validateSurface(definition, 'custom surface') as T;
 
 /**
- * Resolve a surface to its definition. A name is looked up in the shared
- * catalog; an inline definition is validated and passed through.
+ * Resolve a surface to its definition. A built-in name is looked up in the
+ * generated catalog; a custom surface is validated and passed through.
  */
 export function getMotionSurface(
   surface: MotionSurfaceInput
@@ -213,14 +189,6 @@ export function getMotionSurface(
     return validateSurface(surface, describeSurface(surface));
   }
 
-  const definition: MotionSurfaceDefinition | undefined = surfaces[surface];
-
-  if (!definition) {
-    throw new Error(
-      `Unable to find motion surface \`${surface}\`. Expected one of: ` +
-        Object.keys(surfaces).join(', ')
-    );
-  }
-
-  return definition;
+  // the generated lookup raises its own error listing the built-in names
+  return getBuiltInSurface(surface) as MotionSurfaceDefinition;
 }
