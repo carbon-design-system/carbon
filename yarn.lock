@@ -2815,6 +2815,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@csstools/css-calc@npm:^3.2.1":
+  version: 3.3.0
+  resolution: "@csstools/css-calc@npm:3.3.0"
+  peerDependencies:
+    "@csstools/css-parser-algorithms": ^4.0.0
+    "@csstools/css-tokenizer": ^4.0.0
+  checksum: 10/46dde1c26c8a62d7b849a616a521cb97abc2d6c8c480f7be6f14c70fe60689a2a58c1f5f905aae237250ad27172968e10c70f6f83864c7dc48d8f8921f55f6a9
+  languageName: node
+  linkType: hard
+
 "@csstools/css-color-parser@npm:^3.0.9":
   version: 3.0.10
   resolution: "@csstools/css-color-parser@npm:3.0.10"
@@ -2855,6 +2865,18 @@ __metadata:
     css-tree:
       optional: true
   checksum: 10/1c91dc03b64ca913eed5064ca0e434da1c0be8def6ce20f932d1db10f9b478ac3830c99a033b0edf75954cf9164c7c267b220ed9faffbc3342bf320870c3bb4b
+  languageName: node
+  linkType: hard
+
+"@csstools/css-syntax-patches-for-csstree@npm:^1.1.4":
+  version: 1.1.9
+  resolution: "@csstools/css-syntax-patches-for-csstree@npm:1.1.9"
+  peerDependencies:
+    css-tree: ^3.2.1
+  peerDependenciesMeta:
+    css-tree:
+      optional: true
+  checksum: 10/1b7f280a9d0cf1460e373a252157230932b54853789f885822ac4684e3ead7214f62a47f591c3f8196e2434cbf45702351c5f628f75643a3c8be484975fc4bfd
   languageName: node
   linkType: hard
 
@@ -16132,6 +16154,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"known-css-properties@npm:^0.37.0":
+  version: 0.37.0
+  resolution: "known-css-properties@npm:0.37.0"
+  checksum: 10/9bddf2eb980f707567e3fbf8f2daaca27f5d544f4a49eab26d696ae33f54410f82f0a3032097b083d9e889e285586696c7b4324e6393103e7d71a46ca4438bfd
+  languageName: node
+  linkType: hard
+
 "koa-compose@npm:^4.1.0":
   version: 4.1.0
   resolution: "koa-compose@npm:4.1.0"
@@ -22116,7 +22145,7 @@ __metadata:
     stylelint-no-unsupported-browser-features: "npm:^8.0.4"
     stylelint-order: "npm:^6.0.0"
     stylelint-prettier: "npm:^5.0.0"
-    stylelint-scss: "npm:^6.2.1"
+    stylelint-scss: "npm:^7.0.0"
     stylelint-use-logical: "npm:^2.1.0"
   peerDependencies:
     stylelint: ^17.0.0
@@ -22235,7 +22264,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint-scss@npm:^6.2.1, stylelint-scss@npm:^6.4.0":
+"stylelint-scss@npm:^6.4.0":
   version: 6.8.0
   resolution: "stylelint-scss@npm:6.8.0"
   dependencies:
@@ -22250,6 +22279,27 @@ __metadata:
   peerDependencies:
     stylelint: ^16.0.2
   checksum: 10/95f099e1465ffd18e237114766b4afcd0aefa9d351dddc51dd212590c1ef4ac061831caad0649372f6780d6296884519689104f704d4264c8d39dc74cb123819
+  languageName: node
+  linkType: hard
+
+"stylelint-scss@npm:^7.0.0":
+  version: 7.2.0
+  resolution: "stylelint-scss@npm:7.2.0"
+  dependencies:
+    "@csstools/css-calc": "npm:^3.2.1"
+    "@csstools/css-parser-algorithms": "npm:^4.0.0"
+    "@csstools/css-syntax-patches-for-csstree": "npm:^1.1.4"
+    "@csstools/css-tokenizer": "npm:^4.0.0"
+    css-tree: "npm:^3.2.1"
+    is-plain-object: "npm:^5.0.0"
+    known-css-properties: "npm:^0.37.0"
+    postcss-media-query-parser: "npm:^0.2.3"
+    postcss-resolve-nested-selector: "npm:^0.1.6"
+    postcss-selector-parser: "npm:^7.1.1"
+    postcss-value-parser: "npm:^4.2.0"
+  peerDependencies:
+    stylelint: ^16.8.2 || ^17.0.0
+  checksum: 10/7ed4ec71c1d1faa708e7840de1b5255e12bf4cdae21e3ca3bddfdfddd339facad7e063b622f48a39cdc9affc3ca44507d1d3f1bcf4405240a9ed5fae39b45e4b
   languageName: node
   linkType: hard
 

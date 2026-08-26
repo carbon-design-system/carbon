@@ -36,7 +36,7 @@
     "stylelint-no-unsupported-browser-features": "^8.0.4",
     "stylelint-order": "^6.0.0",
     "stylelint-prettier": "^5.0.0",
-    "stylelint-scss": "^6.2.1",
+    "stylelint-scss": "^7.0.0",
     "stylelint-use-logical": "^2.1.0"
   },
   "devDependencies": {
