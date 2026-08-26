@@ -249,10 +249,9 @@ jobs:
           --scope='@carbon/icons-react' --scope='@carbon/icons-vue'
           --scope='@carbon/pictograms' --scope='@carbon/pictograms-react'
           --include-dependencies
-      # Cap concurrency to keep runners from going OOM
       - name: Run e2e tests
         if: ${{ steps.filter.outputs.e2e == 'true' }}
-        run: yarn test:e2e --maxWorkers=2
+        run: yarn test:e2e
 
   avt-build:
     runs-on: ubuntu-latest
