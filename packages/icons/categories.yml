@@ -427,6 +427,7 @@ categories:
           - fade
           - filter
           - filter--edit
+          - filter--filled
           - filter--remove
           - filter--reset
           - flag
@@ -586,6 +587,7 @@ categories:
           - light--filled
           - list
           - locked
+          - locked--filled
           - microphone
           - microphone--filled
           - microphone--off
@@ -635,6 +637,7 @@ categories:
           - trophy
           - trophy--filled
           - unlocked
+          - unlocked--filled
           - video
           - video--filled
           - video--off
@@ -651,14 +654,17 @@ categories:
         members:
           - logo--angular
           - logo--ansible-community
+          - logo--astradb
           - logo--figma
           - logo--gitlab
           - logo--invision
           - logo--jupyter
           - logo--keybase
           - logo--kubernetes
+          - logo--milvus
           - logo--model-context-protocol
           - logo--npm
+          - logo--opensearch
           - logo--openshift
           - logo--python
           - logo--r-script
@@ -720,9 +726,9 @@ categories:
     subcategories:
       - name: AI
         members:
-          - agent-detached
           - AI
-          - ai-agent-invocation
+          - ai-agent
+          - ai-agent-detached
           - ai-business-impact-assessment
           - AI-enabled-EDT
           - AI-enabled-PDLC
@@ -735,6 +741,7 @@ categories:
           - ai-recommend
           - ai--observability
           - business-metrics
+          - ibm--engineering-ai-hub
           - ibm--granite
           - ibm-watson--discovery
           - ibm-watson--orders
@@ -767,6 +774,7 @@ categories:
         members:
           - ai-financial-sustainability-check
           - autoscaling
+          - binding--connector
           - block-storage
           - object-storage
           - cics--explorer
@@ -837,6 +845,7 @@ categories:
           - ibm--event-streams
           - ibm--gcm
           - ibm--global-storage-architecture
+          - ibm--i
           - ibm--ibv
           - ibm--instana
           - ibm--jrs
@@ -982,13 +991,23 @@ categories:
           - ibm-z-os--package-manager
           - infrastructure--classic
           - load-balancer--vpc
+          - metadata--definition
+          - metadata--definition--semantic
+          - metadata--usage
           - mysql
+          - package--library
+          - parameter--action
           - portfolio--management
           - power-enterprise-pools-metered-capacity-integration
           - power-virtual-server-disaster-recovery-automation
           - red-hat-ai-instructlab-on-ibm-cloud
+          - representation--textual
           - scis--control-tower
           - scis--transparent-supply
+          - state--definition
+          - state--exhibit
+          - use-case--include
+          - view--definition
           - virtual-private-cloud--alt
           - vlan--ibm
       - name: Commerce
@@ -1453,8 +1472,11 @@ categories:
           - execution-history
           - factor
           - flow
+          - flow--branch
+          - flow--conditional
           - flow--connection
           - flow--data
+          - flow--merge
           - flow--modeler
           - flow--modeler--reference
           - flow--sequence
@@ -1802,6 +1824,7 @@ categories:
           - task--settings
           - task--star
           - task--tools
+          - task--user
           - task--view
           - template
           - ticket
@@ -1833,6 +1856,7 @@ categories:
           - caution
           - caution-inverted
           - checkmark
+          - checkmark--double
           - checkmark--filled
           - checkmark--filled--error
           - checkmark--filled--warning
@@ -2343,6 +2367,10 @@ categories:
           - direction--loop-right--filled
           - direction--merge
           - direction--merge--filled
+          - direction--merge-left
+          - direction--merge-left--filled
+          - direction--merge-right
+          - direction--merge-right--filled
           - direction--right--01
           - direction--right--01--filled
           - direction--right--02
