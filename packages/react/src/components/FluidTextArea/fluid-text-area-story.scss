@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/spacing' as *;
 
 .fluid-text-area-story {
   position: relative;
@@ -14,6 +14,6 @@
 .fluid-text-area-story__toggletip {
   position: absolute;
   z-index: 2;
-  inset-block-start: 0.8125rem;
-  inset-inline-start: calc(6.75rem + spacing.$spacing-03);
+  inset-block-start: $spacing-04;
+  inset-inline-start: calc(6.75rem + $spacing-03);
 }
