@@ -40,12 +40,12 @@ const args = {
   alignmentAxisOffset: 0,
   autoalign: false,
   bodyText:
-    'Your available balance reflects completed transactions and may not include pending activity.',
-  buttonLabel: 'Show account balance details',
-  buttonText: 'View balance',
+    'Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.',
+  buttonLabel: 'Show information',
+  buttonText: 'Button',
   defaultOpen: false,
-  labelText: 'Account balance',
-  linkText: 'Learn more',
+  labelText: 'Toggletip label',
+  linkText: 'Link action',
 };
 
 const argTypes = {
@@ -149,11 +149,8 @@ export const ExperimentalAutoAlign = {
     ...args,
     autoalign: true,
     bodyText:
-      'Scroll the container to observe how the toggletip automatically changes position to stay within the viewport.',
-    buttonLabel: 'Show auto-alignment details',
-    buttonText: 'View details',
+      'Scroll the container up, down, left or right to observe how the Toggletip will automatically change its position in attempt to stay within the viewport. This works on initial render in addition to on scroll.',
     defaultOpen: true,
-    labelText: 'Automatic alignment',
   },
   render: ({
     alignment,

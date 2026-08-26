@@ -22,12 +22,12 @@ import { WithFeatureFlags } from '../../../.storybook/templates/WithFeatureFlags
 const args = {
   align: 'bottom',
   bodyText:
-    'Scroll the container to observe how the toggletip automatically changes position to stay within the viewport.',
-  buttonLabel: 'Show auto-alignment details',
-  buttonText: 'View details',
+    'Scroll the container up, down, left or right to observe how the Toggletip will automatically change its position in attempt to stay within the viewport. This works on initial render in addition to on scroll.',
+  buttonLabel: 'Show information',
+  buttonText: 'Button',
   defaultOpen: true,
-  labelText: 'Automatic alignment',
-  linkText: 'Learn more',
+  labelText: 'Toggletip label',
+  linkText: 'Link action',
 };
 
 // eslint-disable-next-line storybook/csf-component
