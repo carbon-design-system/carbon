@@ -29,6 +29,26 @@
 /// @access public
 /// @group date-picker
 
+@position-try --bottom-left {
+  inset-area: block-end span-inline-start;
+  margin-block-start: $spacing-02;
+}
+
+@position-try --top-left {
+  inset-area: block-start span-inline-start;
+  margin-block-end: $spacing-02;
+}
+
+@position-try --bottom-right {
+  inset-area: block-end span-inline-end;
+  margin-block-start: $spacing-02;
+}
+
+@position-try --top-right {
+  inset-area: block-start span-inline-end;
+  margin-block-end: $spacing-02;
+}
+
 @mixin date-picker-next-rules {
   // Input wrapper needs relative positioning for icon placement
   .#{$prefix}--date-picker-input__wrapper {
@@ -99,26 +119,6 @@
 
     // Handle viewport overflow
     position-try-options: --bottom-left, --top-left, --bottom-right, --top-right;
-
-    @position-try --bottom-left {
-      inset-area: block-end span-inline-start;
-      margin-block-start: $spacing-02;
-    }
-
-    @position-try --top-left {
-      inset-area: block-start span-inline-start;
-      margin-block-end: $spacing-02;
-    }
-
-    @position-try --bottom-right {
-      inset-area: block-end span-inline-end;
-      margin-block-start: $spacing-02;
-    }
-
-    @position-try --top-right {
-      inset-area: block-start span-inline-end;
-      margin-block-end: $spacing-02;
-    }
   }
 
   .#{$prefix}--date-picker__calendar.open {

@@ -29,7 +29,7 @@ import { match, keys } from '../../internal/keyboard';
 import { isComponentElement } from '../../internal';
 import { usePrefix } from '../../internal/usePrefix';
 import { useSavedCallback } from '../../internal/useSavedCallback';
-import {
+import type {
   DateLimit,
   DateOption,
   Options as FlatpickrOptions,
