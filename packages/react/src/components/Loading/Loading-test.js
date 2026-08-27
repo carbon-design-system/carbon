@@ -65,7 +65,7 @@ describe('Loading', () => {
       render(<Loading withOverlay />);
 
       const dialog = screen.getByRole('dialog');
-      expect(dialog).toHaveAttribute('aria-modal', 'true');
+      expect(dialog).not.toHaveAttribute('aria-modal');
       expect(screen.getByRole('presentation')).toContainElement(dialog);
     });
 
@@ -223,6 +223,7 @@ describe('Loading', () => {
       );
 
       const overlayDialog = screen.getByRole('dialog', { name: 'loading' });
+      expect(overlayDialog).not.toHaveAttribute('aria-modal');
 
       await waitFor(() => {
         expect(document.activeElement).toBe(overlayDialog);
