@@ -42,6 +42,7 @@
 
     @if enabled('enable-v12-release') {
       padding: $spacing-02;
+      border: 1px solid $border-subtle;
       border-radius: $border-radius-08;
     }
   }
@@ -231,5 +232,10 @@
     block-size: convert.to-rem(1px);
     inline-size: 100%;
     margin-block: $spacing-02;
+
+    @if enabled('enable-v12-release') {
+      inline-size: calc(100% + #{$spacing-02 * 2});
+      margin-inline: -$spacing-02;
+    }
   }
 }
