@@ -1,0 +1,112 @@
+import { ArgTypes, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import NotificationPanelStories from './notification-panel.stories';
+
+<Meta of={NotificationPanelStories} />
+
+# NotificationPanel
+
+The NotificationsPanel sets expectations on the behavior for notifications,
+allowing the user to view and interact with them all in one place.
+
+The component includes a composable footer section, exposed via the footer slot.
+Adopters can insert custom content into this slot and, if they choose to do so,
+are expected to provide the appropriate styles. Alternatively, the
+`cds-notification-footer` component can be used, which comes with built-in
+styling.
+
+In addition to the footer, the today and previous sections are also exposed as
+named slots, giving adopters more flexibility to control the content in those
+areas. These sections are intended to contain `cds-notification` components.
+Each `cds-notification` supports two named slots: title and description,
+allowing for further customization of the notification content.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/web-components/es/components/notification-panel/index.js';
+```
+
+### HTML
+
+```html
+<cds-notification-panel
+  .triggerButtonRef="${triggerButton}"
+  .open="${openPanel}"
+  title-text="${args.titleText}"
+  today-text="${args.todayText}"
+  previous-text="${args.previousText}"
+  dismiss-all-label="${args.dismissAllLabel}"
+  donot-disturb-label="${args.doNotDisturbLabel}"
+  date-time-locale="${args.dateTimeLocale}"
+  @cds-notification-dismiss-all="${dismissAllNotification}"
+  @cds-notification-click-outside="${clickOutside}">
+  ${dataToday.length > 0 ? html` ${dataToday.map((item) => { return html`
+  <cds-notification
+    slot="today"
+    .open="${args.open}"
+    @cds-notification-click="${item.onNotificationClick}"
+    @cds-notification-dismiss="${()"
+    ="">
+    { notificationSingleDismiss(item.id, 'today'); }} type=${item.type}
+    ?unread=${item.unread} .timestamp=${item.timestamp} >
+    <cds-heading
+      class="${classMap({"
+      [`${blockClassNotification}-title`]:
+      true,
+      [`${blockClassNotification}-title-unread`]:
+      item.unread,
+      })}
+      slot="title">
+      ${item.title}
+    </cds-heading>
+    <div slot="description">${item.description}</div>
+  </cds-notification>
+  `; })} ` : ''} ${dataPrevious.length > 0 ? html` ${dataPrevious.map((item) =>
+  { return html`
+  <cds-notification
+    slot="previous"
+    @cds-notification-click="${item.onNotificationClick}"
+    @cds-notification-dismiss="${()"
+    ="">
+    { notificationSingleDismiss(item.id, 'previous'); }} type=${item.type}
+    ?unread=${item.unread} .timestamp=${item.timestamp} >
+    <cds-heading
+      class="${classMap({"
+      [`${blockClassNotification}-title`]:
+      true,
+      [`${blockClassNotification}-title-unread`]:
+      item.unread,
+      })}
+      slot="title">
+      ${item.title}
+    </cds-heading>
+    <div slot="description">${item.description}</div>
+  </cds-notification>
+  `; })} ` : ''}
+  <cds-notification-footer
+    slot="footer"
+    view-all-label="View all (${dataToday.length + dataPrevious.length})"
+    @cds-notification-view-all="${action(`Clicked"
+    View
+    All`)}
+    @cds-notification-settings="${action(`Clicked"
+    Settings`)}></cds-notification-footer>
+</cds-notification-panel>
+```
+
+## `<cds-notification-panel>` attributes, properties, events and slots.
+
+<ArgTypes of="cds-notification-panel" />
+
+## `<cds-notification>` attributes, properties, events and slots.
+
+<ArgTypes of="cds-notification" />
+
+## `<cds-notification-footer>` attributes, properties, events and slots.
+
+<ArgTypes of="cds-notification-footer" />
