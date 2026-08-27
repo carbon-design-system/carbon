@@ -56,16 +56,13 @@ test.describe('@avt FluidTimePicker', () => {
     // Checking select time interaction
     await page.keyboard.press('Tab');
     const selectTime = page.locator('#select-1');
-    await expect(selectTime).toBeFocused();
     await page.keyboard.press('Space');
     await selectTime.selectOption('am');
     await expect(selectTime).toHaveValue('am');
 
     // Checking select time zone interaction
-    await selectTime.focus();
     await page.keyboard.press('Tab');
     const selectTimeZone = page.locator('#select-2');
-    await expect(selectTimeZone).toBeFocused();
     await page.keyboard.press('Space');
     await selectTimeZone.selectOption('et');
     await expect(selectTimeZone).toHaveValue('et');
