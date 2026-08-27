@@ -348,6 +348,10 @@
     svg {
       fill: $icon-primary;
     }
+
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-04;
+    }
   }
 
   .#{$prefix}--date-picker__current-month {
@@ -455,6 +459,10 @@
       background-color: $layer-hover;
       outline: 2px solid $focus;
       outline-offset: -2px;
+    }
+
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-04;
     }
   }
 }
