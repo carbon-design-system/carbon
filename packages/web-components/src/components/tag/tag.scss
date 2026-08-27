@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2024
+// Copyright IBM Corp. 2019, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -203,10 +203,6 @@ $css--plex: true !default;
   outline-offset: -1px;
 }
 
-:host(#{$prefix}-tag[disabled]) {
-  @extend .#{$prefix}--tag--disabled;
-}
-
 :host(#{$prefix}-tag[filter]) {
   @extend .#{$prefix}--tag--filter;
 
@@ -257,7 +253,7 @@ $css--plex: true !default;
 
 :host(#{$prefix}-dismissible-tag[disabled]),
 :host(#{$prefix}-tag[disabled]) {
-  @extend .#{$prefix}--tag--disabled;
+  @include tag-theme($layer, $text-disabled);
 }
 
 // Skeleton state
