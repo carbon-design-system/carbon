@@ -194,3 +194,4 @@ export { default as CDSLayoutConstraint } from './components/layout/layout-const
 // export { default as CDSTruncatedText } from './components/truncated-text/truncated-text';
 // export { default as CDSActionSet } from './components/action-set/action-set';
 // export { default as CDSSidePanel } from './components/side-panel/side-panel';
+// export { default as CDSBigNumber } from './components/big-number/big-number';
