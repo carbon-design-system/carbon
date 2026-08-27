@@ -103,6 +103,11 @@ const meta = {
       control: { type: 'boolean' },
       description: 'Truncate the title text with an ellipsis when it overflows',
     },
+    actionCount: {
+      control: { type: 'number', min: 0, max: 10, step: 1 },
+      description:
+        'Number of icon-button actions in the card header (0 = no actions). Demonstrates overflow when actions exceed available space.',
+    },
   },
   args: {
     density: 'productive',
@@ -114,6 +119,7 @@ const meta = {
     description: '',
     bodyText: 'Use the controls panel to customise this card.',
     titleTruncate: false,
+    actionCount: 0,
   },
 };
 
@@ -131,7 +137,22 @@ const readonlyArgTypes = {
   description: { control: false },
   bodyText: { control: false },
   titleTruncate: { control: false },
+  actionCount: { control: false },
 };
+
+// Icons cycled through when actionCount > 0 in the Default story.
+const _defaultActionIcons = [
+  { icon: Edit16, label: 'Edit' },
+  { icon: Share16, label: 'Share' },
+  { icon: Download16, label: 'Download' },
+  { icon: Favorite16, label: 'Favorite' },
+  { icon: Copy16, label: 'Copy' },
+  { icon: Settings16, label: 'Settings' },
+  { icon: Analytics16, label: 'Analytics' },
+  { icon: Notification16, label: 'Notification' },
+  { icon: View16, label: 'View' },
+  { icon: TrashCan16, label: 'Delete' },
+];
 
 // ─── Stories ──────────────────────────────────────────────────────────────────
 
@@ -142,6 +163,7 @@ export const Default = {
     description,
     bodyText,
     titleTruncate,
+    actionCount,
     ...cardArgs
   }) => html`
     <style>
@@ -165,6 +187,22 @@ export const Default = {
               ?title-truncate=${titleTruncate}>
               ${title}
             </cds-card-title>
+            ${actionCount > 0
+              ? html`
+                  <cds-card-actions>
+                    ${_defaultActionIcons.slice(0, actionCount).map(
+                      ({ icon, label: actionLabel }) => html`
+                        <cds-card-action label=${actionLabel}>
+                          <cds-icon-button kind="ghost" size="sm">
+                            ${iconLoader(icon, { slot: 'icon' })}
+                            <span slot="tooltip-content">${actionLabel}</span>
+                          </cds-icon-button>
+                        </cds-card-action>
+                      `
+                    )}
+                  </cds-card-actions>
+                `
+              : ''}
           </cds-card-header>
           <cds-card-body>${bodyText}</cds-card-body>
         </cds-card>
