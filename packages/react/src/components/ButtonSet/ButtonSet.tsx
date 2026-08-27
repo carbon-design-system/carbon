@@ -71,13 +71,19 @@ const ButtonSet = forwardRef<HTMLDivElement, ButtonSetProps>((props, ref) => {
       return newIsStacked;
     };
 
-    /* initial value not dependant on observer */
-    setIsStacked(checkStacking());
+    // React 19: setIsStacked called synchronously inside useIsomorphicEffect
+    // (= useLayoutEffect in browser) causes setState during commit → crash.
+    // Capture the value eagerly (DOM must be read synchronously) then defer
+    // the setState call past the commit boundary via queueMicrotask.
+    const initialIsStacked = checkStacking();
+    queueMicrotask(() => setIsStacked(initialIsStacked));
 
     if (!fluidInnerRef.current) {
       return;
     }
 
+    // ResizeObserver callback fires outside the commit phase — safe to call
+    // setIsStacked synchronously here.
     const resizeObserver = new ResizeObserver(() => {
       setIsStacked(checkStacking());
     });
@@ -95,7 +101,11 @@ const ButtonSet = forwardRef<HTMLDivElement, ButtonSetProps>((props, ref) => {
         (isStacked ? -1 : 1)
       );
     });
-    setSortedChildren(newSortedChildren);
+    // React 19: setSortedChildren inside useEffect can fire inside
+    // flushPassiveEffects → flushSpawnedWork during a flushSync call,
+    // incrementing nestedUpdateCount → crash.
+    // Defer past the current flush via queueMicrotask.
+    queueMicrotask(() => setSortedChildren(newSortedChildren));
 
     // adding sortedChildren to deps causes an infinite loop
   }, [children, isStacked]);
