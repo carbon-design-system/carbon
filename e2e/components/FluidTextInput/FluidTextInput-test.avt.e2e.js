@@ -88,10 +88,6 @@ test.describe('@avt FluidTextInput', () => {
     const input = page.getByRole('textbox');
     await expect(input).toBeVisible();
 
-    // Check the focus
-    await page.keyboard.press('Tab');
-    await expect(input).toBeFocused();
-
     // Check toggletip visibility
     await page.keyboard.press('Tab');
     await expect(page.getByLabel('Show information')).toBeFocused();
@@ -100,8 +96,11 @@ test.describe('@avt FluidTextInput', () => {
       page.getByText('Additional field information here.')
     ).toBeVisible();
 
+    // Check the focus
+    await page.keyboard.press('Tab');
+    await expect(input).toBeFocused();
+
     // Check input interaction
-    await input.focus();
     await input.fill('Text');
     await expect(input).toHaveValue('Text');
     await page.keyboard.press('Backspace');

@@ -60,6 +60,16 @@ test.describe('@avt FluidNumberInput', () => {
     await expect(input).toBeVisible();
     await expect(input).toHaveValue('50');
 
+    // Focus on label additional information
+    await page.keyboard.press('Tab');
+    await expect(
+      page.getByRole('button', { name: 'Show information' }).first()
+    ).toBeFocused();
+    await page.keyboard.press('Enter');
+    await expect(
+      page.getByText('Additional field information here.').first()
+    ).toBeVisible();
+
     // Tab to the NumberInput and receive focus
     await page.keyboard.press('Tab');
     await expect(input).toBeFocused();
@@ -90,15 +100,5 @@ test.describe('@avt FluidNumberInput', () => {
     await input.fill('-1');
     await expect(input).toHaveValue('-1');
     await expect(input).toHaveAttribute('data-invalid', 'true');
-
-    // Focus on label additional information
-    await page.keyboard.press('Tab');
-    await expect(
-      page.getByRole('button', { name: 'Show information' }).first()
-    ).toBeFocused();
-    await page.keyboard.press('Enter');
-    await expect(
-      page.getByText('Additional field information here.').first()
-    ).toBeVisible();
   });
 });

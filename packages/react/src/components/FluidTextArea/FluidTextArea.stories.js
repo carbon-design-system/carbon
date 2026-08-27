@@ -177,6 +177,7 @@ DefaultWithLayers.argTypes = {
 };
 
 const LabelToggletip = () => (
+  // Keep the toggletip outside `labelText`; interactive content is invalid in labels.
   <span className="fluid-text-area-story__toggletip">
     <Toggletip align="top-left">
       <ToggletipButton label="Show information">
@@ -191,8 +192,8 @@ const LabelToggletip = () => (
 
 export const DefaultWithToggletip = ({ defaultWidth, ...textAreaArgs }) => (
   <div className="fluid-text-area-story" style={{ width: defaultWidth }}>
-    <FluidTextArea {...textAreaArgs} labelText="Text Area label" />
     <LabelToggletip />
+    <FluidTextArea {...textAreaArgs} labelText="Text Area label" />
   </div>
 );
 

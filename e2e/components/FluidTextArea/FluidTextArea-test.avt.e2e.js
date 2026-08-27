@@ -90,11 +90,6 @@ test.describe('@avt FluidTextArea', () => {
     });
     await expect(page.getByText('Text Area label')).toBeVisible();
 
-    // Checking focus on textarea
-    const textArea = page.getByRole('textbox');
-    await page.keyboard.press('Tab');
-    await expect(textArea).toBeFocused();
-
     // Checking toggletip
     await page.keyboard.press('Tab');
     await expect(page.getByLabel('Show information')).toBeFocused();
@@ -103,8 +98,12 @@ test.describe('@avt FluidTextArea', () => {
       page.getByText('Additional field information here.')
     ).toBeVisible();
 
+    // Checking focus on textarea
+    const textArea = page.getByRole('textbox');
+    await page.keyboard.press('Tab');
+    await expect(textArea).toBeFocused();
+
     // Writting a word to check functionality
-    await textArea.focus();
     await textArea.fill('test');
     await expect(textArea).toHaveValue('test');
     await expect(page).toHaveNoACViolations('FluidTextArea with toggletip');

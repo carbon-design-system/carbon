@@ -37,6 +37,7 @@ export const Default = ({ defaultWidth, ...textInputArgs }) => (
 );
 
 const LabelToggletip = () => (
+  // Keep the toggletip outside `labelText`; interactive content is invalid in labels.
   <span className="fluid-text-input-story__toggletip">
     <Toggletip align="top-left">
       <ToggletipButton label="Show information">
@@ -120,8 +121,8 @@ Default.argTypes = {
 
 export const DefaultWithToggletip = () => (
   <div className="fluid-text-input-story">
-    <FluidTextInput labelText="Label" placeholder="Placeholder text" />
     <LabelToggletip />
+    <FluidTextInput labelText="Label" placeholder="Placeholder text" />
   </div>
 );
 

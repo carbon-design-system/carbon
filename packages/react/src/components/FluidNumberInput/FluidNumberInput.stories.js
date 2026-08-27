@@ -27,7 +27,7 @@ export default {
 
 export const Default = ({ defaultWidth, ...numberInputArgs }) => (
   <div className="fluid-number-input-story" style={{ width: defaultWidth }}>
-    <FluidNumberInput {...numberInputArgs} />
+    {/* Keep the toggletip outside `label`; interactive content is invalid in labels. */}
     <span className="fluid-number-input-story__toggletip">
       <Toggletip align="top-left">
         <ToggletipButton label="Show information">
@@ -38,6 +38,7 @@ export const Default = ({ defaultWidth, ...numberInputArgs }) => (
         </ToggletipContent>
       </Toggletip>
     </span>
+    <FluidNumberInput {...numberInputArgs} />
   </div>
 );
 

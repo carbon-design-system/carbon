@@ -30,6 +30,7 @@ export default {
 };
 
 const ClockToggletip = ({ className }) => (
+  // Keep the toggletip outside `labelText`; interactive content is invalid in labels.
   <span className={`fluid-time-picker-story__toggletip ${className}`}>
     <Toggletip align="top-left">
       <ToggletipButton label="Show information">

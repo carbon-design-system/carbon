@@ -105,13 +105,7 @@ const widthArgType = {
 
 export const Default = ({ defaultWidth, ...selectArgs }) => (
   <div className="fluid-select-story" style={{ width: defaultWidth }}>
-    <FluidSelect {...selectArgs} id="select-1">
-      <SelectItem value="" text="" />
-      <SelectItem value="option-1" text="Option 1" />
-      <SelectItem value="option-2" text="Option 2" />
-      <SelectItem value="option-3" text="Option 3" />
-      <SelectItem value="option-4" text="Option 4" />
-    </FluidSelect>
+    {/* Keep the toggletip outside `labelText`; interactive content is invalid in labels. */}
     <span className="fluid-select-story__toggletip">
       <Toggletip align="top-left">
         <ToggletipButton label="Show information">
@@ -122,6 +116,13 @@ export const Default = ({ defaultWidth, ...selectArgs }) => (
         </ToggletipContent>
       </Toggletip>
     </span>
+    <FluidSelect {...selectArgs} id="select-1">
+      <SelectItem value="" text="" />
+      <SelectItem value="option-1" text="Option 1" />
+      <SelectItem value="option-2" text="Option 2" />
+      <SelectItem value="option-3" text="Option 3" />
+      <SelectItem value="option-4" text="Option 4" />
+    </FluidSelect>
   </div>
 );
 

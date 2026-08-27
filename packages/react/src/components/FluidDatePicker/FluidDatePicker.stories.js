@@ -152,6 +152,7 @@ const sharedParameters = {
 };
 
 const LabelToggletip = () => (
+  // Keep the toggletip outside `labelText`; interactive content is invalid in labels.
   <span className="fluid-date-picker-story__toggletip">
     <Toggletip align="top-left">
       <ToggletipButton label="Show information">
@@ -166,6 +167,7 @@ const LabelToggletip = () => (
 
 export const Simple = ({ defaultWidth, ...args }) => (
   <div className="fluid-date-picker-story" style={{ width: defaultWidth }}>
+    <LabelToggletip />
     <FluidDatePicker datePickerType="simple" {...args}>
       <FluidDatePickerInput
         placeholder="mm/dd/yyyy"
@@ -174,7 +176,6 @@ export const Simple = ({ defaultWidth, ...args }) => (
         {...args}
       />
     </FluidDatePicker>
-    <LabelToggletip />
   </div>
 );
 
@@ -192,6 +193,7 @@ Simple.parameters = sharedParameters;
 
 export const Single = ({ defaultWidth, ...args }) => (
   <div className="fluid-date-picker-story" style={{ width: defaultWidth }}>
+    <LabelToggletip />
     <FluidDatePicker datePickerType="single" {...args}>
       <FluidDatePickerInput
         style={{ width: defaultWidth }}
@@ -201,7 +203,6 @@ export const Single = ({ defaultWidth, ...args }) => (
         {...args}
       />
     </FluidDatePicker>
-    <LabelToggletip />
   </div>
 );
 
@@ -220,6 +221,7 @@ Single.parameters = sharedParameters;
 export const RangeWithCalendar = ({ defaultWidth, ...args }) => {
   return (
     <div className="fluid-date-picker-story" style={{ width: defaultWidth }}>
+      <LabelToggletip />
       <FluidDatePicker datePickerType="range" {...args}>
         <FluidDatePickerInput
           id="date-picker-input-id-start"
@@ -236,7 +238,6 @@ export const RangeWithCalendar = ({ defaultWidth, ...args }) => {
           {...args}
         />
       </FluidDatePicker>
-      <LabelToggletip />
     </div>
   );
 };
