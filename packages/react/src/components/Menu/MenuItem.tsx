@@ -8,6 +8,7 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
+  Children,
   forwardRef,
   useContext,
   useEffect,
@@ -112,7 +113,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
     const [submenuOpen, setSubmenuOpen] = useState(false);
     const [rtl, setRtl] = useState(false);
 
-    const hasChildren = React.Children.toArray(children).length > 0;
+    const hasChildren = Children.toArray(children).length > 0;
 
     const {
       refs,
