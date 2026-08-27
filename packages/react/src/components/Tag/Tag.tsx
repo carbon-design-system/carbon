@@ -178,7 +178,12 @@ const TagBase = React.forwardRef<
       const newElement = tagRef.current?.getElementsByClassName(
         `${prefix}--tag__label`
       )[0];
-      setIsEllipsisApplied(isEllipsisActive(newElement));
+      // React 19: setIsEllipsisApplied called synchronously inside
+      // useIsomorphicEffect (= useLayoutEffect) causes setState during commit
+      // → crash. Read the DOM value eagerly (must be synchronous), then defer
+      // only the setState call past the commit boundary via queueMicrotask.
+      const result = isEllipsisActive(newElement);
+      queueMicrotask(() => setIsEllipsisApplied(result));
     }, [prefix, tagRef]);
 
     const conditions = [

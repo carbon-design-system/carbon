@@ -142,7 +142,12 @@ const DismissibleTag = forwardRef(
       const newElement = tagLabelRef.current?.getElementsByClassName(
         `${prefix}--tag__label`
       )[0];
-      setIsEllipsisApplied(isEllipsisActive(newElement));
+      // React 19: setIsEllipsisApplied called synchronously inside
+      // useIsomorphicEffect (= useLayoutEffect) causes setState during commit
+      // → crash. Read the DOM value eagerly (must be synchronous), then defer
+      // only the setState call past the commit boundary via queueMicrotask.
+      const result = isEllipsisActive(newElement);
+      queueMicrotask(() => setIsEllipsisApplied(result));
     }, [prefix, tagLabelRef]);
     const combinedRef = mergeRefs(tagLabelRef, forwardRef);
     const handleClose = (event: React.MouseEvent<HTMLButtonElement>) => {
