@@ -386,14 +386,26 @@ export const DataTable = <RowType, ColTypes extends any[]>(
     const hasHeadersChanged = !isEqual(nextHeaders, currentHeaders);
     const currentRows = state.rowIds.map((id) => {
       const row = state.rowsById[id];
-      return {
-        id: row.id,
-        disabled: row.disabled,
-        isExpanded: row.isExpanded,
-        isSelected: row.isSelected,
-      };
+      return headers.reduce(
+        (acc, { key }) => ({
+          ...acc,
+          [key]: state.cellsById[getCellId(row.id, key)]?.value,
+        }),
+        {
+          id: row.id,
+          disabled: row.disabled,
+          isExpanded: row.isExpanded,
+          isSelected: row.isSelected,
+        }
+      );
     });
-    const hasRowsChanged = !isEqual(rows, currentRows);
+    const nextRows = rows.map((row) => ({
+      ...row,
+      disabled: row.disabled ?? false,
+      isExpanded: row.isExpanded ?? false,
+      isSelected: row.isSelected ?? false,
+    }));
+    const hasRowsChanged = !isEqual(nextRows, currentRows);
 
     if (hasRowIdsChanged || hasHeadersChanged || hasRowsChanged) {
       setState((prev) => getDerivedStateFromProps(props, prev));

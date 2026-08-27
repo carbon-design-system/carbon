@@ -1104,6 +1104,20 @@ describe('DataTable', () => {
         expect(nextArgs.rows.map((row) => row.id)).toEqual(['c', 'a', 'b']);
       });
 
+      it('should not update rows when receiving equivalent props', () => {
+        const { rerender } = render(<DataTable {...mockProps} />);
+        mockProps.render.mockClear();
+
+        rerender(
+          <DataTable
+            {...mockProps}
+            rows={mockProps.rows.map((row) => ({ ...row }))}
+          />
+        );
+
+        expect(mockProps.render).toHaveBeenCalledTimes(1);
+      });
+
       it('should update cells when receiving new props', () => {
         const { rerender } = render(<DataTable {...mockProps} />);
         const args = mockProps.render.mock.calls[0][0];
