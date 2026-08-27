@@ -379,12 +379,8 @@ export const DataTable = <RowType, ColTypes extends any[]>(
 
   useEffect(() => {
     const nextRowIds = rows.map((row) => row.id);
-    const nextHeaders = headers.map((header) => header.key);
     const hasRowIdsChanged = !isEqual(nextRowIds, state.rowIds);
-    const hasHeadersChanged = !isEqual(
-      nextHeaders,
-      state.headers.map((h) => h.key)
-    );
+    const hasHeadersChanged = !isEqual(headers, state.headers);
     const currentRows = state.rowIds.map((id) => {
       const row = state.rowsById[id];
       return {
