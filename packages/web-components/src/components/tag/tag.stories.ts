@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,6 +8,7 @@
 import { html } from 'lit';
 import { TAG_SIZE } from './tag';
 import './index';
+import styles from './tag-story.scss?lit';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import View16 from '@carbon/icons/es/view/16.js';
 import FolderOpen16 from '@carbon/icons/es/folder--open/16.js';
@@ -197,19 +198,21 @@ export const Dismissible = {
     return html` <div style="margin-bottom: 3rem">
         <cds-button @click="${resetTags}">Reset</cds-button>
       </div>
-      ${tags.map(
-        (tag) =>
-          html`<cds-dismissible-tag
-            ?disabled="${disabled}"
-            text="${text || tag.text}"
-            tag-title="${tag.tagTitle}"
-            type="${tag.type}"
-            size="${size}"
-            dismiss-tooltip-label="${dismissTooltipLabel}"
-            dismiss-tooltip-alignment="${dismissTooltipAlignment}"
-            >${iconLoader(Asleep16, { slot: 'icon' })}
-          </cds-dismissible-tag>`
-      )}`;
+      <div class="tag-group">
+        ${tags.map(
+          (tag) =>
+            html`<cds-dismissible-tag
+              ?disabled="${disabled}"
+              text="${text || tag.text}"
+              tag-title="${tag.tagTitle}"
+              type="${tag.type}"
+              size="${size}"
+              dismiss-tooltip-label="${dismissTooltipLabel}"
+              dismiss-tooltip-alignment="${dismissTooltipAlignment}"
+              >${iconLoader(Asleep16, { slot: 'icon' })}
+            </cds-dismissible-tag>`
+        )}
+      </div>`;
   },
 };
 
@@ -264,7 +267,7 @@ export const Selectable = {
       },
     ];
 
-    return html` <div aria-label="Selectable tags" role="group">
+    return html` <div class="tag-group" aria-label="Selectable tags" role="group">
       ${tags.map(
         (tag) =>
           html`<cds-selectable-tag
@@ -352,6 +355,7 @@ export const Operational = {
 
     return html`
       <div
+        class="tag-group"
         aria-label="Operational tags"
         role="group"
         style="margin-bottom:1rem">
@@ -404,7 +408,7 @@ export const Operational = {
             </cds-operational-tag>
           </div>
           <cds-popover-content>
-            <div style="display:flex; flex-direction: column; padding:1rem">
+            <div class="tag-group tag-group--column">
               <cds-tag type="blue">Tag 1 name</cds-tag>
               <cds-tag type="blue">Tag 2 name</cds-tag>
               <cds-tag type="blue">Tag 3 name</cds-tag>
@@ -441,27 +445,19 @@ export const ReadOnly = {
     text: 'Tag content',
   },
   render: ({ filter, title, size, disabled, text }) =>
-    html` <cds-tag
-        type="red"
-        ?filter="${filter}"
-        title="${title}"
-        size="${size}"
-        ?disabled="${disabled}">
-        ${text}
-      </cds-tag>
-      ${types
-        .slice(1)
-        .map(
-          (e) =>
-            html`<cds-tag
-              type="${e}"
-              ?filter="${filter}"
-              title="${title}"
-              size="${size}"
-              ?disabled="${disabled}"
-              >${text}</cds-tag
-            >`
-        )}`,
+    html`<div class="tag-group">
+      ${types.map(
+        (type) =>
+          html`<cds-tag
+            type="${type}"
+            ?filter="${filter}"
+            title="${title}"
+            size="${size}"
+            ?disabled="${disabled}"
+            >${text}</cds-tag
+          >`
+      )}
+    </div>`,
 };
 
 export const WithAILabel = {
@@ -482,7 +478,8 @@ export const WithAILabel = {
     dismissTooltipLabel: 'Dismiss',
   },
   render: ({ disabled, size, text, dismissTooltipLabel }) =>
-    html`<cds-tag type="red" ?disabled="${disabled}" size="${size}"
+    html`<div class="tag-group">
+      <cds-tag type="red" ?disabled="${disabled}" size="${size}"
         >${text}
         <cds-ai-label alignment="bottom-left">
           ${content}${actions}</cds-ai-label
@@ -516,11 +513,20 @@ export const WithAILabel = {
         <cds-ai-label alignment="bottom-left">
           ${content}${actions}</cds-ai-label
         >
-      </cds-dismissible-tag>`,
+      </cds-dismissible-tag>
+    </div>`,
 };
 
 const meta = {
   title: 'Components/Tag',
+  decorators: [
+    (story) => html`
+      <style>
+        ${styles}
+      </style>
+      ${story()}
+    `,
+  ],
 };
 
 export default meta;
