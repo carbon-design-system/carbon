@@ -104,7 +104,10 @@ const useFocusTrap = (
         ? document.activeElement
         : null;
 
-    if (!isLayeredOnTop(previouslyFocused, overlay)) {
+    if (
+      document.activeElement === document.body &&
+      !isLayeredOnTop(previouslyFocused, overlay)
+    ) {
       overlay.focus();
     }
 
