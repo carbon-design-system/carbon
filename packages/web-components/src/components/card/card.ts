@@ -251,6 +251,15 @@ class CDSCard extends CDSLink {
   }
 
   /**
+   * Override CDSLink.render() so that `disabled` alone never short-circuits
+   * to CDSLink._renderDisabledLink() (a bare `<p>`). Cards always go through
+   * _renderLink() which handles the disabled state itself.
+   */
+  render() {
+    return this._renderLink();
+  }
+
+  /**
    * Override CDSLink._renderLink to add role/keyboard attrs for non-link
    * clickable cards, and to render a plain div when not clickable/href.
    */
@@ -263,6 +272,8 @@ class CDSCard extends CDSLink {
     }
 
     // Non-link clickable card — div with button semantics.
+    // Stays as role="button" even when disabled; tabindex and aria-disabled
+    // communicate the disabled state without removing the element from the tree.
     if (clickable) {
       return html`
         <div
