@@ -82,13 +82,20 @@ describe('cds-big-number', () => {
       el.locale = 'fr-CA';
       await el.updateComplete;
 
+      // Normalise whitespace: browser ICU may use narrow no-break space (U+202F)
+      // between the number and compact suffix instead of a regular space.
+      const normalise = (str) => str?.replace(/\s/g, ' ');
+
       const shadow = el.shadowRoot;
       expect(
-        shadow?.querySelector(`.${blockClass}__value`)?.textContent?.trim()
+        normalise(
+          shadow?.querySelector(`.${blockClass}__value`)?.textContent?.trim()
+        )
       ).to.equal('12,3 k');
       expect(
-        // eslint-disable-next-line no-irregular-whitespace
-        shadow?.querySelector(`.${blockClass}__total`)?.textContent?.trim()
+        normalise(
+          shadow?.querySelector(`.${blockClass}__total`)?.textContent?.trim()
+        )
       ).to.equal(`${Characters.Slash}1,0 M`);
     });
   });
