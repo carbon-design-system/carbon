@@ -41,6 +41,14 @@ $css--plex: true !default;
     border-radius: $border-radius-04;
   }
 }
+
+@if flags.enabled('enable-v12-release') {
+  :host(#{$prefix}-menu-item[role='menuitemcheckbox']),
+  :host(#{$prefix}-menu-item[role='menuitemradio']) {
+    padding-inline: $spacing-04;
+  }
+}
+
 :host(#{$prefix}-menu-item:focus) {
   @include focus-outline('outline');
 }

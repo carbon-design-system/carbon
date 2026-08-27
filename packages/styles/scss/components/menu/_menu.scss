@@ -100,6 +100,13 @@
     }
   }
 
+  @if enabled('enable-v12-release') {
+    .#{$prefix}--menu-item[role='menuitemcheckbox'],
+    .#{$prefix}--menu-item[role='menuitemradio'] {
+      padding-inline: $spacing-04;
+    }
+  }
+
   .#{$prefix}--menu-item:hover {
     background-color: $layer-hover;
     color: $text-primary;
