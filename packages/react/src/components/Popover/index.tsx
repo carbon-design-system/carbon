@@ -10,6 +10,7 @@ import PropTypes, { WeakValidationMap } from 'prop-types';
 import { deprecateValuesWithin } from '../../prop-types/deprecateValuesWithin';
 import React, {
   forwardRef,
+  useCallback,
   useEffect,
   useMemo,
   useRef,
@@ -757,7 +758,23 @@ export const PopoverContent = frFn((props, forwardRef) => {
 
   const prefix = usePrefix();
   const { setFloating, caretRef, autoAlign } = React.useContext(PopoverContext);
-  const ref = useMergedRefs([setFloating, forwardRef]);
+
+  // React 19: setFloating is a useState setter backed by floating-ui.
+  // Passing it as a ref callback causes setState during commit → crash.
+  // Capture the node in a ref and forward it in a passive effect (after commit).
+  const pendingNodeRef = useRef<HTMLSpanElement | null>(null);
+  const setFloatingSafe = useCallback((node: HTMLSpanElement | null) => {
+    pendingNodeRef.current = node;
+  }, []);
+  useEffect(() => {
+    if (pendingNodeRef.current !== null && typeof setFloating === 'function') {
+      const node = pendingNodeRef.current;
+      pendingNodeRef.current = null;
+      (setFloating as (node: HTMLSpanElement | null) => void)(node);
+    }
+  });
+
+  const ref = useMergedRefs([setFloatingSafe, forwardRef]);
   const enableFloatingStyles =
     useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
   return (
