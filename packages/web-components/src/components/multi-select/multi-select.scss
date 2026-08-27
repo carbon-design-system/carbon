@@ -45,6 +45,12 @@ $css--plex: true !default;
     outline: none;
   }
 
+  @if flags.enabled('enable-v12-release') {
+    .#{$prefix}--list-box__field {
+      block-size: calc(100% + 1px);
+    }
+  }
+
   .#{$prefix}--text-input {
     border: none;
     padding-inline-start: 0;
@@ -65,11 +71,6 @@ $css--plex: true !default;
     .#{$prefix}--list-box__field:focus {
       @extend .#{$prefix}--multi-select--filterable--input-focused;
     }
-  }
-
-  /* stylelint-disable declaration-no-important */
-  .#{$prefix}--list-box__selection--multi::after {
-    display: none !important;
   }
 }
 
@@ -573,7 +574,9 @@ $css--plex: true !default;
   :host(#{$prefix}-multi-select[has-value]) {
     .#{$prefix}--list-box__field,
     .#{$prefix}--multi-select--invalid {
+      /* stylelint-disable-next-line declaration-no-important */
       outline: 1px solid $focus !important;
+      /* stylelint-disable-next-line declaration-no-important */
       outline-offset: -1px !important;
     }
   }
@@ -613,6 +616,7 @@ $css--plex: true !default;
   }
   .#{$prefix}--list-box__field:focus,
   .#{$prefix}--list-box__selection:focus {
+    /* stylelint-disable-next-line declaration-no-important */
     outline: none !important;
   }
 }

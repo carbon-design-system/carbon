@@ -41,6 +41,12 @@ $css--plex: true !default;
     }
   }
 
+  @if flags.enabled('enable-v12-release') {
+    .#{$prefix}--list-box__field {
+      block-size: calc(100% + 1px);
+    }
+  }
+
   .#{$prefix}--text-input {
     border: none;
     outline: none;

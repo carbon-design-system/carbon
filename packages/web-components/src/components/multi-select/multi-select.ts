@@ -437,8 +437,6 @@ class CDSMultiSelect extends CDSDropdown {
     } = this;
 
     const selectionButtonClasses = classMap({
-      [`${prefix}--list-box__selection`]: true,
-      [`${prefix}--list-box__selection--multi`]: true,
       [`${prefix}--tag`]: true,
       [`${prefix}--tag--filter`]: true,
       [`${prefix}--tag--high-contrast`]: true,
@@ -447,18 +445,19 @@ class CDSMultiSelect extends CDSDropdown {
     return selectedItemsCount === 0
       ? undefined
       : html`
-          <div
-            id="selection-button"
-            role="button"
-            class="${selectionButtonClasses}"
-            tabindex="-1"
-            aria-disabled=${readOnly}
-            title="${clearSelectionLabel}">
-            ${selectedItemsCount}
-            ${iconLoader(Close16, {
-              'aria-label': clearSelectionLabel,
-              class: `${prefix}--tag__close-icon`,
-            })}
+          <div id="selection-button" class="${selectionButtonClasses}">
+            <span class="${prefix}--tag__label" title="${selectedItemsCount}"
+              >${selectedItemsCount}</span
+            >
+            <div
+              role="button"
+              tabindex="-1"
+              class="${prefix}--tag__close-icon"
+              aria-label="${clearSelectionLabel}"
+              title="${clearSelectionLabel}"
+              aria-disabled="${readOnly}">
+              ${iconLoader(Close16)}
+            </div>
           </div>
         `;
   }
@@ -691,6 +690,7 @@ class CDSMultiSelect extends CDSDropdown {
       [`${prefix}--list-box--inline`]: inline,
       [`${prefix}--list-box--expanded`]: open,
       [`${prefix}--list-box--${size}`]: size,
+      [`${prefix}--layout--size-${size}`]: size,
       [`${prefix}--multi-select--invalid`]: normalizedProps.invalid,
       [`${prefix}--multi-select--warn`]: normalizedProps.warn,
       [`${prefix}--multi-select--inline`]: inline,
