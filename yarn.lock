@@ -2024,7 +2024,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/cli@npm:^11.49.0-rc.0, @carbon/cli@workspace:packages/cli":
+"@carbon/cli@npm:^11.49.0, @carbon/cli@workspace:packages/cli":
   version: 0.0.0-use.local
   resolution: "@carbon/cli@workspace:packages/cli"
   dependencies:
@@ -2039,8 +2039,8 @@ __metadata:
     child-process-promise: "npm:^2.2.1"
     fast-glob: "npm:^3.3.3"
     fs-extra: "npm:^11.2.0"
-    inquirer: "npm:^12.5.0"
-    klaw-sync: "npm:^8.0.0"
+    inquirer: "npm:^14.0.0"
+    klaw-sync: "npm:^6.0.0"
     lodash: "npm:^4.17.21"
     prettier: "npm:^3.3.3"
     prettier-config-carbon: "npm:^0.12.0"
@@ -2057,11 +2057,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/colors@npm:^11.57.0-rc.0, @carbon/colors@workspace:packages/colors":
+"@carbon/colors@npm:^11.57.0, @carbon/colors@workspace:packages/colors":
   version: 0.0.0-use.local
   resolution: "@carbon/colors@workspace:packages/colors"
   dependencies:
-    "@carbon/cli": "npm:^11.49.0-rc.0"
+    "@carbon/cli": "npm:^11.49.0"
     "@carbon/cli-reporter": "npm:^10.9.0"
     "@carbon/scss-generator": "npm:^10.20.0"
     "@carbon/test-utils": "npm:^10.41.0"
@@ -2078,14 +2078,14 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@carbon/elements@workspace:packages/elements"
   dependencies:
-    "@carbon/cli": "npm:^11.49.0-rc.0"
-    "@carbon/colors": "npm:^11.57.0-rc.0"
-    "@carbon/grid": "npm:^11.61.0-rc.0"
-    "@carbon/icons": "npm:^11.87.0-rc.0"
-    "@carbon/layout": "npm:^11.58.0-rc.0"
-    "@carbon/motion": "npm:^11.51.0-rc.0"
-    "@carbon/themes": "npm:^11.80.0-rc.0"
-    "@carbon/type": "npm:^11.66.0-rc.0"
+    "@carbon/cli": "npm:^11.49.0"
+    "@carbon/colors": "npm:^11.57.0"
+    "@carbon/grid": "npm:^11.61.0"
+    "@carbon/icons": "npm:^11.87.0"
+    "@carbon/layout": "npm:^11.58.0"
+    "@carbon/motion": "npm:^11.51.0"
+    "@carbon/themes": "npm:^11.80.0"
+    "@carbon/type": "npm:^11.66.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     fs-extra: "npm:^11.0.0"
     klaw-sync: "npm:^8.0.0"
@@ -2095,7 +2095,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/feature-flags@npm:^1.8.0-rc.0, @carbon/feature-flags@workspace:packages/feature-flags":
+"@carbon/feature-flags@npm:^1.8.0, @carbon/feature-flags@workspace:packages/feature-flags":
   version: 0.0.0-use.local
   resolution: "@carbon/feature-flags@workspace:packages/feature-flags"
   dependencies:
@@ -2115,18 +2115,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/grid@npm:^11.61.0-rc.0, @carbon/grid@workspace:packages/grid":
+"@carbon/grid@npm:^11.61.0, @carbon/grid@workspace:packages/grid":
   version: 0.0.0-use.local
   resolution: "@carbon/grid@workspace:packages/grid"
   dependencies:
-    "@carbon/cli": "npm:^11.49.0-rc.0"
-    "@carbon/layout": "npm:^11.58.0-rc.0"
+    "@carbon/cli": "npm:^11.49.0"
+    "@carbon/layout": "npm:^11.58.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     rimraf: "npm:^6.0.1"
   languageName: unknown
   linkType: soft
 
-"@carbon/icon-build-helpers@npm:^1.64.0-rc.0, @carbon/icon-build-helpers@workspace:packages/icon-build-helpers":
+"@carbon/icon-build-helpers@npm:^1.64.0, @carbon/icon-build-helpers@workspace:packages/icon-build-helpers":
   version: 0.0.0-use.local
   resolution: "@carbon/icon-build-helpers@workspace:packages/icon-build-helpers"
   dependencies:
@@ -2134,7 +2134,7 @@ __metadata:
     "@babel/template": "npm:^8.0.0"
     "@babel/types": "npm:^8.0.0"
     "@carbon/cli-reporter": "npm:^10.9.0"
-    "@carbon/icon-helpers": "npm:^10.81.0-rc.0"
+    "@carbon/icon-helpers": "npm:^10.81.0"
     change-case-all: "npm:^2.1.0"
     fs-extra: "npm:^11.0.0"
     joi: "npm:^18.0.0"
@@ -2159,24 +2159,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/icon-helpers@npm:^10.81.0-rc.0, @carbon/icon-helpers@workspace:packages/icon-helpers":
+"@carbon/icon-helpers@npm:^10.81.0, @carbon/icon-helpers@workspace:packages/icon-helpers":
   version: 0.0.0-use.local
   resolution: "@carbon/icon-helpers@workspace:packages/icon-helpers"
   dependencies:
-    "@carbon/cli": "npm:^11.49.0-rc.0"
+    "@carbon/cli": "npm:^11.49.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     rimraf: "npm:^6.0.1"
     typescript-config-carbon: "workspace:^0.11.0"
   languageName: unknown
   linkType: soft
 
-"@carbon/icons-react@npm:^11.87.0-rc.0, @carbon/icons-react@workspace:packages/icons-react":
+"@carbon/icons-react@npm:^11.87.0, @carbon/icons-react@workspace:packages/icons-react":
   version: 0.0.0-use.local
   resolution: "@carbon/icons-react@workspace:packages/icons-react"
   dependencies:
-    "@carbon/icon-build-helpers": "npm:^1.64.0-rc.0"
-    "@carbon/icon-helpers": "npm:^10.81.0-rc.0"
-    "@carbon/icons": "npm:^11.87.0-rc.0"
+    "@carbon/icon-build-helpers": "npm:^1.64.0"
+    "@carbon/icon-helpers": "npm:^10.81.0"
+    "@carbon/icons": "npm:^11.87.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     prop-types: "npm:^15.8.1"
     rimraf: "npm:^6.0.1"
@@ -2189,30 +2189,30 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@carbon/icons-vue@workspace:packages/icons-vue"
   dependencies:
-    "@carbon/icon-helpers": "npm:^10.81.0-rc.0"
-    "@carbon/icons": "npm:^11.87.0-rc.0"
+    "@carbon/icon-helpers": "npm:^10.81.0"
+    "@carbon/icons": "npm:^11.87.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     rimraf: "npm:^6.0.1"
     vue: "npm:^3.0.0"
   languageName: unknown
   linkType: soft
 
-"@carbon/icons@npm:^11.87.0-rc.0, @carbon/icons@workspace:packages/icons":
+"@carbon/icons@npm:^11.87.0, @carbon/icons@workspace:packages/icons":
   version: 0.0.0-use.local
   resolution: "@carbon/icons@workspace:packages/icons"
   dependencies:
-    "@carbon/cli": "npm:^11.49.0-rc.0"
-    "@carbon/icon-build-helpers": "npm:^1.64.0-rc.0"
+    "@carbon/cli": "npm:^11.49.0"
+    "@carbon/icon-build-helpers": "npm:^1.64.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     rimraf: "npm:^6.0.1"
   languageName: unknown
   linkType: soft
 
-"@carbon/layout@npm:^11.58.0-rc.0, @carbon/layout@workspace:packages/layout":
+"@carbon/layout@npm:^11.58.0, @carbon/layout@workspace:packages/layout":
   version: 0.0.0-use.local
   resolution: "@carbon/layout@workspace:packages/layout"
   dependencies:
-    "@carbon/cli": "npm:^11.49.0-rc.0"
+    "@carbon/cli": "npm:^11.49.0"
     "@carbon/cli-reporter": "npm:^10.9.0"
     "@carbon/scss-generator": "npm:^10.20.0"
     "@carbon/test-utils": "npm:^10.41.0"
@@ -2224,11 +2224,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/motion@npm:^11.51.0-rc.0, @carbon/motion@workspace:packages/motion":
+"@carbon/motion@npm:^11.51.0, @carbon/motion@workspace:packages/motion":
   version: 0.0.0-use.local
   resolution: "@carbon/motion@workspace:packages/motion"
   dependencies:
-    "@carbon/cli": "npm:^11.49.0-rc.0"
+    "@carbon/cli": "npm:^11.49.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     rimraf: "npm:^6.0.1"
     typescript: "npm:^6.0.3"
@@ -2240,9 +2240,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@carbon/pictograms-react@workspace:packages/pictograms-react"
   dependencies:
-    "@carbon/icon-build-helpers": "npm:^1.64.0-rc.0"
-    "@carbon/icon-helpers": "npm:^10.81.0-rc.0"
-    "@carbon/pictograms": "npm:^12.83.0-rc.0"
+    "@carbon/icon-build-helpers": "npm:^1.64.0"
+    "@carbon/icon-helpers": "npm:^10.81.0"
+    "@carbon/pictograms": "npm:^12.83.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     prop-types: "npm:^15.8.1"
     rimraf: "npm:^6.0.1"
@@ -2251,17 +2251,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/pictograms@npm:^12.83.0-rc.0, @carbon/pictograms@workspace:packages/pictograms":
+"@carbon/pictograms@npm:^12.83.0, @carbon/pictograms@workspace:packages/pictograms":
   version: 0.0.0-use.local
   resolution: "@carbon/pictograms@workspace:packages/pictograms"
   dependencies:
-    "@carbon/icon-build-helpers": "npm:^1.64.0-rc.0"
+    "@carbon/icon-build-helpers": "npm:^1.64.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     rimraf: "npm:^6.0.1"
   languageName: unknown
   linkType: soft
 
-"@carbon/react@npm:^1.115.0-rc.0, @carbon/react@workspace:packages/react":
+"@carbon/react@npm:^1.115.0, @carbon/react@workspace:packages/react":
   version: 0.0.0-use.local
   resolution: "@carbon/react@workspace:packages/react"
   dependencies:
@@ -2274,14 +2274,14 @@ __metadata:
     "@babel/preset-react": "npm:^8.0.0"
     "@babel/preset-typescript": "npm:^8.0.0"
     "@babel/runtime": "npm:^8.0.0"
-    "@carbon/feature-flags": "npm:^1.8.0-rc.0"
-    "@carbon/icons-react": "npm:^11.87.0-rc.0"
-    "@carbon/layout": "npm:^11.58.0-rc.0"
-    "@carbon/motion": "npm:^11.51.0-rc.0"
-    "@carbon/styles": "npm:^1.114.0-rc.0"
+    "@carbon/feature-flags": "npm:^1.8.0"
+    "@carbon/icons-react": "npm:^11.87.0"
+    "@carbon/layout": "npm:^11.58.0"
+    "@carbon/motion": "npm:^11.51.0"
+    "@carbon/styles": "npm:^1.114.0"
     "@carbon/test-utils": "npm:^10.41.0"
-    "@carbon/themes": "npm:^11.80.0-rc.0"
-    "@carbon/utilities": "npm:^0.25.0-rc.0"
+    "@carbon/themes": "npm:^11.80.0"
+    "@carbon/utilities": "npm:^0.25.0"
     "@figma/code-connect": "npm:^2.0.0"
     "@floating-ui/react": "npm:^0.27.4"
     "@ibm/telemetry-js": "npm:^1.5.0"
@@ -2296,7 +2296,7 @@ __metadata:
     "@types/use-sync-external-store": "npm:^1"
     "@vitejs/plugin-react": "npm:^6.0.0"
     babel-plugin-dev-expression: "npm:^0.2.3"
-    babel-preset-carbon: "npm:^0.9.0-rc.0"
+    babel-preset-carbon: "npm:^0.9.0"
     browserify-zlib: "npm:^0.2.0"
     browserslist-config-carbon: "npm:^11.2.0"
     classnames: "npm:2.5.1"
@@ -2344,18 +2344,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/styles@npm:^1.114.0-rc.0, @carbon/styles@workspace:packages/styles":
+"@carbon/styles@npm:^1.114.0, @carbon/styles@workspace:packages/styles":
   version: 0.0.0-use.local
   resolution: "@carbon/styles@workspace:packages/styles"
   dependencies:
-    "@carbon/colors": "npm:^11.57.0-rc.0"
-    "@carbon/feature-flags": "npm:^1.8.0-rc.0"
-    "@carbon/grid": "npm:^11.61.0-rc.0"
-    "@carbon/layout": "npm:^11.58.0-rc.0"
-    "@carbon/motion": "npm:^11.51.0-rc.0"
+    "@carbon/colors": "npm:^11.57.0"
+    "@carbon/feature-flags": "npm:^1.8.0"
+    "@carbon/grid": "npm:^11.61.0"
+    "@carbon/layout": "npm:^11.58.0"
+    "@carbon/motion": "npm:^11.51.0"
     "@carbon/test-utils": "npm:^10.41.0"
-    "@carbon/themes": "npm:^11.80.0-rc.0"
-    "@carbon/type": "npm:^11.66.0-rc.0"
+    "@carbon/themes": "npm:^11.80.0"
+    "@carbon/type": "npm:^11.66.0"
     "@ibm/plex": "npm:6.4.1"
     "@ibm/plex-mono": "npm:2.5.0"
     "@ibm/plex-sans": "npm:1.1.0"
@@ -2396,19 +2396,19 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/themes@npm:^11.80.0-rc.0, @carbon/themes@workspace:packages/themes":
+"@carbon/themes@npm:^11.80.0, @carbon/themes@workspace:packages/themes":
   version: 0.0.0-use.local
   resolution: "@carbon/themes@workspace:packages/themes"
   dependencies:
     "@babel/node": "npm:^8.0.0"
     "@babel/preset-env": "npm:^8.0.0"
-    "@carbon/cli": "npm:^11.49.0-rc.0"
+    "@carbon/cli": "npm:^11.49.0"
     "@carbon/cli-reporter": "npm:^10.9.0"
-    "@carbon/colors": "npm:^11.57.0-rc.0"
-    "@carbon/layout": "npm:^11.58.0-rc.0"
+    "@carbon/colors": "npm:^11.57.0"
+    "@carbon/layout": "npm:^11.58.0"
     "@carbon/scss-generator": "npm:^10.20.0"
     "@carbon/test-utils": "npm:^10.41.0"
-    "@carbon/type": "npm:^11.66.0-rc.0"
+    "@carbon/type": "npm:^11.66.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     "@types/color": "npm:^4.2.1"
     ajv: "npm:^8.20.0"
@@ -2425,13 +2425,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/type@npm:^11.66.0-rc.0, @carbon/type@workspace:packages/type":
+"@carbon/type@npm:^11.66.0, @carbon/type@workspace:packages/type":
   version: 0.0.0-use.local
   resolution: "@carbon/type@workspace:packages/type"
   dependencies:
-    "@carbon/cli": "npm:^11.49.0-rc.0"
-    "@carbon/grid": "npm:^11.61.0-rc.0"
-    "@carbon/layout": "npm:^11.58.0-rc.0"
+    "@carbon/cli": "npm:^11.49.0"
+    "@carbon/grid": "npm:^11.61.0"
+    "@carbon/layout": "npm:^11.58.0"
     "@carbon/test-utils": "npm:^10.41.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     change-case-all: "npm:^2.1.0"
@@ -2451,7 +2451,7 @@ __metadata:
     execa: "npm:^10.0.0"
     fast-glob: "npm:^3.3.3"
     fs-extra: "npm:^11.0.0"
-    inquirer: "npm:^12.5.0"
+    inquirer: "npm:^14.0.0"
     is-git-clean: "npm:^1.1.0"
     jest-diff: "npm:^30.0.0"
     jscodeshift: "npm:^17.0.0"
@@ -2473,7 +2473,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@carbon/utilities-react@workspace:packages/utilities-react"
   dependencies:
-    "@carbon/utilities": "npm:^0.25.0-rc.0"
+    "@carbon/utilities": "npm:^0.25.0"
     "@ibm/telemetry-js": "npm:^1.6.1"
     rimraf: "npm:^6.0.1"
     tsdown: "npm:^0.22.0"
@@ -2483,7 +2483,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/utilities@npm:^0.25.0-rc.0, @carbon/utilities@workspace:packages/utilities":
+"@carbon/utilities@npm:^0.25.0, @carbon/utilities@workspace:packages/utilities":
   version: 0.0.0-use.local
   resolution: "@carbon/utilities@workspace:packages/utilities"
   dependencies:
@@ -2501,11 +2501,11 @@ __metadata:
   resolution: "@carbon/web-components@workspace:packages/web-components"
   dependencies:
     "@carbon/icon-helpers": "npm:10.47.0"
-    "@carbon/icons": "npm:^11.87.0-rc.0"
-    "@carbon/layout": "npm:^11.58.0-rc.0"
-    "@carbon/motion": "npm:^11.51.0-rc.0"
-    "@carbon/styles": "npm:^1.114.0-rc.0"
-    "@carbon/utilities": "npm:^0.25.0-rc.0"
+    "@carbon/icons": "npm:^11.87.0"
+    "@carbon/layout": "npm:^11.58.0"
+    "@carbon/motion": "npm:^11.51.0"
+    "@carbon/styles": "npm:^1.114.0"
+    "@carbon/utilities": "npm:^0.25.0"
     "@floating-ui/dom": "npm:^1.6.3"
     "@ibm/telemetry-js": "npm:^1.10.2"
     "@juggle/resize-observer": "npm:^3.4.0"
@@ -3770,6 +3770,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@inquirer/ansi@npm:^2.0.7":
+  version: 2.0.7
+  resolution: "@inquirer/ansi@npm:2.0.7"
+  checksum: 10/ae4ff228412f1f67d78aa9a7410e07e692eeb7c9b75034825f1039898821b02505dfe934be53d6ee4ce5bde9e7ff6b4ce7547bacc1c9aa441396cb9b99717e0f
+  languageName: node
+  linkType: hard
+
 "@inquirer/checkbox@npm:^4.3.0":
   version: 4.3.0
   resolution: "@inquirer/checkbox@npm:4.3.0"
@@ -3788,6 +3795,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@inquirer/checkbox@npm:^5.2.2":
+  version: 5.2.2
+  resolution: "@inquirer/checkbox@npm:5.2.2"
+  dependencies:
+    "@inquirer/ansi": "npm:^2.0.7"
+    "@inquirer/core": "npm:^12.0.0"
+    "@inquirer/figures": "npm:^2.0.8"
+    "@inquirer/type": "npm:^4.0.7"
+  peerDependencies:
+    "@types/node": ">=18"
+  peerDependenciesMeta:
+    "@types/node":
+      optional: true
+  checksum: 10/10ea9063aa5950dc3efdae3a75355d33f78b436fe071ef0290fe8668a020894f50185d54b3820f64f295c3a46633eb291f5502f38a46a871e90731d03f83bc6a
+  languageName: node
+  linkType: hard
+
 "@inquirer/confirm@npm:^5.1.19":
   version: 5.1.19
   resolution: "@inquirer/confirm@npm:5.1.19"
@@ -3800,6 +3824,21 @@ __metadata:
     "@types/node":
       optional: true
   checksum: 10/d65e0addf80c146d71a74057d77048bd78a4a80d74a9e0d774b759ff1adf38a33cde6c06a6d6ef802bb61ef9158770315dec3931f89b3624c0e63c595c0473c1
+  languageName: node
+  linkType: hard
+
+"@inquirer/confirm@npm:^6.2.0":
+  version: 6.2.0
+  resolution: "@inquirer/confirm@npm:6.2.0"
+  dependencies:
+    "@inquirer/core": "npm:^12.0.0"
+    "@inquirer/type": "npm:^4.0.7"
+  peerDependencies:
+    "@types/node": ">=18"
+  peerDependenciesMeta:
+    "@types/node":
+      optional: true
+  checksum: 10/b915b39cc231f9c3f79c7fc7b189ab4a88ee528a2e7276ecb4a8914c43509fe382f2b769fa2560bebcab92b5a6de39a8d149813bf37388fbd6c02fc49e4da94f
   languageName: node
   linkType: hard
 
@@ -3824,6 +3863,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@inquirer/core@npm:^12.0.0":
+  version: 12.0.0
+  resolution: "@inquirer/core@npm:12.0.0"
+  dependencies:
+    "@inquirer/ansi": "npm:^2.0.7"
+    "@inquirer/figures": "npm:^2.0.8"
+    "@inquirer/type": "npm:^4.0.7"
+    cli-width: "npm:^4.1.0"
+    fast-wrap-ansi: "npm:^0.2.0"
+    mute-stream: "npm:^3.0.0"
+    signal-exit: "npm:^4.1.0"
+  peerDependencies:
+    "@types/node": ">=18"
+  peerDependenciesMeta:
+    "@types/node":
+      optional: true
+  checksum: 10/d5a2fd29de44c0c350eb6cefebd7d6b7318a45eb7c10131ff3775b5bea65eb8cf5bf1f7fcc33fc11377dfd0f8baab486ecac17aebfe87d3bcfcbde2d34e1870b
+  languageName: node
+  linkType: hard
+
 "@inquirer/editor@npm:^4.2.21":
   version: 4.2.21
   resolution: "@inquirer/editor@npm:4.2.21"
@@ -3837,6 +3896,22 @@ __metadata:
     "@types/node":
       optional: true
   checksum: 10/cf2d4237dc86abb2143ba6e99a4a60368ee992ba56b0072457e4dd472e7ac99ebffcbd0895bf36d5f694f3e327ff0dbb70265952b03ec8a0dbf4abd1db306991
+  languageName: node
+  linkType: hard
+
+"@inquirer/editor@npm:^5.3.0":
+  version: 5.3.0
+  resolution: "@inquirer/editor@npm:5.3.0"
+  dependencies:
+    "@inquirer/core": "npm:^12.0.0"
+    "@inquirer/external-editor": "npm:^3.0.4"
+    "@inquirer/type": "npm:^4.0.7"
+  peerDependencies:
+    "@types/node": ">=18"
+  peerDependenciesMeta:
+    "@types/node":
+      optional: true
+  checksum: 10/a269825739b5b9cf04eb1728994c4f2d79c6e36dd1cc4691ca68becebe7a1416e4412b211c0f2855282ec08f89a07216f377d226c8097a6462b1466e62794924
   languageName: node
   linkType: hard
 
@@ -3856,6 +3931,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@inquirer/expand@npm:^5.1.2":
+  version: 5.1.2
+  resolution: "@inquirer/expand@npm:5.1.2"
+  dependencies:
+    "@inquirer/core": "npm:^12.0.0"
+    "@inquirer/type": "npm:^4.0.7"
+  peerDependencies:
+    "@types/node": ">=18"
+  peerDependenciesMeta:
+    "@types/node":
+      optional: true
+  checksum: 10/e5d5f1d3f2fe2e3bc10ac5a7a0dccf8d0465c01eacbc1bc3acd402a2d99b307afc766b44ec9d7ffb9afd05f4d161f69fe9a93b7a6efbab24ac21f3349a362b08
+  languageName: node
+  linkType: hard
+
 "@inquirer/external-editor@npm:^1.0.2":
   version: 1.0.2
   resolution: "@inquirer/external-editor@npm:1.0.2"
@@ -3871,10 +3961,32 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@inquirer/external-editor@npm:^3.0.4":
+  version: 3.0.4
+  resolution: "@inquirer/external-editor@npm:3.0.4"
+  dependencies:
+    chardet: "npm:^2.1.1"
+    iconv-lite: "npm:^0.7.2"
+  peerDependencies:
+    "@types/node": ">=18"
+  peerDependenciesMeta:
+    "@types/node":
+      optional: true
+  checksum: 10/e3c5ad2a697f9b60d20de9743d62a39d2819b5c9007f973b210deb8a4872743fb73f14eb49549f98014279e10fefd481013a67b701626e3f8f1f4388fcda446d
+  languageName: node
+  linkType: hard
+
 "@inquirer/figures@npm:^1.0.14":
   version: 1.0.14
   resolution: "@inquirer/figures@npm:1.0.14"
   checksum: 10/39df361eb607cea5a020d457e25f9c6aee3a1de8975c6295a4b3bfe86ba7e7f7bfbefa6a52b145b1790f2690e5c8f10eb822e5bc764aff7ba00a6cd24eec5a25
+  languageName: node
+  linkType: hard
+
+"@inquirer/figures@npm:^2.0.8":
+  version: 2.0.8
+  resolution: "@inquirer/figures@npm:2.0.8"
+  checksum: 10/d7f72980ff875f79f5b4ddd56f8527793ba1442b7e7d1ea5398f5fc35f71982cba13576b94ba718fd6b15e4d2f1a4a1f2a1dc86bce0e84c280da3833088e049f
   languageName: node
   linkType: hard
 
@@ -3893,6 +4005,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@inquirer/input@npm:^5.1.3":
+  version: 5.1.3
+  resolution: "@inquirer/input@npm:5.1.3"
+  dependencies:
+    "@inquirer/core": "npm:^12.0.0"
+    "@inquirer/type": "npm:^4.0.7"
+  peerDependencies:
+    "@types/node": ">=18"
+  peerDependenciesMeta:
+    "@types/node":
+      optional: true
+  checksum: 10/2ca0cf6714f83aa2fd5b43f61fbf7e7b82f725957a2e09a2060d908a3c61ba3abeba0179cb8f7316a69d20136480cf34da03c5150f8ab4f46f1ace62004308a1
+  languageName: node
+  linkType: hard
+
 "@inquirer/number@npm:^3.0.21":
   version: 3.0.21
   resolution: "@inquirer/number@npm:3.0.21"
@@ -3905,6 +4032,21 @@ __metadata:
     "@types/node":
       optional: true
   checksum: 10/7b254cb3947c78a83593d82347bf93929b0af714cffa20f9f4503ec338004b3c0d6813945e3e3d7062b5d50006412b181ed833ac88c7da4df538df8bb15775d0
+  languageName: node
+  linkType: hard
+
+"@inquirer/number@npm:^4.2.0":
+  version: 4.2.0
+  resolution: "@inquirer/number@npm:4.2.0"
+  dependencies:
+    "@inquirer/core": "npm:^12.0.0"
+    "@inquirer/type": "npm:^4.0.7"
+  peerDependencies:
+    "@types/node": ">=18"
+  peerDependenciesMeta:
+    "@types/node":
+      optional: true
+  checksum: 10/5c610ed314b8d52aee8bfb89a634e0a9b465c774380f35c516de4a04b45baf645956c39ec1fc54dd2d12cefe8f0a3913edc0d6c51b5a6733807b759c870f315e
   languageName: node
   linkType: hard
 
@@ -3921,6 +4063,22 @@ __metadata:
     "@types/node":
       optional: true
   checksum: 10/07fb1527ea2d44a81b79d9263f59713e66977e21fbf44efedb6bf08d27d617900ef481c49c91b0a749caf1d282f2b5e19fe6b7474acc98db3edd174eb5d45416
+  languageName: node
+  linkType: hard
+
+"@inquirer/password@npm:^5.1.2":
+  version: 5.1.2
+  resolution: "@inquirer/password@npm:5.1.2"
+  dependencies:
+    "@inquirer/ansi": "npm:^2.0.7"
+    "@inquirer/core": "npm:^12.0.0"
+    "@inquirer/type": "npm:^4.0.7"
+  peerDependencies:
+    "@types/node": ">=18"
+  peerDependenciesMeta:
+    "@types/node":
+      optional: true
+  checksum: 10/9284a67c6b23d87f9500e3ea570c0f8901544d17e175f35f92da3825ef126cd0f7cfd0f2210202dd9410d35b5ac991a3352f40f3e287d4d82003e1b1d42d209f
   languageName: node
   linkType: hard
 
@@ -3947,6 +4105,29 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@inquirer/prompts@npm:^8.6.0":
+  version: 8.6.0
+  resolution: "@inquirer/prompts@npm:8.6.0"
+  dependencies:
+    "@inquirer/checkbox": "npm:^5.2.2"
+    "@inquirer/confirm": "npm:^6.2.0"
+    "@inquirer/editor": "npm:^5.3.0"
+    "@inquirer/expand": "npm:^5.1.2"
+    "@inquirer/input": "npm:^5.1.3"
+    "@inquirer/number": "npm:^4.2.0"
+    "@inquirer/password": "npm:^5.1.2"
+    "@inquirer/rawlist": "npm:^5.3.2"
+    "@inquirer/search": "npm:^4.3.0"
+    "@inquirer/select": "npm:^5.2.2"
+  peerDependencies:
+    "@types/node": ">=18"
+  peerDependenciesMeta:
+    "@types/node":
+      optional: true
+  checksum: 10/9a66d7dd190ea9c056c466bc84933c014e4239c4391623d29b2a3a3119a2a4e66cbd4861e4a3a7f0770abad3fe74eb2c7869411077b3f5c0d7fe2ede4ea7cf49
+  languageName: node
+  linkType: hard
+
 "@inquirer/rawlist@npm:^4.1.9":
   version: 4.1.9
   resolution: "@inquirer/rawlist@npm:4.1.9"
@@ -3960,6 +4141,21 @@ __metadata:
     "@types/node":
       optional: true
   checksum: 10/ec23e087bfa9497b36d51b53e8da18c837e4a0c5c091bce7d1a6b52d9664035d7e22c3753993dd3c7c9ebfd5e9b71f1738873f2c25422668733ddb28d74bf26b
+  languageName: node
+  linkType: hard
+
+"@inquirer/rawlist@npm:^5.3.2":
+  version: 5.3.2
+  resolution: "@inquirer/rawlist@npm:5.3.2"
+  dependencies:
+    "@inquirer/core": "npm:^12.0.0"
+    "@inquirer/type": "npm:^4.0.7"
+  peerDependencies:
+    "@types/node": ">=18"
+  peerDependenciesMeta:
+    "@types/node":
+      optional: true
+  checksum: 10/4fad0726cc2226acf797287fc083e2065585e1735bd99402b24c2d756d3fecc51729c3c5ed89a754dd070f89e7d94df603306877423a3880c0c1370968fb5cdd
   languageName: node
   linkType: hard
 
@@ -3977,6 +4173,22 @@ __metadata:
     "@types/node":
       optional: true
   checksum: 10/b01a53d6f72090f45cda39b75dd2e613e2d7fa0f454c0781f846e543b833eed4da831fec8d9e5325ebd4383684a69a74c5a38520b7ee0734b1090f71cf5dd372
+  languageName: node
+  linkType: hard
+
+"@inquirer/search@npm:^4.3.0":
+  version: 4.3.0
+  resolution: "@inquirer/search@npm:4.3.0"
+  dependencies:
+    "@inquirer/core": "npm:^12.0.0"
+    "@inquirer/figures": "npm:^2.0.8"
+    "@inquirer/type": "npm:^4.0.7"
+  peerDependencies:
+    "@types/node": ">=18"
+  peerDependenciesMeta:
+    "@types/node":
+      optional: true
+  checksum: 10/8f99dacf632869b0757fdd40d4805d3f335c2de2543dfaa827509a250750bcc2f6e3f455fca38af615342500ffde6c708852373e631b396f53ecece4a8da7f6d
   languageName: node
   linkType: hard
 
@@ -3998,6 +4210,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@inquirer/select@npm:^5.2.2":
+  version: 5.2.2
+  resolution: "@inquirer/select@npm:5.2.2"
+  dependencies:
+    "@inquirer/ansi": "npm:^2.0.7"
+    "@inquirer/core": "npm:^12.0.0"
+    "@inquirer/figures": "npm:^2.0.8"
+    "@inquirer/type": "npm:^4.0.7"
+  peerDependencies:
+    "@types/node": ">=18"
+  peerDependenciesMeta:
+    "@types/node":
+      optional: true
+  checksum: 10/50c0e38f0904ec0da9efd4b200446b26538f8eb91810a40acec538cac883070bc42ab4f39ae671716974158e3480eb3978d6fa84543ae87e071a0d9beee3fdd8
+  languageName: node
+  linkType: hard
+
 "@inquirer/type@npm:^3.0.8, @inquirer/type@npm:^3.0.9":
   version: 3.0.9
   resolution: "@inquirer/type@npm:3.0.9"
@@ -4007,6 +4236,18 @@ __metadata:
     "@types/node":
       optional: true
   checksum: 10/960ba4737405f70bac17e7cdc4696c60064b06c8dd13a4b3d0783763ba1714bdadbd598b88d537ab9415b7d5d61e011ac042cfbd1438b2a35298e2868724b853
+  languageName: node
+  linkType: hard
+
+"@inquirer/type@npm:^4.0.7":
+  version: 4.0.7
+  resolution: "@inquirer/type@npm:4.0.7"
+  peerDependencies:
+    "@types/node": ">=18"
+  peerDependenciesMeta:
+    "@types/node":
+      optional: true
+  checksum: 10/97769b74264a2575c12c231e3d4acf98b4ae237fc987cec6b459f88b907b1729623403b8d9fe0cf2ca21743114777c64e3031fbeff72e9da37fbf4c8985f587f
   languageName: node
   linkType: hard
 
@@ -8949,7 +9190,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-preset-carbon@npm:^0.9.0-rc.0, babel-preset-carbon@workspace:^, babel-preset-carbon@workspace:config/babel-preset-carbon":
+"babel-preset-carbon@npm:^0.9.0, babel-preset-carbon@workspace:^, babel-preset-carbon@workspace:config/babel-preset-carbon":
   version: 0.0.0-use.local
   resolution: "babel-preset-carbon@workspace:config/babel-preset-carbon"
   dependencies:
@@ -9539,12 +9780,12 @@ __metadata:
     "@babel/plugin-transform-react-constant-elements": "npm:^8.0.0"
     "@babel/preset-env": "npm:^8.0.0"
     "@babel/preset-react": "npm:^8.0.0"
-    "@carbon/react": "npm:^1.115.0-rc.0"
-    "@carbon/styles": "npm:^1.114.0-rc.0"
+    "@carbon/react": "npm:^1.115.0"
+    "@carbon/styles": "npm:^1.114.0"
     "@carbon/test-utils": "npm:^10.41.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     babel-plugin-dev-expression: "npm:^0.2.3"
-    babel-preset-carbon: "npm:^0.9.0-rc.0"
+    babel-preset-carbon: "npm:^0.9.0"
     browserslist-config-carbon: "npm:^11.2.0"
     chalk: "npm:6.0.0"
     fs-extra: "npm:^11.0.0"
@@ -9563,7 +9804,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "carbon-components@workspace:packages/carbon-components"
   dependencies:
-    "@carbon/styles": "npm:^1.114.0-rc.0"
+    "@carbon/styles": "npm:^1.114.0"
     "@carbon/test-utils": "npm:^10.41.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     chalk: "npm:6.0.0"
@@ -9770,10 +10011,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chardet@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "chardet@npm:2.1.0"
-  checksum: 10/8085fd8e5b1234fafacb279b4dab84dc127f512f953441daf09fc71ade70106af0dff28e86bfda00bab0de61fb475fa9003c87f82cbad3da02a4f299bfd427da
+"chardet@npm:^2.1.0, chardet@npm:^2.1.1":
+  version: 2.2.0
+  resolution: "chardet@npm:2.2.0"
+  checksum: 10/78d1e5ba7bdc7db23511a194eedca805918df90a511f9c57f9cc7c1fc03702ed4ad053e485a766ace930362869269c4a731feaf460ae24bd3ed7d190cde8087d
   languageName: node
   linkType: hard
 
@@ -12914,10 +13155,35 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fast-string-truncated-width@npm:^3.0.2":
+  version: 3.0.3
+  resolution: "fast-string-truncated-width@npm:3.0.3"
+  checksum: 10/3a1631e48927cb558b612a90ee78a61a660823c39b024bfc113935760b5b64805dbf03c4e696c33005294db578417687432e9d13567f1a582c2c75015e8a7648
+  languageName: node
+  linkType: hard
+
+"fast-string-width@npm:^3.0.2":
+  version: 3.0.2
+  resolution: "fast-string-width@npm:3.0.2"
+  dependencies:
+    fast-string-truncated-width: "npm:^3.0.2"
+  checksum: 10/5b9019769f2b00b96d43575c202f4e035a0e55eba7669a9a32351de9fa0805d0959a2afcaec6e4db5ee9b9a4c08d8e77f95abeb04b5bae2f76635cf04ddb4b80
+  languageName: node
+  linkType: hard
+
 "fast-uri@npm:^3.0.1":
   version: 3.1.5
   resolution: "fast-uri@npm:3.1.5"
   checksum: 10/784bef687ca3ecfb4587a05104a4d41101796f0fec72be47a9abed743b10109e69a24d1ad0854ee7d2705912dc2ca9d93e03d35b65df0a3da0339e05b5d83b5c
+  languageName: node
+  linkType: hard
+
+"fast-wrap-ansi@npm:^0.2.0":
+  version: 0.2.2
+  resolution: "fast-wrap-ansi@npm:0.2.2"
+  dependencies:
+    fast-string-width: "npm:^3.0.2"
+  checksum: 10/c72272e4ee9c047ec4609adea9beb779f058e0aaee37d9e99d2306c401b34ad2b158ba6969860e35f8be7a0b0ba7512b71315d403e58a45a9f0eba0dc5b4befd
   languageName: node
   linkType: hard
 
@@ -14335,7 +14601,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"inquirer@npm:12.9.6, inquirer@npm:^12.5.0":
+"inquirer@npm:12.9.6":
   version: 12.9.6
   resolution: "inquirer@npm:12.9.6"
   dependencies:
@@ -14352,6 +14618,25 @@ __metadata:
     "@types/node":
       optional: true
   checksum: 10/bcac231b3eba055aa16dbdb60ba6d7bfe66109be654bfb19f92095f703af07fc01528f716e86ec62f7bf7bd17b4e21ad4bb32b677cf42075dee04568afe9686b
+  languageName: node
+  linkType: hard
+
+"inquirer@npm:^14.0.0":
+  version: 14.1.0
+  resolution: "inquirer@npm:14.1.0"
+  dependencies:
+    "@inquirer/ansi": "npm:^2.0.7"
+    "@inquirer/core": "npm:^12.0.0"
+    "@inquirer/prompts": "npm:^8.6.0"
+    "@inquirer/type": "npm:^4.0.7"
+    mute-stream: "npm:^3.0.0"
+    run-async: "npm:^4.0.6"
+  peerDependencies:
+    "@types/node": ">=18"
+  peerDependenciesMeta:
+    "@types/node":
+      optional: true
+  checksum: 10/252122c22466b8187e956da710e6ed222e02fac965554137f4b894a08126b56ff8156cce9ccceb0d3da509b8d54ab6a1c1696d25ad8b882dd2a9bd16d3c7e704
   languageName: node
   linkType: hard
 
@@ -16106,6 +16391,15 @@ __metadata:
   version: 6.0.3
   resolution: "kind-of@npm:6.0.3"
   checksum: 10/5873d303fb36aad875b7538798867da2ae5c9e328d67194b0162a3659a627d22f742fc9c4ae95cd1704132a24b00cae5041fc00c0f6ef937dc17080dc4dbb962
+  languageName: node
+  linkType: hard
+
+"klaw-sync@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "klaw-sync@npm:6.0.0"
+  dependencies:
+    graceful-fs: "npm:^4.1.11"
+  checksum: 10/0da397f8961313c3ef8f79fb63af9002cde5a8fb2aeb1a37351feff0dd6006129c790400c3f5c3b4e757bedcabb13d21ec0a5eaef5a593d59515d4f2c291e475
   languageName: node
   linkType: hard
 
@@ -17909,6 +18203,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"mute-stream@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "mute-stream@npm:3.0.0"
+  checksum: 10/bee5db5c996a4585dbffc49e51fea10f3582d7f65441db9bc63126f16269541713c6ccb5a6fe37e08f627967b6eb28dd6b35e54a8dce53cf3837d7e010917b43
+  languageName: node
+  linkType: hard
+
 "nanocolors@npm:^0.2.1":
   version: 0.2.13
   resolution: "nanocolors@npm:0.2.13"
@@ -17916,12 +18217,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nanoid@npm:^3.1.25, nanoid@npm:^3.3.16":
-  version: 3.3.16
-  resolution: "nanoid@npm:3.3.16"
+"nanoid@npm:^3.1.25, nanoid@npm:^3.3.17":
+  version: 3.3.18
+  resolution: "nanoid@npm:3.3.18"
   bin:
     nanoid: bin/nanoid.cjs
-  checksum: 10/8004af92b5541af1dbd23b69845b5026f777d5b7ef07163cea1837aae86e052ced8b383cecbf8a4f1b5e77ae207df96dc45e16b9e0fa3c4b761d085f1e42851b
+  checksum: 10/1b3b4fdac831b92b56d1dbe8b1e63a372432faf86ea383134e3b53141ef8108a60b7f84343b5cefecac9550bb74edf8164da93ea07d1c4f757039bc75d8a5d9e
   languageName: node
   linkType: hard
 
@@ -19693,6 +19994,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"postcss-sorting@npm:^10.0.0":
+  version: 10.0.0
+  resolution: "postcss-sorting@npm:10.0.0"
+  peerDependencies:
+    postcss: ^8.4.20
+  checksum: 10/0d1c9fe60cb7c091ff7411d123303b2f874d435d191d759a78b377543da67a3316c27caa4c2ee0d6a1972e46317c12a3a604b5456e174fa35e1ca11966248010
+  languageName: node
+  linkType: hard
+
 "postcss-sorting@npm:^8.0.2":
   version: 8.0.2
   resolution: "postcss-sorting@npm:8.0.2"
@@ -19732,14 +20042,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.4.32, postcss@npm:^8.4.47, postcss@npm:^8.4.48, postcss@npm:^8.5.10, postcss@npm:^8.5.17, postcss@npm:^8.5.6, postcss@npm:^8.5.9":
-  version: 8.5.23
-  resolution: "postcss@npm:8.5.23"
+"postcss@npm:^8.4.32, postcss@npm:^8.4.47, postcss@npm:^8.4.48, postcss@npm:^8.5.10, postcss@npm:^8.5.17, postcss@npm:^8.5.6, postcss@npm:^8.5.8, postcss@npm:^8.5.9":
+  version: 8.5.26
+  resolution: "postcss@npm:8.5.26"
   dependencies:
-    nanoid: "npm:^3.3.16"
+    nanoid: "npm:^3.3.17"
     picocolors: "npm:^1.1.1"
     source-map-js: "npm:^1.2.1"
-  checksum: 10/8387f421216696bf62a13e5a270e9fefdafc81e196903c0f8d7653f8bab315367cc2261b3c22cf197e492cb075f31bdfc07fd9c3be1cb165ff3cabe14c5a039a
+  checksum: 10/842a624f822f77cb37264cc24f0cf97c0a69dd8d6f7b4a6d76b5a8dc95355899dd044f33a2d4e890da858293de570fce18dff453f3b629ff14cac67a3591895a
   languageName: node
   linkType: hard
 
@@ -21016,7 +21326,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"run-async@npm:^4.0.5":
+"run-async@npm:^4.0.5, run-async@npm:^4.0.6":
   version: 4.0.6
   resolution: "run-async@npm:4.0.6"
   checksum: 10/d23929e36d0422b871a8964d5cfcb1b88295950ea5f72e1dfed458d4c3f3a33a7395e08167d8a4446f2110cfaac7d7653d9c804d2becab8afa8a63e16b97da81
@@ -22114,7 +22424,7 @@ __metadata:
     stylelint-config-standard: "npm:^36.0.0"
     stylelint-config-standard-scss: "npm:^13.1.0"
     stylelint-no-unsupported-browser-features: "npm:^8.0.4"
-    stylelint-order: "npm:^6.0.0"
+    stylelint-order: "npm:^8.0.0"
     stylelint-prettier: "npm:^5.0.0"
     stylelint-scss: "npm:^6.2.1"
     stylelint-use-logical: "npm:^2.1.0"
@@ -22211,7 +22521,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint-order@npm:^6.0.0, stylelint-order@npm:^6.0.2":
+"stylelint-order@npm:^6.0.2":
   version: 6.0.4
   resolution: "stylelint-order@npm:6.0.4"
   dependencies:
@@ -22220,6 +22530,18 @@ __metadata:
   peerDependencies:
     stylelint: ^14.0.0 || ^15.0.0 || ^16.0.1
   checksum: 10/a16a017bded454f78fb3ed02643e93525ee1e4a03c0303c364aa8ee908c4500238036e8df15403f9bb968136c70a32335b494a443df15bb6985bb8e1f431edcd
+  languageName: node
+  linkType: hard
+
+"stylelint-order@npm:^8.0.0":
+  version: 8.1.1
+  resolution: "stylelint-order@npm:8.1.1"
+  dependencies:
+    postcss: "npm:^8.5.8"
+    postcss-sorting: "npm:^10.0.0"
+  peerDependencies:
+    stylelint: ^16.18.0 || ^17.0.0
+  checksum: 10/abe08a7037e68253a524a718f78a11e9ae181093e5c2578743352e22c3873f9177f4cbadccec8d6208adc0a648b27c63ca769d80e6c3758a99a4c494182cb2dc
   languageName: node
   linkType: hard
 
