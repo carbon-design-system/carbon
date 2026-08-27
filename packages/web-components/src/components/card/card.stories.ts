@@ -20,7 +20,6 @@ import Favorite32 from '@carbon/icons/es/favorite/32.js';
 import Notification16 from '@carbon/icons/es/notification/16.js';
 import Settings16 from '@carbon/icons/es/settings/16.js';
 import Share16 from '@carbon/icons/es/share/16.js';
-import Time16 from '@carbon/icons/es/time/16.js';
 import TrashCan16 from '@carbon/icons/es/trash-can/16.js';
 import View16 from '@carbon/icons/es/view/16.js';
 import './index';
@@ -28,6 +27,8 @@ import '../ai-label';
 import '../button';
 import '../grid/index';
 import '../icon-button';
+import '../tag';
+import '../icon-indicator';
 import storyDocs from './card.mdx';
 import styles from './card-story.scss?lit';
 import illustration1 from './_story-assets/illustration-img-1.png';
@@ -763,7 +764,7 @@ export const WithHeaderMedia = {
             </cds-card-title>
           </cds-card-header>
           <cds-card-body>
-            This card demonstrates the header media slot (icon) with action
+            This card demonstrates the icon slot (first child) with action
             buttons on the right.
           </cds-card-body>
         </cds-card>
@@ -777,150 +778,46 @@ export const WithHeaderMedia = {
               <img
                 src=${illustration1}
                 alt="A sample illustration"
-                style="width:48px;height:48px;border-radius:4px;display:block" />
+                style="width:48px;height:48px;border-radius:4px" />
             </cds-card-header-media>
             <cds-card-title>Card with Image</cds-card-title>
           </cds-card-header>
-          <cds-card-body>
-            The header media slot can contain an image element.
-          </cds-card-body>
+          <cds-card-body
+            >The icon slot can contain an image element.</cds-card-body
+          >
         </cds-card>
       </cds-column>
 
-      <!-- Larger 32px icon -->
+      <!-- Tag in header media -->
       <cds-column lg="4" md="4" sm="4">
         <cds-card>
           <cds-card-header>
             <cds-card-header-media>
-              ${iconLoader(Favorite32, { style: 'display:block' })}
+              <cds-tag type="blue">New</cds-tag>
             </cds-card-header-media>
-            <cds-card-title description="Your saved content">
-              Favorite Items
-            </cds-card-title>
+            <cds-card-title>Card with Tag</cds-card-title>
           </cds-card-header>
-          <cds-card-body>
-            This card includes a larger icon (32px) for more prominence.
-          </cds-card-body>
-          <cds-card-footer>
-            <cds-button kind="tertiary" size="md">Learn more</cds-button>
-          </cds-card-footer>
-        </cds-card>
-      </cds-column>
-    </cds-grid>
-  `,
-};
-
-export const WithHorizontalMedia = {
-  argTypes: readonlyArgTypes,
-  render: () => html`
-    <style>
-      ${styles}
-    </style>
-    <cds-grid with-row-gap>
-      <!-- Media start (default) + footer button -->
-      <cds-column lg="8" md="4" sm="4">
-        <cds-card horizontal>
-          <cds-card-media media-width="33.33%">
-            <img
-              src=${placeholder1x1}
-              alt="Placeholder"
-              style="width:100%;height:100%" />
-          </cds-card-media>
-          <cds-card-header>
-            <cds-card-title label="Get started">
-              Generate synthetic tabular data
-            </cds-card-title>
-          </cds-card-header>
-          <cds-card-body>
-            Prepare your data and generate synthetic tabular data using
-            AI-assisted tooling.
-          </cds-card-body>
-          <cds-card-footer>
-            <cds-card-action>
-              <cds-button kind="tertiary" size="md">
-                Start ${iconLoader(ArrowRight16, { slot: 'icon' })}
-              </cds-button>
-            </cds-card-action>
-          </cds-card-footer>
+          <cds-card-body
+            >The icon slot can contain a Tag component.</cds-card-body
+          >
         </cds-card>
       </cds-column>
 
-      <!-- Custom media width -->
-      <cds-column lg="8" md="4" sm="4">
-        <cds-card horizontal>
-          <cds-card-media media-width="50%">
-            <img
-              src=${placeholder16x9}
-              alt="Placeholder"
-              style="width:100%;height:100%" />
-          </cds-card-media>
+      <!-- IconIndicator in header media -->
+      <cds-column lg="4" md="4" sm="4">
+        <cds-card>
           <cds-card-header>
-            <cds-card-title>Custom media width</cds-card-title>
+            <cds-card-header-media>
+              <cds-icon-indicator
+                kind="succeeded"
+                size="16"
+                label="Succeeded"></cds-icon-indicator>
+            </cds-card-header-media>
+            <cds-card-title>Card with Status</cds-card-title>
           </cds-card-header>
           <cds-card-body>
-            Pass <code>media-width="50%"</code> to control the media column
-            width. Accepts any valid CSS value.
+            The icon slot can contain an IconIndicator component.
           </cds-card-body>
-          <cds-card-footer>
-            <cds-card-action>
-              <cds-button kind="ghost" size="md">
-                Learn more ${iconLoader(ArrowRight16, { slot: 'icon' })}
-              </cds-button>
-            </cds-card-action>
-          </cds-card-footer>
-        </cds-card>
-      </cds-column>
-
-      <!-- Media end (content before media in DOM) -->
-      <cds-column lg="8" md="4" sm="4">
-        <cds-card horizontal media-position="end">
-          <cds-card-media media-width="33.33%">
-            <img
-              src=${placeholder1x1}
-              alt="Placeholder"
-              style="width:100%;height:100%" />
-          </cds-card-media>
-          <cds-card-header>
-            <cds-card-title>Media on the right</cds-card-title>
-          </cds-card-header>
-          <cds-card-body>
-            Set <code>media-position="end"</code> to place the media column on
-            the right side.
-          </cds-card-body>
-          <cds-card-footer>
-            <cds-card-action>
-              <cds-button kind="ghost" size="md">
-                Learn more ${iconLoader(ArrowRight16, { slot: 'icon' })}
-              </cds-button>
-            </cds-card-action>
-          </cds-card-footer>
-        </cds-card>
-      </cds-column>
-
-      <!-- Expressive + header media icon + time footer -->
-      <cds-column lg="8" md="4" sm="4">
-        <cds-card horizontal density="expressive">
-          <cds-card-media media-width="33.33%">
-            <img
-              src=${placeholder1x1}
-              alt="Placeholder"
-              style="width:100%;height:100%" />
-          </cds-card-media>
-          <cds-card-header>
-            <cds-card-title label="Prepare your data">
-              Generate synthetic tabular data
-            </cds-card-title>
-          </cds-card-header>
-          <cds-card-footer>
-            <span class="card-story-time">
-              ${iconLoader(Time16, {})} 12:00 PM
-            </span>
-            <cds-card-action>
-              <cds-icon-button kind="ghost" size="md" label="View">
-                ${iconLoader(ArrowRight16, { slot: 'icon' })}
-              </cds-icon-button>
-            </cds-card-action>
-          </cds-card-footer>
         </cds-card>
       </cds-column>
     </cds-grid>
