@@ -193,4 +193,6 @@ export { default as CDSLayout } from './components/layout/layout';
 export { default as CDSLayoutConstraint } from './components/layout/layout-constraint';
 // export { default as CDSTruncatedText } from './components/truncated-text/truncated-text';
 // export { default as CDSActionSet } from './components/action-set/action-set';
+// export { default as CDSGuideBanner } from './components/guide-banner/guide-banner';
+// export { default as CDSGuideBannerElement } from './components/guide-banner/guide-banner-element';
 // export { default as CDSSidePanel } from './components/side-panel/side-panel';
