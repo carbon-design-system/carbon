@@ -34,9 +34,11 @@ describe('cds-tag', function () {
     });
 
     it('does not render a dismiss tooltip when disabled', async () => {
-      const el = await fixture(html`<cds-dismissible-tag
-        disabled
-        text="Tag content"></cds-dismissible-tag>`);
+      const el = await fixture(
+        html`<cds-dismissible-tag
+          disabled
+          text="Tag content"></cds-dismissible-tag>`
+      );
       await el.updateComplete;
 
       expect(el.shadowRoot.querySelector('cds-tooltip')).to.equal(null);

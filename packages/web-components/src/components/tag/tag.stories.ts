@@ -267,7 +267,10 @@ export const Selectable = {
       },
     ];
 
-    return html` <div class="tag-group" aria-label="Selectable tags" role="group">
+    return html` <div
+      class="tag-group"
+      aria-label="Selectable tags"
+      role="group">
       ${tags.map(
         (tag) =>
           html`<cds-selectable-tag
