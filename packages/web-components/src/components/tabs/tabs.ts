@@ -409,7 +409,7 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
   protected _selectionDidChange(
     itemToSelect: CDSTab,
     interactionType?: ContentSwitcherSelectionInteractionType
-  ): void {
+  ) {
     super._selectionDidChange(itemToSelect, interactionType);
     this._assistiveStatusText = this.selectedItemAssistiveText;
   }
@@ -610,7 +610,7 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     return true;
   }
 
-  firstUpdated(): void {
+  firstUpdated() {
     // Call super to run content-switcher init logic (initial selection)
     super.firstUpdated();
     this._tabInitialLoad();
@@ -773,7 +773,7 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     });
   }
 
-  protected _tabInitialLoad(): void {
+  protected _tabInitialLoad() {
     const { selectorTablist, selectorItemEnabled } = this
       .constructor as typeof CDSTabs;
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
@@ -782,7 +782,7 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     if (this.selectionMode === 'manual') {
       const items = this.querySelectorAll<CDSTab>(selectorItemEnabled);
       // Highlight the consumer-selected tab if present, else the first enabled
-      // tab, so it becomes the roving-tabindex focus target. Selection itself is
+      // tab, so it becomes the manual navigation target. Selection itself is
       // owned by the consumer-aware base init; do not force it here.
       const highlighted =
         Array.from(items).find((tab) => tab.selected) ?? items[0] ?? null;

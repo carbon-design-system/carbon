@@ -163,7 +163,7 @@ class CDSContentSwitcher extends LitElement {
   protected _handleUserInitiatedSelectItem(
     item: CDSContentSwitcherItem,
     interactionType?: UserInteractionType
-  ): void {
+  ) {
     if (
       (item && !item.disabled && item.value !== this.value) ||
       (this.selectionMode === 'manual' &&
@@ -246,7 +246,7 @@ class CDSContentSwitcher extends LitElement {
   protected _selectionDidChange(
     itemToSelect: CDSContentSwitcherItem,
     interactionType?: ContentSwitcherSelectionInteractionType
-  ): void {
+  ) {
     if (this.selectionMode === 'manual' && interactionType === 'keyboard') {
       // In manual mode, only focus the item without changing the selection
       Promise.resolve().then(() => {
@@ -325,18 +325,18 @@ class CDSContentSwitcher extends LitElement {
   @property({ type: Boolean, reflect: true, attribute: 'low-contrast' })
   lowContrast = false;
 
-  firstUpdated(): void {
+  firstUpdated() {
     this._selectInitialItem();
   }
 
   /**
    * Consumer-aware initial selection, run once on mount. Resolves the item to
-   * select in this order:
-   *   1. a child already marked `selected` (consumer-set), then
-   *   2. an existing `value` matching a child, then
-   *   3. the `selectedIndex` fallback.
+   * select, considering only enabled children, in this order:
+   *   1. an enabled child already marked `selected` (consumer-set), then
+   *   2. an existing `value` matching an enabled child, then
+   *   3. the `selectedIndex` fallback among enabled children.
    */
-  protected _selectInitialItem(): void {
+  protected _selectInitialItem() {
     const { selectorItemEnabled, selectorItemSelected } = this
       .constructor as typeof CDSContentSwitcher;
     const items = this.querySelectorAll(selectorItemEnabled);
@@ -344,22 +344,31 @@ class CDSContentSwitcher extends LitElement {
       return;
     }
 
+    const isContentSwitcherItem = (
+      item: Element
+    ): item is CDSContentSwitcherItem => item instanceof CDSContentSwitcherItem;
+
     let itemToSelect =
-      (Array.from(items).find((item) => item.matches(selectorItemSelected)) as
-        | CDSContentSwitcherItem
-        | undefined) ?? null;
+      Array.from(items).find(
+        (item): item is CDSContentSwitcherItem =>
+          isContentSwitcherItem(item) && item.matches(selectorItemSelected)
+      ) ?? null;
     if (!itemToSelect && this.value) {
       itemToSelect =
-        (Array.from(items).find(
-          (elem) => (elem as CDSContentSwitcherItem).value === this.value
-        ) as CDSContentSwitcherItem | undefined) ?? null;
+        Array.from(items).find(
+          (item): item is CDSContentSwitcherItem =>
+            isContentSwitcherItem(item) && item.value === this.value
+        ) ?? null;
     }
     if (
       !itemToSelect &&
       this.selectedIndex >= 0 &&
       this.selectedIndex < items.length
     ) {
-      itemToSelect = items[this.selectedIndex] as CDSContentSwitcherItem;
+      const indexed = items[this.selectedIndex];
+      if (isContentSwitcherItem(indexed)) {
+        itemToSelect = indexed;
+      }
     }
 
     if (itemToSelect) {
@@ -368,7 +377,7 @@ class CDSContentSwitcher extends LitElement {
   }
 
   // Validate a selected index for the initially selected content
-  protected _updateSelectedItemFromIndex(): void {
+  protected _updateSelectedItemFromIndex() {
     const { selectorItemEnabled } = this
       .constructor as typeof CDSContentSwitcher;
     const items = this.querySelectorAll(selectorItemEnabled);
