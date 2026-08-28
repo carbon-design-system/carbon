@@ -196,18 +196,21 @@ export const Operational = (args) => {
       <h4>Interactive examples</h4>
       <div
         id="operational-tag"
-        style={{
-          display: 'flex',
-          justifyContent: 'flex-start',
-          marginTop: '1rem',
-        }}
+        className="tag-group"
+        style={{ marginTop: '1rem' }}
         aria-label="Operational tags with Popover"
         role="group">
         {/* High contrast example */}
-        <Popover open={openHighContrast} highContrast>
+        <Popover
+          open={openHighContrast}
+          highContrast
+          onRequestClose={() => {
+            setOpenHighContrast(false);
+          }}>
           <OperationalTag
             onClick={() => {
-              setOpenHighContrast(!openHighContrast);
+              setOpen(false);
+              setOpenHighContrast((prev) => !prev);
             }}
             aria-expanded={openHighContrast}
             renderIcon={Asleep}
@@ -224,10 +227,15 @@ export const Operational = (args) => {
           </PopoverContent>
         </Popover>
 
-        <Popover open={open}>
+        <Popover
+          open={open}
+          onRequestClose={() => {
+            setOpen(false);
+          }}>
           <OperationalTag
             onClick={() => {
-              setOpen(!open);
+              setOpenHighContrast(false);
+              setOpen((prev) => !prev);
             }}
             aria-expanded={open}
             renderIcon={Asleep}

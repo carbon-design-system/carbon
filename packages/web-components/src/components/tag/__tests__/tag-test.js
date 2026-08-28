@@ -33,6 +33,16 @@ describe('cds-tag', function () {
       await expect(el).dom.to.equalSnapshot();
     });
 
+    it('does not render a dismiss tooltip when disabled', async () => {
+      const el = await fixture(html`<cds-dismissible-tag
+        disabled
+        text="Tag content"></cds-dismissible-tag>`);
+      await el.updateComplete;
+
+      expect(el.shadowRoot.querySelector('cds-tooltip')).to.equal(null);
+      expect(el.shadowRoot.querySelector('button').disabled).to.equal(true);
+    });
+
     it('should support onClose event', async () => {
       const el = await fixture(dismissibleTag);
       await el.updateComplete;

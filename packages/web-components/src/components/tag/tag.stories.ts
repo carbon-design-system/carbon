@@ -373,7 +373,8 @@ export const Operational = {
       <h4>Interactive examples</h4>
       <div
         id="operational-tag"
-        style="display:flex; justify-content:flex-start; margin-top:1rem"
+        class="tag-group"
+        style="margin-top:1rem"
         aria-label="Operational tags with Popover"
         role="group">
         <cds-popover highContrast>

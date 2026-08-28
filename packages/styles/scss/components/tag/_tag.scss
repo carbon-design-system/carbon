@@ -247,7 +247,8 @@
     @include tag-theme(
       $background-inverse,
       $text-inverse,
-      $background-inverse-hover
+      $background-inverse-hover,
+      $close-focus-color: $focus-inverse
     );
   }
 
@@ -262,10 +263,12 @@
   .#{$prefix}--tag--outline:not(.#{$prefix}--tag--operational):not(span):not(
       [disabled]
     ) {
-    @include tag-theme($background, $text-primary, $layer-hover);
-
-    outline: 1px solid $background-inverse;
-    outline-offset: -1px;
+    @include tag-theme(
+      $background,
+      $text-primary,
+      $layer-hover,
+      $outline-color: $background-inverse
+    );
   }
 
   .#{$prefix}--tag--disabled:not(.#{$prefix}--tag--operational),
@@ -276,13 +279,18 @@
     box-shadow: none;
     outline: none;
 
-    &:hover {
-      cursor: not-allowed;
-    }
-
     .#{$prefix}--tag__label {
       background-color: $layer;
       color: $text-disabled;
+    }
+  }
+
+  .#{$prefix}--tag--disabled:not(.#{$prefix}--tag--operational):not(
+      .#{$prefix}--tag--filter
+    ),
+  .#{$prefix}--tag--interactive.#{$prefix}--tag--disabled {
+    &:hover {
+      cursor: not-allowed;
     }
   }
 
@@ -353,10 +361,6 @@
     z-index: 99999;
     box-shadow: inset 0 0 0 1px $focus;
     outline: none;
-  }
-
-  .#{$prefix}--tag--high-contrast .#{$prefix}--tag__close-icon:focus {
-    box-shadow: inset 0 0 0 1px $focus-inverse;
   }
 
   .#{$prefix}--tag--filter.#{$prefix}--tag--disabled
@@ -469,9 +473,14 @@
     max-inline-size: convert.to-rem(158px);
   }
 
+  .#{$prefix}--tag > span {
+    min-inline-size: 0;
+  }
+
   .#{$prefix}--interactive--tag-children {
     display: inline-flex;
     max-inline-size: convert.to-rem(200px);
+    min-inline-size: 0;
     place-items: center;
   }
 
@@ -479,7 +488,7 @@
     .#{$prefix}--tag__custom-icon
     + span
     > .#{$prefix}--interactive--tag-children {
-    max-inline-size: convert.to-rem(184px);
+    max-inline-size: 100%;
   }
 
   .#{$prefix}--tag .#{$prefix}--definition-term {

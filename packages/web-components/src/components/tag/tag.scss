@@ -72,6 +72,8 @@ $css--plex: true !default;
 :host(#{$prefix}-dismissible-tag) #{$prefix}-tooltip {
   @extend .#{$prefix}--icon-tooltip;
   @extend .#{$prefix}--tag-label-tooltip;
+
+  display: inline-flex;
 }
 
 :host(#{$prefix}-dismissible-tag) .#{$prefix}--tag__close-icon {
@@ -109,12 +111,15 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-tag[size='lg']),
-:host(#{$prefix}-dismissible-tag[size='lg']),
 :host(#{$prefix}-tag-skeleton[size='lg']) {
   @extend .#{$prefix}--layout--size-lg;
   @extend .#{$prefix}--tag--lg;
 
   padding-inline: $spacing-04;
+}
+
+:host(#{$prefix}-dismissible-tag[size='lg']) {
+  @extend .#{$prefix}--layout--size-lg;
 }
 
 :host(#{$prefix}-tag[size='lg'][has-custom-icon]),
@@ -191,16 +196,19 @@ $css--plex: true !default;
   @include tag-theme(
     $background-inverse,
     $text-inverse,
-    $background-inverse-hover
+    $background-inverse-hover,
+    $close-focus-color: $focus-inverse
   );
 }
 
 :host(#{$prefix}-dismissible-tag[type='outline']:not([disabled])),
 :host(#{$prefix}-tag[type='outline']:not([disabled])) {
-  @include tag-theme($background, $text-primary, $layer-hover);
-
-  outline: 1px solid $background-inverse;
-  outline-offset: -1px;
+  @include tag-theme(
+    $background,
+    $text-primary,
+    $layer-hover,
+    $outline-color: $background-inverse
+  );
 }
 
 :host(#{$prefix}-tag[filter]) {
