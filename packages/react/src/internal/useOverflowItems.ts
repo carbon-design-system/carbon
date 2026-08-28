@@ -36,7 +36,7 @@ function useOverflowItems<T extends Item>(
   visibleItems: T[];
   itemRefHandler: (id: string, node: HTMLElement | null) => void;
   hiddenItems: T[];
-  offsetRefHandler: (node: HTMLElement | null) => HTMLElement;
+  offsetRefHandler: (node: HTMLElement | null) => HTMLElement | null;
 } {
   const [remainingWidth, setRemainingWidth] = useState(0);
   const offsetWidthRef = useRef<number>(0);
