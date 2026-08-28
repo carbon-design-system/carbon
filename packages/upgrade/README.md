@@ -344,9 +344,9 @@ npx @carbon/upgrade migrate slug-prop-to-decorator-prop --write
 
 ### Unstable / preview Pagination to Pagination
 
-Migrates `unstable_Pagination` / `preview_Pagination` to the stable
-`Pagination` component. Drops `PageSelector` imports and children render-props,
-since the stable component renders an equivalent page-select control by default.
+Migrates `unstable_Pagination` / `preview_Pagination` to the stable `Pagination`
+component. Drops `PageSelector` imports and children render-props, since the
+stable component renders an equivalent page-select control by default.
 
 **Usage:**
 
