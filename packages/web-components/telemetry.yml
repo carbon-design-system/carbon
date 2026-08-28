@@ -52,6 +52,7 @@ collect:
         - close-on-activation
         - close-on-escape
         - close-on-select
+        - collapse-label
         - collapse-mode
         - color-scheme
         - cols
@@ -80,6 +81,7 @@ collect:
         - enabled-range
         - enter-delay-ms
         - even
+        - expand-label
         - expandable
         - expanded
         - feedback
@@ -141,6 +143,7 @@ collect:
         - legend-id
         - legend-text
         - lineCount
+        - lines
         - link-role
         - loading-description
         - loading-icon-description
@@ -286,6 +289,10 @@ collect:
         # cds-accordion-item
         - oncds-accordion-item-beingtoggled
         - oncds-accordion-item-toggled
+        # cds-action-set
+        - actions
+        - button-size
+        - disable-stacking
         # cds-ai-skeleton-icon
         - custom-styles
         # cds-badge-indicator
@@ -481,6 +488,12 @@ collect:
         - oncds-radio-button-group-changed
         # cds-radio-tile
         - oncds-radio-tile-selected
+        # cds-resizer-handle
+        - axis
+        - onresize-drag
+        - onresize-end
+        - onresize-reset
+        - onresize-start
         # cds-selectable-tag
         - oncds-selectable-tag-beforeselected
         - oncds-selectable-tag-selected
@@ -495,6 +508,7 @@ collect:
         - oncds-side-nav-menu-toggled
         # cds-side-panel
         - animate-title
+        - close-icon-tooltip-alignment
         - condensed-actions
         - current-step
         - include-overlay
@@ -503,6 +517,7 @@ collect:
         - oncds-side-panel-closed
         - oncds-side-panel-navigate-back
         - placement
+        - resizable
         - selector-page-content
         - slide-in
         # cds-skip-to-content
@@ -646,8 +661,16 @@ collect:
         - xl
         - xs
         # General - type
+        - expand
         - number
         - text
+        - tooltip
+        # cds-action-set - button-size
+        - 2xl
+        - lg
+        - md
+        - sm
+        - xl
         # cds-fluid-date-picker-skeleton - date-picker-type
         - range
         - simple
@@ -676,6 +699,9 @@ collect:
         - sm
         - xl
         - xs
+        # cds-resizer-handle - axis
+        - x
+        - y
   npm:
     dependencies: null
   js:
