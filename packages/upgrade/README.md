@@ -342,6 +342,47 @@ npx @carbon/upgrade migrate slug-prop-to-decorator-prop --write
 <Component decorator="my-identifier">Content</Component>
 ```
 
+### Unstable / preview Pagination to Pagination
+
+Migrates `unstable_Pagination` / `preview_Pagination` to the stable
+`Pagination` component. Drops `PageSelector` imports and children render-props,
+since the stable component renders an equivalent page-select control by default.
+
+**Usage:**
+
+```bash
+npx @carbon/upgrade migrate unstable-pagination-to-pagination --write
+```
+
+**Example:**
+
+```jsx
+// Before
+import {
+  unstable_Pagination as Pagination,
+  unstable_PageSelector as PageSelector,
+} from '@carbon/react';
+
+<Pagination pageSizes={[10, 20, 30]} totalItems={100}>
+  {({ currentPage, onSetPage, totalPages }) => (
+    <PageSelector
+      currentPage={currentPage}
+      onChange={(event) => onSetPage(event.target.value)}
+      totalPages={totalPages}
+    />
+  )}
+</Pagination>;
+
+// After
+import { Pagination } from '@carbon/react';
+
+<Pagination pageSizes={[10, 20, 30]} totalItems={100} />;
+```
+
+Custom page-select children are removed and a `TODO` comment is left to migrate
+them with `renderPageSelect` if needed. Omit `pageSizes` to hide the items per
+page selector.
+
 ### FeatureFlag deprecate flags prop
 
 Updates FeatureFlags component to use individual boolean props instead of the
