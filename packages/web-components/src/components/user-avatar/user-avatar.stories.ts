@@ -208,7 +208,7 @@ export const WithImage = {
 };
 
 const meta: Meta = {
-  title: 'Experimental/UserAvatar',
+  title: 'Components/UserAvatar',
   component: 'cds-user-avatar',
 };
 
