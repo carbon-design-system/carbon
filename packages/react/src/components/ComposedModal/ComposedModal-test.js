@@ -451,7 +451,7 @@ describe.each([
       });
     });
 
-    it('should call onClose when the native dialog cancel event fires (Escape key via browser)', async () => {
+    it('should call onClose when the dialog cancel event fires', () => {
       const onClose = jest.fn();
       render(
         <FeatureFlags enableDialogElement>
@@ -466,8 +466,7 @@ describe.each([
       const dialog = document.querySelector('dialog');
       expect(dialog).not.toBeNull();
 
-      // Simulate the browser's native cancel event that fires when Escape is
-      // pressed on a <dialog> element.
+      // Simulate a native cancel event on the dialog.
       fireEvent(
         dialog,
         new Event('cancel', { bubbles: false, cancelable: true })

@@ -601,7 +601,10 @@ const ComposedModalDialog = React.forwardRef<
   const modalBody = enableDialogElement ? (
     <Dialog
       open={open}
-      onCancel={closeModal}
+      onCancel={(evt) => {
+        evt.preventDefault();
+        closeModal(evt);
+      }}
       focusAfterCloseRef={launcherButtonRef}
       modal
       className={containerClass}
