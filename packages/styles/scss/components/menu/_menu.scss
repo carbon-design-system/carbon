@@ -42,7 +42,6 @@
 
     @if enabled('enable-v12-release') {
       padding: $spacing-02;
-      border: 1px solid $border-subtle;
       border-radius: $border-radius-08;
     }
   }

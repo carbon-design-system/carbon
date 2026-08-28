@@ -250,7 +250,9 @@ class CDSMenu extends HostListenerMixin(LitElement) {
       [`${prefix}--menu--shown`]: position[0] >= 0 && position[1] >= 0,
       [`${prefix}--menu--with-selectable-items`]:
         this.context.hasSelectableItems,
-      [`${prefix}--menu--border`]: this.border,
+      // In v12 the menu always renders a border
+      [`${prefix}--menu--border`]:
+        this.border || isFeatureFlagEnabled('enable-v12-release', this),
       [`${prefix}--menu--background-token__background`]:
         this.backgroundToken === MENU_BACKGROUND_TOKEN.BACKGROUND,
     });
