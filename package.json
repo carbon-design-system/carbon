@@ -39,7 +39,7 @@
     "flatpickr@4.6.13": "patch:flatpickr@npm%3A4.6.13#./.yarn/patches/flatpickr-npm-4.6.13-06399933fc.patch",
     "@octokit/rest": "^22.0.0",
     "eslint": "9.39.5",
-    "typescript-eslint": "8.67.0",
+    "typescript-eslint": "8.68.0",
     "immutable": "^5.1.8"
   },
   "devDependencies": {
@@ -76,7 +76,7 @@
     "eslint-plugin-testing-library": "^7.6.6",
     "fs-extra": "^11.0.0",
     "glob": "^13.0.0",
-    "globals": "17.10.0",
+    "globals": "17.11.0",
     "husky": "^9.0.0",
     "jest": "^30.2.0",
     "jest-junit": "^17.0.0",

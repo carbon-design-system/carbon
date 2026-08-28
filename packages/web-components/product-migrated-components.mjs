@@ -16,6 +16,8 @@ export const productMigratedStoryGlobs = [
   '../src/components/action-set/*.mdx',
   '../src/components/edit-in-place/edit-in-place.stories.ts',
   '../src/components/edit-in-place/*.mdx',
+  '../src/components/options-tile/options-tile.stories.ts',
+  '../src/components/options-tile/*.mdx',
   '../src/components/resizer/resizer.stories.ts',
   '../src/components/resizer/*.mdx',
   '../src/components/side-panel/side-panel.stories.ts',
@@ -39,6 +41,7 @@ export const productMigratedStoryGlobs = [
 export const excludeProductsComponents = [
   'src/components/action-set/**/*',
   'src/components/edit-in-place/**/*',
+  'src/components/options-tile/**/*',
   'src/components/resizer/**/*',
   'src/components/side-panel/**/*',
   'src/components/truncated-text/**/*',

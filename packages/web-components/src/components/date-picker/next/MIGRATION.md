@@ -12,6 +12,15 @@ classic and preview can coexist while you migrate.
 > **Preview:** APIs and behavior may change before general availability. Some
 > classic features are not implemented yet.
 
+## Browser support
+
+Temporal is not yet universally shipped — no version of Safari implements it,
+and Chrome/Edge only gained it in 144. `@carbon/utilities/date-picker` therefore
+bundles [`temporal-polyfill`](https://github.com/fullcalendar/temporal-polyfill)
+and installs it on `globalThis` only when the engine has no native
+implementation, so native Temporal is always preferred where it exists. Nothing
+is required on your side — do not add a second Temporal polyfill.
+
 ## Tag and event renames
 
 | Classic v11               | Preview                           |
