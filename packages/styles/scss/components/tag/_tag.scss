@@ -105,8 +105,10 @@
     padding-block: 0;
     padding-inline-end: 0;
 
-    &:hover {
-      outline: none;
+    @media (any-hover: hover) {
+      &:hover {
+        outline: none;
+      }
     }
   }
 
@@ -116,9 +118,11 @@
     color: $text-primary;
     cursor: pointer;
 
-    &:hover {
-      background-color: $layer-hover;
-      outline: none;
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: $layer-hover;
+        outline: none;
+      }
     }
 
     &:focus {
@@ -131,8 +135,10 @@
     background-color: $layer-selected-inverse;
     color: $text-inverse;
 
-    &:hover {
-      background-color: $layer-selected-inverse;
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: $layer-selected-inverse;
+      }
     }
   }
 
@@ -142,9 +148,11 @@
     color: $tag-color-gray;
     cursor: pointer;
 
-    &:hover {
-      background-color: $tag-hover-gray;
-      outline: none;
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: $tag-hover-gray;
+        outline: none;
+      }
     }
 
     &:focus {
@@ -255,8 +263,10 @@
   .#{$prefix}--multi-select--readonly
     .#{$prefix}--tag--high-contrast:not(.#{$prefix}--tag--operational)
     .#{$prefix}--tag__close-icon {
-    &:hover {
-      background-color: transparent;
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: transparent;
+      }
     }
   }
 
@@ -289,8 +299,10 @@
       .#{$prefix}--tag--filter
     ),
   .#{$prefix}--tag--interactive.#{$prefix}--tag--disabled {
-    &:hover {
-      cursor: not-allowed;
+    @media (any-hover: hover) {
+      &:hover {
+        cursor: not-allowed;
+      }
     }
   }
 
@@ -300,9 +312,11 @@
     background-color: $layer;
     color: $text-disabled;
 
-    &:hover {
-      background-color: $layer;
-      cursor: not-allowed;
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: $layer;
+        cursor: not-allowed;
+      }
     }
   }
 
@@ -363,9 +377,11 @@
     outline: none;
   }
 
-  .#{$prefix}--tag--filter.#{$prefix}--tag--disabled
-    .#{$prefix}--tag__close-icon:hover {
-    background-color: transparent;
+  @media (any-hover: hover) {
+    .#{$prefix}--tag--filter.#{$prefix}--tag--disabled
+      .#{$prefix}--tag__close-icon:hover {
+      background-color: transparent;
+    }
   }
 
   .#{$prefix}--tag--filter.#{$prefix}--tag--disabled svg {
@@ -429,11 +445,13 @@
     background-color: currentColor;
   }
 
-  .#{$prefix}--tag
-    .#{$prefix}--ai-label
-    .#{$prefix}--ai-label__button--inline:hover,
-  .#{$prefix}--tag .#{$prefix}--slug .#{$prefix}--slug__button--inline:hover {
-    border-color: currentColor;
+  @media (any-hover: hover) {
+    .#{$prefix}--tag
+      .#{$prefix}--ai-label
+      .#{$prefix}--ai-label__button--inline:hover,
+    .#{$prefix}--tag .#{$prefix}--slug .#{$prefix}--slug__button--inline:hover {
+      border-color: currentColor;
+    }
   }
 
   .#{$prefix}--tag--filter .#{$prefix}--tag__decorator > *,

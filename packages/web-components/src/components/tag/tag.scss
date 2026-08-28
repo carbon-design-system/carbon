@@ -238,11 +238,13 @@ $css--plex: true !default;
 :host(#{$prefix}-dismissible-tag[disabled]),
 :host(#{$prefix}-tag[filter][disabled]) {
   .#{$prefix}--tag__close-icon {
+    background-color: transparent;
     cursor: not-allowed;
 
-    &,
-    &:hover {
-      background-color: transparent;
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: transparent;
+      }
     }
   }
 }
@@ -253,9 +255,11 @@ $css--plex: true !default;
   background-color: $layer;
   color: $text-disabled;
 
-  &:hover {
-    background-color: $layer;
-    cursor: not-allowed;
+  @media (any-hover: hover) {
+    &:hover {
+      background-color: $layer;
+      cursor: not-allowed;
+    }
   }
 }
 

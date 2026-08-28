@@ -26,8 +26,10 @@
   &.#{$prefix}--tag--operational {
     border: 1px solid $border-color;
 
-    &:hover {
-      background-color: $filter-hover-color;
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: $filter-hover-color;
+      }
     }
   }
 
@@ -38,8 +40,10 @@
       background-clip: content-box;
     }
 
-    &:hover {
-      background-color: $filter-hover-color;
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: $filter-hover-color;
+      }
     }
 
     @if $close-focus-color {
