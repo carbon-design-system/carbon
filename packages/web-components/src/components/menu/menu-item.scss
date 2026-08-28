@@ -100,10 +100,8 @@ $css--plex: true !default;
   color: $text-on-color;
 }
 
-@if not flags.enabled('enable-v12-release') {
-  :host(.#{$prefix}--menu-item--danger:focus) {
-    box-shadow: inset 0 0 0 to-rem(3px) $background;
-  }
+:host(.#{$prefix}--menu-item--danger:focus) {
+  box-shadow: inset 0 0 0 to-rem(3px) $background;
 }
 
 .#{$prefix}--menu-item__icon,

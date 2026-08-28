@@ -218,10 +218,8 @@
     color: $text-on-color;
   }
 
-  @if not enabled('enable-v12-release') {
-    .#{$prefix}--menu-item--danger:focus {
-      box-shadow: inset 0 0 0 convert.to-rem(3px) $background;
-    }
+  .#{$prefix}--menu-item--danger:focus {
+    box-shadow: inset 0 0 0 convert.to-rem(3px) $background;
   }
 
   // MenuItemDivider
