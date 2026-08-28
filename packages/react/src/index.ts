@@ -773,6 +773,7 @@ export type { SwitcherItemProps } from './components/UIShell/SwitcherItem';
 // export { TruncatedText } from './components/TruncatedText';
 // export type { TruncatedTextProps } from './components/TruncatedText';
 // export * from './components/UserAvatar';
+// export type { TagOverflowItem, TagOverflowProps } from './components/TagOverflow';
 
 // TODO: uncomment in v12 — also remove from excludeProductsComponents
 // export * from './components/Tearsheet';

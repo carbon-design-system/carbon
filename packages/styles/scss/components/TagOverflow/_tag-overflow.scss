@@ -1,0 +1,202 @@
+//
+// Copyright IBM Corp. 2024, 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../../config' as *;
+@use '../../theme' as *;
+@use '../../type' as *;
+@use '../../spacing' as *;
+@use '../../breakpoint' as *;
+
+/// TagOverflow styles
+/// @access public
+/// @group tag-overflow
+@mixin tag-overflow {
+  $block-class: #{$prefix}--tag-overflow;
+  $block-class-popover: #{$block-class}-popover;
+  $block-class-modal: #{$block-class}-modal;
+
+  .#{$block-class}__visible-tags {
+    display: flex;
+  }
+
+  .#{$block-class}--align-end {
+    justify-content: flex-end;
+  }
+
+  .#{$block-class}--align-center {
+    justify-content: center;
+  }
+
+  .#{$block-class}--multiline {
+    flex-wrap: wrap;
+  }
+
+  .#{$block-class}__item--tag {
+    border: none;
+    margin-block-end: $spacing-03;
+    margin-inline-end: $spacing-03;
+  }
+
+  .#{$block-class}__item--tag span {
+    display: inline-block;
+    max-inline-size: $spacing-12;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .#{$block-class}__item--tag
+    .#{$prefix}--popover-container:not(.#{$prefix}--popover--open)
+    .#{$prefix}--popover-content {
+    display: none;
+  }
+
+  .#{$block-class}__indicator {
+    display: inline-block;
+    max-inline-size: $spacing-09;
+  }
+
+  .#{$prefix}--popover .#{$prefix}--popover-content {
+    white-space: normal;
+  }
+
+  .#{$block-class-popover} {
+    display: inline-block;
+    vertical-align: bottom;
+  }
+
+  .#{$block-class-popover} .#{$prefix}--tag.#{$prefix}--tag--interactive {
+    border: 0;
+  }
+
+  .#{$block-class-popover} .#{$prefix}--popover .#{$prefix}--popover-content {
+    padding: $spacing-05;
+  }
+
+  .#{$block-class-popover}--hidden {
+    overflow: hidden;
+    max-inline-size: 0;
+    visibility: hidden;
+  }
+
+  .#{$block-class-popover}__el {
+    min-inline-size: initial;
+    text-align: start;
+  }
+
+  .#{$block-class-popover}__el .#{$block-class-popover}__trigger {
+    /* stylelint-disable-next-line declaration-no-important */
+    border: none !important;
+    font-family: inherit;
+  }
+
+  .#{$block-class-popover}__el .#{$prefix}--link:active,
+  .#{$block-class-popover}__el .#{$prefix}--link:active:visited,
+  .#{$block-class-popover}__el .#{$prefix}--link:active:visited:hover {
+    color: $text-inverse;
+  }
+
+  .#{$block-class-popover}__el .#{$block-class-popover}__tag-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .#{$block-class-popover}__el .#{$block-class-popover}__show-all-tags-link {
+    color: $link-inverse;
+  }
+
+  .#{$block-class-popover}__el
+    .#{$block-class-popover}__show-all-tags-link:hover,
+  .#{$block-class-popover}__el
+    .#{$block-class-popover}__show-all-tags-link:visited:hover {
+    color: $link-inverse-hover;
+  }
+
+  .#{$block-class-popover}__el
+    .#{$block-class-popover}__show-all-tags-link:focus {
+    color: $focus-inverse;
+  }
+
+  .#{$block-class-popover}__el
+    .#{$block-class-popover}__show-all-tags-link:visited {
+    color: $link-inverse;
+  }
+
+  .#{$block-class-popover}__el
+    .#{$block-class-popover}__tag-item.#{$block-class-popover}__tag-item--tag
+    .#{$prefix}--tag {
+    background-color: $background-inverse-hover;
+  }
+
+  .#{$block-class-popover}__el
+    .#{$block-class-popover}__tag-item.#{$block-class-popover}__tag-item--default,
+  .#{$block-class-popover}__el
+    .#{$block-class-popover}__tag-item.#{$block-class-popover}__tag-item--default
+    .#{$prefix}--tag {
+    @include type-style('body-compact-01');
+
+    display: block;
+    overflow: hidden;
+    padding: 0;
+    border-radius: 0;
+    margin: 0;
+    background-color: inherit;
+    color: inherit;
+    min-block-size: initial;
+    min-inline-size: initial;
+  }
+
+  .#{$block-class-popover}__el
+    .#{$block-class-popover}__tag
+    .#{$prefix}--tag__close-icon {
+    padding: 0;
+  }
+
+  .#{$block-class-popover}__el
+    .#{$block-class-popover}__tag
+    .#{$prefix}--tag--high-contrast {
+    background-color: $background;
+    color: $text-primary;
+  }
+
+  .#{$block-class-popover}__el
+    .#{$block-class-popover}__tag
+    .#{$prefix}--tag__close-icon:hover {
+    background-color: $background-hover;
+  }
+
+  .#{$block-class-popover}__el
+    .#{$block-class-popover}__tag
+    .#{$prefix}--tag__close-icon:focus {
+    box-shadow: inset 0 0 0 $spacing-01 $focus;
+  }
+
+  .#{$block-class-modal} {
+    text-align: initial;
+    white-space: initial;
+  }
+
+  .#{$block-class-modal}__container {
+    @include breakpoint(md) {
+      block-size: 90%;
+      max-block-size: 450px;
+    }
+  }
+
+  .#{$block-class-modal}__search {
+    margin-block: $spacing-05 0;
+  }
+
+  .#{$block-class-modal}__header {
+    margin-inline-end: $spacing-05;
+    padding-inline-end: 0;
+  }
+
+  .#{$block-class-modal}__body .#{$prefix}--tag {
+    margin-block-end: $spacing-03;
+    margin-inline-end: $spacing-03;
+  }
+}
