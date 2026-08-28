@@ -131,6 +131,9 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   _customHeaderElements: Element[] = [];
 
   @state()
+  _customHeaderHidden = false;
+
+  @state()
   _sidePanelWidth?: number;
 
   @state()
@@ -612,15 +615,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
       `${animationProgress}`
     );
 
-    if (animationProgress === 1) {
-      this._customHeaderElements.forEach((el) => {
-        el.classList.add(`cds--visually-hidden`);
-      });
-    } else {
-      this._customHeaderElements.forEach((el) => {
-        el.classList.remove(`cds--visually-hidden`);
-      });
-    }
+    this._customHeaderHidden = animationProgress === 1;
   };
 
   /**
@@ -988,9 +983,12 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
           : ''}
 
         <!-- slot for custom header components -->
-        <slot
-          name="above-title"
-          @slotchange=${this._handleCustomHeaderSlotChange}></slot>
+        <div
+          class=${`${blockClass}__custom-header-wrapper${this._customHeaderHidden ? ` ${blockClass}__custom-header-wrapper--hidden` : ''}`}>
+          <slot
+            name="above-title"
+            @slotchange=${this._handleCustomHeaderSlotChange}></slot>
+        </div>
 
         <!-- render title label -->
         ${title?.length && labelText?.length
@@ -1034,9 +1032,12 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
         </p>
 
         <!-- slot for custom header components -->
-        <slot
-          name="below-title"
-          @slotchange=${this._handleCustomHeaderSlotChange}></slot>
+        <div
+          class=${`${blockClass}__custom-header-wrapper${this._customHeaderHidden ? ` ${blockClass}__custom-header-wrapper--hidden` : ''}`}>
+          <slot
+            name="below-title"
+            @slotchange=${this._handleCustomHeaderSlotChange}></slot>
+        </div>
 
         <div
           class=${this._hasActionToolbar ? `${blockClass}__action-toolbar` : ''}
