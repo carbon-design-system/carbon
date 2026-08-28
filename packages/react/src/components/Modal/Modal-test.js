@@ -706,6 +706,33 @@ describe.each([
         expect(focusElem).toHaveFocus();
       });
     });
+
+    it('should call onRequestClose when the native dialog cancel event fires (Escape key via browser)', async () => {
+      const onRequestClose = jest.fn();
+      render(
+        <FeatureFlags enableDialogElement>
+          <Component
+            open
+            modalHeading="Test modal"
+            primaryButtonText="Submit"
+            secondaryButtonText="Cancel"
+            onRequestClose={onRequestClose}
+          />
+        </FeatureFlags>
+      );
+
+      const dialog = document.querySelector('dialog');
+      expect(dialog).not.toBeNull();
+
+      // Simulate the browser's native cancel event that fires when Escape is
+      // pressed on a <dialog> element.
+      fireEvent(
+        dialog,
+        new Event('cancel', { bubbles: false, cancelable: true })
+      );
+
+      expect(onRequestClose).toHaveBeenCalledTimes(1);
+    });
   });
 
   describe('Modal scroll content hysteresis', () => {

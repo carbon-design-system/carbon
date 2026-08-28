@@ -450,6 +450,31 @@ describe.each([
         expect(focusElem).toHaveFocus();
       });
     });
+
+    it('should call onClose when the native dialog cancel event fires (Escape key via browser)', async () => {
+      const onClose = jest.fn();
+      render(
+        <FeatureFlags enableDialogElement>
+          <Component open onClose={onClose}>
+            <ModalHeader>Modal header</ModalHeader>
+            <ModalBody>Modal content</ModalBody>
+            <ModalFooter primaryButtonText="Add" secondaryButtonText="Cancel" />
+          </Component>
+        </FeatureFlags>
+      );
+
+      const dialog = document.querySelector('dialog');
+      expect(dialog).not.toBeNull();
+
+      // Simulate the browser's native cancel event that fires when Escape is
+      // pressed on a <dialog> element.
+      fireEvent(
+        dialog,
+        new Event('cancel', { bubbles: false, cancelable: true })
+      );
+
+      expect(onClose).toHaveBeenCalledTimes(1);
+    });
   });
 
   it('should respect the deprecated slug prop', () => {

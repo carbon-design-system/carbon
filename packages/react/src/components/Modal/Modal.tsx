@@ -735,6 +735,7 @@ const ModalDialog = React.forwardRef(function ModalDialog(
   const modalBody = enableDialogElement ? (
     <Dialog
       open={open}
+      onCancel={onRequestClose}
       focusAfterCloseRef={launcherButtonRef}
       modal
       ref={innerModal}
