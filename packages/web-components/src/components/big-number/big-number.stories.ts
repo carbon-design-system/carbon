@@ -277,7 +277,7 @@ export const Skeleton = {
 };
 
 const meta: Meta = {
-  title: 'Components/BigNumber',
+  title: 'Preview/BigNumber',
   component: 'cds-big-number',
 };
 
