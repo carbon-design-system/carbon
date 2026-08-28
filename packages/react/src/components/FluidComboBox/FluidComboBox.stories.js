@@ -152,12 +152,9 @@ const sharedArgs = {
 };
 
 const sharedControls = Object.keys(sharedArgTypes);
-const widthArgType = {
-  control: { type: 'range', min: 300, max: 800, step: 50 },
-};
 
-export const Default = ({ defaultWidth, ...comboBoxArgs }) => (
-  <div style={{ width: defaultWidth }}>
+export const Default = (comboBoxArgs) => (
+  <div style={{ width: 400 }}>
     <FluidComboBox
       id="default"
       titleText="Label"
@@ -171,16 +168,14 @@ export const Default = ({ defaultWidth, ...comboBoxArgs }) => (
 
 Default.args = {
   ...sharedArgs,
-  defaultWidth: 400,
 };
 
 Default.argTypes = {
   ...sharedArgTypes,
-  defaultWidth: widthArgType,
 };
 
 Default.parameters = {
-  controls: { include: [...sharedControls, 'defaultWidth'] },
+  controls: { include: sharedControls },
 };
 
 const ToggleTip = (
@@ -197,8 +192,8 @@ const ToggleTip = (
   </>
 );
 
-export const Condensed = ({ defaultWidth, ...comboBoxArgs }) => (
-  <div style={{ width: defaultWidth }}>
+export const Condensed = (comboBoxArgs) => (
+  <div style={{ width: 400 }}>
     <FluidComboBox
       id="default"
       titleText="Label"
@@ -212,13 +207,11 @@ export const Condensed = ({ defaultWidth, ...comboBoxArgs }) => (
 
 Condensed.args = {
   ...sharedArgs,
-  defaultWidth: 400,
   isCondensed: true,
 };
 
 Condensed.argTypes = {
   ...sharedArgTypes,
-  defaultWidth: widthArgType,
   isCondensed: {
     ...sharedArgTypes.isCondensed,
     table: { readonly: true },
@@ -226,7 +219,7 @@ Condensed.argTypes = {
 };
 
 Condensed.parameters = {
-  controls: { include: [...sharedControls, 'defaultWidth'] },
+  controls: { include: sharedControls },
 };
 
 const aiLabel = (
@@ -260,8 +253,8 @@ const aiLabel = (
   </AILabel>
 );
 
-export const withAILabel = ({ defaultWidth, ...comboBoxArgs }) => (
-  <div style={{ width: defaultWidth }}>
+export const withAILabel = (comboBoxArgs) => (
+  <div style={{ width: 400 }}>
     <FluidComboBox
       id="default"
       titleText="Label"
@@ -276,32 +269,18 @@ export const withAILabel = ({ defaultWidth, ...comboBoxArgs }) => (
 
 withAILabel.args = {
   ...sharedArgs,
-  defaultWidth: 400,
 };
 
 withAILabel.argTypes = {
   ...sharedArgTypes,
-  defaultWidth: widthArgType,
 };
 
 withAILabel.parameters = {
-  controls: { include: [...sharedControls, 'defaultWidth'] },
+  controls: { include: sharedControls },
 };
 
-export const Skeleton = ({ defaultWidth }) => (
-  <div style={{ width: defaultWidth }}>
+export const Skeleton = () => (
+  <div style={{ width: 400 }}>
     <FluidComboBoxSkeleton />
   </div>
 );
-
-Skeleton.args = {
-  defaultWidth: 400,
-};
-
-Skeleton.argTypes = {
-  defaultWidth: widthArgType,
-};
-
-Skeleton.parameters = {
-  controls: { include: ['defaultWidth'] },
-};

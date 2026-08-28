@@ -73,7 +73,6 @@ const items = [
 ];
 
 const args = {
-  defaultWidth: 400,
   ariaLabel: '',
   'auto-align': false,
   direction: 'bottom',
@@ -93,9 +92,6 @@ const args = {
 };
 
 const argTypes = {
-  defaultWidth: {
-    control: { type: 'range', min: 300, max: 800, step: 50 },
-  },
   ariaLabel: {
     control: 'text',
     description:
@@ -165,7 +161,6 @@ export const Default = {
   args,
   argTypes,
   render: ({
-    defaultWidth,
     ariaLabel,
     'auto-align': autoAlign,
     direction,
@@ -181,31 +176,29 @@ export const Default = {
     warn,
     warnText,
   }) => html`
-    <div style="width:${defaultWidth}px;">
-      <cds-fluid-combo-box
-        aria-label="${ifDefined(ariaLabel || undefined)}"
-        ?auto-align="${autoAlign}"
-        direction="${ifDefined(direction)}"
-        ?disabled="${disabled}"
-        ?is-condensed="${isCondensed}"
-        ?invalid="${invalid}"
-        invalid-text="${ifDefined(invalidText)}"
-        label="${ifDefined(label)}"
-        ?open="${open}"
-        ?read-only="${readOnly}"
-        title-text="${ifDefined(titleText)}"
-        value="${ifDefined(value || undefined)}"
-        ?warn="${warn}"
-        warn-text="${ifDefined(warnText)}">
-        ${items.map(
-          (elem) => html`
-            <cds-combo-box-item ?disabled=${elem.disabled} value="${elem.value}"
-              >${elem.text}</cds-combo-box-item
-            >
-          `
-        )}
-      </cds-fluid-combo-box>
-    </div>
+    <cds-fluid-combo-box
+      aria-label="${ifDefined(ariaLabel || undefined)}"
+      ?auto-align="${autoAlign}"
+      direction="${ifDefined(direction)}"
+      ?disabled="${disabled}"
+      ?is-condensed="${isCondensed}"
+      ?invalid="${invalid}"
+      invalid-text="${ifDefined(invalidText)}"
+      label="${ifDefined(label)}"
+      ?open="${open}"
+      ?read-only="${readOnly}"
+      title-text="${ifDefined(titleText)}"
+      value="${ifDefined(value || undefined)}"
+      ?warn="${warn}"
+      warn-text="${ifDefined(warnText)}">
+      ${items.map(
+        (elem) => html`
+          <cds-combo-box-item ?disabled=${elem.disabled} value="${elem.value}"
+            >${elem.text}</cds-combo-box-item
+          >
+        `
+      )}
+    </cds-fluid-combo-box>
   `,
 };
 
@@ -222,7 +215,6 @@ export const Condensed = {
     },
   },
   render: ({
-    defaultWidth,
     ariaLabel,
     'auto-align': autoAlign,
     direction,
@@ -238,31 +230,29 @@ export const Condensed = {
     warn,
     warnText,
   }) => html`
-    <div style="width:${defaultWidth}px;">
-      <cds-fluid-combo-box
-        aria-label="${ifDefined(ariaLabel || undefined)}"
-        ?auto-align="${autoAlign}"
-        direction="${ifDefined(direction)}"
-        ?disabled="${disabled}"
-        ?is-condensed="${isCondensed}"
-        ?invalid="${invalid}"
-        invalid-text="${ifDefined(invalidText)}"
-        label="${ifDefined(label)}"
-        ?open="${open}"
-        ?read-only="${readOnly}"
-        title-text="${ifDefined(titleText)}"
-        value="${ifDefined(value || undefined)}"
-        ?warn="${warn}"
-        warn-text="${ifDefined(warnText)}">
-        ${items.map(
-          (elem) => html`
-            <cds-combo-box-item ?disabled=${elem.disabled} value="${elem.value}"
-              >${elem.text}</cds-combo-box-item
-            >
-          `
-        )}
-      </cds-fluid-combo-box>
-    </div>
+    <cds-fluid-combo-box
+      aria-label="${ifDefined(ariaLabel || undefined)}"
+      ?auto-align="${autoAlign}"
+      direction="${ifDefined(direction)}"
+      ?disabled="${disabled}"
+      ?is-condensed="${isCondensed}"
+      ?invalid="${invalid}"
+      invalid-text="${ifDefined(invalidText)}"
+      label="${ifDefined(label)}"
+      ?open="${open}"
+      ?read-only="${readOnly}"
+      title-text="${ifDefined(titleText)}"
+      value="${ifDefined(value || undefined)}"
+      ?warn="${warn}"
+      warn-text="${ifDefined(warnText)}">
+      ${items.map(
+        (elem) => html`
+          <cds-combo-box-item ?disabled=${elem.disabled} value="${elem.value}"
+            >${elem.text}</cds-combo-box-item
+          >
+        `
+      )}
+    </cds-fluid-combo-box>
   `,
 };
 
@@ -272,18 +262,8 @@ export const Skeleton = {
       skip: true,
     },
   },
-  args: {
-    defaultWidth: 400,
-  },
-  argTypes: {
-    defaultWidth: {
-      control: { type: 'range', min: 300, max: 800, step: 50 },
-    },
-  },
-  render: ({ defaultWidth }) => html`
-    <div style="width: ${defaultWidth}px;">
-      <cds-fluid-combo-box-skeleton></cds-fluid-combo-box-skeleton>
-    </div>
+  render: () => html`
+    <cds-fluid-combo-box-skeleton></cds-fluid-combo-box-skeleton>
   `,
 };
 
@@ -293,7 +273,6 @@ export const WithAILabel = {
     ...argTypes,
   },
   render: ({
-    defaultWidth,
     ariaLabel,
     'auto-align': autoAlign,
     direction,
@@ -309,34 +288,30 @@ export const WithAILabel = {
     warn,
     warnText,
   }) => html`
-    <div style="width:${defaultWidth}px;">
-      <cds-fluid-combo-box
-        aria-label="${ifDefined(ariaLabel || undefined)}"
-        ?auto-align="${autoAlign}"
-        direction="${ifDefined(direction)}"
-        ?disabled="${disabled}"
-        ?is-condensed="${isCondensed}"
-        ?invalid="${invalid}"
-        invalid-text="${ifDefined(invalidText)}"
-        label="${ifDefined(label)}"
-        ?open="${open}"
-        ?read-only="${readOnly}"
-        title-text="${ifDefined(titleText)}"
-        value="${ifDefined(value || undefined)}"
-        ?warn="${warn}"
-        warn-text="${ifDefined(warnText)}">
-        <cds-ai-label alignment="bottom-left">
-          ${content}${actions}</cds-ai-label
-        >
-        ${items.map(
-          (elem) => html`
-            <cds-combo-box-item ?disabled=${elem.disabled} value="${elem.value}"
-              >${elem.text}</cds-combo-box-item
-            >
-          `
-        )}
-      </cds-fluid-combo-box>
-    </div>
+    <cds-fluid-combo-box
+      aria-label="${ifDefined(ariaLabel || undefined)}"
+      ?auto-align="${autoAlign}"
+      direction="${ifDefined(direction)}"
+      ?disabled="${disabled}"
+      ?is-condensed="${isCondensed}"
+      ?invalid="${invalid}"
+      invalid-text="${ifDefined(invalidText)}"
+      label="${ifDefined(label)}"
+      ?open="${open}"
+      ?read-only="${readOnly}"
+      title-text="${ifDefined(titleText)}"
+      value="${ifDefined(value || undefined)}"
+      ?warn="${warn}"
+      warn-text="${ifDefined(warnText)}">
+      <cds-ai-label alignment="bottom-left"> ${content}${actions}</cds-ai-label>
+      ${items.map(
+        (elem) => html`
+          <cds-combo-box-item ?disabled=${elem.disabled} value="${elem.value}"
+            >${elem.text}</cds-combo-box-item
+          >
+        `
+      )}
+    </cds-fluid-combo-box>
   `,
 };
 
