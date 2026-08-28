@@ -6,48 +6,103 @@
  */
 
 import Pagination from './Pagination';
+import { NumberInput } from '../NumberInput';
 import React from 'react';
 import { action } from 'storybook/actions';
 import mdx from './Pagination.mdx';
 import userEvent from '@testing-library/user-event';
 
-const props = () => ({
-  disabled: false,
-  page: 1,
-  totalItems: 103,
-  pagesUnknown: false,
-  pageInputDisabled: undefined,
-  pageSizeInputDisabled: undefined,
+const args = {
   backwardText: 'Previous',
+  backwardTextTooltipPosition: 'top',
+  disabled: false,
   forwardText: 'Next',
-  pageSize: 10,
-  pageSizes: [10, 20, 30, 40, 50],
+  forwardTextTooltipPosition: 'top',
+  isLastPage: false,
   itemsPerPageText: 'Items per page:',
+  page: 1,
+  pageInputDisabled: false,
+  pageNumberText: 'Page Number',
+  pageSize: 10,
+  pageSizeInputDisabled: false,
+  pageSizes: [10, 20, 30, 40, 50],
+  pagesUnknown: false,
+  size: 'md',
+  totalItems: 103,
   onChange: action('onChange'),
-});
+};
+
+const argTypes = {
+  className: {
+    control: false,
+  },
+  id: {
+    control: false,
+  },
+  itemText: {
+    control: false,
+  },
+  backwardText: {
+    control: { type: 'text' },
+  },
+  backwardTextTooltipPosition: {
+    options: ['top', 'right', 'bottom', 'left'],
+    control: { type: 'select' },
+  },
+  forwardText: {
+    control: { type: 'text' },
+  },
+  forwardTextTooltipPosition: {
+    options: ['top', 'right', 'bottom', 'left'],
+    control: { type: 'select' },
+  },
+  disabled: {
+    control: { type: 'boolean' },
+  },
+  isLastPage: {
+    control: { type: 'boolean' },
+  },
+  itemsPerPageText: {
+    control: { type: 'text' },
+  },
+  onChange: {
+    action: 'onChange',
+  },
+  page: {
+    control: { type: 'number' },
+  },
+  pageInputDisabled: {
+    control: { type: 'boolean' },
+  },
+  pageSize: {
+    control: { type: 'number' },
+  },
+  pageSizes: {
+    control: { type: 'array' },
+  },
+  pageNumberText: {
+    control: { type: 'text' },
+  },
+  pagesUnknown: {
+    control: { type: 'boolean' },
+  },
+  pageSizeInputDisabled: {
+    control: { type: 'boolean' },
+  },
+  size: {
+    options: ['xs', 'sm', 'md', 'lg'],
+    control: { type: 'select' },
+  },
+  totalItems: {
+    control: { type: 'number' },
+  },
+};
 
 export default {
   title: 'Components/Pagination',
   component: Pagination,
-  argTypes: {
-    size: {
-      options: ['xs', 'sm', 'md', 'lg'],
-      control: { type: 'select' },
-    },
-    backwardTextTooltipPosition: {
-      options: ['top', 'right', 'bottom', 'left'],
-      control: { type: 'select' },
-    },
-    forwardTextTooltipPosition: {
-      options: ['top', 'right', 'bottom', 'left'],
-      control: { type: 'select' },
-    },
-  },
-  args: {
-    size: 'md',
-    backwardTextTooltipPosition: 'top',
-    forwardTextTooltipPosition: 'top',
-  },
+  argTypes,
+  args,
   decorators: [
     (story) => (
       <div style={{ maxWidth: '800px', marginTop: '15px' }}>{story()}</div>
@@ -61,118 +116,10 @@ export default {
 };
 
 export const Default = (args) => {
-  return <Pagination pageSizes={[10, 20, 30, 40, 50]} {...args} />;
-};
-
-Default.args = {
-  backwardText: 'Previous',
-  backwardTextTooltipPosition: 'top',
-  forwardText: 'Next',
-  forwardTextTooltipPosition: 'top',
-  disabled: false,
-  isLastPage: false,
-  itemsPerPageText: 'Items per page:',
-  page: 1,
-  pageInputDisabled: false,
-  pageSize: 10,
-  pageSizes: [10, 20, 30, 40, 50],
-  pageNumberText: 'Page Number',
-  pagesUnknown: false,
-  pageSizeInputDisabled: false,
-  totalItems: 103,
-};
-
-Default.argTypes = {
-  className: {
-    control: false,
-  },
-  id: {
-    control: false,
-  },
-  itemText: {
-    control: false,
-  },
-  backwardText: {
-    control: {
-      type: 'text',
-    },
-  },
-  backwardTextTooltipPosition: {
-    options: ['top', 'right', 'bottom', 'left'],
-    control: { type: 'select' },
-  },
-  forwardText: {
-    control: {
-      type: 'text',
-    },
-  },
-  forwardTextTooltipPosition: {
-    options: ['top', 'right', 'bottom', 'left'],
-    control: { type: 'select' },
-  },
-  disabled: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  isLastPage: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  itemsPerPageText: {
-    control: {
-      type: 'text',
-    },
-  },
-  page: {
-    control: {
-      type: 'number',
-    },
-  },
-  pageInputDisabled: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  pageSize: {
-    control: {
-      type: 'number',
-    },
-  },
-  pageSizes: {
-    control: {
-      type: 'array',
-    },
-  },
-  pageNumberText: {
-    control: {
-      type: 'text',
-    },
-  },
-  pagesUnknown: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  pageSizeInputDisabled: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  size: {
-    options: ['xs', 'sm', 'md', 'lg'],
-    control: { type: 'select' },
-  },
-  totalItems: {
-    control: {
-      type: 'number',
-    },
-  },
+  return <Pagination {...args} />;
 };
 
 export const TooltipHover = {
-  ...Default,
   tags: ['!autodocs', '!dev'],
   parameters: {
     chromatic: { delay: 100 },
@@ -188,8 +135,8 @@ export const TooltipHover = {
 export const MultiplePaginationComponents = (args) => {
   return (
     <div>
-      <Pagination {...props()} {...args} />
-      <Pagination {...props()} {...args} />
+      <Pagination {...args} />
+      <Pagination {...args} />
     </div>
   );
 };
@@ -200,7 +147,7 @@ export const PaginationWithCustomPageSizesLabel = (args) => {
   return (
     <div>
       <Pagination
-        {...props()}
+        {...args}
         pageSizes={[
           { text: 'Ten', value: 10 },
           { text: 'Twenty', value: 20 },
@@ -208,7 +155,6 @@ export const PaginationWithCustomPageSizesLabel = (args) => {
           { text: 'Forty', value: 40 },
           { text: 'Fifty', value: 50 },
         ]}
-        {...args}
       />
     </div>
   );
@@ -216,19 +162,18 @@ export const PaginationWithCustomPageSizesLabel = (args) => {
 
 PaginationWithCustomPageSizesLabel.storyName =
   'Pagination with custom page sizes label';
+PaginationWithCustomPageSizesLabel.parameters = {
+  controls: {
+    exclude: ['pageSizes'],
+  },
+};
 
 export const PaginationUnknownPages = (args) => {
   const { pageInputDisabled, pagesUnknown, totalItems, ...rest } = args ?? {};
 
   return (
     <div>
-      <Pagination
-        {...props()}
-        page={1}
-        {...rest}
-        pagesUnknown
-        totalItems={undefined}
-      />
+      <Pagination {...rest} pagesUnknown totalItems={undefined} />
     </div>
   );
 };
@@ -237,5 +182,82 @@ PaginationUnknownPages.storyName = 'Unknown pages and items';
 PaginationUnknownPages.parameters = {
   controls: {
     exclude: ['pageInputDisabled', 'pagesUnknown', 'totalItems'],
+  },
+};
+
+export const WithoutPageSizes = (args) => {
+  // Omit `pageSizes` to hide the "items per page" selector. `pageSize` sets the
+  // fixed page size (falls back to 10 when not provided).
+  // `renderPageSelect` replaces the default page-select <Select> — returning
+  // null hides it entirely.
+  const { pageSizes, ...rest } = args ?? {};
+
+  return (
+    <Pagination
+      pageSize={10}
+      totalItems={103}
+      renderPageSelect={() => null}
+      {...rest}
+    />
+  );
+};
+
+WithoutPageSizes.storyName = 'Without page sizes and render page select';
+WithoutPageSizes.parameters = {
+  controls: {
+    exclude: ['pageSizes', 'itemsPerPageText', 'pageSizeInputDisabled'],
+  },
+};
+
+/**
+ * `renderPageSelect` lets you replace the default page-select control with
+ * any React node.
+ *
+ * This story uses Carbon's `NumberInput` with `hideSteppers` to replace the
+ * default page-select `<Select>`, illustrating how any custom control can be
+ * slotted in.
+ * TODO: remove after initial review ?
+ */
+export const WithRenderPageSelect = (args) => (
+  <Pagination
+    totalItems={350}
+    pageSizes={[10, 20, 30]}
+    {...args}
+    renderPageSelect={({
+      currentPage,
+      totalPages,
+      pageSelectLabelText,
+      onSetPage,
+    }) => (
+      <NumberInput
+        hideSteppers
+        id="page-select-number-input"
+        label={pageSelectLabelText}
+        hideLabel
+        size={args.size}
+        disabled={args.disabled || args.pageInputDisabled}
+        style={{
+          minInlineSize: 'unset',
+          paddingInline: '1rem',
+          inlineSize: `calc(${String(currentPage).length + 2}ch + 1rem)`,
+          border: '0',
+        }}
+        min={1}
+        max={totalPages}
+        value={currentPage}
+        onChange={(_e, { value }) => {
+          onSetPage(value);
+        }}
+      />
+    )}
+  />
+);
+
+WithRenderPageSelect.storyName = 'With custom page select (renderPageSelect)';
+WithRenderPageSelect.tags = ['!dev', '!autodocs']; // remove this to enable story
+WithRenderPageSelect.parameters = {
+  chromatic: { disableSnapshot: true }, // remove this to enable snapshots
+  controls: {
+    exclude: ['renderPageSelect'],
   },
 };
