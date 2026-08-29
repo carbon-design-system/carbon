@@ -500,6 +500,63 @@ describe('MenuItem', () => {
         expect(child).toHaveFocus();
       });
     });
+
+    it('should not steal focus when hovering over a leaf item then moving mouse away', async () => {
+      // Regression test: useHover was unconditionally enabled on every MenuItem.
+      // On mouseleave it called onOpenChange(false) which then called
+      // menuItem.current?.focus(), stealing focus from the trigger/outside element.
+      render(
+        <>
+          <button>Trigger</button>
+          <Menu open label="Menu">
+            <MenuItem label="Item 1" />
+            <MenuItem label="Item 2" />
+          </Menu>
+        </>
+      );
+
+      // Wait for the menu to focus item 1 on open
+      const item1 = await screen.findByRole('menuitem', { name: 'Item 1' });
+      expect(item1).toHaveFocus();
+
+      // Simulate hovering over item 2 then moving the mouse away entirely.
+      // useHover is disabled for leaf items so no state update fires and no
+      // focus() call is made — item 2 must not receive focus.
+      const item2 = screen.getByRole('menuitem', { name: 'Item 2' });
+      await act(() => {
+        fireEvent.mouseEnter(item2);
+        fireEvent.mouseLeave(item2);
+      });
+
+      // Focus must NOT have moved to item 2 after unhovering
+      expect(item2).not.toHaveFocus();
+    });
+
+    it('should open submenu on hover for items with children', async () => {
+      // Verify useHover remains enabled for items that have a nested submenu.
+      jest.useFakeTimers();
+      render(
+        <Menu open label="Menu">
+          <MenuItem label="Parent">
+            <MenuItem label="Child" />
+          </MenuItem>
+        </Menu>
+      );
+      await waitForPosition();
+
+      const menus = screen.getAllByRole('menu');
+
+      // accessible name is title + label text: "Parent Parent"
+      await act(() => {
+        fireEvent.mouseEnter(
+          screen.getByRole('menuitem', { name: 'Parent Parent' })
+        );
+        jest.runOnlyPendingTimers();
+      });
+
+      expect(menus[1]).toHaveClass('cds--menu--open');
+      jest.useRealTimers();
+    });
   });
 
   it('navigates through dynamically added MenuItems in the correct order', async () => {
@@ -509,6 +566,11 @@ describe('MenuItem', () => {
     await userEvent.click(
       screen.getByRole('button', { name: /add menu items/i })
     );
+
+    // wait for all MenuItem mount effects (RTL detection, autoUpdate) to flush
+    await waitFor(() => {
+      expect(screen.getAllByRole('menuitem')).toHaveLength(9);
+    });
 
     const menu = screen.getByRole('menu');
     menu.focus();
