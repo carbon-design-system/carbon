@@ -201,5 +201,31 @@ describe('ComboButton', () => {
           .parentElement
       ).toHaveClass(`${prefix}--combo-button__primary-action`);
     });
+
+    it('does not steal focus when hovering over menu items (#22831)', async () => {
+      render(
+        <ComboButton label="Primary action">
+          <MenuItem label="Item 1" />
+          <MenuItem label="Item 2" />
+        </ComboButton>
+      );
+
+      // Open the menu
+      await userEvent.click(screen.getAllByRole('button')[1]);
+
+      const items = screen.getAllByRole('menuitem', { hidden: true });
+      expect(items.length).toBe(2);
+
+      // Wait for focusItem in requestAnimationFrame to set focus to Item 1
+      await new Promise((resolve) => requestAnimationFrame(resolve));
+      expect(items[0]).toHaveFocus();
+
+      // Hover over Item 2
+      await userEvent.hover(items[1]);
+
+      // Focus should not have moved to Item 2 just because of hover
+      expect(items[0]).toHaveFocus();
+      expect(items[1]).not.toHaveFocus();
+    });
   });
 });
