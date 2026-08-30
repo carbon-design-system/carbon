@@ -19,33 +19,15 @@ import DataTable, {
   TableHeader,
   TableRow,
 } from '../..';
-import { rows, headers } from '../shared';
+import { dataTableArgs, dataTableArgTypes, rows, headers } from '../shared';
 import mdx from '../../DataTable.mdx';
 import { action } from 'storybook/actions';
-
-const sharedArgTypes = {
-  size: {
-    control: 'select',
-    options: ['xs', 'sm', 'md', 'lg', 'xl'],
-    description: 'Change the row height of table',
-  },
-  stickyHeader: {
-    control: 'boolean',
-    description:
-      'Specify whether the header should be sticky. Still in preview: may not work with every combination of table props',
-  },
-};
-
-const sharedArgs = {
-  size: 'lg',
-  stickyHeader: false,
-};
 
 export default {
   title: 'Components/DataTable/Expansion',
   component: DataTable,
-  args: sharedArgs,
-  argTypes: sharedArgTypes,
+  args: dataTableArgs,
+  argTypes: dataTableArgTypes,
   subcomponents: {
     TableExpandHeader,
     TableExpandRow,
