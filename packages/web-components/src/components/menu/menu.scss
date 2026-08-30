@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2024
+// Copyright IBM Corp. 2024, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -13,6 +13,8 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/utilities' as *;
 @use '@carbon/styles/scss/components/menu' as *;
+@use '@carbon/styles/scss/feature-flags' as flags;
+@use '@carbon/styles/scss/utilities/convert';
 @use './menu-variables' as *;
 
 :host(#{$prefix}-menu) {
@@ -27,6 +29,7 @@ $css--plex: true !default;
     pointer-events: none;
   }
 }
+
 .#{$prefix}--menu--with-icons {
   --grid-template: #{$spacing-05} 1fr max-content;
   --display-icon-item: flex;
@@ -92,4 +95,32 @@ $css--plex: true !default;
 }
 .#{$prefix}--menu--lg {
   --block-size-value: 3rem;
+}
+
+// A submenu is spaced away from its parent menu item, so the pointer has to cross a
+// gap belonging to neither. This causes `mouseleave` to fire, closing the submenu prematurely
+//
+// This spans exactly that gap, stopping at the item's edge, so it covers only the
+// space in between.
+//
+// Visually, everything looks the same, but functionally, the submenu stays open since
+// the cursor technically never left it.
+:host(#{$prefix}-menu[ischild]) .#{$prefix}--menu {
+  &::before {
+    position: absolute;
+    content: '';
+    cursor: auto;
+    inline-size: $spacing-01;
+    inset-block: 0;
+    inset-inline-start: -$spacing-01;
+
+    @if flags.enabled('enable-v12-release') {
+      inline-size: convert.to-rem(6px);
+      inset-inline-start: calc(-1 * convert.to-rem(6px));
+    }
+  }
+
+  &--shown {
+    overflow: visible;
+  }
 }
