@@ -1,0 +1,164 @@
+//
+// Copyright IBM Corp. 2024, 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Big number
+//-----------------------------
+
+@use '../../config' as *;
+@use '../../theme' as *;
+@use '../../type' as *;
+@use '../../spacing' as *;
+
+/// BigNumber styles
+/// @access public
+/// @group big-number
+@mixin big-number {
+  .#{$prefix}--big-number {
+    margin: 0;
+  }
+
+  .#{$prefix}--big-number__label {
+    @include type-style('label-01');
+
+    display: block;
+    margin: 0;
+    color: $text-secondary;
+  }
+
+  .#{$prefix}--big-number__value {
+    @include type-style('heading-04');
+
+    margin-block-end: 0;
+  }
+
+  .#{$prefix}--big-number__total {
+    @include type-style('body-compact-01');
+  }
+
+  .#{$prefix}--big-number__total,
+  .#{$prefix}--big-number__percentage-mark {
+    margin-block: auto $spacing-02;
+  }
+
+  .#{$prefix}--big-number__info {
+    padding-inline-start: $spacing-03;
+    vertical-align: top;
+  }
+
+  .#{$prefix}--big-number__trend {
+    margin-block-start: $spacing-03;
+    vertical-align: top;
+  }
+
+  .#{$prefix}--big-number__row {
+    display: flex;
+  }
+
+  .#{$prefix}--big-number__percentage {
+    @include type-style('heading-04');
+  }
+
+  .#{$prefix}--big-number__percentage-mark {
+    @include type-style('body-compact-01');
+  }
+
+  .#{$prefix}--big-number__icon-button {
+    margin-inline-start: $spacing-02;
+  }
+
+  .#{$prefix}--big-number--lg .#{$prefix}--big-number__value,
+  .#{$prefix}--big-number--lg .#{$prefix}--big-number__percentage {
+    @include type-style('heading-06');
+  }
+
+  .#{$prefix}--big-number--lg .#{$prefix}--big-number__total,
+  .#{$prefix}--big-number--lg .#{$prefix}--big-number__percentage-mark {
+    @include type-style('heading-03');
+  }
+
+  .#{$prefix}--big-number--xl .#{$prefix}--big-number__label {
+    @include type-style('body-compact-01');
+  }
+
+  .#{$prefix}--big-number--xl .#{$prefix}--big-number__value,
+  .#{$prefix}--big-number--xl .#{$prefix}--big-number__percentage {
+    @include type-style('heading-07');
+  }
+
+  .#{$prefix}--big-number--xl .#{$prefix}--big-number__total,
+  .#{$prefix}--big-number--xl .#{$prefix}--big-number__percentage-mark {
+    @include type-style('heading-04');
+  }
+
+  .#{$prefix}--big-number--xl .#{$prefix}--big-number__trend {
+    margin-block-start: $spacing-04;
+  }
+
+  .#{$prefix}--big-number .#{$prefix}--big-number__tooltip-trigger {
+    display: inline-flex;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    cursor: pointer;
+    vertical-align: top;
+
+    &:focus {
+      outline: 1px solid $focus;
+    }
+  }
+
+  //
+  // Skeleton
+  //
+
+  .#{$prefix}--big-number-skeleton {
+    inline-size: 4rem;
+  }
+
+  .#{$prefix}--big-number-skeleton__label {
+    block-size: $spacing-04;
+    margin-block: 0 $spacing-03;
+  }
+
+  .#{$prefix}--big-number-skeleton__value {
+    margin: 0;
+    /* stylelint-disable-next-line declaration-no-important */
+    block-size: $spacing-08 !important;
+  }
+
+  .#{$prefix}--big-number-skeleton--lg {
+    inline-size: 5rem;
+  }
+
+  .#{$prefix}--big-number-skeleton--xl {
+    inline-size: 6rem;
+  }
+
+  .#{$prefix}--big-number-skeleton.#{$prefix}--big-number-skeleton--lg
+    .#{$prefix}--big-number-skeleton__label {
+    block-size: $spacing-04;
+  }
+
+  .#{$prefix}--big-number-skeleton.#{$prefix}--big-number-skeleton--lg
+    .#{$prefix}--big-number-skeleton__value {
+    /* stylelint-disable-next-line declaration-no-important */
+    block-size: $spacing-09 !important;
+  }
+
+  .#{$prefix}--big-number-skeleton.#{$prefix}--big-number-skeleton--xl
+    .#{$prefix}--big-number-skeleton__label {
+    block-size: $spacing-04;
+  }
+
+  .#{$prefix}--big-number-skeleton.#{$prefix}--big-number-skeleton--xl
+    .#{$prefix}--big-number-skeleton__value {
+    /* stylelint-disable-next-line declaration-no-important */
+    block-size: $spacing-10 !important;
+  }
+}

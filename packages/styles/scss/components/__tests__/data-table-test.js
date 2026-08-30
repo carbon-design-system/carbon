@@ -31,6 +31,47 @@ describe('scss/components/data-table', () => {
       ]
     `);
   });
+
+  test('row hover styles are only applied on devices that support hover', async () => {
+    const { result } = await render(`
+      @use '../data-table';
+      @use '../data-table/expandable';
+      @use '../data-table/skeleton';
+    `);
+    const hoverRules = [];
+
+    postcss.parse(result.css.toString()).walkRules((rule) => {
+      if (
+        /(?:^|[\s>+~,])tr(?=[.\[:\s])/.test(rule.selector) &&
+        rule.selector.includes(':hover')
+      ) {
+        hoverRules.push(rule);
+      }
+    });
+
+    expect(hoverRules.length).toBeGreaterThan(0);
+    expect(
+      hoverRules
+        .filter((rule) => {
+          let parent = rule.parent;
+
+          while (parent) {
+            if (
+              parent.type === 'atrule' &&
+              parent.name === 'media' &&
+              parent.params.includes('(any-hover: hover)')
+            ) {
+              return false;
+            }
+
+            parent = parent.parent;
+          }
+
+          return true;
+        })
+        .map((rule) => rule.selector)
+    ).toEqual([]);
+  });
 });
 
 describe('scss/components/data-table/action', () => {
