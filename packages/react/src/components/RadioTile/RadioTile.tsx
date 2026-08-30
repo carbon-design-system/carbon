@@ -179,6 +179,13 @@ const RadioTile = React.forwardRef(
       }
     }
 
+    function handleOnFocus(evt: React.FocusEvent<HTMLInputElement>) {
+      evt.currentTarget.nextElementSibling?.scrollIntoView?.({
+        block: 'nearest',
+        inline: 'nearest',
+      });
+    }
+
     // AILabel is always size `xs`
     const candidate = slug ?? decorator;
     const candidateIsAILabel = isComponentElement(candidate, AILabel);
@@ -195,6 +202,7 @@ const RadioTile = React.forwardRef(
           id={inputId}
           name={name}
           onChange={!disabled ? handleOnChange : undefined}
+          onFocus={handleOnFocus}
           onKeyDown={!disabled ? handleOnKeyDown : undefined}
           tabIndex={!disabled ? tabIndex : undefined}
           type="radio"

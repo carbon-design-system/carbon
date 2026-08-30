@@ -126,6 +126,28 @@ describe('RadioTile', () => {
       expect(ref.current.type).toEqual('radio');
       expect(ref.current.value).toEqual('some test value');
     });
+
+    it('should scroll the visible tile into view when the input receives focus', () => {
+      const scrollIntoView = jest.fn();
+      const originalScrollIntoView =
+        window.HTMLElement.prototype.scrollIntoView;
+      window.HTMLElement.prototype.scrollIntoView = scrollIntoView;
+
+      render(<RadioTile value="standard">Option 1</RadioTile>);
+
+      screen.getByRole('radio').focus();
+
+      expect(scrollIntoView.mock.instances[0]).toBe(
+        screen.getByText('Option 1').closest('label')
+      );
+      expect(scrollIntoView).toHaveBeenCalledWith({
+        block: 'nearest',
+        inline: 'nearest',
+      });
+
+      window.HTMLElement.prototype.scrollIntoView = originalScrollIntoView;
+    });
+
     it('should pass "required" prop to the input element', () => {
       render(
         <RadioTile required value="some test value">
