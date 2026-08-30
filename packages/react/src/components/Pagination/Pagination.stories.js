@@ -6,6 +6,7 @@
  */
 
 import Pagination from './Pagination';
+import { NumberInput } from '../NumberInput';
 import React from 'react';
 import { action } from 'storybook/actions';
 import mdx from './Pagination.mdx';
@@ -181,5 +182,82 @@ PaginationUnknownPages.storyName = 'Unknown pages and items';
 PaginationUnknownPages.parameters = {
   controls: {
     exclude: ['pageInputDisabled', 'pagesUnknown', 'totalItems'],
+  },
+};
+
+export const WithoutPageSizes = (args) => {
+  // Omit `pageSizes` to hide the "items per page" selector. `pageSize` sets the
+  // fixed page size (falls back to 10 when not provided).
+  // `renderPageSelect` replaces the default page-select <Select> — returning
+  // null hides it entirely.
+  const { pageSizes, ...rest } = args ?? {};
+
+  return (
+    <Pagination
+      pageSize={10}
+      totalItems={103}
+      renderPageSelect={() => null}
+      {...rest}
+    />
+  );
+};
+
+WithoutPageSizes.storyName = 'Without page sizes and render page select';
+WithoutPageSizes.parameters = {
+  controls: {
+    exclude: ['pageSizes', 'itemsPerPageText', 'pageSizeInputDisabled'],
+  },
+};
+
+/**
+ * `renderPageSelect` lets you replace the default page-select control with
+ * any React node.
+ *
+ * This story uses Carbon's `NumberInput` with `hideSteppers` to replace the
+ * default page-select `<Select>`, illustrating how any custom control can be
+ * slotted in.
+ * TODO: remove after initial review ?
+ */
+export const WithRenderPageSelect = (args) => (
+  <Pagination
+    totalItems={350}
+    pageSizes={[10, 20, 30]}
+    {...args}
+    renderPageSelect={({
+      currentPage,
+      totalPages,
+      pageSelectLabelText,
+      onSetPage,
+    }) => (
+      <NumberInput
+        hideSteppers
+        id="page-select-number-input"
+        label={pageSelectLabelText}
+        hideLabel
+        size={args.size}
+        disabled={args.disabled || args.pageInputDisabled}
+        style={{
+          minInlineSize: 'unset',
+          paddingInline: '1rem',
+          inlineSize: `calc(${String(currentPage).length + 2}ch + 1rem)`,
+          border: '0',
+        }}
+        min={1}
+        max={totalPages}
+        value={currentPage}
+        onChange={(_e, { value }) => {
+          onSetPage(value);
+        }}
+      />
+    )}
+  />
+);
+
+WithRenderPageSelect.storyName = 'With custom page select (renderPageSelect)';
+WithRenderPageSelect.tags = ['!dev', '!autodocs']; // remove this to enable story
+WithRenderPageSelect.parameters = {
+  chromatic: { disableSnapshot: true }, // remove this to enable snapshots
+  controls: {
+    exclude: ['renderPageSelect'],
   },
 };

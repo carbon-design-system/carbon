@@ -249,10 +249,9 @@ jobs:
           --scope='@carbon/icons-react' --scope='@carbon/icons-vue'
           --scope='@carbon/pictograms' --scope='@carbon/pictograms-react'
           --include-dependencies
-      # Cap concurrency to keep runners from going OOM
       - name: Run e2e tests
         if: ${{ steps.filter.outputs.e2e == 'true' }}
-        run: yarn test:e2e --maxWorkers=2
+        run: yarn test:e2e
 
   avt-build:
     runs-on: ubuntu-latest
@@ -458,7 +457,7 @@ jobs:
         run: yarn workspace @carbon/react storybook:build --stats-json
       - id: chromatic
         name: Run Chromatic
-        uses: chromaui/action@534eebfc19023579541d106f7b61d5ad70ed65c7 # v18.5.0
+        uses: chromaui/action@69be7d88fc9479eedbe5b2861f847eb48f97cabc # v18.6.1
         with:
           # 👇 Token is intentionally plaintext
           # https://www.chromatic.com/docs/github-actions/#run-chromatic-on-external-forks-of-open-source-projects
