@@ -61,6 +61,48 @@ describe('scss/components/link', () => {
     ]);
     expect(
       hoverRules
+        .filter((rule) =>
+          rule.selector.includes(
+            '.cds--link:active:not(.cds--link--disabled):visited:hover'
+          )
+        )
+        .map((rule) =>
+          rule.nodes.map(({ prop, value }) => ({
+            prop,
+            value,
+          }))
+        )
+    ).toEqual([
+      expect.arrayContaining([
+        {
+          prop: 'color',
+          value: expect.stringContaining('--cds-link-text-color'),
+        },
+      ]),
+    ]);
+    expect(
+      hoverRules
+        .filter((rule) =>
+          rule.selector.includes(
+            '.cds--link.cds--link--visited:active:not(.cds--link--disabled):visited:hover'
+          )
+        )
+        .map((rule) =>
+          rule.nodes.map(({ prop, value }) => ({
+            prop,
+            value,
+          }))
+        )
+    ).toEqual([
+      expect.arrayContaining([
+        {
+          prop: 'color',
+          value: expect.stringContaining('--cds-link-text-color'),
+        },
+      ]),
+    ]);
+    expect(
+      hoverRules
         .filter((rule) => {
           let parent = rule.parent;
 

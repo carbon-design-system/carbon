@@ -74,6 +74,10 @@ $link-focus-text-color: custom-property.get-var(
       &:visited:hover {
         color: $link-hover-text-color;
       }
+
+      &:active:not(.#{$prefix}--link--disabled):visited:hover {
+        color: $link-text-color;
+      }
     }
   }
 
@@ -101,6 +105,12 @@ $link-focus-text-color: custom-property.get-var(
   @media (any-hover: hover) {
     .#{$prefix}--link.#{$prefix}--link--visited:visited:hover {
       color: $link-hover-text-color;
+    }
+
+    .#{$prefix}--link.#{$prefix}--link--visited:active:not(
+        .#{$prefix}--link--disabled
+      ):visited:hover {
+      color: $link-text-color;
     }
   }
 
