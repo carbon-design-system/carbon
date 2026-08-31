@@ -17,6 +17,10 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/utilities/convert' as *;
 @use '@carbon/styles/scss/utilities' as *;
 
+@use '@carbon/styles/scss/components/notifications-panel' as
+  notifications-panel-styles;
+@include notifications-panel-styles.notifications-panel;
+
 $block-class: #{$prefix}--notifications-panel;
 
 :host(#{$prefix}-notification-panel) {
