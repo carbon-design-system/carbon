@@ -26,7 +26,6 @@ import { dateTimeLocaleContext } from './date-time-context';
 import '../button/index';
 import '../toggle/index';
 import '../icon-button/index';
-import '@carbon-labs/wc-empty-state/es/index.js';
 
 const blockClass = `${prefix}--notifications-panel`;
 /**
@@ -235,10 +234,9 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
           <slot name="previous"></slot>
           ${!_hasTodayContent && !_hasPreviousContent
             ? html` <slot name="empty-state">
-                <clabs-empty-state
-                  subtitle="${emptyStateLabel}"
-                  kind="notifications">
-                </clabs-empty-state>
+                <p class="${blockClass}__empty-state-label">
+                  ${emptyStateLabel}
+                </p>
               </slot>`
             : ''}
         </div>

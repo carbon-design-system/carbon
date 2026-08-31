@@ -11,7 +11,7 @@ import { classMap } from 'lit/directives/class-map.js';
 import { action } from 'storybook/actions';
 import './index';
 import styles from './story-styles.scss?lit';
-import { useState } from '@storybook/preview-api';
+import { useState } from 'storybook/preview-api';
 import { prefix } from '../../globals/settings';
 
 const carbonPrefix = prefix;

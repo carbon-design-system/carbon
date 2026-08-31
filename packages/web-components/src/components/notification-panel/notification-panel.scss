@@ -36,6 +36,11 @@ $block-class: #{$prefix}--notifications-panel;
     --#{$prefix}-link-primary-hover: --#{$prefix}-text-primary;
   }
 
+  .#{$block-class}__empty-state-label {
+    padding: $spacing-05;
+    color: $text-secondary;
+  }
+
   .#{$block-class}__bottom-actions-container {
     position: sticky;
     z-index: 2;
