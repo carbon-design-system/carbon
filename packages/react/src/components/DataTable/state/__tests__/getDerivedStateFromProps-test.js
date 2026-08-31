@@ -58,6 +58,18 @@ describe('getDerivedStateFromProps', () => {
     expect(stateB.headers).toEqual(headersB);
   });
 
+  it('should not update headers in state when props.headers is mutated in-place', () => {
+    const headersA = [{ key: 'name', header: 'Name' }];
+    const stateA = getDerivedStateFromProps(
+      { rows: [], headers: headersA },
+      {}
+    );
+    expect(stateA.headers).not.toBe(headersA);
+    expect(stateA.headers[0]).not.toBe(headersA[0]);
+    headersA[0].key = 'newKey';
+    expect(stateA.headers[0].key).toEqual('name');
+  });
+
   describe('with previous state', () => {
     let mockProps;
 
