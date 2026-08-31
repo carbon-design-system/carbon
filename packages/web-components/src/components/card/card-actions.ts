@@ -56,10 +56,6 @@ class CDSCardActions extends LitElement {
   private _offsetEl: HTMLDivElement | undefined;
   private _sentinelObserver: MutationObserver | undefined;
 
-  connectedCallback() {
-    super.connectedCallback();
-  }
-
   disconnectedCallback() {
     super.disconnectedCallback();
     this._overflowHandler?.disconnect();
