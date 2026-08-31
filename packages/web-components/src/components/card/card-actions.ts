@@ -95,6 +95,7 @@ class CDSCardActions extends LitElement {
         (el) => el.localName === `${prefix}-card-action`
       ) as HTMLElement[];
 
+    this._assignActionIds(actions);
     this._actionItems = this._resolveActionItems(actions);
     if (!this._pendingAttach) {
       this._pendingAttach = true;
@@ -124,10 +125,15 @@ class CDSCardActions extends LitElement {
     });
   }
 
+  private _assignActionIds(actions: HTMLElement[]) {
+    actions.forEach((action, index) => {
+      action.dataset.actionId = `card-action-${index}`;
+    });
+  }
+
   private _resolveActionItems(actions: HTMLElement[]): ActionItem[] {
     return actions.map((action, index) => {
       const id = `card-action-${index}`;
-      action.dataset.actionId = id;
 
       const actionLabel = action.getAttribute('label');
       if (actionLabel) return { el: action, label: actionLabel, id };
