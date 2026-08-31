@@ -75,8 +75,10 @@ class CDSCardActions extends LitElement {
 
     const div = document.createElement('div');
     div.setAttribute('data-offset', '');
-    div.style.cssText =
-      'inline-size:32px; block-size:32px; flex-shrink:0; display:none;';
+    div.style.inlineSize = `var(--${prefix}-spacing-07, 2rem)`;
+    div.style.blockSize = `var(--${prefix}-spacing-07, 2rem)`;
+    div.style.flexShrink = '0';
+    div.style.display = 'none';
     this._offsetEl = div;
     this.appendChild(div);
   }
