@@ -60,14 +60,11 @@ class CDSCardActions extends LitElement {
   private _pendingAttach = false;
 
   private _offsetEl: HTMLDivElement | undefined;
-  private _sentinelObserver: MutationObserver | undefined;
 
   disconnectedCallback() {
     super.disconnectedCallback();
     this._overflowHandler?.disconnect();
     this._overflowHandler = undefined;
-    this._sentinelObserver?.disconnect();
-    this._sentinelObserver = undefined;
     this._offsetEl?.remove();
     this._offsetEl = undefined;
     this._pendingAttach = false;
@@ -78,19 +75,10 @@ class CDSCardActions extends LitElement {
 
     const div = document.createElement('div');
     div.setAttribute('data-offset', '');
-    div.setAttribute('data-hidden', '');
-    div.style.cssText = 'inline-size:32px; block-size:32px; flex-shrink:0;';
+    div.style.cssText =
+      'inline-size:32px; block-size:32px; flex-shrink:0; display:none;';
     this._offsetEl = div;
     this.appendChild(div);
-
-    this._sentinelObserver = new MutationObserver(() => {
-      div.style.display = div.hasAttribute('data-hidden') ? 'none' : 'block';
-    });
-    this._sentinelObserver.observe(div, {
-      attributes: true,
-      attributeFilter: ['data-hidden'],
-    });
-    div.style.display = 'none';
   }
 
   private _handleSlotChange({ target }: Event) {
@@ -123,11 +111,15 @@ class CDSCardActions extends LitElement {
     this._ensureOffsetEl();
 
     const idByEl = new Map(this._actionItems.map(({ el, id }) => [el, id]));
+    const offsetEl = this._offsetEl;
 
     this._overflowHandler = createOverflowHandler({
       container: this,
       gap: 8,
       onChange: (_, hidden: HTMLElement[]) => {
+        if (offsetEl) {
+          offsetEl.style.display = hidden.length > 0 ? 'block' : 'none';
+        }
         this._hiddenIds = new Set(
           hidden.map((el) => idByEl.get(el)).filter(Boolean) as string[]
         );
