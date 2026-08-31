@@ -37,7 +37,7 @@ describe('getDerivedStateFromProps', () => {
     const headers = [{ key: 'name', header: 'Name' }];
     const props = { rows: [], headers };
     const state = getDerivedStateFromProps(props, {});
-    expect(state.headers).toBe(headers);
+    expect(state.headers).toEqual(headers);
   });
 
   it('updates headers in state when props.headers changes', () => {
@@ -50,12 +50,12 @@ describe('getDerivedStateFromProps', () => {
       { rows: [], headers: headersA },
       {}
     );
-    expect(stateA.headers).toBe(headersA);
+    expect(stateA.headers).toEqual(headersA);
     const stateB = getDerivedStateFromProps(
       { rows: [], headers: headersB },
       stateA
     );
-    expect(stateB.headers).toBe(headersB);
+    expect(stateB.headers).toEqual(headersB);
   });
 
   describe('with previous state', () => {

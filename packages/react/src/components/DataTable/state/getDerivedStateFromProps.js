@@ -22,7 +22,7 @@ const getDerivedStateFromProps = (props, prevState) => {
     prevState
   );
   const state = {
-    headers: props.headers,
+    headers: props.headers.slice(),
     rowIds,
     rowsById,
     cellsById,
