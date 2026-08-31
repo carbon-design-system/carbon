@@ -85,6 +85,9 @@ export * from './components/Modal';
 export * from './components/ModalWrapper';
 export * from './components/MultiSelect';
 export * from './components/Notification';
+// TODO: uncomment in v12 — also remove from excludeProductsComponents
+// export { NotificationsPanel } from './components/NotificationsPanel';
+// export type { NotificationsPanelProps } from './components/NotificationsPanel';
 export * from './components/NumberInput';
 export * from './components/OrderedList';
 // TODO: uncomment in v12 — also remove from excludeProductsComponents
