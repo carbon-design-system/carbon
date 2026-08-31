@@ -141,6 +141,7 @@
       margin-block-start: $spacing-01;
     }
     .#{$prefix}--date-picker__calendar.open {
+      border: 1px solid $border-subtle;
       border-radius: $border-radius-08;
     }
 

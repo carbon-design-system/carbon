@@ -310,6 +310,7 @@
     outline: none;
 
     @if enabled('enable-v12-release') {
+      border: 1px solid $border-subtle;
       border-radius: $border-radius-08;
     }
 
