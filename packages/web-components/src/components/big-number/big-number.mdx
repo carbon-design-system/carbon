@@ -19,12 +19,13 @@ import * as BigNumberStories from './big-number.stories';
 ## Overview
 
 BigNumber is used to display large values in a small area. The display of values
-can be the value itself, or grouped in a `numerator/denominator` fashion.
-Control over the total fraction decimals displayed as well as how the
-values/totals are displayed are done via a locale prop. Other optional props
-allow control over size, truncation, if the value is a percentage as well as the
-addition of trending icon functionality. The default locale is English(`en-US`)
-if one is not provided or if the provided one is not supported.
+can be the value itself, or grouped in a `numerator/denominator` fashion. The
+`fraction-digits` prop controls how many decimal places are shown, while the
+`locale` prop controls number formatting conventions such as digit grouping and
+decimal separators. Other optional props allow control over size, truncation, if
+the value is a percentage as well as the addition of trending icon
+functionality. The default locale is English(`en-US`) if one is not provided or
+if the provided one is not supported.
 
 [Supported locales](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#locales)
 

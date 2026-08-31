@@ -14,8 +14,10 @@ export function getSupportedLocale(
   defaultLocale: string
 ): Intl.LocalesArgument {
   try {
-    Intl.NumberFormat.supportedLocalesOf(locale as string | string[]);
-    return locale;
+    const supported = Intl.NumberFormat.supportedLocalesOf(
+      locale as string | string[]
+    );
+    return supported.length > 0 ? locale : defaultLocale;
   } catch {
     return defaultLocale;
   }

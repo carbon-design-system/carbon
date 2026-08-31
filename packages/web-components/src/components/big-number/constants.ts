@@ -11,7 +11,6 @@ export enum BigNumberSize {
   XLarge = 'xl',
 }
 
-// 'default' | 'lg' | 'xl'
 export type BigNumberSizeValues = `${BigNumberSize}`;
 
 export enum Characters {
