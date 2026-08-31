@@ -27,6 +27,8 @@ interface ActionItem {
   el: HTMLElement;
   /** Resolved label for the overflow menu entry. */
   label: string;
+  /** The data-action-id assigned to `el`, cached to avoid repeated dataset lookups. */
+  id: string;
 }
 
 /**
@@ -126,10 +128,11 @@ class CDSCardActions extends LitElement {
 
   private _resolveActionItems(actions: HTMLElement[]): ActionItem[] {
     return actions.map((action, index) => {
-      action.dataset.actionId = `card-action-${index}`;
+      const id = `card-action-${index}`;
+      action.dataset.actionId = id;
 
       const actionLabel = action.getAttribute('label');
-      if (actionLabel) return { el: action, label: actionLabel };
+      if (actionLabel) return { el: action, label: actionLabel, id };
 
       const button = action.querySelector(
         `${prefix}-button, ${prefix}-icon-button`
@@ -139,26 +142,24 @@ class CDSCardActions extends LitElement {
           button.getAttribute('label') ||
           button.getAttribute('tooltip-text') ||
           button.getAttribute('tooltip-content');
-        if (btnLabel) return { el: action, label: btnLabel };
+        if (btnLabel) return { el: action, label: btnLabel, id };
       }
 
       const tooltipContent = action.querySelector(
         '[slot="tooltip-content"]'
       ) as HTMLElement | null;
       if (tooltipContent?.textContent?.trim()) {
-        return { el: action, label: tooltipContent.textContent.trim() };
+        return { el: action, label: tooltipContent.textContent.trim(), id };
       }
 
-      return { el: action, label: `Action ${index + 1}` };
+      return { el: action, label: `Action ${index + 1}`, id };
     });
   }
 
   render() {
     const { _actionItems, _hiddenIds, overflowMenuLabel } = this;
     const hasHidden = _hiddenIds.size > 0;
-    const hiddenItems = _actionItems.filter(({ el }) =>
-      _hiddenIds.has(el.dataset.actionId ?? '')
-    );
+    const hiddenItems = _actionItems.filter(({ id }) => _hiddenIds.has(id));
 
     return html`
       <slot @slotchange=${this._handleSlotChange}></slot>
@@ -178,9 +179,9 @@ class CDSCardActions extends LitElement {
               })}
               <cds-menu>
                 ${hiddenItems.map(
-                  ({ el, label }) => html`
+                  ({ id, label }) => html`
                     <cds-menu-item
-                      data-action-id=${el.dataset.actionId ?? ''}
+                      data-action-id=${id}
                       label=${label}></cds-menu-item>
                   `
                 )}
