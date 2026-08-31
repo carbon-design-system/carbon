@@ -463,15 +463,16 @@ describe.each([
         </FeatureFlags>
       );
 
-      const dialog = document.querySelector('dialog');
-      expect(dialog).not.toBeNull();
+      const dialog = screen.getByRole('dialog');
 
       // Simulate a native cancel event on the dialog.
-      fireEvent(
-        dialog,
-        new Event('cancel', { bubbles: false, cancelable: true })
-      );
+      const cancelEvent = new Event('cancel', {
+        bubbles: false,
+        cancelable: true,
+      });
+      fireEvent(dialog, cancelEvent);
 
+      expect(cancelEvent.defaultPrevented).toBe(true);
       expect(onClose).toHaveBeenCalledTimes(1);
     });
   });
