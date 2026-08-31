@@ -114,12 +114,14 @@ class CDSCardActions extends LitElement {
 
     this._ensureOffsetEl();
 
+    const idByEl = new Map(this._actionItems.map(({ el, id }) => [el, id]));
+
     this._overflowHandler = createOverflowHandler({
       container: this,
       gap: 8,
       onChange: (_, hidden: HTMLElement[]) => {
         this._hiddenIds = new Set(
-          hidden.map((el) => el.dataset.actionId).filter(Boolean) as string[]
+          hidden.map((el) => idByEl.get(el)).filter(Boolean) as string[]
         );
       },
     });
