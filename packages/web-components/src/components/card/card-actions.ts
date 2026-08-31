@@ -19,6 +19,11 @@ import '../overflow-menu/index';
 import '../menu/index';
 import styles from './card.scss?lit';
 
+const _overflowIcon = iconLoader(OverflowMenuVertical16, {
+  slot: 'icon',
+  class: `${prefix}--overflow-menu__icon`,
+});
+
 /**
  * Resolved item shape used for overflow menu population.
  */
@@ -65,6 +70,7 @@ class CDSCardActions extends LitElement {
     this._sentinelObserver = undefined;
     this._offsetEl?.remove();
     this._offsetEl = undefined;
+    this._pendingAttach = false;
   }
 
   private _ensureOffsetEl() {
@@ -101,7 +107,9 @@ class CDSCardActions extends LitElement {
       this._pendingAttach = true;
       void this.updateComplete.then(() => {
         this._pendingAttach = false;
-        this._attachOverflowHandler();
+        if (this.isConnected) {
+          this._attachOverflowHandler();
+        }
       });
     }
   }
@@ -179,10 +187,7 @@ class CDSCardActions extends LitElement {
               menu-alignment="bottom-end"
               label=${overflowMenuLabel}
               class="${prefix}--card__actions-overflow-menu">
-              ${iconLoader(OverflowMenuVertical16, {
-                slot: 'icon',
-                class: `${prefix}--overflow-menu__icon`,
-              })}
+              ${_overflowIcon}
               <cds-menu>
                 ${hiddenItems.map(
                   ({ id, label }) => html`
