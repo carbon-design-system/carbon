@@ -16,6 +16,8 @@ export const productMigratedStoryGlobs = [
   '../src/components/action-set/*.mdx',
   '../src/components/notification-panel/notification-panel.stories.ts',
   '../src/components/notification-panel/*.mdx',
+  '../src/components/options-tile/options-tile.stories.ts',
+  '../src/components/options-tile/*.mdx',
   '../src/components/truncated-text/truncated-text.stories.ts',
   '../src/components/truncated-text/*.mdx',
   '../src/components/resizer/resizer.stories.ts',
@@ -42,4 +44,5 @@ export const excludeProductsComponents = [
   'src/components/action-set/**/*',
   'src/components/truncated-text/**/*',
   'src/components/side-panel/**/*',
+  'src/components/options-tile/**/*',
 ];
