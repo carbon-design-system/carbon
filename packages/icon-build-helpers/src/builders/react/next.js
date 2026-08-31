@@ -185,7 +185,7 @@ async function builder(metadata, { output }) {
       deps: {
         neverBundle: external,
       },
-      failOnWarn: false,
+      failOnWarn: true,
       format: target.format === 'commonjs' ? 'cjs' : 'esm',
       logLevel: 'warn',
       inputOptions(inputOptions) {

@@ -13,6 +13,7 @@ collect:
         - accept
         - action
         - actionButtonLabel
+        - actions
         - activation
         - active
         - addFocusListeners
@@ -31,7 +32,9 @@ collect:
         - backgroundToken
         - border
         - buttonKind
+        - buttonProps
         - caption
+        - caret
         - checked
         - children
         - className
@@ -39,6 +42,7 @@ collect:
         - clearSelectionDescription
         - clearSelectionText
         - closeButtonLabelText
+        - closeIconDescription
         - closeModal
         - closeOnActivation
         - cols
@@ -242,6 +246,7 @@ collect:
         - tooltipDropShadow
         - tooltipHighContrast
         - tooltipPosition
+        - tooltipText
         - totalItems
         - translateWithId
         - type
@@ -263,6 +268,9 @@ collect:
         # ActionableNotification
         - closeOnEscape
         - hasFocus
+        # ActionSet
+        - buttonSize
+        - disableStacking
         # AILabel
         - AILabelContent
         - aiText
@@ -276,13 +284,48 @@ collect:
         - style
         # AspectRatio
         - ratio
+        # BigNumber
+        - forceShowTotal
+        - fractionDigits
+        - iconButton
+        - loading
+        - percentage
+        - tooltipDescription
+        - total
+        - trending
+        - truncate
         # ButtonSet
         - fluid
         - stacked
+        # Calendar
+        - context
+        - onDateSelect
+        - onNavigate
+        # Card
+        - clickable
+        - horizontal
+        - renderFooterIcon
+        # CardActions
+        - overflowMenuLabel
+        # CardMedia
+        - mediaWidth
+        # CardTitle
+        - descriptionTruncate
+        - labelTruncate
+        - maxWidth
+        - titleEnd
+        - titleStart
+        - titleTruncate
         # ChatButton
         - isQuickAction
         # ClickableTile
         - clicked
+        # Coachmark
+        - floating
+        - position
+        # CoachmarkContentHeader
+        - dragAriaLabel
+        - dragIconDescription
         # CodeSnippet
         - copyButtonDescription
         - copyText
@@ -326,12 +369,16 @@ collect:
         - parseDate
         - prevMonthAriaLabel
         - short
+        # DatePickerInput
+        - hideIcon
+        - onIconClick
         # DatePickerSkeleton
         - range
+        # Default
+        - onSubmit
         # DefinitionTooltip
         - definition
         - openOnHover
-        - tooltipText
         - triggerClassName
         # Dialog
         - ariaDescribedBy
@@ -342,6 +389,17 @@ collect:
         - dismissTooltipAlignment
         - dismissTooltipLabel
         - tagTitle
+        # EditInPlace
+        - cancelLabel
+        - editAlwaysVisible
+        - editLabel
+        - inheritTypography
+        - invalidLabel
+        - onSave
+        - readOnlyLabel
+        - readOnlyToggleTipText
+        - saveLabel
+        - toggleTipAlignment
         # ErrorBoundary
         - fallback
         # ExpandableTile
@@ -406,6 +464,25 @@ collect:
         # InlineLoading
         - onSuccess
         - successDelay
+        # InterstitialScreen
+        - isFullScreen
+        # InterstitialScreenBody
+        - contentRenderer
+        # InterstitialScreenFooter
+        - actionButtonRenderer
+        - nextButtonLabel
+        - onAction
+        - previousButtonLabel
+        - skipButtonLabel
+        - startButtonLabel
+        # InterstitialScreenHeader
+        - headerSubTitle
+        - headerTitle
+        - hideProgressIndicator
+        # InterstitialScreenView
+        - stepTitle
+        # InterstitialScreenViewModule
+        - disableActionButton
         # Layer
         - withBackground
         # LinkBase
@@ -471,6 +548,11 @@ collect:
         - onStepperBlur
         - stepStartValue
         - validate
+        # OptionsTile
+        - enabled
+        - locked
+        - lockedText
+        - summary
         # OrderedList
         - native
         # OverflowMenuItem
@@ -486,7 +568,6 @@ collect:
         # PageHeaderContent
         - contextualActions
         # PageHeaderContentPageActions
-        - actions
         - menuButtonLabel
         # PageHeaderTabBar
         - tags
@@ -519,7 +600,6 @@ collect:
         # Popover
         - alignmentAxisOffset
         - autoAlignBoundary
-        - caret
         - isTabTip
         # ProgressIndicator
         - currentIndex
@@ -529,6 +609,17 @@ collect:
         - current
         - overflowTooltipProps
         - tooltipId
+        # Resizer
+        - onDoubleClick
+        - onResize
+        - onResizeEnd
+        - thickness
+        # ScrollGradient
+        - color
+        - getScrollElementRef
+        - hideStartGradient
+        - onScroll
+        - scrollElementClassName
         # Select
         - noLabel
         # SelectItem
@@ -547,6 +638,19 @@ collect:
         - assistiveText
         # SideNavSwitcher
         - options
+        # SidePanel
+        - actionToolbarButtons
+        - aiLabel
+        - animateTitle
+        - closeIconTooltipAlignment
+        - condensedActions
+        - currentStep
+        - includeOverlay
+        - navigationBackIconDescription
+        - placement
+        - resizable
+        - selectorPageContent
+        - slideIn
         # Slider
         - ariaLabelInput
         - formatLabel
@@ -640,6 +744,14 @@ collect:
         # TreeView
         - multiselect
         - onActivate
+        # TruncatedText
+        - collapseLabel
+        - expandLabel
+        - lines
+        # UserAvatar
+        - backgroundColor
+        # WithCustomContext
+        - onLog
         # React
         - key
         - ref
@@ -697,7 +809,9 @@ collect:
         - single
         # General - density
         - condensed
+        - expressive
         - normal
+        - productive
         # General - dir
         - auto
         - ltr
@@ -715,10 +829,13 @@ collect:
         - text
         - url
         # General - kind
+        - "403"
+        - "404"
         - caution-major
         - caution-minor
         - cautious
         - critical
+        - custom
         - danger
         - default
         - disclosed
@@ -890,6 +1007,7 @@ collect:
         - cool-gray
         - cyan
         - default
+        - expand
         - gray
         - green
         - high-contrast
@@ -907,6 +1025,7 @@ collect:
         - submit
         - teal
         - text
+        - tooltip
         - warm-gray
         # AspectRatio - ratio
         - 16x9
@@ -934,6 +1053,15 @@ collect:
         - top
         - top-end
         - top-start
+        # EditInPlace - toggleTipAlignment
+        - bottom
+        - bottom-left
+        - bottom-right
+        - left
+        - right
+        - top
+        - top-left
+        - top-right
         # FileUploader - filenameStatus
         - complete
         - edit
@@ -969,6 +1097,9 @@ collect:
         # ShapeIndicator - textSize
         - "12"
         - "14"
+        # SidePanel - placement
+        - left
+        - right
         # TableBody - aria-live
         - assertive
         - off
@@ -983,6 +1114,19 @@ collect:
         # TextArea - counterMode
         - character
         - word
+        # UserAvatar - backgroundColor
+        - order-1-cyan
+        - order-10-magenta
+        - order-11-purple
+        - order-12-teal
+        - order-2-gray
+        - order-3-green
+        - order-4-magenta
+        - order-5-purple
+        - order-6-teal
+        - order-7-cyan
+        - order-8-gray
+        - order-9-green
   npm:
     dependencies: null
   js:

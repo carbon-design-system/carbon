@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -157,6 +157,12 @@ function generateDTCGColorAliases() {
       $type: 'color',
       $value: solidColorValue(value),
       $description: `${family} ${scale}`,
+      // Mark every palette entry as a reference token so Style Dictionary
+      // (and the carbon/scss-themes format) can filter them out of theme-map
+      // output — palette tokens are inputs to alias resolution, not outputs.
+      $extensions: {
+        'org.carbon': { role: 'reference' },
+      },
     };
   }
 

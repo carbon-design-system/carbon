@@ -447,16 +447,6 @@
     - add remark
   sizes:
     - 32
-- name: agent-detached
-  friendly_name: Agent detached
-  aliases:
-    - agent
-    - detached
-    - external
-    - alias
-    - AI
-  sizes:
-    - 32
 - name: aggregator--count-rows
   friendly_name: Aggregator count rows
   aliases:
@@ -505,6 +495,24 @@
     - Plex
   sizes:
     - 32
+- name: ai-agent
+  friendly_name: AI Agent
+  aliases:
+    - ai
+    - artificial intelligence
+    - agent
+  sizes:
+    - 32
+- name: ai-agent-detached
+  friendly_name: AI agent detached
+  aliases:
+    - ai
+    - artificial intelligence
+    - agent
+    - detached
+    - external
+  sizes:
+    - 32
 - name: ai--observability
   friendly_name: AI observability
   aliases:
@@ -518,15 +526,6 @@
     - Model evaluation
     - AI debugging tools
     - LLM metrics dashboard
-  sizes:
-    - 32
-- name: ai-agent-invocation
-  friendly_name: Invoke AI Agent
-  aliases:
-    - ai
-    - artificial intelligence
-    - agent
-    - invocation
   sizes:
     - 32
 - name: ai-business-impact-assessment
@@ -2271,6 +2270,20 @@
     - relationship
     - arrows
     - sysml
+  sizes:
+    - 32
+- name: binding--connector
+  friendly_name: Binding connector
+  aliases:
+    - binding
+    - connector
+    - connection
+    - edge
+    - equals
+    - bind
+    - link
+    - constraint
+    - tie
   sizes:
     - 32
 - name: binoculars
@@ -4732,6 +4745,30 @@
   sizes:
     - 20
     - 24
+    - 32
+- name: checkmark--double
+  friendly_name: Checkmark double
+  aliases:
+    - approved
+    - 'yes'
+    - valid
+    - validation
+    - confirmation
+    - status
+    - checkmark
+    - double checkmark
+    - file
+    - task
+    - check
+    - double check
+    - tick
+    - double tick
+    - tick mark
+    - double tick mark
+    - read
+    - read receipt
+    - delivered
+  sizes:
     - 32
 - name: checkmark--filled
   friendly_name: Checkmark filled
@@ -8061,6 +8098,56 @@
     - direction merge filled
   sizes:
     - 32
+- name: direction--merge-left
+  friendly_name: Direction merge left
+  aliases:
+    - direction
+    - merge
+    - direction merge
+    - left
+    - combine
+    - git
+    - repository
+  sizes:
+    - 32
+- name: direction--merge-left--filled
+  friendly_name: Direction merge left filled
+  aliases:
+    - direction
+    - merge
+    - direction merge
+    - left
+    - filled
+    - combine
+    - git
+    - repository
+  sizes:
+    - 32
+- name: direction--merge-right
+  friendly_name: Direction merge right
+  aliases:
+    - direction
+    - merge
+    - direction merge
+    - right
+    - combine
+    - git
+    - repository
+  sizes:
+    - 32
+- name: direction--merge-right--filled
+  friendly_name: Direction merge right filled
+  aliases:
+    - direction
+    - merge
+    - direction merge
+    - right
+    - filled
+    - combine
+    - git
+    - repository
+  sizes:
+    - 32
 - name: direction--right--01
   friendly_name: Direction right 01
   aliases:
@@ -10047,6 +10134,17 @@
     - funnel
     - filter edit
     - filter
+- name: filter--filled
+  friendly_name: Filter filled
+  aliases:
+    - filter
+    - filled
+    - filter filled
+    - refine
+    - sort
+    - funnel
+  sizes:
+    - 32
 - name: filter--remove
   friendly_name: Filter remove
   aliases:
@@ -10346,6 +10444,31 @@
     - flow
   sizes:
     - 32
+- name: flow--branch
+  friendly_name: Branch flow
+  aliases:
+    - flow chart
+    - chart
+    - graph
+    - diagram
+    - outline
+    - flow
+    - branch
+  sizes:
+    - 32
+- name: flow--conditional
+  friendly_name: Conditional flow
+  aliases:
+    - flow chart
+    - chart
+    - graph
+    - diagram
+    - outline
+    - flow
+    - conditional
+    - diamond
+  sizes:
+    - 32
 - name: flow--connection
   friendly_name: Flow connection
   aliases:
@@ -10366,6 +10489,19 @@
     - outline
     - flow data
     - data flow
+- name: flow--merge
+  friendly_name: Merge flow
+  aliases:
+    - flow chart
+    - chart
+    - graph
+    - diagram
+    - outline
+    - flow
+    - merge
+    - combine
+  sizes:
+    - 32
 - name: flow--modeler
   friendly_name: Flow modeler
   aliases:
@@ -12219,6 +12355,27 @@
     - arrow
   sizes:
     - 32
+- name: ibm--engineering-ai-hub
+  friendly_name: IBM® Engineering AI Hub
+  aliases:
+    - engineering
+    - AI
+    - artificial intelligence
+    - hub
+    - AI hub
+    - engineering AI hub
+    - engineering AI
+    - AI assistant
+    - engineering generative AI
+    - agentic AI
+    - AI engineering workspace
+    - AI platform
+    - engineering intelligence
+    - engineering lifecycle management
+    - ELM
+    - AI
+  sizes:
+    - 32
 - name: ibm--engineering-lifecycle-mgmt
   friendly_name: IBM® Engineering Lifecycle Management
   aliases:
@@ -12422,6 +12579,18 @@
     - foundation models
     - open-source
     - cube
+  sizes:
+    - 32
+- name: ibm--i
+  friendly_name: IBM i
+  aliases:
+    - OS
+    - power systems
+    - operating system
+    - i
+    - IBM
+    - IBM i
+    - AS400
   sizes:
     - 32
 - name: ibm--ibv
@@ -16857,6 +17026,18 @@
     - padlock
   sizes:
     - 32
+- name: locked--filled
+  friendly_name: Locked filled
+  aliases:
+    - lock
+    - locked
+    - filled
+    - seal
+    - hidden
+    - edit
+    - padlock
+  sizes:
+    - 32
 - name: locked-and-blocked
   friendly_name: Locked with Warning alt inverted filled
   aliases:
@@ -16911,6 +17092,24 @@
     - avatar
     - tag
     - identification
+  sizes:
+    - 32
+- name: logo--astradb
+  friendly_name: Logo Astra DB
+  aliases:
+    - brand
+    - emblem
+    - logotype
+    - symbol
+    - id
+    - avatar
+    - tag
+    - identification
+    - astra
+    - astra db
+    - database
+    - vector
+    - vector database
   sizes:
     - 32
 - name: logo--bluesky
@@ -17165,6 +17364,23 @@
     - avatar
     - tag
     - identification
+- name: logo--milvus
+  friendly_name: Logo Milvus
+  aliases:
+    - brand
+    - emblem
+    - logotype
+    - symbol
+    - id
+    - avatar
+    - tag
+    - identification
+    - milvus
+    - database
+    - vector
+    - vector database
+  sizes:
+    - 32
 - name: logo--model-context-protocol
   friendly_name: Logo Model Context Protocol (MCP)
   aliases:
@@ -17187,6 +17403,23 @@
     - avatar
     - tag
     - identification
+  sizes:
+    - 32
+- name: logo--opensearch
+  friendly_name: Logo OpenSearch
+  aliases:
+    - brand
+    - emblem
+    - logotype
+    - symbol
+    - id
+    - avatar
+    - tag
+    - identification
+    - opensearch
+    - database
+    - vector
+    - vector database
   sizes:
     - 32
 - name: logo--openshift
@@ -17946,6 +18179,70 @@
     - message
     - queue
     - inbox
+  sizes:
+    - 32
+- name: metadata--definition
+  friendly_name: Metadata definition
+  aliases:
+    - metadata
+    - definition
+    - metadata definition
+    - language
+    - ext
+    - language ext
+    - stereotype
+    - tag
+    - annotation
+    - at
+    - at sign
+    - '@'
+    - tag
+    - attribute
+    - label
+    - profile
+    - apply
+  sizes:
+    - 32
+- name: metadata--definition--semantic
+  friendly_name: Metadata definition (semantic)
+  aliases:
+    - metadata
+    - definition
+    - semantic
+    - metadata definition
+    - stereotype
+    - tag
+    - annotation
+    - pound
+    - pound sign
+    - hash
+    - hashtag
+    - hashtag sign
+    - '#'
+    - tag
+    - attribute
+    - label
+    - profile
+    - apply
+  sizes:
+    - 32
+- name: metadata--usage
+  friendly_name: Metadata usage
+  aliases:
+    - metadata
+    - usage
+    - metadata usage
+    - stereotype
+    - tag
+    - annotation
+    - at
+    - at sign
+    - '@'
+    - tag
+    - attribute
+    - label
+    - profile
+    - apply
   sizes:
     - 32
 - name: meter
@@ -19723,6 +20020,23 @@
     - operations
   sizes:
     - 32
+- name: package--library
+  friendly_name: Library package
+  aliases:
+    - library
+    - package
+    - package library
+    - language
+    - ext
+    - language ext
+    - folder
+    - module
+    - collection
+    - reuse
+    - book
+    - directory
+  sizes:
+    - 32
 - name: package--text-analysis
   friendly_name: Package text analysis
   aliases:
@@ -19871,6 +20185,22 @@
     - snippet
     - value
     - data
+  sizes:
+    - 32
+- name: parameter--action
+  friendly_name: Parameter action
+  aliases:
+    - parameter
+    - action
+    - flow
+    - action flow
+    - port
+    - input
+    - output
+    - argument
+    - flow
+    - pin
+    - boundary
   sizes:
     - 32
 - name: parent-child
@@ -21880,6 +22210,27 @@
     - growth
     - arrow
     - summary
+  sizes:
+    - 32
+- name: representation--textual
+  friendly_name: Textual representation
+  aliases:
+    - text
+    - textual
+    - representation
+    - textual representation
+    - language
+    - ext
+    - language ext
+    - annotation
+    - note
+    - comment
+    - document
+    - documentation
+    - description
+    - 'Tr'
+    - rich text
+    - string
   sizes:
     - 32
 - name: request-quote
@@ -24445,6 +24796,39 @@
     - comment
   sizes:
     - 32
+- name: state--definition
+  friendly_name: State definition
+  aliases:
+    - state
+    - definition
+    - state definition
+    - general
+    - status
+    - mode
+    - machine
+    - condition
+    - stage
+    - ellipse
+  sizes:
+    - 32
+- name: state--exhibit
+  friendly_name: State exhibit
+  aliases:
+    - state
+    - exhibit
+    - exhibit state
+    - reference
+    - usage
+    - perform
+    - machine
+    - arrow
+    - behavior
+    - show
+    - show state
+    - rectangle
+    - arrow
+  sizes:
+    - 32
 - name: status--acknowledge
   friendly_name: Status acknowledge
   aliases:
@@ -25476,6 +25860,20 @@
     - settings
     - wrench
     - tools
+  sizes:
+    - 32
+- name: task--user
+  friendly_name: Task user
+  aliases:
+    - task
+    - assignment
+    - clipboard
+    - to do list
+    - list
+    - chore
+    - paper
+    - user
+    - user task
   sizes:
     - 32
 - name: task--view
@@ -27135,6 +27533,20 @@
   sizes:
     - 16
     - 32
+- name: unlocked--filled
+  friendly_name: Unlocked filled
+  aliases:
+    - lock
+    - unlock
+    - unlocked
+    - filled
+    - unseal
+    - opened
+    - shown
+    - edit
+    - padlock
+  sizes:
+    - 32
 - name: unplug
   friendly_name: Unplug
   aliases:
@@ -27250,6 +27662,21 @@
     - diagram
     - node
     - sysml
+  sizes:
+    - 32
+- name: use-case--include
+  friendly_name: Include use case
+  aliases:
+    - include
+    - use case
+    - general
+    - reference
+    - usage
+    - requirement
+    - actor
+    - scenario
+    - circle
+    - arrow
   sizes:
     - 32
 - name: use-case--usage
@@ -27932,6 +28359,24 @@
     - visible
   sizes:
     - 16
+    - 32
+- name: view--definition
+  friendly_name: View definition
+  aliases:
+    - view
+    - definition
+    - view definition
+    - language
+    - ext
+    - language ext
+    - diagram
+    - viewpoint
+    - graph
+    - model
+    - nodes
+    - layout
+    - display
+  sizes:
     - 32
 - name: view--filled
   friendly_name: View filled

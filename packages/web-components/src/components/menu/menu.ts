@@ -19,6 +19,7 @@ import {
   type MenuContextUpdate,
 } from './menu-context';
 import CDSmenuItem, { MENU_CLOSE_ROOT_EVENT } from './menu-item';
+import { isFeatureFlagEnabled } from '../feature-flags';
 import { consume, provide } from '@lit/context';
 import { MENU_BACKGROUND_TOKEN, MENU_SIZE } from './defs';
 
@@ -249,7 +250,9 @@ class CDSMenu extends HostListenerMixin(LitElement) {
       [`${prefix}--menu--shown`]: position[0] >= 0 && position[1] >= 0,
       [`${prefix}--menu--with-selectable-items`]:
         this.context.hasSelectableItems,
-      [`${prefix}--menu--border`]: this.border,
+      // In v12 the menu always renders a border
+      [`${prefix}--menu--border`]:
+        this.border || isFeatureFlagEnabled('enable-v12-release', this),
       [`${prefix}--menu--background-token__background`]:
         this.backgroundToken === MENU_BACKGROUND_TOKEN.BACKGROUND,
     });
@@ -346,13 +349,23 @@ class CDSMenu extends HostListenerMixin(LitElement) {
       this._menuElement ?? this
     ).getBoundingClientRect();
     const alignment = isRoot ? 'vertical' : 'horizontal';
+
+    // The submenu is positioned against the menu item, which in v12 is inset
+    // from the menu's edge by the menu's inline padding ($spacing-02 = 4px).
+    // Adjust the offset accordingly (by 4px).
+    const submenuOffset = isRoot
+      ? 0
+      : isFeatureFlagEnabled('enable-v12-release', this)
+        ? -6
+        : -2;
+
     const axes = {
       x: {
         max: window.innerWidth,
         size: width,
         anchor: alignment === 'horizontal' ? range[1] : range[0],
         reversedAnchor: alignment === 'horizontal' ? range[0] : range[1],
-        offset: 0,
+        offset: submenuOffset,
       },
       y: {
         max: window.innerHeight,

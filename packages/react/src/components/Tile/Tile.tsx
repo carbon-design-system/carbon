@@ -475,7 +475,7 @@ export const SelectableTile = React.forwardRef<
       onKeyDown = () => {},
       selected = false,
       tabIndex = 0,
-      title = 'title',
+      title,
       slug,
       hasRoundedCorners,
       ...rest

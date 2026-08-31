@@ -59,21 +59,22 @@ invoking Bob, the plugin checks for its hidden comment header and skips an issue
 it already assessed. The Bob CLI receives only its API key and returns text; it
 receives neither GitHub token. That inference credential is passed through the
 `BOB_INFERENCE_API_KEY` action input, then mapped to Bob Shell's required
-`BOBSHELL_API_KEY` child-process environment variable.
+`BOBSHELL_API_KEY` child-process environment variable. Bob runs with debug mode
+and newline-delimited structured output. The plugin logs lifecycle events, tool
+names, byte counts, one-minute heartbeats, exit information, and a sanitized
+stderr tail. Structured model messages, tool parameters, and tool results are
+discarded rather than copied into Actions logs.
 
 Carbon Automation initializes issue fields and Project 39 metadata, so its
 GitHub App installation needs Issues and Issue fields write access plus
 Organization Projects read-and-write access. The workflow does not narrow the
 Carbon token's permissions; it inherits the permissions approved on the App
-installation. Missing Project write access is reported next to the failed
-membership mutation so maintainers can distinguish configuration from a project
-race.
-
-The workflow queues all events for an issue in one concurrency group instead of
-allowing a newer pending delivery to replace an older one. Bob token creation is
-limited to eligible Bug events and may fail without stopping Carbon-backed
-plugins; the eligible Bob plugin then records the missing dedicated token and
-keeps the workflow failure visible.
+installation. Project 39's own workflow automation is the sole owner of project
+membership. The plugin never issues an add-item mutation; it performs bounded
+retries until the auto-added item is visible, then fills only empty Area and
+Effort fields. If membership never becomes visible or a field update fails, the
+log points maintainers to both the project workflow and the App's Organization
+Projects permission.
 
 The workflow queues all events for an issue in one concurrency group instead of
 allowing a newer pending delivery to replace an older one. Bob token creation is

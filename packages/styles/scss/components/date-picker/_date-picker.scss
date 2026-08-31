@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2023
+// Copyright IBM Corp. 2016, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -122,8 +122,10 @@
       color: $text-disabled;
     }
 
-    &:disabled:hover {
-      border-block-end: 1px solid transparent;
+    @media (any-hover: hover) {
+      &:disabled:hover {
+        border-block-end: 1px solid transparent;
+      }
     }
 
     &::placeholder {

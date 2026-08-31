@@ -14,6 +14,7 @@ import fs from 'fs-extra';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import {
+  borderRadius,
   container,
   iconSize,
   spacing,
@@ -97,6 +98,12 @@ async function build() {
         return buildModulesTokenFile(layout, 'layout');
       },
     },
+    {
+      filepath: path.join(SCSS_DIR, '_border-radius.scss'),
+      builder() {
+        return buildModulesTokenFile(borderRadius, 'border-radius');
+      },
+    },
   ];
 
   await fs.ensureDir(SCSS_DIR);
@@ -126,9 +133,11 @@ function buildModulesTokenFile(tokenScale, group) {
  LICENSE file in the root directory of this source tree.
 `);
 
-  const values = tokenScale.map((value, index) => {
-    const name = formatStep(`${group}`, index + 1);
-    const shorthand = formatStep(group, index + 1);
+  const values = Object.entries(tokenScale).map(([key, value], index) => {
+    const name = Array.isArray(tokenScale)
+      ? formatStep(`${group}`, index + 1)
+      : key;
+    const shorthand = name;
     const id = t.Identifier(name);
     return [
       name,

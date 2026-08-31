@@ -8,6 +8,7 @@ const sharedConfig = defineConfig({
     index: 'src/index.ts',
     '*': ['src/*/index.{ts,tsx,js,jsx}'],
   },
+  failOnWarn: true,
   logLevel: 'warn',
   target: 'es2022',
   outputOptions(options) {

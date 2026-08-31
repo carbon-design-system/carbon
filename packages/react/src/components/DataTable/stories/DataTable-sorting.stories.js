@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -15,12 +15,14 @@ import DataTable, {
   TableHeader,
   TableRow,
 } from '..';
-import { rows, headers } from './shared';
+import { dataTableArgs, dataTableArgTypes, rows, headers } from './shared';
 import mdx from '../DataTable.mdx';
 
 export default {
   title: 'Components/DataTable/Sorting',
   component: DataTable,
+  args: dataTableArgs,
+  argTypes: dataTableArgTypes,
   subcomponents: {
     Table,
     TableBody,
@@ -38,7 +40,7 @@ export default {
 };
 
 export const Default = (args) => (
-  <DataTable isSortable rows={rows} headers={headers} {...args}>
+  <DataTable rows={rows} headers={headers} {...args}>
     {({
       rows,
       headers,
@@ -74,3 +76,8 @@ export const Default = (args) => (
     )}
   </DataTable>
 );
+
+Default.args = { isSortable: true };
+Default.argTypes = {
+  isSortable: { table: { readonly: true } },
+};

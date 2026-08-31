@@ -28,6 +28,7 @@ import { deprecate } from '../../prop-types/deprecate';
 import { MenuContext, menuReducer } from './MenuContext';
 import { useLayoutDirection } from '../LayoutDirection';
 import { canUseDOM } from '../../internal/environment';
+import { useFeatureFlag } from '../FeatureFlags';
 
 const spacing = 8; // distance to keep to window edges, in px
 
@@ -122,7 +123,7 @@ export interface MenuProps extends React.HTMLAttributes<HTMLUListElement> {
 const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   {
     backgroundToken = 'layer',
-    border = false,
+    border: borderProp = false,
     children,
     className,
     containerRef,
@@ -141,6 +142,11 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   forwardRef
 ) {
   const prefix = usePrefix();
+
+  const enableV12Release = useFeatureFlag('enable-v12-release');
+
+  // In v12 the menu always renders a border.
+  const border = enableV12Release || borderProp;
 
   const focusReturn = useRef<HTMLElement | null>(null);
 

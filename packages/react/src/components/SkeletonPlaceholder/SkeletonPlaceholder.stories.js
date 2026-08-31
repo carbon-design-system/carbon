@@ -5,8 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/* eslint-disable no-console */
-
 import React from 'react';
 
 import SkeletonPlaceholder from '.';
@@ -15,6 +13,29 @@ import mdx from './SkeletonPlaceholder.mdx';
 export default {
   title: 'Components/Skeleton/SkeletonPlaceholder',
   component: SkeletonPlaceholder,
+  argTypes: {
+    className: {
+      control: {
+        type: 'text',
+      },
+    },
+    height: {
+      control: {
+        type: 'range',
+        min: 16,
+        max: 400,
+        step: 4,
+      },
+    },
+    width: {
+      control: {
+        type: 'range',
+        min: 16,
+        max: 400,
+        step: 4,
+      },
+    },
+  },
   parameters: {
     docs: {
       page: mdx,
@@ -22,6 +43,17 @@ export default {
   },
 };
 
-export const Default = () => {
-  return <SkeletonPlaceholder />;
+export const Default = (args) => {
+  return (
+    <SkeletonPlaceholder
+      className={args.className}
+      style={{ height: args.height, width: args.width }}
+    />
+  );
+};
+
+Default.args = {
+  className: '',
+  height: 100,
+  width: 100,
 };

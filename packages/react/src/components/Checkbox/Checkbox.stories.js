@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -14,6 +14,7 @@ import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
+import { useArgs } from 'storybook/preview-api';
 
 export default {
   title: 'Components/Checkbox',
@@ -26,29 +27,28 @@ export default {
     docs: {
       page: mdx,
     },
-    controls: {
-      exclude: [
-        'checked',
-        'defaultChecked',
-        'hideLabel',
-        'id',
-        'indeterminate',
-        'labelText',
-        'title',
-      ],
-    },
   },
 };
 
-const sharedArgs = {
+const groupArgs = {
+  disabled: false,
   helperText: 'Helper text goes here',
   invalid: false,
   invalidText: 'Invalid message goes here',
+  legendText: 'Group label',
+  orientation: 'vertical',
+  readOnly: false,
   warn: false,
   warnText: 'Warning message goes here',
 };
 
-const sharedArgTypes = {
+const groupArgTypes = {
+  disabled: {
+    description: 'Specify whether the checkbox group is disabled',
+    control: {
+      type: 'boolean',
+    },
+  },
   helperText: {
     description: 'Provide text for the form group for additional help',
     control: {
@@ -101,72 +101,184 @@ const sharedArgTypes = {
   },
 };
 
+const groupControls = [
+  'disabled',
+  'helperText',
+  'invalid',
+  'invalidText',
+  'legendText',
+  'orientation',
+  'readOnly',
+  'warn',
+  'warnText',
+];
+
+const checkboxArgs = {
+  checked: false,
+  disabled: false,
+  helperText: 'Helper text goes here',
+  hideLabel: false,
+  indeterminate: false,
+  invalid: false,
+  invalidText: 'Invalid text goes here',
+  labelText: 'Checkbox label',
+  readOnly: false,
+  title: '',
+  warn: false,
+  warnText: 'Warning text goes here',
+};
+
+const checkboxArgTypes = {
+  checked: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  helperText: {
+    control: {
+      type: 'text',
+    },
+  },
+  hideLabel: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  indeterminate: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  invalid: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  invalidText: {
+    control: {
+      type: 'text',
+    },
+  },
+  labelText: {
+    control: {
+      type: 'text',
+    },
+  },
+  readOnly: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  title: {
+    control: {
+      type: 'text',
+    },
+  },
+  warn: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  warnText: {
+    control: {
+      type: 'text',
+    },
+  },
+};
+
+const checkboxControls = Object.keys(checkboxArgTypes);
+
 export const Default = (args) => (
-  <CheckboxGroup className="some-class" legendText="Group label" {...args}>
-    <Checkbox labelText={`Checkbox label`} id="checkbox-label-1" />
-    <Checkbox labelText={`Checkbox label`} id="checkbox-label-2" />
+  <CheckboxGroup {...args} readOnly={args.readOnly || undefined}>
+    <Checkbox labelText="Checkbox label" id="checkbox-label-1" />
+    <Checkbox labelText="Checkbox label" id="checkbox-label-2" />
   </CheckboxGroup>
 );
 
 Default.args = {
-  ...sharedArgs,
+  ...groupArgs,
 };
 
-Default.argTypes = { ...sharedArgTypes };
+Default.argTypes = { ...groupArgTypes };
+
+Default.parameters = {
+  controls: {
+    include: groupControls,
+  },
+};
 
 export const Horizontal = (args) => {
   return (
-    <CheckboxGroup
-      orientation="horizontal"
-      className="some-class"
-      legendText="Group label"
-      helperText="Helper text goes here"
-      {...args}>
-      <Checkbox labelText={`Checkbox label`} id="checkbox-label-1" />
-      <Checkbox labelText={`Checkbox label`} id="checkbox-label-2" />
-      <Checkbox labelText={`Checkbox label`} id="checkbox-label-3" />
+    <CheckboxGroup {...args} readOnly={args.readOnly || undefined}>
+      <Checkbox labelText="Checkbox label" id="checkbox-label-1" />
+      <Checkbox labelText="Checkbox label" id="checkbox-label-2" />
+      <Checkbox labelText="Checkbox label" id="checkbox-label-3" />
     </CheckboxGroup>
   );
 };
 
-Horizontal.args = { ...sharedArgs };
+Horizontal.args = {
+  ...groupArgs,
+  orientation: 'horizontal',
+};
 
-Horizontal.argTypes = { ...sharedArgTypes };
+Horizontal.argTypes = {
+  ...groupArgTypes,
+  orientation: {
+    ...groupArgTypes.orientation,
+    table: {
+      readonly: true,
+    },
+  },
+};
 
-export const Single = () => {
-  const checkboxEvents = {
-    className: 'some-class',
-    labelText: 'Checkbox label',
-  };
+Horizontal.parameters = {
+  controls: {
+    include: groupControls,
+  },
+};
+
+export const Single = (args) => {
+  const [{ checked }, updateArgs] = useArgs();
+
   return (
-    <>
-      <Checkbox
-        {...checkboxEvents}
-        id="checkbox-3"
-        helperText="Helper text goes here"
-      />
-      <br /> <br />
-      <Checkbox
-        {...checkboxEvents}
-        id="checkbox-4"
-        invalid
-        invalidText="Invalid text goes here"
-      />
-      <br /> <br />
-      <Checkbox
-        {...checkboxEvents}
-        id="checkbox-5"
-        warn
-        warnText="Warning text goes here"
-      />
-      <br /> <br />
-      <Checkbox {...checkboxEvents} id="checkbox-6" readOnly />
-    </>
+    <Checkbox
+      {...args}
+      checked={checked}
+      id="checkbox-single"
+      onChange={(event, data) => {
+        updateArgs({ checked: data.checked });
+        args.onChange?.(event, data);
+      }}
+    />
   );
 };
 
-export const Skeleton = () => {
-  return <CheckboxSkeleton />;
+Single.args = {
+  ...checkboxArgs,
+};
+
+Single.argTypes = {
+  ...checkboxArgTypes,
+};
+
+Single.parameters = {
+  controls: {
+    include: checkboxControls,
+  },
+};
+
+export const Skeleton = () => <CheckboxSkeleton />;
+
+Skeleton.parameters = {
+  controls: {
+    disable: true,
+  },
 };
 
 export const withAILabel = (args) => {
@@ -204,51 +316,55 @@ export const withAILabel = (args) => {
   return (
     <div className="ai-label-check-radio-container">
       <CheckboxGroup
-        legendText="Group Label"
         decorator={AILabelFunc()}
-        {...args}>
-        <Checkbox labelText={`Checkbox label`} id="checkbox-label-1" />
-        <Checkbox labelText={`Checkbox label`} id="checkbox-label-2" />
-        <Checkbox labelText={`Checkbox label`} id="checkbox-label-3" />
+        {...args}
+        readOnly={args.readOnly || undefined}>
+        <Checkbox labelText="Checkbox label" id="checkbox-label-1" />
+        <Checkbox labelText="Checkbox label" id="checkbox-label-2" />
+        <Checkbox labelText="Checkbox label" id="checkbox-label-3" />
       </CheckboxGroup>
 
-      <CheckboxGroup legendText="Group Label" {...args}>
+      <CheckboxGroup {...args} readOnly={args.readOnly || undefined}>
         <Checkbox
-          labelText={`Checkbox label`}
+          labelText="Checkbox label"
           id="checkbox-label-4"
           decorator={AILabelFunc()}
         />
         <Checkbox
-          labelText={`Checkbox label`}
+          labelText="Checkbox label"
           id="checkbox-label-5"
           decorator={AILabelFunc()}
         />
-        <Checkbox labelText={`Checkbox label`} id="checkbox-label-6" />
+        <Checkbox labelText="Checkbox label" id="checkbox-label-6" />
       </CheckboxGroup>
 
-      <CheckboxGroup legendText="Group Label" {...args}>
+      <CheckboxGroup {...args} readOnly={args.readOnly || undefined}>
         <Checkbox
-          labelText={`Checkbox label`}
+          labelText="Checkbox label"
           id="checkbox-label-7"
           decorator={AILabelFunc('inline')}
         />
         <Checkbox
-          labelText={`Checkbox label`}
+          labelText="Checkbox label"
           id="checkbox-label-8"
           decorator={AILabelFunc('inline')}
         />
-        <Checkbox labelText={`Checkbox label`} id="checkbox-label-9" />
+        <Checkbox labelText="Checkbox label" id="checkbox-label-9" />
       </CheckboxGroup>
     </div>
   );
 };
 
 withAILabel.args = {
-  invalid: false,
-  invalidText: 'Invalid message goes here',
-  readOnly: false,
-  warn: false,
-  warnText: 'Warning message goes here',
+  ...groupArgs,
+  helperText: '',
+  legendText: 'Group Label',
 };
 
-withAILabel.argTypes = { ...sharedArgTypes };
+withAILabel.argTypes = { ...groupArgTypes };
+
+withAILabel.parameters = {
+  controls: {
+    include: groupControls,
+  },
+};

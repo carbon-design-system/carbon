@@ -326,6 +326,56 @@ function toSassLiteral(value, indent = 0) {
 }
 
 /**
+ * Serialise a JS recipe value as a TypeScript type literal.
+ * Preserves string/number literal types (and nested object/tuple structure)
+ * so generated `.d.ts` files discriminate on `kind` and keep token names
+ * assignable to hand-authored unions like `DurationName`.
+ *
+ * @param {*} value
+ * @param {number} [indent=0]
+ * @returns {string}
+ */
+function toDtsTypeLiteral(value, indent = 0) {
+  const pad = '  '.repeat(indent);
+  const innerPad = '  '.repeat(indent + 1);
+
+  if (Array.isArray(value)) {
+    if (value.length === 0) {
+      return '[]';
+    }
+    const items = value
+      .map((item) => `${innerPad}${toDtsTypeLiteral(item, indent + 1)}`)
+      .join(',\n');
+    return `[\n${items}\n${pad}]`;
+  }
+
+  if (value !== null && typeof value === 'object') {
+    const entries = Object.entries(value);
+    if (entries.length === 0) {
+      return '{}';
+    }
+    const body = entries
+      .map(
+        ([key, nested]) =>
+          `${innerPad}${key}: ${toDtsTypeLiteral(nested, indent + 1)}`
+      )
+      .join(',\n');
+    return `{\n${body}\n${pad}}`;
+  }
+
+  if (typeof value === 'number' || typeof value === 'boolean') {
+    return String(value);
+  }
+
+  if (value === null) {
+    return 'null';
+  }
+
+  // string literal type — JSON-escaped for safe .d.ts emission
+  return JSON.stringify(String(value));
+}
+
+/**
  * Build a JS module + sibling .d.ts from surfaces.json.
  * Written to js/generated/surfaces.{js,d.ts} — gitignored.
  * Consumed by the hand-authored src/surfaces.ts.
@@ -359,10 +409,7 @@ function buildDTCGMotionSurfacesJS() {
       `export const ${exportName} = ${JSON.stringify(recipe, null, 2)};`
     );
     dtsLines.push(
-      `export declare const ${exportName}: ${JSON.stringify(recipe, null, 2)
-        .replace(/"([^"]+)":/g, '$1:')
-        .replace(/: "([^"]+)"/g, ': string')
-        .replace(/: (\d+)/g, ': number')};`
+      `export declare const ${exportName}: ${toDtsTypeLiteral(recipe)};`
     );
     jsLines.push('');
     dtsLines.push('');
@@ -446,4 +493,6 @@ module.exports = {
   buildDTCGMotionSCSS,
   buildDTCGMotionSurfacesJS,
   buildDTCGMotionSurfacesSCSS,
+  // Exported for unit tests
+  toDtsTypeLiteral,
 };

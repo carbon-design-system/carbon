@@ -50,8 +50,10 @@
       @include focus-outline('outline');
     }
 
-    &:hover {
-      background-color: $background-hover;
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: $background-hover;
+      }
     }
   }
 
@@ -123,8 +125,10 @@
     }
   }
 
-  .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--open:hover {
-    background-color: $layer;
+  @media (any-hover: hover) {
+    .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--open:hover {
+      background-color: $layer;
+    }
   }
 
   .#{$prefix}--overflow-menu-options--light {
@@ -135,8 +139,10 @@
     }
   }
 
-  .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--light.#{$prefix}--overflow-menu--open:hover {
-    background-color: $layer-hover;
+  @media (any-hover: hover) {
+    .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--light.#{$prefix}--overflow-menu--open:hover {
+      background-color: $layer-hover;
+    }
   }
 
   .#{$prefix}--overflow-menu-options[data-floating-menu-direction='bottom']:not(

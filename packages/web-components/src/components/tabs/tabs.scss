@@ -342,6 +342,10 @@ $inset-transition: inset 110ms motion(standard, productive);
     --#{$prefix}-popover-offset: #{convert.to-rem(8px)};
   }
 
+  #{$prefix}-tooltip-content {
+    --#{$prefix}-popover-offset: #{convert.to-rem(8px)};
+  }
+
   #{$prefix}-tooltip::part(popover-container) {
     display: block;
     block-size: 100%;

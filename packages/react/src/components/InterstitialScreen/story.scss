@@ -1,0 +1,65 @@
+//
+// Copyright IBM Corp. 2024, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/utilities/scss/carousel' as carbon-utilities-carousel;
+@use './_story-assets/InterstitialScreenViewModule/interstitial-screen-view-module';
+
+// Carousel utility styles for InterstitialScreen. Storybook loads component
+// styles from node_modules/@carbon/styles (published), not the local
+// packages/styles source, so the carousel CSS must be injected here where
+// the stories file can reach it via `import './story.scss'`.
+@include carbon-utilities-carousel.carousel;
+
+.#{$prefix}--interstitial-screen-view-module--enableTag {
+  margin-block-start: $spacing-07;
+}
+
+.CustomLayout {
+  display: flex;
+  flex-wrap: wrap;
+  padding: $spacing-07;
+  gap: $spacing-05;
+}
+
+.storyCardExample {
+  flex-grow: 1;
+  padding: $spacing-06;
+  border: 1px solid $border-inverse;
+  background-color: $layer-accent-01;
+  block-size: 350px;
+  inline-size: 20%;
+}
+
+.GenericView {
+  /* stylelint-disable-next-line declaration-no-important */
+  margin-block-start: $spacing-12 !important;
+}
+
+.NoImageExampleModal {
+  $one-grid-column: calc(100% / 16);
+
+  inline-size: calc($one-grid-column * 16);
+
+  @media (min-width: 672px) {
+    inline-size: calc($one-grid-column * 12);
+  }
+}
+
+.NoImageExampleFullScreen {
+  $one-grid-column: calc(100% / 16);
+
+  inline-size: calc($one-grid-column * 16);
+  @media (min-width: 672px) {
+    inline-size: calc($one-grid-column * 12);
+  }
+  @media (min-width: 1056px) {
+    inline-size: calc($one-grid-column * 8);
+  }
+}

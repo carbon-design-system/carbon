@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`@carbon/styles/scss/border-radius Public API 1`] = `
+{
+  "variables": {
+    "border-radius": {
+      "border-radius-00": "0px",
+      "border-radius-02": "0.125rem",
+      "border-radius-04": "0.25rem",
+      "border-radius-08": "0.5rem",
+      "border-radius-16": "1rem",
+      "border-radius-24": "1.5rem",
+      "border-radius-max": "999999px",
+    },
+    "border-radius-00": "0px",
+    "border-radius-02": "0.125rem",
+    "border-radius-04": "0.25rem",
+    "border-radius-08": "0.5rem",
+    "border-radius-16": "1rem",
+    "border-radius-24": "1.5rem",
+    "border-radius-max": "999999px",
+  },
+}
+`;

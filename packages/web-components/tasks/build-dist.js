@@ -65,7 +65,7 @@ async function buildDist() {
       onlyBundle: false,
       alwaysBundle: [/.*/],
     },
-    failOnWarn: false,
+    failOnWarn: true,
     format: 'esm',
     inputOptions: withInputCompatibilityAndPlugins({
       postCSSPlugins,

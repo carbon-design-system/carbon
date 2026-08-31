@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2024
+// Copyright IBM Corp. 2024, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -17,6 +17,8 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/utilities/convert' as *;
 @use '@carbon/styles/scss/components/menu' as *;
 @use '@carbon/styles/scss/utilities/component-reset';
+@use '@carbon/styles/scss/border-radius' as *;
+@use '@carbon/styles/scss/feature-flags' as flags;
 
 :host(#{$prefix}-menu-item) {
   @include type-style('body-short-01');
@@ -34,7 +36,13 @@ $css--plex: true !default;
   svg {
     color: $icon-secondary;
   }
+
+  @if flags.enabled('enable-v12-release') {
+    border-radius: $border-radius-04;
+    padding-inline: $spacing-04;
+  }
 }
+
 :host(#{$prefix}-menu-item:focus) {
   @include focus-outline('outline');
 }
