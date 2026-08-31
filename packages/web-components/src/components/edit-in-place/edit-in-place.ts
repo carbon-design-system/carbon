@@ -253,7 +253,7 @@ class CDSEditInPlace extends HostListenerMixin(LitElement) {
     this._focused = true;
   }
 
-  protected override updated(changedProperties: Map<string, unknown>) {
+  protected override willUpdate(changedProperties: Map<string, unknown>) {
     if (changedProperties.has('value')) {
       const value = this.value || this.defaultValue;
       this._internalValue = value;
