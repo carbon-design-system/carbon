@@ -46,16 +46,14 @@ import '@carbon/web-components/es/components/big-number/index.js';
 ### HTML
 
 ```html
-<cds-big-number
+<c4p-big-number
   fraction-digits="1"
   label="Label"
+  value="5"
+  total="13"
   size="default"
-  locale="en-US"
-  ?trending="${trending}"
-  ?truncate="${truncate}"
-  ?percentage="${percentage}"
-  ?loading="${loading}">
-</cds-big-number>
+  locale="en-US">
+</c4p-big-number>
 ```
 
 <Canvas
@@ -63,25 +61,44 @@ import '@carbon/web-components/es/components/big-number/index.js';
   of={BigNumberStories.WithCustomIcons}
 />
 
-### HTML
+### Lit (JavaScript)
 
-```html
-<cds-big-number
-  fraction-digits="1"
-  label="Label"
-  size="default"
-  locale="en-US"
-  ?trending="${trending}"
-  ?truncate="${truncate}"
-  ?percentage="${percentage}"
-  ?loading="${loading}">
-  ${iconLoader(getTrendingIcon(size), { slot: 'trending-icon', class:
-  `cds--big-number__trend`, })}
-  <cds-icon-button kind="ghost" size="sm" align="bottom" slot="icon-button">
-    ${iconLoader(Edit16, { slot: 'icon', })}
-    <span slot="tooltip-content">Icon description</span>
-  </cds-icon-button>
-</cds-big-number>
+```javascript
+import { html } from 'lit';
+import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
+import ArrowDown16 from '@carbon/icons/es/arrow--down/16.js';
+import Edit16 from '@carbon/icons/es/edit/16.js';
+import '@carbon/web-components/es/components/icon-button/index.js';
+
+html`
+  <c4p-big-number
+    fraction-digits=${fractionDigits}
+    label=${label}
+    .value=${value}
+    .total=${total}
+    size=${size}
+    locale=${locale}
+    ?trending=${trending}
+    ?truncate=${truncate}
+    ?percentage=${percentage}
+    ?loading=${loading}>
+        ${iconLoader(getTrendingIcon(size), {
+      slot: 'trending-icon',
+      class: `${prefix}--big-number__trend`,
+    })}
+        <cds-icon-button
+      kind="ghost"
+      size="sm"
+      align="bottom"
+      slot="icon-button">
+              ${iconLoader(Edit16, {
+        slot: 'icon',
+      })}
+              <span slot="tooltip-content">Icon description</span>
+          </cds-icon-button
+    >
+  </c4p-big-number>
+`;
 ```
 
 ## `<cds-big-number>` attributes, properties, events and slots.
