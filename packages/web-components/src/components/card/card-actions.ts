@@ -52,6 +52,7 @@ class CDSCardActions extends LitElement {
   private _actionItems: ActionItem[] = [];
 
   private _overflowHandler: OverflowHandler | undefined;
+  private _pendingAttach = false;
 
   private _offsetEl: HTMLDivElement | undefined;
   private _sentinelObserver: MutationObserver | undefined;
@@ -95,7 +96,13 @@ class CDSCardActions extends LitElement {
       ) as HTMLElement[];
 
     this._actionItems = this._resolveActionItems(actions);
-    void this.updateComplete.then(() => this._attachOverflowHandler());
+    if (!this._pendingAttach) {
+      this._pendingAttach = true;
+      void this.updateComplete.then(() => {
+        this._pendingAttach = false;
+        this._attachOverflowHandler();
+      });
+    }
   }
 
   private _attachOverflowHandler() {
