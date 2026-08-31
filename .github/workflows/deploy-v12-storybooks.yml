@@ -20,11 +20,11 @@ jobs:
           - package: react
             name: React
             destination: v12-react-storybook
-            cname: v2-react.carbondesignsystem.com
+            cname: v12-react.carbondesignsystem.com
           - package: web-components
             name: Web Components
             destination: v12-web-components-storybook
-            cname: v3-web-components.carbondesignsystem.com
+            cname: v12-web-components.carbondesignsystem.com
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
