@@ -85,10 +85,12 @@ class CDSNotification extends HostListenerMixin(LitElement) {
       ${icon}
       <div class="${blockClass}-content">
         <p class="${blockClass}-time-label">
-          ${dateTimeFormat.relative.format(timestamp as Date, {
-            locale: supportedLocale as string,
-            style: dateTimeStyle,
-          })}
+          ${timestamp
+            ? dateTimeFormat.relative.format(timestamp, {
+                locale: supportedLocale as string,
+                style: dateTimeStyle,
+              })
+            : ''}
         </p>
         <slot name="title"></slot>
         <div class="${blockClass}-description">
