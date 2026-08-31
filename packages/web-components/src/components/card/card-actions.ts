@@ -58,7 +58,6 @@ class CDSCardActions extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this._ensureOffsetEl();
   }
 
   disconnectedCallback() {
@@ -82,10 +81,7 @@ class CDSCardActions extends LitElement {
     this.appendChild(div);
 
     this._sentinelObserver = new MutationObserver(() => {
-      if (!this._offsetEl) return;
-      this._offsetEl.style.display = this._offsetEl.hasAttribute('data-hidden')
-        ? 'none'
-        : 'block';
+      div.style.display = div.hasAttribute('data-hidden') ? 'none' : 'block';
     });
     this._sentinelObserver.observe(div, {
       attributes: true,
