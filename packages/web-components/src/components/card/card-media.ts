@@ -35,14 +35,6 @@ type AspectRatio =
 /**
  * Card media — aspect-ratio media slot.
  *
- * In vertical (default) mode it renders a div with the aspect-ratio BEM
- * modifier class. In horizontal mode (detected via context) it renders a
- * full-height div sized by the `media-width` CSS custom property.
- *
- * When the parent card switches to horizontal layout this element
- * reassigns itself to the `media` named slot so the card's flex layout
- * can place it correctly.
- *
  * @element cds-card-media
  * @slot - Default slot for an image, video, or other media content.
  */
@@ -69,8 +61,6 @@ class CDSCardMedia extends LitElement {
   mediaWidth = '33.33%';
 
   updated() {
-    // Self-assign to the named `media` slot when the card is horizontal so
-    // the card's two-slot flex template can position media vs content correctly.
     if (this._cardContext.horizontal) {
       this.setAttribute('slot', 'media');
     } else {

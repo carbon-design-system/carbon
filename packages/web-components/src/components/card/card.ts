@@ -27,15 +27,6 @@ export { CARD_DENSITY, CARD_MEDIA_POSITION };
 /**
  * Card — composable container component.
  *
- * When `href` is set the card renders as an `<a>` element (link card).
- * When `clickable` is set without `href` it renders as a `role="button"`
- * `<div>` with full keyboard support (Enter / Space).
- *
- * Context provided to children:
- *   - `clickable`  → cds-card-footer (suppression), cds-card-header (decorator isolation)
- *   - `disabled`   → cds-card-footer
- *   - `horizontal` → cds-card-media (layout switch + slot self-assignment)
- *
  * @element cds-card
  * @slot - Default slot for cds-card-header, cds-card-body, cds-card-footer, cds-card-media.
  * @slot decorator - Slot for cds-ai-label. Sets `has-ai-label` attribute when populated.
@@ -59,23 +50,18 @@ class CDSCard extends CDSLink {
 
   /**
    * Makes the entire card surface interactive.
-   * - With `href`: renders as `<a>`.
-   * - Without `href`: adds `role="button"` and keyboard handlers.
    */
   @property({ type: Boolean, reflect: true })
   clickable = false;
 
   /**
-   * Mutes all interaction. Sets `aria-disabled` and `tabindex="-1"`.
-   * Overrides the inherited CDSLink `disabled` property.
+   * Mutes all interaction.
    */
   @property({ type: Boolean, reflect: true })
   disabled = false;
 
   /**
    * Controls heading typography inside the card.
-   * - `'productive'` (default): $heading-compact-02
-   * - `'expressive'`: $heading-03
    */
   @property({ type: String, reflect: true })
   density: CARD_DENSITY = CARD_DENSITY.PRODUCTIVE;
@@ -146,11 +132,6 @@ class CDSCard extends CDSLink {
     }
   }
 
-  /**
-   * Reflects `has-actions` attribute when a `cds-card-actions` element is
-   * present in the default slot. This lets the CSS rule [15] key off
-   * `cds-card[has-ai-label][has-actions]` without any cross-boundary `:has()`.
-   */
   private _handleDefaultSlotChange({ target }: Event) {
     const slot = target as HTMLSlotElement;
     const hasActions = slot
@@ -198,8 +179,6 @@ class CDSCard extends CDSLink {
 
   /**
    * The card's inner content layout.
-   * - Vertical: single default slot.
-   * - Horizontal: named `media` slot + `__content` wrapper for the rest.
    */
   private _renderContent() {
     const { horizontal, mediaPosition } = this;
@@ -232,11 +211,6 @@ class CDSCard extends CDSLink {
   }
 
   // ─── CDSLink overrides ────────────────────────────────────────────────────
-
-  /**
-   * Override CDSLink._renderInner to inject the card's full shadow DOM.
-   * CDSLink.render() calls this inside the <a> (or <p> when disabled).
-   */
   protected _renderInner() {
     const { clickable } = this;
     return html`
@@ -250,30 +224,20 @@ class CDSCard extends CDSLink {
     `;
   }
 
-  /**
-   * Override CDSLink.render() so that `disabled` alone never short-circuits
-   * to CDSLink._renderDisabledLink() (a bare `<p>`). Cards always go through
-   * _renderLink() which handles the disabled state itself.
-   */
   render() {
     return this._renderLink();
   }
 
-  /**
-   * Override CDSLink._renderLink to add role/keyboard attrs for non-link
-   * clickable cards, and to render a plain div when not clickable/href.
-   */
   protected _renderLink() {
     const { href, clickable, disabled } = this;
 
-    // Link card — delegate entirely to CDSLink's <a> implementation.
+    // Link card — delegate to CDSLink's implementation, but render a <p>
+    // (via _renderDisabledLink) when disabled to suppress navigation.
     if (href) {
-      return super._renderLink();
+      return disabled ? this._renderDisabledLink() : super._renderLink();
     }
 
     // Non-link clickable card — div with button semantics.
-    // Stays as role="button" even when disabled; tabindex and aria-disabled
-    // communicate the disabled state without removing the element from the tree.
     if (clickable) {
       return html`
         <div
