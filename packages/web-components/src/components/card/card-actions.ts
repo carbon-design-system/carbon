@@ -86,7 +86,7 @@ class CDSCardActions extends LitElement {
     div.style.display = 'none';
   }
 
-  private async _handleSlotChange({ target }: Event) {
+  private _handleSlotChange({ target }: Event) {
     const slot = target as HTMLSlotElement;
     const actions = slot
       .assignedElements({ flatten: true })
@@ -95,8 +95,7 @@ class CDSCardActions extends LitElement {
       ) as HTMLElement[];
 
     this._actionItems = this._resolveActionItems(actions);
-    await this.updateComplete;
-    this._attachOverflowHandler();
+    void this.updateComplete.then(() => this._attachOverflowHandler());
   }
 
   private _attachOverflowHandler() {
