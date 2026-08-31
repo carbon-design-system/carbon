@@ -259,7 +259,6 @@
 
     &.#{$prefix}--btn--ghost {
       &:focus {
-        background-color: $background-active;
         box-shadow: inset 0 0 0 $button-outline-width $button-focus-color;
       }
     }
