@@ -18,6 +18,20 @@ import mdx from './FormLabel.mdx';
 export default {
   title: 'Components/FormLabel',
   component: FormLabel,
+  args: {
+    label: 'Form label',
+  },
+  argTypes: {
+    label: {
+      control: { type: 'text' },
+      table: {
+        category: 'story controls',
+      },
+    },
+    id: {
+      control: { type: 'text' },
+    },
+  },
   parameters: {
     docs: {
       page: mdx,
@@ -25,16 +39,15 @@ export default {
   },
 };
 
-export const Default = () => {
-  return <FormLabel>Form label</FormLabel>;
+export const Default = ({ label, ...args }) => {
+  return <FormLabel {...args}>{label}</FormLabel>;
 };
 
-export const WithToggletip = (controls) => {
-  const { align } = controls;
+export const WithToggletip = ({ align, label, ...formLabelArgs }) => {
   return (
     <>
       <div className="form-wrapper">
-        <FormLabel>Form label with Toggletip</FormLabel>
+        <FormLabel {...formLabelArgs}>{label}</FormLabel>
         <Toggletip align={align}>
           <ToggletipButton label="Show information">
             <Information />
@@ -71,4 +84,29 @@ export const WithToggletip = (controls) => {
       </ActionableNotification>
     </>
   );
+};
+
+WithToggletip.args = {
+  label: 'Form label with Toggletip',
+  align: 'bottom',
+};
+
+WithToggletip.argTypes = {
+  align: {
+    control: { type: 'select' },
+    options: [
+      'top',
+      'top-start',
+      'top-end',
+      'bottom',
+      'bottom-start',
+      'bottom-end',
+      'left',
+      'left-start',
+      'left-end',
+      'right',
+      'right-start',
+      'right-end',
+    ],
+  },
 };

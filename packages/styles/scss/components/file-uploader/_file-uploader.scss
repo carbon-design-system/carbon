@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2023
+// Copyright IBM Corp. 2016, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -72,13 +72,18 @@
     outline-offset: -2px;
     transition: $duration-fast-02 motion(standard, productive);
 
-    &:focus,
-    &:hover {
-      outline: 2px solid $focus;
+    @media (any-hover: hover) {
+      &:hover {
+        outline: 2px solid $focus;
+        text-decoration: underline;
+      }
     }
 
-    &:hover,
-    &:focus,
+    &:focus {
+      outline: 2px solid $focus;
+      text-decoration: underline;
+    }
+
     &:active,
     &:active:visited {
       text-decoration: underline;
@@ -94,17 +99,19 @@
     cursor: no-drop;
     text-decoration: none;
     transition: none;
+    @media (any-hover: hover) {
+      &:hover {
+        color: $text-disabled;
+        outline: none;
+        text-decoration: none;
+      }
+    }
 
-    &:hover,
     &:focus {
       color: $text-disabled;
       outline: none;
       text-decoration: none;
     }
-  }
-
-  .#{$prefix}--file-browse-btn--disabled .#{$prefix}--file__drop-container {
-    border: 1px dashed button.$button-disabled;
   }
 
   .#{$prefix}--label-description {
@@ -416,6 +423,12 @@
     padding: $spacing-05;
     border: 1px dashed $border-strong;
     block-size: convert.to-rem(96px);
+  }
+
+  .#{$prefix}--file-browse-btn--disabled.#{$prefix}--file__drop-container,
+  .#{$prefix}--file-browse-btn--disabled .#{$prefix}--file__drop-container {
+    border: 1px dashed button.$button-disabled;
+    cursor: no-drop;
   }
 
   .#{$prefix}--file__drop-container--drag-over {

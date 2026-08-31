@@ -20,7 +20,7 @@ export default {
       page: mdx,
     },
     controls: {
-      exclude: ['legendId', 'invalid'],
+      exclude: ['children'],
     },
   },
 };
@@ -38,6 +38,21 @@ export const Default = (args) => {
 };
 
 Default.argTypes = {
+  className: {
+    control: {
+      type: 'text',
+    },
+  },
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  invalid: {
+    control: {
+      type: 'boolean',
+    },
+  },
   legendId: {
     control: {
       type: 'text',
@@ -61,7 +76,11 @@ Default.argTypes = {
 };
 
 Default.args = {
+  className: 'some-class',
+  disabled: false,
+  invalid: false,
   legendId: 'form-group-1',
   legendText: 'Contact preferences',
   message: false,
+  messageText: 'Form group message',
 };
