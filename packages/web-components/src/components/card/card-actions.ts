@@ -68,6 +68,8 @@ class CDSCardActions extends LitElement {
     this._offsetEl?.remove();
     this._offsetEl = undefined;
     this._pendingAttach = false;
+    this._hiddenIds = new Set();
+    this._actionItems = [];
   }
 
   private _ensureOffsetEl() {
@@ -123,7 +125,9 @@ class CDSCardActions extends LitElement {
           offsetEl.style.display = hidden.length > 0 ? 'block' : 'none';
         }
         this._hiddenIds = new Set(
-          hidden.map((el) => idByEl.get(el)).filter(Boolean) as string[]
+          hidden
+            .map((el) => idByEl.get(el))
+            .filter((id): id is string => id !== undefined)
         );
       },
     });
