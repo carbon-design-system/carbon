@@ -13,6 +13,7 @@
  */
 export const productMigratedStoryGlobs = [
   '../src/components/ActionSet/ActionSet.stories.js',
+  '../src/components/NotificationsPanel/NotificationsPanel.stories.js',
   '../src/components/BigNumber/BigNumber.stories.js',
   '../src/components/FullPageError/FullPageError.stories.js',
   '../src/components/Coachmark/Coachmark.stories.js',
@@ -42,6 +43,7 @@ export const excludeProductsComponents = [
   'src/components/Coachmark/**/*',
   'src/components/Resizer/**/*',
   'src/components/ActionSet/**/*',
+  'src/components/NotificationsPanel/**/*',
   'src/components/ScrollGradient/**/*',
   'src/components/FullPageError/**/*',
   'src/components/OptionsTile/**/*',
