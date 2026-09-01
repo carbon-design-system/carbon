@@ -14,14 +14,31 @@
  * token files (button.json, tag.json, …) use into flat per-theme tokens that
  * Style Dictionary can process natively.
  *
- * Input — one token node with no $value but a per-theme map in extensions:
+ * Input — one token node with no $value but a per-theme map in extensions.
+ * Two equivalent forms are accepted:
  *
+ *   Component-token form (legacy, bare strings + separate alphaModifiers):
  *   "button": {
  *     "danger-active": {
  *       "$type": "color",
  *       "$extensions": {
  *         "carbon.themes": { "white": "{red.80}", "g10": "{red.80}", ... },
  *         "org.carbon": { "alphaModifiers": { "g90": 0.3, "g100": 0.3 } }
+ *       }
+ *     }
+ *   }
+ *
+ *   Unified theme-token form (value + alpha co-located per theme):
+ *   "background": {
+ *     "hover": {
+ *       "$type": "color",
+ *       "$extensions": {
+ *         "carbon.themes": {
+ *           "white": { "value": "{gray.50}", "alpha": 0.12 },
+ *           "g10":   { "value": "{gray.50}", "alpha": 0.12 },
+ *           "g90":   "{gray.50}",
+ *           "g100":  "{gray.50}"
+ *         }
  *       }
  *     }
  *   }
@@ -80,9 +97,22 @@ function carbonComponentTokensPreprocessor(dictionary) {
       if (carbonThemes && value.$value === undefined) {
         const byTheme = {};
 
-        // Preserve original JSON key order (important for 'fallback' position)
-        for (const [theme, themeValue] of Object.entries(carbonThemes)) {
-          const alpha = alphaModifiers[theme];
+        // Preserve original JSON key order (important for 'fallback' position).
+        // Each entry in carbon.themes is either:
+        //   - a bare string/alias  → { "white": "{red.80}" }   (legacy component form)
+        //   - an object { value, alpha? } → unified theme form where value and
+        //     alpha are co-located under the same theme key.
+        // The legacy separate "org.carbon.alphaModifiers" map is still supported
+        // for backwards-compat with existing component token files.
+        for (const [theme, themeEntry] of Object.entries(carbonThemes)) {
+          const isObject =
+            themeEntry !== null &&
+            typeof themeEntry === 'object' &&
+            !Array.isArray(themeEntry);
+          const themeValue = isObject ? themeEntry.value : themeEntry;
+          // Per-theme alpha: prefer co-located entry.alpha, fall back to legacy
+          // separate alphaModifiers map.
+          const alpha = isObject ? themeEntry.alpha : alphaModifiers[theme];
           const syntheticNode = {
             $type: value.$type ?? 'color',
             $value: themeValue,
