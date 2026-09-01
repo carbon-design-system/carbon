@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2022
+// Copyright IBM Corp. 2022, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -362,7 +362,8 @@
   .#{$prefix}--number-input--fluid--disabled:not(
       .#{$prefix}--number-input--fluid--invalid
     )
-    .#{$prefix}--number {
+    .#{$prefix}--number
+    input:is([type='number'], [type='text']):disabled {
     border-block-end: 1px solid $border-subtle;
   }
 

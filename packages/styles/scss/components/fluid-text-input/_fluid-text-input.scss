@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2018, 2025
+// Copyright IBM Corp. 2018, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -220,6 +220,16 @@
     inline-size: 50%;
     inset-block-start: convert.to-rem(36px);
     inset-inline-start: $spacing-05;
+  }
+
+  // Disabled state
+  .#{$prefix}--text-input--fluid--disabled .#{$prefix}--text-input {
+    border-block-end: convert.to-rem(1px) solid $border-subtle;
+  }
+
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--password-input.#{$prefix}--text-input--fluid--disabled {
+    border-block-end: convert.to-rem(1px) solid $border-subtle;
   }
 
   // AILabel styles
