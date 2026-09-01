@@ -51,16 +51,16 @@ export async function generate(packages, lastTag, latestTag) {
 }
 
 /**
- * Returns true when the conventional commit scope (the text in parentheses)
- * mentions v12, for example `chore(v12): update card`. These commits are
- * listed under "Upcoming in v12" instead of their conventional type section.
+ * Returns true when the commit header contains "v12" anywhere, for example
+ * `chore(v12): update card` or `chore(table): v12 switching`. These commits
+ * are listed under "Upcoming in v12" instead of their conventional type
+ * section.
  *
- * @param {{ info: { scope?: string | null } }} commit
+ * @param {{ info: { header?: string } }} commit
  * @returns {boolean}
  */
 function isUpcomingV12Commit(commit) {
-  const { scope } = commit.info;
-  return typeof scope === 'string' && /\bv12\b/i.test(scope);
+  return /v12/i.test(commit.info.header);
 }
 
 const sectionTypes = [
