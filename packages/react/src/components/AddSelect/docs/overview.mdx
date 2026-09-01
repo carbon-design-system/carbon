@@ -1,0 +1,88 @@
+import { Controls, Canvas, Story, Meta } from '@storybook/addon-docs/blocks';
+import * as AddSelectStories from '../AddSelect.stories';
+
+<Meta isTemplate />
+
+# AddSelect
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Component API](#component-api)
+
+## Overview
+
+AddSelect is a composable component system for building flexible add/select
+interfaces. It uses the compound component pattern where you compose the UI from
+smaller, focused components rather than a single monolithic component. This
+design enables maximum flexibility while maintaining consistency and
+accessibility.
+
+### Key Features
+
+- **Composable architecture** — combine simple, focused components to build
+  complex selection interfaces
+- **Multi-select and single-select** — checkbox-based multi-selection and radio
+  button-based single selection
+- **Hierarchical navigation** — navigate through nested item structures
+- **Search and filter** — global and column-level search with custom filter
+  actions
+- **Selection summary** — display and manage selected items with optional
+  accordion view
+- **Item details panel** — show detailed information about individual items
+- **Keyboard navigation** — full keyboard support for accessibility
+
+### Component hierarchy
+
+```
+AddSelect (root container)
+├── AddSelect.Body (main content area)
+│   └── AddSelect.Column (optional column wrapper)
+│       └── AddSelect.Row (individual selectable items)
+├── AddSelect.SelectionSummary (selected items panel)
+│   └── AddSelect.SelectionSummaryItem (individual selected item)
+└── AddSelect.ItemPanel (item details panel)
+```
+
+## Example usage
+
+### AddSelect.Body
+
+<Canvas>
+  <Story of={AddSelectStories.AddSelectBody} />
+</Canvas>
+
+### AddSelect.Column
+
+<Canvas>
+  <Story of={AddSelectStories.AddSelectColumn} />
+</Canvas>
+
+### AddSelect.Row
+
+<Canvas>
+  <Story of={AddSelectStories.AddSelectRow} />
+</Canvas>
+
+### AddSelect.SelectionSummary
+
+<Canvas>
+  <Story of={AddSelectStories.AddSelectSelectionSummary} />
+</Canvas>
+
+### AddSelect.SelectionSummaryItem
+
+<Canvas>
+  <Story of={AddSelectStories.AddSelectSelectionSummaryItem} />
+</Canvas>
+
+### AddSelect.ItemPanel
+
+<Canvas>
+  <Story of={AddSelectStories.AddSelectItemPanel} />
+</Canvas>
+
+## Component API
+
+<Controls />
