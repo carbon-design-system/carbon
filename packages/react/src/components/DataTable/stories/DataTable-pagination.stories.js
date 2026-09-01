@@ -10,6 +10,10 @@ import React, { useMemo, useState } from 'react';
 import Button from '../../Button';
 import { DataTable } from '..';
 import Pagination from '../../Pagination';
+import { EmptyState } from '../../EmptyState';
+import notFoundIllustration from '../../EmptyState/story-assets/not-found.svg';
+import mdx from '../DataTable.mdx';
+import './datatable-story.scss';
 import { dataTableArgs, dataTableArgTypes, headers } from './shared';
 
 const {
@@ -26,9 +30,6 @@ const {
   TableToolbarMenu,
   TableToolbarSearch,
 } = DataTable;
-
-import mdx from '../DataTable.mdx';
-import './datatable-story.scss';
 
 export default {
   title: 'Components/DataTable/Pagination',
@@ -107,20 +108,13 @@ export const Default = (args) => {
 
   const filteredRows = allRows.filter((row) => {
     const search = searchValue.trim().toLowerCase();
-
-    if (search === '') {
-      return true;
-    }
-
+    if (search === '') return true;
     return Object.values(row).some((value) =>
       String(value).toLowerCase().includes(search)
     );
   });
 
-  const handlePaginationChange = ({ page, pageSize }) => {
-    setPage(page);
-    setPageSize(pageSize);
-  };
+  const showEmptyState = filteredRows.length === 0;
 
   const handleSearchChange = (event) => {
     action('toolbar search input')(event);
@@ -128,17 +122,23 @@ export const Default = (args) => {
     setPage(1);
   };
 
-  // Calculate the rows to display for the current page
+  const handlePaginationChange = ({ page, pageSize }) => {
+    setPage(page);
+    setPageSize(pageSize);
+  };
+
   const startIndex = (page - 1) * pageSize;
   const endIndex = startIndex + pageSize;
-  const paginatedRows = filteredRows.slice(startIndex, endIndex);
+  const paginatedRows = showEmptyState
+    ? []
+    : filteredRows.slice(startIndex, endIndex);
 
   return (
     <>
       <DataTable rows={paginatedRows} headers={headers} {...args}>
         {({
-          rows,
-          headers,
+          rows: tableRows,
+          headers: tableHeaders,
           getHeaderProps,
           getRowProps,
           getTableProps,
@@ -168,7 +168,7 @@ export const Default = (args) => {
             <Table {...getTableProps()} aria-label="paginated table">
               <TableHead>
                 <TableRow>
-                  {headers.map((header) => (
+                  {tableHeaders.map((header) => (
                     <TableHeader
                       key={header.key}
                       {...getHeaderProps({ header })}>
@@ -178,28 +178,50 @@ export const Default = (args) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows.map((row) => (
-                  <TableRow key={row.id} {...getRowProps({ row })}>
-                    {row.cells.map((cell) => (
-                      <TableCell key={cell.id} {...getCellProps({ cell })}>
-                        {cell.value}
-                      </TableCell>
+                {showEmptyState
+                  ? null
+                  : tableRows.map((row) => (
+                      <TableRow key={row.id} {...getRowProps({ row })}>
+                        {row.cells.map((cell) => (
+                          <TableCell key={cell.id} {...getCellProps({ cell })}>
+                            {cell.value}
+                          </TableCell>
+                        ))}
+                      </TableRow>
                     ))}
-                  </TableRow>
-                ))}
               </TableBody>
             </Table>
+            {showEmptyState && (
+              <div style={{ padding: '2rem 1rem' }}>
+                <EmptyState
+                  illustration={notFoundIllustration}
+                  illustrationDescription="Not found illustration"
+                  title="No results match the current search"
+                  subtitle="Clear the search field to see all results, or try a different search term."
+                  action={{
+                    text: 'Clear search',
+                    kind: 'tertiary',
+                    onClick: () => {
+                      setSearchValue('');
+                      setPage(1);
+                    },
+                  }}
+                />
+              </div>
+            )}
           </TableContainer>
         )}
       </DataTable>
-      <Pagination
-        page={page}
-        pageSize={pageSize}
-        pageSizes={[10, 20, 30, 40, 50]}
-        totalItems={filteredRows.length}
-        onChange={handlePaginationChange}
-        size={paginationSize}
-      />
+      {!showEmptyState && (
+        <Pagination
+          page={page}
+          pageSize={pageSize}
+          pageSizes={[10, 20, 30, 40, 50]}
+          totalItems={filteredRows.length}
+          onChange={handlePaginationChange}
+          size={paginationSize}
+        />
+      )}
     </>
   );
 };
