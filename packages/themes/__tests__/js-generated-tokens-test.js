@@ -94,11 +94,32 @@ function applyTransforms(node) {
  *   3. Walk the tree, pick each token's value for `themeName` from _by_theme,
  *      synthesise a $value node, apply transforms, collect keyed by kebab name.
  */
+const THEME_COLOR_SCHEME = {
+  white: 'light',
+  g10: 'light',
+  g90: 'dark',
+  g100: 'dark',
+};
+
 function convertDTCGToTheme(dtcgTokens, themeName) {
   // Step 1: expand carbon.themes → _by_theme per-theme leaves
   const expanded = componentTokensPreprocessor.preprocessor(dtcgTokens);
-  // Step 2: lift color-scheme metadata
-  const preprocessed = themeMetadataPreprocessor.preprocessor(expanded);
+  // Step 2: re-inject per-theme color-scheme onto root $extensions so
+  // themeMetadataPreprocessor can lift it into the synthetic color.scheme token
+  // (mirrors what themeConfig() does in sd.config.js).
+  const expandedWithScheme = {
+    ...expanded,
+    $extensions: {
+      ...(expanded.$extensions ?? {}),
+      'org.carbon': {
+        ...(expanded.$extensions?.['org.carbon'] ?? {}),
+        'color-scheme': THEME_COLOR_SCHEME[themeName],
+      },
+    },
+  };
+  // Step 3: lift color-scheme metadata
+  const preprocessed =
+    themeMetadataPreprocessor.preprocessor(expandedWithScheme);
 
   const theme = {};
 

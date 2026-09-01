@@ -45,6 +45,15 @@ const JS_GENERATED_COMPONENTS = path.join(
 );
 
 const THEME_NAMES = ['white', 'g10', 'g90', 'g100'];
+
+// Light/dark scheme per theme — used to re-inject color-scheme metadata after
+// extractThemeSlice strips the root $extensions from the unified file.
+const THEME_COLOR_SCHEME = {
+  white: 'light',
+  g10: 'light',
+  g90: 'dark',
+  g100: 'dark',
+};
 const COMPONENT_NAMES = [
   'button',
   'tag',
@@ -178,7 +187,24 @@ function themeConfig(themeName) {
   // Now extract only this theme's _by_theme.<themeName> leaf nodes, rewriting
   // them back to plain $value tokens so the rest of the pipeline sees a normal
   // single-theme token tree.
-  const themeSlice = extractThemeSlice(expanded, themeName);
+  const rawSlice = extractThemeSlice(expanded, themeName);
+
+  // Re-attach the per-theme color-scheme to the root $extensions so that
+  // carbonThemeMetadataPreprocessor (which reads
+  // dictionary.$extensions["org.carbon"]["color-scheme"]) can inject the
+  // color-scheme synthetic token.  extractThemeSlice does not carry the root
+  // $extensions through because they are global, not per-token.
+  const themeSlice = {
+    ...rawSlice,
+    $extensions: {
+      ...(rawSlice.$extensions ?? {}),
+      'org.carbon': {
+        ...(rawSlice.$extensions?.['org.carbon'] ?? {}),
+        'color-scheme': THEME_COLOR_SCHEME[themeName],
+      },
+    },
+  };
+
   const flatTokens = flattenDualRole(themeSlice);
 
   return {
