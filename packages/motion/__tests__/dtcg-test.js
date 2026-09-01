@@ -441,6 +441,9 @@ describe('@carbon/motion — generated surfaces.d.ts keeps literal types', () =>
   const {
     toDtsTypeLiteral,
   } = require('../style-dictionary/utils/dts-type-literal');
+  const {
+    format: jsSurfacesFormat,
+  } = require('../style-dictionary/formats/js-surfaces');
   const dtsSource = fs.readFileSync(
     path.resolve(__dirname, '../js/generated/surfaces.d.ts'),
     'utf8'
@@ -480,6 +483,14 @@ describe('@carbon/motion — generated surfaces.d.ts keeps literal types', () =>
     expect(dtsSource).toContain('kind: "shared-element"');
     expect(dtsSource).toContain('origin: "trigger"');
     expect(dtsSource).not.toMatch(/kind:\s*string/);
+  });
+
+  test('js-surfaces format dts output matches the on-disk generated file shape', () => {
+    const dts = jsSurfacesFormat({ options: { output: 'dts' } });
+    expect(dts).toContain('kind: "reveal"');
+    expect(dts).toContain('kind: "shared-element"');
+    expect(dts).toContain('origin: "trigger"');
+    expect(dts).not.toMatch(/kind:\s*string/);
   });
 });
 
