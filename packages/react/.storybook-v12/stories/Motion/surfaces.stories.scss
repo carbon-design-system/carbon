@@ -100,6 +100,31 @@
   text-decoration: none !important;
 }
 // stylelint-enable declaration-no-important
+.motion-context-demo {
+  padding: $spacing-07;
+  max-inline-size: 44rem;
+}
+
+.motion-context-demo__row {
+  display: flex;
+  border-block-end: 1px solid $border-subtle-01;
+  gap: $spacing-06;
+  padding-block: $spacing-04;
+}
+
+.motion-context-demo__row-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  min-inline-size: 6rem;
+}
+
+.motion-context-demo__row-value {
+  min-inline-size: 10rem;
+}
+
+.motion-context-demo__row-description {
+  color: $text-secondary;
+}
 
 // This adds a subtle hover effect to the tile for the expand story, this
 // is not part of the expand surface definition but we could add it if we

@@ -33,11 +33,13 @@ import {
 } from '@floating-ui/react';
 import { useFeatureFlag } from '../FeatureFlags';
 import { PolymorphicComponentPropWithRef } from '../../internal/PolymorphicProps';
+import { MotionSurface } from '../../internal/motion/MotionSurface';
 
 export interface PopoverContext {
   setFloating: React.Ref<HTMLSpanElement>;
   caretRef: React.Ref<HTMLSpanElement>;
   autoAlign: boolean | null;
+  open: boolean;
 }
 
 const PopoverContext = React.createContext<PopoverContext>({
@@ -48,6 +50,7 @@ const PopoverContext = React.createContext<PopoverContext>({
     current: null,
   },
   autoAlign: null,
+  open: false,
 });
 
 /**
@@ -440,14 +443,17 @@ export const Popover: PopoverComponent & {
     }
   }, [enableFloatingStyles, open, elements, update]);
 
+  const enableMotion = useFeatureFlag('enable-v12-motion');
+
   const value = useMemo(() => {
     return {
       floating,
       setFloating: refs.setFloating,
       caretRef,
       autoAlign: autoAlign,
+      open,
     };
-  }, [refs.setFloating, autoAlign]);
+  }, [refs.setFloating, autoAlign, open]);
 
   if (isTabTip) {
     const tabTipAlignments: PopoverAlignment[] = ['bottom-start', 'bottom-end'];
@@ -515,7 +521,9 @@ export const Popover: PopoverComponent & {
       [`${prefix}--popover--drop-shadow`]: dropShadow,
       [`${prefix}--popover--border`]: border,
       [`${prefix}--popover--high-contrast`]: highContrast,
-      [`${prefix}--popover--open`]: open,
+      // When the motion flag is on, Motion owns visibility — omit the
+      // `--open` class so CSS `display:none` doesn't interrupt the exit.
+      [`${prefix}--popover--open`]: enableMotion ? false : open,
       [`${prefix}--popover--auto-align ${prefix}--autoalign`]:
         enableFloatingStyles,
       [`${prefix}--popover--${currentAlignment}`]: true,
@@ -599,7 +607,11 @@ export const Popover: PopoverComponent & {
 
   return (
     <PopoverContext.Provider value={value}>
-      <BaseComponent {...rest} className={className} ref={ref}>
+      <BaseComponent
+        {...rest}
+        className={className}
+        data-popover-open={enableMotion ? open : undefined}
+        ref={ref}>
         {enableFloatingStyles || isTabTip ? mappedChildren : children}
       </BaseComponent>
     </PopoverContext.Provider>
@@ -756,32 +768,61 @@ export const PopoverContent = frFn((props, forwardRef) => {
   const { className, children, ...rest } = props;
 
   const prefix = usePrefix();
-  const { setFloating, caretRef, autoAlign } = React.useContext(PopoverContext);
+  const { setFloating, caretRef, autoAlign, open } =
+    React.useContext(PopoverContext);
   const ref = useMergedRefs([setFloating, forwardRef]);
   const enableFloatingStyles =
     useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
-  return (
-    <span {...rest} className={`${prefix}--popover`}>
-      <span className={cx(`${prefix}--popover-content`, className)} ref={ref}>
-        {children}
-        {enableFloatingStyles && (
-          <span
-            className={cx({
-              [`${prefix}--popover-caret`]: true,
-              [`${prefix}--popover--auto-align`]: true,
-            })}
-            ref={caretRef}
-          />
-        )}
-      </span>
-      {!enableFloatingStyles && (
+  const enableMotion = useFeatureFlag('enable-v12-motion');
+
+  // When Motion owns visibility, AnimatePresence handles mount/unmount so the
+  // CSS `display: none` base rule on `.cds--popover-content` must not apply.
+  // An inline style wins over the class rule without needing to touch the
+  // stylesheet. The `--motion-open` modifier enables the ::before bridge gap.
+  const contentSpan = (
+    <span
+      className={cx(`${prefix}--popover-content`, className, {
+        [`${prefix}--popover-content--motion-open`]: enableMotion,
+      })}
+      ref={ref}
+      style={enableMotion ? { display: 'block' } : undefined}>
+      {children}
+      {enableFloatingStyles && (
         <span
           className={cx({
             [`${prefix}--popover-caret`]: true,
+            [`${prefix}--popover--auto-align`]: true,
           })}
           ref={caretRef}
         />
       )}
+    </span>
+  );
+
+  const caretSpan = !enableFloatingStyles && (
+    <span
+      className={cx({
+        [`${prefix}--popover-caret`]: true,
+      })}
+      ref={caretRef}
+    />
+  );
+
+  if (enableMotion) {
+    return (
+      <span {...rest} className={`${prefix}--popover`}>
+        <MotionSurface surface="contextual" open={open}>
+          {contentSpan}
+        </MotionSurface>
+        {caretSpan}
+      </span>
+    );
+  }
+
+  return (
+    <span {...rest} className={`${prefix}--popover`}>
+      {contentSpan}
+      {caretSpan}
     </span>
   );
 });

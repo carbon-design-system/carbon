@@ -15,10 +15,15 @@ import React, {
   type ReactNode,
 } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
+import type { TargetAndTransition } from 'motion/react';
 import type { MotionSurfaceName } from '@carbon/motion';
 import { PresenceHoldContext } from '../usePresenceContext';
 import { warning } from '../warning';
-import { useMotionSurface } from './useMotionSurface';
+import {
+  useMotionSurface,
+  type ResolvedRevealSurface,
+} from './useMotionSurface';
+import { useMotionContext } from './MotionContext';
 
 // Motion owns these handler types (not React)
 type SafeDivProps = Omit<
@@ -27,11 +32,27 @@ type SafeDivProps = Omit<
 >;
 
 export interface MotionSurfaceProps extends SafeDivProps {
-  surface: MotionSurfaceName;
+  /** Named Carbon motion surface. Can be omitted when `animate` is supplied. */
+  surface?: MotionSurfaceName;
   surfaceId?: string;
   open?: boolean;
   onExitComplete?: () => void;
   children?: ReactNode;
+  /**
+   * Override (or replace when `surface` is omitted) the `initial` keyframe
+   * passed to the underlying `motion.div`.
+   */
+  initial?: TargetAndTransition;
+  /**
+   * Override (or replace when `surface` is omitted) the `animate` keyframe
+   * passed to the underlying `motion.div`.
+   */
+  animate?: TargetAndTransition;
+  /**
+   * Override (or replace when `surface` is omitted) the `exit` keyframe
+   * passed to the underlying `motion.div`.
+   */
+  exit?: TargetAndTransition;
 }
 
 /**
@@ -47,19 +68,37 @@ export interface MotionSurfaceProps extends SafeDivProps {
  */
 export const MotionSurface = forwardRef<HTMLDivElement, MotionSurfaceProps>(
   function MotionSurface(
-    { surface, surfaceId, open = true, onExitComplete, children, ...rest },
+    {
+      surface,
+      surfaceId,
+      open = true,
+      onExitComplete,
+      children,
+      initial: initialProp,
+      animate: animateProp,
+      exit: exitProp,
+      ...rest
+    },
     ref
   ) {
-    const resolved = useMotionSurface(surface);
+    // Always call with a valid name (hooks must not be conditional).
+    // When `surface` is omitted the resolved keyframes are ignored.
+    const resolved = useMotionSurface(surface ?? 'contextual');
     const { enabled } = resolved;
     // enclosing Carbon presence (ModalPresence etc.), if any
     const presence = useContext(PresenceHoldContext);
     const releaseHoldRef = useRef<(() => void) | null>(null);
 
     warning(
-      !(resolved.kind === 'shared-element' && !surfaceId),
+      !(surface && resolved.kind === 'shared-element' && !surfaceId),
       `MotionSurface: the ${surface} surface is a shared-element morph and ` +
         'needs a `surfaceId` that matches a `MotionSurfaceOrigin`.'
+    );
+
+    warning(
+      !(!surface && !animateProp),
+      'MotionSurface: neither `surface` nor `animate` was provided. ' +
+        'Pass a `surface` name or supply your own `animate` (and optionally `initial`/`exit`) styles.'
     );
 
     // Carbon presence only watches CSS animations, so it can't see Motion's
@@ -111,7 +150,7 @@ export const MotionSurface = forwardRef<HTMLDivElement, MotionSurfaceProps>(
       ) : null;
     }
 
-    if (resolved.kind === 'shared-element') {
+    if (surface && resolved.kind === 'shared-element') {
       return (
         <AnimatePresence initial={false} onExitComplete={handleExitComplete}>
           {open && (
@@ -119,8 +158,8 @@ export const MotionSurface = forwardRef<HTMLDivElement, MotionSurfaceProps>(
               ref={ref}
               layoutId={surfaceId}
               transition={resolved.enterTransition}
-              animate={resolved.animate}
-              exit={resolved.exit}
+              animate={animateProp ?? resolved.animate}
+              exit={exitProp ?? resolved.exit}
               {...rest}>
               {children}
             </motion.div>
@@ -134,14 +173,85 @@ export const MotionSurface = forwardRef<HTMLDivElement, MotionSurfaceProps>(
         {open && (
           <motion.div
             ref={ref}
-            initial={resolved.initial}
-            animate={resolved.animate}
-            exit={resolved.exit}
+            initial={
+              initialProp ??
+              (surface
+                ? (resolved as ResolvedRevealSurface).initial
+                : undefined)
+            }
+            animate={animateProp ?? (surface ? resolved.animate : undefined)}
+            exit={exitProp ?? (surface ? resolved.exit : undefined)}
             {...rest}>
             {children}
           </motion.div>
         )}
       </AnimatePresence>
+    );
+  }
+);
+export interface MotionItemProps extends SafeDivProps {
+  surface: MotionSurfaceName;
+  children?: ReactNode;
+}
+
+/**
+ * Animates its children on enter according to a named @carbon/motion reveal
+ * surface. Mount and unmount are controlled entirely by the parent — `MotionItem`
+ * does not manage an `open` prop or exit animation. It fires the enter
+ * transition whenever it mounts, and exit (if needed) is the parent's
+ * responsibility.
+ *
+ * Reads the nearest `MotionContext` and applies its `settle` value as the
+ * animation delay automatically, so items inside a
+ * `<MotionContext stagger={n}>` stagger in without any manual delay wiring.
+ *
+ * Only `reveal` surfaces are supported — shared-element surfaces require a
+ * paired origin/target and should use `MotionSurface` + `MotionSurfaceOrigin`.
+ *
+ * When the user prefers reduced motion, renders a plain `<div>` with no
+ * animation.
+ *
+ * @example
+ * <MotionContext stagger={50}>
+ *   <MotionItem surface="contextual"><Row label="Status" /></MotionItem>
+ *   <MotionItem surface="contextual"><Row label="Region" /></MotionItem>
+ * </MotionContext>
+ */
+export const MotionItem = forwardRef<HTMLDivElement, MotionItemProps>(
+  function MotionItem({ surface, children, ...rest }, ref) {
+    const resolved = useMotionSurface(surface);
+    const motionCtx = useMotionContext();
+
+    warning(
+      resolved.kind !== 'shared-element',
+      `MotionItem: the ${surface} surface is a shared-element morph. ` +
+        'MotionItem only supports reveal surfaces. Use MotionSurface instead.'
+    );
+
+    if (!resolved.enabled || resolved.kind !== 'reveal') {
+      return (
+        <div ref={ref} {...rest}>
+          {children}
+        </div>
+      );
+    }
+
+    const delaySeconds = motionCtx?.enabled ? motionCtx.settle / 1000 : 0;
+
+    return (
+      <motion.div
+        ref={ref}
+        initial={resolved.initial}
+        animate={{
+          ...resolved.animate,
+          transition: {
+            ...resolved.enterTransition,
+            delay: delaySeconds,
+          },
+        }}
+        {...rest}>
+        {children}
+      </motion.div>
     );
   }
 );

@@ -22,6 +22,7 @@ import { getTextInputProps } from './util';
 import { FormContext } from '../FluidForm';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
+import { useFeatureFlag } from '../FeatureFlags';
 import { getAnnouncement } from '../../internal/getAnnouncement';
 import { hasHelperText } from '../../internal/hasHelperText';
 import { Text } from '../Text';
@@ -193,6 +194,7 @@ const TextInput = forwardRef<unknown, TextInputProps>(
     ref
   ) => {
     const prefix = usePrefix();
+    const enableMotion = useFeatureFlag('enable-v12-motion');
 
     const { defaultValue, value } = rest;
 
@@ -293,6 +295,7 @@ const TextInput = forwardRef<unknown, TextInputProps>(
         [`${prefix}--text-input__field-wrapper--warning`]: normalizedProps.warn,
         [`${prefix}--text-input__field-wrapper--slug`]: slug,
         [`${prefix}--text-input__field-wrapper--decorator`]: decorator,
+        [`${prefix}--text-input__field-wrapper--motion`]: enableMotion,
       }
     );
     const iconClasses = classNames({

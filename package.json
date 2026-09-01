@@ -5,7 +5,7 @@
   "repository": "git@github.com:carbon-design-system/carbon.git",
   "license": "Apache-2.0",
   "engines": {
-    "node": ">=20.x"
+    "node": ">=22.x"
   },
   "workspaces": [
     "actions/*",
