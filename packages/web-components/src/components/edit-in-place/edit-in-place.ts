@@ -316,6 +316,14 @@ class CDSEditInPlace extends HostListenerMixin(LitElement) {
    * Handle blur
    */
   private _handleBlur(e: FocusEvent) {
+    if (this.readOnly) {
+      const relatedTarget = e.relatedTarget as Node | null;
+      if (!this.contains(relatedTarget)) {
+        this._focused = false;
+      }
+      return;
+    }
+
     const relatedTarget = e.relatedTarget as Node | null;
     const clickedWithin = this._clickingWithin;
     const targetingChild = relatedTarget ? this.contains(relatedTarget) : false;

@@ -44,7 +44,8 @@ $block-class: #{$prefix}--edit-in-place;
       outline-offset: 0;
     }
 
-    &:has(.#{$block-class}__btn:focus-within) {
+    &:has(.#{$block-class}__btn:focus-within),
+    &:has(.#{$block-class}__btn-readonly:focus-within) {
       outline: none;
     }
 
