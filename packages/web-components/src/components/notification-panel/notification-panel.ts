@@ -125,7 +125,6 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
   }
 
   firstUpdated() {
-    super.firstUpdated();
     this.todaySlot?.addEventListener('slotchange', () =>
       this._handleSlotChange('today')
     );
