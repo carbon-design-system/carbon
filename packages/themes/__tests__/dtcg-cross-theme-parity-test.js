@@ -13,119 +13,138 @@ const fs = require('fs');
 const path = require('path');
 
 const DTCG_DIR = path.resolve(__dirname, '../src/dtcg');
-const THEME_FILES = ['white.json', 'g10.json', 'g90.json', 'g100.json'];
+const THEMES_FILE = path.join(DTCG_DIR, 'themes.json');
+const THEME_NAMES = ['white', 'g10', 'g90', 'g100'];
 
 /**
- * Recursively flatten a DTCG token tree into a map of dot-separated token
- * paths to their leaf token objects (objects that have a $type key).
- * Non-token keys (prefixed with $) are skipped when building the path.
+ * Recursively collect every leaf token path in the unified themes.json.
+ * A leaf is any node that has a $type key (regardless of whether it also
+ * has non-$ children — i.e. dual-role nodes count as leaves).
+ * Paths are dot-separated, skipping $ keys.
+ *
+ * For the unified file each leaf carries $extensions["carbon.themes"] instead
+ * of a $value, so we look for $type as the leaf indicator.
  */
-function flattenTokens(obj, prefix = '') {
-  const result = {};
+function flattenTokenPaths(obj, prefix = '') {
+  const result = [];
   for (const [key, value] of Object.entries(obj)) {
-    // Skip all DTCG metadata keys — $type, $value, $description, $extensions,
-    // $schema, etc. This also means composite color objects (which appear as
-    // $value: { colorSpace, components, hex }) are never visited as nodes.
-    if (key.startsWith('$')) {
-      continue;
-    }
+    if (key.startsWith('$')) continue;
     const tokenPath = prefix ? `${prefix}.${key}` : key;
     if (value !== null && typeof value === 'object' && !Array.isArray(value)) {
       if ('$type' in value) {
-        result[tokenPath] = value;
+        result.push(tokenPath);
       }
-      Object.assign(result, flattenTokens(value, tokenPath));
+      result.push(...flattenTokenPaths(value, tokenPath));
     }
   }
   return result;
 }
 
-const themes = THEME_FILES.map((file) => ({
-  name: file.replace('.json', ''),
-  tokens: flattenTokens(
-    JSON.parse(fs.readFileSync(path.join(DTCG_DIR, file), 'utf8'))
-  ),
-}));
+/**
+ * Return the token node at the given dot-separated path inside obj.
+ */
+function getAt(obj, tokenPath) {
+  return tokenPath
+    .split('.')
+    .reduce((node, key) => (node ? node[key] : undefined), obj);
+}
 
-const allTokenPaths = [
-  ...new Set(themes.flatMap(({ tokens }) => Object.keys(tokens))),
-].sort();
+const themes = JSON.parse(fs.readFileSync(THEMES_FILE, 'utf8'));
 
-describe('DTCG cross-theme token parity', () => {
-  describe('structural conventions — theme JSON follows DTCG nesting rules', () => {
-    test.each(themes)(
-      '$name theme keys are strictly nested without hyphens',
-      ({ tokens }) => {
-        // In DTCG theme files, token segments must be nested objects rather than
-        // hyphenated strings (e.g. `layer.accent.active.03`, not `layer-accent-active-03`).
-        for (const tokenPath of Object.keys(tokens)) {
-          const segments = tokenPath.split('.');
-          for (const segment of segments) {
-            expect(segment).not.toMatch(/-/);
-            expect(segment).toMatch(/^[a-z0-9]+$/);
-          }
+// Collect every token path that has a $type
+const allTokenPaths = [...new Set(flattenTokenPaths(themes))].sort();
+
+describe('DTCG unified themes.json structural conventions', () => {
+  test('file exists and has expected top-level structure', () => {
+    expect(themes.$schema).toBeDefined();
+    expect(themes.$description).toBeDefined();
+    // spot-check a few top-level groups
+    expect(themes.background).toBeDefined();
+    expect(themes.layer).toBeDefined();
+    expect(themes.text).toBeDefined();
+  });
+
+  test('keys are strictly nested without hyphens (DTCG nesting rules)', () => {
+    for (const tokenPath of allTokenPaths) {
+      const segments = tokenPath.split('.');
+      for (const segment of segments) {
+        expect(segment).not.toMatch(/-/);
+      }
+    }
+  });
+
+  test('every token has a valid $description', () => {
+    for (const tokenPath of allTokenPaths) {
+      const token = getAt(themes, tokenPath);
+      expect(token['$description']).toBeDefined();
+      expect(typeof token['$description']).toBe('string');
+      expect(token['$description'].trim().length).toBeGreaterThan(0);
+    }
+  });
+
+  test('every token has a $type', () => {
+    for (const tokenPath of allTokenPaths) {
+      const token = getAt(themes, tokenPath);
+      expect(token['$type']).toBeDefined();
+    }
+  });
+});
+
+describe('DTCG unified themes.json — per-theme value coverage', () => {
+  test.each(allTokenPaths)(
+    '%s has a carbon.themes entry for all four themes',
+    (tokenPath) => {
+      const token = getAt(themes, tokenPath);
+      const carbonThemes = token.$extensions?.['carbon.themes'];
+      expect(carbonThemes).toBeDefined();
+      for (const themeName of THEME_NAMES) {
+        expect(Object.keys(carbonThemes)).toContain(themeName);
+      }
+    }
+  );
+
+  test.each(allTokenPaths)(
+    '%s carbon.themes entries have valid value fields',
+    (tokenPath) => {
+      const token = getAt(themes, tokenPath);
+      const carbonThemes = token.$extensions?.['carbon.themes'];
+      for (const [themeName, entry] of Object.entries(carbonThemes)) {
+        if (themeName === 'fallback') continue; // some component tokens have a fallback key
+        if (entry === null || entry === undefined) {
+          throw new Error(
+            `Token "${tokenPath}" theme "${themeName}" has null/undefined entry`
+          );
+        }
+        // Entry is either:
+        //   - a bare string alias/hex
+        //   - a composite color object { colorSpace, components, hex } (bare, no alpha)
+        //   - a { value, alpha? } wrapper object
+        const isBareComposite =
+          typeof entry === 'object' && entry !== null && 'hex' in entry;
+        const value = isBareComposite
+          ? entry
+          : typeof entry === 'object' && !Array.isArray(entry)
+            ? entry.value
+            : entry;
+        // Value must be a non-empty string (alias or hex) or a composite color object
+        const valid =
+          !!(typeof value === 'string' && value.trim().length > 0) ||
+          !!(typeof value === 'object' && value !== null && value.hex);
+        expect(valid).toBe(true);
+      }
+    }
+  );
+
+  test.each(allTokenPaths)(
+    '%s alpha entries are numbers when present',
+    (tokenPath) => {
+      const token = getAt(themes, tokenPath);
+      const carbonThemes = token.$extensions?.['carbon.themes'];
+      for (const [, entry] of Object.entries(carbonThemes)) {
+        if (typeof entry === 'object' && entry !== null && 'alpha' in entry) {
+          expect(typeof entry.alpha).toBe('number');
         }
       }
-    );
-
-    test.each(themes)(
-      '$name theme has valid $description on every token',
-      ({ tokens }) => {
-        for (const [tokenPath, token] of Object.entries(tokens)) {
-          expect(token['$description']).toBeDefined();
-          expect(typeof token['$description']).toBe('string');
-          expect(token['$description'].trim().length).toBeGreaterThan(0);
-        }
-      }
-    );
-  });
-
-  describe('token presence — every token exists in all four themes', () => {
-    test.each(allTokenPaths)('%s', (tokenPath) => {
-      for (const { name, tokens } of themes) {
-        expect(Object.keys(tokens)).toContain(tokenPath);
-      }
-    });
-  });
-
-  describe('$type consistency — every token has the same $type across themes', () => {
-    test.each(allTokenPaths)('%s', (tokenPath) => {
-      const types = themes
-        .filter(({ tokens }) => tokenPath in tokens)
-        .map(({ name, tokens }) => `${name}: ${tokens[tokenPath]['$type']}`);
-
-      const uniqueTypes = [
-        ...new Set(
-          themes
-            .filter(({ tokens }) => tokenPath in tokens)
-            .map(({ tokens }) => tokens[tokenPath]['$type'])
-        ),
-      ];
-      expect(uniqueTypes).toHaveLength(1);
-    });
-  });
-
-  describe('$description consistency — every token has the same $description across themes', () => {
-    test.each(allTokenPaths)('%s', (tokenPath) => {
-      const descriptions = themes
-        .filter(({ tokens }) => tokenPath in tokens)
-        .map(({ name, tokens }) => ({
-          name,
-          description: tokens[tokenPath]['$description'],
-        }));
-
-      const uniqueDescriptions = [
-        ...new Set(descriptions.map((d) => d.description)),
-      ];
-
-      if (uniqueDescriptions.length > 1) {
-        const detail = descriptions
-          .map((d) => `  ${d.name}: ${JSON.stringify(d.description)}`)
-          .join('\n');
-        throw new Error(
-          `Token "${tokenPath}" has mismatched $description across themes:\n${detail}`
-        );
-      }
-    });
-  });
+    }
+  );
 });

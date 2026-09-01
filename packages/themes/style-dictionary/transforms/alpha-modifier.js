@@ -19,7 +19,7 @@
  * If no alphaModifier extension is present the token is passed through
  * unchanged (carbon/color-flatten will handle it next).
  *
- * Example in white.json:
+ * Example in themes.json:
  *   "background-active": {
  *     "$type": "color",
  *     "$value": "{gray.50}",         ← resolved by SD to '#8d8d8d'
