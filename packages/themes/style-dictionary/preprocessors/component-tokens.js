@@ -125,12 +125,24 @@ function carbonComponentTokensPreprocessor(dictionary) {
           byTheme[theme] = syntheticNode;
         }
 
-        out[key] = {
+        // Build the expanded node: preserve DTCG metadata, add _by_theme, and
+        // recurse into any non-$ children (dual-role nodes in themes.json have
+        // both a carbon.themes value AND group children like `active`, `hover`).
+        const expandedNode = {
           ...(value.$type ? { $type: value.$type } : {}),
           ...(value.$description ? { $description: value.$description } : {}),
           // _by_theme is a DTCG group — each child is a leaf token with $value
           _by_theme: byTheme,
         };
+        for (const [childKey, childValue] of Object.entries(value)) {
+          if (childKey.startsWith('$') || childKey === '_by_theme') continue;
+          if (!childValue || typeof childValue !== 'object') continue;
+          // Wrap in a single-key object so walk() sees the key and can apply
+          // the carbon.themes expansion logic to it (walk iterates the entries
+          // of the object passed in, so childValue alone would skip expansion).
+          expandedNode[childKey] = walk({ [childKey]: childValue })[childKey];
+        }
+        out[key] = expandedNode;
       } else {
         // Recurse into nested groups
         out[key] = walk(value);
