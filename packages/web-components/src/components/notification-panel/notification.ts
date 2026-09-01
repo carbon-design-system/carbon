@@ -96,7 +96,7 @@ class CDSNotification extends HostListenerMixin(LitElement) {
         </div>
       </div>
       <cds-button
-        tooltip-text=""
+        tooltip-text="Dismiss notification"
         align="left"
         kind="ghost"
         size="sm"

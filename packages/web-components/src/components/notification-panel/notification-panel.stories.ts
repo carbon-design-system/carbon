@@ -127,7 +127,6 @@ const defaultTemplate = {
     const [expandUserPanel, setExpandUserPanel] = useState(false);
     const [expandPanel, setExpandPanel] = useState(false);
     const [isNewNotification, setIsNewNotification] = useState(false);
-    const triggerButton = document.querySelector('#trigger-button');
     const toggleButton = () => {
       setOpenPanel(!openPanel);
       setExpandPanel(false);
@@ -247,7 +246,7 @@ const defaultTemplate = {
         </div>
       </cds-header>
       <cds-notification-panel
-        .triggerButtonRef=${triggerButton}
+        .triggerButtonRef=${document.querySelector('#trigger-button')}
         .open="${openPanel}"
         title-text="${args.titleText}"
         today-text="${args.todayText}"

@@ -125,6 +125,7 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
   }
 
   firstUpdated() {
+    super.firstUpdated();
     this.todaySlot?.addEventListener('slotchange', () =>
       this._handleSlotChange('today')
     );
@@ -192,10 +193,16 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
     });
 
     return html`
-      <div role="dialog" tabindex="0" class=${classes}>
+      <div
+        role="dialog"
+        tabindex="0"
+        class=${classes}
+        aria-labelledby="notifications-panel-title">
         <div class="${blockClass}__header-container">
           <div class="${blockClass}__header-flex">
-            <h2 class="${blockClass}__header">${titleText}</h2>
+            <h2 id="notifications-panel-title" class="${blockClass}__header">
+              ${titleText}
+            </h2>
             <cds-button
               size="sm"
               kind="ghost"
@@ -362,8 +369,10 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
 
   @HostListener('keydown')
   // @ts-expect-error: The decorator refers to this method but TS thinks this method is not referred to
-  private _handleKeydown = ({ key, target }: KeyboardEvent) => {
+  private _handleKeydown = (event: KeyboardEvent) => {
+    const { key, target } = event;
     if (key === 'Escape') {
+      if (event.defaultPrevented) return;
       this.open = false;
       const init = {
         bubbles: true,
@@ -401,7 +410,7 @@ class CDSNotificationPanel extends HostListenerMixin(LitElement) {
       'textarea',
       '[role="button"]',
       '[role="link"]',
-      '[tabindex]:not([tabindex="-1"]',
+      '[tabindex]:not([tabindex="-1"])',
       'cds-button',
       'cds-link',
       'cds-accordion-item',

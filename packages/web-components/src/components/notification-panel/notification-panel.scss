@@ -29,10 +29,18 @@ $block-class: #{$prefix}--notifications-panel;
   }
 
   .#{$block-class}__header-container {
-    --#{$prefix}-heading-06-font-size: --#{$prefix}-heading-compact-01-font-size;
-    --#{$prefix}-heading-06-font-weight: --#{$prefix}-heading-compact-01-font-weight;
-    --#{$prefix}-heading-06-line-height: --#{$prefix}-heading-compact-01-line-height;
-    --#{$prefix}-heading-06-letter-spacing: --#{$prefix}-heading-compact-01-letter-spacing;
+    --#{$prefix}-heading-06-font-size: var(
+      --#{$prefix}-heading-compact-01-font-size
+    );
+    --#{$prefix}-heading-06-font-weight: var(
+      --#{$prefix}-heading-compact-01-font-weight
+    );
+    --#{$prefix}-heading-06-line-height: var(
+      --#{$prefix}-heading-compact-01-line-height
+    );
+    --#{$prefix}-heading-06-letter-spacing: var(
+      --#{$prefix}-heading-compact-01-letter-spacing
+    );
   }
 
   .#{$block-class}__dismiss-button {

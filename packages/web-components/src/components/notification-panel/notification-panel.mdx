@@ -35,67 +35,30 @@ import '@carbon/web-components/es/components/notification-panel/index.js';
 
 ```html
 <cds-notification-panel
-  .triggerButtonRef="${triggerButton}"
-  .open="${openPanel}"
-  title-text="${args.titleText}"
-  today-text="${args.todayText}"
-  previous-text="${args.previousText}"
-  dismiss-all-label="${args.dismissAllLabel}"
-  donot-disturb-label="${args.doNotDisturbLabel}"
-  date-time-locale="${args.dateTimeLocale}"
-  @cds-notification-dismiss-all="${dismissAllNotification}"
-  @cds-notification-click-outside="${clickOutside}">
-  ${dataToday.length > 0 ? html` ${dataToday.map((item) => { return html`
-  <cds-notification
-    slot="today"
-    .open="${args.open}"
-    @cds-notification-click="${item.onNotificationClick}"
-    @cds-notification-dismiss="${()"
-    ="">
-    { notificationSingleDismiss(item.id, 'today'); }} type=${item.type}
-    ?unread=${item.unread} .timestamp=${item.timestamp} >
-    <cds-heading
-      class="${classMap({"
-      [`${blockClassNotification}-title`]:
-      true,
-      [`${blockClassNotification}-title-unread`]:
-      item.unread,
-      })}
-      slot="title">
-      ${item.title}
-    </cds-heading>
-    <div slot="description">${item.description}</div>
+  title-text="Notifications"
+  today-text="Today"
+  previous-text="Previous"
+  dismiss-all-label="Dismiss all"
+  empty-state-label="You do not have any notifications"
+  donot-disturb-label="Do not disturb"
+  date-time-locale="en-US"
+  open>
+  <!-- Today notifications (slot="today") -->
+  <cds-notification slot="today" type="error" unread>
+    <span slot="title">Notification title</span>
+    <span slot="description">Notification description text.</span>
   </cds-notification>
-  `; })} ` : ''} ${dataPrevious.length > 0 ? html` ${dataPrevious.map((item) =>
-  { return html`
-  <cds-notification
-    slot="previous"
-    @cds-notification-click="${item.onNotificationClick}"
-    @cds-notification-dismiss="${()"
-    ="">
-    { notificationSingleDismiss(item.id, 'previous'); }} type=${item.type}
-    ?unread=${item.unread} .timestamp=${item.timestamp} >
-    <cds-heading
-      class="${classMap({"
-      [`${blockClassNotification}-title`]:
-      true,
-      [`${blockClassNotification}-title-unread`]:
-      item.unread,
-      })}
-      slot="title">
-      ${item.title}
-    </cds-heading>
-    <div slot="description">${item.description}</div>
+
+  <!-- Previous notifications (slot="previous") -->
+  <cds-notification slot="previous" type="informational">
+    <span slot="title">Notification title</span>
+    <span slot="description">Notification description text.</span>
   </cds-notification>
-  `; })} ` : ''}
+
+  <!-- Footer (slot="footer") -->
   <cds-notification-footer
     slot="footer"
-    view-all-label="View all (${dataToday.length + dataPrevious.length})"
-    @cds-notification-view-all="${action(`Clicked"
-    View
-    All`)}
-    @cds-notification-settings="${action(`Clicked"
-    Settings`)}></cds-notification-footer>
+    view-all-label="View all"></cds-notification-footer>
 </cds-notification-panel>
 ```
 
