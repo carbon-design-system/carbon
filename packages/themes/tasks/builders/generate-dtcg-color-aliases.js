@@ -22,7 +22,7 @@
  *     }
  *   }
  *
- * The $value shape matches what white.json / g10.json use:
+ * The $value shape matches what themes.json uses:
  *   - Solid colors:  { colorSpace, components (0–1 floats), hex }
  *
  * All tokens in @carbon/colors are fully opaque hex values — there are no
@@ -73,7 +73,7 @@ function hexToComponents(hex) {
 
 /**
  * Build the DTCG $value object for a solid (fully opaque) color, matching the
- * shape used throughout white.json / g10.json etc.
+ * shape used throughout themes.json.
  *
  * @param {string} hex
  * @returns {{ colorSpace: string, components: number[], hex: string }}

@@ -9,10 +9,8 @@ industry-standard format.
 
 ```
 dtcg/
-├── white.json              # White theme (light, high contrast)
-├── g10.json               # Gray 10 theme (light)
-├── g90.json               # Gray 90 theme (dark)
-├── g100.json              # Gray 100 theme (dark, high contrast)
+├── themes.json            # All four themes in one file (white, g10, g90, g100)
+├── color-palette.json     # Color palette aliases (generated from @carbon/colors)
 └── components/
     ├── button.json        # Button component tokens
     ├── tag.json           # Tag component tokens
@@ -169,57 +167,68 @@ During the build the `carbon/alpha-modifier` Style Dictionary transform resolves
 > **`alphaModifier: 0`** means fully transparent (`rgba(…, 0)`). This is used
 > for gradient "fade to transparent" endpoints (e.g. `ai-aura-end`).
 
-## Component tokens — `$extensions["carbon.themes"]`
+## `$extensions["carbon.themes"]` — the unified per-theme format
 
-Theme tokens (in `white.json` etc.) have a single `$value` per file because the
-file itself represents one theme. Component tokens are different: a single
-component token file covers **all four themes at once**, with per-theme values
-stored inside `$extensions["carbon.themes"]` instead of `$value`:
+Both theme tokens (`themes.json`) and component tokens (`components/*.json`)
+store per-theme values under the same `$extensions["carbon.themes"]` key. Each
+entry for a theme is either:
+
+- **A bare string** (palette alias or hex) when there is no alpha modifier:
+  ```json
+  "white": "{gray.10}"
+  ```
+- **An object `{ value, alpha }`** when an opacity modifier is needed:
+  ```json
+  "white": { "value": "{gray.50}", "alpha": 0.12 }
+  ```
+
+Example token from `themes.json`:
 
 ```json
-"button": {
-  "danger-secondary": {
+"background": {
+  "hover": {
     "$type": "color",
-    "$description": "Border and text color for secondary danger buttons.",
+    "$description": "Background color for hover state.",
     "$extensions": {
       "carbon.themes": {
-        "white": "{red.60}",
-        "g10":   "{red.60}",
-        "g90":   "{red.40}",
-        "g100":  "{red.50}"
+        "white": { "value": "{gray.50}", "alpha": 0.12 },
+        "g10":   { "value": "{gray.50}", "alpha": 0.12 },
+        "g90":   { "value": "{gray.50}", "alpha": 0.16 },
+        "g100":  { "value": "{gray.50}", "alpha": 0.16 }
       }
     }
   }
 }
 ```
 
-Key differences from theme tokens:
+The `carbon/component-tokens` preprocessor understands both entry shapes and
+expands them into per-theme leaf tokens before Style Dictionary processes them.
 
-|               | Theme token (e.g. `white.json`)           | Component token (e.g. `components/button.json`)                  |
-| ------------- | ----------------------------------------- | ---------------------------------------------------------------- |
-| File scope    | One theme                                 | All four themes                                                  |
-| Value field   | `$value`                                  | `$extensions["carbon.themes"]["<theme>"]`                        |
-| Grepping      | Navigate nested keys                      | Same nesting rules apply                                         |
-| Alpha opacity | `$extensions["org.carbon"].alphaModifier` | `$extensions["org.carbon"].alphaModifiers.<theme>` (note plural) |
+### Comparison: theme tokens vs. component tokens
 
-The `carbon/component-tokens` preprocessor expands this shape into per-theme
-leaf tokens before Style Dictionary processes them. The generated output lives
-in `scss/generated/_<component>-tokens.scss`.
+|               | Theme token (`themes.json`)                                           | Component token (`components/button.json`)                                 |
+| ------------- | --------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| File scope    | All four themes                                                       | All four themes                                                            |
+| Value field   | `$extensions["carbon.themes"]["<theme>"]` (string or `{value,alpha}`) | `$extensions["carbon.themes"]["<theme>"]` (string)                         |
+| Alpha opacity | Co-located: `{ "value": "…", "alpha": 0.12 }`                         | Separate: `$extensions["org.carbon"].alphaModifiers.<theme>` (note plural) |
+| Grepping      | Navigate nested keys                                                  | Same nesting rules apply                                                   |
 
-> **Reading component token values:** Look up the token name in
-> `components/<component>.json`, navigate to the nested key, and read the value
-> for the theme you care about from the `carbon.themes` map.
+> **Note:** Component files still use the legacy `org.carbon.alphaModifiers` map
+> for backwards compatibility. Both forms are accepted by the preprocessor.
+
+> **Reading theme token values:** Navigate to the nested key in `themes.json`,
+> then read the value for the theme you care about from `carbon.themes`.
 
 ## Theme Tokens
 
-All four Carbon themes are available in DTCG format:
+All four Carbon themes are consolidated into `themes.json`:
 
-- **white.json** - White theme (light, high contrast)
-- **g10.json** - Gray 10 theme (light)
-- **g90.json** - Gray 90 theme (dark)
-- **g100.json** - Gray 100 theme (dark, high contrast)
+- **white** — Light theme, high contrast for optimal readability
+- **g10** — Gray 10 light theme, subtle contrast for data-dense interfaces
+- **g90** — Gray 90 dark theme
+- **g100** — Gray 100 dark theme, high contrast
 
-Each theme file contains 250+ tokens organized into categories:
+The file contains 250+ tokens organised into categories:
 
 - **Color tokens**: Background, layer, field, border, text, link, icon, support
   colors
@@ -265,7 +274,7 @@ Manual validation can be performed using any JSON Schema validator:
 
 ```bash
 # Using ajv-cli
-ajv validate -s https://tr.designtokens.org/format/schema.json -d white.json
+ajv validate -s https://tr.designtokens.org/format/schema.json -d themes.json
 ```
 
 ## Contributing
