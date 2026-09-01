@@ -105,14 +105,25 @@ function carbonComponentTokensPreprocessor(dictionary) {
         // The legacy separate "org.carbon.alphaModifiers" map is still supported
         // for backwards-compat with existing component token files.
         for (const [theme, themeEntry] of Object.entries(carbonThemes)) {
-          const isObject =
+          // An entry can be:
+          //   1. A bare string alias/hex           → treat as the value directly
+          //   2. A composite color object           → { colorSpace, components, hex }
+          //      Used for hardcoded non-palette colors. Treat as the value directly.
+          //   3. A { value, alpha? } wrapper object → unified theme format
+          const isComposite =
             themeEntry !== null &&
             typeof themeEntry === 'object' &&
-            !Array.isArray(themeEntry);
-          const themeValue = isObject ? themeEntry.value : themeEntry;
-          // Per-theme alpha: prefer co-located entry.alpha, fall back to legacy
-          // separate alphaModifiers map.
-          const alpha = isObject ? themeEntry.alpha : alphaModifiers[theme];
+            !Array.isArray(themeEntry) &&
+            'hex' in themeEntry;
+          const isWrapper =
+            themeEntry !== null &&
+            typeof themeEntry === 'object' &&
+            !Array.isArray(themeEntry) &&
+            !isComposite;
+          const themeValue = isWrapper ? themeEntry.value : themeEntry;
+          // Per-theme alpha: only { value, alpha } wrappers carry alpha.
+          // Legacy org.carbon.alphaModifiers map is the fallback for component files.
+          const alpha = isWrapper ? themeEntry.alpha : alphaModifiers[theme];
           const syntheticNode = {
             $type: value.$type ?? 'color',
             $value: themeValue,
