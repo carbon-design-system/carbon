@@ -52,19 +52,22 @@ icons, pictograms, layout, motion, themes, type), and tooling.
 
 ## Theme token lookup
 
-- Token values and descriptions live in `packages/themes/src/dtcg/` — one JSON
-  file per theme (`white.json`, `g10.json`, `g90.json`, `g100.json`). Component
-  tokens are in `packages/themes/src/dtcg/components/`.
+- All four theme token values and descriptions live in a single file:
+  `packages/themes/src/dtcg/themes.json`. Component tokens are in
+  `packages/themes/src/dtcg/components/`.
 - Tokens use nested JSON keys (e.g. `layer-accent-active-03` is
   `layer.accent.active.03`), so search by key segments rather than flat token
   names.
-- The DTCG files are the canonical source of truth for both `$value` and
-  `$description`. The generated `packages/themes/scss/generated/_themes.scss` is
-  useful for seeing all four theme values side-by-side but carries no
-  descriptions and should not be edited directly.
+- Each token carries per-theme values under `$extensions["carbon.themes"]`.
+  Entries are either a bare string alias (no alpha) or a `{ value, alpha }`
+  object. There is no per-file `$value` — look inside `carbon.themes` for the
+  value you need.
+- The generated `packages/themes/scss/generated/_themes.scss` shows all four
+  resolved hex values side-by-side but carries no descriptions and should not be
+  edited directly.
 - See `packages/themes/src/dtcg/README.md` for full details on: nested key
-  structure, dual-role nodes, alpha modifier tokens, component token format, and
-  how to resolve `$value` palette references.
+  structure, dual-role nodes, the `carbon.themes` entry format, alpha modifier
+  tokens, component token format, and how to resolve palette references.
 
 ## Package-specific details
 

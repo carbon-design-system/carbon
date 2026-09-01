@@ -21,7 +21,7 @@ dtcg/
 
 ## Token categories in each theme file
 
-Each theme JSON is organised into top-level groups. When searching for a token,
+`themes.json` is organised into top-level groups. When searching for a token,
 start with the group that matches the first segment of its name:
 
 | Top-level key | Token name prefix examples                                  |
@@ -41,7 +41,7 @@ start with the group that matches the first segment of its name:
 | `text`        | `text-primary`, `text-on-color`, `text-disabled`            |
 
 > **Note:** Component tokens (`button`, `tag`, etc.) live in
-> `components/<name>.json`, **not** in the theme files.
+> `components/<name>.json`, **not** in `themes.json`.
 
 ## Nested key → flat token name mapping
 
@@ -82,15 +82,27 @@ numbered tier (`01`, `02`, or `03`) based on container nesting depth.
 ## Dual-role nodes (tokens that are also groups)
 
 Some tokens are simultaneously a value **and** a group of related tokens. For
-example, `background` has its own `$value` but also has children like
-`background-active` and `background-hover`. In the JSON these look like:
+example, `background` has its own per-theme value but also has children like
+`background-active` and `background-hover`. In `themes.json` these look like:
 
 ```json
 "background": {
   "$type": "color",
-  "$value": "{gray.10}",
-  "active": { "$type": "color", "$value": "{gray.50}" },
-  "hover":  { "$type": "color", "$value": "{gray.50}" }
+  "$description": "…",
+  "$extensions": {
+    "carbon.themes": {
+      "white": "{white.default}", "g10": "{gray.10}",
+      "g90":   "{gray.90}",       "g100": "{gray.100}"
+    }
+  },
+  "active": {
+    "$type": "color",
+    "$extensions": { "carbon.themes": { "white": { "value": "{gray.50}", "alpha": 0.5 }, … } }
+  },
+  "hover": {
+    "$type": "color",
+    "$extensions": { "carbon.themes": { "white": { "value": "{gray.50}", "alpha": 0.12 }, … } }
+  }
 }
 ```
 
@@ -98,18 +110,19 @@ The flat names generated are `background`, `background-active`,
 `background-hover` — all siblings in the output even though they are
 parent/child in the source JSON.
 
-> **Tip for agents:** If you read a node and it has both a `$value` and non-`$`
-> children, both the node itself **and** every child are valid tokens. Do not
-> assume a node with children is only a group.
+> **Tip for agents:** If you read a node and it has both a
+> `$extensions["carbon.themes"]` entry and non-`$` children, both the node
+> itself **and** every child are valid tokens. Do not assume a node with
+> children is only a group.
 
-## `$value` references and `color-palette.json`
+## `carbon.themes` value aliases and `color-palette.json`
 
-Token `$value` fields use curly-brace alias syntax referencing the color
-palette, e.g. `"{blue.60}"` or `"{gray.20}"`. These references are resolved
-during the build against `packages/themes/src/dtcg/color-palette.json`, which
-contains the full Carbon color ramp (`gray.10` … `gray.100`, `blue.10` …
-`blue.100`, etc.) with their hex values. If you need the actual hex for a
-`$value` alias, look it up in that file.
+The `value` field inside each `carbon.themes` entry uses curly-brace alias
+syntax referencing the color palette, e.g. `"{blue.60}"` or `"{gray.20}"`. These
+references are resolved during the build against
+`packages/themes/src/dtcg/color-palette.json`, which contains the full Carbon
+color ramp (`gray.10` … `gray.100`, `blue.10` … `blue.100`, etc.) with their hex
+values. If you need the actual hex for an alias, look it up in that file.
 
 ## Token Format
 
@@ -139,19 +152,25 @@ keys:
 - **`$extensions`** - Custom metadata and vendor-specific information. Carbon
   uses two namespaces — see the dedicated sections below for full details.
 
-## `$extensions["org.carbon"].alphaModifier` — semi-transparent tokens
+## Semi-transparent tokens — the `alpha` field
 
-Some tokens are a base color with an opacity applied. Instead of hardcoding an
-`rgba()` value, the source JSON stores the opaque palette reference in `$value`
-and the opacity multiplier in `$extensions["org.carbon"].alphaModifier`:
+Some tokens are a base color with an opacity applied. In `themes.json` the
+opacity is expressed as an `alpha` field co-located with `value` inside the
+per-theme entry:
 
 ```json
-"background-hover": {
-  "$type": "color",
-  "$value": "{gray.50}",
-  "$description": "Background color for hover state.",
-  "$extensions": {
-    "org.carbon": { "alphaModifier": 0.12 }
+"background": {
+  "hover": {
+    "$type": "color",
+    "$description": "Background color for hover state.",
+    "$extensions": {
+      "carbon.themes": {
+        "white": { "value": "{gray.50}", "alpha": 0.12 },
+        "g10":   { "value": "{gray.50}", "alpha": 0.12 },
+        "g90":   { "value": "{gray.50}", "alpha": 0.16 },
+        "g100":  { "value": "{gray.50}", "alpha": 0.16 }
+      }
+    }
   }
 }
 ```
@@ -159,13 +178,17 @@ and the opacity multiplier in `$extensions["org.carbon"].alphaModifier`:
 During the build the `carbon/alpha-modifier` Style Dictionary transform resolves
 `{gray.50}` to its hex (`#8d8d8d`) and then emits `rgba(141, 141, 141, 0.12)`.
 
-> **Reading the source:** When you see `alphaModifier` on a token, the `$value`
-> field alone does **not** tell you the final color. The real output value is
-> `rgba(<palette hex at $value>, <alphaModifier>)`. Check `color-palette.json`
-> for the hex, then apply the multiplier mentally.
+> **Reading the source:** When a `carbon.themes` entry is an object, the `value`
+> field alone does **not** tell you the final color. The real output is
+> `rgba(<palette hex at value>, <alpha>)`. Check `color-palette.json` for the
+> hex, then apply `alpha` mentally.
 
-> **`alphaModifier: 0`** means fully transparent (`rgba(…, 0)`). This is used
-> for gradient "fade to transparent" endpoints (e.g. `ai-aura-end`).
+> **`alpha: 0`** means fully transparent (`rgba(…, 0)`). Used for gradient "fade
+> to transparent" endpoints (e.g. `ai-aura-end`).
+
+> **Note for component token files:** `components/*.json` still use the legacy
+> `$extensions["org.carbon"].alphaModifiers` map (plural, keyed by theme) rather
+> than the co-located `alpha` field. The build preprocessor accepts both forms.
 
 ## `$extensions["carbon.themes"]` — the unified per-theme format
 
@@ -287,7 +310,8 @@ When adding or modifying tokens:
    `$description`
 3. **Use appropriate types** - Set correct `$type` values (color, dimension,
    etc.)
-4. **Add theme-specific values** - Use `$extensions.carbon.themes` for component
+4. **Add theme-specific values** - Edit `themes.json` for theme tokens; use
+   `$extensions["carbon.themes"]` in `components/<name>.json` for component
    tokens
 5. **Validate your changes** - Run `yarn build` to validate against DTCG schema
 6. **Test generated output** - Verify SCSS generation works correctly
