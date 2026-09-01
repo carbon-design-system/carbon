@@ -516,6 +516,8 @@ export const validateNumberSeparators = (
           ? input.includes(groupSeparator)
           : false);
 
+  const isIndianLocale =
+    locale === 'en-IN' || locale.toLowerCase().endsWith('-in');
   const scientificMatch = input?.match(/^([^eE]+)([eE][+-]?.*)?$/);
   const baseNumber = scientificMatch ? scientificMatch[1] : input;
 
@@ -532,20 +534,56 @@ export const validateNumberSeparators = (
   // When grouping is used, we need to handle two cases:
   // 1. Numbers with 1-3 digits (no separator required): 1, 12, 123
   // 2. Numbers with 4+ digits (separator required): 1,234 or 12,345 or 123,456
-  const integerRegex = usesGrouping
-    ? new RegExp(`^${sign}(${digit}{1,3}|${digit}{1,3}(${group}${digit}{3})+)$`)
-    : new RegExp(`^${sign}${digit}+$`);
+  let integerRegex: RegExp;
 
+  if (!usesGrouping) {
+    integerRegex = new RegExp(`^${sign}${digit}+$`);
+  } else if (isIndianLocale) {
+    // Indian grouping:
+    // 1-3 digits
+    // 1,234
+    // 12,345
+    // 1,23,456
+    // 12,34,567
+    // 1,23,45,678
+    integerRegex = new RegExp(
+      `^${sign}(` +
+        `${digit}{1,3}` +
+        `|${digit}{1,3}${group}${digit}{3}` +
+        `|${digit}{1,2}(${group}${digit}{2})+${group}${digit}{3}` +
+        `)$`
+    );
+  } else {
+    integerRegex = new RegExp(
+      `^${sign}(${digit}{1,3}|${digit}{1,3}(${group}${digit}{3})+)$`
+    );
+  }
   if (!integerRegex.test(integerPart)) {
     return false;
   }
 
   // STEP 2: full number validation
-  const fullRegex = new RegExp(
-    `^${sign}${digit}+` +
-      (usesGrouping ? `(${group}${digit}{3})*` : '') +
-      `(${decimal}${digit}+)?${scientific}$`
-  );
+  let fullRegex: RegExp;
+
+  if (!usesGrouping) {
+    fullRegex = new RegExp(
+      `^${sign}${digit}+(${decimal}${digit}+)?${scientific}$`
+    );
+  } else if (isIndianLocale) {
+    fullRegex = new RegExp(
+      `^${sign}(` +
+        `${digit}{1,3}` +
+        `|${digit}{1,3}${group}${digit}{3}` +
+        `|${digit}{1,2}(${group}${digit}{2})+${group}${digit}{3}` +
+        `)` +
+        `(${decimal}${digit}+)?${scientific}$`
+    );
+  } else {
+    fullRegex = new RegExp(
+      `^${sign}${digit}{1,3}(${group}${digit}{3})*` +
+        `(${decimal}${digit}+)?${scientific}$`
+    );
+  }
 
   return fullRegex.test(input);
 };

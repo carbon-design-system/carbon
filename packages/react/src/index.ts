@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,11 +12,21 @@ import './feature-flags';
 import './internal/warnAboutDeprecatedReactVersion';
 
 export * from './components/Accordion';
+// export { ActionSet } from './components/ActionSet';
+// export type { ActionSetProps } from './components/ActionSet';
+// export {
+//   BigNumber as preview__BigNumber,
+//   BigNumberSkeleton as preview__BigNumberSkeleton,
+// } from './components/BigNumber';
+export type { BigNumberProps as preview__BigNumberProps } from './components/BigNumber';
 export * from './components/AccordionItem';
 export * from './components/AspectRatio';
 export * from './components/Breadcrumb';
 export * from './components/Button';
 export * from './components/ButtonSet';
+export * as preview__Card from './components/Card';
+// TODO: uncomment in v12 — also remove from excludeProductsComponents
+// export * from './components/Coachmark';
 export * from './components/Checkbox';
 export * from './components/CheckboxGroup';
 export * from './components/ClassPrefix';
@@ -34,7 +44,10 @@ export * from './components/DataTable';
 export * from './components/DataTableSkeleton';
 export * from './components/DatePicker';
 export * from './components/DatePickerInput';
+export * as preview__DatePicker from './components/DatePicker/next';
 export * from './components/Dropdown';
+// TODO: uncomment in v12 — also remove from excludeProductsComponents
+// export * from './components/EditInPlace';
 export * from './components/ErrorBoundary';
 export * from './components/ExpandableSearch';
 export {
@@ -49,6 +62,8 @@ export {
   useFeatureFlags as preview_useFeatureFlags, // this export can be removed in v12
 } from './components/FeatureFlags';
 export * from './components/FileUploader';
+// TODO: uncomment in v12 — also remove from excludeProductsComponents
+// export * from './components/FullPageError';
 export * from './components/FluidForm';
 export * from './components/Form';
 export * from './components/FormGroup';
@@ -59,6 +74,8 @@ export * from './components/Icon/Icon.Skeleton';
 export * from './components/IdPrefix';
 export { InlineCheckbox } from './components/InlineCheckbox';
 export * from './components/InlineLoading';
+// TODO: uncomment in v12 — also remove from excludeProductsComponents
+// export * from './components/InterstitialScreen';
 export * from './components/Link';
 export * from './components/ListItem';
 export * from './components/Loading';
@@ -68,8 +85,13 @@ export * from './components/Modal';
 export * from './components/ModalWrapper';
 export * from './components/MultiSelect';
 export * from './components/Notification';
+// TODO: uncomment in v12 — also remove from excludeProductsComponents
+// export { NotificationsPanel } from './components/NotificationsPanel';
+// export type { NotificationsPanelProps } from './components/NotificationsPanel';
 export * from './components/NumberInput';
 export * from './components/OrderedList';
+// TODO: uncomment in v12 — also remove from excludeProductsComponents
+// export * from './components/OptionsTile';
 export * from './components/OverflowMenu';
 export * from './components/OverflowMenuItem';
 export * as unstable__PageHeader from './components/PageHeader';
@@ -224,6 +246,9 @@ export {
   OverflowMenuV2 as unstable_OverflowMenuV2,
   OverflowMenuV2 as preview_OverflowMenuV2,
 } from './components/OverflowMenuV2';
+// unstable_Pagination / preview_Pagination are deprecated. Use the stable
+// `Pagination` component with the `renderPageSelect` prop instead.
+// TODO: These exports will be removed in v12.
 export {
   PageSelector as unstable_PageSelector,
   Pagination as unstable_Pagination,
@@ -533,6 +558,9 @@ export type { NumberInputSkeletonProps } from './components/NumberInput/NumberIn
 //ordered list
 export type { OrderedListProps } from './components/OrderedList/OrderedList';
 
+//options tile (migrated from @carbon/ibm-products)
+// export type { OptionsTileProps } from './components/OptionsTile';
+
 //overflow menu
 export type { OverflowMenuProps } from './components/OverflowMenu/OverflowMenu';
 export type { OverflowMenuItemProps } from './components/OverflowMenuItem/OverflowMenuItem';
@@ -585,9 +613,17 @@ export type { RadioButtonSkeletonProps } from './components/RadioButton/RadioBut
 export type { RadioButtonGroupProps } from './components/RadioButtonGroup/RadioButtonGroup';
 export type { RadioTileProps } from './components/RadioTile/RadioTile';
 
+// TODO: uncomment in v12 — also remove from excludeProductsComponents (migrated from @carbon/ibm-products)
+// export { ScrollGradient } from './components/ScrollGradient';
+// export type { ScrollGradientProps } from './components/ScrollGradient';
+
 //search
 export type { SearchProps } from './components/Search/Search';
 export type { SearchSkeletonProps } from './components/Search/Search.Skeleton';
+
+//side panel (migrated from @carbon/ibm-products)
+// export { SidePanel } from './components/SidePanel';
+// export type { SidePanelProps } from './components/SidePanel';
 
 //select
 export type { SelectProps } from './components/Select/Select';
@@ -721,6 +757,11 @@ export type { SkipToContentProps } from './components/UIShell/SkipToContent';
 export type { BaseSwitcherProps } from './components/UIShell/Switcher';
 export type { SwitcherDividerProps } from './components/UIShell/SwitcherDivider';
 export type { SwitcherItemProps } from './components/UIShell/SwitcherItem';
+
+// TODO: ibm-products migration in progress — re-enable when component is ready
+// export { TruncatedText } from './components/TruncatedText';
+// export type { TruncatedTextProps } from './components/TruncatedText';
+// export * from './components/UserAvatar';
 
 //unordered list
 export type { UnorderedListProps } from './components/UnorderedList/UnorderedList';

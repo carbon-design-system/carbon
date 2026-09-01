@@ -20,14 +20,14 @@ import flatpickr from 'flatpickr';
 import l10n from 'flatpickr/dist/l10n/index';
 import DatePickerInput from '../DatePickerInput';
 import { appendToPlugin } from './plugins/appendToPlugin';
-import carbonFlatpickrFixEventsPlugin from './plugins/fixEventsPlugin';
+import { fixEventsPlugin } from './plugins/fixEventsPlugin';
 import { rangePlugin } from './plugins/rangePlugin';
 import { deprecate } from '../../prop-types/deprecate';
 import { match, keys } from '../../internal/keyboard';
 import { isComponentElement } from '../../internal';
 import { usePrefix } from '../../internal/usePrefix';
 import { useSavedCallback } from '../../internal/useSavedCallback';
-import {
+import type {
   DateLimit,
   DateOption,
   Options as FlatpickrOptions,
@@ -55,6 +55,11 @@ function initializeWeekdayShorthand() {
 
 const forEach = Array.prototype.forEach;
 const defaultAriaDateFormat = 'l, F j, Y';
+
+const flatpickrDeprecation = (prop: string) =>
+  `The \`${prop}\` prop is deprecated and will be removed in the next major ` +
+  `release. Please use the new \`preview__DatePicker\` component which doesn't use it — if that ` +
+  `blocks you, tell us why: https://github.com/carbon-design-system/carbon/issues.`;
 
 /**
  * @param {number} monthNumber The month number.
@@ -215,6 +220,8 @@ export interface DatePickerProps {
 
   /**
    * The DOM element the flatpickr should be inserted into `<body>` by default.
+   *
+   * @deprecated This prop will be removed in the next major release, please see `preview__DatePicker` which does not flatpickr.
    */
   appendTo?: HTMLElement;
 
@@ -249,16 +256,22 @@ export interface DatePickerProps {
 
   /**
    * The flatpickr `disable` option that allows a user to disable certain dates.
+   *
+   * @deprecated This prop will be removed in the next major release, please see `preview__DatePicker` which does not flatpickr
    */
   disable?: DateLimit<DateOption>[];
 
   /**
    * The flatpickr `enable` option that allows a user to enable certain dates.
+   *
+   * @deprecated This prop will be removed in the next major release, please see `preview__DatePicker` which does not flatpickr
    */
   enable?: DateLimit<DateOption>[];
 
   /**
    * The flatpickr `inline` option.
+   *
+   * @deprecated This prop will be removed in the next major release, please see `preview__DatePicker` which does not flatpickr
    */
   inline?: boolean;
 
@@ -309,6 +322,8 @@ export interface DatePickerProps {
 
   /**
    * flatpickr prop passthrough. Controls how dates are parsed.
+   *
+   * @deprecated This prop will be removed in the next major release, please see `preview__DatePicker` which does not flatpickr
    */
   parseDate?: (date: string) => Date | false;
 
@@ -633,10 +648,9 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
           classFlatpickrCurrentMonth: 'cur-month',
           locale: locale,
         }) as unknown as Plugin,
-        carbonFlatpickrFixEventsPlugin({
+        fixEventsPlugin({
           inputFrom: startInputField.current,
           inputTo: endInputField.current,
-          lastStartValue,
           container: wrapperRef.current,
         }) as unknown as Plugin,
       ],
@@ -964,7 +978,7 @@ DatePicker.propTypes = {
   /**
    * The DOM element the Flatpicker should be inserted into. `<body>` by default.
    */
-  appendTo: PropTypes.object,
+  appendTo: deprecate(PropTypes.object, flatpickrDeprecation('appendTo')),
 
   /**
    * The child nodes.
@@ -998,17 +1012,17 @@ DatePicker.propTypes = {
   /**
    * The flatpickr `disable` option that allows a user to disable certain dates.
    */
-  disable: PropTypes.array,
+  disable: deprecate(PropTypes.array, flatpickrDeprecation('disable')),
 
   /**
    * The flatpickr `enable` option that allows a user to enable certain dates.
    */
-  enable: PropTypes.array,
+  enable: deprecate(PropTypes.array, flatpickrDeprecation('enable')),
 
   /**
    * The flatpickr `inline` option.
    */
-  inline: PropTypes.bool,
+  inline: deprecate(PropTypes.bool, flatpickrDeprecation('inline')),
 
   /**
    * Specify whether or not the control is invalid (Fluid only)
@@ -1062,7 +1076,7 @@ DatePicker.propTypes = {
   /**
    * flatpickr prop passthrough. Controls how dates are parsed.
    */
-  parseDate: PropTypes.func,
+  parseDate: deprecate(PropTypes.func, flatpickrDeprecation('parseDate')),
 
   /**
    * whether the DatePicker is to be readOnly

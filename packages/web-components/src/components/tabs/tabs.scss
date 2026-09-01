@@ -16,11 +16,14 @@
 @use '@carbon/styles/scss/components/tabs/index';
 @use '@carbon/styles/scss/components/tabs/vars' as *;
 @use '@carbon/styles/scss/utilities/button-reset';
-@use '@carbon/styles/scss/layout' as *;
+@use '@carbon/styles/scss/utilities/layout' as *;
 @use '@carbon/styles/scss/utilities/layout';
 @use '@carbon/styles/scss/utilities/convert';
 @use '@carbon/styles/scss/utilities/skeleton' as *;
 @use '@carbon/styles/scss/utilities/update_fields_on_layer' as *;
+
+@include emit-layout-context-classes();
+@include emit-layout-context-classes('density');
 
 $inset-transition: inset 110ms motion(standard, productive);
 
@@ -336,6 +339,10 @@ $inset-transition: inset 110ms motion(standard, productive);
     --#{$prefix}-tooltip-padding-block: #{convert.to-rem(2px)};
     --#{$prefix}-popover-caret-width: #{convert.to-rem(8px)};
     --#{$prefix}-popover-caret-height: #{convert.to-rem(4px)};
+    --#{$prefix}-popover-offset: #{convert.to-rem(8px)};
+  }
+
+  #{$prefix}-tooltip-content {
     --#{$prefix}-popover-offset: #{convert.to-rem(8px)};
   }
 

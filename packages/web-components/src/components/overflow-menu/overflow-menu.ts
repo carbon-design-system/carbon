@@ -281,6 +281,82 @@ class CDSOverflowMenu
     return this.getBoundingClientRect();
   }
 
+  /**
+   * Delegates host focus to the trigger and preserves visible focus when needed.
+   */
+  focus(options?: FocusOptions): void {
+    const triggerButton = this._getTriggerButton();
+    if (!triggerButton) {
+      HTMLElement.prototype.focus.call(this, options);
+      return;
+    }
+
+    HTMLElement.prototype.focus.call(this, options);
+
+    if (this.shadowRoot?.activeElement !== triggerButton) {
+      triggerButton.focus(options);
+    }
+
+    if (this.shadowRoot?.activeElement !== triggerButton) {
+      return;
+    }
+
+    if (triggerButton.matches(':focus')) {
+      return;
+    }
+
+    // Some browsers do not expose `:focus` or emit `focus` for the tooltip
+    // trigger after delegated programmatic focus.
+    triggerButton.dispatchEvent(new FocusEvent('focus'));
+    this.toggleAttribute('data-programmatic-focus', true);
+    triggerButton.addEventListener('blur', this._handleTriggerBlur, {
+      once: true,
+    });
+    this.ownerDocument.addEventListener(
+      'pointerdown',
+      this._handleDocumentInteraction,
+      true
+    );
+    this.ownerDocument.addEventListener(
+      'focusin',
+      this._handleDocumentInteraction,
+      true
+    );
+  }
+
+  private _handleTriggerBlur = () => {
+    this._clearProgrammaticFocus();
+  };
+
+  private _handleDocumentInteraction = (event: Event) => {
+    const triggerButton = this._getTriggerButton();
+    if (!triggerButton || !event.composedPath().includes(triggerButton)) {
+      this._clearProgrammaticFocus();
+    }
+  };
+
+  private _clearProgrammaticFocus() {
+    const triggerButton = this._getTriggerButton();
+    const hadProgrammaticFocus = this.hasAttribute('data-programmatic-focus');
+
+    this.toggleAttribute('data-programmatic-focus', false);
+    triggerButton?.removeEventListener('blur', this._handleTriggerBlur);
+    this.ownerDocument.removeEventListener(
+      'pointerdown',
+      this._handleDocumentInteraction,
+      true
+    );
+    this.ownerDocument.removeEventListener(
+      'focusin',
+      this._handleDocumentInteraction,
+      true
+    );
+
+    if (hadProgrammaticFocus) {
+      triggerButton?.dispatchEvent(new FocusEvent('focusout'));
+    }
+  }
+
   connectedCallback() {
     if (!this.hasAttribute('aria-haspopup')) {
       this.setAttribute('aria-haspopup', 'true');
@@ -309,6 +385,7 @@ class CDSOverflowMenu
     this.removeEventListener('click', this._handleClickTrigger);
     this.removeEventListener('keydown', this._handleKeydownTrigger);
     this.removeEventListener('mousedown', this._handleMousedownTrigger);
+    this._clearProgrammaticFocus();
     super.disconnectedCallback();
   }
 

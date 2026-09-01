@@ -13,7 +13,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/utilities' as *;
 @use '@carbon/styles/scss/components/time-picker/index';
 @use '@carbon/styles/scss/components/select';
-@use '@carbon/styles/scss/layout' as *;
+@use '@carbon/styles/scss/utilities/layout' as *;
 @use '@carbon/styles/scss/utilities/convert' as convert;
 
 :host(#{$prefix}-time-picker) {

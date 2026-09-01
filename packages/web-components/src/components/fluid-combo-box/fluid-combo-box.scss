@@ -10,7 +10,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/fluid-combo-box/index';
 @use '@carbon/styles/scss/components/combo-box' as *;
 @use '@carbon/styles/scss/components/list-box' as *;
-@use '@carbon/styles/scss/layout' as *;
+@use '@carbon/styles/scss/utilities/layout' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/type' as *;
