@@ -21,7 +21,7 @@ const storyClass = 'guidebanner-stories';
 export default {
   title: 'Preview/Onboarding/preview__Guidebanner',
   component: Guidebanner,
-  tags: ['autodocs', 'ibm-products-migrated'],
+  tags: ['ibm-products-migrated'],
   decorators: [
     (Story) => (
       <div className={`${storyClass}__viewport`}>
