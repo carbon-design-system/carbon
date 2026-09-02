@@ -55,7 +55,7 @@ export default async function bundle(entrypoint, options) {
       deps: {
         neverBundle: Object.keys(dependencies),
       },
-      failOnWarn: false,
+      failOnWarn: true,
       format,
       globalName: format === 'umd' ? name : undefined,
       outDir: directory,

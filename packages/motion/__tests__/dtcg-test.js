@@ -434,6 +434,67 @@ describe('@carbon/motion — every DTCG surface generates a JS export', () => {
 });
 
 // ---------------------------------------------------------------------------
+// JS declaration output — surfaces
+// ---------------------------------------------------------------------------
+
+describe('@carbon/motion — generated surfaces.d.ts keeps literal types', () => {
+  const {
+    toDtsTypeLiteral,
+  } = require('../style-dictionary/utils/dts-type-literal');
+  const {
+    format: jsSurfacesFormat,
+  } = require('../style-dictionary/formats/js-surfaces');
+  const dtsSource = fs.readFileSync(
+    path.resolve(__dirname, '../js/generated/surfaces.d.ts'),
+    'utf8'
+  );
+
+  test('toDtsTypeLiteral preserves string and number literals', () => {
+    expect(toDtsTypeLiteral('reveal')).toBe('"reveal"');
+    expect(toDtsTypeLiteral(0)).toBe('0');
+    expect(toDtsTypeLiteral({ kind: 'reveal', duration: 'moderate-01' })).toBe(
+      '{\n  kind: "reveal",\n  duration: "moderate-01"\n}'
+    );
+    expect(toDtsTypeLiteral(['entrance', 'productive'])).toBe(
+      '[\n  "entrance",\n  "productive"\n]'
+    );
+  });
+
+  test('generated declaration file does not widen string values to string', () => {
+    expect(dtsSource).not.toMatch(/kind:\s*string/);
+    expect(dtsSource).not.toMatch(/duration:\s*string/);
+    expect(dtsSource).not.toMatch(/origin:\s*string/);
+  });
+
+  test('generated declaration file uses kind/duration/origin literals from surfaces.json', () => {
+    for (const { recipe } of allSurfaces) {
+      expect(dtsSource).toContain(`kind: ${JSON.stringify(recipe.kind)}`);
+      expect(dtsSource).toContain(
+        `duration: ${JSON.stringify(recipe.duration)}`
+      );
+      if (recipe.origin) {
+        expect(dtsSource).toContain(`origin: ${JSON.stringify(recipe.origin)}`);
+      }
+    }
+  });
+
+  test('generated surfaces.d.ts contains literal type shapes', () => {
+    expect(dtsSource).toContain('kind: "reveal"');
+    expect(dtsSource).toContain('kind: "shared-element"');
+    expect(dtsSource).toContain('origin: "trigger"');
+    expect(dtsSource).not.toMatch(/kind:\s*string/);
+  });
+
+  test('js-surfaces format dts output matches the on-disk generated file shape', () => {
+    const dts = jsSurfacesFormat({ options: { output: 'dts' } });
+    expect(dts).toContain('kind: "reveal"');
+    expect(dts).toContain('kind: "shared-element"');
+    expect(dts).toContain('origin: "trigger"');
+    expect(dts).not.toMatch(/kind:\s*string/);
+  });
+});
+
+// ---------------------------------------------------------------------------
 // Sass output — tokens
 // ---------------------------------------------------------------------------
 
