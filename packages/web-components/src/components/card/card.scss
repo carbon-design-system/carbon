@@ -47,7 +47,18 @@ $css--plex: true !default;
   flex: 1 0 auto;
 }
 
+// The host elements are the actual flex children of .cds--card__content.
+// flex: 1 0 auto on the inner shadow div has no effect — it must be on the host.
+:host(#{$prefix}-card-body):host-context(#{$prefix}-card[horizontal]) {
+  flex: 1 0 auto;
+}
+
 :host-context(#{$prefix}-card[horizontal]) .#{$prefix}--card__footer {
+  margin-block-start: auto;
+}
+
+// Same issue for footer: margin-block-start: auto must be on the host element.
+:host(#{$prefix}-card-footer):host-context(#{$prefix}-card[horizontal]) {
   margin-block-start: auto;
 }
 
@@ -147,6 +158,19 @@ $css--plex: true !default;
 
 :host(#{$prefix}-card-media) {
   display: block;
+}
+
+// In horizontal mode, cds-card-media is assigned into <slot name="media"> inside
+// cds-card's shadow DOM and therefore becomes a direct flex child of
+// .cds--card--horizontal. The sizing CSS must target the host itself; rules on
+// the inner shadow <div> (.cds--card__media--horizontal) cannot be reached by
+// the card's flex container. The CSS custom property --cds--card--media-width is
+// forwarded to the host via card-media.ts so `var()` resolves here.
+:host(#{$prefix}-card-media):host-context(#{$prefix}-card[horizontal]) {
+  overflow: hidden;
+  flex-basis: var(--#{$prefix}--card--media-width, 33.33%);
+  flex-shrink: 0;
+  align-self: stretch;
 }
 
 :host(#{$prefix}-card-header-media) {

@@ -9,7 +9,6 @@ import { LitElement, html } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { consume } from '@lit/context';
 import { classMap } from 'lit/directives/class-map.js';
-import { styleMap } from 'lit/directives/style-map.js';
 import { prefix } from '../../globals/settings';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import {
@@ -63,22 +62,22 @@ class CDSCardMedia extends LitElement {
   updated() {
     if (this._cardContext.horizontal) {
       this.setAttribute('slot', 'media');
+      // Forward the CSS custom property to the host so the :host-context rule
+      // in card.scss can read it via flex-basis: var(--cds--card--media-width).
+      this.style.setProperty(`--${prefix}--card--media-width`, this.mediaWidth);
     } else {
       this.removeAttribute('slot');
+      this.style.removeProperty(`--${prefix}--card--media-width`);
     }
   }
 
   render() {
     const blockClass = `${prefix}--card`;
-    const { ratio, mediaWidth, _cardContext } = this;
+    const { ratio, _cardContext } = this;
 
     if (_cardContext.horizontal) {
       return html`
-        <div
-          class="${blockClass}__media ${blockClass}__media--horizontal"
-          style=${styleMap({
-            [`--${prefix}--card--media-width`]: mediaWidth,
-          })}>
+        <div class="${blockClass}__media ${blockClass}__media--horizontal">
           <slot></slot>
         </div>
       `;
