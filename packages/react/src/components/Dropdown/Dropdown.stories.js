@@ -508,7 +508,9 @@ export const withToggletipLabel = ({ titleText, ...args }) => {
       <Dropdown
         {...args}
         id="dropdown"
-        items={[]}
+        label="placeholder"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
         titleText={
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <ToggletipLabel>{titleText}</ToggletipLabel>

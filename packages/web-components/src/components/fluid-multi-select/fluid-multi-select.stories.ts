@@ -376,7 +376,6 @@ export const FilterableWithLayer = {
       direction,
       defaultWidth,
       disabled,
-      helperText,
       locale,
       isCondensed,
       invalid,
@@ -399,7 +398,6 @@ export const FilterableWithLayer = {
           ?invalid=${invalid}
           invalid-text=${ifDefined(invalidText)}
           clear-selection-label=${ifDefined(clearSelectionLabel)}
-          helper-text=${ifDefined(helperText)}
           locale=${ifDefined(locale)}
           ?read-only=${readOnly}
           title-text=${ifDefined(titleText)}

@@ -56,7 +56,7 @@ describe('Card', () => {
     const user = userEvent.setup();
 
     render(
-      <Card clickable onClick={handleClick}>
+      <Card clickable onClick={handleClick} aria-label="Clickable card">
         <CardBody>Clickable content</CardBody>
       </Card>
     );
@@ -72,7 +72,7 @@ describe('Card', () => {
     const user = userEvent.setup();
 
     render(
-      <Card clickable onClick={handleClick}>
+      <Card clickable onClick={handleClick} aria-label="Clickable card">
         <CardBody>Clickable content</CardBody>
       </Card>
     );
@@ -89,7 +89,7 @@ describe('Card', () => {
     const user = userEvent.setup();
 
     render(
-      <Card clickable onClick={handleClick}>
+      <Card clickable onClick={handleClick} aria-label="Clickable card">
         <CardBody>Clickable content</CardBody>
       </Card>
     );
@@ -106,7 +106,7 @@ describe('Card', () => {
     const user = userEvent.setup();
 
     const { container } = render(
-      <Card clickable disabled onClick={handleClick}>
+      <Card clickable disabled onClick={handleClick} aria-label="Disabled card">
         <CardBody>Disabled content</CardBody>
       </Card>
     );
@@ -122,7 +122,7 @@ describe('Card', () => {
     const user = userEvent.setup();
 
     render(
-      <Card clickable disabled onClick={handleClick}>
+      <Card clickable disabled onClick={handleClick} aria-label="Disabled card">
         <CardBody>Disabled content</CardBody>
       </Card>
     );
@@ -159,7 +159,7 @@ describe('Card', () => {
     const user = userEvent.setup();
 
     render(
-      <Card clickable onKeyDown={handleKeyDown}>
+      <Card clickable onKeyDown={handleKeyDown} aria-label="Clickable card">
         <CardBody>Content</CardBody>
       </Card>
     );
@@ -173,7 +173,7 @@ describe('Card', () => {
 
   it('sets tabIndex to -1 on a disabled clickable card', () => {
     render(
-      <Card clickable disabled>
+      <Card clickable disabled aria-label="Disabled card">
         <CardBody>Content</CardBody>
       </Card>
     );
@@ -182,7 +182,7 @@ describe('Card', () => {
 
   it('sets aria-disabled on a disabled clickable card', () => {
     render(
-      <Card clickable disabled>
+      <Card clickable disabled aria-label="Disabled card">
         <CardBody>Content</CardBody>
       </Card>
     );
@@ -213,6 +213,178 @@ describe('Card', () => {
     );
     expect(container.querySelector('.cds--card__content')).toBeInTheDocument();
   });
+
+  it('renders as an <a> element when as="a" is passed', () => {
+    const { container } = render(
+      <Card clickable as="a" href="/dashboard" aria-label="Dashboard">
+        <CardBody>Content</CardBody>
+      </Card>
+    );
+    expect(container.firstChild.tagName).toBe('A');
+  });
+
+  it('renders as a custom component when as prop is provided', () => {
+    const CustomEl = React.forwardRef((props, ref) => (
+      <section ref={ref} {...props} />
+    ));
+    const { container } = render(
+      <Card as={CustomEl} aria-label="Custom">
+        <CardBody>Content</CardBody>
+      </Card>
+    );
+    expect(container.firstChild.tagName).toBe('SECTION');
+  });
+
+  it('does not apply role="button" when as="a" and clickable', () => {
+    const { container } = render(
+      <Card clickable as="a" href="/dashboard" aria-label="Dashboard">
+        <CardBody>Content</CardBody>
+      </Card>
+    );
+    expect(container.firstChild).not.toHaveAttribute('role', 'button');
+  });
+
+  it('renders the built-in clickable footer affordance when clickable', () => {
+    const { container } = render(
+      <Card clickable onClick={() => {}} aria-label="Test card">
+        <CardBody>Content</CardBody>
+      </Card>
+    );
+    expect(
+      container.querySelector('.cds--card__clickable-footer')
+    ).toBeInTheDocument();
+  });
+
+  it('does not render the built-in clickable footer when not clickable', () => {
+    const { container } = render(
+      <Card>
+        <CardBody>Content</CardBody>
+      </Card>
+    );
+    expect(
+      container.querySelector('.cds--card__clickable-footer')
+    ).not.toBeInTheDocument();
+  });
+
+  it('renders the default ArrowRight icon in clickable footer', () => {
+    const { container } = render(
+      <Card clickable onClick={() => {}} aria-label="Test card">
+        <CardBody>Content</CardBody>
+      </Card>
+    );
+    const footer = container.querySelector('.cds--card__clickable-footer');
+    expect(footer).toBeInTheDocument();
+    // Footer should contain an SVG (the icon)
+    expect(footer.querySelector('svg')).toBeInTheDocument();
+  });
+
+  it('renders a custom icon in clickable footer via renderFooterIcon', () => {
+    const CustomIcon = () => <svg data-testid="custom-icon" />;
+    render(
+      <Card
+        clickable
+        onClick={() => {}}
+        renderFooterIcon={CustomIcon}
+        aria-label="Test card">
+        <CardBody>Content</CardBody>
+      </Card>
+    );
+    expect(screen.getByTestId('custom-icon')).toBeInTheDocument();
+  });
+
+  it('marks the clickable footer as aria-hidden', () => {
+    const { container } = render(
+      <Card clickable onClick={() => {}} aria-label="Test card">
+        <CardBody>Content</CardBody>
+      </Card>
+    );
+    expect(
+      container.querySelector('.cds--card__clickable-footer')
+    ).toHaveAttribute('aria-hidden', 'true');
+  });
+
+  it('warns when renderFooterIcon is used without clickable', () => {
+    const consoleSpy = jest
+      .spyOn(console, 'error')
+      .mockImplementation(() => {});
+    const CustomIcon = () => <svg />;
+    render(
+      <Card renderFooterIcon={CustomIcon}>
+        <CardBody>Content</CardBody>
+      </Card>
+    );
+    expect(consoleSpy).toHaveBeenCalledWith(
+      expect.stringContaining(
+        '`renderFooterIcon` only has effect when `clickable` is true'
+      )
+    );
+    consoleSpy.mockRestore();
+  });
+
+  it('warns when a clickable card has no accessible name', () => {
+    const consoleSpy = jest
+      .spyOn(console, 'error')
+      .mockImplementation(() => {});
+    render(
+      <Card clickable onClick={() => {}}>
+        <CardBody>Content</CardBody>
+      </Card>
+    );
+    expect(consoleSpy).toHaveBeenCalledWith(
+      expect.stringContaining('A clickable card must have an accessible name')
+    );
+    consoleSpy.mockRestore();
+  });
+
+  it('supports a ref placed on the root element', () => {
+    const ref = jest.fn();
+    const { container } = render(
+      <Card ref={ref}>
+        <CardBody>Content</CardBody>
+      </Card>
+    );
+    expect(ref).toHaveBeenCalledWith(container.firstChild);
+  });
+
+  it('spreads extra props onto the root element', () => {
+    const { container } = render(
+      <Card data-testid="my-card">
+        <CardBody>Content</CardBody>
+      </Card>
+    );
+    expect(container.firstChild).toHaveAttribute('data-testid', 'my-card');
+  });
+
+  it('renders decorator in CardHeader when decorator prop is provided', () => {
+    const Decorator = () => <span data-testid="decorator-node" />;
+    render(
+      <Card decorator={<Decorator />}>
+        <CardHeader>Header</CardHeader>
+        <CardBody>Content</CardBody>
+      </Card>
+    );
+    expect(screen.getByTestId('decorator-node')).toBeInTheDocument();
+  });
+
+  it('does not fire card onClick when the decorator is clicked', async () => {
+    const handleClick = jest.fn();
+    const user = userEvent.setup();
+    const Decorator = () => <span data-testid="decorator-node">AI</span>;
+
+    render(
+      <Card
+        clickable
+        onClick={handleClick}
+        aria-label="Clickable card"
+        decorator={<Decorator />}>
+        <CardHeader>Header</CardHeader>
+        <CardBody>Content</CardBody>
+      </Card>
+    );
+
+    await user.click(screen.getByTestId('decorator-node'));
+    expect(handleClick).not.toHaveBeenCalled();
+  });
 });
 
 // ---------------------------------------------------------------------------
@@ -229,6 +401,25 @@ describe('CardHeader', () => {
 
     expect(screen.getByText('Header Content')).toBeInTheDocument();
   });
+
+  it('applies custom className', () => {
+    const { container } = render(
+      <Card>
+        <CardHeader className="custom-header">Header</CardHeader>
+      </Card>
+    );
+    expect(container.querySelector('.custom-header')).toBeInTheDocument();
+  });
+
+  it('supports a ref placed on the header element', () => {
+    const ref = jest.fn();
+    render(
+      <Card>
+        <CardHeader ref={ref}>Header</CardHeader>
+      </Card>
+    );
+    expect(ref).toHaveBeenCalledWith(expect.any(HTMLElement));
+  });
 });
 
 // ---------------------------------------------------------------------------
@@ -244,6 +435,58 @@ describe('CardBody', () => {
     );
 
     expect(screen.getByText('Body Content')).toBeInTheDocument();
+  });
+
+  it('applies custom className', () => {
+    const { container } = render(
+      <Card>
+        <CardBody className="custom-body">Content</CardBody>
+      </Card>
+    );
+    expect(container.querySelector('.custom-body')).toBeInTheDocument();
+  });
+
+  it('supports a ref placed on the body element', () => {
+    const ref = jest.fn();
+    render(
+      <Card>
+        <CardBody ref={ref}>Content</CardBody>
+      </Card>
+    );
+    expect(ref).toHaveBeenCalledWith(expect.any(HTMLElement));
+  });
+
+  it('spreads extra props onto the root element', () => {
+    render(
+      <Card>
+        <CardBody data-testid="my-body">Content</CardBody>
+      </Card>
+    );
+    expect(screen.getByTestId('my-body')).toBeInTheDocument();
+  });
+
+  it('applies flush modifier when isFlush is true', () => {
+    const { container } = render(
+      <Card>
+        <CardBody isFlush>Body Content</CardBody>
+      </Card>
+    );
+
+    expect(container.querySelector('.cds--card__body')).toHaveClass(
+      'cds--card__body--flush'
+    );
+  });
+
+  it('does not apply flush modifier by default', () => {
+    const { container } = render(
+      <Card>
+        <CardBody>Body Content</CardBody>
+      </Card>
+    );
+
+    expect(container.querySelector('.cds--card__body')).not.toHaveClass(
+      'cds--card__body--flush'
+    );
   });
 });
 
@@ -262,6 +505,25 @@ describe('CardFooter', () => {
     expect(screen.getByText('Footer Content')).toBeInTheDocument();
   });
 
+  it('applies the base footer class', () => {
+    const { container } = render(
+      <Card>
+        <CardFooter>Footer</CardFooter>
+      </Card>
+    );
+    expect(container.querySelector('.cds--card__footer')).toBeInTheDocument();
+  });
+
+  it('supports a ref placed on the footer element', () => {
+    const ref = jest.fn();
+    render(
+      <Card>
+        <CardFooter ref={ref}>Footer</CardFooter>
+      </Card>
+    );
+    expect(ref).toHaveBeenCalledWith(expect.any(HTMLElement));
+  });
+
   it('applies custom className', () => {
     const { container } = render(
       <Card>
@@ -269,6 +531,26 @@ describe('CardFooter', () => {
       </Card>
     );
     expect(container.querySelector('.my-footer')).toBeInTheDocument();
+  });
+
+  it('renders nothing and warns when used inside a clickable card', () => {
+    const consoleSpy = jest
+      .spyOn(console, 'error')
+      .mockImplementation(() => {});
+    const { container } = render(
+      <Card clickable onClick={() => {}} aria-label="Test card">
+        <CardFooter>Footer</CardFooter>
+      </Card>
+    );
+    // Footer content should not be rendered
+    expect(screen.queryByText('Footer')).not.toBeInTheDocument();
+    // Warning should be fired
+    expect(consoleSpy).toHaveBeenCalledWith(
+      expect.stringContaining(
+        '`Card.Footer` cannot be used inside a `clickable` card'
+      )
+    );
+    consoleSpy.mockRestore();
   });
 });
 
