@@ -28,6 +28,7 @@ const actionsMappingWithLabels = actionsMapping(
 export default {
   title: 'Utilities/ActionSet',
   component: ActionSet,
+  tags: ['autodocs', 'ibm-products-migrated'],
   parameters: {
     layout: 'centered',
     docs: {
