@@ -92,9 +92,11 @@
       color $duration-fast-02 motion(standard, productive);
     user-select: none;
 
-    &:hover {
-      background-color: $background-color-hover;
-      color: $text-primary;
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: $background-color-hover;
+        color: $text-primary;
+      }
     }
 
     &:focus {

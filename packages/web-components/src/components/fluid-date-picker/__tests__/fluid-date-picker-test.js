@@ -6,6 +6,7 @@
  */
 
 import '@carbon/web-components/es/components/fluid-date-picker/index.js';
+import '@carbon/web-components/es/components/feature-flags/index.js';
 import { fixture, html, expect } from '@open-wc/testing';
 
 describe('cds-fluid-date-picker', () => {
@@ -231,6 +232,69 @@ describe('cds-fluid-date-picker', () => {
         '.cds--form-requirement'
       );
       expect(formRequirement?.textContent?.trim()).to.equal(warnText);
+    });
+  });
+
+  describe('enable-v12-release — input state mirroring', () => {
+    it('should set/remove data-input-disabled when simple input is disabled', async () => {
+      const el = await fixture(html`
+        <feature-flags enable-v12-release>
+          <cds-fluid-date-picker>
+            <cds-fluid-date-picker-input
+              kind="simple"
+              label-text="Date"
+              disabled></cds-fluid-date-picker-input>
+          </cds-fluid-date-picker>
+        </feature-flags>
+      `);
+      const picker = el.querySelector('cds-fluid-date-picker');
+      const input = el.querySelector('cds-fluid-date-picker-input');
+
+      await picker.updateComplete;
+      expect(picker.hasAttribute('data-input-disabled')).to.be.true;
+
+      input.removeAttribute('disabled');
+      await new Promise((r) => setTimeout(r, 0));
+
+      expect(picker.hasAttribute('data-input-disabled')).to.be.false;
+    });
+
+    it('should set/remove data-input-readonly when simple input is readonly', async () => {
+      const el = await fixture(html`
+        <feature-flags enable-v12-release>
+          <cds-fluid-date-picker>
+            <cds-fluid-date-picker-input
+              kind="simple"
+              label-text="Date"
+              readonly></cds-fluid-date-picker-input>
+          </cds-fluid-date-picker>
+        </feature-flags>
+      `);
+      const picker = el.querySelector('cds-fluid-date-picker');
+      const input = el.querySelector('cds-fluid-date-picker-input');
+
+      await picker.updateComplete;
+      expect(picker.hasAttribute('data-input-readonly')).to.be.true;
+
+      input.removeAttribute('readonly');
+      await new Promise((r) => setTimeout(r, 0));
+
+      expect(picker.hasAttribute('data-input-readonly')).to.be.false;
+    });
+
+    it('should not set data-input-disabled or data-input-readonly when flag is not enabled', async () => {
+      const el = await fixture(html`
+        <cds-fluid-date-picker>
+          <cds-fluid-date-picker-input
+            kind="simple"
+            label-text="Date"
+            disabled
+            readonly></cds-fluid-date-picker-input>
+        </cds-fluid-date-picker>
+      `);
+      await el.updateComplete;
+      expect(el.hasAttribute('data-input-disabled')).to.be.false;
+      expect(el.hasAttribute('data-input-readonly')).to.be.false;
     });
   });
 });
