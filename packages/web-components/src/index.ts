@@ -193,5 +193,6 @@ export { default as CDSLayout } from './components/layout/layout';
 export { default as CDSLayoutConstraint } from './components/layout/layout-constraint';
 // export { default as CDSTruncatedText } from './components/truncated-text/truncated-text';
 // export { default as CDSActionSet } from './components/action-set/action-set';
+// export { default as CDSEditInPlace } from './components/edit-in-place/edit-in-place';
 // export { default as CDSSidePanel } from './components/side-panel/side-panel';
 // export { default as CDSOptionsTile } from './components/options-tile/options-tile';
