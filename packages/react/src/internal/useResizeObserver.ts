@@ -102,7 +102,7 @@ export const useResizeObserver = ({
 
       if (animationFrame.current === null) {
         animationFrame.current = 0;
-        const frameId = window.requestAnimationFrame(() => {
+        const frameId = requestAnimationFrame(() => {
           animationFrame.current = null;
           doCallbacks();
         });
