@@ -7,20 +7,7 @@
 
 export default {
   preset: 'jest-config-carbon',
-  collectCoverageFrom: [
-    'packages/**/src/**/*.js',
-    '!packages/{cli,components}/**',
-    '!packages/**/{examples,stories}/**',
-    '!**/*-story.js',
-  ],
   testMatch: ['<rootDir>/e2e/**/*-test.js'],
-  testPathIgnorePatterns: [
-    'examples',
-    '/packages/components/',
-    '/packages/react/',
-  ],
-  transformIgnorePatterns: [
-    '<rootDir>/node_modules/(?!lodash-es|nanoid|chalk)',
-  ],
-  reporters: ['default', 'jest-junit'],
+  testPathIgnorePatterns: [],
+  transformIgnorePatterns: ['<rootDir>/node_modules/(?!chalk|@babel/)'],
 };
