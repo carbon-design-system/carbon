@@ -218,7 +218,7 @@ class CDSMenu extends HostListenerMixin(LitElement) {
     super.disconnectedCallback();
   }
   async firstUpdated() {
-    this.isRtl = this.direction === 'rtl';
+    this.isRtl = this._isRtlDirection();
     this.isRoot = this.context.isRoot;
 
     if (this.isChild) {
@@ -447,6 +447,30 @@ class CDSMenu extends HostListenerMixin(LitElement) {
       return [x, x];
     }
   };
+
+  _isRtlDirection = () => {
+    return (
+      this.direction === 'rtl' || getComputedStyle(this).direction === 'rtl'
+    );
+  };
+
+  /**
+   * Converts a measured viewport range into distances from the viewport's
+   * inline start.
+   *
+   * Endpoints swap in rtl because mirroring reverses their order: a box's left
+   * edge is the nearer edge measured from the left, but the farther edge
+   * measured from the right.
+   */
+  _toInlineRange = (range: number[]) => {
+    if (!this._isRtlDirection()) {
+      return range;
+    }
+
+    const max = window.innerWidth;
+    return [max - range[1], max - range[0]];
+  };
+
   _calculatePosition = () => {
     const ranges = {
       x: this._getPosition(this.x),
@@ -456,20 +480,20 @@ class CDSMenu extends HostListenerMixin(LitElement) {
     if (!ranges.x || !ranges.y) {
       return [-1, -1];
     }
+
+    const x = this.context.isRoot
+      ? (ranges.x as number[])
+      : this._toInlineRange(ranges.x as number[]);
+
     return [
-      this._fitValue(ranges.x as number[], 'x') ?? -1,
+      this._fitValue(x, 'x') ?? -1,
       this._fitValue(ranges.y as number[], 'y') ?? -1,
     ];
   };
   _handleOpen = async () => {
     const pos = this._calculatePosition();
-    if (this.isRtl) {
-      this.style.insetInlineStart = `initial`;
-      this.style.insetInlineEnd = `${pos[0]}px`;
-    } else {
-      this.style.insetInlineStart = `${pos[0]}px`;
-      this.style.insetInlineEnd = `initial`;
-    }
+    this.style.insetInlineStart = `${pos[0]}px`;
+    this.style.insetInlineEnd = `initial`;
     this.style.insetBlockStart = `${pos[1]}px`;
     this.position = pos;
 
