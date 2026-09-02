@@ -10,6 +10,7 @@
 @use 'ai-label';
 @use 'aspect-ratio';
 @use 'badge-indicator';
+@use 'big-number';
 @use 'breadcrumb';
 @use 'button';
 @use 'card';
@@ -56,9 +57,10 @@
 @use 'modal';
 @use 'multiselect';
 @use 'notification';
+@use 'notifications-panel';
 @use 'number-input';
 @use 'overflow-menu';
-@use 'OptionsTile';
+@use 'options-tile';
 @use 'page-header';
 @use 'pagination';
 @use 'pagination-nav';
@@ -89,5 +91,5 @@
 @use 'treeview';
 @use 'truncated-text';
 @use 'ui-shell';
-@use 'EditInPlace';
+@use 'edit-in-place';
 @use 'user-avatar';
