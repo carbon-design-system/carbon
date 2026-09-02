@@ -10,6 +10,7 @@
 @use 'ai-label';
 @use 'aspect-ratio';
 @use 'badge-indicator';
+@use 'big-number';
 @use 'breadcrumb';
 @use 'button';
 @use 'card';
@@ -43,6 +44,7 @@
 @use 'fluid-text-input';
 @use 'fluid-time-picker';
 @use 'form';
+@use 'FullPageError';
 @use 'icon-indicator';
 @use 'inline-loading';
 @use 'InterstitialScreen';
@@ -55,9 +57,10 @@
 @use 'modal';
 @use 'multiselect';
 @use 'notification';
+@use 'notifications-panel';
 @use 'number-input';
 @use 'overflow-menu';
-@use 'OptionsTile';
+@use 'options-tile';
 @use 'page-header';
 @use 'pagination';
 @use 'pagination-nav';
@@ -66,6 +69,7 @@
 @use 'progress-indicator';
 @use 'radio-button';
 @use 'resizer';
+@use 'scroll-gradient';
 @use 'side-panel';
 @use 'search';
 @use 'select';
@@ -87,5 +91,5 @@
 @use 'treeview';
 @use 'truncated-text';
 @use 'ui-shell';
-@use 'EditInPlace';
+@use 'edit-in-place';
 @use 'user-avatar';
