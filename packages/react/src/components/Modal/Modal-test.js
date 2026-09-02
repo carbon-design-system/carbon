@@ -1719,7 +1719,10 @@ describe.each([
   ({ enableDialogElement, expectedCopyRoot }) => {
     it('should copy from within the appropriate modal root', async () => {
       let copyRoot;
-      const originalIsSecureContext = window.isSecureContext;
+      const originalIsSecureContext = Object.getOwnPropertyDescriptor(
+        window,
+        'isSecureContext'
+      );
       const originalExecCommand = document.execCommand;
 
       Object.defineProperty(window, 'isSecureContext', {
@@ -1737,32 +1740,40 @@ describe.each([
         return true;
       });
 
-      const modal = (
-        <Modal open>
-          <CodeSnippet copyText="copied value">snippet value</CodeSnippet>
-        </Modal>
-      );
+      try {
+        const modal = (
+          <Modal open>
+            <CodeSnippet copyText="copied value">snippet value</CodeSnippet>
+          </Modal>
+        );
 
-      render(
-        enableDialogElement ? (
-          <FeatureFlags enableDialogElement>{modal}</FeatureFlags>
-        ) : (
-          modal
-        )
-      );
+        render(
+          enableDialogElement ? (
+            <FeatureFlags enableDialogElement>{modal}</FeatureFlags>
+          ) : (
+            modal
+          )
+        );
 
-      await userEvent.click(
-        screen.getByRole('button', { name: 'Copy to clipboard' })
-      );
+        await userEvent.click(
+          screen.getByRole('button', { name: 'Copy to clipboard' })
+        );
 
-      expect(document.execCommand).toHaveBeenCalledWith('copy');
-      expect(copyRoot).toBe(expectedCopyRoot());
+        expect(document.execCommand).toHaveBeenCalledWith('copy');
+        expect(copyRoot).toBe(expectedCopyRoot());
+      } finally {
+        document.execCommand = originalExecCommand;
 
-      document.execCommand = originalExecCommand;
-      Object.defineProperty(window, 'isSecureContext', {
-        configurable: true,
-        value: originalIsSecureContext,
-      });
+        if (originalIsSecureContext) {
+          Object.defineProperty(
+            window,
+            'isSecureContext',
+            originalIsSecureContext
+          );
+        } else {
+          delete window.isSecureContext;
+        }
+      }
     });
   }
 );
