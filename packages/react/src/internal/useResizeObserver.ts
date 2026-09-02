@@ -117,11 +117,9 @@ export const useResizeObserver = ({
     observer.observe(ref.current);
 
     return () => {
-      if (
-        animationFrame.current !== null &&
-        typeof cancelAnimationFrame === 'function'
-      ) {
+      if (animationFrame.current !== null) {
         cancelAnimationFrame(animationFrame.current);
+        animationFrame.current = null;
       }
       observer.disconnect();
     };
