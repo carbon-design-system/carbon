@@ -20,7 +20,7 @@
 
 $tooltip-padding-block: custom-property.get-var(
   'tooltip-padding-block',
-  spacing.$spacing-05
+  if(enabled('enable-v12-release'), spacing.$spacing-02, spacing.$spacing-05)
 );
 
 $tooltip-padding-inline: custom-property.get-var(
