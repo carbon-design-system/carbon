@@ -1,0 +1,58 @@
+//
+// Copyright IBM Corp. 2024, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// FullPageError is a stable component — styles are included in the global
+// @carbon/styles bundle via packages/styles/scss/components/_index.scss.
+// Story-specific layout styles for the Storybook canvas are below.
+
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/breakpoint' as *;
+
+$story-class: 'full-page-error-stories';
+
+.#{$story-class}__breadcrumb-container {
+  position: sticky;
+  padding: $spacing-04 $spacing-09;
+  background: $layer-01;
+  border-block-end: 1px solid $border-subtle-03;
+  inset-block-start: 0;
+
+  @include breakpoint-down(md) {
+    padding: $spacing-04 $spacing-03;
+  }
+}
+
+.#{$story-class}__breadcrumb {
+  padding: 0;
+
+  @include breakpoint(md) {
+    padding: 0 $spacing-03;
+  }
+}
+
+.#{$story-class}__offset {
+  block-size: calc(100% - #{$spacing-09});
+  margin-block-start: $spacing-09;
+  overflow-y: auto;
+
+  @supports (overflow-block: auto) {
+    overflow-block: auto;
+  }
+}
+
+.#{$story-class}__viewport {
+  overflow: hidden;
+  block-size: 100vh;
+}
+
+// cspell:disable-next-line
+.sbdocs .#{$story-class}__viewport {
+  background-color: $background;
+  color: $text-primary;
+  max-block-size: 60vh;
+}
