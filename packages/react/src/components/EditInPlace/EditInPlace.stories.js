@@ -32,7 +32,7 @@ const tooltipAlignmentOptions = {
 export default {
   title: 'Components/EditInPlace',
   component: EditInPlace,
-  tags: ['autodocs'],
+  tags: ['autodocs', 'ibm-products-migrated'],
   argTypes: {
     className: {
       table: {
