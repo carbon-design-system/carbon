@@ -36,8 +36,8 @@
   }
 
   @if ($type == 'outline-lg') {
-    outline: 4px solid theme.$focus;
-    outline-offset: -4px;
+    outline: 3px solid theme.$focus;
+    outline-offset: -3px;
 
     @media screen and (prefers-contrast) {
       outline-style: dotted;
