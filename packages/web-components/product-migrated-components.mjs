@@ -16,14 +16,16 @@ export const productMigratedStoryGlobs = [
   '../src/components/action-set/*.mdx',
   '../src/components/big-number/big-number.stories.ts',
   '../src/components/big-number/*.mdx',
+  '../src/components/edit-in-place/edit-in-place.stories.ts',
+  '../src/components/edit-in-place/*.mdx',
   '../src/components/options-tile/options-tile.stories.ts',
   '../src/components/options-tile/*.mdx',
-  '../src/components/truncated-text/truncated-text.stories.ts',
-  '../src/components/truncated-text/*.mdx',
   '../src/components/resizer/resizer.stories.ts',
   '../src/components/resizer/*.mdx',
   '../src/components/side-panel/side-panel.stories.ts',
   '../src/components/side-panel/*.mdx',
+  '../src/components/truncated-text/truncated-text.stories.ts',
+  '../src/components/truncated-text/*.mdx',
 ];
 
 /**
@@ -39,10 +41,11 @@ export const productMigratedStoryGlobs = [
  *   2. Uncomment its export in src/index.ts.
  */
 export const excludeProductsComponents = [
-  'src/components/big-number/**/*',
-  'src/components/resizer/**/*',
   'src/components/action-set/**/*',
-  'src/components/truncated-text/**/*',
-  'src/components/side-panel/**/*',
+  'src/components/big-number/**/*',
+  'src/components/edit-in-place/**/*',
   'src/components/options-tile/**/*',
+  'src/components/resizer/**/*',
+  'src/components/side-panel/**/*',
+  'src/components/truncated-text/**/*',
 ];
