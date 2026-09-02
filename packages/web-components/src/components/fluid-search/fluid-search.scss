@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp.2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,6 +7,7 @@
 
 $css--plex: true !default;
 @use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/feature-flags' as flags;
 @use '@carbon/styles/scss/components/fluid-search/index';
 @use '@carbon/styles/scss/utilities/layout' as *;
 @use '@carbon/styles/scss/spacing' as *;
@@ -49,7 +50,9 @@ $css--plex: true !default;
     cursor: not-allowed;
   }
 
-  .#{$prefix}--search-input[disabled] {
-    border-block-end: 1px solid $border-subtle;
+  @if not flags.enabled('enable-v12-release') {
+    .#{$prefix}--search-input[disabled] {
+      border-block-end: 1px solid $border-subtle;
+    }
   }
 }
