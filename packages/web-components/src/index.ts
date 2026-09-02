@@ -109,6 +109,10 @@ export { default as CDSProgressStep } from './components/progress-indicator/prog
 export { default as CDSRadioButton } from './components/radio-button/radio-button';
 export { default as CDSRadioButtonGroup } from './components/radio-button/radio-button-group';
 export { default as CDSRadioButtonSkeleton } from './components/radio-button/radio-button-skeleton';
+// export { default as CDSResizerGrid } from './components/resizer/resizer-grid';
+// export { default as CDSResizerHandle } from './components/resizer/resizer-handle';
+// export { default as CDSResizerHandlePivot } from './components/resizer/resizer-handle-pivot';
+// export { default as CDSResizerPanel } from './components/resizer/resizer-panel';
 export { default as CDSSearch } from './components/search/search';
 export { default as CDSSearchSkeleton } from './components/search/search-skeleton';
 export { default as CDSSelect } from './components/select/select';
@@ -187,3 +191,9 @@ export { default as CDSDialogSubtitle } from './components/dialog/dialog-subtitl
 export { default as CDSDialogTitle } from './components/dialog/dialog-title';
 export { default as CDSLayout } from './components/layout/layout';
 export { default as CDSLayoutConstraint } from './components/layout/layout-constraint';
+// export { default as CDSTruncatedText } from './components/truncated-text/truncated-text';
+// export { default as CDSActionSet } from './components/action-set/action-set';
+// export { default as CDSEditInPlace } from './components/edit-in-place/edit-in-place';
+// export { default as CDSSidePanel } from './components/side-panel/side-panel';
+// export { default as CDSBigNumber } from './components/big-number/big-number';
+// export { default as CDSOptionsTile } from './components/options-tile/options-tile';
