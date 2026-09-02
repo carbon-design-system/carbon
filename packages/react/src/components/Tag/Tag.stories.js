@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -29,7 +29,7 @@ export default {
 
 export const ReadOnly = (args) => {
   return (
-    <>
+    <div className="tag-group">
       <Tag className="some-class" type="red" {...args}>
         {'Tag content with a long text description'}
       </Tag>
@@ -66,7 +66,7 @@ export const ReadOnly = (args) => {
       <Tag className="some-class" type="outline" {...args}>
         {'Tag content'}
       </Tag>
-    </>
+    </div>
   );
 };
 
@@ -186,7 +186,7 @@ export const withAILabel = (args) => {
   );
 
   return (
-    <div style={{ marginBottom: '4rem' }}>
+    <div className="tag-group" style={{ marginBottom: '4rem' }}>
       <Tag
         decorator={aiLabel}
         className="some-class"
