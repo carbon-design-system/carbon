@@ -16,13 +16,36 @@ import { TextInput } from '../TextInput';
 import { Layout, LayoutConstraint } from './';
 import mdx from './Layout.mdx';
 
+const args = {
+  density: 'normal',
+  size: 'md',
+};
+
+const argTypes = {
+  density: {
+    control: 'radio',
+    description: 'Specify the density of components within the layout context.',
+    options: ['condensed', 'normal'],
+  },
+  size: {
+    control: 'select',
+    description: 'Specify the size of components within the layout context.',
+    options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl'],
+  },
+};
+
 export default {
   title: 'Preview/preview__Layout',
   component: Layout,
   subcomponents: {
     LayoutConstraint,
   },
+  args,
+  argTypes,
   parameters: {
+    controls: {
+      include: ['density', 'size'],
+    },
     docs: {
       page: mdx,
     },

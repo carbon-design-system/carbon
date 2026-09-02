@@ -1003,6 +1003,42 @@ export const upgrades = [
           });
         },
       },
+      {
+        name: 'unstable-pagination-to-pagination',
+        description:
+          'Replace unstable_Pagination / preview_Pagination with Pagination and remove unstable_PageSelector / preview_PageSelector. Custom page-select children must use renderPageSelect and may need a manual update.',
+        migrate: async (options) => {
+          const transform = path.join(
+            TRANSFORM_DIR,
+            'unstable-pagination-to-pagination.js'
+          );
+          const paths =
+            Array.isArray(options.paths) && options.paths.length > 0
+              ? options.paths
+              : await glob(['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'], {
+                  cwd: options.workspaceDir,
+                  ignore: [
+                    '**/es/**',
+                    '**/lib/**',
+                    '**/umd/**',
+                    '**/node_modules/**',
+                    '**/storybook-static/**',
+                    '**/dist/**',
+                    '**/build/**',
+                    '**/*.d.ts',
+                    '**/coverage/**',
+                  ],
+                });
+
+          await runCodemod(options, {
+            dry: !options.write,
+            transform,
+            paths,
+            verbose: options.verbose,
+            parser: 'tsx',
+          });
+        },
+      },
     ],
   },
   {
