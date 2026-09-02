@@ -106,6 +106,20 @@
     @include tooltip--placement('icon', 'bottom', 'center');
   }
 
+  // Size the tooltip host to the toggle so v12 floating-ui has a real reference.
+  .#{$prefix}--password-input-wrapper:not(.#{$prefix}--text-input--fluid)
+    .#{$prefix}--toggle-password-tooltip {
+    position: absolute;
+    aspect-ratio: 1;
+    inset-block: 0;
+    inset-inline-end: 0;
+  }
+
+  .#{$prefix}--toggle-password-tooltip .#{$prefix}--tooltip-trigger__wrapper {
+    block-size: 100%;
+    inline-size: 100%;
+  }
+
   .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger {
     @include focus-outline('reset');
 
@@ -122,13 +136,6 @@
     inset-inline-end: 0;
     min-block-size: auto;
     transition: outline $duration-fast-01 motion(standard, productive);
-  }
-
-  .#{$prefix}--toggle-password-tooltip .#{$prefix}--popover {
-    @include layout.use('size', $default: 'md', $min: 'xs', $max: 'lg');
-
-    gap: $spacing-02;
-    inset-inline-start: calc(-1 * (layout.size('height')));
   }
 
   .#{$prefix}--toggle-password-tooltip .#{$prefix}--popover-content {
