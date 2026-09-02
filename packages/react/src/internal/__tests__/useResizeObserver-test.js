@@ -113,6 +113,17 @@ describe('useResizeObserver', () => {
     expect(resizeFn).toHaveBeenCalledTimes(1);
   });
 
+  it('calls onResize for the first observed size even when dimensions are unchanged', async () => {
+    const resizeFn = jest.fn();
+    render(<ResizeTest onResize={resizeFn} />);
+    const element = screen.getByTestId('observed-element');
+
+    await triggerResize(element, 0, 0);
+
+    expect(resizeFn).toHaveBeenCalledTimes(1);
+    expect(resizeFn).toHaveBeenLastCalledWith({ width: 0, height: 0 });
+  });
+
   it('coalesces multiple resize entries into one animation frame', () => {
     const animationFrameCallbacks = [];
     window.requestAnimationFrame = jest.fn((callback) => {

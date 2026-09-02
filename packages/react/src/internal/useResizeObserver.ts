@@ -19,6 +19,7 @@ export const useResizeObserver = ({
   const entriesToHandle = useRef<ResizeObserverEntry[] | null>(null);
   const animationFrame = useRef<number | null>(null);
   const currentSize = useRef({ width: -1, height: -1 });
+  const hasObservedSize = useRef(false);
   const cb = useRef(onResize);
 
   useEffect(() => {
@@ -78,21 +79,24 @@ export const useResizeObserver = ({
       }
 
       const entry = entriesToHandle.current[0];
-
-      if (
-        currentSize.current.width === entry.contentRect.width &&
-        currentSize.current.height === entry.contentRect.height
-      ) {
-        return;
-      }
-
-      currentSize.current = {
+      const nextSize = {
         width: entry.contentRect.width,
         height: entry.contentRect.height,
       };
 
-      setWidth(entry.contentRect.width);
-      setHeight(entry.contentRect.height);
+      if (
+        hasObservedSize.current &&
+        currentSize.current.width === nextSize.width &&
+        currentSize.current.height === nextSize.height
+      ) {
+        return;
+      }
+
+      hasObservedSize.current = true;
+      currentSize.current = nextSize;
+
+      setWidth(nextSize.width);
+      setHeight(nextSize.height);
       cb.current?.(entry.contentRect);
     };
 
