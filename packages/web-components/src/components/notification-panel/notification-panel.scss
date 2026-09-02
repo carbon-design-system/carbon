@@ -44,8 +44,8 @@ $block-class: #{$prefix}--notifications-panel;
   }
 
   .#{$block-class}__dismiss-button {
-    --#{$prefix}-link-primary: --#{$prefix}-text-primary;
-    --#{$prefix}-link-primary-hover: --#{$prefix}-text-primary;
+    --#{$prefix}-link-primary: var(--#{$prefix}-text-primary);
+    --#{$prefix}-link-primary-hover: var(--#{$prefix}-text-primary);
   }
 
   .#{$block-class}__empty-state-label {

@@ -94,8 +94,8 @@ $block-notification-class: #{$prefix}--notifications-panel__notification;
     &:focus {
       opacity: 1;
     }
-    --cds-link-primary: --cds-text-primary;
-    --cds-link-primary-hover: --cds-text-primary;
+    --cds-link-primary: var(--cds-text-primary);
+    --cds-link-primary-hover: var(--cds-text-primary);
   }
   .#{$block-notification-class}-time-label,
   .#{$block-notification-class}-description {
