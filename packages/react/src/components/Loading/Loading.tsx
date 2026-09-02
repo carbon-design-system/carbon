@@ -104,7 +104,10 @@ const useFocusTrap = (
         ? document.activeElement
         : null;
 
-    if (!isLayeredOnTop(previouslyFocused, overlay)) {
+    if (
+      document.activeElement === document.body &&
+      !isLayeredOnTop(previouslyFocused, overlay)
+    ) {
       overlay.focus();
     }
 
@@ -239,7 +242,6 @@ function Loading({
       <div
         ref={overlayRef}
         role={active ? 'dialog' : undefined}
-        aria-modal={active ? 'true' : undefined}
         aria-label={active ? description : undefined}
         tabIndex={active ? -1 : undefined}>
         {loading}
