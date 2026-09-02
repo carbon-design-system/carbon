@@ -57,6 +57,7 @@
 @use 'modal';
 @use 'multiselect';
 @use 'notification';
+@use 'notifications-panel';
 @use 'number-input';
 @use 'overflow-menu';
 @use 'options-tile';
@@ -90,5 +91,5 @@
 @use 'treeview';
 @use 'truncated-text';
 @use 'ui-shell';
-@use 'EditInPlace';
+@use 'edit-in-place';
 @use 'user-avatar';

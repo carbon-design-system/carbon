@@ -2040,7 +2040,7 @@ __metadata:
     fast-glob: "npm:^3.3.3"
     fs-extra: "npm:^11.2.0"
     inquirer: "npm:^14.0.0"
-    klaw-sync: "npm:^6.0.0"
+    klaw-sync: "npm:^8.0.0"
     lodash: "npm:^4.17.21"
     prettier: "npm:^3.3.3"
     prettier-config-carbon: "npm:^0.12.0"
@@ -2048,7 +2048,7 @@ __metadata:
     remark: "npm:^15.0.1"
     replace-in-file: "npm:^9.0.0"
     sass: "npm:^1.77.7"
-    tinyclip: "npm:^0.1.12"
+    tinyclip: "npm:^1.0.0"
     tsdown: "npm:^0.22.0"
     typescript: "npm:^6.0.3"
     yargs: "npm:^17.7.2"
@@ -2231,6 +2231,7 @@ __metadata:
     "@carbon/cli": "npm:^11.49.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     rimraf: "npm:^6.0.1"
+    style-dictionary: "npm:^5.5.0"
     typescript: "npm:^6.0.3"
     typescript-config-carbon: "workspace:^0.11.0"
   languageName: unknown
@@ -2322,7 +2323,7 @@ __metadata:
     storybook-addon-accessibility-checker: "npm:>=9.2.0-rc.4"
     stream-browserify: "npm:^3.0.0"
     tabbable: "npm:^6.2.0"
-    tinyclip: "npm:^0.1.12"
+    tinyclip: "npm:^1.0.0"
     tsdown: "npm:^0.22.0"
     typescript: "npm:^6.0.3"
     typescript-config-carbon: "workspace:^0.11.0"
@@ -8995,12 +8996,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ast-types@npm:^0.14.0":
-  version: 0.14.2
-  resolution: "ast-types@npm:0.14.2"
+"ast-types@npm:^0.16.0":
+  version: 0.16.3
+  resolution: "ast-types@npm:0.16.3"
   dependencies:
     tslib: "npm:^2.0.1"
-  checksum: 10/7c74b3090c90aa600b49a7a8cecc99e329f190600bcaa75ad087472a1a5a7ef23795a17ea00a74c2a8e822b336cd4f874e2e1b815a9877b4dba5e401566b0433
+  checksum: 10/f1ec706fb384e1c93c23d55b875efc1a84528d6497e17f3c4faecb24b2eb17bfe83dd776d3ea885328b203b6a020681510ca1a3eec54a6c21a0dc2db7293842c
   languageName: node
   linkType: hard
 
@@ -16392,15 +16393,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"klaw-sync@npm:^6.0.0":
-  version: 6.0.0
-  resolution: "klaw-sync@npm:6.0.0"
-  dependencies:
-    graceful-fs: "npm:^4.1.11"
-  checksum: 10/0da397f8961313c3ef8f79fb63af9002cde5a8fb2aeb1a37351feff0dd6006129c790400c3f5c3b4e757bedcabb13d21ec0a5eaef5a593d59515d4f2c291e475
-  languageName: node
-  linkType: hard
-
 "klaw-sync@npm:^8.0.0":
   version: 8.0.0
   resolution: "klaw-sync@npm:8.0.0"
@@ -22947,10 +22939,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tinyclip@npm:^0.1.12":
-  version: 0.1.12
-  resolution: "tinyclip@npm:0.1.12"
-  checksum: 10/9652b136dff13a295c3d826e428684f414570d630e6035da6e2b24dd1aeab005277136f53056ae7959b1c08fa43568b714ac43045c14c961d0c9331cbdbf632a
+"tinyclip@npm:^1.0.0":
+  version: 1.0.1
+  resolution: "tinyclip@npm:1.0.1"
+  checksum: 10/1313584c48dc702c62f478f3c0d107fbb90ab50f119c388e41e5536b803903524e5505269bb8ac58cc3213ff994fef4115ae59e5d6bb98dc4645d0c3bc455e28
   languageName: node
   linkType: hard
 
