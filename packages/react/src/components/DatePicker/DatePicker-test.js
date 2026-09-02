@@ -530,6 +530,19 @@ describe('Simple date picker', () => {
     expect(screen.queryByRole('application')).not.toBeInTheDocument();
   });
 
+  it('should set the native input as readOnly', () => {
+    render(
+      <DatePicker datePickerType="simple" readOnly>
+        <DatePickerInput
+          id="date-picker-input-id-simple"
+          labelText="Deadline"
+        />
+      </DatePicker>
+    );
+
+    expect(screen.getByLabelText('Deadline')).toHaveAttribute('readonly');
+  });
+
   it('should update the input value when a controlled simple date value changes', () => {
     const { rerender } = render(
       <DatePicker datePickerType="simple" value="01/14/2025">
