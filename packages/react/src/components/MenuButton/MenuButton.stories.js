@@ -104,7 +104,7 @@ export const ExperimentalAutoAlign = (args) => (
         position: 'absolute',
         bottom: '20px',
       }}>
-      <MenuButton label="Actions" {...args}>
+      <MenuButton {...args}>
         <MenuItem label="First action" />
         <MenuItem label="Second action that is a longer item to test overflow and title." />
         <MenuItem label="Third action" disabled />
@@ -117,7 +117,7 @@ ExperimentalAutoAlign.args = commonArgs;
 
 export const WithDanger = (args) => {
   return (
-    <MenuButton label="Actions" {...args}>
+    <MenuButton {...args}>
       <MenuItem label="First action" />
       <MenuItem label="Second action" />
       <MenuItem label="Third action" />
@@ -131,7 +131,7 @@ WithDanger.args = commonArgs;
 
 export const WithDividers = (args) => {
   return (
-    <MenuButton label="Actions" {...args}>
+    <MenuButton {...args}>
       <MenuItem label="Create service request" />
       <MenuItem label="Create work order" />
       <MenuItemDivider />
@@ -148,7 +148,7 @@ WithDividers.args = commonArgs;
 
 export const WithIcons = (args) => {
   return (
-    <MenuButton label="Add" {...args}>
+    <MenuButton {...args}>
       <MenuItem label="Asset" renderIcon={Asset} />
       <MenuItem label="User" renderIcon={User} />
       <MenuItem label="User group" renderIcon={Group} />
@@ -162,7 +162,7 @@ WithIcons.args = {
 };
 
 export const WithNestedMenu = (args) => (
-  <MenuButton label="Actions" {...args}>
+  <MenuButton {...args}>
     <MenuItem label="Save" shortcut="⌘S" />
     <MenuItem label="Save as" shortcut="⌥⌘S" />
     <MenuItem label="Export as">
