@@ -9,10 +9,10 @@
 
 'use strict';
 
-const CarbonIconsVue = require('@carbon/icons-vue');
+const { readPackageExports } = require('../test-utils/icon-package');
 
 describe('@carbon/icons-vue', () => {
   it('should not update exports without a semver change', () => {
-    expect(Object.keys(CarbonIconsVue).sort()).toMatchSnapshot();
+    expect(readPackageExports('@carbon/icons-vue')).toMatchSnapshot();
   });
 });
