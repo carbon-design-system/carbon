@@ -7,14 +7,10 @@
 
 @use '@carbon/styles/scss/theme' as *;
 
-#storybook-root {
+.guidebanner-stories__viewport {
   overflow-x: hidden;
 
   @supports (overflow-inline: hidden) {
     overflow-inline: hidden;
   }
-}
-
-.non-linear-reading-stories__viewport {
-  margin: 0;
 }

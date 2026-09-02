@@ -21,6 +21,14 @@ const storyClass = 'guidebanner-stories';
 export default {
   title: 'Preview/Onboarding/preview__Guidebanner',
   component: Guidebanner,
+  tags: ['autodocs', 'ibm-products-migrated'],
+  decorators: [
+    (Story) => (
+      <div className={`${storyClass}__viewport`}>
+        <Story />
+      </div>
+    ),
+  ],
   parameters: {
     layout: 'fullscreen',
     docs: {
@@ -90,8 +98,34 @@ const DefaultLink = () => (
 );
 
 export const Default = (args) => (
-  <div className={`${storyClass}__viewport`}>
-    <Guidebanner {...args} onClose={() => action('onClose()')()}>
+  <Guidebanner {...args} onClose={() => action('onClose()')()}>
+    <GuidebannerElement
+      title="Use-case specific heading"
+      description="Use-case specific content related to the heading that explains the concept or adds context. Use-case specific content related to the heading that explains the concept or adds context."
+      button={<DefaultButtonLarge />}
+    />
+    <GuidebannerElement
+      title="Use-case specific heading"
+      description="Use-case specific content related to the heading that explains the concept or adds context."
+      button={<DefaultButtonSmall />}
+    />
+    <GuidebannerElement
+      title="Use-case specific heading"
+      description="Use-case specific content related to the heading that explains the concept or adds context."
+      button={<DefaultLink />}
+    />
+  </Guidebanner>
+);
+
+export const Collapsible = (args) => {
+  const [open, setOpen] = useState(true);
+  return (
+    <Guidebanner
+      {...args}
+      collapsible
+      open={open}
+      onChange={setOpen}
+      onClose={() => action('onClose()')()}>
       <GuidebannerElement
         title="Use-case specific heading"
         description="Use-case specific content related to the heading that explains the concept or adds context. Use-case specific content related to the heading that explains the concept or adds context."
@@ -100,7 +134,40 @@ export const Default = (args) => (
       <GuidebannerElement
         title="Use-case specific heading"
         description="Use-case specific content related to the heading that explains the concept or adds context."
+        button={<DefaultLink />}
+      />
+    </Guidebanner>
+  );
+};
+
+export const ManyInsights = (args) => {
+  const [open, setOpen] = useState(true);
+  return (
+    <Guidebanner
+      {...args}
+      collapsible
+      open={open}
+      onChange={setOpen}
+      onClose={() => action('onClose()')()}>
+      <GuidebannerElement
+        title="Use-case specific heading"
+        description="Use-case specific content related to the heading that explains the concept or adds context. Use-case specific content related to the heading that explains the concept or adds context."
+        button={<DefaultButtonLarge />}
+      />
+      <GuidebannerElement
+        title="Use-case specific heading"
+        description="Use-case specific content related to the heading that explains the concept or adds context. Use-case specific content related to the heading that explains the concept or adds context. Use-case specific content related to the heading that explains the concept or adds context."
         button={<DefaultButtonSmall />}
+      />
+      <GuidebannerElement
+        title="Use-case specific heading"
+        description="Use-case specific content related to the heading that explains the concept or adds context."
+        button={<DefaultButtonSmall />}
+      />
+      <GuidebannerElement
+        title="Use-case specific heading"
+        description="Use-case specific content related to the heading that explains the concept or adds context. Use-case specific content related to the heading that explains the concept or adds context."
+        button={<DefaultLink />}
       />
       <GuidebannerElement
         title="Use-case specific heading"
@@ -108,70 +175,5 @@ export const Default = (args) => (
         button={<DefaultLink />}
       />
     </Guidebanner>
-  </div>
-);
-
-export const Collapsible = (args) => {
-  const [open, setOpen] = useState(true);
-  return (
-    <div className={`${storyClass}__viewport`}>
-      <Guidebanner
-        {...args}
-        collapsible
-        open={open}
-        onChange={setOpen}
-        onClose={() => action('onClose()')()}>
-        <GuidebannerElement
-          title="Use-case specific heading"
-          description="Use-case specific content related to the heading that explains the concept or adds context. Use-case specific content related to the heading that explains the concept or adds context."
-          button={<DefaultButtonLarge />}
-        />
-        <GuidebannerElement
-          title="Use-case specific heading"
-          description="Use-case specific content related to the heading that explains the concept or adds context."
-          button={<DefaultLink />}
-        />
-      </Guidebanner>
-    </div>
-  );
-};
-
-export const ManyInsights = (args) => {
-  const [open, setOpen] = useState(true);
-  return (
-    <div className={`${storyClass}__viewport`}>
-      <Guidebanner
-        {...args}
-        collapsible
-        open={open}
-        onChange={setOpen}
-        onClose={() => action('onClose()')()}>
-        <GuidebannerElement
-          title="Use-case specific heading"
-          description="Use-case specific content related to the heading that explains the concept or adds context. Use-case specific content related to the heading that explains the concept or adds context."
-          button={<DefaultButtonLarge />}
-        />
-        <GuidebannerElement
-          title="Use-case specific heading"
-          description="Use-case specific content related to the heading that explains the concept or adds context. Use-case specific content related to the heading that explains the concept or adds context. Use-case specific content related to the heading that explains the concept or adds context."
-          button={<DefaultButtonSmall />}
-        />
-        <GuidebannerElement
-          title="Use-case specific heading"
-          description="Use-case specific content related to the heading that explains the concept or adds context."
-          button={<DefaultButtonSmall />}
-        />
-        <GuidebannerElement
-          title="Use-case specific heading"
-          description="Use-case specific content related to the heading that explains the concept or adds context. Use-case specific content related to the heading that explains the concept or adds context."
-          button={<DefaultLink />}
-        />
-        <GuidebannerElement
-          title="Use-case specific heading"
-          description="Use-case specific content related to the heading that explains the concept or adds context."
-          button={<DefaultLink />}
-        />
-      </Guidebanner>
-    </div>
   );
 };
