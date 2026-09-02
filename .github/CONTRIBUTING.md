@@ -142,6 +142,11 @@ http://localhost:3000 to see your changes live.
 Refer to the [developer handbook](../docs/developer-handbook.md#coding-style)
 for guidance on coding style (e.g., naming conventions, file structure).
 
+#### Document v12 migration impact
+
+For contributions that affect v12 behavior, follow the
+[required v12 migration documentation](../docs/working-with-v12.md#required-v12-migration-documentation).
+
 #### Test
 
 If you're working on JavaScript or TypeScript code, test your changes by running
