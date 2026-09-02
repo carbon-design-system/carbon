@@ -19,6 +19,6 @@
   ],
   "dependencies": {
     "@actions/core": "^3.0.0",
-    "got": "^14.4.7"
+    "got": "^15.0.0"
   }
 }
