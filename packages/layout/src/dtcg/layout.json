@@ -214,33 +214,63 @@
     "$description": "Named component size tokens (xs–2xl).",
     "size-xs": {
       "$type": "dimension",
-      "$value": "1.5rem",
-      "$description": "Component size token — XSmall, 24px. Use for the smallest component variant."
+      "$value": 24,
+      "$description": "Component size token — XSmall, 24px. Use for the smallest component variant.",
+      "$extensions": {
+        "carbon.layout": {
+          "converter": "rem"
+        }
+      }
     },
     "size-sm": {
       "$type": "dimension",
-      "$value": "2rem",
-      "$description": "Component size token — Small, 32px."
+      "$value": 32,
+      "$description": "Component size token — Small, 32px.",
+      "$extensions": {
+        "carbon.layout": {
+          "converter": "rem"
+        }
+      }
     },
     "size-md": {
       "$type": "dimension",
-      "$value": "2.5rem",
-      "$description": "Component size token — Medium, 40px. Default component size."
+      "$value": 40,
+      "$description": "Component size token — Medium, 40px. Default component size.",
+      "$extensions": {
+        "carbon.layout": {
+          "converter": "rem"
+        }
+      }
     },
     "size-lg": {
       "$type": "dimension",
-      "$value": "3rem",
-      "$description": "Component size token — Large, 48px."
+      "$value": 48,
+      "$description": "Component size token — Large, 48px.",
+      "$extensions": {
+        "carbon.layout": {
+          "converter": "rem"
+        }
+      }
     },
     "size-xl": {
       "$type": "dimension",
-      "$value": "4rem",
-      "$description": "Component size token — XLarge, 64px."
+      "$value": 64,
+      "$description": "Component size token — XLarge, 64px.",
+      "$extensions": {
+        "carbon.layout": {
+          "converter": "rem"
+        }
+      }
     },
     "size-2xl": {
       "$type": "dimension",
-      "$value": "5rem",
-      "$description": "Component size token — 2XLarge, 80px."
+      "$value": 80,
+      "$description": "Component size token — 2XLarge, 80px.",
+      "$extensions": {
+        "carbon.layout": {
+          "converter": "rem"
+        }
+      }
     }
   },
   "icon-size": {
