@@ -31,7 +31,7 @@
   "resolutions": {
     "@types/react": "~19.2.0",
     "@types/prop-types": "^15.7.14",
-    "ast-types": "^0.14.0",
+    "ast-types": "^0.16.0",
     "node-sass": "^9.0.0",
     "react": "~19.2.3",
     "react-dom": "~19.2.3",
