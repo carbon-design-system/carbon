@@ -12,6 +12,8 @@
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
+@use '../../border-radius' as *;
+@use '../../feature-flags' as *;
 @use '../../utilities/convert';
 @use '../../utilities/focus-outline' as *;
 @use '../text-input';
@@ -19,11 +21,14 @@
 @mixin fluid-text-input {
   .#{$prefix}--text-input--fluid.#{$prefix}--text-input-wrapper {
     position: relative;
-    background: $field;
     block-size: 100%;
     transition:
       background-color $duration-fast-01 motion(standard, productive),
       outline $duration-fast-01 motion(standard, productive);
+
+    @if not enabled('enable-v12-release') {
+      background: $field;
+    }
   }
 
   .#{$prefix}--text-input--fluid .#{$prefix}--label {
@@ -92,6 +97,17 @@
   .#{$prefix}--text-input--fluid
     .#{$prefix}--text-input__field-wrapper--warning {
     display: block;
+
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-04;
+      background: $field;
+
+      .#{$prefix}--text-input {
+        border: none;
+        border-radius: $border-radius-00;
+        background: transparent;
+      }
+    }
   }
 
   .#{$prefix}--text-input--fluid input[data-invalid] {
@@ -203,9 +219,23 @@
   // Skeleton
   .#{$prefix}--text-input--fluid__skeleton {
     position: relative;
-    background: $skeleton-background;
     block-size: convert.to-rem(64px);
-    border-block-end: 1px solid $skeleton-element;
+
+    @if enabled('enable-v12-release') {
+      border: 1px solid transparent;
+      border-radius: $border-radius-04;
+      background:
+        linear-gradient($skeleton-background, $skeleton-background) padding-box,
+        linear-gradient(
+            to bottom,
+            $border-subtle calc(100% - 4px),
+            $skeleton-element 100%
+          )
+          border-box;
+    } @else {
+      background: $skeleton-background;
+      border-block-end: 1px solid $skeleton-element;
+    }
   }
 
   .#{$prefix}--text-input--fluid__skeleton .#{$prefix}--skeleton {
