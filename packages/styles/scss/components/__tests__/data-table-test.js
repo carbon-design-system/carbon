@@ -85,6 +85,55 @@ describe('scss/components/data-table/action', () => {
        `);
     expect(unwrap('mixin')).toBe(true);
   });
+
+  test('toolbar hover styles are only applied on devices that support hover', async () => {
+    const { result } = await render(`
+      @use '../data-table/action';
+    `);
+    const hoverRules = [];
+    const toolbarSelectors = [
+      '.cds--toolbar',
+      '.cds--action-list',
+      '.cds--batch-summary',
+    ];
+
+    postcss.parse(result.css.toString()).walkRules((rule) => {
+      if (
+        rule.selector.includes(':hover') &&
+        toolbarSelectors.some((selector) => rule.selector.includes(selector))
+      ) {
+        hoverRules.push(rule);
+      }
+    });
+
+    expect(hoverRules.length).toBeGreaterThan(0);
+    expect(
+      hoverRules.some((rule) =>
+        rule.selector.includes('.cds--toolbar-action:hover')
+      )
+    ).toBe(true);
+    expect(
+      hoverRules
+        .filter((rule) => {
+          let parent = rule.parent;
+
+          while (parent) {
+            if (
+              parent.type === 'atrule' &&
+              parent.name === 'media' &&
+              parent.params.includes('(any-hover: hover)')
+            ) {
+              return false;
+            }
+
+            parent = parent.parent;
+          }
+
+          return true;
+        })
+        .map((rule) => rule.selector)
+    ).toEqual([]);
+  });
 });
 
 describe('scss/components/data-table/expandable', () => {
