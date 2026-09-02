@@ -363,6 +363,8 @@ export const MultiSelect = React.forwardRef(
     const enableFloatingStyles =
       useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
 
+    const enableV12Release = useFeatureFlag('enable-v12-release');
+
     const { refs, floatingStyles, middlewareData } = useFloating(
       enableFloatingStyles
         ? {
@@ -840,13 +842,15 @@ export const MultiSelect = React.forwardRef(
                   totalSelectableCount,
                 } = getSelectionStats(selectedItems, filteredItems);
 
-                const isChecked = isSelectAllItem(item)
+                const isSelectAll = isSelectAllItem(item);
+
+                const isChecked = isSelectAll
                   ? nonSelectAllSelectedCount === totalSelectableCount &&
                     totalSelectableCount > 0
                   : selectedItems.some((selected) => isEqual(selected, item));
 
                 const isIndeterminate =
-                  isSelectAllItem(item) &&
+                  isSelectAll &&
                   hasIndividualSelections &&
                   nonSelectAllSelectedCount < totalSelectableCount;
 
@@ -858,10 +862,10 @@ export const MultiSelect = React.forwardRef(
                 });
                 const itemText = itemToString(item);
 
-                return (
+                const menuItem = (
                   <ListBox.MenuItem
                     key={itemProps.id}
-                    isActive={isChecked && !isSelectAllItem(item)}
+                    isActive={isChecked && !isSelectAll}
                     aria-label={itemText}
                     aria-checked={isIndeterminate ? 'mixed' : isChecked}
                     isHighlighted={highlightedIndex === index}
@@ -882,6 +886,17 @@ export const MultiSelect = React.forwardRef(
                     </div>
                   </ListBox.MenuItem>
                 );
+
+                return isSelectAll && enableV12Release
+                  ? [
+                      menuItem,
+                      <li
+                        key={`${itemProps.id}__divider`}
+                        className={`${prefix}--list-box__menu-divider`}
+                        aria-hidden="true"
+                      />,
+                    ]
+                  : menuItem;
               })}
           </ListBox.Menu>
           {itemsCleared && (
