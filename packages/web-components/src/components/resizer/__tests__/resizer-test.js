@@ -16,8 +16,8 @@ describe('cds-resizer-grid', function () {
         <cds-resizer-panel slot="right">Right panel</cds-resizer-panel>
       </cds-resizer-grid>
     `);
-    expect(grid).dom.to.equalSnapshot();
-    expect(grid).shadowDom.to.be.accessible();
+    await expect(grid).dom.to.equalSnapshot();
+    await expect(grid).shadowDom.to.be.accessible();
   });
 
   it('should render all slot elements', async () => {
@@ -68,8 +68,8 @@ describe('cds-resizer-panel', function () {
     const panel = await fixture(html`
       <cds-resizer-panel>Panel content</cds-resizer-panel>
     `);
-    expect(panel).dom.to.equalSnapshot();
-    expect(panel).shadowDom.to.be.accessible();
+    await expect(panel).dom.to.equalSnapshot();
+    await expect(panel).shadowDom.to.be.accessible();
   });
 
   it('should render slotted content', async () => {
@@ -101,7 +101,7 @@ describe('cds-resizer-handle', function () {
     handle.setAttribute('aria-valuemin', '0');
     handle.setAttribute('aria-valuemax', '100');
     await handle.updateComplete;
-    expect(handle).dom.to.equalSnapshot();
+    await expect(handle).dom.to.equalSnapshot();
     await expect(handle).shadowDom.to.be.accessible();
   });
 
@@ -418,8 +418,8 @@ describe('cds-resizer-handle-pivot', function () {
     const pivot = await fixture(html`
       <cds-resizer-handle-pivot></cds-resizer-handle-pivot>
     `);
-    expect(pivot).dom.to.equalSnapshot();
-    expect(pivot).shadowDom.to.be.accessible();
+    await expect(pivot).dom.to.equalSnapshot();
+    await expect(pivot).shadowDom.to.be.accessible();
   });
 
   it('should set slot attribute to pivot on connect', async () => {
