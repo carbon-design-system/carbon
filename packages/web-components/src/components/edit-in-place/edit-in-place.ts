@@ -316,14 +316,6 @@ class CDSEditInPlace extends HostListenerMixin(LitElement) {
    * Handle blur
    */
   private _handleBlur(e: FocusEvent) {
-    if (this.readOnly) {
-      const relatedTarget = e.relatedTarget as Node | null;
-      if (!this.contains(relatedTarget)) {
-        this._focused = false;
-      }
-      return;
-    }
-
     const relatedTarget = e.relatedTarget as Node | null;
     const clickedWithin = this._clickingWithin;
     const targetingChild = relatedTarget ? this.contains(relatedTarget) : false;
@@ -466,10 +458,10 @@ class CDSEditInPlace extends HostListenerMixin(LitElement) {
    * Cleanup component state when removed from DOM
    */
   disconnectedCallback() {
+    super.disconnectedCallback();
     this._escaping = false;
     this._clickingWithin = false;
     this._focused = false;
-    super.disconnectedCallback();
   }
 
   /**
@@ -588,10 +580,7 @@ class CDSEditInPlace extends HostListenerMixin(LitElement) {
     };
 
     return html`
-      <div
-        class=${classMap(containerClasses)}
-        @focusin=${this._handleFocus}
-        @blur=${this._handleBlur}>
+      <div class=${classMap(containerClasses)} @blur=${this._handleBlur}>
         ${this._renderInput()}
         <div
           class="${blockClass}__toolbar"
