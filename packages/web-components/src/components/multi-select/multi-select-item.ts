@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,6 +12,7 @@ import { prefix } from '../../globals/settings';
 import CDSDropdownItem from '../dropdown/dropdown-item';
 import styles from './multi-select.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import { isFeatureFlagEnabled } from '../feature-flags';
 import '../checkbox';
 /**
  * Multi select item.
@@ -59,6 +60,11 @@ class CDSMultiSelectItem extends CDSDropdownItem {
           <slot></slot>
         </cds-checkbox>
       </div>
+      ${this.isSelectAll && isFeatureFlagEnabled('enable-v12-release', this)
+        ? html`<div
+            class="${prefix}--list-box__menu-divider"
+            aria-hidden="true"></div>`
+        : null}
     `;
   }
 

@@ -1,16 +1,20 @@
 //
-// Copyright IBM Corp. 2018, 2025
+// Copyright IBM Corp. 2018, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
 @use 'accordion';
+@use 'action-set';
 @use 'ai-label';
 @use 'aspect-ratio';
 @use 'badge-indicator';
+@use 'big-number';
 @use 'breadcrumb';
 @use 'button';
+@use 'card';
+@use 'coachmark';
 @use 'chat-button';
 @use 'checkbox';
 @use 'code-snippet';
@@ -40,8 +44,10 @@
 @use 'fluid-text-input';
 @use 'fluid-time-picker';
 @use 'form';
+@use 'FullPageError';
 @use 'icon-indicator';
 @use 'inline-loading';
+@use 'InterstitialScreen';
 @use 'link';
 @use 'list';
 @use 'list-box';
@@ -51,8 +57,10 @@
 @use 'modal';
 @use 'multiselect';
 @use 'notification';
+@use 'notifications-panel';
 @use 'number-input';
 @use 'overflow-menu';
+@use 'options-tile';
 @use 'page-header';
 @use 'pagination';
 @use 'pagination-nav';
@@ -60,6 +68,9 @@
 @use 'progress-bar';
 @use 'progress-indicator';
 @use 'radio-button';
+@use 'resizer';
+@use 'scroll-gradient';
+@use 'side-panel';
 @use 'search';
 @use 'select';
 @use 'shape-indicator';
@@ -78,4 +89,7 @@
 @use 'toggle';
 @use 'tooltip';
 @use 'treeview';
+@use 'truncated-text';
 @use 'ui-shell';
+@use 'edit-in-place';
+@use 'user-avatar';

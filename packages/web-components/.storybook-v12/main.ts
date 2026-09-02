@@ -13,6 +13,7 @@ import type { StorybookConfig } from '@storybook/web-components-vite';
 import { mergeConfig } from 'vite';
 
 import baseConfig from '../.storybook/main.ts';
+import { productMigratedStoryGlobs } from '../product-migrated-components.mjs';
 
 const configDir = fileURLToPath(new URL('.', import.meta.url));
 const manifestPath = path.join(configDir, 'generated', 'manifest.json');
@@ -100,13 +101,16 @@ const stories = (baseConfig.stories ?? [])
   .concat(
     './Welcome/Welcome.mdx',
     './GettingStarted.mdx',
+    './Changelog.mdx',
     './CustomStyles.mdx',
     './CarbonCDNStyleHelpers.mdx',
     './FormParticipation.mdx',
     ...(fs.existsSync(deprecatedStoriesDir)
       ? ['./deprecated/**/*.mdx', './deprecated/**/*.stories.@(js|jsx|ts|tsx)']
       : []),
-    './generated/**/*.stories.@(js|jsx|ts|tsx)'
+    './generated/**/*.stories.@(js|jsx|ts|tsx)',
+    // ibm-products components in migration — only shown in v12 Storybook
+    ...productMigratedStoryGlobs
   );
 
 const config: StorybookConfig = {
