@@ -82,6 +82,7 @@ const sharedArgTypes = {
 export default {
   title: 'Components/Tearsheet',
   component: Tearsheet,
+  tags: ['ibm-products-migrated'],
   parameters: {
     docs: {
       page: docs,
