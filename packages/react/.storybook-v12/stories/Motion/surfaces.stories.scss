@@ -82,7 +82,7 @@
 }
 // stylelint-enable declaration-no-important
 
-// custom, user-defined reveal
+// custom, user-defined 'stretch` reveal
 .motion-surface-demo__modal--css
   .motion-surface-demo__container[data-carbon-surface='custom-panel'] {
   @include motion.surface(

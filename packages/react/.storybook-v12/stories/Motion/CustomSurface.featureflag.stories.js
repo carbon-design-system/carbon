@@ -21,8 +21,8 @@ export default {
   },
 };
 
-// user-defined reveal exapmle (not using built-in surface)
-const panelReveal = defineMotionSurface({
+// user-defined `stretch` reveal exapmle (not using built-in surface)
+const stretchReveal = defineMotionSurface({
   kind: 'reveal',
   duration: 'slow-01',
   enter: { opacity: 1, clipPath: 'inset(0 0 0 0)' },
@@ -32,7 +32,7 @@ const panelReveal = defineMotionSurface({
 });
 
 /**
- * user-defined reveal example, pure CSS
+ * user-defined stretch example, pure CSS
  *
  * `surfaces.stories.scss` passes a definition map to
  * `@include motion.surface(...)`, and the story toggles
@@ -98,7 +98,7 @@ export const CustomSurfaceWithMotion = () => {
         Create resource
       </Button>
       <DemoDialog
-        surface={panelReveal}
+        surface={stretchReveal}
         open={open}
         onClose={() => setOpen(false)}
         heading="Create resource">
