@@ -215,7 +215,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
     }
 
     function handleClick(
-      e: KeyboardEvent<HTMLLIElement> | MouseEvent<HTMLLIElement>
+      e: KeyboardEvent<HTMLLIElement> | MouseEvent<Element>
     ) {
       if (!isDisabled) {
         if (hasChildren) {
@@ -224,7 +224,9 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
           context.state.requestCloseRoot(e);
 
           if (onClick) {
-            onClick(e);
+            onClick(
+              e as KeyboardEvent<HTMLLIElement> | MouseEvent<HTMLLIElement>
+            );
           }
         }
       }
