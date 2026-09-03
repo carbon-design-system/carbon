@@ -115,12 +115,6 @@
     opacity: 1;
   }
 
-  // TODO: deprecate this style block
-  .#{$prefix}--text-input--password__visibility {
-    @include tooltip--trigger('icon', 'bottom');
-    @include tooltip--placement('icon', 'bottom', 'center');
-  }
-
   // Size the tooltip host to the toggle so v12 floating-ui has a real reference.
   .#{$prefix}--password-input-wrapper:not(.#{$prefix}--text-input--fluid)
     .#{$prefix}--toggle-password-tooltip {
