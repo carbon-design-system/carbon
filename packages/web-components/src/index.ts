@@ -195,4 +195,7 @@ export { default as CDSLayoutConstraint } from './components/layout/layout-const
 // export { default as CDSActionSet } from './components/action-set/action-set';
 // export { default as CDSGuideBanner } from './components/guide-banner/guide-banner';
 // export { default as CDSGuideBannerElement } from './components/guide-banner/guide-banner-element';
+// export { default as CDSEditInPlace } from './components/edit-in-place/edit-in-place';
 // export { default as CDSSidePanel } from './components/side-panel/side-panel';
+// export { default as CDSBigNumber } from './components/big-number/big-number';
+// export { default as CDSOptionsTile } from './components/options-tile/options-tile';

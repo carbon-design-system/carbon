@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import React, {
   forwardRef,
   useCallback,
+  useContext,
   useEffect,
   useImperativeHandle,
   useRef,
@@ -19,6 +20,7 @@ import cx from 'classnames';
 import flatpickr from 'flatpickr';
 import l10n from 'flatpickr/dist/l10n/index';
 import DatePickerInput from '../DatePickerInput';
+import { FormContext } from '../FluidForm';
 import { appendToPlugin } from './plugins/appendToPlugin';
 import { fixEventsPlugin } from './plugins/fixEventsPlugin';
 import { rangePlugin } from './plugins/rangePlugin';
@@ -166,12 +168,16 @@ function isLabelTextEmpty(children) {
   return children.every((child) => !child.props.labelText);
 }
 
-function updateClassNames(calendar, prefix) {
+function updateClassNames(calendar, prefix, isFluid = false) {
   const calendarContainer = calendar.calendarContainer;
   const daysContainer = calendar.days;
   if (calendarContainer && daysContainer) {
     // calendarContainer and daysContainer are undefined if flatpickr detects a mobile device
     calendarContainer.classList.add(`${prefix}--date-picker__calendar`);
+    calendarContainer.classList.toggle(
+      `${prefix}--date-picker__calendar--fluid`,
+      isFluid
+    );
     calendarContainer
       .querySelector('.flatpickr-month')
       .classList.add(`${prefix}--date-picker__month`);
@@ -458,6 +464,8 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
 
   const wrapperRef = useRef<HTMLDivElement>(null);
 
+  const { isFluid } = useContext(FormContext);
+
   const datePickerClasses = cx(`${prefix}--date-picker`, {
     [`${prefix}--date-picker--short`]: short,
     [`${prefix}--date-picker--light`]: light,
@@ -534,7 +542,7 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
     }
 
     const onHook = (_electedDates, _dateStr, instance) => {
-      updateClassNames(instance, prefix);
+      updateClassNames(instance, prefix, isFluid);
       if (startInputField?.current) {
         startInputField.current.readOnly = readOnly;
       }
@@ -943,7 +951,7 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
       ) {
         calendarRef.current.setDate(value);
       }
-      updateClassNames(calendarRef.current, prefix);
+      updateClassNames(calendarRef.current, prefix, isFluid);
       //for simple date picker w/o calendar; initial mount may not have value
     } else if (
       !calendarRef.current &&
@@ -952,7 +960,7 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
     ) {
       startInputField.current.value = value;
     }
-  }, [value, prefix, startInputField]);
+  }, [value, prefix, startInputField, isFluid]);
 
   let fluidError;
 
