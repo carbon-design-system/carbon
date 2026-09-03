@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './story.scss';
+import './Tearsheet.stories.scss';
 import docs from './Tearsheet.mdx';
 
 import React, { useRef, useState } from 'react';
