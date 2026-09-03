@@ -179,8 +179,8 @@ describe('@carbon/motion', () => {
     );
   });
 
-  // A reveal missing `enter` would otherwise resolve to an empty keyframe and
-  // animate nothing, and a missing `kind` falls through to shared-element.
+  // revleas missing `enter` would resolve to an empty keyframe and animate nothing;
+  // missing `kind` falls through to shared-element
   test('rejects a malformed inline definition', () => {
     const base = {
       duration: 'slow-01',
