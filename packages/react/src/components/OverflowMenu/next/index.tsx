@@ -5,7 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useEffect, useRef, type ElementType } from 'react';
+import React, {
+  useEffect,
+  useRef,
+  type ComponentProps,
+  type ElementType,
+} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { OverflowMenuVertical } from '@carbon/icons-react';
@@ -25,7 +30,7 @@ import { mapPopoverAlign } from '../../../tools/mapPopoverAlign';
 
 const defaultSize = 'md';
 
-interface OverflowMenuProps {
+export interface OverflowMenuProps extends ComponentProps<'div'> {
   /**
    * **Experimental**: Will attempt to automatically align the floating element
    * to avoid collisions with the viewport and being clipped by ancestor
