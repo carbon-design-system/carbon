@@ -46,6 +46,7 @@
 @use 'fluid-time-picker';
 @use 'form';
 @use 'FullPageError';
+@use 'guidebanner';
 @use 'icon-indicator';
 @use 'inline-loading';
 @use 'InterstitialScreen';
@@ -92,5 +93,5 @@
 @use 'treeview';
 @use 'truncated-text';
 @use 'ui-shell';
-@use 'EditInPlace';
+@use 'edit-in-place';
 @use 'user-avatar';
