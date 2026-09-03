@@ -165,6 +165,7 @@ $css--plex: true !default;
 
 :host(#{$prefix}-card-title) {
   display: block;
+  min-inline-size: 0;
 }
 
 :host(#{$prefix}-card-title-media) {
