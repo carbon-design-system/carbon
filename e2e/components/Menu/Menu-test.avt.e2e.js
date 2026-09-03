@@ -79,7 +79,7 @@ test.describe('@avt Menu', () => {
     // this retries the keypress along with the focus assertion until it passes
     await expect(async () => {
       await page.keyboard.press('ArrowRight');
-      expect(nestedMenuItem).toBeFocused();
+      await expect(nestedMenuItem).toBeFocused();
     }).toPass();
 
     await expect(nestedMenu).toBeVisible();
@@ -99,7 +99,7 @@ test.describe('@avt Menu', () => {
     // this retries the keypress along with the focus assertion until it passes
     await expect(async () => {
       await page.keyboard.press('ArrowRight');
-      expect(nestedMenuItem).toBeFocused();
+      await expect(nestedMenuItem).toBeFocused();
     }).toPass();
 
     await expect(nestedMenuItem).toHaveAttribute('aria-checked', 'false');
