@@ -23,6 +23,7 @@ import OverflowMenu from '../OverflowMenu';
 import OverflowMenuItem from '../OverflowMenuItem';
 import { MenuButton } from '../MenuButton';
 import { MenuItem } from '../Menu';
+import CodeSnippet from '../CodeSnippet';
 
 const prefix = 'cds';
 
@@ -1706,3 +1707,73 @@ describe('enableDialogElement role attribute', () => {
     expect(document.getElementById(modalBodyId)).toHaveTextContent('Body');
   });
 });
+
+describe.each([
+  { enableDialogElement: false, expectedCopyRoot: () => document.body },
+  {
+    enableDialogElement: true,
+    expectedCopyRoot: () => screen.getByRole('dialog'),
+  },
+])(
+  'CodeSnippet clipboard behavior with enableDialogElement=$enableDialogElement',
+  ({ enableDialogElement, expectedCopyRoot }) => {
+    it('should copy from within the appropriate modal root', async () => {
+      let copyRoot;
+      const originalIsSecureContext = Object.getOwnPropertyDescriptor(
+        window,
+        'isSecureContext'
+      );
+      const originalExecCommand = document.execCommand;
+
+      Object.defineProperty(window, 'isSecureContext', {
+        configurable: true,
+        value: false,
+      });
+      document.execCommand = jest.fn(() => {
+        const range = document.getSelection().getRangeAt(0);
+        const selectedNode = range.commonAncestorContainer;
+        const copyElement =
+          selectedNode.nodeType === Node.TEXT_NODE
+            ? selectedNode.parentElement
+            : selectedNode;
+        copyRoot = copyElement.parentElement;
+        return true;
+      });
+
+      try {
+        const modal = (
+          <Modal open>
+            <CodeSnippet copyText="copied value">snippet value</CodeSnippet>
+          </Modal>
+        );
+
+        render(
+          enableDialogElement ? (
+            <FeatureFlags enableDialogElement>{modal}</FeatureFlags>
+          ) : (
+            modal
+          )
+        );
+
+        await userEvent.click(
+          screen.getByRole('button', { name: 'Copy to clipboard' })
+        );
+
+        expect(document.execCommand).toHaveBeenCalledWith('copy');
+        expect(copyRoot).toBe(expectedCopyRoot());
+      } finally {
+        document.execCommand = originalExecCommand;
+
+        if (originalIsSecureContext) {
+          Object.defineProperty(
+            window,
+            'isSecureContext',
+            originalIsSecureContext
+          );
+        } else {
+          delete window.isSecureContext;
+        }
+      }
+    });
+  }
+);
