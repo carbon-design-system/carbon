@@ -271,7 +271,7 @@ const defaultArgs = {
 };
 
 const meta: Meta = {
-  title: 'Experimental/GuideBanner',
+  title: 'Preview/GuideBanner',
   component: 'cds-guide-banner',
 };
 

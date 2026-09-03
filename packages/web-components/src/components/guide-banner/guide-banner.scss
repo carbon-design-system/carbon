@@ -13,6 +13,9 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/type';
 
+@use '@carbon/styles/scss/components/guidebanner' as guidebanner-styles;
+@include guidebanner-styles.guidebanner;
+
 $block-class: #{$prefix}--guidebanner;
 
 :host(#{$prefix}-guide-banner) {
