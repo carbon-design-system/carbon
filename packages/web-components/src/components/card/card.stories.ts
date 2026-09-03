@@ -44,7 +44,7 @@ const placeholder1x1 = placeholder1x1Src;
 // ─── Meta ─────────────────────────────────────────────────────────────────────
 
 const meta = {
-  title: 'Components/Card',
+  title: 'Preview/Card',
   parameters: {
     docs: { page: storyDocs },
     layout: 'fullscreen',
