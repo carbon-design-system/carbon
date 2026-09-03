@@ -903,9 +903,10 @@ export const WithTitleLeadingIcon = {
       <cds-column lg="4" md="4" sm="4">
         <cds-card>
           <cds-card-header>
-            <cds-card-title>
-              ${iconLoader(Bee16, { slot: 'title-start' })} Analytics dashboard
-            </cds-card-title>
+            <cds-card-title
+              >${iconLoader(Bee16, { slot: 'title-start' })}Analytics
+              dashboard</cds-card-title
+            >
           </cds-card-header>
           <cds-card-body>
             The leading icon adapts to the title size. In productive density,
@@ -918,9 +919,10 @@ export const WithTitleLeadingIcon = {
       <cds-column lg="4" md="4" sm="4">
         <cds-card density="expressive">
           <cds-card-header>
-            <cds-card-title>
-              ${iconLoader(Bee24, { slot: 'title-start' })} Analytics dashboard
-            </cds-card-title>
+            <cds-card-title
+              >${iconLoader(Bee24, { slot: 'title-start' })}Analytics
+              dashboard</cds-card-title
+            >
           </cds-card-header>
           <cds-card-body>
             The leading icon adapts to the title size. In expressive density,
@@ -933,10 +935,10 @@ export const WithTitleLeadingIcon = {
       <cds-column lg="4" md="4" sm="4">
         <cds-card>
           <cds-card-header>
-            <cds-card-title title-truncate="2">
-              ${iconLoader(Bee16, { slot: 'title-start' })} Example of long
-              title text that wraps onto two lines
-            </cds-card-title>
+            <cds-card-title title-truncate="2"
+              >${iconLoader(Bee16, { slot: 'title-start' })}Example of long
+              title text that wraps onto two lines</cds-card-title
+            >
           </cds-card-header>
           <cds-card-body>
             When the title wraps to multiple lines, the icon stays top-aligned
@@ -1088,9 +1090,12 @@ export const WithTitleTrailingIcon = {
       <cds-column lg="4" md="4" sm="4">
         <cds-card>
           <cds-card-header>
-            <cds-card-title>
-              Analytics dashboard ${iconLoader(Bee16, { slot: 'title-end' })}
-            </cds-card-title>
+            <cds-card-title
+              >Analytics
+              dashboard${iconLoader(Bee16, {
+                slot: 'title-end',
+              })}</cds-card-title
+            >
           </cds-card-header>
           <cds-card-body>
             The trailing icon adapts to the title size. In productive density,
@@ -1103,9 +1108,12 @@ export const WithTitleTrailingIcon = {
       <cds-column lg="4" md="4" sm="4">
         <cds-card density="expressive">
           <cds-card-header>
-            <cds-card-title>
-              Analytics dashboard ${iconLoader(Bee24, { slot: 'title-end' })}
-            </cds-card-title>
+            <cds-card-title
+              >Analytics
+              dashboard${iconLoader(Bee24, {
+                slot: 'title-end',
+              })}</cds-card-title
+            >
           </cds-card-header>
           <cds-card-body>
             The trailing icon adapts to the title size. In expressive density,
@@ -1118,10 +1126,10 @@ export const WithTitleTrailingIcon = {
       <cds-column lg="4" md="4" sm="4">
         <cds-card>
           <cds-card-header>
-            <cds-card-title title-truncate="2">
-              Example of long title text that wraps into three lines with icon
-              ${iconLoader(Bee16, { slot: 'title-end' })}
-            </cds-card-title>
+            <cds-card-title title-truncate="2"
+              >Example of long title text that wraps into three lines with
+              icon${iconLoader(Bee16, { slot: 'title-end' })}</cds-card-title
+            >
           </cds-card-header>
           <cds-card-body>
             When the title wraps to multiple lines, the icon stays inline with
