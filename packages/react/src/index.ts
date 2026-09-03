@@ -105,8 +105,8 @@ export * from './components/OrderedList';
 // export * from './components/OptionsTile';
 export * from './components/OverflowMenu';
 export * from './components/OverflowMenuItem';
-export * as unstable__PageHeader from './components/PageHeader';
-export * as preview__PageHeader from './components/PageHeader';
+export * as unstable__PageHeader from './components/PageHeaderDeprecated';
+export * as preview__PageHeader from './components/PageHeaderDeprecated';
 export * as preview__Dialog from './components/Dialog';
 export * from './components/Pagination';
 export * from './components/Pagination/Pagination.Skeleton';
@@ -583,7 +583,7 @@ export type {
   PageHeaderContentProps,
   PageHeaderHeroImageProps,
   PageHeaderTabBarProps,
-} from './components/PageHeader';
+} from './components/PageHeaderDeprecated';
 
 export type {
   DialogProps,
