@@ -114,7 +114,7 @@
     "storybook": "^10.3.5",
     "storybook-addon-accessibility-checker": ">=9.2.0-rc.4",
     "stream-browserify": "^3.0.0",
-    "tinyclip": "^0.1.12",
+    "tinyclip": "^1.0.0",
     "tsdown": "^0.22.0",
     "typescript": "^6.0.3",
     "typescript-config-carbon": "workspace:^0.11.0",
