@@ -4,7 +4,7 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import { fixture, html, expect, oneEvent } from '@open-wc/testing';
+import { fixture, html, expect, oneEvent, nextFrame } from '@open-wc/testing';
 import '@carbon/web-components/es/components/coachmark/index.js';
 import '@carbon/web-components/es/components/coachmark/coachmark-beacon/index.js';
 import '@carbon/web-components/es/components/button/index.js';
@@ -232,6 +232,7 @@ describe('cds-coachmark', () => {
       templateFloating({ align: 'bottom', open: true, floating: true })
     );
     await el.updateComplete;
+    await nextFrame();
 
     const popoverContent = el.shadowRoot
       ?.querySelector(`.${blockClass}--popover`)
