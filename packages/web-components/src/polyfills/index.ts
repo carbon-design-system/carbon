@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -18,7 +18,7 @@ import 'core-js/modules/es.object.is.js'; // For src/globals/directives/spread.t
 import 'core-js/modules/es.object.values.js';
 import 'core-js/modules/es.object.entries';
 
-import ResizeObserver from '@juggle/resize-observer';
+import { ResizeObserver as ResizeObserverPolyfill } from '@juggle/resize-observer';
 
 import './element-closest';
 import './element-matches';
@@ -27,7 +27,7 @@ import './toggle-class';
 
 import '@webcomponents/webcomponentsjs';
 
-if (typeof ResizeObserver === 'undefined') {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  (window as any).ResizeObserver = ResizeObserver;
+if (typeof window.ResizeObserver === 'undefined') {
+  window.ResizeObserver =
+    ResizeObserverPolyfill as unknown as typeof window.ResizeObserver;
 }
