@@ -338,7 +338,7 @@ jobs:
       - uses: ./actions/wait-for-it
         with:
           URL: 'http://localhost:3000'
-        timeout-minutes: 3
+        timeout-minutes: 5
       - name: Run AVT
         if: github.repository == 'carbon-design-system/carbon'
         run: |
