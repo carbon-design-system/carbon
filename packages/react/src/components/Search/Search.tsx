@@ -31,9 +31,28 @@ import { noopFn } from '../../internal/noopFn';
 import { Tooltip } from '../Tooltip';
 import { isSearchValuePresent } from './utils';
 import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
+import type { TFunc, TranslateWithId } from '../../types/common';
+
+const translationIds = {
+  'carbon.search.clear': 'carbon.search.clear',
+  'carbon.search.expand': 'carbon.search.expand',
+} as const;
+
+type TranslationKey = keyof typeof translationIds;
+
+const defaultTranslations: Record<TranslationKey, string> = {
+  [translationIds['carbon.search.clear']]: 'Clear search input',
+  [translationIds['carbon.search.expand']]: 'Search',
+};
+
+const defaultTranslateWithId: TFunc<TranslationKey> = (messageId) => {
+  return defaultTranslations[messageId];
+};
 
 type InputPropsBase = Omit<HTMLAttributes<HTMLInputElement>, 'onChange'>;
-export interface SearchProps extends InputPropsBase {
+export interface SearchProps
+  extends InputPropsBase,
+    TranslateWithId<TranslationKey> {
   /**
    * Specify an optional value for the `autocomplete` property on the underlying
    * `<input>`, defaults to "off"
@@ -46,6 +65,7 @@ export interface SearchProps extends InputPropsBase {
   className?: string;
 
   /**
+   * @deprecated Use `translateWithId` with the `carbon.search.clear` id instead.
    * Specify a label to be read by screen readers on the "close" button
    */
   closeButtonLabelText?: string;
@@ -132,7 +152,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
     {
       autoComplete = 'off',
       className,
-      closeButtonLabelText = 'Clear search input',
+      closeButtonLabelText,
       defaultValue,
       disabled,
       isExpanded = true,
@@ -150,6 +170,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
       role,
       size,
       tabIndex,
+      translateWithId,
       type = 'search',
       value,
       ...rest
@@ -278,13 +299,18 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
       </div>
     );
 
+    const t = translateWithId ?? defaultTranslateWithId;
+    const clearLabel =
+      closeButtonLabelText ?? t(translationIds['carbon.search.clear']);
+    const expandLabel = t(translationIds['carbon.search.expand']);
+
     // Wrap magnifierButton in a tooltip if it's expandable
     const magnifierWithTooltip =
       onExpand && !isExpanded && !disabled ? (
         <Tooltip
           className={`${prefix}--search-tooltip ${prefix}--search-magnifier-tooltip ${prefix}--icon-tooltip`}
           align="top"
-          label="Search">
+          label={expandLabel}>
           {magnifierButton}
         </Tooltip>
       ) : (
@@ -326,11 +352,11 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
           tabIndex={isExpandableCollapsed ? -1 : tabIndex}
         />
         <button
-          aria-label={closeButtonLabelText}
+          aria-label={clearLabel}
           className={clearClasses}
           disabled={disabled}
           onClick={clearInput}
-          title={closeButtonLabelText}
+          title={clearLabel}
           type="button">
           <Close />
         </button>
@@ -353,9 +379,18 @@ Search.propTypes = {
   className: PropTypes.string,
 
   /**
+   * @deprecated Use `translateWithId` with the `carbon.search.clear` id instead.
    * Specify a label to be read by screen readers on the "close" button
    */
-  closeButtonLabelText: PropTypes.string,
+  closeButtonLabelText: deprecate(
+    PropTypes.string,
+    'The `closeButtonLabelText` prop has been deprecated. Use `translateWithId` with the `carbon.search.clear` id instead.'
+  ),
+
+  /**
+   * Translates component strings using your i18n tool.
+   */
+  translateWithId: PropTypes.func,
 
   /**
    * Optionally provide the default value of the `<input>`
