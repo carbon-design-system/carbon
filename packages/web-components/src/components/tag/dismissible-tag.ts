@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -88,8 +88,10 @@ class CDSDismissibleTag extends HostListenerMixin(FocusMixin(CDSTag)) {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   protected _handleClick = (event: MouseEvent) => {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-    if (event.composedPath().indexOf(this._buttonNode!) >= 0) {
+    if (
+      this._buttonNode &&
+      event.composedPath().indexOf(this._buttonNode) >= 0
+    ) {
       if (this.disabled) {
         event.stopPropagation();
       } else if (this.open) {
@@ -198,6 +200,15 @@ class CDSDismissibleTag extends HostListenerMixin(FocusMixin(CDSTag)) {
     const dismissActionLabel =
       dismissTooltipLabel || (hasEllipsisApplied ? dismissLabel : 'Dismiss');
 
+    const closeButton = html`
+      <button
+        class="${prefix}--tag__close-icon"
+        ?disabled=${disabled}
+        aria-label="${dismissActionLabel}">
+        ${iconLoader(Close16)}
+      </button>
+    `;
+
     return html`
       ${size !== TAG_SIZE.SMALL
         ? html`<slot name="icon" @slotchange="${handleIconSlotChange}"></slot>`
@@ -211,19 +222,22 @@ class CDSDismissibleTag extends HostListenerMixin(FocusMixin(CDSTag)) {
         <slot name="decorator" @slotchange="${handleAILabelSlotChange}"></slot>
         <slot name="ai-label" @slotchange="${handleAILabelSlotChange}"></slot>
         <slot name="slug" @slotchange="${handleAILabelSlotChange}"></slot>
-        <cds-tooltip align=${dismissTooltipAlignment} enter-delay-ms=${0}>
-          <button
-            class="sb-tooltip-trigger"
-            role="button"
-            aria-labelledby="content"
-            class="${prefix}--tag__close-icon"
-            ?disabled=${disabled}>
-            ${iconLoader(Close16)}
-          </button>
-          <cds-tooltip-content id="content">
-            ${dismissActionLabel}
-          </cds-tooltip-content>
-        </cds-tooltip>
+        ${disabled
+          ? closeButton
+          : html`<cds-tooltip
+              align=${dismissTooltipAlignment}
+              enter-delay-ms=${0}>
+              <button
+                class="sb-tooltip-trigger"
+                role="button"
+                aria-labelledby="content"
+                class="${prefix}--tag__close-icon">
+                ${iconLoader(Close16)}
+              </button>
+              <cds-tooltip-content id="content">
+                ${dismissActionLabel}
+              </cds-tooltip-content>
+            </cds-tooltip>`}
       </div>
     `;
   }
