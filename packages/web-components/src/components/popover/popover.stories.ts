@@ -17,24 +17,50 @@ import '../checkbox';
 import { iconLoader } from '../../globals/internal/icon-loader';
 
 import styles from './popover-story.scss?lit';
+
+const alignments = [
+  POPOVER_ALIGNMENT.TOP,
+  POPOVER_ALIGNMENT.TOP_START,
+  POPOVER_ALIGNMENT.TOP_END,
+  POPOVER_ALIGNMENT.BOTTOM,
+  POPOVER_ALIGNMENT.BOTTOM_START,
+  POPOVER_ALIGNMENT.BOTTOM_END,
+  POPOVER_ALIGNMENT.LEFT,
+  POPOVER_ALIGNMENT.LEFT_END,
+  POPOVER_ALIGNMENT.LEFT_START,
+  POPOVER_ALIGNMENT.RIGHT,
+  POPOVER_ALIGNMENT.RIGHT_END,
+  POPOVER_ALIGNMENT.RIGHT_START,
+];
+
+const togglePopover = (event: Event) => {
+  const trigger = event.currentTarget as HTMLElement;
+  const popover = trigger.closest(`${prefix}-popover`);
+
+  if (popover) {
+    popover.toggleAttribute('open');
+    trigger.setAttribute('aria-expanded', String(popover.hasAttribute('open')));
+  }
+};
+
+const handlePopoverClose = (event: Event, onClose?: (event: Event) => void) => {
+  const popover = event.currentTarget as HTMLElement;
+  const trigger = popover.querySelector<HTMLElement>(':scope > button');
+
+  trigger?.setAttribute('aria-expanded', 'false');
+  onClose?.(event);
+};
+
 const sharedArgTypes = {
   align: {
     control: 'select',
-    options: [
-      POPOVER_ALIGNMENT.TOP,
-      POPOVER_ALIGNMENT.TOP_START,
-      POPOVER_ALIGNMENT.TOP_END,
-      POPOVER_ALIGNMENT.BOTTOM,
-      POPOVER_ALIGNMENT.BOTTOM_START,
-      POPOVER_ALIGNMENT.BOTTOM_END,
-      POPOVER_ALIGNMENT.LEFT,
-      POPOVER_ALIGNMENT.LEFT_END,
-      POPOVER_ALIGNMENT.LEFT_START,
-      POPOVER_ALIGNMENT.RIGHT,
-      POPOVER_ALIGNMENT.RIGHT_END,
-      POPOVER_ALIGNMENT.RIGHT_START,
-    ],
+    options: alignments,
     description: `Specify how the popover should align with the trigger element`,
+  },
+  alignmentAxisOffset: {
+    control: 'number',
+    description:
+      'Provide an offset value for the alignment axis when auto-align is enabled',
   },
   autoAlign: {
     control: 'boolean',
@@ -70,9 +96,17 @@ const sharedArgTypes = {
     control: 'boolean',
     description: 'Specify whether the component is currently open or closed',
   },
+  onBeforeClose: {
+    action: 'cds-popover-beingclosed',
+  },
+  onClose: {
+    action: 'cds-popover-closed',
+  },
 };
 
 const sharedAutoAlignArgTypes = {
+  align: sharedArgTypes.align,
+  alignmentAxisOffset: sharedArgTypes.alignmentAxisOffset,
   caret: {
     control: 'boolean',
     description: `Specify whether a caret should be rendered`,
@@ -102,6 +136,8 @@ const sharedAutoAlignArgTypes = {
     control: 'boolean',
     description: 'Specify whether the component is currently open or closed',
   },
+  onBeforeClose: sharedArgTypes.onBeforeClose,
+  onClose: sharedArgTypes.onClose,
 };
 
 export const Default = {
@@ -111,7 +147,9 @@ export const Default = {
     border: false,
     highContrast: false,
     align: POPOVER_ALIGNMENT.BOTTOM,
+    alignmentAxisOffset: 0,
     autoAlign: false,
+    backgroundToken: POPOVER_BACKGROUND_TOKEN.LAYER,
     dropShadow: true,
     open: true,
   },
@@ -120,36 +158,29 @@ export const Default = {
     (story) => html`<div class="mt-10 flex justify-center">${story()}</div>`,
   ],
   render: (args) => {
-    const handleClick = () => {
-      const popover = document.querySelector(`${prefix}-popover`);
-      const open = popover?.hasAttribute('open');
-      if (open) {
-        popover?.removeAttribute('open');
-      } else {
-        popover?.setAttribute('open', '');
-      }
-    };
-
     return html`
       <style>
         ${styles}
       </style>
       <cds-popover
         ?open=${args.open}
+        alignment-axis-offset=${args.alignmentAxisOffset}
         ?caret=${args.caret}
         ?border=${args.border}
         ?highContrast=${args.highContrast}
         ?autoalign=${args.autoAlign}
         align=${args.align}
-        ?tabTip=${args.tabTip}
         ?dropShadow=${args.dropShadow}
-        backgroundToken=${args.backgroundToken}>
+        backgroundToken=${args.backgroundToken}
+        @cds-popover-beingclosed=${args.onBeforeClose}
+        @cds-popover-closed=${(event: Event) =>
+          handlePopoverClose(event, args.onClose)}>
         <button
           class="playground-trigger"
           aria-label="Checkbox"
           type="button"
-          aria-expanded=${open}
-          @click="${() => handleClick()}">
+          aria-expanded=${args.open}
+          @click=${togglePopover}>
           ${iconLoader(Checkbox16)}
         </button>
         <cds-popover-content>
@@ -173,23 +204,15 @@ export const ExperimentalAutoAlign = {
     dropShadow: true,
     open: true,
     border: false,
-    backgroundToken: 'layer',
+    align: POPOVER_ALIGNMENT.TOP,
+    alignmentAxisOffset: 0,
+    backgroundToken: POPOVER_BACKGROUND_TOKEN.LAYER,
   },
 
   decorators: [
     (story) => html`<div class="mt-10 flex justify-center">${story()}</div>`,
   ],
   render: (args) => {
-    const handleClick = () => {
-      const popover = document.querySelector(`${prefix}-popover`);
-      const open = popover?.hasAttribute('open');
-      if (open) {
-        popover?.removeAttribute('open');
-      } else {
-        popover?.setAttribute('open', '');
-      }
-    };
-
     requestAnimationFrame(() => {
       document.querySelector('cds-popover')?.scrollIntoView({
         block: 'center',
@@ -206,18 +229,23 @@ export const ExperimentalAutoAlign = {
           left: 2500px; padding-right: 2500px;">
           <cds-popover
             ?open=${args.open}
+            align=${args.align}
+            alignment-axis-offset=${args.alignmentAxisOffset}
             ?caret=${args.caret}
             ?highContrast=${args.highContrast}
             autoalign
             ?dropShadow=${args.dropShadow}
             ?border=${args.border}
-            backgroundToken=${args.backgroundToken}>
+            backgroundToken=${args.backgroundToken}
+            @cds-popover-beingclosed=${args.onBeforeClose}
+            @cds-popover-closed=${(event: Event) =>
+              handlePopoverClose(event, args.onClose)}>
             <button
               class="playground-trigger"
               aria-label="Checkbox"
               type="button"
-              aria-expanded=${open}
-              @click="${() => handleClick()}">
+              aria-expanded=${args.open}
+              @click=${togglePopover}>
               ${iconLoader(Checkbox16)}
             </button>
             <cds-popover-content>
@@ -246,23 +274,15 @@ export const ExperimentalAutoAlignWithBoundary = {
     dropShadow: true,
     open: true,
     border: false,
-    backgroundToken: 'layer',
+    align: POPOVER_ALIGNMENT.TOP,
+    alignmentAxisOffset: 0,
+    backgroundToken: POPOVER_BACKGROUND_TOKEN.LAYER,
   },
 
   decorators: [
     (story) => html`<div class="mt-10 flex justify-center">${story()}</div>`,
   ],
   render: (args) => {
-    const handleClick = () => {
-      const popover = document.querySelector(`${prefix}-popover`);
-      const open = popover?.hasAttribute('open');
-      if (open) {
-        popover?.removeAttribute('open');
-      } else {
-        popover?.setAttribute('open', '');
-      }
-    };
-
     requestAnimationFrame(() => {
       document.querySelector('cds-popover')?.scrollIntoView({
         block: 'center',
@@ -282,19 +302,24 @@ export const ExperimentalAutoAlignWithBoundary = {
         <div style="place-items:center;height:32px;width:32px;">
           <cds-popover
             ?open=${args.open}
+            align=${args.align}
+            alignment-axis-offset=${args.alignmentAxisOffset}
             ?caret=${args.caret}
             ?highContrast=${args.highContrast}
             autoalign-boundary="#boundary"
             autoalign
             ?dropShadow=${args.dropShadow}
             ?border=${args.border}
-            backgroundToken=${args.backgroundToken}>
+            backgroundToken=${args.backgroundToken}
+            @cds-popover-beingclosed=${args.onBeforeClose}
+            @cds-popover-closed=${(event: Event) =>
+              handlePopoverClose(event, args.onClose)}>
             <button
               class="playground-trigger"
               aria-label="Checkbox"
               type="button"
-              aria-expanded=${open}
-              @click="${() => handleClick()}">
+              aria-expanded=${args.open}
+              @click=${togglePopover}>
               ${iconLoader(Checkbox16)}
             </button>
             <cds-popover-content>
@@ -317,6 +342,8 @@ export const ExperimentalAutoAlignWithBoundary = {
 };
 
 const sharedTabTipArgTypes = {
+  backgroundToken: sharedArgTypes.backgroundToken,
+  border: sharedArgTypes.border,
   dropShadow: {
     control: 'boolean',
     description:
@@ -326,39 +353,39 @@ const sharedTabTipArgTypes = {
     control: 'boolean',
     description: 'Specify whether the component is currently open or closed',
   },
+  onBeforeClose: sharedArgTypes.onBeforeClose,
+  onClose: sharedArgTypes.onClose,
 };
 export const TabTip = {
   argTypes: sharedTabTipArgTypes,
   args: {
+    backgroundToken: POPOVER_BACKGROUND_TOKEN.LAYER,
+    border: false,
     dropShadow: true,
     open: true,
   },
   render: (args) => {
-    const handleClick = (id) => {
-      const popover = document.querySelector(id);
-      const open = popover?.hasAttribute('open');
-      if (open) {
-        popover?.removeAttribute('open');
-      } else {
-        popover?.setAttribute('open', '');
-      }
-    };
-
     return html`
       <style>
         ${styles}
       </style>
-      <div class="popover-tabtip-story" style="display: 'flex'">
+      <div class="popover-tabtip-story" style="display: flex">
         <cds-popover
+          backgroundToken=${args.backgroundToken}
+          ?border=${args.border}
           ?dropShadow=${args.dropShadow}
           ?open=${args.open}
           tabTip
           align="bottom-left"
-          id="popover-one">
+          id="popover-one"
+          @cds-popover-beingclosed=${args.onBeforeClose}
+          @cds-popover-closed=${(event: Event) =>
+            handlePopoverClose(event, args.onClose)}>
           <button
             aria-label="Settings"
             type="button"
-            @click="${() => handleClick('#popover-one')}">
+            aria-expanded=${args.open}
+            @click=${togglePopover}>
             ${iconLoader(Settings16)}
           </button>
           <cds-popover-content>
@@ -399,16 +426,20 @@ export const TabTip = {
           </cds-popover-content>
         </cds-popover>
         <cds-popover
+          backgroundToken=${args.backgroundToken}
+          ?border=${args.border}
           ?dropShadow=${args.dropShadow}
-          ?highContrast=${args.highContrast}
           tabTip
           id="popover-two"
           align="bottom-right"
-          backgroundToken=${POPOVER_BACKGROUND_TOKEN.LAYER}>
+          @cds-popover-beingclosed=${args.onBeforeClose}
+          @cds-popover-closed=${(event: Event) =>
+            handlePopoverClose(event, args.onClose)}>
           <button
             aria-label="Settings"
             type="button"
-            @click="${() => handleClick('#popover-two')}">
+            aria-expanded="false"
+            @click=${togglePopover}>
             ${iconLoader(Settings16)}
           </button>
           <cds-popover-content>
@@ -423,11 +454,11 @@ export const TabTip = {
                   <cds-radio-button
                     label-text="Small"
                     value="small"
-                    id="radio-small"></cds-radio-button>
+                    id="radio-small-2"></cds-radio-button>
                   <cds-radio-button
                     label-text="Large"
                     value="large"
-                    id="radio-large"></cds-radio-button>
+                    id="radio-large-2"></cds-radio-button>
                 </cds-radio-button-group>
               </cds-form-item>
               <hr />
@@ -435,15 +466,15 @@ export const TabTip = {
                 <cds-checkbox
                   checked
                   label-text="Name"
-                  id="checkbox-label-1"></cds-checkbox>
+                  id="checkbox-label-4"></cds-checkbox>
                 <cds-checkbox
                   checked
                   label-text="Type"
-                  id="checkbox-label-2"></cds-checkbox>
+                  id="checkbox-label-5"></cds-checkbox>
                 <cds-checkbox
                   checked
                   label-text="Location"
-                  id="checkbox-label-3"></cds-checkbox>
+                  id="checkbox-label-6"></cds-checkbox>
               </cds-checkbox-group>
             </div>
           </cds-popover-content>
@@ -453,9 +484,25 @@ export const TabTip = {
   },
 };
 
+const tabTipAutoAlignArgTypes = {
+  align: sharedAutoAlignArgTypes.align,
+  alignmentAxisOffset: sharedAutoAlignArgTypes.alignmentAxisOffset,
+  backgroundToken: sharedAutoAlignArgTypes.backgroundToken,
+  border: sharedAutoAlignArgTypes.border,
+  dropShadow: sharedAutoAlignArgTypes.dropShadow,
+  highContrast: sharedAutoAlignArgTypes.highContrast,
+  onBeforeClose: sharedAutoAlignArgTypes.onBeforeClose,
+  onClose: sharedAutoAlignArgTypes.onClose,
+  open: sharedAutoAlignArgTypes.open,
+};
+
 export const TabTipExperimentalAutoAlign = {
-  argTypes: sharedTabTipArgTypes,
+  argTypes: tabTipAutoAlignArgTypes,
   args: {
+    align: POPOVER_ALIGNMENT.BOTTOM_END,
+    alignmentAxisOffset: 0,
+    backgroundToken: POPOVER_BACKGROUND_TOKEN.LAYER,
+    border: false,
     highContrast: false,
     dropShadow: true,
     open: true,
@@ -465,16 +512,6 @@ export const TabTipExperimentalAutoAlign = {
     (story) => html`<div class="mt-10 flex justify-center">${story()}</div>`,
   ],
   render: (args) => {
-    const handleClick = () => {
-      const popover = document.querySelector(`${prefix}-popover`);
-      const open = popover?.hasAttribute('open');
-      if (open) {
-        popover?.removeAttribute('open');
-      } else {
-        popover?.setAttribute('open', '');
-      }
-    };
-
     requestAnimationFrame(() => {
       document.querySelector('cds-popover')?.scrollIntoView({
         block: 'center',
@@ -491,16 +528,25 @@ export const TabTipExperimentalAutoAlign = {
           left: 2500px; padding-right: 2500px;">
           <cds-popover
             ?open=${args.open}
+            align=${args.align}
+            alignment-axis-offset=${args.alignmentAxisOffset}
+            backgroundToken=${args.backgroundToken}
+            ?border=${args.border}
             ?highContrast=${args.highContrast}
             autoalign
             tabTip
-            ?dropShadow=${args.dropShadow}>
-            <div
+            ?dropShadow=${args.dropShadow}
+            @cds-popover-beingclosed=${args.onBeforeClose}
+            @cds-popover-closed=${(event: Event) =>
+              handlePopoverClose(event, args.onClose)}>
+            <button
               class="playground-trigger"
-              aria-expanded=${open}
-              @click="${() => handleClick()}">
+              aria-label="Checkbox"
+              type="button"
+              aria-expanded=${args.open}
+              @click=${togglePopover}>
               ${iconLoader(Checkbox16)}
-            </div>
+            </button>
             <cds-popover-content>
               <div class="p-3">
                 <p class="popover-title">
