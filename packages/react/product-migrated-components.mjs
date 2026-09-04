@@ -12,6 +12,7 @@
  * stories and MDX files.
  */
 export const productMigratedStoryGlobs = [
+  '../src/components/ConditionBuilder/ConditionBuilder.stories.js',
   '../src/components/ActionSet/ActionSet.stories.js',
   '../src/components/NotificationsPanel/NotificationsPanel.stories.js',
   '../src/components/BigNumber/BigNumber.stories.js',
@@ -40,6 +41,7 @@ export const productMigratedStoryGlobs = [
  *   2. Add its export to src/index.ts.
  */
 export const excludeProductsComponents = [
+  'src/components/ConditionBuilder/**/*',
   'src/components/BigNumber/**/*',
   'src/components/Coachmark/**/*',
   'src/components/Guidebanner/**/*',

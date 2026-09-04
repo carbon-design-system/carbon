@@ -1,0 +1,88 @@
+//
+// Copyright IBM Corp. 2024, 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../../config' as *;
+@use '../../theme' as *;
+@use '../../spacing' as *;
+@use 'condition-builder-condition';
+@use 'condition-builder-item';
+
+/// ConditionBuilder styles
+/// @access public
+/// @group condition-builder
+@mixin condition-builder {
+  $block-class: #{$prefix}--condition-builder;
+
+  @include condition-builder-condition.condition-builder-condition;
+  @include condition-builder-item.condition-builder-item;
+
+  // ── Layout ────────────────────────────────────────────────────────────────
+
+  .#{$block-class}__condition-builder__group {
+    display: flex;
+  }
+
+  .#{$block-class}__visible {
+    visibility: visible;
+  }
+
+  .#{$block-class}__hidden {
+    visibility: hidden;
+  }
+
+  .#{$block-class}__condition-wrapper {
+    display: flex;
+    flex-flow: row wrap;
+  }
+
+  .#{$block-class}__gap {
+    margin-inline-end: $spacing-01;
+  }
+
+  .#{$block-class}__gap-bottom {
+    margin-block-end: $spacing-01;
+  }
+
+  .#{$block-class}__gap-left {
+    margin-inline-start: $spacing-01;
+  }
+
+  .#{$block-class}__condition-block {
+    display: flex;
+    flex-direction: row;
+    inline-size: fit-content;
+  }
+
+  .#{$block-class}__content-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: $spacing-02;
+  }
+
+  .#{$block-class}__heading {
+    margin-block: $spacing-03;
+  }
+
+  .#{$block-class}__Hierarchical
+    .#{$block-class}__actions-container
+    .#{$block-class}__condition-wrapper {
+    flex-direction: column;
+  }
+
+  .#{$block-class}__group-separator {
+    margin-block-start: $spacing-02;
+  }
+
+  .#{$block-class}__add-group,
+  .#{$block-class}__group-separator {
+    inline-size: fit-content;
+  }
+
+  .#{$block-class}__tooltip {
+    word-break: break-all;
+  }
+}
