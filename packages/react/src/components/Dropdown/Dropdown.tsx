@@ -63,6 +63,7 @@ import {
   isComponentElement,
   isItemDisabled,
 } from '../../internal';
+import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
 
 const { ItemMouseMove, MenuMouseLeave, ToggleButtonBlur, FunctionCloseMenu } =
   useSelect.stateChangeTypes as UseSelectInterface['stateChangeTypes'] & {
@@ -515,6 +516,8 @@ const Dropdown = React.forwardRef(
     };
 
     const buttonRef = useRef<HTMLButtonElement>(null);
+    const titleRef = useRef<HTMLLabelElement>(null);
+    const labelRef = useRef<HTMLSpanElement>(null);
     const mergedRef = mergeRefs<HTMLButtonElement>(
       toggleButtonProps.ref,
       ref,
@@ -615,14 +618,22 @@ const Dropdown = React.forwardRef(
     const labelProps = isValidElement(titleText)
       ? { id: allLabelProps.id }
       : allLabelProps;
+    useNoInteractiveChildren(
+      titleRef,
+      'The Dropdown component `titleText` prop must have no interactive content'
+    );
+    useNoInteractiveChildren(
+      labelRef,
+      'The Dropdown component `label` prop must have no interactive content'
+    );
 
     return (
       <div className={wrapperClasses} {...other}>
-        {titleText && (
-          <label className={titleClasses} {...labelProps}>
+        {titleText ? (
+          <label className={titleClasses} {...labelProps} ref={titleRef}>
             {titleText}
           </label>
-        )}
+        ) : null}
         <ListBox
           onFocus={handleFocus}
           onBlur={handleFocus}
@@ -672,7 +683,7 @@ const Dropdown = React.forwardRef(
             {...toggleButtonProps}
             {...readOnlyEventHandlers}
             ref={mergedRef}>
-            <span className={`${prefix}--list-box__label`}>
+            <span className={`${prefix}--list-box__label`} ref={labelRef}>
               {selectedItem
                 ? renderSelectedItem
                   ? renderSelectedItem(selectedItem)
