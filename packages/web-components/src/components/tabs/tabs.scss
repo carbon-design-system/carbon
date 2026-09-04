@@ -88,6 +88,7 @@ $inset-transition: inset 110ms motion(standard, productive);
 
 :host(#{$prefix}-tabs[size='sm']) {
   @extend .#{$prefix}--layout--size-sm;
+  --#{$prefix}-tabs-icon-only-badge-indicator-offset: #{$spacing-02};
 }
 
 :host(#{$prefix}-tabs[size='md']) {
@@ -318,8 +319,14 @@ $inset-transition: inset 110ms motion(standard, productive);
       )
   )
   #{$prefix}-badge-indicator {
-  margin-block-start: $spacing-02;
-  margin-inline-end: $spacing-02;
+  margin-block-start: var(
+    --#{$prefix}-tabs-icon-only-badge-indicator-offset,
+    #{$spacing-03}
+  );
+  margin-inline-end: var(
+    --#{$prefix}-tabs-icon-only-badge-indicator-offset,
+    #{$spacing-03}
+  );
 }
 
 :host(#{$prefix}-tab[icon-only]),
@@ -339,6 +346,10 @@ $inset-transition: inset 110ms motion(standard, productive);
     --#{$prefix}-tooltip-padding-block: #{convert.to-rem(2px)};
     --#{$prefix}-popover-caret-width: #{convert.to-rem(8px)};
     --#{$prefix}-popover-caret-height: #{convert.to-rem(4px)};
+    --#{$prefix}-popover-offset: #{convert.to-rem(8px)};
+  }
+
+  #{$prefix}-tooltip-content {
     --#{$prefix}-popover-offset: #{convert.to-rem(8px)};
   }
 

@@ -1,0 +1,57 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/spacing';
+
+.card-story__viewport {
+  padding-block-start: spacing.$spacing-07; // 2rem
+}
+
+// Storybook disabled toggle column — aligns the toggle button to the bottom
+.card-story-disabled-toggle {
+  display: flex;
+  align-items: flex-end;
+  padding-block-end: spacing.$spacing-05;
+}
+
+.story-time {
+  display: flex;
+  align-items: center;
+  padding: 0 spacing.$spacing-05;
+  font-size: calc(spacing.$spacing-04 + spacing.$spacing-01);
+  gap: spacing.$spacing-03;
+}
+
+// Metric pair row — used in the WithChart story to lay out two BigNumbers side by side
+.card-story-metrics {
+  display: flex;
+  gap: spacing.$spacing-07; // 2rem
+  padding-block-end: spacing.$spacing-05;
+}
+
+// Body text above the chart in Example 1 of the WithChart story
+.card-story-chart-body-text {
+  padding-block-end: spacing.$spacing-05;
+}
+
+// Metadata row in the GetStarted card footer
+.card-story-get-started-meta {
+  display: flex;
+  flex: 1 0 0;
+  align-items: center;
+  gap: spacing.$spacing-05;
+}
+
+.card-story-get-started-meta__item {
+  display: flex;
+  align-items: center;
+  font-size: 0.75rem; // label-01
+  gap: spacing.$spacing-02;
+  letter-spacing: 0.32px;
+  line-height: 1rem;
+  white-space: nowrap;
+}

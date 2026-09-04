@@ -1,11 +1,9 @@
 /**
-* Copyright IBM Corp. 2019, 2024
+* Copyright IBM Corp. 2019, 2026
 *
 * This source code is licensed under the Apache-2.0 license found in the
 * LICENSE file in the root directory of this source tree.
 */
-@use 'sass:map';
-
 @use '@carbon/styles/scss/config' as *;
 @use '@carbon/styles/scss/type' as *;
 @use '@carbon/styles/scss/theme' as *;
@@ -16,25 +14,13 @@
 @use '@carbon/styles/scss/utilities/ai-gradient' as *;
 @use '@carbon/styles/scss/components/slug/index' as *;
 
-// importing tag color tokens for the styling slug in tag component
-@use '@carbon/styles/scss/components/tag/tokens' as tag-tokens;
-
-$colorMap: (
-  'red': tag-tokens.$tag-color-red,
-  'magenta': tag-tokens.$tag-color-magenta,
-  'purple': tag-tokens.$tag-color-purple,
-  'blue': tag-tokens.$tag-color-blue,
-  'cyan': tag-tokens.$tag-color-cyan,
-  'teal': tag-tokens.$tag-color-teal,
-  'green': tag-tokens.$tag-color-green,
-  'gray': tag-tokens.$tag-color-gray,
-  'cool-gray': tag-tokens.$tag-color-cool-gray,
-  'warm-gray': tag-tokens.$tag-color-warm-gray,
-  'high-contrast': $text-inverse,
-);
-
 :host(#{$prefix}-ai-label) {
   @extend .#{$prefix}--slug;
+
+  .#{$prefix}--slug__button {
+    border-color: transparent;
+    color: currentColor;
+  }
 
   .#{$prefix}--slug__text {
     @include font-family('sans');
@@ -315,22 +301,29 @@ $colorMap: (
   }
 }
 
-@each $color, $token in $colorMap {
-  :host(#{$prefix}-ai-label[tag='#{$color}']) {
-    .#{$prefix}--slug__text {
-      color: $token;
-    }
+:host(#{$prefix}-ai-label[tag]) {
+  .#{$prefix}--slug__button {
+    margin-inline-start: to-rem(1px);
+  }
 
-    .#{$prefix}--slug__text::before {
-      background: $token;
-    }
+  .#{$prefix}--slug__text::before {
+    background-color: currentColor;
+  }
 
-    button:hover {
-      border-color: $token;
+  @media (any-hover: hover) {
+    .#{$prefix}--slug__button:hover {
+      border-color: currentColor;
+      background: transparent;
+      box-shadow: none;
+      color: currentColor;
 
       .#{$prefix}--slug__text::before {
-        background-color: $token;
+        background-color: currentColor;
       }
+    }
+
+    .#{$prefix}--slug__button:hover:active {
+      color: $text-secondary;
     }
   }
 }

@@ -20,16 +20,16 @@ jobs:
           - package: react
             name: React
             destination: v12-react-storybook
-            cname: v2-react.carbondesignsystem.com
+            cname: v12-react.carbondesignsystem.com
           - package: web-components
             name: Web Components
             destination: v12-web-components-storybook
-            cname: v3-web-components.carbondesignsystem.com
+            cname: v12-web-components.carbondesignsystem.com
     steps:
-      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Use Node.js version from .nvmrc
-        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version-file: '.nvmrc'
       - name: Install dependencies

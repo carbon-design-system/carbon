@@ -138,6 +138,18 @@ class CDSDropdown extends ValidityMixin(
   protected _slotTitleTextNode!: HTMLSlotElement;
 
   /**
+   * The `<slot>` element for the AI label in the shadow DOM.
+   */
+  @query("slot[name='ai-label']")
+  private _slotAILabelNode!: HTMLSlotElement;
+
+  /**
+   * The `<slot>` element for the slug in the shadow DOM.
+   */
+  @query("slot[name='slug']")
+  private _slotSlugNode!: HTMLSlotElement;
+
+  /**
    * @param itemToSelect A dropdown item. Absense of this argument means clearing selection.
    * @returns `true` if the selection of this dropdown should change if the given item is selected upon user interaction.
    */
@@ -1149,19 +1161,17 @@ class CDSDropdown extends ValidityMixin(
       this.removeAttribute('ai-label');
     }
 
-    const label = this.shadowRoot?.querySelector("slot[name='ai-label']");
+    const label = this._slotAILabelNode;
     if (label) {
       label?.classList.toggle(
         `${prefix}--slug--revert`,
         this.querySelector(`${prefix}-ai-label`)?.hasAttribute('revert-active')
       );
     } else {
-      this.shadowRoot
-        ?.querySelector("slot[name='slug']")
-        ?.classList.toggle(
-          `${prefix}--slug--revert`,
-          this.querySelector(`${prefix}-slug`)?.hasAttribute('revert-active')
-        );
+      this._slotSlugNode?.classList.toggle(
+        `${prefix}--slug--revert`,
+        this.querySelector(`${prefix}-slug`)?.hasAttribute('revert-active')
+      );
     }
 
     if (
@@ -1296,13 +1306,6 @@ class CDSDropdown extends ValidityMixin(
     const inline = type === DROPDOWN_TYPE.INLINE;
     const normalizedProps = this._normalizedProps;
 
-    let activeDescendantFallback: string | undefined;
-    if (open && !activeDescendant) {
-      const constructor = this.constructor as typeof CDSDropdown;
-      const items = this.querySelectorAll(constructor.selectorItem);
-      activeDescendantFallback = items[0]?.id;
-    }
-
     const helperClasses = classMap({
       [`${prefix}--form__helper-text`]: true,
       [`${prefix}--form__helper-text--disabled`]: normalizedProps.disabled,
@@ -1329,11 +1332,12 @@ class CDSDropdown extends ValidityMixin(
           class: `${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`,
           'aria-label': toggleLabel,
         });
-    const helperMessage = normalizedProps.invalid
+    const validationMessage = normalizedProps.invalid
       ? invalidText
       : normalizedProps.warn
         ? warnText
-        : helperText;
+        : undefined;
+    const helperMessage = validationMessage ?? helperText;
     const menuBody = html`
       <div
         aria-labelledby="${ifDefined(ariaLabel ? undefined : 'dropdown-label')}"
@@ -1387,7 +1391,7 @@ class CDSDropdown extends ValidityMixin(
             !shouldTriggerBeFocusable
               ? undefined
               : open
-                ? (activeDescendant ?? activeDescendantFallback)
+                ? (activeDescendant ?? '')
                 : ''
           )}">
           ${this._renderPrecedingLabel()}${this._renderLabel()}${this._renderFollowingLabel()}
@@ -1402,15 +1406,21 @@ class CDSDropdown extends ValidityMixin(
         <slot name="slug" @slotchange=${handleAILabelSlotChange}></slot>
         ${menuBody}
       </div>
-      <div
-        part="helper-text"
-        class="${helperClasses}"
-        ?hidden="${(inline && !this.warn && !normalizedProps.invalid) ||
-        !hasHelperText}">
-        <slot name="helper-text" @slotchange="${handleSlotchangeHelperText}"
-          >${helperMessage}</slot
-        >
-      </div>
+      ${this.isFluid
+        ? validationMessage
+          ? html`<div part="helper-text" class="${helperClasses}">
+              ${validationMessage}
+            </div>`
+          : null
+        : html`<div
+            part="helper-text"
+            class="${helperClasses}"
+            ?hidden="${(inline && !this.warn && !normalizedProps.invalid) ||
+            !hasHelperText}">
+            <slot name="helper-text" @slotchange="${handleSlotchangeHelperText}"
+              >${helperMessage}</slot
+            >
+          </div>`}
     `;
   }
 
