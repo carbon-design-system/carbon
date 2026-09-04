@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -76,7 +76,6 @@ type LinkComponent = <T extends React.ElementType = 'a'>(
 ) => React.ReactElement | any;
 
 // First create the component with basic types
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const LinkBase = React.forwardRef<
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   any,
@@ -156,10 +155,11 @@ const LinkBase = React.forwardRef<
     );
   }
 );
+
+LinkBase.displayName = 'Link';
+
 const Link = LinkBase as LinkComponent;
 
-// @ts-expect-error - `displayName` isn't typed.
-Link.displayName = 'Link';
 // @ts-expect-error - `propTypes` isn't typed.
 Link.propTypes = {
   /**

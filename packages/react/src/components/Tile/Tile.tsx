@@ -457,7 +457,6 @@ export interface SelectableTileProps extends HTMLAttributes<HTMLDivElement> {
   value?: string | number;
 }
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 export const SelectableTile = React.forwardRef<
   HTMLDivElement,
   SelectableTileProps
@@ -589,6 +588,8 @@ export const SelectableTile = React.forwardRef<
     );
   }
 );
+
+SelectableTile.displayName = 'SelectableTile';
 
 SelectableTile.propTypes = {
   children: PropTypes.node,
