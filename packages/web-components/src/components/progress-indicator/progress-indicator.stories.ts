@@ -11,11 +11,10 @@ import { action } from 'storybook/actions';
 import './index';
 
 const args = {
-  currentIndex: 0,
+  currentIndex: 1,
   vertical: false,
   spaceEqually: false,
-  iconLabel: '',
-  secondaryLabel: 'Optional label',
+  secondaryLabel: 'Recommended',
 };
 
 const argTypes = {
@@ -33,14 +32,12 @@ const argTypes = {
     description:
       'Specify whether progress steps should be split equally in size (horizontal only).',
   },
-  iconLabel: {
-    table: {
-      disable: true,
-    },
-  },
   secondaryLabel: {
     control: 'text',
     description: 'The secondary progress label.',
+    table: {
+      category: 'ProgressStep',
+    },
   },
 };
 
@@ -53,54 +50,74 @@ export const Default = {
       ?space-equally="${spaceEqually}"
       current-index="${currentIndex}">
       <cds-progress-step
-        description="Step 1: Getting started with Carbon Design System"
-        label="First step"
-        secondary-label="${ifDefined(secondaryLabel)}"
-        complete></cds-progress-step>
+        description="Select the plan that best fits your team"
+        label="Choose a plan"
+        secondary-label="${ifDefined(secondaryLabel)}"></cds-progress-step>
       <cds-progress-step
-        description="Step 2: Getting started with Carbon Design System"
-        label="Second step with tooltip"
-        current></cds-progress-step>
+        description="Enter your account and contact information"
+        label="Set up your account"></cds-progress-step>
       <cds-progress-step
-        description="Step 3: Getting started with Carbon Design System"
-        label="Third step with tooltip"></cds-progress-step>
+        description="Choose workspace defaults and permissions"
+        label="Configure your workspace"></cds-progress-step>
       <cds-progress-step
-        description="Step 4: Getting started with Carbon Design System"
-        label="Fourth step"
-        secondary-label="Example invalid step"
+        description="Add collaborators and assign their roles"
+        label="Invite team members"
+        secondary-label="Action required"
         invalid></cds-progress-step>
       <cds-progress-step
         disabled
-        description="Step 5: Getting started with Carbon Design System"
-        label="Fifth step"></cds-progress-step>
+        description="Confirm your settings and create the workspace"
+        label="Review and launch"></cds-progress-step>
     </cds-progress-indicator>
   `,
 };
 
 export const Interactive = {
   args: {
-    onChange: action('Clicked'),
+    currentIndex: 1,
+    onChange: action('onChange'),
+    spaceEqually: false,
+    vertical: false,
   },
-  render: ({ onChange }) => html`
-    <cds-progress-indicator current-index="1" .onChange=${onChange}>
+  argTypes: {
+    currentIndex: {
+      ...argTypes.currentIndex,
+      control: { type: 'number', min: 0, max: 2 },
+    },
+    onChange: {
+      action: 'onChange',
+    },
+    spaceEqually: argTypes.spaceEqually,
+    vertical: argTypes.vertical,
+  },
+  render: ({ currentIndex, onChange, spaceEqually, vertical }) => html`
+    <cds-progress-indicator
+      current-index="${currentIndex}"
+      .onChange=${onChange}
+      ?space-equally="${spaceEqually}"
+      ?vertical="${vertical}">
       <cds-progress-step
-        label="Click me"
-        description="Step 1: Register an onChange event"
-        complete></cds-progress-step>
+        label="Create your account"
+        description="Enter your account and contact information"></cds-progress-step>
       <cds-progress-step
-        label="Really long label"
-        description="The progress indicator will listen for clicks on the steps"
-        current></cds-progress-step>
+        label="Configure workspace settings and permissions"
+        description="Choose workspace defaults and assign access levels"></cds-progress-step>
       <cds-progress-step
-        label="Third step"
-        description="The progress indicator will listen for clicks on the steps"></cds-progress-step>
+        label="Invite team members"
+        description="Add collaborators and review their roles"></cds-progress-step>
     </cds-progress-indicator>
   `,
 };
 
 export const Skeleton = {
-  render: () => html`
-    <cds-progress-indicator-skeleton>
+  args: {
+    vertical: false,
+  },
+  argTypes: {
+    vertical: argTypes.vertical,
+  },
+  render: ({ vertical }) => html`
+    <cds-progress-indicator-skeleton ?vertical="${vertical}">
       <cds-progress-step-skeleton></cds-progress-step-skeleton>
       <cds-progress-step-skeleton></cds-progress-step-skeleton>
       <cds-progress-step-skeleton></cds-progress-step-skeleton>
