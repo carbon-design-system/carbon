@@ -97,7 +97,7 @@ export const Default = {
         <div
           class="user-avatar-story__theme-section user-avatar-story__theme-section--white">
           <p class="user-avatar-story__theme-text">
-            useTheme reveals theme: 'white', isDark: 'false'
+            background theme: 'white', theme: 'light'
           </p>
           <cds-user-avatar
             tooltip-alignment=${args.tooltipAlignment}
@@ -111,7 +111,7 @@ export const Default = {
         <div
           class="user-avatar-story__theme-section user-avatar-story__theme-section--g10">
           <p class="user-avatar-story__theme-text">
-            useTheme reveals theme: 'g10', isDark: 'false'
+            background theme: 'g10', theme: 'light'
           </p>
           <cds-user-avatar
             tooltip-alignment=${args.tooltipAlignment}
@@ -125,7 +125,7 @@ export const Default = {
         <div
           class="user-avatar-story__theme-section user-avatar-story__theme-section--g90">
           <p class="user-avatar-story__theme-text">
-            useTheme reveals theme: 'g90', isDark: 'true'
+            background theme: 'g90', theme: 'dark'
           </p>
           <cds-user-avatar
             tooltip-alignment=${args.tooltipAlignment}
@@ -139,7 +139,7 @@ export const Default = {
         <div
           class="user-avatar-story__theme-section user-avatar-story__theme-section--g100">
           <p class="user-avatar-story__theme-text">
-            useTheme reveals theme: 'g100', isDark: 'true'
+            background theme: 'g100', theme: 'dark'
           </p>
           <cds-user-avatar
             tooltip-alignment=${args.tooltipAlignment}

@@ -68,10 +68,16 @@ describe('cds-user-avatar', () => {
     expect(bgClass).to.exist;
   });
 
-  it('applies className to the containing node', async () => {
+  it('should render tooltip trigger with aria-label when tooltipText is supplied', async () => {
     const el = await fixture(template({ ...defaultProps }));
-    el.classList.add('test');
-    expect(el.getAttribute('class')).to.include('test');
+    await el.updateComplete;
+    const trigger = el.shadowRoot?.querySelector(
+      `.${blockClass}__tooltip-trigger`
+    );
+    expect(trigger).to.exist;
+    expect(trigger.getAttribute('aria-label')).to.equal(
+      defaultProps.tooltipText
+    );
   });
 
   it('should return appropriately sized circle based on size prop', async () => {
@@ -137,7 +143,9 @@ describe('cds-user-avatar', () => {
       })
     );
     await el.updateComplete;
-    const imagePath = el.shadowRoot?.querySelector('img')?.getAttribute('src');
-    expect(typeof imagePath).to.equal('string');
+    const img = el.shadowRoot?.querySelector('img');
+    expect(img).to.exist;
+    expect(img.getAttribute('src')).to.equal('mock-image-path');
+    expect(img.getAttribute('alt')).to.equal('test alt text');
   });
 });

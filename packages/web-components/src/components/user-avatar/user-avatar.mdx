@@ -45,14 +45,18 @@ demonstrate how the backgroundColor changes based on the theme prop.
 
 ### With Icon
 
-The user avatar with profile picture
+For a custom icon, specify the slot by adding the `slot="rendericon"` attribute
+to the element.
 
 ```html
 <cds-user-avatar
-  tooltip-alignment="right"
-  tooltip-text="TW, Thomas J. Watson user profile"
+  name="Thomas J. Watson"
+  background-color="order-1-cyan"
   size="md"
+  tooltip-text="TW, Thomas J. Watson user profile"
+  tooltip-alignment="right"
   theme="light">
+  ${iconLoader(Group, { slot: 'rendericon' })}
 </cds-user-avatar>
 ```
 
@@ -62,17 +66,16 @@ The user avatar with profile picture
 
 ### With Image
 
-For a custom icon, specify the slot by adding the `slot="rendericon"` attribute
-to the element.
+For a profile picture, pass a full image URL to the `image` attribute and a
+description to `image-description` for screen readers.
 
 ```html
 <cds-user-avatar
-  name="Thomas J. Watson"
-  background-color="order-11-purple"
-  size="lg"
+  tooltip-alignment="right"
   tooltip-text="TW, Thomas J. Watson user profile"
-  tooltip-alignment="right">
-  ${Group({ slot: 'rendericon' })}
+  size="md"
+  image="https://example.com/avatar.png"
+  image-description="Avatar of Thomas J. Watson">
 </cds-user-avatar>
 ```
 

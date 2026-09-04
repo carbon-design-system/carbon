@@ -6,7 +6,7 @@
  */
 
 import { LitElement, html } from 'lit';
-import { property } from 'lit/decorators.js';
+import { property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { prefix } from '../../globals/settings';
 import HostListenerMixin from '../../globals/mixins/host-listener';
@@ -79,6 +79,18 @@ class CDSUserAvatar extends HostListenerMixin(LitElement) {
   @property({ reflect: true })
   theme;
 
+  @state()
+  private _hasRenderIcon = false;
+
+  connectedCallback() {
+    super.connectedCallback();
+    this._hasRenderIcon = this.querySelector('[slot="rendericon"]') !== null;
+  }
+
+  private _onSlotChange() {
+    this._hasRenderIcon = this.querySelector('[slot="rendericon"]') !== null;
+  }
+
   render() {
     const getItem = () => {
       if (this.image) {
@@ -87,12 +99,14 @@ class CDSUserAvatar extends HostListenerMixin(LitElement) {
           [`${blockClass}__photo--${this.size}`]: this.size,
         });
         return html` <img
-          alt="${this.imageDescription}"
+          alt="${this.imageDescription ?? ''}"
           src="${this.image}"
           class="${imageClasses}" />`;
       }
-      if (this.querySelector('[slot="rendericon"]')) {
-        return html`<slot name="rendericon"></slot>`;
+      if (this._hasRenderIcon) {
+        return html`<slot
+          name="rendericon"
+          @slotchange=${this._onSlotChange}></slot>`;
       }
       if (this.name) {
         const parts = this.name?.split(' ') || [];
@@ -126,14 +140,14 @@ class CDSUserAvatar extends HostListenerMixin(LitElement) {
     if (tooltipText) {
       return html`<cds-tooltip
         align=${tooltipAlignment}
-        aria-label=${tooltipText}
         class=${`${blockClass}__tooltip ${prefix}--icon-tooltip`}>
-        <button class=${`${blockClass}__tooltip-trigger`} role="button">
+        <button
+          class=${`${blockClass}__tooltip-trigger`}
+          type="button"
+          aria-label=${tooltipText}>
           ${Avatar()}
         </button>
-        <cds-tooltip-content
-          class=${`${blockClass}__tooltip-content`}
-          id="content">
+        <cds-tooltip-content class=${`${blockClass}__tooltip-content`}>
           ${tooltipText}
         </cds-tooltip-content>
       </cds-tooltip>`;
