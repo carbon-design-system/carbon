@@ -30,6 +30,7 @@ import { FormContext } from '../FluidForm';
 import { noopFn } from '../../internal/noopFn';
 import { Tooltip } from '../Tooltip';
 import { isSearchValuePresent } from './utils';
+import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
 
 type InputPropsBase = Omit<HTMLAttributes<HTMLInputElement>, 'onChange'>;
 export interface SearchProps extends InputPropsBase {
@@ -162,6 +163,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
     const inputRef = useRef<HTMLInputElement>(null);
     const ref = useMergedRefs([forwardRef, inputRef]);
     const expandButtonRef = useRef<HTMLDivElement>(null);
+    const labelRef = useRef<HTMLLabelElement>(null);
     const inputId = useId('search-input');
     const uniqueId = id || inputId;
     const searchId = `${uniqueId}-search`;
@@ -288,6 +290,10 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
       ) : (
         magnifierButton
       );
+    useNoInteractiveChildren(
+      labelRef,
+      'The Search component `labelText` prop must have no interactive content'
+    );
 
     return (
       <div role="search" aria-labelledby={searchId} className={searchClasses}>
@@ -295,7 +301,11 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
         {/* the magnifier is used in ExpandableSearch as a click target to expand,
       however, it does not need a keyboard event bc the input element gets focus on keyboard nav and expands that way*/}
 
-        <label id={searchId} htmlFor={uniqueId} className={`${prefix}--label`}>
+        <label
+          id={searchId}
+          htmlFor={uniqueId}
+          className={`${prefix}--label`}
+          ref={labelRef}>
           {labelText}
         </label>
         <input
