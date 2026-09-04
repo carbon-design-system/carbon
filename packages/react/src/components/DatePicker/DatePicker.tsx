@@ -695,7 +695,8 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
           datePickerType === 'range' &&
           event.target === startInputField.current &&
           calendar.selectedDates.length === 1 &&
-          endInputField.current
+          endInputField.current &&
+          !endInputField.current.disabled
         ) {
           event.preventDefault();
           endInputField.current.focus();

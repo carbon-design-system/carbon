@@ -1393,6 +1393,44 @@ describe('Range date picker', () => {
     expect(document.activeElement).toHaveClass('flatpickr-day');
   });
 
+  it('should not trap Tab on start input when the end input is disabled', async () => {
+    const ref = createRef();
+    render(
+      <DatePicker
+        ref={ref}
+        datePickerType="range"
+        onChange={() => {}}
+        dateFormat="m/d/Y">
+        <DatePickerInput id="disabled-end-start-id" labelText="Start date" />
+        <DatePickerInput
+          id="disabled-end-end-id"
+          labelText="End date"
+          disabled
+        />
+      </DatePicker>
+    );
+
+    const startInput = screen.getByLabelText('Start date');
+
+    await userEvent.tab();
+    expect(startInput).toHaveFocus();
+    await userEvent.tab();
+    expect(document.activeElement).toHaveClass('flatpickr-day');
+    await userEvent.click(document.activeElement);
+
+    expect(ref.current.calendar.selectedDates).toHaveLength(1);
+
+    // Simulate focus returning to the start input.
+    startInput.focus();
+    expect(startInput).toHaveFocus();
+
+    await userEvent.tab();
+
+    // focus shouldn't stay stuck on start input when end input can't
+    // receive focus
+    expect(startInput).not.toHaveFocus();
+  });
+
   it('should close calendar with range type on focus loss', async () => {
     const onClose = jest.fn();
     render(
