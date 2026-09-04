@@ -27,7 +27,7 @@
   .#{$prefix}--dropdown__wrapper--inline {
     display: inline-grid;
     align-items: center;
-    grid-gap: 0 convert.to-rem(8px);
+    gap: 0 convert.to-rem(8px);
     grid-template: auto / auto min-content auto;
 
     &:has(.#{$prefix}--label.#{$prefix}--visually-hidden) {

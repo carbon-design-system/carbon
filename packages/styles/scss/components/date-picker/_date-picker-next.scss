@@ -118,7 +118,8 @@
     }
 
     // Handle viewport overflow
-    position-try-options: --bottom-left, --top-left, --bottom-right, --top-right;
+    position-try-fallbacks: --bottom-left, --top-left, --bottom-right,
+      --top-right;
   }
 
   .#{$prefix}--date-picker__calendar.open {
@@ -304,7 +305,7 @@
     padding: $spacing-03;
     border: none;
     background-color: $layer;
-    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 6px 0 rgb(0, 0, 0, 0.2);
     inline-size: rem(288px);
     max-inline-size: rem(288px);
     outline: none;
