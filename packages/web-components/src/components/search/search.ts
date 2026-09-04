@@ -97,6 +97,10 @@ class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleExpand(e: Event) {
+    if (this.disabled) {
+      return;
+    }
+
     // Check if the click came from the magnifier area
     const path = (e.composedPath && (e.composedPath() as unknown[])) || [];
     const isMagnifierClick = path.some((n: unknown) =>
@@ -123,6 +127,10 @@ class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore
   private _handleKeys(event: KeyboardEvent) {
+    if (this.disabled) {
+      return;
+    }
+
     const key = event.key;
 
     // Esc only works when the input is the active element
