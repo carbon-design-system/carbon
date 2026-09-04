@@ -20,6 +20,37 @@ const monthToStr = (monthNumber: number, shorthand: boolean, locale: Locale) =>
   locale.months[shorthand ? 'shorthand' : 'longhand'][monthNumber];
 
 /**
+ * Updates the text-based month UI with the current Flatpickr month.
+ * @param fp The Flatpickr instance.
+ * @param config Plugin configuration.
+ */
+export const updateCurrentMonth = (
+  fp: FlatpickrInstance,
+  config: DatePickerMonthSelectPluginConfig
+) => {
+  const { yearElements, currentMonth, l10n } = fp;
+  const {
+    shorthand,
+    selectorFlatpickrMonthYearContainer,
+    selectorFlatpickrCurrentMonth,
+  } = config;
+  const monthStr = monthToStr(currentMonth, shorthand === true, l10n);
+  yearElements.forEach((elem) => {
+    const currentMonthContainer = elem.closest(
+      selectorFlatpickrMonthYearContainer
+    );
+    if (currentMonthContainer) {
+      forEach(
+        currentMonthContainer.querySelectorAll(selectorFlatpickrCurrentMonth),
+        (monthElement) => {
+          monthElement.textContent = monthStr;
+        }
+      );
+    }
+  });
+};
+
+/**
  * The configuration for the Flatpickr plugin to use text instead of `<select>` for month picker.
  */
 export interface DatePickerMonthSelectPluginConfig {
@@ -109,34 +140,6 @@ export default (config: DatePickerMonthSelectPluginConfig): Plugin =>
     };
 
     /**
-     * Updates the text-based month UI with the latest selected date.
-     */
-    const updateCurrentMonth = () => {
-      const { yearElements, currentMonth, l10n } = fp;
-      const {
-        shorthand,
-        selectorFlatpickrMonthYearContainer,
-        selectorFlatpickrCurrentMonth,
-      } = config;
-      const monthStr = monthToStr(currentMonth, shorthand === true, l10n);
-      yearElements.forEach((elem) => {
-        const currentMonthContainer = elem.closest(
-          selectorFlatpickrMonthYearContainer
-        );
-        if (currentMonthContainer) {
-          forEach(
-            currentMonthContainer.querySelectorAll(
-              selectorFlatpickrCurrentMonth
-            ),
-            (monthElement) => {
-              monthElement.textContent = monthStr;
-            }
-          );
-        }
-      });
-    };
-
-    /**
      * Registers this Flatpickr plugin.
      */
     const register = () => {
@@ -144,9 +147,9 @@ export default (config: DatePickerMonthSelectPluginConfig): Plugin =>
     };
 
     return {
-      onMonthChange: updateCurrentMonth,
-      onValueUpdate: updateCurrentMonth,
-      onOpen: updateCurrentMonth,
-      onReady: [setupElements, updateCurrentMonth, register],
+      onMonthChange: () => updateCurrentMonth(fp, config),
+      onValueUpdate: () => updateCurrentMonth(fp, config),
+      onOpen: () => updateCurrentMonth(fp, config),
+      onReady: [setupElements, () => updateCurrentMonth(fp, config), register],
     };
   };

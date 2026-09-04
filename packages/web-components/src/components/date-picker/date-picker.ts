@@ -25,7 +25,7 @@ import cssClassPlugin from './css-class-plugin';
 import fixEventsPlugin from './fix-events-plugin';
 import focusPlugin from './focus-plugin';
 import iconPlugin from './icon-plugin';
-import monthSelectPlugin from './month-select-plugin';
+import monthSelectPlugin, { updateCurrentMonth } from './month-select-plugin';
 import rangePlugin from './range-plugin';
 import shadowDOMEventPlugin from './shadow-dom-events-plugin';
 import stateHandshakePlugin from './state-handshake-plugin';
@@ -287,8 +287,14 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
     const { disabled, dateFormat, open, readonly, minDate, maxDate, value } =
       this;
 
-    const { selectorInputFrom, selectorInputTo } = this
-      .constructor as typeof CDSDatePicker;
+    const {
+      selectorInputFrom,
+      selectorInputTo,
+      _selectorFlatpickrMonthYearContainer: selectorFlatpickrMonthYearContainer,
+      _selectorFlatpickrYearContainer: selectorFlatpickrYearContainer,
+      _selectorFlatpickrCurrentMonth: selectorFlatpickrCurrentMonth,
+      _classFlatpickrCurrentMonth: classFlatpickrCurrentMonth,
+    } = this.constructor as typeof CDSDatePicker;
     const inputFrom = this.querySelector(
       selectorInputFrom
     ) as CDSDatePickerInput;
@@ -350,6 +356,12 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
       }
       if (calendar) {
         calendar.setDate(dates);
+        updateCurrentMonth(calendar, {
+          selectorFlatpickrMonthYearContainer,
+          selectorFlatpickrYearContainer,
+          selectorFlatpickrCurrentMonth,
+          classFlatpickrCurrentMonth,
+        });
         [inputFrom, inputTo].forEach((input, i) => {
           if (input) {
             input.value = !dates[i]
