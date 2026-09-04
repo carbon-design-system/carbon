@@ -153,6 +153,23 @@ describe.each([
       expect(onClose).toHaveBeenCalled();
     });
 
+    it('should close a passive modal on a single Escape key press', async () => {
+      const onClose = jest.fn();
+
+      render(
+        <Component open onClose={onClose}>
+          <ModalHeader>Modal header</ModalHeader>
+          <ModalBody>Modal body</ModalBody>
+        </Component>
+      );
+
+      expect(screen.getByRole('button', { name: 'Close' })).toHaveFocus();
+
+      await userEvent.keyboard('{Escape}');
+
+      expect(onClose).toHaveBeenCalledTimes(1);
+    });
+
     it('should not close when onClose returns false', async () => {
       const onClose = () => false;
       render(
@@ -1075,10 +1092,6 @@ describe('state with presence context', () => {
     expect(screen.queryByTestId('sibling-modal')).toBeInTheDocument();
     expect(screen.queryByTestId('child-modal')).toBeInTheDocument();
 
-    // First ESC closes the tooltip in the child modal
-    await userEvent.keyboard('{Escape}');
-
-    // Second ESC closes the child modal
     await userEvent.keyboard('{Escape}');
 
     // Wait for child modal to be removed

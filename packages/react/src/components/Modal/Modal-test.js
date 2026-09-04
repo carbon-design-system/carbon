@@ -156,6 +156,26 @@ describe.each([
     );
   });
 
+  it('should close a passive modal on a single Escape key press', async () => {
+    const onRequestClose = jest.fn();
+
+    render(
+      <Component
+        open
+        modalHeading="A test heading"
+        onRequestClose={onRequestClose}
+        passiveModal>
+        <p>Test content</p>
+      </Component>
+    );
+
+    expect(screen.getByRole('button', { name: 'Close' })).toHaveFocus();
+
+    await userEvent.keyboard('{Escape}');
+
+    expect(onRequestClose).toHaveBeenCalledTimes(1);
+  });
+
   it('should set id if one is passed via props', () => {
     render(
       <Component id="custom-modal-id" data-testid="modal-4">
