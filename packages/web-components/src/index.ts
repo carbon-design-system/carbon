@@ -201,6 +201,13 @@ export { default as CDSDialogSubtitle } from './components/dialog/dialog-subtitl
 export { default as CDSDialogTitle } from './components/dialog/dialog-title';
 export { default as CDSLayout } from './components/layout/layout';
 export { default as CDSLayoutConstraint } from './components/layout/layout-constraint';
+
+// TODO: uncomment in v12 — remove from product-migrated-components.mjs and excludeProductsComponents too
+// export { default as CDSCoachmark } from './components/coachmark/coachmark';
+// export { default as CDSCoachmarkHeader } from './components/coachmark/coachmark-header';
+// export { default as CDSCoachmarkBody } from './components/coachmark/coachmark-body';
+// export { default as CDSCoachmarkBeacon } from './components/coachmark/coachmark-beacon/coachmark-beacon';
+// export { default as CDSCoachmarkTagline } from './components/coachmark/coachmark-tagline/coachmark-tagline';
 // export { default as CDSTruncatedText } from './components/truncated-text/truncated-text';
 // export { default as CDSActionSet } from './components/action-set/action-set';
 // export { default as CDSEditInPlace } from './components/edit-in-place/edit-in-place';
