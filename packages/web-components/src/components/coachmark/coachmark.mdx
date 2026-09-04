@@ -1,0 +1,84 @@
+import { ArgTypes, Markdown, Meta, Canvas } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as CoachmarkStories from './coachmark.stories';
+
+<Meta of={CoachmarkStories} />
+
+# Coachmark
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/components/onboarding/coachmark/usage)
+
+[Coachmark](https://pages.github.ibm.com/carbon/ibm-products/components/onboarding/coachmark/usage)
+are used to call out specific functionality or concepts within the UI that may
+not be intuitive but are important for the user to gain an understanding of the
+product's main value and discover new use cases. They can be used for first-time
+use, as well as secondary onboarding and to highlight new functionality.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/web-components/es/components/coachmark/index.js';
+import '@carbon/web-components/es/components/coachmark/coachmark-beacon/index.js';
+import '@carbon/web-components/es/components/button/index.js';
+import Crossroads from '@carbon/icons/es/crossroads/16.js';
+```
+
+### HTML
+
+### Tooltip
+
+```html
+<cds-coachmark
+  align="bottom"
+  open
+  high-contrast
+  caret
+  selector-primary-focus=".done-button">
+  <cds-coachmark-beacon label="Show information" expanded slot="trigger">
+  </cds-coachmark-beacon>
+  <cds-coachmark-header
+    class="coachmark-header"
+    close-icon-description="Close"></cds-coachmark-header>
+  <cds-coachmark-body class="coachmark-body">
+    <h2>Hello World</h2>
+    <p>this is a description test</p>
+    <cds-button size="sm">Done</cds-button>
+  </cds-coachmark-body>
+</cds-coachmark>
+```
+
+### Floating
+
+```html
+<cds-coachmark align="bottom" open high-contrast floating>
+  <cds-button kind="tertiary" slot="trigger" class="trigger-btn"
+    >Show information
+  </cds-button>
+  <cds-coachmark-header
+    class="coachmark-header"
+    close-icon-description="Close"
+    drag-icon-description="Drag"></cds-coachmark-header>
+  <cds-coachmark-body class="coachmark-body">
+    <h2>Hello World</h2>
+    <p>this is a description test</p>
+    <cds-button size="sm">Done</cds-button>
+  </cds-coachmark-body>
+</cds-coachmark>
+```
+
+## `<cds-coachmark>` attributes, properties and events
+
+<ArgTypes of="cds-coachmark" />
+
+## `<cds-coachmark-header>` attributes, properties and events
+
+<ArgTypes of="cds-coachmark-header" />
+
+## `<cds-coachmark-body>` attributes, properties and events
+
+The `<cds-coachmark-body>` component serves as a container for the coachmark's
+main content.
