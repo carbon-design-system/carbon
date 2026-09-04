@@ -7,20 +7,28 @@
 
 import React, { forwardRef, type Ref } from 'react';
 import { useFeatureFlag } from '../FeatureFlags';
-import { OverflowMenu as OverflowMenuV12 } from './next';
+import {
+  OverflowMenu as OverflowMenuV12,
+  type OverflowMenuProps as OverflowMenuV12Props,
+} from './next';
 import {
   OverflowMenu as OverflowMenuV11,
-  type OverflowMenuProps,
+  type OverflowMenuProps as OverflowMenuV11Props,
 } from './OverflowMenu';
+
+type OverflowMenuProps = OverflowMenuV11Props | OverflowMenuV12Props;
 
 const OverflowMenu = forwardRef<HTMLDivElement, OverflowMenuProps>(
   (props, ref) => {
     const enableV12OverflowMenu = useFeatureFlag('enable-v12-overflowmenu');
 
     return enableV12OverflowMenu ? (
-      <OverflowMenuV12 {...props} ref={ref} />
+      <OverflowMenuV12 {...(props as OverflowMenuV12Props)} ref={ref} />
     ) : (
-      <OverflowMenuV11 {...props} ref={ref as Ref<HTMLButtonElement>} />
+      <OverflowMenuV11
+        {...(props as OverflowMenuV11Props)}
+        ref={ref as Ref<HTMLButtonElement>}
+      />
     );
   }
 );

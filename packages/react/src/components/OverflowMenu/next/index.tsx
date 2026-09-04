@@ -45,6 +45,29 @@ interface OverflowMenuProps {
   className?: string;
 
   /**
+   * Specify whether the tooltip on the trigger button should be open when it
+   * first renders.
+   */
+  tooltipDefaultOpen?: boolean;
+
+  /**
+   * Specify whether the trigger button should be disabled.
+   */
+  disabled?: boolean;
+
+  /**
+   * Specify the duration in milliseconds to delay before displaying the tooltip
+   * on the trigger button.
+   */
+  tooltipEnterDelayMs?: number;
+
+  /**
+   * Specify the duration in milliseconds to delay before hiding the tooltip
+   * on the trigger button.
+   */
+  tooltipLeaveDelayMs?: number;
+
+  /**
    * A label describing the options available. Is used in the trigger tooltip and as the menu's accessible label.
    */
   label?: string;
@@ -70,6 +93,18 @@ interface OverflowMenuProps {
   tooltipAlignment?: PopoverAlignment;
 
   /**
+   * **Experimental**: Will attempt to automatically align the tooltip on the
+   * trigger button to avoid collisions with the viewport. Requires React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
+   */
+  tooltipAutoAlign?: boolean;
+
+  /**
+   * Specify the tab index of the trigger button.
+   */
+  tabIndex?: number;
+
+  /**
    * Specify a DOM node where the Menu should be rendered in. Defaults to document.body.
    */
   menuTarget?: Element;
@@ -82,11 +117,17 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
       autoAlign = false,
       children,
       className,
+      tooltipDefaultOpen = false,
+      disabled,
+      tooltipEnterDelayMs = 100,
+      tooltipLeaveDelayMs = 100,
       label = 'Options',
       renderIcon: IconElement = OverflowMenuVertical,
       size = defaultSize,
       menuAlignment = 'bottom-start',
       tooltipAlignment,
+      tooltipAutoAlign = false,
+      tabIndex = 0,
       menuTarget,
       ...rest
     },
@@ -193,17 +234,25 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
         aria-owns={open ? id : undefined}
         ref={forwardRef}>
         <IconButton
-          aria-controls={open ? id : undefined}
-          aria-haspopup
-          aria-expanded={open}
+          align={tooltipAlignment}
+          autoAlign={tooltipAutoAlign}
           className={triggerClasses}
+          defaultOpen={tooltipDefaultOpen}
+          disabled={disabled}
+          enterDelayMs={tooltipEnterDelayMs}
+          kind="ghost"
+          label={label}
+          leaveDelayMs={tooltipLeaveDelayMs}
+          ref={floatingRef}
+          tabIndex={tabIndex}
           onClick={handleTriggerClick}
           onMouseDown={handleMousedown}
-          ref={floatingRef}
-          label={label}
-          align={tooltipAlignment}
-          kind="ghost">
-          <IconElement className={`${prefix}--overflow-menu__icon`} />
+          aria-controls={open ? id : undefined}
+          aria-expanded={open}
+          aria-haspopup>
+          <IconElement
+            className={`${prefix}--overflow-menu__icon ${prefix}--btn__icon`}
+          />
         </IconButton>
         <Menu
           containerRef={triggerRef}
@@ -233,6 +282,7 @@ OverflowMenu.propTypes = {
    * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign: PropTypes.bool,
+
   /**
    * A collection of MenuItems to be rendered within this OverflowMenu.
    */
@@ -242,6 +292,29 @@ OverflowMenu.propTypes = {
    * Additional CSS class names for the trigger button.
    */
   className: PropTypes.string,
+
+  /**
+   * Specify whether the tooltip on the trigger button should be open when it
+   * first renders.
+   */
+  tooltipDefaultOpen: PropTypes.bool,
+
+  /**
+   * Specify whether the trigger button should be disabled.
+   */
+  disabled: PropTypes.bool,
+
+  /**
+   * Specify the duration in milliseconds to delay before displaying the tooltip
+   * on the trigger button.
+   */
+  tooltipEnterDelayMs: PropTypes.number,
+
+  /**
+   * Specify the duration in milliseconds to delay before hiding the tooltip
+   * on the trigger button.
+   */
+  tooltipLeaveDelayMs: PropTypes.number,
 
   /**
    * A label describing the options available. Is used in the trigger tooltip and as the menu's accessible label.
@@ -317,6 +390,18 @@ OverflowMenu.propTypes = {
   ),
 
   /**
+   * **Experimental**: Will attempt to automatically align the tooltip on the
+   * trigger button to avoid collisions with the viewport. Requires React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
+   */
+  tooltipAutoAlign: PropTypes.bool,
+
+  /**
+   * Specify the tab index of the trigger button.
+   */
+  tabIndex: PropTypes.number,
+
+  /**
    * Specify a DOM node where the Menu should be rendered in. Defaults to document.body.
    */
   menuTarget: PropTypes.instanceOf(
@@ -324,4 +409,4 @@ OverflowMenu.propTypes = {
   ) as PropTypes.Validator<Element | null | undefined>,
 };
 
-export { OverflowMenu };
+export { OverflowMenu, type OverflowMenuProps };
