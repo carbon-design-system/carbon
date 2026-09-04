@@ -243,7 +243,7 @@
   }
 
   // ─── Label (nested inside __title via label prop on CardTitle) ─────────
-  .#{$prefix}--card__title > .#{$prefix}--card__label {
+  .#{$prefix}--card__title .#{$prefix}--card__label {
     @include type-style('label-01');
 
     color: $text-secondary;
@@ -340,7 +340,7 @@
   }
 
   // ─── Description (nested inside __title via description prop) ──────────
-  .#{$prefix}--card__title > .#{$prefix}--card__description {
+  .#{$prefix}--card__title .#{$prefix}--card__description {
     @include type-style('label-01');
 
     color: $text-secondary;
