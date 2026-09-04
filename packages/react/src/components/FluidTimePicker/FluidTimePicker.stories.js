@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,13 +10,9 @@ import FluidTimePicker from '../FluidTimePicker';
 import FluidTimePickerSelect from '../FluidTimePickerSelect';
 import FluidTimePickerSkeleton from './FluidTimePicker.Skeleton';
 import SelectItem from '../SelectItem';
-import {
-  ToggletipLabel,
-  Toggletip,
-  ToggletipButton,
-  ToggletipContent,
-} from '../Toggletip';
+import { Toggletip, ToggletipButton, ToggletipContent } from '../Toggletip';
 import { Information } from '@carbon/icons-react';
+import './fluid-time-picker-story.scss';
 import mdx from './FluidTimePicker.mdx';
 
 export default {
@@ -33,9 +29,9 @@ export default {
   },
 };
 
-const ToggleTip = (
-  <>
-    <ToggletipLabel>Clock</ToggletipLabel>
+const ClockToggletip = ({ className }) => (
+  // Keep the toggletip outside `labelText`; interactive content is invalid in labels.
+  <span className={`fluid-time-picker-story__toggletip ${className}`}>
     <Toggletip align="top-left">
       <ToggletipButton label="Show information">
         <Information />
@@ -44,7 +40,7 @@ const ToggleTip = (
         <p>Additional field information here.</p>
       </ToggletipContent>
     </Toggletip>
-  </>
+  </span>
 );
 
 export const Skeleton = () => (
@@ -58,31 +54,37 @@ export const Skeleton = () => (
 
 export const Default = (timePickerArgs) => {
   return (
-    <div style={{ width: 350 }}>
-      <FluidTimePicker id="time-picker-1" {...timePickerArgs}>
-        <FluidTimePickerSelect id="select-1" labelText={ToggleTip}>
-          <SelectItem value="am" text="AM" />
-          <SelectItem value="pm" text="PM" />
-        </FluidTimePickerSelect>
-        <FluidTimePickerSelect id="select-2" labelText="Timezone">
-          <SelectItem value="et" text="Eastern Time (ET)" />
-          <SelectItem value="ct" text="Central Time (CT)" />
-          <SelectItem value="mt" text="Mountain Time (MT)" />
-          <SelectItem value="pt" text="Pacific Time (PT)" />
-        </FluidTimePickerSelect>
-      </FluidTimePicker>
+    <div style={{ width: '350px' }}>
+      <div className="fluid-time-picker-story">
+        <FluidTimePicker id="time-picker-1" {...timePickerArgs}>
+          <FluidTimePickerSelect id="select-1" labelText="Clock">
+            <SelectItem value="am" text="AM" />
+            <SelectItem value="pm" text="PM" />
+          </FluidTimePickerSelect>
+          <FluidTimePickerSelect id="select-2" labelText="Timezone">
+            <SelectItem value="et" text="Eastern Time (ET)" />
+            <SelectItem value="ct" text="Central Time (CT)" />
+            <SelectItem value="mt" text="Mountain Time (MT)" />
+            <SelectItem value="pt" text="Pacific Time (PT)" />
+          </FluidTimePickerSelect>
+        </FluidTimePicker>
+        <ClockToggletip className="fluid-time-picker-story__toggletip--three-inputs" />
+      </div>
       <br />
       <br />
-      <FluidTimePicker
-        id="time-picker-2"
-        labelText="Time"
-        placeholder="hh:mm"
-        {...timePickerArgs}>
-        <FluidTimePickerSelect id="select-3" labelText={ToggleTip}>
-          <SelectItem value="am" text="AM" />
-          <SelectItem value="pm" text="PM" />
-        </FluidTimePickerSelect>
-      </FluidTimePicker>
+      <div className="fluid-time-picker-story">
+        <FluidTimePicker
+          id="time-picker-2"
+          labelText="Time"
+          placeholder="hh:mm"
+          {...timePickerArgs}>
+          <FluidTimePickerSelect id="select-3" labelText="Clock">
+            <SelectItem value="am" text="AM" />
+            <SelectItem value="pm" text="PM" />
+          </FluidTimePickerSelect>
+        </FluidTimePicker>
+        <ClockToggletip className="fluid-time-picker-story__toggletip--two-inputs" />
+      </div>
     </div>
   );
 };
