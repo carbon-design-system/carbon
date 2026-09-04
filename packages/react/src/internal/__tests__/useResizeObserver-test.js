@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef } from 'react';
+import React, { StrictMode, useRef } from 'react';
 import { render, screen, act } from '@testing-library/react';
 import { useResizeObserver } from '../useResizeObserver';
 
@@ -22,20 +22,28 @@ const ResizeTest = ({ onResize }) => {
 const defaultSize = 100;
 describe('useResizeObserver', () => {
   let savedObserverCb;
+  let observeMock;
+  let disconnectMock;
+  const originalRequestAnimationFrame = window.requestAnimationFrame;
+  const originalCancelAnimationFrame = window.cancelAnimationFrame;
 
   beforeEach(() => {
+    observeMock = jest.fn();
+    disconnectMock = jest.fn();
     window.ResizeObserver = jest.fn().mockImplementation((cb) => {
       savedObserverCb = cb;
       return {
-        observe: jest.fn(),
+        observe: observeMock,
         unobserve: jest.fn(),
-        disconnect: jest.fn(),
+        disconnect: disconnectMock,
       };
     });
   });
 
   afterEach(() => {
     jest.clearAllMocks();
+    window.requestAnimationFrame = originalRequestAnimationFrame;
+    window.cancelAnimationFrame = originalCancelAnimationFrame;
   });
 
   /** Triggers resize from the saved resize observer callback */
@@ -91,5 +99,85 @@ describe('useResizeObserver', () => {
       screen.getByText(`width: ${defaultSize}, height: ${defaultSize}`)
     ).toBeInTheDocument();
     expect(resizeFn).toHaveBeenCalledTimes(3);
+  });
+
+  it('does not update state or call onResize when dimensions are unchanged', async () => {
+    const resizeFn = jest.fn();
+    render(<ResizeTest onResize={resizeFn} />);
+    const element = screen.getByTestId('observed-element');
+
+    await triggerResize(element);
+    expect(resizeFn).toHaveBeenCalledTimes(1);
+
+    await triggerResize(element);
+    expect(resizeFn).toHaveBeenCalledTimes(1);
+  });
+
+  it('calls onResize for the first observed size even when dimensions are unchanged', async () => {
+    const resizeFn = jest.fn();
+    render(<ResizeTest onResize={resizeFn} />);
+    const element = screen.getByTestId('observed-element');
+
+    await triggerResize(element, 0, 0);
+
+    expect(resizeFn).toHaveBeenCalledTimes(1);
+    expect(resizeFn).toHaveBeenLastCalledWith({ width: 0, height: 0 });
+  });
+
+  it('coalesces multiple resize entries into one animation frame', () => {
+    const animationFrameCallbacks = [];
+    window.requestAnimationFrame = jest.fn((callback) => {
+      animationFrameCallbacks.push(callback);
+      return animationFrameCallbacks.length;
+    });
+    window.cancelAnimationFrame = jest.fn();
+
+    const resizeFn = jest.fn();
+    render(<ResizeTest onResize={resizeFn} />);
+    const element = screen.getByTestId('observed-element');
+
+    act(() => {
+      savedObserverCb([
+        { target: element, contentRect: { width: 200, height: 300 } },
+      ]);
+      savedObserverCb([
+        { target: element, contentRect: { width: 400, height: 500 } },
+      ]);
+    });
+
+    expect(window.requestAnimationFrame).toHaveBeenCalledTimes(1);
+    expect(resizeFn).not.toHaveBeenCalled();
+
+    act(() => {
+      animationFrameCallbacks[0]();
+    });
+
+    expect(screen.getByText('width: 400, height: 500')).toBeInTheDocument();
+    expect(resizeFn).toHaveBeenCalledTimes(1);
+    expect(resizeFn).toHaveBeenLastCalledWith({ width: 400, height: 500 });
+  });
+
+  it('schedules a new animation frame after cleanup cancels a pending frame', () => {
+    const animationFrameCallbacks = [];
+    window.requestAnimationFrame = jest.fn((callback) => {
+      animationFrameCallbacks.push(callback);
+      return animationFrameCallbacks.length;
+    });
+    window.cancelAnimationFrame = jest.fn();
+    observeMock.mockImplementation((element) => {
+      savedObserverCb([
+        { target: element, contentRect: { width: 200, height: 300 } },
+      ]);
+    });
+
+    render(
+      <StrictMode>
+        <ResizeTest />
+      </StrictMode>
+    );
+
+    expect(disconnectMock).toHaveBeenCalledTimes(1);
+    expect(window.cancelAnimationFrame).toHaveBeenCalledWith(1);
+    expect(window.requestAnimationFrame).toHaveBeenCalledTimes(2);
   });
 });
