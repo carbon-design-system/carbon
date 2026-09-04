@@ -515,7 +515,7 @@ const ComposedModalDialog = React.forwardRef<
   );
 
   useEffect(() => {
-    if (!open) return;
+    if (!open || enableDialogElement) return;
 
     const handleEscapeKey = (event) => {
       if (

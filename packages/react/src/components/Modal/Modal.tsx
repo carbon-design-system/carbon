@@ -587,7 +587,7 @@ const ModalDialog = React.forwardRef(function ModalDialog(
   }
 
   useEffect(() => {
-    if (!open) return;
+    if (!open || enableDialogElement) return;
 
     const handleEscapeKey = (event) => {
       if (
