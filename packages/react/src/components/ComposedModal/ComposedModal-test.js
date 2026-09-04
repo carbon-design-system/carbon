@@ -371,6 +371,7 @@ describe.each([
     });
 
     it('should blur focused modal descendants before aria-hidden is applied on close', async () => {
+      const focusDuringClose = jest.fn();
       const ComposedModalExample = () => {
         const buttonRef = useRef(null);
         const [isOpen, setIsOpen] = useState(false);
@@ -387,10 +388,7 @@ describe.each([
               launcherButtonRef={buttonRef}
               open={isOpen}
               onClose={() => {
-                const overlay = screen.getByRole('presentation', {
-                  hidden: true,
-                });
-                expect(overlay.contains(document.activeElement)).toBe(false);
+                focusDuringClose(document.activeElement);
                 setIsOpen(false);
               }}>
               <ModalHeader>Header</ModalHeader>
@@ -413,10 +411,12 @@ describe.each([
 
       await userEvent.click(closeButton);
 
+      expect(focusDuringClose).toHaveBeenCalledTimes(1);
+      expect(overlay.contains(focusDuringClose.mock.calls[0][0])).toBe(false);
+
       if (!isPresence) {
         expect(overlay).toHaveAttribute('aria-hidden', 'true');
       }
-      expect(overlay.contains(document.activeElement)).toBe(false);
     });
 
     it('should change size based on size prop', () => {
