@@ -199,6 +199,33 @@ describe('Search', () => {
       expect(onExpand).toHaveBeenCalledTimes(3);
     });
 
+    it('should not call onExpand if disabled', async () => {
+      const onExpand = jest.fn();
+      const { container } = render(
+        <Search
+          disabled
+          isExpanded={false}
+          labelText="test-search"
+          onExpand={onExpand}
+        />
+      );
+
+      const expandControl = screen.getAllByRole('button')[0];
+
+      expect(expandControl).toHaveAttribute('aria-disabled', 'true');
+      expect(expandControl).not.toHaveAttribute('tabIndex');
+      expect(
+        container.querySelector(`.${prefix}--search-magnifier-tooltip`)
+      ).toBeNull();
+
+      await userEvent.click(expandControl);
+      expandControl.focus();
+      await userEvent.keyboard('[Space]');
+      await userEvent.keyboard('[Enter]');
+
+      expect(onExpand).not.toHaveBeenCalled();
+    });
+
     it('should call onKeyDown when expected', async () => {
       const onKeyDown = jest.fn();
       render(<Search labelText="test-search" onKeyDown={onKeyDown} />);

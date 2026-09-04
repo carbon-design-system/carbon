@@ -244,6 +244,10 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
     }
 
     function handleExpandButtonKeyDown(event: KeyboardEvent<HTMLDivElement>) {
+      if (disabled) {
+        return;
+      }
+
       if (match(event, keys.Enter) || match(event, keys.Space)) {
         event.stopPropagation();
         if (onExpand) {
@@ -257,10 +261,11 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
         aria-labelledby={onExpand ? searchId : undefined}
         role={onExpand ? 'button' : undefined}
         className={`${prefix}--search-magnifier`}
-        onClick={onExpand}
+        onClick={disabled ? undefined : onExpand}
         onKeyDown={handleExpandButtonKeyDown}
-        tabIndex={isExpandableCollapsed ? 0 : -1}
+        tabIndex={isExpandableCollapsed ? (disabled ? undefined : 0) : -1}
         ref={expandButtonRef}
+        aria-disabled={onExpand && disabled ? true : undefined}
         aria-expanded={
           onExpand && isExpanded
             ? true
@@ -275,7 +280,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
 
     // Wrap magnifierButton in a tooltip if it's expandable
     const magnifierWithTooltip =
-      onExpand && !isExpanded ? (
+      onExpand && !isExpanded && !disabled ? (
         <Tooltip
           className={`${prefix}--search-tooltip ${prefix}--search-magnifier-tooltip ${prefix}--icon-tooltip`}
           align="top"

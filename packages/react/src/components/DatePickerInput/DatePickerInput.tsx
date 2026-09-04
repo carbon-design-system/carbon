@@ -26,6 +26,7 @@ import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
+import { useFeatureFlag } from '../FeatureFlags';
 
 type ExcludedAttributes = 'value' | 'onChange' | 'locale' | 'children';
 export type ReactNodeLike =
@@ -173,6 +174,7 @@ const DatePickerInput = frFn((props, ref) => {
   } = props;
   const prefix = usePrefix();
   const { isFluid } = useContext(FormContext);
+  const enableV12Release = useFeatureFlag('enable-v12-release');
   const datePickerInputInstanceId = useId();
   const labelRef = useRef<HTMLLabelElement>(null);
 
@@ -261,6 +263,7 @@ const DatePickerInput = frFn((props, ref) => {
     ...datePickerInputProps,
     className: inputClasses,
     disabled: normalizedProps.disabled,
+    readOnly,
     ref,
     ['aria-describedby']: ariaDescribedBy,
   };
@@ -310,6 +313,11 @@ const DatePickerInput = frFn((props, ref) => {
           />
         </span>
       </div>
+      {enableV12Release &&
+        isFluid &&
+        (normalizedProps.invalid || normalizedProps.warn) && (
+          <hr className={`${prefix}--date-picker__divider`} />
+        )}
       {normalizedProps.validation}
       {helperText && !normalizedProps.invalid && !normalizedProps.warn && (
         <Text

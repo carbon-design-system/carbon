@@ -73,6 +73,7 @@ import { hasHelperText } from '../../internal/hasHelperText';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
+import { useFeatureFlag } from '../FeatureFlags';
 
 const {
   InputBlur,
@@ -392,6 +393,8 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     [filteredItems]
   );
   const selectAll = filteredItems.some(isSelectAllItem);
+
+  const enableV12Release = useFeatureFlag('enable-v12-release');
 
   const {
     selectedItems: controlledSelectedItems,
@@ -1086,7 +1089,10 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
             ? sortedItems.map((item, index) => {
                 let isChecked: boolean;
                 let isIndeterminate = false;
-                if (isSelectAllItem(item)) {
+
+                const isSelectAll = isSelectAllItem(item);
+
+                if (isSelectAll) {
                   isChecked = selectAllStatus.checked;
                   isIndeterminate = selectAllStatus.indeterminate;
                 } else {
@@ -1111,12 +1117,12 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
                   ...modifiedItemProps
                 } = itemProps;
 
-                return (
+                const menuItem = (
                   <ListBox.MenuItem
                     key={itemProps.id}
                     aria-label={itemText}
                     aria-checked={isIndeterminate ? 'mixed' : isChecked}
-                    isActive={isChecked && !isSelectAllItem(item)}
+                    isActive={isChecked && !isSelectAll}
                     isHighlighted={highlightedIndex === index}
                     title={itemText}
                     disabled={disabled}
@@ -1140,6 +1146,17 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
                     </div>
                   </ListBox.MenuItem>
                 );
+
+                return isSelectAll && enableV12Release
+                  ? [
+                      menuItem,
+                      <li
+                        key={`${itemProps.id}__divider`}
+                        className={`${prefix}--list-box__menu-divider`}
+                        aria-hidden="true"
+                      />,
+                    ]
+                  : menuItem;
               })
             : null}
         </ListBox.Menu>
