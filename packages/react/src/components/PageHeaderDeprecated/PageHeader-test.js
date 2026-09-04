@@ -21,7 +21,7 @@ import {
   PageHeaderContentText as PageHeaderContentTextDirect,
   PageHeaderHeroImage as PageHeaderHeroImageDirect,
   PageHeaderTabBar as PageHeaderTabBarDirect,
-} from '../PageHeader';
+} from '../PageHeaderDeprecated';
 import * as hooks from '../../internal/useMatchMedia';
 import { breakpoints } from '@carbon/layout';
 import { Breadcrumb, BreadcrumbItem } from '../Breadcrumb';
