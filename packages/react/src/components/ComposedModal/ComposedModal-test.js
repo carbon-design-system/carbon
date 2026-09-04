@@ -450,6 +450,31 @@ describe.each([
         expect(focusElem).toHaveFocus();
       });
     });
+
+    it('should call onClose when the dialog cancel event fires', () => {
+      const onClose = jest.fn();
+      render(
+        <FeatureFlags enableDialogElement>
+          <Component open onClose={onClose}>
+            <ModalHeader>Modal header</ModalHeader>
+            <ModalBody>Modal content</ModalBody>
+            <ModalFooter primaryButtonText="Add" secondaryButtonText="Cancel" />
+          </Component>
+        </FeatureFlags>
+      );
+
+      const dialog = screen.getByRole('dialog');
+
+      // Simulate a native cancel event on the dialog.
+      const cancelEvent = new Event('cancel', {
+        bubbles: false,
+        cancelable: true,
+      });
+      fireEvent(dialog, cancelEvent);
+
+      expect(cancelEvent.defaultPrevented).toBe(true);
+      expect(onClose).toHaveBeenCalledTimes(1);
+    });
   });
 
   it('should respect the deprecated slug prop', () => {

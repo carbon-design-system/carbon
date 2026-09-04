@@ -587,7 +587,7 @@ const ModalDialog = React.forwardRef(function ModalDialog(
   }
 
   useEffect(() => {
-    if (!open) return;
+    if (!open || enableDialogElement) return;
 
     const handleEscapeKey = (event) => {
       if (
@@ -735,6 +735,10 @@ const ModalDialog = React.forwardRef(function ModalDialog(
   const modalBody = enableDialogElement ? (
     <Dialog
       open={open}
+      onCancel={(evt) => {
+        evt.preventDefault();
+        onRequestClose(evt);
+      }}
       focusAfterCloseRef={launcherButtonRef}
       modal
       ref={innerModal}

@@ -515,7 +515,7 @@ const ComposedModalDialog = React.forwardRef<
   );
 
   useEffect(() => {
-    if (!open) return;
+    if (!open || enableDialogElement) return;
 
     const handleEscapeKey = (event) => {
       if (
@@ -601,6 +601,10 @@ const ComposedModalDialog = React.forwardRef<
   const modalBody = enableDialogElement ? (
     <Dialog
       open={open}
+      onCancel={(evt) => {
+        evt.preventDefault();
+        closeModal(evt);
+      }}
       focusAfterCloseRef={launcherButtonRef}
       modal
       className={containerClass}
