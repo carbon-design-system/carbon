@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -14,6 +14,7 @@ import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import mdx from './RadioButton.mdx';
+import { useArgs } from 'storybook/preview-api';
 
 export default {
   title: 'Components/RadioButton',
@@ -22,18 +23,6 @@ export default {
     RadioButtonGroup,
     RadioButtonSkeleton,
   },
-  argTypes: {
-    checked: {
-      table: {
-        disable: true,
-      },
-    },
-    defaultChecked: {
-      table: {
-        disable: true,
-      },
-    },
-  },
   parameters: {
     docs: {
       page: mdx,
@@ -41,38 +30,243 @@ export default {
   },
 };
 
-export const Vertical = () => {
+const radioButtonOptions = [
+  { id: 'radio-1', label: 'Radio button label', value: 'radio-1' },
+  { id: 'radio-2', label: 'Radio button label', value: 'radio-2' },
+  { id: 'radio-3', label: 'Radio button label', value: 'radio-3' },
+];
+
+const groupArgs = {
+  disabled: false,
+  helperText: 'Helper text',
+  hideLabel: false,
+  invalid: false,
+  invalidText: 'Invalid selection',
+  labelPosition: 'right',
+  labelText: radioButtonOptions[0].label,
+  legendText: 'Radio Button group',
+  name: 'radio-button-default-group',
+  orientation: 'horizontal',
+  readOnly: false,
+  required: false,
+  valueSelected: radioButtonOptions[1].value,
+  warn: false,
+  warnText: 'Please notice the warning',
+};
+
+const groupArgTypes = {
+  disabled: {
+    description: 'Specify whether the RadioButtonGroup is disabled',
+    control: {
+      type: 'boolean',
+    },
+  },
+  helperText: {
+    description:
+      'Provide text that is used alongside the control label for additional help',
+    control: {
+      type: 'text',
+    },
+  },
+  hideLabel: {
+    description:
+      'Specify whether the radio button labels are visually hidden but still available to screen readers',
+    control: {
+      type: 'boolean',
+    },
+  },
+  invalid: {
+    description: 'Specify whether the RadioButtonGroup is invalid',
+    control: {
+      type: 'boolean',
+    },
+  },
+  invalidText: {
+    description:
+      'Provide the text that is displayed when the control is in an invalid state',
+    control: {
+      type: 'text',
+    },
+  },
+  labelPosition: {
+    description: 'Provide where radio button labels should be placed',
+    control: 'select',
+    options: ['left', 'right'],
+  },
+  labelText: {
+    description: 'Provide the label text for the first radio button',
+    control: {
+      type: 'text',
+    },
+  },
+  legendText: {
+    description:
+      'Provide the text to be rendered inside of the fieldset <legend>',
+    control: {
+      type: 'text',
+    },
+  },
+  name: {
+    description: 'Provide a name for the underlying radio button inputs',
+    control: {
+      type: 'text',
+    },
+  },
+  onChange: {
+    action: 'onChange',
+  },
+  orientation: {
+    description: 'Provide how radio buttons should be displayed',
+    control: 'select',
+    options: ['horizontal', 'vertical'],
+  },
+  readOnly: {
+    description: 'Specify whether the RadioButtonGroup is read-only',
+    control: {
+      type: 'boolean',
+    },
+  },
+  required: {
+    description: 'Specify whether a radio button selection is required',
+    control: {
+      type: 'boolean',
+    },
+  },
+  valueSelected: {
+    description: 'Specify the selected radio button',
+    control: 'select',
+    options: radioButtonOptions.map(({ value }) => value),
+  },
+  warn: {
+    description: 'Specify whether the control is currently in warning state',
+    control: {
+      type: 'boolean',
+    },
+  },
+  warnText: {
+    description:
+      'Provide the text that is displayed when the control is in warning state',
+    control: {
+      type: 'text',
+    },
+  },
+};
+
+const groupControls = Object.keys(groupArgTypes);
+
+const GroupStory = (args) => {
+  const [{ valueSelected }, updateArgs] = useArgs();
+  const { hideLabel, labelText, onChange, ...radioButtonGroupArgs } = args;
+
   return (
     <RadioButtonGroup
-      legendText="Group label"
-      name="radio-button-vertical-group"
-      defaultSelected="radio-1"
-      orientation="vertical">
-      <RadioButton
-        labelText="Radio button label"
-        value="radio-1"
-        id="radio-1"
-      />
-      <RadioButton
-        labelText="Radio button label"
-        value="radio-2"
-        id="radio-2"
-      />
-      <RadioButton
-        labelText="Radio button label"
-        value="radio-3"
-        id="radio-3"
-        disabled
-      />
+      {...radioButtonGroupArgs}
+      valueSelected={valueSelected}
+      onChange={(selection, name, event) => {
+        updateArgs({ valueSelected: selection });
+        onChange?.(selection, name, event);
+      }}>
+      {radioButtonOptions.map((option, index) => (
+        <RadioButton
+          key={option.value}
+          labelText={index === 0 ? labelText : option.label}
+          value={option.value}
+          id={option.id}
+          hideLabel={hideLabel}
+        />
+      ))}
     </RadioButtonGroup>
   );
 };
 
-export const Skeleton = () => {
-  return <RadioButtonSkeleton />;
+export const Default = GroupStory;
+
+Default.args = {
+  ...groupArgs,
 };
 
-export const withAILabel = () => {
+Default.argTypes = {
+  ...groupArgTypes,
+};
+
+Default.parameters = {
+  controls: {
+    include: groupControls,
+  },
+};
+
+export const Vertical = (args) => {
+  const [{ valueSelected }, updateArgs] = useArgs();
+  const { hideLabel, labelText, onChange, ...radioButtonGroupArgs } = args;
+
+  return (
+    <RadioButtonGroup
+      {...radioButtonGroupArgs}
+      valueSelected={valueSelected}
+      onChange={(selection, name, event) => {
+        updateArgs({ valueSelected: selection });
+        onChange?.(selection, name, event);
+      }}>
+      {radioButtonOptions.map((option, index) => (
+        <RadioButton
+          key={option.value}
+          labelText={index === 0 ? labelText : option.label}
+          value={option.value}
+          id={option.id}
+          hideLabel={hideLabel}
+          disabled={index === 2}
+        />
+      ))}
+    </RadioButtonGroup>
+  );
+};
+
+Vertical.args = {
+  ...groupArgs,
+  legendText: 'Group label',
+  name: 'radio-button-vertical-group',
+  orientation: 'vertical',
+  valueSelected: radioButtonOptions[0].value,
+};
+
+Vertical.argTypes = {
+  ...groupArgTypes,
+  orientation: {
+    ...groupArgTypes.orientation,
+    table: {
+      readonly: true,
+    },
+  },
+};
+
+Vertical.parameters = {
+  controls: {
+    include: groupControls,
+  },
+};
+
+export const Skeleton = (args) => <RadioButtonSkeleton {...args} />;
+
+Skeleton.args = {
+  className: '',
+};
+
+Skeleton.argTypes = {
+  className: {
+    description: 'Specify an optional class name to add to the skeleton',
+    control: {
+      type: 'text',
+    },
+  },
+};
+
+Skeleton.parameters = {
+  controls: {
+    include: ['className'],
+  },
+};
+
+export const withAILabel = (args) => {
   const AILabelFunc = (kind) => (
     <AILabel className="ai-label-container" kind={kind}>
       <AILabelContent>
@@ -104,176 +298,94 @@ export const withAILabel = () => {
     </AILabel>
   );
 
+  const { hideLabel, labelText, name, onChange } = args;
+  const radioButtonGroupArgs = {
+    disabled: args.disabled,
+    helperText: args.helperText,
+    invalid: args.invalid,
+    invalidText: args.invalidText,
+    labelPosition: args.labelPosition,
+    legendText: args.legendText,
+    orientation: args.orientation,
+    readOnly: args.readOnly,
+    required: args.required,
+    warn: args.warn,
+    warnText: args.warnText,
+  };
+
+  const renderRadioButtons = (groupNumber, decorators = {}) =>
+    radioButtonOptions.map((option, index) => (
+      <RadioButton
+        key={option.value}
+        labelText={index === 0 ? labelText : option.label}
+        value={option.value}
+        id={`radio-ai-${groupNumber}-${option.value}`}
+        hideLabel={hideLabel}
+        decorator={decorators[index]}
+      />
+    ));
+
   return (
     <div className="ai-label-check-radio-container">
       <RadioButtonGroup
+        {...radioButtonGroupArgs}
         decorator={AILabelFunc('default')}
-        orientation="vertical"
-        legendText="Group label"
-        name="radio-button-group"
-        defaultSelected="radio-1">
-        <RadioButton
-          labelText="Radio button label"
-          value="radio-1"
-          id="radio-1"
-        />
-        <RadioButton
-          labelText="Radio button label"
-          value="radio-2"
-          id="radio-2"
-        />
-        <RadioButton
-          labelText="Radio button label"
-          value="radio-3"
-          id="radio-3"
-        />
+        name={`${name}-group-1`}
+        defaultSelected={radioButtonOptions[0].value}
+        onChange={onChange}>
+        {renderRadioButtons(1)}
       </RadioButtonGroup>
 
       <RadioButtonGroup
-        orientation="vertical"
-        legendText="Group label"
-        name="radio-button-group-2"
-        defaultSelected="radio-4">
-        <RadioButton
-          labelText="Radio button label"
-          value="radio-4"
-          id="radio-4"
-          decorator={AILabelFunc()}
-        />
-        <RadioButton
-          labelText="Radio button label"
-          value="radio-5"
-          id="radio-5"
-          decorator={AILabelFunc()}
-        />
-        <RadioButton
-          labelText="Radio button label"
-          value="radio-6"
-          id="radio-6"
-        />
+        {...radioButtonGroupArgs}
+        name={`${name}-group-2`}
+        defaultSelected={radioButtonOptions[0].value}
+        onChange={onChange}>
+        {renderRadioButtons(2, {
+          0: AILabelFunc(),
+          1: AILabelFunc(),
+        })}
       </RadioButtonGroup>
 
       <RadioButtonGroup
-        orientation="vertical"
-        legendText="Group label"
-        name="radio-button-group-3"
-        defaultSelected="radio-7">
-        <RadioButton
-          labelText="Radio button label"
-          value="radio-7"
-          id="radio-7"
-          decorator={AILabelFunc('inline')}
-        />
-        <RadioButton
-          labelText="Radio button label"
-          value="radio-8"
-          id="radio-8"
-          decorator={AILabelFunc('inline')}
-        />
-        <RadioButton
-          labelText="Radio button label"
-          value="radio-9"
-          id="radio-9"
-        />
+        {...radioButtonGroupArgs}
+        name={`${name}-group-3`}
+        defaultSelected={radioButtonOptions[0].value}
+        onChange={onChange}>
+        {renderRadioButtons(3, {
+          0: AILabelFunc('inline'),
+          1: AILabelFunc('inline'),
+        })}
       </RadioButtonGroup>
     </div>
   );
 };
 
-export const Default = (args) => {
-  return (
-    <RadioButtonGroup
-      legendText="Radio Button group"
-      name="radio-button-default-group"
-      {...args}>
-      <RadioButton
-        labelText="Radio button label"
-        value="radio-1"
-        id="radio-1"
-        hideLabel={args.hideLabel}
-      />
-      <RadioButton
-        labelText="Radio button label"
-        value="radio-2"
-        id="radio-2"
-        hideLabel={args.hideLabel}
-      />
-      <RadioButton
-        labelText="Radio button label"
-        value="radio-3"
-        id="radio-3"
-        hideLabel={args.hideLabel}
-      />
-    </RadioButtonGroup>
-  );
+withAILabel.args = {
+  ...groupArgs,
+  legendText: 'Group label',
+  name: 'radio-button-group',
+  orientation: 'vertical',
+  valueSelected: radioButtonOptions[0].value,
 };
 
-Default.args = {
-  defaultSelected: 'radio-2',
-  helperText: 'Helper text',
-  hideLabel: false,
-  invalidText: 'Invalid selection',
-  warn: false,
-  warnText: 'Please notice the warning',
-};
-
-Default.argTypes = {
-  defaultSelected: {
-    description: 'Specify the `<RadioButton>` to be selected by default',
-    options: ['radio-1', 'radio-2', 'radio-3'],
-    control: {
-      type: 'select',
-    },
-  },
-  readOnly: {
-    description: 'Specify whether the RadioButtonGroup is read-only',
-    control: {
-      type: 'boolean',
-    },
-  },
-  helperText: {
-    description:
-      'Provide text that is used alongside the control label for additional help',
-    control: {
-      type: 'text',
-    },
-  },
-  hideLabel: {
-    description:
-      'Specify whether the label should be visually hidden but still available to screen readers',
-    control: {
-      type: 'boolean',
-    },
-  },
-  invalid: {
-    description: 'Specify whether the RadioButtonGroup is invalid',
-    control: {
-      type: 'boolean',
-    },
-  },
-  invalidText: {
-    description:
-      'Provide the text that is displayed when the control is in an invalid state',
-    control: {
-      type: 'text',
-    },
-  },
+withAILabel.argTypes = {
+  ...groupArgTypes,
   orientation: {
-    description: 'Provide how radio buttons should be displayed',
-    control: 'select',
-    options: ['horizontal', 'vertical'],
-  },
-  warn: {
-    description: 'Specify whether the control is currently in warning state',
-    control: {
-      type: 'boolean',
+    ...groupArgTypes.orientation,
+    table: {
+      readonly: true,
     },
   },
-  warnText: {
-    description:
-      'Provide the text that is displayed when the control is in warning state',
-    control: {
-      type: 'text',
+  valueSelected: {
+    table: {
+      disable: true,
     },
+  },
+};
+
+withAILabel.parameters = {
+  controls: {
+    include: groupControls.filter((control) => control !== 'valueSelected'),
   },
 };

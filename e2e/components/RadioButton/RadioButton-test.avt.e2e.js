@@ -68,7 +68,6 @@ test.describe('@avt RadioButton', () => {
       },
       args: {
         invalid: 'true',
-        invalidText: 'Invalid selection',
       },
     });
 
@@ -85,7 +84,6 @@ test.describe('@avt RadioButton', () => {
       },
       args: {
         warn: 'true',
-        warnText: 'Please notice the warning',
       },
     });
 
@@ -121,8 +119,8 @@ test.describe('@avt RadioButton', () => {
       },
     });
 
-    const inputElement = await page.locator('input#radio-1').isChecked();
-    expect(inputElement).toBeFalsy();
+    const inputElement = await page.locator('input#radio-2').isChecked();
+    expect(inputElement).toBeTruthy();
     await expect(page).toHaveNoACViolations('RadioButton-read-only');
   });
 });
