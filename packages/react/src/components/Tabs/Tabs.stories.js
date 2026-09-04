@@ -206,13 +206,6 @@ const tabListArgTypes = {
       category: 'TabList',
     },
   },
-  light: {
-    control: { type: 'boolean' },
-    description: 'Specify whether to use the light component variant',
-    table: {
-      category: 'TabList',
-    },
-  },
   rightOverflowButtonProps: {
     control: { type: 'object' },
     description: 'Provide the props that describe the right overflow button',
@@ -542,13 +535,12 @@ export default {
         disable: true,
       },
     },
-    ...tabsArgTypes,
-    ...tabListArgTypes,
-    ...tabArgTypes,
-    ...iconStoriesArgTypes,
-    ...tabPanelsArgTypes,
-    ...tabPanelArgTypes,
-    ...tabsSkeletonArgTypes,
+    // `light` is deprecated
+    light: {
+      table: {
+        disable: true,
+      },
+    },
   },
 };
 
@@ -564,7 +556,6 @@ export const Default = (args) => {
     fullWidth,
     iconSize,
     leftOverflowButtonProps,
-    light,
     onChange,
     onClick,
     onKeyDown,
@@ -595,7 +586,6 @@ export const Default = (args) => {
         fullWidth={fullWidth}
         iconSize={iconSize}
         leftOverflowButtonProps={leftOverflowButtonProps}
-        light={light}
         rightOverflowButtonProps={rightOverflowButtonProps}
         scrollDebounceWait={scrollDebounceWait}
         scrollIntoView={scrollIntoView}
@@ -637,7 +627,6 @@ Default.argTypes = {
   ...tabListArgTypes,
   ...lineTabsSizeArgType,
   ...tabArgTypes,
-  ...iconStoriesArgTypes,
   ...tabPanelsArgTypes,
   ...tabPanelArgTypes,
 };
@@ -948,10 +937,13 @@ Manual.argTypes = lineTabsSizeArgType;
 Manual.args = lineTabsSizeArgs;
 
 export const Icon20Only = ({
+  badgeIndicator,
+  defaultOpen,
+  enterDelayMs,
   iconTabClassName,
   iconTabDisabled,
   iconTabLabel,
-  ...args
+  leaveDelayMs,
 }) => {
   return (
     <Tabs>
@@ -963,10 +955,13 @@ export const Icon20Only = ({
           <Activity size={20} aria-label="Activity" />
         </IconTab>
         <IconTab
+          badgeIndicator={badgeIndicator}
           className={iconTabClassName}
+          defaultOpen={defaultOpen}
           disabled={iconTabDisabled}
+          enterDelayMs={enterDelayMs}
           label={iconTabLabel}
-          {...args}>
+          leaveDelayMs={leaveDelayMs}>
           <Notification size={20} aria-label="Notification" />
         </IconTab>
         <IconTab label="Chat">
@@ -987,11 +982,14 @@ Icon20Only.argTypes = iconStoriesArgTypes;
 Icon20Only.args = iconStoriesArgs;
 
 export const IconOnly = ({
+  badgeIndicator,
+  defaultOpen,
+  enterDelayMs,
   iconTabClassName,
   iconTabDisabled,
   iconTabLabel,
+  leaveDelayMs,
   size,
-  ...args
 }) => {
   return (
     <Tabs>
@@ -1003,10 +1001,13 @@ export const IconOnly = ({
           <Activity aria-label="Activity" />
         </IconTab>
         <IconTab
+          badgeIndicator={badgeIndicator}
           className={iconTabClassName}
+          defaultOpen={defaultOpen}
           disabled={iconTabDisabled}
+          enterDelayMs={enterDelayMs}
           label={iconTabLabel}
-          {...args}>
+          leaveDelayMs={leaveDelayMs}>
           <Notification aria-label="Notification" />
         </IconTab>
         <IconTab label="Chat">
@@ -1348,9 +1349,6 @@ Vertical.args = {
 Vertical.argTypes = {
   ...tabsVerticalArgTypes,
   ...tabListVerticalArgTypes,
-  ...tabArgTypes,
-  ...tabPanelsArgTypes,
-  ...tabPanelArgTypes,
 };
 
 Vertical.parameters = {
@@ -1383,10 +1381,13 @@ Skeleton.args = {
 };
 
 export const Icon20OnlyVisualSnapshots = ({
+  badgeIndicator,
+  defaultOpen,
+  enterDelayMs,
   iconTabClassName,
   iconTabDisabled,
   iconTabLabel,
-  ...args
+  leaveDelayMs,
 }) => {
   return (
     <Tabs>
@@ -1398,10 +1399,13 @@ export const Icon20OnlyVisualSnapshots = ({
           <Activity size={20} aria-label="Activity" />
         </IconTab>
         <IconTab
+          badgeIndicator={badgeIndicator}
           className={iconTabClassName}
+          defaultOpen={defaultOpen}
           disabled={iconTabDisabled}
+          enterDelayMs={enterDelayMs}
           label={iconTabLabel}
-          {...args}>
+          leaveDelayMs={leaveDelayMs}>
           <Notification size={20} aria-label="Notification" />
         </IconTab>
         <IconTab label="Chat">
@@ -1428,10 +1432,13 @@ Icon20OnlyVisualSnapshots.play = async ({ userEvent }) => {
 Icon20OnlyVisualSnapshots.tags = ['!dev', '!autodocs'];
 
 export const IconOnlyVisualSnapshots = ({
+  badgeIndicator,
+  defaultOpen,
+  enterDelayMs,
   iconTabClassName,
   iconTabDisabled,
   iconTabLabel,
-  ...args
+  leaveDelayMs,
 }) => {
   return (
     <Tabs>
@@ -1443,10 +1450,13 @@ export const IconOnlyVisualSnapshots = ({
           <Activity aria-label="Activity" />
         </IconTab>
         <IconTab
+          badgeIndicator={badgeIndicator}
           className={iconTabClassName}
+          defaultOpen={defaultOpen}
           disabled={iconTabDisabled}
+          enterDelayMs={enterDelayMs}
           label={iconTabLabel}
-          {...args}>
+          leaveDelayMs={leaveDelayMs}>
           <Notification aria-label="Notification" />
         </IconTab>
         <IconTab label="Chat">
