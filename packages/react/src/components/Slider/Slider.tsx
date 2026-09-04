@@ -43,6 +43,7 @@ import type { TFunc, TranslateWithId } from '../../types/common';
 import { clamp } from '../../internal/clamp';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import { useId } from '../../internal/useId';
+import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
 
 interface ThumbWrapperProps
   extends Omit<
@@ -411,6 +412,7 @@ const Slider = (props: SliderProps) => {
   const thumbRefUpper = useRef<HTMLDivElement>(null);
   const filledTrackRef = useRef<HTMLDivElement>(null);
   const elementRef = useRef<HTMLDivElement>(null);
+  const labelRef = useRef<HTMLLabelElement>(null);
   const generatedId = useId();
   const prefix = usePrefix();
 
@@ -1289,6 +1291,10 @@ const Slider = (props: SliderProps) => {
     [`${prefix}--visually-hidden`]: hideLabel,
     [`${prefix}--label--disabled`]: disabled,
   });
+  useNoInteractiveChildren(
+    labelRef,
+    'The Slider component `labelText` prop must have no interactive content'
+  );
 
   const containerClasses = classNames(`${prefix}--slider-container`, {
     [`${prefix}--slider-container--two-handles`]: twoHandles,
@@ -1381,7 +1387,8 @@ const Slider = (props: SliderProps) => {
         as="label"
         htmlFor={twoHandles ? undefined : id}
         className={labelClasses}
-        id={labelId}>
+        id={labelId}
+        ref={labelRef}>
         {labelText}
       </Text>
       <div className={containerClasses}>
