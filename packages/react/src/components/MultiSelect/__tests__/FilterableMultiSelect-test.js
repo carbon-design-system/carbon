@@ -41,6 +41,43 @@ describe('FilterableMultiSelect', () => {
     };
   });
 
+  it('should not allow interactive content in titleText', () => {
+    const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+    expect(() => {
+      render(
+        <FilterableMultiSelect
+          {...mockProps}
+          titleText={
+            <>
+              FilterableMultiselect title <button type="button">Help</button>
+            </>
+          }
+        />
+      );
+    }).toThrow(
+      'The FilterableMultiSelect component `titleText` prop must have no interactive content'
+    );
+
+    spy.mockRestore();
+  });
+
+  it('should allow non-interactive content in titleText', () => {
+    expect(() => {
+      render(
+        <FilterableMultiSelect
+          {...mockProps}
+          titleText={
+            <>
+              FilterableMultiselect title
+              <span>additional title content</span>
+            </>
+          }
+        />
+      );
+    }).not.toThrow();
+  });
+
   it('should display all items when the menu is open', async () => {
     render(<FilterableMultiSelect {...mockProps} />);
     await waitForPosition();
