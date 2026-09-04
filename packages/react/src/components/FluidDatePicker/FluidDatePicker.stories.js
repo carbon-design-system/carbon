@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,13 +9,9 @@ import React from 'react';
 import FluidDatePicker from '../FluidDatePicker';
 import FluidDatePickerInput from '../FluidDatePickerInput';
 import FluidDatePickerSkeleton from './FluidDatePicker.Skeleton';
-import {
-  ToggletipLabel,
-  Toggletip,
-  ToggletipButton,
-  ToggletipContent,
-} from '../Toggletip';
+import { Toggletip, ToggletipButton, ToggletipContent } from '../Toggletip';
 import { Information } from '@carbon/icons-react';
+import './fluid-date-picker-story.scss';
 import mdx from './FluidDatePicker.mdx';
 
 export default {
@@ -155,9 +151,9 @@ const sharedParameters = {
   },
 };
 
-const ToggleTip = (
-  <>
-    <ToggletipLabel>Label</ToggletipLabel>
+const LabelToggletip = () => (
+  // Keep the toggletip outside `labelText`; interactive content is invalid in labels.
+  <span className="fluid-date-picker-story__toggletip">
     <Toggletip align="top-left">
       <ToggletipButton label="Show information">
         <Information />
@@ -166,15 +162,16 @@ const ToggleTip = (
         <p>Additional field information here.</p>
       </ToggletipContent>
     </Toggletip>
-  </>
+  </span>
 );
 
 export const Simple = ({ defaultWidth, ...args }) => (
-  <div style={{ width: defaultWidth }}>
+  <div className="fluid-date-picker-story" style={{ width: defaultWidth }}>
+    <LabelToggletip />
     <FluidDatePicker datePickerType="simple" {...args}>
       <FluidDatePickerInput
         placeholder="mm/dd/yyyy"
-        labelText={ToggleTip}
+        labelText="Label"
         id="date-picker-simple"
         {...args}
       />
@@ -195,12 +192,13 @@ Simple.argTypes = {
 Simple.parameters = sharedParameters;
 
 export const Single = ({ defaultWidth, ...args }) => (
-  <div style={{ width: defaultWidth }}>
+  <div className="fluid-date-picker-story" style={{ width: defaultWidth }}>
+    <LabelToggletip />
     <FluidDatePicker datePickerType="single" {...args}>
       <FluidDatePickerInput
         style={{ width: defaultWidth }}
         placeholder="mm/dd/yyyy"
-        labelText={ToggleTip}
+        labelText="Label"
         id="date-picker-single"
         {...args}
       />
@@ -222,12 +220,13 @@ Single.parameters = sharedParameters;
 
 export const RangeWithCalendar = ({ defaultWidth, ...args }) => {
   return (
-    <div style={{ width: defaultWidth }}>
+    <div className="fluid-date-picker-story" style={{ width: defaultWidth }}>
+      <LabelToggletip />
       <FluidDatePicker datePickerType="range" {...args}>
         <FluidDatePickerInput
           id="date-picker-input-id-start"
           placeholder="mm/dd/yyyy"
-          labelText={ToggleTip}
+          labelText="Label"
           size="md"
           {...args}
         />
