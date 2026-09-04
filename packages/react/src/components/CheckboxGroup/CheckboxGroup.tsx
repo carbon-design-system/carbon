@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import React, {
   Children,
   cloneElement,
+  useRef,
   type ComponentProps,
   type ReactNode,
 } from 'react';
@@ -22,6 +23,7 @@ import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps'
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
 import { Checkbox } from '../Checkbox';
+import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
 
 export interface CheckboxGroupProps {
   children?: ReactNode;
@@ -67,6 +69,7 @@ const CheckboxGroup = ({
   ...rest
 }: CheckboxGroupProps) => {
   const prefix = usePrefix();
+  const legendRef = useRef<HTMLLegendElement>(null);
   const checkboxGroupInstanceId = useId();
   const normalizedProps = useNormalizedInputProps({
     id: `checkbox-group-${checkboxGroupInstanceId}`,
@@ -107,6 +110,10 @@ const CheckboxGroup = ({
   const normalizedDecorator = candidateIsAILabel
     ? cloneElement(candidate, { size: 'mini', kind: 'default' })
     : candidate;
+  useNoInteractiveChildren(
+    legendRef,
+    'The CheckboxGroup component `legendText` prop must have no interactive content'
+  );
 
   const clonedChildren = Children.map(children, (child) => {
     if (isComponentElement(child, Checkbox)) {
@@ -156,18 +163,17 @@ const CheckboxGroup = ({
       {...rest}>
       <legend
         className={`${prefix}--label`}
-        id={legendId || rest['aria-labelledby']}>
+        id={legendId || rest['aria-labelledby']}
+        ref={legendRef}>
         {legendText}
-        {slug ? (
-          normalizedDecorator
-        ) : decorator ? (
-          <div className={`${prefix}--checkbox-group-inner--decorator`}>
-            {normalizedDecorator}
-          </div>
-        ) : (
-          ''
-        )}
       </legend>
+      {slug ? (
+        normalizedDecorator
+      ) : decorator ? (
+        <div className={`${prefix}--checkbox-group-inner--decorator`}>
+          {normalizedDecorator}
+        </div>
+      ) : null}
       {clonedChildren}
       <div className={`${prefix}--checkbox-group__validation-msg`}>
         {normalizedProps.invalid && (
