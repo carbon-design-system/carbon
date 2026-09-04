@@ -18,10 +18,7 @@ import {
 import { TokenFormat, group } from '../../../../src/tokens';
 import * as componentGroups from '../../../../src/tokens/components';
 
-import whiteJson from '../../../../src/dtcg/white.json';
-import g10Json from '../../../../src/dtcg/g10.json';
-import g90Json from '../../../../src/dtcg/g90.json';
-import g100Json from '../../../../src/dtcg/g100.json';
+import themesJson from '../../../../src/dtcg/themes.json';
 import buttonJson from '../../../../src/dtcg/components/button.json';
 import contentSwitcherJson from '../../../../src/dtcg/components/content-switcher.json';
 import notificationJson from '../../../../src/dtcg/components/notification.json';
@@ -42,15 +39,31 @@ const THEME_KEY = { white: 'whiteTheme', g10: 'g10', g90: 'g90', g100: 'g100' };
 
 // ─── DTCG helpers ─────────────────────────────────────────────────────────────
 
-function flattenDtcg(obj, prefix = '') {
+function flattenThemesDtcg(obj, theme, prefix = '') {
   const result = {};
   for (const [key, val] of Object.entries(obj)) {
     if (key.startsWith('$')) continue;
     const name = prefix ? `${prefix}-${key}` : key;
-    if (val && typeof val === 'object' && !('$value' in val)) {
-      Object.assign(result, flattenDtcg(val, name));
-    } else if (val && '$value' in val) {
-      result[name] = val;
+    if (
+      val &&
+      typeof val === 'object' &&
+      '$extensions' in val &&
+      'carbon.themes' in val.$extensions
+    ) {
+      const themeVal = val.$extensions['carbon.themes'][theme];
+      const $value =
+        themeVal && typeof themeVal === 'object' ? themeVal.value : themeVal;
+      const _alphaModifier =
+        themeVal && typeof themeVal === 'object' ? themeVal.alpha : undefined;
+      result[name] = {
+        $type: val.$type,
+        $description: val.$description,
+        $value,
+        _alphaModifier,
+        $extensions: val.$extensions,
+      };
+    } else if (val && typeof val === 'object') {
+      Object.assign(result, flattenThemesDtcg(val, theme, name));
     }
   }
   return result;
@@ -76,10 +89,10 @@ function flattenComponentDtcg(obj, prefix = '') {
 }
 
 const dtcgFlat = {
-  white: flattenDtcg(whiteJson),
-  g10: flattenDtcg(g10Json),
-  g90: flattenDtcg(g90Json),
-  g100: flattenDtcg(g100Json),
+  white: flattenThemesDtcg(themesJson, 'white'),
+  g10: flattenThemesDtcg(themesJson, 'g10'),
+  g90: flattenThemesDtcg(themesJson, 'g90'),
+  g100: flattenThemesDtcg(themesJson, 'g100'),
 };
 
 const componentDtcg = {
@@ -131,7 +144,8 @@ function getAlias(theme, tokenName) {
   const entry = dtcgFlat[theme]?.[tokenName] ?? dtcgFlat.white?.[tokenName];
   if (!entry) return null;
   const ref = String(entry.$value ?? '');
-  const alpha = entry.$extensions?.['org.carbon']?.alphaModifier;
+  const alpha =
+    entry._alphaModifier ?? entry.$extensions?.['org.carbon']?.alphaModifier;
   return alpha != null ? `${ref} × ${alpha}α` : ref;
 }
 
