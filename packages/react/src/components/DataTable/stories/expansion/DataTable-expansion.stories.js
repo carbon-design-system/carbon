@@ -106,6 +106,17 @@ export const Default = (args) => (
   </DataTable>
 );
 
+export const StickyHeader = Default.bind({});
+StickyHeader.args = {
+  stickyHeader: true,
+};
+StickyHeader.play = async ({ canvas, userEvent }) => {
+  const [firstExpandButton] = canvas.getAllByRole('button', {
+    name: 'Expand current row',
+  });
+  await userEvent.click(firstExpandButton);
+};
+
 export const BatchExpansion = (args) => (
   <DataTable {...args} rows={rows} headers={headers}>
     {({
