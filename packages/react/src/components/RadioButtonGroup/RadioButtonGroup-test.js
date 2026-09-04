@@ -29,6 +29,44 @@ describe('RadioButtonGroup', () => {
     expect(legend).toBeInTheDocument();
   });
 
+  it('should not allow interactive content in legendText', () => {
+    const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+    expect(() => {
+      render(
+        <RadioButtonGroup
+          name="test"
+          legendText={
+            <>
+              test <button type="button">Help</button>
+            </>
+          }>
+          <RadioButton labelText="test-1" value="test-1" />
+        </RadioButtonGroup>
+      );
+    }).toThrow(
+      'The RadioButtonGroup component `legendText` prop must have no interactive content'
+    );
+
+    spy.mockRestore();
+  });
+
+  it('should allow non-interactive content in legendText', () => {
+    expect(() => {
+      render(
+        <RadioButtonGroup
+          name="test"
+          legendText={
+            <>
+              test <span>additional legend content</span>
+            </>
+          }>
+          <RadioButton labelText="test-1" value="test-1" />
+        </RadioButtonGroup>
+      );
+    }).not.toThrow();
+  });
+
   it('should render `legendText` in a <fieldset>', () => {
     render(
       <RadioButtonGroup defaultSelected="test-1" name="test" legendText="test">
@@ -294,6 +332,10 @@ describe('RadioButtonGroup', () => {
       expect(container.firstChild.firstChild).toHaveClass(
         `${prefix}--radio-button-group--decorator`
       );
+      expect(screen.getAllByText('test')).toHaveLength(1);
+      expect(container.querySelector('legend')).not.toContainElement(
+        screen.getByRole('button')
+      );
     });
 
     it('should respect deprecated slug prop', () => {
@@ -307,6 +349,9 @@ describe('RadioButtonGroup', () => {
 
       expect(container.firstChild.firstChild).toHaveClass(
         `${prefix}--radio-button-group--slug`
+      );
+      expect(container.querySelector('legend')).not.toContainElement(
+        screen.getByRole('button')
       );
       spy.mockRestore();
     });
