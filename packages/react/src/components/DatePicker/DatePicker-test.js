@@ -774,6 +774,130 @@ describe('Single date picker', () => {
     expect(screen.getByLabelText('Date Picker label')).toHaveValue('');
   });
 
+  it('should update the visible month when controlled value changes while calendar is open', async () => {
+    const ref = createRef();
+    const DatePickerExample = () => {
+      const [date, setDate] = useState('03/16/2026');
+      return (
+        <>
+          <DatePicker
+            ref={ref}
+            datePickerType="single"
+            value={date}
+            onChange={() => {}}>
+            <DatePickerInput
+              placeholder="mm/dd/yyyy"
+              labelText="Date Picker label"
+              id="date-picker-controlled-month"
+            />
+          </DatePicker>
+          <button
+            type="button"
+            onClick={() => {
+              setDate('01/01/2026');
+            }}>
+            set January
+          </button>
+        </>
+      );
+    };
+
+    render(<DatePickerExample />);
+    const input = screen.getByLabelText('Date Picker label');
+
+    await userEvent.click(input);
+    await userEvent.click(screen.getByText('set January'));
+
+    // eslint-disable-next-line testing-library/no-node-access
+    const monthElement = document.querySelector(
+      '.flatpickr-current-month .cur-month'
+    );
+
+    expect(input).toHaveValue('01/01/2026');
+    expect(ref.current.calendar.currentMonth).toBe(0);
+    expect(ref.current.calendar.currentYear).toBe(2026);
+    expect(monthElement).toHaveTextContent('January');
+  });
+
+  it('should not call onChange when controlled value changes externally', async () => {
+    const onChange = jest.fn();
+    const DatePickerExample = () => {
+      const [date, setDate] = useState('03/16/2026');
+      return (
+        <>
+          <DatePicker datePickerType="single" value={date} onChange={onChange}>
+            <DatePickerInput
+              placeholder="mm/dd/yyyy"
+              labelText="Date Picker label"
+              id="date-picker-controlled-on-change"
+            />
+          </DatePicker>
+          <button
+            type="button"
+            onClick={() => {
+              setDate('01/01/2026');
+            }}>
+            set January
+          </button>
+        </>
+      );
+    };
+
+    render(<DatePickerExample />);
+
+    await userEvent.click(screen.getByLabelText('Date Picker label'));
+    await userEvent.click(screen.getByText('set January'));
+
+    expect(onChange).not.toHaveBeenCalled();
+  });
+
+  it('should navigate from the externally controlled month after controlled value changes', async () => {
+    const ref = createRef();
+    const DatePickerExample = () => {
+      const [date, setDate] = useState('03/16/2026');
+      return (
+        <>
+          <DatePicker
+            ref={ref}
+            datePickerType="single"
+            value={date}
+            onChange={() => {}}>
+            <DatePickerInput
+              placeholder="mm/dd/yyyy"
+              labelText="Date Picker label"
+              id="date-picker-controlled-navigation"
+            />
+          </DatePicker>
+          <button
+            type="button"
+            onClick={() => {
+              setDate('01/01/2026');
+            }}>
+            set January
+          </button>
+        </>
+      );
+    };
+
+    render(<DatePickerExample />);
+
+    await userEvent.click(screen.getByLabelText('Date Picker label'));
+    await userEvent.click(screen.getByText('set January'));
+
+    // eslint-disable-next-line testing-library/no-node-access
+    const nextMonthButton = document.querySelector('.flatpickr-next-month');
+    await userEvent.click(nextMonthButton);
+
+    // eslint-disable-next-line testing-library/no-node-access
+    const monthElement = document.querySelector(
+      '.flatpickr-current-month .cur-month'
+    );
+
+    expect(ref.current.calendar.currentMonth).toBe(1);
+    expect(ref.current.calendar.currentYear).toBe(2026);
+    expect(monthElement).toHaveTextContent('February');
+  });
+
   it('should clear calendar when value is set to null', async () => {
     const DatePickerExample = () => {
       const [date, setDate] = useState('01/20/1989');
