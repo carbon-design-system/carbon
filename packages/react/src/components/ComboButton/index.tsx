@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { ChevronDown } from '@carbon/icons-react';
@@ -144,7 +144,34 @@ const ComboButton = React.forwardRef<HTMLDivElement, ComboButtonProps>(
       middleware: middlewares,
       whileElementsMounted: autoUpdate,
     });
-    const ref = mergeRefs(forwardRef, containerRef, refs.setReference);
+    // React 19: refs.setFloating / refs.setReference are useState setters.
+    // Passing them as ref callbacks causes setState during commit → crash.
+    // Capture the node in a ref and forward it in a passive effect (after commit).
+    const pendingFloatingNodeRef = useRef(null);
+    const setFloatingSafe = useCallback((node) => {
+      pendingFloatingNodeRef.current = node;
+    }, []);
+    useEffect(() => {
+      if (pendingFloatingNodeRef.current !== null) {
+        const node = pendingFloatingNodeRef.current;
+        pendingFloatingNodeRef.current = null;
+        refs.setFloating(node);
+      }
+    });
+
+    const pendingReferenceNodeRef = useRef(null);
+    const setReferenceSafe = useCallback((node) => {
+      pendingReferenceNodeRef.current = node;
+    }, []);
+    useEffect(() => {
+      if (pendingReferenceNodeRef.current !== null) {
+        const node = pendingReferenceNodeRef.current;
+        pendingReferenceNodeRef.current = null;
+        refs.setReference(node);
+      }
+    });
+
+    const ref = mergeRefs(forwardRef, containerRef, setReferenceSafe);
     const {
       open,
       handleClick: hookOnClick,
@@ -207,7 +234,7 @@ const ComboButton = React.forwardRef<HTMLDivElement, ComboButtonProps>(
           </Button>
         </div>
         <IconButton
-          ref={refs.setReference}
+          ref={setReferenceSafe}
           className={triggerClasses}
           label={t('carbon.combo-button.additional-actions')}
           size={size}
@@ -224,7 +251,7 @@ const ComboButton = React.forwardRef<HTMLDivElement, ComboButtonProps>(
           containerRef={containerRef}
           menuAlignment={menuAlignment}
           className={menuClasses}
-          ref={refs.setFloating}
+          ref={setFloatingSafe}
           id={id}
           label={t('carbon.combo-button.additional-actions')}
           size={size}

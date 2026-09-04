@@ -431,6 +431,32 @@ const ComboBox = forwardRef(
           }
         : {}
     );
+    // React 19: refs.setFloating / refs.setReference are useState setters.
+    // Passing them as ref callbacks causes setState during commit → crash.
+    // Capture the node in a ref and forward it in a passive effect (after commit).
+    const pendingFloatingNodeRef = useRef(null);
+    const setFloatingSafe = useCallback((node) => {
+      pendingFloatingNodeRef.current = node;
+    }, []);
+    useEffect(() => {
+      if (pendingFloatingNodeRef.current !== null) {
+        const node = pendingFloatingNodeRef.current;
+        pendingFloatingNodeRef.current = null;
+        refs.setFloating(node);
+      }
+    });
+
+    const pendingReferenceNodeRef = useRef(null);
+    const setReferenceSafe = useCallback((node) => {
+      pendingReferenceNodeRef.current = node;
+    }, []);
+    useEffect(() => {
+      if (pendingReferenceNodeRef.current !== null) {
+        const node = pendingReferenceNodeRef.current;
+        pendingReferenceNodeRef.current = null;
+        refs.setReference(node);
+      }
+    });
     const referenceElement = refs?.reference?.current;
     const parentWidth =
       typeof HTMLElement !== 'undefined' &&
@@ -1023,7 +1049,7 @@ const ComboBox = forwardRef(
     const menuProps = useMemo(
       () =>
         getMenuProps({
-          ref: enableFloatingStyles ? refs.setFloating : null,
+          ref: enableFloatingStyles ? setFloatingSafe : null,
         }),
       // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
       [
@@ -1031,7 +1057,7 @@ const ComboBox = forwardRef(
         deprecatedAriaLabel,
         ariaLabel,
         getMenuProps,
-        refs.setFloating,
+        setFloatingSafe,
       ]
     );
 
@@ -1065,7 +1091,7 @@ const ComboBox = forwardRef(
           light={light}
           size={size}
           warn={normalizedProps.warn}
-          ref={enableFloatingStyles ? refs.setReference : null}
+          ref={enableFloatingStyles ? setReferenceSafe : null}
           warnText={warnText}
           warnTextId={warnTextId}>
           <div className={`${prefix}--list-box__field`}>
