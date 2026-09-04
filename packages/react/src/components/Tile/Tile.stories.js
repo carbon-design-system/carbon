@@ -138,7 +138,7 @@ const radioArgs = {
   legend: 'Radio Tile Group',
   name: 'radio tile group',
   required: false,
-  valueSelected: 'default-selected',
+  defaultSelected: 'default-selected',
   onChange: action('onChange'),
 };
 
@@ -155,7 +155,7 @@ const radioArgTypes = {
   required: {
     control: 'boolean',
   },
-  valueSelected: {
+  defaultSelected: {
     control: 'select',
     options: ['standard', 'default-selected', 'selected'],
   },
@@ -428,7 +428,7 @@ Radio.parameters = {
 export const RadioWithLayer = (args) => (
   <WithLayer>
     {(layer) => (
-      <TileGroup {...args}>
+      <TileGroup {...args} name={`${args.name} ${layer}`}>
         <RadioTile
           id={`radio-tile-${layer}-1`}
           value="standard"
@@ -449,8 +449,8 @@ RadioWithLayer.args = {
 
 RadioWithLayer.argTypes = {
   ...radioArgTypes,
-  valueSelected: {
-    ...radioArgTypes.valueSelected,
+  defaultSelected: {
+    ...radioArgTypes.defaultSelected,
     options: ['standard', 'default-selected'],
   },
 };

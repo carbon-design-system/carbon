@@ -118,7 +118,7 @@ test.describe('@avt Tile', () => {
         theme: 'white',
       },
       args: {
-        valueSelected: 'selected',
+        defaultSelected: 'selected',
       },
     });
 
@@ -229,7 +229,6 @@ test.describe('@avt Tile', () => {
     await page.keyboard.press('Tab');
     await expect(page.getByRole('radio').nth(1)).toBeFocused();
     await page.keyboard.press('ArrowUp');
-    await expect(page.getByRole('radio').nth(0)).toBeFocused();
-    await expect(page.getByRole('radio').nth(1)).toBeChecked();
+    await expect(page.getByRole('radio').nth(0)).toBeChecked();
   });
 });
