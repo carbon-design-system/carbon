@@ -235,13 +235,12 @@ export default class FloatingController implements ReactiveController {
         // @ts-ignore
         const { x: arrowX, y: arrowY } = middlewareData.arrow;
 
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-        const staticSide: any = {
+        const staticSide = {
           top: 'bottom',
           right: 'left',
           bottom: 'top',
           left: 'right',
-        }[placement.split('-')[0]];
+        }[placement.split('-')[0] as 'top' | 'right' | 'bottom' | 'left'];
 
         arrowElement.style.left = arrowX != null ? `${arrowX}px` : '';
         arrowElement.style.top = arrowY != null ? `${arrowY}px` : '';
