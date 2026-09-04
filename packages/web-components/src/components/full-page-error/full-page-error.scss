@@ -11,7 +11,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/reset';
 @use '@carbon/styles/scss/config' as *;
 @use '@carbon/grid';
-@use '@carbon/styles/scss/components/FullPageError' as component-styles;
+@use '@carbon/styles/scss/components/full-page-error' as component-styles;
 
 // Emit Carbon full-page-error class rules at file root
 @include component-styles.full-page-error;

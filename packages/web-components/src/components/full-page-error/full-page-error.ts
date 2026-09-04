@@ -66,7 +66,7 @@ class CDSFullPageError extends LitElement {
   title: string = 'Title';
 
   render() {
-    return html` <div class=${blockClass} role="main">
+    return html` <div class=${blockClass}>
       <div class=${`${blockClass}__container`}>
         <div class=${`${blockClass}__grid ${prefix}--css-grid `}>
           <div
@@ -84,7 +84,7 @@ class CDSFullPageError extends LitElement {
           <div
             class=${`${prefix}--css-grid-column ${prefix}--sm:col-span-4 ${prefix}--md:col-span-5 ${prefix}--lg:col-span-10`}>
             <div class=${`${blockClass}__svg-container`}>
-              ${errorData[this.kind].svg}
+              ${errorData[this.kind]?.svg ?? errorData[Kind.Custom].svg}
             </div>
           </div>
         </div>

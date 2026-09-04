@@ -59,26 +59,25 @@ export const Default = {
         <cds-header aria-label="IBM Product">
           <cds-header-menu-button
             button-label-active="Close menu"
-            button-label-inactive="Open menu"
-          ></cds-header-menu-button>
+            button-label-inactive="Open menu"></cds-header-menu-button>
           <cds-header-name href="/" prefix="IBM">Product</cds-header-name>
           <div class="cds--header__global">
             <cds-header-global-action
               aria-label="User Avatar"
               tooltip-text="User Avatar"
-              tooltip-alignment="end"
-            >
+              tooltip-alignment="end">
               ${iconLoader(User20, { slot: 'icon' })}
             </cds-header-global-action>
           </div>
-          <cds-side-nav aria-label="Side navigation" collapse-mode="responsive"></>
+          <cds-side-nav
+            aria-label="Side navigation"
+            collapse-mode="responsive"></cds-side-nav>
         </cds-header>
 
         <cds-page-header-breadcrumb
           border="true"
           within-grid
-          class="full-page-error-stories__story-breadcrumbs"
-        >
+          class="full-page-error-stories__story-breadcrumbs">
           <cds-breadcrumb>
             <cds-breadcrumb-item>
               <cds-breadcrumb-link href="#">Link 0</cds-breadcrumb-link>
@@ -100,8 +99,7 @@ export const Default = {
           class=${args.class}
           title=${args.title}
           description=${args.description}
-          kind=${args.kind}
-        >
+          kind=${args.kind}>
           <a class="cds--link cds--link--lg" href="#">– Forwarding Link 1</a>
           <br />
           <a class="cds--link cds--link--lg" href="#">– Forwarding Link 2</a>
@@ -130,26 +128,25 @@ export const Error403 = {
         <cds-header aria-label="IBM Product">
           <cds-header-menu-button
             button-label-active="Close menu"
-            button-label-inactive="Open menu"
-          ></cds-header-menu-button>
+            button-label-inactive="Open menu"></cds-header-menu-button>
           <cds-header-name href="/" prefix="IBM">Product</cds-header-name>
           <div class="cds--header__global">
             <cds-header-global-action
               aria-label="User Avatar"
               tooltip-text="User Avatar"
-              tooltip-alignment="end"
-            >
+              tooltip-alignment="end">
               ${iconLoader(User20, { slot: 'icon' })}
             </cds-header-global-action>
           </div>
-         <cds-side-nav aria-label="Side navigation" collapse-mode="responsive"></>
+          <cds-side-nav
+            aria-label="Side navigation"
+            collapse-mode="responsive"></cds-side-nav>
         </cds-header>
 
         <cds-page-header-breadcrumb
           border="true"
           within-grid
-          class="full-page-error-stories__story-breadcrumbs"
-        >
+          class="full-page-error-stories__story-breadcrumbs">
           <cds-breadcrumb>
             <cds-breadcrumb-item>
               <cds-breadcrumb-link href="#">Link 0</cds-breadcrumb-link>
@@ -171,8 +168,7 @@ export const Error403 = {
           class=${args.class}
           title=${args.title}
           description=${args.description}
-          kind=${args.kind}
-        >
+          kind=${args.kind}>
           <a class="cds--link cds--link--lg" href="#">– Forwarding Link 1</a>
           <br />
           <a class="cds--link cds--link--lg" href="#">– Forwarding Link 2</a>
@@ -201,26 +197,25 @@ export const Error404 = {
         <cds-header aria-label="IBM Product">
           <cds-header-menu-button
             button-label-active="Close menu"
-            button-label-inactive="Open menu"
-          ></cds-header-menu-button>
+            button-label-inactive="Open menu"></cds-header-menu-button>
           <cds-header-name href="/" prefix="IBM">Product</cds-header-name>
           <div class="cds--header__global">
             <cds-header-global-action
               aria-label="User Avatar"
               tooltip-text="User Avatar"
-              tooltip-alignment="end"
-            >
+              tooltip-alignment="end">
               ${iconLoader(User20, { slot: 'icon' })}
             </cds-header-global-action>
           </div>
-           <cds-side-nav aria-label="Side navigation" collapse-mode="responsive"></>
+          <cds-side-nav
+            aria-label="Side navigation"
+            collapse-mode="responsive"></cds-side-nav>
         </cds-header>
 
         <cds-page-header-breadcrumb
           border="true"
           within-grid
-          class="full-page-error-stories__story-breadcrumbs"
-        >
+          class="full-page-error-stories__story-breadcrumbs">
           <cds-breadcrumb>
             <cds-breadcrumb-item>
               <cds-breadcrumb-link href="#">Link 0</cds-breadcrumb-link>
@@ -242,8 +237,7 @@ export const Error404 = {
           class=${args.class}
           title=${args.title}
           description=${args.description}
-          kind=${args.kind}
-        >
+          kind=${args.kind}>
           <a class="cds--link cds--link--lg" href="#">– Forwarding Link 1</a>
           <br />
           <a class="cds--link cds--link--lg" href="#">– Forwarding Link 2</a>
