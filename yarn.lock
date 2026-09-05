@@ -2012,7 +2012,7 @@ __metadata:
   resolution: "@carbon/actions-wait-for-it@workspace:actions/wait-for-it"
   dependencies:
     "@actions/core": "npm:^3.0.0"
-    got: "npm:^15.0.0"
+    got: "npm:^16.0.0"
   languageName: unknown
   linkType: soft
 
@@ -9679,13 +9679,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cacheable-lookup@npm:^7.0.0":
-  version: 7.0.0
-  resolution: "cacheable-lookup@npm:7.0.0"
-  checksum: 10/69ea78cd9f16ad38120372e71ba98b64acecd95bbcbcdad811f857dc192bad81ace021f8def012ce19178583db8d46afd1a00b3e8c88527e978e049edbc23252
-  languageName: node
-  linkType: hard
-
 "cacheable-request@npm:^13.0.18":
   version: 13.0.19
   resolution: "cacheable-request@npm:13.0.19"
@@ -14008,23 +14001,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"got@npm:^15.0.0":
-  version: 15.1.0
-  resolution: "got@npm:15.1.0"
+"got@npm:^16.0.0":
+  version: 16.0.0
+  resolution: "got@npm:16.0.0"
   dependencies:
     "@sindresorhus/is": "npm:^8.0.0"
     byte-counter: "npm:^0.1.0"
-    cacheable-lookup: "npm:^7.0.0"
     cacheable-request: "npm:^13.0.18"
     chunk-data: "npm:^0.1.0"
     decompress-response: "npm:^10.0.0"
-    http2-wrapper: "npm:^2.2.1"
     keyv: "npm:^5.6.0"
     lowercase-keys: "npm:^4.0.1"
     responselike: "npm:^4.0.2"
     type-fest: "npm:^5.6.0"
     uint8array-extras: "npm:^1.5.0"
-  checksum: 10/ca875c2f5df2d63558a62172dba3442d20074c1e94ec22362005a3f935021652d97e555bb46b63ea6566e9a00eebe695b4aaebdfe64119f1e959ce81b1f0086b
+  checksum: 10/ca6a97f1a8c00a4f741a504480ef1a80148971d25c49aa544d7c5ff26339e1a26bf8b7eb9c8c8757b76aee6548fe7c515645ad51d1afa90003cb9e92f45513ec
   languageName: node
   linkType: hard
 
@@ -14358,16 +14349,6 @@ __metadata:
     jsprim: "npm:^1.2.2"
     sshpk: "npm:^1.7.0"
   checksum: 10/2ff7112e6b0d8f08b382dfe705078c655501f2ddd76cf589d108445a9dd388a0a9be928c37108261519a7f53e6bbd1651048d74057b804807cce1ec49e87a95b
-  languageName: node
-  linkType: hard
-
-"http2-wrapper@npm:^2.2.1":
-  version: 2.2.1
-  resolution: "http2-wrapper@npm:2.2.1"
-  dependencies:
-    quick-lru: "npm:^5.1.1"
-    resolve-alpn: "npm:^1.2.0"
-  checksum: 10/e7a5ac6548318e83fc0399cd832cdff6bbf902b165d211cad47a56ee732922e0aa1107246dd884b12532a1c4649d27c4d44f2480911c65202e93c90bde8fa29d
   languageName: node
   linkType: hard
 
@@ -20220,7 +20201,7 @@ __metadata:
     execa: "npm:^10.0.0"
     fast-glob: "npm:^3.3.3"
     fs-extra: "npm:^11.0.0"
-    got: "npm:^15.0.0"
+    got: "npm:^16.0.0"
   languageName: unknown
   linkType: soft
 
@@ -20445,13 +20426,6 @@ __metadata:
   version: 2.2.0
   resolution: "querystringify@npm:2.2.0"
   checksum: 10/46ab16f252fd892fc29d6af60966d338cdfeea68a231e9457631ffd22d67cec1e00141e0a5236a2eb16c0d7d74175d9ec1d6f963660c6f2b1c2fc85b194c5680
-  languageName: node
-  linkType: hard
-
-"quick-lru@npm:^5.1.1":
-  version: 5.1.1
-  resolution: "quick-lru@npm:5.1.1"
-  checksum: 10/a516faa25574be7947969883e6068dbe4aa19e8ef8e8e0fd96cddd6d36485e9106d85c0041a27153286b0770b381328f4072aa40d3b18a19f5f7d2b78b94b5ed
   languageName: node
   linkType: hard
 
@@ -20903,13 +20877,6 @@ __metadata:
   version: 1.2.0
   resolution: "reserved-identifiers@npm:1.2.0"
   checksum: 10/02722585aa97f25384a59a33055529a90c8fa8ce3d32f02be4bcec1454254fb385429fc3168a85fe56bb952ad632ea8fecb8fa2addb47e7d97a1ab4922827ad9
-  languageName: node
-  linkType: hard
-
-"resolve-alpn@npm:^1.2.0":
-  version: 1.2.1
-  resolution: "resolve-alpn@npm:1.2.1"
-  checksum: 10/744e87888f0b6fa0b256ab454ca0b9c0b80808715e2ef1f3672773665c92a941f6181194e30ccae4a8cd0adbe0d955d3f133102636d2ee0cca0119fec0bc9aec
   languageName: node
   linkType: hard
 
