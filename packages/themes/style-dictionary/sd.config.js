@@ -21,7 +21,9 @@ const { default: StyleDictionary } = require('style-dictionary');
 // ── Custom plugins ────────────────────────────────────────────────────────────
 const carbonColorFlatten = require('./transforms/color-flatten');
 const carbonAlphaModifier = require('./transforms/alpha-modifier');
-const carbonComponentTokensPreprocessor = require('./preprocessors/component-tokens');
+const carbonComponentTokensPreprocessorModule = require('./preprocessors/component-tokens');
+const { preprocessor: carbonComponentTokensPreprocessor } =
+  carbonComponentTokensPreprocessorModule;
 const carbonThemeMetadataPreprocessor = require('./preprocessors/theme-metadata');
 const { preprocessor: flattenDualRole } = require('./preprocessors/dual-role');
 const carbonScssThemes = require('./formats/scss-themes');
@@ -43,6 +45,15 @@ const JS_GENERATED_COMPONENTS = path.join(
 );
 
 const THEME_NAMES = ['white', 'g10', 'g90', 'g100'];
+
+// Light/dark scheme per theme — used to re-inject color-scheme metadata after
+// extractThemeSlice strips the root $extensions from the unified file.
+const THEME_COLOR_SCHEME = {
+  white: 'light',
+  g10: 'light',
+  g90: 'dark',
+  g100: 'dark',
+};
 const COMPONENT_NAMES = [
   'button',
   'tag',
@@ -50,6 +61,72 @@ const COMPONENT_NAMES = [
   'status',
   'content-switcher',
 ];
+
+// ── extractThemeSlice ─────────────────────────────────────────────────────────
+//
+// After the component-tokens preprocessor runs on themes.json, every leaf token
+// node becomes a group with a `_by_theme` child containing one synthetic leaf
+// per theme.  This function walks the expanded tree and replaces each
+// `_by_theme` group with the single synthetic leaf for `themeName`, collapsing
+// the tree back into a normal per-theme token structure that the rest of the
+// pipeline (flattenDualRole, SD transforms, formatters) understands.
+//
+// Tokens that do NOT have a _by_theme group (palette reference tokens injected
+// via `source:`) are passed through unchanged.
+function extractThemeSlice(node, themeName) {
+  if (!node || typeof node !== 'object') return node;
+
+  const out = {};
+  for (const [key, value] of Object.entries(node)) {
+    if (key.startsWith('$')) {
+      out[key] = value;
+      continue;
+    }
+    if (!value || typeof value !== 'object') {
+      out[key] = value;
+      continue;
+    }
+    if (key === '_by_theme') {
+      // Skip — handled by the parent via the `value._by_theme` branch below.
+      continue;
+    }
+
+    // Check if this child node has a _by_theme group (i.e. it was a leaf or
+    // dual-role node in themes.json that the preprocessor expanded).
+    if (value._by_theme) {
+      const leaf = value._by_theme[themeName];
+      if (leaf) {
+        // Start with the leaf's DTCG fields ($type, $value, $extensions).
+        const merged = { ...leaf };
+        // Preserve $description from the group wrapper (leaf synthetic nodes
+        // don't carry it, but the original themes.json node does).
+        if (!merged.$description && value.$description)
+          merged.$description = value.$description;
+        if (!merged.$type && value.$type) merged.$type = value.$type;
+
+        // Recurse into any group children of this node (dual-role case):
+        // e.g. `background` is both a token and the parent of `background-active`.
+        for (const [childKey, childValue] of Object.entries(value)) {
+          if (childKey.startsWith('$') || childKey === '_by_theme') continue;
+          if (!childValue || typeof childValue !== 'object') continue;
+          const sliced = extractThemeSlice(
+            { [childKey]: childValue },
+            themeName
+          );
+          if (sliced[childKey] !== undefined)
+            merged[childKey] = sliced[childKey];
+        }
+
+        out[key] = merged;
+      }
+      // If the theme had no entry, skip the token.
+    } else {
+      const sliced = extractThemeSlice(value, themeName);
+      if (sliced !== null) out[key] = sliced;
+    }
+  }
+  return out;
+}
 
 // ── Custom name transform ─────────────────────────────────────────────────────
 //
@@ -89,16 +166,46 @@ const CARBON_TRANSFORMS = [
 ];
 
 // ── Helper: build config for one theme ───────────────────────────────────────
+//
+// themes.json is the unified source — all four themes in one file, with each
+// token carrying per-theme values under $extensions["carbon.themes"].
+// The component-tokens preprocessor expands those into per-theme leaf tokens
+// (identical to what it does for component files), and dual-role splitting
+// then runs on the resulting tree so SD sees clean leaf+group pairs.
 function themeConfig(themeName) {
-  // Pre-process the theme JSON to handle "dual-role" nodes (nodes that have
-  // both a $value AND non-$ children).  SD v5 treats a node with $value as a
-  // leaf and silently drops children; flattenDualRole collects ALL leaf tokens
-  // (including children of dual-role parents) into a flat camelCase structure.
-  // The palette is kept in `source:` (nested) so SD alias resolution works.
-  const rawTheme = JSON.parse(
-    fs.readFileSync(path.join(DTCG_DIR, `${themeName}.json`), 'utf8')
+  // Read the unified themes.json. The component-tokens preprocessor first
+  // expands carbon.themes entries into _by_theme.<theme> leaf nodes, then
+  // flattenDualRole splits any dual-role nodes (value + children) so SD can
+  // process them without losing children.
+  const rawThemes = JSON.parse(
+    fs.readFileSync(path.join(DTCG_DIR, 'themes.json'), 'utf8')
   );
-  const flatTokens = flattenDualRole(rawTheme);
+  // The component-tokens preprocessor understands the { value, alpha } entry
+  // shape from the unified file as well as the legacy bare-string shape from
+  // component files. Run it first so carbon.themes entries become $value leaves.
+  const expanded = carbonComponentTokensPreprocessor(rawThemes);
+  // Now extract only this theme's _by_theme.<themeName> leaf nodes, rewriting
+  // them back to plain $value tokens so the rest of the pipeline sees a normal
+  // single-theme token tree.
+  const rawSlice = extractThemeSlice(expanded, themeName);
+
+  // Re-attach the per-theme color-scheme to the root $extensions so that
+  // carbonThemeMetadataPreprocessor (which reads
+  // dictionary.$extensions["org.carbon"]["color-scheme"]) can inject the
+  // color-scheme synthetic token.  extractThemeSlice does not carry the root
+  // $extensions through because they are global, not per-token.
+  const themeSlice = {
+    ...rawSlice,
+    $extensions: {
+      ...(rawSlice.$extensions ?? {}),
+      'org.carbon': {
+        ...(rawSlice.$extensions?.['org.carbon'] ?? {}),
+        'color-scheme': THEME_COLOR_SCHEME[themeName],
+      },
+    },
+  };
+
+  const flatTokens = flattenDualRole(themeSlice);
 
   return {
     source: [path.join(DTCG_DIR, 'color-palette.json')],
@@ -246,7 +353,7 @@ function createBase() {
     name: 'carbon',
     transforms: CARBON_TRANSFORMS,
   });
-  base.registerPreprocessor(carbonComponentTokensPreprocessor);
+  base.registerPreprocessor(carbonComponentTokensPreprocessorModule);
   base.registerPreprocessor(carbonThemeMetadataPreprocessor);
   base.registerFormat(carbonScssThemes);
   base.registerFormat(carbonScssTokens);

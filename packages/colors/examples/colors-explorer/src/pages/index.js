@@ -7,10 +7,7 @@
 
 import React from 'react';
 import { colors, hoverColors } from '../../../../src';
-import whiteJson from '@carbon/themes/src/dtcg/white.json';
-import g10Json from '@carbon/themes/src/dtcg/g10.json';
-import g90Json from '@carbon/themes/src/dtcg/g90.json';
-import g100Json from '@carbon/themes/src/dtcg/g100.json';
+import themesJson from '@carbon/themes/src/dtcg/themes.json';
 
 // ── Flatten colors into a flat list of token objects ─────────────────────────
 // colors = { blue: { 10: '#edf5ff', 20: '#d0e2ff', ... }, ... }
@@ -76,25 +73,41 @@ const THEME_OPTIONS = [
 // Flattens each theme's DTCG JSON and builds:
 //   colorToThemeTokens['blue-60'] = { white: ['background-brand', ...], g10: [...], ... }
 
-function flattenDtcg(obj, prefix = '') {
+// Flatten the unified themes.json for one theme.
+// Each token leaf carries its per-theme value under
+// $extensions["carbon.themes"][themeName]. The entry is either a bare alias
+// string ("{blue.60}"), a { value, alpha } object, or a composite color object.
+// For the color→token reverse-map we only need the alias strings.
+function flattenDtcg(obj, themeName, prefix = '') {
   const result = {};
   for (const [key, val] of Object.entries(obj)) {
     if (key.startsWith('$')) continue;
     const name = prefix ? `${prefix}-${key}` : key;
-    if (val && typeof val === 'object' && '$value' in val) {
-      result[name] = val.$value;
-    } else if (val && typeof val === 'object') {
-      Object.assign(result, flattenDtcg(val, name));
+    if (val && typeof val === 'object') {
+      const themeEntry = val.$extensions?.['carbon.themes']?.[themeName];
+      if (themeEntry !== undefined) {
+        // Bare alias string or { value } wrapper — extract the alias.
+        const raw =
+          typeof themeEntry === 'string'
+            ? themeEntry
+            : themeEntry?.value ?? null;
+        if (raw !== null) result[name] = raw;
+        // Also recurse into any group children (dual-role tokens like `background`
+        // that are both a leaf token and a parent of `background-active`).
+        Object.assign(result, flattenDtcg(val, themeName, name));
+      } else {
+        Object.assign(result, flattenDtcg(val, themeName, name));
+      }
     }
   }
   return result;
 }
 
 const themeDtcg = {
-  white: flattenDtcg(whiteJson),
-  g10: flattenDtcg(g10Json),
-  g90: flattenDtcg(g90Json),
-  g100: flattenDtcg(g100Json),
+  white: flattenDtcg(themesJson, 'white'),
+  g10: flattenDtcg(themesJson, 'g10'),
+  g90: flattenDtcg(themesJson, 'g90'),
+  g100: flattenDtcg(themesJson, 'g100'),
 };
 
 // Convert DTCG alias "{blue.60}" → "blue-60"
