@@ -1,0 +1,723 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '../../config' as *;
+@use '../../theme' as *;
+@use '../../spacing' as *;
+@use '../../type' as *;
+@use '../../motion' as *;
+
+/// AddSelect styles
+/// @access public
+/// @group add-select
+@mixin add-select {
+  // ──────────────────────────────────────────────────────────────
+  // AddSelect - Root container
+  // ──────────────────────────────────────────────────────────────
+  .#{$prefix}--add-select {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    block-size: 100%;
+    inline-size: 100%;
+  }
+
+  // ──────────────────────────────────────────────────────────────
+  // AddSelectBody - Main content area with search and header
+  // ──────────────────────────────────────────────────────────────
+  .#{$prefix}--add-select__body {
+    display: flex;
+    flex-direction: column;
+    block-size: 100%;
+    inline-size: 100%;
+  }
+
+  .#{$prefix}--add-select__header {
+    border-block-end: 1px solid $border-subtle-01;
+    padding-block-end: $spacing-03;
+    padding-block-start: $spacing-05;
+    padding-inline: $spacing-05;
+  }
+
+  .#{$prefix}--add-select__search {
+    margin-block-end: $spacing-05;
+
+    &--with-actions {
+      display: flex;
+      align-items: flex-end;
+    }
+  }
+
+  .#{$prefix}--add-select__search-input {
+    flex: 1;
+  }
+
+  .#{$prefix}--add-select__global-actions {
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .#{$prefix}--add-select__sub-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .#{$prefix}--add-select__tags {
+    display: flex;
+    align-items: center;
+    gap: $spacing-03;
+  }
+
+  .#{$prefix}--add-select__tags-label {
+    @include type-style('heading-compact-02');
+
+    margin: 0;
+    color: $text-primary;
+  }
+
+  .#{$prefix}--add-select__sub-header-actions {
+    display: flex;
+    align-items: center;
+    gap: $spacing-03;
+    margin-inline-start: $spacing-05;
+  }
+
+  .#{$prefix}--add-select__content {
+    display: flex;
+    overflow: auto;
+    flex: 1;
+    flex-direction: column;
+  }
+
+  // ──────────────────────────────────────────────────────────────
+  // List body container
+  // ──────────────────────────────────────────────────────────────
+  .#{$prefix}--add-select-list-body {
+    display: flex;
+    flex-direction: column;
+
+    &--horizontal {
+      flex-direction: row;
+      align-items: stretch;
+      block-size: 100%;
+
+      .#{$prefix}--add-select-column {
+        padding-block: $spacing-05;
+        padding-inline: $spacing-05;
+      }
+    }
+  }
+
+  // ──────────────────────────────────────────────────────────────
+  // AddSelectRow - Individual selectable row
+  // ──────────────────────────────────────────────────────────────
+  .#{$prefix}--add-select-row {
+    display: flex;
+    border-inline-start: $spacing-01 solid transparent;
+    transition: background-color $duration-fast-01 motion(standard, productive);
+
+    &:focus {
+      outline: $spacing-01 solid $focus;
+      outline-offset: calc(-1 * $spacing-01);
+    }
+
+    &:focus:not(:focus-visible) {
+      outline: none;
+    }
+
+    &--selected {
+      background-color: $layer-selected-01;
+
+      .#{$prefix}--add-select-row__cell-wrapper {
+        border-block-end-color: $border-subtle-selected-01;
+      }
+    }
+
+    &--disabled {
+      cursor: not-allowed;
+
+      .#{$prefix}--add-select-row__title,
+      .#{$prefix}--add-select-row__subtitle {
+        color: $text-disabled;
+      }
+
+      .#{$prefix}--add-select-row__icon svg,
+      .#{$prefix}--add-select-row__view-item-panel svg,
+      .#{$prefix}--add-select-row__nav-indicator svg {
+        fill: $icon-disabled;
+      }
+    }
+
+    &:hover:not(&--disabled) {
+      background: $layer-hover-01;
+
+      .#{$prefix}--add-select-row__title {
+        color: $link-primary;
+      }
+
+      .#{$prefix}--add-select-row__view-item-panel svg,
+      .#{$prefix}--add-select-row__nav-indicator svg {
+        fill: $icon-disabled;
+      }
+    }
+
+    &--selected:hover:not(&--disabled) {
+      background: $layer-selected-hover-01;
+
+      .#{$prefix}--add-select-row__title {
+        color: $text-primary;
+      }
+
+      .#{$prefix}--add-select-row__view-item-panel svg,
+      .#{$prefix}--add-select-row__nav-indicator svg {
+        fill: $icon-primary;
+      }
+    }
+
+    &__cell {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+    }
+
+    &__cell-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-block-end: 1px solid $border-subtle-01;
+      min-block-size: $spacing-09;
+      padding-block: $spacing-03;
+      padding-inline: $spacing-05;
+    }
+
+    &__content {
+      display: flex;
+      flex: 1;
+      align-items: center;
+      align-self: center;
+    }
+
+    &__checkbox {
+      flex: none;
+      align-self: center;
+      margin-inline-end: $spacing-05;
+    }
+
+    &__radio {
+      align-self: center;
+
+      .#{$prefix}--radio-button__appearance {
+        margin-inline-end: 0;
+      }
+    }
+
+    &__icon {
+      display: flex;
+      align-items: center;
+      margin-inline-end: $spacing-03;
+    }
+
+    &__text {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+    }
+
+    &__title {
+      @include type-style('body-compact-01');
+
+      display: block;
+      color: $text-primary;
+    }
+
+    &__subtitle {
+      @include type-style('helper-text-01');
+
+      display: block;
+      color: $text-secondary;
+    }
+
+    &__meta {
+      display: flex;
+      align-items: center;
+      margin-inline-start: $spacing-03;
+    }
+
+    &__view-item-panel {
+      margin-inline-start: auto;
+    }
+
+    &-item-panel--selected {
+      background-color: $layer-hover-01;
+      border-inline-start: 0.125rem solid $interactive;
+    }
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      &__nav-indicator {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        margin-inline-start: $spacing-03;
+        padding-block: $spacing-02;
+        padding-inline: $spacing-02;
+        transition: none;
+
+        &:hover {
+          background-color: $background-hover;
+        }
+
+        &:focus {
+          outline: $spacing-01 solid $focus;
+          outline-offset: calc(-1 * $spacing-01);
+        }
+
+        svg {
+          fill: $icon-primary;
+        }
+      }
+    }
+
+    &__nav-indicator {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      margin-inline-start: $spacing-03;
+      padding-block: $spacing-02;
+      padding-inline: $spacing-02;
+      transition: background-color $duration-fast-01
+        motion(standard, productive);
+
+      &:hover {
+        background-color: $background-hover;
+      }
+
+      &:focus {
+        outline: $spacing-01 solid $focus;
+        outline-offset: calc(-1 * $spacing-01);
+      }
+
+      svg {
+        fill: $icon-primary;
+      }
+    }
+
+    &--skeleton {
+      cursor: default;
+      pointer-events: none;
+
+      &:hover {
+        background: none;
+      }
+
+      .#{$prefix}--add-select-row__skeleton-control {
+        flex: none;
+        border-radius: $spacing-01;
+        background-color: $skeleton-element;
+        block-size: $spacing-05;
+        inline-size: $spacing-05;
+        margin-inline-end: $spacing-05;
+      }
+
+      .#{$prefix}--add-select-row__icon .#{$prefix}--icon--skeleton {
+        border-radius: 50%;
+        block-size: $spacing-07;
+        inline-size: $spacing-07;
+
+        &::before {
+          border-radius: 50%;
+          animation: none;
+        }
+      }
+
+      .#{$prefix}--add-select-row__skeleton-title {
+        margin-block-end: 0;
+      }
+    }
+  }
+
+  // ──────────────────────────────────────────────────────────────
+  // AddSelectColumn - Column container
+  // ──────────────────────────────────────────────────────────────
+  .#{$prefix}--add-select-column {
+    display: flex;
+    flex-direction: column;
+    block-size: 100%;
+    border-inline-end: 1px solid $border-subtle-01;
+    min-inline-size: 300px;
+    padding-block: $spacing-05;
+    padding-inline: $spacing-05;
+
+    &:last-child {
+      border-inline-end: none;
+    }
+
+    .#{$prefix}--add-select-list-body--horizontal & {
+      &:last-child {
+        border-inline-end: 1px solid $border-subtle-01;
+      }
+    }
+
+    &__search {
+      &--with-actions {
+        display: flex;
+        align-items: flex-end;
+      }
+    }
+
+    &__search-input {
+      flex: 1;
+    }
+
+    &__actions {
+      display: flex;
+      align-items: flex-end;
+    }
+
+    &__header {
+      display: flex;
+      align-items: center;
+      border-block-end: 1px solid $border-subtle-01;
+      padding-block: $spacing-05;
+      padding-inline: $spacing-05;
+    }
+
+    &__select-all {
+      .#{$prefix}--checkbox-label {
+        display: flex;
+        align-items: center;
+        gap: 0;
+      }
+
+      .#{$prefix}--checkbox-label-text {
+        display: flex;
+        align-items: center;
+        gap: $spacing-03;
+        margin-inline-start: $spacing-03;
+      }
+    }
+
+    &__title-wrapper {
+      display: flex;
+      align-items: center;
+      gap: $spacing-03;
+    }
+
+    &__title {
+      @include type-style('heading-compact-01');
+    }
+
+    &__rows {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      overflow-y: auto;
+
+      @supports (overflow-block: auto) {
+        overflow-block: auto;
+      }
+    }
+  }
+
+  // ──────────────────────────────────────────────────────────────
+  // Breadcrumbs
+  // ──────────────────────────────────────────────────────────────
+  .#{$prefix}--add-select__breadcrumbs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: $spacing-02;
+  }
+
+  // ──────────────────────────────────────────────────────────────
+  // AddSelectSelectionSummary - Selected items display
+  // ──────────────────────────────────────────────────────────────
+  .#{$prefix}--add-select__selection-summary {
+    display: flex;
+    flex-direction: column;
+
+    &-header {
+      display: flex;
+      align-items: center;
+      border-block-end: 1px solid $layer-accent-01;
+      padding-block-end: $spacing-03;
+      padding-block-start: $spacing-06;
+      padding-inline: $spacing-05;
+    }
+
+    &-title {
+      @include type-style('heading-compact-02');
+
+      margin-inline-end: $spacing-03;
+    }
+
+    &-header-actions {
+      display: flex;
+      align-items: center;
+      gap: $spacing-03;
+      margin-inline-start: auto;
+    }
+  }
+
+  // ──────────────────────────────────────────────────────────────
+  // AddSelectSelectionSummaryItem - Individual selected item
+  // ──────────────────────────────────────────────────────────────
+  .#{$prefix}--add-select__selection-summary-item {
+    position: relative;
+    background-color: $layer-01;
+    border-block-end: 1px solid $border-subtle-01;
+
+    &:hover {
+      background-color: $layer-hover-01;
+    }
+
+    &--accordion .#{$prefix}--accordion__item,
+    &--accordion .#{$prefix}--accordion__item:last-child {
+      border-block-end: none;
+      border-block-start: none;
+    }
+
+    &--accordion .#{$prefix}--accordion__heading {
+      min-block-size: unset;
+      padding-block: $spacing-04;
+      padding-inline-end: $spacing-05;
+    }
+
+    &--default {
+      .#{$prefix}--add-select__selection-summary-item-title-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-block: $spacing-04;
+        padding-inline: $spacing-05;
+      }
+
+      .#{$prefix}--add-select__selection-summary-item-content {
+        padding-block-end: $spacing-04;
+        padding-inline: $spacing-05;
+      }
+
+      .#{$prefix}--add-select__selection-summary-item-title {
+        @include type-style('heading-compact-01');
+      }
+    }
+
+    &-title-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    &-selected-item {
+      flex: 1;
+    }
+
+    &-title {
+      @include type-style('body-compact-01');
+
+      color: $text-primary;
+    }
+
+    &-subtitle {
+      @include type-style('body-01');
+
+      color: $text-secondary;
+    }
+
+    &-entry {
+      margin-block-end: $spacing-05;
+    }
+
+    &-header {
+      @include type-style('label-01');
+
+      color: $text-secondary;
+      margin-block-end: $spacing-03;
+    }
+
+    &-body {
+      @include type-style('body-01');
+
+      margin-block-end: $spacing-05;
+    }
+
+    &-remove-button-container {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding-inline-start: $spacing-03;
+
+      .#{$prefix}--add-select__selection-summary-item--accordion & {
+        position: absolute;
+        inset-block-start: 50%;
+        inset-inline-end: $spacing-05;
+        padding-inline-start: 0;
+        transform: translateY(-50%);
+      }
+    }
+
+    &-remove-button {
+      opacity: 0;
+      transition: opacity $duration-fast-01 motion(standard, productive);
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
+    }
+
+    &:hover &-remove-button,
+    &:focus-within &-remove-button {
+      opacity: 1;
+    }
+
+    &-content {
+      margin-block-start: 0;
+    }
+  }
+
+  // Accordion overrides for SelectionSummaryItem
+  .#{$prefix}--add-select__selection-summary {
+    .#{$prefix}--accordion__arrow {
+      transform: rotate(90deg);
+    }
+
+    .#{$prefix}--accordion__item--active .#{$prefix}--accordion__arrow {
+      transform: rotate(-90deg);
+    }
+
+    .#{$prefix}--accordion--start .#{$prefix}--accordion__arrow {
+      margin-block: 0;
+      margin-inline-end: 0;
+      margin-inline-start: $spacing-05;
+    }
+
+    .#{$prefix}--accordion--start .#{$prefix}--accordion__title {
+      margin-inline-end: 0;
+      margin-inline-start: $spacing-03;
+      padding-inline-end: $spacing-07;
+    }
+
+    .#{$prefix}--accordion__item--active .#{$prefix}--accordion__content {
+      margin-block-start: 0;
+      padding-block: $spacing-05;
+      padding-inline: $spacing-05;
+    }
+  }
+
+  // ──────────────────────────────────────────────────────────────
+  // AddSelectItemPanel - Item details panel
+  // ──────────────────────────────────────────────────────────────
+  @keyframes add-select-item-panel-entrance {
+    0% {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes add-select-item-panel-exit {
+    0% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    100% {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+  }
+
+  @keyframes add-select-item-panel-entrance-reduced {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes add-select-item-panel-exit-reduced {
+    0% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+    }
+  }
+
+  .#{$prefix}--add-select__item-summary-panel {
+    display: none;
+    block-size: 100%;
+    inline-size: 100%;
+    transform: translateX(0);
+    transition-behavior: allow-discrete;
+    transition-duration: $duration-moderate-01;
+    transition-property: display, opacity, transform;
+
+    &--open {
+      display: flex;
+      flex-direction: column;
+      animation: add-select-item-panel-entrance $duration-moderate-01
+        motion(entrance, productive) forwards;
+
+      @starting-style {
+        opacity: 0;
+        transform: translateX(100%);
+      }
+
+      @media (prefers-reduced-motion) {
+        animation: add-select-item-panel-entrance-reduced $duration-moderate-01
+          motion(entrance, productive) forwards;
+
+        @starting-style {
+          opacity: 0;
+          transform: translateX(0);
+        }
+      }
+    }
+
+    &-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-block-end: 1px solid $layer-accent-01;
+      gap: $spacing-03;
+      padding-block-end: $spacing-03;
+      padding-block-start: $spacing-07;
+      padding-inline: $spacing-05;
+    }
+
+    &-title {
+      @include type-style('heading-compact-02');
+    }
+
+    &-body {
+      padding-block: $spacing-05;
+      padding-inline: $spacing-05;
+    }
+
+    &-entry {
+      margin-block-end: $spacing-05;
+
+      &-title {
+        @include type-style('heading-compact-01');
+      }
+
+      &-body {
+        @include type-style('body-compact-01');
+      }
+    }
+  }
+}
