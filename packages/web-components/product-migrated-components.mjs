@@ -20,6 +20,8 @@ export const productMigratedStoryGlobs = [
   '../src/components/edit-in-place/*.mdx',
   '../src/components/options-tile/options-tile.stories.ts',
   '../src/components/options-tile/*.mdx',
+  '../src/components/coachmark/coachmark.stories.ts',
+  '../src/components/coachmark/*.mdx',
   '../src/components/resizer/resizer.stories.ts',
   '../src/components/resizer/*.mdx',
   '../src/components/side-panel/side-panel.stories.ts',
@@ -41,11 +43,12 @@ export const productMigratedStoryGlobs = [
  *   2. Uncomment its export in src/index.ts.
  */
 export const excludeProductsComponents = [
+  'src/components/coachmark/**/*',
+  'src/components/resizer/**/*',
   'src/components/action-set/**/*',
   'src/components/big-number/**/*',
   'src/components/edit-in-place/**/*',
   'src/components/options-tile/**/*',
-  'src/components/resizer/**/*',
   'src/components/side-panel/**/*',
   'src/components/truncated-text/**/*',
 ];

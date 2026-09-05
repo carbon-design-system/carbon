@@ -560,12 +560,14 @@
     - product development lifecycle
   sizes:
     - 32
-- name: ai-financial-sustainability-check
-  friendly_name: AI Financial Sustainability Check
+- name: ibm--ai-financial-instrument-sustainability-check
+  friendly_name: AI Financial Instrument Sustainability Check
   aliases:
+    - IBM
     - automation
     - artificial intelligence
     - finance
+    - instrument
     - sustainability
     - check
     - AI
@@ -14609,7 +14611,7 @@
   sizes:
     - 32
 - name: ibm-watsonx--code-assistant
-  friendly_name: IBM® watsonx Code Assistant™
+  friendly_name: IBM® watsonx Code Assistant®
   aliases:
     - AI
     - watsonx
@@ -14627,7 +14629,7 @@
   sizes:
     - 32
 - name: ibm-watsonx--code-assistant-for-enterprise-java-applications
-  friendly_name: IBM® watsonx Code Assistant™ for Enterprise Java Applications
+  friendly_name: IBM® watsonx Code Assistant® for Enterprise Java Applications
   aliases:
     - IBM watsonx Code Assistant for Enterprise Java Applications
     - end-to-end application lifecycle
@@ -14641,7 +14643,7 @@
   sizes:
     - 32
 - name: ibm-watsonx--code-assistant-for-z
-  friendly_name: IBM® watsonx Code Assistant™ for Z
+  friendly_name: IBM® watsonx Code Assistant® for Z
   aliases:
     - AI
     - watsonx
@@ -14663,7 +14665,7 @@
   sizes:
     - 32
 - name: ibm-watsonx--code-assistant-for-z--refactor
-  friendly_name: IBM® watsonx Code Assistant™ for Z Refactoring Assistant
+  friendly_name: IBM® watsonx Code Assistant® for Z Refactoring Assistant
   aliases:
     - app
     - development
@@ -14675,7 +14677,7 @@
   sizes:
     - 32
 - name: ibm-watsonx--code-assistant-for-z-understand
-  friendly_name: IBM® watsonx Code Assistant™ for Z Understand
+  friendly_name: IBM® watsonx Code Assistant® for Z Understand
   aliases:
     - ibm watsonx code assistant for Z Understand
     - AI assistant
@@ -14687,7 +14689,7 @@
   sizes:
     - 32
 - name: ibm-watsonx--code-assistant-for-z-validation-assistant
-  friendly_name: IBM® watsonx Code Assistant™ for Z Validation Assistant
+  friendly_name: IBM® watsonx Code Assistant® for Z Validation Assistant
   aliases:
     - ibm watsonx code assistant for Z Validation Assistant
     - AI assistant
