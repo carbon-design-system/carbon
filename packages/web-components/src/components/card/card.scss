@@ -1,0 +1,219 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type' as *;
+// `@use` runs the module's `_index.scss` once, which already includes the
+// `card.card` mixin — do not `@include` it again here or every rule from
+// the shared @carbon/styles card mixin gets emitted twice.
+@use '@carbon/styles/scss/components/card' as card;
+
+:host-context(#{$prefix}-card-header) .#{$prefix}--card__title {
+  margin-block: $spacing-05;
+}
+
+:host(#{$prefix}-card-title) .#{$prefix}--card__title-text-row {
+  // Base / fallback — productive is the default density.
+  @include type-style('heading-compact-02');
+}
+
+:host-context(#{$prefix}-card[density='productive'])
+  .#{$prefix}--card__title-text-row {
+  @include type-style('heading-compact-02');
+}
+
+:host-context(#{$prefix}-card[density='expressive'])
+  .#{$prefix}--card__title-text-row {
+  @include type-style('heading-03');
+}
+
+:host-context(#{$prefix}-card[disabled]) .#{$prefix}--card__label {
+  color: $text-disabled;
+}
+
+:host-context(#{$prefix}-card[disabled]) .#{$prefix}--card__description {
+  color: $text-disabled;
+}
+
+:host-context(#{$prefix}-card[horizontal]) .#{$prefix}--card__body {
+  flex: 1 0 auto;
+}
+
+:host-context(#{$prefix}-card[horizontal]) .#{$prefix}--card__footer {
+  margin-block-start: auto;
+}
+
+:host-context(#{$prefix}-card[has-ai-label]) .#{$prefix}--card__title {
+  padding-inline-end: calc($spacing-07 + $spacing-05);
+}
+
+:host-context(#{$prefix}-card[has-ai-label]) .#{$prefix}--card__label {
+  padding-inline-end: calc($spacing-07 + $spacing-05);
+}
+
+:host-context(#{$prefix}-card[has-ai-label]) .#{$prefix}--card__description {
+  padding-inline-end: calc($spacing-07 + $spacing-05);
+}
+
+:host-context(#{$prefix}-card[has-ai-label][has-actions])
+  .#{$prefix}--card__title {
+  padding-inline-end: $spacing-13;
+}
+
+:host-context(#{$prefix}-card[has-ai-label][has-actions])
+  .#{$prefix}--card__label {
+  padding-inline-end: $spacing-13;
+}
+
+:host-context(#{$prefix}-card[has-ai-label][has-actions])
+  .#{$prefix}--card__description {
+  padding-inline-end: $spacing-13;
+}
+
+// When the card has an AI label, shift the absolutely-positioned header
+// actions to the left so they don't overlap the decorator badge.
+:host(#{$prefix}-card-header)
+  .#{$prefix}--card__header[data-has-ai-label]
+  ::slotted(#{$prefix}-card-actions) {
+  inset-inline-end: calc($spacing-03 + $spacing-06 + $spacing-03);
+}
+
+:host-context(#{$prefix}-card-header[has-title-media])
+  .#{$prefix}--card__title {
+  grid-column: 2;
+  margin-inline-start: 0;
+}
+
+:host(#{$prefix}-card-footer[has-actions]) .#{$prefix}--card__footer {
+  overflow: hidden;
+  justify-content: flex-end;
+  padding: 0;
+  border-block-start: 1px solid $border-subtle;
+  gap: 1px;
+}
+
+:host(#{$prefix}-card-action:not([icon-only])) {
+  flex: 1 0 0;
+  min-inline-size: 0;
+
+  .#{$prefix}--card__action {
+    display: flex;
+    inline-size: 100%;
+  }
+
+  .#{$prefix}--card__action > ::slotted(*) {
+    inline-size: 100%;
+    max-inline-size: none;
+  }
+}
+
+// Icon-only actions: fixed width. The footer container's justify-content:flex-end
+// pushes the whole group to the trailing edge, so no per-item margin trick needed.
+// Original: .cds--card__footer > .cds--card__action:has(.cds--btn--icon-only)
+
+:host(#{$prefix}-card-action[icon-only]) {
+  flex: 0 0 auto;
+}
+
+// ─── Host-level display ───────────────────────────────────────────────────────
+
+:host(#{$prefix}-card) {
+  display: block;
+}
+
+:host(#{$prefix}-card) a[part='link'] {
+  color: inherit;
+  text-decoration: none;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+:host(#{$prefix}-card-header) {
+  display: block;
+}
+
+:host(#{$prefix}-card-body) {
+  display: block;
+}
+
+:host(#{$prefix}-card-footer) {
+  display: block;
+}
+
+:host(#{$prefix}-card-media) {
+  display: block;
+}
+
+:host(#{$prefix}-card-header-media) {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  grid-column: 1 / -1;
+  margin-block: $spacing-05;
+  margin-inline: $spacing-05;
+  max-block-size: $spacing-10;
+}
+
+:host(#{$prefix}-card-header-media) .#{$prefix}--card__header-media {
+  display: contents;
+}
+
+:host(#{$prefix}-card-title) {
+  display: block;
+}
+
+:host(#{$prefix}-card-title-media) {
+  display: block;
+}
+
+:host(#{$prefix}-card-header)
+  .#{$prefix}--card__header
+  ::slotted(#{$prefix}-card-actions) {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  block-size: $spacing-07;
+  gap: $spacing-02;
+  inline-size: 50%;
+  inset-block-start: $spacing-03;
+  inset-inline-end: $spacing-03;
+  max-inline-size: 50%;
+}
+
+:host(#{$prefix}-card-actions) {
+  // Provide a positioning context for the shadow-DOM overflow menu.
+  position: relative;
+}
+
+// The overflow menu renders in shadow DOM but visually aligns with the
+// sentinel (which is hidden when not overflowing). `position:absolute` takes
+// it out of flow; the host's `position:relative` is the containing block.
+:host(#{$prefix}-card-actions) .#{$prefix}--card__actions-overflow-menu {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+}
+
+:host(#{$prefix}-card-action) {
+  display: block;
+}
+
+// The overflow handler sets data-hidden on items that don't fit.
+// This hides them from view while keeping them in the DOM for measurement.
+:host(#{$prefix}-card-action[data-hidden]) {
+  display: none;
+}
