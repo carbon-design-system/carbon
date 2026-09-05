@@ -1,0 +1,616 @@
+import { Controls, Canvas, Story, Meta } from '@storybook/addon-docs/blocks';
+import * as ConditionBuilderStories from './ConditionBuilder.stories';
+
+<Meta isTemplate />
+
+# ConditionBuilder
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/components/condition-builder/usage/)
+
+## Overview
+
+The Condition Builder component allows non-technical users to create conditional
+statements without writing code. A user builds one or more conditions, each
+consisting of a **property**, an **operator**, and a **value**. The resulting
+state is returned to the consumer via the `getConditionState` callback.
+
+The component is available in two variants:
+
+- **Non-Hierarchical** (`variant="Non-Hierarchical"`) — conditions appear in a
+  single flat list, presented in a sentence-like format. Best for simple
+  filtering scenarios.
+- **Hierarchical** (`variant="Hierarchical"`) — conditions can be grouped into
+  nested sub-groups with independent connectors (`and` / `or`). Best for
+  complex, multi-level rule building.
+
+---
+
+## inputConfig
+
+The `inputConfig` prop drives everything the user can build. It has a single
+`properties` array where each entry defines one selectable field.
+
+```js
+inputConfig: {
+  properties: [
+    {
+      id: 'continent',        // unique identifier — stored in condition state
+      label: 'Continent',     // display label shown in the property picker
+      icon: Earth,            // optional Carbon icon component
+      type: 'option',         // input type — see types below
+      description: 'Filter by continent', // optional tooltip on the property button
+      config: { ... },        // type-specific config — see below
+    },
+  ],
+}
+```
+
+### Property input types
+
+#### `option`
+
+Renders a list of selectable options. Supports both single-select and
+multi-select.
+
+- Multi-select activates automatically when the user picks the `oneOf` built-in
+  operator, or any custom operator with `isMultiSelect: true`.
+- Supply options statically via `config.options`, or load them asynchronously
+  via the `getOptions` prop (see [Dynamic options](#dynamic-options)).
+- Each option requires an `id` and a `label`. An optional `icon` component can
+  be provided per option.
+
+```js
+{
+  id: 'continent',
+  label: 'Continent',
+  type: 'option',
+  config: {
+    options: [
+      { label: 'Africa',    id: 'Africa' },
+      { label: 'Asia',      id: 'Asia' },
+      { label: 'Europe',    id: 'Europe' },
+    ],
+  },
+}
+```
+
+#### `text` and `textarea`
+
+Renders a Carbon `TextInput` or `TextArea`. Accepts standard Carbon
+`TextInputProps` / `TextAreaProps` via `config`, along with an optional
+`operators` array to override default operators.
+
+```js
+{ id: 'description', label: 'Description', type: 'textarea', config: {} }
+```
+
+#### `number`
+
+Renders a Carbon `NumberInput`. Accepts standard Carbon `NumberInputProps` via
+`config`. Additional keys: `min`, `max`, `step`, and `unit` (a display string
+appended to the stored value, e.g. `"50 Dollars"`).
+
+```js
+{
+  id: 'price',
+  label: 'Price',
+  type: 'number',
+  config: { min: 0, step: 1, unit: 'Dollars' },
+}
+```
+
+#### `date`
+
+Renders a Carbon `DatePicker` (powered by flatpickr). Accepts standard Carbon
+`DatePickerProps` via `config`. The date range picker activates when the user
+picks the `between` operator, or a custom operator with `isMultiSelect: true`.
+
+Configure the date format and locale via `config`:
+
+```js
+{
+  id: 'date',
+  label: 'Date',
+  type: 'date',
+  config: { locale: 'en', dateFormat: 'd/m/Y' },
+}
+```
+
+#### `time`
+
+Renders a Carbon `TimePicker` with AM/PM and time zone selectors. Supply the
+list of available time zone strings via `config.timeZones`. The stored value
+format is `"HH:MM AM/PM TIMEZONE"` (e.g. `"10:30 AM IST"`).
+
+```js
+{
+  id: 'time',
+  label: 'Time',
+  type: 'time',
+  config: { timeZones: ['IST', 'CET', 'UTC', 'LOCAL'] },
+}
+```
+
+#### `custom`
+
+Renders a fully custom component you provide. Use this when the built-in types
+don't cover your use case.
+
+- `config.component` — a React component that receives `onChange` and
+  `conditionState` as props. Call `onChange(value)` to push a new value into
+  condition state.
+- `config.operators` — required for the `custom` type; specify which operators
+  are available for selection.
+- `config.valueFormatter` — optional function that controls how the stored value
+  is displayed in the condition row cell after selection. Useful when the raw
+  stored value differs from the desired display string.
+
+```js
+{
+  id: 'product',
+  label: 'Product',
+  type: 'custom',
+  config: {
+    component: MyCustomInput,   // receives { onChange, conditionState }
+    operators: [
+      { label: 'has value',  id: 'hasValue' },
+      { label: 'has values', id: 'hasValues', isMultiSelect: true },
+    ],
+    valueFormatter: (value) => value?.toLocaleUpperCase(),
+  },
+}
+```
+
+---
+
+## Condition state shape
+
+`getConditionState` is called on every change and receives the full current
+state. Understanding this shape is essential for serializing, persisting, or
+evaluating the built conditions.
+
+```js
+// Non-Hierarchical example
+{
+  operator: 'or',             // top-level connector between groups
+  groups: [
+    {
+      id: 'group-uuid',
+      statement: 'ifAll',     // 'ifAll' | 'ifAny' | 'unlessAll' | 'unlessAny'
+      groupOperator: 'and',   // connector between conditions in this group
+      conditions: [
+        {
+          id: 'condition-uuid',
+          property: 'continent',
+          operator: 'is',
+          value: { id: 'Asia', label: 'Asia' }, // single option
+        },
+        {
+          id: 'condition-uuid',
+          property: 'region',
+          operator: 'oneOf',
+          value: [                               // multi-select option
+            { id: 'AF', label: 'Afghanistan' },
+            { id: 'IN', label: 'India' },
+          ],
+        },
+        {
+          id: 'condition-uuid',
+          property: 'price',
+          operator: 'greater',
+          value: '50 Dollars',                   // text / number — plain string
+        },
+        {
+          id: 'condition-uuid',
+          property: 'date',
+          operator: 'between',
+          value: '10/03/2025 - 13/03/2025',      // date range — plain string
+        },
+      ],
+    },
+  ],
+}
+```
+
+In the Hierarchical variant, `conditions` arrays can contain nested sub-groups
+alongside plain conditions. A sub-group has the same shape as a top-level group
+(`statement`, `groupOperator`, `conditions`, `id`).
+
+A condition with an unfinished selection stores `'INVALID'` as its `property`,
+`operator`, or `value`. Your consumer should treat any condition containing
+`'INVALID'` as incomplete.
+
+---
+
+## popOverSearchThreshold
+
+**Required.** When an option list contains more items than this number, a search
+field is rendered at the top of the popover to filter the list. Set it to a
+value that balances discoverability against visual noise — `4` is a common
+choice for short lists.
+
+```jsx
+<ConditionBuilder popOverSearchThreshold={4} ... />
+```
+
+---
+
+## readOnly mode
+
+Set `readOnly={true}` to render the builder in a non-editable state. Condition
+rows and values are visible, keyboard navigation works, but no selector popovers
+can be opened and no conditions can be added or removed.
+
+---
+
+## Initial state
+
+Use `initialState` to pre-populate the builder with an existing set of
+conditions — for example, when loading a saved filter from a database.
+
+- `initialState.state` — a condition state object in the same shape returned by
+  `getConditionState`.
+- `initialState.enabledDefault` — when `true`, the builder renders the provided
+  state immediately without requiring the user to click "Add condition" first.
+  When `false` or omitted, the "Add condition" button is shown and the state is
+  loaded when the user clicks it.
+
+```jsx
+<ConditionBuilder
+  initialState={{
+    enabledDefault: true,
+    state: {
+      operator: 'or',
+      groups: [
+        {
+          id: 'g1',
+          statement: 'ifAll',
+          groupOperator: 'and',
+          conditions: [
+            {
+              id: 'c1',
+              property: 'continent',
+              operator: 'is',
+              value: { id: 'Asia', label: 'Asia' },
+            },
+          ],
+        },
+      ],
+    },
+  }}
+/>
+```
+
+---
+
+## Custom operators
+
+Each built-in input type has a default set of operators (e.g. `is`, `contains`,
+`is one of`, `is between`). You can replace these per property by supplying
+`config.operators`. Each operator requires an `id` and a `label`.
+
+Set `isMultiSelect: true` to enable multi-select (for the `option` type) or date
+range (for the `date` type) when that operator is selected.
+
+```js
+const customOperators = [
+  { label: 'has value', id: 'hasValue' },
+  { label: 'has no value', id: 'hasNoValue' },
+  { label: 'has values', id: 'hasValues', isMultiSelect: true },
+];
+```
+
+---
+
+## Custom statements
+
+The statement control (the `if` / `unless` button at the start of each group)
+defaults to four options: `if all`, `if any`, `unless all`, `unless any`.
+
+Pass `statementConfigCustom` to replace these with your own set. Each entry
+requires:
+
+- `id` — unique identifier stored in condition state.
+- `label` — text displayed on the statement button.
+- `connector` — `'and'` or `'or'`; sets the default `groupOperator` when this
+  statement is selected.
+- `secondaryLabel` _(optional)_ — additional text displayed below the primary
+  label in the statement picker popover.
+
+```js
+const statementConfigCustom = [
+  { id: 'if', connector: 'and', label: 'if' },
+  {
+    id: 'exclIf',
+    connector: 'or',
+    label: 'excl. if',
+    secondaryLabel: 'Excludes matching rows',
+  },
+];
+```
+
+---
+
+## Disable or hide a specific property
+
+Properties in the picker can be disabled or hidden dynamically as the user
+builds conditions — for example, to prevent selecting the same property twice,
+or to hide properties that are irrelevant given the current state.
+
+Add `getIsDisabled` and/or `getIsHidden` callbacks to the property config. Both
+receive `{ conditionState, group }` (the current condition being edited and the
+group it belongs to) and must return a boolean.
+
+- `getIsDisabled` returning `true` — the property appears in the list but cannot
+  be selected (rendered greyed out).
+- `getIsHidden` returning `true` — the property is removed from the list
+  entirely.
+
+```js
+{
+  id: 'continent',
+  label: 'Continent',
+  type: 'option',
+  getIsDisabled: ({ conditionState, group }) => {
+    // disable if this property is already used in another condition in the group
+    return group.conditions.some(
+      (c) => c.property === 'continent' && c.id !== conditionState.id
+    );
+  },
+  getIsHidden: ({ conditionState, group }) => false,
+  config: { options: [...] },
+}
+```
+
+---
+
+## Dynamic options
+
+Use `getOptions` to load options asynchronously at the point a user opens the
+value picker, rather than supplying them upfront in `inputConfig`. This is
+useful when the available options depend on another condition's value or must be
+fetched from an API.
+
+`getOptions` is called when the user opens the value picker for an `option`-type
+property that has no static `config.options`. It receives the full root state
+and the current condition, and must return a promise that resolves to an options
+array in `{ id, label }` format.
+
+```js
+const getOptions = async (rootState, condition) => {
+  switch (condition.property) {
+    case 'continent':
+      return fetchContinents();
+    case 'region':
+      // rootState lets you read other conditions to filter the result
+      const selectedContinent = rootState.groups?.[0]?.conditions?.find(
+        (c) => c.property === 'continent'
+      )?.value?.id;
+      return fetchRegions(selectedContinent);
+    default:
+      return [];
+  }
+};
+```
+
+---
+
+## Actions
+
+The `actions` prop enables an optional "then" section below the condition rows,
+where users can select one or more actions to be taken when the conditions are
+met. Each action has an `id` and a `label`.
+
+The selected actions are returned via the `getActionsState` callback in the same
+`{ id, label }` shape.
+
+```jsx
+const actions = [
+  { id: 'addToCart', label: 'Add item to cart' },
+  { id: 'checkout', label: 'Proceed to checkout' },
+];
+
+<ConditionBuilder
+  actions={actions}
+  getActionsState={(actionState) => {
+    console.log(actionState); // array of selected { id, label } objects
+  }}
+/>;
+```
+
+The same action can be added multiple times. Actions can be removed
+individually. The `onRemoveItem` callback is also triggered when an action is
+removed, with `type: 'action'`.
+
+---
+
+## Intercepting add and remove
+
+### onAddItem
+
+Called before adding a new condition, subgroup, or group. Return
+`{ preventAdd: true }` to block the addition — for example, to enforce a maximum
+number of conditions.
+
+The callback receives `{ type, state, group }`:
+
+- `type` — `'condition'`, `'subgroup'`, or `'group'`
+- `state` — the current full condition state
+- `group` — the group the item is being added to (for `condition` and
+  `subgroup`)
+
+```jsx
+<ConditionBuilder
+  onAddItem={({ type, state, group }) => {
+    // Limit to 5 conditions per group
+    if (type === 'condition' && group?.conditions?.length >= 5) {
+      return { preventAdd: true };
+    }
+    return { preventAdd: false };
+  }}
+/>
+```
+
+### onRemoveItem
+
+Called before removing a condition, subgroup, group, or action. Return
+`{ preventRemove: true }` to block the removal.
+
+The callback receives `{ type, item, group, state }`:
+
+- `type` — `'condition'`, `'subgroup'`, `'group'`, or `'action'`
+- `item` — the condition, subgroup, group, or action being removed
+- `group` — the parent group (for `condition` and `subgroup`)
+- `state` — the current full condition state
+
+```jsx
+<ConditionBuilder
+  onRemoveItem={({ type, item }) => {
+    if (type === 'condition' && item?.property === 'region') {
+      return { preventRemove: true };
+    }
+    return { preventRemove: false };
+  }}
+/>
+```
+
+---
+
+## Accessibility
+
+### Providing a help description
+
+The Condition Builder is a complex, multi-step widget that uses an ARIA grid
+interaction model unfamiliar to most screen reader users. Providing a short
+plain-text description before the builder helps users understand its structure
+and how to operate it before they land on any interactive cell.
+
+Because the builder is an embeddable component, the description must come from
+the consuming application — only you know which properties are available and the
+purpose of the builder in your product.
+
+Pass the description element's `id` via `aria-describedby`. The component
+spreads all additional HTML attributes onto its root element, so no extra wiring
+is needed.
+
+```jsx
+<p id="condition-builder-desc" className="cds--visually-hidden">
+  Use this builder to create filter conditions. Each condition has three parts:
+  a property (what to filter on), an operator (how to compare), and a value.
+  Available properties are: Continent, Region, Price, and Date.
+  Use arrow keys to navigate between conditions and cells.
+  Press Enter or Space to open a selector. Press Escape to close without saving.
+</p>
+
+<ConditionBuilder
+  aria-describedby="condition-builder-desc"
+  inputConfig={inputConfig}
+  getConditionState={getConditionState}
+  startConditionLabel="Add condition"
+/>
+```
+
+Use `cds--visually-hidden` to hide the description visually unless your design
+calls for visible instructions (e.g. an onboarding flow).
+
+### Keyboard interaction
+
+The builder implements the ARIA grid keyboard pattern. Navigation within the
+builder uses arrow keys; Tab moves between the builder and surrounding page
+elements.
+
+| Key                                    | Action                                                                                                                                                                      |
+| -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Tab`                                  | Move focus into or out of the builder; within an open popover, Tab cycles between the search field and the Select All button                                                |
+| `Arrow Left / Right`                   | Move between condition cells in the current row (property → operator → value → delete)                                                                                      |
+| `Arrow Up / Down`                      | Move between condition rows                                                                                                                                                 |
+| `Enter` or `Space`                     | Open the selector popover for the focused cell                                                                                                                              |
+| `Escape`                               | Close the open popover and return focus to the trigger cell. When a search field has text, the first press clears it and keeps the popover open; the second press closes it |
+| `Arrow Up / Down` (inside popover)     | Move between options in the list                                                                                                                                            |
+| `Enter` (single-select list)           | Select the focused option and close the popover                                                                                                                             |
+| `Space` or `Enter` (multi-select list) | Toggle the focused option; popover stays open to allow multiple selections                                                                                                  |
+
+### Translations
+
+All internal labels can be overridden via `translateWithId`. The function
+receives a key and must return the translated string for that key.
+
+```js
+<ConditionBuilder
+  translateWithId={(key) => {
+    const translations = {
+      addConditionText: 'addCondition Text',
+      removeConditionText: 'remove ConditionText',
+      // ... other keys
+    };
+    return translations[key] ?? key;
+  }}
+/>
+```
+
+**Full list of translation keys and their default values:**
+
+| Key                                | Default                              |
+| ---------------------------------- | ------------------------------------ |
+| `addConditionText`                 | Add condition                        |
+| `addConditionGroupText`            | Add condition group                  |
+| `addSubgroupText`                  | Add subgroup                         |
+| `addPropertyText`                  | Add property                         |
+| `addOperatorText`                  | Add operator                         |
+| `addValueText`                     | Add value                            |
+| `addConditionRowText`              | Add condition row                    |
+| `removeConditionText`              | Delete condition                     |
+| `conditionText`                    | Condition                            |
+| `conditionRowText`                 | Condition row                        |
+| `conditionRowGroupText`            | Condition row group                  |
+| `conditionBuilderText`             | Condition Builder                    |
+| `conditionBuilderHierarchicalText` | Condition Builder Hierarchical       |
+| `conditionHeadingText`             | Condition                            |
+| `propertyText`                     | Property                             |
+| `operatorText`                     | Operator                             |
+| `valueText`                        | Value                                |
+| `connectorText`                    | Connector                            |
+| `ifText`                           | if                                   |
+| `unlessText`                       | unless                               |
+| `excl_if`                          | excl.if                              |
+| `ifAll`                            | if all                               |
+| `ifAny`                            | if any                               |
+| `unlessAll`                        | unless all                           |
+| `unlessAny`                        | unless any                           |
+| `and`                              | and                                  |
+| `or`                               | or                                   |
+| `is`                               | is                                   |
+| `greater`                          | is greater than                      |
+| `greaterEqual`                     | is greater than or equal to          |
+| `lower`                            | is lower than                        |
+| `lowerEqual`                       | is lower than or equal to            |
+| `startsWith`                       | starts with                          |
+| `endsWith`                         | ends with                            |
+| `contains`                         | contains                             |
+| `oneOf`                            | is one of                            |
+| `before`                           | is before                            |
+| `after`                            | is after                             |
+| `between`                          | is between                           |
+| `startText`                        | Start                                |
+| `endText`                          | End                                  |
+| `searchPropertiesText`             | Search properties                    |
+| `clearSearchText`                  | Clear search input                   |
+| `invalidText`                      | Incomplete                           |
+| `invalidNumberWarnText`            | Invalid number, must be 0 or greater |
+| `actionsText`                      | Actions                              |
+| `actionSectionText`                | Action Section                       |
+| `then`                             | then                                 |
+| `addActionText`                    | Add action                           |
+| `removeActionText`                 | Remove Action                        |
+
+---
+
+## Example usage
+
+<Canvas>
+  <Story of={ConditionBuilderStories.Default} />
+</Canvas>
+
+## Component API
+
+<Controls />
