@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { action } from 'storybook/actions';
 
 import {
@@ -26,6 +26,7 @@ import {
   MenuItemRadioGroup,
   MenuItemDivider,
 } from './';
+import { Button } from '../Button';
 import mdx from './Menu.mdx';
 
 export default {
@@ -54,78 +55,132 @@ export default {
 };
 
 export const Default = (args) => {
+  const { open: initialOpen, onClose, onOpen, ...rest } = args;
   const itemOnClick = action('onClick (MenuItem)');
   const selectableOnChange = action('onChange (MenuItemSelectable)');
   const radioOnChange = action('onChange (MenuItemRadioGroup)');
+  const [open, setOpen] = useState(initialOpen);
+  const [position, setPosition] = useState({
+    x: [0, 0],
+    y: [0, 0],
+  });
+  const triggerRef = useRef(null);
 
   const target = document.getElementById('storybook-root');
 
+  useEffect(() => {
+    setOpen(initialOpen);
+  }, [initialOpen]);
+
+  function handleOpen() {
+    if (triggerRef.current) {
+      const { left, right, top, bottom } =
+        triggerRef.current.getBoundingClientRect();
+
+      setPosition({
+        x: [left, right],
+        y: [top, bottom],
+      });
+    }
+
+    setOpen(true);
+  }
+
+  function handleClose() {
+    setOpen(false);
+    onClose?.();
+    requestAnimationFrame(() => {
+      triggerRef.current?.focus();
+    });
+  }
+
   return (
-    <Menu {...args} target={target} x={document?.dir === 'rtl' ? 250 : 0}>
-      <MenuItem label="Share with" renderIcon={FolderShared}>
+    <>
+      <Button
+        aria-expanded={open}
+        aria-haspopup="menu"
+        onClick={open ? handleClose : handleOpen}
+        ref={triggerRef}
+        type="button">
+        Actions
+      </Button>
+      <Menu
+        {...rest}
+        label="Actions"
+        onClose={handleClose}
+        onOpen={onOpen}
+        open={open}
+        target={target}
+        x={
+          document?.dir === 'rtl' ? [position.x[1], position.x[0]] : position.x
+        }
+        y={position.y}>
+        <MenuItem label="Share with" renderIcon={FolderShared}>
+          <MenuItemRadioGroup
+            label="Share with"
+            items={['None', 'Product team', 'Organization', 'Company']}
+            defaultSelectedItem="Product team"
+            onChange={radioOnChange}
+          />
+        </MenuItem>
+        <MenuItemDivider />
+        <MenuItem
+          label="Cut"
+          shortcut="⌘X"
+          onClick={itemOnClick}
+          renderIcon={Cut}
+        />
+        <MenuItem
+          label="Copy"
+          shortcut="⌘C"
+          onClick={itemOnClick}
+          renderIcon={Copy}
+        />
+        <MenuItem
+          label="Paste"
+          shortcut="⌘V"
+          disabled
+          onClick={itemOnClick}
+          renderIcon={Paste}
+        />
+        <MenuItemDivider />
+        <MenuItemGroup label="Font style">
+          <MenuItemSelectable
+            label="Bold"
+            shortcut="⌘B"
+            defaultSelected
+            onChange={selectableOnChange}
+            renderIcon={TextBold}
+          />
+          <MenuItemSelectable
+            label="Italic"
+            shortcut="⌘I"
+            onChange={selectableOnChange}
+            renderIcon={TextItalic}
+          />
+        </MenuItemGroup>
+        <MenuItemDivider />
         <MenuItemRadioGroup
-          label="Share with"
-          items={['None', 'Product team', 'Organization', 'Company']}
-          defaultSelectedItem="Product team"
+          label="Text decoration"
+          items={['None', 'Overline', 'Line-through', 'Underline']}
+          defaultSelectedItem="None"
           onChange={radioOnChange}
         />
-      </MenuItem>
-      <MenuItemDivider />
-      <MenuItem
-        label="Cut"
-        shortcut="⌘X"
-        onClick={itemOnClick}
-        renderIcon={Cut}
-      />
-      <MenuItem
-        label="Copy"
-        shortcut="⌘C"
-        onClick={itemOnClick}
-        renderIcon={Copy}
-      />
-      <MenuItem
-        label="Paste"
-        shortcut="⌘V"
-        disabled
-        onClick={itemOnClick}
-        renderIcon={Paste}
-      />
-      <MenuItemDivider />
-      <MenuItemGroup label="Font style">
-        <MenuItemSelectable
-          label="Bold"
-          shortcut="⌘B"
-          defaultSelected
-          onChange={selectableOnChange}
-          renderIcon={TextBold}
+        <MenuItemDivider />
+        <MenuItem
+          label="Delete"
+          shortcut="⌫"
+          kind="danger"
+          onClick={itemOnClick}
+          renderIcon={TrashCan}
         />
-        <MenuItemSelectable
-          label="Italic"
-          shortcut="⌘I"
-          onChange={selectableOnChange}
-          renderIcon={TextItalic}
-        />
-      </MenuItemGroup>
-      <MenuItemDivider />
-      <MenuItemRadioGroup
-        label="Text decoration"
-        items={['None', 'Overline', 'Line-through', 'Underline']}
-        defaultSelectedItem="None"
-        onChange={radioOnChange}
-      />
-      <MenuItemDivider />
-      <MenuItem
-        label="Delete"
-        shortcut="⌫"
-        kind="danger"
-        onClick={itemOnClick}
-        renderIcon={TrashCan}
-      />
-    </Menu>
+      </Menu>
+    </>
   );
 };
 
 Default.args = {
   onClose: action('onClose'),
-  open: true,
+  onOpen: action('onOpen'),
+  open: false,
 };
