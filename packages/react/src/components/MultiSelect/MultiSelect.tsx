@@ -68,6 +68,7 @@ import {
 } from '../../internal';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
+import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
 
 const {
   ItemClick,
@@ -510,6 +511,8 @@ export const MultiSelect = React.forwardRef(
     });
 
     const toggleButtonRef = useRef<HTMLButtonElement>(null);
+    const titleRef = useRef<HTMLLabelElement>(null);
+    const labelRef = useRef<HTMLSpanElement>(null);
     const mergedRef = mergeRefs<HTMLButtonElement>(
       toggleButtonProps.ref,
       ref,
@@ -725,6 +728,14 @@ export const MultiSelect = React.forwardRef(
     const labelProps = isValidElement(titleText)
       ? { id: allLabelProps.id }
       : allLabelProps;
+    useNoInteractiveChildren(
+      titleRef,
+      'The MultiSelect component `titleText` prop must have no interactive content'
+    );
+    useNoInteractiveChildren(
+      labelRef,
+      'The MultiSelect component `label` prop must have no interactive content'
+    );
 
     const getSelectionStats = useCallback(
       (
@@ -761,7 +772,7 @@ export const MultiSelect = React.forwardRef(
 
     return (
       <div className={wrapperClasses}>
-        <label className={titleClasses} {...labelProps}>
+        <label className={titleClasses} {...labelProps} ref={titleRef}>
           {titleText && titleText}
           {selectedItems.length > 0 && (
             <span className={`${prefix}--visually-hidden`}>
@@ -815,7 +826,10 @@ export const MultiSelect = React.forwardRef(
               {...toggleButtonProps}
               ref={mergedRef}
               {...readOnlyEventHandlers}>
-              <span id={fieldLabelId} className={`${prefix}--list-box__label`}>
+              <span
+                id={fieldLabelId}
+                className={`${prefix}--list-box__label`}
+                ref={labelRef}>
                 {label}
               </span>
               <ListBox.MenuIcon
