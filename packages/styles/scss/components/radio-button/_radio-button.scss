@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2023
+// Copyright IBM Corp. 2016, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -289,48 +289,114 @@ $radio-border-width: 1px !default;
   }
 
   // AILabel styles
-  .#{$prefix}--radio-button-group--decorator legend.#{$prefix}--label,
-  .#{$prefix}--radio-button-wrapper--decorator
-    .#{$prefix}--radio-button__label-text,
-  .#{$prefix}--radio-button-group--slug legend.#{$prefix}--label,
-  .#{$prefix}--radio-button-wrapper--slug
-    .#{$prefix}--radio-button__label-text {
+  .#{$prefix}--radio-button-group--decorator,
+  .#{$prefix}--radio-button-group--slug {
+    display: block;
+  }
+
+  .#{$prefix}--radio-button-group--decorator::after,
+  .#{$prefix}--radio-button-group--slug::after {
+    display: block;
+    clear: both;
+    content: '';
+  }
+
+  .#{$prefix}--radio-button-wrapper--decorator,
+  .#{$prefix}--radio-button-wrapper--slug {
     display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .#{$prefix}--radio-button-wrapper--decorator .#{$prefix}--radio-button__label,
+  .#{$prefix}--radio-button-wrapper--slug .#{$prefix}--radio-button__label {
+    margin-inline-end: 0;
+  }
+
+  .#{$prefix}--radio-button-group--decorator legend.#{$prefix}--label,
+  .#{$prefix}--radio-button-group--slug legend.#{$prefix}--label {
+    float: inline-start;
   }
 
   .#{$prefix}--radio-button-group--decorator
-    legend.#{$prefix}--label
-    .#{$prefix}--radio-button-group-inner--decorator
+    > .#{$prefix}--radio-button-group-inner--decorator,
+  .#{$prefix}--radio-button-group--slug > .#{$prefix}--ai-label,
+  .#{$prefix}--radio-button-group--slug > .#{$prefix}--slug {
+    float: inline-start;
+  }
+
+  .#{$prefix}--radio-button-group--decorator:not(
+      .#{$prefix}--radio-button-group--vertical
+    )
+    > .#{$prefix}--radio-button-wrapper,
+  .#{$prefix}--radio-button-group--slug:not(
+      .#{$prefix}--radio-button-group--vertical
+    )
+    > .#{$prefix}--radio-button-wrapper {
+    float: inline-start;
+  }
+
+  .#{$prefix}--radio-button-group--decorator
+    > .#{$prefix}--radio-button-group-inner--decorator
+    + .#{$prefix}--radio-button-wrapper,
+  .#{$prefix}--radio-button-group--slug
+    > .#{$prefix}--ai-label
+    + .#{$prefix}--radio-button-wrapper,
+  .#{$prefix}--radio-button-group--slug
+    > .#{$prefix}--slug
+    + .#{$prefix}--radio-button-wrapper,
+  .#{$prefix}--radio-button-group--vertical.#{$prefix}--radio-button-group--decorator
+    > .#{$prefix}--radio-button-wrapper,
+  .#{$prefix}--radio-button-group--vertical.#{$prefix}--radio-button-group--slug
+    > .#{$prefix}--radio-button-wrapper {
+    clear: both;
+  }
+
+  .#{$prefix}--radio-button-group--decorator legend.#{$prefix}--label,
+  .#{$prefix}--radio-button-wrapper--decorator
+    .#{$prefix}--radio-button__label-text,
+  .#{$prefix}--radio-button-group--decorator
+    > .#{$prefix}--radio-button-group-inner--decorator,
+  .#{$prefix}--radio-button-group--slug legend.#{$prefix}--label,
+  .#{$prefix}--radio-button-wrapper--slug .#{$prefix}--radio-button__label-text,
+  .#{$prefix}--radio-button-group--slug > .#{$prefix}--ai-label,
+  .#{$prefix}--radio-button-group--slug > .#{$prefix}--slug {
+    display: inline-flex;
+  }
+
+  .#{$prefix}--radio-button-group--decorator
+    > .#{$prefix}--radio-button-group-inner--decorator
     > *,
   .#{$prefix}--radio-button-wrapper--decorator
-    .#{$prefix}--radio-button__label-text
-    .#{$prefix}--radio-button-wrapper-inner--decorator
+    > .#{$prefix}--radio-button-wrapper-inner--decorator
     > *,
-  .#{$prefix}--radio-button-group--slug
-    legend.#{$prefix}--label
-    .#{$prefix}--ai-label,
-  .#{$prefix}--radio-button-wrapper--slug
-    .#{$prefix}--radio-button__label-text
-    .#{$prefix}--ai-label,
-  .#{$prefix}--radio-button-group--slug
-    legend.#{$prefix}--label
-    .#{$prefix}--slug,
-  .#{$prefix}--radio-button-wrapper--slug
-    .#{$prefix}--radio-button__label-text
-    .#{$prefix}--slug {
+  .#{$prefix}--radio-button-group--slug > .#{$prefix}--ai-label,
+  .#{$prefix}--radio-button-group--slug > .#{$prefix}--slug,
+  .#{$prefix}--radio-button-wrapper--slug > .#{$prefix}--ai-label,
+  .#{$prefix}--radio-button-wrapper--slug > .#{$prefix}--slug {
     margin-inline-start: $spacing-03;
   }
 
   .#{$prefix}--radio-button-wrapper--decorator
-    .#{$prefix}--radio-button__label-text
+    > .#{$prefix}--radio-button-wrapper-inner--decorator,
+  .#{$prefix}--radio-button-wrapper--slug > .#{$prefix}--ai-label,
+  .#{$prefix}--radio-button-wrapper--slug > .#{$prefix}--slug {
+    margin-inline-end: $spacing-05;
+  }
+
+  .#{$prefix}--radio-button-wrapper--decorator
+    > .#{$prefix}--radio-button-wrapper-inner--decorator
     .#{$prefix}--ai-label__button--inline,
-  .#{$prefix}--radio-button-wrapper--slug
-    .#{$prefix}--radio-button__label-text
-    .#{$prefix}--ai-label__button--inline,
-  .#{$prefix}--radio-button-wrapper--slug
-    .#{$prefix}--radio-button__label-text
-    .#{$prefix}--slug__button--inline {
+  .#{$prefix}--radio-button-wrapper--slug .#{$prefix}--ai-label__button--inline,
+  .#{$prefix}--radio-button-wrapper--slug .#{$prefix}--slug__button--inline {
     line-height: inherit;
     margin-block-start: convert.to-rem(-1px);
+  }
+
+  .#{$prefix}--radio-button-wrapper--decorator
+    > .#{$prefix}--radio-button__validation-msg,
+  .#{$prefix}--radio-button-wrapper--slug
+    > .#{$prefix}--radio-button__validation-msg {
+    inline-size: 100%;
   }
 }
