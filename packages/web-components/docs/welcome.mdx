@@ -130,7 +130,17 @@ standard, and work well with other front-end frameworks that exist in the
 application. In turn, this also comes with the benefits of encapsulation within
 the Shadow DOM:
 
+## Preparing for v3
+
+In v2, Carbon web components self-register. Once a component is imported it is
+added to the global registry. The next major release introduces a new
+registration model that is side-effect free. Importing a class file no longer
+self-registers the component, the registration must be explicit. See the
+[component registration](../?path=/docs/introduction-component-registration--overview)
+overview for full details.
+
 ### Other usage guides
 
-- [Having components participate in form](/?path=/story/introduction-form-paticipation--page)
-- [Using custom styles in components](/?path=/docs/introduction-custom-styles--page)
+- [Having components participate in form](../?path=/docs/introduction-form-participation--overview)
+- [Using custom styles in components](../?path=/docs/introduction-custom-styles--overview)
+- [Preparing for v3](https://github.com/carbon-design-system/carbon/blob/main/docs/guides/cwc-v3-migration.md)

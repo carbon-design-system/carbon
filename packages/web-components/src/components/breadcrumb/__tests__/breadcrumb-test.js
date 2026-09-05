@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,6 +7,7 @@
 
 import { expect, fixture, html } from '@open-wc/testing';
 import '@carbon/web-components/es/components/breadcrumb/index.js';
+import '@carbon/web-components/es/components/overflow-menu/index.js';
 
 describe('cds-breadcrumb', () => {
   it('should accept an `aria-label` for nav element', async () => {
@@ -65,6 +66,21 @@ describe('cds-breadcrumb', () => {
     const item = el.querySelector('cds-breadcrumb-item');
     const link = item.querySelector('cds-breadcrumb-link');
     expect(link.shadowRoot.querySelector('a.cds--link--sm')).to.exist;
+  });
+
+  it('should pass the size attribute to an overflow menu item', async () => {
+    const el = await fixture(html`
+      <cds-breadcrumb-item size="sm">
+        <cds-overflow-menu>
+          <cds-overflow-menu-body></cds-overflow-menu-body>
+        </cds-overflow-menu>
+      </cds-breadcrumb-item>
+    `);
+    await el.updateComplete;
+
+    const overflowMenu = el.querySelector('cds-overflow-menu');
+
+    expect(overflowMenu).to.have.attribute('breadcrumb-size', 'sm');
   });
 
   it('should apply additional attributes to the outermost element', async () => {
