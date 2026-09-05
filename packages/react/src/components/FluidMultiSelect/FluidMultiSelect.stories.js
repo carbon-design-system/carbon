@@ -12,16 +12,10 @@ import {
   FluidMultiSelect,
   FluidMultiSelectSkeleton,
 } from '../FluidMultiSelect';
-import {
-  ToggletipLabel,
-  Toggletip,
-  ToggletipButton,
-  ToggletipContent,
-} from '../Toggletip';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { Button } from '../Button';
-import { Information, View, FolderOpen, Folders } from '@carbon/icons-react';
+import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import mdx from './FluidMultiSelect.mdx';
 
 export default {
@@ -214,20 +208,6 @@ Default.argTypes = {
 Default.parameters = {
   controls: { include: [...sharedControls, 'defaultWidth'] },
 };
-
-const ToggleTip = (
-  <>
-    <ToggletipLabel>Label</ToggletipLabel>
-    <Toggletip align="top-left">
-      <ToggletipButton label="Show information">
-        <Information />
-      </ToggletipButton>
-      <ToggletipContent>
-        <p>Additional field information here.</p>
-      </ToggletipContent>
-    </Toggletip>
-  </>
-);
 
 export const Filterable = ({ defaultWidth, ...multiSelectArgs }) => (
   <div style={{ width: defaultWidth }}>

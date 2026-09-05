@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { cloneElement, type ReactNode } from 'react';
+import React, { cloneElement, useRef, type ReactNode } from 'react';
 import classNames from 'classnames';
 import { Text } from '../Text';
 import { deprecate } from '../../prop-types/deprecate';
@@ -18,6 +18,7 @@ import { noopFn } from '../../internal/noopFn';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
+import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
 
 type ExcludedAttributes = 'id' | 'onChange' | 'onClick' | 'type';
 
@@ -134,6 +135,7 @@ const Checkbox = React.forwardRef(
     ref
   ) => {
     const prefix = usePrefix();
+    const labelRef = useRef<HTMLLabelElement>(null);
 
     const normalizedProps = useNormalizedInputProps({
       id,
@@ -184,6 +186,10 @@ const Checkbox = React.forwardRef(
           size: candidate.props.kind === 'inline' ? 'md' : 'mini',
         })
       : candidate;
+    useNoInteractiveChildren(
+      labelRef,
+      'The Checkbox component `labelText` prop must have no interactive content'
+    );
 
     return (
       <div className={wrapperClasses}>
@@ -226,20 +232,19 @@ const Checkbox = React.forwardRef(
         <label
           htmlFor={id}
           className={`${prefix}--checkbox-label`}
+          ref={labelRef}
           title={title}>
           <Text as="div" className={innerLabelClasses}>
             {labelText}
-            {slug ? (
-              normalizedDecorator
-            ) : decorator ? (
-              <div className={`${prefix}--checkbox-wrapper-inner--decorator`}>
-                {normalizedDecorator}
-              </div>
-            ) : (
-              ''
-            )}
           </Text>
         </label>
+        {slug ? (
+          normalizedDecorator
+        ) : decorator ? (
+          <div className={`${prefix}--checkbox-wrapper-inner--decorator`}>
+            {normalizedDecorator}
+          </div>
+        ) : null}
         <div className={`${prefix}--checkbox__validation-msg`}>
           {normalizedProps.invalid && (
             <>
