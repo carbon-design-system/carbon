@@ -1,12 +1,14 @@
 //
-// Copyright IBM Corp. 2016, 2025
+// Copyright IBM Corp. 2016, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
 @use '../popover';
+@use '../../border-radius' as *;
 @use '../../config' as *;
+@use '../../feature-flags' as *;
 @use '../../spacing';
 @use '../../theme';
 @use '../../type';
@@ -18,7 +20,7 @@
 
 $tooltip-padding-block: custom-property.get-var(
   'tooltip-padding-block',
-  spacing.$spacing-05
+  if(enabled('enable-v12-release'), spacing.$spacing-02, spacing.$spacing-05)
 );
 
 $tooltip-padding-inline: custom-property.get-var(
@@ -29,6 +31,10 @@ $tooltip-padding-inline: custom-property.get-var(
 @mixin tooltip {
   .#{$prefix}--tooltip {
     @include custom-property.declaration('popover-offset', 12px);
+    @include custom-property.declaration(
+      'popover-border-radius',
+      if(enabled('enable-v12-release'), $border-radius-04, 2px)
+    );
   }
 
   .#{$prefix}--tooltip-content {
@@ -60,6 +66,10 @@ $tooltip-padding-inline: custom-property.get-var(
   }
 
   .#{$prefix}--definition-tooltip {
+    @include custom-property.declaration(
+      'popover-border-radius',
+      if(enabled('enable-v12-release'), $border-radius-04, 2px)
+    );
     @include type.type-style('body-01');
 
     padding: convert.to-rem(8px) convert.to-rem(16px);

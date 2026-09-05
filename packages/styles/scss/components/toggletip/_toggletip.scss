@@ -6,7 +6,9 @@
 //
 
 @use '../button';
+@use '../../border-radius' as *;
 @use '../../config' as *;
+@use '../../feature-flags' as *;
 @use '../../spacing';
 @use '../../theme';
 @use '../../type';
@@ -56,6 +58,10 @@
     @include custom-property.declaration(
       'popover-offset',
       convert.to-rem(13px)
+    );
+    @include custom-property.declaration(
+      'popover-border-radius',
+      if(enabled('enable-v12-release'), $border-radius-04, 2px)
     );
   }
 
