@@ -64,6 +64,14 @@ export default {
 
 export const EnableDialogElement = (args) => {
   const [open, setOpen] = useState(true);
+  const {
+    iconDescription,
+    label = 'Account resources',
+    title = 'Add a custom domain',
+    primaryButtonText = 'Add',
+    secondaryButtonText = 'Cancel',
+    ...modalArgs
+  } = args;
   return (
     <FeatureFlags enableDialogElement>
       <Annotation
@@ -78,11 +86,14 @@ export const EnableDialogElement = (args) => {
           </span>
         }>
         <Button onClick={() => setOpen(true)}>Launch composed modal</Button>
-        <ComposedModal {...args} open={open} onClose={() => setOpen(false)}>
+        <ComposedModal
+          {...modalArgs}
+          open={open}
+          onClose={() => setOpen(false)}>
           <ModalHeader
-            label="Account resources"
-            title="Add a custom domain"
-            {...args}
+            label={label}
+            title={title}
+            iconDescription={iconDescription}
           />
           <ModalBody>
             <p style={{ marginBottom: '1rem' }}>
@@ -103,9 +114,8 @@ export const EnableDialogElement = (args) => {
             </Select>
           </ModalBody>
           <ModalFooter
-            primaryButtonText="Add"
-            secondaryButtonText="Cancel"
-            {...args}
+            primaryButtonText={primaryButtonText}
+            secondaryButtonText={secondaryButtonText}
           />
         </ComposedModal>
       </Annotation>
@@ -116,6 +126,14 @@ EnableDialogElement.storyName = 'enable-dialog-element';
 
 export const EnableFocusWrapWithoutSentinels = (args) => {
   const [open, setOpen] = useState(true);
+  const {
+    iconDescription,
+    label = 'Account resources',
+    title = 'Add a custom domain',
+    primaryButtonText = 'Add',
+    secondaryButtonText = 'Cancel',
+    ...modalArgs
+  } = args;
   return (
     <FeatureFlags enableFocusWrapWithoutSentinels>
       <Annotation
@@ -130,11 +148,14 @@ export const EnableFocusWrapWithoutSentinels = (args) => {
           </span>
         }>
         <Button onClick={() => setOpen(true)}>Launch composed modal</Button>
-        <ComposedModal {...args} open={open} onClose={() => setOpen(false)}>
+        <ComposedModal
+          {...modalArgs}
+          open={open}
+          onClose={() => setOpen(false)}>
           <ModalHeader
-            label="Account resources"
-            title="Add a custom domain"
-            {...args}
+            label={label}
+            title={title}
+            iconDescription={iconDescription}
           />
           <ModalBody>
             <p style={{ marginBottom: '1rem' }}>
@@ -155,9 +176,8 @@ export const EnableFocusWrapWithoutSentinels = (args) => {
             </Select>
           </ModalBody>
           <ModalFooter
-            primaryButtonText="Add"
-            secondaryButtonText="Cancel"
-            {...args}
+            primaryButtonText={primaryButtonText}
+            secondaryButtonText={secondaryButtonText}
           />
         </ComposedModal>
       </Annotation>

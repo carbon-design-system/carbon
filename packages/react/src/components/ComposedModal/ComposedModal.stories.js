@@ -95,14 +95,26 @@ export default {
 
 export const Default = (args) => {
   const [open, setOpen] = useState(true);
+  const {
+    iconDescription = 'Close the modal',
+    label = 'Account resources',
+    title = 'Add a custom domain',
+    primaryButtonText = 'Add',
+    secondaryButtonText = 'Cancel',
+    primaryButtonDisabled = false,
+    loadingStatus = 'inactive',
+    loadingDescription,
+    loadingIconDescription,
+    ...modalArgs
+  } = args;
   return (
     <>
       <Button onClick={() => setOpen(true)}>Launch composed modal</Button>
-      <ComposedModal {...args} open={open} onClose={() => setOpen(false)}>
+      <ComposedModal {...modalArgs} open={open} onClose={() => setOpen(false)}>
         <ModalHeader
-          label="Account resources"
-          title="Add a custom domain"
-          {...args}
+          label={label}
+          title={title}
+          iconDescription={iconDescription}
         />
         <ModalBody>
           <p style={{ marginBottom: '1rem' }}>
@@ -123,9 +135,12 @@ export const Default = (args) => {
           </Select>
         </ModalBody>
         <ModalFooter
-          primaryButtonText="Add"
-          secondaryButtonText="Cancel"
-          {...args}
+          primaryButtonText={primaryButtonText}
+          secondaryButtonText={secondaryButtonText}
+          primaryButtonDisabled={primaryButtonDisabled}
+          loadingStatus={loadingStatus}
+          loadingDescription={loadingDescription}
+          loadingIconDescription={loadingIconDescription}
         />
       </ComposedModal>
     </>
@@ -134,18 +149,30 @@ export const Default = (args) => {
 
 export const FullWidth = (args) => {
   const [open, setOpen] = useState(true);
+  const {
+    iconDescription = 'Close the modal',
+    label = 'An example of a modal with no padding',
+    title = 'Full Width Modal',
+    primaryButtonText = 'Add',
+    secondaryButtonText = 'Cancel',
+    primaryButtonDisabled = false,
+    loadingStatus = 'inactive',
+    loadingDescription,
+    loadingIconDescription,
+    ...modalArgs
+  } = args;
   return (
     <>
       <Button onClick={() => setOpen(true)}>Launch composed modal</Button>
       <ComposedModal
-        {...args}
+        {...modalArgs}
         open={open}
         onClose={() => setOpen(false)}
         isFullWidth>
         <ModalHeader
-          label="An example of a modal with no padding"
-          title="Full Width Modal"
-          {...args}
+          label={label}
+          title={title}
+          iconDescription={iconDescription}
         />
         <ModalBody>
           <StructuredListWrapper>
@@ -197,9 +224,12 @@ export const FullWidth = (args) => {
           </StructuredListWrapper>
         </ModalBody>
         <ModalFooter
-          primaryButtonText="Add"
-          secondaryButtonText="Cancel"
-          {...args}
+          primaryButtonText={primaryButtonText}
+          secondaryButtonText={secondaryButtonText}
+          primaryButtonDisabled={primaryButtonDisabled}
+          loadingStatus={loadingStatus}
+          loadingDescription={loadingDescription}
+          loadingIconDescription={loadingIconDescription}
         />
       </ComposedModal>
     </>
@@ -222,11 +252,21 @@ FullWidth.argTypes = {
 
 export const PassiveModal = (args) => {
   const [open, setOpen] = useState(true);
+  const {
+    iconDescription = 'Close the modal',
+    label,
+    title = 'You have been successfully signed out',
+    ...modalArgs
+  } = args;
   return (
     <>
       <Button onClick={() => setOpen(true)}>Launch composed modal</Button>
-      <ComposedModal {...args} open={open} onClose={() => setOpen(false)}>
-        <ModalHeader title="You have been successfully signed out" {...args} />
+      <ComposedModal {...modalArgs} open={open} onClose={() => setOpen(false)}>
+        <ModalHeader
+          label={label}
+          title={title}
+          iconDescription={iconDescription}
+        />
         <ModalBody />
       </ComposedModal>
     </>
@@ -250,6 +290,18 @@ PassiveModal.parameters = {
 
 export const WithStateManager = (args) => {
   const button = React.useRef();
+  const {
+    iconDescription = 'Close the modal',
+    label = 'Account resources',
+    title = 'Add a custom domain',
+    primaryButtonText = 'Add',
+    secondaryButtonText = 'Cancel',
+    primaryButtonDisabled = false,
+    loadingStatus = 'inactive',
+    loadingDescription,
+    loadingIconDescription,
+    ...modalArgs
+  } = args;
 
   /**
    * Simple state manager for modals.
@@ -280,16 +332,16 @@ export const WithStateManager = (args) => {
       )}>
       {({ open, setOpen }) => (
         <ComposedModal
-          {...args}
+          {...modalArgs}
           open={open}
           onClose={() => {
             setOpen(false);
           }}
           launcherButtonRef={button}>
           <ModalHeader
-            label="Account resources"
-            title="Add a custom domain"
-            {...args}
+            label={label}
+            title={title}
+            iconDescription={iconDescription}
           />
           <ModalBody>
             <p style={{ marginBottom: '1rem' }}>
@@ -310,9 +362,12 @@ export const WithStateManager = (args) => {
             </Select>
           </ModalBody>
           <ModalFooter
-            primaryButtonText="Add"
-            secondaryButtonText="Cancel"
-            {...args}
+            primaryButtonText={primaryButtonText}
+            secondaryButtonText={secondaryButtonText}
+            primaryButtonDisabled={primaryButtonDisabled}
+            loadingStatus={loadingStatus}
+            loadingDescription={loadingDescription}
+            loadingIconDescription={loadingIconDescription}
           />
         </ComposedModal>
       )}
@@ -322,14 +377,26 @@ export const WithStateManager = (args) => {
 
 export const WithScrollingContent = (args) => {
   const [open, setOpen] = useState(true);
+  const {
+    iconDescription = 'Close the modal',
+    label = 'Account resources',
+    title = 'Add a custom domain',
+    primaryButtonText = 'Add',
+    secondaryButtonText = 'Cancel',
+    primaryButtonDisabled = false,
+    loadingStatus = 'inactive',
+    loadingDescription,
+    loadingIconDescription,
+    ...modalArgs
+  } = args;
   return (
     <>
       <Button onClick={() => setOpen(true)}>Launch composed modal</Button>
-      <ComposedModal {...args} open={open} onClose={() => setOpen(false)}>
+      <ComposedModal {...modalArgs} open={open} onClose={() => setOpen(false)}>
         <ModalHeader
-          label="Account resources"
-          title="Add a custom domain"
-          {...args}
+          label={label}
+          title={title}
+          iconDescription={iconDescription}
         />
         <ModalBody hasScrollingContent>
           <p style={{ marginBottom: '1rem' }}>
@@ -392,9 +459,12 @@ export const WithScrollingContent = (args) => {
           />
         </ModalBody>
         <ModalFooter
-          primaryButtonText="Add"
-          secondaryButtonText="Cancel"
-          {...args}
+          primaryButtonText={primaryButtonText}
+          secondaryButtonText={secondaryButtonText}
+          primaryButtonDisabled={primaryButtonDisabled}
+          loadingStatus={loadingStatus}
+          loadingDescription={loadingDescription}
+          loadingIconDescription={loadingIconDescription}
         />
       </ComposedModal>
     </>
@@ -405,6 +475,16 @@ export const WithInlineLoading = (args) => {
   const [open, setOpen] = useState(true);
   const [status, setStatus] = useState('inactive');
   const [description, setDescription] = useState('Submitting...');
+  const {
+    iconDescription = 'Close the modal',
+    label = 'Account resources',
+    title = 'Add a custom domain',
+    primaryButtonText = 'Add',
+    secondaryButtonText = 'Cancel',
+    primaryButtonDisabled = false,
+    loadingIconDescription,
+    ...modalArgs
+  } = args;
 
   const fakePromise = () => {
     return new Promise((resolve) => {
@@ -431,11 +511,11 @@ export const WithInlineLoading = (args) => {
   return (
     <>
       <Button onClick={() => setOpen(true)}>Launch composed modal</Button>
-      <ComposedModal {...args} open={open} onClose={() => setOpen(false)}>
+      <ComposedModal {...modalArgs} open={open} onClose={() => setOpen(false)}>
         <ModalHeader
-          label="Account resources"
-          title="Add a custom domain"
-          {...args}
+          label={label}
+          title={title}
+          iconDescription={iconDescription}
         />
         <ModalBody>
           <p style={{ marginBottom: '1rem' }}>
@@ -456,11 +536,12 @@ export const WithInlineLoading = (args) => {
           </Select>
         </ModalBody>
         <ModalFooter
-          {...args}
-          primaryButtonText="Add"
-          secondaryButtonText="Cancel"
+          primaryButtonText={primaryButtonText}
+          secondaryButtonText={secondaryButtonText}
+          primaryButtonDisabled={primaryButtonDisabled}
           loadingStatus={status}
           loadingDescription={description}
+          loadingIconDescription={loadingIconDescription}
           onRequestSubmit={submit}
           onLoadingSuccess={resetStatus}
         />
@@ -532,18 +613,30 @@ export const _withAILabel = {
   },
   render: (args) => {
     const [open, setOpen] = useState(true); // eslint-disable-line
+    const {
+      iconDescription = 'Close the modal',
+      label = 'Account resources',
+      title = 'Add a custom domain',
+      primaryButtonText = 'Save',
+      secondaryButtonText = 'Cancel',
+      primaryButtonDisabled = false,
+      loadingStatus = 'inactive',
+      loadingDescription,
+      loadingIconDescription,
+      ...modalArgs
+    } = args;
     return (
       <div className="ai-label-modal">
         <Button onClick={() => setOpen(true)}>Launch composed modal</Button>
         <ComposedModal
-          {...args}
+          {...modalArgs}
           open={open}
           onClose={() => setOpen(false)}
           decorator={aiLabel}>
           <ModalHeader
-            label="Account resources"
-            title="Add a custom domain"
-            {...args}
+            label={label}
+            title={title}
+            iconDescription={iconDescription}
           />
           <ModalBody>
             <p style={{ marginBottom: '1rem' }}>
@@ -592,9 +685,12 @@ export const _withAILabel = {
           </ModalBody>
 
           <ModalFooter
-            primaryButtonText="Save"
-            secondaryButtonText="Cancel"
-            {...args}
+            primaryButtonText={primaryButtonText}
+            secondaryButtonText={secondaryButtonText}
+            primaryButtonDisabled={primaryButtonDisabled}
+            loadingStatus={loadingStatus}
+            loadingDescription={loadingDescription}
+            loadingIconDescription={loadingIconDescription}
           />
         </ComposedModal>
       </div>

@@ -67,6 +67,14 @@ export default {
 export const EnablePresence = (args) => {
   const buttonRef = useRef(null);
   const [open, setOpen] = useState(true);
+  const {
+    iconDescription,
+    label = 'Account resources',
+    title = 'Add a custom domain',
+    primaryButtonText = 'Add',
+    secondaryButtonText = 'Cancel',
+    ...modalArgs
+  } = args;
   return (
     <FeatureFlags enablePresence>
       <Annotation
@@ -86,14 +94,14 @@ export const EnablePresence = (args) => {
         <ClassPrefix prefix="presence">
           <div className="preview-modal-with-presence">
             <ComposedModal
-              {...args}
+              {...modalArgs}
               open={open}
               launcherButtonRef={buttonRef}
               onClose={() => setOpen(false)}>
               <ModalHeader
-                label="Account resources"
-                title="Add a custom domain"
-                {...args}
+                label={label}
+                title={title}
+                iconDescription={iconDescription}
               />
               <ModalBody>
                 <p style={{ marginBottom: '1rem' }}>
@@ -118,9 +126,8 @@ export const EnablePresence = (args) => {
                 </Select>
               </ModalBody>
               <ModalFooter
-                primaryButtonText="Add"
-                secondaryButtonText="Cancel"
-                {...args}
+                primaryButtonText={primaryButtonText}
+                secondaryButtonText={secondaryButtonText}
               />
             </ComposedModal>
           </div>
