@@ -236,6 +236,8 @@ class CDSTextarea extends CDSTextInput {
       this.helperText ||
       (this._slotHelperTextNode?.assignedNodes().length ?? 0) > 0;
 
+    const describedBy = hasHelperText ? 'helper-text' : undefined;
+
     const helper = html`
       <div class="${helperTextClasses}" id="helper-text">
         <slot
@@ -279,7 +281,7 @@ class CDSTextarea extends CDSTextInput {
           cols="${ifDefined(this.cols)}"
           ?data-invalid="${this.invalid}"
           ?disabled="${this.disabled}"
-          ?aria-describedby="${hasHelperText ? 'helper-text' : undefined}"
+          aria-describedby="${ifDefined(describedBy)}"
           id="input"
           name="${ifNonEmpty(this.name)}"
           pattern="${ifNonEmpty(this.pattern)}"
