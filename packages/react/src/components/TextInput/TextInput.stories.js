@@ -7,7 +7,6 @@
 
 import React from 'react';
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
-import FluidForm from '../FluidForm';
 import { View, FolderOpen, Folders, Information } from '@carbon/icons-react';
 import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
@@ -194,24 +193,6 @@ Inline.args = {
 Inline.parameters = {
   controls: {
     exclude: ['inline'],
-  },
-};
-
-export const Fluid = (args) => {
-  const { defaultWidth, ...textInputArgs } = args;
-
-  return (
-    <div style={{ width: defaultWidth }}>
-      <FluidForm>
-        <TextInput {...textInputArgs} />
-      </FluidForm>
-    </div>
-  );
-};
-
-Fluid.parameters = {
-  controls: {
-    exclude: ['helperText'],
   },
 };
 

@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2023
+// Copyright IBM Corp. 2016, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -13,6 +13,8 @@
 @use '../../type' as *;
 @use '../../breakpoint' as *;
 @use '../../theme' as *;
+@use '../../border-radius' as *;
+@use '../../feature-flags' as *;
 @use '../../utilities/ai-gradient' as *;
 @use '../../utilities/component-reset';
 @use '../../utilities/convert';
@@ -52,7 +54,7 @@
     border: none;
     border-radius: 0;
     appearance: none;
-    background-color: $field;
+    background: $field;
     block-size: layout.size('height');
     border-block-end: 1px solid $border-strong;
     color: $text-primary;
@@ -68,8 +70,33 @@
     // Do not transition on background-color (see: https://github.com/carbon-design-system/carbon/issues/4464)
     transition: outline $duration-fast-01 motion(standard, productive);
 
+    @if enabled('enable-v12-release') {
+      border: 1px solid transparent;
+      border-radius: $border-radius-04;
+      // (gray-20 → gray-50)
+      background:
+        linear-gradient($field, $field) padding-box,
+        linear-gradient(
+            to bottom,
+            $border-subtle calc(100% - 4px),
+            $border-strong 100%
+          )
+          border-box;
+    }
+
     &:hover {
       background-color: $field-hover;
+
+      @if enabled('enable-v12-release') {
+        background:
+          linear-gradient($field-hover, $field-hover) padding-box,
+          linear-gradient(
+              to bottom,
+              $border-subtle calc(100% - 4px),
+              $border-strong 100%
+            )
+            border-box;
+      }
     }
 
     // Hide default select arrow in IE10+
@@ -99,7 +126,7 @@
 
     &:disabled,
     &:hover:disabled {
-      background-color: $field;
+      background: $field;
       border-block-end-color: transparent;
       color: $text-disabled;
       cursor: not-allowed;
@@ -213,6 +240,12 @@
     inline-size: 100%;
     padding-inline: $spacing-03 $spacing-09;
 
+    @if enabled('enable-v12-release') {
+      // Restore the bottom border width removed above so the border-box
+      // gradient renders on all four sides, matching inline text input.
+      border-block-end: 1px solid transparent;
+    }
+
     &:hover {
       background-color: $field-hover;
     }
@@ -262,9 +295,13 @@
 
   // readonly
   .#{$prefix}--select--readonly .#{$prefix}--select-input {
-    background-color: transparent;
+    background: transparent;
     border-block-end-color: $border-subtle;
     cursor: default;
+
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-00;
+    }
   }
 
   .#{$prefix}--select--readonly .#{$prefix}--select__arrow {
@@ -273,7 +310,7 @@
 
   .#{$prefix}--select--readonly.#{$prefix}--select--inline
     .#{$prefix}--select-input:hover {
-    background-color: transparent;
+    background: transparent;
   }
 
   // Skeleton State
@@ -419,6 +456,29 @@
     ),
   .#{$prefix}--select-input-has--ai-label {
     @include ai-gradient;
+
+    @if enabled('enable-v12-release') {
+      // Reset the bottom-edge color override from @include ai-gradient so the
+      // border-box gradient layer controls all four sides uniformly.
+      background:
+        linear-gradient(
+            0deg,
+            $ai-aura-start-sm 0%,
+            15%,
+            $ai-aura-end 50%,
+            transparent 100%
+          )
+          padding-box,
+        linear-gradient($field, $field) padding-box,
+        // (ai-border-start → ai-border-end), mirroring the default v12 border gradient
+        linear-gradient(
+            to bottom,
+            $ai-border-start calc(100% - 4px),
+            $ai-border-strong 100%
+          )
+          border-box;
+      border-block-end-color: transparent;
+    }
   }
 
   .#{$prefix}--select--decorator:has(.#{$prefix}--select__invalid-icon)

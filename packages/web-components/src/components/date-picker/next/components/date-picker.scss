@@ -12,6 +12,8 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/feature-flags' as flags;
+@use '@carbon/styles/scss/border-radius' as *;
 
 @include date-picker;
 @include date-picker-next.date-picker-next-rules;
@@ -58,10 +60,13 @@
 }
 
 :host(#{$prefix}-preview-date-picker-input[kind='from']),
-:host(#{$prefix}-preview-date-picker-input[kind='to']),
-:host(#{$prefix}-preview-date-picker-input-skeleton[kind='from']),
-:host(#{$prefix}-preview-date-picker-input-skeleton[kind='to']) {
+:host(#{$prefix}-preview-date-picker-input-skeleton[kind='from']) {
   @extend .#{$prefix}--date-picker-container--from;
+}
+
+:host(#{$prefix}-preview-date-picker-input[kind='to']),
+:host(#{$prefix}-preview-date-picker-input-skeleton[kind='to']) {
+  @extend .#{$prefix}--date-picker-container--to;
 }
 
 :host(#{$prefix}-preview-date-picker-input) {
@@ -93,10 +98,31 @@
 
 :host(#{$prefix}-preview-date-picker-input-skeleton) {
   @extend .#{$prefix}--date-picker-input-skeleton;
+
+  @if flags.enabled('enable-v12-release') {
+    display: inline-flex;
+    flex-direction: row;
+  }
 }
 
 :host(#{$prefix}-preview-date-picker-input-skeleton[range]) {
   @extend .#{$prefix}--date-picker-input-skeleton--range;
+
+  @if flags.enabled('enable-v12-release') {
+    column-gap: rem(1px);
+
+    .#{$prefix}--date-picker-input-skeleton-container:first-of-type
+      .#{$prefix}--date-picker__input {
+      border-end-end-radius: $border-radius-00;
+      border-start-end-radius: $border-radius-00;
+    }
+
+    .#{$prefix}--date-picker-input-skeleton-container:last-of-type
+      .#{$prefix}--date-picker__input {
+      border-end-start-radius: $border-radius-00;
+      border-start-start-radius: $border-radius-00;
+    }
+  }
 }
 
 :host(#{$prefix}-preview-date-picker-input[ai-label]) {

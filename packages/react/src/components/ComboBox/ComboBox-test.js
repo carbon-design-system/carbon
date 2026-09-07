@@ -87,6 +87,42 @@ describe('ComboBox', () => {
     };
   });
 
+  it('should not allow interactive content in titleText', () => {
+    const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+    expect(() => {
+      render(
+        <ComboBox
+          {...mockProps}
+          titleText={
+            <>
+              ComboBox title <button type="button">Help</button>
+            </>
+          }
+        />
+      );
+    }).toThrow(
+      'The ComboBox component `titleText` prop must have no interactive content'
+    );
+
+    spy.mockRestore();
+  });
+
+  it('should allow non-interactive content in titleText', () => {
+    expect(() => {
+      render(
+        <ComboBox
+          {...mockProps}
+          titleText={
+            <>
+              ComboBox title <span>additional title content</span>
+            </>
+          }
+        />
+      );
+    }).not.toThrow();
+  });
+
   it('should display the menu of items when a user clicks on the input', async () => {
     render(<ComboBox {...mockProps} />);
 

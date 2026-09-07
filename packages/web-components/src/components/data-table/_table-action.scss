@@ -66,9 +66,11 @@
   flex: auto;
 }
 
-:host(#{$prefix}-table-toolbar-search:hover) {
-  .#{$prefix}--search {
-    background-color: $field-hover;
+@media (any-hover: hover) {
+  :host(#{$prefix}-table-toolbar-search:hover) {
+    .#{$prefix}--search {
+      background-color: $field-hover;
+    }
   }
 }
 
