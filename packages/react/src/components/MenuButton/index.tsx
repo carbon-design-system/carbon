@@ -124,7 +124,7 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
     const prefix = usePrefix();
     const triggerRef = useRef<HTMLDivElement>(null);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-    let middlewares: any[] = [
+    const middlewares: any[] = [
       // $spacing-02 gap between the trigger and the menu
       ...(enableV12Release ? [offset(4)] : []),
     ];
