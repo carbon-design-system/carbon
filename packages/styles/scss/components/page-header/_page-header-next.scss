@@ -1,0 +1,609 @@
+//
+// Copyright IBM Corp. 2025, 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../../config' as *;
+@use '../../breakpoint' as *;
+@use '../../motion' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../type';
+@use '../../utilities/convert';
+
+/// Composable PageHeader styles
+/// @access public
+/// @group page-header
+@mixin page-header-next {
+  $block-class: #{$prefix}--page-header;
+
+  .#{$block-class}.#{$block-class}__next {
+    position: sticky;
+    background-color: $layer-01;
+    border-block-end: 1px solid $border-subtle-01;
+    inset-block-start: var(--#{$prefix}-page-header-header-top);
+    overflow-x: clip;
+  }
+
+  // fullWidthGrid='xl': extra inline padding to match deprecated behavior
+  .#{$block-class}.#{$block-class}__next.#{$block-class}--width--xl {
+    padding-inline: $spacing-07;
+  }
+
+  // When disableStickyTabBar is true, remove sticky positioning from root
+  // This allows breadcrumb to stick to viewport while tab bar scrolls normally
+  .#{$block-class}.#{$block-class}__next.#{$block-class}--disable-sticky-tab-bar {
+    position: static;
+    // Add padding to compensate for fixed breadcrumb (40px height)
+    padding-block-start: convert.to-rem(40px);
+  }
+
+  .#{$block-class}.#{$block-class}__next .#{$block-class}__breadcrumb-bar {
+    position: sticky;
+    z-index: 2;
+    background-color: $layer;
+    block-size: convert.to-rem(40px);
+    inset-block-start: var(--#{$prefix}-page-header-breadcrumb-top);
+  }
+
+  // When disableStickyTabBar is true, breadcrumb uses fixed positioning at top of viewport
+  .#{$block-class}.#{$block-class}__next.#{$block-class}--disable-sticky-tab-bar
+    .#{$block-class}__breadcrumb-bar {
+    position: fixed;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+    inset-inline-start: 0;
+  }
+
+  .#{$block-class}.#{$block-class}__next
+    .#{$block-class}__breadcrumb-bar
+    .#{$prefix}--subgrid,
+  .#{$block-class}.#{$block-class}__next
+    .#{$block-class}__breadcrumb-bar
+    .#{$prefix}--css-grid {
+    block-size: 100%;
+  }
+
+  .#{$block-class}.#{$block-class}__next
+    .#{$block-class}__breadcrumb-bar
+    .#{$prefix}--css-grid
+    .#{$prefix}--css-grid-column {
+    block-size: convert.to-rem(40px);
+  }
+
+  .#{$block-class}.#{$block-class}__next
+    .#{$block-class}__breadcrumb-bar
+    .#{$prefix}--css-grid
+    .#{$prefix}--css-grid-column,
+  .#{$block-class}.#{$block-class}__next
+    .#{$block-class}__breadcrumb-bar
+    .#{$block-class}__breadcrumb-container {
+    block-size: convert.to-rem(40px);
+
+    .#{$block-class}__breadcrumb-wrapper {
+      align-items: center;
+      block-size: inherit;
+    }
+  }
+
+  .#{$block-class}.#{$block-class}__next
+    .#{$block-class}__breadcrumb-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    block-size: 100%;
+    inline-size: 100%;
+  }
+
+  .#{$block-class}.#{$block-class}__next
+    .#{$block-class}__breadcrumb__actions-flush {
+    .#{$prefix}--css-grid {
+      padding-inline-end: 0;
+    }
+
+    .#{$prefix}--css-grid-column {
+      margin-inline-end: 0;
+    }
+  }
+
+  .#{$block-class}.#{$block-class}__next
+    .#{$block-class}__breadcrumb-bar-border {
+    border-block-end: 1px solid $border-subtle-01;
+  }
+
+  .#{$block-class}.#{$block-class}__next .#{$block-class}__breadcrumb__icon {
+    margin-inline-end: $spacing-03;
+
+    svg {
+      fill: $icon-primary;
+    }
+  }
+
+  .#{$block-class}.#{$block-class}__next .#{$block-class}__breadcrumb__actions {
+    display: inline-flex;
+    flex: 0 0 auto;
+    justify-content: flex-end;
+    min-inline-size: 75%;
+
+    @include breakpoint(md) {
+      min-inline-size: 40%;
+    }
+  }
+
+  .#{$block-class}.#{$block-class}__next
+    .#{$block-class}__breadcrumb__content-actions {
+    margin-inline-end: $spacing-04;
+  }
+
+  .#{$block-class}.#{$block-class}__next
+    .#{$block-class}__breadcrumb-page-actions {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    inline-size: 50%;
+  }
+
+  .#{$block-class}.#{$block-class}__next
+    .#{$block-class}__breadcrumb-page-actions__overflow-item {
+    position: relative;
+  }
+
+  .#{$block-class}.#{$block-class}__next .#{$block-class}__breadcrumb-wrapper {
+    display: inline-flex;
+    flex: 1 1 auto;
+    min-inline-size: 0;
+
+    @include breakpoint(md) {
+      min-inline-size: 60%;
+    }
+  }
+
+  .#{$block-class}.#{$block-class}__next
+    .#{$block-class}__breadcrumb-wrapper
+    .#{$prefix}--page-header-breadcrumb-overflow {
+    flex: 1 1 0%;
+    min-inline-size: 0;
+
+    .#{$prefix}--breadcrumb {
+      display: flex;
+      flex-wrap: nowrap;
+    }
+
+    .#{$prefix}--breadcrumb-item[data-fixed='true'] {
+      .#{$prefix}--link {
+        display: block;
+        overflow: hidden;
+        inline-size: 100%;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      @include breakpoint-down(lg) {
+        max-inline-size: 75vw;
+
+        .#{$prefix}--link {
+          inline-size: 75%;
+        }
+      }
+
+      @include breakpoint-down(md) {
+        max-inline-size: 35vw;
+
+        .#{$prefix}--link {
+          inline-size: 100%;
+        }
+      }
+    }
+  }
+
+  .#{$block-class}.#{$block-class}__next
+    .#{$block-class}__breadcrumb-wrapper
+    .#{$prefix}--page-header-breadcrumb-overflow-item {
+    display: none;
+    opacity: 0;
+  }
+
+  .#{$block-class}.#{$block-class}__next
+    .#{$block-class}__breadcrumb-wrapper
+    .#{$prefix}--page-header-overflow-breadcrumb-item-with-items {
+    display: flex;
+    opacity: 1;
+  }
+
+  .#{$block-class}.#{$block-class}__next .#{$block-class}__content {
+    background-color: $layer;
+    padding-block-start: $spacing-06;
+  }
+
+  .#{$block-class}.#{$block-class}__next
+    .#{$block-class}__content__title-wrapper {
+    display: grid;
+    gap: $spacing-05;
+    grid-template-columns: auto minmax(
+        var(--#{$prefix}-page-header-title-grid-width, 0),
+        1fr
+      );
+    margin-block-end: $spacing-05;
+    min-block-size: convert.to-rem(40px);
+
+    @include breakpoint-down(md) {
+      display: flex;
+      flex-direction: column;
+      grid-gap: $spacing-05;
+    }
+  }
+
+  .#{$block-class}.#{$block-class}__next .#{$block-class}__content__start {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-05;
+  }
+
+  .#{$block-class}.#{$block-class}__next
+    .#{$block-class}__content__title-container {
+    display: flex;
+  }
+
+  .#{$block-class}.#{$block-class}__next
+    .#{$block-class}__content__title-container
+    .#{$prefix}--definition-term {
+    border-block-end: none;
+  }
+
+  .#{$block-class}.#{$block-class}__next
+    .#{$block-class}__content__contextual-actions {
+    display: flex;
+    align-items: center;
+  }
+
+  .#{$block-class}.#{$block-class}__next .#{$block-class}__content__title {
+    @include type.type-style('productive-heading-04');
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    max-inline-size: convert.to-rem(640px);
+    text-overflow: ellipsis;
+    white-space: normal;
+  }
+
+  .#{$block-class}.#{$block-class}__next
+    .#{$block-class}__content:has(.#{$block-class}__content__contextual-actions)
+    .#{$block-class}__content__title {
+    -webkit-line-clamp: 1;
+  }
+
+  .#{$block-class}.#{$block-class}__next .#{$block-class}__content__icon {
+    margin-inline-end: $spacing-05;
+
+    svg {
+      fill: $icon-primary;
+    }
+  }
+
+  .#{$block-class}.#{$block-class}__next
+    .#{$block-class}__content__page-actions {
+    display: flex;
+    justify-content: right;
+    transition: opacity motion(standard, productive) $duration-moderate-02;
+
+    &.#{$block-class}__content__page-actions--clipped {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    @include breakpoint-down('md') {
+      justify-content: left;
+      margin-block-start: 0;
+    }
+  }
+
+  .#{$block-class}.#{$block-class}__next
+    .#{$block-class}__content__page-actions
+    .#{$prefix}--menu-button__trigger:not(.#{$prefix}--btn--ghost) {
+    min-inline-size: 0;
+  }
+
+  // Ensure menu dropdown stays within viewport bounds
+  // Note: Carbon MenuButton renders the menu in a portal at body level
+  .#{$prefix}--menu.#{$prefix}--menu--open {
+    // Prevent menu from being cut off at top of viewport
+    max-block-size: calc(100vh - #{$spacing-05});
+    overflow-y: auto;
+  }
+
+  .#{$block-class}.#{$block-class}__next .#{$block-class}__content__subtitle {
+    @include type.type-style('productive-heading-03');
+
+    margin-block-end: $spacing-03;
+  }
+
+  .#{$block-class}.#{$block-class}__next .#{$block-class}__content__body {
+    @include type.type-style('body-01');
+
+    margin-block-start: $spacing-03;
+    max-inline-size: convert.to-rem(640px);
+    padding-block-end: $spacing-06;
+  }
+
+  .#{$block-class}.#{$block-class}__next [data-hidden]:not([data-fixed]) {
+    display: none;
+  }
+
+  .#{$block-class}.#{$block-class}__next .#{$block-class}__hero-image {
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    justify-content: flex-end;
+    block-size: 100%;
+
+    // Object-fit styles for images
+    &--object-fit-cover,
+    &--object-fit-contain,
+    &--object-fit-fill,
+    &--object-fit-none {
+      picture,
+      img {
+        block-size: 100%;
+        inline-size: 100%;
+      }
+    }
+
+    &--object-fit-cover {
+      picture,
+      img {
+        object-fit: cover;
+        object-position: center;
+      }
+    }
+
+    &--object-fit-contain {
+      picture,
+      img {
+        object-fit: contain;
+        object-position: center;
+      }
+    }
+
+    &--object-fit-fill {
+      picture,
+      img {
+        object-fit: fill;
+      }
+    }
+
+    &--object-fit-none {
+      picture,
+      img {
+        object-fit: none;
+        object-position: center;
+      }
+    }
+  }
+
+  .#{$block-class}.#{$block-class}__next .#{$block-class}__tab-bar {
+    position: sticky;
+    z-index: 1;
+    // Use flex at all breakpoints so the scroller button is always a
+    // natural in-flow sibling of the Grid column — no absolute positioning
+    // needed and no overlap with the tag overflow area.
+    display: flex;
+    align-content: center;
+    align-items: center;
+    background-color: $layer;
+    inset-block-start: var(--#{$prefix}-page-header-breadcrumb-top);
+    min-block-size: $spacing-08;
+  }
+
+  // Disable sticky positioning for tab bar when disableStickyTabBar prop is true
+  .#{$block-class}.#{$block-class}__next.#{$block-class}--disable-sticky-tab-bar
+    .#{$block-class}__tab-bar {
+    position: static;
+    display: flex;
+    align-items: center;
+  }
+
+  // Grid column grows to fill the row, leaving the scroller as a fixed-width
+  // item at the end — no absolute positioning hacks needed.
+  .#{$block-class}.#{$block-class}__next
+    .#{$block-class}__tab-bar
+    > .#{$prefix}--css-grid {
+    flex: 1;
+    min-inline-size: 0;
+  }
+
+  .#{$block-class}.#{$block-class}__next .#{$block-class}__tab-bar--tablist {
+    display: flex;
+    align-items: center;
+  }
+
+  .#{$block-class}.#{$block-class}__next
+    .#{$block-class}__tab-bar--tablist
+    > .#{$prefix}--tabs {
+    display: inline-flex;
+    margin-inline-end: $spacing-03;
+  }
+
+  .#{$block-class}.#{$block-class}__next
+    .#{$block-class}__tab-bar--tablist
+    .#{$block-class}__tags {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-inline-start: auto;
+    min-inline-size: 0;
+  }
+
+  .#{$block-class}.#{$block-class}__next
+    .#{$block-class}__tab-bar--tablist.#{$block-class}__tab-bar--with-scroller
+    .#{$block-class}__tags {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+  }
+
+  .#{$block-class}.#{$block-class}__next
+    .#{$prefix}--tabs
+    .#{$prefix}--tab--overflow-nav-button {
+    background-color: $layer-01;
+
+    &.#{$prefix}--tab--overflow-nav-button--next::before {
+      background: linear-gradient(to right, rgba(255, 255, 255, 0), $layer-01);
+    }
+
+    &.#{$prefix}--tab--overflow-nav-button--previous::before {
+      background: linear-gradient(to left, rgba(255, 255, 255, 0), $layer-01);
+    }
+  }
+
+  // **** This is a temporary work-around until the focus clipping
+  // **** for overflowing tabs is resolved in core.
+  // **** https://github.com/carbon-design-system/carbon/issues/19942
+  .#{$block-class}.#{$block-class}__next
+    .#{$prefix}--tabs
+    .#{$prefix}--tabs__nav-link {
+    margin-inline-end: $spacing-01;
+  }
+
+  .#{$block-class}.#{$block-class}__next .#{$block-class}__tags {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+  }
+
+  .#{$block-class}.#{$block-class}__next .#{$block-class}__tags-popover-list {
+    display: flex;
+    flex-direction: column;
+    padding: $spacing-05;
+  }
+
+  .#{$block-class}.#{$block-class}__next
+    .#{$block-class}--tag-overflow-container {
+    display: inline-flex;
+    align-content: center;
+    justify-content: flex-end;
+    inline-size: 40%;
+    text-align: end;
+
+    .#{$prefix}--tag {
+      flex-shrink: 0;
+      margin-inline-end: $spacing-03;
+    }
+  }
+
+  .#{$block-class}.#{$block-class}__next
+    .#{$block-class}--tag-overflow-popover__hidden {
+    display: none;
+  }
+
+  .#{$block-class}.#{$block-class}__next .#{$block-class}__tag-item {
+    flex-shrink: 0;
+  }
+
+  .#{$block-class}.#{$block-class}__next
+    .#{$block-class}--scroller-button-icon {
+    transition: transform $transition-base;
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  .#{$block-class}.#{$block-class}__next
+    .#{$block-class}--scroller-button-icon-collapsed {
+    transform: rotate(-180deg);
+  }
+
+  .#{$block-class}.#{$block-class}__next
+    .#{$block-class}--scroller-button-container {
+    // Always in-flow alongside the Grid column — no absolute positioning.
+    // flex-shrink: 0 ensures it always occupies its natural 40px width and
+    // never competes for space with the tabs or tag overflow area.
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+  }
+
+  @keyframes page-header-title-breadcrumb-animation {
+    0% {
+      opacity: 0;
+      transform: translateY($spacing-05);
+    }
+
+    5% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes page-header-title-breadcrumb-animation-reduced-motion {
+    0% {
+      opacity: 0;
+    }
+
+    5% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .#{$block-class}.#{$block-class}__next
+    .#{$block-class}__breadcrumb__content-actions {
+    opacity: 0;
+  }
+
+  .#{$block-class}.#{$block-class}__next
+    .#{$block-class}__breadcrumb__content-actions-with-global-actions--show {
+    opacity: 1;
+    transition: opacity motion(standard, productive) $duration-moderate-01;
+  }
+
+  .#{$block-class}.#{$block-class}__next
+    .#{$prefix}--page-header-title-breadcrumb {
+    opacity: 0;
+    transform: translateY($spacing-05);
+    transition:
+      transform motion(standard, productive) $duration-moderate-01,
+      opacity motion(standard, productive) $duration-moderate-01;
+
+    // Target browsers that do not yet support animation-timeline: scroll()
+    @supports not (animation-timeline: scroll()) {
+      &.#{$prefix}--page-header-title-breadcrumb-show {
+        @media (prefers-reduced-motion: reduce) {
+          transform: translateY(0);
+          transition: opacity motion(standard, productive) $duration-moderate-01;
+        }
+      }
+    }
+
+    &.#{$prefix}--page-header-title-breadcrumb-show__with-content-element {
+      // `animation-timeline: scroll()` only currently supported in Chromium based browsers
+      @supports (animation-timeline: scroll()) {
+        animation-direction: alternate;
+        animation-duration: 1ms; /* Firefox requires this to apply the animation */
+        animation-name: page-header-title-breadcrumb-animation;
+        animation-timeline: scroll(block nearest);
+
+        @media (prefers-reduced-motion: reduce) {
+          animation-name: page-header-title-breadcrumb-animation-reduced-motion;
+          transform: translateY(0);
+        }
+      }
+    }
+
+    &.#{$prefix}--page-header-title-breadcrumb-show__without-content-element {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
