@@ -8,7 +8,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { unstable_Text as Text } from '@carbon/react';
-import { blockClass } from '../PageHeaderUtils';
+import { blockClass } from './utils';
 
 /**
  * ----------------

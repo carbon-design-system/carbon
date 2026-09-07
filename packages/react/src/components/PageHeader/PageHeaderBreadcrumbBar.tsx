@@ -7,7 +7,7 @@
 import React, { type ComponentType, type FunctionComponent } from 'react';
 import classnames from 'classnames';
 import { Column, Grid } from '@carbon/react';
-import { blockClass } from '../PageHeaderUtils';
+import { blockClass } from './utils';
 import {
   PageHeaderContext,
   usePageHeader,

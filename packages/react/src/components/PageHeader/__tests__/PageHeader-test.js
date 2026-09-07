@@ -10,7 +10,7 @@ import { render, screen, act, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Compact, Default } from '../PageHeader.stories';
 import { preview__PageHeader as PageHeader, pkg } from '../../../..';
-import { blockClass } from '../../PageHeaderUtils';
+import { blockClass } from '../utils';
 import {
   PageHeader as PageHeaderDirect,
   PageHeaderBreadcrumbBar as PageHeaderBreadcrumbBarDirect,

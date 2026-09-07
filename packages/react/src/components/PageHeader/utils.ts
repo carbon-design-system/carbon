@@ -5,11 +5,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { pkg } from '../../../settings';
+
 /**
  * ----------
  * Utilities
  * ----------
  */
+
+/**
+ * The BEM block class shared across all PageHeader sub-components.
+ * Equivalent to the `blockClass` export from the ibm-products PageHeaderUtils.
+ */
+export const blockClass = `${pkg.prefix}--page-header`;
 
 export const getHeaderOffset = (el: HTMLElement): number => {
   const scrollableContainer = scrollableAncestor(el);

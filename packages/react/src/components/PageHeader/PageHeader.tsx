@@ -6,9 +6,8 @@
  */
 import React, { useState, useRef, RefObject, useEffect, useMemo } from 'react';
 import classnames from 'classnames';
-import { blockClass } from '../PageHeaderUtils';
+import { blockClass, getHeaderOffset } from './utils';
 import { PageHeaderContext, PageHeaderRefs } from './context';
-import { getHeaderOffset } from './utils';
 import { pkg } from '../../../settings';
 import { useResizeObserver } from '../../../global/js/hooks/useResizeObserver';
 

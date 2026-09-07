@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { AspectRatio } from '@carbon/react';
 import { breakpoints } from '@carbon/layout';
-import { blockClass } from '../PageHeaderUtils';
+import { blockClass } from './utils';
 
 /**
  * ----------------

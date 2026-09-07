@@ -14,7 +14,7 @@ import React, {
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { Column, Grid, Section, Heading } from '@carbon/react';
-import { blockClass } from '../PageHeaderUtils';
+import { blockClass } from './utils';
 import { usePageHeader, type PageHeaderObserverState } from './context';
 import { TruncatedText } from '../../TruncatedText';
 

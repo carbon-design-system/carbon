@@ -13,7 +13,7 @@ import React, {
 } from 'react';
 import classnames from 'classnames';
 import { Popover, PopoverContent } from '@carbon/react';
-import { blockClass } from '../PageHeaderUtils';
+import { blockClass } from './utils';
 import { createOverflowHandler as localOverflowHandler } from './overflowHandler';
 import { pkg } from '../../../settings';
 

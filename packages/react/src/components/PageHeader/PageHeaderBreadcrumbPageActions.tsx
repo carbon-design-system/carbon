@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { Button, OverflowMenu, MenuItem, FeatureFlags } from '@carbon/react';
 import { createOverflowHandler } from '@carbon/utilities';
-import { blockClass } from '../PageHeaderUtils';
+import { blockClass } from './utils';
 
 /**
  * --------------------------------

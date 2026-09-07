@@ -7,7 +7,7 @@
 import React, { useEffect } from 'react';
 import classnames from 'classnames';
 import { Column, Grid } from '@carbon/react';
-import { blockClass } from '../PageHeaderUtils';
+import { blockClass } from './utils';
 import { pkg } from '../../../settings';
 import { usePageHeader } from './context';
 

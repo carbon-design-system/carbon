@@ -9,7 +9,7 @@ import { useIsomorphicEffect } from '../../../global/js/hooks';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { MenuItem, MenuItemProps, MenuButton } from '@carbon/react';
-import { blockClass } from '../PageHeaderUtils';
+import { blockClass } from './utils';
 import { createOverflowHandler } from '@carbon/utilities';
 import { usePageHeader } from './context';
 import { pkg } from '../../../settings';
