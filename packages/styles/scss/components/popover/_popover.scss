@@ -306,6 +306,20 @@ $popover-caret-height: custom-property.get-var(
     display: block;
   }
 
+  // Toggletip historically sized start/end alignment with a caret. v12 hides
+  // the caret, but Floating UI still needs that box so Toggletip does not
+  // shift relative to v11. Popover should align as a caret-less surface.
+  .#{$prefix}--toggletip.#{$prefix}--popover--auto-align:not(
+      .#{$prefix}--popover--caret
+    ).#{$prefix}--popover--open
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret {
+    display: block;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
   .#{$prefix}--popover--tab-tip
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret {
