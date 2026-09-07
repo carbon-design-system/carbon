@@ -100,15 +100,15 @@ The `ss`, `se`, `es`, and `ee` suffixes are logical corners (start-start,
 start-end, end-start, end-end). They follow writing direction, so a joined
 control stays joined in RTL without extra rules.
 
-| Token                 | CSS value    |
-| --------------------- | ------------ |
-| `$border-radius-00`   | `0`          |
-| `$border-radius-02`   | `0.125rem`   |
-| `$border-radius-04`   | `0.25rem`    |
-| `$border-radius-08`   | `0.5rem`     |
-| `$border-radius-16`   | `1rem`       |
-| `$border-radius-24`   | `1.5rem`     |
-| `$border-radius-max`  | `999999px`   |
+| Token                | CSS value  |
+| -------------------- | ---------- |
+| `$border-radius-00`  | `0`        |
+| `$border-radius-02`  | `0.125rem` |
+| `$border-radius-04`  | `0.25rem`  |
+| `$border-radius-08`  | `0.5rem`   |
+| `$border-radius-16`  | `1rem`     |
+| `$border-radius-24`  | `1.5rem`   |
+| `$border-radius-max` | `999999px` |
 
 <Canvas of={ButtonStories.Radius} />
 
@@ -144,7 +144,8 @@ through the shadow boundary. There is no radius attribute.
       height="16"
       viewBox="0 0 32 32"
       aria-hidden="true">
-      <path d="M17 15 17 8 15 8 15 15 8 15 8 17 15 17 15 24 17 24 17 17 24 17 24 15z"></path>
+      <path
+        d="M17 15 17 8 15 8 15 15 8 15 8 17 15 17 15 24 17 24 17 17 24 17 24 15z"></path>
     </svg>
   </cds-button>
 </div>

@@ -107,7 +107,8 @@ export const BreadcrumbWithOverflowMenu = (args) => {
       </BreadcrumbItem>
       <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
       <BreadcrumbItem data-floating-menu-container>
-        <OverflowMenu {...getBreadcrumbOverflowMenuProps(enableV12OverflowMenu)}>
+        <OverflowMenu
+          {...getBreadcrumbOverflowMenuProps(enableV12OverflowMenu)}>
           {renderBreadcrumbOverflowMenuItems(enableV12OverflowMenu)}
         </OverflowMenu>
       </BreadcrumbItem>
@@ -133,7 +134,8 @@ export const BreadcrumbWithOverflowMenuSizeSmall = (args) => {
       </BreadcrumbItem>
       <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
       <BreadcrumbItem data-floating-menu-container>
-        <OverflowMenu {...getBreadcrumbOverflowMenuProps(enableV12OverflowMenu)}>
+        <OverflowMenu
+          {...getBreadcrumbOverflowMenuProps(enableV12OverflowMenu)}>
           {renderBreadcrumbOverflowMenuItems(enableV12OverflowMenu)}
         </OverflowMenu>
       </BreadcrumbItem>
@@ -191,7 +193,8 @@ export const BreadcrumbWithOverflowVisualSnapshots = (args) => {
       </BreadcrumbItem>
       <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
       <BreadcrumbItem data-floating-menu-container>
-        <OverflowMenu {...getBreadcrumbOverflowMenuProps(enableV12OverflowMenu)}>
+        <OverflowMenu
+          {...getBreadcrumbOverflowMenuProps(enableV12OverflowMenu)}>
           {renderBreadcrumbOverflowMenuItems(enableV12OverflowMenu)}
         </OverflowMenu>
       </BreadcrumbItem>

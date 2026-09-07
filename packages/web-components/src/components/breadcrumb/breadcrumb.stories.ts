@@ -130,7 +130,9 @@ export const BreadcrumbWithOverflowMenu = {
         <cds-breadcrumb-item>
           <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
         </cds-breadcrumb-item>
-        <cds-breadcrumb-item> ${renderBreadcrumbOverflowMenu()} </cds-breadcrumb-item>
+        <cds-breadcrumb-item>
+          ${renderBreadcrumbOverflowMenu()}
+        </cds-breadcrumb-item>
         <cds-breadcrumb-item>
           <cds-breadcrumb-link href="#">Breadcrumb 5</cds-breadcrumb-link>
         </cds-breadcrumb-item>

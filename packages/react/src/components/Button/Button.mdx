@@ -87,7 +87,8 @@ descendant buttons.
 
 If a per-corner property is set, it wins over `--cds-button-radius` for that
 corner. Carbon uses this so a default button can stay fully rounded while a
-button in another component uses a different token which fits its design context:
+button in another component uses a different token which fits its design
+context:
 
 | Context                               | Token                     |
 | ------------------------------------- | ------------------------- |
@@ -119,15 +120,15 @@ The `ss`, `se`, `es`, and `ee` suffixes are logical corners (start-start,
 start-end, end-start, end-end). They follow writing direction, so a joined
 control stays joined in RTL without extra rules.
 
-| Token                 | CSS value    |
-| --------------------- | ------------ |
-| `$border-radius-00`   | `0`          |
-| `$border-radius-02`   | `0.125rem`   |
-| `$border-radius-04`   | `0.25rem`    |
-| `$border-radius-08`   | `0.5rem`     |
-| `$border-radius-16`   | `1rem`       |
-| `$border-radius-24`   | `1.5rem`     |
-| `$border-radius-max`  | `999999px`   |
+| Token                | CSS value  |
+| -------------------- | ---------- |
+| `$border-radius-00`  | `0`        |
+| `$border-radius-02`  | `0.125rem` |
+| `$border-radius-04`  | `0.25rem`  |
+| `$border-radius-08`  | `0.5rem`   |
+| `$border-radius-16`  | `1rem`     |
+| `$border-radius-24`  | `1.5rem`   |
+| `$border-radius-max` | `999999px` |
 
 <Canvas
   of={ButtonStories.Radius}

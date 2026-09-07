@@ -122,12 +122,7 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
                       // `placement` doesn’t fit on the axes in which overflow
                       // is checked.
                       fallbackPlacements: menuAlignment.includes('bottom')
-                        ? [
-                            'bottom-start',
-                            'bottom-end',
-                            'top-start',
-                            'top-end',
-                          ]
+                        ? ['bottom-start', 'bottom-end', 'top-start', 'top-end']
                         : [
                             'top-start',
                             'top-end',

@@ -307,10 +307,7 @@ const radiusTokenScale = [
   ['max', '999999px'],
 ];
 
-const radiusTokenOptions = [
-  'unset',
-  ...radiusTokenScale.map(([name]) => name),
-];
+const radiusTokenOptions = ['unset', ...radiusTokenScale.map(([name]) => name)];
 
 const radiusTokenMapping = {
   unset: undefined,
@@ -326,7 +323,7 @@ const radiusArgType = (name, description) => ({
   table: { category: 'Radius' },
 });
 
-const radiusCssVars = ({ radius, radiusSs, radiusSe, radiusEs, radiusEe }) => {
+const toRadiusStyle = ({ radius, radiusSs, radiusSe, radiusEs, radiusEe }) => {
   const style = {};
   if (radius != null) {
     style['--cds-button-radius'] = radius;
@@ -444,7 +441,7 @@ export const Radius = {
     <div style=${styleMap(radiusStack)}>
       <div style=${styleMap(radiusGroup)}>
         <span style=${styleMap(radiusLabel)}>Custom</span>
-        <div style=${styleMap({ ...radiusRow, ...radiusCssVars(args) })}>
+        <div style=${styleMap({ ...radiusRow, ...toRadiusStyle(args) })}>
           ${radiusTextButton(args, 'Button')}
           ${radiusIconButton(args, args.tooltipText || 'Add')}
         </div>
@@ -454,7 +451,7 @@ export const Radius = {
         <div style=${styleMap(radiusRow)}>
           ${radiusTokenScale.map(
             ([name, value]) => html`
-              <div style=${styleMap(radiusCssVars({ radius: value }))}>
+              <div style=${styleMap(toRadiusStyle({ radius: value }))}>
                 ${radiusTextButton(args, name)}
               </div>
             `
@@ -466,7 +463,7 @@ export const Radius = {
         <div style=${styleMap(radiusRow)}>
           ${radiusTokenScale.map(
             ([name, value]) => html`
-              <div style=${styleMap(radiusCssVars({ radius: value }))}>
+              <div style=${styleMap(toRadiusStyle({ radius: value }))}>
                 ${radiusIconButton(args, name)}
               </div>
             `
@@ -478,7 +475,7 @@ export const Radius = {
         <div style="display: inline-flex; column-gap: 1px">
           <div
             style=${styleMap(
-              radiusCssVars({
+              toRadiusStyle({
                 radius: '999999px',
                 radiusSe: '0',
                 radiusEe: '0',
@@ -488,7 +485,7 @@ export const Radius = {
           </div>
           <div
             style=${styleMap(
-              radiusCssVars({
+              toRadiusStyle({
                 radius: '999999px',
                 radiusSs: '0',
                 radiusEs: '0',
@@ -504,13 +501,13 @@ export const Radius = {
         </span>
         <div
           style=${styleMap({
-            ...radiusCssVars({ radius: '0' }),
+            ...toRadiusStyle({ radius: '0' }),
             display: 'inline-flex',
           })}>
           ${radiusTextButton({ ...args, kind: BUTTON_KIND.GHOST }, 'Cancel')}
           <div
             style=${styleMap(
-              radiusCssVars({ radiusEe: 'calc(0.5rem - 1px)' })
+              toRadiusStyle({ radiusEe: 'calc(0.5rem - 1px)' })
             )}>
             ${radiusTextButton(args, 'Confirm')}
           </div>
@@ -520,11 +517,11 @@ export const Radius = {
         <span style=${styleMap(radiusLabel)}>Nested override</span>
         <div
           style=${styleMap({
-            ...radiusCssVars({ radius: '0' }),
+            ...toRadiusStyle({ radius: '0' }),
             ...radiusRow,
           })}>
           ${radiusTextButton(args, 'Page')}
-          <div style=${styleMap(radiusCssVars({ radius: '999999px' }))}>
+          <div style=${styleMap(toRadiusStyle({ radius: '999999px' }))}>
             ${radiusTextButton(args, 'Hero')}
           </div>
         </div>

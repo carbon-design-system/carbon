@@ -363,10 +363,7 @@ export const WithLayer = {
         onBeforeSelect
       )}"
       @cds-content-switcher-selected="${forwardEventDetail(onChange)}">
-      <cds-content-switcher-item
-        ?disabled="${disabled}"
-        value="all"
-        name="one">
+      <cds-content-switcher-item ?disabled="${disabled}" value="all" name="one">
         First section
       </cds-content-switcher-item>
       <cds-content-switcher-item

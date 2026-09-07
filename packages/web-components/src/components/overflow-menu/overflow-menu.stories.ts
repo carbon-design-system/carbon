@@ -98,7 +98,10 @@ const renderOverflowMenu = (args, icon, menu = defaultMenu) => {
 const renderV12OverflowMenu = (args, icon, menu) => {
   const { iconDescription, open, size } = args ?? {};
   return html`
-    <cds-overflow-menu ?open="${open}" size="${size}" label="${iconDescription}">
+    <cds-overflow-menu
+      ?open="${open}"
+      size="${size}"
+      label="${iconDescription}">
       ${iconLoader(icon, {
         class: `${prefix}--overflow-menu__icon`,
         slot: 'icon',
