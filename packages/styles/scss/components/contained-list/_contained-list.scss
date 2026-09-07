@@ -9,7 +9,9 @@
 
 @use '../button';
 @use '../overflow-menu';
+@use '../../border-radius' as *;
 @use '../../config' as *;
+@use '../../feature-flags' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
@@ -27,6 +29,10 @@
   .#{$prefix}--contained-list {
     @include layout.use('size', $default: 'lg', $min: 'sm', $max: 'xl');
     @include layout.use('density', $default: 'normal');
+
+    @if enabled('enable-v12-release') {
+      @include button.radius($border-radius-00);
+    }
   }
 
   .#{$prefix}--contained-list .#{$prefix}--tag {

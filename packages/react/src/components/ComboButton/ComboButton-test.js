@@ -182,6 +182,9 @@ describe('ComboButton', () => {
       await userEvent.click(screen.getAllByRole('button')[1]);
 
       expect(document.querySelector('ul.cds--menu')).toBeInTheDocument();
+      expect(document.querySelector('ul.cds--menu')).toHaveClass(
+        `${prefix}--autoalign`
+      );
       expect(
         document.querySelector('.cds--menu-item__label')
       ).toHaveTextContent(/^Additional action$/);

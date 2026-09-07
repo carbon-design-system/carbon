@@ -120,22 +120,19 @@ export const Default = {
         <cds-content-switcher-item
           value="all"
           name="one"
-          ?disabled="${disabled}"
-          ?low-contrast="${lowContrast}">
+          ?disabled="${disabled}">
           First section
         </cds-content-switcher-item>
         <cds-content-switcher-item
           value="cloudFoundry"
           name="two"
-          ?disabled="${disabled}"
-          ?low-contrast="${lowContrast}">
+          ?disabled="${disabled}">
           Second section
         </cds-content-switcher-item>
         <cds-content-switcher-item
           value="staging"
           name="three"
-          ?disabled="${disabled}"
-          ?low-contrast="${lowContrast}">
+          ?disabled="${disabled}">
           Third section
         </cds-content-switcher-item>
       </cds-content-switcher>
@@ -165,27 +162,18 @@ export const IconOnly = {
         onBeforeSelect
       )}"
       @cds-content-switcher-selected="${forwardEventDetail(onChange)}">
-      <cds-content-switcher-item
-        icon
-        value="all"
-        ?disabled="${disabled}"
-        ?low-contrast="${lowContrast}">
+      <cds-content-switcher-item icon value="all" ?disabled="${disabled}">
         ${iconLoader(TableOfContents16)}
         <span slot="tooltip-content">Table of Contents</span>
       </cds-content-switcher-item>
       <cds-content-switcher-item
         icon
         value="cloudFoundry"
-        ?disabled="${disabled}"
-        ?low-contrast="${lowContrast}">
+        ?disabled="${disabled}">
         ${iconLoader(Workspace16)}
         <span slot="tooltip-content">Workspace Test</span>
       </cds-content-switcher-item>
-      <cds-content-switcher-item
-        icon
-        value="staging"
-        ?disabled="${disabled}"
-        ?low-contrast="${lowContrast}">
+      <cds-content-switcher-item icon value="staging" ?disabled="${disabled}">
         ${iconLoader(ViewMode2_16)}
         <span slot="tooltip-content">View Mode</span>
       </cds-content-switcher-item>
@@ -219,27 +207,18 @@ export const IconOnlyWithLayer = {
         onBeforeSelect
       )}"
       @cds-content-switcher-selected="${forwardEventDetail(onChange)}">
-      <cds-content-switcher-item
-        icon
-        value="all"
-        ?disabled="${disabled}"
-        ?low-contrast="${lowContrast}">
+      <cds-content-switcher-item icon value="all" ?disabled="${disabled}">
         ${iconLoader(TableOfContents16)}
         <span slot="tooltip-content">Table of Contents</span>
       </cds-content-switcher-item>
       <cds-content-switcher-item
         icon
         value="cloudFoundry"
-        ?disabled="${disabled}"
-        ?low-contrast="${lowContrast}">
+        ?disabled="${disabled}">
         ${iconLoader(Workspace16)}
         <span slot="tooltip-content">Workspace Test</span>
       </cds-content-switcher-item>
-      <cds-content-switcher-item
-        icon
-        value="staging"
-        ?disabled="${disabled}"
-        ?low-contrast="${lowContrast}">
+      <cds-content-switcher-item icon value="staging" ?disabled="${disabled}">
         ${iconLoader(ViewMode2_16)}
         <span slot="tooltip-content">View Mode</span>
       </cds-content-switcher-item>
@@ -284,7 +263,6 @@ export const LowContrast = {
         @cds-content-switcher-selected="${forwardEventDetail(onChange)}">
         <cds-content-switcher-item
           ?disabled="${disabled}"
-          ?low-contrast="${lowContrast}"
           value="all"
           name="one">
           First section
@@ -292,14 +270,12 @@ export const LowContrast = {
         <cds-content-switcher-item
           value="cloudFoundry"
           name="two"
-          ?disabled="${disabled}"
-          ?low-contrast="${lowContrast}">
+          ?disabled="${disabled}">
           Second section
         </cds-content-switcher-item>
         <cds-content-switcher-item
           name="three"
           ?disabled="${disabled}"
-          ?low-contrast="${lowContrast}"
           value="staging">
           Third section
         </cds-content-switcher-item>
@@ -342,27 +318,18 @@ export const lowContrastIconOnly = {
         onBeforeSelect
       )}"
       @cds-content-switcher-selected="${forwardEventDetail(onChange)}">
-      <cds-content-switcher-item
-        icon
-        value="all"
-        ?disabled="${disabled}"
-        ?low-contrast="${lowContrast}">
+      <cds-content-switcher-item icon value="all" ?disabled="${disabled}">
         ${iconLoader(TableOfContents16)}
         <span slot="tooltip-content">Table of Contents</span>
       </cds-content-switcher-item>
       <cds-content-switcher-item
         icon
         value="cloudFoundry"
-        ?disabled="${disabled}"
-        ?low-contrast="${lowContrast}">
+        ?disabled="${disabled}">
         ${iconLoader(Workspace16)}
         <span slot="tooltip-content">Workspace Test</span>
       </cds-content-switcher-item>
-      <cds-content-switcher-item
-        icon
-        value="staging"
-        ?disabled="${disabled}"
-        ?low-contrast="${lowContrast}">
+      <cds-content-switcher-item icon value="staging" ?disabled="${disabled}">
         ${iconLoader(ViewMode2_16)}
         <span slot="tooltip-content">View Mode</span>
       </cds-content-switcher-item>
@@ -398,21 +365,18 @@ export const WithLayer = {
       @cds-content-switcher-selected="${forwardEventDetail(onChange)}">
       <cds-content-switcher-item
         ?disabled="${disabled}"
-        ?low-contrast="${lowContrast}"
         value="all"
         name="one">
         First section
       </cds-content-switcher-item>
       <cds-content-switcher-item
         ?disabled="${disabled}"
-        ?low-contrast="${lowContrast}"
         value="cloudFoundry"
         name="two">
         Second section
       </cds-content-switcher-item>
       <cds-content-switcher-item
         ?disabled="${disabled}"
-        ?low-contrast="${lowContrast}"
         value="staging"
         name="three">
         Third section

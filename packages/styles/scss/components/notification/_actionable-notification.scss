@@ -6,6 +6,7 @@
 //
 @use 'mixins' as *;
 @use '../button';
+@use '../../border-radius' as *;
 @use '../../breakpoint' as *;
 @use '../../colors' as *;
 @use '../../config' as *;
@@ -49,6 +50,10 @@
 
   @include breakpoint(max) {
     max-inline-size: convert.to-rem(832px);
+  }
+
+  @if enabled('enable-v12-release') {
+    @include button.radius($border-radius-00);
   }
 }
 /// Actionable notification toast variant base styles

@@ -472,6 +472,7 @@ class CDSCodeSnippet extends FocusMixin(LitElement) {
               button-class-name=${disabledCopyButtonClasses}
               feedback=${feedback}
               feedback-timeout=${feedbackTimeout}
+              size="${type === CODE_SNIPPET_TYPE.MULTI ? 'sm' : 'md'}"
               @click="${handleCopyClick}">
               ${tooltipContent}
             </cds-copy-button>

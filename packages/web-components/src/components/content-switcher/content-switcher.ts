@@ -354,13 +354,23 @@ class CDSContentSwitcher extends LitElement {
 
     this._updateSelectedItemFromValue(changedProperties);
 
-    if (changedProperties.has('size')) {
-      const items = this.querySelectorAll(`${prefix}-content-switcher-item`);
-      items.forEach((item) => {
-        const size = this.size || 'md';
-        item.setAttribute('size', size);
-      });
+    if (changedProperties.has('size') || changedProperties.has('lowContrast')) {
+      this._syncItemAttributes();
     }
+  }
+
+  /**
+   * Propagate `size` and `low-contrast` to items until `:host-context()` is
+   * supported in all major browsers.
+   */
+  private _syncItemAttributes() {
+    const { selectorItem } = this.constructor as typeof CDSContentSwitcher;
+    const size = this.size || 'md';
+    forEach(this.querySelectorAll(selectorItem), (elem) => {
+      const item = elem as CDSContentSwitcherItem;
+      item.setAttribute('size', size);
+      item.lowContrast = this.lowContrast;
+    });
   }
 
   _handleSlotchange() {
@@ -377,6 +387,8 @@ class CDSContentSwitcher extends LitElement {
     if (nextItem) {
       (nextItem as CDSContentSwitcherItem).hideDivider = true;
     }
+
+    this._syncItemAttributes();
   }
 
   /**

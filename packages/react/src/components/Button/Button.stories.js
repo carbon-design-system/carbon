@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,9 +9,13 @@ import React from 'react';
 import { action } from 'storybook/actions';
 import { Add, Notification, Filter } from '@carbon/icons-react';
 import { default as Button, ButtonSkeleton } from '../Button';
-import { Stack } from '../Stack';
 import mdx from './Button.mdx';
 import './button-story.scss';
+import {
+  ButtonRadiusExamples,
+  radiusTokenMapping,
+  radiusTokenOptions,
+} from './ButtonRadiusExamples';
 
 // Note: we explicitly define the defaultValue here, as the Button component takes `props` and forwards them
 // to the underlying `button` or `a` element, as a result storybook cannot infer the default values from the component.
@@ -160,6 +164,63 @@ Default.argTypes = {
 
 Default.parameters = {
   controls: { include: [...textButtonControls, 'dangerDescription'] },
+};
+
+const radiusArgType = (name, description) => ({
+  name,
+  description,
+  options: radiusTokenOptions,
+  mapping: radiusTokenMapping,
+  control: { type: 'select' },
+  table: { category: 'Radius' },
+});
+
+export const Radius = (args) => {
+  const { renderIcon, ...rest } = args;
+  return (
+    <ButtonRadiusExamples
+      {...rest}
+      renderIcon={
+        renderIcon && renderIcon !== 'None'
+          ? getIconFromString(renderIcon)
+          : undefined
+      }
+      onClick={action('onClick')}
+    />
+  );
+};
+
+Radius.argTypes = {
+  ...sharedArgTypes,
+  radius: radiusArgType(
+    '--cds-button-radius',
+    'Sets every corner. Per-corner properties win when set.'
+  ),
+  radiusSs: radiusArgType('--cds-button-radius-ss', 'Start-start corner'),
+  radiusSe: radiusArgType('--cds-button-radius-se', 'Start-end corner'),
+  radiusEs: radiusArgType('--cds-button-radius-es', 'End-start corner'),
+  radiusEe: radiusArgType('--cds-button-radius-ee', 'End-end corner'),
+};
+
+Radius.args = {
+  radius: 'max',
+  radiusSs: 'unset',
+  radiusSe: 'unset',
+  radiusEs: 'unset',
+  radiusEe: 'unset',
+};
+
+Radius.parameters = {
+  controls: {
+    include: [
+      ...textButtonControls,
+      'radius',
+      'radiusSs',
+      'radiusSe',
+      'radiusEs',
+      'radiusEe',
+    ],
+  },
 };
 
 export const Secondary = (args) => {

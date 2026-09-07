@@ -541,20 +541,12 @@ $inset-transition: inset 110ms motion(standard, productive);
   margin-inline-start: $spacing-01;
 
   .#{$prefix}--tabs__nav-link {
-    @include skeleton;
-
     display: flex;
     align-items: center;
     padding: 0 layout.density('padding-inline');
-    background-color: transparent;
     block-size: 100%;
     border-block-end: 2px solid $skeleton-element;
     inline-size: 10rem;
-
-    &::before {
-      display: none;
-      content: none;
-    }
   }
 
   .#{$prefix}--tabs__nav-item {

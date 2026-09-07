@@ -59,6 +59,7 @@ import {
   useFloating,
   flip,
   hide,
+  offset,
   size as floatingSize,
   autoUpdate,
 } from '@floating-ui/react';
@@ -460,6 +461,8 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
 
           // Middleware order matters, arrow should be last
           middleware: [
+            // $spacing-02. CSS margin cannot be used on the floating node.
+            enableV12Release && offset(4),
             flip({ crossAxis: false }),
             floatingSize({
               apply({ rects, elements }) {

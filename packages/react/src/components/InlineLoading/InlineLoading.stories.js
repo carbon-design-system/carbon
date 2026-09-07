@@ -7,6 +7,7 @@
 
 import React, { useState } from 'react';
 import Button from '../Button';
+import ButtonSet from '../ButtonSet';
 import InlineLoading from '.';
 import mdx from './InlineLoading.mdx';
 import { action } from 'storybook/actions';
@@ -90,7 +91,7 @@ export const UxExample = () => {
   return (
     <MockSubmission>
       {({ handleSubmit, isSubmitting, success, description, ariaLive }) => (
-        <div style={{ display: 'flex', width: '300px' }}>
+        <ButtonSet style={{ width: '300px' }}>
           <Button kind="secondary" disabled={isSubmitting || success}>
             Cancel
           </Button>
@@ -104,7 +105,7 @@ export const UxExample = () => {
           ) : (
             <Button onClick={handleSubmit}>Submit</Button>
           )}
-        </div>
+        </ButtonSet>
       )}
     </MockSubmission>
   );

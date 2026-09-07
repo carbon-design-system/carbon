@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2024
+// Copyright IBM Corp. 2016, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -9,8 +9,11 @@
 @use 'tokens' as *;
 @use 'vars' as *;
 @use 'mixins' as *;
+@use 'radius' as button-radius;
 @use '../tooltip';
+@use '../../border-radius' as *;
 @use '../../config' as *;
+@use '../../feature-flags' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
@@ -456,12 +459,17 @@
   .#{$prefix}--btn.#{$prefix}--skeleton {
     @include skeleton;
 
+    overflow: hidden;
     inline-size: convert.to-rem(150px);
   }
 
   // button set styles
   .#{$prefix}--btn-set {
     display: flex;
+
+    @if enabled('enable-v12-release') {
+      @include button-radius.radius($border-radius-00);
+    }
   }
 
   .#{$prefix}--btn-set--stacked {
