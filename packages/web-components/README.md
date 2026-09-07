@@ -77,10 +77,36 @@ at version `v1.16.0`):
 </html>
 ```
 
+### Preparing for v3
+
+The next major release (v3) changes how components register. See the
+[v3 migration guide](../../docs/guides/cwc-v3-migration.md) to prepare.
+
+**Available now.** Both the opt-in registration API — `defineCustomElement`
+(`es/globals/register.js`) and the `static is` tag field — are available in v2,
+so you can write v3-ready code today.
+
+**Deprecated (will be removed in v3):**
+
+- **The `carbonElement` decorator** (`es/globals/decorators/carbon-element.js`),
+  used to author your own custom elements — migrate to Lit's `customElement`
+  (`import { customElement } from 'lit/decorators.js'`).
+- **The `es-custom` build** (`cds-custom-*` elements), replaced by custom tag
+  names, a prefixed build, and scoped registries.
+- **The `custom-elements.json` WCA manifest**, replaced by the standard Custom
+  Elements Manifest (CEM).
+
+**Breaking in v3:** In v3, importing a component's class file no longer
+registers its element, e.g. importing `button/button.js` instead of
+`button/index.js`. Test using the `v3` tag — built from the
+[`feat/web-components-v3`](https://github.com/carbon-design-system/carbon/tree/feat/web-components-v3)
+branch.
+
 ### Other usage guides
 
 - [Using components in a form](./docs/form.md)
 - [Using custom styles in components](./docs/styling.md)
+- [Migrating to v3](../../docs/guides/cwc-v3-migration.md)
 
 ## 📖 API Documentation
 

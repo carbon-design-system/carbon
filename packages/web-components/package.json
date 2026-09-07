@@ -11,7 +11,11 @@
     "directory": "packages/web-components"
   },
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "bin": {
+    "create-prefixed-build": "./bin/create-prefixed-build.js"
+  },
   "files": [
+    "bin/**/*",
     "custom-elements.json",
     "es/**/*",
     "es-custom/**/*",
@@ -51,9 +55,10 @@
     "build": "yarn clean && node tasks/build.js && yarn wca",
     "build:dist": "node tasks/build-dist.js",
     "build:cdn": "yarn clean && yarn build:dist",
-    "ci-check": "yarn wca && yarn typecheck",
+    "ci-check": "yarn registration-coverage && yarn wca && yarn typecheck",
     "clean": "rimraf es es-custom lib scss dist storybook-static storybook-static-v12 .storybook-v12/generated",
     "postinstall": "ibmtelemetry --config=telemetry.yml",
+    "registration-coverage": "node tasks/registration-coverage.mjs",
     "serve": "node tasks/build.js --serve",
     "start": "yarn storybook",
     "storybook": "storybook dev -p 6011",
@@ -64,7 +69,7 @@
     "test": "web-test-runner --node-resolve --concurrency=1",
     "test:updateSnapshots": "yarn test --update-snapshots",
     "typecheck": "tsc --noEmit -p tsconfig.json",
-    "wca": "web-component-analyzer analyze src --outFile custom-elements.json",
+    "wca": "web-component-analyzer analyze src --outFile custom-elements.json && node tasks/wca-deprecation.mjs",
     "telemetry:config": "npx -y @ibm/telemetry-js-config-generator generate --wc --id 8cf8b3b8-a121-47d3-9eec-e4bea0ff23f5 --endpoint https://www-api.ibm.com/ibm-telemetry/v1/metrics --files ./src/components"
   },
   "dependencies": {
