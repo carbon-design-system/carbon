@@ -12,7 +12,6 @@ import './fluid-text-input';
 import './fluid-text-input-skeleton';
 
 const args = {
-  defaultWidth: 300,
   helperText: '',
   hideLabel: false,
   inline: false,
@@ -33,35 +32,64 @@ const args = {
 };
 
 const argTypes = {
-  defaultWidth: {
-    control: { type: 'range', min: 300, max: 800, step: 50 },
+  helperText: {
+    control: 'text',
+    description: 'The helper text.',
+    table: { defaultValue: { summary: '""' } },
   },
-  helperText: { control: 'text' },
-  hideLabel: { control: 'boolean' },
-  inline: { control: 'boolean' },
+  hideLabel: {
+    control: 'boolean',
+    description:
+      'Specify whether you want the underlying label to be visually hidden.',
+    table: { defaultValue: { summary: false } },
+  },
+  inline: {
+    control: 'boolean',
+    description: 'Specify whether to use the inline version.',
+    table: { defaultValue: { summary: false } },
+  },
   placeholder: {
     control: { type: 'text' },
+    description: 'Specify the placeholder attribute for the `<input>`.',
+    table: { defaultValue: { summary: '""' } },
   },
   invalid: {
     control: { type: 'boolean' },
+    description: 'Specify whether the control is currently invalid.',
+    table: { defaultValue: { summary: false } },
   },
   invalidText: {
     control: { type: 'text' },
+    description:
+      'Provide the text that is displayed when the control is in an invalid state.',
+    table: { defaultValue: { summary: '""' } },
   },
   disabled: {
     control: { type: 'boolean' },
+    description: 'Specify whether the `<input>` should be disabled.',
+    table: { defaultValue: { summary: false } },
   },
   labelText: {
     control: { type: 'text' },
+    description:
+      'Provide the text that will be read by a screen reader when visiting this control.',
+    table: { defaultValue: { summary: '""' } },
   },
   warn: {
     control: { type: 'boolean' },
+    description: 'Specify whether the control is currently in warning state.',
+    table: { defaultValue: { summary: false } },
   },
   warnText: {
     control: { type: 'text' },
+    description:
+      'Provide the text that is displayed when the control is in warning state.',
+    table: { defaultValue: { summary: '""' } },
   },
   value: {
     control: { type: 'text' },
+    description: 'The value of the input.',
+    table: { defaultValue: { summary: '""' } },
   },
   onInput: {
     action: `input`,
@@ -71,19 +99,25 @@ const argTypes = {
   },
   maxCount: {
     control: 'number',
-    description: 'Max count (max-count)',
+    description:
+      'Max character count allowed for input. This is needed in order for enableCounter to display.',
+    table: { defaultValue: { summary: 'undefined' } },
   },
   enableCounter: {
     control: 'boolean',
-    description: 'Enable counter (enable-counter)',
+    description: 'Specify whether to display the character counter.',
+    table: { defaultValue: { summary: false } },
   },
   readonly: {
     control: 'boolean',
-    description: 'Read only (readonly)',
+    description: 'Specify if the component should be read-only.',
+    table: { defaultValue: { summary: false } },
   },
   size: {
     control: 'select',
     options: ['xs', 'sm', 'md', 'lg'],
+    description: 'The input box size.',
+    table: { defaultValue: { summary: 'undefined' } },
   },
 };
 
@@ -140,44 +174,27 @@ export const Default = {
       exclude: ['onClick', 'onInput'],
     },
   },
-  render: ({ defaultWidth, ...textInputArgs }) => html`
-    <div style="width:${defaultWidth}px;">
-      ${renderTextInput(textInputArgs)}
-    </div>
-  `,
+  render: (textInputArgs) => html`${renderTextInput(textInputArgs)}`,
 };
 
 export const DefaultWithToggletip = {
   args,
   argTypes,
   parameters: { controls: { exclude: ['labelText', 'onClick', 'onInput'] } },
-  render: ({ defaultWidth, ...textInputArgs }) => html`
-    <div style="width:${defaultWidth}px;">
-      ${renderTextInput(
-        textInputArgs,
-        html`<cds-toggletip autoalign="true" slot="label-text">
-          Label
-          <p slot="body-text">Additional field information here.</p>
-        </cds-toggletip>`
-      )}
-    </div>
+  render: (textInputArgs) => html`
+    ${renderTextInput(
+      textInputArgs,
+      html`<cds-toggletip autoalign="true" slot="label-text">
+        Label
+        <p slot="body-text">Additional field information here.</p>
+      </cds-toggletip>`
+    )}
   `,
 };
 
 export const Skeleton = {
-  args: {
-    defaultWidth: 300,
-  },
-  argTypes: {
-    defaultWidth: {
-      control: { type: 'range', min: 300, max: 800, step: 50 },
-    },
-  },
-  render: ({ defaultWidth }) => html`
-    <div style="width: ${defaultWidth}px;">
-      <cds-fluid-text-input-skeleton></cds-fluid-text-input-skeleton>
-    </div>
-  `,
+  render: () =>
+    html`<cds-fluid-text-input-skeleton></cds-fluid-text-input-skeleton>`,
 };
 
 export default {

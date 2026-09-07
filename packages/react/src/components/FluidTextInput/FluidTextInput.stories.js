@@ -30,11 +30,7 @@ export default {
   },
 };
 
-export const Default = ({ defaultWidth, ...textInputArgs }) => (
-  <div style={{ width: defaultWidth }}>
-    <FluidTextInput {...textInputArgs} />
-  </div>
-);
+export const Default = (textInputArgs) => <FluidTextInput {...textInputArgs} />;
 
 const LabelToggletip = () => (
   // Keep the toggletip outside `labelText`; interactive content is invalid in labels.
@@ -51,17 +47,66 @@ const LabelToggletip = () => (
 );
 
 const sharedArgTypes = {
-  className: { control: { type: 'text' } },
-  disabled: { control: { type: 'boolean' } },
-  enableCounter: { control: { type: 'boolean' } },
-  invalid: { control: { type: 'boolean' } },
-  invalidText: { control: { type: 'text' } },
-  labelText: { control: { type: 'text' } },
-  maxCount: { control: { type: 'number' } },
-  placeholder: { control: { type: 'text' } },
-  readOnly: { control: { type: 'boolean' } },
-  warn: { control: { type: 'boolean' } },
-  warnText: { control: { type: 'text' } },
+  className: {
+    control: { type: 'text' },
+    description:
+      'Specify an optional className to be applied to the outer FluidForm wrapper.',
+    table: { defaultValue: { summary: 'undefined' } },
+  },
+  disabled: {
+    control: { type: 'boolean' },
+    description: 'Specify whether the `<input>` should be disabled.',
+    table: { defaultValue: { summary: false } },
+  },
+  enableCounter: {
+    control: { type: 'boolean' },
+    description: 'Specify whether to display the character counter.',
+    table: { defaultValue: { summary: false } },
+  },
+  invalid: {
+    control: { type: 'boolean' },
+    description: 'Specify whether the control is currently invalid.',
+    table: { defaultValue: { summary: false } },
+  },
+  invalidText: {
+    control: { type: 'text' },
+    description:
+      'Provide the text that is displayed when the control is in an invalid state.',
+    table: { defaultValue: { summary: 'undefined' } },
+  },
+  labelText: {
+    control: { type: 'text' },
+    description:
+      'Provide the text that will be read by a screen reader when visiting this control.',
+    table: { defaultValue: { summary: 'required' } },
+  },
+  maxCount: {
+    control: { type: 'number' },
+    description:
+      'Max character count allowed for the textInput. This is needed in order for enableCounter to display.',
+    table: { defaultValue: { summary: 'undefined' } },
+  },
+  placeholder: {
+    control: { type: 'text' },
+    description: 'Specify the placeholder attribute for the `<input>`.',
+    table: { defaultValue: { summary: 'undefined' } },
+  },
+  readOnly: {
+    control: { type: 'boolean' },
+    description: 'Whether or not the component is readonly.',
+    table: { defaultValue: { summary: false } },
+  },
+  warn: {
+    control: { type: 'boolean' },
+    description: 'Specify whether the control is currently in warning state.',
+    table: { defaultValue: { summary: false } },
+  },
+  warnText: {
+    control: { type: 'text' },
+    description:
+      'Provide the text that is displayed when the control is in warning state.',
+    table: { defaultValue: { summary: 'undefined' } },
+  },
 };
 
 const sharedArgs = {
@@ -82,26 +127,21 @@ const sharedArgs = {
 };
 
 const sharedControls = Object.keys(sharedArgTypes);
-const widthArgType = {
-  control: { type: 'range', min: 300, max: 800, step: 50 },
-};
 
 Default.args = {
   ...sharedArgs,
-  defaultWidth: 300,
 };
 
 Default.argTypes = {
   ...sharedArgTypes,
-  defaultWidth: widthArgType,
 };
 
 Default.parameters = {
-  controls: { include: [...sharedControls, 'defaultWidth'] },
+  controls: { include: sharedControls },
 };
 
-export const DefaultWithToggletip = ({ defaultWidth, ...textInputArgs }) => (
-  <div className="fluid-text-input-story" style={{ width: defaultWidth }}>
+export const DefaultWithToggletip = (textInputArgs) => (
+  <div className="fluid-text-input-story">
     <LabelToggletip />
     <FluidTextInput {...textInputArgs} labelText="Label" />
   </div>
@@ -109,27 +149,14 @@ export const DefaultWithToggletip = ({ defaultWidth, ...textInputArgs }) => (
 
 DefaultWithToggletip.args = {
   ...sharedArgs,
-  defaultWidth: 300,
 };
 DefaultWithToggletip.argTypes = {
   ...sharedArgTypes,
-  defaultWidth: widthArgType,
 };
 DefaultWithToggletip.parameters = {
   controls: {
-    include: [
-      ...sharedControls.filter((control) => control !== 'labelText'),
-      'defaultWidth',
-    ],
+    include: sharedControls.filter((control) => control !== 'labelText'),
   },
 };
 
-export const Skeleton = ({ defaultWidth }) => (
-  <div style={{ width: defaultWidth }}>
-    <FluidTextInputSkeleton />
-  </div>
-);
-
-Skeleton.args = { defaultWidth: 300 };
-Skeleton.argTypes = { defaultWidth: widthArgType };
-Skeleton.parameters = { controls: { include: ['defaultWidth'] } };
+export const Skeleton = () => <FluidTextInputSkeleton />;
