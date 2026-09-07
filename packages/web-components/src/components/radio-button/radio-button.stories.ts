@@ -102,6 +102,7 @@ const groupArgTypes = {
     description: 'Specify whether a radio button selection is required.',
   },
   helperText: {
+    name: 'Helper text',
     control: 'text',
     description: 'Provide text for the radio button group for additional help.',
   },

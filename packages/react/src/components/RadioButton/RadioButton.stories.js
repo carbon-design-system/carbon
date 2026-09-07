@@ -62,6 +62,7 @@ const groupArgTypes = {
     },
   },
   helperText: {
+    name: 'Helper text',
     description:
       'Provide text that is used alongside the control label for additional help',
     control: {
