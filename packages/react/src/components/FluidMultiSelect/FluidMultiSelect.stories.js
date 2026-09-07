@@ -59,17 +59,15 @@ const items = [
   },
 ];
 
-export const Default = ({ defaultWidth, ...multiSelectArgs }) => (
-  <div style={{ width: defaultWidth }}>
-    <FluidMultiSelect
-      id="default"
-      titleText="Label"
-      label="Choose an option"
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
-      {...multiSelectArgs}
-    />
-  </div>
+export const Default = (multiSelectArgs) => (
+  <FluidMultiSelect
+    id="default"
+    titleText="Label"
+    label="Choose an option"
+    items={items}
+    itemToString={(item) => (item ? item.text : '')}
+    {...multiSelectArgs}
+  />
 );
 
 const sharedArgTypes = {
@@ -173,7 +171,6 @@ const sharedArgs = {
     'Warning message that is really long can wrap to more lines but should not be excessively long.',
 };
 
-const sharedControls = Object.keys(sharedArgTypes);
 const filterableArgTypes = {
   ...sharedArgTypes,
   isFilterable: {
@@ -191,75 +188,58 @@ const condensedArgTypes = {
     table: { readonly: true },
   },
 };
-const widthArgType = {
-  control: { type: 'range', min: 300, max: 800, step: 50 },
-};
-
 Default.args = {
   ...sharedArgs,
-  defaultWidth: 400,
 };
 
 Default.argTypes = {
   ...sharedArgTypes,
-  defaultWidth: widthArgType,
 };
 
-Default.parameters = {
-  controls: { include: [...sharedControls, 'defaultWidth'] },
-};
-
-export const Filterable = ({ defaultWidth, ...multiSelectArgs }) => (
-  <div style={{ width: defaultWidth }}>
-    <FluidMultiSelect
-      initialSelectedItem={items[2]}
-      id="default"
-      titleText="Label"
-      label="Choose an option"
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
-      {...multiSelectArgs}
-    />
-  </div>
+export const Filterable = (multiSelectArgs) => (
+  <FluidMultiSelect
+    initialSelectedItem={items[2]}
+    id="default"
+    titleText="Label"
+    label="Choose an option"
+    items={items}
+    itemToString={(item) => (item ? item.text : '')}
+    {...multiSelectArgs}
+  />
 );
 
 Filterable.args = {
   ...sharedArgs,
-  defaultWidth: 400,
   isFilterable: true,
 };
 
 Filterable.argTypes = {
   ...filterableArgTypes,
-  defaultWidth: widthArgType,
 };
 
 Filterable.parameters = {
   controls: {
-    include: [...Object.keys(filterableArgTypes), 'defaultWidth'],
+    include: Object.keys(filterableArgTypes),
   },
 };
 
-export const _FilterableWithLayer = ({ defaultWidth, ...multiSelectArgs }) => (
+export const _FilterableWithLayer = (multiSelectArgs) => (
   <WithLayer>
     {(layer) => (
-      <div style={{ width: defaultWidth }}>
-        <FluidMultiSelect
-          id={`carbon-multiselect-example-${layer}`}
-          titleText="Multiselect title"
-          items={items}
-          itemToString={(item) => (item ? item.text : '')}
-          selectionFeedback="top-after-reopen"
-          {...multiSelectArgs}
-        />
-      </div>
+      <FluidMultiSelect
+        id={`carbon-multiselect-example-${layer}`}
+        titleText="Multiselect title"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        selectionFeedback="top-after-reopen"
+        {...multiSelectArgs}
+      />
     )}
   </WithLayer>
 );
 
 _FilterableWithLayer.args = {
   ...sharedArgs,
-  defaultWidth: 300,
   isFilterable: true,
   label: '',
   titleText: 'Multiselect title',
@@ -268,33 +248,29 @@ _FilterableWithLayer.args = {
 _FilterableWithLayer.argTypes = Filterable.argTypes;
 _FilterableWithLayer.parameters = Filterable.parameters;
 
-export const Condensed = ({ defaultWidth, ...multiSelectArgs }) => (
-  <div style={{ width: defaultWidth }}>
-    <FluidMultiSelect
-      id="default"
-      titleText="Label"
-      label="Choose an option"
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
-      {...multiSelectArgs}
-    />
-  </div>
+export const Condensed = (multiSelectArgs) => (
+  <FluidMultiSelect
+    id="default"
+    titleText="Label"
+    label="Choose an option"
+    items={items}
+    itemToString={(item) => (item ? item.text : '')}
+    {...multiSelectArgs}
+  />
 );
 
 Condensed.args = {
   ...sharedArgs,
-  defaultWidth: 400,
   isCondensed: true,
 };
 
 Condensed.argTypes = {
   ...condensedArgTypes,
-  defaultWidth: widthArgType,
 };
 
 Condensed.parameters = {
   controls: {
-    include: [...Object.keys(condensedArgTypes), 'defaultWidth'],
+    include: Object.keys(condensedArgTypes),
   },
 };
 
@@ -329,49 +305,25 @@ const aiLabel = (
   </AILabel>
 );
 
-export const withAILabel = ({ defaultWidth, ...multiSelectArgs }) => (
-  <div style={{ width: defaultWidth }}>
-    <FluidMultiSelect
-      initialSelectedItem={items[2]}
-      id="default"
-      titleText="Label"
-      label="Choose an option"
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
-      decorator={aiLabel}
-      {...multiSelectArgs}
-    />
-  </div>
+export const withAILabel = (multiSelectArgs) => (
+  <FluidMultiSelect
+    initialSelectedItem={items[2]}
+    id="default"
+    titleText="Label"
+    label="Choose an option"
+    items={items}
+    itemToString={(item) => (item ? item.text : '')}
+    decorator={aiLabel}
+    {...multiSelectArgs}
+  />
 );
 
 withAILabel.args = {
   ...sharedArgs,
-  defaultWidth: 400,
 };
 
 withAILabel.argTypes = {
   ...sharedArgTypes,
-  defaultWidth: widthArgType,
 };
 
-withAILabel.parameters = {
-  controls: { include: [...sharedControls, 'defaultWidth'] },
-};
-
-export const Skeleton = ({ defaultWidth }) => (
-  <div style={{ width: defaultWidth }}>
-    <FluidMultiSelectSkeleton />
-  </div>
-);
-
-Skeleton.args = {
-  defaultWidth: 400,
-};
-
-Skeleton.argTypes = {
-  defaultWidth: widthArgType,
-};
-
-Skeleton.parameters = {
-  controls: { include: ['defaultWidth'] },
-};
+export const Skeleton = () => <FluidMultiSelectSkeleton />;
