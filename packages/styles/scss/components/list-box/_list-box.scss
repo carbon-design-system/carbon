@@ -916,8 +916,8 @@ $list-box-menu-width: convert.to-rem(300px);
     inset-block-end: layout.size('height');
 
     @if enabled('enable-v12-release') {
-      margin-block-start: 0;
       margin-block-end: $spacing-02;
+      margin-block-start: 0;
     }
   }
 

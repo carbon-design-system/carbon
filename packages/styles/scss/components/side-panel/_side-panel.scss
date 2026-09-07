@@ -87,6 +87,7 @@ $resizer-class: #{$prefix}--resizer;
     @if enabled('enable-v12-release') {
       @include button.radius($border-radius-00);
     }
+
     block-size: calc(100% - 3rem);
     color: $text-primary;
     /* if the title does not scroll then we have a child scrolling section. */
