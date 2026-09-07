@@ -22,6 +22,7 @@ import CDSButton from '../button/button';
 import { MENU_BUTTON_KIND, MENU_BUTTON_SIZE } from './defs';
 import { MENU_BACKGROUND_TOKEN } from '../menu/defs';
 import FloatingUIController from '../../globals/controllers/floating-controller';
+import { isFeatureFlagEnabled } from '../feature-flags';
 
 export { MENU_BUTTON_KIND, MENU_BUTTON_SIZE };
 
@@ -187,6 +188,10 @@ class CDSMenuButton extends HostListenerMixin(LitElement) {
           alignment: this.menuAlignment,
           styleElement,
           matchWidth: true,
+          // $spacing-02 gap between the trigger and the menu
+          mainAxisOffset: isFeatureFlagEnabled('enable-v12-release', this)
+            ? 4
+            : 0,
           open: this._open,
         });
       });

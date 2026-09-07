@@ -20,6 +20,7 @@ import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import {
   useFloating,
   flip,
+  offset,
   size as floatingSize,
   autoUpdate,
 } from '@floating-ui/react';
@@ -112,6 +113,7 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
     },
     forwardRef
   ) => {
+    const enableV12Release = useFeatureFlag('enable-v12-release');
     // feature flag utilized to separate out only the dynamic styles from @floating-ui
     // flag is turned on when collision detection (ie. flip, hide) logic is not desired
     const enableOnlyFloatingStyles = useFeatureFlag(
@@ -122,10 +124,13 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
     const prefix = usePrefix();
     const triggerRef = useRef<HTMLDivElement>(null);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-    let middlewares: any[] = [];
+    let middlewares: any[] = [
+      // $spacing-02 gap between the trigger and the menu
+      ...(enableV12Release ? [offset(4)] : []),
+    ];
 
     if (!enableOnlyFloatingStyles) {
-      middlewares = [flip({ crossAxis: false })];
+      middlewares.push(flip({ crossAxis: false }));
     }
 
     if (menuAlignment === 'bottom' || menuAlignment === 'top') {
