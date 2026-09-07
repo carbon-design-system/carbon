@@ -32,8 +32,6 @@ export const ConditionBuilder = React.forwardRef(
       startConditionLabel = 'Add Condition',
       popOverSearchThreshold = 4,
       getOptions,
-      initialState,
-      getConditionState,
       getActionsState,
       variant = NON_HIERARCHICAL_VARIANT,
       actions,
@@ -87,9 +85,7 @@ export const ConditionBuilder = React.forwardRef(
             onKeyDown={handleKeyDownHandler}>
             <ConditionBuilderContent
               startConditionLabel={startConditionLabel}
-              getConditionState={getConditionState}
               getActionsState={getActionsState}
-              initialState={initialState}
               actions={actions}
             />
           </VStack>

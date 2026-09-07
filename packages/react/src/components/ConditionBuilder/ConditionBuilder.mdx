@@ -12,7 +12,7 @@ import * as ConditionBuilderStories from './ConditionBuilder.stories';
 The Condition Builder component allows non-technical users to create conditional
 statements without writing code. A user builds one or more conditions, each
 consisting of a **property**, an **operator**, and a **value**. The resulting
-state is returned to the consumer via the `getConditionState` callback.
+state is returned to the consumer via the `onChange` callback.
 
 The component is available in two variants:
 
@@ -165,9 +165,9 @@ don't cover your use case.
 
 ## Condition state shape
 
-`getConditionState` is called on every change and receives the full current
-state. Understanding this shape is essential for serializing, persisting, or
-evaluating the built conditions.
+`onChange` is called on every user-initiated change and receives the full
+current state. Understanding this shape is essential for serializing,
+persisting, or evaluating the built conditions.
 
 ```js
 // Non-Hierarchical example
@@ -224,10 +224,9 @@ A condition with an unfinished selection stores `'INVALID'` as its `property`,
 
 ## popOverSearchThreshold
 
-**Required.** When an option list contains more items than this number, a search
-field is rendered at the top of the popover to filter the list. Set it to a
-value that balances discoverability against visual noise — `4` is a common
-choice for short lists.
+When an option list contains more items than this number, a search field is
+rendered at the top of the popover to filter the list. This is an option prop
+set to a default of 4.
 
 ```jsx
 <ConditionBuilder popOverSearchThreshold={4} ... />
@@ -243,41 +242,82 @@ can be opened and no conditions can be added or removed.
 
 ---
 
-## Initial state
+## value and onChange
 
-Use `initialState` to pre-populate the builder with an existing set of
-conditions — for example, when loading a saved filter from a database.
+`value` and `onChange` are the primary props for reading and writing condition
+state. They work together in two patterns:
 
-- `initialState.state` — a condition state object in the same shape returned by
-  `getConditionState`.
-- `initialState.enabledDefault` — when `true`, the builder renders the provided
-  state immediately without requiring the user to click "Add condition" first.
-  When `false` or omitted, the "Add condition" button is shown and the state is
-  loaded when the user clicks it.
+### Uncontrolled seed (read-once)
+
+Pass `value` without `onChange` to pre-populate the builder with an existing set
+of conditions — for example, when loading a saved filter from a database. The
+builder owns its state after the first render; subsequent changes are managed
+internally.
 
 ```jsx
 <ConditionBuilder
-  initialState={{
-    enabledDefault: true,
-    state: {
-      operator: 'or',
-      groups: [
-        {
-          id: 'g1',
-          statement: 'ifAll',
-          groupOperator: 'and',
-          conditions: [
-            {
-              id: 'c1',
-              property: 'continent',
-              operator: 'is',
-              value: { id: 'Asia', label: 'Asia' },
-            },
-          ],
-        },
-      ],
-    },
+  inputConfig={inputConfig}
+  value={{
+    operator: 'or',
+    groups: [
+      {
+        id: 'g1',
+        statement: 'ifAll',
+        groupOperator: 'and',
+        conditions: [
+          {
+            id: 'c1',
+            property: 'continent',
+            operator: 'is',
+            value: { id: 'Asia', label: 'Asia' },
+          },
+        ],
+      },
+    ],
   }}
+/>
+```
+
+When `value` contains at least one group and `startActive` is `true` (the
+default), the builder renders immediately without requiring the user to click
+"Add condition" first. Pass `startActive={false}` to keep the "Add condition"
+button visible regardless.
+
+### Controlled (full two-way sync)
+
+Pass both `value` and `onChange` to keep the parent fully in control of the
+state. `onChange` is called on every user-initiated edit and receives the new
+`ConditionBuilderState`. The parent must feed it back via `value` on the next
+render to keep the builder in sync.
+
+```jsx
+const [conditionState, setConditionState] = useState(initialValue);
+
+<ConditionBuilder
+  inputConfig={inputConfig}
+  value={conditionState}
+  onChange={(newState) => setConditionState(newState)}
+/>;
+```
+
+**Important:** `onChange` fires only when the _user_ edits conditions inside the
+builder. Setting `value` programmatically from outside (e.g. a "Reset" button)
+does **not** trigger `onChange` — the parent already owns that change. This is
+the standard React controlled-component contract and prevents infinite update
+loops.
+
+```jsx
+// ✓ This button sets state directly — onChange will NOT fire.
+<Button onClick={() => setConditionState(savedState)}>
+  Load saved filter
+</Button>
+
+// ✓ User edits a condition inside the builder — onChange fires,
+//   parent calls setConditionState, value updates, builder stays in sync.
+<ConditionBuilder
+  value={conditionState}
+  onChange={(newState) => setConditionState(newState)}
+  ...
 />
 ```
 
@@ -505,7 +545,7 @@ is needed.
 <ConditionBuilder
   aria-describedby="condition-builder-desc"
   inputConfig={inputConfig}
-  getConditionState={getConditionState}
+  onChange={handleConditionChange}
   startConditionLabel="Add condition"
 />
 ```

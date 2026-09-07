@@ -236,17 +236,7 @@ export type ConditionBuilderTextKeys =
   | 'conditionRemovedText';
 export type ConditionBuilderProps = {
   inputConfig: inputConfig;
-  /**
-   * @deprecated Use `value` (and `onChange` for controlled mode) instead.
-   * `initialState` will be removed in a future major release.
-   */
-  initialState?: InitialState;
   getActionsState?: (state: Action[] | undefined) => void;
-  /**
-   * @deprecated Use `onChange` instead. `getConditionState` will be removed
-   * in a future major release.
-   */
-  getConditionState?: (state: ConditionBuilderState | undefined) => void;
   getOptions?: (
     state: ConditionBuilderState,
     condition: Condition
@@ -277,8 +267,7 @@ export type ConditionBuilderProps = {
    * Pre-populate the builder with an existing condition state.
    *
    * - **Uncontrolled seed** (no `onChange`): the builder uses this as its
-   *   starting state and then manages state internally — equivalent to
-   *   `initialState.state` but without the `enabledDefault` flag.
+   *   starting state and then manages state internally.
    * - **Controlled** (with `onChange`): the parent owns the state on every
    *   render. Must be kept in sync via `onChange`.
    */
@@ -290,11 +279,6 @@ export type ConditionBuilderProps = {
    * - Can also be used standalone instead of `getConditionState`.
    */
   onChange?: (state: ConditionBuilderState) => void;
-};
-
-export type InitialState = {
-  state: ConditionBuilderState;
-  enabledDefault?: boolean;
 };
 
 export interface ConditionBuilderContextInputProps extends PropsWithChildren {

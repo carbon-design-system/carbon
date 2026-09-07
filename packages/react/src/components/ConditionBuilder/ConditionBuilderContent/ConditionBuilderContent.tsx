@@ -31,23 +31,16 @@ import {
   ConditionBuilderContextProps,
   ConditionBuilderState,
   ConditionGroup,
-  InitialState,
 } from '../ConditionBuilder.types';
 import { HIERARCHICAL_VARIANT } from '../utils/util';
 interface ConditionBuilderContentProps {
   startConditionLabel: string;
-  /** @deprecated Use `onChange` (from context) instead. */
-  getConditionState?: (state: ConditionBuilderState) => void;
   getActionsState?: (state: Action[]) => void;
-  /** @deprecated Use `value` (and `onChange` for controlled mode) instead. */
-  initialState?: InitialState;
   actions?: Action[];
 }
 const ConditionBuilderContent = ({
   startConditionLabel,
-  getConditionState,
   getActionsState,
-  initialState,
   actions,
 }: ConditionBuilderContentProps) => {
   const {
@@ -64,9 +57,6 @@ const ConditionBuilderContent = ({
     startActive,
   } = useContext<ConditionBuilderContextProps>(ConditionBuilderContext);
 
-  const initialConditionState = useRef(
-    initialState?.state ? JSON.parse(JSON.stringify(initialState?.state)) : null
-  );
   // Tracks whether the user has explicitly clicked "Add condition".
   // Used to lift the startActive=false gate after the first click.
   const userActivated = useRef(false);
@@ -99,14 +89,7 @@ const ConditionBuilderContent = ({
   };
 
   useEffect(() => {
-    // When startActive is explicitly false, suppress auto-activation until
-    // the user has clicked the "Add condition" button (userActivated.current).
     if (startActive === false && !userActivated.current) {
-      // getConditionState (legacy) is a state-read callback — calling on mount
-      // is intentional for backward compat.
-      if (getConditionState) {
-        getConditionState(rootState ?? {});
-      }
       return;
     }
 
@@ -115,12 +98,6 @@ const ConditionBuilderContent = ({
     } else {
       setIsConditionBuilderActive(false);
     }
-
-    // getConditionState (legacy): fires on every state update including mount.
-    if (getConditionState) {
-      getConditionState(rootState ?? {});
-    }
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rootState]);
 
@@ -128,13 +105,6 @@ const ConditionBuilderContent = ({
     getActionsState?.(actionState ?? []);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [actionState]);
-  useEffect(() => {
-    // `value` takes precedence over `initialState` — skip if the new API is in use.
-    if (initialState?.enabledDefault && seedValue === undefined) {
-      setRootState?.(initialState.state);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [initialState]);
 
   const onStartConditionBuilder = () => {
     userActivated.current = true;
@@ -154,14 +124,7 @@ const ConditionBuilderContent = ({
       // correct, just reveal the builder.
       return;
     }
-    // No seed, or seed was cleared: initialize with legacy initialState or a
-    // fresh empty state.
-    if (initialConditionState?.current?.groups?.length) {
-      setRootState?.(initialConditionState.current);
-      initialConditionState.current = null;
-    } else {
-      setRootState?.(getEmptyState(statementConfigCustom));
-    }
+    setRootState?.(getEmptyState(statementConfigCustom));
   };
 
   const onRemove = useCallback(
@@ -185,10 +148,6 @@ const ConditionBuilderContent = ({
           ...rootState,
           groups: rootState ? groups : [],
         });
-        //set the initial state to empty.
-        if (groups?.length === 0) {
-          initialConditionState.current = null;
-        }
         setStatusMessage(conditionRemovedText);
       }
     },

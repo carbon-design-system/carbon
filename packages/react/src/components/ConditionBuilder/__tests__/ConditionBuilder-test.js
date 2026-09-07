@@ -404,7 +404,6 @@ const defaultProps = {
   inputConfig: {},
   startConditionLabel: 'Add condition',
   popOverSearchThreshold: 4,
-  getConditionState: () => {},
   variant: NON_HIERARCHICAL_VARIANT,
 };
 const testInputText = 'testID123';
@@ -481,12 +480,7 @@ describe(componentName, () => {
 
   it('has no accessibility violations', async () => {
     const { container } = render(<ConditionBuilder {...defaultProps} />);
-    try {
-      await expect(container).toBeAccessible(componentName);
-      await expect(container).toHaveNoAxeViolations();
-    } catch (err) {
-      console.log('accessibility test error :', err);
-    }
+    await expect(container).toHaveNoAxeViolations();
   });
 
   it('applies className to the containing node', async () => {
@@ -742,12 +736,9 @@ describe(componentName, () => {
       <ConditionBuilder
         {...defaultProps}
         inputConfig={inputData}
-        initialState={{ state: sampleDataStructure_nonHierarchical }}
+        value={sampleDataStructure_nonHierarchical}
       />
     );
-    //start builder
-
-    await userEvent.click(screen.getByText('Add condition'));
 
     await userEvent.click(screen.getAllByRole('button', { name: 'and' })[0]);
     await userEvent.click(
@@ -1028,12 +1019,10 @@ describe(componentName, () => {
       <ConditionBuilder
         {...defaultProps}
         inputConfig={inputData}
-        initialState={{ state: sampleDataStructure_nonHierarchical }}
+        value={sampleDataStructure_nonHierarchical}
         translateWithId={translateWithId}
       />
     );
-    //start builder
-    await userEvent.click(screen.getByText('Add condition'));
 
     expect(screen.getByText('Condition Heading')).toBeVisible();
   });
@@ -1249,11 +1238,9 @@ describe(componentName, () => {
       <ConditionBuilder
         {...defaultProps}
         inputConfig={inputData}
-        initialState={{ state: sampleDataStructure_nonHierarchical }}
+        value={sampleDataStructure_nonHierarchical}
       />
     );
-
-    await userEvent.click(screen.getByText('Add condition'));
 
     let closeButtons = document.querySelectorAll(
       `.${blockClass}__close-condition`
@@ -1343,11 +1330,9 @@ describe(componentName, () => {
         {...defaultProps}
         inputConfig={inputData}
         variant={HIERARCHICAL_VARIANT}
-        initialState={{ state: sampleDataStructure }}
+        value={sampleDataStructure}
       />
     );
-
-    await userEvent.click(screen.getByText('Add condition'));
 
     let closeButtons = document.querySelectorAll(
       `.${blockClass}__close-condition`
@@ -1419,11 +1404,9 @@ describe(componentName, () => {
         {...defaultProps}
         inputConfig={inputData}
         actions={actions}
-        initialState={{ state: sampleDataStructure }}
+        value={sampleDataStructure}
       />
     );
-
-    await userEvent.click(screen.getByText('Add condition'));
 
     //click on add action button
     await userEvent.click(
@@ -1601,11 +1584,9 @@ describe(componentName, () => {
         {...defaultProps}
         variant={HIERARCHICAL_VARIANT}
         inputConfig={inputData}
-        initialState={{ state: sampleDataStructure }}
+        value={sampleDataStructure}
       />
     );
-
-    await userEvent.click(screen.getByText('Add condition'));
 
     expect(screen.getAllByRole('button', { name: 'if' })).toHaveLength(3);
 
@@ -1860,7 +1841,7 @@ describe(componentName, () => {
         {...defaultProps}
         readOnly={true}
         inputConfig={inputData}
-        initialState={{ state: sampleDataStructure_nonHierarchical }}
+        value={sampleDataStructure_nonHierarchical}
       />
     );
 
@@ -1870,8 +1851,6 @@ describe(componentName, () => {
     expect(
       document.querySelector(`.${blockClass}__add-button`)
     ).not.toBeInTheDocument();
-
-    await userEvent.click(screen.getByText('Add condition'));
 
     expect(
       screen.queryByRole('option', { name: 'Continent' })
@@ -2150,7 +2129,8 @@ describe(componentName, () => {
         {...defaultProps}
         variant={HIERARCHICAL_VARIANT}
         inputConfig={inputData}
-        initialState={{ state: sampleDataStructure_Hierarchical }}
+        value={sampleDataStructure_Hierarchical}
+        startActive={false}
       />
     );
 
@@ -2458,14 +2438,14 @@ describe(componentName, () => {
     });
   });
 
-  describe('getConditionState callback', () => {
-    it('calls getConditionState with updated state on every condition change', async () => {
-      const getConditionState = jest.fn();
+  describe('onChange callback', () => {
+    it('calls onChange with updated state on every condition change', async () => {
+      const onChange = jest.fn();
       render(
         <ConditionBuilder
           {...defaultProps}
           inputConfig={inputConfigOptionType}
-          getConditionState={getConditionState}
+          onChange={onChange}
         />
       );
 
@@ -2475,11 +2455,8 @@ describe(componentName, () => {
       await userEvent.click(screen.getByRole('option', { name: 'Africa' }));
 
       expect(screen.getByRole('button', { name: 'Africa' })).toBeVisible();
-      expect(getConditionState).toHaveBeenCalled();
-      const lastCall =
-        getConditionState.mock.calls[
-          getConditionState.mock.calls.length - 1
-        ][0];
+      expect(onChange).toHaveBeenCalled();
+      const lastCall = onChange.mock.calls[onChange.mock.calls.length - 1][0];
       expect(lastCall.groups[0].conditions[0].value).toMatchObject({
         id: 'Africa',
         label: 'Africa',

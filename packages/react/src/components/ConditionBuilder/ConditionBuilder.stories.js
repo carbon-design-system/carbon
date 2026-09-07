@@ -147,6 +147,9 @@ const ConditionBuilderTemplate = (args) => {
         onRemoveItem={(config) =>
           action(`onRemoveItem is triggered, type: ${config?.type}`)(config)
         }
+        onChange={(newState) => {
+          console.log('newState:', newState);
+        }}
       />
     </>
   );
@@ -306,7 +309,10 @@ const ControlledTemplate = () => {
             popOverSearchThreshold={4}
             aria-describedby={descriptionId}
             value={conditionState}
-            onChange={(newState) => setConditionState(newState)}
+            onChange={(newState) => {
+              console.log('newState:', newState);
+              setConditionState(newState);
+            }}
           />
         </div>
         <div
