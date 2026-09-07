@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { forwardRef, type HTMLAttributes } from 'react';
+import React, { forwardRef, useRef, type HTMLAttributes } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { View, ViewOff, WarningFilled } from '@carbon/icons-react';
@@ -15,6 +15,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import { useId } from '../../internal/useId';
 import { hasHelperText } from '../../internal/hasHelperText';
 import { noopFn } from '../../internal/noopFn';
+import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
 
 export interface ControlledPasswordInputProps
   extends HTMLAttributes<HTMLInputElement> {
@@ -153,6 +154,7 @@ const ControlledPasswordInput = forwardRef<
   ) => {
     const prefix = usePrefix();
     const controlledPasswordInstanceId = useId();
+    const labelRef = useRef<HTMLLabelElement>(null);
 
     const errorId = id + '-error-msg';
     const textInputClasses = classNames(
@@ -191,9 +193,13 @@ const ControlledPasswordInput = forwardRef<
       [`${prefix}--form__helper-text--disabled`]: disabled,
     });
     const label = typeof labelText !== 'undefined' && labelText !== null && (
-      <label htmlFor={id} className={labelClasses}>
+      <label htmlFor={id} className={labelClasses} ref={labelRef}>
         {labelText}
       </label>
+    );
+    useNoInteractiveChildren(
+      labelRef,
+      'The ControlledPasswordInput component `labelText` prop must have no interactive content'
     );
     const error = invalid ? (
       <div className={`${prefix}--form-requirement`} id={errorId}>
