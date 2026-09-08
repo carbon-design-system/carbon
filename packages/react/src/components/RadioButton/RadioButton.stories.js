@@ -23,6 +23,18 @@ export default {
     RadioButtonGroup,
     RadioButtonSkeleton,
   },
+  argTypes: {
+    checked: {
+      table: {
+        disable: true,
+      },
+    },
+    defaultChecked: {
+      table: {
+        disable: true,
+      },
+    },
+  },
   parameters: {
     docs: {
       page: mdx,
@@ -62,7 +74,6 @@ const groupArgTypes = {
     },
   },
   helperText: {
-    name: 'Helper text',
     description:
       'Provide text that is used alongside the control label for additional help',
     control: {
@@ -322,6 +333,7 @@ export const withAILabel = (args) => {
         value={option.value}
         id={`radio-ai-${groupNumber}-${option.value}`}
         hideLabel={hideLabel}
+        labelPosition={args.labelPosition}
         decorator={decorators[index]}
       />
     ));

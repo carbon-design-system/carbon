@@ -102,7 +102,6 @@ const groupArgTypes = {
     description: 'Specify whether a radio button selection is required.',
   },
   helperText: {
-    name: 'Helper text',
     control: 'text',
     description: 'Provide text for the radio button group for additional help.',
   },
@@ -209,6 +208,7 @@ const GroupStory = (args) => {
           <cds-radio-button
             ?hide-label="${hideLabel}"
             label-text="${ifDefined(index === 0 ? labelText : option.label)}"
+            label-position="${ifDefined(labelPosition)}"
             value="${option.value}"></cds-radio-button>
         `
       )}
@@ -262,6 +262,7 @@ const VerticalStory = (args) => {
           <cds-radio-button
             ?hide-label="${hideLabel}"
             label-text="${ifDefined(index === 0 ? labelText : option.label)}"
+            label-position="${ifDefined(labelPosition)}"
             .disabledItem="${index === 2}"
             value="${option.value}"></cds-radio-button>
         `
@@ -371,6 +372,7 @@ export const WithAILabel = {
     const renderRadioButton = (option, index, aiLabel) => html`
       <cds-radio-button
         ?hide-label="${hideLabel}"
+        label-position="${ifDefined(labelPosition)}"
         label-text="${ifDefined(index === 0 ? labelText : option.label)}"
         value="${option.value}">
         ${aiLabel}
@@ -405,15 +407,15 @@ export const WithAILabel = {
       ${renderGroup(
         1,
         {},
-        html`<cds-ai-label alignment="bottom-left"
+        html`<cds-ai-label slot="ai-label" alignment="bottom-left"
           >${content}${actions}</cds-ai-label
         >`
       )}
       ${renderGroup(2, {
-        0: html`<cds-ai-label alignment="bottom-left"
+        0: html`<cds-ai-label slot="ai-label" alignment="bottom-left"
           >${content}${actions}</cds-ai-label
         >`,
-        1: html`<cds-ai-label alignment="bottom-left"
+        1: html`<cds-ai-label slot="ai-label" alignment="bottom-left"
           >${content}${actions}</cds-ai-label
         >`,
       })}
