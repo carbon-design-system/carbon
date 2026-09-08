@@ -316,8 +316,8 @@ $popover-caret-height: custom-property.get-var(
     > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret {
     display: block;
-    visibility: hidden;
     pointer-events: none;
+    visibility: hidden;
   }
 
   .#{$prefix}--popover--tab-tip
