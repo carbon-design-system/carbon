@@ -394,18 +394,18 @@ export const Minimal = () => (
 
 Minimal.argTypes = readonlyArgTypes;
 
-export const ProductiveAndExpressive = () => (
+export const WithDensities = () => (
   <Grid withRowGap>
     <Column lg={4} md={4} sm={4}>
       <Card>
         <Card.Header>
-          <Card.Title label="Category" description="Uses heading-compact-02">
-            Productive Card
+          <Card.Title label="Category" description="Card description">
+            Card title
           </Card.Title>
         </Card.Header>
         <Card.Body>
-          Productive density uses compact headings (heading-compact-02) for a
-          more condensed layout.
+          This is the card body content. It can contain any custom content you
+          need.
         </Card.Body>
         <Card.Footer>
           <Card.Action>
@@ -419,23 +419,27 @@ export const ProductiveAndExpressive = () => (
     <Column lg={4} md={4} sm={4}>
       <Card density="expressive">
         <Card.Header>
-          <Card.Title label="Category" description="Uses heading-03">
-            Expressive Card
+          <Card.Title label="Category" description="Card description">
+            Card title
           </Card.Title>
         </Card.Header>
         <Card.Body>
-          Expressive density uses larger headings (heading-03) for a more
-          spacious layout.
+          This is the card body content. It can contain any custom content you
+          need.
         </Card.Body>
         <Card.Footer>
-          <IconIndicator kind="succeeded" size={16} label="Succeeded" />
+          <Card.Action>
+            <Button kind="ghost" size="md">
+              View details
+            </Button>
+          </Card.Action>
         </Card.Footer>
       </Card>
     </Column>
   </Grid>
 );
 
-ProductiveAndExpressive.argTypes = readonlyArgTypes;
+WithDensities.argTypes = readonlyArgTypes;
 
 export const WithAILabel = () => (
   <Grid withRowGap>
@@ -1155,7 +1159,7 @@ export const WithMedia = () => (
             </Button>
           </Card.Action>
           <Card.Action>
-            <Button kind="secondary" size="md" renderIcon={ArrowRight}>
+            <Button kind="primary" size="md" renderIcon={ArrowRight}>
               Confirm
             </Button>
           </Card.Action>
