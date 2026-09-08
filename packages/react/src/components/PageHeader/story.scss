@@ -16,13 +16,18 @@
   background-color: $layer-01 !important;
 }
 
-// Storybook layout overrides
-.sb-show-main.sb-main-centered {
-  align-items: normal;
+// Give tab panels enough height to make sticky behaviour visible in stories.
+// Also remove the default TabPanel padding so content is flush with the header.
+.page-header-story--tall-tab-panel {
+  min-block-size: 150vh;
+  /* stylelint-disable-next-line declaration-no-important */
+  padding: 0 !important;
 }
 
-.sb-show-main.sb-main-centered #storybook-root {
+// Used in the TabBarWithTabsAndTags story that renders a full UI-shell Header
+// above the PageHeader. Ensures the page body starts directly below the shell
+// with no additional margin or padding.
+.page-header-story__wrapper {
   margin: 0;
   padding: 0;
-  width: 100%;
 }

@@ -72,30 +72,12 @@ export default {
     },
   },
   parameters: {
+    layout: 'fullscreen',
     docs: {
       page: mdx,
     },
   },
-  decorators: [
-    (Story) => (
-      <>
-        <style>
-          {`
-          .sb-show-main.sb-main-centered {
-            align-items: normal;
-          }
-
-          .sb-show-main.sb-main-centered #storybook-root {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-          }
-        `}
-        </style>
-        <Story />
-      </>
-    ),
-  ],
+  decorators: [(Story) => <Story />],
 };
 
 const BeeIcon = () => <Bee size={32} />;
