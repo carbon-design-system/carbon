@@ -7,7 +7,7 @@
 
 @use '@carbon/styles/scss/spacing';
 
-#storybook-root {
+.card-story__viewport {
   padding-block-start: spacing.$spacing-07; // 2rem
 }
 
