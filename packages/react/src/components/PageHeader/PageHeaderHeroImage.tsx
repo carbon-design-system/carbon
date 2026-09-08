@@ -5,9 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import { AspectRatio } from '@carbon/react';
+import { AspectRatio } from '../AspectRatio';
 import { breakpoints } from '@carbon/layout';
 import { blockClass } from './utils';
 
@@ -80,18 +79,3 @@ export const PageHeaderHeroImage = ({
 };
 
 PageHeaderHeroImage.displayName = 'PageHeaderHeroImage';
-
-PageHeaderHeroImage.propTypes = {
-  /**
-   * Provide child elements to be rendered inside PageHeaderHeroImage.
-   */
-  children: PropTypes.node,
-  /**
-   * Specify an optional className to be added to your PageHeaderHeroImage
-   */
-  className: PropTypes.string,
-  /**
-   * Specify how the image should fit within the container.
-   */
-  objectFit: PropTypes.oneOf(['cover', 'contain', 'fill', 'none']),
-};

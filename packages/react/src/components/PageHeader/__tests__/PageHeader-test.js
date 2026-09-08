@@ -8,17 +8,14 @@
 import React, { cloneElement } from 'react';
 import { render, screen, act, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Compact, Default } from '../PageHeader.stories';
-import { preview__PageHeader as PageHeader, pkg } from '../../../..';
-import { blockClass } from '../utils';
+import * as PageHeader from '../PageHeader';
 import {
-  PageHeader as PageHeaderDirect,
   PageHeaderBreadcrumbBar as PageHeaderBreadcrumbBarDirect,
   PageHeaderContent as PageHeaderContentDirect,
   PageHeaderTabBar as PageHeaderTabBarDirect,
 } from '../PageHeader';
 import { PageHeaderBreadcrumbPageActions } from '../PageHeaderBreadcrumbPageActions';
-import { scrollableAncestor, getHeaderOffset } from '../utils';
+import { blockClass, scrollableAncestor, getHeaderOffset } from '../utils';
 import { usePageHeader } from '../context';
 import { breakpoints } from '@carbon/layout';
 import {
@@ -35,6 +32,81 @@ import {
   Tag,
 } from '@carbon/react';
 import { Bee } from '@carbon/icons-react';
+
+// Minimal fixture components used instead of story imports
+const DefaultFixture = (props) => {
+  const { className, 'data-testid': testId, role, ...rest } = props;
+  return (
+    <Tabs>
+      <PageHeader.Root
+        className={className}
+        data-testid={testId}
+        role={role}
+        {...rest}>
+        <PageHeader.BreadcrumbBar
+          border
+          contentActions={<button>Actions</button>}
+          pageActions={<button>Page action</button>}>
+          <Breadcrumb noTrailingSlash>
+            <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+            <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+            <BreadcrumbItem href="#">Breadcrumb 3</BreadcrumbItem>
+            <BreadcrumbItem href="#">Breadcrumb 4</BreadcrumbItem>
+            <PageHeader.TitleBreadcrumb data-fixed>
+              Virtual Machine DAL
+            </PageHeader.TitleBreadcrumb>
+          </Breadcrumb>
+        </PageHeader.BreadcrumbBar>
+        <PageHeader.Content title="Virtual Machine DAL">
+          <PageHeader.ContentText subtitle="Subtitle">
+            Description text
+          </PageHeader.ContentText>
+        </PageHeader.Content>
+        <PageHeader.TabBar>
+          <TabList aria-label="Tab list">
+            <Tab>Tab 1</Tab>
+            <Tab>Tab 2</Tab>
+          </TabList>
+        </PageHeader.TabBar>
+      </PageHeader.Root>
+      <TabPanels>
+        <TabPanel>Tab Panel 1</TabPanel>
+        <TabPanel>Tab Panel 2</TabPanel>
+      </TabPanels>
+    </Tabs>
+  );
+};
+
+const CompactFixture = () => (
+  <PageHeader.Root>
+    <PageHeader.BreadcrumbBar
+      contentActions={
+        <PageHeader.ContentPageActions
+          menuButtonLabel="Actions"
+          actions={[
+            {
+              id: 'a1',
+              onClick: () => {},
+              body: <button>Action 1</button>,
+              menuItem: { label: 'Action 1' },
+            },
+          ]}
+        />
+      }>
+      <Breadcrumb noTrailingSlash>
+        <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+        <PageHeader.TitleBreadcrumb data-fixed>
+          Title
+        </PageHeader.TitleBreadcrumb>
+      </Breadcrumb>
+    </PageHeader.BreadcrumbBar>
+    <PageHeader.TabBar>
+      <TabList aria-label="Tab list">
+        <Tab>Tab 1</Tab>
+      </TabList>
+    </PageHeader.TabBar>
+  </PageHeader.Root>
+);
 
 let mockOverflowOnChange = jest.fn();
 
@@ -56,8 +128,38 @@ jest.mock('../overflowHandler', () => ({
   }),
 }));
 
-const prefix = 'c4p';
+const prefix = 'cds';
 const carbonPrefix = 'cds';
+
+// Flush any pending floating-ui / React microtask state updates after each test
+// to prevent act() warnings from leaking into subsequent tests.
+afterEach(async () => {
+  await act(async () => {});
+});
+
+beforeAll(() => {
+  // IntersectionObserver is not in the global jest setup — mock it here.
+  window.IntersectionObserver = jest.fn(() => ({
+    observe: jest.fn(),
+    unobserve: jest.fn(),
+    disconnect: jest.fn(),
+  }));
+
+  // matchMedia is used by internal Carbon hooks — provide a minimal mock.
+  if (!window.matchMedia) {
+    Object.defineProperty(window, 'matchMedia', {
+      writable: true,
+      value: jest.fn().mockImplementation((query) => ({
+        matches: false,
+        media: query,
+        onchange: null,
+        addEventListener: jest.fn(),
+        removeEventListener: jest.fn(),
+        dispatchEvent: jest.fn(),
+      })),
+    });
+  }
+});
 
 describe('PageHeader', () => {
   describe('export configuration', () => {
@@ -86,33 +188,29 @@ describe('PageHeader', () => {
 
     it('should update css variable for sticky positioning', () => {
       const testId = 'page-header-next-test-id';
-      render(<Default {...Default.args} data-testid={testId} />);
+      render(<DefaultFixture data-testid={testId} />);
       triggerResize();
       const computedStyle = window.getComputedStyle(screen.getByTestId(testId));
       expect(
-        computedStyle.getPropertyValue(
-          `--${pkg.prefix}--page-header-header-top`
-        )
+        computedStyle.getPropertyValue(`--${prefix}-page-header-header-top`)
       ).toBeDefined();
       expect(
-        computedStyle.getPropertyValue(
-          `--${pkg.prefix}--page-header-breadcrumb-top`
-        )
+        computedStyle.getPropertyValue(`--${prefix}-page-header-breadcrumb-top`)
       ).toBeDefined();
     });
 
     it('supports dot notation component namespacing from the main entrypoint', () => {
-      const { container } = render(<Default {...Default.args} />);
+      const { container } = render(<DefaultFixture />);
       expect(container.firstChild).toBeInTheDocument();
     });
 
     it('supports direct component imports from the PageHeader path', () => {
       const { container } = render(
-        <PageHeaderDirect>
+        <PageHeader.Root>
           <PageHeaderBreadcrumbBarDirect />
           <PageHeaderContentDirect title="title" />
           <PageHeaderTabBarDirect />
-        </PageHeaderDirect>
+        </PageHeader.Root>
       );
       expect(container.firstChild).toBeInTheDocument();
     });
@@ -125,9 +223,7 @@ describe('PageHeader', () => {
     });
 
     it('should place className on the outermost element', () => {
-      render(
-        <Default {...Default.args} className="custom-class" role="banner" />
-      );
+      render(<DefaultFixture className="custom-class" role="banner" />);
       const pageHeaderOuter = screen.getByRole('banner');
       expect(pageHeaderOuter).toHaveClass('custom-class');
     });
@@ -219,7 +315,7 @@ describe('PageHeader', () => {
     });
 
     it('should render breadcrumb items', () => {
-      render(<Default {...Default.args} role="banner" />);
+      render(<DefaultFixture role="banner" />);
 
       const pageHeaderOuter = screen.getByRole('banner');
       const breadcrumbs = pageHeaderOuter.getElementsByClassName(
@@ -577,7 +673,7 @@ describe('PageHeader', () => {
     });
 
     it('should use a custom menuButtonLabel if provided', () => {
-      render(<Compact {...Compact.args} />);
+      render(<CompactFixture />);
       expect(
         screen.getByRole('button', { name: /actions/i })
       ).toBeInTheDocument();
@@ -590,12 +686,12 @@ describe('PageHeader', () => {
         </PageHeader.Root>
       );
 
-      await act(() =>
+      act(() => {
         mockOverflowOnChange(
           [mockPageActions[0]], // visible
           [mockPageActions[1]] // hidden
-        )
-      );
+        );
+      });
 
       // Find the menu button
       const menuButton = await screen.findByRole('button', {
@@ -603,7 +699,8 @@ describe('PageHeader', () => {
       });
       expect(menuButton).toBeInTheDocument();
 
-      await act(() => userEvent.click(menuButton));
+      // userEvent v14 handles act() internally — do not double-wrap in act()
+      await userEvent.click(menuButton);
 
       const menuItem = await screen.findByRole('menuitem', {
         name: /Action 2/i,
@@ -611,7 +708,7 @@ describe('PageHeader', () => {
 
       expect(menuItem).toBeInTheDocument();
 
-      await act(() => userEvent.click(menuItem));
+      await userEvent.click(menuItem);
 
       expect(onClickMock).toHaveBeenCalledTimes(1);
     });
@@ -640,7 +737,7 @@ describe('PageHeader', () => {
     });
 
     it('should render a subtitle', () => {
-      render(<Default {...Default.args} />);
+      render(<DefaultFixture />);
 
       expect(screen.getByText('Subtitle')).toBeInTheDocument();
     });
@@ -866,12 +963,12 @@ describe('PageHeader', () => {
       const tab3Button = screen.getByRole('tab', { name: 'Tab 3' });
 
       // Verify tabs can be focused and clicked
-      await act(() => userEvent.click(tab2Button));
+      await userEvent.click(tab2Button);
       await waitFor(() => {
         expect(screen.getByText('Tab Panel 2')).toBeInTheDocument();
       });
 
-      await act(() => userEvent.click(tab3Button));
+      await userEvent.click(tab3Button);
       await waitFor(() => {
         expect(screen.getByText('Tab Panel 3')).toBeInTheDocument();
       });
@@ -995,7 +1092,7 @@ describe('PageHeader', () => {
         expect(overflowButton).toHaveAttribute('aria-expanded', 'false');
 
         // Click to open popover
-        await act(() => userEvent.click(overflowButton));
+        await userEvent.click(overflowButton);
 
         // Check that popover is now open
         await waitFor(() => {
@@ -1016,7 +1113,7 @@ describe('PageHeader', () => {
         const overflowButton = screen.getByRole('button', { name: '+6' });
 
         // Click to open popover
-        await act(() => userEvent.click(overflowButton));
+        await userEvent.click(overflowButton);
 
         // Verify popover is open
         await waitFor(() => {
@@ -1024,7 +1121,7 @@ describe('PageHeader', () => {
         });
 
         // Click outside popover
-        await act(() => userEvent.click(document.body));
+        await userEvent.click(document.body);
 
         // Verify popover is closed
         await waitFor(() => {
@@ -1045,7 +1142,7 @@ describe('PageHeader', () => {
         const overflowButton = screen.getByRole('button', { name: '+6' });
 
         // Click to open popover
-        await act(() => userEvent.click(overflowButton));
+        await userEvent.click(overflowButton);
 
         // Verify popover is open
         await waitFor(() => {
@@ -1171,7 +1268,7 @@ describe('PageHeader', () => {
         </PageHeader.Root>
       );
       expect(ref.current).toHaveClass(
-        `${pkg.prefix}--page-header-breadcrumb-overflow`
+        `${prefix}--page-header-breadcrumb-overflow`
       );
     });
     it('should render children without overflow breadcrumb', () => {
@@ -1548,7 +1645,7 @@ describe('PageHeader', () => {
 
       // No overflow — click the visible Delete button directly
       const deleteBtn = screen.getByLabelText('Delete');
-      await act(() => userEvent.click(deleteBtn));
+      await userEvent.click(deleteBtn);
       expect(deleteClick).toHaveBeenCalledTimes(1);
     });
   });
@@ -1672,45 +1769,7 @@ describe('PageHeader', () => {
 
   // ─── PageHeader.ScrollButton ──────────────────────────────────────────────
   describe('PageHeader.ScrollButton', () => {
-    // Get the pconsole module's default export to spy on its `warn` method.
-    // PageHeaderScrollButton calls `pconsole.warn(...)` on the default export,
-    // so we spy on that object rather than `console.warn` directly, which avoids
-    // fragility around the test setup's console.warn wrapper.
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const pconsoleModule = require('../../../global/js/utils/pconsole');
-    // In Jest+Babel the default export is at .default; fall back to the module itself
-    const pconsoleDefault = pconsoleModule.default ?? pconsoleModule;
-
     afterEach(() => jest.restoreAllMocks());
-
-    it('warns when collapseText prop is an empty string', () => {
-      // Spy directly on the default export object used by PageHeaderScrollButton
-      const warnSpy = jest
-        .spyOn(pconsoleDefault, 'warn')
-        .mockImplementation(() => {});
-      render(
-        <PageHeader.Root>
-          <PageHeader.ScrollButton collapseText="" />
-        </PageHeader.Root>
-      );
-      expect(warnSpy).toHaveBeenCalledWith(
-        expect.stringContaining('collapseText')
-      );
-    });
-
-    it('warns when expandText prop is an empty string', () => {
-      const warnSpy = jest
-        .spyOn(pconsoleDefault, 'warn')
-        .mockImplementation(() => {});
-      render(
-        <PageHeader.Root>
-          <PageHeader.ScrollButton expandText="" />
-        </PageHeader.Root>
-      );
-      expect(warnSpy).toHaveBeenCalledWith(
-        expect.stringContaining('expandText')
-      );
-    });
 
     it('scrolls the page to the top when expand is clicked while the content is fully collapsed', async () => {
       const scrollToMock = jest.fn();
@@ -2021,7 +2080,7 @@ describe('PageHeader', () => {
       const overflowButton = screen.getByRole('button', { name: '+2' });
 
       // Open the popover
-      await act(() => userEvent.click(overflowButton));
+      await userEvent.click(overflowButton);
       await waitFor(() =>
         expect(overflowButton).toHaveAttribute('aria-expanded', 'true')
       );
@@ -2104,7 +2163,7 @@ describe('PageHeader', () => {
       // Patch useContext for one call so it returns undefined, simulating
       // a component tree that has no PageHeaderContext.Provider ancestor.
       const React_ = require('react');
-      const contextModule = require('./context');
+      const contextModule = require('../context');
       const origUseContext = React_.useContext;
 
       jest.spyOn(React_, 'useContext').mockImplementationOnce((ctx) => {

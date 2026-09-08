@@ -12,10 +12,10 @@ import React, {
   RefObject,
 } from 'react';
 import classnames from 'classnames';
-import { Popover, PopoverContent } from '@carbon/react';
+import { Popover, PopoverContent } from '../Popover';
 import { blockClass } from './utils';
 import { createOverflowHandler as localOverflowHandler } from './overflowHandler';
-import { pkg } from '../../../settings';
+import { usePrefix } from '../../internal/usePrefix';
 
 export interface PageHeaderTagOverflowProps {
   // Maybe scope this more to only accept tag or operational tag children
@@ -35,9 +35,10 @@ export const PageHeaderTagOverflow = React.forwardRef<
   HTMLDivElement,
   PageHeaderTagOverflowProps
 >(({ renderOverflowTag, renderPopoverContent, children }, ref) => {
+  const prefix = usePrefix();
   const [openPopover, setOpenPopover] = useState(false);
   const [hiddenTags, setHiddenTags] = useState<HTMLElement[]>([]);
-  const overflowButtonId = `${pkg.prefix}--page-header--tag-overflow-btn`;
+  const overflowButtonId = `${prefix}--page-header--tag-overflow-btn`;
 
   const localRef = useRef<HTMLDivElement>(null);
   const tagsContainerRef = (ref || localRef) as RefObject<HTMLDivElement>;
@@ -83,26 +84,20 @@ export const PageHeaderTagOverflow = React.forwardRef<
   return (
     <div
       ref={tagsContainerRef}
-      className={classnames(
-        `${pkg.prefix}--page-header--tag-overflow-container`,
-        {
-          [`${pkg.prefix}--page-header--tag-overflow-container__has-no-hidden-items`]:
-            !hiddenTags.length,
-        }
-      )}>
+      className={classnames(`${prefix}--page-header--tag-overflow-container`, {
+        [`${prefix}--page-header--tag-overflow-container__has-no-hidden-items`]:
+          !hiddenTags.length,
+      })}>
       {children}
       <Popover
         open={openPopover}
         onRequestClose={() => setOpenPopover(false)}
         data-fixed
         aria-labelledby={overflowButtonId}
-        className={classnames(
-          `${pkg.prefix}--page-header--tag-overflow-popover`,
-          {
-            [`${pkg.prefix}--page-header--tag-overflow-popover__hidden`]:
-              !hiddenTags.length,
-          }
-        )}>
+        className={classnames(`${prefix}--page-header--tag-overflow-popover`, {
+          [`${prefix}--page-header--tag-overflow-popover__hidden`]:
+            !hiddenTags.length,
+        })}>
         {renderOverflowTag?.(
           hiddenTags,
           handleOverflowClick,

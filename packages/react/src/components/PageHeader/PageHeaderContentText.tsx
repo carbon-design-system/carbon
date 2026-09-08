@@ -5,9 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React from 'react';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import { unstable_Text as Text } from '@carbon/react';
+import { Text } from '../Text';
 import { blockClass } from './utils';
 
 /**
@@ -61,22 +60,3 @@ export const PageHeaderContentText = ({
 };
 
 PageHeaderContentText.displayName = 'PageHeaderContentText';
-
-PageHeaderContentText.propTypes = {
-  /**
-   * Provide child elements to be rendered inside PageHeaderContentText.
-   */
-  children: PropTypes.node,
-  /**
-   * Specify an optional className to be added to your PageHeaderContentText
-   */
-  className: PropTypes.string,
-  /**
-   * The PageHeaderContent's subtitle
-   */
-  subtitle: PropTypes.string,
-  /**
-   * Specify the element used to render the subtitle.
-   */
-  subtitleAs: PropTypes.oneOf(['h2', 'h3', 'h4', 'h5', 'h6']),
-};

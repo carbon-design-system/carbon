@@ -6,12 +6,11 @@
  */
 import React from 'react';
 import classnames from 'classnames';
-import { IconButtonProps, IconButton } from '@carbon/react';
-import { ChevronUp } from '@carbon/react/icons';
+import { IconButton, type IconButtonProps } from '../IconButton';
+import { ChevronUp } from '@carbon/icons-react';
 import { usePageHeader } from './context';
 import { scrollableAncestor } from './utils';
-import { pkg } from '../../../settings';
-import pconsole from '../../../global/js/utils/pconsole';
+import { usePrefix } from '../../internal/usePrefix';
 
 export interface PageHeaderScrollButtonProps extends IconButtonProps {
   collapseText?: string;
@@ -33,16 +32,7 @@ export const PageHeaderScrollButton = React.forwardRef<
   }: PageHeaderScrollButtonProps,
   ref
 ) {
-  if (!collapseText) {
-    pconsole.warn(
-      'PageHeaderScrollButton: The `collapseText` prop is the accessible label for the collapse button. Provide a translated string.'
-    );
-  }
-  if (!expandText) {
-    pconsole.warn(
-      'PageHeaderScrollButton: The `expandText` prop is the accessible label for the expand button. Provide a translated string.'
-    );
-  }
+  const prefix = usePrefix();
   const { refs, observerState } = usePageHeader();
   const fullyCollapsed = observerState.fullyCollapsed;
 
@@ -73,7 +63,6 @@ export const PageHeaderScrollButton = React.forwardRef<
       label={fullyCollapsed ? expandText : collapseText}
       size="md"
       kind="ghost"
-      autoAlign
       {...other}
       onClick={(event) => {
         onClick?.(event);
@@ -81,16 +70,13 @@ export const PageHeaderScrollButton = React.forwardRef<
       }}
       className={classnames(
         className,
-        `${pkg.prefix}--page-header--scroller-button`
+        `${prefix}--page-header--scroller-button`
       )}>
       <ChevronUp
-        className={classnames(
-          `${pkg.prefix}--page-header--scroller-button-icon`,
-          {
-            [`${pkg.prefix}--page-header--scroller-button-icon-collapsed`]:
-              fullyCollapsed,
-          }
-        )}
+        className={classnames(`${prefix}--page-header--scroller-button-icon`, {
+          [`${prefix}--page-header--scroller-button-icon-collapsed`]:
+            fullyCollapsed,
+        })}
       />
     </IconButton>
   );

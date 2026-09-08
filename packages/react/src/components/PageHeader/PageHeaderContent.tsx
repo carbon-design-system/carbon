@@ -11,12 +11,12 @@ import React, {
   useRef,
   RefObject,
 } from 'react';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import { Column, Grid, Section, Heading } from '@carbon/react';
+import { Column, Grid } from '../Grid';
+import { Section, Heading } from '../Heading';
 import { blockClass } from './utils';
 import { usePageHeader, type PageHeaderObserverState } from './context';
-import { TruncatedText } from '../../TruncatedText';
+import { TruncatedText } from '../TruncatedText';
 
 /**
  * -----------------
@@ -165,41 +165,3 @@ export const PageHeaderContent = React.forwardRef<
 });
 
 PageHeaderContent.displayName = 'PageHeaderContent';
-
-PageHeaderContent.propTypes = {
-  /**
-   * Provide child elements to be rendered inside PageHeaderContent.
-   */
-  children: PropTypes.node,
-  /**
-   * Specify an optional className to be added to your PageHeaderContent
-   */
-  className: PropTypes.string,
-  /**
-   * The PageHeaderContent's contextual actions
-   */
-  contextualActions: PropTypes.node,
-  /**
-   * The PageHeaderContent's page actions
-   */
-  pageActions: PropTypes.node,
-  /**
-   * Provide an optional icon to render in front of the PageHeaderContent's title.
-   */
-  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-  /**
-   * The PageHeaderContent's title
-   */
-  title: PropTypes.node.isRequired,
-  /**
-   * Specify the element or component used to render the title.
-   */
-  titleAs: PropTypes.oneOfType([
-    PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'h6']),
-    PropTypes.elementType,
-  ]),
-  /**
-   * Specify the maximum number of lines the title can span before truncating.
-   */
-  titleTruncate: PropTypes.number,
-};

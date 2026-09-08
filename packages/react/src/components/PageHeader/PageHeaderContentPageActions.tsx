@@ -5,14 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React, { useEffect, useState, useRef } from 'react';
-import { useIsomorphicEffect } from '../../../global/js/hooks';
-import PropTypes from 'prop-types';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import classnames from 'classnames';
-import { MenuItem, MenuItemProps, MenuButton } from '@carbon/react';
+import { MenuItem, type MenuItemProps } from '../Menu/MenuItem';
+import { MenuButton } from '../MenuButton';
 import { blockClass } from './utils';
 import { createOverflowHandler } from '@carbon/utilities';
 import { usePageHeader } from './context';
-import { pkg } from '../../../settings';
+import { usePrefix } from '../../internal/usePrefix';
 
 /**
  * ----------------
@@ -45,6 +45,7 @@ export const PageHeaderContentPageActions = ({
   actions,
   ...other
 }: PageHeaderContentPageActionsProps) => {
+  const prefix = usePrefix();
   const {
     setRefs,
     observerState,
@@ -79,7 +80,6 @@ export const PageHeaderContentPageActions = ({
   const offsetRef = useRef<HTMLLIElement>(null);
   const [menuButtonVisibility, setMenuButtonVisibility] = useState(false);
   const [hiddenItems, setHiddenItems] = useState<action[]>([]);
-  const [hasMounted, setHasMounted] = useState(false);
 
   // need to set the grid columns width based on the menu button's width
   // to avoid overlapping when resizing
@@ -92,15 +92,11 @@ export const PageHeaderContentPageActions = ({
       ) as HTMLElement | null;
       const target = pageHeaderRoot ?? containerRef.current;
       target.style.setProperty(
-        `--${pkg.prefix}-page-header-title-grid-width`,
+        `--${prefix}-page-header-title-grid-width`,
         `${width}px`
       );
     }
   }, [menuButtonVisibility]);
-
-  useEffect(() => {
-    setHasMounted(true);
-  }, []);
 
   useEffect(() => {
     if (isInBreadcrumbBar) {
@@ -111,7 +107,7 @@ export const PageHeaderContentPageActions = ({
   }, [isInBreadcrumbBar, setRefs]);
 
   useEffect(() => {
-    if (!hasMounted || !containerRef.current || !Array.isArray(actions)) {
+    if (!containerRef.current || !Array.isArray(actions)) {
       return;
     }
     createOverflowHandler({
@@ -126,7 +122,7 @@ export const PageHeaderContentPageActions = ({
         }
       },
     });
-  }, [actions, hasMounted]);
+  }, [actions]);
 
   return (
     <ul className={classNames} ref={containerRef} {...other}>
@@ -141,20 +137,18 @@ export const PageHeaderContentPageActions = ({
             </li>
           ))}
           <li data-offset data-hidden ref={offsetRef}>
-            {hasMounted ? (
-              <MenuButton
-                menuAlignment="bottom-end"
-                label={menuButtonLabel}
-                size="md">
-                {[...hiddenItems].reverse().map((item) => (
-                  <MenuItem
-                    key={item.id}
-                    onClick={item.onClick}
-                    {...item.menuItem}
-                  />
-                ))}
-              </MenuButton>
-            ) : null}
+            <MenuButton
+              menuAlignment="bottom-end"
+              label={menuButtonLabel}
+              size="md">
+              {[...hiddenItems].reverse().map((item) => (
+                <MenuItem
+                  key={item.id}
+                  onClick={item.onClick}
+                  {...item.menuItem}
+                />
+              ))}
+            </MenuButton>
           </li>
         </>
       )}
@@ -163,22 +157,3 @@ export const PageHeaderContentPageActions = ({
 };
 
 PageHeaderContentPageActions.displayName = 'PageHeaderContentPageActions';
-
-PageHeaderContentPageActions.propTypes = {
-  /**
-   * The PageHeaderContent's page actions
-   */
-  actions: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
-  /**
-   * Provide child elements to be rendered inside PageHeaderContentPageActions.
-   */
-  children: PropTypes.node,
-  /**
-   * Specify an optional className to be added to your PageHeaderContentPageActions
-   */
-  className: PropTypes.string,
-  /**
-   * The PageHeaderContent's collapsible Menu button label
-   */
-  menuButtonLabel: PropTypes.string,
-};

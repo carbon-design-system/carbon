@@ -4,12 +4,10 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+import './story.scss';
 import React, { useCallback } from 'react';
 import {
-  preview__PageHeader as PageHeader,
-  preview__TruncatedText as TruncatedText,
-} from '../..';
-import {
+  PageHeader,
   PageHeaderBreadcrumbBar,
   PageHeaderContent,
   PageHeaderTabBar,
@@ -22,6 +20,7 @@ import {
   PageHeaderBreadcrumbOverflow,
   PageHeaderTagOverflow,
 } from './PageHeader';
+import { TruncatedText } from '../TruncatedText';
 import {
   Tag,
   Grid,
@@ -42,7 +41,6 @@ import {
 import { breakpoints } from '@carbon/layout';
 import image1 from './_story-assets/2x1.jpg';
 import image2 from './_story-assets/3x2.jpg';
-import styles from './_storybook-styles.scss?inline';
 
 import { Bee, AiGenerate, CloudFoundry_1, Activity } from '@carbon/icons-react';
 import mdx from './docs/overview.mdx';
@@ -67,11 +65,13 @@ export default {
   tags: ['autodocs'],
   argTypes: {
     children: {
-      control: false, // ReactNode props don't work in the controls pane
+      table: { disable: true },
+    },
+    className: {
+      table: { disable: true },
     },
   },
   parameters: {
-    styles,
     docs: {
       page: mdx,
     },

@@ -6,17 +6,11 @@
  */
 import React, { useEffect, useRef, forwardRef, RefObject } from 'react';
 import classnames from 'classnames';
-import {
-  BreadcrumbItemProps,
-  BreadcrumbItem,
-  BreadcrumbProps,
-  Breadcrumb,
-  usePrefix,
-} from '@carbon/react';
+import { type BreadcrumbItemProps } from '../Breadcrumb/BreadcrumbItem';
+import { type BreadcrumbProps } from '../Breadcrumb/Breadcrumb';
+import Breadcrumb from '../Breadcrumb';
+import { usePrefix } from '../../internal/usePrefix';
 import { createOverflowHandler as localOverflowHandler } from './overflowHandler';
-import { pkg } from '../../../settings';
-import { PageHeaderTitleBreadcrumb } from './PageHeaderTitleBreadcrumb';
-
 export interface PageHeaderBreadcrumbOverflowProps extends BreadcrumbProps {
   renderOverflowBreadcrumb?: (
     hiddenBreadcrumbs: HTMLElement[]
@@ -34,8 +28,8 @@ export const PageHeaderBreadcrumbOverflow = forwardRef<
   const [hiddenBreadcrumbs, setHiddenBreadcrumbs] = React.useState<
     HTMLElement[]
   >([]);
-  const fallbackRef = useRef<Breadcrumb | null>(null);
-  const componentRef = (ref ?? fallbackRef) as RefObject<Breadcrumb>;
+  const fallbackRef = useRef<HTMLElement | null>(null);
+  const componentRef = (ref ?? fallbackRef) as RefObject<HTMLElement>;
 
   // Initialize overflow resize handler
   const carbonPrefix = usePrefix();
@@ -58,12 +52,16 @@ export const PageHeaderBreadcrumbOverflow = forwardRef<
 
   const renderChildren = () => {
     // Only BreadcrumbItems and TitleBreadcrumbs are valid children
+    // Use displayName for type check to avoid module-identity mismatches
+    // between @carbon/react lib exports and src imports.
     const filteredBreadcrumbs = React.Children.toArray(children).filter(
       (child) => {
         if (React.isValidElement(child)) {
+          const displayName =
+            (child.type as { displayName?: string })?.displayName ?? '';
           return (
-            child.type === BreadcrumbItem ||
-            child.type === PageHeaderTitleBreadcrumb
+            displayName === 'BreadcrumbItem' ||
+            displayName === 'PageHeaderTitleBreadcrumb'
           );
         }
       }
@@ -85,9 +83,9 @@ export const PageHeaderBreadcrumbOverflow = forwardRef<
           key: 'cloned overflow breadcrumb item',
           'data-fixed': true,
           className: classnames(
-            `${pkg.prefix}--page-header-breadcrumb-overflow-item`,
+            `${carbonPrefix}--page-header-breadcrumb-overflow-item`,
             {
-              [`${pkg.prefix}--page-header-overflow-breadcrumb-item-with-items`]:
+              [`${carbonPrefix}--page-header-overflow-breadcrumb-item-with-items`]:
                 hiddenBreadcrumbs.length,
             }
           ),
@@ -108,7 +106,7 @@ export const PageHeaderBreadcrumbOverflow = forwardRef<
     <Breadcrumb
       className={classnames(
         className,
-        `${pkg.prefix}--page-header-breadcrumb-overflow`
+        `${carbonPrefix}--page-header-breadcrumb-overflow`
       )}
       ref={componentRef}
       {...other}>

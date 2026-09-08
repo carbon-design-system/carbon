@@ -18,7 +18,7 @@ export const productMigratedStoryGlobs = [
   '../src/components/FullPageError/FullPageError.stories.js',
   '../src/components/Coachmark/Coachmark.stories.js',
   '../src/components/OptionsTile/OptionsTile.stories.js',
-  '../src/components/PageHeader/PageHeader.stories.jsx',
+  '../src/components/PageHeader/PageHeader.stories.js',
   '../src/components/InterstitialScreen/InterstitialScreen.stories.js',
   '../src/components/Guidebanner/Guidebanner.stories.js',
   '../src/components/Resizer/Resizer.stories.js',

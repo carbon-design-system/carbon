@@ -5,9 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React, { useEffect, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import { Button, OverflowMenu, MenuItem, FeatureFlags } from '@carbon/react';
+import Button from '../Button';
+import { OverflowMenu } from '../OverflowMenu';
+import { MenuItem } from '../Menu/MenuItem';
+import { FeatureFlags } from '../FeatureFlags';
 import { createOverflowHandler } from '@carbon/utilities';
 import { blockClass } from './utils';
 
@@ -134,41 +136,3 @@ export const PageHeaderBreadcrumbPageActions = ({
 };
 
 PageHeaderBreadcrumbPageActions.displayName = 'PageHeaderBreadcrumbPageActions';
-
-PageHeaderBreadcrumbPageActions.propTypes = {
-  /**
-   * Array of action items to display
-   */
-  actions: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired,
-      renderIcon: PropTypes.elementType.isRequired,
-      onClick: PropTypes.func,
-    }).isRequired
-  ).isRequired,
-  /**
-   * Kind of the action buttons
-   */
-  buttonKind: PropTypes.oneOf([
-    'primary',
-    'secondary',
-    'tertiary',
-    'ghost',
-    'danger',
-    'danger--tertiary',
-    'danger--ghost',
-  ]),
-  /**
-   * Size of the action buttons
-   */
-  buttonSize: PropTypes.oneOf(['sm', 'md', 'lg']),
-  /**
-   * Specify an optional className to be added to the component
-   */
-  className: PropTypes.string,
-  /**
-   * Aria label for the overflow menu
-   */
-  overflowMenuLabel: PropTypes.string,
-};

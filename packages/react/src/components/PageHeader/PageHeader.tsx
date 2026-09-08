@@ -7,9 +7,12 @@
 import React, { useState, useRef, RefObject, useEffect, useMemo } from 'react';
 import classnames from 'classnames';
 import { blockClass, getHeaderOffset } from './utils';
-import { PageHeaderContext, PageHeaderRefs } from './context';
-import { pkg } from '../../../settings';
-import { useResizeObserver } from '../../../global/js/hooks/useResizeObserver';
+import {
+  PageHeaderContext,
+  PageHeaderRefs,
+  PageHeaderObserverState,
+} from './context';
+import { usePrefix } from '../../internal/usePrefix';
 
 // Import separated child components
 import {
@@ -102,11 +105,13 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
     ref
   ) {
     const [refs, setRefs] = useState<PageHeaderRefs>({});
-    const [pageActionsInstance, setPageActionsInstance] =
-      useState<React.ReactNode | null>(null);
+    const [pageActionsInstance, setPageActionsInstance] = useState<
+      React.ReactNode | ((state: PageHeaderObserverState) => React.ReactNode)
+    >(null);
     const [disableStickyTabBar, setDisableStickyTabBar] = useState(false);
     const tempRef = useRef<HTMLDivElement>(null);
     const componentRef = (ref ?? tempRef) as RefObject<HTMLDivElement>;
+    const prefix = usePrefix();
     const classNames = classnames(
       {
         [`${blockClass}`]: true,
@@ -119,23 +124,34 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
 
     // Used to set CSS custom property with PageHeaderContent height to be used
     // for sticky positioning
-    useResizeObserver(componentRef, () => {
-      if (componentRef?.current) {
-        // It's possible we don't have the content element
-        // in which case we set it's height to 0
-        const pageHeaderContentHeight =
-          refs?.contentRef?.current?.offsetHeight ?? 0;
-        const totalHeaderOffset = getHeaderOffset(componentRef?.current);
-        componentRef?.current.style.setProperty(
-          `--${pkg.prefix}-page-header-header-top`,
-          `${(Math.round(pageHeaderContentHeight) - totalHeaderOffset) * -1}px`
-        );
-        componentRef?.current.style.setProperty(
-          `--${pkg.prefix}-page-header-breadcrumb-top`,
-          `${totalHeaderOffset}px`
-        );
+    useEffect(() => {
+      if (!componentRef?.current) {
+        return;
       }
-    });
+      const updateCssVars = () => {
+        if (componentRef?.current) {
+          // It's possible we don't have the content element
+          // in which case we set it's height to 0
+          const pageHeaderContentHeight =
+            refs?.contentRef?.current?.offsetHeight ?? 0;
+          const totalHeaderOffset = getHeaderOffset(componentRef.current);
+          componentRef.current.style.setProperty(
+            `--${prefix}-page-header-header-top`,
+            `${(Math.round(pageHeaderContentHeight) - totalHeaderOffset) * -1}px`
+          );
+          componentRef.current.style.setProperty(
+            `--${prefix}-page-header-breadcrumb-top`,
+            `${totalHeaderOffset}px`
+          );
+        }
+      };
+      const observer = new ResizeObserver(updateCssVars);
+      observer.observe(componentRef.current);
+      return () => {
+        observer.disconnect();
+      };
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [componentRef, prefix]);
 
     const [fullyCollapsed, setFullyCollapsed] = useState(false);
     const [titleClipped, setTitleClipped] = useState(false);

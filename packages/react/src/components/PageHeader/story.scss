@@ -1,0 +1,28 @@
+/**
+ * Copyright IBM Corp. 2025, 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+// PageHeader is PREVIEW — styles are NOT yet in the global bundle.
+// This file loads the component styles explicitly for Storybook.
+@use '@carbon/styles/scss/components/page-header';
+@use '@carbon/styles/scss/theme' as *;
+
+.sb-show-main,
+.docs-story {
+  /* stylelint-disable-next-line declaration-no-important */
+  background-color: $layer-01 !important;
+}
+
+// Storybook layout overrides
+.sb-show-main.sb-main-centered {
+  align-items: normal;
+}
+
+.sb-show-main.sb-main-centered #storybook-root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}

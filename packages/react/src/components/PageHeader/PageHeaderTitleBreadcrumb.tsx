@@ -6,14 +6,16 @@
  */
 import React, { forwardRef } from 'react';
 import classnames from 'classnames';
-import { BreadcrumbItemProps, BreadcrumbItem } from '@carbon/react';
+import { type BreadcrumbItemProps } from '../Breadcrumb/BreadcrumbItem';
+import BreadcrumbItem from '../BreadcrumbItem';
 import { usePageHeader } from './context';
-import { pkg } from '../../../settings';
+import { usePrefix } from '../../internal/usePrefix';
 
 export const PageHeaderTitleBreadcrumb = forwardRef<
   HTMLLIElement,
   BreadcrumbItemProps
 >(({ className, children, ...other }, ref) => {
+  const prefix = usePrefix();
   const { observerState, refs } = usePageHeader();
   const titleClipped = observerState.titleClipped;
   // Show title breadcrumb when:
@@ -33,12 +35,12 @@ export const PageHeaderTitleBreadcrumb = forwardRef<
       tabIndex={isAriaHidden ? -1 : undefined}
       className={classnames(
         className,
-        `${pkg.prefix}--page-header-title-breadcrumb`,
+        `${prefix}--page-header-title-breadcrumb`,
         {
-          [`${pkg.prefix}--page-header-title-breadcrumb-show`]: shouldShow,
-          [`${pkg.prefix}--page-header-title-breadcrumb-show__with-content-element`]:
+          [`${prefix}--page-header-title-breadcrumb-show`]: shouldShow,
+          [`${prefix}--page-header-title-breadcrumb-show__with-content-element`]:
             hasContentElement,
-          [`${pkg.prefix}--page-header-title-breadcrumb-show__without-content-element`]:
+          [`${prefix}--page-header-title-breadcrumb-show__without-content-element`]:
             !hasContentElement,
         }
       )}>

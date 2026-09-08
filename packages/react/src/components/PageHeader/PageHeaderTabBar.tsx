@@ -6,9 +6,9 @@
  */
 import React, { useEffect } from 'react';
 import classnames from 'classnames';
-import { Column, Grid } from '@carbon/react';
+import { Column, Grid } from '../Grid';
 import { blockClass } from './utils';
-import { pkg } from '../../../settings';
+import { usePrefix } from '../../internal/usePrefix';
 import { usePageHeader } from './context';
 
 /**
@@ -42,6 +42,7 @@ export const PageHeaderTabBar = React.forwardRef<
   ref
 ) {
   const { setDisableStickyTabBar, fullWidthGrid, narrowGrid } = usePageHeader();
+  const prefix = usePrefix();
 
   useEffect(() => {
     setDisableStickyTabBar?.(disableStickyTabBar);
@@ -56,7 +57,7 @@ export const PageHeaderTabBar = React.forwardRef<
 
   const renderScroller = () =>
     scroller && (
-      <div className={`${pkg.prefix}--page-header--scroller-button-container`}>
+      <div className={`${prefix}--page-header--scroller-button-container`}>
         {scroller}
       </div>
     );
@@ -81,8 +82,7 @@ export const PageHeaderTabBar = React.forwardRef<
         <Column lg={16} md={8} sm={4}>
           <div
             className={classnames(`${blockClass}__tab-bar--tablist`, {
-              [`${pkg.prefix}--page-header__tab-bar--with-scroller`]:
-                !!scroller,
+              [`${prefix}--page-header__tab-bar--with-scroller`]: !!scroller,
             })}>
             {children}
             {tags}
