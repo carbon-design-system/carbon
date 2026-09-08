@@ -16,6 +16,7 @@
 @use '../../utilities/convert';
 @use '../../utilities/custom-property';
 @use '../../utilities/focus-outline';
+@use '../../feature-flags' as *;
 
 @mixin toggletip() {
   .#{$prefix}--toggletip-label {
@@ -57,7 +58,11 @@
   .#{$prefix}--toggletip {
     @include custom-property.declaration(
       'popover-offset',
-      convert.to-rem(13px)
+      if(
+        enabled('enable-v12-release'),
+        convert.to-rem(4px),
+        convert.to-rem(13px)
+      )
     );
     @include custom-property.declaration(
       'popover-border-radius',

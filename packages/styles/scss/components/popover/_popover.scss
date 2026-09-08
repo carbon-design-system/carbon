@@ -354,7 +354,9 @@ $popover-caret-height: custom-property.get-var(
     ):not(.#{$prefix}--popover--tab-tip)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content {
-    inset-block-end: -$spacing-02;
+    @if not enabled('enable-v12-release') {
+      inset-block-end: -$spacing-02;
+    }
   }
 
   .#{$prefix}--popover--top:not(.#{$prefix}--popover--caret):not(
@@ -372,7 +374,9 @@ $popover-caret-height: custom-property.get-var(
     ):not(.#{$prefix}--popover--tab-tip)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content {
-    inset-block-start: -$spacing-02;
+    @if not enabled('enable-v12-release') {
+      inset-block-start: -$spacing-02;
+    }
   }
 
   .#{$prefix}--popover--top-start:not(.#{$prefix}--popover--caret):not(
@@ -415,7 +419,11 @@ $popover-caret-height: custom-property.get-var(
     ):not(.#{$prefix}--popover--tab-tip)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content {
-    inset-inline-start: calc(100% + $spacing-02);
+    @if enabled('enable-v12-release') {
+      inset-inline-start: calc(100%);
+    } @else {
+      inset-inline-start: calc(100% + $spacing-02);
+    }
   }
 
   .#{$prefix}--popover--left:not(.#{$prefix}--popover--caret):not(
@@ -433,7 +441,11 @@ $popover-caret-height: custom-property.get-var(
     ):not(.#{$prefix}--popover--tab-tip)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content {
-    inset-inline-end: calc(100% + $spacing-02);
+    @if enabled('enable-v12-release') {
+      inset-inline-end: calc(100%);
+    } @else {
+      inset-inline-end: calc(100% + $spacing-02);
+    }
   }
 
   .#{$prefix}--popover--bottom:not(.#{$prefix}--popover--auto-align):dir(rtl)

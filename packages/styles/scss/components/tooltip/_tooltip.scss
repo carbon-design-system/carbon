@@ -17,6 +17,7 @@
 @use '../../utilities/convert';
 @use '../../utilities/button-reset';
 @use '../../utilities/focus-outline';
+@use '../../feature-flags' as *;
 
 $tooltip-padding-block: custom-property.get-var(
   'tooltip-padding-block',
@@ -30,7 +31,10 @@ $tooltip-padding-inline: custom-property.get-var(
 
 @mixin tooltip {
   .#{$prefix}--tooltip {
-    @include custom-property.declaration('popover-offset', 12px);
+    @include custom-property.declaration(
+      'popover-offset',
+      if(enabled('enable-v12-release'), convert.to-rem(4px), 12px)
+    );
     @include custom-property.declaration(
       'popover-border-radius',
       if(enabled('enable-v12-release'), $border-radius-04, 2px)
