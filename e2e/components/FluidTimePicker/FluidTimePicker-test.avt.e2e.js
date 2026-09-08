@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -53,14 +53,6 @@ test.describe('@avt FluidTimePicker', () => {
     await inputTime.fill('11:45');
     await expect(inputTime).toHaveValue('11:45');
 
-    // Checking info icon
-    await page.keyboard.press('Tab');
-    await expect(page.getByLabel('Show information').first()).toBeFocused();
-    await page.keyboard.press('Enter');
-    await expect(
-      page.getByLabel('Additional field information here.').first()
-    ).toBeVisible();
-
     // Checking select time interaction
     await page.keyboard.press('Tab');
     const selectTime = page.locator('#select-1');
@@ -74,5 +66,14 @@ test.describe('@avt FluidTimePicker', () => {
     await page.keyboard.press('Space');
     await selectTimeZone.selectOption('et');
     await expect(selectTimeZone).toHaveValue('et');
+
+    // Checking info icon
+    await selectTimeZone.focus();
+    await page.keyboard.press('Tab');
+    await expect(page.getByLabel('Show information').first()).toBeFocused();
+    await page.keyboard.press('Enter');
+    await expect(
+      page.getByText('Additional field information here.').first()
+    ).toBeVisible();
   });
 });
