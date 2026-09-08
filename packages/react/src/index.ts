@@ -774,5 +774,8 @@ export type { SwitcherItemProps } from './components/UIShell/SwitcherItem';
 // export type { TruncatedTextProps } from './components/TruncatedText';
 // export * from './components/UserAvatar';
 
+// TODO: uncomment in v12 — also remove from excludeProductsComponents
+// export * from './components/Tearsheet';
+
 //unordered list
 export type { UnorderedListProps } from './components/UnorderedList/UnorderedList';

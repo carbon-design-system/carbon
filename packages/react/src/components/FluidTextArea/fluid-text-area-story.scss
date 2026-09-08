@@ -1,0 +1,19 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/spacing' as *;
+
+.fluid-text-area-story {
+  position: relative;
+}
+
+.fluid-text-area-story__toggletip {
+  position: absolute;
+  z-index: 2;
+  inset-block-start: $spacing-04;
+  inset-inline-start: calc(6.75rem + $spacing-03);
+}

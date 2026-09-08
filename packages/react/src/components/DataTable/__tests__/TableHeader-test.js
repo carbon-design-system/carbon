@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2023
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,6 +9,9 @@ import React from 'react';
 import { Table, TableHead, TableRow, TableHeader } from '../';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
+import { AILabel } from '../../AILabel';
+
+const prefix = 'cds';
 
 describe('TableHeader', () => {
   describe('renders as expected - Component API', () => {
@@ -132,6 +135,91 @@ describe('TableHeader', () => {
       expect(screen.getByTestId('test-id')).toHaveClass('cds--table-sort');
     });
 
+    it('should not allow interactive content in children when sortable', () => {
+      const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+      expect(() => {
+        render(
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableHeader isSortable>
+                  Header <button type="button">Help</button>
+                </TableHeader>
+              </TableRow>
+            </TableHead>
+          </Table>
+        );
+      }).toThrow(
+        'The TableHeader component `children` prop must have no interactive content when `isSortable` is true'
+      );
+
+      spy.mockRestore();
+    });
+
+    it('should allow non-interactive content in children when sortable', () => {
+      expect(() => {
+        render(
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableHeader isSortable>
+                  Header <span>additional header content</span>
+                </TableHeader>
+              </TableRow>
+            </TableHead>
+          </Table>
+        );
+      }).not.toThrow();
+    });
+
+    it('should not render the decorator inside the sort button', () => {
+      const { container } = render(
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableHeader decorator={<AILabel />} isSortable>
+                Header
+              </TableHeader>
+            </TableRow>
+          </TableHead>
+        </Table>
+      );
+
+      expect(
+        container.querySelector(`.${prefix}--table-sort`)
+      ).not.toContainElement(
+        screen.getByRole('button', {
+          name: 'AI Show information',
+        })
+      );
+    });
+
+    it('should position the deprecated slug outside the sort button', () => {
+      const { container } = render(
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableHeader slug={<AILabel />} isSortable>
+                Header
+              </TableHeader>
+            </TableRow>
+          </TableHead>
+        </Table>
+      );
+
+      expect(container.querySelector('th')).toHaveClass(
+        `${prefix}--table-sort__header--slug`
+      );
+      expect(
+        container.querySelector(`.${prefix}--table-sort`)
+      ).not.toContainElement(
+        screen.getByRole('button', {
+          name: 'AI Show information',
+        })
+      );
+    });
+
     it('should respect scope prop', () => {
       render(
         <Table>
@@ -184,6 +272,28 @@ describe('TableHeader', () => {
 
       await userEvent.click(screen.getByRole('button'), 'test');
       expect(onClick).toHaveBeenCalled();
+    });
+
+    it('should not call onClick when clicking the decorator', async () => {
+      const onClick = jest.fn();
+      render(
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableHeader decorator={<AILabel />} isSortable onClick={onClick}>
+                Header
+              </TableHeader>
+            </TableRow>
+          </TableHead>
+        </Table>
+      );
+
+      await userEvent.click(
+        screen.getByRole('button', {
+          name: 'AI Show information',
+        })
+      );
+      expect(onClick).not.toHaveBeenCalled();
     });
   });
 });
