@@ -12,8 +12,9 @@
  *
  * Reads:  src/dtcg/colors.json
  * Writes:
- *   - src/colors.ts        (TypeScript source, consumed by carbon-cli bundle)
- *   - index.scss           (generated Sass variables + $colors map)
+ *   - js/generated/colors.js    (CJS module, consumed by src/index.ts → bundle)
+ *   - js/generated/colors.d.ts  (TypeScript declarations)
+ *   - index.scss                (generated Sass variables + $colors map)
  */
 
 const path = require('path');
