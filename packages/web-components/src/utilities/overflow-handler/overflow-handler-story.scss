@@ -1,0 +1,212 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:math';
+@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/type';
+
+.overflow-handler-container {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  box-sizing: border-box;
+  background: theme.$highlight;
+  max-inline-size: 100%;
+}
+
+.overflow-handler-container [data-hidden]:not([data-fixed]) {
+  display: none;
+}
+
+.overflow-handler-container::before,
+.overflow-handler-container::after {
+  content: none;
+}
+
+.overflow-handler-show-gap {
+  background: color-mix(in srgb, #{theme.$support-warning} 35%, transparent);
+}
+
+.overflow-handler-show-gap::after {
+  flex: 1 1 auto;
+  background: theme.$highlight;
+  content: '';
+  min-block-size: 0;
+  min-inline-size: 0;
+  pointer-events: none;
+}
+
+.overflow-handler-show-offset-value::before {
+  position: absolute;
+  z-index: 0;
+  background: theme.$support-info;
+  content: '';
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.overflow-handler-container-horizontal {
+  flex-direction: row;
+  inline-size: 100%;
+  resize: horizontal;
+}
+
+.overflow-handler-container-horizontal.overflow-handler-show-offset-value::before {
+  inline-size: var(--overflow-handler-offset-value, 0);
+  inset-block: 0;
+  inset-inline-end: 0;
+}
+
+.overflow-handler-container-horizontal.overflow-handler-show-gap::after {
+  margin-inline-start: calc(-1 * var(--overflow-handler-gap, 0));
+}
+
+.overflow-handler-container-vertical {
+  flex-direction: column;
+  block-size: 14rem;
+  inline-size: 12.5rem;
+  resize: vertical;
+}
+
+.overflow-handler-container-vertical.overflow-handler-show-offset-value::before {
+  block-size: var(--overflow-handler-offset-value, 0);
+  inset-block-end: 0;
+  inset-inline: 0;
+}
+
+.overflow-handler-container-vertical.overflow-handler-show-gap::after {
+  margin-block-start: calc(-1 * var(--overflow-handler-gap, 0));
+}
+
+.overflow-handler-item {
+  @include type.type-style('code-01');
+
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  background: theme.$layer-accent;
+  white-space: nowrap;
+}
+
+.overflow-handler-container-horizontal .overflow-handler-item {
+  padding: 0 spacing.$spacing-04;
+  block-size: spacing.$spacing-07;
+  line-height: spacing.$spacing-07;
+}
+
+.overflow-handler-container-vertical .overflow-handler-item {
+  padding: math.div(spacing.$spacing-04, 2) spacing.$spacing-04;
+  inline-size: 100%;
+}
+
+.overflow-handler-item-fixed {
+  background: theme.$support-success;
+  color: theme.$text-on-color;
+}
+
+.overflow-handler-offset {
+  @include type.type-style('code-01');
+
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  border: 0;
+  margin: 0;
+  background: var(--cds-button-secondary);
+  color: theme.$text-on-color;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.overflow-handler-container-horizontal .overflow-handler-offset {
+  padding: 0 spacing.$spacing-04;
+  block-size: spacing.$spacing-07;
+  line-height: spacing.$spacing-07;
+}
+
+.overflow-handler-container-vertical .overflow-handler-offset {
+  padding: math.div(spacing.$spacing-04, 2) spacing.$spacing-04;
+  inline-size: 100%;
+}
+
+.overflow-handler-legend {
+  @include type.type-style('code-01');
+
+  display: flex;
+  flex-wrap: wrap;
+  color: theme.$text-secondary;
+  gap: spacing.$spacing-05;
+  margin-block-start: spacing.$spacing-04;
+}
+
+.overflow-handler-legend-offset {
+  display: none;
+}
+
+.overflow-handler-demo:has([data-offset]:not([data-hidden]))
+  .overflow-handler-legend-offset {
+  display: revert;
+}
+
+.overflow-handler-swatch {
+  display: inline-block;
+  flex-shrink: 0;
+  block-size: spacing.$spacing-04;
+  inline-size: spacing.$spacing-04;
+  margin-inline-end: math.div(spacing.$spacing-04, 2);
+  vertical-align: middle;
+}
+
+.overflow-handler-swatch-regular {
+  background: theme.$layer-accent;
+}
+
+.overflow-handler-swatch-fixed {
+  background: theme.$support-success;
+}
+
+.overflow-handler-swatch-offset {
+  background: var(--cds-button-secondary);
+}
+
+.overflow-handler-swatch-available {
+  background: theme.$highlight;
+}
+
+.overflow-handler-swatch-gap {
+  background: theme.$support-warning;
+  opacity: 0.35;
+}
+
+.overflow-handler-swatch-offset-value {
+  background: theme.$support-info;
+  opacity: 0.6;
+}
+
+.overflow-handler-log {
+  @include type.type-style('code-01');
+
+  padding: 0;
+  background: none;
+  color: theme.$text-secondary;
+
+  margin-block-start: spacing.$spacing-04;
+  white-space: pre-wrap;
+}
+
+.overflow-handler-instance {
+  border-block-start: 1px solid theme.$border-subtle;
+  margin-block-start: spacing.$spacing-06;
+  padding-block-start: spacing.$spacing-06;
+}
+
+.overflow-handler-instance:first-of-type {
+  border-block-start: none;
+  margin-block-start: spacing.$spacing-04;
+  padding-block-start: 0;
+}

@@ -1,0 +1,21 @@
+//
+// Copyright IBM Corp. 2024, 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Story-specific layout styles for UserAvatar.
+// Component styles are provided globally through @carbon/styles.
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+
+.theme-section {
+  padding: $spacing-05;
+  background: $background;
+  color: $text-primary;
+}
+
+.theme-text {
+  margin-block-end: $spacing-03;
+}

@@ -1,9 +1,12 @@
+# Purpose: Collect reproducible implementation bugs in a structured format.
+# GitHub assigns the formal Bug type, which is the metadata and Bob automation
+# gate; the legacy "needs triage" label is intentionally not applied.
 name: Bug report 🐛
 description:
   Something not working as expected? This is the place to report your issue.
 title: '[Bug]: '
 type: 'bug'
-labels: ['type: bug 🐛', 'status: needs triage :female_detective:']
+labels: ['type: bug 🐛']
 body:
   - type: markdown
     attributes:
@@ -89,24 +92,27 @@ body:
       required: true
   - type: dropdown
     id: severity
+    # The automation reads the "Suggested Severity" heading and the numeric
+    # value in each option. Keep both stable if the surrounding copy changes.
     attributes:
       label: Suggested Severity
       description:
         'Read more to understand our [severity
         levels](https://github.com/carbon-design-system/carbon/blob/main/docs/guides/support.md#severity)'
       options:
-        # NOTE: The text in these options is used to automatically label the
-        # issue with the appropriate severity label. If these are modified,
-        # .github/labeler.yml must be updated as well.
-        - 'Severity 1 = Must be fixed ASAP. The response must be swift. Someone
-          from the team must drop all current work and be immediately reassigned
-          to address the issue.'
-        - 'Severity 2 = User cannot complete task, and/or no workaround within
-          the user experience of a given component.'
-        - 'Severity 3 = User can complete task, and/or has a workaround within
-          the user experience of a given component.'
-        - 'Severity 4 = Unrelated to a user task, has a workaround or does not
-          need a workaround.'
+        - 'Critical (Severity 1) = Must be fixed ASAP. The response must be
+          swift. Someone from the team must drop all current work and be
+          immediately reassigned to address the issue.'
+        - 'High (Severity 2) = User cannot complete task, and/or no workaround
+          within the user experience of a given component.'
+        - 'Medium (Severity 3) = User can complete task, and/or has a workaround
+          within the user experience of a given component.'
+        - 'Low (Severity 4) = Unrelated to a user task, has a workaround or does
+          not need a workaround.'
+    validations:
+      # Required suggestions let automation initialize an empty Severity field
+      # without treating the reporter's choice as a permanent maintainer value.
+      required: true
   - type: input
     id: project
     attributes:

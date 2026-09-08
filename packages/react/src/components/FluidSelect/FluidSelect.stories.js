@@ -8,16 +8,12 @@
 import React from 'react';
 import { FluidSelect, FluidSelectSkeleton } from '.';
 import SelectItem from '../SelectItem';
-import {
-  ToggletipLabel,
-  Toggletip,
-  ToggletipButton,
-  ToggletipContent,
-} from '../Toggletip';
+import { Toggletip, ToggletipButton, ToggletipContent } from '../Toggletip';
 import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { Information, View, FolderOpen, Folders } from '@carbon/icons-react';
+import './fluid-select-story.scss';
 import mdx from './FluidSelect.mdx';
 
 export default {
@@ -69,6 +65,14 @@ const sharedArgTypes = {
       type: 'text',
     },
   },
+  onChange: {
+    action: 'onChange',
+  },
+  readOnly: {
+    control: {
+      type: 'boolean',
+    },
+  },
   warn: {
     control: {
       type: 'boolean',
@@ -81,22 +85,37 @@ const sharedArgTypes = {
   },
 };
 
-const ToggleTip = (
-  <>
-    <ToggletipLabel>Select an option</ToggletipLabel>
-    <Toggletip align="top-left">
-      <ToggletipButton label="Show information">
-        <Information />
-      </ToggletipButton>
-      <ToggletipContent>
-        <p>Additional field information here.</p>
-      </ToggletipContent>
-    </Toggletip>
-  </>
-);
+const sharedArgs = {
+  className: 'test-class',
+  disabled: false,
+  invalid: false,
+  invalidText:
+    'Error message that is really long can wrap to more lines but should not be excessively long.',
+  labelText: 'Select an option',
+  readOnly: false,
+  warn: false,
+  warnText:
+    'Warning message that is really long can wrap to more lines but should not be excessively long.',
+};
+
+const sharedControls = Object.keys(sharedArgTypes);
+const widthArgType = {
+  control: { type: 'range', min: 300, max: 800, step: 50 },
+};
 
 export const Default = ({ defaultWidth, ...selectArgs }) => (
-  <div style={{ width: defaultWidth }}>
+  <div className="fluid-select-story" style={{ width: defaultWidth }}>
+    {/* Keep the toggletip outside `labelText`; interactive content is invalid in labels. */}
+    <span className="fluid-select-story__toggletip">
+      <Toggletip align="top-left">
+        <ToggletipButton label="Show information">
+          <Information />
+        </ToggletipButton>
+        <ToggletipContent>
+          <p>Additional field information here.</p>
+        </ToggletipContent>
+      </Toggletip>
+    </span>
     <FluidSelect {...selectArgs} id="select-1">
       <SelectItem value="" text="" />
       <SelectItem value="option-1" text="Option 1" />
@@ -108,23 +127,17 @@ export const Default = ({ defaultWidth, ...selectArgs }) => (
 );
 
 Default.args = {
-  labelText: ToggleTip,
+  ...sharedArgs,
   defaultWidth: 400,
-  className: 'test-class',
-  disabled: false,
-  invalid: false,
-  invalidText:
-    'Error message that is really long can wrap to more lines but should not be excessively long.',
-  warn: false,
-  warnText:
-    'Warning message that is really long can wrap to more lines but should not be excessively long.',
 };
 
 Default.argTypes = {
   ...sharedArgTypes,
-  defaultWidth: {
-    control: { type: 'range', min: 300, max: 800, step: 50 },
-  },
+  defaultWidth: widthArgType,
+};
+
+Default.parameters = {
+  controls: { include: [...sharedControls, 'defaultWidth'] },
 };
 
 const aiLabel = (
@@ -158,13 +171,13 @@ const aiLabel = (
   </AILabel>
 );
 
-export const withAILabel = (args) => (
-  <div style={{ width: 400 }}>
+export const withAILabel = ({ defaultWidth, ...selectArgs }) => (
+  <div style={{ width: defaultWidth }}>
     <FluidSelect
       id="select-1"
       labelText="Select an option"
       decorator={aiLabel}
-      {...args}>
+      {...selectArgs}>
       <SelectItem value="" text="" />
       <SelectItem
         value="An example option that is really long to show what should be done to handle long text"
@@ -177,10 +190,34 @@ export const withAILabel = (args) => (
   </div>
 );
 
-withAILabel.argTypes = { ...sharedArgTypes };
+withAILabel.args = {
+  ...sharedArgs,
+  defaultWidth: 400,
+};
 
-export const Skeleton = () => (
-  <div style={{ width: 400 }}>
+withAILabel.argTypes = {
+  ...sharedArgTypes,
+  defaultWidth: widthArgType,
+};
+
+withAILabel.parameters = {
+  controls: { include: [...sharedControls, 'defaultWidth'] },
+};
+
+export const Skeleton = ({ defaultWidth }) => (
+  <div style={{ width: defaultWidth }}>
     <FluidSelectSkeleton />
   </div>
 );
+
+Skeleton.args = {
+  defaultWidth: 400,
+};
+
+Skeleton.argTypes = {
+  defaultWidth: widthArgType,
+};
+
+Skeleton.parameters = {
+  controls: { include: ['defaultWidth'] },
+};

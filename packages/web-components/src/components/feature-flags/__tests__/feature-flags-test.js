@@ -254,4 +254,105 @@ describe('feature-flag', function () {
     const child = el.querySelector('#child');
     expect(isFeatureFlagEnabled('enable-dialog-element', child)).to.be.false;
   });
+
+  it('should update nested scope when a parent attribute changes', async () => {
+    const el = await fixture(html`
+      <feature-flags enable-dialog-element="false">
+        <feature-flags>
+          <div id="child"></div>
+        </feature-flags>
+      </feature-flags>
+    `);
+    const child = el.querySelector('#child');
+    expect(isFeatureFlagEnabled('enable-dialog-element', child)).to.be.false;
+
+    el.setAttribute('enable-dialog-element', 'true');
+    await el.updateComplete;
+
+    expect(isFeatureFlagEnabled('enable-dialog-element', child)).to.be.true;
+  });
+
+  describe('notification', function () {
+    let originalConsoleInfo;
+    let infoCalls;
+
+    beforeEach(() => {
+      infoCalls = [];
+      originalConsoleInfo = console.info;
+      console.info = (...args) => {
+        infoCalls.push(args.join(' '));
+      };
+    });
+
+    afterEach(() => {
+      console.info = originalConsoleInfo;
+    });
+
+    it('should call console.info when a v12 flag is available but not enabled', async () => {
+      const el = await fixture(html`
+        <feature-flags>
+          <div id="child"></div>
+        </feature-flags>
+      `);
+      const child = el.querySelector('#child');
+      isFeatureFlagEnabled('enable-v12-overflowmenu', child);
+      expect(infoCalls.some((msg) => msg.includes('enable-v12-overflowmenu')))
+        .to.be.true;
+    });
+
+    it('should not call console.info when a v12 flag is enabled', async () => {
+      const el = await fixture(html`
+        <feature-flags enable-v12-overflowmenu>
+          <div id="child"></div>
+        </feature-flags>
+      `);
+      const child = el.querySelector('#child');
+      isFeatureFlagEnabled('enable-v12-overflowmenu', child);
+      expect(infoCalls.some((msg) => msg.includes('enable-v12-overflowmenu')))
+        .to.be.false;
+    });
+
+    it('should not call console.info for non-v12 flags', async () => {
+      const el = await fixture(html`
+        <feature-flags>
+          <div id="child"></div>
+        </feature-flags>
+      `);
+      const child = el.querySelector('#child');
+      isFeatureFlagEnabled('enable-dialog-element', child);
+      expect(infoCalls.length).to.equal(0);
+    });
+  });
+
+  describe('each supported attribute', function () {
+    const flags = [
+      'enable-v12-release',
+      'enable-v12-tile-default-icons',
+      'enable-v12-tile-radio-icons',
+      'enable-v12-overflowmenu',
+      'enable-v12-dynamic-floating-styles',
+      'enable-v12-toggle-reduced-label-spacing',
+      'enable-treeview-controllable',
+      'enable-dialog-element',
+      'enable-focus-wrap-without-sentinels',
+      'enable-experimental-focus-wrap-without-sentinels',
+    ];
+
+    flags.forEach((flag) => {
+      it(`${flag} should default to false and enable when set`, async () => {
+        const el = await fixture(html`
+          <feature-flags>
+            <div id="child"></div>
+          </feature-flags>
+        `);
+        const child = el.querySelector('#child');
+        expect(isFeatureFlagEnabled(flag, child)).to.be.false;
+
+        el.setAttribute(flag, '');
+        await el.updateComplete;
+
+        expect(isFeatureFlagEnabled(flag, child)).to.be.true;
+      });
+    });
+  });
 });

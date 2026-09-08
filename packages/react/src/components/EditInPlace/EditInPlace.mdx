@@ -1,0 +1,43 @@
+import { Controls, Canvas, Story, Meta } from '@storybook/addon-docs/blocks';
+import * as EditInPlaceStories from './EditInPlace.stories';
+
+<Meta isTemplate />
+
+# EditInPlace
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+  - [Default](#default)
+  - [Invalid](#invalid)
+  - [Custom Blur Function](#custom-blur-function)
+  - [Read Only](#read-only)
+- [Component API](#component-api)
+
+## Overview
+
+`EditInPlace` allows users to to edit text inline with save and cancel actions.
+It provides a seamless editing experience with keyboard support and validation.
+
+## Example usage
+
+### Default
+
+<Canvas of={EditInPlaceStories.Default} />
+
+### Invalid
+
+<Canvas of={EditInPlaceStories.Invalid} />
+
+### Custom Blur Function
+
+<Canvas of={EditInPlaceStories.CustomBlurFunction} />
+
+### Read Only
+
+<Canvas of={EditInPlaceStories.ReadOnly} />
+
+## Component API
+
+<Controls />

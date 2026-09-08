@@ -53,6 +53,7 @@ export const parameters = {
           'Welcome',
           'Getting started',
           'Feature Flags',
+          'Changelog',
           'Custom styles',
           'Carbon CDN style helpers',
           'Form participation',

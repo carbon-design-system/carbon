@@ -24,7 +24,7 @@ export interface FormLabelProps
   className?: string;
 
   /**
-   * Provide a unique id for the given <FormLabel>
+   * Provide a unique id for the given `FormLabel`
    */
   id?: string;
 }
@@ -61,7 +61,7 @@ FormLabel.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Provide a unique id for the given <FormLabel>
+   * Provide a unique id for the given `FormLabel`
    */
   id: PropTypes.string,
 };

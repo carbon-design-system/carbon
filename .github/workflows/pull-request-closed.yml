@@ -1,13 +1,15 @@
 # https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows#force-deleting-cache-entries
 name: Pull request closed
 on:
-  pull_request:
+  pull_request_target:
     types:
       - closed
 
 jobs:
   cleanup:
     runs-on: ubuntu-latest
+    permissions:
+      actions: write
     steps:
       - name: Cleanup up branch cache
         run: |
@@ -32,6 +34,7 @@ jobs:
     if: github.event.pull_request.merged == true
     permissions:
       issues: write
+      pull-requests: write
     runs-on: ubuntu-latest
     steps:
       - name: Comment the schedule release

@@ -83,6 +83,32 @@ describe('@carbon/feature-flags', () => {
       expect(FeatureFlags.enabled('enable-not-v12-example')).toBe(false);
     });
 
+    it('should enable unprefixed v12 flags when the v12 release flag is enabled', () => {
+      FeatureFlags.merge({
+        'enable-v12-release': true,
+        'enable-focus-wrap-without-sentinels': false,
+      });
+
+      expect(FeatureFlags.enabled('enable-focus-wrap-without-sentinels')).toBe(
+        true
+      );
+    });
+
+    it('should not enable the deprecated experimental flags via the v12 release flag', () => {
+      FeatureFlags.merge({
+        'enable-v12-release': true,
+        'enable-experimental-tile-contrast': false,
+        'enable-experimental-focus-wrap-without-sentinels': false,
+      });
+
+      expect(FeatureFlags.enabled('enable-experimental-tile-contrast')).toBe(
+        false
+      );
+      expect(
+        FeatureFlags.enabled('enable-experimental-focus-wrap-without-sentinels')
+      ).toBe(false);
+    });
+
     it('should allow v12 flags to be enabled independently of the v12 release flag', () => {
       FeatureFlags.merge({
         'enable-v12-release': false,
@@ -119,6 +145,83 @@ describe('@carbon/feature-flags', () => {
 
       expect(FeatureFlags.enabled('flag-a')).toBe(true);
       expect(FeatureFlags.enabled('flag-b')).toBe(false);
+    });
+  });
+
+  describe('notifyAvailableFlag', () => {
+    let info;
+    let notifyAvailableFlag;
+
+    beforeEach(() => {
+      ({ notifyAvailableFlag } = FeatureFlags);
+      info = jest.spyOn(console, 'info').mockImplementation(() => {});
+    });
+
+    afterEach(() => {
+      info.mockRestore();
+    });
+
+    it('should notify when a v12 flag is available but not enabled', () => {
+      notifyAvailableFlag('enable-v12-example', false);
+
+      expect(info).toHaveBeenCalledTimes(1);
+      expect(info.mock.calls[0][0]).toContain('enable-v12-example');
+    });
+
+    it('should only notify once per flag', () => {
+      notifyAvailableFlag('enable-v12-example', false);
+      notifyAvailableFlag('enable-v12-example', false);
+      notifyAvailableFlag('enable-v12-example', false);
+
+      expect(info).toHaveBeenCalledTimes(1);
+    });
+
+    it('should not notify when the flag is already enabled', () => {
+      notifyAvailableFlag('enable-v12-example', true);
+
+      expect(info).not.toHaveBeenCalled();
+    });
+
+    it('should not notify for non-v12 flags', () => {
+      notifyAvailableFlag('enable-example', false);
+
+      expect(info).not.toHaveBeenCalled();
+    });
+
+    it('should not notify for the release flag itself', () => {
+      notifyAvailableFlag('enable-v12-release', false);
+
+      expect(info).not.toHaveBeenCalled();
+    });
+
+    it('should include the flag description when there is one', () => {
+      notifyAvailableFlag('enable-v12-overflowmenu', false);
+
+      expect(info.mock.calls[0][0]).toContain('Menu subcomponents');
+    });
+
+    it('should point at the release flag, which enables every v12 flag', () => {
+      notifyAvailableFlag('enable-v12-overflowmenu', false);
+
+      expect(info.mock.calls[0][0]).toContain(
+        'enable `enable-v12-release` to turn on every v12 flag'
+      );
+    });
+
+    it.each(['enable-focus-wrap-without-sentinels'])(
+      'should notify for the unprefixed v12 flag %s',
+      (flag) => {
+        notifyAvailableFlag(flag, false);
+
+        expect(info).toHaveBeenCalledTimes(1);
+        expect(info.mock.calls[0][0]).toContain(flag);
+      }
+    );
+
+    it('should stay silent for an unprefixed v12 flag that is enabled', () => {
+      notifyAvailableFlag('enable-focus-wrap-without-sentinels', true);
+
+      expect(info).not.toHaveBeenCalled();
     });
   });
 });

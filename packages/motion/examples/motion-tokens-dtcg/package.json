@@ -1,0 +1,15 @@
+{
+  "name": "motion-tokens-dtcg",
+  "private": true,
+  "scripts": {
+    "develop": "next",
+    "build": "next build"
+  },
+  "dependencies": {
+    "@carbon/motion": "link:../../",
+    "next": "^16.2.6",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
+    "sass": "^1.36.0"
+  }
+}

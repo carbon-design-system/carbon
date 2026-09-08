@@ -132,7 +132,8 @@
   color: $text-primary;
   cursor: auto;
 
-  &:hover {
+  &:hover,
+  &:active:not(.#{$prefix}--link--disabled) {
     text-decoration: none;
   }
 }
@@ -141,7 +142,8 @@
   color: $text-primary;
   cursor: auto;
 
-  &:hover {
+  &:hover,
+  &:active:not(.#{$prefix}--link--disabled) {
     text-decoration: none;
   }
 }

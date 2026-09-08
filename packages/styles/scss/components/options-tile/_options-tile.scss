@@ -1,0 +1,240 @@
+//
+// Copyright IBM Corp. 2021, 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Options tile
+//-----------------------------
+
+@use '../../config' as *;
+@use '../../theme' as *;
+@use '../../type';
+@use '../../spacing' as *;
+@use '../../motion' as *;
+@use '../../utilities/focus-outline';
+@use '../../utilities/visually-hidden';
+
+/// Options tile styles
+/// @access public
+/// @group options-tile
+@mixin options-tile {
+  .#{$prefix}--options-tile {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    background-color: $layer;
+    border-block-end: 1px solid $border-subtle;
+  }
+
+  .#{$prefix}--options-tile__toggle-container {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: calc(#{$spacing-05} + 2rem + #{$spacing-05});
+
+    inset-block: 0;
+    inset-inline-end: 0;
+    padding-inline-end: $spacing-05;
+    padding-inline-start: $spacing-05;
+  }
+
+  .#{$prefix}--options-tile__toggle {
+    position: absolute;
+  }
+
+  .#{$prefix}--options-tile__toggle
+    .#{$prefix}--toggle-input__label
+    .#{$prefix}--toggle__switch {
+    margin: 0;
+  }
+
+  .#{$prefix}--options-tile__toggle .#{$prefix}--toggle__label-text {
+    @include visually-hidden.visually-hidden;
+  }
+
+  .#{$prefix}--options-tile__details {
+    display: inline-flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .#{$prefix}--options-tile__header,
+  .#{$prefix}--options-tile__static-content {
+    display: grid;
+    box-sizing: border-box;
+    align-items: center;
+    grid-template-columns: 3rem 1fr 0;
+    padding-inline-end: $spacing-05;
+  }
+
+  .#{$prefix}--options-tile__header {
+    flex-grow: 1;
+    background-color: transparent;
+    cursor: pointer;
+    inline-size: 100%;
+    transition: background-color $duration-fast-01 motion(entrance, productive);
+
+    &--has-toggle {
+      inline-size: calc(100% - (#{$spacing-05} + 2rem + #{$spacing-05}));
+    }
+  }
+
+  .#{$prefix}--options-tile__header::-webkit-details-marker {
+    display: none;
+  }
+
+  .#{$prefix}--options-tile__header:hover {
+    background-color: $background-hover;
+  }
+
+  .#{$prefix}--options-tile__header:has(
+      .#{$prefix}--options-tile__toggle-container:hover
+    ) {
+    background-color: transparent;
+  }
+
+  .#{$prefix}--options-tile__header:focus {
+    @include focus-outline.focus-outline('outline');
+  }
+
+  .#{$prefix}--options-tile__heading {
+    grid-column: 2;
+  }
+
+  .#{$prefix}--options-tile__title {
+    @include type.type-style('productive-heading-01');
+
+    color: $text-primary;
+  }
+
+  .#{$prefix}--options-tile__summary {
+    @include type.type-style('helper-text-01');
+
+    display: grid;
+    block-size: $spacing-05;
+    color: $text-secondary;
+    margin-block-start: $spacing-02;
+    opacity: 1;
+    transition-duration: $duration-moderate-01;
+    transition-property: height, opacity, margin-top;
+    transition-timing-function: motion(standard, productive);
+  }
+
+  .#{$prefix}--options-tile__summary--invalid,
+  .#{$prefix}--options-tile__summary--warn,
+  .#{$prefix}--options-tile__summary--locked {
+    column-gap: $spacing-02;
+    grid-template-columns: 1rem 1fr;
+  }
+
+  .#{$prefix}--options-tile__summary--invalid {
+    color: $support-error;
+  }
+
+  .#{$prefix}--options-tile__summary--warn {
+    color: $text-primary;
+  }
+
+  .#{$prefix}--options-tile__summary--warn svg {
+    color: $support-warning;
+  }
+
+  .#{$prefix}--options-tile__summary--warn svg path[fill='none'] {
+    fill: #000000;
+  }
+
+  .#{$prefix}--options-tile__summary-text {
+    overflow: hidden;
+    block-size: max-content;
+    padding-inline-end: $spacing-05;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .#{$prefix}--options-tile__chevron {
+    display: block;
+    justify-self: center;
+    transition: transform $duration-fast-02 motion(standard, productive);
+  }
+
+  .#{$prefix}--options-tile__content {
+    padding-inline: $spacing-09 $spacing-05;
+  }
+
+  .#{$prefix}--options-tile__content
+    > .#{$prefix}--fieldset
+    > .#{$prefix}--label:empty {
+    display: none;
+  }
+
+  .#{$prefix}--options-tile--closing .#{$prefix}--options-tile__content {
+    overflow: hidden;
+  }
+
+  .#{$prefix}--options-tile__summary.#{$prefix}--options-tile__summary--open:not(
+      .#{$prefix}--options-tile__summary--closing
+    ),
+  .#{$prefix}--options-tile__summary--hidden {
+    block-size: 0;
+    margin-block-start: 0;
+    opacity: 0;
+  }
+
+  .#{$prefix}--options-tile__chevron.#{$prefix}--options-tile__chevron--open:not(
+      .#{$prefix}--options-tile__chevron--closing
+    ) {
+    transform: rotate(180deg);
+  }
+
+  .#{$prefix}--options-tile > details[open] .#{$prefix}--options-tile__content {
+    padding-block: $spacing-03 $spacing-06;
+  }
+
+  .#{$prefix}--options-tile__locked-text {
+    @include type.type-style('body-long-01');
+
+    display: inline-flex;
+    align-items: center;
+    color: $text-secondary;
+    margin-block-end: $spacing-06;
+  }
+
+  .#{$prefix}--options-tile__locked-text > svg {
+    margin-inline-end: $spacing-02;
+  }
+
+  .#{$prefix}--options-tile--lg .#{$prefix}--options-tile__header,
+  .#{$prefix}--options-tile--lg .#{$prefix}--options-tile__static-content {
+    block-size: 3rem;
+  }
+
+  .#{$prefix}--options-tile--xl .#{$prefix}--options-tile__header,
+  .#{$prefix}--options-tile--xl .#{$prefix}--options-tile__static-content {
+    block-size: 4rem;
+  }
+
+  .#{$prefix}--options-tile--lg .#{$prefix}--options-tile__toggle {
+    // "top" shouldn't be a spacing token as it depends on the toggle size
+    inset-block-start: $spacing-05;
+  }
+
+  .#{$prefix}--options-tile--xl .#{$prefix}--options-tile__toggle {
+    // "top" shouldn't be a spacing token as it depends on the toggle size
+    inset-block-start: $spacing-06;
+  }
+
+  .#{$prefix}--options-tile--lg .#{$prefix}--options-tile__summary {
+    margin-block-start: $spacing-01;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .#{$prefix}--options-tile__summary,
+    .#{$prefix}--options-tile__chevron {
+      transition: none;
+    }
+  }
+}

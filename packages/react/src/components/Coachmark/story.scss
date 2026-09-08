@@ -1,0 +1,51 @@
+/**
+ * Copyright IBM Corp. 2024, 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as theme;
+@use '@carbon/styles/scss/type';
+
+.docs-story main {
+  /* stylelint-disable-next-line declaration-no-important */
+  background-color: theme.$background !important;
+}
+
+// Prevent scrollbars when the floating Coachmark is dragged.
+// .sb-show-main is the actual iframe scroll root in the Storybook canvas.
+// This is story-only CSS, never shipped to consumers.
+// .sb-show-main {
+//   overflow: hidden;
+// }
+
+$block-class: cds--coachmark;
+
+// BUBBLE - content styling
+.#{$block-class}--coachmark-content {
+  inline-size: 290px;
+
+  .#{$block-class}--content-body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .#{$block-class}--content-body > h2 {
+    @include type.type-style('productive-heading-02');
+
+    margin: 0 0 $spacing-03;
+  }
+
+  .#{$block-class}--content-body > p {
+    @include type.type-style('body-long-01');
+  }
+
+  .#{$block-class}--content-body > button {
+    display: flex;
+    align-self: flex-end;
+    margin-block-end: $spacing-05;
+    margin-block-start: $spacing-05;
+  }
+}

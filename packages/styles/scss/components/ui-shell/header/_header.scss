@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2025
+// Copyright IBM Corp. 2016, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -73,8 +73,10 @@
     display: inline;
   }
 
-  .#{$prefix}--header__action:hover {
-    background-color: $background-hover;
+  @media (any-hover: hover) {
+    .#{$prefix}--header__action:hover {
+      background-color: $background-hover;
+    }
   }
 
   .#{$prefix}--header__action--active {
@@ -106,8 +108,6 @@
     fill: $icon-secondary;
   }
 
-  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--header__action:hover
-    svg,
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--header__action:active
     svg,
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--header__action--active
@@ -115,13 +115,22 @@
     fill: $icon-primary;
   }
 
+  @media (any-hover: hover) {
+    .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--header__action:hover
+      svg {
+      fill: $icon-primary;
+    }
+  }
+
   .#{$prefix}--header__menu-trigger > svg {
     fill: $icon-primary;
   }
 
-  .#{$prefix}--header__menu-trigger:hover > svg {
-    fill: $icon-primary;
-    // TODO: ask design if this color changes on hover, missing spec for it
+  @media (any-hover: hover) {
+    .#{$prefix}--header__menu-trigger:hover > svg {
+      fill: $icon-primary;
+      // TODO: ask design if this color changes on hover, missing spec for it
+    }
   }
 
   .#{$prefix}--header__menu-toggle {
@@ -168,9 +177,14 @@
     font-weight: 400;
   }
 
-  a.#{$prefix}--header__name,
-  a.#{$prefix}--header__name:hover {
+  a.#{$prefix}--header__name {
     color: $text-primary;
+  }
+
+  @media (any-hover: hover) {
+    a.#{$prefix}--header__name:hover {
+      color: $text-primary;
+    }
   }
 
   .#{$prefix}--header__menu-toggle:not(.#{$prefix}--header__menu-toggle__hidden)
@@ -240,9 +254,11 @@
     user-select: none;
   }
 
-  a.#{$prefix}--header__menu-item:hover {
-    background-color: $background-hover;
-    color: $text-primary;
+  @media (any-hover: hover) {
+    a.#{$prefix}--header__menu-item:hover {
+      background-color: $background-hover;
+      color: $text-primary;
+    }
   }
 
   .#{$prefix}--header__action:active,
@@ -256,9 +272,14 @@
     outline: none;
   }
 
-  a.#{$prefix}--header__menu-item:hover > svg,
   a.#{$prefix}--header__menu-item:active > svg {
     fill: $icon-primary;
+  }
+
+  @media (any-hover: hover) {
+    a.#{$prefix}--header__menu-item:hover > svg {
+      fill: $icon-primary;
+    }
   }
 
   // Styles for selected state
@@ -358,11 +379,13 @@
     background-color: $layer;
   }
 
-  .#{$prefix}--header__menu-title[aria-expanded='true']
-    + .#{$prefix}--header__menu
-    .#{$prefix}--header__menu-item:hover {
-    background-color: $layer-hover;
-    color: $text-primary;
+  @media (any-hover: hover) {
+    .#{$prefix}--header__menu-title[aria-expanded='true']
+      + .#{$prefix}--header__menu
+      .#{$prefix}--header__menu-item:hover {
+      background-color: $layer-hover;
+      color: $text-primary;
+    }
   }
 
   .#{$prefix}--header__menu-title[aria-expanded='true']
@@ -378,8 +401,10 @@
     // used for both desktop and mobile
     background-color: $layer-selected;
 
-    &:hover {
-      background-color: $layer-selected-hover;
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: $layer-selected-hover;
+      }
     }
   }
 

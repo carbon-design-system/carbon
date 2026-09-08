@@ -1,0 +1,297 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import React, { useCallback, useMemo, useState } from 'react';
+import classNames from 'classnames';
+import type { DatePickerContext } from '@carbon/utilities/date-picker';
+import {
+  generateCalendarGrid,
+  getMonthYearLabel,
+  getFullDateLabel,
+  getWeekdayLabels,
+} from '@carbon/utilities/date-picker';
+import { usePrefix } from '../../../../internal/usePrefix';
+
+/**
+ * Calendar component props
+ */
+export interface CalendarProps {
+  /**
+   * State machine context
+   */
+  context: DatePickerContext;
+
+  /**
+   * Date selection handler
+   */
+  onDateSelect: (date: Temporal.PlainDate) => void;
+
+  /**
+   * Navigation handler
+   */
+  onNavigate: (eventType: string) => void;
+
+  /**
+   * Additional CSS class names
+   */
+  className?: string;
+
+  /**
+   * BCP 47 locale tag used to localize month and weekday labels
+   */
+  locale?: string;
+}
+
+/**
+ * Calendar component
+ * Renders a calendar grid for date selection
+ */
+export function Calendar({
+  context,
+  onDateSelect,
+  onNavigate,
+  className,
+  locale = 'en',
+}: CalendarProps) {
+  const prefix = usePrefix();
+  const { viewDate, startDate, endDate, minDate, maxDate, focusedDate, mode } =
+    context;
+
+  // Track hovered date for range preview
+  const [hoveredDate, setHoveredDate] = useState<Temporal.PlainDate | null>(
+    null
+  );
+
+  // Generate calendar grid
+  const calendarGrid = useMemo(() => {
+    if (!viewDate) {
+      return [];
+    }
+    return generateCalendarGrid(viewDate, minDate, maxDate);
+  }, [viewDate, minDate, maxDate]);
+
+  // Navigation handlers
+  const handlePrevMonth = useCallback(() => {
+    onNavigate('PREV_MONTH');
+  }, [onNavigate]);
+
+  const handleNextMonth = useCallback(() => {
+    onNavigate('NEXT_MONTH');
+  }, [onNavigate]);
+
+  const handleDateClick = useCallback(
+    (date: Temporal.PlainDate, isDisabled: boolean) => {
+      if (!isDisabled) {
+        onDateSelect(date);
+      }
+    },
+    [onDateSelect]
+  );
+
+  // Check if a date is selected
+  const isDateSelected = useCallback(
+    (date: Temporal.PlainDate): boolean => {
+      if (!startDate) {
+        return false;
+      }
+      if (Temporal.PlainDate.compare(date, startDate) === 0) {
+        return true;
+      }
+      if (endDate && Temporal.PlainDate.compare(date, endDate) === 0) {
+        return true;
+      }
+      return false;
+    },
+    [startDate, endDate]
+  );
+
+  // Check if a date is in the selected range
+  const isDateInRange = useCallback(
+    (date: Temporal.PlainDate): boolean => {
+      if (mode !== 'range' || !startDate) {
+        return false;
+      }
+
+      // If endDate exists, use it for the range
+      if (endDate) {
+        return (
+          Temporal.PlainDate.compare(date, startDate) > 0 &&
+          Temporal.PlainDate.compare(date, endDate) < 0
+        );
+      }
+
+      // If endDate doesn't exist, show preview range with hovered or focused date
+      const previewDate = hoveredDate || focusedDate;
+      if (previewDate) {
+        // Don't show range preview if the preview date is disabled
+        const isPreviewDisabled =
+          (minDate && Temporal.PlainDate.compare(previewDate, minDate) < 0) ||
+          (maxDate && Temporal.PlainDate.compare(previewDate, maxDate) > 0);
+
+        if (isPreviewDisabled) {
+          return false;
+        }
+
+        const earlierDate =
+          Temporal.PlainDate.compare(startDate, previewDate) < 0
+            ? startDate
+            : previewDate;
+        const laterDate =
+          Temporal.PlainDate.compare(startDate, previewDate) < 0
+            ? previewDate
+            : startDate;
+
+        return (
+          Temporal.PlainDate.compare(date, earlierDate) > 0 &&
+          Temporal.PlainDate.compare(date, laterDate) < 0
+        );
+      }
+
+      return false;
+    },
+    [mode, startDate, endDate, hoveredDate, focusedDate, minDate, maxDate]
+  );
+
+  // Check if a date is focused
+  const isDateFocused = useCallback(
+    (date: Temporal.PlainDate): boolean => {
+      if (!focusedDate) {
+        return false;
+      }
+      return Temporal.PlainDate.compare(date, focusedDate) === 0;
+    },
+    [focusedDate]
+  );
+
+  if (!viewDate) {
+    return null;
+  }
+
+  const calendarClasses = classNames(
+    `${prefix}--date-picker__calendar`,
+    className
+  );
+
+  // Localized month/year heading and weekday headers.
+  const monthYear = getMonthYearLabel(viewDate, locale);
+  const weekdayLabels = getWeekdayLabels(locale);
+
+  return (
+    <div
+      className={calendarClasses}
+      role="grid"
+      aria-label="Calendar"
+      tabIndex={0}>
+      {/* Month Header */}
+      <div className={`${prefix}--date-picker__month`}>
+        <button
+          type="button"
+          className={`${prefix}--date-picker__month-nav`}
+          onClick={handlePrevMonth}
+          aria-label="Previous month">
+          <svg
+            focusable="false"
+            preserveAspectRatio="xMidYMid meet"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            aria-hidden="true">
+            <path
+              d="M11 8l-5 5-.7-.7L9.6 8 5.3 3.7 6 3z"
+              transform="rotate(180 8 8)"
+            />
+          </svg>
+        </button>
+
+        <div className={`${prefix}--date-picker__current-month`}>
+          {monthYear}
+        </div>
+
+        <button
+          type="button"
+          className={`${prefix}--date-picker__month-nav`}
+          onClick={handleNextMonth}
+          aria-label="Next month">
+          <svg
+            focusable="false"
+            preserveAspectRatio="xMidYMid meet"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            aria-hidden="true">
+            <path d="M11 8l-5 5-.7-.7L9.6 8 5.3 3.7 6 3z" />
+          </svg>
+        </button>
+      </div>
+
+      {/* Weekday Headers */}
+      <div className={`${prefix}--date-picker__weekdays`}>
+        {weekdayLabels.map((day, index) => (
+          <div
+            key={index}
+            className={`${prefix}--date-picker__weekday`}
+            title={day}>
+            {day}
+          </div>
+        ))}
+      </div>
+
+      {/* Calendar Grid */}
+      <div className={`${prefix}--date-picker__days`}>
+        {calendarGrid.flat().map((dayCell, index) => {
+          const { date, isCurrentMonth, isDisabled, isToday } = dayCell;
+          const selected = isDateSelected(date);
+          const inRange = isDateInRange(date);
+          const focused = isDateFocused(date);
+
+          const dayClasses = classNames(`${prefix}--date-picker__day`, {
+            today: isToday,
+            selected: selected,
+            inRange: inRange,
+            prevMonthDay: !isCurrentMonth && date.month < viewDate.month,
+            nextMonthDay: !isCurrentMonth && date.month > viewDate.month,
+            disabled: isDisabled,
+            focused: focused,
+          });
+
+          return (
+            <button
+              key={index}
+              type="button"
+              className={dayClasses}
+              onMouseDown={(event) => {
+                event.preventDefault();
+              }}
+              onMouseEnter={() => {
+                // track hover in range mode when selecting end date
+                if (mode === 'range' && startDate && !endDate) {
+                  setHoveredDate(date);
+                }
+              }}
+              onMouseLeave={() => {
+                setHoveredDate(null);
+              }}
+              onClick={() => handleDateClick(date, isDisabled)}
+              disabled={isDisabled}
+              aria-label={getFullDateLabel(date, locale)}
+              aria-pressed={selected || undefined}
+              aria-current={isToday ? 'date' : undefined}
+              tabIndex={focused ? 0 : -1}>
+              {date.day}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+Calendar.displayName = 'Calendar';

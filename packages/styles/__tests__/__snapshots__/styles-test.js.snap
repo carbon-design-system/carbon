@@ -8,6 +8,11 @@ exports[`@carbon/styles should have stable public scss entrypoints 1`] = `
     "relativePath": "",
   },
   {
+    "filepath": "scss/_border-radius.scss",
+    "importPath": "@carbon/styles/scss/border-radius",
+    "relativePath": "scss/border-radius",
+  },
+  {
     "filepath": "scss/_breakpoint.scss",
     "importPath": "@carbon/styles/scss/breakpoint",
     "relativePath": "scss/breakpoint",
