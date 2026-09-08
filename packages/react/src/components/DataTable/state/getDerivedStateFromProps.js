@@ -6,6 +6,7 @@
  */
 
 import { initialSortState, getSortedState } from './sorting';
+import { isSelectedRow } from './selection';
 import normalize from '../tools/normalize';
 
 /**
@@ -21,11 +22,7 @@ const getDerivedStateFromProps = (props, prevState) => {
     props.headers,
     prevState
   );
-  const hasSelectedRows = rowIds.some((id) => {
-    const row = rowsById[id];
-
-    return row.isSelected && !row.disabled;
-  });
+  const hasSelectedRows = rowIds.some((id) => isSelectedRow(rowsById[id]));
   const state = {
     rowIds,
     rowsById,
