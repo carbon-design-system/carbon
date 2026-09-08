@@ -47,7 +47,7 @@ import mdx from './docs/overview.mdx';
 import { pageActionButtonItems } from './_story-assets/pageActionButtonItems';
 
 export default {
-  title: 'Preview/PageHeader',
+  title: 'Components/PageHeader',
   component: PageHeader,
   subcomponents: {
     PageHeaderBreadcrumbBar,
@@ -62,7 +62,7 @@ export default {
     PageHeaderBreadcrumbOverflow,
     PageHeaderTagOverflow,
   },
-  tags: ['autodocs'],
+  tags: ['autodocs', 'ibm-products-migrated'],
   argTypes: {
     children: {
       table: { disable: true },
