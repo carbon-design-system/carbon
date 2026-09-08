@@ -1,0 +1,715 @@
+/**
+ * Copyright IBM Corp. 2025, 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '../../config' as *;
+@use '../../theme' as *;
+@use '../../type' as *;
+@use '../../spacing' as *;
+@use '../../motion' as *;
+@use '../../breakpoint' as *;
+@use '../../utilities';
+@use '@carbon/layout/scss/convert';
+@use '../../utilities/focus-outline';
+@use '../button/button' as button-mixin;
+
+/// Tearsheet styles
+/// @access public
+/// @group tearsheet
+@mixin tearsheet {
+  $block-class: #{$prefix}--tearsheet;
+  $motion-duration: $duration-moderate-02;
+  // viewport, capped at 500px to set an upper limit on the movement speed
+  $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
+
+  .#{$block-class} {
+    // ──────────────────────────────────────────────────────────────
+    // Presence animations (enter/exit) - default behavior
+    // ──────────────────────────────────────────────────────────────
+    &.#{$block-class}:not(.#{$block-class}--keep-mounted) {
+      animation: #{$block-class}--presence-tearsheet__enter $motion-duration
+        motion(entrance, expressive);
+      opacity: 1;
+
+      // extra specificity to ensure this transition overrides the carbon default
+      &.#{$block-class}.#{$block-class} .#{$block-class}__container {
+        animation: #{$block-class}--presence-tearsheet--container__enter
+          $motion-duration motion(entrance, expressive);
+        transform: translate3d(0, 0, 0);
+        @media screen and (prefers-reduced-motion: reduce) {
+          animation: none;
+        }
+      }
+
+      &.#{$block-class}--stacked.is-visible .#{$block-class}__container {
+        transform: scaleX(var(--scale-factor));
+      }
+
+      &[data-tearsheet-exiting] {
+        animation: #{$block-class}--presence-tearsheet__exit $motion-duration
+          motion(exit, expressive) forwards;
+
+        &.#{$block-class}.#{$block-class} .#{$block-class}__container {
+          animation: #{$block-class}--presence-tearsheet--container__exit
+            $motion-duration motion(entrance, expressive) forwards;
+          @media screen and (prefers-reduced-motion: reduce) {
+            animation: none;
+          }
+        }
+      }
+    }
+
+    // ──────────────────────────────────────────────────────────────
+    // Traditional visibility toggle when keepMounted is true
+    // ──────────────────────────────────────────────────────────────
+    &.#{$block-class}--keep-mounted {
+      &:not(.is-visible) {
+        &.#{$block-class}.#{$block-class} .#{$block-class}__container {
+          transform: $transform-start;
+        }
+      }
+    }
+
+    @keyframes #{$block-class}--presence-tearsheet__enter {
+      from {
+        opacity: 0;
+        transition: none;
+      }
+    }
+
+    @keyframes #{$block-class}--presence-tearsheet__exit {
+      to {
+        opacity: 0;
+      }
+    }
+
+    @keyframes #{$block-class}--presence-tearsheet--container__enter {
+      from {
+        transform: $transform-start;
+        transition: none;
+      }
+    }
+
+    @keyframes #{$block-class}--presence-tearsheet--container__exit {
+      to {
+        transform: $transform-start;
+      }
+    }
+
+    // ──────────────────────────────────────────────────────────────
+    // Container
+    // ──────────────────────────────────────────────────────────────
+    .#{$block-class}__container {
+      align-self: flex-end;
+      border: 1px solid $border-subtle-01;
+      block-size: 100%;
+      inset-block-start: auto;
+      max-block-size: calc(
+        100% - var(
+            --tearsheet-vertical-gap,
+            calc(#{$spacing-11} + #{$spacing-03})
+          )
+      );
+      max-inline-size: var(--tearsheet-max-inline-size, 1312px);
+    }
+
+    &:not(.#{$block-class}--stack-activated.is-visible) {
+      .#{$block-class}__container {
+        @include breakpoint-down(md) {
+          max-block-size: none;
+        }
+      }
+    }
+
+    &:not(.is-visible) {
+      &.#{$block-class}.#{$block-class} .#{$block-class}__container {
+        transform: translate3d(0, calc(min(95vh, 500px)), 0);
+      }
+    }
+
+    &.#{$block-class}.#{$block-class}--has-ai-label {
+      .#{$block-class}__container {
+        border: 1px solid transparent;
+
+        /* override carbon ai removing background gradient */
+        background:
+          linear-gradient(to top, var(--cds-layer), var(--cds-layer))
+            padding-box,
+          linear-gradient(
+              to bottom,
+              var(--cds-ai-border-start, #78a9ff),
+              var(--cds-ai-border-end, #d0e2ff)
+            )
+            border-box,
+          linear-gradient(to top, var(--cds-layer), var(--cds-layer)) border-box;
+        border-block-end: 0;
+        box-shadow: 0 4px 10px 2px $ai-drop-shadow;
+      }
+
+      .#{$block-class}__main-content {
+        position: relative;
+        @include utilities.ai-popover-gradient('default', 0, 'background');
+
+        box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow;
+      }
+    }
+
+    // Extra specificity to override Carbon default transition
+    &.#{$block-class}.#{$block-class} .#{$block-class}__container {
+      transition:
+        transform $motion-duration motion(entrance, expressive),
+        max-block-size $motion-duration motion(entrance, expressive);
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
+    }
+
+    // ──────────────────────────────────────────────────────────────
+    // Header
+    // ──────────────────────────────────────────────────────────────
+    .#{$block-class}__header {
+      display: flex;
+      flex-wrap: wrap;
+      align-content: space-between;
+      border-block-end: 1px solid $border-subtle-01;
+      margin-block: 0;
+      max-block-size: 50vh;
+      padding-block-end: 0;
+      padding-block-start: $spacing-06;
+      padding-inline: $spacing-07;
+
+      > * {
+        flex-basis: 100%;
+      }
+
+      > *:not(
+          .#{$block-class}__navigation-bar,
+          .#{$block-class}__header-content-wrapper,
+          .#{$prefix}--modal-close-button,
+          .#{$block-class}__close-button
+        ) {
+        margin-block-end: $spacing-06;
+      }
+
+      @include breakpoint-down(md) {
+        padding-inline: $spacing-05;
+      }
+    }
+
+    .#{$prefix}--modal-container--sm .#{$prefix}--modal-header {
+      padding-inline-end: $spacing-07;
+    }
+
+    // ──────────────────────────────────────────────────────────────
+    // Header content wrapper
+    // ──────────────────────────────────────────────────────────────
+    .#{$block-class}__header-content-wrapper {
+      display: grid;
+      flex-basis: unset;
+      gap: $spacing-05;
+      grid-template-columns: minmax(auto, 40rem) minmax(
+          var(--tearsheet-header-title-grid-width, 0),
+          1fr
+        );
+      inline-size: calc(100% - var(--tearsheet-header-action-offset));
+
+      @include breakpoint-down(md) {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+
+    &:not(.#{$block-class}--narrow) {
+      @include breakpoint(md) {
+        .#{$block-class}__header-content-wrapper {
+          .#{$block-class}__header-actions {
+            order: 2;
+          }
+
+          .#{$block-class}__header-content {
+            order: 1;
+          }
+        }
+      }
+    }
+
+    // ──────────────────────────────────────────────────────────────
+    // Header default state: animated transitions
+    // ──────────────────────────────────────────────────────────────
+    .#{$block-class}__header {
+      > *:not(
+          .#{$block-class}__navigation-bar,
+          .#{$block-class}__header-content-wrapper,
+          .#{$prefix}--modal-close-button,
+          .#{$block-class}__close-button,
+          .#{$block-class}__decorator,
+          .excludeFromCollapse
+        ) {
+        overflow: hidden;
+        max-block-size: 50vh;
+        opacity: 1;
+        transition:
+          max-block-size $motion-duration motion(entrance, expressive),
+          opacity $motion-duration motion(entrance, expressive),
+          margin $motion-duration motion(entrance, expressive),
+          padding $motion-duration motion(entrance, expressive);
+      }
+
+      .#{$block-class}__header-actions,
+      .#{$block-class}__header-content-wrapper
+        .#{$block-class}__header-content
+        *:not(
+          .#{$block-class}__content__title-wrapper,
+          .#{$block-class}__header-label
+        ) {
+        opacity: 1;
+        transition:
+          all $motion-duration motion(entrance, expressive),
+          opacity $motion-duration motion(entrance, expressive);
+      }
+    }
+
+    .#{$prefix}--modal-close {
+      transition: all $motion-duration ease;
+    }
+
+    // COLLAPSED STATE
+    .#{$block-class}__header-collapsed {
+      padding-block-start: 0;
+      transition: padding $motion-duration motion(entrance, expressive);
+
+      > *:not(
+          .#{$block-class}__navigation-bar,
+          .#{$block-class}__header-content-wrapper,
+          .#{$prefix}--modal-close-button,
+          .#{$block-class}__close-button,
+          .#{$block-class}__decorator,
+          .excludeFromCollapse
+        ),
+      .#{$block-class}__header-actions
+        > *:not(.#{$block-class}__content__header-actions),
+      .#{$block-class}__header-content
+        > *:not(.#{$block-class}__content__title-wrapper),
+      > *:not(
+          .#{$block-class}__navigation-bar,
+          .#{$block-class}__header-content-wrapper,
+          .#{$prefix}--modal-close-button,
+          .#{$block-class}__close-button,
+          .#{$block-class}__decorator,
+          .excludeFromCollapse
+        )
+        *,
+      .#{$block-class}__header-content-wrapper
+        .#{$block-class}__header-content
+        > *:not(.#{$block-class}__content__title-wrapper)
+        * {
+        overflow: hidden;
+        padding: 0;
+        margin: 0;
+        max-block-size: 0;
+        opacity: 0;
+        pointer-events: none;
+        transition: all $motion-duration motion(entrance, expressive);
+        visibility: hidden;
+      }
+
+      .#{$block-class}__header-title {
+        @include type-style('label-02');
+
+        align-items: center;
+        gap: $spacing-03;
+        margin-block-start: $spacing-02;
+        transition: all $motion-duration motion(entrance, expressive);
+
+        > span {
+          display: flex;
+          align-items: center;
+          block-size: $spacing-06;
+        }
+
+        .#{$block-class}__title-start,
+        .#{$block-class}__title-end {
+          svg {
+            inline-size: $spacing-05;
+          }
+        }
+      }
+
+      .#{$block-class}__header-content {
+        align-self: center;
+        margin-block-end: 0;
+
+        @include breakpoint-down(md) {
+          align-self: stretch;
+        }
+      }
+
+      .#{$prefix}--modal-close {
+        block-size: $spacing-08;
+        inline-size: $spacing-08;
+        transition: all $motion-duration ease;
+      }
+
+      .#{$block-class}__decorator {
+        inset-block-start: $spacing-03;
+      }
+
+      .#{$block-class}__header-title {
+        block-size: $spacing-08;
+      }
+
+      .#{$block-class}__content__header-actions {
+        block-size: $spacing-06;
+        margin-block-start: $spacing-03;
+        transition: all $motion-duration ease;
+      }
+
+      @include breakpoint-down(md) {
+        .#{$block-class}__header-actions {
+          display: none;
+        }
+      }
+
+      .#{$block-class}__header-content-wrapper,
+      .#{$block-class}__header-content,
+      .#{$block-class}__content__title-wrapper,
+      .#{$block-class}__header-actions,
+      .#{$block-class}__header-title {
+        margin-block: 0;
+        transition: margin-block $motion-duration ease;
+      }
+
+      .#{$block-class}__header-content-wrapper {
+        min-block-size: $spacing-08;
+      }
+
+      .#{$block-class}__navigation-bar::before {
+        position: absolute;
+        z-index: 1;
+        background: $border-subtle-01;
+        block-size: 1px;
+        content: '';
+        inline-size: calc(100% + $spacing-11);
+        inset-block-start: 0;
+        inset-inline-start: -$spacing-07;
+        pointer-events: none;
+      }
+    }
+
+    &.#{$block-class}--stack-activated.is-visible {
+      --overlay-color: #{$overlay};
+      --overlay-alpha: 0.5;
+
+      z-index: calc(#{utilities.z('modal')} - var(--stack-depth, 0));
+      background-color: initial;
+
+      &::before {
+        position: absolute;
+        display: block;
+        background: var(--overlay-color);
+        content: '';
+        inset: 0;
+        opacity: calc(var(--overlay-alpha) - var(--stack-depth) * 0.1);
+        transition:
+          background-color $motion-duration motion(exit, expressive),
+          opacity $motion-duration motion(exit, expressive);
+
+        @media (prefers-reduced-motion: reduce) {
+          transition: none;
+        }
+      }
+
+      &.is-visible {
+        .#{$block-class}__container {
+          max-block-size: calc(
+            100% - var(
+                --tearsheet-vertical-gap,
+                calc(#{$spacing-11} + #{$spacing-03} + #{$spacing-01})
+              ) + var(--block-size-change)
+          );
+          transform: scaleX(var(--scale-factor));
+        }
+      }
+    }
+  }
+
+  // ──────────────────────────────────────────────────────────────
+  // Top-level styles (outside .#{$block-class})
+  // ──────────────────────────────────────────────────────────────
+  $block-class: #{$prefix}--tearsheet;
+
+  .#{$block-class}__header-label {
+    @include type-style('label-01');
+
+    color: $text-secondary;
+    margin-block-end: $spacing-02;
+  }
+
+  .#{$block-class}__header-title {
+    @include type-style('heading-04');
+
+    @include breakpoint-down(md) {
+      @include type-style('heading-03');
+    }
+
+    display: flex;
+    align-items: flex-start;
+    gap: $spacing-05;
+    margin-block-end: $spacing-03;
+
+    &--no-content-below {
+      margin-block-end: 0;
+    }
+
+    svg {
+      flex-shrink: 0;
+    }
+
+    .#{$block-class}__title-end {
+      margin-inline-start: $spacing-05;
+    }
+  }
+
+  .#{$block-class}__header-description {
+    @include type-style('body-compact-01');
+  }
+
+  .#{$block-class}__header--no-close-icon {
+    display: none;
+  }
+
+  .#{$block-class}__decorator {
+    position: absolute;
+    inset-block-start: convert.to-rem(10px);
+    inset-inline-end: $spacing-09;
+  }
+
+  .#{$block-class}__navigation-bar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $spacing-01;
+    max-inline-size: calc(100% - $spacing-04);
+    min-block-size: $spacing-08;
+
+    .#{$prefix}--tabs {
+      margin-inline-start: -$spacing-05;
+    }
+  }
+
+  .#{$block-class}__scroller-container {
+    position: absolute;
+    inset-block-end: 0;
+    inset-inline-end: -$spacing-08;
+
+    @include breakpoint-down(md) {
+      inset-inline-end: -$spacing-06;
+    }
+
+    .#{$block-class}__scroller-button-icon-collapsed {
+      transform: rotate(-180deg);
+    }
+  }
+
+  .#{$block-class}__header-actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .#{$block-class}__content__header-actions {
+    display: flex;
+    overflow: hidden;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: flex-end;
+    block-size: $spacing-07;
+    gap: $spacing-03;
+    inline-size: 100%;
+    margin-block-start: -14px;
+
+    > * {
+      flex-shrink: 0;
+    }
+
+    @include breakpoint-down(md) {
+      justify-content: flex-start;
+      margin-inline-end: 0;
+    }
+  }
+
+  .#{$block-class}__header-content,
+  .#{$block-class}__header-actions {
+    margin-block-end: $spacing-06;
+  }
+
+  @include breakpoint(md) {
+    .#{$block-class}--wide .#{$block-class}__container {
+      inline-size: calc(100% - (2 * #{$spacing-10}));
+    }
+  }
+
+  .#{$block-class}__body-layout {
+    display: grid;
+    grid-template-areas:
+      'influencer body'
+      'influencer footer';
+    grid-template-columns:
+      var(--tearsheet-influencer-width, calc($spacing-10 * 4))
+      1fr;
+    grid-template-rows: 1fr auto;
+    padding-block: 0;
+    padding-inline-end: 0;
+
+    &:not(.#{$block-class}__body-layout--has-influencer) {
+      grid-template-areas:
+        'body'
+        'footer';
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .#{$block-class}__influencer {
+    border-inline-end: 1px solid $border-subtle-01;
+    grid-area: influencer;
+  }
+
+  .#{$block-class}__body {
+    position: relative;
+    display: grid;
+    overflow: hidden;
+    grid-area: body;
+    grid-template-columns: 1fr var(
+        --tearsheet-summary-content-width,
+        calc($spacing-10 * 4)
+      );
+
+    @include breakpoint-down(md) {
+      grid-template-columns: 1fr 0;
+    }
+
+    > *:only-child {
+      grid-column: 1 / -1;
+    }
+
+    .#{$prefix}--tab-content {
+      padding: 0;
+    }
+  }
+
+  .#{$block-class}__footer {
+    overflow: hidden;
+    border-block-start: 1px solid $border-subtle-01;
+    grid-area: footer;
+
+    // @include breakpoint-down(md) {
+    //   block-size: $spacing-10;
+    // }
+
+    // Use a lower stacking threshold (120px/button) so the footer buttons
+    // don't stack in typical narrow (540px) tearsheet containers.
+    // The mixin is called here on the same element that has .cds--btn-set--fluid
+    // so container-type and the custom-threshold @container queries are scoped
+    // to the tearsheet footer, overriding the global 176px defaults.
+    .#{$block-class}__footer-button-set {
+      block-size: 100%;
+
+      &.#{$prefix}--btn-set--fluid {
+        @include button-mixin.button-set-fluid-layout(
+          $min-inline-size: convert.to-rem(120px)
+        );
+      }
+    }
+  }
+
+  .#{$block-class}__influencer,
+  .#{$block-class}__main-content,
+  .#{$block-class}__summary-content {
+    overflow: auto;
+
+    &:not(.#{$block-class}__flush) {
+      padding-inline: $spacing-07;
+
+      @include breakpoint-down(md) {
+        padding-inline: $spacing-05;
+      }
+    }
+
+    &:focus {
+      @include focus-outline.focus-outline('outline');
+    }
+  }
+
+  .#{$block-class}__main-content {
+    position: relative;
+  }
+
+  .#{$block-class}__side-panel {
+    position: absolute;
+    z-index: 9999;
+    block-size: 100%;
+    inline-size: 100% !important; /* stylelint-disable-line declaration-no-important */
+    inset-block-start: 0;
+    max-inline-size: none;
+
+    .#{$prefix}--side-panel__header {
+      min-block-size: 0;
+    }
+  }
+
+  .#{$block-class}--narrow {
+    .#{$block-class}__container {
+      inline-size: 480px;
+      max-inline-size: 480px;
+
+      @media (width <= 480px) {
+        inline-size: 100%;
+        max-inline-size: 100%;
+      }
+    }
+
+    .#{$block-class}__header {
+      padding-inline: $spacing-05;
+    }
+
+    .#{$block-class}__header.#{$block-class}__header-collapsed {
+      .#{$block-class}__header-actions {
+        display: none;
+      }
+
+      .#{$block-class}__header-content {
+        align-self: flex-start;
+      }
+    }
+
+    .#{$block-class}__header-content-wrapper {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .#{$block-class}__header-title {
+      @include type-style('heading-03');
+    }
+
+    .#{$block-class}__content__header-actions {
+      justify-content: flex-start;
+      margin-inline-end: 0;
+    }
+
+    .#{$block-class}__body {
+      grid-template-columns: 1fr 0;
+    }
+
+    .#{$block-class}__influencer,
+    .#{$block-class}__main-content,
+    .#{$block-class}__summary-content {
+      &:not(.#{$block-class}__flush) {
+        padding-inline: $spacing-05;
+      }
+    }
+  }
+}
