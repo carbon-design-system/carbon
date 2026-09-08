@@ -12,9 +12,6 @@ import './fluid-text-input';
 import './fluid-text-input-skeleton';
 
 const args = {
-  helperText: '',
-  hideLabel: false,
-  inline: false,
   placeholder: 'Placeholder text',
   invalid: false,
   invalidText:
@@ -24,7 +21,6 @@ const args = {
   enableCounter: false,
   maxCount: 500,
   readonly: false,
-  size: 'md',
   value: '',
   warn: false,
   warnText:
@@ -32,26 +28,10 @@ const args = {
 };
 
 const argTypes = {
-  helperText: {
-    control: 'text',
-    description: 'The helper text.',
-    table: { defaultValue: { summary: '""' } },
-  },
-  hideLabel: {
-    control: 'boolean',
-    description:
-      'Specify whether you want the underlying label to be visually hidden.',
-    table: { defaultValue: { summary: false } },
-  },
-  inline: {
-    control: 'boolean',
-    description: 'Specify whether to use the inline version.',
-    table: { defaultValue: { summary: false } },
-  },
   placeholder: {
     control: { type: 'text' },
     description: 'Specify the placeholder attribute for the `<input>`.',
-    table: { defaultValue: { summary: '""' } },
+    table: { defaultValue: { summary: 'undefined' } },
   },
   invalid: {
     control: { type: 'boolean' },
@@ -62,7 +42,7 @@ const argTypes = {
     control: { type: 'text' },
     description:
       'Provide the text that is displayed when the control is in an invalid state.',
-    table: { defaultValue: { summary: '""' } },
+    table: { defaultValue: { summary: 'undefined' } },
   },
   disabled: {
     control: { type: 'boolean' },
@@ -73,7 +53,7 @@ const argTypes = {
     control: { type: 'text' },
     description:
       'Provide the text that will be read by a screen reader when visiting this control.',
-    table: { defaultValue: { summary: '""' } },
+    table: { defaultValue: { summary: 'required' } },
   },
   warn: {
     control: { type: 'boolean' },
@@ -84,7 +64,7 @@ const argTypes = {
     control: { type: 'text' },
     description:
       'Provide the text that is displayed when the control is in warning state.',
-    table: { defaultValue: { summary: '""' } },
+    table: { defaultValue: { summary: 'undefined' } },
   },
   value: {
     control: { type: 'text' },
@@ -100,7 +80,7 @@ const argTypes = {
   maxCount: {
     control: 'number',
     description:
-      'Max character count allowed for input. This is needed in order for enableCounter to display.',
+      'Max character count allowed for the textInput. This is needed in order for enableCounter to display.',
     table: { defaultValue: { summary: 'undefined' } },
   },
   enableCounter: {
@@ -110,14 +90,8 @@ const argTypes = {
   },
   readonly: {
     control: 'boolean',
-    description: 'Specify if the component should be read-only.',
+    description: 'Whether or not the component is readonly.',
     table: { defaultValue: { summary: false } },
-  },
-  size: {
-    control: 'select',
-    options: ['xs', 'sm', 'md', 'lg'],
-    description: 'The input box size.',
-    table: { defaultValue: { summary: 'undefined' } },
   },
 };
 
@@ -125,9 +99,6 @@ const renderTextInput = (
   {
     disabled,
     enableCounter,
-    helperText,
-    hideLabel,
-    inline,
     invalid,
     invalidText,
     labelText,
@@ -136,7 +107,6 @@ const renderTextInput = (
     onInput,
     placeholder,
     readonly,
-    size,
     value,
     warn,
     warnText,
@@ -146,9 +116,6 @@ const renderTextInput = (
   <cds-fluid-text-input
     ?disabled="${disabled}"
     ?enable-counter="${enableCounter}"
-    helper-text="${ifDefined(helperText)}"
-    ?hide-label="${hideLabel}"
-    ?inline="${inline}"
     id="input-1"
     ?invalid="${invalid}"
     invalid-text="${ifDefined(invalidText)}"
@@ -156,7 +123,6 @@ const renderTextInput = (
     max-count="${ifDefined(maxCount)}"
     placeholder="${ifDefined(placeholder)}"
     ?readonly="${readonly}"
-    size="${ifDefined(size)}"
     value="${ifDefined(value)}"
     ?warn="${warn}"
     warn-text="${ifDefined(warnText)}"
