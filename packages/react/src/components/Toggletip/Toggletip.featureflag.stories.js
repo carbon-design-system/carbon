@@ -19,6 +19,17 @@ import {
 } from '../Toggletip';
 import { WithFeatureFlags } from '../../../.storybook/templates/WithFeatureFlags';
 
+const args = {
+  align: 'bottom',
+  bodyText:
+    'Scroll the container up, down, left or right to observe how the Toggletip will automatically change its position in attempt to stay within the viewport. This works on initial render in addition to on scroll.',
+  buttonLabel: 'Show information',
+  buttonText: 'Button',
+  defaultOpen: true,
+  labelText: 'Toggletip label',
+  linkText: 'Link action',
+};
+
 // eslint-disable-next-line storybook/csf-component
 export default {
   title: 'Components/Toggletip/Feature Flag',
@@ -38,23 +49,31 @@ export default {
 };
 
 export const FloatingStyles = (args) => {
+  const {
+    align,
+    bodyText,
+    buttonLabel,
+    buttonText,
+    defaultOpen,
+    labelText,
+    linkText,
+  } = args;
+
   return (
     <div>
-      <ToggletipLabel>Toggletip label</ToggletipLabel>
-      <Toggletip align={args.align} defaultOpen>
-        <ToggletipButton label="Show information">
+      <ToggletipLabel>{labelText}</ToggletipLabel>
+      <Toggletip
+        key={defaultOpen ? 'open' : 'closed'}
+        align={align}
+        defaultOpen={defaultOpen}>
+        <ToggletipButton label={buttonLabel}>
           <Information />
         </ToggletipButton>
         <ToggletipContent>
-          <p>
-            Scroll the container up, down, left or right to observe how the
-            Toggletip will automatically change its position in attempt to stay
-            within the viewport. This works on initial render in addition to on
-            scroll.
-          </p>
+          <p>{bodyText}</p>
           <ToggletipActions>
-            <Link href="#">Link action</Link>
-            <Button size="sm">Button</Button>
+            <Link href="#">{linkText}</Link>
+            <Button size="sm">{buttonText}</Button>
           </ToggletipActions>
         </ToggletipContent>
       </Toggletip>
@@ -62,9 +81,7 @@ export const FloatingStyles = (args) => {
   );
 };
 
-FloatingStyles.args = {
-  align: 'bottom',
-};
+FloatingStyles.args = args;
 
 FloatingStyles.argTypes = {
   align: {
@@ -88,5 +105,44 @@ FloatingStyles.argTypes = {
     control: {
       type: 'select',
     },
+  },
+  bodyText: {
+    control: 'text',
+    table: {
+      category: 'ToggletipContent',
+    },
+  },
+  buttonLabel: {
+    control: 'text',
+    table: {
+      category: 'ToggletipButton',
+    },
+  },
+  buttonText: {
+    control: 'text',
+    table: {
+      category: 'ToggletipActions',
+    },
+  },
+  defaultOpen: {
+    control: 'boolean',
+  },
+  labelText: {
+    control: 'text',
+    table: {
+      category: 'ToggletipLabel',
+    },
+  },
+  linkText: {
+    control: 'text',
+    table: {
+      category: 'ToggletipActions',
+    },
+  },
+};
+
+FloatingStyles.parameters = {
+  controls: {
+    include: Object.keys(FloatingStyles.argTypes),
   },
 };

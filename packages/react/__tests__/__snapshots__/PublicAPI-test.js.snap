@@ -7875,18 +7875,12 @@ Map {
       },
       "pageSizes": {
         "args": [
-          [
-            {
-              "args": [
+          {
+            "args": [
+              [
                 {
-                  "isRequired": true,
                   "type": "number",
                 },
-              ],
-              "type": "arrayOf",
-            },
-            {
-              "args": [
                 {
                   "args": [
                     {
@@ -7900,16 +7894,14 @@ Map {
                       },
                     },
                   ],
-                  "isRequired": true,
                   "type": "shape",
                 },
               ],
-              "type": "arrayOf",
-            },
-          ],
+            ],
+            "type": "oneOfType",
+          },
         ],
-        "isRequired": true,
-        "type": "oneOfType",
+        "type": "arrayOf",
       },
       "pageText": {
         "type": "func",
