@@ -503,6 +503,18 @@ PassiveModal.parameters = {
   },
 };
 
+export const WithLongStrings = PassiveModal.bind({});
+WithLongStrings.args = {
+  modalLabel: 'production_eu_central_customer_transaction_archive',
+  modalHeading:
+    'customer_transaction_archive_2026_09_08_eu_central_production_export.json',
+  children:
+    'customer_transaction_archive_2026_09_08_eu_central_production_export_'.repeat(
+      15
+    ),
+};
+WithLongStrings.parameters = PassiveModal.parameters;
+
 export const WithInlineLoading = (args) => {
   const [status, setStatus] = useState('inactive');
   const [description, setDescription] = useState('Deleting...');

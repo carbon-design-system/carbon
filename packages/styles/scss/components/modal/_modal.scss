@@ -123,6 +123,7 @@
     font-weight: 400;
     grid-column: 1/-1;
     grid-row: 2/-2;
+    overflow-wrap: anywhere;
     overflow-y: auto;
     padding-block: $spacing-03 $spacing-09;
     // Required to accommodate focus outline's negative offset:
@@ -162,6 +163,7 @@
     grid-row: 1/1;
     margin-block-end: $spacing-03;
     max-block-size: 50vh;
+    overflow-wrap: anywhere;
     overflow-y: auto;
     padding-block-start: $spacing-05;
     padding-inline: $spacing-05 $spacing-09;
