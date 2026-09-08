@@ -69,9 +69,6 @@ export const Default = {
               ${iconLoader(User20, { slot: 'icon' })}
             </cds-header-global-action>
           </div>
-          <cds-side-nav
-            aria-label="Side navigation"
-            collapse-mode="responsive"></cds-side-nav>
         </cds-header>
 
         <cds-page-header-breadcrumb
@@ -138,9 +135,6 @@ export const Error403 = {
               ${iconLoader(User20, { slot: 'icon' })}
             </cds-header-global-action>
           </div>
-          <cds-side-nav
-            aria-label="Side navigation"
-            collapse-mode="responsive"></cds-side-nav>
         </cds-header>
 
         <cds-page-header-breadcrumb
@@ -207,9 +201,6 @@ export const Error404 = {
               ${iconLoader(User20, { slot: 'icon' })}
             </cds-header-global-action>
           </div>
-          <cds-side-nav
-            aria-label="Side navigation"
-            collapse-mode="responsive"></cds-side-nav>
         </cds-header>
 
         <cds-page-header-breadcrumb
