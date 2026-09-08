@@ -9,9 +9,10 @@ import React, { StrictMode, useRef } from 'react';
 import { render, screen, act } from '@testing-library/react';
 import { useResizeObserver } from '../useResizeObserver';
 
-const ResizeTest = ({ onResize }) => {
+const ResizeTest = ({ onResize, onRender }) => {
   const ref = useRef(null);
   const { width, height } = useResizeObserver({ ref, onResize });
+  onRender?.();
   return (
     <div ref={ref} data-testid="observed-element">
       width: {width}, height: {height}
@@ -103,14 +104,17 @@ describe('useResizeObserver', () => {
 
   it('does not update state or call onResize when dimensions are unchanged', async () => {
     const resizeFn = jest.fn();
-    render(<ResizeTest onResize={resizeFn} />);
+    const renderFn = jest.fn();
+    render(<ResizeTest onResize={resizeFn} onRender={renderFn} />);
     const element = screen.getByTestId('observed-element');
 
     await triggerResize(element);
     expect(resizeFn).toHaveBeenCalledTimes(1);
+    const renderCount = renderFn.mock.calls.length;
 
     await triggerResize(element);
     expect(resizeFn).toHaveBeenCalledTimes(1);
+    expect(renderFn).toHaveBeenCalledTimes(renderCount);
   });
 
   it('calls onResize for the first observed size even when dimensions are unchanged', async () => {
