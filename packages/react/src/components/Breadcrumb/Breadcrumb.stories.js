@@ -85,17 +85,15 @@ const getBreadcrumbOverflowMenuProps = (enableV12OverflowMenu) =>
       };
 
 const renderBreadcrumbOverflowMenuItems = (enableV12OverflowMenu) =>
-  enableV12OverflowMenu ? (
-    <>
-      <MenuItem label="Breadcrumb 3" />
-      <MenuItem label="Breadcrumb 4" />
-    </>
-  ) : (
-    <>
-      <OverflowMenuItem itemText="Breadcrumb 3" />
-      <OverflowMenuItem itemText="Breadcrumb 4" />
-    </>
-  );
+  enableV12OverflowMenu
+    ? [
+        <MenuItem key="breadcrumb-3" label="Breadcrumb 3" />,
+        <MenuItem key="breadcrumb-4" label="Breadcrumb 4" />,
+      ]
+    : [
+        <OverflowMenuItem key="breadcrumb-3" itemText="Breadcrumb 3" />,
+        <OverflowMenuItem key="breadcrumb-4" itemText="Breadcrumb 4" />,
+      ];
 
 export const BreadcrumbWithOverflowMenu = (args) => {
   const enableV12OverflowMenu = useFeatureFlag('enable-v12-overflowmenu');

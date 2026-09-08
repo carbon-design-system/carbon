@@ -20,7 +20,6 @@ import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import {
   useFloating,
   flip,
-  hide,
   offset,
   size as floatingSize,
   autoUpdate,
@@ -124,7 +123,6 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
       // $spacing-02 gap between the trigger and the menu
       ...(enableV12Release ? [offset(4)] : []),
       flip({ crossAxis: false }),
-      hide(),
     ];
 
     if (menuAlignment === 'bottom' || menuAlignment === 'top') {
@@ -170,13 +168,9 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
     } = useAttachedMenu(triggerRef);
 
     useIsomorphicEffect(() => {
-      const updatedFloatingStyles = {
-        ...floatingStyles,
-        visibility: middlewareData.hide?.referenceHidden ? 'hidden' : 'visible',
-      };
-      Object.keys(updatedFloatingStyles).forEach((style) => {
+      Object.keys(floatingStyles).forEach((style) => {
         if (refs.floating.current) {
-          let value = updatedFloatingStyles[style];
+          let value = floatingStyles[style];
 
           if (
             ['top', 'right', 'bottom', 'left'].includes(style) &&
