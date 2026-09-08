@@ -57,6 +57,7 @@ import {
   size as floatingSize,
 } from '@floating-ui/react';
 import { useFeatureFlag } from '../FeatureFlags';
+import { useSafeFloatingRefs } from '../../internal/useSafeFloatingRefs';
 import { AILabel } from '../AILabel';
 import {
   defaultItemToString,
@@ -355,32 +356,7 @@ const Dropdown = React.forwardRef(
       // When autoAlign is turned off & the `enable-v12-dynamic-floating-styles` feature flag is not
       // enabled, floating-ui will not be used
     );
-    // React 19: refs.setFloating / refs.setReference are useState setters.
-    // Passing them as ref callbacks causes setState during commit → crash.
-    // Capture the node in a ref and forward it in a passive effect (after commit).
-    const pendingFloatingNodeRef = useRef(null);
-    const setFloatingSafe = useCallback((node) => {
-      pendingFloatingNodeRef.current = node;
-    }, []);
-    useEffect(() => {
-      if (pendingFloatingNodeRef.current !== null) {
-        const node = pendingFloatingNodeRef.current;
-        pendingFloatingNodeRef.current = null;
-        refs.setFloating(node);
-      }
-    });
-
-    const pendingReferenceNodeRef = useRef(null);
-    const setReferenceSafe = useCallback((node) => {
-      pendingReferenceNodeRef.current = node;
-    }, []);
-    useEffect(() => {
-      if (pendingReferenceNodeRef.current !== null) {
-        const node = pendingReferenceNodeRef.current;
-        pendingReferenceNodeRef.current = null;
-        refs.setReference(node);
-      }
-    });
+    const { setFloatingSafe, setReferenceSafe } = useSafeFloatingRefs(refs);
 
     useEffect(() => {
       if (enableFloatingStyles || autoAlign) {

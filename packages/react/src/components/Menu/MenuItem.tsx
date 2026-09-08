@@ -9,7 +9,6 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
   forwardRef,
-  useCallback,
   useContext,
   useEffect,
   useRef,
@@ -32,6 +31,7 @@ import {
   FloatingFocusManager,
   flip,
 } from '@floating-ui/react';
+import { useSafeFloatingRefs } from '../../internal/useSafeFloatingRefs';
 import { CaretRight, CaretLeft, Checkmark } from '@carbon/icons-react';
 import { keys, match } from '../../internal/keyboard';
 import { useControllableState } from '../../internal/useControllableState';
@@ -160,33 +160,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
       ],
       strategy: 'fixed',
     });
-    // React 19: refs.setFloating / refs.setReference are useState setters.
-    // Passing them as ref callbacks causes setState during commit → crash.
-    // Capture the node in a ref and forward it in a passive effect (after commit).
-    const pendingFloatingNodeRef = useRef(null);
-    const setFloatingSafe = useCallback((node) => {
-      pendingFloatingNodeRef.current = node;
-    }, []);
-    useEffect(() => {
-      if (pendingFloatingNodeRef.current !== null) {
-        const node = pendingFloatingNodeRef.current;
-        pendingFloatingNodeRef.current = null;
-        refs.setFloating(node);
-      }
-    });
-
-    const pendingReferenceNodeRef = useRef(null);
-    const setReferenceSafe = useCallback((node) => {
-      pendingReferenceNodeRef.current = node;
-    }, []);
-    useEffect(() => {
-      if (pendingReferenceNodeRef.current !== null) {
-        const node = pendingReferenceNodeRef.current;
-        pendingReferenceNodeRef.current = null;
-        refs.setReference(node);
-      }
-    });
-
+    const { setFloatingSafe, setReferenceSafe } = useSafeFloatingRefs(refs);
     const { getReferenceProps, getFloatingProps } = useInteractions([
       useHover(floatingContext, {
         delay: 100,

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { ChevronDown } from '@carbon/icons-react';
@@ -26,6 +26,7 @@ import {
 } from '@floating-ui/react';
 import { useFeatureFlag } from '../FeatureFlags';
 import { mergeRefs } from '../../tools/mergeRefs';
+import { useSafeFloatingRefs } from '../../internal/useSafeFloatingRefs';
 import { MenuAlignment } from '../MenuButton';
 import type { TFunc, TranslateWithId } from '../../types/common';
 import { deprecateValuesWithin } from '../../prop-types/deprecateValuesWithin';
@@ -144,33 +145,7 @@ const ComboButton = React.forwardRef<HTMLDivElement, ComboButtonProps>(
       middleware: middlewares,
       whileElementsMounted: autoUpdate,
     });
-    // React 19: refs.setFloating / refs.setReference are useState setters.
-    // Passing them as ref callbacks causes setState during commit → crash.
-    // Capture the node in a ref and forward it in a passive effect (after commit).
-    const pendingFloatingNodeRef = useRef(null);
-    const setFloatingSafe = useCallback((node) => {
-      pendingFloatingNodeRef.current = node;
-    }, []);
-    useEffect(() => {
-      if (pendingFloatingNodeRef.current !== null) {
-        const node = pendingFloatingNodeRef.current;
-        pendingFloatingNodeRef.current = null;
-        refs.setFloating(node);
-      }
-    });
-
-    const pendingReferenceNodeRef = useRef(null);
-    const setReferenceSafe = useCallback((node) => {
-      pendingReferenceNodeRef.current = node;
-    }, []);
-    useEffect(() => {
-      if (pendingReferenceNodeRef.current !== null) {
-        const node = pendingReferenceNodeRef.current;
-        pendingReferenceNodeRef.current = null;
-        refs.setReference(node);
-      }
-    });
-
+    const { setFloatingSafe, setReferenceSafe } = useSafeFloatingRefs(refs);
     const ref = mergeRefs(forwardRef, containerRef, setReferenceSafe);
     const {
       open,

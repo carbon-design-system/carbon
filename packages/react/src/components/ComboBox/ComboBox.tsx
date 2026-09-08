@@ -52,6 +52,7 @@ import { FormContext } from '../FluidForm';
 import { autoUpdate, flip, hide, useFloating } from '@floating-ui/react';
 import type { TranslateWithId } from '../../types/common';
 import { useFeatureFlag } from '../FeatureFlags';
+import { useSafeFloatingRefs } from '../../internal/useSafeFloatingRefs';
 import { AILabel } from '../AILabel';
 import {
   defaultItemToString,
@@ -431,32 +432,7 @@ const ComboBox = forwardRef(
           }
         : {}
     );
-    // React 19: refs.setFloating / refs.setReference are useState setters.
-    // Passing them as ref callbacks causes setState during commit → crash.
-    // Capture the node in a ref and forward it in a passive effect (after commit).
-    const pendingFloatingNodeRef = useRef(null);
-    const setFloatingSafe = useCallback((node) => {
-      pendingFloatingNodeRef.current = node;
-    }, []);
-    useEffect(() => {
-      if (pendingFloatingNodeRef.current !== null) {
-        const node = pendingFloatingNodeRef.current;
-        pendingFloatingNodeRef.current = null;
-        refs.setFloating(node);
-      }
-    });
-
-    const pendingReferenceNodeRef = useRef(null);
-    const setReferenceSafe = useCallback((node) => {
-      pendingReferenceNodeRef.current = node;
-    }, []);
-    useEffect(() => {
-      if (pendingReferenceNodeRef.current !== null) {
-        const node = pendingReferenceNodeRef.current;
-        pendingReferenceNodeRef.current = null;
-        refs.setReference(node);
-      }
-    });
+    const { setFloatingSafe, setReferenceSafe } = useSafeFloatingRefs(refs);
     const referenceElement = refs?.reference?.current;
     const parentWidth =
       typeof HTMLElement !== 'undefined' &&
