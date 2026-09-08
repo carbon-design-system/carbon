@@ -16,7 +16,6 @@ import CDSComboBoxItem from './combo-box-item';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import styles from './combo-box.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-import { ifDefined } from 'lit/directives/if-defined.js';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
 import spread from '../../globals/directives/spread';
 
@@ -442,13 +441,6 @@ class CDSComboBox extends CDSDropdown {
       [`${prefix}--text-input--empty`]: !value,
     });
 
-    let activeDescendantFallback: string | undefined;
-    if (open && !activeDescendant) {
-      const constructor = this.constructor as typeof CDSDropdown;
-      const items = this.querySelectorAll(constructor.selectorItem);
-      activeDescendantFallback = items[0]?.id;
-    }
-
     return html`
       <input
         id="trigger-button"
@@ -463,9 +455,7 @@ class CDSComboBox extends CDSDropdown {
         aria-haspopup="listbox"
         aria-autocomplete="list"
         aria-expanded="${String(open)}"
-        aria-activedescendant="${ifDefined(
-          open ? (activeDescendant ?? activeDescendantFallback) : ''
-        )}"
+        aria-activedescendant="${open ? (activeDescendant ?? '') : ''}"
         ?readonly=${readOnly}
         @input=${handleInput}
         @keydown=${handleInputKeydown}
