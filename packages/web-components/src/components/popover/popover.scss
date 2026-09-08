@@ -14,7 +14,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/theme';
 @use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/components/popover' as *;
-@use '@carbon/styles/scss/feature-flags' as *;
+@use '@carbon/styles/scss/feature-flags' as flags;
 
 // The distance between the popover container and the triggering element
 // Specify the distance between the popover and the trigger. This value must
@@ -542,7 +542,7 @@ $popover-border-color: custom-property.get-var(
   .#{$prefix}--popover-content {
     inset-inline-end: 100%;
 
-    @if enabled('enable-v12-release') {
+    @if flags.enabled('enable-v12-release') {
       inset-block-end: 0;
       transform: translate(calc(-1 * $popover-offset), 0);
     } @else {
@@ -570,7 +570,7 @@ $popover-border-color: custom-property.get-var(
   .#{$prefix}--popover-content {
     inset-inline-end: 100%;
 
-    @if enabled('enable-v12-release') {
+    @if flags.enabled('enable-v12-release') {
       inset-block-start: 0;
       transform: translate(calc(-1 * $popover-offset), 0);
     } @else {
@@ -708,7 +708,7 @@ $popover-border-color: custom-property.get-var(
   .#{$prefix}--popover-content {
     inset-inline-start: 100%;
 
-    @if enabled('enable-v12-release') {
+    @if flags.enabled('enable-v12-release') {
       inset-block-end: 0;
       transform: translate($popover-offset, 0);
     } @else {
@@ -731,7 +731,7 @@ $popover-border-color: custom-property.get-var(
   .#{$prefix}--popover-content {
     inset-inline-start: 100%;
 
-    @if enabled('enable-v12-release') {
+    @if flags.enabled('enable-v12-release') {
       inset-block-start: 0;
       transform: translate($popover-offset, 0);
     } @else {
