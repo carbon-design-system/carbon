@@ -21,22 +21,26 @@ const argTypes = {
   currentIndex: {
     control: 'number',
     description: 'Optionally specify the current step array index.',
+    table: { defaultValue: { summary: 0 } },
   },
   vertical: {
     control: 'boolean',
     description:
       'Determines whether or not the Progress Indicator should be rendered vertically.',
+    table: { defaultValue: { summary: false } },
   },
   spaceEqually: {
     control: 'boolean',
     description:
       'Specify whether progress steps should be split equally in size (horizontal only).',
+    table: { defaultValue: { summary: false } },
   },
   secondaryLabel: {
     control: 'text',
     description: 'The secondary progress label.',
     table: {
       category: 'ProgressStep',
+      defaultValue: { summary: 'undefined' },
     },
   },
 };
@@ -86,6 +90,9 @@ export const Interactive = {
     },
     onChange: {
       action: 'onChange',
+      description:
+        'Optional callback called if a ProgressStep is clicked on. Returns the index of the step.',
+      table: { defaultValue: { summary: 'undefined' } },
     },
     spaceEqually: argTypes.spaceEqually,
     vertical: argTypes.vertical,

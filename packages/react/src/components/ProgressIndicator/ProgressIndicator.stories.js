@@ -19,12 +19,20 @@ const progressIndicatorArgs = {
 const progressIndicatorArgTypes = {
   currentIndex: {
     control: { type: 'number', min: 0, max: 4 },
+    description: 'Optionally specify the current step array index.',
+    table: { defaultValue: { summary: 0 } },
   },
   spaceEqually: {
     control: { type: 'boolean' },
+    description:
+      'Specify whether the progress steps should be split equally in size in the div.',
+    table: { defaultValue: { summary: false } },
   },
   vertical: {
     control: { type: 'boolean' },
+    description:
+      'Determines whether or not the ProgressIndicator should be rendered vertically.',
+    table: { defaultValue: { summary: false } },
   },
 };
 
@@ -73,6 +81,9 @@ Interactive.argTypes = {
   },
   onChange: {
     action: 'onChange',
+    description:
+      'Optional callback called if a ProgressStep is clicked on. Returns the index of the step.',
+    table: { defaultValue: { summary: 'undefined' } },
   },
 };
 
@@ -132,8 +143,10 @@ Default.argTypes = {
   ...progressIndicatorArgTypes,
   secondaryLabel: {
     control: { type: 'text' },
+    description: 'Provide an optional secondary label.',
     table: {
       category: 'ProgressStep',
+      defaultValue: { summary: 'undefined' },
     },
   },
 };
