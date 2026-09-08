@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -13,6 +13,7 @@ import { default as DismissibleTag } from './DismissibleTag';
 import { Asleep } from '@carbon/icons-react';
 import { Popover, PopoverContent } from '../Popover';
 import mdx from './Tag.mdx';
+import './story.scss';
 import './storyInteractiveTag.scss';
 import { Text } from '../Text';
 import Button from '../Button';
@@ -64,7 +65,7 @@ export const Selectable = (args) => {
   };
 
   return (
-    <div aria-label="Selectable tags" role="group">
+    <div className="tag-group" aria-label="Selectable tags" role="group">
       {tags.map((tag, index) => (
         <SelectableTag
           key={index}
@@ -116,6 +117,7 @@ export const Operational = (args) => {
   return (
     <>
       <div
+        className="tag-group"
         aria-label="Operational tags"
         role="group"
         style={{ marginBottom: '1rem' }}>
@@ -194,18 +196,21 @@ export const Operational = (args) => {
       <h4>Interactive examples</h4>
       <div
         id="operational-tag"
-        style={{
-          display: 'flex',
-          justifyContent: 'flex-start',
-          marginTop: '1rem',
-        }}
+        className="tag-group"
+        style={{ marginTop: '1rem' }}
         aria-label="Operational tags with Popover"
         role="group">
         {/* High contrast example */}
-        <Popover open={openHighContrast} highContrast>
+        <Popover
+          open={openHighContrast}
+          highContrast
+          onRequestClose={() => {
+            setOpenHighContrast(false);
+          }}>
           <OperationalTag
             onClick={() => {
-              setOpenHighContrast(!openHighContrast);
+              setOpen(false);
+              setOpenHighContrast((prev) => !prev);
             }}
             aria-expanded={openHighContrast}
             renderIcon={Asleep}
@@ -222,10 +227,15 @@ export const Operational = (args) => {
           </PopoverContent>
         </Popover>
 
-        <Popover open={open}>
+        <Popover
+          open={open}
+          onRequestClose={() => {
+            setOpen(false);
+          }}>
           <OperationalTag
             onClick={() => {
-              setOpen(!open);
+              setOpenHighContrast(false);
+              setOpen((prev) => !prev);
             }}
             aria-expanded={open}
             renderIcon={Asleep}
@@ -234,12 +244,7 @@ export const Operational = (args) => {
             {...args}
           />
           <PopoverContent>
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                padding: '1rem',
-              }}>
+            <div className="tag-group tag-group--column">
               <Tag type="blue" className="some-class" {...args}>
                 {'Tag 1 name'}
               </Tag>
@@ -371,7 +376,7 @@ export const Dismissible = (args) => {
         Reset
       </Button>
       <br />
-      <div aria-label="Dismissible tags" role="group">
+      <div className="tag-group" aria-label="Dismissible tags" role="group">
         {renderedTags.map((tag, index) => (
           <DismissibleTag
             key={index}

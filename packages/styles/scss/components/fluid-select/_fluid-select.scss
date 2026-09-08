@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2022
+// Copyright IBM Corp. 2022, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -12,6 +12,8 @@
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
+@use '../../border-radius' as *;
+@use '../../feature-flags' as *;
 @use '../../utilities/convert';
 @use '../../utilities/focus-outline' as *;
 @use '../select';
@@ -19,11 +21,14 @@
 @mixin fluid-select {
   .#{$prefix}--select--fluid .#{$prefix}--select {
     position: relative;
-    background: $field;
     block-size: 100%;
     transition:
       background-color $duration-fast-01 motion(standard, productive),
       outline $duration-fast-01 motion(standard, productive);
+
+    @if not enabled('enable-v12-release') {
+      background: $field;
+    }
   }
 
   .#{$prefix}--select--fluid .#{$prefix}--label {
@@ -109,6 +114,30 @@
 
   .#{$prefix}--select--fluid .#{$prefix}--select-input__wrapper {
     display: block;
+  }
+
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select:not(.#{$prefix}--select--readonly)
+    .#{$prefix}--select-input__wrapper {
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-04;
+    }
+  }
+
+  .#{$prefix}--select--fluid .#{$prefix}--select-input__wrapper[data-invalid],
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select--warning
+    .#{$prefix}--select-input__wrapper {
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-04;
+      background: $field;
+
+      .#{$prefix}--select-input {
+        border: none;
+        border-radius: $border-radius-00;
+        background: transparent;
+      }
+    }
   }
 
   .#{$prefix}--select--fluid

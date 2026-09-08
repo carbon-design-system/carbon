@@ -28,11 +28,53 @@ export default {
     ModalFooter,
   },
   tags: ['!autodocs'],
+  parameters: {
+    controls: {
+      exclude: [
+        'containerClassName',
+        'launcherButtonRef',
+        'selectorPrimaryFocus',
+        'selectorsFloatingMenus',
+      ],
+    },
+  },
+  argTypes: {
+    danger: { control: 'boolean' },
+    isFullWidth: { control: 'boolean' },
+    size: { control: 'radio', options: ['xs', 'sm', 'md', 'lg'] },
+    preventCloseOnClickOutside: { control: 'boolean' },
+    'aria-label': { control: 'text' },
+    label: { control: 'text' },
+    title: { control: 'text' },
+    primaryButtonText: { control: 'text' },
+    secondaryButtonText: { control: 'text' },
+    onClose: { action: 'onClose' },
+    onKeyDown: { action: 'onKeyDown' },
+  },
+  args: {
+    danger: false,
+    isFullWidth: false,
+    size: null,
+    preventCloseOnClickOutside: false,
+    'aria-label': 'Modal content',
+    label: 'Account resources',
+    title: 'Add a custom domain',
+    primaryButtonText: 'Add',
+    secondaryButtonText: 'Cancel',
+  },
 };
 
 export const EnablePresence = (args) => {
   const buttonRef = useRef(null);
   const [open, setOpen] = useState(true);
+  const {
+    iconDescription,
+    label = 'Account resources',
+    title = 'Add a custom domain',
+    primaryButtonText = 'Add',
+    secondaryButtonText = 'Cancel',
+    ...modalArgs
+  } = args;
   return (
     <FeatureFlags enablePresence>
       <Annotation
@@ -52,14 +94,14 @@ export const EnablePresence = (args) => {
         <ClassPrefix prefix="presence">
           <div className="preview-modal-with-presence">
             <ComposedModal
-              {...args}
+              {...modalArgs}
               open={open}
               launcherButtonRef={buttonRef}
               onClose={() => setOpen(false)}>
               <ModalHeader
-                label="Account resources"
-                title="Add a custom domain"
-                {...args}
+                label={label}
+                title={title}
+                iconDescription={iconDescription}
               />
               <ModalBody>
                 <p style={{ marginBottom: '1rem' }}>
@@ -84,9 +126,8 @@ export const EnablePresence = (args) => {
                 </Select>
               </ModalBody>
               <ModalFooter
-                primaryButtonText="Add"
-                secondaryButtonText="Cancel"
-                {...args}
+                primaryButtonText={primaryButtonText}
+                secondaryButtonText={secondaryButtonText}
               />
             </ComposedModal>
           </div>
@@ -96,21 +137,3 @@ export const EnablePresence = (args) => {
   );
 };
 EnablePresence.storyName = 'enable-presence';
-EnablePresence.parameters = {
-  controls: {
-    exclude: [
-      'containerClassName',
-      'launcherButtonRef',
-      'selectorPrimaryFocus',
-      'selectorsFloatingMenus',
-    ],
-  },
-};
-EnablePresence.argTypes = {
-  onClose: {
-    action: 'onClose',
-  },
-  onKeyDown: {
-    action: 'onKeyDown',
-  },
-};
