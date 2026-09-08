@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2025
+// Copyright IBM Corp. 2016, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -35,8 +35,10 @@
       outline: none;
     }
 
-    &:hover {
-      cursor: pointer;
+    @media (any-hover: hover) {
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 
@@ -65,30 +67,39 @@
     outline: none;
   }
 
-  .#{$prefix}--tree-node--disabled,
-  .#{$prefix}--tree-node--disabled .#{$prefix}--tree-node__label:hover,
-  .#{$prefix}--tree-node--disabled
-    .#{$prefix}--tree-node__label:hover
-    .#{$prefix}--tree-node__label__details {
+  .#{$prefix}--tree-node--disabled {
     background-color: $field-01;
     color: $text-disabled;
+    cursor: not-allowed;
   }
 
   .#{$prefix}--tree-node--disabled .#{$prefix}--tree-parent-node__toggle-icon,
-  .#{$prefix}--tree-node--disabled .#{$prefix}--tree-node__icon,
-  .#{$prefix}--tree-node--disabled
-    .#{$prefix}--tree-node__label:hover
-    .#{$prefix}--tree-parent-node__toggle-icon,
-  .#{$prefix}--tree-node--disabled
-    .#{$prefix}--tree-node__label:hover
-    .#{$prefix}--tree-node__icon {
+  .#{$prefix}--tree-node--disabled .#{$prefix}--tree-node__icon {
     fill: $icon-disabled;
   }
 
-  .#{$prefix}--tree-node--disabled,
-  .#{$prefix}--tree-node--disabled
-    .#{$prefix}--tree-parent-node__toggle-icon:hover {
-    cursor: not-allowed;
+  @media (any-hover: hover) {
+    .#{$prefix}--tree-node--disabled .#{$prefix}--tree-node__label:hover,
+    .#{$prefix}--tree-node--disabled
+      .#{$prefix}--tree-node__label:hover
+      .#{$prefix}--tree-node__label__details {
+      background-color: $field-01;
+      color: $text-disabled;
+    }
+
+    .#{$prefix}--tree-node--disabled
+      .#{$prefix}--tree-node__label:hover
+      .#{$prefix}--tree-parent-node__toggle-icon,
+    .#{$prefix}--tree-node--disabled
+      .#{$prefix}--tree-node__label:hover
+      .#{$prefix}--tree-node__icon {
+      fill: $icon-disabled;
+    }
+
+    .#{$prefix}--tree-node--disabled
+      .#{$prefix}--tree-parent-node__toggle-icon:hover {
+      cursor: not-allowed;
+    }
   }
 
   // Overrides link styling
@@ -122,9 +133,11 @@
     min-block-size: convert.to-rem(32px);
     padding-inline-end: 1rem;
 
-    &:hover {
-      background-color: $layer-hover-01;
-      color: $text-primary;
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: $layer-hover-01;
+        color: $text-primary;
+      }
     }
   }
 
@@ -134,14 +147,16 @@
     // (min-height 32px - single line text height 18px) / 2 = 7px
   }
 
-  .#{$prefix}--tree-node__label:hover .#{$prefix}--tree-node__label__details {
-    color: $text-primary;
-  }
+  @media (any-hover: hover) {
+    .#{$prefix}--tree-node__label:hover .#{$prefix}--tree-node__label__details {
+      color: $text-primary;
+    }
 
-  .#{$prefix}--tree-node__label:hover
-    .#{$prefix}--tree-parent-node__toggle-icon,
-  .#{$prefix}--tree-node__label:hover .#{$prefix}--tree-node__icon {
-    fill: $icon-primary;
+    .#{$prefix}--tree-node__label:hover
+      .#{$prefix}--tree-parent-node__toggle-icon,
+    .#{$prefix}--tree-node__label:hover .#{$prefix}--tree-node__icon {
+      fill: $icon-primary;
+    }
   }
 
   .#{$prefix}--tree-leaf-node {
@@ -177,8 +192,10 @@
     margin-inline: -$spacing-02 $spacing-02;
     padding-inline-start: $spacing-02;
 
-    &:hover {
-      cursor: pointer;
+    @media (any-hover: hover) {
+      &:hover {
+        cursor: pointer;
+      }
     }
 
     &:focus {
@@ -213,8 +230,10 @@
     background-color: $layer-selected-01;
     color: $text-primary;
 
-    &:hover {
-      background-color: $layer-selected-hover-01;
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: $layer-selected-hover-01;
+      }
     }
   }
 

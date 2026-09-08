@@ -73,3 +73,6 @@ deprecated:
   - name: ibm-watsonx--code-assistant-for-z--refactor
     reason:
       Icon no longer relevant. watsonx Code Assistant for Z Refactoring Assistant has been merged into an existing product.
+  - name: logo--twitter
+    reason:
+      Icon no longer relevant. Replaced with logo--x.

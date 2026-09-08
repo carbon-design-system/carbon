@@ -79,10 +79,10 @@ $button-border-width: 2px !default;
 /// @group button
 $button-outline-width: 1px !default;
 
-/// Minimum inline size of a fluid button. Used as the container-query threshold
-/// for stacking fluid button sets. Contexts with more buttons or narrower
-/// containers (e.g. Tearsheet at 540px with 4 buttons) should lower this value
-/// via `@use … with ($button-min-inline-size: <value>)`.
+/// Default minimum inline size per button for fluid ButtonSet container-query
+/// stacking. Components with narrower containers (e.g. Tearsheet, SidePanel)
+/// should pass a custom value via the `$min-inline-size` parameter of the
+/// `button-set-fluid-layout` mixin rather than reconfiguring this variable.
 /// @type Number
 /// @access public
 /// @group button

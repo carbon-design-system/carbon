@@ -6,6 +6,7 @@
  */
 
 import { html } from 'lit';
+import { keyed } from 'lit/directives/keyed.js';
 import './index';
 import styles from './tooltip-story.scss?lit';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
@@ -14,22 +15,31 @@ const tooltipAlignments = {
   [`top`]: POPOVER_ALIGNMENT.TOP,
   [`top-left`]: POPOVER_ALIGNMENT.TOP_LEFT,
   [`top-right`]: POPOVER_ALIGNMENT.TOP_RIGHT,
+  [`top-start`]: POPOVER_ALIGNMENT.TOP_START,
+  [`top-end`]: POPOVER_ALIGNMENT.TOP_END,
   [`bottom`]: POPOVER_ALIGNMENT.BOTTOM,
   [`bottom-left`]: POPOVER_ALIGNMENT.BOTTOM_LEFT,
   [`bottom-right`]: POPOVER_ALIGNMENT.BOTTOM_RIGHT,
+  [`bottom-start`]: POPOVER_ALIGNMENT.BOTTOM_START,
+  [`bottom-end`]: POPOVER_ALIGNMENT.BOTTOM_END,
   [`left`]: POPOVER_ALIGNMENT.LEFT,
   [`left-bottom`]: POPOVER_ALIGNMENT.LEFT_BOTTOM,
   [`left-top`]: POPOVER_ALIGNMENT.LEFT_TOP,
+  [`left-start`]: POPOVER_ALIGNMENT.LEFT_START,
+  [`left-end`]: POPOVER_ALIGNMENT.LEFT_END,
   [`right`]: POPOVER_ALIGNMENT.RIGHT,
   [`right-bottom`]: POPOVER_ALIGNMENT.RIGHT_BOTTOM,
   [`right-top`]: POPOVER_ALIGNMENT.RIGHT_TOP,
+  [`right-start`]: POPOVER_ALIGNMENT.RIGHT_START,
+  [`right-end`]: POPOVER_ALIGNMENT.RIGHT_END,
 };
 
 const defaultArgs = {
-  align: POPOVER_ALIGNMENT.BOTTOM_LEFT,
+  align: POPOVER_ALIGNMENT.BOTTOM_START,
   autoAlign: false,
   defaultOpen: false,
-  definition: 'Example definition',
+  definition:
+    'Uniform Resource Locator; the address of a resource (such as a document or website) on the Internet.',
   openOnHover: true,
 };
 
@@ -69,14 +79,19 @@ export const Default = {
       Custom domains direct requests for your apps in this Cloud Foundry
       organization to a
       <span style="display: inline-block;">
-        <cds-definition-tooltip
-          align=${align}
-          ?autoalign=${autoAlign}
-          ?open-on-hover=${openOnHover}
-          ?default-open=${defaultOpen}>
-          <span slot="definition">${definition}</span>
-          URL
-        </cds-definition-tooltip>
+        ${keyed(
+          defaultOpen,
+          html`
+            <cds-definition-tooltip
+              align=${align}
+              ?autoalign=${autoAlign}
+              ?open-on-hover=${openOnHover}
+              ?default-open=${defaultOpen}>
+              <span slot="definition">${definition}</span>
+              URL
+            </cds-definition-tooltip>
+          `
+        )}
       </span>
       that you own. A custom domain can be a shared domain, a shared subdomain,
       or a shared domain and host.
