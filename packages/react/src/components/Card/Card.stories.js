@@ -36,6 +36,8 @@ import rebusClassic from './_story-assets/classic-rebus.png';
 import './card-story.scss';
 import mdx from './Card.mdx';
 
+const storyClass = 'card-story';
+
 export default {
   title: 'Preview/preview__Card',
   component: Card,
@@ -51,6 +53,13 @@ export default {
     CardAction: Card.Action,
   },
   tags: ['autodocs'],
+  decorators: [
+    (Story) => (
+      <div className={`${storyClass}__viewport`}>
+        <Story />
+      </div>
+    ),
+  ],
   parameters: {
     layout: 'fullscreen',
     docs: {

@@ -110,6 +110,38 @@ describe('Slider', () => {
       ).toBeInTheDocument();
     });
 
+    it('should not allow interactive content in labelText', () => {
+      const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+      expect(() => {
+        renderSlider({
+          labelText: (
+            <>
+              Slider label
+              <button type="button">Help</button>
+            </>
+          ),
+        });
+      }).toThrow(
+        'The Slider component `labelText` prop must have no interactive content'
+      );
+
+      spy.mockRestore();
+    });
+
+    it('should allow non-interactive content in labelText', () => {
+      expect(() => {
+        renderSlider({
+          labelText: (
+            <>
+              Slider label
+              <span>additional label content</span>
+            </>
+          ),
+        });
+      }).not.toThrow();
+    });
+
     it('should render extra classes passed in via className', () => {
       const customSliderClass = 'slider-custom-class';
       const { container } = renderSlider({ className: customSliderClass });

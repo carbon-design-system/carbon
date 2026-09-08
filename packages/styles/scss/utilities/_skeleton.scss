@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2021
+// Copyright IBM Corp. 2021, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -8,6 +8,7 @@
 @use 'keyframes';
 @use '../theme' as *;
 @use '../config' as *;
+@use '../feature-flags' as *;
 @use '../utilities/high-contrast-mode' as *;
 
 /// Skeleton loading animation
@@ -21,6 +22,11 @@
   background: $skeleton-background;
   box-shadow: none;
   pointer-events: none;
+
+  @if enabled('enable-v12-release') {
+    overflow: hidden;
+    border-radius: 4px;
+  }
 
   &:hover,
   &:focus,

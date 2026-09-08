@@ -39,6 +39,7 @@ import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import {
   getInteractiveContent,
   getRoleContent,
+  useNoInteractiveChildren,
 } from '../../internal/useNoInteractiveChildren';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useFeatureFlag } from '../FeatureFlags';
@@ -282,7 +283,8 @@ export const ClickableTile = React.forwardRef<
       [`${prefix}--tile--disabled-icon`]: v12DefaultIcons && disabled,
     });
 
-    return (
+    const hasElementDecorator = React.isValidElement(decorator);
+    const clickableTile = (
       <Link
         className={classes}
         href={href}
@@ -300,12 +302,20 @@ export const ClickableTile = React.forwardRef<
         {(slug === true || decorator === true) && (
           <AiLabel size="24" className={`${prefix}--tile--ai-label-icon`} />
         )}
-        {React.isValidElement(decorator) && (
-          <div className={`${prefix}--tile--inner-decorator`}>{decorator}</div>
-        )}
         {Icon && <Icon className={iconClasses} aria-hidden="true" />}
       </Link>
     );
+
+    if (hasElementDecorator) {
+      return (
+        <div className={`${prefix}--clickable-tile__wrapper`}>
+          {clickableTile}
+          <div className={`${prefix}--tile--inner-decorator`}>{decorator}</div>
+        </div>
+      );
+    }
+
+    return clickableTile;
   }
 );
 
@@ -524,14 +534,6 @@ export const SelectableTile = React.forwardRef<
     function handleClick(evt: MouseEvent<HTMLDivElement>) {
       evt.preventDefault();
       evt?.persist?.();
-      if (
-        normalizedDecorator &&
-        decoratorRef.current &&
-        evt.target instanceof Node &&
-        decoratorRef.current.contains(evt.target)
-      ) {
-        return;
-      }
 
       const newSelected = !isSelected;
       handleSelectionChange(evt, newSelected);
@@ -549,14 +551,29 @@ export const SelectableTile = React.forwardRef<
     }
 
     // AILabel is always size `xs`
-    const decoratorRef = useRef<HTMLInputElement>(null);
+    const labelRef = useRef<HTMLLabelElement>(null);
     const candidate = slug ?? decorator;
     const candidateIsAILabel = isComponentElement(candidate, AILabel);
     const normalizedDecorator = candidateIsAILabel
-      ? cloneElement(candidate, { size: 'xs', ref: decoratorRef })
+      ? cloneElement(candidate, { size: 'xs' })
       : candidate;
+    const wrapperClassName = cx(`${prefix}--selectable-tile__wrapper`, {
+      [`${prefix}--selectable-tile__wrapper--slug`]: slug,
+      [`${prefix}--selectable-tile__wrapper--decorator`]: decorator,
+    });
+    const decoratorNode = slug ? (
+      normalizedDecorator
+    ) : decorator ? (
+      <div className={`${prefix}--tile--inner-decorator`}>
+        {normalizedDecorator}
+      </div>
+    ) : null;
+    useNoInteractiveChildren(
+      labelRef,
+      'The SelectableTile component `children` prop must have no interactive content'
+    );
 
-    return (
+    const selectableTile = (
       // eslint-disable-next-line jsx-a11y/interactive-supports-focus
       <div
         className={classes}
@@ -573,19 +590,23 @@ export const SelectableTile = React.forwardRef<
           className={`${prefix}--tile__checkmark ${prefix}--tile__checkmark--persistent`}>
           {isSelected ? <CheckboxCheckedFilled /> : <Checkbox />}
         </span>
-        <Text as="label" htmlFor={id} className={`${prefix}--tile-content`}>
+        <Text
+          as="label"
+          htmlFor={id}
+          className={`${prefix}--tile-content`}
+          ref={labelRef}>
           {children}
         </Text>
-        {slug ? (
-          normalizedDecorator
-        ) : decorator ? (
-          <div className={`${prefix}--tile--inner-decorator`}>
-            {normalizedDecorator}
-          </div>
-        ) : (
-          ''
-        )}
       </div>
+    );
+
+    return decoratorNode ? (
+      <div className={wrapperClassName}>
+        {selectableTile}
+        {decoratorNode}
+      </div>
+    ) : (
+      selectableTile
     );
   }
 );

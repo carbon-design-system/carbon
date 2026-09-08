@@ -459,8 +459,21 @@ const ComposedModalDialog = React.forwardRef<
   }
 
   function closeModal(evt) {
+    const previouslyFocused =
+      document.activeElement instanceof HTMLElement &&
+      innerModal.current?.contains(document.activeElement)
+        ? document.activeElement
+        : null;
+
+    // Move focus out of the modal before aria-hidden="true" is applied on
+    // re-render, otherwise the browser will warn about aria-hidden being set
+    // on an ancestor of the focused element.
+    previouslyFocused?.blur();
+
     if (!onClose || onClose(evt) !== false) {
       setIsOpen(false);
+    } else {
+      previouslyFocused?.focus();
     }
   }
 

@@ -35,6 +35,44 @@ describe('ControlledPasswordInput Component', () => {
     expect(input).toBeInTheDocument();
   });
 
+  it('should not allow interactive content in labelText', () => {
+    const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+    expect(() => {
+      render(
+        <ControlledPasswordInput
+          id="password-input"
+          labelText={
+            <>
+              ControlledPasswordInput label
+              <button type="button">Help</button>
+            </>
+          }
+        />
+      );
+    }).toThrow(
+      'The ControlledPasswordInput component `labelText` prop must have no interactive content'
+    );
+
+    spy.mockRestore();
+  });
+
+  it('should allow non-interactive content in labelText', () => {
+    expect(() => {
+      render(
+        <ControlledPasswordInput
+          id="password-input"
+          labelText={
+            <>
+              ControlledPasswordInput label
+              <span>additional label content</span>
+            </>
+          }
+        />
+      );
+    }).not.toThrow();
+  });
+
   it('renders the component with initial type as password', () => {
     render(
       <ControlledPasswordInput

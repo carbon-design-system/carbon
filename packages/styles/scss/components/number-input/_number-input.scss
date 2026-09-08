@@ -1,13 +1,15 @@
 //
-// Copyright IBM Corp. 2016, 2025
+// Copyright IBM Corp. 2016, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
 @use '../form';
+@use '../../border-radius' as *;
 @use '../../colors' as *;
 @use '../../config' as *;
+@use '../../feature-flags' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
@@ -67,6 +69,20 @@
     transition:
       background-color $duration-fast-01 motion(standard, productive),
       outline $duration-fast-01 motion(standard, productive);
+
+    @if enabled('enable-v12-release') {
+      border: 1px solid transparent;
+      border-radius: $border-radius-04;
+      // (gray-20 → gray-50)
+      background:
+        linear-gradient($field, $field) padding-box,
+        linear-gradient(
+            to bottom,
+            $border-subtle calc(100% - 4px),
+            $border-strong 100%
+          )
+          border-box;
+    }
 
     &:focus {
       @include focus-outline('outline');
@@ -133,6 +149,11 @@
     background-color: $field;
     color: $text-disabled;
     cursor: not-allowed;
+
+    @if enabled('enable-v12-release') {
+      border: none;
+      background: $field;
+    }
   }
 
   .#{$prefix}--number__input-wrapper {
@@ -191,6 +212,16 @@
       color: $text-disabled;
       cursor: not-allowed;
     }
+
+    @if enabled('enable-v12-release') {
+      border: 1px solid transparent;
+      border-radius: $border-radius-04;
+      background-clip: padding-box;
+
+      &:hover {
+        box-shadow: none;
+      }
+    }
   }
 
   // set orders to facilitate styling for rule dividers
@@ -227,6 +258,10 @@
     border-color: $focus;
     box-shadow: none;
     outline-offset: -2px;
+
+    @if enabled('enable-v12-release') {
+      border-color: transparent;
+    }
   }
 
   .#{$prefix}--number
@@ -255,16 +290,20 @@
   .#{$prefix}--number
     input[type='number'][data-invalid]:not(:focus)
     ~ .#{$prefix}--number__controls
-    .#{$prefix}--number__control-btn:hover,
+    .#{$prefix}--number__control-btn,
   .#{$prefix}--number
     input[type='text'][data-invalid]:not(:focus)
     ~ .#{$prefix}--number__controls
-    .#{$prefix}--number__control-btn:hover {
+    .#{$prefix}--number__control-btn {
     border-width: 2px 0;
     border-style: solid;
     border-color: $support-error;
     box-shadow: none;
     outline-offset: -2px;
+
+    @if enabled('enable-v12-release') {
+      border-color: transparent;
+    }
   }
 
   .#{$prefix}--number
@@ -287,6 +326,10 @@
 
     &:first-of-type {
       order: 0;
+    }
+
+    @if enabled('enable-v12-release') {
+      display: none;
     }
   }
 
@@ -449,11 +492,19 @@
   .#{$prefix}--number--readonly input[type='text'] {
     background: transparent;
     border-block-end-color: $border-subtle;
+
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-00;
+    }
   }
 
   .#{$prefix}--number--readonly .#{$prefix}--number__control-btn {
     color: $icon-disabled;
     pointer-events: none;
+
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-00;
+    }
 
     &:hover {
       background-color: transparent;
@@ -516,6 +567,10 @@
     block-size: convert.to-rem(16px);
     content: '';
     inline-size: convert.to-rem(1px);
+
+    @if enabled('enable-v12-release') {
+      display: none;
+    }
   }
 
   .#{$prefix}--number__input-wrapper--decorator
@@ -540,6 +595,10 @@
   .#{$prefix}--number__control-btn::after {
     display: block;
     inset-inline-end: 0;
+
+    @if enabled('enable-v12-release') {
+      display: none;
+    }
   }
 
   .#{$prefix}--number__input-wrapper--decorator
@@ -650,6 +709,31 @@
     @include ai-gradient;
 
     padding-inline-end: convert.to-rem(145px);
+
+    @if enabled('enable-v12-release') {
+      border: 1px solid transparent;
+      border-radius: $border-radius-04;
+      // Reset the bottom-edge color override from @include ai-gradient so the
+      // border-box gradient layer controls all four sides uniformly.
+      background:
+        linear-gradient(
+            0deg,
+            $ai-aura-start-sm 0%,
+            15%,
+            $ai-aura-end 50%,
+            transparent 100%
+          )
+          padding-box,
+        linear-gradient($field, $field) padding-box,
+        // (ai-border-start → ai-border-end), mirroring the default v12 border gradient
+        linear-gradient(
+            to bottom,
+            $ai-border-start calc(100% - 4px),
+            $ai-border-strong 100%
+          )
+          border-box;
+      border-block-end-color: transparent;
+    }
   }
 
   // Skeleton State
@@ -698,11 +782,13 @@
   display: none;
 }
 
-.#{$prefix}--number__input-wrapper--decorator
-  .#{$prefix}--number__control-btn:hover,
-.#{$prefix}--number__input-wrapper--slug
-  .#{$prefix}--number__control-btn:hover {
-  box-shadow: 0 -1px 0 $ai-border-strong inset;
+@if not enabled('enable-v12-release') {
+  .#{$prefix}--number__input-wrapper--decorator
+    .#{$prefix}--number__control-btn:hover,
+  .#{$prefix}--number__input-wrapper--slug
+    .#{$prefix}--number__control-btn:hover {
+    box-shadow: 0 -1px 0 $ai-border-strong inset;
+  }
 }
 
 //hide dividers on button focus

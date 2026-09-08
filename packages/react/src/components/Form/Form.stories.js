@@ -1,77 +1,44 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Checkbox from '../Checkbox';
 import Form from './Form';
 import FormGroup from '../FormGroup';
 import FileUploader from '../FileUploader';
-import { NumberInput } from '../NumberInput';
+import { NumberInput, NumberInputSkeleton } from '../NumberInput';
 import RadioButton from '../RadioButton';
 import RadioButtonGroup from '../RadioButtonGroup';
 import Button from '../Button';
-import Search from '../Search';
-import Select from '../Select';
+import {
+  ComposedModal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+} from '../ComposedModal';
+import Search, { SearchSkeleton } from '../Search';
+import Select, { SelectSkeleton } from '../Select';
 import SelectItem from '../SelectItem';
-import TextArea from '../TextArea';
-import TextInput from '../TextInput';
+import TextArea, { TextAreaSkeleton } from '../TextArea';
+import TextInput, { TextInputSkeleton } from '../TextInput';
+import { PasswordInput } from '../PasswordInput';
 import { Stack } from '../Stack';
 import ComboBox from '../ComboBox';
-import Dropdown from '../Dropdown';
-import DatePicker from '../DatePicker';
+import Dropdown, { DropdownSkeleton } from '../Dropdown';
+import DatePicker, { DatePickerSkeleton } from '../DatePicker';
 import DatePickerInput from '../DatePickerInput';
 import { MultiSelect, FilterableMultiSelect } from '../MultiSelect';
-import FluidComboBox from '../FluidComboBox';
-import FluidForm from '../FluidForm';
-import FluidNumberInput from '../FluidNumberInput';
-import FluidDatePicker from '../FluidDatePicker';
-import FluidDatePickerInput from '../FluidDatePickerInput';
-import FluidDropdown from '../FluidDropdown';
-import FluidMultiSelect from '../FluidMultiSelect';
-import FluidSelect from '../FluidSelect';
-import FluidTextArea from '../FluidTextArea';
-import FluidTextInput from '../FluidTextInput';
 import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import '../AILabel/ailabel-story.scss';
 
 import mdx from './Form.mdx';
-
-const numberInputProps = {
-  className: 'some-class',
-  id: 'number-input-1',
-  label: 'Number Input',
-  min: 0,
-  max: 100,
-  value: 50,
-  step: 10,
-  iconDescription: 'Add/decrement number',
-};
-
-const TextInputProps = {
-  className: 'some-class',
-  id: 'test2',
-  labelText: 'Text Input label',
-  placeholder: 'Placeholder text',
-};
-
-const textareaProps = {
-  labelText: 'Text Area label',
-  className: 'some-class',
-  placeholder: 'Placeholder text',
-  id: 'test5',
-  rows: 4,
-};
-
-const buttonEvents = {
-  className: 'some-class',
-};
 
 export default {
   title: 'Components/Form',
@@ -81,174 +48,71 @@ export default {
       page: mdx,
     },
   },
-};
-
-const formArgs = {
-  className: 'some-class',
-};
-
-const formArgTypes = {
-  className: {
-    control: { type: 'text' },
+  // ── Shared controls inherited by every story ──────────────────────────────
+  args: {
+    className: 'some-class',
+    skeleton: false,
+    aiLabel: false,
+    revertActive: false,
+    showInModal: false,
+    disabled: false,
+    readOnly: false,
+    invalid: false,
+    invalidText: 'Error message.',
+    warn: false,
+    warnText: 'Warning message.',
   },
-  onSubmit: {
-    action: 'onSubmit',
+  argTypes: {
+    className: {
+      control: { type: 'text' },
+      description: 'Specify a custom className to be applied to the form',
+    },
+    onSubmit: {
+      action: 'onSubmit',
+    },
+    skeleton: {
+      control: { type: 'boolean' },
+      description: 'Render all form inputs as skeleton loaders simultaneously',
+    },
+    aiLabel: {
+      control: { type: 'boolean' },
+      description: 'Attach an AI Label decorator to all inputs that support it',
+      table: { category: 'AILabel' },
+    },
+    revertActive: {
+      control: { type: 'boolean' },
+      table: { category: 'AILabel' },
+    },
+    showInModal: {
+      control: { type: 'boolean' },
+      description:
+        'Render the entire form inside a ComposedModal with a trigger button',
+    },
+    disabled: {
+      control: { type: 'boolean' },
+      description: 'Specify whether the form inputs should be disabled',
+    },
+    readOnly: {
+      control: { type: 'boolean' },
+      description: 'Specify whether the form inputs should be read-only',
+    },
+    invalid: {
+      control: { type: 'boolean' },
+      description: 'Specify whether the form inputs are in an invalid state',
+    },
+    invalidText: {
+      control: { type: 'text' },
+      description: 'Provide the text for the invalid state',
+    },
+    warn: {
+      control: { type: 'boolean' },
+      description: 'Specify whether the form inputs should display a warning',
+    },
+    warnText: {
+      control: { type: 'text' },
+      description: 'Provide the text for the warning state',
+    },
   },
-};
-
-export const Default = ({ className, onSubmit }) => {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    onSubmit?.(event);
-  };
-
-  return (
-    <Form
-      aria-label="sample form"
-      className={className}
-      onSubmit={handleSubmit}>
-      <Stack gap={7}>
-        <FormGroup className="some-class" legendText="Checkbox heading">
-          <Checkbox defaultChecked labelText="Checkbox label" id="checkbox-0" />
-          <Checkbox labelText="Checkbox label" id="checkbox-1" />
-          <Checkbox disabled labelText="Checkbox label" id="checkbox-2" />
-        </FormGroup>
-
-        <NumberInput
-          className="some-class"
-          id="number-input-1"
-          label="Number Input"
-          min={0}
-          max={100}
-          value={50}
-          step={10}
-          iconDescription="Add/decrement number"
-        />
-
-        <FormGroup className="some-class" legendText="File Uploader">
-          <FileUploader
-            id="file-1"
-            role="button"
-            labelDescription="Max file size is 500 MB. Only .jpg files are supported."
-            buttonLabel="Add file"
-            buttonKind="primary"
-            size="md"
-            filenameStatus="edit"
-            accept={['.jpg', '.png']}
-            multiple={true}
-            disabled={false}
-            iconDescription="Dismiss file"
-            name=""
-          />
-        </FormGroup>
-
-        <RadioButtonGroup
-          name="radio-button-group"
-          defaultSelected="default-selected"
-          legendText="Radio Button heading">
-          <RadioButton
-            value="standard"
-            id="radio-1"
-            labelText="Standard Radio Button"
-            className="some-class"
-          />
-          <RadioButton
-            value="default-selected"
-            labelText="Default Selected Radio Button"
-            id="radio-2"
-            className="some-class"
-          />
-          <RadioButton
-            value="blue"
-            labelText="Standard Radio Button"
-            id="radio-3"
-            className="some-class"
-          />
-          <RadioButton
-            value="disabled"
-            labelText="Disabled Radio Button"
-            id="radio-4"
-            disabled
-            className="some-class"
-          />
-        </RadioButtonGroup>
-
-        <FormGroup className="some-class" legendText="Search">
-          <Search
-            className="some-class"
-            size="md"
-            id="search-1"
-            labelText="Search"
-            placeholder="Search"
-          />
-        </FormGroup>
-
-        <Select
-          className="some-class"
-          id="select-1"
-          defaultValue="placeholder-item">
-          <SelectItem
-            disabled
-            hidden
-            value="placeholder-item"
-            text="Choose an option"
-          />
-          <SelectItem value="option-1" text="Option 1" />
-          <SelectItem value="option-2" text="Option 2" />
-          <SelectItem value="option-3" text="Option 3" />
-        </Select>
-
-        <TextInput
-          className="some-class"
-          id="test2"
-          labelText="Text Input label"
-          placeholder="Placeholder text"
-        />
-
-        <TextInput
-          type="password"
-          required
-          pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
-          className="some-class"
-          id="test3"
-          labelText="Password"
-        />
-
-        <TextInput
-          type="password"
-          required
-          pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
-          className="some-class"
-          id="test4"
-          labelText="Password"
-          invalid
-          invalidText="Your password must be at least 6 characters as well as contain at least one uppercase one lowercase, and one number."
-        />
-
-        <TextArea
-          labelText="Text Area label"
-          className="some-class"
-          placeholder="Placeholder text"
-          id="test5"
-          rows={4}
-        />
-
-        <Button type="submit" className="some-class">
-          Submit
-        </Button>
-      </Stack>
-    </Form>
-  );
-};
-
-Default.args = formArgs;
-Default.propTypes = {
-  className: PropTypes.string,
-  onSubmit: PropTypes.func,
-};
-Default.argTypes = formArgTypes;
-Default.parameters = {
-  controls: { include: Object.keys(formArgTypes) },
 };
 
 const items = [
@@ -279,14 +143,70 @@ const items = [
   },
 ];
 
-export const withAILabel = (args) => {
-  const { className, onSubmit, revertActive, ...rest } = args;
+const formRowStyle = {
+  display: 'flex',
+  flexWrap: 'wrap',
+  gap: '1rem',
+};
+
+const formColStyle = {
+  flex: '1 1 12rem',
+  minWidth: 0,
+};
+
+const dateRowStyle = {
+  display: 'flex',
+  flexWrap: 'wrap',
+  gap: '1rem',
+  alignItems: 'flex-start',
+};
+
+const dateRangeColStyle = {
+  flex: '0 1 auto',
+};
+
+const dateSimpleColStyle = {
+  flex: '0 1 auto',
+};
+
+const formShellStyle = {
+  width: '100%',
+  maxWidth: '600px',
+  minWidth: 0,
+};
+
+export const Default = (args) => {
+  const {
+    className,
+    onSubmit,
+    skeleton,
+    size,
+    showInModal,
+    aiLabel,
+    revertActive,
+    disabled,
+    readOnly,
+    invalid,
+    invalidText,
+    warn,
+    warnText,
+  } = args;
+
+  const [modalOpen, setModalOpen] = useState(false);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     onSubmit?.(event);
   };
-  const aiLabel = (
-    <AILabel className="ai-label-container" revertActive={revertActive}>
+
+  // xs is only valid for TextInput, Select, Search — clamp to sm for list-box components
+  const listBoxSize = size === 'xs' ? 'sm' : size;
+
+  const decorator = aiLabel ? (
+    <AILabel
+      className="ai-label-container"
+      align="bottom-left"
+      revertActive={revertActive}>
       <AILabelContent>
         <div>
           <p className="secondary">AI Explained</p>
@@ -314,248 +234,406 @@ export const withAILabel = (args) => {
         </AILabelActions>
       </AILabelContent>
     </AILabel>
-  );
-  return (
-    <Stack gap={7} className="form-example">
-      <Form
-        aria-label="sample form"
-        className={['ai-label-form', className].filter(Boolean).join(' ')}
-        onSubmit={handleSubmit}>
-        <Stack gap={7}>
-          <NumberInput {...numberInputProps} decorator={aiLabel} {...rest} />
-          <DatePicker datePickerType="single">
-            <DatePickerInput
-              placeholder="mm/dd/yyyy"
-              labelText="Date Picker label"
-              size="md"
-              id="date-picker"
-              decorator={aiLabel}
-              {...rest}
-            />
-          </DatePicker>
-          <TextInput {...TextInputProps} decorator={aiLabel} {...rest} />
-          <TextArea {...textareaProps} decorator={aiLabel} {...rest} />
-          <Dropdown
-            id="default"
-            titleText="Dropdown title"
-            helperText="This is some helper text"
-            initialSelectedItem={items[1]}
-            label="Option 1"
-            items={items}
-            itemToString={(item) => (item ? item.text : '')}
-            decorator={aiLabel}
-            {...rest}
-          />
-          <MultiSelect
-            label="Multiselect Label"
-            id="carbon-multiselect-example"
-            titleText="Multiselect title"
-            helperText="This is helper text"
-            items={items}
-            itemToString={(item) => (item ? item.text : '')}
-            selectionFeedback="top-after-reopen"
-            decorator={aiLabel}
-            {...rest}
-          />
-          <FilterableMultiSelect
-            id="carbon-multiselect-example-3"
-            titleText="FilterableMultiselect title"
-            helperText="This is helper text"
-            items={items}
-            itemToString={(item) => (item ? item.text : '')}
-            selectionFeedback="top-after-reopen"
-            decorator={aiLabel}
-            {...rest}
-          />
-          <ComboBox
-            onChange={() => {}}
-            id="carbon-combobox"
-            items={items}
-            itemToString={(item) => (item ? item.text : '')}
-            titleText="ComboBox title"
-            helperText="Combobox helper text"
-            decorator={aiLabel}
-            {...rest}
-          />
-          <Select
-            id="select-1"
-            labelText="Select an option"
-            helperText="Optional helper text"
-            decorator={aiLabel}
-            {...rest}>
-            <SelectItem value="" text="" />
-            <SelectItem
-              value="An example option that is really long to show what should be done to handle long text"
-              text="An example option that is really long to show what should be done to handle long text"
-            />
-            <SelectItem value="Option 2" text="Option 2" />
-            <SelectItem value="Option 3" text="Option 3" />
-            <SelectItem value="Option 4" text="Option 4" />
-          </Select>
-          <Button type="submit" className="some-class" {...buttonEvents}>
-            Submit
-          </Button>
-        </Stack>
-      </Form>
+  ) : undefined;
 
-      <FluidForm
-        aria-label="sample ai form"
-        className={['fluid-ai-label-form', className].filter(Boolean).join(' ')}
-        onSubmit={handleSubmit}>
-        <div style={{ display: 'flex' }}>
-          <FluidDatePicker datePickerType="single" style={{ width: '100%' }}>
-            <FluidDatePickerInput
-              placeholder="mm/dd/yyyy"
-              labelText="Date Picker label"
-              size="md"
-              id="fluid-date-picker"
-              decorator={aiLabel}
-              {...rest}
+  const sharedProps = {
+    size,
+    disabled,
+    readOnly,
+    invalid,
+    invalidText,
+    warn,
+    warnText,
+    ...(decorator ? { decorator } : {}),
+  };
+
+  const listBoxProps = {
+    ...sharedProps,
+    size: listBoxSize,
+  };
+
+  const formContent = skeleton ? (
+    <Form
+      aria-label="new project setup"
+      className={className}
+      onSubmit={handleSubmit}>
+      <Stack gap={5}>
+        <SearchSkeleton />
+        <div style={formRowStyle}>
+          <div style={formColStyle}>
+            <TextInputSkeleton id="skeleton-project-name" />
+          </div>
+          <div style={formColStyle}>
+            <TextInputSkeleton id="skeleton-project-id" />
+          </div>
+        </div>
+        <div style={formRowStyle}>
+          <div style={formColStyle}>
+            <DropdownSkeleton />
+          </div>
+          <div style={formColStyle}>
+            <DropdownSkeleton />
+          </div>
+        </div>
+        <DropdownSkeleton />
+        <div style={dateRowStyle}>
+          <div style={dateRangeColStyle}>
+            <DatePickerSkeleton range />
+          </div>
+          <div style={dateSimpleColStyle}>
+            <DatePickerSkeleton />
+          </div>
+        </div>
+        <div style={formRowStyle}>
+          <div style={formColStyle}>
+            <NumberInputSkeleton />
+          </div>
+          <div style={formColStyle}>
+            <SelectSkeleton id="skeleton-currency" />
+          </div>
+        </div>
+        <DropdownSkeleton />
+        <DropdownSkeleton />
+        <TextAreaSkeleton />
+        <div style={formRowStyle}>
+          <div style={formColStyle}>
+            <TextInputSkeleton id="skeleton-repo" />
+          </div>
+          <div style={formColStyle}>
+            <TextInputSkeleton id="skeleton-password" />
+          </div>
+        </div>
+      </Stack>
+    </Form>
+  ) : (
+    <Form
+      aria-label="new project setup"
+      className={className}
+      onSubmit={handleSubmit}>
+      <Stack gap={5}>
+        <Search
+          size={size}
+          id="search-members"
+          labelText="Search members"
+          placeholder="e.g. Jane Smith"
+          disabled={disabled}
+        />
+
+        {/* ── Project basics ── */}
+        <div style={formRowStyle}>
+          <div style={formColStyle}>
+            <TextInput
+              id="project-name"
+              labelText="Project name"
+              helperText="Short, descriptive project name."
+              placeholder="e.g. Carbon Design System"
+              {...sharedProps}
             />
-          </FluidDatePicker>
+          </div>
+          <div style={formColStyle}>
+            <TextInput
+              id="project-id"
+              labelText="Project ID"
+              helperText="Lowercase letters, numbers, hyphens only."
+              placeholder="e.g. carbon-design-system"
+              {...sharedProps}
+            />
+          </div>
         </div>
 
-        <div style={{ display: 'flex' }}>
-          <FluidNumberInput
-            {...numberInputProps}
-            id="fluid-number-input"
-            decorator={aiLabel}
-            {...rest}
+        {/* ── Team & ownership ── */}
+        <div style={formRowStyle}>
+          <div style={formColStyle}>
+            <Dropdown
+              id="workspace"
+              titleText="Workspace"
+              helperText="Workspace this project belongs to."
+              initialSelectedItem={items[1]}
+              label="Select workspace"
+              items={items}
+              itemToString={(item) => (item ? item.text : '')}
+              {...listBoxProps}
+            />
+          </div>
+          <div style={formColStyle}>
+            <ComboBox
+              id="project-lead"
+              onChange={() => {}}
+              items={items}
+              itemToString={(item) => (item ? item.text : '')}
+              titleText="Project lead"
+              helperText="Start typing to find a team member."
+              placeholder="Search members..."
+              {...listBoxProps}
+            />
+          </div>
+        </div>
+
+        <MultiSelect
+          id="team-members"
+          titleText="Team members"
+          label="Select members"
+          helperText="Everyone who will have access."
+          items={items}
+          itemToString={(item) => (item ? item.text : '')}
+          selectionFeedback="top-after-reopen"
+          {...listBoxProps}
+        />
+
+        <div style={dateRowStyle}>
+          <div style={dateRangeColStyle}>
+            <DatePicker datePickerType="range" readOnly={readOnly}>
+              <DatePickerInput
+                id="start-date"
+                placeholder="mm/dd/yyyy"
+                labelText="Start date"
+                helperText="Active work begins."
+                {...sharedProps}
+              />
+              <DatePickerInput
+                id="end-date"
+                placeholder="mm/dd/yyyy"
+                labelText="End date"
+                helperText="Active work ends."
+                {...sharedProps}
+              />
+            </DatePicker>
+          </div>
+          <div style={dateSimpleColStyle}>
+            <DatePicker datePickerType="simple" readOnly={readOnly}>
+              <DatePickerInput
+                id="deadline"
+                placeholder="mm/dd/yyyy"
+                labelText="Deadline"
+                helperText="Final delivery date."
+                {...sharedProps}
+              />
+            </DatePicker>
+          </div>
+        </div>
+
+        <div style={formRowStyle}>
+          <div style={formColStyle}>
+            <NumberInput
+              id="budget"
+              label="Budget"
+              helperText="Total allocated budget."
+              min={0}
+              max={10000000}
+              defaultValue={5000}
+              step={500}
+              iconDescription="Adjust budget"
+              {...listBoxProps}
+            />
+          </div>
+          <div style={formColStyle}>
+            <Select
+              id="currency"
+              labelText="Currency"
+              helperText="Currency for the budget above."
+              defaultValue="usd"
+              {...sharedProps}>
+              <SelectItem value="usd" text="USD – US Dollar" />
+              <SelectItem value="eur" text="EUR – Euro" />
+              <SelectItem value="gbp" text="GBP – British Pound" />
+              <SelectItem value="jpy" text="JPY – Japanese Yen" />
+            </Select>
+          </div>
+        </div>
+
+        {/* ── Classification ── */}
+        <RadioButtonGroup
+          name="project-visibility"
+          defaultSelected="private"
+          legendText="Visibility"
+          helperText="Who can see and access this project."
+          disabled={disabled}
+          readOnly={readOnly}>
+          <RadioButton
+            value="private"
+            id="vis-private"
+            labelText="Private – only invited members"
           />
-        </div>
-        <div style={{ display: 'flex' }}>
-          <FluidTextInput
-            {...TextInputProps}
-            id="fluid-text-input"
-            decorator={aiLabel}
-            {...rest}
+          <RadioButton
+            value="internal"
+            id="vis-internal"
+            labelText="Internal – everyone in the org"
           />
-        </div>
-        <div style={{ display: 'flex' }}>
-          <FluidTextArea
-            {...textareaProps}
-            id="fluid-text-area"
-            decorator={aiLabel}
-            {...rest}
+          <RadioButton
+            value="public"
+            id="vis-public"
+            labelText="Public – anyone with the link"
           />
-        </div>
-        <div style={{ display: 'flex' }}>
-          <FluidDropdown
-            isCondensed
-            initialSelectedItem={items[2]}
-            id="fluid-dropdown"
-            titleText="Label"
-            label="Choose an option"
-            items={items}
-            itemToString={(item) => (item ? item.text : '')}
-            decorator={aiLabel}
-            {...rest}
+        </RadioButtonGroup>
+
+        <Dropdown
+          id="project-type"
+          titleText="Project type"
+          helperText="Methodology used for this project."
+          initialSelectedItem={items[2]}
+          label="Select type"
+          items={items}
+          itemToString={(item) => (item ? item.text : '')}
+          {...listBoxProps}
+        />
+
+        <FilterableMultiSelect
+          id="tags"
+          titleText="Tags"
+          helperText="Labels to categorise and filter this project."
+          placeholder="Filter"
+          items={items}
+          itemToString={(item) => (item ? item.text : '')}
+          selectionFeedback="top-after-reopen"
+          {...listBoxProps}
+        />
+
+        <FormGroup legendText="Features">
+          <Checkbox
+            id="feat-issues"
+            labelText="Issue tracking"
+            defaultChecked
+            disabled={disabled}
           />
-        </div>
-        <div style={{ display: 'flex' }}>
-          <FluidComboBox
-            isCondensed
-            onChange={() => {}}
-            id="fluid-combobox"
-            titleText="Label"
-            label="Choose an option"
-            items={items}
-            itemToString={(item) => (item ? item.text : '')}
-            decorator={aiLabel}
-            {...rest}
+          <Checkbox
+            id="feat-wiki"
+            labelText="Wiki"
+            defaultChecked
+            disabled={disabled}
           />
-        </div>
-        <div style={{ display: 'flex' }}>
-          <FluidMultiSelect
-            isCondensed
-            onChange={() => {}}
-            initialSelectedItem={items[2]}
-            id="fluid-multi-select"
-            titleText="Label"
-            label="Choose an option"
-            items={items}
-            itemToString={(item) => (item ? item.text : '')}
-            decorator={aiLabel}
-            {...rest}
+          <Checkbox
+            id="feat-ci"
+            labelText="CI / CD pipeline"
+            disabled={disabled}
           />
-        </div>
-        <div style={{ display: 'flex' }}>
-          <FluidMultiSelect
-            isFilterable
-            isCondensed
-            onChange={() => {}}
-            initialSelectedItem={items[2]}
-            id="fluid-multi-select-2"
-            titleText="Label"
-            label="Choose an option"
-            items={items}
-            itemToString={(item) => (item ? item.text : '')}
-            decorator={aiLabel}
-            {...rest}
+          <Checkbox
+            id="feat-releases"
+            labelText="Releases"
+            disabled={disabled}
           />
-        </div>
-        <div style={{ display: 'flex' }}>
-          <FluidSelect decorator={aiLabel} {...rest} id="select-2">
-            <SelectItem value="" text="" />
-            <SelectItem value="option-1" text="Option 1" />
-            <SelectItem value="option-2" text="Option 2" />
-            <SelectItem value="option-3" text="Option 3" />
-            <SelectItem value="option-4" text="Option 4" />
-          </FluidSelect>
-        </div>
-        <Button type="submit" className="some-class" {...buttonEvents}>
-          Submit
+        </FormGroup>
+
+        {/* ── Additional details ── */}
+        <TextArea
+          id="project-description"
+          labelText="Description"
+          helperText="Goals and scope of this project."
+          placeholder="What is this project about?"
+          rows={4}
+          {...sharedProps}
+        />
+
+        <TextInput
+          id="repo-url"
+          labelText="Repository URL"
+          helperText="Link to an existing Git repository."
+          placeholder="https://github.com/org/repo"
+          {...sharedProps}
+        />
+
+        <PasswordInput
+          id="repo-password"
+          labelText="Password"
+          helperText="Must be at least 6 characters and include an uppercase letter, a lowercase letter, and a number."
+          placeholder="Enter password"
+          required
+          pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
+          size={size}
+          disabled={disabled}
+          readOnly={readOnly}
+          invalid={invalid}
+          invalidText="Your password must be at least 6 characters as well as contain at least one uppercase, one lowercase, and one number."
+          warn={warn}
+          warnText={warnText}
+        />
+
+        <FormGroup legendText="Project assets">
+          <FileUploader
+            id="file-assets"
+            role="button"
+            labelDescription="Max 25 MB per file."
+            buttonLabel="Add files"
+            buttonKind="primary"
+            size="md"
+            filenameStatus="edit"
+            accept={['.pdf', '.png', '.jpg', '.fig', '.sketch']}
+            multiple={true}
+            disabled={disabled}
+            iconDescription="Remove file"
+            name=""
+          />
+        </FormGroup>
+
+        <Button
+          type="submit"
+          onClick={() => showInModal && setModalOpen(false)}>
+          Create project
         </Button>
-      </FluidForm>
-    </Stack>
+      </Stack>
+    </Form>
   );
+
+  if (showInModal) {
+    return (
+      <>
+        <Button onClick={() => setModalOpen(true)}>Open form</Button>
+        <ComposedModal open={modalOpen} onClose={() => setModalOpen(false)}>
+          <ModalHeader title="Create project" />
+          <ModalBody hasScrollingContent>
+            <div style={{ padding: '1rem' }}>{formContent}</div>
+          </ModalBody>
+          <ModalFooter
+            primaryButtonText="Create project"
+            secondaryButtonText="Cancel"
+            onRequestClose={() => setModalOpen(false)}
+            onRequestSubmit={() => setModalOpen(false)}
+          />
+        </ComposedModal>
+      </>
+    );
+  }
+
+  return <div style={formShellStyle}>{formContent}</div>;
+};
+
+// Story-specific args — shared controls come from the export default above
+Default.args = {
+  size: 'md',
+  showInModal: false,
+};
+
+Default.propTypes = {
+  className: PropTypes.string,
+  onSubmit: PropTypes.func,
+};
+
+Default.argTypes = {
+  showInModal: {
+    control: { type: 'boolean' },
+    description:
+      'Render the entire form inside a ComposedModal with a trigger button',
+  },
+  size: {
+    control: { type: 'select' },
+    options: ['xs', 'sm', 'md', 'lg'],
+    description:
+      'Size of all form inputs. xs is supported by TextInput, Select and Search; other components clamp to sm.',
+  },
+};
+
+export const withAILabel = (args) => {
+  const mergedArgs = { ...args, size: 'md' };
+  return <Default {...mergedArgs} />;
 };
 
 withAILabel.args = {
-  ...formArgs,
-  revertActive: false,
-  invalid: false,
-  invalidText:
-    'Error message that is really long can wrap to more lines but should not be excessively long.',
-  disabled: false,
-  warn: false,
-  warnText:
-    'Warning message that is really long can wrap to more lines but should not be excessively long.',
+  aiLabel: true,
 };
 
+withAILabel.storyName = 'With AI Label';
+
 withAILabel.argTypes = {
-  ...formArgTypes,
-  disabled: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  invalid: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  invalidText: {
-    control: {
-      type: 'text',
-    },
-  },
-  warn: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  warnText: {
-    control: {
-      type: 'text',
-    },
-  },
-  revertActive: {
-    control: {
-      type: 'boolean',
-    },
-    table: {
-      category: 'AILabel',
-    },
+  size: {
+    table: { disable: true },
   },
 };

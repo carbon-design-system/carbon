@@ -7,10 +7,11 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { forwardRef, type HTMLAttributes } from 'react';
+import React, { forwardRef, useRef, type HTMLAttributes } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import { deprecate } from '../../prop-types/deprecate';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
+import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
 
 type ExcludedAttributes = 'id' | 'value';
 
@@ -169,6 +170,7 @@ const TimePicker = frFn((props, ref) => {
     ...rest
   } = props;
   const prefix = usePrefix();
+  const labelRef = useRef<HTMLLabelElement>(null);
 
   function handleOnClick(evt) {
     if (!disabled) {
@@ -225,9 +227,13 @@ const TimePicker = frFn((props, ref) => {
   });
 
   const label = typeof labelText !== 'undefined' && labelText !== null && (
-    <label htmlFor={id} className={labelClasses}>
+    <label htmlFor={id} className={labelClasses} ref={labelRef}>
       {labelText}
     </label>
+  );
+  useNoInteractiveChildren(
+    labelRef,
+    'The TimePicker component `labelText` prop must have no interactive content'
   );
 
   function getInternalPickerSelects() {

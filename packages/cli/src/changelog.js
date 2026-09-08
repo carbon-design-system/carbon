@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -50,7 +50,24 @@ export async function generate(packages, lastTag, latestTag) {
   ].join('\n');
 }
 
+/**
+ * Returns true when the commit header contains "v12" anywhere, for example
+ * `chore(v12): update card` or `chore(table): v12 switching`. These commits
+ * are listed under "Upcoming in v12" instead of their conventional type
+ * section.
+ *
+ * @param {{ info: { header?: string } }} commit
+ * @returns {boolean}
+ */
+function isUpcomingV12Commit(commit) {
+  return /v12/i.test(commit.info.header);
+}
+
 const sectionTypes = [
+  {
+    title: 'Upcoming in v12 :next:',
+    match: isUpcomingV12Commit,
+  },
   {
     title: 'New features :rocket:',
     types: ['feat'],
@@ -82,14 +99,27 @@ const commitUrl = 'https://github.com/carbon-design-system/carbon/commit';
 function getMarkdownSections(packages) {
   return packages.map(({ name, version, commits }) => {
     let section = `## \`${name}@${version}\`\n`;
+    const claimed = new Set();
 
-    for (const { title, types } of sectionTypes) {
+    for (const { title, types, match } of sectionTypes) {
       const commitsForSection = commits.filter((commit) => {
+        if (claimed.has(commit)) {
+          return false;
+        }
+
+        if (match) {
+          return match(commit);
+        }
+
         return types.includes(commit.info.type);
       });
 
       if (commitsForSection.length === 0) {
         continue;
+      }
+
+      for (const commit of commitsForSection) {
+        claimed.add(commit);
       }
 
       let subsection = `### ${title}\n`;

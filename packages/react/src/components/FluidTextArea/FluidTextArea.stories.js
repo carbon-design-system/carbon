@@ -11,13 +11,9 @@ import { WithLayer } from '../../../.storybook/templates/WithLayer';
 
 import FluidTextArea from '../FluidTextArea';
 import FluidTextAreaSkeleton from './FluidTextArea.Skeleton';
-import {
-  ToggletipLabel,
-  Toggletip,
-  ToggletipButton,
-  ToggletipContent,
-} from '../Toggletip';
+import { Toggletip, ToggletipButton, ToggletipContent } from '../Toggletip';
 import { Information } from '@carbon/icons-react';
+import './fluid-text-area-story.scss';
 import mdx from './FluidTextArea.mdx';
 
 export default {
@@ -180,9 +176,9 @@ DefaultWithLayers.argTypes = {
   ...sharedArgTypes,
 };
 
-const ToggleTip = (
-  <>
-    <ToggletipLabel>Text Area label</ToggletipLabel>
+const LabelToggletip = () => (
+  // Keep the toggletip outside `labelText`; interactive content is invalid in labels.
+  <span className="fluid-text-area-story__toggletip">
     <Toggletip align="top-left">
       <ToggletipButton label="Show information">
         <Information />
@@ -191,12 +187,13 @@ const ToggleTip = (
         <p>Additional field information here.</p>
       </ToggletipContent>
     </Toggletip>
-  </>
+  </span>
 );
 
 export const DefaultWithToggletip = ({ defaultWidth, ...textAreaArgs }) => (
-  <div style={{ width: defaultWidth }}>
-    <FluidTextArea {...textAreaArgs} labelText={ToggleTip} />
+  <div className="fluid-text-area-story" style={{ width: defaultWidth }}>
+    <LabelToggletip />
+    <FluidTextArea {...textAreaArgs} labelText="Text Area label" />
   </div>
 );
 

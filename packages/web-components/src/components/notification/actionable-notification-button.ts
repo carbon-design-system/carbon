@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -19,10 +19,9 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 class CDSActionableNotificationButton extends CDSButton {
   update(changedProperties) {
     super.update(changedProperties);
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-    this.shadowRoot!.getElementById('button')?.classList.add(
-      `${prefix}--actionable-notification__action-button`
-    );
+    this.shadowRoot
+      ?.getElementById('button')
+      ?.classList.add(`${prefix}--actionable-notification__action-button`);
 
     this.setAttribute('size', 'sm');
   }

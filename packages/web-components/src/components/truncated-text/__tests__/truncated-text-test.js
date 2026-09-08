@@ -9,18 +9,6 @@ import '@carbon/web-components/es/components/truncated-text/index.js';
 import '@carbon/web-components/es/components/layer/index.js';
 import { fixture, html, expect } from '@open-wc/testing';
 
-// Suppress the benign "ResizeObserver loop completed with undelivered notifications"
-// error that fires in headless Puppeteer because there is no real paint loop.
-// This does not affect test correctness — overflow detection via ResizeObserver
-// is exercised in integration / Storybook; unit tests drive state directly.
-const _origOnError = window.onerror;
-window.onerror = (message, ...rest) => {
-  if (typeof message === 'string' && message.includes('ResizeObserver loop')) {
-    return true; // suppress
-  }
-  if (_origOnError) return _origOnError(message, ...rest);
-};
-
 const prefix = 'cds';
 const blockClass = `${prefix}--truncated-text`;
 

@@ -76,8 +76,10 @@
       width $transition-expansion $standard-easing,
       background-color $duration-fast-02 motion(entrance, productive);
 
-    &:hover {
-      background-color: $field-hover;
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: $field-hover;
+      }
     }
   }
 
@@ -117,12 +119,19 @@
   .#{$prefix}--toolbar-search-container-active
     .#{$prefix}--search-magnifier-icon:focus,
   .#{$prefix}--toolbar-search-container-active
-    .#{$prefix}--search-magnifier-icon:active,
-  .#{$prefix}--toolbar-search-container-active
-    .#{$prefix}--search-magnifier-icon:hover {
+    .#{$prefix}--search-magnifier-icon:active {
     border: none;
     background-color: transparent;
     outline: none;
+  }
+
+  @media (any-hover: hover) {
+    .#{$prefix}--toolbar-search-container-active
+      .#{$prefix}--search-magnifier-icon:hover {
+      border: none;
+      background-color: transparent;
+      outline: none;
+    }
   }
 
   //-------------------------------------------------
@@ -161,12 +170,19 @@
   //SEARCH CLOSE BUTTON
   //-------------------------------------------------
   .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search-close,
-  .#{$prefix}--toolbar-search-container-persistent
-    .#{$prefix}--search-close:hover,
-  .#{$prefix}--toolbar-search-container-active .#{$prefix}--search-close,
-  .#{$prefix}--toolbar-search-container-active .#{$prefix}--search-close:hover {
+  .#{$prefix}--toolbar-search-container-active .#{$prefix}--search-close {
     border: none;
     background-color: transparent;
+  }
+
+  @media (any-hover: hover) {
+    .#{$prefix}--toolbar-search-container-persistent
+      .#{$prefix}--search-close:hover,
+    .#{$prefix}--toolbar-search-container-active
+      .#{$prefix}--search-close:hover {
+      border: none;
+      background-color: transparent;
+    }
   }
 
   .#{$prefix}--toolbar-search-container-persistent
@@ -199,13 +215,20 @@
     transition: background $duration-fast-02 motion(entrance, productive);
   }
 
-  .#{$prefix}--toolbar-action:hover:not([disabled]) {
-    background-color: $field-hover;
+  @media (any-hover: hover) {
+    .#{$prefix}--toolbar-action:hover:not([disabled]) {
+      background-color: $field-hover;
+    }
   }
 
-  .#{$prefix}--toolbar-action[aria-expanded='true'],
-  .#{$prefix}--toolbar-action:hover[aria-expanded='true'] {
+  .#{$prefix}--toolbar-action[aria-expanded='true'] {
     background-color: $layer-02;
+  }
+
+  @media (any-hover: hover) {
+    .#{$prefix}--toolbar-action:hover[aria-expanded='true'] {
+      background-color: $layer-02;
+    }
   }
 
   .#{$prefix}--toolbar-action[disabled] {
@@ -283,9 +306,11 @@
     @include focus-outline('outline');
   }
 
-  .#{$prefix}--toolbar-search-container-persistent
-    .#{$prefix}--search-input:hover:not([disabled]) {
-    background-color: $field-hover;
+  @media (any-hover: hover) {
+    .#{$prefix}--toolbar-search-container-persistent
+      .#{$prefix}--search-input:hover:not([disabled]) {
+      background-color: $field-hover;
+    }
   }
 
   .#{$prefix}--toolbar-search-container-persistent
@@ -389,12 +414,17 @@
 
   // cancel btn pseudo element
   .#{$prefix}--action-list
-    .#{$prefix}--btn--primary:nth-child(3):hover
-    + .#{$prefix}--btn--primary.#{$prefix}--batch-summary__cancel::before,
-  .#{$prefix}--action-list
     .#{$prefix}--btn--primary:nth-child(3):focus
     + .#{$prefix}--btn--primary.#{$prefix}--batch-summary__cancel::before {
     opacity: 0;
+  }
+
+  @media (any-hover: hover) {
+    .#{$prefix}--action-list
+      .#{$prefix}--btn--primary:nth-child(3):hover
+      + .#{$prefix}--btn--primary.#{$prefix}--batch-summary__cancel::before {
+      opacity: 0;
+    }
   }
 
   .#{$prefix}--btn--primary.#{$prefix}--batch-summary__cancel::before {
@@ -412,9 +442,11 @@
     transition: opacity $duration-fast-02 motion(standard, productive);
   }
 
-  .#{$prefix}--btn--primary.#{$prefix}--batch-summary__cancel:hover::before {
-    opacity: 0;
-    transition: opacity $transition-base $standard-easing;
+  @media (any-hover: hover) {
+    .#{$prefix}--btn--primary.#{$prefix}--batch-summary__cancel:hover::before {
+      opacity: 0;
+      transition: opacity $transition-base $standard-easing;
+    }
   }
 
   // items selected text

@@ -69,6 +69,79 @@ describe('MultiSelect', () => {
       await expect(container).toHaveNoACViolations('MultiSelect');
     });
   });
+
+  it('should not allow interactive content in titleText', () => {
+    const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+    expect(() => {
+      render(
+        <MultiSelect
+          {...mockProps}
+          titleText={
+            <>
+              Multiselect title <button type="button">Help</button>
+            </>
+          }
+        />
+      );
+    }).toThrow(
+      'The MultiSelect component `titleText` prop must have no interactive content'
+    );
+
+    spy.mockRestore();
+  });
+
+  it('should allow non-interactive content in titleText', () => {
+    expect(() => {
+      render(
+        <MultiSelect
+          {...mockProps}
+          titleText={
+            <>
+              Multiselect title <span>additional title content</span>
+            </>
+          }
+        />
+      );
+    }).not.toThrow();
+  });
+
+  it('should not allow interactive content in label', () => {
+    const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+    expect(() => {
+      render(
+        <MultiSelect
+          {...mockProps}
+          label={
+            <>
+              Choose options <button type="button">Help</button>
+            </>
+          }
+        />
+      );
+    }).toThrow(
+      'The MultiSelect component `label` prop must have no interactive content'
+    );
+
+    spy.mockRestore();
+  });
+
+  it('should allow non-interactive content in label', () => {
+    expect(() => {
+      render(
+        <MultiSelect
+          {...mockProps}
+          label={
+            <>
+              Choose options <span>additional label content</span>
+            </>
+          }
+        />
+      );
+    }).not.toThrow();
+  });
+
   it('does not render items with undefined values', async () => {
     const items = [{ text: 'joey' }, { text: 'johnny' }, { text: undefined }];
     const label = 'test-label';

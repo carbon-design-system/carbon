@@ -15,6 +15,7 @@ import Dropdown from '../Dropdown';
 export default {
   title: 'Components/OptionsTile',
   component: OptionsTile,
+  tags: ['autodocs', 'ibm-products-migrated'],
   parameters: {
     docs: {
       page: mdx,

@@ -10,6 +10,8 @@ import PropTypes from 'prop-types';
 import React, { useEffect, useRef, useState, type HTMLAttributes } from 'react';
 import { matches, keys } from '../../internal/keyboard';
 import { useId } from '../../internal/useId';
+import { useMergedRefs } from '../../internal/useMergedRefs';
+import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
 import { usePrefix } from '../../internal/usePrefix';
 import { deprecate } from '../../prop-types/deprecate';
 import { noopFn } from '../../internal/noopFn';
@@ -124,6 +126,8 @@ function FileUploaderButton({
   const generatedId = useId();
   const { current: inputId } = useRef(id || generatedId);
   const inputNode = useRef<HTMLInputElement>(null);
+  const labelRef = useRef<HTMLLabelElement>(null);
+  const mergedLabelRef = useMergedRefs([labelRef, innerRef]);
   const classes = cx(`${prefix}--btn`, className, {
     [`${prefix}--btn--${buttonKind}`]: buttonKind,
     [`${prefix}--btn--disabled`]: disabled,
@@ -168,6 +172,11 @@ function FileUploaderButton({
     onChange(event);
   }
 
+  useNoInteractiveChildren(
+    labelRef,
+    'The FileUploaderButton component `labelText` prop must have no interactive content'
+  );
+
   return (
     <>
       <button
@@ -186,7 +195,7 @@ function FileUploaderButton({
       </button>
       <label
         className={`${prefix}--visually-hidden`}
-        ref={innerRef}
+        ref={mergedLabelRef}
         htmlFor={inputId}>
         <span>{labelText}</span>
       </label>

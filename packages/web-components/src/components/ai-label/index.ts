@@ -7,3 +7,4 @@
 
 import './ai-label';
 import './ai-label-action-button';
+import '../icon-button/icon-button';
