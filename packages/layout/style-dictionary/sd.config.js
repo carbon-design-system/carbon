@@ -11,7 +11,7 @@
  * Style Dictionary configuration for @carbon/layout.
  *
  * Reads src/dtcg/layout.json and generates:
- *   scss/generated/_layout-tokens.scss   — Sass variables + maps (one file)
+ *   scss/generated/*.scss                — Sass variables + maps (one file per token group)
  *   js/generated/layout-tokens.js        — ES module named exports
  *   js/generated/layout-tokens.d.ts      — TypeScript declarations
  */

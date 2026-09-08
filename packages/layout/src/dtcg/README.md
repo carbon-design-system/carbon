@@ -252,7 +252,7 @@ src/dtcg/layout.json          ← you edit this
         ▼  yarn build:dtcg
         │  (style-dictionary/sd.config.js)
         │
-        ├── scss/generated/_layout-tokens.scss   (Sass variables + maps)
+        ├── scss/generated/*.scss                (Sass variables + maps, one file per token group)
         └── js/generated/layout-tokens.{js,d.ts} (ES module + types)
                 │
                 ▼
