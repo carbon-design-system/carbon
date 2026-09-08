@@ -51,9 +51,7 @@ describe('cds-user-avatar', () => {
   it('should return a circle with background color', async () => {
     const el = await fixture(template({ ...defaultProps }));
     expect(el.getAttribute('background-color')).to.equal('order-1-cyan');
-    const bgClass = el.shadowRoot?.querySelector(
-      `.${blockClass}--order-1-cyan`
-    );
+    const bgClass = el.shadowRoot.querySelector(`.${blockClass}--order-1-cyan`);
     expect(bgClass).to.exist;
   });
 
@@ -62,7 +60,7 @@ describe('cds-user-avatar', () => {
       template({ ...defaultProps, backgroundColor: 'order-3-green' })
     );
     expect(el.getAttribute('background-color')).to.equal('order-3-green');
-    const bgClass = el.shadowRoot?.querySelector(
+    const bgClass = el.shadowRoot.querySelector(
       `.${blockClass}--order-3-green`
     );
     expect(bgClass).to.exist;
@@ -71,7 +69,7 @@ describe('cds-user-avatar', () => {
   it('should render tooltip trigger with aria-label when tooltipText is supplied', async () => {
     const el = await fixture(template({ ...defaultProps }));
     await el.updateComplete;
-    const trigger = el.shadowRoot?.querySelector(
+    const trigger = el.shadowRoot.querySelector(
       `.${blockClass}__tooltip-trigger`
     );
     expect(trigger).to.exist;
@@ -81,31 +79,37 @@ describe('cds-user-avatar', () => {
   });
 
   it('should return appropriately sized circle based on size prop', async () => {
-    const el = await fixture(template({ ...defaultProps, size: 'md' }));
-    const hasSizeClass = el.shadowRoot?.querySelector(`.${blockClass}--md`);
+    const el = await fixture(template({ ...defaultProps, size: 'lg' }));
+    const hasSizeClass = el.shadowRoot.querySelector(`.${blockClass}--lg`);
+    expect(hasSizeClass).to.exist;
+  });
+
+  it('should default to md size', async () => {
+    const el = await fixture(template({ ...defaultProps }));
+    const hasSizeClass = el.shadowRoot.querySelector(`.${blockClass}--md`);
     expect(hasSizeClass).to.exist;
   });
 
   it('should render the initials when passed the name prop', async () => {
     const el = await fixture(template({ ...defaultProps }));
     await el.updateComplete;
-    const initials = el.shadowRoot?.querySelector(`.${blockClass}`);
+    const initials = el.shadowRoot.querySelector(`.${blockClass}`);
     expect(initials).to.exist;
-    expect(initials?.textContent?.trim()).to.equal('TW');
+    expect(initials.textContent.trim()).to.equal('TW');
   });
 
   it('should render the initials when simply passing two characters to the name prop', async () => {
     const el = await fixture(template({ ...defaultProps, name: 'DN' }));
     await el.updateComplete;
-    const initials = el.shadowRoot?.querySelector(`.${blockClass}`);
+    const initials = el.shadowRoot.querySelector(`.${blockClass}`);
     expect(initials).to.exist;
-    expect(initials?.textContent?.trim()).to.equal('DN');
+    expect(initials.textContent.trim()).to.equal('DN');
   });
 
   it('should render a tooltip when tooltipText is supplied', async () => {
     const el = await fixture(template({ ...defaultProps }));
     await el.updateComplete;
-    const tooltipElement = el.shadowRoot?.querySelector(
+    const tooltipElement = el.shadowRoot.querySelector(
       `.${blockClass}__tooltip`
     );
     expect(tooltipElement).to.exist;
@@ -114,7 +118,7 @@ describe('cds-user-avatar', () => {
   it('should not render a tooltip when tooltipText is empty', async () => {
     const el = await fixture(template({ ...defaultProps, tooltipText: '' }));
     await el.updateComplete;
-    const tooltipElement = el.shadowRoot?.querySelector(
+    const tooltipElement = el.shadowRoot.querySelector(
       `.${blockClass}__tooltip`
     );
     expect(tooltipElement).to.be.null;
@@ -123,9 +127,7 @@ describe('cds-user-avatar', () => {
   it('should render a slot for a custom icon', async () => {
     const el = await fixture(iconTemplate({ ...defaultProps, size: 'md' }));
     await el.updateComplete;
-    const renderedSlot = el.shadowRoot?.querySelector(
-      'slot[name="rendericon"]'
-    );
+    const renderedSlot = el.shadowRoot.querySelector('slot[name="rendericon"]');
     expect(renderedSlot).to.exist;
     const assignedNodes = renderedSlot.assignedNodes({ flatten: true });
     const svg = assignedNodes.find(
@@ -143,9 +145,23 @@ describe('cds-user-avatar', () => {
       })
     );
     await el.updateComplete;
-    const img = el.shadowRoot?.querySelector('img');
+    const img = el.shadowRoot.querySelector('img');
     expect(img).to.exist;
     expect(img.getAttribute('src')).to.equal('mock-image-path');
     expect(img.getAttribute('alt')).to.equal('test alt text');
+  });
+  it('should dynamically update when icon is appended after connect', async () => {
+    const el = await fixture(
+      html`<cds-user-avatar name="Thomas"></cds-user-avatar>`
+    );
+    await el.updateComplete;
+
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('slot', 'rendericon');
+    el.appendChild(svg);
+    await el.updateComplete;
+
+    const renderedSlot = el.shadowRoot.querySelector('slot[name="rendericon"]');
+    expect(renderedSlot).to.exist;
   });
 });

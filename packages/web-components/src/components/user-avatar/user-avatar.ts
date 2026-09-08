@@ -51,7 +51,7 @@ class CDSUserAvatar extends HostListenerMixin(LitElement) {
    * Set the size of the avatar circle.
    */
   @property({ reflect: true })
-  size;
+  size = 'md';
 
   /**
    * When passing the image prop, supply a full path to the image to be
@@ -68,7 +68,7 @@ class CDSUserAvatar extends HostListenerMixin(LitElement) {
   imageDescription;
 
   /**
-   * Provide the background color need to be set for UserAvatar.
+   * Specify the background color for UserAvatar.
    */
   @property({ reflect: true, attribute: 'background-color' })
   backgroundColor = 'order-1-cyan';
@@ -82,13 +82,34 @@ class CDSUserAvatar extends HostListenerMixin(LitElement) {
   @state()
   private _hasRenderIcon = false;
 
+  private _observerMutation: MutationObserver | null = null;
+
+  private _handleMutation = () => {
+    this._hasRenderIcon = Boolean(this.querySelector('[slot="rendericon"]'));
+  };
+
   connectedCallback() {
     super.connectedCallback();
-    this._hasRenderIcon = this.querySelector('[slot="rendericon"]') !== null;
+    this._hasRenderIcon = Boolean(this.querySelector('[slot="rendericon"]'));
+    this._observerMutation = new MutationObserver(this._handleMutation);
+    this._observerMutation.observe(this, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ['slot'],
+    });
+  }
+
+  disconnectedCallback() {
+    if (this._observerMutation) {
+      this._observerMutation.disconnect();
+      this._observerMutation = null;
+    }
+    super.disconnectedCallback();
   }
 
   private _onSlotChange() {
-    this._hasRenderIcon = this.querySelector('[slot="rendericon"]') !== null;
+    this._hasRenderIcon = Boolean(this.querySelector('[slot="rendericon"]'));
   }
 
   render() {

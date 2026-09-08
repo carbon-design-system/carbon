@@ -27,7 +27,7 @@ const tooltipAlignments = {
 const argTypes = {
   backgroundColor: {
     control: { type: 'select' },
-    description: 'Provide the background color need to be set for UserAvatar.',
+    description: 'Specify the background color for UserAvatar.',
     options: [
       'order-1-cyan',
       'order-2-gray',
