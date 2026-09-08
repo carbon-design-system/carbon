@@ -162,11 +162,13 @@ describe.each([
         </Component>
       );
 
-      await userEvent.click(screen.getByLabelText('Close'));
+      const closeButton = screen.getByLabelText('Close');
+      await userEvent.click(closeButton);
 
       expect(screen.getByRole('presentation', { hidden: true })).toHaveClass(
         'is-visible'
       );
+      expect(closeButton).toHaveFocus();
     });
 
     it('should focus selector on open', async () => {
@@ -366,6 +368,55 @@ describe.each([
       }
 
       expect(button).toHaveFocus();
+    });
+
+    it('should blur focused modal descendants before aria-hidden is applied on close', async () => {
+      const focusDuringClose = jest.fn();
+      const ComposedModalExample = () => {
+        const buttonRef = useRef(null);
+        const [isOpen, setIsOpen] = useState(false);
+
+        return (
+          <>
+            <button
+              ref={buttonRef}
+              type="button"
+              onClick={() => setIsOpen(true)}>
+              Launch modal
+            </button>
+            <Component
+              launcherButtonRef={buttonRef}
+              open={isOpen}
+              onClose={() => {
+                focusDuringClose(document.activeElement);
+                setIsOpen(false);
+              }}>
+              <ModalHeader>Header</ModalHeader>
+              <ModalFooter
+                primaryButtonText="Add"
+                secondaryButtonText="Cancel"
+              />
+            </Component>
+          </>
+        );
+      };
+      render(<ComposedModalExample />);
+
+      await userEvent.click(
+        screen.getByRole('button', { name: /Launch modal/ })
+      );
+
+      const overlay = screen.getByRole('presentation', { hidden: true });
+      const closeButton = screen.getByRole('button', { name: /Close/ });
+
+      await userEvent.click(closeButton);
+
+      expect(focusDuringClose).toHaveBeenCalledTimes(1);
+      expect(overlay.contains(focusDuringClose.mock.calls[0][0])).toBe(false);
+
+      if (!isPresence) {
+        expect(overlay).toHaveAttribute('aria-hidden', 'true');
+      }
     });
 
     it('should change size based on size prop', () => {
