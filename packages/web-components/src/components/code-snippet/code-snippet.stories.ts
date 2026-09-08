@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -14,8 +14,8 @@ const args = {
   copyButtonDescription: 'Copy to clipboard',
   copyText: '',
   disabled: false,
-  feedback: '',
-  feedbackTimeout: 0,
+  feedback: 'Copied to clipboard',
+  feedbackTimeout: 2000,
   hideCopyButton: false,
   maxCollapsedNumberOfRows: 15,
   maxExpandedNumberOfRows: 0,
@@ -32,63 +32,76 @@ const argTypes = {
   copyButtonDescription: {
     control: 'text',
     description: 'Specify the description for the Copy Button.',
+    table: { defaultValue: { summary: '"Copy to clipboard"' } },
   },
   copyText: {
     control: 'text',
     description:
       "Optional text to copy. If not specified, the children node's <code>innerText</code> will be used as the copy value.",
+    table: { defaultValue: { summary: '""' } },
   },
   disabled: {
     control: 'boolean',
     description: 'Specify whether or not the CodeSnippet should be disabled.',
+    table: { defaultValue: { summary: false } },
   },
   feedback: {
     control: 'text',
     description: 'Specify the string displayed when the snippet is copied.',
+    table: { defaultValue: { summary: '"Copied!"' } },
   },
   feedbackTimeout: {
     control: 'number',
     description:
       'Specify the time it takes for the feedback message to timeout.',
+    table: { defaultValue: { summary: 2000 } },
   },
   hideCopyButton: {
     control: 'boolean',
     description:
       'Specify whether or not a copy button should be used/rendered.',
+    table: { defaultValue: { summary: false } },
   },
   maxCollapsedNumberOfRows: {
     control: 'number',
     description:
       'Specify the maximum number of rows to be shown when in collapsed view.',
+    table: { defaultValue: { summary: 15 } },
   },
   maxExpandedNumberOfRows: {
     control: 'number',
     description:
       'Specify the maximum number of rows to be shown when in expanded view.',
+    table: { defaultValue: { summary: 0 } },
   },
   minCollapsedNumberOfRows: {
     control: 'number',
     description:
       'Specify the minimum number of rows to be shown when in collapsed view.',
+    table: { defaultValue: { summary: 3 } },
   },
   minExpandedNumberOfRows: {
     control: 'number',
     description:
       'Specify the minimum number of rows to be shown when in expanded view.',
+    table: { defaultValue: { summary: 16 } },
   },
   showLessText: {
     control: 'text',
     description:
       'Specify a string that is displayed when the Code Snippet has been interacted with to show more lines.',
+    table: { defaultValue: { summary: '"Show less"' } },
   },
   showMoreText: {
     control: 'text',
     description:
       'Specify a string that is displayed when the Code Snippet text is more than 15 lines.',
+    table: { defaultValue: { summary: '"Show more"' } },
   },
   type: {
     control: 'radio',
     options: ['single', 'inline', 'multi'],
+    table: { defaultValue: { summary: '"single"' } },
   },
   text: {
     control: 'text',
@@ -97,6 +110,18 @@ const argTypes = {
   wrapText: {
     control: 'boolean',
     description: 'Specify whether or not to wrap the text.',
+    table: { defaultValue: { summary: false } },
+  },
+};
+
+const variantArgTypes = {
+  ...argTypes,
+  type: {
+    ...argTypes.type,
+    table: {
+      ...argTypes.type.table,
+      readonly: true,
+    },
   },
 };
 
@@ -105,7 +130,7 @@ export const Inline = {
     ...args,
     type: 'inline',
   },
-  argTypes,
+  argTypes: variantArgTypes,
   render: (args) => {
     const {
       copyButtonDescription,
@@ -155,7 +180,7 @@ export const InlineWithLayer = {
     ...args,
     type: 'inline',
   },
-  argTypes,
+  argTypes: variantArgTypes,
   render: (args) => {
     const {
       copyButtonDescription,
@@ -230,7 +255,7 @@ export const Multiline = {
     "@commitlint/cli": "^8.3.5",
 `,
   },
-  argTypes,
+  argTypes: variantArgTypes,
 
   render: (args) => {
     const {
@@ -310,7 +335,7 @@ export const MultilineWithLayer = {
     "@commitlint/cli": "^8.3.5",
 `,
   },
-  argTypes,
+  argTypes: variantArgTypes,
   render: (args) => {
     const {
       copyButtonDescription,
@@ -358,7 +383,7 @@ export const Singleline = {
     type: 'single',
     text: 'yarn add carbon-components@latest carbon-components-react@latest @carbon/icons-react@latest carbon-icons@latest',
   },
-  argTypes,
+  argTypes: variantArgTypes,
   render: (args) => {
     const {
       copyButtonDescription,
@@ -409,7 +434,7 @@ export const SinglelineWithLayer = {
     type: 'single',
     text: 'yarn add carbon-components@latest carbon-components-react@latest @carbon/icons-react@latest carbon-icons@latest',
   },
-  argTypes,
+  argTypes: variantArgTypes,
   render: (args) => {
     const {
       copyButtonDescription,
@@ -451,11 +476,24 @@ export const SinglelineWithLayer = {
 };
 
 export const Skeleton = {
-  render: () => html`
-    <cds-code-snippet-skeleton
-      type="single"
-      style="margin-bottom: 8px;"></cds-code-snippet-skeleton>
-    <cds-code-snippet-skeleton type="multi"></cds-code-snippet-skeleton>
+  args: {
+    type: 'single',
+  },
+  argTypes: {
+    type: {
+      control: 'radio',
+      description: 'Specify the type of Code Snippet skeleton.',
+      options: ['single', 'multi'],
+      table: { defaultValue: { summary: '"single"' } },
+    },
+  },
+  parameters: {
+    controls: {
+      include: ['type'],
+    },
+  },
+  render: ({ type }) => html`
+    <cds-code-snippet-skeleton type="${type}"></cds-code-snippet-skeleton>
   `,
 };
 

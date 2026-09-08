@@ -1,0 +1,56 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../../config' as *;
+@use '../../theme' as *;
+@use '../../spacing' as *;
+@use '../button/tokens' as *;
+
+/// Coachmark styles
+/// @access public
+/// @group coachmark
+@mixin coachmark {
+  $block-class: #{$prefix}--coachmark;
+
+  .#{$block-class} {
+    &--floating {
+      span:has(> div > .#{$block-class}--content-header--drag-icon) {
+        margin-inline-end: auto;
+      }
+    }
+
+    .#{$block-class}--content-header--is-dragging {
+      border-radius: 0;
+      box-shadow: 0 0 0 $spacing-02 $icon-inverse;
+      outline: $spacing-01 solid $background-inverse;
+    }
+
+    .#{$block-class}--coachmark-content {
+      .#{$block-class}--content-header {
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .#{$block-class}--content-header--drag-icon,
+      .#{$block-class}--content-header .#{$prefix}--btn {
+        color: $icon-inverse;
+
+        .#{$prefix}--btn__icon,
+        svg {
+          color: $icon-inverse;
+          fill: $icon-inverse;
+        }
+      }
+
+      .#{$block-class}--content-body {
+        display: flex;
+        flex-direction: column;
+        padding: $spacing-01 $spacing-05 0;
+      }
+    }
+  }
+}

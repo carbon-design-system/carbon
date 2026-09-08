@@ -10,7 +10,7 @@ import React, { useMemo, useState } from 'react';
 import Button from '../../Button';
 import { DataTable } from '..';
 import Pagination from '../../Pagination';
-import { headers } from './shared';
+import { dataTableArgs, dataTableArgTypes, headers } from './shared';
 
 const {
   Table,
@@ -33,6 +33,8 @@ import './datatable-story.scss';
 export default {
   title: 'Components/DataTable/Pagination',
   component: DataTable,
+  args: dataTableArgs,
+  argTypes: dataTableArgTypes,
   subcomponents: {
     TableContainer,
     Table,

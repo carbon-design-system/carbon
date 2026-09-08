@@ -6,7 +6,9 @@
 //
 @use '@carbon/styles/scss/motion' as motion;
 @use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/utilities/box-shadow' as *;
+@use '@carbon/styles/scss/utilities/z-index' as *;
 
 .motion-surface-demo__grid {
   display: flex;
@@ -22,6 +24,41 @@
   display: inline-block;
 }
 
+// Add the overlay styles for the modal since the demos are self-contained.
+.motion-surface-demo__modal {
+  position: fixed;
+  z-index: z('modal');
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $overlay;
+  block-size: 100vh;
+  inline-size: 100vw;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.motion-surface-demo__modal.is-visible {
+  opacity: 1;
+  visibility: inherit;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .motion-surface-demo__modal {
+    transition:
+      opacity motion.$duration-moderate-02 motion.motion(exit, expressive),
+      visibility 0ms linear motion.$duration-moderate-02;
+  }
+
+  .motion-surface-demo__modal.is-visible {
+    transition:
+      opacity motion.$duration-moderate-02 motion.motion(entrance, expressive),
+      visibility 0ms linear;
+  }
+}
+
 // Neutralize stock modal container animations so neither path fights the
 // modal stylesheet. Motion path also kills transitions (Motion writes inline
 // values each frame). CSS reveal path keeps transitions from `surface()`.
@@ -34,10 +71,7 @@
   transition: none !important;
 }
 
-// Stock modal fades the overlay and slides the container with a `transition`
-// shorthand that would override the surface mixin's clip-path transition.
-// Kill those so only the shared stretch surface styles drive the reveal.
-// Keep the closed overlay hidden so it doesn't block the trigger.
+// Overlay fade would race the stretch surface reveal — kill it for the CSS path.
 .motion-surface-demo__modal--css {
   transition: none !important;
 }

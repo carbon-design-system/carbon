@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -14,6 +14,32 @@ import { FeatureFlags } from '../FeatureFlags';
 
 describe('RadioTile', () => {
   describe('renders as expected - Component API', () => {
+    it('should not allow interactive content in children', () => {
+      const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+      expect(() => {
+        render(
+          <RadioTile value="standard">
+            Option 1 <button type="button">Help</button>
+          </RadioTile>
+        );
+      }).toThrow(
+        'The RadioTile component `children` prop must have no interactive content'
+      );
+
+      spy.mockRestore();
+    });
+
+    it('should allow non-interactive content in children', () => {
+      expect(() => {
+        render(
+          <RadioTile value="standard">
+            Option 1 <span>additional label content</span>
+          </RadioTile>
+        );
+      }).not.toThrow();
+    });
+
     it('should spread extra props onto outermost element', () => {
       render(
         <RadioTile value="standard" data-testid="test-id">
@@ -208,24 +234,30 @@ describe('RadioTile', () => {
   });
 
   it('should check decorator prop and if AILabel exists on radio tile and is xs', async () => {
-    render(
+    const { container } = render(
       <RadioTile value="standard" decorator={<AILabel />}>
         {' '}
         Option 1{' '}
       </RadioTile>
     );
     expect(screen.getByRole('button')).toHaveClass(`cds--ai-label__button--xs`);
+    expect(container.querySelector('label')).not.toContainElement(
+      screen.getByRole('button')
+    );
   });
 
   it('should check deprecated slug prop and if AILabel exists on radio tile and is xs', async () => {
     const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
-    render(
+    const { container } = render(
       <RadioTile value="standard" slug={<AILabel />}>
         {' '}
         Option 1{' '}
       </RadioTile>
     );
     expect(screen.getByRole('button')).toHaveClass(`cds--ai-label__button--xs`);
+    expect(container.querySelector('label')).not.toContainElement(
+      screen.getByRole('button')
+    );
     spy.mockRestore();
   });
 

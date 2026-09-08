@@ -1,0 +1,130 @@
+//
+// Copyright IBM Corp. 2021, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Action set
+//-----------------------------
+
+@use '../../config' as *;
+@use '../../theme' as *;
+@use '../../type';
+@use '../../spacing' as *;
+@use '../../utilities/convert' as *;
+
+/// Action set styles
+/// @access public
+/// @group action-set
+@mixin action-set {
+  .#{$prefix}--action-set {
+    align-items: stretch;
+    justify-content: flex-end;
+    background-color: $layer-01;
+  }
+
+  .#{$prefix}--action-set .#{$prefix}--action-set__action-button {
+    @include type.type-style('body-short-01');
+
+    align-items: center;
+    margin: 0;
+
+    &.#{$prefix}--action-set__action-button--expressive {
+      block-size: $spacing-10;
+      padding-block: $spacing-05 $spacing-07;
+    }
+  }
+
+  .#{$prefix}--action-set.#{$prefix}--btn-set
+    .#{$prefix}--action-set__action-button.#{$prefix}--btn.#{$prefix}--btn--expressive,
+  .#{$prefix}--action-set.#{$prefix}--btn-set
+    .#{$prefix}--action-set__action-button.#{$prefix}--btn {
+    max-inline-size: none;
+  }
+
+  .#{$prefix}--action-set:not(.#{$prefix}--action-set--stacking)
+    .#{$prefix}--action-set__action-button--ghost {
+    padding-inline-start: $spacing-05;
+  }
+
+  // For row-single in medium,
+  // or for ghosts in row-single,
+  // buttons are 100% width
+  .#{$prefix}--action-set.#{$prefix}--action-set--row-single.#{$prefix}--action-set--md
+    .#{$prefix}--action-set__action-button,
+  .#{$prefix}--action-set.#{$prefix}--action-set--row-single
+    .#{$prefix}--action-set__action-button--ghost {
+    flex: 0 0 100%;
+  }
+
+  // For ghosts in row-double,
+  // buttons are 75% width and expand to use any remaining space
+  .#{$prefix}--action-set.#{$prefix}--action-set--row-double
+    .#{$prefix}--action-set__action-button--ghost {
+    flex: 1 1 75%;
+  }
+
+  // For row-single in large (non-ghost),
+  // or row-double in medium or large,
+  // buttons are 50% width
+  .#{$prefix}--action-set.#{$prefix}--action-set--row-single.#{$prefix}--action-set--lg
+    .#{$prefix}--action-set__action-button:not(
+      .#{$prefix}--action-set__action-button--ghost
+    ),
+  .#{$prefix}--action-set.#{$prefix}--action-set--row-double.#{$prefix}--action-set--md
+    .#{$prefix}--action-set__action-button,
+  .#{$prefix}--action-set.#{$prefix}--action-set--row-double.#{$prefix}--action-set--lg
+    .#{$prefix}--action-set__action-button,
+  .#{$prefix}--action-set.#{$prefix}--action-set--row-triple
+    .#{$prefix}--action-set__action-button--ghost {
+    flex: 0 1 50%;
+  }
+
+  // For ghosts in row-triple,
+  // buttons are 50% width and expand to use any remaining space
+  .#{$prefix}--action-set.#{$prefix}--action-set--row-triple
+    .#{$prefix}--action-set__action-button--ghost {
+    flex: 1 1 50%;
+  }
+
+  // For row-triple in large (non-ghost),
+  // or any non-ghosts in extra large or 2xl,
+  // or row-quadruple (non-ghost),
+  // buttons are 25% width with a max of 232px
+  .#{$prefix}--action-set.#{$prefix}--btn-set.#{$prefix}--action-set--row-triple.#{$prefix}--action-set--lg
+    .#{$prefix}--action-set__action-button:not(
+      .#{$prefix}--action-set__action-button--ghost
+    ),
+  .#{$prefix}--action-set.#{$prefix}--btn-set.#{$prefix}--action-set--xl
+    .#{$prefix}--action-set__action-button:not(
+      .#{$prefix}--action-set__action-button--ghost
+    ),
+  .#{$prefix}--action-set.#{$prefix}--btn-set.#{$prefix}--action-set--2xl
+    .#{$prefix}--action-set__action-button:not(
+      .#{$prefix}--action-set__action-button--ghost
+    ),
+  .#{$prefix}--action-set.#{$prefix}--btn-set.#{$prefix}--action-set--row-quadruple
+    .#{$prefix}--action-set__action-button:not(
+      .#{$prefix}--action-set__action-button--ghost
+    ) {
+    flex: 0 1 25%;
+
+    max-inline-size: to-rem(232px);
+  }
+
+  .#{$prefix}--action-set.#{$prefix}--btn-set.#{$prefix}--action-set--row-quadruple
+    .#{$prefix}--action-set__action-button--ghost {
+    flex: 1 1 25%;
+  }
+
+  .#{$prefix}--action-set
+    .#{$prefix}--action-set__action-button
+    .#{$prefix}--inline-loading {
+    position: absolute;
+    inline-size: $spacing-07;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+  }
+}

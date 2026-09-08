@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023
+ * Copyright IBM Corp. 2023, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -14,6 +14,64 @@ import { CopyFile, Export } from '@carbon/icons-react';
 import { ComboButton } from './';
 import mdx from './ComboButton.mdx';
 
+const sharedArgs = {
+  disabled: false,
+  label: 'Primary action',
+  menuAlignment: 'bottom',
+  size: 'lg',
+  tooltipAlignment: 'top',
+};
+
+const sharedArgTypes = {
+  disabled: {
+    control: 'boolean',
+  },
+  label: {
+    control: 'text',
+  },
+  menuAlignment: {
+    control: 'select',
+    options: [
+      'top',
+      'top-start',
+      'top-end',
+      'bottom',
+      'bottom-start',
+      'bottom-end',
+    ],
+  },
+  onClick: {
+    action: 'onClick',
+  },
+  size: {
+    control: 'radio',
+    options: ['xs', 'sm', 'md', 'lg'],
+  },
+  tooltipAlignment: {
+    control: 'select',
+    options: [
+      'top',
+      'top-start',
+      'top-end',
+      'bottom',
+      'bottom-start',
+      'bottom-end',
+      'left',
+      'left-start',
+      'left-end',
+      'right',
+      'right-start',
+      'right-end',
+    ],
+  },
+};
+
+const sharedParameters = {
+  controls: {
+    include: Object.keys(sharedArgTypes),
+  },
+};
+
 export default {
   title: 'Components/ComboButton',
   component: ComboButton,
@@ -21,19 +79,24 @@ export default {
     MenuItem,
     MenuItemDivider,
   },
+  decorators: [
+    (Story) => (
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <Story />
+      </div>
+    ),
+  ],
   parameters: {
     docs: {
       page: mdx,
     },
-    controls: {
-      exclude: ['translateWithId'],
-    },
+    layout: 'centered',
   },
 };
 
 export const Default = (args) => {
   return (
-    <ComboButton {...args} onClick={action('onClick')} label="Primary action">
+    <ComboButton {...args}>
       <MenuItem
         label="Second action with a long label description"
         onClick={action('onClick')}
@@ -50,6 +113,10 @@ export const Default = (args) => {
   );
 };
 
+Default.args = sharedArgs;
+Default.argTypes = sharedArgTypes;
+Default.parameters = sharedParameters;
+
 export const ExperimentalAutoAlign = (args) => (
   <div style={{ width: '5000px', height: '5000px' }}>
     <div
@@ -57,7 +124,7 @@ export const ExperimentalAutoAlign = (args) => (
         position: 'absolute',
         bottom: '20px',
       }}>
-      <ComboButton label="Primary action" {...args}>
+      <ComboButton {...args}>
         <MenuItem label="Second action with a long label description" />
         <MenuItem label="Third action" />
         <MenuItem label="Fourth action" disabled />
@@ -66,9 +133,13 @@ export const ExperimentalAutoAlign = (args) => (
   </div>
 );
 
+ExperimentalAutoAlign.args = sharedArgs;
+ExperimentalAutoAlign.argTypes = sharedArgTypes;
+ExperimentalAutoAlign.parameters = sharedParameters;
+
 export const WithDanger = (args) => {
   return (
-    <ComboButton label="Primary action" {...args}>
+    <ComboButton {...args}>
       <MenuItem label="Second action with a long label description" />
       <MenuItem label="Third action" />
       <MenuItem label="Fourth action" />
@@ -78,68 +149,22 @@ export const WithDanger = (args) => {
   );
 };
 
+WithDanger.args = sharedArgs;
+WithDanger.argTypes = sharedArgTypes;
+WithDanger.parameters = sharedParameters;
+
 export const WithIcons = (args) => {
   return (
-    <ComboButton label="Save record" {...args}>
+    <ComboButton {...args}>
       <MenuItem label="Save as a copy" renderIcon={CopyFile} />
       <MenuItem label="Export" renderIcon={Export} />
     </ComboButton>
   );
 };
 
-export const WithMenuAlignment = () => {
-  return (
-    <>
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <ComboButton label="Bottom" menuAlignment="bottom">
-          <MenuItem label="Second action with a long label description" />
-          <MenuItem label="Third action" />
-          <MenuItem label="Fourth action" disabled />
-        </ComboButton>
-
-        <ComboButton label="Bottom start" menuAlignment="bottom-start">
-          <MenuItem label="Second action with a long label description" />
-          <MenuItem label="Third action" />
-          <MenuItem label="Fourth action" disabled />
-        </ComboButton>
-
-        <ComboButton label="Bottom end" menuAlignment="bottom-end">
-          <MenuItem label="Second action with a long label description" />
-          <MenuItem label="Third action" />
-          <MenuItem label="Fourth action" disabled />
-        </ComboButton>
-      </div>
-
-      <div
-        style={{
-          display: 'flex',
-          marginTop: '15rem',
-          justifyContent: 'space-between',
-        }}>
-        <ComboButton label="Top" menuAlignment="top" tooltipAlignment="bottom">
-          <MenuItem label="Second action with a long label description" />
-          <MenuItem label="Third action" />
-          <MenuItem label="Fourth action" disabled />
-        </ComboButton>
-
-        <ComboButton
-          label="Top start"
-          menuAlignment="top-start"
-          tooltipAlignment="bottom">
-          <MenuItem label="Second action with a long label description" />
-          <MenuItem label="Third action" />
-          <MenuItem label="Fourth action" disabled />
-        </ComboButton>
-
-        <ComboButton
-          label="Top end"
-          menuAlignment="top-end"
-          tooltipAlignment="bottom">
-          <MenuItem label="Second action with a long label description" />
-          <MenuItem label="Third action" />
-          <MenuItem label="Fourth action" disabled />
-        </ComboButton>
-      </div>
-    </>
-  );
+WithIcons.args = {
+  ...sharedArgs,
+  label: 'Save record',
 };
+WithIcons.argTypes = sharedArgTypes;
+WithIcons.parameters = sharedParameters;

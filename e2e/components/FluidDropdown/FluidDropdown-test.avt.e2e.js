@@ -46,7 +46,7 @@ test.describe('@avt FluidDropdown', () => {
 
   test('@avt-keyboard-nav', async ({ page }) => {
     await visitStory(page, {
-      component: 'Dropdown',
+      component: 'FluidDropdown',
       id: 'components-fluid-components-fluiddropdown--default',
       globals: {
         theme: 'white',

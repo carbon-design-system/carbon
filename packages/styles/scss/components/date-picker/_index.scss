@@ -6,6 +6,9 @@
 //
 
 @forward 'date-picker';
+@forward 'date-picker-next';
 @use 'date-picker';
+@use 'date-picker-next';
 
 @include date-picker.date-picker;
+@include date-picker-next.date-picker-next;

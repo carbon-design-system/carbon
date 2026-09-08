@@ -9,6 +9,7 @@
 
 'use strict';
 
+const postcss = require('postcss');
 const { SassRenderer } = require('@carbon/test-utils/scss');
 
 const { render } = SassRenderer.create(__dirname);
@@ -39,6 +40,7 @@ describe('scss/components/button', () => {
   "button-padding-ghost-sm",
   "button-border-width",
   "button-outline-width",
+  "button-min-inline-size",
   "button-separator",
   "button-primary",
   "button-secondary",
@@ -67,5 +69,31 @@ describe('scss/components/button', () => {
       $_: get('height', button.$button-height);
     `);
     expect(unwrap('height')).toBe('2rem');
+  });
+
+  test('icon-only ghost button does not apply active background on focus', async () => {
+    const { result } = await render(`
+    @use '../button';
+  `);
+
+    let focusRule;
+
+    postcss.parse(result.css.toString()).walkRules((rule) => {
+      if (rule.selector === '.cds--btn--icon-only.cds--btn--ghost:focus') {
+        focusRule = rule;
+      }
+    });
+
+    expect(focusRule).toBeDefined();
+
+    const declarations = focusRule.nodes
+      .filter((node) => node.type === 'decl')
+      .reduce((styles, node) => {
+        styles[node.prop] = node.value;
+        return styles;
+      }, {});
+
+    expect(declarations['background-color']).toBeUndefined();
+    expect(declarations['box-shadow']).toBeDefined();
   });
 });

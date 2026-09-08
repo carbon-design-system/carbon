@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -26,11 +26,13 @@ import {
   TableToolbarMenu,
 } from '..';
 import mdx from '../DataTable.mdx';
-import { headers, rows } from './shared';
+import { dataTableArgs, dataTableArgTypes, headers, rows } from './shared';
 
 export default {
   title: 'Components/DataTable/Toolbar',
   component: DataTable,
+  args: dataTableArgs,
+  argTypes: dataTableArgTypes,
   subcomponents: {
     TableContainer,
     Table,
@@ -48,18 +50,11 @@ export default {
 };
 
 const sharedArgTypes = {
-  size: {
-    options: ['xs', 'sm', 'md', 'lg', 'xl'],
-    control: { type: 'select' },
-  },
-  useZebraStyles: {
-    control: { type: 'boolean' },
-  },
-  isSortable: { control: { type: 'boolean' } },
+  ...dataTableArgTypes,
   persistent: { control: { type: 'boolean' } },
 };
 
-export const Default = (args) => (
+export const Default = ({ persistent, ...args }) => (
   <DataTable rows={rows} headers={headers} {...args}>
     {({
       rows,
@@ -78,7 +73,10 @@ export const Default = (args) => (
         {...getTableContainerProps()}>
         <TableToolbar {...getToolbarProps()} aria-label="data table toolbar">
           <TableToolbarContent>
-            <TableToolbarSearch onChange={onInputChange} />
+            <TableToolbarSearch
+              onChange={onInputChange}
+              persistent={persistent}
+            />
             <TableToolbarMenu>
               <TableToolbarAction onClick={action('Action 1 Click')}>
                 Action 1
@@ -120,9 +118,10 @@ export const Default = (args) => (
   </DataTable>
 );
 
-Default.argTypes = { ...sharedArgTypes };
+Default.args = { persistent: false };
+Default.argTypes = sharedArgTypes;
 
-export const PersistentToolbar = (args) => (
+export const PersistentToolbar = ({ persistent, ...args }) => (
   <DataTable rows={rows} headers={headers} {...args}>
     {({
       rows,
@@ -141,7 +140,10 @@ export const PersistentToolbar = (args) => (
         {...getTableContainerProps()}>
         <TableToolbar {...getToolbarProps()} aria-label="data table toolbar">
           <TableToolbarContent>
-            <TableToolbarSearch onChange={onInputChange} persistent />
+            <TableToolbarSearch
+              onChange={onInputChange}
+              persistent={persistent}
+            />
             <TableToolbarMenu>
               <TableToolbarAction onClick={action('Action 1 Click')}>
                 Action 1
@@ -183,9 +185,13 @@ export const PersistentToolbar = (args) => (
   </DataTable>
 );
 
-PersistentToolbar.argTypes = { ...sharedArgTypes };
+PersistentToolbar.args = { persistent: true };
+PersistentToolbar.argTypes = {
+  ...sharedArgTypes,
+  persistent: { table: { readonly: true } },
+};
 
-export const SmallPersistentToolbar = (args) => (
+export const SmallPersistentToolbar = ({ persistent, ...args }) => (
   <DataTable rows={rows} headers={headers} {...args}>
     {({
       rows,
@@ -205,10 +211,14 @@ export const SmallPersistentToolbar = (args) => (
         <TableToolbar
           {...getToolbarProps()}
           aria-label="data table toolbar"
-          size="sm">
+          size={args.size}>
           <TableToolbarContent>
-            <TableToolbarSearch onChange={onInputChange} persistent size="sm" />
-            <TableToolbarMenu size="sm">
+            <TableToolbarSearch
+              onChange={onInputChange}
+              persistent={persistent}
+              size={args.size}
+            />
+            <TableToolbarMenu size={args.size}>
               <TableToolbarAction onClick={action('Action 1 Click')}>
                 Action 1
               </TableToolbarAction>
@@ -222,7 +232,7 @@ export const SmallPersistentToolbar = (args) => (
             <Button onClick={action('Button click')}>Primary Button</Button>
           </TableToolbarContent>
         </TableToolbar>
-        <Table {...getTableProps()} size="sm" aria-label="sample table">
+        <Table {...getTableProps()} size={args.size} aria-label="sample table">
           <TableHead>
             <TableRow>
               {headers.map((header) => (
@@ -249,9 +259,13 @@ export const SmallPersistentToolbar = (args) => (
   </DataTable>
 );
 
-SmallPersistentToolbar.argTypes = { ...sharedArgTypes };
+SmallPersistentToolbar.args = { persistent: true, size: 'sm' };
+SmallPersistentToolbar.argTypes = {
+  ...sharedArgTypes,
+  persistent: { table: { readonly: true } },
+};
 
-export const WithOverflowMenu = (args) => (
+export const WithOverflowMenu = ({ persistent, ...args }) => (
   <DataTable rows={rows} headers={headers} {...args}>
     {({
       rows,
@@ -266,7 +280,10 @@ export const WithOverflowMenu = (args) => (
       <TableContainer title="DataTable" description="With overflow menu">
         <TableToolbar {...getToolbarProps()} aria-label="data table toolbar">
           <TableToolbarContent>
-            <TableToolbarSearch onChange={onInputChange} />
+            <TableToolbarSearch
+              onChange={onInputChange}
+              persistent={persistent}
+            />
             <TableToolbarMenu>
               <TableToolbarAction onClick={action('Action 1 Click')}>
                 Action 1
@@ -319,6 +336,8 @@ export const WithOverflowMenu = (args) => (
 WithOverflowMenu.argTypes = {
   ...sharedArgTypes,
   overflowMenuOnHover: {
-    control: { type: 'boolean' },
+    control: 'boolean',
+    description: 'Only show row overflow menus on hover.',
   },
 };
+WithOverflowMenu.args = { overflowMenuOnHover: false, persistent: false };

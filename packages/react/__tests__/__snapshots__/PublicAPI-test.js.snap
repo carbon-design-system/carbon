@@ -2757,9 +2757,7 @@ Map {
       "allowInput": {
         "type": "bool",
       },
-      "appendTo": {
-        "type": "object",
-      },
+      "appendTo": [Function],
       "children": {
         "type": "node",
       },
@@ -2782,15 +2780,9 @@ Map {
         ],
         "type": "oneOf",
       },
-      "disable": {
-        "type": "array",
-      },
-      "enable": {
-        "type": "array",
-      },
-      "inline": {
-        "type": "bool",
-      },
+      "disable": [Function],
+      "enable": [Function],
+      "inline": [Function],
       "invalid": {
         "type": "bool",
       },
@@ -2911,9 +2903,7 @@ Map {
       "onOpen": {
         "type": "func",
       },
-      "parseDate": {
-        "type": "func",
-      },
+      "parseDate": [Function],
       "prevMonthAriaLabel": {
         "type": "string",
       },
@@ -7887,18 +7877,12 @@ Map {
       },
       "pageSizes": {
         "args": [
-          [
-            {
-              "args": [
+          {
+            "args": [
+              [
                 {
-                  "isRequired": true,
                   "type": "number",
                 },
-              ],
-              "type": "arrayOf",
-            },
-            {
-              "args": [
                 {
                   "args": [
                     {
@@ -7912,16 +7896,14 @@ Map {
                       },
                     },
                   ],
-                  "isRequired": true,
                   "type": "shape",
                 },
               ],
-              "type": "arrayOf",
-            },
-          ],
+            ],
+            "type": "oneOfType",
+          },
         ],
-        "isRequired": true,
-        "type": "oneOfType",
+        "type": "arrayOf",
       },
       "pageText": {
         "type": "func",
@@ -12147,6 +12129,68 @@ Map {
       },
     },
   },
+  "preview__Card" => {
+    "Card": {
+      "$$typeof": Symbol(react.forward_ref),
+      "Action": [Function],
+      "Actions": [Function],
+      "Body": {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      },
+      "Footer": {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      },
+      "Header": {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      },
+      "HeaderMedia": [Function],
+      "Media": [Function],
+      "Title": {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      },
+      "TitleMedia": {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      },
+      "render": [Function],
+    },
+    "CardAction": {
+      "displayName": "Card.Action",
+    },
+    "CardActions": {
+      "displayName": "Card.Actions",
+    },
+    "CardBody": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "CardFooter": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "CardHeader": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "CardHeaderMedia": {
+      "displayName": "Card.HeaderMedia",
+    },
+    "CardMedia": {
+      "displayName": "Card.Media",
+    },
+    "CardTitle": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "CardTitleMedia": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+  },
   "preview__ChatButton" => {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": {
@@ -12219,6 +12263,16 @@ Map {
         "type": "oneOf",
       },
     },
+  },
+  "preview__DatePicker" => {
+    "DatePicker": {
+      "displayName": "DatePicker",
+    },
+    "DatePickerInput": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "DatePickerSkeleton": {},
   },
   "preview__Dialog" => {
     "Dialog": {
