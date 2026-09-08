@@ -26,7 +26,7 @@ const ThemeText = () => {
 export default {
   title: 'Components/UserAvatar',
   component: UserAvatar,
-  tags: ['autodocs'],
+  tags: ['autodocs', 'ibm-products-migrated'],
   argTypes: {
     backgroundColor: {
       control: {
