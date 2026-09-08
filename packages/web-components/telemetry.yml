@@ -297,6 +297,13 @@ collect:
         - custom-styles
         # cds-badge-indicator
         - count
+        # cds-big-number
+        - fraction-digits
+        - loading
+        - percentage
+        - total
+        - trending
+        - truncate
         # cds-breadcrumb
         - no-trailing-slash
         # cds-breadcrumb-link
@@ -311,6 +318,21 @@ collect:
         # cds-clickable-tile
         - ai-label
         - slug
+        # cds-coachmark
+        - drag-aria-label
+        - floating
+        - oncds-coachmark-closed
+        - oncds-coachmark-opened
+        - position
+        - selector-primary-focus
+        # cds-coachmark-beacon
+        - oncds-coachmark-beacon-clicked
+        # cds-coachmark-header
+        - closeIconDescription
+        - dragIconDescription
+        # cds-coachmark-tagline
+        - oncds-coachmark-tagline-close
+        - oncds-coachmark-tagline-cta-click
         # cds-code-snippet
         - copy-text
         - hide-copy-button
@@ -346,6 +368,19 @@ collect:
         - oncds-dismissible-tag-beingclosed
         - oncds-dismissible-tag-closed
         - tag-title
+        # cds-edit-in-place
+        - cancel-label
+        - edit-always-visible
+        - edit-label
+        - inherit-typography
+        - oncds-edit-in-place-blur
+        - oncds-edit-in-place-cancel
+        - oncds-edit-in-place-change
+        - oncds-edit-in-place-save
+        - read-only-label
+        - read-only-toggletip-text
+        - save-label
+        - toggletip-alignment
         # cds-expandable-tile
         - oncds-expandable-tile-beingtoggled
         - oncds-expandable-tile-toggled
@@ -428,6 +463,14 @@ collect:
         # cds-operational-tag
         - oncds-operational-tag-beforeselected
         - oncds-operational-tag-selected
+        # cds-options-tile
+        - locked
+        - lockedText
+        - oncds-options-tile-close
+        - oncds-options-tile-open
+        - titleId
+        - titleText
+        - warnText
         # cds-ordered-list
         - native
         # cds-overflow-menu-item
@@ -655,11 +698,21 @@ collect:
         - dialog
         # General - size
         - 2xl
+        - default
         - lg
         - md
         - sm
         - xl
         - xs
+        # General - tooltip-alignment
+        - bottom
+        - bottom-left
+        - bottom-right
+        - left
+        - right
+        - top
+        - top-left
+        - top-right
         # General - type
         - expand
         - number
@@ -671,6 +724,15 @@ collect:
         - md
         - sm
         - xl
+        # cds-edit-in-place - toggletip-alignment
+        - bottom
+        - bottom-left
+        - bottom-right
+        - left
+        - right
+        - top
+        - top-left
+        - top-right
         # cds-fluid-date-picker-skeleton - date-picker-type
         - range
         - simple
