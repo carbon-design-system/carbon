@@ -30,8 +30,10 @@ import {
   Time,
 } from '@carbon/icons-react';
 import illustration1 from './_story-assets/illustration-img-1.png';
-import placeholder16x9 from './_story-assets/placeholder-16x9.svg';
-import placeholder1x1 from './_story-assets/placeholder-1x1.svg';
+import illustration16x9 from './_story-assets/illustration-16x9.png';
+import illustration1x1 from './_story-assets/illustration-1x1.png';
+import illustration2_16x9 from './_story-assets/illustration-2-16x9.png';
+import illustration2_1x1 from './_story-assets/illustration-2-1x1.png';
 import rebusClassic from './_story-assets/classic-rebus.png';
 import './card-story.scss';
 import mdx from './Card.mdx';
@@ -152,7 +154,7 @@ export const Default = {
       <Column lg={4} md={4} sm={4}>
         <Card {...cardArgs}>
           <Card.Media ratio="16x9">
-            <img src={placeholder16x9} alt="" width="100%" />
+            <img src={illustration16x9} alt="" width="100%" />
           </Card.Media>
           <Card.Header>
             <Card.Title
@@ -204,7 +206,7 @@ export const Clickable = () => (
         onClick={() => alert('Card clicked')}
         aria-labelledby="clickable-title-usage">
         <Card.Media ratio="16x9">
-          <img src={placeholder16x9} alt="" width="100%" />
+          <img src={illustration16x9} alt="" width="100%" />
         </Card.Media>
         <Card.Header>
           <Card.Title id="clickable-title-usage" label="Analytics">
@@ -226,7 +228,7 @@ export const Clickable = () => (
         target="_blank"
         aria-labelledby="clickable-title-carbon">
         <Card.Media ratio="16x9">
-          <img src={placeholder16x9} alt="" width="100%" />
+          <img src={illustration2_16x9} alt="" width="100%" />
         </Card.Media>
         <Card.Header>
           <Card.Title id="clickable-title-carbon" label="External link">
@@ -286,7 +288,7 @@ export const Clickable = () => (
         onClick={() => alert('Expressive card clicked')}
         aria-labelledby="clickable-title-launch">
         <Card.Media ratio="16x9">
-          <img src={placeholder16x9} alt="" width="100%" />
+          <img src={illustration16x9} alt="" width="100%" />
         </Card.Media>
         <Card.Header>
           <Card.Title id="clickable-title-launch" label="Featured">
@@ -916,7 +918,7 @@ export const WithHorizontalMedia = () => (
       <Card horizontal>
         <Card.Media>
           <img
-            src={placeholder1x1}
+            src={illustration1x1}
             alt="Placeholder"
             style={{ width: '100%', height: '100%' }}
           />
@@ -941,7 +943,7 @@ export const WithHorizontalMedia = () => (
       <Card horizontal>
         <Card.Media mediaWidth="50%">
           <img
-            src={placeholder16x9}
+            src={illustration2_16x9}
             alt="Placeholder"
             style={{ width: '100%', height: '100%' }}
           />
@@ -980,7 +982,7 @@ export const WithHorizontalMedia = () => (
         </Card.Footer>
         <Card.Media>
           <img
-            src={placeholder1x1}
+            src={illustration2_1x1}
             alt="Placeholder"
             style={{ width: '100%', height: '100%' }}
           />
@@ -1012,7 +1014,7 @@ export const WithHorizontalMedia = () => (
         </Card.Footer>
         <Card.Media>
           <img
-            src={placeholder1x1}
+            src={illustration1x1}
             alt="Placeholder"
             style={{ width: '100%', height: '100%' }}
           />
@@ -1111,7 +1113,7 @@ export const WithMedia = () => (
       <Card>
         <Card.Media ratio="16x9">
           <img
-            src={placeholder16x9}
+            src={illustration16x9}
             alt="Placeholder 16:9 ratio"
             width="100%"
           />
@@ -1142,7 +1144,11 @@ export const WithMedia = () => (
     <Column lg={4} md={4} sm={4}>
       <Card>
         <Card.Media ratio="1x1">
-          <img src={placeholder1x1} alt="Placeholder 1:1 ratio" width="100%" />
+          <img
+            src={illustration2_1x1}
+            alt="Placeholder 1:1 ratio"
+            width="100%"
+          />
         </Card.Media>
         <Card.Header>
           <Card.Title description="Perfect for profile images">
@@ -1319,13 +1325,6 @@ export const WithTitleMedia = () => (
     </Column>
     <Column lg={4} md={4} sm={4}>
       <Card>
-        <Card.Media ratio="16x9">
-          <img
-            src={placeholder16x9}
-            alt="Placeholder 16:9 ratio"
-            width="100%"
-          />
-        </Card.Media>
         <Card.Header>
           <Card.HeaderMedia>
             <IconIndicator kind="succeeded" size={16} label="Succeeded" />
