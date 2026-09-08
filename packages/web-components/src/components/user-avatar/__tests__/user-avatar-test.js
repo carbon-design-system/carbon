@@ -7,6 +7,7 @@
 
 import { fixture, html, expect } from '@open-wc/testing';
 import '@carbon/web-components/es/components/user-avatar/index.js';
+import { nothing } from 'lit';
 
 const prefix = 'cds';
 const blockClass = `${prefix}--user-avatar`;
@@ -22,7 +23,7 @@ const template = (props = defaultProps) => html`
     tooltip-text=${props.tooltipText}
     name=${props.name}
     background-color=${props.backgroundColor}
-    size=${props.size}
+    size=${props.size ?? nothing}
     image=${props.image}
     image-description=${props.imageDescription}>
   </cds-user-avatar>
@@ -159,7 +160,8 @@ describe('cds-user-avatar', () => {
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     svg.setAttribute('slot', 'rendericon');
     el.appendChild(svg);
-    await el.updateComplete;
+
+    await new Promise((resolve) => setTimeout(resolve));
 
     const renderedSlot = el.shadowRoot.querySelector('slot[name="rendericon"]');
     expect(renderedSlot).to.exist;
