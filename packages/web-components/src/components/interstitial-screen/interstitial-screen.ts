@@ -136,7 +136,7 @@ class CDSInterstitialScreen extends SignalWatcher(
                     next: carouselAPI.next,
                     prev: carouselAPI.prev,
                     reset: carouselAPI.reset,
-                    gotToStep: carouselAPI.goToIndex,
+                    goToStep: carouselAPI.goToIndex,
                   }
                 : undefined,
               setDisableActionButtons: this.setDisableActionButtons,
@@ -169,16 +169,20 @@ class CDSInterstitialScreen extends SignalWatcher(
     updateInterstitialDetailsSignal({ name: 'disableActions', detail: config });
   };
 
-  _handleClose(e) {
+  _handleClose(e: Event) {
     this.open = false;
     e.stopPropagation();
+
+    // e may be a CustomEvent (fired by footer/header with detail.triggeredBy)
+    // or a raw MouseEvent (fired by _handleOutsideClick — no .detail).
+    const triggeredBy = (e as CustomEvent)?.detail?.triggeredBy ?? e.target;
 
     const init = {
       bubbles: true,
       cancelable: true,
       composed: true,
       detail: {
-        triggeredBy: e.detail.triggeredBy,
+        triggeredBy,
       },
     };
     if (

@@ -43,7 +43,7 @@ class CDSInterstitialScreenBodyItem extends HostListenerMixin(LitElement) {
     const stepKey = `${this.stepTitle?.replace(/\s+/g, '') || randomId}`;
     const newStep = {
       stepTitle: this.stepTitle,
-      id: this.id ?? stepKey,
+      id: this.id || stepKey,
     };
 
     const exists = interstitialDetailsSignal

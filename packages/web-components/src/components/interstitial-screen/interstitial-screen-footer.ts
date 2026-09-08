@@ -84,6 +84,7 @@ class CDSInterstitialScreenFooter extends SignalWatcher(
   }
 
   protected updated(_changedProperties: PropertyValues): void {
+    super.updated(_changedProperties);
     if (_changedProperties.size === 0) {
       // This logic ensures the start/next button receives focus when focus is lost from the "next" or "back" buttons
       // during step navigation—particularly when those buttons are not rendered.
@@ -99,10 +100,10 @@ class CDSInterstitialScreenFooter extends SignalWatcher(
         }
 
         const focusButton = (selector: string) => {
-          const btn = this.shadowRoot?.querySelector(
-            selector
-          ) as HTMLButtonElement | null;
-          btn?.focus();
+          const btn = this.shadowRoot?.querySelector(selector);
+          if (btn instanceof HTMLButtonElement) {
+            btn.focus();
+          }
         };
 
         if (currentStep === lastStepIndex) {

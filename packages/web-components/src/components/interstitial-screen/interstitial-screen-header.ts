@@ -137,18 +137,15 @@ class CDSInterstitialScreenHeader extends SignalWatcher(
     const stepDetails = interstitialDetailsSignal.get().stepDetails;
 
     return html`
-     
-      ${this.headerTitle || this.headerSubTitle ? this.getTitleContent() : nothing}
+      ${this.headerTitle || this.headerSubTitle
+        ? this.getTitleContent()
+        : nothing}
 
-          <slot></slot>
+      <slot></slot>
 
-          ${
-            !this.hideProgressIndicator && stepDetails?.length > 0
-              ? this.getProgressIndicatorContent(stepDetails)
-              : nothing
-          }
-        </div>
-      
+      ${!this.hideProgressIndicator && stepDetails?.length > 0
+        ? this.getProgressIndicatorContent(stepDetails)
+        : nothing}
     `;
   }
 
@@ -165,7 +162,10 @@ class CDSInterstitialScreenHeader extends SignalWatcher(
       : html`<cds-modal-header class="${classes}">
           <cds-modal-close-button
             close-button-label=${this.closeIconDescription}
-            @click="${this._handleUserInitiatedClose}"></cds-modal-close-button>
+            @click="${(e: MouseEvent) =>
+              this._handleUserInitiatedClose(
+                e.target
+              )}"></cds-modal-close-button>
 
           ${this.getHeaderContent()}
         </cds-modal-header>`;

@@ -31,12 +31,9 @@ import '@carbon/web-components/es/components/interstitial-screen/index.js';
 
 ```html
 <cds-interstitial-screen
-  ?full-screen="${false}"
+  ?fullscreen="${false}"
   ?open="${true}"
-  @cds-interstitial-opened="${(e)"
-  ="">
-  { console.log('event initialize', e.detail); }} >
-
+  @cds-interstitial-opened="${(e) => { console.log('event initialize', e.detail); }}">
   <cds-interstitial-screen-header
     header-title="Use case-specific title"
     header-subtitle="Use case-specific sub title"></cds-interstitial-screen-header>
