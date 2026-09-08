@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, screen } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import React, { forwardRef } from 'react';
 import { Popover, PopoverContent } from '../../Popover';
 import userEvent from '@testing-library/user-event';
@@ -66,6 +66,33 @@ describe('Popover', () => {
         <PopoverContent ref={ref}>test</PopoverContent>
       );
       expect(ref).toHaveBeenCalledWith(container.firstChild.firstChild);
+    });
+
+    it('should forward the ref to setFloating after mount via deferred effect', async () => {
+      // Verifies the React 19 fix: setFloatingSafe captures the node during
+      // commit and forwards it to setFloating in a passive useEffect.
+      const ref = jest.fn();
+      await act(async () => {
+        render(<PopoverContent ref={ref}>test</PopoverContent>);
+      });
+      // forwardRef is called synchronously; the deferred path runs after act flushes effects
+      expect(ref).toHaveBeenCalled();
+      expect(ref.mock.calls[0][0]).not.toBeNull();
+    });
+
+    it('should forward null to setFloating on unmount (detach cleanup)', async () => {
+      const ref = jest.fn();
+      let unmount;
+      await act(async () => {
+        ({ unmount } = render(<PopoverContent ref={ref}>test</PopoverContent>));
+      });
+      ref.mockClear();
+
+      await act(async () => {
+        unmount();
+      });
+
+      expect(ref).toHaveBeenCalledWith(null);
     });
 
     it('should support a custom class name on the popover content', () => {

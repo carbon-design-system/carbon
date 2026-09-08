@@ -762,14 +762,23 @@ export const PopoverContent = frFn((props, forwardRef) => {
   // React 19: setFloating is a useState setter backed by floating-ui.
   // Passing it as a ref callback causes setState during commit → crash.
   // Capture the node in a ref and forward it in a passive effect (after commit).
-  const pendingNodeRef = useRef<HTMLSpanElement | null>(null);
+  // Use a { pending, node } sentinel so null detach signals (unmount cleanup)
+  // are forwarded correctly — a plain !== null guard would silently drop them,
+  // leaving floating-ui with a stale reference to a detached DOM node.
+  const pendingNodeRef = useRef<{
+    pending: boolean;
+    node: HTMLSpanElement | null;
+  }>({
+    pending: false,
+    node: null,
+  });
   const setFloatingSafe = useCallback((node: HTMLSpanElement | null) => {
-    pendingNodeRef.current = node;
+    pendingNodeRef.current = { pending: true, node };
   }, []);
   useEffect(() => {
-    if (pendingNodeRef.current !== null && typeof setFloating === 'function') {
-      const node = pendingNodeRef.current;
-      pendingNodeRef.current = null;
+    if (pendingNodeRef.current.pending && typeof setFloating === 'function') {
+      const { node } = pendingNodeRef.current;
+      pendingNodeRef.current = { pending: false, node: null };
       (setFloating as (node: HTMLSpanElement | null) => void)(node);
     }
   });
