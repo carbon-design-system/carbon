@@ -90,6 +90,29 @@ export interface PageHeaderProps {
   narrowGrid?: boolean;
 }
 
+/**
+ * Static sub-component properties attached to PageHeader for namespace usage.
+ * Declared here so TypeScript knows about `PageHeader.Root`, etc.
+ */
+type PageHeaderCompositeComponent = React.ForwardRefExoticComponent<
+  PageHeaderProps & React.RefAttributes<HTMLDivElement>
+> & {
+  Root: React.ForwardRefExoticComponent<
+    PageHeaderProps & React.RefAttributes<HTMLDivElement>
+  >;
+  BreadcrumbBar: typeof PageHeaderBreadcrumbBar;
+  Content: typeof PageHeaderContent;
+  ContentPageActions: typeof PageHeaderContentPageActions;
+  ContentText: typeof PageHeaderContentText;
+  HeroImage: typeof PageHeaderHeroImage;
+  TabBar: typeof PageHeaderTabBar;
+  ScrollButton: typeof PageHeaderScrollButton;
+  TitleBreadcrumb: typeof PageHeaderTitleBreadcrumb;
+  BreadcrumbOverflow: typeof PageHeaderBreadcrumbOverflow;
+  TagOverflow: typeof PageHeaderTagOverflow;
+  BreadcrumbPageActions: typeof PageHeaderBreadcrumbPageActions;
+};
+
 const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
   function PageHeader(
     {
@@ -286,49 +309,46 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
       </PageHeaderContext.Provider>
     );
   }
-);
+) as PageHeaderCompositeComponent;
 PageHeader.displayName = 'PageHeader';
 
 /**
  * -------
  * Exports
  * -------
+ *
+ * Sub-components are attached as static properties on PageHeader so that
+ * stories and consumers can use the namespace pattern:
+ *   <PageHeader.Root>, <PageHeader.BreadcrumbBar>, etc.
  */
+
+// Attach sub-components as static properties for namespace-style usage
+PageHeader.Root = PageHeader;
+PageHeader.BreadcrumbBar = PageHeaderBreadcrumbBar;
+PageHeader.Content = PageHeaderContent;
+PageHeader.ContentPageActions = PageHeaderContentPageActions;
+PageHeader.ContentText = PageHeaderContentText;
+PageHeader.HeroImage = PageHeaderHeroImage;
+PageHeader.TabBar = PageHeaderTabBar;
+PageHeader.ScrollButton = PageHeaderScrollButton;
+PageHeader.TitleBreadcrumb = PageHeaderTitleBreadcrumb;
+PageHeader.BreadcrumbOverflow = PageHeaderBreadcrumbOverflow;
+PageHeader.TagOverflow = PageHeaderTagOverflow;
+PageHeader.BreadcrumbPageActions = PageHeaderBreadcrumbPageActions;
+
+// Standalone aliases (kept for direct named import support)
 const Root = PageHeader;
-Root.displayName = 'PageHeader.Root';
-
 const BreadcrumbBar = PageHeaderBreadcrumbBar;
-BreadcrumbBar.displayName = 'PageHeaderBreadcrumbBar';
-
 const Content = PageHeaderContent;
-Content.displayName = 'PageHeaderContent';
-
 const ContentPageActions = PageHeaderContentPageActions;
-ContentPageActions.displayName = 'PageHeaderContentPageActions';
-
 const ContentText = PageHeaderContentText;
-ContentText.displayName = 'PageHeaderContentText';
-
 const HeroImage = PageHeaderHeroImage;
-HeroImage.displayName = 'PageHeaderHeroImage';
-
 const TabBar = PageHeaderTabBar;
-TabBar.displayName = 'PageHeaderTabBar';
-
 const ScrollButton = PageHeaderScrollButton;
-ScrollButton.displayName = 'PageHeaderScrollButton';
-
 const TitleBreadcrumb = PageHeaderTitleBreadcrumb;
-TitleBreadcrumb.displayName = 'PageHeaderTitleBreadcrumb';
-
 const BreadcrumbOverflow = PageHeaderBreadcrumbOverflow;
-BreadcrumbOverflow.displayName = 'PageHeaderBreadcrumbOverflow';
-
 const TagOverflow = PageHeaderTagOverflow;
-TagOverflow.displayName = 'PageHeaderTagOverflow';
-
 const BreadcrumbPageActions = PageHeaderBreadcrumbPageActions;
-BreadcrumbPageActions.displayName = 'PageHeaderBreadcrumbPageActions';
 
 export {
   // direct exports
