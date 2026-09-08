@@ -96,9 +96,7 @@ Map {
       "border": {
         "type": "bool",
       },
-      "caret": {
-        "type": "bool",
-      },
+      "caret": [Function],
       "children": {
         "type": "node",
       },
@@ -8221,9 +8219,7 @@ Map {
       "border": {
         "type": "bool",
       },
-      "caret": {
-        "type": "bool",
-      },
+      "caret": [Function],
       "children": {
         "type": "node",
       },
@@ -11378,9 +11374,7 @@ Map {
       "border": {
         "type": "bool",
       },
-      "caret": {
-        "type": "bool",
-      },
+      "caret": [Function],
       "children": {
         "type": "node",
       },
@@ -14029,9 +14023,7 @@ Map {
       "border": {
         "type": "bool",
       },
-      "caret": {
-        "type": "bool",
-      },
+      "caret": [Function],
       "children": {
         "type": "node",
       },
@@ -16071,9 +16063,7 @@ Map {
       "border": {
         "type": "bool",
       },
-      "caret": {
-        "type": "bool",
-      },
+      "caret": [Function],
       "children": {
         "type": "node",
       },
