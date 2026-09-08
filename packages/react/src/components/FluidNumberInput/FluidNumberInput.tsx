@@ -168,7 +168,6 @@ export interface FluidNumberInputProps
   readOnly?: boolean;
 }
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const FluidNumberInput = React.forwardRef<
   HTMLInputElement,
   FluidNumberInputProps
@@ -183,6 +182,7 @@ const FluidNumberInput = React.forwardRef<
   );
 });
 
+FluidNumberInput.displayName = 'FluidNumberInput';
 FluidNumberInput.propTypes = {
   /**
    * `true` to allow empty string.

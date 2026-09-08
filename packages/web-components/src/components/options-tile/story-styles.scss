@@ -1,0 +1,32 @@
+/*
+ * Copyright IBM Corp. 2025, 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/spacing' as *;
+
+.options-tile-stories__wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  min-block-size: 100vh;
+}
+
+.options-tile-stories__viewport {
+  inline-size: 80vw;
+  max-inline-size: 48rem;
+  min-inline-size: 16rem;
+}
+
+.options-tile-stories__body p {
+  @include type.type-style('body-01');
+
+  margin-block-end: $spacing-05;
+}
+
+.options-tile-stories__dropdown:first-of-type {
+  margin-block-end: $spacing-05;
+}
