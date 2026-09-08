@@ -12,6 +12,7 @@ import { NumberInput } from '../../../NumberInput';
 import { useTranslations } from '../../utils/useTranslations';
 import { Condition, PropertyConfigNumber } from '../../ConditionBuilder.types';
 import { usePrefix } from '../../../../internal/usePrefix';
+import { useId } from '../../../../internal/useId';
 
 interface ConditionBuilderItemNumberProps {
   conditionState: Condition;
@@ -25,6 +26,7 @@ export const ConditionBuilderItemNumber = ({
 }: ConditionBuilderItemNumberProps) => {
   const prefix = usePrefix();
   const blockClass = `${prefix}--condition-builder`;
+  const instanceId = useId('condition-builder-number');
   const [invalidNumberWarnText] = useTranslations(['invalidNumberWarnText']);
   const onChangeHandler = (e, { value }) => {
     if (value !== '' && !isNaN(value) && checkIfValid(value)) {
@@ -68,7 +70,7 @@ export const ConditionBuilderItemNumber = ({
         {...config}
         label={conditionState.property}
         hideLabel
-        id={conditionState.property?.replace(/\s/g, '') as string}
+        id={instanceId}
         invalidText={invalidNumberWarnText}
         allowEmpty
         onChange={onChangeHandler}
