@@ -1,0 +1,46 @@
+import { Canvas, Story, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as EmptyStateStories from './EmptyState.stories';
+
+# EmptyState
+
+The **Empty State** pattern provides a consistent way to communicate to users
+that there is no data to display — whether because data has not yet been added,
+a search returned no results, or content was deleted.
+
+## Usage
+
+An empty state typically contains:
+
+- **Illustration** (optional) — a pictogram, icon or custom image
+- **Heading** — a concise label for the state (required)
+- **Subtitle** — a short description telling users what they can do
+- **Action button** (optional) — a primary call to action (e.g. "Create new")
+- **Link** (optional) — a secondary call to action or documentation link
+
+## Anatomy
+
+<Canvas of={EmptyStateStories.Default} />
+
+## With action button
+
+<Canvas of={EmptyStateStories.WithAction} />
+
+## With link
+
+<Canvas of={EmptyStateStories.WithLink} />
+
+## With action and link
+
+<Canvas of={EmptyStateStories.WithActionAndLink} />
+
+## Small size
+
+<Canvas of={EmptyStateStories.Small} />
+
+## With illustration
+
+<Canvas of={EmptyStateStories.WithIllustration} />
+
+## Props
+
+<ArgTypes />

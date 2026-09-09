@@ -1,0 +1,84 @@
+//
+// Copyright IBM Corp. 2016, 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+
+// ─── Empty-state placement wrapper (inside DataTable) ────────────────────────
+
+.es-story__empty-wrap {
+  display: flex;
+  padding: $spacing-07 $spacing-05;
+  background-color: var(--cds-layer);
+
+  &--centre {
+    justify-content: center;
+  }
+
+  &--left {
+    justify-content: flex-start;
+  }
+}
+
+// ─── Right-hand tile column (spans 2 grid rows) ───────────────────────────────
+
+.es-story__col--span-2 {
+  display: flex;
+  flex-direction: column;
+  grid-row: span 2;
+}
+
+// ─── Tile shared styles ───────────────────────────────────────────────────────
+
+.es-story__tile {
+  display: flex;
+  flex-direction: column;
+  block-size: 100%;
+  flex: 1;
+  padding: $spacing-05;
+}
+
+// ─── Tile label / title ───────────────────────────────────────────────────────
+
+.es-story__tile-label {
+  @include type.type-style('label-01');
+
+  margin-block-end: $spacing-02;
+  color: var(--cds-text-secondary);
+}
+
+.es-story__tile-title {
+  @include type.type-style('heading-compact-01');
+
+  margin-block-end: $spacing-05;
+}
+
+// ─── Empty-state content wrapper inside a tile ───────────────────────────────
+
+// Vertical tile: centres the empty state vertically within the remaining space
+.es-story__tile-empty--vertical {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  &--centre {
+    align-items: center;
+  }
+}
+
+// Horizontal tile: aligns empty state to start (or centre) horizontally
+.es-story__tile-empty--horizontal {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+
+  &--centre {
+    justify-content: center;
+  }
+}
