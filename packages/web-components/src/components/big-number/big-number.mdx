@@ -4,9 +4,11 @@ import {
   Markdown,
   Meta,
   Story,
+  Unstyled,
 } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 import * as BigNumberStories from './big-number.stories';
+import '../notification/inline-notification';
 
 {/* Copyright IBM Corp. 2025, 2026. Licensed under the Apache-2.0 license. */}
 
@@ -28,6 +30,18 @@ functionality. The default locale is English(`en-US`) if one is not provided or
 if the provided one is not supported.
 
 [Supported locales](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#locales)
+
+{/* <!-- prettier-ignore-start --> */}
+
+<Unstyled style={{ marginBottom: '1.5rem' }}>
+  <cds-inline-notification
+    kind="info"
+    title="Migrated component:"
+    subtitle="This component has been migrated from Carbon for IBM Products. While visible in the v12 Storybook, migrated components are not available in the published v11 package and enabling enable-v12-release does not expose them — they will be part of the public @carbon/web-components API when v12 ships."
+  />
+</Unstyled>
+
+{/* <!-- prettier-ignore-end --> */}
 
 ## Getting started
 
