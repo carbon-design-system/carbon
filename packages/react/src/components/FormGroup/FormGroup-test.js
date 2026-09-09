@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -36,6 +36,44 @@ describe('FormGroup', () => {
 
     // eslint-disable-next-line testing-library/prefer-presence-queries
     expect(screen.queryByText('legendtest')).toBeInTheDocument();
+  });
+
+  it('should not allow interactive content in legendText', () => {
+    const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+    expect(() => {
+      render(
+        <FormGroup
+          legendId="legend-testid"
+          legendText={
+            <>
+              FormGroup legend <button type="button">Help</button>
+            </>
+          }>
+          FormGroup Test
+        </FormGroup>
+      );
+    }).toThrow(
+      'The FormGroup component `legendText` prop must have no interactive content'
+    );
+
+    spy.mockRestore();
+  });
+
+  it('should allow non-interactive content in legendText', () => {
+    expect(() => {
+      render(
+        <FormGroup
+          legendId="legend-testid"
+          legendText={
+            <>
+              FormGroup legend <span>additional legend content</span>
+            </>
+          }>
+          FormGroup Test
+        </FormGroup>
+      );
+    }).not.toThrow();
   });
 
   it('should set the id for legend based on legendId', () => {
