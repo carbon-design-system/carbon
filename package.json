@@ -40,7 +40,9 @@
     "@octokit/rest": "^22.0.0",
     "eslint": "9.39.5",
     "typescript-eslint": "8.69.0",
-    "immutable": "^5.1.8"
+    "immutable": "^5.1.8",
+    "tar@7.5.20": "7.5.22",
+    "vite@5.0.10": "5.4.21"
   },
   "devDependencies": {
     "@babel/core": "^8.0.0",
