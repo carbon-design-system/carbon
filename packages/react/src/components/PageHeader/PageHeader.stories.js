@@ -797,11 +797,17 @@ export const CustomRenderWithCallbacks = (args) => {
     ...rootArgs
   } = args;
 
-  const handleContentFullyCollapsed = useCallback(() => {}, []);
+  const handleContentFullyCollapsed = useCallback((collapsed) => {
+    console.log('onContentFullyCollapsed:', collapsed);
+  }, []);
 
-  const handleTitleClipped = useCallback(() => {}, []);
+  const handleTitleClipped = useCallback((clipped) => {
+    console.log('onTitleClipped:', clipped);
+  }, []);
 
-  const handleContentActionsClipped = useCallback(() => {}, []);
+  const handleContentActionsClipped = useCallback((clipped) => {
+    console.log('onContentActionsClipped:', clipped);
+  }, []);
 
   return (
     <div className="page-header-story__wrapper--no-shell">
@@ -846,13 +852,11 @@ export const CustomRenderWithCallbacks = (args) => {
           </PageHeader.BreadcrumbBar>
           <PageHeader.Content
             title={title}
-            pageActions={({ fullyCollapsed }) =>
-              !fullyCollapsed ? (
-                <PageHeader.ContentPageActions
-                  menuButtonLabel="Actions"
-                  actions={pageActionButtonItems}
-                />
-              ) : null
+            pageActions={
+              <PageHeader.ContentPageActions
+                menuButtonLabel="Actions"
+                actions={pageActionButtonItems}
+              />
             }>
             <PageHeader.ContentText subtitle="Subtitle">
               Built for modern teams, our technology platform simplifies

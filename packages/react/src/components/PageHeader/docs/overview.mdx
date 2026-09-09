@@ -387,14 +387,14 @@ area:
 
   <PageHeader.Content
     title="Page Title"
-    // Function rendering: hide actions when fully collapsed
-    pageActions={({ fullyCollapsed }) =>
-      !fullyCollapsed ? (
-        <PageHeader.ContentPageActions
-          menuButtonLabel="Actions"
-          actions={actionItems}
-        />
-      ) : null
+    // Always render as a static node — PageHeaderContentPageActions must stay
+    // mounted so the IntersectionObserver can watch it. The --clipped CSS class
+    // handles hide/show; do not return null from a function here.
+    pageActions={
+      <PageHeader.ContentPageActions
+        menuButtonLabel="Actions"
+        actions={actionItems}
+      />
     }>
     <PageHeader.ContentText subtitle="Subtitle">
       Page description text
@@ -405,14 +405,14 @@ area:
 
 **Key benefits:**
 
-- Actions in
-  [`BreadcrumbBar`](packages/ibm-products/src/components/PageHeader/next/PageHeaderBreadcrumbBar.tsx:57)
-  and
-  [`Content`](packages/ibm-products/src/components/PageHeader/next/PageHeaderContent.tsx:65)
-  can operate independently
-- Choose static nodes for simple cases or functions for dynamic behavior
+- Actions in `BreadcrumbBar` and `Content` can operate independently
+- Use the **function form** on `BreadcrumbBar.contentActions` to conditionally
+  show actions only when they are clipped (scroll-based)
+- Always pass a **static node** to `Content.pageActions` — the component must
+  stay mounted so the `IntersectionObserver` can track when it scrolls out of
+  view; CSS handles the hide/show via the `--clipped` modifier class
 - Create responsive scroll-based interactions without managing state
-- Backward compatible - existing code using React nodes continues to work
+- Backward compatible — existing code using static React nodes continues to work
 
 ## PageHeader.Content
 
