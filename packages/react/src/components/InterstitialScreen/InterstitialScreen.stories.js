@@ -23,6 +23,7 @@ const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 export default {
   title: 'Components/InterstitialScreen',
   component: InterstitialScreen,
+  tags: ['autodocs', 'ibm-products-migrated'],
   subcomponents: {
     Header: InterstitialScreen.Header,
     Body: InterstitialScreen.Body,

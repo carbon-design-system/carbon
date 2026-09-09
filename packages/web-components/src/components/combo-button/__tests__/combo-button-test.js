@@ -196,7 +196,7 @@ describe('cds-combo-button', () => {
       '[slot="tooltip-content"]'
     );
     expect(tooltipSlot?.textContent?.trim()).to.equal('Additional actions');
-    expect(el).shadowDom.to.equalSnapshot();
+    await expect(el).shadowDom.to.equalSnapshot();
   });
 });
 

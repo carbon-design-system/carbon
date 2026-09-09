@@ -65,7 +65,7 @@ describe('Loading', () => {
       render(<Loading withOverlay />);
 
       const dialog = screen.getByRole('dialog');
-      expect(dialog).toHaveAttribute('aria-modal', 'true');
+      expect(dialog).not.toHaveAttribute('aria-modal');
       expect(screen.getByRole('presentation')).toContainElement(dialog);
     });
 
@@ -114,6 +114,27 @@ describe('Loading', () => {
   });
 
   describe('focus trap', () => {
+    it('should not steal focus when the overlay becomes active', () => {
+      const { rerender } = render(
+        <div>
+          <button data-testid="page-control">Page control</button>
+          <Loading withOverlay active={false} />
+        </div>
+      );
+
+      const pageControl = screen.getByTestId('page-control');
+      pageControl.focus();
+
+      rerender(
+        <div>
+          <button data-testid="page-control">Page control</button>
+          <Loading withOverlay active />
+        </div>
+      );
+
+      expect(document.activeElement).toBe(pageControl);
+    });
+
     it('should prevent Tab from moving focus outside overlay', async () => {
       const user = userEvent.setup();
 
@@ -202,6 +223,7 @@ describe('Loading', () => {
       );
 
       const overlayDialog = screen.getByRole('dialog', { name: 'loading' });
+      expect(overlayDialog).not.toHaveAttribute('aria-modal');
 
       await waitFor(() => {
         expect(document.activeElement).toBe(overlayDialog);
@@ -403,7 +425,7 @@ describe('Loading', () => {
         </div>
       );
 
-      expect(document.activeElement).toBe(screen.getByRole('dialog'));
+      screen.getByRole('dialog').focus();
 
       rerender(
         <div>
@@ -429,13 +451,11 @@ describe('Loading', () => {
       expect(document.activeElement).toBe(glyph);
 
       rerender(withGlyph(<Loading withOverlay active />));
-      expect(document.activeElement).toBe(
-        screen.getByRole('dialog', { name: 'loading' })
-      );
+      expect(document.activeElement).toBe(glyph);
 
       rerender(withGlyph(null));
 
-      expect(document.activeElement).toBe(document.body);
+      expect(document.activeElement).toBe(glyph);
     });
 
     it('should restore focus next to the trigger when the trigger is disabled', () => {
@@ -453,9 +473,7 @@ describe('Loading', () => {
       screen.getByTestId('trigger').focus();
 
       rerender(withForm(<Loading withOverlay active />, false));
-      expect(document.activeElement).toBe(
-        screen.getByRole('dialog', { name: 'loading' })
-      );
+      screen.getByRole('dialog', { name: 'loading' }).focus();
 
       rerender(withForm(null, true));
 
@@ -483,6 +501,7 @@ describe('Loading', () => {
       screen.getByTestId('trigger').focus();
 
       rerender(withForm(<Loading withOverlay active />, false));
+      screen.getByRole('dialog', { name: 'loading' }).focus();
       rerender(withForm(null, true));
 
       const formElement = screen.getByTestId('form');
@@ -512,6 +531,7 @@ describe('Loading', () => {
       screen.getByTestId('trigger').focus();
 
       rerender(withForm(<Loading withOverlay active />, false));
+      screen.getByRole('dialog', { name: 'loading' }).focus();
 
       const rival = screen.getByTestId('rival');
       const steal = (event) => {

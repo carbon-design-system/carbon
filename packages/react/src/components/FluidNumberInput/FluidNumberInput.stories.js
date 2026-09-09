@@ -7,13 +7,9 @@
 
 import React from 'react';
 import { FluidNumberInput, FluidNumberInputSkeleton } from '.';
-import {
-  ToggletipLabel,
-  Toggletip,
-  ToggletipButton,
-  ToggletipContent,
-} from '../Toggletip';
+import { Toggletip, ToggletipButton, ToggletipContent } from '../Toggletip';
 import { Information } from '@carbon/icons-react';
+import './fluid-number-input-story.scss';
 import mdx from './FluidNumberInput.mdx';
 
 export default {
@@ -29,52 +25,64 @@ export default {
   },
 };
 
-const ToggleTip = (
-  <>
-    <ToggletipLabel>Label</ToggletipLabel>
-    <Toggletip align="top-left">
-      <ToggletipButton label="Show information">
-        <Information />
-      </ToggletipButton>
-      <ToggletipContent>
-        <p>Additional field information here.</p>
-      </ToggletipContent>
-    </Toggletip>
-  </>
-);
-
-export const Default = ({ defaultWidth, ...numberInputArgs }) => (
-  <div style={{ width: defaultWidth }}>
-    <FluidNumberInput {...numberInputArgs} />
+export const Default = ({ defaultWidth, labelText, ...numberInputArgs }) => (
+  <div className="fluid-number-input-story" style={{ width: defaultWidth }}>
+    {/* Keep the toggletip outside `label`; interactive content is invalid in labels. */}
+    <span className="fluid-number-input-story__toggletip">
+      <Toggletip align="top-left">
+        <ToggletipButton label="Show information">
+          <Information />
+        </ToggletipButton>
+        <ToggletipContent>
+          <p>Additional field information here.</p>
+        </ToggletipContent>
+      </Toggletip>
+    </span>
+    <FluidNumberInput {...numberInputArgs} label={labelText} />
   </div>
 );
 
 Default.args = {
-  max: 100,
-  min: 0,
-  step: 10,
-  id: 'input-default',
-  placeholder: 'Placeholder text',
+  allowEmpty: false,
+  className: '',
   defaultWidth: 400,
   defaultValue: 50,
+  disableWheel: false,
+  disabled: false,
+  iconDescription: 'Adjust number',
+  id: 'input-default',
+  inputMode: 'decimal',
   invalid: false,
   invalidText:
     'Error message that is really long can wrap to more lines but should not be excessively long.',
-  disabled: false,
-  label: ToggleTip,
+  labelText: 'Label',
+  locale: 'en-US',
+  max: 100,
+  min: 0,
+  placeholder: 'Placeholder text',
+  readOnly: false,
+  step: 10,
+  type: 'number',
   warn: false,
   warnText:
     'Warning message that is really long can wrap to more lines but should not be excessively long.',
 };
 
 Default.argTypes = {
+  allowEmpty: {
+    control: 'boolean',
+  },
+  className: {
+    control: 'text',
+  },
   defaultWidth: {
     control: { type: 'range', min: 300, max: 800, step: 50 },
   },
   defaultValue: {
-    control: {
-      type: 'number',
-    },
+    control: 'number',
+  },
+  disableWheel: {
+    control: 'boolean',
   },
   invalid: {
     control: {
@@ -91,10 +99,58 @@ Default.argTypes = {
       type: 'boolean',
     },
   },
-  label: {
-    control: {
-      type: 'text',
-    },
+  iconDescription: {
+    control: 'text',
+  },
+  id: {
+    control: 'text',
+  },
+  inputMode: {
+    control: 'select',
+    options: [
+      'none',
+      'text',
+      'tel',
+      'url',
+      'email',
+      'numeric',
+      'decimal',
+      'search',
+    ],
+  },
+  labelText: {
+    control: 'text',
+  },
+  locale: {
+    control: 'text',
+  },
+  max: {
+    control: 'number',
+  },
+  min: {
+    control: 'number',
+  },
+  onChange: {
+    action: 'onChange',
+  },
+  onClick: {
+    action: 'onClick',
+  },
+  onKeyUp: {
+    action: 'onKeyUp',
+  },
+  placeholder: {
+    control: 'text',
+  },
+  readOnly: {
+    control: 'boolean',
+  },
+  step: {
+    control: 'number',
+  },
+  type: {
+    control: 'select',
+    options: ['number', 'text'],
   },
   warn: {
     control: {
@@ -108,12 +164,26 @@ Default.argTypes = {
   },
 };
 
-export const Skeleton = () => (
-  <div style={{ width: '400px' }}>
-    <FluidNumberInputSkeleton
-      label="Label"
-      placeholder="Placeholder text"
-      id="input-skeleton"
-    />
+Default.parameters = {
+  controls: { include: Object.keys(Default.argTypes) },
+};
+
+export const Skeleton = ({ defaultWidth, ...args }) => (
+  <div style={{ width: defaultWidth }}>
+    <FluidNumberInputSkeleton {...args} />
   </div>
 );
+
+Skeleton.args = {
+  className: '',
+  defaultWidth: 400,
+};
+
+Skeleton.argTypes = {
+  className: { control: 'text' },
+  defaultWidth: Default.argTypes.defaultWidth,
+};
+
+Skeleton.parameters = {
+  controls: { include: Object.keys(Skeleton.argTypes) },
+};

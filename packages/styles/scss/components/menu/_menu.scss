@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020
+// Copyright IBM Corp. 2020, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -17,6 +17,8 @@
 @use '../../utilities/z-index' as *;
 @use '../../utilities/convert';
 @use '../../utilities/component-reset';
+@use '../../border-radius' as *;
+@use '../../feature-flags' as *;
 
 /// Menu styles
 /// @access public
@@ -37,6 +39,11 @@
     opacity: 0;
     overflow-y: auto;
     visibility: hidden;
+
+    @if enabled('enable-v12-release') {
+      padding: $spacing-02;
+      border-radius: $border-radius-08;
+    }
   }
 
   .#{$prefix}--menu--border {
@@ -85,6 +92,11 @@
 
     &:focus {
       @include focus-outline('outline');
+    }
+
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-04;
+      padding-inline: $spacing-04;
     }
   }
 
@@ -218,5 +230,10 @@
     block-size: convert.to-rem(1px);
     inline-size: 100%;
     margin-block: $spacing-02;
+
+    @if enabled('enable-v12-release') {
+      inline-size: calc(100% + #{$spacing-02 * 2});
+      margin-inline: -$spacing-02;
+    }
   }
 }
