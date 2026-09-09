@@ -381,29 +381,31 @@ $popover-caret-height: custom-property.get-var(
     }
   }
 
-  .#{$prefix}--popover--top-start:not(.#{$prefix}--popover--caret):not(
-      .#{$prefix}--popover--auto-align
-    ):not(.#{$prefix}--popover--tab-tip)
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-content,
-  .#{$prefix}--popover--bottom-start:not(.#{$prefix}--popover--caret):not(
-      .#{$prefix}--popover--auto-align
-    ):not(.#{$prefix}--popover--tab-tip)
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-content {
-    inset-inline-start: calc(50% - $popover-offset - 1rem);
-  }
-  .#{$prefix}--popover--top-end:not(.#{$prefix}--popover--caret):not(
-      .#{$prefix}--popover--auto-align
-    ):not(.#{$prefix}--popover--tab-tip)
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-content,
-  .#{$prefix}--popover--bottom-end:not(.#{$prefix}--popover--caret):not(
-      .#{$prefix}--popover--auto-align
-    ):not(.#{$prefix}--popover--tab-tip)
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-content {
-    inset-inline-end: calc(50% - $popover-offset - 1rem);
+  @if not enabled('enable-v12-release') {
+    .#{$prefix}--popover--top-start:not(.#{$prefix}--popover--caret):not(
+        .#{$prefix}--popover--auto-align
+      ):not(.#{$prefix}--popover--tab-tip)
+      > .#{$prefix}--popover
+      > .#{$prefix}--popover-content,
+    .#{$prefix}--popover--bottom-start:not(.#{$prefix}--popover--caret):not(
+        .#{$prefix}--popover--auto-align
+      ):not(.#{$prefix}--popover--tab-tip)
+      > .#{$prefix}--popover
+      > .#{$prefix}--popover-content {
+      inset-inline-start: calc(50% - $popover-offset - 1rem);
+    }
+    .#{$prefix}--popover--top-end:not(.#{$prefix}--popover--caret):not(
+        .#{$prefix}--popover--auto-align
+      ):not(.#{$prefix}--popover--tab-tip)
+      > .#{$prefix}--popover
+      > .#{$prefix}--popover-content,
+    .#{$prefix}--popover--bottom-end:not(.#{$prefix}--popover--caret):not(
+        .#{$prefix}--popover--auto-align
+      ):not(.#{$prefix}--popover--tab-tip)
+      > .#{$prefix}--popover
+      > .#{$prefix}--popover-content {
+      inset-inline-end: calc(50% - $popover-offset - 1rem);
+    }
   }
 
   .#{$prefix}--popover--right:not(.#{$prefix}--popover--caret):not(
