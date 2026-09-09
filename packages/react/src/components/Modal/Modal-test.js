@@ -707,6 +707,33 @@ describe.each([
         expect(focusElem).toHaveFocus();
       });
     });
+
+    it('should call onRequestClose when the dialog cancel event fires', () => {
+      const onRequestClose = jest.fn();
+      render(
+        <FeatureFlags enableDialogElement>
+          <Component
+            open
+            modalHeading="Test modal"
+            primaryButtonText="Submit"
+            secondaryButtonText="Cancel"
+            onRequestClose={onRequestClose}
+          />
+        </FeatureFlags>
+      );
+
+      const dialog = screen.getByRole('dialog');
+
+      // Simulate a native cancel event on the dialog.
+      const cancelEvent = new Event('cancel', {
+        bubbles: false,
+        cancelable: true,
+      });
+      fireEvent(dialog, cancelEvent);
+
+      expect(cancelEvent.defaultPrevented).toBe(true);
+      expect(onRequestClose).toHaveBeenCalledTimes(1);
+    });
   });
 
   describe('Modal scroll content hysteresis', () => {

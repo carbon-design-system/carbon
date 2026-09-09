@@ -124,6 +124,15 @@ const experimentalArgTypes = {
   },
 };
 
+const autoAlignStoryContainerStyle = {
+  display: 'grid',
+  placeItems: 'center',
+  width: '200vw',
+  minWidth: '1200px',
+  height: '200vh',
+  minHeight: '1200px',
+};
+
 export default {
   title: 'Components/Toggletip',
   component: Toggletip,
@@ -218,15 +227,10 @@ export const ExperimentalAutoAlign = (args) => {
   const resolvedAlign = alignDeprecated || align;
 
   return (
-    <div style={{ width: '5000px', height: '5000px' }}>
+    <div style={autoAlignStoryContainerStyle}>
       <div
         style={{
-          display: 'flex',
-          alignItems: 'center',
-          inlineSize: 'max-content',
-          position: 'absolute',
-          top: '2500px',
-          left: '2500px',
+          inlineSize: '8rem',
         }}>
         <ToggletipLabel>{labelText}</ToggletipLabel>
         <Toggletip
