@@ -120,7 +120,10 @@ export const PageHeaderBreadcrumbPageActions = ({
         data-floating-menu-container
         className={`${blockClass}__breadcrumb-page-actions__overflow-item`}>
         <FeatureFlags enableV12Overflowmenu>
-          <OverflowMenu size={buttonSize} aria-label={overflowMenuLabel}>
+          <OverflowMenu
+            menuAlignment="bottom-end"
+            size={buttonSize}
+            aria-label={overflowMenuLabel}>
             {hiddenItems.map((item) => (
               <MenuItem
                 key={item.id}
