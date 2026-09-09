@@ -77,7 +77,26 @@ export default {
       page: mdx,
     },
   },
-  decorators: [(Story) => <Story />],
+  decorators: [
+    (Story) => (
+      <>
+        <style>
+          {`
+          .sb-show-main.sb-main-centered {
+            align-items: normal;
+          }
+
+          .sb-show-main.sb-main-centered #storybook-root {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+          }
+        `}
+        </style>
+        <Story />
+      </>
+    ),
+  ],
 };
 
 const BeeIcon = () => <Bee size={32} />;
@@ -119,96 +138,98 @@ export const Default = (args) => {
     ...rootArgs
   } = args;
   return (
-    <Tabs>
-      <PageHeader.Root {...rootArgs}>
-        <PageHeader.BreadcrumbBar
-          border={border}
-          pageActionsFlush={pageActionsFlush}
-          contentActionsFlush={contentActionsFlush}
-          renderIcon={renderBreadcrumbIcon ? BreadcrumbBeeIcon : null}
-          contentActions={
-            <PageHeader.ContentPageActions
-              menuButtonLabel="Actions"
-              actions={pageActionButtonItems}
-            />
-          }
-          pageActions={breadcrumbPageActions}>
-          <PageHeader.BreadcrumbOverflow
-            noTrailingSlash
-            renderOverflowBreadcrumb={(hiddenItems) => (
-              <BreadcrumbItem data-floating-menu-container>
-                <OverflowMenu
-                  align="bottom"
-                  aria-label="Overflow menu in a breadcrumb">
-                  {hiddenItems.map((el) => (
-                    <OverflowMenuItem
-                      key={el.innerText}
-                      itemText={el.innerText}
-                    />
-                  ))}
-                </OverflowMenu>
-              </BreadcrumbItem>
-            )}>
-            <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
-            <BreadcrumbItem href="/#">Breadcrumb 2</BreadcrumbItem>
-            <BreadcrumbItem href="/#">Breadcrumb 3</BreadcrumbItem>
-            <PageHeader.TitleBreadcrumb data-fixed>
-              {title}
-            </PageHeader.TitleBreadcrumb>
-          </PageHeader.BreadcrumbOverflow>
-        </PageHeader.BreadcrumbBar>
-        <PageHeader.Content
-          title={title}
-          pageActions={
-            <PageHeader.ContentPageActions
-              menuButtonLabel="Actions"
-              actions={pageActionButtonItems}
-            />
-          }>
-          <PageHeader.ContentText subtitle="Subtitle">
-            Built for modern teams, our technology platform simplifies
-            complexity with powerful APIs, real-time collaboration tools, and
-            seamless integration. From deployment to monitoring, we help you
-            ship faster, scale efficiently, and stay in control every step of
-            the way.
-          </PageHeader.ContentText>
-        </PageHeader.Content>
-        <PageHeader.TabBar>
-          <TabList>
-            <Tab>Tab 1</Tab>
-            <Tab>Tab 2</Tab>
-            <Tab>Tab 3</Tab>
-            <Tab>Tab 4</Tab>
-            <Tab>Tab 5</Tab>
-            <Tab>Tab 6</Tab>
-            <Tab>Tab 7</Tab>
-          </TabList>
-        </PageHeader.TabBar>
-      </PageHeader.Root>
-      <TabPanels>
-        <TabPanel className="page-header-story--tall-tab-panel">
-          Tab Panel 1
-        </TabPanel>
-        <TabPanel className="page-header-story--tall-tab-panel">
-          Tab Panel 2
-        </TabPanel>
-        <TabPanel className="page-header-story--tall-tab-panel">
-          Tab Panel 3
-        </TabPanel>
-        <TabPanel className="page-header-story--tall-tab-panel">
-          Tab Panel 4
-        </TabPanel>
-        <TabPanel className="page-header-story--tall-tab-panel">
-          Tab Panel 5
-        </TabPanel>
-        <TabPanel className="page-header-story--tall-tab-panel">
-          Tab Panel 6
-        </TabPanel>
-        <TabPanel className="page-header-story--tall-tab-panel">
-          Tab Panel 7
-        </TabPanel>
-      </TabPanels>
-    </Tabs>
+    <div className="page-header-story__wrapper--no-shell">
+      <Tabs>
+        <PageHeader.Root {...rootArgs}>
+          <PageHeader.BreadcrumbBar
+            border={border}
+            pageActionsFlush={pageActionsFlush}
+            contentActionsFlush={contentActionsFlush}
+            renderIcon={renderBreadcrumbIcon ? BreadcrumbBeeIcon : null}
+            contentActions={
+              <PageHeader.ContentPageActions
+                menuButtonLabel="Actions"
+                actions={pageActionButtonItems}
+              />
+            }
+            pageActions={breadcrumbPageActions}>
+            <PageHeader.BreadcrumbOverflow
+              noTrailingSlash
+              renderOverflowBreadcrumb={(hiddenItems) => (
+                <BreadcrumbItem data-floating-menu-container>
+                  <OverflowMenu
+                    align="bottom"
+                    aria-label="Overflow menu in a breadcrumb">
+                    {hiddenItems.map((el) => (
+                      <OverflowMenuItem
+                        key={el.innerText}
+                        itemText={el.innerText}
+                      />
+                    ))}
+                  </OverflowMenu>
+                </BreadcrumbItem>
+              )}>
+              <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+              <BreadcrumbItem href="/#">Breadcrumb 2</BreadcrumbItem>
+              <BreadcrumbItem href="/#">Breadcrumb 3</BreadcrumbItem>
+              <PageHeader.TitleBreadcrumb data-fixed>
+                {title}
+              </PageHeader.TitleBreadcrumb>
+            </PageHeader.BreadcrumbOverflow>
+          </PageHeader.BreadcrumbBar>
+          <PageHeader.Content
+            title={title}
+            pageActions={
+              <PageHeader.ContentPageActions
+                menuButtonLabel="Actions"
+                actions={pageActionButtonItems}
+              />
+            }>
+            <PageHeader.ContentText subtitle="Subtitle">
+              Built for modern teams, our technology platform simplifies
+              complexity with powerful APIs, real-time collaboration tools, and
+              seamless integration. From deployment to monitoring, we help you
+              ship faster, scale efficiently, and stay in control every step of
+              the way.
+            </PageHeader.ContentText>
+          </PageHeader.Content>
+          <PageHeader.TabBar>
+            <TabList>
+              <Tab>Tab 1</Tab>
+              <Tab>Tab 2</Tab>
+              <Tab>Tab 3</Tab>
+              <Tab>Tab 4</Tab>
+              <Tab>Tab 5</Tab>
+              <Tab>Tab 6</Tab>
+              <Tab>Tab 7</Tab>
+            </TabList>
+          </PageHeader.TabBar>
+        </PageHeader.Root>
+        <TabPanels>
+          <TabPanel className="page-header-story--tall-tab-panel">
+            Tab Panel 1
+          </TabPanel>
+          <TabPanel className="page-header-story--tall-tab-panel">
+            Tab Panel 2
+          </TabPanel>
+          <TabPanel className="page-header-story--tall-tab-panel">
+            Tab Panel 3
+          </TabPanel>
+          <TabPanel className="page-header-story--tall-tab-panel">
+            Tab Panel 4
+          </TabPanel>
+          <TabPanel className="page-header-story--tall-tab-panel">
+            Tab Panel 5
+          </TabPanel>
+          <TabPanel className="page-header-story--tall-tab-panel">
+            Tab Panel 6
+          </TabPanel>
+          <TabPanel className="page-header-story--tall-tab-panel">
+            Tab Panel 7
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
+    </div>
   );
 };
 
@@ -275,186 +296,205 @@ Default.argTypes = {
 };
 
 export const ContentWithIcon = (args) => (
-  <PageHeader.Root>
-    <PageHeader.BreadcrumbBar pageActions={breadcrumbPageActions}>
-      <PageHeader.BreadcrumbOverflow
-        noTrailingSlash
-        renderOverflowBreadcrumb={(hiddenItems) => (
-          <BreadcrumbItem data-floating-menu-container>
-            <OverflowMenu
-              align="bottom"
-              aria-label="Overflow menu in a breadcrumb">
-              {hiddenItems.map((el) => (
-                <OverflowMenuItem key={el.innerText} itemText={el.innerText} />
-              ))}
-            </OverflowMenu>
-          </BreadcrumbItem>
-        )}>
-        <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
-        <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
-      </PageHeader.BreadcrumbOverflow>
-    </PageHeader.BreadcrumbBar>
-    <PageHeader.Content
-      title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
-      renderIcon={BeeIcon}
-      {...args}>
-      <PageHeader.ContentText subtitle="Subtitle">
-        Built for modern teams, our technology platform simplifies complexity
-        with powerful APIs, real-time collaboration tools, and seamless
-        integration. From deployment to monitoring, we help you ship faster,
-        scale efficiently, and stay in control every step of the way.
-      </PageHeader.ContentText>
-    </PageHeader.Content>
-  </PageHeader.Root>
+  <div className="page-header-story__wrapper--no-shell">
+    <PageHeader.Root>
+      <PageHeader.BreadcrumbBar pageActions={breadcrumbPageActions}>
+        <PageHeader.BreadcrumbOverflow
+          noTrailingSlash
+          renderOverflowBreadcrumb={(hiddenItems) => (
+            <BreadcrumbItem data-floating-menu-container>
+              <OverflowMenu
+                align="bottom"
+                aria-label="Overflow menu in a breadcrumb">
+                {hiddenItems.map((el) => (
+                  <OverflowMenuItem
+                    key={el.innerText}
+                    itemText={el.innerText}
+                  />
+                ))}
+              </OverflowMenu>
+            </BreadcrumbItem>
+          )}>
+          <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+          <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+        </PageHeader.BreadcrumbOverflow>
+      </PageHeader.BreadcrumbBar>
+      <PageHeader.Content
+        title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
+        renderIcon={BeeIcon}
+        {...args}>
+        <PageHeader.ContentText subtitle="Subtitle">
+          Built for modern teams, our technology platform simplifies complexity
+          with powerful APIs, real-time collaboration tools, and seamless
+          integration. From deployment to monitoring, we help you ship faster,
+          scale efficiently, and stay in control every step of the way.
+        </PageHeader.ContentText>
+      </PageHeader.Content>
+    </PageHeader.Root>
+  </div>
 );
 
 export const ContentWithContextualActions = (args) => (
-  <PageHeader.Root>
-    <PageHeader.BreadcrumbBar
-      renderIcon={BreadcrumbBeeIcon}
-      pageActions={breadcrumbPageActions}>
-      <PageHeader.BreadcrumbOverflow
-        noTrailingSlash
-        renderOverflowBreadcrumb={(hiddenItems) => (
-          <BreadcrumbItem data-floating-menu-container>
-            <OverflowMenu
-              align="bottom"
-              aria-label="Overflow menu in a breadcrumb">
-              {hiddenItems.map((el) => (
-                <OverflowMenuItem key={el.innerText} itemText={el.innerText} />
-              ))}
-            </OverflowMenu>
-          </BreadcrumbItem>
-        )}>
-        <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
-        <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
-      </PageHeader.BreadcrumbOverflow>
-    </PageHeader.BreadcrumbBar>
-    <PageHeader.Content
-      title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
-      contextualActions={
-        <>
-          <Tag className="tag" type="blue" size="lg">
-            Tag
-          </Tag>
-        </>
-      }
-      titleTruncate={1}
-      {...args}>
-      <PageHeader.ContentText subtitle="Subtitle">
-        Built for modern teams, our technology platform simplifies complexity
-        with powerful APIs, real-time collaboration tools, and seamless
-        integration. From deployment to monitoring, we help you ship faster,
-        scale efficiently, and stay in control every step of the way.
-      </PageHeader.ContentText>
-    </PageHeader.Content>
-  </PageHeader.Root>
+  <div className="page-header-story__wrapper--no-shell">
+    <PageHeader.Root>
+      <PageHeader.BreadcrumbBar
+        renderIcon={BreadcrumbBeeIcon}
+        pageActions={breadcrumbPageActions}>
+        <PageHeader.BreadcrumbOverflow
+          noTrailingSlash
+          renderOverflowBreadcrumb={(hiddenItems) => (
+            <BreadcrumbItem data-floating-menu-container>
+              <OverflowMenu
+                align="bottom"
+                aria-label="Overflow menu in a breadcrumb">
+                {hiddenItems.map((el) => (
+                  <OverflowMenuItem
+                    key={el.innerText}
+                    itemText={el.innerText}
+                  />
+                ))}
+              </OverflowMenu>
+            </BreadcrumbItem>
+          )}>
+          <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+          <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+        </PageHeader.BreadcrumbOverflow>
+      </PageHeader.BreadcrumbBar>
+      <PageHeader.Content
+        title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
+        contextualActions={
+          <>
+            <Tag className="tag" type="blue" size="lg">
+              Tag
+            </Tag>
+          </>
+        }
+        titleTruncate={1}
+        {...args}>
+        <PageHeader.ContentText subtitle="Subtitle">
+          Built for modern teams, our technology platform simplifies complexity
+          with powerful APIs, real-time collaboration tools, and seamless
+          integration. From deployment to monitoring, we help you ship faster,
+          scale efficiently, and stay in control every step of the way.
+        </PageHeader.ContentText>
+      </PageHeader.Content>
+    </PageHeader.Root>
+  </div>
 );
 
 export const ContentWithHeroImage = (args) => (
-  <PageHeader.Root>
-    <Grid>
-      <Column lg={8} md={4} sm={4}>
-        <PageHeader.BreadcrumbBar border={false} renderIcon={BreadcrumbBeeIcon}>
-          <PageHeader.BreadcrumbOverflow
-            noTrailingSlash
-            renderOverflowBreadcrumb={(hiddenItems) => (
-              <BreadcrumbItem data-floating-menu-container>
-                <OverflowMenu
-                  align="bottom"
-                  aria-label="Overflow menu in a breadcrumb">
-                  {hiddenItems.map((el) => (
-                    <OverflowMenuItem
-                      key={el.innerText}
-                      itemText={el.innerText}
-                    />
-                  ))}
-                </OverflowMenu>
+  <div className="page-header-story__wrapper--no-shell">
+    <PageHeader.Root>
+      <Grid>
+        <Column lg={8} md={4} sm={4}>
+          <PageHeader.BreadcrumbBar
+            border={false}
+            renderIcon={BreadcrumbBeeIcon}>
+            <PageHeader.BreadcrumbOverflow
+              noTrailingSlash
+              renderOverflowBreadcrumb={(hiddenItems) => (
+                <BreadcrumbItem data-floating-menu-container>
+                  <OverflowMenu
+                    align="bottom"
+                    aria-label="Overflow menu in a breadcrumb">
+                    {hiddenItems.map((el) => (
+                      <OverflowMenuItem
+                        key={el.innerText}
+                        itemText={el.innerText}
+                      />
+                    ))}
+                  </OverflowMenu>
+                </BreadcrumbItem>
+              )}>
+              <BreadcrumbItem>
+                <a href="/#">Breadcrumb 1</a>
               </BreadcrumbItem>
-            )}>
-            <BreadcrumbItem>
-              <a href="/#">Breadcrumb 1</a>
-            </BreadcrumbItem>
-            <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
-          </PageHeader.BreadcrumbOverflow>
-        </PageHeader.BreadcrumbBar>
-        <PageHeader.Content
-          title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
-          {...args}>
-          <PageHeader.ContentText subtitle="Subtitle">
-            Built for modern teams, our technology platform simplifies
-            complexity with powerful APIs, real-time collaboration tools, and
-            seamless integration. From deployment to monitoring, we help you
-            ship faster, scale efficiently, and stay in control every step of
-            the way.
-          </PageHeader.ContentText>
-        </PageHeader.Content>
-      </Column>
-      <Column lg={8} md={4} sm={0}>
-        <PageHeader.HeroImage objectFit="cover">
-          <picture>
-            <source
-              srcSet={image1}
-              media={`(min-width: ${breakpoints.lg.width})`}
-            />
-            <source
-              srcSet={image2}
-              media={`(max-width: ${breakpoints.lg.width})`}
-            />
-            <img src={image1} alt="Default presentation" />
-          </picture>
-        </PageHeader.HeroImage>
-      </Column>
-    </Grid>
-  </PageHeader.Root>
+              <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+            </PageHeader.BreadcrumbOverflow>
+          </PageHeader.BreadcrumbBar>
+          <PageHeader.Content
+            title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
+            {...args}>
+            <PageHeader.ContentText subtitle="Subtitle">
+              Built for modern teams, our technology platform simplifies
+              complexity with powerful APIs, real-time collaboration tools, and
+              seamless integration. From deployment to monitoring, we help you
+              ship faster, scale efficiently, and stay in control every step of
+              the way.
+            </PageHeader.ContentText>
+          </PageHeader.Content>
+        </Column>
+        <Column lg={8} md={4} sm={0}>
+          <PageHeader.HeroImage objectFit="cover">
+            <picture>
+              <source
+                srcSet={image1}
+                media={`(min-width: ${breakpoints.lg.width})`}
+              />
+              <source
+                srcSet={image2}
+                media={`(max-width: ${breakpoints.lg.width})`}
+              />
+              <img src={image1} alt="Default presentation" />
+            </picture>
+          </PageHeader.HeroImage>
+        </Column>
+      </Grid>
+    </PageHeader.Root>
+  </div>
 );
 
 export const ContentWithContextualActionsAndPageActions = (args) => (
-  <PageHeader.Root>
-    <PageHeader.BreadcrumbBar
-      renderIcon={BreadcrumbBeeIcon}
-      pageActions={breadcrumbPageActions}>
-      <PageHeader.BreadcrumbOverflow
-        noTrailingSlash
-        renderOverflowBreadcrumb={(hiddenItems) => (
-          <BreadcrumbItem data-floating-menu-container>
-            <OverflowMenu
-              align="bottom"
-              aria-label="Overflow menu in a breadcrumb">
-              {hiddenItems.map((el) => (
-                <OverflowMenuItem key={el.innerText} itemText={el.innerText} />
-              ))}
-            </OverflowMenu>
-          </BreadcrumbItem>
-        )}>
-        <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
-        <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
-      </PageHeader.BreadcrumbOverflow>
-    </PageHeader.BreadcrumbBar>
-    <PageHeader.Content
-      title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
-      contextualActions={
-        <>
-          <Tag className="tag" type="blue" size="lg">
-            Tag
-          </Tag>
-        </>
-      }
-      titleTruncate={1}
-      pageActions={
-        <PageHeader.ContentPageActions
-          menuButtonLabel="Actions"
-          actions={pageActionButtonItems}></PageHeader.ContentPageActions>
-      }
-      {...args}>
-      <PageHeader.ContentText subtitle="Subtitle">
-        Built for modern teams, our technology platform simplifies complexity
-        with powerful APIs, real-time collaboration tools, and seamless
-        integration. From deployment to monitoring, we help you ship faster,
-        scale efficiently, and stay in control every step of the way.
-      </PageHeader.ContentText>
-    </PageHeader.Content>
-  </PageHeader.Root>
+  <div className="page-header-story__wrapper--no-shell">
+    <PageHeader.Root>
+      <PageHeader.BreadcrumbBar
+        renderIcon={BreadcrumbBeeIcon}
+        pageActions={breadcrumbPageActions}>
+        <PageHeader.BreadcrumbOverflow
+          noTrailingSlash
+          renderOverflowBreadcrumb={(hiddenItems) => (
+            <BreadcrumbItem data-floating-menu-container>
+              <OverflowMenu
+                align="bottom"
+                aria-label="Overflow menu in a breadcrumb">
+                {hiddenItems.map((el) => (
+                  <OverflowMenuItem
+                    key={el.innerText}
+                    itemText={el.innerText}
+                  />
+                ))}
+              </OverflowMenu>
+            </BreadcrumbItem>
+          )}>
+          <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+          <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+        </PageHeader.BreadcrumbOverflow>
+      </PageHeader.BreadcrumbBar>
+      <PageHeader.Content
+        title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
+        contextualActions={
+          <>
+            <Tag className="tag" type="blue" size="lg">
+              Tag
+            </Tag>
+          </>
+        }
+        titleTruncate={1}
+        pageActions={
+          <PageHeader.ContentPageActions
+            menuButtonLabel="Actions"
+            actions={pageActionButtonItems}></PageHeader.ContentPageActions>
+        }
+        {...args}>
+        <PageHeader.ContentText subtitle="Subtitle">
+          Built for modern teams, our technology platform simplifies complexity
+          with powerful APIs, real-time collaboration tools, and seamless
+          integration. From deployment to monitoring, we help you ship faster,
+          scale efficiently, and stay in control every step of the way.
+        </PageHeader.ContentText>
+      </PageHeader.Content>
+    </PageHeader.Root>
+  </div>
 );
 
 const tabBarTags = [
@@ -635,150 +675,21 @@ TabBarWithTabsAndTags.args = {
 };
 
 export const Compact = (args) => (
-  <Tabs>
-    <PageHeader.Root>
-      <PageHeader.BreadcrumbBar
-        border={args.border}
-        pageActionsFlush={args.pageActionsFlush}
-        contentActionsFlush={args.contentActionsFlush}
-        renderIcon={args.renderBreadcrumbIcon ? BreadcrumbBeeIcon : null}
-        pageActions={breadcrumbPageActions}
-        contentActions={
-          <PageHeader.ContentPageActions
-            menuButtonLabel="Actions"
-            actions={pageActionButtonItems}
-          />
-        }>
-        <PageHeader.BreadcrumbOverflow
-          noTrailingSlash
-          renderOverflowBreadcrumb={(hiddenItems) => (
-            <BreadcrumbItem data-floating-menu-container>
-              <OverflowMenu
-                align="bottom"
-                aria-label="Overflow menu in a breadcrumb">
-                {hiddenItems.map((el) => (
-                  <OverflowMenuItem
-                    key={el.innerText}
-                    itemText={el.innerText}
-                  />
-                ))}
-              </OverflowMenu>
-            </BreadcrumbItem>
-          )}>
-          <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
-          <BreadcrumbItem href="/#">Breadcrumb 2</BreadcrumbItem>
-          <BreadcrumbItem href="/#">Breadcrumb 3</BreadcrumbItem>
-          <PageHeader.TitleBreadcrumb data-fixed>
-            <TruncatedText
-              value="Virtual-Machine-DAL-really-long-title-example"
-              align="bottom"
-              lines={1}
-            />
-          </PageHeader.TitleBreadcrumb>
-        </PageHeader.BreadcrumbOverflow>
-      </PageHeader.BreadcrumbBar>
-      <PageHeader.TabBar
-        tags={
-          <PageHeader.TagOverflow
-            renderOverflowTag={(
-              hiddenItems,
-              handleOverflowClick,
-              openPopover,
-              triggerId
-            ) => (
-              <OperationalTag
-                id={triggerId}
-                onClick={handleOverflowClick}
-                aria-expanded={openPopover}
-                aria-label={`Show ${hiddenItems.length} more tags`}
-                text={`+${hiddenItems.length}`}
-              />
-            )}
-            renderPopoverContent={(hiddenItems) => {
-              return hiddenItems.map((i, index) => {
-                const foundJSXTag = tabBarTags.find((c) => c.props.id === i.id);
-                return React.cloneElement(foundJSXTag, {
-                  id: `cloned-tag-node-id-${index}`,
-                  key: `cloned-tag-key-${index}`,
-                });
-              });
-            }}>
-            {tabBarTags}
-          </PageHeader.TagOverflow>
-        }>
-        <TabList>
-          <Tab>Tab 1</Tab>
-          <Tab>Tab 2</Tab>
-          <Tab>Tab 3</Tab>
-          <Tab>Tab 4</Tab>
-          <Tab>Tab 5</Tab>
-          <Tab>Tab 6</Tab>
-          <Tab>Tab 7</Tab>
-        </TabList>
-      </PageHeader.TabBar>
-    </PageHeader.Root>
-    <TabPanels>
-      <TabPanel className="page-header-story--tall-tab-panel">
-        Tab Panel 1
-      </TabPanel>
-      <TabPanel className="page-header-story--tall-tab-panel">
-        Tab Panel 2
-      </TabPanel>
-      <TabPanel className="page-header-story--tall-tab-panel">
-        Tab Panel 3
-      </TabPanel>
-      <TabPanel className="page-header-story--tall-tab-panel">
-        Tab Panel 4
-      </TabPanel>
-      <TabPanel className="page-header-story--tall-tab-panel">
-        Tab Panel 5
-      </TabPanel>
-      <TabPanel className="page-header-story--tall-tab-panel">
-        Tab Panel 6
-      </TabPanel>
-      <TabPanel className="page-header-story--tall-tab-panel">
-        Tab Panel 7
-      </TabPanel>
-    </TabPanels>
-  </Tabs>
-);
-
-export const CustomRenderWithCallbacks = (args) => {
-  const {
-    border,
-    pageActionsFlush,
-    contentActionsFlush,
-    renderBreadcrumbIcon,
-    title,
-    ...rootArgs
-  } = args;
-
-  const handleContentFullyCollapsed = useCallback(() => {}, []);
-
-  const handleTitleClipped = useCallback(() => {}, []);
-
-  const handleContentActionsClipped = useCallback(() => {}, []);
-
-  return (
+  <div className="page-header-story__wrapper--no-shell">
     <Tabs>
-      <PageHeader.Root
-        {...rootArgs}
-        onContentFullyCollapsed={handleContentFullyCollapsed}
-        onTitleClipped={handleTitleClipped}
-        onContentActionsClipped={handleContentActionsClipped}>
+      <PageHeader.Root>
         <PageHeader.BreadcrumbBar
-          border={border}
-          contentActionsFlush={contentActionsFlush}
-          renderIcon={renderBreadcrumbIcon ? BreadcrumbBeeIcon : null}
-          contentActions={({ contentActionsClipped }) =>
-            contentActionsClipped ? (
-              <PageHeader.ContentPageActions
-                menuButtonLabel="Actions"
-                actions={pageActionButtonItems}
-              />
-            ) : null
-          }
-          pageActions={breadcrumbPageActions}>
+          border={args.border}
+          pageActionsFlush={args.pageActionsFlush}
+          contentActionsFlush={args.contentActionsFlush}
+          renderIcon={args.renderBreadcrumbIcon ? BreadcrumbBeeIcon : null}
+          pageActions={breadcrumbPageActions}
+          contentActions={
+            <PageHeader.ContentPageActions
+              menuButtonLabel="Actions"
+              actions={pageActionButtonItems}
+            />
+          }>
           <PageHeader.BreadcrumbOverflow
             noTrailingSlash
             renderOverflowBreadcrumb={(hiddenItems) => (
@@ -796,28 +707,48 @@ export const CustomRenderWithCallbacks = (args) => {
               </BreadcrumbItem>
             )}>
             <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
-            <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+            <BreadcrumbItem href="/#">Breadcrumb 2</BreadcrumbItem>
+            <BreadcrumbItem href="/#">Breadcrumb 3</BreadcrumbItem>
+            <PageHeader.TitleBreadcrumb data-fixed>
+              <TruncatedText
+                value="Virtual-Machine-DAL-really-long-title-example"
+                align="bottom"
+                lines={1}
+              />
+            </PageHeader.TitleBreadcrumb>
           </PageHeader.BreadcrumbOverflow>
         </PageHeader.BreadcrumbBar>
-        <PageHeader.Content
-          title={title}
-          pageActions={({ fullyCollapsed }) =>
-            !fullyCollapsed ? (
-              <PageHeader.ContentPageActions
-                menuButtonLabel="Actions"
-                actions={pageActionButtonItems}
-              />
-            ) : null
+        <PageHeader.TabBar
+          tags={
+            <PageHeader.TagOverflow
+              renderOverflowTag={(
+                hiddenItems,
+                handleOverflowClick,
+                openPopover,
+                triggerId
+              ) => (
+                <OperationalTag
+                  id={triggerId}
+                  onClick={handleOverflowClick}
+                  aria-expanded={openPopover}
+                  aria-label={`Show ${hiddenItems.length} more tags`}
+                  text={`+${hiddenItems.length}`}
+                />
+              )}
+              renderPopoverContent={(hiddenItems) => {
+                return hiddenItems.map((i, index) => {
+                  const foundJSXTag = tabBarTags.find(
+                    (c) => c.props.id === i.id
+                  );
+                  return React.cloneElement(foundJSXTag, {
+                    id: `cloned-tag-node-id-${index}`,
+                    key: `cloned-tag-key-${index}`,
+                  });
+                });
+              }}>
+              {tabBarTags}
+            </PageHeader.TagOverflow>
           }>
-          <PageHeader.ContentText subtitle="Subtitle">
-            Built for modern teams, our technology platform simplifies
-            complexity with powerful APIs, real-time collaboration tools, and
-            seamless integration. From deployment to monitoring, we help you
-            ship faster, scale efficiently, and stay in control every step of
-            the way.
-          </PageHeader.ContentText>
-        </PageHeader.Content>
-        <PageHeader.TabBar>
           <TabList>
             <Tab>Tab 1</Tab>
             <Tab>Tab 2</Tab>
@@ -853,6 +784,121 @@ export const CustomRenderWithCallbacks = (args) => {
         </TabPanel>
       </TabPanels>
     </Tabs>
+  </div>
+);
+
+export const CustomRenderWithCallbacks = (args) => {
+  const {
+    border,
+    pageActionsFlush,
+    contentActionsFlush,
+    renderBreadcrumbIcon,
+    title,
+    ...rootArgs
+  } = args;
+
+  const handleContentFullyCollapsed = useCallback(() => {}, []);
+
+  const handleTitleClipped = useCallback(() => {}, []);
+
+  const handleContentActionsClipped = useCallback(() => {}, []);
+
+  return (
+    <div className="page-header-story__wrapper--no-shell">
+      <Tabs>
+        <PageHeader.Root
+          {...rootArgs}
+          onContentFullyCollapsed={handleContentFullyCollapsed}
+          onTitleClipped={handleTitleClipped}
+          onContentActionsClipped={handleContentActionsClipped}>
+          <PageHeader.BreadcrumbBar
+            border={border}
+            contentActionsFlush={contentActionsFlush}
+            renderIcon={renderBreadcrumbIcon ? BreadcrumbBeeIcon : null}
+            contentActions={({ contentActionsClipped }) =>
+              contentActionsClipped ? (
+                <PageHeader.ContentPageActions
+                  menuButtonLabel="Actions"
+                  actions={pageActionButtonItems}
+                />
+              ) : null
+            }
+            pageActions={breadcrumbPageActions}>
+            <PageHeader.BreadcrumbOverflow
+              noTrailingSlash
+              renderOverflowBreadcrumb={(hiddenItems) => (
+                <BreadcrumbItem data-floating-menu-container>
+                  <OverflowMenu
+                    align="bottom"
+                    aria-label="Overflow menu in a breadcrumb">
+                    {hiddenItems.map((el) => (
+                      <OverflowMenuItem
+                        key={el.innerText}
+                        itemText={el.innerText}
+                      />
+                    ))}
+                  </OverflowMenu>
+                </BreadcrumbItem>
+              )}>
+              <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+              <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+            </PageHeader.BreadcrumbOverflow>
+          </PageHeader.BreadcrumbBar>
+          <PageHeader.Content
+            title={title}
+            pageActions={({ fullyCollapsed }) =>
+              !fullyCollapsed ? (
+                <PageHeader.ContentPageActions
+                  menuButtonLabel="Actions"
+                  actions={pageActionButtonItems}
+                />
+              ) : null
+            }>
+            <PageHeader.ContentText subtitle="Subtitle">
+              Built for modern teams, our technology platform simplifies
+              complexity with powerful APIs, real-time collaboration tools, and
+              seamless integration. From deployment to monitoring, we help you
+              ship faster, scale efficiently, and stay in control every step of
+              the way.
+            </PageHeader.ContentText>
+          </PageHeader.Content>
+          <PageHeader.TabBar>
+            <TabList>
+              <Tab>Tab 1</Tab>
+              <Tab>Tab 2</Tab>
+              <Tab>Tab 3</Tab>
+              <Tab>Tab 4</Tab>
+              <Tab>Tab 5</Tab>
+              <Tab>Tab 6</Tab>
+              <Tab>Tab 7</Tab>
+            </TabList>
+          </PageHeader.TabBar>
+        </PageHeader.Root>
+        <TabPanels>
+          <TabPanel className="page-header-story--tall-tab-panel">
+            Tab Panel 1
+          </TabPanel>
+          <TabPanel className="page-header-story--tall-tab-panel">
+            Tab Panel 2
+          </TabPanel>
+          <TabPanel className="page-header-story--tall-tab-panel">
+            Tab Panel 3
+          </TabPanel>
+          <TabPanel className="page-header-story--tall-tab-panel">
+            Tab Panel 4
+          </TabPanel>
+          <TabPanel className="page-header-story--tall-tab-panel">
+            Tab Panel 5
+          </TabPanel>
+          <TabPanel className="page-header-story--tall-tab-panel">
+            Tab Panel 6
+          </TabPanel>
+          <TabPanel className="page-header-story--tall-tab-panel">
+            Tab Panel 7
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
+    </div>
   );
 };
 

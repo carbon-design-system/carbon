@@ -6,7 +6,7 @@
  */
 import React, { useState, useRef, RefObject, useEffect, useMemo } from 'react';
 import classnames from 'classnames';
-import { blockClass, getHeaderOffset } from './utils';
+import { blockClass, getHeaderOffset, scrollableAncestor } from './utils';
 import {
   PageHeaderContext,
   PageHeaderRefs,
@@ -170,11 +170,12 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
       };
       const observer = new ResizeObserver(updateCssVars);
       observer.observe(componentRef.current);
+      // Also run immediately so the vars are correct before the first resize fires
+      updateCssVars();
       return () => {
         observer.disconnect();
       };
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [componentRef, prefix]);
+    }, [componentRef, prefix, refs]);
 
     const [fullyCollapsed, setFullyCollapsed] = useState(false);
     const [titleClipped, setTitleClipped] = useState(false);
@@ -189,10 +190,44 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
         return;
       }
 
-      const totalHeaderOffset = getHeaderOffset(componentRef?.current);
-      const predefinedContentPadding = 24;
+      // Determine the scroll root: use the scrollable ancestor element if it is
+      // a real DOM element (not the document scrolling element).  When a wrapper
+      // div is the scroll container (e.g. in Storybook), we must pass it as
+      // IntersectionObserver's root so that scroll events inside the wrapper
+      // trigger the observer.  When the page itself scrolls, root stays null
+      // (viewport).
+      const scrollContainer = scrollableAncestor(componentRef.current);
+      const ioRoot =
+        scrollContainer instanceof Element &&
+        scrollContainer !== document.scrollingElement
+          ? scrollContainer
+          : null;
 
-      // Create content observer only if contentRef exists
+      // When observing against the viewport (ioRoot=null), use getHeaderOffset
+      // to account for a fixed shell header above the component.
+      // When observing against a scroll container, offset is 0 (container top = reference).
+      const totalHeaderOffset =
+        ioRoot === null ? getHeaderOffset(componentRef.current) : 0;
+
+      // After the header collapses, only the breadcrumb bar and tab bar remain
+      // visible (sticky).  We detect "clipped" when an element has scrolled
+      // above that remaining sticky region.
+      // breadcrumbBarHeight (40px) + any tabBar (40px) + shell offset = stickyTopHeight.
+      // We add a small buffer (4px) to avoid false positives at exact boundary.
+      const breadcrumbBarHeight =
+        refs?.contentRef?.current
+          ?.closest(`.cds--page-header__next`)
+          ?.querySelector(`.cds--page-header__breadcrumb-bar`)?.offsetHeight ??
+        40;
+      const tabBarHeight =
+        refs?.contentRef?.current
+          ?.closest(`.cds--page-header__next`)
+          ?.querySelector(`.cds--page-header__tab-bar`)?.offsetHeight ?? 0;
+      const stickyTopHeight =
+        totalHeaderOffset + breadcrumbBarHeight + tabBarHeight + 4;
+
+      // Create content observer only if contentRef exists.
+      // Fire when the content element's bottom edge crosses above the sticky top.
       const contentObserver = refs?.contentRef?.current
         ? new IntersectionObserver(
             (entries) => {
@@ -205,14 +240,14 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
               });
             },
             {
-              root: null,
-              rootMargin: `${(predefinedContentPadding + (refs?.contentRef?.current?.offsetHeight || 0) + totalHeaderOffset + 24) * -1}px 0px 0px 0px`,
-              threshold: 0.1,
+              root: ioRoot,
+              rootMargin: `${stickyTopHeight * -1}px 0px 0px 0px`,
+              threshold: 0,
             }
           )
         : null;
 
-      // Create title observer only if titleRef exists
+      // Create title observer only if titleRef exists.
       const titleObserver = refs?.titleRef?.current
         ? new IntersectionObserver(
             (entries) => {
@@ -225,14 +260,14 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
               });
             },
             {
-              root: null,
-              rootMargin: `${(predefinedContentPadding + (refs?.titleRef.current.offsetHeight || 0) + totalHeaderOffset + 24) * -1}px 0px 0px 0px`,
-              threshold: 0.1,
+              root: ioRoot,
+              rootMargin: `${stickyTopHeight * -1}px 0px 0px 0px`,
+              threshold: 0,
             }
           )
         : null;
 
-      // Create contentActions observer only if contentActions ref exists
+      // Create contentActions observer only if contentActions ref exists.
       const contentActionsObserver = refs?.contentActions?.current
         ? new IntersectionObserver(
             (entries) => {
@@ -245,9 +280,9 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
               });
             },
             {
-              root: null,
-              rootMargin: `${(predefinedContentPadding + (refs?.contentActions?.current?.offsetHeight || 0) + totalHeaderOffset + 24) * -1}px 0px 0px 0px`,
-              threshold: 0.1,
+              root: ioRoot,
+              rootMargin: `${stickyTopHeight * -1}px 0px 0px 0px`,
+              threshold: 0,
             }
           )
         : null;
