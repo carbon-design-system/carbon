@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -587,7 +587,7 @@ const ModalDialog = React.forwardRef(function ModalDialog(
   }
 
   useEffect(() => {
-    if (!open) return;
+    if (!open || enableDialogElement) return;
 
     const handleEscapeKey = (event) => {
       if (
@@ -604,7 +604,7 @@ const ModalDialog = React.forwardRef(function ModalDialog(
       document.removeEventListener('keydown', handleEscapeKey);
     };
     // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
-  }, [open]);
+  }, [open, enableDialogElement]);
 
   useEffect(() => {
     return () => {
@@ -735,6 +735,10 @@ const ModalDialog = React.forwardRef(function ModalDialog(
   const modalBody = enableDialogElement ? (
     <Dialog
       open={open}
+      onCancel={(evt) => {
+        evt.preventDefault();
+        onRequestClose(evt);
+      }}
       focusAfterCloseRef={launcherButtonRef}
       modal
       ref={innerModal}
