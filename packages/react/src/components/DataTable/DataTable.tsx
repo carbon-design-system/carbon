@@ -396,7 +396,14 @@ export const DataTable = <RowType, ColTypes extends any[]>(
     const hasRowsChanged = !isEqual(rows, currentRows);
 
     if (hasRowIdsChanged || hasHeadersChanged || hasRowsChanged) {
-      setState((prev) => getDerivedStateFromProps(props, prev));
+      // queueMicrotask defers the setState until after the current
+      // flushSync/commitRoot call stack has fully unwound, preventing
+      // nestedUpdateCount from being incremented inside flushPassiveEffects
+      // and avoiding the React 19 "Maximum update depth exceeded" crash when
+      // many DataTable instances mount simultaneously inside a flushSync call.
+      queueMicrotask(() =>
+        setState((prev) => getDerivedStateFromProps(props, prev))
+      );
     }
     // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
   }, [headers, rows]);
