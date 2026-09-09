@@ -34,10 +34,10 @@ export const PageHeaderBreadcrumbOverflow = forwardRef<
   // Initialize overflow resize handler
   const carbonPrefix = usePrefix();
   useEffect(() => {
-    if (!componentRef) {
+    if (!componentRef?.current) {
       return;
     }
-    const breadcrumbList = componentRef?.current.querySelector(
+    const breadcrumbList = componentRef.current.querySelector(
       `.${carbonPrefix}--breadcrumb`
     ) as HTMLOListElement;
     localOverflowHandler({

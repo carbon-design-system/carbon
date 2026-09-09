@@ -14,8 +14,8 @@ import { stackblitzPrefillConfig } from '../../../../previewer/codePreviewer';
   - [Dynamic Action Rendering](#dynamic-action-rendering)
 - [PageHeader.Content](#pageheadercontent)
   - [PageHeader.Content with hero image](#pageheadercontent-with-hero-image)
-- [PageHeader.TabsBar](#pageheadertabsbar)
-  - [PageHeader.TabsBar with Tags](#pageheadertabsbar-with-tags)
+- [PageHeader.TabBar](#pageheadertabbar)
+  - [PageHeader.TabBar with Tags](#pageheadertabbar-with-tags)
 - [Migration guidance from deprecated PageHeader to preview_PageHeader](#migration-guidance-from-deprecated-pageheader-to-preview_pageheader)
 
 ## Overview
@@ -150,7 +150,6 @@ export const customFunctionArr = [
             `import { Button } from '@carbon/react';`,
             `import { Add, Bee, CloudFoundry_1, AiGenerate, Activity } from '@carbon/react/icons';`,
           ],
-          styles: PageHeaderStories.default.parameters.styles,
         }),
     },
   ]}
@@ -359,7 +358,6 @@ area:
             `import { Button } from '@carbon/react';`,
             `import { Add, Bee, CloudFoundry_1, AiGenerate, Activity } from '@carbon/react/icons';`,
           ],
-          styles: PageHeaderStories.default.parameters.styles,
         }),
     },
   ]}
@@ -435,7 +433,6 @@ area:
             `import { Add, AiGenerate, Activity, Bee, CloudFoundry_1 } from '@carbon/react/icons';`,
             `import { Button } from '@carbon/react';`,
           ],
-          styles: PageHeaderStories.default.parameters.styles,
         }),
     },
   ]}
@@ -544,7 +541,6 @@ return (
             `import { breakpoints } from '@carbon/layout';`,
             `import { Bee } from '@carbon/react/icons';`,
           ],
-          styles: PageHeaderStories.default.parameters.styles,
         }),
     },
   ]}
@@ -685,13 +681,12 @@ associated panel.
             `import { Button, Tag, HeaderContainer, Header, HeaderName } from '@carbon/react';`,
             `import { Add, AiGenerate, Activity, Bee, CloudFoundry_1 } from '@carbon/react/icons';`,
           ],
-          styles: PageHeaderStories.default.parameters.styles,
         }),
     },
   ]}
 />
 
-The `PageHeader.TabsBar` component accepts a `tags` prop expecting a react node.
+The `PageHeader.TabBar` component accepts a `tags` prop expecting a react node.
 If you wish to handle overflowing logic on your own, you can pass any node to
 this prop. You can also use the tag overflow sub component
 (`PageHeader.TagOverflow`), which will handle the overflowing logic for you, yet

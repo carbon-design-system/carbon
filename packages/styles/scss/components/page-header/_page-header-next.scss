@@ -37,14 +37,14 @@
   .#{$block-class}.#{$block-class}__next.#{$block-class}--disable-sticky-tab-bar {
     position: static;
     // Add padding to compensate for fixed breadcrumb (40px height)
-    padding-block-start: convert.to-rem(40px);
+    padding-block-start: $spacing-08;
   }
 
   .#{$block-class}.#{$block-class}__next .#{$block-class}__breadcrumb-bar {
     position: sticky;
     z-index: 2;
     background-color: $layer;
-    block-size: convert.to-rem(40px);
+    block-size: $spacing-08;
     inset-block-start: var(--#{$prefix}-page-header-breadcrumb-top);
   }
 
@@ -70,7 +70,7 @@
     .#{$block-class}__breadcrumb-bar
     .#{$prefix}--css-grid
     .#{$prefix}--css-grid-column {
-    block-size: convert.to-rem(40px);
+    block-size: $spacing-08;
   }
 
   .#{$block-class}.#{$block-class}__next
@@ -80,7 +80,7 @@
   .#{$block-class}.#{$block-class}__next
     .#{$block-class}__breadcrumb-bar
     .#{$block-class}__breadcrumb-container {
-    block-size: convert.to-rem(40px);
+    block-size: $spacing-08;
 
     .#{$block-class}__breadcrumb-wrapper {
       align-items: center;
@@ -226,7 +226,7 @@
         1fr
       );
     margin-block-end: $spacing-05;
-    min-block-size: convert.to-rem(40px);
+    min-block-size: $spacing-08;
 
     @include breakpoint-down(md) {
       display: flex;
@@ -306,8 +306,12 @@
     min-inline-size: 0;
   }
 
-  // Ensure menu dropdown stays within viewport bounds
-  // Note: Carbon MenuButton renders the menu in a portal at body level
+  // Ensure menu dropdown stays within viewport bounds.
+  // Note: Carbon MenuButton renders its menu in a body-level portal, so this
+  // selector cannot be scoped under #{$block-class}. This intentionally applies
+  // to every open Carbon menu on any page that loads these styles — not just
+  // menus triggered by PageHeader. This is a known global side-effect; confirm
+  // with the design team if a more targeted scope is ever required.
   .#{$prefix}--menu.#{$prefix}--menu--open {
     // Prevent menu from being cut off at top of viewport
     max-block-size: calc(100vh - #{$spacing-05});
