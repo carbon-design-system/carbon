@@ -1093,7 +1093,7 @@ $sizes: (
     position: absolute;
     justify-content: flex-end;
     backdrop-filter: blur(85px);
-    background: rgba(0, 0, 0, 0.01);
+    background: rgb(0, 0, 0, 0.01);
     border-end-end-radius: convert.to-rem(8px);
     border-end-start-radius: convert.to-rem(8px);
     column-gap: 0;

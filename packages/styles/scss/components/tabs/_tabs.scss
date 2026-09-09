@@ -196,14 +196,14 @@
       .#{$prefix}--tab--overflow-nav-button--next::before {
         background: linear-gradient(
           to right,
-          rgba(255, 255, 255, 0),
+          rgb(255, 255, 255, 0),
           $background
         );
       }
       .#{$prefix}--tab--overflow-nav-button--previous::before {
         background: linear-gradient(
           to left,
-          rgba(255, 255, 255, 0),
+          rgb(255, 255, 255, 0),
           $background
         );
       }
@@ -226,17 +226,13 @@
     }
 
     .#{$prefix}--tabs--light .#{$prefix}--tabs__overflow-indicator--left {
-      background-image: linear-gradient(
-        to left,
-        rgba(255, 255, 255, 0),
-        $layer
-      );
+      background-image: linear-gradient(to left, rgb(255, 255, 255, 0), $layer);
     }
 
     .#{$prefix}--tabs--light .#{$prefix}--tabs__overflow-indicator--right {
       background-image: linear-gradient(
         to right,
-        rgba(255, 255, 255, 0),
+        rgb(255, 255, 255, 0),
         $layer
       );
     }
@@ -244,7 +240,7 @@
     &.#{$prefix}--tabs--contained .#{$prefix}--tabs__overflow-indicator--left {
       background-image: linear-gradient(
         to left,
-        rgba(255, 255, 255, 0),
+        rgb(255, 255, 255, 0),
         $layer-accent
       );
     }
@@ -252,7 +248,7 @@
     &.#{$prefix}--tabs--contained .#{$prefix}--tabs__overflow-indicator--right {
       background-image: linear-gradient(
         to right,
-        rgba(255, 255, 255, 0),
+        rgb(255, 255, 255, 0),
         $layer-accent
       );
     }

@@ -29,7 +29,7 @@
 
   display: flex;
   block-size: auto;
-  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 6px 0 rgb(0, 0, 0, 0.2);
   color: $text-inverse;
   inline-size: convert.to-rem(288px);
   padding-inline-start: convert.to-rem(13px);

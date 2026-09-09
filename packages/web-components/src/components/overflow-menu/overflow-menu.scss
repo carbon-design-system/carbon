@@ -53,7 +53,7 @@
 :host(#{$prefix}-overflow-menu[open]),
 :host(#{$prefix}-breadcrumb-overflow-menu[open]) {
   background-color: $layer-01;
-  box-shadow: 0 $spacing-01 6px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 $spacing-01 6px 0 rgb(0, 0, 0, 0.3);
   transition: none;
 
   @media (any-hover: hover) {

@@ -38,8 +38,8 @@ $css--plex: true !default;
 
 :host(#{$prefix}-code-snippet[wrap-text]) {
   pre {
+    overflow-wrap: break-word;
     white-space: pre-wrap;
-    word-wrap: break-word;
   }
 }
 
