@@ -42,7 +42,7 @@ export default {
   parameters: {
     controls: {
       hideNoControlsWarning: true,
-      exclude: ['badgeCount'],
+      exclude: ['children'],
     },
     docs: {
       page: mdx,
@@ -69,10 +69,18 @@ export const Default = (args) => {
 
 Default.args = {
   align: 'bottom',
+  autoAlign: false,
+  closeOnActivation: true,
   defaultOpen: true,
   disabled: false,
+  dropShadow: false,
+  enterDelayMs: 100,
+  highContrast: true,
+  isSelected: false,
   label: 'Custom label',
   kind: 'primary',
+  leaveDelayMs: 100,
+  size: 'lg',
 };
 
 Default.argTypes = {
@@ -92,12 +100,43 @@ Default.argTypes = {
       category: 'Deprecated',
     },
   },
-  disabled: {
+  autoAlign: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  closeOnActivation: {
     control: {
       type: 'boolean',
     },
   },
   defaultOpen: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  dropShadow: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  enterDelayMs: {
+    control: {
+      type: 'number',
+      min: 0,
+    },
+  },
+  highContrast: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  isSelected: {
     control: {
       type: 'boolean',
     },
@@ -113,6 +152,24 @@ Default.argTypes = {
     },
     options: ['primary', 'secondary', 'ghost', 'tertiary'],
   },
+  leaveDelayMs: {
+    control: {
+      type: 'number',
+      min: 0,
+    },
+  },
+  size: {
+    control: {
+      type: 'select',
+    },
+    options: ['xs', 'sm', 'md', 'lg'],
+  },
+};
+
+Default.parameters = {
+  controls: {
+    exclude: ['badgeCount', 'children'],
+  },
 };
 
 export const withBadgeIndicator = (args) => {
@@ -120,10 +177,10 @@ export const withBadgeIndicator = (args) => {
     <div style={{ margin: '3rem' }}>
       <IconButton
         label="Notification"
-        kind="ghost"
-        size="lg"
         autoAlign
-        {...args}>
+        {...args}
+        kind="ghost"
+        size="lg">
         <Notification />
       </IconButton>
     </div>
@@ -131,10 +188,39 @@ export const withBadgeIndicator = (args) => {
 };
 
 withBadgeIndicator.args = {
+  align: 'bottom',
+  autoAlign: true,
   badgeCount: 4,
+  closeOnActivation: true,
+  disabled: false,
+  dropShadow: false,
+  enterDelayMs: 100,
+  highContrast: true,
+  isSelected: false,
+  kind: 'ghost',
+  label: 'Notifications',
+  leaveDelayMs: 100,
+  size: 'lg',
+};
+withBadgeIndicator.argTypes = {
+  ...Default.argTypes,
+  badgeCount: {
+    control: {
+      type: 'number',
+      min: 0,
+    },
+  },
+  kind: {
+    ...Default.argTypes.kind,
+    control: false,
+  },
+  size: {
+    ...Default.argTypes.size,
+    control: false,
+  },
 };
 withBadgeIndicator.parameters = {
   controls: {
-    exclude: ['size', 'kind'],
+    exclude: ['children'],
   },
 };
