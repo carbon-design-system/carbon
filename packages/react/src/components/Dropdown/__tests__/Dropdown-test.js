@@ -121,7 +121,81 @@ describe('Dropdown', () => {
     expect(emptySpanTargeting).toBeNull();
   });
 
+  describe('label', () => {
+    it('should not allow interactive content in label', () => {
+      const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+      expect(() => {
+        render(
+          <Dropdown
+            {...mockProps}
+            label={
+              <>
+                Choose an option <button type="button">Help</button>
+              </>
+            }
+          />
+        );
+      }).toThrow(
+        'The Dropdown component `label` prop must have no interactive content'
+      );
+
+      spy.mockRestore();
+    });
+
+    it('should allow non-interactive content in label', () => {
+      expect(() => {
+        render(
+          <Dropdown
+            {...mockProps}
+            label={
+              <>
+                Choose an option <span>additional label content</span>
+              </>
+            }
+          />
+        );
+      }).not.toThrow();
+    });
+  });
+
   describe('title', () => {
+    it('should not allow interactive content in titleText', () => {
+      const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+      expect(() => {
+        render(
+          <Dropdown
+            {...mockProps}
+            titleText={
+              <>
+                Dropdown label <button type="button">Help</button>
+              </>
+            }
+          />
+        );
+      }).toThrow(
+        'The Dropdown component `titleText` prop must have no interactive content'
+      );
+
+      spy.mockRestore();
+    });
+
+    it('should allow non-interactive content in titleText', () => {
+      expect(() => {
+        render(
+          <Dropdown
+            {...mockProps}
+            titleText={
+              <>
+                Dropdown label <span>additional title content</span>
+              </>
+            }
+          />
+        );
+      }).not.toThrow();
+    });
+
     it('renders a title', async () => {
       render(<Dropdown {...mockProps} titleText="Email Input" />);
       await waitForPosition();
@@ -655,12 +729,14 @@ describe('Test useEffect ', () => {
       (acc, { name, value }) => ({ ...acc, [name]: value }),
       {}
     );
+    const idPrefix = attributes.id.replace(/-label$/, '');
 
     expect(attributes).toEqual({
       class: 'cds--label',
-      for: 'downshift-_r_29_-toggle-button',
-      id: 'downshift-_r_29_-label',
+      for: attributes.for,
+      id: attributes.id,
     });
+    expect(attributes.for).toBe(`${idPrefix}-toggle-button`);
   });
 
   it('should add certain label props when `titleText` is an element', () => {
@@ -674,7 +750,7 @@ describe('Test useEffect ', () => {
 
     expect(attributes).toEqual({
       class: 'cds--label',
-      id: 'downshift-_r_2b_-label',
+      id: attributes.id,
     });
   });
 });
