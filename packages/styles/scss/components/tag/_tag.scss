@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2023
+// Copyright IBM Corp. 2016, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -10,6 +10,8 @@
 @use '../../type' as *;
 @use '../../motion' as *;
 @use '../../config' as *;
+@use '../../border-radius' as *;
+@use '../../feature-flags' as *;
 @use '../../utilities/component-tokens' as *;
 @use '../../utilities/convert';
 @use '../../utilities/high-contrast-mode' as *;
@@ -55,6 +57,10 @@
     vertical-align: middle;
     word-break: break-word;
 
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-04;
+    }
+
     &.#{$prefix}--tag--lg {
       padding-inline-start: $spacing-04;
     }
@@ -99,8 +105,10 @@
     padding-block: 0;
     padding-inline-end: 0;
 
-    &:hover {
-      outline: none;
+    @media (any-hover: hover) {
+      &:hover {
+        outline: none;
+      }
     }
   }
 
@@ -110,9 +118,11 @@
     color: $text-primary;
     cursor: pointer;
 
-    &:hover {
-      background-color: $layer-hover;
-      outline: none;
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: $layer-hover;
+        outline: none;
+      }
     }
 
     &:focus {
@@ -125,8 +135,10 @@
     background-color: $layer-selected-inverse;
     color: $text-inverse;
 
-    &:hover {
-      background-color: $layer-selected-inverse;
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: $layer-selected-inverse;
+      }
     }
   }
 
@@ -136,9 +148,11 @@
     color: $tag-color-gray;
     cursor: pointer;
 
-    &:hover {
-      background-color: $tag-hover-gray;
-      outline: none;
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: $tag-hover-gray;
+        outline: none;
+      }
     }
 
     &:focus {
@@ -241,25 +255,30 @@
     @include tag-theme(
       $background-inverse,
       $text-inverse,
-      $background-inverse-hover
+      $background-inverse-hover,
+      $close-focus-color: $focus-inverse
     );
   }
 
   .#{$prefix}--multi-select--readonly
     .#{$prefix}--tag--high-contrast:not(.#{$prefix}--tag--operational)
     .#{$prefix}--tag__close-icon {
-    &:hover {
-      background-color: transparent;
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: transparent;
+      }
     }
   }
 
   .#{$prefix}--tag--outline:not(.#{$prefix}--tag--operational):not(span):not(
       [disabled]
     ) {
-    @include tag-theme($background, $text-primary, $layer-hover);
-
-    outline: 1px solid $background-inverse;
-    outline-offset: -1px;
+    @include tag-theme(
+      $background,
+      $text-primary,
+      $layer-hover,
+      $outline-color: $background-inverse
+    );
   }
 
   .#{$prefix}--tag--disabled:not(.#{$prefix}--tag--operational),
@@ -270,13 +289,20 @@
     box-shadow: none;
     outline: none;
 
-    &:hover {
-      cursor: not-allowed;
-    }
-
     .#{$prefix}--tag__label {
       background-color: $layer;
       color: $text-disabled;
+    }
+  }
+
+  .#{$prefix}--tag--disabled:not(.#{$prefix}--tag--operational):not(
+      .#{$prefix}--tag--filter
+    ),
+  .#{$prefix}--tag--interactive.#{$prefix}--tag--disabled {
+    @media (any-hover: hover) {
+      &:hover {
+        cursor: not-allowed;
+      }
     }
   }
 
@@ -286,9 +312,11 @@
     background-color: $layer;
     color: $text-disabled;
 
-    &:hover {
-      background-color: $layer;
-      cursor: not-allowed;
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: $layer;
+        cursor: not-allowed;
+      }
     }
   }
 
@@ -313,6 +341,10 @@
     transition:
       background-color $duration-fast-01 motion(standard, productive),
       box-shadow $duration-fast-01 motion(standard, productive);
+
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-04;
+    }
 
     svg {
       fill: currentColor;
@@ -341,18 +373,15 @@
 
   .#{$prefix}--tag__close-icon:focus {
     z-index: 99999;
-    border-radius: 50%;
     box-shadow: inset 0 0 0 1px $focus;
     outline: none;
   }
 
-  .#{$prefix}--tag--high-contrast .#{$prefix}--tag__close-icon:focus {
-    box-shadow: inset 0 0 0 1px $focus-inverse;
-  }
-
-  .#{$prefix}--tag--filter.#{$prefix}--tag--disabled
-    .#{$prefix}--tag__close-icon:hover {
-    background-color: transparent;
+  @media (any-hover: hover) {
+    .#{$prefix}--tag--filter.#{$prefix}--tag--disabled
+      .#{$prefix}--tag__close-icon:hover {
+      background-color: transparent;
+    }
   }
 
   .#{$prefix}--tag--filter.#{$prefix}--tag--disabled svg {
@@ -365,6 +394,18 @@
 
   .#{$prefix}--tag--sm .#{$prefix}--tag__close-icon {
     margin-inline-start: convert.to-rem(5px);
+  }
+
+  @if enabled('enable-v12-release') {
+    .#{$prefix}--tag--sm,
+    .#{$prefix}--tag.#{$prefix}--layout--size-sm {
+      border-radius: $border-radius-02;
+    }
+
+    .#{$prefix}--tag--sm .#{$prefix}--tag__close-icon,
+    .#{$prefix}--tag.#{$prefix}--layout--size-sm .#{$prefix}--tag__close-icon {
+      border-radius: $border-radius-02;
+    }
   }
 
   // Skeleton state
@@ -404,11 +445,13 @@
     background-color: currentColor;
   }
 
-  .#{$prefix}--tag
-    .#{$prefix}--ai-label
-    .#{$prefix}--ai-label__button--inline:hover,
-  .#{$prefix}--tag .#{$prefix}--slug .#{$prefix}--slug__button--inline:hover {
-    border-color: currentColor;
+  @media (any-hover: hover) {
+    .#{$prefix}--tag
+      .#{$prefix}--ai-label
+      .#{$prefix}--ai-label__button--inline:hover,
+    .#{$prefix}--tag .#{$prefix}--slug .#{$prefix}--slug__button--inline:hover {
+      border-color: currentColor;
+    }
   }
 
   .#{$prefix}--tag--filter .#{$prefix}--tag__decorator > *,
@@ -448,9 +491,14 @@
     max-inline-size: convert.to-rem(158px);
   }
 
+  .#{$prefix}--tag > span {
+    min-inline-size: 0;
+  }
+
   .#{$prefix}--interactive--tag-children {
     display: inline-flex;
     max-inline-size: convert.to-rem(200px);
+    min-inline-size: 0;
     place-items: center;
   }
 
@@ -458,7 +506,7 @@
     .#{$prefix}--tag__custom-icon
     + span
     > .#{$prefix}--interactive--tag-children {
-    max-inline-size: convert.to-rem(184px);
+    max-inline-size: 100%;
   }
 
   .#{$prefix}--tag .#{$prefix}--definition-term {

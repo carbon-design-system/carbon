@@ -132,6 +132,7 @@ const CardComponent = forwardRef<HTMLDivElement, CardProps>(
       ...rest,
       ref,
       className: cardClasses,
+      ...(disabled && { 'aria-disabled': true }),
       ...(clickable && {
         ...(isAnchor
           ? {

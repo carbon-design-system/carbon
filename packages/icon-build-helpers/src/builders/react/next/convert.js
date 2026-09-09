@@ -68,28 +68,28 @@ function svgToJSX(node) {
       .map(([key, value]) => {
         const formatted = attributeAllowlist.has(key) ? key : camelCase(key);
         if (typeof value === 'string') {
-          return t.jSXAttribute(
-            t.jSXIdentifier(formatted),
+          return t.jsxAttribute(
+            t.jsxIdentifier(formatted),
             t.stringLiteral(value)
           );
         }
-        return t.jSXAttribute(
-          t.jSXIdentifier(formatted),
-          t.jSXExpressionContainer(jsToAST(value))
+        return t.jsxAttribute(
+          t.jsxIdentifier(formatted),
+          t.jsxExpressionContainer(jsToAST(value))
         );
       });
 
     if (node.children.length > 0) {
       const children = node.children.map(svgToJSX);
-      return t.jSXElement(
-        t.jSXOpeningElement(t.jSXIdentifier(tagName), attributes, false),
-        t.jSXClosingElement(t.jSXIdentifier(tagName)),
+      return t.jsxElement(
+        t.jsxOpeningElement(t.jsxIdentifier(tagName), attributes, false),
+        t.jsxClosingElement(t.jsxIdentifier(tagName)),
         children
       );
     }
 
-    return t.jSXElement(
-      t.jSXOpeningElement(t.jSXIdentifier(tagName), attributes, true),
+    return t.jsxElement(
+      t.jsxOpeningElement(t.jsxIdentifier(tagName), attributes, true),
       null,
       []
     );

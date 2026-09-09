@@ -36,6 +36,8 @@ import rebusClassic from './_story-assets/classic-rebus.png';
 import './card-story.scss';
 import mdx from './Card.mdx';
 
+const storyClass = 'card-story';
+
 export default {
   title: 'Preview/preview__Card',
   component: Card,
@@ -51,6 +53,13 @@ export default {
     CardAction: Card.Action,
   },
   tags: ['autodocs'],
+  decorators: [
+    (Story) => (
+      <div className={`${storyClass}__viewport`}>
+        <Story />
+      </div>
+    ),
+  ],
   parameters: {
     layout: 'fullscreen',
     docs: {
@@ -141,7 +150,7 @@ export const Default = {
   }) => (
     <Grid>
       <Column lg={4} md={4} sm={4}>
-        <Card {...cardArgs} aria-label={title || 'Default card example'}>
+        <Card {...cardArgs}>
           <Card.Media ratio="16x9">
             <img src={placeholder16x9} alt="" width="100%" />
           </Card.Media>
@@ -193,12 +202,14 @@ export const Clickable = () => (
       <Card
         clickable
         onClick={() => alert('Card clicked')}
-        aria-label="View analytics report">
+        aria-labelledby="clickable-title-usage">
         <Card.Media ratio="16x9">
           <img src={placeholder16x9} alt="" width="100%" />
         </Card.Media>
         <Card.Header>
-          <Card.Title label="Analytics">Usage report</Card.Title>
+          <Card.Title id="clickable-title-usage" label="Analytics">
+            Usage report
+          </Card.Title>
         </Card.Header>
         <Card.Body>
           Click anywhere on this card to trigger the action.
@@ -213,12 +224,14 @@ export const Clickable = () => (
         as="a"
         href="https://carbondesignsystem.com"
         target="_blank"
-        aria-label="Open Carbon Design System in a new tab">
+        aria-labelledby="clickable-title-carbon">
         <Card.Media ratio="16x9">
           <img src={placeholder16x9} alt="" width="100%" />
         </Card.Media>
         <Card.Header>
-          <Card.Title label="External link">Carbon Design System</Card.Title>
+          <Card.Title id="clickable-title-carbon" label="External link">
+            Carbon Design System
+          </Card.Title>
         </Card.Header>
         <Card.Body>
           This card renders as an <code>&lt;a&gt;</code> element for true
@@ -233,9 +246,11 @@ export const Clickable = () => (
         clickable
         onClick={() => alert('Launch clicked')}
         renderFooterIcon={Share}
-        aria-label="Share this report">
+        aria-labelledby="clickable-title-share">
         <Card.Header>
-          <Card.Title label="Share">Share report</Card.Title>
+          <Card.Title id="clickable-title-share" label="Share">
+            Share report
+          </Card.Title>
         </Card.Header>
         <Card.Body>
           Pass <code>renderFooterIcon</code> to replace the default arrow with
@@ -250,9 +265,11 @@ export const Clickable = () => (
         clickable
         disabled
         onClick={() => alert('Should not fire')}
-        aria-label="Disabled card">
+        aria-labelledby="clickable-title-disabled">
         <Card.Header>
-          <Card.Title label="Status">Disabled card</Card.Title>
+          <Card.Title id="clickable-title-disabled" label="Status">
+            Disabled card
+          </Card.Title>
         </Card.Header>
         <Card.Body>
           When <code>disabled</code> is true the card is not interactive and the
@@ -267,12 +284,14 @@ export const Clickable = () => (
         clickable
         density="expressive"
         onClick={() => alert('Expressive card clicked')}
-        aria-label="View product launch details">
+        aria-labelledby="clickable-title-launch">
         <Card.Media ratio="16x9">
           <img src={placeholder16x9} alt="" width="100%" />
         </Card.Media>
         <Card.Header>
-          <Card.Title label="Featured">Product launch</Card.Title>
+          <Card.Title id="clickable-title-launch" label="Featured">
+            Product launch
+          </Card.Title>
         </Card.Header>
         <Card.Body>Clickable card in expressive density.</Card.Body>
       </Card>
@@ -285,9 +304,11 @@ export const Clickable = () => (
         density="expressive"
         as="a"
         href="#"
-        aria-label="Read the quarterly review">
+        aria-labelledby="clickable-title-quarterly">
         <Card.Header>
-          <Card.Title label="Report">Quarterly review</Card.Title>
+          <Card.Title id="clickable-title-quarterly" label="Report">
+            Quarterly review
+          </Card.Title>
         </Card.Header>
         <Card.Body>
           Use <code>as="a"</code> with <code>density="expressive"</code> for
@@ -925,8 +946,8 @@ export const WithHorizontalMedia = () => (
           <Card.Title>Custom media width</Card.Title>
         </Card.Header>
         <Card.Body>
-          Pass <code>mediaWidth=50%</code> to control the media column width.
-          Accepts any valid CSS value.
+          Pass mediaWidth="50%" to control the media column width. Accepts any
+          valid CSS value.
         </Card.Body>
         <Card.Footer>
           <Card.Action>
@@ -977,7 +998,12 @@ export const WithHorizontalMedia = () => (
             <Time /> 12:00 PM
           </div>
           <Card.Action>
-            <IconButton renderIcon={ArrowRight} kind="ghost" size="md" />
+            <IconButton
+              label="Next"
+              renderIcon={ArrowRight}
+              kind="ghost"
+              size="md"
+            />
           </Card.Action>
         </Card.Footer>
         <Card.Media>

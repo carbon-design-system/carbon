@@ -129,7 +129,7 @@ export const CardActions = ({
         style={{
           position: 'relative',
         }}>
-        <OverflowMenu size="sm" aria-label={overflowMenuLabel}>
+        <OverflowMenu size="sm" label={overflowMenuLabel}>
           {hiddenItems.map((item) => (
             <MenuItem
               key={item.id}

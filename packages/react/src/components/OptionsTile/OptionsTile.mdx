@@ -1,0 +1,53 @@
+import {
+  Controls,
+  Canvas,
+  Story,
+  Meta,
+  Unstyled,
+} from '@storybook/addon-docs/blocks';
+import * as OptionsTileStories from './OptionsTile.stories';
+import { InlineNotification } from '../Notification';
+
+<Meta isTemplate />
+
+# OptionsTile
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Component API](#component-api)
+
+{/* <!-- prettier-ignore-start --> */}
+
+<Unstyled>
+  <InlineNotification
+    kind="info"
+    title="Migrated component:"
+    subtitle="This component has been migrated from Carbon for IBM Products. While visible in the v12 Storybook, migrated components are not available in the published v11 package and enabling enable-v12-release does not expose them — they will be part of the public @carbon/react API when v12 ships."
+  />
+</Unstyled>
+
+{/* <!-- prettier-ignore-end --> */}
+
+## Overview
+
+The options tile is a disclosure widget, grouping a set of related controls or
+information while providing a summary of its contents when collapsed. It is used
+to avoid overwhelming the user with too many choices and elements when they're
+likely not interested in all available options, but only a subset.
+
+An options tile can also be paired with a toggle to enable or disable an entire
+set of features with ease.
+
+## Example usage
+
+<Canvas of={OptionsTileStories.Default} />
+
+## Static variant
+
+<Canvas of={OptionsTileStories.Static} />
+
+## Component API
+
+<Controls />
