@@ -215,7 +215,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
     }
 
     function handleClick(
-      e: KeyboardEvent<HTMLLIElement> | MouseEvent<HTMLLIElement>
+      e: KeyboardEvent<HTMLLIElement> | MouseEvent<Element>
     ) {
       if (!isDisabled) {
         if (hasChildren) {
@@ -224,7 +224,9 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
           context.state.requestCloseRoot(e);
 
           if (onClick) {
-            onClick(e);
+            onClick(
+              e as KeyboardEvent<HTMLLIElement> | MouseEvent<HTMLLIElement>
+            );
           }
         }
       }
@@ -307,62 +309,72 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
 
     const assistiveId = useId('danger-description');
 
+    const menuItemNode = (
+      <li
+        {...getReferenceProps({
+          role: 'menuitem',
+          ...rest,
+          ref,
+          className: classNames,
+          tabIndex: !disabled ? 0 : -1,
+          'aria-disabled': isDisabled ?? undefined,
+          'aria-haspopup': hasChildren ?? undefined,
+          'aria-expanded': hasChildren ? submenuOpen : undefined,
+          onMouseDown: handleMouseDown,
+          onClick: handleClick,
+          onKeyDown: handleKeyDown,
+          onKeyUp: handleKeyUp,
+          title: label,
+        })}>
+        <div className={`${prefix}--menu-item__selection-icon`}>
+          {rest['aria-checked'] && <Checkmark />}
+        </div>
+        <div className={`${prefix}--menu-item__icon`}>
+          {IconElement && <IconElement />}
+        </div>
+        <Text as="div" className={`${prefix}--menu-item__label`}>
+          {label}
+        </Text>
+        {hasDangerDescription && (
+          <span id={assistiveId} className={`${prefix}--visually-hidden`}>
+            {dangerDescription}
+          </span>
+        )}
+        {shortcut && !hasChildren && (
+          <div className={`${prefix}--menu-item__shortcut`}>{shortcut}</div>
+        )}
+        {hasChildren && (
+          <>
+            <div className={`${prefix}--menu-item__shortcut`}>
+              {rtl ? <CaretLeft /> : <CaretRight />}
+            </div>
+            <Menu
+              label={label}
+              open={submenuOpen}
+              onClose={() => {
+                closeSubmenu();
+                menuItem.current?.focus();
+              }}
+              ref={refs.setFloating}
+              {...getFloatingProps()}>
+              {children}
+            </Menu>
+          </>
+        )}
+      </li>
+    );
+
+    if (!hasChildren) {
+      return menuItemNode;
+    }
+
     return (
       <FloatingFocusManager
         context={floatingContext}
+        disabled={!submenuOpen}
         order={['reference', 'floating']}
         modal={false}>
-        <li
-          role="menuitem"
-          {...rest}
-          ref={ref}
-          className={classNames}
-          tabIndex={!disabled ? 0 : -1}
-          aria-disabled={isDisabled ?? undefined}
-          aria-haspopup={hasChildren ?? undefined}
-          aria-expanded={hasChildren ? submenuOpen : undefined}
-          onMouseDown={handleMouseDown}
-          onClick={handleClick}
-          onKeyDown={handleKeyDown}
-          onKeyUp={handleKeyUp}
-          title={label}
-          {...getReferenceProps()}>
-          <div className={`${prefix}--menu-item__selection-icon`}>
-            {rest['aria-checked'] && <Checkmark />}
-          </div>
-          <div className={`${prefix}--menu-item__icon`}>
-            {IconElement && <IconElement />}
-          </div>
-          <Text as="div" className={`${prefix}--menu-item__label`}>
-            {label}
-          </Text>
-          {hasDangerDescription && (
-            <span id={assistiveId} className={`${prefix}--visually-hidden`}>
-              {dangerDescription}
-            </span>
-          )}
-          {shortcut && !hasChildren && (
-            <div className={`${prefix}--menu-item__shortcut`}>{shortcut}</div>
-          )}
-          {hasChildren && (
-            <>
-              <div className={`${prefix}--menu-item__shortcut`}>
-                {rtl ? <CaretLeft /> : <CaretRight />}
-              </div>
-              <Menu
-                label={label}
-                open={submenuOpen}
-                onClose={() => {
-                  closeSubmenu();
-                  menuItem.current?.focus();
-                }}
-                ref={refs.setFloating}
-                {...getFloatingProps()}>
-                {children}
-              </Menu>
-            </>
-          )}
-        </li>
+        {menuItemNode}
       </FloatingFocusManager>
     );
   }
