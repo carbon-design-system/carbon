@@ -102,6 +102,10 @@ describe('cds-preview-text-input', function () {
     );
     const el = form.querySelector('cds-preview-text-input');
     el.value = 'typed';
+    // `value` reflects, so let the attribute update before resetting — otherwise
+    // the reset reads a stale attribute and passes for the wrong reason.
+    await el.updateComplete;
+    expect(el.getAttribute('value')).to.equal('typed');
 
     form.reset();
 

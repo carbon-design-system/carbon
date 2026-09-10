@@ -51,8 +51,8 @@ class CDSPreviewCheckbox extends FormAssociatedMixin(CDSCheckbox) {
    * Restores the default checked state, which the content attributes define.
    */
   formResetCallback() {
-    this.checked = this.hasAttribute('checked');
-    this.indeterminate = this.hasAttribute('indeterminate');
+    this.checked = this._formDefaults?.checked ?? false;
+    this.indeterminate = this._formDefaults?.indeterminate ?? false;
     this._syncFormValue();
   }
 

@@ -49,6 +49,11 @@ const FormAssociatedMixin = <T extends Constructor<HTMLElement>>(
     _attachInternalsClaimed: boolean;
     attachInternals(): ElementInternals;
     _fieldsetDisabled: boolean;
+    _formDefaults?: {
+      value: string | null;
+      checked: boolean;
+      indeterminate: boolean;
+    };
     _fieldsetDisabledControls: Set<HTMLInputElement>;
     _getFormValue(): FormValue;
     _getFormState(): FormValue;
@@ -163,6 +168,19 @@ const FormAssociatedMixin = <T extends Constructor<HTMLElement>>(
      * @protected
      */
     _fieldsetDisabled = false;
+
+    /**
+     * The content-attribute state at first connect. `value` reflects on these
+     * components, so re-reading the attribute at reset time returns whatever
+     * the user last typed, not the default.
+     *
+     * @protected
+     */
+    _formDefaults?: {
+      value: string | null;
+      checked: boolean;
+      indeterminate: boolean;
+    };
 
     /**
      * The rendered controls this mix-in disabled on behalf of an ancestor
@@ -365,11 +383,9 @@ const FormAssociatedMixin = <T extends Constructor<HTMLElement>>(
      * attributes, not from the current property values.
      */
     formResetCallback() {
-      // Native controls reset to the default their content attribute defines,
-      // not to their current property value.
       if ('value' in this) {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (this as any).value = this.getAttribute('value') ?? '';
+        (this as any).value = this._formDefaults?.value ?? '';
       }
       this._syncFormValue();
     }
@@ -428,6 +444,14 @@ const FormAssociatedMixin = <T extends Constructor<HTMLElement>>(
     connectedCallback() {
       // @ts-expect-error -- `connectedCallback` comes from LitElement.
       super.connectedCallback();
+      this._formDefaults ??= {
+        value: this.getAttribute('value'),
+        // `default-checked` is Carbon's `defaultChecked`; it is applied to
+        // `checked` on connect, so both spellings are the parse-time default.
+        checked:
+          this.hasAttribute('checked') || this.hasAttribute('default-checked'),
+        indeterminate: this.hasAttribute('indeterminate'),
+      };
       this._syncFormValue();
     }
   }

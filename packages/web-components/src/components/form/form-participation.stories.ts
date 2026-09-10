@@ -6,6 +6,7 @@
  */
 
 import { html, nothing } from 'lit';
+import { fn } from 'storybook/test';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import View16 from '@carbon/icons/es/view/16.js';
@@ -31,6 +32,7 @@ import '../multi-select/next/index';
 import '../combo-box/next/index';
 import '../search/next/index';
 import '../radio-button/next/index';
+import '../date-picker/next/index';
 
 const items = [
   {
@@ -132,6 +134,21 @@ const multiSelectItems = () =>
     `
   );
 
+const dateRow = (children) => html`
+  <div
+    style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: flex-start;">
+    ${children}
+  </div>
+`;
+
+const dateRangeCol = (children) => html`
+  <div style="flex: 0 1 auto;">${children}</div>
+`;
+
+const dateSimpleCol = (children) => html`
+  <div style="flex: 0 1 auto;">${children}</div>
+`;
+
 const row = (children) => html`
   <div style="display: flex; flex-wrap: wrap; gap: 1rem;">${children}</div>
 `;
@@ -141,7 +158,11 @@ const col = (children) => html`
 `;
 
 const sharedArgs = {
-  onSubmit: () => {},
+  onSubmit: fn(),
+  onInvalid: fn(),
+  onReset: fn(),
+  onChange: fn(),
+  onFormData: fn(),
   aiLabel: false,
   revertActive: false,
   showInModal: false,
@@ -155,7 +176,8 @@ const sharedArgs = {
 
 const sharedArgTypes = {
   onSubmit: {
-    action: 'onSubmit',
+    description:
+      'Native `submit`, with the entries the browser collected. Fires only once every control passes constraint validation.',
   },
   aiLabel: {
     control: { type: 'boolean' },
@@ -281,6 +303,20 @@ const serialize = (form) => {
   output.textContent = entries || '(no entries)';
 };
 
+// SB renders twice on arg changes; suppress dupes
+let lastFormData = '';
+
+// constraints flags the browser set on a controls
+const failedConstraints = (el) => {
+  const out = [];
+  for (const flag in el.validity) {
+    if (flag !== 'valid' && el.validity[flag]) {
+      out.push(flag);
+    }
+  }
+  return out;
+};
+
 const renderPreviewForm = (args) => {
   const {
     size = 'md',
@@ -296,10 +332,14 @@ const renderPreviewForm = (args) => {
     onSubmit,
     onInvalid,
     onReset,
+    onChange,
+    onFormData,
   } = args ?? {};
 
   const listBoxSize = size === 'xs' ? 'sm' : size;
   const decorator = () => (aiLabel ? renderAILabel(revertActive) : nothing);
+  const dateHelper = (text) =>
+    invalid || warn ? nothing : html`<span slot="helper-text">${text}</span>`;
 
   const handleSubmit = () => {
     const form = document.querySelector('#preview-form');
@@ -309,16 +349,57 @@ const renderPreviewForm = (args) => {
     form.requestSubmit();
   };
 
+  // set up controls/actions
+  requestAnimationFrame(() => {
+    const form = document.querySelector('#preview-form');
+    if (!form) {
+      return;
+    }
+    const payload = {
+      disabled,
+      readOnly,
+      invalid,
+      size,
+      entries: [...new FormData(form)].map(([n, v]) => `${n}=${v}`),
+    };
+    const fingerprint = JSON.stringify(payload);
+    if (fingerprint === lastFormData) {
+      return;
+    }
+    lastFormData = fingerprint;
+    onFormData?.(payload);
+  });
+
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    serialize(event.target);
-    onSubmit?.(event);
+    const form = event.target;
+    serialize(form);
+    onSubmit?.(
+      [...new FormData(form)].map(([name, value]) => `${name}=${value}`)
+    );
+  };
+
+  const handleInvalid = {
+    handleEvent: (event) => {
+      const el = event.target;
+      onInvalid?.({
+        control: el.tagName.toLowerCase(),
+        name: el.getAttribute('name'),
+        failed: failedConstraints(el),
+        message: el.validationMessage,
+      });
+    },
+    capture: true,
   };
 
   const handleReset = (event) => {
     const form = event.target;
-    requestAnimationFrame(() => serialize(form));
-    onReset?.(event);
+    requestAnimationFrame(() => {
+      serialize(form);
+      onReset?.(
+        [...new FormData(form)].map(([name, value]) => `${name}=${value}`)
+      );
+    });
   };
 
   return wrapForm(
@@ -329,7 +410,15 @@ const renderPreviewForm = (args) => {
           aria-label="new project setup"
           @submit="${handleFormSubmit}"
           @reset="${handleReset}"
-          @invalid="${onInvalid}">
+          @invalid="${handleInvalid}"
+          @change="${(event) => {
+            const el = event.target;
+            onChange?.({
+              control: el.tagName.toLowerCase(),
+              name: el.getAttribute('name'),
+              value: el.checked !== undefined ? el.checked : el.value,
+            });
+          }}">
           <cds-stack gap="5">
             <cds-preview-search
               size="${ifDefined(size)}"
@@ -430,6 +519,64 @@ const renderPreviewForm = (args) => {
               ${decorator()} ${multiSelectItems()}
             </cds-preview-multi-select>
 
+            ${dateRow(html`
+              ${dateRangeCol(html`
+                <cds-preview-date-picker
+                  name="project-dates"
+                  ?disabled="${disabled}"
+                  ?readonly="${readOnly}">
+                  <cds-preview-date-picker-input
+                    kind="from"
+                    id="start-date"
+                    placeholder="mm/dd/yyyy"
+                    label-text="Start date"
+                    size="${ifDefined(size)}"
+                    ?disabled="${disabled}"
+                    ?readonly="${readOnly}"
+                    ?invalid="${invalid}"
+                    invalid-text="${ifDefined(invalidText)}"
+                    ?warn="${warn}"
+                    warn-text="${ifDefined(warnText)}">
+                    ${decorator()} ${dateHelper('Active work begins.')}
+                  </cds-preview-date-picker-input>
+                  <cds-preview-date-picker-input
+                    kind="to"
+                    id="end-date"
+                    placeholder="mm/dd/yyyy"
+                    label-text="End date"
+                    size="${ifDefined(size)}"
+                    ?disabled="${disabled}"
+                    ?readonly="${readOnly}"
+                    ?invalid="${invalid}"
+                    invalid-text="${ifDefined(invalidText)}"
+                    ?warn="${warn}"
+                    warn-text="${ifDefined(warnText)}">
+                    ${decorator()} ${dateHelper('Active work ends.')}
+                  </cds-preview-date-picker-input>
+                </cds-preview-date-picker>
+              `)}
+              ${dateSimpleCol(html`
+                <cds-preview-date-picker
+                  name="deadline"
+                  ?disabled="${disabled}"
+                  ?readonly="${readOnly}">
+                  <cds-preview-date-picker-input
+                    kind="simple"
+                    id="deadline"
+                    placeholder="mm/dd/yyyy"
+                    label-text="Deadline"
+                    size="${ifDefined(size)}"
+                    ?disabled="${disabled}"
+                    ?readonly="${readOnly}"
+                    ?invalid="${invalid}"
+                    invalid-text="${ifDefined(invalidText)}"
+                    ?warn="${warn}"
+                    warn-text="${ifDefined(warnText)}">
+                    ${decorator()} ${dateHelper('Final delivery date.')}
+                  </cds-preview-date-picker-input>
+                </cds-preview-date-picker>
+              `)}
+            `)}
             ${row(html`
               ${col(html`
                 <cds-preview-number-input
@@ -644,7 +791,6 @@ export const Default = {
         'Size of all form inputs. xs is supported by TextInput, Select and Search; other components clamp to sm.',
     },
     onInvalid: {
-      action: 'invalid',
       description:
         'Native `invalid`, dispatched by the browser at a control that blocks submission.',
     },

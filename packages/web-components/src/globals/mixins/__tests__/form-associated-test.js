@@ -304,6 +304,10 @@ describe('parity with native form controls', function () {
           await p.updateComplete;
           edit(n);
           edit(p);
+          // `value` reflects on some components, so let the attribute settle
+          // before resetting — otherwise reset reads a stale attribute and the
+          // test passes for the wrong reason.
+          await p.updateComplete;
 
           form.reset();
           await p.updateComplete;
