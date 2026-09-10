@@ -189,7 +189,33 @@ export default {
   },
   tags: ['!autodocs'],
   args: {
+    hideLabel: false,
+    label: 'Tree View',
+    multiselect: false,
+    onActivate: action('onActivate'),
     onSelect: action('onSelect'),
+    size: 'sm',
+  },
+  argTypes: {
+    hideLabel: {
+      control: { type: 'boolean' },
+    },
+    label: {
+      control: { type: 'text' },
+    },
+    multiselect: {
+      control: { type: 'boolean' },
+    },
+    onActivate: {
+      action: 'onActivate',
+    },
+    onSelect: {
+      action: 'onSelect',
+    },
+    size: {
+      options: ['xs', 'sm'],
+      control: { type: 'select' },
+    },
   },
   decorators: [
     (Story) => (
@@ -203,6 +229,7 @@ export default {
 export const Default = (args) => {
   const [selected, setSelected] = useState([]);
   const [active, setActive] = useState(null);
+  const { onActivate, onSelect, ...treeViewArgs } = args;
 
   return (
     <VStack gap={6}>
@@ -227,12 +254,17 @@ export const Default = (args) => {
 
       <div>
         <TreeView
-          label="Tree View"
-          {...args}
+          {...treeViewArgs}
           active={active}
-          onActivate={setActive}
+          onActivate={(nextActive) => {
+            setActive(nextActive);
+            onActivate(nextActive);
+          }}
           selected={selected}
-          onSelect={setSelected}>
+          onSelect={(nextSelected) => {
+            setSelected(nextSelected);
+            onSelect(nextSelected);
+          }}>
           {renderTree(nodes)}
         </TreeView>
       </div>
@@ -242,18 +274,15 @@ export const Default = (args) => {
 
 Default.args = {
   hideLabel: false,
+  label: 'Tree View',
   multiselect: false,
-};
-
-Default.argTypes = {
-  size: {
-    options: ['xs', 'sm'],
-    control: { type: 'select' },
-  },
+  onActivate: action('onActivate'),
+  onSelect: action('onSelect'),
+  size: 'sm',
 };
 
 Default.parameters = {
   controls: {
-    exclude: ['active', 'selected'],
+    exclude: ['active', 'children', 'selected'],
   },
 };
