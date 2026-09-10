@@ -38,39 +38,50 @@ the import is a drop-in.
 
 <Canvas of={FormParticipationStories.Default} />
 
-The form above submits with no `formdata` listener and no manual collection. The
-browser serializes it, the way it would a form of native inputs.
+This is the [Components/Form](/story/components-form--default) story, rebuilt on
+the preview components. Same layout, same controls, same markup — the only
+difference is the tag names and what the browser does with them.
 
-Four things follow from being a real form control, none of which the `formdata`
-mechanism could provide.
+### What the port deletes
 
-### `<label for>` associates with the control
+The v2 story validates by hand before submitting, because `required` lives on
+the host while the real `<input>` is in shadow DOM:
 
-<Canvas of={FormParticipationStories.LabelAssociation} />
+```diff
+- const hasInvalidRequired = Array.from(
+-   document.querySelectorAll('[required]')
+- ).some((el) => {
+-   const input = el.shadowRoot?.querySelector('input');
+-   return input ? !input.reportValidity() : false;
+- });
+- if (hasInvalidRequired) return;
+  form.requestSubmit();
+```
 
-With a v2 component, `<label for>` silently does nothing — an accessibility
-defect rather than a missing convenience.
+`requestSubmit()` runs constraint validation itself once the controls are real
+form controls, so the loop goes away. The Password field carries both `required`
+and a `pattern`, and both are enforced — submit with a weak password and the
+browser blocks it and fires a native `invalid` event, which you can watch in the
+**Actions** tab.
 
-### `form.reset()` restores the control
+Values reach the form the same way: no `formdata` listener, no manual
+collection. Submit and the entries appear below the form.
 
-<Canvas of={FormParticipationStories.FormReset} />
+### Not yet ported
 
-The default value comes from the `value` content attribute, as it does for an
-`<input>`.
+Two controls from the v2 story are missing here. `cds-date-picker` has a
+preview, but it is the Temporal rewrite with a different API rather than a form
+participation subclass, so it needs porting rather than renaming.
+`cds-file-uploader` has no preview and does not participate in forms in v2
+either.
 
-### A disabled `<fieldset>` excludes the value
+## `cds-button` cannot submit these forms
 
-<Canvas of={FormParticipationStories.DisabledFieldset} />
-
-A v2 component inside a disabled `<fieldset>` still submits its value. That is a
-correctness bug this fixes.
-
-### `required` blocks submission
-
-<Canvas of={FormParticipationStories.RequiredValidation} />
-
-Constraint validation comes from the browser. `invalid` remains presentational —
-it styles the control without blocking submission, as it always has.
+The examples use native `<button type="submit">` rather than `cds-button`.
+`cds-button` renders its `<button>` inside shadow DOM and is not
+form-associated, so it cannot reach the surrounding `<form>` — clicking it
+submits nothing. Form participation on the inputs does not help with this; the
+button needs the same treatment.
 
 ## Available preview tags
 

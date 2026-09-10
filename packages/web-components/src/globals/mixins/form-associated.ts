@@ -78,7 +78,6 @@ const FormAssociatedMixin = <T extends Constructor<HTMLElement>>(
      * support v12 preview tag names
      */
     static finalize() {
-       
       // @ts-expect-error -- `finalize` comes from ReactiveElement.
       const finalized = super.finalize();
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -216,26 +215,49 @@ const FormAssociatedMixin = <T extends Constructor<HTMLElement>>(
     }
 
     /**
-     * Reflects `required` into native constraint validation.
+     * Mirrors the rendered control's constraints onto the host.
      *
-     * Only `required` is wired up. The `invalid` property stays presentational
-     * — it styles the control without blocking submission, which is what it has
-     * always meant in Carbon.
+     * The inner `<input>` already carries `pattern`, `min`, `minlength`, `type`
+     * and the rest, so its `validity` is copied up rather than reimplemented.
+     * `required` is checked against the host's own form value first, for
+     * controls whose value is not an inner input's value.
+     *
+     * `invalid` stays presentational — it styles the control without blocking
+     * submission, as it always has.
      *
      * @protected
      */
     _syncValidity() {
+      const anchor = this._validationAnchor();
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const { required, requiredValidityMessage } = this as any;
+
       if (required && !this._getFormValue()) {
         this._internals.setValidity(
           { valueMissing: true },
           requiredValidityMessage || 'Please fill out this field.',
-          this._validationAnchor()
+          anchor
         );
-      } else {
-        this._internals.setValidity({});
+        return;
       }
+
+      const native = (anchor as HTMLInputElement | undefined)?.validity;
+      if (native && !native.valid) {
+        const flags: ValidityStateFlags = {};
+        for (const flag in native) {
+          if (flag !== 'valid' && native[flag as keyof ValidityState]) {
+            flags[flag as keyof ValidityStateFlags] = true;
+          }
+        }
+        this._internals.setValidity(
+          flags,
+          (anchor as HTMLInputElement).validationMessage,
+          anchor
+        );
+        return;
+      }
+
+      this._internals.setValidity({});
     }
 
     /**
