@@ -13,6 +13,11 @@
     - [A prefixed build, for the whole package](#a-prefixed-build-for-the-whole-package)
     - [A scoped registry, for isolation](#a-scoped-registry-for-isolation)
   - [The WCA manifest is replaced by CEM](#the-wca-manifest-is-replaced-by-cem)
+  - [Form participation moves to `ElementInternals`](#form-participation-moves-to-elementinternals)
+    - [Try it today](#try-it-today)
+    - [What you get](#what-you-get)
+    - [What changes when it becomes the default](#what-changes-when-it-becomes-the-default)
+    - [If you built a workaround, remove it](#if-you-built-a-workaround-remove-it)
   - [Deprecations at a glance](#deprecations-at-a-glance)
   - [Codemods](#codemods)
 
@@ -235,6 +240,148 @@ The deprecated manifest carries a `_deprecated` marker at the top of the file
 and the build prints a deprecation warning. Tracking:
 [#20670](https://github.com/carbon-design-system/carbon/issues/20670).
 
+## Form participation moves to `ElementInternals`
+
+Carbon's form components become real form controls. Rather than collecting their
+values through the `formdata` event, they associate with their `<form>` natively
+through
+[`ElementInternals`](https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals),
+so the behavior a form control is expected to have comes from the browser
+instead of from Carbon emulating it.
+
+In practice that means the platform treats a `cds-text-input` the way it treats
+an `<input>` — for labelling, resetting, disabling, validating and submitting.
+The table under [What you get](#what-you-get) lists exactly what that adds.
+
+The `formdata` mechanism they use today — `FormMixin` internally — is deprecated
+in v2 and removed in v3.
+
+> **Read more:** [Form participation][form-participation] covers why the
+> `formdata` mechanism existed, what it could and could not do, and the
+> implementation details of the replacement.
+
+[form-participation]:
+  ../../packages/web-components/src/components/form/form-data.md
+
+### Try it today
+
+Form association cannot ship behind Carbon's `<feature-flags>` element. The
+browser reads `static formAssociated` once, at `customElements.define()`, and it
+cannot be toggled per instance or after registration — so a runtime flag has
+nothing to switch.
+
+It ships instead under separate `cds-preview-*` tags, the same approach used by
+`cds-preview-date-picker`. Import the `next` barrel and change the tag name:
+
+```diff
+- import '@carbon/web-components/es/components/text-input/index.js';
++ import '@carbon/web-components/es/components/text-input/next/index.js';
+```
+
+```diff
+- <cds-text-input name="email" value="[email protected]"></cds-text-input>
++ <cds-preview-text-input name="email" value="[email protected]"></cds-preview-text-input>
+```
+
+| v2 tag                     | Preview tag                        |
+| -------------------------- | ---------------------------------- |
+| `<cds-text-input>`         | `<cds-preview-text-input>`         |
+| `<cds-textarea>`           | `<cds-preview-textarea>`           |
+| `<cds-number-input>`       | `<cds-preview-number-input>`       |
+| `<cds-password-input>`     | `<cds-preview-password-input>`     |
+| `<cds-checkbox>`           | `<cds-preview-checkbox>`           |
+| `<cds-select>`             | `<cds-preview-select>`             |
+| `<cds-dropdown>`           | `<cds-preview-dropdown>`           |
+| `<cds-multi-select>`       | `<cds-preview-multi-select>`       |
+| `<cds-radio-button-group>` | `<cds-preview-radio-button-group>` |
+| `<cds-search>`             | `<cds-preview-search>`             |
+| `<cds-slider>`             | `<cds-preview-slider>`             |
+
+Child elements are unchanged — a `<cds-preview-dropdown>` still holds v2
+`<cds-dropdown-item>` children, and `<cds-preview-radio-button-group>` still
+holds `<cds-radio-button>`. Only the container participates in the form.
+
+Not yet converted: `cds-date-picker`, `cds-time-picker`, `cds-combo-box` and the
+`cds-fluid-*` variants.
+
+Properties, events, slots and styling are unchanged — these are subclasses of
+the v2 components, not rewrites. Only form participation differs. Both versions
+can coexist on the same page, so you can migrate one field at a time.
+
+> **Preview:** these tags exist to gather feedback before v3. They are removed
+> in v3, when the behavior moves onto the canonical tags.
+
+### What you get
+
+| Behavior                                      | v2  | Preview |
+| --------------------------------------------- | --- | ------- |
+| Contributes a value on submit                 | Yes | Yes     |
+| `<label for>` associates with the control     | No  | Yes     |
+| Appears in `form.elements`                    | No  | Yes     |
+| `form` / `labels` / `validity` properties     | No  | Yes     |
+| Restored by `form.reset()`                    | No  | Yes     |
+| Excluded by an ancestor `<fieldset disabled>` | No  | Yes     |
+| `required` blocks submission                  | No  | Yes     |
+| `disabled` follows native semantics           | No  | Yes[^1] |
+
+[^1]:
+    `disabled` reports only the element's _own_ attribute, matching
+    `HTMLInputElement.disabled` — an element inside a disabled `<fieldset>`
+    reports `false`. Use `el.matches(':disabled')` for the effective state. The
+    rendered control is disabled either way.
+
+Two of the "No" rows are defects rather than gaps. `<label for>` silently not
+associating is an **accessibility** failure, and a value inside a disabled
+`<fieldset>` still being submitted is a **correctness** one.
+
+### What changes when it becomes the default
+
+In v3 these behaviors move onto `<cds-text-input>`, `<cds-checkbox>` and the
+rest, and the preview tags are removed. Being a real form control is observable,
+so some of that change reaches your application.
+
+#### Check these in your app
+
+| What changes                                                                                                | What to do                                                                                                                         |
+| ----------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `form.elements` includes Carbon controls, changing its `length`, indices and `namedItem()`                  | Review anything that iterates `form.elements` by index or count.                                                                   |
+| `click` no longer fires on a disabled control, matching a native `<button disabled>`                        | If you show a tooltip explaining _why_ a control is disabled, move to `aria-disabled` plus a wrapper element that stays clickable. |
+| The host matches `:disabled`                                                                                | Check broad application CSS such as `*:disabled` or `[disabled]`, which now applies to the Carbon element itself.                  |
+| A wrapping `<label>` forwards a click, and `label.control` resolves to the Carbon element instead of `null` | Check test selectors and any click handling that assumed the label did nothing.                                                    |
+| Submitted entry order follows DOM order rather than listener order                                          | Only matters if you parse repeated keys positionally.                                                                              |
+
+None of these require a change before v3 — the preview tags let you find them
+early.
+
+#### Still being decided
+
+These are open questions rather than settled behavior. They are tracked
+individually so you can follow or weigh in:
+
+| Question                                                                                                           | Current preview behavior                                                                    | Tracking |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------- | -------- |
+| Should `cds-multi-select` submit one entry per selection (`name=a&name=b`) instead of a joined value (`name=a,b`)? | Keeps the v2 joined format. A native `<select multiple>` submits repeated entries.          | TBD      |
+| Should `invalid` participate in constraint validation, or stay presentational?                                     | Stays presentational — it styles the control without blocking submission, as it always has. | TBD      |
+| Should `checkValidity()` and `setCustomValidity()` adopt native semantics?                                         | Carbon's existing non-standard versions still apply on components that have them.           | TBD      |
+
+One deliberate improvement, not an open question: **`cds-preview-slider` with no
+value submits no entry**, where the v2 component submitted the string
+`"undefined"`.
+
+### If you built a workaround, remove it
+
+Because this closes gaps rather than changing working behavior, the code most
+likely to break is the code written to work around the gaps. If you:
+
+- collect Carbon values by hand instead of using `new FormData(form)`
+- reset Carbon fields manually because `form.reset()` did not reach them
+- disable Carbon fields manually because `<fieldset disabled>` did not
+- subclass a Carbon form component and call `attachInternals()` yourself
+
+…then that code is now redundant, and in the first case it will submit values
+twice. Note the last one is safe today: the preview components hand a subclass
+the internals they already attached rather than letting the second call fail.
+
 ## Deprecations at a glance
 
 These keep working in v2 and are removed in v3.
@@ -244,6 +391,7 @@ These keep working in v2 and are removed in v3.
 | `carbonElement` decorator             | Lit's `customElement`, or `static is` with `defineCustomElement`           |
 | `es-custom` build (`cds-custom-*`)    | custom tag names, the `create-prefixed-build` binary, or scoped registries |
 | `custom-elements.json` (WCA manifest) | the standard Custom Elements Manifest (CEM)                                |
+| `FormMixin` / the `formdata` event    | native form association via `ElementInternals`                             |
 
 ## Codemods
 
