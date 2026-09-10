@@ -13,6 +13,7 @@ import { Grid, Column } from '../Grid';
 import { Tag } from '../Tag';
 import { AILabel, AILabelContent } from '../AILabel';
 import { IconIndicator } from '../IconIndicator';
+import { UserAvatar } from '../UserAvatar';
 import {
   Edit,
   TrashCan,
@@ -116,6 +117,59 @@ export default {
       description:
         'Number of icon actions to show in the header (0–8). Rendered as IconButtons inside Card.Actions; overflow collapses into a menu.',
     },
+    footerActions: {
+      control: { type: 'select' },
+      options: ['none', 'ghost-button', 'ghost-button-icons', 'icons-only'],
+      description:
+        'Footer action combination. "ghost-button" — single text action. "ghost-button-icons" — text action with icon secondaries. "icons-only" — icon buttons only. Has no effect when `clickable` is true.',
+    },
+    mediaRatio: {
+      control: { type: 'select' },
+      options: [
+        'none',
+        '16x9',
+        '9x16',
+        '2x1',
+        '1x2',
+        '4x3',
+        '3x4',
+        '3x2',
+        '2x3',
+        '1x1',
+      ],
+      description:
+        'Aspect ratio of the card media slot. "none" hides the media slot.',
+    },
+    mediaContent: {
+      control: { type: 'select' },
+      options: ['image', 'video'],
+      description:
+        'Content rendered inside the media slot. "video" embeds a YouTube iframe. Has no effect when mediaRatio is "none".',
+    },
+    showAILabel: {
+      control: { type: 'boolean' },
+      description: 'Attach an AI label decorator to the card.',
+    },
+    headerMedia: {
+      control: { type: 'select' },
+      options: ['none', 'icon', 'tag', 'user-avatar', 'status-indicator'],
+      description:
+        'Content shown in the Card.HeaderMedia slot above the title row.',
+    },
+    titleMedia: {
+      control: { type: 'select' },
+      options: ['none', 'image'],
+      description:
+        'Content shown in the Card.TitleMedia slot to the left of the title.',
+    },
+    titleLeadingIcon: {
+      control: { type: 'boolean' },
+      description: 'Show a leading icon inside the title text row.',
+    },
+    titleTrailingIcon: {
+      control: { type: 'boolean' },
+      description: 'Show a trailing icon inside the title text row.',
+    },
   },
   args: {
     density: 'productive',
@@ -125,8 +179,16 @@ export default {
     label: 'Example',
     title: 'Card title',
     description: '',
-    bodyText: 'Use the controls panel to customise this card.',
+    bodyText: 'Last updated 2 hours ago.',
     actionCount: 0,
+    footerActions: 'none',
+    mediaRatio: '16x9',
+    mediaContent: 'image',
+    showAILabel: false,
+    headerMedia: 'none',
+    titleMedia: 'none',
+    titleLeadingIcon: false,
+    titleTrailingIcon: false,
     renderFooterIcon: 'ArrowRight',
   },
 };
@@ -149,6 +211,63 @@ const ACTION_ICONS = [
   { icon: View, label: 'View' },
 ];
 
+// Maps the headerMedia control value to a concrete React element.
+const HEADER_MEDIA_MAP = {
+  none: null,
+  icon: <Analytics size={32} />,
+  tag: <Tag type="blue">New</Tag>,
+  'user-avatar': <UserAvatar name="Thomas J. Watson" size="md" />,
+  'status-indicator': (
+    <IconIndicator kind="succeeded" size={16} label="Succeeded" />
+  ),
+};
+
+// Maps the titleMedia control value to a concrete React element.
+const TITLE_MEDIA_MAP = {
+  none: null,
+  image: (
+    <img
+      src={rebusClassic}
+      alt="IBM Classic Rebus logo"
+      width={48}
+      height={48}
+    />
+  ),
+};
+
+// Renders the footer action combination selected via the footerActions control.
+// Not used when the card is clickable (clickable cards render their own footer).
+const renderFooterActions = (footerActions) => {
+  if (footerActions === 'none') return null;
+  return (
+    <Card.Footer>
+      {(footerActions === 'ghost-button' ||
+        footerActions === 'ghost-button-icons') && (
+        <Card.Action>
+          <Button kind="ghost" size="md">
+            View details
+          </Button>
+        </Card.Action>
+      )}
+      {(footerActions === 'ghost-button-icons' ||
+        footerActions === 'icons-only') && (
+        <>
+          <Card.Action>
+            <IconButton label="Share" kind="ghost" size="md">
+              <Share />
+            </IconButton>
+          </Card.Action>
+          <Card.Action>
+            <IconButton label="Download" kind="ghost" size="md">
+              <Download />
+            </IconButton>
+          </Card.Action>
+        </>
+      )}
+    </Card.Footer>
+  );
+};
+
 export const Default = {
   render: ({
     label,
@@ -157,6 +276,14 @@ export const Default = {
     bodyText,
     titleTruncate = false,
     actionCount,
+    footerActions,
+    mediaRatio,
+    mediaContent,
+    showAILabel,
+    headerMedia,
+    titleMedia,
+    titleLeadingIcon,
+    titleTrailingIcon,
     renderFooterIcon,
     ...cardArgs
   }) => (
@@ -166,15 +293,59 @@ export const Default = {
           {...cardArgs}
           {...(cardArgs.clickable && {
             renderFooterIcon: FOOTER_ICON_MAP[renderFooterIcon],
+          })}
+          {...(showAILabel && {
+            decorator: (
+              <AILabel align="bottom" size="xs">
+                <AILabelContent>
+                  <div>
+                    <p className="secondary">AI Explained</p>
+                    <h1>84%</h1>
+                    <p className="secondary bold">Confidence score</p>
+                    <p className="secondary">
+                      This content was generated using IBM AI services.
+                    </p>
+                    <hr />
+                    <p className="secondary">Model type</p>
+                    <p className="bold">Foundation model</p>
+                  </div>
+                </AILabelContent>
+              </AILabel>
+            ),
           })}>
-          <Card.Media ratio="16x9">
-            <img src={illustration16x9} alt="" width="100%" />
-          </Card.Media>
+          {mediaRatio !== 'none' && (
+            <Card.Media ratio={mediaRatio}>
+              {mediaContent === 'video' ? (
+                <iframe
+                  width="100%"
+                  height="100%"
+                  style={{ position: 'absolute' }}
+                  src="https://www.youtube.com/embed/Veg7njIKUm4?si=B9yWeUzcFHI4ITD1&controls=0"
+                  title="YouTube video player"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                />
+              ) : (
+                <img src={illustration1x1} alt="" width="100%" />
+              )}
+            </Card.Media>
+          )}
           <Card.Header>
+            {HEADER_MEDIA_MAP[headerMedia] && (
+              <Card.HeaderMedia>
+                {HEADER_MEDIA_MAP[headerMedia]}
+              </Card.HeaderMedia>
+            )}
+            {TITLE_MEDIA_MAP[titleMedia] && (
+              <Card.TitleMedia>{TITLE_MEDIA_MAP[titleMedia]}</Card.TitleMedia>
+            )}
             <Card.Title
               label={label || undefined}
               description={description || undefined}
-              titleTruncate={titleTruncate}>
+              titleTruncate={titleTruncate}
+              {...(titleLeadingIcon && { titleStart: <BeeIcon size={16} /> })}
+              {...(titleTrailingIcon && { titleEnd: <BeeIcon size={16} /> })}>
               {title}
             </Card.Title>
             {actionCount > 0 && (
@@ -192,6 +363,7 @@ export const Default = {
             )}
           </Card.Header>
           <Card.Body>{bodyText}</Card.Body>
+          {!cardArgs.clickable && renderFooterActions(footerActions)}
         </Card>
       </Column>
     </Grid>
@@ -209,6 +381,14 @@ const readonlyArgTypes = {
   description: { control: false },
   bodyText: { control: false },
   actionCount: { control: false },
+  footerActions: { control: false },
+  mediaRatio: { control: false },
+  mediaContent: { control: false },
+  showAILabel: { control: false },
+  headerMedia: { control: false },
+  titleMedia: { control: false },
+  titleLeadingIcon: { control: false },
+  titleTrailingIcon: { control: false },
 };
 
 export const Clickable = () => (
@@ -227,9 +407,7 @@ export const Clickable = () => (
             Usage report
           </Card.Title>
         </Card.Header>
-        <Card.Body>
-          Click anywhere on this card to trigger the action.
-        </Card.Body>
+        <Card.Body>Monthly summary across all active projects.</Card.Body>
       </Card>
     </Column>
 
@@ -249,10 +427,7 @@ export const Clickable = () => (
             Carbon Design System
           </Card.Title>
         </Card.Header>
-        <Card.Body>
-          This card renders as an <code>&lt;a&gt;</code> element for true
-          navigation semantics. Right-click or Cmd+click to open in a new tab.
-        </Card.Body>
+        <Card.Body>Read about tokens, components, and patterns.</Card.Body>
       </Card>
     </Column>
 
@@ -268,10 +443,7 @@ export const Clickable = () => (
             Share report
           </Card.Title>
         </Card.Header>
-        <Card.Body>
-          Pass <code>renderFooterIcon</code> to replace the default arrow with
-          any icon from <code>@carbon/icons-react</code>.
-        </Card.Body>
+        <Card.Body>Share this report with your team.</Card.Body>
       </Card>
     </Column>
 
@@ -287,10 +459,7 @@ export const Clickable = () => (
             Disabled card
           </Card.Title>
         </Card.Header>
-        <Card.Body>
-          When <code>disabled</code> is true the card is not interactive and the
-          footer affordance is visually muted.
-        </Card.Body>
+        <Card.Body>This card is not currently available.</Card.Body>
       </Card>
     </Column>
 
@@ -309,7 +478,7 @@ export const Clickable = () => (
             Product launch
           </Card.Title>
         </Card.Header>
-        <Card.Body>Clickable card in expressive density.</Card.Body>
+        <Card.Body>Highlights from the Q3 product launch.</Card.Body>
       </Card>
     </Column>
 
@@ -326,10 +495,7 @@ export const Clickable = () => (
             Quarterly review
           </Card.Title>
         </Card.Header>
-        <Card.Body>
-          Use <code>as="a"</code> with <code>density="expressive"</code> for
-          navigation cards in an editorial layout.
-        </Card.Body>
+        <Card.Body>Key findings and recommendations from Q3.</Card.Body>
       </Card>
     </Column>
   </Grid>
@@ -428,10 +594,7 @@ export const WithDensities = () => (
             Card title
           </Card.Title>
         </Card.Header>
-        <Card.Body>
-          This is the card body content. It can contain any custom content you
-          need.
-        </Card.Body>
+        <Card.Body>5,240 active users across 12 regions.</Card.Body>
         <Card.Footer>
           <Card.Action>
             <Button kind="ghost" size="md">
@@ -448,10 +611,7 @@ export const WithDensities = () => (
             Card title
           </Card.Title>
         </Card.Header>
-        <Card.Body>
-          This is the card body content. It can contain any custom content you
-          need.
-        </Card.Body>
+        <Card.Body>5,240 active users across 12 regions.</Card.Body>
         <Card.Footer>
           <Card.Action>
             <Button kind="ghost" size="md">
@@ -493,10 +653,7 @@ export const WithAILabel = () => (
             Usage Analytics
           </Card.Title>
         </Card.Header>
-        <Card.Body>
-          This card demonstrates the AI label feature with a blue gradient
-          border indicating AI-generated content.
-        </Card.Body>
+        <Card.Body>4,812 active users — 9% above forecast.</Card.Body>
       </Card>
     </Column>
     <Column lg={4} md={4} sm={4}>
@@ -527,7 +684,9 @@ export const WithAILabel = () => (
             Performance Insights
           </Card.Title>
         </Card.Header>
-        <Card.Body>Card with AI label and header media slot (icon).</Card.Body>
+        <Card.Body>
+          CPU utilization averaged 62% over the last 7 days.
+        </Card.Body>
       </Card>
     </Column>
     <Column lg={4} md={4} sm={4}>
@@ -579,10 +738,7 @@ export const WithAILabel = () => (
             </Card.Action>
           </Card.Actions>
         </Card.Header>
-        <Card.Body>
-          Card with AI label and actions. Note how the actions are positioned to
-          the left of the AI label with proper spacing.
-        </Card.Body>
+        <Card.Body>3 products match your recent activity.</Card.Body>
         <Card.Footer>
           <Button size="sm" kind="tertiary">
             View Details
@@ -610,7 +766,7 @@ export const WithFlushBody = () => (
               border: '1px dashed var(--cds-link-primary)',
               padding: '1rem',
             }}>
-            Content with 16px body padding
+            Body with default padding
           </div>
         </Card.Body>
       </Card>
@@ -629,7 +785,7 @@ export const WithFlushBody = () => (
               border: '1px dashed var(--cds-link-primary)',
               padding: '1rem',
             }}>
-            Content fills edge-to-edge
+            Body flush to card edges
           </div>
         </Card.Body>
       </Card>
@@ -675,8 +831,7 @@ export const WithHeaderActions = () => (
           </Card.Actions>
         </Card.Header>
         <Card.Body>
-          This clickable card has action buttons in the header that prevent
-          click propagation.
+          Deployment pipeline ran successfully across all regions.
         </Card.Body>
         <Card.Footer>
           <Card.Action>
@@ -756,11 +911,7 @@ export const WithHeaderActions = () => (
             </Card.Action>
           </Card.Actions>
         </Card.Header>
-        <Card.Body>
-          Multiple action buttons can be placed in the header alongside label,
-          title, and description. Actions are right-aligned and maintain proper
-          spacing.
-        </Card.Body>
+        <Card.Body>Last synced 4 minutes ago.</Card.Body>
       </Card>
     </Column>
     <Column lg={4} md={4} sm={4}>
@@ -775,10 +926,7 @@ export const WithHeaderActions = () => (
             </Card.Action>
           </Card.Actions>
         </Card.Header>
-        <Card.Body>
-          Text actions use Carbon&apos;s small ghost button for actions that
-          require text labels instead of icons.
-        </Card.Body>
+        <Card.Body>API requests peaked at 3.2k/s on Thursday.</Card.Body>
       </Card>
     </Column>
     <Column lg={4} md={4} sm={4}>
@@ -803,7 +951,7 @@ export const WithHeaderActions = () => (
             </Card.Action>
           </Card.Actions>
         </Card.Header>
-        <Card.Body>Multiple text actions in the header.</Card.Body>
+        <Card.Body>Exports available in CSV, JSON, and PDF.</Card.Body>
       </Card>
     </Column>
     <Column lg={4} md={4} sm={4}>
@@ -836,10 +984,7 @@ export const WithHeaderActions = () => (
             </Card.Action>
           </Card.Actions>
         </Card.Header>
-        <Card.Body>
-          Truncated label (single line ellipsis), long wrapping title, and
-          description clamped to 2 lines — all alongside header actions.
-        </Card.Body>
+        <Card.Body>Pipeline completed in 4m 12s with no warnings.</Card.Body>
       </Card>
     </Column>
   </Grid>
@@ -885,10 +1030,7 @@ export const WithHeaderMedia = () => (
             </Card.Action>
           </Card.Actions>
         </Card.Header>
-        <Card.Body>
-          This card demonstrates the icon slot (first child) with action buttons
-          on the right.
-        </Card.Body>
+        <Card.Body>Request volume up 12% compared to last week.</Card.Body>
       </Card>
     </Column>
     <Column lg={4} md={4} sm={4}>
@@ -903,7 +1045,7 @@ export const WithHeaderMedia = () => (
           </Card.HeaderMedia>
           <Card.Title>Card with Image</Card.Title>
         </Card.Header>
-        <Card.Body>The icon slot can contain an image element.</Card.Body>
+        <Card.Body>4 deployments completed this week.</Card.Body>
       </Card>
     </Column>
     <Column lg={4} md={4} sm={4}>
@@ -914,7 +1056,7 @@ export const WithHeaderMedia = () => (
           </Card.HeaderMedia>
           <Card.Title>Card with Tag</Card.Title>
         </Card.Header>
-        <Card.Body>The icon slot can contain a Tag component.</Card.Body>
+        <Card.Body>Feature flag enabled for 10% of users.</Card.Body>
       </Card>
     </Column>
     <Column lg={4} md={4} sm={4}>
@@ -925,9 +1067,7 @@ export const WithHeaderMedia = () => (
           </Card.HeaderMedia>
           <Card.Title>Card with Status</Card.Title>
         </Card.Header>
-        <Card.Body>
-          The icon slot can contain an IconIndicator component.
-        </Card.Body>
+        <Card.Body>All systems operational. No incidents reported.</Card.Body>
       </Card>
     </Column>
   </Grid>
@@ -951,10 +1091,7 @@ export const WithHorizontalMedia = () => (
             Generate synthetic tabular data
           </Card.Title>
         </Card.Header>
-        <Card.Body>
-          Prepare your data and generate synthetic tabular data using
-          AI-assisted tooling.
-        </Card.Body>
+        <Card.Body>Balanced dataset ready for model training.</Card.Body>
         <Card.Footer>
           <Button kind="tertiary" size="md" renderIcon={ArrowRight}>
             Start
@@ -974,10 +1111,7 @@ export const WithHorizontalMedia = () => (
         <Card.Header>
           <Card.Title>Custom media width</Card.Title>
         </Card.Header>
-        <Card.Body>
-          Pass mediaWidth="50%" to control the media column width. Accepts any
-          valid CSS value.
-        </Card.Body>
+        <Card.Body>Revenue grew 18% year-over-year in this segment.</Card.Body>
         <Card.Footer>
           <Card.Action>
             <Button kind="ghost" size="md" renderIcon={ArrowRight}>
@@ -992,10 +1126,7 @@ export const WithHorizontalMedia = () => (
         <Card.Header>
           <Card.Title>Content before media</Card.Title>
         </Card.Header>
-        <Card.Body>
-          When Card.Media appears after the content children in JSX, it is
-          rendered on the right.
-        </Card.Body>
+        <Card.Body>Scheduled maintenance window starts at 02:00 UTC.</Card.Body>
         <Card.Footer>
           <Card.Action>
             <Button kind="ghost" size="md" renderIcon={ArrowRight}>
@@ -1061,9 +1192,7 @@ export const WithIcon = () => (
             Analytics Dashboard
           </Card.Title>
         </Card.Header>
-        <Card.Body>
-          This card includes a small icon (16px) alongside the title.
-        </Card.Body>
+        <Card.Body>Inbound traffic up 8% since last Tuesday.</Card.Body>
         <Card.Footer>
           <Card.Action>
             <Button kind="ghost" size="md">
@@ -1115,9 +1244,7 @@ export const WithIcon = () => (
             Favorite Items
           </Card.Title>
         </Card.Header>
-        <Card.Body>
-          This card includes a larger icon (32px) for more prominence.
-        </Card.Body>
+        <Card.Body>12 items saved across 3 workspaces.</Card.Body>
         <Card.Footer>
           <Button kind="tertiary" size="md">
             Learn more
@@ -1146,9 +1273,7 @@ export const WithMedia = () => (
             Product Launch Event
           </Card.Title>
         </Card.Header>
-        <Card.Body>
-          This card features a 16:9 aspect ratio media slot at the top.
-        </Card.Body>
+        <Card.Body>Registration closes 30 April.</Card.Body>
         <Card.Footer>
           <div style={{ padding: '0 1rem' }}>
             <IconIndicator kind="in-progress" size={16} label="In progress" />
@@ -1178,9 +1303,7 @@ export const WithMedia = () => (
             Square Format
           </Card.Title>
         </Card.Header>
-        <Card.Body>
-          This card uses a 1:1 (square) aspect ratio for the media.
-        </Card.Body>
+        <Card.Body>Confirm your profile photo before publishing.</Card.Body>
         <Card.Footer>
           <Card.Action>
             <Button kind="ghost" size="md">
@@ -1209,10 +1332,7 @@ export const WithTitleLeadingIcon = () => (
             Analytics dashboard
           </Card.Title>
         </Card.Header>
-        <Card.Body>
-          The leading icon adapts to the title size. In productive density, use
-          16px icons.
-        </Card.Body>
+        <Card.Body>Latency p99 held below 120ms all week.</Card.Body>
       </Card>
     </Column>
     <Column lg={4} md={4} sm={4}>
@@ -1222,10 +1342,7 @@ export const WithTitleLeadingIcon = () => (
             Analytics dashboard
           </Card.Title>
         </Card.Header>
-        <Card.Body>
-          The leading icon adapts to the title size. In expressive density, use
-          24px icons.
-        </Card.Body>
+        <Card.Body>Latency p99 held below 120ms all week.</Card.Body>
       </Card>
     </Column>
     <Column lg={4} md={4} sm={4}>
@@ -1236,8 +1353,7 @@ export const WithTitleLeadingIcon = () => (
           </Card.Title>
         </Card.Header>
         <Card.Body>
-          When the title wraps to multiple lines, the icon stays top-aligned
-          with 2px padding to center with the first line.
+          Storage quota reached on 2 of 5 connected accounts.
         </Card.Body>
       </Card>
     </Column>
@@ -1265,11 +1381,7 @@ export const WithTitleMedia = () => (
             Card with title icon
           </Card.Title>
         </Card.Header>
-        <Card.Body>
-          CardTitleMedia provides a media slot positioned to the left of the
-          card title. The media adapts to the heading area height (min 48px, max
-          64px).
-        </Card.Body>
+        <Card.Body>12 contributors, 3 open pull requests.</Card.Body>
       </Card>
     </Column>
     <Column lg={4} md={4} sm={4}>
@@ -1289,11 +1401,7 @@ export const WithTitleMedia = () => (
             Card with title icon
           </Card.Title>
         </Card.Header>
-        <Card.Body>
-          CardTitleMedia provides a media slot positioned to the left of the
-          card title. The media adapts to the heading area height (min 48px, max
-          64px).
-        </Card.Body>
+        <Card.Body>12 contributors, 3 open pull requests.</Card.Body>
       </Card>
     </Column>
     <Column lg={4} md={4} sm={4}>
@@ -1339,11 +1447,7 @@ export const WithTitleMedia = () => (
             </Card.Action>
           </Card.Actions>
         </Card.Header>
-        <Card.Body>
-          CardTitleMedia provides a media slot positioned to the left of the
-          card title. The media adapts to the heading area height (min 48px, max
-          64px).
-        </Card.Body>
+        <Card.Body>Release tagged and deployment pipeline triggered.</Card.Body>
       </Card>
     </Column>
     <Column lg={4} md={4} sm={4}>
@@ -1392,11 +1496,7 @@ export const WithTitleMedia = () => (
             </Card.Action>
           </Card.Actions>
         </Card.Header>
-        <Card.Body>
-          CardTitleMedia provides a media slot positioned to the left of the
-          card title. The media adapts to the heading area height (min 48px, max
-          64px).
-        </Card.Body>
+        <Card.Body>Build passed all 847 checks. Ready to merge.</Card.Body>
       </Card>
     </Column>
   </Grid>
@@ -1413,10 +1513,7 @@ export const WithTitleTrailingIcon = () => (
             Analytics dashboard
           </Card.Title>
         </Card.Header>
-        <Card.Body>
-          The trailing icon adapts to the title size. In productive density, use
-          16px icons.
-        </Card.Body>
+        <Card.Body>Error rate dropped to 0.02% after the patch.</Card.Body>
       </Card>
     </Column>
     <Column lg={4} md={4} sm={4}>
@@ -1426,10 +1523,7 @@ export const WithTitleTrailingIcon = () => (
             Analytics dashboard
           </Card.Title>
         </Card.Header>
-        <Card.Body>
-          The trailing icon adapts to the title size. In expressive density, use
-          24px icons.
-        </Card.Body>
+        <Card.Body>Error rate dropped to 0.02% after the patch.</Card.Body>
       </Card>
     </Column>
     <Column lg={4} md={4} sm={4}>
@@ -1440,8 +1534,7 @@ export const WithTitleTrailingIcon = () => (
           </Card.Title>
         </Card.Header>
         <Card.Body>
-          When the title wraps to multiple lines, the icon stays inline with the
-          text on the last line with 8px gap.
+          Backup completed successfully. Next run in 23 hours.
         </Card.Body>
       </Card>
     </Column>
@@ -1509,7 +1602,7 @@ export const WithTruncatedTitle = {
     title:
       'A long card title that will be truncated once it exceeds the available width',
     description: '3 regions',
-    bodyText: 'Use the controls panel to adjust truncation behavior.',
+    bodyText: '14 of 20 steps completed.',
     titleTruncate: true,
     labelTruncate: false,
     descriptionTruncate: false,
@@ -1570,10 +1663,7 @@ export const WithVideo = () => (
             Your browser does not support the video tag.
           </video>
         </Card.Media>
-        <Card.Body>
-          Video content fills the AspectRatio container and maintains the 16:9
-          aspect ratio.
-        </Card.Body>
+        <Card.Body>Full walkthrough of the new pipeline builder.</Card.Body>
       </Card>
     </Column>
     <Column lg={4} md={4} sm={4}>
@@ -1595,8 +1685,7 @@ export const WithVideo = () => (
           </Card.Title>
         </Card.Header>
         <Card.Body>
-          Videos can include a poster image that displays before playback
-          starts.
+          Set up your first automated workflow in under 5 minutes.
         </Card.Body>
       </Card>
     </Column>
