@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2023
+// Copyright IBM Corp. 2016, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -7,7 +7,9 @@
 
 @use '../text-input';
 @use '../select';
+@use '../../border-radius' as *;
 @use '../../config' as *;
+@use '../../feature-flags' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
@@ -27,7 +29,12 @@
 
   .#{$prefix}--time-picker__select {
     justify-content: center;
-    margin-inline-start: $spacing-01;
+
+    @if enabled('enable-v12-release') {
+      margin-inline-start: convert.to-rem(1px);
+    } @else {
+      margin-inline-start: $spacing-01;
+    }
   }
 
   .#{$prefix}--time-picker__input {
@@ -125,5 +132,27 @@
     .#{$prefix}--select-input
     + .#{$prefix}--select__arrow {
     fill: $icon-disabled;
+  }
+
+  @if enabled('enable-v12-release') {
+    .#{$prefix}--time-picker__input:has(+ .#{$prefix}--time-picker__select)
+      .#{$prefix}--time-picker__input-field {
+      border-end-end-radius: $border-radius-00;
+      border-inline-end: none;
+      border-start-end-radius: $border-radius-00;
+    }
+
+    .#{$prefix}--time-picker__select .#{$prefix}--select-input {
+      border-end-start-radius: $border-radius-00;
+      border-inline-start: none;
+      border-start-start-radius: $border-radius-00;
+    }
+
+    .#{$prefix}--time-picker__select:has(+ .#{$prefix}--time-picker__select)
+      .#{$prefix}--select-input {
+      border-end-end-radius: $border-radius-00;
+      border-inline-end: none;
+      border-start-end-radius: $border-radius-00;
+    }
   }
 }
