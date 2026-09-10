@@ -286,10 +286,9 @@ describe('parity with native form controls', function () {
           const form = await fixture(
             `<form><label for="n" id="ln">n</label><label for="p" id="lp">p</label>` +
               `${native.replace('<input', '<input id="n"')}` +
-              `${preview.replace('<cds-preview', '<cds-preview')}</form>`
+              `${preview.replace('name="preview"', 'id="p" name="preview"')}</form>`
           );
           const p = form.querySelector('[name="preview"]');
-          p.id = 'p';
           await p.updateComplete;
 
           expect(form.querySelector('#ln').control).to.equal(
