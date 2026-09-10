@@ -1253,8 +1253,7 @@ class CDSDropdown extends ValidityMixin(
   /**
    * The CSS class list for dropdown listbox
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  protected get _classes(): any {
+  protected get _classes(): ReturnType<typeof classMap> {
     const { size, type, open, autoalign } = this;
     const inline = type === DROPDOWN_TYPE.INLINE;
     const normalizedProps = this._normalizedProps;
