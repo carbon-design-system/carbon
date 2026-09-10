@@ -13,6 +13,7 @@ import React, {
   cloneElement,
   forwardRef,
   useContext,
+  useRef,
   type HTMLAttributes,
   type ReactNode,
 } from 'react';
@@ -24,6 +25,7 @@ import { deprecate } from '../../prop-types/deprecate';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
+import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
 import { useFeatureFlag } from '../FeatureFlags';
 
 type ExcludedAttributes = 'value' | 'onChange' | 'locale' | 'children';
@@ -174,6 +176,7 @@ const DatePickerInput = frFn((props, ref) => {
   const { isFluid } = useContext(FormContext);
   const enableV12Release = useFeatureFlag('enable-v12-release');
   const datePickerInputInstanceId = useId();
+  const labelRef = useRef<HTMLLabelElement>(null);
 
   const normalizedProps = useNormalizedInputProps({
     id,
@@ -276,14 +279,18 @@ const DatePickerInput = frFn((props, ref) => {
   const normalizedDecorator = candidateIsAILabel
     ? cloneElement(candidate, { size: 'mini' })
     : candidate;
+  useNoInteractiveChildren(
+    labelRef,
+    'The DatePickerInput component `labelText` prop must have no interactive content'
+  );
 
   return (
     <div className={containerClasses}>
-      {labelText && (
-        <Text as="label" htmlFor={id} className={labelClasses}>
+      {labelText ? (
+        <Text as="label" htmlFor={id} className={labelClasses} ref={labelRef}>
           {labelText}
         </Text>
-      )}
+      ) : null}
       <div className={wrapperClasses}>
         <span>
           {input}
