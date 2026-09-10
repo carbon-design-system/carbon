@@ -47,7 +47,8 @@ type ExcludedInheritedProps =
   | 'onChange'
   | 'onExpand'
   | 'onFocus'
-  | 'tabIndex';
+  | 'tabIndex'
+  | 'translateWithId';
 
 export type TableToolbarSearchHandleExpand = (
   event: FocusEvent<HTMLInputElement>,

@@ -11,8 +11,10 @@ import classnames from 'classnames';
 import Search from '../Search';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm/FormContext';
+import { deprecate } from '../../prop-types/deprecate';
+import type { TranslateWithId } from '../../types/common';
 
-export interface FluidSearchProps {
+export interface FluidSearchProps extends TranslateWithId {
   /**
    * Specify an optional value for the `autocomplete` property on the underlying
    * `<input>`, defaults to "off"
@@ -23,6 +25,7 @@ export interface FluidSearchProps {
    */
   className?: string;
   /**
+   * @deprecated Use `translateWithId` with the `carbon.search.clear` id instead.
    * Specify a label to be read by screen readers on the "close" button
    */
   closeButtonLabelText?: string;
@@ -100,9 +103,13 @@ FluidSearch.propTypes = {
   className: PropTypes.string,
 
   /**
+   * @deprecated Use `translateWithId` with the `carbon.search.clear` id instead.
    * Specify a label to be read by screen readers on the "close" button
    */
-  closeButtonLabelText: PropTypes.string,
+  closeButtonLabelText: deprecate(
+    PropTypes.string,
+    'The `closeButtonLabelText` prop has been deprecated. Use `translateWithId` with the `carbon.search.clear` id instead.'
+  ),
 
   /**
    * Optionally provide the default value of the `<input>`
@@ -155,6 +162,11 @@ FluidSearch.propTypes = {
    * Optional prop to specify the type of the `<input>`
    */
   type: PropTypes.string,
+
+  /**
+   * Translates component strings using your i18n tool.
+   */
+  translateWithId: PropTypes.func,
 
   /**
    * Specify the value of the `<input>`
