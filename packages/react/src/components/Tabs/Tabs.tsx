@@ -479,6 +479,13 @@ function TabList({
   const [isScrollable, setIsScrollable] = useState(false);
   const [scrollLeft, setScrollLeft] = useState<number>(0);
 
+  // In RTL mode, browsers report scrollLeft as 0 at the visual right edge
+  // and negative as content scrolls left.
+  const isRTL = useCallback(() => {
+    if (!containerRef.current) return false;
+    return getComputedStyle(containerRef.current).direction === 'rtl';
+  }, []);
+
   const hasSecondaryLabelTabs =
     contained &&
     Children.toArray(children).some(
@@ -514,20 +521,12 @@ function TabList({
     customClassName
   );
 
-  // Previous Button
-  // VISIBLE IF:
-  //   SCROLLABLE
-  //   AND SCROLL_LEFT > 0
-  //
-  // Next Button
-  // VISIBLE IF:
-  //   SCROLLABLE
-  //   AND SCROLL_LEFT + CLIENT_WIDTH < SCROLL_WIDTH
   const [isNextButtonVisible, setIsNextButtonVisible] = useState(
     ref.current
       ? scrollLeft + ref.current.clientWidth < ref.current.scrollWidth
       : false
   );
+  const [isPreviousButtonVisible, setIsPreviousButtonVisible] = useState(false);
 
   const updateOverflowState = useCallback(() => {
     if (!containerRef.current || !ref.current) {
@@ -537,17 +536,20 @@ function TabList({
     // adding 1 in calculations for Firefox support
     const hasOverflow =
       ref.current.scrollWidth > containerRef.current.clientWidth + 1;
+
+    // In RTL scrollLeft is negative; normalise to a non-negative distance
+    // from start. In LTR keep the raw value (always ≥ 0 in real browsers).
+    const normalizedScroll = isRTL()
+      ? Math.abs(ref.current.scrollLeft)
+      : ref.current.scrollLeft;
+    setIsPreviousButtonVisible(hasOverflow && normalizedScroll > 0);
     setIsNextButtonVisible(
       hasOverflow &&
-        ref.current.scrollLeft + ref.current.clientWidth + 1 <
-          ref.current.scrollWidth
+        normalizedScroll + ref.current.clientWidth + 1 < ref.current.scrollWidth
     );
     setIsScrollable(hasOverflow);
-  }, []);
+  }, [isRTL]);
 
-  const isPreviousButtonVisible = ref.current
-    ? isScrollable && scrollLeft > 0
-    : false;
   const previousButtonClasses = cx(
     `${prefix}--tab--overflow-nav-button`,
     `${prefix}--tab--overflow-nav-button--previous`,
@@ -749,34 +751,49 @@ function TabList({
   usePressable(previousButton, {
     onPress({ longPress }) {
       if (!longPress && ref.current) {
-        setScrollLeft(
-          Math.max(
-            scrollLeft - (ref.current.scrollWidth / tabs.current.length) * 1.5,
-            0
-          )
-        );
+        const step = (ref.current.scrollWidth / tabs.current.length) * 1.5;
+        if (isRTL()) {
+          setScrollLeft(Math.min(scrollLeft + step, 0));
+        } else {
+          setScrollLeft(Math.max(scrollLeft - step, 0));
+        }
       }
     },
     onLongPress() {
-      return createLongPressBehavior(ref, 'backward', setScrollLeft);
+      return createLongPressBehavior(
+        ref,
+        isRTL() ? 'forward' : 'backward',
+        setScrollLeft
+      );
     },
   });
 
   usePressable(nextButton, {
     onPress({ longPress }) {
       if (!longPress && ref.current) {
-        setScrollLeft(
-          Math.min(
-            scrollLeft + (ref.current.scrollWidth / tabs.current.length) * 1.5,
-            ref.current.scrollWidth - ref.current.clientWidth
-          )
-        );
+        const step = (ref.current.scrollWidth / tabs.current.length) * 1.5;
+        const maxScroll = ref.current.scrollWidth - ref.current.clientWidth;
+        if (isRTL()) {
+          setScrollLeft(Math.max(scrollLeft - step, -maxScroll));
+        } else {
+          setScrollLeft(Math.min(scrollLeft + step, maxScroll));
+        }
       }
     },
     onLongPress() {
-      return createLongPressBehavior(ref, 'forward', setScrollLeft);
+      return createLongPressBehavior(
+        ref,
+        isRTL() ? 'backward' : 'forward',
+        setScrollLeft
+      );
     },
   });
+
+  // In RTL, CSS swaps the buttons to opposite sides. Pick icons that always
+  // point outward from the tab list regardless of direction.
+  const rtl = isRTL();
+  const PreviousIcon = rtl ? ChevronRight : ChevronLeft;
+  const NextIcon = rtl ? ChevronLeft : ChevronRight;
 
   return (
     <div ref={containerRef} className={className}>
@@ -788,7 +805,7 @@ function TabList({
         className={previousButtonClasses}
         type="button"
         {...leftOverflowButtonProps}>
-        <ChevronLeft />
+        <PreviousIcon />
       </button>
       {/* eslint-disable-next-line jsx-a11y/interactive-supports-focus */}
       <div
@@ -827,7 +844,7 @@ function TabList({
         className={nextButtonClasses}
         type="button"
         {...rightOverflowButtonProps}>
-        <ChevronRight />
+        <NextIcon />
       </button>
     </div>
   );
