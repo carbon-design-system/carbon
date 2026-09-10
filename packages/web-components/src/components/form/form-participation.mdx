@@ -1,0 +1,97 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+import meta from './form-participation.stories';
+import * as FormParticipationStories from './form-participation.stories';
+
+<Meta of={meta} />
+
+# Form participation
+
+Preview form components participate in a `<form>` natively, through
+[`ElementInternals`](https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals),
+instead of the deprecated `formdata` event. The browser treats them as real form
+controls.
+
+> **Preview:** these tags exist to gather feedback before v3. They are removed
+> in v3, when the behavior moves onto the canonical tags.
+
+## The API change
+
+There are only two changes. Import the `next` barrel, and use the preview tag:
+
+```diff
+- import '@carbon/web-components/es/components/text-input/index.js';
++ import '@carbon/web-components/es/components/text-input/next/index.js';
+```
+
+```diff
+- <cds-text-input name="email"></cds-text-input>
++ <cds-preview-text-input name="email"></cds-preview-text-input>
+```
+
+Properties, events, slots and styling are unchanged — the preview components
+subclass the v2 components rather than reimplementing them. Child elements stay
+as they are, so a `cds-preview-select` still holds `cds-select-item` children.
+Importing a `next` barrel registers everything its v2 barrel does, so swapping
+the import is a drop-in.
+
+## What you get
+
+<Canvas of={FormParticipationStories.Default} />
+
+The form above submits with no `formdata` listener and no manual collection. The
+browser serializes it, the way it would a form of native inputs.
+
+Four things follow from being a real form control, none of which the `formdata`
+mechanism could provide.
+
+### `<label for>` associates with the control
+
+<Canvas of={FormParticipationStories.LabelAssociation} />
+
+With a v2 component, `<label for>` silently does nothing — an accessibility
+defect rather than a missing convenience.
+
+### `form.reset()` restores the control
+
+<Canvas of={FormParticipationStories.FormReset} />
+
+The default value comes from the `value` content attribute, as it does for an
+`<input>`.
+
+### A disabled `<fieldset>` excludes the value
+
+<Canvas of={FormParticipationStories.DisabledFieldset} />
+
+A v2 component inside a disabled `<fieldset>` still submits its value. That is a
+correctness bug this fixes.
+
+### `required` blocks submission
+
+<Canvas of={FormParticipationStories.RequiredValidation} />
+
+Constraint validation comes from the browser. `invalid` remains presentational —
+it styles the control without blocking submission, as it always has.
+
+## Available preview tags
+
+`cds-preview-text-input`, `cds-preview-textarea`, `cds-preview-number-input`,
+`cds-preview-password-input`, `cds-preview-checkbox`, `cds-preview-select`,
+`cds-preview-dropdown`, `cds-preview-multi-select`, `cds-preview-combo-box`,
+`cds-preview-radio-button-group`, `cds-preview-search`, `cds-preview-slider`,
+`cds-preview-time-picker`, `cds-preview-time-picker-select`,
+`cds-preview-date-picker`, and the `cds-preview-fluid-*` variants.
+
+## Notes
+
+- `disabled` reports only the element's **own** attribute, matching
+  `HTMLInputElement.disabled`. An element inside a disabled `<fieldset>` reports
+  `false` and matches `:disabled` instead.
+- `cds-preview-multi-select` keeps the v2 joined wire format (`name=a,b`) rather
+  than one entry per selection.
+- Each control also exposes the standard `form`, `labels`, `validity`,
+  `validationMessage`, `willValidate`, `checkValidity()` and `reportValidity()`
+  surface.
+
+For the full picture, including what changes when this becomes the default in
+v3, see the
+[v3 migration guide](https://github.com/carbon-design-system/carbon/blob/main/docs/guides/cwc-v3-migration.md#form-participation-moves-to-elementinternals).

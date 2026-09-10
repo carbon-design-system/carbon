@@ -2,21 +2,48 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 <Meta title="Introduction/Form participation" />
 
-# Having components participate in form
+# Having components participate in a form
 
-Though form elements in `@carbon/web-components` (e.g. `<cds-text-input>`) are
-not native form elements like `<input>`, they have some extra APIs that align
-well with web/framework standards.
+## Native form association (preview)
 
-## `formdata` event
+Preview form components associate with their `<form>` natively through
+[`ElementInternals`](https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals).
+They need no listener and no manual collection — the browser serializes them the
+way it serializes an `<input>`.
 
-Browsers supporting
-[`formdata` event](https://www.chromestatus.com/feature/5662230242656256) fire
-that event when the user clicks on `<button type="submit">` in `<form>`. Our
-form components listen to that event to add their values to the `<form>`.
+Import the `next` barrel and use the preview tag:
 
-To support other browsers, you can use a regular `<button>` and manually fire a
-custom event with the same name (`formdata`), like below:
+```diff
+- import '@carbon/web-components/es/components/text-input/index.js';
++ import '@carbon/web-components/es/components/text-input/next/index.js';
+```
+
+```diff
+- <cds-text-input name="email"></cds-text-input>
++ <cds-preview-text-input name="email"></cds-preview-text-input>
+```
+
+Everything else is unchanged. Beyond submitting a value, this also makes
+`<label for>` associate with the control, puts it in `form.elements`, restores
+it on `form.reset()`, excludes it from a disabled `<fieldset>`, and lets
+`required` block submission.
+
+See **Preview → Form participation** for runnable examples of each, and the
+[v3 migration guide](https://github.com/carbon-design-system/carbon/blob/main/docs/guides/cwc-v3-migration.md#form-participation-moves-to-elementinternals)
+for the full picture.
+
+## The `formdata` event (deprecated)
+
+The mechanism below is how the v2 components participate in a form today. It is
+deprecated in v2 and removed in v3.
+
+Browsers fire the
+[`formdata` event](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/formdata_event)
+when the user submits a `<form>`. The v2 form components listen for it and
+append their values.
+
+An application can also fire the event itself, to collect values without letting
+the form submit:
 
 ```javascript
 const form = document.querySelector('form');
@@ -30,10 +57,11 @@ button.addEventListener('click', () => {
   });
   event.formData = formData;
   form.dispatchEvent(event);
-  // `formData` is populated with the data in components such as `<cds-text-input>` or `<cds-dropdown>`, etc. in the `<form>`.
-  // You can use `formData` with `fetch()`/XHR instead of letting `<form>` submit the data
+  // `formData` is populated with the data in components such as
+  // `<cds-text-input>` or `<cds-dropdown>` in the `<form>`. You can pass it to
+  // `fetch()`/XHR instead of letting `<form>` submit.
 });
 ```
 
-Stackblitz example
-[here](https://stackblitz.com/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/stackblitz/form/basic?embed=1&file=src%2Findex.js&hideExplorer=1&hideNavigation=1&theme=light&terminalHeight=0&hidedevtools=1)
+With a preview component this is unnecessary: `new FormData(form)` already
+contains the values, because the element is a real form control.

@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { unsafeCSS, type CSSResult } from 'lit';
+
 /**
  * Form association for Carbon's form components.
  *
@@ -72,6 +74,32 @@ const FormAssociatedMixin = <T extends Constructor<HTMLElement>>(
   formValueProperties: string[];
 } & T => {
   abstract class FormAssociatedImpl extends Base {
+    /**
+     * support v12 preview tag names
+     */
+    static finalize() {
+       
+      // @ts-expect-error -- `finalize` comes from ReactiveElement.
+      const finalized = super.finalize();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const self = this as any;
+      const tag: string | undefined = self.is;
+      if (!tag?.includes('-preview-') || !Array.isArray(self.elementStyles)) {
+        return finalized;
+      }
+      const base = tag.replace('-preview-', '-');
+      self.elementStyles = self.elementStyles.map((style: CSSResult) => {
+        const css = String(style.cssText);
+        const rewritten = css.replace(
+          /:host\(([^)]*)\)/g,
+          (whole: string, arg: string) =>
+            arg.includes(base) ? `:host(${arg.split(base).join(tag)})` : whole
+        );
+        return rewritten === css ? style : unsafeCSS(rewritten);
+      });
+      return finalized;
+    }
+
     /**
      * Marks the element as a form-associated custom element.
      *
