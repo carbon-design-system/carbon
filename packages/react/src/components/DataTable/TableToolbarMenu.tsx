@@ -10,12 +10,13 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { usePrefix } from '../../internal/usePrefix';
-import OverflowMenu, { OverflowMenuProps } from '../OverflowMenu';
+import OverflowMenu from '../OverflowMenu';
+import { type OverflowMenuProps as OverflowMenuV11Props } from '../OverflowMenu/OverflowMenu';
 import { useTableToolbar } from './TableToolbar';
 
 const defaultIconDescription = 'Settings';
 
-export type TableToolbarMenuProps = OverflowMenuProps;
+export type TableToolbarMenuProps = OverflowMenuV11Props;
 
 const TableToolbarMenu = ({
   className,
