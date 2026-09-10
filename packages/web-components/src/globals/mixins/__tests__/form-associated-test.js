@@ -233,3 +233,119 @@ describe('cds-preview-multi-select', function () {
     expect(entries(form)).to.equal('');
   });
 });
+
+// test native controls for the preview components in each case and assert
+// they behvae identically
+const NATIVE_PAIRS = [
+  {
+    label: 'text input',
+    native: '<input name="native" value="orig">',
+    preview:
+      '<cds-preview-text-input name="preview" value="orig"></cds-preview-text-input>',
+    edit: (el) => {
+      el.value = 'edited';
+    },
+    submitted: 'orig',
+    comparesRequired: true,
+  },
+  {
+    label: 'checkbox',
+    native: '<input type="checkbox" name="native" value="v" checked>',
+    preview:
+      '<cds-preview-checkbox name="preview" value="v" checked></cds-preview-checkbox>',
+    edit: (el) => {
+      el.checked = false;
+    },
+    submitted: 'v',
+  },
+];
+
+describe('parity with native form controls', function () {
+  NATIVE_PAIRS.forEach(
+    ({ label, native, preview, edit, submitted, comparesRequired }) => {
+      describe(label, function () {
+        const both = (form) => [
+          form.querySelector('[name="native"]'),
+          form.querySelector('[name="preview"]'),
+        ];
+
+        it('should both take part in the form', async () => {
+          const form = await fixture(`<form>${native}${preview}</form>`);
+          const [n, p] = both(form);
+          await p.updateComplete;
+
+          expect([...form.elements]).to.include(n);
+          expect([...form.elements]).to.include(p);
+          expect(p.form).to.equal(n.form);
+          expect(entries(form)).to.equal(
+            `native=${submitted}|preview=${submitted}`
+          );
+        });
+
+        it('should both associate with a <label for>', async () => {
+          const form = await fixture(
+            `<form><label for="n" id="ln">n</label><label for="p" id="lp">p</label>` +
+              `${native.replace('<input', '<input id="n"')}` +
+              `${preview.replace('<cds-preview', '<cds-preview')}</form>`
+          );
+          const p = form.querySelector('[name="preview"]');
+          p.id = 'p';
+          await p.updateComplete;
+
+          expect(form.querySelector('#ln').control).to.equal(
+            form.querySelector('#n')
+          );
+          expect(form.querySelector('#lp').control).to.equal(p);
+        });
+
+        it('should both restore their content-attribute default on reset', async () => {
+          const form = await fixture(`<form>${native}${preview}</form>`);
+          const [n, p] = both(form);
+          await p.updateComplete;
+          edit(n);
+          edit(p);
+
+          form.reset();
+          await p.updateComplete;
+
+          expect(entries(form)).to.equal(
+            `native=${submitted}|preview=${submitted}`
+          );
+        });
+
+        it('should both report the same disabled state inside a disabled fieldset', async () => {
+          const form = await fixture(
+            `<form><fieldset disabled>${native}${preview}</fieldset></form>`
+          );
+          const [n, p] = both(form);
+          await p.updateComplete;
+
+          // `disabled` is the element's own attribute; `:disabled` is effective.
+          expect(p.disabled, 'own disabled').to.equal(n.disabled);
+          expect(p.matches(':disabled'), 'effective disabled').to.equal(
+            n.matches(':disabled')
+          );
+          expect(entries(form), 'neither is submitted').to.equal('');
+        });
+
+        it('should both block submission when required and empty', async function () {
+          if (!comparesRequired) {
+            this.skip();
+          }
+          const form = await fixture(
+            `<form><input name="native" required>` +
+              `<cds-preview-text-input name="preview" required></cds-preview-text-input></form>`
+          );
+          const [n, p] = both(form);
+          await p.updateComplete;
+
+          expect(p.checkValidity(), 'preview validity').to.equal(
+            n.checkValidity()
+          );
+          expect(p.validity.valueMissing).to.equal(n.validity.valueMissing);
+          expect(form.checkValidity()).to.be.false;
+        });
+      });
+    }
+  );
+});
