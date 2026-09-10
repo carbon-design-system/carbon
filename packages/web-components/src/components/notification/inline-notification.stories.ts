@@ -21,6 +21,7 @@ const args = {
   role: 'status',
   statusIconDescription: 'notification',
   subtitle: 'Subtitle text goes here',
+  timeout: 0,
   title: 'Notification title',
 };
 
@@ -54,6 +55,11 @@ const argTypes = {
     control: 'text',
     description: 'Specify the subtitle.',
   },
+  timeout: {
+    control: 'number',
+    description:
+      'Specify an optional duration in milliseconds before the notification closes.',
+  },
   title: {
     control: 'text',
     description: 'Specify the title.',
@@ -66,60 +72,57 @@ const argTypes = {
   },
 };
 
+const renderNotification = (args) => {
+  const {
+    kind,
+    title,
+    subtitle,
+    hideCloseButton,
+    lowContrast,
+    role,
+    statusIconDescription,
+    timeout,
+    disableClose,
+    onBeforeClose = noop,
+    onClose = noop,
+  } = args ?? {};
+  const handleBeforeClose = (event: CustomEvent) => {
+    onBeforeClose(event);
+    if (disableClose) {
+      event.preventDefault();
+    }
+  };
+  return html`
+    <cds-inline-notification
+      kind="${ifDefined(kind)}"
+      title="${ifDefined(title)}"
+      subtitle="${ifDefined(subtitle)}"
+      ?hide-close-button="${hideCloseButton}"
+      ?low-contrast="${lowContrast}"
+      role="${ifDefined(role)}"
+      status-icon-description="${ifDefined(statusIconDescription)}"
+      timeout="${ifDefined(timeout)}"
+      @cds-notification-beingclosed="${handleBeforeClose}"
+      @cds-notification-closed="${onClose}">
+    </cds-inline-notification>
+  `;
+};
+
 export const Default = {
-  render: () => {
-    return html`
-      <cds-inline-notification
-        kind="${NOTIFICATION_KIND.ERROR}"
-        title="Notification title"
-        subtitle="Subtitle text goes here">
-      </cds-inline-notification>
-    `;
+  args: {
+    kind: NOTIFICATION_KIND.ERROR,
   },
+  render: renderNotification,
 };
 
 export const Playground = {
-  args,
-  argTypes,
-  render: (args) => {
-    const {
-      kind,
-      title,
-      subtitle,
-      hideCloseButton,
-      lowContrast,
-      role,
-      statusIconDescription,
-      timeout,
-      disableClose,
-      onBeforeClose = noop,
-      onClose = noop,
-    } = args ?? {};
-    const handleBeforeClose = (event: CustomEvent) => {
-      onBeforeClose(event);
-      if (disableClose) {
-        event.preventDefault();
-      }
-    };
-    return html`
-      <cds-inline-notification
-        kind="${ifDefined(kind)}"
-        title="${ifDefined(title)}"
-        subtitle="${ifDefined(subtitle)}"
-        ?hide-close-button="${hideCloseButton}"
-        ?low-contrast="${lowContrast}"
-        role="${ifDefined(role)}"
-        status-icon-description="${ifDefined(statusIconDescription)}"
-        timeout="${ifDefined(timeout)}"
-        @cds-notification-beingclosed="${handleBeforeClose}"
-        @cds-notification-closed="${onClose}">
-      </cds-inline-notification>
-    `;
-  },
+  render: renderNotification,
 };
 
 const meta = {
   title: 'Components/Notifications/Inline',
+  args,
+  argTypes,
   parameters: {
     docs: {
       page: storyDocs,

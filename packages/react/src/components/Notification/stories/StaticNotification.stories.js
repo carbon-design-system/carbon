@@ -21,9 +21,9 @@ export default {
   },
 };
 
-export const Default = () => (
+export const Default = (args) => (
   <>
-    <StaticNotification title="StaticNotification has been renamed to Callout" />
+    <StaticNotification {...args} />
 
     <div style={{ marginLeft: '.5rem', marginTop: '2rem' }}>
       <p style={{ marginBottom: '1rem' }}>
@@ -36,3 +36,13 @@ export const Default = () => (
     </div>
   </>
 );
+
+Default.args = {
+  title: 'StaticNotification has been renamed to Callout',
+};
+
+Default.parameters = {
+  controls: {
+    include: ['title'],
+  },
+};
