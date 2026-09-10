@@ -5,18 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// Load the NotificationsPanel component styles directly for Storybook.
-// The global bundle (@carbon/styles) has this commented out while the
-// component is still in migration, so we load it explicitly here.
-@use '@carbon/styles/scss/components/notifications-panel';
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
-
-.sb-show-main,
-.docs-story {
-  /* stylelint-disable-next-line declaration-no-important */
-  background-color: $layer-01 !important;
-}
 
 // ---------------------------------------------------------------------------
 // Story layout helpers

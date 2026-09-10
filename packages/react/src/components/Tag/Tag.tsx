@@ -127,7 +127,6 @@ type TagComponent = <T extends React.ElementType = 'div'>(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
 ) => React.ReactElement | any;
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const TagBase = React.forwardRef<
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   any,
@@ -320,6 +319,8 @@ const TagBase = React.forwardRef<
     );
   }
 );
+
+TagBase.displayName = 'Tag';
 const Tag = TagBase as TagComponent;
 
 // @ts-expect-error - `propTypes` isn't typed.
