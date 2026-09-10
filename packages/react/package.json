@@ -116,7 +116,7 @@
     "stream-browserify": "^3.0.0",
     "tinyclip": "^1.0.0",
     "tsdown": "^0.22.0",
-    "typescript": "^6.0.3",
+    "typescript": "^7.0.0",
     "typescript-config-carbon": "workspace:^0.11.0",
     "use-sync-external-store": "^1.5.0",
     "vite": "^8.0.0"
