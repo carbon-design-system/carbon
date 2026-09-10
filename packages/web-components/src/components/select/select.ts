@@ -15,7 +15,7 @@ import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import FormMixin from '../../globals/mixins/form';
 import { filter } from '../../globals/internal/collection-helpers';
-import { INPUT_SIZE } from '../text-input/text-input';
+import type { INPUT_SIZE } from '../text-input/text-input';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import styles from './select.scss?lit';
 import ifNonEmpty from '../../globals/directives/if-non-empty';

@@ -13,7 +13,7 @@ import HostListenerMixin from '../../globals/mixins/host-listener';
 import { find } from '../../globals/internal/collection-helpers';
 import CDSFloatingMenuTrigger from '../floating-menu/floating-menu-trigger';
 import { OVERFLOW_MENU_SIZE } from './defs';
-import CDSOverflowMenuBody from './overflow-menu-body';
+import type CDSOverflowMenuBody from './overflow-menu-body';
 import '../menu/index';
 import CDSMenu from '../menu/menu';
 import { MENU_SIZE } from '../menu/defs';

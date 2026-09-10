@@ -12,7 +12,7 @@ import CDSFloatingMenu, {
 } from '../floating-menu/floating-menu';
 import { NAVIGATION_DIRECTION, OVERFLOW_MENU_SIZE } from './defs';
 
-import CDSOverflowMenuItem from './overflow-menu-item';
+import type CDSOverflowMenuItem from './overflow-menu-item';
 import HostListener from '../../globals/decorators/host-listener';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { html } from 'lit';

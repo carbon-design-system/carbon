@@ -20,7 +20,7 @@ import CDSInlineNotification from './inline-notification';
 import styles from './actionable-notification.scss?lit';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
-import CDSButton from '../button/button';
+import type CDSButton from '../button/button';
 
 /**
  * The default icons, keyed by notification kind.

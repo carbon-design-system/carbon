@@ -17,8 +17,8 @@ import '../radio-button';
 
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
-import CDSTableExpandedRow from './table-expanded-row';
-import CDSTableCell from './table-cell';
+import type CDSTableExpandedRow from './table-expanded-row';
+import type CDSTableCell from './table-cell';
 import { iconLoader } from '../../globals/internal/icon-loader';
 
 /**

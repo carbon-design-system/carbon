@@ -25,7 +25,7 @@ import {
   TABS_TYPE,
   TABS_SIZE,
 } from './defs';
-import CDSTab from './tab';
+import type CDSTab from './tab';
 import styles from './tabs.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 

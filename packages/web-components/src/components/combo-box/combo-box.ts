@@ -12,7 +12,7 @@ import { prefix } from '../../globals/settings';
 import Close16 from '@carbon/icons/es/close/16.js';
 import { forEach } from '../../globals/internal/collection-helpers';
 import CDSDropdown, { DROPDOWN_KEYBOARD_ACTION } from '../dropdown/dropdown';
-import CDSComboBoxItem from './combo-box-item';
+import type CDSComboBoxItem from './combo-box-item';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import styles from './combo-box.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';

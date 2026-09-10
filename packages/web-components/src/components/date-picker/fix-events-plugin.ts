@@ -9,7 +9,7 @@ import { Instance as FlatpickrInstance } from 'flatpickr/dist/types/instance';
 import { Plugin } from 'flatpickr/dist/types/options';
 import on from '../../globals/mixins/on';
 import Handle from '../../globals/internal/handle';
-import CDSDatePickerInput from './date-picker-input';
+import type CDSDatePickerInput from './date-picker-input';
 
 /**
  * The configuration for the Flatpickr plugin to fix Flatpickr's behavior of certain events.

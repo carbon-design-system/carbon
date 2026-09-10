@@ -7,7 +7,7 @@
 
 import { Instance as FlatpickrInstance } from 'flatpickr/dist/types/instance';
 import { Plugin } from 'flatpickr/dist/types/options';
-import CDSDatePicker from './date-picker';
+import type CDSDatePicker from './date-picker';
 
 /**
  * @param datePicker Plugin configuration.

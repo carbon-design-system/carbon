@@ -20,7 +20,7 @@ import '../tooltip';
 import '../tooltip/tooltip-content';
 import styles from './password-input.scss?lit';
 import CDSTextInput from '../text-input/text-input';
-import CDSTooltip from '../tooltip/tooltip';
+import type CDSTooltip from '../tooltip/tooltip';
 
 import {
   INPUT_COLOR_SCHEME,

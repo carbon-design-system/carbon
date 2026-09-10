@@ -14,7 +14,7 @@ import CDSPopover from '../popover/popover';
 import '../popover/popover-content';
 import styles from './tooltip.scss?lit';
 import popoverStyles from '../popover/popover.scss?lit';
-import CDSTooltipContent from './tooltip-content';
+import type CDSTooltipContent from './tooltip-content';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**

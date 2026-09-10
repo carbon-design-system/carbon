@@ -12,7 +12,7 @@ import { ref } from 'lit/directives/ref.js';
 import { prefix } from '../../globals/settings';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import styles from './action-set.scss?lit';
-import CDSButton from '../button/button';
+import type CDSButton from '../button/button';
 import '../button/index';
 
 const blockClass = `${prefix}--action-set`;

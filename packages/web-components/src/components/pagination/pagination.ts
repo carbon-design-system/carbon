@@ -10,7 +10,7 @@ import '../button/index';
 import { LitElement, html } from 'lit';
 import { property, query } from 'lit/decorators.js';
 
-import CDSSelect from '../select/select';
+import type CDSSelect from '../select/select';
 import CaretLeft16 from '@carbon/icons/es/caret--left/16.js';
 import CaretRight16 from '@carbon/icons/es/caret--right/16.js';
 import FocusMixin from '../../globals/mixins/focus';

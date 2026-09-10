@@ -19,7 +19,7 @@ import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import { MENU_ITEM_KIND, MENU_SIZE } from './defs';
 import { iconLoader } from '../../globals/internal/icon-loader';
-import CDSMenu from './menu';
+import type CDSMenu from './menu';
 
 export { MENU_ITEM_KIND, MENU_SIZE };
 export const MENU_CLOSE_ROOT_EVENT = `${prefix}-menu-close-root-request`;
