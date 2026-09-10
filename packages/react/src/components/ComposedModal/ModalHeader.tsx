@@ -16,8 +16,8 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Close } from '@carbon/icons-react';
 import { usePrefix } from '../../internal/usePrefix';
-import { IconButton } from '../IconButton';
 import { useId } from '../../internal/useId';
+import { ModalCloseButton } from '../Modal/ModalCloseButton';
 import { ComposedModalContext } from './ComposedModalContext';
 
 export type DivProps = Omit<HTMLAttributes<HTMLDivElement>, 'title'>;
@@ -160,19 +160,18 @@ export const ModalHeader = React.forwardRef<HTMLDivElement, ModalHeaderProps>(
         {children}
 
         <div className={`${prefix}--modal-close-button`}>
-          <IconButton
+          <ModalCloseButton
             className={closeClass}
             label={iconDescription}
             onClick={handleCloseButtonClick}
-            aria-label={iconDescription}
-            align="left">
+            aria-label={iconDescription}>
             <Close
               size={20}
               aria-hidden="true"
               tabIndex="-1"
               className={closeIconClass}
             />
-          </IconButton>
+          </ModalCloseButton>
         </div>
       </div>
     );

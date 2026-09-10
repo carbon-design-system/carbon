@@ -54,6 +54,7 @@ import {
   ModalPresenceContext,
   useExclusiveModalPresenceContext,
 } from './ModalPresence';
+import { ModalCloseButton } from './ModalCloseButton';
 import { isTopmostVisibleModal } from './isTopmostVisibleModal';
 
 export const ModalSizes = ['xs', 'sm', 'md', 'lg'] as const;
@@ -711,12 +712,11 @@ const ModalDialog = React.forwardRef(function ModalDialog(
 
   const modalButton = (
     <div className={`${prefix}--modal-close-button`}>
-      <IconButton
+      <ModalCloseButton
         className={modalCloseButtonClass}
         label={closeButtonLabel}
         onClick={onRequestClose}
         aria-label={closeButtonLabel}
-        align="left"
         ref={button}>
         <Close
           size={20}
@@ -724,7 +724,7 @@ const ModalDialog = React.forwardRef(function ModalDialog(
           tabIndex="-1"
           className={`${modalCloseButtonClass}__icon`}
         />
-      </IconButton>
+      </ModalCloseButton>
     </div>
   );
 
