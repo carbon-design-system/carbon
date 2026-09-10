@@ -118,14 +118,22 @@
 
   // readonly
   .#{$prefix}--time-picker--readonly .#{$prefix}--time-picker__input-field {
-    background-color: transparent;
+    background: transparent;
     border-block-end-color: $border-subtle;
+
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-00;
+    }
   }
 
   .#{$prefix}--time-picker--readonly .#{$prefix}--select-input {
-    background-color: transparent;
+    background: transparent;
     border-block-end-color: $border-subtle;
     cursor: default;
+
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-00;
+    }
   }
 
   .#{$prefix}--time-picker--readonly

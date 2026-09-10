@@ -32,6 +32,8 @@ import ComboBox from '../ComboBox';
 import Dropdown, { DropdownSkeleton } from '../Dropdown';
 import DatePicker, { DatePickerSkeleton } from '../DatePicker';
 import DatePickerInput from '../DatePickerInput';
+import TimePicker from '../TimePicker';
+import TimePickerSelect from '../TimePickerSelect';
 import { MultiSelect, FilterableMultiSelect } from '../MultiSelect';
 import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
@@ -286,6 +288,11 @@ export const Default = (args) => {
         </div>
         <div style={formRowStyle}>
           <div style={formColStyle}>
+            <TimePicker id="skeleton-time" labelText="Time" disabled />
+          </div>
+        </div>
+        <div style={formRowStyle}>
+          <div style={formColStyle}>
             <NumberInputSkeleton />
           </div>
           <div style={formColStyle}>
@@ -409,6 +416,36 @@ export const Default = (args) => {
                 {...sharedProps}
               />
             </DatePicker>
+          </div>
+        </div>
+
+        <div style={formRowStyle}>
+          <div style={formColStyle}>
+            <TimePicker
+              id="start-time"
+              labelText="Start time"
+              disabled={disabled}
+              readOnly={readOnly}
+              invalid={invalid}
+              invalidText={invalidText}
+              warning={warn}
+              warningText={warnText}
+              size={size}>
+              <TimePickerSelect
+                id="start-time-format"
+                labelText="AM/PM"
+                disabled={disabled}>
+                <SelectItem value="AM" text="AM" />
+                <SelectItem value="PM" text="PM" />
+              </TimePickerSelect>
+              <TimePickerSelect
+                id="start-time-zone"
+                labelText="Timezone"
+                disabled={disabled}>
+                <SelectItem value="Time zone 1" text="Time zone 1" />
+                <SelectItem value="Time zone 2" text="Time zone 2" />
+              </TimePickerSelect>
+            </TimePicker>
           </div>
         </div>
 

@@ -27,6 +27,7 @@ import '../password-input/index';
 import '../textarea/index';
 import '../button/index';
 import '../date-picker/index';
+import '../time-picker/index';
 import '../dropdown/index';
 import '../multi-select/index';
 import '../combo-box/index';
@@ -351,6 +352,14 @@ const renderDefaultForm = (args) => {
               )}
             `)}
             ${row(html`
+              ${col(html`
+                <cds-time-picker
+                  id="skeleton-time"
+                  label-text="Time"
+                  disabled></cds-time-picker>
+              `)}
+            `)}
+            ${row(html`
               ${col(
                 html`<cds-number-input-skeleton></cds-number-input-skeleton>`
               )}
@@ -519,6 +528,42 @@ const renderDefaultForm = (args) => {
                   ${decorator()} ${dateHelper('Final delivery date.')}
                 </cds-date-picker-input>
               </cds-date-picker>
+            `)}
+          `)}
+          ${row(html`
+            ${col(html`
+              <cds-time-picker
+                id="start-time"
+                label-text="Start time"
+                placeholder="hh:mm"
+                ?disabled="${disabled}"
+                ?readonly="${readOnly}"
+                ?invalid="${invalid}"
+                invalid-text="${ifDefined(invalidText)}"
+                ?warning="${warn}"
+                warning-text="${ifDefined(warnText)}"
+                size="${ifDefined(size)}">
+                <cds-time-picker-select
+                  id="start-time-format"
+                  default-value="AM"
+                  ?disabled="${disabled}"
+                  aria-label="Select AM/PM">
+                  <cds-select-item value="AM">AM</cds-select-item>
+                  <cds-select-item value="PM">PM</cds-select-item>
+                </cds-time-picker-select>
+                <cds-time-picker-select
+                  id="start-time-zone"
+                  default-value="Time zone 1"
+                  ?disabled="${disabled}"
+                  aria-label="Select timezone">
+                  <cds-select-item value="Time zone 1"
+                    >Time zone 1</cds-select-item
+                  >
+                  <cds-select-item value="Time zone 2"
+                    >Time zone 2</cds-select-item
+                  >
+                </cds-time-picker-select>
+              </cds-time-picker>
             `)}
           `)}
           ${row(html`
