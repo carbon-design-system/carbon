@@ -13,7 +13,7 @@ export default {
     }),
   ],
   // exclude snapshots from tests
-  files: ['src/components/**/__tests__/**/*.js', '!**/__snapshots__/**'],
+  files: ['src/**/__tests__/**/*.js', '!**/__snapshots__/**'],
   nodeResolve: {
     extensions: ['.js', '.ts'],
   },
