@@ -160,6 +160,76 @@ xdescribe('cds-tooltip', () => {
   });
 });
 
+// Tests for fix: cds-tooltip Escape dismissal (issue #22810)
+// Per WAI-ARIA Tooltip pattern, Escape must always dismiss regardless of closeOnActivation.
+describe('cds-tooltip keyboard interactions', () => {
+  let trigger: CDSTooltip | null;
+
+  const keyboardTemplate = () => html`
+    <div>
+      <cds-tooltip>
+        <button type="button">trigger</button>
+        <cds-tooltip-content>Tooltip text</cds-tooltip-content>
+      </cds-tooltip>
+    </div>
+  `;
+
+  beforeEach(async () => {
+    render(keyboardTemplate(), document.body);
+    await Promise.resolve();
+    trigger = document.body.querySelector('cds-tooltip');
+  });
+
+  afterEach(() => {
+    render(html``, document.body);
+  });
+
+  it('should dismiss an open tooltip on Escape regardless of closeOnActivation', async () => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    trigger!.open = true;
+    await Promise.resolve();
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    expect(trigger!.open).toBe(true);
+
+    window.dispatchEvent(
+      new KeyboardEvent('keydown', { key: 'Escape', bubbles: true })
+    );
+    await Promise.resolve();
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    expect(trigger!.open).toBe(false);
+  });
+
+  it('should NOT dismiss on Enter when closeOnActivation is false (default)', async () => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    trigger!.open = true;
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    trigger!.closeOnActivation = false;
+    await Promise.resolve();
+
+    window.dispatchEvent(
+      new KeyboardEvent('keydown', { key: 'Enter', bubbles: true })
+    );
+    await Promise.resolve();
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    expect(trigger!.open).toBe(true);
+  });
+
+  it('should dismiss on Enter when closeOnActivation is true', async () => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    trigger!.open = true;
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    trigger!.closeOnActivation = true;
+    await Promise.resolve();
+
+    window.dispatchEvent(
+      new KeyboardEvent('keydown', { key: 'Enter', bubbles: true })
+    );
+    await new Promise((r) => setTimeout(r, 400)); // leaveDelayMs default is 300ms
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    expect(trigger!.open).toBe(false);
+  });
+});
+
 describe('cds-tooltip-icon', () => {
   describe('Rendering', () => {
     xit('Should render with minimum attributes', async () => {
