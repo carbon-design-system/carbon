@@ -388,6 +388,7 @@
   }
 
   // ─── Header actions ───────────────────────────────────────────────────
+  // Actions are pinned to the top-right corner.
   .#{$prefix}--card__actions {
     position: absolute;
     display: inline-flex;
@@ -395,10 +396,23 @@
     justify-content: flex-end;
     block-size: $spacing-07;
     gap: $spacing-02;
-    inline-size: 50%;
+    inline-size: calc(50% - $spacing-03);
     inset-block-start: $spacing-03;
     inset-inline-end: $spacing-03;
-    max-inline-size: 50%;
+    max-inline-size: calc(50% - $spacing-03);
+  }
+
+  // createOverflowHandler marks overflowed items with [data-hidden].
+  .#{$prefix}--card__actions [data-hidden]:not([data-fixed]) {
+    display: none;
+  }
+
+  // The title is always full-width but its text stops exactly where the
+  // buttons start — using all available space when actions are narrow.
+  // Falls back to 50% before the first JS measurement.
+  .#{$prefix}--card__header:has(> .#{$prefix}--card__actions)
+    > .#{$prefix}--card__title {
+    padding-inline-end: var(--#{$prefix}--card--actions-width, 50%);
   }
 
   // ─── AI Label (decorator) ─────────────────────────────────────────────
@@ -425,9 +439,13 @@
     padding-inline-end: calc($spacing-07 + $spacing-05);
   }
 
+  // When both AI label and actions are present, the title must clear both.
+  // Add the decorator width + its gap on top of the measured actions width.
   .#{$prefix}--card--has-ai-label:has(.#{$prefix}--card__actions)
     .#{$prefix}--card__title {
-    padding-inline-end: $spacing-13;
+    padding-inline-end: calc(
+      var(--#{$prefix}--card--actions-width, 50%) + $spacing-07 + $spacing-03
+    );
   }
 
   .#{$prefix}--card--has-ai-label .#{$prefix}--card__label {
@@ -436,7 +454,9 @@
 
   .#{$prefix}--card--has-ai-label:has(.#{$prefix}--card__actions)
     .#{$prefix}--card__label {
-    padding-inline-end: $spacing-13;
+    padding-inline-end: calc(
+      var(--#{$prefix}--card--actions-width, 50%) + $spacing-07 + $spacing-03
+    );
   }
 
   .#{$prefix}--card--has-ai-label .#{$prefix}--card__description {
@@ -445,7 +465,9 @@
 
   .#{$prefix}--card--has-ai-label:has(.#{$prefix}--card__actions)
     .#{$prefix}--card__description {
-    padding-inline-end: $spacing-13;
+    padding-inline-end: calc(
+      var(--#{$prefix}--card--actions-width, 50%) + $spacing-07 + $spacing-03
+    );
   }
 
   .#{$prefix}--card--has-ai-label .#{$prefix}--card__actions {

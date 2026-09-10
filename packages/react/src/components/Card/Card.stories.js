@@ -26,6 +26,7 @@ import {
   View,
   Copy,
   ArrowRight,
+  Launch,
   DirectionFork,
   Time,
 } from '@carbon/icons-react';
@@ -69,7 +70,12 @@ export default {
     },
   },
   argTypes: {
-    renderFooterIcon: { table: { disable: true } },
+    renderFooterIcon: {
+      control: { type: 'select' },
+      options: ['ArrowRight', 'Launch', 'Share', 'Download'],
+      description:
+        'Icon rendered in the clickable-card footer affordance. Only has effect when `clickable` is true. Defaults to `ArrowRight`.',
+    },
     density: {
       control: { type: 'select' },
       options: ['productive', 'expressive'],
@@ -105,10 +111,6 @@ export default {
       control: { type: 'text' },
       description: 'Body copy (Card.Body children)',
     },
-    titleTruncate: {
-      control: { type: 'boolean' },
-      description: 'Truncate the title text with an ellipsis when it overflows',
-    },
     actionCount: {
       control: { type: 'number', min: 0, max: 8 },
       description:
@@ -124,9 +126,16 @@ export default {
     title: 'Card title',
     description: '',
     bodyText: 'Use the controls panel to customise this card.',
-    titleTruncate: false,
     actionCount: 0,
+    renderFooterIcon: 'ArrowRight',
   },
+};
+
+const FOOTER_ICON_MAP = {
+  ArrowRight,
+  Launch,
+  Share,
+  Download,
 };
 
 const ACTION_ICONS = [
@@ -146,13 +155,18 @@ export const Default = {
     title,
     description,
     bodyText,
-    titleTruncate,
+    titleTruncate = false,
     actionCount,
+    renderFooterIcon,
     ...cardArgs
   }) => (
     <Grid>
       <Column lg={4} md={4} sm={4}>
-        <Card {...cardArgs}>
+        <Card
+          {...cardArgs}
+          {...(cardArgs.clickable && {
+            renderFooterIcon: FOOTER_ICON_MAP[renderFooterIcon],
+          })}>
           <Card.Media ratio="16x9">
             <img src={illustration16x9} alt="" width="100%" />
           </Card.Media>
@@ -185,6 +199,7 @@ export const Default = {
 };
 
 const readonlyArgTypes = {
+  renderFooterIcon: { control: false },
   density: { control: false },
   clickable: { control: false },
   disabled: { control: false },
@@ -193,7 +208,6 @@ const readonlyArgTypes = {
   title: { control: false },
   description: { control: false },
   bodyText: { control: false },
-  titleTruncate: { control: false },
   actionCount: { control: false },
 };
 
@@ -323,19 +337,28 @@ export const Clickable = () => (
 
 Clickable.argTypes = readonlyArgTypes;
 
-export const Disabled = () => {
-  const [disabled, setDisabled] = React.useState(true);
-  return (
+export const Disabled = {
+  render: ({
+    density,
+    disabled,
+    label,
+    title,
+    description,
+    bodyText,
+    titleTruncate = false,
+  }) => (
     <Grid withRowGap>
       <Column lg={4} md={4} sm={4}>
-        <Card disabled={disabled}>
+        <Card density={density} disabled={disabled}>
           <Card.Header>
-            <Card.Title>Card Title</Card.Title>
+            <Card.Title
+              label={label || undefined}
+              description={description || undefined}
+              titleTruncate={titleTruncate}>
+              {title}
+            </Card.Title>
           </Card.Header>
-          <Card.Body>
-            When the card is disabled, pass the same state to all interactive
-            elements inside — buttons, inputs, toggles, etc.
-          </Card.Body>
+          <Card.Body>{bodyText}</Card.Body>
           <Card.Footer>
             <Card.Action>
               <Button kind="ghost" size="md" disabled={disabled}>
@@ -354,47 +377,47 @@ export const Disabled = () => {
           </Card.Footer>
         </Card>
       </Column>
-      <Column lg={4} md={4} sm={4} className="card-story-disabled-toggle">
-        <Button
-          kind="tertiary"
-          size="sm"
-          onClick={() => setDisabled((d) => !d)}>
-          {!disabled ? 'Disable Card' : 'Enable Card'}
-        </Button>
-      </Column>
     </Grid>
-  );
+  ),
+  args: {
+    disabled: true,
+  },
+  argTypes: (({
+    density,
+    disabled,
+    label,
+    title,
+    description,
+    bodyText,
+    ...rest
+  }) => rest)(readonlyArgTypes),
 };
 
-Disabled.argTypes = readonlyArgTypes;
-
-export const Minimal = () => (
-  <Grid withRowGap>
-    <Column lg={4} md={4} sm={4}>
-      <Card>
-        <Card.Body>A minimal card with just body content.</Card.Body>
-      </Card>
-    </Column>
-    <Column lg={4} md={4} sm={4}>
-      <Card>
-        <Card.Header>
-          <Card.Title>Card Title</Card.Title>
-        </Card.Header>
-        <Card.Body>
-          This is the card body content. It can contain any custom content you
-          need.
-        </Card.Body>
-        <Card.Footer>
-          <Button kind="tertiary" size="md">
-            Action
-          </Button>
-        </Card.Footer>
-      </Card>
-    </Column>
-  </Grid>
-);
-
-Minimal.argTypes = readonlyArgTypes;
+export const Minimal = {
+  render: ({ density, clickable, disabled, horizontal, bodyText }) => (
+    <Grid>
+      <Column lg={4} md={4} sm={4}>
+        <Card
+          density={density}
+          clickable={clickable}
+          disabled={disabled}
+          horizontal={horizontal}
+          {...(clickable && { 'aria-label': 'Minimal card' })}>
+          <Card.Body>{bodyText}</Card.Body>
+        </Card>
+      </Column>
+    </Grid>
+  ),
+  args: {
+    bodyText: 'Card body content.',
+  },
+  argTypes: {
+    ...readonlyArgTypes,
+    bodyText: { control: 'text' },
+    clickable: { control: 'boolean' },
+    disabled: { control: 'boolean' },
+  },
+};
 
 export const WithDensities = () => (
   <Grid withRowGap>
@@ -528,7 +551,7 @@ export const WithAILabel = () => (
           </AILabel>
         }>
         <Card.Header>
-          <Card.Title>Smart Recommendations Long title</Card.Title>
+          <Card.Title>Smart Recommendations</Card.Title>
           <Card.Actions>
             <Card.Action>
               <IconButton
@@ -677,7 +700,7 @@ export const WithHeaderActions = () => (
     <Column lg={4} md={4} sm={4}>
       <Card>
         <Card.Header>
-          <Card.Title label="Category" description="Last updated 2 hours ago">
+          <Card.Title label="Category" description="2 hours ago">
             Project dashboard
           </Card.Title>
           <Card.Actions>
@@ -789,7 +812,7 @@ export const WithHeaderActions = () => (
           <Card.Title
             label="Category"
             labelTruncate
-            description="This is a lengthy description that will be clamped to exactly two lines using multi-line truncation so you can see how it interacts with the action buttons above"
+            description="Automated daily pipeline run across three regions — results available for review"
             descriptionTruncate
             titleTruncate={2}>
             This is a very long card title that wraps across multiple lines in a
@@ -832,6 +855,9 @@ export const WithHeaderMedia = () => (
           <Card.HeaderMedia>
             <Analytics />
           </Card.HeaderMedia>
+          <Card.Title description="Real-time metrics">
+            Analytics Dashboard
+          </Card.Title>
           <Card.Actions>
             <Card.Action>
               <IconButton
@@ -858,9 +884,6 @@ export const WithHeaderMedia = () => (
               </IconButton>
             </Card.Action>
           </Card.Actions>
-          <Card.Title description="Real-time metrics">
-            Analytics Dashboard
-          </Card.Title>
         </Card.Header>
         <Card.Body>
           This card demonstrates the icon slot (first child) with action buttons
@@ -1427,66 +1450,99 @@ export const WithTitleTrailingIcon = () => (
 
 WithTitleTrailingIcon.argTypes = readonlyArgTypes;
 
-export const WithTruncatedTitle = () => (
-  <Grid withRowGap>
-    <Column lg={4} md={4} sm={4}>
-      <Card>
-        <Card.Header>
-          <Card.Title
-            titleTruncate
-            description="Single-line truncation example">
-            This is a very long title that will be truncated with an ellipsis
-            when it exceeds the maximum width
-          </Card.Title>
-        </Card.Header>
-        <Card.Body>
-          The title is truncated to a single line with an ellipsis.
-        </Card.Body>
-        <Card.Footer>
-          <Card.Action>
-            <IconButton label="Share" kind="ghost" size="md">
-              <Share />
-            </IconButton>
-          </Card.Action>
-          <Card.Action>
-            <IconButton label="Download" kind="ghost" size="md">
-              <Download />
-            </IconButton>
-          </Card.Action>
-        </Card.Footer>
-      </Card>
-    </Column>
-    <Column lg={4} md={4} sm={4}>
-      <Card>
-        <Card.Header>
-          <Card.Title
-            titleTruncate={3}
-            description="Multi-line truncation example">
-            This is a very long title that will be truncated after three lines.
-            It demonstrates the multi-line truncation feature using WebKit line
-            clamp. Any content beyond three lines will be hidden with an
-            ellipsis.
-          </Card.Title>
-        </Card.Header>
-        <Card.Body>
-          The title is truncated to three lines with an ellipsis.
-        </Card.Body>
-        <Card.Footer>
-          <div style={{ padding: '0 1rem' }}>
-            <IconIndicator kind="failed" size={16} label="Failed" />
-          </div>
-          <Card.Action>
-            <IconButton label="Retry" kind="ghost" size="md">
-              <View />
-            </IconButton>
-          </Card.Action>
-        </Card.Footer>
-      </Card>
-    </Column>
-  </Grid>
-);
-
-WithTruncatedTitle.argTypes = readonlyArgTypes;
+export const WithTruncatedTitle = {
+  render: ({
+    label,
+    title,
+    description,
+    bodyText,
+    titleTruncate,
+    labelTruncate,
+    descriptionTruncate,
+    actionCount,
+  }) => (
+    <Grid>
+      <Column lg={4} md={4} sm={4}>
+        <Card>
+          <Card.Header>
+            <Card.Title
+              label={label || undefined}
+              description={description || undefined}
+              titleTruncate={titleTruncate || false}
+              labelTruncate={labelTruncate}
+              descriptionTruncate={descriptionTruncate}>
+              {title}
+            </Card.Title>
+            {actionCount > 0 && (
+              <Card.Actions>
+                {ACTION_ICONS.slice(0, actionCount).map(
+                  ({ icon: Icon, label: iconLabel }) => (
+                    <Card.Action key={iconLabel}>
+                      <IconButton label={iconLabel} kind="ghost" size="sm">
+                        <Icon />
+                      </IconButton>
+                    </Card.Action>
+                  )
+                )}
+              </Card.Actions>
+            )}
+          </Card.Header>
+          <Card.Body>{bodyText}</Card.Body>
+          <Card.Footer>
+            <Card.Action>
+              <IconButton label="Share" kind="ghost" size="md">
+                <Share />
+              </IconButton>
+            </Card.Action>
+            <Card.Action>
+              <IconButton label="Download" kind="ghost" size="md">
+                <Download />
+              </IconButton>
+            </Card.Action>
+          </Card.Footer>
+        </Card>
+      </Column>
+    </Grid>
+  ),
+  args: {
+    label: 'Category',
+    title:
+      'A long card title that will be truncated once it exceeds the available width',
+    description: '3 regions',
+    bodyText: 'Use the controls panel to adjust truncation behavior.',
+    titleTruncate: true,
+    labelTruncate: false,
+    descriptionTruncate: false,
+    actionCount: 0,
+  },
+  argTypes: {
+    ...readonlyArgTypes,
+    label: { control: 'text' },
+    title: { control: 'text' },
+    description: { control: 'text' },
+    bodyText: { control: 'text' },
+    actionCount: {
+      control: { type: 'number', min: 0, max: 8 },
+      description:
+        'Number of icon actions to show in the header (0–8). Overflow collapses into a menu.',
+    },
+    titleTruncate: {
+      control: { type: 'select' },
+      options: [false, true, 2, 3, 4],
+      description:
+        'Truncate the title. `true` clamps to 1 line; a number clamps to that many lines.',
+    },
+    labelTruncate: {
+      control: 'boolean',
+      description: 'Truncate the label to a single line with an ellipsis.',
+    },
+    descriptionTruncate: {
+      control: 'boolean',
+      description:
+        'Truncate the description to a single line with an ellipsis.',
+    },
+  },
+};
 
 export const WithVideo = () => (
   <Grid withRowGap>
