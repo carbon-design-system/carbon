@@ -36,6 +36,12 @@ export * from './components/Breadcrumb';
 export * from './components/Button';
 export * from './components/ButtonSet';
 export * as preview__Card from './components/Card';
+// export {
+//   ConditionBuilder,
+//   getEmptyState,
+//   ConditionBuilderContext,
+// } from './components/ConditionBuilder';
+// export type { ConditionBuilderProps } from './components/ConditionBuilder';
 // TODO: uncomment in v12 — also remove from excludeProductsComponents
 // export * from './components/Coachmark';
 export * from './components/Checkbox';
