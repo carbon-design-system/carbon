@@ -11,7 +11,7 @@ import { property, query } from 'lit/decorators.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
 import styles from './popover.scss?lit';
-import type CDSPopoverContent from './popover-content';
+import CDSPopoverContent from './popover-content';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import FloatingUIController from '../../globals/controllers/floating-controller';

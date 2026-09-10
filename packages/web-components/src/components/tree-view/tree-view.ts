@@ -14,7 +14,7 @@ import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import styles from './tree-view.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-import type CDSTreeNode from './tree-node';
+import CDSTreeNode from './tree-node';
 
 export { TREE_SIZE };
 /**

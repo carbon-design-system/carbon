@@ -293,16 +293,34 @@ It ships instead under separate `cds-preview-*` tags, the same approach used by
 | `<cds-select>`             | `<cds-preview-select>`             |
 | `<cds-dropdown>`           | `<cds-preview-dropdown>`           |
 | `<cds-multi-select>`       | `<cds-preview-multi-select>`       |
+| `<cds-combo-box>`          | `<cds-preview-combo-box>`          |
 | `<cds-radio-button-group>` | `<cds-preview-radio-button-group>` |
 | `<cds-search>`             | `<cds-preview-search>`             |
 | `<cds-slider>`             | `<cds-preview-slider>`             |
+| `<cds-time-picker>`        | `<cds-preview-time-picker>`        |
+| `<cds-time-picker-select>` | `<cds-preview-time-picker-select>` |
+| `<cds-date-picker>`        | `<cds-preview-date-picker>`[^2]    |
+| `<cds-fluid-text-input>`   | `<cds-preview-fluid-text-input>`   |
+| `<cds-fluid-search>`       | `<cds-preview-fluid-search>`       |
+| `<cds-fluid-select>`       | `<cds-preview-fluid-select>`       |
+| `<cds-fluid-dropdown>`     | `<cds-preview-fluid-dropdown>`     |
+| `<cds-fluid-multi-select>` | `<cds-preview-fluid-multi-select>` |
+| `<cds-fluid-combo-box>`    | `<cds-preview-fluid-combo-box>`    |
+| `<cds-fluid-time-picker>`  | `<cds-preview-fluid-time-picker>`  |
+| `<cds-fluid-date-picker>`  | `<cds-preview-fluid-date-picker>`  |
+
+[^2]:
+    `cds-preview-date-picker` already existed as the preview of the Temporal
+    based date picker. Form association was added to it rather than introducing
+    a second preview tag, so that tag now carries both changes.
 
 Child elements are unchanged — a `<cds-preview-dropdown>` still holds v2
 `<cds-dropdown-item>` children, and `<cds-preview-radio-button-group>` still
 holds `<cds-radio-button>`. Only the container participates in the form.
 
-Not yet converted: `cds-date-picker`, `cds-time-picker`, `cds-combo-box` and the
-`cds-fluid-*` variants.
+Importing a `next` barrel registers everything its v2 barrel does — items,
+skeletons and related elements — so swapping the import is a drop-in. Only the
+form control itself gains a preview tag.
 
 Properties, events, slots and styling are unchanged — these are subclasses of
 the v2 components, not rewrites. Only form participation differs. Both versions

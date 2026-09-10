@@ -12,7 +12,7 @@ import FormMixin from '../../../../globals/mixins/form';
 import FormAssociatedMixin from '../../../../globals/mixins/form-associated';
 import HostListenerMixin from '../../../../globals/mixins/host-listener';
 import HostListener from '../../../../globals/decorators/host-listener';
-import type CDSDatePickerInput from './date-picker-input';
+import CDSDatePickerInput from './date-picker-input';
 import { WebComponentAdapter } from '../adapters/web-component-adapter.js';
 import type { StateTransition } from '@carbon/utilities/date-picker';
 import {

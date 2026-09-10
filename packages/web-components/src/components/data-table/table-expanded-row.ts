@@ -13,7 +13,7 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
-import type CDSTableRow from './table-row';
+import CDSTableRow from './table-row';
 /**
  * Table row of collapsible details.
  *

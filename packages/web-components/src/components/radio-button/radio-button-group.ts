@@ -15,7 +15,7 @@ import HostListenerMixin from '../../globals/mixins/host-listener';
 import HostListener from '../../globals/decorators/host-listener';
 import { find, forEach } from '../../globals/internal/collection-helpers';
 import { RADIO_BUTTON_LABEL_POSITION, RADIO_BUTTON_ORIENTATION } from './defs';
-import type CDSRadioButton from './radio-button';
+import CDSRadioButton from './radio-button';
 import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
 import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
 import styles from './radio-button.scss?lit';

@@ -10,7 +10,7 @@ import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import { selectorTabbable } from '../../globals/settings';
-import type CDSModalFooter from './modal-footer';
+import CDSModalFooter from './modal-footer';
 import '../inline-loading';
 
 /**

@@ -32,7 +32,7 @@ import {
   DROPDOWN_TYPE,
   NAVIGATION_DIRECTION,
 } from './defs';
-import type CDSDropdownItem from './dropdown-item';
+import CDSDropdownItem from './dropdown-item';
 import styles from './dropdown.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import CDSAILabel from '../ai-label/ai-label';

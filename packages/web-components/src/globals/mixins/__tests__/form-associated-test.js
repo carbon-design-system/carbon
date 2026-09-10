@@ -16,12 +16,23 @@ import '@carbon/web-components/es/components/radio-button/next/index.js';
 import '@carbon/web-components/es/components/search/next/index.js';
 import '@carbon/web-components/es/components/slider/next/index.js';
 import '@carbon/web-components/es/components/multi-select/next/index.js';
+import '@carbon/web-components/es/components/combo-box/next/index.js';
+import '@carbon/web-components/es/components/time-picker/next/index.js';
+import '@carbon/web-components/es/components/date-picker/next/index.js';
+import '@carbon/web-components/es/components/fluid-text-input/next/index.js';
+import '@carbon/web-components/es/components/fluid-search/next/index.js';
+import '@carbon/web-components/es/components/fluid-select/next/index.js';
+import '@carbon/web-components/es/components/fluid-dropdown/next/index.js';
+import '@carbon/web-components/es/components/fluid-combo-box/next/index.js';
+import '@carbon/web-components/es/components/fluid-multi-select/next/index.js';
+import '@carbon/web-components/es/components/fluid-time-picker/next/index.js';
+import '@carbon/web-components/es/components/fluid-date-picker/next/index.js';
 
 const entries = (form) =>
   [...new FormData(form)].map(([k, v]) => `${k}=${v}`).join('|');
 
 /**
- * All form-associated preview components must pass
+ * all form-associated preview components must pass
  */
 const TAGS = [
   { tag: 'cds-preview-text-input', value: 'v' },
@@ -33,18 +44,43 @@ const TAGS = [
   { tag: 'cds-preview-radio-button-group', value: 'v' },
   { tag: 'cds-preview-search', value: 'v' },
   { tag: 'cds-preview-slider', value: '3' },
+  {
+    tag: 'cds-preview-combo-box',
+    value: 'v',
+    children: '<cds-combo-box-item value="v">V</cds-combo-box-item>',
+  },
+  { tag: 'cds-preview-time-picker', value: 'v' },
+  { tag: 'cds-preview-time-picker-select', value: 'v' },
+  { tag: 'cds-preview-date-picker', value: 'v' },
+  { tag: 'cds-preview-fluid-text-input', value: 'v' },
+  { tag: 'cds-preview-fluid-search', value: 'v' },
+  { tag: 'cds-preview-fluid-select', value: 'v' },
+  { tag: 'cds-preview-fluid-dropdown', value: 'v' },
+  {
+    tag: 'cds-preview-fluid-combo-box',
+    value: 'v',
+    children: '<cds-combo-box-item value="v">V</cds-combo-box-item>',
+  },
+  { tag: 'cds-preview-fluid-time-picker', value: 'v' },
+  { tag: 'cds-preview-fluid-date-picker', value: 'v' },
   { tag: 'cds-preview-checkbox', value: 'v', needsChecked: true },
 ];
 
 describe('FormAssociatedMixin contract', function () {
-  TAGS.forEach(({ tag, value, needsChecked }) => {
+  TAGS.forEach(({ tag, value, needsChecked, children = '' }) => {
     describe(tag, function () {
-      const one = (attrs = '') =>
-        fixture(
+      const one = async (attrs = '') => {
+        const form = await fixture(
           `<form><${tag} name="a" value="${value}" ${
             needsChecked ? 'checked' : ''
-          } ${attrs}></${tag}></form>`
+          } ${attrs}>${children}</${tag}></form>`
         );
+        // components that resolve their value against slotted children — a
+        // combo box matching `value` to an item — settle a cycle after the
+        // fixture renders
+        await form.querySelector(tag).updateComplete;
+        return form;
+      };
 
       it('should submit its value under its name', async () => {
         const form = await one();
@@ -71,7 +107,7 @@ describe('FormAssociatedMixin contract', function () {
       it('should associate with a <label for>', async () => {
         const form = await fixture(
           `<form><label for="target" id="lbl">Label</label>` +
-            `<${tag} id="target" name="a"></${tag}></form>`
+            `<${tag} id="target" name="a">${children}</${tag}></form>`
         );
         expect(form.querySelector('#lbl').control).to.equal(
           form.querySelector(tag)
@@ -82,20 +118,20 @@ describe('FormAssociatedMixin contract', function () {
         const form = await fixture(
           `<form><fieldset disabled><${tag} name="a" value="${value}" ${
             needsChecked ? 'checked' : ''
-          }></${tag}></fieldset></form>`
+          }>${children}</${tag}></fieldset></form>`
         );
         expect(entries(form)).to.equal('');
       });
 
       it('should follow native disabled semantics inside a disabled fieldset', async () => {
         const form = await fixture(
-          `<form><fieldset id="fs" disabled><${tag} name="a"></${tag}></fieldset></form>`
+          `<form><fieldset id="fs" disabled><${tag} name="a">${children}</${tag}></fieldset></form>`
         );
         const el = form.querySelector(tag);
         await el.updateComplete;
 
-        // Native `HTMLInputElement.disabled` reports only the element's own
-        // attribute. The effective state is `:disabled`.
+        // native `HTMLInputElement.disabled` reports only the element's own
+        // attribute, effective state is `:disabled`
         expect(el.disabled, 'own disabled attribute').to.be.false;
         expect(el.matches(':disabled'), 'effective state').to.be.true;
 

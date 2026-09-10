@@ -17,7 +17,7 @@ import CDSDropdown, {
 } from '../dropdown/dropdown';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import { SELECTION_FEEDBACK_OPTION } from './defs';
-import type CDSMultiSelectItem from './multi-select-item';
+import CDSMultiSelectItem from './multi-select-item';
 import styles from './multi-select.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import HostListener from '../../globals/decorators/host-listener';

@@ -14,8 +14,8 @@ import HostListener from '../../globals/decorators/host-listener';
 import { forEach } from '../../globals/internal/collection-helpers';
 import Handle from '../../globals/internal/handle';
 import { SIDE_NAV_COLLAPSE_MODE, SIDE_NAV_USAGE_MODE } from './defs';
-import type CDSHeaderMenuButton from './header-menu-button';
-import type CDSSideNavMenu from './side-nav-menu';
+import CDSHeaderMenuButton from './header-menu-button';
+import CDSSideNavMenu from './side-nav-menu';
 import styles from './side-nav.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 

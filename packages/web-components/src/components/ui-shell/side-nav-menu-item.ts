@@ -11,7 +11,7 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
-import type CDSSideNavMenu from './side-nav-menu';
+import CDSSideNavMenu from './side-nav-menu';
 import styles from './side-nav.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 

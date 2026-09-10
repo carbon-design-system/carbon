@@ -24,7 +24,7 @@ import {
   CDSTableRow,
   CDSTableToolbarSearch,
 } from '../..';
-import type CDSTableExpandedRow from './table-expanded-row';
+import CDSTableExpandedRow from './table-expanded-row';
 
 export { TABLE_SIZE };
 

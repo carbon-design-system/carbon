@@ -19,7 +19,7 @@ import FormMixin from '../../globals/mixins/form';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import HostListener from '../../globals/decorators/host-listener';
 import { getISODateString, parseISODateString } from './iso-date';
-import type CDSDatePickerInput from './date-picker-input';
+import CDSDatePickerInput from './date-picker-input';
 import appendToPlugin from './append-to-plugin';
 import cssClassPlugin from './css-class-plugin';
 import fixEventsPlugin from './fix-events-plugin';
