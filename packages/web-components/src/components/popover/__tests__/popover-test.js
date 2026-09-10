@@ -310,6 +310,18 @@ describe('cds-popover-content', function () {
       )
     ).to.be.false;
   });
+
+  it('guards open tab tip trigger hover styles with any-hover', async () => {
+    const { styles } = customElements.get('cds-popover');
+    const cssText = Array.isArray(styles)
+      ? styles.map((style) => style.cssText || style.toString()).join('')
+      : styles.cssText || styles.toString();
+
+    expect(cssText).to.include(
+      '@media (any-hover:hover){:host([tabtip][open]) slot::slotted(.cds--popover--tab-tip__button:hover)'
+    );
+    expect(cssText).to.include('background:var(--cds-layer-hover)!important');
+  });
 });
 describe('cds-popover focusout/outsideclick', () => {
   it('does not close when clicking the trigger button', async () => {

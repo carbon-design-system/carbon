@@ -42,13 +42,10 @@ $popover-border-color: custom-property.get-var(
   theme.$border-subtle
 );
 
-:host(#{$prefix}-tooltip),
-:host(#{$prefix}-popover) {
-  ::slotted(.#{$prefix}--popover--tab-tip__button) {
-    @include popover-tab-tip-button;
+slot::slotted(.#{$prefix}--popover--tab-tip__button) {
+  @include popover-tab-tip-button;
 
-    color: theme.$icon-primary;
-  }
+  color: theme.$icon-primary;
 }
 
 :host(#{$prefix}-tooltip[highContrast]),
@@ -79,10 +76,30 @@ $popover-border-color: custom-property.get-var(
   }
 }
 
-:host(#{$prefix}-popover[tabTip][open]) {
-  ::slotted(.#{$prefix}--popover--tab-tip__button) {
+:host([tabtip][open]) {
+  slot::slotted(.#{$prefix}--popover--tab-tip__button) {
     background: theme.$layer !important; /* stylelint-disable-line declaration-no-important */
     box-shadow: 0 $spacing-01 $spacing-01 rgba(0, 0, 0, 0.2);
+  }
+
+  @media (any-hover: hover) {
+    slot::slotted(.#{$prefix}--popover--tab-tip__button:hover) {
+      background: theme.$layer-hover !important; /* stylelint-disable-line declaration-no-important */
+    }
+  }
+
+  slot::slotted(
+      button[class*='#{$prefix}--popover--tab-tip__button']:not(:focus)
+    ) {
+    &::after {
+      position: absolute;
+      z-index: z('floating') + 1;
+      background: theme.$layer;
+      block-size: 2px;
+      content: '';
+      inline-size: 100%;
+      inset-block-end: 0;
+    }
   }
 }
 
@@ -101,7 +118,7 @@ $popover-border-color: custom-property.get-var(
   }
 }
 
-:host(#{$prefix}-popover) {
+:host {
   .#{$prefix}--popover--tab-tip__button:focus-within {
     @include focus-outline('outline');
   }
@@ -113,20 +130,6 @@ $popover-border-color: custom-property.get-var(
     border-radius: 0;
   }
 }
-:host(#{$prefix}-popover[tabTip][open]) {
-  ::slotted(button[class*='#{$prefix}--popover--tab-tip__button']:not(:focus)) {
-    &::after {
-      position: absolute;
-      z-index: z('floating') + 1;
-      background: theme.$layer;
-      block-size: 2px;
-      content: '';
-      inline-size: 100%;
-      inset-block-end: 0;
-    }
-  }
-}
-
 :host(#{$prefix}-tooltip-content[open][caret]),
 :host(#{$prefix}-popover-content[open][caret]),
 :host(#{$prefix}-toggletip[open]),
