@@ -467,8 +467,21 @@ const ComposedModalDialog = React.forwardRef<
   }
 
   function closeModal(evt) {
+    const previouslyFocused =
+      document.activeElement instanceof HTMLElement &&
+      innerModal.current?.contains(document.activeElement)
+        ? document.activeElement
+        : null;
+
+    // Move focus out of the modal before aria-hidden="true" is applied on
+    // re-render, otherwise the browser will warn about aria-hidden being set
+    // on an ancestor of the focused element.
+    previouslyFocused?.blur();
+
     if (!onClose || onClose(evt) !== false) {
       setIsOpen(false);
+    } else {
+      previouslyFocused?.focus();
     }
   }
 
@@ -523,7 +536,7 @@ const ComposedModalDialog = React.forwardRef<
   );
 
   useEffect(() => {
-    if (!open) return;
+    if (!open || enableDialogElement) return;
 
     const handleEscapeKey = (event) => {
       if (
@@ -540,7 +553,7 @@ const ComposedModalDialog = React.forwardRef<
       document.removeEventListener('keydown', handleEscapeKey);
     };
     // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
-  }, [open]);
+  }, [open, enableDialogElement]);
 
   useEffect(() => {
     if (!enableDialogElement && !enablePresence && !open && launcherButtonRef) {
@@ -609,6 +622,10 @@ const ComposedModalDialog = React.forwardRef<
   const modalBody = enableDialogElement ? (
     <Dialog
       open={open}
+      onCancel={(evt) => {
+        evt.preventDefault();
+        closeModal(evt);
+      }}
       focusAfterCloseRef={launcherButtonRef}
       modal
       className={containerClass}

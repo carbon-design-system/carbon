@@ -23,6 +23,16 @@ export { default as CDSBreadcrumbItem } from './components/breadcrumb/breadcrumb
 export { default as CDSBreadcrumbLink } from './components/breadcrumb/breadcrumb-link';
 export { default as CDSBreadcrumbOverflowMenu } from './components/breadcrumb/breadcrumb-overflow-menu';
 export { default as CDSBreadcrumbSkeleton } from './components/breadcrumb/breadcrumb-skeleton';
+export { default as CDSCard } from './components/card/card';
+export { default as CDSCardAction } from './components/card/card-action';
+export { default as CDSCardActions } from './components/card/card-actions';
+export { default as CDSCardBody } from './components/card/card-body';
+export { default as CDSCardFooter } from './components/card/card-footer';
+export { default as CDSCardHeader } from './components/card/card-header';
+export { default as CDSCardHeaderMedia } from './components/card/card-header-media';
+export { default as CDSCardMedia } from './components/card/card-media';
+export { default as CDSCardTitle } from './components/card/card-title';
+export { default as CDSCardTitleMedia } from './components/card/card-title-media';
 export { default as CDSChatButton } from './components/chat-button/chat-button';
 export { default as CDSChatButtonSkeleton } from './components/chat-button/chat-button-skeleton';
 export { default as CDSCheckbox } from './components/checkbox/checkbox';
@@ -91,6 +101,10 @@ export { default as CDSActionableNotification } from './components/notification/
 export { default as CDSActionableNotificationButton } from './components/notification/actionable-notification-button';
 export { default as CDSInlineNotification } from './components/notification/inline-notification';
 export { default as CDSToastNotification } from './components/notification/toast-notification';
+// TODO: uncomment in v12 — remove from product-migrated-components.mjs too
+// export { default as CDSNotificationPanel } from './components/notification-panel/notification-panel';
+// export { default as CDSNotification } from './components/notification-panel/notification';
+// export { default as CDSNotificationFooter } from './components/notification-panel/notification-footer';
 export { default as CDSNumberInput } from './components/number-input/number-input';
 export { default as CDSNumberInputSkeleton } from './components/number-input/number-input-skeleton';
 export { default as CDSTextarea } from './components/textarea/textarea';
@@ -109,6 +123,10 @@ export { default as CDSProgressStep } from './components/progress-indicator/prog
 export { default as CDSRadioButton } from './components/radio-button/radio-button';
 export { default as CDSRadioButtonGroup } from './components/radio-button/radio-button-group';
 export { default as CDSRadioButtonSkeleton } from './components/radio-button/radio-button-skeleton';
+// export { default as CDSResizerGrid } from './components/resizer/resizer-grid';
+// export { default as CDSResizerHandle } from './components/resizer/resizer-handle';
+// export { default as CDSResizerHandlePivot } from './components/resizer/resizer-handle-pivot';
+// export { default as CDSResizerPanel } from './components/resizer/resizer-panel';
 export { default as CDSSearch } from './components/search/search';
 export { default as CDSSearchSkeleton } from './components/search/search-skeleton';
 export { default as CDSSelect } from './components/select/select';
@@ -187,3 +205,17 @@ export { default as CDSDialogSubtitle } from './components/dialog/dialog-subtitl
 export { default as CDSDialogTitle } from './components/dialog/dialog-title';
 export { default as CDSLayout } from './components/layout/layout';
 export { default as CDSLayoutConstraint } from './components/layout/layout-constraint';
+
+// TODO: uncomment in v12 — remove from product-migrated-components.mjs and excludeProductsComponents too
+// export { default as CDSCoachmark } from './components/coachmark/coachmark';
+// export { default as CDSCoachmarkHeader } from './components/coachmark/coachmark-header';
+// export { default as CDSCoachmarkBody } from './components/coachmark/coachmark-body';
+// export { default as CDSCoachmarkBeacon } from './components/coachmark/coachmark-beacon/coachmark-beacon';
+// export { default as CDSCoachmarkTagline } from './components/coachmark/coachmark-tagline/coachmark-tagline';
+// export { default as CDSTruncatedText } from './components/truncated-text/truncated-text';
+// export { default as CDSActionSet } from './components/action-set/action-set';
+// export { default as CDSEditInPlace } from './components/edit-in-place/edit-in-place';
+// export { default as CDSSidePanel } from './components/side-panel/side-panel';
+// export { default as CDSUserAvatar } from './components/user-avatar/user-avatar';
+// export { default as CDSBigNumber } from './components/big-number/big-number';
+// export { default as CDSOptionsTile } from './components/options-tile/options-tile';

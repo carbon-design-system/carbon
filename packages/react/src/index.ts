@@ -14,6 +14,22 @@ import './internal/warnAboutDeprecatedReactVersion';
 export * from './components/Accordion';
 // export { ActionSet } from './components/ActionSet';
 // export type { ActionSetProps } from './components/ActionSet';
+// export {
+//   BigNumber as preview__BigNumber,
+//   BigNumberSkeleton as preview__BigNumberSkeleton,
+// } from './components/BigNumber';
+export type { BigNumberProps as preview__BigNumberProps } from './components/BigNumber';
+// TODO: uncomment in v12 — also remove from excludeProductsComponents
+// export {
+//   Guidebanner as preview__Guidebanner,
+//   GuidebannerElement as preview__GuidebannerElement,
+//   GuidebannerElementButton as preview__GuidebannerElementButton,
+//   GuidebannerElementLink as preview__GuidebannerElementLink,
+// } from './components/Guidebanner';
+// export type { GuidebannerProps } from './components/Guidebanner';
+// export type { GuidebannerElementProps } from './components/Guidebanner';
+// export type { GuidebannerElementButtonProps } from './components/Guidebanner';
+// export type { GuidebannerElementLinkProps } from './components/Guidebanner';
 export * from './components/AccordionItem';
 export * from './components/AspectRatio';
 export * from './components/Breadcrumb';
@@ -80,6 +96,9 @@ export * from './components/Modal';
 export * from './components/ModalWrapper';
 export * from './components/MultiSelect';
 export * from './components/Notification';
+// TODO: uncomment in v12 — also remove from excludeProductsComponents
+// export { NotificationsPanel } from './components/NotificationsPanel';
+// export type { NotificationsPanelProps } from './components/NotificationsPanel';
 export * from './components/NumberInput';
 export * from './components/OrderedList';
 // TODO: uncomment in v12 — also remove from excludeProductsComponents
@@ -754,6 +773,9 @@ export type { SwitcherItemProps } from './components/UIShell/SwitcherItem';
 // export { TruncatedText } from './components/TruncatedText';
 // export type { TruncatedTextProps } from './components/TruncatedText';
 // export * from './components/UserAvatar';
+
+// TODO: uncomment in v12 — also remove from excludeProductsComponents
+// export * from './components/Tearsheet';
 
 //unordered list
 export type { UnorderedListProps } from './components/UnorderedList/UnorderedList';

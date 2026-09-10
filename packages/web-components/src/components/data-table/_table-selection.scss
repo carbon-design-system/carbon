@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2024
+// Copyright IBM Corp. 2019, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -55,11 +55,13 @@
   }
 }
 
-:host(#{$prefix}-table-row:hover) {
-  .#{$prefix}--table-column-checkbox {
-    background-color: $background-hover;
-    border-block-end-color: $layer-hover;
-    border-block-start-color: $layer-hover;
+@media (any-hover: hover) {
+  :host(#{$prefix}-table-row:hover) {
+    .#{$prefix}--table-column-checkbox {
+      background-color: $background-hover;
+      border-block-end-color: $layer-hover;
+      border-block-start-color: $layer-hover;
+    }
   }
 }
 
@@ -73,12 +75,14 @@
     color: $text-primary;
   }
 
-  &:hover {
-    ::slotted(#{$prefix}-table-cell),
-    .#{$prefix}--table-expand,
-    .#{$prefix}--table-column-checkbox {
-      background-color: $data-table-column-hover;
-      border-block-end-color: $data-table-column-hover;
+  @media (any-hover: hover) {
+    &:hover {
+      ::slotted(#{$prefix}-table-cell),
+      .#{$prefix}--table-expand,
+      .#{$prefix}--table-column-checkbox {
+        background-color: $data-table-column-hover;
+        border-block-end-color: $data-table-column-hover;
+      }
     }
   }
 }
@@ -96,8 +100,7 @@
 
   background-attachment: fixed;
 
-  &[highlighted],
-  &:hover {
+  &[highlighted] {
     @include ai-table-gradient('hover');
 
     background-attachment: fixed;
@@ -106,6 +109,20 @@
     .#{$prefix}--table-expand,
     .#{$prefix}--table-column-checkbox {
       background: none;
+    }
+  }
+
+  @media (any-hover: hover) {
+    &:hover {
+      @include ai-table-gradient('hover');
+
+      background-attachment: fixed;
+
+      ::slotted(#{$prefix}-table-cell),
+      .#{$prefix}--table-expand,
+      .#{$prefix}--table-column-checkbox {
+        background: none;
+      }
     }
   }
 

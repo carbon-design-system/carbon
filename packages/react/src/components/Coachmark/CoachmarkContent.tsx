@@ -116,8 +116,9 @@ const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
     // Handle focus management with selectorPrimaryFocus or default to close button
     useEffect(() => {
       if (open) {
-        setTimeout(() => {
-          requestAnimationFrame(() => {
+        let frame;
+        const timer = setTimeout(() => {
+          frame = requestAnimationFrame(() => {
             let elementToFocus: HTMLElement | null = null;
 
             if (selectorPrimaryFocus) {
@@ -136,6 +137,15 @@ const CoachmarkContent = forwardRef<HTMLDivElement, CoachmarkContentProps>(
             }
           });
         }, 100);
+
+        // without this the deferred focus can run after the component has
+        // unmounted, which React reports as an update outside `act(...)`
+        return () => {
+          clearTimeout(timer);
+          if (frame) {
+            cancelAnimationFrame(frame);
+          }
+        };
       }
     }, [open, selectorPrimaryFocus]);
 
