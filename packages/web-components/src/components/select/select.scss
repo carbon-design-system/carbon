@@ -10,6 +10,8 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/config' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/border-radius' as *;
+@use '@carbon/styles/scss/feature-flags' as flags;
 @use '@carbon/styles/scss/components/select';
 @use '@carbon/styles/scss/colors';
 @use '@carbon/styles/scss/utilities/convert' as *;
@@ -93,6 +95,19 @@ $divider-width: 1px;
 
     &:focus {
       background-color: transparent;
+    }
+
+    // Keep pagination selects flush with the bar. Standalone v12 Select
+    // rounded field chrome should not cascade into Pagination.
+    @if flags.enabled('enable-v12-release') {
+      border: none;
+      border-radius: $border-radius-00;
+      background: transparent;
+      border-block-end: none;
+
+      &:hover {
+        background: $layer-hover;
+      }
     }
   }
 

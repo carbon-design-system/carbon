@@ -595,9 +595,15 @@ $list-box-menu-width: convert.to-rem(300px);
     }
   }
 
-  // Allow auto-alignment to control inline placement
+  // Allow auto-alignment to control placement. Floating UI owns the v12
+  // trigger-to-menu gap via `offset()`; CSS margin on a fixed-position
+  // floating node shifts the measured box and breaks flip/hide.
   .#{$prefix}--autoalign .#{$prefix}--list-box__menu {
     inset-inline: auto;
+
+    @if enabled('enable-v12-release') {
+      margin-block: 0;
+    }
   }
 
   .#{$prefix}--list-box .#{$prefix}--list-box__field[aria-expanded='false'] {
@@ -903,9 +909,16 @@ $list-box-menu-width: convert.to-rem(300px);
     white-space: nowrap;
   }
 
-  // Dropdown top orientation modifiers
-  .#{$prefix}--list-box--up .#{$prefix}--list-box__menu {
+  // Dropdown top orientation modifiers. Skip when autoAlign is positioning
+  // the menu; `inset-block-end` would fight Floating UI's fixed placement.
+  .#{$prefix}--list-box--up:not(.#{$prefix}--autoalign)
+    .#{$prefix}--list-box__menu {
     inset-block-end: layout.size('height');
+
+    @if enabled('enable-v12-release') {
+      margin-block-end: $spacing-02;
+      margin-block-start: 0;
+    }
   }
 
   // Tweaks for descendants

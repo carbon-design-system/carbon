@@ -22,6 +22,7 @@ import {
 } from '../ListBox/test-helpers';
 import ComboBox from '../ComboBox';
 import { AILabel } from '../AILabel';
+import { FeatureFlags } from '../FeatureFlags';
 
 jest.mock('@floating-ui/react', () => ({
   ...jest.requireActual('@floating-ui/react'),
@@ -1940,6 +1941,28 @@ describe('ComboBox', () => {
     expect(floatingNode.style.left).toBe('8px');
     expect(floatingNode.style.visibility).toBe('hidden');
     expect(floatingNode.style.width).toBe('320px');
+  });
+
+  it('should use offset middleware for v12 ComboBox floating menus', () => {
+    const spy = jest.fn((options) =>
+      actualFloatingUiReact.useFloating(options)
+    );
+    useFloating.mockImplementation(spy);
+
+    render(
+      <FeatureFlags enableV12Release>
+        <ComboBox {...mockProps} autoAlign />
+      </FeatureFlags>
+    );
+
+    const options = spy.mock.calls[0][0];
+    const middlewareNames = (options.middleware ?? [])
+      .filter(Boolean)
+      .map((middleware) => middleware.name);
+
+    expect(middlewareNames).toEqual(
+      expect.arrayContaining(['offset', 'flip', 'hide'])
+    );
   });
 
   it('should expose downshift actions through `downshiftActions`', () => {

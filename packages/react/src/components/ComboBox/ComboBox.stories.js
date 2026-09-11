@@ -207,14 +207,22 @@ export const ExperimentalAutoAlign = (args) => (
       itemToString={(item) => (item ? item.text : '')}
       titleText="Label"
       helperText="Helper text"
-      autoAlign={true}
       {...args}
     />
     <div style={{ height: 800 }}></div>
   </div>
 );
 
-ExperimentalAutoAlign.argTypes = { ...sharedArgTypes };
+ExperimentalAutoAlign.argTypes = {
+  ...sharedArgTypes,
+  autoAlign: {
+    control: false,
+  },
+};
+
+ExperimentalAutoAlign.args = {
+  autoAlign: true,
+};
 
 export const _WithLayer = (args) => (
   <WithLayer>

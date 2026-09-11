@@ -7,6 +7,7 @@
 
 @use 'sass:list';
 @use '../button';
+@use '../../border-radius' as *;
 @use '../../config' as *;
 @use '../../feature-flags' as *;
 @use '../../breakpoint' as *;
@@ -336,6 +337,10 @@
     justify-content: flex-end;
     block-size: $spacing-10;
     grid-area: footer;
+
+    @if enabled('enable-v12-release') {
+      @include button.radius($border-radius-00);
+    }
   }
 
   .#{$prefix}--dialog-footer .#{$prefix}--btn {
@@ -395,6 +400,10 @@
     cursor: pointer;
     inline-size: 3rem;
     transition: background-color $duration-fast-02 motion(standard, productive);
+
+    @if enabled('enable-v12-release') {
+      @include button.radius($border-radius-00);
+    }
 
     &:hover {
       background-color: $layer-hover;

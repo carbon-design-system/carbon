@@ -21,6 +21,10 @@ import * as ButtonStories from './button.stories';
 ## Table of Contents
 
 - [Overview](#overview)
+- [Radius](#radius)
+  - [Flatten a region](#flatten-a-region)
+  - [Per-corner](#per-corner)
+  - [Nested regions](#nested-regions)
 - [Secondary Button](#secondary)
 - [Tertiary Button](#tertiary)
 - [Ghost Button](#ghost)
@@ -47,6 +51,210 @@ in a variety of ways. `Button` labels express what action will occur when the
 user interacts with it.
 
 <Canvas of={ButtonStories.Default} />
+
+## Radius
+
+Buttons in v12 default to `$border-radius-max` (fully rounded). Radius is not a
+component attribute. Any ancestor can set CSS custom properties, which inherit
+into descendant buttons through the shadow boundary.
+
+| Custom property          | Corner      |
+| ------------------------ | ----------- |
+| `--cds-button-radius`    | All corners |
+| `--cds-button-radius-ss` | Start-start |
+| `--cds-button-radius-se` | Start-end   |
+| `--cds-button-radius-es` | End-start   |
+| `--cds-button-radius-ee` | End-end     |
+
+If a per-corner property is set, it wins over `--cds-button-radius` for that
+corner. Carbon uses this so a default button can stay fully rounded while a
+button in another component uses a different token:
+
+| Context                               | Token                     |
+| ------------------------------------- | ------------------------- |
+| Default button                        | `$border-radius-max`      |
+| Data table toolbar                    | `$border-radius-00`       |
+| Pagination                            | `$border-radius-00`       |
+| Pagination nav                        | `$border-radius-00`       |
+| Modal footer                          | `$border-radius-00`       |
+| Modal close                           | `$border-radius-00`       |
+| Dialog footer                         | `$border-radius-00`       |
+| Dialog close                          | `$border-radius-00`       |
+| Button set                            | `$border-radius-00`       |
+| Action set                            | `$border-radius-00`       |
+| Breadcrumb overflow menu              | `$border-radius-00`       |
+| Side panel                            | `$border-radius-00`       |
+| Code snippet                          | `$border-radius-00`       |
+| Coachmark                             | `$border-radius-00`       |
+| Edit in place                         | `$border-radius-00`       |
+| Header                                | `$border-radius-00`       |
+| Actionable notification               | `$border-radius-00`       |
+| Card                                  | `$border-radius-00`       |
+| Contained list                        | `$border-radius-00`       |
+| Combo button (joined sides)           | `$border-radius-00`       |
+| Combo button (outer corners)          | `$border-radius-max`      |
+| AI Label footer actions               | `$border-radius-00`       |
+| AI Label last footer action (end-end) | `$border-radius-08 - 1px` |
+
+The `ss`, `se`, `es`, and `ee` suffixes are logical corners (start-start,
+start-end, end-start, end-end). They follow writing direction, so a joined
+control stays joined in RTL without extra rules.
+
+| Token                | CSS value  |
+| -------------------- | ---------- |
+| `$border-radius-00`  | `0`        |
+| `$border-radius-02`  | `0.125rem` |
+| `$border-radius-04`  | `0.25rem`  |
+| `$border-radius-08`  | `0.5rem`   |
+| `$border-radius-16`  | `1rem`     |
+| `$border-radius-24`  | `1.5rem`   |
+| `$border-radius-max` | `999999px` |
+
+<Canvas of={ButtonStories.Radius} />
+
+### Flatten a region
+
+Set `--cds-button-radius` on any ancestor. Every descendant button inherits it
+through the shadow boundary. There is no radius attribute.
+
+```css
+.my-toolbar {
+  --cds-button-radius: 0;
+}
+
+.my-icon-button {
+  --cds-button-radius: 0.25rem; /* $border-radius-04 */
+}
+```
+
+```html
+<div style="--cds-button-radius: 0">
+  <cds-button>Save</cds-button>
+</div>
+
+<div style="--cds-button-radius: 0.25rem">
+  <cds-button tooltip-text="Add">
+    <svg
+      focusable="false"
+      preserveAspectRatio="xMidYMid meet"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="currentColor"
+      slot="icon"
+      width="16"
+      height="16"
+      viewBox="0 0 32 32"
+      aria-hidden="true">
+      <path
+        d="M17 15 17 8 15 8 15 15 8 15 8 17 15 17 15 24 17 24 17 17 24 17 24 15z"></path>
+    </svg>
+  </cds-button>
+</div>
+```
+
+Component authors can set the same properties from Sass. Prefer tokens over raw
+lengths:
+
+```scss
+@use '@carbon/styles/scss/components/button';
+@use '@carbon/styles/scss/border-radius';
+
+.my-toolbar {
+  @include button.radius(border-radius.$border-radius-00);
+}
+
+.my-icon-button {
+  @include button.radius(border-radius.$border-radius-04);
+}
+```
+
+### Per-corner
+
+Per-corner properties win over `--cds-button-radius` for that corner. Use a
+rounded base and square only the joined side. Combo Button uses this pattern:
+
+```css
+.my-split-primary {
+  --cds-button-radius: 999999px; /* $border-radius-max */
+  --cds-button-radius-se: 0;
+  --cds-button-radius-ee: 0;
+}
+
+.my-split-trigger {
+  --cds-button-radius: 999999px;
+  --cds-button-radius-ss: 0;
+  --cds-button-radius-es: 0;
+}
+```
+
+```scss
+@use '@carbon/styles/scss/components/button';
+@use '@carbon/styles/scss/border-radius';
+
+.my-split-primary {
+  @include button.radius(
+    border-radius.$border-radius-max,
+    $se: border-radius.$border-radius-00,
+    $ee: border-radius.$border-radius-00
+  );
+}
+
+.my-split-trigger {
+  @include button.radius(
+    border-radius.$border-radius-max,
+    $ss: border-radius.$border-radius-00,
+    $es: border-radius.$border-radius-00
+  );
+}
+```
+
+You can also omit the base and set only the corners that differ. Carbon's AI
+Label footer squares every action, then rounds the last action's end-end corner
+so it follows the container:
+
+```scss
+.my-dialog-footer {
+  @include button.radius(border-radius.$border-radius-00);
+}
+
+.my-dialog-footer > :last-child {
+  @include button.radius($ee: calc(#{border-radius.$border-radius-08} - 1px));
+}
+```
+
+### Nested regions
+
+A nested container can opt a subset of buttons back to a different radius.
+Setting the base property is enough when the ancestor did not set per-corner
+properties:
+
+```css
+.my-page {
+  --cds-button-radius: 0;
+}
+
+.my-page .my-hero {
+  --cds-button-radius: 999999px;
+}
+```
+
+```scss
+.my-page {
+  @include button.radius(border-radius.$border-radius-00);
+}
+
+.my-page .my-hero {
+  @include button.radius(border-radius.$border-radius-max);
+}
+```
+
+Per-corner properties inherit independently. If an ancestor sets
+`--cds-button-radius-ee`, a descendant that only sets `--cds-button-radius`
+still uses the inherited end-end value. Set that per-corner property on the
+descendant when you need to change that corner.
+
+Opt in during v11 with the `enable-v12-release` Sass flag. The custom properties
+work without the flag; the flag changes the default fallback from `0` to
+`$border-radius-max` and applies Carbon's context overrides.
 
 ## Danger Button
 

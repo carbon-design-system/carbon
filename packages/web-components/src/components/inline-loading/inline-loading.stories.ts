@@ -7,6 +7,7 @@
 
 import { html } from 'lit';
 import { INLINE_LOADING_STATE } from './inline-loading';
+import '../button/index';
 
 const states = {
   [`${INLINE_LOADING_STATE.INACTIVE}`]: INLINE_LOADING_STATE.INACTIVE,
@@ -61,7 +62,8 @@ export const UxExample = {
   args: defaultArgs,
   argTypes: getControls({ disableControl: true }),
   decorators: [
-    (story) => html`<div style="display:flex;width:300px">${story()}</div>`,
+    (story) =>
+      html`<cds-button-set style="width:300px">${story()}</cds-button-set>`,
   ],
   render: ({ onSuccess = noop }) => {
     const onSubmit = () => {

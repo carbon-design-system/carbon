@@ -9,7 +9,7 @@ import React, { useEffect, useRef, type ElementType } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { OverflowMenuVertical } from '@carbon/icons-react';
-import { useFloating, flip, autoUpdate } from '@floating-ui/react';
+import { useFloating, flip, autoUpdate, offset } from '@floating-ui/react';
 import { useFeatureFlag } from '../../FeatureFlags';
 
 import { IconButton } from '../../IconButton';
@@ -92,6 +92,7 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
     },
     forwardRef
   ) => {
+    const enableV12Release = useFeatureFlag('enable-v12-release');
     const enableFloatingStyles =
       useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
 
@@ -112,15 +113,25 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
             // initial `placement` computation and eventual return of data for
             // rendering. Each middleware is executed in order.
             middleware: [
-              autoAlign &&
-                flip({
-                  // An explicit array of placements to try if the initial
-                  // `placement` doesn’t fit on the axes in which overflow
-                  // is checked.
-                  fallbackPlacements: menuAlignment.includes('bottom')
-                    ? ['bottom-start', 'bottom-end', 'top-start', 'top-end']
-                    : ['top-start', 'top-end', 'bottom-start', 'bottom-end'],
-                }),
+              // $spacing-02 gap between the trigger and the menu
+              ...(enableV12Release ? [offset(4)] : []),
+              ...(autoAlign
+                ? [
+                    flip({
+                      // An explicit array of placements to try if the initial
+                      // `placement` doesn’t fit on the axes in which overflow
+                      // is checked.
+                      fallbackPlacements: menuAlignment.includes('bottom')
+                        ? ['bottom-start', 'bottom-end', 'top-start', 'top-end']
+                        : [
+                            'top-start',
+                            'top-end',
+                            'bottom-start',
+                            'bottom-end',
+                          ],
+                    }),
+                  ]
+                : []),
             ],
             whileElementsMounted: autoUpdate,
           }

@@ -9,9 +9,12 @@
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/border-radius' as *;
+@use '@carbon/styles/scss/feature-flags' as flags;
 @use '@carbon/styles/scss/utilities/convert' as *;
 @use '@carbon/styles/scss/utilities/layout' as *;
 @use '@carbon/styles/scss/utilities/ai-gradient' as *;
+@use '@carbon/styles/scss/components/button/radius' as button;
 @use '@carbon/styles/scss/components/slug/index' as *;
 
 :host(#{$prefix}-ai-label) {
@@ -51,6 +54,17 @@
     inline-size: 100%;
     inset-block-end: 0;
     inset-inline-end: 0;
+  }
+
+  @if flags.enabled('enable-v12-release') {
+    ::slotted([slot='actions']) {
+      @include button.radius($border-radius-00);
+    }
+
+    ::slotted([slot='actions']:last-child),
+    ::slotted([kind='primary']) {
+      @include button.radius($ee: calc(#{$border-radius-08} - 1px));
+    }
   }
 
   .#{$prefix}--toggletip-content {
@@ -111,11 +125,24 @@
 
 :host(#{$prefix}-ai-label-action-button) {
   @include emit-layout-tokens();
+
+  display: inline-flex;
+
+  .#{$prefix}--btn {
+    flex-grow: 1;
+    max-inline-size: 100%;
+  }
+
   .#{$prefix}--btn--primary {
     order: 1;
-    border-end-end-radius: to-rem(7px);
+
+    @if not flags.enabled('enable-v12-release') {
+      border-end-end-radius: to-rem(7px);
+    }
   }
 }
+
+@include emit-layout-tokens-to-shadow-host('#{$prefix}-ai-label-action-button');
 
 :host(
     #{$prefix}-ai-label[kind='inline']:not([size='md']):not([size='lg']):not(

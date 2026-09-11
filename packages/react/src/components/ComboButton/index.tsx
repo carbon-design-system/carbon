@@ -19,8 +19,9 @@ import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import {
   autoUpdate,
   flip,
-  size as floatingSize,
   hide,
+  offset,
+  size as floatingSize,
   useFloating,
   type Middleware,
 } from '@floating-ui/react';
@@ -105,20 +106,16 @@ const ComboButton = React.forwardRef<HTMLDivElement, ComboButtonProps>(
     },
     forwardRef
   ) {
-    // feature flag utilized to separate out only the dynamic styles from @floating-ui
-    // flag is turned on when collision detection (ie. flip, hide) logic is not desired
-    const enableOnlyFloatingStyles = useFeatureFlag(
-      'enable-v12-dynamic-floating-styles'
-    );
+    const enableV12Release = useFeatureFlag('enable-v12-release');
 
     const id = useId('combobutton');
     const prefix = usePrefix();
     const containerRef = useRef<HTMLDivElement>(null);
-    const middlewares: Middleware[] = [];
-
-    if (!enableOnlyFloatingStyles) {
-      middlewares.push(flip({ crossAxis: false }), hide());
-    }
+    const middlewares: Middleware[] = [
+      ...(enableV12Release ? [offset(4)] : []),
+      flip({ crossAxis: false }),
+      hide(),
+    ];
 
     if (menuAlignment === 'bottom' || menuAlignment === 'top') {
       middlewares.push(
@@ -207,7 +204,6 @@ const ComboButton = React.forwardRef<HTMLDivElement, ComboButtonProps>(
           </Button>
         </div>
         <IconButton
-          ref={refs.setReference}
           className={triggerClasses}
           label={t('carbon.combo-button.additional-actions')}
           size={size}
@@ -226,6 +222,7 @@ const ComboButton = React.forwardRef<HTMLDivElement, ComboButtonProps>(
           className={menuClasses}
           ref={refs.setFloating}
           id={id}
+          legacyAutoalign={false}
           label={t('carbon.combo-button.additional-actions')}
           size={size}
           open={open}
