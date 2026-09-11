@@ -198,6 +198,7 @@ export const StaticOptionsTile = {
 const meta: Meta = {
   title: 'Components/OptionsTile',
   component: 'cds-options-tile',
+  tags: ['ibm-products-migrated'],
 };
 
 export default meta;
