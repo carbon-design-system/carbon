@@ -306,7 +306,7 @@ describe('DatePicker', () => {
 
   it('should respect parseDate prop', async () => {
     const parseDate = jest.fn();
-    parseDate.mockReturnValueOnce(new Date('1989/01/20'));
+    parseDate.mockReturnValue(new Date('1989/01/20'));
     render(
       <DatePicker
         onChange={() => {}}
@@ -325,6 +325,137 @@ describe('DatePicker', () => {
       '01/20/1989{enter}'
     );
     expect(parseDate).toHaveBeenCalled();
+  });
+
+  it('should call onChange when a complete valid date is typed', async () => {
+    const onChange = jest.fn();
+    render(
+      <DatePicker onChange={onChange} datePickerType="single">
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="mm/dd/yyyy"
+          labelText="Date Picker label"
+        />
+      </DatePicker>
+    );
+
+    const input = screen.getByLabelText('Date Picker label');
+    await userEvent.type(input, '01/20/1989');
+
+    expect(onChange).toHaveBeenCalledTimes(1);
+    expect(onChange.mock.calls[0][0][0]).toEqual(new Date('1989/01/20'));
+    expect(onChange.mock.calls[0][1]).toBe('01/20/1989');
+
+    fireEvent.blur(input);
+    expect(onChange).toHaveBeenCalledTimes(1);
+  });
+
+  it('should call onChange when a previously typed date is typed after selecting another date', async () => {
+    const onChange = jest.fn();
+    const ref = createRef();
+    render(
+      <DatePicker ref={ref} onChange={onChange} datePickerType="single">
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="mm/dd/yyyy"
+          labelText="Date Picker label"
+        />
+      </DatePicker>
+    );
+
+    const input = screen.getByLabelText('Date Picker label');
+    await userEvent.type(input, '01/23/1989');
+
+    expect(onChange).toHaveBeenCalledTimes(1);
+    expect(onChange.mock.calls[0][1]).toBe('01/23/1989');
+
+    ref.current.calendar.setDate('01/24/1989', true, 'm/d/Y');
+
+    expect(onChange).toHaveBeenCalledTimes(2);
+    expect(onChange.mock.calls[1][1]).toBe('01/24/1989');
+
+    fireEvent.input(input, {
+      target: {
+        value: '01/23/1989',
+      },
+    });
+
+    expect(onChange).toHaveBeenCalledTimes(3);
+    expect(onChange.mock.calls[2][0][0]).toEqual(new Date('1989/01/23'));
+    expect(onChange.mock.calls[2][1]).toBe('01/23/1989');
+  });
+
+  it('should call onChange when a complete valid custom format date is typed', async () => {
+    const onChange = jest.fn();
+    render(
+      <DatePicker
+        onChange={onChange}
+        datePickerType="single"
+        dateFormat="d.m.Y">
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="dd.mm.yyyy"
+          labelText="Date Picker label"
+        />
+      </DatePicker>
+    );
+
+    await userEvent.type(
+      screen.getByLabelText('Date Picker label'),
+      '20.01.1989'
+    );
+
+    expect(onChange).toHaveBeenCalledTimes(1);
+    expect(onChange.mock.calls[0][0][0]).toEqual(new Date('1989/01/20'));
+    expect(onChange.mock.calls[0][1]).toBe('20.01.1989');
+  });
+
+  it('should call onChange when a complete valid variable-width custom format date is typed', async () => {
+    const onChange = jest.fn();
+    render(
+      <DatePicker
+        onChange={onChange}
+        datePickerType="single"
+        dateFormat="n/j/Y">
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="m/d/yyyy"
+          labelText="Date Picker label"
+        />
+      </DatePicker>
+    );
+
+    await userEvent.type(
+      screen.getByLabelText('Date Picker label'),
+      '1/2/1989'
+    );
+
+    expect(onChange).toHaveBeenCalledTimes(1);
+    expect(onChange.mock.calls[0][0][0]).toEqual(new Date('1989/01/02'));
+    expect(onChange.mock.calls[0][1]).toBe('1/2/1989');
+  });
+
+  it('should not call onChange for invalid typed custom format dates', async () => {
+    const onChange = jest.fn();
+    render(
+      <DatePicker
+        onChange={onChange}
+        datePickerType="single"
+        dateFormat="d/m/Y">
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="dd/mm/yyyy"
+          labelText="Date Picker label"
+        />
+      </DatePicker>
+    );
+
+    await userEvent.type(
+      screen.getByLabelText('Date Picker label'),
+      '34/34/3434'
+    );
+
+    expect(onChange).not.toHaveBeenCalled();
   });
 
   it('invalid date month/day is correctly parsed when using the default format', async () => {
