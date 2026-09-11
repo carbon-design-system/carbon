@@ -2168,7 +2168,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/ibm-products@npm:latest":
+"@carbon/ibm-products@npm:2.98.0":
   version: 2.98.0
   resolution: "@carbon/ibm-products@npm:2.98.0"
   dependencies:
@@ -2351,7 +2351,6 @@ __metadata:
     "@babel/preset-typescript": "npm:^8.0.0"
     "@babel/runtime": "npm:^8.0.0"
     "@carbon/feature-flags": "npm:^1.9.0"
-    "@carbon/ibm-products": "npm:latest"
     "@carbon/icons-react": "npm:^11.88.0"
     "@carbon/layout": "npm:^11.59.0"
     "@carbon/motion": "npm:^11.52.0"
@@ -10000,6 +9999,7 @@ __metadata:
     "@babel/preset-react": "npm:^8.0.0"
     "@babel/runtime": "npm:^8.0.0"
     "@carbon/cli": "workspace:packages/cli"
+    "@carbon/ibm-products": "npm:2.98.0"
     "@commitlint/cli": "npm:^21.0.0"
     "@commitlint/config-conventional": "npm:^21.0.0"
     "@eslint/compat": "npm:^2.0.1"
