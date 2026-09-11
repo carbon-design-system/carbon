@@ -7,6 +7,7 @@
 
 import type { StorybookConfig } from '@storybook/react-vite';
 
+import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import remarkGfm from 'remark-gfm';
@@ -123,10 +124,17 @@ const config: StorybookConfig = {
       ],
       resolve: {
         preserveSymlinks: true,
-        alias: {
-          '~@ibm/plex': '@ibm/plex',
-          '~@ibm/plex/': '@ibm/plex/',
-        },
+        alias: [
+          { find: /^~@ibm\/plex\//, replacement: '@ibm/plex/' },
+          { find: /^~@ibm\/plex$/, replacement: '@ibm/plex' },
+          {
+            find: /^@carbon\/ibm-products-styles\//,
+            replacement: path.resolve(
+              configDir,
+              '../../../node_modules/@carbon/ibm-products-styles/'
+            ),
+          },
+        ],
       },
       build: {
         rollupOptions: {
