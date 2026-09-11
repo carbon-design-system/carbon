@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2025
+// Copyright IBM Corp. 2019, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -7,7 +7,9 @@
 
 $css--plex: true !default;
 
+@use '@carbon/styles/scss/border-radius' as *;
 @use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/feature-flags' as flags;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/utilities/convert' as *;
 @use '@carbon/styles/scss/utilities' as *;
@@ -22,7 +24,14 @@ $css--plex: true !default;
 
 :host(#{$prefix}-time-picker-select) {
   @extend .#{$prefix}--select;
-  @extend .#{$prefix}--time-picker__select;
+
+  justify-content: center;
+
+  @if flags.enabled('enable-v12-release') {
+    margin-inline-start: convert.to-rem(1px);
+  } @else {
+    margin-inline-start: $spacing-01;
+  }
 }
 
 :host(#{$prefix}-time-picker-select) .#{$prefix}--select {
@@ -47,4 +56,34 @@ $css--plex: true !default;
   line-height: 1;
   min-inline-size: auto;
   padding-inline-end: convert.to-rem(48px);
+}
+
+@if flags.enabled('enable-v12-release') {
+  :host(#{$prefix}-time-picker) {
+    .#{$prefix}--time-picker__input-field {
+      border-end-end-radius: $border-radius-00;
+      border-inline-end: none;
+      border-start-end-radius: $border-radius-00;
+    }
+
+    ::slotted(#{$prefix}-time-picker-select:not(:last-of-type)) {
+      --#{$prefix}-time-picker-join-end-radius: #{$border-radius-00};
+      --#{$prefix}-time-picker-join-end-width: 0;
+    }
+  }
+
+  :host(#{$prefix}-time-picker-select) .#{$prefix}--select-input {
+    border-end-end-radius: var(
+      --#{$prefix}-time-picker-join-end-radius,
+      #{$border-radius-04}
+    );
+    border-end-start-radius: $border-radius-00;
+    border-inline-end-width: var(--#{$prefix}-time-picker-join-end-width, 1px);
+    border-inline-start: none;
+    border-start-end-radius: var(
+      --#{$prefix}-time-picker-join-end-radius,
+      #{$border-radius-04}
+    );
+    border-start-start-radius: $border-radius-00;
+  }
 }
