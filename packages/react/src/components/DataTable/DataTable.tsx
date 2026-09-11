@@ -396,11 +396,13 @@ export const DataTable = <RowType, ColTypes extends any[]>(
     const hasRowsChanged = !isEqual(rows, currentRows);
 
     if (hasRowIdsChanged || hasHeadersChanged || hasRowsChanged) {
-      // queueMicrotask defers the setState until after the current
-      // flushSync/commitRoot call stack has fully unwound, preventing
-      // nestedUpdateCount from being incremented inside flushPassiveEffects
-      // and avoiding the React 19 "Maximum update depth exceeded" crash when
-      // many DataTable instances mount simultaneously inside a flushSync call.
+      // queueMicrotask defers the setState until after the current passive
+      // effects flush completes. Without this, a setState call inside
+      // flushPassiveEffects increments React 19's nestedPassiveUpdateCount.
+      // When many DataTable instances update in the same flush this can
+      // accumulate and exceed the limit of 50, throwing "Maximum update
+      // depth exceeded". Deferring via queueMicrotask keeps every setState
+      // in its own independent scheduler cycle.
       queueMicrotask(() =>
         setState((prev) => getDerivedStateFromProps(props, prev))
       );
