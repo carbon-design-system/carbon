@@ -174,8 +174,10 @@ $css--plex: true !default;
   cursor: default;
   transition: max-height $duration-moderate-01 motion(standard, productive);
 
-  &:hover {
-    background-color: $layer;
+  @media (any-hover: hover) {
+    &:hover {
+      background-color: $layer;
+    }
   }
 
   &:focus {
@@ -238,8 +240,10 @@ $css--plex: true !default;
   transition: inset-inline-end $duration-fast-02 motion(standard, productive);
 }
 
-:host(#{$prefix}-expandable-tile[ai-label]):hover {
-  @include ai-popover-gradient('default', 0, 'layer');
+@media (any-hover: hover) {
+  :host(#{$prefix}-expandable-tile[ai-label]):hover {
+    @include ai-popover-gradient('default', 0, 'layer');
+  }
 }
 
 :host(#{$prefix}-radio-tile[ai-label]) .#{$prefix}--tile::before,
@@ -266,10 +270,12 @@ $css--plex: true !default;
   box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow;
 }
 
-:host(#{$prefix}-radio-tile[ai-label]) .#{$prefix}--tile:hover::before,
-:host(#{$prefix}-selectable-tile[ai-label]) .#{$prefix}--tile:hover::before,
-:host(#{$prefix}-clickable-tile[ai-label]) .#{$prefix}--tile:hover::before {
-  opacity: 1;
+@media (any-hover: hover) {
+  :host(#{$prefix}-radio-tile[ai-label]) .#{$prefix}--tile:hover::before,
+  :host(#{$prefix}-selectable-tile[ai-label]) .#{$prefix}--tile:hover::before,
+  :host(#{$prefix}-clickable-tile[ai-label]) .#{$prefix}--tile:hover::before {
+    opacity: 1;
+  }
 }
 
 :host(#{$prefix}-radio-tile[ai-label]) .#{$prefix}--tile--is-selected,
