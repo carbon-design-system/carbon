@@ -14,8 +14,8 @@
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/utilities/hide-at-breakpoint' as *;
 @use '@carbon/styles/scss/config' as carbon-config;
-@use '@carbon/ibm-products/scss/components/Tearsheet';
-@use '@carbon/ibm-products/scss/components/EmptyStates';
+@use '@carbon/ibm-products-styles/scss/components/Tearsheet';
+@use '@carbon/ibm-products-styles/scss/components/EmptyStates';
 
 // CreateTearsheet uses the following IBM Products components:
 // TearsheetShell

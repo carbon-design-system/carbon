@@ -8,7 +8,6 @@
 import type { StorybookConfig } from '@storybook/react-vite';
 
 import { fileURLToPath } from 'node:url';
-import path from 'node:path';
 
 import remarkGfm from 'remark-gfm';
 import glob from 'fast-glob';
@@ -124,20 +123,10 @@ const config: StorybookConfig = {
       ],
       resolve: {
         preserveSymlinks: true,
-        alias: [
-          { find: /^~@ibm\/plex\//, replacement: '@ibm/plex/' },
-          { find: /^~@ibm\/plex$/, replacement: '@ibm/plex' },
-          // Redirect @carbon/ibm-products SCSS imports to the copy installed
-          // at the monorepo root so the Sass resolver always finds it,
-          // regardless of where in the workspace the build is invoked.
-          {
-            find: /^@carbon\/ibm-products\//,
-            replacement: path.resolve(
-              configDir,
-              '../../../node_modules/@carbon/ibm-products/'
-            ),
-          },
-        ],
+        alias: {
+          '~@ibm/plex': '@ibm/plex',
+          '~@ibm/plex/': '@ibm/plex/',
+        },
       },
       build: {
         rollupOptions: {

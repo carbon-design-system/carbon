@@ -2146,7 +2146,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/ibm-products-styles@npm:^2.94.0":
+"@carbon/ibm-products-styles@npm:2.94.0, @carbon/ibm-products-styles@npm:^2.94.0":
   version: 2.94.0
   resolution: "@carbon/ibm-products-styles@npm:2.94.0"
   dependencies:
@@ -2344,6 +2344,7 @@ __metadata:
     "@babel/preset-typescript": "npm:^8.0.0"
     "@babel/runtime": "npm:^8.0.0"
     "@carbon/feature-flags": "npm:^1.9.0"
+    "@carbon/ibm-products-styles": "npm:2.94.0"
     "@carbon/icons-react": "npm:^11.88.0"
     "@carbon/layout": "npm:^11.59.0"
     "@carbon/motion": "npm:^11.52.0"

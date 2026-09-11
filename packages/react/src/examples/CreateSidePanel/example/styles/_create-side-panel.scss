@@ -8,7 +8,7 @@
 @use '@carbon/styles/scss/config' as carbon-config;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
-@use '@carbon/ibm-products/scss/components/SidePanel';
+@use '@carbon/ibm-products-styles/scss/components/SidePanel';
 
 .create-side-panel__form-title {
   @include type.type-style('heading-compact-02');
