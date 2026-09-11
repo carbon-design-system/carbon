@@ -61,6 +61,80 @@ import {
 
 [![Edit react-patterns](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/react/src/examples/DeleteAndRemove/example)
 
+### Example
+
+Here's a quick example of high impact deletion to get you started.
+
+```jsx
+export const HighImpactDeletion = () => {
+  const [open, setOpen] = useState(false);
+  const [loadingStatus, setLoadingStatus] = useState('inactive');
+  const [loaderDescription, setLoaderDescription] = useState('Deleting');
+  const [resourceName, setResourceName] = useState('');
+  const [isValidName, setIsValidName] = useState(false);
+
+  const handleDelete = async () => {
+    setLoadingStatus('active');
+    await deleteItem();
+    setLoadingStatus('finished');
+    setLoaderDescription('Deleted!');
+    setOpen(false);
+  };
+
+  const validateInput = (evt) => {
+    setResourceName(evt.target.value);
+    setIsValidName(evt.target.value === 'Bx1001');
+  };
+
+  const resetLoaderStatus = () => {
+    setLoadingStatus('inactive');
+    setLoaderDescription('Deleting...');
+  };
+
+  return (
+    <div>
+      <Button
+        size="md"
+        kind="danger"
+        onClick={() => {
+          setResourceName('');
+          setOpen(true);
+        }}
+      >
+        Delete
+      </Button>
+      <Modal
+        open={open}
+        danger
+        modalHeading="Confirm delete"
+        modalLabel="Delete Bx1001"
+        primaryButtonText="Delete"
+        secondaryButtonText="Cancel"
+        primaryButtonDisabled={!isValidName}
+        loadingStatus={loadingStatus}
+        loadingDescription={loaderDescription}
+        onRequestClose={() => setOpen(false)}
+        onRequestSubmit={handleDelete}
+        onLoadingSuccess={resetLoaderStatus}
+      >
+        <p style={{ marginBottom: '1rem' }}>
+          Deleting &apos;Bx1001&apos; will permanently delete the
+          configuration. This action cannot be undone.
+        </p>
+        <TextInput
+          data-modal-primary-focus
+          id="text-input-1"
+          labelText="Type Bx1001 to confirm"
+          placeholder="Name of resource"
+          value={resourceName}
+          onChange={validateInput}
+        />
+      </Modal>
+    </div>
+  );
+};
+```
+
 ## High impact deletion
 
 When deleting is high-impact, a confirmation dialog should be presented to the

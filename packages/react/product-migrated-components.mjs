@@ -30,6 +30,16 @@ export const productMigratedStoryGlobs = [
   // Pattern examples migrated from ibm-products
   '../src/examples/DeleteAndRemove/DeleteAndRemove.stories.js',
   '../src/examples/DeleteAndRemove/DeleteAndRemove.mdx',
+  '../src/examples/CreateFullPage/CreateFullPage.stories.js',
+  '../src/examples/CreateFullPage/CreateFullPage.mdx',
+  '../src/examples/CreateModal/CreateModal.stories.js',
+  '../src/examples/CreateModal/CreateModal.mdx',
+  '../src/examples/CreateSidePanel/CreateSidePanel.stories.js',
+  '../src/examples/CreateSidePanel/CreateSidePanel.mdx',
+  '../src/examples/CreateTearsheet/CreateTearsheet.stories.js',
+  '../src/examples/CreateTearsheet/CreateTearsheet.mdx',
+  '../src/examples/CreateTearsheetNarrow/CreateTearsheet.stories.js',
+  '../src/examples/CreateTearsheetNarrow/CreateTearsheet.mdx',
 ];
 
 /**

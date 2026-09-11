@@ -1,5 +1,5 @@
 {
-  "name": "delete-and-remove-example",
+  "name": "create-modal-example",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -11,8 +11,7 @@
   "dependencies": {
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "@carbon/react": "latest",
-    "@carbon/ibm-products": "latest"
+    "@carbon/react": "latest"
   },
   "devDependencies": {
     "@types/react": "^19.1.8",
