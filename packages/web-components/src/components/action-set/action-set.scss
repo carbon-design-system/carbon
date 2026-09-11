@@ -14,6 +14,10 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/button/tokens' as button-tokens;
 @use '@carbon/styles/scss/utilities/convert' as *;
 @use '../button/button';
+@use '@carbon/styles/scss/components/action-set' as action-set-styles;
+
+// Emit global .cds--action-set class rules (includes justify-content: flex-end)
+@include action-set-styles.action-set;
 
 $block-class: #{$prefix}--action-set;
 
