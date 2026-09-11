@@ -5,14 +5,23 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { Children, forwardRef, ForwardedRef, ReactNode } from 'react';
+import React, {
+  Children,
+  forwardRef,
+  ForwardedRef,
+  ReactNode,
+  PropsWithChildren,
+} from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import { Accordion } from '../Accordion';
 import { AccordionItem } from '../Accordion';
 import { IconButton, type IconButtonProps } from '../IconButton';
 import type { AccordionProps } from '../Accordion/Accordion';
-import type { AccordionItemProps } from '../Accordion/AccordionItem';
+import type {
+  AccordionItemProps,
+  AccordionToggleProps,
+} from '../Accordion/AccordionItem';
 import { SubtractAlt } from '@carbon/icons-react';
 import type { AddSelectItem } from '@carbon/utilities';
 
@@ -218,21 +227,32 @@ const AddSelectSelectionSummaryItem = forwardRef<
         ? renderAccordionBody(item)
         : defaultContent();
 
+      // Use renderToggle to place the remove button as a sibling of the
+      // accordion heading <button>, not inside it — avoids nested <button>
+      // invalid HTML while keeping the button visually aligned with the chevron.
+      const renderToggleWithRemove = onRemove
+        ? ({
+            children,
+            ...toggleProps
+          }: PropsWithChildren<AccordionToggleProps>) => (
+            <>
+              <button type="button" {...toggleProps}>
+                {children}
+              </button>
+              <div
+                className={`${blockClass}__selection-summary-item-remove-button-container`}>
+                {RemoveButton}
+              </div>
+            </>
+          )
+        : undefined;
+
       return (
         <div className={itemClasses} ref={ref} {...rest}>
           <Accordion align="start" {...accordionProps}>
             <AccordionItem
-              title={
-                <>
-                  {titleContent}
-                  {onRemove && (
-                    <div
-                      className={`${blockClass}__selection-summary-item-remove-button-container`}>
-                      {RemoveButton}
-                    </div>
-                  )}
-                </>
-              }
+              title={titleContent}
+              renderToggle={renderToggleWithRemove}
               {...accordionItemProps}>
               {bodyContent}
             </AccordionItem>

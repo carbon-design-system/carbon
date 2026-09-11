@@ -169,8 +169,8 @@ const AddSelectBody = forwardRef<HTMLDivElement, AddSelectBodyProps>(
       }
       if (rowsCacheRef.current === null) {
         rowsCacheRef.current = Array.from(
-          listRef.current.querySelectorAll('[role="row"]')
-        ) as HTMLElement[];
+          listRef.current.querySelectorAll<HTMLElement>('[role="row"]')
+        );
       }
       return rowsCacheRef.current;
     };

@@ -479,6 +479,7 @@
 
     &--accordion .#{$prefix}--accordion__item,
     &--accordion .#{$prefix}--accordion__item:last-child {
+      position: relative;
       border-block-end: none;
       border-block-start: none;
     }
@@ -552,14 +553,25 @@
       align-items: center;
       justify-content: center;
       padding-inline-start: $spacing-03;
+    }
 
-      .#{$prefix}--add-select__selection-summary-item--accordion & {
-        position: absolute;
-        inset-block-start: 50%;
-        inset-inline-end: $spacing-05;
-        padding-inline-start: 0;
-        transform: translateY(-50%);
-      }
+    &--accordion &-remove-button-container {
+      // Sit inside the <li> (position: relative), absolutely positioned so it
+      // overlaps the heading row without affecting document flow.
+      // The heading uses padding-block: $spacing-04; min-block-size is unset
+      // so block-size matches the heading button exactly.
+      // z-index: 3 keeps the container above the heading <button>'s z-index: 2
+      // focus ring so the remove button is never hidden when the heading is focused.
+      position: absolute;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      block-size: fit-content;
+      inset-block-end: auto;
+      inset-block-start: 0;
+      inset-inline-end: $spacing-05;
+      padding-block: $spacing-04;
+      padding-inline: 0;
     }
 
     &-remove-button {
