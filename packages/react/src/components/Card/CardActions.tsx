@@ -8,6 +8,7 @@
 import React, {
   ReactNode,
   useEffect,
+  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -114,6 +115,45 @@ export const CardActions = ({
 
     return () => handler.disconnect();
   }, [actionItems]);
+
+  // Measure the actual occupied width of visible action buttons and write it
+  // as a CSS custom property on the parent header. We sum visible children
+  // rather than using container.offsetWidth (which is always the full 50% box)
+  // so the title reclaims space when items collapse into the overflow menu.
+  useLayoutEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const header = container.closest(
+      `.${prefix}--card__header`
+    ) as HTMLElement | null;
+    if (!header) return;
+
+    const prop = `--${prefix}--card--actions-width`;
+
+    const measure = () => {
+      const visibleWidth = Array.from(container.children).reduce(
+        (sum, child) => {
+          const el = child as HTMLElement;
+          // Skip items hidden by the overflow handler
+          if (el.hasAttribute('data-hidden')) return sum;
+          return sum + el.getBoundingClientRect().width;
+        },
+        0
+      );
+      header.style.setProperty(prop, `${Math.ceil(visibleWidth)}px`);
+    };
+
+    const observer = new ResizeObserver(measure);
+    observer.observe(container);
+    measure();
+
+    return () => {
+      observer.disconnect();
+      // Clean up so the title padding resets when CardActions unmounts.
+      header.style.removeProperty(prop);
+    };
+  }, [prefix, hiddenItems]);
 
   return (
     <div ref={containerRef} className={classes} {...rest}>
