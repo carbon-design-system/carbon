@@ -386,7 +386,7 @@ export const Popover: PopoverComponent & {
                       // Use 4px spacing when no caret, otherwise use the caret offset
                       mainAxis: caret ? popoverDimensions?.current?.offset : 4,
                     }
-                  : 0
+                  : { mainAxis: enableV12Release ? 4 : 0 }
               ),
               autoAlign &&
                 flip({

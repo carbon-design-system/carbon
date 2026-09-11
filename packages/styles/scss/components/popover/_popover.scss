@@ -1524,7 +1524,9 @@ $popover-caret-height: custom-property.get-var(
   .#{$prefix}--popover--tab-tip
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content {
-    border-radius: 0;
+    @if not enabled('enable-v12-release') {
+      border-radius: 0;
+    }
   }
 
   .#{$prefix}--popover--tab-tip.#{$prefix}--popover--top-start:not(

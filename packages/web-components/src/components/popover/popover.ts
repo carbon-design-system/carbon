@@ -460,6 +460,10 @@ class CDSPopover extends HostListenerMixin(LitElement) {
           alignment: this.align,
           open: this.open,
           alignmentAxisOffset: this.alignmentAxisOffset,
+          mainAxisOffset:
+            this.tabTip && isFeatureFlagEnabled('enable-v12-release', this)
+              ? 4
+              : undefined,
           autoAlignBoundary: this._resolveAutoAlignBoundary(),
           isTabTip: this.tabTip,
         });
