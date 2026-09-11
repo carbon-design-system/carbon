@@ -76,6 +76,7 @@ class CDSInterstitialScreen extends SignalWatcher(
     this.addEventListener(`${prefix}-request-close`, this._handleClose);
   }
   disconnectedCallback(): void {
+    super.disconnectedCallback();
     const { carouselAPI } = interstitialDetailsSignal.get();
     carouselAPI?.destroyEvents?.();
     this._trapFocusAPI?.cleanup();
