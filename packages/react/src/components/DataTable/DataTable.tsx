@@ -396,7 +396,16 @@ export const DataTable = <RowType, ColTypes extends any[]>(
     const hasRowsChanged = !isEqual(rows, currentRows);
 
     if (hasRowIdsChanged || hasHeadersChanged || hasRowsChanged) {
-      setState((prev) => getDerivedStateFromProps(props, prev));
+      // queueMicrotask defers the setState until after the current passive
+      // effects flush completes. Without this, a setState call inside
+      // flushPassiveEffects increments React 19's nestedPassiveUpdateCount.
+      // When many DataTable instances update in the same flush this can
+      // accumulate and exceed the limit of 50, throwing "Maximum update
+      // depth exceeded". Deferring via queueMicrotask keeps every setState
+      // in its own independent scheduler cycle.
+      queueMicrotask(() =>
+        setState((prev) => getDerivedStateFromProps(props, prev))
+      );
     }
     // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
   }, [headers, rows]);
