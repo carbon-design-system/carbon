@@ -30,7 +30,7 @@ const blockClassModal = `${blockClass}-modal`;
 export default {
   title: 'Components/TagOverflow',
   component: TagOverflow,
-  tags: ['autodocs'],
+  tags: ['autodocs', 'ibm-products-migrated'],
   parameters: {
     docs: {
       page: mdx,
