@@ -7,6 +7,7 @@
 
 import type { StorybookConfig } from '@storybook/react-vite';
 
+import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -83,11 +84,52 @@ const config: StorybookConfig = {
     reactDocgen: 'react-docgen', // Favor docgen from prop-types instead of TS interfaces
   },
   async viteFinal(config) {
+    // Sass importer that resolves @carbon/ibm-products-styles/ imports to the
+    // absolute path in the monorepo root node_modules. Vite's internal Sass
+    // resolver walks up from the importing file's directory, which fails for
+    // files deep in src/examples/*/example/ because the package is installed at
+    // the repo root, not in packages/react/node_modules/.
+    const ibmProductsStylesRoot = path.resolve(
+      configDir,
+      '../../../node_modules/@carbon/ibm-products-styles'
+    );
+    const ibmProductsStylesImporter = {
+      canonicalize(url: string) {
+        if (!url.startsWith('@carbon/ibm-products-styles/')) return null;
+        const rel = url.slice('@carbon/ibm-products-styles/'.length);
+        // Try _<name>.scss, <name>.scss, <name>/_index.scss in order
+        const base = path.join(ibmProductsStylesRoot, rel);
+        const dir = path.dirname(base);
+        const name = path.basename(base);
+        const candidates = [
+          path.join(dir, `_${name}.scss`),
+          `${base}.scss`,
+          path.join(base, '_index.scss'),
+          path.join(base, 'index.scss'),
+        ];
+        for (const candidate of candidates) {
+          try {
+            fs.accessSync(candidate);
+            return new URL(`file://${candidate}`);
+          } catch {
+            // try next
+          }
+        }
+        return null;
+      },
+      load(canonicalUrl: URL) {
+        const filePath = canonicalUrl.pathname;
+        const contents = fs.readFileSync(filePath, 'utf-8');
+        return { contents, syntax: 'scss' as const };
+      },
+    };
+
     return mergeConfig(config, {
       css: {
         preprocessorOptions: {
           scss: {
             api: 'modern',
+            importers: [ibmProductsStylesImporter],
           },
         },
       },
@@ -124,17 +166,10 @@ const config: StorybookConfig = {
       ],
       resolve: {
         preserveSymlinks: true,
-        alias: [
-          { find: /^~@ibm\/plex\//, replacement: '@ibm/plex/' },
-          { find: /^~@ibm\/plex$/, replacement: '@ibm/plex' },
-          {
-            find: /^@carbon\/ibm-products-styles\//,
-            replacement: path.resolve(
-              configDir,
-              '../../../node_modules/@carbon/ibm-products-styles/'
-            ),
-          },
-        ],
+        alias: {
+          '~@ibm/plex': '@ibm/plex',
+          '~@ibm/plex/': '@ibm/plex/',
+        },
       },
       build: {
         rollupOptions: {
