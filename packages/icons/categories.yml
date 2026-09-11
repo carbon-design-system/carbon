@@ -772,7 +772,7 @@ categories:
           - watsonx-governance
       - name: App catalogue
         members:
-          - ai-financial-sustainability-check
+          - ibm--ai-financial-instrument-sustainability-check
           - autoscaling
           - binding--connector
           - block-storage
