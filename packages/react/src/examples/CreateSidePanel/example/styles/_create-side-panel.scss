@@ -1,0 +1,50 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/config' as carbon-config;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/ibm-products-styles/scss/components/SidePanel';
+
+.create-side-panel__form-title {
+  @include type.type-style('heading-compact-02');
+
+  padding-block-end: $spacing-03;
+}
+
+.create-side-panel__form-description {
+  @include type.type-style('body-01');
+
+  margin-block-end: $spacing-05;
+}
+
+.create-side-panel__form .cds--form-item {
+  margin-block-end: $spacing-05;
+
+  &:last-child {
+    margin-block-end: 0;
+  }
+}
+
+// Story-specific helpers (mirrors the component's _storybook-styles.scss)
+.create-side-panel-stories__example-container {
+  display: grid;
+  align-items: flex-end;
+  grid-gap: $spacing-03;
+  grid-template-columns: 1fr 1fr;
+}
+
+.create-side-panel-stories__example-form-group
+  > legend.cds--label {
+  margin-block-end: 0;
+  padding-block-end: $spacing-03;
+  padding-block-start: $spacing-03;
+}
+
+.create-side-panel-stories__form-item {
+  margin-block-end: $spacing-05;
+}

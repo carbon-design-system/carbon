@@ -54,6 +54,7 @@
     "@babel/preset-react": "^8.0.0",
     "@babel/runtime": "^8.0.0",
     "@carbon/cli": "workspace:packages/cli",
+    "@carbon/ibm-products": "2.98.0",
     "@commitlint/cli": "^21.0.0",
     "@commitlint/config-conventional": "^21.0.0",
     "@eslint/compat": "^2.0.1",
