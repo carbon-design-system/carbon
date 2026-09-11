@@ -33,6 +33,43 @@ describe('cds-textarea', () => {
     expect(helper.textContent).to.include('Helper text');
   });
 
+  it('should describe the textarea with the helper text', async () => {
+    const el = await fixture(html`
+      <cds-textarea
+        label="Textarea label"
+        helper-text="Helpful info"></cds-textarea>
+    `);
+
+    const textarea = el.shadowRoot.querySelector('textarea');
+    const helper = el.shadowRoot.querySelector('.cds--form__helper-text');
+
+    expect(textarea.getAttribute('aria-describedby')).to.equal('helper-text');
+    expect(helper.id).to.equal('helper-text');
+  });
+
+  it('should describe the textarea with slotted helper text', async () => {
+    const el = await fixture(html`
+      <cds-textarea label="Textarea label">
+        <span slot="helper-text">Slotted helpful info</span>
+      </cds-textarea>
+    `);
+    await el.updateComplete;
+
+    const textarea = el.shadowRoot.querySelector('textarea');
+
+    expect(textarea.getAttribute('aria-describedby')).to.equal('helper-text');
+  });
+
+  it('should not set aria-describedby when there is no helper text', async () => {
+    const el = await fixture(html`
+      <cds-textarea label="Textarea label"></cds-textarea>
+    `);
+
+    const textarea = el.shadowRoot.querySelector('textarea');
+
+    expect(textarea.hasAttribute('aria-describedby')).to.be.false;
+  });
+
   it('should reflect value to the textarea', async () => {
     const el = await fixture(html`
       <cds-textarea value="Initial content"></cds-textarea>
