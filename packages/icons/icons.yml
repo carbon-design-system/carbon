@@ -1792,6 +1792,25 @@
     - asset
   sizes:
     - 32
+- name: asset--edit
+  friendly_name: Asset edit
+  aliases:
+    - technology
+    - edit
+    - pencil
+    - asset
+    - asset edit
+    - modify
+    - asset update
+    - asset modify
+    - asset management
+    - change asset
+    - asset record
+    - move asset
+    - swap asset
+    - modify record
+  sizes:
+    - 32
 - name: asset--view
   friendly_name: Asset view
   aliases:
@@ -2206,6 +2225,20 @@
     - technology
     - battery indicator
     - battery
+- name: beacon
+  friendly_name: Beacon
+  aliases:
+    - beacon
+    - lighthouse
+    - guidance
+    - direction
+    - signal
+    - clarity
+    - insight
+    - Trusted Guide
+    - star
+  sizes:
+    - 32
 - name: bee
   friendly_name: Bee
   aliases:
@@ -6242,6 +6275,87 @@
     - application
     - interface
     - software
+  sizes:
+    - 32
+- name: content-navigator-edit-service--download
+  friendly_name: IBM® Content Navigator Edit Service Download
+  aliases:
+    - IBM
+    - Content Navigator Edit Service
+    - content
+    - navigator
+    - edit
+    - service
+    - download
+    - pencil
+    - arrow
+  sizes:
+    - 32
+- name: content-navigator-edit-service--upload
+  friendly_name: IBM® Content Navigator Edit Service Upload
+  aliases:
+  aliases:
+    - IBM
+    - Content Navigator Edit Service
+    - content
+    - navigator
+    - edit
+    - service
+    - upload
+    - pencil
+    - arrow
+  sizes:
+    - 32
+- name: content-navigator-sync--error
+  friendly_name: IBM® Content Navigator Sync Error
+  aliases:
+  aliases:
+    - IBM
+    - Content Navigator Sync
+    - content
+    - navigator
+    - sync
+    - error
+    - file
+  sizes:
+    - 32
+- name: content-navigator-sync--loading
+  friendly_name: IBM® Content Navigator Sync Loading
+  aliases:
+  aliases:
+    - IBM
+    - Content Navigator Sync
+    - content
+    - navigator
+    - sync
+    - loading
+    - file
+  sizes:
+    - 32
+- name: content-navigator-sync--paused
+  friendly_name: IBM® Content Navigator Sync Paused
+  aliases:
+  aliases:
+    - IBM
+    - Content Navigator Sync
+    - content
+    - navigator
+    - sync
+    - paused
+    - file
+  sizes:
+    - 32
+- name: content-navigator-sync--warning
+  friendly_name: IBM® Content Navigator Sync Warning
+  aliases:
+  aliases:
+    - IBM
+    - Content Navigator Sync
+    - content
+    - navigator
+    - sync
+    - warning
+    - file
   sizes:
     - 32
 - name: content-view
@@ -18021,6 +18135,20 @@
     - forecast
   sizes:
     - 32
+- name: markdown
+  friendly_name: Markdown
+  aliases:
+    - format
+    - markdown
+    - language
+    - MD
+    - mdown
+    - mkd
+    - mkdn
+    - letter M
+    - M
+  sizes:
+    - 32
 - name: material-request
   friendly_name: Resourceful
   aliases:
@@ -21989,6 +22117,20 @@
     - diagram
   sizes:
     - 32
+- name: red-hat-ai-inference-on-ibm-cloud
+  friendly_name: Red Hat® AI Inference on IBM Cloud®
+  aliases:
+    - Red Hat
+    - AI
+    - inference
+    - IBM
+    - IBM Cloud
+    - models
+    - LLM
+    - machine learning
+    - star
+  sizes:
+    - 32
 - name: red-hat-ai-instructlab-on-ibm-cloud
   friendly_name: Red Hat AI InstructLab® on IBM Cloud®
   aliases:
@@ -24882,6 +25024,17 @@
     - chart
     - data
     - data analytics
+  sizes:
+    - 32
+- name: stepzen--graph-server
+  friendly_name: IBM® StepZen Graph Server
+  aliases:
+    - stepzen
+    - zen
+    - graph
+    - server
+    - api
+    - connect
   sizes:
     - 32
 - name: stethoscope
@@ -28391,6 +28544,43 @@
     - look
     - inspect
     - visible
+- name: view--matrix
+  friendly_name: Matrix view
+  aliases:
+  aliases:
+    - data
+    - table
+    - tabular
+    - matrix
+    - cross-reference
+    - mapping
+    - relationship
+    - spreadsheet
+    - excel
+    - chart
+    - rows
+    - columns
+    - cells
+    - grid
+    - view
+  sizes:
+    - 32
+- name: view--table
+  friendly_name: Table view
+  aliases:
+    - data
+    - table
+    - tabular
+    - spreadsheet
+    - excel
+    - chart
+    - rows
+    - columns
+    - cells
+    - grid
+    - view
+  sizes:
+    - 32
 - name: view--mode-1
   friendly_name: View mode 1
   sizes:
