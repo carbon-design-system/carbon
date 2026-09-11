@@ -59,7 +59,7 @@
     max-inline-size: $spacing-09;
   }
 
-  .#{$prefix}--popover .#{$prefix}--popover-content {
+  .#{$block-class} .#{$prefix}--popover .#{$prefix}--popover-content {
     white-space: normal;
   }
 

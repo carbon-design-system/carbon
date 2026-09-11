@@ -33,7 +33,7 @@ export interface TagOverflowPopoverProps {
 const componentName = 'TagOverflowPopover';
 
 export const TagOverflowPopover = forwardRef(
-  (props: TagOverflowPopoverProps, ref: Ref<HTMLDivElement>) => {
+  (props: TagOverflowPopoverProps, ref: Ref<HTMLSpanElement>) => {
     const prefix = usePrefix();
     const blockClass = `${prefix}--tag-overflow-popover`;
     const {
@@ -49,17 +49,13 @@ export const TagOverflowPopover = forwardRef(
       showAllTagsLabel,
       ...rest
     } = props;
-    const localRef = useRef<HTMLDivElement>(null);
     const overflowTagContent = useRef<HTMLDivElement>(null);
 
-    useOutsideClick(
-      (ref as React.RefObject<HTMLDivElement>) || localRef,
-      () => {
-        if (popoverOpen) {
-          setPopoverOpen?.(false);
-        }
+    useOutsideClick(ref as React.RefObject<HTMLSpanElement>, () => {
+      if (popoverOpen) {
+        setPopoverOpen?.(false);
       }
-    );
+    });
 
     const handleShowAllTagsClick = (evt: Event) => {
       evt.stopPropagation();
@@ -92,7 +88,7 @@ export const TagOverflowPopover = forwardRef(
         className={cx(blockClass, {
           [`${blockClass}--hidden`]: overflowTags?.length === 0,
         })}
-        ref={(ref as React.RefObject<HTMLSpanElement>) || localRef}>
+        ref={ref as React.RefObject<HTMLSpanElement>}>
         <Popover
           align={overflowAlign}
           autoAlign={autoAlign}

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { RefObject, useRef, useState } from 'react';
+import { RefObject, useEffect, useRef, useState } from 'react';
 import { useResizeObserver } from './useResizeObserver';
 
 type Item = {
@@ -110,7 +110,7 @@ function useOverflowItems<T extends Item>(
     let includeOffset = false;
 
     if (maxItems) {
-      includeOffset = requiredWidth + offsetWidthRef?.current > requiredWidth;
+      includeOffset = offsetWidthRef.current > 0;
     } else {
       includeOffset = requiredWidth > remainingWidth + offsetWidthRef?.current;
     }
@@ -141,24 +141,27 @@ function useOverflowItems<T extends Item>(
 
   const visibleItems = getVisibleItems();
   const hiddenItems = overflowItems.slice(visibleItems?.length);
-  // only call the change handler when the number of visible items has changed
-  if (
-    visibleItems?.length !== visibleItemCount.current ||
-    remainingWidth !== minWidthRef.current ||
-    requiredWidth !== requiredWidthRef.current
-  ) {
-    visibleItemCount.current = visibleItems?.length;
-    minWidthRef.current = remainingWidth;
-    requiredWidthRef.current = requiredWidth;
-    const firstItemKey: string = getMap()?.keys()?.next()?.value || '';
-    const firstItemWidth = getMap()?.get(firstItemKey) || 0;
 
-    onChange?.({
-      hiddenItems,
-      minWidth: remainingWidth,
-      maxWidth: requiredWidth + firstItemWidth,
-    });
-  }
+  // Call onChange in an effect so it never fires as a side-effect during render.
+  useEffect(() => {
+    if (
+      visibleItems?.length !== visibleItemCount.current ||
+      remainingWidth !== minWidthRef.current ||
+      requiredWidth !== requiredWidthRef.current
+    ) {
+      visibleItemCount.current = visibleItems?.length;
+      minWidthRef.current = remainingWidth;
+      requiredWidthRef.current = requiredWidth;
+      const firstItemKey: string = getMap()?.keys()?.next()?.value || '';
+      const firstItemWidth = getMap()?.get(firstItemKey) || 0;
+
+      onChange?.({
+        hiddenItems,
+        minWidth: remainingWidth,
+        maxWidth: requiredWidth + firstItemWidth,
+      });
+    }
+  });
 
   return {
     visibleItems,

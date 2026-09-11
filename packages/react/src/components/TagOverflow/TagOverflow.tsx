@@ -28,7 +28,7 @@ export interface TagOverflowItem {
   filter?: boolean;
   id: string;
   label: string;
-  onClose: () => void;
+  onClose?: () => void;
   tagType?:
     | 'red'
     | 'magenta'
@@ -62,7 +62,7 @@ export interface TagOverflowProps {
    * Disable the portal and render the modal inline. Useful for tests and
    * contexts where you need to inherit React context from parent components.
    *
-   * @default true
+   * @default false
    */
   disablePortal?: boolean;
   items: TagOverflowItem[];
@@ -96,7 +96,8 @@ export interface TagOverflowProps {
   overflowClassName?: string;
   overflowType?: 'default' | 'tag';
   showAllTagsLabel?: string;
-  tagComponent?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  tagComponent?: string | React.ComponentType<any>;
 }
 
 const componentName = 'TagOverflow';
@@ -153,7 +154,8 @@ export const TagOverflow = forwardRef<HTMLDivElement, TagOverflowProps>(
 
     const getCustomComponent = (
       item: TagOverflowItem,
-      tagComponent: string
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      tagComponent: string | React.ComponentType<any>
     ) => {
       const { className, ...other } = item;
       return createElement(tagComponent, {
@@ -215,7 +217,7 @@ export const TagOverflow = forwardRef<HTMLDivElement, TagOverflowProps>(
             );
           })}
           {overflowItems.length > 0 && (
-            <div className={`${blockClass}__indicator`} ref={offsetRef}>
+            <div className={`${blockClass}__indicator`}>
               <TagOverflowPopover
                 allTagsModalSearchThreshold={allTagsModalSearchThreshold}
                 className={overflowClassName}
