@@ -65,7 +65,7 @@ function isUpcomingV12Commit(commit) {
 
 const sectionTypes = [
   {
-    title: 'Upcoming in v12 :next:',
+    title: 'Upcoming in v12 :next_track_button:',
     match: isUpcomingV12Commit,
   },
   {
