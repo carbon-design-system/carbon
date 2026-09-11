@@ -145,7 +145,7 @@ export default class FloatingController implements ReactiveController {
               // Fallback remains 4px for non-caret overlays.
               mainAxis: mainAxisOffset ?? (caret ? offsetPx : 4),
             }
-          : 0
+          : { mainAxis: mainAxisOffset ?? 0 }
       ),
       flip({
         fallbackPlacements: isTabTip
