@@ -27,6 +27,9 @@ export const productMigratedStoryGlobs = [
   '../src/components/Tearsheet/Tearsheet.stories.js',
   '../src/components/UserAvatar/UserAvatar.stories.js',
   '../src/components/TruncatedText/TruncatedText.stories.js',
+  // Pattern examples migrated from ibm-products
+  '../src/examples/DeleteAndRemove/DeleteAndRemove.stories.js',
+  '../src/examples/DeleteAndRemove/DeleteAndRemove.mdx',
 ];
 
 /**
