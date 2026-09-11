@@ -88,10 +88,6 @@ const config: StorybookConfig = {
         preprocessorOptions: {
           scss: {
             api: 'modern',
-            // Ensure Sass can resolve packages installed at the monorepo root
-            // (e.g. @carbon/ibm-products) even when the build runs from
-            // packages/react/ where those packages are not locally installed.
-            loadPaths: [path.resolve(configDir, '../../../node_modules')],
           },
         },
       },
@@ -128,10 +124,20 @@ const config: StorybookConfig = {
       ],
       resolve: {
         preserveSymlinks: true,
-        alias: {
-          '~@ibm/plex': '@ibm/plex',
-          '~@ibm/plex/': '@ibm/plex/',
-        },
+        alias: [
+          { find: /^~@ibm\/plex\//, replacement: '@ibm/plex/' },
+          { find: /^~@ibm\/plex$/, replacement: '@ibm/plex' },
+          // Redirect @carbon/ibm-products SCSS imports to the copy installed
+          // at the monorepo root so the Sass resolver always finds it,
+          // regardless of where in the workspace the build is invoked.
+          {
+            find: /^@carbon\/ibm-products\//,
+            replacement: path.resolve(
+              configDir,
+              '../../../node_modules/@carbon/ibm-products/'
+            ),
+          },
+        ],
       },
       build: {
         rollupOptions: {
