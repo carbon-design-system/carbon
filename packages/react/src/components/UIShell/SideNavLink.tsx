@@ -170,9 +170,10 @@ SideNavLink.propTypes = {
   tabIndex: PropTypes.number,
 };
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
-export const createCustomSideNavLink = (element) => (props) => {
-  return <SideNavLink element={element} {...props} />;
+export const createCustomSideNavLink = (element) => {
+  return function CustomSideNavLink(props) {
+    return <SideNavLink element={element} {...props} />;
+  };
 };
 
 export default SideNavLink;

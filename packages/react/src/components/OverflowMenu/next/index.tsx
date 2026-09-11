@@ -75,7 +75,6 @@ interface OverflowMenuProps {
   menuTarget?: Element;
 }
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
   (
     {
@@ -225,6 +224,9 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
     );
   }
 );
+
+OverflowMenu.displayName = 'OverflowMenu';
+
 OverflowMenu.propTypes = {
   /**
    * **Experimental**: Will attempt to automatically align the floating element
