@@ -1,0 +1,193 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+
+$story-prefix: 'add-select-next-stories';
+
+// Viewport wrapper — constrains stories to half the canvas width
+.#{$story-prefix}__viewport {
+  inline-size: 50%;
+}
+
+// PlaceholderShell — dashed outline container used in Body/Column stories
+.#{$story-prefix}__placeholder-shell {
+  border: 1px dashed var(--cds-border-subtle);
+  background: var(--cds-layer);
+}
+
+// PlaceholderRows — skeleton row grid shown inside Body stories
+.#{$story-prefix}__placeholder-rows {
+  display: grid;
+  gap: 1px;
+}
+
+.#{$story-prefix}__placeholder-row {
+  padding: $spacing-03;
+  background: var(--cds-layer-hover-01);
+
+  p {
+    margin: 0;
+  }
+}
+
+// Row story — constrained single-row preview
+.#{$story-prefix}-container--single {
+  inline-size: 26rem;
+}
+
+// Column story container
+.#{$story-prefix}-column-container {
+  border: 1px dashed var(--cds-border-subtle);
+  background: var(--cds-layer);
+  block-size: 400px;
+  inline-size: 360px;
+}
+
+// SelectionSummary / ItemPanel story container
+.#{$story-prefix}-summary-container {
+  overflow: auto;
+  border: 1px dashed var(--cds-border-subtle);
+  background: var(--cds-layer);
+  block-size: 32rem;
+  inline-size: 22.5rem;
+}
+
+// Row story — hide the header border so the single-row demo has no divider
+.#{$story-prefix}--no-header-border {
+  .#{$prefix}--add-select__header {
+    padding: 0;
+    border-block-end: none;
+  }
+}
+
+// Row story — rowContent slot example
+.#{$story-prefix}__row-content {
+  display: flex;
+  align-items: center;
+  gap: $spacing-03;
+}
+
+// SelectionSummary — emptyState slot wrapper
+.#{$story-prefix}__empty-state {
+  padding: $spacing-05 $spacing-03;
+}
+
+// SelectionSummary — headerContent slot
+.#{$story-prefix}__summary-header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  inline-size: 100%;
+
+  h3 {
+    @include type.type-style('heading-03');
+
+    margin: 0;
+  }
+}
+
+// SelectionSummaryItem — "item removed" fallback message
+.#{$story-prefix}__summary-item-removed {
+  margin: 0;
+}
+
+// SelectionSummaryItem — story wrapper
+.#{$story-prefix}__summary-item-wrapper {
+  padding: $spacing-03;
+  border: 1px dashed var(--cds-border-subtle);
+  background: var(--cds-layer);
+  inline-size: 22.5rem;
+}
+
+// ItemPanel — renderItem / useChildren slot content
+.#{$story-prefix}__item-panel-content {
+  p {
+    margin: 0;
+  }
+
+  &__title {
+    @include type.type-style('body-compact-02');
+  }
+
+  &__body {
+    margin-block-start: $spacing-02;
+  }
+}
+
+// SelectionSummaryItem — renderAccordionTitle slot
+.#{$story-prefix}__accordion-title {
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-03;
+
+  &-text {
+    &__title {
+      @include type.type-style('body-compact-01');
+
+      margin: 0;
+      color: var(--cds-text-primary);
+    }
+
+    &__subtitle {
+      @include type.type-style('body-01');
+
+      margin: 0;
+      color: var(--cds-text-secondary);
+    }
+  }
+}
+
+// SelectionSummaryItem — renderAccordionBody slot
+.#{$story-prefix}__accordion-body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-02;
+  margin-block-start: $spacing-05;
+}
+
+// SelectionSummaryItem — useChildren / renderItem example rows
+.#{$story-prefix}__summary-item-row {
+  display: flex;
+  align-items: center;
+  padding: $spacing-04 $spacing-05;
+  gap: $spacing-03;
+
+  &-reorder {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    gap: $spacing-03;
+  }
+
+  &-text {
+    flex: 1;
+
+    &__title {
+      @include type.type-style('body-compact-01');
+
+      margin: 0;
+      color: var(--cds-text-primary);
+    }
+
+    &__subtitle {
+      @include type.type-style('body-01');
+
+      margin: 0;
+      color: var(--cds-text-secondary);
+    }
+  }
+
+  &-modifier {
+    @include type.type-style('body-compact-01');
+
+    color: var(--cds-text-secondary);
+    white-space: nowrap;
+  }
+}
