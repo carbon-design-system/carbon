@@ -71,7 +71,8 @@
   transition: none !important;
 }
 
-// Overlay fade would race the stretch surface reveal — kill it for the CSS path.
+// The overlay fade defined above would run alongside the reveal and muddy it,
+// so the CSS path opts out and lets the surface styles drive it alone.
 .motion-surface-demo__modal--css {
   transition: none !important;
 }
@@ -79,13 +80,35 @@
 .motion-surface-demo__modal--css .motion-surface-demo__container {
   transform: none !important;
 }
-
-// Native CSS reveal for stretch surface variant— tokens from @carbon/motion.
-.motion-surface-demo__modal--css
-  .motion-surface-demo__container[data-carbon-surface='stretch'] {
-  @include motion.surface(stretch);
-}
 // stylelint-enable declaration-no-important
+
+// custom, user-defined 'stretch` reveal
+.motion-surface-demo__modal--css
+  .motion-surface-demo__container[data-carbon-surface='custom-panel'] {
+  @include motion.surface(
+    (
+      kind: reveal,
+      duration: slow-01,
+      enter: (
+        opacity: 1,
+        clip-path: inset(0 0 0 0),
+      ),
+      exit: (
+        opacity: 0,
+        clip-path: inset(50% 0 50% 0),
+      ),
+      enter-easing: (
+        name: entrance,
+        mode: expressive,
+      ),
+      exit-easing: (
+        name: exit,
+        mode: expressive,
+      ),
+    )
+  );
+}
+
 .motion-surface-tile {
   margin-block-end: 1px;
 }
