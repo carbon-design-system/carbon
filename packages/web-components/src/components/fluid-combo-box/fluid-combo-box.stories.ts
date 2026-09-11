@@ -74,7 +74,7 @@ const items = [
 
 const args = {
   ariaLabel: '',
-  'auto-align': false,
+  autoalign: false,
   direction: 'bottom',
   disabled: false,
   isCondensed: false,
@@ -97,7 +97,7 @@ const argTypes = {
     description:
       'Specify a label to be read by screen readers on the container node.',
   },
-  'auto-align': {
+  autoalign: {
     control: 'boolean',
     description:
       'Will auto-align the combo box. This attribute is currently experimental and is subject to future changes.',
@@ -162,7 +162,7 @@ export const Default = {
   argTypes,
   render: ({
     ariaLabel,
-    'auto-align': autoAlign,
+    autoalign,
     direction,
     disabled,
     isCondensed,
@@ -178,7 +178,7 @@ export const Default = {
   }) => html`
     <cds-fluid-combo-box
       aria-label="${ifDefined(ariaLabel || undefined)}"
-      ?auto-align="${autoAlign}"
+      ?autoalign="${autoalign}"
       direction="${ifDefined(direction)}"
       ?disabled="${disabled}"
       ?is-condensed="${isCondensed}"
@@ -216,7 +216,7 @@ export const Condensed = {
   },
   render: ({
     ariaLabel,
-    'auto-align': autoAlign,
+    autoalign,
     direction,
     disabled,
     isCondensed,
@@ -232,7 +232,7 @@ export const Condensed = {
   }) => html`
     <cds-fluid-combo-box
       aria-label="${ifDefined(ariaLabel || undefined)}"
-      ?auto-align="${autoAlign}"
+      ?autoalign="${autoalign}"
       direction="${ifDefined(direction)}"
       ?disabled="${disabled}"
       ?is-condensed="${isCondensed}"
@@ -274,7 +274,7 @@ export const WithAILabel = {
   },
   render: ({
     ariaLabel,
-    'auto-align': autoAlign,
+    autoalign,
     direction,
     disabled,
     isCondensed,
@@ -290,7 +290,7 @@ export const WithAILabel = {
   }) => html`
     <cds-fluid-combo-box
       aria-label="${ifDefined(ariaLabel || undefined)}"
-      ?auto-align="${autoAlign}"
+      ?autoalign="${autoalign}"
       direction="${ifDefined(direction)}"
       ?disabled="${disabled}"
       ?is-condensed="${isCondensed}"
