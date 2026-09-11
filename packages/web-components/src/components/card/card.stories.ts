@@ -44,7 +44,7 @@ const placeholder1x1 = placeholder1x1Src;
 // ─── Meta ─────────────────────────────────────────────────────────────────────
 
 const meta = {
-  title: 'Components/Card',
+  title: 'Preview/Card',
   parameters: {
     docs: { page: storyDocs },
     layout: 'fullscreen',
@@ -1032,9 +1032,10 @@ export const WithTitleLeadingIcon = {
       <cds-column lg="4" md="4" sm="4">
         <cds-card>
           <cds-card-header>
-            <cds-card-title>
-              ${iconLoader(Bee16, { slot: 'title-start' })} Analytics dashboard
-            </cds-card-title>
+            <cds-card-title
+              >${iconLoader(Bee16, { slot: 'title-start' })}Analytics
+              dashboard</cds-card-title
+            >
           </cds-card-header>
           <cds-card-body>
             The leading icon adapts to the title size. In productive density,
@@ -1047,9 +1048,10 @@ export const WithTitleLeadingIcon = {
       <cds-column lg="4" md="4" sm="4">
         <cds-card density="expressive">
           <cds-card-header>
-            <cds-card-title>
-              ${iconLoader(Bee24, { slot: 'title-start' })} Analytics dashboard
-            </cds-card-title>
+            <cds-card-title
+              >${iconLoader(Bee24, { slot: 'title-start' })}Analytics
+              dashboard</cds-card-title
+            >
           </cds-card-header>
           <cds-card-body>
             The leading icon adapts to the title size. In expressive density,
@@ -1062,10 +1064,10 @@ export const WithTitleLeadingIcon = {
       <cds-column lg="4" md="4" sm="4">
         <cds-card>
           <cds-card-header>
-            <cds-card-title title-truncate="2">
-              ${iconLoader(Bee16, { slot: 'title-start' })} Example of long
-              title text that wraps onto two lines
-            </cds-card-title>
+            <cds-card-title title-truncate="2"
+              >${iconLoader(Bee16, { slot: 'title-start' })}Example of long
+              title text that wraps onto two lines</cds-card-title
+            >
           </cds-card-header>
           <cds-card-body>
             When the title wraps to multiple lines, the icon stays top-aligned
@@ -1217,9 +1219,12 @@ export const WithTitleTrailingIcon = {
       <cds-column lg="4" md="4" sm="4">
         <cds-card>
           <cds-card-header>
-            <cds-card-title>
-              Analytics dashboard ${iconLoader(Bee16, { slot: 'title-end' })}
-            </cds-card-title>
+            <cds-card-title
+              >Analytics
+              dashboard${iconLoader(Bee16, {
+                slot: 'title-end',
+              })}</cds-card-title
+            >
           </cds-card-header>
           <cds-card-body>
             The trailing icon adapts to the title size. In productive density,
@@ -1232,9 +1237,12 @@ export const WithTitleTrailingIcon = {
       <cds-column lg="4" md="4" sm="4">
         <cds-card density="expressive">
           <cds-card-header>
-            <cds-card-title>
-              Analytics dashboard ${iconLoader(Bee24, { slot: 'title-end' })}
-            </cds-card-title>
+            <cds-card-title
+              >Analytics
+              dashboard${iconLoader(Bee24, {
+                slot: 'title-end',
+              })}</cds-card-title
+            >
           </cds-card-header>
           <cds-card-body>
             The trailing icon adapts to the title size. In expressive density,
@@ -1247,10 +1255,10 @@ export const WithTitleTrailingIcon = {
       <cds-column lg="4" md="4" sm="4">
         <cds-card>
           <cds-card-header>
-            <cds-card-title title-truncate="2">
-              Example of long title text that wraps into three lines with icon
-              ${iconLoader(Bee16, { slot: 'title-end' })}
-            </cds-card-title>
+            <cds-card-title title-truncate="2"
+              >Example of long title text that wraps into three lines with
+              icon${iconLoader(Bee16, { slot: 'title-end' })}</cds-card-title
+            >
           </cds-card-header>
           <cds-card-body>
             When the title wraps to multiple lines, the icon stays inline with
@@ -1343,19 +1351,17 @@ export const WithVideo = {
             </cds-card-title>
           </cds-card-header>
           <cds-card-media ratio="16x9">
-            <video
-              controls
-              style="width:100%;height:100%;object-fit:cover;position:absolute">
+            <video controls style="width:100%;height:100%;object-fit:cover;">
               <source
-                src="https://www.w3schools.com/html/mov_bbb.mp4"
+                src="https://www.youtube.com/watch?v=Veg7njIKUm4"
                 type="video/mp4" />
               <track kind="captions" />
               Your browser does not support the video tag.
             </video>
           </cds-card-media>
           <cds-card-body>
-            Video content fills the aspect-ratio container and maintains the
-            16:9 ratio.
+            Video content fills the AspectRatio container and maintains the 16:9
+            aspect ratio.
           </cds-card-body>
         </cds-card>
       </cds-column>
@@ -1367,11 +1373,11 @@ export const WithVideo = {
             <iframe
               width="100%"
               height="100%"
-              style="position:absolute"
-              src="https://www.youtube.com/embed/Veg7njIKUm4?si=B9yWeUzcFHI4ITD1&controls=0"
+              src="https://www.youtube.com/embed/Veg7njIKUm4?si=B9yWeUzcFHI4ITD1&amp;controls=0"
               title="YouTube video player"
               frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share">
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin">
             </iframe>
           </cds-card-media>
           <cds-card-header>
@@ -1386,7 +1392,7 @@ export const WithVideo = {
         </cds-card>
       </cds-column>
 
-      <!-- Second YouTube embed -->
+      <!-- Second YouTube embed (media only) -->
       <cds-column lg="4" md="4" sm="4">
         <cds-card>
           <cds-card-media ratio="16x9">
@@ -1394,20 +1400,13 @@ export const WithVideo = {
               width="100%"
               height="100%"
               style="position:absolute"
-              src="https://www.youtube.com/embed/Veg7njIKUm4?si=B9yWeUzcFHI4ITD1&controls=0"
+              src="https://www.youtube.com/embed/Veg7njIKUm4?si=B9yWeUzcFHI4ITD1&amp;controls=0"
               title="YouTube video player"
               frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share">
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin">
             </iframe>
           </cds-card-media>
-          <cds-card-header>
-            <cds-card-title description="Introduction to Carbon components">
-              Carbon Design System
-            </cds-card-title>
-          </cds-card-header>
-          <cds-card-body>
-            Embed any iframe-compatible video player using the media slot.
-          </cds-card-body>
         </cds-card>
       </cds-column>
     </cds-grid>

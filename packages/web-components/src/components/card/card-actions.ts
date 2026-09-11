@@ -90,8 +90,9 @@ class CDSCardActions extends LitElement {
     const actions = slot
       .assignedElements({ flatten: true })
       .filter(
-        (el) => el.localName === `${prefix}-card-action`
-      ) as HTMLElement[];
+        (el): el is HTMLElement =>
+          el instanceof HTMLElement && el.localName === `${prefix}-card-action`
+      );
 
     this._assignActionIds(actions);
     this._actionItems = this._resolveActionItems(actions);

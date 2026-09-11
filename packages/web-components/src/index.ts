@@ -101,6 +101,10 @@ export { default as CDSActionableNotification } from './components/notification/
 export { default as CDSActionableNotificationButton } from './components/notification/actionable-notification-button';
 export { default as CDSInlineNotification } from './components/notification/inline-notification';
 export { default as CDSToastNotification } from './components/notification/toast-notification';
+// TODO: uncomment in v12 — remove from product-migrated-components.mjs too
+// export { default as CDSNotificationPanel } from './components/notification-panel/notification-panel';
+// export { default as CDSNotification } from './components/notification-panel/notification';
+// export { default as CDSNotificationFooter } from './components/notification-panel/notification-footer';
 export { default as CDSNumberInput } from './components/number-input/number-input';
 export { default as CDSNumberInputSkeleton } from './components/number-input/number-input-skeleton';
 export { default as CDSTextarea } from './components/textarea/textarea';
@@ -201,7 +205,17 @@ export { default as CDSDialogSubtitle } from './components/dialog/dialog-subtitl
 export { default as CDSDialogTitle } from './components/dialog/dialog-title';
 export { default as CDSLayout } from './components/layout/layout';
 export { default as CDSLayoutConstraint } from './components/layout/layout-constraint';
+
+// TODO: uncomment in v12 — remove from product-migrated-components.mjs and excludeProductsComponents too
+// export { default as CDSCoachmark } from './components/coachmark/coachmark';
+// export { default as CDSCoachmarkHeader } from './components/coachmark/coachmark-header';
+// export { default as CDSCoachmarkBody } from './components/coachmark/coachmark-body';
+// export { default as CDSCoachmarkBeacon } from './components/coachmark/coachmark-beacon/coachmark-beacon';
+// export { default as CDSCoachmarkTagline } from './components/coachmark/coachmark-tagline/coachmark-tagline';
 // export { default as CDSTruncatedText } from './components/truncated-text/truncated-text';
 // export { default as CDSActionSet } from './components/action-set/action-set';
+// export { default as CDSEditInPlace } from './components/edit-in-place/edit-in-place';
 // export { default as CDSSidePanel } from './components/side-panel/side-panel';
+// export { default as CDSUserAvatar } from './components/user-avatar/user-avatar';
+// export { default as CDSBigNumber } from './components/big-number/big-number';
 // export { default as CDSOptionsTile } from './components/options-tile/options-tile';
