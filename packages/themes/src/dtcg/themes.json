@@ -1,0 +1,3356 @@
+{
+  "$schema": "https://tr.designtokens.org/format/",
+  "$description": "Carbon Design System theme tokens — all four themes (white, g10, g90, g100) in a single file. Each token carries per-theme values under $extensions[\"carbon.themes\"]. A bare string entry means no alpha modifier; an object entry { value, alpha } carries an opacity modifier.",
+  "ai": {
+    "aura": {
+      "end": {
+        "$type": "color",
+        "$description": "End color for AI aura gradient effect. Creates a fade-to-transparent effect at the edge of AI-enhanced elements.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": {
+              "value": "{white.default}",
+              "alpha": 0
+            },
+            "g10": {
+              "value": "{white.default}",
+              "alpha": 0
+            },
+            "g90": {
+              "value": "{black.default}",
+              "alpha": 0
+            },
+            "g100": {
+              "value": "{black.default}",
+              "alpha": 0
+            }
+          }
+        }
+      },
+      "hover": {
+        "background": {
+          "$type": "color",
+          "$description": "Background color for AI aura on hover. Use when user hovers over AI-enhanced interactive elements.",
+          "$extensions": {
+            "carbon.themes": {
+              "white": "{blue.10}",
+              "g10": "{blue.10}",
+              "g90": "{gray.80Hover}",
+              "g100": "{gray.90Hover}"
+            }
+          }
+        },
+        "end": {
+          "$type": "color",
+          "$description": "End color for AI aura gradient on hover. Creates hover state fade effect for AI elements.",
+          "$extensions": {
+            "carbon.themes": {
+              "white": {
+                "value": "{white.default}",
+                "alpha": 0
+              },
+              "g10": {
+                "value": "{white.default}",
+                "alpha": 0
+              },
+              "g90": {
+                "value": "{black.default}",
+                "alpha": 0
+              },
+              "g100": {
+                "value": "{black.default}",
+                "alpha": 0
+              }
+            }
+          }
+        },
+        "start": {
+          "$type": "color",
+          "$description": "Start color for AI aura gradient on hover. Provides the vibrant blue beginning of the hover gradient.",
+          "$extensions": {
+            "carbon.themes": {
+              "white": {
+                "value": "{blue.50}",
+                "alpha": 0.32
+              },
+              "g10": {
+                "value": "{blue.50}",
+                "alpha": 0.32
+              },
+              "g90": {
+                "value": "{blue.50}",
+                "alpha": 0.4
+              },
+              "g100": {
+                "value": "{blue.50}",
+                "alpha": 0.4
+              }
+            }
+          }
+        }
+      },
+      "start": {
+        "$type": "color",
+        "$description": "Start color for AI aura gradient effect. Provides the vibrant blue beginning of the gradient for AI-enhanced elements.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": {
+              "value": "{blue.50}",
+              "alpha": 0.1
+            },
+            "g10": {
+              "value": "{blue.50}",
+              "alpha": 0.1
+            },
+            "g90": {
+              "value": "{blue.50}",
+              "alpha": 0.1
+            },
+            "g100": {
+              "value": "{blue.50}",
+              "alpha": 0.1
+            }
+          }
+        },
+        "sm": {
+          "$type": "color",
+          "$description": "Start color for small AI aura gradient. Use for compact AI indicators or smaller UI elements.",
+          "$extensions": {
+            "carbon.themes": {
+              "white": {
+                "value": "{blue.50}",
+                "alpha": 0.16
+              },
+              "g10": {
+                "value": "{blue.50}",
+                "alpha": 0.16
+              },
+              "g90": {
+                "value": "{blue.50}",
+                "alpha": 0.16
+              },
+              "g100": {
+                "value": "{blue.50}",
+                "alpha": 0.16
+              }
+            }
+          }
+        }
+      }
+    },
+    "border": {
+      "end": {
+        "$type": "color",
+        "$description": "End color for AI border gradient. Creates the lighter edge of gradient borders on AI elements.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{blue.40}",
+            "g10": "{blue.40}",
+            "g90": "{blue.50}",
+            "g100": "{blue.50}"
+          }
+        }
+      },
+      "start": {
+        "$type": "color",
+        "$description": "Start color for AI border gradient. Creates the darker edge of gradient borders on AI elements.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": {
+              "value": "{blue.30}",
+              "alpha": 0.64
+            },
+            "g10": {
+              "value": "{blue.30}",
+              "alpha": 0.64
+            },
+            "g90": {
+              "value": "{blue.30}",
+              "alpha": 0.36
+            },
+            "g100": {
+              "value": "{blue.30}",
+              "alpha": 0.36
+            }
+          }
+        }
+      },
+      "strong": {
+        "$type": "color",
+        "$description": "Strong border color for AI elements. Use for high-emphasis AI borders that need clear definition.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{blue.50}",
+            "g10": "{blue.50}",
+            "g90": "{blue.40}",
+            "g100": "{blue.40}"
+          }
+        }
+      }
+    },
+    "drop": {
+      "shadow": {
+        "$type": "color",
+        "$description": "Drop shadow color for AI elements. Provides depth and elevation for AI-enhanced components.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": {
+              "value": "{blue.60}",
+              "alpha": 0.1
+            },
+            "g10": {
+              "value": "{blue.60}",
+              "alpha": 0.1
+            },
+            "g90": {
+              "value": "{black.default}",
+              "alpha": 0.28
+            },
+            "g100": {
+              "value": "{black.default}",
+              "alpha": 0.28
+            }
+          }
+        }
+      }
+    },
+    "inner": {
+      "shadow": {
+        "$type": "color",
+        "$description": "Inner shadow color for AI elements. Creates inset depth effect for AI-enhanced surfaces.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": {
+              "value": "{blue.50}",
+              "alpha": 0.1
+            },
+            "g10": {
+              "value": "{blue.50}",
+              "alpha": 0.1
+            },
+            "g90": {
+              "value": "{blue.50}",
+              "alpha": 0.16
+            },
+            "g100": {
+              "value": "{blue.50}",
+              "alpha": 0.16
+            }
+          }
+        }
+      }
+    },
+    "overlay": {
+      "$type": "color",
+      "$description": "Overlay color for AI modal backgrounds. Use to dim content behind AI dialogs or popovers.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": {
+            "value": "{blue.100}",
+            "alpha": 0.5
+          },
+          "g10": {
+            "value": "{blue.100}",
+            "alpha": 0.5
+          },
+          "g90": {
+            "value": "{black.default}",
+            "alpha": 0.5
+          },
+          "g100": {
+            "value": "{black.default}",
+            "alpha": 0.5
+          }
+        }
+      }
+    },
+    "popover": {
+      "background": {
+        "$type": "color",
+        "$description": "Background color for AI popovers and tooltips. Provides the base surface for AI-generated content displays.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{white.default}",
+            "g10": "{white.default}",
+            "g90": "{gray.100}",
+            "g100": "{gray.100}"
+          }
+        }
+      },
+      "caret": {
+        "bottom": {
+          "$type": "color",
+          "$description": "Bottom caret color for AI popovers. Creates the gradient pointer at the bottom of AI tooltips.",
+          "$extensions": {
+            "carbon.themes": {
+              "white": "{blue.40}",
+              "g10": "{blue.40}",
+              "g90": "{blue.50}",
+              "g100": "{blue.50}"
+            }
+          },
+          "background": {
+            "$type": "color",
+            "$description": "Background color for bottom caret of AI popovers. Provides the base color for the popover pointer.",
+            "$extensions": {
+              "carbon.themes": {
+                "white": {
+                  "colorSpace": "srgb",
+                  "components": [
+                    0.917647,
+                    0.945098,
+                    1
+                  ],
+                  "hex": "#eaf1ff"
+                },
+                "g10": {
+                  "colorSpace": "srgb",
+                  "components": [
+                    0.917647,
+                    0.945098,
+                    1
+                  ],
+                  "hex": "#eaf1ff"
+                },
+                "g90": {
+                  "colorSpace": "srgb",
+                  "components": [
+                    0.12549,
+                    0.176471,
+                    0.270588
+                  ],
+                  "hex": "#202d45"
+                },
+                "g100": {
+                  "colorSpace": "srgb",
+                  "components": [
+                    0.12549,
+                    0.176471,
+                    0.270588
+                  ],
+                  "hex": "#202d45"
+                }
+              }
+            },
+            "actions": {
+              "$type": "color",
+              "$description": "Background color for action area in AI popover bottom caret. Use for interactive sections within AI tooltips.",
+              "$extensions": {
+                "carbon.themes": {
+                  "white": {
+                    "colorSpace": "srgb",
+                    "components": [
+                      0.913725,
+                      0.937255,
+                      0.980392
+                    ],
+                    "hex": "#e9effa"
+                  },
+                  "g10": {
+                    "colorSpace": "srgb",
+                    "components": [
+                      0.913725,
+                      0.937255,
+                      0.980392
+                    ],
+                    "hex": "#e9effa"
+                  },
+                  "g90": {
+                    "colorSpace": "srgb",
+                    "components": [
+                      0.117647,
+                      0.156863,
+                      0.227451
+                    ],
+                    "hex": "#1e283a"
+                  },
+                  "g100": {
+                    "colorSpace": "srgb",
+                    "components": [
+                      0.117647,
+                      0.156863,
+                      0.227451
+                    ],
+                    "hex": "#1e283a"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "center": {
+          "$type": "color",
+          "$description": "Center color for AI popover caret gradient. Creates the vibrant middle of the gradient pointer.",
+          "$extensions": {
+            "carbon.themes": {
+              "white": {
+                "colorSpace": "srgb",
+                "components": [
+                  0.627451,
+                  0.764706,
+                  1
+                ],
+                "hex": "#a0c3ff"
+              },
+              "g10": {
+                "colorSpace": "srgb",
+                "components": [
+                  0.627451,
+                  0.764706,
+                  1
+                ],
+                "hex": "#a0c3ff"
+              },
+              "g90": {
+                "colorSpace": "srgb",
+                "components": [
+                  0.282353,
+                  0.439216,
+                  0.709804
+                ],
+                "hex": "#4870b5"
+              },
+              "g100": {
+                "colorSpace": "srgb",
+                "components": [
+                  0.282353,
+                  0.439216,
+                  0.709804
+                ],
+                "hex": "#4870b5"
+              }
+            }
+          }
+        }
+      },
+      "shadow": {
+        "outer": {
+          "01": {
+            "$type": "color",
+            "$description": "Primary outer shadow for AI popovers. Provides the first layer of depth for elevated AI elements.",
+            "$extensions": {
+              "carbon.themes": {
+                "white": {
+                  "value": "{blue.70}",
+                  "alpha": 0.06
+                },
+                "g10": {
+                  "value": "{blue.70}",
+                  "alpha": 0.06
+                },
+                "g90": {
+                  "value": "{black.default}",
+                  "alpha": 0.12
+                },
+                "g100": {
+                  "value": "{black.default}",
+                  "alpha": 0.12
+                }
+              }
+            }
+          },
+          "02": {
+            "$type": "color",
+            "$description": "Secondary outer shadow for AI popovers. Adds additional depth layer for AI element elevation.",
+            "$extensions": {
+              "carbon.themes": {
+                "white": {
+                  "value": "{black.default}",
+                  "alpha": 0.04
+                },
+                "g10": {
+                  "value": "{black.default}",
+                  "alpha": 0.04
+                },
+                "g90": {
+                  "value": "{black.default}",
+                  "alpha": 0.08
+                },
+                "g100": {
+                  "value": "{black.default}",
+                  "alpha": 0.08
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "skeleton": {
+      "background": {
+        "$type": "color",
+        "$description": "Background color for AI skeleton loaders. Use while AI-generated content is loading.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{blue.20}",
+            "g10": "{blue.20}",
+            "g90": {
+              "value": "{blue.40}",
+              "alpha": 0.5
+            },
+            "g100": {
+              "value": "{blue.40}",
+              "alpha": 0.5
+            }
+          }
+        }
+      },
+      "element": {
+        "background": {
+          "$type": "color",
+          "$description": "Element background color for AI skeleton loaders. Provides the animated shimmer effect for loading AI content.",
+          "$extensions": {
+            "carbon.themes": {
+              "white": "{blue.50}",
+              "g10": "{blue.50}",
+              "g90": {
+                "value": "{blue.40}",
+                "alpha": 0.3
+              },
+              "g100": {
+                "value": "{blue.40}",
+                "alpha": 0.3
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "background": {
+    "$type": "color",
+    "$description": "Default page background color. Use as the base surface for the entire application or page.",
+    "$extensions": {
+      "carbon.themes": {
+        "white": "{white.default}",
+        "g10": "{gray.10}",
+        "g90": "{gray.90}",
+        "g100": "{gray.100}"
+      }
+    },
+    "active": {
+      "$type": "color",
+      "$description": "Background color for active/pressed state. Use when user clicks or presses interactive elements.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": {
+            "value": "{gray.50}",
+            "alpha": 0.5
+          },
+          "g10": {
+            "value": "{gray.50}",
+            "alpha": 0.5
+          },
+          "g90": {
+            "value": "{gray.50}",
+            "alpha": 0.4
+          },
+          "g100": {
+            "value": "{gray.50}",
+            "alpha": 0.4
+          }
+        }
+      }
+    },
+    "brand": {
+      "$type": "color",
+      "$description": "Brand color for backgrounds. Use for branded sections, headers, or promotional areas.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{blue.60}",
+          "g10": "{blue.60}",
+          "g90": "{blue.60}",
+          "g100": "{blue.60}"
+        }
+      }
+    },
+    "hover": {
+      "$type": "color",
+      "$description": "Background color for hover state. Use when user hovers over interactive elements to provide visual feedback.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": {
+            "value": "{gray.50}",
+            "alpha": 0.12
+          },
+          "g10": {
+            "value": "{gray.50}",
+            "alpha": 0.12
+          },
+          "g90": {
+            "value": "{gray.50}",
+            "alpha": 0.16
+          },
+          "g100": {
+            "value": "{gray.50}",
+            "alpha": 0.16
+          }
+        }
+      }
+    },
+    "inverse": {
+      "$type": "color",
+      "$description": "Inverse background color for dark UI elements. Use for tooltips, inverse buttons, or dark-themed sections.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{gray.80}",
+          "g10": "{gray.80}",
+          "g90": "{gray.10}",
+          "g100": "{gray.10}"
+        }
+      },
+      "hover": {
+        "$type": "color",
+        "$description": "Hover state for inverse backgrounds. Use when user hovers over dark UI elements.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{gray.80Hover}",
+            "g10": "{gray.80Hover}",
+            "g90": "{gray.10Hover}",
+            "g100": "{gray.10Hover}"
+          }
+        }
+      }
+    },
+    "selected": {
+      "$type": "color",
+      "$description": "Background color for selected state. Use to highlight currently selected items or active states.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": {
+            "value": "{gray.50}",
+            "alpha": 0.2
+          },
+          "g10": {
+            "value": "{gray.50}",
+            "alpha": 0.2
+          },
+          "g90": {
+            "value": "{gray.50}",
+            "alpha": 0.24
+          },
+          "g100": {
+            "value": "{gray.50}",
+            "alpha": 0.24
+          }
+        }
+      },
+      "hover": {
+        "$type": "color",
+        "$description": "Hover state for selected backgrounds. Use when user hovers over already-selected items.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": {
+              "value": "{gray.50}",
+              "alpha": 0.32
+            },
+            "g10": {
+              "value": "{gray.50}",
+              "alpha": 0.32
+            },
+            "g90": {
+              "value": "{gray.50}",
+              "alpha": 0.32
+            },
+            "g100": {
+              "value": "{gray.50}",
+              "alpha": 0.32
+            }
+          }
+        }
+      }
+    }
+  },
+  "border": {
+    "disabled": {
+      "$type": "color",
+      "$description": "Border color for disabled elements. Use when borders need to indicate unavailable or inactive state.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{gray.30}",
+          "g10": "{gray.30}",
+          "g90": {
+            "value": "{gray.50}",
+            "alpha": 0.5
+          },
+          "g100": {
+            "value": "{gray.50}",
+            "alpha": 0.5
+          }
+        }
+      }
+    },
+    "interactive": {
+      "$type": "color",
+      "$description": "Border color for interactive elements. Use for focused inputs, active selections, or clickable borders.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{blue.60}",
+          "g10": "{blue.60}",
+          "g90": "{blue.50}",
+          "g100": "{blue.50}"
+        }
+      }
+    },
+    "inverse": {
+      "$type": "color",
+      "$description": "Border color for inverse/dark UI elements. Use for borders on dark backgrounds or inverse components.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{gray.100}",
+          "g10": "{gray.100}",
+          "g90": "{gray.10}",
+          "g100": "{gray.10}"
+        }
+      }
+    },
+    "strong": {
+      "01": {
+        "$type": "color",
+        "$description": "Strong border color for layer 01. Use for high-contrast borders that need clear definition on first layer.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{gray.50}",
+            "g10": "{gray.50}",
+            "g90": "{gray.50}",
+            "g100": "{gray.60}"
+          }
+        }
+      },
+      "02": {
+        "$type": "color",
+        "$description": "Strong border color for layer 02. Use for high-contrast borders on second layer surfaces.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{gray.50}",
+            "g10": "{gray.50}",
+            "g90": "{gray.40}",
+            "g100": "{gray.50}"
+          }
+        }
+      },
+      "03": {
+        "$type": "color",
+        "$description": "Strong border color for layer 03. Use for high-contrast borders on third layer surfaces.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{gray.50}",
+            "g10": "{gray.50}",
+            "g90": "{gray.30}",
+            "g100": "{gray.40}"
+          }
+        }
+      }
+    },
+    "subtle": {
+      "00": {
+        "$type": "color",
+        "$description": "Subtle border color for base layer. Use for low-contrast borders on page background.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{gray.20}",
+            "g10": "{gray.30}",
+            "g90": "{gray.70}",
+            "g100": "{gray.80}"
+          }
+        }
+      },
+      "01": {
+        "$type": "color",
+        "$description": "Subtle border color for layer 01. Use for low-contrast borders on first layer surfaces.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{gray.30}",
+            "g10": "{gray.20}",
+            "g90": "{gray.60}",
+            "g100": "{gray.70}"
+          }
+        }
+      },
+      "02": {
+        "$type": "color",
+        "$description": "Subtle border color for layer 02. Use for low-contrast borders on second layer surfaces.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{gray.20}",
+            "g10": "{gray.30}",
+            "g90": "{gray.50}",
+            "g100": "{gray.60}"
+          }
+        }
+      },
+      "03": {
+        "$type": "color",
+        "$description": "Subtle border color for layer 03. Use for low-contrast borders on third layer surfaces.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{gray.30}",
+            "g10": "{gray.20}",
+            "g90": "{gray.50}",
+            "g100": "{gray.60}"
+          }
+        }
+      },
+      "selected": {
+        "01": {
+          "$type": "color",
+          "$description": "Subtle border for selected items on layer 01. Use for low-contrast borders on selected elements.",
+          "$extensions": {
+            "carbon.themes": {
+              "white": "{gray.30}",
+              "g10": "{gray.30}",
+              "g90": "{gray.50}",
+              "g100": "{gray.60}"
+            }
+          }
+        },
+        "02": {
+          "$type": "color",
+          "$description": "Subtle border for selected items on layer 02. Use for low-contrast borders on selected elements.",
+          "$extensions": {
+            "carbon.themes": {
+              "white": "{gray.30}",
+              "g10": "{gray.30}",
+              "g90": "{gray.40}",
+              "g100": "{gray.50}"
+            }
+          }
+        },
+        "03": {
+          "$type": "color",
+          "$description": "Subtle border for selected items on layer 03. Use for low-contrast borders on selected elements.",
+          "$extensions": {
+            "carbon.themes": {
+              "white": "{gray.30}",
+              "g10": "{gray.30}",
+              "g90": "{gray.40}",
+              "g100": "{gray.50}"
+            }
+          }
+        }
+      }
+    },
+    "tile": {
+      "01": {
+        "$type": "color",
+        "$description": "Border color for tiles on layer 01. Use for card or tile borders on first layer.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{gray.30}",
+            "g10": "{gray.40}",
+            "g90": "{gray.60}",
+            "g100": "{gray.70}"
+          }
+        }
+      },
+      "02": {
+        "$type": "color",
+        "$description": "Border color for tiles on layer 02. Use for card or tile borders on second layer.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{gray.40}",
+            "g10": "{gray.30}",
+            "g90": "{gray.50}",
+            "g100": "{gray.60}"
+          }
+        }
+      },
+      "03": {
+        "$type": "color",
+        "$description": "Border color for tiles on layer 03. Use for card or tile borders on third layer.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{gray.30}",
+            "g10": "{gray.40}",
+            "g90": "{gray.40}",
+            "g100": "{gray.50}"
+          }
+        }
+      }
+    }
+  },
+  "chat": {
+    "avatar": {
+      "agent": {
+        "$type": "color",
+        "$description": "Avatar background color for human agents in chat. Use to distinguish agent messages from bot or user.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{gray.80}",
+            "g10": "{gray.80}",
+            "g90": "{gray.30}",
+            "g100": "{gray.30}"
+          }
+        }
+      },
+      "bot": {
+        "$type": "color",
+        "$description": "Avatar background color for AI bots in chat. Use to identify automated or AI-generated responses.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{gray.60}",
+            "g10": "{gray.60}",
+            "g90": "{gray.50}",
+            "g100": "{gray.50}"
+          }
+        }
+      },
+      "user": {
+        "$type": "color",
+        "$description": "Avatar background color for users in chat. Use to identify messages from the current user.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{blue.60}",
+            "g10": "{blue.60}",
+            "g90": "{blue.50}",
+            "g100": "{blue.50}"
+          }
+        }
+      }
+    },
+    "bubble": {
+      "agent": {
+        "$type": "color",
+        "$description": "Background color for agent message bubbles. Use for messages from human agents in chat interfaces.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{white.default}",
+            "g10": "{white.default}",
+            "g90": "{gray.90}",
+            "g100": "{gray.90}"
+          }
+        },
+        "text": {
+          "$type": "color",
+          "$description": "Text color for agent message bubbles. Ensures readable contrast in agent messages.",
+          "$extensions": {
+            "carbon.themes": {
+              "white": "{gray.100}",
+              "g10": "{gray.100}",
+              "g90": "{gray.10}",
+              "g100": "{gray.10}"
+            }
+          }
+        }
+      },
+      "border": {
+        "$type": "color",
+        "$description": "Border color for chat message bubbles. Provides visual definition for all message types.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{gray.20}",
+            "g10": "{gray.20}",
+            "g90": "{gray.70}",
+            "g100": "{gray.70}"
+          }
+        }
+      },
+      "user": {
+        "$type": "color",
+        "$description": "Background color for user message bubbles. Use for messages from the current user in chat interfaces.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{gray.20}",
+            "g10": "{gray.20}",
+            "g90": "{gray.80}",
+            "g100": "{gray.80}"
+          }
+        },
+        "text": {
+          "$type": "color",
+          "$description": "Text color for user message bubbles. Ensures readable contrast in user messages.",
+          "$extensions": {
+            "carbon.themes": {
+              "white": "{gray.100}",
+              "g10": "{gray.100}",
+              "g90": "{gray.10}",
+              "g100": "{gray.10}"
+            }
+          }
+        }
+      }
+    },
+    "button": {
+      "$type": "color",
+      "$description": "Icon color for chat action buttons. Use for interactive elements within chat interface.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{blue.60}",
+          "g10": "{blue.60}",
+          "g90": "{blue.40}",
+          "g100": "{blue.40}"
+        }
+      },
+      "active": {
+        "$type": "color",
+        "$description": "Background color for chat buttons in active/pressed state. Use when user clicks chat actions.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": {
+              "value": "{gray.50}",
+              "alpha": 0.5
+            },
+            "g10": {
+              "value": "{gray.50}",
+              "alpha": 0.5
+            },
+            "g90": {
+              "value": "{gray.50}",
+              "alpha": 0.4
+            },
+            "g100": {
+              "value": "{gray.50}",
+              "alpha": 0.4
+            }
+          }
+        }
+      },
+      "hover": {
+        "$type": "color",
+        "$description": "Background color for chat buttons on hover. Use to provide feedback when hovering over chat actions.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": {
+              "value": "{gray.50}",
+              "alpha": 0.12
+            },
+            "g10": {
+              "value": "{gray.50}",
+              "alpha": 0.12
+            },
+            "g90": {
+              "value": "{gray.50}",
+              "alpha": 0.16
+            },
+            "g100": {
+              "value": "{gray.50}",
+              "alpha": 0.16
+            }
+          }
+        }
+      },
+      "selected": {
+        "$type": "color",
+        "$description": "Background color for selected chat buttons. Use to highlight currently active chat action.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": {
+              "value": "{gray.50}",
+              "alpha": 0.2
+            },
+            "g10": {
+              "value": "{gray.50}",
+              "alpha": 0.2
+            },
+            "g90": {
+              "value": "{gray.50}",
+              "alpha": 0.24
+            },
+            "g100": {
+              "value": "{gray.50}",
+              "alpha": 0.24
+            }
+          }
+        }
+      },
+      "text": {
+        "hover": {
+          "$type": "color",
+          "$description": "Text color for chat buttons on hover. Provides visual feedback for interactive chat elements.",
+          "$extensions": {
+            "carbon.themes": {
+              "white": "{blue.70}",
+              "g10": "{blue.70}",
+              "g90": "{blue.30}",
+              "g100": "{blue.30}"
+            }
+          }
+        },
+        "selected": {
+          "$type": "color",
+          "$description": "Text color for selected chat buttons. Indicates the currently active chat action.",
+          "$extensions": {
+            "carbon.themes": {
+              "white": "{gray.70}",
+              "g10": "{gray.70}",
+              "g90": "{gray.30}",
+              "g100": "{gray.30}"
+            }
+          }
+        }
+      }
+    },
+    "header": {
+      "background": {
+        "$type": "color",
+        "$description": "Background color for chat header. Use for the top section of chat interfaces.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{white.default}",
+            "g10": "{white.default}",
+            "g90": "{gray.90}",
+            "g100": "{gray.90}"
+          }
+        }
+      },
+      "text": {
+        "$type": "color",
+        "$description": "Text color for chat header. Ensures readable titles and labels in chat header.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{gray.100}",
+            "g10": "{gray.100}",
+            "g90": "{gray.10}",
+            "g100": "{gray.10}"
+          }
+        }
+      }
+    },
+    "prompt": {
+      "background": {
+        "$type": "color",
+        "$description": "Background color for chat input prompt area. Use for the message composition field.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{white.default}",
+            "g10": "{white.default}",
+            "g90": "{gray.100}",
+            "g100": "{gray.100}"
+          }
+        }
+      },
+      "border": {
+        "end": {
+          "$type": "color",
+          "$description": "End color for chat prompt border gradient. Creates fade effect at edge of input area.",
+          "$extensions": {
+            "carbon.themes": {
+              "white": {
+                "value": "{gray.10}",
+                "alpha": 0
+              },
+              "g10": {
+                "value": "{gray.10}",
+                "alpha": 0
+              },
+              "g90": {
+                "value": "{gray.90}",
+                "alpha": 0
+              },
+              "g100": {
+                "value": "{gray.90}",
+                "alpha": 0
+              }
+            }
+          }
+        },
+        "start": {
+          "$type": "color",
+          "$description": "Start color for chat prompt border gradient. Defines the beginning of input border gradient.",
+          "$extensions": {
+            "carbon.themes": {
+              "white": "{gray.10}",
+              "g10": "{gray.10}",
+              "g90": "{gray.90}",
+              "g100": "{gray.90}"
+            }
+          }
+        }
+      },
+      "text": {
+        "$type": "color",
+        "$description": "Text color for chat input prompt. Ensures readable text in message composition area.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{gray.100}",
+            "g10": "{gray.100}",
+            "g90": "{gray.10}",
+            "g100": "{gray.10}"
+          }
+        }
+      }
+    },
+    "shell": {
+      "background": {
+        "$type": "color",
+        "$description": "Background color for chat container shell. Use as the base surface for entire chat interface.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{white.default}",
+            "g10": "{white.default}",
+            "g90": "{gray.90}",
+            "g100": "{gray.90}"
+          }
+        }
+      }
+    }
+  },
+  "field": {
+    "01": {
+      "$type": "color",
+      "$description": "Background color for form fields on layer 01. Use for input fields, text areas, and selects on first layer.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{gray.10}",
+          "g10": "{white.default}",
+          "g90": "{gray.80}",
+          "g100": "{gray.90}"
+        }
+      }
+    },
+    "02": {
+      "$type": "color",
+      "$description": "Background color for form fields on layer 02. Use for input fields on second layer surfaces.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{white.default}",
+          "g10": "{gray.10}",
+          "g90": "{gray.70}",
+          "g100": "{gray.80}"
+        }
+      }
+    },
+    "03": {
+      "$type": "color",
+      "$description": "Background color for form fields on layer 03. Use for input fields on third layer surfaces.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{gray.10}",
+          "g10": "{white.default}",
+          "g90": "{gray.60}",
+          "g100": "{gray.70}"
+        }
+      }
+    },
+    "hover": {
+      "01": {
+        "$type": "color",
+        "$description": "Hover background for fields on layer 01. Use when user hovers over input fields on first layer.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{gray.10Hover}",
+            "g10": "{gray.10Hover}",
+            "g90": "{gray.80Hover}",
+            "g100": "{gray.90Hover}"
+          }
+        }
+      },
+      "02": {
+        "$type": "color",
+        "$description": "Hover background for fields on layer 02. Use when user hovers over input fields on second layer.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{gray.10Hover}",
+            "g10": "{gray.10Hover}",
+            "g90": "{gray.70Hover}",
+            "g100": "{gray.80Hover}"
+          }
+        }
+      },
+      "03": {
+        "$type": "color",
+        "$description": "Hover background for fields on layer 03. Use when user hovers over input fields on third layer.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{gray.10Hover}",
+            "g10": "{gray.10Hover}",
+            "g90": "{gray.60Hover}",
+            "g100": "{gray.70Hover}"
+          }
+        }
+      }
+    }
+  },
+  "focus": {
+    "$type": "color",
+    "$description": "Focus indicator color. Use for focus rings and outlines on interactive elements for keyboard navigation.",
+    "$extensions": {
+      "carbon.themes": {
+        "white": "{blue.60}",
+        "g10": "{blue.60}",
+        "g90": "{white.default}",
+        "g100": "{white.default}"
+      }
+    },
+    "inset": {
+      "$type": "color",
+      "$description": "Inset focus indicator color. Use for inner focus rings on elements with colored backgrounds.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{white.default}",
+          "g10": "{white.default}",
+          "g90": "{gray.100}",
+          "g100": "{gray.100}"
+        }
+      }
+    },
+    "inverse": {
+      "$type": "color",
+      "$description": "Focus indicator for inverse/dark elements. Use for focus rings on dark backgrounds.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{white.default}",
+          "g10": "{white.default}",
+          "g90": "{blue.60}",
+          "g100": "{blue.60}"
+        }
+      }
+    }
+  },
+  "highlight": {
+    "$type": "color",
+    "$description": "Highlight color for selected text or emphasized content. Use for text selection or search result highlighting.",
+    "$extensions": {
+      "carbon.themes": {
+        "white": "{blue.20}",
+        "g10": "{blue.20}",
+        "g90": "{blue.80}",
+        "g100": "{blue.90}"
+      }
+    }
+  },
+  "icon": {
+    "disabled": {
+      "$type": "color",
+      "$description": "Icon color for disabled state. Use when icons need to indicate unavailable or inactive functionality.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": {
+            "value": "{gray.100}",
+            "alpha": 0.25
+          },
+          "g10": {
+            "value": "{gray.100}",
+            "alpha": 0.25
+          },
+          "g90": {
+            "value": "{gray.10}",
+            "alpha": 0.25
+          },
+          "g100": {
+            "value": "{gray.10}",
+            "alpha": 0.25
+          }
+        }
+      }
+    },
+    "interactive": {
+      "$type": "color",
+      "$description": "Icon color for interactive elements. Use for clickable icons, buttons, and actionable items.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{blue.60}",
+          "g10": "{blue.60}",
+          "g90": "{white.default}",
+          "g100": "{white.default}"
+        }
+      }
+    },
+    "inverse": {
+      "$type": "color",
+      "$description": "Icon color for inverse/dark backgrounds. Use for icons on dark surfaces or inverse components.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{white.default}",
+          "g10": "{white.default}",
+          "g90": "{gray.100}",
+          "g100": "{gray.100}"
+        }
+      }
+    },
+    "on": {
+      "color": {
+        "$type": "color",
+        "$description": "Icon color for colored backgrounds. Use for icons on brand colors, buttons, or colored surfaces.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{white.default}",
+            "g10": "{white.default}",
+            "g90": "{white.default}",
+            "g100": "{white.default}"
+          }
+        },
+        "disabled": {
+          "$type": "color",
+          "$description": "Disabled icon color on colored backgrounds. Use when icons on colored surfaces are inactive.",
+          "$extensions": {
+            "carbon.themes": {
+              "white": "{gray.50}",
+              "g10": "{gray.50}",
+              "g90": {
+                "value": "{white.default}",
+                "alpha": 0.25
+              },
+              "g100": {
+                "value": "{white.default}",
+                "alpha": 0.25
+              }
+            }
+          }
+        }
+      }
+    },
+    "primary": {
+      "$type": "color",
+      "$description": "Primary icon color. Use for main icons with highest visual priority and emphasis.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{gray.100}",
+          "g10": "{gray.100}",
+          "g90": "{gray.10}",
+          "g100": "{gray.10}"
+        }
+      }
+    },
+    "secondary": {
+      "$type": "color",
+      "$description": "Secondary icon color. Use for supporting icons with less emphasis than primary.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{gray.70}",
+          "g10": "{gray.70}",
+          "g90": "{gray.30}",
+          "g100": "{gray.30}"
+        }
+      }
+    }
+  },
+  "interactive": {
+    "$type": "color",
+    "$description": "Interactive element color. Use for clickable elements, links, and actionable items.",
+    "$extensions": {
+      "carbon.themes": {
+        "white": "{blue.60}",
+        "g10": "{blue.60}",
+        "g90": "{blue.50}",
+        "g100": "{blue.50}"
+      }
+    }
+  },
+  "layer": {
+    "01": {
+      "$type": "color",
+      "$description": "Primary layer background",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{gray.10}",
+          "g10": "{white.default}",
+          "g90": "{gray.80}",
+          "g100": "{gray.90}"
+        }
+      }
+    },
+    "02": {
+      "$type": "color",
+      "$description": "Secondary layer background",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{white.default}",
+          "g10": "{gray.10}",
+          "g90": "{gray.70}",
+          "g100": "{gray.80}"
+        }
+      }
+    },
+    "03": {
+      "$type": "color",
+      "$description": "Tertiary layer background",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{gray.10}",
+          "g10": "{white.default}",
+          "g90": "{gray.60}",
+          "g100": "{gray.70}"
+        }
+      }
+    },
+    "accent": {
+      "01": {
+        "$type": "color",
+        "$description": "Primary accent layer",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{gray.20}",
+            "g10": "{gray.20}",
+            "g90": "{gray.70}",
+            "g100": "{gray.80}"
+          }
+        }
+      },
+      "02": {
+        "$type": "color",
+        "$description": "Secondary accent layer",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{gray.20}",
+            "g10": "{gray.20}",
+            "g90": "{gray.60}",
+            "g100": "{gray.70}"
+          }
+        }
+      },
+      "03": {
+        "$type": "color",
+        "$description": "Tertiary accent layer",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{gray.20}",
+            "g10": "{gray.20}",
+            "g90": "{gray.50}",
+            "g100": "{gray.60}"
+          }
+        }
+      },
+      "active": {
+        "01": {
+          "$type": "color",
+          "$description": "Active state for accent layer 01",
+          "$extensions": {
+            "carbon.themes": {
+              "white": "{gray.40}",
+              "g10": "{gray.40}",
+              "g90": "{gray.50}",
+              "g100": "{gray.60}"
+            }
+          }
+        },
+        "02": {
+          "$type": "color",
+          "$description": "Active state for accent layer 02",
+          "$extensions": {
+            "carbon.themes": {
+              "white": "{gray.40}",
+              "g10": "{gray.40}",
+              "g90": "{gray.80}",
+              "g100": "{gray.50}"
+            }
+          }
+        },
+        "03": {
+          "$type": "color",
+          "$description": "Active state for accent layer 03",
+          "$extensions": {
+            "carbon.themes": {
+              "white": "{gray.40}",
+              "g10": "{gray.40}",
+              "g90": "{gray.70}",
+              "g100": "{gray.80}"
+            }
+          }
+        }
+      },
+      "hover": {
+        "01": {
+          "$type": "color",
+          "$description": "Hover state for accent layer 01",
+          "$extensions": {
+            "carbon.themes": {
+              "white": "{gray.20Hover}",
+              "g10": "{gray.20Hover}",
+              "g90": "{gray.70Hover}",
+              "g100": "{gray.80Hover}"
+            }
+          }
+        },
+        "02": {
+          "$type": "color",
+          "$description": "Hover state for accent layer 02",
+          "$extensions": {
+            "carbon.themes": {
+              "white": "{gray.20Hover}",
+              "g10": "{gray.20Hover}",
+              "g90": "{gray.60Hover}",
+              "g100": "{gray.70Hover}"
+            }
+          }
+        },
+        "03": {
+          "$type": "color",
+          "$description": "Hover state for accent layer 03",
+          "$extensions": {
+            "carbon.themes": {
+              "white": "{gray.20Hover}",
+              "g10": "{gray.20Hover}",
+              "g90": "{gray.50Hover}",
+              "g100": "{gray.60Hover}"
+            }
+          }
+        }
+      }
+    },
+    "active": {
+      "01": {
+        "$type": "color",
+        "$description": "Active state for layer 01",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{gray.30}",
+            "g10": "{gray.30}",
+            "g90": "{gray.60}",
+            "g100": "{gray.70}"
+          }
+        }
+      },
+      "02": {
+        "$type": "color",
+        "$description": "Active state for layer 02",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{gray.30}",
+            "g10": "{gray.30}",
+            "g90": "{gray.50}",
+            "g100": "{gray.60}"
+          }
+        }
+      },
+      "03": {
+        "$type": "color",
+        "$description": "Active state for layer 03",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{gray.30}",
+            "g10": "{gray.30}",
+            "g90": "{gray.80}",
+            "g100": "{gray.50}"
+          }
+        }
+      }
+    },
+    "background": {
+      "01": {
+        "$type": "color",
+        "$description": "Background behind layer 01",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{white.default}",
+            "g10": "{gray.10}",
+            "g90": "{gray.90}",
+            "g100": "{gray.100}"
+          }
+        }
+      },
+      "02": {
+        "$type": "color",
+        "$description": "Background behind layer 02",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{gray.10}",
+            "g10": "{white.default}",
+            "g90": "{gray.80}",
+            "g100": "{gray.90}"
+          }
+        }
+      },
+      "03": {
+        "$type": "color",
+        "$description": "Background behind layer 03",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{white.default}",
+            "g10": "{gray.10}",
+            "g90": "{gray.70}",
+            "g100": "{gray.80}"
+          }
+        }
+      }
+    },
+    "hover": {
+      "01": {
+        "$type": "color",
+        "$description": "Hover state for layer 01",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{gray.10Hover}",
+            "g10": "{gray.10Hover}",
+            "g90": "{gray.80Hover}",
+            "g100": "{gray.90Hover}"
+          }
+        }
+      },
+      "02": {
+        "$type": "color",
+        "$description": "Hover state for layer 02",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{gray.10Hover}",
+            "g10": "{gray.10Hover}",
+            "g90": "{gray.70Hover}",
+            "g100": "{gray.80Hover}"
+          }
+        }
+      },
+      "03": {
+        "$type": "color",
+        "$description": "Hover state for layer 03",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{gray.10Hover}",
+            "g10": "{gray.10Hover}",
+            "g90": "{gray.60Hover}",
+            "g100": "{gray.70Hover}"
+          }
+        }
+      }
+    },
+    "selected": {
+      "01": {
+        "$type": "color",
+        "$description": "Selected state for layer 01",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{gray.20}",
+            "g10": "{gray.20}",
+            "g90": "{gray.70}",
+            "g100": "{gray.80}"
+          }
+        }
+      },
+      "02": {
+        "$type": "color",
+        "$description": "Selected state for layer 02",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{gray.20}",
+            "g10": "{gray.20}",
+            "g90": "{gray.60}",
+            "g100": "{gray.70}"
+          }
+        }
+      },
+      "03": {
+        "$type": "color",
+        "$description": "Selected state for layer 03",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{gray.20}",
+            "g10": "{gray.20}",
+            "g90": "{gray.70}",
+            "g100": "{gray.60}"
+          }
+        }
+      },
+      "disabled": {
+        "$type": "color",
+        "$description": "Disabled. Token for disabled in the design system.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{gray.50}",
+            "g10": "{gray.50}",
+            "g90": "{gray.40}",
+            "g100": "{gray.40}"
+          }
+        }
+      },
+      "hover": {
+        "01": {
+          "$type": "color",
+          "$description": "Hover state for selected layer 01",
+          "$extensions": {
+            "carbon.themes": {
+              "white": "{gray.20Hover}",
+              "g10": "{gray.20Hover}",
+              "g90": "{gray.70Hover}",
+              "g100": "{gray.80Hover}"
+            }
+          }
+        },
+        "02": {
+          "$type": "color",
+          "$description": "Hover state for selected layer 02",
+          "$extensions": {
+            "carbon.themes": {
+              "white": "{gray.20Hover}",
+              "g10": "{gray.20Hover}",
+              "g90": "{gray.60Hover}",
+              "g100": "{gray.70Hover}"
+            }
+          }
+        },
+        "03": {
+          "$type": "color",
+          "$description": "Hover state for selected layer 03",
+          "$extensions": {
+            "carbon.themes": {
+              "white": "{gray.20Hover}",
+              "g10": "{gray.20Hover}",
+              "g90": "{gray.70Hover}",
+              "g100": "{gray.60Hover}"
+            }
+          }
+        }
+      },
+      "inverse": {
+        "$type": "color",
+        "$description": "Inverse. Token for inverse in the design system.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{gray.100}",
+            "g10": "{gray.100}",
+            "g90": "{gray.10}",
+            "g100": "{gray.10}"
+          }
+        }
+      }
+    }
+  },
+  "link": {
+    "inverse": {
+      "$type": "color",
+      "$description": "Link color for dark backgrounds. Use for links on inverse or dark surfaces.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{blue.40}",
+          "g10": "{blue.40}",
+          "g90": "{blue.60}",
+          "g100": "{blue.60}"
+        }
+      },
+      "active": {
+        "$type": "color",
+        "$description": "Active state for inverse links. Use when user clicks links on dark backgrounds.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{gray.10}",
+            "g10": "{gray.10}",
+            "g90": "{gray.100}",
+            "g100": "{gray.100}"
+          }
+        }
+      },
+      "hover": {
+        "$type": "color",
+        "$description": "Hover state for inverse links. Use when hovering over links on dark backgrounds.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{blue.30}",
+            "g10": "{blue.30}",
+            "g90": "{blue.70}",
+            "g100": "{blue.70}"
+          }
+        }
+      },
+      "visited": {
+        "$type": "color",
+        "$description": "Visited link color for dark backgrounds. Use for previously clicked links on inverse surfaces.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{purple.40}",
+            "g10": "{purple.40}",
+            "g90": "{purple.60}",
+            "g100": "{purple.60}"
+          }
+        }
+      }
+    },
+    "primary": {
+      "$type": "color",
+      "$description": "Primary link color. Use for standard hyperlinks and navigation links.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{blue.60}",
+          "g10": "{blue.60}",
+          "g90": "{blue.40}",
+          "g100": "{blue.40}"
+        }
+      },
+      "hover": {
+        "$type": "color",
+        "$description": "Hover color for primary links. Use when user hovers over standard links.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{blue.70}",
+            "g10": "{blue.70}",
+            "g90": "{blue.30}",
+            "g100": "{blue.30}"
+          }
+        }
+      }
+    },
+    "secondary": {
+      "$type": "color",
+      "$description": "Secondary link color. Use for less prominent links or alternative link styles.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{blue.70}",
+          "g10": "{blue.70}",
+          "g90": "{blue.30}",
+          "g100": "{blue.30}"
+        }
+      }
+    },
+    "visited": {
+      "$type": "color",
+      "$description": "Color for visited links. Use to indicate previously clicked links.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{purple.60}",
+          "g10": "{purple.60}",
+          "g90": "{purple.40}",
+          "g100": "{purple.40}"
+        }
+      }
+    }
+  },
+  "overlay": {
+    "$type": "color",
+    "$description": "Overlay color for modal backgrounds. Use to dim content behind dialogs and modals.",
+    "$extensions": {
+      "carbon.themes": {
+        "white": {
+          "value": "{black.default}",
+          "alpha": 0.6
+        },
+        "g10": {
+          "value": "{black.default}",
+          "alpha": 0.6
+        },
+        "g90": {
+          "value": "{black.default}",
+          "alpha": 0.6
+        },
+        "g100": {
+          "value": "{black.default}",
+          "alpha": 0.6
+        }
+      }
+    }
+  },
+  "shadow": {
+    "$type": "color",
+    "$description": "Shadow color for elevation. Provides depth and layering for elevated components.",
+    "$extensions": {
+      "carbon.themes": {
+        "white": {
+          "value": "{black.default}",
+          "alpha": 0.3
+        },
+        "g10": {
+          "value": "{black.default}",
+          "alpha": 0.3
+        },
+        "g90": {
+          "value": "{black.default}",
+          "alpha": 0.8
+        },
+        "g100": {
+          "value": "{black.default}",
+          "alpha": 0.8
+        }
+      }
+    }
+  },
+  "skeleton": {
+    "background": {
+      "$type": "color",
+      "$description": "Background color for skeleton loaders. Use as base for loading placeholders.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{gray.10Hover}",
+          "g10": "{gray.10Hover}",
+          "g90": "{gray.90Hover}",
+          "g100": "{gray.100Hover}"
+        }
+      }
+    },
+    "element": {
+      "$type": "color",
+      "$description": "Element color for skeleton loaders. Provides the animated shimmer effect for loading states.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{gray.30}",
+          "g10": "{gray.30}",
+          "g90": "{gray.70}",
+          "g100": "{gray.80}"
+        }
+      }
+    }
+  },
+  "support": {
+    "caution": {
+      "major": {
+        "$type": "color",
+        "$description": "Major caution color. Use for high-severity warnings or significant issues.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{orange.40}",
+            "g10": "{orange.40}",
+            "g90": "{orange.40}",
+            "g100": "{orange.40}"
+          }
+        }
+      },
+      "minor": {
+        "$type": "color",
+        "$description": "Minor caution color. Use for low-severity warnings or minor issues.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{yellow.30}",
+            "g10": "{yellow.30}",
+            "g90": "{yellow.30}",
+            "g100": "{yellow.30}"
+          }
+        }
+      },
+      "undefined": {
+        "$type": "color",
+        "$description": "Undefined caution color. Use for unknown or indeterminate caution states.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{purple.60}",
+            "g10": "{purple.60}",
+            "g90": "{purple.50}",
+            "g100": "{purple.50}"
+          }
+        }
+      }
+    },
+    "error": {
+      "$type": "color",
+      "$description": "Error color for critical states. Use for error messages, failed validations, and critical alerts.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{red.60}",
+          "g10": "{red.60}",
+          "g90": "{red.40}",
+          "g100": "{red.50}"
+        }
+      },
+      "inverse": {
+        "$type": "color",
+        "$description": "Error color for dark backgrounds. Use for error indicators on inverse surfaces.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{red.50}",
+            "g10": "{red.50}",
+            "g90": "{red.60}",
+            "g100": "{red.60}"
+          }
+        }
+      }
+    },
+    "info": {
+      "$type": "color",
+      "$description": "Info color for informational states. Use for helpful tips, neutral information, and guidance.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{blue.70}",
+          "g10": "{blue.70}",
+          "g90": "{blue.50}",
+          "g100": "{blue.50}"
+        }
+      },
+      "inverse": {
+        "$type": "color",
+        "$description": "Info color for dark backgrounds. Use for info indicators on inverse surfaces.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{blue.50}",
+            "g10": "{blue.50}",
+            "g90": "{blue.70}",
+            "g100": "{blue.70}"
+          }
+        }
+      }
+    },
+    "success": {
+      "$type": "color",
+      "$description": "Success color for positive states. Use for success messages, completed actions, and confirmations.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{green.50}",
+          "g10": "{green.50}",
+          "g90": "{green.40}",
+          "g100": "{green.40}"
+        }
+      },
+      "inverse": {
+        "$type": "color",
+        "$description": "Success color for dark backgrounds. Use for success indicators on inverse surfaces.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{green.40}",
+            "g10": "{green.40}",
+            "g90": "{green.50}",
+            "g100": "{green.50}"
+          }
+        }
+      }
+    },
+    "warning": {
+      "$type": "color",
+      "$description": "Warning color for caution states. Use for warnings, potential issues, and items needing attention.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{yellow.30}",
+          "g10": "{yellow.30}",
+          "g90": "{yellow.30}",
+          "g100": "{yellow.30}"
+        }
+      },
+      "inverse": {
+        "$type": "color",
+        "$description": "Warning color for dark backgrounds. Use for warning indicators on inverse surfaces.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{yellow.30}",
+            "g10": "{yellow.30}",
+            "g90": "{yellow.30}",
+            "g100": "{yellow.30}"
+          }
+        }
+      }
+    }
+  },
+  "syntax": {
+    "angle": {
+      "bracket": {
+        "$type": "color",
+        "$description": "Bracket. Token for bracket in the design system.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{coolGray.60}",
+            "g10": "{coolGray.60}",
+            "g90": "{gray.50}",
+            "g100": "{gray.50}"
+          }
+        }
+      }
+    },
+    "annotation": {
+      "$type": "color",
+      "$description": "Annotation. Token for annotation in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{teal.60}",
+          "g10": "{teal.60}",
+          "g90": "{teal.40}",
+          "g100": "{teal.40}"
+        }
+      }
+    },
+    "arithmetic": {
+      "operator": {
+        "$type": "color",
+        "$description": "Operator. Token for operator in the design system.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{coolGray.80}",
+            "g10": "{coolGray.80}",
+            "g90": "{gray.20}",
+            "g100": "{gray.20}"
+          }
+        }
+      }
+    },
+    "atom": {
+      "$type": "color",
+      "$description": "Atom. Token for atom in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{gray.100}",
+          "g10": "{gray.100}",
+          "g90": "{gray.10}",
+          "g100": "{gray.10}"
+        }
+      }
+    },
+    "attribute": {
+      "$type": "color",
+      "$description": "Attribute. Token for attribute in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{cyan.70}",
+          "g10": "{cyan.70}",
+          "g90": "{cyan.40}",
+          "g100": "{cyan.40}"
+        }
+      },
+      "name": {
+        "$type": "color",
+        "$description": "Name. Token for name in the design system.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{cyan.70}",
+            "g10": "{cyan.70}",
+            "g90": "{cyan.40}",
+            "g100": "{cyan.40}"
+          }
+        }
+      },
+      "value": {
+        "$type": "color",
+        "$description": "Value. Token for value in the design system.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{gray.100}",
+            "g10": "{gray.100}",
+            "g90": "{gray.10}",
+            "g100": "{gray.10}"
+          }
+        }
+      }
+    },
+    "bitwise": {
+      "operator": {
+        "$type": "color",
+        "$description": "Operator. Token for operator in the design system.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{coolGray.80}",
+            "g10": "{coolGray.80}",
+            "g90": "{gray.20}",
+            "g100": "{gray.20}"
+          }
+        }
+      }
+    },
+    "block": {
+      "comment": {
+        "$type": "color",
+        "$description": "Comment. Token for comment in the design system.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{green.60}",
+            "g10": "{green.60}",
+            "g90": "{green.40}",
+            "g100": "{green.40}"
+          }
+        }
+      }
+    },
+    "bool": {
+      "$type": "color",
+      "$description": "Bool. Token for bool in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{gray.100}",
+          "g10": "{gray.100}",
+          "g90": "{gray.10}",
+          "g100": "{gray.10}"
+        }
+      }
+    },
+    "brace": {
+      "$type": "color",
+      "$description": "Brace. Token for brace in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{coolGray.80}",
+          "g10": "{coolGray.80}",
+          "g90": "{gray.20}",
+          "g100": "{gray.20}"
+        }
+      }
+    },
+    "bracket": {
+      "$type": "color",
+      "$description": "Bracket. Token for bracket in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{coolGray.80}",
+          "g10": "{coolGray.80}",
+          "g90": "{gray.20}",
+          "g100": "{gray.20}"
+        }
+      }
+    },
+    "character": {
+      "$type": "color",
+      "$description": "Character. Token for character in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{gray.100}",
+          "g10": "{gray.100}",
+          "g90": "{gray.10}",
+          "g100": "{gray.10}"
+        }
+      }
+    },
+    "class": {
+      "name": {
+        "$type": "color",
+        "$description": "Name. Token for name in the design system.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{teal.60}",
+            "g10": "{teal.60}",
+            "g90": "{teal.30}",
+            "g100": "{teal.30}"
+          }
+        }
+      }
+    },
+    "color": {
+      "$type": "color",
+      "$description": "Color. Token for color in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{gray.100}",
+          "g10": "{gray.100}",
+          "g90": "{gray.10}",
+          "g100": "{gray.10}"
+        }
+      }
+    },
+    "comment": {
+      "$type": "color",
+      "$description": "Comment. Token for comment in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{green.60}",
+          "g10": "{green.60}",
+          "g90": "{green.40}",
+          "g100": "{green.40}"
+        }
+      }
+    },
+    "compare": {
+      "operator": {
+        "$type": "color",
+        "$description": "Operator. Token for operator in the design system.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{coolGray.80}",
+            "g10": "{coolGray.80}",
+            "g90": "{gray.20}",
+            "g100": "{gray.20}"
+          }
+        }
+      }
+    },
+    "constant": {
+      "$type": "color",
+      "$description": "Constant. Token for constant in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{blue.60}",
+          "g10": "{blue.60}",
+          "g90": "{blue.50}",
+          "g100": "{blue.50}"
+        }
+      }
+    },
+    "content": {
+      "$type": "color",
+      "$description": "Content. Token for content in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{gray.100}",
+          "g10": "{gray.100}",
+          "g90": "{gray.10}",
+          "g100": "{gray.10}"
+        }
+      },
+      "separator": {
+        "$type": "color",
+        "$description": "Separator. Token for separator in the design system.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{coolGray.80}",
+            "g10": "{coolGray.80}",
+            "g90": "{gray.20}",
+            "g100": "{gray.20}"
+          }
+        }
+      }
+    },
+    "control": {
+      "keyword": {
+        "$type": "color",
+        "$description": "Keyword. Token for keyword in the design system.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{purple.70}",
+            "g10": "{purple.70}",
+            "g90": "{purple.40}",
+            "g100": "{purple.40}"
+          }
+        }
+      },
+      "operator": {
+        "$type": "color",
+        "$description": "Operator. Token for operator in the design system.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{purple.70}",
+            "g10": "{purple.70}",
+            "g90": "{purple.40}",
+            "g100": "{purple.40}"
+          }
+        }
+      }
+    },
+    "definition": {
+      "$type": "color",
+      "$description": "Definition. Token for definition in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{cyan.70}",
+          "g10": "{cyan.70}",
+          "g90": "{cyan.40}",
+          "g100": "{cyan.40}"
+        }
+      },
+      "keyword": {
+        "$type": "color",
+        "$description": "Keyword. Token for keyword in the design system.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{cyan.70}",
+            "g10": "{cyan.70}",
+            "g90": "{cyan.40}",
+            "g100": "{cyan.40}"
+          }
+        }
+      },
+      "operator": {
+        "$type": "color",
+        "$description": "Operator. Token for operator in the design system.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{cyan.70}",
+            "g10": "{cyan.70}",
+            "g90": "{cyan.40}",
+            "g100": "{cyan.40}"
+          }
+        }
+      }
+    },
+    "deleted": {
+      "$type": "color",
+      "$description": "Deleted. Token for deleted in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{red.20}",
+          "g10": "{red.20}",
+          "g90": "{red.70}",
+          "g100": "{red.70}"
+        }
+      }
+    },
+    "deref": {
+      "operator": {
+        "$type": "color",
+        "$description": "Operator. Token for operator in the design system.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{coolGray.80}",
+            "g10": "{coolGray.80}",
+            "g90": "{gray.20}",
+            "g100": "{gray.20}"
+          }
+        }
+      }
+    },
+    "doc": {
+      "comment": {
+        "$type": "color",
+        "$description": "Comment. Token for comment in the design system.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{green.60}",
+            "g10": "{green.60}",
+            "g90": "{green.40}",
+            "g100": "{green.40}"
+          }
+        }
+      },
+      "string": {
+        "$type": "color",
+        "$description": "String. Token for string in the design system.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{gray.100}",
+            "g10": "{gray.100}",
+            "g90": "{gray.10}",
+            "g100": "{gray.10}"
+          }
+        }
+      }
+    },
+    "document": {
+      "meta": {
+        "$type": "color",
+        "$description": "Meta. Token for meta in the design system.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{green.60}",
+            "g10": "{green.60}",
+            "g90": "{green.40}",
+            "g100": "{green.40}"
+          }
+        }
+      }
+    },
+    "emphasis": {
+      "$type": "color",
+      "$description": "Emphasis. Token for emphasis in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{gray.100}",
+          "g10": "{gray.100}",
+          "g90": "{gray.10}",
+          "g100": "{gray.10}"
+        }
+      }
+    },
+    "escape": {
+      "$type": "color",
+      "$description": "Escape. Token for escape in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{coolGray.80}",
+          "g10": "{coolGray.80}",
+          "g90": "{gray.20}",
+          "g100": "{gray.20}"
+        }
+      }
+    },
+    "float": {
+      "$type": "color",
+      "$description": "Float. Token for float in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{green.60}",
+          "g10": "{green.60}",
+          "g90": "{green.30}",
+          "g100": "{green.30}"
+        }
+      }
+    },
+    "function": {
+      "$type": "color",
+      "$description": "Function. Token for function in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{yellow.60}",
+          "g10": "{yellow.60}",
+          "g90": "{yellow.30}",
+          "g100": "{yellow.30}"
+        }
+      }
+    },
+    "heading": {
+      "1": {
+        "$type": "color",
+        "$description": "1. Token for 1 in the design system.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{cyan.70}",
+            "g10": "{cyan.70}",
+            "g90": "{cyan.40}",
+            "g100": "{cyan.40}"
+          }
+        }
+      },
+      "2": {
+        "$type": "color",
+        "$description": "2. Token for 2 in the design system.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{cyan.70}",
+            "g10": "{cyan.70}",
+            "g90": "{cyan.40}",
+            "g100": "{cyan.40}"
+          }
+        }
+      },
+      "3": {
+        "$type": "color",
+        "$description": "3. Token for 3 in the design system.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{cyan.70}",
+            "g10": "{cyan.70}",
+            "g90": "{cyan.40}",
+            "g100": "{cyan.40}"
+          }
+        }
+      },
+      "4": {
+        "$type": "color",
+        "$description": "4. Token for 4 in the design system.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{cyan.70}",
+            "g10": "{cyan.70}",
+            "g90": "{cyan.40}",
+            "g100": "{cyan.40}"
+          }
+        }
+      },
+      "5": {
+        "$type": "color",
+        "$description": "5. Token for 5 in the design system.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{cyan.70}",
+            "g10": "{cyan.70}",
+            "g90": "{cyan.40}",
+            "g100": "{cyan.40}"
+          }
+        }
+      },
+      "6": {
+        "$type": "color",
+        "$description": "6. Token for 6 in the design system.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{cyan.70}",
+            "g10": "{cyan.70}",
+            "g90": "{cyan.40}",
+            "g100": "{cyan.40}"
+          }
+        }
+      },
+      "$type": "color",
+      "$description": "Heading. Token for heading in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{cyan.70}",
+          "g10": "{cyan.70}",
+          "g90": "{cyan.40}",
+          "g100": "{cyan.40}"
+        }
+      }
+    },
+    "inserted": {
+      "$type": "color",
+      "$description": "Inserted. Token for inserted in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{green.20}",
+          "g10": "{green.20}",
+          "g90": "{green.60}",
+          "g100": "{green.60}"
+        }
+      }
+    },
+    "integer": {
+      "$type": "color",
+      "$description": "Integer. Token for integer in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{green.60}",
+          "g10": "{green.60}",
+          "g90": "{green.30}",
+          "g100": "{green.30}"
+        }
+      }
+    },
+    "invalid": {
+      "$type": "color",
+      "$description": "Invalid. Token for invalid in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{red.60}",
+          "g10": "{red.60}",
+          "g90": "{red.50}",
+          "g100": "{red.50}"
+        }
+      }
+    },
+    "keyword": {
+      "$type": "color",
+      "$description": "Keyword. Token for keyword in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{blue.60}",
+          "g10": "{blue.60}",
+          "g90": "{blue.50}",
+          "g100": "{blue.50}"
+        }
+      }
+    },
+    "label": {
+      "name": {
+        "$type": "color",
+        "$description": "Name. Token for name in the design system.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{blue.60}",
+            "g10": "{blue.60}",
+            "g90": "{blue.30}",
+            "g100": "{blue.30}"
+          }
+        }
+      }
+    },
+    "line": {
+      "comment": {
+        "$type": "color",
+        "$description": "Comment. Token for comment in the design system.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{green.60}",
+            "g10": "{green.60}",
+            "g90": "{green.40}",
+            "g100": "{green.40}"
+          }
+        }
+      }
+    },
+    "link": {
+      "$type": "color",
+      "$description": "Link. Token for link in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{blue.60}",
+          "g10": "{blue.60}",
+          "g90": "{blue.50}",
+          "g100": "{blue.50}"
+        }
+      }
+    },
+    "list": {
+      "$type": "color",
+      "$description": "List. Token for list in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{gray.100}",
+          "g10": "{gray.100}",
+          "g90": "{gray.10}",
+          "g100": "{gray.10}"
+        }
+      }
+    },
+    "literal": {
+      "$type": "color",
+      "$description": "Literal. Token for literal in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{gray.100}",
+          "g10": "{gray.100}",
+          "g90": "{gray.10}",
+          "g100": "{gray.10}"
+        }
+      }
+    },
+    "local": {
+      "$type": "color",
+      "$description": "Local. Token for local in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{blue.60}",
+          "g10": "{blue.60}",
+          "g90": "{blue.30}",
+          "g100": "{blue.30}"
+        }
+      }
+    },
+    "logic": {
+      "operator": {
+        "$type": "color",
+        "$description": "Operator. Token for operator in the design system.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{coolGray.80}",
+            "g10": "{coolGray.80}",
+            "g90": "{gray.20}",
+            "g100": "{gray.20}"
+          }
+        }
+      }
+    },
+    "macro": {
+      "name": {
+        "$type": "color",
+        "$description": "Name. Token for name in the design system.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{gray.100}",
+            "g10": "{gray.100}",
+            "g90": "{gray.10}",
+            "g100": "{gray.10}"
+          }
+        }
+      }
+    },
+    "meta": {
+      "$type": "color",
+      "$description": "Meta. Token for meta in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{green.60}",
+          "g10": "{green.60}",
+          "g90": "{green.40}",
+          "g100": "{green.40}"
+        }
+      }
+    },
+    "modifier": {
+      "$type": "color",
+      "$description": "Modifier. Token for modifier in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{blue.60}",
+          "g10": "{blue.60}",
+          "g90": "{blue.50}",
+          "g100": "{blue.50}"
+        }
+      }
+    },
+    "module": {
+      "keyword": {
+        "$type": "color",
+        "$description": "Keyword. Token for keyword in the design system.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{purple.70}",
+            "g10": "{purple.70}",
+            "g90": "{purple.40}",
+            "g100": "{purple.40}"
+          }
+        }
+      }
+    },
+    "monospace": {
+      "$type": "color",
+      "$description": "Monospace. Token for monospace in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{gray.100}",
+          "g10": "{gray.100}",
+          "g90": "{gray.10}",
+          "g100": "{gray.10}"
+        }
+      }
+    },
+    "name": {
+      "$type": "color",
+      "$description": "Name. Token for name in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{blue.60}",
+          "g10": "{blue.60}",
+          "g90": "{blue.30}",
+          "g100": "{blue.30}"
+        }
+      }
+    },
+    "namespace": {
+      "$type": "color",
+      "$description": "Namespace. Token for namespace in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{teal.60}",
+          "g10": "{teal.60}",
+          "g90": "{teal.30}",
+          "g100": "{teal.30}"
+        }
+      }
+    },
+    "null": {
+      "$type": "color",
+      "$description": "Null. Token for null in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{gray.100}",
+          "g10": "{gray.100}",
+          "g90": "{gray.10}",
+          "g100": "{gray.10}"
+        }
+      }
+    },
+    "number": {
+      "$type": "color",
+      "$description": "Number. Token for number in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{green.60}",
+          "g10": "{green.60}",
+          "g90": "{green.30}",
+          "g100": "{green.30}"
+        }
+      }
+    },
+    "operator": {
+      "$type": "color",
+      "$description": "Operator. Token for operator in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{coolGray.80}",
+          "g10": "{coolGray.80}",
+          "g90": "{gray.20}",
+          "g100": "{gray.20}"
+        }
+      },
+      "keyword": {
+        "$type": "color",
+        "$description": "Keyword. Token for keyword in the design system.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{blue.60}",
+            "g10": "{blue.60}",
+            "g90": "{blue.50}",
+            "g100": "{blue.50}"
+          }
+        }
+      }
+    },
+    "paren": {
+      "$type": "color",
+      "$description": "Paren. Token for paren in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{coolGray.80}",
+          "g10": "{coolGray.80}",
+          "g90": "{gray.20}",
+          "g100": "{gray.20}"
+        }
+      }
+    },
+    "processing": {
+      "instruction": {
+        "$type": "color",
+        "$description": "Instruction. Token for instruction in the design system.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{gray.100}",
+            "g10": "{gray.100}",
+            "g90": "{gray.10}",
+            "g100": "{gray.10}"
+          }
+        }
+      }
+    },
+    "property": {
+      "name": {
+        "$type": "color",
+        "$description": "Name. Token for name in the design system.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{cyan.70}",
+            "g10": "{cyan.70}",
+            "g90": "{cyan.40}",
+            "g100": "{cyan.40}"
+          }
+        }
+      }
+    },
+    "punctuation": {
+      "$type": "color",
+      "$description": "Punctuation. Token for punctuation in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{coolGray.80}",
+          "g10": "{coolGray.80}",
+          "g90": "{gray.20}",
+          "g100": "{gray.20}"
+        }
+      }
+    },
+    "quote": {
+      "$type": "color",
+      "$description": "Quote. Token for quote in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{green.60}",
+          "g10": "{green.60}",
+          "g90": "{green.40}",
+          "g100": "{green.40}"
+        }
+      }
+    },
+    "regexp": {
+      "$type": "color",
+      "$description": "Regexp. Token for regexp in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{purple.70}",
+          "g10": "{purple.70}",
+          "g90": "{purple.40}",
+          "g100": "{purple.40}"
+        }
+      }
+    },
+    "self": {
+      "$type": "color",
+      "$description": "Self. Token for self in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{teal.60}",
+          "g10": "{teal.60}",
+          "g90": "{teal.30}",
+          "g100": "{teal.30}"
+        }
+      }
+    },
+    "separator": {
+      "$type": "color",
+      "$description": "Separator. Token for separator in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{coolGray.80}",
+          "g10": "{coolGray.80}",
+          "g90": "{gray.20}",
+          "g100": "{gray.20}"
+        }
+      }
+    },
+    "special": {
+      "$type": "color",
+      "$description": "Special. Token for special in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{blue.60}",
+          "g10": "{blue.60}",
+          "g90": "{blue.50}",
+          "g100": "{blue.50}"
+        }
+      },
+      "string": {
+        "$type": "color",
+        "$description": "String. Token for string in the design system.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{purple.60}",
+            "g10": "{purple.60}",
+            "g90": "{purple.40}",
+            "g100": "{purple.40}"
+          }
+        }
+      }
+    },
+    "square": {
+      "bracket": {
+        "$type": "color",
+        "$description": "Bracket. Token for bracket in the design system.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{coolGray.80}",
+            "g10": "{coolGray.80}",
+            "g90": "{gray.20}",
+            "g100": "{gray.20}"
+          }
+        }
+      }
+    },
+    "standard": {
+      "$type": "color",
+      "$description": "Standard. Token for standard in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{blue.60}",
+          "g10": "{blue.60}",
+          "g90": "{blue.50}",
+          "g100": "{blue.50}"
+        }
+      }
+    },
+    "strikethrough": {
+      "$type": "color",
+      "$description": "Strikethrough. Token for strikethrough in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{gray.100}",
+          "g10": "{gray.100}",
+          "g90": "{gray.10}",
+          "g100": "{gray.10}"
+        }
+      }
+    },
+    "string": {
+      "$type": "color",
+      "$description": "String. Token for string in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{gray.100}",
+          "g10": "{gray.100}",
+          "g90": "{gray.10}",
+          "g100": "{gray.10}"
+        }
+      }
+    },
+    "strong": {
+      "$type": "color",
+      "$description": "Strong. Token for strong in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{gray.100}",
+          "g10": "{gray.100}",
+          "g90": "{gray.10}",
+          "g100": "{gray.10}"
+        }
+      }
+    },
+    "tag": {
+      "$type": "color",
+      "$description": "Tag. Token for tag in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{teal.60}",
+          "g10": "{teal.60}",
+          "g90": "{teal.30}",
+          "g100": "{teal.30}"
+        }
+      },
+      "name": {
+        "$type": "color",
+        "$description": "Name. Token for name in the design system.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{teal.60}",
+            "g10": "{teal.60}",
+            "g90": "{teal.30}",
+            "g100": "{teal.30}"
+          }
+        }
+      }
+    },
+    "type": {
+      "$type": "color",
+      "$description": "Type. Token for type in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{teal.60}",
+          "g10": "{teal.60}",
+          "g90": "{teal.30}",
+          "g100": "{teal.30}"
+        }
+      },
+      "name": {
+        "$type": "color",
+        "$description": "Name. Token for name in the design system.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{teal.60}",
+            "g10": "{teal.60}",
+            "g90": "{teal.30}",
+            "g100": "{teal.30}"
+          }
+        }
+      },
+      "operator": {
+        "$type": "color",
+        "$description": "Operator. Token for operator in the design system.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{teal.60}",
+            "g10": "{teal.60}",
+            "g90": "{teal.30}",
+            "g100": "{teal.30}"
+          }
+        }
+      }
+    },
+    "unit": {
+      "$type": "color",
+      "$description": "Unit. Token for unit in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{green.60}",
+          "g10": "{green.60}",
+          "g90": "{green.30}",
+          "g100": "{green.30}"
+        }
+      }
+    },
+    "update": {
+      "operator": {
+        "$type": "color",
+        "$description": "Operator. Token for operator in the design system.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{coolGray.80}",
+            "g10": "{coolGray.80}",
+            "g90": "{gray.20}",
+            "g100": "{gray.20}"
+          }
+        }
+      }
+    },
+    "url": {
+      "$type": "color",
+      "$description": "Url. Token for url in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{coolGray.80}",
+          "g10": "{coolGray.80}",
+          "g90": "{gray.20}",
+          "g100": "{gray.20}"
+        }
+      }
+    },
+    "variable": {
+      "$type": "color",
+      "$description": "Variable. Token for variable in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{blue.60}",
+          "g10": "{blue.60}",
+          "g90": "{blue.30}",
+          "g100": "{blue.30}"
+        }
+      },
+      "name": {
+        "$type": "color",
+        "$description": "Name. Token for name in the design system.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{blue.60}",
+            "g10": "{blue.60}",
+            "g90": "{blue.30}",
+            "g100": "{blue.30}"
+          }
+        }
+      }
+    }
+  },
+  "text": {
+    "disabled": {
+      "$type": "color",
+      "$description": "Disabled. Token for disabled in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": {
+            "value": "{gray.100}",
+            "alpha": 0.25
+          },
+          "g10": {
+            "value": "{gray.100}",
+            "alpha": 0.25
+          },
+          "g90": {
+            "value": "{gray.10}",
+            "alpha": 0.25
+          },
+          "g100": {
+            "value": "{gray.10}",
+            "alpha": 0.25
+          }
+        }
+      }
+    },
+    "error": {
+      "$type": "color",
+      "$description": "Error. Token for error in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{red.60}",
+          "g10": "{red.60}",
+          "g90": "{red.30}",
+          "g100": "{red.40}"
+        }
+      }
+    },
+    "helper": {
+      "$type": "color",
+      "$description": "Helper. Token for helper in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{gray.60}",
+          "g10": "{gray.60}",
+          "g90": "{gray.30}",
+          "g100": "{gray.40}"
+        }
+      }
+    },
+    "inverse": {
+      "$type": "color",
+      "$description": "Inverse. Token for inverse in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{white.default}",
+          "g10": "{white.default}",
+          "g90": "{gray.100}",
+          "g100": "{gray.100}"
+        }
+      }
+    },
+    "on": {
+      "color": {
+        "$type": "color",
+        "$description": "Color. Token for color in the design system.",
+        "$extensions": {
+          "carbon.themes": {
+            "white": "{white.default}",
+            "g10": "{white.default}",
+            "g90": "{white.default}",
+            "g100": "{white.default}"
+          }
+        },
+        "disabled": {
+          "$type": "color",
+          "$description": "Disabled. Token for disabled in the design system.",
+          "$extensions": {
+            "carbon.themes": {
+              "white": "{gray.50}",
+              "g10": "{gray.50}",
+              "g90": {
+                "value": "{white.default}",
+                "alpha": 0.25
+              },
+              "g100": {
+                "value": "{white.default}",
+                "alpha": 0.25
+              }
+            }
+          }
+        }
+      }
+    },
+    "placeholder": {
+      "$type": "color",
+      "$description": "Placeholder. Token for placeholder in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": {
+            "value": "{gray.100}",
+            "alpha": 0.4
+          },
+          "g10": {
+            "value": "{gray.100}",
+            "alpha": 0.4
+          },
+          "g90": {
+            "value": "{gray.10}",
+            "alpha": 0.4
+          },
+          "g100": {
+            "value": "{gray.10}",
+            "alpha": 0.4
+          }
+        }
+      }
+    },
+    "primary": {
+      "$type": "color",
+      "$description": "Primary. Token for primary in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{gray.100}",
+          "g10": "{gray.100}",
+          "g90": "{gray.10}",
+          "g100": "{gray.10}"
+        }
+      }
+    },
+    "secondary": {
+      "$type": "color",
+      "$description": "Secondary. Token for secondary in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{gray.70}",
+          "g10": "{gray.70}",
+          "g90": "{gray.30}",
+          "g100": "{gray.30}"
+        }
+      }
+    }
+  },
+  "toggle": {
+    "off": {
+      "$type": "color",
+      "$description": "Off. Token for off in the design system.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{gray.50}",
+          "g10": "{gray.50}",
+          "g90": "{gray.50}",
+          "g100": "{gray.60}"
+        }
+      }
+    }
+  }
+}
