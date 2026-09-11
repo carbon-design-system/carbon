@@ -233,6 +233,7 @@ export default defineConfig(
       '**/types/',
 
       'packages/*/examples/*',
+      'packages/*/src/examples/**/example/**',
 
       // Components
       'packages/components/demo/*.css',
