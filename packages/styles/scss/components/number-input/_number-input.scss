@@ -147,6 +147,7 @@
   .#{$prefix}--number input[type='number']:disabled,
   .#{$prefix}--number input[type='text']:disabled {
     background-color: $field;
+    border-block-end: 1px solid transparent;
     color: $text-disabled;
     cursor: not-allowed;
 
