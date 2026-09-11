@@ -16,6 +16,7 @@ import { prefix } from '../../globals/settings';
 import Checkmark from '@carbon/icons/es/checkmark/16.js';
 import ArrowRight from '@carbon/icons/es/arrow--right/16.js';
 import { iconLoader } from '../../globals/internal/icon-loader';
+import type { Meta } from '@storybook/web-components';
 
 const argTypes = {
   fullscreen: {
@@ -456,8 +457,8 @@ export const FullScreenWithMultipleSteps = {
   },
 };
 
-const meta = {
+const meta: Meta = {
   title: 'Components/Onboarding/InterstitialScreen',
+  tags: ['ibm-products-migrated'],
 };
-
 export default meta;

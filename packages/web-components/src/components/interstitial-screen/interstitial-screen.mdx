@@ -1,6 +1,12 @@
-import { ArgTypes, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import {
+  ArgTypes,
+  Markdown,
+  Meta,
+  Unstyled,
+} from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 import * as InterstitialScreenStories from './interstitial-screen.stories';
+import '../notification/inline-notification';
 
 <Meta of={InterstitialScreenStories} />
 
@@ -16,6 +22,18 @@ import * as InterstitialScreenStories from './interstitial-screen.stories';
 can be a full page or an overlay, and are shown on the first time a user
 accesses a new experience (e.g. upon first login or first time opening a page
 where a newly purchased capability is presented).
+
+{/* <!-- prettier-ignore-start --> */}
+
+<Unstyled style={{ marginBottom: '1.5rem' }}>
+  <cds-inline-notification
+    kind="info"
+    title="Migrated component:"
+    subtitle="This component has been migrated from Carbon for IBM Products. While visible in the v12 Storybook, migrated components are not available in the published v11 package and enabling enable-v12-release does not expose them — they will be part of the public @carbon/web-components API when v12 ships."
+  />
+</Unstyled>
+
+{/* <!-- prettier-ignore-end --> */}
 
 ## Getting started
 
