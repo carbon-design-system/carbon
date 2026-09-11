@@ -8,6 +8,7 @@
 import type { StorybookConfig } from '@storybook/react-vite';
 
 import { fileURLToPath } from 'node:url';
+import path from 'node:path';
 
 import remarkGfm from 'remark-gfm';
 import glob from 'fast-glob';
@@ -87,6 +88,10 @@ const config: StorybookConfig = {
         preprocessorOptions: {
           scss: {
             api: 'modern',
+            // Ensure Sass can resolve packages installed at the monorepo root
+            // (e.g. @carbon/ibm-products) even when the build runs from
+            // packages/react/ where those packages are not locally installed.
+            loadPaths: [path.resolve(configDir, '../../../node_modules')],
           },
         },
       },
