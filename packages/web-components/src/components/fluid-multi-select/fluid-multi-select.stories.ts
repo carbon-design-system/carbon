@@ -82,7 +82,6 @@ const args = {
   titleText: 'Label',
   label: 'Choose an option',
   selectionFeedback: SELECTION_FEEDBACK_OPTION.TOP_AFTER_REOPEN,
-  size: 'md',
   readOnly: false,
   isCondensed: false,
   warn: false,
@@ -95,6 +94,9 @@ const filterableArgs = {
   ...args,
   label: '',
 };
+
+const renderFluidMultiSelectStory = (story: unknown) =>
+  html`<div style="width: 400px">${story}</div>`;
 
 const argTypes = {
   autoalign: {
@@ -155,11 +157,6 @@ const argTypes = {
       "Specify feedback (mode) of the selection. <code>top</code>: selected item jumps to top <code>fixed</code>: selected item stays at it's position <code>top-after-reopen</code>: selected item jump to top after reopen dropdown.",
     options: selectionFeedbackOptions,
   },
-  size: {
-    control: 'select',
-    options: ['xs', 'sm', 'md', 'lg'],
-    description: 'Specify the size of the multi-select.',
-  },
   readOnly: {
     control: 'boolean',
     description: 'Whether or not the Dropdown is readonly.',
@@ -202,13 +199,12 @@ export const Default = {
       readOnly,
       titleText,
       selectionFeedback,
-      size,
       label,
       value,
       warn,
       warnText,
     } = args ?? {};
-    return html`
+    return renderFluidMultiSelectStory(html`
       <cds-fluid-multi-select
         ?autoalign=${autoalign}
         direction=${ifDefined(direction)}
@@ -223,7 +219,6 @@ export const Default = {
         ?read-only=${readOnly}
         title-text=${ifDefined(titleText)}
         selection-feedback=${ifDefined(selectionFeedback)}
-        size=${ifDefined(size)}
         ?warn=${warn}
         warn-text=${ifDefined(warnText)}
         label=${ifDefined(label)}
@@ -242,7 +237,7 @@ export const Default = {
         <cds-multi-select-item value="dea">Option 4</cds-multi-select-item>
         <cds-multi-select-item value="router">Option 5</cds-multi-select-item>
       </cds-fluid-multi-select>
-    `;
+    `);
   },
 };
 
@@ -274,13 +269,12 @@ export const Condensed = {
       titleText,
       selectionFeedback,
       isCondensed,
-      size,
       label,
       value,
       warn,
       warnText,
     } = args ?? {};
-    return html`
+    return renderFluidMultiSelectStory(html`
       <cds-fluid-multi-select
         ?autoalign=${autoalign}
         direction=${ifDefined(direction)}
@@ -295,7 +289,6 @@ export const Condensed = {
         ?read-only=${readOnly}
         title-text=${ifDefined(titleText)}
         selection-feedback=${ifDefined(selectionFeedback)}
-        size=${ifDefined(size)}
         ?warn=${warn}
         warn-text=${ifDefined(warnText)}
         label=${ifDefined(label)}
@@ -314,7 +307,7 @@ export const Condensed = {
         <cds-multi-select-item value="dea">Option 4</cds-multi-select-item>
         <cds-multi-select-item value="router">Option 5</cds-multi-select-item>
       </cds-fluid-multi-select>
-    `;
+    `);
   },
 };
 
@@ -336,13 +329,12 @@ export const Filterable = {
       isCondensed,
       titleText,
       selectionFeedback,
-      size,
       label,
       value,
       warn,
       warnText,
     } = args ?? {};
-    return html`
+    return renderFluidMultiSelectStory(html`
       <cds-fluid-multi-select
         ?autoalign=${autoalign}
         direction=${ifDefined(direction)}
@@ -358,7 +350,6 @@ export const Filterable = {
         ?read-only=${readOnly}
         title-text=${ifDefined(titleText)}
         selection-feedback=${ifDefined(selectionFeedback)}
-        size=${ifDefined(size)}
         ?warn=${warn}
         warn-text=${ifDefined(warnText)}
         label=${ifDefined(label)}
@@ -377,7 +368,7 @@ export const Filterable = {
         <cds-multi-select-item value="dea">Option 4</cds-multi-select-item>
         <cds-multi-select-item value="router">Option 5</cds-multi-select-item>
       </cds-fluid-multi-select>
-    `;
+    `);
   },
 };
 
@@ -403,13 +394,12 @@ export const FilterableWithLayer = {
       readOnly,
       titleText,
       selectionFeedback,
-      size,
       label,
       value,
       warn,
       warnText,
     } = args ?? {};
-    return html`
+    return renderFluidMultiSelectStory(html`
       <cds-fluid-multi-select
         ?autoalign=${autoalign}
         direction=${ifDefined(direction)}
@@ -424,7 +414,6 @@ export const FilterableWithLayer = {
         ?read-only=${readOnly}
         title-text=${ifDefined(titleText)}
         selection-feedback=${ifDefined(selectionFeedback)}
-        size=${ifDefined(size)}
         ?warn=${warn}
         warn-text=${ifDefined(warnText)}
         label=${ifDefined(label)}
@@ -444,7 +433,7 @@ export const FilterableWithLayer = {
         <cds-multi-select-item value="dea">Option 4</cds-multi-select-item>
         <cds-multi-select-item value="router">Option 5</cds-multi-select-item>
       </cds-fluid-multi-select>
-    `;
+    `);
   },
 };
 
@@ -455,7 +444,9 @@ export const Skeleton = {
     },
   },
   render: () =>
-    html`<cds-fluid-multi-select-skeleton></cds-fluid-multi-select-skeleton>`,
+    renderFluidMultiSelectStory(
+      html`<cds-fluid-multi-select-skeleton></cds-fluid-multi-select-skeleton>`
+    ),
 };
 
 export const WithAILabel = {
@@ -485,40 +476,44 @@ export const WithAILabel = {
       warnText,
     } = args ?? {};
 
-    return html`<cds-fluid-multi-select
-      ?autoalign=${autoalign}
-      clear-selection-description=${ifDefined(clearSelectionDescription)}
-      clear-selection-label=${ifDefined(clearSelectionLabel)}
-      clear-selection-text=${ifDefined(clearSelectionText)}
-      direction=${ifDefined(direction)}
-      ?disabled="${disabled}"
-      ?is-condensed="${isCondensed}"
-      title-text=${ifDefined(titleText)}
-      ?invalid="${invalid}"
-      invalid-text="${ifDefined(invalidText)}"
-      label=${ifDefined(label)}
-      locale=${ifDefined(locale)}
-      name="${ifDefined(name)}"
-      ?read-only="${readOnly}"
-      selection-feedback=${ifDefined(selectionFeedback)}
-      value=${ifDefined(value)}
-      ?warn="${warn}"
-      warn-text="${ifDefined(warnText)}">
-      <cds-ai-label alignment="bottom-left"> ${content}${actions}</cds-ai-label>
-      <cds-multi-select-item value="example"
-        >An example option that is really long to show what should be done to
-        handle long text</cds-multi-select-item
-      >
-      <cds-multi-select-item value="all">Option 1</cds-multi-select-item>
-      <cds-multi-select-item value="cloudFoundry"
-        >Option 2</cds-multi-select-item
-      >
-      <cds-multi-select-item disabled value="staging"
-        >Option 3 - a disabled item</cds-multi-select-item
-      >
-      <cds-multi-select-item value="dea">Option 4</cds-multi-select-item>
-      <cds-multi-select-item value="router">Option 5</cds-multi-select-item>
-    </cds-fluid-multi-select>`;
+    return renderFluidMultiSelectStory(
+      html`<cds-fluid-multi-select
+        ?autoalign=${autoalign}
+        clear-selection-description=${ifDefined(clearSelectionDescription)}
+        clear-selection-label=${ifDefined(clearSelectionLabel)}
+        clear-selection-text=${ifDefined(clearSelectionText)}
+        direction=${ifDefined(direction)}
+        ?disabled="${disabled}"
+        ?is-condensed="${isCondensed}"
+        title-text=${ifDefined(titleText)}
+        ?invalid="${invalid}"
+        invalid-text="${ifDefined(invalidText)}"
+        label=${ifDefined(label)}
+        locale=${ifDefined(locale)}
+        name="${ifDefined(name)}"
+        ?read-only="${readOnly}"
+        selection-feedback=${ifDefined(selectionFeedback)}
+        value=${ifDefined(value)}
+        ?warn="${warn}"
+        warn-text="${ifDefined(warnText)}">
+        <cds-ai-label alignment="bottom-left">
+          ${content}${actions}</cds-ai-label
+        >
+        <cds-multi-select-item value="example"
+          >An example option that is really long to show what should be done to
+          handle long text</cds-multi-select-item
+        >
+        <cds-multi-select-item value="all">Option 1</cds-multi-select-item>
+        <cds-multi-select-item value="cloudFoundry"
+          >Option 2</cds-multi-select-item
+        >
+        <cds-multi-select-item disabled value="staging"
+          >Option 3 - a disabled item</cds-multi-select-item
+        >
+        <cds-multi-select-item value="dea">Option 4</cds-multi-select-item>
+        <cds-multi-select-item value="router">Option 5</cds-multi-select-item>
+      </cds-fluid-multi-select>`
+    );
   },
 };
 

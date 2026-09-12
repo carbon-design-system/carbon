@@ -21,6 +21,13 @@ import mdx from './FluidMultiSelect.mdx';
 export default {
   title: 'Components/Fluid Components/FluidMultiSelect',
   component: FluidMultiSelect,
+  decorators: [
+    (Story) => (
+      <div style={{ width: 400 }}>
+        <Story />
+      </div>
+    ),
+  ],
   parameters: {
     docs: {
       page: mdx,
