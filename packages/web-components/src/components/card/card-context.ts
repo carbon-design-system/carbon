@@ -11,12 +11,14 @@ export type CardContextValue = {
   clickable: boolean;
   disabled: boolean;
   horizontal: boolean;
+  hasAILabel: boolean;
 };
 
 export const cardDefaultContext: CardContextValue = {
   clickable: false,
   disabled: false,
   horizontal: false,
+  hasAILabel: false,
 };
 
 /**
