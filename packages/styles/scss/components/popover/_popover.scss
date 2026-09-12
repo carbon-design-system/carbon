@@ -1,11 +1,13 @@
 //
-// Copyright IBM Corp. 2016, 2025
+// Copyright IBM Corp. 2016, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
+@use '../../border-radius' as *;
 @use '../../config' as *;
+@use '../../feature-flags' as *;
 @use '../../layer' as *;
 @use '../../spacing' as *;
 @use '../../theme';
@@ -60,7 +62,10 @@ $popover-border-color: custom-property.get-var(
 );
 
 // The border radius value for the popover container
-$popover-border-radius: custom-property.get-var('popover-border-radius', 2px);
+$popover-border-radius: custom-property.get-var(
+  'popover-border-radius',
+  if(enabled('enable-v12-release'), $border-radius-08, 2px)
+);
 
 // The text color used for text placed inside of the popover
 $popover-text-color: custom-property.get-var(
@@ -301,6 +306,22 @@ $popover-caret-height: custom-property.get-var(
     display: block;
   }
 
+  @if enabled('enable-v12-release') {
+    // Toggletip historically sized start/end alignment with a caret. v12 hides
+    // the caret, but Floating UI still needs that box so Toggletip does not
+    // shift relative to v11. Popover should align as a caret-less surface.
+    .#{$prefix}--toggletip.#{$prefix}--popover--auto-align:not(
+        .#{$prefix}--popover--caret
+      ).#{$prefix}--popover--open
+      > .#{$prefix}--popover
+      > .#{$prefix}--popover-content
+      > .#{$prefix}--popover-caret {
+      display: block;
+      pointer-events: none;
+      visibility: hidden;
+    }
+  }
+
   .#{$prefix}--popover--tab-tip
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret {
@@ -335,7 +356,9 @@ $popover-caret-height: custom-property.get-var(
     ):not(.#{$prefix}--popover--tab-tip)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content {
-    inset-block-end: -$spacing-02;
+    @if not enabled('enable-v12-release') {
+      inset-block-end: -$spacing-02;
+    }
   }
 
   .#{$prefix}--popover--top:not(.#{$prefix}--popover--caret):not(
@@ -353,32 +376,36 @@ $popover-caret-height: custom-property.get-var(
     ):not(.#{$prefix}--popover--tab-tip)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content {
-    inset-block-start: -$spacing-02;
+    @if not enabled('enable-v12-release') {
+      inset-block-start: -$spacing-02;
+    }
   }
 
-  .#{$prefix}--popover--top-start:not(.#{$prefix}--popover--caret):not(
-      .#{$prefix}--popover--auto-align
-    ):not(.#{$prefix}--popover--tab-tip)
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-content,
-  .#{$prefix}--popover--bottom-start:not(.#{$prefix}--popover--caret):not(
-      .#{$prefix}--popover--auto-align
-    ):not(.#{$prefix}--popover--tab-tip)
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-content {
-    inset-inline-start: calc(50% - $popover-offset - 1rem);
-  }
-  .#{$prefix}--popover--top-end:not(.#{$prefix}--popover--caret):not(
-      .#{$prefix}--popover--auto-align
-    ):not(.#{$prefix}--popover--tab-tip)
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-content,
-  .#{$prefix}--popover--bottom-end:not(.#{$prefix}--popover--caret):not(
-      .#{$prefix}--popover--auto-align
-    ):not(.#{$prefix}--popover--tab-tip)
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-content {
-    inset-inline-end: calc(50% - $popover-offset - 1rem);
+  @if not enabled('enable-v12-release') {
+    .#{$prefix}--popover--top-start:not(.#{$prefix}--popover--caret):not(
+        .#{$prefix}--popover--auto-align
+      ):not(.#{$prefix}--popover--tab-tip)
+      > .#{$prefix}--popover
+      > .#{$prefix}--popover-content,
+    .#{$prefix}--popover--bottom-start:not(.#{$prefix}--popover--caret):not(
+        .#{$prefix}--popover--auto-align
+      ):not(.#{$prefix}--popover--tab-tip)
+      > .#{$prefix}--popover
+      > .#{$prefix}--popover-content {
+      inset-inline-start: calc(50% - $popover-offset - 1rem);
+    }
+    .#{$prefix}--popover--top-end:not(.#{$prefix}--popover--caret):not(
+        .#{$prefix}--popover--auto-align
+      ):not(.#{$prefix}--popover--tab-tip)
+      > .#{$prefix}--popover
+      > .#{$prefix}--popover-content,
+    .#{$prefix}--popover--bottom-end:not(.#{$prefix}--popover--caret):not(
+        .#{$prefix}--popover--auto-align
+      ):not(.#{$prefix}--popover--tab-tip)
+      > .#{$prefix}--popover
+      > .#{$prefix}--popover-content {
+      inset-inline-end: calc(50% - $popover-offset - 1rem);
+    }
   }
 
   .#{$prefix}--popover--right:not(.#{$prefix}--popover--caret):not(
@@ -396,7 +423,11 @@ $popover-caret-height: custom-property.get-var(
     ):not(.#{$prefix}--popover--tab-tip)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content {
-    inset-inline-start: calc(100% + $spacing-02);
+    @if enabled('enable-v12-release') {
+      inset-inline-start: calc(100%);
+    } @else {
+      inset-inline-start: calc(100% + $spacing-02);
+    }
   }
 
   .#{$prefix}--popover--left:not(.#{$prefix}--popover--caret):not(
@@ -414,7 +445,11 @@ $popover-caret-height: custom-property.get-var(
     ):not(.#{$prefix}--popover--tab-tip)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content {
-    inset-inline-end: calc(100% + $spacing-02);
+    @if enabled('enable-v12-release') {
+      inset-inline-end: calc(100%);
+    } @else {
+      inset-inline-end: calc(100% + $spacing-02);
+    }
   }
 
   .#{$prefix}--popover--bottom:not(.#{$prefix}--popover--auto-align):dir(rtl)
@@ -1489,7 +1524,9 @@ $popover-caret-height: custom-property.get-var(
   .#{$prefix}--popover--tab-tip
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content {
-    border-radius: 0;
+    @if not enabled('enable-v12-release') {
+      border-radius: 0;
+    }
   }
 
   .#{$prefix}--popover--tab-tip.#{$prefix}--popover--top-start:not(
