@@ -221,6 +221,8 @@ $popover-caret-height: custom-property.get-var(
     inline-size: max-content;
     max-inline-size: convert.to-rem(368px);
     pointer-events: auto;
+
+    @include high-contrast-mode('outline');
   }
 
   .#{$prefix}--popover--open

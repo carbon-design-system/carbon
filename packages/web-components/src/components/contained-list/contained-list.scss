@@ -11,6 +11,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/utilities/high-contrast-mode' as *;
 @use '@carbon/styles/scss/utilities/layout' as *;
 @use '@carbon/styles/scss/components/contained-list';
 @use '@carbon/styles/scss/components/form' as *;
@@ -54,6 +55,13 @@ $css--plex: true !default;
     content: '';
     inset-block-end: 0;
     inset-inline: 0;
+
+    @include high-contrast-mode {
+      // Keep row separators visible above item content in forced-colors mode.
+      z-index: 1;
+      background-color: CanvasText;
+      pointer-events: none;
+    }
   }
 }
 
