@@ -38,7 +38,10 @@ export default {
 
   decorators: [
     (Story) => (
-      <WithFeatureFlags>
+      <WithFeatureFlags
+        flags={{
+          'enable-v12-dynamic-floating-styles': true,
+        }}>
         <Story />
       </WithFeatureFlags>
     ),
