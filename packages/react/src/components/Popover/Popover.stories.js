@@ -277,6 +277,15 @@ Default.story = {
   ],
 };
 
+const autoAlignStoryContainerStyle = {
+  display: 'grid',
+  placeItems: 'center',
+  width: '200vw',
+  minWidth: '1200px',
+  height: '200vh',
+  minHeight: '1200px',
+};
+
 export const ExperimentalAutoAlign = (args) => {
   const { onRequestClose, open: openArg, ...popoverProps } = args;
   const [open, setOpen] = useOpenState(openArg);
@@ -287,45 +296,38 @@ export const ExperimentalAutoAlign = (args) => {
   });
 
   return (
-    <div style={{ width: '5000px', height: '5000px' }}>
-      <div
-        style={{
-          position: 'absolute',
-          top: '2500px',
-          left: '2500px',
+    <div style={autoAlignStoryContainerStyle}>
+      <Popover
+        {...popoverProps}
+        open={open}
+        autoAlign
+        ref={ref}
+        onRequestClose={() => {
+          onRequestClose?.();
+          setOpen(false);
         }}>
-        <Popover
-          {...popoverProps}
-          open={open}
-          autoAlign
-          ref={ref}
-          onRequestClose={() => {
-            onRequestClose?.();
-            setOpen(false);
+        <button
+          className="playground-trigger"
+          aria-label="Checkbox"
+          type="button"
+          aria-expanded={open}
+          onClick={() => {
+            setOpen(!open);
           }}>
-          <button
-            className="playground-trigger"
-            aria-label="Checkbox"
-            type="button"
-            aria-expanded={open}
-            onClick={() => {
-              setOpen(!open);
-            }}>
-            <CheckboxIcon />
-          </button>
-          <PopoverContent className="p-3">
-            <div>
-              <p className="popover-title">This popover uses autoAlign</p>
-              <p className="popover-details">
-                Scroll the container up, down, left or right to observe how the
-                popover will automatically change its position in attempt to
-                stay within the viewport. This works on initial render in
-                addition to on scroll.
-              </p>
-            </div>
-          </PopoverContent>
-        </Popover>
-      </div>
+          <CheckboxIcon />
+        </button>
+        <PopoverContent className="p-3">
+          <div>
+            <p className="popover-title">This popover uses autoAlign</p>
+            <p className="popover-details">
+              Scroll the container up, down, left or right to observe how the
+              popover will automatically change its position in attempt to stay
+              within the viewport. This works on initial render in addition to
+              on scroll.
+            </p>
+          </div>
+        </PopoverContent>
+      </Popover>
     </div>
   );
 };
@@ -429,48 +431,41 @@ export const TabTipExperimentalAutoAlign = (args) => {
   });
 
   return (
-    <div style={{ width: '5000px', height: '5000px' }}>
-      <div
-        style={{
-          position: 'absolute',
-          top: '2500px',
-          left: '2500px',
+    <div style={autoAlignStoryContainerStyle}>
+      <Popover
+        {...popoverProps}
+        open={open}
+        autoAlign
+        ref={ref}
+        isTabTip
+        onRequestClose={() => {
+          onRequestClose?.();
+          setOpen(false);
         }}>
-        <Popover
-          {...popoverProps}
-          open={open}
-          autoAlign
-          ref={ref}
-          isTabTip
-          onRequestClose={() => {
-            onRequestClose?.();
-            setOpen(false);
+        <button
+          className="playground-trigger"
+          aria-label="Checkbox"
+          aria-expanded={open}
+          type="button"
+          onClick={() => {
+            setOpen(!open);
           }}>
-          <button
-            className="playground-trigger"
-            aria-label="Checkbox"
-            aria-expanded={open}
-            type="button"
-            onClick={() => {
-              setOpen(!open);
-            }}>
-            <CheckboxIcon />
-          </button>
-          <PopoverContent className="p-3">
-            <div>
-              <p className="popover-title">
-                This popover uses autoAlign with isTabTip
-              </p>
-              <p className="popover-details">
-                Scroll the container up, down, left or right to observe how the
-                popover will automatically change its position in attempt to
-                stay within the viewport. This works on initial render in
-                addition to on scroll.
-              </p>
-            </div>
-          </PopoverContent>
-        </Popover>
-      </div>
+          <CheckboxIcon />
+        </button>
+        <PopoverContent className="p-3">
+          <div>
+            <p className="popover-title">
+              This popover uses autoAlign with isTabTip
+            </p>
+            <p className="popover-details">
+              Scroll the container up, down, left or right to observe how the
+              popover will automatically change its position in attempt to stay
+              within the viewport. This works on initial render in addition to
+              on scroll.
+            </p>
+          </div>
+        </PopoverContent>
+      </Popover>
     </div>
   );
 };
