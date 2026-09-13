@@ -1,101 +1,120 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import { html } from 'lit';
-import './index';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import Add16 from '@carbon/icons/es/add/16.js';
 import { iconLoader } from '../../globals/internal/icon-loader';
-import styles from './chat-button-story.scss?lit';
+import { CHAT_BUTTON_KIND, CHAT_BUTTON_SIZE } from './chat-button';
+import './index';
 
-export const Default = () => {
-  return html`
-    <style>
-      ${styles}
-    </style>
-    <div class="test-button">
-      <div class="test-button-sizes">
-        <h3>Sizes</h3>
-        <br />
-        <cds-chat-button size="sm">
-          Primary ${iconLoader(Add16, { slot: 'icon' })}
-        </cds-chat-button>
-        <cds-chat-button size="md">
-          Primary ${iconLoader(Add16, { slot: 'icon' })}
-        </cds-chat-button>
-        <cds-chat-button size="lg">
-          Primary ${iconLoader(Add16, { slot: 'icon' })}
-        </cds-chat-button>
-        <br />
-        <br />
-        <cds-chat-button size="sm"> Primary </cds-chat-button>
-        <cds-chat-button size="md"> Primary </cds-chat-button>
-        <cds-chat-button size="lg"> Primary </cds-chat-button>
-      </div>
-      <div class="test-button-kinds">
-        <h3>Kinds</h3>
-        <br />
-        <cds-chat-button kind="primary">
-          Primary ${iconLoader(Add16, { slot: 'icon' })}
-        </cds-chat-button>
-        <cds-chat-button kind="secondary">
-          Secondary ${iconLoader(Add16, { slot: 'icon' })}
-        </cds-chat-button>
-        <cds-chat-button kind="tertiary">
-          Tertiary ${iconLoader(Add16, { slot: 'icon' })}
-        </cds-chat-button>
-        <cds-chat-button kind="ghost">
-          Ghost ${iconLoader(Add16, { slot: 'icon' })}
-        </cds-chat-button>
-        <cds-chat-button kind="danger">
-          Danger ${iconLoader(Add16, { slot: 'icon' })}
-        </cds-chat-button>
-        <br />
-        <br />
-        <cds-chat-button kind="primary"> Primary </cds-chat-button>
-        <cds-chat-button kind="secondary"> Secondary </cds-chat-button>
-        <cds-chat-button kind="tertiary"> Tertiary </cds-chat-button>
-        <cds-chat-button kind="ghost"> Ghost </cds-chat-button>
-        <cds-chat-button kind="danger"> Danger </cds-chat-button>
-      </div>
-      <div class="test-button-quick-action">
-        <h3>Quick action</h3>
-        <br />
-        <cds-chat-button is-quick-action>
-          Quick action ${iconLoader(Add16, { slot: 'icon' })}
-        </cds-chat-button>
-        <cds-chat-button is-quick-action is-selected>
-          Selected and Enabled ${iconLoader(Add16, { slot: 'icon' })}
-        </cds-chat-button>
-        <cds-chat-button is-quick-action is-selected disabled>
-          Selected and disabled ${iconLoader(Add16, { slot: 'icon' })}
-        </cds-chat-button>
-        <cds-chat-button is-quick-action disabled>
-          Disabled ${iconLoader(Add16, { slot: 'icon' })}
-        </cds-chat-button>
-        <br />
-        <br />
-        <cds-chat-button is-quick-action> Quick action </cds-chat-button>
-        <cds-chat-button is-quick-action is-selected>
-          Selected and Enabled
-        </cds-chat-button>
-        <cds-chat-button is-quick-action is-selected disabled>
-          Selected and disabled
-        </cds-chat-button>
-        <cds-chat-button is-quick-action disabled> Disabled </cds-chat-button>
-      </div>
-      <div class="test-button-skeleton">
-        <h3>Skeleton</h3>
-        <br />
-        <cds-chat-button-skeleton size="sm"></cds-chat-button-skeleton>
-        <cds-chat-button-skeleton size="md"></cds-chat-button-skeleton>
-        <cds-chat-button-skeleton size="lg"></cds-chat-button-skeleton>
-      </div>
-    </div>
-  `;
+const sizes = [
+  CHAT_BUTTON_SIZE.SMALL,
+  CHAT_BUTTON_SIZE.MEDIUM,
+  CHAT_BUTTON_SIZE.LARGE,
+];
+
+const sizeArgType = {
+  options: sizes,
+  control: { type: 'select' },
+};
+
+const chatButtonArgTypes = {
+  children: {
+    control: { type: 'text' },
+  },
+  disabled: {
+    control: { type: 'boolean' },
+  },
+  icon: {
+    options: ['Add', 'None'],
+    control: { type: 'select' },
+    mapping: {
+      Add: (props) => iconLoader(Add16, props),
+      None: undefined,
+    },
+    table: { category: 'Slot' },
+  },
+  isQuickAction: {
+    control: { type: 'boolean' },
+  },
+  isSelected: {
+    control: { type: 'boolean' },
+  },
+  kind: {
+    options: [
+      CHAT_BUTTON_KIND.PRIMARY,
+      CHAT_BUTTON_KIND.SECONDARY,
+      CHAT_BUTTON_KIND.TERTIARY,
+      CHAT_BUTTON_KIND.GHOST,
+      CHAT_BUTTON_KIND.DANGER,
+    ],
+    control: { type: 'select' },
+  },
+  onClick: {
+    action: 'onClick',
+  },
+  size: sizeArgType,
+};
+
+export const Default = {
+  args: {
+    children: 'Ask AI',
+    disabled: false,
+    icon: 'Add',
+    isQuickAction: false,
+    isSelected: false,
+    kind: CHAT_BUTTON_KIND.PRIMARY,
+    size: CHAT_BUTTON_SIZE.LARGE,
+  },
+  argTypes: chatButtonArgTypes,
+  parameters: {
+    controls: {
+      include: Object.keys(chatButtonArgTypes),
+    },
+  },
+  render: ({
+    children,
+    disabled,
+    icon,
+    isQuickAction,
+    isSelected,
+    kind,
+    onClick,
+    size,
+  }) => html`
+    <cds-chat-button
+      ?disabled="${disabled}"
+      ?is-quick-action="${isQuickAction}"
+      ?is-selected="${isSelected}"
+      kind="${ifDefined(kind)}"
+      size="${ifDefined(size)}"
+      @click="${onClick}">
+      ${children} ${icon?.({ slot: 'icon' })}
+    </cds-chat-button>
+  `,
+};
+
+export const Skeleton = {
+  args: {
+    size: CHAT_BUTTON_SIZE.LARGE,
+  },
+  argTypes: {
+    size: sizeArgType,
+  },
+  parameters: {
+    controls: {
+      include: ['size'],
+    },
+  },
+  render: ({ size }) => html`
+    <cds-chat-button-skeleton
+      size="${ifDefined(size)}"></cds-chat-button-skeleton>
+  `,
 };
 
 const meta = {

@@ -1,102 +1,100 @@
 /**
- * Copyright IBM Corp. 2022
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import React from 'react';
-import { ChatButton, ChatButtonSkeleton } from './';
 import { Add } from '@carbon/icons-react';
-import './chat-button-story.scss';
+import { ChatButton, ChatButtonSkeleton } from './';
+
+const icons = {
+  Add,
+};
+
+const sizeArgType = {
+  options: ['sm', 'md', 'lg'],
+  control: { type: 'select' },
+};
+
+const chatButtonArgTypes = {
+  children: {
+    control: { type: 'text' },
+  },
+  className: {
+    control: { type: 'text' },
+  },
+  disabled: {
+    control: { type: 'boolean' },
+  },
+  isQuickAction: {
+    control: { type: 'boolean' },
+  },
+  isSelected: {
+    control: { type: 'boolean' },
+  },
+  kind: {
+    options: ['primary', 'secondary', 'tertiary', 'ghost', 'danger'],
+    control: { type: 'select' },
+  },
+  onClick: {
+    action: 'onClick',
+  },
+  renderIcon: {
+    options: ['Add', 'None'],
+    control: { type: 'select' },
+  },
+  size: sizeArgType,
+};
 
 export default {
   title: 'Preview/preview__ChatButton',
   component: ChatButton,
-  parameters: {},
+  subcomponents: { ChatButtonSkeleton },
 };
 
-export const Default = () => (
-  <div className="test-button">
-    <div className="test-button-sizes">
-      <h3>Sizes</h3>
-      <br />
-      <ChatButton size="sm" renderIcon={Add}>
-        Primary
-      </ChatButton>
-      <ChatButton size="md" renderIcon={Add}>
-        Primary
-      </ChatButton>
-      <ChatButton size="lg" renderIcon={Add}>
-        Primary
-      </ChatButton>
-      <br />
-      <br />
-      <ChatButton size="sm">Primary</ChatButton>
-      <ChatButton size="md">Primary</ChatButton>
-      <ChatButton size="lg">Primary</ChatButton>
-    </div>
-    <div className="test-button-kinds">
-      <h3>Kinds</h3>
-      <br />
-      <ChatButton kind="primary" renderIcon={Add}>
-        Primary
-      </ChatButton>
-      <ChatButton kind="secondary" renderIcon={Add}>
-        Secondary
-      </ChatButton>
-      <ChatButton kind="tertiary" renderIcon={Add}>
-        Tertiary
-      </ChatButton>
-      <ChatButton kind="ghost" renderIcon={Add}>
-        Ghost
-      </ChatButton>
-      <ChatButton kind="danger" renderIcon={Add}>
-        Danger
-      </ChatButton>
-      <br />
-      <br />
-      <ChatButton kind="primary">Primary</ChatButton>
-      <ChatButton kind="secondary">Secondary</ChatButton>
-      <ChatButton kind="tertiary">Tertiary</ChatButton>
-      <ChatButton kind="ghost">Ghost</ChatButton>
-      <ChatButton kind="danger">Danger</ChatButton>
-    </div>
-    <div className="test-button-quick-action">
-      <h3>Quick action</h3>
-      <br />
-      <ChatButton isQuickAction renderIcon={Add}>
-        Quick action
-      </ChatButton>
-      <ChatButton isSelected isQuickAction renderIcon={Add}>
-        Selected and Enabled
-      </ChatButton>
-      <ChatButton disabled isSelected isQuickAction renderIcon={Add}>
-        Selected and Disabled
-      </ChatButton>
-      <ChatButton disabled isQuickAction renderIcon={Add}>
-        Disabled
-      </ChatButton>
-      <br />
-      <br />
-      <ChatButton isQuickAction>Quick action</ChatButton>
-      <ChatButton isSelected isQuickAction>
-        Selected and Enabled
-      </ChatButton>
-      <ChatButton disabled isSelected isQuickAction>
-        Selected and Disabled
-      </ChatButton>
-      <ChatButton disabled isQuickAction>
-        Disabled
-      </ChatButton>
-    </div>
+export const Default = (args) => {
+  const { renderIcon, ...rest } = args;
+  return (
+    <ChatButton
+      {...rest}
+      renderIcon={renderIcon === 'None' ? undefined : icons[renderIcon]}
+    />
+  );
+};
 
-    <div className="test-button-skeleton">
-      <h3>Skeleton</h3>
-      <br />
-      <ChatButtonSkeleton size="sm" />
-      <ChatButtonSkeleton size="md" />
-      <ChatButtonSkeleton />
-    </div>
-  </div>
-);
+Default.args = {
+  children: 'Ask AI',
+  className: '',
+  disabled: false,
+  isQuickAction: false,
+  isSelected: false,
+  kind: 'primary',
+  renderIcon: 'Add',
+  size: 'lg',
+};
+
+Default.argTypes = chatButtonArgTypes;
+
+Default.parameters = {
+  controls: {
+    include: Object.keys(chatButtonArgTypes),
+  },
+};
+
+export const Skeleton = (args) => <ChatButtonSkeleton {...args} />;
+
+Skeleton.args = {
+  size: 'lg',
+};
+
+Skeleton.argTypes = {
+  size: sizeArgType,
+};
+
+Skeleton.parameters = {
+  controls: {
+    include: ['size'],
+  },
+};
