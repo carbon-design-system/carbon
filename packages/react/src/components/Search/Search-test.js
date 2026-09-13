@@ -120,6 +120,40 @@ describe('Search', () => {
       );
     });
 
+    it('should not allow interactive content in labelText', () => {
+      const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+      expect(() => {
+        render(
+          <Search
+            labelText={
+              <>
+                Search label <button type="button">Help</button>
+              </>
+            }
+          />
+        );
+      }).toThrow(
+        'The Search component `labelText` prop must have no interactive content'
+      );
+
+      spy.mockRestore();
+    });
+
+    it('should allow non-interactive content in labelText', () => {
+      expect(() => {
+        render(
+          <Search
+            labelText={
+              <>
+                Search label <span>additional label content</span>
+              </>
+            }
+          />
+        );
+      }).not.toThrow();
+    });
+
     it('should call onChange when expected', async () => {
       const onChange = jest.fn();
       render(<Search labelText="test-search" onChange={onChange} />);

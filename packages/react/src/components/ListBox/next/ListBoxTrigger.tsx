@@ -43,7 +43,6 @@ export interface ListBoxTriggerProps
  * state of the menu for a given `ListBox`
  */
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const ListBoxTrigger = React.forwardRef<HTMLButtonElement, ListBoxTriggerProps>(
   ({ isOpen, translateWithId: t = defaultTranslateWithId, ...rest }, ref) => {
     const prefix = usePrefix();
@@ -67,6 +66,7 @@ const ListBoxTrigger = React.forwardRef<HTMLButtonElement, ListBoxTriggerProps>(
   }
 );
 
+ListBoxTrigger.displayName = 'ListBoxTrigger';
 ListBoxTrigger.propTypes = {
   /**
    * Specify whether the menu is currently open, which will influence the
