@@ -174,5 +174,5 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-page-header-tabs) ::slotted(cds-tabs) {
-  --tabs-overflow-button-background: $layer-01;
+  --tabs-overflow-button-background: #{$layer-01};
 }
