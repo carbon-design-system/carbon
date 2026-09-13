@@ -16,6 +16,9 @@ export default {
   title: 'Deprecated/preview__PageHeader',
   component: PageHeader,
   parameters: {
+    controls: {
+      hideNoControlsWarning: true,
+    },
     docs: {
       page: mdx,
     },
@@ -36,3 +39,6 @@ export const Default = () => (
     for migration details.
   </p>
 );
+
+Default.args = {};
+Default.argTypes = {};
