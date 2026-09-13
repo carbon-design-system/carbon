@@ -7,13 +7,40 @@
 
 import React from 'react';
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
-import { View, FolderOpen, Folders, Information } from '@carbon/icons-react';
+import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import mdx from './TextInput.mdx';
 
 import { default as TextInput, TextInputSkeleton } from '../TextInput';
+
+const getTextInputStoryArgs = ({
+  defaultWidth,
+  onChange,
+  onClick,
+  ...textInputArgs
+}) => {
+  const handleChange = (event) => {
+    onChange?.({
+      value: event.target.value,
+    });
+  };
+  const handleClick = (event) => {
+    onClick?.({
+      value: event.target.value,
+    });
+  };
+
+  return {
+    defaultWidth,
+    textInputArgs: {
+      ...textInputArgs,
+      onChange: handleChange,
+      onClick: handleClick,
+    },
+  };
+};
 
 export default {
   title: 'Components/TextInput',
@@ -166,7 +193,7 @@ export default {
 };
 
 export const Default = (args) => {
-  const { defaultWidth, ...textInputArgs } = args;
+  const { defaultWidth, textInputArgs } = getTextInputStoryArgs(args);
 
   return (
     <div style={{ width: defaultWidth }}>
@@ -176,7 +203,7 @@ export const Default = (args) => {
 };
 
 export const Inline = (args) => {
-  const { defaultWidth, ...textInputArgs } = args;
+  const { defaultWidth, textInputArgs } = getTextInputStoryArgs(args);
 
   return (
     <div style={{ width: defaultWidth }}>
@@ -197,7 +224,7 @@ Inline.parameters = {
 };
 
 export const ReadOnly = (args) => {
-  const { defaultWidth, ...textInputArgs } = args;
+  const { defaultWidth, textInputArgs } = getTextInputStoryArgs(args);
 
   return (
     <div style={{ width: defaultWidth }}>
@@ -228,7 +255,7 @@ ReadOnly.parameters = {
 };
 
 export const _WithLayer = (args) => {
-  const { defaultWidth, ...textInputArgs } = args;
+  const { defaultWidth, textInputArgs } = getTextInputStoryArgs(args);
 
   return (
     <WithLayer>
@@ -242,7 +269,7 @@ export const _WithLayer = (args) => {
 };
 
 export const withAILabel = (args) => {
-  const { defaultWidth, ...textInputArgs } = args;
+  const { defaultWidth, textInputArgs } = getTextInputStoryArgs(args);
   const aiLabel = (
     <AILabel className="ai-label-container">
       <AILabelContent>
