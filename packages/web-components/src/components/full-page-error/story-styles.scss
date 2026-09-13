@@ -1,0 +1,49 @@
+/*
+ * Copyright IBM Corp. 2025, 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+
+$story-prefix: 'full-page-error-stories__';
+
+#main-content {
+  padding: $spacing-05 0;
+}
+
+.#{$story-prefix}story-container {
+  position: relative;
+  display: grid;
+  block-size: 100vh;
+  grid-template-rows: 3rem 1fr;
+  inline-size: 100vw;
+}
+
+.#{$story-prefix}story-breadcrumbs {
+  position: fixed;
+  z-index: 7000;
+  display: flex;
+  align-items: center;
+  padding: $spacing-04 $spacing-09;
+  background: $layer-01;
+  border-block-end: 1px solid $border-subtle-01;
+  inset-block-start: $spacing-09;
+  inset-inline: 0;
+}
+
+// Style the cds-header to match React component
+.#{$story-prefix}story-container cds-full-page-error {
+  margin-block-start: $spacing-10;
+}
+
+// Remove underlines by default on forwarding links (only show on hover)
+.#{$story-prefix}story-container cds-full-page-error a.cds--link {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
