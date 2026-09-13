@@ -500,6 +500,29 @@ describe('MenuItem', () => {
         expect(child).toHaveFocus();
       });
     });
+
+    it('moves focus between menu items with arrow keys', async () => {
+      render(
+        <Menu open label="Menu">
+          <MenuItem label="Item 1" />
+          <MenuItem label="Item 2" />
+        </Menu>
+      );
+
+      const item1 = await screen.findByRole('menuitem', { name: 'Item 1' });
+      const item2 = screen.getByRole('menuitem', { name: 'Item 2' });
+
+      expect(item1).toHaveFocus();
+
+      await userEvent.keyboard('{ArrowDown}');
+      expect(item2).toHaveFocus();
+
+      await userEvent.keyboard('{ArrowUp}');
+      expect(item1).toHaveFocus();
+
+      await userEvent.keyboard('{ArrowUp}');
+      expect(item2).toHaveFocus();
+    });
   });
 
   it('navigates through dynamically added MenuItems in the correct order', async () => {
