@@ -1,5 +1,12 @@
-import { Controls, Canvas, Story, Meta } from '@storybook/addon-docs/blocks';
+import {
+  Controls,
+  Canvas,
+  Story,
+  Meta,
+  Unstyled,
+} from '@storybook/addon-docs/blocks';
 import * as EditInPlaceStories from './EditInPlace.stories';
+import { InlineNotification } from '../Notification';
 
 <Meta isTemplate />
 
@@ -14,6 +21,18 @@ import * as EditInPlaceStories from './EditInPlace.stories';
   - [Custom Blur Function](#custom-blur-function)
   - [Read Only](#read-only)
 - [Component API](#component-api)
+
+{/* <!-- prettier-ignore-start --> */}
+
+<Unstyled>
+  <InlineNotification
+    kind="info"
+    title="Migrated component:"
+    subtitle="This component has been migrated from Carbon for IBM Products. While visible in the v12 Storybook, migrated components are not available in the published v11 package and enabling enable-v12-release does not expose them — they will be part of the public @carbon/react API when v12 ships."
+  />
+</Unstyled>
+
+{/* <!-- prettier-ignore-end --> */}
 
 ## Overview
 

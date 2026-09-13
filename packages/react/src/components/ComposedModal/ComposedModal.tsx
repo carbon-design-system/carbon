@@ -528,7 +528,7 @@ const ComposedModalDialog = React.forwardRef<
   );
 
   useEffect(() => {
-    if (!open) return;
+    if (!open || enableDialogElement) return;
 
     const handleEscapeKey = (event) => {
       if (
@@ -545,7 +545,7 @@ const ComposedModalDialog = React.forwardRef<
       document.removeEventListener('keydown', handleEscapeKey);
     };
     // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
-  }, [open]);
+  }, [open, enableDialogElement]);
 
   useEffect(() => {
     if (!enableDialogElement && !enablePresence && !open && launcherButtonRef) {
@@ -614,6 +614,10 @@ const ComposedModalDialog = React.forwardRef<
   const modalBody = enableDialogElement ? (
     <Dialog
       open={open}
+      onCancel={(evt) => {
+        evt.preventDefault();
+        closeModal(evt);
+      }}
       focusAfterCloseRef={launcherButtonRef}
       modal
       className={containerClass}
