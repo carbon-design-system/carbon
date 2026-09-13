@@ -216,6 +216,8 @@ export { default as CDSLayoutConstraint } from './components/layout/layout-const
 // export { default as CDSActionSet } from './components/action-set/action-set';
 // export { default as CDSEditInPlace } from './components/edit-in-place/edit-in-place';
 // export { default as CDSSidePanel } from './components/side-panel/side-panel';
+// export { default as CDSInterstitialScreen } from './components/interstitial-screen/interstitial-screen';
+// export { default as CDSFullPageError } from './components/full-page-error/full-page-error';
 // export { default as CDSUserAvatar } from './components/user-avatar/user-avatar';
 // export { default as CDSBigNumber } from './components/big-number/big-number';
 // export { default as CDSOptionsTile } from './components/options-tile/options-tile';
