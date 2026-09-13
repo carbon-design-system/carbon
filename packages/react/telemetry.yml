@@ -33,6 +33,7 @@ collect:
         - border
         - buttonKind
         - buttonProps
+        - buttonSize
         - caption
         - caret
         - checked
@@ -51,6 +52,7 @@ collect:
         - compareItems
         - condensed
         - contained
+        - containerClassName
         - count
         - danger
         - dangerDescription
@@ -99,6 +101,7 @@ collect:
         - iconClass
         - iconDescription
         - id
+        - illustrationTheme
         - indeterminate
         - index
         - initialSelectedItem
@@ -240,7 +243,9 @@ collect:
         - text
         - theme
         - title
+        - titleEnd
         - titleId
+        - titleStart
         - titleText
         - tooltipAlignment
         - tooltipDropShadow
@@ -269,7 +274,6 @@ collect:
         - closeOnEscape
         - hasFocus
         # ActionSet
-        - buttonSize
         - disableStacking
         # AILabel
         - AILabelContent
@@ -313,8 +317,6 @@ collect:
         - descriptionTruncate
         - labelTruncate
         - maxWidth
-        - titleEnd
-        - titleStart
         - titleTruncate
         # ChatButton
         - isQuickAction
@@ -343,8 +345,6 @@ collect:
         - sm
         - span
         - xlg
-        # ComposedModal
-        - containerClassName
         # ContainedList
         - isInset
         # ContentSwitcher
@@ -444,6 +444,15 @@ collect:
         - messageText
         # GridSettings
         - subgrid
+        # Guidebanner
+        - collapseButtonLabel
+        - collapsible
+        - expandButtonLabel
+        - nextIconDescription
+        - previousIconDescription
+        - withLeftGutter
+        # GuidebannerElement
+        - button
         # HeaderContainer
         - render
         # HeaderMenu
@@ -543,6 +552,43 @@ collect:
         - withHeader
         # NotificationButton
         - notificationType
+        # NotificationsEmptyState
+        - illustrationDescription
+        # NotificationsPanel
+        - data
+        - dateTimeLocale
+        - dateTimeStyle
+        - daysAgoText
+        - dismissAllLabel
+        - dismissSingleNotificationIconDescription
+        - doNotDisturbDefaultToggled
+        - doNotDisturbLabel
+        - emptyStateLabel
+        - hourAgoText
+        - hoursAgoText
+        - minuteAgoText
+        - minutesAgoText
+        - monthAgoText
+        - monthsAgoText
+        - nowText
+        - onClickOutside
+        - onDismissAllNotifications
+        - onDismissSingleNotification
+        - onDoNotDisturbChange
+        - onSettingsClick
+        - onViewAllClick
+        - previousLabel
+        - readLessLabel
+        - readMoreLabel
+        - secondsAgoText
+        - settingsIconDescription
+        - todayLabel
+        - triggerButtonRef
+        - viewAllLabel
+        - yearAgoText
+        - yearsAgoText
+        - yesterdayAtText
+        - yesterdayLabel
         # NumberInput
         - hideSteppers
         - onStepperBlur
@@ -667,6 +713,8 @@ collect:
         # SliderSkeleton
         - twoHandles
         - unstable_ariaLabelHandleUpper
+        # StackProvider
+        - stackStepSize
         # StructuredListCell
         - noWrap
         # StructuredListWrapper
@@ -717,8 +765,38 @@ collect:
         - onTabCloseRequest
         # TabsVertical
         - height
-        # TagBase
+        # Tag
         - filter
+        # Tearsheet
+        - disablePortal
+        - influencerWidth
+        - keepMounted
+        - portalTarget
+        - summaryContentWidth
+        - variant
+        - verticalGap
+        # TearsheetHeader
+        - disableHeaderCollapse
+        - onHeaderCollapse
+        # TearsheetHeaderActionItem
+        - overflowItemLabel
+        # TearsheetHeaderActions
+        - menuButtonProps
+        # TearsheetHeaderContent
+        - headerActions
+        # TearsheetInfluencer
+        - influencerPanelAriaLabel
+        - influencerPanelOpen
+        - influencerPanelTriggerRef
+        # TearsheetNavigationBar
+        - scroller
+        # TearsheetScrollButton
+        - collapseText
+        - expandText
+        # TearsheetSummaryContent
+        - summaryPanelAriaLabel
+        - summaryPanelOpen
+        - summaryPanelTriggerRef
         # TextArea
         - counterMode
         # TextDirection
@@ -819,6 +897,9 @@ collect:
         # General - direction
         - bottom
         - top
+        # General - illustrationTheme
+        - dark
+        - light
         # General - inputMode
         - decimal
         - email
@@ -1082,6 +1163,10 @@ collect:
         - actionable
         - inline
         - toast
+        # NotificationsPanel - dateTimeStyle
+        - long
+        - narrow
+        - short
         # Pagination - backwardTextTooltipPosition
         - bottom
         - left
@@ -1100,6 +1185,10 @@ collect:
         # SidePanel - placement
         - left
         - right
+        # StackProvider - stackStepSize
+        - lg
+        - md
+        - sm
         # TableBody - aria-live
         - assertive
         - off
@@ -1111,6 +1200,9 @@ collect:
         # TabList - iconSize
         - default
         - lg
+        # Tearsheet - variant
+        - narrow
+        - wide
         # TextArea - counterMode
         - character
         - word
