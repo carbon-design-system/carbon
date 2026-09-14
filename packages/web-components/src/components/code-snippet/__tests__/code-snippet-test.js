@@ -89,6 +89,7 @@ describe('cds-code-snippet', function () {
 
     const copyButton = el.shadowRoot?.querySelector('cds-copy-button');
     expect(copyButton).to.exist;
+    expect(copyButton).to.have.attribute('size', 'md');
     const buttonClassName = copyButton.getAttribute('button-class-name');
     if (buttonClassName) {
       expect(buttonClassName).to.include('cds--snippet--single');
@@ -112,6 +113,7 @@ describe('cds-code-snippet', function () {
 
     const copyButton = el.shadowRoot?.querySelector('cds-copy-button');
     expect(copyButton).to.exist;
+    expect(copyButton).to.have.attribute('size', 'sm');
 
     const buttonClassName = copyButton.getAttribute('button-class-name');
     if (buttonClassName) {

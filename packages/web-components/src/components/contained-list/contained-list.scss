@@ -11,7 +11,10 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/border-radius' as *;
+@use '@carbon/styles/scss/feature-flags' as flags;
 @use '@carbon/styles/scss/utilities/layout' as *;
+@use '@carbon/styles/scss/components/button/radius' as button;
 @use '@carbon/styles/scss/components/contained-list';
 @use '@carbon/styles/scss/components/form' as *;
 
@@ -25,6 +28,10 @@ $css--plex: true !default;
   --cds-search-border-bottom: 1px solid #{$border-subtle};
 
   display: block;
+
+  @if flags.enabled('enable-v12-release') {
+    @include button.radius($border-radius-00);
+  }
 }
 
 :host(#{$prefix}-contained-list-item) {

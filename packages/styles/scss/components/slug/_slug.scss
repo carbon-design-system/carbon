@@ -6,7 +6,9 @@
 //
 
 @use '../../config' as *;
+@use '../../border-radius' as *;
 @use '../../colors' as *;
+@use '../../feature-flags' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
@@ -14,6 +16,7 @@
 @use '../../utilities/ai-gradient' as *;
 @use '../../utilities/convert';
 @use '../../utilities/custom-property';
+@use '../button/radius' as button;
 @use '../toggletip';
 @use '../popover';
 
@@ -1100,6 +1103,10 @@ $sizes: (
     inline-size: 100%;
     inset-block-end: 0;
     inset-inline-end: 0;
+
+    @if enabled('enable-v12-release') {
+      @include button.radius($border-radius-00);
+    }
   }
 
   .#{$prefix}--ai-label .#{$prefix}--ai-label-actions .#{$prefix}--btn:focus,
@@ -1111,9 +1118,21 @@ $sizes: (
   }
 
   .#{$prefix}--ai-label .#{$prefix}--ai-label-actions .#{$prefix}--btn--primary,
+  .#{$prefix}--ai-label .#{$prefix}--ai-label-actions > :last-child,
+  .#{$prefix}--slug .#{$prefix}--slug-actions .#{$prefix}--btn--primary,
+  .#{$prefix}--slug .#{$prefix}--slug-actions > :last-child {
+    @if enabled('enable-v12-release') {
+      @include button.radius($ee: calc(#{$border-radius-08} - 1px));
+    }
+  }
+
+  .#{$prefix}--ai-label .#{$prefix}--ai-label-actions .#{$prefix}--btn--primary,
   .#{$prefix}--slug .#{$prefix}--slug-actions .#{$prefix}--btn--primary {
     order: 1;
-    border-end-end-radius: convert.to-rem(7px);
+
+    @if not enabled('enable-v12-release') {
+      border-end-end-radius: convert.to-rem(7px);
+    }
   }
 
   // Revert styles
