@@ -153,6 +153,68 @@ export const upgrades = [
     ],
     migrations: [
       {
+        name: 'wc-report-non-barrel-imports',
+        description:
+          'Report @carbon/web-components class-file (non-barrel) imports that register nothing under v3 pure exports',
+        migrate: async (options) => {
+          const transform = path.join(
+            TRANSFORM_DIR,
+            'wc-report-non-barrel-imports.js'
+          );
+          const paths =
+            Array.isArray(options.paths) && options.paths.length > 0
+              ? options.paths
+              : await glob(['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'], {
+                  cwd: options.workspaceDir,
+                  ignore: [
+                    '**/es/**',
+                    '**/lib/**',
+                    '**/umd/**',
+                    '**/node_modules/**',
+                    '**/storybook-static/**',
+                  ],
+                });
+
+          await runCodemod(options, {
+            dry: !options.write,
+            transform,
+            paths,
+            verbose: options.verbose,
+          });
+        },
+      },
+      {
+        name: 'wc-add-barrel-imports',
+        description:
+          'Add/collapse @carbon/web-components component barrel imports so class-file imports still register under v3 pure exports',
+        migrate: async (options) => {
+          const transform = path.join(
+            TRANSFORM_DIR,
+            'wc-add-barrel-imports.js'
+          );
+          const paths =
+            Array.isArray(options.paths) && options.paths.length > 0
+              ? options.paths
+              : await glob(['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'], {
+                  cwd: options.workspaceDir,
+                  ignore: [
+                    '**/es/**',
+                    '**/lib/**',
+                    '**/umd/**',
+                    '**/node_modules/**',
+                    '**/storybook-static/**',
+                  ],
+                });
+
+          await runCodemod(options, {
+            dry: !options.write,
+            transform,
+            paths,
+            verbose: options.verbose,
+          });
+        },
+      },
+      {
         name: 'icons-react-size-prop',
         description: 'Update imports and size usage for @carbon/icons-react',
         migrate: async (options) => {

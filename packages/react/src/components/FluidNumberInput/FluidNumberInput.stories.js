@@ -7,13 +7,9 @@
 
 import React from 'react';
 import { FluidNumberInput, FluidNumberInputSkeleton } from '.';
-import {
-  ToggletipLabel,
-  Toggletip,
-  ToggletipButton,
-  ToggletipContent,
-} from '../Toggletip';
+import { Toggletip, ToggletipButton, ToggletipContent } from '../Toggletip';
 import { Information } from '@carbon/icons-react';
+import './fluid-number-input-story.scss';
 import mdx from './FluidNumberInput.mdx';
 
 export default {
@@ -29,26 +25,20 @@ export default {
   },
 };
 
-const getToggletipLabel = (labelText) => (
-  <>
-    <ToggletipLabel>{labelText}</ToggletipLabel>
-    <Toggletip align="top-left">
-      <ToggletipButton label="Show information">
-        <Information />
-      </ToggletipButton>
-      <ToggletipContent>
-        <p>Additional field information here.</p>
-      </ToggletipContent>
-    </Toggletip>
-  </>
-);
-
 export const Default = ({ defaultWidth, labelText, ...numberInputArgs }) => (
-  <div style={{ width: defaultWidth }}>
-    <FluidNumberInput
-      {...numberInputArgs}
-      label={getToggletipLabel(labelText)}
-    />
+  <div className="fluid-number-input-story" style={{ width: defaultWidth }}>
+    {/* Keep the toggletip outside `label`; interactive content is invalid in labels. */}
+    <span className="fluid-number-input-story__toggletip">
+      <Toggletip align="top-left">
+        <ToggletipButton label="Show information">
+          <Information />
+        </ToggletipButton>
+        <ToggletipContent>
+          <p>Additional field information here.</p>
+        </ToggletipContent>
+      </Toggletip>
+    </span>
+    <FluidNumberInput {...numberInputArgs} label={labelText} />
   </div>
 );
 
