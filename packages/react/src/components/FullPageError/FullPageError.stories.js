@@ -19,7 +19,7 @@ const storyClass = 'full-page-error-stories';
 export default {
   title: 'Components/FullPageError',
   component: FullPageError,
-  tags: ['autodocs'],
+  tags: ['autodocs', 'ibm-products-migrated'],
   argTypes: {
     className: { table: { disable: true } },
     kind: {

@@ -383,8 +383,8 @@ categories:
       - enterprise--messaging
       - event-driven
       - event--streams--02
-      - expand--horz
-      - expand--vert
+      - expand--horizontal
+      - expand--vertical
       - expansion
       - extend-the-data-center
       - extensible
@@ -1158,6 +1158,7 @@ categories:
       - event--processing
       - event--streams
       - global--network
+      - international--standard
       - integration
       - inspect--data
       - global--partner
@@ -1182,6 +1183,8 @@ categories:
       - transactional--blockchain
       - transactional--trust
       - transform--02
+      - union
+      - union--act
       - workday
   - name: People
     members:

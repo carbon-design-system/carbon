@@ -13,6 +13,8 @@
 @use '../../theme' as *;
 @use '../../spacing' as *;
 @use '../../type' as *;
+@use '../../border-radius' as *;
+@use '../../feature-flags' as *;
 @use '../../utilities/ai-gradient' as *;
 @use '../../utilities/component-reset';
 @use '../../utilities/convert';
@@ -133,6 +135,50 @@
     }
   }
 
+  @if enabled('enable-v12-release') {
+    .#{$prefix}--date-picker__calendar.open.arrowTop {
+      // flatpickr calendar renders with 2px margin-top, add $spacing-01 to get 4px
+      margin-block-start: $spacing-01;
+    }
+    .#{$prefix}--date-picker__calendar.open {
+      border: 1px solid $border-subtle;
+      border-radius: $border-radius-08;
+    }
+
+    .#{$prefix}--date-picker__input {
+      border: 1px solid transparent;
+      border-radius: $border-radius-04;
+
+      &:not(:disabled) {
+        // (gray-20 → gray-50)
+        background:
+          linear-gradient($field, $field) padding-box,
+          linear-gradient(
+              to bottom,
+              $border-subtle calc(100% - 4px),
+              $border-strong 100%
+            )
+            border-box;
+      }
+    }
+
+    .#{$prefix}--date-picker--range {
+      .#{$prefix}--date-picker-container:first-of-type
+        .#{$prefix}--date-picker__input {
+        border-end-end-radius: $border-radius-00;
+        border-inline-end: none;
+        border-start-end-radius: $border-radius-00;
+      }
+
+      .#{$prefix}--date-picker-container:last-of-type
+        .#{$prefix}--date-picker__input {
+        border-end-start-radius: $border-radius-00;
+        border-inline-start: none;
+        border-start-start-radius: $border-radius-00;
+      }
+    }
+  }
+
   // Size variant styles
   .#{$prefix}--date-picker__input--lg {
     block-size: convert.to-rem(48px);
@@ -232,6 +278,29 @@
     @include ai-gradient;
 
     padding-inline-end: $spacing-10;
+
+    @if enabled('enable-v12-release') {
+      // Reset the bottom-edge color override from @include ai-gradient so the
+      // border-box gradient layer controls all four sides uniformly.
+      background:
+        linear-gradient(
+            0deg,
+            $ai-aura-start-sm 0%,
+            15%,
+            $ai-aura-end 50%,
+            transparent 100%
+          )
+          padding-box,
+        linear-gradient($field, $field) padding-box,
+        // (ai-border-start → ai-border-end), mirroring the default v12 border gradient
+        linear-gradient(
+            to bottom,
+            $ai-border-start calc(100% - 4px),
+            $ai-border-strong 100%
+          )
+          border-box;
+      border-block-end-color: transparent;
+    }
   }
 
   // Read-only State
@@ -239,6 +308,10 @@
     background: transparent;
     border-block-end-color: $border-subtle;
     cursor: text;
+
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-00;
+    }
   }
 
   .#{$prefix}--date-picker__input[readonly] + .#{$prefix}--date-picker__icon {

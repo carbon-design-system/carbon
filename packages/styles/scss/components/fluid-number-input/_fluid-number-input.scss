@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2022
+// Copyright IBM Corp. 2022, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -12,6 +12,8 @@
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
+@use '../../border-radius' as *;
+@use '../../feature-flags' as *;
 @use '../../utilities/ai-gradient' as *;
 @use '../../utilities/convert';
 @use '../../utilities/focus-outline' as *;
@@ -22,6 +24,26 @@
     position: relative;
     background: $field;
     block-size: 100%;
+
+    @if enabled('enable-v12-release') {
+      border: 1px solid transparent;
+      border-radius: $border-radius-04;
+      background:
+        linear-gradient($field, $field) padding-box,
+        linear-gradient(
+            to bottom,
+            $border-subtle calc(100% - 4px),
+            $border-strong 100%
+          )
+          border-box;
+
+      &:has(.#{$prefix}--number--readonly),
+      &.#{$prefix}--number-input--fluid--readonly {
+        border-radius: $border-radius-00;
+        background: transparent;
+        border-block-end-color: $border-subtle;
+      }
+    }
   }
 
   .#{$prefix}--number-input--fluid .#{$prefix}--label {
@@ -56,6 +78,11 @@
 
   .#{$prefix}--number-input--fluid .#{$prefix}--number__input-wrapper {
     position: initial;
+
+    @if enabled('enable-v12-release') {
+      // Match default NumberInput: steppers are positioned against the field.
+      position: relative;
+    }
   }
 
   .#{$prefix}--number-input--fluid input[type='number'],
@@ -67,35 +94,115 @@
     outline: none;
   }
 
-  .#{$prefix}--number-input--fluid .#{$prefix}--number__controls {
-    block-size: convert.to-rem(40px);
-    inset-block-start: convert.to-rem(23px);
-    transform: translate(0);
+  // number-input.scss is emitted after this file, including AI `:has()`
+  // input rules (0,3,1). Flatten the inner field so rounded chrome stays
+  // on the fluid wrapper (which also wraps invalid/warn text).
+  .#{$prefix}--number-input--fluid
+    .#{$prefix}--number
+    .#{$prefix}--number__input-wrapper
+    input[type='number'],
+  .#{$prefix}--number-input--fluid
+    .#{$prefix}--number
+    .#{$prefix}--number__input-wrapper
+    input[type='text'] {
+    @if enabled('enable-v12-release') {
+      border: none;
+      border-radius: $border-radius-00;
+      background: transparent;
+    }
   }
 
   .#{$prefix}--number-input--fluid
+    .#{$prefix}--number
+    input[type='number']:focus,
+  .#{$prefix}--number-input--fluid
+    .#{$prefix}--number
+    input[type='text']:focus {
+    outline: none;
+  }
+
+  .#{$prefix}--number-input--fluid .#{$prefix}--number__controls {
+    z-index: 1;
+
+    @if enabled('enable-v12-release') {
+      // Same md stepper size as default NumberInput. Sit 1px past the
+      // input-wrapper so they meet the field's 1px border.
+      block-size: convert.to-rem(40px);
+      inset-block-end: convert.to-rem(-1px);
+      inset-block-start: auto;
+      inset-inline-end: convert.to-rem(-1px);
+      transform: none;
+    } @else {
+      block-size: convert.to-rem(40px);
+      inset-block-start: convert.to-rem(23px);
+      transform: translate(0);
+    }
+  }
+
+  .#{$prefix}--number-input--fluid .#{$prefix}--number__control-btn {
+    // Fluid steppers sit above the field's bottom edge (40px in a 64px
+    // control). The default NumberInput hover inset shadow would paint a
+    // second line 1px above the field border.
+    &:hover {
+      box-shadow: none;
+    }
+  }
+
+  // number-input is @used after fluid-number-input, so these selectors must
+  // beat `.cds--number input:focus ~ … .cds--number__control-btn`.
+  .#{$prefix}--number-input--fluid
+    .#{$prefix}--number
     input[type='number']:focus
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn,
   .#{$prefix}--number-input--fluid
+    .#{$prefix}--number
     input[type='text']:focus
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn {
-    border-block-end-color: $focus;
-    box-shadow: inset 0 -1px $focus;
+    @if enabled('enable-v12-release') {
+      // Default NumberInput paints `border-width: 2px 0` in `$focus` so the
+      // steppers continue the input's focus ring. Fluid draws that ring on
+      // the wrapper; the 2px transparent gap lets the ring show through as
+      // a blue line on the button.
+      border: none;
+      box-shadow: none;
+    } @else {
+      border-block-end-color: $focus;
+      box-shadow: inset 0 -1px $focus;
+    }
   }
 
   .#{$prefix}--number-input--fluid
+    .#{$prefix}--number
     input[type='number']:focus
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn:last-of-type,
   .#{$prefix}--number-input--fluid
+    .#{$prefix}--number
     input[type='text']:focus
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn:last-of-type {
-    box-shadow:
-      inset 0 -1px $focus,
-      inset -2px 0 $focus;
+    @if not enabled('enable-v12-release') {
+      box-shadow:
+        inset 0 -1px $focus,
+        inset -2px 0 $focus;
+    }
+  }
+
+  .#{$prefix}--number-input--fluid
+    .#{$prefix}--number
+    input[type='number']:focus
+    ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn:last-of-type:hover,
+  .#{$prefix}--number-input--fluid
+    .#{$prefix}--number
+    input[type='text']:focus
+    ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn:last-of-type:hover {
+    @if enabled('enable-v12-release') {
+      box-shadow: none;
+    }
   }
 
   .#{$prefix}--number-input--fluid
@@ -138,7 +245,9 @@
     input[type='text'][data-invalid]:focus
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn:last-of-type {
-    box-shadow: inset -2px 0 $focus;
+    @if not enabled('enable-v12-release') {
+      box-shadow: inset -2px 0 $focus;
+    }
   }
 
   .#{$prefix}--number-input--fluid--invalid
@@ -149,7 +258,9 @@
     input[type='text'][data-invalid]:not(:focus)
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn:last-of-type:hover {
-    box-shadow: inset -2px 0 $support-error;
+    @if not enabled('enable-v12-release') {
+      box-shadow: inset -2px 0 $support-error;
+    }
   }
 
   .#{$prefix}--number-input--fluid--invalid
@@ -163,9 +274,18 @@
     box-shadow: none;
   }
 
-  .#{$prefix}--number-input--fluid.#{$prefix}--number-input--fluid--focus
-    .#{$prefix}--number {
-    @include focus-outline('outline');
+  .#{$prefix}--number-input--fluid.#{$prefix}--number-input--fluid--focus {
+    @if enabled('enable-v12-release') {
+      @include focus-outline('outline');
+
+      .#{$prefix}--number {
+        outline: none;
+      }
+    } @else {
+      .#{$prefix}--number {
+        @include focus-outline('outline');
+      }
+    }
   }
 
   .#{$prefix}--number-input--fluid:not(
@@ -186,7 +306,10 @@
     input[type='text']:focus
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn:hover {
-    border-block-end: 1px solid $focus;
+    @if not enabled('enable-v12-release') {
+      border-block-end: 1px solid $focus;
+    }
+
     outline: none;
   }
 
@@ -268,9 +391,18 @@
 
   .#{$prefix}--number-input--fluid.#{$prefix}--number-input--fluid--invalid:not(
       .#{$prefix}--number-input--fluid--focus
-    )
-    .#{$prefix}--number {
-    @include focus-outline('invalid');
+    ) {
+    @if enabled('enable-v12-release') {
+      @include focus-outline('invalid');
+
+      .#{$prefix}--number {
+        outline: none;
+      }
+    } @else {
+      .#{$prefix}--number {
+        @include focus-outline('invalid');
+      }
+    }
   }
 
   .#{$prefix}--number-input--fluid--invalid
@@ -354,16 +486,29 @@
     input[type='text']
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn {
-    border: initial;
-    border-block-end-width: convert.to-rem(1px);
+    @if not enabled('enable-v12-release') {
+      border: 0;
+    }
   }
 
   // Disabled states
   .#{$prefix}--number-input--fluid--disabled:not(
       .#{$prefix}--number-input--fluid--invalid
-    )
-    .#{$prefix}--number {
-    border-block-end: 1px solid $border-subtle;
+    ) {
+    @if enabled('enable-v12-release') {
+      border: 1px solid transparent;
+      border-radius: $border-radius-04;
+      background: $field;
+
+      input[type='number']:disabled,
+      input[type='text']:disabled {
+        background: transparent;
+      }
+    } @else {
+      .#{$prefix}--number {
+        border-block-end: 1px solid $border-subtle;
+      }
+    }
   }
 
   .#{$prefix}--number-input--fluid--disabled.#{$prefix}--number-input--fluid--invalid
@@ -446,6 +591,41 @@
       :has(.#{$prefix}--slug--revert)
     ) {
     @include ai-gradient;
+
+    @if enabled('enable-v12-release') {
+      background: none;
+      border-block-end-color: transparent;
+    }
+  }
+
+  @if enabled('enable-v12-release') {
+    .#{$prefix}--number-input--fluid:has(
+        .#{$prefix}--number__input-wrapper--decorator .#{$prefix}--ai-label
+      ):not(:has(.#{$prefix}--ai-label--revert)),
+    .#{$prefix}--number-input--fluid:has(
+        .#{$prefix}--number__input-wrapper--slug .#{$prefix}--ai-label
+      ):not(:has(.#{$prefix}--ai-label--revert)),
+    .#{$prefix}--number-input--fluid:has(
+        .#{$prefix}--number__input-wrapper--slug .#{$prefix}--slug
+      ):not(:has(.#{$prefix}--slug--revert)) {
+      background:
+        linear-gradient(
+            0deg,
+            $ai-aura-start-sm 0%,
+            15%,
+            $ai-aura-end 50%,
+            transparent 100%
+          )
+          padding-box,
+        linear-gradient($field, $field) padding-box,
+        linear-gradient(
+            to bottom,
+            $ai-border-start calc(100% - 4px),
+            $ai-border-strong 100%
+          )
+          border-box;
+      border-block-end-color: transparent;
+    }
   }
 
   .#{$prefix}--number-input--fluid

@@ -24,6 +24,7 @@ import { PopoverAlignment } from '../Popover';
 import { deprecate } from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { hasHelperText } from '../../internal/hasHelperText';
+import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
 
 type ExcludedAttributes = 'size';
 
@@ -220,6 +221,7 @@ const PasswordInput = forwardRef<unknown, PasswordInputProps>(
     });
 
     const { isFluid } = useContext(FormContext);
+    const labelRef = React.useRef<HTMLLabelElement>(null);
 
     const handleTogglePasswordVisibility = (event) => {
       setInputType(inputType === 'password' ? 'text' : 'password');
@@ -298,9 +300,13 @@ const PasswordInput = forwardRef<unknown, PasswordInputProps>(
     });
 
     const label = typeof labelText !== 'undefined' && labelText !== null && (
-      <label htmlFor={id} className={labelClasses}>
+      <label htmlFor={id} className={labelClasses} ref={labelRef}>
         {labelText}
       </label>
+    );
+    useNoInteractiveChildren(
+      labelRef,
+      'The PasswordInput component `labelText` prop must have no interactive content'
     );
     const helper = hasHelperText(helperText) && (
       <div id={normalizedProps.helperId} className={helperTextClasses}>

@@ -1,2 +1,5 @@
 scss
 index.scss
+
+!examples/**/src/scss
+!examples/**/src/scss/**

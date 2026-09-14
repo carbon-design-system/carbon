@@ -44,7 +44,9 @@ export default {
     // Selector
     'selector-pseudo-class-no-unknown': true,
     'selector-pseudo-element-no-unknown': true,
-    'selector-type-no-unknown': true,
+    // custom elements are unknown to the HTML element list by definition; the
+    // rule still catches real typos, which have no hyphen
+    'selector-type-no-unknown': [true, { ignore: ['custom-elements'] }],
 
     // Media feature
     'media-feature-name-no-unknown': [
