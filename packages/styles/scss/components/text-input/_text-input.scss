@@ -26,6 +26,7 @@
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/button-reset';
 @use '../../utilities/visually-hidden' as *;
+@use '../../utilities/high-contrast-mode' as *;
 
 /// Text input styles
 /// @access public
@@ -68,6 +69,7 @@
     &:focus,
     &:active {
       @include focus-outline('outline');
+      @include high-contrast-mode('focus-lg');
     }
 
     &-wrapper svg[hidden] {
