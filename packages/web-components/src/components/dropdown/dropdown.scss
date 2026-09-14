@@ -332,7 +332,7 @@ $css--plex: true !default;
   @extend .#{$prefix}--form-item;
 
   .#{$prefix}--skeleton {
-    @include skeleton;
+    @include skeleton($border-radius: $border-radius-04);
   }
 }
 // AILabel styles
