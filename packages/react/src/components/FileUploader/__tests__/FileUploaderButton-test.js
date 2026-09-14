@@ -152,6 +152,26 @@ describe('FileUploaderButton', () => {
     }).not.toThrow();
   });
 
+  it('should label the file input with the button instead of a separate label element', () => {
+    const { container } = render(<FileUploaderButton labelText="Add file" />);
+
+    const button = screen.getByRole('button', { name: 'Add file' });
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+    const input = container.querySelector('input[type="file"]');
+
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+    expect(container.querySelector('label')).toBeNull();
+    expect(input).toHaveAttribute('aria-labelledby', button.id);
+    expect(screen.getByLabelText('Add file')).toBe(input);
+  });
+
+  it('should forward `innerRef` to the button', () => {
+    const ref = React.createRef();
+    render(<FileUploaderButton labelText="Add file" innerRef={ref} />);
+
+    expect(ref.current).toBe(screen.getByRole('button', { name: 'Add file' }));
+  });
+
   describe('FileUploaderButton label', () => {
     it('should update the label when a file is selected', async () => {
       const { container } = render(

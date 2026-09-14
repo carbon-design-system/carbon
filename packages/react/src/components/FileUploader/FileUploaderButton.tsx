@@ -10,7 +10,6 @@ import PropTypes from 'prop-types';
 import React, { useEffect, useRef, useState, type HTMLAttributes } from 'react';
 import { matches, keys } from '../../internal/keyboard';
 import { useId } from '../../internal/useId';
-import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
 import { usePrefix } from '../../internal/usePrefix';
 import { deprecate } from '../../prop-types/deprecate';
@@ -102,7 +101,7 @@ export interface FileUploaderButtonProps
    */
   tabIndex?: number | string;
 
-  innerRef?: React.RefObject<HTMLLabelElement | null>;
+  innerRef?: React.RefObject<HTMLButtonElement | null>;
 }
 
 function FileUploaderButton({
@@ -125,9 +124,9 @@ function FileUploaderButton({
   const [labelText, setLabelText] = useState(ownerLabelText);
   const generatedId = useId();
   const { current: inputId } = useRef(id || generatedId);
+  const buttonId = `${generatedId}-button`;
   const inputNode = useRef<HTMLInputElement>(null);
-  const labelRef = useRef<HTMLLabelElement>(null);
-  const mergedLabelRef = useMergedRefs([labelRef, innerRef]);
+  const labelRef = useRef<HTMLSpanElement>(null);
   const classes = cx(`${prefix}--btn`, className, {
     [`${prefix}--btn--${buttonKind}`]: buttonKind,
     [`${prefix}--btn--disabled`]: disabled,
@@ -181,6 +180,8 @@ function FileUploaderButton({
     <>
       <button
         type="button"
+        id={buttonId}
+        ref={innerRef}
         disabled={disabled}
         className={classes}
         onClick={onClick}
@@ -191,18 +192,13 @@ function FileUploaderButton({
             ? parseInt(other.tabIndex as string)
             : undefined
         }>
-        {labelText}
+        <span ref={labelRef}>{labelText}</span>
       </button>
-      <label
-        className={`${prefix}--visually-hidden`}
-        ref={mergedLabelRef}
-        htmlFor={inputId}>
-        <span>{labelText}</span>
-      </label>
       <input
         className={`${prefix}--visually-hidden`}
         ref={inputNode}
         id={inputId}
+        aria-labelledby={buttonId}
         disabled={disabled}
         type="file"
         tabIndex={-1}
