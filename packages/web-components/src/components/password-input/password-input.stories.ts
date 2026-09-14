@@ -34,7 +34,7 @@ const args = {
   invalidText: 'Password must be at least 8 characters',
   labelText: 'Password',
   placeholder: 'Enter your password',
-  readonly: false,
+  readOnly: false,
   showPasswordLabel: 'Show password',
   size: INPUT_SIZE.MEDIUM,
   tooltipAlignment: INPUT_TOOLTIP_ALIGNMENT.END,
@@ -95,9 +95,9 @@ const argTypes = {
     control: 'text',
     description: 'Placeholder (placeholder)',
   },
-  readonly: {
+  readOnly: {
     control: 'boolean',
-    description: 'Read only (readonly)',
+    description: 'Read only (readOnly)',
   },
   showPasswordLabel: {
     control: 'text',
@@ -153,7 +153,7 @@ export const Default = {
     labelText,
     onInput,
     placeholder,
-    readonly,
+    readOnly,
     showPasswordLabel,
     size,
     tooltipAlignment,
@@ -174,7 +174,7 @@ export const Default = {
         invalid-text="${ifDefined(invalidText)}"
         label="${ifDefined(labelText)}"
         placeholder="${ifDefined(placeholder)}"
-        ?readonly="${ifDefined(readonly)}"
+        .readOnly="${ifDefined(readOnly)}"
         show-password-label="${ifDefined(showPasswordLabel)}"
         size="${ifDefined(size)}"
         tooltip-alignment="${ifDefined(tooltipAlignment)}"
