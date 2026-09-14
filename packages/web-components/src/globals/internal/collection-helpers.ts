@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -14,8 +14,7 @@
 export const filter = (
   a: NodeListOf<Node> | HTMLCollectionOf<Element>,
   predicate: (search: Node, index?: number) => boolean,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  thisObject?: any
+  thisObject?: unknown
 ) => Array.prototype.filter.call(a, predicate, thisObject);
 
 /**
@@ -27,8 +26,7 @@ export const filter = (
 export const findIndex = (
   a: NodeListOf<Node> | HTMLCollectionOf<Element>,
   predicate: (search: Node, index?: number) => boolean,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  thisObject?: any
+  thisObject?: unknown
 ) => Array.prototype.findIndex.call(a, predicate, thisObject);
 
 /**
@@ -40,8 +38,7 @@ export const findIndex = (
 export const find = (
   a: NodeListOf<Node> | HTMLCollectionOf<Element>,
   predicate: (search: Node, index?: number) => boolean,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  thisObject?: any
+  thisObject?: unknown
 ) => Array.prototype.find.call(a, predicate, thisObject);
 
 /**
@@ -54,8 +51,7 @@ export const find = (
 export const forEach = (
   a: NodeListOf<Node> | HTMLCollectionOf<Element>,
   predicate: (search: Element, index?: number) => void,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  thisObject?: any
+  thisObject?: unknown
 ) => Array.prototype.forEach.call(a, predicate, thisObject);
 
 /**
