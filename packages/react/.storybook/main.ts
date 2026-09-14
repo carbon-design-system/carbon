@@ -91,12 +91,12 @@ const config: StorybookConfig = {
     // the repo root, not in packages/react/node_modules/.
     const ibmProductsStylesRoot = path.resolve(
       configDir,
-      '../../../node_modules/@carbon/ibm-products-styles'
+      '../../../node_modules/@carbon/ibm-products'
     );
     const ibmProductsStylesImporter = {
       canonicalize(url: string) {
-        if (!url.startsWith('@carbon/ibm-products-styles/')) return null;
-        const rel = url.slice('@carbon/ibm-products-styles/'.length);
+        if (!url.startsWith('@carbon/ibm-products/')) return null;
+        const rel = url.slice('@carbon/ibm-products/'.length);
         // Try _<name>.scss, <name>.scss, <name>/_index.scss in order
         const base = path.join(ibmProductsStylesRoot, rel);
         const dir = path.dirname(base);
