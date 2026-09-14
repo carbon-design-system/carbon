@@ -53,7 +53,6 @@ import {
   useFloating,
   flip,
   hide,
-  offset,
   autoUpdate,
   size as floatingSize,
 } from '@floating-ui/react';
@@ -327,7 +326,6 @@ const Dropdown = React.forwardRef(
     const enableFloatingStyles = useFeatureFlag(
       'enable-v12-dynamic-floating-styles'
     );
-    const enableV12Release = useFeatureFlag('enable-v12-release');
 
     const { refs, floatingStyles, middlewareData } = useFloating(
       enableFloatingStyles || autoAlign
@@ -349,8 +347,6 @@ const Dropdown = React.forwardRef(
                   });
                 },
               }),
-              // $spacing-02. CSS margin cannot be used on the floating node.
-              enableV12Release && autoAlign && offset(4),
               autoAlign && flip(),
               autoAlign && hide(),
             ],

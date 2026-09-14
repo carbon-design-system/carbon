@@ -49,13 +49,7 @@ import { deprecate } from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import { FormContext } from '../FluidForm';
-import {
-  autoUpdate,
-  flip,
-  hide,
-  offset,
-  useFloating,
-} from '@floating-ui/react';
+import { autoUpdate, flip, hide, useFloating } from '@floating-ui/react';
 import type { TranslateWithId } from '../../types/common';
 import { useFeatureFlag } from '../FeatureFlags';
 import { AILabel } from '../AILabel';
@@ -427,19 +421,13 @@ const ComboBox = forwardRef(
 
     const enableFloatingStyles =
       useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
-    const enableV12Release = useFeatureFlag('enable-v12-release');
 
     const { refs, floatingStyles, middlewareData } = useFloating(
       enableFloatingStyles
         ? {
             placement: direction,
             strategy: 'fixed',
-            // $spacing-02. CSS margin cannot be used on the floating node.
-            middleware: [
-              enableV12Release && offset(4),
-              autoAlign && flip(),
-              autoAlign && hide(),
-            ],
+            middleware: autoAlign ? [flip(), hide()] : undefined,
             whileElementsMounted: autoUpdate,
           }
         : {}

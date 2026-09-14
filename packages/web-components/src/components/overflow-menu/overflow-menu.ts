@@ -684,10 +684,7 @@ class CDSOverflowMenu
         alignment: menuAlignment,
         styleElement,
         flipArguments,
-        // $spacing-02 gap between the trigger and the menu
-        mainAxisOffset: isFeatureFlagEnabled('enable-v12-release', this)
-          ? 4
-          : 0,
+        mainAxisOffset: 0,
         open: this.open,
       });
     });
