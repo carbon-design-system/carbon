@@ -9,6 +9,7 @@
 // Card
 //-----------------------------
 
+@use '../../border-radius' as *;
 @use '../../config' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
@@ -24,6 +25,7 @@
   // ─── Base ────────────────────────────────────────────────────────────
   .#{$prefix}--card {
     position: relative;
+    border-radius: $border-radius-08;
     background-color: $layer;
     color: $text-primary;
   }
@@ -32,6 +34,7 @@
   .#{$prefix}--card--clickable {
     display: block;
     border: 1px solid $border-tile-01;
+    border-radius: $border-radius-08;
     cursor: pointer;
     // Reset anchor defaults when card is rendered as <a>
     text-decoration: none;
@@ -108,8 +111,12 @@
   }
 
   // Action-set layout: triggered when CardAction children are present
+  // Note: overflow:hidden is intentionally omitted here. The footer's rounded
+  // bottom corners are achieved by border-radius on the :first-child/:last-child
+  // __action wrappers and their inner .cds--btn elements (see below). Using
+  // overflow:hidden on the footer would clip the tooltip/popover that IconButton
+  // floats outside the footer bounds.
   .#{$prefix}--card__footer:has(> .#{$prefix}--card__action) {
-    overflow: hidden;
     padding: 0;
     border-block-start: 1px solid $border-subtle;
     gap: 1px;
@@ -142,6 +149,29 @@
     margin-inline-start: 0;
   }
 
+  // ─── Footer action border-radius ─────────────────────────────────────
+  .#{$prefix}--card__footer:has(> .#{$prefix}--card__action)
+    > .#{$prefix}--card__action:first-child {
+    border-end-start-radius: $border-radius-08;
+  }
+
+  .#{$prefix}--card__footer:has(> .#{$prefix}--card__action)
+    > .#{$prefix}--card__action:first-child
+    .#{$prefix}--btn {
+    border-end-start-radius: $border-radius-08;
+  }
+
+  .#{$prefix}--card__footer:has(> .#{$prefix}--card__action)
+    > .#{$prefix}--card__action:last-child {
+    border-end-end-radius: $border-radius-08;
+  }
+
+  .#{$prefix}--card__footer:has(> .#{$prefix}--card__action)
+    > .#{$prefix}--card__action:last-child
+    .#{$prefix}--btn {
+    border-end-end-radius: $border-radius-08;
+  }
+
   // ─── Action wrapper ───────────────────────────────────────────────────
   .#{$prefix}--card__action {
     display: inline-flex;
@@ -162,6 +192,12 @@
 
   // ─── Media (AspectRatio slot) ────────────────────────────────────────
   .#{$prefix}--card__media {
+    // Clip media content (images/video) to the card's top rounded corners.
+    // overflow:hidden lives here rather than on the card root so that
+    // absolutely-positioned children (tooltips, popovers) are not clipped.
+    overflow: hidden;
+    border-start-end-radius: $border-radius-08;
+    border-start-start-radius: $border-radius-08;
     grid-column: 1 / -1;
     inline-size: 100%;
 
@@ -221,6 +257,10 @@
     flex-basis: var(--#{$prefix}--card--media-width, 33.33%);
     flex-shrink: 0;
     align-self: stretch;
+    // Match card border-radius on the leading edge of the media column.
+    // The card's overflow:hidden clips the trailing corners automatically.
+    border-end-start-radius: $border-radius-08;
+    border-start-start-radius: $border-radius-08;
   }
 
   .#{$prefix}--card--horizontal > .#{$prefix}--card__content {
@@ -458,6 +498,7 @@
 
     position: absolute;
     display: block;
+    border-radius: $border-radius-08;
     block-size: 100%;
     box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow;
     content: '';

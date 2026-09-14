@@ -55,3 +55,12 @@
   line-height: 1rem;
   white-space: nowrap;
 }
+
+// Demo content box used in the WithFlushBody story to visualise padding behaviour
+.card-story__flush-demo-content {
+  background: var(--cds-highlight);
+  border: 1px dashed var(--cds-link-primary);
+  border-end-end-radius: spacing.$spacing-03; // 8px — bottom-right
+  border-end-start-radius: spacing.$spacing-03; // 8px — bottom-left
+  padding: spacing.$spacing-05; // 1rem
+}
