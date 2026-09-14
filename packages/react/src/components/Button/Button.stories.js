@@ -346,7 +346,7 @@ const radiusArgType = (name, description) => ({
   options: radiusTokenOptions,
   mapping: radiusTokenMapping,
   control: { type: 'select' },
-  table: { category: 'Radius' },
+  table: { disable: true, category: 'Radius' },
 });
 
 export const Radius = (args) => {
@@ -383,6 +383,8 @@ Radius.args = {
   radiusEs: 'unset',
   radiusEe: 'unset',
 };
+
+Radius.tags = ['!dev', '!autodocs'];
 
 Radius.parameters = {
   controls: {

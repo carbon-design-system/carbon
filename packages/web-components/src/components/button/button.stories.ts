@@ -320,7 +320,7 @@ const radiusArgType = (name, description) => ({
   options: radiusTokenOptions,
   mapping: radiusTokenMapping,
   control: { type: 'select' },
-  table: { category: 'Radius' },
+  table: { disable: true, category: 'Radius' },
 });
 
 const toRadiusStyle = ({ radius, radiusSs, radiusSe, radiusEs, radiusEe }) => {
@@ -407,6 +407,7 @@ const radiusIconButton = (args, tooltipText) => html`
 `;
 
 export const Radius = {
+  tags: ['!dev', '!autodocs'],
   argTypes: {
     ...sharedArgTypes,
     radius: radiusArgType(

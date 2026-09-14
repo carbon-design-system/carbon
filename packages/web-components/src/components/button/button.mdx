@@ -70,6 +70,10 @@ If a per-corner property is set, it wins over `--cds-button-radius` for that
 corner. Carbon uses this so a default button can stay fully rounded while a
 button in another component uses a different token:
 
+<p>
+<details>
+<summary>Where Carbon sets button radius</summary>
+
 | Context                               | Token                     |
 | ------------------------------------- | ------------------------- |
 | Default button                        | `$border-radius-max`      |
@@ -96,6 +100,9 @@ button in another component uses a different token:
 | AI Label footer actions               | `$border-radius-00`       |
 | AI Label last footer action (end-end) | `$border-radius-08 - 1px` |
 
+</details>
+</p>
+
 The `ss`, `se`, `es`, and `ee` suffixes are logical corners (start-start,
 start-end, end-start, end-end). They follow writing direction, so a joined
 control stays joined in RTL without extra rules.
@@ -110,7 +117,32 @@ control stays joined in RTL without extra rules.
 | `$border-radius-24`  | `1.5rem`   |
 | `$border-radius-max` | `999999px` |
 
-<Canvas of={ButtonStories.Radius} />
+Use `$border-radius-00` to make a button flush:
+
+<Unstyled
+  style={{
+    padding: '1rem',
+    background: 'var(--cds-background)',
+    '--cds-button-radius': '0',
+  }}>
+  <cds-button>Flush</cds-button>
+</Unstyled>
+
+```html
+<div style="--cds-button-radius: 0">
+  <!-- $border-radius-00 -->
+  <cds-button>Flush</cds-button>
+</div>
+```
+
+```scss
+@use '@carbon/styles/scss/components/button';
+@use '@carbon/styles/scss/border-radius';
+
+.my-flush-button {
+  @include button.radius(border-radius.$border-radius-00);
+}
+```
 
 ### Flatten a region
 
