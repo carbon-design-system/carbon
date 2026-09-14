@@ -20,7 +20,6 @@
     @if ($type == 'focus-lg') {
       color: Highlight;
       outline: 3px solid Highlight;
-      outline-offset: -3px;
     }
 
     @if ($type == 'outline') {
