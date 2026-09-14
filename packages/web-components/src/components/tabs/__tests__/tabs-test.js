@@ -78,6 +78,28 @@ describe('cds-tabs', function () {
     expect(tabLink(tabs[0]).getAttribute('tabindex')).to.equal('-1');
   });
 
+  it('should prefer a consumer-set `selected` child over a conflicting host `value` on mount', async () => {
+    const el = await fixture(html`
+      <cds-tabs value="tab-3">
+        <cds-tab value="tab-1" target="p-1">First</cds-tab>
+        <cds-tab value="tab-2" target="p-2" selected>Second</cds-tab>
+        <cds-tab value="tab-3" target="p-3">Third</cds-tab>
+      </cds-tabs>
+    `);
+
+    await el.updateComplete;
+    const tabs = el.querySelectorAll('cds-tab');
+    await Promise.all(Array.from(tabs, (tab) => tab.updateComplete));
+
+    // The consumer-set `selected` child wins over the host `value`.
+    expect(tabs[1].hasAttribute('selected')).to.be.true;
+    expect(tabs[2].hasAttribute('selected')).to.be.false;
+    // The host `value` is synced to the selected child.
+    expect(el.value).to.equal('tab-2');
+    expect(tabLink(tabs[1]).getAttribute('tabindex')).to.equal('0');
+    expect(tabLink(tabs[2]).getAttribute('tabindex')).to.equal('-1');
+  });
+
   it('should not move focus into the tablist on initial mount', async () => {
     const marker = document.createElement('button');
     document.body.appendChild(marker);
