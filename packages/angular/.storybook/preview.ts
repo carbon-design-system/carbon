@@ -38,7 +38,16 @@ const preview: Preview = {
     options: {
       storySort: {
         method: 'alphabetical',
-        order: ['Introduction', ['Welcome', 'Migration'], 'Components'],
+        order: [
+          'Introduction',
+          [
+            'Welcome',
+            'Migration',
+            'Form Participation',
+            'Component Registration',
+          ],
+          'Components',
+        ],
       },
     },
   },

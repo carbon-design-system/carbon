@@ -1,0 +1,50 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Introduction/Welcome" />
+
+# `@carbon/angular`
+
+Angular components for the
+[Carbon Design System](https://carbondesignsystem.com), built as thin wrappers
+over `@carbon/web-components`. Each Angular component registers its backing Web
+Component under a namespaced `cds-wc-*` tag at import time — no separate
+registration step is required.
+
+## Install
+
+```bash
+npm install @carbon/angular @carbon/web-components @carbon/styles
+# or
+yarn add @carbon/angular @carbon/web-components @carbon/styles
+```
+
+## Basic usage
+
+```ts
+// app.module.ts
+import { CDSAngularButtonModule } from '@carbon/angular';
+
+@NgModule({
+  imports: [CDSAngularButtonModule],
+})
+export class AppModule {}
+```
+
+```html
+<!-- app.component.html -->
+<cds-button kind="primary" (buttonClick)="onClick($event)">Click me</cds-button>
+```
+
+## Styles
+
+Add the Carbon stylesheet to your `angular.json` styles array:
+
+```json
+"styles": ["node_modules/@carbon/styles/css/styles.css"]
+```
+
+## Migrating from `carbon-components-angular`?
+
+See the **[Migration guide](?path=/docs/introduction-migration--docs)** for a
+full list of API changes, before/after examples, and the automated codemods that
+handle most of the mechanical work.

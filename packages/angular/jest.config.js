@@ -18,6 +18,13 @@ export default {
   // e2e tests run via Playwright, not Jest
   moduleNameMapper: {
     '\\.(css|scss)$': 'identity-obj-proxy',
+    // @carbon/web-components ES output is not fully built in the workspace yet.
+    // Stub WC classes and the registration utility so Angular layer tests can
+    // compile without requiring the built dist.
+    '@carbon/web-components/es/globals/register\\.js':
+      '<rootDir>/src/__mocks__/@carbon/web-components/register.ts',
+    '@carbon/web-components/es/components/(.*)':
+      '<rootDir>/src/__mocks__/@carbon/web-components/component.ts',
   },
   transformIgnorePatterns: [
     '<rootDir>/node_modules/(?!@carbon/web-components|lit|@lit|@floating-ui)',

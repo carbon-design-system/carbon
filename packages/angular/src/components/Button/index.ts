@@ -5,5 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// Public API barrel — components exported here are part of the public surface.
-export { ButtonComponent, CDSAngularButtonModule } from './components/Button';
+export { ButtonComponent, CDSAngularButtonModule } from './Button.component';

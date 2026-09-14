@@ -19,17 +19,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "exports": {
-    ".": {
-      "types": "./esm2022/index.d.ts",
-      "esm2022": "./esm2022/index.mjs",
-      "default": "./fesm2022/carbon-angular.mjs"
-    },
-    "./package.json": "./package.json"
-  },
-  "main": "fesm2022/carbon-angular.mjs",
-  "module": "fesm2022/carbon-angular.mjs",
-  "typings": "esm2022/index.d.ts",
   "scripts": {
     "build": "ng-packagr -p ng-package.json",
     "clean": "rimraf esm2022 fesm2022",
@@ -65,6 +54,7 @@
     "@storybook/addon-docs": "10.3.5",
     "@storybook/addon-links": "10.3.5",
     "@storybook/angular": "10.3.5",
+    "@types/jest": "^30.0.0",
     "jest": "^29.0.0",
     "jest-environment-jsdom": "^29.0.0",
     "jest-preset-angular": "^14.0.0",
@@ -72,9 +62,9 @@
     "playwright": "^1.45.0",
     "rimraf": "^6.0.1",
     "rxjs": "^7.4.0",
-    "storybook": "^10.3.5",
+    "storybook": "10.3.5",
     "storybook-addon-accessibility-checker": "^9.2.0-rc.4",
-    "typescript": "^5.4.0",
+    "typescript": "~5.8.3",
     "zone.js": "~0.15.0"
   }
 }
