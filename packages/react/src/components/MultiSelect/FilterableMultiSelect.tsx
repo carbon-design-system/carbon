@@ -73,6 +73,7 @@ import {
 import { hasHelperText } from '../../internal/hasHelperText';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
+import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
 import { useFeatureFlag } from '../FeatureFlags';
 
 const {
@@ -375,6 +376,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
 ) {
   const { isFluid } = useContext(FormContext);
   const isFirstRender = useRef(true);
+  const labelRef = useRef<HTMLLabelElement>(null);
   const [isOpen, setIsOpen] = useState<boolean>(!!open);
   const [inputValue, setInputValue] = useState<string>('');
   const [topItems, setTopItems] = useState<ItemType[]>(
@@ -865,6 +867,10 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
   );
 
   const labelProps = getLabelProps();
+  useNoInteractiveChildren(
+    labelRef,
+    'The FilterableMultiSelect component `titleText` prop must have no interactive content'
+  );
 
   const buttonProps = getToggleButtonProps({
     disabled,
@@ -991,7 +997,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
   return (
     <div className={wrapperClasses}>
       {titleText ? (
-        <label className={titleClasses} {...labelProps}>
+        <label className={titleClasses} {...labelProps} ref={labelRef}>
           {titleText}
           <span className={`${prefix}--visually-hidden`}>
             {clearSelectionContent}

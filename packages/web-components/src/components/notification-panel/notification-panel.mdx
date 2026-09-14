@@ -1,0 +1,75 @@
+import { ArgTypes, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import NotificationPanelStories from './notification-panel.stories';
+
+<Meta of={NotificationPanelStories} />
+
+# NotificationPanel
+
+The NotificationsPanel sets expectations on the behavior for notifications,
+allowing the user to view and interact with them all in one place.
+
+The component includes a composable footer section, exposed via the footer slot.
+Adopters can insert custom content into this slot and, if they choose to do so,
+are expected to provide the appropriate styles. Alternatively, the
+`cds-notification-footer` component can be used, which comes with built-in
+styling.
+
+In addition to the footer, the today and previous sections are also exposed as
+named slots, giving adopters more flexibility to control the content in those
+areas. These sections are intended to contain `cds-notification` components.
+Each `cds-notification` supports two named slots: title and description,
+allowing for further customization of the notification content.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/web-components/es/components/notification-panel/index.js';
+```
+
+### HTML
+
+```html
+<cds-notification-panel
+  title-text="Notifications"
+  today-text="Today"
+  previous-text="Previous"
+  dismiss-all-label="Dismiss all"
+  empty-state-label="You do not have any notifications"
+  donot-disturb-label="Do not disturb"
+  date-time-locale="en-US"
+  open>
+  <!-- Today notifications (slot="today") -->
+  <cds-notification slot="today" type="error" unread>
+    <span slot="title">Notification title</span>
+    <span slot="description">Notification description text.</span>
+  </cds-notification>
+
+  <!-- Previous notifications (slot="previous") -->
+  <cds-notification slot="previous" type="informational">
+    <span slot="title">Notification title</span>
+    <span slot="description">Notification description text.</span>
+  </cds-notification>
+
+  <!-- Footer (slot="footer") -->
+  <cds-notification-footer
+    slot="footer"
+    view-all-label="View all"></cds-notification-footer>
+</cds-notification-panel>
+```
+
+## `<cds-notification-panel>` attributes, properties, events and slots.
+
+<ArgTypes of="cds-notification-panel" />
+
+## `<cds-notification>` attributes, properties, events and slots.
+
+<ArgTypes of="cds-notification" />
+
+## `<cds-notification-footer>` attributes, properties, events and slots.
+
+<ArgTypes of="cds-notification-footer" />

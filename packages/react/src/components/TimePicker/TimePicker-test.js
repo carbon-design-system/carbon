@@ -145,6 +145,42 @@ describe('TimePicker', () => {
       expect(screen.queryByLabelText('🐳')).not.toBeInTheDocument();
     });
 
+    it('should not allow interactive content in labelText', () => {
+      const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+      expect(() => {
+        render(
+          <TimePicker
+            id="time-picker"
+            labelText={
+              <>
+                TimePicker label <button type="button">Help</button>
+              </>
+            }
+          />
+        );
+      }).toThrow(
+        'The TimePicker component `labelText` prop must have no interactive content'
+      );
+
+      spy.mockRestore();
+    });
+
+    it('should allow non-interactive content in labelText', () => {
+      expect(() => {
+        render(
+          <TimePicker
+            id="time-picker"
+            labelText={
+              <>
+                TimePicker label <span>additional label content</span>
+              </>
+            }
+          />
+        );
+      }).not.toThrow();
+    });
+
     it('renders a label as expected', () => {
       render(<TimePicker id="time-picker" labelText="🐳" />);
       expect(screen.getByLabelText('🐳')).toBeInTheDocument();

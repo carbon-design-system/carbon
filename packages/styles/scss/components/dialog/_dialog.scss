@@ -405,8 +405,10 @@
       @include button.radius($border-radius-00);
     }
 
-    &:hover {
-      background-color: $layer-hover;
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: $layer-hover;
+      }
     }
 
     &:focus {

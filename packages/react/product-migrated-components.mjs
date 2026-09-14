@@ -24,6 +24,8 @@ export const productMigratedStoryGlobs = [
   '../src/components/ScrollGradient/ScrollGradient.stories.js',
   '../src/components/SidePanel/SidePanel.stories.js',
   '../src/components/EditInPlace/EditInPlace.stories.js',
+  '../src/components/Tearsheet/Tearsheet.stories.js',
+  '../src/components/TagOverflow/TagOverflow.stories.js',
   '../src/components/UserAvatar/UserAvatar.stories.js',
   '../src/components/TruncatedText/TruncatedText.stories.js',
 ];
@@ -53,6 +55,8 @@ export const excludeProductsComponents = [
   'src/components/Resizer/**/*',
   'src/components/SidePanel/**/*',
   'src/components/EditInPlace/**/*',
+  'src/components/Tearsheet/**/*',
+  'src/components/TagOverflow/**/*',
   'src/components/UserAvatar/**/*',
   'src/components/TruncatedText/**/*',
 ];

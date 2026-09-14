@@ -20,6 +20,7 @@ import styles from './toggletip.scss?lit';
 import popoverStyles from '../popover/popover.scss?lit';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import { deepShadowContains } from '../../globals/internal/deep-shadow-contains';
+import { isFeatureFlagEnabled } from '../feature-flags';
 
 /**
  * Definition tooltip.
@@ -86,6 +87,15 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
    */
   @property({ type: Boolean, attribute: 'default-open' })
   defaultOpen = false;
+
+  /**
+   * v12 removes the caret from the popover and everything built on top of it,
+   * so the toggletip no longer renders one once the `enable-v12-release`
+   * feature flag is enabled.
+   */
+  private get _caret() {
+    return !isFeatureFlagEnabled('enable-v12-release', this);
+  }
 
   connectedCallback() {
     super.connectedCallback();
@@ -177,7 +187,9 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
                   @slotchange="${this._handleActionsSlotChange}"></slot>
               </div>
             </div>
-            <span class="${prefix}--popover-caret"></span>
+            ${this._caret
+              ? html`<span class="${prefix}--popover-caret"></span>`
+              : null}
           </span>
         `
       : html`
@@ -192,7 +204,9 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
                 </div>
               </div>
             </span>
-            <span class="${prefix}--popover-caret"></span>
+            ${this._caret
+              ? html`<span class="${prefix}--popover-caret"></span>`
+              : null}
           </span>
         `;
   };
@@ -216,8 +230,8 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
         this.popoverController?.setPlacement({
           trigger: this._toggletipButton,
           target: this._toggletipContent,
-          arrowElement: this._toggletipCaret,
-          caret: true,
+          arrowElement: this._caret ? this._toggletipCaret : undefined,
+          caret: this._caret,
           flipArguments: { fallbackAxisSideDirection: 'start' },
           alignment: this.alignment,
           open: this.open,
@@ -231,7 +245,7 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
     const { alignment, open } = this;
     const classes = classMap({
       [`${prefix}--popover-container`]: true,
-      [`${prefix}--popover--caret`]: true,
+      [`${prefix}--popover--caret`]: this._caret,
       [`${prefix}--popover--high-contrast`]: true,
       [`${prefix}--popover--open`]: open,
       [`${prefix}--popover--${alignment}`]: alignment,
