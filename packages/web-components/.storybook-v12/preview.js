@@ -43,13 +43,13 @@ export const parameters = {
     storySort: {
       method: 'alphabetical',
       order: [
-        'Getting Started',
+        'Introduction',
         [
           'Welcome',
           'Getting started',
-          'Feature Flags',
           'Custom styles',
           'Carbon CDN style helpers',
+          'Feature Flags',
           'Form participation',
         ],
         'Components',
