@@ -43,6 +43,7 @@ jobs:
 
       - name: Publish to Figma Code Connect
         working-directory: packages/${{ matrix.package }}
+        # TODO: Upgrade Code Connect to v2 after all legacy mappings are migrated.
         run: npx figma connect publish
         env:
           FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}
