@@ -36,25 +36,158 @@ import './stories/tabs-wrapper';
 
 const args = {
   contained: false,
-  disabled: false,
+  dismissable: false,
+  fullWidth: false,
+  iconSize: TABS_ICON_SIZE.DEFAULT,
+  selectedIndex: 0,
+  selectedItemAssistiveText: 'Selected an item.',
+  selectingItemsAssistiveText:
+    'Selecting items. Use up and down arrow keys to navigate.',
   size: 'md',
   selectionMode: 'automatic',
+  tabDisabled: false,
+  tabSecondaryLabel: '',
+  tabTarget: 'panel-dashboard',
+  tabTitle: 'Dashboard',
+  tabValue: 'dashboard',
+  triggerContent: '',
+  value: 'dashboard',
 };
 
 const argTypes = {
-  disabled: {
-    control: 'boolean',
-    description: 'Disable tab selection',
-  },
   contained: {
     control: 'boolean',
-    description: 'Container type styling for tabs',
+    description: 'Specify whether tabs use contained styling.',
+    table: {
+      category: 'Tabs',
+      defaultValue: { summary: false },
+    },
+  },
+  dismissable: {
+    control: 'boolean',
+    description: 'Whether the rendered tab children should be dismissable.',
+    table: {
+      category: 'Tabs',
+      defaultValue: { summary: false },
+    },
+  },
+  fullWidth: {
+    control: 'boolean',
+    description:
+      'Used for tabs within a grid, this makes tabs span the full container width and have the same width. Only available on contained tabs with fewer than nine children.',
+    table: {
+      category: 'Tabs',
+      defaultValue: { summary: false },
+    },
+  },
+  iconSize: {
+    control: 'select',
+    description: 'Specify the icon size used by icon-only tabs.',
+    options: [TABS_ICON_SIZE.DEFAULT, TABS_ICON_SIZE.LARGE],
+    table: {
+      category: 'Tabs',
+      defaultValue: { summary: 'undefined' },
+    },
+  },
+  selectedIndex: {
+    control: 'number',
+    description: 'Specify the initially selected tab by index.',
+    table: {
+      category: 'Tabs',
+      defaultValue: { summary: 0 },
+    },
+  },
+  selectedItemAssistiveText: {
+    control: 'text',
+    description:
+      'Provide assistive text for screen readers to announce when an item is selected.',
+    table: {
+      category: 'Tabs',
+      defaultValue: { summary: 'Selected an item.' },
+    },
   },
   selectionMode: {
     control: 'select',
     description:
       'Choose whether or not to automatically change selection on focus when left/right arrow pressed.',
     options: ['automatic', 'manual'],
+    table: {
+      category: 'Tabs',
+      defaultValue: { summary: 'automatic' },
+    },
+  },
+  selectingItemsAssistiveText: {
+    control: 'text',
+    description:
+      'Provide assistive text for screen readers to announce while selecting items.',
+    table: {
+      category: 'Tabs',
+      defaultValue: {
+        summary: 'Selecting items. Use up and down arrow keys to navigate.',
+      },
+    },
+  },
+  triggerContent: {
+    control: 'text',
+    description: 'Specify the content of the trigger button for narrow mode.',
+    table: {
+      category: 'Tabs',
+      defaultValue: { summary: '""' },
+    },
+  },
+  value: {
+    control: 'text',
+    description: 'Specify the value of the selected tab.',
+    table: {
+      category: 'Tabs',
+      defaultValue: { summary: '""' },
+    },
+  },
+  tabDisabled: {
+    control: 'boolean',
+    description: 'Specify whether this tab should be disabled.',
+    name: 'disabled',
+    table: {
+      category: 'Tab',
+      defaultValue: { summary: false },
+    },
+  },
+  tabSecondaryLabel: {
+    control: 'text',
+    description:
+      'Provide an optional label to render under the primary tab label. Only useful for contained tabs.',
+    name: 'secondary-label',
+    table: {
+      category: 'Tab',
+      defaultValue: { summary: 'undefined' },
+    },
+  },
+  tabTarget: {
+    control: 'text',
+    description: 'Specify the ID of the tab panel controlled by this tab.',
+    name: 'target',
+    table: {
+      category: 'Tab',
+      defaultValue: { summary: 'undefined' },
+    },
+  },
+  tabTitle: {
+    control: 'text',
+    description: 'Specify the tab text content.',
+    name: 'tab-title',
+    table: {
+      category: 'Tab',
+      defaultValue: { summary: 'undefined' },
+    },
+  },
+  tabValue: {
+    control: 'text',
+    description: 'Specify the value for this tab.',
+    name: 'value',
+    table: {
+      category: 'Tab',
+      defaultValue: { summary: '""' },
+    },
   },
 };
 
@@ -63,14 +196,22 @@ const lineTabsSizeArgType = {
     control: { type: 'select' },
     options: ['sm', 'md'],
     description: 'Specify the size of the tabs',
+    table: {
+      category: 'Tabs',
+      defaultValue: { summary: 'undefined' },
+    },
   },
 };
 
 const tabsSizeArgType = {
   size: {
     control: { type: 'select' },
-    options: ['sm', 'md', 'lg', 'xl'],
+    options: ['sm', 'md', 'lg'],
     description: 'Specify the size of the tabs',
+    table: {
+      category: 'Tabs',
+      defaultValue: { summary: 'undefined' },
+    },
   },
 };
 
@@ -92,6 +233,10 @@ const iconStoriesArgTypes = {
   badgeIndicator: {
     description: '**Experimental**: Display an empty dot badge on the Tab.',
     control: 'boolean',
+    table: {
+      category: 'Tab',
+      defaultValue: { summary: false },
+    },
   },
 };
 
@@ -101,13 +246,26 @@ export const Default = {
     ...argTypes,
     ...lineTabsSizeArgType,
   },
-  render: ({ disabled, contained, selectionMode, size }) => {
+  render: ({
+    contained,
+    dismissable,
+    fullWidth,
+    iconSize,
+    selectedIndex,
+    selectedItemAssistiveText,
+    selectingItemsAssistiveText,
+    selectionMode,
+    size,
+    tabDisabled,
+    tabSecondaryLabel,
+    tabTarget,
+    tabTitle,
+    tabValue,
+    triggerContent,
+    value,
+  }) => {
     const handleBeforeSelected = (event: CustomEvent) => {
       onTabsBeingSelected(event);
-
-      if (disabled) {
-        event.preventDefault();
-      }
     };
 
     return html`
@@ -115,15 +273,29 @@ export const Default = {
         ${styles}
       </style>
       <cds-tabs
-        disabled="${disabled}"
+        ?dismissable="${dismissable}"
+        ?full-width="${fullWidth}"
+        icon-size="${ifDefined(iconSize)}"
+        .selectedIndex=${selectedIndex}
+        selected-item-assistive-text="${ifDefined(selectedItemAssistiveText)}"
+        selecting-items-assistive-text="${ifDefined(
+          selectingItemsAssistiveText
+        )}"
         selection-mode="${selectionMode}"
         size="${ifDefined(size)}"
-        type="${ifDefined(contained && TABS_TYPE.CONTAINED)}"
-        value="dashboard"
+        trigger-content="${ifDefined(triggerContent)}"
+        type="${ifDefined(contained ? TABS_TYPE.CONTAINED : undefined)}"
+        value="${ifDefined(value)}"
         @cds-tabs-beingselected="${handleBeforeSelected}"
         @cds-tabs-selected="${onTabsSelected}">
-        <cds-tab id="tab-dashboard" target="panel-dashboard" value="dashboard">
-          Dashboard
+        <cds-tab
+          id="tab-dashboard"
+          ?disabled="${tabDisabled}"
+          secondary-label="${ifDefined(tabSecondaryLabel || undefined)}"
+          .tabTitle="${tabTitle}"
+          target="${ifDefined(tabTarget)}"
+          value="${ifDefined(tabValue)}">
+          ${tabTitle}
         </cds-tab>
         <cds-tab
           id="tab-monitoring"
@@ -470,13 +642,16 @@ export const ContainedWithIcons = {
 };
 
 export const ContainedWithSecondaryLabels = {
-  render: () => html`
+  args: containedTabsSizeArgs,
+  argTypes: tabsSizeArgType,
+  render: ({ size }) => html`
     <style>
       ${styles}
     </style>
     <cds-tabs
       value="engage"
       type="${TABS_TYPE.CONTAINED}"
+      size="${ifDefined(size)}"
       @cds-tabs-beingselected="${onTabsBeingSelected}"
       @cds-tabs-selected="${onTabsSelected}">
       <cds-tab
@@ -571,13 +746,16 @@ export const ContainedWithSecondaryLabels = {
 };
 
 export const ContainedWithSecondaryLabelsAndIcons = {
-  render: () => html`
+  args: containedTabsSizeArgs,
+  argTypes: tabsSizeArgType,
+  render: ({ size }) => html`
     <style>
       ${styles}
     </style>
     <cds-tabs
       value="engage"
       type="${TABS_TYPE.CONTAINED}"
+      size="${ifDefined(size)}"
       @cds-tabs-beingselected="${onTabsBeingSelected}"
       @cds-tabs-selected="${onTabsSelected}">
       <cds-tab
@@ -934,7 +1112,9 @@ export const IconOnly = {
 };
 
 export const Manual = {
-  render: () => {
+  args: lineTabsSizeArgs,
+  argTypes: lineTabsSizeArgType,
+  render: ({ size }) => {
     return html`
       <style>
         ${styles}
@@ -942,6 +1122,7 @@ export const Manual = {
       <cds-tabs
         value="all"
         selection-mode="manual"
+        size="${ifDefined(size)}"
         @cds-tabs-beingselected="${onTabsBeingSelected}"
         @cds-tabs-selected="${onTabsSelected}">
         <cds-tab id="tab-all" target="panel-all" value="all">Dashboard</cds-tab>
@@ -1008,8 +1189,17 @@ export const Manual = {
 };
 
 export const skeleton = {
-  render: () => html`
-    <cds-tabs-skeleton>
+  args: {
+    contained: false,
+  },
+  argTypes: {
+    contained: {
+      control: 'boolean',
+      description: 'Specify whether the skeleton is for contained tabs',
+    },
+  },
+  render: ({ contained }) => html`
+    <cds-tabs-skeleton ?contained="${contained}">
       <cds-tab-skeleton></cds-tab-skeleton>
       <cds-tab-skeleton></cds-tab-skeleton>
       <cds-tab-skeleton></cds-tab-skeleton>
