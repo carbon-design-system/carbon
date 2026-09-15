@@ -269,6 +269,9 @@ const renderFooterActions = (footerActions) => {
 };
 
 export const Default = {
+  args: {
+    actionCount: 4,
+  },
   render: ({
     label,
     title,
@@ -1191,6 +1194,23 @@ export const WithIcon = () => (
           <Card.Title description="Real-time metrics">
             Analytics Dashboard
           </Card.Title>
+          <Card.Actions>
+            <Card.Action>
+              <IconButton label="Edit" kind="ghost" size="sm">
+                <Edit />
+              </IconButton>
+            </Card.Action>
+            <Card.Action>
+              <IconButton label="Share" kind="ghost" size="sm">
+                <Share />
+              </IconButton>
+            </Card.Action>
+            <Card.Action>
+              <IconButton label="Download" kind="ghost" size="sm">
+                <Download />
+              </IconButton>
+            </Card.Action>
+          </Card.Actions>
         </Card.Header>
         <Card.Body>Inbound traffic up 8% since last Tuesday.</Card.Body>
         <Card.Footer>
@@ -1243,6 +1263,18 @@ export const WithIcon = () => (
           <Card.Title description="Your saved content">
             Favorite Items
           </Card.Title>
+          <Card.Actions>
+            <Card.Action>
+              <IconButton label="Edit" kind="ghost" size="sm">
+                <Edit />
+              </IconButton>
+            </Card.Action>
+            <Card.Action>
+              <IconButton label="Delete" kind="ghost" size="sm">
+                <TrashCan />
+              </IconButton>
+            </Card.Action>
+          </Card.Actions>
         </Card.Header>
         <Card.Body>12 items saved across 3 workspaces.</Card.Body>
         <Card.Footer>
