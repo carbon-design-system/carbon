@@ -50,6 +50,25 @@ icons, pictograms, layout, motion, themes, type), and tooling.
 - A detailed graph of packages and their relationships is generated from the
   build: `docs/generated/package-structure-graph.json`
 
+## Theme token lookup
+
+- All four theme token values and descriptions live in a single file:
+  `packages/themes/src/dtcg/themes.json`. Component tokens are in
+  `packages/themes/src/dtcg/components/`.
+- Tokens use nested JSON keys (e.g. `layer-accent-active-03` is
+  `layer.accent.active.03`), so search by key segments rather than flat token
+  names.
+- Each token carries per-theme values under `$extensions["carbon.themes"]`.
+  Entries are either a bare string alias (no alpha) or a `{ value, alpha }`
+  object. There is no per-file `$value` — look inside `carbon.themes` for the
+  value you need.
+- The generated `packages/themes/scss/generated/_themes.scss` shows all four
+  resolved hex values side-by-side but carries no descriptions and should not be
+  edited directly.
+- See `packages/themes/src/dtcg/README.md` for full details on: nested key
+  structure, dual-role nodes, the `carbon.themes` entry format, alpha modifier
+  tokens, component token format, and how to resolve palette references.
+
 ## Package-specific details
 
 - A dual-flagship model is followed for `@carbon/react` and
