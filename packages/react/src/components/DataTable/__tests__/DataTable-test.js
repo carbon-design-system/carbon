@@ -145,19 +145,23 @@ describe('DataTable', () => {
   });
 
   describe('renders as expected - Component API', () => {
-    it('should spread extra props onto outermost element', () => {
+    it('should spread extra props onto outermost element', async () => {
       const { container } = render(<DataTable {...mockProps} />);
+      // act flushes the queueMicrotask-deferred setState from useEffect
+      await act(async () => {});
 
       expect(container.firstChild).toHaveAttribute('data-testid', 'test-id');
     });
 
-    it('should render and match snapshot', () => {
+    it('should render and match snapshot', async () => {
       const { container } = render(<DataTable {...mockProps} />);
+      await act(async () => {});
       expect(container).toMatchSnapshot();
     });
 
-    it('should associate data cells with their column headers', () => {
+    it('should associate data cells with their column headers', async () => {
       render(<DataTable {...mockProps} />);
+      await act(async () => {});
 
       const [firstHeader, secondHeader] = screen.getAllByRole('columnheader');
       const cells = screen.getAllByRole('cell');
@@ -176,7 +180,7 @@ describe('DataTable', () => {
       expect(cells[3]).toHaveAttribute('headers', secondHeader.id);
     });
 
-    it('should preserve custom header and cell associations', () => {
+    it('should preserve custom header and cell associations', async () => {
       const { render: _render, ...props } = mockProps;
 
       render(
@@ -215,6 +219,7 @@ describe('DataTable', () => {
           )}
         </DataTable>
       );
+      await act(async () => {});
 
       const [firstHeader, secondHeader] = screen.getAllByRole('columnheader');
       const cells = screen.getAllByRole('cell');
@@ -230,6 +235,7 @@ describe('DataTable', () => {
     describe('sorting', () => {
       it('should sort a row by a header when a header is clicked', async () => {
         render(<DataTable isSortable={true} {...mockProps} />);
+        await act(async () => {});
         const header = within(screen.getAllByRole('columnheader')[0]).getByRole(
           'button'
         );
@@ -282,7 +288,7 @@ describe('DataTable', () => {
         ]);
       });
 
-      it('should resolve isSortable from header, override, and table defaults', () => {
+      it('should resolve isSortable from header, override, and table defaults', async () => {
         const headersWithSort = [
           { key: 'princess', header: 'Princess', isSortable: false },
           { key: 'peach', header: 'Peach' },
@@ -318,6 +324,7 @@ describe('DataTable', () => {
             }}
           </DataTable>
         );
+        await act(async () => {});
 
         expect(screen.getByTestId('first-default')).toHaveAttribute(
           'data-issortable',
@@ -337,6 +344,7 @@ describe('DataTable', () => {
         const { rerender } = render(
           <DataTable isSortable={true} {...mockProps} />
         );
+        await act(async () => {});
         const header = within(screen.getAllByRole('columnheader')[0]).getByRole(
           'button'
         );
@@ -358,7 +366,9 @@ describe('DataTable', () => {
           'Field 3:B',
         ]);
 
-        rerender(<DataTable isSortable={true} {...mockProps} />);
+        await act(async () => {
+          rerender(<DataTable isSortable={true} {...mockProps} />);
+        });
         expect(cells()).toEqual([
           'Field 1:A',
           'Field 1:B',
@@ -371,6 +381,7 @@ describe('DataTable', () => {
 
       it('should reset to ASC ordering when another header is clicked', async () => {
         render(<DataTable isSortable={true} {...mockProps} />);
+        await act(async () => {});
 
         const firstHeader = () => screen.getAllByRole('columnheader')[0];
         const secondHeader = () => screen.getAllByRole('columnheader')[1];
@@ -397,6 +408,7 @@ describe('DataTable', () => {
     describe('filtering', () => {
       it('should filter rows by the given input', async () => {
         render(<DataTable isSortable={true} {...mockProps} />);
+        await act(async () => {});
         const filterInput = screen.getByRole('searchbox');
 
         // +1 for the header row
@@ -537,18 +549,21 @@ describe('DataTable', () => {
         spy.mockRestore();
       });
 
-      it('should render and match snapshot', () => {
+      it('should render and match snapshot', async () => {
         const { container } = render(<DataTable {...mockProps} />);
+        await act(async () => {});
         expect(container).toMatchSnapshot();
       });
 
-      it('should have select-all default to un-checked if no rows are present', () => {
+      it('should have select-all default to un-checked if no rows are present', async () => {
         render(<DataTable {...mockProps} rows={[]} />);
+        await act(async () => {});
         expect(screen.getAllByRole('checkbox')[0]).not.toBeChecked();
       });
 
       it('should select all rows if a user interacts with select all', async () => {
         render(<DataTable {...mockProps} />);
+        await act(async () => {});
         const selectAllCheckbox = screen.getAllByRole('checkbox')[0];
         expect(selectAllCheckbox).not.toBeChecked();
 
@@ -562,6 +577,7 @@ describe('DataTable', () => {
 
       it('should select a specific row when a user interacts with select row', async () => {
         render(<DataTable {...mockProps} />);
+        await act(async () => {});
         const selectAllCheckbox = screen.getAllByRole('checkbox')[0];
         const firstRowCheckbox = screen.getAllByRole('checkbox')[1];
 
@@ -579,6 +595,7 @@ describe('DataTable', () => {
 
       it('should deselect all rows when batch action cancel is invoked', async () => {
         render(<DataTable {...mockProps} />);
+        await act(async () => {});
         const selectAllCheckbox = screen.getAllByRole('checkbox')[0];
 
         await userEvent.click(selectAllCheckbox);
@@ -597,6 +614,7 @@ describe('DataTable', () => {
 
       it('should call the onSelectAll prop if supplied to TableBatchAction component', async () => {
         render(<DataTable {...mockProps} />);
+        await act(async () => {});
         const selectAllCheckbox = screen.getAllByRole('checkbox')[0];
 
         await userEvent.click(selectAllCheckbox);
@@ -707,6 +725,7 @@ describe('DataTable', () => {
 
       it('should only select all from filtered items', async () => {
         render(<DataTable {...mockProps} />);
+        await act(async () => {});
 
         const selectAllCheckbox = screen.getAllByRole('checkbox')[0];
         const firstRowCheckbox = () => screen.getAllByRole('checkbox')[1];
@@ -740,6 +759,7 @@ describe('DataTable', () => {
           },
         ];
         render(<DataTable {...mockProps} rows={nextRows} />);
+        await act(async () => {});
 
         const filterInput = screen.getByRole('searchbox');
         const selectAllCheckbox = screen.getAllByRole('checkbox')[0];
@@ -758,6 +778,7 @@ describe('DataTable', () => {
           ...mockProps.rows.map((row) => ({ ...row, disabled: true })),
         ];
         render(<DataTable {...mockProps} rows={nextRows} />);
+        await act(async () => {});
         const selectAllCheckbox = screen.getAllByRole('checkbox')[0];
 
         await userEvent.click(selectAllCheckbox);
@@ -848,19 +869,22 @@ describe('DataTable', () => {
         };
       });
 
-      it('should render', () => {
+      it('should render', async () => {
         const { container } = render(<DataTable {...mockProps} />);
+        await act(async () => {});
         expect(container).toMatchSnapshot();
       });
 
-      it('should not have select-all checkbox', () => {
+      it('should not have select-all checkbox', async () => {
         const { container } = render(<DataTable {...mockProps} />);
+        await act(async () => {});
         expect(screen.queryAllByRole('checkbox').length).toBe(0);
         expect(container).toMatchSnapshot();
       });
 
       it('should select a specific row when a user interacts with select row', async () => {
         render(<DataTable {...mockProps} />);
+        await act(async () => {});
         const radioButton = screen.getAllByRole('radio')[0];
 
         expect(radioButton).not.toBeChecked();
@@ -874,6 +898,7 @@ describe('DataTable', () => {
 
       it('should deselect all other rows when a row is selected', async () => {
         render(<DataTable {...mockProps} />);
+        await act(async () => {});
         const radioButtonOne = screen.getAllByRole('radio')[0];
         const radioButtonTwo = screen.getAllByRole('radio')[1];
 
@@ -989,8 +1014,9 @@ describe('DataTable', () => {
         };
       });
 
-      it('should add additional rows when receiving new props', () => {
+      it('should add additional rows when receiving new props', async () => {
         const { rerender } = render(<DataTable {...mockProps} />);
+        await act(async () => {});
         const args = mockProps.render.mock.calls[0][0];
 
         expect(args.rows.length).toEqual(mockProps.rows.length);
@@ -1004,7 +1030,9 @@ describe('DataTable', () => {
           },
         ];
 
-        rerender(<DataTable {...mockProps} rows={nextRows} />);
+        await act(async () => {
+          rerender(<DataTable {...mockProps} rows={nextRows} />);
+        });
 
         const nextArgs = getLastCallFor(mockProps.render)[0];
         expect(nextArgs.rows.length).toBe(nextRows.length);
@@ -1016,8 +1044,9 @@ describe('DataTable', () => {
         ]);
       });
 
-      it('should add additional headers when receiving new props', () => {
+      it('should add additional headers when receiving new props', async () => {
         const { rerender } = render(<DataTable {...mockProps} />);
+        await act(async () => {});
         const args = mockProps.render.mock.calls[0][0];
 
         expect(args.headers).toEqual(mockProps.headers);
@@ -1036,7 +1065,9 @@ describe('DataTable', () => {
           ],
         };
 
-        rerender(<DataTable {...mockProps} {...nextProps} />);
+        await act(async () => {
+          rerender(<DataTable {...mockProps} {...nextProps} />);
+        });
 
         const nextArgs = getLastCallFor(mockProps.render)[0];
         expect(nextArgs.headers).toEqual(nextProps.headers);
@@ -1044,6 +1075,7 @@ describe('DataTable', () => {
 
       it('should keep batch action after adding rows, as long as some existing rows are selected', async () => {
         const { rerender } = render(<DataTable {...mockProps} />);
+        await act(async () => {});
         const selectAllCheckbox = screen.getAllByRole('checkbox')[0];
         await userEvent.click(selectAllCheckbox);
 
@@ -1057,7 +1089,9 @@ describe('DataTable', () => {
           },
         ];
 
-        rerender(<DataTable {...mockProps} rows={nextRows} />);
+        await act(async () => {
+          rerender(<DataTable {...mockProps} rows={nextRows} />);
+        });
 
         expect(selectAllCheckbox).not.toBeChecked();
         const { getBatchActionProps, selectedRows } = getLastCallFor(
@@ -1069,6 +1103,7 @@ describe('DataTable', () => {
 
       it('should keep selected all state after adding rows, as long as all existing rows and new row are selected', async () => {
         const { rerender } = render(<DataTable {...mockProps} />);
+        await act(async () => {});
         const selectAllCheckbox = screen.getAllByRole('checkbox')[0];
         await userEvent.click(selectAllCheckbox);
 
@@ -1081,7 +1116,9 @@ describe('DataTable', () => {
           },
         ];
 
-        rerender(<DataTable {...mockProps} rows={nextRows} />);
+        await act(async () => {
+          rerender(<DataTable {...mockProps} rows={nextRows} />);
+        });
 
         const { getBatchActionProps, selectedRows } = getLastCallFor(
           mockProps.render
@@ -1090,22 +1127,26 @@ describe('DataTable', () => {
         expect(selectedRows.length).toBe(3);
       });
 
-      it('should update rows when receiving new props', () => {
+      it('should update rows when receiving new props', async () => {
         const { rerender } = render(<DataTable {...mockProps} />);
+        await act(async () => {});
         const args = mockProps.render.mock.calls[0][0];
 
         expect(args.rows.length).toEqual(mockProps.rows.length);
 
         const nextRows = mockProps.rows.slice().reverse();
 
-        rerender(<DataTable {...mockProps} rows={nextRows} />);
+        await act(async () => {
+          rerender(<DataTable {...mockProps} rows={nextRows} />);
+        });
 
         const nextArgs = getLastCallFor(mockProps.render)[0];
         expect(nextArgs.rows.map((row) => row.id)).toEqual(['c', 'a', 'b']);
       });
 
-      it('should update cells when receiving new props', () => {
+      it('should update cells when receiving new props', async () => {
         const { rerender } = render(<DataTable {...mockProps} />);
+        await act(async () => {});
         const args = mockProps.render.mock.calls[0][0];
 
         expect(args.rows.length).toEqual(mockProps.rows.length);
@@ -1117,7 +1158,9 @@ describe('DataTable', () => {
           };
         });
 
-        rerender(<DataTable {...mockProps} rows={nextRows} />);
+        await act(async () => {
+          rerender(<DataTable {...mockProps} rows={nextRows} />);
+        });
 
         const nextArgs = getLastCallFor(mockProps.render)[0];
         expect(nextArgs.rows.map((row) => row.cells[0].value)).toEqual([
@@ -1171,6 +1214,7 @@ describe('DataTable', () => {
             )}
           />
         );
+        await act(async () => {});
 
         const firstRow = screen.getByTestId('row-b');
         await userEvent.click(firstRow);
@@ -1181,7 +1225,7 @@ describe('DataTable', () => {
   });
 
   describe('sortBy called during initial render', () => {
-    it('should not crash when sortBy is called immediately in render prop', () => {
+    it('should not crash when sortBy is called immediately in render prop', async () => {
       const mockProps = {
         rows: [
           { id: 'b', fieldA: 'Field 2:A', fieldB: 'Field 2:B' },
@@ -1237,9 +1281,9 @@ describe('DataTable', () => {
       };
 
       // This should not throw an error
-      expect(() => {
+      await act(async () => {
         render(<DataTable {...mockProps} />);
-      }).not.toThrow();
+      });
 
       // Verify the table rendered successfully
       expect(screen.getAllByRole('row').length).toBe(4); // 3 data rows + 1 header row
@@ -1299,6 +1343,7 @@ describe('DataTable', () => {
       };
 
       const { rerender } = render(<DataTable {...mockProps} />);
+      await act(async () => {});
 
       // Get initial cell values
       const getCells = () =>
@@ -1383,6 +1428,7 @@ describe('DataTable', () => {
       };
 
       render(<DataTable {...mockProps} />);
+      await act(async () => {});
 
       // Rapid successive calls should not crash
       expect(() => {
@@ -1397,7 +1443,7 @@ describe('DataTable', () => {
       expect(screen.getAllByRole('row').length).toBe(3); // 2 data rows + 1 header
     });
 
-    it('should maintain state integrity when sortBy is called before full initialization', () => {
+    it('should maintain state integrity when sortBy is called before full initialization', async () => {
       const stateCapture = [];
 
       const mockProps = {
@@ -1458,12 +1504,100 @@ describe('DataTable', () => {
       };
 
       render(<DataTable {...mockProps} />);
+      await act(async () => {});
 
       // Verify state was always valid
       stateCapture.forEach((state, index) => {
         expect(state.hasRows).toBe(true);
         expect(state.hasCells).toBe(true);
         expect(state.cellCount).toBe(2); // Should always have 2 cells for 2 headers
+      });
+    });
+  });
+
+  describe('queueMicrotask deferral (React 19 regression)', () => {
+    const minimalHeaders = [{ key: 'fieldA', header: 'Field A' }];
+
+    function MinimalTable(props) {
+      return (
+        <DataTable {...props}>
+          {({ rows, headers, getTableProps, getHeaderProps, getRowProps }) => (
+            <Table {...getTableProps()}>
+              <TableHead>
+                <TableRow>
+                  {headers.map((header) => (
+                    <TableHeader
+                      {...getHeaderProps({ header })}
+                      key={header.key}>
+                      {header.header}
+                    </TableHeader>
+                  ))}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {rows.map((row) => (
+                  <TableRow {...getRowProps({ row })} key={row.id}>
+                    {row.cells.map((cell) => (
+                      <TableCell key={cell.id}>{cell.value}</TableCell>
+                    ))}
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          )}
+        </DataTable>
+      );
+    }
+
+    it('should apply updated rows after headers or rows prop change', async () => {
+      // Verifies that the queueMicrotask-deferred setState is not lost:
+      // the new cell value must appear in the DOM after act() drains microtasks.
+      const { rerender } = render(
+        <MinimalTable
+          headers={minimalHeaders}
+          rows={[{ id: 'a', fieldA: 'Value A' }]}
+        />
+      );
+      await act(async () => {});
+
+      expect(screen.getByRole('cell')).toHaveTextContent('Value A');
+
+      await act(async () => {
+        rerender(
+          <MinimalTable
+            headers={minimalHeaders}
+            rows={[{ id: 'a', fieldA: 'Value B' }]}
+          />
+        );
+      });
+
+      expect(screen.getByRole('cell')).toHaveTextContent('Value B');
+    });
+
+    it('should not throw when many instances mount and each defers a setState', async () => {
+      // Regression guard: mounting N DataTable instances whose
+      // useEffect([headers, rows]) all schedule setState via queueMicrotask
+      // must not accumulate nestedPassiveUpdateCount past the React 19 limit.
+      const count = 20;
+
+      await act(async () => {
+        render(
+          <>
+            {Array.from({ length: count }, (_, i) => (
+              <MinimalTable
+                key={i}
+                headers={minimalHeaders}
+                rows={[{ id: `row-${i}`, fieldA: `Value ${i}` }]}
+              />
+            ))}
+          </>
+        );
+      });
+
+      const cells = screen.getAllByRole('cell');
+      expect(cells).toHaveLength(count);
+      cells.forEach((cell, i) => {
+        expect(cell).toHaveTextContent(`Value ${i}`);
       });
     });
   });
