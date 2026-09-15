@@ -317,6 +317,40 @@ describe('FilterableMultiSelect', () => {
     });
   });
 
+  it('should support selecting items from multiple instances with the same id', async () => {
+    const user = userEvent.setup();
+    const firstOnChange = jest.fn();
+    const secondOnChange = jest.fn();
+
+    render(
+      <>
+        <FilterableMultiSelect
+          {...mockProps}
+          id="shared-filterable-multiselect"
+          onChange={firstOnChange}
+        />
+        <FilterableMultiSelect
+          {...mockProps}
+          id="shared-filterable-multiselect"
+          onChange={secondOnChange}
+        />
+      </>
+    );
+    await waitForPosition();
+
+    expect(screen.getAllByRole('combobox')[0].id).not.toBe(
+      screen.getAllByRole('combobox')[1].id
+    );
+
+    await user.click(screen.getAllByRole('combobox')[1]);
+    await user.click(screen.getAllByRole('option')[0]);
+
+    expect(firstOnChange).not.toHaveBeenCalled();
+    expect(secondOnChange).toHaveBeenCalledWith({
+      selectedItems: [mockProps.items[0]],
+    });
+  });
+
   it('should let items stay at their position after selecting', async () => {
     render(<FilterableMultiSelect {...mockProps} selectionFeedback="fixed" />);
     await waitForPosition();
@@ -1267,7 +1301,7 @@ describe('FilterableMultiSelect', () => {
       'aria-label': 'Choose an item',
       autocomplete: 'off',
       class: 'cds--text-input cds--text-input--empty',
-      id: 'test-combo-input',
+      id: expect.stringMatching(/^test-combo-.+-input$/),
       maxlength: '10',
       placeholder: 'Type here',
       role: 'combobox',
