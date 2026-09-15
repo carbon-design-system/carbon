@@ -26,8 +26,8 @@ const args = {
   tooltipAlignment: 'top',
   tooltipAutoAlign: false,
   tooltipDefaultOpen: false,
-  tooltipEnterDelayMs: 0,
-  tooltipLeaveDelayMs: 0,
+  tooltipEnterDelayMs: 100,
+  tooltipLeaveDelayMs: 100,
 };
 
 const tooltipAlignmentOptions = [
