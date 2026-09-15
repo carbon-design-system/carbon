@@ -18,6 +18,8 @@ export const productMigratedStoryGlobs = [
   '../src/components/big-number/*.mdx',
   '../src/components/edit-in-place/edit-in-place.stories.ts',
   '../src/components/edit-in-place/*.mdx',
+  '../src/components/notification-panel/notification-panel.stories.ts',
+  '../src/components/notification-panel/*.mdx',
   '../src/components/options-tile/options-tile.stories.ts',
   '../src/components/options-tile/*.mdx',
   '../src/components/coachmark/coachmark.stories.ts',
@@ -26,6 +28,8 @@ export const productMigratedStoryGlobs = [
   '../src/components/resizer/*.mdx',
   '../src/components/side-panel/side-panel.stories.ts',
   '../src/components/side-panel/*.mdx',
+  '../src/components/user-avatar/user-avatar.stories.ts',
+  '../src/components/user-avatar/*.mdx',
   '../src/components/truncated-text/truncated-text.stories.ts',
   '../src/components/truncated-text/*.mdx',
 ];
@@ -48,7 +52,9 @@ export const excludeProductsComponents = [
   'src/components/action-set/**/*',
   'src/components/big-number/**/*',
   'src/components/edit-in-place/**/*',
+  'src/components/notification-panel/**/*',
   'src/components/options-tile/**/*',
   'src/components/side-panel/**/*',
+  'src/components/user-avatar/**/*',
   'src/components/truncated-text/**/*',
 ];
