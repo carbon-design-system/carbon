@@ -12,45 +12,64 @@ import './fluid-text-input';
 import './fluid-text-input-skeleton';
 
 const args = {
-  defaultWidth: 300,
   placeholder: 'Placeholder text',
   invalid: false,
   invalidText:
     'Error message that is really long can wrap to more lines but should not be excessively long.',
   disabled: false,
   labelText: 'Label',
+  enableCounter: false,
+  maxCount: 500,
+  readonly: false,
+  value: '',
   warn: false,
   warnText:
     'Warning message that is really long can wrap to more lines but should not be excessively long.',
 };
 
 const argTypes = {
-  defaultWidth: {
-    control: { type: 'range', min: 300, max: 800, step: 50 },
-  },
   placeholder: {
     control: { type: 'text' },
+    description: 'Specify the placeholder attribute for the `<input>`.',
+    table: { defaultValue: { summary: 'undefined' } },
   },
   invalid: {
     control: { type: 'boolean' },
+    description: 'Specify whether the control is currently invalid.',
+    table: { defaultValue: { summary: false } },
   },
   invalidText: {
     control: { type: 'text' },
+    description:
+      'Provide the text that is displayed when the control is in an invalid state.',
+    table: { defaultValue: { summary: 'undefined' } },
   },
   disabled: {
     control: { type: 'boolean' },
+    description: 'Specify whether the `<input>` should be disabled.',
+    table: { defaultValue: { summary: false } },
   },
   labelText: {
     control: { type: 'text' },
+    description:
+      'Provide the text that will be read by a screen reader when visiting this control.',
+    table: { defaultValue: { summary: 'required' } },
   },
   warn: {
     control: { type: 'boolean' },
+    description: 'Specify whether the control is currently in warning state.',
+    table: { defaultValue: { summary: false } },
   },
   warnText: {
     control: { type: 'text' },
+    description:
+      'Provide the text that is displayed when the control is in warning state.',
+    table: { defaultValue: { summary: 'undefined' } },
   },
   value: {
     control: { type: 'text' },
+    description: 'The value of the input.',
+    table: { defaultValue: { summary: '""' } },
   },
   onInput: {
     action: `input`,
@@ -59,18 +78,59 @@ const argTypes = {
     action: `click`,
   },
   maxCount: {
-    control: 'text',
-    description: 'Max count (max-count)',
+    control: 'number',
+    description:
+      'Max character count allowed for the textInput. This is needed in order for enableCounter to display.',
+    table: { defaultValue: { summary: 'undefined' } },
   },
   enableCounter: {
     control: 'boolean',
-    description: 'Enable counter (enable-counter)',
+    description: 'Specify whether to display the character counter.',
+    table: { defaultValue: { summary: false } },
   },
   readonly: {
     control: 'boolean',
-    description: 'Read only (readonly)',
+    description: 'Whether or not the component is readonly.',
+    table: { defaultValue: { summary: false } },
   },
 };
+
+const renderTextInput = (
+  {
+    disabled,
+    enableCounter,
+    invalid,
+    invalidText,
+    labelText,
+    maxCount,
+    onClick,
+    onInput,
+    placeholder,
+    readonly,
+    value,
+    warn,
+    warnText,
+  },
+  labelSlot
+) => html`
+  <cds-fluid-text-input
+    ?disabled="${disabled}"
+    ?enable-counter="${enableCounter}"
+    id="input-1"
+    ?invalid="${invalid}"
+    invalid-text="${ifDefined(invalidText)}"
+    label="${ifDefined(labelText)}"
+    max-count="${ifDefined(maxCount)}"
+    placeholder="${ifDefined(placeholder)}"
+    ?readonly="${readonly}"
+    value="${ifDefined(value)}"
+    ?warn="${warn}"
+    warn-text="${ifDefined(warnText)}"
+    @click="${onClick}"
+    @input="${onInput}">
+    ${labelSlot}
+  </cds-fluid-text-input>
+`;
 
 export const Default = {
   args,
@@ -80,63 +140,27 @@ export const Default = {
       exclude: ['onClick', 'onInput'],
     },
   },
-  render: ({
-    defaultWidth,
-    placeholder,
-    invalid,
-    invalidText,
-    disabled,
-    labelText,
-    warn,
-    warnText,
-    enableCounter,
-    maxCount,
-    value,
-    readonly,
-  }) => html`
-    <div style="width:${defaultWidth}px;">
-      <cds-fluid-text-input
-        placeholder="${ifDefined(placeholder)}"
-        ?invalid="${invalid}"
-        invalid-text="${ifDefined(invalidText)}"
-        ?disabled="${disabled}"
-        label="${ifDefined(labelText)}"
-        ?warn="${warn}"
-        warn-text="${ifDefined(warnText)}"
-        value="${ifDefined(value)}"
-        ?enable-counter="${ifDefined(enableCounter)}"
-        max-count="${ifDefined(maxCount)}"
-        ?readonly="${ifDefined(readonly)}">
-      </cds-fluid-text-input>
-    </div>
-  `,
+  render: (textInputArgs) => html`${renderTextInput(textInputArgs)}`,
 };
 
 export const DefaultWithToggletip = {
-  render: () => html`
-    <cds-fluid-text-input placeholder="Placeholder text">
-      <cds-toggletip autoAlign="true" slot="label-text">
+  args,
+  argTypes,
+  parameters: { controls: { exclude: ['labelText', 'onClick', 'onInput'] } },
+  render: (textInputArgs) => html`
+    ${renderTextInput(
+      textInputArgs,
+      html`<cds-toggletip autoalign="true" slot="label-text">
         Label
         <p slot="body-text">Additional field information here.</p>
-      </cds-toggletip>
-    </cds-fluid-text-input>
+      </cds-toggletip>`
+    )}
   `,
 };
 
 export const Skeleton = {
-  args: {
-    defaultWidth: 300,
-  },
-  argTypes: {
-    defaultWidth: {
-      control: { type: 'range', min: 300, max: 800, step: 50 },
-    },
-  },
-  render: ({ defaultWidth }) => html`
-    <div style="width: ${defaultWidth}px;">
-      <cds-fluid-text-input-skeleton></cds-fluid-text-input-skeleton>
-    </div>
-  `,
+  render: () =>
+    html`<cds-fluid-text-input-skeleton></cds-fluid-text-input-skeleton>`,
 };
 
 export default {
