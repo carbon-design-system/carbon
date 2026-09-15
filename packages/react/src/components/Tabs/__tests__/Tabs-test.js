@@ -1096,6 +1096,515 @@ describe('Tab', () => {
       `${prefix}--tabs__nav-item--icon-left`
     );
   });
+
+  describe('RTL overflow', () => {
+    /**
+     * Helper: mock clientWidth / scrollWidth so the tablist always overflows,
+     * then return a cleanup function that restores the spies.
+     *
+     * In RTL mode browsers report scrollLeft as 0 at the rightmost position
+     * (the visual start) and as a negative number as the user scrolls toward
+     * the visual right edge (the logical start).  JSDOM honours negative
+     * scrollLeft assignments, so we can reproduce that behaviour by directly
+     * writing a negative value onto the DOM node and firing a scroll event.
+     */
+    function setupOverflow({ scrollWidth = 300, clientWidth = 100 } = {}) {
+      const clientWidthSpy = jest
+        .spyOn(HTMLElement.prototype, 'clientWidth', 'get')
+        .mockImplementation(function () {
+          return this.getAttribute?.('role') === 'tablist' ||
+            this.classList?.contains(`${prefix}--tabs`)
+            ? clientWidth
+            : 0;
+        });
+      const scrollWidthSpy = jest
+        .spyOn(HTMLElement.prototype, 'scrollWidth', 'get')
+        .mockImplementation(function () {
+          return this.getAttribute?.('role') === 'tablist' ? scrollWidth : 0;
+        });
+      return () => {
+        clientWidthSpy.mockRestore();
+        scrollWidthSpy.mockRestore();
+      };
+    }
+
+    /**
+     * isRTL() calls getComputedStyle(containerRef.current).direction.
+     * containerRef points to the outer wrapper <div class="cds--tabs">.
+     * JSDOM does not cascade inherited CSS properties between elements, so
+     * we cannot use a parent wrapper or a style on <TabList>.  Instead we
+     * mock window.getComputedStyle so that it returns direction:'rtl' when
+     * called on a cds--tabs element and falls through to the real
+     * implementation for everything else.
+     */
+    function mockRTL() {
+      const original = window.getComputedStyle;
+      window.getComputedStyle = function (element, ...rest) {
+        const result = original.call(this, element, ...rest);
+        if (element?.classList?.contains(`${prefix}--tabs`)) {
+          return { ...result, direction: 'rtl' };
+        }
+        return result;
+      };
+      return () => {
+        window.getComputedStyle = original;
+      };
+    }
+
+    it('should show the previous overflow button when scrollLeft is negative (RTL)', () => {
+      jest.useFakeTimers();
+      const restore = setupOverflow();
+      const restoreRTL = mockRTL();
+
+      try {
+        render(
+          <Tabs>
+            <TabList aria-label="List of tabs" />
+          </Tabs>
+        );
+
+        const tablist = screen.getByRole('tablist');
+        // Negative scrollLeft = user has scrolled away from the RTL start edge
+        Object.defineProperty(tablist, 'scrollLeft', {
+          configurable: true,
+          writable: true,
+          value: -50,
+        });
+
+        fireEvent.scroll(tablist);
+        act(() => {
+          jest.advanceTimersByTime(250);
+        });
+
+        expect(screen.getByLabelText('Scroll left')).not.toHaveClass(
+          `${prefix}--tab--overflow-nav-button--hidden`
+        );
+      } finally {
+        restoreRTL();
+        restore();
+        jest.useRealTimers();
+      }
+    });
+
+    it('should hide the previous overflow button at the RTL start edge (scrollLeft === 0)', () => {
+      jest.useFakeTimers();
+      const restore = setupOverflow();
+      const restoreRTL = mockRTL();
+
+      try {
+        render(
+          <Tabs>
+            <TabList aria-label="List of tabs" />
+          </Tabs>
+        );
+
+        const tablist = screen.getByRole('tablist');
+        Object.defineProperty(tablist, 'scrollLeft', {
+          configurable: true,
+          writable: true,
+          value: 0,
+        });
+
+        fireEvent.scroll(tablist);
+        act(() => {
+          jest.advanceTimersByTime(250);
+        });
+
+        expect(screen.getByLabelText('Scroll left')).toHaveClass(
+          `${prefix}--tab--overflow-nav-button--hidden`
+        );
+      } finally {
+        restoreRTL();
+        restore();
+        jest.useRealTimers();
+      }
+    });
+
+    it('should hide the next overflow button when RTL scroll reaches the logical end', () => {
+      jest.useFakeTimers();
+      // scrollWidth=200, clientWidth=100 → maxScroll magnitude is 100
+      const restore = setupOverflow({ scrollWidth: 200, clientWidth: 100 });
+      const restoreRTL = mockRTL();
+
+      try {
+        render(
+          <Tabs>
+            <TabList aria-label="List of tabs" />
+          </Tabs>
+        );
+
+        const tablist = screen.getByRole('tablist');
+        // |scrollLeft| = 100 → normalizedScroll + clientWidth = 200 = scrollWidth
+        // so the next button should be hidden
+        Object.defineProperty(tablist, 'scrollLeft', {
+          configurable: true,
+          writable: true,
+          value: -100,
+        });
+
+        fireEvent.scroll(tablist);
+        act(() => {
+          jest.advanceTimersByTime(250);
+        });
+
+        expect(screen.getByLabelText('Scroll right')).toHaveClass(
+          `${prefix}--tab--overflow-nav-button--hidden`
+        );
+      } finally {
+        restoreRTL();
+        restore();
+        jest.useRealTimers();
+      }
+    });
+
+    it('should keep the next overflow button visible when RTL scroll has not yet reached the logical end', () => {
+      jest.useFakeTimers();
+      const restore = setupOverflow({ scrollWidth: 200, clientWidth: 100 });
+      const restoreRTL = mockRTL();
+
+      try {
+        render(
+          <Tabs>
+            <TabList aria-label="List of tabs" />
+          </Tabs>
+        );
+
+        const tablist = screen.getByRole('tablist');
+        // |scrollLeft| = 50 → 50 + 100 + 1 = 151 < 200 → next button visible
+        Object.defineProperty(tablist, 'scrollLeft', {
+          configurable: true,
+          writable: true,
+          value: -50,
+        });
+
+        fireEvent.scroll(tablist);
+        act(() => {
+          jest.advanceTimersByTime(250);
+        });
+
+        expect(screen.getByLabelText('Scroll right')).not.toHaveClass(
+          `${prefix}--tab--overflow-nav-button--hidden`
+        );
+      } finally {
+        restoreRTL();
+        restore();
+        jest.useRealTimers();
+      }
+    });
+
+    it('should render ChevronRight inside the previous button and ChevronLeft inside the next button in RTL', () => {
+      const restore = setupOverflow();
+      const restoreRTL = mockRTL();
+
+      try {
+        render(
+          <Tabs>
+            <TabList aria-label="List of tabs" />
+          </Tabs>
+        );
+
+        const prevButton = screen.getByLabelText('Scroll left');
+        const nextButton = screen.getByLabelText('Scroll right');
+
+        // ChevronRight path starts with "M11", ChevronLeft path starts with "M5"
+        // eslint-disable-next-line testing-library/no-node-access
+        const prevPath = prevButton
+          .querySelector('svg path')
+          ?.getAttribute('d');
+        // eslint-disable-next-line testing-library/no-node-access
+        const nextPath = nextButton
+          .querySelector('svg path')
+          ?.getAttribute('d');
+
+        expect(prevPath).toMatch(/^M11/); // ChevronRight inside previous button
+        expect(nextPath).toMatch(/^M5/); // ChevronLeft inside next button
+      } finally {
+        restoreRTL();
+        restore();
+      }
+    });
+
+    it('should render ChevronLeft inside the previous button and ChevronRight inside the next button in LTR (default)', () => {
+      const restore = setupOverflow();
+
+      try {
+        render(
+          <Tabs>
+            <TabList aria-label="List of tabs" />
+          </Tabs>
+        );
+
+        const prevButton = screen.getByLabelText('Scroll left');
+        const nextButton = screen.getByLabelText('Scroll right');
+
+        // eslint-disable-next-line testing-library/no-node-access
+        const prevPath = prevButton
+          .querySelector('svg path')
+          ?.getAttribute('d');
+        // eslint-disable-next-line testing-library/no-node-access
+        const nextPath = nextButton
+          .querySelector('svg path')
+          ?.getAttribute('d');
+
+        expect(prevPath).toMatch(/^M5/); // ChevronLeft inside previous button
+        expect(nextPath).toMatch(/^M11/); // ChevronRight inside next button
+      } finally {
+        restore();
+      }
+    });
+
+    describe('button click scroll behaviour', () => {
+      /**
+       * With scrollWidth=200, clientWidth=100, and 2 tabs:
+       *   step = (200 / 2) * 1.5 = 150
+       *   maxScroll = 200 - 100 = 100
+       *
+       * LTR next  from 0   → min(0+150, 100)  = 100
+       * LTR prev  from 100 → max(100-150, 0)  = 0
+       * RTL next  from 0   → max(0-150, -100) = -100
+       * RTL prev  from -100→ min(-100+150, 0) = 0
+       */
+      const SCROLL_WIDTH = 200;
+      const CLIENT_WIDTH = 100;
+
+      function setupClickOverflow() {
+        const clientWidthSpy = jest
+          .spyOn(HTMLElement.prototype, 'clientWidth', 'get')
+          .mockImplementation(function () {
+            return this.getAttribute?.('role') === 'tablist' ||
+              this.classList?.contains(`${prefix}--tabs`)
+              ? CLIENT_WIDTH
+              : 0;
+          });
+        const scrollWidthSpy = jest
+          .spyOn(HTMLElement.prototype, 'scrollWidth', 'get')
+          .mockImplementation(function () {
+            return this.getAttribute?.('role') === 'tablist' ? SCROLL_WIDTH : 0;
+          });
+        return () => {
+          clientWidthSpy.mockRestore();
+          scrollWidthSpy.mockRestore();
+        };
+      }
+
+      it('LTR: clicking the next button advances scrollLeft toward maxScroll', () => {
+        const restore = setupClickOverflow();
+        try {
+          render(
+            <Tabs>
+              <TabList aria-label="List of tabs">
+                <Tab>Tab 1</Tab>
+                <Tab>Tab 2</Tab>
+              </TabList>
+            </Tabs>
+          );
+
+          const tablist = screen.getByRole('tablist');
+          // Start at the beginning (scrollLeft = 0)
+          Object.defineProperty(tablist, 'scrollLeft', {
+            configurable: true,
+            writable: true,
+            value: 0,
+          });
+
+          act(() => {
+            fireEvent.click(screen.getByLabelText('Scroll right'));
+          });
+
+          // step=150, maxScroll=100 → min(0+150, 100) = 100
+          expect(tablist.scrollLeft).toBe(100);
+        } finally {
+          restore();
+        }
+      });
+
+      it('LTR: clicking the previous button retreats scrollLeft toward 0', () => {
+        jest.useFakeTimers();
+        const restore = setupClickOverflow();
+        try {
+          render(
+            <Tabs>
+              <TabList aria-label="List of tabs">
+                <Tab>Tab 1</Tab>
+                <Tab>Tab 2</Tab>
+              </TabList>
+            </Tabs>
+          );
+
+          const tablist = screen.getByRole('tablist');
+          // Sync the DOM scroll position into React state via a scroll event
+          // so that onPress sees scrollLeft=100 in its closure.
+          Object.defineProperty(tablist, 'scrollLeft', {
+            configurable: true,
+            writable: true,
+            value: 100,
+          });
+          fireEvent.scroll(tablist);
+          act(() => {
+            jest.advanceTimersByTime(250);
+          });
+
+          act(() => {
+            fireEvent.click(screen.getByLabelText('Scroll left'));
+          });
+
+          // step=150, floor=0 → max(100-150, 0) = 0
+          expect(tablist.scrollLeft).toBe(0);
+        } finally {
+          restore();
+          jest.useRealTimers();
+        }
+      });
+
+      it('RTL: clicking the next button makes scrollLeft more negative (toward -maxScroll)', () => {
+        const restore = setupClickOverflow();
+        const restoreRTL = mockRTL();
+        try {
+          render(
+            <Tabs>
+              <TabList aria-label="List of tabs">
+                <Tab>Tab 1</Tab>
+                <Tab>Tab 2</Tab>
+              </TabList>
+            </Tabs>
+          );
+
+          const tablist = screen.getByRole('tablist');
+          // RTL start edge: scrollLeft = 0
+          Object.defineProperty(tablist, 'scrollLeft', {
+            configurable: true,
+            writable: true,
+            value: 0,
+          });
+
+          act(() => {
+            fireEvent.click(screen.getByLabelText('Scroll right'));
+          });
+
+          // step=150, floor=-100 → max(0-150, -100) = -100
+          expect(tablist.scrollLeft).toBe(-100);
+        } finally {
+          restoreRTL();
+          restore();
+        }
+      });
+
+      it('RTL: clicking the previous button makes scrollLeft less negative (toward 0)', () => {
+        jest.useFakeTimers();
+        const restore = setupClickOverflow();
+        const restoreRTL = mockRTL();
+        try {
+          render(
+            <Tabs>
+              <TabList aria-label="List of tabs">
+                <Tab>Tab 1</Tab>
+                <Tab>Tab 2</Tab>
+              </TabList>
+            </Tabs>
+          );
+
+          const tablist = screen.getByRole('tablist');
+          // Sync DOM scroll into React state so onPress closure sees scrollLeft=-100
+          Object.defineProperty(tablist, 'scrollLeft', {
+            configurable: true,
+            writable: true,
+            value: -100,
+          });
+          fireEvent.scroll(tablist);
+          act(() => {
+            jest.advanceTimersByTime(250);
+          });
+
+          act(() => {
+            fireEvent.click(screen.getByLabelText('Scroll left'));
+          });
+
+          // step=150, ceiling=0 → min(-100+150, 0) = 0
+          expect(tablist.scrollLeft).toBe(0);
+        } finally {
+          restoreRTL();
+          restore();
+          jest.useRealTimers();
+        }
+      });
+
+      it('LTR: clicking next is clamped to maxScroll and cannot overshoot', () => {
+        jest.useFakeTimers();
+        const restore = setupClickOverflow();
+        try {
+          render(
+            <Tabs>
+              <TabList aria-label="List of tabs">
+                <Tab>Tab 1</Tab>
+                <Tab>Tab 2</Tab>
+              </TabList>
+            </Tabs>
+          );
+
+          const tablist = screen.getByRole('tablist');
+          // Sync a near-end position into React state
+          Object.defineProperty(tablist, 'scrollLeft', {
+            configurable: true,
+            writable: true,
+            value: 90,
+          });
+          fireEvent.scroll(tablist);
+          act(() => {
+            jest.advanceTimersByTime(250);
+          });
+
+          act(() => {
+            fireEvent.click(screen.getByLabelText('Scroll right'));
+          });
+
+          // min(90+150, 100) = 100 — never exceeds maxScroll
+          expect(tablist.scrollLeft).toBe(100);
+        } finally {
+          restore();
+          jest.useRealTimers();
+        }
+      });
+
+      it('RTL: clicking next is clamped to -maxScroll and cannot overshoot', () => {
+        jest.useFakeTimers();
+        const restore = setupClickOverflow();
+        const restoreRTL = mockRTL();
+        try {
+          render(
+            <Tabs>
+              <TabList aria-label="List of tabs">
+                <Tab>Tab 1</Tab>
+                <Tab>Tab 2</Tab>
+              </TabList>
+            </Tabs>
+          );
+
+          const tablist = screen.getByRole('tablist');
+          // Sync a near-end RTL position into React state
+          Object.defineProperty(tablist, 'scrollLeft', {
+            configurable: true,
+            writable: true,
+            value: -90,
+          });
+          fireEvent.scroll(tablist);
+          act(() => {
+            jest.advanceTimersByTime(250);
+          });
+
+          act(() => {
+            fireEvent.click(screen.getByLabelText('Scroll right'));
+          });
+
+          // max(-90-150, -100) = -100 — never exceeds -maxScroll
+          expect(tablist.scrollLeft).toBe(-100);
+        } finally {
+          restoreRTL();
+          restore();
+          jest.useRealTimers();
+        }
+      });
+    });
+  });
 });
 
 describe('TabsVertical', () => {

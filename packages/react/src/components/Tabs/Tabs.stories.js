@@ -931,3 +931,59 @@ IconOnlyVisualSnapshots.tags = ['!dev', '!autodocs'];
 
 ContainedFullWidth.argTypes = tabsSizeArgType;
 ContainedFullWidth.args = containedTabsSizeArgs;
+
+export const Overflow = (args) => {
+  return (
+    <div style={{ width: '400px' }}>
+      <Tabs>
+        <TabList {...args}>
+          <Tab>Dashboard</Tab>
+          <Tab>Monitoring</Tab>
+          <Tab>Activity</Tab>
+          <Tab>Analyze</Tab>
+          <Tab>Notifications</Tab>
+          <Tab>Incidents</Tab>
+          <Tab>Reports</Tab>
+          <Tab>Logs</Tab>
+          <Tab>Alerts</Tab>
+          <Tab>Integrations</Tab>
+          <Tab>Compliance</Tab>
+          <Tab>Audit</Tab>
+          <Tab>Access Control</Tab>
+          <Tab>Billing</Tab>
+          <Tab disabled>Settings</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1 – Dashboard</TabPanel>
+          <TabPanel>Tab Panel 2 – Monitoring</TabPanel>
+          <TabPanel>Tab Panel 3 – Activity</TabPanel>
+          <TabPanel>Tab Panel 4 – Analyze</TabPanel>
+          <TabPanel>Tab Panel 5 – Notifications</TabPanel>
+          <TabPanel>Tab Panel 6 – Incidents</TabPanel>
+          <TabPanel>Tab Panel 7 – Reports</TabPanel>
+          <TabPanel>Tab Panel 8 – Logs</TabPanel>
+          <TabPanel>Tab Panel 9 – Alerts</TabPanel>
+          <TabPanel>Tab Panel 10 – Integrations</TabPanel>
+          <TabPanel>Tab Panel 11 – Compliance</TabPanel>
+          <TabPanel>Tab Panel 12 – Audit</TabPanel>
+          <TabPanel>Tab Panel 13 – Access Control</TabPanel>
+          <TabPanel>Tab Panel 14 – Billing</TabPanel>
+          <TabPanel>Tab Panel 15 – Settings</TabPanel>
+        </TabPanels>
+      </Tabs>
+    </div>
+  );
+};
+
+Overflow.args = {
+  ...lineTabsSizeArgs,
+};
+
+Overflow.argTypes = {
+  ...lineTabsSizeArgType,
+  contained: {
+    control: { type: 'boolean' },
+  },
+};
+
+Overflow.storyName = 'Overflow';
