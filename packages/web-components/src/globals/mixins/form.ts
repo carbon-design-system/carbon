@@ -11,6 +11,19 @@ import Handle from '../internal/handle';
 /**
  * @param Base The base class.
  * @returns A mix-in to handle `formdata` event on the containing form.
+ *
+ * @deprecated `FormMixin` is deprecated and will be removed in v3. It is a
+ *   stop-gap from a time when form-associated custom elements were not yet
+ *   available in every browser we support, and it can only emulate one part of
+ *   being a form control — contributing a value on submit. It cannot make an
+ *   element labelable, put it in `form.elements`, respond to `form.reset()`, or
+ *   honor an ancestor `<fieldset disabled>`.
+ *
+ *   v3 replaces it with native form association through `ElementInternals`
+ *   (`FormAssociatedMixin`). You can try that today on the `cds-preview-*`
+ *   form components, which behave identically apart from participating in
+ *   forms natively. See the v3 migration guide:
+ *   https://github.com/carbon-design-system/carbon/blob/main/docs/guides/cwc-v3-migration.md#form-participation-moves-to-elementinternals
  */
 const FormMixin = <T extends Constructor<HTMLElement>>(
   Base: T

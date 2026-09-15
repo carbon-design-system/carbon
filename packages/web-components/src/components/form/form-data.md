@@ -1,84 +1,98 @@
-# Event-based form participation
+# Form participation
 
-This document is for assessing if `carbon-web-components` library can support
-event-based form participation spec, as a stop-gap solution until full-blown
-[form-associated custom element API](https://github.com/whatwg/html/pull/4383)
-in order for our components to support use cases seen e.g. with `<input>` in
-`<form>`.
+> **Deprecated.** The `formdata` event mechanism described here is deprecated in
+> v2 and removed in v3, replaced by native form association through
+> [`ElementInternals`][element-internals]. It keeps working unchanged until v3.
+> To try the replacement today, see [Form participation moves to
+> `ElementInternals`][migration] in the v3 migration guide.
 
-## Specifications and tests
+## What we do today
 
-### `formdata` event
+Carbon's form components participate in a containing `<form>` by listening for
+its [`formdata` event][formdata-event] and appending their value to
+`event.formData`. `FormMixin` (`src/globals/mixins/form.ts`) attaches that
+listener on connect, and each component implements `_handleFormdata`.
 
-- Explainer:
-  https://docs.google.com/document/d/1JO8puctCSpW-ZYGU8lF-h4FWRIDQNDVexzHoOQ2iQmY/edit
-- Spec: https://github.com/whatwg/html/pull/4239
-- Tests:
-  - https://github.com/web-platform-tests/wpt/pull/14637
-  - https://github.com/web-platform-tests/wpt/pull/18910
+This was chosen as a stop-gap. The original assessment recorded here concluded
+that the full form-associated custom element API was not yet available across
+the browsers Carbon supported — Safari in particular had [no
+roadmap][webkit-bug] at the time — and that the `formdata` event was the
+practical alternative until it was.
 
-## Browser support
+## Why it is being replaced
 
-### `formdata` event
+This limitaion is no longer true. Form-associated custom elements are supported
+in every browser Carbon supports:
 
-- Chrome:
-  [Starting Chrome 77](https://bugs.chromium.org/p/chromium/issues/detail?id=825684)
-- Firefox:
-  [Starting Firefox 71](https://bugzilla.mozilla.org/show_bug.cgi?id=1518442)
-- Safari: [No roadmap yet](https://bugs.webkit.org/show_bug.cgi?id=193231)
+| Browser | Form-associated custom elements |
+| ------- | ------------------------------- |
+| Chrome  | 77+                             |
+| Firefox | 98+                             |
+| Safari  | 16.4+                           |
 
-### `FormData` object
+More importantly, the `formdata` approach is not a complete substitute. It can
+only emulate one of the things a form control does — contributing a value at
+submit time. Everything else a control gets from the platform is missing, and
+cannot be added from an event listener:
 
-Supported by all major browsers including IE11:
-https://developer.mozilla.org/en-US/docs/Web/API/FormData
+| Form control behavior                         | `formdata` mixin |
+| --------------------------------------------- | ---------------- |
+| Contributes a value on submit                 | Yes              |
+| `<label for>` associates with the control     | No               |
+| Appears in `form.elements`                    | No               |
+| Restored by `form.reset()`                    | No               |
+| Excluded by an ancestor `<fieldset disabled>` | No               |
+| Participates in constraint validation         | No               |
 
-## Behaviours
+Two of those are defects, not gaps. `<label for>` silently not associating is an
+accessibility failure, and a value inside a disabled `<fieldset>` still being
+submitted is a semantic one.
 
-- `formdata` event bubbles, not cancelable, not composed.
-- `formdata` event is fired on `<form>`, upon submitting it. (e.g. upon
-  `HTMLFormElement#submit()` call)
+## The replacement
 
-## The story with full-blown form-associated custom element API
+`FormAssociatedMixin` (`src/globals/mixins/form-associated.ts`) sets
+`static formAssociated = true`, attaches `ElementInternals`, and pushes the
+value with `setFormValue()`. Everything in the table above then comes from the
+platform.
 
-From the
-[explainer](https://docs.google.com/document/d/1JO8puctCSpW-ZYGU8lF-h4FWRIDQNDVexzHoOQ2iQmY/edit#heading=h.m351ojpczvcd):
+Because `formAssociated` is read once by the browser at
+`customElements.define()` and cannot be toggled per instance or after
+registration, this cannot ship behind Carbon's runtime `<feature-flags>`
+element. It ships instead under separate `cds-preview-*` tags, the same approach
+used by `cds-preview-date-picker`, and becomes the behavior of the canonical
+tags in v3.
 
-> UA handles them as submittable elements. In constructing the entry list
-> algorithm, UA creates an entry with name attribute value of the
-> form-associated custom element, and the value set by `setFormValue()` of
-> `ElementInternals` interface. Authors don’t need to register `formdata` event
-> handlers.
+### Implementation notes
 
-## What we do for now
+Two details are easy to get wrong and are worth knowing if you add a component
+to the preview set:
 
-Our components code handles `formdata` event for the time being (until we are
-ready, which means full-blown form-associated custom element API is supported by
-all browsers we support), and switches to full-blown form-associated custom
-element API once we are ready.
+- **`name` must reflect.** `setFormValue()` reads the `name` _content
+  attribute_, not the property. Carbon declares `name` without `reflect`, so a
+  name set only as a property — which is what framework template bindings do —
+  submits no entry at all.
+- **`disabled` means the element's own attribute.** Matching
+  `HTMLInputElement.disabled`, an element inside a disabled `<fieldset>` reports
+  `false` and matches `:disabled` instead. The platform does not disable shadow
+  content on its own, so `FormAssociatedMixin` disables the rendered control to
+  match what a UA does for a built-in — and restores exactly the controls it
+  changed, because the template's `disabled` binding never changed and Lit will
+  not undo it.
+- **Sync the value synchronously.** `FormAssociatedMixin` pushes the value from
+  `requestUpdate()`, which Lit calls synchronously from its setters. Doing it in
+  an async lifecycle such as `updated()` leaves a stale value readable by a
+  `new FormData(form)` in the same task, which a native control never does.
 
-## Non-goal: High-fidelity shim/polyfill
+## Migration
 
-Instead, it's likely that we merely define `formdata` event handler in our
-custom elements (components). One scenario in mind is application manually fires
-`formdata` event (upon user's gesture on form submit button, etc.) to let our
-components populate `event.formData`, and run XHR/`fetch()` with the populated
-`event.formData`.
+See [Form participation moves to `ElementInternals`][migration] in the v3
+migration guide for the tag names, how to test early, and what changes when the
+preview becomes the default.
 
-## Non-goal: Feature-detection of full-blown form-associated custom element API
-
-Given we require application to manually handle user's gesture for form
-submission, and manually handle the data gathered from `formdata` event,
-feature-detection of full-blown form-associated custom element API means that
-application needs to maintain two codebase to use our components, one for
-browsers with full-blown form-associated custom element API, one without. That
-said, we are not likely to do feature-detection of full-blown form-associated
-custom element API, at least for now.
-
-## Non-goal: Supporting constraint validation API
-
-For supporting
-[constraint validation API](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#the-constraint-validation-api),
-i.e. `checkValidity()`/`reportValidity()` and `invalid` event, etc., we'll wait
-for full-blown
-[form-associated custom element API](https://github.com/whatwg/html/pull/4383)
-being available in all browsers we support.
+[element-internals]:
+  https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals
+[formdata-event]:
+  https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/formdata_event
+[webkit-bug]: https://bugs.webkit.org/show_bug.cgi?id=193231
+[migration]:
+  https://github.com/carbon-design-system/carbon/blob/main/docs/guides/cwc-v3-migration.md#form-participation-moves-to-elementinternals
