@@ -40,7 +40,7 @@ class CDSGuideBanner extends HostListenerMixin(LitElement) {
   @property({ type: Boolean, reflect: true })
   open: boolean = false;
 
-  @property({ type: String, reflect: true })
+  @property({ type: String, reflect: true, attribute: 'title-text' })
   titleText?: string = '';
 
   static get eventToggle() {
