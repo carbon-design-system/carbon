@@ -48,10 +48,10 @@ class CDSCardHeader extends LitElement {
   }
 
   render() {
-    void this._cardContext;
+    const { hasAILabel } = this._cardContext;
 
     return html`
-      <div class="${prefix}--card__header">
+      <div class="${prefix}--card__header" ?data-has-ai-label=${hasAILabel}>
         <slot @slotchange=${this._handleDefaultSlotChange}></slot>
         <div
           class="${prefix}--card__decorator"
