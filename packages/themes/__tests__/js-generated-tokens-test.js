@@ -365,7 +365,14 @@ describe('JS generated theme files match DTCG JSON source', () => {
         const dtcgJson = JSON.parse(
           fs.readFileSync(path.join(DTCG_DIR, `${themeName}.json`), 'utf8')
         );
+        const {
+          generateV12OklchTheme,
+        } = require('../tasks/builders/generate-v12-oklch');
         const rawTheme = convertDTCGToTheme(dtcgJson);
+        const isDark = themeName === 'g90' || themeName === 'g100';
+        const oklchTheme = generateV12OklchTheme(isDark ? 'dark' : 'light');
+        Object.assign(rawTheme, oklchTheme);
+
         expected = {};
         for (const [kebabKey, value] of Object.entries(rawTheme)) {
           expected[kebabToCamel(kebabKey)] = value;

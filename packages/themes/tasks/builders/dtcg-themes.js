@@ -11,6 +11,7 @@ const { types: t } = require('@carbon/scss-generator');
 const fs = require('fs-extra');
 const path = require('path');
 const { convertDTCGToTheme } = require('./dtcg-converter');
+const { generateV12OklchTheme } = require('./generate-v12-oklch');
 const { FILE_BANNER, primitive } = require('./shared');
 
 /**
@@ -39,6 +40,11 @@ function buildDTCGThemesFile() {
 
     const dtcgTokens = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
     const theme = convertDTCGToTheme(dtcgTokens);
+
+    // Merge algorithmic V12 OKLCH tokens
+    const isDark = themeName === 'g90' || themeName === 'g100';
+    const oklchTheme = generateV12OklchTheme(isDark ? 'dark' : 'light');
+    Object.assign(theme, oklchTheme);
 
     return [
       t.Newline(),

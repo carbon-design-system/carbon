@@ -85,6 +85,36 @@ $-default-layer-sets: (
     theme.$border-tile-02,
     theme.$border-tile-03,
   ),
+  skeleton-background: (
+    theme.$skeleton-background-01,
+    theme.$skeleton-background-02,
+    theme.$skeleton-background-03,
+  ),
+  skeleton-element: (
+    theme.$skeleton-element-01,
+    theme.$skeleton-element-02,
+    theme.$skeleton-element-03,
+  ),
+  text-placeholder: (
+    theme.$text-placeholder-01,
+    theme.$text-placeholder-02,
+    theme.$text-placeholder-03,
+  ),
+  text-helper: (
+    theme.$text-helper-01,
+    theme.$text-helper-02,
+    theme.$text-helper-03,
+  ),
+  icon-placeholder: (
+    theme.$icon-placeholder-01,
+    theme.$icon-placeholder-02,
+    theme.$icon-placeholder-03,
+  ),
+  icon-helper: (
+    theme.$icon-helper-01,
+    theme.$icon-helper-02,
+    theme.$icon-helper-03,
+  ),
 );
 
 /// Define a map of layer sets, each set should have values for each layer in

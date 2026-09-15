@@ -79,4 +79,54 @@ describe('scss/layer', () => {
       'rgba(0, 0, 0, 0.6)'
     );
   });
+
+  it('should emit all default contextual tokens including skeletons, text-helper, and text-placeholder', async () => {
+    const { result } = await render(`
+      @use '../config' with (
+        $prefix: 'cds',
+      );
+      @use '../layer';
+    `);
+    const { stylesheet } = css.parse(result.css.toString());
+
+    function findSelector(stylesheet, matcher) {
+      return stylesheet.rules.find((rule) => {
+        return (
+          rule.selectors &&
+          rule.selectors.some((selector) => {
+            return selector.includes(matcher);
+          })
+        );
+      });
+    }
+
+    function findDeclaration(rule, property) {
+      return (
+        rule.declarations &&
+        rule.declarations.find((declaration) => {
+          return declaration.property === property;
+        })
+      );
+    }
+
+    const root = findSelector(stylesheet, ':root');
+    const layer1 = findSelector(stylesheet, '.cds--layer-one');
+    const layer2 = findSelector(stylesheet, '.cds--layer-two');
+    const layer3 = findSelector(stylesheet, '.cds--layer-three');
+
+    expect(findDeclaration(root, '--cds-skeleton-element')).toBeDefined();
+    expect(findDeclaration(layer1, '--cds-skeleton-element')).toBeDefined();
+    expect(findDeclaration(layer2, '--cds-skeleton-element')).toBeDefined();
+    expect(findDeclaration(layer3, '--cds-skeleton-element')).toBeDefined();
+
+    expect(findDeclaration(root, '--cds-text-placeholder')).toBeDefined();
+    expect(findDeclaration(layer1, '--cds-text-placeholder')).toBeDefined();
+    expect(findDeclaration(layer2, '--cds-text-placeholder')).toBeDefined();
+    expect(findDeclaration(layer3, '--cds-text-placeholder')).toBeDefined();
+
+    expect(findDeclaration(root, '--cds-text-helper')).toBeDefined();
+    expect(findDeclaration(layer1, '--cds-text-helper')).toBeDefined();
+    expect(findDeclaration(layer2, '--cds-text-helper')).toBeDefined();
+    expect(findDeclaration(layer3, '--cds-text-helper')).toBeDefined();
+  });
 });

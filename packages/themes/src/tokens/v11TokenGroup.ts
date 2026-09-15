@@ -237,7 +237,13 @@ export const text = TokenGroup.create({
     'text-primary',
     'text-secondary',
     'text-placeholder',
+    'text-placeholder-01',
+    'text-placeholder-02',
+    'text-placeholder-03',
     'text-helper',
+    'text-helper-01',
+    'text-helper-02',
+    'text-helper-03',
     'text-error',
     'text-inverse',
     {
@@ -284,6 +290,14 @@ export const icon = TokenGroup.create({
   tokens: [
     'icon-primary',
     'icon-secondary',
+    'icon-helper',
+    'icon-helper-01',
+    'icon-helper-02',
+    'icon-helper-03',
+    'icon-placeholder',
+    'icon-placeholder-01',
+    'icon-placeholder-02',
+    'icon-placeholder-03',
     'icon-inverse',
     {
       name: 'icon-on-color',
@@ -327,7 +341,16 @@ export const focus = TokenGroup.create({
 export const skeleton = TokenGroup.create({
   name: 'Skeleton',
   properties: ['background'],
-  tokens: ['skeleton-background', 'skeleton-element'],
+  tokens: [
+    'skeleton-background',
+    'skeleton-element',
+    'skeleton-background-01',
+    'skeleton-background-02',
+    'skeleton-background-03',
+    'skeleton-element-01',
+    'skeleton-element-02',
+    'skeleton-element-03',
+  ],
 });
 
 export const contextual = TokenGroup.create({
@@ -348,6 +371,12 @@ export const contextual = TokenGroup.create({
     'border-subtle-selected',
     'border-strong',
     'border-tile',
+    'skeleton-background',
+    'skeleton-element',
+    'text-placeholder',
+    'text-helper',
+    'icon-placeholder',
+    'icon-helper',
   ],
 });
 

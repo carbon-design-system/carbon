@@ -16,6 +16,7 @@ const buildCompatTokensFile = require('./builders/compat/tokens');
 const buildDTCGThemesFile = require('./builders/dtcg-themes');
 const buildDTCGComponentTokensFile = require('./builders/dtcg-component-tokens');
 const buildDTCGTokens = require('./builders/dtcg-tokens');
+const buildHexFallbacksFile = require('./builders/dtcg-hex-fallbacks');
 const generateDTCGColorAliases = require('./builders/generate-dtcg-color-aliases');
 
 async function build() {
@@ -90,9 +91,16 @@ async function build() {
   for (const { filepath, builder } of files) {
     await fs.ensureFile(filepath);
 
-    const { code } = generate(builder());
-    await fs.writeFile(filepath, await code);
+    const result = builder();
+    const content =
+      typeof result === 'string' ? result : await generate(result).code;
+    await fs.writeFile(filepath, content);
   }
+
+  // Generate _hex-fallbacks.scss
+  const hexFallbackPath = path.join(GENERATED_DTCG_DIR, '_hex-fallbacks.scss');
+  await fs.ensureFile(hexFallbackPath);
+  await fs.writeFile(hexFallbackPath, buildHexFallbacksFile());
 
   reporter.success('Done! 🎉');
 }

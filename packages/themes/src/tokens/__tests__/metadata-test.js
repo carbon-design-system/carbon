@@ -814,7 +814,31 @@ test('metadata', () => {
           "type": "color",
         },
         {
+          "name": "text-placeholder-01",
+          "type": "color",
+        },
+        {
+          "name": "text-placeholder-02",
+          "type": "color",
+        },
+        {
+          "name": "text-placeholder-03",
+          "type": "color",
+        },
+        {
           "name": "text-helper",
+          "type": "color",
+        },
+        {
+          "name": "text-helper-01",
+          "type": "color",
+        },
+        {
+          "name": "text-helper-02",
+          "type": "color",
+        },
+        {
+          "name": "text-helper-03",
           "type": "color",
         },
         {
@@ -875,6 +899,38 @@ test('metadata', () => {
         },
         {
           "name": "icon-secondary",
+          "type": "color",
+        },
+        {
+          "name": "icon-helper",
+          "type": "color",
+        },
+        {
+          "name": "icon-helper-01",
+          "type": "color",
+        },
+        {
+          "name": "icon-helper-02",
+          "type": "color",
+        },
+        {
+          "name": "icon-helper-03",
+          "type": "color",
+        },
+        {
+          "name": "icon-placeholder",
+          "type": "color",
+        },
+        {
+          "name": "icon-placeholder-01",
+          "type": "color",
+        },
+        {
+          "name": "icon-placeholder-02",
+          "type": "color",
+        },
+        {
+          "name": "icon-placeholder-03",
           "type": "color",
         },
         {
@@ -1502,6 +1558,30 @@ test('metadata', () => {
           "type": "color",
         },
         {
+          "name": "skeleton-background-01",
+          "type": "color",
+        },
+        {
+          "name": "skeleton-background-02",
+          "type": "color",
+        },
+        {
+          "name": "skeleton-background-03",
+          "type": "color",
+        },
+        {
+          "name": "skeleton-element-01",
+          "type": "color",
+        },
+        {
+          "name": "skeleton-element-02",
+          "type": "color",
+        },
+        {
+          "name": "skeleton-element-03",
+          "type": "color",
+        },
+        {
           "name": "layer",
           "type": "color",
         },
@@ -1555,6 +1635,30 @@ test('metadata', () => {
         },
         {
           "name": "border-tile",
+          "type": "color",
+        },
+        {
+          "name": "skeleton-background",
+          "type": "color",
+        },
+        {
+          "name": "skeleton-element",
+          "type": "color",
+        },
+        {
+          "name": "text-placeholder",
+          "type": "color",
+        },
+        {
+          "name": "text-helper",
+          "type": "color",
+        },
+        {
+          "name": "icon-placeholder",
+          "type": "color",
+        },
+        {
+          "name": "icon-helper",
           "type": "color",
         },
         {
