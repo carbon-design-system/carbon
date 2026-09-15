@@ -22,6 +22,7 @@ const getDerivedStateFromProps = (props, prevState) => {
     prevState
   );
   const state = {
+    headers: props.headers.map((header) => ({ ...header })),
     rowIds,
     rowsById,
     cellsById,
