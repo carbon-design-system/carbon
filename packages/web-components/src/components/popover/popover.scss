@@ -49,6 +49,12 @@ slot::slotted(.#{$prefix}--popover--tab-tip__button) {
   color: theme.$icon-primary;
 }
 
+@media (any-hover: hover) {
+  slot::slotted(.#{$prefix}--popover--tab-tip__button:hover) {
+    background: theme.$layer-hover;
+  }
+}
+
 :host(#{$prefix}-tooltip[highContrast]),
 :host(#{$prefix}-popover[highContrast]) {
   ::slotted(#{$prefix}-tooltip-content),
