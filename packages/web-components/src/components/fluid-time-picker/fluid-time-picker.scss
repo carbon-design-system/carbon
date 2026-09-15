@@ -167,11 +167,11 @@ $css--plex: true !default;
 
 :host(#{$prefix}-fluid-time-picker-select[disabled])
   .#{$prefix}--select-input__wrapper::before {
-  background-color: $border-disabled;
+  background-color: $border-subtle;
 }
 
 :host(#{$prefix}-fluid-time-picker-select[disabled]) .#{$prefix}--select-input {
-  border-block-end: convert.to-rem(1px) solid transparent;
+  border-block-end: convert.to-rem(1px) solid $border-subtle;
 }
 
 :host(#{$prefix}-fluid-time-picker-select[disabled])
@@ -190,7 +190,7 @@ $css--plex: true !default;
 :host(#{$prefix}-fluid-time-picker)
   .#{$prefix}--time-picker--fluid--disabled
   .#{$prefix}--text-input:disabled {
-  border-block-end: convert.to-rem(1px) solid transparent;
+  border-block-end: convert.to-rem(1px) solid $border-subtle;
 }
 
 :host(#{$prefix}-fluid-time-picker-skeleton) {
