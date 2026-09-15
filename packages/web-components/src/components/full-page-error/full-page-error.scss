@@ -1,0 +1,27 @@
+/*
+ * Copyright IBM Corp. 2025, 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+$css--plex: true !default;
+@use 'sass:map';
+
+@use '@carbon/styles/scss/reset';
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/grid';
+@use '@carbon/styles/scss/components/full-page-error' as component-styles;
+
+// Emit Carbon full-page-error class rules at file root
+@include component-styles.full-page-error;
+
+$block-class: #{$prefix}--full-page-error;
+
+:host(#{$prefix}-full-page-error) {
+  @include grid.css-grid();
+
+  .#{$block-class} {
+    @extend .#{$block-class} !optional;
+  }
+}
