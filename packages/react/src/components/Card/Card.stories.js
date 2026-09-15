@@ -588,7 +588,13 @@ export const WithFlushBody = () => (
         <Card.Header>
           <Card.Title>Flush body</Card.Title>
         </Card.Header>
-        <Card.Body isFlush>
+        <Card.Body
+          isFlush
+          style={{
+            overflow: 'hidden',
+            borderBottomLeftRadius: 'inherit',
+            borderBottomRightRadius: 'inherit',
+          }}>
           <div className={`${storyClass}__flush-demo-content`}>
             Content fills edge-to-edge
           </div>
