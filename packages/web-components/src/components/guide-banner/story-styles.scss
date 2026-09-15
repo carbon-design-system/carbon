@@ -7,17 +7,36 @@
 
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/colors' as *;
 
 $horizontal-margin: $spacing-09;
 $block-class: 'guide-banner-story';
 
 .#{$block-class}__body {
+  display: flex;
   color: $text-primary;
+  -ms-overflow-style: none;
+  overflow-x: scroll;
+  padding-block-end: $spacing-05;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .#{$block-class}__body-elm {
-  inline-size: 600px;
+  flex-shrink: 0;
+  inline-size: 400px;
   padding-inline-start: $horizontal-margin;
+  scroll-snap-align: start;
+
+  &:last-child {
+    inline-size: 448px;
+    padding-inline-end: $horizontal-margin;
+  }
 }
 
 .#{$block-class}__footer {
@@ -28,4 +47,42 @@ $block-class: 'guide-banner-story';
 
 .#{$block-class}__footer-left .#{$block-class}__toggle-button {
   margin-inline-start: $spacing-07;
+}
+
+// Button hover colours — match React _guidebanner.scss
+
+// Tertiary button ("Show Me") in the carousel body.
+.#{$block-class}__body cds-button[kind='tertiary']::part(button) {
+  &:hover,
+  &:active {
+    border-color: $white-0;
+    background-color: $white-0;
+    color: $gray-100;
+  }
+}
+
+// Ghost button ("Click me") in the carousel body.
+.#{$block-class}__body cds-button[kind='ghost']::part(button) {
+  &:hover,
+  &:active {
+    background-color: $purple-70;
+    color: $gray-10;
+  }
+}
+
+// Ghost toggle button ("Read less/more") and nav arrow buttons in the footer.
+.#{$block-class}__footer cds-button[kind='ghost']::part(button) {
+  &:hover,
+  &:active {
+    background-color: $purple-70;
+    color: $gray-10;
+  }
+}
+
+// Link ("Learn more") in the carousel body.
+.#{$block-class}__body cds-link::part(link) {
+  &:hover,
+  &:active {
+    color: $blue-20;
+  }
 }

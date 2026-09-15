@@ -65,7 +65,7 @@ class CDSGuideBanner extends HostListenerMixin(LitElement) {
     );
   }
 
-  private _handleToggle() {
+  _handleToggle() {
     this.open = !this.open;
     const init = {
       bubbles: true,
@@ -126,18 +126,10 @@ class CDSGuideBanner extends HostListenerMixin(LitElement) {
             ${iconLoader(Close16, { slot: 'icon' })}
           </cds-button>
         </div>
-        <details ?open=${this.open}>
-          <slot name="body"></slot>
-          <summary
-            tabindex="-1"
-            @click=${(evt: MouseEvent) => {
-              evt.preventDefault();
-            }}>
-            <div class="${blockClass}__navigation">
-              <slot name="footer">${this._getButton()}</slot>
-            </div>
-          </summary>
-        </details>
+        <slot name="body"></slot>
+        <div class="${blockClass}__navigation">
+          <slot name="footer">${this._getButton()}</slot>
+        </div>
       </div>
     `;
   }

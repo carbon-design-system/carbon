@@ -1,89 +1,99 @@
 /**
- * Copyright IBM Corp. 2026
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+let _scrollContainer: Element | null = null;
+let _itemSelector: string = '';
+
 /**
- * Lightweight snap-scroll helpers used by story templates that render
- * horizontally-scrollable lists of guide-banner elements.
- *
- * The module keeps a single pair of (container, item) selectors so that
- * story-level controls (Previous / Next buttons) can call scrollNext /
- * scrollPrevious without needing to pass DOM references every time.
+ * Initialise snap-scroll on a container.
+ * @param containerSelector CSS selector for the scroll container.
+ * @param itemSelector CSS selector for individual scroll items inside the container.
  */
-
-let _containerSelector = '';
-let _itemSelector = '';
-
-/** Cache selectors so the navigation helpers know which elements to scroll. */
 export function snapScroll(
   containerSelector: string,
   itemSelector: string
 ): void {
-  _containerSelector = containerSelector;
   _itemSelector = itemSelector;
+  _scrollContainer = document.querySelector(containerSelector);
 }
 
-function getContainer(): Element | null {
-  return document.querySelector(_containerSelector);
-}
-
-function getItems(): Element[] {
-  const container = getContainer();
-  if (!container) return [];
-  return Array.from(container.querySelectorAll(_itemSelector));
-}
-
-/** Returns the first item that is not fully visible on the right side. */
-function firstItemNotInView(): Element | null {
-  const container = getContainer();
-  if (!container) return null;
-  const { right: containerRight } = container.getBoundingClientRect();
-  return (
-    getItems().find((item) => {
-      const { right } = item.getBoundingClientRect();
-      return right > containerRight;
-    }) ?? null
-  );
-}
-
-/** Returns the first item that is not fully visible on the left side. */
-function firstItemBeforeView(): Element | null {
-  const container = getContainer();
-  if (!container) return null;
-  const { left: containerLeft } = container.getBoundingClientRect();
-  return (
-    getItems()
-      .slice()
-      .reverse()
-      .find((item) => {
-        const { left } = item.getBoundingClientRect();
-        return left < containerLeft;
-      }) ?? null
-  );
-}
-
-/** Scroll forward to bring the next out-of-view item into view. */
+/** Scroll to the next snap item. */
 export function scrollNext(): void {
-  firstItemNotInView()?.scrollIntoView({ behavior: 'smooth', inline: 'start' });
+  if (!_scrollContainer) {
+    return;
+  }
+  const items = Array.from(
+    _scrollContainer.querySelectorAll(_itemSelector)
+  ) as HTMLElement[];
+  const containerLeft = _scrollContainer.getBoundingClientRect().left;
+  const next = items.find(
+    (el) => el.getBoundingClientRect().left > containerLeft + 1
+  );
+  if (next) {
+    next.scrollIntoView({
+      behavior: 'smooth',
+      block: 'nearest',
+      inline: 'start',
+    });
+  }
 }
 
-/** Scroll backward to bring the previous out-of-view item into view. */
+/** Scroll to the previous snap item. */
 export function scrollPrevious(): void {
-  firstItemBeforeView()?.scrollIntoView({
+  if (!_scrollContainer) {
+    return;
+  }
+  const items = Array.from(
+    _scrollContainer.querySelectorAll(_itemSelector)
+  ) as HTMLElement[];
+  const containerLeft = _scrollContainer.getBoundingClientRect().left;
+  const visible = items.filter(
+    (el) => el.getBoundingClientRect().left >= containerLeft - 1
+  );
+  // The item just before the first fully-visible one
+  const firstVisibleIdx = items.indexOf(visible[0]);
+  const target = firstVisibleIdx > 0 ? items[firstVisibleIdx - 1] : items[0];
+  target.scrollIntoView({
     behavior: 'smooth',
+    block: 'nearest',
     inline: 'start',
   });
 }
 
-/** True when at least one item extends beyond the right edge of the container. */
+/**
+ * Returns true when there is at least one item that is not fully in view
+ * to the right of the currently visible items.
+ */
 export function hasNextSiblingNotInView(): boolean {
-  return firstItemNotInView() !== null;
+  if (!_scrollContainer) {
+    return false;
+  }
+  const containerRight = _scrollContainer.getBoundingClientRect().right;
+  const items = Array.from(
+    _scrollContainer.querySelectorAll(_itemSelector)
+  ) as HTMLElement[];
+  return items.some(
+    (el) => el.getBoundingClientRect().right > containerRight + 1
+  );
 }
 
-/** True when at least one item is hidden to the left of the container. */
+/**
+ * Returns true when there is at least one item scrolled out of view
+ * to the left of the scroll container.
+ */
 export function hasPreviousSiblingNotInView(): boolean {
-  return firstItemBeforeView() !== null;
+  if (!_scrollContainer) {
+    return false;
+  }
+  const containerLeft = _scrollContainer.getBoundingClientRect().left;
+  const items = Array.from(
+    _scrollContainer.querySelectorAll(_itemSelector)
+  ) as HTMLElement[];
+  return items.some(
+    (el) => el.getBoundingClientRect().left < containerLeft - 1
+  );
 }

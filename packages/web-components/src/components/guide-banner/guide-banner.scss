@@ -21,18 +21,12 @@ $block-class: #{$prefix}--guidebanner;
 :host(#{$prefix}-guide-banner) {
   display: block;
 
-  details {
-    display: flex;
-    flex-direction: column-reverse;
-  }
-
-  ::marker,
-  ::-webkit-details-marker {
-    display: none;
-    content: '';
-  }
-
   .#{$block-class}__title {
     padding-block-end: $spacing-05;
+  }
+
+  // Hide the slotted body content when collapsed.
+  .#{$block-class}__collapsible-collapsed ::slotted([slot='body']) {
+    display: none;
   }
 }
