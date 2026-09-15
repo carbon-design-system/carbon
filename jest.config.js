@@ -33,9 +33,11 @@ export default {
     // scss-generator is covered by `yarn test:scss-generator`, which scopes
     // VM modules to the Prettier 3 dynamic imports in that package.
     'packages/scss-generator/*',
+    // e2e already covered by the `test:e2e` job via jest.e2e.config.js
+    '<rootDir>/e2e/',
   ],
   transformIgnorePatterns: [
-    '<rootDir>/node_modules/(?!lodash-es|nanoid|chalk|@babel/)',
+    '<rootDir>/node_modules/(?!lodash-es|nanoid|chalk|@babel/|temporal-polyfill|temporal-utils)',
   ],
   moduleNameMapper: {
     // Jest uses identity-obj-proxy to mock CSS/SCSS imports.

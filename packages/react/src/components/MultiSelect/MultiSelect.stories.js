@@ -6,7 +6,7 @@
  */
 
 import React, { useEffect, useRef, useState } from 'react';
-import { View, FolderOpen, Folders, Information } from '@carbon/icons-react';
+import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import { action } from 'storybook/actions';
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 import mdx from './MultiSelect.mdx';
@@ -16,15 +16,6 @@ import Button from '../Button';
 import ButtonSet from '../ButtonSet';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
-import {
-  Toggletip,
-  ToggletipActions,
-  ToggletipButton,
-  ToggletipContent,
-  ToggletipLabel,
-} from '../Toggletip';
-import Link from '../Link';
-import TextInput from '../TextInput';
 
 export default {
   title: 'Components/MultiSelect',
@@ -717,44 +708,6 @@ ExperimentalAutoAlign.argTypes = {
 };
 
 ExperimentalAutoAlign.args = { ...sharedArgs, autoAlign: true };
-export const withToggletipLabel = (args) => {
-  return (
-    <div>
-      <MultiSelect
-        label="Multiselect Label"
-        id="carbon-multiselect-example"
-        titleText={
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <ToggletipLabel>Multiselect title</ToggletipLabel>
-            <Toggletip>
-              <ToggletipButton label="Show information">
-                <Information />
-              </ToggletipButton>
-              <ToggletipContent>
-                <p>
-                  Lorem ipsum dolor sit amet, di os consectetur adipiscing elit,
-                  sed do eiusmod tempor incididunt ut fsil labore et dolore
-                  magna aliqua.
-                </p>
-                <ToggletipActions>
-                  <Link href="#">Link action</Link>
-                  <Button size="sm">Button</Button>
-                </ToggletipActions>
-              </ToggletipContent>
-            </Toggletip>
-          </div>
-        }
-        helperText="This is helper text"
-        items={items}
-        itemToString={(item) => (item ? item.text : '')}
-        selectionFeedback="top-after-reopen"
-        {...args}
-      />
-    </div>
-  );
-};
-
-withToggletipLabel.args = { ...sharedArgs };
 
 export const SelectAllWithDynamicItems = (args) => {
   const [label, setLabel] = useState('Choose options');

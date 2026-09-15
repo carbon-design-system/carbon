@@ -550,7 +550,8 @@
       }
     }
 
-    .#{$prefix}--tabs__nav-item--icon-only:not(
+    &.#{$prefix}--layout--size-sm
+      .#{$prefix}--tabs__nav-item--icon-only:not(
         .#{$prefix}--tabs__nav-item--icon-only__20
       )
       .#{$prefix}--badge-indicator {
@@ -825,6 +826,17 @@
       white-space: normal;
     }
   }
+}
+
+//-----------------------------
+// Popover tooltip
+//-----------------------------
+.#{$prefix}--tabs .#{$prefix}--icon-tooltip .#{$prefix}--popover-content {
+  @include custom-property.declaration('popover-offset', convert.to-rem(8px));
+}
+
+.#{$prefix}--tabs .#{$prefix}--icon-tooltip .#{$prefix}--popover-caret {
+  @include custom-property.declaration('popover-offset', convert.to-rem(8px));
 }
 
 .#{$prefix}--tabs.#{$prefix}--tabs--vertical.#{$prefix}--layout--size-sm {

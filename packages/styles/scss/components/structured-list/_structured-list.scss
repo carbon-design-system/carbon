@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2023
+// Copyright IBM Corp. 2016, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -87,21 +87,23 @@
     border: none;
   }
 
-  .#{$prefix}--structured-list--selection
-    .#{$prefix}--structured-list-row:hover:not(
-      .#{$prefix}--structured-list-row--header-row
-    ):not(.#{$prefix}--structured-list-row--selected) {
-    border-color: $layer-hover;
-    background-color: $layer-hover;
-    cursor: pointer;
-  }
+  @media (any-hover: hover) {
+    .#{$prefix}--structured-list--selection
+      .#{$prefix}--structured-list-row:hover:not(
+        .#{$prefix}--structured-list-row--header-row
+      ):not(.#{$prefix}--structured-list-row--selected) {
+      border-color: $layer-hover;
+      background-color: $layer-hover;
+      cursor: pointer;
+    }
 
-  .#{$prefix}--structured-list--selection
-    .#{$prefix}--structured-list-row:hover:not(
-      .#{$prefix}--structured-list-row--header-row
-    ):not(.#{$prefix}--structured-list-row--selected)
-    + .#{$prefix}--structured-list-row {
-    border-color: $layer-hover;
+    .#{$prefix}--structured-list--selection
+      .#{$prefix}--structured-list-row:hover:not(
+        .#{$prefix}--structured-list-row--header-row
+      ):not(.#{$prefix}--structured-list-row--selected)
+      + .#{$prefix}--structured-list-row {
+      border-color: $layer-hover;
+    }
   }
 
   .#{$prefix}--structured-list--selection
@@ -126,11 +128,16 @@
     cursor: inherit;
   }
 
-  .#{$prefix}--structured-list--selection
-    .#{$prefix}--structured-list-row:hover:not(
-      .#{$prefix}--structured-list-row--header-row
-    )
-    > .#{$prefix}--structured-list-td,
+  @media (any-hover: hover) {
+    .#{$prefix}--structured-list--selection
+      .#{$prefix}--structured-list-row:hover:not(
+        .#{$prefix}--structured-list-row--header-row
+      )
+      > .#{$prefix}--structured-list-td {
+      color: $text-primary;
+    }
+  }
+
   .#{$prefix}--structured-list--selection
     .#{$prefix}--structured-list-row.#{$prefix}--structured-list-row--selected
     > .#{$prefix}--structured-list-td {

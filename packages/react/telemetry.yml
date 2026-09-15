@@ -32,7 +32,10 @@ collect:
         - backgroundToken
         - border
         - buttonKind
+        - buttonProps
+        - buttonSize
         - caption
+        - caret
         - checked
         - children
         - className
@@ -40,6 +43,7 @@ collect:
         - clearSelectionDescription
         - clearSelectionText
         - closeButtonLabelText
+        - closeIconDescription
         - closeModal
         - closeOnActivation
         - cols
@@ -48,6 +52,7 @@ collect:
         - compareItems
         - condensed
         - contained
+        - containerClassName
         - count
         - danger
         - dangerDescription
@@ -96,6 +101,7 @@ collect:
         - iconClass
         - iconDescription
         - id
+        - illustrationTheme
         - indeterminate
         - index
         - initialSelectedItem
@@ -237,12 +243,15 @@ collect:
         - text
         - theme
         - title
+        - titleEnd
         - titleId
+        - titleStart
         - titleText
         - tooltipAlignment
         - tooltipDropShadow
         - tooltipHighContrast
         - tooltipPosition
+        - tooltipText
         - totalItems
         - translateWithId
         - type
@@ -265,7 +274,6 @@ collect:
         - closeOnEscape
         - hasFocus
         # ActionSet
-        - buttonSize
         - disableStacking
         # AILabel
         - AILabelContent
@@ -280,6 +288,16 @@ collect:
         - style
         # AspectRatio
         - ratio
+        # BigNumber
+        - forceShowTotal
+        - fractionDigits
+        - iconButton
+        - loading
+        - percentage
+        - tooltipDescription
+        - total
+        - trending
+        - truncate
         # ButtonSet
         - fluid
         - stacked
@@ -290,6 +308,7 @@ collect:
         # Card
         - clickable
         - horizontal
+        - renderFooterIcon
         # CardActions
         - overflowMenuLabel
         # CardMedia
@@ -298,13 +317,17 @@ collect:
         - descriptionTruncate
         - labelTruncate
         - maxWidth
-        - titleEnd
-        - titleStart
         - titleTruncate
         # ChatButton
         - isQuickAction
         # ClickableTile
         - clicked
+        # Coachmark
+        - floating
+        - position
+        # CoachmarkContentHeader
+        - dragAriaLabel
+        - dragIconDescription
         # CodeSnippet
         - copyButtonDescription
         - copyText
@@ -322,8 +345,6 @@ collect:
         - sm
         - span
         - xlg
-        # ComposedModal
-        - containerClassName
         # ContainedList
         - isInset
         # ContentSwitcher
@@ -353,10 +374,11 @@ collect:
         - onIconClick
         # DatePickerSkeleton
         - range
+        # Default
+        - onSubmit
         # DefinitionTooltip
         - definition
         - openOnHover
-        - tooltipText
         - triggerClassName
         # Dialog
         - ariaDescribedBy
@@ -367,6 +389,17 @@ collect:
         - dismissTooltipAlignment
         - dismissTooltipLabel
         - tagTitle
+        # EditInPlace
+        - cancelLabel
+        - editAlwaysVisible
+        - editLabel
+        - inheritTypography
+        - invalidLabel
+        - onSave
+        - readOnlyLabel
+        - readOnlyToggleTipText
+        - saveLabel
+        - toggleTipAlignment
         # ErrorBoundary
         - fallback
         # ExpandableTile
@@ -411,6 +444,15 @@ collect:
         - messageText
         # GridSettings
         - subgrid
+        # Guidebanner
+        - collapseButtonLabel
+        - collapsible
+        - expandButtonLabel
+        - nextIconDescription
+        - previousIconDescription
+        - withLeftGutter
+        # GuidebannerElement
+        - button
         # HeaderContainer
         - render
         # HeaderMenu
@@ -431,6 +473,25 @@ collect:
         # InlineLoading
         - onSuccess
         - successDelay
+        # InterstitialScreen
+        - isFullScreen
+        # InterstitialScreenBody
+        - contentRenderer
+        # InterstitialScreenFooter
+        - actionButtonRenderer
+        - nextButtonLabel
+        - onAction
+        - previousButtonLabel
+        - skipButtonLabel
+        - startButtonLabel
+        # InterstitialScreenHeader
+        - headerSubTitle
+        - headerTitle
+        - hideProgressIndicator
+        # InterstitialScreenView
+        - stepTitle
+        # InterstitialScreenViewModule
+        - disableActionButton
         # Layer
         - withBackground
         # LinkBase
@@ -491,11 +552,53 @@ collect:
         - withHeader
         # NotificationButton
         - notificationType
+        # NotificationsEmptyState
+        - illustrationDescription
+        # NotificationsPanel
+        - data
+        - dateTimeLocale
+        - dateTimeStyle
+        - daysAgoText
+        - dismissAllLabel
+        - dismissSingleNotificationIconDescription
+        - doNotDisturbDefaultToggled
+        - doNotDisturbLabel
+        - emptyStateLabel
+        - hourAgoText
+        - hoursAgoText
+        - minuteAgoText
+        - minutesAgoText
+        - monthAgoText
+        - monthsAgoText
+        - nowText
+        - onClickOutside
+        - onDismissAllNotifications
+        - onDismissSingleNotification
+        - onDoNotDisturbChange
+        - onSettingsClick
+        - onViewAllClick
+        - previousLabel
+        - readLessLabel
+        - readMoreLabel
+        - secondsAgoText
+        - settingsIconDescription
+        - todayLabel
+        - triggerButtonRef
+        - viewAllLabel
+        - yearAgoText
+        - yearsAgoText
+        - yesterdayAtText
+        - yesterdayLabel
         # NumberInput
         - hideSteppers
         - onStepperBlur
         - stepStartValue
         - validate
+        # OptionsTile
+        - enabled
+        - locked
+        - lockedText
+        - summary
         # OrderedList
         - native
         # OverflowMenuItem
@@ -543,7 +646,6 @@ collect:
         # Popover
         - alignmentAxisOffset
         - autoAlignBoundary
-        - caret
         - isTabTip
         # ProgressIndicator
         - currentIndex
@@ -558,6 +660,12 @@ collect:
         - onResize
         - onResizeEnd
         - thickness
+        # ScrollGradient
+        - color
+        - getScrollElementRef
+        - hideStartGradient
+        - onScroll
+        - scrollElementClassName
         # Select
         - noLabel
         # SelectItem
@@ -580,7 +688,6 @@ collect:
         - actionToolbarButtons
         - aiLabel
         - animateTitle
-        - closeIconDescription
         - closeIconTooltipAlignment
         - condensedActions
         - currentStep
@@ -606,6 +713,8 @@ collect:
         # SliderSkeleton
         - twoHandles
         - unstable_ariaLabelHandleUpper
+        # StackProvider
+        - stackStepSize
         # StructuredListCell
         - noWrap
         # StructuredListWrapper
@@ -656,8 +765,38 @@ collect:
         - onTabCloseRequest
         # TabsVertical
         - height
-        # TagBase
+        # Tag
         - filter
+        # Tearsheet
+        - disablePortal
+        - influencerWidth
+        - keepMounted
+        - portalTarget
+        - summaryContentWidth
+        - variant
+        - verticalGap
+        # TearsheetHeader
+        - disableHeaderCollapse
+        - onHeaderCollapse
+        # TearsheetHeaderActionItem
+        - overflowItemLabel
+        # TearsheetHeaderActions
+        - menuButtonProps
+        # TearsheetHeaderContent
+        - headerActions
+        # TearsheetInfluencer
+        - influencerPanelAriaLabel
+        - influencerPanelOpen
+        - influencerPanelTriggerRef
+        # TearsheetNavigationBar
+        - scroller
+        # TearsheetScrollButton
+        - collapseText
+        - expandText
+        # TearsheetSummaryContent
+        - summaryPanelAriaLabel
+        - summaryPanelOpen
+        - summaryPanelTriggerRef
         # TextArea
         - counterMode
         # TextDirection
@@ -687,6 +826,8 @@ collect:
         - collapseLabel
         - expandLabel
         - lines
+        # UserAvatar
+        - backgroundColor
         # WithCustomContext
         - onLog
         # React
@@ -756,6 +897,9 @@ collect:
         # General - direction
         - bottom
         - top
+        # General - illustrationTheme
+        - dark
+        - light
         # General - inputMode
         - decimal
         - email
@@ -766,10 +910,13 @@ collect:
         - text
         - url
         # General - kind
+        - "403"
+        - "404"
         - caution-major
         - caution-minor
         - cautious
         - critical
+        - custom
         - danger
         - default
         - disclosed
@@ -987,6 +1134,15 @@ collect:
         - top
         - top-end
         - top-start
+        # EditInPlace - toggleTipAlignment
+        - bottom
+        - bottom-left
+        - bottom-right
+        - left
+        - right
+        - top
+        - top-left
+        - top-right
         # FileUploader - filenameStatus
         - complete
         - edit
@@ -1007,6 +1163,10 @@ collect:
         - actionable
         - inline
         - toast
+        # NotificationsPanel - dateTimeStyle
+        - long
+        - narrow
+        - short
         # Pagination - backwardTextTooltipPosition
         - bottom
         - left
@@ -1025,6 +1185,10 @@ collect:
         # SidePanel - placement
         - left
         - right
+        # StackProvider - stackStepSize
+        - lg
+        - md
+        - sm
         # TableBody - aria-live
         - assertive
         - off
@@ -1036,9 +1200,25 @@ collect:
         # TabList - iconSize
         - default
         - lg
+        # Tearsheet - variant
+        - narrow
+        - wide
         # TextArea - counterMode
         - character
         - word
+        # UserAvatar - backgroundColor
+        - order-1-cyan
+        - order-10-magenta
+        - order-11-purple
+        - order-12-teal
+        - order-2-gray
+        - order-3-green
+        - order-4-magenta
+        - order-5-purple
+        - order-6-teal
+        - order-7-cyan
+        - order-8-gray
+        - order-9-green
   npm:
     dependencies: null
   js:

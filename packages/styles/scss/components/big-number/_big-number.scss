@@ -57,6 +57,7 @@
 
   .#{$prefix}--big-number__row {
     display: flex;
+    align-items: center;
   }
 
   .#{$prefix}--big-number__percentage {

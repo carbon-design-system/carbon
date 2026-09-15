@@ -21,6 +21,7 @@
     enabled: true,
   },
   rebaseWhen: 'never',
+  postUpdateOptions: ['yarnDedupeHighest'],
   lockFileMaintenance: {
     enabled: false,
   },
