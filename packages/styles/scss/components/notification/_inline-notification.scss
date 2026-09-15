@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2023
+// Copyright IBM Corp. 2016, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -316,16 +316,26 @@
     color: $link-inverse;
   }
 
-  .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:active,
-  .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:hover {
+  .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:active {
     background-color: $background-inverse-hover;
   }
 
-  .#{$prefix}--inline-notification--low-contrast
-    .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:active,
-  .#{$prefix}--inline-notification--low-contrast
+  @media (any-hover: hover) {
     .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:hover {
+      background-color: $background-inverse-hover;
+    }
+  }
+
+  .#{$prefix}--inline-notification--low-contrast
+    .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:active {
     background-color: $notification-action-hover;
+  }
+
+  @media (any-hover: hover) {
+    .#{$prefix}--inline-notification--low-contrast
+      .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:hover {
+      background-color: $notification-action-hover;
+    }
   }
 
   .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:focus {

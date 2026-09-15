@@ -23,6 +23,7 @@ import OverflowMenu from '../OverflowMenu';
 import OverflowMenuItem from '../OverflowMenuItem';
 import { MenuButton } from '../MenuButton';
 import { MenuItem } from '../Menu';
+import CodeSnippet from '../CodeSnippet';
 
 const prefix = 'cds';
 
@@ -705,6 +706,33 @@ describe.each([
       await waitFor(() => {
         expect(focusElem).toHaveFocus();
       });
+    });
+
+    it('should call onRequestClose when the dialog cancel event fires', () => {
+      const onRequestClose = jest.fn();
+      render(
+        <FeatureFlags enableDialogElement>
+          <Component
+            open
+            modalHeading="Test modal"
+            primaryButtonText="Submit"
+            secondaryButtonText="Cancel"
+            onRequestClose={onRequestClose}
+          />
+        </FeatureFlags>
+      );
+
+      const dialog = screen.getByRole('dialog');
+
+      // Simulate a native cancel event on the dialog.
+      const cancelEvent = new Event('cancel', {
+        bubbles: false,
+        cancelable: true,
+      });
+      fireEvent(dialog, cancelEvent);
+
+      expect(cancelEvent.defaultPrevented).toBe(true);
+      expect(onRequestClose).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -1670,3 +1698,109 @@ describe.each([
     expect(onRequestClose).toHaveBeenCalled();
   });
 });
+
+describe('enableDialogElement role attribute', () => {
+  it('should preserve native dialog attributes for non-alert modals', () => {
+    render(
+      <FeatureFlags enableDialogElement>
+        <Modal open>
+          <p>Body</p>
+        </Modal>
+      </FeatureFlags>
+    );
+
+    const modal = screen.getByRole('dialog');
+
+    expect(modal).toBeInTheDocument();
+    expect(modal).not.toHaveAttribute('role');
+    expect(modal).not.toHaveAttribute('aria-describedby');
+  });
+
+  it('should set alertdialog attributes for alert modals', () => {
+    render(
+      <FeatureFlags enableDialogElement>
+        <Modal open danger alert>
+          <p>Body</p>
+        </Modal>
+      </FeatureFlags>
+    );
+
+    const modal = screen.getByRole('alertdialog');
+    const modalBodyId = modal.getAttribute('aria-describedby');
+
+    expect(modal).toBeInTheDocument();
+    expect(modal).toHaveAttribute('role', 'alertdialog');
+    expect(modalBodyId).toMatch(/^cds--modal-body--modal-id-/);
+    expect(document.getElementById(modalBodyId)).toHaveTextContent('Body');
+  });
+});
+
+describe.each([
+  { enableDialogElement: false, expectedCopyRoot: () => document.body },
+  {
+    enableDialogElement: true,
+    expectedCopyRoot: () => screen.getByRole('dialog'),
+  },
+])(
+  'CodeSnippet clipboard behavior with enableDialogElement=$enableDialogElement',
+  ({ enableDialogElement, expectedCopyRoot }) => {
+    it('should copy from within the appropriate modal root', async () => {
+      let copyRoot;
+      const originalIsSecureContext = Object.getOwnPropertyDescriptor(
+        window,
+        'isSecureContext'
+      );
+      const originalExecCommand = document.execCommand;
+
+      Object.defineProperty(window, 'isSecureContext', {
+        configurable: true,
+        value: false,
+      });
+      document.execCommand = jest.fn(() => {
+        const range = document.getSelection().getRangeAt(0);
+        const selectedNode = range.commonAncestorContainer;
+        const copyElement =
+          selectedNode.nodeType === Node.TEXT_NODE
+            ? selectedNode.parentElement
+            : selectedNode;
+        copyRoot = copyElement.parentElement;
+        return true;
+      });
+
+      try {
+        const modal = (
+          <Modal open>
+            <CodeSnippet copyText="copied value">snippet value</CodeSnippet>
+          </Modal>
+        );
+
+        render(
+          enableDialogElement ? (
+            <FeatureFlags enableDialogElement>{modal}</FeatureFlags>
+          ) : (
+            modal
+          )
+        );
+
+        await userEvent.click(
+          screen.getByRole('button', { name: 'Copy to clipboard' })
+        );
+
+        expect(document.execCommand).toHaveBeenCalledWith('copy');
+        expect(copyRoot).toBe(expectedCopyRoot());
+      } finally {
+        document.execCommand = originalExecCommand;
+
+        if (originalIsSecureContext) {
+          Object.defineProperty(
+            window,
+            'isSecureContext',
+            originalIsSecureContext
+          );
+        } else {
+          delete window.isSecureContext;
+        }
+      }
+    });
+  }
+);

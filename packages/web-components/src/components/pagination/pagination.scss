@@ -14,7 +14,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/components/pagination' as *;
 @use '@carbon/styles/scss/utilities/visually-hidden' as *;
-@use '@carbon/styles/scss/layout' as *;
+@use '@carbon/styles/scss/utilities/layout' as *;
 
 :host(#{$prefix}-pagination) {
   @extend .#{$prefix}--pagination;
@@ -24,7 +24,7 @@ $css--plex: true !default;
   outline: none;
 
   #{$prefix}-select[inline] {
-    --cds-background: $layer;
+    --cds-background: #{$layer};
   }
 
   .#{$prefix}-ce--pagination__divider {

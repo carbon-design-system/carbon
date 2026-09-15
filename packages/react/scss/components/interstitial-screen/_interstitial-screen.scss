@@ -1,0 +1,12 @@
+// Copyright IBM Corp. 2025
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+
+// @carbon/utilities/scss/carousel depends on @carbon/styles, so it cannot be
+// @used from inside packages/styles (circular identity conflict in Sass). It
+// must be consumed here, in the packages/react layer, where @carbon/styles
+// always resolves unambiguously to node_modules.
+@use '@carbon/utilities/scss/carousel' as carbon-utilities-carousel;
+@forward '@carbon/styles/scss/components/InterstitialScreen/interstitial-screen';
+
+@include carbon-utilities-carousel.carousel;

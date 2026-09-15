@@ -177,6 +177,15 @@ This reset sets some top-level properties on `html` and `body`, namely
 `font-size`, `font-family`, and some `text-rendering` options. We also map the
 `strong` tag to the semibold font weight.
 
+### Replacing the typeface
+
+`@carbon/type` can configure the font families used by its own Sass APIs, but it
+does not generate Carbon component styles or control IBM Plex `@font-face`
+output. Carbon's type foundation and component styles are closely integrated, so
+application-wide typeface replacement must be configured through the
+`@carbon/styles` Sass entrypoint. See
+[Replacing the typeface in `@carbon/styles`](../styles/README.md#replacing-the-typeface).
+
 ### Type scale
 
 A type scale is provided through the `$type-scale` variable and corresponding

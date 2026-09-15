@@ -11,37 +11,27 @@ import { match, keys } from '../../../internal/keyboard';
 interface FixEventsPluginConfig {
   inputFrom: HTMLInputElement;
   inputTo?: HTMLInputElement | null;
-  lastStartValue: {
-    current: string;
-  };
   container?: HTMLElement | null;
 }
 
 type FixEventsPlugin = (config: FixEventsPluginConfig) => Plugin;
 
-const fixEventsPlugin: FixEventsPlugin = (config) => (fp) => {
-  const { inputFrom, inputTo, lastStartValue, container } = config;
+export const fixEventsPlugin: FixEventsPlugin = (config) => (fp) => {
+  const { inputFrom, inputTo, container } = config;
   // Avoid closing when mousedown starts inside but click lands outside after
   // scroll or blur (e.g., scrollable modal masks).
   let mouseDownInside = false;
 
-  // TODO: Remove this function in a follow-up to the TypeScript port.
-  const getEventPath = (event: Event) =>
-    typeof event.composedPath === 'function' ? event.composedPath() : [];
-
   const isEventInside = (event: MouseEvent) => {
-    const path = getEventPath(event);
+    const path = event.composedPath();
     const { target } = event;
 
     if (!(target instanceof Node)) return false;
 
     return Boolean(
       (container && (path.includes(container) || container.contains(target))) ||
-        // TODO: Remove the `fp.calendarContainer` guard in a follow-up to the
-        // TypeScript port.
-        (fp.calendarContainer &&
-          (path.includes(fp.calendarContainer) ||
-            fp.calendarContainer.contains(target))) ||
+        path.includes(fp.calendarContainer) ||
+        fp.calendarContainer.contains(target) ||
         (inputFrom &&
           (path.includes(inputFrom) || inputFrom.contains(target))) ||
         (inputTo && (path.includes(inputTo) || inputTo.contains(target)))
@@ -93,7 +83,7 @@ const fixEventsPlugin: FixEventsPlugin = (config) => (fp) => {
       } else if (match(event, keys.ArrowDown)) {
         event.preventDefault();
         fp.open();
-      } else if (!fp.config.allowInput) {
+      } else if (!fp.config.allowInput && !match(event, keys.Tab)) {
         // We override the default behaviour of Flatpickr, ideally when allowInput is set to false,
         // the Delete/Backspace button clears all of the date, which we don't want, hence
         // we stop event bubbling and the default Flatpickr's onChange behaviour here itself
@@ -105,6 +95,8 @@ const fixEventsPlugin: FixEventsPlugin = (config) => (fp) => {
 
   const parseDateWithFormat = (dateStr: string) =>
     fp.parseDate(dateStr, fp.config.dateFormat);
+
+  const isValidDate = (date?: Date) => date?.toString() !== 'Invalid Date';
 
   /**
    * Handles `blur` event.
@@ -146,7 +138,6 @@ const fixEventsPlugin: FixEventsPlugin = (config) => (fp) => {
       }
     }
 
-    const isValidDate = (date?: Date) => date?.toString() !== 'Invalid Date';
     // save end date in calendar immediately after it's been written down
     if (inputTo === target && fp.selectedDates.length === 1 && inputTo.value) {
       if (isValidDate(parseDateWithFormat(inputTo.value))) {
@@ -155,23 +146,6 @@ const fixEventsPlugin: FixEventsPlugin = (config) => (fp) => {
           true,
           fp.config.dateFormat
         );
-      }
-    }
-
-    // overriding the flatpickr bug where the startDate gets deleted on blur
-    //
-    // TODO: Verify whether this workaround is still needed in a follow-up to
-    // the TypeScript port.
-    if (inputTo === target && !inputFrom.value && lastStartValue.current) {
-      if (isValidDate(parseDateWithFormat(lastStartValue.current))) {
-        inputFrom.value = lastStartValue.current;
-        if (inputTo.value) {
-          fp.setDate(
-            [inputFrom.value, inputTo.value],
-            true,
-            fp.config.dateFormat
-          );
-        }
       }
     }
   };
@@ -217,6 +191,3 @@ const fixEventsPlugin: FixEventsPlugin = (config) => (fp) => {
     onDestroy: [release],
   };
 };
-
-// TODO: Replace with a named export in a follow-up to the TypeScript port.
-export default fixEventsPlugin;

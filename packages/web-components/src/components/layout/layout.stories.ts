@@ -6,6 +6,7 @@
  */
 
 import { html } from 'lit';
+import type { Meta } from '@storybook/web-components-vite';
 import './index';
 import '../accordion/index';
 import '../button/index';
@@ -14,6 +15,29 @@ import '../text-input/index';
 import '../stack/index';
 import docs from './layout.mdx';
 import { LAYOUT_SIZES, LAYOUT_DENSITIES } from './layout';
+
+const args = {
+  density: 'normal',
+  size: 'md',
+};
+
+const argTypes = {
+  density: {
+    control: 'radio',
+    description: 'Specify the density of components within the layout context.',
+    options: [...LAYOUT_DENSITIES],
+  },
+  size: {
+    control: 'select',
+    description: 'Specify the size of components within the layout context.',
+    options: [...LAYOUT_SIZES],
+  },
+  styles: {
+    table: {
+      disable: true,
+    },
+  },
+};
 
 const Demo = () => html`
   <cds-stack gap="6">
@@ -55,19 +79,6 @@ const Demo = () => html`
 `;
 
 export const Default = {
-  argTypes: {
-    size: {
-      control: 'select',
-      description: 'Specify the size of components within the layout context.',
-      options: [...LAYOUT_SIZES],
-    },
-    density: {
-      control: 'radio',
-      description:
-        'Specify the density of components within the layout context.',
-      options: [...LAYOUT_DENSITIES],
-    },
-  },
   render: ({ size, density }) => html`
     <div style="display: flex; flex-direction: column; gap: 2.5rem;">
       <h1>Layout demo</h1>
@@ -86,19 +97,17 @@ export const Default = {
   `,
 };
 
-const meta = {
+const meta: Meta = {
   title: 'Preview/preview__Layout',
   component: 'cds-layout',
+  args,
+  argTypes,
   parameters: {
+    controls: {
+      include: ['density', 'size'],
+    },
     docs: {
       page: docs,
-    },
-  },
-  argTypes: {
-    styles: {
-      table: {
-        disable: true,
-      },
     },
   },
 };

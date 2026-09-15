@@ -1,0 +1,193 @@
+{
+  "$schema": "https://tr.designtokens.org/format/",
+  "$description": "Button component color tokens for all button variants and states.",
+  "button": {
+    "danger-active": {
+      "$type": "color",
+      "$description": "Background color for danger buttons in active/pressed state. Use when user clicks or presses a destructive action button.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{red.80}",
+          "g10": "{red.80}",
+          "g90": "{red.80}",
+          "g100": "{red.80}"
+        }
+      }
+    },
+    "danger-hover": {
+      "$type": "color",
+      "$description": "Background color for danger buttons on hover. Use when user hovers over a destructive action button to provide visual feedback.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#b81921",
+          "g10": "#b81921",
+          "g90": "#b81921",
+          "g100": "#b81921"
+        }
+      }
+    },
+    "danger-primary": {
+      "$type": "color",
+      "$description": "Background color for primary danger buttons in default state. Use for destructive actions like delete, remove, or cancel that require high emphasis.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{red.60}",
+          "g10": "{red.60}",
+          "g90": "{red.60}",
+          "g100": "{red.60}"
+        }
+      }
+    },
+    "danger-secondary": {
+      "$type": "color",
+      "$description": "Border and text color for secondary danger buttons. Use for destructive actions that need less emphasis than primary danger buttons.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{red.60}",
+          "g10": "{red.60}",
+          "g90": "{red.40}",
+          "g100": "{red.50}"
+        }
+      }
+    },
+    "disabled": {
+      "$type": "color",
+      "$description": "Background color for disabled buttons across all variants. Use when a button action is temporarily unavailable or not applicable in the current context.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{gray.30}",
+          "g10": "{gray.30}",
+          "g90": "{gray.50}",
+          "g100": "{gray.50}"
+        },
+        "org.carbon": {
+          "alphaModifiers": {
+            "g90": 0.3,
+            "g100": 0.3
+          }
+        }
+      }
+    },
+    "primary": {
+      "$type": "color",
+      "$description": "Background color for primary buttons in default state. Use for the main call-to-action on a page or in a workflow step.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{blue.60}",
+          "g10": "{blue.60}",
+          "g90": "{blue.60}",
+          "g100": "{blue.60}"
+        }
+      }
+    },
+    "primary-active": {
+      "$type": "color",
+      "$description": "Background color for primary buttons in active/pressed state. Use when user clicks or presses the primary action button.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{blue.80}",
+          "g10": "{blue.80}",
+          "g90": "{blue.80}",
+          "g100": "{blue.80}"
+        }
+      }
+    },
+    "primary-hover": {
+      "$type": "color",
+      "$description": "Background color for primary buttons on hover. Use when user hovers over the primary action button to provide visual feedback.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{blue.60Hover}",
+          "g10": "{blue.60Hover}",
+          "g90": "{blue.60Hover}",
+          "g100": "{blue.60Hover}"
+        }
+      }
+    },
+    "secondary": {
+      "$type": "color",
+      "$description": "Background color for secondary buttons in default state. Use for secondary actions that support the primary action or provide alternative paths.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{gray.80}",
+          "g10": "{gray.80}",
+          "g90": "{gray.60}",
+          "g100": "{gray.60}"
+        }
+      }
+    },
+    "secondary-active": {
+      "$type": "color",
+      "$description": "Background color for secondary buttons in active/pressed state. Use when user clicks or presses a secondary action button.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{gray.60}",
+          "g10": "{gray.60}",
+          "g90": "{gray.80}",
+          "g100": "{gray.80}"
+        }
+      }
+    },
+    "secondary-hover": {
+      "$type": "color",
+      "$description": "Background color for secondary buttons on hover. Use when user hovers over a secondary action button to provide visual feedback.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{gray.80Hover}",
+          "g10": "{gray.80Hover}",
+          "g90": "{gray.60Hover}",
+          "g100": "{gray.60Hover}"
+        }
+      }
+    },
+    "separator": {
+      "$type": "color",
+      "$description": "Border color for button separators in button groups or split buttons. Use to visually divide adjacent buttons while maintaining their connection.",
+      "$extensions": {
+        "carbon.themes": {
+          "fallback": "{gray.20}",
+          "white": "{gray.20}",
+          "g10": "{gray.20}",
+          "g90": "{gray.100}",
+          "g100": "{gray.100}"
+        }
+      }
+    },
+    "tertiary": {
+      "$type": "color",
+      "$description": "Text and icon color for tertiary buttons in default state. Use for low-emphasis actions or when multiple actions need equal visual weight.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{blue.60}",
+          "g10": "{blue.60}",
+          "g90": "{white.default}",
+          "g100": "{white.default}"
+        }
+      }
+    },
+    "tertiary-active": {
+      "$type": "color",
+      "$description": "Text and icon color for tertiary buttons in active/pressed state. Use when user clicks or presses a tertiary action button.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{blue.80}",
+          "g10": "{blue.80}",
+          "g90": "{gray.30}",
+          "g100": "{gray.30}"
+        }
+      }
+    },
+    "tertiary-hover": {
+      "$type": "color",
+      "$description": "Background color for tertiary buttons on hover. Use when user hovers over a tertiary action button to provide subtle visual feedback.",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{blue.60Hover}",
+          "g10": "{blue.60Hover}",
+          "g90": "{gray.10}",
+          "g100": "{gray.10}"
+        }
+      }
+    }
+  }
+}

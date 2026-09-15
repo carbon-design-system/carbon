@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`@carbon/motion @carbon/motion/scss/motion.scss 1`] = `
 [
@@ -15,6 +15,7 @@ exports[`@carbon/motion @carbon/motion/scss/motion.scss 1`] = `
   "moderate-02",
   "slow-01",
   "slow-02",
+  "surfaces",
 ]
 `;
 
@@ -42,24 +43,122 @@ exports[`@carbon/motion Public API 1`] = `
   },
   "fast01": "70ms",
   "fast02": "110ms",
+  "getMotionSurface": [Function],
   "moderate01": "150ms",
   "moderate02": "240ms",
   "motion": [Function],
+  "resolveDuration": [Function],
+  "resolveEasing": [Function],
   "slow01": "400ms",
   "slow02": "700ms",
+  "surfaces": {
+    "contextual": {
+      "duration": "fast-02",
+      "enter": {
+        "opacity": 1,
+        "transform": "scale(1)",
+      },
+      "enterEasing": [
+        "entrance",
+        "expressive",
+      ],
+      "exit": {
+        "opacity": 0,
+        "transform": "scale(0.96)",
+      },
+      "exitEasing": [
+        "exit",
+        "expressive",
+      ],
+      "kind": "reveal",
+    },
+    "disclosure": {
+      "duration": "moderate-01",
+      "enter": {
+        "blockSize": "auto",
+        "opacity": 1,
+      },
+      "enterEasing": [
+        "entrance",
+        "productive",
+      ],
+      "exit": {
+        "blockSize": 0,
+        "opacity": 0,
+      },
+      "exitEasing": [
+        "exit",
+        "productive",
+      ],
+      "kind": "reveal",
+    },
+    "expand": {
+      "duration": "moderate-02",
+      "enter": {
+        "opacity": 1,
+        "transform": "scale(1)",
+      },
+      "enterEasing": [
+        "standard",
+        "productive",
+      ],
+      "exit": {
+        "opacity": 0,
+        "transform": "scale(0.96)",
+      },
+      "exitEasing": [
+        "standard",
+        "productive",
+      ],
+      "kind": "shared-element",
+    },
+    "invoke": {
+      "duration": "moderate-02",
+      "enterEasing": [
+        "standard",
+        "expressive",
+      ],
+      "exitEasing": [
+        "standard",
+        "expressive",
+      ],
+      "kind": "shared-element",
+      "origin": "trigger",
+    },
+    "stretch": {
+      "duration": "slow-01",
+      "enter": {
+        "clipPath": "inset(0 0 0 0)",
+        "opacity": 1,
+      },
+      "enterEasing": [
+        "entrance",
+        "expressive",
+      ],
+      "exit": {
+        "clipPath": "inset(50% 0 50% 0)",
+        "opacity": 0,
+      },
+      "exitEasing": [
+        "exit",
+        "expressive",
+      ],
+      "kind": "reveal",
+    },
+  },
   "unstable_tokens": [
-    "fast01",
-    "fast02",
-    "moderate01",
-    "moderate02",
-    "slow01",
-    "slow02",
     "durationFast01",
     "durationFast02",
     "durationModerate01",
     "durationModerate02",
     "durationSlow01",
     "durationSlow02",
+    "fast01",
+    "fast02",
+    "moderate01",
+    "moderate02",
+    "slow01",
+    "slow02",
   ],
 }
 `;

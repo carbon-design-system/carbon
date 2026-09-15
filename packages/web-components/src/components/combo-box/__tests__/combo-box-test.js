@@ -580,6 +580,59 @@ describe('cds-combo-box', function () {
     expect(getInput(el).value).to.equal('Apple');
   });
 
+  it('should preserve the selected value when opening with allow-custom-value and a different display label', async () => {
+    const el = await fixture(html`
+      <cds-combo-box
+        title-text="Combo box Label"
+        allow-custom-value
+        value="item1"
+        should-filter-item>
+        <cds-combo-box-item value="item1">Apple</cds-combo-box-item>
+        <cds-combo-box-item value="item2">Pineapple</cds-combo-box-item>
+      </cds-combo-box>
+    `);
+
+    expect(el.value).to.equal('item1');
+    expect(getInput(el).value).to.equal('Apple');
+
+    await openMenu(el);
+
+    expect(el.value).to.equal('item1');
+    expect(getInput(el).value).to.equal('Apple');
+    expect(
+      el
+        .querySelector('cds-combo-box-item[value="item1"]')
+        ?.hasAttribute('selected')
+    ).to.be.true;
+  });
+
+  it('should preserve trailing whitespace custom values when a selected label is edited with allow-custom-value', async () => {
+    const el = await fixture(html`
+      <cds-combo-box
+        title-text="Combo box Label"
+        allow-custom-value
+        value="item1"
+        should-filter-item>
+        <cds-combo-box-item value="item1">Apple</cds-combo-box-item>
+        <cds-combo-box-item value="item2">Pineapple</cds-combo-box-item>
+      </cds-combo-box>
+    `);
+
+    await openMenu(el);
+    await setInputValue(el, 'Apple ');
+    getInput(el).dispatchEvent(
+      new FocusEvent('focusout', {
+        bubbles: true,
+        composed: true,
+        relatedTarget: document.body,
+      })
+    );
+    await waitForUpdates(el);
+
+    expect(el.value).to.equal('Apple ');
+    expect(getInput(el).value).to.equal('Apple ');
+  });
+
   it('should emit custom value through cds-combo-box-selected when allow-custom-value is set', async () => {
     const el = await fixture(html`
       <cds-combo-box title-text="Combo box Label" allow-custom-value>

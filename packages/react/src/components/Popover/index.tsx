@@ -20,6 +20,7 @@ import { isComponentElement } from '../../internal';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
 import { useWindowEvent, useEvent } from '../../internal/useEvent';
+import { selectorTabbable } from '../../internal/keyboard/navigation';
 import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
 import {
   useFloating,
@@ -32,6 +33,7 @@ import {
 } from '@floating-ui/react';
 import { useFeatureFlag } from '../FeatureFlags';
 import { PolymorphicComponentPropWithRef } from '../../internal/PolymorphicProps';
+import { deprecate } from '../../prop-types/deprecate';
 
 export interface PopoverContext {
   setFloating: React.Ref<HTMLSpanElement>;
@@ -109,6 +111,9 @@ export interface PopoverBaseProps {
   autoAlignBoundary?: Boundary;
 
   /**
+   * @deprecated This prop has been deprecated and will be
+   * removed in the next major release of Carbon.
+   *
    * Specify whether a caret should be rendered
    */
   caret?: boolean;
@@ -177,7 +182,7 @@ export const Popover: PopoverComponent & {
     autoAlign = false,
     autoAlignBoundary,
     backgroundToken = 'layer',
-    caret = !isTabTip,
+    caret: caretProp = !isTabTip,
     className: customClassName,
     children,
     border = false,
@@ -199,6 +204,10 @@ export const Popover: PopoverComponent & {
   const popover = useRef<Element>(null);
   const enableFloatingStyles =
     useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
+  const enableV12Release = useFeatureFlag('enable-v12-release');
+  // v12 removes the caret from Popover and everything built on top of it, so
+  // the `caret` prop no longer has an effect once the flag is enabled
+  const caret = enableV12Release ? false : caretProp;
   const lastClickWasInsidePopoverContent = useRef(false);
 
   const isTargetInDatePickerInsidePopover = (target: Node) => {
@@ -274,6 +283,25 @@ export const Popover: PopoverComponent & {
         onRequestClose?.();
       }
     }
+  });
+
+  useWindowEvent('keydown', (event) => {
+    if (!open || event.key !== 'Escape' || event.defaultPrevented) return;
+
+    // Esc should only close the popover if focus is inside the popover content
+    const target = event.target;
+    if (
+      !(target instanceof Element) ||
+      target.closest(`.${prefix}--popover-content`) !== refs.floating.current
+    ) {
+      return;
+    }
+    onRequestClose?.();
+
+    // return focus to the trigger while making sure it is tabbable
+    const trigger =
+      popover.current?.querySelector<HTMLElement>(selectorTabbable);
+    trigger?.focus();
   });
 
   useWindowEvent('click', ({ target }) => {
@@ -358,7 +386,7 @@ export const Popover: PopoverComponent & {
                       // Use 4px spacing when no caret, otherwise use the caret offset
                       mainAxis: caret ? popoverDimensions?.current?.offset : 4,
                     }
-                  : 0
+                  : { mainAxis: enableV12Release ? 4 : 0 }
               ),
               autoAlign &&
                 flip({
@@ -402,7 +430,7 @@ export const Popover: PopoverComponent & {
                 }),
               arrow({
                 element: caretRef,
-                padding: 16,
+                padding: enableV12Release ? 3 : 16,
               }),
               autoAlign && hide(),
             ],
@@ -681,9 +709,15 @@ Popover.propTypes = {
   ]) as PropTypes.Validator<Boundary | null | undefined>,
 
   /**
+   * @deprecated This prop has been deprecated and will be
+   * removed in the next major release of Carbon.
+   *
    * Specify whether a caret should be rendered
    */
-  caret: PropTypes.bool,
+  caret: deprecate(
+    PropTypes.bool,
+    'The `caret` prop has been deprecated and will be removed in the next major release of Carbon.'
+  ),
 
   /**
    * Specify whether a border should be rendered on the popover

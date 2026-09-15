@@ -7,6 +7,7 @@
 
 import React, { StrictMode } from 'react';
 import { act, render, screen } from '@testing-library/react';
+import { useCombobox } from 'downshift';
 import { getByText } from '@carbon/test-utils/dom';
 import userEvent from '@testing-library/user-event';
 import { FilterableMultiSelect } from '../';
@@ -38,6 +39,43 @@ describe('FilterableMultiSelect', () => {
       onMenuChange: jest.fn(),
       placeholder: 'Placeholder...',
     };
+  });
+
+  it('should not allow interactive content in titleText', () => {
+    const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+    expect(() => {
+      render(
+        <FilterableMultiSelect
+          {...mockProps}
+          titleText={
+            <>
+              FilterableMultiselect title <button type="button">Help</button>
+            </>
+          }
+        />
+      );
+    }).toThrow(
+      'The FilterableMultiSelect component `titleText` prop must have no interactive content'
+    );
+
+    spy.mockRestore();
+  });
+
+  it('should allow non-interactive content in titleText', () => {
+    expect(() => {
+      render(
+        <FilterableMultiSelect
+          {...mockProps}
+          titleText={
+            <>
+              FilterableMultiselect title
+              <span>additional title content</span>
+            </>
+          }
+        />
+      );
+    }).not.toThrow();
   });
 
   it('should display all items when the menu is open', async () => {
@@ -433,6 +471,70 @@ describe('FilterableMultiSelect', () => {
     expect(onInputValueChange).toHaveBeenLastCalledWith(
       expect.objectContaining({ inputValue: 'test' })
     );
+  });
+
+  it('should support items filtered by an external search', async () => {
+    const externallyFilteredItems = [
+      { id: 'external-result', label: 'Server result' },
+    ];
+
+    function CustomSearchMultiSelect() {
+      const [items, setItems] = React.useState(mockProps.items);
+
+      return (
+        <FilterableMultiSelect
+          {...mockProps}
+          items={items}
+          filterItems={(items) => items}
+          onInputValueChange={({ inputValue }) => {
+            if (inputValue === 'remote') {
+              setItems(externallyFilteredItems);
+            }
+          }}
+        />
+      );
+    }
+
+    render(<CustomSearchMultiSelect />);
+    await waitForPosition();
+
+    await openMenu();
+    await userEvent.type(screen.getByRole('combobox'), 'remote');
+
+    expect(screen.getByText('Server result')).toBeInTheDocument();
+    expect(screen.queryByText('Item 0')).not.toBeInTheDocument();
+  });
+
+  it('should call onInputValueChange with empty string when clear button is clicked', async () => {
+    const onInputValueChange = jest.fn();
+    render(
+      <FilterableMultiSelect
+        {...mockProps}
+        placeholder="test"
+        onInputValueChange={onInputValueChange}
+      />
+    );
+    await waitForPosition();
+
+    const input = screen.getByPlaceholderText('test');
+
+    await openMenu();
+    await userEvent.type(input, 'abc');
+    expect(input).toHaveDisplayValue('abc');
+
+    onInputValueChange.mockClear();
+
+    const clearButton = screen.getByRole('button', {
+      name: 'Clear selected item',
+    });
+    await userEvent.click(clearButton);
+
+    expect(input).toHaveDisplayValue('');
+    expect(onInputValueChange).toHaveBeenCalledWith({
+      inputValue: '',
+      type: useCombobox.stateChangeTypes.FunctionSetInputValue,
+    });
+    expect(onInputValueChange).toHaveBeenCalledTimes(1);
   });
 
   it('should clear all selections when clicking clear all button', async () => {

@@ -16,6 +16,42 @@ import { FormContext } from '../FluidForm';
 const prefix = 'cds';
 
 describe('DatePicker', () => {
+  it('should not allow interactive content in DatePickerInput labelText', () => {
+    const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+    expect(() => {
+      render(
+        <DatePickerInput
+          id="date-picker-input-id"
+          labelText={
+            <>
+              Date Picker label <button type="button">Help</button>
+            </>
+          }
+        />
+      );
+    }).toThrow(
+      'The DatePickerInput component `labelText` prop must have no interactive content'
+    );
+
+    spy.mockRestore();
+  });
+
+  it('should allow non-interactive content in DatePickerInput labelText', () => {
+    expect(() => {
+      render(
+        <DatePickerInput
+          id="date-picker-input-id"
+          labelText={
+            <>
+              Date Picker label <span>additional label content</span>
+            </>
+          }
+        />
+      );
+    }).not.toThrow();
+  });
+
   it('should add extra classes that are passed via className', () => {
     render(
       <DatePicker
@@ -528,6 +564,19 @@ describe('Simple date picker', () => {
     );
 
     expect(screen.queryByRole('application')).not.toBeInTheDocument();
+  });
+
+  it('should set the native input as readOnly', () => {
+    render(
+      <DatePicker datePickerType="simple" readOnly>
+        <DatePickerInput
+          id="date-picker-input-id-simple"
+          labelText="Deadline"
+        />
+      </DatePicker>
+    );
+
+    expect(screen.getByLabelText('Deadline')).toHaveAttribute('readonly');
   });
 
   it('should update the input value when a controlled simple date value changes', () => {
@@ -1332,6 +1381,105 @@ describe('Range date picker', () => {
     expect(screen.getByLabelText('ToDate')).toHaveValue('');
   });
 
+  it('should focus end date when tabbing from start input with a partial range selected', async () => {
+    const ref = createRef();
+    render(
+      <DatePicker
+        ref={ref}
+        datePickerType="range"
+        onChange={() => {}}
+        dateFormat="m/d/Y">
+        <DatePickerInput
+          id="range-partial-start-tab-id"
+          labelText="Start date"
+        />
+        <DatePickerInput id="range-partial-end-tab-id" labelText="End date" />
+      </DatePicker>
+    );
+
+    const startInput = screen.getByLabelText('Start date');
+    const endInput = screen.getByLabelText('End date');
+
+    await userEvent.tab();
+    expect(startInput).toHaveFocus();
+    await userEvent.tab();
+    expect(document.activeElement).toHaveClass('flatpickr-day');
+    await userEvent.click(document.activeElement);
+
+    expect(ref.current.calendar.selectedDates).toHaveLength(1);
+
+    // Simulate focus returning to the start input.
+    startInput.focus();
+    expect(startInput).toHaveFocus();
+
+    await userEvent.tab();
+    expect(endInput).toHaveFocus();
+  });
+
+  it('should not block Tab on start input when allowInput is false', async () => {
+    render(
+      <DatePicker
+        allowInput={false}
+        datePickerType="range"
+        onChange={() => {}}
+        dateFormat="m/d/Y">
+        <DatePickerInput
+          id="allow-input-false-start-id"
+          labelText="Start date"
+        />
+        <DatePickerInput id="allow-input-false-end-id" labelText="End date" />
+      </DatePicker>
+    );
+
+    const startInput = screen.getByLabelText('Start date');
+
+    await userEvent.tab();
+    expect(startInput).toHaveFocus();
+
+    await userEvent.tab();
+
+    expect(startInput).not.toHaveFocus();
+    expect(document.activeElement).toHaveClass('flatpickr-day');
+  });
+
+  it('should not trap Tab on start input when the end input is disabled', async () => {
+    const ref = createRef();
+    render(
+      <DatePicker
+        ref={ref}
+        datePickerType="range"
+        onChange={() => {}}
+        dateFormat="m/d/Y">
+        <DatePickerInput id="disabled-end-start-id" labelText="Start date" />
+        <DatePickerInput
+          id="disabled-end-end-id"
+          labelText="End date"
+          disabled
+        />
+      </DatePicker>
+    );
+
+    const startInput = screen.getByLabelText('Start date');
+
+    await userEvent.tab();
+    expect(startInput).toHaveFocus();
+    await userEvent.tab();
+    expect(document.activeElement).toHaveClass('flatpickr-day');
+    await userEvent.click(document.activeElement);
+
+    expect(ref.current.calendar.selectedDates).toHaveLength(1);
+
+    // Simulate focus returning to the start input.
+    startInput.focus();
+    expect(startInput).toHaveFocus();
+
+    await userEvent.tab();
+
+    // focus shouldn't stay stuck on start input when end input can't
+    // receive focus
+    expect(startInput).not.toHaveFocus();
+  });
+
   it('should close calendar with range type on focus loss', async () => {
     const onClose = jest.fn();
     render(
@@ -1531,6 +1679,29 @@ describe('Range date picker', () => {
 
       expect(start.value).toBe('03/03/2025');
       expect(end.value).toBe('03/09/2025');
+    });
+
+    it('should preserve the start date when the end input blurs after manual entry', async () => {
+      render(
+        <DatePicker
+          dateFormat="Y-m-d"
+          onChange={() => {}}
+          datePickerType="range">
+          <DatePickerInput id="start-blur" labelText="Start date" />
+          <DatePickerInput id="end-blur" labelText="End date" />
+        </DatePicker>
+      );
+
+      const start = screen.getByLabelText('Start date');
+      const end = screen.getByLabelText('End date');
+
+      await userEvent.type(start, '2023-01-05{enter}');
+      await userEvent.type(end, '2023-01-19');
+
+      fireEvent.blur(end);
+
+      expect(start).toHaveValue('2023-01-05');
+      expect(end).toHaveValue('2023-01-19');
     });
 
     it('should not fire end input blur handlers when Enter is pressed', async () => {

@@ -7,7 +7,7 @@
 
 import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
-import { property } from 'lit/decorators.js';
+import { property, query } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { prefix } from '../../globals/settings';
 import { iconLoader } from '../../globals/internal/icon-loader';
@@ -25,6 +25,9 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  */
 @customElement(`${prefix}-slider-input`)
 class CDSSliderInput extends FocusMixin(LitElement) {
+  @query('input')
+  _inputNode!: HTMLInputElement | null;
+
   /**
    * The internal value of `max` property.
    */

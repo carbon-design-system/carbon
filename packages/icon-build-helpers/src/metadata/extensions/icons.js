@@ -7,7 +7,7 @@
 
 'use strict';
 
-const Joi = require('@hapi/joi');
+const Joi = require('joi');
 
 /**
  * The default icons extension for the metadata. This validates an icon file

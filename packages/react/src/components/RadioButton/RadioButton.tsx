@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -16,6 +16,7 @@ import { mergeRefs } from '../../tools/mergeRefs';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
+import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
 
 type ExcludedAttributes = 'onChange';
 
@@ -195,6 +196,7 @@ const RadioButton = React.forwardRef<HTMLInputElement, RadioButtonProps>(
     );
 
     const inputRef = useRef<HTMLInputElement>(null);
+    const labelRef = useRef<HTMLLabelElement>(null);
 
     const candidate = slug ?? decorator;
     const candidateIsAILabel = isComponentElement(candidate, AILabel);
@@ -203,6 +205,10 @@ const RadioButton = React.forwardRef<HTMLInputElement, RadioButtonProps>(
           size: candidate.props?.['kind'] === 'inline' ? 'md' : 'mini',
         })
       : candidate;
+    useNoInteractiveChildren(
+      labelRef,
+      'The RadioButton component `labelText` prop must have no interactive content'
+    );
 
     return (
       <div className={wrapperClasses}>
@@ -219,24 +225,20 @@ const RadioButton = React.forwardRef<HTMLInputElement, RadioButtonProps>(
           required={required}
           readOnly={readOnly}
         />
-        <label htmlFor={uniqueId} className={`${prefix}--radio-button__label`}>
+        <label
+          htmlFor={uniqueId}
+          className={`${prefix}--radio-button__label`}
+          ref={labelRef}>
           <span className={`${prefix}--radio-button__appearance`} />
-          {labelText && (
-            <Text className={innerLabelClasses}>
-              {labelText}
-              {slug ? (
-                normalizedDecorator
-              ) : decorator ? (
-                <div
-                  className={`${prefix}--radio-button-wrapper-inner--decorator`}>
-                  {normalizedDecorator}
-                </div>
-              ) : (
-                ''
-              )}
-            </Text>
-          )}
+          {labelText && <Text className={innerLabelClasses}>{labelText}</Text>}
         </label>
+        {labelText && slug ? (
+          normalizedDecorator
+        ) : labelText && decorator ? (
+          <div className={`${prefix}--radio-button-wrapper-inner--decorator`}>
+            {normalizedDecorator}
+          </div>
+        ) : null}
         {normalizedProps.validation}
       </div>
     );

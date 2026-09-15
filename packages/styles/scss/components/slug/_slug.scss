@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2023, 2024
+// Copyright IBM Corp. 2023, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -122,30 +122,32 @@ $sizes: (
     box-shadow: inset 0 0 0 1px $focus;
   }
 
-  .#{$prefix}--ai-label .#{$prefix}--ai-label__button:hover,
-  .#{$prefix}--slug .#{$prefix}--slug__button:hover {
-    background: $border-inverse;
-    color: $text-inverse;
-  }
+  @media (any-hover: hover) {
+    .#{$prefix}--ai-label .#{$prefix}--ai-label__button:hover,
+    .#{$prefix}--slug .#{$prefix}--slug__button:hover {
+      background: $border-inverse;
+      color: $text-inverse;
+    }
 
-  .#{$prefix}--ai-label .#{$prefix}--ai-label__button:hover:active,
-  .#{$prefix}--slug .#{$prefix}--slug__button:hover:active {
-    background: $border-inverse;
-    box-shadow:
-      inset 0 0 0 1px $focus,
-      inset 0 0 0 2px $focus-inset;
-    color: $text-inverse;
-  }
+    .#{$prefix}--ai-label .#{$prefix}--ai-label__button:hover:active,
+    .#{$prefix}--slug .#{$prefix}--slug__button:hover:active {
+      background: $border-inverse;
+      box-shadow:
+        inset 0 0 0 1px $focus,
+        inset 0 0 0 2px $focus-inset;
+      color: $text-inverse;
+    }
 
-  .#{$prefix}--ai-label
-    .#{$prefix}--ai-label__button.#{$prefix}--ai-label__button--mini:hover:active,
-  .#{$prefix}--ai-label
-    .#{$prefix}--ai-label__button.#{$prefix}--ai-label__button--2xs:hover:active,
-  .#{$prefix}--slug
-    .#{$prefix}--slug__button.#{$prefix}--slug__button--mini:hover:active,
-  .#{$prefix}--slug
-    .#{$prefix}--slug__button.#{$prefix}--slug__button--2xs:hover:active {
-    box-shadow: inset 0 0 0 1px $focus-inset;
+    .#{$prefix}--ai-label
+      .#{$prefix}--ai-label__button.#{$prefix}--ai-label__button--mini:hover:active,
+    .#{$prefix}--ai-label
+      .#{$prefix}--ai-label__button.#{$prefix}--ai-label__button--2xs:hover:active,
+    .#{$prefix}--slug
+      .#{$prefix}--slug__button.#{$prefix}--slug__button--mini:hover:active,
+    .#{$prefix}--slug
+      .#{$prefix}--slug__button.#{$prefix}--slug__button--2xs:hover:active {
+      box-shadow: inset 0 0 0 1px $focus-inset;
+    }
   }
 
   .#{$prefix}--ai-label__text,
@@ -178,28 +180,30 @@ $sizes: (
     box-shadow: none;
   }
 
-  .#{$prefix}--ai-label .#{$prefix}--ai-label__button--inline:hover,
-  .#{$prefix}--ai-label .#{$prefix}--ai-label__button--inline:hover:active,
-  .#{$prefix}--slug .#{$prefix}--slug__button--inline:hover,
-  .#{$prefix}--slug .#{$prefix}--slug__button--inline:hover:active {
-    border-color: $icon-secondary;
-    background: transparent;
-    box-shadow: none;
-    color: $text-secondary;
-  }
+  @media (any-hover: hover) {
+    .#{$prefix}--ai-label .#{$prefix}--ai-label__button--inline:hover,
+    .#{$prefix}--ai-label .#{$prefix}--ai-label__button--inline:hover:active,
+    .#{$prefix}--slug .#{$prefix}--slug__button--inline:hover,
+    .#{$prefix}--slug .#{$prefix}--slug__button--inline:hover:active {
+      border-color: $icon-secondary;
+      background: transparent;
+      box-shadow: none;
+      color: $text-secondary;
+    }
 
-  .#{$prefix}--ai-label .#{$prefix}--ai-label__button--inline:focus:hover,
-  .#{$prefix}--slug .#{$prefix}--slug__button--inline:focus:hover {
-    border-color: $focus;
-  }
+    .#{$prefix}--ai-label .#{$prefix}--ai-label__button--inline:focus:hover,
+    .#{$prefix}--slug .#{$prefix}--slug__button--inline:focus:hover {
+      border-color: $focus;
+    }
 
-  .#{$prefix}--ai-label
-    .#{$prefix}--ai-label__button--inline:hover
-    .#{$prefix}--ai-label__text::before,
-  .#{$prefix}--slug
-    .#{$prefix}--slug__button--inline:hover
-    .#{$prefix}--slug__text::before {
-    background: $icon-secondary;
+    .#{$prefix}--ai-label
+      .#{$prefix}--ai-label__button--inline:hover
+      .#{$prefix}--ai-label__text::before,
+    .#{$prefix}--slug
+      .#{$prefix}--slug__button--inline:hover
+      .#{$prefix}--slug__text::before {
+      background: $icon-secondary;
+    }
   }
 
   .#{$prefix}--ai-label__button--inline .#{$prefix}--ai-label__text,
@@ -304,11 +308,17 @@ $sizes: (
 
   .#{$prefix}--ai-label
     .#{$prefix}--ai-label__button--inline-with-content:focus,
-  .#{$prefix}--ai-label
-    .#{$prefix}--ai-label__button--inline-with-content:hover:focus,
-  .#{$prefix}--slug .#{$prefix}--slug__button--inline-with-content:focus,
-  .#{$prefix}--slug .#{$prefix}--slug__button--inline-with-content:hover:focus {
+  .#{$prefix}--slug .#{$prefix}--slug__button--inline-with-content:focus {
     box-shadow: inset 0 0 0 1px $focus;
+  }
+
+  @media (any-hover: hover) {
+    .#{$prefix}--ai-label
+      .#{$prefix}--ai-label__button--inline-with-content:hover:focus,
+    .#{$prefix}--slug
+      .#{$prefix}--slug__button--inline-with-content:hover:focus {
+      box-shadow: inset 0 0 0 1px $focus;
+    }
   }
 
   // Slug callout styles

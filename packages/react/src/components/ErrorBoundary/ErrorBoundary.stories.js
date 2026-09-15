@@ -1,15 +1,32 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { action } from 'storybook/actions';
 import { ErrorBoundary, ErrorBoundaryContext } from './';
 import Button from '../Button';
 import mdx from './ErrorBoundary.mdx';
+
+const defaultArgs = {
+  buttonLabel: 'Toggle throwing error',
+  children: 'Successfully rendered',
+  errorMessage: 'Component threw error',
+  fallback: 'Whoops',
+  shouldThrowError: false,
+};
+
+const argTypes = {
+  buttonLabel: { control: 'text' },
+  children: { control: 'text' },
+  errorMessage: { control: 'text' },
+  fallback: { control: 'text' },
+  onLog: { action: 'log' },
+  shouldThrowError: { control: 'boolean' },
+};
 
 export default {
   title: 'Components/ErrorBoundary',
@@ -18,77 +35,66 @@ export default {
     docs: {
       page: mdx,
     },
+    controls: { include: Object.keys(argTypes) },
   },
 };
 
-export const Default = () => {
-  function DemoComponent() {
-    const [shouldThrowError, setShouldThrowError] = React.useState(false);
+function DemoComponent({
+  buttonLabel,
+  children,
+  errorMessage,
+  fallback,
+  shouldThrowError: shouldThrowErrorArg,
+}) {
+  const [shouldThrowError, setShouldThrowError] = useState(shouldThrowErrorArg);
 
-    function onClick() {
-      setShouldThrowError(!shouldThrowError);
-    }
+  useEffect(() => {
+    setShouldThrowError(shouldThrowErrorArg);
+  }, [shouldThrowErrorArg]);
 
-    return (
-      <>
-        <Button onClick={onClick}>Toggle throwing error</Button>
-        <div>
-          <ErrorBoundary fallback={<Fallback />}>
-            <ThrowError shouldThrowError={shouldThrowError} />
-          </ErrorBoundary>
-        </div>
-      </>
-    );
+  function onClick() {
+    setShouldThrowError(!shouldThrowError);
   }
 
-  function Fallback() {
-    return 'Whoops';
+  return (
+    <>
+      <Button onClick={onClick}>{buttonLabel}</Button>
+      <div>
+        <ErrorBoundary fallback={fallback}>
+          <ThrowError
+            shouldThrowError={shouldThrowError}
+            errorMessage={errorMessage}>
+            {children}
+          </ThrowError>
+        </ErrorBoundary>
+      </div>
+    </>
+  );
+}
+
+function ThrowError({ children, errorMessage, shouldThrowError }) {
+  if (shouldThrowError) {
+    throw new Error(errorMessage);
   }
 
-  function ThrowError({ shouldThrowError }) {
-    if (shouldThrowError) {
-      throw new Error('Component threw error');
-    }
+  return children;
+}
 
-    return 'Successfully rendered';
-  }
-
-  return <DemoComponent />;
+export const Default = (args) => {
+  return <DemoComponent {...args} />;
 };
 
-export const WithCustomContext = () => {
-  function DemoComponent() {
-    const [shouldThrowError, setShouldThrowError] = useState(false);
+Default.args = { ...defaultArgs };
+Default.argTypes = { ...argTypes };
 
-    function onClick() {
-      setShouldThrowError(!shouldThrowError);
-    }
-
-    return (
-      <ErrorBoundaryContext.Provider value={{ log: action('log') }}>
-        <Button onClick={onClick}>Toggle throwing error</Button>
-        <div>
-          <ErrorBoundary fallback={<Fallback />}>
-            <ThrowError shouldThrowError={shouldThrowError} />
-          </ErrorBoundary>
-        </div>
-      </ErrorBoundaryContext.Provider>
-    );
-  }
-
-  function Fallback() {
-    return 'Whoops';
-  }
-
-  function ThrowError({ shouldThrowError }) {
-    if (shouldThrowError) {
-      throw new Error('Component threw error');
-    }
-
-    return 'Successfully rendered';
-  }
-
-  return <DemoComponent />;
+export const WithCustomContext = ({ onLog = action('log'), ...args }) => {
+  return (
+    <ErrorBoundaryContext.Provider value={{ log: onLog }}>
+      <DemoComponent {...args} />
+    </ErrorBoundaryContext.Provider>
+  );
 };
 
 WithCustomContext.storyName = 'with custom context';
+WithCustomContext.args = { ...defaultArgs };
+WithCustomContext.argTypes = { ...argTypes };

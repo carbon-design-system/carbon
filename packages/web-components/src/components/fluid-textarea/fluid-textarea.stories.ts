@@ -14,9 +14,9 @@ import { withLayers } from '../../../.storybook/decorators/with-layers';
 const args = {
   cols: 0,
   counterMode: '',
+  defaultWidth: 300,
   disabled: false,
   enableCounter: true,
-  hideLabel: false,
   invalid: false,
   invalidText:
     'Error message that is really long can wrap to more lines but should not be excessively long.',
@@ -42,6 +42,9 @@ const argTypes = {
     description:
       'Specify the method used for calculating the counter number (character or word)',
   },
+  defaultWidth: {
+    control: { type: 'range', min: 300, max: 800, step: 50 },
+  },
   disabled: {
     control: 'boolean',
     description: 'Disabled (disabled)',
@@ -49,10 +52,6 @@ const argTypes = {
   enableCounter: {
     control: 'boolean',
     description: 'Enable character counter (enable-counter)',
-  },
-  hideLabel: {
-    control: 'boolean',
-    description: 'Hide label (hide-label)',
   },
   invalid: {
     control: 'boolean',
@@ -99,20 +98,12 @@ const argTypes = {
   },
 };
 
-export const Default = {
-  args,
-  argTypes,
-  parameters: {
-    controls: {
-      exclude: ['onInput'],
-    },
-  },
-  render: ({
+const renderTextArea = (
+  {
     cols,
     counterMode,
     disabled,
     enableCounter,
-    hideLabel,
     invalid,
     invalidText,
     label,
@@ -124,61 +115,81 @@ export const Default = {
     value,
     warn,
     warnText,
-  }) => html`
-    <div style="width:300px;">
-      <cds-fluid-textarea
-        ?enable-counter="${enableCounter}"
-        counter-mode="${ifDefined(counterMode)}"
-        ?hide-label="${hideLabel}"
-        ?invalid="${invalid}"
-        invalid-text="${ifDefined(invalidText)}"
-        label="${ifDefined(label)}"
-        ?readonly="${readonly}"
-        value="${ifDefined(value)}"
-        ?warn="${warn}"
-        warn-text="${ifDefined(warnText)}"
-        ?disabled="${disabled}"
-        max-count="${ifDefined(maxCount)}"
-        placeholder="${ifDefined(placeholder)}"
-        @input="${onInput}"
-        rows="${ifDefined(rows)}"
-        cols="${ifDefined(cols)}">
-        ${value}
-      </cds-fluid-textarea>
-    </div>
+  },
+  labelSlot = value
+) => html`
+  <cds-fluid-textarea
+    ?enable-counter="${enableCounter}"
+    counter-mode="${ifDefined(counterMode)}"
+    ?invalid="${invalid}"
+    invalid-text="${ifDefined(invalidText)}"
+    label="${ifDefined(label)}"
+    ?readonly="${readonly}"
+    value="${ifDefined(value)}"
+    ?warn="${warn}"
+    warn-text="${ifDefined(warnText)}"
+    ?disabled="${disabled}"
+    max-count="${ifDefined(maxCount)}"
+    placeholder="${ifDefined(placeholder)}"
+    @input="${onInput}"
+    rows="${ifDefined(rows)}"
+    cols="${ifDefined(cols)}">
+    ${labelSlot}
+  </cds-fluid-textarea>
+`;
+
+export const Default = {
+  args,
+  argTypes,
+  parameters: {
+    controls: {
+      exclude: ['onInput'],
+    },
+  },
+  render: ({ defaultWidth, ...storyArgs }) => html`
+    <div style="width:${defaultWidth}px;">${renderTextArea(storyArgs)}</div>
   `,
 };
 
 export const Skeleton = {
-  render: () =>
-    html` <div style="width:300px;">
+  args: { defaultWidth: 300 },
+  argTypes: { defaultWidth: argTypes.defaultWidth },
+  render: ({ defaultWidth }) =>
+    html` <div style="width:${defaultWidth}px;">
       <cds-fluid-textarea-skeleton></cds-fluid-textarea-skeleton>
     </div>`,
 };
 
 export const WithLayer = {
+  args,
+  argTypes,
   decorators: [withLayers],
   parameters: {
     layout: 'fullscreen',
   },
-  render: () => html`
-    <cds-fluid-textarea
-      placeholder="Placeholder text"
-      label="Text Area label"
-      helper-text="Optional helper text">
-    </cds-fluid-textarea>
+  render: ({ defaultWidth, ...storyArgs }) => html`
+    <div style="width:${defaultWidth}px;">${renderTextArea(storyArgs)}</div>
   `,
 };
 
 export const DefaultWithToggletip = {
-  render: () => html`
-    <div style="width:300px;">
-      <cds-fluid-textarea placeholder="Placeholder text">
-        <cds-toggletip slot="label-text" alignment="top-left" autoAlign="true">
-          Toggletip label
-          <p slot="body-text">Additional field information here.</p>
-        </cds-toggletip>
-      </cds-fluid-textarea>
+  args,
+  argTypes,
+  parameters: { controls: { exclude: ['label'] } },
+  render: ({ defaultWidth, ...textAreaArgs }) => html`
+    <div style="width:${defaultWidth}px;">
+      ${renderTextArea(
+        textAreaArgs,
+        html`
+          <cds-toggletip
+            slot="label-text"
+            alignment="top-left"
+            autoAlign="true">
+            Toggletip label
+            <p slot="body-text">Additional field information here.</p>
+          </cds-toggletip>
+        `
+      )}
     </div>
   `,
 };

@@ -112,4 +112,13 @@ describe('cds-radio-button', () => {
 
     expect(input?.getAttribute('aria-readonly')).to.equal('true');
   });
+
+  it('should associate the label with the input via matching for/id', async () => {
+    const el = await fixture(basicRadioButton);
+    const input = el.shadowRoot.querySelector('input[type="radio"]');
+    const label = el.shadowRoot.querySelector('label');
+
+    expect(input?.id).to.exist;
+    expect(label?.getAttribute('for')).to.equal(input?.id);
+  });
 });

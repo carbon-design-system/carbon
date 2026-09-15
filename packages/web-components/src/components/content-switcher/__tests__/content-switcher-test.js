@@ -304,6 +304,26 @@ describe('cds-content-switcher', function () {
     expect(el.hasAttribute('icon')).to.be.true;
   });
 
+  it('should add icon-tooltip class to the tooltip element of an icon-only item', async () => {
+    const el = await fixture(html`
+      <cds-content-switcher>
+        <cds-content-switcher-item
+          icon
+          value="icon1"
+          aria-label="Notifications">
+          <svg aria-hidden="true" viewBox="0 0 16 16"></svg>
+        </cds-content-switcher-item>
+      </cds-content-switcher>
+    `);
+
+    const item = el.querySelector('cds-content-switcher-item');
+    await item.updateComplete;
+
+    const tooltip = item.shadowRoot.querySelector('cds-tooltip');
+    expect(tooltip).to.exist;
+    expect(tooltip.classList.contains('cds--icon-tooltip')).to.be.true;
+  });
+
   it('should allow disabling items via attribute', async () => {
     const el = await fixture(html`
       <cds-content-switcher>

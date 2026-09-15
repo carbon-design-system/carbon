@@ -9,6 +9,7 @@ import { CaretLeft, CaretRight } from '@carbon/icons-react';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 import { IconButton } from '../IconButton';
+import { clamp } from '../../internal/clamp';
 import PropTypes from 'prop-types';
 import Select from '../Select';
 import SelectItem from '../SelectItem';
@@ -117,6 +118,23 @@ export interface PaginationProps
   pageSelectLabelText?: (total: number) => string;
 
   /**
+   * Provide a custom render function for the page-selection control.
+   * When provided, the default `<Select>` is replaced with the returned node.
+   */
+  renderPageSelect?: (props: {
+    /** The currently active page. */
+    currentPage: number;
+    /** Total number of pages derived from `totalItems` and `pageSize`. */
+    totalPages: number;
+    /** Current page size. */
+    currentPageSize: number;
+    /** The computed accessible label for the page-selection control. */
+    pageSelectLabelText: string;
+    /** Sets the active page. */
+    onSetPage: (page: number | string) => void;
+  }) => React.ReactNode;
+
+  /**
    * The number dictating how many items a page contains.
    */
   pageSize?: number;
@@ -129,7 +147,7 @@ export interface PaginationProps
   /**
    * The choices for `pageSize`.
    */
-  pageSizes: number[] | PaginationPageSize[];
+  pageSizes?: Array<number | PaginationPageSize>;
 
   /**
    * The translatable text showing the current page.
@@ -137,7 +155,8 @@ export interface PaginationProps
   pageText?: (page: number, pagesUnknown?: boolean) => string;
 
   /**
-   * `true` if the total number of items is unknown.
+   * `true` when the total number of pages is unknown. Hides the page selection
+   * control.
    */
   pagesUnknown?: boolean;
 
@@ -152,16 +171,16 @@ export interface PaginationProps
   totalItems?: number;
 }
 
-const isPaginationPageSizeArray = (
+const mapPageSizesToObject = (
   sizes: PaginationProps['pageSizes']
-): sizes is PaginationPageSize[] =>
-  typeof sizes[0] === 'object' && sizes[0] !== null;
+): PaginationPageSize[] | undefined =>
+  sizes && sizes.length
+    ? sizes.map((size) =>
+        typeof size === 'object' ? size : { text: String(size), value: size }
+      )
+    : undefined;
 
-const mapPageSizesToObject = (sizes: PaginationProps['pageSizes']) => {
-  if (isPaginationPageSizeArray(sizes)) return sizes;
-
-  return sizes.map((size) => ({ text: String(size), value: size }));
-};
+const DEFAULT_PAGE_SIZE = 10;
 
 function renderSelectItems(total) {
   let counter = 1;
@@ -175,17 +194,18 @@ function renderSelectItems(total) {
   return itemArr;
 }
 
-const getPageSize = (pageSizes: PaginationPageSize[], pageSize?: number) => {
-  if (typeof pageSize !== 'undefined') {
-    const hasSize = pageSizes.find((size) => {
-      return pageSize === size.value;
-    });
-
-    if (hasSize) {
-      return pageSize;
-    }
+const getPageSize = (
+  pageSizes: PaginationPageSize[] | undefined,
+  pageSize?: number
+): number => {
+  if (!pageSizes) {
+    const resolved = pageSize ?? DEFAULT_PAGE_SIZE;
+    return resolved > 0 ? resolved : DEFAULT_PAGE_SIZE;
   }
-  return pageSizes[0].value;
+  const hasSize =
+    typeof pageSize !== 'undefined' &&
+    pageSizes.some((size) => pageSize === size.value);
+  return hasSize ? pageSize : pageSizes[0].value;
 };
 
 // eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
@@ -211,6 +231,7 @@ const Pagination = React.forwardRef(
         `Page of ${total} ${total === 1 ? 'page' : 'pages'}`,
       page: controlledPage = 1,
       pageInputDisabled,
+      renderPageSelect,
       pageSize: controlledPageSize,
       pageSizeInputDisabled,
       pageSizes: controlledPageSizes,
@@ -269,7 +290,16 @@ const Pagination = React.forwardRef(
       [`${prefix}--pagination__button--forward`]: true,
       [`${prefix}--pagination__button--no-index`]: forwardButtonDisabled,
     });
-    const selectItems = renderSelectItems(totalPages);
+    const selectItems = renderPageSelect ? [] : renderSelectItems(totalPages);
+    const pageSelectNode = pagesUnknown
+      ? null
+      : (renderPageSelect?.({
+          currentPage: page,
+          totalPages,
+          currentPageSize: pageSize,
+          pageSelectLabelText: pageSelectLabelText(totalPages),
+          onSetPage: handleSetPage,
+        }) ?? null);
 
     const focusMap = {
       backward: backBtnRef,
@@ -305,10 +335,15 @@ const Pagination = React.forwardRef(
     }, [controlledPage]);
 
     useEffect(() => {
-      if (
-        typeof prevControlledPageSizes === 'undefined' ||
-        isEqual(prevControlledPageSizes, normalizedControlledPageSizes)
-      ) {
+      if (isEqual(prevControlledPageSizes, normalizedControlledPageSizes)) {
+        return;
+      }
+
+      if (!normalizedControlledPageSizes) {
+        const nextPageSize = getPageSize(undefined, controlledPageSize);
+
+        setPageSizes(undefined);
+        setPageSize(nextPageSize);
         return;
       }
 
@@ -411,6 +446,18 @@ const Pagination = React.forwardRef(
       }
     }
 
+    function handleSetPage(nextPage: number | string) {
+      if (disabled || pageInputDisabled) return;
+      const numericPage = Number(nextPage);
+      if (!Number.isInteger(numericPage)) return;
+      const clamped = clamp(numericPage, 1, totalPages);
+      if (clamped === page) return;
+      setPage(clamped);
+      if (onChange) {
+        onChange({ page: clamped, pageSize });
+      }
+    }
+
     function incrementPage() {
       const nextPage = page + 1;
       setPage(nextPage);
@@ -455,31 +502,38 @@ const Pagination = React.forwardRef(
 
     return (
       <div className={className} ref={ref} {...rest}>
-        <div className={`${prefix}--pagination__left`}>
-          <label
-            id={`${prefix}-pagination-select-${inputId}-count-label`}
-            className={`${prefix}--pagination__text`}
-            htmlFor={`${prefix}-pagination-select-${inputId}`}>
-            {itemsPerPageText}
-          </label>
-          <Select
-            id={`${prefix}-pagination-select-${inputId}`}
-            className={`${prefix}--select__item-count`}
-            labelText=""
-            hideLabel
-            noLabel
-            inline
-            onChange={handleSizeChange}
-            disabled={pageSizeInputDisabled || disabled}
-            value={pageSize}>
-            {pageSizes.map((sizeObj) => (
-              <SelectItem
-                key={sizeObj.value}
-                value={sizeObj.value}
-                text={String(sizeObj.text)}
-              />
-            ))}
-          </Select>
+        <div
+          className={cx(`${prefix}--pagination__left`, {
+            [`${prefix}--pagination__left--no-sizer`]: !pageSizes,
+          })}>
+          {pageSizes && (
+            <>
+              <label
+                id={`${prefix}-pagination-select-${inputId}-count-label`}
+                className={`${prefix}--pagination__text`}
+                htmlFor={`${prefix}-pagination-select-${inputId}`}>
+                {itemsPerPageText}
+              </label>
+              <Select
+                id={`${prefix}-pagination-select-${inputId}`}
+                className={`${prefix}--select__item-count`}
+                labelText=""
+                hideLabel
+                noLabel
+                inline
+                onChange={handleSizeChange}
+                disabled={pageSizeInputDisabled || disabled}
+                value={pageSize}>
+                {pageSizes.map((sizeObj) => (
+                  <SelectItem
+                    key={sizeObj.value}
+                    value={sizeObj.value}
+                    text={String(sizeObj.text)}
+                  />
+                ))}
+              </Select>
+            </>
+          )}
           <span
             className={`${prefix}--pagination__text ${prefix}--pagination__items-count`}>
             {pagesUnknown || !totalItems
@@ -493,7 +547,11 @@ const Pagination = React.forwardRef(
                 )}
           </span>
         </div>
-        <div className={`${prefix}--pagination__right`}>
+        <div
+          className={cx(`${prefix}--pagination__right`, {
+            [`${prefix}--pagination__right--no-content`]:
+              !pagesUnknown && !!renderPageSelect,
+          })}>
           {pagesUnknown ? (
             <span
               className={`${prefix}--pagination__text ${prefix}--pagination__page-text ${prefix}--pagination__unknown-pages-text`}>
@@ -501,20 +559,26 @@ const Pagination = React.forwardRef(
             </span>
           ) : (
             <>
-              <Select
-                id={`${prefix}-pagination-select-${inputId}-right`}
-                className={`${prefix}--select__page-number`}
-                labelText={pageSelectLabelText(totalPages)}
-                inline
-                hideLabel
-                onChange={handlePageInputChange}
-                value={page}
-                key={page}
-                disabled={pageInputDisabled || disabled}>
-                {selectItems}
-              </Select>
+              {renderPageSelect ? (
+                pageSelectNode
+              ) : (
+                <Select
+                  id={`${prefix}-pagination-select-${inputId}-right`}
+                  className={`${prefix}--select__page-number`}
+                  labelText={pageSelectLabelText(totalPages)}
+                  inline
+                  hideLabel
+                  onChange={handlePageInputChange}
+                  value={page}
+                  key={page}
+                  disabled={pageInputDisabled || disabled}>
+                  {selectItems}
+                </Select>
+              )}
               <span className={`${prefix}--pagination__text`}>
-                {pageRangeText(page, totalPages)}
+                {pageSelectNode == null && renderPageSelect
+                  ? `${page} ${pageRangeText(page, totalPages)}`
+                  : pageRangeText(page, totalPages)}
               </span>
             </>
           )}
@@ -644,6 +708,12 @@ Pagination.propTypes = {
   pageSelectLabelText: PropTypes.func,
 
   /**
+   * Provide a custom render function for the page-selection control.
+   * When provided, the default `<Select>` is replaced with the returned node.
+   */
+  renderPageSelect: PropTypes.func,
+
+  /**
    * The number dictating how many items a page contains.
    */
   pageSize: PropTypes.number,
@@ -656,15 +726,15 @@ Pagination.propTypes = {
   /**
    * The choices for `pageSize`.
    */
-  pageSizes: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.number.isRequired),
-    PropTypes.arrayOf(
+  pageSizes: PropTypes.arrayOf(
+    PropTypes.oneOfType([
+      PropTypes.number,
       PropTypes.shape({
         text: PropTypes.string.isRequired,
         value: PropTypes.number.isRequired,
-      }).isRequired
-    ),
-  ]).isRequired,
+      }),
+    ])
+  ),
 
   /**
    * The translatable text showing the current page.

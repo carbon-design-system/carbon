@@ -26,14 +26,14 @@ const sizes = {
 const args = {
   defaultWidth: 300,
   disabled: false,
-  helperText: 'Optional help text',
+  helperText: 'Use at least 8 characters',
   hideLabel: false,
   hidePasswordLabel: 'Hide password',
   inline: false,
   invalid: false,
-  invalidText: 'Error message goes here',
-  labelText: 'Text input label',
-  placeholder: 'Placeholder text',
+  invalidText: 'Password must be at least 8 characters',
+  labelText: 'Password',
+  placeholder: 'Enter your password',
   readonly: false,
   showPasswordLabel: 'Show password',
   size: INPUT_SIZE.MEDIUM,
@@ -42,8 +42,7 @@ const args = {
   type: 'password',
   value: '',
   warn: false,
-  warnText:
-    'Warning message that is really long can wrap to more lines but should not be excessively long.',
+  warnText: 'Password strength is low',
 };
 
 const argTypes = {
@@ -88,6 +87,9 @@ const argTypes = {
     control: 'text',
     description:
       'Provide the text that will be read by a screen reader when visiting this control',
+  },
+  onInput: {
+    action: 'input',
   },
   placeholder: {
     control: 'text',
@@ -139,8 +141,6 @@ const argTypes = {
 };
 
 export const Default = {
-  args,
-  argTypes,
   render: ({
     defaultWidth,
     disabled,
@@ -151,6 +151,7 @@ export const Default = {
     invalid,
     invalidText,
     labelText,
+    onInput,
     placeholder,
     readonly,
     showPasswordLabel,
@@ -179,9 +180,10 @@ export const Default = {
         tooltip-alignment="${ifDefined(tooltipAlignment)}"
         tooltip-position="${ifDefined(tooltipPosition)}"
         type="${ifDefined(type)}"
-        value="${ifDefined(value)}"
+        .value="${ifDefined(value)}"
         ?warn="${ifDefined(warn)}"
-        warn-text="${ifDefined(warnText)}">
+        warn-text="${ifDefined(warnText)}"
+        @input="${onInput}">
       </cds-password-input>
     </div>
   `,
@@ -190,4 +192,6 @@ export const Default = {
 export default {
   title: 'Components/Password Input',
   actions: { argTypesRegex: '^on.*' },
+  args,
+  argTypes,
 };

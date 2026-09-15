@@ -28,11 +28,22 @@ import '../select/index';
 import '../textarea/index';
 
 const args = {
+  invalid: false,
+  legendId: 'form-group-1',
   legendText: 'FormGroup Legend',
   message: false,
+  messageText: 'Form group message',
 };
 
 const argTypes = {
+  invalid: {
+    control: 'boolean',
+    description: 'Specify whether the form group is invalid.',
+  },
+  legendId: {
+    control: 'text',
+    description: 'Provide the id used to label the fieldset.',
+  },
   legendText: {
     control: 'text',
     description: 'Provide the text to be rendered inside of the fieldset.',
@@ -52,10 +63,12 @@ export const Default = {
   args,
   argTypes,
   render: (args) => {
-    const { legendText, message, messageText } = args ?? {};
+    const { invalid, legendId, legendText, message, messageText } = args ?? {};
 
     return html`
       <cds-form-group
+        ?invalid="${invalid}"
+        legend-id="${ifDefined(legendId)}"
         legend-text="${ifDefined(legendText)}"
         ?message="${message}"
         message-text="${ifDefined(messageText)}">
@@ -150,6 +163,10 @@ export const _WithAILabel = {
     disabled: false,
     invalid: false,
     invalidText: 'Error message goes here',
+    legendId: 'form-group-ai-label',
+    legendText: 'AI-enabled fields',
+    message: false,
+    messageText: 'Form group message',
     warn: false,
     warnText:
       'Warning message that is really long can wrap to more lines but should not be excessively long.',
@@ -165,6 +182,18 @@ export const _WithAILabel = {
     invalidText: {
       control: 'text',
     },
+    legendId: {
+      control: 'text',
+    },
+    legendText: {
+      control: 'text',
+    },
+    message: {
+      control: 'boolean',
+    },
+    messageText: {
+      control: 'text',
+    },
     warn: {
       control: 'boolean',
     },
@@ -176,12 +205,27 @@ export const _WithAILabel = {
     },
   },
   render: (args) => {
-    const { disabled, invalid, invalidText, warn, warnText, revert } =
-      args ?? {};
+    const {
+      disabled,
+      invalid,
+      invalidText,
+      legendId,
+      legendText,
+      message,
+      messageText,
+      warn,
+      warnText,
+      revert,
+    } = args ?? {};
 
     return html`
       <div style="width: 400px">
-        <cds-form-group>
+        <cds-form-group
+          ?invalid="${invalid}"
+          legend-id="${ifDefined(legendId)}"
+          legend-text="${ifDefined(legendText)}"
+          ?message="${message}"
+          message-text="${ifDefined(messageText)}">
           <cds-stack gap="7">
             <cds-form-item>
               <cds-number-input

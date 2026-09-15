@@ -1,11 +1,16 @@
 /**
- * Copyright IBM Corp. 2020, 2025
+ * Copyright IBM Corp. 2020, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useEffect, useRef, type ElementType } from 'react';
+import React, {
+  useEffect,
+  useRef,
+  type ComponentProps,
+  type ElementType,
+} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { OverflowMenuVertical } from '@carbon/icons-react';
@@ -25,7 +30,7 @@ import { mapPopoverAlign } from '../../../tools/mapPopoverAlign';
 
 const defaultSize = 'md';
 
-interface OverflowMenuProps {
+export interface OverflowMenuProps extends ComponentProps<'div'> {
   /**
    * **Experimental**: Will attempt to automatically align the floating element
    * to avoid collisions with the viewport and being clipped by ancestor
@@ -180,7 +185,8 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
       {
         [`${prefix}--overflow-menu--open`]: open,
       },
-      size !== defaultSize && `${prefix}--overflow-menu--${size}`
+      size !== defaultSize && `${prefix}--overflow-menu--${size}`, // TODO: V12 - Remove this class
+      size !== defaultSize && `${prefix}--layout--size-${size}`
     );
 
     const floatingRef = mergeRefs(triggerRef, refs.setReference);

@@ -1,0 +1,17 @@
+//
+// Copyright IBM Corp. 2023, 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@forward 'coachmark';
+@forward 'coachmark-beacon';
+@forward 'coachmark-tagline';
+@use 'coachmark';
+@use 'coachmark-beacon';
+@use 'coachmark-tagline';
+
+@include coachmark.coachmark;
+@include coachmark-beacon.coachmark-beacon;
+@include coachmark-tagline.coachmark-tagline;

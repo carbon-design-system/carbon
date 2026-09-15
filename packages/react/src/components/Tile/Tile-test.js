@@ -98,11 +98,23 @@ describe('Tile', () => {
       expect(screen.getByTestId('test')).toBeInTheDocument();
     });
 
-    it('should respect decorator prop', () => {
+    it('should respect decorator prop', async () => {
+      const onClick = jest.fn();
       render(
-        <ClickableTile decorator={<AILabel />}>Default tile</ClickableTile>
+        <ClickableTile href="/" decorator={<AILabel />} onClick={onClick}>
+          Default tile
+        </ClickableTile>
       );
-      expect(document.querySelector(`.${prefix}--cds--ai-label`));
+      const aiLabel = screen.getByRole('button', {
+        name: 'AI Show information',
+      });
+      const tile = screen.getByRole('link');
+
+      expect(aiLabel).toBeInTheDocument();
+      expect(tile).not.toContainElement(aiLabel);
+
+      await userEvent.click(aiLabel);
+      expect(onClick).not.toHaveBeenCalled();
     });
 
     it('should respect deprecated slug prop', () => {
@@ -182,6 +194,32 @@ describe('Tile', () => {
   });
 
   describe('Multi Select', () => {
+    it('should not allow interactive content in children', () => {
+      const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+      expect(() => {
+        render(
+          <SelectableTile id="tile-1">
+            Default tile <button type="button">Help</button>
+          </SelectableTile>
+        );
+      }).toThrow(
+        'The SelectableTile component `children` prop must have no interactive content'
+      );
+
+      spy.mockRestore();
+    });
+
+    it('should allow non-interactive content in children', () => {
+      expect(() => {
+        render(
+          <SelectableTile id="tile-1">
+            Default tile <span>additional tile content</span>
+          </SelectableTile>
+        );
+      }).not.toThrow();
+    });
+
     it('does not invoke the click handler if SelectableTile is disabled', async () => {
       const onClick = jest.fn();
       render(
@@ -246,23 +284,65 @@ describe('Tile', () => {
       const aiLabel = screen.getByRole('button', {
         name: 'AI Show information',
       });
+      const tile = screen.getByRole('checkbox');
+
       expect(aiLabel).toBeInTheDocument();
-      const tile = container.firstChild;
+      expect(container.querySelector('label')).not.toContainElement(aiLabel);
+      expect(tile).not.toContainElement(aiLabel);
+
       await userEvent.click(aiLabel);
       expect(tile).not.toHaveClass(`${prefix}--tile--is-selected`);
     });
 
     it('should respect deprecated slug prop', () => {
       const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
-      render(
+      const { container } = render(
         <SelectableTile slug={<AILabel />} id="tile-1">
           Default tile
         </SelectableTile>
       );
-      expect(
-        screen.getByRole('button', { name: 'AI Show information' })
-      ).toBeInTheDocument();
+      const aiLabel = screen.getByRole('button', {
+        name: 'AI Show information',
+      });
+      const tile = screen.getByRole('checkbox');
+
+      expect(aiLabel).toBeInTheDocument();
+      expect(container.querySelector('label')).not.toContainElement(aiLabel);
+      expect(tile).not.toContainElement(aiLabel);
       spy.mockRestore();
+    });
+
+    it('should not render a title attribute when title prop is not provided', () => {
+      const { container } = render(
+        <SelectableTile id="tile-1">Default tile</SelectableTile>
+      );
+      expect(container.firstChild).not.toHaveAttribute('title');
+    });
+
+    it('should render the provided title attribute when title prop is passed', () => {
+      const { container } = render(
+        <SelectableTile id="tile-1" title="My tile">
+          Default tile
+        </SelectableTile>
+      );
+      expect(container.firstChild).toHaveAttribute('title', 'My tile');
+    });
+
+    it('should not give all tiles the same accessible name when title is omitted', () => {
+      render(
+        <div role="group" aria-label="selectable tiles">
+          <SelectableTile data-testid="tile-a" id="tile-1">
+            Tile 1
+          </SelectableTile>
+          <SelectableTile data-testid="tile-b" id="tile-2">
+            Tile 2
+          </SelectableTile>
+        </div>
+      );
+      const tileA = screen.getByTestId('tile-a');
+      const tileB = screen.getByTestId('tile-b');
+      expect(tileA).not.toHaveAttribute('title');
+      expect(tileB).not.toHaveAttribute('title');
     });
   });
 

@@ -143,6 +143,7 @@ class CDSPasswordInput extends CDSTextInput {
       warn,
       warnText,
       _handleInput: handleInput,
+      _handleChange: handleChange,
       _handleSlotChange: handleSlotChange,
     } = this;
 
@@ -311,7 +312,8 @@ class CDSPasswordInput extends CDSTextInput {
               ?required="${required}"
               type="${ifNonEmpty(type)}"
               .value="${this._value}"
-              @input="${handleInput}" />
+              @input="${handleInput}"
+              @change="${handleChange}" />
             <slot name="slug" @slotchange="${handleSlotChange}"></slot>
             <cds-tooltip
               align="${align}"

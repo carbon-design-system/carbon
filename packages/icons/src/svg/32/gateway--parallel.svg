@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <path id="gateway--parallel" d="M16,31c-.2559,0-.5117-.0977-.707-.293L1.293,16.707c-.3906-.3906-.3906-1.0234,0-1.4141L15.293,1.293c.3906-.3906,1.0234-.3906,1.4141,0l14,14c.3906.3906.3906,1.0234,0,1.4141l-14,14c-.1953.1953-.4512.293-.707.293ZM3.4141,16l12.5859,12.5859,12.5859-12.5859L16,3.4141,3.4141,16ZM17,21h-2v-4h-4v-2h4v-4h2v4h4v2h-4v4Z"/>
+  <rect id="Transparent_Rectangle" data-name="Transparent Rectangle" class="cls-1" width="32" height="32"/>
+</svg>

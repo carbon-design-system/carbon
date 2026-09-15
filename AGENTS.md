@@ -25,6 +25,14 @@ icons, pictograms, layout, motion, themes, type), and tooling.
   `docs/guides/`
 - The approach for delivering experimental, feature-flagged, "preview" code:
   `docs/experimental-code.md`, `docs/feature-flags.md`, `docs/preview-code.md`
+- Every code change that affects v12 behavior, including code exercised through
+  `enable-v12-release`, an individual `enable-v12-*` flag, or a related package
+  change, must meaningfully update `docs/migration/v12.md` in the same change.
+  Keep it accurate for a consumer or agent migrating from v11 to v12: update an
+  existing section when possible, document only consumer-visible behavior and
+  migration burden, and omit internal details or maintainer notes. Do not
+  duplicate flag or codemod metadata. See
+  `docs/working-with-v12.md#required-v12-migration-documentation`.
 - Linting, formatting, build and tests should all pass before committing
 - Before opening or reviewing a pull request (PR), follow the instructions:
   `docs/guides/reviewing-pull-requests.md`
@@ -42,6 +50,25 @@ icons, pictograms, layout, motion, themes, type), and tooling.
 - A detailed graph of packages and their relationships is generated from the
   build: `docs/generated/package-structure-graph.json`
 
+## Theme token lookup
+
+- All four theme token values and descriptions live in a single file:
+  `packages/themes/src/dtcg/themes.json`. Component tokens are in
+  `packages/themes/src/dtcg/components/`.
+- Tokens use nested JSON keys (e.g. `layer-accent-active-03` is
+  `layer.accent.active.03`), so search by key segments rather than flat token
+  names.
+- Each token carries per-theme values under `$extensions["carbon.themes"]`.
+  Entries are either a bare string alias (no alpha) or a `{ value, alpha }`
+  object. There is no per-file `$value` — look inside `carbon.themes` for the
+  value you need.
+- The generated `packages/themes/scss/generated/_themes.scss` shows all four
+  resolved hex values side-by-side but carries no descriptions and should not be
+  edited directly.
+- See `packages/themes/src/dtcg/README.md` for full details on: nested key
+  structure, dual-role nodes, the `carbon.themes` entry format, alpha modifier
+  tokens, component token format, and how to resolve palette references.
+
 ## Package-specific details
 
 - A dual-flagship model is followed for `@carbon/react` and
@@ -56,6 +83,10 @@ icons, pictograms, layout, motion, themes, type), and tooling.
 - `carbon-components` is a deprecated package that re-exports `@carbon/styles`
 - `carbon-components-react` is a deprecated package that re-exports
   `@carbon/react`
+- `@carbon/colors` color values are defined in
+  `packages/colors/src/dtcg/colors.json` (DTCG format). Do not edit generated
+  files under `packages/colors/js/generated/` or `packages/colors/scss/` — run
+  `yarn build` in that package to regenerate them.
 
 ## End user/practitioner guidance
 

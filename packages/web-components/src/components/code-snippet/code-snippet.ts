@@ -5,9 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 /**  eslint-disable @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452 */
-import { styleMap } from 'lit/directives/style-map.js';
 import { LitElement, html } from 'lit';
-import { property } from 'lit/decorators.js';
+import { property, query } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import ChevronDown16 from '@carbon/icons/es/chevron--down/16.js';
 import FocusMixin from '../../globals/mixins/focus';
@@ -48,6 +47,12 @@ const observeResize = (observer: ResizeObserver, elem: Element) => {
  */
 @customElement(`${prefix}-code-snippet`)
 class CDSCodeSnippet extends FocusMixin(LitElement) {
+  /**
+   * The code snippet container element.
+   */
+  @query(`.${prefix}--snippet-container`)
+  private _snippetContainer!: HTMLDivElement;
+
   /**
    * `true` to expand multi-line variant of code snippet.
    */
@@ -132,9 +137,7 @@ class CDSCodeSnippet extends FocusMixin(LitElement) {
    */
   private _handleScroll() {
     if (this) {
-      const codeContainerRef = this?.shadowRoot?.querySelector(
-        `.${prefix}--snippet-container`
-      );
+      const codeContainerRef = this._snippetContainer;
       const codeContentRef = codeContainerRef?.querySelector('pre');
       if (
         this.type === CODE_SNIPPET_TYPE.INLINE ||
@@ -177,9 +180,7 @@ class CDSCodeSnippet extends FocusMixin(LitElement) {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore
   private _resizeObserver = new ResizeObserver(() => {
-    const codeContainerRef = this.shadowRoot?.querySelector(
-      `.${prefix}--snippet-container`
-    );
+    const codeContainerRef = this._snippetContainer;
     const codeContentRef = codeContainerRef?.querySelector('code'); // PRE?
     const {
       type,
@@ -252,25 +253,25 @@ class CDSCodeSnippet extends FocusMixin(LitElement) {
   /**
    * Specify the maximum number of rows to be shown when in collapsed view
    */
-  @property()
+  @property({ type: Number })
   maxCollapsedNumberOfRows = 15;
 
   /**
    * Specify the maximum number of rows to be shown when in expanded view
    */
-  @property()
+  @property({ type: Number })
   maxExpandedNumberOfRows = 0;
 
   /**
    * Specify the minimum number of rows to be shown when in collapsed view
    */
-  @property()
+  @property({ type: Number })
   minCollapsedNumberOfRows = 3;
 
   /**
    * Specify the minimum number of rows to be shown when in expanded view
    */
-  @property()
+  @property({ type: Number })
   minExpandedNumberOfRows = 16;
 
   /**
@@ -325,6 +326,47 @@ class CDSCodeSnippet extends FocusMixin(LitElement) {
     } else {
       this.removeAttribute('expanded-code');
     }
+
+    const { _snippetContainer: container } = this;
+    if (!container) {
+      return;
+    }
+
+    if (this.type === CODE_SNIPPET_TYPE.MULTI) {
+      const {
+        maxExpandedNumberOfRows,
+        minExpandedNumberOfRows,
+        maxCollapsedNumberOfRows,
+        minCollapsedNumberOfRows,
+        _expandedCode: expandedCode,
+        _rowHeightInPixels: rowHeightInPixels,
+      } = this;
+
+      let maxHeight = '';
+      let minHeight = '';
+
+      if (expandedCode) {
+        if (maxExpandedNumberOfRows > 0) {
+          maxHeight = `${maxExpandedNumberOfRows * rowHeightInPixels}px`;
+        }
+        if (minExpandedNumberOfRows > 0) {
+          minHeight = `${minExpandedNumberOfRows * rowHeightInPixels}px`;
+        }
+      } else {
+        if (maxCollapsedNumberOfRows > 0) {
+          maxHeight = `${maxCollapsedNumberOfRows * rowHeightInPixels}px`;
+        }
+        if (minCollapsedNumberOfRows > 0) {
+          minHeight = `${minCollapsedNumberOfRows * rowHeightInPixels}px`;
+        }
+      }
+
+      container.style.maxHeight = maxHeight;
+      container.style.minHeight = minHeight;
+    } else {
+      container.style.maxHeight = '';
+      container.style.minHeight = '';
+    }
   }
 
   render() {
@@ -333,10 +375,6 @@ class CDSCodeSnippet extends FocusMixin(LitElement) {
       feedback,
       feedbackTimeout,
       hideCopyButton,
-      maxExpandedNumberOfRows,
-      minExpandedNumberOfRows,
-      maxCollapsedNumberOfRows,
-      minCollapsedNumberOfRows,
       type,
       wrapText,
       tooltipContent,
@@ -347,7 +385,6 @@ class CDSCodeSnippet extends FocusMixin(LitElement) {
       _handleScroll: handleScroll,
       _hasRightOverflow: hasRightOverflow,
       _hasLeftOverflow: hasLeftOverflow,
-      _rowHeightInPixels: rowHeightInPixels,
       _shouldShowMoreLessBtn: shouldShowMoreLessBtn,
     } = this;
 
@@ -392,29 +429,6 @@ class CDSCodeSnippet extends FocusMixin(LitElement) {
       `;
     }
 
-    const styles = {};
-    if (type === 'multi') {
-      if (expandedCode) {
-        if (maxExpandedNumberOfRows > 0) {
-          styles['max-height'] =
-            maxExpandedNumberOfRows * rowHeightInPixels + 'px';
-        }
-        if (minExpandedNumberOfRows > 0) {
-          styles['min-height'] =
-            minExpandedNumberOfRows * rowHeightInPixels + 'px';
-        }
-      } else {
-        if (maxCollapsedNumberOfRows > 0) {
-          styles['max-height'] =
-            maxCollapsedNumberOfRows * rowHeightInPixels + 'px';
-        }
-        if (minCollapsedNumberOfRows > 0) {
-          styles['min-height'] =
-            minCollapsedNumberOfRows * rowHeightInPixels + 'px';
-        }
-      }
-    }
-
     return html`
       <div
         role="${type === CODE_SNIPPET_TYPE.SINGLE ||
@@ -433,8 +447,8 @@ class CDSCodeSnippet extends FocusMixin(LitElement) {
           ? true
           : null}"
         aria-multiline="${type === CODE_SNIPPET_TYPE.MULTI ? true : null}"
-        @scroll="${(type === CODE_SNIPPET_TYPE.SINGLE && handleScroll) || null}"
-        style=${styleMap(styles)}>
+        @scroll="${(type === CODE_SNIPPET_TYPE.SINGLE && handleScroll) ||
+        null}">
         <pre
           @scroll="${(type === CODE_SNIPPET_TYPE.MULTI && handleScroll) ||
           null}"><code><slot></slot></code></pre>

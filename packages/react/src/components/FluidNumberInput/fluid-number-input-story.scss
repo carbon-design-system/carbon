@@ -1,0 +1,19 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/spacing';
+
+.fluid-number-input-story {
+  position: relative;
+}
+
+.fluid-number-input-story__toggletip {
+  position: absolute;
+  z-index: 2;
+  inset-block-start: 0.8125rem;
+  inset-inline-start: calc(3rem + spacing.$spacing-03);
+}

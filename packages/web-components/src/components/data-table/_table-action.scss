@@ -14,7 +14,6 @@
 @use '@carbon/styles/scss/components/search';
 @use '@carbon/styles/scss/components/data-table/data-table';
 @use '@carbon/styles/scss/components/data-table/action';
-@use '@carbon/styles/scss/layout' as *;
 @use '@carbon/styles/scss/utilities/layout';
 //
 // Table toolbar
@@ -67,9 +66,11 @@
   flex: auto;
 }
 
-:host(#{$prefix}-table-toolbar-search:hover) {
-  .#{$prefix}--search {
-    background-color: $field-hover;
+@media (any-hover: hover) {
+  :host(#{$prefix}-table-toolbar-search:hover) {
+    .#{$prefix}--search {
+      background-color: $field-hover;
+    }
   }
 }
 

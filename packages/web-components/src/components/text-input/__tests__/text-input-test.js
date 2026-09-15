@@ -6,6 +6,8 @@
  */
 
 import '@carbon/web-components/es/components/text-input/index.js';
+import '@carbon/web-components/es/components/ai-label/index.js';
+import '@carbon/web-components/es/components/slug/index.js';
 import { html, fixture, expect, oneEvent } from '@open-wc/testing';
 
 describe('cds-text-input', () => {
@@ -143,6 +145,23 @@ describe('cds-text-input', () => {
     );
     const event = await inputEvent;
     expect(event).to.exist;
+  });
+
+  it('should re-dispatch change event', async () => {
+    const el = await fixture(defaultInput);
+    const input = el.shadowRoot.querySelector('input');
+    const changeEvent = oneEvent(el, 'change');
+
+    input.value = 'text';
+    input.dispatchEvent(new Event('change', { bubbles: true }));
+
+    const event = await changeEvent;
+    expect(event).to.exist;
+    expect(event.composed).to.be.true;
+
+    expect(event.target).to.equal(el);
+    expect(event.target.value).to.equal('text');
+    expect(el.value).to.equal('text');
   });
 
   it('should reflect value set via attribute', async () => {
@@ -301,5 +320,153 @@ describe('cds-text-input', () => {
     const wrapper = el.shadowRoot.querySelector('.cds--text-input-wrapper');
     expect(wrapper.classList.contains('cds--text-input-wrapper--inline')).to.be
       .true;
+  });
+
+  it('should associate the label with the input via matching for/id', async () => {
+    const el = await fixture(defaultInput);
+    const label = el.shadowRoot.querySelector('label');
+    const input = el.shadowRoot.querySelector('input');
+
+    expect(input.id).to.exist;
+    expect(label.getAttribute('for')).to.equal(input.id);
+  });
+
+  it('should describe the input with the helper text', async () => {
+    const el = await fixture(html`
+      <cds-text-input
+        label="Text input label"
+        helper-text="Helpful info"></cds-text-input>
+    `);
+    const input = el.shadowRoot.querySelector('input');
+    const helper = el.shadowRoot.querySelector('.cds--form__helper-text');
+
+    expect(input.getAttribute('aria-describedby')).to.equal('helper-text');
+    expect(helper.id).to.equal('helper-text');
+  });
+
+  it('should not set aria-describedby when there is no helper text', async () => {
+    const el = await fixture(defaultInput);
+    const input = el.shadowRoot.querySelector('input');
+
+    expect(input.hasAttribute('aria-describedby')).to.be.false;
+  });
+
+  it('should describe the input with the validation message when invalid', async () => {
+    const el = await fixture(html`
+      <cds-text-input
+        label="Text input label"
+        helper-text="Helpful info"
+        invalid
+        invalid-text="Something is wrong"></cds-text-input>
+    `);
+    const input = el.shadowRoot.querySelector('input');
+    const errorText = el.shadowRoot.querySelector('.cds--form-requirement');
+
+    expect(input.getAttribute('aria-describedby')).to.equal('error-text');
+    expect(errorText.id).to.equal('error-text');
+  });
+
+  describe('AI label and slug slot (@query decorator)', () => {
+    it('should set ai-label attribute when cds-ai-label is slotted', async () => {
+      const el = await fixture(html`
+        <cds-text-input label-text="With AI">
+          <cds-ai-label slot="ai-label"></cds-ai-label>
+        </cds-text-input>
+      `);
+      await el.updateComplete;
+
+      expect(el.hasAttribute('ai-label')).to.be.true;
+    });
+
+    it('should resolve ai-label slot node via @query decorator', async () => {
+      const el = await fixture(html`
+        <cds-text-input label-text="With AI">
+          <cds-ai-label slot="ai-label"></cds-ai-label>
+        </cds-text-input>
+      `);
+      await el.updateComplete;
+
+      const slotNode = el.shadowRoot.querySelector("slot[name='ai-label']");
+      expect(slotNode).to.exist;
+    });
+
+    it('should resolve slug slot node via @query decorator', async () => {
+      const el = await fixture(html`
+        <cds-text-input label-text="With Slug">
+          <cds-slug slot="slug"></cds-slug>
+        </cds-text-input>
+      `);
+      await el.updateComplete;
+
+      const slotNode = el.shadowRoot.querySelector("slot[name='slug']");
+      expect(slotNode).to.exist;
+    });
+
+    it('should toggle cds--slug--revert class on ai-label slot when revert-active is set', async () => {
+      const el = await fixture(html`
+        <cds-text-input label-text="With AI">
+          <cds-ai-label slot="ai-label" revert-active></cds-ai-label>
+        </cds-text-input>
+      `);
+      await el.updateComplete;
+
+      const aiLabelSlot = el.shadowRoot.querySelector("slot[name='ai-label']");
+      expect(aiLabelSlot.classList.contains('cds--slug--revert')).to.be.true;
+    });
+
+    it('should not add cds--slug--revert to slug slot when only cds-slug is present (ai-label slot takes precedence in shadow DOM)', async () => {
+      // The ai-label slot element always exists in shadow DOM, so the else-branch
+      // for the slug slot is never reached when only cds-slug is slotted.
+      const el = await fixture(html`
+        <cds-text-input label-text="With Slug">
+          <cds-slug slot="slug" revert-active></cds-slug>
+        </cds-text-input>
+      `);
+      await el.updateComplete;
+
+      const slugSlot = el.shadowRoot.querySelector("slot[name='slug']");
+      expect(slugSlot.classList.contains('cds--slug--revert')).to.be.false;
+    });
+
+    it('should not set cds--slug--revert on ai-label slot when revert-active is absent', async () => {
+      const el = await fixture(html`
+        <cds-text-input label-text="With AI">
+          <cds-ai-label slot="ai-label"></cds-ai-label>
+        </cds-text-input>
+      `);
+      await el.updateComplete;
+
+      const aiLabelSlot = el.shadowRoot.querySelector("slot[name='ai-label']");
+      expect(aiLabelSlot.classList.contains('cds--slug--revert')).to.be.false;
+    });
+
+    it('should not have ai-label attribute without cds-ai-label', async () => {
+      const el = await fixture(html`
+        <cds-text-input label-text="Plain input"></cds-text-input>
+      `);
+      await el.updateComplete;
+
+      expect(el.hasAttribute('ai-label')).to.be.false;
+    });
+
+    it('should toggle cds--slug--revert on slug slot when ai-label slot node is absent', async () => {
+      const el = await fixture(html`
+        <cds-text-input label-text="With Slug">
+          <cds-slug slot="slug" revert-active></cds-slug>
+        </cds-text-input>
+      `);
+      await el.updateComplete;
+
+      // Remove the ai-label slot from shadow DOM so _slotAILabelNode returns null,
+      // forcing the else-branch in updated() to run for the slug slot.
+      const aiLabelSlot = el.shadowRoot.querySelector("slot[name='ai-label']");
+      aiLabelSlot.remove();
+
+      el.requestUpdate();
+      await el.updateComplete;
+
+      const slugSlot = el.shadowRoot.querySelector("slot[name='slug']");
+      expect(slugSlot.classList.contains('cds--slug--revert')).to.be.true;
+    });
   });
 });

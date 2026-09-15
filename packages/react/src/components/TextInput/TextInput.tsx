@@ -27,6 +27,7 @@ import { hasHelperText } from '../../internal/hasHelperText';
 import { Text } from '../Text';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
+import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
 
 type ExcludedAttributes = 'defaultValue' | 'id' | 'size' | 'value';
 
@@ -197,6 +198,7 @@ const TextInput = forwardRef<unknown, TextInputProps>(
     const { defaultValue, value } = rest;
 
     const inputRef = useRef<HTMLInputElement>(null);
+    const labelRef = useRef<HTMLLabelElement>(null);
     const mergedRef = useMergedRefs([ref, inputRef]);
 
     function getInitialTextCount(): number {
@@ -314,9 +316,14 @@ const TextInput = forwardRef<unknown, TextInputProps>(
       ) : null;
 
     const label = typeof labelText !== 'undefined' && labelText !== null && (
-      <Text as="label" htmlFor={id} className={labelClasses}>
+      <Text as="label" htmlFor={id} className={labelClasses} ref={labelRef}>
         {labelText}
       </Text>
+    );
+
+    useNoInteractiveChildren(
+      labelRef,
+      'The TextInput component `labelText` prop must have no interactive content'
     );
 
     const labelWrapper = (

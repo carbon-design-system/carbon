@@ -13,6 +13,7 @@ import React, {
   type PropsWithChildren,
 } from 'react';
 import {
+  PresenceHoldContext,
   usePresenceContext,
   type PresenceContext,
 } from '../../internal/usePresenceContext';
@@ -54,7 +55,9 @@ export const ModalPresence = ({
 
   return (
     <ModalPresenceContext.Provider value={contextValue}>
-      {children}
+      <PresenceHoldContext.Provider value={contextValue}>
+        {children}
+      </PresenceHoldContext.Provider>
     </ModalPresenceContext.Provider>
   );
 };

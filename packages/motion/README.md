@@ -50,6 +50,10 @@ do the following in your project:
 Both the `motion` function and mixin support passing in the name of the motion
 curve and the mode you want to work in.
 
+> **Build note:** Token values are generated at build time from
+> `src/dtcg/motion.json`. Run `yarn build` (or `npm run build`) once after
+> cloning so that `js/generated/` and `scss/generated/` are present.
+
 ### JavaScript
 
 If you're using `@carbon/motion` as a JavaScript dependency, we export our

@@ -89,6 +89,14 @@ const standardCustomElement = (
  * }
  * ```
  *
+ * @deprecated The `carbonElement` decorator is deprecated and will be removed in
+ *   v3. In v3, `@carbon/web-components` moves to pure component
+ *   classes (`static is = '${prefix}-name'`) with opt-in registration via
+ *   `defineCustomElement`, and this self-registering decorator is removed. If you
+ *   author your own custom elements with it, migrate to Lit's `customElement`
+ *   (`import { customElement } from 'lit/decorators.js'`). See the v3 migration
+ *   guide:
+ *   https://github.com/carbon-design-system/carbon/blob/main/docs/guides/cwc-v3-migration.md#the-carbonelement-decorator-is-removed
  * @category Decorator
  * @param tagName The tag name of the custom element to define.
  */

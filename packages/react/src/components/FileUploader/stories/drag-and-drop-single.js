@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -18,6 +18,7 @@ const ExampleDropContainerApp = (props) => {
   const [file, setFile] = useState();
   const uploaderButton = useRef(null);
   const uniqueId = useId();
+  const { disabled, size } = props;
   const handleDrop = (e) => {
     e.preventDefault();
   };
@@ -87,6 +88,8 @@ const ExampleDropContainerApp = (props) => {
   };
 
   const onAddFilesButton = (event, { addedFiles }) => {
+    // eslint-disable-next-line react/prop-types
+    props.onAddFiles?.(event, { addedFiles });
     const file = addedFiles;
 
     const newFile = [
@@ -109,13 +112,11 @@ const ExampleDropContainerApp = (props) => {
   };
 
   const labelClasses = classnames(`${prefix}--file--label`, {
-    // eslint-disable-next-line react/prop-types
-    [`${prefix}--file--label--disabled`]: props.disabled,
+    [`${prefix}--file--label--disabled`]: disabled,
   });
 
   const helperTextClasses = classnames(`${prefix}--label-description`, {
-    // eslint-disable-next-line react/prop-types
-    [`${prefix}--label-description--disabled`]: props.disabled,
+    [`${prefix}--label-description--disabled`]: disabled,
   });
 
   return (
@@ -139,15 +140,14 @@ const ExampleDropContainerApp = (props) => {
         )}>
         {file !== undefined && (
           <FileUploaderItem
-            disabled={props.disabled}
+            disabled={disabled}
             key={file.uuid}
             uuid={file.uuid}
             name={file.name}
             filesize={file.filesize}
             errorSubject="File size exceeds limit"
             errorBody="1 MB max file size. Select a new file and try again."
-            // eslint-disable-next-line react/prop-types
-            size={props.size}
+            size={size}
             status={file.status}
             iconDescription={file.iconDescription}
             invalid={file.invalid}

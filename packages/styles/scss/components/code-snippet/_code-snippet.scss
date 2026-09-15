@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2023
+// Copyright IBM Corp. 2016, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -44,12 +44,19 @@ $copy-btn-feedback: $background-inverse !default;
     color: $text-disabled;
   }
 
-  .#{$prefix}--snippet--disabled .#{$prefix}--snippet-btn--expand:hover,
-  .#{$prefix}--snippet--disabled .#{$prefix}--copy-btn,
-  .#{$prefix}--snippet--disabled .#{$prefix}--copy-btn:hover {
+  .#{$prefix}--snippet--disabled .#{$prefix}--copy-btn {
     background-color: $layer;
     color: $text-disabled;
     cursor: not-allowed;
+  }
+
+  @media (any-hover: hover) {
+    .#{$prefix}--snippet--disabled .#{$prefix}--snippet-btn--expand:hover,
+    .#{$prefix}--snippet--disabled .#{$prefix}--copy-btn:hover {
+      background-color: $layer;
+      color: $text-disabled;
+      cursor: not-allowed;
+    }
   }
 
   .#{$prefix}--snippet--disabled .#{$prefix}--snippet__icon,
@@ -76,8 +83,10 @@ $copy-btn-feedback: $background-inverse !default;
     color: $text-primary;
     cursor: pointer;
 
-    &:hover {
-      background-color: $layer-hover;
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: $layer-hover;
+      }
     }
 
     &:active {
@@ -133,15 +142,19 @@ $copy-btn-feedback: $background-inverse !default;
   .#{$prefix}--snippet--inline.#{$prefix}--snippet--no-copy {
     display: inline-block;
 
-    &:hover {
-      background-color: $layer;
-      cursor: auto;
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: $layer;
+        cursor: auto;
+      }
     }
   }
 
-  .#{$prefix}--snippet--light.#{$prefix}--snippet--inline.#{$prefix}--snippet--no-copy:hover {
-    background-color: $layer-hover;
-    cursor: auto;
+  @media (any-hover: hover) {
+    .#{$prefix}--snippet--light.#{$prefix}--snippet--inline.#{$prefix}--snippet--no-copy:hover {
+      background-color: $layer-hover;
+      cursor: auto;
+    }
   }
 
   // Single Line Snippet
@@ -297,8 +310,10 @@ $copy-btn-feedback: $background-inverse !default;
     padding-inline: 0;
   }
 
-  .#{$prefix}--snippet--inline.#{$prefix}--btn.#{$prefix}--btn--primary:hover {
-    color: $text-primary;
+  @media (any-hover: hover) {
+    .#{$prefix}--snippet--inline.#{$prefix}--btn.#{$prefix}--btn--primary:hover {
+      color: $text-primary;
+    }
   }
 
   // override multi copy btn styles
@@ -347,9 +362,11 @@ $copy-btn-feedback: $background-inverse !default;
     transition: $duration-moderate-01 motion(standard, productive);
   }
 
-  .#{$prefix}--snippet-btn--expand:hover {
-    background: $layer-hover;
-    color: $text-primary;
+  @media (any-hover: hover) {
+    .#{$prefix}--snippet-btn--expand:hover {
+      background: $layer-hover;
+      color: $text-primary;
+    }
   }
 
   .#{$prefix}--snippet-btn--expand:active {
@@ -377,12 +394,14 @@ $copy-btn-feedback: $background-inverse !default;
     background-color: $layer;
   }
 
-  .#{$prefix}--snippet--light.#{$prefix}--snippet--inline:hover,
-  .#{$prefix}--snippet--light .#{$prefix}--snippet-button:hover,
-  .#{$prefix}--snippet--light
-    .#{$prefix}--btn.#{$prefix}--snippet-btn--expand:hover,
-  .#{$prefix}--snippet--light .#{$prefix}--copy-btn:hover {
-    background-color: $layer-hover;
+  @media (any-hover: hover) {
+    .#{$prefix}--snippet--light.#{$prefix}--snippet--inline:hover,
+    .#{$prefix}--snippet--light .#{$prefix}--snippet-button:hover,
+    .#{$prefix}--snippet--light
+      .#{$prefix}--btn.#{$prefix}--snippet-btn--expand:hover,
+    .#{$prefix}--snippet--light .#{$prefix}--copy-btn:hover {
+      background-color: $layer-hover;
+    }
   }
 
   .#{$prefix}--snippet--light.#{$prefix}--snippet--inline:active,
