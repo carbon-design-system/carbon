@@ -12,6 +12,7 @@ import { INPUT_SIZE } from './defs';
 import View16 from '@carbon/icons/es/view/16.js';
 import FolderOpen16 from '@carbon/icons/es/folder--open/16.js';
 import Folders16 from '@carbon/icons/es/folders/16.js';
+import '../button';
 import './date-picker';
 import './date-picker-input-skeleton';
 import '../layer/index';
@@ -456,6 +457,55 @@ export const SingleWithCalendarWithLayer = {
           warn-text="${warnText}">
         </cds-date-picker-input>
       </cds-date-picker>
+    `;
+  },
+};
+
+// I need to remove this test before merge
+export const ControlledValueUpdateWhileOpen = {
+  render: () => {
+    const setValue = async (nextValue: string) => {
+      const datePicker = document.querySelector(
+        'cds-date-picker[data-controlled-value-update]'
+      ) as
+        | (HTMLElement & {
+            value: string;
+            open: boolean;
+            updateComplete: Promise<unknown>;
+          })
+        | null;
+
+      if (datePicker) {
+        datePicker.open = true;
+        await datePicker.updateComplete;
+        datePicker.value = nextValue;
+      }
+    };
+
+    return html`
+      <div style="display: grid; gap: 1rem; max-width: 20rem;">
+        <div style="display: flex; gap: 0.5rem;">
+          <cds-button
+            size="sm"
+            @mousedown="${(event: Event) => event.preventDefault()}"
+            @click="${() => setValue('2026-01-01')}">
+            Set January 1, 2026
+          </cds-button>
+          <cds-button
+            size="sm"
+            @mousedown="${(event: Event) => event.preventDefault()}"
+            @click="${() => setValue('2026-03-16')}">
+            Set March 16, 2026
+          </cds-button>
+        </div>
+        <cds-date-picker data-controlled-value-update value="2026-03-16">
+          <cds-date-picker-input
+            kind="single"
+            label-text="Date Picker label"
+            placeholder="mm/dd/yyyy">
+          </cds-date-picker-input>
+        </cds-date-picker>
+      </div>
     `;
   },
 };

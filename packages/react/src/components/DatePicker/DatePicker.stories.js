@@ -189,6 +189,52 @@ export const SingleWithCalendar = (args) => (
 
 SingleWithCalendar.argTypes = { ...sharedArgTypes };
 
+// I need to remove this test before merge
+export const ControlledValueUpdateWhileOpen = (args) => {
+  const [date, setDate] = useState('03/16/2026');
+
+  return (
+    <div>
+      <div style={{ display: 'flex', gap: '0.5rem', marginBlockEnd: '1rem' }}>
+        <Button
+          type="button"
+          kind="secondary"
+          onMouseDown={(event) => event.preventDefault()}
+          onClick={() => setDate('01/01/2026')}>
+          Set January 1, 2026
+        </Button>
+        <Button
+          type="button"
+          kind="secondary"
+          onMouseDown={(event) => event.preventDefault()}
+          onClick={() => setDate('03/16/2026')}>
+          Set March 16, 2026
+        </Button>
+      </div>
+      <DatePicker
+        datePickerType="single"
+        {...args}
+        value={date}
+        onChange={(selectedDates, dateStr, instance) => {
+          setDate(dateStr);
+          args.onChange?.(selectedDates, dateStr, instance);
+        }}>
+        <DatePickerInput
+          placeholder="mm/dd/yyyy"
+          labelText="Date Picker label"
+          id="date-picker-controlled-value-update"
+          size="md"
+          {...sharedArgs}
+          {...args}
+        />
+      </DatePicker>
+    </div>
+  );
+};
+
+ControlledValueUpdateWhileOpen.storyName = 'Controlled value update while open';
+ControlledValueUpdateWhileOpen.argTypes = { ...sharedArgTypes };
+
 export const RangeWithCalendar = (args) => {
   return (
     <DatePicker datePickerType="range" {...args}>
