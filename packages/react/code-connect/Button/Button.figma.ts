@@ -1,19 +1,15 @@
 // url=https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=1854-1776&mode=dev
-// source=https://github.com/carbon-design-system/carbon/blob/main/packages/web-components/src/components/button/index.ts
-// component=cds-button
+// source=https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Button/index.ts
+// component=Button
 
 /**
- * Copyright IBM Corp. 2026
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import figma from 'figma';
-import {
-  renderBooleanAttribute,
-  renderStringAttribute,
-} from '../template-helpers';
 
 const instance = figma.selectedInstance;
 
@@ -37,14 +33,12 @@ function createTemplate() {
     const size = getSize();
 
     return {
-      id: 'cds-button-skeleton',
-      imports: [
-        "import '@carbon/web-components/es/components/button/button-skeleton.js'",
-      ],
-      example: figma.code`<cds-button-skeleton${renderStringAttribute(
+      id: 'ButtonSkeleton',
+      imports: ["import { ButtonSkeleton } from '@carbon/react';"],
+      example: figma.code`<ButtonSkeleton${figma.helpers.react.renderProp(
         'size',
         size
-      )}></cds-button-skeleton>`,
+      )} />`,
       metadata: { nestable: true },
     };
   }
@@ -52,44 +46,53 @@ function createTemplate() {
   const disabled = instance.getEnum('State', {
     Disabled: true,
   });
-  const text = instance.getString('Button text');
-  const isIconOnly = instance.getEnum('Type', {
-    'Icon only': true,
-  });
-  const buttonText = isIconOnly ? '' : text;
-  const tooltipText = isIconOnly ? text : undefined;
+  const buttonText = instance.getString('Button text');
   const kind = instance.getEnum('Style', {
     Primary: 'primary',
     Secondary: 'secondary',
     Tertiary: 'tertiary',
     Ghost: 'ghost',
     'Danger primary': 'danger',
-    'Danger tertiary': 'danger-tertiary',
-    'Danger ghost': 'danger-ghost',
+    'Danger tertiary': 'danger--tertiary',
+    'Danger ghost': 'danger--ghost',
   });
   const size = getSize();
   const isExpressive = instance.getEnum('Size', {
     Expressive: true,
   });
-  const icon = instance.getInstanceSwap('Swap icon');
-  const renderedIcon = icon?.executeTemplate().example;
+  const hasIconOnly = instance.getEnum('Type', {
+    'Icon only': true,
+  });
+  const iconDescription = hasIconOnly ? buttonText : undefined;
+  const renderIcon = instance
+    .getInstanceSwap('Swap icon')
+    ?.executeTemplate().example;
 
   return {
-    id: 'cds-button',
-    imports: ["import '@carbon/web-components/es/components/button/button.js'"],
-    example: figma.code`<cds-button${renderBooleanAttribute(
+    id: 'Button',
+    imports: ["import { Button } from '@carbon/react';"],
+    example: figma.code`<Button${figma.helpers.react.renderProp(
       'disabled',
       disabled
-    )}${renderStringAttribute('kind', kind)}${renderStringAttribute(
+    )}${figma.helpers.react.renderProp(
+      'kind',
+      kind
+    )}${figma.helpers.react.renderProp(
       'size',
       size
-    )}${renderBooleanAttribute(
+    )}${figma.helpers.react.renderProp(
       'isExpressive',
       isExpressive
-    )}${renderStringAttribute(
-      'tooltip-text',
-      tooltipText
-    )}>${buttonText} ${renderedIcon}</cds-button>`,
+    )}${figma.helpers.react.renderProp(
+      'hasIconOnly',
+      hasIconOnly
+    )}${figma.helpers.react.renderProp(
+      'iconDescription',
+      iconDescription
+    )}${figma.helpers.react.renderProp(
+      'renderIcon',
+      renderIcon
+    )}>${figma.helpers.react.renderChildren(buttonText)}</Button>`,
     metadata: { nestable: true },
   };
 }

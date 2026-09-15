@@ -1,19 +1,15 @@
 // url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=17422-270657&t=Qm7ndWAwgu7d5Uxc-4
-// source=https://github.com/carbon-design-system/carbon/blob/main/packages/web-components/src/components/checkbox/checkbox-group.ts
-// component=cds-checkbox-group
+// source=https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/CheckboxGroup/CheckboxGroup.tsx
+// component=CheckboxGroup
 
 /**
- * Copyright IBM Corp. 2026
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import figma from 'figma';
-import {
-  renderBooleanAttribute,
-  renderStringAttribute,
-} from '../template-helpers';
 
 const instance = figma.selectedInstance;
 const children = instance
@@ -25,7 +21,7 @@ const helperText = instance.getBoolean('Helper message')
 const orientation = instance.getBoolean('Horizontal')
   ? 'horizontal'
   : undefined;
-const readonly = instance.getEnum('State', {
+const readOnly = instance.getEnum('State', {
   'Read-only': true,
 });
 const invalid = instance.getEnum('State', {
@@ -38,24 +34,28 @@ const warn = instance.getEnum('State', {
 const warnText = warn ? instance.getString('Warning text') : undefined;
 
 export default {
-  id: 'cds-checkbox-group',
-  imports: [
-    "import '@carbon/web-components/es/components/checkbox/checkbox-group.js'",
-  ],
-  example: figma.code`<cds-checkbox-group${renderStringAttribute(
+  id: 'CheckboxGroup',
+  imports: ["import { CheckboxGroup } from '@carbon/react';"],
+  example: figma.code`<CheckboxGroup legendText="Checkbox group label"${figma.helpers.react.renderProp(
     'orientation',
     orientation
-  )}${renderStringAttribute('helper-text', helperText)}${renderBooleanAttribute(
-    'readonly',
-    readonly
-  )}${renderBooleanAttribute('invalid', invalid)}${renderStringAttribute(
-    'invalid-text',
+  )}${figma.helpers.react.renderProp(
+    'helperText',
+    helperText
+  )}${figma.helpers.react.renderProp(
+    'readOnly',
+    readOnly
+  )}${figma.helpers.react.renderProp(
+    'invalid',
+    invalid
+  )}${figma.helpers.react.renderProp(
+    'invalidText',
     invalidText
-  )}${renderBooleanAttribute('warn', warn)}${renderStringAttribute(
-    'warn-text',
-    warnText
-  )} legend-text="Checkbox group label">
-  ${children}
-</cds-checkbox-group>`,
+  )}${figma.helpers.react.renderProp(
+    'warn',
+    warn
+  )}${figma.helpers.react.renderProp('warnText', warnText)}>
+  ${figma.helpers.react.renderChildren(children)}
+</CheckboxGroup>`,
   metadata: { nestable: true },
 };
