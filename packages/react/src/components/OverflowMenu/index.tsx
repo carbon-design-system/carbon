@@ -27,10 +27,7 @@ const OverflowMenu = forwardRef<HTMLDivElement, OverflowMenuProps>(
       // elements (v12 renders a div, v11 a button), so neither branch is
       // assignable from the shared v11-typed props. The v11 branch already
       // casts its ref for the same reason.
-      <OverflowMenuV12
-        {...(props as unknown as OverflowMenuV12Props)}
-        ref={ref}
-      />
+      <OverflowMenuV12 {...(props as OverflowMenuV12Props)} ref={ref} />
     ) : (
       <OverflowMenuV11
         {...(props as OverflowMenuV11Props)}
