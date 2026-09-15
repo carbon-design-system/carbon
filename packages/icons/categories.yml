@@ -689,6 +689,12 @@ categories:
           - carbon-for-salesforce
           - carbon--ui-builder
           - cloud-app
+          - content-navigator-edit-service--download
+          - content-navigator-edit-service--upload
+          - content-navigator-sync--error
+          - content navigator-sync--loading
+          - content-navigator-sync--paused
+          - content-navigator-sync--warning
           - edt-loop
           - ibm-cloud
           - ibm-partner-plus
@@ -774,6 +780,7 @@ categories:
         members:
           - ibm--ai-financial-instrument-sustainability-check
           - autoscaling
+          - beacon
           - binding--connector
           - block-storage
           - object-storage
@@ -1000,12 +1007,14 @@ categories:
           - portfolio--management
           - power-enterprise-pools-metered-capacity-integration
           - power-virtual-server-disaster-recovery-automation
+          - red-hat-ai-inference-on-ibm-cloud
           - red-hat-ai-instructlab-on-ibm-cloud
           - representation--textual
           - scis--control-tower
           - scis--transparent-supply
           - state--definition
           - state--exhibit
+          - stepzen--graph-server
           - use-case--include
           - view--definition
           - virtual-private-cloud--alt
@@ -1517,6 +1526,7 @@ categories:
           - mapping--hide
           - mapping--show
           - marginal
+          - markdown
           - math-curve
           - model-builder
           - model-builder--reference
@@ -2174,6 +2184,8 @@ categories:
           - vehicle--connected
           - vehicle--insights
           - vehicle--services
+          - view--matrix
+          - view--table
           - virtual-desktop
           - vlan
           - volume--block-storage
@@ -2656,6 +2668,7 @@ categories:
           - asset
           - asset--confirm
           - asset--digital-twin
+          - asset--edit
           - asset--view
           - asset-movement
           - at
