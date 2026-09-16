@@ -573,7 +573,7 @@ export type { OrderedListProps } from './components/OrderedList/OrderedList';
 // export type { OptionsTileProps } from './components/OptionsTile';
 
 //overflow menu
-export type { OverflowMenuProps } from './components/OverflowMenu/OverflowMenu';
+export type { OverflowMenuProps } from './components/OverflowMenu/index';
 export type { OverflowMenuItemProps } from './components/OverflowMenuItem/OverflowMenuItem';
 
 //page header
