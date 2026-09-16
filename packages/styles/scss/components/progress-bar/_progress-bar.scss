@@ -56,11 +56,11 @@
   }
 
   .#{$prefix}--progress-bar--big .#{$prefix}--progress-bar__track {
-    block-size: convert.to-rem(8px);
+    block-size: $spacing-03;
   }
 
   .#{$prefix}--progress-bar--small .#{$prefix}--progress-bar__track {
-    block-size: convert.to-rem(4px);
+    block-size: $spacing-02;
   }
 
   .#{$prefix}--progress-bar__bar {
