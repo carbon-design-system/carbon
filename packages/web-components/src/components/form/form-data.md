@@ -21,7 +21,7 @@ practical alternative until it was.
 
 ## Why it is being replaced
 
-This limitaion is no longer true. Form-associated custom elements are supported
+This limitation is no longer true. Form-associated custom elements are supported
 in every browser Carbon supports:
 
 | Browser | Form-associated custom elements |
