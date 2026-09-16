@@ -252,6 +252,65 @@ describe('cds-overflow-menu', () => {
     });
   });
 
+  it('should keep menu open for non-closing keys when slotted menu item content has focus', async () => {
+    const el = await fixture(html`
+      <cds-overflow-menu>
+        <span slot="tooltip-content">Options</span>
+        <cds-overflow-menu-body>
+          <cds-overflow-menu-item>
+            <span tabindex="0">Filter A</span>
+          </cds-overflow-menu-item>
+        </cds-overflow-menu-body>
+      </cds-overflow-menu>
+    `);
+    const menuBody = el.querySelector('cds-overflow-menu-body');
+    const slottedContent = menuBody.querySelector('[tabindex="0"]');
+
+    el.open = true;
+    menuBody.open = true;
+    await el.updateComplete;
+    await menuBody.updateComplete;
+    slottedContent.focus();
+
+    const event = new KeyboardEvent('keydown', {
+      key: 'Home',
+      bubbles: true,
+      composed: true,
+      cancelable: true,
+    });
+
+    menuBody.dispatchEvent(event);
+
+    expect(event.defaultPrevented).to.be.true;
+    expect(el.open).to.be.true;
+    expect(menuBody.open).to.be.true;
+  });
+
+  it('should close menu for closing keys when the menu item has focus', async () => {
+    const el = await fixture(basicOverflowMenu);
+    const menuBody = el.querySelector('cds-overflow-menu-body');
+    const menuItem = menuBody.querySelector('cds-overflow-menu-item');
+
+    el.open = true;
+    menuBody.open = true;
+    await el.updateComplete;
+    await menuBody.updateComplete;
+    menuItem.focus();
+
+    const event = new KeyboardEvent('keydown', {
+      key: 'Enter',
+      bubbles: true,
+      composed: true,
+      cancelable: true,
+    });
+
+    menuBody.dispatchEvent(event);
+
+    expect(event.defaultPrevented).to.be.true;
+    expect(el.open).to.be.false;
+    expect(menuBody.open).to.be.false;
+  });
+
   it('should close menu when a menu item is clicked', async () => {
     const el = await fixture(basicOverflowMenu);
     const menuBody = el.querySelector('cds-overflow-menu-body');
