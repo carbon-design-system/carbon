@@ -33,7 +33,7 @@
     justify-content: space-between;
     color: $text-primary;
     margin-block-end: $spacing-03;
-    min-inline-size: convert.to-rem(48px);
+    min-inline-size: $spacing-09;
   }
 
   .#{$prefix}--progress-bar__label-text {
@@ -47,7 +47,7 @@
     background-color: $border-subtle;
     block-size: convert.to-rem(8px);
     inline-size: 100%;
-    min-inline-size: convert.to-rem(48px);
+    min-inline-size: $spacing-09;
 
     @if enabled('enable-v12-release') {
       overflow: hidden;
@@ -78,7 +78,7 @@
     }
   }
 
-  .#{$prefix}--progress-bar__bar:dir(rtl) {
+  [dir='rtl'] .#{$prefix}--progress-bar__bar {
     transform-origin: 100% center;
   }
 
@@ -109,8 +109,9 @@
     }
   }
 
-  .#{$prefix}--progress-bar--indeterminate
-    .#{$prefix}--progress-bar__track:dir(rtl)::after {
+  [dir='rtl']
+    .#{$prefix}--progress-bar--indeterminate
+    .#{$prefix}--progress-bar__track::after {
     animation-name: #{$prefix}--progress-bar-indeterminate-rtl;
   }
 
