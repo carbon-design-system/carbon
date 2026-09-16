@@ -12,6 +12,7 @@
 @use '@carbon/styles/scss/utilities/convert' as *;
 @use '@carbon/styles/scss/utilities/layout' as *;
 @use '@carbon/styles/scss/utilities/ai-gradient' as *;
+@use '@carbon/styles/scss/utilities/high-contrast-mode' as *;
 @use '@carbon/styles/scss/components/slug/index' as *;
 
 :host(#{$prefix}-ai-label) {
@@ -38,6 +39,11 @@
       -56px 64px 64px -24px $ai-popover-shadow-outer-02;
     color: $text-primary;
     min-inline-size: to-rem(280px);
+
+    // The gradient is only background-image layers, which forced colors mode drops
+    @include high-contrast-mode {
+      background-color: Canvas;
+    }
   }
 
   .#{$prefix}--toggletip-actions {
