@@ -7,10 +7,11 @@
 
 @use 'mixins' as *;
 @use 'tokens' as *;
+@use '../../border-radius' as *;
 @use '../../breakpoint' as *;
 @use '../../colors' as *;
 @use '../../config' as *;
-@use '../../feature-flags';
+@use '../../feature-flags' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
@@ -29,6 +30,11 @@
 
   display: flex;
   block-size: auto;
+
+  @if enabled('enable-v12-release') {
+    border-radius: $border-radius-08;
+  }
+
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
   color: $text-inverse;
   inline-size: convert.to-rem(288px);
@@ -249,6 +255,17 @@
     margin-inline-start: auto;
     min-block-size: convert.to-rem(48px);
     min-inline-size: convert.to-rem(48px);
+
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-max;
+      block-size: convert.to-rem(32px);
+      inline-size: convert.to-rem(32px);
+      margin-block-start: $spacing-03;
+      margin-inline-end: $spacing-03;
+      min-block-size: convert.to-rem(32px);
+      min-inline-size: convert.to-rem(32px);
+    }
+
     transition:
       outline $transition-base,
       background-color $transition-base;
