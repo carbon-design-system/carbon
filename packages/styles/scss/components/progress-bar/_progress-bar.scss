@@ -45,7 +45,7 @@
   .#{$prefix}--progress-bar__track {
     position: relative;
     background-color: $border-subtle;
-    block-size: convert.to-rem(8px);
+    block-size: $spacing-03;
     inline-size: 100%;
     min-inline-size: $spacing-09;
 
