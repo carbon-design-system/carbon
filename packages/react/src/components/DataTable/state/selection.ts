@@ -5,4 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export const isSelectedRow = (row) => row.isSelected && !row.disabled;
+interface SelectableRow {
+  disabled?: boolean;
+  isSelected?: boolean;
+}
+
+export const isSelectedRow = (row: SelectableRow) =>
+  row.isSelected === true && !row.disabled;
