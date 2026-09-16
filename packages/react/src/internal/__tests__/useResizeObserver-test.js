@@ -25,8 +25,8 @@ describe('useResizeObserver', () => {
   let savedObserverCb;
   let observeMock;
   let disconnectMock;
-  const originalRequestAnimationFrame = window.requestAnimationFrame;
-  const originalCancelAnimationFrame = window.cancelAnimationFrame;
+  const originalRequestAnimationFrame = requestAnimationFrame;
+  const originalCancelAnimationFrame = cancelAnimationFrame;
 
   beforeEach(() => {
     observeMock = jest.fn();
@@ -43,8 +43,8 @@ describe('useResizeObserver', () => {
 
   afterEach(() => {
     jest.clearAllMocks();
-    window.requestAnimationFrame = originalRequestAnimationFrame;
-    window.cancelAnimationFrame = originalCancelAnimationFrame;
+    globalThis.requestAnimationFrame = originalRequestAnimationFrame;
+    globalThis.cancelAnimationFrame = originalCancelAnimationFrame;
   });
 
   /** Triggers resize from the saved resize observer callback */
@@ -130,11 +130,11 @@ describe('useResizeObserver', () => {
 
   it('coalesces multiple resize entries into one animation frame', () => {
     const animationFrameCallbacks = [];
-    window.requestAnimationFrame = jest.fn((callback) => {
+    globalThis.requestAnimationFrame = jest.fn((callback) => {
       animationFrameCallbacks.push(callback);
       return animationFrameCallbacks.length;
     });
-    window.cancelAnimationFrame = jest.fn();
+    globalThis.cancelAnimationFrame = jest.fn();
 
     const resizeFn = jest.fn();
     render(<ResizeTest onResize={resizeFn} />);
@@ -149,7 +149,7 @@ describe('useResizeObserver', () => {
       ]);
     });
 
-    expect(window.requestAnimationFrame).toHaveBeenCalledTimes(1);
+    expect(requestAnimationFrame).toHaveBeenCalledTimes(1);
     expect(resizeFn).not.toHaveBeenCalled();
 
     act(() => {
@@ -163,11 +163,11 @@ describe('useResizeObserver', () => {
 
   it('schedules a new animation frame after cleanup cancels a pending frame', () => {
     const animationFrameCallbacks = [];
-    window.requestAnimationFrame = jest.fn((callback) => {
+    globalThis.requestAnimationFrame = jest.fn((callback) => {
       animationFrameCallbacks.push(callback);
       return animationFrameCallbacks.length;
     });
-    window.cancelAnimationFrame = jest.fn();
+    globalThis.cancelAnimationFrame = jest.fn();
     observeMock.mockImplementation((element) => {
       savedObserverCb([
         { target: element, contentRect: { width: 200, height: 300 } },
@@ -181,7 +181,7 @@ describe('useResizeObserver', () => {
     );
 
     expect(disconnectMock).toHaveBeenCalledTimes(1);
-    expect(window.cancelAnimationFrame).toHaveBeenCalledWith(1);
-    expect(window.requestAnimationFrame).toHaveBeenCalledTimes(2);
+    expect(cancelAnimationFrame).toHaveBeenCalledWith(1);
+    expect(requestAnimationFrame).toHaveBeenCalledTimes(2);
   });
 });
