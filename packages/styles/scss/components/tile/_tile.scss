@@ -114,12 +114,14 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
     border: 0;
   }
 
-  @media (any-hover: hover) {
-    .#{$prefix}--tile--clickable:hover,
-    .#{$prefix}--tile--clickable:visited:hover {
-      color: $text-primary;
-      text-decoration: none;
-    }
+  // Not gated behind `any-hover: hover`: this normalizes the anchor styling that
+  // comes from the `cds--link` class on `ClickableTile`, rather than being a
+  // hover affordance. On touch devices a tap leaves a sticky `:hover`, so gating
+  // it would leave the tile text blue and underlined after every tap.
+  .#{$prefix}--tile--clickable:hover,
+  .#{$prefix}--tile--clickable:visited:hover {
+    color: $text-primary;
+    text-decoration: none;
   }
 
   .#{$prefix}--tile--clickable:active,
