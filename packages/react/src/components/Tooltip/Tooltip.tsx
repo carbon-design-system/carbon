@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -107,12 +107,13 @@ interface TooltipBaseProps {
 export type TooltipProps<T extends React.ElementType> =
   PolymorphicComponentPropWithRef<T, TooltipBaseProps>;
 
-type TooltipComponent = <T extends React.ElementType = typeof Popover>(
-  props: TooltipProps<T>
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-) => React.ReactElement | any;
+type TooltipComponent = {
+  <T extends React.ElementType = typeof Popover>(
+    props: TooltipProps<T>
+  ): React.ReactNode;
+  displayName?: string;
+};
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const Tooltip: TooltipComponent = React.forwardRef(
   <T extends React.ElementType = typeof Popover>(
     {
@@ -314,6 +315,8 @@ const Tooltip: TooltipComponent = React.forwardRef(
     );
   }
 );
+
+Tooltip.displayName = 'Tooltip';
 
 // @ts-expect-error - `propTypes` isn't typed.
 Tooltip.propTypes = {
