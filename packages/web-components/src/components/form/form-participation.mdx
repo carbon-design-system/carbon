@@ -1,0 +1,108 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+import meta from './form-participation.stories';
+import * as FormParticipationStories from './form-participation.stories';
+
+<Meta of={meta} />
+
+# Form participation
+
+Preview form components participate in a `<form>` natively, through
+[`ElementInternals`](https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals),
+instead of the deprecated `formdata` event. The browser treats them as real form
+controls.
+
+> **Preview:** these tags exist to gather feedback before v3. They are removed
+> in v3, when the behavior moves onto the canonical tags.
+
+## The API change
+
+There are only two changes. Import the `next` barrel, and use the preview tag:
+
+```diff
+- import '@carbon/web-components/es/components/text-input/index.js';
++ import '@carbon/web-components/es/components/text-input/next/index.js';
+```
+
+```diff
+- <cds-text-input name="email"></cds-text-input>
++ <cds-preview-text-input name="email"></cds-preview-text-input>
+```
+
+Properties, events, slots and styling are unchanged — the preview components
+subclass the v2 components rather than reimplementing them. Child elements stay
+as they are, so a `cds-preview-select` still holds `cds-select-item` children.
+Importing a `next` barrel registers everything its v2 barrel does, so swapping
+the import is a drop-in.
+
+## What you get
+
+<Canvas of={FormParticipationStories.Default} />
+
+This is the [Components/Form](/story/components-form--default) story, rebuilt on
+the preview components. Same layout, same controls, same markup — the only
+difference is the tag names and what the browser does with them.
+
+### What the port deletes
+
+The v2 story validates by hand before submitting, because `required` lives on
+the host while the real `<input>` is in shadow DOM:
+
+```diff
+- const hasInvalidRequired = Array.from(
+-   document.querySelectorAll('[required]')
+- ).some((el) => {
+-   const input = el.shadowRoot?.querySelector('input');
+-   return input ? !input.reportValidity() : false;
+- });
+- if (hasInvalidRequired) return;
+  form.requestSubmit();
+```
+
+`requestSubmit()` runs constraint validation itself once the controls are real
+form controls, so the loop goes away. The Password field carries both `required`
+and a `pattern`, and both are enforced — submit with a weak password and the
+browser blocks it and fires a native `invalid` event, which you can watch in the
+**Actions** tab.
+
+Values reach the form the same way: no `formdata` listener, no manual
+collection. Submit and the entries appear below the form.
+
+### Not yet ported
+
+Two controls from the v2 story are missing here. `cds-date-picker` has a
+preview, but it is the Temporal rewrite with a different API rather than a form
+participation subclass, so it needs porting rather than renaming.
+`cds-file-uploader` has no preview and does not participate in forms in v2
+either.
+
+## `cds-button` cannot submit these forms
+
+The examples use native `<button type="submit">` rather than `cds-button`.
+`cds-button` renders its `<button>` inside shadow DOM and is not
+form-associated, so it cannot reach the surrounding `<form>` — clicking it
+submits nothing. Form participation on the inputs does not help with this; the
+button needs the same treatment.
+
+## Available preview tags
+
+`cds-preview-text-input`, `cds-preview-textarea`, `cds-preview-number-input`,
+`cds-preview-password-input`, `cds-preview-checkbox`, `cds-preview-select`,
+`cds-preview-dropdown`, `cds-preview-multi-select`, `cds-preview-combo-box`,
+`cds-preview-radio-button-group`, `cds-preview-search`, `cds-preview-slider`,
+`cds-preview-time-picker`, `cds-preview-time-picker-select`,
+`cds-preview-date-picker`, and the `cds-preview-fluid-*` variants.
+
+## Notes
+
+- `disabled` reports only the element's **own** attribute, matching
+  `HTMLInputElement.disabled`. An element inside a disabled `<fieldset>` reports
+  `false` and matches `:disabled` instead.
+- `cds-preview-multi-select` keeps the v2 joined wire format (`name=a,b`) rather
+  than one entry per selection.
+- Each control also exposes the standard `form`, `labels`, `validity`,
+  `validationMessage`, `willValidate`, `checkValidity()` and `reportValidity()`
+  surface.
+
+For the full picture, including what changes when this becomes the default in
+v3, see the
+[v3 migration guide](https://github.com/carbon-design-system/carbon/blob/main/docs/guides/cwc-v3-migration.md#form-participation-moves-to-elementinternals).
