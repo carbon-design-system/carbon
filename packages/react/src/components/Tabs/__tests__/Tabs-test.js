@@ -1604,6 +1604,180 @@ describe('Tab', () => {
         }
       });
     });
+
+    describe('long press scroll behaviour', () => {
+      /**
+       * Helper that stubs requestAnimationFrame so that only the very first
+       * call executes its callback synchronously (giving us one tick of the
+       * scroll loop) and every subsequent call just returns an id without
+       * running.  This prevents the `tick → rAF(tick)` loop from recurring
+       * infinitely while still exercising the direction logic.
+       * Returns a cleanup function that restores the originals.
+       */
+      function mockRAF() {
+        const original = window.requestAnimationFrame;
+        const originalCancel = window.cancelAnimationFrame;
+        let callCount = 0;
+        window.requestAnimationFrame = jest.fn((callback) => {
+          callCount += 1;
+          if (callCount === 1) {
+            callback();
+          }
+          return callCount;
+        });
+        window.cancelAnimationFrame = jest.fn();
+        return () => {
+          window.requestAnimationFrame = original;
+          window.cancelAnimationFrame = originalCancel;
+        };
+      }
+
+      it('LTR: long-pressing the next button continuously scrolls the tab list forward', () => {
+        jest.useFakeTimers();
+        const restore = setupOverflow();
+        const restoreRAF = mockRAF();
+        try {
+          render(
+            <Tabs>
+              <TabList aria-label="List of tabs">
+                <Tab>Tab 1</Tab>
+                <Tab>Tab 2</Tab>
+              </TabList>
+            </Tabs>
+          );
+
+          const tablist = screen.getByRole('tablist');
+          Object.defineProperty(tablist, 'scrollLeft', {
+            configurable: true,
+            writable: true,
+            value: 0,
+          });
+
+          // Trigger long press: pointerdown → wait 500 ms
+          fireEvent.pointerDown(screen.getByLabelText('Scroll right'));
+          act(() => {
+            jest.advanceTimersByTime(500);
+          });
+
+          // One RAF tick fires: scrollLeft += 5 (forward direction in LTR)
+          expect(tablist.scrollLeft).toBeGreaterThan(0);
+        } finally {
+          restoreRAF();
+          restore();
+          jest.useRealTimers();
+        }
+      });
+
+      it('LTR: long-pressing the previous button continuously scrolls the tab list backward', () => {
+        jest.useFakeTimers();
+        const restore = setupOverflow();
+        const restoreRAF = mockRAF();
+        try {
+          render(
+            <Tabs>
+              <TabList aria-label="List of tabs">
+                <Tab>Tab 1</Tab>
+                <Tab>Tab 2</Tab>
+              </TabList>
+            </Tabs>
+          );
+
+          const tablist = screen.getByRole('tablist');
+          Object.defineProperty(tablist, 'scrollLeft', {
+            configurable: true,
+            writable: true,
+            value: 50,
+          });
+
+          // Trigger long press on the previous button
+          fireEvent.pointerDown(screen.getByLabelText('Scroll left'));
+          act(() => {
+            jest.advanceTimersByTime(500);
+          });
+
+          // One RAF tick fires: scrollLeft -= 5 (backward direction in LTR)
+          expect(tablist.scrollLeft).toBeLessThan(50);
+        } finally {
+          restoreRAF();
+          restore();
+          jest.useRealTimers();
+        }
+      });
+
+      it('RTL: long-pressing the next button continuously scrolls the tab list forward', () => {
+        jest.useFakeTimers();
+        const restore = setupOverflow();
+        const restoreRTL = mockRTL();
+        const restoreRAF = mockRAF();
+        try {
+          render(
+            <Tabs>
+              <TabList aria-label="List of tabs">
+                <Tab>Tab 1</Tab>
+                <Tab>Tab 2</Tab>
+              </TabList>
+            </Tabs>
+          );
+
+          const tablist = screen.getByRole('tablist');
+          Object.defineProperty(tablist, 'scrollLeft', {
+            configurable: true,
+            writable: true,
+            value: 0,
+          });
+
+          // In RTL the next button should scroll backward (scrollLeft -= 5)
+          fireEvent.pointerDown(screen.getByLabelText('Scroll right'));
+          act(() => {
+            jest.advanceTimersByTime(500);
+          });
+
+          expect(tablist.scrollLeft).toBeLessThan(0);
+        } finally {
+          restoreRAF();
+          restoreRTL();
+          restore();
+          jest.useRealTimers();
+        }
+      });
+
+      it('RTL: long-pressing the previous button continuously scrolls the tab list backward', () => {
+        jest.useFakeTimers();
+        const restore = setupOverflow();
+        const restoreRTL = mockRTL();
+        const restoreRAF = mockRAF();
+        try {
+          render(
+            <Tabs>
+              <TabList aria-label="List of tabs">
+                <Tab>Tab 1</Tab>
+                <Tab>Tab 2</Tab>
+              </TabList>
+            </Tabs>
+          );
+
+          const tablist = screen.getByRole('tablist');
+          Object.defineProperty(tablist, 'scrollLeft', {
+            configurable: true,
+            writable: true,
+            value: -50,
+          });
+
+          // In RTL the previous button should scroll forward (scrollLeft += 5)
+          fireEvent.pointerDown(screen.getByLabelText('Scroll left'));
+          act(() => {
+            jest.advanceTimersByTime(500);
+          });
+
+          expect(tablist.scrollLeft).toBeGreaterThan(-50);
+        } finally {
+          restoreRAF();
+          restoreRTL();
+          restore();
+          jest.useRealTimers();
+        }
+      });
+    });
   });
 });
 
