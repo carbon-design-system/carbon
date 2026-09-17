@@ -318,9 +318,17 @@
     align-self: stretch;
 
     @if enabled('enable-v12-release') {
-      // Match card border-radius on the leading edge of the media column.
-      border-end-start-radius: $border-radius-08;
-      border-start-start-radius: $border-radius-08;
+      // Media-left: clip to the card's top-left and bottom-left outer corners.
+      &:first-child {
+        border-end-start-radius: $border-radius-08;
+        border-start-start-radius: $border-radius-08;
+      }
+
+      // Media-right: clip to the card's top-right and bottom-right outer corners.
+      &:last-child {
+        border-end-end-radius: $border-radius-08;
+        border-start-end-radius: $border-radius-08;
+      }
     }
   }
 
