@@ -6,6 +6,7 @@
  */
 
 import { html } from 'lit';
+import { enabled } from '@carbon/feature-flags';
 import { prefix } from '../../../globals/settings';
 import { TABLE_SIZE } from '../table';
 import Add from '@carbon/icons/es/add/16.js';
@@ -16,6 +17,7 @@ import Download16 from '@carbon/icons/es/download/16.js';
 // @ts-ignore
 import Settings16 from '@carbon/icons/es/settings/16.js';
 import '../../overflow-menu';
+import '../../menu/index';
 import '../index';
 import storyDocs from './data-table.mdx';
 import '../../link/index';
@@ -60,6 +62,45 @@ const controls = {
     description: 'Use zebra styles',
   },
 };
+
+const renderToolbarOverflowMenu = () =>
+  enabled('enable-v12-overflowmenu')
+    ? html`
+        <cds-overflow-menu
+          enable-v12-overflowmenu
+          toolbar-action
+          label="Settings">
+          ${iconLoader(Settings16, {
+            slot: 'icon',
+            class: `${prefix}--overflow-menu__icon`,
+          })}
+          <cds-menu>
+            <cds-menu-item label="Action 1"></cds-menu-item>
+            <cds-menu-item label="Action 2"></cds-menu-item>
+            <cds-menu-item label="Action 3"></cds-menu-item>
+          </cds-menu>
+        </cds-overflow-menu>
+      `
+    : html`
+        <cds-overflow-menu toolbar-action>
+          ${iconLoader(Settings16, {
+            slot: 'icon',
+            class: `${prefix}--overflow-menu__icon`,
+          })}
+          <span slot="tooltip-content">Settings</span>
+          <cds-overflow-menu-body>
+            <cds-overflow-menu-item @click=${() => alert('Alert 1')}>
+              Action 1
+            </cds-overflow-menu-item>
+            <cds-overflow-menu-item @click=${() => alert('Alert 2')}>
+              Action 2
+            </cds-overflow-menu-item>
+            <cds-overflow-menu-item @click=${() => alert('Alert 3')}>
+              Action 3
+            </cds-overflow-menu-item>
+          </cds-overflow-menu-body>
+        </cds-overflow-menu>
+      `;
 
 export const Default = {
   args: defaultArgs,
@@ -109,25 +150,7 @@ export const Default = {
         <cds-table-toolbar-content ?has-batch-actions="true">
           <cds-table-toolbar-search
             placeholder="Filter table"></cds-table-toolbar-search>
-          <cds-overflow-menu toolbar-action>
-            ${iconLoader(Settings16, {
-              slot: 'icon',
-              class: `${prefix}--overflow-menu__icon`,
-            })}
-            <span slot="tooltip-content">Settings</span>
-
-            <cds-overflow-menu-body>
-              <cds-overflow-menu-item @click=${() => alert('Alert 1')}>
-                Action 1
-              </cds-overflow-menu-item>
-              <cds-overflow-menu-item @click=${() => alert('Alert 2')}>
-                Action 2
-              </cds-overflow-menu-item>
-              <cds-overflow-menu-item @click=${() => alert('Alert 3')}>
-                Action 3
-              </cds-overflow-menu-item>
-            </cds-overflow-menu-body>
-          </cds-overflow-menu>
+          ${renderToolbarOverflowMenu()}
           <cds-button>Add new</cds-button>
         </cds-table-toolbar-content>
       </cds-table-toolbar>
