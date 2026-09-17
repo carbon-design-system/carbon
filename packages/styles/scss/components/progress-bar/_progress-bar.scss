@@ -47,7 +47,7 @@
     background-color: $border-subtle;
     block-size: convert.to-rem(8px);
     inline-size: 100%;
-    min-inline-size: $spacing-09;
+    min-inline-size: convert.to-rem(48px);
 
     @if enabled('enable-v12-release') {
       overflow: hidden;
