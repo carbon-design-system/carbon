@@ -1299,7 +1299,6 @@ export interface TabProps extends HTMLAttributes<HTMLElement> {
   secondaryLabel?: string;
 }
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const Tab = forwardRef<HTMLElement, TabProps>(
   (
     {
@@ -1573,6 +1572,9 @@ const Tab = forwardRef<HTMLElement, TabProps>(
     );
   }
 );
+
+Tab.displayName = 'Tab';
+
 Tab.propTypes = {
   /**
    * Provide a custom element to render instead of the default button
@@ -1675,7 +1677,6 @@ export interface IconTabProps extends DivAttributes {
    */
   leaveDelayMs?: number;
 }
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const IconTab = React.forwardRef<HTMLDivElement, IconTabProps>(
   (
     {
@@ -1719,6 +1720,8 @@ const IconTab = React.forwardRef<HTMLDivElement, IconTabProps>(
     );
   }
 );
+
+IconTab.displayName = 'IconTab';
 
 IconTab.propTypes = {
   /**
@@ -1776,7 +1779,6 @@ export interface TabPanelProps extends DivAttributes {
   className?: string;
 }
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const TabPanel = React.forwardRef<HTMLDivElement, TabPanelProps>(
   ({ children, className: customClassName, ...rest }, forwardRef) => {
     const prefix = usePrefix();
@@ -1801,6 +1803,8 @@ const TabPanel = React.forwardRef<HTMLDivElement, TabPanelProps>(
     );
   }
 );
+
+TabPanel.displayName = 'TabPanel';
 
 TabPanel.propTypes = {
   /**
