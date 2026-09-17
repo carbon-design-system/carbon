@@ -9,7 +9,7 @@ import figma, { html } from '@figma/code-connect/html';
 
 // single
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=3673-40574&m=dev',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=3673-40574&m=dev',
   {
     props: {
       slider: figma.nestedProps('_Slider base', {
@@ -53,7 +53,7 @@ figma.connect(
 
 // two handle
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=41061-1531&m=dev',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=41061-1531&m=dev',
   {
     props: {
       max: figma.string('Max range text'),
@@ -105,7 +105,7 @@ figma.connect(
 
 // single skeleton
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=3673-40574&m=dev',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=3673-40574&m=dev',
   {
     variant: { State: 'Skeleton' },
     example: () => html`<cds-slider-skeleton></cds-slider-skeleton>`,
@@ -115,7 +115,7 @@ figma.connect(
 
 // two handle skeleton
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=41061-1531&m=dev',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=41061-1531&m=dev',
   {
     variant: { State: 'Skeleton' },
     example: () => html`<cds-slider-skeleton twohandles></cds-slider-skeleton>`,

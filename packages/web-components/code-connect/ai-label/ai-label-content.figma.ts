@@ -8,7 +8,7 @@
 import figma, { html } from '@figma/code-connect/html';
 
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=57561-3508&t=SB9qULZbn3FRopvU-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=57561-3508&t=SB9qULZbn3FRopvU-4',
   {
     props: {
       title: figma.string('AI title'),

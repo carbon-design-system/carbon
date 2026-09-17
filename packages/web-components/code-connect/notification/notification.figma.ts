@@ -27,7 +27,7 @@ const sharedNotificationProps = {
 };
 
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-Carbon-Design-System?node-id=4179-105911&t=nJ89fkK549fgCUuf-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=4179-105911&p=f&m=dev',
   {
     variant: { Actionable: 'False' },
     props: sharedNotificationProps,
@@ -45,7 +45,7 @@ figma.connect(
 );
 
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-Carbon-Design-System?node-id=4179-105911&t=nJ89fkK549fgCUuf-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=4179-105911&p=f&m=dev',
   {
     variant: { Actionable: 'True' },
     props: sharedNotificationProps,
@@ -68,12 +68,15 @@ figma.connect(
 );
 
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-Carbon-Design-System?node-id=84336-35011&t=nJ89fkK549fgCUuf-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=84336-35011&p=f&m=dev',
   {
     variant: { Actionable: 'False' },
     props: {
       ...sharedNotificationProps,
-      caption: figma.string('Time text'),
+      caption: figma.boolean('Time stamp', {
+        true: figma.string('Time text'),
+        false: '',
+      }),
     },
     example: (props) =>
       html`<cds-toast-notification
@@ -90,7 +93,7 @@ figma.connect(
 );
 
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-Carbon-Design-System?node-id=84336-35011&t=nJ89fkK549fgCUuf-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=84336-35011&p=f&m=dev',
   {
     variant: { Actionable: 'True' },
     props: sharedNotificationProps,
@@ -112,7 +115,7 @@ figma.connect(
 );
 
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-Carbon-Design-System?node-id=84336-36580&t=nJ89fkK549fgCUuf-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=84336-36580&p=f&m=dev',
   {
     props: {
       title: figma.boolean('Title', {

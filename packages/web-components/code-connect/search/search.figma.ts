@@ -20,7 +20,7 @@ const sharedSearchProps = {
 };
 
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=2805-21056&t=6KMXKibN414b97hv-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=2805-21056&t=6KMXKibN414b97hv-4',
   {
     variant: { Expandable: 'False' },
     props: sharedSearchProps,
@@ -34,7 +34,7 @@ figma.connect(
 );
 
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=2805-21056&t=6KMXKibN414b97hv-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=2805-21056&t=6KMXKibN414b97hv-4',
   {
     variant: { Expandable: 'True' },
     props: sharedSearchProps,
@@ -49,7 +49,7 @@ figma.connect(
 );
 
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=2805-21056&t=6KMXKibN414b97hv-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=2805-21056&t=6KMXKibN414b97hv-4',
   {
     variant: { State: 'Skeleton' },
     example: () => html`<cds-search-skeleton></cds-search-skeleton>`,

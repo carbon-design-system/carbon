@@ -8,7 +8,7 @@
 import figma, { html } from '@figma/code-connect/html';
 
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=10151-402486&t=LoXqbMLZkoMgbrAS-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=10151-402486&t=LoXqbMLZkoMgbrAS-4',
   {
     props: {
       children: figma.children(['_Content switcher text item']),
@@ -33,7 +33,7 @@ figma.connect(
 );
 
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=10151-402486&t=LoXqbMLZkoMgbrAS-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=10151-402486&t=LoXqbMLZkoMgbrAS-4',
   {
     variant: { Type: 'Icon only' },
     props: {

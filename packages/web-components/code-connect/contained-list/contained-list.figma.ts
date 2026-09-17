@@ -37,7 +37,7 @@ const sharedContainedListProps = {
 };
 
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=16193-272726&t=cMvnFTYLPEhzhIpj-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=16193-272726&t=cMvnFTYLPEhzhIpj-4',
   {
     props: sharedContainedListProps,
     example: (props) =>
@@ -54,7 +54,7 @@ figma.connect(
 );
 
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=16193-272726&t=cMvnFTYLPEhzhIpj-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=16193-272726&t=cMvnFTYLPEhzhIpj-4',
   {
     variant: { Search: 'True' },
     props: sharedContainedListProps,

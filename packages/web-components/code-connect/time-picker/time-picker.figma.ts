@@ -8,7 +8,7 @@
 import figma, { html } from '@figma/code-connect/html';
 
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=17544-268301&t=qp8bdiovIuVIO7xb-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=17544-268301&t=qp8bdiovIuVIO7xb-4',
   {
     props: {
       size: figma.enum('Size', {

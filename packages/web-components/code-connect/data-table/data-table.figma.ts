@@ -39,7 +39,7 @@ const sharedTableProps = {
 };
 
 figma.connect(
-  'https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=4630-268268&mode=design&t=dSt5NCwcWajIQZR7-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?type=design&node-id=4630-268268&mode=design&t=dSt5NCwcWajIQZR7-4',
   {
     props: sharedTableProps,
     example: (props) =>
@@ -66,7 +66,7 @@ figma.connect(
 );
 
 figma.connect(
-  'https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=4630-268268&mode=design&t=dSt5NCwcWajIQZR7-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?type=design&node-id=4630-268268&mode=design&t=dSt5NCwcWajIQZR7-4',
   {
     variant: { Type: 'Expandable' },
     props: sharedTableProps,
@@ -94,7 +94,7 @@ figma.connect(
 );
 
 figma.connect(
-  'https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=4630-268268&mode=design&t=dSt5NCwcWajIQZR7-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?type=design&node-id=4630-268268&mode=design&t=dSt5NCwcWajIQZR7-4',
   {
     variant: { Type: 'Select checkbox' },
     props: sharedTableProps,
@@ -122,7 +122,7 @@ figma.connect(
 );
 
 figma.connect(
-  'https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=4630-268268&mode=design&t=dSt5NCwcWajIQZR7-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?type=design&node-id=4630-268268&mode=design&t=dSt5NCwcWajIQZR7-4',
   {
     variant: { Type: 'Select radio' },
     props: sharedTableProps,
@@ -150,7 +150,7 @@ figma.connect(
 );
 
 figma.connect(
-  'https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=4630-268268&mode=design&t=dSt5NCwcWajIQZR7-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?type=design&node-id=4630-268268&mode=design&t=dSt5NCwcWajIQZR7-4',
   {
     variant: { Type: 'Expandable + Selectable' },
     props: sharedTableProps,

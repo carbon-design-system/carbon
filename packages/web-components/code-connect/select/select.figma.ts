@@ -8,7 +8,7 @@
 import figma, { html } from '@figma/code-connect/html';
 
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=17650-274860&t=LS77peWFGhwOdxIw-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=17650-274860&t=LS77peWFGhwOdxIw-4',
   {
     props: {
       disabled: figma.enum('State', {
@@ -66,7 +66,7 @@ figma.connect(
 );
 
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=17650-274860&t=LS77peWFGhwOdxIw-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=17650-274860&t=LS77peWFGhwOdxIw-4',
   {
     variant: { State: 'Skeleton' },
     props: {

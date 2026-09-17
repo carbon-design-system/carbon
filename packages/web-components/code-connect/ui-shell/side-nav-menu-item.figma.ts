@@ -8,7 +8,7 @@
 import figma, { html } from '@figma/code-connect/html';
 
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=2346-16194&t=wcK3P98b09VsrxXF-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=2346-16194&t=wcK3P98b09VsrxXF-4',
   {
     props: {
       linkText: figma.string('Link text'),
@@ -27,7 +27,7 @@ figma.connect(
 );
 
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=2346-16194&t=wcK3P98b09VsrxXF-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=2346-16194&t=wcK3P98b09VsrxXF-4',
   {
     variant: { 'Icon left': 'True' },
     props: {
@@ -48,7 +48,7 @@ figma.connect(
 );
 
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=2346-16194&t=wcK3P98b09VsrxXF-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=2346-16194&t=wcK3P98b09VsrxXF-4',
   {
     variant: { Type: 'Sub-menu' },
     props: {
@@ -68,7 +68,7 @@ figma.connect(
 );
 
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=2346-16194&t=wcK3P98b09VsrxXF-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=2346-16194&t=wcK3P98b09VsrxXF-4',
   {
     variant: { Type: 'Sub-menu', 'Icon left': 'True' },
     props: {

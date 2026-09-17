@@ -19,7 +19,7 @@ const sharedTabProps = {
 };
 
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/-v11--Carbon-Design-System?node-id=103086-4853&t=qzeFExzcZKEytj8o-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=103086-4853&t=qzeFExzcZKEytj8o-4',
   {
     variant: { Type: 'Text + Icon' },
     props: sharedTabProps,
@@ -32,7 +32,7 @@ figma.connect(
 );
 
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/-v11--Carbon-Design-System?node-id=103086-4853&t=qzeFExzcZKEytj8o-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=103086-4853&t=qzeFExzcZKEytj8o-4',
   {
     variant: {
       Type: 'Text + Icon',
@@ -51,7 +51,7 @@ figma.connect(
 );
 
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/-v11--Carbon-Design-System?node-id=103086-4853&t=qzeFExzcZKEytj8o-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=103086-4853&t=qzeFExzcZKEytj8o-4',
   {
     variant: { Type: 'Icon only' },
     props: sharedTabProps,
@@ -68,7 +68,7 @@ figma.connect(
 
 // vertical tabs items
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=75769-1965&t=PaZ3ZnEGQGMgXgBW-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=75769-1965&t=PaZ3ZnEGQGMgXgBW-4',
   {
     props: {
       label: figma.string('Text'),

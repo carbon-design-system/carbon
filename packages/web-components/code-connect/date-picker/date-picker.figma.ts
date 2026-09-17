@@ -34,7 +34,7 @@ const sharedDateInputProps = {
 };
 
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=17544-266985&t=hgJuU7m9Y6EM076g-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=17544-266985&t=hgJuU7m9Y6EM076g-4',
   {
     props: {
       ...sharedDateInputProps,
@@ -64,7 +64,7 @@ figma.connect(
 );
 
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=17544-266985&t=hgJuU7m9Y6EM076g-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=17544-266985&t=hgJuU7m9Y6EM076g-4',
   {
     variant: { State: 'Skeleton' },
     example: () =>
@@ -76,7 +76,7 @@ figma.connect(
 );
 
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=17544-267504&t=hgJuU7m9Y6EM076g-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=17544-267504&t=hgJuU7m9Y6EM076g-4',
   {
     props: sharedDateInputProps,
     example: (props) =>
@@ -99,7 +99,7 @@ figma.connect(
 );
 
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=17544-267504&t=hgJuU7m9Y6EM076g-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=17544-267504&t=hgJuU7m9Y6EM076g-4',
   {
     variant: { State: 'Skeleton' },
     example: () =>
@@ -111,7 +111,7 @@ figma.connect(
 );
 
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=17544-268170&t=hgJuU7m9Y6EM076g-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=17544-268170&t=hgJuU7m9Y6EM076g-4',
   {
     props: {
       size: figma.enum('Size', {
@@ -170,7 +170,7 @@ figma.connect(
 );
 
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=17544-268170&t=hgJuU7m9Y6EM076g-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=17544-268170&t=hgJuU7m9Y6EM076g-4',
   {
     variant: { State: 'Skeleton' },
     example: () =>

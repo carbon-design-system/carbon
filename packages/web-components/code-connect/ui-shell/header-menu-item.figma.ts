@@ -8,7 +8,7 @@
 import figma, { html } from '@figma/code-connect/html';
 
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=2133-9531&t=A3oys5odsvKkcDFA-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=2133-9531&t=A3oys5odsvKkcDFA-4',
   {
     props: {
       linkText: figma.string('Link text'),
@@ -25,7 +25,7 @@ figma.connect(
 );
 
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=2133-9531&t=A3oys5odsvKkcDFA-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=2133-9531&t=A3oys5odsvKkcDFA-4',
   {
     variant: { Type: 'Sub-menu' },
     props: {
@@ -48,7 +48,7 @@ figma.connect(
 
 // sub menu item
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=2133-9888&t=A3oys5odsvKkcDFA-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=2133-9888&t=A3oys5odsvKkcDFA-4',
   {
     props: {
       linkText: figma.string('Link text'),
@@ -65,7 +65,7 @@ figma.connect(
 
 // sub menu
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=2133-9973&t=A3oys5odsvKkcDFA-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=2133-9973&t=A3oys5odsvKkcDFA-4',
   {
     props: {
       children: figma.children(['UI shell - Header sub-menu item']),

@@ -33,7 +33,7 @@ const sharedMenuButtonProps = {
 };
 
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=31420-317548&t=KXgYpEhuz2XzSITV-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=31420-317548&t=KXgYpEhuz2XzSITV-4',
   {
     props: sharedMenuButtonProps,
     example: (props) =>

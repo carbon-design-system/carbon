@@ -8,7 +8,7 @@
 import figma, { html } from '@figma/code-connect/html';
 
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=4547-163221&t=5C1lVaCoSygb13J1-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=4547-163221&t=5C1lVaCoSygb13J1-4',
   {
     props: {
       children: figma.children('Col*'),
@@ -21,7 +21,7 @@ figma.connect(
 );
 
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=4547-163221&t=5C1lVaCoSygb13J1-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=4547-163221&t=5C1lVaCoSygb13J1-4',
   {
     variant: { Expandable: 'True' },
     props: {
@@ -39,7 +39,7 @@ figma.connect(
 );
 
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=4547-163221&t=5C1lVaCoSygb13J1-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=4547-163221&t=5C1lVaCoSygb13J1-4',
   {
     variant: { Expandable: 'True', Selectable: 'True' },
     props: {
@@ -57,7 +57,7 @@ figma.connect(
 );
 
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=4547-163221&t=5C1lVaCoSygb13J1-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=4547-163221&t=5C1lVaCoSygb13J1-4',
   {
     variant: { 'Select type': 'Checkbox' },
     props: {
@@ -76,7 +76,7 @@ figma.connect(
 // Radio variant for table-row renders the same as checkbox because `radio` attribute comes from
 // the parent `<cds-table>`
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=4547-163221&t=5C1lVaCoSygb13J1-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=4547-163221&t=5C1lVaCoSygb13J1-4',
   {
     variant: { 'Select type': 'Radio button' },
     props: {

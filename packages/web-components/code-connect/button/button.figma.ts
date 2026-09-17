@@ -8,7 +8,7 @@
 import figma, { html } from '@figma/code-connect/html';
 
 figma.connect(
-  'https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=1854-1776&mode=dev',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=1854-1776&p=f&m=dev',
   {
     props: {
       disabled: figma.enum('State', {
@@ -35,6 +35,7 @@ figma.connect(
         'Extra small': 'xs',
         'Extra large': 'xl',
         '2X large': '2xl',
+        Expressive: 'md',
       }),
       isExpressive: figma.enum('Size', {
         Expressive: true,
@@ -57,7 +58,7 @@ figma.connect(
 );
 
 figma.connect(
-  'https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=1854-1776&mode=dev',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=1854-1776&p=f&m=dev',
   {
     variant: { State: 'Skeleton' },
     props: {
@@ -68,6 +69,7 @@ figma.connect(
         'Extra small': 'xs',
         'Extra large': 'xl',
         '2X large': '2xl',
+        Expressive: 'md',
       }),
     },
     example: (props) =>

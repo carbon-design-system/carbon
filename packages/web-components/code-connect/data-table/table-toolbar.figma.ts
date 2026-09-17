@@ -8,7 +8,7 @@
 import figma, { html } from '@figma/code-connect/html';
 
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=4487-180741&t=T1B0YRZ6hK2IkVMC-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=4487-180741&t=T1B0YRZ6hK2IkVMC-4',
   {
     example: () =>
       html`<cds-table-toolbar slot="toolbar">

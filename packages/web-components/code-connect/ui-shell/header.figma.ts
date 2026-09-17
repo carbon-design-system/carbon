@@ -8,7 +8,7 @@
 import figma, { html } from '@figma/code-connect/html';
 
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-Carbon-Design-System?node-id=92123-1663&t=UFUf7yvv8SJyoEK1-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=92123-1663&t=UFUf7yvv8SJyoEK1-4',
   {
     props: {
       prefix: figma.boolean('Site prefix', {

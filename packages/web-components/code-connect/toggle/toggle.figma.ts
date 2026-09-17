@@ -8,7 +8,7 @@
 import figma, { html } from '@figma/code-connect/html';
 
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=3038-25739&t=9zqAFF3e617gPBGE-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=3038-25739&t=9zqAFF3e617gPBGE-4',
   {
     props: {
       size: figma.enum('Size', {
@@ -45,7 +45,7 @@ figma.connect(
 );
 
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=3038-25739&t=9zqAFF3e617gPBGE-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=3038-25739&t=9zqAFF3e617gPBGE-4',
   {
     variant: { 'Toggle only': 'True' },
     props: {
@@ -75,7 +75,7 @@ figma.connect(
 );
 
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=3038-25739&t=9zqAFF3e617gPBGE-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=3038-25739&t=9zqAFF3e617gPBGE-4',
   {
     variant: { 'Show value': 'False' },
     props: {
@@ -111,7 +111,7 @@ figma.connect(
 );
 
 figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=3038-25739&t=9zqAFF3e617gPBGE-4',
+  'https://www.figma.com/design/Ude8f8dEgXxxnpbzrvWfwE/-v11--Carbon-Design-System--Community-?node-id=3038-25739&t=9zqAFF3e617gPBGE-4',
   {
     variant: { State: 'Skeleton' },
     example: () => html`<cds-toggle-skeleton></cds-toggle-skeleton>`,
