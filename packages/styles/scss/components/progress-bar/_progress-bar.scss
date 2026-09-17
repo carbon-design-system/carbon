@@ -33,7 +33,7 @@
     justify-content: space-between;
     color: $text-primary;
     margin-block-end: $spacing-03;
-    min-inline-size: $spacing-09;
+    min-inline-size: convert.to-rem(48px);
   }
 
   .#{$prefix}--progress-bar__label-text {
@@ -45,7 +45,7 @@
   .#{$prefix}--progress-bar__track {
     position: relative;
     background-color: $border-subtle;
-    block-size: $spacing-03;
+    block-size: convert.to-rem(8px);
     inline-size: 100%;
     min-inline-size: $spacing-09;
 
@@ -56,11 +56,11 @@
   }
 
   .#{$prefix}--progress-bar--big .#{$prefix}--progress-bar__track {
-    block-size: $spacing-03;
+    block-size: convert.to-rem(8px);
   }
 
   .#{$prefix}--progress-bar--small .#{$prefix}--progress-bar__track {
-    block-size: $spacing-02;
+    block-size: convert.to-rem(4px);
   }
 
   .#{$prefix}--progress-bar__bar {
