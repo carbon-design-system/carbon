@@ -14,6 +14,7 @@
 @use '../../utilities/ai-gradient' as *;
 @use '../../utilities/convert';
 @use '../../utilities/custom-property';
+@use '../../utilities/high-contrast-mode' as *;
 @use '../toggletip';
 @use '../popover';
 
@@ -1131,5 +1132,15 @@ $sizes: (
   .#{$prefix}--ai-label--revert .#{$prefix}--btn--icon-only svg,
   .#{$prefix}--slug--revert .#{$prefix}--btn--icon-only svg {
     margin: 0;
+  }
+
+  //High Contrast Mode
+  //The callout background is painted by the AI gradient, which is dropped in
+  //Windows HCM, leaving the callout transparent over the page content behind it
+  @include high-contrast-mode {
+    .#{$prefix}--ai-label .#{$prefix}--ai-label-content,
+    .#{$prefix}--slug .#{$prefix}--slug-content {
+      background-color: Canvas;
+    }
   }
 }
