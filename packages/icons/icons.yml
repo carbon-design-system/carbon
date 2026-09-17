@@ -6294,7 +6294,6 @@
 - name: content-navigator-edit-service--upload
   friendly_name: IBM® Content Navigator Edit Service Upload
   aliases:
-  aliases:
     - IBM
     - Content Navigator Edit Service
     - content
@@ -6309,7 +6308,6 @@
 - name: content-navigator-sync--error
   friendly_name: IBM® Content Navigator Sync Error
   aliases:
-  aliases:
     - IBM
     - Content Navigator Sync
     - content
@@ -6321,7 +6319,6 @@
     - 32
 - name: content-navigator-sync--loading
   friendly_name: IBM® Content Navigator Sync Loading
-  aliases:
   aliases:
     - IBM
     - Content Navigator Sync
@@ -6335,7 +6332,6 @@
 - name: content-navigator-sync--paused
   friendly_name: IBM® Content Navigator Sync Paused
   aliases:
-  aliases:
     - IBM
     - Content Navigator Sync
     - content
@@ -6347,7 +6343,6 @@
     - 32
 - name: content-navigator-sync--warning
   friendly_name: IBM® Content Navigator Sync Warning
-  aliases:
   aliases:
     - IBM
     - Content Navigator Sync
@@ -28546,7 +28541,6 @@
     - visible
 - name: view--matrix
   friendly_name: Matrix view
-  aliases:
   aliases:
     - data
     - table
