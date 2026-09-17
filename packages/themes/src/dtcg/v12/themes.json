@@ -1,0 +1,1799 @@
+{
+  "$schema": "https://tr.designtokens.org/format/",
+  "$description": "Experimental Carbon V12 themes (light + dark) generated from the OKLCH specification.",
+  "$extensions": {
+    "org.carbon": {
+      "experimental": true
+    }
+  },
+  "themes": {
+    "light": {
+      "$extensions": {
+        "org.carbon": {
+          "color-scheme": "light"
+        }
+      },
+      "background": {
+        "brand": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.5565,
+              0.243,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#0f62fe"
+          },
+          "$description": "Brand background color.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "confirmed",
+              "source": {
+                "type": "fixed"
+              },
+              "fallback": "#0f62fe"
+            }
+          }
+        }
+      },
+      "base": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.16,
+            0.004,
+            262
+          ],
+          "alpha": 1,
+          "hex": "#0c0d0f"
+        },
+        "$description": "Shared dark base color.",
+        "$extensions": {
+          "org.carbon": {
+            "status": "confirmed",
+            "source": {
+              "type": "fixed"
+            },
+            "fallback": "#0c0d0f"
+          }
+        }
+      },
+      "layer": {
+        "01": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.97,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#f4f5f8"
+          },
+          "$description": "Contextual surface for surface context 1.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "confirmed",
+              "source": {
+                "type": "fixed"
+              },
+              "fallback": "#f4f5f8"
+            }
+          }
+        },
+        "02": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              1,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#ffffff"
+          },
+          "$description": "Contextual surface for surface context 2.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "confirmed",
+              "source": {
+                "type": "fixed"
+              },
+              "fallback": "#ffffff"
+            }
+          }
+        },
+        "03": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.94,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#eaebee"
+          },
+          "$description": "Contextual surface for surface context 3.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "confirmed",
+              "source": {
+                "type": "fixed"
+              },
+              "fallback": "#eaebee"
+            }
+          }
+        },
+        "accent-01": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.91,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#e0e1e4"
+          },
+          "$description": "Contextual accent for surface context 1.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "unresolved",
+              "source": {
+                "type": "lightness-delta",
+                "delta": -0.06,
+                "relativeTo": "surface"
+              },
+              "fallback": "#e0e1e4"
+            }
+          }
+        },
+        "accent-02": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.94,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#eaebee"
+          },
+          "$description": "Contextual accent for surface context 2.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "unresolved",
+              "source": {
+                "type": "lightness-delta",
+                "delta": -0.06,
+                "relativeTo": "surface-light"
+              },
+              "fallback": "#eaebee"
+            }
+          }
+        },
+        "accent-03": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.88,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#d6d7da"
+          },
+          "$description": "Contextual accent for surface context 3.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "unresolved",
+              "source": {
+                "type": "lightness-delta",
+                "delta": -0.06,
+                "relativeTo": "surface-dark"
+              },
+              "fallback": "#d6d7da"
+            }
+          }
+        }
+      },
+      "field": {
+        "01": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.94,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#eaebee"
+          },
+          "$description": "Contextual field for surface context 1.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "confirmed",
+              "source": {
+                "type": "lightness-delta",
+                "delta": -0.03,
+                "relativeTo": "surface"
+              },
+              "fallback": "#eaebee"
+            }
+          }
+        },
+        "02": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.97,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#f4f5f8"
+          },
+          "$description": "Contextual field for surface context 2.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "confirmed",
+              "source": {
+                "type": "lightness-delta",
+                "delta": -0.03,
+                "relativeTo": "surface-light"
+              },
+              "fallback": "#f4f5f8"
+            }
+          }
+        },
+        "03": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.91,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#e0e1e4"
+          },
+          "$description": "Contextual field for surface context 3.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "confirmed",
+              "source": {
+                "type": "lightness-delta",
+                "delta": -0.03,
+                "relativeTo": "surface-dark"
+              },
+              "fallback": "#e0e1e4"
+            }
+          }
+        }
+      },
+      "text": {
+        "primary": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.24,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#1e1f21"
+          },
+          "$description": "Primary text color.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "confirmed",
+              "source": {
+                "type": "fixed"
+              },
+              "fallback": "#1e1f21"
+            }
+          }
+        },
+        "secondary": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.48,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#5c5e60"
+          },
+          "$description": "Secondary text color.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "confirmed",
+              "source": {
+                "type": "fixed"
+              },
+              "fallback": "#5c5e60"
+            }
+          }
+        },
+        "helper-01": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.5472854861710492,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#6f7173"
+          },
+          "$description": "Contextual helper text for surface context 1.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "confirmed",
+              "source": {
+                "type": "contrast",
+                "target": 4.5,
+                "relativeTo": "surface"
+              },
+              "fallback": "#6f7173"
+            }
+          }
+        },
+        "helper-02": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.567451522661031,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#757779"
+          },
+          "$description": "Contextual helper text for surface context 2.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "confirmed",
+              "source": {
+                "type": "contrast",
+                "target": 4.5,
+                "relativeTo": "surface-light"
+              },
+              "fallback": "#757779"
+            }
+          }
+        },
+        "helper-03": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.5261814499340836,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#696b6d"
+          },
+          "$description": "Contextual helper text for surface context 3.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "confirmed",
+              "source": {
+                "type": "contrast",
+                "target": 4.5,
+                "relativeTo": "surface-dark"
+              },
+              "fallback": "#696b6d"
+            }
+          }
+        },
+        "placeholder-01": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.5472854861710492,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#6f7173"
+          },
+          "$description": "Contextual placeholder text for surface context 1.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "unresolved",
+              "source": {
+                "type": "alias",
+                "token": "text-helper"
+              },
+              "fallback": "#6f7173"
+            }
+          }
+        },
+        "placeholder-02": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.567451522661031,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#757779"
+          },
+          "$description": "Contextual placeholder text for surface context 2.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "unresolved",
+              "source": {
+                "type": "alias",
+                "token": "text-helper"
+              },
+              "fallback": "#757779"
+            }
+          }
+        },
+        "placeholder-03": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.5261814499340836,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#696b6d"
+          },
+          "$description": "Contextual placeholder text for surface context 3.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "unresolved",
+              "source": {
+                "type": "alias",
+                "token": "text-helper"
+              },
+              "fallback": "#696b6d"
+            }
+          }
+        }
+      },
+      "icon": {
+        "primary": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.24,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#1e1f21"
+          },
+          "$description": "Primary icon color.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "unresolved",
+              "source": {
+                "type": "fixed"
+              },
+              "fallback": "#1e1f21"
+            }
+          }
+        },
+        "secondary": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.48,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#5c5e60"
+          },
+          "$description": "Secondary icon color.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "confirmed",
+              "source": {
+                "type": "fixed"
+              },
+              "fallback": "#5c5e60"
+            }
+          }
+        },
+        "helper-01": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.5472854861710492,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#6f7173"
+          },
+          "$description": "Contextual helper icon for surface context 1.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "unresolved",
+              "source": {
+                "type": "alias",
+                "token": "text-helper"
+              },
+              "fallback": "#6f7173"
+            }
+          }
+        },
+        "helper-02": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.567451522661031,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#757779"
+          },
+          "$description": "Contextual helper icon for surface context 2.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "unresolved",
+              "source": {
+                "type": "alias",
+                "token": "text-helper"
+              },
+              "fallback": "#757779"
+            }
+          }
+        },
+        "helper-03": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.5261814499340836,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#696b6d"
+          },
+          "$description": "Contextual helper icon for surface context 3.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "unresolved",
+              "source": {
+                "type": "alias",
+                "token": "text-helper"
+              },
+              "fallback": "#696b6d"
+            }
+          }
+        },
+        "placeholder-01": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.5472854861710492,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#6f7173"
+          },
+          "$description": "Contextual placeholder icon for surface context 1.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "unresolved",
+              "source": {
+                "type": "alias",
+                "token": "text-helper"
+              },
+              "fallback": "#6f7173"
+            }
+          }
+        },
+        "placeholder-02": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.567451522661031,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#757779"
+          },
+          "$description": "Contextual placeholder icon for surface context 2.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "unresolved",
+              "source": {
+                "type": "alias",
+                "token": "text-helper"
+              },
+              "fallback": "#757779"
+            }
+          }
+        },
+        "placeholder-03": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.5261814499340836,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#696b6d"
+          },
+          "$description": "Contextual placeholder icon for surface context 3.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "unresolved",
+              "source": {
+                "type": "alias",
+                "token": "text-helper"
+              },
+              "fallback": "#696b6d"
+            }
+          }
+        }
+      },
+      "border": {
+        "strong-01": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.6470369716208371,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#8d8e91"
+          },
+          "$description": "Contextual strong border for surface context 1.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "confirmed",
+              "source": {
+                "type": "contrast",
+                "target": 3,
+                "relativeTo": "surface"
+              },
+              "fallback": "#8d8e91"
+            }
+          }
+        },
+        "strong-02": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.6687488920970281,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#939597"
+          },
+          "$description": "Contextual strong border for surface context 2.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "confirmed",
+              "source": {
+                "type": "contrast",
+                "target": 3,
+                "relativeTo": "surface-light"
+              },
+              "fallback": "#939597"
+            }
+          }
+        },
+        "strong-03": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.6244733403281679,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#86878a"
+          },
+          "$description": "Contextual strong border for surface context 3.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "confirmed",
+              "source": {
+                "type": "contrast",
+                "target": 3,
+                "relativeTo": "surface-dark"
+              },
+              "fallback": "#86878a"
+            }
+          }
+        },
+        "subtle-01": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.88,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#d6d7da"
+          },
+          "$description": "Contextual subtle border for surface context 1.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "confirmed",
+              "source": {
+                "type": "lightness-delta",
+                "delta": -0.09,
+                "relativeTo": "surface"
+              },
+              "fallback": "#d6d7da"
+            }
+          }
+        },
+        "subtle-02": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.91,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#e0e1e4"
+          },
+          "$description": "Contextual subtle border for surface context 2.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "confirmed",
+              "source": {
+                "type": "lightness-delta",
+                "delta": -0.09,
+                "relativeTo": "surface-light"
+              },
+              "fallback": "#e0e1e4"
+            }
+          }
+        },
+        "subtle-03": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.85,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#ccced0"
+          },
+          "$description": "Contextual subtle border for surface context 3.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "confirmed",
+              "source": {
+                "type": "lightness-delta",
+                "delta": -0.09,
+                "relativeTo": "surface-dark"
+              },
+              "fallback": "#ccced0"
+            }
+          }
+        }
+      },
+      "skeleton": {
+        "background-01": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.93,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#e6e8eb"
+          },
+          "$description": "Contextual skeleton background for surface context 1.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "experimental",
+              "source": {
+                "type": "lightness-delta",
+                "delta": -0.04,
+                "relativeTo": "surface"
+              },
+              "fallback": "#e6e8eb"
+            }
+          }
+        },
+        "background-02": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.96,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#f0f2f4"
+          },
+          "$description": "Contextual skeleton background for surface context 2.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "experimental",
+              "source": {
+                "type": "lightness-delta",
+                "delta": -0.04,
+                "relativeTo": "surface-light"
+              },
+              "fallback": "#f0f2f4"
+            }
+          }
+        },
+        "background-03": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.9,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#dcdee1"
+          },
+          "$description": "Contextual skeleton background for surface context 3.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "experimental",
+              "source": {
+                "type": "lightness-delta",
+                "delta": -0.04,
+                "relativeTo": "surface-dark"
+              },
+              "fallback": "#dcdee1"
+            }
+          }
+        }
+      }
+    },
+    "dark": {
+      "$extensions": {
+        "org.carbon": {
+          "color-scheme": "dark"
+        }
+      },
+      "background": {
+        "brand": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.5565,
+              0.243,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#0f62fe"
+          },
+          "$description": "Brand background color.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "confirmed",
+              "source": {
+                "type": "fixed"
+              },
+              "fallback": "#0f62fe"
+            }
+          }
+        }
+      },
+      "base": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.16,
+            0.004,
+            262
+          ],
+          "alpha": 1,
+          "hex": "#0c0d0f"
+        },
+        "$description": "Shared dark base color.",
+        "$extensions": {
+          "org.carbon": {
+            "status": "confirmed",
+            "source": {
+              "type": "fixed"
+            },
+            "fallback": "#0c0d0f"
+          }
+        }
+      },
+      "layer": {
+        "01": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.2,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#151618"
+          },
+          "$description": "Contextual surface for surface context 1.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "confirmed",
+              "source": {
+                "type": "fixed"
+              },
+              "fallback": "#151618"
+            }
+          }
+        },
+        "02": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.24,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#1e1f21"
+          },
+          "$description": "Contextual surface for surface context 2.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "confirmed",
+              "source": {
+                "type": "fixed"
+              },
+              "fallback": "#1e1f21"
+            }
+          }
+        },
+        "03": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.16,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#0c0d0f"
+          },
+          "$description": "Contextual surface for surface context 3.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "confirmed",
+              "source": {
+                "type": "fixed"
+              },
+              "fallback": "#0c0d0f"
+            }
+          }
+        },
+        "accent-01": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.12,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#050607"
+          },
+          "$description": "Contextual accent for surface context 1.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "unresolved",
+              "source": {
+                "type": "lightness-delta",
+                "delta": -0.08,
+                "relativeTo": "surface"
+              },
+              "fallback": "#050607"
+            }
+          }
+        },
+        "accent-02": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.16,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#0c0d0f"
+          },
+          "$description": "Contextual accent for surface context 2.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "unresolved",
+              "source": {
+                "type": "lightness-delta",
+                "delta": -0.08,
+                "relativeTo": "surface-light"
+              },
+              "fallback": "#0c0d0f"
+            }
+          }
+        },
+        "accent-03": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.08,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#010202"
+          },
+          "$description": "Contextual accent for surface context 3.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "unresolved",
+              "source": {
+                "type": "lightness-delta",
+                "delta": -0.08,
+                "relativeTo": "surface-dark"
+              },
+              "fallback": "#010202"
+            }
+          }
+        }
+      },
+      "field": {
+        "01": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.16,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#0c0d0f"
+          },
+          "$description": "Contextual field for surface context 1.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "confirmed",
+              "source": {
+                "type": "lightness-delta",
+                "delta": -0.04,
+                "relativeTo": "surface"
+              },
+              "fallback": "#0c0d0f"
+            }
+          }
+        },
+        "02": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.2,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#151618"
+          },
+          "$description": "Contextual field for surface context 2.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "confirmed",
+              "source": {
+                "type": "lightness-delta",
+                "delta": -0.04,
+                "relativeTo": "surface-light"
+              },
+              "fallback": "#151618"
+            }
+          }
+        },
+        "03": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.12,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#050607"
+          },
+          "$description": "Contextual field for surface context 3.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "confirmed",
+              "source": {
+                "type": "lightness-delta",
+                "delta": -0.04,
+                "relativeTo": "surface-dark"
+              },
+              "fallback": "#050607"
+            }
+          }
+        }
+      },
+      "text": {
+        "primary": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.94,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#eaebee"
+          },
+          "$description": "Primary text color.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "confirmed",
+              "source": {
+                "type": "fixed"
+              },
+              "fallback": "#eaebee"
+            }
+          }
+        },
+        "secondary": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.72,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#a3a5a7"
+          },
+          "$description": "Secondary text color.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "confirmed",
+              "source": {
+                "type": "fixed"
+              },
+              "fallback": "#a3a5a7"
+            }
+          }
+        },
+        "helper-01": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.5953226383549919,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#7d7f81"
+          },
+          "$description": "Contextual helper text for surface context 1.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "confirmed",
+              "source": {
+                "type": "contrast",
+                "target": 4.5,
+                "relativeTo": "surface"
+              },
+              "fallback": "#7d7f81"
+            }
+          }
+        },
+        "helper-02": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.6190184843724635,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#848688"
+          },
+          "$description": "Contextual helper text for surface context 2.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "confirmed",
+              "source": {
+                "type": "contrast",
+                "target": 4.5,
+                "relativeTo": "surface-light"
+              },
+              "fallback": "#848688"
+            }
+          }
+        },
+        "helper-03": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.5783164832337934,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#787a7c"
+          },
+          "$description": "Contextual helper text for surface context 3.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "confirmed",
+              "source": {
+                "type": "contrast",
+                "target": 4.5,
+                "relativeTo": "surface-dark"
+              },
+              "fallback": "#787a7c"
+            }
+          }
+        },
+        "placeholder-01": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.5953226383549919,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#7d7f81"
+          },
+          "$description": "Contextual placeholder text for surface context 1.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "unresolved",
+              "source": {
+                "type": "alias",
+                "token": "text-helper"
+              },
+              "fallback": "#7d7f81"
+            }
+          }
+        },
+        "placeholder-02": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.6190184843724635,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#848688"
+          },
+          "$description": "Contextual placeholder text for surface context 2.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "unresolved",
+              "source": {
+                "type": "alias",
+                "token": "text-helper"
+              },
+              "fallback": "#848688"
+            }
+          }
+        },
+        "placeholder-03": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.5783164832337934,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#787a7c"
+          },
+          "$description": "Contextual placeholder text for surface context 3.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "unresolved",
+              "source": {
+                "type": "alias",
+                "token": "text-helper"
+              },
+              "fallback": "#787a7c"
+            }
+          }
+        }
+      },
+      "icon": {
+        "primary": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.94,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#eaebee"
+          },
+          "$description": "Primary icon color.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "unresolved",
+              "source": {
+                "type": "fixed"
+              },
+              "fallback": "#eaebee"
+            }
+          }
+        },
+        "secondary": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.72,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#a3a5a7"
+          },
+          "$description": "Secondary icon color.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "confirmed",
+              "source": {
+                "type": "fixed"
+              },
+              "fallback": "#a3a5a7"
+            }
+          }
+        },
+        "helper-01": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.5953226383549919,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#7d7f81"
+          },
+          "$description": "Contextual helper icon for surface context 1.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "unresolved",
+              "source": {
+                "type": "alias",
+                "token": "text-helper"
+              },
+              "fallback": "#7d7f81"
+            }
+          }
+        },
+        "helper-02": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.6190184843724635,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#848688"
+          },
+          "$description": "Contextual helper icon for surface context 2.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "unresolved",
+              "source": {
+                "type": "alias",
+                "token": "text-helper"
+              },
+              "fallback": "#848688"
+            }
+          }
+        },
+        "helper-03": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.5783164832337934,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#787a7c"
+          },
+          "$description": "Contextual helper icon for surface context 3.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "unresolved",
+              "source": {
+                "type": "alias",
+                "token": "text-helper"
+              },
+              "fallback": "#787a7c"
+            }
+          }
+        },
+        "placeholder-01": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.5953226383549919,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#7d7f81"
+          },
+          "$description": "Contextual placeholder icon for surface context 1.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "unresolved",
+              "source": {
+                "type": "alias",
+                "token": "text-helper"
+              },
+              "fallback": "#7d7f81"
+            }
+          }
+        },
+        "placeholder-02": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.6190184843724635,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#848688"
+          },
+          "$description": "Contextual placeholder icon for surface context 2.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "unresolved",
+              "source": {
+                "type": "alias",
+                "token": "text-helper"
+              },
+              "fallback": "#848688"
+            }
+          }
+        },
+        "placeholder-03": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.5783164832337934,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#787a7c"
+          },
+          "$description": "Contextual placeholder icon for surface context 3.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "unresolved",
+              "source": {
+                "type": "alias",
+                "token": "text-helper"
+              },
+              "fallback": "#787a7c"
+            }
+          }
+        }
+      },
+      "border": {
+        "strong-01": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.4986518861667718,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#626365"
+          },
+          "$description": "Contextual strong border for surface context 1.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "confirmed",
+              "source": {
+                "type": "contrast",
+                "target": 3,
+                "relativeTo": "surface"
+              },
+              "fallback": "#626365"
+            }
+          }
+        },
+        "strong-02": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.5210542063794492,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#68696c"
+          },
+          "$description": "Contextual strong border for surface context 2.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "confirmed",
+              "source": {
+                "type": "contrast",
+                "target": 3,
+                "relativeTo": "surface-light"
+              },
+              "fallback": "#68696c"
+            }
+          }
+        },
+        "strong-03": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.4824277543563949,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#5d5e61"
+          },
+          "$description": "Contextual strong border for surface context 3.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "confirmed",
+              "source": {
+                "type": "contrast",
+                "target": 3,
+                "relativeTo": "surface-dark"
+              },
+              "fallback": "#5d5e61"
+            }
+          }
+        },
+        "subtle-01": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.32,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#323335"
+          },
+          "$description": "Contextual subtle border for surface context 1.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "confirmed",
+              "source": {
+                "type": "lightness-delta",
+                "delta": 0.12,
+                "relativeTo": "surface"
+              },
+              "fallback": "#323335"
+            }
+          }
+        },
+        "subtle-02": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.36,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#3c3d3f"
+          },
+          "$description": "Contextual subtle border for surface context 2.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "confirmed",
+              "source": {
+                "type": "lightness-delta",
+                "delta": 0.12,
+                "relativeTo": "surface-light"
+              },
+              "fallback": "#3c3d3f"
+            }
+          }
+        },
+        "subtle-03": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.28,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#28292b"
+          },
+          "$description": "Contextual subtle border for surface context 3.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "confirmed",
+              "source": {
+                "type": "lightness-delta",
+                "delta": 0.12,
+                "relativeTo": "surface-dark"
+              },
+              "fallback": "#28292b"
+            }
+          }
+        }
+      },
+      "skeleton": {
+        "background-01": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.14,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#08090b"
+          },
+          "$description": "Contextual skeleton background for surface context 1.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "experimental",
+              "source": {
+                "type": "lightness-delta",
+                "delta": -0.06,
+                "relativeTo": "surface"
+              },
+              "fallback": "#08090b"
+            }
+          }
+        },
+        "background-02": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.18,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#111213"
+          },
+          "$description": "Contextual skeleton background for surface context 2.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "experimental",
+              "source": {
+                "type": "lightness-delta",
+                "delta": -0.06,
+                "relativeTo": "surface-light"
+              },
+              "fallback": "#111213"
+            }
+          }
+        },
+        "background-03": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.1,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#030304"
+          },
+          "$description": "Contextual skeleton background for surface context 3.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "experimental",
+              "source": {
+                "type": "lightness-delta",
+                "delta": -0.06,
+                "relativeTo": "surface-dark"
+              },
+              "fallback": "#030304"
+            }
+          }
+        }
+      }
+    }
+  }
+}

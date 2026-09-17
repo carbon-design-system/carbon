@@ -20,6 +20,7 @@ const { default: StyleDictionary } = require('style-dictionary');
 
 // ── Custom plugins ────────────────────────────────────────────────────────────
 const carbonColorFlatten = require('./transforms/color-flatten');
+const carbonOklchFlatten = require('./transforms/oklch-flatten');
 const carbonAlphaModifier = require('./transforms/alpha-modifier');
 const carbonComponentTokensPreprocessorModule = require('./preprocessors/component-tokens');
 const { preprocessor: carbonComponentTokensPreprocessor } =
@@ -37,6 +38,7 @@ const ROOT = path.resolve(__dirname, '..');
 const DTCG_DIR = path.join(ROOT, 'src', 'dtcg');
 const SCSS_GENERATED = path.join(ROOT, 'scss', 'generated');
 const JS_GENERATED_THEMES = path.join(ROOT, 'js', 'generated', 'themes');
+const V12_JS_GENERATED = path.join(ROOT, 'js', 'generated', 'v12');
 const JS_GENERATED_COMPONENTS = path.join(
   ROOT,
   'js',
@@ -54,6 +56,9 @@ const THEME_COLOR_SCHEME = {
   g90: 'dark',
   g100: 'dark',
 };
+
+const V12_THEME_NAMES = ['light', 'dark'];
+
 const COMPONENT_NAMES = [
   'button',
   'tag',
@@ -165,6 +170,12 @@ const CARBON_TRANSFORMS = [
   'carbon/color-flatten',
 ];
 
+const V12_TRANSFORMS = [
+  'attribute/cti',
+  'carbon/name-kebab',
+  'carbon/oklch-flatten',
+];
+
 // ── Helper: build config for one theme ───────────────────────────────────────
 //
 // themes.json is the unified source — all four themes in one file, with each
@@ -266,6 +277,53 @@ function themeConfig(themeName) {
   };
 }
 
+function v12ThemeConfig(themeName) {
+  // Read the unified v12/themes.json and extract only this mode's token slice,
+  // using the same extractThemeSlice pattern as the V11 themeConfig above.
+  const rawThemes = JSON.parse(
+    fs.readFileSync(path.join(DTCG_DIR, 'v12', 'themes.json'), 'utf8')
+  );
+  const modeTokens = rawThemes.themes?.[themeName];
+  if (!modeTokens) {
+    throw new Error(
+      `v12/themes.json does not contain a "${themeName}" entry under "themes".`
+    );
+  }
+
+  return {
+    tokens: modeTokens,
+    platforms: {
+      [`scss/v12/${themeName}`]: {
+        transforms: V12_TRANSFORMS,
+        buildPath: SCSS_GENERATED + '/',
+        files: [
+          {
+            destination: `_v12-${themeName}.scss`,
+            format: 'carbon/scss-themes',
+            options: { themeName },
+          },
+        ],
+      },
+      [`js/v12/${themeName}`]: {
+        transforms: V12_TRANSFORMS,
+        buildPath: V12_JS_GENERATED + '/',
+        files: [
+          {
+            destination: `${themeName}.js`,
+            format: 'carbon/js-themes',
+            options: { output: 'js' },
+          },
+          {
+            destination: `${themeName}.d.ts`,
+            format: 'carbon/js-themes',
+            options: { output: 'dts' },
+          },
+        ],
+      },
+    },
+  };
+}
+
 // ── Helper: build config for one component ───────────────────────────────────
 function componentConfig(componentName) {
   return {
@@ -349,6 +407,7 @@ function createBase() {
   base.registerTransform(carbonNameKebab);
   base.registerTransform(carbonAlphaModifier);
   base.registerTransform(carbonColorFlatten);
+  base.registerTransform(carbonOklchFlatten);
   base.registerTransformGroup({
     name: 'carbon',
     transforms: CARBON_TRANSFORMS,
@@ -416,6 +475,13 @@ async function runScss() {
   }
 }
 
+async function runV12() {
+  const base = createBase();
+  for (const themeName of V12_THEME_NAMES) {
+    await (await base.extend(v12ThemeConfig(themeName))).buildAllPlatforms();
+  }
+}
+
 // ── JS build ──────────────────────────────────────────────────────────────────
 // Generates:
 //   js/generated/themes/{white,g10,g90,g100}.{js,d.ts}
@@ -437,13 +503,16 @@ async function runJs() {
 async function run() {
   await runScss();
   await runJs();
+  await runV12();
 }
 
 module.exports = {
   run,
   runScss,
   runJs,
+  runV12,
   themeConfig,
+  v12ThemeConfig,
   componentConfig,
   tokensConfig,
 };

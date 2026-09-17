@@ -12,6 +12,8 @@ import * as white from '../js/generated/themes/white.js';
 import * as g10 from '../js/generated/themes/g10.js';
 import * as g90 from '../js/generated/themes/g90.js';
 import * as g100 from '../js/generated/themes/g100.js';
+import * as experimentalV12Light from '../js/generated/v12/light.js';
+import * as experimentalV12Dark from '../js/generated/v12/dark.js';
 import * as v10 from './v10';
 import * as buttonTokens from '../js/generated/component-tokens/button.js';
 import * as tagTokens from '../js/generated/component-tokens/tag.js';
@@ -35,6 +37,8 @@ export {
   g90,
   g100,
   themes,
+  experimentalV12Light,
+  experimentalV12Dark,
   v10,
   buttonTokens,
   tagTokens,
