@@ -92,3 +92,17 @@ jobs:
               repo: context.repo.repo,
             })
 
+
+  packages:
+    needs: build
+    runs-on: ubuntu-latest
+    # only trigger for stable releases, not release candidates
+    if: contains(github.ref_name, '-rc') == false
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      # run deploy-packages workflow
+      - name: Deploy packages
+        uses: peter-evans/repository-dispatch@v4
+        with:
+          event-type: deploy-packages
