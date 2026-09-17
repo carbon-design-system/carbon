@@ -80,13 +80,9 @@
   .#{$prefix}--card__header {
     position: relative;
     display: grid;
+    container-type: inline-size;
     grid-template-columns: auto minmax(0, 1fr);
     row-gap: 0;
-  }
-
-  .#{$prefix}--card__header:has(> .#{$prefix}--card__actions) {
-    grid-template-columns: auto minmax(0, 1fr) auto;
-    padding-inline-end: $spacing-03;
   }
 
   // ─── Body ────────────────────────────────────────────────────────────
@@ -154,7 +150,7 @@
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
-    grid-column: 1 / 3;
+    grid-column: 1 / -1;
     margin-block: $spacing-05;
     margin-inline-start: $spacing-05;
     max-block-size: $spacing-10;
@@ -271,7 +267,6 @@
   // Always col 2 so it shares that column with __header-media above it.
   .#{$prefix}--card__title {
     display: flex;
-    overflow: hidden;
     flex-direction: column;
     gap: $spacing-01;
     grid-column: 2;
@@ -385,22 +380,31 @@
 
   // ─── Header actions ───────────────────────────────────────────────────
   .#{$prefix}--card__actions {
+    position: absolute;
     display: inline-flex;
-    overflow: visible;
     align-items: center;
-    align-self: start;
     justify-content: flex-end;
     block-size: $spacing-07;
     gap: $spacing-02;
-    grid-column: 3;
-    grid-row: 1 / -1;
-    margin-block-start: $spacing-03;
-    max-inline-size: calc(4 * #{$spacing-07} + 3 * #{$spacing-02});
+    inline-size: calc(50% - $spacing-03);
+    inset-block-start: $spacing-03;
+    inset-inline-end: $spacing-03;
+    max-inline-size: calc(50% - $spacing-03);
   }
 
   // createOverflowHandler marks overflowed items with [data-hidden].
   .#{$prefix}--card__actions [data-hidden]:not([data-fixed]) {
     display: none;
+  }
+
+  // Reserve space for the absolutely-positioned actions box so the title
+  // text never slides under the buttons.  max-inline-size uses cqw so the
+  // 50% resolves against the header container width — the same reference
+  // box that the actions' own inline-size uses — regardless of how wide
+  // col1 (TitleMedia) is.
+  .#{$prefix}--card__header:has(> .#{$prefix}--card__actions)
+    > .#{$prefix}--card__title {
+    max-inline-size: calc(50cqw - $spacing-03);
   }
 
   // ─── AI Label (decorator) ─────────────────────────────────────────────
@@ -423,30 +427,24 @@
     inset-inline-end: $spacing-03;
   }
 
-  .#{$prefix}--card--has-ai-label .#{$prefix}--card__title {
-    padding-inline-end: calc($spacing-07 + $spacing-05);
+  // AI label without actions: title must clear the decorator ($spacing-07)
+  // plus its $spacing-03 inset from the card edge.
+  .#{$prefix}--card--has-ai-label:not(:has(.#{$prefix}--card__actions))
+    .#{$prefix}--card__header
+    > .#{$prefix}--card__title {
+    max-inline-size: calc(100cqw - $spacing-07 - $spacing-03);
   }
 
-  .#{$prefix}--card--has-ai-label .#{$prefix}--card__label {
-    padding-inline-end: calc($spacing-07 + $spacing-05);
-  }
-
-  .#{$prefix}--card--has-ai-label .#{$prefix}--card__description {
-    padding-inline-end: calc($spacing-07 + $spacing-05);
-  }
-
-  .#{$prefix}--card--has-ai-label
-    .#{$prefix}--card__header:has(> .#{$prefix}--card__actions) {
-    padding-inline-end: calc($spacing-03 + $spacing-06 + $spacing-03);
-  }
-
+  // AI label with actions: the actions box is shifted left by the decorator
+  // width; the title must clear that shifted edge.
   .#{$prefix}--card--has-ai-label:has(.#{$prefix}--card__actions)
-    .#{$prefix}--card__title,
-  .#{$prefix}--card--has-ai-label:has(.#{$prefix}--card__actions)
-    .#{$prefix}--card__label,
-  .#{$prefix}--card--has-ai-label:has(.#{$prefix}--card__actions)
-    .#{$prefix}--card__description {
-    padding-inline-end: 0;
+    .#{$prefix}--card__header
+    > .#{$prefix}--card__title {
+    max-inline-size: calc(50cqw - $spacing-03 - $spacing-06 - $spacing-03 * 2);
+  }
+
+  .#{$prefix}--card--has-ai-label .#{$prefix}--card__actions {
+    inset-inline-end: calc($spacing-03 + $spacing-06 + $spacing-03);
   }
 
   // AI label hover state for clickable cards
