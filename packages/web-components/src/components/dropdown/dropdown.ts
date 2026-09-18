@@ -34,7 +34,6 @@ import {
 } from './defs';
 import CDSDropdownItem from './dropdown-item';
 import styles from './dropdown.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import CDSAILabel from '../ai-label/ai-label';
 
 export {
@@ -63,10 +62,11 @@ export {
  * @fires cds-dropdown-selected - The custom event fired after a dropdown item is selected upon a user gesture.
  * @fires cds-dropdown-toggled - The custom event fired after the open state of this dropdown is toggled upon a user gesture.
  */
-@customElement(`${prefix}-dropdown`)
 class CDSDropdown extends ValidityMixin(
   HostListenerMixin(FormMixin(FocusMixin(LitElement)))
 ) {
+  static is = `${prefix}-dropdown`;
+
   /**
    * `true` if there is an AI Label.
    */

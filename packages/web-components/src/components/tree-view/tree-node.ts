@@ -13,7 +13,6 @@ import { iconLoader } from '../../globals/internal/icon-loader';
 import CaretDown16 from '@carbon/icons/es/caret--down/16.js';
 
 import styles from './tree-view.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Tree node.
@@ -24,8 +23,9 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  * @fires eventToggled
  *   The name of the custom event fired when a node is toggled.
  */
-@customElement(`${prefix}-tree-node`)
 class CDSTreeNode extends LitElement {
+  static is = `${prefix}-tree-node`;
+
   private _hasChildren = false;
   private _hasIcon = false;
   /**

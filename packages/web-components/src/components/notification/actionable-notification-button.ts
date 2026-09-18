@@ -8,15 +8,15 @@
 import { prefix } from '../../globals/settings';
 import CDSButton from '../button/button';
 import styles from './actionable-notification.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Actionable notification action button.
  *
  * @element cds-actionable-notification-button
  */
-@customElement(`${prefix}-actionable-notification-button`)
 class CDSActionableNotificationButton extends CDSButton {
+  static is = `${prefix}-actionable-notification-button`;
+
   update(changedProperties) {
     super.update(changedProperties);
     this.shadowRoot

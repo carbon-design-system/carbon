@@ -6,7 +6,6 @@
  */
 
 import { LitElement, html } from 'lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
 import styles from './column-hang.scss?lit';
 
@@ -15,8 +14,9 @@ import styles from './column-hang.scss?lit';
  *
  * @element cds-column-hang
  */
-@customElement(`${prefix}-column-hang`)
 class CDSColumnHang extends LitElement {
+  static is = `${prefix}-column-hang`;
+
   render() {
     // Grid styling added to contained components, allowing CSS Grid
     // to affect its own slot content.

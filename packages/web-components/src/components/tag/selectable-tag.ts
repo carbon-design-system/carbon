@@ -15,7 +15,6 @@ import { TAG_SIZE, TAG_TYPE } from './defs';
 import CDSTag from './tag';
 import '../tooltip/index';
 import styles from './tag.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 export { TAG_SIZE, TAG_TYPE };
 
@@ -27,8 +26,9 @@ export { TAG_SIZE, TAG_TYPE };
  * @fires cds-selectable-tag-beforeselected - The custom event fired as the element is being selected
  * @fires cds-selectable-tag-selected - The custom event fired after the element has been selected
  */
-@customElement(`${prefix}-selectable-tag`)
 class CDSSelectableTag extends HostListenerMixin(FocusMixin(LitElement)) {
+  static is = `${prefix}-selectable-tag`;
+
   @query(`${prefix}-tag`)
   private _tag!: CDSTag;
 

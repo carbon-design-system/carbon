@@ -8,15 +8,15 @@
 import { LitElement, html } from 'lit';
 import { prefix } from '../../globals/settings';
 import styles from './dialog.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Dialog header controls.
  *
  * @element cds-dialog-controls
  */
-@customElement(`${prefix}-dialog-controls`)
 class CDSDialogControls extends LitElement {
+  static is = `${prefix}-dialog-controls`;
+
   render() {
     return html` <slot></slot> `;
   }

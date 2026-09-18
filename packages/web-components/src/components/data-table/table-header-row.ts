@@ -7,7 +7,6 @@
 
 import { prefix } from '../../globals/settings';
 import CDSTableRow from './table-row';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Data table header row.
@@ -17,8 +16,9 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  *   The name of the custom event fired before this row is selected/unselected upon a user gesture.
  *   Cancellation of this event stops the user-initiated change in selection.
  */
-@customElement(`${prefix}-table-header-row`)
 class CDSTableHeaderRow extends CDSTableRow {
+  static is = `${prefix}-table-header-row`;
+
   /**
    * The name of the custom event fired before this row is selected/unselected upon a user gesture.
    * Cancellation of this event stops the user-initiated change in selection.

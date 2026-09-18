@@ -7,7 +7,6 @@
 
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
 import styles from './layer.scss?lit';
 
@@ -27,8 +26,9 @@ export type LayerLevel = 0 | 1 | 2;
  *   The custom event that returns the layer level and the layer element.
  * @slot children - The elements contained within the component.
  */
-@customElement(`${prefix}-layer`)
 class CDSLayer extends LitElement {
+  static is = `${prefix}-layer`;
+
   /**
    * Specify the layer level and override any existing levels based on hierarchy
    */

@@ -11,15 +11,15 @@ import { prefix } from '../../globals/settings';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import FocusMixin from '../../globals/mixins/focus';
 import styles from './skip-to-content.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Skip-to-content link.
  *
  * @element cds-skip-to-content
  */
-@customElement(`${prefix}-skip-to-content`)
 class CDSSkipToContent extends FocusMixin(LitElement) {
+  static is = `${prefix}-skip-to-content`;
+
   /**
    * The assistive text for the link,
    */

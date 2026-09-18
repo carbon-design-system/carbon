@@ -5,6 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './checkbox';
-import './checkbox-group';
-import './checkbox-skeleton';
+import { defineCustomElement } from '../../globals/register';
+import CDSCheckbox from './checkbox';
+import CDSCheckboxGroup from './checkbox-group';
+import CDSCheckboxSkeleton from './checkbox-skeleton';
+
+export { CDSCheckbox, CDSCheckboxGroup, CDSCheckboxSkeleton };
+
+defineCustomElement(CDSCheckbox);
+defineCustomElement(CDSCheckboxGroup);
+defineCustomElement(CDSCheckboxSkeleton);

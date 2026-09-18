@@ -5,4 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './fluid-form';
+import { defineCustomElement } from '../../globals/register';
+import CDSFluidForm from './fluid-form';
+
+export { CDSFluidForm };
+
+defineCustomElement(CDSFluidForm);

@@ -7,7 +7,6 @@
 
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
 import styles from './popover.scss?lit';
 import { POPOVER_BACKGROUND_TOKEN } from './defs';
@@ -17,8 +16,9 @@ import { POPOVER_BACKGROUND_TOKEN } from './defs';
  *
  * @element cds-popover-content
  */
-@customElement(`${prefix}-popover-content`)
 class CDSPopoverContent extends LitElement {
+  static is = `${prefix}-popover-content`;
+
   /**
    * Specify the popover alignment
    */

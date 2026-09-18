@@ -14,7 +14,6 @@ import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
 import CDSCheckbox from './checkbox';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import styles from './checkbox.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { CHECKBOX_ORIENTATION } from './defs';
 
 export { CHECKBOX_ORIENTATION };
@@ -23,8 +22,9 @@ export { CHECKBOX_ORIENTATION };
  *
  * @element cds-checkbox-group
  */
-@customElement(`${prefix}-checkbox-group`)
 class CDSCheckboxGroup extends LitElement {
+  static is = `${prefix}-checkbox-group`;
+
   /**
    * fieldset `aria-labelledby`
    */

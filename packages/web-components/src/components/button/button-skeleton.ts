@@ -11,13 +11,13 @@ import { html } from 'lit';
 import { prefix } from '../../globals/settings';
 import CDSButton from './button';
 import styles from './button.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Button skeleton.
  */
-@customElement(`${prefix}-button-skeleton`)
 class CDSButtonSkeleton extends CDSButton {
+  static is = `${prefix}-button-skeleton`;
+
   /**
    * Handles `click` event on the `<a>.
    *

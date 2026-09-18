@@ -18,7 +18,6 @@ import HostListener from '../../globals/decorators/host-listener';
 import { forEach } from '../../globals/internal/collection-helpers';
 import CDSHeaderMenuItem from './header-menu-item';
 import styles from './header.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Header menu.
@@ -28,8 +27,9 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  * @csspart trigger-icon The trigger button icon.
  * @csspart menu-body The menu body.
  */
-@customElement(`${prefix}-header-menu`)
 class CDSHeaderMenu extends HostListenerMixin(FocusMixin(LitElement)) {
+  static is = `${prefix}-header-menu`;
+
   /**
    * The trigger button.
    */

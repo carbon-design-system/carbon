@@ -12,7 +12,6 @@ import { property, query } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import styles from './side-nav.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Side nav menu item.
@@ -22,8 +21,9 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  * @slot title - The title.
  * @slot title-icon-container - The title icon container.
  */
-@customElement(`${prefix}-side-nav-link`)
 class CDSSideNavLink extends FocusMixin(LitElement) {
+  static is = `${prefix}-side-nav-link`;
+
   /**
    * The container for the title icon.
    */

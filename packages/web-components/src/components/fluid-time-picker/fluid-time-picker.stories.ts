@@ -5,10 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import './index';
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import '../toggle-tip/toggletip';
-import '../select/select-item';
+import '../toggle-tip/index';
+import '../select/index';
 import './fluid-time-picker';
 import './fluid-time-picker-select';
 import './fluid-time-picker-skeleton';

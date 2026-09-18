@@ -14,7 +14,6 @@ import { iconLoader } from '../../globals/internal/icon-loader';
 import ChevronDown16 from '@carbon/icons/es/chevron--down/16.js';
 import { filter } from '../../globals/internal/collection-helpers';
 import styles from './time-picker.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { TIME_PICKER_SIZE } from './defs';
 import FormMixin from '../../globals/mixins/form';
 
@@ -23,8 +22,9 @@ import FormMixin from '../../globals/mixins/form';
  *
  * @element cds-time-picker-select
  */
-@customElement(`${prefix}-time-picker-select`)
 class CDSTimePickerSelect extends FormMixin(LitElement) {
+  static is = `${prefix}-time-picker-select`;
+
   /**
    * The mutation observer for DOM mutation.
    */

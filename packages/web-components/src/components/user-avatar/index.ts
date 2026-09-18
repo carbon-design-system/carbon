@@ -5,4 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './user-avatar';
+import { defineCustomElement } from '../../globals/register';
+import CDSUserAvatar from './user-avatar';
+
+export { CDSUserAvatar };
+
+defineCustomElement(CDSUserAvatar);

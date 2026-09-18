@@ -27,7 +27,6 @@ import {
 } from './defs';
 import CDSTab from './tab';
 import styles from './tabs.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 export {
   NAVIGATION_DIRECTION,
@@ -47,8 +46,9 @@ export {
  *   Cancellation of this event stops changing the user-initiated selection.
  * @fires cds-tabs-selected - The custom event fired after a a tab is selected upon a user gesture.
  */
-@customElement(`${prefix}-tabs`)
 export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
+  static is = `${prefix}-tabs`;
+
   /**
    * The latest status of this dropdown, for screen reader to accounce.
    */

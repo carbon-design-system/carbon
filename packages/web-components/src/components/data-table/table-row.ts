@@ -9,7 +9,6 @@ import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import ChevronRight16 from '@carbon/icons/es/chevron--right/16.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import FocusMixin from '../../globals/mixins/focus';
 import styles from './data-table.scss?lit';
 import '../checkbox';
@@ -40,8 +39,9 @@ import { iconLoader } from '../../globals/internal/icon-loader';
  * @fires cds-table-row-expando-toggled
  *   The name of the custom event fired after the expanded state of this row is toggled upon a user gesture.
  */
-@customElement(`${prefix}-table-row`)
 class CDSTableRow extends HostListenerMixin(FocusMixin(LitElement)) {
+  static is = `${prefix}-table-row`;
+
   /**
    * `true` if there is an AI Label.
    */

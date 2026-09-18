@@ -8,7 +8,6 @@
 import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
 import { property, query } from 'lit/decorators.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
@@ -25,8 +24,9 @@ const selectorInput = `.${prefix}--file-input`;
  * @element cds-file-uploader-button
  * @fires cds-file-uploader-button-changed The custom event fired when there is a user gesture to select files to upload.
  */
-@customElement(`${prefix}-file-uploader-button`)
 class CDSFileUploaderButton extends HostListenerMixin(LitElement) {
+  static is = `${prefix}-file-uploader-button`;
+
   @query(selectorInput)
   private _fileInput!: HTMLInputElement;
 

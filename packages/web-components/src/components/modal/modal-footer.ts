@@ -9,15 +9,15 @@ import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import styles from './modal.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Modal footer.
  *
  * @element cds-modal-footer
  */
-@customElement(`${prefix}-modal-footer`)
 class CDSModalFooter extends LitElement {
+  static is = `${prefix}-modal-footer`;
+
   /**
    * `true` if this modal footer has more than two buttons.
    */

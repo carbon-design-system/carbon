@@ -5,5 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './toggle';
-import './toggle-skeleton';
+import { defineCustomElement } from '../../globals/register';
+import CDSToggle from './toggle';
+import CDSToggleSkeleton from './toggle-skeleton';
+
+export { CDSToggle, CDSToggleSkeleton };
+
+defineCustomElement(CDSToggle);
+defineCustomElement(CDSToggleSkeleton);

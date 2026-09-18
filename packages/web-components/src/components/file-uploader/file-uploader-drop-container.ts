@@ -13,7 +13,6 @@ import HostListenerMixin from '../../globals/mixins/host-listener';
 import HostListener from '../../globals/decorators/host-listener';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
 import styles from './file-uploader.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 export { FORM_ELEMENT_COLOR_SCHEME as TILE_COLOR_SCHEME } from '../../globals/shared-enums';
 
@@ -33,8 +32,9 @@ const dropEffects = {
  * @element cds-file-uploader-drop-container
  * @fires cds-file-uploader-drop-container-changed The custom event fired when there is a user gesture to select files to upload.
  */
-@customElement(`${prefix}-file-uploader-drop-container`)
 class CDSFileUploaderDropContainer extends HostListenerMixin(LitElement) {
+  static is = `${prefix}-file-uploader-drop-container`;
+
   @query(selectorInput)
   private _fileInput!: HTMLInputElement;
 

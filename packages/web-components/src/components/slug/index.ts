@@ -5,6 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import '../icon-button/icon-button';
-import './slug';
-import './slug-action-button';
+import { defineCustomElement } from '../../globals/register';
+import '../icon-button/index';
+import CDSSlug from './slug';
+import CDSSlugActionButton from './slug-action-button';
+
+export { CDSSlug, CDSSlugActionButton };
+
+defineCustomElement(CDSSlug);
+defineCustomElement(CDSSlugActionButton);

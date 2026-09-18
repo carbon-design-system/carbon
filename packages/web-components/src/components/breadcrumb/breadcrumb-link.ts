@@ -9,7 +9,6 @@ import { html } from 'lit';
 import { prefix } from '../../globals/settings';
 import CDSLink from '../link/link';
 import styles from './breadcrumb.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 /**
@@ -17,8 +16,9 @@ import { classMap } from 'lit/directives/class-map.js';
  *
  * @element cds-breadcrumb-link
  */
-@customElement(`${prefix}-breadcrumb-link`)
 class CDSBreadcrumbLink extends CDSLink {
+  static is = `${prefix}-breadcrumb-link`;
+
   /**
    * indicates that this breadcrumb item represents the current item
    */

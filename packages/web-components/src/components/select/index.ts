@@ -5,7 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './select';
-import './select-item';
-import './select-item-group';
-import './select-skeleton';
+import { defineCustomElement } from '../../globals/register';
+import CDSSelect from './select';
+import CDSSelectItem from './select-item';
+import CDSSelectItemGroup from './select-item-group';
+import CDSSelectSkeleton from './select-skeleton';
+
+export { CDSSelect, CDSSelectItem, CDSSelectItemGroup, CDSSelectSkeleton };
+
+defineCustomElement(CDSSelect);
+defineCustomElement(CDSSelectItem);
+defineCustomElement(CDSSelectItemGroup);
+defineCustomElement(CDSSelectSkeleton);

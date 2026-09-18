@@ -5,4 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './shape-indicator';
+import { defineCustomElement } from '../../globals/register';
+import '../tooltip/index';
+import CDSShapeIndicator from './shape-indicator';
+
+export { CDSShapeIndicator };
+
+defineCustomElement(CDSShapeIndicator);

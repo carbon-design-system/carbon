@@ -9,15 +9,15 @@ import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import styles from './textarea.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * @element cds-textarea-skeleton
  *
  * Skeleton of text area.
  */
-@customElement(`${prefix}-textarea-skeleton`)
 class CDSTextareaSkeleton extends LitElement {
+  static is = `${prefix}-textarea-skeleton`;
+
   /**
    * Specify whether the label should be hidden, or not
    */

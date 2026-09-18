@@ -5,5 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './number-input';
-import './number-input-skeleton';
+import { defineCustomElement } from '../../globals/register';
+import CDSNumberInput from './number-input';
+import CDSNumberInputSkeleton from './number-input-skeleton';
+
+export { CDSNumberInput, CDSNumberInputSkeleton };
+
+defineCustomElement(CDSNumberInput);
+defineCustomElement(CDSNumberInputSkeleton);

@@ -10,13 +10,13 @@ import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import { CODE_SNIPPET_TYPE } from './code-snippet';
 import styles from './code-snippet.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Skeleton of code snippet.
  */
-@customElement(`${prefix}-code-snippet-skeleton`)
 class CDSCodeSnippetSkeleton extends LitElement {
+  static is = `${prefix}-code-snippet-skeleton`;
+
   /**
    * The type of code snippet. Corresponds to the attribute with the same name.
    */

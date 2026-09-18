@@ -7,7 +7,6 @@
 
 import { LitElement } from 'lit';
 import { prefix } from '../../globals/settings';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import styles from './side-nav.scss?lit';
 
 /**
@@ -15,8 +14,9 @@ import styles from './side-nav.scss?lit';
  *
  * @element cds-side-nav-divider
  */
-@customElement(`${prefix}-side-nav-divider`)
 class CDSSideNavDivider extends LitElement {
+  static is = `${prefix}-side-nav-divider`;
+
   connectedCallback() {
     if (!this.hasAttribute('role')) {
       this.setAttribute('role', 'separator');

@@ -15,7 +15,6 @@ import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import { TAG_SIZE, TAG_TYPE } from './defs';
 import styles from './tag.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 export { TAG_SIZE, TAG_TYPE };
 
@@ -25,8 +24,9 @@ export { TAG_SIZE, TAG_TYPE };
  * @fires cds-tag-beingclosed - The custom event fired as the element is being closed
  * @fires cds-tag-closed - The custom event fired after the element has been closed
  */
-@customElement(`${prefix}-tag`)
 class CDSTag extends HostListenerMixin(FocusMixin(LitElement)) {
+  static is = `${prefix}-tag`;
+
   @query('button')
   protected _buttonNode!: HTMLButtonElement;
 

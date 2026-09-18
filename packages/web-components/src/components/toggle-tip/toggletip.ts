@@ -8,7 +8,6 @@
 import { classMap } from 'lit/directives/class-map.js';
 import { adoptStyles, html, LitElement } from 'lit';
 import { property, query } from 'lit/decorators.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
 import Information16 from '@carbon/icons/es/information/16.js';
 import HostListener from '../../globals/decorators/host-listener';
@@ -27,8 +26,9 @@ import { isFeatureFlagEnabled } from '../feature-flags';
  *
  * @element cds-toggletip
  */
-@customElement(`${prefix}-toggletip`)
 class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
+  static is = `${prefix}-toggletip`;
+
   /**
    * Create popover controller instance
    */

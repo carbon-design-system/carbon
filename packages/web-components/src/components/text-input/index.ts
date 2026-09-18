@@ -5,5 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './text-input';
-import './text-input-skeleton';
+import { defineCustomElement } from '../../globals/register';
+import CDSTextInput from './text-input';
+import CDSTextInputSkeleton from './text-input-skeleton';
+
+export { CDSTextInput, CDSTextInputSkeleton };
+
+defineCustomElement(CDSTextInput);
+defineCustomElement(CDSTextInputSkeleton);

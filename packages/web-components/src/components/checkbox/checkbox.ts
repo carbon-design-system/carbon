@@ -15,7 +15,6 @@ import FormMixin from '../../globals/mixins/form';
 import styles from './checkbox.scss?lit';
 import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
 import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { iconLoader } from '../../globals/internal/icon-loader';
 
 /**
@@ -26,8 +25,9 @@ import { iconLoader } from '../../globals/internal/icon-loader';
  * @csspart input The checkbox.
  * @csspart label The label.
  */
-@customElement(`${prefix}-checkbox`)
 class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
+  static is = `${prefix}-checkbox`;
+
   @query('input')
   protected _checkboxNode!: HTMLInputElement;
 

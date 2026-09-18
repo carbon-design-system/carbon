@@ -15,15 +15,15 @@ import '../popover/popover-content';
 import styles from './tooltip.scss?lit';
 import popoverStyles from '../popover/popover.scss?lit';
 import CDSTooltipContent from './tooltip-content';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Trigger button of tooltip.
  *
  * @element cds-tooltip
  */
-@customElement(`${prefix}-tooltip`)
 class CDSTooltip extends HostListenerMixin(CDSPopover) {
+  static is = `${prefix}-tooltip`;
+
   /**
    * Specify how the trigger should align with the tooltip
    */

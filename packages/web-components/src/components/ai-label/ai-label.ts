@@ -15,7 +15,6 @@ import toggletipStyles from '../toggle-tip/toggletip.scss?lit';
 import styles from './ai-label.scss?lit';
 import Undo16 from '@carbon/icons/es/undo/16.js';
 import { AI_LABEL_SIZE, AI_LABEL_KIND } from './defs';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { iconLoader } from '../../globals/internal/icon-loader';
 
 /**
@@ -23,8 +22,9 @@ import { iconLoader } from '../../globals/internal/icon-loader';
  *
  * @element cds-ai-label
  */
-@customElement(`${prefix}-ai-label`)
 class CDSAILabel extends CDSToggleTip {
+  static is = `${prefix}-ai-label`;
+
   /**
    * @deprecated the slot string will be renamed to "decorator"
    */

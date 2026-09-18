@@ -11,15 +11,15 @@ import { classMap } from 'lit/directives/class-map.js';
 import { prefix } from '../../globals/settings';
 import { TAG_SIZE } from './defs';
 import styles from './tag.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Skeleton of tag.
  *
  * @element cds-tag-skeleton
  */
-@customElement(`${prefix}-tag-skeleton`)
 export default class CDSTagSkeleton extends LitElement {
+  static is = `${prefix}-tag-skeleton`;
+
   /**
    * Specify the size of the Tag. Currently supports either `sm`,
    * `md` (default) or `lg` sizes.

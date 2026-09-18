@@ -15,7 +15,6 @@ import Incomplete16 from '@carbon/icons/es/incomplete/16.js';
 import FocusMixin from '../../globals/mixins/focus';
 import { PROGRESS_STEP_STAT } from './defs';
 import styles from './progress-indicator.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { iconLoader } from '../../globals/internal/icon-loader';
 
 export { PROGRESS_STEP_STAT };
@@ -36,8 +35,9 @@ const icons = {
  * @element cds-progress-step
  * @slot secondary-label-text - The secondary progress label.
  */
-@customElement(`${prefix}-progress-step`)
 export default class CDSProgressStep extends FocusMixin(LitElement) {
+  static is = `${prefix}-progress-step`;
+
   /**
    * Internal flags: true if the user explicitly passed these attributes.
    */

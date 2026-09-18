@@ -7,4 +7,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './edit-in-place';
+import { defineCustomElement } from '../../globals/register';
+import CDSEditInPlace from './edit-in-place';
+
+export { CDSEditInPlace };
+
+defineCustomElement(CDSEditInPlace);

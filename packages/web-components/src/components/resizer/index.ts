@@ -5,7 +5,20 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './resizer-handle';
-import './resizer-handle-pivot';
-import './resizer-grid';
-import './resizer-panel';
+import { defineCustomElement } from '../../globals/register';
+import CDSResizerHandle from './resizer-handle';
+import CDSResizerHandlePivot from './resizer-handle-pivot';
+import CDSResizerGrid from './resizer-grid';
+import CDSResizerPanel from './resizer-panel';
+
+export {
+  CDSResizerHandle,
+  CDSResizerHandlePivot,
+  CDSResizerGrid,
+  CDSResizerPanel,
+};
+
+defineCustomElement(CDSResizerHandle);
+defineCustomElement(CDSResizerHandlePivot);
+defineCustomElement(CDSResizerGrid);
+defineCustomElement(CDSResizerPanel);

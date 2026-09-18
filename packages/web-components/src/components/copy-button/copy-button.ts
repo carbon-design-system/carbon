@@ -7,7 +7,6 @@
 
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import Copy16 from '@carbon/icons/es/copy/16.js';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
@@ -21,8 +20,9 @@ import { iconLoader } from '../../globals/internal/icon-loader';
  *
  * @element cds-copy-button
  */
-@customElement(`${prefix}-copy-button`)
 class CDSCopyButton extends FocusMixin(LitElement) {
+  static is = `${prefix}-copy-button`;
+
   /**
    * Specify an optional className to be added to your Button
    */

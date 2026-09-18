@@ -8,7 +8,6 @@ import { html, LitElement } from 'lit';
 import { property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { styleMap } from 'lit/directives/style-map.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
 import '../tooltip/index';
 
@@ -23,8 +22,9 @@ const elementName = `${prefix}-${componentName}`; // cds-truncated-text
  *
  * @element cds-truncated-text
  */
-@customElement(elementName)
 export class CDSTruncatedText extends LitElement {
+  static is = elementName;
+
   /**
    * Specify how the tooltip should align with the content.
    */

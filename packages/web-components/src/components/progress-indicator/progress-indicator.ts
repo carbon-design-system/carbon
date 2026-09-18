@@ -11,15 +11,15 @@ import { prefix } from '../../globals/settings';
 import { forEach } from '../../globals/internal/collection-helpers';
 import CDSProgressStep from './progress-step';
 import styles from './progress-indicator.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Progress indicator.
  *
  * @element cds-progress-indicator
  */
-@customElement(`${prefix}-progress-indicator`)
 export default class CDSProgressIndicator extends LitElement {
+  static is = `${prefix}-progress-indicator`;
+
   /**
    * Determines whether or not the progress indicator should be rendered
    * vertically.

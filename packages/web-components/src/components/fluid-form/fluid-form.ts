@@ -8,15 +8,15 @@
 import { LitElement, html } from 'lit';
 import { prefix } from '../../globals/settings';
 import styles from './fluid-form.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Presentational element for fluid form
  *
  * @element cds-fluid-form
  */
-@customElement(`${prefix}-fluid-form`)
 class CDSFluidForm extends LitElement {
+  static is = `${prefix}-fluid-form`;
+
   connectedCallback() {
     super.connectedCallback();
     this.toggleAttribute('in-modal', !!this.closest(`${prefix}-modal-body`));

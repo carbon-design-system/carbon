@@ -9,7 +9,6 @@ import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../../globals/settings';
 import HostListenerMixin from '../../../globals/mixins/host-listener';
-import { carbonElement as customElement } from '../../../globals/decorators/carbon-element';
 import styles from './coachmark-tagline.scss?lit';
 import Close16 from '@carbon/icons/es/close/16.js';
 import Idea16 from '@carbon/icons/es/idea/16.js';
@@ -28,8 +27,9 @@ const blockClass = `${prefix}--coachmark-tagline`;
  * @fires cds-coachmark-tagline-close - Custom event fired when close button is clicked
  * @fires cds-coachmark-tagline-cta-click - Custom event fired when tagline CTA is clicked
  */
-@customElement(`${prefix}-coachmark-tagline`)
 class CDSCoachmarkTagline extends HostListenerMixin(LitElement) {
+  static is = `${prefix}-coachmark-tagline`;
+
   /**
    * Tooltip text and aria label for the Close button icon.
    */

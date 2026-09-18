@@ -8,7 +8,6 @@
 import { html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { NOTIFICATION_TYPE } from './defs';
 import CDSInlineNotification from './inline-notification';
 import styles from './toast-notification.scss?lit';
@@ -24,8 +23,9 @@ import styles from './toast-notification.scss?lit';
  *   Cancellation of this event stops the user-initiated action of closing this notification.
  * @fires cds-notification-closed - The custom event fired after this notification is closed upon a user gesture.
  */
-@customElement(`${prefix}-toast-notification`)
 class CDSToastNotification extends CDSInlineNotification {
+  static is = `${prefix}-toast-notification`;
+
   protected _type = NOTIFICATION_TYPE.TOAST;
 
   protected _renderText() {

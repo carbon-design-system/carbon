@@ -5,6 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './grid';
-import './column';
-import './column-hang';
+import { defineCustomElement } from '../../globals/register';
+import CDSGrid from './grid';
+import CDSColumn from './column';
+import CDSColumnHang from './column-hang';
+
+export { CDSGrid, CDSColumn, CDSColumnHang };
+
+defineCustomElement(CDSGrid);
+defineCustomElement(CDSColumn);
+defineCustomElement(CDSColumnHang);

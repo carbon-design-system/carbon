@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import './index';
 import { html } from 'lit';
 import { keyed } from 'lit/directives/keyed.js';
 import './toggletip';

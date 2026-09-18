@@ -5,4 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './skip-to-content';
+import { defineCustomElement } from '../../globals/register';
+import CDSSkipToContent from './skip-to-content';
+
+export { CDSSkipToContent };
+
+defineCustomElement(CDSSkipToContent);

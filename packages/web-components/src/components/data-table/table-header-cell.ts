@@ -19,7 +19,6 @@ import {
 } from './defs';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import styles from './data-table.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 export { TABLE_SORT_CYCLE, TABLE_SORT_CYCLES, TABLE_SORT_DIRECTION };
 
@@ -31,8 +30,9 @@ export { TABLE_SORT_CYCLE, TABLE_SORT_CYCLES, TABLE_SORT_DIRECTION };
  *   The custom event fired before a new sort direction is set upon a user gesture.
  *   Cancellation of this event stops the user-initiated change in sort direction.
  */
-@customElement(`${prefix}-table-header-cell`)
 class CDSTableHeaderCell extends FocusMixin(LitElement) {
+  static is = `${prefix}-table-header-cell`;
+
   /**
    * Handles `click` event on the sort button.
    *

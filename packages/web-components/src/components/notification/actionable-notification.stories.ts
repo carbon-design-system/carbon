@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import './index';
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { NOTIFICATION_KIND } from './inline-notification';
@@ -13,7 +14,7 @@ import './actionable-notification-button';
 import storyDocs from './notification.mdx';
 import { prefix } from '../../globals/settings';
 import kinds from './stories/helper';
-import '../button/button';
+import '../button/index';
 
 const noop = () => {};
 

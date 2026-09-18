@@ -31,7 +31,7 @@ import ts from 'typescript';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const COMPONENTS = path.resolve(__dirname, '..', 'src', 'components');
 
-const DECLARES = /@customElement\(\s*`\$\{prefix\}-([a-z0-9-]+)`/g;
+const DECLARES = /static is\s*=\s*`\$\{prefix\}-([a-z0-9-]+)`/g;
 const IMPORTS = /from\s*['"]([^'"]+)['"]|import\s*['"]([^'"]+)['"]/g;
 
 const componentFiles = (dir) =>

@@ -7,7 +7,6 @@
 
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
 import styles from './side-nav.scss?lit';
 
@@ -16,8 +15,9 @@ import styles from './side-nav.scss?lit';
  *
  * @element cds-header-side-nav-items
  */
-@customElement(`${prefix}-header-side-nav-items`)
 class CDSHeaderSideNavItems extends LitElement {
+  static is = `${prefix}-header-side-nav-items`;
+
   /**
    * Optionally specify if container will have a bottom divider to differentiate
    * between original sidenav items and header menu items. False by default.

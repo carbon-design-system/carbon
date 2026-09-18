@@ -8,7 +8,7 @@
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import './index';
-import '../form/form-item';
+import '../form/index';
 import '../layer';
 import { prefix } from '../../globals/settings';
 import { withLayers } from '../../../.storybook/decorators/with-layers';

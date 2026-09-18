@@ -5,6 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './radio-button';
-import './radio-button-group';
-import './radio-button-skeleton';
+import { defineCustomElement } from '../../globals/register';
+import CDSRadioButton from './radio-button';
+import CDSRadioButtonGroup from './radio-button-group';
+import CDSRadioButtonSkeleton from './radio-button-skeleton';
+
+export { CDSRadioButton, CDSRadioButtonGroup, CDSRadioButtonSkeleton };
+
+defineCustomElement(CDSRadioButton);
+defineCustomElement(CDSRadioButtonGroup);
+defineCustomElement(CDSRadioButtonSkeleton);

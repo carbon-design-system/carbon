@@ -11,7 +11,6 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { prefix } from '../../globals/settings';
 import CDSDropdownItem from '../dropdown/dropdown-item';
 import styles from './multi-select.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { isFeatureFlagEnabled } from '../feature-flags';
 import '../checkbox';
 /**
@@ -19,8 +18,9 @@ import '../checkbox';
  *
  * @element cds-multi-select-item
  */
-@customElement(`${prefix}-multi-select-item`)
 class CDSMultiSelectItem extends CDSDropdownItem {
+  static is = `${prefix}-multi-select-item`;
+
   /**
    * The property to hide when item is filtered from input
    */

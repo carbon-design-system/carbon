@@ -9,7 +9,6 @@ import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../../globals/settings';
 import HostListenerMixin from '../../../globals/mixins/host-listener';
-import { carbonElement as customElement } from '../../../globals/decorators/carbon-element';
 import styles from './coachmark-beacon.scss?lit';
 import '../../button/button';
 import { BEACON_KIND } from './defs';
@@ -22,8 +21,9 @@ const blockClass = `${prefix}--coachmark-beacon`;
  * @element cds-coachmark-beacon
  * @fires cds-coachmark-beacon-clicked Custom event fired when beacon is clicked
  * */
-@customElement(`${prefix}-coachmark-beacon`)
 class CDSCoachmarkBeacon extends HostListenerMixin(LitElement) {
+  static is = `${prefix}-coachmark-beacon`;
+
   /**
    * What style of beacon.
    * BEACON_KIND is an enum from the Coachmark and can be used for this value.

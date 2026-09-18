@@ -5,6 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './slider';
-import './slider-input';
-import './slider-skeleton';
+import { defineCustomElement } from '../../globals/register';
+import CDSSlider from './slider';
+import CDSSliderInput from './slider-input';
+import CDSSliderSkeleton from './slider-skeleton';
+
+export { CDSSlider, CDSSliderInput, CDSSliderSkeleton };
+
+defineCustomElement(CDSSlider);
+defineCustomElement(CDSSliderInput);
+defineCustomElement(CDSSliderSkeleton);

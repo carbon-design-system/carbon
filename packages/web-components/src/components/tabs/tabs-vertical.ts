@@ -10,7 +10,6 @@ import { property, query } from 'lit/decorators.js';
 import { breakpoints } from '@carbon/layout';
 import { prefix } from '../../globals/settings';
 import styles from './tabs.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Breakpoint for switching between horizontal and vertical tab layouts.
@@ -27,8 +26,9 @@ const VERTICAL_TABS_BREAKPOINT = `(min-width: calc(${breakpoints.md.width} + 0.0
  * @slot tabs - The `<cds-tabs>` navigation element.
  * @slot panel - One or more `<div role="tabpanel">` elements.
  */
-@customElement(`${prefix}-tabs-vertical`)
 export default class CDSTabsVertical extends LitElement {
+  static is = `${prefix}-tabs-vertical`;
+
   /**
    * Option to set a height style only if using vertical variation.
    */

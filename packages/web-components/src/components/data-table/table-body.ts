@@ -10,15 +10,15 @@ import { property, query } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import CDSTableRow from './table-row';
 import styles from './data-table.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Data table body.
  *
  * @element cds-table-body
  */
-@customElement(`${prefix}-table-body`)
 class CDSTableBody extends LitElement {
+  static is = `${prefix}-table-body`;
+
   /**
    * The `<slot>` element in the shadow DOM.
    */

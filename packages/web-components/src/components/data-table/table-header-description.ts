@@ -8,15 +8,15 @@
 import { LitElement, html } from 'lit';
 import { prefix } from '../../globals/settings';
 import styles from './data-table.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Data table header description
  *
  * @element cds-table-header-description
  */
-@customElement(`${prefix}-table-header-description`)
 class CDSTableHeaderDescription extends LitElement {
+  static is = `${prefix}-table-header-description`;
+
   render() {
     return html` <slot></slot> `;
   }

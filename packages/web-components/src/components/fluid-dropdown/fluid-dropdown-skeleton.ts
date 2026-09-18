@@ -7,7 +7,6 @@
 
 import { prefix } from '../../globals/settings';
 import { html } from 'lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import styles from './fluid-dropdown.scss?lit';
 import CDSDropdownSkeleton from '../dropdown/dropdown-skeleton';
 
@@ -16,8 +15,9 @@ import CDSDropdownSkeleton from '../dropdown/dropdown-skeleton';
  *
  * @element cds-fluid-dropdown-skeleton
  */
-@customElement(`${prefix}-fluid-dropdown-skeleton`)
 class CDSFluidDropdownSkeleton extends CDSDropdownSkeleton {
+  static is = `${prefix}-fluid-dropdown-skeleton`;
+
   render() {
     return html`
       <div class="${prefix}--list-box__wrapper--fluid">

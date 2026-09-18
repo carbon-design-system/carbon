@@ -8,13 +8,13 @@
 import { LitElement, html } from 'lit';
 import { prefix } from '../../globals/settings';
 import styles from './checkbox.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Skeleton of number input.
  */
-@customElement(`${prefix}-checkbox-skeleton`)
 class CDSCheckboxSkeleton extends LitElement {
+  static is = `${prefix}-checkbox-skeleton`;
+
   render() {
     return html`
       <label class="${prefix}--checkbox-label" for="checkbox" part="label">

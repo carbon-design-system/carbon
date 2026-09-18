@@ -7,7 +7,6 @@
 
 import { prefix } from '../../globals/settings';
 import { html } from 'lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import styles from './fluid-select.scss?lit';
 import CDSSelectSkeleton from '../select/select-skeleton';
 /**
@@ -15,8 +14,9 @@ import CDSSelectSkeleton from '../select/select-skeleton';
  *
  * @element cds-fluid-select-skeleton
  */
-@customElement(`${prefix}-fluid-select-skeleton`)
 class CDSFluidSelectSkeleton extends CDSSelectSkeleton {
+  static is = `${prefix}-fluid-select-skeleton`;
+
   render() {
     return html`
       <div class="${prefix}--select--fluid__skeleton">${super.render()}</div>

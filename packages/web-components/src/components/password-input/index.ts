@@ -5,5 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './password-input';
-import './password-input-skeleton';
+import { defineCustomElement } from '../../globals/register';
+import CDSPasswordInput from './password-input';
+import CDSPasswordInputSkeleton from './password-input-skeleton';
+
+export { CDSPasswordInput, CDSPasswordInputSkeleton };
+
+defineCustomElement(CDSPasswordInput);
+defineCustomElement(CDSPasswordInputSkeleton);

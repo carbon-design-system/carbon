@@ -7,7 +7,6 @@
 
 import { prefix } from '../../globals/settings';
 import styles from './dialog.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import CDSModalFooter from '../modal/modal-footer';
 
 /**
@@ -15,8 +14,9 @@ import CDSModalFooter from '../modal/modal-footer';
  *
  * @element cds-dialog-footer
  */
-@customElement(`${prefix}-dialog-footer`)
 class CDSDialogFooter extends CDSModalFooter {
+  static is = `${prefix}-dialog-footer`;
+
   /**
    * A selector that selects the child buttons.
    */

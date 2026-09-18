@@ -9,7 +9,6 @@ import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import '../button/index';
 import HostListenerMixin from '../../globals/mixins/host-listener';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import styles from './coachmark-header.scss?lit';
 import Close from '@carbon/icons/es/close/16';
 import Draggable from '@carbon/icons/es/draggable/16';
@@ -24,8 +23,9 @@ import { iconLoader } from '../../globals/internal/icon-loader';
  * coachmark-header for content header section
  * @element cds-coachmark-header
  */
-@customElement(`${prefix}-coachmark-header`)
 class CDSCoachmarkHeader extends SignalWatcher(HostListenerMixin(LitElement)) {
+  static is = `${prefix}-coachmark-header`;
+
   /**
    * Tooltip text and aria label for the Close button icon.
    */

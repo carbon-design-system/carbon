@@ -19,7 +19,6 @@ import { INPUT_SIZE } from '../text-input/text-input';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import styles from './select.scss?lit';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Select box.
@@ -31,8 +30,9 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  * @slot label-text - The label text.
  * @slot validity-message - The validity message. If present and non-empty, this input shows the UI of its invalid state.
  */
-@customElement(`${prefix}-select`)
 class CDSSelect extends FormMixin(LitElement) {
+  static is = `${prefix}-select`;
+
   /**
    * `true` if there is an AI Label.
    */

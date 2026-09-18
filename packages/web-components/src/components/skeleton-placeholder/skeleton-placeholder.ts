@@ -10,15 +10,15 @@ import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import styles from './skeleton-placeholder.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Skeleton placeholder.
  *
  * @element cds-skeleton-placeholder
  */
-@customElement(`${prefix}-skeleton-placeholder`)
 class CDSSkeletonPlaceholder extends LitElement {
+  static is = `${prefix}-skeleton-placeholder`;
+
   /**
    * Specify optional classes to be added to your SkeletonText
    */

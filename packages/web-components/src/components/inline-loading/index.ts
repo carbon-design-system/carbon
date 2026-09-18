@@ -5,4 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './inline-loading';
+import { defineCustomElement } from '../../globals/register';
+import CDSInlineLoading from './inline-loading';
+
+export { CDSInlineLoading };
+
+defineCustomElement(CDSInlineLoading);

@@ -5,4 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './pagination-nav';
+import { defineCustomElement } from '../../globals/register';
+import CDSPaginationNav from './pagination-nav';
+
+export { CDSPaginationNav };
+
+defineCustomElement(CDSPaginationNav);

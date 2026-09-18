@@ -19,7 +19,6 @@ import CDSRadioButton from './radio-button';
 import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
 import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
 import styles from './radio-button.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { iconLoader } from '../../globals/internal/icon-loader';
 
 export { RADIO_BUTTON_ORIENTATION };
@@ -32,8 +31,9 @@ export { RADIO_BUTTON_ORIENTATION };
  * @fires cds-radio-button-changed
  *   The name of the custom event fired after a radio button changes its checked state.
  */
-@customElement(`${prefix}-radio-button-group`)
 class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
+  static is = `${prefix}-radio-button-group`;
+
   /**
    * Handles user-initiated change in selected radio button.
    */

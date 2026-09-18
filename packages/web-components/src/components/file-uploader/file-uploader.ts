@@ -10,15 +10,15 @@ import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import styles from './file-uploader.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * The file uploader component.
  *
  * @element cds-file-uploader
  */
-@customElement(`${prefix}-file-uploader`)
 class CDSFileUploader extends LitElement {
+  static is = `${prefix}-file-uploader`;
+
   /**
    * `true` if the file uploader should disabled.
    */

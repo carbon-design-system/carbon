@@ -7,7 +7,6 @@
 
 import { prefix } from '../../globals/settings';
 import { html } from 'lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import CDSNumberInput from '../number-input/number-input';
 import styles from './fluid-number-input.scss?lit';
 import { classMap } from 'lit/directives/class-map.js';
@@ -17,8 +16,9 @@ import { classMap } from 'lit/directives/class-map.js';
  *
  * @element cds-fluid-number-input
  */
-@customElement(`${prefix}-fluid-number-input`)
 class CDSFluidNumberInput extends CDSNumberInput {
+  static is = `${prefix}-fluid-number-input`;
+
   connectedCallback() {
     this.setAttribute('isFluid', 'true');
     super.connectedCallback();

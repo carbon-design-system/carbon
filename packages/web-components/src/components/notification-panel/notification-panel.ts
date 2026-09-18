@@ -20,7 +20,6 @@ import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import styles from './notification-panel.scss?lit';
 import { selectorTabbable } from '../../globals/settings';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { classMap } from 'lit/directives/class-map.js';
 import { dateTimeLocaleContext } from './date-time-context';
 import '../button/index';
@@ -41,8 +40,9 @@ const blockClass = `${prefix}--notifications-panel`;
  * @fires cds-notification-donot-disturb-change - The custom event fired after notification-panel is closed upon a user gesture.
  * @fires cds-notification-click-outside - The custom event fired after user clicks outside the panel or Esc key is pressed.
  */
-@customElement(`${prefix}-notification-panel`)
 class CDSNotificationPanel extends HostListenerMixin(LitElement) {
+  static is = `${prefix}-notification-panel`;
+
   /**
    * Sets the Title for the Notification panel
    */

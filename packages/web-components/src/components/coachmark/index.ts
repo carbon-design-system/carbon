@@ -5,6 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './coachmark';
-import './coachmark-header';
-import './coachmark-body';
+import { defineCustomElement } from '../../globals/register';
+import CDSCoachmark from './coachmark';
+import CDSCoachmarkHeader from './coachmark-header';
+import CDSCoachmarkBody from './coachmark-body';
+
+export { CDSCoachmark, CDSCoachmarkHeader, CDSCoachmarkBody };
+
+defineCustomElement(CDSCoachmark);
+defineCustomElement(CDSCoachmarkHeader);
+defineCustomElement(CDSCoachmarkBody);

@@ -11,7 +11,6 @@ import Close20 from '@carbon/icons/es/close/20.js';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import styles from './dialog.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import CDSModalCloseButton from '../modal/modal-close-button';
 
 /**
@@ -21,8 +20,9 @@ import CDSModalCloseButton from '../modal/modal-close-button';
  * @csspart button The button.
  * @csspart close-icon The close icon.
  */
-@customElement(`${prefix}-dialog-close-button`)
 class CDSDialogCloseButton extends CDSModalCloseButton {
+  static is = `${prefix}-dialog-close-button`;
+
   render() {
     const { closeButtonLabel } = this;
     return html`

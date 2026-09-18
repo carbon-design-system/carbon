@@ -8,15 +8,15 @@
 import { LitElement } from 'lit';
 import { prefix } from '../../globals/settings';
 import styles from './header.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * A divider in switcher.
  *
  * @element cds-switcher-divider
  */
-@customElement(`${prefix}-switcher-divider`)
 class CDSSwitcherDivider extends LitElement {
+  static is = `${prefix}-switcher-divider`;
+
   connectedCallback() {
     if (!this.hasAttribute('role')) {
       this.setAttribute('role', 'separator');

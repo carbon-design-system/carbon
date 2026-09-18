@@ -16,7 +16,6 @@ import { iconLoader } from '../../globals/internal/icon-loader';
 import FocusMixin from '../../globals/mixins/focus';
 import { SIDE_NAV_COLLAPSE_MODE } from './side-nav';
 import styles from './header.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * The trigger button for side nav in header nav.
@@ -26,8 +25,9 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  * @csspart toggle-icon The toggle icon.
  * @fires cds-header-menu-button-toggled - The custom event fired after this header menu button is toggled upon a user gesture.
  */
-@customElement(`${prefix}-header-menu-button`)
 class CDSHeaderMenuButton extends FocusMixin(LitElement) {
+  static is = `${prefix}-header-menu-button`;
+
   private _handleClick() {
     const active = !this.active;
     this.active = active;

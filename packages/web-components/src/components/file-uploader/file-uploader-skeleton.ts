@@ -10,15 +10,15 @@ import { prefix } from '../../globals/settings';
 import '../skeleton-text/skeleton-text';
 import { SKELETON_TEXT_TYPE } from '../skeleton-text/skeleton-text';
 import '../button/button-skeleton';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * The File uploader skeleton.
  *
  * @element cds-file-uploader-skeleton
  */
-@customElement(`${prefix}-file-uploader-skeleton`)
 class CDSFileUploaderSkeleton extends LitElement {
+  static is = `${prefix}-file-uploader-skeleton`;
+
   render() {
     return html`
       <cds-skeleton-text

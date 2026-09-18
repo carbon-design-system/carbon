@@ -17,7 +17,6 @@ import HostListener from '../../globals/decorators/host-listener';
 import CDSSliderInput from './slider-input';
 import '../tooltip/index';
 import styles from './slider.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 interface Cancelable {
   cancel(): void;
@@ -53,8 +52,9 @@ const EVENT_THROTTLE = 16; // ms
  * @slot min-text - The text for minimum value.
  * @fires cds-slider-changed - The custom event fired after the value is changed by user gesture.
  */
-@customElement(`${prefix}-slider`)
 class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
+  static is = `${prefix}-slider`;
+
   private _cachedRateUpper: number = 1;
   private _cachedRate: number = 0;
   private dragCooldownTimeout: number | null = null;

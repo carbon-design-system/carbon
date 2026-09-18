@@ -5,5 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './textarea';
-import './textarea-skeleton';
+import { defineCustomElement } from '../../globals/register';
+import CDSTextarea from './textarea';
+import CDSTextareaSkeleton from './textarea-skeleton';
+
+export { CDSTextarea, CDSTextareaSkeleton };
+
+defineCustomElement(CDSTextarea);
+defineCustomElement(CDSTextareaSkeleton);
