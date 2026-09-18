@@ -82,10 +82,44 @@ import {
   g100,
 
   // Specific token values
-  interactive01,
-  interactive02,
+  background,
+  interactive,
+  textPrimary,
 } from '@carbon/themes';
 ```
+
+### Component tokens
+
+The DTCG migration introduced per-component token sets. They are exported as
+named objects:
+
+```js
+import {
+  buttonTokens,
+  tagTokens,
+  notificationTokens,
+  statusTokens,
+  contentSwitcherTokens,
+} from '@carbon/themes';
+```
+
+Each object contains the token values for all four themes. The corresponding
+Sass output is available via `@use '@carbon/themes/scss/component-tokens'`.
+
+### Modifying token values
+
+Token values are defined in [`src/dtcg/themes.json`](./src/dtcg/themes.json)
+(theme tokens) and [`src/dtcg/components/`](./src/dtcg/components/) (component
+tokens) using the [DTCG token format](https://tr.designtokens.org/format/).
+These are the single source of truth — **do not edit generated files directly**.
+
+To add or update a token:
+
+1. Edit `src/dtcg/themes.json` (or the relevant `src/dtcg/components/*.json`
+   file for component tokens)
+2. Run `yarn build` in this package to regenerate all outputs
+3. Run `yarn test --testPathPatterns=packages/themes` from the repo root to
+   confirm nothing regressed
 
 ## 📖 API Documentation
 

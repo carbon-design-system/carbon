@@ -8,9 +8,12 @@
   "dependencies": {
     "@carbon/colors": "link:../../",
     "@carbon/themes": "link:../../../themes",
-    "next": "^16.2.6",
+    "next": "^16.3.3",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "sass": "^1.36.0"
+  },
+  "resolutions": {
+    "nanoid": "^3.3.18"
   }
 }
