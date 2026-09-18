@@ -242,6 +242,10 @@
     box-shadow: none;
   }
 
+  .#{$prefix}--text-input--invalid:focus {
+    @include focus-outline('outline-lg');
+  }
+
   //-----------------------------
   // Skeleton
   //-----------------------------
