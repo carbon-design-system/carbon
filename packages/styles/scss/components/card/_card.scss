@@ -9,7 +9,9 @@
 // Card
 //-----------------------------
 
+@use '../../border-radius' as *;
 @use '../../config' as *;
+@use '../../feature-flags' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
@@ -26,6 +28,10 @@
     position: relative;
     background-color: $layer;
     color: $text-primary;
+
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-08;
+    }
   }
 
   // ─── Clickable ───────────────────────────────────────────────────────
@@ -33,6 +39,10 @@
     display: block;
     border: 1px solid $border-tile-01;
     cursor: pointer;
+
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-08;
+    }
     // Reset anchor defaults when card is rendered as <a>
     text-decoration: none;
     transition: background-color $duration-fast-02 motion(standard, productive);
@@ -53,7 +63,6 @@
   }
 
   // ─── Clickable footer affordance ─────────────────────────────────────
-  // Auto-rendered by Card when clickable is true.
   .#{$prefix}--card__clickable-footer {
     display: flex;
     align-items: center;
@@ -100,16 +109,13 @@
   }
 
   // ─── Footer ──────────────────────────────────────────────────────────
-  // Default: padded, no border (raw-content slot)
   .#{$prefix}--card__footer {
     display: flex;
     align-items: center;
     padding: $spacing-05;
   }
 
-  // Action-set layout: triggered when CardAction children are present
   .#{$prefix}--card__footer:has(> .#{$prefix}--card__action) {
-    overflow: hidden;
     padding: 0;
     border-block-start: 1px solid $border-subtle;
     gap: 1px;
@@ -142,6 +148,67 @@
     margin-inline-start: 0;
   }
 
+  // ─── Footer action border-radius ─────────────────────────────────────
+  @if enabled('enable-v12-release') {
+    .#{$prefix}--card__footer:has(> .#{$prefix}--card__action)
+      > .#{$prefix}--card__action:first-child:not(
+        :has(.#{$prefix}--btn--icon-only)
+      ) {
+      border-end-start-radius: $border-radius-08;
+    }
+
+    .#{$prefix}--card__footer:has(> .#{$prefix}--card__action)
+      > .#{$prefix}--card__action:first-child:not(
+        :has(.#{$prefix}--btn--icon-only)
+      )
+      .#{$prefix}--btn {
+      border-end-start-radius: $border-radius-08;
+    }
+
+    .#{$prefix}--card__footer:has(> .#{$prefix}--card__action)
+      > .#{$prefix}--card__action:last-child {
+      border-end-end-radius: $border-radius-08;
+    }
+
+    .#{$prefix}--card__footer:has(> .#{$prefix}--card__action)
+      > .#{$prefix}--card__action:last-child
+      .#{$prefix}--btn {
+      border-end-end-radius: $border-radius-08;
+    }
+
+    // ─── Horizontal card: suppress footer radius where media covers the corner ─
+    .#{$prefix}--card--horizontal:has(
+        > .#{$prefix}--card__media--horizontal:first-child
+      )
+      .#{$prefix}--card__footer:has(> .#{$prefix}--card__action)
+      > .#{$prefix}--card__action:first-child,
+    .#{$prefix}--card--horizontal:has(
+        > .#{$prefix}--card__media--horizontal:first-child
+      )
+      .#{$prefix}--card__footer:has(> .#{$prefix}--card__action)
+      > .#{$prefix}--card__action:first-child
+      .#{$prefix}--btn {
+      border-end-start-radius: 0;
+    }
+
+    // Media-right: media occupies the bottom-right corner of the card.
+    // The footer's right edge is interior (against __content), not the card edge —
+    // suppress the bottom-right radius on the last footer action.
+    .#{$prefix}--card--horizontal:has(
+        > .#{$prefix}--card__media--horizontal:last-child
+      )
+      .#{$prefix}--card__footer:has(> .#{$prefix}--card__action)
+      > .#{$prefix}--card__action:last-child,
+    .#{$prefix}--card--horizontal:has(
+        > .#{$prefix}--card__media--horizontal:last-child
+      )
+      .#{$prefix}--card__footer:has(> .#{$prefix}--card__action)
+      > .#{$prefix}--card__action:last-child
+      .#{$prefix}--btn {
+      border-end-end-radius: 0;
+    }
+  }
+
   // ─── Action wrapper ───────────────────────────────────────────────────
   .#{$prefix}--card__action {
     display: inline-flex;
@@ -162,13 +229,41 @@
 
   // ─── Media (AspectRatio slot) ────────────────────────────────────────
   .#{$prefix}--card__media {
+    overflow: hidden;
     grid-column: 1 / -1;
     inline-size: 100%;
+
+    @if enabled('enable-v12-release') {
+      &:first-child {
+        border-start-end-radius: $border-radius-08;
+        border-start-start-radius: $border-radius-08;
+      }
+
+      &:last-child {
+        border-end-end-radius: $border-radius-08;
+        border-end-start-radius: $border-radius-08;
+      }
+    }
 
     // Disable Carbon's float-based padding-top trick
     &::before,
     &::after {
       display: none;
+    }
+  }
+
+  // ─── Media inside a bordered (clickable) card ────────────────────────
+  @if enabled('enable-v12-release') {
+    .#{$prefix}--card--clickable .#{$prefix}--card__media {
+      &:first-child {
+        border-start-end-radius: calc($border-radius-08 - 1px);
+        border-start-start-radius: calc($border-radius-08 - 1px);
+      }
+
+      &:last-child {
+        border-end-end-radius: calc($border-radius-08 - 1px);
+        border-end-start-radius: calc($border-radius-08 - 1px);
+      }
     }
   }
 
@@ -221,6 +316,20 @@
     flex-basis: var(--#{$prefix}--card--media-width, 33.33%);
     flex-shrink: 0;
     align-self: stretch;
+
+    @if enabled('enable-v12-release') {
+      // Media-left: clip to the card's top-left and bottom-left outer corners.
+      &:first-child {
+        border-end-start-radius: $border-radius-08;
+        border-start-start-radius: $border-radius-08;
+      }
+
+      // Media-right: clip to the card's top-right and bottom-right outer corners.
+      &:last-child {
+        border-end-end-radius: $border-radius-08;
+        border-start-end-radius: $border-radius-08;
+      }
+    }
   }
 
   .#{$prefix}--card--horizontal > .#{$prefix}--card__content {
@@ -466,6 +575,10 @@
     inset-inline-start: 0;
     opacity: 0;
     transition: opacity $duration-fast-02 motion(standard, productive);
+
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-08;
+    }
   }
 
   .#{$prefix}--card--clickable.#{$prefix}--card--has-ai-label:hover::before {

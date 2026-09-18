@@ -55,7 +55,7 @@ export const CardMedia = ({
   if (horizontal) {
     return (
       <div
-        className={`${blockClass}__media ${blockClass}__media--horizontal`}
+        className={cx(`${blockClass}__media--horizontal`, className)}
         style={
           {
             [`--${prefix}--card--media-width`]: mediaWidth,
