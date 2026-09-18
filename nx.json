@@ -4,5 +4,6 @@
     "build": {
       "dependsOn": ["^build"]
     }
-  }
+  },
+  "neverConnectToCloud": true
 }

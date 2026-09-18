@@ -1,0 +1,16 @@
+{
+  "name": "colors-explorer",
+  "private": true,
+  "scripts": {
+    "develop": "next",
+    "build": "next build"
+  },
+  "dependencies": {
+    "@carbon/colors": "link:../../",
+    "@carbon/themes": "link:../../../themes",
+    "next": "^16.2.6",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
+    "sass": "^1.36.0"
+  }
+}

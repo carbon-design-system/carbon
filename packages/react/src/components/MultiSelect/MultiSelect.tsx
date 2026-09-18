@@ -68,6 +68,7 @@ import {
 } from '../../internal';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
+import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
 
 const {
   ItemClick,
@@ -363,6 +364,8 @@ export const MultiSelect = React.forwardRef(
     const enableFloatingStyles =
       useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
 
+    const enableV12Release = useFeatureFlag('enable-v12-release');
+
     const { refs, floatingStyles, middlewareData } = useFloating(
       enableFloatingStyles
         ? {
@@ -508,6 +511,8 @@ export const MultiSelect = React.forwardRef(
     });
 
     const toggleButtonRef = useRef<HTMLButtonElement>(null);
+    const titleRef = useRef<HTMLLabelElement>(null);
+    const labelRef = useRef<HTMLSpanElement>(null);
     const mergedRef = mergeRefs<HTMLButtonElement>(
       toggleButtonProps.ref,
       ref,
@@ -723,6 +728,14 @@ export const MultiSelect = React.forwardRef(
     const labelProps = isValidElement(titleText)
       ? { id: allLabelProps.id }
       : allLabelProps;
+    useNoInteractiveChildren(
+      titleRef,
+      'The MultiSelect component `titleText` prop must have no interactive content'
+    );
+    useNoInteractiveChildren(
+      labelRef,
+      'The MultiSelect component `label` prop must have no interactive content'
+    );
 
     const getSelectionStats = useCallback(
       (
@@ -759,7 +772,7 @@ export const MultiSelect = React.forwardRef(
 
     return (
       <div className={wrapperClasses}>
-        <label className={titleClasses} {...labelProps}>
+        <label className={titleClasses} {...labelProps} ref={titleRef}>
           {titleText && titleText}
           {selectedItems.length > 0 && (
             <span className={`${prefix}--visually-hidden`}>
@@ -813,7 +826,10 @@ export const MultiSelect = React.forwardRef(
               {...toggleButtonProps}
               ref={mergedRef}
               {...readOnlyEventHandlers}>
-              <span id={fieldLabelId} className={`${prefix}--list-box__label`}>
+              <span
+                id={fieldLabelId}
+                className={`${prefix}--list-box__label`}
+                ref={labelRef}>
                 {label}
               </span>
               <ListBox.MenuIcon
@@ -840,13 +856,15 @@ export const MultiSelect = React.forwardRef(
                   totalSelectableCount,
                 } = getSelectionStats(selectedItems, filteredItems);
 
-                const isChecked = isSelectAllItem(item)
+                const isSelectAll = isSelectAllItem(item);
+
+                const isChecked = isSelectAll
                   ? nonSelectAllSelectedCount === totalSelectableCount &&
                     totalSelectableCount > 0
                   : selectedItems.some((selected) => isEqual(selected, item));
 
                 const isIndeterminate =
-                  isSelectAllItem(item) &&
+                  isSelectAll &&
                   hasIndividualSelections &&
                   nonSelectAllSelectedCount < totalSelectableCount;
 
@@ -858,10 +876,10 @@ export const MultiSelect = React.forwardRef(
                 });
                 const itemText = itemToString(item);
 
-                return (
+                const menuItem = (
                   <ListBox.MenuItem
                     key={itemProps.id}
-                    isActive={isChecked && !isSelectAllItem(item)}
+                    isActive={isChecked && !isSelectAll}
                     aria-label={itemText}
                     aria-checked={isIndeterminate ? 'mixed' : isChecked}
                     isHighlighted={highlightedIndex === index}
@@ -882,6 +900,17 @@ export const MultiSelect = React.forwardRef(
                     </div>
                   </ListBox.MenuItem>
                 );
+
+                return isSelectAll && enableV12Release
+                  ? [
+                      menuItem,
+                      <li
+                        key={`${itemProps.id}__divider`}
+                        className={`${prefix}--list-box__menu-divider`}
+                        aria-hidden="true"
+                      />,
+                    ]
+                  : menuItem;
               })}
           </ListBox.Menu>
           {itemsCleared && (
