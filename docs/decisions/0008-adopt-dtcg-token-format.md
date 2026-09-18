@@ -65,25 +65,22 @@ Scope boundaries:
 Under this migration, DTCG JSON files are the only hand-edited source of truth:
 
 - **`@carbon/themes`** — All four themes (white, g10, g90, g100) and component
-  tokens consolidated into [`themes.json`](packages/themes/src/dtcg/themes.json)
-  and component token files under `packages/themes/src/dtcg/components/`. Each
-  token carries `$type: "color"`, `$description`, and per-theme values stored
-  under a `$extensions["carbon.themes"]` key so all four themes live in one file
-  instead of four.
-- **`@carbon/colors`** — The full color palette moved to
-  [`colors.json`](packages/colors/src/dtcg/colors.json) with `$type: "color"` on
-  every entry. This file becomes the palette alias target for all token
-  references in [`themes.json`](packages/themes/src/dtcg/themes.json).
+  tokens consolidated into `themes.json` and component token files under
+  `packages/themes/src/dtcg/components/`. Each token carries `$type: "color"`,
+  `$description`, and per-theme values stored under a
+  `$extensions["carbon.themes"]` key so all four themes live in one file instead
+  of four.
+- **`@carbon/colors`** — The full color palette moved to `colors.json` with
+  `$type: "color"` on every entry. This file becomes the palette alias target
+  for all token references in `themes.json`.
 - **`@carbon/layout`** — All spacing, fluid-spacing, container, icon-size,
-  border-radius, layout-scale, and size tokens moved to
-  [`layout.json`](packages/layout/src/dtcg/layout.json) with
+  border-radius, layout-scale, and size tokens moved to `layout.json` with
   `$type: "dimension"` on every token. A `carbon.layout.converter` extension
   declares how raw numeric values (`miniUnits` grid steps or pixel values) are
   resolved to `rem` strings by Style Dictionary.
-- **`@carbon/motion`** — Duration and easing tokens moved to
-  [`motion.json`](packages/motion/src/dtcg/motion.json) and
-  [`surfaces.json`](packages/motion/src/dtcg/surfaces.json) with
-  `$type: "duration"` and `$type: "cubicBezier"` respectively.
+- **`@carbon/motion`** — Duration and easing tokens moved to `motion.json` and
+  `surfaces.json` with `$type: "duration"` and `$type: "cubicBezier"`
+  respectively.
 
 `$extensions` carries auxiliary data that may be needed to calculate the actual
 value. See individual package READMEs for the full `$extensions` usage
@@ -98,12 +95,10 @@ JavaScript/TypeScript modules that consumers already depend on. The public API
 surface of each package is unchanged.
 
 Consistency across the migrated theme files is enforced via a Jest validation
-test
-([`dtcg-cross-theme-parity-test.js`](packages/themes/__tests__/dtcg-cross-theme-parity-test.js)),
-which asserts token naming, `$type`, and `$description` consistency across all
-Carbon theme files. DTCG JSON Schema validation was also added to each package's
-test suite so that any token that does not conform to the spec causes a CI
-failure before it reaches consumers.
+test (`dtcg-cross-theme-parity-test.js`), which asserts token naming, `$type`,
+and `$description` consistency across all Carbon theme files. DTCG JSON Schema
+validation was also added to each package's test suite so that any token that
+does not conform to the spec causes a CI failure before it reaches consumers.
 
 ## Consequences
 
@@ -121,8 +116,7 @@ Adopting DTCG as the source format has the following effects.
   not a driver of this migration and hasn't been adopted yet.
 - **Cross-theme consistency checking** — automatable now that naming, `$type`,
   and `$description` follow a standard schema, rather than being implicit in JS
-  structure (enforced via
-  [`dtcg-cross-theme-parity-test.js`](packages/themes/__tests__/dtcg-cross-theme-parity-test.js)).
+  structure (enforced via `dtcg-cross-theme-parity-test.js`).
 - **Consistent authoring across packages** — Contributors follow the same
   conventions regardless of which package they are editing: `$type`, `$value`,
   `$description`, `$extensions`. Onboarding friction is reduced.
