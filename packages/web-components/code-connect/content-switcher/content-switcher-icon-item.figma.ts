@@ -1,4 +1,4 @@
-// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=10151-402337&t=Y6lD1uj5Q0yszbgL-4
+// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=21988-280553&t=Y6lD1uj5Q0yszbgL-4
 // source=https://github.com/carbon-design-system/carbon/blob/main/packages/web-components/src/components/content-switcher/content-switcher-item.ts
 // component=cds-content-switcher-item
 
@@ -13,7 +13,9 @@ import figma from 'figma';
 import { renderBooleanAttribute } from '../template-helpers';
 
 const instance = figma.selectedInstance;
-const text = instance.getString('Label text');
+const children = instance
+  .findConnectedInstances((child) => child.hasCodeConnect())
+  .map((child) => child.executeTemplate().example);
 const disabled = instance.getEnum('State', { Disabled: true });
 
 export default {
@@ -21,9 +23,12 @@ export default {
   imports: [
     "import '@carbon/web-components/es/components/content-switcher/index.js'",
   ],
-  example: figma.code`<cds-content-switcher-item value="switch-value"${renderBooleanAttribute(
+  example: figma.code`<cds-content-switcher-item icon value="icon-switch-value"${renderBooleanAttribute(
     'disabled',
     disabled
-  )}>${text}</cds-content-switcher-item>`,
+  )}>
+  ${children}
+  <span slot="tooltip-content">Content switcher item</span>
+</cds-content-switcher-item>`,
   metadata: { nestable: true },
 };
