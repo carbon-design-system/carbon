@@ -51,6 +51,11 @@ export interface OverflowMenuItemProps
    */
   href?: string;
 
+  /**
+   * Specify where to display the linked URL when `href` is provided.
+   */
+  target?: React.HTMLAttributeAnchorTarget;
+
   index?: number;
 
   /**
@@ -235,6 +240,11 @@ OverflowMenuItem.propTypes = {
    * If given, overflow item will render as a link with the given href
    */
   href: PropTypes.string,
+
+  /**
+   * Specify where to display the linked URL when `href` is provided.
+   */
+  target: PropTypes.string,
 
   index: PropTypes.number,
 
