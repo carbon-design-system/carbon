@@ -207,7 +207,7 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
       (string | undefined)[]
     >([]);
 
-    const uploaderButton = React.createRef<HTMLLabelElement>();
+    const uploaderButton = React.createRef<HTMLButtonElement>();
     const nodes: HTMLElement[] = [];
 
     const createFileItem = useCallback(
