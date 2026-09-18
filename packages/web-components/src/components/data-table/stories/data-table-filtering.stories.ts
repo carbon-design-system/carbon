@@ -6,11 +6,14 @@
  */
 
 import { html } from 'lit';
+import { enabled } from '@carbon/feature-flags';
 import { prefix } from '../../../globals/settings';
 import { TABLE_SIZE } from '../table';
 // @ts-ignore
 import Settings16 from '@carbon/icons/es/settings/16.js';
 import '../index';
+import '../../overflow-menu/';
+import '../../menu/index';
 import storyDocs from './data-table.mdx';
 import { iconLoader } from '../../../globals/internal/icon-loader';
 
@@ -54,6 +57,39 @@ const controls = {
   },
 };
 
+const renderToolbarOverflowMenu = () =>
+  enabled('enable-v12-overflowmenu')
+    ? html`
+        <cds-overflow-menu
+          enable-v12-overflowmenu
+          toolbar-action
+          label="Settings">
+          ${iconLoader(Settings16, {
+            slot: 'icon',
+            class: `${prefix}--overflow-menu__icon`,
+          })}
+          <cds-menu>
+            <cds-menu-item label="Action 1"></cds-menu-item>
+            <cds-menu-item label="Action 2"></cds-menu-item>
+            <cds-menu-item label="Action 3"></cds-menu-item>
+          </cds-menu>
+        </cds-overflow-menu>
+      `
+    : html`
+        <cds-overflow-menu toolbar-action>
+          ${iconLoader(Settings16, {
+            slot: 'icon',
+            class: `${prefix}--overflow-menu__icon`,
+          })}
+          <span slot="tooltip-content">Settings</span>
+          <cds-overflow-menu-body flipped>
+            <cds-overflow-menu-item> Action 1 </cds-overflow-menu-item>
+            <cds-overflow-menu-item> Action 2 </cds-overflow-menu-item>
+            <cds-overflow-menu-item> Action 3 </cds-overflow-menu-item>
+          </cds-overflow-menu-body>
+        </cds-overflow-menu>
+      `;
+
 export const Default = {
   args: defaultArgs,
   argTypes: controls,
@@ -81,18 +117,7 @@ export const Default = {
         <cds-table-toolbar-content ?has-batch-actions="true">
           <cds-table-toolbar-search
             placeholder="Filter table"></cds-table-toolbar-search>
-          <cds-overflow-menu toolbar-action>
-            ${iconLoader(Settings16, {
-              slot: 'icon',
-              class: `${prefix}--overflow-menu__icon`,
-            })}
-            <span slot="tooltip-content">Settings</span>
-            <cds-overflow-menu-body flipped>
-              <cds-overflow-menu-item> Action 1 </cds-overflow-menu-item>
-              <cds-overflow-menu-item> Action 2 </cds-overflow-menu-item>
-              <cds-overflow-menu-item> Action 3 </cds-overflow-menu-item>
-            </cds-overflow-menu-body>
-          </cds-overflow-menu>
+          ${renderToolbarOverflowMenu()}
           <cds-button>Primary Button</cds-button>
         </cds-table-toolbar-content>
       </cds-table-toolbar>
