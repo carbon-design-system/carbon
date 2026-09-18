@@ -4,11 +4,9 @@ Date: 2026-07-30
 
 ## Status
 
-Accepted
-
-Implemented across four packages: `@carbon/themes` (#22326, #22870, #23217),
-`@carbon/motion` (#22743), `@carbon/layout` (#23075), and `@carbon/colors`
-(#23074).
+Accepted. Migration complete for `@carbon/themes`, `@carbon/colors`,
+`@carbon/motion`, and `@carbon/layout` (v11 tokens). v10 tokens are out of scope
+and will not be migrated. v12 migration work is ongoing.
 
 ## Context
 
@@ -26,27 +24,22 @@ foundational package kept its tokens as hand-authored JS exports:
   had to be kept in sync.
 
 This JS-first approach worked well for JavaScript consumers, but it created
-three pain points as tooling expectations evolved:
+several problems as tooling expectations evolved:
 
-1. **No shared consumer story for non-JS targets.** Tooling outside JavaScript —
-   design tools (Figma Variables, Tokens Studio), mobile code generators
-   (iOS/SwiftUI, Android Compose), and documentation pipelines — could not
-   consume Carbon tokens reliably. There was no documented, stable,
-   format-neutral schema to target. Every consumer had to write a custom parser
-   or adapter on top of the generated JS.
-
-2. **No machine-readable type information.** Plain JS exports carry no metadata
-   about what kind of value a token represents. A tool processing
-   `spacing05 = '1rem'` has to guess whether it is a dimension, a color, or an
-   opaque string. That guessing is fragile and blocks integrations with
-   strongly-typed platforms where the type determines which field the token
-   populates.
-
-3. **Divergent per-package build conventions.** Each package resolved its tokens
-   differently — `miniUnits()` in layout, raw hex strings in colors, bare
-   millisecond strings in motion — with no shared rule. Adding a token required
-   understanding each package's unique authoring convention and updating its
-   bespoke build script separately.
+- **Poor machine-readability for emerging AI/agent tooling**: JS-defined tokens
+  are not structured for reliable parsing by MCP servers or other agent-based
+  consumers, which need a predictable, tool-agnostic data format rather than
+  executable code.
+- **Limited tool interoperability**: any non-JS tool (such as design-token
+  processors, design tools like Figma, documentation pipelines, or custom
+  external integrations) needed bespoke adapters or was forced to
+  execute/interpret JS to consume Carbon tokens. There was no machine-readable
+  type information or format-neutral schema.
+- **Divergent per-package build conventions**: each package resolved its tokens
+  differently — `miniUnits()` in layout, raw hex strings in colors, bare
+  millisecond strings in motion — with no shared rule. Adding a token required
+  understanding each package's unique authoring convention and updating its
+  bespoke build script separately.
 
 The
 [W3C Design Tokens Community Group (DTCG)](https://tr.designtokens.org/format/)
@@ -59,29 +52,44 @@ it the closest thing to an industry standard at the time of this decision.
 
 ## Decision
 
-Adopt the DTCG format as the **canonical, human-edited token source** in the
-four foundational Carbon packages that author design tokens.
+Migrate all v11 tokens across four Carbon packages — `@carbon/themes`,
+`@carbon/colors`, `@carbon/motion`, and `@carbon/layout` — from JS-based
+definitions to the DTCG token format.
+
+Scope boundaries:
+
+- **v11**: fully migrated (all four packages above).
+- **v10**: explicitly not considered for migration.
+- **v12**: migration continues as an ongoing effort beyond this ADR's scope.
+
+Under this migration, DTCG JSON files are the only hand-edited source of truth:
 
 - **`@carbon/themes`** — All four themes (white, g10, g90, g100) and component
-  tokens consolidated into `src/dtcg/themes.json` and
-  `src/dtcg/components/*.json`. Each token carries `$type: "color"`,
-  `$description`, and per-theme values stored under a
-  `$extensions["carbon.themes"]` key so all four themes live in one file instead
-  of four.
-- **`@carbon/colors`** — The full color palette moved to `src/dtcg/colors.json`
-  with `$type: "color"` on every entry. This file becomes the palette alias
-  target for all token references in `themes.json`.
+  tokens consolidated into [`themes.json`](packages/themes/src/dtcg/themes.json)
+  and component token files under `packages/themes/src/dtcg/components/`. Each
+  token carries `$type: "color"`, `$description`, and per-theme values stored
+  under a `$extensions["carbon.themes"]` key so all four themes live in one file
+  instead of four.
+- **`@carbon/colors`** — The full color palette moved to
+  [`colors.json`](packages/colors/src/dtcg/colors.json) with `$type: "color"` on
+  every entry. This file becomes the palette alias target for all token
+  references in [`themes.json`](packages/themes/src/dtcg/themes.json).
 - **`@carbon/layout`** — All spacing, fluid-spacing, container, icon-size,
-  border-radius, layout-scale, and size tokens moved to `src/dtcg/layout.json`
-  with `$type: "dimension"` on every token. A `carbon.layout.converter`
-  extension declares how raw numeric values (`miniUnits` grid steps or pixel
-  values) are resolved to `rem` strings by Style Dictionary.
+  border-radius, layout-scale, and size tokens moved to
+  [`layout.json`](packages/layout/src/dtcg/layout.json) with
+  `$type: "dimension"` on every token. A `carbon.layout.converter` extension
+  declares how raw numeric values (`miniUnits` grid steps or pixel values) are
+  resolved to `rem` strings by Style Dictionary.
 - **`@carbon/motion`** — Duration and easing tokens moved to
-  `src/dtcg/motion.json` and `src/dtcg/surfaces.json` with `$type: "duration"`
-  and `$type: "cubicBezier"` respectively.
+  [`motion.json`](packages/motion/src/dtcg/motion.json) and
+  [`surfaces.json`](packages/motion/src/dtcg/surfaces.json) with
+  `$type: "duration"` and `$type: "cubicBezier"` respectively.
 
-In all four packages the DTCG JSON files are the only hand-edited source of
-truth. The existing build pipeline in each package was updated to use
+`$extensions` carries auxiliary data that may be needed to calculate the actual
+value. See individual package READMEs for the full `$extensions` usage
+convention and examples.
+
+The existing build pipeline in each package was updated to use
 [Style Dictionary v5](https://styledictionary.com/) as the transform and output
 layer, replacing the previous bespoke Node scripts. Style Dictionary reads the
 DTCG files, applies Carbon-specific transforms (e.g. `carbon/alpha-modifier`,
@@ -89,51 +97,58 @@ DTCG files, applies Carbon-specific transforms (e.g. `carbon/alpha-modifier`,
 JavaScript/TypeScript modules that consumers already depend on. The public API
 surface of each package is unchanged.
 
-DTCG JSON Schema validation was added to each package's test suite so that any
-token that does not conform to the spec causes a CI failure before it reaches
-consumers.
+Consistency across the migrated theme files is enforced via a Jest validation
+test
+([`dtcg-cross-theme-parity-test.js`](packages/themes/__tests__/dtcg-cross-theme-parity-test.js)),
+which asserts token naming, `$type`, and `$description` consistency across all
+Carbon theme files. DTCG JSON Schema validation was also added to each package's
+test suite so that any token that does not conform to the spec causes a CI
+failure before it reaches consumers.
 
 ## Consequences
 
 Adopting DTCG as the source format has the following effects.
 
-**Easier to do:**
+**Easier:**
 
-- **Design-tool synchronisation.** Figma Variables, Tokens Studio, and other
-  tools that consume DTCG JSON can ingest Carbon tokens directly without a
-  custom adapter. `$type` ensures values land in the correct variable type
-  (color vs. number vs. string).
-- **Cross-platform code generation.** Mobile platforms (iOS/SwiftUI, Android
-  Compose) and other targets can use a standard DTCG pipeline to generate
-  platform-native token files from the same source Carbon uses.
-- **Consistent authoring across packages.** Contributors follow the same
+- **AI/agent tooling readiness** — structured DTCG JSON is directly parseable by
+  MCP and other agent-based consumers, without needing to execute or interpret
+  JS.
+- **Multi-tool support** — tokens are no longer locked to JS-only consumption;
+  other tools (e.g., Style Dictionary as a CI conformance checker) can read the
+  same source of truth.
+- **Figma sync** — becomes newly feasible as a future capability, though it was
+  not a driver of this migration and hasn't been adopted yet.
+- **Cross-theme consistency checking** — automatable now that naming, `$type`,
+  and `$description` follow a standard schema, rather than being implicit in JS
+  structure (enforced via
+  [`dtcg-cross-theme-parity-test.js`](packages/themes/__tests__/dtcg-cross-theme-parity-test.js)).
+- **Consistent authoring across packages** — Contributors follow the same
   conventions regardless of which package they are editing: `$type`, `$value`,
   `$description`, `$extensions`. Onboarding friction is reduced.
-- **Token explorer and documentation.** The shared schema makes it
+- **Token explorer and documentation** — The shared schema makes it
   straightforward to generate token explorer UIs, searchable tables, and diff
   views from the JSON without parsing package-specific formats.
-- **Spec validation in CI.** Schema validation runs automatically, catching
+- **Spec validation in CI** — Schema validation runs automatically, catching
   structural mistakes (wrong type, missing description, invalid reference
   syntax) before they reach consumers.
 
-**More difficult or requiring care:**
+**More difficult / carried-over debt to be aware of:**
 
-- **Nested-key authoring.** DTCG represents token names through JSON object
+- **v10 tokens remain on the old JS-based format indefinitely**, so tooling that
+  needs to support both v10 and v11 must handle two token formats side by side.
+- **Nested-key authoring** — DTCG represents token names through JSON object
   nesting rather than flat hyphenated keys. A token named `border-subtle-02` is
   authored as `border → subtle → 02`. Contributors must learn to navigate nested
   JSON rather than flat lists. The per-package READMEs document this convention
   explicitly.
-- **Carbon-specific extensions.** The DTCG spec does not natively express
+- **Carbon-specific extensions** — The DTCG spec does not natively express
   per-theme color values (one token, four theme values) or grid-step-based
   dimension authoring. These are expressed as `$extensions["carbon.themes"]` and
   `$extensions["carbon.layout"]` respectively. Any tool that reads the JSON must
   understand these extensions or treat extension data as opaque. The extensions
   are documented in the package READMEs and are stable.
-- **Build dependency on Style Dictionary v5.** All four packages now depend on
+- **Build dependency on Style Dictionary v5** — All four packages now depend on
   SD v5. Upstream breaking changes or bugs in SD affect token generation across
   the entire foundational layer. The SD version is pinned and upgrade testing is
   required before bumping.
-- **Dual-format transition period.** During migration, some consumers may depend
-  on the old generated output filenames or Sass map variable names. Because the
-  generated API surface was kept identical, no breaking changes were introduced,
-  but care is required when renaming generated files in the future.
