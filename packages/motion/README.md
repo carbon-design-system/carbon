@@ -22,55 +22,73 @@ yarn add @carbon/motion
 ## Usage
 
 `@carbon/motion` supports standard, entrance, and exit easing curves in two
-motion modes: productive and expressive. You can access these curves using
-either Sass or JavaScript.
+motion modes: productive and expressive. It also provides duration tokens and
+named motion surfaces. You can access these using either Sass or JavaScript.
+
+> **Build note:** Token values are generated at build time from
+> `src/dtcg/motion.json` and `src/dtcg/surfaces.json`. Run `yarn build` (or
+> `npm run build`) once after cloning so that `js/generated/` and
+> `scss/generated/` are present.
 
 ### Sass
 
-`@carbon/motion` exports a `carbon--motion` function and `carbon--motion` mixin
-that you can use to access the value of a motion curve or include that curve as
-the `transition-timing-function` for a selector. To use these helpers, you can
-do the following in your project:
+`@carbon/motion` exports a `motion` function and `motion` mixin for easing
+curves, duration token variables, a `surface` function and `surface` mixin for
+named motion surfaces. Bring in the package with `@use`:
 
 ```scss
-@import '@carbon/motion/scss/motion.scss';
+@use '@carbon/motion';
 
-.my-custom-selector {
-  // Supplies the standard easing curve, using the productive mode by default
-  transition-timing-function: carbon--motion(standard);
+.my-selector {
+  // Easing curve — productive mode by default
+  transition-timing-function: motion.motion(standard);
 }
 
-.my-custom-selector-v2 {
-  // Supplies the standard easing curve, but with the expressive mode, on the
-  // transition-timing-function property for this selector
-  @include carbon--motion(standard, expressive);
+.my-selector-expressive {
+  // Easing curve with explicit mode, set as transition-timing-function
+  @include motion.motion(standard, expressive);
+}
+
+.my-panel {
+  // Apply a named motion surface (handles enter/exit keyframes and timing)
+  @include motion.surface(contextual);
 }
 ```
 
-Both the `motion` function and mixin support passing in the name of the motion
-curve and the mode you want to work in.
+Available duration variables:
 
-> **Build note:** Token values are generated at build time from
-> `src/dtcg/motion.json`. Run `yarn build` (or `npm run build`) once after
-> cloning so that `js/generated/` and `scss/generated/` are present.
+```scss
+@use '@carbon/motion';
+
+.my-selector {
+  transition-duration: motion.$duration-fast-01; // 70ms
+  transition-duration: motion.$duration-moderate-01; // 150ms
+  transition-duration: motion.$duration-slow-01; // 400ms
+}
+```
 
 ### JavaScript
 
-If you're using `@carbon/motion` as a JavaScript dependency, we export our
-easings and a function called `motion` that you can use. For example:
-
-```js
-// CommonJS
-const { easings, motion } = require('@carbon/motion');
-```
-
-You can also include this as a JavaScript module:
+If you're using `@carbon/motion` as a JavaScript dependency, we export easings,
+duration tokens, a `motion` function, and surface utilities:
 
 ```js
 // ESM
-import { easings, motion } from '@carbon/motion';
+import {
+  easings,
+  motion,
+  // Duration tokens
+  durationFast01,
+  durationModerate01,
+  durationSlow01,
+  // Surface utilities
+  surfaces,
+  getMotionSurface,
+  defineMotionSurface,
+} from '@carbon/motion';
 
 motion('standard', 'productive'); // Returns a string `cubic-bezier()` function
+getMotionSurface('contextual'); // Returns the surface definition object
 ```
 
 ## 🙌 Contributing
