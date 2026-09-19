@@ -839,6 +839,7 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
 
       if (
         parsedDate &&
+        calendar.isEnabled(parsedDate, false) &&
         calendar.formatDate(parsedDate, calendar.config.dateFormat) ===
           inputValue
       ) {

@@ -458,6 +458,37 @@ describe('DatePicker', () => {
     expect(onChange).not.toHaveBeenCalled();
   });
 
+  it.each([
+    ['disable', { disable: ['01/20/1989'] }],
+    ['enable', { enable: ['01/21/1989'] }],
+    ['minDate', { minDate: '01/21/1989' }],
+    ['maxDate', { maxDate: '01/19/1989' }],
+  ])(
+    'should not call onChange when a typed date is rejected by `%s`',
+    async (_propName, datePickerProps) => {
+      const onChange = jest.fn();
+      render(
+        <DatePicker
+          {...datePickerProps}
+          onChange={onChange}
+          datePickerType="single">
+          <DatePickerInput
+            id="date-picker-input-id-start"
+            placeholder="mm/dd/yyyy"
+            labelText="Date Picker label"
+          />
+        </DatePicker>
+      );
+
+      await userEvent.type(
+        screen.getByLabelText('Date Picker label'),
+        '01/20/1989'
+      );
+
+      expect(onChange).not.toHaveBeenCalled();
+    }
+  );
+
   it('invalid date month/day is correctly parsed when using the default format', async () => {
     render(
       <DatePicker onChange={() => {}} datePickerType="single">
