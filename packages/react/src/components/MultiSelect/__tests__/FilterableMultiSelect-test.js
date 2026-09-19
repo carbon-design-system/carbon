@@ -1301,7 +1301,7 @@ describe('FilterableMultiSelect', () => {
       'aria-label': 'Choose an item',
       autocomplete: 'off',
       class: 'cds--text-input cds--text-input--empty',
-      id: expect.stringMatching(/^test-combo-.+-input$/),
+      id: expect.stringMatching(/^test-combo-id-.+-input$/),
       maxlength: '10',
       placeholder: 'Type here',
       role: 'combobox',
