@@ -266,6 +266,58 @@ describe('FileUploader', () => {
     expect(onChange).toHaveBeenCalledTimes(1);
   });
 
+  it('should add selected files that match an exact MIME type in the accept prop', async () => {
+    const onAddFiles = jest.fn();
+    const onChange = jest.fn();
+    const { container } = render(
+      <FileUploader
+        {...requiredProps}
+        accept={['image/png']}
+        onAddFiles={onAddFiles}
+        onChange={onChange}
+      />
+    );
+
+    const input = container.querySelector('input');
+    const acceptedFile = new File(['image'], 'avatar.png', {
+      type: 'image/png',
+    });
+
+    await userEvent.upload(input, acceptedFile);
+
+    expect(screen.getByText('avatar.png')).toBeInTheDocument();
+    expect(onAddFiles).toHaveBeenCalledTimes(1);
+    const addedFiles = onAddFiles.mock.calls[0][1].addedFiles;
+    expect(addedFiles[0].invalidFileType).toBeUndefined();
+    expect(onChange).toHaveBeenCalledTimes(1);
+  });
+
+  it('should add selected files that match a wildcard MIME type in the accept prop', async () => {
+    const onAddFiles = jest.fn();
+    const onChange = jest.fn();
+    const { container } = render(
+      <FileUploader
+        {...requiredProps}
+        accept={['image/*']}
+        onAddFiles={onAddFiles}
+        onChange={onChange}
+      />
+    );
+
+    const input = container.querySelector('input');
+    const acceptedFile = new File(['image'], 'avatar.png', {
+      type: 'image/png',
+    });
+
+    await userEvent.upload(input, acceptedFile);
+
+    expect(screen.getByText('avatar.png')).toBeInTheDocument();
+    expect(onAddFiles).toHaveBeenCalledTimes(1);
+    const addedFiles = onAddFiles.mock.calls[0][1].addedFiles;
+    expect(addedFiles[0].invalidFileType).toBeUndefined();
+    expect(onChange).toHaveBeenCalledTimes(1);
+  });
+
   it('should call onAddFiles with validated files after validation', async () => {
     const onAddFiles = jest.fn();
     const { container } = render(

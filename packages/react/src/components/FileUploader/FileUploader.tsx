@@ -22,6 +22,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import { Text } from '../Text';
 import { useId } from '../../internal/useId';
 import { useFeatureFlag } from '../FeatureFlags';
+import { fileMatchesAccept } from './fileMatchesAccept';
 
 interface FileItem {
   name: string;
@@ -223,36 +224,6 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
       [fileUploaderInstanceId]
     );
 
-    const fileMatchesAccept = useCallback(
-      (file: File) => {
-        if (!accept?.length) {
-          return true;
-        }
-
-        const fileName = file.name.toLowerCase();
-        const mimeType = file.type.toLowerCase();
-
-        return accept.some((acceptedType) => {
-          const normalizedType = acceptedType.trim().toLowerCase();
-
-          if (!normalizedType) {
-            return false;
-          }
-
-          if (normalizedType.startsWith('.')) {
-            return fileName.endsWith(normalizedType);
-          }
-
-          if (normalizedType.endsWith('/*')) {
-            return mimeType.startsWith(normalizedType.slice(0, -1));
-          }
-
-          return mimeType === normalizedType;
-        });
-      },
-      [accept]
-    );
-
     /**
      * Validates files based on file size and type restrictions.
      * Marks invalid files with `invalidFileType: true` but includes them in the result.
@@ -264,14 +235,14 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
         return files.map((file) => {
           if (
             (maxFileSize && file.size > maxFileSize) ||
-            !fileMatchesAccept(file)
+            !fileMatchesAccept(file, accept)
           ) {
             file.invalidFileType = true;
           }
           return file;
         });
       },
-      [fileMatchesAccept, maxFileSize]
+      [accept, maxFileSize]
     );
 
     const handleChange = useCallback(

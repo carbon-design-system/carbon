@@ -320,6 +320,38 @@ describe('FileUploaderDropContainer', () => {
     expect(addedFiles[1].invalidFileType).toBeFalsy();
   });
 
+  it('should accept files that match a wildcard MIME type in the accept prop', async () => {
+    const onAddFiles = jest.fn();
+    const { container } = render(
+      <FileUploaderDropContainer
+        accept={['image/*']}
+        multiple
+        onAddFiles={onAddFiles}
+        {...requiredProps}
+      />
+    );
+
+    const input = container.querySelector('input');
+
+    const files = [
+      new File(['foo'], 'foo.txt', { type: 'text/plain' }),
+      new File(['bar'], 'bar.png', { type: 'image/png' }),
+    ];
+
+    await act(async () => {
+      fireEvent.change(input, { target: { files } });
+    });
+
+    expect(onAddFiles).toHaveBeenCalled();
+
+    const call = onAddFiles.mock.calls[0];
+    const addedFiles = call[1].addedFiles;
+
+    expect(addedFiles.length).toBe(2);
+    expect(addedFiles[0].invalidFileType).toBeTruthy();
+    expect(addedFiles[1].invalidFileType).toBeFalsy();
+  });
+
   it('should call onClick when drop area is clicked', () => {
     const onClick = jest.fn();
     const { container } = render(

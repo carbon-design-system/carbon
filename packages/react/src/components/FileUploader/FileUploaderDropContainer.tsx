@@ -21,6 +21,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import { composeEventHandlers } from '../../tools/events';
 import { deprecate } from '../../prop-types/deprecate';
 import { noopFn } from '../../internal/noopFn';
+import { fileMatchesAccept } from './fileMatchesAccept';
 
 export interface FileUploaderDropContainerProps
   extends Omit<HTMLAttributes<HTMLButtonElement>, 'tabIndex'> {
@@ -139,30 +140,26 @@ function FileUploaderDropContainer({
    * Filters the array of added files based on file type and size restrictions
    */
   function validateFiles(transferredFiles: AddedFile[]) {
-    const acceptedTypes = new Set(accept);
+    const acceptsOnlyExtensions =
+      accept.length > 0 &&
+      accept.every((acceptedType) => acceptedType.trim().startsWith('.'));
     return transferredFiles.reduce<AddedFile[]>((acc, curr) => {
-      const { name, type: mimeType = '' } = curr;
       const fileExtensionRegExp = new RegExp(pattern, 'i');
-      const [fileExtension] = name.match(fileExtensionRegExp) ?? [];
+      const [fileExtension] = curr.name.match(fileExtensionRegExp) ?? [];
 
       if (maxFileSize && curr.size > maxFileSize) {
         curr.invalidFileType = true;
         return acc.concat([curr]);
       }
 
-      if (!accept.length) {
+      if (acceptsOnlyExtensions && fileExtension === undefined) {
+        return acc;
+      }
+
+      if (fileMatchesAccept(curr, accept, pattern)) {
         return acc.concat([curr]);
       }
 
-      if (fileExtension === undefined) {
-        return acc;
-      }
-      if (
-        acceptedTypes.has(mimeType) ||
-        acceptedTypes.has(fileExtension.toLowerCase())
-      ) {
-        return acc.concat([curr]);
-      }
       curr.invalidFileType = true;
       return acc.concat([curr]);
     }, []);
