@@ -11,7 +11,7 @@ import { ProgressIndicator, ProgressStep, ProgressIndicatorSkeleton } from './';
 import mdx from './ProgressIndicator.mdx';
 
 const progressIndicatorArgs = {
-  currentIndex: 1,
+  currentIndex: 0,
   spaceEqually: false,
   vertical: false,
 };
@@ -54,16 +54,16 @@ export const Interactive = (args) => {
   return (
     <ProgressIndicator {...args}>
       <ProgressStep
-        label="Create your account"
-        description="Enter your account and contact information"
+        label="Click me"
+        description="Step 1: Register an onChange event"
       />
       <ProgressStep
-        label="Configure workspace settings and permissions"
-        description="Choose workspace defaults and assign access levels"
+        label="Really long label"
+        description="The progress indicator will listen for clicks on the steps"
       />
       <ProgressStep
-        label="Invite team members"
-        description="Add collaborators and review their roles"
+        label="Third step"
+        description="The progress indicator will listen for clicks on the steps"
       />
     </ProgressIndicator>
   );
@@ -71,12 +71,14 @@ export const Interactive = (args) => {
 
 Interactive.args = {
   ...progressIndicatorArgs,
+  currentIndex: 1,
   onChange: action('onChange'),
 };
 
 Interactive.argTypes = {
   ...progressIndicatorArgTypes,
   currentIndex: {
+    ...progressIndicatorArgTypes.currentIndex,
     control: { type: 'number', min: 0, max: 2 },
   },
   onChange: {
@@ -107,27 +109,29 @@ export const Default = (args) => {
   return (
     <ProgressIndicator {...progressIndicatorProps}>
       <ProgressStep
-        label="Choose a plan"
-        description="Select the plan that best fits your team"
+        complete
+        label="First step"
+        description="Step 1: Getting started with Carbon Design System"
         secondaryLabel={secondaryLabel}
       />
       <ProgressStep
-        label="Set up your account"
-        description="Enter your account and contact information"
+        current
+        label="Second step with tooltip"
+        description="Step 2: Getting started with Carbon Design System"
       />
       <ProgressStep
-        label="Configure your workspace"
-        description="Choose workspace defaults and permissions"
+        label="Third step with tooltip"
+        description="Step 3: Getting started with Carbon Design System"
       />
       <ProgressStep
-        label="Invite team members"
-        description="Add collaborators and assign their roles"
+        label="Fourth step"
+        description="Step 4: Getting started with Carbon Design System"
         invalid
-        secondaryLabel="Action required"
+        secondaryLabel="Example invalid step"
       />
       <ProgressStep
-        label="Review and launch"
-        description="Confirm your settings and create the workspace"
+        label="Fifth step"
+        description="Step 5: Getting started with Carbon Design System"
         disabled
       />
     </ProgressIndicator>
@@ -136,7 +140,7 @@ export const Default = (args) => {
 
 Default.args = {
   ...progressIndicatorArgs,
-  secondaryLabel: 'Recommended',
+  secondaryLabel: 'Optional label',
 };
 
 Default.argTypes = {
