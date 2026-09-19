@@ -109,7 +109,6 @@ class CDSPasswordInput extends CDSTextInput {
   /**
    * Specify if the component should be read-only.
    */
-  @property({ type: Boolean, attribute: 'read-only', reflect: true })
   get readOnly() {
     return this.readonly;
   }

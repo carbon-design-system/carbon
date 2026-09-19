@@ -172,7 +172,21 @@ describe('cds-fluid-password-input', () => {
 
     const input = el.shadowRoot.querySelector('input');
     expect(el.readonly).to.be.true;
+    expect(el.hasAttribute('read-only')).to.be.false;
     expect(input.readOnly).to.be.true;
+  });
+
+  it('should keep readOnly as a property alias for readonly', async () => {
+    const el = await fixture(
+      html`<cds-fluid-password-input> </cds-fluid-password-input>`
+    );
+
+    el.readonly = true;
+    await el.updateComplete;
+
+    expect(el.readOnly).to.be.true;
+    expect(el.hasAttribute('readonly')).to.be.true;
+    expect(el.hasAttribute('read-only')).to.be.false;
   });
 
   it('should render divider when isFluid is true', async () => {
