@@ -674,7 +674,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     items: sortedItems,
     // defaultHighlightedIndex: 0, // after selection, highlight the first item.
     itemToString,
-    id,
+    id: instanceId,
     labelId,
     menuId,
     inputId,

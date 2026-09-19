@@ -327,22 +327,53 @@ describe('FilterableMultiSelect', () => {
         <FilterableMultiSelect
           {...mockProps}
           id="shared-filterable-multiselect"
+          titleText="Filterable MultiSelect"
           onChange={firstOnChange}
         />
         <FilterableMultiSelect
           {...mockProps}
           id="shared-filterable-multiselect"
+          titleText="Filterable MultiSelect"
           onChange={secondOnChange}
         />
       </>
     );
     await waitForPosition();
 
-    expect(screen.getAllByRole('combobox')[0].id).not.toBe(
-      screen.getAllByRole('combobox')[1].id
+    const comboboxes = screen.getAllByRole('combobox');
+    const controls = comboboxes.map((combobox) => {
+      const listBox = combobox.closest(`.${prefix}--list-box`);
+      const toggleButton = listBox.querySelector(
+        'button[id$="-toggle-button"]'
+      );
+      const menu = listBox.querySelector('[role="listbox"]');
+      const label = document.querySelector(`label[for="${combobox.id}"]`);
+
+      return {
+        combobox,
+        toggleButton,
+        menu,
+        label,
+      };
+    });
+    const generatedIds = controls.flatMap(
+      ({ combobox, toggleButton, menu, label }) => [
+        combobox.id,
+        toggleButton.id,
+        menu.id,
+        label.id,
+      ]
     );
 
-    await user.click(screen.getAllByRole('combobox')[1]);
+    expect(new Set(generatedIds).size).toBe(generatedIds.length);
+    controls.forEach(({ combobox, toggleButton, menu, label }) => {
+      expect(label).toHaveAttribute('for', combobox.id);
+      expect(combobox.id).toBe(label.getAttribute('for'));
+      expect(toggleButton).toHaveAttribute('aria-controls', menu.id);
+    });
+
+    await user.click(comboboxes[1]);
+    expect(comboboxes[1]).toHaveAttribute('aria-controls', controls[1].menu.id);
     await user.click(screen.getAllByRole('option')[0]);
 
     expect(firstOnChange).not.toHaveBeenCalled();
