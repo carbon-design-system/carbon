@@ -804,6 +804,49 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
       }
     }
 
+    function handleInput(event: Event) {
+      if (
+        readOnly ||
+        datePickerType !== 'single' ||
+        !calendar.config.allowInput ||
+        !(event.target instanceof HTMLInputElement)
+      ) {
+        return;
+      }
+
+      const { value: inputValue } = event.target;
+      if (!inputValue) {
+        return;
+      }
+
+      const selectedDate = calendar.selectedDates[0];
+      if (
+        selectedDate &&
+        calendar.formatDate(selectedDate, calendar.config.dateFormat) ===
+          inputValue
+      ) {
+        return;
+      }
+
+      const originalErrorHandler = calendar.config.errorHandler;
+      let parsedDate;
+      try {
+        calendar.config.errorHandler = () => {};
+        parsedDate = calendar.parseDate(inputValue, calendar.config.dateFormat);
+      } finally {
+        calendar.config.errorHandler = originalErrorHandler;
+      }
+
+      if (
+        parsedDate &&
+        calendar.isEnabled(parsedDate, false) &&
+        calendar.formatDate(parsedDate, calendar.config.dateFormat) ===
+          inputValue
+      ) {
+        calendar.setDate(parsedDate, true);
+      }
+    }
+
     function handleKeyPress(event) {
       if (
         match(event, keys.Enter) &&
@@ -817,6 +860,7 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
     if (start) {
       start.addEventListener('keydown', handleInputFieldKeyDown);
       start.addEventListener('change', handleOnChange);
+      start.addEventListener('input', handleInput);
       start.addEventListener('keypress', handleKeyPress);
 
       if (calendar && calendar.calendarContainer) {
@@ -866,6 +910,7 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
       if (start) {
         start.removeEventListener('keydown', handleInputFieldKeyDown);
         start.removeEventListener('change', handleOnChange);
+        start.removeEventListener('input', handleInput);
         start.removeEventListener('keypress', handleKeyPress);
       }
 
