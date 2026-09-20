@@ -627,6 +627,8 @@ describe('FilterableMultiSelect', () => {
     await waitForPosition();
 
     expect(container.firstChild).toHaveClass(`${prefix}--autoalign`);
+    const menu = container.querySelector('.cds--list-box__menu');
+    expect(menu.style.maxHeight).toBeDefined();
   });
 
   it('should handle inline type', async () => {
