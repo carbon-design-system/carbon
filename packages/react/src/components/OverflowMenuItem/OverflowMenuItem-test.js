@@ -80,6 +80,33 @@ describe('OverflowMenuItem - RTL', () => {
       );
     });
 
+    it('should support anchor attributes', () => {
+      render(
+        <OverflowMenuItem
+          closeMenu={jest.fn()}
+          href="https://carbondesignsystem.com"
+          itemText="one"
+          ping="https://example.com/ping"
+          referrerPolicy="strict-origin-when-cross-origin"
+          rel="external noreferrer"
+          target="_blank"
+        />
+      );
+
+      expect(screen.getByRole('menuitem')).toHaveAttribute('target', '_blank');
+      expect(screen.getByRole('menuitem')).toHaveAttribute(
+        'ping',
+        'https://example.com/ping'
+      );
+      expect(screen.getByRole('menuitem')).toHaveAttribute(
+        'referrerpolicy',
+        'strict-origin-when-cross-origin'
+      );
+      expect(screen.getByRole('menuitem')).toHaveAttribute(
+        'rel',
+        'external noreferrer'
+      );
+    });
 
     it('should call closeMenu on click', async () => {
       const closeMenu = jest.fn();
