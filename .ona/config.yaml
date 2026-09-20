@@ -1,0 +1,116 @@
+tasks:
+  install-dependencies:
+    name: Install dependencies
+    description: Install the immutable Yarn workspace and Chromium test runtime
+    triggeredBy:
+      - manual
+      - postDevcontainerStart
+      - prebuild
+    command: |
+      corepack enable
+      yarn install --immutable
+      yarn playwright install --with-deps chromium
+
+  build:
+    name: Build all packages
+    description: Build every publishable Carbon workspace package
+    triggeredBy:
+      - manual
+    dependsOn:
+      - install-dependencies
+    command: yarn build
+
+  format-check:
+    name: Check formatting
+    description: Verify Prettier formatting without changing files
+    triggeredBy:
+      - manual
+    dependsOn:
+      - install-dependencies
+    command: yarn format:diff
+
+  lint:
+    name: Lint source and styles
+    description: Run the repository ESLint and Stylelint checks
+    triggeredBy:
+      - manual
+    dependsOn:
+      - install-dependencies
+    command: |
+      yarn lint
+      yarn lint:styles
+
+  test:
+    name: Run unit tests
+    description: Run the Jest test suite in CI mode
+    triggeredBy:
+      - manual
+    dependsOn:
+      - build
+    command: yarn test --ci
+
+  test-e2e:
+    name: Run end-to-end tests
+    description: Run the documented end-to-end Jest suite in CI mode
+    triggeredBy:
+      - manual
+    dependsOn:
+      - build
+    command: yarn test:e2e --ci
+
+services:
+  react-storybook:
+    name: React Storybook
+    description: Component development for the React flagship package
+    triggeredBy:
+      - manual
+      - postEnvironmentStart
+    commands:
+      start: |
+        ona environment port open 3011 --admission creator_only --name "React Storybook" --protocol http
+        export ONA_EXPOSED_HOST="$(ona environment port get 3011 -f URL | cut -c 9-)"
+        export __VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS="$ONA_EXPOSED_HOST"
+        yarn workspace @carbon/react storybook --host 0.0.0.0
+      ready: curl -fsS http://localhost:3011/ >/dev/null
+
+  react-v12-storybook:
+    name: React v12 Storybook
+    description: Feature-flagged v12 component development for React
+    triggeredBy:
+      - manual
+      - postEnvironmentStart
+    commands:
+      start: |
+        ona environment port open 3012 --admission creator_only --name "React v12 Storybook" --protocol http
+        export ONA_EXPOSED_HOST="$(ona environment port get 3012 -f URL | cut -c 9-)"
+        export __VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS="$ONA_EXPOSED_HOST"
+        yarn workspace @carbon/react storybook:v12 --host 0.0.0.0
+      ready: curl -fsS http://localhost:3012/ >/dev/null
+
+  web-components-storybook:
+    name: Web Components Storybook
+    description: Component development for the Web Components flagship package
+    triggeredBy:
+      - manual
+      - postEnvironmentStart
+    commands:
+      start: |
+        ona environment port open 6011 --admission creator_only --name "Web Components Storybook" --protocol http
+        export ONA_EXPOSED_HOST="$(ona environment port get 6011 -f URL | cut -c 9-)"
+        export __VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS="$ONA_EXPOSED_HOST"
+        yarn workspace @carbon/web-components storybook --host 0.0.0.0
+      ready: curl -fsS http://localhost:6011/ >/dev/null
+
+  web-components-v12-storybook:
+    name: Web Components v12 Storybook
+    description: Feature-flagged v12 component development for Web Components
+    triggeredBy:
+      - manual
+      - postEnvironmentStart
+    commands:
+      start: |
+        ona environment port open 6012 --admission creator_only --name "Web Components v12 Storybook" --protocol http
+        export ONA_EXPOSED_HOST="$(ona environment port get 6012 -f URL | cut -c 9-)"
+        export __VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS="$ONA_EXPOSED_HOST"
+        yarn workspace @carbon/web-components storybook:v12 --host 0.0.0.0
+      ready: curl -fsS http://localhost:6012/ >/dev/null
