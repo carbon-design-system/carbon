@@ -5235,6 +5235,12 @@
     - ide
     - modernization
     - assistant
+- name: ibm--champion-star
+  friendly_name: IBM Champion Star
+  aliases:
+    - ibm
+    - champion
+    - star
 - name: ibm--cloud
   friendly_name: IBM Cloud
   aliases:
