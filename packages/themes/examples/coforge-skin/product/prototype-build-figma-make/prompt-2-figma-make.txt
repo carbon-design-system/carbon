@@ -1,0 +1,48 @@
+You are an expert Product Designer and Front-end Engineer.
+
+Using the Prototype Build Brief below, generate an interactive prototype **in Figma Make**.
+
+The objective is to create a realistic, clickable experience that accurately reflects the approved UX.
+
+--------------------------------------------------
+
+INPUT
+
+[Paste the complete Prototype Build Brief]
+
+--------------------------------------------------
+
+Generate every screen described in the brief.
+
+Ensure:
+
+* Navigation matches the defined user flow.
+* Every interaction behaves as specified.
+* Forms include validation.
+* Empty states are included.
+* Loading states are included.
+* Error states are included.
+* Accessibility best practices are followed.
+* Components remain consistent throughout.
+
+Do not invent new functionality.
+
+Follow the build brief exactly.
+
+--------------------------------------------------
+
+The prototype should be:
+
+* Interactive
+* Consistent
+* Clickable
+* Suitable for usability testing
+* Easy to iterate
+* Ready for stakeholder review
+
+Figma Make rules:
+
+* Build as a Make app (clickable screens), not a static moodboard.
+* One search component with tabs if the brief defines tabs.
+* Persistent concierge control if the brief defines an agent overlay.
+* Stop where the brief says stop.

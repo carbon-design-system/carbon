@@ -1,0 +1,47 @@
+[data-coforge-skin=on]:not([data-carbon-theme=g90]):not([data-carbon-theme=g100]):not([storybook-carbon-theme=g90]):not([storybook-carbon-theme=g100]) {
+  --cds-background: #eeece6;
+  --cds-text-primary: #041222;
+  --cds-icon-primary: #041222;
+  --cds-focus: #041222;
+  --cds-interactive: #041222;
+  --cds-border-interactive: #041222;
+  --cds-icon-interactive: #041222;
+  --cds-background-brand: #f15b40;
+  --cds-button-primary: #f15b40;
+  --cds-button-primary-hover: #b03822;
+  --cds-button-primary-active: #041222;
+  --cds-link-primary: #b03822;
+  --cds-link-primary-hover: #041222;
+  --coforge-bone: #eeece6;
+  --coforge-ink: #041222;
+  --coforge-coral: #f15b40;
+  --coforge-coral-text: #b03822;
+  --coforge-accent-container: #f15b40;
+  --coforge-accent-text: #b03822;
+}
+[data-coforge-skin=on]:not([data-carbon-theme=g90]):not([data-carbon-theme=g100]):not([storybook-carbon-theme=g90]):not([storybook-carbon-theme=g100]),
+[data-coforge-skin=on]:not([data-carbon-theme=g90]):not([data-carbon-theme=g100]):not([storybook-carbon-theme=g90]):not([storybook-carbon-theme=g100]) body,
+[data-coforge-skin=on]:not([data-carbon-theme=g90]):not([data-carbon-theme=g100]):not([storybook-carbon-theme=g90]):not([storybook-carbon-theme=g100]) .docs-story {
+  background-color: var(--cds-background);
+  color: var(--cds-text-primary);
+}
+[data-coforge-skin=on]:not([data-carbon-theme=g90]):not([data-carbon-theme=g100]):not([storybook-carbon-theme=g90]):not([storybook-carbon-theme=g100]) .cds--btn--primary.cds--btn--sm,
+[data-coforge-skin=on]:not([data-carbon-theme=g90]):not([data-carbon-theme=g100]):not([storybook-carbon-theme=g90]):not([storybook-carbon-theme=g100]) cds-button[kind=primary][size=sm] {
+  --cds-button-primary: #041222;
+  --cds-button-primary-hover: #b03822;
+  --cds-button-primary-active: #eeece6;
+}
+[data-coforge-skin=on]:not([data-carbon-theme=g90]):not([data-carbon-theme=g100]):not([storybook-carbon-theme=g90]):not([storybook-carbon-theme=g100]),
+[data-coforge-skin=on]:not([data-carbon-theme=g90]):not([data-carbon-theme=g100]):not([storybook-carbon-theme=g90]):not([storybook-carbon-theme=g100]) body {
+  font-family: "Anek Latin", system-ui, sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+[data-coforge-skin=on]:not([data-carbon-theme=g90]):not([data-carbon-theme=g100]):not([storybook-carbon-theme=g90]):not([storybook-carbon-theme=g100]) code,
+[data-coforge-skin=on]:not([data-carbon-theme=g90]):not([data-carbon-theme=g100]):not([storybook-carbon-theme=g90]):not([storybook-carbon-theme=g100]) kbd,
+[data-coforge-skin=on]:not([data-carbon-theme=g90]):not([data-carbon-theme=g100]):not([storybook-carbon-theme=g90]):not([storybook-carbon-theme=g100]) samp,
+[data-coforge-skin=on]:not([data-carbon-theme=g90]):not([data-carbon-theme=g100]):not([storybook-carbon-theme=g90]):not([storybook-carbon-theme=g100]) pre,
+[data-coforge-skin=on]:not([data-carbon-theme=g90]):not([data-carbon-theme=g100]):not([storybook-carbon-theme=g90]):not([storybook-carbon-theme=g100]) .cds--snippet,
+[data-coforge-skin=on]:not([data-carbon-theme=g90]):not([data-carbon-theme=g100]):not([storybook-carbon-theme=g90]):not([storybook-carbon-theme=g100]) .cds--snippet-container,
+[data-coforge-skin=on]:not([data-carbon-theme=g90]):not([data-carbon-theme=g100]):not([storybook-carbon-theme=g90]):not([storybook-carbon-theme=g100]) cds-code-snippet {
+  font-family: "Source Code Pro", ui-monospace, monospace;
+}

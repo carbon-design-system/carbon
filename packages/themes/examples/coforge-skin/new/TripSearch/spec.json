@@ -1,0 +1,9 @@
+{
+  "id": "TripSearch",
+  "folder": "new/TripSearch",
+  "wraps": ["cds-content-switcher", "cds-form", "cds-combo-box", "cds-date-picker", "cds-text-input", "cds-select", "cds-button", "cds-radio-button-group"],
+  "react": ["ContentSwitcher", "Switch", "Form", "ComboBox", "DatePicker", "DatePickerInput", "TextInput", "Select", "RadioButtonGroup", "Button"],
+  "use_cases": ["UC-BOOK-1"],
+  "heuristics": ["N2", "N4", "N6"],
+  "forbidden": ["cf-*", "sitewide-mega-search"]
+}

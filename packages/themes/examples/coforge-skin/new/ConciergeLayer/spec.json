@@ -1,0 +1,8 @@
+{
+  "id": "ConciergeLayer",
+  "folder": "new/ConciergeLayer",
+  "wraps": ["cds-header-global-action", "cds-header-panel", "cds-link"],
+  "use_cases": ["UC-CONC-1", "UC-P12-1"],
+  "heuristics": ["N2", "N7"],
+  "forbidden": ["book", "plan-for-you", "sell-seat"]
+}

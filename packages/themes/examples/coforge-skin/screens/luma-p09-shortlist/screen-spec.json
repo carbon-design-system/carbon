@@ -1,0 +1,100 @@
+{
+  "slug": "luma-p09-shortlist",
+  "screen": "Hotel shortlist (access gate)",
+  "flow_id": "luma-p09-shortlist",
+  "persona": "P09",
+  "viewport": { "width": 1280, "height": 900 },
+  "figma": {
+    "fileKey": "mnPFHuLUzXItWQimrWQEvV",
+    "page": "Ai Test",
+    "pageId": "13172:2451",
+    "frameId": "13184:2991"
+  },
+  "states": ["default", "unpublished-access", "empty"],
+  "regions": [
+    {
+      "id": "heading",
+      "component": "html-h1",
+      "react": "h1",
+      "tokens": ["--cds-text-primary"],
+      "copy": "Hotels with published access",
+      "notes": "Ink on bone. Not a booking title. IA v2: Hotels not Venues."
+    },
+    {
+      "id": "search",
+      "component": "cds-search",
+      "react": "Search",
+      "variant": { "size": "lg", "state": "enabled" },
+      "tokens": ["--cds-field-01", "--cds-text-primary"],
+      "figma": {
+        "fileKey": "mnPFHuLUzXItWQimrWQEvV",
+        "nodeId": "2805:21056",
+        "props": { "Placeholder": "City or venue" }
+      },
+      "copy": "Search venues"
+    },
+    {
+      "id": "tile-verified",
+      "component": "cds-tile",
+      "react": "Tile",
+      "tokens": ["--cds-layer-01", "--cds-text-primary"],
+      "figma": { "fileKey": "mnPFHuLUzXItWQimrWQEvV", "nodeId": "20125:279432" },
+      "copy": "Hotel Stare Miasto — door 85 cm · hoist 140 cm · room photos"
+    },
+    {
+      "id": "tag-verified",
+      "component": "cds-tag-readonly",
+      "react": "Tag",
+      "variant": { "color": "gray", "size": "md" },
+      "tokens": ["--cds-tag-background-gray"],
+      "figma": {
+        "fileKey": "mnPFHuLUzXItWQimrWQEvV",
+        "nodeId": "16031:269750",
+        "props": { "Color": "Gray", "Size": "Medium" }
+      },
+      "copy": "Verified protocol"
+    },
+    {
+      "id": "tile-unpublished",
+      "component": "cds-tile",
+      "react": "Tile",
+      "tokens": ["--cds-layer-01", "--cds-text-primary"],
+      "figma": { "fileKey": "mnPFHuLUzXItWQimrWQEvV", "nodeId": "20125:279432" },
+      "copy": "No published access — treat as inaccessible. No book action."
+    },
+    {
+      "id": "tag-unpublished",
+      "component": "cds-tag-readonly",
+      "react": "Tag",
+      "variant": { "color": "outline", "size": "md" },
+      "figma": {
+        "fileKey": "mnPFHuLUzXItWQimrWQEvV",
+        "nodeId": "16031:269750",
+        "props": { "Color": "Outline", "Size": "Medium" }
+      },
+      "copy": "Unpublished"
+    },
+    {
+      "id": "tile-specialist",
+      "component": "cds-tile",
+      "react": "Tile",
+      "tokens": ["--cds-layer-01"],
+      "figma": { "fileKey": "mnPFHuLUzXItWQimrWQEvV", "nodeId": "20125:279432" },
+      "copy": "Specialist listing — measured bathroom, entrance photos"
+    },
+    {
+      "id": "help",
+      "component": "cds-link",
+      "react": "Link",
+      "tokens": ["--cds-link-primary", "--coforge-accent-text"],
+      "figma": { "fileKey": "mnPFHuLUzXItWQimrWQEvV", "nodeId": "50111:991" },
+      "copy": "How access is verified"
+    }
+  ],
+  "forbidden": [
+    "booking CTA",
+    "raw hex on instances",
+    "off-catalogue access-card component",
+    "coral on small text"
+  ]
+}

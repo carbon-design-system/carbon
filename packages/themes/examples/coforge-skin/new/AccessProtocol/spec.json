@@ -1,0 +1,8 @@
+{
+  "id": "AccessProtocol",
+  "folder": "new/AccessProtocol",
+  "wraps": ["cds-tile", "cds-tag-readonly", "cds-ordered-list", "cds-link"],
+  "use_cases": ["UC-P09-3", "UC-P09-4"],
+  "heuristics": ["N6", "N10"],
+  "forbidden": ["book", "assistance-live"]
+}

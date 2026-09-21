@@ -1,0 +1,39 @@
+# CoForge overlay (machine)
+
+Load this once. Fetch detail on demand. Do not inline Carbon themes.json.
+
+## Rules
+
+- Git: `Coforge_skin`. Figma writes: `mnPFHuLUzXItWQimrWQEvV` (never `Ude8f8dEgXxxnpbzrvWfwE`).
+- Overlay only. Do not edit `packages/themes/src/dtcg/themes.json`.
+- No raw hex. Tokens: `palette.json`, `semantic-overrides.json`, Carbon `--cds-*`.
+- Do not remap layer-01/02/03, field-*, border-subtle-*, syntax-*. Light only.
+- Coral `#f15b40` = large primary fill only. Coral-text `#b03822` = links/labels. Small primary = ink or ghost.
+- Query `component-token-map.json` before inventing. Missing row = proposal, not a primitive.
+
+## Files
+
+- [DESIGN-SYSTEM.md](./DESIGN-SYSTEM.md) — human index
+- [README.md](./README.md) — overlay how-to
+- [palette.json](./palette.json) — bone, ink, coral, coral-text
+- [semantic-overrides.json](./semantic-overrides.json) — Carbon var remaps + do_not_override
+- [component-token-map.json](./component-token-map.json) — cds-* ↔ React ↔ Figma node ↔ tokens
+- [context/PROJECT.md](./context/PROJECT.md)
+- [context/BUSINESS.md](./context/BUSINESS.md)
+- [context/USER.md](./context/USER.md)
+- [context/TASK.md](./context/TASK.md) — required per job; stop if empty
+- [rag/RAG.md](./rag/RAG.md) — sibling CoForge OS pointers (Luma Travel). Do not nest that repo.
+- Skills: `.cursor/skills/coforge-skin-contract`, `coforge-skin-bench`, `coforge-screen-design`, `coforge-ux`, `coforge-ui`, `coforge-frontend`, `coforge-prototype`
+- Agents: `.cursor/agents/coforge-product-architect.md` (product), `coforge-screen-designer.md` (leaf screen)
+- Product IA: `packages/themes/examples/coforge-skin/product/IA.md`
+
+## Colour CSS
+
+- `--cds-background` = bone `#eeece6`
+- `--cds-text-primary` `--cds-icon-primary` `--cds-focus` `--cds-interactive` = ink `#041222`
+- `--cds-button-primary` `--cds-background-brand` = coral `#f15b40`
+- `--cds-link-primary` `--coforge-accent-text` = coral-text `#b03822`
+
+## Resolve
+
+Code Connect `packages/web-components/code-connect-parserless/**/*.figma.ts` → keep node-id → write with fileKey `mnPFHuLUzXItWQimrWQEvV` → vendor component name → `--cds-*` from the map row.

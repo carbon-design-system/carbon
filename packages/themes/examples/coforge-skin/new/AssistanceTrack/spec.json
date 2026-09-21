@@ -1,0 +1,14 @@
+{
+  "id": "AssistanceTrack",
+  "folder": "new/AssistanceTrack",
+  "wraps": [
+    "cds-tile",
+    "cds-tag",
+    "cds-contained-list",
+    "cds-inline-notification"
+  ],
+  "react": ["Tile", "Tag", "ContainedList", "InlineNotification"],
+  "use_cases": ["UC-BOOK-ASSIST"],
+  "heuristics": ["N1", "N2", "N6"],
+  "forbidden": ["auto-dispatch", "fake-live-gps", "confirm_pay", "cf-*"]
+}

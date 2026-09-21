@@ -1,0 +1,9 @@
+{
+  "id": "TripTimeline",
+  "folder": "new/TripTimeline",
+  "wraps": ["cds-contained-list", "cds-tag", "cds-link"],
+  "react": ["ContainedList", "Tag", "Link"],
+  "use_cases": ["UC-BOOK-ITIN"],
+  "heuristics": ["N1", "N6"],
+  "forbidden": ["fake-live-tracking", "cf-*"]
+}

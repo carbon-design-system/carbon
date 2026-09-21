@@ -9,6 +9,7 @@
   $font-path: '~@ibm/plex'
 );
 @use '../scss/grid/flexbox';
+@use '../../themes/scss/coforge/skin' as coforge;
 
 :root {
   @include styles.theme(styles.$white);
@@ -48,6 +49,10 @@ body {
 .docs-story > *:has(> .docblock-code-toggle) {
   background-color: styles.$background;
 }
+
+// Opt-in CoForge overlay. Toolbar sets [data-coforge-skin='on'] on <html>.
+// Default Storybook remains IBM white / g10 / g90 / g100.
+@include coforge.coforge-skin-attr;
 
 /* stylelint-disable */
 .docblock-argstable-head ~ .docblock-argstable-body table tbody > tr > td {

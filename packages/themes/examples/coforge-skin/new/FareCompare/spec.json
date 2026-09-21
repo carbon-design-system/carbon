@@ -1,0 +1,9 @@
+{
+  "id": "FareCompare",
+  "folder": "new/FareCompare",
+  "wraps": ["cds-radio-tile", "cds-tile-group", "cds-button", "cds-structured-list"],
+  "react": ["RadioTile", "TileGroup", "Button"],
+  "use_cases": ["UC-BOOK-FARE"],
+  "heuristics": ["N2", "N6"],
+  "forbidden": ["colour-only-difference", "cf-*"]
+}

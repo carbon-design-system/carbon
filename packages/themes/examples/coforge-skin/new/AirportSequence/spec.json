@@ -1,0 +1,8 @@
+{
+  "id": "AirportSequence",
+  "folder": "new/AirportSequence",
+  "wraps": ["cds-ordered-list", "cds-link", "cds-button", "cds-tile"],
+  "use_cases": ["UC-P12-1", "UC-P12-2", "UC-P12-3", "UC-P12-4", "UC-P12-5"],
+  "heuristics": ["N1", "N2", "N3", "N10"],
+  "forbidden": ["agency-book", "progress-as-checkout", "simplified-onboarding"]
+}

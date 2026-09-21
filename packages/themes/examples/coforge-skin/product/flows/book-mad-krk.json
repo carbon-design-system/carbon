@@ -1,0 +1,23 @@
+{
+  "id": "book-mad-krk",
+  "title": "Book MAD→KRK with agentic concierge",
+  "entry": "book/",
+  "happy_path": [
+    "home",
+    "flight-results",
+    "basket",
+    "passengers",
+    "extras",
+    "payment",
+    "confirmation",
+    "itinerary"
+  ],
+  "agent_tools": [
+    "fill_trip_search",
+    "select_best_value_flight",
+    "add_stay",
+    "fill_passengers_demo",
+    "go_payment"
+  ],
+  "forbidden": ["confirm_pay"]
+}

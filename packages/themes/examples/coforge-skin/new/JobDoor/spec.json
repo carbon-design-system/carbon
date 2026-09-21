@@ -1,0 +1,9 @@
+{
+  "id": "JobDoor",
+  "folder": "new/JobDoor",
+  "wraps": ["cds-tile"],
+  "react": ["ClickableTile"],
+  "use_cases": ["UC-SHELL-1", "UC-SHELL-2"],
+  "heuristics": ["N2", "N8"],
+  "forbidden": ["book", "checkout", "price"]
+}

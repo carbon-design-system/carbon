@@ -1,0 +1,8 @@
+{
+  "id": "DocumentPair",
+  "folder": "new/DocumentPair",
+  "wraps": ["cds-form", "cds-button", "cds-tile", "cds-inline-notification"],
+  "use_cases": ["UC-P14-1", "UC-P14-2"],
+  "heuristics": ["N2", "N5", "N6", "N9"],
+  "forbidden": ["print-both-legs", "sell-seat", "simplified-elderly"]
+}

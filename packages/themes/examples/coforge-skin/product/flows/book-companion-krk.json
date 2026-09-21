@@ -1,0 +1,88 @@
+{
+  "flow_id": "book-companion-krk",
+  "persona": "BOOKER",
+  "entry": { "route": "book/", "from": ["confirmation"] },
+  "exit": [{ "id": "close-trip", "to": "home", "success": true }],
+  "screens": [
+    "itinerary",
+    "documents",
+    "checklist",
+    "airport",
+    "assistance",
+    "share",
+    "group",
+    "access",
+    "close"
+  ],
+  "nodes": [
+    {
+      "screen": "itinerary",
+      "route": "itinerary",
+      "states": ["default"],
+      "hotspots": [
+        { "from": "nav-airport", "event": "click", "to": "airport" },
+        { "from": "nav-assistance", "event": "click", "to": "assistance" },
+        { "from": "nav-share", "event": "click", "to": "share" }
+      ],
+      "forbidden_hotspots": ["confirm_pay"]
+    },
+    {
+      "screen": "airport",
+      "route": "airport",
+      "states": ["step-current"],
+      "hotspots": [
+        { "from": "next-place", "event": "click", "to": "airport" }
+      ],
+      "forbidden_hotspots": ["confirm_pay"]
+    },
+    {
+      "screen": "assistance",
+      "route": "assistance",
+      "states": ["default"],
+      "hotspots": [{ "from": "nav-itinerary", "event": "click", "to": "itinerary" }],
+      "forbidden_hotspots": ["confirm_pay", "auto-dispatch"]
+    },
+    {
+      "screen": "share",
+      "route": "share",
+      "states": ["view-only"],
+      "hotspots": [{ "from": "copy-url", "event": "click", "to": "share" }],
+      "forbidden_hotspots": ["force-account", "confirm_pay"]
+    },
+    {
+      "screen": "group",
+      "route": "group",
+      "states": ["guest"],
+      "hotspots": [{ "from": "nav-itinerary", "event": "click", "to": "itinerary" }],
+      "forbidden_hotspots": ["edit-in-guest-mode", "confirm_pay"]
+    },
+    {
+      "screen": "documents",
+      "route": "documents",
+      "states": ["default"],
+      "hotspots": [{ "from": "nav-checklist", "event": "click", "to": "checklist" }],
+      "forbidden_hotspots": ["print-both-legs", "confirm_pay"]
+    },
+    {
+      "screen": "checklist",
+      "route": "checklist",
+      "states": ["default"],
+      "hotspots": [{ "from": "nav-airport", "event": "click", "to": "airport" }],
+      "forbidden_hotspots": ["confirm_pay"]
+    },
+    {
+      "screen": "access",
+      "route": "access",
+      "states": ["default"],
+      "hotspots": [{ "from": "nav-itinerary", "event": "click", "to": "itinerary" }],
+      "forbidden_hotspots": ["assistance-live", "confirm_pay"]
+    },
+    {
+      "screen": "close",
+      "route": "close",
+      "states": ["default"],
+      "hotspots": [{ "from": "plan-next", "event": "click", "to": "home" }],
+      "forbidden_hotspots": ["confirm_pay"]
+    }
+  ]
+}

@@ -8,6 +8,7 @@
 import type { StorybookConfig } from '@storybook/react-vite';
 
 import { fileURLToPath } from 'node:url';
+import path from 'node:path';
 
 import remarkGfm from 'remark-gfm';
 import glob from 'fast-glob';
@@ -27,6 +28,9 @@ const configDir = fileURLToPath(new URL('.', import.meta.url));
 // TypeScript.
 const storyGlobs = [
   './Welcome/Welcome.mdx',
+  './CoForgeSkin.stories.js',
+  './CoForgeCreateRequest.stories.js',
+  './CoForgeLumaPrototype.stories.js',
   '../src/**/*.stories.js',
   '../src/**/*.stories.tsx',
   '../src/**/*.mdx',
@@ -124,8 +128,31 @@ const config: StorybookConfig = {
       resolve: {
         preserveSymlinks: true,
         alias: {
+          // Subpath exports (`overflowHandler`, `date-picker`) live under
+          // `src/` in the workspace. Alias must not send them to the package
+          // root or Vite looks for `packages/utilities/overflowHandler`.
+          '@carbon/utilities/overflowHandler': path.resolve(
+            configDir,
+            '../../utilities/src/overflowHandler'
+          ),
+          '@carbon/utilities/date-picker': path.resolve(
+            configDir,
+            '../../utilities/src/date-picker'
+          ),
           '~@ibm/plex': '@ibm/plex',
           '~@ibm/plex/': '@ibm/plex/',
+          '@carbon/themes': path.resolve(configDir, '../../themes'),
+          '@carbon/feature-flags': path.resolve(
+            configDir,
+            '../../feature-flags'
+          ),
+          '@carbon/icons-react': path.resolve(configDir, '../../icons-react'),
+          '@carbon/utilities': path.resolve(configDir, '../../utilities'),
+          '@carbon/icon-helpers': path.resolve(configDir, '../../icon-helpers'),
+          '@carbon/react/icons': path.resolve(
+            configDir,
+            '../icons/src/index.ts'
+          ),
         },
       },
       build: {

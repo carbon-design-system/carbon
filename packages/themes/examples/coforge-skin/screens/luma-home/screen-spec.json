@@ -1,0 +1,74 @@
+{
+  "slug": "luma-home",
+  "screen": "Home",
+  "flow_id": "prototype-agentic-1",
+  "viewport": { "width": 1280, "height": 800 },
+  "figma": {
+    "fileKey": "mnPFHuLUzXItWQimrWQEvV",
+    "page": "Screens"
+  },
+  "states": ["default"],
+  "regions": [
+    {
+      "id": "nav-tickets",
+      "component": "cds-header-menu-item",
+      "react": "HeaderMenuItem",
+      "copy": "Tickets"
+    },
+    {
+      "id": "nav-hotels",
+      "component": "cds-header-menu-item",
+      "react": "HeaderMenuItem",
+      "copy": "Hotels"
+    },
+    {
+      "id": "nav-activities",
+      "component": "cds-header-menu-item",
+      "react": "HeaderMenuItem",
+      "copy": "Activities"
+    },
+    {
+      "id": "nav-itinerary",
+      "component": "cds-header-menu-item",
+      "react": "HeaderMenuItem",
+      "copy": "Itinerary"
+    },
+    {
+      "id": "concierge",
+      "component": "cds-header-global-action",
+      "react": "HeaderGlobalAction",
+      "copy": "Concierge"
+    },
+    {
+      "id": "job-tickets",
+      "component": "cds-tile",
+      "react": "ClickableTile",
+      "copy": "Tickets"
+    },
+    {
+      "id": "job-hotels",
+      "component": "cds-tile",
+      "react": "ClickableTile",
+      "copy": "Hotels"
+    },
+    {
+      "id": "job-activities",
+      "component": "cds-tile",
+      "react": "ClickableTile",
+      "copy": "Activities"
+    },
+    {
+      "id": "job-itinerary",
+      "component": "cds-tile",
+      "react": "ClickableTile",
+      "copy": "Itinerary"
+    }
+  ],
+  "forbidden": [
+    "Book",
+    "airport as Header menu item",
+    "sitewide search",
+    "off-catalogue components",
+    "coral on small text"
+  ]
+}

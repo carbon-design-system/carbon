@@ -1,0 +1,9 @@
+{
+  "id": "ConciergeAgent",
+  "folder": "new/ConciergeAgent",
+  "wraps": ["cds-header-global-action", "cds-header-panel", "cds-text-input", "cds-button", "cds-tag", "cds-inline-notification"],
+  "react": ["HeaderGlobalAction", "HeaderPanel", "TextInput", "Button", "Tag", "InlineNotification"],
+  "use_cases": ["UC-BOOK-CONC"],
+  "heuristics": ["N1", "N3", "N7"],
+  "forbidden": ["confirm_pay", "cf-*", "hide-tabs"]
+}

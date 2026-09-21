@@ -1,0 +1,40 @@
+{
+  "$schema": "https://tr.designtokens.org/format/",
+  "$description": "CoForge brand primitives. Sourced from CoForge tokens.json v0.2.0 / brand.md §3 / ART-005. Not IBM Carbon ramps. Do not merge into packages/themes/src/dtcg/themes.json.",
+  "$extensions": {
+    "coforge": {
+      "source_repo": "CoForge-Agentic-Design---Claude-duplicated",
+      "source_tokens": "design-system/tokens/tokens.json",
+      "figma": "https://www.figma.com/design/ip2wZ3UUQ5sbFc3r902kYK/Agentic-Design-test---Claude?node-id=11-833",
+      "gate": "Gate A — brand.md APPROVED 2026-08-27; primitives approved 2026-09-02"
+    }
+  },
+  "palette": {
+    "bone": {
+      "default": {
+        "$type": "color",
+        "$value": "#eeece6",
+        "$description": "Default page and document ground. Warm off-white, not pure white."
+      }
+    },
+    "ink": {
+      "default": {
+        "$type": "color",
+        "$value": "#041222",
+        "$description": "Default text and mark colour. Deep navy, not black. 15.95:1 on bone."
+      }
+    },
+    "coral": {
+      "default": {
+        "$type": "color",
+        "$value": "#f15b40",
+        "$description": "Accent and CONTAINER only. Never body text or small labels (2.82:1 on bone)."
+      },
+      "text": {
+        "$type": "color",
+        "$value": "#b03822",
+        "$description": "Text-safe coral. Only coral value permitted to carry text (5.18:1 on bone)."
+      }
+    }
+  }
+}

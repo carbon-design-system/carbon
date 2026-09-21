@@ -101,6 +101,19 @@ export const globalTypes = {
       ],
     },
   },
+  coforgeSkin: {
+    name: 'CoForge skin',
+    description:
+      'Overlay CoForge brand tokens on light themes (git branch Coforge_skin)',
+    defaultValue: 'off',
+    toolbar: {
+      title: 'CoForge',
+      items: [
+        { value: 'off', title: 'IBM Carbon' },
+        { value: 'on', title: 'CoForge skin' },
+      ],
+    },
+  },
   ...(process.env.NODE_ENV === 'development' ? devTools : {}),
 };
 
@@ -229,7 +242,8 @@ export const decorators = [
   function decoratorContainer(story, context) {
     const result = story();
     const { hasMainTag } = result;
-    const { locale, dir, layoutSize, layoutDensity } = context.globals;
+    const { locale, dir, layoutSize, layoutDensity, coforgeSkin } =
+      context.globals;
     const backgroundValue = context.globals.backgrounds?.value;
     const theme = getThemeFromBackground(backgroundValue);
 
@@ -240,6 +254,20 @@ export const decorators = [
     document.documentElement.setAttribute('storybook-carbon-theme', theme);
     document.documentElement.lang = locale;
     document.documentElement.dir = dir;
+
+    if (coforgeSkin === 'on' && theme !== 'g90' && theme !== 'g100') {
+      document.documentElement.setAttribute('data-coforge-skin', 'on');
+      if (!document.getElementById('coforge-fonts')) {
+        const link = document.createElement('link');
+        link.id = 'coforge-fonts';
+        link.rel = 'stylesheet';
+        link.href =
+          'https://fonts.googleapis.com/css2?family=Anek+Latin:wght@100..800&family=Source+Code+Pro:wght@400;700&display=swap';
+        document.head.appendChild(link);
+      }
+    } else {
+      document.documentElement.removeAttribute('data-coforge-skin');
+    }
 
     const containerResult = container({ hasMainTag, children: result });
 

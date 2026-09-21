@@ -1,0 +1,9 @@
+{
+  "id": "TripBasket",
+  "folder": "new/TripBasket",
+  "wraps": ["cds-contained-list", "cds-button", "cds-link", "cds-tag", "cds-inline-notification"],
+  "react": ["ContainedList", "Button", "Link", "Tag", "InlineNotification"],
+  "use_cases": ["UC-BOOK-BASKET"],
+  "heuristics": ["N1", "N3"],
+  "forbidden": ["hidden-fees", "cf-*"]
+}

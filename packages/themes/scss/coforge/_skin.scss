@@ -1,0 +1,159 @@
+//
+// CoForge skin — CSS custom property overlay on Carbon themes.
+// Include AFTER @carbon/styles / a Carbon theme mixin.
+//
+// Does not edit IBM white / g10 / g90 / g100 maps.
+// Light only (white + g10). Dark themes stay Carbon until OQ-5 closes.
+//
+// Consumer (always on):
+//   @use '@carbon/themes/scss/coforge/skin' as *;
+//   @include coforge-skin;
+//
+// Storybook (opt-in via [data-coforge-skin='on']):
+//   @include coforge-skin-attr;
+//
+
+@use '../config' as *;
+
+$coforge-bone: #eeece6;
+$coforge-ink: #041222;
+$coforge-coral: #f15b40;
+$coforge-coral-text: #b03822;
+
+/// CoForge brand colour roles as Carbon CSS variables.
+/// Does not set layer / field / syntax. Does not assign coral to interactive.
+@mixin coforge-skin-vars {
+  --#{$prefix}-background: #{$coforge-bone};
+  --#{$prefix}-text-primary: #{$coforge-ink};
+  --#{$prefix}-icon-primary: #{$coforge-ink};
+  --#{$prefix}-focus: #{$coforge-ink};
+  --#{$prefix}-interactive: #{$coforge-ink};
+  --#{$prefix}-border-interactive: #{$coforge-ink};
+  --#{$prefix}-icon-interactive: #{$coforge-ink};
+  --#{$prefix}-background-brand: #{$coforge-coral};
+  --#{$prefix}-button-primary: #{$coforge-coral};
+  --#{$prefix}-button-primary-hover: #{$coforge-coral-text};
+  --#{$prefix}-button-primary-active: #{$coforge-ink};
+  --#{$prefix}-link-primary: #{$coforge-coral-text};
+  --#{$prefix}-link-primary-hover: #{$coforge-ink};
+  --coforge-bone: #{$coforge-bone};
+  --coforge-ink: #{$coforge-ink};
+  --coforge-coral: #{$coforge-coral};
+  --coforge-coral-text: #{$coforge-coral-text};
+  --coforge-accent-container: #{$coforge-coral};
+  --coforge-accent-text: #{$coforge-coral-text};
+}
+
+/// Small primary controls cannot carry coral (2.82:1 on bone). Ink fill instead.
+@mixin coforge-skin-small-primary {
+  .#{$prefix}--btn--primary.#{$prefix}--btn--sm,
+  #{$prefix}-button[kind='primary'][size='sm'] {
+    --#{$prefix}-button-primary: #{$coforge-ink};
+    --#{$prefix}-button-primary-hover: #{$coforge-coral-text};
+    --#{$prefix}-button-primary-active: #{$coforge-bone};
+  }
+}
+
+/// Anek Latin + Source Code Pro + the 8-level scale from tokens.json.
+/// Does not rewrite @carbon/type IBM Plex maps.
+@mixin coforge-skin-type {
+  --coforge-font-sans: 'Anek Latin', system-ui, sans-serif;
+  --coforge-font-mono: 'Source Code Pro', ui-monospace, monospace;
+  --coforge-type-display-size: 3.875rem;
+  --coforge-type-display-weight: 700;
+  --coforge-type-display-tracking: -0.125rem;
+  --coforge-type-h1-size: 2.5rem;
+  --coforge-type-h1-weight: 700;
+  --coforge-type-h1-tracking: -0.06rem;
+  --coforge-type-h2-size: 1.75rem;
+  --coforge-type-h2-weight: 600;
+  --coforge-type-h2-tracking: -0.03rem;
+  --coforge-type-h3-size: 1.25rem;
+  --coforge-type-h3-weight: 600;
+  --coforge-type-h3-tracking: -0.015rem;
+  --coforge-type-body-size: 1rem;
+  --coforge-type-body-weight: 400;
+  --coforge-type-body-tracking: 0;
+  --coforge-type-body-sm-size: 0.875rem;
+  --coforge-type-body-sm-weight: 400;
+  --coforge-type-body-sm-tracking: 0.005rem;
+  --coforge-type-caption-size: 0.75rem;
+  --coforge-type-caption-weight: 400;
+  --coforge-type-caption-tracking: 0.01rem;
+  --coforge-type-code-size: 0.75rem;
+  --coforge-type-code-weight: 400;
+  --coforge-type-code-tracking: 0;
+
+  &,
+  body {
+    font-family: var(--coforge-font-sans);
+    font-size: var(--coforge-type-body-size);
+    font-weight: var(--coforge-type-body-weight);
+    letter-spacing: var(--coforge-type-body-tracking);
+    font-variant-numeric: tabular-nums;
+  }
+
+  h1 {
+    font-size: var(--coforge-type-h1-size);
+    font-weight: var(--coforge-type-h1-weight);
+    letter-spacing: var(--coforge-type-h1-tracking);
+  }
+
+  h2 {
+    font-size: var(--coforge-type-h2-size);
+    font-weight: var(--coforge-type-h2-weight);
+    letter-spacing: var(--coforge-type-h2-tracking);
+  }
+
+  h3 {
+    font-size: var(--coforge-type-h3-size);
+    font-weight: var(--coforge-type-h3-weight);
+    letter-spacing: var(--coforge-type-h3-tracking);
+  }
+
+  code,
+  kbd,
+  samp,
+  pre,
+  .#{$prefix}--snippet,
+  .#{$prefix}--snippet-container,
+  #{$prefix}-code-snippet {
+    font-family: var(--coforge-font-mono);
+    font-size: var(--coforge-type-code-size);
+    font-weight: var(--coforge-type-code-weight);
+    letter-spacing: var(--coforge-type-code-tracking);
+  }
+}
+
+/// Apply skin to :root and Carbon light theme classes (product consumers).
+@mixin coforge-skin {
+  :root,
+  .#{$prefix}--white,
+  .#{$prefix}--g10,
+  [data-carbon-theme='white'],
+  [data-carbon-theme='g10'] {
+    @include coforge-skin-vars;
+    @include coforge-skin-type;
+  }
+
+  @include coforge-skin-small-primary;
+}
+
+/// Opt-in for Storybook. Set data-coforge-skin="on" on <html>. Skips g90/g100.
+@mixin coforge-skin-attr {
+  [data-coforge-skin='on']:not([data-carbon-theme='g90']):not(
+      [data-carbon-theme='g100']
+    ):not([storybook-carbon-theme='g90']):not([storybook-carbon-theme='g100']) {
+    @include coforge-skin-vars;
+
+    &,
+    body,
+    .docs-story {
+      background-color: var(--#{$prefix}-background);
+      color: var(--#{$prefix}-text-primary);
+    }
+
+    @include coforge-skin-small-primary;
+    @include coforge-skin-type;
+  }
+}

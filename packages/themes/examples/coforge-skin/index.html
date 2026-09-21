@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en" data-carbon-theme="white" data-coforge-skin="on">
+  <head>
+    <meta charset="utf-8" />
+    <title>CoForge skin colour bench</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Anek+Latin:wght@100..800&family=Source+Code+Pro:wght@400;700&display=swap" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@carbon/styles@1.115.0/css/styles.css" />
+    <link rel="stylesheet" href="./skin.css" />
+    <style>
+      body {
+        margin: 2rem;
+        max-inline-size: 40rem;
+      }
+      .row {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        margin-block: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <p data-testid="coforge-copy">
+      Page should be bone. This sentence is ink. Coral is not used here.
+    </p>
+    <div class="row">
+      <button class="cds--btn cds--btn--primary cds--btn--lg" type="button">
+        Start the conversation
+      </button>
+      <button class="cds--btn cds--btn--primary cds--btn--sm" type="button">
+        Small
+      </button>
+    </div>
+    <p>
+      <a class="cds--link" href="#bench">Coral-text link</a>
+    </p>
+    <div class="cds--form-item cds--text-input-wrapper">
+      <label class="cds--label" for="coforge-field">Field stays Carbon gray</label>
+      <input id="coforge-field" class="cds--text-input" type="text" />
+    </div>
+    <div class="cds--layer-one" style="padding: 1rem; margin-top: 1rem">
+      layer 01
+      <div class="cds--layer-two" style="padding: 1rem">
+        layer 02
+        <div class="cds--layer-three" style="padding: 1rem">layer 03</div>
+      </div>
+    </div>
+    <pre class="cds--snippet cds--snippet--multi" style="margin-top: 1rem">
+      <code>const a = 1;
+function hello() {
+  return a;
+}</code>
+    </pre>
+    <script type="module">
+      import 'https://unpkg.com/@carbon/web-components@2.41.1/es/components/button/index.js';
+    </script>
+  </body>
+</html>

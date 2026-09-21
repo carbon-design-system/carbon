@@ -1,0 +1,15 @@
+artifacts/luma-travel/2026-09-10__persona__research-grounded-persona-set__v1/research-grounded-personas.md
+artifacts/luma-travel/2026-09-14__persona__priority-four__v1/luma-personas-priority-four.html
+artifacts/luma-travel/2026-09-14__handoff-spec__luma-personas-figma-make-package__v1/luma-personas/luma-personas-priority-four.md
+artifacts/luma-travel/2026-09-15__handoff-spec__luma-journey-maps-figma-make-package__v1/luma-journey-maps/05-luma-journey-maps-priority-four-content.md
+artifacts/luma-travel/2026-09-15__competitive-benchmark__priority-four-pain-points__v1/luma-priority-four-benchmark.md
+artifacts/brand-foundations/2026-08-27__brand-extraction__coforge-web__v1/coforge-visual-foundations.md
+artifacts/brand-foundations/2026-09-02__a11y-audit__semantic-colour-layer__v2/semantic-colour-contrast-audit.md
+artifacts/design-system-authoring/2026-09-03__component-spec__cf-chip__v1/chip-component-spec.md
+artifacts/design-system-authoring/2026-09-03__component-spec__cf-nav-rail__v1/nav-rail-component-spec.md
+artifacts/design-system-authoring/2026-09-03__component-spec__cf-detail-panel__v1/detail-panel-component-spec.md
+decisions/ADR-011-design-system-carbon.md
+decisions/ADR-018-component-namespacing.md
+decisions/ADR-021-dataviz-layer.md
+decisions/ADR-022-first-authored-l1-promotions.md
+decisions/ADR-024-synthetic-corpora-are-measurement-not-testimony.md

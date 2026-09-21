@@ -1,0 +1,59 @@
+{
+  "flow_id": "p09-access-gate",
+  "persona": "P09",
+  "entry": { "route": "/hotels", "from": ["home", "concierge"] },
+  "exit": [
+    { "id": "drop-unpublished", "to": "/hotels", "success": true },
+    { "id": "switch-job", "to": "/" }
+  ],
+  "screens": [
+    "luma-home",
+    "luma-p09-shortlist",
+    "luma-p09-hotel",
+    "luma-p09-how-verified"
+  ],
+  "nodes": [
+    {
+      "screen": "luma-home",
+      "route": "/",
+      "states": ["default"],
+      "hotspots": [
+        { "from": "job-hotels", "event": "click", "to": "luma-p09-shortlist" },
+        { "from": "nav-hotels", "event": "click", "to": "luma-p09-shortlist" }
+      ],
+      "forbidden_hotspots": ["book", "checkout", "hold"]
+    },
+    {
+      "screen": "luma-p09-shortlist",
+      "route": "/hotels",
+      "states": ["default", "empty", "unpublished-access"],
+      "hotspots": [
+        { "from": "search", "event": "submit", "to": "luma-p09-shortlist" },
+        { "from": "tile-verified", "event": "click", "to": "luma-p09-hotel" },
+        { "from": "tile-specialist", "event": "click", "to": "luma-p09-hotel" },
+        { "from": "drop-unpublished", "event": "click", "to": "luma-p09-shortlist", "state": "unpublished-access" },
+        { "from": "help", "event": "click", "to": "luma-p09-how-verified" }
+      ],
+      "forbidden_hotspots": ["book", "checkout", "hold"]
+    },
+    {
+      "screen": "luma-p09-hotel",
+      "route": "/hotels/:id",
+      "states": ["default"],
+      "hotspots": [
+        { "from": "help", "event": "click", "to": "luma-p09-how-verified" },
+        { "from": "back", "event": "click", "to": "luma-p09-shortlist" }
+      ],
+      "forbidden_hotspots": ["book", "checkout", "hold"]
+    },
+    {
+      "screen": "luma-p09-how-verified",
+      "route": "/hotels/how-verified",
+      "states": ["default"],
+      "hotspots": [
+        { "from": "back", "event": "click", "to": "luma-p09-shortlist" }
+      ],
+      "forbidden_hotspots": ["book", "checkout", "hold"]
+    }
+  ]
+}

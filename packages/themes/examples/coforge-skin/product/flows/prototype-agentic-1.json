@@ -1,0 +1,137 @@
+{
+  "flow_id": "prototype-agentic-1",
+  "persona": "priority-four",
+  "entry": { "route": "/", "from": ["cold"] },
+  "exit": [
+    { "id": "drop-unpublished", "to": "/hotels", "success": true },
+    { "id": "switch-job", "to": "/" },
+    { "id": "share-recipient", "to": "/itinerary/share", "success": true }
+  ],
+  "screens": [
+    "luma-home",
+    "luma-p14-tickets",
+    "luma-p14-documents",
+    "luma-p14-recovery",
+    "luma-p09-shortlist",
+    "luma-p09-hotel",
+    "luma-p09-how-verified",
+    "luma-activities",
+    "luma-p04-itinerary",
+    "luma-p04-share",
+    "luma-p12-airport"
+  ],
+  "nodes": [
+    {
+      "screen": "luma-home",
+      "route": "/",
+      "states": ["default"],
+      "hotspots": [
+        { "from": "job-tickets", "event": "click", "to": "luma-p14-tickets" },
+        { "from": "job-hotels", "event": "click", "to": "luma-p09-shortlist" },
+        { "from": "job-activities", "event": "click", "to": "luma-activities" },
+        { "from": "job-itinerary", "event": "click", "to": "luma-p04-itinerary" },
+        { "from": "nav-tickets", "event": "click", "to": "luma-p14-tickets" },
+        { "from": "nav-hotels", "event": "click", "to": "luma-p09-shortlist" },
+        { "from": "nav-activities", "event": "click", "to": "luma-activities" },
+        { "from": "nav-itinerary", "event": "click", "to": "luma-p04-itinerary" },
+        { "from": "concierge", "event": "click", "to": "header-panel-concierge" }
+      ],
+      "forbidden_hotspots": ["book", "checkout", "hold", "sell-seat", "airport-menu"]
+    },
+    {
+      "screen": "luma-p09-shortlist",
+      "route": "/hotels",
+      "states": ["default", "empty", "unpublished-access"],
+      "hotspots": [
+        { "from": "search", "event": "submit", "to": "luma-p09-shortlist" },
+        { "from": "tile-verified", "event": "click", "to": "luma-p09-hotel" },
+        { "from": "tile-specialist", "event": "click", "to": "luma-p09-hotel" },
+        { "from": "drop-unpublished", "event": "click", "to": "luma-p09-shortlist", "state": "unpublished-access" },
+        { "from": "help", "event": "click", "to": "luma-p09-how-verified" }
+      ],
+      "forbidden_hotspots": ["book", "checkout", "hold"]
+    },
+    {
+      "screen": "luma-p09-hotel",
+      "route": "/hotels/:id",
+      "states": ["mainstream", "specialist"],
+      "hotspots": [
+        { "from": "help", "event": "click", "to": "luma-p09-how-verified" },
+        { "from": "back", "event": "click", "to": "luma-p09-shortlist" }
+      ],
+      "forbidden_hotspots": ["book", "checkout", "hold", "assistance-live"]
+    },
+    {
+      "screen": "luma-p09-how-verified",
+      "route": "/hotels/how-verified",
+      "states": ["default"],
+      "hotspots": [
+        { "from": "back", "event": "click", "to": "luma-p09-shortlist" }
+      ],
+      "forbidden_hotspots": ["book", "checkout", "hold"]
+    },
+    {
+      "screen": "luma-p14-tickets",
+      "route": "/tickets",
+      "states": ["default"],
+      "hotspots": [
+        { "from": "tile-flight", "event": "click", "to": "luma-p14-documents" },
+        { "from": "link-airport", "event": "click", "to": "luma-p12-airport" }
+      ],
+      "forbidden_hotspots": ["sell-seat", "checkout", "book"]
+    },
+    {
+      "screen": "luma-p14-documents",
+      "route": "/tickets/documents",
+      "states": ["auth-wall", "pair", "blocked", "confirmed"],
+      "hotspots": [
+        { "from": "sign-in", "event": "click", "to": "luma-p14-documents", "state": "pair" },
+        { "from": "confirm-leg", "event": "click", "to": "luma-p14-documents" },
+        { "from": "recovery", "event": "click", "to": "luma-p14-recovery" }
+      ],
+      "forbidden_hotspots": ["print-both-legs", "sell-seat"]
+    },
+    {
+      "screen": "luma-p14-recovery",
+      "route": "/tickets/documents/recovery",
+      "states": ["default"],
+      "hotspots": [
+        { "from": "back", "event": "click", "to": "luma-p14-documents" }
+      ],
+      "forbidden_hotspots": ["sell-seat"]
+    },
+    {
+      "screen": "luma-p04-itinerary",
+      "route": "/itinerary",
+      "states": ["default"],
+      "hotspots": [
+        { "from": "share", "event": "click", "to": "luma-p04-share" },
+        { "from": "link-airport", "event": "click", "to": "luma-p12-airport" }
+      ],
+      "forbidden_hotspots": ["force-recipient-account", "collab-editor"]
+    },
+    {
+      "screen": "luma-p04-share",
+      "route": "/itinerary/share",
+      "states": ["default"],
+      "hotspots": [],
+      "forbidden_hotspots": ["sign-in-required"]
+    },
+    {
+      "screen": "luma-p12-airport",
+      "route": "/airport",
+      "states": ["default"],
+      "hotspots": [
+        { "from": "tsa", "event": "click", "to": "https://www.tsa.gov/travel/security-screening" }
+      ],
+      "forbidden_hotspots": ["agency-book", "simplified-onboarding"]
+    },
+    {
+      "screen": "luma-activities",
+      "route": "/activities",
+      "states": ["default"],
+      "hotspots": [],
+      "forbidden_hotspots": ["marketplace-book", "book", "checkout"]
+    }
+  ]
+}

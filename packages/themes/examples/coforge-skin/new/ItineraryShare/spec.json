@@ -1,0 +1,8 @@
+{
+  "id": "ItineraryShare",
+  "folder": "new/ItineraryShare",
+  "wraps": ["cds-button", "cds-text-input", "cds-inline-notification"],
+  "use_cases": ["UC-P04-2", "UC-P04-3"],
+  "heuristics": ["N2", "N7"],
+  "forbidden": ["force-recipient-account", "collab-editor"]
+}

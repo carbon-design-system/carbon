@@ -9,6 +9,7 @@
 @use '@carbon/themes/scss/themes';
 @use '@carbon/styles/scss/theme';
 @use '@carbon/grid';
+@use '@carbon/themes/scss/coforge/skin' as coforge;
 
 @use '@carbon/styles/scss/components/button/tokens' as button-tokens;
 @use '@carbon/styles/scss/components/notification/tokens' as notification-tokens;
@@ -74,6 +75,8 @@ body {
 .docs-story > *:has(> .docblock-code-toggle) {
   background-color: theme.$background;
 }
+
+@include coforge.coforge-skin-attr;
 
 // Following styles are needed to ensure that the Canvas containers render correctly
 .docs-story div div {

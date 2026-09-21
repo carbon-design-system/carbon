@@ -1,0 +1,165 @@
+{
+  "slug": "create-request",
+  "screen": "Create request",
+  "flow_id": "create-request",
+  "viewport": { "width": 672, "height": 800 },
+  "figma": {
+    "fileKey": "mnPFHuLUzXItWQimrWQEvV",
+    "page": "Screens",
+    "pageId": "1756:1439",
+    "frameId": "13177:44990",
+    "variableMode": "IBM default (overlay not rebound on instances)"
+  },
+  "storybook": "CoForge/Create request",
+  "states": ["default", "empty", "error", "success"],
+  "regions": [
+    {
+      "id": "title-heading",
+      "component": "html-h1",
+      "react": "h1",
+      "variant": { "token": "coforge-type-h1" },
+      "tokens": ["--cds-text-primary", "--coforge-type-h1-size"],
+      "figma": {
+        "fileKey": "mnPFHuLUzXItWQimrWQEvV",
+        "instanceId": "13177:44991",
+        "componentKey": null
+      },
+      "copy": "Create request",
+      "notes": "Type overlay not shipped as Figma text style; IBM Plex Sans SemiBold stand-in. Ink fill #041222."
+    },
+    {
+      "id": "title-field",
+      "component": "cds-text-input",
+      "react": "TextInput",
+      "variant": { "size": "md", "state": "enabled" },
+      "tokens": ["--cds-field-01", "--cds-text-primary", "--cds-text-secondary"],
+      "figma": {
+        "fileKey": "mnPFHuLUzXItWQimrWQEvV",
+        "nodeId": "15784:271032",
+        "componentKey": "a7b952c5250babff54d6687ee585a2e61898c67f",
+        "instanceId": "13177:44992",
+        "props": {
+          "Size": "Medium",
+          "State": "Enabled",
+          "Text filled": "False",
+          "Label text#107318:0": "Title"
+        }
+      },
+      "copy": "Title"
+    },
+    {
+      "id": "description-field",
+      "component": "cds-textarea",
+      "react": "TextArea",
+      "variant": { "state": "enabled" },
+      "tokens": ["--cds-field-01", "--cds-text-primary", "--cds-text-secondary"],
+      "figma": {
+        "fileKey": "mnPFHuLUzXItWQimrWQEvV",
+        "nodeId": "14494:263111",
+        "componentKey": "2dd4fce1ea7d47a7ae2baa62ee2caeafff56c3db",
+        "instanceId": "13177:45014",
+        "props": {
+          "State": "Enabled",
+          "Text filled": "False",
+          "Label text#11412:460": "Description"
+        }
+      },
+      "copy": "Description"
+    },
+    {
+      "id": "notify",
+      "component": "cds-checkbox",
+      "react": "Checkbox",
+      "variant": { "state": "enabled", "checked": false },
+      "tokens": ["--cds-icon-primary", "--cds-text-primary"],
+      "figma": {
+        "fileKey": "mnPFHuLUzXItWQimrWQEvV",
+        "nodeId": "3193:29303",
+        "componentKey": "d7146f2ae81b5bb9f14672d961f2a54159e4c55d",
+        "instanceId": "13177:45043",
+        "props": {
+          "State": "Enabled",
+          "Selection": "Unchecked",
+          "Value text#11555:53": "Notify me when complete"
+        }
+      },
+      "copy": "Notify me when complete"
+    },
+    {
+      "id": "help",
+      "component": "cds-link",
+      "react": "Link",
+      "variant": { "kind": "primary" },
+      "tokens": ["--cds-link-primary", "--coforge-accent-text"],
+      "figma": {
+        "fileKey": "mnPFHuLUzXItWQimrWQEvV",
+        "nodeId": "50111:991",
+        "componentKey": "fec64b6e8cde20ec9a50e7eda1277964a8a25eb8",
+        "instanceId": "13177:45057",
+        "props": {
+          "Type": "Standalone",
+          "Size": "Medium",
+          "State": "Enabled",
+          "Link text#12006:151": "How requests are routed"
+        }
+      },
+      "copy": "How requests are routed"
+    },
+    {
+      "id": "cancel",
+      "component": "cds-button",
+      "react": "Button",
+      "variant": { "kind": "ghost", "size": "lg", "state": "enabled" },
+      "tokens": ["--cds-link-primary"],
+      "figma": {
+        "fileKey": "mnPFHuLUzXItWQimrWQEvV",
+        "nodeId": "1854:1776",
+        "componentKey": "e4eed5da771b618736995b5e63192096d8b2c6c2",
+        "props": {
+          "Style": "Ghost",
+          "Type": "Text + Icon",
+          "Size": "Large",
+          "State": "Enabled",
+          "Button text#11004:541": "Cancel"
+        }
+      },
+      "copy": "Cancel"
+    },
+    {
+      "id": "submit",
+      "component": "cds-button",
+      "react": "Button",
+      "variant": { "kind": "primary", "size": "lg", "state": "enabled" },
+      "tokens": ["--cds-button-primary", "--cds-text-on-color"],
+      "figma": {
+        "fileKey": "mnPFHuLUzXItWQimrWQEvV",
+        "nodeId": "1854:1776",
+        "componentKey": "e4eed5da771b618736995b5e63192096d8b2c6c2",
+        "props": {
+          "Style": "Primary",
+          "Type": "Text + Icon",
+          "Size": "Large",
+          "State": "Enabled",
+          "Button text#11004:541": "Submit request"
+        }
+      },
+      "copy": "Submit request"
+    },
+    {
+      "id": "success-note",
+      "component": "cds-inline-notification",
+      "react": "InlineNotification",
+      "variant": { "kind": "success", "state": "success-only" },
+      "tokens": ["--cds-text-primary"],
+      "figma": {
+        "fileKey": "mnPFHuLUzXItWQimrWQEvV",
+        "nodeId": "4179:105911",
+        "componentKey": "5a2bef60e10df27b621bea3b92424a0aa413b76a",
+        "props": { "Status": "Success" }
+      },
+      "copy": "Request submitted",
+      "visible_in": ["success"]
+    }
+  ],
+  "forbidden": ["raw hex", "off-catalogue components", "coral on small text", "coral primary sm"]
+}

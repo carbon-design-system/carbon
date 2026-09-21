@@ -1,0 +1,29 @@
+{
+  "$schema": "https://tr.designtokens.org/format/",
+  "$description": "CoForge light-theme semantic remaps over Carbon white/g10. Layer/field/syntax stay Carbon (ADR-011). Dark (g90/g100) is untouched — brand.md OQ-5 is open.",
+  "light": {
+    "background": "{palette.bone.default}",
+    "text-primary": "{palette.ink.default}",
+    "icon-primary": "{palette.ink.default}",
+    "focus": "{palette.ink.default}",
+    "border-interactive": "{palette.ink.default}",
+    "icon-interactive": "{palette.ink.default}",
+    "interactive": "{palette.ink.default}",
+    "background-brand": "{palette.coral.default}",
+    "button-primary": "{palette.coral.default}",
+    "button-primary-hover": "{palette.coral.text}",
+    "button-primary-active": "{palette.ink.default}",
+    "link-primary": "{palette.coral.text}",
+    "accent-container": "{palette.coral.default}",
+    "accent-text": "{palette.coral.text}"
+  },
+  "do_not_override": [
+    "layer-01",
+    "layer-02",
+    "layer-03",
+    "field-01",
+    "field-02",
+    "border-subtle-01",
+    "syntax-*"
+  ]
+}

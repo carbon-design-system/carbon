@@ -1,0 +1,74 @@
+{
+  "version": 2,
+  "chrome": {
+    "header": "cds-header",
+    "menu": ["tickets", "hotels", "activities", "itinerary"],
+    "concierge": "cds-header-global-action",
+    "account": "cds-header-global-action",
+    "search": "in-job-only"
+  },
+  "session": {
+    "cold": [
+      "/",
+      "/hotels",
+      "/activities",
+      "/itinerary",
+      "/itinerary/share",
+      "/airport",
+      "/tickets"
+    ],
+    "auth_required": ["/tickets/documents", "/tickets/documents/recovery"]
+  },
+  "home": "/",
+  "routes": [
+    { "path": "/", "job": "home", "screens": ["luma-home"] },
+    {
+      "path": "/tickets",
+      "job": "tickets",
+      "persona": "P14",
+      "screens": ["luma-p14-tickets"]
+    },
+    {
+      "path": "/tickets/documents",
+      "job": "tickets",
+      "persona": "P14",
+      "auth": true,
+      "screens": ["luma-p14-documents"]
+    },
+    {
+      "path": "/hotels",
+      "job": "hotels",
+      "persona": "P09",
+      "screens": ["luma-p09-shortlist", "luma-p09-hotel", "luma-p09-how-verified"]
+    },
+    {
+      "path": "/activities",
+      "job": "activities",
+      "screens": ["luma-activities"]
+    },
+    {
+      "path": "/itinerary",
+      "job": "itinerary",
+      "persona": "P04",
+      "screens": ["luma-p04-itinerary"]
+    },
+    {
+      "path": "/airport",
+      "job": "airport",
+      "persona": "P12",
+      "menu": false,
+      "screens": ["luma-p12-airport"]
+    }
+  ],
+  "forbidden": [
+    "sitewide-search",
+    "p09-book",
+    "sell-tickets",
+    "activities-marketplace-book",
+    "cf-nav-rail",
+    "journey-stages-as-nav",
+    "concierge-as-menu-item",
+    "auth-on-recipient-itinerary",
+    "auth-on-hotel-research"
+  ]
+}

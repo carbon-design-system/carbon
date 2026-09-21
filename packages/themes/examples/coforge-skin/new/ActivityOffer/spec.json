@@ -1,0 +1,9 @@
+{
+  "id": "ActivityOffer",
+  "folder": "new/ActivityOffer",
+  "wraps": ["cds-tile", "cds-tag", "cds-button"],
+  "react": ["Tile", "Tag", "Button"],
+  "use_cases": ["UC-BOOK-ACT"],
+  "heuristics": ["N2", "N4"],
+  "forbidden": ["cf-*", "marketplace-sku"]
+}

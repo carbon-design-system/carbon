@@ -1,0 +1,9 @@
+{
+  "id": "StayOffer",
+  "folder": "new/StayOffer",
+  "wraps": ["cds-tile", "cds-tag", "cds-button", "cds-link"],
+  "react": ["Tile", "Tag", "Button", "Link"],
+  "use_cases": ["UC-BOOK-STAY"],
+  "heuristics": ["N2", "N4"],
+  "forbidden": ["cf-*", "colour-only-accessible"]
+}

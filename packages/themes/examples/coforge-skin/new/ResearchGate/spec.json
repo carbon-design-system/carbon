@@ -1,0 +1,8 @@
+{
+  "id": "ResearchGate",
+  "folder": "new/ResearchGate",
+  "wraps": ["cds-search", "cds-tile", "cds-tag-readonly", "cds-button", "cds-inline-notification"],
+  "use_cases": ["UC-P09-1", "UC-P09-2"],
+  "heuristics": ["N5", "N6", "N9"],
+  "forbidden": ["book", "checkout", "hold"]
+}

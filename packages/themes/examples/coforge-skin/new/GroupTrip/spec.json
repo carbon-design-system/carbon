@@ -1,0 +1,9 @@
+{
+  "id": "GroupTrip",
+  "folder": "new/GroupTrip",
+  "wraps": ["cds-tile", "cds-tag", "cds-contained-list"],
+  "react": ["Tile", "Tag", "ContainedList"],
+  "use_cases": ["UC-BOOK-GROUP"],
+  "heuristics": ["N2", "N3", "N6"],
+  "forbidden": ["force-account", "edit-in-guest-mode", "cf-*"]
+}
