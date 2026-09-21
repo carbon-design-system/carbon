@@ -646,6 +646,7 @@
 
   .#{$block-class}__main-content {
     position: relative;
+    background-color: $background;
   }
 
   .#{$block-class}__side-panel {
