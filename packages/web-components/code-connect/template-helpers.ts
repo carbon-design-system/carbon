@@ -13,5 +13,11 @@ export function renderBooleanAttribute(name: string, value: unknown) {
 }
 
 export function renderStringAttribute(name: string, value: unknown) {
-  return typeof value === 'string' ? figma.code` ${name}="${value}"` : null;
+  if (typeof value !== 'string') {
+    return null;
+  }
+
+  const escaped = value.replaceAll('&', '&amp;').replaceAll('"', '&quot;');
+
+  return figma.code` ${name}="${escaped}"`;
 }
