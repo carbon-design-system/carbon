@@ -396,7 +396,17 @@ export const DataTable = <RowType, ColTypes extends any[]>(
     const hasRowsChanged = !isEqual(rows, currentRows);
 
     if (hasRowIdsChanged || hasHeadersChanged || hasRowsChanged) {
-      setState((prev) => getDerivedStateFromProps(props, prev));
+      // queueMicrotask schedules the setState to run after the current
+      // passive effects flush returns. React 19 sets the internal flag
+      // `isFlushingPassiveEffects` during flushPassiveEffects(); a setState
+      // call while that flag is set marks `didScheduleUpdateDuringPassiveEffects`
+      // on the root, which causes nestedPassiveUpdateCount to increment on
+      // every subsequent flush. By deferring past that boundary the flag is
+      // already cleared when setState is called, so the counter is never
+      // incremented and the "Maximum update depth exceeded" error is avoided.
+      queueMicrotask(() =>
+        setState((prev) => getDerivedStateFromProps(props, prev))
+      );
     }
     // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
   }, [headers, rows]);
