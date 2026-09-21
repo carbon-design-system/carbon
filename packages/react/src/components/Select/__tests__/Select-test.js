@@ -17,8 +17,8 @@ const prefix = 'cds';
 
 describe('Select', () => {
   describe('renders as expected - Component API', () => {
-    it('should not allow interactive content in labelText', () => {
-      const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+    it('should warn without throwing for interactive content in labelText', () => {
+      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
       expect(() => {
         render(
@@ -31,8 +31,12 @@ describe('Select', () => {
             }
           />
         );
-      }).toThrow(
-        'The Select component `labelText` prop must have no interactive content'
+      }).not.toThrow();
+
+      expect(spy).toHaveBeenCalledWith(
+        expect.stringContaining(
+          'Warning: The Select component `labelText` prop must have no interactive content'
+        )
       );
 
       spy.mockRestore();
