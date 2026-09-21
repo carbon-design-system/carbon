@@ -1,4 +1,4 @@
-# This workflow merges the main branch into the feat/v3-cwc branch every night to keep the branch up to date..
+# This workflow merges the main branch into the next (v12) branch every night to keep the branch up to date..
 name: Automerge
 
 on:
@@ -10,7 +10,7 @@ on:
 
 jobs:
   merge:
-    name: Merge main into feat/v3-cwc
+    name: Merge main into next
     runs-on: ubuntu-latest
     if: github.repository == 'carbon-design-system/carbon'
     permissions:
@@ -19,22 +19,22 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: '0'
-          ref: feat/v3-cwc
+          ref: next
 
-      - name: Merge main into feat/v3-cwc
+      - name: Merge main into next
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           if git merge-base --is-ancestor origin/main HEAD; then
-            echo "feat/v3-cwc already contains main; nothing to merge."
+            echo "next already contains main; nothing to merge."
             exit 0
           fi
 
           if ! git merge origin/main --no-edit; then
-            echo "Merge conflict merging main into feat/v3-cwc. Resolve locally and push."
+            echo "Merge conflict merging main into next. Resolve locally and push."
             git merge --abort
             exit 1
           fi
 
-          git push origin HEAD:feat/v3-cwc
+          git push origin HEAD:next
