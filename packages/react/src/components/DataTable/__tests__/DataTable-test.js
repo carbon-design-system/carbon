@@ -1574,11 +1574,14 @@ describe('DataTable', () => {
       expect(screen.getByRole('cell')).toHaveTextContent('Value B');
     });
 
-    it('should not throw when many instances mount and each defers a setState', async () => {
-      // Regression guard: mounting N DataTable instances whose
-      // useEffect([headers, rows]) all schedule setState via queueMicrotask
-      // must not accumulate nestedPassiveUpdateCount past the React 19 limit.
-      const count = 20;
+    it('should render all instances correctly when many mount simultaneously', async () => {
+      // Verify that mounting more than 50 DataTable instances at once does not
+      // prevent any of them from applying their derived state. 51+ instances
+      // is the threshold that would exceed React 19's nestedPassiveUpdateCount
+      // limit without the queueMicrotask deferral. Each instance defers its
+      // setState via queueMicrotask; act() drains the microtask queue so every
+      // update must be reflected in the DOM before the assertions below.
+      const count = 60;
 
       await act(async () => {
         render(
