@@ -69,6 +69,7 @@ collect:
         - dir
         - direction
         - disabled
+        - disablePortal
         - disableWheel
         - downshiftActions
         - downshiftProps
@@ -155,6 +156,7 @@ collect:
         - menuOptionsClass
         - menuTarget
         - min
+        - modalAriaLabel
         - modalHeading
         - modalLabel
         - mode
@@ -196,12 +198,15 @@ collect:
         - open
         - ordered
         - orientation
+        - overflowAlign
+        - overflowType
         - page
         - pageActions
         - paragraph
         - passiveModal
         - pattern
         - placeholder
+        - portalTarget
         - prefix
         - preventCloseOnClickOutside
         - primaryButtonDisabled
@@ -228,6 +233,7 @@ collect:
         - selectorPrimaryFocus
         - selectorsFloatingMenus
         - shouldFilterItem
+        - showAllTagsLabel
         - showPasswordLabel
         - size
         - slug
@@ -494,7 +500,7 @@ collect:
         - disableActionButton
         # Layer
         - withBackground
-        # LinkBase
+        # Link
         - visited
         # ListBox
         - invalidTextId
@@ -524,7 +530,6 @@ collect:
         # Modal
         - alert
         - closeButtonLabel
-        - modalAriaLabel
         - shouldSubmitOnEnter
         # ModalBody
         - hasForm
@@ -767,11 +772,33 @@ collect:
         - height
         # Tag
         - filter
+        # TagOverflow
+        - allTagsModalAriaLabel
+        - allTagsModalSearchLabel
+        - allTagsModalSearchPlaceholderText
+        - allTagsModalTarget
+        - allTagsModalTitle
+        - containingElementRef
+        - maxVisible
+        - measurementOffset
+        - multiline
+        - onOverflowTagChange
+        - overflowClassName
+        - tagComponent
+        # TagOverflowModal
+        - allTags
+        - onTagClose
+        - searchLabel
+        - searchPlaceholder
+        # TagOverflowPopover
+        - allTagsModalSearchThreshold
+        - onShowAllClick
+        - overflowTags
+        - popoverOpen
+        - setPopoverOpen
         # Tearsheet
-        - disablePortal
         - influencerWidth
         - keepMounted
-        - portalTarget
         - summaryContentWidth
         - variant
         - verticalGap
@@ -1036,6 +1063,22 @@ collect:
         # General - orientation
         - horizontal
         - vertical
+        # General - overflowAlign
+        - bottom
+        - bottom-left
+        - bottom-right
+        - left
+        - left-bottom
+        - left-top
+        - right
+        - right-bottom
+        - right-top
+        - top
+        - top-left
+        - top-right
+        # General - overflowType
+        - default
+        - tag
         # General - role
         - alert
         - alertdialog
