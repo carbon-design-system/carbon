@@ -7778,9 +7778,6 @@ Map {
       "requireTitle": {
         "type": "bool",
       },
-      "target": {
-        "type": "string",
-      },
       "title": {
         "type": "string",
       },

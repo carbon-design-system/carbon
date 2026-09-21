@@ -7,7 +7,12 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { forwardRef } from 'react';
+import React, {
+  forwardRef,
+  type AnchorHTMLAttributes,
+  type HTMLAttributes,
+  type ReactNode,
+} from 'react';
 import { keys, match } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
 import { warning } from '../../internal/warning';
@@ -15,12 +20,12 @@ import { Text } from '../Text';
 import { useId } from '../../internal/useId';
 
 type AnchorAttributeProps = Omit<
-  React.AnchorHTMLAttributes<HTMLAnchorElement>,
-  keyof React.HTMLAttributes<HTMLElement> | 'href' | 'type'
+  AnchorHTMLAttributes<HTMLAnchorElement>,
+  keyof HTMLAttributes<HTMLElement> | 'href' | 'type'
 >;
 
 export interface OverflowMenuItemProps
-  extends React.HTMLAttributes<HTMLElement>,
+  extends HTMLAttributes<HTMLElement>,
     AnchorAttributeProps {
   /**
    * The CSS class name to be placed on the button element
@@ -62,7 +67,7 @@ export interface OverflowMenuItemProps
   /**
    * The text to show for the menu item
    */
-  itemText?: React.ReactNode;
+  itemText?: ReactNode;
 
   /**
    * `true` to make this menu item a danger button.
