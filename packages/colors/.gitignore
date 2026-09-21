@@ -1,5 +1,7 @@
+js/generated
 scss
 index.scss
+src/colors.ts
 
 !examples/**/src/scss
 !examples/**/src/scss/**

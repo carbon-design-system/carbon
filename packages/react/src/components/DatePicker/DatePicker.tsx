@@ -72,6 +72,42 @@ const flatpickrDeprecation = (prop: string) =>
 const monthToStr = (monthNumber, shorthand, locale) =>
   locale.months[shorthand ? 'shorthand' : 'longhand'][monthNumber];
 
+const monthSelectPluginConfig = {
+  selectorFlatpickrMonthYearContainer: '.flatpickr-current-month',
+  selectorFlatpickrYearContainer: '.numInputWrapper',
+  selectorFlatpickrCurrentMonth: '.cur-month',
+  classFlatpickrCurrentMonth: 'cur-month',
+};
+
+/**
+ * Updates the text-based month UI with the current Flatpickr month.
+ */
+const updateCurrentMonth = (fp, config) => {
+  if (fp.monthElements) {
+    const monthStr = monthToStr(
+      fp.currentMonth,
+      config.shorthand === true,
+      fp.l10n
+    );
+    fp.yearElements.forEach((elem) => {
+      const currentMonthContainer = elem.closest(
+        config.selectorFlatpickrMonthYearContainer
+      );
+      if (!currentMonthContainer) {
+        return;
+      }
+      Array.prototype.forEach.call(
+        currentMonthContainer.querySelectorAll(
+          config.selectorFlatpickrCurrentMonth
+        ),
+        (monthElement) => {
+          monthElement.textContent = monthStr;
+        }
+      );
+    });
+  }
+};
+
 /**
  * @param {object} config Plugin configuration.
  * @param {boolean} [config.shorthand] `true` to use shorthand month.
@@ -126,36 +162,15 @@ const carbonFlatpickrMonthSelectPlugin = (config) => (fp) => {
     );
   };
 
-  const updateCurrentMonth = () => {
-    if (fp.monthElements) {
-      const monthStr = monthToStr(
-        fp.currentMonth,
-        config.shorthand === true,
-        fp.l10n
-      );
-      fp.yearElements.forEach((elem) => {
-        const currentMonthContainer = elem.closest(
-          config.selectorFlatpickrMonthYearContainer
-        );
-        Array.prototype.forEach.call(
-          currentMonthContainer.querySelectorAll('.cur-month'),
-          (monthElement) => {
-            monthElement.textContent = monthStr;
-          }
-        );
-      });
-    }
-  };
-
   const register = () => {
     fp.loadedPlugins.push('carbonFlatpickrMonthSelectPlugin');
   };
 
   return {
-    onMonthChange: updateCurrentMonth,
-    onValueUpdate: updateCurrentMonth,
-    onOpen: updateCurrentMonth,
-    onReady: [setupElements, updateCurrentMonth, register],
+    onMonthChange: () => updateCurrentMonth(fp, config),
+    onValueUpdate: () => updateCurrentMonth(fp, config),
+    onOpen: () => updateCurrentMonth(fp, config),
+    onReady: [setupElements, () => updateCurrentMonth(fp, config), register],
   };
 };
 
@@ -650,11 +665,8 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
             })
           : ((() => {}) as unknown as Plugin),
         carbonFlatpickrMonthSelectPlugin({
-          selectorFlatpickrMonthYearContainer: '.flatpickr-current-month',
-          selectorFlatpickrYearContainer: '.numInputWrapper',
-          selectorFlatpickrCurrentMonth: '.cur-month',
-          classFlatpickrCurrentMonth: 'cur-month',
-          locale: locale,
+          ...monthSelectPluginConfig,
+          locale,
         }) as unknown as Plugin,
         fixEventsPlugin({
           inputFrom: startInputField.current,
@@ -964,6 +976,7 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
           (value.length > 0 && !value.every(isEmptyDateValue)))
       ) {
         calendarRef.current.setDate(value);
+        updateCurrentMonth(calendarRef.current, monthSelectPluginConfig);
       }
       updateClassNames(calendarRef.current, prefix, isFluid);
       //for simple date picker w/o calendar; initial mount may not have value
