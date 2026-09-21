@@ -6,6 +6,7 @@
  */
 
 import { defineCustomElement } from '../../globals/register';
+import '../icon-button/index';
 import CDSAILabel from './ai-label';
 import CDSAILabelActionButton from './ai-label-action-button';
 

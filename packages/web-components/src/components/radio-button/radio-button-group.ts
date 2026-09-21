@@ -10,7 +10,7 @@ import { property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { prefix } from '../../globals/settings';
-import FormMixin from '../../globals/mixins/form';
+import FormAssociatedMixin from '../../globals/mixins/form-associated';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import HostListener from '../../globals/decorators/host-listener';
 import { find, forEach } from '../../globals/internal/collection-helpers';
@@ -31,7 +31,9 @@ export { RADIO_BUTTON_ORIENTATION };
  * @fires cds-radio-button-changed
  *   The name of the custom event fired after a radio button changes its checked state.
  */
-class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
+class CDSRadioButtonGroup extends FormAssociatedMixin(
+  HostListenerMixin(LitElement)
+) {
   static is = `${prefix}-radio-button-group`;
 
   /**

@@ -15,7 +15,7 @@ import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
 import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
 import ChevronDown16 from '@carbon/icons/es/chevron--down/16.js';
 import FocusMixin from '../../globals/mixins/focus';
-import FormMixin from '../../globals/mixins/form';
+import FormAssociatedMixin from '../../globals/mixins/form-associated';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import ValidityMixin from '../../globals/mixins/validity';
 import HostListener from '../../globals/decorators/host-listener';
@@ -62,8 +62,8 @@ export {
  * @fires cds-dropdown-selected - The custom event fired after a dropdown item is selected upon a user gesture.
  * @fires cds-dropdown-toggled - The custom event fired after the open state of this dropdown is toggled upon a user gesture.
  */
-class CDSDropdown extends ValidityMixin(
-  HostListenerMixin(FormMixin(FocusMixin(LitElement)))
+class CDSDropdown extends FormAssociatedMixin(
+  ValidityMixin(HostListenerMixin(FocusMixin(LitElement)))
 ) {
   static is = `${prefix}-dropdown`;
 

@@ -13,7 +13,7 @@ import ChevronDown16 from '@carbon/icons/es/chevron--down/16.js';
 import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
 import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import FormMixin from '../../globals/mixins/form';
+import FormAssociatedMixin from '../../globals/mixins/form-associated';
 import { filter } from '../../globals/internal/collection-helpers';
 import { INPUT_SIZE } from '../text-input/text-input';
 import { iconLoader } from '../../globals/internal/icon-loader';
@@ -30,7 +30,7 @@ import ifNonEmpty from '../../globals/directives/if-non-empty';
  * @slot label-text - The label text.
  * @slot validity-message - The validity message. If present and non-empty, this input shows the UI of its invalid state.
  */
-class CDSSelect extends FormMixin(LitElement) {
+class CDSSelect extends FormAssociatedMixin(LitElement) {
   static is = `${prefix}-select`;
 
   /**

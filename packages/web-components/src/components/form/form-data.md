@@ -1,12 +1,13 @@
 # Form participation
 
-> **Deprecated.** The `formdata` event mechanism described here is deprecated in
-> v2 and removed in v3, replaced by native form association through
-> [`ElementInternals`][element-internals]. It keeps working unchanged until v3.
-> To try the replacement today, see [Form participation moves to
-> `ElementInternals`][migration] in the v3 migration guide.
+> **Deprecated.** The `formdata` event mechanism described here is removed in
+> v3, replaced by native form association through
+> [`ElementInternals`][element-internals]. Date picker still uses this path on
+> `cds-date-picker`; the replacement is on `cds-preview-date-picker`. See [Form
+> participation moves to `ElementInternals`][migration] in the v3 migration
+> guide.
 
-## What we do today
+## What v2 did
 
 Carbon's form components participate in a containing `<form>` by listening for
 its [`formdata` event][formdata-event] and appending their value to
@@ -58,14 +59,15 @@ platform.
 Because `formAssociated` is read once by the browser at
 `customElements.define()` and cannot be toggled per instance or after
 registration, this cannot ship behind Carbon's runtime `<feature-flags>`
-element. It ships instead under separate `cds-preview-*` tags, the same approach
-used by `cds-preview-date-picker`, and becomes the behavior of the canonical
-tags in v3.
+element. In v3 it is the behavior of the canonical form component tags. Date
+picker is the exception: the v2 `cds-date-picker` still uses `FormMixin`, and
+form association lives on `cds-preview-date-picker` until that rewrite replaces
+the canonical tag.
 
 ### Implementation notes
 
-Two details are easy to get wrong and are worth knowing if you add a component
-to the preview set:
+Two details are easy to get wrong and are worth knowing if you add a form
+component:
 
 - **`name` must reflect.** `setFormValue()` reads the `name` _content
   attribute_, not the property. Carbon declares `name` without `reflect`, so a

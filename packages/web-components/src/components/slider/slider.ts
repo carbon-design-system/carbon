@@ -11,7 +11,7 @@ import { classMap } from 'lit/directives/class-map.js';
 import throttle from 'lodash-es/throttle';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
-import FormMixin from '../../globals/mixins/form';
+import FormAssociatedMixin from '../../globals/mixins/form-associated';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import HostListener from '../../globals/decorators/host-listener';
 import CDSSliderInput from './slider-input';
@@ -52,7 +52,9 @@ const EVENT_THROTTLE = 16; // ms
  * @slot min-text - The text for minimum value.
  * @fires cds-slider-changed - The custom event fired after the value is changed by user gesture.
  */
-class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
+class CDSSlider extends FormAssociatedMixin(
+  HostListenerMixin(FocusMixin(LitElement))
+) {
   static is = `${prefix}-slider`;
 
   private _cachedRateUpper: number = 1;
@@ -251,6 +253,15 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
     if (!disabled) {
       formData.append(name, String(value));
     }
+  }
+
+  /**
+   * Restores the default value, coercing it to a number as the property expects.
+   */
+  formResetCallback() {
+    const fallback = this.getAttribute('value');
+    this.value = fallback === null ? 0 : Number(fallback);
+    this._syncFormValue();
   }
 
   /**
