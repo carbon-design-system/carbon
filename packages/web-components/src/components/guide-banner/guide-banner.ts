@@ -32,16 +32,16 @@ const blockEvent = `${prefix}-guidebanner`;
 @customElement(`${prefix}-guide-banner`)
 class CDSGuideBanner extends HostListenerMixin(LitElement) {
   @property({ type: String, reflect: true })
-  collapseText?: string = '';
+  collapseText!: string;
 
   @property({ type: String, reflect: true })
-  expandText?: string = '';
+  expandText!: string;
 
   @property({ type: Boolean, reflect: true })
-  open: boolean = false;
+  open = false;
 
   @property({ type: String, reflect: true, attribute: 'title-text' })
-  titleText?: string = '';
+  titleText!: string;
 
   static get eventToggle() {
     return `${blockEvent}-toggle`;
