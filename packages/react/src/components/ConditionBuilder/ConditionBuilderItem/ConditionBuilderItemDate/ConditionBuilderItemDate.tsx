@@ -7,7 +7,6 @@
  */
 
 import React, { useEffect, useRef, useContext, useState } from 'react';
-import { useId } from '../../../../internal/useId';
 import type { Instance } from 'flatpickr/dist/types/instance';
 
 import { DatePicker } from '../../../DatePicker';
@@ -102,7 +101,7 @@ export const ConditionBuilderItemDate = ({
     }
   };
 
-  const instanceId = useId('condition-builder-date');
+  const propertyId = conditionState.property ?? 'condition-builder-date';
 
   return (
     <div className={`${blockClass}__item-date `}>
@@ -116,7 +115,7 @@ export const ConditionBuilderItemDate = ({
           onClose={onCloseHandler}
           onKeyPress={onKeyPressHandler}>
           <DatePickerInput
-            id={`${instanceId}-single`}
+            id={`${propertyId}Picker`}
             placeholder="dd/mm/yyyy"
             labelText={conditionState.property}
           />
@@ -133,12 +132,12 @@ export const ConditionBuilderItemDate = ({
           onKeyPress={onKeyPressHandler}
           value={dateFromState}>
           <DatePickerInput
-            id={`${instanceId}-start`}
+            id={`${propertyId}PickerStart`}
             placeholder="dd/mm/yyyy"
             labelText={startText}
           />
           <DatePickerInput
-            id={`${instanceId}-end`}
+            id={`${propertyId}PickerEnd`}
             placeholder="dd/mm/yyyy"
             labelText={endText}
           />
