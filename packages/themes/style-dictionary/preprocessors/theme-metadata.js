@@ -10,7 +10,7 @@
 /**
  *
  * Extracts the `$extensions["org.carbon"]["color-scheme"]` value that lives
- * at the top level of each theme JSON file (white.json, g10.json, etc.) and
+ * at the top level of the unified themes.json and
  * injects it as a synthetic `color-scheme` token, so the SCSS format can
  * include it in the theme Sass map alongside the regular color tokens.
  *
