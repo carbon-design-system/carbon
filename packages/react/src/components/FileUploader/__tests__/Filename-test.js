@@ -7,7 +7,6 @@
 
 import { getByText, render, fireEvent } from '@testing-library/react';
 import React from 'react';
-import { Simulate } from 'react-dom/test-utils';
 import { Filename } from '../';
 
 const statuses = ['uploading', 'edit', 'complete'];
@@ -33,6 +32,38 @@ describe('Filename', () => {
         await expect(container).toHaveNoACViolations(`Filename-${status}`);
       }
     );
+  });
+
+  describe('aria-label includes filename for a11y', () => {
+    it('should include the filename in aria-label on the Loading svg when status is uploading', () => {
+      const { container } = render(
+        <Filename
+          iconDescription="Uploading"
+          name="test-file.png"
+          status="uploading"
+        />
+      );
+      // The uploading status shows a Loading component
+      // The Loading component takes a description prop that becomes the aria-label/title for the svg
+      // Similar to the other statuses in Filename, append the filename to the aria-label by way of
+      // the Loading description, for a11y to have a state transition
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+      const svg = container.querySelector('svg');
+      expect(svg).toHaveAttribute('aria-label', 'Uploading - test-file.png');
+    });
+
+    it('should include the filename in aria-label on the CheckmarkFilled icon when status is complete', () => {
+      const { container } = render(
+        <Filename
+          iconDescription="Complete"
+          name="test-file.png"
+          status="complete"
+        />
+      );
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+      const svg = container.querySelector('svg');
+      expect(svg).toHaveAttribute('aria-label', 'Complete - test-file.png');
+    });
   });
 
   it('should support events on interactive icons when `edit` or `complete` is the status', () => {

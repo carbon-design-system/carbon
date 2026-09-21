@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2023, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -62,8 +62,8 @@ describe('FileUploaderItem', () => {
         onDelete={onDelete}
       />
     );
-    // eslint-disable-next-line testing-library/prefer-screen-queries
-    removeFile = getByText(uploading.container, description);
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+    removeFile = uploading.container.querySelector('.cds--loading');
 
     fireEvent.click(removeFile);
     expect(onDelete).not.toHaveBeenCalled();
@@ -73,5 +73,35 @@ describe('FileUploaderItem', () => {
 
     fireEvent.keyDown(removeFile, keys.Space);
     expect(onDelete).not.toHaveBeenCalled();
+  });
+
+  describe('a11y: aria-label on status icons includes filename', () => {
+    it('should set aria-label with filename on the Loading svg when uploading', () => {
+      const { container } = render(
+        <FileUploaderItem
+          iconDescription="Uploading"
+          name="test-file.png"
+          status="uploading"
+          uuid="test"
+        />
+      );
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+      const svg = container.querySelector('.cds--file-loading svg');
+      expect(svg).toHaveAttribute('aria-label', 'Uploading - test-file.png');
+    });
+
+    it('should set aria-label with filename on the checkmark icon when complete', () => {
+      const { container } = render(
+        <FileUploaderItem
+          iconDescription="Complete"
+          name="test-file.png"
+          status="complete"
+          uuid="test"
+        />
+      );
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+      const svg = container.querySelector('.cds--file-complete');
+      expect(svg).toHaveAttribute('aria-label', 'Complete - test-file.png');
+    });
   });
 });
