@@ -155,10 +155,10 @@ const renderTemplate = (args: Args) => {
       class=${withLeftGutter
         ? `${blockClass} ${blockClass}--with-left-gutter`
         : blockClass}
-      collapseText=${collapseText}
-      expandText=${expandText}
+      collapse-text=${collapseText}
+      expand-text=${expandText}
       ?open=${open}
-      titleText=${titleText}>
+      title-text=${titleText}>
       <div slot="body">
         <div
           class="${blockClass}__body"
