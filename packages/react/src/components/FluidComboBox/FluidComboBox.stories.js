@@ -55,6 +55,11 @@ const items = [
 ];
 
 const sharedArgTypes = {
+  autoAlign: {
+    control: {
+      type: 'boolean',
+    },
+  },
   className: {
     control: {
       type: 'text',
@@ -70,6 +75,12 @@ const sharedArgTypes = {
       type: 'boolean',
     },
   },
+  direction: {
+    control: {
+      type: 'select',
+    },
+    options: ['top', 'bottom'],
+  },
   invalid: {
     control: {
       type: 'boolean',
@@ -83,6 +94,20 @@ const sharedArgTypes = {
   label: {
     control: {
       type: 'text',
+    },
+  },
+  onChange: {
+    action: 'onChange',
+  },
+  onInputChange: {
+    action: 'onInputChange',
+  },
+  onToggleClick: {
+    action: 'onToggleClick',
+  },
+  readOnly: {
+    control: {
+      type: 'boolean',
     },
   },
   titleText: {
@@ -102,10 +127,29 @@ const sharedArgTypes = {
   },
 };
 
-export const Default = ({ defaultWidth, ...comboBoxArgs }) => (
-  <div style={{ width: defaultWidth }}>
+const sharedArgs = {
+  autoAlign: false,
+  className: 'test-class',
+  direction: 'bottom',
+  disabled: false,
+  invalid: false,
+  invalidText:
+    'Error message that is really long can wrap to more lines but should not be excessively long.',
+  isCondensed: false,
+  label: 'Choose an option',
+  onChange: () => {},
+  readOnly: false,
+  titleText: 'Label',
+  warn: false,
+  warnText:
+    'Warning message that is really long can wrap to more lines but should not be excessively long.',
+};
+
+const sharedControls = Object.keys(sharedArgTypes);
+
+export const Default = (comboBoxArgs) => (
+  <div style={{ width: 400 }}>
     <FluidComboBox
-      onChange={() => {}}
       id="default"
       titleText="Label"
       label="Choose an option"
@@ -117,40 +161,46 @@ export const Default = ({ defaultWidth, ...comboBoxArgs }) => (
 );
 
 Default.args = {
-  defaultWidth: 400,
-  className: 'test-class',
-  isCondensed: false,
-  disabled: false,
-  invalid: false,
-  invalidText:
-    'Error message that is really long can wrap to more lines but should not be excessively long.',
-  label: 'Choose an option',
-  titleText: 'Label',
-  warn: false,
-  warnText:
-    'Warning message that is really long can wrap to more lines but should not be excessively long.',
+  ...sharedArgs,
 };
 
 Default.argTypes = {
   ...sharedArgTypes,
-  defaultWidth: {
-    control: { type: 'range', min: 300, max: 800, step: 50 },
-  },
 };
 
-export const Condensed = () => (
-  <div style={{ width: '400px' }}>
+Default.parameters = {
+  controls: { include: sharedControls },
+};
+
+export const Condensed = (comboBoxArgs) => (
+  <div style={{ width: 400 }}>
     <FluidComboBox
-      onChange={() => {}}
       id="default"
-      isCondensed
       titleText="Label"
       label="Choose an option"
       items={items}
       itemToString={(item) => (item ? item.text : '')}
+      {...comboBoxArgs}
     />
   </div>
 );
+
+Condensed.args = {
+  ...sharedArgs,
+  isCondensed: true,
+};
+
+Condensed.argTypes = {
+  ...sharedArgTypes,
+  isCondensed: {
+    ...sharedArgTypes.isCondensed,
+    table: { readonly: true },
+  },
+};
+
+Condensed.parameters = {
+  controls: { include: sharedControls },
+};
 
 const aiLabel = (
   <AILabel className="ai-label-container">
@@ -183,23 +233,30 @@ const aiLabel = (
   </AILabel>
 );
 
-export const withAILabel = (args) => (
-  <div style={{ width: '400px' }}>
+export const withAILabel = (comboBoxArgs) => (
+  <div style={{ width: 400 }}>
     <FluidComboBox
-      onChange={() => {}}
       id="default"
       titleText="Label"
       label="Choose an option"
       items={items}
       itemToString={(item) => (item ? item.text : '')}
       decorator={aiLabel}
-      {...args}
+      {...comboBoxArgs}
     />
   </div>
 );
 
+withAILabel.args = {
+  ...sharedArgs,
+};
+
 withAILabel.argTypes = {
   ...sharedArgTypes,
+};
+
+withAILabel.parameters = {
+  controls: { include: sharedControls },
 };
 
 export const Skeleton = () => (
