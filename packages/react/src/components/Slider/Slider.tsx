@@ -43,7 +43,7 @@ import type { TFunc, TranslateWithId } from '../../types/common';
 import { clamp } from '../../internal/clamp';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import { useId } from '../../internal/useId';
-import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
+import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
 
 interface ThumbWrapperProps
   extends Omit<
@@ -1291,7 +1291,7 @@ const Slider = (props: SliderProps) => {
     [`${prefix}--visually-hidden`]: hideLabel,
     [`${prefix}--label--disabled`]: disabled,
   });
-  useNoInteractiveChildren(
+  useNoInteractiveChildrenForLabel(
     labelRef,
     'The Slider component `labelText` prop must have no interactive content'
   );

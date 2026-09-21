@@ -10,13 +10,17 @@ import TextInput from '../TextInput';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
 import { AILabel } from '../../AILabel';
+import { FeatureFlags } from '../../FeatureFlags';
 
 const prefix = 'cds';
 
 describe('TextInput', () => {
   describe('renders as expected - Component API', () => {
-    it('should not allow interactive content in labelText', () => {
-      const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+    it('should warn without throwing for interactive content in labelText', () => {
+      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+      const errorSpy = jest
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
 
       expect(() => {
         render(
@@ -24,12 +28,43 @@ describe('TextInput', () => {
             id="input-1"
             labelText={
               <>
-                TextInput label <button type="button">Help</button>
+                TextInput label <a href="/">Help</a>
               </>
             }
           />
         );
-      }).toThrow(
+      }).not.toThrow();
+
+      expect(spy).toHaveBeenCalledWith(
+        expect.stringContaining(
+          'Warning: The TextInput component `labelText` prop must have no interactive content'
+        )
+      );
+      expect(errorSpy).not.toHaveBeenCalled();
+      expect(screen.getByRole('textbox')).toBeInTheDocument();
+      expect(screen.getByRole('link', { name: 'Help' })).toBeInTheDocument();
+
+      spy.mockRestore();
+      errorSpy.mockRestore();
+    });
+
+    it('should throw for interactive content in labelText when the v12 release flag is enabled', () => {
+      const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+      expect(() =>
+        render(
+          <FeatureFlags enableV12Release>
+            <TextInput
+              id="input-1"
+              labelText={
+                <span>
+                  Terms <a href="/terms">Terms & Conditions</a>
+                </span>
+              }
+            />
+          </FeatureFlags>
+        )
+      ).toThrow(
         'The TextInput component `labelText` prop must have no interactive content'
       );
 
