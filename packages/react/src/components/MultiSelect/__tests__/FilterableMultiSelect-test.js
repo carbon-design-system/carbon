@@ -350,6 +350,7 @@ describe('FilterableMultiSelect', () => {
       const label = document.querySelector(`label[for="${combobox.id}"]`);
 
       return {
+        listBox,
         combobox,
         toggleButton,
         menu,
@@ -357,7 +358,8 @@ describe('FilterableMultiSelect', () => {
       };
     });
     const generatedIds = controls.flatMap(
-      ({ combobox, toggleButton, menu, label }) => [
+      ({ listBox, combobox, toggleButton, menu, label }) => [
+        listBox.id,
         combobox.id,
         toggleButton.id,
         menu.id,
@@ -455,11 +457,13 @@ describe('FilterableMultiSelect', () => {
     );
   });
 
-  it('should place the given id on the listbox wrapper', async () => {
+  it('should scope the listbox wrapper id', async () => {
     render(<FilterableMultiSelect {...mockProps} id="custom-id" />);
     await waitForPosition();
 
-    expect(document.querySelector(`.${prefix}--list-box`).id).toBe('custom-id');
+    expect(document.querySelector(`.${prefix}--list-box`).id).toEqual(
+      expect.stringMatching(/^custom-id-id-.+$/)
+    );
   });
 
   it('should render with initial selected items', async () => {
