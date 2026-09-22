@@ -267,7 +267,7 @@ export interface NumberInputProps
   /**
    * Specify the size of the Number Input.
    */
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'md' | 'lg';
 
   /**
    * @deprecated please use `decorator` instead.
@@ -618,7 +618,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       onKeyUp,
       pattern = '[0-9]*',
       readOnly,
-      size = 'md',
+      size,
       slug,
       step = 1,
       translateWithId: t = defaultTranslateWithId,
@@ -719,7 +719,8 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       [`${prefix}--number--light`]: light,
       [`${prefix}--number--nolabel`]: hideLabel,
       [`${prefix}--number--nosteppers`]: hideSteppers,
-      [`${prefix}--number--${size}`]: size,
+      [`${prefix}--number--${size}`]: size, // TODO: V12 - Remove this class
+      [`${prefix}--layout--size-${size}`]: size,
     });
     const isInputValid = getInputValidity({
       allowEmpty,
@@ -1302,7 +1303,7 @@ NumberInput.propTypes = {
   /**
    * Specify the size of the Number Input.
    */
-  size: PropTypes.oneOf(['sm', 'md', 'lg']),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
 
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -25,12 +25,12 @@ export interface NumberInputSkeletonProps
   /**
    * Specify the size of the Number Input.
    */
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'md' | 'lg';
 }
 function NumberInputSkeleton({
   hideLabel,
   className,
-  size = 'md',
+  size,
   ...rest
 }: NumberInputSkeletonProps) {
   const prefix = usePrefix();
@@ -39,8 +39,9 @@ function NumberInputSkeleton({
       {!hideLabel && (
         <span className={`${prefix}--label ${prefix}--skeleton`} />
       )}
+      {/* TODO: V12 - Remove `${prefix}--number--${size}` class */}
       <div
-        className={`${prefix}--number ${prefix}--skeleton ${prefix}--number--${size}`}
+        className={`${prefix}--number ${prefix}--skeleton ${prefix}--number--${size} ${prefix}--layout--size-${size}`}
       />
     </div>
   );
@@ -60,7 +61,7 @@ NumberInputSkeleton.propTypes = {
   /**
    * Specify the size of the Number Input.
    */
-  size: PropTypes.oneOf(['sm', 'md', 'lg']),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
 };
 
 export default NumberInputSkeleton;

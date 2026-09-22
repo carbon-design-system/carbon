@@ -16,10 +16,15 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/number-input/index';
 @use '@carbon/styles/scss/components/fluid-number-input' as *;
 @use '@carbon/styles/scss/utilities/ai-gradient' as *;
+@use '@carbon/styles/scss/utilities/layout' as *;
 @use '@carbon/styles/scss/spacing' as *;
+
+@include emit-layout-context-classes();
 
 :host(#{$prefix}-number-input),
 :host(#{$prefix}-number-input-skeleton) {
+  @include emit-layout-tokens();
+
   // the base text-input class has a 100% so we need to propagate it up to the host element
   display: flex;
   flex-direction: column;

@@ -50,20 +50,28 @@ describe('<cds-number-input-skeleton>', () => {
     expect(inputSkeleton).to.exist;
   });
 
-  it('should render with md size class by default', async () => {
+  it('should render without a size class by default', async () => {
     const el = await fixture(
       html`<cds-number-input-skeleton></cds-number-input-skeleton>`
     );
     const numberSkeleton = el.shadowRoot.querySelector('.cds--number');
-    expect(numberSkeleton.classList.contains('cds--number--md')).to.be.true;
+    expect(
+      [...numberSkeleton.classList].some(
+        (name) =>
+          name.startsWith('cds--number--') || // TODO: V12 - Remove this check
+          name.startsWith('cds--layout--size-')
+      )
+    ).to.be.false;
   });
 
-  it('should render with sm size class when size is sm', async () => {
+  it('should render with xs size class when size is xs', async () => {
     const el = await fixture(
-      html`<cds-number-input-skeleton size="sm"></cds-number-input-skeleton>`
+      html`<cds-number-input-skeleton size="xs"></cds-number-input-skeleton>`
     );
     const numberSkeleton = el.shadowRoot.querySelector('.cds--number');
-    expect(numberSkeleton.classList.contains('cds--number--sm')).to.be.true;
+    expect(numberSkeleton.classList.contains('cds--number--xs')).to.be.true; // TODO: V12 - Remove this check
+    expect(numberSkeleton.classList.contains('cds--layout--size-xs')).to.be
+      .true;
   });
 
   it('should render with lg size class when size is lg', async () => {
@@ -71,7 +79,9 @@ describe('<cds-number-input-skeleton>', () => {
       html`<cds-number-input-skeleton size="lg"></cds-number-input-skeleton>`
     );
     const numberSkeleton = el.shadowRoot.querySelector('.cds--number');
-    expect(numberSkeleton.classList.contains('cds--number--lg')).to.be.true;
+    expect(numberSkeleton.classList.contains('cds--number--lg')).to.be.true; // TODO: V12 - Remove this check
+    expect(numberSkeleton.classList.contains('cds--layout--size-lg')).to.be
+      .true;
   });
 
   it('should update size dynamically', async () => {

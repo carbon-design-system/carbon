@@ -21,12 +21,14 @@
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/convert';
 @use '../../utilities/z-index' as *;
+@use '../../utilities/layout';
 
 /// Number input styles
 /// @access public
 /// @group number-input
 @mixin number-input {
   .#{$prefix}--number {
+    @include layout.use('size', $default: 'md', $min: 'xs', $max: 'lg');
     @include reset;
 
     position: relative;
@@ -41,7 +43,7 @@
   .#{$prefix}--number
     .#{$prefix}--number__input-wrapper--warning
     input[type='text'] {
-    padding-inline-end: convert.to-rem(128px);
+    padding-inline-end: calc(2 * layout.size('height') + 3 * $spacing-05);
   }
 
   .#{$prefix}--number input[type='number'],
@@ -58,14 +60,14 @@
     -moz-appearance: textfield;
     appearance: textfield;
     background-color: $field;
-    block-size: convert.to-rem(40px);
+    block-size: layout.size('height');
     border-block-end: convert.to-rem(1px) solid $border-strong;
     color: $text-primary;
     font-family: font-family('sans');
     font-weight: 400;
     inline-size: 100%;
     min-inline-size: 9.375rem;
-    padding-inline: $spacing-05 $spacing-12;
+    padding-inline: $spacing-05 calc(2 * layout.size('height') + $spacing-05);
     transition:
       background-color $duration-fast-01 motion(standard, productive),
       outline $duration-fast-01 motion(standard, productive);
@@ -108,39 +110,7 @@
     }
 
     &[data-invalid] {
-      padding-inline-end: convert.to-rem(128px);
-    }
-  }
-
-  .#{$prefix}--number--lg.#{$prefix}--number {
-    input[type='number'],
-    input[type='text'] {
-      padding-inline-end: convert.to-rem(112px);
-
-      &[data-invalid] {
-        padding-inline-end: convert.to-rem(144px);
-      }
-    }
-
-    .#{$prefix}--number__input-wrapper--warning input[type='number'],
-    .#{$prefix}--number__input-wrapper--warning input[type='text'] {
-      padding-inline-end: convert.to-rem(144px);
-    }
-  }
-
-  .#{$prefix}--number--sm.#{$prefix}--number {
-    input[type='number'],
-    input[type='text'] {
-      padding-inline-end: convert.to-rem(80px);
-
-      &[data-invalid] {
-        padding-inline-end: convert.to-rem(112px);
-      }
-    }
-
-    .#{$prefix}--number__input-wrapper--warning input[type='number'],
-    .#{$prefix}--number__input-wrapper--warning input[type='text'] {
-      padding-inline-end: convert.to-rem(112px);
+      padding-inline-end: calc(2 * layout.size('height') + 3 * $spacing-05);
     }
   }
 
@@ -171,7 +141,7 @@
     align-items: center;
     justify-content: center;
     block-size: 100%;
-    inline-size: convert.to-rem(80px);
+    inline-size: calc(2 * layout.size('height'));
     // vertically center controls within parent container on IE11
     inset-block-start: 50%;
     inset-inline-end: 0;
@@ -384,32 +354,12 @@
   .#{$prefix}--number__invalid {
     position: absolute;
     fill: $support-error;
-    inset-inline-end: $spacing-12;
-  }
-
-  .#{$prefix}--number--lg .#{$prefix}--number__invalid {
-    inset-inline-end: convert.to-rem(112px);
-  }
-
-  .#{$prefix}--number--sm .#{$prefix}--number__invalid {
-    inset-inline-end: convert.to-rem(80px);
+    inset-inline-end: calc(2 * layout.size('height') + $spacing-05);
   }
 
   .#{$prefix}--number__invalid + .#{$prefix}--number__rule-divider {
     position: absolute;
-    inset-inline-end: convert.to-rem(80px);
-  }
-
-  .#{$prefix}--number--lg
-    .#{$prefix}--number__invalid
-    + .#{$prefix}--number__rule-divider {
-    inset-inline-end: $spacing-12;
-  }
-
-  .#{$prefix}--number--sm
-    .#{$prefix}--number__invalid
-    + .#{$prefix}--number__rule-divider {
-    inset-inline-end: convert.to-rem(64px);
+    inset-inline-end: calc(2 * layout.size('height'));
   }
 
   .#{$prefix}--number__control-btn.down-icon:hover
@@ -430,33 +380,6 @@
   .#{$prefix}--number__invalid--warning path:first-of-type {
     fill: $black-100;
     opacity: 1;
-  }
-
-  // Size Variant styles
-  .#{$prefix}--number--lg input[type='number'],
-  .#{$prefix}--number--lg input[type='text'] {
-    block-size: convert.to-rem(48px);
-  }
-
-  .#{$prefix}--number--lg .#{$prefix}--number__controls {
-    inline-size: $spacing-12;
-  }
-
-  .#{$prefix}--number--lg .#{$prefix}--number__control-btn {
-    inline-size: convert.to-rem(48px);
-  }
-
-  .#{$prefix}--number--sm input[type='number'],
-  .#{$prefix}--number--sm input[type='text'] {
-    block-size: convert.to-rem(32px);
-  }
-
-  .#{$prefix}--number--sm .#{$prefix}--number__controls {
-    inline-size: convert.to-rem(64px);
-  }
-
-  .#{$prefix}--number--sm .#{$prefix}--number__control-btn {
-    inline-size: convert.to-rem(32px);
   }
 
   //No label positioning adjustment
@@ -749,16 +672,8 @@
     }
   }
 
-  .#{$prefix}--number.#{$prefix}--skeleton.#{$prefix}--number--sm {
-    block-size: $spacing-07;
-  }
-
-  .#{$prefix}--number.#{$prefix}--skeleton.#{$prefix}--number--md {
-    block-size: $spacing-08;
-  }
-
-  .#{$prefix}--number.#{$prefix}--skeleton.#{$prefix}--number--lg {
-    block-size: $spacing-09;
+  .#{$prefix}--number.#{$prefix}--skeleton.#{$prefix}--number {
+    block-size: layout.size('height');
   }
 
   // Windows HCM fix
