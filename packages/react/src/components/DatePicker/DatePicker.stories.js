@@ -57,6 +57,8 @@ const sharedArgs = {
   warnText: 'Warning message goes here',
 };
 
+// Add sharedArgs to each story's .args so they flow through {…args} automatically
+
 const sharedArgTypes = {
   onChange: {
     action: 'onChange',
@@ -135,7 +137,6 @@ export const Default = ({ readOnly, ...args }) => {
         placeholder="mm/dd/yyyy"
         labelText="Date Picker label"
         id="date-picker-single"
-        {...sharedArgs}
         {...args}
       />
       {args.datePickerType === 'range' && (
@@ -144,13 +145,19 @@ export const Default = ({ readOnly, ...args }) => {
           labelText="End date"
           size="md"
           id="date-picker-input-2"
-          {...sharedArgs}
           {...args}
         />
       )}
     </DatePicker>
   );
 };
+
+Default.args = {
+  invalidText: 'Error message goes here',
+  warnText: 'Warning message goes here',
+};
+
+Default.args = { ...sharedArgs };
 
 Default.argTypes = {
   ...sharedArgTypes,
@@ -160,33 +167,37 @@ Default.argTypes = {
   },
 };
 
-export const Simple = (args) => (
-  <DatePicker datePickerType="simple" {...args}>
-    <DatePickerInput
-      placeholder="mm/dd/yyyy"
-      labelText="Date Picker label"
-      id="date-picker-simple"
-      {...sharedArgs}
-      {...args}
-    />
-  </DatePicker>
-);
+export const Simple = (args) => {
+  return (
+    <DatePicker datePickerType="simple" {...args}>
+      <DatePickerInput
+        placeholder="mm/dd/yyyy"
+        labelText="Date Picker label"
+        id="date-picker-simple"
+        {...args}
+      />
+    </DatePicker>
+  );
+};
 
+Simple.args = { ...sharedArgs };
 Simple.argTypes = { ...sharedArgTypes };
 
-export const SingleWithCalendar = (args) => (
-  <DatePicker datePickerType="single" {...args}>
-    <DatePickerInput
-      placeholder="mm/dd/yyyy"
-      labelText="Date Picker label"
-      id="date-picker-single"
-      size="md"
-      {...sharedArgs}
-      {...args}
-    />
-  </DatePicker>
-);
+export const SingleWithCalendar = (args) => {
+  return (
+    <DatePicker datePickerType="single" {...args}>
+      <DatePickerInput
+        placeholder="mm/dd/yyyy"
+        labelText="Date Picker label"
+        id="date-picker-single"
+        size="md"
+        {...args}
+      />
+    </DatePicker>
+  );
+};
 
+SingleWithCalendar.args = { ...sharedArgs };
 SingleWithCalendar.argTypes = { ...sharedArgTypes };
 
 export const RangeWithCalendar = (args) => {
@@ -197,7 +208,6 @@ export const RangeWithCalendar = (args) => {
         placeholder="mm/dd/yyyy"
         labelText="Start date"
         size="md"
-        {...sharedArgs}
         {...args}
       />
       <DatePickerInput
@@ -205,50 +215,56 @@ export const RangeWithCalendar = (args) => {
         placeholder="mm/dd/yyyy"
         labelText="End date"
         size="md"
-        {...sharedArgs}
         {...args}
       />
     </DatePicker>
   );
 };
 
+RangeWithCalendar.args = { ...sharedArgs };
 RangeWithCalendar.argTypes = { ...sharedArgTypes };
 
-export const SimpleWithLayer = (args) => (
-  <WithLayer>
-    {(layer) => (
-      <DatePicker datePickerType="simple" {...args}>
-        <DatePickerInput
-          placeholder="mm/dd/yyyy"
-          labelText="Date Picker label"
-          id={`date-picker-simple-${layer}`}
-          size="md"
-          {...sharedArgs}
-          {...args}
-        />
-      </DatePicker>
-    )}
-  </WithLayer>
-);
+export const SimpleWithLayer = (args) => {
+  return (
+    <WithLayer>
+      {(layer) => (
+        <DatePicker datePickerType="simple" {...args}>
+          <DatePickerInput
+            placeholder="mm/dd/yyyy"
+            labelText="Date Picker label"
+            id={`date-picker-simple-${layer}`}
+            size="md"
+            invalidText="Error message goes here"
+            warnText="Warning message goes here"
+            {...args}
+          />
+        </DatePicker>
+      )}
+    </WithLayer>
+  );
+};
 
 SimpleWithLayer.argTypes = { ...sharedArgTypes };
 
-export const SingleWithCalendarWithLayer = (args) => (
-  <WithLayer>
-    {(layer) => (
-      <DatePicker datePickerType="single" {...args}>
-        <DatePickerInput
-          placeholder="mm/dd/yyyy"
-          labelText="Date Picker label"
-          id={`date-picker-single-${layer}`}
-          size="md"
-          {...sharedArgs}
-          {...args}
-        />
-      </DatePicker>
-    )}
-  </WithLayer>
-);
+export const SingleWithCalendarWithLayer = (args) => {
+  return (
+    <WithLayer>
+      {(layer) => (
+        <DatePicker datePickerType="single" {...args}>
+          <DatePickerInput
+            placeholder="mm/dd/yyyy"
+            labelText="Date Picker label"
+            id={`date-picker-single-${layer}`}
+            size="md"
+            invalidText="Error message goes here"
+            warnText="Warning message goes here"
+            {...args}
+          />
+        </DatePicker>
+      )}
+    </WithLayer>
+  );
+};
 
 SingleWithCalendarWithLayer.argTypes = { ...sharedArgTypes };
 
@@ -261,7 +277,6 @@ export const RangeWithCalendarWithLayer = (args) => (
           placeholder="mm/dd/yyyy"
           labelText="Start date"
           size="md"
-          {...sharedArgs}
           {...args}
         />
         <DatePickerInput
@@ -269,7 +284,6 @@ export const RangeWithCalendarWithLayer = (args) => (
           placeholder="mm/dd/yyyy"
           labelText="End date"
           size="md"
-          {...sharedArgs}
           {...args}
         />
       </DatePicker>
@@ -277,6 +291,7 @@ export const RangeWithCalendarWithLayer = (args) => (
   </WithLayer>
 );
 
+RangeWithCalendarWithLayer.args = { ...sharedArgs };
 RangeWithCalendarWithLayer.argTypes = { ...sharedArgTypes };
 
 export const Skeleton = () => {
@@ -323,7 +338,6 @@ export const withAILabel = (args) => {
           size="md"
           id="date-picker"
           decorator={aiLabel}
-          {...sharedArgs}
           {...args}
         />
       </DatePicker>
@@ -331,4 +345,5 @@ export const withAILabel = (args) => {
   );
 };
 
+withAILabel.args = { ...sharedArgs };
 withAILabel.argTypes = { ...sharedArgTypes };
