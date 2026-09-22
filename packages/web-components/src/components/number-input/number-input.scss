@@ -17,6 +17,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/fluid-number-input' as *;
 @use '@carbon/styles/scss/utilities/ai-gradient' as *;
 @use '@carbon/styles/scss/utilities/layout' as *;
+@use '@carbon/styles/scss/utilities/layout';
 @use '@carbon/styles/scss/spacing' as *;
 
 @include emit-layout-context-classes();
@@ -64,7 +65,7 @@ $css--plex: true !default;
   ::slotted(#{$prefix}-slug) {
     position: absolute;
     inset-block-start: 50%;
-    inset-inline-end: $spacing-12;
+    inset-inline-end: calc(layout.size('height') * 2 + $spacing-05);
   }
   ::slotted(#{$prefix}-ai-label:not([revert-active])),
   ::slotted(#{$prefix}-slug:not([revert-active])) {
