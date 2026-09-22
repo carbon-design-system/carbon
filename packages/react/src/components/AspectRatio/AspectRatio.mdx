@@ -37,7 +37,11 @@ determined by the ratio that you specified.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(AspectRatioStories.Default),
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: AspectRatioStories.Default,
+          styles: AspectRatioStories.default.parameters.styles,
+        }),
     },
   ]}
 />
