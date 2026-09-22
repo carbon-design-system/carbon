@@ -242,7 +242,7 @@ body {
 }
 ```
 
-Thankfully, setting this on `body` is is handled by Carbon for you so no need to
+Thankfully, setting this on `body` is handled by Carbon for you so no need to
 set this up if you're already using Carbon!
 
 If you would like to support Unicode ranges, as well, be on the lookout for an
