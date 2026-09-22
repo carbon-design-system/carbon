@@ -74,9 +74,9 @@ jobs:
           fi
 
       - name: Publish packages
-        run:
-          yarn lerna publish from-package --dist-tag ${{ env.DIST_TAG }}
-          --no-verify-access --yes
+        run: |
+          yarn lerna publish from-package --dist-tag "$DIST_TAG" \
+            --no-verify-access --yes
 
       - name: Create Release
         id: create_release
