@@ -5,19 +5,29 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import styles from './fluid-text-input-story.scss?inline';
+
 import React from 'react';
 import FluidTextInput from '../FluidTextInput';
 import FluidTextInputSkeleton from './FluidTextInput.Skeleton';
 import { Toggletip, ToggletipButton, ToggletipContent } from '../Toggletip';
 import { Information } from '@carbon/icons-react';
 import './test.scss';
-import './fluid-text-input-story.scss';
 import mdx from './FluidTextInput.mdx';
 
 export default {
   title: 'Components/Fluid Components/FluidTextInput',
   component: FluidTextInput,
+  decorators: [
+    (Story) => (
+      <>
+        <style>{styles}</style>
+        <Story />
+      </>
+    ),
+  ],
   parameters: {
+    styles,
     docs: {
       page: mdx,
     },
@@ -30,25 +40,14 @@ export default {
   },
 };
 
-export const Default = ({ defaultWidth, ...textInputArgs }) => (
-  <div style={{ width: defaultWidth }}>
-    <FluidTextInput {...textInputArgs} />
-  </div>
-);
-
-const LabelToggletip = () => (
-  // Keep the toggletip outside `labelText`; interactive content is invalid in labels.
-  <span className="fluid-text-input-story__toggletip">
-    <Toggletip align="top-left">
-      <ToggletipButton label="Show information">
-        <Information />
-      </ToggletipButton>
-      <ToggletipContent>
-        <p>Additional field information here.</p>
-      </ToggletipContent>
-    </Toggletip>
-  </span>
-);
+export const Default = (args) => {
+  const { defaultWidth, ...textInputArgs } = args;
+  return (
+    <div style={{ width: defaultWidth }}>
+      <FluidTextInput {...textInputArgs} />
+    </div>
+  );
+};
 
 Default.args = {
   defaultWidth: 300,
@@ -119,19 +118,35 @@ Default.argTypes = {
   },
 };
 
-export const DefaultWithToggletip = () => (
-  <div className="fluid-text-input-story">
-    <LabelToggletip />
-    <FluidTextInput labelText="Label" placeholder="Placeholder text" />
-  </div>
-);
+export const DefaultWithToggletip = () => {
+  const labelToggletip = (
+    <span className="fluid-text-input-story__toggletip">
+      <Toggletip align="top-left">
+        <ToggletipButton label="Show information">
+          <Information />
+        </ToggletipButton>
+        <ToggletipContent>
+          <p>Additional field information here.</p>
+        </ToggletipContent>
+      </Toggletip>
+    </span>
+  );
+  return (
+    <div className="fluid-text-input-story">
+      {labelToggletip}
+      <FluidTextInput labelText="Label" placeholder="Placeholder text" />
+    </div>
+  );
+};
 
-export const Skeleton = () => (
-  <div style={{ width: '300px' }}>
-    <FluidTextInputSkeleton
-      labelText="Label"
-      placeholder="Placeholder text"
-      id="input-1"
-    />
-  </div>
-);
+export const Skeleton = () => {
+  return (
+    <div style={{ width: '300px' }}>
+      <FluidTextInputSkeleton
+        labelText="Label"
+        placeholder="Placeholder text"
+        id="input-1"
+      />
+    </div>
+  );
+};
