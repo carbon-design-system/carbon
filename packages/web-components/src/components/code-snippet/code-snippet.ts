@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 /**  eslint-disable @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452 */
-import { LitElement, html } from 'lit';
+import { LitElement, html, nothing } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import ChevronDown16 from '@carbon/icons/es/chevron--down/16.js';
@@ -434,20 +434,20 @@ class CDSCodeSnippet extends FocusMixin(LitElement) {
 
     return html`
       <div
-        role="${isSingle ? 'textbox' : null}"
-        tabindex="${isSingle && !disabled ? 0 : null}"
+        role="${isSingle ? 'textbox' : nothing}"
+        tabindex="${isSingle && !disabled ? 0 : nothing}"
         class="${prefix}--snippet-container"
-        aria-label="${isSingle ? 'code-snippet' : null}"
-        aria-readonly="${isSingle ? true : null}"
-        @scroll="${(isSingle && handleScroll) || null}">
+        aria-label="${isSingle ? 'code-snippet' : nothing}"
+        ?aria-readonly="${isSingle}"
+        @scroll="${(isSingle && handleScroll) || nothing}">
         <pre
-          role="${isMulti ? 'textbox' : null}"
-          tabindex="${isMulti && !disabled ? 0 : null}"
-          aria-label="${isMulti ? 'code-snippet' : null}"
-          aria-readonly="${isMulti ? true : null}"
-          aria-multiline="${isMulti ? true : null}"
+          role="${isMulti ? 'textbox' : nothing}"
+          tabindex="${isMulti && !disabled ? 0 : nothing}"
+          aria-label="${isMulti ? 'code-snippet' : nothing}"
+          ?aria-readonly="${isMulti}"
+          ?aria-multiline="${isMulti}"
           @scroll="${(isMulti && handleScroll) ||
-          null}"><code><slot></slot></code></pre>
+          nothing}"><code><slot></slot></code></pre>
       </div>
 
       ${hasLeftOverflow
