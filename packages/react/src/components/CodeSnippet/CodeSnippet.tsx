@@ -312,7 +312,7 @@ function CodeSnippet({
         role={isSingle ? 'textbox' : undefined}
         tabIndex={isSingle && !disabled ? 0 : undefined}
         className={`${prefix}--snippet-container`}
-        aria-label={isSingle ? label : undefined}
+        aria-label={!isMulti ? label : undefined}
         aria-readonly={isSingle ? true : undefined}
         {...containerStyle}>
         <pre
