@@ -57,10 +57,10 @@ text.
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig(
-          ModalStories.WithStateManager,
-          "import ReactDOM from 'react-dom';"
-        ),
+        stackblitzPrefillConfig({
+          story: ModalStories.WithStateManager,
+          customImports: ["import ReactDOM from 'react-dom';"],
+        }),
     },
   ]}
 />
