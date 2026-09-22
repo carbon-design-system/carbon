@@ -831,6 +831,8 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
       const originalErrorHandler = calendar.config.errorHandler;
       let parsedDate;
       try {
+        // Partial typed values are expected while the user is entering a date.
+        // Suppress flatpickr parse warnings for this speculative parse only.
         calendar.config.errorHandler = () => {};
         parsedDate = calendar.parseDate(inputValue, calendar.config.dateFormat);
       } finally {
