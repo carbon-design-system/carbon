@@ -16,8 +16,8 @@ import { FormContext } from '../FluidForm';
 const prefix = 'cds';
 
 describe('DatePicker', () => {
-  it('should not allow interactive content in DatePickerInput labelText', () => {
-    const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+  it('should warn without throwing for interactive content in DatePickerInput labelText', () => {
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
     expect(() => {
       render(
@@ -30,8 +30,12 @@ describe('DatePicker', () => {
           }
         />
       );
-    }).toThrow(
-      'The DatePickerInput component `labelText` prop must have no interactive content'
+    }).not.toThrow();
+
+    expect(spy).toHaveBeenCalledWith(
+      expect.stringContaining(
+        'Warning: The DatePickerInput component `labelText` prop must have no interactive content'
+      )
     );
 
     spy.mockRestore();
