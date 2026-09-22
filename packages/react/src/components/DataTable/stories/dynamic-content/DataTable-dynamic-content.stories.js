@@ -48,7 +48,7 @@ const initialRows = [
     protocol: 'HTTP',
     port: 3000,
     rule: 'Round robin',
-    attached_groups: 'Kevin\u2019s VM Groups',
+    attached_groups: 'Kevin’s VM Groups',
     status: <IconIndicator kind="failed" label="Failed" />,
   },
   {
@@ -57,7 +57,7 @@ const initialRows = [
     protocol: 'HTTP',
     port: 443,
     rule: 'Round robin',
-    attached_groups: 'Maureen\u2019s VM Groups',
+    attached_groups: 'Maureen’s VM Groups',
     status: <IconIndicator kind="in-progress" label="In progress" />,
   },
   {
@@ -66,7 +66,7 @@ const initialRows = [
     protocol: 'HTTP',
     port: 80,
     rule: 'DNS delegation',
-    attached_groups: 'Andrew\u2019s VM Groups',
+    attached_groups: 'Andrew’s VM Groups',
     status: <IconIndicator kind="succeeded" label="Succeeded" />,
   },
   {
@@ -75,7 +75,7 @@ const initialRows = [
     protocol: 'HTTP',
     port: 3000,
     rule: 'Round robin',
-    attached_groups: 'Marc\u2019s VM Groups',
+    attached_groups: 'Marc’s VM Groups',
     status: <IconIndicator kind="failed" label="Failed" />,
   },
   {
@@ -84,7 +84,7 @@ const initialRows = [
     protocol: 'HTTP',
     port: 443,
     rule: 'Round robin',
-    attached_groups: 'Mel\u2019s VM Groups',
+    attached_groups: 'Mel’s VM Groups',
     status: <IconIndicator kind="in-progress" label="In progress" />,
   },
   {
@@ -93,7 +93,7 @@ const initialRows = [
     protocol: 'HTTP',
     port: 80,
     rule: 'DNS delegation',
-    attached_groups: 'Ronja\u2019s VM Groups',
+    attached_groups: 'Ronja’s VM Groups',
     status: <IconIndicator kind="succeeded" label="Succeeded" />,
   },
 ];
