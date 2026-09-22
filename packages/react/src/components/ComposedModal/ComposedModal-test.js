@@ -492,15 +492,20 @@ describe.each([
   describe('enable-dialog-element feature flag', () => {
     it('should pass aria-describedby through to the native dialog element', () => {
       render(
-        <FeatureFlags enableDialogElement>
-          <ComposedModal
-            aria-describedby="description-modal-id"
-            data-testid="modal"
-            open>
-            <ModalHeader>Modal header</ModalHeader>
-            <ModalBody>This is the modal body content</ModalBody>
-          </ComposedModal>
-        </FeatureFlags>
+        <div>
+          <div id="description-modal-id">
+            This is the description of the modal
+          </div>
+          <FeatureFlags enableDialogElement>
+            <ComposedModal
+              aria-describedby="description-modal-id"
+              data-testid="modal"
+              open>
+              <ModalHeader>Modal header</ModalHeader>
+              <ModalBody>This is the modal body content</ModalBody>
+            </ComposedModal>
+          </FeatureFlags>
+        </div>
       );
 
       expect(screen.getByRole('dialog', { hidden: true })).toHaveAttribute(

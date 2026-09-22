@@ -185,7 +185,7 @@ export interface ComposedModalProps extends HTMLAttributes<HTMLDivElement> {
   'aria-labelledby'?: string;
 
   /**
-   * Specify the aria-describedby for cds--modal-container.
+   * Specify the accessible description for the modal.
    * Useful for alert/confirmation modals where the body content
    * needs to be announced to screen readers.
    */
@@ -729,7 +729,7 @@ ComposedModal.propTypes = {
   ['aria-labelledby']: PropTypes.string,
 
   /**
-   * Specify the aria-describedby for cds--modal-container
+   * Specify the accessible description for the modal
    */
   ['aria-describedby']: PropTypes.string,
 
