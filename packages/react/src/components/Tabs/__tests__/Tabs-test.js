@@ -1176,7 +1176,7 @@ describe('Tab', () => {
           jest.advanceTimersByTime(250);
         });
 
-        expect(screen.getByLabelText('Scroll left')).not.toHaveClass(
+        expect(screen.getByLabelText('Scroll right')).not.toHaveClass(
           `${prefix}--tab--overflow-nav-button--hidden`
         );
       } finally {
@@ -1210,7 +1210,7 @@ describe('Tab', () => {
           jest.advanceTimersByTime(250);
         });
 
-        expect(screen.getByLabelText('Scroll left')).toHaveClass(
+        expect(screen.getByLabelText('Scroll right')).toHaveClass(
           `${prefix}--tab--overflow-nav-button--hidden`
         );
       } finally {
@@ -1247,7 +1247,7 @@ describe('Tab', () => {
           jest.advanceTimersByTime(250);
         });
 
-        expect(screen.getByLabelText('Scroll right')).toHaveClass(
+        expect(screen.getByLabelText('Scroll left')).toHaveClass(
           `${prefix}--tab--overflow-nav-button--hidden`
         );
       } finally {
@@ -1282,7 +1282,7 @@ describe('Tab', () => {
           jest.advanceTimersByTime(250);
         });
 
-        expect(screen.getByLabelText('Scroll right')).not.toHaveClass(
+        expect(screen.getByLabelText('Scroll left')).not.toHaveClass(
           `${prefix}--tab--overflow-nav-button--hidden`
         );
       } finally {
@@ -1303,8 +1303,8 @@ describe('Tab', () => {
           </Tabs>
         );
 
-        const prevButton = screen.getByLabelText('Scroll left');
-        const nextButton = screen.getByLabelText('Scroll right');
+        const prevButton = screen.getByLabelText('Scroll right');
+        const nextButton = screen.getByLabelText('Scroll left');
 
         // ChevronRight path starts with "M11", ChevronLeft path starts with "M5"
         // eslint-disable-next-line testing-library/no-node-access
@@ -1478,7 +1478,7 @@ describe('Tab', () => {
           });
 
           act(() => {
-            fireEvent.click(screen.getByLabelText('Scroll right'));
+            fireEvent.click(screen.getByLabelText('Scroll left'));
           });
 
           // step=150, floor=-100 → max(0-150, -100) = -100
@@ -1516,7 +1516,7 @@ describe('Tab', () => {
           });
 
           act(() => {
-            fireEvent.click(screen.getByLabelText('Scroll left'));
+            fireEvent.click(screen.getByLabelText('Scroll right'));
           });
 
           // step=150, ceiling=0 → min(-100+150, 0) = 0
@@ -1592,7 +1592,7 @@ describe('Tab', () => {
           });
 
           act(() => {
-            fireEvent.click(screen.getByLabelText('Scroll right'));
+            fireEvent.click(screen.getByLabelText('Scroll left'));
           });
 
           // max(-90-150, -100) = -100 — never exceeds -maxScroll
@@ -1727,7 +1727,7 @@ describe('Tab', () => {
           });
 
           // In RTL the next button should scroll backward (scrollLeft -= 5)
-          fireEvent.pointerDown(screen.getByLabelText('Scroll right'));
+          fireEvent.pointerDown(screen.getByLabelText('Scroll left'));
           act(() => {
             jest.advanceTimersByTime(500);
           });
@@ -1764,7 +1764,7 @@ describe('Tab', () => {
           });
 
           // In RTL the previous button should scroll forward (scrollLeft += 5)
-          fireEvent.pointerDown(screen.getByLabelText('Scroll left'));
+          fireEvent.pointerDown(screen.getByLabelText('Scroll right'));
           act(() => {
             jest.advanceTimersByTime(500);
           });
