@@ -3,18 +3,15 @@
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
- *
- * ─── PATTERN RECIPE ──────────────────────────────────────────────────────────
- * This file is a copy-and-customize recipe, not a published package export.
- * Copy it into your own codebase and adapt it to your needs.
  */
 
 import React, { useState } from 'react';
-import { Search as SearchIcon } from '@carbon/icons-react';
-import Button from '../../components/Button';
-import { Column, Grid } from '../../components/Grid';
 import {
+  Button,
+  Column,
   Content,
+  DataTable,
+  Grid,
   Header,
   HeaderContainer,
   HeaderGlobalAction,
@@ -27,9 +24,6 @@ import {
   SideNavItems,
   SideNavLink,
   SkipToContent,
-} from '../../components/UIShell';
-import {
-  DataTable,
   Table,
   TableBody,
   TableCell,
@@ -42,14 +36,15 @@ import {
   TableToolbarContent,
   TableToolbarMenu,
   TableToolbarSearch,
-} from '../../components/DataTable';
-import { EmptyState } from '../../components/EmptyState';
-import { Tile } from '../../components/Tile';
-import notFoundIllustration from './assets/not-found.svg';
-import unauthorizedIllustration from './assets/unauthorized.svg';
-import errorIllustration from './assets/error.svg';
-import './EmptyState.scss';
-
+  Tile,
+} from '@carbon/react';
+import { Search as SearchIcon } from '@carbon/icons-react';
+import { EmptyState } from '../components/EmptyState';
+import notFoundIllustration from '../assets/not-found.svg';
+import unauthorizedIllustration from '../assets/unauthorized.svg';
+import errorIllustration from '../assets/error.svg';
+import '../styles/_empty-state.scss';
+import '../styles/_story-styles.scss';
 
 const TABLE_HEADERS = [
   { key: 'name', header: 'Name' },
@@ -74,12 +69,11 @@ const SIDE_NAV_LINKS = [
   'Billing',
 ];
 
-
-export interface EmptyStateExampleProps {
-  placement?: 'left' | 'centre';
+interface PageContentProps {
+  placement: 'left' | 'centre';
 }
 
-const PageContent = ({ placement }: { placement: 'left' | 'centre' }) => {
+const PageContent = ({ placement }: PageContentProps) => {
   const isCentre = placement === 'centre';
   const [searchValue, setSearchValue] = useState('');
   const [searchKey, setSearchKey] = useState(0);
@@ -91,11 +85,13 @@ const PageContent = ({ placement }: { placement: 'left' | 'centre' }) => {
   });
 
   const noResults = filteredRows.length === 0;
+  const emptyWrapClass = `es-example__empty-wrap es-example__empty-wrap--${
+    isCentre ? 'centre' : 'left'
+  }`;
 
   return (
     <Content>
       <Grid withRowGap>
-        {/* ── DataTable with inline empty state ───────────────────────────── */}
         <Column sm={4} md={6} lg={12}>
           <DataTable rows={filteredRows} headers={TABLE_HEADERS}>
             {({
@@ -112,38 +108,27 @@ const PageContent = ({ placement }: { placement: 'left' | 'centre' }) => {
                 title="Assets"
                 description="Search to filter results"
                 {...getTableContainerProps()}>
-                <TableToolbar
-                  {...getToolbarProps()}
-                  aria-label="asset table toolbar">
+                <TableToolbar {...getToolbarProps()} aria-label="asset table toolbar">
                   <TableToolbarContent>
                     <TableToolbarSearch
                       key={searchKey}
-                      onChange={(_evt: React.ChangeEvent, value?: string) =>
-                        setSearchValue(value ?? '')
-                      }
+                      onChange={(_evt, value) => setSearchValue(value ?? '')}
                       persistent
                     />
                     <TableToolbarMenu>
-                      <TableToolbarAction onClick={() => {}}>
-                        Action 1
-                      </TableToolbarAction>
-                      <TableToolbarAction onClick={() => {}}>
-                        Action 2
-                      </TableToolbarAction>
+                      <TableToolbarAction onClick={() => {}}>Action 1</TableToolbarAction>
+                      <TableToolbarAction onClick={() => {}}>Action 2</TableToolbarAction>
                     </TableToolbarMenu>
                     <Button kind="primary" onClick={() => {}}>
                       Add asset
                     </Button>
                   </TableToolbarContent>
                 </TableToolbar>
-
                 <Table {...getTableProps()} aria-label="assets table">
                   <TableHead>
                     <TableRow>
                       {headers.map((header) => (
-                        <TableHeader
-                          key={header.key}
-                          {...getHeaderProps({ header })}>
+                        <TableHeader {...getHeaderProps({ header })} key={header.key}>
                           {header.header}
                         </TableHeader>
                       ))}
@@ -154,9 +139,7 @@ const PageContent = ({ placement }: { placement: 'left' | 'centre' }) => {
                       rows.map((row) => (
                         <TableRow key={row.id} {...getRowProps({ row })}>
                           {row.cells.map((cell) => (
-                            <TableCell
-                              key={cell.id}
-                              {...getCellProps({ cell })}>
+                            <TableCell key={cell.id} {...getCellProps({ cell })}>
                               {cell.value}
                             </TableCell>
                           ))}
@@ -164,16 +147,8 @@ const PageContent = ({ placement }: { placement: 'left' | 'centre' }) => {
                       ))}
                   </TableBody>
                 </Table>
-
-                {/* ── Empty state: no search results ────────────────────── */}
                 {noResults && (
-                  <div
-                    className={[
-                      'es-example__empty-wrap',
-                      isCentre
-                        ? 'es-example__empty-wrap--centre'
-                        : 'es-example__empty-wrap--left',
-                    ].join(' ')}>
+                  <div className={emptyWrapClass}>
                     <EmptyState
                       illustration={notFoundIllustration}
                       illustrationDescription="No results illustration"
@@ -195,18 +170,14 @@ const PageContent = ({ placement }: { placement: 'left' | 'centre' }) => {
           </DataTable>
         </Column>
 
-        {/* ── Vertical tile (spans 2 grid rows) ──────────────────────────── */}
         <Column sm={4} md={2} lg={4} className="es-example__col--span-2">
           <Tile className="es-example__tile">
             <p className="es-example__tile-label">Label</p>
             <p className="es-example__tile-title">Title</p>
             <div
-              className={[
-                'es-example__tile-empty--vertical',
-                isCentre ? 'es-example__tile-empty--vertical--centre' : '',
-              ]
-                .filter(Boolean)
-                .join(' ')}>
+              className={`es-example__tile-empty--vertical${
+                isCentre ? ' es-example__tile-empty--vertical--centre' : ''
+              }`}>
               <EmptyState
                 size="sm"
                 illustration={errorIllustration}
@@ -222,32 +193,22 @@ const PageContent = ({ placement }: { placement: 'left' | 'centre' }) => {
           </Tile>
         </Column>
 
-        {/* ── Horizontal tiles ───────────────────────────────────────────── */}
-        {([0, 1] as const).map((i) => (
+        {[0, 1].map((i) => (
           <Column key={i} sm={2} md={3} lg={6}>
             <Tile className="es-example__tile">
               <p className="es-example__tile-label">Label</p>
               <p className="es-example__tile-title">Title</p>
               <div
-                className={[
-                  'es-example__tile-empty--horizontal',
-                  isCentre
-                    ? 'es-example__tile-empty--horizontal--centre'
-                    : '',
-                ]
-                  .filter(Boolean)
-                  .join(' ')}>
+                className={`es-example__tile-empty--horizontal${
+                  isCentre ? ' es-example__tile-empty--horizontal--centre' : ''
+                }`}>
                 <EmptyState
                   size="sm"
                   illustration={unauthorizedIllustration}
                   illustrationDescription="Unauthorized illustration"
                   title="You do not have access"
                   subtitle="Unlock product insights by requesting view access from your admin."
-                  action={{
-                    text: 'Request access',
-                    kind: 'tertiary',
-                    onClick: () => {},
-                  }}
+                  action={{ text: 'Request access', kind: 'tertiary', onClick: () => {} }}
                 />
               </div>
             </Tile>
@@ -258,11 +219,11 @@ const PageContent = ({ placement }: { placement: 'left' | 'centre' }) => {
   );
 };
 
-// ─── Full UI Shell layout ─────────────────────────────────────────────────────
+interface EmptyStateUnitProps {
+  placement?: 'left' | 'centre';
+}
 
-export const EmptyStateExample = ({
-  placement = 'left',
-}: EmptyStateExampleProps) => (
+export const EmptyStateUnit = ({ placement = 'left' }: EmptyStateUnitProps) => (
   <HeaderContainer
     render={({
       isSideNavExpanded,
@@ -310,5 +271,3 @@ export const EmptyStateExample = ({
     )}
   />
 );
-
-export default EmptyStateExample;

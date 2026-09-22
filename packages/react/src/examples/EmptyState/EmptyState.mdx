@@ -1,0 +1,88 @@
+import { Story, Controls, Source, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+import * as stories from './EmptyState.stories';
+
+<Meta isTemplate />
+
+# Empty State
+
+[Usage guidelines](https://carbondesignsystem.com/patterns/empty-states-pattern/)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Isometric illustration](#isometric-illustration)
+- [Pictogram illustration](#pictogram-illustration)
+- [Empty state in a UI](#empty-state-in-a-ui)
+- [Feedback](#feedback)
+
+## Overview
+
+The Empty State pattern provides a recipe for communicating an empty, error, or
+no-results state to users. It is used when a page, table, or container has no
+content to display.
+
+> NOTE: Patterns have multiple ways of accomplishing a user need and typically
+> use a combination of components with additional design considerations. The
+> pattern code we share is meant to serve as an example implementation that can
+> be built and extended further.
+
+To build this pattern, you can use the `EmptyState` component recipe from
+`example/components/EmptyState.tsx` alongside:
+
+- [DataTable](https://react.carbondesignsystem.com/?path=/docs/components-datatable)
+- [Tile](https://react.carbondesignsystem.com/?path=/docs/components-tile)
+- [Button](https://react.carbondesignsystem.com/?path=/docs/components-button)
+- [Link](https://react.carbondesignsystem.com/?path=/docs/components-link)
+
+## Example usage
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/react/src/examples/EmptyState/example)
+> example implementation.
+
+[![Edit empty-state-pattern](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/react/src/examples/EmptyState/example)
+
+## Isometric illustration
+
+Use an isometric SVG illustration to communicate a visually rich empty state.
+Swap the `illustration` prop with any image `src` string.
+
+<Canvas
+  of={stories.emptyStateIsometric}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(stories.emptyStateIsometric),
+    },
+  ]}
+/>
+
+## Pictogram illustration
+
+Use a Carbon pictogram (or any inline SVG component) for a leaner illustration
+style that respects the current text colour.
+
+<Canvas
+  of={stories.emptyStatePictogram}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(stories.emptyStatePictogram),
+    },
+  ]}
+/>
+
+## Empty state in a UI
+
+Demonstrates three empty-state placements in context: inside a DataTable
+(no search results), inside a tall vertical tile, and inside wide horizontal
+tiles. Toggle `placement` between `left` and `centre`.
+
+<Canvas of={stories.emptyStateInUI} />
+
+## Feedback
+
+Help us improve this pattern by providing feedback through
+[GitHub issues](https://github.com/carbon-design-system/carbon/issues/new/choose).

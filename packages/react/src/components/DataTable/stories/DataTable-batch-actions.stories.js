@@ -31,8 +31,8 @@ import DataTable, {
 
 import { Toggletip, ToggletipButton, ToggletipContent } from '../../Toggletip';
 
-import { EmptyState } from '../../EmptyState';
-import notFoundIllustration from '../../EmptyState/story-assets/not-found.svg';
+import { EmptyState } from '../../../examples/EmptyState/example/components/EmptyState';
+import notFoundIllustration from '../../../examples/EmptyState/example/assets/not-found.svg';
 import {
   batchActionClick,
   dataTableArgs,

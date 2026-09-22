@@ -26,8 +26,8 @@ import DataTable, {
   TableSelectAll,
   TableSelectRow,
 } from '..';
-import { EmptyState } from '../../EmptyState';
-import notFoundIllustration from '../../EmptyState/story-assets/not-found.svg';
+import { EmptyState } from '../../../examples/EmptyState/example/components/EmptyState';
+import notFoundIllustration from '../../../examples/EmptyState/example/assets/not-found.svg';
 import { dataTableArgs, dataTableArgTypes, rows, headers } from './shared';
 import mdx from '../DataTable.mdx';
 import TableToolbarFilter from './examples/TableToolbarFilter';
@@ -62,6 +62,7 @@ export default {
 
 export const Default = (args) => {
   const [renderedRows, setRenderedRows] = useState(rows);
+  const [searchKey, setSearchKey] = useState(0);
 
   const handleTableFilter = (selectedCheckboxes) => {
     setRenderedRows([]);
@@ -90,10 +91,6 @@ export const Default = (args) => {
     }
   };
 
-  const handleOnResetFilter = () => {
-    setRenderedRows(rows);
-  };
-
   return (
     <DataTable rows={renderedRows} headers={headers} {...args}>
       {({
@@ -107,12 +104,20 @@ export const Default = (args) => {
         getCellProps,
       }) => {
         const showEmptyState = rows.length === 0;
+
+        const handleOnResetFilter = () => {
+          setRenderedRows((prev) => prev); // no-op to avoid stale closure
+          onInputChange({ target: { value: '' } });
+          setSearchKey((k) => k + 1);
+        };
+
         return (
           <TableContainer title="DataTable" description="With filtering">
             <TableToolbar {...getToolbarProps()}>
               <TableToolbarContent>
                 {/* pass in `onInputChange` change here to make filtering work */}
                 <TableToolbarSearch
+                  key={searchKey}
                   onChange={(evt, value) => {
                     action(`TableToolbarSearch - onChange ${value}`)(evt);
                     onInputChange(evt);

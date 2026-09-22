@@ -10,8 +10,8 @@ import './story.scss';
 import React, { useState } from 'react';
 import { TrashCan, Save, Download } from '@carbon/icons-react';
 import { action } from 'storybook/actions';
-import { EmptyState } from '../../../EmptyState';
-import notFoundIllustration from '../../../EmptyState/story-assets/not-found.svg';
+import { EmptyState } from '../../../../examples/EmptyState/example/components/EmptyState';
+import notFoundIllustration from '../../../../examples/EmptyState/example/assets/not-found.svg';
 import DataTable, {
   Table,
   TableBatchAction,
