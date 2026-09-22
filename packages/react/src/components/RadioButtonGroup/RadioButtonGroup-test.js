@@ -29,8 +29,8 @@ describe('RadioButtonGroup', () => {
     expect(legend).toBeInTheDocument();
   });
 
-  it('should not allow interactive content in legendText', () => {
-    const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+  it('should warn without throwing for interactive content in legendText', () => {
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
     expect(() => {
       render(
@@ -44,8 +44,12 @@ describe('RadioButtonGroup', () => {
           <RadioButton labelText="test-1" value="test-1" />
         </RadioButtonGroup>
       );
-    }).toThrow(
-      'The RadioButtonGroup component `legendText` prop must have no interactive content'
+    }).not.toThrow();
+
+    expect(spy).toHaveBeenCalledWith(
+      expect.stringContaining(
+        'Warning: The RadioButtonGroup component `legendText` prop must have no interactive content'
+      )
     );
 
     spy.mockRestore();
