@@ -93,73 +93,86 @@ export default {
   },
 };
 
-export const Default = ({ disabled, ...args }) => (
-  <ContentSwitcher {...args}>
-    <Switch name="one" text="First section" disabled={disabled} />
-    <Switch name="two" text="Second section" disabled={disabled} />
-    <Switch name="three" text="Third section" disabled={disabled} />
-  </ContentSwitcher>
-);
+export const Default = (args) => {
+  return (
+    <ContentSwitcher {...args}>
+      <Switch name="one" text="First section" disabled={args.disabled} />
+      <Switch name="two" text="Second section" disabled={args.disabled} />
+      <Switch name="three" text="Third section" disabled={args.disabled} />
+    </ContentSwitcher>
+  );
+};
 
 Default.args = { ...sharedArgs };
 Default.argTypes = { ...sharedArgTypes };
 
-export const _WithLayer = ({ disabled, ...args }) => (
-  <WithLayer>
-    <ContentSwitcher {...args}>
-      <Switch name="one" text="First section" disabled={disabled} />
-      <Switch name="two" text="Second section" disabled={disabled} />
-      <Switch name="three" text="Third section" disabled={disabled} />
-    </ContentSwitcher>
-  </WithLayer>
-);
+export const _WithLayer = (args) => {
+  return (
+    <WithLayer>
+      <ContentSwitcher {...args}>
+        <Switch name="one" text="First section" disabled={args.disabled} />
+        <Switch name="two" text="Second section" disabled={args.disabled} />
+        <Switch name="three" text="Third section" disabled={args.disabled} />
+      </ContentSwitcher>
+    </WithLayer>
+  );
+};
 
 _WithLayer.args = { ...sharedArgs };
 _WithLayer.argTypes = { ...sharedArgTypes };
 
-export const IconOnly = ({ disabled, ...args }) => (
-  <ContentSwitcher {...args}>
-    <IconSwitch name="one" text="Table of Contents" disabled={disabled}>
-      <TableOfContents />
-    </IconSwitch>
-    <IconSwitch name="two" text="Workspace Test" disabled={disabled}>
-      <Workspace />
-    </IconSwitch>
-    <IconSwitch name="three" text="View Mode" disabled={disabled}>
-      <ViewMode_2 />
-    </IconSwitch>
-  </ContentSwitcher>
-);
+export const IconOnly = (args) => {
+  return (
+    <ContentSwitcher {...args}>
+      <IconSwitch name="one" text="Table of Contents" disabled={args.disabled}>
+        <TableOfContents />
+      </IconSwitch>
+      <IconSwitch name="two" text="Workspace Test" disabled={args.disabled}>
+        <Workspace />
+      </IconSwitch>
+      <IconSwitch name="three" text="View Mode" disabled={args.disabled}>
+        <ViewMode_2 />
+      </IconSwitch>
+    </ContentSwitcher>
+  );
+};
 
 IconOnly.args = { ...sharedArgs };
 IconOnly.argTypes = { ...sharedArgTypes };
 
-export const IconOnlyWithLayer = ({ disabled, ...args }) => (
-  <WithLayer>
-    <ContentSwitcher {...args}>
-      <IconSwitch name="one" text="Table of Contents" disabled={disabled}>
-        <TableOfContents />
-      </IconSwitch>
-      <IconSwitch name="two" text="Workspace Test" disabled={disabled}>
-        <Workspace />
-      </IconSwitch>
-      <IconSwitch name="three" text="View Mode" disabled={disabled}>
-        <ViewMode_2 />
-      </IconSwitch>
-    </ContentSwitcher>
-  </WithLayer>
-);
+export const IconOnlyWithLayer = (args) => {
+  return (
+    <WithLayer>
+      <ContentSwitcher {...args}>
+        <IconSwitch
+          name="one"
+          text="Table of Contents"
+          disabled={args.disabled}>
+          <TableOfContents />
+        </IconSwitch>
+        <IconSwitch name="two" text="Workspace Test" disabled={args.disabled}>
+          <Workspace />
+        </IconSwitch>
+        <IconSwitch name="three" text="View Mode" disabled={args.disabled}>
+          <ViewMode_2 />
+        </IconSwitch>
+      </ContentSwitcher>
+    </WithLayer>
+  );
+};
 
 IconOnlyWithLayer.args = { ...sharedArgs };
 IconOnlyWithLayer.argTypes = { ...sharedArgTypes };
 
-export const lowContrast = ({ disabled, ...args }) => (
-  <ContentSwitcher {...args}>
-    <Switch name="one" text="First section" disabled={disabled} />
-    <Switch name="two" text="Second section" disabled={disabled} />
-    <Switch name="three" text="Third section" disabled={disabled} />
-  </ContentSwitcher>
-);
+export const lowContrast = (args) => {
+  return (
+    <ContentSwitcher {...args}>
+      <Switch name="one" text="First section" disabled={args.disabled} />
+      <Switch name="two" text="Second section" disabled={args.disabled} />
+      <Switch name="three" text="Third section" disabled={args.disabled} />
+    </ContentSwitcher>
+  );
+};
 
 lowContrast.args = {
   ...sharedArgs,
