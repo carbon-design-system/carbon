@@ -72,6 +72,7 @@ export { default as CDSDatePickerInputSkeleton } from './components/date-picker/
 export { default as CDSDropdown } from './components/dropdown/dropdown';
 export { default as CDSDropdownItem } from './components/dropdown/dropdown-item';
 export { default as CDSDropdownSkeleton } from './components/dropdown/dropdown-skeleton';
+export { default as CDSEmptyState } from './components/empty-state/empty-state';
 export { default as CDSFormItem } from './components/form/form-item';
 export { default as CDSFormGroup } from './components/form-group/form-group';
 export { default as CDSIcon } from './components/icon/icon';
