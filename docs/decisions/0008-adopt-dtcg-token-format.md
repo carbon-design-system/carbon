@@ -44,7 +44,7 @@ several problems as tooling expectations evolved:
 The
 [W3C Design Tokens Community Group (DTCG)](https://tr.designtokens.org/format/)
 specification defines an open, vendor-neutral JSON format for design tokens. It
-standardises the keys every token carries (`$type`, `$value`, `$description`,
+standardizes the keys every token carries (`$type`, `$value`, `$description`,
 `$extensions`), the reference alias syntax (`{palette.blue.60}`), and the set of
 allowed primitive types (`color`, `dimension`, `duration`, `fontFamily`, etc.).
 Several design tools and token pipelines have converged on this format, making
