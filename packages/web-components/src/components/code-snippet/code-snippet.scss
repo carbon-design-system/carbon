@@ -96,13 +96,8 @@ $css--plex: true !default;
     overflow-x: auto;
   }
 
-  &.#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre:focus {
-    @include focus-outline('outline');
-
-    outline-offset: -2px;
-  }
   &.#{$prefix}--snippet--multi .#{$prefix}--snippet-container:has(pre:focus) {
-    mask-composite: unset;
+    mask: none;
   }
 
   #{$prefix}-button {
