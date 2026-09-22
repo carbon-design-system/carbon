@@ -44,7 +44,7 @@ several problems as tooling expectations evolved:
 The
 [W3C Design Tokens Community Group (DTCG)](https://tr.designtokens.org/format/)
 specification defines an open, vendor-neutral JSON format for design tokens. It
-standardises the keys every token carries (`$type`, `$value`, `$description`,
+standardises the keys a token may carry (`$type`, `$value`, `$description`,
 `$extensions`), the reference alias syntax (`{palette.blue.60}`), and the set of
 allowed primitive types (`color`, `dimension`, `duration`, `fontFamily`, etc.).
 Several design tools and token pipelines have converged on this format, making
@@ -78,9 +78,10 @@ Under this migration, DTCG JSON files are the only hand-edited source of truth:
   `$type: "dimension"` on every token. A `carbon.layout.converter` extension
   declares how raw numeric values (`miniUnits` grid steps or pixel values) are
   resolved to `rem` strings by Style Dictionary.
-- **`@carbon/motion`** — Duration and easing tokens moved to `motion.json` and
-  `surfaces.json` with `$type: "duration"` and `$type: "cubicBezier"`
-  respectively.
+- **`@carbon/motion`** — Duration (`$type: "duration"`) and easing
+  (`$type: "cubicBezier"`) primitive tokens moved to `motion.json`. Composite
+  surface recipes (`$type: "transition"`) that reference those primitives live
+  in `surfaces.json`.
 
 `$extensions` carries auxiliary data that may be needed to calculate the actual
 value. See individual package READMEs for the full `$extensions` usage
@@ -94,11 +95,12 @@ DTCG files, applies Carbon-specific transforms (e.g. `carbon/alpha-modifier`,
 JavaScript/TypeScript modules that consumers already depend on. The public API
 surface of each package is unchanged.
 
-Consistency across the migrated theme files is enforced via a Jest validation
+Consistency within the unified `themes.json` is enforced via a Jest validation
 test (`dtcg-cross-theme-parity-test.js`), which asserts token naming, `$type`,
-and `$description` consistency across all Carbon theme files. DTCG JSON Schema
-validation was also added to each package's test suite so that any token that
-does not conform to the spec causes a CI failure before it reaches consumers.
+`$description`, and per-theme value coverage within that single file. DTCG JSON
+Schema validation was added to `@carbon/themes` and `@carbon/motion` so that any
+token that does not conform to the spec causes a CI failure before it reaches
+consumers.
 
 ## Consequences
 
