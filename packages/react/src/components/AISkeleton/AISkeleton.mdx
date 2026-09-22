@@ -32,7 +32,8 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(AISkeletonStories._AISkeletonIcon),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: AISkeletonStories._AISkeletonIcon }),
     },
   ]}
 />
@@ -45,9 +46,9 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig(
-          AISkeletonPlaceholderStories._AISkeletonPlaceholder
-        ),
+        stackblitzPrefillConfig({
+          story: AISkeletonPlaceholderStories._AISkeletonPlaceholder,
+        }),
     },
   ]}
 />
@@ -60,7 +61,9 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig(AISkeletonTextStories._AISkeletonText),
+        stackblitzPrefillConfig({
+          story: AISkeletonTextStories._AISkeletonText,
+        }),
     },
   ]}
 />
