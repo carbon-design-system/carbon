@@ -48,6 +48,52 @@ describe('Button props', () => {
     await expect(el).shadowDom.to.equalSnapshot();
   });
 
+  it('should set kind on the underlying cds-copy element', async () => {
+    const el = await fixture(html`
+      <cds-copy-button kind="primary" icon-description="Copy to clipboard">
+      </cds-copy-button>
+    `);
+
+    const copy = el.shadowRoot?.querySelector('cds-copy');
+    expect(copy).to.have.attribute('kind', 'primary');
+
+    const button = copy?.shadowRoot?.querySelector('button');
+    expect(button).to.have.class('cds--btn--primary');
+    await expect(el).shadowDom.to.equalSnapshot();
+  });
+
+  it('should set size on the underlying cds-copy element', async () => {
+    const el = await fixture(html`
+      <cds-copy-button size="sm" icon-description="Copy to clipboard">
+      </cds-copy-button>
+    `);
+
+    const copy = el.shadowRoot?.querySelector('cds-copy');
+    expect(copy).to.have.attribute('size', 'sm');
+
+    const button = copy?.shadowRoot?.querySelector('button');
+    expect(button).to.have.class('cds--btn--sm');
+    await expect(el).shadowDom.to.equalSnapshot();
+  });
+
+  it('should default kind to ghost', async () => {
+    const el = await fixture(html`
+      <cds-copy-button icon-description="Copy to clipboard"> </cds-copy-button>
+    `);
+
+    const copy = el.shadowRoot?.querySelector('cds-copy');
+    expect(copy).to.have.attribute('kind', 'ghost');
+  });
+
+  it('should default size to lg', async () => {
+    const el = await fixture(html`
+      <cds-copy-button icon-description="Copy to clipboard"> </cds-copy-button>
+    `);
+
+    const copy = el.shadowRoot?.querySelector('cds-copy');
+    expect(copy).to.have.attribute('size', 'lg');
+  });
+
   it('should call the click handler', async () => {
     let clicked = false;
     const el = await fixture(html`
