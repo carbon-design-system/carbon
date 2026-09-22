@@ -800,7 +800,7 @@ function TabList({
       <button
         aria-hidden="true"
         tabIndex={-1}
-        aria-label="Scroll left"
+        aria-label={rtl ? 'Scroll right' : 'Scroll left'}
         ref={previousButton}
         className={previousButtonClasses}
         type="button"
@@ -839,7 +839,7 @@ function TabList({
       <button
         aria-hidden="true"
         tabIndex={-1}
-        aria-label="Scroll right"
+        aria-label={rtl ? 'Scroll left' : 'Scroll right'}
         ref={nextButton}
         className={nextButtonClasses}
         type="button"
