@@ -123,10 +123,6 @@ export const Default = {
   render: renderNotification,
 };
 
-export const Playground = {
-  render: renderNotification,
-};
-
 const meta = {
   title: 'Components/Notifications/Toast',
   args,

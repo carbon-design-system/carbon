@@ -60,17 +60,11 @@ WithInteractiveElements.args = {
   lowContrast: true,
   statusIconDescription: 'notification',
   title: 'Notification title',
-  titleId: 'callout-title-interactive'',
+  titleId: 'callout-title-interactive',
 };
 
 WithInteractiveElements.parameters = {
   controls: {
-    include: [
-      'kind',
-      'lowContrast',
-      'statusIconDescription',
-      'title',
-      'titleId',
-    ],
+    include: ['kind', 'lowContrast', 'statusIconDescription', 'title'],
   },
 };

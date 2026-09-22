@@ -105,13 +105,7 @@ export const WithInteractiveElements = {
   },
   parameters: {
     controls: {
-      include: [
-        'kind',
-        'lowContrast',
-        'statusIconDescription',
-        'title',
-        'titleId',
-      ],
+      include: ['kind', 'lowContrast', 'statusIconDescription', 'title'],
     },
   },
   render: ({ kind, lowContrast, statusIconDescription, title, titleId }) => {
