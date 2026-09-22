@@ -190,7 +190,7 @@ describe('CodeSnippet', () => {
     const snippetContainer = container.querySelector('.cds--snippet-container');
 
     expect(snippetContainer).not.toHaveAttribute('role');
-    expect(snippetContainer).toHaveAttribute('aria-label', 'code-snippet');
+    expect(snippetContainer).not.toHaveAttribute('aria-label');
     expect(snippetContainer).not.toHaveAttribute('aria-readonly');
   });
 

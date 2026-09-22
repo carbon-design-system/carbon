@@ -429,28 +429,24 @@ class CDSCodeSnippet extends FocusMixin(LitElement) {
       `;
     }
 
+    const isSingle = type === CODE_SNIPPET_TYPE.SINGLE;
+    const isMulti = type === CODE_SNIPPET_TYPE.MULTI;
+
     return html`
       <div
-        role="${type === CODE_SNIPPET_TYPE.SINGLE ||
-        type === CODE_SNIPPET_TYPE.MULTI
-          ? 'textbox'
-          : null}"
-        tabindex="${(type === CODE_SNIPPET_TYPE.SINGLE ||
-          type === CODE_SNIPPET_TYPE.MULTI) &&
-        !disabled
-          ? 0
-          : null}"
+        role="${isSingle ? 'textbox' : null}"
+        tabindex="${isSingle && !disabled ? 0 : null}"
         class="${prefix}--snippet-container"
-        aria-label="${'code-snippet'}"
-        aria-readonly="${type === CODE_SNIPPET_TYPE.SINGLE ||
-        type === CODE_SNIPPET_TYPE.MULTI
-          ? true
-          : null}"
-        aria-multiline="${type === CODE_SNIPPET_TYPE.MULTI ? true : null}"
-        @scroll="${(type === CODE_SNIPPET_TYPE.SINGLE && handleScroll) ||
-        null}">
+        aria-label="${isSingle ? 'code-snippet' : null}"
+        aria-readonly="${isSingle ? true : null}"
+        @scroll="${(isSingle && handleScroll) || null}">
         <pre
-          @scroll="${(type === CODE_SNIPPET_TYPE.MULTI && handleScroll) ||
+          role="${isMulti ? 'textbox' : null}"
+          tabindex="${isMulti && !disabled ? 0 : null}"
+          aria-label="${isMulti ? 'code-snippet' : null}"
+          aria-readonly="${isMulti ? true : null}"
+          aria-multiline="${isMulti ? true : null}"
+          @scroll="${(isMulti && handleScroll) ||
           null}"><code><slot></slot></code></pre>
       </div>
 
