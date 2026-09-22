@@ -191,6 +191,25 @@ describe('cds-code-snippet', function () {
     }
   });
 
+  it('should use fallback container attributes when `type` is not recognized', async () => {
+    const el = await fixture(html`
+      <cds-code-snippet type="other">${single}</cds-code-snippet>
+    `);
+
+    await el.updateComplete;
+
+    const snippetContainer = el.shadowRoot?.querySelector(
+      '.cds--snippet-container'
+    );
+
+    expect(snippetContainer).to.exist;
+    expect(snippetContainer.hasAttribute('role')).to.be.false;
+    expect(snippetContainer.getAttribute('aria-label')).to.equal(
+      'code-snippet'
+    );
+    expect(snippetContainer.hasAttribute('aria-readonly')).to.be.false;
+  });
+
   describe('CodeSnippet events', () => {
     it('should call the click handler when the copy button is clicked', async () => {
       let clickEventFired = false;
