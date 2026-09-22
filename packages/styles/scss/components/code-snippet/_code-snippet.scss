@@ -259,38 +259,31 @@ $copy-btn-feedback: $background-inverse !default;
   }
 
   //Copy Button
-  .#{$prefix}--snippet__icon {
+  .#{$prefix}--snippet .#{$prefix}--snippet__icon {
     block-size: convert.to-rem(16px);
     fill: $icon-primary;
     inline-size: convert.to-rem(16px);
     transition: all $duration-fast-01 motion(standard, productive);
   }
 
-  .#{$prefix}--btn > .#{$prefix}--snippet__icon {
+  .#{$prefix}--snippet .#{$prefix}--btn > .#{$prefix}--snippet__icon {
     margin-block-start: 0;
   }
 
-  .#{$prefix}--copy-btn {
-    @include reset;
-
-    display: flex;
-    overflow: visible;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    border: none;
+  .#{$prefix}--snippet .#{$prefix}--copy-btn {
     background-color: $layer;
-    cursor: pointer;
-    outline: none;
 
-    &:focus {
-      @include focus-outline('outline');
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: $layer-hover;
+      }
+    }
 
-      outline-color: $focus;
+    &:active {
+      background-color: $layer-active;
     }
   }
 
-  // TODO: remove copy button styles above
   .#{$prefix}--snippet .#{$prefix}--popover-container {
     @include font-family('sans');
 

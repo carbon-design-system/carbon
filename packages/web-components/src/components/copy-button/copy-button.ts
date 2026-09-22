@@ -12,6 +12,7 @@ import Copy16 from '@carbon/icons/es/copy/16.js';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import styles from './copy-button.scss?lit';
+import { BUTTON_KIND, BUTTON_SIZE } from '../button/defs';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
 import '../copy/copy';
 import { iconLoader } from '../../globals/internal/icon-loader';
@@ -28,6 +29,18 @@ class CDSCopyButton extends FocusMixin(LitElement) {
    */
   @property({ reflect: true, attribute: 'button-class-name' })
   buttonClassName;
+
+  /**
+   * Specify the kind of Button you want to create.
+   */
+  @property({ reflect: true })
+  kind = BUTTON_KIND.GHOST;
+
+  /**
+   * Specify the size of the Button. Defaults to `lg`.
+   */
+  @property({ reflect: true })
+  size: BUTTON_SIZE | string = BUTTON_SIZE.LARGE;
 
   /**
    * `true` if the button should be disabled.
@@ -67,6 +80,8 @@ class CDSCopyButton extends FocusMixin(LitElement) {
       feedbackTimeout,
       align,
       autoAlign,
+      kind,
+      size,
     } = this;
 
     let classes = `${prefix}--copy-btn`;
@@ -83,10 +98,12 @@ class CDSCopyButton extends FocusMixin(LitElement) {
         feedback-timeout=${feedbackTimeout}
         button-class-name=${classes}
         exportparts="button"
-        align=${align}>
+        align=${align}
+        kind=${kind}
+        size=${size}>
         ${iconLoader(Copy16, {
           slot: 'icon',
-          class: `${prefix}--snippet__icon`,
+          class: `${prefix}--btn__icon`,
         })}
         <slot slot="tooltip-content"></slot>
       </cds-copy>
