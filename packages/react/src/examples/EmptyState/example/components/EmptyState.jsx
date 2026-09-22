@@ -6,26 +6,17 @@
  */
 
 import cx from 'classnames';
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Button, Link } from '@carbon/react';
 
 const blockClass = 'cds--empty-state';
 
 export const EmptyState = React.forwardRef(function EmptyState(
-  {
-    action,
-    className,
-    illustration,
-    illustrationDescription,
-    link,
-    size = 'md',
-    subtitle,
-    title,
-    ...rest
-  },
+  { action, illustration, link, size = 'md', subtitle, title, ...rest },
   ref
 ) {
-  const rootClasses = cx(blockClass, className, {
+  const rootClasses = cx(blockClass, {
     [`${blockClass}--${size}`]: size,
   });
 
@@ -35,7 +26,7 @@ export const EmptyState = React.forwardRef(function EmptyState(
       illustrationNode = (
         <img
           src={illustration}
-          alt={illustrationDescription ?? (typeof title === 'string' ? title : '')}
+          alt={typeof title === 'string' ? title : ''}
           className={`${blockClass}__illustration--${size}`}
         />
       );
@@ -44,10 +35,7 @@ export const EmptyState = React.forwardRef(function EmptyState(
       illustrationNode = (
         <IllustrationComponent
           className={`${blockClass}__illustration--${size}`}
-          aria-label={
-            illustrationDescription ??
-            (typeof title === 'string' ? title : undefined)
-          }
+          aria-label={typeof title === 'string' ? title : undefined}
         />
       );
     }
@@ -76,7 +64,7 @@ export const EmptyState = React.forwardRef(function EmptyState(
           <Button
             {...action}
             className={`${blockClass}__action`}
-            kind={action.kind ?? 'tertiary'}
+            kind="tertiary"
             size="sm">
             {action.text}
           </Button>
@@ -92,5 +80,33 @@ export const EmptyState = React.forwardRef(function EmptyState(
 });
 
 EmptyState.displayName = 'EmptyState';
+
+EmptyState.propTypes = {
+  /** Optional action button rendered below the subtitle. */
+  action: PropTypes.shape({
+    text: PropTypes.string.isRequired,
+    onClick: PropTypes.func,
+  }),
+  /**
+   * Illustration to display. Pass an image `src` string, or a React component
+   * (e.g. a Carbon pictogram or a custom SVG component).
+   */
+  illustration: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
+  /** Optional link rendered below the action button. */
+  link: PropTypes.shape({
+    text: PropTypes.node.isRequired,
+    href: PropTypes.string.isRequired,
+    target: PropTypes.string,
+  }),
+  /**
+   * Size variant — controls illustration dimensions.
+   * @default 'md'
+   */
+  size: PropTypes.oneOf(['md', 'sm']),
+  /** Subtitle / body copy shown below the heading. */
+  subtitle: PropTypes.node,
+  /** Main heading text (required). */
+  title: PropTypes.node.isRequired,
+};
 
 export default EmptyState;

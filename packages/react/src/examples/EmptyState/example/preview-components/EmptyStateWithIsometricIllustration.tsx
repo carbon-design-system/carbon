@@ -30,7 +30,6 @@ interface EmptyStateWithIsometricIllustrationProps {
   title?: string;
   subtitle?: string;
   actionText?: string;
-  actionKind?: 'primary' | 'secondary' | 'tertiary';
   linkText?: string;
   linkHref?: string;
 }
@@ -41,17 +40,15 @@ export const EmptyStateWithIsometricIllustration = ({
   title = 'Get started by adding an asset',
   subtitle = 'Unlock product insights by adding assets from your system or cloud environment.',
   actionText = 'Add asset',
-  actionKind = 'primary',
   linkText = 'Learn more',
   linkHref = 'https://carbondesignsystem.com/patterns/empty-states-pattern/',
 }: EmptyStateWithIsometricIllustrationProps) => (
   <EmptyState
     size={size}
     illustration={illustrationMap[illustrationKey]}
-    illustrationDescription={`${illustrationKey} isometric illustration`}
     title={title}
     subtitle={subtitle}
-    action={actionText ? { text: actionText, kind: actionKind } : undefined}
+    action={actionText ? { text: actionText } : undefined}
     link={linkText && linkHref ? { text: linkText, href: linkHref } : undefined}
   />
 );

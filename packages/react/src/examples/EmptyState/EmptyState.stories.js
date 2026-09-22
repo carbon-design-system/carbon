@@ -31,7 +31,6 @@ emptyStateIsometric.args = {
   title: 'Get started by adding an asset',
   subtitle: 'Unlock product insights by adding assets from your system or cloud environment.',
   actionText: 'Add asset',
-  actionKind: 'primary',
   linkText: 'Learn more',
   linkHref: 'https://carbondesignsystem.com/patterns/empty-states-pattern/',
 };
@@ -50,12 +49,11 @@ export const emptyStatePictogram = (args) => <EmptyStateWithPictogramIllustratio
 emptyStatePictogram.storyName = 'Empty State unit with pictogram illustration';
 emptyStatePictogram.parameters = { layout: 'padded' };
 emptyStatePictogram.args = {
-  pictogramKey: 'No data',
+  pictogramKey: 'First use',
   size: 'md',
   title: 'Get started by adding an asset',
   subtitle: 'Unlock product insights by adding assets from your system or cloud environment.',
   actionText: 'Add asset',
-  actionKind: 'primary',
   linkText: 'Learn more',
   linkHref: 'https://carbondesignsystem.com/patterns/empty-states-pattern/',
 };
@@ -64,7 +62,20 @@ emptyStatePictogram.argTypes = {
     name: 'pictogram type',
     description: 'Carbon pictogram to display.',
     control: { type: 'select' },
-    options: ['No data', 'Not found', 'Unauthorized', 'Error', 'Notification'],
+    options: [
+      'First use',
+      'Error',
+      'Warning',
+      'Success',
+      'No access',
+      'Prerequisites',
+      'Retry',
+      'Offline',
+      'Maintenance',
+      'Unavailable',
+      'Search',
+      'Filtered',
+    ],
   },
   size: { control: { type: 'select' }, options: ['md', 'sm'] },
 };
