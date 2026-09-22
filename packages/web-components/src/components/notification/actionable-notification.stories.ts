@@ -101,7 +101,7 @@ export const Default = {
         kind="${NOTIFICATION_KIND.ERROR}"
         title="Notification title"
         subtitle="Subtitle text goes here">
-        <cds-actionable-notification-button size="md" slot="action"
+        <cds-actionable-notification-button slot="action"
           >Action</cds-actionable-notification-button
         >
       </cds-actionable-notification>
@@ -151,7 +151,7 @@ export const Playground = {
         status-icon-description="${ifDefined(statusIconDescription)}"
         @cds-notification-beingclosed="${handleBeforeClose}"
         @cds-notification-closed="${onClose}">
-        <cds-actionable-notification-button size="md" slot="action"
+        <cds-actionable-notification-button slot="action"
           >${actionButtonLabel}</cds-actionable-notification-button
         >
       </cds-actionable-notification>

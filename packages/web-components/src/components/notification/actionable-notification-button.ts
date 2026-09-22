@@ -8,6 +8,7 @@
 import { prefix } from '../../globals/settings';
 import CDSButton from '../button/button';
 import styles from './actionable-notification.scss?lit';
+import buttonStyles from '../button/button.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
@@ -26,7 +27,7 @@ class CDSActionableNotificationButton extends CDSButton {
     this.setAttribute('size', 'sm');
   }
 
-  static styles = styles;
+  static styles = [buttonStyles, styles];
 }
 
 export default CDSActionableNotificationButton;
