@@ -232,10 +232,11 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
       (
         files: Array<File & { invalidFileType?: boolean }>
       ): Array<File & { invalidFileType?: boolean }> => {
+        const fileExtensionRegExp = /.[0-9a-z]+$/i;
         return files.map((file) => {
           if (
             (maxFileSize && file.size > maxFileSize) ||
-            !fileMatchesAccept(file, accept)
+            !fileMatchesAccept(file, accept ?? [], fileExtensionRegExp)
           ) {
             file.invalidFileType = true;
           }

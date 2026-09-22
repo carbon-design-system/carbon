@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2026
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,8 +7,8 @@
 
 export function fileMatchesAccept(
   file: File,
-  accept: readonly string[] = [],
-  pattern = '.[0-9a-z]+$'
+  accept: readonly string[],
+  fileExtensionRegExp: RegExp
 ) {
   if (!accept.length) {
     return true;
@@ -16,7 +16,6 @@ export function fileMatchesAccept(
 
   const fileName = file.name.toLowerCase();
   const mimeType = file.type.toLowerCase();
-  const fileExtensionRegExp = new RegExp(pattern, 'i');
   const [fileExtension] = file.name.match(fileExtensionRegExp) ?? [];
 
   return accept.some((acceptedType) => {

@@ -143,8 +143,9 @@ function FileUploaderDropContainer({
     const acceptsOnlyExtensions =
       accept.length > 0 &&
       accept.every((acceptedType) => acceptedType.trim().startsWith('.'));
+    const fileExtensionRegExp = new RegExp(pattern, 'i');
+
     return transferredFiles.reduce<AddedFile[]>((acc, curr) => {
-      const fileExtensionRegExp = new RegExp(pattern, 'i');
       const [fileExtension] = curr.name.match(fileExtensionRegExp) ?? [];
 
       if (maxFileSize && curr.size > maxFileSize) {
@@ -156,7 +157,7 @@ function FileUploaderDropContainer({
         return acc;
       }
 
-      if (fileMatchesAccept(curr, accept, pattern)) {
+      if (fileMatchesAccept(curr, accept, fileExtensionRegExp)) {
         return acc.concat([curr]);
       }
 
