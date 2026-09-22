@@ -34,7 +34,7 @@ or `$field`.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(LayerStories.Default),
+      onClick: () => stackblitzPrefillConfig({ story: LayerStories.Default }),
     },
   ]}
 />
@@ -65,7 +65,8 @@ the `withBackground` prop, it automatically sets a background color using the
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(LayerStories.withBackground),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: LayerStories.withBackground }),
     },
   ]}
 />
@@ -93,7 +94,8 @@ To do this, you can use the `level` prop:
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(LayerStories.CustomLevel),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: LayerStories.CustomLevel }),
     },
   ]}
 />

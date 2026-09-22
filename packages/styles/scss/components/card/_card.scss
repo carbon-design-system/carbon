@@ -80,10 +80,8 @@
   .#{$prefix}--card__header {
     position: relative;
     display: grid;
-    // 16px gap between __title-media and __title
-    column-gap: $spacing-05;
-    grid-template-columns: auto 1fr;
-    // vertical rhythm is handled by margin-block on each child
+    container-type: inline-size;
+    grid-template-columns: auto minmax(0, 1fr);
     row-gap: 0;
   }
 
@@ -148,15 +146,13 @@
   }
 
   // ─── Header media (icon / avatar slot) ───────────────────────────────
-  // Spans both grid columns so it always sits above the title-media+title row.
   .#{$prefix}--card__header-media {
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
     grid-column: 1 / -1;
     margin-block: $spacing-05;
-    margin-inline: $spacing-05;
-    // 64px max height
+    margin-inline-start: $spacing-05;
     max-block-size: $spacing-10;
   }
 
@@ -268,12 +264,12 @@
   }
 
   // ─── Title ───────────────────────────────────────────────────────────
+  // Always col 2 so it shares that column with __header-media above it.
   .#{$prefix}--card__title {
     display: flex;
-    overflow: hidden;
     flex-direction: column;
-    // 2px between label / text-row / description
     gap: $spacing-01;
+    grid-column: 2;
     margin-inline: $spacing-05;
     min-inline-size: 0;
   }
@@ -368,23 +364,18 @@
   .#{$prefix}--card__title-media {
     display: flex;
     flex-shrink: 0;
-    // top-align so it tracks the first line on long titles
     align-items: flex-start;
     justify-content: center;
     grid-column: 1;
-    // aligns top edge with title text top margin
     margin-block-start: $spacing-05;
-    // 16px from card edge
-    margin-inline-start: $spacing-05;
-    // 64px max height
     max-block-size: $spacing-10;
+    padding-inline-end: $spacing-05;
+    padding-inline-start: $spacing-05;
   }
 
   .#{$prefix}--card__header:has(> .#{$prefix}--card__title-media)
     > .#{$prefix}--card__title {
-    grid-column: 2;
-    // left margin is provided by the gap from __title-media
-    margin-inline-start: 0;
+    margin-inline: 0 $spacing-05;
   }
 
   // ─── Header actions ───────────────────────────────────────────────────
@@ -395,10 +386,25 @@
     justify-content: flex-end;
     block-size: $spacing-07;
     gap: $spacing-02;
-    inline-size: 50%;
+    inline-size: calc(50% - $spacing-03);
     inset-block-start: $spacing-03;
     inset-inline-end: $spacing-03;
-    max-inline-size: 50%;
+    max-inline-size: calc(50% - $spacing-03);
+  }
+
+  // createOverflowHandler marks overflowed items with [data-hidden].
+  .#{$prefix}--card__actions [data-hidden]:not([data-fixed]) {
+    display: none;
+  }
+
+  // Reserve space for the absolutely-positioned actions box so the title
+  // text never slides under the buttons.  max-inline-size uses cqw so the
+  // 50% resolves against the header container width — the same reference
+  // box that the actions' own inline-size uses — regardless of how wide
+  // col1 (TitleMedia) is.
+  .#{$prefix}--card__header:has(> .#{$prefix}--card__actions)
+    > .#{$prefix}--card__title {
+    max-inline-size: calc(50cqw - $spacing-03);
   }
 
   // ─── AI Label (decorator) ─────────────────────────────────────────────
@@ -421,31 +427,20 @@
     inset-inline-end: $spacing-03;
   }
 
-  .#{$prefix}--card--has-ai-label .#{$prefix}--card__title {
-    padding-inline-end: calc($spacing-07 + $spacing-05);
+  // AI label without actions: title must clear the decorator ($spacing-07)
+  // plus its $spacing-03 inset from the card edge.
+  .#{$prefix}--card--has-ai-label:not(:has(.#{$prefix}--card__actions))
+    .#{$prefix}--card__header
+    > .#{$prefix}--card__title {
+    max-inline-size: calc(100cqw - $spacing-07 - $spacing-03);
   }
 
+  // AI label with actions: the actions box is shifted left by the decorator
+  // width; the title must clear that shifted edge.
   .#{$prefix}--card--has-ai-label:has(.#{$prefix}--card__actions)
-    .#{$prefix}--card__title {
-    padding-inline-end: $spacing-13;
-  }
-
-  .#{$prefix}--card--has-ai-label .#{$prefix}--card__label {
-    padding-inline-end: calc($spacing-07 + $spacing-05);
-  }
-
-  .#{$prefix}--card--has-ai-label:has(.#{$prefix}--card__actions)
-    .#{$prefix}--card__label {
-    padding-inline-end: $spacing-13;
-  }
-
-  .#{$prefix}--card--has-ai-label .#{$prefix}--card__description {
-    padding-inline-end: calc($spacing-07 + $spacing-05);
-  }
-
-  .#{$prefix}--card--has-ai-label:has(.#{$prefix}--card__actions)
-    .#{$prefix}--card__description {
-    padding-inline-end: $spacing-13;
+    .#{$prefix}--card__header
+    > .#{$prefix}--card__title {
+    max-inline-size: calc(50cqw - $spacing-03 - $spacing-06 - $spacing-03 * 2);
   }
 
   .#{$prefix}--card--has-ai-label .#{$prefix}--card__actions {

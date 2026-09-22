@@ -43,7 +43,7 @@ used option that is on the list.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(SelectStories.Default),
+      onClick: () => stackblitzPrefillConfig({ story: SelectStories.Default }),
     },
   ]}
 />
@@ -154,7 +154,7 @@ desired option.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(SelectStories.Inline),
+      onClick: () => stackblitzPrefillConfig({ story: SelectStories.Inline }),
     },
   ]}
 />
@@ -166,7 +166,7 @@ desired option.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(SelectStories.Skeleton),
+      onClick: () => stackblitzPrefillConfig({ story: SelectStories.Skeleton }),
     },
   ]}
 />
@@ -178,7 +178,8 @@ desired option.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(SelectStories.withAILabel),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: SelectStories.withAILabel }),
     },
   ]}
 />

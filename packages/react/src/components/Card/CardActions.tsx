@@ -102,8 +102,13 @@ export const CardActions = ({
       return;
     }
 
+    const gap = parseFloat(
+      getComputedStyle(containerRef.current).columnGap || '0'
+    );
+
     const handler = createOverflowHandler({
       container: containerRef.current,
+      gap,
       onChange: (_visible, hidden) => {
         const hiddenIds = hidden.map((el) => el.dataset.id);
         setHiddenItems(
