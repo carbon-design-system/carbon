@@ -2310,6 +2310,8 @@ __metadata:
     fs-extra: "npm:^11.0.0"
     invariant: "npm:^2.2.3"
     motion: "npm:^13.0.0"
+    prettier: "npm:^3.3.3"
+    prettier-config-carbon: "workspace:^0.12.0"
     process: "npm:^0.11.10"
     prop-types: "npm:^15.8.1"
     react: "npm:^19.2.3"
@@ -20100,7 +20102,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier-config-carbon@npm:^0.12.0, prettier-config-carbon@workspace:config/prettier-config-carbon":
+"prettier-config-carbon@npm:^0.12.0, prettier-config-carbon@workspace:^0.12.0, prettier-config-carbon@workspace:config/prettier-config-carbon":
   version: 0.0.0-use.local
   resolution: "prettier-config-carbon@workspace:config/prettier-config-carbon"
   peerDependencies:
