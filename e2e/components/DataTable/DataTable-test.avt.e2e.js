@@ -36,6 +36,18 @@ test.describe('@avt DataTable', () => {
         'components-datatable-basic--xl-with-two-lines'
       );
     });
+    test('@avt-advanced-states lg with wrapping text', async ({ page }) => {
+      await visitStory(page, {
+        component: 'DataTable',
+        id: 'components-datatable-basic--lg-with-wrapping-text',
+        globals: {
+          theme: 'white',
+        },
+      });
+      await expect(page).toHaveNoACViolations(
+        'components-datatable-basic--lg-with-wrapping-text'
+      );
+    });
   });
 
   test.describe('@avt batch actions', () => {
