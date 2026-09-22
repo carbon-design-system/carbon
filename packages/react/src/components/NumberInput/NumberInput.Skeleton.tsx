@@ -39,9 +39,12 @@ function NumberInputSkeleton({
       {!hideLabel && (
         <span className={`${prefix}--label ${prefix}--skeleton`} />
       )}
-      {/* TODO: V12 - Remove `${prefix}--number--${size}` class */}
       <div
-        className={`${prefix}--number ${prefix}--skeleton ${prefix}--number--${size} ${prefix}--layout--size-${size}`}
+        className={cx(`${prefix}--number`, `${prefix}--skeleton`, {
+          // TODO: V12 - Remove `${prefix}--number--${size}` class
+          [`${prefix}--number--${size}`]: size,
+          [`${prefix}--layout--size-${size}`]: size,
+        })}
       />
     </div>
   );
