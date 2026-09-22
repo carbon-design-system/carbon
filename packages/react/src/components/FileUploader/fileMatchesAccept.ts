@@ -8,7 +8,7 @@
 export function fileMatchesAccept(
   file: File,
   accept: readonly string[],
-  fileExtensionRegExp: RegExp
+  fileExtension?: string
 ) {
   if (!accept.length) {
     return true;
@@ -16,7 +16,6 @@ export function fileMatchesAccept(
 
   const fileName = file.name.toLowerCase();
   const mimeType = file.type.toLowerCase();
-  const [fileExtension] = file.name.match(fileExtensionRegExp) ?? [];
 
   return accept.some((acceptedType) => {
     const normalizedType = acceptedType.trim().toLowerCase();
