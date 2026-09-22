@@ -22,7 +22,7 @@ import { Text } from '../Text';
 import { useFeatureFlag } from '../FeatureFlags';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
-import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
+import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
 
 export interface RadioTileProps {
   /**
@@ -191,7 +191,7 @@ const RadioTile = React.forwardRef(
     const normalizedDecorator = candidateIsAILabel
       ? cloneElement(candidate, { size: 'xs' })
       : candidate;
-    useNoInteractiveChildren(
+    useNoInteractiveChildrenForLabel(
       labelRef,
       'The RadioTile component `children` prop must have no interactive content'
     );
