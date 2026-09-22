@@ -14,6 +14,22 @@ import './internal/warnAboutDeprecatedReactVersion';
 export * from './components/Accordion';
 // export { ActionSet } from './components/ActionSet';
 // export type { ActionSetProps } from './components/ActionSet';
+// export {
+//   BigNumber as preview__BigNumber,
+//   BigNumberSkeleton as preview__BigNumberSkeleton,
+// } from './components/BigNumber';
+export type { BigNumberProps as preview__BigNumberProps } from './components/BigNumber';
+// TODO: uncomment in v12 — also remove from excludeProductsComponents
+// export {
+//   Guidebanner as preview__Guidebanner,
+//   GuidebannerElement as preview__GuidebannerElement,
+//   GuidebannerElementButton as preview__GuidebannerElementButton,
+//   GuidebannerElementLink as preview__GuidebannerElementLink,
+// } from './components/Guidebanner';
+// export type { GuidebannerProps } from './components/Guidebanner';
+// export type { GuidebannerElementProps } from './components/Guidebanner';
+// export type { GuidebannerElementButtonProps } from './components/Guidebanner';
+// export type { GuidebannerElementLinkProps } from './components/Guidebanner';
 export * from './components/AccordionItem';
 export * from './components/AspectRatio';
 export * from './components/Breadcrumb';
@@ -58,6 +74,8 @@ export {
   useFeatureFlags as preview_useFeatureFlags, // this export can be removed in v12
 } from './components/FeatureFlags';
 export * from './components/FileUploader';
+// TODO: uncomment in v12 — also remove from excludeProductsComponents
+// export * from './components/FullPageError';
 export * from './components/FluidForm';
 export * from './components/Form';
 export * from './components/FormGroup';
@@ -79,6 +97,9 @@ export * from './components/Modal';
 export * from './components/ModalWrapper';
 export * from './components/MultiSelect';
 export * from './components/Notification';
+// TODO: uncomment in v12 — also remove from excludeProductsComponents
+// export { NotificationsPanel } from './components/NotificationsPanel';
+// export type { NotificationsPanelProps } from './components/NotificationsPanel';
 export * from './components/NumberInput';
 export * from './components/OrderedList';
 // TODO: uncomment in v12 — also remove from excludeProductsComponents
@@ -604,6 +625,10 @@ export type { RadioButtonSkeletonProps } from './components/RadioButton/RadioBut
 export type { RadioButtonGroupProps } from './components/RadioButtonGroup/RadioButtonGroup';
 export type { RadioTileProps } from './components/RadioTile/RadioTile';
 
+// TODO: uncomment in v12 — also remove from excludeProductsComponents (migrated from @carbon/ibm-products)
+// export { ScrollGradient } from './components/ScrollGradient';
+// export type { ScrollGradientProps } from './components/ScrollGradient';
+
 //search
 export type { SearchProps } from './components/Search/Search';
 export type { SearchSkeletonProps } from './components/Search/Search.Skeleton';
@@ -749,6 +774,10 @@ export type { SwitcherItemProps } from './components/UIShell/SwitcherItem';
 // export { TruncatedText } from './components/TruncatedText';
 // export type { TruncatedTextProps } from './components/TruncatedText';
 // export * from './components/UserAvatar';
+// export type { TagOverflowItem, TagOverflowProps } from './components/TagOverflow';
+
+// TODO: uncomment in v12 — also remove from excludeProductsComponents
+// export * from './components/Tearsheet';
 
 //unordered list
 export type { UnorderedListProps } from './components/UnorderedList/UnorderedList';

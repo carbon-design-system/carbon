@@ -9,10 +9,10 @@
 
 'use strict';
 
-const CarbonPictograms = require('@carbon/pictograms-react');
+const { readPackageExports } = require('../test-utils/icon-package');
 
 describe('@carbon/pictograms-react', () => {
   it('should not update exports without a semver change', () => {
-    expect(Object.keys(CarbonPictograms).sort()).toMatchSnapshot();
+    expect(readPackageExports('@carbon/pictograms-react')).toMatchSnapshot();
   });
 });

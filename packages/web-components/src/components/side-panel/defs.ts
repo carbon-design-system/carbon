@@ -1,5 +1,7 @@
 /**
- * Copyright IBM Corp. 2023, 2024
+ * @license
+ *
+ * Copyright IBM Corp. 2023, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -28,6 +30,11 @@ export enum SIDE_PANEL_SIZE {
    * Large size.
    */
   LARGE = 'lg',
+
+  /**
+   * Extra Large size.
+   */
+  EXTRA_LARGE = 'xl',
 
   /**
    * 2X-Large size.

@@ -1,4 +1,5 @@
 <!-- NOTE: This file is used in the generation of storybook docs page(s). -->
+<!-- Any changes/additions made to the headings/sections in this file should be followed with an update to the 'Table of Contents' section in the storybook docs page(s) -->
 
 ## About feature flags
 
@@ -61,6 +62,18 @@ In addition to this document, some components include `Feature flags` folders
 within Storybook. Those docs pages cover package-specific configuration and
 usage, while the stories demonstrate the impact of turning flags on. The
 inventory, availability, and codemod associations above remain authoritative.
+
+## IBM Products component migration
+
+A selection of widely-used components from `carbon-for-ibm-products` are being
+consolidated into `@carbon/react` as part of v12. The goal is to make these
+components available to all Carbon consumers without requiring a separate
+package dependency.
+
+In the v12 Storybook, these components are labelled with a **Migrated** badge in
+the sidebar so they are easy to identify. They are not available in the
+published v11 package and enabling `enable-v12-release` does not expose them —
+they will be part of the public `@carbon/react` API when v12 ships.
 
 ## Using Codemods for Migration
 

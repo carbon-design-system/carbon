@@ -475,6 +475,7 @@ function TabList({
   const ref = useRef<HTMLDivElement>(null);
   const previousButton = useRef<HTMLButtonElement>(null);
   const nextButton = useRef<HTMLButtonElement>(null);
+  const resizeAnimationFrame = useRef<number>(null);
   const [isScrollable, setIsScrollable] = useState(false);
   const [scrollLeft, setScrollLeft] = useState<number>(0);
 
@@ -697,10 +698,27 @@ function TabList({
 
     updateOverflowState();
 
-    const resizeObserver = new ResizeObserver(updateOverflowState);
+    const resizeObserver = new ResizeObserver(() => {
+      if (resizeAnimationFrame.current !== null) {
+        cancelAnimationFrame(resizeAnimationFrame.current);
+      }
+
+      resizeAnimationFrame.current = requestAnimationFrame(() => {
+        resizeAnimationFrame.current = null;
+
+        updateOverflowState();
+      });
+    });
+
     resizeObserver.observe(element);
 
     return () => {
+      if (resizeAnimationFrame.current !== null) {
+        cancelAnimationFrame(resizeAnimationFrame.current);
+
+        resizeAnimationFrame.current = null;
+      }
+
       resizeObserver.disconnect();
     };
   }, [updateOverflowState]);
@@ -1264,7 +1282,6 @@ export interface TabProps extends HTMLAttributes<HTMLElement> {
   secondaryLabel?: string;
 }
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const Tab = forwardRef<HTMLElement, TabProps>(
   (
     {
@@ -1538,6 +1555,9 @@ const Tab = forwardRef<HTMLElement, TabProps>(
     );
   }
 );
+
+Tab.displayName = 'Tab';
+
 Tab.propTypes = {
   /**
    * Provide a custom element to render instead of the default button
@@ -1640,7 +1660,6 @@ export interface IconTabProps extends DivAttributes {
    */
   leaveDelayMs?: number;
 }
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const IconTab = React.forwardRef<HTMLDivElement, IconTabProps>(
   (
     {
@@ -1675,7 +1694,7 @@ const IconTab = React.forwardRef<HTMLDivElement, IconTabProps>(
           className={`${prefix}--icon-tooltip`}
           enterDelayMs={enterDelayMs}
           label={label}
-          leaveDelayMs={leaveDelayMs}>
+          leaveDelayMs={leaveDelayMs ?? 0}>
           <Tab className={classNames} ref={ref} {...rest}>
             {children}
           </Tab>
@@ -1684,6 +1703,8 @@ const IconTab = React.forwardRef<HTMLDivElement, IconTabProps>(
     );
   }
 );
+
+IconTab.displayName = 'IconTab';
 
 IconTab.propTypes = {
   /**
@@ -1741,7 +1762,6 @@ export interface TabPanelProps extends DivAttributes {
   className?: string;
 }
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const TabPanel = React.forwardRef<HTMLDivElement, TabPanelProps>(
   ({ children, className: customClassName, ...rest }, forwardRef) => {
     const prefix = usePrefix();
@@ -1766,6 +1786,8 @@ const TabPanel = React.forwardRef<HTMLDivElement, TabPanelProps>(
     );
   }
 );
+
+TabPanel.displayName = 'TabPanel';
 
 TabPanel.propTypes = {
   /**

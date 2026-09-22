@@ -11,6 +11,8 @@
 @use '../../utilities/ai-gradient' as *;
 @use '../../utilities/convert' as *;
 @use '../../utilities/skeleton' as *;
+@use '../../feature-flags' as *;
+@use '../../border-radius' as *;
 
 /// Shared v12 date-picker rules for both React and Web Components. Each one
 /// scopes them differently so they don't clash with the v11 date picker:
@@ -26,6 +28,26 @@
 // =============================================================================
 /// @access public
 /// @group date-picker
+
+@position-try --bottom-left {
+  inset-area: block-end span-inline-start;
+  margin-block-start: $spacing-02;
+}
+
+@position-try --top-left {
+  inset-area: block-start span-inline-start;
+  margin-block-end: $spacing-02;
+}
+
+@position-try --bottom-right {
+  inset-area: block-end span-inline-end;
+  margin-block-start: $spacing-02;
+}
+
+@position-try --top-right {
+  inset-area: block-start span-inline-end;
+  margin-block-end: $spacing-02;
+}
 
 @mixin date-picker-next-rules {
   // Input wrapper needs relative positioning for icon placement
@@ -97,26 +119,6 @@
 
     // Handle viewport overflow
     position-try-options: --bottom-left, --top-left, --bottom-right, --top-right;
-
-    @position-try --bottom-left {
-      inset-area: block-end span-inline-start;
-      margin-block-start: $spacing-02;
-    }
-
-    @position-try --top-left {
-      inset-area: block-start span-inline-start;
-      margin-block-end: $spacing-02;
-    }
-
-    @position-try --bottom-right {
-      inset-area: block-end span-inline-end;
-      margin-block-start: $spacing-02;
-    }
-
-    @position-try --top-right {
-      inset-area: block-start span-inline-end;
-      margin-block-end: $spacing-02;
-    }
   }
 
   .#{$prefix}--date-picker__calendar.open {
@@ -132,6 +134,10 @@
     inset-block-start: 100%;
     inset-inline-start: 0;
     margin-block-start: 0;
+
+    @if enabled('enable-v12-release') {
+      margin-block-start: $spacing-02;
+    }
   }
 
   // DATE PICKER INPUT STYLES
@@ -183,6 +189,24 @@
   // Range date picker sizing
   .#{$prefix}--date-picker-container--from {
     margin-inline-end: rem(1px);
+
+    @if enabled('enable-v12-release') {
+      .#{$prefix}--date-picker__input {
+        border-end-end-radius: $border-radius-00;
+        border-inline-end: none;
+        border-start-end-radius: $border-radius-00;
+      }
+    }
+  }
+
+  .#{$prefix}--date-picker-container--to {
+    @if enabled('enable-v12-release') {
+      .#{$prefix}--date-picker__input {
+        border-end-start-radius: $border-radius-00;
+        border-inline-start: none;
+        border-start-start-radius: $border-radius-00;
+      }
+    }
   }
 
   .#{$prefix}--date-picker-container--from,
@@ -198,6 +222,29 @@
   .#{$prefix}--date-picker-container--ai-label {
     .#{$prefix}--date-picker__input--decorator {
       @include ai-gradient;
+
+      @if enabled('enable-v12-release') {
+        // Reset the bottom-edge color override from @include ai-gradient so the
+        // border-box gradient layer controls all four sides uniformly.
+        background:
+          linear-gradient(
+              0deg,
+              $ai-aura-start-sm 0%,
+              15%,
+              $ai-aura-end 50%,
+              transparent 100%
+            )
+            padding-box,
+          linear-gradient($field, $field) padding-box,
+          // (ai-border-start → ai-border-end), mirroring the default v12 border gradient
+          linear-gradient(
+              to bottom,
+              $ai-border-start calc(100% - 4px),
+              $ai-border-strong 100%
+            )
+            border-box;
+        border-block-end-color: transparent;
+      }
     }
   }
 
@@ -262,6 +309,11 @@
     max-inline-size: rem(288px);
     outline: none;
 
+    @if enabled('enable-v12-release') {
+      border: 1px solid $border-subtle;
+      border-radius: $border-radius-08;
+    }
+
     &:focus {
       outline: none;
     }
@@ -296,6 +348,10 @@
 
     svg {
       fill: $icon-primary;
+    }
+
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-04;
     }
   }
 
@@ -404,6 +460,10 @@
       background-color: $layer-hover;
       outline: 2px solid $focus;
       outline-offset: -2px;
+    }
+
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-04;
     }
   }
 }

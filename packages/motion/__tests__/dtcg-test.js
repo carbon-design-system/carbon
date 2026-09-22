@@ -256,16 +256,16 @@ describe('@carbon/motion — DTCG surface file (src/dtcg/surfaces.json)', () => 
     }
   });
 
-  test('all recipes have enterEasing and exitEasing as [name, mode] pairs', () => {
+  test('all recipes have enterEasing and exitEasing as { name, mode }', () => {
     const validNames = ['standard', 'entrance', 'exit'];
     const validModes = ['productive', 'expressive'];
     for (const surface of allSurfaces) {
       for (const field of ['enterEasing', 'exitEasing']) {
         const easing = surface.recipe[field];
-        expect(Array.isArray(easing)).toBe(true);
-        expect(easing).toHaveLength(2);
-        expect(validNames).toContain(easing[0]);
-        expect(validModes).toContain(easing[1]);
+        expect(typeof easing).toBe('object');
+        expect(Array.isArray(easing)).toBe(false);
+        expect(validNames).toContain(easing.name);
+        expect(validModes).toContain(easing.mode);
       }
     }
   });
@@ -440,8 +440,10 @@ describe('@carbon/motion — every DTCG surface generates a JS export', () => {
 describe('@carbon/motion — generated surfaces.d.ts keeps literal types', () => {
   const {
     toDtsTypeLiteral,
-    buildDTCGMotionSurfacesJS,
-  } = require('../tasks/builders/dtcg-motion');
+  } = require('../style-dictionary/utils/dts-type-literal');
+  const {
+    format: jsSurfacesFormat,
+  } = require('../style-dictionary/formats/js-surfaces');
   const dtsSource = fs.readFileSync(
     path.resolve(__dirname, '../js/generated/surfaces.d.ts'),
     'utf8'
@@ -476,8 +478,15 @@ describe('@carbon/motion — generated surfaces.d.ts keeps literal types', () =>
     }
   });
 
-  test('buildDTCGMotionSurfacesJS dts output matches the on-disk generated file shape', () => {
-    const { dts } = buildDTCGMotionSurfacesJS();
+  test('generated surfaces.d.ts contains literal type shapes', () => {
+    expect(dtsSource).toContain('kind: "reveal"');
+    expect(dtsSource).toContain('kind: "shared-element"');
+    expect(dtsSource).toContain('origin: "trigger"');
+    expect(dtsSource).not.toMatch(/kind:\s*string/);
+  });
+
+  test('js-surfaces format dts output matches the on-disk generated file shape', () => {
+    const dts = jsSurfacesFormat({ options: { output: 'dts' } });
     expect(dts).toContain('kind: "reveal"');
     expect(dts).toContain('kind: "shared-element"');
     expect(dts).toContain('origin: "trigger"');
@@ -570,17 +579,21 @@ describe('@carbon/motion — every DTCG surface generates a Sass variable', () =
     }
   });
 
-  test('every surface enterEasing pair appears in the Sass output', () => {
+  test('every surface enterEasing appears in the Sass output', () => {
     for (const { recipe } of allSurfaces) {
-      const [name, mode] = recipe.enterEasing;
-      expect(scssSource).toContain(`enter-easing: ('${name}', '${mode}')`);
+      const { name, mode } = recipe.enterEasing;
+      expect(scssSource).toContain(
+        `enter-easing: (\n      name: '${name}',\n      mode: '${mode}',\n    )`
+      );
     }
   });
 
-  test('every surface exitEasing pair appears in the Sass output', () => {
+  test('every surface exitEasing appears in the Sass output', () => {
     for (const { recipe } of allSurfaces) {
-      const [name, mode] = recipe.exitEasing;
-      expect(scssSource).toContain(`exit-easing: ('${name}', '${mode}')`);
+      const { name, mode } = recipe.exitEasing;
+      expect(scssSource).toContain(
+        `exit-easing: (\n      name: '${name}',\n      mode: '${mode}',\n    )`
+      );
     }
   });
 

@@ -11,16 +11,52 @@ import React from 'react';
 import { Grid, Column, ColumnHang, GridSettings } from '../Grid';
 import mdx from './Grid.mdx';
 
+const defaultArgs = {
+  align: 'center',
+  as: 'div',
+  condensed: false,
+  fullWidth: false,
+  narrow: false,
+  withRowGap: false,
+};
+
+const sharedArgTypes = {
+  align: {
+    control: 'radio',
+    options: ['start', 'center', 'end'],
+  },
+  as: {
+    control: 'text',
+  },
+  children: {
+    control: false,
+  },
+  className: {
+    control: false,
+  },
+  condensed: {
+    control: 'boolean',
+  },
+  fullWidth: {
+    control: 'boolean',
+  },
+  narrow: {
+    control: 'boolean',
+  },
+  withRowGap: {
+    control: 'boolean',
+  },
+};
+
 export default {
   title: 'Elements/Grid',
   component: Grid,
   subcomponents: {
     Column,
   },
+  args: defaultArgs,
+  argTypes: sharedArgTypes,
   parameters: {
-    controls: {
-      hideNoControlsWarning: true,
-    },
     docs: {
       page: mdx,
     },
@@ -49,42 +85,6 @@ export const Default = (args) => {
   );
 };
 
-Default.args = {
-  as: 'div',
-  fullWidth: false,
-  narrow: false,
-  condensed: false,
-};
-
-Default.argTypes = {
-  as: {
-    control: {
-      type: 'text',
-    },
-  },
-  children: {
-    control: false,
-  },
-  className: {
-    control: false,
-  },
-  fullWidth: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  narrow: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  condensed: {
-    control: {
-      type: 'boolean',
-    },
-  },
-};
-
 export const WithRowGap = (args) => {
   return (
     <div className="sb-css-grid-container">
@@ -104,42 +104,76 @@ export const WithRowGap = (args) => {
 
 WithRowGap.args = {
   withRowGap: true,
-  narrow: false,
-  condensed: false,
 };
 
 WithRowGap.argTypes = {
+  ...sharedArgTypes,
   withRowGap: {
-    control: {
-      type: 'boolean',
+    ...sharedArgTypes.withRowGap,
+    table: {
+      readonly: true,
     },
-    description:
-      'Add a row gap to the grid that matches the current gutter size',
   },
+};
+
+export const Narrow = (args) => {
+  return (
+    <div className="sb-css-grid-container">
+      <Grid {...args}>
+        <Column sm={4} />
+        <Column sm={4} />
+        <Column sm={4} />
+        <Column sm={4} />
+      </Grid>
+    </div>
+  );
+};
+
+Narrow.args = {
+  narrow: true,
+};
+
+Narrow.argTypes = {
+  ...sharedArgTypes,
   narrow: {
-    control: {
-      type: 'boolean',
+    ...sharedArgTypes.narrow,
+    table: {
+      readonly: true,
     },
-    description: 'Container hangs 16px into the gutter',
   },
+};
+
+export const Condensed = (args) => {
+  return (
+    <div className="sb-css-grid-container">
+      <Grid {...args}>
+        <Column sm={4} />
+        <Column sm={4} />
+        <Column sm={4} />
+        <Column sm={4} />
+      </Grid>
+    </div>
+  );
+};
+
+Condensed.args = {
+  condensed: true,
+};
+
+Condensed.argTypes = {
+  ...sharedArgTypes,
   condensed: {
-    control: {
-      type: 'boolean',
+    ...sharedArgTypes.condensed,
+    table: {
+      readonly: true,
     },
-    description: 'Collapse the gutter to 1px',
-  },
-  children: {
-    control: false,
-  },
-  className: {
-    control: false,
   },
 };
 
-export const Narrow = () => {
+export const FullWidth = (args) => {
   return (
     <div className="sb-css-grid-container">
-      <Grid narrow>
+      <Grid {...args}>
         <Column sm={4} />
         <Column sm={4} />
         <Column sm={4} />
@@ -149,36 +183,24 @@ export const Narrow = () => {
   );
 };
 
-export const Condensed = () => {
-  return (
-    <div className="sb-css-grid-container">
-      <Grid condensed>
-        <Column sm={4} />
-        <Column sm={4} />
-        <Column sm={4} />
-        <Column sm={4} />
-      </Grid>
-    </div>
-  );
+FullWidth.args = {
+  fullWidth: true,
 };
 
-export const FullWidth = () => {
-  return (
-    <div className="sb-css-grid-container">
-      <Grid fullWidth>
-        <Column sm={4} />
-        <Column sm={4} />
-        <Column sm={4} />
-        <Column sm={4} />
-      </Grid>
-    </div>
-  );
+FullWidth.argTypes = {
+  ...sharedArgTypes,
+  fullWidth: {
+    ...sharedArgTypes.fullWidth,
+    table: {
+      readonly: true,
+    },
+  },
 };
 
-export const Responsive = () => {
+export const Responsive = (args) => {
   return (
     <div className="sb-css-grid-container">
-      <Grid>
+      <Grid {...args}>
         <Column sm={2} md={4} lg={6}>
           <p>Small: Span 2 of 4</p>
           <p>Medium: Span 4 of 8</p>
@@ -209,10 +231,10 @@ export const Responsive = () => {
   );
 };
 
-export const Subgrid = () => {
+export const Subgrid = (args) => {
   return (
     <div className="sb-css-grid-container">
-      <Grid>
+      <Grid {...args}>
         <Column sm={2} md={4} lg={3}>
           <p>Small: Span 2 of 4</p>
           <p>Medium: Span 4 of 8</p>
@@ -306,7 +328,7 @@ export const Subgrid = () => {
 };
 
 export const SubgridWithRowGap = (args) => (
-  <Grid withRowGap {...args}>
+  <Grid {...args}>
     <Column sm={4} md={8} lg={16}>
       <Grid withRowGap>
         {/* Nested subgrid with row gap */}
@@ -338,39 +360,23 @@ export const SubgridWithRowGap = (args) => (
 );
 
 SubgridWithRowGap.args = {
-  fullWidth: false,
-  narrow: false,
-  condensed: false,
+  withRowGap: true,
 };
 
 SubgridWithRowGap.argTypes = {
-  children: {
-    control: false,
-  },
-  className: {
-    control: false,
-  },
-  fullWidth: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  narrow: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  condensed: {
-    control: {
-      type: 'boolean',
+  ...sharedArgTypes,
+  withRowGap: {
+    ...sharedArgTypes.withRowGap,
+    table: {
+      readonly: true,
     },
   },
 };
 
-export const MixedGutterModes = () => {
+export const MixedGutterModes = (args) => {
   return (
     <div className="sb-css-grid-container">
-      <Grid>
+      <Grid {...args}>
         <Column span={8}>
           <Grid>
             <Column span={8}>
@@ -408,7 +414,7 @@ export const MixedGutterModes = () => {
           </Grid>
         </Column>
       </Grid>
-      <Grid narrow>
+      <Grid {...args} narrow>
         <Column span={8}>
           <Grid>
             <Column span={4} />
@@ -435,10 +441,10 @@ export const MixedGutterModes = () => {
   );
 };
 
-export const GridStartEnd = () => {
+export const GridStartEnd = (args) => {
   return (
     <div className="sb-css-grid-container">
-      <Grid>
+      <Grid {...args}>
         <Column
           sm={{ span: 1, start: 4 }}
           md={{ span: 2, start: 7 }}
@@ -462,10 +468,10 @@ export const GridStartEnd = () => {
   );
 };
 
-export const Offset = () => {
+export const Offset = (args) => {
   return (
     <div className="sb-css-grid-container">
-      <Grid>
+      <Grid {...args}>
         <Column
           sm={{ span: 1, offset: 3 }}
           md={{ span: 2, offset: 6 }}
@@ -535,5 +541,14 @@ WithGridSettings.argTypes = {
   },
   narrow: {
     control: false,
+  },
+  withRowGap: {
+    control: false,
+  },
+};
+
+WithGridSettings.parameters = {
+  controls: {
+    include: ['subgrid'],
   },
 };

@@ -37,6 +37,7 @@ import { keys, match } from '../../internal/keyboard';
 import { NumberFormatOptionsPropType } from './NumberFormatPropTypes';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
+import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
 
 const translationIds = {
   'increment.number': 'increment.number',
@@ -588,7 +589,6 @@ export const validateNumberSeparators = (
   return fullRegex.test(input);
 };
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
   (props: NumberInputProps, forwardRef) => {
     const {
@@ -1127,6 +1127,8 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
   }
 );
 
+NumberInput.displayName = 'NumberInput';
+
 NumberInput.propTypes = {
   /**
    * `true` to allow empty string.
@@ -1367,15 +1369,20 @@ interface LabelProps {
 
 const Label = ({ disabled, id, hideLabel, label }: LabelProps) => {
   const prefix = usePrefix();
+  const labelRef = useRef<HTMLLabelElement>(null);
   const className = cx({
     [`${prefix}--label`]: true,
     [`${prefix}--label--disabled`]: disabled,
     [`${prefix}--visually-hidden`]: hideLabel,
   });
+  useNoInteractiveChildrenForLabel(
+    labelRef,
+    'The NumberInput component `label` prop must have no interactive content'
+  );
 
   if (label) {
     return (
-      <Text as="label" htmlFor={id} className={className}>
+      <Text as="label" htmlFor={id} className={className} ref={labelRef}>
         {label}
       </Text>
     );
