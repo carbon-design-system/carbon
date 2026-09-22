@@ -14,7 +14,7 @@ import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
-import { useArgs } from 'storybook/preview-api';
+import { useState } from 'react';
 
 export default {
   title: 'Components/Checkbox',
@@ -244,7 +244,7 @@ Horizontal.parameters = {
 };
 
 export const Single = (args) => {
-  const [{ checked }, updateArgs] = useArgs();
+  const [{ checked }, updateArgs] = useState(args);
 
   return (
     <Checkbox
@@ -273,7 +273,7 @@ Single.parameters = {
   },
 };
 
-export const Skeleton = () => <CheckboxSkeleton />;
+export const Skeleton = (args) => <CheckboxSkeleton {...args} />;
 
 Skeleton.parameters = {
   controls: {
