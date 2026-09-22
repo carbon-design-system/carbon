@@ -460,7 +460,7 @@
   .#{$prefix}--number__input-wrapper--slug .#{$prefix}--slug {
     position: absolute;
     inset-block-start: 50%;
-    inset-inline-end: calc(layout.size(height) * 2 + $spacing-05);
+    inset-inline-end: calc(layout.size('height') * 2 + $spacing-05);
     transform: translateY(-50%);
   }
 
@@ -529,7 +529,7 @@
   .#{$prefix}--number__input-wrapper--slug
     .#{$prefix}--number__control-btn::before {
     display: block;
-    inset-inline-end: calc(layout.size(height));
+    inset-inline-end: calc(layout.size('height'));
   }
 
   .#{$prefix}--number__input-wrapper--decorator
@@ -559,7 +559,7 @@
 
   .#{$prefix}--number__input-wrapper--decorator .#{$prefix}--number__invalid,
   .#{$prefix}--number__input-wrapper--slug .#{$prefix}--number__invalid {
-    inset-inline-end: calc(layout.size(height) * 2 + $spacing-10);
+    inset-inline-end: calc(layout.size('height') * 2 + $spacing-10);
   }
 
   .#{$prefix}--number__input-wrapper--decorator:has(
