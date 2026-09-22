@@ -715,9 +715,7 @@ export const DataTable = <RowType, ColTypes extends any[]>(
   const handleSelectAll = () => {
     setState((prev) => {
       const { rowsById } = prev;
-      const isSelected = !Object.values(rowsById).filter(
-        (row) => row.isSelected && !row.disabled
-      ).length;
+      const isSelected = !Object.values(rowsById).filter(isSelectedRow).length;
 
       return {
         ...prev,
