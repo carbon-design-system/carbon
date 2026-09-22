@@ -2,6 +2,22 @@ import { ArgTypes, Canvas, Story, Meta } from '@storybook/addon-docs/blocks';
 import * as FluidDatePickerStories from './FluidDatePicker.stories.js';
 import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
+export const labelToggletipDef = `const LabelToggletip = () => (
+  <span className="fluid-date-picker-story__toggletip">
+    <Toggletip align="top-left">
+      <ToggletipButton label="Show information">
+        <Information />
+      </ToggletipButton>
+      <ToggletipContent>
+        <p>Additional field information here.</p>
+      </ToggletipContent>
+    </Toggletip>
+  </span>
+);`;
+
+export const labelToggletipImport =
+  "import { Toggletip, ToggletipButton, ToggletipContent } from '@carbon/react';\nimport { Information } from '@carbon/icons-react';";
+
 <Meta isTemplate />
 
 # Fluid DatePicker
@@ -30,7 +46,13 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(FluidDatePickerStories.Simple),
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: FluidDatePickerStories.Simple,
+          customImports: [labelToggletipImport],
+          customFunctionDefs: [labelToggletipDef],
+          styles: FluidDatePickerStories.default.parameters.styles,
+        }),
     },
   ]}
 />
@@ -42,7 +64,8 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(FluidDatePickerStories.Skeleton),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: FluidDatePickerStories.Skeleton }),
     },
   ]}
 />
@@ -54,7 +77,13 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(FluidDatePickerStories.Single),
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: FluidDatePickerStories.Single,
+          customImports: [labelToggletipImport],
+          customFunctionDefs: [labelToggletipDef],
+          styles: FluidDatePickerStories.default.parameters.styles,
+        }),
     },
   ]}
 />
@@ -67,7 +96,12 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig(FluidDatePickerStories.RangeWithCalendar),
+        stackblitzPrefillConfig({
+          story: FluidDatePickerStories.RangeWithCalendar,
+          customImports: [labelToggletipImport],
+          customFunctionDefs: [labelToggletipDef],
+          styles: FluidDatePickerStories.default.parameters.styles,
+        }),
     },
   ]}
 />

@@ -33,7 +33,8 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(PaginationStories.Default),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: PaginationStories.Default }),
     },
   ]}
 />
@@ -46,7 +47,9 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig(PaginationStories.MultiplePaginationComponents),
+        stackblitzPrefillConfig({
+          story: PaginationStories.MultiplePaginationComponents,
+        }),
     },
   ]}
 />
@@ -59,7 +62,9 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig(PaginationStories.PaginationUnknownPages),
+        stackblitzPrefillConfig({
+          story: PaginationStories.PaginationUnknownPages,
+        }),
     },
   ]}
 />
@@ -72,9 +77,9 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig(
-          PaginationStories.PaginationWithCustomPageSizesLabel
-        ),
+        stackblitzPrefillConfig({
+          story: PaginationStories.PaginationWithCustomPageSizesLabel,
+        }),
     },
   ]}
 />
