@@ -13,6 +13,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/feature-flags' as flags;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/utilities/convert';
 @use '@carbon/styles/scss/components/notification/index' as *;
 @use '@carbon/styles/scss/components/button';
 @use '@carbon/styles/scss/components/button/mixins' as button-mixins;
@@ -102,6 +103,10 @@ $css--plex: true !default;
 
   .#{$prefix}--actionable-notification__content {
     flex-direction: column;
+  }
+
+  .#{$prefix}--actionable-notification__text-wrapper {
+    padding: convert.to-rem(15px) 0 convert.to-rem(23px) 0;
   }
 }
 
