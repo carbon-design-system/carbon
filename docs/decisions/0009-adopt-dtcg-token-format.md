@@ -1,4 +1,4 @@
-# 8. Adopt the DTCG token format across foundational packages
+# 9. Adopt the DTCG token format across foundational packages
 
 Date: 2026-07-30
 
@@ -92,8 +92,10 @@ The existing build pipeline in each package was updated to use
 layer, replacing the previous bespoke Node scripts. Style Dictionary reads the
 DTCG files, applies Carbon-specific transforms (e.g. `carbon/alpha-modifier`,
 `carbon.layout.miniUnits`), and emits the same Sass variables, Sass maps, and
-JavaScript/TypeScript modules that consumers already depend on. The public API
-surface of each package is unchanged.
+JavaScript/TypeScript modules that consumers already depend on. This migration
+is fully backward-compatible: it is an internal authoring and build architecture
+change with zero breaking changes, and the public API surface of each package is
+unchanged.
 
 Consistency within the unified `themes.json` is enforced via a Jest validation
 test (`dtcg-cross-theme-parity-test.js`), which asserts token naming, `$type`,
@@ -108,6 +110,10 @@ Adopting DTCG as the source format has the following effects.
 
 **Easier:**
 
+- **Zero backward-compatibility impact for end users** — Because generated
+  outputs (Sass maps/variables, JS/TS exports, CSS variables) remain bit-for-bit
+  identical, downstream consumers experience no breaking changes or migration
+  burden.
 - **AI/agent tooling readiness** — structured DTCG JSON is directly parseable by
   MCP and other agent-based consumers, without needing to execute or interpret
   JS.
