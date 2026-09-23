@@ -171,7 +171,7 @@ export default class CDSTab extends HostListenerMixin(CDSContentSwitcherItem) {
 
   connectedCallback() {
     if (!this.hasAttribute('role')) {
-      this.setAttribute('role', 'listitem');
+      this.setAttribute('role', 'presentation');
     }
     super.connectedCallback();
   }
