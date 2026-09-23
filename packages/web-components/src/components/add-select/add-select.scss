@@ -19,6 +19,7 @@ $block-class: #{$prefix}--add-select__next;
   .#{$block-class} {
     position: relative;
     display: flex;
+    overflow: hidden;
     flex-direction: column;
     block-size: 100%;
     inline-size: 100%;

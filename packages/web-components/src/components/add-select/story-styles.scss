@@ -59,6 +59,8 @@ $block-class: 'cds--add-select__next';
 
 // Summary story container
 .#{$story-prefix}-summary-container {
+  position: relative;
+  overflow: hidden;
   border: 1px dashed var(--cds-border-subtle);
   background: var(--cds-layer);
   block-size: 32rem;
