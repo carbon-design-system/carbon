@@ -12,6 +12,8 @@
  * migrated component's stories and MDX files.
  */
 export const productMigratedStoryGlobs = [
+  '../src/components/add-select/add-select.stories.ts',
+  '../src/components/add-select/*.mdx',
   '../src/components/action-set/action-set.stories.ts',
   '../src/components/action-set/*.mdx',
   '../src/components/full-page-error/full-page-error.stories.ts',
@@ -60,6 +62,7 @@ export const productMigratedStoryGlobs = [
  */
 export const excludeProductsComponents = [
   'src/components/action-set/**/*',
+  'src/components/add-select/**/*',
   'src/components/full-page-error/**/*',
   'src/components/truncated-text/**/*',
   'src/components/big-number/**/*',

@@ -1,0 +1,212 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/motion' as *;
+
+$block-class: #{$prefix}--add-select__next-row;
+
+/* Item panel open — blue left border */
+:host(#{$prefix}-add-select-row[item-panel-open]) {
+  .#{$block-class} {
+    border-inline-start-color: $interactive;
+  }
+}
+
+:host(#{$prefix}-add-select-row) {
+  display: block;
+
+  .#{$block-class} {
+    display: flex;
+    border-inline-start: 0.125rem solid transparent;
+    transition: background-color $duration-fast-01 motion(standard, productive);
+
+    &:focus {
+      outline: 2px solid $focus;
+      outline-offset: -2px;
+    }
+
+    // Only show focus outline when navigating via keyboard, not mouse clicks
+    &:focus:not(:focus-visible) {
+      outline: none;
+    }
+
+    &--selected {
+      background-color: $layer-selected-01;
+    }
+  }
+
+  .#{$block-class} {
+    &--disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    &:hover:not(&--disabled) {
+      background: $layer-hover-01;
+
+      .#{$block-class}__title {
+        color: $link-primary;
+      }
+
+      .#{$block-class}__view-item-panel svg,
+      .#{$block-class}__nav-indicator svg {
+        fill: $icon-disabled;
+      }
+    }
+
+    // Must come after &:hover to win the specificity tie
+    &--selected:hover:not(&--disabled) {
+      background: $layer-selected-hover-01;
+
+      .#{$block-class}__title {
+        color: $text-primary;
+      }
+
+      .#{$block-class}__view-item-panel svg,
+      .#{$block-class}__nav-indicator svg {
+        fill: $icon-primary;
+      }
+    }
+  }
+
+  .#{$block-class}__cell {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .#{$block-class}__cell-wrapper {
+    display: flex;
+    /* Shadow DOM doesn't inherit Carbon's global border-box reset */
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: space-between;
+    border-block-end: 1px solid $layer-accent-01;
+    min-block-size: $spacing-09;
+    padding-block: $spacing-03;
+    padding-inline: $spacing-05;
+  }
+
+  .#{$block-class}__content {
+    display: flex;
+    flex: 1;
+    align-items: center;
+  }
+
+  .#{$block-class}__icon {
+    display: flex;
+    align-items: center;
+    margin-inline-end: $spacing-03;
+  }
+
+  .#{$block-class}__text {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+
+  .#{$block-class}__title {
+    @include type.type-style('body-compact-01');
+
+    display: block;
+    color: $text-primary;
+  }
+
+  .#{$block-class}__subtitle {
+    @include type.type-style('label-01');
+
+    display: block;
+    color: $text-secondary;
+  }
+
+  .#{$block-class}__meta {
+    display: flex;
+    align-items: center;
+    margin-inline-start: $spacing-03;
+  }
+
+  .#{$block-class}__view-item-panel {
+    margin-inline-start: auto;
+  }
+
+  .#{$block-class}__nav-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-inline-start: $spacing-03;
+    padding-block: $spacing-02;
+    padding-inline: $spacing-02;
+    transition: background-color $duration-fast-01 motion(standard, productive);
+
+    &:hover {
+      background-color: $background-hover;
+    }
+
+    &:focus {
+      outline: $spacing-01 solid $focus;
+      outline-offset: calc(-1 * $spacing-01);
+    }
+
+    svg {
+      fill: $icon-primary;
+    }
+  }
+
+  // Skeleton state
+  .#{$block-class}--skeleton {
+    cursor: default;
+    pointer-events: none;
+
+    &:hover {
+      background: none;
+    }
+
+    .#{$block-class}__skeleton-control {
+      flex: none;
+      border-radius: $spacing-01;
+      background-color: $skeleton-element;
+      block-size: $spacing-05;
+      inline-size: $spacing-05;
+      margin-inline-end: $spacing-05;
+    }
+
+    // Override cds-skeleton-icon host size to match the circular icon placeholder
+    .#{$block-class}__icon cds-skeleton-icon {
+      border-radius: 50%;
+      block-size: $spacing-07;
+      inline-size: $spacing-07;
+
+      &::before {
+        border-radius: 50%;
+        animation: none;
+      }
+    }
+
+    .#{$block-class}__skeleton-title {
+      margin-block-end: 0;
+      margin-block-start: $spacing-03;
+    }
+  }
+
+  @media screen and (prefers-reduced-motion: reduce) {
+    .#{$block-class} {
+      transition: none;
+    }
+
+    .#{$block-class}__nav-indicator {
+      transition: none;
+    }
+  }
+}

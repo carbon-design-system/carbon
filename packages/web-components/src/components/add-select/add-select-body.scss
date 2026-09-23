@@ -1,0 +1,97 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+
+$block-class: #{$prefix}--add-select__next;
+
+:host(#{$prefix}-add-select-body) {
+  display: block;
+  block-size: 100%;
+
+  .#{$block-class}__body {
+    display: flex;
+    flex-direction: column;
+    block-size: 100%;
+    inline-size: 100%;
+  }
+
+  .#{$block-class}__header {
+    padding: $spacing-05;
+    border-block-end: 1px solid $border-subtle-01;
+  }
+
+  // When consumer provides a custom header via slot="header",
+  // hide the default search/sub-header content.
+  .#{$block-class}__header--custom {
+    .#{$block-class}__search,
+    .#{$block-class}__sub-header {
+      display: none;
+    }
+  }
+
+  // Search row: input + actions side by side (matches __search--with-actions)
+  .#{$block-class}__search--with-actions {
+    display: flex;
+    align-items: flex-end;
+    margin-block-end: $spacing-05;
+  }
+
+  .#{$block-class}__search-input {
+    flex: 1;
+  }
+
+  .#{$block-class}__global-actions {
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .#{$block-class}__sub-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .#{$block-class}__tags {
+    display: flex;
+    align-items: center;
+    gap: $spacing-03;
+  }
+
+  .#{$block-class}__tags-label {
+    @include type.type-style('heading-compact-02');
+
+    margin: 0;
+    color: $text-primary;
+  }
+
+  .#{$block-class}__sub-header-actions {
+    display: flex;
+    align-items: center;
+    gap: $spacing-03;
+    margin-inline-start: $spacing-05;
+  }
+
+  .#{$block-class}__content {
+    overflow: auto;
+    flex: 1;
+  }
+
+  .#{$block-class}-list-body {
+    display: flex;
+    flex-direction: column;
+
+    &--horizontal {
+      flex-direction: row;
+    }
+  }
+}

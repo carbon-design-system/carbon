@@ -1,0 +1,84 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+
+$block-class: #{$prefix}--add-select__next;
+
+:host(#{$prefix}-add-select-column) {
+  display: block;
+
+  .#{$block-class}-column {
+    display: flex;
+    flex-direction: column;
+    block-size: 100%;
+    border-inline-end: 1px solid $border-subtle-01;
+    min-inline-size: 300px;
+    padding-block: $spacing-05;
+    padding-inline: $spacing-05;
+  }
+
+  .#{$block-class}-column__search {
+    padding: 0;
+
+    &--with-actions {
+      display: flex;
+      align-items: flex-end;
+    }
+  }
+
+  .#{$block-class}-column__search-input {
+    flex: 1;
+  }
+
+  .#{$block-class}-column__actions {
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .#{$block-class}-column__header {
+    display: flex;
+    align-items: center;
+    padding: $spacing-05;
+    border-block-end: 1px solid $border-subtle-01;
+  }
+
+  .#{$block-class}-column__title-wrapper {
+    display: flex;
+    align-items: center;
+    gap: $spacing-03;
+  }
+
+  .#{$block-class}-column__title {
+    @include type.type-style('heading-compact-01');
+
+    margin-inline-end: $spacing-03;
+  }
+
+  // Select all: align slotted title + tag inside the checkbox label
+  .#{$block-class}-column__select-all {
+    &::part(label) {
+      display: flex;
+      align-items: center;
+      gap: $spacing-03;
+    }
+  }
+
+  .#{$block-class}-column__rows {
+    overflow: auto;
+    flex: 1;
+
+    @supports (overflow-block: auto) {
+      overflow-block: auto;
+    }
+  }
+}
