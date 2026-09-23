@@ -46,7 +46,7 @@ use optional decorative icons to delineate between multiple categories.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TagStories.ReadOnly),
+      onClick: () => stackblitzPrefillConfig({ story: TagStories.ReadOnly }),
     },
   ]}
 />
@@ -65,7 +65,8 @@ When to use:
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(InteractiveTagStories.Dismissible),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: InteractiveTagStories.Dismissible }),
     },
   ]}
 />
@@ -146,7 +147,8 @@ When to use:
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(InteractiveTagStories.Selectable),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: InteractiveTagStories.Selectable }),
     },
   ]}
 />
@@ -228,7 +230,8 @@ When not to use:
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(InteractiveTagStories.Operational),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: InteractiveTagStories.Operational }),
     },
   ]}
 />
@@ -244,7 +247,7 @@ when AI is present in the component.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TagStories.withAILabel),
+      onClick: () => stackblitzPrefillConfig({ story: TagStories.withAILabel }),
     },
   ]}
 />
@@ -256,7 +259,7 @@ when AI is present in the component.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TagStories.Skeleton),
+      onClick: () => stackblitzPrefillConfig({ story: TagStories.Skeleton }),
     },
   ]}
 />
