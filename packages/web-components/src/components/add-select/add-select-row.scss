@@ -98,6 +98,16 @@ $block-class: #{$prefix}--add-select__next-row;
     padding-inline: $spacing-05;
   }
 
+  .#{$block-class}__checkbox {
+    flex: none;
+    align-self: center;
+    margin-inline-end: $spacing-05;
+  }
+
+  .#{$block-class}__radio {
+    align-self: center;
+  }
+
   .#{$block-class}__content {
     display: flex;
     flex: 1;
