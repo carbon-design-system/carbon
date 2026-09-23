@@ -1,0 +1,415 @@
+import { ArgTypes, Markdown, Meta, Canvas } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as TearsheetStories from './tearsheet.stories';
+
+<Meta of={TearsheetStories} />
+
+{/* <!-- prettier-ignore-start --> */}
+
+<Unstyled style={{ marginBottom: '1.5rem' }}>
+  <cds-inline-notification
+    kind="info"
+    title="Migrated component:"
+    subtitle="This component has been migrated from Carbon for IBM Products. While visible in the v12 Storybook, migrated components are not available in the published v11 package and enabling enable-v12-release does not expose them — they will be part of the public @carbon/web-components API when v12 ships."
+  />
+</Unstyled>
+
+{/* <!-- prettier-ignore-end --> */}
+
+# Tearsheet (New Composable)
+
+> 💡 This is the new composable tearsheet component with enhanced features
+> including stacking support, collapsible headers, responsive and improved
+> composability.
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/components/tearsheet/usage/)
+
+## Overview
+
+A tearsheet is a mostly full-screen type of dialog that keeps users in-context
+and focused by bringing actionable content front and center while revealing
+parts of the UI behind it. There is also a narrow variant of the tearsheet.
+
+A tearsheet is composed of up to five zones, providing flexibility based on the
+content: a heading area, an optional navigation area positioned just below the
+heading, an optional influencer area on the left, a main content area, an
+optional summary details area on the right, and a footer section.
+
+The implementation is designed to deliver a composable tearsheet that’s both
+feature-rich and highly customizable. In web components this is achieved through
+a slot-based composition model with distinct sections.
+
+By default, the tearsheet is controlled through the `open` attribute on
+`cds-tearsheet`.
+
+The next-generation tearsheet uses a slot-based composition model with the
+following sub-components:
+
+- **`cds-tearsheet`** - Main container
+- **`cds-tearsheet-header`** - Header section
+- **`cds-tearsheet-header-content`** - Header content area
+- **`cds-tearsheet-navigation-bar`** - Rendered at the bottom of the header and
+  can render tabs
+- **`cds-tearsheet-scroller`** - Can be used inside the navigation bar as a
+  trigger to collapse or expand the header
+- **`cds-tearsheet-body`** - Main content area
+- **`cds-tearsheet-influencer`** - Left-side panel for contextual content
+- **`cds-tearsheet-footer`** - Footer with actions
+
+## Available Slots
+
+### Main Tearsheet (`cds-tearsheet`)
+
+| Slot         | Component                  | Description                           |
+| ------------ | -------------------------- | ------------------------------------- |
+| `header`     | `cds-tearsheet-header`     | Header section with title and actions |
+| `influencer` | `cds-tearsheet-influencer` | Left-side panel for contextual info   |
+| `body`       | `cds-tearsheet-body`       | Main content area                     |
+| `footer`     | `cds-tearsheet-footer`     | Footer with action buttons            |
+
+### Header (`cds-tearsheet-header`)
+
+| Slot                | Component                      | Description                              |
+| ------------------- | ------------------------------ | ---------------------------------------- |
+| `header-content`    | `cds-tearsheet-header-content` | Main header content (title, description) |
+| `header-navigation` | Any                            | Navigation tabs or breadcrumbs           |
+| `header-actions`    | `cds-button`                   | Action buttons (e.g., settings, delete)  |
+| `decorator`         | `cds-ai-label`                 | AI label or decorative elements          |
+
+### Header Content (`cds-tearsheet-header-content`)
+
+| Slot          | Component      | Description                        |
+| ------------- | -------------- | ---------------------------------- |
+| `label`       | Any            | Optional label text above title    |
+| `title-start` | Any            | Content before title (e.g., icons) |
+| `title-end`   | Any            | Content after title (e.g., badges) |
+| `description` | Any            | Custom description content         |
+| `decorator`   | `cds-ai-label` | AI label or decorative elements    |
+
+### Body (`cds-tearsheet-body`)
+
+| Slot              | Component                       | Description                  |
+| ----------------- | ------------------------------- | ---------------------------- |
+| `main-content`    | Any                             | Primary content area         |
+| `summary-content` | `cds-tearsheet-summary-content` | Right-side panel for summary |
+
+## Key Features
+
+- **Scalable & Composable**: Built with composable subcomponents that can be
+  easily extended and customized for different use cases
+- **Collapsible Header**: Smart header that automatically collapses on scroll to
+  maximize content space and can be disabled via the `disable-header-collapse`
+  attribute on `cds-tearsheet-header`
+- **Better Developer Experience**: Clear component boundaries through named
+  slots and dedicated subcomponents
+- **Responsive Layout**: Influencer and summary content can move into side
+  panels on small screens and narrow tearsheets
+- **Stacking Support**: Multiple tearsheets can stack when wrapped in
+  `cds-tearsheet-stack`
+
+## Getting Started
+
+### JS (via import)
+
+```javascript
+import '@carbon/web-components/es/components/tearsheet/index.js';
+// Import Carbon components for content
+import '@carbon/web-components/es/components/text-input/index.js';
+import '@carbon/web-components/es/components/textarea/index.js';
+import '@carbon/web-components/es/components/button/index.js';
+```
+
+## Migration from Legacy Tearsheet
+
+**Before (Legacy):**
+
+```html
+<cds-tearsheet open label="Create resource" description="Configure settings">
+  <div>Content</div>
+</cds-tearsheet>
+```
+
+**After (Next Gen):**
+
+```html
+<cds-tearsheet open>
+  <cds-tearsheet-header slot="header">
+    <cds-tearsheet-header-content slot="header-content" title="Create resource">
+      <div slot="description">Configure settings</div>
+    </cds-tearsheet-header-content>
+  </cds-tearsheet-header>
+
+  <cds-tearsheet-body slot="body">
+    <div slot="main-content">Content</div>
+  </cds-tearsheet-body>
+</cds-tearsheet>
+```
+
+### Basic Example
+
+```html
+<cds-tearsheet open>
+  <cds-tearsheet-header slot="header">
+    <cds-tearsheet-header-content slot="header-content" title="Create resource">
+      <div slot="description">description</div>
+    </cds-tearsheet-header-content>
+  </cds-tearsheet-header>
+
+  <cds-tearsheet-body slot="body">
+    <div slot="main-content">
+      <cds-text-input label="Resource name"></cds-text-input>
+      <cds-textarea label="Description"></cds-textarea>
+    </div>
+  </cds-tearsheet-body>
+
+  <cds-tearsheet-footer slot="footer">
+    <cds-button kind="secondary">Cancel</cds-button>
+    <cds-button kind="primary">Create</cds-button>
+  </cds-tearsheet-footer>
+</cds-tearsheet>
+```
+
+## With Influencer and Summary Content
+
+```html
+<cds-tearsheet open variant="wide">
+  <cds-tearsheet-header slot="header">
+    <cds-tearsheet-header-content
+      slot="header-content"
+      title="Resource details">
+    </cds-tearsheet-header-content>
+  </cds-tearsheet-header>
+  <!-- Left panel -->
+  <cds-tearsheet-influencer slot="influencer">
+    <h6>Quick info</h6>
+    <p>Additional context here</p>
+  </cds-tearsheet-influencer>
+  <cds-tearsheet-body slot="body">
+    <!-- Main content -->
+    <div slot="main-content">
+      <h5>Main content area</h5>
+      <!-- Your content -->
+    </div>
+
+    <!-- Right panel -->
+    <cds-tearsheet-summary-content slot="summary-content">
+      <h6>Summary</h6>
+      <p>Key details</p>
+    </cds-tearsheet-summary-content>
+  </cds-tearsheet-body>
+
+  <cds-tearsheet-footer slot="footer">
+    <cds-button slot="actions">Save</cds-button>
+  </cds-tearsheet-footer>
+</cds-tearsheet>
+```
+
+## Stacking Tearsheets
+
+To enable stacking for multiple tearsheets, wrap them in a
+`<cds-tearsheet-stack>` component. This opt-in approach provides better
+performance and explicit control over which tearsheets participate in stacking.
+The `stack-step-size` attribute controls the visual offset between stacked
+tearsheets (`sm`, `md`, or `lg`).
+
+```html
+<cds-tearsheet-stack stack-step-size="lg">
+  <!-- First tearsheet -->
+  <cds-tearsheet id="tearsheet-1" open>
+    <cds-tearsheet-header slot="header">
+      <cds-button slot="header-actions"> Open details </cds-button>
+    </cds-tearsheet-header>
+    <!-- ... -->
+  </cds-tearsheet>
+
+  <!-- Second tearsheet - will stack on top -->
+  <cds-tearsheet id="tearsheet-2" open>
+    <!-- ... -->
+  </cds-tearsheet>
+</cds-tearsheet-stack>
+```
+
+## With AI Label Decorator
+
+```html
+<cds-tearsheet-header-content slot="header-content" title="AI-powered analysis">
+  <cds-ai-label slot="decorator" size="xs">
+    <div slot="body-text">
+      <p>AI Explained</p>
+      <h1>84%</h1>
+      <p>Confidence score</p>
+    </div>
+  </cds-ai-label>
+</cds-tearsheet-header-content>
+```
+
+## Collapsible Header
+
+The header automatically collapses when scrolling in the main content area. To
+disable this behavior:
+
+```html
+<cds-tearsheet-header slot="header" disable-header-collapse>
+  <!-- Header will not collapse on scroll -->
+</cds-tearsheet-header>
+```
+
+## Custom Widths
+
+```html
+<cds-tearsheet
+  influencer-width="320px"
+  summary-content-width="280px"
+  vertical-gap="4rem">
+</cds-tearsheet>
+```
+
+## Footer Actions
+
+The `cds-tearsheet-footer` component supports two approaches for rendering
+action buttons:
+
+**Using the `.actions` property (recommended):**
+
+```html
+<cds-tearsheet-footer
+  slot="footer"
+  .actions="${[
+    {
+      kind: 'ghost',
+      label: 'Cancel',
+      onClick: () => setOpen(false),
+    },
+    {
+      kind: 'secondary',
+      label: 'Back',
+    },
+    {
+      kind: 'primary',
+      label: 'Submit',
+    },
+  ]}">
+</cds-tearsheet-footer>
+```
+
+**Using custom buttons:**
+
+```html
+<cds-tearsheet-footer slot="footer">
+  <cds-button kind="ghost">Cancel</cds-button>
+  <cds-button kind="secondary">Back</cds-button>
+  <cds-button kind="primary">Submit</cds-button>
+</cds-tearsheet-footer>
+```
+
+The `.actions` property automatically handles button sizing based on the
+tearsheet variant and screen size, while custom buttons give you full control
+over the footer layout.
+
+## Example Usage
+
+### Default
+
+<Canvas of={TearsheetStories.Default}></Canvas>
+
+### With Influencer
+
+<Canvas of={TearsheetStories.WithInfluencer}></Canvas>
+
+### With Tabs
+
+<Canvas of={TearsheetStories.WithTabs}></Canvas>
+
+### Narrow Tearsheet
+
+<Canvas of={TearsheetStories.narrowTearsheet}></Canvas>
+
+### With Custom Footer Actions
+
+<Canvas of={TearsheetStories.WithCustomFooterActions}></Canvas>
+
+### With Steps
+
+<Canvas of={TearsheetStories.withSteps}></Canvas>
+
+### With Steps and Horizontal Progress Indicator
+
+<Canvas of={TearsheetStories.withStepsAndHorizontalProgressIndicator}></Canvas>
+
+### Stacking Tearsheets
+
+<Canvas of={TearsheetStories.StackingTearsheets}></Canvas>
+
+### Stacking Narrow Tearsheets
+
+<Canvas of={TearsheetStories.StackingNarrowTearsheets}></Canvas>
+
+### Stacking With Different Sizes
+
+<Canvas of={TearsheetStories.StackingWithDifferentSizes}></Canvas>
+
+## Component API
+
+### `<cds-tearsheet>` attributes and properties
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<cds-tearsheet open>`) and `false` means not setting the attribute.
+
+<ArgTypes of="cds-tearsheet" />
+
+### `<cds-tearsheet-header>` attributes and properties
+
+<ArgTypes of="cds-tearsheet-header" />
+
+### `<cds-tearsheet-header-content>` attributes and properties
+
+<ArgTypes of="cds-tearsheet-header-content" />
+
+## Events
+
+| Event                       | Detail                     | Description                   |
+| --------------------------- | -------------------------- | ----------------------------- |
+| `cds-tearsheet-beingclosed` | `{ triggeredBy: Element }` | Fired before tearsheet closes |
+| `cds-tearsheet-closed`      | `{ triggeredBy: Element }` | Fired after tearsheet closes  |
+
+## Slots Reference
+
+### Main Tearsheet Slots
+
+| Slot         | Description                                      |
+| ------------ | ------------------------------------------------ |
+| `header`     | Header section (use `cds-tearsheet-header`)      |
+| `influencer` | Left-side panel (use `cds-tearsheet-influencer`) |
+| `body`       | Main content area (use `cds-tearsheet-body`)     |
+| `footer`     | Footer with actions (use `cds-tearsheet-footer`) |
+
+### Header Slots
+
+| Slot                | Description                                              |
+| ------------------- | -------------------------------------------------------- |
+| `header-content`    | Header content area (use `cds-tearsheet-header-content`) |
+| `header-navigation` | Navigation tabs or breadcrumbs                           |
+| `header-actions`    | Action buttons in header                                 |
+
+### Header Content Slots
+
+| Slot          | Description                           |
+| ------------- | ------------------------------------- |
+| `label`       | Optional label text above title       |
+| `title-start` | Content before title (e.g., icons)    |
+| `title-end`   | Content after title (e.g., badges)    |
+| `description` | Custom description content            |
+| `decorator`   | AI label or other decorative elements |
+
+### Body Slots
+
+| Slot              | Description                                            |
+| ----------------- | ------------------------------------------------------ |
+| `main-content`    | Primary content area                                   |
+| `summary-content` | Right-side panel (use `cds-tearsheet-summary-content`) |
+
+### Footer Slots
+
+| Slot      | Description                               |
+| --------- | ----------------------------------------- |
+| `actions` | Action buttons (typically Cancel, Submit) |

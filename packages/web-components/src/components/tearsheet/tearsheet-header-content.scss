@@ -1,0 +1,254 @@
+/**
+ * @license
+ *
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/layout/scss/convert';
+@use './tearsheet.scss' as *;
+
+$block-class: #{$prefix}--tearsheet;
+$motion-duration: $duration-moderate-02;
+
+.#{$block-class}__header-title {
+  margin-block-start: 0;
+}
+
+// Narrow variant styles
+:host-context(#{$prefix}-tearsheet[variant='narrow']) {
+  display: flex;
+  flex-direction: column;
+
+  .#{$block-class}__header-title {
+    @include type.type-style('heading-03');
+  }
+
+  .#{$block-class}__header-actions {
+    justify-content: flex-start;
+    margin-inline-end: 0;
+  }
+}
+
+// Hide header actions when collapsed in narrow variant
+:host-context(#{$prefix}-tearsheet[variant='narrow']) {
+  &:host-context(#{$prefix}-tearsheet-header[collapsed]) {
+    .#{$block-class}__header-actions {
+      display: none;
+    }
+    .#{$block-class}__header-content {
+      align-self: flex-start;
+    }
+  }
+  .#{$block-class}__title-start {
+    align-items: center;
+
+    ::slotted(*) {
+      block-size: $spacing-06;
+      inline-size: $spacing-06;
+    }
+  }
+}
+
+:host {
+  // Grid hosts header-content (col 1) and header-actions (col 2).
+  // Decorator and close button are absolutely positioned top-right,
+  // placed early in DOM order for correct keyboard tab sequence.
+  // full width — close/decorator are abs-positioned, no offset needed
+  display: grid;
+  flex-basis: unset;
+  gap: $spacing-05;
+  grid-template-columns: minmax(auto, 40rem) minmax(
+      var(--tearsheet-header-title-grid-width, 0),
+      1fr
+    );
+  inline-size: 100%;
+
+  .#{$block-class}__header-actions,
+  .#{$block-class}__header-content
+    *:not(
+      .#{$block-class}__content__title-wrapper,
+      .#{$block-class}__header-label
+    ) {
+    opacity: 1;
+    transition:
+      all $motion-duration motion(entrance, expressive),
+      opacity $motion-duration motion(entrance, expressive);
+  }
+
+  @include breakpoint-down(md) {
+    display: flex;
+    flex-direction: column;
+
+    .#{$block-class}__header-actions {
+      justify-content: flex-start;
+      margin-inline-end: 0;
+    }
+  }
+}
+
+// ── Decorator (AI label) ─────────────────────────────────────────
+// DOM position: 2nd (after header-actions, before close, before header-content)
+// Visual position: absolute top-right (matches React TearsheetNext)
+.#{$block-class}__decorator {
+  position: absolute;
+  z-index: 1;
+  inset-block-start: convert.to-rem(10px);
+  inset-inline-end: $spacing-09;
+  // Transition on base state so it animates in both directions (expand + collapse)
+  transition: inset-block-start $motion-duration motion(entrance, expressive);
+
+  // When header is collapsed, shift slightly down — matches React
+  :host-context(#{$prefix}-tearsheet-header[collapsed]) & {
+    inset-block-start: $spacing-03;
+  }
+}
+
+// ── Close button ─────────────────────────────────────────────────
+// DOM position: 3rd (after decorator, before header-content)
+// Visual position: absolute top-right corner — stays absolute on ALL screen sizes
+.#{$block-class}__close-button {
+  position: absolute;
+  z-index: 1;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+
+  // Animate size change (lg → md on collapse) — matches React
+  .#{$prefix}--modal-close {
+    transition: all $motion-duration ease;
+  }
+}
+
+.#{$block-class}__header-actions {
+  display: flex;
+  justify-content: flex-end;
+  order: 2; /* Visual order: appears on the right on desktop */
+  margin-block-start: -14px;
+
+  @include breakpoint-down(md) {
+    order: 0; /* Reset to DOM order on mobile (header-actions first) */
+  }
+}
+
+.#{$block-class}__header-content {
+  order: 1; /* Visual order: appears on the left on desktop */
+
+  @include breakpoint-down(md) {
+    order: 0; /* Reset to DOM order on mobile (header-content second) */
+  }
+}
+
+// ──────────────────────────────────────────────────────────────
+// Collapsed Header State
+// ──────────────────────────────────────────────────────────────
+:host-context(#{$prefix}-tearsheet-header[collapsed]) {
+  // Collapse header actions except the main action button
+  .#{$block-class}__header-actions
+    > *:not(.#{$block-class}__content__header-actions) {
+    @include collapsed-element;
+  }
+
+  // Collapse all header content except title wrapper
+  .#{$block-class}__header-content
+    > *:not(.#{$block-class}__content__title-wrapper) {
+    @include collapsed-element;
+  }
+
+  // Collapse nested elements within non-title elements
+  .#{$block-class}__header-content
+    > *:not(.#{$block-class}__content__title-wrapper)
+    * {
+    @include collapsed-element;
+  }
+
+  // Header title styling when collapsed
+  .#{$block-class}__header-title {
+    @include type.type-style('label-02');
+
+    align-items: center;
+    // Fixed block-size keeps the title row at the same height as the close button
+    block-size: $spacing-08;
+    // Gap between title-start icon and title text when collapsed
+    gap: $spacing-03;
+    margin-block-start: $spacing-02;
+    transition: all $motion-duration motion(entrance, expressive);
+
+    > span {
+      display: flex;
+      align-items: center;
+      block-size: $spacing-06;
+    }
+  }
+
+  // Header content alignment
+  .#{$block-class}__header-content {
+    align-self: center;
+    margin-block-end: 0;
+
+    @include breakpoint-down(md) {
+      align-self: stretch;
+    }
+  }
+
+  // Hide header actions on small screens when collapsed
+  // Normalize visible elements
+  .#{$block-class}__header-content,
+  .#{$block-class}__content__title-wrapper,
+  .#{$block-class}__header-title {
+    margin-block: 0;
+    transition: margin-block $motion-duration ease;
+  }
+
+  @include breakpoint-down(md) {
+    .#{$block-class}__header-actions {
+      display: none;
+    }
+  }
+
+  @include breakpoint(md) {
+    .#{$block-class}__header-actions {
+      display: flex;
+      align-items: center;
+      margin-block: 0;
+      transition: margin-block $motion-duration ease;
+    }
+  }
+  // Header actions adjustment — removed negative offset that caused misalignment
+  // Style for title-start slot content (like icons)
+  .#{$block-class}__title-start {
+    display: inline-flex;
+    align-items: center;
+
+    ::slotted(*) {
+      block-size: $spacing-05;
+      inline-size: $spacing-05;
+    }
+  }
+}
+.#{$block-class}__title-start {
+  @media screen and (prefers-reduced-motion: reduce) {
+    ::slotted(*) {
+      transition: none;
+    }
+  }
+
+  ::slotted(*) {
+    transition: all $motion-duration motion(entrance, expressive);
+  }
+}
+
+// Hide header content elements immediately when tearsheet is closing
+:host-context(#{$prefix}-tearsheet:not([open])) {
+  .#{$block-class}__header-actions,
+  .#{$block-class}__header-content,
+  .#{$block-class}__header-content * {
+    opacity: 0;
+    transition: opacity 0.1s ease-out;
+  }
+}

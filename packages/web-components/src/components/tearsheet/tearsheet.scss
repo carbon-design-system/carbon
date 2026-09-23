@@ -1,0 +1,278 @@
+/**
+ * @license
+ *
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/utilities';
+@use '@carbon/styles/scss/utilities/ai-gradient' as *;
+@use '@carbon/styles/scss/utilities/focus-outline';
+@use '@carbon/styles/scss/config' as *;
+
+@use '@carbon/styles/scss/components/Tearsheet';
+
+$block-class: #{$prefix}--tearsheet;
+$motion-duration: $duration-moderate-02;
+
+@mixin collapsed-element {
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  max-block-size: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: all $motion-duration motion(entrance, expressive);
+}
+.#{$block-class}--has-ai-label::part(dialog) {
+  border: 1px solid transparent !important; /* stylelint-disable-line declaration-no-important */
+
+  /* override carbon ai removing background gradient */
+  background:
+    linear-gradient(to top, var(--cds-layer), var(--cds-layer)) padding-box,
+    linear-gradient(
+        to bottom,
+        var(--cds-ai-border-start, #78a9ff),
+        var(--cds-ai-border-end, #d0e2ff)
+      )
+      border-box,
+    linear-gradient(to top, var(--cds-layer), var(--cds-layer)) border-box;
+  border-block-end: 0;
+  box-shadow: 0 4px 10px 2px $ai-drop-shadow;
+}
+
+.#{$block-class}__main-content {
+  position: relative;
+
+  &.#{$block-class}__flush {
+    padding-inline: 0;
+  }
+
+  &.#{$block-class}__main-content--no-summary {
+    grid-column: 1 / -1;
+  }
+
+  &.#{$block-class}__main-content--has-ai-label {
+    @include ai-popover-gradient('default', 0, 'background');
+
+    box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow;
+  }
+}
+
+:host ::slotted([slot='summary-content']) {
+  @extend .#{$block-class}__summary-content !optional;
+}
+
+:host ::slotted([slot='summary-content']:focus) {
+  @include focus-outline.focus-outline('outline');
+}
+
+:host ::slotted([slot='summary-content'][is-flush]) {
+  padding-inline: 0;
+}
+:host(#{$prefix}-tearsheet) {
+  @media screen and (prefers-reduced-motion: reduce) {
+    ::part(dialog) {
+      align-self: flex-end;
+      border: 1px solid $border-subtle-01;
+      block-size: 100%;
+      inset-block-start: auto;
+      max-block-size: calc(
+        100% - var(
+            --tearsheet-vertical-gap,
+            calc(#{$spacing-11} + #{$spacing-03} + #{$spacing-01})
+          )
+      );
+      transform: translate3d(0, min(95vh, 500px), 0);
+      transition: none;
+    }
+  }
+
+  ::part(dialog) {
+    align-self: flex-end;
+    border: 1px solid $border-subtle-01;
+    block-size: 100%;
+    inset-block-start: auto;
+    max-block-size: calc(
+      100% - var(
+          --tearsheet-vertical-gap,
+          calc(#{$spacing-11} + #{$spacing-03} + #{$spacing-01})
+        )
+    );
+    transform: translate3d(0, min(95vh, 500px), 0);
+    transition:
+      transform $motion-duration motion(entrance, expressive),
+      max-block-size $motion-duration motion(entrance, expressive);
+  }
+
+  ::slotted([slot='influencer']) {
+    @extend .#{$block-class}__influencer !optional;
+  }
+
+  ::slotted([slot='influencer'][is-flush]) {
+    padding-inline: 0;
+  }
+
+  ::slotted([slot='body']) {
+    @extend .#{$block-class}__body !optional;
+  }
+
+  ::slotted([slot='footer']) {
+    @extend .#{$block-class}__footer !optional;
+  }
+}
+:host(#{$prefix}-tearsheet[open]) {
+  ::part(dialog) {
+    transform: translate3d(0, 0, 0);
+    transition: transform $duration-moderate-02 motion(entrance, expressive);
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+}
+
+// This will set full screen height for tearsheets in mobile devices
+:host(:not(.#{$block-class}--stack-activated.is-visible)) {
+  ::part(dialog) {
+    @include breakpoint-down(md) {
+      max-block-size: none;
+    }
+  }
+}
+
+// Stacking styles
+:host(#{$prefix}-tearsheet.#{$block-class}--stack-activated.is-visible) {
+  --overlay-color: #{$overlay};
+  --overlay-alpha: 0.5;
+
+  &::before {
+    position: fixed;
+    z-index: calc(#{utilities.z('modal')} - var(--stack-depth, 0));
+    display: block;
+    background: var(--overlay-color);
+    content: '';
+    inset: 0;
+    opacity: calc(var(--overlay-alpha) - var(--stack-depth) * 0.1);
+    pointer-events: none;
+
+    transition:
+      background-color $motion-duration motion(exit, expressive),
+      opacity $motion-duration motion(exit, expressive);
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  #{$prefix}-modal {
+    background-color: transparent;
+  }
+
+  ::part(dialog) {
+    max-block-size: calc(
+      100% - var(
+          --tearsheet-vertical-gap,
+          calc(#{$spacing-11} + #{$spacing-03} + #{$spacing-01})
+        ) + var(--block-size-change)
+    );
+    transform: scaleX(var(--scale-factor));
+  }
+}
+
+// ──────────────────────────────────────────────────────────────
+// Narrow variant styles
+// ──────────────────────────────────────────────────────────────
+// ── Narrow container sizing ───────────────────────────────────
+// Carbon's dialog defaults to full-width on small screens and ~480 px on
+// larger ones, but its breakpoint (~672 px) is too wide for a narrow
+// tearsheet.  Pin it to exactly 480 px; below 480 px fill the viewport.
+:host(#{$prefix}-tearsheet[variant='narrow']) {
+  ::part(dialog) {
+    inline-size: 480px;
+    max-inline-size: 480px;
+
+    @media (width <= 480px) {
+      inline-size: 100%;
+      max-inline-size: 100%;
+    }
+  }
+
+  .#{$block-class}__header {
+    padding-inline: $spacing-05;
+  }
+
+  .#{$block-class}__header.#{$block-class}__header-collapsed {
+    .#{$block-class}__header-actions {
+      display: none;
+    }
+  }
+
+  .#{$block-class}__header-content-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .#{$block-class}__header-title {
+    @include type.type-style('heading-03');
+  }
+
+  .#{$block-class}__content__header-actions {
+    justify-content: flex-start;
+    margin-inline-end: 0;
+  }
+
+  .#{$block-class}__body {
+    grid-template-columns: 1fr 0;
+  }
+
+  ::slotted([slot='influencer']),
+  ::slotted([slot='summary-content']) {
+    padding: 0 !important; /* stylelint-disable-line declaration-no-important */
+  }
+}
+
+// Small screen styles
+@include breakpoint-down(md) {
+  :host(#{$prefix}-tearsheet) {
+    ::slotted([slot='influencer']),
+    ::slotted([slot='summary-content']) {
+      padding: 0 !important; /* stylelint-disable-line declaration-no-important */
+    }
+  }
+}
+
+.#{$block-class}__header-label {
+  @extend .#{$block-class}__header-label !optional;
+}
+.#{$block-class}__header-title {
+  @extend .#{$block-class}__header-title !optional;
+}
+
+.#{$block-class}__header-description {
+  @extend .#{$block-class}__header-description !optional;
+}
+
+:host {
+  #{$prefix}-side-panel::part(dialog) {
+    @extend .#{$block-class}__side-panel !optional;
+  }
+}
+
+:host-context(#{$prefix}-tearsheet[variant='narrow']) {
+  ::slotted([slot='summary-content']) {
+    padding: 0;
+  }
+}
+
+:host ::slotted([slot='footer']) {
+  padding-block: 0;
+}
