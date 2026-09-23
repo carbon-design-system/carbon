@@ -11,7 +11,7 @@ import React, { forwardRef, useRef, type HTMLAttributes } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import { deprecate } from '../../prop-types/deprecate';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
-import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
+import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
 
 type ExcludedAttributes = 'id' | 'value';
 
@@ -231,7 +231,7 @@ const TimePicker = frFn((props, ref) => {
       {labelText}
     </label>
   );
-  useNoInteractiveChildren(
+  useNoInteractiveChildrenForLabel(
     labelRef,
     'The TimePicker component `labelText` prop must have no interactive content'
   );

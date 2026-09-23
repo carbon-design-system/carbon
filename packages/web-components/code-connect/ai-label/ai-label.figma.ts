@@ -1,3 +1,7 @@
+// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=51447-1916&t=9XaizJDx8eI6KgQz-4
+// source=https://github.com/carbon-design-system/carbon/blob/main/packages/web-components/src/components/ai-label/ai-label.ts
+// component=cds-ai-label
+
 /**
  * Copyright IBM Corp. 2026
  *
@@ -5,58 +9,29 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import figma, { html } from '@figma/code-connect/html';
+import figma from 'figma';
+import { renderStringAttribute } from '../template-helpers';
 
-figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=51447-1916&t=9XaizJDx8eI6KgQz-4',
-  {
-    props: {
-      aiText: figma.string('Text translation'),
-      size: figma.enum('Size', {
-        '16px': 'mini',
-        '20px': '2xs',
-        '24px': 'xs',
-        '32px': 'sm',
-        '40px': 'md',
-        '48px': 'lg',
-        '64px': 'xl',
-      }),
-    },
-    example: (props) =>
-      html`<cds-ai-label
-        autoalign
-        ai-text=${props.aiText}
-        size=${props.size}></cds-ai-label>`,
-    imports: [
-      "import '@carbon/web-components/es/components/ai-label/index.js'",
-    ],
-  }
-);
+const instance = figma.selectedInstance;
+const aiText = instance.getString('Text translation');
+const size = instance.getEnum('Size', {
+  '16px': 'mini',
+  '20px': '2xs',
+  '24px': 'xs',
+  '32px': 'sm',
+  '40px': 'md',
+  '48px': 'lg',
+  '64px': 'xl',
+});
 
-// inline
-figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=51447-2035&t=9XaizJDx8eI6KgQz-4',
-  {
-    props: {
-      aiText: figma.string('Text translation'),
-      textLabel: figma.enum('Type', {
-        'Text + Icon': figma.string('Slug text'),
-      }),
-      size: figma.enum('Size', {
-        '12px': 'sm',
-        '14px': 'md',
-        '16px': 'lg',
-      }),
-    },
-    example: (props) =>
-      html`<cds-ai-label
-        autoalign
-        kind="inline"
-        ai-text=${props.aiText}
-        ai-text-label=${props.textLabel}
-        size=${props.size}></cds-ai-label>`,
-    imports: [
-      "import '@carbon/web-components/es/components/ai-label/index.js'",
-    ],
-  }
-);
+export default {
+  id: 'cds-ai-label',
+  imports: [
+    "import '@carbon/web-components/es/components/ai-label/ai-label.js'",
+  ],
+  example: figma.code`<cds-ai-label autoalign${renderStringAttribute(
+    'ai-text',
+    aiText
+  )}${renderStringAttribute('size', size)}></cds-ai-label>`,
+  metadata: { nestable: true },
+};
