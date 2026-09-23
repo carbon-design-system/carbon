@@ -3,10 +3,12 @@ on:
   push:
     branches:
       - main
+      - next
   pull_request:
     types: [opened, reopened, synchronize, ready_for_review]
     branches:
       - main
+      - next
   merge_group:
     types: [checks_requested]
 
@@ -116,7 +118,7 @@ jobs:
       - name: Merge coverage reports
         run: cat coverage/scss-generator/lcov.info >> coverage/lcov.info
       - name: Upload coverage reports to Codecov with GitHub Action
-        uses: codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f # v7.0.0
+        uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
         with:
           files: ./coverage/lcov.info
           flags: main-packages
@@ -156,7 +158,7 @@ jobs:
           cd packages/web-components
           yarn test --coverage
       - name: Upload web-components coverage reports to Codecov
-        uses: codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f # v7.0.0
+        uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
         with:
           files: ./packages/web-components/coverage/lcov.info
           flags: web-components
@@ -457,7 +459,7 @@ jobs:
         run: yarn workspace @carbon/react storybook:build --stats-json
       - id: chromatic
         name: Run Chromatic
-        uses: chromaui/action@259eda5f0e44c0c1eab38b672f1c4c967cc969b7 # v18.8.1
+        uses: chromaui/action@bb3b582719a93c1828c5e520e62992b2937d7889 # v18.9.4
         with:
           # 👇 Token is intentionally plaintext
           # https://www.chromatic.com/docs/github-actions/#run-chromatic-on-external-forks-of-open-source-projects

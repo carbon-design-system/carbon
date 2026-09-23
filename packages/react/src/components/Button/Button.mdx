@@ -11,6 +11,18 @@ import { Add, TrashCan } from '@carbon/icons-react';
 import * as ButtonStories from './Button.stories';
 import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
+export const getIconFromStringImport =
+  "import { Add, Notification, Filter } from '@carbon/icons-react';";
+
+export const getIconFromStringDef = `const getIconFromString = (iconName) => {
+  const icons = {
+    Add: (props) => <Add {...props} />,
+    Notification: (props) => <Notification {...props} />,
+    Filter: (props) => <Filter {...props} />,
+  };
+  return icons[iconName];
+};`;
+
 <Meta isTemplate />
 
 # Buttons
@@ -62,7 +74,12 @@ user interacts with it.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(ButtonStories.Default),
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: ButtonStories.Default,
+          customImports: [getIconFromStringImport],
+          customFunctionDefs: [getIconFromStringDef],
+        }),
     },
   ]}
 />
@@ -102,7 +119,12 @@ not support Danger, Danger tertiary, or Danger ghost.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(ButtonStories.IconButton),
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: ButtonStories.IconButton,
+          customImports: [getIconFromStringImport],
+          customFunctionDefs: [getIconFromStringDef],
+        }),
     },
   ]}
 />
@@ -118,7 +140,7 @@ content is being loaded.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(ButtonStories.Skeleton),
+      onClick: () => stackblitzPrefillConfig({ story: ButtonStories.Skeleton }),
     },
   ]}
 />
