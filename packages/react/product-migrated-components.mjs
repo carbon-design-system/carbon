@@ -40,6 +40,8 @@ export const productMigratedStoryGlobs = [
   '../src/examples/CreateTearsheet/CreateTearsheet.mdx',
   '../src/examples/CreateTearsheetNarrow/CreateTearsheet.stories.js',
   '../src/examples/CreateTearsheetNarrow/CreateTearsheet.mdx',
+  '../src/examples/ExportModal/ExportModal.stories.js',
+  '../src/examples/ExportModal/ExportModal.mdx',
 ];
 
 /**
