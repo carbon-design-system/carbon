@@ -11,8 +11,17 @@
 
 import figma from 'figma';
 
+const size = figma.selectedInstance.getEnum('Size', {
+  Large: 'lg',
+  Medium: 'md',
+  Small: 'sm',
+});
+
 export default {
   id: 'PaginationNav',
   imports: ["import { PaginationNav } from '@carbon/react';"],
-  example: figma.code`<PaginationNav itemsShown={7} totalItems={30}/>`,
+  example: figma.code`<PaginationNav${figma.helpers.react.renderProp(
+    'size',
+    size
+  )} itemsShown={7} totalItems={30}/>`,
 };
