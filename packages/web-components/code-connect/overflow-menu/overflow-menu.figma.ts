@@ -20,6 +20,7 @@ const size = instance.getEnum('Size', {
   Large: 'lg',
   Medium: 'md',
   Small: 'sm',
+  'Extra small': 'xs',
 });
 const direction = instance.getEnum('Position', {
   Top: 'top',

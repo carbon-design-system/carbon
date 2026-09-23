@@ -15,6 +15,7 @@ const size = figma.selectedInstance.getEnum('Size', {
   Large: 'lg',
   Medium: 'md',
   Small: 'sm',
+  'Extra small': 'xs',
 });
 const direction = figma.selectedInstance.getEnum('Position', {
   Top: 'top',
