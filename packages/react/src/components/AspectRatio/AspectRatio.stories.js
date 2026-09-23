@@ -4,8 +4,7 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
-import './AspectRatio-story.scss';
+import styles from './AspectRatio-story.scss?inline';
 
 import React from 'react';
 import { Grid, Column } from '../Grid';
@@ -17,12 +16,14 @@ export default {
   component: AspectRatio,
   decorators: [
     (Story) => (
-      <div className="aspect-ratio-story">
+      <>
+        <style>{styles}</style>
         <Story />
-      </div>
+      </>
     ),
   ],
   parameters: {
+    styles,
     docs: {
       page: mdx,
     },
@@ -31,20 +32,22 @@ export default {
 
 export const Default = (args) => {
   return (
-    <Grid {...args}>
-      <Column sm={1} md={2} lg={4}>
-        <AspectRatio {...args}>Content</AspectRatio>
-      </Column>
-      <Column sm={1} md={2} lg={4}>
-        <AspectRatio {...args}>Content</AspectRatio>
-      </Column>
-      <Column sm={1} md={2} lg={4}>
-        <AspectRatio {...args}>Content</AspectRatio>
-      </Column>
-      <Column sm={1} md={2} lg={4}>
-        <AspectRatio {...args}>Content</AspectRatio>
-      </Column>
-    </Grid>
+    <div className="aspect-ratio-story">
+      <Grid {...args}>
+        <Column sm={1} md={2} lg={4}>
+          <AspectRatio {...args}>Content</AspectRatio>
+        </Column>
+        <Column sm={1} md={2} lg={4}>
+          <AspectRatio {...args}>Content</AspectRatio>
+        </Column>
+        <Column sm={1} md={2} lg={4}>
+          <AspectRatio {...args}>Content</AspectRatio>
+        </Column>
+        <Column sm={1} md={2} lg={4}>
+          <AspectRatio {...args}>Content</AspectRatio>
+        </Column>
+      </Grid>
+    </div>
   );
 };
 
