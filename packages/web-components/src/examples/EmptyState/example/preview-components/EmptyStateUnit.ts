@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2026
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -20,24 +20,31 @@
  */
 
 import { LitElement, html } from 'lit';
-import { property, state } from 'lit/decorators.js';
-import { customElement } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 
 // ─── Import web component definitions ────────────────────────────────────────
-import '../../components/empty-state/index';
-import '../../components/button/button';
-import '../../components/data-table/index';
-import '../../components/grid/grid';
-import '../../components/link/link';
-import '../../components/tile/tile';
-import '../../components/ui-shell/index';
+// In a standalone project, replace these with:
+//   import '@carbon/web-components/es/components/button/index.js'; etc.
+import '../../../../components/button/index';
+import '../../../../components/data-table/index';
+import '../../../../components/link/index';
+import '../../../../components/overflow-menu/index';
+import '../../../../components/skip-to-content/index';
+import '../../../../components/tile/index';
+import '../../../../components/ui-shell/index';
+
+import Search20 from '@carbon/icons/es/search/20.js';
+import Settings16 from '@carbon/icons/es/settings/16.js';
+import { iconLoader } from '../../../../globals/internal/icon-loader';
+
+import '../components/EmptyState';
 
 // ─── Copy your own SVG assets ─────────────────────────────────────────────────
-import notFoundSrc from './assets/not-found.svg';
-import unauthorizedSrc from './assets/unauthorized.svg';
-import errorSrc from './assets/error.svg';
-
-import styles from './empty-state-example.scss?lit';
+// Use ?url to get the asset URL (not the inline SVG Lit template the vite-lit-loader
+// plugin produces for bare .svg imports).
+import notFoundSrc from '../assets/not-found.svg?url';
+import unauthorizedSrc from '../assets/unauthorized.svg?url';
+import errorSrc from '../assets/error.svg?url';
 
 // ─── Static table data ────────────────────────────────────────────────────────
 
@@ -55,26 +62,36 @@ const TABLE_ROWS = [
 ];
 
 const SIDE_NAV_LINKS = [
-  'Overview', 'Assets', 'Monitoring', 'Activity',
-  'Configuration', 'Access', 'Billing',
+  'Overview',
+  'Assets',
+  'Monitoring',
+  'Activity',
+  'Configuration',
+  'Access',
+  'Billing',
 ];
 
 /**
- * `cds-empty-state-example`
+ * `cds-empty-state-unit`
  *
- * Drop this into your own app and customize freely.
+ * Full UI Shell demo showing three empty-state placement scenarios:
+ *  1. Inside a DataTable (no search results)
+ *  2. Inside a tall vertical tile
+ *  3. Inside wide horizontal tiles
+ *
+ * Toggle `placement` between `left` and `centre`.
  *
  * @example
  * <!-- Left-aligned (default) -->
- * <cds-empty-state-example></cds-empty-state-example>
+ * <cds-empty-state-unit></cds-empty-state-unit>
  *
  * <!-- Centred -->
- * <cds-empty-state-example placement="centre"></cds-empty-state-example>
+ * <cds-empty-state-unit placement="centre"></cds-empty-state-unit>
  *
- * @element cds-empty-state-example
+ * @element cds-empty-state-unit
  */
-@customElement('cds-empty-state-example')
-class CDSEmptyStateExample extends LitElement {
+@customElement('cds-empty-state-unit')
+export class CDSEmptyStateUnit extends LitElement {
   /**
    * Alignment of every empty state relative to its own container.
    * @default 'left'
@@ -97,14 +114,14 @@ class CDSEmptyStateExample extends LitElement {
   }
 
   private _handleSearch(e: Event) {
-    const input = e.target as HTMLInputElement;
-    this._searchValue = input.value ?? '';
+    this._searchValue = (e.target as HTMLInputElement).value ?? '';
   }
 
   private _clearSearch() {
     this._searchValue = '';
-    // Reset the toolbar search input
-    const search = this.shadowRoot?.querySelector('cds-table-toolbar-search') as HTMLInputElement | null;
+    const search = this.renderRoot?.querySelector(
+      'cds-table-toolbar-search'
+    ) as HTMLInputElement | null;
     if (search) search.value = '';
   }
 
@@ -112,11 +129,19 @@ class CDSEmptyStateExample extends LitElement {
     this._sideNavExpanded = !this._sideNavExpanded;
   }
 
+  // No Shadow DOM — styles from _story-styles.scss and _empty-state.scss
+  // must reach the rendered HTML directly.
+  protected createRenderRoot() {
+    return this;
+  }
+
   render() {
     const { placement, _filteredRows: filteredRows, _sideNavExpanded: expanded } = this;
     const isCentre = placement === 'centre';
     const noResults = filteredRows.length === 0;
-    const emptyWrapMod = isCentre ? 'es-example__empty-wrap--centre' : 'es-example__empty-wrap--left';
+    const emptyWrapMod = isCentre
+      ? 'es-example__empty-wrap--centre'
+      : 'es-example__empty-wrap--left';
 
     return html`
       <cds-header aria-label="IBM Platform">
@@ -132,10 +157,15 @@ class CDSEmptyStateExample extends LitElement {
           <cds-header-nav-item href="#">Link</cds-header-nav-item>
           <cds-header-nav-item href="#">Link</cds-header-nav-item>
         </cds-header-nav>
+        <div class="cds--header__global">
+          <cds-header-global-action aria-label="Search" tooltip-text="Search">
+            ${iconLoader(Search20, { slot: 'icon' })}
+          </cds-header-global-action>
+        </div>
         <cds-side-nav
           aria-label="Side navigation"
           ?expanded="${expanded}"
-          collapse-mode="rail">
+          is-not-persistent>
           ${SIDE_NAV_LINKS.map((label) => html`
             <cds-side-nav-link href="#">${label}</cds-side-nav-link>
           `)}
@@ -159,41 +189,58 @@ class CDSEmptyStateExample extends LitElement {
                     placeholder="Search"
                     @cds-search-input="${this._handleSearch}">
                   </cds-table-toolbar-search>
+                  <cds-overflow-menu toolbar-action>
+                    ${iconLoader(Settings16, {
+                      slot: 'icon',
+                      class: 'cds--overflow-menu__icon',
+                    })}
+                    <span slot="tooltip-content">Settings</span>
+                    <cds-overflow-menu-body flipped>
+                      <cds-overflow-menu-item>Action 1</cds-overflow-menu-item>
+                      <cds-overflow-menu-item>Action 2</cds-overflow-menu-item>
+                    </cds-overflow-menu-body>
+                  </cds-overflow-menu>
                   <cds-button kind="primary">Add asset</cds-button>
                 </cds-table-toolbar-content>
               </cds-table-toolbar>
               <cds-table-head>
                 <cds-table-header-row>
-                  ${TABLE_HEADERS.map((h) => html`
-                    <cds-table-header-cell>${h.header}</cds-table-header-cell>
-                  `)}
+                  ${TABLE_HEADERS.map(
+                    (h) => html`<cds-table-header-cell>${h.header}</cds-table-header-cell>`
+                  )}
                 </cds-table-header-row>
               </cds-table-head>
               <cds-table-body>
-                ${!noResults ? filteredRows.map((row) => html`
-                  <cds-table-row>
-                    <cds-table-cell>${row.name}</cds-table-cell>
-                    <cds-table-cell>${row.protocol}</cds-table-cell>
-                    <cds-table-cell>${row.port}</cds-table-cell>
-                    <cds-table-cell>${row.rule}</cds-table-cell>
-                  </cds-table-row>
-                `) : ''}
+                ${!noResults
+                  ? filteredRows.map(
+                      (row) => html`
+                        <cds-table-row>
+                          <cds-table-cell>${row.name}</cds-table-cell>
+                          <cds-table-cell>${row.protocol}</cds-table-cell>
+                          <cds-table-cell>${row.port}</cds-table-cell>
+                          <cds-table-cell>${row.rule}</cds-table-cell>
+                        </cds-table-row>
+                      `
+                    )
+                  : ''}
               </cds-table-body>
             </cds-table>
 
-            ${noResults ? html`
-              <div class="es-example__empty-wrap ${emptyWrapMod}">
-                <cds-empty-state
-                  illustration-src="${notFoundSrc}"
-                  illustration-description="No results illustration"
-                  heading="No results match the current search"
-                  subtitle="Clear the search field to see all results, or try a different search term."
-                  action-text="Clear search"
-                  action-kind="tertiary"
-                  @click="${(e: Event) => { if ((e.target as HTMLElement).tagName === 'CDS-BUTTON') this._clearSearch(); }}">
-                </cds-empty-state>
-              </div>
-            ` : ''}
+            ${noResults
+              ? html`
+                  <div class="es-example__empty-wrap ${emptyWrapMod}">
+                    <cds-empty-state
+                      illustration-src="${notFoundSrc}"
+                      illustration-description="No results illustration"
+                      heading="No results match the current search"
+                      subtitle="Clear the search field to see all results, or try a different search term."
+                      action-text="Clear search"
+                      action-kind="tertiary"
+                      @cds-empty-state-action-click="${this._clearSearch}">
+                    </cds-empty-state>
+                  </div>
+                `
+              : ''}
           </div>
 
           <!-- ── Vertical tile (spans 2 grid rows) ─────────────────────── -->
@@ -201,7 +248,10 @@ class CDSEmptyStateExample extends LitElement {
             <cds-tile class="es-example__tile">
               <p class="es-example__tile-label">Label</p>
               <p class="es-example__tile-title">Title</p>
-              <div class="es-example__tile-empty--vertical${isCentre ? ' es-example__tile-empty--vertical--centre' : ''}">
+              <div
+                class="es-example__tile-empty--vertical${isCentre
+                  ? ' es-example__tile-empty--vertical--centre'
+                  : ''}">
                 <cds-empty-state
                   size="sm"
                   illustration-src="${errorSrc}"
@@ -216,32 +266,37 @@ class CDSEmptyStateExample extends LitElement {
           </div>
 
           <!-- ── Horizontal tiles ───────────────────────────────────────── -->
-          ${([0, 1] as const).map(() => html`
-            <div class="es-example__col-half">
-              <cds-tile class="es-example__tile">
-                <p class="es-example__tile-label">Label</p>
-                <p class="es-example__tile-title">Title</p>
-                <div class="es-example__tile-empty--horizontal${isCentre ? ' es-example__tile-empty--horizontal--centre' : ''}">
-                  <cds-empty-state
-                    size="sm"
-                    illustration-src="${unauthorizedSrc}"
-                    illustration-description="Unauthorized illustration"
-                    heading="You do not have access"
-                    subtitle="Unlock product insights by requesting view access from your admin."
-                    action-text="Request access"
-                    action-kind="tertiary">
-                  </cds-empty-state>
+          <div class="es-example__col-bottom">
+            ${([0, 1] as const).map(
+              () => html`
+                <div class="es-example__col-half">
+                  <cds-tile class="es-example__tile">
+                    <p class="es-example__tile-label">Label</p>
+                    <p class="es-example__tile-title">Title</p>
+                    <div
+                      class="es-example__tile-empty--horizontal${isCentre
+                        ? ' es-example__tile-empty--horizontal--centre'
+                        : ''}">
+                      <cds-empty-state
+                        size="sm"
+                        illustration-src="${unauthorizedSrc}"
+                        illustration-description="Unauthorized illustration"
+                        heading="You do not have access"
+                        subtitle="Unlock product insights by requesting view access from your admin."
+                        action-text="Request access"
+                        action-kind="tertiary">
+                      </cds-empty-state>
+                    </div>
+                  </cds-tile>
                 </div>
-              </cds-tile>
-            </div>
-          `)}
+              `
+            )}
+          </div>
 
         </div>
       </main>
     `;
   }
-
-  static styles = styles;
 }
 
-export default CDSEmptyStateExample;
+export default CDSEmptyStateUnit;
