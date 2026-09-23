@@ -38,7 +38,8 @@ you'll need to include a `Toggletip`, `ToggletipButton` for the trigger, and
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(ToggletipStories.Default),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: ToggletipStories.Default }),
     },
   ]}
 />

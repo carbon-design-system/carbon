@@ -39,7 +39,8 @@ responsible for displaying the page links in the hierarchy.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(BreadcrumbStories.Default),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: BreadcrumbStories.Default }),
     },
   ]}
 />
@@ -57,7 +58,9 @@ onto a second line.
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig(BreadcrumbStories.BreadcrumbWithOverflowMenu),
+        stackblitzPrefillConfig({
+          story: BreadcrumbStories.BreadcrumbWithOverflowMenu,
+        }),
     },
   ]}
 />
@@ -73,7 +76,8 @@ fetched from an external resource like an API.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(BreadcrumbStories.Skeleton),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: BreadcrumbStories.Skeleton }),
     },
   ]}
 />
