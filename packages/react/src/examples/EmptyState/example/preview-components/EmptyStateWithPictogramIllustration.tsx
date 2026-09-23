@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { ComponentType } from 'react';
+import React, { type ComponentType, type FC } from 'react';
 import {
   Availability,
   CloudBuilderProfessionalServices,
@@ -20,8 +20,18 @@ import {
   VisualInspection,
   Warning_01,
 } from '@carbon/pictograms-react';
-import { EmptyState } from '../components/EmptyState';
+import EmptyStateJsx from '../components/EmptyState';
 import '../styles/_empty-state.scss';
+
+interface EmptyStateProps {
+  size?: 'md' | 'sm';
+  illustration?: string | ComponentType<object>;
+  title: React.ReactNode;
+  subtitle?: React.ReactNode;
+  action?: { text: string; onClick?: React.MouseEventHandler<HTMLButtonElement> };
+  link?: { text: React.ReactNode; href: string; target?: string };
+}
+const EmptyState = EmptyStateJsx as FC<EmptyStateProps>;
 
 export type PictogramKey =
   | 'First use'
@@ -37,7 +47,7 @@ export type PictogramKey =
   | 'Search'
   | 'Filtered';
 
-const pictogramMap: Record<PictogramKey, ComponentType<any>> = {
+const pictogramMap: Record<PictogramKey, ComponentType<object>> = {
   'First use': Container,
   Error: DoNot_02,
   Warning: Warning_01,

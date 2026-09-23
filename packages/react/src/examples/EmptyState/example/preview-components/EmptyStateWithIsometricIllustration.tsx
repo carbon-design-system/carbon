@@ -5,14 +5,24 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import { EmptyState } from '../components/EmptyState';
+import React, { type FC } from 'react';
+import EmptyStateJsx from '../components/EmptyState';
 import noDataIllustration from '../assets/no-data.svg';
 import notFoundIllustration from '../assets/not-found.svg';
 import unauthorizedIllustration from '../assets/unauthorized.svg';
 import errorIllustration from '../assets/error.svg';
 import notificationIllustration from '../assets/notification.svg';
 import '../styles/_empty-state.scss';
+
+interface EmptyStateProps {
+  size?: 'md' | 'sm';
+  illustration?: string;
+  title: React.ReactNode;
+  subtitle?: React.ReactNode;
+  action?: { text: string; onClick?: React.MouseEventHandler<HTMLButtonElement> };
+  link?: { text: React.ReactNode; href: string; target?: string };
+}
+const EmptyState = EmptyStateJsx as FC<EmptyStateProps>;
 
 type IllustrationKey = 'No data' | 'Not found' | 'Unauthorized' | 'Error' | 'Notification';
 

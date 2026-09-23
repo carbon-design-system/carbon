@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React, { useState, type ComponentType, type FC } from 'react';
 import {
   Button,
   Column,
@@ -39,12 +39,22 @@ import {
   Tile,
 } from '@carbon/react';
 import { Search as SearchIcon } from '@carbon/icons-react';
-import { EmptyState } from '../components/EmptyState';
+import EmptyStateJsx from '../components/EmptyState';
 import notFoundIllustration from '../assets/not-found.svg';
 import unauthorizedIllustration from '../assets/unauthorized.svg';
 import errorIllustration from '../assets/error.svg';
 import '../styles/_empty-state.scss';
 import '../styles/_story-styles.scss';
+
+interface EmptyStateProps {
+  size?: 'md' | 'sm';
+  illustration?: string | ComponentType<object>;
+  title: React.ReactNode;
+  subtitle?: React.ReactNode;
+  action?: { text: string; onClick?: React.MouseEventHandler<HTMLButtonElement> };
+  link?: { text: React.ReactNode; href: string; target?: string };
+}
+const EmptyState = EmptyStateJsx as FC<EmptyStateProps>;
 
 const TABLE_HEADERS = [
   { key: 'name', header: 'Name' },
@@ -151,12 +161,10 @@ const PageContent = ({ placement }: PageContentProps) => {
                   <div className={emptyWrapClass}>
                     <EmptyState
                       illustration={notFoundIllustration}
-                      illustrationDescription="No results illustration"
                       title="No results match the current search"
                       subtitle="Clear the search field to see all results, or try a different search term."
                       action={{
                         text: 'Clear search',
-                        kind: 'tertiary',
                         onClick: () => {
                           setSearchValue('');
                           setSearchKey((k) => k + 1);
@@ -181,7 +189,6 @@ const PageContent = ({ placement }: PageContentProps) => {
               <EmptyState
                 size="sm"
                 illustration={errorIllustration}
-                illustrationDescription="Error illustration"
                 title="This insight is unavailable"
                 subtitle="Try loading the page once again after adding an asset."
                 link={{
@@ -205,10 +212,9 @@ const PageContent = ({ placement }: PageContentProps) => {
                 <EmptyState
                   size="sm"
                   illustration={unauthorizedIllustration}
-                  illustrationDescription="Unauthorized illustration"
                   title="You do not have access"
                   subtitle="Unlock product insights by requesting view access from your admin."
-                  action={{ text: 'Request access', kind: 'tertiary', onClick: () => {} }}
+                  action={{ text: 'Request access', onClick: () => {} }}
                 />
               </div>
             </Tile>
