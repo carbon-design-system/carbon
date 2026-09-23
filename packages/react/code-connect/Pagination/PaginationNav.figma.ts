@@ -1,0 +1,18 @@
+// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=2799-20761&t=gkzO9FaEPqewqYn6-4
+// source=https://github.com/maradwan26/carbon/blob/main/packages/react/lib/components/PaginationNav/PaginationNav.d.ts
+// component=PaginationNav
+
+/**
+ * Copyright IBM Corp. 2016, 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import figma from 'figma';
+
+export default {
+  id: 'PaginationNav',
+  imports: ["import { PaginationNav } from '@carbon/react';"],
+  example: figma.code`<PaginationNav itemsShown={7} totalItems={30}/>`,
+};
