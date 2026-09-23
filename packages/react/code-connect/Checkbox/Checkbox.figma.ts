@@ -1,19 +1,15 @@
 // url=https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=3193-29303&mode=design&t=QVE44xARq96HRr11-4
-// source=https://github.com/carbon-design-system/carbon/blob/main/packages/web-components/src/components/checkbox/checkbox.ts
-// component=cds-checkbox
+// source=https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Checkbox/Checkbox.tsx
+// component=Checkbox
 
 /**
- * Copyright IBM Corp. 2026
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import figma from 'figma';
-import {
-  renderBooleanAttribute,
-  renderStringAttribute,
-} from '../template-helpers';
 
 const instance = figma.selectedInstance;
 
@@ -24,11 +20,9 @@ function createTemplate() {
 
   if (isSkeleton) {
     return {
-      id: 'cds-checkbox-skeleton',
-      imports: [
-        "import '@carbon/web-components/es/components/checkbox/checkbox-skeleton.js'",
-      ],
-      example: figma.code`<cds-checkbox-skeleton></cds-checkbox-skeleton>`,
+      id: 'CheckboxSkeleton',
+      imports: ["import { CheckboxSkeleton } from '@carbon/react';"],
+      example: figma.code`<CheckboxSkeleton />`,
       metadata: { nestable: true },
     };
   }
@@ -55,34 +49,44 @@ function createTemplate() {
   const disabled = instance.getEnum('State', {
     Disabled: true,
   });
-  const readonly = instance.getEnum('State', {
+  const readOnly = instance.getEnum('State', {
     'Read-only': true,
   });
 
   return {
-    id: 'cds-checkbox',
-    imports: [
-      "import '@carbon/web-components/es/components/checkbox/checkbox.js'",
-    ],
-    example: figma.code`<cds-checkbox${renderBooleanAttribute(
-      'checked',
-      checked
-    )}${renderBooleanAttribute('disabled', disabled)}${renderStringAttribute(
-      'helper-text',
-      helperText
-    )}${renderBooleanAttribute(
-      'hide-label',
+    id: 'Checkbox',
+    imports: ["import { Checkbox } from '@carbon/react';"],
+    example: figma.code`<Checkbox id="your_checkbox_id"${figma.helpers.react.renderProp(
+      'labelText',
+      labelText
+    )}${figma.helpers.react.renderProp(
+      'hideLabel',
       hideLabel
-    )}${renderBooleanAttribute(
+    )}${figma.helpers.react.renderProp(
       'indeterminate',
       indeterminate
-    )}${renderBooleanAttribute('invalid', invalid)}${renderStringAttribute(
-      'invalid-text',
+    )}${figma.helpers.react.renderProp(
+      'checked',
+      checked
+    )}${figma.helpers.react.renderProp(
+      'helperText',
+      helperText
+    )}${figma.helpers.react.renderProp(
+      'invalid',
+      invalid
+    )}${figma.helpers.react.renderProp(
+      'invalidText',
       invalidText
-    )}${renderBooleanAttribute('readonly', readonly)}${renderBooleanAttribute(
+    )}${figma.helpers.react.renderProp(
       'warn',
       warn
-    )}${renderStringAttribute('warn-text', warnText)}>${labelText}</cds-checkbox>`,
+    )}${figma.helpers.react.renderProp(
+      'warnText',
+      warnText
+    )}${figma.helpers.react.renderProp(
+      'disabled',
+      disabled
+    )}${figma.helpers.react.renderProp('readOnly', readOnly)} />`,
     metadata: { nestable: true },
   };
 }
