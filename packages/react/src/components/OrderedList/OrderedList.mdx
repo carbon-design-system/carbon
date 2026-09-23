@@ -32,7 +32,8 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
     additionalActions={[
       {
         title: 'Open in Stackblitz',
-        onClick: () => stackblitzPrefillConfig(OrderedListStories.Default),
+        onClick: () =>
+          stackblitzPrefillConfig({ story: OrderedListStories.Default }),
       },
     ]}
   />
@@ -47,7 +48,9 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
       {
         title: 'Open in Stackblitz',
         onClick: () =>
-          stackblitzPrefillConfig(OrderedListStories.NativeListStyles),
+          stackblitzPrefillConfig({
+            story: OrderedListStories.NativeListStyles,
+          }),
       },
     ]}
   />
@@ -61,7 +64,8 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
     additionalActions={[
       {
         title: 'Open in Stackblitz',
-        onClick: () => stackblitzPrefillConfig(OrderedListStories.Nested),
+        onClick: () =>
+          stackblitzPrefillConfig({ story: OrderedListStories.Nested }),
       },
     ]}
   />
