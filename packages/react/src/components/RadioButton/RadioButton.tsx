@@ -16,7 +16,7 @@ import { mergeRefs } from '../../tools/mergeRefs';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
-import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
+import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
 
 type ExcludedAttributes = 'onChange';
 
@@ -205,7 +205,7 @@ const RadioButton = React.forwardRef<HTMLInputElement, RadioButtonProps>(
           size: candidate.props?.['kind'] === 'inline' ? 'md' : 'mini',
         })
       : candidate;
-    useNoInteractiveChildren(
+    useNoInteractiveChildrenForLabel(
       labelRef,
       'The RadioButton component `labelText` prop must have no interactive content'
     );
