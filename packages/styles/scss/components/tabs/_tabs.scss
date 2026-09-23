@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2023
+// Copyright IBM Corp. 2016, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -206,6 +206,25 @@
           rgba(255, 255, 255, 0),
           $background
         );
+      }
+
+      // In RTL the buttons swap sides; reverse the fade direction to match.
+      [dir='rtl'] & {
+        .#{$prefix}--tab--overflow-nav-button--next::before {
+          background: linear-gradient(
+            to left,
+            rgba(255, 255, 255, 0),
+            $background
+          );
+        }
+
+        .#{$prefix}--tab--overflow-nav-button--previous::before {
+          background: linear-gradient(
+            to right,
+            rgba(255, 255, 255, 0),
+            $background
+          );
+        }
       }
     }
 
