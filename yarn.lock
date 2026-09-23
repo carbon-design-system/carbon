@@ -2237,7 +2237,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/pictograms-react@workspace:packages/pictograms-react":
+"@carbon/pictograms-react@npm:^11.111.0-rc.0, @carbon/pictograms-react@workspace:packages/pictograms-react":
   version: 0.0.0-use.local
   resolution: "@carbon/pictograms-react@workspace:packages/pictograms-react"
   dependencies:
@@ -2279,6 +2279,7 @@ __metadata:
     "@carbon/icons-react": "npm:^11.89.0-rc.0"
     "@carbon/layout": "npm:^11.60.0-rc.0"
     "@carbon/motion": "npm:^11.53.0-rc.0"
+    "@carbon/pictograms-react": "npm:^11.111.0-rc.0"
     "@carbon/styles": "npm:^1.116.0-rc.0"
     "@carbon/test-utils": "npm:^10.41.0"
     "@carbon/themes": "npm:^11.82.0-rc.0"
