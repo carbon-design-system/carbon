@@ -1,4 +1,4 @@
-// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=51447-1916&t=9XaizJDx8eI6KgQz-4
+// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=51447-2035&t=9XaizJDx8eI6KgQz-4
 // source=https://github.com/carbon-design-system/carbon/blob/main/packages/web-components/src/components/ai-label/ai-label.ts
 // component=cds-ai-label
 
@@ -14,14 +14,13 @@ import { renderStringAttribute } from '../template-helpers';
 
 const instance = figma.selectedInstance;
 const aiText = instance.getString('Text translation');
+const aiTextLabel = instance.getEnum('Type', {
+  'Text + Icon': instance.getString('Slug text'),
+});
 const size = instance.getEnum('Size', {
-  '16px': 'mini',
-  '20px': '2xs',
-  '24px': 'xs',
-  '32px': 'sm',
-  '40px': 'md',
-  '48px': 'lg',
-  '64px': 'xl',
+  '12px': 'sm',
+  '14px': 'md',
+  '16px': 'lg',
 });
 
 export default {
@@ -29,9 +28,12 @@ export default {
   imports: [
     "import '@carbon/web-components/es/components/ai-label/ai-label.js'",
   ],
-  example: figma.code`<cds-ai-label autoalign${renderStringAttribute(
+  example: figma.code`<cds-ai-label autoalign kind="inline"${renderStringAttribute(
     'ai-text',
     aiText
+  )}${renderStringAttribute(
+    'ai-text-label',
+    aiTextLabel
   )}${renderStringAttribute('size', size)}></cds-ai-label>`,
   metadata: { nestable: true },
 };

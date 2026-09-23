@@ -1,19 +1,15 @@
 // url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/-v11--Carbon-Design-System?node-id=104376-11673&m=dev
-// source=https://github.com/carbon-design-system/carbon/blob/main/packages/web-components/src/components/breadcrumb/breadcrumb.ts
-// component=cds-breadcrumb
+// source=https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Breadcrumb/Breadcrumb.tsx
+// component=Breadcrumb
 
 /**
- * Copyright IBM Corp. 2026
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import figma from 'figma';
-import {
-  renderBooleanAttribute,
-  renderStringAttribute,
-} from '../template-helpers';
 
 const instance = figma.selectedInstance;
 const breadcrumbItems = instance.findConnectedInstances((child) =>
@@ -39,17 +35,18 @@ const isSkeleton = breadcrumbItems.some((item) =>
 function createTemplate() {
   if (isSkeleton) {
     return {
-      id: 'cds-breadcrumb-skeleton',
-      imports: [
-        "import '@carbon/web-components/es/components/breadcrumb/breadcrumb-skeleton.js'",
-      ],
-      example: figma.code`<cds-breadcrumb-skeleton items="${breadcrumbItems.length}"${renderStringAttribute(
+      id: 'BreadcrumbSkeleton',
+      imports: ["import { BreadcrumbSkeleton } from '@carbon/react';"],
+      example: figma.code`<BreadcrumbSkeleton${figma.helpers.react.renderProp(
+        'items',
+        breadcrumbItems.length
+      )}${figma.helpers.react.renderProp(
         'size',
         size
-      )}${renderBooleanAttribute(
-        'no-trailing-slash',
+      )}${figma.helpers.react.renderProp(
+        'noTrailingSlash',
         noTrailingSlash
-      )}></cds-breadcrumb-skeleton>`,
+      )} />`,
       metadata: { nestable: true },
     };
   }
@@ -59,18 +56,14 @@ function createTemplate() {
   );
 
   return {
-    id: 'cds-breadcrumb',
-    imports: [
-      "import '@carbon/web-components/es/components/breadcrumb/breadcrumb.js'",
-      "import '@carbon/web-components/es/components/breadcrumb/breadcrumb-item.js'",
-      "import '@carbon/web-components/es/components/breadcrumb/breadcrumb-link.js'",
-    ],
-    example: figma.code`<cds-breadcrumb${renderStringAttribute(
+    id: 'Breadcrumb',
+    imports: ["import { Breadcrumb } from '@carbon/react';"],
+    example: figma.code`<Breadcrumb${figma.helpers.react.renderProp(
       'size',
       size
-    )}${renderBooleanAttribute('no-trailing-slash', noTrailingSlash)}>
-  ${children}
-</cds-breadcrumb>`,
+    )}${figma.helpers.react.renderProp('noTrailingSlash', noTrailingSlash)}>
+  ${figma.helpers.react.renderChildren(children)}
+</Breadcrumb>`,
     metadata: { nestable: true },
   };
 }
