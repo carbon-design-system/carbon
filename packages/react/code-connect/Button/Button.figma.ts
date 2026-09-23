@@ -63,6 +63,7 @@ function createTemplate() {
   const hasIconOnly = instance.getEnum('Type', {
     'Icon only': true,
   });
+  const buttonChildren = hasIconOnly ? undefined : buttonText;
   const iconDescription = hasIconOnly ? buttonText : undefined;
   const renderIcon = instance
     .getInstanceSwap('Swap icon')
@@ -92,7 +93,7 @@ function createTemplate() {
     )}${figma.helpers.react.renderProp(
       'renderIcon',
       renderIcon
-    )}>${figma.helpers.react.renderChildren(buttonText)}</Button>`,
+    )}>${figma.helpers.react.renderChildren(buttonChildren)}</Button>`,
     metadata: { nestable: true },
   };
 }
