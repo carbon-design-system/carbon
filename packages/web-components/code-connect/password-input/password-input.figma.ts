@@ -44,6 +44,12 @@ function createTemplate() {
   });
   const invalidText = invalid ? instance.getString('Error text') : undefined;
   const label = instance.getString('Label text');
+  const readonly = instance.getEnum('State', {
+    'Read only': true,
+  });
+  const inline = instance.getEnum('Style', {
+    Inline: true,
+  });
   const size = instance.getEnum('Size', {
     Large: 'lg',
     Medium: 'md',
@@ -68,7 +74,10 @@ function createTemplate() {
     )}${renderBooleanAttribute('invalid', invalid)}${renderStringAttribute(
       'invalid-text',
       invalidText
-    )}${renderStringAttribute('label', label)}${renderStringAttribute(
+    )}${renderBooleanAttribute('inline', inline)}${renderStringAttribute(
+      'label',
+      label
+    )}${renderBooleanAttribute('readonly', readonly)}${renderStringAttribute(
       'size',
       size
     )}${renderBooleanAttribute('warn', warn)}${renderStringAttribute(

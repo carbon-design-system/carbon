@@ -31,11 +31,9 @@ if (figma.selectedInstance.getPropertyValue('State') === 'Skeleton') {
     Warning: true,
   });
   const warnText = figma.selectedInstance.getString('Warning text');
-
-  // missing from Figma
-  // const readOnly = figma.selectedInstance.getEnum('State', {
-  //   Read-only: true,
-  // });
+  const readOnly = figma.selectedInstance.getEnum('State', {
+    'Read only': true,
+  });
 
   template = {
     id: 'FluidPasswordInput',
@@ -55,7 +53,10 @@ if (figma.selectedInstance.getPropertyValue('State') === 'Skeleton') {
     )}${figma.helpers.react.renderProp(
       'warn',
       warn
-    )}${figma.helpers.react.renderProp('warnText', warnText)}/>`,
+    )}${figma.helpers.react.renderProp(
+      'warnText',
+      warnText
+    )}${figma.helpers.react.renderProp('readOnly', readOnly)}/>`,
     metadata: { nestable: true },
   };
 }

@@ -39,11 +39,12 @@ if (figma.selectedInstance.getPropertyValue('State') === 'Skeleton') {
   const helperText = figma.selectedInstance.getBoolean('Show helper', {
     true: figma.selectedInstance.getString('Helper text'),
   });
-
-  // missing from Figma
-  // const readOnly = figma.selectedInstance.getEnum('State', {
-  //   Read-only: true,
-  // });
+  const readOnly = figma.selectedInstance.getEnum('State', {
+    'Read only': true,
+  });
+  const inline = figma.selectedInstance.getEnum('Style', {
+    Inline: true,
+  });
 
   template = {
     id: 'PasswordInput',
@@ -69,7 +70,13 @@ if (figma.selectedInstance.getPropertyValue('State') === 'Skeleton') {
     )}${figma.helpers.react.renderProp(
       'warnText',
       warnText
-    )}${figma.helpers.react.renderProp('helperText', helperText)}/>`,
+    )}${figma.helpers.react.renderProp(
+      'helperText',
+      helperText
+    )}${figma.helpers.react.renderProp(
+      'readOnly',
+      readOnly
+    )}${figma.helpers.react.renderProp('inline', inline)}/>`,
     metadata: { nestable: true },
   };
 }
