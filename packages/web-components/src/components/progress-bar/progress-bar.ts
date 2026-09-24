@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -19,6 +19,7 @@ import ErrorFilled16 from '@carbon/icons/es/error--filled/16.js';
 import CheckmarkFilled16 from '@carbon/icons/es/checkmark--filled/16.js';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import styles from './progress-bar.scss?lit';
+import { isFeatureFlagEnabled } from '../feature-flags';
 
 export { PROGRESS_BAR_SIZE, PROGRESS_BAR_STATUS, PROGRESS_BAR_TYPE };
 
@@ -113,9 +114,16 @@ class CDSProgressBar extends LitElement {
         status != PROGRESS_BAR_STATUS.ERROR &&
         status != PROGRESS_BAR_STATUS.FINISHED
       ) {
-        this._bar.style.transform = `scaleX(${percentage})`;
+        // v12: size the bar instead of scaling it, so its border-radius is not
+        // squashed along with the box
+        if (isFeatureFlagEnabled('enable-v12-release', this)) {
+          this._bar.style.inlineSize = `${percentage * 100}%`;
+        } else {
+          this._bar.style.transform = `scaleX(${percentage})`;
+        }
       } else {
         this._bar.style.transform = 'none';
+        this._bar.style.inlineSize = '';
       }
     }
   }
