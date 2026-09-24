@@ -475,7 +475,7 @@ describe.each([
         const [open, setOpen] = useState(true);
         const focusRef = useRef();
         return (
-          <FeatureFlags enableDialogElement>
+          <FeatureFlags enableV12Release={false} enableDialogElement>
             <Component
               open={open}
               launcherButtonRef={focusRef}
@@ -505,7 +505,7 @@ describe.each([
     it('should call onClose when the dialog cancel event fires', () => {
       const onClose = jest.fn();
       render(
-        <FeatureFlags enableDialogElement>
+        <FeatureFlags enableV12Release={false} enableDialogElement>
           <Component open onClose={onClose}>
             <ModalHeader>Modal header</ModalHeader>
             <ModalBody>Modal content</ModalBody>

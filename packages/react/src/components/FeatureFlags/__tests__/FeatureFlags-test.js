@@ -256,11 +256,11 @@ describe('FeatureFlags', () => {
     );
 
     expect(checkFlags).toHaveBeenLastCalledWith({
-      enableV12Overflowmenu: false,
+      enableV12Overflowmenu: true,
       enableTreeviewControllable: true,
     });
     expect(checkFlag).toHaveBeenLastCalledWith({
-      enableV12Overflowmenu: false,
+      enableV12Overflowmenu: true,
       enableTreeviewControllable: true,
     });
   });
@@ -286,7 +286,7 @@ describe('FeatureFlags', () => {
     );
 
     expect(checkFlag).toHaveBeenLastCalledWith({
-      enableV12Overflowmenu: false,
+      enableV12Overflowmenu: true,
       enableTreeviewControllable: true,
     });
 
@@ -432,11 +432,11 @@ describe('FeatureFlags', () => {
     );
 
     expect(checkFlags).toHaveBeenLastCalledWith({
-      enableV12Overflowmenu: false,
+      enableV12Overflowmenu: true,
       enableExperimentalFocusWrapWithoutSentinels: true,
     });
     expect(checkFlag).toHaveBeenLastCalledWith({
-      enableV12Overflowmenu: false,
+      enableV12Overflowmenu: true,
       enableExperimentalFocusWrapWithoutSentinels: true,
     });
   });
@@ -566,10 +566,10 @@ describe('FeatureFlags', () => {
 
       // Ensure the default value is as defined and as expected
       expect(checkFlags).toHaveBeenLastCalledWith({
-        enableV12TileDefaultIcons: false,
+        enableV12TileDefaultIcons: true,
       });
       expect(checkFlag).toHaveBeenLastCalledWith({
-        enableV12TileDefaultIcons: false,
+        enableV12TileDefaultIcons: true,
       });
 
       // Enable the flag
@@ -620,10 +620,10 @@ describe('FeatureFlags', () => {
 
       // Ensure the default value is as defined and as expected
       expect(checkFlags).toHaveBeenLastCalledWith({
-        enableV12TileRadioIcons: false,
+        enableV12TileRadioIcons: true,
       });
       expect(checkFlag).toHaveBeenLastCalledWith({
-        enableV12TileRadioIcons: false,
+        enableV12TileRadioIcons: true,
       });
 
       // Enable the flag
@@ -672,10 +672,10 @@ describe('FeatureFlags', () => {
 
       // Ensure the default value is as defined and as expected
       expect(checkFlags).toHaveBeenLastCalledWith({
-        enableV12Overflowmenu: false,
+        enableV12Overflowmenu: true,
       });
       expect(checkFlag).toHaveBeenLastCalledWith({
-        enableV12Overflowmenu: false,
+        enableV12Overflowmenu: true,
       });
 
       // Enable the flag
@@ -834,10 +834,10 @@ describe('FeatureFlags', () => {
 
       // Ensure the default value is as defined and as expected
       expect(checkFlags).toHaveBeenLastCalledWith({
-        enableFocusWrapWithoutSentinels: false,
+        enableFocusWrapWithoutSentinels: true,
       });
       expect(checkFlag).toHaveBeenLastCalledWith({
-        enableFocusWrapWithoutSentinels: false,
+        enableFocusWrapWithoutSentinels: true,
       });
 
       // Enable the flag
@@ -888,10 +888,10 @@ describe('FeatureFlags', () => {
 
       // Ensure the default value is as defined and as expected
       expect(checkFlags).toHaveBeenLastCalledWith({
-        enableV12DynamicFloatingStyles: false,
+        enableV12DynamicFloatingStyles: true,
       });
       expect(checkFlag).toHaveBeenLastCalledWith({
-        enableV12DynamicFloatingStyles: false,
+        enableV12DynamicFloatingStyles: true,
       });
 
       // Enable the flag

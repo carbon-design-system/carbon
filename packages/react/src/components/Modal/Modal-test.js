@@ -681,7 +681,7 @@ describe.each([
         const [open, setOpen] = useState(true);
         const focusRef = useRef();
         return (
-          <FeatureFlags enableDialogElement>
+          <FeatureFlags enableV12Release={false} enableDialogElement>
             <Component
               open={open}
               launcherButtonRef={focusRef}
@@ -711,7 +711,7 @@ describe.each([
     it('should call onRequestClose when the dialog cancel event fires', () => {
       const onRequestClose = jest.fn();
       render(
-        <FeatureFlags enableDialogElement>
+        <FeatureFlags enableV12Release={false} enableDialogElement>
           <Component
             open
             modalHeading="Test modal"
@@ -1702,7 +1702,7 @@ describe.each([
 describe('enableDialogElement role attribute', () => {
   it('should preserve native dialog attributes for non-alert modals', () => {
     render(
-      <FeatureFlags enableDialogElement>
+      <FeatureFlags enableV12Release={false} enableDialogElement>
         <Modal open>
           <p>Body</p>
         </Modal>
@@ -1718,7 +1718,7 @@ describe('enableDialogElement role attribute', () => {
 
   it('should set alertdialog attributes for alert modals', () => {
     render(
-      <FeatureFlags enableDialogElement>
+      <FeatureFlags enableV12Release={false} enableDialogElement>
         <Modal open danger alert>
           <p>Body</p>
         </Modal>
@@ -1776,7 +1776,9 @@ describe.each([
 
         render(
           enableDialogElement ? (
-            <FeatureFlags enableDialogElement>{modal}</FeatureFlags>
+            <FeatureFlags enableV12Release={false} enableDialogElement>
+              {modal}
+            </FeatureFlags>
           ) : (
             modal
           )
