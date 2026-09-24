@@ -99,6 +99,10 @@
     user-select: none;
   }
 
+  .#{$prefix}--loading-overlay > div:focus {
+    outline: none;
+  }
+
   .#{$prefix}--loading-overlay--stop {
     display: none;
   }
