@@ -1,3 +1,7 @@
+// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=17422-270657&t=Qm7ndWAwgu7d5Uxc-4
+// source=https://github.com/carbon-design-system/carbon/blob/main/packages/web-components/src/components/checkbox/checkbox-group.ts
+// component=cds-checkbox-group
+
 /**
  * Copyright IBM Corp. 2026
  *
@@ -5,41 +9,53 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import figma, { html } from '@figma/code-connect/html';
+import figma from 'figma';
+import {
+  renderBooleanAttribute,
+  renderStringAttribute,
+} from '../template-helpers';
 
-figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=17422-270657&t=Qm7ndWAwgu7d5Uxc-4',
-  {
-    props: {
-      children: figma.children(['Checkbox']),
-      helperText: figma.boolean('Helper message', {
-        true: figma.string('Helper text'),
-      }),
-      readonly: figma.enum('State', {
-        'Read-only': true,
-      }),
-      invalid: figma.enum('State', {
-        Invalid: true,
-      }),
-      invalidText: figma.string('Error text'),
-      warn: figma.enum('State', {
-        Warning: true,
-      }),
-      warnText: figma.string('Warning text'),
-    },
-    example: (props) =>
-      html`<cds-checkbox-group
-        helper-text=${props.helperText}
-        invalid=${props.invalid}
-        invalid-text=${props.invalidText}
-        legend-text="Checkbox group label"
-        readonly=${props.readonly}
-        warn=${props.warn}
-        warn-text=${props.warnText}>
-        ${props.children}
-      </cds-checkbox-group>`,
-    imports: [
-      "import '@carbon/web-components/es/components/checkbox/index.js'",
-    ],
-  }
-);
+const instance = figma.selectedInstance;
+const children = instance
+  .findConnectedInstances((child) => child.hasCodeConnect())
+  .map((child) => child.executeTemplate().example);
+const helperText = instance.getBoolean('Helper message')
+  ? instance.getString('Helper text')
+  : undefined;
+const orientation = instance.getBoolean('Horizontal')
+  ? 'horizontal'
+  : undefined;
+const readonly = instance.getEnum('State', {
+  'Read-only': true,
+});
+const invalid = instance.getEnum('State', {
+  Invalid: true,
+});
+const invalidText = invalid ? instance.getString('Error text') : undefined;
+const warn = instance.getEnum('State', {
+  Warning: true,
+});
+const warnText = warn ? instance.getString('Warning text') : undefined;
+
+export default {
+  id: 'cds-checkbox-group',
+  imports: [
+    "import '@carbon/web-components/es/components/checkbox/checkbox-group.js'",
+  ],
+  example: figma.code`<cds-checkbox-group${renderStringAttribute(
+    'orientation',
+    orientation
+  )}${renderStringAttribute('helper-text', helperText)}${renderBooleanAttribute(
+    'readonly',
+    readonly
+  )}${renderBooleanAttribute('invalid', invalid)}${renderStringAttribute(
+    'invalid-text',
+    invalidText
+  )}${renderBooleanAttribute('warn', warn)}${renderStringAttribute(
+    'warn-text',
+    warnText
+  )} legend-text="Checkbox group label">
+  ${children}
+</cds-checkbox-group>`,
+  metadata: { nestable: true },
+};

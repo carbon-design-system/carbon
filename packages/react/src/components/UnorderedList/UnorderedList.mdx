@@ -30,7 +30,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(UnorderedList.Default),
+      onClick: () => stackblitzPrefillConfig({ story: UnorderedList.Default }),
     },
   ]}
 />
@@ -42,7 +42,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(UnorderedList.Nested),
+      onClick: () => stackblitzPrefillConfig({ story: UnorderedList.Nested }),
     },
   ]}
 />

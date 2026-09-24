@@ -25,7 +25,7 @@ import { deprecate } from '../../prop-types/deprecate';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
-import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
+import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
 import { useFeatureFlag } from '../FeatureFlags';
 
 type ExcludedAttributes = 'value' | 'onChange' | 'locale' | 'children';
@@ -279,7 +279,7 @@ const DatePickerInput = frFn((props, ref) => {
   const normalizedDecorator = candidateIsAILabel
     ? cloneElement(candidate, { size: 'mini' })
     : candidate;
-  useNoInteractiveChildren(
+  useNoInteractiveChildrenForLabel(
     labelRef,
     'The DatePickerInput component `labelText` prop must have no interactive content'
   );

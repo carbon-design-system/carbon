@@ -23,7 +23,7 @@ const GLOBAL_DTCG_SCHEMA_URL =
 const SCHEMA_FETCH_TIMEOUT = 10000;
 
 /**
- * Pre-processes token data before schema validation to handle two Carbon-specific
+ * Pre-processes token data before schema validation to handle Carbon-specific
  * patterns that are structurally valid for Carbon's use case but don't conform
  * to the strict DTCG oneOf schema:
  *
@@ -32,10 +32,14 @@ const SCHEMA_FETCH_TIMEOUT = 10000;
  *    Renaming these would be a breaking change, so we strip $value/$type before
  *    validation, treating them as pure groups.
  *
- * 2. Component tokens: intentionally have no $value — their per-theme values
- *    live in $extensions.carbon.themes and are consumed by the DTCG build
- *    pipeline to generate Sass maps. We strip $type so the schema treats them
- *    as group nodes rather than invalid tokens.
+ * 2. Unified theme tokens / component tokens: intentionally have no $value —
+ *    their per-theme values live in $extensions["carbon.themes"] and are
+ *    consumed by the DTCG build pipeline. We strip $type so the schema treats
+ *    them as group nodes rather than invalid tokens.
+ *
+ * 3. Unified theme token entries: the carbon.themes map may contain objects
+ *    { value, alpha } instead of plain strings. These live inside $extensions
+ *    which the DTCG schema treats as freeform, so they pass through unchanged.
  */
 function prepareForValidation(obj) {
   if (!obj || typeof obj !== 'object') return obj;
@@ -67,9 +71,9 @@ function prepareForValidation(obj) {
     !('$ref' in result) &&
     childKeys.length === 0
   ) {
-    // Component token: has $type but no $value — intentional pattern where
-    // per-theme values live in $extensions.carbon.themes. Strip $type so
-    // schema treats it as a valid group/extension node.
+    // Unified theme / component token: has $type but no $value — intentional
+    // pattern where per-theme values live in $extensions["carbon.themes"].
+    // Strip $type so schema treats it as a valid group/extension node.
     delete result['$type'];
   }
 
@@ -139,8 +143,9 @@ describe('DTCG Schema Validation', () => {
   });
 
   describe('Theme token files', () => {
-    const themeFiles = ['white.json', 'g10.json', 'g90.json', 'g100.json'].map(
-      (file) => path.join(__dirname, '../src/dtcg', file)
+    // The four per-theme files have been consolidated into a single themes.json.
+    const themeFiles = ['themes.json'].map((file) =>
+      path.join(__dirname, '../src/dtcg', file)
     );
 
     test.each(themeFiles)('should validate %s against DTCG schema', (file) => {

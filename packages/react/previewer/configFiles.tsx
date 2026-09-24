@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -17,13 +17,14 @@ export const packageJson: string = `{
   },
   "dependencies": {
     "@carbon/react": "latest",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "classnames": "latest",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "4.0.0",
+    "@vitejs/plugin-react": "^4.3.0",
     "sass": "^1.77.7",
-    "vite": "^6.3.5"
+    "vite": "^6.0.0"
   }
 }`;
 
@@ -38,7 +39,7 @@ export const index: string = `
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
 
@@ -82,3 +83,17 @@ export const flexGridScss: string = `
   $use-flexbox-grid: true
 );
 `;
+
+export const tsconfig: string = `{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "jsx": "react-jsx",
+    "strict": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src"]
+}`;
