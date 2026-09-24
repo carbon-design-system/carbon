@@ -11,7 +11,6 @@ import { prefix } from '../../globals/settings';
 import { forEach } from '../../globals/internal/collection-helpers';
 import { ACCORDION_SIZE, ACCORDION_ALIGNMENT } from './defs';
 import styles from './accordion.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 export { ACCORDION_SIZE, ACCORDION_ALIGNMENT };
 
@@ -20,8 +19,9 @@ export { ACCORDION_SIZE, ACCORDION_ALIGNMENT };
  *
  * @element cds-accordion
  */
-@customElement(`${prefix}-accordion`)
 class CDSAccordion extends LitElement {
+  static is = `${prefix}-accordion`;
+
   /**
    * Accordion size should be sm, md, lg.
    */

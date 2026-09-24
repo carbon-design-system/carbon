@@ -7,7 +7,6 @@
 
 import { html } from 'lit';
 import { classMap } from 'lit/directives/class-map.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import { prefix } from '../../globals/settings';
 import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
@@ -27,8 +26,9 @@ import styles from './fluid-time-picker.scss?lit';
  * @slot warning-text - The warning text.
  * @slot - slot for fluid time picker select components.
  */
-@customElement(`${prefix}-fluid-time-picker`)
 class CDSFluidTimePicker extends CDSTimePicker {
+  static is = `${prefix}-fluid-time-picker`;
+
   private _hoverTargets: HTMLElement[] = [];
 
   private _handleSelectMouseEnter = (event: MouseEvent) => {

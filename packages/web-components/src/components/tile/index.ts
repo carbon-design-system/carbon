@@ -5,9 +5,26 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './clickable-tile';
-import './expandable-tile';
-import './radio-tile';
-import './selectable-tile';
-import './tile';
-import './tile-group';
+import { defineCustomElement } from '../../globals/register';
+import CDSClickableTile from './clickable-tile';
+import CDSExpandableTile from './expandable-tile';
+import CDSRadioTile from './radio-tile';
+import CDSSelectableTile from './selectable-tile';
+import CDSTile from './tile';
+import CDSTileGroup from './tile-group';
+
+export {
+  CDSClickableTile,
+  CDSExpandableTile,
+  CDSRadioTile,
+  CDSSelectableTile,
+  CDSTile,
+  CDSTileGroup,
+};
+
+defineCustomElement(CDSClickableTile);
+defineCustomElement(CDSExpandableTile);
+defineCustomElement(CDSRadioTile);
+defineCustomElement(CDSSelectableTile);
+defineCustomElement(CDSTile);
+defineCustomElement(CDSTileGroup);

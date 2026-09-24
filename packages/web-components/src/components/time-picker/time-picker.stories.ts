@@ -8,9 +8,9 @@
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import './index';
-import '../form/form-item';
+import '../form/index';
 import './time-picker-select';
-import '../select/select-item';
+import '../select/index';
 import './time-picker';
 import { withLayers } from '../../../.storybook/decorators/with-layers';
 

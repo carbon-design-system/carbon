@@ -8,7 +8,6 @@
 import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
 import { property, query } from 'lit/decorators.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
 import styles from './popover.scss?lit';
 import CDSPopoverContent from './popover-content';
@@ -27,8 +26,9 @@ import { isFeatureFlagEnabled } from '../feature-flags';
  * @fires cds-popover-beingclosed before the popover closes via focusout/outsideclick.
  * @fires cds-popover-closed when the popover closes via focusout/outsideclick
  */
-@customElement(`${prefix}-popover`)
 class CDSPopover extends HostListenerMixin(LitElement) {
+  static is = `${prefix}-popover`;
+
   /**
    * Create popover controller instance
    */

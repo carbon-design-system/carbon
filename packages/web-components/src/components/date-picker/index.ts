@@ -5,6 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './date-picker';
-import './date-picker-input';
-import './date-picker-input-skeleton';
+import { defineCustomElement } from '../../globals/register';
+import CDSDatePicker from './date-picker';
+import CDSDatePickerInput from './date-picker-input';
+import CDSDatePickerInputSkeleton from './date-picker-input-skeleton';
+
+export { CDSDatePicker, CDSDatePickerInput, CDSDatePickerInputSkeleton };
+
+defineCustomElement(CDSDatePicker);
+defineCustomElement(CDSDatePickerInput);
+defineCustomElement(CDSDatePickerInputSkeleton);

@@ -7,7 +7,6 @@
 
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
 import styles from './form-group.scss?lit';
 
@@ -16,8 +15,9 @@ import styles from './form-group.scss?lit';
  *
  * @element cds-form-group
  */
-@customElement(`${prefix}-form-group`)
 class CDSFormGroup extends LitElement {
+  static is = `${prefix}-form-group`;
+
   /**
    * Specify whether the Form Group is invalid
    */

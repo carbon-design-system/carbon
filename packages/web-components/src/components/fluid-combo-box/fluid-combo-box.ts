@@ -7,7 +7,6 @@
 
 import { prefix } from '../../globals/settings';
 import { property } from 'lit/decorators.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import CDSComboBox from '../combo-box/combo-box';
 import styles from './fluid-combo-box.scss?lit';
 
@@ -16,8 +15,9 @@ import styles from './fluid-combo-box.scss?lit';
  *
  * @element cds-fluid-combo-box
  */
-@customElement(`${prefix}-fluid-combo-box`)
 class CDSFluidComboBox extends CDSComboBox {
+  static is = `${prefix}-fluid-combo-box`;
+
   /**
    * Specify if the combo box should render its menu items in condensed mode.
    */

@@ -9,7 +9,6 @@ import { LitElement, html } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import HostListenerMixin from '../../globals/mixins/host-listener';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import styles from './coachmark.scss?lit';
 import { SignalWatcher } from '@lit-labs/signals';
 import '../popover/index';
@@ -32,8 +31,9 @@ export const blockClass = `${prefix}--coachmark`;
  *   The custom event fired when the coachmark is closed.
  *   This event can be used to perform actions such as restoring focus when the coachmark is dismissed.
  */
-@customElement(`${prefix}-coachmark`)
 class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
+  static is = `${prefix}-coachmark`;
+
   /**
    * Specifies whether the component is currently open.
    */

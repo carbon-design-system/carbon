@@ -11,7 +11,6 @@ import { prefix } from '../../globals/settings';
 import { forEach } from '../../globals/internal/collection-helpers';
 import { TABLE_SIZE, TABLE_SORT_DIRECTION } from './defs';
 import styles from './data-table.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
@@ -54,8 +53,9 @@ export { TABLE_SIZE };
  * @fires cds-table-filtered
  *   The name of the custom event fired after the table has been filtered containing remaining rows.
  */
-@customElement(`${prefix}-table`)
 class CDSTable extends HostListenerMixin(LitElement) {
+  static is = `${prefix}-table`;
+
   /**
    * The map of how sorting direction affects sorting order.
    */

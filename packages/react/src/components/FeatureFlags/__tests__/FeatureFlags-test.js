@@ -256,11 +256,11 @@ describe('FeatureFlags', () => {
     );
 
     expect(checkFlags).toHaveBeenLastCalledWith({
-      enableV12Overflowmenu: false,
+      enableV12Overflowmenu: true,
       enableTreeviewControllable: true,
     });
     expect(checkFlag).toHaveBeenLastCalledWith({
-      enableV12Overflowmenu: false,
+      enableV12Overflowmenu: true,
       enableTreeviewControllable: true,
     });
   });
@@ -286,7 +286,7 @@ describe('FeatureFlags', () => {
     );
 
     expect(checkFlag).toHaveBeenLastCalledWith({
-      enableV12Overflowmenu: false,
+      enableV12Overflowmenu: true,
       enableTreeviewControllable: true,
     });
 
@@ -306,9 +306,10 @@ describe('FeatureFlags', () => {
     });
 
     // Explicitly setting a flag to false in an inner scope overrides the
-    // parent scope's true value.
+    // parent scope's true value. The release flag is off here because it
+    // enables every v12 flag regardless of what a scope sets.
     render(
-      <FeatureFlags enableTreeviewControllable>
+      <FeatureFlags enableV12Release={false} enableTreeviewControllable>
         <FeatureFlags enableV12Overflowmenu>
           <FeatureFlags
             enableTreeviewControllable={false}
@@ -432,11 +433,11 @@ describe('FeatureFlags', () => {
     );
 
     expect(checkFlags).toHaveBeenLastCalledWith({
-      enableV12Overflowmenu: false,
+      enableV12Overflowmenu: true,
       enableExperimentalFocusWrapWithoutSentinels: true,
     });
     expect(checkFlag).toHaveBeenLastCalledWith({
-      enableV12Overflowmenu: false,
+      enableV12Overflowmenu: true,
       enableExperimentalFocusWrapWithoutSentinels: true,
     });
   });
@@ -512,10 +513,10 @@ describe('FeatureFlags', () => {
 
       // Ensure the default value is as defined and as expected
       expect(checkFlags).toHaveBeenLastCalledWith({
-        enableV12Release: false,
+        enableV12Release: true,
       });
       expect(checkFlag).toHaveBeenLastCalledWith({
-        enableV12Release: false,
+        enableV12Release: true,
       });
 
       // Enable the flag
@@ -566,10 +567,10 @@ describe('FeatureFlags', () => {
 
       // Ensure the default value is as defined and as expected
       expect(checkFlags).toHaveBeenLastCalledWith({
-        enableV12TileDefaultIcons: false,
+        enableV12TileDefaultIcons: true,
       });
       expect(checkFlag).toHaveBeenLastCalledWith({
-        enableV12TileDefaultIcons: false,
+        enableV12TileDefaultIcons: true,
       });
 
       // Enable the flag
@@ -620,10 +621,10 @@ describe('FeatureFlags', () => {
 
       // Ensure the default value is as defined and as expected
       expect(checkFlags).toHaveBeenLastCalledWith({
-        enableV12TileRadioIcons: false,
+        enableV12TileRadioIcons: true,
       });
       expect(checkFlag).toHaveBeenLastCalledWith({
-        enableV12TileRadioIcons: false,
+        enableV12TileRadioIcons: true,
       });
 
       // Enable the flag
@@ -672,10 +673,10 @@ describe('FeatureFlags', () => {
 
       // Ensure the default value is as defined and as expected
       expect(checkFlags).toHaveBeenLastCalledWith({
-        enableV12Overflowmenu: false,
+        enableV12Overflowmenu: true,
       });
       expect(checkFlag).toHaveBeenLastCalledWith({
-        enableV12Overflowmenu: false,
+        enableV12Overflowmenu: true,
       });
 
       // Enable the flag
@@ -834,10 +835,10 @@ describe('FeatureFlags', () => {
 
       // Ensure the default value is as defined and as expected
       expect(checkFlags).toHaveBeenLastCalledWith({
-        enableFocusWrapWithoutSentinels: false,
+        enableFocusWrapWithoutSentinels: true,
       });
       expect(checkFlag).toHaveBeenLastCalledWith({
-        enableFocusWrapWithoutSentinels: false,
+        enableFocusWrapWithoutSentinels: true,
       });
 
       // Enable the flag
@@ -888,10 +889,10 @@ describe('FeatureFlags', () => {
 
       // Ensure the default value is as defined and as expected
       expect(checkFlags).toHaveBeenLastCalledWith({
-        enableV12DynamicFloatingStyles: false,
+        enableV12DynamicFloatingStyles: true,
       });
       expect(checkFlag).toHaveBeenLastCalledWith({
-        enableV12DynamicFloatingStyles: false,
+        enableV12DynamicFloatingStyles: true,
       });
 
       // Enable the flag
@@ -1026,20 +1027,6 @@ describe('FeatureFlags', () => {
 
     afterEach(() => {
       info.mockRestore();
-    });
-
-    it('should notify when a v12 flag is available but not enabled', () => {
-      add('enable-v12-notice-available', false);
-
-      function TestComponent() {
-        useFeatureFlag('enable-v12-notice-available');
-        return null;
-      }
-
-      render(<TestComponent />);
-
-      expect(info).toHaveBeenCalledTimes(1);
-      expect(info.mock.calls[0][0]).toContain('enable-v12-notice-available');
     });
 
     it('should not notify for a flag enabled by the v12 release flag', () => {

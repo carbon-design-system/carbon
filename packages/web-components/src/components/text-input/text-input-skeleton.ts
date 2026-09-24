@@ -7,7 +7,6 @@
 
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { classMap } from 'lit/directives/class-map.js';
 import { prefix } from '../../globals/settings';
 import styles from './text-input.scss?lit';
@@ -18,8 +17,9 @@ import { INPUT_SIZE } from './defs';
  *
  * Skeleton of text input.
  */
-@customElement(`${prefix}-text-input-skeleton`)
 class CDSTextInputSkeleton extends LitElement {
+  static is = `${prefix}-text-input-skeleton`;
+
   /**
    * Specify whether the label should be hidden, or not
    */

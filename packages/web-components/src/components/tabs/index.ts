@@ -5,10 +5,20 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './tabs';
-import './tab';
-import './tab-skeleton';
-import './tabs-skeleton';
-import './tabs-vertical';
-import '../badge-indicator';
-import '../tooltip';
+import { defineCustomElement } from '../../globals/register';
+import '../button/index';
+import '../badge-indicator/index';
+import '../tooltip/index';
+import CDSTabs from './tabs';
+import CDSTab from './tab';
+import CDSTabSkeleton from './tab-skeleton';
+import CDSTabsSkeleton from './tabs-skeleton';
+import CDSTabsVertical from './tabs-vertical';
+
+export { CDSTabs, CDSTab, CDSTabSkeleton, CDSTabsSkeleton, CDSTabsVertical };
+
+defineCustomElement(CDSTabs);
+defineCustomElement(CDSTab);
+defineCustomElement(CDSTabSkeleton);
+defineCustomElement(CDSTabsSkeleton);
+defineCustomElement(CDSTabsVertical);

@@ -12,7 +12,6 @@
 import { LitElement, html } from 'lit';
 import { prefix } from '../../globals/settings';
 import styles from './page-header.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Page header Hero Image.
@@ -21,8 +20,9 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  *   See https://github.com/carbon-design-system/carbon/issues/21926
  * @element cds-page-header-hero-image
  */
-@customElement(`${prefix}-page-header-hero-image`)
 class CDSPageHeaderHeroImage extends LitElement {
+  static is = `${prefix}-page-header-hero-image`;
+
   render() {
     return html`<slot></slot> `;
   }

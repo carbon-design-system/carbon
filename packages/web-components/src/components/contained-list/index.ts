@@ -5,6 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './contained-list';
-import './contained-list-item';
-import './contained-list-description';
+import { defineCustomElement } from '../../globals/register';
+import CDSContainedList from './contained-list';
+import CDSContainedListItem from './contained-list-item';
+import CDSContainedListDescription from './contained-list-description';
+
+export { CDSContainedList, CDSContainedListItem, CDSContainedListDescription };
+
+defineCustomElement(CDSContainedList);
+defineCustomElement(CDSContainedListItem);
+defineCustomElement(CDSContainedListDescription);

@@ -11,14 +11,14 @@ import { prefix } from '../../globals/settings';
 import styles from './progress-indicator.scss?lit';
 import CircleDash from '@carbon/icons/es/circle-dash/16.js';
 import '../skeleton-text';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { iconLoader } from '../../globals/internal/icon-loader';
 
 /**
  * Skeleton of progress step.
  */
-@customElement(`${prefix}-progress-step-skeleton`)
 export default class CDSProgressStepSkeleton extends LitElement {
+  static is = `${prefix}-progress-step-skeleton`;
+
   /**
    * `true` if the progress indicator should be vertical. Corresponds to the attribute with the same name.
    */

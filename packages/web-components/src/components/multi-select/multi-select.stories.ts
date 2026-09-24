@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import './index';
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import View16 from '@carbon/icons/es/view/16.js';

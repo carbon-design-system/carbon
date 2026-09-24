@@ -9,7 +9,6 @@ import { LitElement, html, nothing } from 'lit';
 import { state } from 'lit/decorators.js';
 import { consume } from '@lit/context';
 import { prefix } from '../../globals/settings';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import {
   cardContext,
   cardDefaultContext,
@@ -31,8 +30,9 @@ import styles from './card.scss?lit';
  * @element cds-card-footer
  * @slot - Default slot for footer content or cds-card-action elements.
  */
-@customElement(`${prefix}-card-footer`)
 class CDSCardFooter extends LitElement {
+  static is = `${prefix}-card-footer`;
+
   @consume({ context: cardContext, subscribe: true })
   @state()
   private _cardContext: CardContextValue = cardDefaultContext;

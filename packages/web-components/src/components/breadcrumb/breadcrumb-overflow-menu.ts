@@ -13,7 +13,6 @@ import { iconLoader } from '../../globals/internal/icon-loader';
 
 import overflowMenuStyles from '../overflow-menu/overflow-menu.scss?lit';
 import styles from './breadcrumb.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Overflow menu in breadcrumb.
@@ -22,8 +21,9 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  *
  * @element cds-breadcrumb-overflow-menu
  */
-@customElement(`${prefix}-breadcrumb-overflow-menu`)
 class CDSBreadcrumbOverflowMenu extends CDSOverflowMenu {
+  static is = `${prefix}-breadcrumb-overflow-menu`;
+
   connectedCallback() {
     super.connectedCallback();
 

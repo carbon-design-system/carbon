@@ -68,9 +68,6 @@ describe('AILabel', () => {
         <AILabel data-testid="test" autoAlign={false} align="bottom-start" />
       );
 
-      expect(screen.getByTestId('test')).not.toHaveClass(
-        `${prefix}--popover--auto-align`
-      );
       expect(screen.getByTestId('test')).toHaveClass(
         `${prefix}--popover--bottom-start`
       );

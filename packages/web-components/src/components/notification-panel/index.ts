@@ -5,6 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './notification-panel';
-import './notification';
-import './notification-footer';
+import { defineCustomElement } from '../../globals/register';
+import CDSNotificationPanel from './notification-panel';
+import CDSNotification from './notification';
+import CDSNotificationFooter from './notification-footer';
+
+export { CDSNotificationPanel, CDSNotification, CDSNotificationFooter };
+
+defineCustomElement(CDSNotificationPanel);
+defineCustomElement(CDSNotification);
+defineCustomElement(CDSNotificationFooter);

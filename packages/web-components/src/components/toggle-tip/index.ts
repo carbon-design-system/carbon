@@ -5,4 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './toggletip';
+import { defineCustomElement } from '../../globals/register';
+import CDSToggletip from './toggletip';
+
+export { CDSToggletip };
+
+defineCustomElement(CDSToggletip);

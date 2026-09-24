@@ -10,50 +10,20 @@ import TextInput from '../TextInput';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
 import { AILabel } from '../../AILabel';
-import { FeatureFlags } from '../../FeatureFlags';
 
 const prefix = 'cds';
 
 describe('TextInput', () => {
   describe('renders as expected - Component API', () => {
-    it('should warn without throwing for interactive content in labelText', () => {
+    it('should throw for interactive content in labelText', () => {
       const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
       const errorSpy = jest
         .spyOn(console, 'error')
         .mockImplementation(() => {});
 
-      expect(() => {
-        render(
-          <TextInput
-            id="input-1"
-            labelText={
-              <>
-                TextInput label <a href="/">Help</a>
-              </>
-            }
-          />
-        );
-      }).not.toThrow();
-
-      expect(spy).toHaveBeenCalledWith(
-        expect.stringContaining(
-          'Warning: The TextInput component `labelText` prop must have no interactive content'
-        )
-      );
-      expect(errorSpy).not.toHaveBeenCalled();
-      expect(screen.getByRole('textbox')).toBeInTheDocument();
-      expect(screen.getByRole('link', { name: 'Help' })).toBeInTheDocument();
-
-      spy.mockRestore();
-      errorSpy.mockRestore();
-    });
-
-    it('should throw for interactive content in labelText when the v12 release flag is enabled', () => {
-      const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
-
-      expect(() =>
-        render(
-          <FeatureFlags enableV12Release>
+      try {
+        expect(() =>
+          render(
             <TextInput
               id="input-1"
               labelText={
@@ -62,13 +32,20 @@ describe('TextInput', () => {
                 </span>
               }
             />
-          </FeatureFlags>
-        )
-      ).toThrow(
-        'The TextInput component `labelText` prop must have no interactive content'
-      );
+          )
+        ).toThrow(
+          'The TextInput component `labelText` prop must have no interactive content'
+        );
 
-      spy.mockRestore();
+        expect(errorSpy).toHaveBeenCalledWith(
+          expect.stringContaining(
+            'Error: The TextInput component `labelText` prop must have no interactive content'
+          )
+        );
+      } finally {
+        spy.mockRestore();
+        errorSpy.mockRestore();
+      }
     });
 
     it('should allow non-interactive content in labelText', () => {

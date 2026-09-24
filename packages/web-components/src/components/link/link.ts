@@ -12,7 +12,6 @@ import { property, query } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import styles from './link.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Link size.
@@ -32,8 +31,9 @@ type LINK_SIZE_TYPE = (typeof LINK_SIZE)[keyof typeof LINK_SIZE];
  * @element cds-link
  * @csspart link The link.
  */
-@customElement(`${prefix}-link`)
 class CDSLink extends FocusMixin(LitElement) {
+  static is = `${prefix}-link`;
+
   /**
    * `true` if there is an icon.
    */

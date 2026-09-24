@@ -9,15 +9,15 @@ import { LitElement, html } from 'lit';
 import { prefix } from '../../globals/settings';
 import styles from './ai-skeleton.scss?lit';
 import '../skeleton-placeholder/skeleton-placeholder';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * AI skeleton placeholder.
  *
  * @element cds-ai-skeleton-placeholder
  */
-@customElement(`${prefix}-ai-skeleton-placeholder`)
 class CDSAISkeletonPlaceholder extends LitElement {
+  static is = `${prefix}-ai-skeleton-placeholder`;
+
   render() {
     return html`<cds-skeleton-placeholder
       exportparts="placeholder:skeleton-placeholder"

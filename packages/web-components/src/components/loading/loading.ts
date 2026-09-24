@@ -12,7 +12,6 @@ import { prefix } from '../../globals/settings';
 import { LOADING_TYPE } from './defs';
 import getLoadingIcon from './loading-icon';
 import styles from './loading.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Spinner indicating loading state.
@@ -20,8 +19,9 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  * @element cds-loading
  */
 
-@customElement(`${prefix}-loading`)
 class CDSLoading extends LitElement {
+  static is = `${prefix}-loading`;
+
   /**
    * @deprecated
    * The 'assistive-text' property will be deprecated in the next major release. Please use `description` instead.

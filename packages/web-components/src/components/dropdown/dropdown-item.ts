@@ -12,7 +12,6 @@ import { iconLoader } from '../../globals/internal/icon-loader';
 import Checkmark16 from '@carbon/icons/es/checkmark/16.js';
 import { DROPDOWN_SIZE } from './dropdown';
 import styles from './dropdown.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Dropdown item.
@@ -20,8 +19,9 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  * @element cds-dropdown-item
  * @csspart selected-icon The selected icon.
  */
-@customElement(`${prefix}-dropdown-item`)
 class CDSDropdownItem extends LitElement {
+  static is = `${prefix}-dropdown-item`;
+
   /**
    * `true` if this dropdown item should be disabled.
    */

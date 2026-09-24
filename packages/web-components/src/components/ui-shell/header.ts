@@ -7,7 +7,6 @@
 
 import { LitElement, html } from 'lit';
 import { prefix } from '../../globals/settings';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import styles from './header.scss?lit';
 
 /**
@@ -15,8 +14,9 @@ import styles from './header.scss?lit';
  *
  * @element cds-header
  */
-@customElement(`${prefix}-header`)
 class CDSHeader extends LitElement {
+  static is = `${prefix}-header`;
+
   connectedCallback() {
     if (!this.hasAttribute('role')) {
       this.setAttribute('role', 'banner');

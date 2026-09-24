@@ -20,7 +20,6 @@ import { AILabel, AILabelContent } from '../AILabel';
 import { FeatureFlags } from '../FeatureFlags';
 import { ModalPresence, withModalPresence } from './ModalPresence';
 import OverflowMenu from '../OverflowMenu';
-import OverflowMenuItem from '../OverflowMenuItem';
 import { MenuButton } from '../MenuButton';
 import { MenuItem } from '../Menu';
 import CodeSnippet from '../CodeSnippet';
@@ -681,7 +680,7 @@ describe.each([
         const [open, setOpen] = useState(true);
         const focusRef = useRef();
         return (
-          <FeatureFlags enableDialogElement>
+          <FeatureFlags enableV12Release={false} enableDialogElement>
             <Component
               open={open}
               launcherButtonRef={focusRef}
@@ -711,7 +710,7 @@ describe.each([
     it('should call onRequestClose when the dialog cancel event fires', () => {
       const onRequestClose = jest.fn();
       render(
-        <FeatureFlags enableDialogElement>
+        <FeatureFlags enableV12Release={false} enableDialogElement>
           <Component
             open
             modalHeading="Test modal"
@@ -1345,9 +1344,9 @@ describe.each([
           primaryButtonText="Primary button"
           secondaryButtonText="Secondary button"
           onRequestClose={onRequestClose}>
-          <OverflowMenu iconDescription="More options">
-            <OverflowMenuItem itemText="Download" />
-            <OverflowMenuItem itemText="Share" />
+          <OverflowMenu label="More options">
+            <MenuItem label="Download" />
+            <MenuItem label="Share" />
           </OverflowMenu>
           <p>Test content</p>
         </Component>
@@ -1422,9 +1421,9 @@ describe.each([
         primaryButtonText="Primary button"
         secondaryButtonText="Secondary button"
         onRequestClose={onRequestClose}>
-        <OverflowMenu iconDescription="More options">
-          <OverflowMenuItem itemText="Download" />
-          <OverflowMenuItem itemText="Share" />
+        <OverflowMenu label="More options">
+          <MenuItem label="Download" />
+          <MenuItem label="Share" />
         </OverflowMenu>
         <p>Modal content</p>
         <TextInput
@@ -1702,7 +1701,7 @@ describe.each([
 describe('enableDialogElement role attribute', () => {
   it('should preserve native dialog attributes for non-alert modals', () => {
     render(
-      <FeatureFlags enableDialogElement>
+      <FeatureFlags enableV12Release={false} enableDialogElement>
         <Modal open>
           <p>Body</p>
         </Modal>
@@ -1718,7 +1717,7 @@ describe('enableDialogElement role attribute', () => {
 
   it('should set alertdialog attributes for alert modals', () => {
     render(
-      <FeatureFlags enableDialogElement>
+      <FeatureFlags enableV12Release={false} enableDialogElement>
         <Modal open danger alert>
           <p>Body</p>
         </Modal>
@@ -1776,7 +1775,9 @@ describe.each([
 
         render(
           enableDialogElement ? (
-            <FeatureFlags enableDialogElement>{modal}</FeatureFlags>
+            <FeatureFlags enableV12Release={false} enableDialogElement>
+              {modal}
+            </FeatureFlags>
           ) : (
             modal
           )

@@ -9,15 +9,15 @@ import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import styles from './data-table.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Data table cell.
  *
  * @element cds-table-cell
  */
-@customElement(`${prefix}-table-cell`)
 class CDSTableCell extends LitElement {
+  static is = `${prefix}-table-cell`;
+
   /**
    * Specify whether the overflow menu (if it exists) should be shown always, or only on hover
    */

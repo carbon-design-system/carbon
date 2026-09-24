@@ -55,29 +55,35 @@ describe('MultiSelect', () => {
     });
   });
 
-  it('should warn without throwing for interactive content in titleText', () => {
+  it('should throw for interactive content in titleText', () => {
     const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
 
-    expect(() => {
-      render(
-        <MultiSelect
-          {...mockProps}
-          titleText={
-            <>
-              Multiselect title <button type="button">Help</button>
-            </>
-          }
-        />
+    try {
+      expect(() => {
+        render(
+          <MultiSelect
+            {...mockProps}
+            titleText={
+              <>
+                Multiselect title <button type="button">Help</button>
+              </>
+            }
+          />
+        );
+      }).toThrow(
+        'The MultiSelect component `titleText` prop must have no interactive content'
       );
-    }).not.toThrow();
 
-    expect(spy).toHaveBeenCalledWith(
-      expect.stringContaining(
-        'Warning: The MultiSelect component `titleText` prop must have no interactive content'
-      )
-    );
-
-    spy.mockRestore();
+      expect(errorSpy).toHaveBeenCalledWith(
+        expect.stringContaining(
+          'Error: The MultiSelect component `titleText` prop must have no interactive content'
+        )
+      );
+    } finally {
+      spy.mockRestore();
+      errorSpy.mockRestore();
+    }
   });
 
   it('should allow non-interactive content in titleText', () => {
@@ -95,29 +101,35 @@ describe('MultiSelect', () => {
     }).not.toThrow();
   });
 
-  it('should warn without throwing for interactive content in label', () => {
+  it('should throw for interactive content in label', () => {
     const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
 
-    expect(() => {
-      render(
-        <MultiSelect
-          {...mockProps}
-          label={
-            <>
-              Choose options <a href="/">Help</a>
-            </>
-          }
-        />
+    try {
+      expect(() => {
+        render(
+          <MultiSelect
+            {...mockProps}
+            label={
+              <>
+                Choose options <a href="/">Help</a>
+              </>
+            }
+          />
+        );
+      }).toThrow(
+        'The MultiSelect component `label` prop must have no interactive content'
       );
-    }).not.toThrow();
 
-    expect(spy).toHaveBeenCalledWith(
-      expect.stringContaining(
-        'Warning: The MultiSelect component `label` prop must have no interactive content'
-      )
-    );
-
-    spy.mockRestore();
+      expect(errorSpy).toHaveBeenCalledWith(
+        expect.stringContaining(
+          'Error: The MultiSelect component `label` prop must have no interactive content'
+        )
+      );
+    } finally {
+      spy.mockRestore();
+      errorSpy.mockRestore();
+    }
   });
 
   it('should allow non-interactive content in label', () => {
@@ -863,35 +875,46 @@ describe('MultiSelect', () => {
     });
 
     it('should apply floating styles when `autoAlign` is enabled', async () => {
+      // The shared Jest setup stubs out floating-ui positioning. This test
+      // asserts on the computed position, so it needs the real hook.
+      const useFloatingSpy = jest
+        .spyOn(jest.requireMock('@floating-ui/react'), 'useFloating')
+        .mockImplementation(
+          jest.requireActual('@floating-ui/react').useFloating
+        );
       const items = generateItems(4, generateGenericItem);
 
-      render(
-        <MultiSelect
-          autoAlign
-          open
-          id="test"
-          label="test-label"
-          items={items}
-        />
-      );
-      await waitForPosition();
+      try {
+        render(
+          <MultiSelect
+            autoAlign
+            open
+            id="test"
+            label="test-label"
+            items={items}
+          />
+        );
+        await waitForPosition();
 
-      const combobox = screen.getByRole('combobox');
-      const listbox = screen.getByRole('listbox', { hidden: true });
-      const multiSelect = combobox.closest(`.${prefix}--multi-select`);
+        const combobox = screen.getByRole('combobox');
+        const listbox = screen.getByRole('listbox', { hidden: true });
+        const multiSelect = combobox.closest(`.${prefix}--multi-select`);
 
-      expect(multiSelect).toHaveClass(
-        `${prefix}--multi-select`,
-        `${prefix}--autoalign`,
-        `${prefix}--list-box`,
-        `${prefix}--list-box--expanded`,
-        { exact: true }
-      );
+        expect(multiSelect).toHaveClass(
+          `${prefix}--multi-select`,
+          `${prefix}--autoalign`,
+          `${prefix}--list-box`,
+          `${prefix}--list-box--expanded`,
+          { exact: true }
+        );
 
-      await waitFor(() => {
-        expect(listbox.style.visibility).toBe('hidden');
-        expect(listbox.style.width).toBe('0px');
-      });
+        await waitFor(() => {
+          expect(listbox.style.visibility).toBe('hidden');
+          expect(listbox.style.width).toBe('0px');
+        });
+      } finally {
+        useFloatingSpy.mockRestore();
+      }
     });
 
     it('should accept a `ref` for the underlying button element', async () => {

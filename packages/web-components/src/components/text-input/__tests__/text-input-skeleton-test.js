@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import '@carbon/web-components/es/components/text-input/text-input-skeleton.js';
+import '@carbon/web-components/es/components/text-input/index.js';
 import { expect, fixture, html } from '@open-wc/testing';
 
 describe('cds-text-input-skeleton', () => {

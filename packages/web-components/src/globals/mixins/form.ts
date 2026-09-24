@@ -20,9 +20,9 @@ import Handle from '../internal/handle';
  *   honor an ancestor `<fieldset disabled>`.
  *
  *   v3 replaces it with native form association through `ElementInternals`
- *   (`FormAssociatedMixin`). You can try that today on the `cds-preview-*`
- *   form components, which behave identically apart from participating in
- *   forms natively. See the v3 migration guide:
+ *   (`FormAssociatedMixin`) on the canonical form component tags. Date picker
+ *   still uses `FormMixin` on `cds-date-picker`; try the replacement on
+ *   `cds-preview-date-picker`. See the v3 migration guide:
  *   https://github.com/carbon-design-system/carbon/blob/main/docs/guides/cwc-v3-migration.md#form-participation-moves-to-elementinternals
  */
 const FormMixin = <T extends Constructor<HTMLElement>>(

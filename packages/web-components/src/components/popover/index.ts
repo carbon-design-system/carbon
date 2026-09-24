@@ -5,5 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './popover';
-import './popover-content';
+import { defineCustomElement } from '../../globals/register';
+import CDSPopover from './popover';
+import CDSPopoverContent from './popover-content';
+
+export { CDSPopover, CDSPopoverContent };
+
+defineCustomElement(CDSPopover);
+defineCustomElement(CDSPopoverContent);

@@ -15,7 +15,6 @@ import CheckmarkFilled16 from '@carbon/icons/es/checkmark--filled/16.js';
 import { LOADING_TYPE } from '../loading/loading';
 import { FILE_UPLOADER_ITEM_SIZE, FILE_UPLOADER_ITEM_STATE } from './defs';
 import styles from './file-uploader.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 export { FILE_UPLOADER_ITEM_SIZE, FILE_UPLOADER_ITEM_STATE };
 
@@ -30,8 +29,9 @@ export { FILE_UPLOADER_ITEM_SIZE, FILE_UPLOADER_ITEM_STATE };
  *   Cancellation of this event stops the user-initiated action of deleting this file uploader item.
  * @fires cds-file-uploader-item-deleted - The custom event fired after this file uploader item is deleted upon a user gesture.
  */
-@customElement(`${prefix}-file-uploader-item`)
 class CDSFileUploaderItem extends LitElement {
+  static is = `${prefix}-file-uploader-item`;
+
   /**
    * Handles `click` event on the delete button.
    */

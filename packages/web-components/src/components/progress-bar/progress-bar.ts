@@ -7,7 +7,6 @@
 
 import { LitElement, html } from 'lit';
 import { property, query } from 'lit/decorators.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { classMap } from 'lit/directives/class-map.js';
 import {
   PROGRESS_BAR_SIZE,
@@ -28,8 +27,9 @@ export { PROGRESS_BAR_SIZE, PROGRESS_BAR_STATUS, PROGRESS_BAR_TYPE };
  *
  * @element cds-progress-bar
  */
-@customElement(`${prefix}-progress-bar`)
 class CDSProgressBar extends LitElement {
+  static is = `${prefix}-progress-bar`;
+
   @query(`.${prefix}--progress-bar__bar`)
   private _bar!: HTMLDivElement;
 

@@ -8,15 +8,15 @@
 import { LitElement, html } from 'lit';
 import styles from './button.scss?lit';
 import { prefix } from '../../globals/settings';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Button set without button checks
  *
  * @element cds-button-set-base
  */
-@customElement(`${prefix}-button-set-base`)
 class CDSButtonSetBase extends LitElement {
+  static is = `${prefix}-button-set-base`;
+
   render() {
     return html`<slot></slot>`;
   }

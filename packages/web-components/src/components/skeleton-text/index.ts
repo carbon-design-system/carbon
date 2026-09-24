@@ -5,4 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './skeleton-text';
+import { defineCustomElement } from '../../globals/register';
+import CDSSkeletonText from './skeleton-text';
+
+export { CDSSkeletonText };
+
+defineCustomElement(CDSSkeletonText);

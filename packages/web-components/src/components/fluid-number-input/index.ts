@@ -4,5 +4,12 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import './fluid-number-input';
-import './fluid-number-input-skeleton';
+
+import { defineCustomElement } from '../../globals/register';
+import CDSFluidNumberInput from './fluid-number-input';
+import CDSFluidNumberInputSkeleton from './fluid-number-input-skeleton';
+
+export { CDSFluidNumberInput, CDSFluidNumberInputSkeleton };
+
+defineCustomElement(CDSFluidNumberInput);
+defineCustomElement(CDSFluidNumberInputSkeleton);

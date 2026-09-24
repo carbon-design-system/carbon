@@ -6,7 +6,7 @@
  */
 
 import { expect, fixture, html } from '@open-wc/testing';
-import '@carbon/web-components/es/components/fluid-select/fluid-select-skeleton.js';
+import '@carbon/web-components/es/components/fluid-select/index.js';
 
 describe('cds-fluid-select-skeleton', () => {
   describe('renders as expected - Component API', () => {

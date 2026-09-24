@@ -7,7 +7,6 @@
 
 import { render } from '@testing-library/react';
 import React, { useRef } from 'react';
-import { FeatureFlags } from '../index';
 import { useNoInteractiveChildrenForLabel } from '../useNoInteractiveChildrenForLabel';
 
 const validationMessage =
@@ -25,28 +24,18 @@ const TestComponent = () => {
 };
 
 describe('useNoInteractiveChildrenForLabel', () => {
-  it('warns without throwing in v11', () => {
+  it('throws when using interactive content in label', () => {
     const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
 
-    expect(() => render(<TestComponent />)).not.toThrow();
-    expect(spy).toHaveBeenCalledWith(
-      expect.stringContaining(`Warning: ${validationMessage}`)
-    );
-
-    spy.mockRestore();
-  });
-
-  it('throws when the v12 release flag is enabled', () => {
-    const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
-
-    expect(() =>
-      render(
-        <FeatureFlags enableV12Release>
-          <TestComponent />
-        </FeatureFlags>
-      )
-    ).toThrow(validationMessage);
-
-    spy.mockRestore();
+    try {
+      expect(() => render(<TestComponent />)).toThrow(validationMessage);
+      expect(errorSpy).toHaveBeenCalledWith(
+        expect.stringContaining(`Error: ${validationMessage}`)
+      );
+    } finally {
+      spy.mockRestore();
+      errorSpy.mockRestore();
+    }
   });
 });

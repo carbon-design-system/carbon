@@ -5,4 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './truncated-text';
+import { defineCustomElement } from '../../globals/register';
+import { CDSTruncatedText } from './truncated-text';
+
+export { CDSTruncatedText };
+
+defineCustomElement(CDSTruncatedText);

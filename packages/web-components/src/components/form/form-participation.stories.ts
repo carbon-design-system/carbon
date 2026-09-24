@@ -19,19 +19,19 @@ import '../icon-button/index';
 import '../form-group/index';
 import '../button/index';
 import '../modal/index';
-// Preview form controls. Each `next` barrel also registers everything its v2
-// barrel does, so items and skeletons come along.
-import '../text-input/next/index';
-import '../textarea/next/index';
-import '../number-input/next/index';
-import '../password-input/next/index';
-import '../checkbox/next/index';
-import '../select/next/index';
-import '../dropdown/next/index';
-import '../multi-select/next/index';
-import '../combo-box/next/index';
-import '../search/next/index';
-import '../radio-button/next/index';
+// Canonical form controls now register as form-associated custom elements.
+// Date picker remains on the `next` preview tags until that rewrite lands.
+import '../text-input/index';
+import '../textarea/index';
+import '../number-input/index';
+import '../password-input/index';
+import '../checkbox/index';
+import '../select/index';
+import '../dropdown/index';
+import '../multi-select/index';
+import '../combo-box/index';
+import '../search/index';
+import '../radio-button/index';
 import '../date-picker/next/index';
 
 const items = [
@@ -420,17 +420,17 @@ const renderPreviewForm = (args) => {
             });
           }}">
           <cds-stack gap="5">
-            <cds-preview-search
+            <cds-search
               size="${ifDefined(size)}"
               id="search-members"
               name="search-members"
               label-text="Search members"
               placeholder="e.g. Jane Smith"
-              ?disabled="${disabled}"></cds-preview-search>
+              ?disabled="${disabled}"></cds-search>
 
             ${row(html`
               ${col(html`
-                <cds-preview-text-input
+                <cds-text-input
                   id="project-name"
                   name="project-name"
                   label="Project name"
@@ -444,10 +444,10 @@ const renderPreviewForm = (args) => {
                   ?warn="${warn}"
                   warn-text="${ifDefined(warnText)}">
                   ${decorator()}
-                </cds-preview-text-input>
+                </cds-text-input>
               `)}
               ${col(html`
-                <cds-preview-text-input
+                <cds-text-input
                   id="project-id"
                   name="project-id"
                   label="Project ID"
@@ -461,12 +461,12 @@ const renderPreviewForm = (args) => {
                   ?warn="${warn}"
                   warn-text="${ifDefined(warnText)}">
                   ${decorator()}
-                </cds-preview-text-input>
+                </cds-text-input>
               `)}
             `)}
             ${row(html`
               ${col(html`
-                <cds-preview-dropdown
+                <cds-dropdown
                   id="workspace"
                   name="workspace"
                   title-text="Workspace"
@@ -481,10 +481,10 @@ const renderPreviewForm = (args) => {
                   ?warn="${warn}"
                   warn-text="${ifDefined(warnText)}">
                   ${decorator()} ${dropdownItems()}
-                </cds-preview-dropdown>
+                </cds-dropdown>
               `)}
               ${col(html`
-                <cds-preview-combo-box
+                <cds-combo-box
                   id="project-lead"
                   name="project-lead"
                   title-text="Project lead"
@@ -498,11 +498,11 @@ const renderPreviewForm = (args) => {
                   ?warn="${warn}"
                   warn-text="${ifDefined(warnText)}">
                   ${decorator()} ${comboBoxItems()}
-                </cds-preview-combo-box>
+                </cds-combo-box>
               `)}
             `)}
 
-            <cds-preview-multi-select
+            <cds-multi-select
               id="team-members"
               name="team-members"
               title-text="Team members"
@@ -517,7 +517,7 @@ const renderPreviewForm = (args) => {
               ?warn="${warn}"
               warn-text="${ifDefined(warnText)}">
               ${decorator()} ${multiSelectItems()}
-            </cds-preview-multi-select>
+            </cds-multi-select>
 
             ${dateRow(html`
               ${dateRangeCol(html`
@@ -579,7 +579,7 @@ const renderPreviewForm = (args) => {
             `)}
             ${row(html`
               ${col(html`
-                <cds-preview-number-input
+                <cds-number-input
                   id="budget"
                   name="budget"
                   label="Budget"
@@ -597,10 +597,10 @@ const renderPreviewForm = (args) => {
                   ?warn="${warn}"
                   warn-text="${ifDefined(warnText)}">
                   ${decorator()}
-                </cds-preview-number-input>
+                </cds-number-input>
               `)}
               ${col(html`
-                <cds-preview-select
+                <cds-select
                   id="currency"
                   name="currency"
                   label-text="Currency"
@@ -622,11 +622,11 @@ const renderPreviewForm = (args) => {
                   <cds-select-item value="jpy"
                     >JPY – Japanese Yen</cds-select-item
                   >
-                </cds-preview-select>
+                </cds-select>
               `)}
             `)}
 
-            <cds-preview-radio-button-group
+            <cds-radio-button-group
               name="project-visibility"
               value="private"
               legend-text="Visibility"
@@ -645,9 +645,9 @@ const renderPreviewForm = (args) => {
                 value="public"
                 id="vis-public"
                 label-text="Public – anyone with the link"></cds-radio-button>
-            </cds-preview-radio-button-group>
+            </cds-radio-button-group>
 
-            <cds-preview-dropdown
+            <cds-dropdown
               id="project-type"
               name="project-type"
               title-text="Project type"
@@ -662,9 +662,9 @@ const renderPreviewForm = (args) => {
               ?warn="${warn}"
               warn-text="${ifDefined(warnText)}">
               ${decorator()} ${dropdownItems()}
-            </cds-preview-dropdown>
+            </cds-dropdown>
 
-            <cds-preview-multi-select
+            <cds-multi-select
               id="tags"
               name="tags"
               filterable
@@ -680,38 +680,35 @@ const renderPreviewForm = (args) => {
               ?warn="${warn}"
               warn-text="${ifDefined(warnText)}">
               ${decorator()} ${multiSelectItems()}
-            </cds-preview-multi-select>
+            </cds-multi-select>
 
             <cds-form-group legend-text="Features">
-              <cds-preview-checkbox
+              <cds-checkbox
                 id="feat-issues"
                 name="feat-issues"
                 default-checked
                 ?disabled="${disabled}"
-                >Issue tracking</cds-preview-checkbox
+                >Issue tracking</cds-checkbox
               >
-              <cds-preview-checkbox
+              <cds-checkbox
                 id="feat-wiki"
                 name="feat-wiki"
                 default-checked
                 ?disabled="${disabled}"
-                >Wiki</cds-preview-checkbox
+                >Wiki</cds-checkbox
               >
-              <cds-preview-checkbox
-                id="feat-ci"
-                name="feat-ci"
-                ?disabled="${disabled}"
-                >CI / CD pipeline</cds-preview-checkbox
+              <cds-checkbox id="feat-ci" name="feat-ci" ?disabled="${disabled}"
+                >CI / CD pipeline</cds-checkbox
               >
-              <cds-preview-checkbox
+              <cds-checkbox
                 id="feat-releases"
                 name="feat-releases"
                 ?disabled="${disabled}"
-                >Releases</cds-preview-checkbox
+                >Releases</cds-checkbox
               >
             </cds-form-group>
 
-            <cds-preview-textarea
+            <cds-textarea
               id="project-description"
               name="project-description"
               label="Description"
@@ -725,9 +722,9 @@ const renderPreviewForm = (args) => {
               ?warn="${warn}"
               warn-text="${ifDefined(warnText)}">
               ${decorator()}
-            </cds-preview-textarea>
+            </cds-textarea>
 
-            <cds-preview-text-input
+            <cds-text-input
               id="repo-url"
               name="repo-url"
               label="Repository URL"
@@ -741,9 +738,9 @@ const renderPreviewForm = (args) => {
               ?warn="${warn}"
               warn-text="${ifDefined(warnText)}">
               ${decorator()}
-            </cds-preview-text-input>
+            </cds-text-input>
 
-            <cds-preview-password-input
+            <cds-password-input
               id="repo-password"
               name="repo-password"
               label="Password"
@@ -758,7 +755,7 @@ const renderPreviewForm = (args) => {
               invalid-text="Your password must be at least 6 characters as well as contain at least one uppercase, one lowercase, and one number."
               ?warn="${warn}"
               warn-text="${ifDefined(warnText)}">
-            </cds-preview-password-input>
+            </cds-password-input>
 
             <cds-button type="submit" @click="${handleSubmit}"
               >Create project</cds-button

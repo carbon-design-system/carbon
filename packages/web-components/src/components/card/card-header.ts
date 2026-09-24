@@ -9,7 +9,6 @@ import { LitElement, html } from 'lit';
 import { state } from 'lit/decorators.js';
 import { consume } from '@lit/context';
 import { prefix } from '../../globals/settings';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import {
   cardContext,
   cardDefaultContext,
@@ -24,8 +23,9 @@ import styles from './card.scss?lit';
  * @slot - Default slot for cds-card-title, cds-card-title-media, cds-card-actions.
  * @slot decorator - Slot for cds-ai-label or other decorator element.
  */
-@customElement(`${prefix}-card-header`)
 class CDSCardHeader extends LitElement {
+  static is = `${prefix}-card-header`;
+
   @consume({ context: cardContext, subscribe: true })
   @state()
   private _cardContext: CardContextValue = cardDefaultContext;

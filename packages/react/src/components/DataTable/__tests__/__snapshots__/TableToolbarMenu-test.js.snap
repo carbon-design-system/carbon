@@ -2,11 +2,11 @@
 
 exports[`TableToolbarMenu renders as expected - Component API should render 1`] = `
 <div>
-  <span
-    class="cds--overflow-menu__wrapper"
+  <div
+    class="custom-class cds--toolbar-action cds--overflow-menu cds--overflow-menu__container cds--autoalign"
   >
     <span
-      class="cds--popover-container cds--popover--caret cds--popover--high-contrast cds--popover--top cds--tooltip cds--icon-tooltip"
+      class="cds--popover-container cds--popover--high-contrast cds--popover--auto-align cds--autoalign cds--popover--top cds--tooltip cds--icon-tooltip"
     >
       <div
         class="cds--tooltip-trigger__wrapper"
@@ -14,18 +14,17 @@ exports[`TableToolbarMenu renders as expected - Component API should render 1`] 
         <button
           aria-expanded="false"
           aria-haspopup="true"
-          aria-labelledby="tooltip-_r_1_"
-          class="custom-class cds--toolbar-action cds--overflow-menu cds--overflow-menu cds--btn cds--btn--ghost cds--btn--icon-only"
+          aria-labelledby="tooltip-_r_3_"
+          class="cds--overflow-menu cds--btn cds--btn--ghost cds--btn--icon-only"
           type="button"
         >
           <svg
-            aria-label="Add"
+            aria-hidden="true"
             class="cds--overflow-menu__icon"
             fill="currentColor"
             focusable="false"
             height="16"
             preserveAspectRatio="xMidYMid meet"
-            role="img"
             viewBox="0 0 16 16"
             width="16"
             xmlns="http://www.w3.org/2000/svg"
@@ -42,19 +41,20 @@ exports[`TableToolbarMenu renders as expected - Component API should render 1`] 
       <span
         aria-hidden="true"
         class="cds--popover"
-        id="tooltip-_r_1_"
+        id="tooltip-_r_3_"
         role="tooltip"
       >
         <span
           class="cds--popover-content cds--tooltip-content"
+          style="position: fixed; left: 0px; top: 0px; visibility: visible; transform: translate(0px, 0px);"
         >
           Add
+          <span
+            class="cds--popover-caret cds--popover--auto-align"
+          />
         </span>
-        <span
-          class="cds--popover-caret"
-        />
       </span>
     </span>
-  </span>
+  </div>
 </div>
 `;

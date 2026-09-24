@@ -15,7 +15,6 @@ import FocusMixin from '../../globals/mixins/focus';
 import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
 import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
 import styles from './slider.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * The `<input>` box for slider.
@@ -23,8 +22,9 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  * @element cds-slider-input
  * @fires cds-slider-input-changed - The custom event fired after the value is changed by user gesture.
  */
-@customElement(`${prefix}-slider-input`)
 class CDSSliderInput extends FocusMixin(LitElement) {
+  static is = `${prefix}-slider-input`;
+
   @query('input')
   _inputNode!: HTMLInputElement | null;
 

@@ -11,7 +11,6 @@ import { property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { prefix } from '../../../../globals/settings';
-import { carbonElement as customElement } from '../../../../globals/decorators/carbon-element';
 import ChevronLeft16 from '@carbon/icons/es/chevron--left/16.js';
 import ChevronRight16 from '@carbon/icons/es/chevron--right/16.js';
 import { iconLoader } from '../../../../globals/internal/icon-loader';
@@ -31,8 +30,9 @@ import styles from './date-picker.scss?lit';
  * @fires cds-preview-date-picker-calendar-date-select - Fired when a date is selected
  * @fires cds-preview-date-picker-calendar-month-change - Fired when the month changes
  */
-@customElement(`${prefix}-preview-date-picker-calendar`)
 class CDSDatePickerCalendar extends LitElement {
+  static is = `${prefix}-preview-date-picker-calendar`;
+
   /**
    * The currently displayed month (Temporal.PlainYearMonth)
    */

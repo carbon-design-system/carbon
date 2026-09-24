@@ -9,15 +9,15 @@ import { prefix } from '../../globals/settings';
 import CDSButton from '../button/button';
 import buttonStyles from '../button/button.scss?lit';
 import styles from './modal.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Modal footer button.
  *
  * @element cds-modal-footer-button
  */
-@customElement(`${prefix}-modal-footer-button`)
 class CDSModalFooterButton extends CDSButton {
+  static is = `${prefix}-modal-footer-button`;
+
   static styles = [buttonStyles, styles];
 }
 

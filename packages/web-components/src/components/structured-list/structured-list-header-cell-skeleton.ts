@@ -8,13 +8,13 @@
 import { LitElement, html } from 'lit';
 import { prefix } from '../../globals/settings';
 import styles from './structured-list.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Skeleton of structured list header cell.
  */
-@customElement(`${prefix}-structured-list-header-cell-skeleton`)
 class CDSStructuredListHeaderCellSkeleton extends LitElement {
+  static is = `${prefix}-structured-list-header-cell-skeleton`;
+
   render() {
     return html` <span></span> `;
   }

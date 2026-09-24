@@ -5,6 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './ai-label';
-import './ai-label-action-button';
-import '../icon-button/icon-button';
+import { defineCustomElement } from '../../globals/register';
+import '../icon-button/index';
+import CDSAILabel from './ai-label';
+import CDSAILabelActionButton from './ai-label-action-button';
+
+export { CDSAILabel, CDSAILabelActionButton };
+
+defineCustomElement(CDSAILabel);
+defineCustomElement(CDSAILabelActionButton);

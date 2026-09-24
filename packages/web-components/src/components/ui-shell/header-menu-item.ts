@@ -7,14 +7,14 @@
 
 import { prefix } from '../../globals/settings';
 import CDSHeaderNavItem from './header-nav-item';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Header submenu item.
  *
  * @element cds-header-menu-item
  */
-@customElement(`${prefix}-header-menu-item`)
-class CDSHeaderMenuItem extends CDSHeaderNavItem {}
+class CDSHeaderMenuItem extends CDSHeaderNavItem {
+  static is = `${prefix}-header-menu-item`;
+}
 
 export default CDSHeaderMenuItem;

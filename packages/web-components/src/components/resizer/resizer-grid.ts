@@ -6,7 +6,6 @@
  */
 
 import { LitElement, html } from 'lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
 import styles from './resizer-grid.scss?lit';
 
@@ -14,8 +13,9 @@ import styles from './resizer-grid.scss?lit';
  * Resizer grid component for managing resizable panels.
  * @element cds-resizer-grid
  */
-@customElement(`${prefix}-resizer-grid`)
 class CDSResizerGrid extends LitElement {
+  static is = `${prefix}-resizer-grid`;
+
   static styles = styles;
 
   render() {

@@ -8,7 +8,6 @@
 import { html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import CDSActionableNotification, {
   iconsForKinds,
@@ -24,8 +23,9 @@ import styles from './actionable-notification.scss?lit';
  * @slot action - The action button.
  * @slot - The default slot for additional content.
  */
-@customElement(`${prefix}-callout-notification`)
 class CDSCalloutNotification extends CDSActionableNotification {
+  static is = `${prefix}-callout-notification`;
+
   /**
    * Specify the id for the title element.
    */

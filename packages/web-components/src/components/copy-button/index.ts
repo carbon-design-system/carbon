@@ -5,4 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './copy-button';
+import { defineCustomElement } from '../../globals/register';
+import '../copy/index';
+import CDSCopyButton from './copy-button';
+
+export { CDSCopyButton };
+
+defineCustomElement(CDSCopyButton);

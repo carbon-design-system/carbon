@@ -14,7 +14,6 @@ import HostListener from '../../globals/decorators/host-listener';
 import { SEARCH_SIZE } from '../search/search';
 import CDSSearch from '../search/search';
 import styles from './data-table.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Table toolbar search.
@@ -22,8 +21,9 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  * @element cds-table-toolbar-search
  * @fires cds-search-input - The custom event fired after the search content is changed upon a user gesture.
  */
-@customElement(`${prefix}-table-toolbar-search`)
 class CDSTableToolbarSearch extends HostListenerMixin(CDSSearch) {
+  static is = `${prefix}-table-toolbar-search`;
+
   @query('input')
   private _inputNode!: HTMLInputElement;
 

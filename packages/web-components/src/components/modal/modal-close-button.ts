@@ -13,7 +13,6 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import FocusMixin from '../../globals/mixins/focus';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import styles from './modal.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import '../icon-button';
 
 /**
@@ -23,8 +22,9 @@ import '../icon-button';
  * @csspart button The button.
  * @csspart close-icon The close icon.
  */
-@customElement(`${prefix}-modal-close-button`)
 class CDSModalCloseButton extends FocusMixin(LitElement) {
+  static is = `${prefix}-modal-close-button`;
+
   /**
    * Specify a label for the close button of the modal; defaults to close
    */

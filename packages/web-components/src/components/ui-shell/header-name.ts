@@ -11,7 +11,6 @@ import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import styles from './header.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * The product name UI in header nav.
@@ -20,8 +19,9 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  * @csspart link The link.
  * @csspart prefix The prefix content.
  */
-@customElement(`${prefix}-header-name`)
 class CDSHeaderName extends FocusMixin(LitElement) {
+  static is = `${prefix}-header-name`;
+
   /**
    * Link `href`.
    */

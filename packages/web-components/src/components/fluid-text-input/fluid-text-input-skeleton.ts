@@ -7,7 +7,6 @@
 
 import { prefix } from '../../globals/settings';
 import { html } from 'lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import styles from './fluid-text-input.scss?lit';
 import CDSTextInputSkeleton from '../text-input/text-input-skeleton';
 
@@ -16,8 +15,9 @@ import CDSTextInputSkeleton from '../text-input/text-input-skeleton';
  *
  * @element cds-fluid-text-input-skeleton
  */
-@customElement(`${prefix}-fluid-text-input-skeleton`)
 class CDSFluidTextInputSkeleton extends CDSTextInputSkeleton {
+  static is = `${prefix}-fluid-text-input-skeleton`;
+
   render() {
     return html` ${super.render()} `;
   }

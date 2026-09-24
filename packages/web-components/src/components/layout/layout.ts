@@ -6,7 +6,7 @@
  */
 
 import { LitElement, html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import styles from './layout.scss?lit';
 
@@ -24,8 +24,9 @@ export type LayoutDensity = (typeof LAYOUT_DENSITIES)[number];
  *
  * @element cds-layout
  */
-@customElement(`${prefix}-layout`)
 class CDSLayout extends LitElement {
+  static is = `${prefix}-layout`;
+
   static styles = styles;
 
   /**

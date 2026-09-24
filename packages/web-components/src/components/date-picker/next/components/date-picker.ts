@@ -27,7 +27,6 @@ import {
   ClickOutsideHandler,
 } from '@carbon/utilities/date-picker';
 import styles from './date-picker.scss?lit';
-import { carbonElement as customElement } from '../../../../globals/decorators/carbon-element';
 
 /**
  * Date picker modes.
@@ -56,10 +55,11 @@ enum DATE_PICKER_MODE {
  * @fires cds-preview-date-picker-changed - The custom event fired when the date selection changes.
  * @fires cds-preview-date-picker-error - The custom event fired when an error occurs.
  */
-@customElement(`${prefix}-preview-date-picker`)
 class CDSDatePicker extends FormAssociatedMixin(
   HostListenerMixin(FormMixin(LitElement))
 ) {
+  static is = `${prefix}-preview-date-picker`;
+
   /**
    * The slotted `<cds-date-input kind="from">`.
    */

@@ -5,5 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './code-snippet';
-import './code-snippet-skeleton';
+import { defineCustomElement } from '../../globals/register';
+import '../button/index';
+import '../copy/index';
+import CDSCodeSnippet from './code-snippet';
+import CDSCodeSnippetSkeleton from './code-snippet-skeleton';
+
+export { CDSCodeSnippet, CDSCodeSnippetSkeleton };
+
+defineCustomElement(CDSCodeSnippet);
+defineCustomElement(CDSCodeSnippetSkeleton);

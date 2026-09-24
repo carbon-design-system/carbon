@@ -21,7 +21,6 @@ import {
 } from './defs';
 import styles from './number-input.scss?lit';
 import CDSTextInput, { INPUT_SIZE } from '../text-input/text-input';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { NumberFormatter, NumberParser } from '@carbon/utilities';
 
 export { NUMBER_INPUT_VALIDATION_STATUS };
@@ -50,8 +49,9 @@ export enum NUMBER_INPUT_TYPE {
  * @slot label-text - The label text.
  * @slot validity-message - The validity message. If present and non-empty, this input shows the UI of its invalid state.
  */
-@customElement(`${prefix}-number-input`)
 class CDSNumberInput extends CDSTextInput {
+  static is = `${prefix}-number-input`;
+
   /**
    * The underlying input element
    */

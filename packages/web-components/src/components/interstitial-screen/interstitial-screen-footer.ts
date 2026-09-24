@@ -9,7 +9,6 @@ import { html, nothing, PropertyValues } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import HostListenerMixin from '../../globals/mixins/host-listener';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import '../button/index';
 import styles from './interstitial-screen-footer.scss?lit';
 import { interstitialDetailsSignal } from './interstitial-screen-context';
@@ -33,10 +32,11 @@ export type ActionType = 'close' | 'start' | 'skip' | 'back' | 'next';
  *  callback before continuing. When asyncAction is true, you must listen for the eventOnBeforeAction event and call the proceed() function
  *  (either synchronously or with a promise) to allow navigation.
  */
-@customElement(`${prefix}-interstitial-screen-footer`)
 class CDSInterstitialScreenFooter extends SignalWatcher(
   HostListenerMixin(CDSModalFooter)
 ) {
+  static is = `${prefix}-interstitial-screen-footer`;
+
   /**
    * The label for the Next button.
    */

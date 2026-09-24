@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import './index';
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { prefix } from '../../globals/settings';
@@ -15,7 +16,7 @@ import Folders16 from '@carbon/icons/es/folders/16.js';
 import { INPUT_SIZE } from '../text-input/text-input';
 import './number-input';
 import './number-input-skeleton';
-import '../form/form-item';
+import '../form/index';
 import '../ai-label';
 import '../icon-button';
 

@@ -10,15 +10,15 @@ import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 
 import styles from './badge-indicator.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Badge Indicator.
  *
  * @element cds-badge-indicator
  */
-@customElement(`${prefix}-badge-indicator`)
 class CDSBadgeIndicator extends LitElement {
+  static is = `${prefix}-badge-indicator`;
+
   /**
    * Count of badge indicator
    */

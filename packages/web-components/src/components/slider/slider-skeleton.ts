@@ -10,13 +10,13 @@ import { classMap } from 'lit/directives/class-map.js';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import styles from './slider.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Skeleton of slider.
  */
-@customElement(`${prefix}-slider-skeleton`)
 class CDSSliderSkeleton extends LitElement {
+  static is = `${prefix}-slider-skeleton`;
+
   /**
    * `Turn the slider into a range slider.
    */

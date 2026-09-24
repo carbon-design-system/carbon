@@ -7,7 +7,6 @@
 
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import styles from './header.scss?lit';
 import { prefix } from '../../globals/settings';
 
@@ -16,8 +15,9 @@ import { prefix } from '../../globals/settings';
  *
  * @element cds-switcher
  */
-@customElement(`${prefix}-switcher`)
 class CDSSwitcher extends LitElement {
+  static is = `${prefix}-switcher`;
+
   /**
    * Required props for accessibility label on the underlying menu
    */

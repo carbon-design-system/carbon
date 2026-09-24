@@ -7,7 +7,6 @@
 
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import CDSFluidSelect from '../fluid-select/fluid-select';
 import styles from './fluid-time-picker.scss?lit';
 
@@ -16,8 +15,9 @@ import styles from './fluid-time-picker.scss?lit';
  *
  * @element cds-fluid-time-picker-select
  */
-@customElement(`${prefix}-fluid-time-picker-select`)
 class CDSFluidTimePickerSelect extends CDSFluidSelect {
+  static is = `${prefix}-fluid-time-picker-select`;
+
   /**
    * Optionally provide the default value of the select.
    */

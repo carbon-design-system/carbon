@@ -11,11 +11,11 @@ import './index';
 import View16 from '@carbon/icons/es/view/16.js';
 import FolderOpen16 from '@carbon/icons/es/folder--open/16.js';
 import Folders16 from '@carbon/icons/es/folders/16.js';
-import '../dropdown/dropdown-item';
+import '../dropdown/index';
 import '../ai-label';
 import '../icon-button';
 import { iconLoader } from '../../globals/internal/icon-loader';
-import '../toggle-tip/toggletip';
+import '../toggle-tip/index';
 
 const content = html`
   <div slot="body-text">

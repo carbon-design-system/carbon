@@ -9,7 +9,6 @@ import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import styles from './data-table.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
@@ -19,8 +18,9 @@ import CDSTableRow from './table-row';
  *
  * @element cds-table-expanded-row
  */
-@customElement(`${prefix}-table-expanded-row`)
 class CDSTableExpandedRow extends HostListenerMixin(LitElement) {
+  static is = `${prefix}-table-expanded-row`;
+
   /**
    * Handles `mouseover`/`mouseout` event handler on this element.
    *

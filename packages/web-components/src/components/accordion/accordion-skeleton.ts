@@ -17,13 +17,12 @@ import './accordion-item-skeleton';
 import '../skeleton-text/index';
 import styles from './accordion.scss?lit';
 
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-
 /**
  * Skeleton of code snippet.
  */
-@customElement(`${prefix}-accordion-skeleton`)
 class CDSAccordionSkeleton extends LitElement {
+  static is = `${prefix}-accordion-skeleton`;
+
   /**
    * Specify the alignment of the accordion heading title and chevron
    */

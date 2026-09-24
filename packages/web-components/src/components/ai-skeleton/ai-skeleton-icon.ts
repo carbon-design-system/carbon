@@ -10,15 +10,15 @@ import { prefix } from '../../globals/settings';
 import { property } from 'lit/decorators.js';
 import styles from './ai-skeleton.scss?lit';
 import '../skeleton-icon/skeleton-icon';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * AI skeleton icon.
  *
  * @element cds-ai-skeleton-icon
  */
-@customElement(`${prefix}-ai-skeleton-icon`)
 class CDSAISkeletonIcon extends LitElement {
+  static is = `${prefix}-ai-skeleton-icon`;
+
   /**
    * Custom styles to apply to skeleton icon
    */

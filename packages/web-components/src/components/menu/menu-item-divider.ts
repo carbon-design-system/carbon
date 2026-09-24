@@ -8,14 +8,14 @@
 import { LitElement } from 'lit';
 import { prefix } from '../../globals/settings';
 import styles from './menu-item.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 /**
  * Menu Item.
  *
  * @element cds-menu-item-divider
  */
-@customElement(`${prefix}-menu-item-divider`)
 class CDSmenuItemDivider extends LitElement {
+  static is = `${prefix}-menu-item-divider`;
+
   connectedCallback() {
     if (!this.hasAttribute('role')) {
       this.setAttribute('role', 'separator');

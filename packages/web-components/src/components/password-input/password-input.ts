@@ -7,7 +7,6 @@
 
 import { LitElement, html } from 'lit';
 import { property, query } from 'lit/decorators.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { classMap } from 'lit/directives/class-map.js';
 import { prefix } from '../../globals/settings';
 import View16 from '@carbon/icons/es/view/16.js';
@@ -45,8 +44,9 @@ export {
  * @slot label-text - The label text.
  * @slot validity-message - The validity message. If present and non-empty, this input shows the UI of its invalid state.
  */
-@customElement(`${prefix}-password-input`)
 class CDSPasswordInput extends CDSTextInput {
+  static is = `${prefix}-password-input`;
+
   /**
    * The Show/Hide Password tooltip
    */

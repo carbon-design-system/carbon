@@ -8,15 +8,15 @@
 import { LitElement, html } from 'lit';
 import { prefix } from '../../globals/settings';
 import styles from './data-table.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Data table header.
  *
  * @element cds-table-head
  */
-@customElement(`${prefix}-table-head`)
 class CDSTableHead extends LitElement {
+  static is = `${prefix}-table-head`;
+
   /**
    * TODO: Uncomment when Carbon fully implements sticky header
    * Specify whether the header should be sticky.

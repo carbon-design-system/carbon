@@ -7,7 +7,6 @@
 
 import { prefix } from '../../globals/settings';
 import { html, LitElement } from 'lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import styles from './fluid-combo-box.scss?lit';
 
 /**
@@ -15,8 +14,9 @@ import styles from './fluid-combo-box.scss?lit';
  *
  * @element cds-fluid-combo-box-skeleton
  */
-@customElement(`${prefix}-fluid-combo-box-skeleton`)
 class CDSFluidComboBoxSkeleton extends LitElement {
+  static is = `${prefix}-fluid-combo-box-skeleton`;
+
   render() {
     return html`
       <div class="${prefix}--list-box__wrapper--fluid">

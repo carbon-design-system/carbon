@@ -13,7 +13,6 @@ import { TREE_SIZE } from './defs';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import styles from './tree-view.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import CDSTreeNode from './tree-node';
 
 export { TREE_SIZE };
@@ -22,8 +21,9 @@ export { TREE_SIZE };
  *
  * @element cds-tree-view
  */
-@customElement(`${prefix}-tree-view`)
 class CDSTreeView extends HostListenerMixin(LitElement) {
+  static is = `${prefix}-tree-view`;
+
   /**
    * Specify whether or not the label should be hidden
    */

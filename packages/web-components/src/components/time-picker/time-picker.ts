@@ -8,12 +8,11 @@
 import { LitElement, html } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
 import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
 import ValidityMixin from '../../globals/mixins/validity';
-import FormMixin from '../../globals/mixins/form';
+import FormAssociatedMixin from '../../globals/mixins/form-associated';
 import { prefix } from '../../globals/settings';
 import styles from './time-picker.scss?lit';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
@@ -26,8 +25,9 @@ import { TIME_PICKER_SIZE } from './defs';
  * @slot time-picker-select - Slot for time picker select components.
  * @slot validity-message - The validity message. If present and non-empty, this input shows the UI of its invalid state.
  */
-@customElement(`${prefix}-time-picker`)
-class CDSTimePicker extends ValidityMixin(FormMixin(LitElement)) {
+class CDSTimePicker extends FormAssociatedMixin(ValidityMixin(LitElement)) {
+  static is = `${prefix}-time-picker`;
+
   /**
    * The underlying input element
    */

@@ -5,5 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './form-item';
-import './form';
+import { defineCustomElement } from '../../globals/register';
+import CDSFormItem from './form-item';
+import CDSForm from './form';
+
+export { CDSFormItem, CDSForm };
+
+defineCustomElement(CDSFormItem);
+defineCustomElement(CDSForm);

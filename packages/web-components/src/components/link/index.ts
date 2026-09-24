@@ -5,4 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './link';
+import { defineCustomElement } from '../../globals/register';
+import CDSLink from './link';
+
+export { CDSLink };
+
+defineCustomElement(CDSLink);

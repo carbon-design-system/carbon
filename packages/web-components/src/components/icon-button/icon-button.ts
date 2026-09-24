@@ -7,7 +7,6 @@
 
 import { adoptStyles, html } from 'lit';
 import { property } from 'lit/decorators.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
 import '../tooltip/index';
 import '../button/index';
@@ -24,8 +23,9 @@ export { ICON_BUTTON_SIZE, ICON_BUTTON_TOOLTIP_ALIGNMENT };
  *
  * @element cds-icon-button
  */
-@customElement(`${prefix}-icon-button`)
 class CDSIconButton extends CDSButton {
+  static is = `${prefix}-icon-button`;
+
   /**
    * Checks if a badge indicator is being used with incorrect properties
    */

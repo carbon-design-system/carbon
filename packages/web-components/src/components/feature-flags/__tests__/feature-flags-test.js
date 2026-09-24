@@ -290,7 +290,7 @@ describe('feature-flag', function () {
 
     it('should call console.info when a v12 flag is available but not enabled', async () => {
       const el = await fixture(html`
-        <feature-flags>
+        <feature-flags enable-v12-release="false">
           <div id="child"></div>
         </feature-flags>
       `);
@@ -325,18 +325,54 @@ describe('feature-flag', function () {
   });
 
   describe('each supported attribute', function () {
-    const flags = [
-      'enable-v12-release',
+    // Turned on by the default-enabled enable-v12-release flag: every
+    // enable-v12-* flag, plus enable-focus-wrap-without-sentinels.
+    const v12Flags = [
       'enable-v12-tile-default-icons',
       'enable-v12-tile-radio-icons',
       'enable-v12-overflowmenu',
       'enable-v12-dynamic-floating-styles',
       'enable-v12-toggle-reduced-label-spacing',
+      'enable-focus-wrap-without-sentinels',
+    ];
+
+    const flags = [
       'enable-treeview-controllable',
       'enable-dialog-element',
-      'enable-focus-wrap-without-sentinels',
       'enable-experimental-focus-wrap-without-sentinels',
     ];
+
+    it('enable-v12-release should default to true', async () => {
+      const el = await fixture(html`
+        <feature-flags>
+          <div id="child"></div>
+        </feature-flags>
+      `);
+      const child = el.querySelector('#child');
+      expect(isFeatureFlagEnabled('enable-v12-release', child)).to.be.true;
+    });
+
+    v12Flags.forEach((flag) => {
+      it(`${flag} should default to true and enable when set after the v12 release flag is disabled`, async () => {
+        const el = await fixture(html`
+          <feature-flags>
+            <div id="child"></div>
+          </feature-flags>
+        `);
+        const child = el.querySelector('#child');
+        expect(isFeatureFlagEnabled(flag, child)).to.be.true;
+
+        el.setAttribute('enable-v12-release', 'false');
+        await el.updateComplete;
+
+        expect(isFeatureFlagEnabled(flag, child)).to.be.false;
+
+        el.setAttribute(flag, '');
+        await el.updateComplete;
+
+        expect(isFeatureFlagEnabled(flag, child)).to.be.true;
+      });
+    });
 
     flags.forEach((flag) => {
       it(`${flag} should default to false and enable when set`, async () => {

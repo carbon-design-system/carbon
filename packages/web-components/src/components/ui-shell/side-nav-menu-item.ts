@@ -13,7 +13,6 @@ import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import CDSSideNavMenu from './side-nav-menu';
 import styles from './side-nav.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Side nav menu item.
@@ -22,8 +21,9 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  * @csspart link The link.
  * @csspart title The title.
  */
-@customElement(`${prefix}-side-nav-menu-item`)
 class CDSSideNavMenuItem extends FocusMixin(LitElement) {
+  static is = `${prefix}-side-nav-menu-item`;
+
   /**
    * `true` if the menu item should be active.
    */

@@ -17,7 +17,6 @@ import { property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { prefix } from '../../globals/settings';
 import { iconLoader } from '../../globals/internal/icon-loader';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import FocusMixin from '../../globals/mixins/focus';
 import { NOTIFICATION_KIND, NOTIFICATION_TYPE } from './defs';
 import styles from './inline-notification.scss?lit';
@@ -47,8 +46,9 @@ const iconNamesForKinds = {
  *   Cancellation of this event stops the user-initiated action of closing this notification.
  * @fires cds-notification-closed - The custom event fired after this notification is closed upon a user gesture.
  */
-@customElement(`${prefix}-inline-notification`)
 class CDSInlineNotification extends FocusMixin(LitElement) {
+  static is = `${prefix}-inline-notification`;
+
   /**
    * Current timeout identifier
    */

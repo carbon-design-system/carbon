@@ -15,7 +15,6 @@ import CDSDropdown, { DROPDOWN_KEYBOARD_ACTION } from '../dropdown/dropdown';
 import CDSComboBoxItem from './combo-box-item';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import styles from './combo-box.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
 import spread from '../../globals/directives/spread';
 
@@ -40,8 +39,9 @@ type ShouldFilterItem = (input: {
  * @fires cds-combo-box-selected - The custom event fired after a combo box item is selected upon a user gesture.
  * @fires cds-combo-box-toggled - The custom event fired after the open state of this combo box is toggled upon a user gesture.
  */
-@customElement(`${prefix}-combo-box`)
 class CDSComboBox extends CDSDropdown {
+  static is = `${prefix}-combo-box`;
+
   /**
    * The text content that should be set to the `<input>` for filtering.
    */

@@ -5,5 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './multi-select';
-import './multi-select-item';
+import { defineCustomElement } from '../../globals/register';
+import CDSMultiSelect from './multi-select';
+import CDSMultiSelectItem from './multi-select-item';
+
+export { CDSMultiSelect, CDSMultiSelectItem };
+
+defineCustomElement(CDSMultiSelect);
+defineCustomElement(CDSMultiSelectItem);
