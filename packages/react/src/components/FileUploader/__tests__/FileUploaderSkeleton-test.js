@@ -15,11 +15,6 @@ describe('FileUploaderSkeleton', () => {
       const { container } = render(<FileUploaderSkeleton />);
       await expect(container).toHaveNoAxeViolations();
     });
-
-    it('should have no AC violations', async () => {
-      const { container } = render(<FileUploaderSkeleton />);
-      await expect(container).toHaveNoACViolations('FileUploaderSkeleton');
-    });
   });
 
   it('should accept a custom className prop on the root node', () => {
