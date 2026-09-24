@@ -1,0 +1,40 @@
+# This workflow merges the main branch into the next (v12) branch every night to keep the branch up to date..
+name: Automerge
+
+on:
+  schedule:
+    # Run every night at 10:00PM ET
+    - cron: '0 22 * * *'
+      timezone: 'America/New_York'
+  workflow_dispatch: # Allows you to run this manually
+
+jobs:
+  merge:
+    name: Merge main into next
+    runs-on: ubuntu-latest
+    if: github.repository == 'carbon-design-system/carbon'
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: '0'
+          ref: next
+
+      - name: Merge main into next
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          if git merge-base --is-ancestor origin/main HEAD; then
+            echo "next already contains main; nothing to merge."
+            exit 0
+          fi
+
+          if ! git merge origin/main --no-edit; then
+            echo "Merge conflict merging main into next. Resolve locally and push."
+            git merge --abort
+            exit 1
+          fi
+
+          git push origin HEAD:next
