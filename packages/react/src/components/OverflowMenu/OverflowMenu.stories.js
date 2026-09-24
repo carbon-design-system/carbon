@@ -6,9 +6,11 @@
  */
 
 import React from 'react';
-import { OverflowMenu } from './OverflowMenu';
+import { OverflowMenu } from './';
 import { default as OverflowMenuItem } from '../OverflowMenuItem';
+import { MenuItem, MenuItemDivider } from '../Menu';
 import { Filter } from '@carbon/icons-react';
+import { useFeatureFlag } from '../FeatureFlags';
 import mdx from './OverflowMenu.mdx';
 
 const args = {
@@ -83,10 +85,21 @@ export default {
 };
 
 export const RenderCustomIcon = (args) => {
+  const enableV12OverflowMenu = useFeatureFlag('enable-v12-overflowmenu');
+
   return (
     <OverflowMenu {...args} renderIcon={Filter}>
-      <OverflowMenuItem itemText="Filter A" />
-      <OverflowMenuItem itemText="Filter B" />
+      {enableV12OverflowMenu ? (
+        <>
+          <MenuItem label="Filter A" />
+          <MenuItem label="Filter B" />
+        </>
+      ) : (
+        <>
+          <OverflowMenuItem itemText="Filter A" />
+          <OverflowMenuItem itemText="Filter B" />
+        </>
+      )}
     </OverflowMenu>
   );
 };

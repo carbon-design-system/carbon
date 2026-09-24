@@ -40,18 +40,10 @@ export const parameters = {
   ...baseParameters,
   options: {
     ...baseOptionsWithoutStorySort,
-    storySort: {
-      method: 'alphabetical',
-      order: [
+    // Same story-level order as v11 React: Default/Overview first, then A–Z.
+    storySort: (storyA, storyB) => {
+      const categoryOrder = [
         'Introduction',
-        [
-          'Welcome',
-          'Getting started',
-          'Custom styles',
-          'Carbon CDN style helpers',
-          'Feature Flags',
-          'Form participation',
-        ],
         'Components',
         'Deprecated',
         'Elements',
@@ -59,7 +51,68 @@ export const parameters = {
         'Hooks',
         'Layout',
         'Preview',
-      ],
+      ];
+      const idA = storyA.id;
+      const idB = storyB.id;
+      const titleA = storyA.title;
+      const titleB = storyB.title;
+      const categoryA = titleA.split('/')[0];
+      const categoryB = titleB.split('/')[0];
+
+      if (categoryA !== categoryB) {
+        const indexA = categoryOrder.indexOf(categoryA);
+        const indexB = categoryOrder.indexOf(categoryB);
+        if (indexA !== -1 || indexB !== -1) {
+          return (
+            (indexA === -1 ? categoryOrder.length : indexA) -
+            (indexB === -1 ? categoryOrder.length : indexB)
+          );
+        }
+        return titleA.localeCompare(titleB);
+      }
+
+      if (titleA !== titleB) {
+        if (idA.includes('welcome')) {
+          return -1;
+        }
+        if (idB.includes('welcome')) {
+          return 1;
+        }
+        if (idA.includes('overview') && !idB.includes('overview')) {
+          return -1;
+        }
+        if (idB.includes('overview') && !idA.includes('overview')) {
+          return 1;
+        }
+        return titleA.localeCompare(titleB);
+      }
+
+      const UNKNOWN_KEYWORD = 5;
+      const keywords = [
+        ['welcome', 0],
+        ['overview', 1],
+        ['default', 2],
+        ['usage', 3],
+        ['flag-details', 4],
+        ['playground', 6],
+        ['development', 7],
+        ['deprecated', 8],
+        ['unstable', 9],
+      ];
+      const weightOf = (id) => {
+        for (const [keyword, weight] of keywords) {
+          if (id.includes(keyword)) {
+            return weight;
+          }
+        }
+        return UNKNOWN_KEYWORD;
+      };
+      const weightA = weightOf(idA);
+      const weightB = weightOf(idB);
+      if (weightA !== weightB) {
+        return weightA - weightB;
+      }
+      return idA.localeCompare(idB);
     },
   },
 };

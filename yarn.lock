@@ -2024,7 +2024,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/cli@npm:^11.51.0-rc.0, @carbon/cli@workspace:packages/cli":
+"@carbon/cli@npm:^11.51.0, @carbon/cli@workspace:packages/cli":
   version: 0.0.0-use.local
   resolution: "@carbon/cli@workspace:packages/cli"
   dependencies:
@@ -2057,11 +2057,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/colors@npm:^11.59.0-rc.0, @carbon/colors@workspace:packages/colors":
+"@carbon/colors@npm:^11.59.0, @carbon/colors@workspace:packages/colors":
   version: 0.0.0-use.local
   resolution: "@carbon/colors@workspace:packages/colors"
   dependencies:
-    "@carbon/cli": "npm:^11.51.0-rc.0"
+    "@carbon/cli": "npm:^11.51.0"
     "@carbon/cli-reporter": "npm:^10.9.0"
     "@carbon/test-utils": "npm:^10.41.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
@@ -2077,14 +2077,14 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@carbon/elements@workspace:packages/elements"
   dependencies:
-    "@carbon/cli": "npm:^11.51.0-rc.0"
-    "@carbon/colors": "npm:^11.59.0-rc.0"
-    "@carbon/grid": "npm:^11.63.0-rc.0"
-    "@carbon/icons": "npm:^11.89.0-rc.0"
-    "@carbon/layout": "npm:^11.60.0-rc.0"
-    "@carbon/motion": "npm:^11.53.0-rc.0"
-    "@carbon/themes": "npm:^11.82.0-rc.0"
-    "@carbon/type": "npm:^11.68.0-rc.0"
+    "@carbon/cli": "npm:^11.51.0"
+    "@carbon/colors": "npm:^11.59.0"
+    "@carbon/grid": "npm:^11.63.0"
+    "@carbon/icons": "npm:^11.89.0"
+    "@carbon/layout": "npm:^11.60.0"
+    "@carbon/motion": "npm:^11.53.0"
+    "@carbon/themes": "npm:^11.82.0"
+    "@carbon/type": "npm:^11.68.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     fs-extra: "npm:^11.0.0"
     klaw-sync: "npm:^8.0.0"
@@ -2094,7 +2094,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/feature-flags@npm:^1.10.0-rc.0, @carbon/feature-flags@workspace:packages/feature-flags":
+"@carbon/feature-flags@npm:^1.10.0, @carbon/feature-flags@workspace:packages/feature-flags":
   version: 0.0.0-use.local
   resolution: "@carbon/feature-flags@workspace:packages/feature-flags"
   dependencies:
@@ -2114,18 +2114,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/grid@npm:^11.63.0-rc.0, @carbon/grid@workspace:packages/grid":
+"@carbon/grid@npm:^11.63.0, @carbon/grid@workspace:packages/grid":
   version: 0.0.0-use.local
   resolution: "@carbon/grid@workspace:packages/grid"
   dependencies:
-    "@carbon/cli": "npm:^11.51.0-rc.0"
-    "@carbon/layout": "npm:^11.60.0-rc.0"
+    "@carbon/cli": "npm:^11.51.0"
+    "@carbon/layout": "npm:^11.60.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     rimraf: "npm:^6.0.1"
   languageName: unknown
   linkType: soft
 
-"@carbon/icon-build-helpers@npm:^1.66.0-rc.0, @carbon/icon-build-helpers@workspace:packages/icon-build-helpers":
+"@carbon/icon-build-helpers@npm:^1.66.0, @carbon/icon-build-helpers@workspace:packages/icon-build-helpers":
   version: 0.0.0-use.local
   resolution: "@carbon/icon-build-helpers@workspace:packages/icon-build-helpers"
   dependencies:
@@ -2133,7 +2133,7 @@ __metadata:
     "@babel/template": "npm:^8.0.0"
     "@babel/types": "npm:^8.0.0"
     "@carbon/cli-reporter": "npm:^10.9.0"
-    "@carbon/icon-helpers": "npm:^10.83.0-rc.0"
+    "@carbon/icon-helpers": "npm:^10.83.0"
     change-case-all: "npm:^2.1.0"
     fs-extra: "npm:^11.0.0"
     joi: "npm:^18.0.0"
@@ -2158,24 +2158,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/icon-helpers@npm:^10.83.0-rc.0, @carbon/icon-helpers@workspace:packages/icon-helpers":
+"@carbon/icon-helpers@npm:^10.83.0, @carbon/icon-helpers@workspace:packages/icon-helpers":
   version: 0.0.0-use.local
   resolution: "@carbon/icon-helpers@workspace:packages/icon-helpers"
   dependencies:
-    "@carbon/cli": "npm:^11.51.0-rc.0"
+    "@carbon/cli": "npm:^11.51.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     rimraf: "npm:^6.0.1"
     typescript-config-carbon: "workspace:^0.11.0"
   languageName: unknown
   linkType: soft
 
-"@carbon/icons-react@npm:^11.89.0-rc.0, @carbon/icons-react@workspace:packages/icons-react":
+"@carbon/icons-react@npm:^11.89.0, @carbon/icons-react@workspace:packages/icons-react":
   version: 0.0.0-use.local
   resolution: "@carbon/icons-react@workspace:packages/icons-react"
   dependencies:
-    "@carbon/icon-build-helpers": "npm:^1.66.0-rc.0"
-    "@carbon/icon-helpers": "npm:^10.83.0-rc.0"
-    "@carbon/icons": "npm:^11.89.0-rc.0"
+    "@carbon/icon-build-helpers": "npm:^1.66.0"
+    "@carbon/icon-helpers": "npm:^10.83.0"
+    "@carbon/icons": "npm:^11.89.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     prop-types: "npm:^15.8.1"
     rimraf: "npm:^6.0.1"
@@ -2188,30 +2188,30 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@carbon/icons-vue@workspace:packages/icons-vue"
   dependencies:
-    "@carbon/icon-helpers": "npm:^10.83.0-rc.0"
-    "@carbon/icons": "npm:^11.89.0-rc.0"
+    "@carbon/icon-helpers": "npm:^10.83.0"
+    "@carbon/icons": "npm:^11.89.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     rimraf: "npm:^6.0.1"
     vue: "npm:^3.0.0"
   languageName: unknown
   linkType: soft
 
-"@carbon/icons@npm:^11.89.0-rc.0, @carbon/icons@workspace:packages/icons":
+"@carbon/icons@npm:^11.89.0, @carbon/icons@workspace:packages/icons":
   version: 0.0.0-use.local
   resolution: "@carbon/icons@workspace:packages/icons"
   dependencies:
-    "@carbon/cli": "npm:^11.51.0-rc.0"
-    "@carbon/icon-build-helpers": "npm:^1.66.0-rc.0"
+    "@carbon/cli": "npm:^11.51.0"
+    "@carbon/icon-build-helpers": "npm:^1.66.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     rimraf: "npm:^6.0.1"
   languageName: unknown
   linkType: soft
 
-"@carbon/layout@npm:^11.60.0-rc.0, @carbon/layout@workspace:packages/layout":
+"@carbon/layout@npm:^11.60.0, @carbon/layout@workspace:packages/layout":
   version: 0.0.0-use.local
   resolution: "@carbon/layout@workspace:packages/layout"
   dependencies:
-    "@carbon/cli": "npm:^11.51.0-rc.0"
+    "@carbon/cli": "npm:^11.51.0"
     "@carbon/cli-reporter": "npm:^10.9.0"
     "@carbon/scss-generator": "npm:^10.20.0"
     "@carbon/test-utils": "npm:^10.41.0"
@@ -2224,11 +2224,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/motion@npm:^11.53.0-rc.0, @carbon/motion@workspace:packages/motion":
+"@carbon/motion@npm:^11.53.0, @carbon/motion@workspace:packages/motion":
   version: 0.0.0-use.local
   resolution: "@carbon/motion@workspace:packages/motion"
   dependencies:
-    "@carbon/cli": "npm:^11.51.0-rc.0"
+    "@carbon/cli": "npm:^11.51.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     rimraf: "npm:^6.0.1"
     style-dictionary: "npm:^5.5.0"
@@ -2241,9 +2241,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@carbon/pictograms-react@workspace:packages/pictograms-react"
   dependencies:
-    "@carbon/icon-build-helpers": "npm:^1.66.0-rc.0"
-    "@carbon/icon-helpers": "npm:^10.83.0-rc.0"
-    "@carbon/pictograms": "npm:^12.85.0-rc.0"
+    "@carbon/icon-build-helpers": "npm:^1.66.0"
+    "@carbon/icon-helpers": "npm:^10.83.0"
+    "@carbon/pictograms": "npm:^12.85.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     prop-types: "npm:^15.8.1"
     rimraf: "npm:^6.0.1"
@@ -2252,17 +2252,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/pictograms@npm:^12.85.0-rc.0, @carbon/pictograms@workspace:packages/pictograms":
+"@carbon/pictograms@npm:^12.85.0, @carbon/pictograms@workspace:packages/pictograms":
   version: 0.0.0-use.local
   resolution: "@carbon/pictograms@workspace:packages/pictograms"
   dependencies:
-    "@carbon/icon-build-helpers": "npm:^1.66.0-rc.0"
+    "@carbon/icon-build-helpers": "npm:^1.66.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     rimraf: "npm:^6.0.1"
   languageName: unknown
   linkType: soft
 
-"@carbon/react@npm:^1.117.0-rc.0, @carbon/react@workspace:packages/react":
+"@carbon/react@npm:^1.117.0, @carbon/react@workspace:packages/react":
   version: 0.0.0-use.local
   resolution: "@carbon/react@workspace:packages/react"
   dependencies:
@@ -2275,15 +2275,14 @@ __metadata:
     "@babel/preset-react": "npm:^8.0.0"
     "@babel/preset-typescript": "npm:^8.0.0"
     "@babel/runtime": "npm:^8.0.0"
-    "@carbon/feature-flags": "npm:^1.10.0-rc.0"
-    "@carbon/icons-react": "npm:^11.89.0-rc.0"
-    "@carbon/layout": "npm:^11.60.0-rc.0"
-    "@carbon/motion": "npm:^11.53.0-rc.0"
-    "@carbon/styles": "npm:^1.116.0-rc.0"
+    "@carbon/feature-flags": "npm:^1.10.0"
+    "@carbon/icons-react": "npm:^11.89.0"
+    "@carbon/layout": "npm:^11.60.0"
+    "@carbon/motion": "npm:^11.53.0"
+    "@carbon/styles": "npm:^1.116.0"
     "@carbon/test-utils": "npm:^10.41.0"
-    "@carbon/themes": "npm:^11.82.0-rc.0"
-    "@carbon/utilities": "npm:^0.26.0-rc.0"
-    "@figma/code-connect": "npm:^2.0.0"
+    "@carbon/themes": "npm:^11.82.0"
+    "@carbon/utilities": "npm:^0.26.0"
     "@floating-ui/react": "npm:^0.27.4"
     "@ibm/telemetry-js": "npm:^1.5.0"
     "@rolldown/plugin-babel": "npm:^0.2.0"
@@ -2347,18 +2346,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/styles@npm:^1.116.0-rc.0, @carbon/styles@workspace:packages/styles":
+"@carbon/styles@npm:^1.116.0, @carbon/styles@workspace:packages/styles":
   version: 0.0.0-use.local
   resolution: "@carbon/styles@workspace:packages/styles"
   dependencies:
-    "@carbon/colors": "npm:^11.59.0-rc.0"
-    "@carbon/feature-flags": "npm:^1.10.0-rc.0"
-    "@carbon/grid": "npm:^11.63.0-rc.0"
-    "@carbon/layout": "npm:^11.60.0-rc.0"
-    "@carbon/motion": "npm:^11.53.0-rc.0"
+    "@carbon/colors": "npm:^11.59.0"
+    "@carbon/feature-flags": "npm:^1.10.0"
+    "@carbon/grid": "npm:^11.63.0"
+    "@carbon/layout": "npm:^11.60.0"
+    "@carbon/motion": "npm:^11.53.0"
     "@carbon/test-utils": "npm:^10.41.0"
-    "@carbon/themes": "npm:^11.82.0-rc.0"
-    "@carbon/type": "npm:^11.68.0-rc.0"
+    "@carbon/themes": "npm:^11.82.0"
+    "@carbon/type": "npm:^11.68.0"
     "@ibm/plex": "npm:6.4.1"
     "@ibm/plex-mono": "npm:2.5.0"
     "@ibm/plex-sans": "npm:1.1.0"
@@ -2399,19 +2398,19 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/themes@npm:^11.82.0-rc.0, @carbon/themes@workspace:packages/themes":
+"@carbon/themes@npm:^11.82.0, @carbon/themes@workspace:packages/themes":
   version: 0.0.0-use.local
   resolution: "@carbon/themes@workspace:packages/themes"
   dependencies:
     "@babel/node": "npm:^8.0.0"
     "@babel/preset-env": "npm:^8.0.0"
-    "@carbon/cli": "npm:^11.51.0-rc.0"
+    "@carbon/cli": "npm:^11.51.0"
     "@carbon/cli-reporter": "npm:^10.9.0"
-    "@carbon/colors": "npm:^11.59.0-rc.0"
-    "@carbon/layout": "npm:^11.60.0-rc.0"
+    "@carbon/colors": "npm:^11.59.0"
+    "@carbon/layout": "npm:^11.60.0"
     "@carbon/scss-generator": "npm:^10.20.0"
     "@carbon/test-utils": "npm:^10.41.0"
-    "@carbon/type": "npm:^11.68.0-rc.0"
+    "@carbon/type": "npm:^11.68.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     "@types/color": "npm:^4.2.1"
     ajv: "npm:^8.20.0"
@@ -2428,13 +2427,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/type@npm:^11.68.0-rc.0, @carbon/type@workspace:packages/type":
+"@carbon/type@npm:^11.68.0, @carbon/type@workspace:packages/type":
   version: 0.0.0-use.local
   resolution: "@carbon/type@workspace:packages/type"
   dependencies:
-    "@carbon/cli": "npm:^11.51.0-rc.0"
-    "@carbon/grid": "npm:^11.63.0-rc.0"
-    "@carbon/layout": "npm:^11.60.0-rc.0"
+    "@carbon/cli": "npm:^11.51.0"
+    "@carbon/grid": "npm:^11.63.0"
+    "@carbon/layout": "npm:^11.60.0"
     "@carbon/test-utils": "npm:^10.41.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     change-case-all: "npm:^2.1.0"
@@ -2476,7 +2475,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@carbon/utilities-react@workspace:packages/utilities-react"
   dependencies:
-    "@carbon/utilities": "npm:^0.26.0-rc.0"
+    "@carbon/utilities": "npm:^0.26.0"
     "@ibm/telemetry-js": "npm:^1.6.1"
     rimraf: "npm:^6.0.1"
     tsdown: "npm:^0.23.0"
@@ -2486,7 +2485,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/utilities@npm:^0.26.0-rc.0, @carbon/utilities@workspace:packages/utilities":
+"@carbon/utilities@npm:^0.26.0, @carbon/utilities@workspace:packages/utilities":
   version: 0.0.0-use.local
   resolution: "@carbon/utilities@workspace:packages/utilities"
   dependencies:
@@ -2504,11 +2503,11 @@ __metadata:
   resolution: "@carbon/web-components@workspace:packages/web-components"
   dependencies:
     "@carbon/icon-helpers": "npm:10.47.0"
-    "@carbon/icons": "npm:^11.89.0-rc.0"
-    "@carbon/layout": "npm:^11.60.0-rc.0"
-    "@carbon/motion": "npm:^11.53.0-rc.0"
-    "@carbon/styles": "npm:^1.116.0-rc.0"
-    "@carbon/utilities": "npm:^0.26.0-rc.0"
+    "@carbon/icons": "npm:^11.89.0"
+    "@carbon/layout": "npm:^11.60.0"
+    "@carbon/motion": "npm:^11.53.0"
+    "@carbon/styles": "npm:^1.116.0"
+    "@carbon/utilities": "npm:^0.26.0"
     "@floating-ui/dom": "npm:^1.6.3"
     "@ibm/telemetry-js": "npm:^1.10.2"
     "@juggle/resize-observer": "npm:^3.4.0"
@@ -3513,9 +3512,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@figma/code-connect@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "@figma/code-connect@npm:2.0.0"
+"@figma/code-connect@npm:1.5.3":
+  version: 1.5.3
+  resolution: "@figma/code-connect@npm:1.5.3"
   dependencies:
     boxen: "npm:5.1.1"
     chalk: "npm:^4.1.2"
@@ -3542,7 +3541,7 @@ __metadata:
     zod-validation-error: "npm:^3.2.0"
   bin:
     figma: bin/figma
-  checksum: 10/89971f53969dc2ab3aef39a3651707293248bb29ea3731bae18814fe3d6f205266772cac8f37148d0bfe7fe0a7a03605642f4e69015ce373082d94fac1b768ab
+  checksum: 10/ecd257edc10cca144e8dcb2695f613f462a8da0a73392939fa015b212a81449f80baeb7c80f2c9c552edce7399f29a493070d6d2e08a65c1b0be2398c8823204
   languageName: node
   linkType: hard
 
@@ -10039,8 +10038,8 @@ __metadata:
     "@babel/plugin-transform-react-constant-elements": "npm:^8.0.0"
     "@babel/preset-env": "npm:^8.0.0"
     "@babel/preset-react": "npm:^8.0.0"
-    "@carbon/react": "npm:^1.117.0-rc.0"
-    "@carbon/styles": "npm:^1.116.0-rc.0"
+    "@carbon/react": "npm:^1.117.0"
+    "@carbon/styles": "npm:^1.116.0"
     "@carbon/test-utils": "npm:^10.41.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     babel-plugin-dev-expression: "npm:^0.2.3"
@@ -10063,7 +10062,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "carbon-components@workspace:packages/carbon-components"
   dependencies:
-    "@carbon/styles": "npm:^1.116.0-rc.0"
+    "@carbon/styles": "npm:^1.116.0"
     "@carbon/test-utils": "npm:^10.41.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     chalk: "npm:6.0.0"
@@ -10092,6 +10091,7 @@ __metadata:
     "@commitlint/config-conventional": "npm:^21.0.0"
     "@eslint/compat": "npm:^2.0.1"
     "@eslint/js": "npm:^9.24.0"
+    "@figma/code-connect": "npm:1.5.3"
     "@playwright/test": "npm:^1.36.2"
     "@testing-library/dom": "npm:^10.1.0"
     "@testing-library/jest-dom": "npm:^7.0.0"
