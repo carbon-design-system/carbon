@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2021, 2025
+// Copyright IBM Corp. 2021, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -9,11 +9,14 @@
 // Action set
 //-----------------------------
 
+@use '../../border-radius' as *;
 @use '../../config' as *;
+@use '../../feature-flags' as *;
 @use '../../theme' as *;
 @use '../../type';
 @use '../../spacing' as *;
 @use '../../utilities/convert' as *;
+@use '../button/radius' as button;
 
 /// Action set styles
 /// @access public
@@ -23,6 +26,10 @@
     align-items: stretch;
     justify-content: flex-end;
     background-color: $layer-01;
+
+    @if enabled('enable-v12-release') {
+      @include button.radius($border-radius-00);
+    }
   }
 
   .#{$prefix}--action-set .#{$prefix}--action-set__action-button {
