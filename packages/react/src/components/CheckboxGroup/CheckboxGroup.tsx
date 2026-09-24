@@ -23,7 +23,7 @@ import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps'
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
 import { Checkbox } from '../Checkbox';
-import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
+import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
 
 export interface CheckboxGroupProps {
   children?: ReactNode;
@@ -110,7 +110,7 @@ const CheckboxGroup = ({
   const normalizedDecorator = candidateIsAILabel
     ? cloneElement(candidate, { size: 'mini', kind: 'default' })
     : candidate;
-  useNoInteractiveChildren(
+  useNoInteractiveChildrenForLabel(
     legendRef,
     'The CheckboxGroup component `legendText` prop must have no interactive content'
   );
