@@ -60,7 +60,7 @@ $step-block-class: #{$block-class}__step;
   white-space: nowrap;
 }
 
-.#{carbon-config.$prefix}--form-item {
+.#{$block-class} .#{carbon-config.$prefix}--form-item {
   margin-block-end: $spacing-05;
 }
 

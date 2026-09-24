@@ -108,7 +108,7 @@ export const CreateTearsheetNarrow = ({
         />
       </Tearsheet.Header>
       <Tearsheet.Body className="create-tearsheet-narrow__body">
-        <Tearsheet.MainContent isFlush={true}>
+        <Tearsheet.MainContent isFlush={true} className='main__content'>
           {formTitle && (
             <h3 className="create-tearsheet-narrow__form-title">{formTitle}</h3>
           )}

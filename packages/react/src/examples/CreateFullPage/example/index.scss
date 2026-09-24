@@ -74,12 +74,12 @@ $influencer-block-class: create-influencer;
 }
 
 @include breakpoint-down(md) {
-  .#{carbon-config.$prefix}--breadcrumb-item {
+  .#{$breadcrumb-block-class} .#{carbon-config.$prefix}--breadcrumb-item {
     display: none;
   }
 
   .#{$breadcrumb-block-class}__breadcrumb-back,
-  .#{carbon-config.$prefix}--breadcrumb-item:last-child {
+  .#{$breadcrumb-block-class} .#{carbon-config.$prefix}--breadcrumb-item:last-child {
     display: inline-flex;
     vertical-align: middle;
   }
@@ -89,7 +89,7 @@ $influencer-block-class: create-influencer;
   }
 }
 
-.#{carbon-config.$prefix}--breadcrumb-item:last-child {
+.#{$breadcrumb-block-class} .#{carbon-config.$prefix}--breadcrumb-item:last-child {
   display: inline-flex;
 }
 
@@ -334,7 +334,7 @@ $influencerAnimationStart: calc(-1 * #{$spacing-05});
     }
 
     p {
-      @include type.type-style('body-short-01');
+      @include type.type-style('body-compact-01');
 
       color: $text-secondary;
       margin-block-end: $spacing-05;

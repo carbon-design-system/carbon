@@ -29,26 +29,26 @@ p.step__description:last-of-type {
   margin-block-end: $spacing-05;
 }
 
-// Tile group styles
-.#{carbon-config.$prefix}--tile-group div {
+// Tile group styles — scoped to the tearsheet story wrapper to avoid global leakage
+.tearsheet-create-multi-step .#{carbon-config.$prefix}--tile-group div {
   display: flex;
   flex-wrap: wrap;
 }
 
 // Custom tile styles
-.cds--create-tearsheet-step--custom-tile {
+.tearsheet-create-multi-step--custom-tile {
   block-size: 240px;
   inline-size: 280px;
   margin-inline-end: $spacing-05;
 }
 
-.cds--create-tearsheet-step--custom-tile
+.tearsheet-create-multi-step--custom-tile
   .cds--empty-state__illustration.cds--empty-state__illustration--lg {
   block-size: 120px;
   min-inline-size: 120px;
 }
 
-.cds--create-tearsheet-step--custom-tile-label {
+.tearsheet-create-multi-step--custom-tile-label {
   position: absolute;
   inset-block-end: $spacing-05;
   inset-inline-start: $spacing-05;

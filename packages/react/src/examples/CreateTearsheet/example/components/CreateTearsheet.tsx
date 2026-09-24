@@ -288,6 +288,7 @@ export const CreateTearsheet = ({
         influencerWidth={influencerWidth}
         decorator={decorator}
         preventCloseOnClickOutside
+        className='createTearsheet'
         {...rest}
       >
         <Tearsheet.Header hideCloseButton>
