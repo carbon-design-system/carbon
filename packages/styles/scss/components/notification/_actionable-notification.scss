@@ -69,6 +69,10 @@
   box-shadow: 0 2px 6px 0 rgb(0 0 0 / 20%);
   max-inline-size: convert.to-rem(288px);
   min-inline-size: convert.to-rem(288px);
+
+  .#{$prefix}--actionable-notification__text-wrapper {
+    padding: convert.to-rem(15px) 0 convert.to-rem(23px) 0;
+  }
 }
 
 /// Actionable notification low-contrast variant base styles
@@ -352,11 +356,6 @@
 
   .#{$prefix}--actionable-notification__button-wrapper {
     display: flex;
-  }
-
-  .#{$prefix}--actionable-notification--toast
-    .#{$prefix}--actionable-notification__text-wrapper {
-    padding: convert.to-rem(15px) 0 convert.to-rem(23px) 0;
   }
 
   .#{$prefix}--actionable-notification__content {
