@@ -6,13 +6,7 @@
  */
 
 import React from 'react';
-import {
-  render,
-  screen,
-  act,
-  fireEvent,
-  waitFor,
-} from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { NotificationsPanel } from '../NotificationsPanel';
 
@@ -217,7 +211,7 @@ describe(componentName, () => {
     const readMoreButton = notificationEl.querySelector(
       `.${blockClass}__notification-read-more-button`
     );
-    await act(() => userEvent.click(readMoreButton));
+    await userEvent.click(readMoreButton);
     expect(notificationEl.querySelector(`.${readLessClass}`)).toHaveClass(
       readLessClass
     );
@@ -233,7 +227,7 @@ describe(componentName, () => {
     const dismissBtn = notificationEl.querySelector(
       `.${blockClass}__dismiss-single-button`
     );
-    await act(() => userEvent.click(dismissBtn));
+    await userEvent.click(dismissBtn);
     expect(onDismissSingleNotificationFn).toHaveBeenCalled();
   });
 
@@ -256,7 +250,7 @@ describe(componentName, () => {
       data: testData,
       onDismissAllNotifications: onDismissAllFn,
     });
-    await act(() => userEvent.click(screen.getByText(/Dismiss all/i)));
+    await userEvent.click(screen.getByText(/Dismiss all/i));
     expect(onDismissAllFn).toHaveBeenCalled();
   });
 
@@ -268,13 +262,9 @@ describe(componentName, () => {
       onViewAllClick: onViewAllFn,
       onSettingsClick: onSettingsFn,
     });
-    await act(() =>
-      userEvent.click(screen.getByText(`View all (${testData.length})`))
-    );
-    await act(() =>
-      userEvent.click(
-        container.querySelector(`.${blockClass}__settings-button`)
-      )
+    await userEvent.click(screen.getByText(`View all (${testData.length})`));
+    await userEvent.click(
+      container.querySelector(`.${blockClass}__settings-button`)
     );
     expect(onViewAllFn).toHaveBeenCalled();
     expect(onSettingsFn).toHaveBeenCalled();
@@ -283,15 +273,15 @@ describe(componentName, () => {
   it('should close the panel when Escape key is pressed', async () => {
     const { container } = renderNotifications({ data: [] });
     container.querySelector(`.${blockClass}`).focus();
-    await act(() => userEvent.keyboard('{Escape}'));
+    await userEvent.keyboard('{Escape}');
     expect(onClickOutside).toHaveBeenCalled();
   });
 
   it('should toggle do not disturb switch', async () => {
     const onToggle = jest.fn();
     renderNotifications({ onDoNotDisturbChange: onToggle, data: [] });
-    await act(() =>
-      userEvent.click(screen.getByRole('switch', { name: /Do not disturb/i }))
+    await userEvent.click(
+      screen.getByRole('switch', { name: /Do not disturb/i })
     );
     expect(onToggle).toHaveBeenCalled();
   });

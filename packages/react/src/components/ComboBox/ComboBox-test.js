@@ -118,7 +118,7 @@ describe('ComboBox', () => {
     }
   });
 
-  it('should allow non-interactive content in titleText', () => {
+  it('should allow non-interactive content in titleText', async () => {
     expect(() => {
       render(
         <ComboBox
@@ -131,6 +131,7 @@ describe('ComboBox', () => {
         />
       );
     }).not.toThrow();
+    await waitForPosition();
   });
 
   it('should display the menu of items when a user clicks on the input', async () => {
@@ -195,14 +196,16 @@ describe('ComboBox', () => {
     });
   });
 
-  it('should display titleText', () => {
+  it('should display titleText', async () => {
     render(<ComboBox {...mockProps} titleText="Combobox title" />);
+    await waitForPosition();
 
     expect(screen.getByText('Combobox title')).toBeInTheDocument();
   });
 
-  it('should confirm custom aria-label is on the input', () => {
+  it('should confirm custom aria-label is on the input', async () => {
     render(<ComboBox {...mockProps} aria-label="custom aria-label" />);
+    await waitForPosition();
 
     expect(screen.getByRole('combobox')).toHaveAttribute(
       'aria-label',
@@ -277,8 +280,9 @@ describe('ComboBox', () => {
     beforeEach(() => {
       onInputChange = jest.fn();
     });
-    it('should not call onChange or onInputChange on initial render', () => {
+    it('should not call onChange or onInputChange on initial render', async () => {
       render(<ComboBox {...mockProps} onInputChange={onInputChange} />);
+      await waitForPosition();
       expect(onInputChange).not.toHaveBeenCalled();
       expect(mockProps.onChange).not.toHaveBeenCalled();
     });
@@ -722,8 +726,9 @@ describe('ComboBox', () => {
       await waitForPosition();
       expect(findInputNode()).toHaveDisplayValue(mockProps.items[0].label);
     });
-    it('should not call onChange or onInputChange on initial render', () => {
+    it('should not call onChange or onInputChange on initial render', async () => {
       render(<ControlledComboBox />);
+      await waitForPosition();
       expect(screen.getByText('onChangeCallCount: 0')).toBeInTheDocument();
       expect(screen.getByText('onInputChangeCallCount: 0')).toBeInTheDocument();
     });
@@ -892,8 +897,10 @@ describe('ComboBox', () => {
       const { rerender } = render(
         <ComboBox {...mockProps} selectedItem={mockProps.items[0]} />
       );
+      await waitForPosition();
       expect(findInputNode()).toHaveDisplayValue(mockProps.items[0].label);
       rerender(<ComboBox {...mockProps} selectedItem={mockProps.items[1]} />);
+      await waitForPosition();
       expect(findInputNode()).toHaveDisplayValue(mockProps.items[1].label);
       expect(mockProps.onChange).toHaveBeenCalledTimes(1);
     });

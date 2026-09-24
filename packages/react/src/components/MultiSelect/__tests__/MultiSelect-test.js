@@ -890,35 +890,46 @@ describe('MultiSelect', () => {
     });
 
     it('should apply floating styles when `autoAlign` is enabled', async () => {
+      // The shared Jest setup stubs out floating-ui positioning. This test
+      // asserts on the computed position, so it needs the real hook.
+      const useFloatingSpy = jest
+        .spyOn(jest.requireMock('@floating-ui/react'), 'useFloating')
+        .mockImplementation(
+          jest.requireActual('@floating-ui/react').useFloating
+        );
       const items = generateItems(4, generateGenericItem);
 
-      render(
-        <MultiSelect
-          autoAlign
-          open
-          id="test"
-          label="test-label"
-          items={items}
-        />
-      );
-      await waitForPosition();
+      try {
+        render(
+          <MultiSelect
+            autoAlign
+            open
+            id="test"
+            label="test-label"
+            items={items}
+          />
+        );
+        await waitForPosition();
 
-      const combobox = screen.getByRole('combobox');
-      const listbox = screen.getByRole('listbox', { hidden: true });
-      const multiSelect = combobox.closest(`.${prefix}--multi-select`);
+        const combobox = screen.getByRole('combobox');
+        const listbox = screen.getByRole('listbox', { hidden: true });
+        const multiSelect = combobox.closest(`.${prefix}--multi-select`);
 
-      expect(multiSelect).toHaveClass(
-        `${prefix}--multi-select`,
-        `${prefix}--autoalign`,
-        `${prefix}--list-box`,
-        `${prefix}--list-box--expanded`,
-        { exact: true }
-      );
+        expect(multiSelect).toHaveClass(
+          `${prefix}--multi-select`,
+          `${prefix}--autoalign`,
+          `${prefix}--list-box`,
+          `${prefix}--list-box--expanded`,
+          { exact: true }
+        );
 
-      await waitFor(() => {
-        expect(listbox.style.visibility).toBe('hidden');
-        expect(listbox.style.width).toBe('0px');
-      });
+        await waitFor(() => {
+          expect(listbox.style.visibility).toBe('hidden');
+          expect(listbox.style.width).toBe('0px');
+        });
+      } finally {
+        useFloatingSpy.mockRestore();
+      }
     });
 
     it('should accept a `ref` for the underlying button element', async () => {

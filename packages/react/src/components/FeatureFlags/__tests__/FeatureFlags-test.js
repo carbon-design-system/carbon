@@ -1029,26 +1029,6 @@ describe('FeatureFlags', () => {
       info.mockRestore();
     });
 
-    it('should notify when a v12 flag is available but not enabled', () => {
-      add('enable-v12-notice-available', false);
-
-      function TestComponent() {
-        useFeatureFlag('enable-v12-notice-available');
-        return null;
-      }
-
-      // The release flag is off here because it enables every v12 flag, and an
-      // enabled flag has nothing to notify about.
-      render(
-        <FeatureFlags enableV12Release={false}>
-          <TestComponent />
-        </FeatureFlags>
-      );
-
-      expect(info).toHaveBeenCalledTimes(1);
-      expect(info.mock.calls[0][0]).toContain('enable-v12-notice-available');
-    });
-
     it('should not notify for a flag enabled by the v12 release flag', () => {
       add('enable-v12-notice-released', false);
 

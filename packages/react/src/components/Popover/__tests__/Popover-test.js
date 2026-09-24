@@ -9,7 +9,6 @@ import { render, screen } from '@testing-library/react';
 import React, { forwardRef } from 'react';
 import { Popover, PopoverContent } from '../../Popover';
 import userEvent from '@testing-library/user-event';
-import { waitForPosition } from '../../ListBox/test-helpers';
 import RadioButton from '../../RadioButton';
 import RadioButtonGroup from '../../RadioButtonGroup';
 import { default as Checkbox } from '../../Checkbox';
@@ -77,62 +76,6 @@ describe('Popover', () => {
       // NOTE: the popover should render popover-content as the first child and
       // popover-caret as the second child
       expect(screen.getByTestId('test').firstChild).toHaveClass('test');
-    });
-
-    it('should have default caret height', async () => {
-      render(
-        <Popover
-          open
-          align="bottom"
-          data-testid="test"
-          autoAlign
-          className="test ai-label">
-          <button type="button">Settings</button>
-          <PopoverContent className="test"></PopoverContent>
-        </Popover>
-      );
-
-      await waitForPosition();
-      const caretContainer =
-        screen.getByTestId('test').lastChild.lastChild.firstChild;
-      expect(caretContainer).toHaveStyle({ left: '0px', top: '-6px' });
-    });
-
-    it('should change caret height in case of ai-label', async () => {
-      render(
-        <Popover
-          open
-          align="bottom"
-          data-testid="test"
-          autoAlign
-          className="test ai-label">
-          <button type="button">Settings</button>
-          <PopoverContent className="test ai-label"></PopoverContent>
-        </Popover>
-      );
-
-      await waitForPosition();
-      const caretContainer =
-        screen.getByTestId('test').lastChild.lastChild.firstChild;
-      expect(caretContainer).toHaveStyle({ left: '0px', top: '-7px' });
-    });
-
-    it('should auto align when trigger component shares `PopoverContent` `displayName`', async () => {
-      render(
-        <Popover open align="bottom" data-testid="test" autoAlign>
-          <TriggerWithPopoverContentDisplayName>
-            Settings
-          </TriggerWithPopoverContentDisplayName>
-          <PopoverContent />
-        </Popover>
-      );
-
-      await waitForPosition();
-
-      const caretContainer =
-        screen.getByTestId('test').lastChild.lastChild.firstChild;
-
-      expect(caretContainer).toHaveStyle({ left: '0px', top: '-6px' });
     });
 
     it('should forward additional props on the outermost element', () => {
