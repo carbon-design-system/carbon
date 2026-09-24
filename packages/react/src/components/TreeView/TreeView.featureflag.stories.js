@@ -272,15 +272,6 @@ export const Default = (args) => {
   );
 };
 
-Default.args = {
-  hideLabel: false,
-  label: 'Tree View',
-  multiselect: false,
-  onActivate: action('onActivate'),
-  onSelect: action('onSelect'),
-  size: 'sm',
-};
-
 Default.parameters = {
   controls: {
     exclude: ['active', 'children', 'selected'],

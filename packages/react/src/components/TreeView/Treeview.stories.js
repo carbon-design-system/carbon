@@ -256,10 +256,6 @@ export const Default = (args) => {
   );
 };
 
-Default.args = {
-  ...sharedArgs,
-};
-
 export const WithIcons = (args) => {
   const nodes = [
     {
@@ -433,10 +429,6 @@ export const WithIcons = (args) => {
   return (
     <TreeView {...args}>{renderTree({ nodes, withIcons: true })}</TreeView>
   );
-};
-
-WithIcons.args = {
-  ...sharedArgs,
 };
 
 const TreeViewWithLinks = React.memo(({ setCurrentPage, ...args }) => {
@@ -648,7 +640,6 @@ export const WithLinks = (args) => {
 };
 
 WithLinks.args = {
-  ...sharedArgs,
   hideLabel: true,
 };
 
@@ -837,10 +828,6 @@ export const WithControlledExpansion = (args) => {
   );
 };
 
-WithControlledExpansion.args = {
-  ...sharedArgs,
-};
-
 const Nested = () => {
   return <TreeNode key={21} value="Nested" label="Nested" />;
 };
@@ -869,7 +856,6 @@ export const WithComplexNesting = (args) => {
 };
 
 WithComplexNesting.args = {
-  ...sharedArgs,
   hideLabel: true,
   label: 'Tree View with Complex Nesting',
   multiselect: true,
