@@ -6,8 +6,10 @@
  */
 
 import { prefix } from '../../globals/settings';
-import CDSButton from '../button/button';
+import CDSButton, { BUTTON_SIZE } from '../button/button';
+import { property } from 'lit/decorators.js';
 import styles from './actionable-notification.scss?lit';
+import buttonStyles from '../button/button.scss?lit';
 
 /**
  * Actionable notification action button.
@@ -17,16 +19,20 @@ import styles from './actionable-notification.scss?lit';
 class CDSActionableNotificationButton extends CDSButton {
   static is = `${prefix}-actionable-notification-button`;
 
-  update(changedProperties) {
-    super.update(changedProperties);
+  /**
+   * Specify the size of the button. Defaults to `sm` in actionable notification.
+   */
+  @property({ type: String, reflect: true })
+  size?: BUTTON_SIZE | string = BUTTON_SIZE.SMALL;
+
+  firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
     this.shadowRoot
       ?.getElementById('button')
       ?.classList.add(`${prefix}--actionable-notification__action-button`);
-
-    this.setAttribute('size', 'sm');
   }
 
-  static styles = styles;
+  static styles = [buttonStyles, styles];
 }
 
 export default CDSActionableNotificationButton;
