@@ -20,7 +20,6 @@ import { AILabel, AILabelContent } from '../AILabel';
 import { FeatureFlags } from '../FeatureFlags';
 import { ModalPresence, withModalPresence } from './ModalPresence';
 import OverflowMenu from '../OverflowMenu';
-import OverflowMenuItem from '../OverflowMenuItem';
 import { MenuButton } from '../MenuButton';
 import { MenuItem } from '../Menu';
 import CodeSnippet from '../CodeSnippet';
@@ -1345,9 +1344,9 @@ describe.each([
           primaryButtonText="Primary button"
           secondaryButtonText="Secondary button"
           onRequestClose={onRequestClose}>
-          <OverflowMenu iconDescription="More options">
-            <OverflowMenuItem itemText="Download" />
-            <OverflowMenuItem itemText="Share" />
+          <OverflowMenu label="More options">
+            <MenuItem label="Download" />
+            <MenuItem label="Share" />
           </OverflowMenu>
           <p>Test content</p>
         </Component>
@@ -1422,9 +1421,9 @@ describe.each([
         primaryButtonText="Primary button"
         secondaryButtonText="Secondary button"
         onRequestClose={onRequestClose}>
-        <OverflowMenu iconDescription="More options">
-          <OverflowMenuItem itemText="Download" />
-          <OverflowMenuItem itemText="Share" />
+        <OverflowMenu label="More options">
+          <MenuItem label="Download" />
+          <MenuItem label="Share" />
         </OverflowMenu>
         <p>Modal content</p>
         <TextInput

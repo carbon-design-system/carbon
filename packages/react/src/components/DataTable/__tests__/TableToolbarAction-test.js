@@ -23,7 +23,7 @@ describe('TableToolbarAction', () => {
     );
 
     expect(screen.getByTestId('toolbar-action')).toHaveClass(
-      'cds--overflow-menu-options__btn',
+      'cds--menu-item',
       '🪑',
       { exact: true }
     );

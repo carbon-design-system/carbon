@@ -8,6 +8,7 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { BreadcrumbItem } from '../../Breadcrumb';
+import { FeatureFlags } from '../../FeatureFlags';
 import OverflowMenu from '../../OverflowMenu';
 import OverflowMenuItem from '../../OverflowMenuItem';
 
@@ -44,11 +45,15 @@ describe('BreadcrumbItem', () => {
 
   it('should render overflow menu children with breadcrumb menu props', () => {
     render(
-      <BreadcrumbItem>
-        <OverflowMenu aria-label="Overflow menu in breadcrumb">
-          <OverflowMenuItem itemText="Breadcrumb 3" />
-        </OverflowMenu>
-      </BreadcrumbItem>
+      // v12 OverflowMenu does not accept `menuOffset`. BreadcrumbItem still
+      // passes it, and the v12 menu forwards that prop onto a DOM node.
+      <FeatureFlags enableV12Release={false}>
+        <BreadcrumbItem>
+          <OverflowMenu aria-label="Overflow menu in breadcrumb">
+            <OverflowMenuItem itemText="Breadcrumb 3" />
+          </OverflowMenu>
+        </BreadcrumbItem>
+      </FeatureFlags>
     );
 
     const trigger = screen.getByRole('button', { name: 'Options' });

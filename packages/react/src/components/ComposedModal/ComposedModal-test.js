@@ -24,7 +24,7 @@ import {
 import { FeatureFlags, useFeatureFlag } from '../FeatureFlags';
 import { ModalHeader } from './ModalHeader';
 import { ModalFooter } from './ModalFooter';
-import { TextInput, OverflowMenu, OverflowMenuItem } from '../../';
+import { TextInput, OverflowMenu, MenuItem } from '../../';
 import { AILabel, AILabelContent } from '../AILabel';
 
 const prefix = 'cds';
@@ -755,9 +755,9 @@ describe.each([
           <Component open onClose={onClose}>
             <ModalHeader>Modal with Overflow Menu</ModalHeader>
             <ModalBody>
-              <OverflowMenu iconDescription="More options">
-                <OverflowMenuItem itemText="Download" />
-                <OverflowMenuItem itemText="Share" />
+              <OverflowMenu label="More options">
+                <MenuItem label="Download" />
+                <MenuItem label="Share" />
               </OverflowMenu>
               <p>Test content</p>
             </ModalBody>
@@ -911,9 +911,9 @@ describe.each([
       <Component open onClose={onClose}>
         <ModalHeader>Modal with Overflow Menu</ModalHeader>
         <ModalBody>
-          <OverflowMenu iconDescription="More options">
-            <OverflowMenuItem itemText="Download" />
-            <OverflowMenuItem itemText="Share" />
+          <OverflowMenu label="More options">
+            <MenuItem label="Download" />
+            <MenuItem label="Share" />
           </OverflowMenu>
           <p>Modal content</p>
           <TextInput

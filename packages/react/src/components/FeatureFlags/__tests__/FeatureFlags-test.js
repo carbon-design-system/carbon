@@ -306,9 +306,10 @@ describe('FeatureFlags', () => {
     });
 
     // Explicitly setting a flag to false in an inner scope overrides the
-    // parent scope's true value.
+    // parent scope's true value. The release flag is off here because it
+    // enables every v12 flag regardless of what a scope sets.
     render(
-      <FeatureFlags enableTreeviewControllable>
+      <FeatureFlags enableV12Release={false} enableTreeviewControllable>
         <FeatureFlags enableV12Overflowmenu>
           <FeatureFlags
             enableTreeviewControllable={false}
@@ -512,10 +513,10 @@ describe('FeatureFlags', () => {
 
       // Ensure the default value is as defined and as expected
       expect(checkFlags).toHaveBeenLastCalledWith({
-        enableV12Release: false,
+        enableV12Release: true,
       });
       expect(checkFlag).toHaveBeenLastCalledWith({
-        enableV12Release: false,
+        enableV12Release: true,
       });
 
       // Enable the flag
@@ -1036,7 +1037,13 @@ describe('FeatureFlags', () => {
         return null;
       }
 
-      render(<TestComponent />);
+      // The release flag is off here because it enables every v12 flag, and an
+      // enabled flag has nothing to notify about.
+      render(
+        <FeatureFlags enableV12Release={false}>
+          <TestComponent />
+        </FeatureFlags>
+      );
 
       expect(info).toHaveBeenCalledTimes(1);
       expect(info.mock.calls[0][0]).toContain('enable-v12-notice-available');
