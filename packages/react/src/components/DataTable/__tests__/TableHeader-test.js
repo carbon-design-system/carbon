@@ -135,30 +135,38 @@ describe('TableHeader', () => {
       expect(screen.getByTestId('test-id')).toHaveClass('cds--table-sort');
     });
 
-    it('should warn without throwing for interactive content in children when sortable', () => {
+    it('should throw for interactive content in children when sortable', () => {
       const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+      const errorSpy = jest
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
 
-      expect(() => {
-        render(
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableHeader isSortable>
-                  Header <a href="/">Help</a>
-                </TableHeader>
-              </TableRow>
-            </TableHead>
-          </Table>
+      try {
+        expect(() => {
+          render(
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableHeader isSortable>
+                    Header <a href="/">Help</a>
+                  </TableHeader>
+                </TableRow>
+              </TableHead>
+            </Table>
+          );
+        }).toThrow(
+          'The TableHeader component `children` prop must have no interactive content when `isSortable` is true'
         );
-      }).not.toThrow();
 
-      expect(spy).toHaveBeenCalledWith(
-        expect.stringContaining(
-          'Warning: The TableHeader component `children` prop must have no interactive content when `isSortable` is true'
-        )
-      );
-
-      spy.mockRestore();
+        expect(errorSpy).toHaveBeenCalledWith(
+          expect.stringContaining(
+            'Error: The TableHeader component `children` prop must have no interactive content when `isSortable` is true'
+          )
+        );
+      } finally {
+        spy.mockRestore();
+        errorSpy.mockRestore();
+      }
     });
 
     it('should allow non-interactive content in children when sortable', () => {

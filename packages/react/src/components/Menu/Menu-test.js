@@ -340,6 +340,7 @@ describe('MenuItem', () => {
         'cds--menu--open',
         'cds--menu--shown',
         'cds--menu--with-icons',
+        'cds--menu--border',
         { exact: true }
       );
     });
@@ -357,6 +358,7 @@ describe('MenuItem', () => {
         'cds--menu--open',
         'cds--menu--shown',
         'cds--menu--with-selectable-items',
+        'cds--menu--border',
         { exact: true }
       );
     });
