@@ -33,7 +33,10 @@ function createTemplate() {
     };
   }
 
-  const label = instance.findText('Label').__render__();
+  const labelLayer = instance.findText('Label');
+  const label =
+    labelLayer.type !== 'ERROR' ? labelLayer.textContent : undefined;
+
   const disabled = instance.getEnum('State', {
     Disabled: true,
   });

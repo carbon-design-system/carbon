@@ -48,10 +48,11 @@ if (isSkeleton) {
   const warnText = warn ? instance.getString('Warning text') : undefined;
 
   const numberInputBase = instance.findInstance('_Number input base');
+
+  const valueText =
+    numberInputBase.type !== 'ERROR' ? numberInputBase.findText('Text') : null;
   const value =
-    numberInputBase.type !== 'ERROR'
-      ? numberInputBase.findText('Text').__render__()
-      : undefined;
+    valueText && valueText.type !== 'ERROR' ? valueText.textContent : undefined;
 
   template = {
     id: 'NumberInput',

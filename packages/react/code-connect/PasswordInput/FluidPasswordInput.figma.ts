@@ -19,7 +19,10 @@ if (figma.selectedInstance.getPropertyValue('State') === 'Skeleton') {
     example: figma.code`<FluidTextInputSkeleton />`,
   };
 } else {
-  const labelText = figma.selectedInstance.findText('Label').__render__();
+  const labelLayer = figma.selectedInstance.findText('Label');
+  const labelText =
+    labelLayer.type !== 'ERROR' ? labelLayer.textContent : undefined;
+
   const disabled = figma.selectedInstance.getEnum('State', {
     Disabled: true,
   });
