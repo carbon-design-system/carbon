@@ -438,14 +438,14 @@ class CDSCodeSnippet extends FocusMixin(LitElement) {
         tabindex="${isSingle && !disabled ? 0 : nothing}"
         class="${prefix}--snippet-container"
         aria-label="${!isMulti ? 'code-snippet' : nothing}"
-        ?aria-readonly="${isSingle}"
+        aria-readonly="${isSingle ? 'true' : nothing}"
         @scroll="${(isSingle && handleScroll) || nothing}">
         <pre
           role="${isMulti ? 'textbox' : nothing}"
           tabindex="${isMulti && !disabled ? 0 : nothing}"
           aria-label="${isMulti ? 'code-snippet' : nothing}"
-          ?aria-readonly="${isMulti}"
-          ?aria-multiline="${isMulti}"
+          aria-readonly="${isMulti ? 'true' : nothing}"
+          aria-multiline="${isMulti ? 'true' : nothing}"
           @scroll="${(isMulti && handleScroll) ||
           nothing}"><code><slot></slot></code></pre>
       </div>
