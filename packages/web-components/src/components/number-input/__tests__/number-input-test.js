@@ -277,6 +277,34 @@ describe('<cds-number-input>', () => {
     expect(decrement.getAttribute('aria-label')).to.equal('Less');
     expect(increment.getAttribute('aria-label')).to.equal('More');
   });
+
+  describe('size', () => {
+    it('should apply size class', async () => {
+      const el = await fixture(
+        html`<cds-number-input size="xs" label="Label"></cds-number-input>`
+      );
+      const wrapper = el.shadowRoot.querySelector('.cds--number');
+
+      expect(wrapper.classList.contains('cds--number--xs')).to.be.true; // TODO: V12 - Remove this check
+      expect(wrapper.classList.contains('cds--layout--size-xs')).to.be.true;
+    });
+
+    it('should render without a size class by default', async () => {
+      const el = await fixture(
+        html`<cds-number-input label="Label"></cds-number-input>`
+      );
+      const wrapper = el.shadowRoot.querySelector('.cds--number');
+
+      expect(
+        [...wrapper.classList].some(
+          (name) =>
+            name.startsWith('cds--number--') || // TODO: V12 - Remove this check
+            name.startsWith('cds--layout--size-')
+        )
+      ).to.be.false;
+    });
+  });
+
   describe('with type="text"', () => {
     it('should render an <input> with type="text"', async () => {
       const el = await fixture(

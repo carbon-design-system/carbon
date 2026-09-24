@@ -383,7 +383,7 @@ class CDSNumberInput extends CDSTextInput {
    * The input box size.
    */
   @property({ reflect: true })
-  size = INPUT_SIZE.MEDIUM;
+  size?: INPUT_SIZE;
 
   /**
    * **Experimental**: Specify if the input should be of type text or number.
@@ -859,7 +859,8 @@ class CDSNumberInput extends CDSTextInput {
 
     const wrapperClasses = classMap({
       [`${prefix}--number`]: true,
-      [`${prefix}--number--${this.size}`]: this.size,
+      [`${prefix}--number--${this.size}`]: this.size !== undefined, // TODO V12 - remove this class
+      [`${prefix}--layout--size-${this.size}`]: this.size !== undefined,
       [`${prefix}--number--nosteppers`]: this.hideSteppers,
       [`${prefix}--number--readonly`]: this.readonly,
     });
