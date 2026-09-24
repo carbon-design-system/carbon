@@ -15640,7 +15640,6 @@ __metadata:
     "@babel/preset-react": "npm:^8.0.0"
     "@babel/preset-typescript": "npm:^8.0.0"
     "@babel/runtime": "npm:^8.0.0"
-    accessibility-checker: "npm:^4.0.17"
     axe-core: "npm:^4.10.3"
     babel-jest: "npm:^30.2.0"
     chalk: "npm:^6.0.0"
