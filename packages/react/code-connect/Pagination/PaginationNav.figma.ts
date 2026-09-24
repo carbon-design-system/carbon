@@ -1,5 +1,5 @@
 // url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=2799-20761&t=gkzO9FaEPqewqYn6-4
-// source=https://github.com/maradwan26/carbon/blob/main/packages/react/lib/components/PaginationNav/PaginationNav.d.ts
+// source=https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/PaginationNav/PaginationNav.tsx
 // component=PaginationNav
 
 /**

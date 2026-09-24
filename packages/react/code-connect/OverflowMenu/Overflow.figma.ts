@@ -1,5 +1,5 @@
 // url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=3717-45725&t=aG4cJRjteQHcd71k-4
-// source=https://github.com/maradwan26/carbon/blob/main/packages/react/lib/components/OverflowMenu/index.d.ts
+// source=https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/OverflowMenu/index.tsx
 // component=OverflowMenu
 
 /**

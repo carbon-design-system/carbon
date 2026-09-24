@@ -1,5 +1,5 @@
 // url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=68771-7312&t=BNxiN6zuoeazJ8tv-4
-// source=https://github.com/maradwan26/carbon/blob/main/packages/react/lib/components/FluidTextInput/FluidPasswordInput.d.ts
+// source=https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/FluidTextInput/FluidPasswordInput.tsx
 // component=FluidPasswordInput
 
 /**
