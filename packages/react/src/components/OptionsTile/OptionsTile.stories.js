@@ -7,7 +7,7 @@
 
 import './story.scss';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import mdx from './OptionsTile.mdx';
 import { OptionsTile } from '.';
 import Dropdown from '../Dropdown';
@@ -90,13 +90,21 @@ const defaultArgs = {
 };
 
 export const Default = (args) => {
-  const { enabled: enabledControl, ...rest } = args;
+  const { enabled: enabledControl, open: openControl, ...rest } = args;
   const [toggleChecked, setToggleChecked] = useState(true);
+  const [open, setOpen] = useState(openControl ?? false);
+
+  // Sync with Storybook controls panel changes
+  useEffect(() => {
+    setOpen(openControl ?? false);
+  }, [openControl]);
 
   return (
     <main>
       <OptionsTile
         {...rest}
+        open={open}
+        onChange={setOpen}
         enabled={enabledControl ? toggleChecked : undefined}
         onToggle={(checked) => {
           setToggleChecked(checked);
@@ -126,10 +134,30 @@ export const Default = (args) => {
 };
 Default.args = { ...defaultArgs };
 
-export const Static = (args) => (
-  <main>
-    <OptionsTile {...args} />
-  </main>
-);
+export const Static = (args) => {
+  const { enabled: enabledControl, ...rest } = args;
+  const [toggleChecked, setToggleChecked] = useState(
+    enabledControl !== undefined ? !!enabledControl : undefined
+  );
+
+  // Sync with Storybook controls panel changes to the enabled arg
+  useEffect(() => {
+    setToggleChecked(
+      enabledControl !== undefined ? !!enabledControl : undefined
+    );
+  }, [enabledControl]);
+
+  return (
+    <main>
+      <OptionsTile
+        {...rest}
+        enabled={toggleChecked}
+        onToggle={(checked) => {
+          setToggleChecked(checked);
+        }}
+      />
+    </main>
+  );
+};
 Static.args = { ...defaultArgs };
 Static.storyName = 'Static';
