@@ -50,27 +50,22 @@ export default {
     "import { Popover, PopoverContent } from '@carbon/react';",
     "import { Settings } from '@carbon/icons-react';",
   ],
-  example: figma.code`function Example() {
-    const [open, setOpen] = React.useState(false);
-    return (<Popover${figma.helpers.react.renderProp(
-      'align',
-      align
-    )}${figma.helpers.react.renderProp(
-      'open',
-      open
-    )}${figma.helpers.react.renderProp(
-      'caret',
-      popoverItem.caret
-    )}${figma.helpers.react.renderProp('dropShadow', popoverItem.dropShadow)}>
-          <button type="button" onClick={() => {
-            setOpen(!open);
-        }}>
-            <Settings />
-          </button>
-          <PopoverContent>${figma.helpers.react.renderChildren(
-            popoverItem.children
-          )}</PopoverContent>
-        </Popover>);
-}`,
-  metadata: { nestable: false },
+  example: figma.code`<Popover${figma.helpers.react.renderProp(
+    'align',
+    align
+  )}${figma.helpers.react.renderProp(
+    'open',
+    open
+  )}${figma.helpers.react.renderProp(
+    'caret',
+    popoverItem.caret
+  )}${figma.helpers.react.renderProp('dropShadow', popoverItem.dropShadow)}>
+  <button type="button">
+    <Settings />
+  </button>
+  <PopoverContent>${figma.helpers.react.renderChildren(
+    popoverItem.children
+  )}</PopoverContent>
+</Popover>`,
+  metadata: { nestable: true },
 };
