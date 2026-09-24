@@ -244,8 +244,7 @@ class CDSCheckboxGroup extends LitElement {
    * A selector that will return the checkboxes.
    */
   static get selectorCheckbox() {
-    // include form-associated preview tag so a group can hold either
-    return `${prefix}-checkbox, ${prefix}-preview-checkbox`;
+    return `${prefix}-checkbox`;
   }
 
   /**
