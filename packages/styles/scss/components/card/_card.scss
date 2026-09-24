@@ -407,6 +407,12 @@
     max-inline-size: calc(50cqw - $spacing-03);
   }
 
+  // The overflow handler sets data-hidden on action items that don't fit.
+  // Hide them so only the overflow menu button appears.
+  .#{$prefix}--card__actions [data-hidden]:not([data-fixed]) {
+    display: none;
+  }
+
   // ─── AI Label (decorator) ─────────────────────────────────────────────
   .#{$prefix}--card--has-ai-label {
     @include ai-popover-gradient('default', 0, 'layer');
