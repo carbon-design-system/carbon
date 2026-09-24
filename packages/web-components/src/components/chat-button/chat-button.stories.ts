@@ -23,9 +23,13 @@ const sizeArgType = {
   control: { type: 'select' },
 };
 
+// `isQuickAction` sets `kind="ghost"` and `size="sm"`
+const hideWhenQuickAction = { if: { arg: 'isQuickAction', truthy: false } };
+
 const chatButtonArgTypes = {
   children: {
     control: { type: 'text' },
+    table: { category: 'Slot' },
   },
   disabled: {
     control: { type: 'boolean' },
@@ -54,11 +58,12 @@ const chatButtonArgTypes = {
       CHAT_BUTTON_KIND.DANGER,
     ],
     control: { type: 'select' },
+    ...hideWhenQuickAction,
   },
   onClick: {
     action: 'onClick',
   },
-  size: sizeArgType,
+  size: { ...sizeArgType, ...hideWhenQuickAction },
 };
 
 export const Default = {

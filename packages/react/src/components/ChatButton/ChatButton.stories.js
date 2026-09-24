@@ -18,6 +18,9 @@ const sizeArgType = {
   control: { type: 'select' },
 };
 
+// `isQuickAction` sets `kind="ghost"` and `size="sm"`
+const hideWhenQuickAction = { if: { arg: 'isQuickAction', truthy: false } };
+
 const chatButtonArgTypes = {
   children: {
     control: { type: 'text' },
@@ -37,6 +40,7 @@ const chatButtonArgTypes = {
   kind: {
     options: ['primary', 'secondary', 'tertiary', 'ghost', 'danger'],
     control: { type: 'select' },
+    ...hideWhenQuickAction,
   },
   onClick: {
     action: 'onClick',
@@ -45,7 +49,7 @@ const chatButtonArgTypes = {
     options: ['Add', 'None'],
     control: { type: 'select' },
   },
-  size: sizeArgType,
+  size: { ...sizeArgType, ...hideWhenQuickAction },
 };
 
 export default {
