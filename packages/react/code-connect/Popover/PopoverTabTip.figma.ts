@@ -31,7 +31,7 @@ export default {
   id: 'Popover',
   imports: [
     "import { Popover, PopoverContent } from '@carbon/react';",
-    "import { Settings } from '@carbon/react';",
+    "import { Settings } from '@carbon/icons-react';",
   ],
   example: figma.code`function Example() {
     const [open, setOpen] = React.useState(false);
