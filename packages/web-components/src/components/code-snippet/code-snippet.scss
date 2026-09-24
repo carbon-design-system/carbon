@@ -96,7 +96,7 @@ $css--plex: true !default;
     overflow-x: auto;
   }
 
-  &.#{$prefix}--snippet--multi .#{$prefix}--snippet-container:has(pre:focus) {
+  .#{$prefix}--snippet-container:has(pre:focus) {
     mask: none;
   }
 
