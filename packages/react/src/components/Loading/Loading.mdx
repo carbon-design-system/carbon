@@ -32,7 +32,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(LoadingStories.Default),
+      onClick: () => stackblitzPrefillConfig({ story: LoadingStories.Default }),
     },
   ]}
 />
@@ -52,7 +52,8 @@ Select **Start** to trigger a two second loading state.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(LoadingStories.OverlayLoading),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: LoadingStories.OverlayLoading }),
     },
   ]}
 />
@@ -72,7 +73,9 @@ instead of moving to the overlay underneath.
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig(LoadingStories.OverlayLoadingBehindModal),
+        stackblitzPrefillConfig({
+          story: LoadingStories.OverlayLoadingBehindModal,
+        }),
     },
   ]}
 />
