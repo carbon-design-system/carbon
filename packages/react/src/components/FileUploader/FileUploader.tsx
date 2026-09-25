@@ -22,6 +22,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import { Text } from '../Text';
 import { useId } from '../../internal/useId';
 import { useFeatureFlag } from '../FeatureFlags';
+import { fileMatchesAccept } from './fileMatchesAccept';
 
 interface FileItem {
   name: string;
@@ -224,26 +225,28 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
     );
 
     /**
-     * Validates files based on file size restrictions.
+     * Validates files based on file size and type restrictions.
      * Marks invalid files with `invalidFileType: true` but includes them in the result.
-     *
-     * Note: The `accept` prop is passed to the native HTML input element (`FileUploaderButton`),
-     * which provides UI-level filtering in the file picker dialog, but there is no JavaScript validation
-     * for file types - users can bypass this by changing the file type filter in the dialog.
-     * https://github.com/carbon-design-system/carbon/issues/21166
      */
     const validateFiles = useCallback(
       (
         files: Array<File & { invalidFileType?: boolean }>
       ): Array<File & { invalidFileType?: boolean }> => {
         return files.map((file) => {
-          if (maxFileSize && file.size > maxFileSize) {
+          const extensionIndex = file.name.lastIndexOf('.');
+          const fileExtension =
+            extensionIndex === -1 ? undefined : file.name.slice(extensionIndex);
+
+          if (
+            (maxFileSize && file.size > maxFileSize) ||
+            !fileMatchesAccept(file, accept ?? [], fileExtension)
+          ) {
             file.invalidFileType = true;
           }
           return file;
         });
       },
-      [maxFileSize]
+      [accept, maxFileSize]
     );
 
     const handleChange = useCallback(
