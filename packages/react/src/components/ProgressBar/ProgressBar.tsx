@@ -12,6 +12,7 @@ import { CheckmarkFilled, ErrorFilled } from '@carbon/icons-react';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
+import { useFeatureFlag } from '../FeatureFlags';
 
 export interface ProgressBarProps {
   /**
@@ -133,16 +134,25 @@ function ProgressBar({
     });
   }
 
+  const enableV12Release = useFeatureFlag('enable-v12-release');
+
   const ref = useRef<HTMLDivElement>(null);
   useIsomorphicEffect(() => {
     if (ref.current) {
       if (!isFinished && !isError) {
-        ref.current.style.transform = `scaleX(${percentage})`;
+        // v12: size the bar instead of scaling it, so its border-radius is not
+        // squashed along with the box
+        if (enableV12Release) {
+          ref.current.style.inlineSize = `${percentage * 100}%`;
+        } else {
+          ref.current.style.transform = `scaleX(${percentage})`;
+        }
       } else {
         ref.current.style.transform = '';
+        ref.current.style.inlineSize = '';
       }
     }
-  }, [percentage, isFinished, isError]);
+  }, [percentage, isFinished, isError, enableV12Release]);
 
   return (
     <div className={wrapperClasses}>

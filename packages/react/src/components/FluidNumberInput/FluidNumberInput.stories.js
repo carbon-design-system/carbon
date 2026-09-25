@@ -5,17 +5,27 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import styles from './fluid-number-input-story.scss?inline';
+
 import React from 'react';
 import { FluidNumberInput, FluidNumberInputSkeleton } from '.';
 import { Toggletip, ToggletipButton, ToggletipContent } from '../Toggletip';
 import { Information } from '@carbon/icons-react';
-import './fluid-number-input-story.scss';
 import mdx from './FluidNumberInput.mdx';
 
 export default {
   title: 'Components/Fluid Components/FluidNumberInput',
   component: FluidNumberInput,
+  decorators: [
+    (Story) => (
+      <>
+        <style>{styles}</style>
+        <Story />
+      </>
+    ),
+  ],
   parameters: {
+    styles,
     docs: {
       page: mdx,
     },
@@ -25,22 +35,25 @@ export default {
   },
 };
 
-export const Default = ({ defaultWidth, labelText, ...numberInputArgs }) => (
-  <div className="fluid-number-input-story" style={{ width: defaultWidth }}>
-    {/* Keep the toggletip outside `label`; interactive content is invalid in labels. */}
-    <span className="fluid-number-input-story__toggletip">
-      <Toggletip align="top-left">
-        <ToggletipButton label="Show information">
-          <Information />
-        </ToggletipButton>
-        <ToggletipContent>
-          <p>Additional field information here.</p>
-        </ToggletipContent>
-      </Toggletip>
-    </span>
-    <FluidNumberInput {...numberInputArgs} label={labelText} />
-  </div>
-);
+export const Default = (args) => {
+  const { defaultWidth, labelText, ...numberInputArgs } = args;
+  return (
+    <div className="fluid-number-input-story" style={{ width: defaultWidth }}>
+      {/* Keep the toggletip outside `label`; interactive content is invalid in labels. */}
+      <span className="fluid-number-input-story__toggletip">
+        <Toggletip align="top-left">
+          <ToggletipButton label="Show information">
+            <Information />
+          </ToggletipButton>
+          <ToggletipContent>
+            <p>Additional field information here.</p>
+          </ToggletipContent>
+        </Toggletip>
+      </span>
+      <FluidNumberInput {...numberInputArgs} label={labelText} />
+    </div>
+  );
+};
 
 Default.args = {
   allowEmpty: false,
@@ -168,11 +181,14 @@ Default.parameters = {
   controls: { include: Object.keys(Default.argTypes) },
 };
 
-export const Skeleton = ({ defaultWidth, ...args }) => (
-  <div style={{ width: defaultWidth }}>
-    <FluidNumberInputSkeleton {...args} />
-  </div>
-);
+export const Skeleton = (args) => {
+  const { defaultWidth, ...skeletonArgs } = args;
+  return (
+    <div style={{ width: defaultWidth }}>
+      <FluidNumberInputSkeleton {...skeletonArgs} />
+    </div>
+  );
+};
 
 Skeleton.args = {
   className: '',

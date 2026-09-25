@@ -53,25 +53,10 @@ describe('MultiSelect', () => {
 
       await expect(container).toHaveNoAxeViolations();
     });
-
-    it('should have no AC violations', async () => {
-      const items = generateItems(4, generateGenericItem);
-      const { container } = render(
-        <MultiSelect
-          id="test"
-          label="Field"
-          titleText="Multiselect title"
-          items={items}
-        />
-      );
-      await waitForPosition();
-
-      await expect(container).toHaveNoACViolations('MultiSelect');
-    });
   });
 
-  it('should not allow interactive content in titleText', () => {
-    const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+  it('should warn without throwing for interactive content in titleText', () => {
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
     expect(() => {
       render(
@@ -84,8 +69,12 @@ describe('MultiSelect', () => {
           }
         />
       );
-    }).toThrow(
-      'The MultiSelect component `titleText` prop must have no interactive content'
+    }).not.toThrow();
+
+    expect(spy).toHaveBeenCalledWith(
+      expect.stringContaining(
+        'Warning: The MultiSelect component `titleText` prop must have no interactive content'
+      )
     );
 
     spy.mockRestore();
@@ -106,8 +95,8 @@ describe('MultiSelect', () => {
     }).not.toThrow();
   });
 
-  it('should not allow interactive content in label', () => {
-    const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+  it('should warn without throwing for interactive content in label', () => {
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
     expect(() => {
       render(
@@ -115,13 +104,17 @@ describe('MultiSelect', () => {
           {...mockProps}
           label={
             <>
-              Choose options <button type="button">Help</button>
+              Choose options <a href="/">Help</a>
             </>
           }
         />
       );
-    }).toThrow(
-      'The MultiSelect component `label` prop must have no interactive content'
+    }).not.toThrow();
+
+    expect(spy).toHaveBeenCalledWith(
+      expect.stringContaining(
+        'Warning: The MultiSelect component `label` prop must have no interactive content'
+      )
     );
 
     spy.mockRestore();

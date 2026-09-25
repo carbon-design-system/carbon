@@ -64,7 +64,7 @@ import {
   isComponentElement,
   isItemDisabled,
 } from '../../internal';
-import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
+import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
 
 const { ItemMouseMove, MenuMouseLeave, ToggleButtonBlur, FunctionCloseMenu } =
   useSelect.stateChangeTypes as UseSelectInterface['stateChangeTypes'] & {
@@ -620,11 +620,11 @@ const Dropdown = React.forwardRef(
     const labelProps = isValidElement(titleText)
       ? { id: allLabelProps.id }
       : allLabelProps;
-    useNoInteractiveChildren(
+    useNoInteractiveChildrenForLabel(
       titleRef,
       'The Dropdown component `titleText` prop must have no interactive content'
     );
-    useNoInteractiveChildren(
+    useNoInteractiveChildrenForLabel(
       labelRef,
       'The Dropdown component `label` prop must have no interactive content'
     );
