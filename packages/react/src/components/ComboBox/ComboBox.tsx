@@ -49,7 +49,7 @@ import { deprecate } from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import { FormContext } from '../FluidForm';
-import { autoUpdate, flip, hide, useFloating } from '@floating-ui/react';
+import { autoUpdate, computePosition, flip, hide } from '@floating-ui/react';
 import type { TranslateWithId } from '../../types/common';
 import { useFeatureFlag } from '../FeatureFlags';
 import { AILabel } from '../AILabel';
@@ -422,42 +422,13 @@ const ComboBox = forwardRef(
     const enableFloatingStyles =
       useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
 
-    const { refs, floatingStyles, middlewareData } = useFloating(
-      enableFloatingStyles
-        ? {
-            placement: direction,
-            strategy: 'fixed',
-            middleware: autoAlign ? [flip(), hide()] : undefined,
-            whileElementsMounted: autoUpdate,
-          }
-        : {}
-    );
-    const referenceElement = refs?.reference?.current;
-    const parentWidth =
-      typeof HTMLElement !== 'undefined' &&
-      referenceElement instanceof HTMLElement
-        ? referenceElement.clientWidth
-        : undefined;
+    const triggerRef = useRef<HTMLDivElement>(null);
+    const menuRef = useRef<HTMLUListElement>(null);
 
-    useEffect(() => {
-      if (enableFloatingStyles) {
-        const updatedFloatingStyles = {
-          ...floatingStyles,
-          visibility: middlewareData.hide?.referenceHidden
-            ? 'hidden'
-            : 'visible',
-        };
-        Object.keys(updatedFloatingStyles).forEach((style) => {
-          if (refs.floating.current) {
-            refs.floating.current.style[style] = updatedFloatingStyles[style];
-          }
-        });
-        if (parentWidth && refs.floating.current) {
-          refs.floating.current.style.width = parentWidth + 'px';
-        }
-      }
-      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
-    }, [enableFloatingStyles, floatingStyles, refs.floating, parentWidth]);
+    const floatingMiddleware = useMemo(
+      () => (enableFloatingStyles ? [flip(), hide()] : undefined),
+      [enableFloatingStyles]
+    );
 
     const [inputValue, setInputValue] = useState(
       getInputValue({
@@ -943,6 +914,34 @@ const ComboBox = forwardRef(
       }
     }, [selectedItem, selectedItemProp, selectItem]);
 
+    // Position imperatively via autoUpdate — scroll/resize never touch React state.
+    useEffect(() => {
+      if (!enableFloatingStyles || !isOpen) {
+        return;
+      }
+      const reference = triggerRef.current;
+      const floating = menuRef.current;
+      if (!reference || !floating) {
+        return;
+      }
+      const applyPosition = () =>
+        computePosition(reference, floating, {
+          placement: direction,
+          strategy: 'fixed',
+          middleware: floatingMiddleware,
+        }).then(({ x, y, middlewareData: data }) => {
+          Object.assign(floating.style, {
+            left: `${x}px`,
+            top: `${y}px`,
+            visibility: data.hide?.referenceHidden ? 'hidden' : 'visible',
+            width: `${reference.clientWidth}px`,
+          });
+        });
+      floating.style.position = 'fixed';
+      return autoUpdate(reference, floating, applyPosition);
+      // triggerRef/menuRef are stable refs — omitted from deps intentionally.
+    }, [enableFloatingStyles, isOpen, direction, floatingMiddleware]);
+
     useEffect(() => {
       // Used to expose the downshift actions to consumers for use with downshiftProps
       // An odd pattern, here we mutate the value stored in the ref provided from the consumer.
@@ -1025,16 +1024,10 @@ const ComboBox = forwardRef(
     const menuProps = useMemo(
       () =>
         getMenuProps({
-          ref: enableFloatingStyles ? refs.setFloating : null,
+          ref: enableFloatingStyles ? menuRef : null,
         }),
       // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
-      [
-        enableFloatingStyles,
-        deprecatedAriaLabel,
-        ariaLabel,
-        getMenuProps,
-        refs.setFloating,
-      ]
+      [enableFloatingStyles, deprecatedAriaLabel, ariaLabel, getMenuProps]
     );
 
     useEffect(() => {
@@ -1075,7 +1068,7 @@ const ComboBox = forwardRef(
           light={light}
           size={size}
           warn={normalizedProps.warn}
-          ref={enableFloatingStyles ? refs.setReference : null}
+          ref={enableFloatingStyles ? triggerRef : null}
           warnText={warnText}
           warnTextId={warnTextId}>
           <div className={`${prefix}--list-box__field`}>

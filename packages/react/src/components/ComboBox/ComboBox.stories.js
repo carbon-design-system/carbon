@@ -7,6 +7,7 @@
 
 import React from 'react';
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
+import { autoAlignDecorator } from '../../../.storybook/templates/autoAlignDecorator';
 import ComboBox from '../ComboBox';
 import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
@@ -45,6 +46,7 @@ const items = [
 export default {
   title: 'Components/ComboBox',
   component: ComboBox,
+  decorators: [autoAlignDecorator],
   argTypes: {
     size: {
       options: ['xs', 'sm', 'md', 'lg'],
@@ -196,22 +198,18 @@ AutocompleteWithTypeahead.argTypes = {
 };
 
 export const ExperimentalAutoAlign = (args) => (
-  <div style={{ width: 400 }}>
-    <div style={{ height: 300 }}></div>
-    <ComboBox
-      onChange={() => {}}
-      id="carbon-combobox"
-      invalidText="Error message goes here"
-      warnText="Warning message goes here"
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
-      titleText="Label"
-      helperText="Helper text"
-      autoAlign={true}
-      {...args}
-    />
-    <div style={{ height: 800 }}></div>
-  </div>
+  <ComboBox
+    onChange={() => {}}
+    id="carbon-combobox"
+    invalidText="Error message goes here"
+    warnText="Warning message goes here"
+    items={items}
+    itemToString={(item) => (item ? item.text : '')}
+    titleText="Label"
+    helperText="Helper text"
+    autoAlign={true}
+    {...args}
+  />
 );
 
 ExperimentalAutoAlign.argTypes = { ...sharedArgTypes };
