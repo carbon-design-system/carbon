@@ -898,6 +898,8 @@ export const DataTable = <RowType, ColTypes extends any[]>(
   return null;
 };
 
+DataTable.displayName = 'DataTable';
+
 DataTable.Table = Table;
 DataTable.TableActionList = TableActionList;
 DataTable.TableBatchAction = TableBatchAction;
