@@ -146,7 +146,7 @@ $css--plex: true !default;
   // TODO: remove once responsive logic for tags is implemented
   @include breakpoint-down(md) {
     flex-direction: column-reverse;
-    grid-gap: $spacing-05;
+    gap: $spacing-05;
   }
 }
 
