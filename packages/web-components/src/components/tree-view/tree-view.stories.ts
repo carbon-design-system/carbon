@@ -19,7 +19,9 @@ const sizes = {
 };
 
 const defaultArgs = {
+  hideLabel: false,
   label: 'Tree View',
+  size: TREE_SIZE.SMALL,
 };
 
 const controls = {
@@ -80,10 +82,12 @@ export const Default = {
 };
 
 export const withControlledExpansion = {
+  argTypes: controls,
+  args: defaultArgs,
   decorators: [
     (story) => html` <div style="inline-size: 20rem">${story()}</div> `,
   ],
-  render: () => html`
+  render: ({ hideLabel, label, size }) => html`
     <script>
       function expandAll() {
         document
@@ -107,7 +111,11 @@ export const withControlledExpansion = {
       <cds-button onclick="expandAll()">Expand All</cds-button>
       <cds-button onclick="collapseAll()">Collapse All</cds-button>
     </div>
-    <cds-tree-view controlled label="Tree View">
+    <cds-tree-view
+      controlled
+      ?hide-label=${hideLabel}
+      label=${label}
+      size=${size}>
       <cds-tree-node label="Artificial intelligence"></cds-tree-node>
       <cds-tree-node label="Blockchain"></cds-tree-node>
       <cds-tree-node label="Business automation">
@@ -142,11 +150,13 @@ export const withControlledExpansion = {
 };
 
 export const withIcons = {
+  argTypes: controls,
+  args: defaultArgs,
   decorators: [
     (story) => html` <div style="inline-size: 20rem">${story()}</div> `,
   ],
-  render: () => html`
-    <cds-tree-view label="Tree View">
+  render: ({ hideLabel, label, size }) => html`
+    <cds-tree-view ?hide-label=${hideLabel} label=${label} size=${size}>
       <cds-tree-node label="Artificial intelligence">
         ${iconLoader(Document16, { slot: 'icon' })}
       </cds-tree-node>
@@ -218,7 +228,12 @@ export const withIcons = {
 };
 
 export const withLinks = {
-  render: () => html`
+  argTypes: controls,
+  args: {
+    ...defaultArgs,
+    hideLabel: true,
+  },
+  render: ({ hideLabel, label, size }) => html`
     <script>
       document
         .querySelector('cds-tree-view[links]')
@@ -230,8 +245,9 @@ export const withLinks = {
     <div id="page-body" style="display: flex">
       <cds-tree-view
         links
-        hide-label
-        label="Tree view"
+        ?hide-label=${hideLabel}
+        label=${label}
+        size=${size}
         style="inline-size: 20rem">
         <cds-tree-node
           label="Artificial intelligence"
