@@ -33,6 +33,43 @@ describe('getDerivedStateFromProps', () => {
     );
   });
 
+  it('stores headers from props in state', () => {
+    const headers = [{ key: 'name', header: 'Name' }];
+    const props = { rows: [], headers };
+    const state = getDerivedStateFromProps(props, {});
+    expect(state.headers).toEqual(headers);
+  });
+
+  it('updates headers in state when props.headers changes', () => {
+    const headersA = [{ key: 'name', header: 'Name' }];
+    const headersB = [
+      { key: 'col1', header: 'Column 1' },
+      { key: 'col2', header: 'Column 2' },
+    ];
+    const stateA = getDerivedStateFromProps(
+      { rows: [], headers: headersA },
+      {}
+    );
+    expect(stateA.headers).toEqual(headersA);
+    const stateB = getDerivedStateFromProps(
+      { rows: [], headers: headersB },
+      stateA
+    );
+    expect(stateB.headers).toEqual(headersB);
+  });
+
+  it('should not update headers in state when props.headers is mutated in-place', () => {
+    const headersA = [{ key: 'name', header: 'Name' }];
+    const stateA = getDerivedStateFromProps(
+      { rows: [], headers: headersA },
+      {}
+    );
+    expect(stateA.headers).not.toBe(headersA);
+    expect(stateA.headers[0]).not.toBe(headersA[0]);
+    headersA[0].key = 'newKey';
+    expect(stateA.headers[0].key).toEqual('name');
+  });
+
   describe('with previous state', () => {
     let mockProps;
 
