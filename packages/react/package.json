@@ -85,6 +85,7 @@
     "@babel/preset-typescript": "^8.0.0",
     "@carbon/test-utils": "^10.41.0",
     "@carbon/themes": "^11.82.0",
+    "@carbon/utilities-react": "workspace:^0.29.0",
     "@rolldown/plugin-babel": "^0.2.0",
     "@stackblitz/sdk": "^1.11.0",
     "@storybook/addon-a11y": "^10.3.5",
