@@ -17,6 +17,7 @@ const size = instance.getEnum('Size', {
   Large: 'lg',
   Medium: 'md',
   Small: 'sm',
+  'Extra small': 'xs',
 });
 const menuAlignment = instance.getEnum('Position', {
   Bottom: 'bottom',
