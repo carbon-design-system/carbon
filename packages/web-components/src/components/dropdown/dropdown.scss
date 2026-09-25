@@ -134,7 +134,7 @@ $css--plex: true !default;
 :host(#{$prefix}-dropdown[type='inline']) {
   @extend .#{$prefix}--list-box__wrapper--inline;
 
-  grid-gap: 0 $spacing-03;
+  gap: 0 $spacing-03;
 
   .#{$prefix}--list-box__menu {
     margin-block-start: 0;

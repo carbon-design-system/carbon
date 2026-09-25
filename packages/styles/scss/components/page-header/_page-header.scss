@@ -91,7 +91,7 @@
     @include breakpoint-down(md) {
       display: flex;
       flex-direction: column;
-      grid-gap: $spacing-05;
+      gap: $spacing-05;
     }
 
     display: grid;
@@ -207,7 +207,7 @@
   .#{$prefix}--page-header:not(.#{$prefix}--page-header__next)
     .#{$prefix}--page-header__tab-bar--tablist {
     display: grid;
-    grid-gap: $spacing-10;
+    gap: $spacing-10;
     grid-template-columns: auto minmax(0, 1fr);
   }
 
