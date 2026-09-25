@@ -53,11 +53,11 @@ import Checkbox from '../Checkbox';
 import type { TranslateWithId } from '../../types/common';
 import { noopFn } from '../../internal/noopFn';
 import {
-  useFloating,
   flip,
   hide,
   size as floatingSize,
   autoUpdate,
+  computePosition,
 } from '@floating-ui/react';
 import { useFeatureFlag } from '../FeatureFlags';
 import { AILabel } from '../AILabel';
@@ -67,7 +67,6 @@ import {
   isItemDisabled,
 } from '../../internal';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
-import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
 
 const {
@@ -366,19 +365,13 @@ export const MultiSelect = React.forwardRef(
 
     const enableV12Release = useFeatureFlag('enable-v12-release');
 
-    const { refs, floatingStyles, middlewareData } = useFloating(
-      enableFloatingStyles
-        ? {
-            placement: direction,
+    const triggerRef = useRef<HTMLDivElement>(null);
+    const menuRef = useRef<HTMLUListElement>(null);
 
-            // The floating element is positioned relative to its nearest
-            // containing block (usually the viewport). It will in many cases also
-            // “break” the floating element out of a clipping ancestor.
-            // https://floating-ui.com/docs/misc#clipping
-            strategy: 'fixed',
-
-            // Middleware order matters, arrow should be last
-            middleware: [
+    const floatingMiddleware = useMemo(
+      () =>
+        enableFloatingStyles
+          ? [
               autoAlign && flip({ crossAxis: false }),
               floatingSize({
                 apply({ rects, elements }) {
@@ -388,33 +381,37 @@ export const MultiSelect = React.forwardRef(
                 },
               }),
               autoAlign && hide(),
-            ],
-            whileElementsMounted: autoUpdate,
-          }
-        : {}
+            ].filter(Boolean)
+          : undefined,
+      [enableFloatingStyles, autoAlign]
     );
 
-    useIsomorphicEffect(() => {
-      if (enableFloatingStyles) {
-        const updatedFloatingStyles = {
-          ...floatingStyles,
-          visibility: middlewareData.hide?.referenceHidden
-            ? 'hidden'
-            : 'visible',
-        };
-        Object.keys(updatedFloatingStyles).forEach((style) => {
-          if (refs.floating.current) {
-            refs.floating.current.style[style] = updatedFloatingStyles[style];
-          }
-        });
+    // Position imperatively via autoUpdate — scroll/resize never touch React state.
+    useEffect(() => {
+      if (!enableFloatingStyles || !isOpen) {
+        return;
       }
-    }, [
-      enableFloatingStyles,
-      floatingStyles,
-      refs.floating,
-      middlewareData,
-      open,
-    ]);
+      const reference = triggerRef.current;
+      const floating = menuRef.current;
+      if (!reference || !floating) {
+        return;
+      }
+      const applyPosition = () =>
+        computePosition(reference, floating, {
+          placement: direction,
+          strategy: 'fixed',
+          middleware: floatingMiddleware,
+        }).then(({ x, y, middlewareData: data }) => {
+          Object.assign(floating.style, {
+            left: `${x}px`,
+            top: `${y}px`,
+            visibility: data.hide?.referenceHidden ? 'hidden' : 'visible',
+          });
+        });
+      floating.style.position = 'fixed';
+      return autoUpdate(reference, floating, applyPosition);
+      // triggerRef/menuRef are stable refs — omitted from deps intentionally.
+    }, [enableFloatingStyles, isOpen, direction, floatingMiddleware]);
 
     const {
       selectedItems: controlledSelectedItems,
@@ -718,10 +715,10 @@ export const MultiSelect = React.forwardRef(
     const menuProps = useMemo(
       () =>
         getMenuProps({
-          ref: enableFloatingStyles ? refs.setFloating : null,
+          ref: enableFloatingStyles ? menuRef : null,
           hidden: !isOpen,
         }),
-      [enableFloatingStyles, getMenuProps, isOpen, refs.setFloating]
+      [enableFloatingStyles, getMenuProps, isOpen]
     );
 
     const allLabelProps = getLabelProps();
@@ -803,7 +800,7 @@ export const MultiSelect = React.forwardRef(
           )}
           <div
             className={multiSelectFieldWrapperClasses}
-            ref={enableFloatingStyles ? refs.setReference : null}>
+            ref={enableFloatingStyles ? triggerRef : null}>
             {selectedItems.length > 0 && (
               <ListBox.Selection
                 readOnly={readOnly}
