@@ -27,6 +27,8 @@ const translationIds = {
   'carbon.table.toolbar.search.label': 'carbon.table.toolbar.search.label',
   'carbon.table.toolbar.search.placeholder':
     'carbon.table.toolbar.search.placeholder',
+  'carbon.search.clear': 'carbon.search.clear',
+  'carbon.search.expand': 'carbon.search.expand',
 } as const;
 
 type TranslationKey = keyof typeof translationIds;
@@ -34,6 +36,8 @@ type TranslationKey = keyof typeof translationIds;
 const defaultTranslations: Record<TranslationKey, string> = {
   [translationIds['carbon.table.toolbar.search.label']]: 'Filter table',
   [translationIds['carbon.table.toolbar.search.placeholder']]: 'Filter table',
+  [translationIds['carbon.search.clear']]: 'Clear search input',
+  [translationIds['carbon.search.expand']]: 'Search',
 };
 
 const defaultTranslateWithId: TFunc<TranslationKey> = (messageId) => {
@@ -47,7 +51,8 @@ type ExcludedInheritedProps =
   | 'onChange'
   | 'onExpand'
   | 'onFocus'
-  | 'tabIndex';
+  | 'tabIndex'
+  | 'translateWithId';
 
 export type TableToolbarSearchHandleExpand = (
   event: FocusEvent<HTMLInputElement>,
@@ -228,6 +233,7 @@ const TableToolbarSearch = ({
       id={typeof id !== 'undefined' ? id : uniqueId}
       labelText={labelText || t('carbon.table.toolbar.search.label')}
       placeholder={placeholder || t('carbon.table.toolbar.search.placeholder')}
+      translateWithId={t}
       onChange={onChange}
       onClear={onClear}
       onFocus={

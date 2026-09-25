@@ -139,4 +139,23 @@ describe('TableToolbarSearch', () => {
       );
     });
   });
+
+  describe('translateWithId', () => {
+    it('should forward translated clear button label to Search', async () => {
+      render(
+        <TableToolbarSearch
+          defaultExpanded
+          defaultValue="foo"
+          translateWithId={(id) => {
+            if (id === 'carbon.search.clear') return 'Translated clear';
+            return id;
+          }}
+        />
+      );
+
+      expect(
+        screen.getByRole('button', { name: 'Translated clear' })
+      ).toBeInTheDocument();
+    });
+  });
 });
