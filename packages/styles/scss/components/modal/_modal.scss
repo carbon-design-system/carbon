@@ -6,6 +6,7 @@
 //
 
 @use '../button';
+@use '../../border-radius' as *;
 @use '../../config' as *;
 @use '../../feature-flags' as *;
 @use '../../breakpoint' as *;
@@ -311,6 +312,10 @@
     grid-column: 1/-1;
     grid-row: -1/-1;
     margin-block-start: auto;
+
+    @if enabled('enable-v12-release') {
+      @include button.radius($border-radius-00);
+    }
   }
 
   .#{$prefix}--modal-footer .#{$prefix}--btn {
@@ -338,6 +343,10 @@
     position: absolute;
     inset-block-start: 0;
     inset-inline-end: 0;
+
+    @if enabled('enable-v12-release') {
+      @include button.radius($border-radius-00);
+    }
   }
 
   .#{$prefix}--modal-close {
@@ -349,8 +358,10 @@
     inline-size: 3rem;
     transition: background-color $duration-fast-02 motion(standard, productive);
 
-    &:hover {
-      background-color: $layer-hover;
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: $layer-hover;
+      }
     }
 
     &:focus {
