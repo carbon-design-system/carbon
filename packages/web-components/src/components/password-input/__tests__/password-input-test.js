@@ -199,6 +199,29 @@ describe('cds-password-input', () => {
     expect(input.readOnly).to.be.true;
   });
 
+  it('should apply readOnly property', async () => {
+    const el = await fixture(html` <cds-password-input></cds-password-input> `);
+
+    el.readOnly = true;
+    await el.updateComplete;
+
+    const input = el.shadowRoot.querySelector('input');
+    expect(el.readonly).to.be.true;
+    expect(el.hasAttribute('read-only')).to.be.false;
+    expect(input.readOnly).to.be.true;
+  });
+
+  it('should keep readOnly as a property alias for readonly', async () => {
+    const el = await fixture(html` <cds-password-input></cds-password-input> `);
+
+    el.readonly = true;
+    await el.updateComplete;
+
+    expect(el.readOnly).to.be.true;
+    expect(el.hasAttribute('readonly')).to.be.true;
+    expect(el.hasAttribute('read-only')).to.be.false;
+  });
+
   it('should not disable hide/show password toggle button when readonly is true', async () => {
     const el = await fixture(html`
       <cds-password-input readonly></cds-password-input>
