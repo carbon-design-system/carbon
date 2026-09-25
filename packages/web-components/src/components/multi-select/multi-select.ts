@@ -659,8 +659,7 @@ class CDSMultiSelect extends CDSDropdown {
   /**
    * The CSS class list for multi-select listbox
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  protected get _classes(): any {
+  protected get _classes(): ReturnType<typeof classMap> {
     const {
       disabled,
       size,

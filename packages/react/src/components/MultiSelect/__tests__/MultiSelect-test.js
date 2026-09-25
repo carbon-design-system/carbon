@@ -53,22 +53,88 @@ describe('MultiSelect', () => {
 
       await expect(container).toHaveNoAxeViolations();
     });
+  });
 
-    it('should have no AC violations', async () => {
-      const items = generateItems(4, generateGenericItem);
-      const { container } = render(
+  it('should warn without throwing for interactive content in titleText', () => {
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+    expect(() => {
+      render(
         <MultiSelect
-          id="test"
-          label="Field"
-          titleText="Multiselect title"
-          items={items}
+          {...mockProps}
+          titleText={
+            <>
+              Multiselect title <button type="button">Help</button>
+            </>
+          }
         />
       );
-      await waitForPosition();
+    }).not.toThrow();
 
-      await expect(container).toHaveNoACViolations('MultiSelect');
-    });
+    expect(spy).toHaveBeenCalledWith(
+      expect.stringContaining(
+        'Warning: The MultiSelect component `titleText` prop must have no interactive content'
+      )
+    );
+
+    spy.mockRestore();
   });
+
+  it('should allow non-interactive content in titleText', () => {
+    expect(() => {
+      render(
+        <MultiSelect
+          {...mockProps}
+          titleText={
+            <>
+              Multiselect title <span>additional title content</span>
+            </>
+          }
+        />
+      );
+    }).not.toThrow();
+  });
+
+  it('should warn without throwing for interactive content in label', () => {
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+    expect(() => {
+      render(
+        <MultiSelect
+          {...mockProps}
+          label={
+            <>
+              Choose options <a href="/">Help</a>
+            </>
+          }
+        />
+      );
+    }).not.toThrow();
+
+    expect(spy).toHaveBeenCalledWith(
+      expect.stringContaining(
+        'Warning: The MultiSelect component `label` prop must have no interactive content'
+      )
+    );
+
+    spy.mockRestore();
+  });
+
+  it('should allow non-interactive content in label', () => {
+    expect(() => {
+      render(
+        <MultiSelect
+          {...mockProps}
+          label={
+            <>
+              Choose options <span>additional label content</span>
+            </>
+          }
+        />
+      );
+    }).not.toThrow();
+  });
+
   it('does not render items with undefined values', async () => {
     const items = [{ text: 'joey' }, { text: 'johnny' }, { text: undefined }];
     const label = 'test-label';

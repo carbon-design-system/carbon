@@ -36,6 +36,12 @@ export * from './components/Breadcrumb';
 export * from './components/Button';
 export * from './components/ButtonSet';
 export * as preview__Card from './components/Card';
+// export {
+//   ConditionBuilder,
+//   getEmptyState,
+//   ConditionBuilderContext,
+// } from './components/ConditionBuilder';
+// export type { ConditionBuilderProps } from './components/ConditionBuilder';
 // TODO: uncomment in v12 — also remove from excludeProductsComponents
 // export * from './components/Coachmark';
 export * from './components/Checkbox';
@@ -105,8 +111,23 @@ export * from './components/OrderedList';
 // export * from './components/OptionsTile';
 export * from './components/OverflowMenu';
 export * from './components/OverflowMenuItem';
-export * as unstable__PageHeader from './components/PageHeader';
-export * as preview__PageHeader from './components/PageHeader';
+export * as unstable__PageHeader from './components/PageHeaderDeprecated';
+export * as preview__PageHeader from './components/PageHeaderDeprecated';
+// TODO: uncomment in v12 — also remove from excludeProductsComponents
+// export {
+//   PageHeader,
+//   PageHeaderBreadcrumbBar,
+//   PageHeaderContent,
+//   PageHeaderContentPageActions,
+//   PageHeaderContentText,
+//   PageHeaderTabBar,
+//   PageHeaderHeroImage,
+//   PageHeaderScrollButton,
+//   PageHeaderTitleBreadcrumb,
+//   PageHeaderBreadcrumbOverflow,
+//   PageHeaderTagOverflow,
+//   PageHeaderBreadcrumbPageActions,
+// } from './components/PageHeader';
 export * as preview__Dialog from './components/Dialog';
 export * from './components/Pagination';
 export * from './components/Pagination/Pagination.Skeleton';
@@ -583,7 +604,22 @@ export type {
   PageHeaderContentProps,
   PageHeaderHeroImageProps,
   PageHeaderTabBarProps,
-} from './components/PageHeader';
+} from './components/PageHeaderDeprecated';
+// TODO: uncomment in v12 — also remove from excludeProductsComponents
+// export type {
+//   PageHeaderProps,
+//   PageHeaderBreadcrumbBarProps,
+//   PageHeaderContentProps,
+//   PageHeaderContentPageActionsProps,
+//   PageHeaderContentTextProps,
+//   PageHeaderTabBarProps,
+//   PageHeaderHeroImageProps,
+//   PageHeaderScrollButtonProps,
+//   PageHeaderTagOverflowProps,
+//   PageHeaderBreadcrumbOverflowProps,
+//   PageHeaderBreadcrumbPageActionsProps,
+//   PageHeaderBreadcrumbPageActionItem,
+// } from './components/PageHeader';
 
 export type {
   DialogProps,
@@ -773,6 +809,10 @@ export type { SwitcherItemProps } from './components/UIShell/SwitcherItem';
 // export { TruncatedText } from './components/TruncatedText';
 // export type { TruncatedTextProps } from './components/TruncatedText';
 // export * from './components/UserAvatar';
+// export type { TagOverflowItem, TagOverflowProps } from './components/TagOverflow';
+
+// TODO: uncomment in v12 — also remove from excludeProductsComponents
+// export * from './components/Tearsheet';
 
 //unordered list
 export type { UnorderedListProps } from './components/UnorderedList/UnorderedList';

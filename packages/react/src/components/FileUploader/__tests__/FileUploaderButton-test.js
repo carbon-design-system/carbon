@@ -116,6 +116,46 @@ describe('FileUploaderButton', () => {
     expect(getByText(container, 'tester')).toBeInstanceOf(HTMLElement);
   });
 
+  it('should warn without throwing for interactive content in labelText', () => {
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+    expect(() => {
+      render(
+        <FileUploaderButton
+          labelText={
+            <>
+              FileUploaderButton label
+              <a href="/">Help</a>
+            </>
+          }
+        />
+      );
+    }).not.toThrow();
+
+    expect(spy).toHaveBeenCalledWith(
+      expect.stringContaining(
+        'Warning: The FileUploaderButton component `labelText` prop must have no interactive content'
+      )
+    );
+
+    spy.mockRestore();
+  });
+
+  it('should allow non-interactive content in labelText', () => {
+    expect(() => {
+      render(
+        <FileUploaderButton
+          labelText={
+            <>
+              FileUploaderButton label
+              <span>additional label content</span>
+            </>
+          }
+        />
+      );
+    }).not.toThrow();
+  });
+
   describe('FileUploaderButton label', () => {
     it('should update the label when a file is selected', async () => {
       const { container } = render(

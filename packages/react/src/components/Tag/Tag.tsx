@@ -127,7 +127,6 @@ type TagComponent = <T extends React.ElementType = 'div'>(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
 ) => React.ReactElement | any;
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const TagBase = React.forwardRef<
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   any,
@@ -178,7 +177,12 @@ const TagBase = React.forwardRef<
       const newElement = tagRef.current?.getElementsByClassName(
         `${prefix}--tag__label`
       )[0];
-      setIsEllipsisApplied(isEllipsisActive(newElement));
+      // React 19: setIsEllipsisApplied called synchronously inside
+      // useIsomorphicEffect (= useLayoutEffect) causes setState during commit
+      // → crash. Read the DOM value eagerly (must be synchronous), then defer
+      // only the setState call past the commit boundary via queueMicrotask.
+      const result = isEllipsisActive(newElement);
+      queueMicrotask(() => setIsEllipsisApplied(result));
     }, [prefix, tagRef]);
 
     const conditions = [
@@ -320,6 +324,8 @@ const TagBase = React.forwardRef<
     );
   }
 );
+
+TagBase.displayName = 'Tag';
 const Tag = TagBase as TagComponent;
 
 // @ts-expect-error - `propTypes` isn't typed.

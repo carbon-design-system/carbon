@@ -12,16 +12,10 @@ import {
   FluidMultiSelect,
   FluidMultiSelectSkeleton,
 } from '../FluidMultiSelect';
-import {
-  ToggletipLabel,
-  Toggletip,
-  ToggletipButton,
-  ToggletipContent,
-} from '../Toggletip';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { Button } from '../Button';
-import { Information, View, FolderOpen, Folders } from '@carbon/icons-react';
+import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import mdx from './FluidMultiSelect.mdx';
 
 export default {
@@ -65,19 +59,22 @@ const items = [
   },
 ];
 
-export const Default = ({ defaultWidth, ...multiSelectArgs }) => (
-  <div style={{ width: defaultWidth }}>
-    <FluidMultiSelect
-      onChange={() => {}}
-      id="default"
-      titleText="Label"
-      label="Choose an option"
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
-      {...multiSelectArgs}
-    />
-  </div>
-);
+export const Default = (args) => {
+  const { defaultWidth, ...multiSelectArgs } = args;
+  return (
+    <div style={{ width: defaultWidth }}>
+      <FluidMultiSelect
+        onChange={() => {}}
+        id="default"
+        titleText="Label"
+        label="Choose an option"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        {...multiSelectArgs}
+      />
+    </div>
+  );
+};
 
 const sharedArgTypes = {
   className: {
@@ -155,119 +152,114 @@ Default.argTypes = {
   },
 };
 
-const ToggleTip = (
-  <>
-    <ToggletipLabel>Label</ToggletipLabel>
-    <Toggletip align="top-left">
-      <ToggletipButton label="Show information">
-        <Information />
-      </ToggletipButton>
-      <ToggletipContent>
-        <p>Additional field information here.</p>
-      </ToggletipContent>
-    </Toggletip>
-  </>
-);
+export const Filterable = () => {
+  return (
+    <div style={{ width: '400px' }}>
+      <FluidMultiSelect
+        isFilterable
+        onChange={() => {}}
+        initialSelectedItem={items[2]}
+        id="default"
+        titleText="Label"
+        label="Choose an option"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+      />
+    </div>
+  );
+};
 
-export const Filterable = () => (
-  <div style={{ width: '400px' }}>
-    <FluidMultiSelect
-      isFilterable
-      onChange={() => {}}
-      initialSelectedItem={items[2]}
-      id="default"
-      titleText="Label"
-      label="Choose an option"
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
-    />
-  </div>
-);
+export const _FilterableWithLayer = () => {
+  return (
+    <WithLayer>
+      {(layer) => (
+        <div style={{ width: 300 }}>
+          <FluidMultiSelect
+            isFilterable
+            id={`carbon-multiselect-example-${layer}`}
+            titleText="Multiselect title"
+            items={items}
+            itemToString={(item) => (item ? item.text : '')}
+            selectionFeedback="top-after-reopen"
+          />
+        </div>
+      )}
+    </WithLayer>
+  );
+};
 
-export const _FilterableWithLayer = () => (
-  <WithLayer>
-    {(layer) => (
-      <div style={{ width: 300 }}>
-        <FluidMultiSelect
-          isFilterable
-          id={`carbon-multiselect-example-${layer}`}
-          titleText="Multiselect title"
-          items={items}
-          itemToString={(item) => (item ? item.text : '')}
-          selectionFeedback="top-after-reopen"
-        />
-      </div>
-    )}
-  </WithLayer>
-);
+export const Condensed = () => {
+  return (
+    <div style={{ width: '400px' }}>
+      <FluidMultiSelect
+        onChange={() => {}}
+        id="default"
+        isCondensed
+        titleText="Label"
+        label="Choose an option"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+      />
+    </div>
+  );
+};
 
-export const Condensed = () => (
-  <div style={{ width: '400px' }}>
-    <FluidMultiSelect
-      onChange={() => {}}
-      id="default"
-      isCondensed
-      titleText="Label"
-      label="Choose an option"
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
-    />
-  </div>
-);
-
-const aiLabel = (
-  <AILabel className="ai-label-container">
-    <AILabelContent>
-      <div>
-        <p className="secondary">AI Explained</p>
-        <h2 className="ai-label-heading">84%</h2>
-        <p className="secondary bold">Confidence score</p>
-        <p className="secondary">
-          Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
-        </p>
-        <hr />
-        <p className="secondary">Model type</p>
-        <p className="bold">Foundation model</p>
-      </div>
-      <AILabelActions>
-        <IconButton kind="ghost" label="View">
-          <View />
-        </IconButton>
-        <IconButton kind="ghost" label="Open Folder">
-          <FolderOpen />
-        </IconButton>
-        <IconButton kind="ghost" label="Folders">
-          <Folders />
-        </IconButton>
-        <Button>View details</Button>
-      </AILabelActions>
-    </AILabelContent>
-  </AILabel>
-);
-
-export const withAILabel = (args) => (
-  <div style={{ width: '400px' }}>
-    <FluidMultiSelect
-      onChange={() => {}}
-      initialSelectedItem={items[2]}
-      id="default"
-      titleText="Label"
-      label="Choose an option"
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
-      decorator={aiLabel}
-      {...args}
-    />
-  </div>
-);
+export const withAILabel = (args) => {
+  const aiLabel = (
+    <AILabel className="ai-label-container">
+      <AILabelContent>
+        <div>
+          <p className="secondary">AI Explained</p>
+          <h2 className="ai-label-heading">84%</h2>
+          <p className="secondary bold">Confidence score</p>
+          <p className="secondary">
+            Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+          </p>
+          <hr />
+          <p className="secondary">Model type</p>
+          <p className="bold">Foundation model</p>
+        </div>
+        <AILabelActions>
+          <IconButton kind="ghost" label="View">
+            <View />
+          </IconButton>
+          <IconButton kind="ghost" label="Open Folder">
+            <FolderOpen />
+          </IconButton>
+          <IconButton kind="ghost" label="Folders">
+            <Folders />
+          </IconButton>
+          <Button>View details</Button>
+        </AILabelActions>
+      </AILabelContent>
+    </AILabel>
+  );
+  return (
+    <div style={{ width: '400px' }}>
+      <FluidMultiSelect
+        onChange={() => {}}
+        initialSelectedItem={items[2]}
+        id="default"
+        titleText="Label"
+        label="Choose an option"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        decorator={aiLabel}
+        {...args}
+      />
+    </div>
+  );
+};
 
 withAILabel.argTypes = {
   ...sharedArgTypes,
 };
 
-export const Skeleton = () => (
-  <div style={{ width: 400 }}>
-    <FluidMultiSelectSkeleton />
-  </div>
-);
+export const Skeleton = () => {
+  return (
+    <div style={{ width: 400 }}>
+      <FluidMultiSelectSkeleton />
+    </div>
+  );
+};

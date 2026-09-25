@@ -5,6 +5,8 @@
       "packages/react/src/*": "@carbon/react"
     },
     "paths": {},
-    "include": ["code-connect/**"]
+    "include": ["code-connect/**/*.figma.ts", "code-connect/**/*.figma.tsx"],
+    "label": "React",
+    "language": "jsx"
   }
 }

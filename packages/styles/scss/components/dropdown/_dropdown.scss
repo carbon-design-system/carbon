@@ -7,6 +7,7 @@
 
 @use '../list-box';
 @use '../../config' as *;
+@use '../../border-radius' as *;
 @use '../../feature-flags' as *;
 @use '../../layer' as *;
 @use '../../motion' as *;
@@ -488,7 +489,7 @@
   // Skeleton State
   .#{$prefix}--dropdown-v2.#{$prefix}--skeleton,
   .#{$prefix}--dropdown.#{$prefix}--skeleton {
-    @include skeleton;
+    @include skeleton($border-radius: $border-radius-04);
   }
 
   // Windows HCM fix

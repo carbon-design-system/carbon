@@ -11,9 +11,16 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/border-radius' as *;
+@use '@carbon/styles/scss/feature-flags' as flags;
 @use '@carbon/styles/scss/components/button/tokens' as button-tokens;
+@use '@carbon/styles/scss/components/button/radius' as button-radius;
 @use '@carbon/styles/scss/utilities/convert' as *;
 @use '../button/button';
+@use '@carbon/styles/scss/components/action-set' as action-set-styles;
+
+// Emit global .cds--action-set class rules (includes justify-content: flex-end)
+@include action-set-styles.action-set;
 
 $block-class: #{$prefix}--action-set;
 
@@ -57,6 +64,10 @@ $block-class: #{$prefix}--action-set;
 
   // Button separator styles for horizontal layout
   @include button-separator(horizontal);
+
+  @if flags.enabled('enable-v12-release') {
+    @include button-radius.radius($border-radius-00);
+  }
 }
 
 // Stacked layout styles

@@ -15,6 +15,8 @@
 @use '../../utilities/visually-hidden' as *;
 @use '../../utilities/layout';
 @use '../../utilities/high-contrast-mode' as *;
+@use '../../border-radius' as *;
+@use '../../feature-flags' as *;
 
 /// Progress Bar styles
 /// @access public
@@ -46,6 +48,11 @@
     block-size: convert.to-rem(8px);
     inline-size: 100%;
     min-inline-size: convert.to-rem(48px);
+
+    @if enabled('enable-v12-release') {
+      overflow: hidden;
+      border-radius: $border-radius-max;
+    }
   }
 
   .#{$prefix}--progress-bar--big .#{$prefix}--progress-bar__track {
@@ -61,14 +68,23 @@
     background-color: currentColor;
     block-size: 100%;
     color: $interactive;
-    inline-size: 100%;
-    transform: scaleX(0);
-    transform-origin: 0 center;
-    transition: transform $duration-fast-02 motion(standard, productive);
+
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-max;
+      inline-size: 0;
+      transition: inline-size $duration-fast-02 motion(standard, productive);
+    } @else {
+      inline-size: 100%;
+      transform: scaleX(0);
+      transform-origin: 0 center;
+      transition: transform $duration-fast-02 motion(standard, productive);
+    }
   }
 
-  [dir='rtl'] .#{$prefix}--progress-bar__bar {
-    transform-origin: 100% center;
+  @if not enabled('enable-v12-release') {
+    [dir='rtl'] .#{$prefix}--progress-bar__bar {
+      transform-origin: 100% center;
+    }
   }
 
   .#{$prefix}--progress-bar--indeterminate
@@ -78,15 +94,24 @@
     animation-iteration-count: infinite;
     animation-name: #{$prefix}--progress-bar-indeterminate;
     animation-timing-function: linear;
-    background-image: linear-gradient(
-      90deg,
-      $interactive 12.5%,
-      transparent 12.5%
-    );
-    background-position-x: 0%;
-    background-size: 200% 100%;
     content: '';
-    inset: 0;
+
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-max;
+      background-color: $interactive;
+      inline-size: 25%;
+      inset-block: 0;
+      inset-inline-start: 0;
+    } @else {
+      background-image: linear-gradient(
+        90deg,
+        $interactive 12.5%,
+        transparent 12.5%
+      );
+      background-position-x: 0%;
+      background-size: 200% 100%;
+      inset: 0;
+    }
   }
 
   [dir='rtl']
@@ -124,7 +149,11 @@
 
   .#{$prefix}--progress-bar--finished .#{$prefix}--progress-bar__bar,
   .#{$prefix}--progress-bar--error .#{$prefix}--progress-bar__bar {
-    transform: scaleX(1);
+    @if enabled('enable-v12-release') {
+      inline-size: 100%;
+    } @else {
+      transform: scaleX(1);
+    }
   }
 
   .#{$prefix}--progress-bar--finished.#{$prefix}--progress-bar--inline
@@ -143,25 +172,49 @@
     margin-inline-end: 0;
   }
 
-  @keyframes #{$prefix}--progress-bar-indeterminate {
-    0% {
-      background-position-x: 25%;
+  @if enabled('enable-v12-release') {
+    @keyframes #{$prefix}--progress-bar-indeterminate {
+      0% {
+        transform: translateX(-100%);
+      }
+
+      80%,
+      100% {
+        transform: translateX(420%);
+      }
     }
 
-    80%,
-    100% {
-      background-position-x: -105%;
-    }
-  }
+    @keyframes #{$prefix}--progress-bar-indeterminate-rtl {
+      0% {
+        transform: translateX(120%);
+      }
 
-  @keyframes #{$prefix}--progress-bar-indeterminate-rtl {
-    0% {
-      background-position-x: -105%;
+      80%,
+      100% {
+        transform: translateX(-400%);
+      }
+    }
+  } @else {
+    @keyframes #{$prefix}--progress-bar-indeterminate {
+      0% {
+        background-position-x: 25%;
+      }
+
+      80%,
+      100% {
+        background-position-x: -105%;
+      }
     }
 
-    80%,
-    100% {
-      background-position-x: 25%;
+    @keyframes #{$prefix}--progress-bar-indeterminate-rtl {
+      0% {
+        background-position-x: -105%;
+      }
+
+      80%,
+      100% {
+        background-position-x: 25%;
+      }
     }
   }
 
