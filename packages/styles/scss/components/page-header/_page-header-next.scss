@@ -454,11 +454,11 @@
     background-color: $layer-01;
 
     &.#{$prefix}--tab--overflow-nav-button--next::before {
-      background: linear-gradient(to right, rgba(255, 255, 255, 0), $layer-01);
+      background: linear-gradient(to right, rgb(255, 255, 255, 0), $layer-01);
     }
 
     &.#{$prefix}--tab--overflow-nav-button--previous::before {
-      background: linear-gradient(to left, rgba(255, 255, 255, 0), $layer-01);
+      background: linear-gradient(to left, rgb(255, 255, 255, 0), $layer-01);
     }
   }
 
