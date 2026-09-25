@@ -70,7 +70,7 @@ const sharedArgTypes = {
   },
 };
 
-export const Default = (props) => {
+export const Default = (args) => {
   return (
     <div
       style={{
@@ -78,17 +78,17 @@ export const Default = (props) => {
         flexFlow: 'column',
         rowGap: '.5rem',
       }}>
-      <ShapeIndicator kind="failed" label="Failed" {...props} />
-      <ShapeIndicator kind="critical" label="Critical" {...props} />
-      <ShapeIndicator kind="high" label="High" {...props} />
-      <ShapeIndicator kind="medium" label="Medium" {...props} />
-      <ShapeIndicator kind="low" label="Low" {...props} />
-      <ShapeIndicator kind="cautious" label="Cautious" {...props} />
-      <ShapeIndicator kind="undefined" label="Undefined" {...props} />
-      <ShapeIndicator kind="stable" label="Stable" {...props} />
-      <ShapeIndicator kind="informative" label="Informative" {...props} />
-      <ShapeIndicator kind="incomplete" label="Incomplete" {...props} />
-      <ShapeIndicator kind="draft" label="Draft" {...props} />
+      <ShapeIndicator kind="failed" label="Failed" {...args} />
+      <ShapeIndicator kind="critical" label="Critical" {...args} />
+      <ShapeIndicator kind="high" label="High" {...args} />
+      <ShapeIndicator kind="medium" label="Medium" {...args} />
+      <ShapeIndicator kind="low" label="Low" {...args} />
+      <ShapeIndicator kind="cautious" label="Cautious" {...args} />
+      <ShapeIndicator kind="undefined" label="Undefined" {...args} />
+      <ShapeIndicator kind="stable" label="Stable" {...args} />
+      <ShapeIndicator kind="informative" label="Informative" {...args} />
+      <ShapeIndicator kind="incomplete" label="Incomplete" {...args} />
+      <ShapeIndicator kind="draft" label="Draft" {...args} />
     </div>
   );
 };
@@ -103,7 +103,7 @@ Default.args = {
 
 Default.argTypes = sharedArgTypes;
 
-export const DefaultWithTextSize14 = (props) => {
+export const DefaultWithTextSize14 = (args) => {
   return (
     <div
       style={{
@@ -111,17 +111,17 @@ export const DefaultWithTextSize14 = (props) => {
         flexFlow: 'column',
         rowGap: '.5rem',
       }}>
-      <ShapeIndicator kind="failed" label="Failed" {...props} />
-      <ShapeIndicator kind="critical" label="Critical" {...props} />
-      <ShapeIndicator kind="high" label="High" {...props} />
-      <ShapeIndicator kind="medium" label="Medium" {...props} />
-      <ShapeIndicator kind="low" label="Low" {...props} />
-      <ShapeIndicator kind="cautious" label="Cautious" {...props} />
-      <ShapeIndicator kind="undefined" label="Undefined" {...props} />
-      <ShapeIndicator kind="stable" label="Stable" {...props} />
-      <ShapeIndicator kind="informative" label="Informative" {...props} />
-      <ShapeIndicator kind="incomplete" label="Incomplete" {...props} />
-      <ShapeIndicator kind="draft" label="Draft" {...props} />
+      <ShapeIndicator kind="failed" label="Failed" {...args} />
+      <ShapeIndicator kind="critical" label="Critical" {...args} />
+      <ShapeIndicator kind="high" label="High" {...args} />
+      <ShapeIndicator kind="medium" label="Medium" {...args} />
+      <ShapeIndicator kind="low" label="Low" {...args} />
+      <ShapeIndicator kind="cautious" label="Cautious" {...args} />
+      <ShapeIndicator kind="undefined" label="Undefined" {...args} />
+      <ShapeIndicator kind="stable" label="Stable" {...args} />
+      <ShapeIndicator kind="informative" label="Informative" {...args} />
+      <ShapeIndicator kind="incomplete" label="Incomplete" {...args} />
+      <ShapeIndicator kind="draft" label="Draft" {...args} />
     </div>
   );
 };

@@ -5,6 +5,21 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
+export const getTextInputStoryArgsDef = [
+  `const getTextInputStoryArgs = ({ defaultWidth, onChange, onClick, ...textInputArgs }) => {
+  const handleChange = (event) => {
+    onChange?.({ value: event.target.value });
+  };
+  const handleClick = (event) => {
+    onClick?.({ value: event.target.value });
+  };
+  return {
+    defaultWidth,
+    textInputArgs: { ...textInputArgs, onChange: handleChange, onClick: handleClick },
+  };
+};`,
+];
+
 # TextInput
 
 [Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/TextInput)
@@ -40,7 +55,10 @@ default text input is for short, one-line content.
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig({ story: TextInputStories.Default }),
+        stackblitzPrefillConfig({
+          story: TextInputStories.Default,
+          customFunctionDefs: getTextInputStoryArgsDef,
+        }),
     },
   ]}
 />
@@ -53,7 +71,10 @@ default text input is for short, one-line content.
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig({ story: TextInputStories.ReadOnly }),
+        stackblitzPrefillConfig({
+          story: TextInputStories.ReadOnly,
+          customFunctionDefs: getTextInputStoryArgsDef,
+        }),
     },
   ]}
 />
@@ -79,7 +100,10 @@ default text input is for short, one-line content.
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig({ story: TextInputStories.withAILabel }),
+        stackblitzPrefillConfig({
+          story: TextInputStories.withAILabel,
+          customFunctionDefs: getTextInputStoryArgsDef,
+        }),
     },
   ]}
 />

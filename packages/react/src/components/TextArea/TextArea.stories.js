@@ -15,6 +15,7 @@ import { IconButton } from '../IconButton';
 import { default as TextArea, TextAreaSkeleton } from './';
 import { Tooltip } from '../Tooltip';
 import mdx from './TextArea.mdx';
+
 export default {
   title: 'Components/TextArea',
   component: TextArea,
@@ -119,21 +120,22 @@ export default {
       },
     },
   },
-  args: {
-    enableCounter: false,
-    helperText: 'TextArea helper text',
-    labelText: 'TextArea label',
-    maxCount: 500,
-    disabled: false,
-    hideLabel: false,
-    invalid: false,
-    invalidText:
-      'Error message that is really long can wrap to more lines but should not be excessively long.',
-    placeholder: '',
-    rows: 4,
-    warn: false,
-    warnText: 'This is a warning message.',
-  },
+};
+
+const defaultArgs = {
+  enableCounter: false,
+  helperText: 'TextArea helper text',
+  labelText: 'TextArea label',
+  maxCount: 500,
+  disabled: false,
+  hideLabel: false,
+  invalid: false,
+  invalidText:
+    'Error message that is really long can wrap to more lines but should not be excessively long.',
+  placeholder: '',
+  rows: 4,
+  warn: false,
+  warnText: 'This is a warning message.',
 };
 
 export const Default = (args) => {
@@ -141,6 +143,7 @@ export const Default = (args) => {
 };
 
 Default.args = {
+  ...defaultArgs,
   enableCounter: true,
 };
 

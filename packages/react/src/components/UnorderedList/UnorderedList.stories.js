@@ -77,6 +77,7 @@ export const Nested = ({ nested, ...listArgs }) => {
 };
 
 Nested.args = {
+  ...args,
   nested: true,
 };
 

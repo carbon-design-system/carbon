@@ -61,7 +61,13 @@ context. Example:
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig({ story: LayoutStories.Default }),
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: LayoutStories.Default,
+          customImports: [
+            "import { preview_Layout as Layout } from '@carbon/react';",
+          ],
+        }),
     },
   ]}
 />

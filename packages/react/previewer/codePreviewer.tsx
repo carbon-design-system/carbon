@@ -96,6 +96,9 @@ const _stackblitzPrefillConfig = async ({
     /(\.\.\.\s*args)|(\{\s*[^}]*\.\.\.[^}]*\}\s*=\s*args)|\bargs\b/.test(
       rawSource
     );
+  // True when the signature is `({ a, b, ...args }) => {` — filterStoryCode rewrites
+  // named params to `const { a, b } = args;` so args must always be emitted.
+  const hasDestructuredParams = /^\s*\(\s*\{[^}]+\}\s*\)\s*=>/.test(rawSource);
   let storyCode = filterStoryCode(rawSource, args);
 
   // Fallback: if filterStoryCode didn't insert a `return`, but the first
@@ -128,11 +131,12 @@ const _stackblitzPrefillConfig = async ({
   const componentNames = Object.keys(carbonComponents);
   const iconsNames = Object.keys(carbonIconsReact);
 
-  // Find matched Carbon components
-  const matchedComponents = findComponentImports(componentNames, storyCode);
+  // Find matched Carbon components — scan story body and any custom function definitions
+  const scanCode = [storyCode, ...customFunctionDefs].join('\n');
+  const matchedComponents = findComponentImports(componentNames, scanCode);
 
   // Find matched Carbon icons
-  const matchedIcons = findIconImports(iconsNames, storyCode, componentNames);
+  const matchedIcons = findIconImports(iconsNames, scanCode, componentNames);
 
   // Only include story scss for components actually used
   const componentsWithStyles = [
@@ -161,8 +165,27 @@ const _stackblitzPrefillConfig = async ({
     styleImport += styles.replace(licenseCommentRegex, '');
   }
 
-  // Detect React hooks used in the story code
-  const foundHooks = detectReactHooks(storyCode);
+  // SCSS requires all @use rules to appear before any other declarations.
+  // Extract all @use blocks (including multi-line `@use '...' with ( ... );`),
+  // deduplicate by the module path, and hoist them to the top.
+  const useBlockRegex =
+    /@use\s+'[^']*'(?:\s+(?:as\s+\S+|with\s*\([\s\S]*?\)))?\s*;/g;
+  const seenUseModules = new Set<string>();
+  const useBlocks: string[] = [];
+  styleImport = styleImport.replace(useBlockRegex, (match) => {
+    const moduleMatch = match.match(/@use\s+'([^']+)'/);
+    const moduleKey = moduleMatch ? moduleMatch[1] : match;
+    if (seenUseModules.has(moduleKey)) return '';
+    seenUseModules.add(moduleKey);
+    useBlocks.push(match.trim());
+    return '';
+  });
+  styleImport = useBlocks.join('\n') + '\n' + styleImport.trimStart();
+
+  // Detect React hooks used in the story code and any custom function definitions
+  const foundHooks = detectReactHooks(
+    [storyCode, ...customFunctionDefs].join('\n')
+  );
   const hooksString =
     foundHooks.length > 0 ? `, { ${foundHooks.join(', ')} }` : '';
 
@@ -174,7 +197,7 @@ ${customImports.length > 0 ? customImports.join('\n') : ''}
 ${matchedComponents.length > 0 ? `import { ${matchedComponents.join(', ')} } from "@carbon/react";` : ''}
 ${matchedIcons.length > 0 ? `import { ${matchedIcons.join(', ')} } from "@carbon/icons-react";` : ''}
 export default function App() {
-  ${hasArgsSpread ? formattedArgs : ''}
+  ${hasArgsSpread || hasDestructuredParams ? formattedArgs : ''}
   ${customFunctionDefs.length > 0 ? customFunctionDefs.join('\n') : ''}
   ${storyCode}
 }
@@ -229,6 +252,30 @@ const filterStoryCode = (
   let updated = storyCode
     // Strip local relative imports (./foo or ../foo) — those files don't exist in StackBlitz
     .replace(/^\s*import\s+.*?from\s+['"][./][^'"]*['"]\s*;?\s*$/gm, '')
+    // Preserve destructured arrow params as a const binding before stripping the wrapper.
+    // `({ label, level }) => {`        → `const { label, level } = args;`
+    // `({ nested, ...args }) => {`     → `const { nested, ...args } = args;`
+    //   Including ...args in the destructure rebinds `args` without the named params,
+    //   so `{...args}` spreads in the body won't leak extracted props (e.g. nested).
+    // The opening `{` is consumed here; the closing `}` is removed by the wrapper stripper below.
+    .replace(/^\s*\(\s*\{([^}]+)\}\s*\)\s*=>\s*\{/, (_, params) => {
+      const parts = params
+        .split(',')
+        .map((p) => p.trim())
+        .filter(Boolean);
+      const hasRest = parts.some((p) => p.startsWith('...'));
+      const named = parts.filter((p) => !p.startsWith('...')).join(', ');
+      // If there's a ...rest, include it so args is rebound without named params.
+      // Exception: if the rest element is named `...args`, omit it — `args` is
+      // already declared as `const args = {...}` above, so re-declaring it with
+      // `const { x, ...args } = args` would cause "Identifier already declared".
+      // Omitting it is safe because `args` in the body still refers to the full
+      // args object (all named params are also inlined by the arg-value loop).
+      const restPart = parts.find((p) => p.startsWith('...'));
+      const includeRest = hasRest && restPart !== '...args';
+      const destructure = includeRest ? parts.join(', ') : named;
+      return destructure ? `const { ${destructure} } = args;` : '';
+    })
     // Remove arrow function wrapper with block body: (params) => { … } / args => { … }
     .replace(/^\s*(\([^)]*\)|[\w]+)\s*=>\s*{\s*|}\s*;?\s*$/g, '')
     // Remove empty arrow wrapper: () => {
@@ -295,11 +342,26 @@ const findIconImports = (
   storyCode: string,
   componentNames: string[]
 ): string[] => {
+  // Strip string literals and JSX text content before bare identifier matching
+  // so that icon names appearing only as text (e.g. `label: 'Blockchain'` or
+  // `<ListItem>Review pull requests</ListItem>`) are not mistakenly imported.
+  const codeWithoutStrings = storyCode
+    .replace(/`[^`]*`|'[^']*'|"[^"]*"/g, '""')
+    .replace(/>[^\n<]+</g, '><');
+
   return iconNames.filter((name) => {
     const regexComponent = new RegExp(`<${name}\\b`, 'g');
     const regexCurlBraces = new RegExp(`{\\s*${name}\\s*}`, 'g');
+    // Bare identifier usage (arrays, prop values) — checked against string-stripped code
+    // e.g. `icons = [Dashboard, Activity]` or `renderIcon={Dashboard}`
+    // Negative lookahead `(?!\s*[.(])` prevents matching built-in calls like
+    // `Array.from(...)` or `Array(n)` which would emit
+    // `import { Array } from '@carbon/icons-react'`, shadowing the global.
+    const regexIdentifier = new RegExp(`\\b${name}\\b(?!\\s*[.(])`, 'g');
     return (
-      (regexComponent.test(storyCode) || regexCurlBraces.test(storyCode)) &&
+      (regexComponent.test(storyCode) ||
+        regexCurlBraces.test(storyCode) ||
+        regexIdentifier.test(codeWithoutStrings)) &&
       !componentNames.includes(name)
     );
   });

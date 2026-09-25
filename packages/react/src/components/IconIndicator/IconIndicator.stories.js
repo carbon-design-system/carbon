@@ -71,7 +71,7 @@ const sharedArgTypes = {
   },
 };
 
-export const Default = (props) => {
+export const Default = (args) => {
   return (
     <div
       style={{
@@ -79,18 +79,18 @@ export const Default = (props) => {
         flexFlow: 'column',
         rowGap: '.5rem',
       }}>
-      <IconIndicator kind="failed" label="Failed" {...props} />
-      <IconIndicator kind="caution-major" label="Caution major" {...props} />
-      <IconIndicator kind="caution-minor" label="Caution minor" {...props} />
-      <IconIndicator kind="undefined" label="Undefined" {...props} />
-      <IconIndicator kind="succeeded" label="Succeeded" {...props} />
-      <IconIndicator kind="normal" label="Normal" {...props} />
-      <IconIndicator kind="in-progress" label="In progress" {...props} />
-      <IconIndicator kind="incomplete" label="Incomplete" {...props} />
-      <IconIndicator kind="not-started" label="Not started" {...props} />
-      <IconIndicator kind="pending" label="Pending" {...props} />
-      <IconIndicator kind="unknown" label="Unknown" {...props} />
-      <IconIndicator kind="informative" label="Informative" {...props} />
+      <IconIndicator kind="failed" label="Failed" {...args} />
+      <IconIndicator kind="caution-major" label="Caution major" {...args} />
+      <IconIndicator kind="caution-minor" label="Caution minor" {...args} />
+      <IconIndicator kind="undefined" label="Undefined" {...args} />
+      <IconIndicator kind="succeeded" label="Succeeded" {...args} />
+      <IconIndicator kind="normal" label="Normal" {...args} />
+      <IconIndicator kind="in-progress" label="In progress" {...args} />
+      <IconIndicator kind="incomplete" label="Incomplete" {...args} />
+      <IconIndicator kind="not-started" label="Not started" {...args} />
+      <IconIndicator kind="pending" label="Pending" {...args} />
+      <IconIndicator kind="unknown" label="Unknown" {...args} />
+      <IconIndicator kind="informative" label="Informative" {...args} />
     </div>
   );
 };
@@ -104,7 +104,7 @@ Default.args = {
 };
 Default.argTypes = sharedArgTypes;
 
-export const DefaultWithSize20 = (props) => {
+export const DefaultWithSize20 = (args) => {
   return (
     <div
       style={{
@@ -112,18 +112,18 @@ export const DefaultWithSize20 = (props) => {
         flexFlow: 'column',
         rowGap: '.5rem',
       }}>
-      <IconIndicator kind="failed" label="Failed" {...props} />
-      <IconIndicator kind="caution-major" label="Caution major" {...props} />
-      <IconIndicator kind="caution-minor" label="Caution minor" {...props} />
-      <IconIndicator kind="undefined" label="Undefined" {...props} />
-      <IconIndicator kind="succeeded" label="Succeeded" {...props} />
-      <IconIndicator kind="normal" label="Normal" {...props} />
-      <IconIndicator kind="in-progress" label="In progress" {...props} />
-      <IconIndicator kind="incomplete" label="Incomplete" {...props} />
-      <IconIndicator kind="not-started" label="Not started" {...props} />
-      <IconIndicator kind="pending" label="Pending" {...props} />
-      <IconIndicator kind="unknown" label="Unknown" {...props} />
-      <IconIndicator kind="informative" label="Informative" {...props} />
+      <IconIndicator kind="failed" label="Failed" {...args} />
+      <IconIndicator kind="caution-major" label="Caution major" {...args} />
+      <IconIndicator kind="caution-minor" label="Caution minor" {...args} />
+      <IconIndicator kind="undefined" label="Undefined" {...args} />
+      <IconIndicator kind="succeeded" label="Succeeded" {...args} />
+      <IconIndicator kind="normal" label="Normal" {...args} />
+      <IconIndicator kind="in-progress" label="In progress" {...args} />
+      <IconIndicator kind="incomplete" label="Incomplete" {...args} />
+      <IconIndicator kind="not-started" label="Not started" {...args} />
+      <IconIndicator kind="pending" label="Pending" {...args} />
+      <IconIndicator kind="unknown" label="Unknown" {...args} />
+      <IconIndicator kind="informative" label="Informative" {...args} />
     </div>
   );
 };

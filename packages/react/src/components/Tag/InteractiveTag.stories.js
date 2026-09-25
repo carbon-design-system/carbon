@@ -5,6 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import styles from './story.scss?inline';
+import interactiveTagStyles from './storyInteractiveTag.scss?inline';
+
 import React from 'react';
 import { default as Tag } from '.';
 import { default as SelectableTag } from './SelectableTag';
@@ -13,15 +16,24 @@ import { default as DismissibleTag } from './DismissibleTag';
 import { Asleep } from '@carbon/icons-react';
 import { Popover, PopoverContent } from '../Popover';
 import mdx from './Tag.mdx';
-import './story.scss';
-import './storyInteractiveTag.scss';
 import { Text } from '../Text';
 import Button from '../Button';
 
 export default {
   title: 'Components/Tag',
   component: SelectableTag,
+  decorators: [
+    (Story) => (
+      <>
+        <style>{styles}</style>
+        <style>{interactiveTagStyles}</style>
+        <Story />
+      </>
+    ),
+  ],
   parameters: {
+    styles,
+    interactiveTagStyles,
     docs: {
       page: mdx,
     },
