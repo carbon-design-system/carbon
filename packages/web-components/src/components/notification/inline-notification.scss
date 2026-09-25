@@ -25,10 +25,6 @@ $css--plex: true !default;
   display: none;
   outline: none;
 
-  .#{$prefix}--inline-notification__close-button:focus {
-    @include focus-outline('outline');
-  }
-
   .#{$prefix}--inline-notification__title {
     margin-block: 0;
   }
