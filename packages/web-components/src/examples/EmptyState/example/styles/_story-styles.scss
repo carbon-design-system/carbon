@@ -1,0 +1,134 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/theme' as *;
+
+
+// ─── Page content area ────────────────────────────────────────────────────────
+
+.es-example__content {
+  // Clear the fixed header (48px) + add 2rem breathing room matching Carbon's <Content> component.
+  padding-block-start: calc(#{$spacing-09} + #{$spacing-07});
+  padding-block-end: $spacing-07;
+  padding-inline: $spacing-07;
+}
+
+
+// ─── 4-column grid: DataTable(3) + vertical tile(1) on row 1,
+//     two half-width tiles(2+2) + vertical tile continues on row 2
+// ─────────────────────────────────────────────────────────────────────────────
+
+.es-example__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $spacing-07;
+}
+
+// DataTable: columns 1-3, row 1
+.es-example__col-full {
+  grid-column: 1 / 4;
+}
+
+// Bottom-left area: fills columns 1-3 on row 2, contains two equal-width tiles
+.es-example__col-bottom {
+  grid-column: 1 / 4;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: $spacing-07;
+}
+
+.es-example__col-half {
+  // direct child of .es-example__col-bottom — sized by the inner 2-col grid
+}
+
+
+// ─── Empty-state placement wrapper (used inside the DataTable) ────────────────
+
+.es-example__empty-wrap {
+  display: flex;
+  padding: $spacing-07 $spacing-05;
+  background-color: $layer;
+
+  &--centre {
+    justify-content: center;
+  }
+
+  &--left {
+    justify-content: flex-start;
+  }
+}
+
+
+// ─── Right-hand tile column — column 4, spans rows 1 and 2 ───────────────────
+
+.es-example__col--span-2 {
+  display: flex;
+  flex-direction: column;
+  grid-column: 4;
+  grid-row: 1 / 3;
+}
+
+
+// ─── Shared tile chrome ───────────────────────────────────────────────────────
+
+.es-example__tile {
+  display: flex;
+  flex-direction: column;
+  block-size: 100%;
+  flex: 1;
+  padding: $spacing-05;
+}
+
+.es-example__tile-label {
+  @include type.type-style('label-01');
+
+  margin-block-end: $spacing-02;
+  color: $text-secondary;
+}
+
+.es-example__tile-title {
+  @include type.type-style('heading-compact-01');
+
+  margin-block-end: $spacing-05;
+}
+
+
+// ─── Vertical tile: empty state centred in remaining vertical space ───────────
+
+.es-example__tile-empty--vertical {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  &--centre {
+    align-items: center;
+  }
+}
+
+
+// ─── Horizontal tile: empty state anchored to start (or centred) ─────────────
+
+.es-example__tile-empty--horizontal {
+  display: flex;
+  inline-size: 100%;
+  justify-content: flex-start;
+
+  &--centre {
+    justify-content: center;
+  }
+}
+
+.es-example__launcher {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-block-size: calc(100vh - #{$spacing-09});
+}

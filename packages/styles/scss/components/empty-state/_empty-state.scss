@@ -1,0 +1,84 @@
+//
+// Copyright IBM Corp. 2016, 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../../config' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../type';
+@use '../../utilities/convert';
+
+/// Empty state styles
+/// @access public
+/// @group empty-state
+@mixin empty-state {
+  .#{$prefix}--empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    inline-size: fit-content;
+    max-inline-size: convert.rem(364px);
+    min-inline-size: convert.rem(166px);
+  }
+
+  .#{$prefix}--empty-state__illustration--md {
+    flex-shrink: 0;
+    block-size: convert.rem(80px);
+    fill: $icon-primary;
+    inline-size: convert.rem(80px);
+    margin-block-end: $spacing-05;
+  }
+
+  .#{$prefix}--empty-state__illustration--sm {
+    flex-shrink: 0;
+    block-size: convert.rem(64px);
+    fill: $icon-primary;
+    inline-size: convert.rem(64px);
+    margin-block-end: $spacing-04;
+  }
+
+  // Content wrapper
+  .#{$prefix}--empty-state__content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  // Heading — md size
+  .#{$prefix}--empty-state__heading--md {
+    @include type.type-style('productive-heading-03');
+
+    color: $text-primary;
+    margin-block: 0;
+  }
+
+  // Heading — sm size
+  .#{$prefix}--empty-state__heading--sm {
+    @include type.type-style('heading-compact-01');
+
+    color: $text-primary;
+    margin-block: 0;
+  }
+
+  .#{$prefix}--empty-state__subtitle {
+    @include type.type-style('body-compact-01');
+
+    color: $text-secondary;
+    margin-block: 0;
+    margin-block-end: $spacing-04;
+  }
+
+  .#{$prefix}--empty-state__action {
+    margin-block: 0;
+    margin-block-end: $spacing-04;
+  }
+
+  // Link
+  .#{$prefix}--empty-state__link {
+    display: inline-flex;
+    align-items: center;
+  }
+}
