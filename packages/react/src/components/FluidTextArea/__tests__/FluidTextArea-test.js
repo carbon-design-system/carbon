@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -65,6 +65,17 @@ describe('FluidTextArea', () => {
       );
 
       expect(screen.getByTestId('test-id-2')).toBeDisabled();
+    });
+
+    it('should add disabled classes when disabled', () => {
+      const { container } = render(
+        <FluidTextArea disabled id="input-1" labelText="FluidTextArea label" />
+      );
+
+      expect(container.firstChild).toHaveClass(
+        `${prefix}--text-area--fluid--disabled`
+      );
+      expect(screen.getByLabelText('FluidTextArea label')).toBeDisabled();
     });
 
     it('should respect id prop', () => {
