@@ -34,7 +34,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    inline-size: calc(#{$spacing-05} + 2rem + #{$spacing-05});
+    inline-size: calc(#{$spacing-05} + #{$spacing-07} + #{$spacing-05});
 
     inset-block: 0;
     inset-inline-end: 0;
@@ -81,7 +81,9 @@
     transition: background-color $duration-fast-01 motion(entrance, productive);
 
     &--has-toggle {
-      inline-size: calc(100% - (#{$spacing-05} + 2rem + #{$spacing-05}));
+      inline-size: calc(
+        100% - (#{$spacing-05} + #{$spacing-07} + #{$spacing-05})
+      );
     }
   }
 
@@ -91,7 +93,9 @@
 
     &.#{$prefix}--options-tile__header--has-toggle {
       // total width - toggle container width
-      inline-size: calc(100% - (#{$spacing-05} + 2rem + #{$spacing-05}));
+      inline-size: calc(
+        100% - (#{$spacing-05} + #{$spacing-07} + #{$spacing-05})
+      );
     }
   }
 
