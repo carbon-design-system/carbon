@@ -209,20 +209,26 @@ Default.argTypes = {
 };
 
 export const ExperimentalAutoAlign = (args) => (
-  <Dropdown
-    id="default"
-    titleText="Label"
-    helperText="Helper text"
-    initialSelectedItem={items[1]}
-    label="Option 1"
-    items={items}
-    itemToString={(item) => (item ? item.text : '')}
-    {...args}
-  />
+  <div style={{ width: 400 }}>
+    <Dropdown
+      id="default"
+      titleText="Label"
+      helperText="Helper text"
+      initialSelectedItem={items[1]}
+      label="Option 1"
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      autoAlign
+      {...args}
+    />
+  </div>
 );
 
 ExperimentalAutoAlign.argTypes = {
   ...sharedArgTypes,
+  autoAlign: {
+    control: false,
+  },
 };
 
 ExperimentalAutoAlign.args = {

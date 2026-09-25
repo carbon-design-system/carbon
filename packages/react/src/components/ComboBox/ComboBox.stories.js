@@ -198,21 +198,32 @@ AutocompleteWithTypeahead.argTypes = {
 };
 
 export const ExperimentalAutoAlign = (args) => (
-  <ComboBox
-    onChange={() => {}}
-    id="carbon-combobox"
-    invalidText="Error message goes here"
-    warnText="Warning message goes here"
-    items={items}
-    itemToString={(item) => (item ? item.text : '')}
-    titleText="Label"
-    helperText="Helper text"
-    autoAlign={true}
-    {...args}
-  />
+  <div style={{ width: 300 }}>
+    <ComboBox
+      onChange={() => {}}
+      id="carbon-combobox"
+      invalidText="Error message goes here"
+      warnText="Warning message goes here"
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      titleText="Label"
+      helperText="Helper text"
+      autoAlign={true}
+      {...args}
+    />
+  </div>
 );
 
-ExperimentalAutoAlign.argTypes = { ...sharedArgTypes };
+ExperimentalAutoAlign.argTypes = {
+  ...sharedArgTypes,
+  autoAlign: {
+    control: false,
+  },
+};
+
+ExperimentalAutoAlign.args = {
+  autoAlign: true,
+};
 
 export const _WithLayer = (args) => (
   <WithLayer>
