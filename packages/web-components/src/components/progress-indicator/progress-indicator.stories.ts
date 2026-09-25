@@ -14,7 +14,6 @@ const args = {
   currentIndex: 0,
   vertical: false,
   spaceEqually: false,
-  iconLabel: '',
   secondaryLabel: 'Optional label',
 };
 
@@ -22,25 +21,27 @@ const argTypes = {
   currentIndex: {
     control: 'number',
     description: 'Optionally specify the current step array index.',
+    table: { defaultValue: { summary: 0 } },
   },
   vertical: {
     control: 'boolean',
     description:
       'Determines whether or not the Progress Indicator should be rendered vertically.',
+    table: { defaultValue: { summary: false } },
   },
   spaceEqually: {
     control: 'boolean',
     description:
       'Specify whether progress steps should be split equally in size (horizontal only).',
-  },
-  iconLabel: {
-    table: {
-      disable: true,
-    },
+    table: { defaultValue: { summary: false } },
   },
   secondaryLabel: {
     control: 'text',
     description: 'The secondary progress label.',
+    table: {
+      category: 'ProgressStep',
+      defaultValue: { summary: 'undefined' },
+    },
   },
 };
 
@@ -79,10 +80,31 @@ export const Default = {
 
 export const Interactive = {
   args: {
-    onChange: action('Clicked'),
+    currentIndex: 1,
+    onChange: action('onChange'),
+    spaceEqually: false,
+    vertical: false,
   },
-  render: ({ onChange }) => html`
-    <cds-progress-indicator current-index="1" .onChange=${onChange}>
+  argTypes: {
+    currentIndex: {
+      ...argTypes.currentIndex,
+      control: { type: 'number', min: 0, max: 2 },
+    },
+    onChange: {
+      action: 'onChange',
+      description:
+        'Optional callback called if a ProgressStep is clicked on. Returns the index of the step.',
+      table: { defaultValue: { summary: 'undefined' } },
+    },
+    spaceEqually: argTypes.spaceEqually,
+    vertical: argTypes.vertical,
+  },
+  render: ({ currentIndex, onChange, spaceEqually, vertical }) => html`
+    <cds-progress-indicator
+      current-index="${currentIndex}"
+      .onChange=${onChange}
+      ?space-equally="${spaceEqually}"
+      ?vertical="${vertical}">
       <cds-progress-step
         label="Click me"
         description="Step 1: Register an onChange event"
@@ -99,8 +121,14 @@ export const Interactive = {
 };
 
 export const Skeleton = {
-  render: () => html`
-    <cds-progress-indicator-skeleton>
+  args: {
+    vertical: false,
+  },
+  argTypes: {
+    vertical: argTypes.vertical,
+  },
+  render: ({ vertical }) => html`
+    <cds-progress-indicator-skeleton ?vertical="${vertical}">
       <cds-progress-step-skeleton></cds-progress-step-skeleton>
       <cds-progress-step-skeleton></cds-progress-step-skeleton>
       <cds-progress-step-skeleton></cds-progress-step-skeleton>
