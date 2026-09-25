@@ -34,6 +34,10 @@
         motion(entrance, expressive);
       opacity: 1;
 
+      @media screen and (prefers-reduced-motion: reduce) {
+        animation: none;
+      }
+
       // extra specificity to ensure this transition overrides the carbon default
       &.#{$block-class}.#{$block-class} .#{$block-class}__container {
         animation: #{$block-class}--presence-tearsheet--container__enter
@@ -51,6 +55,10 @@
       &[data-tearsheet-exiting] {
         animation: #{$block-class}--presence-tearsheet__exit $motion-duration
           motion(exit, expressive) forwards;
+
+        @media screen and (prefers-reduced-motion: reduce) {
+          animation: none;
+        }
 
         &.#{$block-class}.#{$block-class} .#{$block-class}__container {
           animation: #{$block-class}--presence-tearsheet--container__exit
@@ -257,6 +265,10 @@
           opacity $motion-duration motion(entrance, expressive),
           margin $motion-duration motion(entrance, expressive),
           padding $motion-duration motion(entrance, expressive);
+
+        @media screen and (prefers-reduced-motion: reduce) {
+          transition: none;
+        }
       }
 
       .#{$block-class}__header-actions,
@@ -270,17 +282,29 @@
         transition:
           all $motion-duration motion(entrance, expressive),
           opacity $motion-duration motion(entrance, expressive);
+
+        @media screen and (prefers-reduced-motion: reduce) {
+          transition: none;
+        }
       }
     }
 
     .#{$prefix}--modal-close {
       transition: all $motion-duration ease;
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
     }
 
     // COLLAPSED STATE
     .#{$block-class}__header-collapsed {
       padding-block-start: 0;
       transition: padding $motion-duration motion(entrance, expressive);
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
 
       > *:not(
           .#{$block-class}__navigation-bar,
@@ -313,8 +337,16 @@
         max-block-size: 0;
         opacity: 0;
         pointer-events: none;
-        transition: all $motion-duration motion(entrance, expressive);
+        transition:
+          opacity $motion-duration motion(entrance, expressive),
+          max-block-size $motion-duration motion(entrance, expressive),
+          padding $motion-duration motion(entrance, expressive),
+          margin $motion-duration motion(entrance, expressive);
         visibility: hidden;
+
+        @media screen and (prefers-reduced-motion: reduce) {
+          transition: none;
+        }
       }
 
       .#{$block-class}__header-title {
@@ -324,6 +356,10 @@
         gap: $spacing-03;
         margin-block-start: $spacing-02;
         transition: all $motion-duration motion(entrance, expressive);
+
+        @media screen and (prefers-reduced-motion: reduce) {
+          transition: none;
+        }
 
         > span {
           display: flex;
@@ -352,6 +388,10 @@
         block-size: $spacing-08;
         inline-size: $spacing-08;
         transition: all $motion-duration ease;
+
+        @media screen and (prefers-reduced-motion: reduce) {
+          transition: none;
+        }
       }
 
       .#{$block-class}__decorator {
@@ -366,6 +406,10 @@
         block-size: $spacing-06;
         margin-block-start: $spacing-03;
         transition: all $motion-duration ease;
+
+        @media screen and (prefers-reduced-motion: reduce) {
+          transition: none;
+        }
       }
 
       @include breakpoint-down(md) {
@@ -381,6 +425,10 @@
       .#{$block-class}__header-title {
         margin-block: 0;
         transition: margin-block $motion-duration ease;
+
+        @media screen and (prefers-reduced-motion: reduce) {
+          transition: none;
+        }
       }
 
       .#{$block-class}__header-content-wrapper {
@@ -646,6 +694,7 @@
 
   .#{$block-class}__main-content {
     position: relative;
+    background-color: $background;
   }
 
   .#{$block-class}__side-panel {
