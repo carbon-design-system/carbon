@@ -6,6 +6,7 @@
  */
 
 import type { StorybookConfig } from '@storybook/react-vite';
+import type { Plugin } from 'vite';
 
 import { fileURLToPath } from 'node:url';
 
@@ -109,6 +110,61 @@ const config: StorybookConfig = {
         },
       },
       plugins: [
+        // storybook:inject-original-source plugin
+        // This is a plugin that manually injects the story source code
+        // into the parameters.docs.source.originalSource object.
+        //
+        // The need for this arises from the fact that esbuild minimizes the
+        // code and mangles names. The 'show code' locations in storybook
+        // are then showing minified code. The source code is injected manually
+        // as a string, and is thus not minified.
+        //
+        // This plugin is based on the webpack-loader at
+        // node_modules/@storybook/csf-plugin/dist/webpack-loader.js.
+        ((): Plugin => ({
+          name: 'storybook:inject-original-source',
+          enforce: 'pre', // pre is required so that this runs before react/babel
+          async transform(code, id) {
+            // Skip running this in dev mode and skip any non-story files
+            if (
+              process.env.NODE_ENV !== 'production' ||
+              !/\.(stories|story)\.(js|jsx|ts|tsx)$/.test(id)
+            ) {
+              return;
+            }
+
+            try {
+              const { readFile } = await import('node:fs/promises');
+              const { loadCsf, enrichCsf, formatCsf } = await import(
+                'storybook/internal/csf-tools'
+              );
+              const makeTitle = (userTitle: string) => userTitle || 'default';
+              // Re-read the original source code in-case vite may have already
+              // modified what is passed into transform for 'code'
+              const sourceCode = await readFile(id, 'utf-8');
+              // csf is the code being transformed
+              const csf = loadCsf(code, { makeTitle }).parse();
+              // csfSource is the raw file on disk (used to extract source text)
+              const csfSource = loadCsf(sourceCode, { makeTitle }).parse();
+              await enrichCsf(csf, csfSource, {
+                disableSource: false,
+                disableDescription: true,
+              });
+              const result = formatCsf(
+                csf,
+                { sourceMaps: true, sourceFileName: id },
+                code
+              );
+              if (typeof result === 'string') {
+                return { code: result, map: null };
+              }
+              return { code: result.code, map: result.map };
+            } catch {
+              // Not a valid CSF file or parse error — leave unchanged
+              return;
+            }
+          },
+        }))(),
         react({
           // use a regex instead of a glob.Vite 8 (Rolldown)
           // globs `**/*.{jsx,js,ts,tsx}` seem to mishandle the transform

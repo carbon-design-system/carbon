@@ -187,6 +187,14 @@ const parameters = {
       </>
     ),
     codePanel: true,
+    source: {
+      // Use the injected originalSource text rather than runtime serialization.
+      // Runtime serialization (SourceType.AUTO) produces minified names like
+      // <n /> or <$> in production builds. 'code' mode always prefers
+      // parameters.docs.source.originalSource which is injected at build time.
+      // see main.ts 'storybook:inject-original-source' plugin
+      type: 'code',
+    },
   },
   viewport: {
     options: {
