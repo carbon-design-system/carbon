@@ -102,19 +102,22 @@ const sharedArgTypes = {
   },
 };
 
-export const Default = ({ defaultWidth, ...comboBoxArgs }) => (
-  <div style={{ width: defaultWidth }}>
-    <FluidComboBox
-      onChange={() => {}}
-      id="default"
-      titleText="Label"
-      label="Choose an option"
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
-      {...comboBoxArgs}
-    />
-  </div>
-);
+export const Default = (args) => {
+  const { defaultWidth, ...comboBoxArgs } = args;
+  return (
+    <div style={{ width: defaultWidth }}>
+      <FluidComboBox
+        onChange={() => {}}
+        id="default"
+        titleText="Label"
+        label="Choose an option"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        {...comboBoxArgs}
+      />
+    </div>
+  );
+};
 
 Default.args = {
   defaultWidth: 400,
@@ -138,65 +141,68 @@ Default.argTypes = {
   },
 };
 
-export const Condensed = () => (
-  <div style={{ width: '400px' }}>
-    <FluidComboBox
-      onChange={() => {}}
-      id="default"
-      isCondensed
-      titleText="Label"
-      label="Choose an option"
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
-    />
-  </div>
-);
+export const Condensed = () => {
+  return (
+    <div style={{ width: '400px' }}>
+      <FluidComboBox
+        onChange={() => {}}
+        id="default"
+        isCondensed
+        titleText="Label"
+        label="Choose an option"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+      />
+    </div>
+  );
+};
 
-const aiLabel = (
-  <AILabel className="ai-label-container">
-    <AILabelContent>
-      <div>
-        <p className="secondary">AI Explained</p>
-        <h2 className="ai-label-heading">84%</h2>
-        <p className="secondary bold">Confidence score</p>
-        <p className="secondary">
-          Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
-        </p>
-        <hr />
-        <p className="secondary">Model type</p>
-        <p className="bold">Foundation model</p>
-      </div>
-      <AILabelActions>
-        <IconButton kind="ghost" label="View">
-          <View />
-        </IconButton>
-        <IconButton kind="ghost" label="Open Folder">
-          <FolderOpen />
-        </IconButton>
-        <IconButton kind="ghost" label="Folders">
-          <Folders />
-        </IconButton>
-        <Button>View details</Button>
-      </AILabelActions>
-    </AILabelContent>
-  </AILabel>
-);
-
-export const withAILabel = (args) => (
-  <div style={{ width: '400px' }}>
-    <FluidComboBox
-      onChange={() => {}}
-      id="default"
-      titleText="Label"
-      label="Choose an option"
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
-      decorator={aiLabel}
-      {...args}
-    />
-  </div>
-);
+export const withAILabel = (args) => {
+  const aiLabel = (
+    <AILabel className="ai-label-container">
+      <AILabelContent>
+        <div>
+          <p className="secondary">AI Explained</p>
+          <h2 className="ai-label-heading">84%</h2>
+          <p className="secondary bold">Confidence score</p>
+          <p className="secondary">
+            Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+          </p>
+          <hr />
+          <p className="secondary">Model type</p>
+          <p className="bold">Foundation model</p>
+        </div>
+        <AILabelActions>
+          <IconButton kind="ghost" label="View">
+            <View />
+          </IconButton>
+          <IconButton kind="ghost" label="Open Folder">
+            <FolderOpen />
+          </IconButton>
+          <IconButton kind="ghost" label="Folders">
+            <Folders />
+          </IconButton>
+          <Button>View details</Button>
+        </AILabelActions>
+      </AILabelContent>
+    </AILabel>
+  );
+  return (
+    <div style={{ width: '400px' }}>
+      <FluidComboBox
+        onChange={() => {}}
+        id="default"
+        titleText="Label"
+        label="Choose an option"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        decorator={aiLabel}
+        {...args}
+      />
+    </div>
+  );
+};
 
 withAILabel.argTypes = {
   ...sharedArgTypes,
