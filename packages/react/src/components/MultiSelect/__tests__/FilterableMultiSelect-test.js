@@ -321,6 +321,73 @@ describe('FilterableMultiSelect', () => {
     });
   });
 
+  it('should support selecting items from multiple instances with the same id', async () => {
+    const user = userEvent.setup();
+    const firstOnChange = jest.fn();
+    const secondOnChange = jest.fn();
+
+    render(
+      <>
+        <FilterableMultiSelect
+          {...mockProps}
+          id="shared-filterable-multiselect"
+          titleText="Filterable MultiSelect"
+          onChange={firstOnChange}
+        />
+        <FilterableMultiSelect
+          {...mockProps}
+          id="shared-filterable-multiselect"
+          titleText="Filterable MultiSelect"
+          onChange={secondOnChange}
+        />
+      </>
+    );
+    await waitForPosition();
+
+    const comboboxes = screen.getAllByRole('combobox');
+    const controls = comboboxes.map((combobox) => {
+      const listBox = combobox.closest(`.${prefix}--list-box`);
+      const toggleButton = listBox.querySelector(
+        'button[id$="-toggle-button"]'
+      );
+      const menu = listBox.querySelector('[role="listbox"]');
+      const label = document.querySelector(`label[for="${combobox.id}"]`);
+
+      return {
+        listBox,
+        combobox,
+        toggleButton,
+        menu,
+        label,
+      };
+    });
+    const generatedIds = controls.flatMap(
+      ({ listBox, combobox, toggleButton, menu, label }) => [
+        listBox.id,
+        combobox.id,
+        toggleButton.id,
+        menu.id,
+        label.id,
+      ]
+    );
+
+    expect(new Set(generatedIds).size).toBe(generatedIds.length);
+    controls.forEach(({ combobox, toggleButton, menu, label }) => {
+      expect(label).toHaveAttribute('for', combobox.id);
+      expect(combobox.id).toBe(label.getAttribute('for'));
+      expect(toggleButton).toHaveAttribute('aria-controls', menu.id);
+    });
+
+    await user.click(comboboxes[1]);
+    expect(comboboxes[1]).toHaveAttribute('aria-controls', controls[1].menu.id);
+    await user.click(screen.getAllByRole('option')[0]);
+
+    expect(firstOnChange).not.toHaveBeenCalled();
+    expect(secondOnChange).toHaveBeenCalledWith({
+      selectedItems: [mockProps.items[0]],
+    });
+  });
+
   it('should let items stay at their position after selecting', async () => {
     render(<FilterableMultiSelect {...mockProps} selectionFeedback="fixed" />);
     await waitForPosition();
@@ -394,11 +461,13 @@ describe('FilterableMultiSelect', () => {
     );
   });
 
-  it('should place the given id on the listbox wrapper', async () => {
+  it('should scope the listbox wrapper id', async () => {
     render(<FilterableMultiSelect {...mockProps} id="custom-id" />);
     await waitForPosition();
 
-    expect(document.querySelector(`.${prefix}--list-box`).id).toBe('custom-id');
+    expect(document.querySelector(`.${prefix}--list-box`).id).toEqual(
+      expect.stringMatching(/^custom-id-id-.+$/)
+    );
   });
 
   it('should render with initial selected items', async () => {
@@ -1271,7 +1340,7 @@ describe('FilterableMultiSelect', () => {
       'aria-label': 'Choose an item',
       autocomplete: 'off',
       class: 'cds--text-input cds--text-input--empty',
-      id: 'test-combo-input',
+      id: expect.stringMatching(/^test-combo-id-.+-input$/),
       maxlength: '10',
       placeholder: 'Type here',
       role: 'combobox',
