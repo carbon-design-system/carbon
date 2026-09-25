@@ -28,7 +28,11 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(FluidTimePickerStories.Default),
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: FluidTimePickerStories.Default,
+          styles: FluidTimePickerStories.default.parameters.styles,
+        }),
     },
   ]}
 />
@@ -40,7 +44,11 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(FluidTimePickerStories.Skeleton),
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: FluidTimePickerStories.Skeleton,
+          styles: FluidTimePickerStories.default.parameters.styles,
+        }),
     },
   ]}
 />

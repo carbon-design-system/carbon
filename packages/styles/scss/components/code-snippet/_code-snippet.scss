@@ -6,8 +6,11 @@
 //
 
 @use 'mixins' as *;
+@use '../button/radius' as button;
 @use '../copy-button';
+@use '../../border-radius' as *;
 @use '../../config' as *;
+@use '../../feature-flags' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
@@ -35,6 +38,10 @@ $copy-btn-feedback: $background-inverse !default;
 @mixin code-snippet {
   .#{$prefix}--snippet {
     @include reset;
+
+    @if enabled('enable-v12-release') {
+      @include button.radius($border-radius-00);
+    }
   }
 
   .#{$prefix}--snippet--disabled,
