@@ -15,12 +15,17 @@ import HostListenerMixin from '../../globals/mixins/host-listener';
 import '../modal/index';
 import '../icon-button/index';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import CDSAILabel from '../ai-label/ai-label';
 import '../truncated-text';
 import styles from './tearsheet-header-content.scss?lit';
 import { MatchMediaController } from '../../globals/js/utils/match-media-controller';
 import { breakpoints } from '@carbon/layout';
-import { registerFocusableContainers } from '../../utilities/manageFocusTrap/manageFocusTrap';
-import { tearsheetSignal } from './tearsheet-signal';
+import {
+  registerFocusableContainers,
+  getFocusableContainers,
+} from '../../utilities/manageFocusTrap/manageFocusTrap';
+import { tearsheetSignal, updateTearsheetSignals } from './tearsheet-signal';
+import CDSTearsheetHeader from './tearsheet-header';
 import { SignalWatcher } from '@lit-labs/signals';
 import Close20 from '@carbon/icons/es/close/20.js';
 import { iconLoader } from '../../globals/internal/icon-loader';
@@ -52,16 +57,9 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
   title: string = '';
 
   /**
-   * Internal ID for the title element (auto-generated, used for aria-labelledby on the modal)
+   * Internal ID for the title element (used only for the <h2> id in this shadow root)
    */
   private _titleId: string = `${blockClass}__title-${Math.random().toString(36).substr(2, 9)}`;
-
-  /**
-   * Public getter for the title ID (used by parent tearsheet for aria-labelledby)
-   */
-  get titleId(): string {
-    return this._titleId;
-  }
 
   @query('slot[name="title-start"]')
   private _titleStartSlot?: HTMLSlotElement;
@@ -119,52 +117,7 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
   );
 
   private get isNarrowVariant(): boolean {
-    const tearsheet = this.closest(`${prefix}-tearsheet`);
-    return tearsheet?.getAttribute('variant') === 'narrow';
-  }
-
-  /**
-   * Returns the first focusable element in the header for the focus trap.
-   
-   * Priority by screen size:
-   *   Large (desktop): header-actions button → close button → AI label
-   *   Small (mobile):  AI label → close button → header-actions button
-   */
-  getFirstFocusable(): HTMLElement | null {
-    // header-actions: consumer may slot a button directly OR wrap buttons in a div.
-    //   <cds-button slot="header-actions">        → slotted element IS the button
-    //   <div slot="header-actions"><cds-button>   → button is a child of the slotted div
-    const headerActionSlot = this.querySelector<HTMLElement>(
-      '[slot="header-actions"]'
-    );
-    const headerActionBtn = headerActionSlot
-      ? headerActionSlot.matches(
-          `${carbonPrefix}-button:not([disabled]), button:not([disabled])`
-        )
-        ? headerActionSlot
-        : headerActionSlot.querySelector<HTMLElement>(
-            `${carbonPrefix}-button:not([disabled]), button:not([disabled])`
-          )
-      : null;
-
-    // close button: inside this component's own shadow DOM
-    const closeBtn = this.shadowRoot?.querySelector<HTMLElement>(
-      `.${blockClass}__close-button ${carbonPrefix}-icon-button:not([disabled])`
-    );
-
-    // AI label: consumer may slot cds-ai-label directly OR wrap it in a div.
-    //   <cds-ai-label slot="decorator">        → slotted element IS the ai-label
-    //   <div slot="decorator"><cds-ai-label>   → ai-label is a child of the slotted div
-    const decoratorSlot = this.querySelector<HTMLElement>('[slot="decorator"]');
-    const aiLabel = decoratorSlot
-      ? decoratorSlot.matches(`${carbonPrefix}-ai-label`)
-        ? decoratorSlot
-        : decoratorSlot.querySelector<HTMLElement>(`${carbonPrefix}-ai-label`)
-      : null;
-
-    return this._isMobileOrNarrow
-      ? (aiLabel ?? closeBtn ?? headerActionBtn ?? null)
-      : (headerActionBtn ?? closeBtn ?? aiLabel ?? null);
+    return tearsheetSignal.get().variant === 'narrow';
   }
 
   protected override firstUpdated(): void {
@@ -191,9 +144,90 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
       this.requestUpdate();
     }
 
+    // Keep the signal's title in sync so tearsheet.ts can use it as aria-label
+    // without walking the DOM every render.
+    if (tearsheetSignal.get().title !== this.title) {
+      updateTearsheetSignals({ title: this.title });
+    }
+
     this._updateDecoratorSize();
     this._updateHeaderOffset();
     this._updateInertState();
+    this._focusCloseButtonOnOpen();
+  }
+
+  /**
+   * Focus the close button when the tearsheet opens.
+   * Called from updated() when the signal's open flips true.
+   *
+   * The tearsheet panel slides in via a CSS transform transition (~moderate-02,
+   * ~240ms). Browsers will not focus an element that is off-screen or
+   * mid-transform, so we defer the focus call until after the animation
+   * completes. 300ms covers the longest Carbon motion duration with margin.
+   */
+  private _previousOpen = false;
+  private _focusTimer: ReturnType<typeof setTimeout> | null = null;
+
+  private _focusCloseButtonOnOpen(): void {
+    const { open, hideCloseButton } = tearsheetSignal.get();
+
+    const justOpened = open && !this._previousOpen;
+    this._previousOpen = open;
+
+    // Cancel any pending focus from a previous open cycle
+    if (this._focusTimer !== null) {
+      clearTimeout(this._focusTimer);
+      this._focusTimer = null;
+    }
+
+    if (!justOpened || hideCloseButton) {
+      return;
+    }
+
+    this._focusTimer = setTimeout(() => {
+      this._focusTimer = null;
+      const { selectorPrimaryFocus } = tearsheetSignal.get();
+
+      // Consumer override — query the document for a custom primary focus target.
+      // The footer buttons live in cds-tearsheet's light DOM (page-level),
+      // so document.querySelector reaches them without shadow boundary issues.
+      if (selectorPrimaryFocus) {
+        // The target element may live inside a shadow root (e.g. cds-action-set's shadow),
+        // so document.querySelector can't reach it. Search all registered focusable
+        // containers instead — they include every shadow root the focus trap knows about.
+        const { uniqueId } = tearsheetSignal.get();
+        const allContainers = getFocusableContainers(uniqueId);
+        let match: HTMLElement | null = null;
+        for (const container of allContainers) {
+          const found =
+            container.querySelector<HTMLElement>(selectorPrimaryFocus);
+          if (found) {
+            match = found;
+            break;
+          }
+        }
+        // If the match is a custom element (e.g. cds-button), drill into its
+        // shadow root for the real focusable <button>; otherwise focus it directly.
+        const customTarget =
+          match?.shadowRoot?.querySelector<HTMLElement>(
+            'button:not([disabled])'
+          ) ?? match;
+        if (customTarget) {
+          customTarget.focus({ preventScroll: true });
+        }
+      } else {
+        // Default — focus the close button from our own shadow root
+        const btn = this.shadowRoot?.querySelector<HTMLElement>(
+          `.${blockClass}__close-button ${carbonPrefix}-icon-button:not([disabled])`
+        );
+        // Drill into cds-icon-button's shadow root for the real <button>.
+        const focusTarget =
+          btn?.shadowRoot?.querySelector<HTMLElement>(
+            'button:not([disabled])'
+          ) ?? btn;
+        focusTarget?.focus({ preventScroll: true });
+      }
+    }, 100);
   }
 
   /**
@@ -270,7 +304,7 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
     this._hasDecorator = childItems.length > 0;
     if (this._hasDecorator) {
       for (const item of childItems) {
-        if (item.tagName.toLowerCase() === `${carbonPrefix}-ai-label`) {
+        if (item instanceof CDSAILabel) {
           this._hasAILabel = true;
           break;
         }
@@ -279,21 +313,34 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
       const { fullyCollapsed } = tearsheetSignal.get();
       childItems[0].setAttribute('size', fullyCollapsed ? 'xs' : 'sm');
 
-      // Update host attributes for CSS targeting
-      const host = this.closest(
-        `${prefix}-tearsheet-header`
-      ) as HTMLElement | null;
-      if (host) {
-        host.setAttribute(this._hasAILabel ? 'ai-label' : 'decorator', '');
-        host.removeAttribute(this._hasAILabel ? 'decorator' : 'ai-label');
+      // Push decorator state into signal so cds-tearsheet can read it
+      // without a tag-name querySelector
+      updateTearsheetSignals({
+        hasDecorator: true,
+        hasAILabel: this._hasAILabel,
+      });
+
+      // Update host attributes for CSS targeting.
+      // Walk ancestors with instanceof — tag-name independent.
+      let ancestor = this.parentElement;
+      while (ancestor && !(ancestor instanceof CDSTearsheetHeader)) {
+        ancestor = ancestor.parentElement;
+      }
+      if (ancestor instanceof CDSTearsheetHeader) {
+        ancestor.setAttribute(this._hasAILabel ? 'ai-label' : 'decorator', '');
+        ancestor.removeAttribute(this._hasAILabel ? 'decorator' : 'ai-label');
       }
     } else {
-      const host = this.closest(
-        `${prefix}-tearsheet-header`
-      ) as HTMLElement | null;
-      if (host) {
-        host.removeAttribute('decorator');
-        host.removeAttribute('ai-label');
+      // Push cleared decorator state into signal
+      updateTearsheetSignals({ hasDecorator: false, hasAILabel: false });
+
+      let ancestor = this.parentElement;
+      while (ancestor && !(ancestor instanceof CDSTearsheetHeader)) {
+        ancestor = ancestor.parentElement;
+      }
+      if (ancestor instanceof CDSTearsheetHeader) {
+        ancestor.removeAttribute('decorator');
+        ancestor.removeAttribute('ai-label');
       }
     }
     // Update header offset CSS variable
@@ -480,6 +527,14 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
         ${headerContentTemplate} ${headerActionsTemplate}`
       : html`${headerActionsTemplate} ${decoratorTemplate}
         ${closeButtonTemplate} ${headerContentTemplate}`;
+  }
+
+  disconnectedCallback(): void {
+    super.disconnectedCallback();
+    if (this._focusTimer !== null) {
+      clearTimeout(this._focusTimer);
+      this._focusTimer = null;
+    }
   }
 
   static styles = styles;

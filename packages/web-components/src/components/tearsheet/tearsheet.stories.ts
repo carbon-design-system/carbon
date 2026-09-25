@@ -77,6 +77,7 @@ export const Default = {
         variant="${args.variant}"
         ?open="${args.open}"
         ?prevent-close-on-click-outside="${args.preventCloseOnClickOutside}"
+        selector-primary-focus="[data-tearsheet-primary-focus]"
         @cds-tearsheet-collapse-change="${handleCollapseChange}">
         <cds-tearsheet-header
           ?hide-close-button="${args.hideCloseButton}"
@@ -140,6 +141,7 @@ export const Default = {
             {
               kind: 'primary',
               label: 'Submit',
+              'data-tearsheet-primary-focus': '',
             },
           ]}">
         </cds-tearsheet-footer>

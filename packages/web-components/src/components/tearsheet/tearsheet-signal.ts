@@ -22,6 +22,8 @@ interface TearsheetSignalType {
   isSm: boolean;
   open: boolean;
   hasAILabel: boolean;
+  /** Whether any decorator (AI label or otherwise) is slotted */
+  hasDecorator: boolean;
   uniqueId: string;
   /** Tooltip/aria label for the close button */
   closeIconDescription: string;
@@ -29,6 +31,10 @@ interface TearsheetSignalType {
   hideCloseButton: boolean;
   /** Callback to close the tearsheet */
   onClose: (() => void) | null;
+  /** CSS selector for the element that should receive focus on open (consumer override) */
+  selectorPrimaryFocus: string;
+  /** Title text from cds-tearsheet-header-content — used as aria-label fallback on the dialog */
+  title: string;
 }
 export const defaultTearsheetSignal: TearsheetSignalType = {
   hasCloseIcon: true,
@@ -38,10 +44,13 @@ export const defaultTearsheetSignal: TearsheetSignalType = {
   isSm: false,
   open: false,
   hasAILabel: false,
+  hasDecorator: false,
   uniqueId: '',
   closeIconDescription: 'Close',
   hideCloseButton: false,
   onClose: null,
+  selectorPrimaryFocus: '',
+  title: '',
 };
 export const tearsheetSignal = signal<TearsheetSignalType>(
   defaultTearsheetSignal

@@ -12,10 +12,15 @@ import { property, state, query } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import styles from './tearsheet.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import CDSTearsheetStack from './tearsheet-stack';
 import { classMap } from 'lit-html/directives/class-map.js';
 import { MatchMediaController } from '../../globals/js/utils/match-media-controller';
 import { breakpoints } from '@carbon/layout';
-import { blockClass, updateTearsheetSignals } from './tearsheet-signal';
+import {
+  blockClass,
+  tearsheetSignal,
+  updateTearsheetSignals,
+} from './tearsheet-signal';
 import { SignalWatcher } from '@lit-labs/signals';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import { ifDefined } from 'lit/directives/if-defined.js';
@@ -95,12 +100,6 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
   preventCloseOnClickOutside: boolean = false;
 
   /**
-   * Optional ref to the trigger button that opened the tearsheet. Focus will return here when tearsheet closes.
-   */
-  @property({ attribute: false })
-  launcherButtonRef?: HTMLElement;
-
-  /**
    * aria-label for the tearsheet dialog
    */
   @property({ reflect: true, attribute: 'aria-label' })
@@ -125,17 +124,11 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
   /**
    * Query the modal body element
    */
-  @query('cds-modal-body')
+  @query(`${prefix}-modal-body`)
   private modalBodyElement?: HTMLElement;
 
   private _trapFocusAPI: { cleanup: () => void } | null = null;
   private _wasOpen = false;
-  /**
-   * Query the header content element to get its titleId
-   */
-  @query(`${prefix}-tearsheet-header-content`)
-  private headerContentElement?: HTMLElement & { titleId?: string };
-
   private smMediaQuery = `(max-width: ${breakpoints.md.width})`;
   private isSmallDevice = new MatchMediaController(
     this,
@@ -143,31 +136,20 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
     false
   );
   /**
-   * Checks if the tearsheet has a decorator (AI label or other)
+   * Checks if the tearsheet has a decorator (AI label or other).
+   * Reads from the shared signal, populated by cds-tearsheet-header-content
+   * via _handleDecoratorChange — no tag-name querySelector needed.
    */
   private get hasDecorator(): boolean {
-    const headerElement = this.querySelector(`${prefix}-tearsheet-header`);
-    if (!headerElement) {
-      return false;
-    }
-    const decorator = headerElement.querySelector('[slot="decorator"]');
-    return !!decorator;
+    return tearsheetSignal.get().hasDecorator ?? false;
   }
 
   /**
-   * Checks if the tearsheet has an AI label decorator
+   * Checks if the tearsheet has an AI label decorator.
+   * Reads from the shared signal — no tag-name querySelector needed.
    */
   private get hasAILabel(): boolean {
-    const headerElement = this.querySelector(`${prefix}-tearsheet-header`);
-    if (!headerElement) {
-      return false;
-    }
-    const decorator = headerElement.querySelector('[slot="decorator"]');
-    if (!decorator) {
-      return false;
-    }
-    const tagName = decorator.tagName.toLowerCase();
-    return tagName === 'cds-ai-label' || tagName === `${prefix}-ai-label`;
+    return tearsheetSignal.get().hasAILabel;
   }
 
   connectedCallback(): void {
@@ -222,27 +204,17 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
     });
   }
 
-  /** Read close-button props from the slotted cds-tearsheet-header element */
+  /**
+   * Read close-button props from the shared signal.
+   * cds-tearsheet-header pushes these via updateTearsheetSignals on connectedCallback
+   * and on every property change — no tag-name querySelector needed.
+   */
   private _readHeaderProps(): {
     closeIconDescription: string;
     hideCloseButton: boolean;
   } {
-    const header = this.querySelector(`${prefix}-tearsheet-header`) as
-      | (HTMLElement & {
-          closeIconDescription?: string;
-          hideCloseButton?: boolean;
-        })
-      | null;
-    return {
-      closeIconDescription:
-        header?.closeIconDescription ??
-        header?.getAttribute('close-icon-description') ??
-        'Close',
-      hideCloseButton:
-        header?.hideCloseButton ??
-        header?.hasAttribute('hide-close-button') ??
-        false,
-    };
+    const { closeIconDescription, hideCloseButton } = tearsheetSignal.get();
+    return { closeIconDescription, hideCloseButton };
   }
 
   protected updated(_changedProperties: PropertyValues): void {
@@ -298,52 +270,24 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
       // which are then passed to `trapFocus`. This allows the utility to query elements
       // directly without being blocked by shadow DOM boundaries.
 
-      // Update signal with current uniqueId FIRST so children can register
-      updateTearsheetSignals({ uniqueId: this.uniqueId });
+      // Update signal with current uniqueId and selectorPrimaryFocus so children can register
+      updateTearsheetSignals({
+        uniqueId: this.uniqueId,
+        selectorPrimaryFocus: this.selectorPrimaryFocus,
+      });
 
-      // Use requestAnimationFrame to ensure child components have registered their containers
+      // Set up focus trap for Tab/Shift+Tab cycling.
+      // Initial focus is handled by cds-tearsheet-header-content._focusCloseButtonOnOpen()
+      // which runs in its own updated() lifecycle — no timing race.
       requestAnimationFrame(() => {
-        this._trapFocusAPI = trapFocus(this as HTMLElement, this.uniqueId, () =>
-          this._getFirstFocusable()
-        );
+        this._trapFocusAPI = trapFocus(this as HTMLElement, this.uniqueId);
       });
     }
 
     this._wasOpen = isOpen;
-    //  Return focus to launcher button when tearsheet closes
-    if (!this.open && this.launcherButtonRef) {
-      // Use a small delay to ensure the tearsheet has fully closed
-      setTimeout(() => {
-        if (this.launcherButtonRef instanceof HTMLElement) {
-          // Check if the button is inside a TearsheetHeaderActions component
-          const headerActionItem = this.launcherButtonRef.closest(
-            `.${blockClass}__header-action-item`
-          );
-
-          if (headerActionItem) {
-            // This is a button inside TearsheetHeaderActions
-            // Check if it's currently visible or if items are collapsed to menu
-            const headerActionsContainer = headerActionItem.closest(
-              `.${blockClass}__content__header-actions`
-            );
-            const menuButton = headerActionsContainer?.querySelector(
-              `.${blockClass}__header-actions-menuButton:not(.${blockClass}__header-actions-menuButton--hidden) button`
-            );
-
-            if (menuButton instanceof HTMLElement) {
-              // On small screens, action buttons collapse to menu - focus the menu button
-              menuButton.focus();
-            } else {
-              // On large screens, focus the action button directly
-              this.launcherButtonRef.focus();
-            }
-          } else {
-            // Regular button ref (not inside TearsheetHeaderActions): focus directly
-            this.launcherButtonRef.focus();
-          }
-        }
-      }, 100);
-    }
+    // Focus-return to the launcher is handled automatically by the inner <cds-modal>
+    // via its _launcher capture (document.activeElement at open time). No manual
+    // launcherButtonRef wiring needed from the consumer.
   }
 
   private updateCSSPropertiesIfNeeded(
@@ -392,18 +336,6 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
       this.style.setProperty('--scale-factor', scaleFactor.toString());
       this.style.setProperty('--block-size-change', blockSizeChange);
     }
-  }
-
-  /**
-   * Delegates to `cds-tearsheet-header-content.getFirstFocusable()`.
-   * All priority logic lives in the component that owns the relevant DOM.
-   */
-  private _getFirstFocusable(): HTMLElement | null {
-    const headerContentEl = this.querySelector(
-      `${prefix}-tearsheet-header-content`
-    ) as (HTMLElement & { getFirstFocusable(): HTMLElement | null }) | null;
-
-    return headerContentEl?.getFirstFocusable() ?? null;
   }
 
   disconnectedCallback() {
@@ -513,7 +445,7 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
     // Check if there's a cds-tearsheet-stack ancestor
     let parent = this.parentElement;
     while (parent) {
-      if (parent.tagName.toLowerCase() === `${prefix}-tearsheet-stack`) {
+      if (parent instanceof CDSTearsheetStack) {
         this._stackingEnabled = true;
         return;
       }
@@ -663,10 +595,11 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
 
     const containerClasses = `${blockClass}__container ${this.containerClassName}`;
 
-    const computedAriaLabelledby =
-      !this.ariaLabel && this.headerContentElement?.titleId
-        ? this.headerContentElement.titleId
-        : undefined;
+    // Use ariaLabel prop if provided; otherwise fall back to the title pushed into
+    // the signal by cds-tearsheet-header-content — no DOM walk needed and no
+    // cross-shadow-root aria-labelledby (which browsers cannot resolve).
+    const effectiveAriaLabel =
+      this.ariaLabel || tearsheetSignal.get().title || undefined;
 
     return html`<cds-modal
       class=${classes}
@@ -674,8 +607,8 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
       ?open="${this.open}"
       container-class="${containerClasses}"
       ?prevent-close-on-click-outside="${this.preventCloseOnClickOutside}"
-      aria-label="${ifDefined(this.ariaLabel || undefined)}"
-      aria-labelledby="${ifDefined(computedAriaLabelledby)}"
+      managed-focus
+      aria-label="${ifDefined(effectiveAriaLabel)}"
       selector-primary-focus="${ifDefined(
         this.selectorPrimaryFocus || undefined
       )}"
