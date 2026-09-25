@@ -340,14 +340,15 @@ const Dropdown = React.forwardRef(
 
             // Middleware order matters, arrow should be last
             middleware: [
+              autoAlign && flip(),
               floatingSize({
-                apply({ rects, elements }) {
+                apply({ availableHeight, rects, elements }) {
                   Object.assign(elements.floating.style, {
                     width: `${rects.reference.width}px`,
+                    maxHeight: `${availableHeight}px`,
                   });
                 },
               }),
-              autoAlign && flip(),
               autoAlign && hide(),
             ],
             whileElementsMounted: autoUpdate,
