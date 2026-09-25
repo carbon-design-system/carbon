@@ -1,19 +1,15 @@
 // url=https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=4630-268268&mode=design&t=dSt5NCwcWajIQZR7-4
-// source=https://github.com/carbon-design-system/carbon/blob/main/packages/web-components/src/components/data-table/table.ts
-// component=cds-table
+// source=https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/DataTable/Table.tsx
+// component=Table
 
 /**
- * Copyright IBM Corp. 2026
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import figma from 'figma';
-import {
-  renderBooleanAttribute,
-  renderStringAttribute,
-} from '../template-helpers';
 
 const instance = figma.selectedInstance;
 const type = instance.getEnum('Type', {
@@ -76,37 +72,42 @@ const bodyRows = instance
 const rowItems = instance.getBoolean('Body', {
   true: bodyRows,
 });
-const expandable = type === 'expandable' || type === 'expandable-selectable';
-const checkboxSelection =
+const isExpandable = type === 'expandable' || type === 'expandable-selectable';
+const isSelectable =
   type === 'select-checkbox' || type === 'expandable-selectable';
-const radio = type === 'select-radio';
-const isSelectable = checkboxSelection || radio;
-const selectionName = checkboxSelection ? 'header' : undefined;
+const isRadio = type === 'select-radio';
+const selectAll = figma.code`<TableSelectAll id="select-all" name="select-all" onSelect={() => {}} />`;
+const headerControls = isExpandable
+  ? figma.code`<TableExpandHeader aria-label="expand row" />
+${isSelectable ? selectAll : null}`
+  : isSelectable
+    ? selectAll
+    : isRadio
+      ? figma.code`<th scope="col" />`
+      : null;
+const imports = [
+  `import { TableContainer, Table, TableHead, TableRow, TableBody${isExpandable ? ', TableExpandHeader' : ''}${isSelectable ? ', TableSelectAll' : ''} } from '@carbon/react';`,
+];
 
 export default {
-  id: 'cds-table',
-  imports: [
-    "import '@carbon/web-components/es/components/data-table/index.js'",
-  ],
-  example: figma.code`<cds-table${renderBooleanAttribute(
-    'expandable',
-    expandable
-  )}${renderBooleanAttribute(
-    'is-selectable',
-    isSelectable
-  )}${renderBooleanAttribute('radio', radio)}>
-  <cds-table-header-title slot="title">${headerItem.title}</cds-table-header-title>
-  <cds-table-header-description slot="description">${headerItem.description}</cds-table-header-description>
-  ${toolbar}
-  <cds-table-head>
-    <cds-table-header-row${renderStringAttribute(
-      'selection-name',
-      selectionName
-    )}>${headerRow.children}</cds-table-header-row>
-  </cds-table-head>
-  <cds-table-body>${rowItems}</cds-table-body>
-  ${pagination}
-  ${slot}
-</cds-table>`,
+  id: 'Table',
+  imports,
+  example: figma.code`<TableContainer${figma.helpers.react.renderProp(
+    'title',
+    headerItem.title
+  )}${figma.helpers.react.renderProp('description', headerItem.description)}>
+  ${figma.helpers.react.renderChildren(toolbar)}
+  <Table aria-label="sample table">
+    <TableHead>
+      <TableRow>
+        ${headerControls}
+        ${figma.helpers.react.renderChildren(headerRow.children)}
+      </TableRow>
+    </TableHead>
+    <TableBody>${figma.helpers.react.renderChildren(rowItems)}</TableBody>
+  </Table>
+  ${figma.helpers.react.renderChildren(pagination)}
+  ${figma.helpers.react.renderChildren(slot)}
+</TableContainer>`,
   metadata: { nestable: true },
 };
