@@ -193,6 +193,79 @@ describe('cds-code-snippet', function () {
     }
   });
 
+  it('should use fallback container attributes when `type` is not recognized', async () => {
+    const el = await fixture(html`
+      <cds-code-snippet type="other">${single}</cds-code-snippet>
+    `);
+
+    await el.updateComplete;
+
+    const snippetContainer = el.shadowRoot?.querySelector(
+      '.cds--snippet-container'
+    );
+
+    expect(snippetContainer).to.exist;
+    expect(snippetContainer.hasAttribute('role')).to.be.false;
+    expect(snippetContainer.getAttribute('aria-label')).to.equal(
+      'code-snippet'
+    );
+    expect(snippetContainer.hasAttribute('aria-readonly')).to.be.false;
+  });
+
+  it('should position tabindex, role, and ARIA attributes on container for single snippet', async () => {
+    const el = await fixture(html`
+      <cds-code-snippet type="single">${single}</cds-code-snippet>
+    `);
+
+    await el.updateComplete;
+
+    const snippetContainer = el.shadowRoot?.querySelector(
+      '.cds--snippet-container'
+    );
+    const preElement = el.shadowRoot?.querySelector('pre');
+
+    expect(snippetContainer).to.exist;
+    expect(snippetContainer.getAttribute('role')).to.equal('textbox');
+    expect(snippetContainer.getAttribute('tabindex')).to.equal('0');
+    expect(snippetContainer.getAttribute('aria-label')).to.equal(
+      'code-snippet'
+    );
+    expect(snippetContainer.getAttribute('aria-readonly')).to.equal('true');
+
+    expect(preElement).to.exist;
+    expect(preElement.hasAttribute('role')).to.be.false;
+    expect(preElement.hasAttribute('tabindex')).to.be.false;
+    expect(preElement.hasAttribute('aria-label')).to.be.false;
+    expect(preElement.hasAttribute('aria-readonly')).to.be.false;
+    expect(preElement.hasAttribute('aria-multiline')).to.be.false;
+  });
+
+  it('should position tabindex, role, and ARIA attributes on pre for multi snippet', async () => {
+    const el = await fixture(html`
+      <cds-code-snippet type="multi">${multiLong}</cds-code-snippet>
+    `);
+
+    await el.updateComplete;
+
+    const snippetContainer = el.shadowRoot?.querySelector(
+      '.cds--snippet-container'
+    );
+    const preElement = el.shadowRoot?.querySelector('pre');
+
+    expect(snippetContainer).to.exist;
+    expect(snippetContainer.hasAttribute('role')).to.be.false;
+    expect(snippetContainer.hasAttribute('tabindex')).to.be.false;
+    expect(snippetContainer.hasAttribute('aria-label')).to.be.false;
+    expect(snippetContainer.hasAttribute('aria-readonly')).to.be.false;
+
+    expect(preElement).to.exist;
+    expect(preElement.getAttribute('role')).to.equal('textbox');
+    expect(preElement.getAttribute('tabindex')).to.equal('0');
+    expect(preElement.getAttribute('aria-label')).to.equal('code-snippet');
+    expect(preElement.getAttribute('aria-readonly')).to.equal('true');
+    expect(preElement.getAttribute('aria-multiline')).to.equal('true');
+  });
+
   describe('CodeSnippet events', () => {
     it('should call the click handler when the copy button is clicked', async () => {
       let clickEventFired = false;

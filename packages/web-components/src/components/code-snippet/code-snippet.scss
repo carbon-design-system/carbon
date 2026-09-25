@@ -96,14 +96,8 @@ $css--plex: true !default;
     overflow-x: auto;
   }
 
-  pre::after {
-    position: absolute;
-    background-image: linear-gradient(to right, transparent, $layer);
-    block-size: 100%;
-    content: '';
-    inline-size: $spacing-05;
-    inset-block-start: 0;
-    inset-inline-end: 0;
+  .#{$prefix}--snippet-container:has(pre:focus) {
+    mask: none;
   }
 
   #{$prefix}-button {

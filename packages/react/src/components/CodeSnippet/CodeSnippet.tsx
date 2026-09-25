@@ -301,20 +301,28 @@ function CodeSnippet({
     }
   }
 
+  const isSingle = type === 'single';
+  const isMulti = type === 'multi';
+  const label = deprecatedAriaLabel || ariaLabel || 'code-snippet';
+
   return (
     <div {...rest} className={codeSnippetClasses}>
       <div
         ref={codeContainerRef}
-        role={type === 'single' || type === 'multi' ? 'textbox' : undefined}
-        tabIndex={
-          (type === 'single' || type === 'multi') && !disabled ? 0 : undefined
-        }
+        role={isSingle ? 'textbox' : undefined}
+        tabIndex={isSingle && !disabled ? 0 : undefined}
         className={`${prefix}--snippet-container`}
-        aria-label={deprecatedAriaLabel || ariaLabel || 'code-snippet'}
-        aria-readonly={type === 'single' || type === 'multi' ? true : undefined}
-        aria-multiline={type === 'multi' ? true : undefined}
+        aria-label={!isMulti ? label : undefined}
+        aria-readonly={isSingle ? true : undefined}
         {...containerStyle}>
-        <pre ref={codeContentRef} {...containerStyle}>
+        <pre
+          role={isMulti ? 'textbox' : undefined}
+          tabIndex={isMulti && !disabled ? 0 : undefined}
+          aria-label={isMulti ? label : undefined}
+          aria-readonly={isMulti ? true : undefined}
+          aria-multiline={isMulti ? true : undefined}
+          ref={codeContentRef}
+          {...containerStyle}>
           <code ref={innerCodeRef}>{children}</code>
         </pre>
       </div>
