@@ -123,6 +123,10 @@ $motion-duration: $duration-moderate-02;
     // Collapsed: remove top padding (was $spacing-04)
     padding-block-start: 0;
     transition: padding $motion-duration motion(entrance, expressive);
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
   }
 
   // Collapse everything except core elements (navigation-bar, header-content, excludeFromCollapse)

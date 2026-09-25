@@ -30,7 +30,15 @@ $motion-duration: $duration-moderate-02;
   max-block-size: 0;
   opacity: 0;
   pointer-events: none;
-  transition: all $motion-duration motion(entrance, expressive);
+  transition:
+    opacity $motion-duration motion(entrance, expressive),
+    max-block-size $motion-duration motion(entrance, expressive),
+    padding $motion-duration motion(entrance, expressive),
+    margin $motion-duration motion(entrance, expressive);
+
+  @media screen and (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
 }
 .#{$block-class}--has-ai-label::part(dialog) {
   border: 1px solid transparent !important; /* stylelint-disable-line declaration-no-important */
@@ -135,6 +143,17 @@ $motion-duration: $duration-moderate-02;
     transition: transform $duration-moderate-02 motion(entrance, expressive);
 
     @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+}
+
+// Carbon's cds-modal has its own opacity transition on exit (non-visible state)
+// that has no prefers-reduced-motion guard upstream. Override it here so the
+// tearsheet host-level opacity fade is also suppressed on exit.
+:host(#{$prefix}-tearsheet:not([open])) {
+  @media screen and (prefers-reduced-motion: reduce) {
+    #{$prefix}-modal {
       transition: none;
     }
   }
