@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import styles from './fluid-text-area-story.scss?inline';
+
 import React from 'react';
 
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
@@ -13,13 +15,21 @@ import FluidTextArea from '../FluidTextArea';
 import FluidTextAreaSkeleton from './FluidTextArea.Skeleton';
 import { Toggletip, ToggletipButton, ToggletipContent } from '../Toggletip';
 import { Information } from '@carbon/icons-react';
-import './fluid-text-area-story.scss';
 import mdx from './FluidTextArea.mdx';
 
 export default {
   title: 'Components/Fluid Components/FluidTextArea',
   component: FluidTextArea,
+  decorators: [
+    (Story) => (
+      <>
+        <style>{styles}</style>
+        <Story />
+      </>
+    ),
+  ],
   parameters: {
+    styles,
     docs: {
       page: mdx,
     },
@@ -144,11 +154,14 @@ const sharedArgs = {
   warnText: 'This is a warning message.',
 };
 
-export const Default = ({ defaultWidth, ...textAreaArgs }) => (
-  <div style={{ width: defaultWidth }}>
-    <FluidTextArea {...textAreaArgs} />
-  </div>
-);
+export const Default = (args) => {
+  const { defaultWidth, ...textAreaArgs } = args;
+  return (
+    <div style={{ width: defaultWidth }}>
+      <FluidTextArea {...textAreaArgs} />
+    </div>
+  );
+};
 
 Default.args = {
   ...sharedArgs,
@@ -158,15 +171,18 @@ Default.argTypes = {
   ...sharedArgTypes,
 };
 
-export const DefaultWithLayers = ({ defaultWidth, ...textAreaArgs }) => (
-  <WithLayer>
-    {(layer) => (
-      <div style={{ width: defaultWidth }}>
-        <FluidTextArea {...textAreaArgs} id={`text-area-${layer}`} />
-      </div>
-    )}
-  </WithLayer>
-);
+export const DefaultWithLayers = (args) => {
+  const { defaultWidth, ...textAreaArgs } = args;
+  return (
+    <WithLayer>
+      {(layer) => (
+        <div style={{ width: defaultWidth }}>
+          <FluidTextArea {...textAreaArgs} id={`text-area-${layer}`} />
+        </div>
+      )}
+    </WithLayer>
+  );
+};
 
 DefaultWithLayers.args = {
   ...sharedArgs,
@@ -176,26 +192,27 @@ DefaultWithLayers.argTypes = {
   ...sharedArgTypes,
 };
 
-const LabelToggletip = () => (
-  // Keep the toggletip outside `labelText`; interactive content is invalid in labels.
-  <span className="fluid-text-area-story__toggletip">
-    <Toggletip align="top-left">
-      <ToggletipButton label="Show information">
-        <Information />
-      </ToggletipButton>
-      <ToggletipContent>
-        <p>Additional field information here.</p>
-      </ToggletipContent>
-    </Toggletip>
-  </span>
-);
-
-export const DefaultWithToggletip = ({ defaultWidth, ...textAreaArgs }) => (
-  <div className="fluid-text-area-story" style={{ width: defaultWidth }}>
-    <LabelToggletip />
-    <FluidTextArea {...textAreaArgs} labelText="Text Area label" />
-  </div>
-);
+export const DefaultWithToggletip = (args) => {
+  const { defaultWidth, ...textAreaArgs } = args;
+  const labelToggletip = (
+    <span className="fluid-text-area-story__toggletip">
+      <Toggletip align="top-left">
+        <ToggletipButton label="Show information">
+          <Information />
+        </ToggletipButton>
+        <ToggletipContent>
+          <p>Additional field information here.</p>
+        </ToggletipContent>
+      </Toggletip>
+    </span>
+  );
+  return (
+    <div className="fluid-text-area-story" style={{ width: defaultWidth }}>
+      {labelToggletip}
+      <FluidTextArea {...textAreaArgs} labelText="Text Area label" />
+    </div>
+  );
+};
 
 DefaultWithToggletip.args = {
   ...sharedArgs,
@@ -211,11 +228,14 @@ DefaultWithToggletip.parameters = {
   },
 };
 
-export const Skeleton = ({ defaultWidth }) => (
-  <div style={{ width: defaultWidth }}>
-    <FluidTextAreaSkeleton />
-  </div>
-);
+export const Skeleton = (args) => {
+  const { defaultWidth } = args;
+  return (
+    <div style={{ width: defaultWidth }}>
+      <FluidTextAreaSkeleton />
+    </div>
+  );
+};
 
 Skeleton.args = { defaultWidth: sharedArgs.defaultWidth };
 Skeleton.argTypes = { defaultWidth: sharedArgTypes.defaultWidth };

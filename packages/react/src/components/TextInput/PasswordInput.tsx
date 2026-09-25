@@ -24,7 +24,7 @@ import { PopoverAlignment } from '../Popover';
 import { deprecate } from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { hasHelperText } from '../../internal/hasHelperText';
-import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
+import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
 
 type ExcludedAttributes = 'size';
 
@@ -304,7 +304,7 @@ const PasswordInput = forwardRef<unknown, PasswordInputProps>(
         {labelText}
       </label>
     );
-    useNoInteractiveChildren(
+    useNoInteractiveChildrenForLabel(
       labelRef,
       'The PasswordInput component `labelText` prop must have no interactive content'
     );
