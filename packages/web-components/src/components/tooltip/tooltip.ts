@@ -164,7 +164,11 @@ class CDSTooltip extends HostListenerMixin(CDSPopover) {
     if (event.key === 'Tab') {
       this.lastInteractionWasKeyboard = true;
     }
-    if (event.key === ' ' || event.key === 'Enter' || event.key === 'Escape') {
+    if (event.key === 'Escape') {
+      this.lastInteractionWasKeyboard = true;
+      this._handleHoverOut();
+    }
+    if (event.key === ' ' || event.key === 'Enter') {
       this.lastInteractionWasKeyboard = true;
       if (this.closeOnActivation) {
         this._handleHoverOut();
