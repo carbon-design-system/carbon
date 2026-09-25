@@ -1,3 +1,7 @@
+// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=3897-51336&t=SbIuH3RAJeFPjXmN-4
+// source=https://github.com/carbon-design-system/carbon/blob/main/packages/web-components/src/components/form/form.ts
+// component=cds-form
+
 /**
  * Copyright IBM Corp. 2026
  *
@@ -5,16 +9,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import figma, { html } from '@figma/code-connect/html';
+import figma from 'figma';
 
-figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=3897-51336&t=SbIuH3RAJeFPjXmN-4',
-  {
-    props: {
-      children: figma.children('*'),
-    },
-    example: (props) =>
-      html`<cds-form aria-label="sample form"> ${props.children} </cds-form>`,
-    imports: ["import '@carbon/web-components/es/components/form/index.js'"],
-  }
-);
+const children = figma.selectedInstance
+  .findConnectedInstances((child) => child.hasCodeConnect())
+  .map((child) => child.executeTemplate().example);
+
+export default {
+  id: 'cds-form',
+  imports: ["import '@carbon/web-components/es/components/form/index.js'"],
+  example: figma.code`<cds-form aria-label="sample form">${children}</cds-form>`,
+  metadata: { nestable: true },
+};

@@ -1,3 +1,7 @@
+// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=4487-180741&t=T1B0YRZ6hK2IkVMC-4
+// source=https://github.com/carbon-design-system/carbon/blob/main/packages/web-components/src/components/data-table/table-toolbar.ts
+// component=cds-table-toolbar
+
 /**
  * Copyright IBM Corp. 2026
  *
@@ -5,13 +9,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import figma, { html } from '@figma/code-connect/html';
+import figma from 'figma';
 
-figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=4487-180741&t=T1B0YRZ6hK2IkVMC-4',
-  {
-    example: () =>
-      html`<cds-table-toolbar slot="toolbar">
+export default {
+  id: 'cds-table-toolbar',
+  imports: [
+    "import '@carbon/web-components/es/components/data-table/index.js'",
+    "import '@carbon/web-components/es/components/overflow-menu/index.js'",
+    "import '@carbon/web-components/es/components/button/index.js'",
+  ],
+  example: figma.code`<cds-table-toolbar slot="toolbar">
         <cds-table-toolbar-content>
           <cds-table-toolbar-search
             placeholder="Filter table"></cds-table-toolbar-search>
@@ -39,10 +46,5 @@ figma.connect(
           <cds-button>Primary button</cds-button>
         </cds-table-toolbar-content>
       </cds-table-toolbar>`,
-    imports: [
-      "import '@carbon/web-components/es/components/data-table/index.js'",
-      "import '@carbon/web-components/es/components/overflow-menu/index.js'",
-      "import '@carbon/web-components/es/components/button/index.js'",
-    ],
-  }
-);
+  metadata: { nestable: true },
+};
