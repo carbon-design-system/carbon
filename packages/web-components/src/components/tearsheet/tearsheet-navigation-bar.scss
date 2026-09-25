@@ -1,0 +1,25 @@
+/**
+ * @license
+ *
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use './tearsheet';
+
+$block-class: #{$prefix}--tearsheet;
+
+:host {
+  @extend .#{$block-class}__navigation-bar !optional;
+}
+
+:host ::slotted([slot='scroller']) {
+  @extend .#{$block-class}__scroller-container !optional;
+}
+
+:host ::slotted(#{$prefix}-tabs) {
+  margin-inline-start: -$spacing-05;
+}

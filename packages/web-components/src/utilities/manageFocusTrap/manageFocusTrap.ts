@@ -132,6 +132,18 @@ export const unregisterFocusableContainers = (
  *   clearFocusableContainers();
  * }
  */
+/**
+ * Returns the registered focusable containers for a given uniqueId (or all containers
+ * when no uniqueId is supplied). Callers can use the returned array to query elements
+ * that live behind shadow DOM boundaries.
+ */
+export const getFocusableContainers = (
+  uniqueId?: string
+): Array<HTMLElement | ShadowRoot> => {
+  const id = uniqueId || DEFAULT_KEY;
+  return containers[id] ? [...containers[id]] : [];
+};
+
 export const clearFocusableContainers = (uniqueId?: string) => {
   if (uniqueId) {
     // eslint-disable-next-line @typescript-eslint/no-dynamic-delete

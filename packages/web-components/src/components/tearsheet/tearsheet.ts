@@ -1,779 +1,641 @@
 /**
- * Copyright IBM Corp. 2023, 2026
+ * @license
+ *
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { LitElement, html } from 'lit';
-import {
-  property,
-  query,
-  queryAssignedElements,
-  state,
-} from 'lit/decorators.js';
+import { LitElement, PropertyValues, html } from 'lit';
+import { property, state, query } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-import HostListener from '../../globals/decorators/host-listener';
-import HostListenerMixin from '../../globals/mixins/host-listener';
-import { selectorTabbable } from '../../globals/settings';
+import styles from './tearsheet.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-import '../button/index';
-import '../layer/index';
-import '../button/button-set-base';
-import '../modal/index';
+import CDSTearsheetStack from './tearsheet-stack';
+import { classMap } from 'lit-html/directives/class-map.js';
+import { MatchMediaController } from '../../globals/js/utils/match-media-controller';
+import { breakpoints } from '@carbon/layout';
 import {
-  TEARSHEET_INFLUENCER_PLACEMENT,
-  TEARSHEET_INFLUENCER_WIDTH,
-  TEARSHEET_WIDTH,
-} from './defs';
-
-export {
-  TEARSHEET_INFLUENCER_PLACEMENT,
-  TEARSHEET_INFLUENCER_WIDTH,
-  TEARSHEET_WIDTH,
-};
-
-const maxStackDepth = 3;
-type StackHandler = (newDepth: number, newPosition: number) => void;
-interface StackState {
-  open: StackHandler[];
-  all: StackHandler[];
-}
-
-const PRECEDING =
-  Node.DOCUMENT_POSITION_PRECEDING | Node.DOCUMENT_POSITION_CONTAINS;
-
-const FOLLOWING =
-  Node.DOCUMENT_POSITION_FOLLOWING | Node.DOCUMENT_POSITION_CONTAINED_BY;
-
-const blockClass = `${prefix}--tearsheet`;
-const blockClassModalHeader = `${prefix}--modal-header`;
-const blockClassActionSet = `${prefix}--action-set`;
+  blockClass,
+  tearsheetSignal,
+  updateTearsheetSignals,
+} from './tearsheet-signal';
+import { SignalWatcher } from '@lit-labs/signals';
+import HostListenerMixin from '../../globals/mixins/host-listener';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import { stackManager } from './stack-signal';
+import {
+  trapFocus,
+  clearFocusableContainers,
+} from '../../utilities/manageFocusTrap/manageFocusTrap';
 
 /**
- * Tries to focus on the given elements and bails out if one of them is successful.
+ * Tearsheet component - A slide-out panel for displaying detailed content.
  *
- * @param elems The elements.
- * @param reverse `true` to go through the list in reverse order.
- * @returns `true` if one of the attempts is successful, `false` otherwise.
- */
-function tryFocusElems(elems: NodeListOf<HTMLElement>, reverse: boolean) {
-  if (!reverse) {
-    for (let i = 0; i < elems.length; ++i) {
-      const elem = elems[i];
-      elem.focus();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-      if (elem.ownerDocument!.activeElement === elem) {
-        return true;
-      }
-    }
-  } else {
-    for (let i = elems.length - 1; i >= 0; --i) {
-      const elem = elems[i];
-      elem.focus();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-      if (elem.ownerDocument!.activeElement === elem) {
-        return true;
-      }
-    }
-  }
-  return false;
-}
-
-/**
- * Tearsheet.
- *
- * @deprecated Use Carbon for IBM Products `tearsheet` component.
- *   This component has been deprecated in `@carbon/web-components` and will instead be maintained
- *   in the Carbon for IBM Products library:
- *   https://github.com/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components
  * @element cds-tearsheet
- * @csspart dialog The dialog.
- * @fires cds-tearsheet-beingclosed
- *   The custom event fired before this tearsheet is being closed upon a user gesture.
- *   Cancellation of this event stops the user-initiated action of closing this tearsheet.
- * @fires cds-tearsheet-closed - The custom event fired after this tearsheet is closed upon a user gesture.
+ * @slot header - The header content of the tearsheet
+ * @slot influencer - Optional left sidebar content (wide variant only)
+ * @slot body - Main body content
+ * @slot footer - Footer content with actions
+ * @fires cds-tearsheet-beingclosed - Fired when the tearsheet is about to close
+ * @fires cds-tearsheet-closed - Fired after the tearsheet has closed
+ * @fires cds-tearsheet-collapse-change - Fired when the header collapse state changes.
+ *   `event.detail.collapsed` is `true` when collapsing, `false` when expanding.
  */
 @customElement(`${prefix}-tearsheet`)
-class CDSTearsheet extends HostListenerMixin(LitElement) {
+class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
   /**
-   * The element that had focus before this tearsheet gets open.
+   * Specifies whether the tearsheet is currently open.
    */
-  private _launcher: Element | null = null;
-
-  /**
-   * Node to track focus going outside of tearsheet content.
-   */
-  @query('#start-sentinel')
-  private _startSentinelNode!: HTMLAnchorElement;
+  @property({ type: Boolean, reflect: true })
+  open: boolean = false;
 
   /**
-   * Node to track focus going outside of tearsheet content.
+   * User can pass any class names that will be added to the modal container
    */
-  @query('#end-sentinel')
-  private _endSentinelNode!: HTMLAnchorElement;
+  @property({ attribute: 'container-class-name' })
+  containerClassName: string = '';
 
   /**
-   * Node to track tearsheet.
+   * Default influencer takes 256px, this allows override eg: 300px, 20rem
    */
-  @query(`.${blockClass}__container`)
-  private _tearsheet!: HTMLDivElement;
-
-  @queryAssignedElements({ slot: 'actions', selector: `${prefix}-button` })
-  private _actions!: Array<HTMLElement>;
-
-  @state()
-  _actionsCount = 0;
-
-  @state()
-  _hasHeaderActions = false;
-
-  @state()
-  _hasLabel = false;
-
-  @state()
-  _hasSlug = false;
-
-  @state()
-  _hasTitle = false;
-
-  @state()
-  _hasDescription = false;
-
-  @state()
-  _hasInfluencerLeft = false;
-
-  @state()
-  _hasInfluencerRight = false;
-
-  @state()
-  _isOpen = false;
-
-  @state()
-  _hasHeaderNavigation = false;
+  @property({ attribute: 'influencer-width' })
+  influencerWidth: string = '';
 
   /**
-   * Handles `click` event on this element.
-   *
-   * @param event The event.
+   * Default summary content takes 256px, this allows override eg: 300px, 20rem
    */
-  @HostListener('click')
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
-  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
-  private _handleClick = (event: MouseEvent) => {
-    if (
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-      event.composedPath().indexOf(this.shadowRoot!) < 0 &&
-      !this.preventCloseOnClickOutside
-    ) {
-      this._handleUserInitiatedClose(event.target);
+  @property({ attribute: 'summary-content-width' })
+  summaryContentWidth: string = '';
+
+  /**
+   * Defines the gap from top of the viewport. Defaulted to 3rem
+   */
+  @property({ attribute: 'vertical-gap' })
+  verticalGap: string = '';
+
+  /**
+   * Default to wide variant. Pass in narrow for narrow tearsheet
+   */
+  @property({ reflect: true })
+  variant: 'wide' | 'narrow' = 'wide';
+
+  /**
+   * Specify the CSS selectors that match the floating menus (comma-separated)
+   */
+  @property({ attribute: 'selectors-floating-menus' })
+  selectorsFloatingMenus: string = '';
+
+  /**
+   * Specify a CSS selector that matches the DOM element that should be focused when the Modal opens
+   */
+  @property({ attribute: 'selector-primary-focus' })
+  selectorPrimaryFocus: string = '';
+
+  /**
+   * Prevents the modal from closing when clicking outside
+   */
+  @property({ type: Boolean, attribute: 'prevent-close-on-click-outside' })
+  preventCloseOnClickOutside: boolean = false;
+
+  /**
+   * aria-label for the tearsheet dialog
+   */
+  @property({ reflect: true, attribute: 'aria-label' })
+  ariaLabel: string = '';
+
+  /**
+   * Unique ID for this tearsheet instance
+   */
+  private uniqueId: string = `tearsheet-${Math.random().toString(36).substr(2, 9)}`;
+
+  /**
+   * Internal flag to track if stacking is enabled (via wrapper)
+   */
+  private _stackingEnabled: boolean = false;
+
+  /**
+   * Internal state for tracking if the tearsheet is in small screen mode
+   */
+  @state()
+  private isSm: boolean = false;
+
+  /**
+   * Query the modal body element
+   */
+  @query(`${prefix}-modal-body`)
+  private modalBodyElement?: HTMLElement;
+
+  private _trapFocusAPI: { cleanup: () => void } | null = null;
+  private _wasOpen = false;
+  private smMediaQuery = `(max-width: ${breakpoints.md.width})`;
+  private isSmallDevice = new MatchMediaController(
+    this,
+    this.smMediaQuery,
+    false
+  );
+  /**
+   * Checks if the tearsheet has a decorator (AI label or other).
+   * Reads from the shared signal, populated by cds-tearsheet-header-content
+   * via _handleDecoratorChange — no tag-name querySelector needed.
+   */
+  private get hasDecorator(): boolean {
+    return tearsheetSignal.get().hasDecorator ?? false;
+  }
+
+  /**
+   * Checks if the tearsheet has an AI label decorator.
+   * Reads from the shared signal — no tag-name querySelector needed.
+   */
+  private get hasAILabel(): boolean {
+    return tearsheetSignal.get().hasAILabel;
+  }
+
+  connectedCallback(): void {
+    super.connectedCallback();
+
+    // Listen for stack wrapper events first
+    this.addEventListener(
+      `${prefix}-tearsheet-stack-connected`,
+      this.handleStackConnected as EventListener
+    );
+    this.addEventListener(
+      `${prefix}-tearsheet-stack-step-size-changed`,
+      this.handleStackStepSizeChanged as EventListener
+    );
+
+    // Check if this tearsheet is wrapped in a stack provider
+    // This handles the case where the stack wrapper connected before this tearsheet
+    this._checkForStackWrapper();
+
+    // Set visibility class
+    if (this.open) {
+      this.classList.add('is-visible');
+    } else {
+      this.classList.remove('is-visible');
     }
-  };
+
+    // Listen for close button click from header
+    this.addEventListener(
+      `${prefix}-tearsheet-header-close-button-clicked`,
+      this.handleHeaderCloseButtonClick as EventListener
+    );
+
+    // Listen for internal collapse-change from header; re-dispatch as public event
+    this.addEventListener(
+      `${prefix}-tearsheet-header-collapse-change`,
+      this.handleHeaderCollapseChange as EventListener
+    );
+  }
+
+  protected override firstUpdated(): void {
+    this.updateCSSCustomProperties();
+    this.isSm = this.isSmallDevice?.matches || this.variant === 'narrow';
+    // Initialize all signals on first update, including uniqueId so children can register
+    updateTearsheetSignals({
+      variant: this.variant,
+      isSm: this.isSm,
+      open: this.open,
+      hasAILabel: this.hasAILabel,
+      uniqueId: this.uniqueId,
+      ...this._readHeaderProps(),
+      onClose: () => this.closeTearsheet(),
+    });
+  }
 
   /**
-   * Handles `blur` event on this element.
-   *
-   * @param event The event.
-   * @param event.target The event target.
-   * @param event.relatedTarget The event relatedTarget.
+   * Read close-button props from the shared signal.
+   * cds-tearsheet-header pushes these via updateTearsheetSignals on connectedCallback
+   * and on every property change — no tag-name querySelector needed.
    */
-  @HostListener('shadowRoot:focusout')
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
-  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
-  private _handleBlur = async ({ target, relatedTarget }: FocusEvent) => {
-    if (!this._topOfStack()) {
+  private _readHeaderProps(): {
+    closeIconDescription: string;
+    hideCloseButton: boolean;
+  } {
+    const { closeIconDescription, hideCloseButton } = tearsheetSignal.get();
+    return { closeIconDescription, hideCloseButton };
+  }
+
+  protected updated(_changedProperties: PropertyValues): void {
+    this.updateIsSmState();
+    this.handleOpenPropertyChange(_changedProperties);
+    this.updateCSSPropertiesIfNeeded(_changedProperties);
+
+    if (_changedProperties.has('variant')) {
+      updateTearsheetSignals({ variant: this.variant });
+    }
+
+    if (_changedProperties.has('isSm')) {
+      this.updateInfluencerVisibility();
+    }
+
+    this.updateStackPropertiesIfNeeded();
+  }
+
+  private updateIsSmState(): void {
+    const previousIsSm = this.isSm;
+    this.isSm = this.isSmallDevice?.matches || this.variant === 'narrow';
+
+    if (this.isSm !== previousIsSm) {
+      updateTearsheetSignals({ isSm: this.isSm });
+    }
+  }
+
+  private handleOpenPropertyChange(_changedProperties: PropertyValues): void {
+    if (!_changedProperties.has('open')) {
+      return;
+    }
+    const wasOpen = this._wasOpen;
+    const isOpen = this.open;
+
+    updateTearsheetSignals({ open: this.open });
+
+    // Only register with stack manager if stacking is enabled
+    if (this._stackingEnabled && this.modalBodyElement) {
+      stackManager.notifyStack(this.uniqueId, this.open, this.modalBodyElement);
+    }
+
+    this.classList.toggle('is-visible', this.open);
+
+    // Only update stack properties if stacking is enabled
+    if (this._stackingEnabled) {
+      this.updateStackProperties();
+    }
+
+    // Initialize focus trap when tearsheet opens
+    if (!wasOpen && isOpen) {
+      // `focusableContainers` holds the containers where we can query DOM elements.
+      // Our strategy here is to let child/slotted components register their containers,
+      // which are then passed to `trapFocus`. This allows the utility to query elements
+      // directly without being blocked by shadow DOM boundaries.
+
+      // Update signal with current uniqueId and selectorPrimaryFocus so children can register
+      updateTearsheetSignals({
+        uniqueId: this.uniqueId,
+        selectorPrimaryFocus: this.selectorPrimaryFocus,
+      });
+
+      // Set up focus trap for Tab/Shift+Tab cycling.
+      // Initial focus is handled by cds-tearsheet-header-content._focusCloseButtonOnOpen()
+      // which runs in its own updated() lifecycle — no timing race.
+      requestAnimationFrame(() => {
+        this._trapFocusAPI = trapFocus(this as HTMLElement, this.uniqueId);
+      });
+    }
+
+    this._wasOpen = isOpen;
+    // Focus-return to the launcher is handled automatically by the inner <cds-modal>
+    // via its _launcher capture (document.activeElement at open time). No manual
+    // launcherButtonRef wiring needed from the consumer.
+  }
+
+  private updateCSSPropertiesIfNeeded(
+    _changedProperties: PropertyValues
+  ): void {
+    const hasRelevantChanges =
+      _changedProperties.has('influencerWidth') ||
+      _changedProperties.has('summaryContentWidth') ||
+      _changedProperties.has('verticalGap');
+
+    if (hasRelevantChanges) {
+      this.updateCSSCustomProperties();
+    }
+  }
+
+  private updateStackPropertiesIfNeeded(): void {
+    // Only update if stacking is enabled
+    if (!this._stackingEnabled) {
       return;
     }
 
-    const {
-      // condensedActions,
-      open,
-      _startSentinelNode: startSentinelNode,
-      _endSentinelNode: endSentinelNode,
-    } = this;
-
-    const oldContains = target !== this && this.contains(target as Node);
-    const currentContains =
-      relatedTarget !== this &&
-      (this.contains(relatedTarget as Node) ||
-        (this.shadowRoot?.contains(relatedTarget as Node) &&
-          relatedTarget !== (startSentinelNode as Node) &&
-          relatedTarget !== (endSentinelNode as Node)));
-
-    // Performs focus wrapping if _all_ of the following is met:
-    // * This tearsheet is open
-    // * The viewport still has focus
-    // * Tearsheet body used to have focus but no longer has focus
-    const { selectorTabbable: selectorTabbableForTearsheet } = this
-      .constructor as typeof CDSTearsheet;
-
-    if (open && relatedTarget && oldContains && !currentContains) {
-      const comparisonResult = (target as Node).compareDocumentPosition(
-        relatedTarget as Node
-      );
-
-      if (relatedTarget === startSentinelNode || comparisonResult & PRECEDING) {
-        await (this.constructor as typeof CDSTearsheet)._delay();
-        if (
-          !tryFocusElems(
-            this.querySelectorAll(selectorTabbableForTearsheet),
-            true
-          ) &&
-          relatedTarget !== this
-        ) {
-          this.focus();
-        }
-      } else if (
-        relatedTarget === endSentinelNode ||
-        comparisonResult & FOLLOWING
-      ) {
-        await (this.constructor as typeof CDSTearsheet)._delay();
-        if (
-          !tryFocusElems(
-            this.querySelectorAll(selectorTabbableForTearsheet),
-            true
-          )
-        ) {
-          this.focus();
-        }
-      }
-    }
-  };
-
-  @HostListener('document:keydown')
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
-  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
-  private _handleKeydown = ({ key, target }: KeyboardEvent) => {
-    if ((key === 'Esc' || key === 'Escape') && this._topOfStack()) {
-      this._handleUserInitiatedClose(target);
-    }
-  };
-
-  private _checkSetHasSlot(e: Event) {
-    const t = e.target as HTMLSlotElement;
-    const dataPostfix = t.getAttribute('data-postfix');
-    const postfix = dataPostfix ? `-${dataPostfix}` : '';
-
-    // snake `ab-cd-ef` to _has camel case _hasAbCdEf
-    const hasName = `_has-${t.name}${postfix}`.replace(/-./g, (c) =>
-      c[1].toUpperCase()
-    );
-    this[hasName] = (t?.assignedElements()?.length ?? 0) > 0;
-  }
-
-  /**
-   * Handles `click` event on the modal container.
-   *
-   * @param event The event.
-   */
-  private _handleClickContainer(event: MouseEvent) {
-    if (
-      (event.target as Element).matches(
-        (this.constructor as typeof CDSTearsheet).selectorCloseButton
-      )
-    ) {
-      this._handleUserInitiatedClose(event.target);
+    const stackState = stackManager.state;
+    if (stackState.stack.length > 0) {
+      this.updateStackProperties();
     }
   }
 
   /**
-   * Handles user-initiated close request of this tearsheet.
-   *
-   * @param triggeredBy The element that triggered this close request.
+   * Update CSS custom properties for stacking
    */
-  private _handleUserInitiatedClose(triggeredBy: EventTarget | null) {
-    if (this.open) {
-      const init = {
-        bubbles: true,
-        cancelable: true,
-        composed: true,
-        detail: {
-          triggeredBy,
-        },
-      };
-      if (
-        this.dispatchEvent(
-          new CustomEvent(
-            (this.constructor as typeof CDSTearsheet).eventBeforeClose,
-            init
-          )
-        )
-      ) {
-        this.open = false;
-        this.dispatchEvent(
-          new CustomEvent(
-            (this.constructor as typeof CDSTearsheet).eventClose,
-            init
-          )
-        );
-      }
-    }
-  }
+  private updateStackProperties(): void {
+    const stackState = stackManager.state;
+    const depth = stackManager.getDepth(this.uniqueId);
+    const scaleFactor = stackManager.getScaleFactor(this.uniqueId);
+    const blockSizeChange = stackManager.getBlockSizeChange(this.uniqueId);
 
-  private _handleSlugChange(e: Event) {
-    const childItems = (e.target as HTMLSlotElement).assignedElements();
-
-    this._hasSlug = childItems.length > 0;
-    if (this._hasSlug) {
-      childItems[0].setAttribute('size', 'lg');
-      this.setAttribute('slug', '');
+    // Manage --stack-activated class on host element
+    if (stackState.stack.length > 1) {
+      this.classList.add(`${blockClass}--stack-activated`);
     } else {
-      this.removeAttribute('slug');
-    }
-  }
-
-  /**
-   * Optional aria label for the tearsheet
-   */
-  @property({ reflect: true, attribute: 'aria-label' })
-  ariaLabel = '';
-
-  /**
-   * Sets the close button icon description
-   */
-  @property({ reflect: true, attribute: 'close-icon-description' })
-  closeIconDescription = 'Close';
-
-  /**
-   * Enable a close icon ('x') in the header area of the tearsheet. By default,
-   * (when this prop is omitted, or undefined or null) a tearsheet does not
-   * display a close icon if there are navigation actions ("transactional
-   * tearsheet") and displays one if there are no navigation actions ("passive
-   * tearsheet"), and that behavior can be overridden if required by setting
-   * this prop to either true or false.
-   */
-
-  @property({ reflect: true, type: Boolean, attribute: 'has-close-icon' })
-  hasCloseIcon = false;
-
-  /**
-   * The placement of the influencer section, 'left' or 'right'.
-   */
-  @property({ reflect: true, attribute: 'influencer-placement' })
-  influencerPlacement = TEARSHEET_INFLUENCER_PLACEMENT.RIGHT;
-
-  /**
-   * The width of the influencer section, 'narrow' or 'wide'.
-   */
-  @property({ reflect: true, attribute: 'influencer-width' })
-  influencerWidth = TEARSHEET_INFLUENCER_WIDTH.NARROW;
-
-  /**
-   * `true` if the tearsheet should be open.
-   */
-  @property({ type: Boolean, reflect: true })
-  open = false;
-
-  /**
-   * Prevent closing on click outside of tearsheet
-   */
-  @property({ type: Boolean, attribute: 'prevent-close-on-click-outside' })
-  preventCloseOnClickOutside = false;
-
-  /**
-   * The initial location of focus in the side panel
-   */
-  @property({
-    reflect: true,
-    attribute: 'selector-initial-focus',
-    type: String,
-  })
-  selectorInitialFocus;
-
-  /**
-   * The width of the influencer section, 'narrow' or 'wide'.
-   */
-  @property({ reflect: true, attribute: 'width' })
-  width = TEARSHEET_WIDTH.NARROW;
-
-  private _checkUpdateActionSizes = () => {
-    if (this._actions) {
-      for (let i = 0; i < this._actions.length; i++) {
-        this._actions[i].setAttribute(
-          'size',
-          this.width === 'wide' ? '2xl' : 'xl'
-        );
-      }
-    }
-  };
-
-  private _maxActions = 4;
-  private _handleActionsChange(e: Event) {
-    const target = e.target as HTMLSlotElement;
-    const actions = target?.assignedElements();
-    const actionsCount = actions?.length ?? 0;
-
-    if (actionsCount > this._maxActions) {
-      this._actionsCount = this._maxActions;
-      // eslint-disable-next-line no-console
-      console.error(`Too many tearsheet actions, max ${this._maxActions}.`);
-    } else {
-      this._actionsCount = actionsCount;
+      this.classList.remove(`${blockClass}--stack-activated`);
     }
 
-    for (let i = 0; i < actions?.length; i++) {
-      if (i + 1 > this._maxActions) {
-        // hide excessive tearsheet actions
-        actions[i].setAttribute('hidden', 'true');
-        actions[i].setAttribute(
-          `data-actions-limit-${this._maxActions}-exceeded`,
-          `${actions.length}`
-        );
-      } else {
-        actions[i].classList.add(`${blockClassActionSet}__action-button`);
-      }
+    if (depth !== -1) {
+      this.style.setProperty('--stack-depth', depth.toString());
+      this.style.setProperty('--scale-factor', scaleFactor.toString());
+      this.style.setProperty('--block-size-change', blockSizeChange);
     }
-    this._checkUpdateActionSizes();
-  }
-
-  // Data structure to communicate the state of tearsheet stacking
-  // (i.e. when more than one tearsheet is open). Each tearsheet supplies a
-  // handler to be called whenever the stacking of the tearsheets changes, which
-  // happens when a tearsheet opens or closes. The 'open' array contains one
-  // handler per OPEN tearsheet ordered from lowest to highest in visual z-order.
-  // The 'all' array contains all the handlers for open and closed tearsheets.
-
-  @state()
-  _stackDepth = -1;
-
-  @state()
-  _stackPosition = -1;
-
-  private _topOfStack = () => {
-    return this._stackDepth === this._stackPosition;
-  };
-
-  private static _stack: StackState = {
-    open: [],
-    all: [],
-  };
-  private _notifyStack = () => {
-    CDSTearsheet._stack.all.forEach(
-      (handler: (stackSize: number, position: number) => void) => {
-        handler(
-          Math.min(CDSTearsheet._stack.open.length, maxStackDepth),
-          CDSTearsheet._stack.open.indexOf(handler) + 1
-        );
-      }
-    );
-  };
-
-  private _handleStackChange: StackHandler = (newDepth, newPosition) => {
-    this._stackDepth = newDepth;
-    this._stackPosition = newPosition;
-    if (this._stackDepth > 1 && this._stackPosition > 0) {
-      this.setAttribute('stack-position', `${newPosition}`);
-      this.setAttribute('stack-depth', `${this._stackDepth}`);
-    } else {
-      this.removeAttribute('stack-position');
-      this.removeAttribute('stack-depth');
-    }
-  };
-
-  private _updateStack = () => {
-    if (this.open) {
-      CDSTearsheet._stack.open.push(this._handleStackChange);
-    } else {
-      const indexOpen = CDSTearsheet._stack.open.indexOf(
-        this._handleStackChange
-      );
-      if (indexOpen >= 0) {
-        CDSTearsheet._stack.open.splice(indexOpen, 1);
-      }
-    }
-    this._notifyStack();
-  };
-
-  actionsMultiple = ['', 'single', 'double', 'triple'][this._actionsCount];
-
-  connectedCallback() {
-    super.connectedCallback();
-
-    CDSTearsheet._stack.all.push(this._handleStackChange);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
 
-    const indexAll = CDSTearsheet._stack.all.indexOf(this._handleStackChange);
-    CDSTearsheet._stack.all.splice(indexAll, 1);
-    const indexOpen = CDSTearsheet._stack.all.indexOf(this._handleStackChange);
-    CDSTearsheet._stack.open.splice(indexOpen, 1);
+    // Cleanup focus trap and clear all registered containers
+    this._trapFocusAPI?.cleanup();
+
+    clearFocusableContainers();
+
+    // Remove event listeners
+    this.removeEventListener(
+      `${prefix}-tearsheet-header-close-button-clicked`,
+      this.handleHeaderCloseButtonClick as EventListener
+    );
+    this.removeEventListener(
+      `${prefix}-tearsheet-stack-connected`,
+      this.handleStackConnected as EventListener
+    );
+    this.removeEventListener(
+      `${prefix}-tearsheet-stack-step-size-changed`,
+      this.handleStackStepSizeChanged as EventListener
+    );
+
+    // Notify stack manager that this tearsheet is closing (only if stacking was enabled)
+    if (this._stackingEnabled) {
+      stackManager.notifyStack(this.uniqueId, false, null);
+    }
+
+    // Clean up CSS custom properties
+    if (this.influencerWidth) {
+      document.documentElement.style.removeProperty(
+        '--tearsheet-influencer-width'
+      );
+    }
+    if (this.summaryContentWidth) {
+      document.documentElement.style.removeProperty(
+        '--tearsheet-summary-content-width'
+      );
+    }
+    if (this.verticalGap) {
+      document.documentElement.style.removeProperty('--tearsheet-vertical-gap');
+    }
   }
 
-  render() {
-    const {
-      closeIconDescription,
-      influencerPlacement,
-      influencerWidth,
-      open,
-      width,
-    } = this;
-
-    const actionsMultiple = ['', 'single', 'double', 'triple'][
-      this._actionsCount
-    ];
-
-    const headerFieldsTemplate = html`<div
-      class=${`${blockClass}__header-fields`}>
-      <h2 class=${`${blockClassModalHeader}__label`} ?hidden=${!this._hasLabel}>
-        <slot name="label" @slotchange=${this._checkSetHasSlot}></slot>
-      </h2>
-      <h3
-        class=${`${blockClassModalHeader}__heading ${blockClass}__heading`}
-        ?hidden=${!this._hasTitle}>
-        <slot name="title" @slotchange=${this._checkSetHasSlot}></slot>
-      </h3>
-      <div
-        class=${`${blockClass}__header-description`}
-        ?hidden=${!this._hasDescription}>
-        <slot name="description" @slotchange=${this._checkSetHasSlot}></slot>
-      </div>
-    </div>`;
-
-    const headerActionsTemplate = html` <div
-      class=${`${blockClass}__header-actions`}
-      ?hidden=${!this._hasHeaderActions || this.width === 'narrow'}>
-      <slot name="header-actions" @slotchange=${this._checkSetHasSlot}></slot>
-    </div>`;
-
-    const headerTemplate = html` <cds-modal-header
-      class=${`${blockClass}__header`}
-      ?has-close-icon=${this.hasCloseIcon || this?._actionsCount === 0}
-      ?has-navigation=${this._hasHeaderNavigation && this.width === 'wide'}
-      ?has-header-actions=${this._hasHeaderActions && this.width === 'wide'}
-      ?has-actions=${this?._actionsCount > 0}
-      ?has-slug=${this?._hasSlug}
-      width=${width}>
-      ${this.width === TEARSHEET_WIDTH.WIDE
-        ? html`<cds-layer level="1" class=${`${blockClass}__header-content`}
-            >${headerFieldsTemplate}${headerActionsTemplate}</cds-layer
-          >`
-        : html`<div>${headerFieldsTemplate}${headerActionsTemplate}</div>`}
-
-      <div
-        class=${`${blockClass}__header-navigation`}
-        ?hidden=${!this._hasHeaderNavigation || this.width === 'narrow'}>
-        <slot
-          name="header-navigation"
-          @slotchange=${this._checkSetHasSlot}></slot>
-      </div>
-      <slot name="slug" @slotchange=${this._handleSlugChange}></slot>
-      ${this.hasCloseIcon || this?._actionsCount === 0
-        ? html`<cds-modal-close-button
-            close-button-label=${closeIconDescription}
-            @click=${this._handleUserInitiatedClose}></cds-modal-close-button>`
-        : ''}
-    </cds-modal-header>`;
-
-    return html`
-      <a
-        id="start-sentinel"
-        class="${prefix}--visually-hidden"
-        href="javascript:void 0"
-        role="navigation"></a>
-      <div
-        aria-label=${this.ariaLabel}
-        class=${`${blockClass}__container ${prefix}--modal-container ${prefix}--modal-container--sm`}
-        part="dialog"
-        role="complementary"
-        ?open=${this._isOpen}
-        ?opening=${open && !this._isOpen}
-        ?closing=${!open && this._isOpen}
-        width=${width}
-        stack-position=${this._stackPosition}
-        stack-depth=${this._stackDepth}
-        @click=${this._handleClickContainer}>
-        <!-- Header -->
-        ${headerTemplate}
-
-        <!-- Body  -->
-        <cds-modal-body class=${`${blockClass}__body`} width=${width}>
-          <!-- Influencer when on left -->
-          ${influencerPlacement !== TEARSHEET_INFLUENCER_PLACEMENT.RIGHT
-            ? html`<div
-                class=${`${blockClass}__influencer`}
-                ?wide=${influencerWidth === 'wide'}
-                ?hidden=${!this._hasInfluencerLeft ||
-                this.width === TEARSHEET_WIDTH.NARROW}>
-                <slot
-                  name="influencer"
-                  data-postfix="left"
-                  @slotchange=${this._checkSetHasSlot}></slot>
-              </div>`
-            : ''}
-
-          <div class=${`${blockClass}__right`}>
-            <div class=${`${blockClass}__main`}>
-              <div class=${`${blockClass}__content`}>
-                <cds-layer level="0">
-                  <slot></slot>
-                </cds-layer>
-              </div>
-
-              <!-- Influencer when on right -->
-              ${influencerPlacement === TEARSHEET_INFLUENCER_PLACEMENT.RIGHT
-                ? html`<div
-                    class=${`${blockClass}__influencer`}
-                    ?wide=${influencerWidth}
-                    ?hidden=${!this._hasInfluencerRight ||
-                    this.width === TEARSHEET_WIDTH.NARROW}>
-                    <slot
-                      name="influencer"
-                      data-postfix="right"
-                      @slotchange=${this._checkSetHasSlot}></slot>
-                  </div>`
-                : ''}
-            </div>
-            <!-- Action buttons -->
-            <cds-button-set-base
-              class=${`${blockClass}__buttons ${blockClass}__button-container`}
-              actions-multiple=${actionsMultiple}
-              ?tearsheet-wide=${width === 'wide'}
-              ?hidden=${this._actionsCount === 0}>
-              <slot
-                name="actions"
-                @slotchange=${this._handleActionsChange}></slot>
-            </cds-button-set-base>
-          </div>
-        </cds-modal-body>
-      </div>
-      <a
-        id="end-sentinel"
-        class="${prefix}--visually-hidden"
-        href="javascript:void 0"
-        role="navigation"></a>
-    `;
+  /**
+   * Update CSS custom properties for dynamic styling
+   */
+  private updateCSSCustomProperties(): void {
+    if (this.influencerWidth) {
+      document.documentElement.style.setProperty(
+        '--tearsheet-influencer-width',
+        this.influencerWidth
+      );
+    }
+    if (this.summaryContentWidth) {
+      document.documentElement.style.setProperty(
+        '--tearsheet-summary-content-width',
+        this.summaryContentWidth
+      );
+    }
+    if (this.verticalGap) {
+      document.documentElement.style.setProperty(
+        '--tearsheet-vertical-gap',
+        this.verticalGap
+      );
+    }
   }
 
-  _checkSetOpen = () => {
-    const { _tearsheet: tearsheet } = this;
-    if (tearsheet && this._isOpen) {
-      // wait until the tearsheet has transitioned off the screen to remove
-      tearsheet.addEventListener('transitionend', () => {
-        this._isOpen = false;
-      });
-    } else {
-      // allow the html to render before animating in the tearsheet
-      window.requestAnimationFrame(() => {
-        this._isOpen = this.open;
-      });
+  /**
+   * Update influencer visibility based on slot content and screen size
+   * Handles both slot changes and screen size changes
+   */
+  private updateInfluencerVisibility(slot?: HTMLSlotElement): void {
+    const influencerSlot =
+      slot ||
+      (this.shadowRoot?.querySelector(
+        'slot[name="influencer"]'
+      ) as HTMLSlotElement);
+
+    if (!influencerSlot) {
+      return;
+    }
+
+    const hasContent =
+      influencerSlot.assignedNodes({ flatten: true }).length > 0;
+    const shouldShow = hasContent && !this.isSm;
+
+    // Update CSS class on modal body
+    if (this.modalBodyElement) {
+      if (shouldShow) {
+        this.modalBodyElement.classList.add(
+          `${blockClass}__body-layout--has-influencer`
+        );
+      } else {
+        this.modalBodyElement.classList.remove(
+          `${blockClass}__body-layout--has-influencer`
+        );
+      }
+    }
+  }
+
+  /**
+   * Check if this tearsheet is wrapped in a stack provider
+   */
+  private _checkForStackWrapper(): void {
+    // Check if there's a cds-tearsheet-stack ancestor
+    let parent = this.parentElement;
+    while (parent) {
+      if (parent instanceof CDSTearsheetStack) {
+        this._stackingEnabled = true;
+        return;
+      }
+      parent = parent.parentElement;
+    }
+    this._stackingEnabled = false;
+  }
+
+  /**
+   * Handle stack wrapper connected event
+   */
+  private handleStackConnected = (event: Event) => {
+    event.stopPropagation();
+    this._stackingEnabled = true;
+  };
+
+  /**
+   * Handle stack step size changed event
+   */
+  private handleStackStepSizeChanged = (event: Event) => {
+    event.stopPropagation();
+    // Stack manager is already updated by the wrapper
+    // Just trigger a re-render of stack properties if needed
+    if (this._stackingEnabled && this.open) {
+      this.updateStackProperties();
     }
   };
 
-  async updated(changedProperties) {
-    if (changedProperties.has('width')) {
-      this._checkUpdateActionSizes();
+  /**
+   * Handle influencer slot change
+   */
+  private handleInfluencerSlotChange = (e: Event) => {
+    const slot = e.target as HTMLSlotElement;
+    this.updateInfluencerVisibility(slot);
+  };
+
+  /**
+   * Common method to handle tearsheet close with proper event dispatching
+   * @param originalEvent - The original event that triggered the close (optional)
+   * @param useAsync - Whether to dispatch closed event asynchronously
+   */
+  private closeTearsheet(originalEvent?: Event, useAsync: boolean = false) {
+    // Dispatch the beingclosed event (cancelable)
+    const beforeCloseEvent = new CustomEvent(
+      `${prefix}-tearsheet-beingclosed`,
+      {
+        bubbles: true,
+        cancelable: true,
+        composed: true,
+        detail: {},
+      }
+    );
+
+    if (!this.dispatchEvent(beforeCloseEvent)) {
+      // If event was cancelled, prevent closing
+      if (originalEvent) {
+        originalEvent.preventDefault();
+      }
+      return;
     }
 
-    if (
-      process.env.NODE_ENV === 'development' &&
-      (changedProperties.has('width') ||
-        changedProperties.has('_hasHeaderNavigation') ||
-        changedProperties.has('_hasInfluencerLeft') ||
-        changedProperties.has('_hasInfluencerRight') ||
-        changedProperties.has('_hasHeaderActions'))
-    ) {
-      if (this.width === 'narrow') {
-        if (this._hasHeaderNavigation) {
-          // eslint-disable-next-line no-console
-          console.error(
-            `Header navigation is not permitted in narrow Tearsheet.`
-          );
-        }
-        if (this._hasInfluencerLeft || this._hasInfluencerRight) {
-          // eslint-disable-next-line no-console
-          console.error(`Influencer is not permitted in narrow Tearsheet.`);
-        }
-        if (this._hasHeaderActions) {
-          // eslint-disable-next-line no-console
-          console.error(
-            `Header actions are not permitted in narrow Tearsheet.`
-          );
-        }
-      }
-    }
+    // Close the tearsheet
+    this.open = false;
 
-    if (changedProperties.has('open')) {
-      this._updateStack();
+    // Dispatch closed event
+    const dispatchClosedEvent = () => {
+      this.dispatchEvent(
+        new CustomEvent(`${prefix}-tearsheet-closed`, {
+          bubbles: true,
+          composed: true,
+          detail: {},
+        })
+      );
+    };
 
-      this._checkSetOpen();
-      if (this.open) {
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-        this._launcher = this.ownerDocument!.activeElement;
-        const focusNode =
-          this.selectorInitialFocus &&
-          this.querySelector(this.selectorInitialFocus);
-
-        await (this.constructor as typeof CDSTearsheet)._delay();
-        if (focusNode) {
-          // For cases where a `carbon-web-components` component (e.g. `<cds-button>`) being `primaryFocusNode`,
-          // where its first update/render cycle that makes it focusable happens after `<cds-tearsheet>`'s first update/render cycle
-          (focusNode as HTMLElement).focus();
-        } else if (
-          !tryFocusElems(
-            this.querySelectorAll(
-              (this.constructor as typeof CDSTearsheet).selectorTabbable
-            ),
-            true
-          )
-        ) {
-          this.focus();
-        }
-      } else if (
-        this._launcher &&
-        typeof (this._launcher as HTMLElement).focus === 'function'
-      ) {
-        (this._launcher as HTMLElement).focus();
-        this._launcher = null;
-      }
+    if (useAsync) {
+      // Use microtask for async scenarios (e.g., click outside)
+      Promise.resolve().then(dispatchClosedEvent);
+    } else {
+      dispatchClosedEvent();
     }
   }
 
   /**
-   * @param ms The number of milliseconds.
-   * @returns A promise that is resolves after the given milliseconds.
+   * Handle close button click from the header
+   * This is an internal event that triggers the tearsheet to close
    */
-  private static _delay(ms = 0) {
-    return new Promise((resolve) => {
-      setTimeout(resolve, ms);
+  private handleHeaderCloseButtonClick = (event: Event) => {
+    // Stop the internal event from propagating
+    event.stopPropagation();
+    this.closeTearsheet();
+  };
+
+  /**
+   * Intercepts the internal collapse-change event from the header and
+   * re-dispatches it as the public `cds-tearsheet-collapse-change` event.
+   */
+  private handleHeaderCollapseChange = (event: Event) => {
+    event.stopPropagation();
+    const { collapsed } = (event as CustomEvent).detail;
+    this.dispatchEvent(
+      new CustomEvent(
+        (this.constructor as typeof CDSTearsheet).eventCollapseChange,
+        {
+          bubbles: true,
+          composed: true,
+          detail: { collapsed },
+        }
+      )
+    );
+  };
+
+  /**
+   * Handle close event from the modal (ESC key, click outside, etc.)
+   */
+  private handleClose = (event: Event) => {
+    this.closeTearsheet(event, true);
+  };
+
+  /**
+   * Parse floating menu selectors from comma-separated string
+   */
+  private getFloatingMenuSelectors(): string {
+    const defaultSelectors = [
+      `.${prefix}--overflow-menu-options`,
+      `.${prefix}--tooltip`,
+      '.flatpickr-calendar',
+      `.${blockClass}__container`,
+      `.${prefix}--menu`,
+    ];
+
+    const customSelectors = this.selectorsFloatingMenus
+      ? this.selectorsFloatingMenus.split(',').map((s) => s.trim())
+      : [];
+
+    return [...defaultSelectors, ...customSelectors].join(',');
+  }
+
+  render() {
+    const classes = classMap({
+      [blockClass]: true,
+      [`${blockClass}--wide`]: this.variant === 'wide',
+      [`${blockClass}--narrow`]: this.variant === 'narrow',
+      [`${blockClass}--has-ai-label`]: this.hasAILabel,
+      [`${blockClass}--has-decorator`]: this.hasDecorator && !this.hasAILabel,
     });
+
+    const containerClasses = `${blockClass}__container ${this.containerClassName}`;
+
+    // Use ariaLabel prop if provided; otherwise fall back to the title pushed into
+    // the signal by cds-tearsheet-header-content — no DOM walk needed and no
+    // cross-shadow-root aria-labelledby (which browsers cannot resolve).
+    const effectiveAriaLabel =
+      this.ariaLabel || tearsheetSignal.get().title || undefined;
+
+    return html`<cds-modal
+      class=${classes}
+      size=${this.variant === 'narrow' ? 'sm' : 'lg'}
+      ?open="${this.open}"
+      container-class="${containerClasses}"
+      ?prevent-close-on-click-outside="${this.preventCloseOnClickOutside}"
+      managed-focus
+      aria-label="${ifDefined(effectiveAriaLabel)}"
+      selector-primary-focus="${ifDefined(
+        this.selectorPrimaryFocus || undefined
+      )}"
+      selectors-floating-menus="${this.getFloatingMenuSelectors()}"
+      @cds-modal-beingclosed="${this.handleClose}"
+      @cds-modal-closed="${this.handleClose}"
+      ?full-width="${true}"
+      ai-label="${ifDefined(this.hasAILabel || undefined)}">
+      <slot name="header"></slot>
+      <cds-modal-body class="${blockClass}__body-layout">
+        <slot
+          name="influencer"
+          @slotchange=${this.handleInfluencerSlotChange}></slot>
+        <slot name="body"></slot>
+        <slot name="footer"></slot>
+      </cds-modal-body>
+    </cds-modal>`;
   }
 
-  /**
-   * A selector selecting buttons that should close this modal.
-   */
-  static get selectorCloseButton() {
-    return `[data-modal-close],${prefix}-modal-close-button`;
-  }
+  static styles = styles;
 
   /**
-   * A selector selecting tabbable nodes.
+   * Public event fired when the header collapse state changes.
+   * `event.detail.collapsed` is `true` when collapsing, `false` when expanding.
    */
-  static get selectorTabbable() {
-    return selectorTabbable;
-  }
-
-  /**
-   * The name of the custom event fired before this tearsheet is being closed upon a user gesture.
-   * Cancellation of this event stops the user-initiated action of closing this tearsheet.
-   */
-  static get eventBeforeClose() {
-    return `${prefix}-tearsheet-beingclosed`;
-  }
-
-  /**
-   * The name of the custom event fired after this tearsheet is closed upon a user gesture.
-   */
-  static get eventClose() {
-    return `${prefix}-tearsheet-closed`;
-  }
-
-  /**
-   * The name of the custom event fired on clicking the navigate back button
-   */
-  static get eventNavigateBack() {
-    return `${prefix}-tearsheet-header-navigate-back`;
+  static get eventCollapseChange() {
+    return `${prefix}-tearsheet-collapse-change`;
   }
 }
 
