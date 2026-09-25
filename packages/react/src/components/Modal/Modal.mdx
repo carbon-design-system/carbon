@@ -14,6 +14,29 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
 
+export const modalFooterDef = [
+  `const modalFooter = (numberOfButtons) => {
+  const secondaryButtons = () => {
+    switch (numberOfButtons) {
+      case '1':
+        return { secondaryButtons: [] };
+      case '2':
+        return { secondaryButtonText: 'Cancel' };
+      case '3':
+        return {
+          secondaryButtons: [
+            { buttonText: 'Keep both', onClick: () => {} },
+            { buttonText: 'Rename', onClick: () => {} },
+          ],
+        };
+      default:
+        return null;
+    }
+  };
+  return { ...secondaryButtons() };
+};`,
+];
+
 # Modal
 
 [Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/Modal)
@@ -60,6 +83,7 @@ text.
         stackblitzPrefillConfig({
           story: ModalStories.WithStateManager,
           customImports: ["import ReactDOM from 'react-dom';"],
+          customFunctionDefs: modalFooterDef,
         }),
     },
   ]}

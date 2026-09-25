@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './story.scss';
+import styles from './story.scss?inline';
 
 import { OverflowMenuVertical } from '@carbon/icons-react';
 import React, { useRef, useEffect } from 'react';
@@ -17,6 +17,7 @@ export default {
   title: 'Components/Tooltip',
   component: Tooltip,
   parameters: {
+    styles,
     controls: {
       hideNoControlsWarning: true,
     },
@@ -67,12 +68,20 @@ export default {
   decorators: [
     (Story, context) => {
       if (context.name.toLowerCase().includes('auto align')) {
-        return <Story />;
+        return (
+          <>
+            <style>{styles}</style>
+            <Story />
+          </>
+        );
       }
       return (
-        <div className="sb-tooltip-story">
-          <Story />
-        </div>
+        <>
+          <style>{styles}</style>
+          <div className="sb-tooltip-story">
+            <Story />
+          </div>
+        </>
       );
     },
   ],
