@@ -256,7 +256,7 @@
     display: inline-block;
 
     .#{$prefix}--label {
-      @include skeleton;
+      @include skeleton($border-radius: $border-radius-04);
 
       block-size: rem(14px);
       inline-size: rem(75px);
@@ -279,7 +279,7 @@
   // New skeleton styles for DatePickerSkeleton component
   .#{$prefix}--date-picker.#{$prefix}--skeleton {
     .#{$prefix}--date-picker__input.#{$prefix}--skeleton {
-      @include skeleton;
+      @include skeleton($border-radius: $border-radius-04);
 
       position: relative;
       overflow: hidden;

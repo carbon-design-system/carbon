@@ -855,8 +855,6 @@ collect:
         - lines
         # UserAvatar
         - backgroundColor
-        # WithCustomContext
-        - onLog
         # React
         - key
         - ref
