@@ -224,129 +224,135 @@ export interface ProgressStepProps extends TranslateWithId<TranslationKey> {
   tooltipId?: string;
 }
 
-function ProgressStep({
-  label,
-  description,
-  className,
-  current,
-  complete,
-  invalid,
-  secondaryLabel,
-  disabled,
-  onClick,
-  translateWithId: t = defaultTranslateWithId,
-  ...rest
-}: ProgressStepProps) {
-  const prefix = usePrefix();
-  const classes = cx({
-    [`${prefix}--progress-step`]: true,
-    [`${prefix}--progress-step--current`]: current,
-    [`${prefix}--progress-step--complete`]: complete,
-    [`${prefix}--progress-step--incomplete`]: !complete && !current,
-    [`${prefix}--progress-step--disabled`]: disabled,
-    [className ?? '']: className,
-  });
+const ProgressStep = React.forwardRef<HTMLLIElement, ProgressStepProps>(
+  function ProgressStep(
+    {
+      label,
+      description,
+      className,
+      current,
+      complete,
+      invalid,
+      secondaryLabel,
+      disabled,
+      onClick,
+      translateWithId: t = defaultTranslateWithId,
+      ...rest
+    },
+    ref
+  ) {
+    const prefix = usePrefix();
+    const classes = cx({
+      [`${prefix}--progress-step`]: true,
+      [`${prefix}--progress-step--current`]: current,
+      [`${prefix}--progress-step--complete`]: complete,
+      [`${prefix}--progress-step--incomplete`]: !complete && !current,
+      [`${prefix}--progress-step--disabled`]: disabled,
+      [className ?? '']: className,
+    });
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
-    if (matches(e, [keys.Enter, keys.Space]) && onClick) {
-      onClick(e);
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+      if (matches(e, [keys.Enter, keys.Space]) && onClick) {
+        onClick(e);
+      }
+    };
+
+    interface SVGIconProps {
+      complete?: boolean;
+      current?: boolean;
+      description?: string;
+      invalid?: boolean;
+      prefix: string;
     }
-  };
 
-  interface SVGIconProps {
-    complete?: boolean;
-    current?: boolean;
-    description?: string;
-    invalid?: boolean;
-    prefix: string;
-  }
-
-  const SVGIcon = ({
-    complete,
-    current,
-    description,
-    invalid,
-    prefix,
-  }: SVGIconProps) => {
-    if (invalid) {
+    const SVGIcon = ({
+      complete,
+      current,
+      description,
+      invalid,
+      prefix,
+    }: SVGIconProps) => {
+      if (invalid) {
+        return (
+          <Warning className={`${prefix}--progress__warning`}>
+            <title>{description}</title>
+          </Warning>
+        );
+      }
+      if (current) {
+        return (
+          <Incomplete>
+            <title>{description}</title>
+          </Incomplete>
+        );
+      }
+      if (complete) {
+        return (
+          <CheckmarkOutline>
+            <title>{description}</title>
+          </CheckmarkOutline>
+        );
+      }
       return (
-        <Warning className={`${prefix}--progress__warning`}>
+        <CircleDash>
           <title>{description}</title>
-        </Warning>
+        </CircleDash>
       );
-    }
+    };
+
+    let message = t('carbon.progress-step.incomplete');
+
     if (current) {
-      return (
-        <Incomplete>
-          <title>{description}</title>
-        </Incomplete>
-      );
+      message = t('carbon.progress-step.current');
     }
+
     if (complete) {
-      return (
-        <CheckmarkOutline>
-          <title>{description}</title>
-        </CheckmarkOutline>
-      );
+      message = t('carbon.progress-step.complete');
     }
+
+    if (invalid) {
+      message = t('carbon.progress-step.invalid');
+    }
+
     return (
-      <CircleDash>
-        <title>{description}</title>
-      </CircleDash>
-    );
-  };
-
-  let message = t('carbon.progress-step.incomplete');
-
-  if (current) {
-    message = t('carbon.progress-step.current');
-  }
-
-  if (complete) {
-    message = t('carbon.progress-step.complete');
-  }
-
-  if (invalid) {
-    message = t('carbon.progress-step.invalid');
-  }
-
-  return (
-    <li className={classes}>
-      <button
-        type="button"
-        className={cx(`${prefix}--progress-step-button`, {
-          [`${prefix}--progress-step-button--unclickable`]: !onClick || current,
-        })}
-        disabled={disabled}
-        aria-disabled={disabled}
-        tabIndex={disabled ? -1 : 0}
-        onClick={!current ? onClick : undefined}
-        onKeyDown={handleKeyDown}
-        title={label}
-        {...rest}>
-        <SVGIcon
-          complete={complete}
-          current={current}
-          description={description}
-          invalid={invalid}
-          prefix={prefix}
-        />
-        <div className={`${prefix}--progress-text`}>
-          <Text as="span" className={`${prefix}--progress-label`}>
-            {label}
-          </Text>
-          {secondaryLabel !== null && secondaryLabel !== undefined ? (
-            <Text as="span" className={`${prefix}--progress-optional`}>
-              {secondaryLabel}
+      <li className={classes} ref={ref}>
+        <button
+          type="button"
+          className={cx(`${prefix}--progress-step-button`, {
+            [`${prefix}--progress-step-button--unclickable`]:
+              !onClick || current,
+          })}
+          disabled={disabled}
+          aria-disabled={disabled}
+          tabIndex={disabled ? -1 : 0}
+          onClick={!current ? onClick : undefined}
+          onKeyDown={handleKeyDown}
+          title={label}
+          {...rest}>
+          <SVGIcon
+            complete={complete}
+            current={current}
+            description={description}
+            invalid={invalid}
+            prefix={prefix}
+          />
+          <div className={`${prefix}--progress-text`}>
+            <Text as="span" className={`${prefix}--progress-label`}>
+              {label}
             </Text>
-          ) : null}
-        </div>
-        <span className={`${prefix}--assistive-text`}>{message}</span>
-        <span className={`${prefix}--progress-line`} />
-      </button>
-    </li>
-  );
-}
+            {secondaryLabel !== null && secondaryLabel !== undefined ? (
+              <Text as="span" className={`${prefix}--progress-optional`}>
+                {secondaryLabel}
+              </Text>
+            ) : null}
+          </div>
+          <span className={`${prefix}--assistive-text`}>{message}</span>
+          <span className={`${prefix}--progress-line`} />
+        </button>
+      </li>
+    );
+  }
+);
 
 ProgressStep.propTypes = {
   /**

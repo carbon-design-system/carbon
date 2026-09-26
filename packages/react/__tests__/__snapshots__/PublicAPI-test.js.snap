@@ -8340,6 +8340,7 @@ Map {
     },
   },
   "ProgressStep" => {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": {
       "className": {
         "type": "string",
@@ -8382,6 +8383,7 @@ Map {
         "type": "func",
       },
     },
+    "render": [Function],
   },
   "RadioButton" => {
     "$$typeof": Symbol(react.forward_ref),
