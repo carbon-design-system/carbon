@@ -46,4 +46,39 @@ describe('cds-table-toolbar-content', () => {
     const button = el.querySelector('cds-button');
     expect(button?.getAttribute('size')).to.equal('xs');
   });
+
+  it('should preserve an explicitly set child size', async () => {
+    const el = await fixture(html`
+      <cds-table-toolbar-content size="xl">
+        <cds-tag size="sm">Tag</cds-tag>
+        <cds-multi-select size="sm"></cds-multi-select>
+      </cds-table-toolbar-content>
+    `);
+
+    await el.updateComplete;
+
+    const tag = el.querySelector('cds-tag');
+    const multiSelect = el.querySelector('cds-multi-select');
+
+    expect(tag?.getAttribute('size')).to.equal('sm');
+    expect(multiSelect?.getAttribute('size')).to.equal('sm');
+  });
+
+  it('should update sizes previously set by the toolbar', async () => {
+    const el = await fixture(html`
+      <cds-table-toolbar-content size="xl">
+        <cds-button></cds-button>
+      </cds-table-toolbar-content>
+    `);
+
+    await el.updateComplete;
+
+    const button = el.querySelector('cds-button');
+    expect(button?.getAttribute('size')).to.equal('lg');
+
+    el.setAttribute('size', 'xs');
+    await el.updateComplete;
+
+    expect(button?.getAttribute('size')).to.equal('xs');
+  });
 });
