@@ -93,6 +93,15 @@ describe('FileUploaderDropContainer', () => {
     expect(input.getAttribute('multiple')).toBeFalsy();
   });
 
+  it('should pass required to the file input', () => {
+    const { container } = render(
+      <FileUploaderDropContainer required {...requiredProps} />
+    );
+
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+    expect(container.querySelector('input')).toBeRequired();
+  });
+
   it('should reset the value of the input when the drop area is clicked', async () => {
     const { container } = render(
       <FileUploaderDropContainer labelText="test" />
