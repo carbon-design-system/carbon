@@ -3775,6 +3775,9 @@ Map {
       "pattern": {
         "type": "string",
       },
+      "required": {
+        "type": "bool",
+      },
       "role": [Function],
       "tabIndex": [Function],
     },
