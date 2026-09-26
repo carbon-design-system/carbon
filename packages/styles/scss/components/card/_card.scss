@@ -9,13 +9,16 @@
 // Card
 //-----------------------------
 
+@use '../../border-radius' as *;
 @use '../../config' as *;
+@use '../../feature-flags' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
 @use '../../utilities/ai-gradient' as *;
 @use '../../utilities/focus-outline' as *;
+@use '../button';
 
 /// Card styles
 /// @access public
@@ -26,6 +29,10 @@
     position: relative;
     background-color: $layer;
     color: $text-primary;
+
+    @if enabled('enable-v12-release') {
+      @include button.radius($border-radius-00);
+    }
   }
 
   // ─── Clickable ───────────────────────────────────────────────────────
@@ -405,6 +412,12 @@
   .#{$prefix}--card__header:has(> .#{$prefix}--card__actions)
     > .#{$prefix}--card__title {
     max-inline-size: calc(50cqw - $spacing-03);
+  }
+
+  // The overflow handler sets data-hidden on action items that don't fit.
+  // Hide them so only the overflow menu button appears.
+  .#{$prefix}--card__actions [data-hidden]:not([data-fixed]) {
+    display: none;
   }
 
   // ─── AI Label (decorator) ─────────────────────────────────────────────
