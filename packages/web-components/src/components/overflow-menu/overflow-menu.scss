@@ -40,6 +40,16 @@
   }
 }
 
+:host(#{$prefix}-overflow-menu) {
+  cds-tooltip button.#{$prefix}--overflow-menu:focus {
+    background-color: $background-active;
+  }
+
+  &[data-programmatic-focus] cds-tooltip button.#{$prefix}--overflow-menu {
+    background-color: $background-active;
+  }
+}
+
 :host(#{$prefix}-overflow-menu[disabled]),
 :host(#{$prefix}-breadcrumb-overflow-menu[disabled]) {
   cursor: not-allowed;
