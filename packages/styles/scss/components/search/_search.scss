@@ -319,6 +319,10 @@
     background-color: $background-hover;
   }
 
+  .#{$prefix}--search--expandable .#{$prefix}--search-magnifier:active {
+    background-color: $background-selected;
+  }
+
   .#{$prefix}--search--expandable.#{$prefix}--search--expanded
     .#{$prefix}--search-magnifier {
     pointer-events: none;
