@@ -49,6 +49,18 @@ describe('IconButton', () => {
     expect(screen.getByText('999+')).toBeInTheDocument();
   });
 
+  it('should add icon button tooltip class to the tooltip wrapper', () => {
+    render(
+      <IconButton label="edit">
+        <Edit />
+      </IconButton>
+    );
+
+    expect(
+      screen.getByLabelText('edit').closest('.cds--popover-container')
+    ).toHaveClass('cds--icon-button-tooltip');
+  });
+
   it('should support data-testid on the <button> element', () => {
     render(
       <IconButton label="edit" data-testid="icon-button">
