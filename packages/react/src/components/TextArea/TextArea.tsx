@@ -29,7 +29,7 @@ import { noopFn } from '../../internal/noopFn';
 import { Text } from '../Text';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
-import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
+import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
 
 export interface TextAreaProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -389,7 +389,7 @@ const TextArea = frFn((props, forwardRef) => {
     </Text>
   );
 
-  useNoInteractiveChildren(
+  useNoInteractiveChildrenForLabel(
     labelRef,
     'The TextArea component `labelText` prop must have no interactive content'
   );
