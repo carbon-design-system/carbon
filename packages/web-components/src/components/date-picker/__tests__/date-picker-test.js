@@ -161,6 +161,89 @@ describe('cds-date-picker', () => {
       expect(el.value).to.equal('2024-01-15');
     });
 
+    it('should update the visible month when controlled value changes while calendar is open', async () => {
+      const el = await fixture(html`
+        <cds-date-picker value="2026-03-16">
+          <cds-date-picker-input
+            kind="single"
+            label-text="Date"
+            placeholder="mm/dd/yyyy">
+          </cds-date-picker-input>
+        </cds-date-picker>
+      `);
+      await el.updateComplete;
+
+      el.open = true;
+      await el.updateComplete;
+      el.value = '2026-01-01';
+      await el.updateComplete;
+
+      const input = el.querySelector('cds-date-picker-input');
+      const monthElement = el.calendar?.calendarContainer?.querySelector(
+        '.flatpickr-current-month .cur-month'
+      );
+
+      expect(input.value).to.equal('01/01/2026');
+      expect(el.calendar.currentMonth).to.equal(0);
+      expect(el.calendar.currentYear).to.equal(2026);
+      expect(monthElement.textContent).to.equal('January');
+    });
+
+    it('should not dispatch change event when controlled value changes externally', async () => {
+      const el = await fixture(html`
+        <cds-date-picker value="2026-03-16">
+          <cds-date-picker-input
+            kind="single"
+            label-text="Date"
+            placeholder="mm/dd/yyyy">
+          </cds-date-picker-input>
+        </cds-date-picker>
+      `);
+      await el.updateComplete;
+      let changeCount = 0;
+      el.addEventListener('cds-date-picker-changed', () => {
+        changeCount++;
+      });
+
+      el.open = true;
+      await el.updateComplete;
+      el.value = '2026-01-01';
+      await el.updateComplete;
+
+      expect(changeCount).to.equal(0);
+    });
+
+    it('should navigate from the externally controlled month after controlled value changes', async () => {
+      const el = await fixture(html`
+        <cds-date-picker value="2026-03-16">
+          <cds-date-picker-input
+            kind="single"
+            label-text="Date"
+            placeholder="mm/dd/yyyy">
+          </cds-date-picker-input>
+        </cds-date-picker>
+      `);
+      await el.updateComplete;
+
+      el.open = true;
+      await el.updateComplete;
+      el.value = '2026-01-01';
+      await el.updateComplete;
+
+      const nextMonthButton = el.calendar?.calendarContainer?.querySelector(
+        '.flatpickr-next-month'
+      );
+      nextMonthButton.click();
+
+      const monthElement = el.calendar?.calendarContainer?.querySelector(
+        '.flatpickr-current-month .cur-month'
+      );
+
+      expect(el.calendar.currentMonth).to.equal(1);
+      expect(el.calendar.currentYear).to.equal(2026);
+      expect(monthElement.textContent).to.equal('February');
+    });
+
     it('should support range mode', async () => {
       const el = await fixture(html`
         <cds-date-picker>

@@ -25,7 +25,7 @@ $block-class: #{$prefix}--truncated-text;
 
 // Mixin for directional gradients
 @mixin gradient-bg($direction, $color) {
-  background: linear-gradient($direction, rgba(255, 255, 255, 0) 0%, $color 0%);
+  background: linear-gradient($direction, rgb(255, 255, 255, 0) 0%, $color 0%);
 }
 
 :host(#{$prefix}-truncated-text) {

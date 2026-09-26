@@ -37,9 +37,9 @@
     animation: 1250ms ease-in-out ai-skeleton-animation infinite;
     background: linear-gradient(
       to right,
-      rgba(theme.get('ai-skeleton-element-background'), 0) 0%,
-      rgba(theme.get('ai-skeleton-element-background'), 0.5) 50%,
-      rgba(theme.get('ai-skeleton-element-background'), 0) 100%
+      rgb(theme.get('ai-skeleton-element-background'), 0) 0%,
+      rgb(theme.get('ai-skeleton-element-background'), 0.5) 50%,
+      rgb(theme.get('ai-skeleton-element-background'), 0) 100%
     );
   }
 

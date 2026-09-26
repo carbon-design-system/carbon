@@ -317,6 +317,52 @@ describe('cds-tag', function () {
 
       expect(el.shadowRoot.querySelector('[part="tag"]')).to.exist;
     });
+
+    it('should not set icon styles for label-only operational tag', async () => {
+      const el = await fixture(html`
+        <cds-operational-tag text="Tag content"></cds-operational-tag>
+      `);
+      const tag = el.shadowRoot.querySelector('cds-tag');
+
+      expect(tag.hasAttribute('has-custom-icon')).to.be.false;
+    });
+
+    it('should set icon styles when operational tag has an icon', async () => {
+      const el = await fixture(html`
+        <cds-operational-tag text="Tag content">
+          <span slot="icon"></span>
+        </cds-operational-tag>
+      `);
+      await el.updateComplete;
+      const tag = el.shadowRoot.querySelector('cds-tag');
+      await tag.updateComplete;
+
+      expect(tag.hasAttribute('has-custom-icon')).to.be.true;
+    });
+  });
+
+  describe('cds-selectable-tag', () => {
+    it('should not set icon styles for label-only selectable tag', async () => {
+      const el = await fixture(html`
+        <cds-selectable-tag text="Tag content"></cds-selectable-tag>
+      `);
+      const tag = el.shadowRoot.querySelector('cds-tag');
+
+      expect(tag.hasAttribute('has-custom-icon')).to.be.false;
+    });
+
+    it('should set icon styles when selectable tag has an icon', async () => {
+      const el = await fixture(html`
+        <cds-selectable-tag text="Tag content">
+          <span slot="icon"></span>
+        </cds-selectable-tag>
+      `);
+      await el.updateComplete;
+      const tag = el.shadowRoot.querySelector('cds-tag');
+      await tag.updateComplete;
+
+      expect(tag.hasAttribute('has-custom-icon')).to.be.true;
+    });
   });
 
   it('should render as a filter tag', async () => {

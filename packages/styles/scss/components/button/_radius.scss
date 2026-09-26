@@ -1,0 +1,83 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../../border-radius' as *;
+@use '../../feature-flags' as *;
+@use '../../utilities/custom-property';
+@use 'vars' as *;
+
+/// Logical corner suffix → CSS border-*-radius longhand.
+/// Kept as a map so the apply and setter mixins stay in lockstep.
+/// @access private
+/// @group button
+$button-radius-corners: (
+  'ee': 'end-end',
+  'es': 'end-start',
+  'se': 'start-end',
+  'ss': 'start-start',
+);
+
+/// Read `--cds-button-radius` and the per-corner `--cds-button-radius-*`
+/// properties onto a button. Granular corner properties win over the base.
+/// @access private
+/// @group button
+@mixin apply {
+  $fallback: $button-border-radius;
+
+  @if enabled('enable-v12-release') {
+    $fallback: $border-radius-max;
+  }
+
+  @each $short, $logical in $button-radius-corners {
+    border-#{$logical}-radius: custom-property.get-var(
+      'button-radius-#{$short}',
+      custom-property.get-var('button-radius', $fallback)
+    );
+  }
+}
+
+/// Set button radius for a containing context. Values inherit to descendant
+/// buttons through CSS custom properties, so this is framework-agnostic.
+///
+/// Pass `$radius` to set every corner. Pass `$ss`, `$se`, `$es`, or `$ee` to
+/// override an individual logical corner; those win over `$radius` when both
+/// are provided.
+///
+/// @param {Length | null} $radius [null] All corners (`--cds-button-radius`)
+/// @param {Length | null} $ss [null] Start-start (`--cds-button-radius-ss`)
+/// @param {Length | null} $se [null] Start-end (`--cds-button-radius-se`)
+/// @param {Length | null} $es [null] End-start (`--cds-button-radius-es`)
+/// @param {Length | null} $ee [null] End-end (`--cds-button-radius-ee`)
+/// @access public
+/// @group button
+///
+/// @example scss
+///   .#{$prefix}--btn-set {
+///     @include radius($border-radius-00);
+///   }
+@mixin radius($radius: null, $ss: null, $se: null, $es: null, $ee: null) {
+  // 0 / 0px are valid radius tokens but are falsy in Sass, so `!= null` is
+  // required to distinguish "unset" from "square".
+  // stylelint-disable scss/at-if-no-null
+  @if $radius != null {
+    @include custom-property.declaration('button-radius', $radius);
+  }
+
+  $corners: (
+    'ss': $ss,
+    'se': $se,
+    'es': $es,
+    'ee': $ee,
+  );
+
+  @each $name, $value in $corners {
+    @if $value != null {
+      @include custom-property.declaration('button-radius-#{$name}', $value);
+    }
+  }
+  // stylelint-enable scss/at-if-no-null
+}
