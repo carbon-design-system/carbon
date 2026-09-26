@@ -50,10 +50,10 @@ import { FormContext } from '../FluidForm';
 import type { TranslateWithId } from '../../types/common';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import {
-  useFloating,
   flip,
   hide,
   autoUpdate,
+  computePosition,
   size as floatingSize,
 } from '@floating-ui/react';
 import { useFeatureFlag } from '../FeatureFlags';
@@ -323,23 +323,16 @@ const Dropdown = React.forwardRef(
     }: DropdownProps<ItemType>,
     ref: ForwardedRef<HTMLButtonElement>
   ) => {
-    const enableFloatingStyles = useFeatureFlag(
-      'enable-v12-dynamic-floating-styles'
-    );
+    const enableFloatingStyles =
+      useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
 
-    const { refs, floatingStyles, middlewareData } = useFloating(
-      enableFloatingStyles || autoAlign
-        ? {
-            placement: direction,
+    const triggerRef = useRef<HTMLDivElement>(null);
+    const menuRef = useRef<HTMLUListElement>(null);
 
-            // The floating element is positioned relative to its nearest
-            // containing block (usually the viewport). It will in many cases also
-            // “break” the floating element out of a clipping ancestor.
-            // https://floating-ui.com/docs/misc#clipping
-            strategy: 'fixed',
-
-            // Middleware order matters, arrow should be last
-            middleware: [
+    const floatingMiddleware = useMemo(
+      () =>
+        enableFloatingStyles
+          ? [
               floatingSize({
                 apply({ rects, elements }) {
                   Object.assign(elements.floating.style, {
@@ -349,30 +342,10 @@ const Dropdown = React.forwardRef(
               }),
               autoAlign && flip(),
               autoAlign && hide(),
-            ],
-            whileElementsMounted: autoUpdate,
-          }
-        : {}
-      // When autoAlign is turned off & the `enable-v12-dynamic-floating-styles` feature flag is not
-      // enabled, floating-ui will not be used
+            ].filter(Boolean)
+          : undefined,
+      [enableFloatingStyles, autoAlign]
     );
-
-    useEffect(() => {
-      if (enableFloatingStyles || autoAlign) {
-        const updatedFloatingStyles = {
-          ...floatingStyles,
-          visibility: middlewareData.hide?.referenceHidden
-            ? 'hidden'
-            : 'visible',
-        };
-        Object.keys(updatedFloatingStyles).forEach((style) => {
-          if (refs.floating.current) {
-            refs.floating.current.style[style] = updatedFloatingStyles[style];
-          }
-        });
-      }
-      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
-    }, [floatingStyles, autoAlign, refs.floating]);
 
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
@@ -446,6 +419,33 @@ const Dropdown = React.forwardRef(
       highlightedIndex,
     } = useSelect(selectProps);
     const inline = type === 'inline';
+
+    // Position imperatively via autoUpdate — scroll/resize never touch React state.
+    useEffect(() => {
+      if (!enableFloatingStyles || !isOpen) {
+        return;
+      }
+      const reference = triggerRef.current;
+      const floating = menuRef.current;
+      if (!reference || !floating) {
+        return;
+      }
+      const applyPosition = () =>
+        computePosition(reference, floating, {
+          placement: direction,
+          strategy: 'fixed',
+          middleware: floatingMiddleware,
+        }).then(({ x, y, middlewareData: data }) => {
+          Object.assign(floating.style, {
+            left: `${x}px`,
+            top: `${y}px`,
+            visibility: data.hide?.referenceHidden ? 'hidden' : 'visible',
+          });
+        });
+      floating.style.position = 'fixed';
+      return autoUpdate(reference, floating, applyPosition);
+      // triggerRef/menuRef are stable refs — omitted from deps intentionally.
+    }, [enableFloatingStyles, isOpen, direction, floatingMiddleware]);
 
     const normalizedProps = useNormalizedInputProps({
       id,
@@ -602,9 +602,9 @@ const Dropdown = React.forwardRef(
     const menuProps = useMemo(
       () =>
         getMenuProps({
-          ref: enableFloatingStyles || autoAlign ? refs.setFloating : null,
+          ref: enableFloatingStyles ? menuRef : null,
         }),
-      [autoAlign, getMenuProps, refs.setFloating, enableFloatingStyles]
+      [enableFloatingStyles, getMenuProps]
     );
 
     // AILabel is always size `mini`
@@ -647,7 +647,7 @@ const Dropdown = React.forwardRef(
           warnTextId={normalizedProps.warnId}
           light={light}
           isOpen={isOpen}
-          ref={enableFloatingStyles || autoAlign ? refs.setReference : null}
+          ref={enableFloatingStyles ? triggerRef : null}
           id={id}>
           {normalizedProps.invalid && (
             <WarningFilled className={`${prefix}--list-box__invalid-icon`} />

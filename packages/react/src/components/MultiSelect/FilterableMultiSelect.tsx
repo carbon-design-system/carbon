@@ -56,11 +56,11 @@ import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { useSelection } from '../../internal/Selection';
 import {
-  useFloating,
   flip,
   hide,
   size as floatingSize,
   autoUpdate,
+  computePosition,
 } from '@floating-ui/react';
 import type { TranslateWithId } from '../../types/common';
 import { AILabel } from '../AILabel';
@@ -71,7 +71,6 @@ import {
 } from '../../internal';
 import { hasHelperText } from '../../internal/hasHelperText';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
-import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
 import { useFeatureFlag } from '../FeatureFlags';
 
@@ -449,19 +448,13 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
   }, [nonSelectAllItems, selectAllStatus, controlledSelectedItems, toggleAll]);
 
-  const { refs, floatingStyles, middlewareData } = useFloating(
-    autoAlign
-      ? {
-          placement: direction,
+  const triggerRef = useRef<HTMLDivElement>(null);
+  const menuRef = useRef<HTMLUListElement>(null);
 
-          // The floating element is positioned relative to its nearest
-          // containing block (usually the viewport). It will in many cases also
-          // “break” the floating element out of a clipping ancestor.
-          // https://floating-ui.com/docs/misc#clipping
-          strategy: 'fixed',
-
-          // Middleware order matters, arrow should be last
-          middleware: [
+  const floatingMiddleware = useMemo(
+    () =>
+      autoAlign
+        ? [
             flip({ crossAxis: false }),
             floatingSize({
               apply({ rects, elements }) {
@@ -471,25 +464,37 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
               },
             }),
             hide(),
-          ],
-          whileElementsMounted: autoUpdate,
-        }
-      : {}
+          ]
+        : undefined,
+    [autoAlign]
   );
 
-  useIsomorphicEffect(() => {
-    if (autoAlign) {
-      const updatedFloatingStyles = {
-        ...floatingStyles,
-        visibility: middlewareData.hide?.referenceHidden ? 'hidden' : 'visible',
-      };
-      Object.keys(updatedFloatingStyles).forEach((style) => {
-        if (refs.floating.current) {
-          refs.floating.current.style[style] = updatedFloatingStyles[style];
-        }
-      });
+  // Position imperatively via autoUpdate — scroll/resize never touch React state.
+  useEffect(() => {
+    if (!autoAlign || !isOpen) {
+      return;
     }
-  }, [autoAlign, floatingStyles, refs.floating, middlewareData, open]);
+    const reference = triggerRef.current;
+    const floating = menuRef.current;
+    if (!reference || !floating) {
+      return;
+    }
+    const applyPosition = () =>
+      computePosition(reference, floating, {
+        placement: direction,
+        strategy: 'fixed',
+        middleware: floatingMiddleware,
+      }).then(({ x, y, middlewareData: data }) => {
+        Object.assign(floating.style, {
+          left: `${x}px`,
+          top: `${y}px`,
+          visibility: data.hide?.referenceHidden ? 'hidden' : 'visible',
+        });
+      });
+    floating.style.position = 'fixed';
+    return autoUpdate(reference, floating, applyPosition);
+    // triggerRef/menuRef are stable refs — omitted from deps intentionally.
+  }, [autoAlign, isOpen, direction, floatingMiddleware]);
 
   const textInput = useRef<HTMLInputElement>(null);
   const filterableMultiSelectInstanceId = useId();
@@ -956,12 +961,12 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     () =>
       getMenuProps(
         {
-          ref: autoAlign ? refs.setFloating : null,
+          ref: autoAlign ? menuRef : null,
           hidden: !isOpen,
         },
         { suppressRefError: true }
       ),
-    [autoAlign, getMenuProps, isOpen, refs.setFloating]
+    [autoAlign, getMenuProps, isOpen]
   );
 
   const mergedRef = mergeRefs(textInput, inputProp.ref);
@@ -1015,7 +1020,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
         size={size}>
         <div
           className={`${prefix}--list-box__field`}
-          ref={autoAlign ? refs.setReference : null}>
+          ref={autoAlign ? triggerRef : null}>
           {controlledSelectedItems.length > 0 && (
             <ListBoxSelection
               readOnly={readOnly}
