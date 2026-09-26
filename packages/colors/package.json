@@ -15,6 +15,7 @@
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "files": [
     "es",
+    "js/generated",
     "lib",
     "scss",
     "umd",
