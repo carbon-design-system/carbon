@@ -66,6 +66,9 @@ const config: StorybookConfig = {
     },
   ],
   core: {
+    allowedHosts: process.env.ONA_EXPOSED_HOST
+      ? [process.env.ONA_EXPOSED_HOST]
+      : undefined,
     builder: '@storybook/builder-vite',
   },
   features: {

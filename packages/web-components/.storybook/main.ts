@@ -50,6 +50,11 @@ const config: StorybookConfig = {
     },
     '@storybook/addon-links',
   ],
+  core: {
+    allowedHosts: process.env.ONA_EXPOSED_HOST
+      ? [process.env.ONA_EXPOSED_HOST]
+      : undefined,
+  },
   features: {
     interactions: false, // disable Interactions tab
   },
