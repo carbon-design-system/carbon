@@ -1,0 +1,156 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/themes/scss/theme';
+@use '@carbon/themes/scss/v12' as v12;
+
+[data-carbon-theme='light'] {
+  @include theme.theme(v12.$experimental-v12-light);
+}
+
+[data-carbon-theme='dark'] {
+  @include theme.theme(v12.$experimental-v12-dark);
+}
+
+.v12-oklch-notice {
+  display: grid;
+  padding: 1rem;
+  background: #fcf4d6;
+  border-inline-start: 0.25rem solid #f1c21b;
+  color: #161616;
+  gap: 0.25rem;
+  margin-block-end: 1rem;
+  max-inline-size: 80rem;
+}
+
+.v12-oklch-comparison {
+  display: grid;
+  gap: 2rem;
+  max-inline-size: 80rem;
+}
+
+@media (width >= 66rem) {
+  .v12-oklch-comparison {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.v12-oklch-theme {
+  border: 1px solid var(--cds-border-strong-01);
+  background: var(--cds-layer-01);
+  color: var(--cds-text-primary);
+}
+
+.v12-oklch-theme .cds--layer-one,
+.v12-oklch-theme .cds--layer-two,
+.v12-oklch-theme .cds--layer-three {
+  padding: 1rem;
+  border-block-start: 1px solid var(--cds-border-subtle);
+}
+
+.v12-oklch-layer__content {
+  display: grid;
+  padding: 1rem;
+  background: var(--cds-layer);
+  color: var(--cds-text-primary);
+  gap: 1rem;
+}
+
+.v12-oklch-layer__content h3,
+.v12-oklch-layer__content p {
+  margin: 0;
+}
+
+.v12-oklch-layer__content p {
+  color: var(--cds-text-secondary);
+}
+
+.v12-oklch-layer__content label {
+  display: grid;
+}
+
+.v12-oklch-layer__content input {
+  box-sizing: border-box;
+  padding: 0.75rem 1rem;
+  border: 0;
+  background: var(--cds-field);
+  border-block-end: 1px solid var(--cds-border-strong);
+  color: inherit;
+  font: inherit;
+  margin-block-start: 0.5rem;
+}
+
+.v12-oklch-layer__content small {
+  color: var(--cds-text-helper-01);
+  margin-block-start: 0.5rem;
+}
+
+.v12-oklch-theme > header {
+  padding: 1rem;
+}
+
+.v12-oklch-theme > header h2,
+.v12-oklch-theme > header p {
+  margin: 0;
+}
+
+.v12-oklch-theme > header p {
+  color: var(--cds-text-secondary);
+}
+
+.v12-oklch-layer__accent {
+  padding: 0.75rem;
+  background: var(--cds-layer-accent);
+}
+
+.v12-oklch-token-table {
+  display: grid;
+  padding: 0.75rem;
+  border: 1px solid var(--cds-border-subtle);
+  background: var(--cds-layer);
+  gap: 0.25rem;
+  margin-block-end: 0.75rem;
+}
+
+.v12-oklch-token-row {
+  display: grid;
+  font-family: SFMono-Regular, Consolas, Menlo, monospace;
+  font-size: 0.75rem;
+  gap: 0.5rem;
+  grid-template-columns: 1fr 1fr;
+  line-height: 1.4;
+}
+
+.v12-oklch-token-name {
+  overflow: hidden;
+  color: var(--cds-text-secondary);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.v12-oklch-token-value {
+  overflow: hidden;
+  color: var(--cds-text-primary);
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.v12-oklch-layer__skeleton {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.v12-oklch-layer__skeleton span {
+  display: block;
+  background: var(--cds-skeleton-background-01);
+  block-size: 0.75rem;
+}
+
+.v12-oklch-layer__skeleton span:last-child {
+  inline-size: 70%;
+}

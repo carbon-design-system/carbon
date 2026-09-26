@@ -28,10 +28,11 @@
   },
   "scripts": {
     "ci-check": "carbon-cli check \"scss/**/*.scss\" -i \"**/generated/**\" -i \"**/compat/**\"",
-    "clean": "rimraf es lib umd scss/compat/generated scss/generated js/generated",
+    "clean": "rimraf es lib umd scss/compat/generated scss/generated js/generated src/dtcg/v12",
     "build:types": "tsc -p tsconfig.types.json",
     "babel-node": "node ../../node_modules/@babel/node/lib/babel-node.js",
     "build:js-tokens": "yarn babel-node --extensions '.js,.ts' --presets '@babel/preset-env,@babel/preset-typescript' tasks/generate-js-tokens.js",
+    "build:v12": "yarn babel-node --extensions '.js,.ts' --presets '@babel/preset-env,@babel/preset-typescript' tasks/build-v12.js",
     "build": "yarn clean && yarn build:js-tokens && carbon-cli bundle src/index.ts --name CarbonThemes && yarn babel-node --extensions '.js,.ts' --presets '@babel/preset-env,@babel/preset-typescript' tasks/build.js && yarn build:types && carbon-cli check \"scss/*.scss\"",
     "postinstall": "ibmtelemetry --config=telemetry.yml"
   },

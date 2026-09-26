@@ -132,6 +132,8 @@ exports[`Public API should only change with a semver change 1`] = `
   "display04",
   "easings",
   "em",
+  "experimentalV12Dark",
+  "experimentalV12Light",
   "expressiveHeading01",
   "expressiveHeading02",
   "expressiveHeading03",
