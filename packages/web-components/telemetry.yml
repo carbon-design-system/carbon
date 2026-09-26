@@ -433,6 +433,11 @@ collect:
         # cds-grid
         - narrow
         - with-row-gap
+        # cds-guide-banner
+        - collapse-text
+        - expand-text
+        - oncds-guide-banner-close
+        - oncds-guide-banner-toggle
         # cds-header-global-action
         - panel-id
         # cds-header-menu

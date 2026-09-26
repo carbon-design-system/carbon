@@ -1,3 +1,7 @@
+// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=31753-68447&t=aG4cJRjteQHcd71k-4
+// source=https://github.com/carbon-design-system/carbon/blob/main/packages/web-components/src/components/combo-button/combo-button.ts
+// component=cds-combo-button
+
 /**
  * Copyright IBM Corp. 2026
  *
@@ -5,37 +9,40 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import figma, { html } from '@figma/code-connect/html';
+import figma from 'figma';
+import { renderStringAttribute } from '../template-helpers';
 
-const sharedComboButtonProps = {
-  size: figma.enum('Size', {
-    Large: 'lg',
-    Medium: 'md',
-    Small: 'sm',
-  }),
-  menuAlignment: figma.enum('Position', {
-    Bottom: 'bottom',
-    Top: 'top',
-  }),
-  menu: figma.nestedProps('Menu', {
-    menuItem: figma.children(['_Menu list item']),
-  }),
+const instance = figma.selectedInstance;
+const size = instance.getEnum('Size', {
+  Large: 'lg',
+  Medium: 'md',
+  Small: 'sm',
+  'Extra small': 'xs',
+});
+const menuAlignment = instance.getEnum('Position', {
+  Bottom: 'bottom',
+  Top: 'top',
+});
+const menu = instance.findInstance('Menu');
+const menuItems =
+  menu.type !== 'ERROR'
+    ? menu
+        .findConnectedInstances(
+          (child) => child.name === '_Menu list item' && child.hasCodeConnect()
+        )
+        .map((child) => child.executeTemplate().example)
+    : [];
+
+export default {
+  id: 'cds-combo-button',
+  imports: [
+    "import '@carbon/web-components/es/components/combo-button/index.js'",
+    "import '@carbon/web-components/es/components/menu/index.js'",
+  ],
+  example: figma.code`<cds-combo-button label="Primary action"${renderStringAttribute(
+    'menu-alignment',
+    menuAlignment
+  )}${renderStringAttribute('size', size)}>
+  <cds-menu>${menuItems}</cds-menu>
+</cds-combo-button>`,
 };
-
-figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=31753-68447&t=aG4cJRjteQHcd71k-4',
-  {
-    props: sharedComboButtonProps,
-    example: (props) =>
-      html`<cds-combo-button
-        label="Primary action"
-        menu-alignment=${props.menuAlignment}
-        size=${props.size}>
-        <cds-menu>${props.menu.menuItem}</cds-menu>
-      </cds-combo-button>`,
-    imports: [
-      "import '@carbon/web-components/es/components/combo-button/index.js'",
-      "import '@carbon/web-components/es/components/menu/index.js'",
-    ],
-  }
-);

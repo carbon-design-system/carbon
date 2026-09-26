@@ -7,10 +7,13 @@
 
 $css--plex: true !default;
 
+@use '@carbon/styles/scss/border-radius' as *;
 @use '@carbon/styles/scss/config' as *;
 @use '@carbon/styles/scss/colors' as *;
+@use '@carbon/styles/scss/feature-flags' as flags;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/utilities/convert';
 @use '@carbon/styles/scss/components/notification/index' as *;
 @use '@carbon/styles/scss/components/button';
 @use '@carbon/styles/scss/components/button/mixins' as button-mixins;
@@ -190,6 +193,10 @@ $css--plex: true !default;
 :host(#{$prefix}-callout-notification) {
   @include actionable-notification-base;
   @include emit-layout-tokens();
+
+  @if flags.enabled('enable-v12-release') {
+    border-radius: $border-radius-04;
+  }
 
   display: flex;
   outline: none;
