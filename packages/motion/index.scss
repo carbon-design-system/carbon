@@ -1,35 +1,42 @@
 //
-// Copyright IBM Corp. 2018, 2023
+// Copyright IBM Corp. 2018, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
+@use 'sass:list';
 @use 'sass:map';
+@use './scss/generated/tokens' as tokens;
+@use 'scss/generated/surfaces' as generated;
 
-/// Common component easings
-/// @type Map
-/// @access public
-/// @group @carbon/motion
-$easings: (
-  standard: (
-    productive: cubic-bezier(0.2, 0, 0.38, 0.9),
-    expressive: cubic-bezier(0.4, 0.14, 0.3, 1),
-  ),
-  entrance: (
-    productive: cubic-bezier(0, 0, 0.38, 0.9),
-    expressive: cubic-bezier(0, 0, 0.3, 1),
-  ),
-  exit: (
-    productive: cubic-bezier(0.2, 0, 1, 0.9),
-    expressive: cubic-bezier(0.4, 0.14, 1, 1),
-  ),
-);
+// Re-forward all generated token variables as public API
+$easings: tokens.$easings !default;
+$duration-fast-01: tokens.$duration-fast-01 !default;
+$duration-fast-02: tokens.$duration-fast-02 !default;
+$duration-moderate-01: tokens.$duration-moderate-01 !default;
+$duration-moderate-02: tokens.$duration-moderate-02 !default;
+$duration-slow-01: tokens.$duration-slow-01 !default;
+$duration-slow-02: tokens.$duration-slow-02 !default;
+
+/// V10 backwards compatibility tokens
+/// @deprecated
+$fast-01: tokens.$fast-01 !default;
+/// @deprecated
+$fast-02: tokens.$fast-02 !default;
+/// @deprecated
+$moderate-01: tokens.$moderate-01 !default;
+/// @deprecated
+$moderate-02: tokens.$moderate-02 !default;
+/// @deprecated
+$slow-01: tokens.$slow-01 !default;
+/// @deprecated
+$slow-02: tokens.$slow-02 !default;
 
 /// Get the transition-timing-function for a given easing and motion mode
 /// @param {String} $name - Can be `standard`, `entrance`, or `exit`
 /// @param {String} $mode [productive] - Can be `productive` or `expressive`
-/// @param {Map} $easings [$carbon--easings] - Easings map
+/// @param {Map} $easings [$easings] - Easings map
 /// @access public
 /// @group @carbon/motion
 /// @return {Function} CSS `cubic-bezier()` function
@@ -55,69 +62,133 @@ $easings: (
   transition-timing-function: motion($name, $mode);
 }
 
+/// Named motion intents shared across Carbon implementations
+/// @type Map
 /// @access public
-/// @type Duration
 /// @group @carbon/motion
-$duration-fast-01: 70ms;
+$surfaces: generated.$surfaces;
 
+/// Get a named motion surface or one of its properties
+/// @param {String} $name - The motion surface name
+/// @param {String | Null} $property [null] - An optional surface property
 /// @access public
-/// @type Duration
 /// @group @carbon/motion
-$duration-fast-02: 110ms;
+/// @return {Map | *} The surface definition or requested property
+@function surface($name, $property: null) {
+  @if not map.has-key($surfaces, $name) {
+    @error 'Unable to find a motion surface named #{$name}.';
+  }
 
-/// @access public
-/// @type Duration
-/// @group @carbon/motion
-$duration-moderate-01: 150ms;
+  $definition: map.get($surfaces, $name);
 
-/// @access public
-/// @type Duration
-/// @group @carbon/motion
-$duration-moderate-02: 240ms;
+  @if not $property {
+    @return $definition;
+  }
 
-/// @access public
-/// @type Duration
-/// @group @carbon/motion
-$duration-slow-01: 400ms;
+  @if not map.has-key($definition, $property) {
+    @error 'Unable to find a property named #{$property} on the #{$name} motion surface.';
+  }
 
-/// @access public
-/// @type Duration
-/// @group @carbon/motion
-$duration-slow-02: 700ms;
+  @return map.get($definition, $property);
+}
 
-/// V10 backwards compatibility tokens
-/// @access public
-/// @deprecated
-/// @type Duration
+/// Surface duration tokens mapped to their duration values
+/// @access private
 /// @group @carbon/motion
-$fast-01: $duration-fast-01;
+$-durations: (
+  'fast-01': $duration-fast-01,
+  'fast-02': $duration-fast-02,
+  'moderate-01': $duration-moderate-01,
+  'moderate-02': $duration-moderate-02,
+  'slow-01': $duration-slow-01,
+  'slow-02': $duration-slow-02,
+);
 
+/// Apply a named reveal surface in CSS from the shared surface map.
+///
+/// Resting / `[data-carbon-surface-state='enter']` use the surface enter
+/// keyframes. `[data-carbon-surface-state='exit']` uses the exit keyframes.
+/// Transitions (and `@starting-style` for first-mount enter) are guarded
+/// behind `prefers-reduced-motion: no-preference` - users who prefer reduced
+/// motion get the resting styles with no animation at all.
+///
+/// Typical usage with controlled open/close:
+///
+/// ```scss
+/// [data-carbon-surface='contextual'] {
+///   @include motion.surface(contextual);
+/// }
+/// ```
+///
+/// Shared-element surfaces morph one element into another and have no
+/// CSS-only form; they need a JavaScript engine (Motion in React, View
+/// Transitions for web components), so this mixin rejects them
+/// @param {String} $name - The motion surface name
 /// @access public
-/// @deprecated
-/// @type Duration
 /// @group @carbon/motion
-$fast-02: $duration-fast-02;
+@mixin surface($name) {
+  $definition: surface($name);
+  $kind: map.get($definition, kind);
 
-/// @access public
-/// @deprecated
-/// @type Duration
-/// @group @carbon/motion
-$moderate-01: $duration-moderate-01;
+  @if $kind != 'reveal' {
+    @error 'The #{$name} surface is a shared-element morph with no CSS-only form. Pair it with a JavaScript engine instead.';
+  }
 
-/// @access public
-/// @deprecated
-/// @type Duration
-/// @group @carbon/motion
-$moderate-02: $duration-moderate-02;
+  $enter: map.get($definition, enter);
+  $exit: map.get($definition, exit);
+  $duration: map.get($-durations, map.get($definition, duration));
+  $enter-easing: map.get($definition, enter-easing);
+  $exit-easing: map.get($definition, exit-easing);
+  $properties: ();
 
-/// @access public
-/// @deprecated
-/// @type Duration
-/// @group @carbon/motion
-$slow-01: $duration-slow-01;
+  @each $property, $value in $enter {
+    $properties: list.append($properties, $property, $separator: comma);
+  }
 
-/// @access public
-/// @deprecated
-/// @type Duration
-/// @group @carbon/motion
-$slow-02: $duration-slow-02;
+  // resting / enter styles apply regardless of motion preference
+  &,
+  &[data-carbon-surface-state='enter'] {
+    @each $property, $value in $enter {
+      #{$property}: #{$value};
+    }
+  }
+
+  &[data-carbon-surface-state='exit'] {
+    @each $property, $value in $exit {
+      #{$property}: #{$value};
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    // `auto` sizes, e.g. disclosure block-size, interpolate where
+    // supported
+    interpolate-size: allow-keywords;
+    transition-duration: $duration;
+    transition-property: $properties;
+
+    &,
+    &[data-carbon-surface-state='enter'] {
+      transition-timing-function: motion(
+        list.nth($enter-easing, 1),
+        list.nth($enter-easing, 2)
+      );
+    }
+
+    &[data-carbon-surface-state='exit'] {
+      transition-timing-function: motion(
+        list.nth($exit-easing, 1),
+        list.nth($exit-easing, 2)
+      );
+    }
+
+    // the styles the element enters from when it is first rendered
+    @starting-style {
+      &,
+      &[data-carbon-surface-state='enter'] {
+        @each $property, $value in $exit {
+          #{$property}: #{$value};
+        }
+      }
+    }
+  }
+}

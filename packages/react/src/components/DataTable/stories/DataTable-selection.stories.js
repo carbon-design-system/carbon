@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -17,13 +17,21 @@ import DataTable, {
   TableSelectAll,
   TableSelectRow,
 } from '..';
-import { rows, headers } from './shared';
+import { dataTableArgs, dataTableArgTypes, rows, headers } from './shared';
 import mdx from '../DataTable.mdx';
 import { action } from 'storybook/actions';
 
 export default {
   title: 'Components/DataTable/Selection',
   component: DataTable,
+  args: { ...dataTableArgs, radio: false },
+  argTypes: {
+    ...dataTableArgTypes,
+    radio: {
+      control: 'boolean',
+      description: 'Use radio selection instead of multi-selection.',
+    },
+  },
   subcomponents: {
     TableSelectAll,
     TableSelectRow,
@@ -39,27 +47,6 @@ export default {
     docs: {
       page: mdx,
     },
-  },
-};
-
-const sharedArgTypes = {
-  filterRows: {
-    control: false,
-  },
-  headers: {
-    control: false,
-  },
-  overflowMenuOnHover: {
-    control: false,
-  },
-  rows: {
-    control: false,
-  },
-  translateWithId: {
-    control: false,
-  },
-  sortRow: {
-    control: false,
   },
 };
 
@@ -119,10 +106,8 @@ export const Default = (args) => (
   </DataTable>
 );
 
-Default.argTypes = { ...sharedArgTypes };
-
 export const WithRadioSelection = (args) => (
-  <DataTable rows={rows} headers={headers} radio {...args}>
+  <DataTable rows={rows} headers={headers} {...args}>
     {({
       rows,
       headers,
@@ -166,10 +151,13 @@ export const WithRadioSelection = (args) => (
   </DataTable>
 );
 
-WithRadioSelection.argTypes = { ...sharedArgTypes };
+WithRadioSelection.args = { radio: true };
+WithRadioSelection.argTypes = {
+  radio: { table: { readonly: true } },
+};
 
 export const WithSelectionAndSorting = (args) => (
-  <DataTable rows={rows} headers={headers} isSortable {...args}>
+  <DataTable rows={rows} headers={headers} {...args}>
     {({
       rows,
       headers,
@@ -213,4 +201,7 @@ export const WithSelectionAndSorting = (args) => (
   </DataTable>
 );
 
-WithSelectionAndSorting.argTypes = { ...sharedArgTypes };
+WithSelectionAndSorting.args = { isSortable: true };
+WithSelectionAndSorting.argTypes = {
+  isSortable: { table: { readonly: true } },
+};

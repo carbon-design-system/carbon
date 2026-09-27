@@ -17,7 +17,7 @@ import React, {
 } from 'react';
 import classNames from 'classnames';
 import RadioButton, { type RadioButtonProps } from '../RadioButton';
-import { Legend } from '../Text/createTextComponent';
+import { Text } from '../Text';
 import { usePrefix } from '../../internal/usePrefix';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import { deprecate } from '../../prop-types/deprecate';
@@ -26,6 +26,7 @@ import { useId } from '../../internal/useId';
 import { hasHelperText } from '../../internal/hasHelperText';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
+import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
 
 export const RadioButtonGroupContext = createContext(null);
 
@@ -248,6 +249,7 @@ const RadioButtonGroup = React.forwardRef(
     );
 
     const divRef = useRef<HTMLDivElement>(null);
+    const legendRef = useRef<HTMLLegendElement>(null);
 
     // AILabel is always size `mini`
     const candidate = slug ?? decorator;
@@ -255,6 +257,10 @@ const RadioButtonGroup = React.forwardRef(
     const normalizedDecorator = candidateIsAILabel
       ? cloneElement(candidate, { size: 'mini', kind: 'default' })
       : candidate;
+    useNoInteractiveChildren(
+      legendRef,
+      'The RadioButtonGroup component `legendText` prop must have no interactive content'
+    );
 
     return (
       <div className={wrapperClasses} ref={mergeRefs(divRef, ref)}>
@@ -265,20 +271,17 @@ const RadioButtonGroup = React.forwardRef(
           aria-describedby={showHelper && hasHelper ? helperId : undefined}
           {...rest}>
           {legendText && (
-            <Legend className={`${prefix}--label`}>
+            <Text as="legend" className={`${prefix}--label`} ref={legendRef}>
               {legendText}
-              {slug ? (
-                normalizedDecorator
-              ) : decorator ? (
-                <div
-                  className={`${prefix}--radio-button-group-inner--decorator`}>
-                  {normalizedDecorator}
-                </div>
-              ) : (
-                ''
-              )}
-            </Legend>
+            </Text>
           )}
+          {legendText && slug ? (
+            normalizedDecorator
+          ) : legendText && decorator ? (
+            <div className={`${prefix}--radio-button-group-inner--decorator`}>
+              {normalizedDecorator}
+            </div>
+          ) : null}
           {getRadioButtons()}
         </fieldset>
         <div className={`${prefix}--radio-button__validation-msg`}>

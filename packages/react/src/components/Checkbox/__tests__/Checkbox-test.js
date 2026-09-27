@@ -24,6 +24,42 @@ describe('Checkbox', () => {
     expect(screen.getByLabelText('test-label')).toBeInTheDocument();
   });
 
+  it('should not allow interactive content in labelText', () => {
+    const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+    expect(() => {
+      render(
+        <Checkbox
+          id="test"
+          labelText={
+            <>
+              test-label <button type="button">Help</button>
+            </>
+          }
+        />
+      );
+    }).toThrow(
+      'The Checkbox component `labelText` prop must have no interactive content'
+    );
+
+    spy.mockRestore();
+  });
+
+  it('should allow non-interactive content in labelText', () => {
+    expect(() => {
+      render(
+        <Checkbox
+          id="test"
+          labelText={
+            <>
+              test-label <span>additional label content</span>
+            </>
+          }
+        />
+      );
+    }).not.toThrow();
+  });
+
   it('should use defaultChecked to set the default value of the <input> checkbox', () => {
     render(<Checkbox id="test" labelText="test-label" defaultChecked />);
     expect(screen.getByRole('checkbox')).toBeChecked();
@@ -347,6 +383,9 @@ describe('Checkbox', () => {
     expect(container.firstChild).toHaveClass(
       `${prefix}--checkbox-wrapper--slug`
     );
+    expect(container.querySelector('label')).not.toContainElement(
+      screen.getByRole('button')
+    );
     spy.mockRestore();
   });
 
@@ -362,6 +401,9 @@ describe('Checkbox', () => {
 
     expect(container.firstChild).toHaveClass(
       `${prefix}--checkbox-wrapper--decorator`
+    );
+    expect(container.querySelector('label')).not.toContainElement(
+      screen.getByRole('button')
     );
   });
 

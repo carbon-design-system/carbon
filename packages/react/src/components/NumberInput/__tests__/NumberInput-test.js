@@ -31,6 +31,42 @@ function translateWithId(id) {
 }
 
 describe('NumberInput', () => {
+  it('should not allow interactive content in label', () => {
+    const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+    expect(() => {
+      render(
+        <NumberInput
+          id="number-input"
+          label={
+            <>
+              NumberInput label <button type="button">Help</button>
+            </>
+          }
+        />
+      );
+    }).toThrow(
+      'The NumberInput component `label` prop must have no interactive content'
+    );
+
+    spy.mockRestore();
+  });
+
+  it('should allow non-interactive content in label', () => {
+    expect(() => {
+      render(
+        <NumberInput
+          id="number-input"
+          label={
+            <>
+              NumberInput label <span>additional label content</span>
+            </>
+          }
+        />
+      );
+    }).not.toThrow();
+  });
+
   // Controlled tests - tests where component state is managed externally via useState/value prop
   describe('Controlled', () => {
     it('should update externally to an empty value when `allowEmpty` is `true`', async () => {
@@ -2726,6 +2762,28 @@ describe('NumberInput', () => {
       expect(parseNumberWithLocale('1234', 'en-US')).toBe(1234);
 
       numberFormatSpy.mockRestore();
+    });
+  });
+
+  describe('validateNumberSeparators - Indian locale', () => {
+    it('should accept valid Indian digit grouping for en-IN', () => {
+      expect(validateNumberSeparators('5,00,000', 'en-IN')).toBe(true);
+      expect(validateNumberSeparators('1,23,45,678', 'en-IN')).toBe(true);
+    });
+
+    it('should reject invalid Indian digit grouping for en-IN', () => {
+      expect(validateNumberSeparators('5,000,00', 'en-IN')).toBe(false);
+      expect(validateNumberSeparators('5,0000', 'en-IN')).toBe(false);
+    });
+  });
+
+  describe('validateNumberSeparators - locale specific grouping', () => {
+    it('accepts Indian grouping for en-IN', () => {
+      expect(validateNumberSeparators('5,00,000', 'en-IN')).toBe(true);
+    });
+
+    it('continues to reject Indian grouping for en-US', () => {
+      expect(validateNumberSeparators('5,00,000', 'en-US')).toBe(false);
     });
   });
 });

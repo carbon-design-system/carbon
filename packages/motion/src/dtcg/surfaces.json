@@ -1,0 +1,100 @@
+{
+  "$schema": "https://tr.designtokens.org/format/",
+  "$description": "Motion surface recipes for Carbon — composite transition intents built from primitive duration and easing tokens.",
+  "surface": {
+    "disclosure": {
+      "$type": "transition",
+      "$value": {
+        "duration": "{duration.moderate.01}",
+        "delay": { "value": 0, "unit": "ms" },
+        "timingFunction": "{easing.entrance.productive}"
+      },
+      "$description": "Accordion, table-row expand — reveal in place.",
+      "$extensions": {
+        "carbon.motion": {
+          "kind": "reveal",
+          "duration": "moderate-01",
+          "enter": { "blockSize": "auto", "opacity": 1 },
+          "exit": { "blockSize": 0, "opacity": 0 },
+          "enterEasing": ["entrance", "productive"],
+          "exitEasing": ["exit", "productive"]
+        }
+      }
+    },
+    "contextual": {
+      "$type": "transition",
+      "$value": {
+        "duration": "{duration.fast.02}",
+        "delay": { "value": 0, "unit": "ms" },
+        "timingFunction": "{easing.entrance.expressive}"
+      },
+      "$description": "Icon → tooltip/popover — fade and scale reveal.",
+      "$extensions": {
+        "carbon.motion": {
+          "kind": "reveal",
+          "duration": "fast-02",
+          "enter": { "opacity": 1, "transform": "scale(1)" },
+          "exit": { "opacity": 0, "transform": "scale(0.96)" },
+          "enterEasing": ["entrance", "expressive"],
+          "exitEasing": ["exit", "expressive"]
+        }
+      }
+    },
+    "stretch": {
+      "$type": "transition",
+      "$value": {
+        "duration": "{duration.slow.01}",
+        "delay": { "value": 0, "unit": "ms" },
+        "timingFunction": "{easing.entrance.expressive}"
+      },
+      "$description": "Component reveal stretching from the vertical axis.",
+      "$extensions": {
+        "carbon.motion": {
+          "kind": "reveal",
+          "duration": "slow-01",
+          "enter": { "opacity": 1, "clipPath": "inset(0 0 0 0)" },
+          "exit": { "opacity": 0, "clipPath": "inset(50% 0 50% 0)" },
+          "enterEasing": ["entrance", "expressive"],
+          "exitEasing": ["exit", "expressive"]
+        }
+      }
+    },
+    "expand": {
+      "$type": "transition",
+      "$value": {
+        "duration": "{duration.moderate.02}",
+        "delay": { "value": 0, "unit": "ms" },
+        "timingFunction": "{easing.standard.productive}"
+      },
+      "$description": "Card/tile → side-panel/tearsheet — shared-element morph.",
+      "$extensions": {
+        "carbon.motion": {
+          "kind": "shared-element",
+          "duration": "moderate-02",
+          "enter": { "opacity": 1, "transform": "scale(1)" },
+          "exit": { "opacity": 0, "transform": "scale(0.96)" },
+          "enterEasing": ["standard", "productive"],
+          "exitEasing": ["standard", "productive"]
+        }
+      }
+    },
+    "invoke": {
+      "$type": "transition",
+      "$value": {
+        "duration": "{duration.moderate.02}",
+        "delay": { "value": 0, "unit": "ms" },
+        "timingFunction": "{easing.standard.expressive}"
+      },
+      "$description": "Button → modal/menu/popover — shared-element morph from the trigger.",
+      "$extensions": {
+        "carbon.motion": {
+          "kind": "shared-element",
+          "origin": "trigger",
+          "duration": "moderate-02",
+          "enterEasing": ["standard", "expressive"],
+          "exitEasing": ["standard", "expressive"]
+        }
+      }
+    }
+  }
+}

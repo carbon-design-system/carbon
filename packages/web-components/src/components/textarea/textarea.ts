@@ -284,7 +284,8 @@ class CDSTextarea extends CDSTextInput {
             : ''}"
           @keydown="${this._onKeyDown}"
           @paste="${this._onPaste}"
-          @input="${this._handleInput}"></textarea>
+          @input="${this._handleInput}"
+          @change="${this._handleChange}"></textarea>
         <slot name="ai-label" @slotchange="${this._handleSlotChange}"></slot>
         <slot name="slug" @slotchange="${this._handleSlotChange}"></slot>
         ${this.isFluid

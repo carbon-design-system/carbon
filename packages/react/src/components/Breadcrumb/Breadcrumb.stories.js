@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -27,10 +27,30 @@ export default {
   },
 };
 
+const sharedArgs = {
+  noTrailingSlash: false,
+  'aria-label': 'Breadcrumb container',
+  size: 'md',
+};
+
 const sharedArgTypes = {
+  className: {
+    control: false,
+  },
+  children: {
+    control: false,
+  },
   size: {
-    options: ['sm', 'md'],
     control: { type: 'select' },
+    options: ['sm', 'md'],
+  },
+  noTrailingSlash: {
+    control: { type: 'boolean' },
+    description: 'Removes the trailing slash from the breadcrumb',
+  },
+  'aria-label': {
+    control: { type: 'text' },
+    description: 'Specifies the label for the breadcrumb container',
   },
 };
 
@@ -45,12 +65,14 @@ export const Default = (args) => (
   </Breadcrumb>
 );
 
+Default.args = { ...sharedArgs };
+
 Default.argTypes = {
   ...sharedArgTypes,
 };
 
 export const BreadcrumbWithOverflowMenu = (args) => (
-  <Breadcrumb noTrailingSlash {...args}>
+  <Breadcrumb {...args} noTrailingSlash>
     <BreadcrumbItem>
       <a href="/#">Breadcrumb 1</a>
     </BreadcrumbItem>
@@ -66,12 +88,14 @@ export const BreadcrumbWithOverflowMenu = (args) => (
   </Breadcrumb>
 );
 
+BreadcrumbWithOverflowMenu.args = { ...sharedArgs };
+
 BreadcrumbWithOverflowMenu.argTypes = {
   ...sharedArgTypes,
 };
 
 export const BreadcrumbWithOverflowMenuSizeSmall = (args) => (
-  <Breadcrumb noTrailingSlash {...args}>
+  <Breadcrumb {...args} noTrailingSlash>
     <BreadcrumbItem>
       <a href="/#">Breadcrumb 1</a>
     </BreadcrumbItem>
@@ -126,7 +150,7 @@ Skeleton.argTypes = {
 };
 
 export const BreadcrumbWithOverflowVisualSnapshots = (args) => (
-  <Breadcrumb noTrailingSlash {...args}>
+  <Breadcrumb {...args} noTrailingSlash>
     <BreadcrumbItem>
       <a href="/#">Breadcrumb 1</a>
     </BreadcrumbItem>

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -116,6 +116,48 @@ describe('cds-menu', () => {
       expect(el.position[1]).to.be.a('number');
       expect(el.position[0]).to.be.at.most(nearMaxX);
       expect(el.position[1]).to.be.at.most(nearMaxY);
+    });
+
+    it('should leave viewport coordinates untouched in LTR', async () => {
+      const el = await fixture(html`<cds-menu></cds-menu>`);
+      await el.updateComplete;
+
+      expect(el._toInlineRange([100, 250])).to.deep.equal([100, 250]);
+    });
+
+    it('should mirror viewport coordinates in RTL', async () => {
+      const originalDir = document.dir;
+      document.dir = 'rtl';
+
+      const el = await fixture(html`<cds-menu></cds-menu>`);
+      await el.updateComplete;
+
+      const max = window.innerWidth;
+
+      expect(el._toInlineRange([100, 250])).to.deep.equal([
+        max - 250,
+        max - 100,
+      ]);
+
+      document.dir = originalDir;
+    });
+
+    it('should not mirror a root menu x in RTL', async () => {
+      const originalDir = document.dir;
+      document.dir = 'rtl';
+
+      const el = await fixture(html`
+        <cds-menu open>
+          <cds-menu-item label="Item 1"></cds-menu-item>
+        </cds-menu>
+      `);
+      await el.updateComplete;
+
+      // `_fitValue` floors every result at `spacing` via
+      // bestOption >= this.spacing ? bestOption : this.spacing;
+      expect(el.position[0]).to.equal(el.spacing);
+
+      document.dir = originalDir;
     });
   });
 

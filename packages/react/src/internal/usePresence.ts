@@ -11,7 +11,21 @@ import useIsomorphicEffect from './useIsomorphicEffect';
 
 export const usePresence = (
   ref: RefObject<HTMLElement | null>,
-  isOpen: boolean
+  isOpen: boolean,
+  /**
+   * Number of pending JS-driven exit animations (e.g. motion surfaces)
+   * registered through the presence context. The exit does not finish while
+   * holds are outstanding, since those animations are invisible to
+   * `getAnimations()`.
+   */
+  exitHoldCount = 0,
+  /**
+   * Override the animation-name prefix used to identify presence animations.
+   * Defaults to `${prefix}--presence` which matches the global convention.
+   * Pass a custom prefix when a component names its animations differently,
+   * e.g. `${prefix}--tearsheet--presence`.
+   */
+  animationNamePrefix?: string
 ) => {
   const prefix = usePrefix();
   const [exitState, setExitState] = useState<'idle' | 'active' | 'finished'>(
@@ -35,6 +49,10 @@ export const usePresence = (
   useIsomorphicEffect(() => {
     if (!ref.current || !isExiting) return;
 
+    // wait for registered JS-driven exits; the effect re-runs when the last
+    // hold is released
+    if (exitHoldCount > 0) return;
+
     // resolve for JSDOM
     if (!('getAnimations' in ref.current)) {
       setExitState('finished');
@@ -42,12 +60,13 @@ export const usePresence = (
     }
 
     // cover all animations that start with the presence prefix
+    const resolvedPrefix = animationNamePrefix ?? `${prefix}--presence`;
     const animations = ref.current
       .getAnimations({ subtree: true })
       .filter(
         (animation) =>
           animation instanceof CSSAnimation &&
-          animation.animationName.startsWith(`${prefix}--presence`)
+          animation.animationName.startsWith(resolvedPrefix)
       );
 
     if (!animations.length) {
@@ -67,7 +86,7 @@ export const usePresence = (
     return () => {
       cancelled = true;
     };
-  }, [ref, isExiting, prefix]);
+  }, [ref, isExiting, prefix, exitHoldCount, animationNamePrefix]);
 
   return {
     /**

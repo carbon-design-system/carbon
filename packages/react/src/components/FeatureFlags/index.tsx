@@ -8,6 +8,7 @@
 import {
   FeatureFlags as GlobalFeatureFlags,
   createScope,
+  notifyAvailableFlag,
 } from '@carbon/feature-flags';
 import PropTypes from 'prop-types';
 import React, {
@@ -20,16 +21,87 @@ import { deprecate } from '../../prop-types/deprecate';
 
 export interface FeatureFlagsProps {
   children?: ReactNode;
+
+  /**
+   * Provide the feature flags to enable or disable in the current React tree.
+   *
+   * @deprecated Use the individual boolean props instead. Run the
+   * `featureflag-deprecate-flags-prop` codemod to migrate:
+   * `npx @carbon/upgrade migrate featureflag-deprecate-flags-prop --write`
+   */
   flags?: Record<string, boolean>;
+
+  /**
+   * Enable the features and functionality for the v12 Release.
+   *
+   * Enabling this turns on every `enableV12*` flag at once, as well as
+   * `enableFocusWrapWithoutSentinels`.
+   */
+  enableV12Release?: boolean;
+
+  /**
+   * Enable rendering of default icons in the tile components.
+   *
+   * Becomes the default behavior in v12.
+   */
   enableV12TileDefaultIcons?: boolean;
+
+  /**
+   * Enable rendering of radio icons in the `RadioTile` component.
+   *
+   * Becomes the default behavior in v12.
+   */
   enableV12TileRadioIcons?: boolean;
+
+  /**
+   * Enable the use of the v12 `OverflowMenu` leveraging the `Menu`
+   * subcomponents.
+   *
+   * Becomes the default behavior in v12.
+   */
   enableV12Overflowmenu?: boolean;
+
+  /**
+   * Enable the new `TreeView` controllable API.
+   */
   enableTreeviewControllable?: boolean;
+
+  /**
+   * Enable the new focus wrap behavior that doesn't use sentinel nodes.
+   *
+   * @deprecated Use `enableFocusWrapWithoutSentinels` instead.
+   */
   enableExperimentalFocusWrapWithoutSentinels?: boolean;
+
+  /**
+   * Enable the new focus wrap behavior that doesn't use sentinel nodes.
+   */
   enableFocusWrapWithoutSentinels?: boolean;
+
+  /**
+   * Enable components to utilize the native `dialog` element.
+   */
   enableDialogElement?: boolean;
+
+  /**
+   * Enable dynamic setting of floating styles for components like `Popover`,
+   * `Tooltip`, etc.
+   *
+   * Becomes the default behavior in v12.
+   */
   enableV12DynamicFloatingStyles?: boolean;
+
+  /**
+   * Enable enhanced functionality for the `FileUploader` component, including
+   * richer callback data and expanded trigger events for `onChange` and
+   * `onDelete`.
+   */
   enableEnhancedFileUploader?: boolean;
+
+  /**
+   * Enable components to remain unmounted in closed state and mount in open
+   * state.
+   */
   enablePresence?: boolean;
 }
 
@@ -46,6 +118,7 @@ const FeatureFlagContext = createContext<FeatureFlagScope>(GlobalFeatureFlags);
 
 // Maps each camelCase prop name to its kebab-case feature flag key.
 const PROP_TO_FLAG: Record<string, string> = {
+  enableV12Release: 'enable-v12-release',
   enableV12TileDefaultIcons: 'enable-v12-tile-default-icons',
   enableV12TileRadioIcons: 'enable-v12-tile-radio-icons',
   enableV12Overflowmenu: 'enable-v12-overflowmenu',
@@ -67,6 +140,7 @@ const PROP_TO_FLAG: Record<string, string> = {
 export const FeatureFlags = ({
   children,
   flags,
+  enableV12Release,
   enableV12TileDefaultIcons,
   enableV12TileRadioIcons,
   enableV12Overflowmenu,
@@ -85,6 +159,7 @@ export const FeatureFlags = ({
     // ensures that unspecified props do not shadow flags set by a parent
     // FeatureFlags scope, which is the correct behaviour for nested scopes.
     const flagProps = {
+      enableV12Release,
       enableV12TileDefaultIcons,
       enableV12TileRadioIcons,
       enableV12Overflowmenu,
@@ -113,6 +188,7 @@ export const FeatureFlags = ({
     scope.mergeWithScope(parentScope);
     return scope;
   }, [
+    enableV12Release,
     enableV12TileDefaultIcons,
     enableV12TileRadioIcons,
     enableV12Overflowmenu,
@@ -145,6 +221,7 @@ FeatureFlags.propTypes = {
       'been deprecated. Please run the `featureflag-deprecate-flags-prop` codemod to migrate to individual boolean props.' +
       `npx @carbon/upgrade migrate featureflag-deprecate-flags-prop --write`
   ),
+  enableV12Release: PropTypes.bool,
   enableV12TileDefaultIcons: PropTypes.bool,
   enableV12TileRadioIcons: PropTypes.bool,
   enableV12Overflowmenu: PropTypes.bool,
@@ -163,7 +240,13 @@ FeatureFlags.propTypes = {
  */
 export const useFeatureFlag = (flag: string) => {
   const scope = useContext(FeatureFlagContext);
-  return scope.enabled(flag);
+  const enabled = scope.enabled(flag);
+
+  if (process.env.NODE_ENV !== 'production') {
+    notifyAvailableFlag(flag, enabled);
+  }
+
+  return enabled;
 };
 
 /**

@@ -91,9 +91,11 @@ async function build() {
       // type file.
       dts: false,
       entry: [reactEntrypoint, ...reactCompatEntrypoints],
-      external,
-      inlineOnly: false,
-      failOnWarn: false,
+      deps: {
+        neverBundle: external,
+        onlyBundle: false,
+      },
+      failOnWarn: true,
       format: format.type,
       logLevel: 'warn',
       loader: {
@@ -109,6 +111,9 @@ async function build() {
           ...options,
           chunkFileNames: '[name].js',
           entryFileNames: '[name].js',
+          // `unbundle` already emits `exports.default`
+          // `named` silences the `MIXED_EXPORTS` warning
+          exports: 'named',
         };
       },
       platform: 'browser',
@@ -141,9 +146,11 @@ async function build() {
     clean: false,
     dts: true,
     entry: [iconsEntrypoint],
-    external,
-    inlineOnly: false,
-    failOnWarn: false,
+    deps: {
+      neverBundle: external,
+      onlyBundle: false,
+    },
+    failOnWarn: true,
     format: 'cjs',
     logLevel: 'warn',
     loader: {
@@ -169,9 +176,11 @@ async function build() {
     clean: false,
     dts: false,
     entry: [iconsEntrypoint],
-    external,
-    inlineOnly: false,
-    failOnWarn: false,
+    deps: {
+      neverBundle: external,
+      onlyBundle: false,
+    },
+    failOnWarn: true,
     format: 'esm',
     logLevel: 'warn',
     loader: {
@@ -223,14 +232,25 @@ async function ensureIconsTypes(filepath) {
 
 async function emitReactDeclarations(tsconfigPath, outDir) {
   const sourceRoot = path.resolve(__dirname, '..', 'src');
+  const { excludeProductsComponents } = await import(
+    '../product-migrated-components.mjs'
+  );
   const configFile = ts.readConfigFile(tsconfigPath, ts.sys.readFile);
 
   if (configFile.error) {
     throw new Error(formatDiagnostics([configFile.error]));
   }
 
+  const config = {
+    ...configFile.config,
+    exclude: [
+      ...(configFile.config.exclude ?? []),
+      ...excludeProductsComponents,
+    ],
+  };
+
   const parsed = ts.parseJsonConfigFileContent(
-    configFile.config,
+    config,
     ts.sys,
     path.dirname(tsconfigPath),
     {
@@ -265,11 +285,7 @@ async function emitReactDeclarations(tsconfigPath, outDir) {
   }
 
   if (diagnostics.length > 0) {
-    // Some source files currently report type issues during declaration emit,
-    // but TypeScript can still write the declaration files we need. Surface the
-    // diagnostics so they are visible during builds without making this package
-    // fail to publish.
-    console.warn(formatDiagnostics(diagnostics));
+    throw new Error(formatDiagnostics(diagnostics));
   }
 }
 

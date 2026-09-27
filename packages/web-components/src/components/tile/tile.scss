@@ -16,7 +16,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/form/index' as *;
 @use '@carbon/styles/scss/utilities/ai-gradient' as *;
 @use '@carbon/styles/scss/theme' as *;
-@use '@carbon/styles/scss/layout' as *;
+@use '@carbon/styles/scss/utilities/layout' as *;
 
 :host(#{$prefix}-tile) {
   @extend .#{$prefix}--tile;

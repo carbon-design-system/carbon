@@ -640,5 +640,263 @@ describe('Pagination', () => {
 
       expect(nextButton.closest('.cds--popover--bottom')).toBeInTheDocument();
     });
+
+    it('should call onChange when renderPageSelect calls onSetPage', async () => {
+      const onChange = jest.fn();
+
+      render(
+        <Pagination
+          totalItems={30}
+          pageSizes={[10]}
+          pageSize={10}
+          page={1}
+          onChange={onChange}
+          renderPageSelect={({ onSetPage }) => (
+            <button onClick={() => onSetPage(3)}>Go to 3</button>
+          )}
+        />
+      );
+
+      await userEvent.click(screen.getByText('Go to 3'));
+
+      expect(onChange).toHaveBeenCalledWith({ page: 3, pageSize: 10 });
+    });
+
+    it('should call onChange when renderPageSelect calls onSetPage with a string', async () => {
+      const onChange = jest.fn();
+
+      render(
+        <Pagination
+          totalItems={30}
+          pageSizes={[10]}
+          pageSize={10}
+          page={1}
+          onChange={onChange}
+          renderPageSelect={({ onSetPage }) => (
+            <button onClick={() => onSetPage('3')}>Go to 3</button>
+          )}
+        />
+      );
+
+      await userEvent.click(screen.getByText('Go to 3'));
+
+      expect(onChange).toHaveBeenCalledWith({ page: 3, pageSize: 10 });
+    });
+
+    it('should not call onChange when disabled and renderPageSelect calls onSetPage', async () => {
+      const onChange = jest.fn();
+
+      render(
+        <Pagination
+          totalItems={30}
+          pageSizes={[10]}
+          pageSize={10}
+          page={1}
+          disabled
+          onChange={onChange}
+          renderPageSelect={({ onSetPage }) => (
+            <button onClick={() => onSetPage(3)}>Go to 3</button>
+          )}
+        />
+      );
+
+      await userEvent.click(screen.getByText('Go to 3'));
+
+      expect(onChange).not.toHaveBeenCalled();
+    });
+
+    it('should not call onChange when pageInputDisabled and renderPageSelect calls onSetPage', async () => {
+      const onChange = jest.fn();
+
+      render(
+        <Pagination
+          totalItems={30}
+          pageSizes={[10]}
+          pageSize={10}
+          page={1}
+          pageInputDisabled
+          onChange={onChange}
+          renderPageSelect={({ onSetPage }) => (
+            <button onClick={() => onSetPage(3)}>Go to 3</button>
+          )}
+        />
+      );
+
+      await userEvent.click(screen.getByText('Go to 3'));
+
+      expect(onChange).not.toHaveBeenCalled();
+    });
+
+    it('should not call onChange when renderPageSelect calls onSetPage with a non-integer', async () => {
+      const onChange = jest.fn();
+
+      render(
+        <Pagination
+          totalItems={30}
+          pageSizes={[10]}
+          pageSize={10}
+          page={1}
+          onChange={onChange}
+          renderPageSelect={({ onSetPage }) => (
+            <button onClick={() => onSetPage(1.5)}>Go to 1.5</button>
+          )}
+        />
+      );
+
+      await userEvent.click(screen.getByText('Go to 1.5'));
+
+      expect(onChange).not.toHaveBeenCalled();
+    });
+
+    it('should not render renderPageSelect when pagesUnknown is true', () => {
+      const renderPageSelect = jest.fn(() => <div>custom select</div>);
+
+      render(
+        <Pagination
+          totalItems={30}
+          pageSizes={[10]}
+          pageSize={10}
+          page={1}
+          pagesUnknown
+          renderPageSelect={renderPageSelect}
+        />
+      );
+
+      expect(renderPageSelect).not.toHaveBeenCalled();
+      expect(screen.queryByText('custom select')).not.toBeInTheDocument();
+    });
+  });
+
+  describe('optional pageSizes', () => {
+    it('should not render the sizer when pageSizes is omitted', () => {
+      render(
+        <Pagination
+          totalItems={350}
+          pageSize={10}
+          page={1}
+          itemsPerPageText="Items per page:"
+        />
+      );
+
+      expect(
+        screen.queryByLabelText('Items per page:')
+      ).not.toBeInTheDocument();
+    });
+
+    it('should render without crashing when pageSizes is omitted', () => {
+      const { container } = render(
+        <Pagination totalItems={350} pageSize={10} page={1} />
+      );
+
+      expect(container.firstChild).toBeInTheDocument();
+    });
+
+    it('should show item-range text when pageSizes is omitted', () => {
+      render(<Pagination totalItems={350} pageSize={10} page={1} />);
+
+      expect(screen.getByText('1–10 of 350 items')).toBeInTheDocument();
+    });
+
+    it('should navigate pages with buttons when pageSizes is omitted', async () => {
+      const onChange = jest.fn();
+      render(
+        <Pagination
+          totalItems={350}
+          pageSize={10}
+          page={2}
+          onChange={onChange}
+        />
+      );
+
+      await userEvent.click(screen.getByLabelText('Previous page'));
+      expect(onChange).toHaveBeenCalledWith(
+        expect.objectContaining({ page: 1 })
+      );
+    });
+
+    it('should fall back to 10 items per page when neither pageSizes nor pageSize is provided', () => {
+      render(<Pagination totalItems={350} page={1} />);
+
+      // With DEFAULT_PAGE_SIZE=10, first page shows items 1–10
+      expect(screen.getByText('1–10 of 350 items')).toBeInTheDocument();
+    });
+
+    it('should treat an empty pageSizes array as no sizer without crashing', () => {
+      render(
+        <Pagination
+          totalItems={350}
+          pageSizes={[]}
+          pageSize={10}
+          page={1}
+          itemsPerPageText="Items per page:"
+        />
+      );
+
+      expect(
+        screen.queryByLabelText('Items per page:')
+      ).not.toBeInTheDocument();
+      expect(screen.getByText('1–10 of 350 items')).toBeInTheDocument();
+    });
+
+    it('should hide the sizer when pageSizes is removed after initial render', async () => {
+      const { rerender } = render(
+        <Pagination
+          totalItems={350}
+          pageSizes={[10, 20]}
+          pageSize={10}
+          page={1}
+          itemsPerPageText="Items per page:"
+        />
+      );
+
+      expect(screen.getByLabelText('Items per page:')).toBeInTheDocument();
+
+      rerender(
+        <Pagination
+          totalItems={350}
+          pageSize={10}
+          page={1}
+          itemsPerPageText="Items per page:"
+        />
+      );
+
+      expect(
+        screen.queryByLabelText('Items per page:')
+      ).not.toBeInTheDocument();
+    });
+
+    it('should reset pageSize to DEFAULT_PAGE_SIZE when pageSizes is removed', () => {
+      const { rerender } = render(
+        <Pagination
+          totalItems={350}
+          pageSizes={[20, 50]}
+          pageSize={20}
+          page={1}
+        />
+      );
+
+      expect(screen.getByText('1–20 of 350 items')).toBeInTheDocument();
+
+      rerender(<Pagination totalItems={350} page={1} />);
+
+      expect(screen.getByText('1–10 of 350 items')).toBeInTheDocument();
+    });
+
+    it('should preserve a controlled pageSize when pageSizes is removed', () => {
+      const { rerender } = render(
+        <Pagination
+          totalItems={350}
+          pageSizes={[20, 50]}
+          pageSize={20}
+          page={1}
+        />
+      );
+
+      expect(screen.getByText('1–20 of 350 items')).toBeInTheDocument();
+
+      rerender(<Pagination totalItems={350} pageSize={20} page={1} />);
+
+      expect(screen.getByText('1–20 of 350 items')).toBeInTheDocument();
+    });
   });
 });

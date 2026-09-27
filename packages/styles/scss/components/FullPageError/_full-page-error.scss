@@ -1,0 +1,91 @@
+//
+// Copyright IBM Corp. 2024, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../../config' as *;
+@use '../../theme' as *;
+@use '../../type' as *;
+@use '../../spacing' as *;
+@use '../../breakpoint' as *;
+
+/// FullPageError styles
+/// @access public
+/// @group full-page-error
+@mixin full-page-error {
+  .#{$prefix}--full-page-error {
+    block-size: inherit;
+  }
+
+  .#{$prefix}--full-page-error__container {
+    margin: 0 $spacing-06;
+    block-size: 100%;
+
+    @include breakpoint-down(md) {
+      margin: 0 $spacing-03;
+    }
+  }
+
+  .#{$prefix}--full-page-error__grid {
+    block-size: 100%;
+    padding-block: $spacing-07;
+  }
+
+  .#{$prefix}--full-page-error__column {
+    padding: 0;
+
+    @include breakpoint(lg) {
+      padding: 0 $spacing-07 0 0;
+    }
+  }
+
+  .#{$prefix}--full-page-error__svg-container {
+    display: flex;
+    padding: $spacing-03 $spacing-03 $spacing-11 $spacing-03;
+    block-size: 100%;
+
+    @include breakpoint(md) {
+      padding: auto $spacing-03 $spacing-11;
+    }
+  }
+
+  .#{$prefix}--full-page-error__label,
+  .#{$prefix}--full-page-error__title {
+    @include type-style('fluid-heading-05', true);
+  }
+
+  .#{$prefix}--full-page-error__label {
+    display: block;
+    color: $text-error;
+  }
+
+  .#{$prefix}--full-page-error__title {
+    margin-block-end: $spacing-09;
+  }
+
+  .#{$prefix}--full-page-error__description {
+    @include type-style('body-02');
+
+    margin-block-end: $spacing-07;
+  }
+
+  .#{$prefix}--full-page-error__body {
+    @include type-style('body-02');
+  }
+
+  // safari rendering fix
+  .#{$prefix}--full-page-error__svg-container
+    svg.#{$prefix}--full-page-error__svg {
+    inline-size: 100%;
+  }
+
+  // svg theme styles
+  .#{$prefix}--full-page-error__svg-container
+    svg.#{$prefix}--full-page-error__svg
+    path {
+    fill: $background;
+    stroke: $border-inverse;
+  }
+}

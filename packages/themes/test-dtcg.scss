@@ -1,0 +1,28 @@
+@use 'scss/themes' as *;
+@use 'scss/component-tokens' as *;
+
+// Test that all 4 themes are available
+.test-white {
+  background: map-get($white, 'background');
+}
+
+.test-g10 {
+  background: map-get($g10, 'background');
+}
+
+.test-g90 {
+  background: map-get($g90, 'background');
+}
+
+.test-g100 {
+  background: map-get($g100, 'background');
+}
+
+// Test component tokens
+.test-button {
+  background: map-get($button-primary, 'white');
+}
+
+.test-tag {
+  background: map-get($tag-background-blue, 'white');
+}

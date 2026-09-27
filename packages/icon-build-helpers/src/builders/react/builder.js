@@ -128,8 +128,10 @@ const didWarnAboutDeprecation = {};`;
       clean: false,
       dts: false,
       entry: input,
-      external,
-      failOnWarn: false,
+      deps: {
+        neverBundle: external,
+      },
+      failOnWarn: true,
       format: format === 'commonjs' ? 'cjs' : 'esm',
       logLevel: 'warn',
       inputOptions(inputOptions) {
@@ -162,14 +164,28 @@ const didWarnAboutDeprecation = {};`;
     entry: {
       index: 'index.ts',
     },
-    external,
-    failOnWarn: false,
+    deps: {
+      neverBundle: external,
+    },
+    failOnWarn: true,
     format: 'iife',
     globalName: 'CarbonIconsReact',
     logLevel: 'warn',
     inputOptions(inputOptions) {
       const options = { ...inputOptions };
       options.plugins = [...(options.plugins || []), virtual(virtualFiles)];
+      // use classic JSX runtime (`React.createElement`) so output doesn't
+      // import `react/jsx-runtime` (no browser global counterpart)
+      // otherwise emits references to an undefined `react_jsx_runtime`
+      options.transform = {
+        ...options.transform,
+        jsx: {
+          ...(typeof options.transform?.jsx === 'object'
+            ? options.transform.jsx
+            : {}),
+          runtime: 'classic',
+        },
+      };
       return options;
     },
     loader: {

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { CaretRight, CaretLeft } from '@carbon/icons-react';
@@ -14,6 +14,10 @@ import SelectItem from '../../SelectItem';
 import { IconButton } from '../../IconButton';
 import { usePrefix } from '../../../internal/usePrefix';
 
+/**
+ * @deprecated Use the stable `Pagination` component with the `renderPageSelect`
+ * prop instead. `unstable_Pagination` / `preview_Pagination` will be removed in v12.
+ */
 function Pagination({
   backwardText = 'Previous page',
   children = undefined,
@@ -37,6 +41,15 @@ function Pagination({
   const [currentPage, setCurrentPage] = useState(initialPage);
   const [currentPageSize, setCurrentPageSize] = useState(pageSize);
   const prefix = usePrefix();
+
+  useEffect(() => {
+    if (process.env.NODE_ENV !== 'production') {
+      console.warn(
+        '[Carbon] `unstable_Pagination` / `preview_Pagination` is deprecated and will be removed in v12. ' +
+          'Use the stable `Pagination` component with the `renderPageSelect` prop instead.'
+      );
+    }
+  }, []);
 
   const totalPages = totalItems
     ? Math.max(Math.ceil(totalItems / currentPageSize), 1)

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025, 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -31,6 +31,18 @@ describe('cds-tag', function () {
     it('should render', async () => {
       const el = await fixture(dismissibleTag);
       await expect(el).dom.to.equalSnapshot();
+    });
+
+    it('does not render a dismiss tooltip when disabled', async () => {
+      const el = await fixture(
+        html`<cds-dismissible-tag
+          disabled
+          text="Tag content"></cds-dismissible-tag>`
+      );
+      await el.updateComplete;
+
+      expect(el.shadowRoot.querySelector('cds-tooltip')).to.equal(null);
+      expect(el.shadowRoot.querySelector('button').disabled).to.equal(true);
     });
 
     it('should support onClose event', async () => {

@@ -11,15 +11,23 @@ import './index';
 
 const args = {
   defaultWidth: 300,
-  placeholder: 'Placeholder text',
-  showPasswordLabel: 'Show password',
+  disabled: false,
+  helperText: '',
+  hideLabel: false,
   hidePasswordLabel: 'Hide password',
-  readonly: false,
+  inline: false,
   invalid: false,
   invalidText:
     'Error message that is really long can wrap to more lines but should not be excessively long.',
-  disabled: false,
   labelText: 'Label',
+  placeholder: 'Placeholder text',
+  readonly: false,
+  showPasswordLabel: 'Show password',
+  size: 'md',
+  tooltipAlignment: 'end',
+  tooltipPosition: 'bottom',
+  type: 'password',
+  value: '',
   warn: false,
   warnText:
     'Warning message that is really long can wrap to more lines but should not be excessively long.',
@@ -30,10 +38,21 @@ const argTypes = {
     control: { type: 'range', min: 300, max: 800, step: 50 },
   },
   showPasswordLabel: {
-    description: 'Show password" tooltip text on password visibility toggle',
+    control: 'text',
+    description: '"Show password" tooltip text on password visibility toggle',
   },
   hidePasswordLabel: {
-    description: 'Hide password" tooltip text on password visibility toggle',
+    control: 'text',
+    description: '"Hide password" tooltip text on password visibility toggle',
+  },
+  helperText: {
+    control: 'text',
+  },
+  hideLabel: {
+    control: 'boolean',
+  },
+  inline: {
+    control: 'boolean',
   },
   placeholder: {
     control: {
@@ -59,6 +78,25 @@ const argTypes = {
     control: {
       type: 'text',
     },
+  },
+  onInput: {
+    action: 'input',
+  },
+  size: {
+    control: 'select',
+    options: ['xs', 'sm', 'md', 'lg'],
+  },
+  tooltipAlignment: {
+    control: 'radio',
+    options: ['start', 'center', 'end'],
+  },
+  tooltipPosition: {
+    control: 'radio',
+    options: ['top', 'right', 'bottom', 'left'],
+  },
+  type: {
+    control: 'radio',
+    options: ['password', 'text'],
   },
   warn: {
     control: {
@@ -87,15 +125,18 @@ export const Default = {
   render: ({
     defaultWidth,
     disabled,
+    helperText,
     hideLabel,
     hidePasswordLabel,
     inline,
     invalid,
     invalidText,
     labelText,
+    onInput,
     placeholder,
     readonly,
     showPasswordLabel,
+    size,
     tooltipAlignment,
     tooltipPosition,
     type,
@@ -106,6 +147,7 @@ export const Default = {
     <div style="width: ${defaultWidth}px;">
       <cds-fluid-password-input
         ?disabled="${disabled}"
+        helper-text="${ifDefined(helperText)}"
         ?hide-label="${hideLabel}"
         hide-password-label="${ifDefined(hidePasswordLabel)}"
         ?inline="${inline}"
@@ -113,14 +155,16 @@ export const Default = {
         invalid-text="${ifDefined(invalidText)}"
         label="${ifDefined(labelText)}"
         placeholder="${ifDefined(placeholder)}"
-        ?readonly="${ifDefined(readonly)}"
+        ?readonly="${readonly}"
         show-password-label="${ifDefined(showPasswordLabel)}"
+        size="${ifDefined(size)}"
         tooltip-alignment="${ifDefined(tooltipAlignment)}"
         tooltip-position="${ifDefined(tooltipPosition)}"
         type="${ifDefined(type)}"
         value="${ifDefined(value)}"
-        ?warn="${ifDefined(warn)}"
-        warn-text="${ifDefined(warnText)}">
+        ?warn="${warn}"
+        warn-text="${ifDefined(warnText)}"
+        @input="${onInput}">
       </cds-fluid-password-input>
     </div>
   `,

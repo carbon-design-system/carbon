@@ -12,7 +12,8 @@ export default {
       },
     }),
   ],
-  files: 'src/components/**/__tests__/**/*.js',
+  // exclude snapshots from tests
+  files: ['src/**/__tests__/**/*.js', '!**/__snapshots__/**'],
   nodeResolve: {
     extensions: ['.js', '.ts'],
   },
@@ -81,4 +82,31 @@ export default {
       timeout: 5000,
     },
   },
+
+  // suppress ResizeObserver loops
+  testRunnerHtml: (testFramework) => `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <script>
+          window.addEventListener(
+            'error',
+            (event) => {
+              if (
+                typeof event.message === 'string' &&
+                event.message.includes('ResizeObserver loop')
+              ) {
+                event.stopImmediatePropagation();
+                event.preventDefault();
+              }
+            },
+            true
+          );
+        </script>
+      </head>
+      <body>
+        <script type="module" src="${testFramework}"></script>
+      </body>
+    </html>
+  `,
 };

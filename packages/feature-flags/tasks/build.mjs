@@ -11,10 +11,12 @@ import * as babelTypes from '@babel/types';
 import { types as t, generate } from '@carbon/scss-generator';
 import { camelCase, constantCase } from 'change-case-all';
 import fs from 'fs-extra';
-import yaml from 'js-yaml';
+import * as yaml from 'js-yaml';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
+const generateCode = generator.default ?? generator;
+const template = babelTemplate.default ?? babelTemplate;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -84,7 +86,7 @@ const javascriptBanner = `/**
 `;
 function buildJavaScriptModule(featureFlags) {
   const t = babelTypes;
-  const tmpl = babelTemplate.default(`
+  const tmpl = template(`
     if (process.env.%%env%%) {
       if (process.env.%%env%% === 'true') {
         enabled.%%key%% = true;
@@ -95,7 +97,7 @@ function buildJavaScriptModule(featureFlags) {
       enabled.%%key%% = %%defaultEnabled%%;
     }
   `);
-  const fallback = babelTemplate.default(`enabled.%%key%% = %%enabled%%;`);
+  const fallback = template(`enabled.%%key%% = %%enabled%%;`);
 
   const file = t.file(
     t.program([
@@ -154,7 +156,7 @@ function buildJavaScriptModule(featureFlags) {
       ),
     ])
   );
-  const { code } = generator.default(file);
+  const { code } = generateCode(file);
 
   return `${javascriptBanner}${code}`;
 }

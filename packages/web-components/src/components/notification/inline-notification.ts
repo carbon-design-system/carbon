@@ -239,7 +239,7 @@ class CDSInlineNotification extends FocusMixin(LitElement) {
 
   connectedCallback() {
     if (!this.hasAttribute('role')) {
-      this.setAttribute('role', 'alert');
+      this.setAttribute('role', 'status');
     }
     super.connectedCallback();
   }

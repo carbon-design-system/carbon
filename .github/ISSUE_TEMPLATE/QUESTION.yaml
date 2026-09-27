@@ -1,7 +1,10 @@
+# Purpose: Route usage questions toward the details and support resources that
+# maintainers need. Questions intentionally receive no generic "needs triage"
+# label or Bug metadata automation.
 name: Question ❓
 description: Usage question or discussion about Carbon components.
 title: '[Question]: '
-labels: ['type: question ❓', 'status: needs triage :female_detective:']
+labels: ['type: question ❓']
 body:
   - type: markdown
     attributes:

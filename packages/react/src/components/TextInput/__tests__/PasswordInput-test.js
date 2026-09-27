@@ -73,6 +73,42 @@ describe('PasswordInput', () => {
       );
     });
 
+    it('should not allow interactive content in labelText', () => {
+      const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+      expect(() => {
+        render(
+          <PasswordInput
+            id="input-1"
+            labelText={
+              <>
+                PasswordInput label <button type="button">Help</button>
+              </>
+            }
+          />
+        );
+      }).toThrow(
+        'The PasswordInput component `labelText` prop must have no interactive content'
+      );
+
+      spy.mockRestore();
+    });
+
+    it('should allow non-interactive content in labelText', () => {
+      expect(() => {
+        render(
+          <PasswordInput
+            id="input-1"
+            labelText={
+              <>
+                PasswordInput label <span>additional label content</span>
+              </>
+            }
+          />
+        );
+      }).not.toThrow();
+    });
+
     it('should render helperText with value 0', () => {
       render(<PasswordInput id="input-1" labelText="label" helperText={0} />);
       expect(screen.getByText('0')).toBeInTheDocument();

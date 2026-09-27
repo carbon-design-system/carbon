@@ -6,51 +6,15 @@
  */
 
 import React from 'react';
-import { FolderOpen, Folders, Information, View } from '@carbon/icons-react';
+import { FolderOpen, Folders, View } from '@carbon/icons-react';
 
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 
 import { default as Dropdown, DropdownSkeleton } from './';
 import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
-import {
-  Toggletip,
-  ToggletipActions,
-  ToggletipButton,
-  ToggletipContent,
-  ToggletipLabel,
-} from '../Toggletip';
 import { IconButton } from '../IconButton';
 import mdx from './Dropdown.mdx';
-import Link from '../Link';
-
-export default {
-  title: 'Components/Dropdown',
-  component: Dropdown,
-  subcomponents: {
-    DropdownSkeleton,
-  },
-  argTypes: {
-    light: {
-      table: {
-        disable: true,
-      },
-    },
-    slug: {
-      table: {
-        disable: true,
-      },
-    },
-  },
-  parameters: {
-    docs: {
-      page: mdx,
-    },
-    controls: {
-      exclude: ['items', 'initialSelectedItem', 'itemToElement', 'id'],
-    },
-  },
-};
 
 const items = [
   {
@@ -84,73 +48,106 @@ const items = [
 ];
 
 const sharedArgs = {
+  'aria-label': '',
+  autoAlign: false,
+  direction: 'bottom',
+  disabled: false,
+  helperText: 'Helper text',
+  hideLabel: false,
   invalid: false,
   invalidText: 'Error message goes here',
-  disabled: false,
-  hideLabel: false,
   label: 'Choose an option',
-  warn: false,
-  warnText: 'Warning message goes here',
+  readOnly: false,
+  size: 'md',
   titleText: 'Label',
   type: 'default',
+  warn: false,
+  warnText: 'Warning message goes here',
 };
 
 const sharedArgTypes = {
+  'aria-label': {
+    control: 'text',
+  },
+  autoAlign: {
+    control: 'boolean',
+  },
+  direction: {
+    control: 'select',
+    options: ['top', 'bottom'],
+  },
   invalid: {
-    control: {
-      type: 'boolean',
-    },
+    control: 'boolean',
   },
   invalidText: {
-    control: {
-      type: 'text',
-    },
+    control: 'text',
   },
   disabled: {
-    control: {
-      type: 'boolean',
-    },
+    control: 'boolean',
   },
   hideLabel: {
-    control: {
-      type: 'boolean',
-    },
+    control: 'boolean',
   },
   helperText: {
-    control: {
-      type: 'text',
-    },
+    control: 'text',
   },
   label: {
-    control: {
-      type: 'text',
-    },
+    control: 'text',
+  },
+  onChange: {
+    action: 'onChange',
+  },
+  readOnly: {
+    control: 'boolean',
   },
   warn: {
-    control: {
-      type: 'boolean',
-    },
+    control: 'boolean',
   },
   warnText: {
-    control: {
-      type: 'text',
-    },
+    control: 'text',
   },
   titleText: {
-    control: {
-      type: 'text',
-    },
+    control: 'text',
     type: {
       required: true,
     },
   },
   size: {
     options: ['xs', 'sm', 'md', 'lg'],
-    control: { type: 'select' },
+    control: 'select',
   },
   type: {
-    control: { type: 'select' },
+    control: 'select',
     options: ['default', 'inline'],
+  },
+};
+
+const skeletonArgs = {
+  hideLabel: false,
+  size: 'md',
+};
+
+const skeletonArgTypes = {
+  hideLabel: { control: 'boolean' },
+  size: {
+    control: 'select',
+    options: ['xs', 'sm', 'md', 'lg'],
+  },
+};
+
+export default {
+  title: 'Components/Dropdown',
+  component: Dropdown,
+  subcomponents: {
+    DropdownSkeleton,
+  },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+    controls: {
+      include: Object.keys(sharedArgTypes),
+    },
   },
 };
 
@@ -265,10 +262,10 @@ ExperimentalAutoAlign.argTypes = {
 };
 
 ExperimentalAutoAlign.args = {
-  invalid: false,
-  invalidText: 'Error message goes here',
-  warn: false,
-  warnText: 'Warning message goes here',
+  ...sharedArgs,
+  autoAlign: true,
+  direction: 'top',
+  label: 'Option 1',
 };
 
 export const Inline = (args) => {
@@ -320,13 +317,17 @@ export const Inline = (args) => {
 
 Inline.argTypes = {
   ...sharedArgTypes,
+  type: {
+    ...sharedArgTypes.type,
+    table: { readonly: true },
+  },
 };
 
 Inline.args = {
-  invalid: false,
-  invalidText: 'Error message goes here',
-  warn: false,
-  warnText: 'Warning message goes here',
+  ...sharedArgs,
+  helperText: '',
+  label: 'Option 1',
+  type: 'inline',
 };
 
 export const _WithLayer = (args) => (
@@ -353,10 +354,8 @@ _WithLayer.argTypes = {
 };
 
 _WithLayer.args = {
-  invalid: false,
-  invalidText: 'Error message goes here',
-  warn: false,
-  warnText: 'Warning message goes here',
+  ...sharedArgs,
+  label: 'Option 1',
 };
 
 export const InlineWithLayer = (args) => (
@@ -380,21 +379,31 @@ export const InlineWithLayer = (args) => (
 
 InlineWithLayer.argTypes = {
   ...sharedArgTypes,
+  type: {
+    ...sharedArgTypes.type,
+    table: { readonly: true },
+  },
 };
 
 InlineWithLayer.args = {
-  invalid: false,
-  invalidText: 'Error message goes here',
-  warn: false,
-  warnText: 'Warning message goes here',
+  ...sharedArgs,
+  helperText: '',
+  label: 'Option 1',
+  type: 'inline',
 };
 
-export const Skeleton = () => {
+export const Skeleton = (args) => {
   return (
     <div style={{ width: 300 }}>
-      <DropdownSkeleton />
+      <DropdownSkeleton {...args} />
     </div>
   );
+};
+
+Skeleton.args = { ...skeletonArgs };
+Skeleton.argTypes = { ...skeletonArgTypes };
+Skeleton.parameters = {
+  controls: { include: Object.keys(skeletonArgTypes) },
 };
 
 export const withAILabel = (args) => {
@@ -481,43 +490,8 @@ withAILabel.argTypes = {
 };
 
 withAILabel.args = {
-  invalid: false,
-  invalidText: 'Error message goes here',
-  warn: false,
-  warnText: 'Warning message goes here',
-};
-
-export const withToggletipLabel = () => {
-  return (
-    <div style={{ width: 400 }}>
-      <Dropdown
-        label="placeholder"
-        id="dropdown"
-        items={[]}
-        titleText={
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <ToggletipLabel>Label</ToggletipLabel>
-            <Toggletip>
-              <ToggletipButton label="Show information">
-                <Information />
-              </ToggletipButton>
-              <ToggletipContent>
-                <p>
-                  Lorem ipsum dolor sit amet, di os consectetur adipiscing elit,
-                  sed do eiusmod tempor incididunt ut fsil labore et dolore
-                  magna aliqua.
-                </p>
-                <ToggletipActions>
-                  <Link href="#">Link action</Link>
-                  <Button size="sm">Button</Button>
-                </ToggletipActions>
-              </ToggletipContent>
-            </Toggletip>
-          </div>
-        }
-      />
-    </div>
-  );
+  ...sharedArgs,
+  label: 'Option 1',
 };
 
 // Hidden Test-Only Story. This story tests for a bug where the invalid-text would overlap with components below it. #19960

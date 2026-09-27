@@ -12,6 +12,7 @@ import './index';
 const defaultArgs = {
   isExpressive: false,
   native: false,
+  nested: false,
 };
 
 const controls = {
@@ -24,13 +25,18 @@ const controls = {
     description:
       'Specify whether this ordered list should use native list styles instead of custom counter.',
   },
+  nested: {
+    control: 'boolean',
+    description: 'Specify whether to use nested styling for child lists.',
+  },
 };
 
 export const Default = {
-  args: defaultArgs,
-  argTypes: controls,
-  render: ({ isExpressive, native }) =>
-    html`<cds-ordered-list ?is-expressive="${isExpressive}" ?native="${native}">
+  render: ({ isExpressive, native, nested }) =>
+    html`<cds-ordered-list
+      ?is-expressive="${isExpressive}"
+      ?native="${native}"
+      ?nested="${nested}">
       <cds-list-item>Ordered List level 1</cds-list-item>
       <cds-list-item>Ordered List level 1</cds-list-item>
       <cds-list-item>Ordered List level 1</cds-list-item>
@@ -48,16 +54,28 @@ export const Default = {
 };
 
 export const NativeListStyles = {
-  args: { ...defaultArgs, native: true },
-  argTypes: controls,
-  render: ({ isExpressive, native }) =>
+  args: { native: true, nested: true },
+  argTypes: {
+    native: {
+      ...controls.native,
+      control: false,
+    },
+    nested: {
+      ...controls.nested,
+      control: false,
+    },
+  },
+  render: ({ isExpressive, native, nested }) =>
     html`<cds-ordered-list ?is-expressive="${isExpressive}" ?native="${native}">
       <cds-list-item>Ordered List level 1</cds-list-item>
       <cds-list-item>Ordered List level 1</cds-list-item>
       <cds-list-item>Ordered List level 1</cds-list-item>
       <cds-list-item>
         Ordered List level 1
-        <cds-ordered-list ?is-expressive="${isExpressive}" ?native="${native}">
+        <cds-ordered-list
+          ?is-expressive="${isExpressive}"
+          ?native="${native}"
+          ?nested="${nested}">
           <cds-list-item>Ordered List level 2</cds-list-item>
           <cds-list-item>Ordered List level 2</cds-list-item>
           <cds-list-item>Ordered List level 2</cds-list-item>
@@ -76,19 +94,28 @@ export const NativeListStyles = {
 };
 
 export const Nested = {
-  args: defaultArgs,
-  argTypes: controls,
-  render: ({ isExpressive, native }) =>
+  args: { nested: true },
+  argTypes: {
+    nested: {
+      ...controls.nested,
+      control: false,
+    },
+  },
+  render: ({ isExpressive, native, nested }) =>
     html`<cds-ordered-list ?is-expressive="${isExpressive}" ?native="${native}">
       <cds-list-item>
         Ordered List level 1
-        <cds-ordered-list ?is-expressive="${isExpressive}" ?native="${native}">
+        <cds-ordered-list
+          ?is-expressive="${isExpressive}"
+          ?native="${native}"
+          ?nested="${nested}">
           <cds-list-item>Ordered List level 2</cds-list-item>
           <cds-list-item>
             Ordered List level 2
             <cds-ordered-list
               ?is-expressive="${isExpressive}"
-              ?native="${native}">
+              ?native="${native}"
+              ?nested="${nested}">
               <cds-list-item>Ordered List level 3</cds-list-item>
               <cds-list-item>Ordered List level 3</cds-list-item>
             </cds-ordered-list>
@@ -102,6 +129,8 @@ export const Nested = {
 
 const meta = {
   title: 'Components/Ordered list',
+  args: defaultArgs,
+  argTypes: controls,
   parameters: {
     docs: {
       page: storyDocs,

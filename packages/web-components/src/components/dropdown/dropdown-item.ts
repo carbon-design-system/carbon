@@ -1,12 +1,12 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import { LitElement, html } from 'lit';
-import { property, state } from 'lit/decorators.js';
+import { property, query, state } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import Checkmark16 from '@carbon/icons/es/checkmark/16.js';
@@ -67,6 +67,9 @@ class CDSDropdownItem extends LitElement {
    * Reference to the next sibling element for hover state management.
    */
   protected _nextSiblingRef: Element | null = null;
+
+  @query(`.${prefix}--list-box__menu-item__option`)
+  private _textContainer!: HTMLDivElement | null;
 
   /**
    * Gets the next dropdown/combo-box item sibling.
@@ -150,9 +153,7 @@ class CDSDropdownItem extends LitElement {
       (node) => node.nodeType !== Node.TEXT_NODE || node!.textContent!.trim()
     );
 
-    const textContainer = this.shadowRoot?.querySelector(
-      `.${prefix}--list-box__menu-item__option`
-    );
+    const textContainer = this._textContainer;
 
     if (!textContainer || this._hasEllipsisApplied === true) return;
 

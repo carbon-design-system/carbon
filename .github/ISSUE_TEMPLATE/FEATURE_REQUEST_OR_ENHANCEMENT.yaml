@@ -1,8 +1,11 @@
+# Purpose: Gather feature proposals as formal Enhancement issues. Enhancements
+# use contribution-comment automation but intentionally receive no generic
+# "needs triage" label.
 name: Feature request or enhancement 💡
 description: Suggest an idea for a new or existing component or pattern.
 title: '[Feature Request]: '
 type: 'enhancement'
-labels: ['type: enhancement 💡', 'status: needs triage :female_detective:']
+labels: ['type: enhancement 💡']
 body:
   - type: markdown
     attributes:

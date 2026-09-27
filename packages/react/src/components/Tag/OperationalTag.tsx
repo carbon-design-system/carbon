@@ -81,7 +81,6 @@ export type OperationalTagProps<T extends React.ElementType> = PolymorphicProps<
   OperationalTagBaseProps
 >;
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const OperationalTag = forwardRef(
   <T extends React.ElementType>(
     {
@@ -161,6 +160,7 @@ const OperationalTag = forwardRef(
   }
 );
 
+OperationalTag.displayName = 'OperationalTag';
 OperationalTag.propTypes = {
   /**
    * Provide a custom className that is applied to the containing <span>

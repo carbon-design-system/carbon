@@ -1,0 +1,42 @@
+//
+// Copyright IBM Corp. 2026, 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/colors' as *;
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/components/coachmark/coachmark-tagline' as
+  coachmark-tagline-styles;
+
+@include coachmark-tagline-styles.coachmark-tagline;
+
+$block-class: #{$prefix}--coachmark-tagline;
+
+.#{$block-class} {
+  &--open {
+    background: $white-0;
+    opacity: 0;
+
+    .#{$block-class}__cta {
+      opacity: 0;
+    }
+
+    .#{$block-class}--close-btn {
+      display: none;
+    }
+
+    &::before {
+      background: $white-0;
+    }
+  }
+
+  &__cta {
+    svg {
+      justify-self: center;
+    }
+  }
+}

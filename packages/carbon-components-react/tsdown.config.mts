@@ -13,8 +13,10 @@ const sharedConfig = defineConfig({
   clean: false,
   dts: false,
   entry: ['src/index.js'],
-  external: ['@carbon/react'],
-  failOnWarn: false,
+  deps: {
+    neverBundle: ['@carbon/react'],
+  },
+  failOnWarn: true,
   logLevel: 'warn',
   outputOptions(options) {
     return {

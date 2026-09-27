@@ -7,7 +7,7 @@
 
 import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
-import { property } from 'lit/decorators.js';
+import { property, query } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import ChevronRight16 from '@carbon/icons/es/chevron--right/16.js';
 import { iconLoader } from '../../globals/internal/icon-loader';
@@ -52,6 +52,12 @@ const observeResize = (observer: ResizeObserver, elem: Element) => {
 @customElement(`${prefix}-accordion-item`)
 class CDSAccordionItem extends FocusMixin(LitElement) {
   /**
+   * The accordion content container.
+   */
+  @query(`.${prefix}--accordion__content`)
+  private _accordionContent!: HTMLDivElement;
+
+  /**
    * The current breakpoint.
    */
   private _currentBreakpoint?: ACCORDION_ITEM_BREAKPOINT;
@@ -83,18 +89,12 @@ class CDSAccordionItem extends FocusMixin(LitElement) {
         )
       )
     ) {
-      const { selectorAccordionContent } = this
-        .constructor as typeof CDSAccordionItem;
-
       if (!this.open) {
         this.setAttribute('expanding', '');
       } else {
         this.setAttribute('collapsing', '');
       }
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-      this.shadowRoot!.querySelector(
-        selectorAccordionContent
-      )!.addEventListener('animationend', () => {
+      this._accordionContent?.addEventListener('animationend', () => {
         this.removeAttribute('expanding');
         this.removeAttribute('collapsing');
       });
@@ -115,15 +115,6 @@ class CDSAccordionItem extends FocusMixin(LitElement) {
   private _handleClickExpando() {
     this._handleUserInitiatedToggle();
   }
-
-  /**
-   * Handler for the `keydown` event on the expando button.
-   */
-  private _handleKeydownExpando = ({ key }: KeyboardEvent) => {
-    if (this.open && (key === 'Esc' || key === 'Escape')) {
-      this._handleUserInitiatedToggle(false);
-    }
-  };
 
   /**
    * The `ResizeObserver` instance for observing element resizes for re-positioning floating menu position.
@@ -187,7 +178,6 @@ class CDSAccordionItem extends FocusMixin(LitElement) {
       open,
       _currentBreakpoint: currentBreakpoint,
       _handleClickExpando: handleClickExpando,
-      _handleKeydownExpando: handleKeydownExpando,
     } = this;
     const { _classesBreakpoints: classesBreakpoints } = this
       .constructor as typeof CDSAccordionItem;
@@ -205,8 +195,7 @@ class CDSAccordionItem extends FocusMixin(LitElement) {
         class="${prefix}--accordion__heading"
         aria-controls="content"
         aria-expanded="${open}"
-        @click="${handleClickExpando}"
-        @keydown="${handleKeydownExpando}">
+        @click="${handleClickExpando}">
         ${iconLoader(ChevronRight16, {
           part: 'expando-icon',
           class: `${prefix}--accordion__arrow`,
@@ -260,10 +249,6 @@ class CDSAccordionItem extends FocusMixin(LitElement) {
    */
   static get eventToggle() {
     return `${prefix}-accordion-item-toggled`;
-  }
-
-  static get selectorAccordionContent() {
-    return `.${prefix}--accordion__content`;
   }
 
   static styles = styles;

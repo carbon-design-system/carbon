@@ -32,6 +32,10 @@ As the author of this PR, before marking ready for review, confirm you:
 
 - [ ] Reviewed every line of the diff
 - [ ] Updated documentation and storybook examples
+- [ ] Followed the
+      [required v12 migration documentation](https://github.com/carbon-design-system/carbon/blob/main/docs/working-with-v12.md#required-v12-migration-documentation)
+      for any code change that affects v12, or struck through this item because
+      the PR does not affect v12
 - [ ] Wrote passing tests that cover this change
 - [ ] Addressed any impact on accessibility (a11y)
 - [ ] Tested for cross-browser consistency

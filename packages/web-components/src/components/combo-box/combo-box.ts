@@ -16,7 +16,6 @@ import CDSComboBoxItem from './combo-box-item';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import styles from './combo-box.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-import { ifDefined } from 'lit/directives/if-defined.js';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
 import spread from '../../globals/directives/spread';
 
@@ -153,23 +152,30 @@ class CDSComboBox extends CDSDropdown {
     this._filterInputValue = rawQueryText;
 
     if (this.allowCustomValue) {
-      const previousValue = this.value;
-      this.value = rawQueryText;
+      const selected = this._getSelectedItem();
+      const selectedDisplayText = selected?.textContent ?? '';
+      const isDisplayingSelectedItem =
+        selected !== null && selectedDisplayText === rawQueryText;
 
-      if (previousValue !== this.value) {
-        this.dispatchEvent(
-          new CustomEvent(
-            (this.constructor as typeof CDSComboBox).eventSelect,
-            {
-              bubbles: true,
-              composed: true,
-              detail: {
-                item: null,
-                value: this.value,
-              },
-            }
-          )
-        );
+      if (!isDisplayingSelectedItem) {
+        const previousValue = this.value;
+        this.value = rawQueryText;
+
+        if (previousValue !== this.value) {
+          this.dispatchEvent(
+            new CustomEvent(
+              (this.constructor as typeof CDSComboBox).eventSelect,
+              {
+                bubbles: true,
+                composed: true,
+                detail: {
+                  item: null,
+                  value: this.value,
+                },
+              }
+            )
+          );
+        }
       }
     }
     this.open = true;
@@ -435,13 +441,6 @@ class CDSComboBox extends CDSDropdown {
       [`${prefix}--text-input--empty`]: !value,
     });
 
-    let activeDescendantFallback: string | undefined;
-    if (open && !activeDescendant) {
-      const constructor = this.constructor as typeof CDSDropdown;
-      const items = this.querySelectorAll(constructor.selectorItem);
-      activeDescendantFallback = items[0]?.id;
-    }
-
     return html`
       <input
         id="trigger-button"
@@ -456,9 +455,7 @@ class CDSComboBox extends CDSDropdown {
         aria-haspopup="listbox"
         aria-autocomplete="list"
         aria-expanded="${String(open)}"
-        aria-activedescendant="${ifDefined(
-          open ? (activeDescendant ?? activeDescendantFallback) : ''
-        )}"
+        aria-activedescendant="${open ? (activeDescendant ?? '') : ''}"
         ?readonly=${readOnly}
         @input=${handleInput}
         @keydown=${handleInputKeydown}

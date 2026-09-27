@@ -180,8 +180,15 @@ const Button: ButtonComponent = React.forwardRef(
     const iconOnlyImage = !ButtonImageElement ? null : <ButtonImageElement />;
 
     if (!isIconOnlyButton(hasIconOnly, kind)) {
-      const { tooltipAlignment, ...propsWithoutTooltipAlignment } = props;
-      return <ButtonBase ref={ref} {...propsWithoutTooltipAlignment} />;
+      const {
+        autoAlign,
+        tooltipAlignment,
+        tooltipDropShadow,
+        tooltipHighContrast,
+        tooltipPosition,
+        ...propsWithoutIconOnlyTooltipProps
+      } = props;
+      return <ButtonBase ref={ref} {...propsWithoutIconOnlyTooltipProps} />;
     } else {
       let align: PopoverAlignment | undefined = undefined;
 

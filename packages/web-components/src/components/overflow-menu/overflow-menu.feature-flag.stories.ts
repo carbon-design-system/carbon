@@ -17,6 +17,7 @@ import mdx from './overflow-menu.feature-flag.mdx';
 import '../../../.storybook/templates/with-feature-flags';
 
 const args = {
+  autoAlign: false,
   open: false,
   label: 'Options',
   menuAlignment: 'bottom-start',
@@ -47,6 +48,11 @@ const tooltipAlignOptions = [
 ];
 
 const argTypes = {
+  autoAlign: {
+    control: 'boolean',
+    description:
+      'Specify whether the menu should automatically choose the best alignment.',
+  },
   open: {
     control: 'boolean',
     description: '<code>true</code> if the menu should be open.',
@@ -93,7 +99,7 @@ const renderDefaultMenu = () => html`
 `;
 
 const renderOverflowMenu = ({
-  autoalign = false,
+  autoAlign = false,
   label = 'Options',
   menu = renderDefaultMenu(),
   menuAlignment = 'bottom-start',
@@ -102,7 +108,7 @@ const renderOverflowMenu = ({
   align = 'top',
 } = {}) => html`
   <cds-overflow-menu
-    ?autoalign=${autoalign}
+    ?autoalign=${autoAlign}
     ?open=${open}
     label="${label}"
     menu-alignment="${menuAlignment}"
@@ -113,11 +119,9 @@ const renderOverflowMenu = ({
 `;
 
 export const Default = {
-  args,
-  argTypes,
   parameters: {
     controls: {
-      include: ['open', 'label', 'menuAlignment', 'align', 'size'],
+      include: ['autoAlign', 'open', 'label', 'menuAlignment', 'align', 'size'],
     },
   },
   render: (args) => {
@@ -133,7 +137,15 @@ export const Default = {
 };
 
 export const AutoAlign = {
-  render: () => {
+  args: {
+    autoAlign: true,
+  },
+  argTypes: {
+    autoAlign: {
+      table: { readonly: true },
+    },
+  },
+  render: (args) => {
     requestAnimationFrame(() => {
       document.querySelector('cds-overflow-menu[autoalign]')?.scrollIntoView({
         block: 'center',
@@ -146,7 +158,7 @@ export const AutoAlign = {
         <feature-flags enable-v12-overflowmenu="true">
           <div style="width: 4900px; height: 4900px; position: relative;">
             <div style="position: absolute; top: 2450px; left: 2450px;">
-              ${renderOverflowMenu({ autoalign: true })}
+              ${renderOverflowMenu(args)}
             </div>
           </div>
         </feature-flags>
@@ -156,13 +168,13 @@ export const AutoAlign = {
 };
 
 export const FloatingStyles = {
-  render: () => {
+  render: (args) => {
     return html`
       <sb-template-feature-flags>
         <feature-flags
           enable-v12-overflowmenu="true"
           enable-v12-dynamic-floating-styles="true">
-          ${renderOverflowMenu()}
+          ${renderOverflowMenu(args)}
         </feature-flags>
       </sb-template-feature-flags>
     `;
@@ -170,11 +182,12 @@ export const FloatingStyles = {
 };
 
 export const Nested = {
-  render: () => {
+  render: (args) => {
     return html`
       <sb-template-feature-flags>
         <feature-flags enable-v12-overflowmenu="true">
           ${renderOverflowMenu({
+            ...args,
             menu: html`
               <cds-menu>
                 <cds-menu-item label="Level 1"></cds-menu-item>
@@ -206,24 +219,41 @@ export const Nested = {
 };
 
 export const WithMenuAlignment = {
-  render: () => {
+  parameters: {
+    controls: {
+      include: ['autoAlign', 'label', 'open', 'size'],
+    },
+  },
+  render: ({ autoAlign, label, open, size }) => {
+    const menuArgs = { autoAlign, label, open, size };
     return html`
       <sb-template-feature-flags>
         <feature-flags
           enable-v12-overflowmenu="true"
           enable-v12-dynamic-floating-styles="true">
           <div style="display: flex; justify-content: space-between;">
-            ${renderOverflowMenu({ menuAlignment: 'bottom-start' })}
-            ${renderOverflowMenu({ menuAlignment: 'bottom-end' })}
+            ${renderOverflowMenu({
+              ...menuArgs,
+              menuAlignment: 'bottom-start',
+            })}
+            ${renderOverflowMenu({
+              ...menuArgs,
+              menuAlignment: 'bottom-end',
+            })}
           </div>
 
           <div
             style="display: flex; justify-content: space-between; margin-top: 15rem;">
             ${renderOverflowMenu({
+              ...menuArgs,
               menuAlignment: 'top-start',
               align: 'bottom',
             })}
-            ${renderOverflowMenu({ menuAlignment: 'top-end', align: 'bottom' })}
+            ${renderOverflowMenu({
+              ...menuArgs,
+              menuAlignment: 'top-end',
+              align: 'bottom',
+            })}
           </div>
         </feature-flags>
       </sb-template-feature-flags>
@@ -233,6 +263,8 @@ export const WithMenuAlignment = {
 
 const meta = {
   title: 'Components/OverflowMenu/Feature Flag',
+  args,
+  argTypes,
   parameters: {
     docs: {
       page: mdx,

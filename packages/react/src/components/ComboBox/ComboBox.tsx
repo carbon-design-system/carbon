@@ -58,6 +58,7 @@ import {
   isComponentElement,
   isItemDisabled,
 } from '../../internal';
+import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
 
 const {
   InputBlur,
@@ -502,6 +503,7 @@ const ComboBox = forwardRef(
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
     const textInput = useRef<HTMLInputElement>(null);
+    const labelRef = useRef<HTMLLabelElement>(null);
     const comboBoxInstanceId = useId();
     const [isFocused, setIsFocused] = useState(false);
     const prevInputValue = useRef(inputValue);
@@ -1046,10 +1048,18 @@ const ComboBox = forwardRef(
         }
       }
     }, [inputValue, typeaheadText]);
+    useNoInteractiveChildren(
+      labelRef,
+      'The ComboBox component `titleText` prop must have no interactive content'
+    );
     return (
       <div className={wrapperClasses}>
         {titleText && (
-          <Text as="label" className={titleClasses} {...getLabelProps()}>
+          <Text
+            as="label"
+            className={titleClasses}
+            {...getLabelProps()}
+            ref={labelRef}>
             {titleText}
           </Text>
         )}

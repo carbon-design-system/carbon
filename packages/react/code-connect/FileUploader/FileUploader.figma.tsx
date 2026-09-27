@@ -29,7 +29,7 @@ figma.connect(
         Small: 'sm',
       }),
       disabled: figma.enum('State', {
-        Disabled: 'disabled',
+        Disabled: true,
       }),
     },
     example: ({ ...props }) => <FileUploader {...props} />,
@@ -80,18 +80,15 @@ figma.connect(
       errorBody: figma.string('Long desc.'),
       errorSubject: figma.string('Short desc.'),
       name: figma.string('Long file name'),
-      filename113480: figma.string('File name'),
       size: figma.enum('Size', {
         Large: 'lg',
         Medium: 'md',
         Small: 'sm',
       }),
-      state: figma.enum('State', {
+      status: figma.enum('State', {
         Uploaded: 'edit',
         Loading: 'uploading',
-        Success: 'complete',
-        'Error short': 'error-short',
-        'Error long': 'error-long',
+        Complete: 'complete',
       }),
       invalid: figma.enum('State', {
         'Error short': true,

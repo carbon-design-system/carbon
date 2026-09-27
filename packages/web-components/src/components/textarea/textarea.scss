@@ -7,7 +7,7 @@
 
 $css--plex: true !default;
 @use '@carbon/styles/scss/config' as *;
-@use '@carbon/styles/scss/layout' as *;
+@use '@carbon/styles/scss/utilities/layout' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/components/text-area/index';
 @use '@carbon/styles/scss/utilities/ai-gradient' as *;
@@ -15,6 +15,8 @@ $css--plex: true !default;
 :host(#{$prefix}-textarea) {
   @include emit-layout-tokens();
 
+  display: flex;
+  flex-direction: column;
   outline: none;
   ::slotted(#{$prefix}-ai-label),
   ::slotted(#{$prefix}-slug) {
@@ -59,6 +61,10 @@ $css--plex: true !default;
 :host(#{$prefix}-textarea[ai-label])
   .#{$prefix}--text-area__wrapper--decorator {
   @include ai-gradient;
+}
+
+.#{$prefix}--text-area__wrapper {
+  flex: 1 1 auto;
 }
 
 .#{$prefix}--text-area__wrapper--cols {

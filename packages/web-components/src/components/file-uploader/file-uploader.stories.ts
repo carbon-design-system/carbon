@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,7 +9,10 @@ import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { prefix } from '../../globals/settings';
 import './index';
-import { FILE_UPLOADER_ITEM_STATE } from './file-uploader-item';
+import {
+  FILE_UPLOADER_ITEM_SIZE,
+  FILE_UPLOADER_ITEM_STATE,
+} from './file-uploader-item';
 import { BUTTON_KIND, BUTTON_SIZE } from '../button/button';
 
 const kind = {
@@ -37,12 +40,11 @@ const sizes = {
   [`lg (${BUTTON_SIZE.LARGE})`]: BUTTON_SIZE.LARGE,
 };
 
-const args = {
+const defaultArgs = {
+  accept: 'image/jpeg',
   buttonKind: BUTTON_KIND.PRIMARY,
   buttonLabel: 'Add file',
   disabled: false,
-  state: FILE_UPLOADER_ITEM_STATE.UPLOADING,
-  iconDescription: 'Delete file',
   labelDescription: 'Max file size is 500kb. Only .jpg files are supported.',
   labelTitle: 'Upload files',
   name: '',
@@ -51,6 +53,10 @@ const args = {
 };
 
 const argTypes = {
+  accept: {
+    control: 'text',
+    description: 'Specify the types of files that this input can receive.',
+  },
   buttonKind: {
     control: 'select',
     options: kind,
@@ -65,16 +71,6 @@ const argTypes = {
   disabled: {
     control: 'boolean',
     description: 'Specify whether file input is disabled.',
-  },
-  state: {
-    control: 'select',
-    description: 'File uploader item state (state)',
-    options: states,
-  },
-  iconDescription: {
-    control: 'text',
-    description:
-      'Provide a description for the complete/close icon that can be read by screen readers.',
   },
   labelDescription: {
     control: 'text',
@@ -102,36 +98,85 @@ const argTypes = {
       'Specify the size of the <code>&lt;cds-file-uploader-button&gt;</code>, from a list of available sizes.',
     options: sizes,
   },
-  onDelete: {
-    action: `${prefix}-file-uploader-item-deleted`,
-  },
   onChange: {
-    action: `${prefix}-drop-container-changed`,
+    action: `${prefix}-file-uploader-button-changed`,
   },
 };
 
+const dropContainerArgs = {
+  accept: 'image/jpeg image/png',
+  disabled: false,
+  labelDescription:
+    'Max file size is 1 MB. Supported file types are .jpg and .png.',
+  labelText: 'Drag and drop files here or click to upload',
+  labelTitle: 'Upload files',
+  multiple: true,
+  name: '',
+};
+
+const dropContainerArgTypes = {
+  accept: { control: 'text' },
+  disabled: { control: 'boolean' },
+  labelDescription: { control: 'text' },
+  labelText: { control: 'text' },
+  labelTitle: { control: 'text' },
+  multiple: { control: 'boolean' },
+  name: { control: 'text' },
+  onChange: {
+    action: `${prefix}-file-uploader-drop-container-changed`,
+  },
+};
+
+const fileUploaderItemArgs = {
+  disabled: false,
+  errorBody: '1 MB max file size. Select a new file and try again.',
+  errorSubject: 'File size exceeds limit',
+  iconDescription: 'Delete file',
+  invalid: false,
+  name: 'README.md',
+  size: FILE_UPLOADER_ITEM_SIZE.MEDIUM,
+  state: FILE_UPLOADER_ITEM_STATE.EDIT,
+};
+
 const fileUploaderItemArgTypes = {
-  // more will be added in https://github.com/carbon-design-system/carbon/issues/20911
   disabled: {
     control: 'boolean',
     description: 'Controls the disabled state of this file uploader item.',
   },
+  errorBody: { control: 'text' },
+  errorSubject: { control: 'text' },
+  iconDescription: { control: 'text' },
+  invalid: { control: 'boolean' },
+  name: { control: 'text' },
+  onDelete: {
+    action: `${prefix}-file-uploader-item-deleted`,
+  },
+  size: {
+    control: 'select',
+    options: {
+      Small: FILE_UPLOADER_ITEM_SIZE.SMALL,
+      Medium: FILE_UPLOADER_ITEM_SIZE.MEDIUM,
+      Large: FILE_UPLOADER_ITEM_SIZE.LARGE,
+    },
+  },
+  state: {
+    control: 'select',
+    options: states,
+  },
 };
 
 export const Default = {
-  args,
+  args: defaultArgs,
   argTypes,
   render: (args) => {
     const {
+      accept,
       buttonKind,
       buttonLabel,
       disabled,
-      state,
-      iconDescription,
       labelDescription,
       labelTitle,
       multiple,
-      onDelete,
       onChange,
       name,
       size,
@@ -141,18 +186,14 @@ export const Default = {
       <cds-file-uploader
         label-title="${labelTitle}"
         label-description="${labelDescription}"
-        ?multiple="${multiple}"
-        input-state="${state}"
-        ?disabled="${disabled}"
-        icon-description="${iconDescription}"
-        @cds-file-uploader-item-deleted="${onDelete}"
-        @cds-file-uploader-drop-container-changed="${onChange}"
-        input-name="${ifDefined(name)}">
+        ?disabled="${disabled}">
         <cds-file-uploader-button
           button-kind="${buttonKind}"
-          accept="image/jpeg"
-          name="default-file-uploader-button"
-          size="${ifDefined(size)}">
+          accept="${accept}"
+          ?multiple="${multiple}"
+          name="${ifDefined(name)}"
+          size="${ifDefined(size)}"
+          @cds-file-uploader-button-changed="${onChange}">
           ${buttonLabel}
         </cds-file-uploader-button>
       </cds-file-uploader>
@@ -161,14 +202,30 @@ export const Default = {
 };
 
 export const DragAndDropUploadContainerExampleApplication = {
-  render: () => {
+  args: { ...dropContainerArgs },
+  argTypes: { ...dropContainerArgTypes },
+  render: ({
+    accept,
+    disabled,
+    labelDescription,
+    labelText,
+    labelTitle,
+    multiple,
+    name,
+    onChange,
+  }) => {
     return html`
       <cds-file-uploader
-        label-title="Upload files"
-        label-description="Max file size is 1 MB. Supported file types are .jpg and .png."
-        multiple>
-        <cds-file-uploader-drop-container accept="image/jpeg image/png">
-          Drag and drop files here or click to upload
+        label-title="${labelTitle}"
+        label-description="${labelDescription}"
+        ?disabled=${disabled}>
+        <cds-file-uploader-drop-container
+          accept="${accept}"
+          ?disabled=${disabled}
+          ?multiple=${multiple}
+          name="${name}"
+          @cds-file-uploader-drop-container-changed=${onChange}>
+          ${labelText}
         </cds-file-uploader-drop-container>
       </cds-file-uploader>
     `;
@@ -176,13 +233,43 @@ export const DragAndDropUploadContainerExampleApplication = {
 };
 
 export const DragAndDropUploadSingleContainerExampleApplication = {
-  render: () => {
+  args: {
+    ...dropContainerArgs,
+    accept: 'image/jpeg',
+    labelDescription: 'Max file size is 1 MB. Only .jpg files are supported.',
+    labelText: 'Drag and drop a file here or click to upload',
+    labelTitle: 'Upload a file',
+    multiple: false,
+  },
+  argTypes: {
+    ...dropContainerArgTypes,
+    multiple: {
+      ...dropContainerArgTypes.multiple,
+      table: { readonly: true },
+    },
+  },
+  render: ({
+    accept,
+    disabled,
+    labelDescription,
+    labelText,
+    labelTitle,
+    multiple,
+    name,
+    onChange,
+  }) => {
     return html`
       <cds-file-uploader
-        label-title="Upload a file"
-        label-description="Max file size is 1 MB. Only .jpg files are supported.">
-        <cds-file-uploader-drop-container accept="image/jpeg">
-          Drag and drop a file here or click to upload
+        label-title="${labelTitle}"
+        label-description="${labelDescription}"
+        ?disabled=${disabled}>
+        <cds-file-uploader-drop-container
+          accept="${accept}"
+          ?disabled=${disabled}
+          ?multiple=${multiple}
+          name="${name}"
+          @cds-file-uploader-drop-container-changed=${onChange}>
+          ${labelText}
         </cds-file-uploader-drop-container>
       </cds-file-uploader>
     `;
@@ -190,13 +277,30 @@ export const DragAndDropUploadSingleContainerExampleApplication = {
 };
 
 export const FileUploaderDropContainer = {
-  render: () => {
+  args: { ...dropContainerArgs },
+  argTypes: { ...dropContainerArgTypes },
+  render: ({
+    accept,
+    disabled,
+    labelDescription,
+    labelText,
+    labelTitle,
+    multiple,
+    name,
+    onChange,
+  }) => {
     return html`
-      <cds-file-uploader>
+      <cds-file-uploader
+        label-title="${labelTitle}"
+        label-description="${labelDescription}"
+        ?disabled=${disabled}>
         <cds-file-uploader-drop-container
-          multiple
-          accept="image/jpeg image/png">
-          Drag and drop files here or click to upload
+          accept="${accept}"
+          ?disabled=${disabled}
+          ?multiple=${multiple}
+          name="${name}"
+          @cds-file-uploader-drop-container-changed=${onChange}>
+          ${labelText}
         </cds-file-uploader-drop-container>
       </cds-file-uploader>
     `;
@@ -205,13 +309,30 @@ export const FileUploaderDropContainer = {
 
 export const FileUploaderItem = {
   argTypes: { ...fileUploaderItemArgTypes },
+  args: { ...fileUploaderItemArgs },
   render: (args) => {
-    const { disabled } = args ?? {};
+    const {
+      disabled,
+      errorBody,
+      errorSubject,
+      iconDescription,
+      invalid,
+      name,
+      onDelete,
+      size,
+      state,
+    } = args ?? {};
     return html`
       <cds-file-uploader-item
-        state="${FILE_UPLOADER_ITEM_STATE.EDIT}"
-        ?disabled=${disabled}>
-        README.md
+        ?disabled=${disabled}
+        error-body="${errorBody}"
+        error-subject="${errorSubject}"
+        icon-description="${iconDescription}"
+        ?invalid=${invalid}
+        size="${size}"
+        state="${state}"
+        @cds-file-uploader-item-deleted=${onDelete}>
+        ${name}
       </cds-file-uploader-item>
     `;
   },
@@ -225,6 +346,11 @@ export const Skeleton = {
 
 const meta = {
   title: 'Components/File uploader',
+  parameters: {
+    controls: {
+      exclude: ['onChange'],
+    },
+  },
 };
 
 export default meta;

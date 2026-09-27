@@ -1,0 +1,53 @@
+/*
+ * Copyright IBM Corp. 2025, 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/themes';
+@use '@carbon/styles/scss/spacing' as *;
+
+#main-content {
+  align-content: center;
+  padding: $spacing-05;
+  min-block-size: 100vh;
+}
+
+.user-avatar-story__theme-section {
+  padding: $spacing-05;
+  inline-size: 100%;
+
+  &--white {
+    @include theme.theme(themes.$white, true);
+
+    background: theme.$background;
+    color: theme.$text-primary;
+  }
+
+  &--g10 {
+    @include theme.theme(themes.$g10, true);
+
+    background: theme.$background;
+    color: theme.$text-primary;
+  }
+
+  &--g90 {
+    @include theme.theme(themes.$g90, true);
+
+    background: theme.$background;
+    color: theme.$text-primary;
+  }
+
+  &--g100 {
+    @include theme.theme(themes.$g100, true);
+
+    background: theme.$background;
+    color: theme.$text-primary;
+  }
+}
+
+.user-avatar-story__theme-text {
+  margin-block-end: $spacing-03;
+}

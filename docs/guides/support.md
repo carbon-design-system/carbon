@@ -1,3 +1,9 @@
+<!--
+  Purpose: Maintainer playbook for support and issue triage. Severity references
+  use the formal Bug issue field, while the descriptive definitions remain the
+  source of truth for humans and automation prompts.
+-->
+
 # Carbon system squad support and maintenance
 
 <!-- prettier-ignore-start -->
@@ -349,12 +355,12 @@ business impact that the feature will bring with future research done.
 
 ### Severity
 
-|                                 Level                                 |                                                             Description                                                             | Kit                                                                                                              | Docs                                                                                                                                                                    | Code                                                                                                             | Release                                                                                                                                                                          |
-| :-------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------: | ---------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| https://github.com/carbon-design-system/carbon/labels/severity%3A%201 | Affects major functionality. Blocks users from completing tasks, exposes intellectual property or damages the brand. No workaround. | The kit is has major functionality defects, designers can’t design and there is no workaround                    | The documentation damages the brand or exposes intellectual property.                                                                                                   | The code has major functionality defects, breaking builds and can’t be worked around.                            | If the problem is in production, it must be fixed as soon as possible in a patch.                                                                                                |
-| https://github.com/carbon-design-system/carbon/labels/severity%3A%202 |                     Affects major functionality. Does not block users from completing tasks. Has a workaround.                      | The kit has a major functionality defect, but it doesn't block users from completing tasks. It has a workaround. | The documentation is wrong or missing major details. It conflicts with what we are saying in another part of the system.                                                | The code has a major functionality defect, but it doesn't block users from completing tasks. It has a workaround | A release will be moved into Production with defects at this severity level included. These defects will have priority in future sprints to be resolved ASAP.                    |
-| https://github.com/carbon-design-system/carbon/labels/severity%3A%203 |                     Affects minor functionality. Does not block users from completing tasks. Has a workaround.                      | The kit has a minor functionality defect. It doesn't block users from completing tasks. Has a workaround.        | The documentation is mis-leading, somewhat true, missing minor details, or grammatically incorrect. It doesn't present conflicts with other parts of the design system. | The code has a minor functionality defect. It doesn’t block users from completing tasks. Has a workaround.       | A release will be moved into Production with defects at this severity level included. These defects will have priority in future sprints after sev2’s.                           |
-| https://github.com/carbon-design-system/carbon/labels/severity%3A%204 |                                        Unrelated to a user task. Does not need a workaround.                                        | Unrelated to a user task. Does not need a workaround.                                                            | Unrelated to a user task. Content has a typo.                                                                                                                           | Unrelated to a user task. Does not need a workaround.                                                            | A release will be moved into Production with defects at this severity level included. These will often not be addressed by the maintainer team as a priority in future releases. |
+|                                                                        Level                                                                        |                                                             Description                                                             | Kit                                                                                                              | Docs                                                                                                                                                                    | Code                                                                                                             | Release                                                                                                                                                                          |
+| :-------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------: | ---------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Critical (Severity 1)](https://github.com/carbon-design-system/carbon/issues?q=is%3Aissue%20state%3Aopen%20type%3ABug%20field.severity%3ACritical) | Affects major functionality. Blocks users from completing tasks, exposes intellectual property or damages the brand. No workaround. | The kit is has major functionality defects, designers can’t design and there is no workaround                    | The documentation damages the brand or exposes intellectual property.                                                                                                   | The code has major functionality defects, breaking builds and can’t be worked around.                            | If the problem is in production, it must be fixed as soon as possible in a patch.                                                                                                |
+|     [High (Severity 2)](https://github.com/carbon-design-system/carbon/issues?q=is%3Aissue%20state%3Aopen%20type%3ABug%20field.severity%3AHigh)     |                     Affects major functionality. Does not block users from completing tasks. Has a workaround.                      | The kit has a major functionality defect, but it doesn't block users from completing tasks. It has a workaround. | The documentation is wrong or missing major details. It conflicts with what we are saying in another part of the system.                                                | The code has a major functionality defect, but it doesn't block users from completing tasks. It has a workaround | A release will be moved into Production with defects at this severity level included. These defects will have priority in future sprints to be resolved ASAP.                    |
+|   [Medium (Severity 3)](https://github.com/carbon-design-system/carbon/issues?q=is%3Aissue%20state%3Aopen%20type%3ABug%20field.severity%3AMedium)   |                     Affects minor functionality. Does not block users from completing tasks. Has a workaround.                      | The kit has a minor functionality defect. It doesn't block users from completing tasks. Has a workaround.        | The documentation is mis-leading, somewhat true, missing minor details, or grammatically incorrect. It doesn't present conflicts with other parts of the design system. | The code has a minor functionality defect. It doesn’t block users from completing tasks. Has a workaround.       | A release will be moved into Production with defects at this severity level included. These defects will have priority in future sprints after sev2’s.                           |
+|      [Low (Severity 4)](https://github.com/carbon-design-system/carbon/issues?q=is%3Aissue%20state%3Aopen%20type%3ABug%20field.severity%3ALow)      |                                        Unrelated to a user task. Does not need a workaround.                                        | Unrelated to a user task. Does not need a workaround.                                                            | Unrelated to a user task. Content has a typo.                                                                                                                           | Unrelated to a user task. Does not need a workaround.                                                            | A release will be moved into Production with defects at this severity level included. These will often not be addressed by the maintainer team as a priority in future releases. |
 
 Workarounds can be described as either of the following:
 
@@ -367,9 +373,7 @@ Workarounds can be described as either of the following:
    instead to format the date on every keystroke.
 
 If either of these types of workarounds are available, the bug will be
-classified as
-https://github.com/carbon-design-system/carbon/labels/severity%3A%203 or
-https://github.com/carbon-design-system/carbon/labels/severity%3A%204
+classified as Medium (Severity 3) or Low (Severity 4).
 
 These can be difficult (and vague!) concepts to wrap your head around. So here's
 a handy flow chart to guide you through assigning issue severity:
@@ -380,11 +384,11 @@ graph TD
     B -->|No| C[Is there a workaround?]
     B -->|Yes| D[Is there a workaround?]
     C -->|No| E[Is this major enough to need an immediate fix?*]
-    C -->|Yes| Sev3([Severity: 3])
-    E -->|No| Sev2([Severity: 2])
-    E -->|Yes| Sev1([Severity: 1])
+    C -->|Yes| Sev3([Medium: Severity 3])
+    E -->|No| Sev2([High: Severity 2])
+    E -->|Yes| Sev1([Critical: Severity 1])
     D -->|Yes| Sev3
-    D -->|Workaround not needed| Sev4([Severity: 4])
+    D -->|Workaround not needed| Sev4([Low: Severity 4])
     B -->|Unrelated to user task| Sev4
 ```
 
@@ -399,14 +403,12 @@ Here are some primary determining factors:
 - The degree to which something is broken (being unable to complete foundational
   tasks like clicking a button or opening a dropdown, for instance)
 
-Also consider the response a
-https://github.com/carbon-design-system/carbon/labels/severity%3A%201 issue
-requires, and evaluate it against the bug:
+Also consider the response a Critical (Severity 1) issue requires, and evaluate
+it against the bug:
 
-- The response must be swift. When a
-  https://github.com/carbon-design-system/carbon/labels/severity%3A%201 issue
-  comes in, someone from the team must drop all current work and be immediately
-  reassigned to address the issue.
+- The response must be swift. When a Critical (Severity 1) issue comes in,
+  someone from the team must drop all current work and be immediately reassigned
+  to address the issue.
 - In the worst circumstances, this person may immediately revert a change from a
   previous release.
 - It's likely a patch must be published once the fix or revert is in - the item
@@ -416,16 +418,13 @@ requires, and evaluate it against the bug:
   identifying what happened and why, with a plan of how we intend to prevent it
   from happening again.
 
-Due to this high threshold and intensity of response,
-https://github.com/carbon-design-system/carbon/labels/severity%3A%201 issues
-should be infrequent and should not be open for a long period of time.
+Due to this high threshold and intensity of response, Critical (Severity 1)
+issues should be infrequent and should not be open for a long period of time.
 
 For the vast majority of bugs that have invalid and blocking behavior with no
-workaround, a
-https://github.com/carbon-design-system/carbon/labels/severity%3A%202 or lower
-is more appropriate.
+workaround, High (Severity 2) or lower is more appropriate.
 
-After applying the severity label, be sure to also apply the appropriate role to
+After setting the Severity field, be sure to also apply the appropriate role to
 the issue. Either `role: dev 🤖` or `role: design :pencil2:`, depending on which
 discipline should be working on it.
 
@@ -433,6 +432,12 @@ discipline should be working on it.
 
 After assigning the role and severity, be sure to apply the correct categories
 in the GitHub Project:
+
+Formal Bug issues are automatically added to the Design System project. The
+suggested severity from the issue form is copied to the Severity field only when
+the field is empty. Once the project item is available, an empty Area defaults
+to Support and an empty Effort defaults to 3. Existing field values are
+preserved. This also runs when an existing issue's type is changed to Bug.
 
 - Status
   - Triage - Issues that need triaging
@@ -443,9 +448,10 @@ in the GitHub Project:
   - Backlog - Issues that have been refined move into the Backlog, where they
     will be sized and assigned for a future sprint.
   - In progress - Issues that are being actively worked on in a given sprint.
-  - Area - The part of the system that the issue effects.
-  - Role - The discipline that will take the lead and deliver the issue to
-    completion.
+- Area - The part of the system that the issue effects.
+- Effort - The estimated effort needed to complete the issue.
+- Role - The discipline that will take the lead and deliver the issue to
+  completion.
 
 ### Other labels
 

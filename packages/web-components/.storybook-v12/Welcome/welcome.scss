@@ -1,0 +1,53 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/colors';
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing';
+
+.welcome__container {
+  position: fixed;
+  padding: spacing.$spacing-09;
+  background: url('../../../react/.storybook/Welcome/carbon_bg.png') no-repeat
+    center center fixed;
+  background-size: cover;
+  block-size: 100vh;
+  inline-size: 100vw;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+}
+
+.welcome__heading {
+  @include type.type-style('productive-heading-07');
+
+  color: colors.$white;
+}
+
+.welcome__heading--subtitle {
+  font-weight: 600;
+}
+
+.welcome__links {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-block-start: spacing.$spacing-07;
+}
+
+.welcome__link {
+  --#{$prefix}-link-text-color: #{colors.$blue-40};
+  --#{$prefix}-link-hover-text-color: #{colors.$blue-40};
+}
+
+.welcome__link-icon {
+  line-height: 1;
+}
+
+.v12-callout {
+  margin-block-start: spacing.$spacing-06;
+}

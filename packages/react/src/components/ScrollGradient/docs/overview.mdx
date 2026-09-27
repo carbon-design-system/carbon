@@ -1,0 +1,57 @@
+import {
+  Controls,
+  Canvas,
+  Story,
+  Meta,
+  Unstyled,
+} from '@storybook/addon-docs/blocks';
+import * as ScrollGradientStories from '../ScrollGradient.stories';
+import { InlineNotification } from '../../Notification';
+
+<Meta isTemplate />
+
+# ScrollGradient
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Component API](#component-api)
+
+{/* <!-- prettier-ignore-start --> */}
+
+<Unstyled>
+  <InlineNotification
+    kind="info"
+    title="Migrated component:"
+    subtitle="This component has been migrated from Carbon for IBM Products. While visible in the v12 Storybook, migrated components are not available in the published v11 package and enabling enable-v12-release does not expose them — they will be part of the public @carbon/react API when v12 ships."
+  />
+</Unstyled>
+
+{/* <!-- prettier-ignore-end --> */}
+
+## Overview
+
+`ScrollGradient` implements gradient fades in horizontal and vertical directions
+based on the user's scroll position. The gradient appears when there is more
+content to scroll to, and disappears when the scroll position reaches the edge.
+This visually informs the user that additional content exists beyond the visible
+area.
+
+## Example usage
+
+<Canvas>
+  <Story of={ScrollGradientStories.Default} />
+</Canvas>
+
+## Code sample
+
+```jsx
+<ScrollGradient>
+  <p>Scrolling content here</p>
+</ScrollGradient>
+```
+
+## Component API
+
+<Controls />

@@ -42,7 +42,13 @@
   }
 }
 
-@mixin button-set-fluid-layout() {
+/// Emit all fluid layout rules for a ButtonSet.
+///
+/// @param {Number} $min-inline-size [$button-min-inline-size] - The minimum
+///   inline size per button used as the container-query stacking threshold.
+///   Pass a smaller value (e.g. `7.5rem` / 120px) for contexts with narrower
+///   footers (Tearsheet, narrow SidePanel) so buttons don't stack too early.
+@mixin button-set-fluid-layout($min-inline-size: $button-min-inline-size) {
   container-type: inline-size;
 
   .#{$prefix}--btn-set__fluid-inner {
@@ -55,13 +61,6 @@
     inline-size: 100%;
   }
 
-  // NOTE: Container queries are based on this value which is based on IBM Products implementation
-  // Side panel has up to 3 buttons unstacked from size lg (640px). Min 160.33px/button
-  // Narrow Tearsheet 540px has 4 buttons unstacked buttons. Min 135px/button
-  // May need to be configurable as 3 * 135px is less than 640px.
-  // Current value 176px only supports up to 3 buttons at 540px.
-  $min-inline-button-size: convert.to-rem(176px);
-
   .#{$prefix}--btn-set__fluid-inner .#{$prefix}--btn {
     // default non-column layout
     flex: 0 1 25%;
@@ -71,7 +70,7 @@
   }
 
   .#{$prefix}--btn-set__fluid-inner--auto-stack .#{$prefix}--btn {
-    min-inline-size: $min-inline-button-size;
+    min-inline-size: $min-inline-size;
   }
 
   .#{$prefix}--btn-set__fluid-inner .#{$prefix}--btn--ghost,
@@ -85,14 +84,14 @@
   $max-fluid-buttons: 4;
   // this determines whether or not column is used
   @for $i from 1 through $max-fluid-buttons {
-    @container (width <= #{$i * $min-inline-button-size}) {
+    @container (width <= #{$i * $min-inline-size}) {
       .#{$prefix}--btn-set__fluid-inner--auto-stack#{has-n-children($i)} {
         @include button-set-fluid-column();
       }
     }
   }
 
-  @container (width <= #{4 * $min-inline-button-size}) {
+  @container (width <= #{4 * $min-inline-size}) {
     .#{$prefix}--btn-set__fluid-inner#{has-n-children(2)} {
       .#{$prefix}--btn {
         flex-basis: 50%;
@@ -101,7 +100,7 @@
     }
   }
 
-  @container (width <= #{3 * $min-inline-button-size}) {
+  @container (width <= #{3 * $min-inline-size}) {
     .#{$prefix}--btn-set__fluid-inner#{has-n-children(1)} .#{$prefix}--btn {
       flex: 1 1 100%;
       max-inline-size: none;
@@ -260,7 +259,6 @@
 
     &.#{$prefix}--btn--ghost {
       &:focus {
-        background-color: $background-active;
         box-shadow: inset 0 0 0 $button-outline-width $button-focus-color;
       }
     }

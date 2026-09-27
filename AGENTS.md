@@ -25,6 +25,14 @@ icons, pictograms, layout, motion, themes, type), and tooling.
   `docs/guides/`
 - The approach for delivering experimental, feature-flagged, "preview" code:
   `docs/experimental-code.md`, `docs/feature-flags.md`, `docs/preview-code.md`
+- Every code change that affects v12 behavior, including code exercised through
+  `enable-v12-release`, an individual `enable-v12-*` flag, or a related package
+  change, must meaningfully update `docs/migration/v12.md` in the same change.
+  Keep it accurate for a consumer or agent migrating from v11 to v12: update an
+  existing section when possible, document only consumer-visible behavior and
+  migration burden, and omit internal details or maintainer notes. Do not
+  duplicate flag or codemod metadata. See
+  `docs/working-with-v12.md#required-v12-migration-documentation`.
 - Linting, formatting, build and tests should all pass before committing
 - Before opening or reviewing a pull request (PR), follow the instructions:
   `docs/guides/reviewing-pull-requests.md`

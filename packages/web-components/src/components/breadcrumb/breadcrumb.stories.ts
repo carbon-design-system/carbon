@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -21,37 +21,32 @@ import { prefix } from '../../globals/settings';
 import OverflowMenuHorizontal16 from '@carbon/icons/es/overflow-menu--horizontal/16.js';
 import { iconLoader } from '../../globals/internal/icon-loader';
 
-const sizes = {
-  [`Small size (${BREADCRUMB_SIZE.SMALL})`]: BREADCRUMB_SIZE.SMALL,
-  [`Medium size (${BREADCRUMB_SIZE.MEDIUM})`]: BREADCRUMB_SIZE.MEDIUM,
-};
 const args = {
-  ariaLabel: '',
-  className: '',
+  ariaLabel: 'custom-breadcrumb-label',
   noTrailingSlash: false,
   size: BREADCRUMB_SIZE.MEDIUM,
 };
 
 const argTypes = {
   ariaLabel: {
-    control: 'text',
+    control: { type: 'text' },
     description: 'Specify the aria-label for the breadcrumb container.',
     name: 'aria-label',
   },
-  className: {
-    control: 'text',
-    description:
-      'Specify an optional className to be applied to the container node.',
-  },
   noTrailingSlash: {
-    control: 'boolean',
-    description:
-      'Optional prop to omit the trailing slash for the breadcrumbs.',
+    control: { type: 'boolean' },
+    description: 'Optional prop to omit the trailing slash for the breadcrumb.',
   },
   size: {
-    control: 'select',
-    description: 'Specify the size of the Accordion.',
-    options: sizes,
+    control: { type: 'select' },
+    description:
+      "Specify the size of the breadcrumb. Currently supports the following: `sm` & `md` (default: 'md')",
+    options: [BREADCRUMB_SIZE.SMALL, BREADCRUMB_SIZE.MEDIUM],
+    table: {
+      type: {
+        summary: `'${BREADCRUMB_SIZE.SMALL}' | '${BREADCRUMB_SIZE.MEDIUM}'`,
+      },
+    },
   },
 };
 

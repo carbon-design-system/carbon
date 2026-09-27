@@ -7,8 +7,10 @@
 
 import * as relative from './relative';
 import * as absolute from './absolute';
+import * as duration from './duration';
 
 export const dateTimeFormat = {
   relative,
   absolute,
+  duration,
 };

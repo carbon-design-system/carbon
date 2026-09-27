@@ -8,6 +8,7 @@
 @use '@carbon/react/scss/config' with (
   $prefix: 'dialog-refactor'
 );
+@use '@carbon/react/scss/layout';
 @use '@carbon/react/scss/components/modal/modal';
 @use '@carbon/react/scss/components/dialog/dialog';
 @use '@carbon/react/scss/components/text-input/text-input';
