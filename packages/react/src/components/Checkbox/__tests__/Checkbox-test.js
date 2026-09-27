@@ -24,8 +24,8 @@ describe('Checkbox', () => {
     expect(screen.getByLabelText('test-label')).toBeInTheDocument();
   });
 
-  it('should not allow interactive content in labelText', () => {
-    const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+  it('should warn without throwing for interactive content in labelText', () => {
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
     expect(() => {
       render(
@@ -38,8 +38,12 @@ describe('Checkbox', () => {
           }
         />
       );
-    }).toThrow(
-      'The Checkbox component `labelText` prop must have no interactive content'
+    }).not.toThrow();
+
+    expect(spy).toHaveBeenCalledWith(
+      expect.stringContaining(
+        'Warning: The Checkbox component `labelText` prop must have no interactive content'
+      )
     );
 
     spy.mockRestore();

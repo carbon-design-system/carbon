@@ -68,7 +68,8 @@ interactions that come with the calendar menu or a dropdown.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(DatePickerStories.Simple),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: DatePickerStories.Simple }),
     },
   ]}
 />
@@ -85,7 +86,9 @@ years, however they work best when used for recent or near future dates.
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig(DatePickerStories.SingleWithCalendar),
+        stackblitzPrefillConfig({
+          story: DatePickerStories.SingleWithCalendar,
+        }),
     },
   ]}
 />
@@ -95,7 +98,7 @@ years, however they work best when used for recent or near future dates.
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig(DatePickerStories.RangeWithCalendar),
+        stackblitzPrefillConfig({ story: DatePickerStories.RangeWithCalendar }),
     },
   ]}
 />
@@ -111,7 +114,8 @@ You can use the `DatePickerSkeleton` component to render a skeleton variant of a
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(DatePickerStories.Skeleton),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: DatePickerStories.Skeleton }),
     },
   ]}
 />
@@ -123,7 +127,8 @@ You can use the `DatePickerSkeleton` component to render a skeleton variant of a
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(DatePickerStories.withAILabel),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: DatePickerStories.withAILabel }),
     },
   ]}
 />

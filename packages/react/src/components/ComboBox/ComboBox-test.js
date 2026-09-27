@@ -87,8 +87,8 @@ describe('ComboBox', () => {
     };
   });
 
-  it('should not allow interactive content in titleText', () => {
-    const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+  it('should warn without throwing for interactive content in titleText', () => {
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
     expect(() => {
       render(
@@ -101,8 +101,12 @@ describe('ComboBox', () => {
           }
         />
       );
-    }).toThrow(
-      'The ComboBox component `titleText` prop must have no interactive content'
+    }).not.toThrow();
+
+    expect(spy).toHaveBeenCalledWith(
+      expect.stringContaining(
+        'Warning: The ComboBox component `titleText` prop must have no interactive content'
+      )
     );
 
     spy.mockRestore();
