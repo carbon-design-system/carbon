@@ -12,7 +12,6 @@ import {
   Stories,
   ArgTypes,
 } from '@storybook/addon-docs/blocks';
-import { withPerformanceMonitor } from '@github-ui/storybook-addon-performance-panel';
 import { allModes } from './modes';
 
 import './styles.scss';
@@ -60,6 +59,20 @@ const devTools = {
         },
         'condensed',
         'normal',
+      ],
+    },
+  },
+  stressTestCount: {
+    description: 'Render N copies of this story for stress testing',
+    defaultValue: 1,
+    toolbar: {
+      title: 'dev :: Stress test instances',
+      items: [
+        { value: 1, title: '1× (off)' },
+        { value: 10, title: '10×' },
+        { value: 25, title: '25×' },
+        { value: 50, title: '50×' },
+        { value: 100, title: '100×' },
       ],
     },
   },
@@ -346,7 +359,6 @@ function getThemeFromBackground(backgroundValue) {
 }
 
 const decorators = [
-  withPerformanceMonitor,
   (Story, context) => {
     const { layoutDensity, layoutSize, locale, dir } = context.globals;
     const backgroundValue = context.globals.backgrounds?.value;
@@ -377,6 +389,26 @@ const decorators = [
       </GlobalTheme>
     );
   },
+  ...(process.env.NODE_ENV === 'development'
+    ? [
+        (Story, context) => {
+          const count = context.globals.stressTestCount ?? 1;
+          if (count <= 1) return <Story />;
+          return (
+            <div
+              style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                gap: '8px',
+              }}>
+              {Array.from({ length: count }, (_, i) => (
+                <Story key={i} />
+              ))}
+            </div>
+          );
+        },
+      ]
+    : []),
 ];
 
 const preview = {
