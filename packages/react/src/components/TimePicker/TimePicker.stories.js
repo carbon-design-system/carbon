@@ -118,8 +118,23 @@ const sharedArgTypes = {
 };
 
 export const Default = (args) => {
+  const [value, setValue] = React.useState(args.value);
+
+  React.useEffect(() => {
+    setValue(args.value);
+  }, [args.value]);
+
+  function handleChange(evt) {
+    setValue(evt.target.value);
+    args.onChange?.(evt);
+  }
+
   return (
-    <TimePicker id="time-picker" {...args}>
+    <TimePicker
+      id="time-picker"
+      {...args}
+      value={value}
+      onChange={handleChange}>
       <TimePickerSelect id="time-picker-select-1">
         <SelectItem value="AM" text="AM" />
         <SelectItem value="PM" text="PM" />
@@ -136,22 +151,39 @@ Default.args = sharedArgs;
 
 Default.argTypes = sharedArgTypes;
 
-export const _WithLayer = (args) => (
-  <WithLayer>
-    {(layer) => (
-      <TimePicker id={`time-picker-${layer}`} {...args}>
-        <TimePickerSelect id={`time-picker-select-${layer}-1`}>
-          <SelectItem value="AM" text="AM" />
-          <SelectItem value="PM" text="PM" />
-        </TimePickerSelect>
-        <TimePickerSelect id={`time-picker-select-${layer}-2`}>
-          <SelectItem value="America/New_York" text="Eastern time" />
-          <SelectItem value="America/Chicago" text="Central time" />
-        </TimePickerSelect>
-      </TimePicker>
-    )}
-  </WithLayer>
-);
+export const _WithLayer = (args) => {
+  const [value, setValue] = React.useState(args.value);
+
+  React.useEffect(() => {
+    setValue(args.value);
+  }, [args.value]);
+
+  function handleChange(evt) {
+    setValue(evt.target.value);
+    args.onChange?.(evt);
+  }
+
+  return (
+    <WithLayer>
+      {(layer) => (
+        <TimePicker
+          id={`time-picker-${layer}`}
+          {...args}
+          value={value}
+          onChange={handleChange}>
+          <TimePickerSelect id={`time-picker-select-${layer}-1`}>
+            <SelectItem value="AM" text="AM" />
+            <SelectItem value="PM" text="PM" />
+          </TimePickerSelect>
+          <TimePickerSelect id={`time-picker-select-${layer}-2`}>
+            <SelectItem value="America/New_York" text="Eastern time" />
+            <SelectItem value="America/Chicago" text="Central time" />
+          </TimePickerSelect>
+        </TimePicker>
+      )}
+    </WithLayer>
+  );
+};
 
 _WithLayer.args = sharedArgs;
 
