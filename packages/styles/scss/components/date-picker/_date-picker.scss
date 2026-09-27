@@ -321,7 +321,7 @@
   // Skeleton State
   .#{$prefix}--date-picker.#{$prefix}--skeleton input,
   .#{$prefix}--date-picker__input.#{$prefix}--skeleton {
-    @include skeleton;
+    @include skeleton($border-radius: $border-radius-04);
 
     inline-size: 100%;
 
@@ -331,7 +331,7 @@
   }
 
   .#{$prefix}--date-picker.#{$prefix}--skeleton .#{$prefix}--label {
-    @include skeleton;
+    @include skeleton($border-radius: $border-radius-04);
 
     block-size: convert.to-rem(14px);
     inline-size: convert.to-rem(75px);

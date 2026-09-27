@@ -24,11 +24,14 @@ export default {
   },
 };
 
-export const Default = ({ defaultWidth, ...passwordInputArgs }) => (
-  <div style={{ width: defaultWidth }}>
-    <FluidPasswordInput {...passwordInputArgs} />
-  </div>
-);
+export const Default = (args) => {
+  const { defaultWidth, ...passwordInputArgs } = args;
+  return (
+    <div style={{ width: defaultWidth }}>
+      <FluidPasswordInput {...passwordInputArgs} />
+    </div>
+  );
+};
 
 Default.args = {
   className: '',

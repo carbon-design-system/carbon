@@ -14,6 +14,7 @@
 @use 'breadcrumb';
 @use 'button';
 @use 'card';
+@use 'ConditionBuilder';
 @use 'coachmark';
 @use 'chat-button';
 @use 'checkbox';
@@ -44,11 +45,11 @@
 @use 'fluid-text-input';
 @use 'fluid-time-picker';
 @use 'form';
-@use 'FullPageError';
+@use 'full-page-error';
 @use 'guidebanner';
 @use 'icon-indicator';
 @use 'inline-loading';
-@use 'InterstitialScreen';
+@use 'interstitial-screen';
 @use 'link';
 @use 'list';
 @use 'list-box';
@@ -81,6 +82,7 @@
 @use 'stack';
 @use 'structured-list';
 @use 'tabs';
+@use 'TagOverflow';
 @use 'tag';
 @use 'Tearsheet';
 @use 'text-area';
