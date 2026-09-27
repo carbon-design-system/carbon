@@ -426,8 +426,11 @@ const ComboBox = forwardRef(
     const menuRef = useRef<HTMLUListElement>(null);
 
     const floatingMiddleware = useMemo(
-      () => (enableFloatingStyles ? [flip(), hide()] : undefined),
-      [enableFloatingStyles]
+      () =>
+        enableFloatingStyles
+          ? [autoAlign && flip(), autoAlign && hide()].filter(Boolean)
+          : undefined,
+      [enableFloatingStyles, autoAlign]
     );
 
     const [inputValue, setInputValue] = useState(
