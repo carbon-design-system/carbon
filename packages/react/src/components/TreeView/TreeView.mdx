@@ -37,10 +37,12 @@ collapsed to show and hide additional items.
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig(
-          TreeViewStories.Default,
-          "import { Document, Folder } from '@carbon/icons-react';"
-        ),
+        stackblitzPrefillConfig({
+          story: TreeViewStories.Default,
+          customImports: [
+            "import { Document, Folder } from '@carbon/icons-react';",
+          ],
+        }),
     },
   ]}
 />
@@ -57,10 +59,12 @@ expanded or collapsed.
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig(
-          TreeViewStories.WithControlledExpansion,
-          "import { Document, Folder } from '@carbon/icons-react';"
-        ),
+        stackblitzPrefillConfig({
+          story: TreeViewStories.WithControlledExpansion,
+          customImports: [
+            "import { Document, Folder } from '@carbon/icons-react';",
+          ],
+        }),
     },
   ]}
 />
@@ -76,10 +80,12 @@ TreeView.
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig(
-          TreeViewStories.WithIcons,
-          "import { Document, Folder } from '@carbon/icons-react';"
-        ),
+        stackblitzPrefillConfig({
+          story: TreeViewStories.WithIcons,
+          customImports: [
+            "import { Document, Folder } from '@carbon/icons-react';",
+          ],
+        }),
     },
   ]}
 />
