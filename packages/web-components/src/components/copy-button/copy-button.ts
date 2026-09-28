@@ -12,7 +12,7 @@ import Copy16 from '@carbon/icons/es/copy/16.js';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import styles from './copy-button.scss?lit';
-import { BUTTON_KIND, BUTTON_SIZE } from '../button/defs';
+import { BUTTON_KIND } from '../button/defs';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
 import { ICON_BUTTON_SIZE } from '../icon-button/defs';
 import '../copy/copy';
@@ -36,12 +36,6 @@ class CDSCopyButton extends FocusMixin(LitElement) {
    */
   @property({ reflect: true })
   kind = BUTTON_KIND.GHOST;
-
-  /**
-   * Specify the size of the Button. Defaults to `lg`.
-   */
-  @property({ reflect: true })
-  size: BUTTON_SIZE | string = BUTTON_SIZE.LARGE;
 
   /**
    * `true` if the button should be disabled.
