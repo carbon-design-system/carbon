@@ -12,6 +12,7 @@
  * stories and MDX files.
  */
 export const productMigratedStoryGlobs = [
+  '../src/components/ConditionBuilder/ConditionBuilder.stories.js',
   '../src/components/ActionSet/ActionSet.stories.js',
   '../src/components/AddSelect/AddSelect.stories.js',
   '../src/components/NotificationsPanel/NotificationsPanel.stories.js',
@@ -45,6 +46,7 @@ export const productMigratedStoryGlobs = [
  */
 export const excludeProductsComponents = [
   'src/components/AddSelect/**/*',
+  'src/components/ConditionBuilder/**/*',
   'src/components/BigNumber/**/*',
   'src/components/Coachmark/**/*',
   'src/components/Guidebanner/**/*',
