@@ -5,19 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// NOTE: This story is intentionally not registered (no `export default`)
+// Re-add the `export default` block when the feature is ready to be
+// surfaced to consumers.
+
 import React, { useEffect, useRef, useState } from 'react';
 import { Layer } from '../../../src/components/Layer';
 import './OklchThemes.stories.scss';
-
-export default {
-  title: 'Preview/Theming/V12 OKLCH themes',
-  component: Layer,
-  parameters: {
-    controls: {
-      disable: true,
-    },
-  },
-};
 
 // Reads the computed CSS custom property value from the nearest DOM ancestor.
 function useTokenValue(ref, token) {
