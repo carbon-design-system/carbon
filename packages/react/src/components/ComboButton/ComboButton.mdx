@@ -42,7 +42,8 @@ disclosed list next to the primary action. These additional actions must be
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(ComboButtonStories.Default),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: ComboButtonStories.Default }),
     },
   ]}
 />
@@ -54,7 +55,8 @@ disclosed list next to the primary action. These additional actions must be
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(ComboButtonStories.WithIcons),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: ComboButtonStories.WithIcons }),
     },
   ]}
 />
@@ -66,7 +68,8 @@ disclosed list next to the primary action. These additional actions must be
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(ComboButtonStories.WithDanger),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: ComboButtonStories.WithDanger }),
     },
   ]}
 />
@@ -92,7 +95,9 @@ understand the `menuAlignment` prop.
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig(ComboButtonStories.ExperimentalAutoAlign),
+        stackblitzPrefillConfig({
+          story: ComboButtonStories.ExperimentalAutoAlign,
+        }),
     },
   ]}
 />

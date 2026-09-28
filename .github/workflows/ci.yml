@@ -3,10 +3,12 @@ on:
   push:
     branches:
       - main
+      - next
   pull_request:
     types: [opened, reopened, synchronize, ready_for_review]
     branches:
       - main
+      - next
   merge_group:
     types: [checks_requested]
 
