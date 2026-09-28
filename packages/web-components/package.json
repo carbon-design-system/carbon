@@ -73,6 +73,7 @@
     "telemetry:config": "npx -y @ibm/telemetry-js-config-generator generate --wc --id 8cf8b3b8-a121-47d3-9eec-e4bea0ff23f5 --endpoint https://www-api.ibm.com/ibm-telemetry/v1/metrics --files ./src/components"
   },
   "dependencies": {
+    "@carbon/feature-flags": "^1.10.0",
     "@carbon/icon-helpers": "10.47.0",
     "@carbon/icons": "^11.89.0",
     "@carbon/styles": "^1.116.0",
