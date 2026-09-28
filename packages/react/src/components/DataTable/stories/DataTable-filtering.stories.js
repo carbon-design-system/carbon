@@ -94,7 +94,7 @@ export const Default = (args) => {
   return (
     <DataTable rows={renderedRows} headers={headers} {...args}>
       {({
-        rows,
+        rows: tableRows,
         headers,
         getHeaderProps,
         getRowProps,
@@ -103,7 +103,7 @@ export const Default = (args) => {
         onInputChange,
         getCellProps,
       }) => {
-        const showEmptyState = rows.length === 0;
+        const showEmptyState = tableRows.length === 0;
 
         const handleOnResetFilter = () => {
           setRenderedRows(rows);
@@ -156,7 +156,7 @@ export const Default = (args) => {
               <TableBody>
                 {showEmptyState
                   ? null
-                  : rows.map((row) => (
+                  : tableRows.map((row) => (
                       <TableRow {...getRowProps({ row })}>
                         {row.cells.map((cell) => (
                           <TableCell {...getCellProps({ cell })}>
