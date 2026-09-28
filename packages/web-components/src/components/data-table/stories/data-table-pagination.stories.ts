@@ -223,7 +223,7 @@ export const Default = {
       );
     };
 
-    // Stop propagation so cds-table's own _handleFilterRows never fires.
+    // Stop Propagation prevents the event from bubbling further up the DOM tree.
     container.addEventListener('cds-search-input', (e: Event) => {
       e.stopPropagation();
       searchValue = (e as CustomEvent).detail?.value ?? '';

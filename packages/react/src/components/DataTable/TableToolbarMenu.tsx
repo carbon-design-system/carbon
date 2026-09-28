@@ -13,7 +13,6 @@ import { usePrefix } from '../../internal/usePrefix';
 import { useFeatureFlag } from '../FeatureFlags';
 import OverflowMenu, { OverflowMenuProps } from '../OverflowMenu';
 import { OverflowMenu as OverflowMenuV12 } from '../OverflowMenu/next';
-import type { OverflowMenuProps as OverflowMenuV12Props } from '../OverflowMenu/next';
 import { useTableToolbar } from './TableToolbar';
 
 const defaultIconDescription = 'Settings';
@@ -43,14 +42,17 @@ const TableToolbarMenu = ({
   );
 
   if (enableV12OverflowMenu) {
-    const v12Props: OverflowMenuV12Props = {
-      renderIcon,
-      className: toolbarActionClasses,
-      label: iconDescription,
-      size,
-      menuAlignment: 'bottom-end',
-    };
-    return <OverflowMenuV12 {...v12Props}>{children}</OverflowMenuV12>;
+    return (
+      <OverflowMenuV12
+        renderIcon={renderIcon}
+        className={toolbarActionClasses}
+        label={iconDescription}
+        size={size}
+        menuAlignment="bottom-end"
+        {...rest}>
+        {children}
+      </OverflowMenuV12>
+    );
   }
 
   return (
