@@ -106,7 +106,7 @@ export const Default = (args) => {
         const showEmptyState = rows.length === 0;
 
         const handleOnResetFilter = () => {
-          setRenderedRows((prev) => prev); // no-op to avoid stale closure
+          setRenderedRows(rows);
           onInputChange({ target: { value: '' } });
           setSearchKey((k) => k + 1);
         };
