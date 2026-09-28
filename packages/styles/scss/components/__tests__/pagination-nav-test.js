@@ -40,7 +40,7 @@ describe('scss/components/pagination-nav', () => {
     expect(optionRule).toBeDefined();
     expect(optionRule.nodes.map(({ prop, value }) => [prop, value])).toEqual(
       expect.arrayContaining([
-        ['background-color', 'var(--cds-layer, #ffffff)'],
+        ['background-color', 'var(--cds-layer)'],
         ['color', 'var(--cds-text-primary, #161616)'],
       ])
     );
