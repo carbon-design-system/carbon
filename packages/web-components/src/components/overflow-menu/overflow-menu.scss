@@ -45,7 +45,7 @@
     background-color: $background-active;
   }
 
-  &[data-programmatic-focus] cds-tooltip button.#{$prefix}--overflow-menu {
+  &[data-programmatic-focus] #{$prefix}-tooltip button.#{$prefix}--overflow-menu {
     background-color: $background-active;
   }
 }
