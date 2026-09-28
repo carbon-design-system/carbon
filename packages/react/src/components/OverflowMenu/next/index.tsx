@@ -14,13 +14,12 @@ import React, {
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { OverflowMenuVertical } from '@carbon/icons-react';
-import { useFloating, flip, autoUpdate } from '@floating-ui/react';
+import { flip, autoUpdate, computePosition } from '@floating-ui/react';
 import { useFeatureFlag } from '../../FeatureFlags';
 
 import { IconButton } from '../../IconButton';
 import { Menu } from '../../Menu';
 import type { PopoverAlignment } from '../../Popover';
-import { mergeRefs } from '../../../tools/mergeRefs';
 
 import { useId } from '../../../internal/useId';
 import { usePrefix } from '../../../internal/usePrefix';
@@ -99,44 +98,11 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
     const enableFloatingStyles =
       useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
 
-    const { refs, floatingStyles, placement, middlewareData } = useFloating(
-      enableFloatingStyles
-        ? {
-            // Computing the position starts with initial positioning
-            // via `placement`.
-            placement: menuAlignment,
-
-            // The floating element is positioned relative to its nearest
-            // containing block (usually the viewport). It will in many cases
-            // also “break” the floating element out of a clipping ancestor.
-            // https://floating-ui.com/docs/misc#clipping
-            strategy: 'fixed',
-
-            // Middleware are executed as an in-between “middle” step of the
-            // initial `placement` computation and eventual return of data for
-            // rendering. Each middleware is executed in order.
-            middleware: [
-              autoAlign &&
-                flip({
-                  // An explicit array of placements to try if the initial
-                  // `placement` doesn’t fit on the axes in which overflow
-                  // is checked.
-                  fallbackPlacements: menuAlignment.includes('bottom')
-                    ? ['bottom-start', 'bottom-end', 'top-start', 'top-end']
-                    : ['top-start', 'top-end', 'bottom-start', 'bottom-end'],
-                }),
-            ],
-            whileElementsMounted: autoUpdate,
-          }
-        : {}
-      // When autoAlign is turned off & the `enable-v12-dynamic-floating-styles` feature flag is not
-      // enabled, floating-ui will not be used
-    );
-
     const id = useId('overflowmenu');
     const prefix = usePrefix();
 
     const triggerRef = useRef<HTMLDivElement>(null);
+    const menuRef = useRef<HTMLUListElement>(null);
 
     const {
       open,
@@ -146,22 +112,36 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
       handleMousedown,
       handleClose,
     } = useAttachedMenu(triggerRef);
+
+    // Position imperatively via autoUpdate — scroll/resize never touch React state.
     useEffect(() => {
-      if (enableFloatingStyles) {
-        Object.keys(floatingStyles).forEach((style) => {
-          if (refs.floating.current) {
-            refs.floating.current.style[style] = floatingStyles[style];
-          }
+      if (!enableFloatingStyles || !open) return;
+      const reference = triggerRef.current;
+      const floating = menuRef.current;
+      if (!reference || !floating) return;
+      const middleware = autoAlign
+        ? [
+            flip({
+              fallbackPlacements: menuAlignment.includes('bottom')
+                ? ['bottom-start', 'bottom-end', 'top-start', 'top-end']
+                : ['top-start', 'top-end', 'bottom-start', 'bottom-end'],
+            }),
+          ]
+        : [];
+      const applyPosition = () =>
+        computePosition(reference, floating, {
+          placement: menuAlignment,
+          strategy: 'fixed',
+          middleware,
+        }).then(({ x, y }) => {
+          Object.assign(floating.style, {
+            position: 'fixed',
+            left: `${x}px`,
+            top: `${y}px`,
+          });
         });
-      }
-    }, [
-      floatingStyles,
-      enableFloatingStyles,
-      refs.floating,
-      open,
-      placement,
-      middlewareData,
-    ]);
+      return autoUpdate(reference, floating, applyPosition);
+    }, [enableFloatingStyles, open, menuAlignment, autoAlign]);
 
     function handleTriggerClick() {
       if (triggerRef.current) {
@@ -188,8 +168,6 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
       size !== defaultSize && `${prefix}--layout--size-${size}`
     );
 
-    const floatingRef = mergeRefs(triggerRef, refs.setReference);
-
     return (
       <div
         {...rest}
@@ -203,7 +181,7 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
           className={triggerClasses}
           onClick={handleTriggerClick}
           onMouseDown={handleMousedown}
-          ref={floatingRef}
+          ref={triggerRef}
           label={label}
           align={tooltipAlignment}
           kind="ghost">
@@ -211,7 +189,7 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
         </IconButton>
         <Menu
           containerRef={triggerRef}
-          ref={refs.setFloating}
+          ref={enableFloatingStyles ? menuRef : undefined}
           menuAlignment={menuAlignment}
           className={menuClasses}
           id={id}

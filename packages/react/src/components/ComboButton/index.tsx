@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { ChevronDown } from '@carbon/icons-react';
@@ -15,13 +15,12 @@ import { Menu } from '../Menu';
 import { useAttachedMenu } from '../../internal/useAttachedMenu';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
-import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import {
   autoUpdate,
   flip,
   size as floatingSize,
   hide,
-  useFloating,
+  computePosition,
   type Middleware,
 } from '@floating-ui/react';
 import { useFeatureFlag } from '../FeatureFlags';
@@ -114,37 +113,10 @@ const ComboButton = React.forwardRef<HTMLDivElement, ComboButtonProps>(
     const id = useId('combobutton');
     const prefix = usePrefix();
     const containerRef = useRef<HTMLDivElement>(null);
-    const middlewares: Middleware[] = [];
+    const triggerButtonRef = useRef<HTMLButtonElement>(null);
+    const menuRef = useRef<HTMLUListElement>(null);
 
-    if (!enableOnlyFloatingStyles) {
-      middlewares.push(flip({ crossAxis: false }), hide());
-    }
-
-    if (menuAlignment === 'bottom' || menuAlignment === 'top') {
-      middlewares.push(
-        floatingSize({
-          apply({ rects, elements }) {
-            Object.assign(elements.floating.style, {
-              width: `${rects.reference.width}px`,
-            });
-          },
-        })
-      );
-    }
-    const { refs, floatingStyles, placement, middlewareData } = useFloating({
-      placement: menuAlignment,
-
-      // The floating element is positioned relative to its nearest
-      // containing block (usually the viewport). It will in many cases also
-      // “break” the floating element out of a clipping ancestor.
-      // https://floating-ui.com/docs/misc#clipping
-      strategy: 'fixed',
-
-      // Middleware order matters, arrow should be last
-      middleware: middlewares,
-      whileElementsMounted: autoUpdate,
-    });
-    const ref = mergeRefs(forwardRef, containerRef, refs.setReference);
+    const ref = mergeRefs(forwardRef, containerRef);
     const {
       open,
       handleClick: hookOnClick,
@@ -152,17 +124,43 @@ const ComboButton = React.forwardRef<HTMLDivElement, ComboButtonProps>(
       handleClose,
     } = useAttachedMenu(containerRef);
 
-    useIsomorphicEffect(() => {
-      const updatedFloatingStyles = {
-        ...floatingStyles,
-        visibility: middlewareData.hide?.referenceHidden ? 'hidden' : 'visible',
-      };
-      Object.keys(updatedFloatingStyles).forEach((style) => {
-        if (refs.floating.current) {
-          refs.floating.current.style[style] = updatedFloatingStyles[style];
-        }
-      });
-    }, [floatingStyles, refs.floating, middlewareData, placement, open]);
+    // Position imperatively via autoUpdate — scroll/resize never touch React state.
+    // Use the full container as reference so the menu matches the ComboButton width.
+    useEffect(() => {
+      if (!open) return;
+      const reference = containerRef.current;
+      const floating = menuRef.current;
+      if (!reference || !floating) return;
+      const middleware: Middleware[] = [];
+      if (!enableOnlyFloatingStyles)
+        middleware.push(flip({ crossAxis: false }), hide());
+      if (menuAlignment === 'bottom' || menuAlignment === 'top') {
+        middleware.push(
+          floatingSize({
+            apply({ rects, elements }) {
+              Object.assign(elements.floating.style, {
+                width: `${rects.reference.width}px`,
+              });
+            },
+          })
+        );
+      }
+      const applyPosition = () =>
+        computePosition(reference, floating, {
+          placement: menuAlignment,
+          strategy: 'fixed',
+          middleware,
+        }).then(({ x, y, middlewareData: data }) => {
+          Object.assign(floating.style, {
+            position: 'fixed',
+            left: `${x}px`,
+            top: `${y}px`,
+            visibility: data.hide?.referenceHidden ? 'hidden' : 'visible',
+          });
+        });
+      return autoUpdate(reference, floating, applyPosition);
+    }, [open, menuAlignment, enableOnlyFloatingStyles]);
+
     function handleTriggerClick() {
       if (containerRef.current) {
         hookOnClick();
@@ -207,7 +205,7 @@ const ComboButton = React.forwardRef<HTMLDivElement, ComboButtonProps>(
           </Button>
         </div>
         <IconButton
-          ref={refs.setReference}
+          ref={triggerButtonRef}
           className={triggerClasses}
           label={t('carbon.combo-button.additional-actions')}
           size={size}
@@ -224,7 +222,7 @@ const ComboButton = React.forwardRef<HTMLDivElement, ComboButtonProps>(
           containerRef={containerRef}
           menuAlignment={menuAlignment}
           className={menuClasses}
-          ref={refs.setFloating}
+          ref={menuRef}
           id={id}
           label={t('carbon.combo-button.additional-actions')}
           size={size}

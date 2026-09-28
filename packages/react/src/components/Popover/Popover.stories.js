@@ -274,7 +274,7 @@ export const ExperimentalAutoAlign = (args) => {
 
   useEffect(() => {
     ref?.current?.scrollIntoView({ block: 'center', inline: 'center' });
-  });
+  }, []);
 
   return (
     <div style={autoAlignStoryContainerStyle}>
@@ -324,7 +324,7 @@ export const ExperimentalAutoAlignBoundary = (args) => {
 
   useEffect(() => {
     ref?.current?.scrollIntoView({ block: 'center', inline: 'center' });
-  });
+  }, []);
 
   return (
     <div

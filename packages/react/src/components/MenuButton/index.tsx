@@ -5,7 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { ComponentProps, forwardRef, ReactNode, useRef } from 'react';
+import React, {
+  ComponentProps,
+  forwardRef,
+  ReactNode,
+  useEffect,
+  useRef,
+} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -16,12 +22,11 @@ import { Menu } from '../Menu';
 import { useAttachedMenu } from '../../internal/useAttachedMenu';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
-import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import {
-  useFloating,
   flip,
   size as floatingSize,
   autoUpdate,
+  computePosition,
 } from '@floating-ui/react';
 import { useFeatureFlag } from '../FeatureFlags';
 import { mergeRefs } from '../../tools/mergeRefs';
@@ -120,47 +125,9 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
     const id = useId('MenuButton');
     const prefix = usePrefix();
     const triggerRef = useRef<HTMLDivElement>(null);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-    let middlewares: any[] = [];
+    const buttonRef = useRef<HTMLButtonElement>(null);
+    const menuRef = useRef<HTMLUListElement>(null);
 
-    if (!enableOnlyFloatingStyles) {
-      middlewares = [flip({ crossAxis: false })];
-    }
-
-    if (menuAlignment === 'bottom' || menuAlignment === 'top') {
-      middlewares.push(
-        floatingSize({
-          apply({ rects, elements }) {
-            Object.assign(elements.floating.style, {
-              width: `${rects.reference.width}px`,
-            });
-          },
-        })
-      );
-    }
-    const { refs, floatingStyles, placement, middlewareData } = useFloating({
-      placement: menuAlignment,
-
-      // The floating element is positioned relative to its nearest
-      // containing block (usually the viewport). It will in many cases also
-      // “break” the floating element out of a clipping ancestor.
-      // https://floating-ui.com/docs/misc#clipping
-      strategy: 'fixed',
-
-      // Submenus are using a fixed position to break out of the parent menu's
-      // box avoiding clipping while allowing for vertical scroll. When an
-      // element is using transform it establishes a new containing block
-      // block for all of its descendants. Therefore, its padding box will be
-      // used for fixed-positioned descendants. This would cause the submenu
-      // to be clipped by its parent menu.
-      // Reference: https://www.w3.org/TR/2019/CR-css-transforms-1-20190214/#current-transformation-matrix-computation
-      // Reference: https://github.com/carbon-design-system/carbon/pull/18153#issuecomment-2498548835
-      transform: false,
-
-      // Middleware order matters, arrow should be last
-      middleware: middlewares,
-      whileElementsMounted: autoUpdate,
-    });
     const ref = mergeRefs(forwardRef, triggerRef);
     const {
       open,
@@ -169,22 +136,41 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
       handleClose,
     } = useAttachedMenu(triggerRef);
 
-    useIsomorphicEffect(() => {
-      Object.keys(floatingStyles).forEach((style) => {
-        if (refs.floating.current) {
-          let value = floatingStyles[style];
-
-          if (
-            ['top', 'right', 'bottom', 'left'].includes(style) &&
-            Number(value)
-          ) {
-            value += 'px';
-          }
-
-          refs.floating.current.style[style] = value;
-        }
-      });
-    }, [floatingStyles, refs.floating, middlewareData, placement, open]);
+    // Position imperatively via autoUpdate — scroll/resize never touch React state.
+    useEffect(() => {
+      if (!open) return;
+      const reference = buttonRef.current;
+      const floating = menuRef.current;
+      if (!reference || !floating) return;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
+      const middleware: any[] = [];
+      if (!enableOnlyFloatingStyles)
+        middleware.push(flip({ crossAxis: false }));
+      if (menuAlignment === 'bottom' || menuAlignment === 'top') {
+        middleware.push(
+          floatingSize({
+            apply({ rects, elements }) {
+              Object.assign(elements.floating.style, {
+                width: `${rects.reference.width}px`,
+              });
+            },
+          })
+        );
+      }
+      const applyPosition = () =>
+        computePosition(reference, floating, {
+          placement: menuAlignment,
+          strategy: 'fixed',
+          middleware,
+        }).then(({ x, y }) => {
+          Object.assign(floating.style, {
+            position: 'fixed',
+            left: `${x}px`,
+            top: `${y}px`,
+          });
+        });
+      return autoUpdate(reference, floating, applyPosition);
+    }, [open, menuAlignment, enableOnlyFloatingStyles]);
 
     function handleClick() {
       if (triggerRef.current) {
@@ -210,7 +196,7 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
         aria-owns={open ? id : undefined}
         className={containerClasses}>
         <Button
-          ref={refs.setReference}
+          ref={buttonRef}
           className={triggerClasses}
           size={size}
           tabIndex={tabIndex}
@@ -228,7 +214,7 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
           containerRef={triggerRef}
           menuAlignment={menuAlignment}
           className={menuClasses}
-          ref={refs.setFloating}
+          ref={menuRef}
           id={id}
           legacyAutoalign={false}
           label={label}
