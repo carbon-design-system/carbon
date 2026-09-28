@@ -16,6 +16,7 @@ import {
 } from 'react';
 import isEqual from 'react-fast-compare';
 import getDerivedStateFromProps from './state/getDerivedStateFromProps';
+import { isSelectedRow } from './state/selection';
 import { getNextSortState, type SortRowFn } from './state/sorting';
 import type { DataTableSortState } from './state/sortStates';
 import { getCellId } from './tools/cells';
@@ -654,11 +655,9 @@ export const DataTable = <RowType, ColTypes extends any[]>(
   /**
    * Selected row IDs, excluding disabled rows.
    */
-  const selectedRows = state.rowIds.filter((id) => {
-    const row = state.rowsById[id];
-
-    return row.isSelected && !row.disabled;
-  });
+  const selectedRows = state.rowIds.filter((id) =>
+    isSelectedRow(state.rowsById[id])
+  );
 
   const filteredRowIds =
     typeof state.filterInputValue === 'string'
@@ -728,9 +727,7 @@ export const DataTable = <RowType, ColTypes extends any[]>(
   const handleSelectAll = () => {
     setState((prev) => {
       const { rowsById } = prev;
-      const isSelected = !Object.values(rowsById).filter(
-        (row) => row.isSelected && !row.disabled
-      ).length;
+      const isSelected = !Object.values(rowsById).filter(isSelectedRow).length;
 
       return {
         ...prev,

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -14,6 +14,7 @@ import FocusMixin from '../../globals/mixins/focus';
 import styles from './copy-button.scss?lit';
 import { BUTTON_KIND, BUTTON_SIZE } from '../button/defs';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
+import { ICON_BUTTON_SIZE } from '../icon-button/defs';
 import '../copy/copy';
 import { iconLoader } from '../../globals/internal/icon-loader';
 
@@ -71,6 +72,12 @@ class CDSCopyButton extends FocusMixin(LitElement) {
    */
   @property({ type: Number, attribute: 'feedback-timeout' })
   feedbackTimeout = 2000;
+
+  /**
+   * Specify the size of the Button. Defaults to `lg`.
+   */
+  @property({ reflect: true })
+  size?: ICON_BUTTON_SIZE | string = ICON_BUTTON_SIZE.LARGE;
 
   render() {
     const {
