@@ -1,4 +1,4 @@
-// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=9125-400576&t=SbIuH3RAJeFPjXmN-4
+// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=9826-402965&t=SbIuH3RAJeFPjXmN-4
 // source=https://github.com/carbon-design-system/carbon/blob/main/packages/web-components/src/components/popover/popover.ts
 // component=cds-popover
 
@@ -16,29 +16,14 @@ import {
 } from '../template-helpers';
 
 const instance = figma.selectedInstance;
-const align = instance.getEnum('Position', {
-  Top: instance.getEnum('Alignment', {
-    Start: 'top-start',
-    Center: 'top',
-    End: 'top-end',
-  }),
-  Bottom: instance.getEnum('Alignment', {
-    Start: 'bottom-start',
-    Center: 'bottom',
-    End: 'bottom-end',
-  }),
-  Left: 'left',
-  Right: 'right',
+const align = instance.getEnum('Alignment', {
+  Start: 'bottom-start',
+  End: 'bottom-end',
 });
-const open = instance.getBoolean('Visible');
+const open = instance.getBoolean('Open');
+const dropShadow = instance.getBoolean('Shadow');
 
 const popoverItem = instance.findInstance('Popover item');
-const caret =
-  popoverItem.type !== 'ERROR'
-    ? popoverItem.getBoolean('Caret tip')
-    : undefined;
-const dropShadow =
-  popoverItem.type !== 'ERROR' ? popoverItem.getBoolean('Shadow') : undefined;
 const children =
   popoverItem.type !== 'ERROR'
     ? popoverItem.getInstanceSwap('Swap slot')?.executeTemplate().example
@@ -50,11 +35,11 @@ export default {
   example: figma.code`<cds-popover${renderStringAttribute(
     'align',
     align
-  )}${renderBooleanAttribute('caret', caret)}${renderBooleanAttribute(
-    'dropshadow',
-    dropShadow
-  )}${renderBooleanAttribute('open', open)}>
-  <button type="button">Open popover</button>
+  )}${renderBooleanAttribute('dropshadow', dropShadow)}${renderBooleanAttribute(
+    'open',
+    open
+  )} tabtip>
+  <button type="button">Open tab tip</button>
   <cds-popover-content>${children}</cds-popover-content>
 </cds-popover>`,
   metadata: { nestable: true },
