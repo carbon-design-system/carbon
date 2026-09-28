@@ -209,7 +209,9 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
       variant: this.variant,
       isSm: this.isSm,
       open: this.open,
-      onClose: () => this.closeTearsheet(),
+      onClose: () => {
+        this.open = false;
+      },
     });
   }
 
@@ -529,12 +531,12 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
   };
 
   /**
-   * Common method to handle tearsheet close with proper event dispatching
-   * @param originalEvent - The original event that triggered the close (optional)
-   * @param useAsync - Whether to dispatch closed event asynchronously
+   * Dispatches `cds-tearsheet-beingclosed` (cancelable).
+   * If cancelled, propagates the cancellation back to the modal so the modal
+   * does not proceed with closing.
+   * Bound to @cds-modal-beingclosed.
    */
-  private closeTearsheet(originalEvent?: Event, useAsync: boolean = false) {
-    // Dispatch the beingclosed event (cancelable)
+  private handleBeingClosed = (event: Event) => {
     const beforeCloseEvent = new CustomEvent(
       `${prefix}-tearsheet-beingclosed`,
       {
@@ -546,34 +548,26 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
     );
 
     if (!this.dispatchEvent(beforeCloseEvent)) {
-      // If event was cancelled, prevent closing
-      if (originalEvent) {
-        originalEvent.preventDefault();
-      }
-      return;
+      event.preventDefault();
     }
+  };
 
-    // Close the tearsheet
+  /**
+   * Dispatches `cds-tearsheet-closed` after the modal has fully closed.
+   * Also resets open = false so the tearsheet property stays in sync when
+   * the modal closes via ESC or click-outside.
+   * Bound to @cds-modal-closed.
+   */
+  private handleClosed = () => {
     this.open = false;
-
-    // Dispatch closed event
-    const dispatchClosedEvent = () => {
-      this.dispatchEvent(
-        new CustomEvent(`${prefix}-tearsheet-closed`, {
-          bubbles: true,
-          composed: true,
-          detail: {},
-        })
-      );
-    };
-
-    if (useAsync) {
-      // Use microtask for async scenarios (e.g., click outside)
-      Promise.resolve().then(dispatchClosedEvent);
-    } else {
-      dispatchClosedEvent();
-    }
-  }
+    this.dispatchEvent(
+      new CustomEvent(`${prefix}-tearsheet-closed`, {
+        bubbles: true,
+        composed: true,
+        detail: {},
+      })
+    );
+  };
 
   /**
    * Handle close button click from the header
@@ -582,7 +576,7 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
   private handleHeaderCloseButtonClick = (event: Event) => {
     // Stop the internal event from propagating
     event.stopPropagation();
-    this.closeTearsheet();
+    this.open = false;
   };
 
   /**
@@ -602,13 +596,6 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
         }
       )
     );
-  };
-
-  /**
-   * Handle close event from the modal (ESC key, click outside, etc.)
-   */
-  private handleClose = (event: Event) => {
-    this.closeTearsheet(event, true);
   };
 
   /**
@@ -663,8 +650,8 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
         this.selectorPrimaryFocus || undefined
       )}"
       selectors-floating-menus="${this.getFloatingMenuSelectors()}"
-      @cds-modal-beingclosed="${this.handleClose}"
-      @cds-modal-closed="${this.handleClose}"
+      @cds-modal-beingclosed="${this.handleBeingClosed}"
+      @cds-modal-closed="${this.handleClosed}"
       ?full-width="${true}"
       ai-label="${ifDefined(hasAILabel || undefined)}">
       <slot name="header"></slot>
