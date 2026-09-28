@@ -287,9 +287,19 @@ export const ExperimentalAutoAlignStressTest = () => (
     }}>
     {Array.from({ length: 50 }, (_, i) => (
       <MenuButton key={i} label={`Actions ${i + 1}`}>
-        <MenuItem label="First action" />
-        <MenuItem label="Second action" />
-        <MenuItem label="Third action" disabled />
+        <MenuItem label="Level 1" />
+        <MenuItem label="Level 1" />
+        <MenuItem label="Level 1">
+          <MenuItem label="Level 2">
+            <MenuItem label="Level 3" />
+            <MenuItem label="Level 3">
+              <MenuItem label="Level 4" />
+            </MenuItem>
+          </MenuItem>
+          <MenuItem label="Level 2" />
+          <MenuItem label="Level 2" />
+        </MenuItem>
+        <MenuItem label="Level 1" />
       </MenuButton>
     ))}
   </div>

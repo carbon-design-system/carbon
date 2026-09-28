@@ -152,19 +152,19 @@ const ContextMenuTile = ({ index }) => {
       }}>
       {index + 1}
       <Menu {...menuProps}>
-        <MenuItem label="Action" />
-        <MenuItem label="Share with">
-          {/* <MenuItem label="Product team">
-            <MenuItem label="Designer" />
-            <MenuItem label="Developer" />
-            <MenuItem label="Manager" />
-          </MenuItem> */}
-          <MenuItem label="Organization" />
-          <MenuItem label="Company" />
+        <MenuItem label="Level 1" />
+        <MenuItem label="Level 1" />
+        <MenuItem label="Level 1">
+          <MenuItem label="Level 2">
+            <MenuItem label="Level 3" />
+            <MenuItem label="Level 3">
+              <MenuItem label="Level 4" />
+            </MenuItem>
+          </MenuItem>
+          <MenuItem label="Level 2" />
+          <MenuItem label="Level 2" />
         </MenuItem>
-        <MenuItem label="Another action" disabled />
-        <MenuItemDivider />
-        <MenuItem label="Delete" kind="danger" />
+        <MenuItem label="Level 1" />
       </Menu>
     </div>
   );

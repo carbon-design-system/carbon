@@ -127,11 +127,19 @@ export const ExperimentalAutoAlignStressTest = () => (
       }}>
       {Array.from({ length: 50 }, (_, i) => (
         <OverflowMenu key={i} label={`Options ${i + 1}`} autoAlign>
-          <MenuItem label="Stop app" />
-          <MenuItem label="Restart app" />
-          <MenuItem label="Rename app" />
-          <MenuItemDivider />
-          <MenuItem label="Delete app" kind="danger" />
+          <MenuItem label="Level 1" />
+          <MenuItem label="Level 1" />
+          <MenuItem label="Level 1">
+            <MenuItem label="Level 2">
+              <MenuItem label="Level 3" />
+              <MenuItem label="Level 3">
+                <MenuItem label="Level 4" />
+              </MenuItem>
+            </MenuItem>
+            <MenuItem label="Level 2" />
+            <MenuItem label="Level 2" />
+          </MenuItem>
+          <MenuItem label="Level 1" />
         </OverflowMenu>
       ))}
     </div>
