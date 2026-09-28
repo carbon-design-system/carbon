@@ -57,6 +57,7 @@ import {
   size as floatingSize,
 } from '@floating-ui/react';
 import { useFeatureFlag } from '../FeatureFlags';
+import { useSafeFloatingRefs } from '../../internal/useSafeFloatingRefs';
 import { AILabel } from '../AILabel';
 import {
   defaultItemToString,
@@ -334,7 +335,7 @@ const Dropdown = React.forwardRef(
 
             // The floating element is positioned relative to its nearest
             // containing block (usually the viewport). It will in many cases also
-            // “break” the floating element out of a clipping ancestor.
+            // "break" the floating element out of a clipping ancestor.
             // https://floating-ui.com/docs/misc#clipping
             strategy: 'fixed',
 
@@ -356,6 +357,7 @@ const Dropdown = React.forwardRef(
       // When autoAlign is turned off & the `enable-v12-dynamic-floating-styles` feature flag is not
       // enabled, floating-ui will not be used
     );
+    const { setFloatingSafe, setReferenceSafe } = useSafeFloatingRefs(refs);
 
     useEffect(() => {
       if (enableFloatingStyles || autoAlign) {
@@ -602,9 +604,9 @@ const Dropdown = React.forwardRef(
     const menuProps = useMemo(
       () =>
         getMenuProps({
-          ref: enableFloatingStyles || autoAlign ? refs.setFloating : null,
+          ref: enableFloatingStyles || autoAlign ? setFloatingSafe : null,
         }),
-      [autoAlign, getMenuProps, refs.setFloating, enableFloatingStyles]
+      [autoAlign, getMenuProps, setFloatingSafe, enableFloatingStyles]
     );
 
     // AILabel is always size `mini`
@@ -647,7 +649,7 @@ const Dropdown = React.forwardRef(
           warnTextId={normalizedProps.warnId}
           light={light}
           isOpen={isOpen}
-          ref={enableFloatingStyles || autoAlign ? refs.setReference : null}
+          ref={enableFloatingStyles || autoAlign ? setReferenceSafe : null}
           id={id}>
           {normalizedProps.invalid && (
             <WarningFilled className={`${prefix}--list-box__invalid-icon`} />
