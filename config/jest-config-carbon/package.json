@@ -29,7 +29,6 @@
     "@babel/preset-react": "^8.0.0",
     "@babel/preset-typescript": "^8.0.0",
     "@babel/runtime": "^8.0.0",
-    "accessibility-checker": "^4.0.17",
     "axe-core": "^4.10.3",
     "babel-jest": "^30.2.0",
     "chalk": "^6.0.0",
