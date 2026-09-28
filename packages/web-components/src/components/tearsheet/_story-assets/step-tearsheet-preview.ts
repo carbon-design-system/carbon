@@ -8,7 +8,6 @@
 
 import { LitElement, html, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { SignalWatcher } from '@lit-labs/signals';
 import { iconLoader } from '../../../globals/internal/icon-loader';
 import RightPanelClose32 from '@carbon/icons/es/right-panel--close/32';
 
@@ -16,7 +15,6 @@ import '../../../components/progress-indicator/index';
 import '../../../components/text-input/index';
 import '../../../components/button/index';
 import styles from './_storybook-styles.scss?lit';
-import { StepInstance } from '@carbon/ibm-products-web-components/es/utilities/step-flow/step-flow-signal.js';
 import '../index';
 import type { ActionButton } from '../../action-set/index.js';
 
@@ -26,25 +24,31 @@ interface FormStateType {
   state?: string;
 }
 
+interface StepState {
+  currentStep: number;
+  totalSteps: number;
+  formState: FormStateType;
+}
+
 @customElement('step-tearsheet-preview')
-export class StepTearsheetNext extends SignalWatcher(LitElement) {
+export class StepTearsheetNext extends LitElement {
   @property({ type: Boolean })
   declare horizontal: boolean;
 
   @state()
   private declare _open: boolean;
 
+  @state()
+  private _stepState: StepState = {
+    currentStep: 0,
+    totalSteps: 3,
+    formState: {},
+  };
+
   constructor() {
     super();
     this.horizontal = false;
     this._open = false;
-  }
-
-  private _stepInfo = new StepInstance();
-
-  connectedCallback(): void {
-    super.connectedCallback();
-    this._stepInfo.updateTotalStepCount = 3;
   }
 
   private _onButtonClick() {
@@ -53,48 +57,54 @@ export class StepTearsheetNext extends SignalWatcher(LitElement) {
 
   private _handleCancelButton() {
     this._open = false;
-    this._stepInfo.reset();
+    this._stepState = { currentStep: 0, totalSteps: 3, formState: {} };
   }
 
   private _handleBackButton() {
-    const { currentStep } = this._stepInfo.data;
+    const { currentStep } = this._stepState;
     if (currentStep === 0) {
       return;
     }
-    return this._stepInfo.handlePrevious();
+    this._stepState = { ...this._stepState, currentStep: currentStep - 1 };
   }
 
   private _handleNextButton() {
-    const { currentStep, totalSteps } = this._stepInfo.data;
+    const { currentStep, totalSteps } = this._stepState;
     if (currentStep + 1 === totalSteps) {
       this._handleCancelButton();
       return;
     }
-    return this._stepInfo.handleNext();
+    this._stepState = { ...this._stepState, currentStep: currentStep + 1 };
   }
 
   private _handleEmailInput(e: Event) {
-    const savedFormState = structuredClone(
-      this._stepInfo.data.formState
-    ) as FormStateType;
-    savedFormState.email = (e.target as HTMLInputElement).value;
-    this._stepInfo.updateFormState = savedFormState;
+    this._stepState = {
+      ...this._stepState,
+      formState: {
+        ...this._stepState.formState,
+        email: (e.target as HTMLInputElement).value,
+      },
+    };
   }
 
   private _handleCityInput(e: Event) {
-    const savedFormState = structuredClone(
-      this._stepInfo.data.formState
-    ) as FormStateType;
-    savedFormState.city = (e.target as HTMLInputElement).value;
-    this._stepInfo.updateFormState = savedFormState;
+    this._stepState = {
+      ...this._stepState,
+      formState: {
+        ...this._stepState.formState,
+        city: (e.target as HTMLInputElement).value,
+      },
+    };
   }
 
   private _handleStateInput(e: Event) {
-    const savedFormState = structuredClone(
-      this._stepInfo.data.formState
-    ) as FormStateType;
-    savedFormState.state = (e.target as HTMLInputElement).value;
-    this._stepInfo.updateFormState = savedFormState;
+    this._stepState = {
+      ...this._stepState,
+      formState: {
+        ...this._stepState.formState,
+        state: (e.target as HTMLInputElement).value,
+      },
+    };
   }
 
   private _toggleInfluencerPanel() {
@@ -107,7 +117,7 @@ export class StepTearsheetNext extends SignalWatcher(LitElement) {
   }
 
   private _getStepContent() {
-    const { formState, currentStep } = this._stepInfo.data;
+    const { formState, currentStep } = this._stepState;
     const typedFormState = formState as FormStateType;
 
     switch (currentStep) {
@@ -149,7 +159,7 @@ export class StepTearsheetNext extends SignalWatcher(LitElement) {
   }
 
   private _getProgressStepState(stepIndex: number) {
-    const { currentStep } = this._stepInfo.data;
+    const { currentStep } = this._stepState;
     if (stepIndex < currentStep) {
       return 'complete';
     }
@@ -160,7 +170,7 @@ export class StepTearsheetNext extends SignalWatcher(LitElement) {
   }
 
   private _getActions(): ActionButton[] {
-    const { currentStep } = this._stepInfo.data;
+    const { currentStep, totalSteps } = this._stepState;
 
     return [
       {
@@ -176,8 +186,7 @@ export class StepTearsheetNext extends SignalWatcher(LitElement) {
       },
       {
         kind: 'primary',
-        label:
-          currentStep < this._stepInfo.data.totalSteps - 1 ? 'Next' : 'Submit',
+        label: currentStep < totalSteps - 1 ? 'Next' : 'Submit',
         onClick: () => this._handleNextButton(),
       },
     ];
