@@ -12,6 +12,8 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/utilities/convert' as *;
 @use '@carbon/styles/scss/utilities';
+@use '@carbon/styles/scss/utilities/skeleton' as *;
+@use '@carbon/styles/scss/border-radius' as *;
 @use '@carbon/styles/scss/components/form';
 @use '@carbon/styles/scss/components/number-input/index';
 @use '@carbon/styles/scss/components/fluid-number-input' as *;
@@ -28,6 +30,12 @@ $css--plex: true !default;
 
   .#{$prefix}--form-requirement[hidden] {
     display: none;
+  }
+}
+
+:host(#{$prefix}-number-input-skeleton) {
+  .#{$prefix}--label.#{$prefix}--skeleton {
+    @include skeleton($border-radius: $border-radius-04);
   }
 }
 
