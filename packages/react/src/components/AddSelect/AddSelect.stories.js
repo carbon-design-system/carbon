@@ -9,6 +9,7 @@ import './story.scss';
 
 import React, { useMemo, useState } from 'react';
 import { IconButton, Tag, Toggle } from '../..';
+import { UserAvatar } from '../UserAvatar';
 import { AddSelect } from './AddSelect';
 import mdx from './docs/overview.mdx';
 import {
@@ -576,11 +577,7 @@ const AddSelectRowStory = (args) => {
               itemPanelOpen={args.hasItemPanel && itemPanelOpen}
               icon={
                 args.showIcon ? (
-                  <span
-                    className={`${storyClass}__avatar-placeholder`}
-                    aria-label="user icon">
-                    👤
-                  </span>
+                  <UserAvatar name="Item icon" size="sm" />
                 ) : undefined
               }
               skeleton={args.skeleton}
