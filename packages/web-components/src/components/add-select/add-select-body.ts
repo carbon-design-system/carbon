@@ -114,6 +114,161 @@ class CDSAddSelectBody extends LitElement {
     this._hasHeaderSlot = slot.assignedElements({ flatten: true }).length > 0;
   }
 
+  /** Index of the currently focused row for grid keyboard navigation */
+  private _focusedRowIndex = 0;
+
+  /** Reference to the shadow div[role="grid"] — set after first render */
+  private _gridEl: HTMLElement | null = null;
+
+  /**
+   * Returns all cds-add-select-row host elements in document order.
+   * These are in the light DOM of this element, so querySelectorAll finds them.
+   */
+  private _getRowHosts(): HTMLElement[] {
+    return Array.from(
+      this.querySelectorAll<HTMLElement>(`${prefix}-add-select-row`)
+    );
+  }
+
+  /**
+   * Keyboard navigation for role="grid" (WAI-ARIA grid pattern).
+   * Mirrors the React AddSelectBody handleKeyDown implementation exactly:
+   * keydown is on the grid div, focused row has tabindex="0", others "-1".
+   */
+  private _handleGridKeydown = (event: KeyboardEvent) => {
+    const rows = this._getRowHosts();
+    if (rows.length === 0) {
+      return;
+    }
+
+    let handled = false;
+    const currentRow = rows[this._focusedRowIndex];
+
+    switch (event.key) {
+      case 'ArrowDown':
+        event.preventDefault();
+        this._updateRowFocus(this._focusedRowIndex + 1);
+        handled = true;
+        break;
+
+      case 'ArrowUp':
+        event.preventDefault();
+        this._updateRowFocus(this._focusedRowIndex - 1);
+        handled = true;
+        break;
+
+      case 'ArrowRight':
+        // Navigate into children if the focused row has them
+        if (currentRow && currentRow.hasAttribute('has-children')) {
+          event.preventDefault();
+          // Trigger navigate by clicking the nav-indicator inside the shadow root
+          const navIndicator =
+            currentRow.shadowRoot?.querySelector<HTMLElement>(
+              '[class*="nav-indicator"]'
+            );
+          navIndicator?.click();
+          handled = true;
+        }
+        break;
+
+      case 'Enter':
+      case ' ':
+        event.preventDefault();
+        if (currentRow) {
+          // The checkbox/radio is inside the row's shadow DOM
+          const input = currentRow.shadowRoot?.querySelector<HTMLInputElement>(
+            'input[type="checkbox"], input[type="radio"]'
+          );
+          input?.click();
+        }
+        handled = true;
+        break;
+
+      case 'Home':
+        if (event.ctrlKey) {
+          event.preventDefault();
+          this._updateRowFocus(0);
+          handled = true;
+        }
+        break;
+
+      case 'End':
+        if (event.ctrlKey) {
+          event.preventDefault();
+          this._updateRowFocus(rows.length - 1);
+          handled = true;
+        }
+        break;
+    }
+
+    if (handled) {
+      event.stopPropagation();
+    }
+  };
+
+  /**
+   * Mirrors React's updateItemFocus:
+   * - Sets tabindex="0" on the target row host so it is the Tab stop inside
+   *   the grid (Tab into grid → focused row, Tab out → next element after grid).
+   * - Sets tabindex="-1" on all other row hosts.
+   * - Calls .focus() on the target row host when shouldFocus is true.
+   *
+   * We set tabindex on the cds-add-select-row host elements (light DOM) rather
+   * than their inner shadow divs because host elements are real browser Tab
+   * stops; shadow-internal elements are not reachable by Tab from outside.
+   */
+  private _updateRowFocus(targetIndex: number, shouldFocus = true) {
+    const rows = this._getRowHosts();
+    if (rows.length === 0) {
+      return;
+    }
+    this._focusedRowIndex = Math.max(0, Math.min(targetIndex, rows.length - 1));
+    rows.forEach((row, idx) => {
+      if (idx === this._focusedRowIndex) {
+        row.setAttribute('tabindex', '0');
+        if (shouldFocus) {
+          row.focus();
+        }
+      } else {
+        row.setAttribute('tabindex', '-1');
+      }
+    });
+  }
+
+  /**
+   * After first render, wire the shadow div[role="grid"] as the Tab stop and
+   * attach the keydown listener to it (mirrors React: tabIndex={0} + onKeyDown
+   * on the grid div).
+   */
+  protected firstUpdated() {
+    const gridEl = this.renderRoot.querySelector<HTMLElement>('[role="grid"]');
+    if (gridEl) {
+      this._gridEl = gridEl;
+      gridEl.setAttribute('tabindex', '0');
+      gridEl.addEventListener('keydown', this._handleGridKeydown);
+    }
+    // Initialise row tabindices without stealing focus (mirrors React useEffect)
+    this._updateRowFocus(0, false);
+  }
+
+  /**
+   * Re-initialise row tabindices when the default slot's content changes
+   * (i.e. when rows are added/removed). Called from the default slot's
+   * slotchange handler in the template.
+   */
+  private _handleContentSlotChange = () => {
+    this._focusedRowIndex = 0;
+    this._updateRowFocus(0, false);
+  };
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    if (this._gridEl) {
+      this._gridEl.removeEventListener('keydown', this._handleGridKeydown);
+      this._gridEl = null;
+    }
+  }
+
   render() {
     const {
       itemsLabel,
@@ -238,13 +393,13 @@ class CDSAddSelectBody extends LitElement {
           : nothing}
 
         <!-- Body Content -->
-        <div class="${blockClass}__content" role="grid" tabindex="0">
+        <div class="${blockClass}__content" role="grid">
           <div
             class="${blockClass}-list-body${layout === 'horizontal'
               ? ` ${blockClass}-list-body--horizontal`
               : ''}"
             role="rowgroup">
-            <slot></slot>
+            <slot @slotchange=${this._handleContentSlotChange}></slot>
           </div>
         </div>
       </div>

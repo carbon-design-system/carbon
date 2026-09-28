@@ -25,6 +25,19 @@ $block-class: #{$prefix}--add-select__next-row;
 :host(#{$prefix}-add-select-row) {
   display: block;
 
+  // Focus ring on the host element itself — used by the grid keyboard navigation
+  // pattern where cds-add-select-body sets tabindex="0" on the host and calls
+  // host.focus(). Mirrors the :focus style on the inner [role="row"] div so the
+  // Carbon focus outline appears whether focus lands on the host or the inner div.
+  &:focus {
+    outline: 2px solid $focus;
+    outline-offset: -2px;
+  }
+
+  &:focus:not(:focus-visible) {
+    outline: none;
+  }
+
   .#{$block-class} {
     display: flex;
     border-inline-start: 0.125rem solid transparent;

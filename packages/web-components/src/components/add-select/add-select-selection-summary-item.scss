@@ -35,16 +35,26 @@ $block-class: #{$prefix}--add-select__next;
     // No extra borders — wrapper owns the border-block-end
   }
 
-  .#{$block-class}__selection-summary-item-accordion-heading {
+  // Row that places the <button> and the remove button side-by-side.
+  // position:relative here so the absolutely-positioned remove button is
+  // anchored to this row rather than to the full-width <button>.
+  .#{$block-class}__selection-summary-item-accordion-heading-row {
     position: relative;
     display: flex;
+    align-items: center;
+  }
+
+  .#{$block-class}__selection-summary-item-accordion-heading {
+    display: flex;
+    flex: 1;
     align-items: center;
     appearance: none;
     border: none; /* stylelint-disable-line order/properties-order */
     background: none;
     color: $text-primary;
     cursor: pointer;
-    inline-size: 100%;
+    // flex:1 makes the button fill the row; the remove button sits next to it.
+    min-inline-size: 0;
     padding-block: $spacing-04;
     padding-inline: $spacing-05;
 
@@ -189,8 +199,10 @@ $block-class: #{$prefix}--add-select__next;
     padding-inline-start: $spacing-03;
   }
 
-  // Accordion heading and render-item — absolutely positioned, vertically centred.
-  .#{$block-class}__selection-summary-item-accordion-heading
+  // Accordion heading row and render-item — absolutely positioned, vertically centred.
+  // Note: the selector targets the heading-row wrapper (not the <button> itself)
+  // because the remove button is a sibling of the <button>, not a descendant.
+  .#{$block-class}__selection-summary-item-accordion-heading-row
     .#{$block-class}__selection-summary-item-remove-button-container,
   .#{$block-class}__selection-summary-item-render-item-wrapper
     .#{$block-class}__selection-summary-item-remove-button-container {

@@ -217,36 +217,46 @@ class CDSAddSelectSelectionSummaryItem extends LitElement {
         <!-- accordion mode wrapper — always rendered when useAccordion, hidden otherwise -->
         <div style=${showAccordion ? '' : 'display:none'}>
           <div class="${blockClass}__selection-summary-item-accordion">
-            <button
-              type="button"
-              class="${blockClass}__selection-summary-item-accordion-heading"
-              aria-expanded=${this._accordionOpen}
-              @click=${() => {
-                this._accordionOpen = !this._accordionOpen;
-              }}>
-              <span
-                class="${blockClass}__selection-summary-item-accordion-arrow ${this
-                  ._accordionOpen
-                  ? `${blockClass}__selection-summary-item-accordion-arrow--open`
-                  : ''}">
-                ${iconLoader(ChevronRight16, {})}
-              </span>
+            <!--
+              The heading row is a flex container that holds the <button> and the
+              remove button as siblings. The remove button must NOT be inside the
+              <button> — nesting interactive content within <button> violates the
+              HTML interactive content model and ARIA authoring practices.
+              This mirrors the React implementation which uses renderToggle for
+              the same reason (see AddSelectSelectionSummaryItem.tsx).
+            -->
+            <div
+              class="${blockClass}__selection-summary-item-accordion-heading-row">
+              <button
+                type="button"
+                class="${blockClass}__selection-summary-item-accordion-heading"
+                aria-expanded=${this._accordionOpen}
+                @click=${() => {
+                  this._accordionOpen = !this._accordionOpen;
+                }}>
+                <span
+                  class="${blockClass}__selection-summary-item-accordion-arrow ${this
+                    ._accordionOpen
+                    ? `${blockClass}__selection-summary-item-accordion-arrow--open`
+                    : ''}">
+                  ${iconLoader(ChevronRight16, {})}
+                </span>
 
-              <span
-                class="${blockClass}__selection-summary-item-accordion-title"
-                style=${this._hasAccordionTitleSlot ? 'display:none' : ''}>
-                ${defaultTitle}
-              </span>
-              <span
-                class="${blockClass}__selection-summary-item-accordion-title ${blockClass}__selection-summary-item-accordion-title--slot"
-                style=${this._hasAccordionTitleSlot ? '' : 'display:none'}>
-                <slot
-                  name="accordion-title"
-                  @slotchange=${this._handleAccordionTitleSlotChange}></slot>
-              </span>
-
+                <span
+                  class="${blockClass}__selection-summary-item-accordion-title"
+                  style=${this._hasAccordionTitleSlot ? 'display:none' : ''}>
+                  ${defaultTitle}
+                </span>
+                <span
+                  class="${blockClass}__selection-summary-item-accordion-title ${blockClass}__selection-summary-item-accordion-title--slot"
+                  style=${this._hasAccordionTitleSlot ? '' : 'display:none'}>
+                  <slot
+                    name="accordion-title"
+                    @slotchange=${this._handleAccordionTitleSlotChange}></slot>
+                </span>
+              </button>
               ${this._renderRemoveButton()}
-            </button>
+            </div>
 
             <!-- accordion-body: shown only when open -->
             <div
