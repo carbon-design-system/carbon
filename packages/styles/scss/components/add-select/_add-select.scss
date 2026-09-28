@@ -203,8 +203,15 @@
     }
 
     &__checkbox {
-      flex: none;
-      align-self: center;
+      // Override cds--form-item's flex: 1 1 auto which causes the checkbox
+      // wrapper to stretch and leave a gap between the control and the title.
+      // cds--form-item and this class are on the same element so we need
+      // higher specificity to win regardless of stylesheet load order.
+      &.#{$prefix}--form-item {
+        flex: none;
+        align-self: center;
+      }
+
       margin-inline-end: $spacing-05;
     }
 
@@ -697,6 +704,18 @@
           opacity: 0;
           transform: translateX(0);
         }
+      }
+    }
+
+    &--closing {
+      display: flex;
+      flex-direction: column;
+      animation: add-select-item-panel-exit $duration-moderate-01
+        motion(exit, productive) forwards;
+
+      @media (prefers-reduced-motion) {
+        animation: add-select-item-panel-exit-reduced $duration-moderate-01
+          motion(exit, productive) forwards;
       }
     }
 

@@ -5,7 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { forwardRef, ForwardedRef, ReactNode } from 'react';
+import React, {
+  forwardRef,
+  ForwardedRef,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import { IconButton, type IconButtonProps } from '../IconButton';
@@ -85,8 +92,35 @@ const AddSelectItemPanel = forwardRef<HTMLDivElement, AddSelectItemPanelProps>(
     const prefix = usePrefix();
     const blockClass = `${prefix}--add-select`;
 
+    // Track whether the panel has ever been opened so we can show the exit
+    // animation on close. Before the first open, the panel stays display:none.
+    const [wasOpen, setWasOpen] = useState(false);
+    const [closing, setClosing] = useState(false);
+    const prevOpenRef = useRef(open);
+
+    useEffect(() => {
+      const prevOpen = prevOpenRef.current;
+      prevOpenRef.current = open;
+
+      if (open) {
+        setWasOpen(true);
+        setClosing(false);
+      } else if (prevOpen && !open) {
+        // Transitioning from open → closed: play exit animation.
+        setClosing(true);
+      }
+    }, [open]);
+
+    const handleAnimationEnd = () => {
+      if (closing) {
+        setClosing(false);
+        setWasOpen(false);
+      }
+    };
+
     const panelClasses = cx(`${blockClass}__item-summary-panel`, className, {
       [`${blockClass}__item-summary-panel--open`]: open,
+      [`${blockClass}__item-summary-panel--closing`]: closing,
     });
 
     // Default content rendering — renders only labelled itemDetails tuples.
@@ -141,8 +175,16 @@ const AddSelectItemPanel = forwardRef<HTMLDivElement, AddSelectItemPanelProps>(
       return defaultContent();
     };
 
+    if (!open && !closing && !wasOpen) {
+      return null;
+    }
+
     return (
-      <div className={panelClasses} ref={ref} {...rest}>
+      <div
+        className={panelClasses}
+        ref={ref}
+        onAnimationEnd={handleAnimationEnd}
+        {...rest}>
         {/* Header with title and close button */}
         <div className={`${blockClass}__item-summary-panel-header`}>
           <p className={`${blockClass}__item-summary-panel-title`}>{title}</p>
