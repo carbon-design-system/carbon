@@ -15,18 +15,18 @@ import RightPanelClose32 from '@carbon/icons/es/right-panel--close/32';
 import '../../../components/progress-indicator/index';
 import '../../../components/text-input/index';
 import '../../../components/button/index';
-import styles from '../story-styles.scss?lit';
-import { StepInstance } from '../../../utilities/step-flow/step-flow-signal';
+import styles from './_storybook-styles.scss?lit';
+import { StepInstance } from '@carbon/ibm-products-web-components/es/utilities/step-flow/step-flow-signal.js';
 import '../index';
 import type { ActionButton } from '../../action-set/index.js';
 
-interface FormStateType extends Record<string, unknown> {
+interface FormStateType {
   email?: string;
   city?: string;
   state?: string;
 }
 
-@customElement('step-tearsheet-demo')
+@customElement('step-tearsheet-preview')
 export class StepTearsheetNext extends SignalWatcher(LitElement) {
   @property({ type: Boolean })
   declare horizontal: boolean;
@@ -262,6 +262,6 @@ export class StepTearsheetNext extends SignalWatcher(LitElement) {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'step-tearsheet-demo': StepTearsheetNext;
+    'step-tearsheet-preview': StepTearsheetNext;
   }
 }

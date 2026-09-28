@@ -55,7 +55,6 @@ div[slot='main-content'],
 .smallScreenButton {
   @include hideAtLargeScreens();
 }
-
 //footer actions styles
 .default__action-buttons {
   display: grid;

@@ -1,5 +1,4 @@
 /**
- * @license
  *
  * Copyright IBM Corp. 2026
  *
@@ -142,12 +141,6 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
 
     if (this._isMobileOrNarrow !== previousIsMobileOrNarrow) {
       this.requestUpdate();
-    }
-
-    // Keep the signal's title in sync so tearsheet.ts can use it as aria-label
-    // without walking the DOM every render.
-    if (tearsheetSignal.get().title !== this.title) {
-      updateTearsheetSignals({ title: this.title });
     }
 
     this._updateDecoratorSize();

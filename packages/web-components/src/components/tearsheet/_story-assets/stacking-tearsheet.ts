@@ -1,5 +1,4 @@
 /**
- * @license
  *
  * Copyright IBM Corp. 2026
  *
@@ -9,7 +8,6 @@
 
 import { LitElement, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { ref, createRef } from 'lit/directives/ref.js';
 import '../index';
 import '../../../components/button/index';
 import '../../../components/text-input/index';
@@ -30,10 +28,6 @@ export class StackingTearsheetDemo extends LitElement {
 
   @state()
   private declare _open3: boolean;
-
-  private _launcherButtonRef1 = createRef<HTMLElement>();
-  private _launcherButtonRef2 = createRef<HTMLElement>();
-  private _launcherButtonRef3 = createRef<HTMLElement>();
 
   constructor() {
     super();
@@ -116,10 +110,7 @@ export class StackingTearsheetDemo extends LitElement {
     };
     return html`
       <div class="stackButtons">
-        <cds-button
-          ${ref(this._launcherButtonRef1)}
-          @click="${this._toggleTearsheet1}"
-          aria-haspopup="dialog">
+        <cds-button @click="${this._toggleTearsheet1}" aria-haspopup="dialog">
           Open Tearsheet 1
         </cds-button>
       </div>
@@ -143,7 +134,6 @@ export class StackingTearsheetDemo extends LitElement {
         <cds-tearsheet
           ?open="${this._open1}"
           variant="${getTearsheetVariant(1)}"
-          .launcherButtonRef="${this._launcherButtonRef1.value}"
           selector-primary-focus="#tss-ft1"
           @cds-tearsheet-closed="${() => (this._open1 = false)}">
           <cds-tearsheet-header>
@@ -156,7 +146,6 @@ export class StackingTearsheetDemo extends LitElement {
               </span>
               <div slot="header-actions">
                 <cds-button
-                  ${ref(this._launcherButtonRef2)}
                   size="sm"
                   kind="tertiary"
                   @click="${this._toggleTearsheet2}"
@@ -198,7 +187,6 @@ export class StackingTearsheetDemo extends LitElement {
         <cds-tearsheet
           ?open="${this._open2}"
           variant="${getTearsheetVariant(2)}"
-          .launcherButtonRef="${this._launcherButtonRef2.value}"
           selector-primary-focus="#tss-ft1"
           @cds-tearsheet-closed="${() => (this._open2 = false)}">
           <cds-tearsheet-header>
@@ -211,7 +199,6 @@ export class StackingTearsheetDemo extends LitElement {
               </span>
               <div slot="header-actions">
                 <cds-button
-                  ${ref(this._launcherButtonRef3)}
                   size="sm"
                   kind="tertiary"
                   @click="${this._toggleTearsheet3}"
@@ -253,7 +240,6 @@ export class StackingTearsheetDemo extends LitElement {
         <cds-tearsheet
           ?open="${this._open3}"
           variant="${getTearsheetVariant(3)}"
-          .launcherButtonRef="${this._launcherButtonRef3.value}"
           selector-primary-focus="#tss-ft1"
           @cds-tearsheet-closed="${() => (this._open3 = false)}">
           <cds-tearsheet-header>

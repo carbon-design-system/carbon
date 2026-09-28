@@ -1,5 +1,4 @@
 /**
- * @license
  *
  * Copyright IBM Corp. 2026
  *
@@ -595,11 +594,7 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
 
     const containerClasses = `${blockClass}__container ${this.containerClassName}`;
 
-    // Use ariaLabel prop if provided; otherwise fall back to the title pushed into
-    // the signal by cds-tearsheet-header-content — no DOM walk needed and no
-    // cross-shadow-root aria-labelledby (which browsers cannot resolve).
-    const effectiveAriaLabel =
-      this.ariaLabel || tearsheetSignal.get().title || undefined;
+    const effectiveAriaLabel = this.ariaLabel || undefined;
 
     return html`<cds-modal
       class=${classes}

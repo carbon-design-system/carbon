@@ -1,5 +1,4 @@
 /**
- * @license
  *
  * Copyright IBM Corp. 2026
  *
@@ -33,8 +32,6 @@ interface TearsheetSignalType {
   onClose: (() => void) | null;
   /** CSS selector for the element that should receive focus on open (consumer override) */
   selectorPrimaryFocus: string;
-  /** Title text from cds-tearsheet-header-content — used as aria-label fallback on the dialog */
-  title: string;
 }
 export const defaultTearsheetSignal: TearsheetSignalType = {
   hasCloseIcon: true,
@@ -50,7 +47,6 @@ export const defaultTearsheetSignal: TearsheetSignalType = {
   hideCloseButton: false,
   onClose: null,
   selectorPrimaryFocus: '',
-  title: '',
 };
 export const tearsheetSignal = signal<TearsheetSignalType>(
   defaultTearsheetSignal

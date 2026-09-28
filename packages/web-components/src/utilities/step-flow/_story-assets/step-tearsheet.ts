@@ -125,7 +125,7 @@ export class StepTearsheet extends SignalWatcher(LitElement) {
           </cds-tearsheet-header-content>
         </cds-tearsheet-header>
 
-        <cds-tearsheet-influencer>
+        <cds-tearsheet-influencer class="stepFlowInfluencer">
           <cds-progress-indicator
             vertical
             class="custom-step-util__dummy-content-block">
@@ -153,53 +153,55 @@ export class StepTearsheet extends SignalWatcher(LitElement) {
 
         <cds-tearsheet-body>
           <step-group slot="main-content">
-            ${currentStep + 1 === 1
-              ? html`<div>
-                  <cds-stack gap="6" orientation="horizontal">
-                    <cds-text-input
-                      label="Email"
-                      id="tearsheet-story-text-input-a"
-                      value=${this._email}
-                      @input="${this._handleEmailInput}"></cds-text-input>
-                  </cds-stack>
-                </div>`
-              : nothing}
-            ${currentStep + 1 === 2
-              ? html`<div>
-                  <cds-stack gap="6" orientation="horizontal">
-                    <cds-text-input
-                      label="City"
-                      id="tearsheet-story-text-input-city"
-                      value=${this._city}
-                      @input="${this._handleCityInput}"></cds-text-input>
-                    <cds-text-input
-                      label="State"
-                      id="tearsheet-story-text-input-state"
-                      value=${this._state}
-                      @input="${this._handleStateInput}"></cds-text-input>
-                  </cds-stack>
-                </div>`
-              : nothing}
-            ${currentStep + 1 === 3
-              ? html`<div>
-                  <!-- //cspell: disable -->
-                  <cds-code-snippet
-                    type="multi"
-                    copy-text=""
-                    maxcollapsednumberofrows="15"
-                    maxexpandednumberofrows=""
-                    mincollapsednumberofrows="3"
-                    minexpandednumberofrows=""
-                    show-less-text="Show less"
-                    show-more-text="Show more"
-                    feedback=""
-                    feedback-timeout="0"
-                    tooltip-content="Copy to clipboard">
-                    ${JSON.stringify(formState, null, 2)}
-                  </cds-code-snippet>
-                  <!-- //cspell: enable -->
-                </div>`
-              : nothing}
+            <div class="stepFlowBody">
+              ${currentStep + 1 === 1
+                ? html`<div>
+                    <cds-stack gap="6" orientation="horizontal">
+                      <cds-text-input
+                        label="Email"
+                        id="tearsheet-story-text-input-a"
+                        value=${this._email}
+                        @input="${this._handleEmailInput}"></cds-text-input>
+                    </cds-stack>
+                  </div>`
+                : nothing}
+              ${currentStep + 1 === 2
+                ? html`<div>
+                    <cds-stack gap="6" orientation="horizontal">
+                      <cds-text-input
+                        label="City"
+                        id="tearsheet-story-text-input-city"
+                        value=${this._city}
+                        @input="${this._handleCityInput}"></cds-text-input>
+                      <cds-text-input
+                        label="State"
+                        id="tearsheet-story-text-input-state"
+                        value=${this._state}
+                        @input="${this._handleStateInput}"></cds-text-input>
+                    </cds-stack>
+                  </div>`
+                : nothing}
+              ${currentStep + 1 === 3
+                ? html`<div>
+                    <!-- //cspell: disable -->
+                    <cds-code-snippet
+                      type="multi"
+                      copy-text=""
+                      maxcollapsednumberofrows="15"
+                      maxexpandednumberofrows=""
+                      mincollapsednumberofrows="3"
+                      minexpandednumberofrows=""
+                      show-less-text="Show less"
+                      show-more-text="Show more"
+                      feedback=""
+                      feedback-timeout="0"
+                      tooltip-content="Copy to clipboard">
+                      ${JSON.stringify(formState, null, 2)}
+                    </cds-code-snippet>
+                    <!-- //cspell: enable -->
+                  </div>`
+                : nothing}
+            </div>
           </step-group>
         </cds-tearsheet-body>
 
