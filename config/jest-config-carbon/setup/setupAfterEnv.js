@@ -16,26 +16,33 @@ import '@testing-library/jest-dom';
 // Library's `act()` and fails any test that mounts a floating element. Keep
 // the real hook for refs and focus, and replace the positioning callback so
 // that microtask never runs.
-jest.mock('@floating-ui/react', () => {
-  const actual = jest.requireActual('@floating-ui/react');
+//
+// `yarn test:scss-generator` enables native ESM via `--experimental-vm-modules`.
+// `jest.mock` calls `require` and throws there. That suite uses the Node
+// environment and does not render Floating UI, so register the mock only in
+// jsdom. `jest.doMock` is not hoisted, which keeps the call inside this guard.
+if (global.window) {
+  jest.doMock('@floating-ui/react', () => {
+    const actual = jest.requireActual('@floating-ui/react');
 
-  function useFloating(options = {}) {
-    const floating = actual.useFloating({
-      ...options,
-      whileElementsMounted: () => () => {},
-    });
+    function useFloating(options = {}) {
+      const floating = actual.useFloating({
+        ...options,
+        whileElementsMounted: () => () => {},
+      });
+
+      return {
+        ...floating,
+        update: () => {},
+      };
+    }
 
     return {
-      ...floating,
-      update: () => {},
+      ...actual,
+      useFloating,
     };
-  }
-
-  return {
-    ...actual,
-    useFloating,
-  };
-});
+  });
+}
 
 // We can extend `expect` using custom matchers as defined by:
 // https://jest-bot.github.io/jest/docs/expect.html#expectextendmatchers
