@@ -14,7 +14,7 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 import { classMap } from 'lit-html/directives/class-map.js';
 import styles from './tearsheet.scss?lit';
 import type { ActionButton, ButtonSize } from '../action-set/index.js';
-import { tearsheetSignal } from './tearsheet-signal';
+import { getTearsheetSignal, getParentTearsheetId } from './tearsheet-signal';
 import { SignalWatcher } from '@lit-labs/signals';
 import '../action-set/index.js';
 import { registerFocusableContainers } from '../../utilities/manageFocusTrap/manageFocusTrap';
@@ -32,17 +32,9 @@ class CDSTearsheetFooter extends SignalWatcher(HostListenerMixin(LitElement)) {
   @property({ reflect: true })
   slot = 'footer';
 
-  /**
-   * Array of action button configurations. Each action is an object with properties
-   * like 'kind', 'label', 'disabled', 'onClick', etc.
-   * These are passed directly to the action-set component which handles rendering.
-   */
   @property({ type: Array })
   actions: ActionButton[] = [];
 
-  /**
-   * Optional button size override. If not provided, defaults based on tearsheet variant.
-   */
   @property({ attribute: 'button-size' })
   buttonSize?: ButtonSize;
 
@@ -51,36 +43,39 @@ class CDSTearsheetFooter extends SignalWatcher(HostListenerMixin(LitElement)) {
 
   private _actionSetRegistered = false;
 
+  /** uniqueId of the parent cds-tearsheet, read once in connectedCallback. */
+  private _uniqueId: string = '';
+
+  connectedCallback(): void {
+    super.connectedCallback();
+    this._uniqueId = getParentTearsheetId(this);
+  }
+
   protected override firstUpdated(): void {
-    // Register with the current tearsheet's uniqueId
-    const uniqueId = tearsheetSignal.get().uniqueId;
-    if (uniqueId) {
-      registerFocusableContainers(this, uniqueId);
-    }
+    registerFocusableContainers(this, this._uniqueId);
   }
 
   protected override updated(): void {
-    // Register action-set shadow root after it's rendered (only once)
-    const uniqueId = tearsheetSignal.get().uniqueId;
     if (
       this.actionSetElement?.shadowRoot &&
-      uniqueId &&
+      this._uniqueId &&
       !this._actionSetRegistered
     ) {
-      registerFocusableContainers(this.actionSetElement.shadowRoot, uniqueId);
+      registerFocusableContainers(
+        this.actionSetElement.shadowRoot,
+        this._uniqueId
+      );
       this._actionSetRegistered = true;
     }
   }
 
-  /**
-   * Renders the action-set component with actions
-   */
   private _renderActions() {
     if (!this.actions || this.actions.length === 0) {
       return null;
     }
-
-    const variant = tearsheetSignal.get().variant;
+    // getTearsheetSignal(id).get() subscribes SignalWatcher to only this
+    // instance's signal — changes in other tearsheets never trigger a re-render.
+    const { variant } = getTearsheetSignal(this._uniqueId).get();
     const actionSetSize = variant === 'wide' ? '2xl' : 'lg';
     const buttonSize = this.buttonSize || (variant === 'wide' ? '2xl' : 'xl');
 

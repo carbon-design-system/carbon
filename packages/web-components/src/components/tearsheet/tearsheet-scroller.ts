@@ -17,7 +17,13 @@ import '../icon-button/index';
 import '../popover/popover-content';
 import CDSButton from '../button/button';
 import { prefix } from '../../globals/settings';
-import { tearsheetSignal } from './tearsheet-signal';
+import {
+  getTearsheetSignal,
+  getTearsheetState,
+  updateTearsheetState,
+  getParentTearsheetId,
+} from './tearsheet-signal';
+import { SignalWatcher } from '@lit-labs/signals';
 
 const blockClass = `${prefix}--tearsheet`;
 
@@ -26,32 +32,29 @@ const blockClass = `${prefix}--tearsheet`;
  * @element cds-tearsheet-scroller
  */
 @customElement(`${prefix}-tearsheet-scroller`)
-export class CDSTearsheetScroller extends CDSButton {
+export class CDSTearsheetScroller extends SignalWatcher(CDSButton) {
   @property({ reflect: true })
   slot = 'scroller';
-  /**
-   * Specify how the trigger should align with the tooltip
-   */
+
   @property({ reflect: true, type: String })
   align = 'left';
 
-  /**
-   * Specify the collapse text for the scroller button
-   */
   @property({ reflect: true, type: String })
   collapseText = 'Collapse';
 
-  /**
-   * Specify the expand text for the scroller button
-   */
   @property({ reflect: true, type: String })
   expandText = 'Expand';
 
-  /**
-   * Specify the size of the Button. Defaults to `md`.
-   */
   @property({ reflect: true })
   size = 'md';
+
+  /** uniqueId of the parent cds-tearsheet, read once in connectedCallback. */
+  private _uniqueId: string = '';
+
+  connectedCallback(): void {
+    super.connectedCallback();
+    this._uniqueId = getParentTearsheetId(this);
+  }
 
   protected _renderTooltipContent() {
     return html`
@@ -62,15 +65,17 @@ export class CDSTearsheetScroller extends CDSButton {
   }
 
   private _handleScroller = () => {
-    const { fullyCollapsed } = tearsheetSignal.get();
-    tearsheetSignal.set({
-      ...tearsheetSignal.get(),
+    const { fullyCollapsed } = getTearsheetState(this._uniqueId);
+    updateTearsheetState(this._uniqueId, {
       fullyCollapsed: !fullyCollapsed,
     });
   };
 
   render() {
-    const { fullyCollapsed } = tearsheetSignal.get();
+    // getTearsheetSignal(id).get() subscribes SignalWatcher to only this
+    // instance's signal — changes in other tearsheets never trigger a re-render.
+    const { fullyCollapsed } = getTearsheetSignal(this._uniqueId).get();
+
     const iconClasses = classMap({
       [`scroller-collapsed`]: !!fullyCollapsed,
       [`${blockClass}__scroller-button`]: true,
@@ -87,6 +92,7 @@ export class CDSTearsheetScroller extends CDSButton {
       </span>
     </cds-icon-button>`;
   }
+
   static styles = css`
     .scroller-collapsed svg {
       transform: rotate(180deg);

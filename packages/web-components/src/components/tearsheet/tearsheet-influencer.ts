@@ -14,7 +14,7 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 
 import styles from './tearsheet.scss?lit';
 import { SignalWatcher } from '@lit-labs/signals';
-import { tearsheetSignal } from './tearsheet-signal.js';
+import { getTearsheetSignal, getParentTearsheetId } from './tearsheet-signal';
 import { prefix } from '../../globals/settings.js';
 
 /**
@@ -35,10 +35,6 @@ class CDSTearsheetInfluencer extends SignalWatcher(
   @property({ type: Boolean, reflect: true, attribute: 'is-flush' })
   isFlush: boolean = false;
 
-  /**
-   * In mobile screens left side influencer section won't be visible by default.
-   * This prop can be toggled to open/close left panel in this case.
-   */
   @property({
     type: Boolean,
     reflect: true,
@@ -46,15 +42,17 @@ class CDSTearsheetInfluencer extends SignalWatcher(
   })
   influencerPanelOpen: boolean = false;
 
-  /**
-   * Optional aria-label for the influencer panel. Defaults to "Influencer panel".
-   */
   @property({ attribute: 'influencer-panel-aria-label' })
   influencerPanelAriaLabel: string = 'Influencer panel';
 
-  /**
-   * Handler for closing the influencer panel
-   */
+  /** uniqueId of the parent cds-tearsheet, read once in connectedCallback. */
+  private _uniqueId: string = '';
+
+  connectedCallback(): void {
+    super.connectedCallback();
+    this._uniqueId = getParentTearsheetId(this);
+  }
+
   private handleClose = () => {
     this.influencerPanelOpen = false;
     this.dispatchEvent(
@@ -66,7 +64,9 @@ class CDSTearsheetInfluencer extends SignalWatcher(
   };
 
   render() {
-    const { isSm } = tearsheetSignal.get();
+    // getTearsheetSignal(id).get() subscribes SignalWatcher to only this
+    // instance's signal — changes in other tearsheets never trigger a re-render.
+    const { isSm } = getTearsheetSignal(this._uniqueId).get();
 
     return !isSm
       ? html` <aside aria-label="${this.influencerPanelAriaLabel}">

@@ -17,8 +17,12 @@ import { MatchMediaController } from '../../globals/js/utils/match-media-control
 import { breakpoints } from '@carbon/layout';
 import {
   blockClass,
-  tearsheetSignal,
-  updateTearsheetSignals,
+  registerTearsheetSignal,
+  updateTearsheetState,
+  removeTearsheetState,
+  getTearsheetSignal,
+  registerTearsheetElement,
+  unregisterTearsheetElement,
 } from './tearsheet-signal';
 import { SignalWatcher } from '@lit-labs/signals';
 import HostListenerMixin from '../../globals/mixins/host-listener';
@@ -123,7 +127,8 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
   /**
    * Unique ID for this tearsheet instance
    */
-  private uniqueId: string = `tearsheet-${Math.random().toString(36).substr(2, 9)}`;
+  /** Unique ID for this tearsheet instance. Private — never in the DOM. */
+  private readonly uniqueId: string = `tearsheet-${Math.random().toString(36).substr(2, 9)}`;
 
   /**
    * Internal flag to track if stacking is enabled (via wrapper)
@@ -152,25 +157,12 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
     this.smMediaQuery,
     false
   );
-  /**
-   * Checks if the tearsheet has a decorator (AI label or other).
-   * Reads from the shared signal, populated by cds-tearsheet-header-content
-   * via _handleDecoratorChange — no tag-name querySelector needed.
-   */
-  private get hasDecorator(): boolean {
-    return tearsheetSignal.get().hasDecorator ?? false;
-  }
-
-  /**
-   * Checks if the tearsheet has an AI label decorator.
-   * Reads from the shared signal — no tag-name querySelector needed.
-   */
-  private get hasAILabel(): boolean {
-    return tearsheetSignal.get().hasAILabel;
-  }
-
   connectedCallback(): void {
     super.connectedCallback();
+
+    // Publish this element in the WeakMap registry so children can resolve
+    // their uniqueId via getParentTearsheetId(child) without a DOM attribute.
+    registerTearsheetElement(this, this.uniqueId);
 
     // Listen for stack wrapper events first
     this.addEventListener(
@@ -209,29 +201,16 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
   protected override firstUpdated(): void {
     this.updateCSSCustomProperties();
     this.isSm = this.isSmallDevice?.matches || this.variant === 'narrow';
-    // Initialize all signals on first update, including uniqueId so children can register
-    updateTearsheetSignals({
+    // Register this instance's own signal. Children resolve uniqueId by
+    // walking the DOM to this element and reading .uniqueId, then call
+    // getTearsheetSignal(id).get() in render() — so SignalWatcher subscribes
+    // only to that one signal and no other instance's state triggers a re-render.
+    registerTearsheetSignal(this.uniqueId, {
       variant: this.variant,
       isSm: this.isSm,
       open: this.open,
-      hasAILabel: this.hasAILabel,
-      uniqueId: this.uniqueId,
-      ...this._readHeaderProps(),
       onClose: () => this.closeTearsheet(),
     });
-  }
-
-  /**
-   * Read close-button props from the shared signal.
-   * cds-tearsheet-header pushes these via updateTearsheetSignals on connectedCallback
-   * and on every property change — no tag-name querySelector needed.
-   */
-  private _readHeaderProps(): {
-    closeIconDescription: string;
-    hideCloseButton: boolean;
-  } {
-    const { closeIconDescription, hideCloseButton } = tearsheetSignal.get();
-    return { closeIconDescription, hideCloseButton };
   }
 
   protected updated(_changedProperties: PropertyValues): void {
@@ -240,7 +219,7 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
     this.updateCSSPropertiesIfNeeded(_changedProperties);
 
     if (_changedProperties.has('variant')) {
-      updateTearsheetSignals({ variant: this.variant });
+      updateTearsheetState(this.uniqueId, { variant: this.variant });
     }
 
     if (_changedProperties.has('isSm')) {
@@ -255,7 +234,7 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
     this.isSm = this.isSmallDevice?.matches || this.variant === 'narrow';
 
     if (this.isSm !== previousIsSm) {
-      updateTearsheetSignals({ isSm: this.isSm });
+      updateTearsheetState(this.uniqueId, { isSm: this.isSm });
     }
   }
 
@@ -266,7 +245,7 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
     const wasOpen = this._wasOpen;
     const isOpen = this.open;
 
-    updateTearsheetSignals({ open: this.open });
+    updateTearsheetState(this.uniqueId, { open: this.open });
 
     // Only register with stack manager if stacking is enabled
     if (this._stackingEnabled && this.modalBodyElement) {
@@ -281,17 +260,13 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
     }
 
     if (!wasOpen && isOpen) {
-      // Capture the deeply-focused element before any rAF/setTimeout moves focus.
-      // document.activeElement stops at shadow-host boundaries, so we pierce through
-      // nested shadow roots to find the actual focused element (e.g. a cds-button
-      // inside a story component's shadow root).
-      this._launcher = CDSTearsheet._getDeepActiveElement(this.ownerDocument);
+      // Reset collapse state every time the tearsheet opens fresh so it always
+      // starts expanded. (If it was already open and tearsheet-2 closed on top
+      // of it, open doesn't change so this branch doesn't fire — the user's
+      // in-session collapse state is preserved.)
+      updateTearsheetState(this.uniqueId, { fullyCollapsed: false });
 
-      // Update signal with current uniqueId and selectorPrimaryFocus so children can register
-      updateTearsheetSignals({
-        uniqueId: this.uniqueId,
-        selectorPrimaryFocus: this.selectorPrimaryFocus,
-      });
+      this._launcher = CDSTearsheet._getDeepActiveElement(this.ownerDocument);
 
       // Notify this tearsheet's own header-content to handle initial focus.
       // Non-bubbling so it only reaches listeners attached directly to this
@@ -383,8 +358,11 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
 
     // Cleanup focus trap and clear all registered containers
     this._trapFocusAPI?.cleanup();
-
     clearFocusableContainers();
+
+    // Remove from WeakMap registry and signal registry
+    unregisterTearsheetElement(this);
+    removeTearsheetState(this.uniqueId);
 
     // Remove event listeners
     this.removeEventListener(
@@ -653,12 +631,20 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
   }
 
   render() {
+    // Subscribe to stackManager so stacking CSS vars update when peers open/close.
+    void stackManager.state;
+    // Subscribe to this instance's own signal so hasAILabel/hasDecorator CSS
+    // classes update reactively when the decorator slot changes.
+    const { hasAILabel, hasDecorator } = getTearsheetSignal(
+      this.uniqueId
+    ).get();
+
     const classes = classMap({
       [blockClass]: true,
       [`${blockClass}--wide`]: this.variant === 'wide',
       [`${blockClass}--narrow`]: this.variant === 'narrow',
-      [`${blockClass}--has-ai-label`]: this.hasAILabel,
-      [`${blockClass}--has-decorator`]: this.hasDecorator && !this.hasAILabel,
+      [`${blockClass}--has-ai-label`]: hasAILabel,
+      [`${blockClass}--has-decorator`]: hasDecorator && !hasAILabel,
     });
 
     const containerClasses = `${blockClass}__container ${this.containerClassName}`;
@@ -680,7 +666,7 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
       @cds-modal-beingclosed="${this.handleClose}"
       @cds-modal-closed="${this.handleClose}"
       ?full-width="${true}"
-      ai-label="${ifDefined(this.hasAILabel || undefined)}">
+      ai-label="${ifDefined(hasAILabel || undefined)}">
       <slot name="header"></slot>
       <cds-modal-body class="${blockClass}__body-layout">
         <slot

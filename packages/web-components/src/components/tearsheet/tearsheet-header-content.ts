@@ -20,7 +20,12 @@ import styles from './tearsheet-header-content.scss?lit';
 import { MatchMediaController } from '../../globals/js/utils/match-media-controller';
 import { breakpoints } from '@carbon/layout';
 import { registerFocusableContainers } from '../../utilities/manageFocusTrap/manageFocusTrap';
-import { tearsheetSignal, updateTearsheetSignals } from './tearsheet-signal';
+import {
+  getTearsheetSignal,
+  getTearsheetState,
+  updateTearsheetState,
+  getParentTearsheetId,
+} from './tearsheet-signal';
 import CDSTearsheetHeader from './tearsheet-header';
 import { SignalWatcher } from '@lit-labs/signals';
 import Close20 from '@carbon/icons/es/close/20.js';
@@ -46,15 +51,9 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
   @property({ reflect: true })
   slot = 'header-content';
 
-  /**
-   *  The main title of the tearsheet.
-   */
   @property({ reflect: true })
   title: string = '';
 
-  /**
-   * Internal ID for the title element (used only for the <h2> id in this shadow root)
-   */
   private _titleId: string = `${blockClass}__title-${Math.random().toString(36).substr(2, 9)}`;
 
   @query('slot[name="title-start"]')
@@ -78,32 +77,15 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
   @query('slot:not([name])')
   private _defaultSlot?: HTMLSlotElement;
 
-  @state()
-  private _hasTitleStart = false;
-
-  @state()
-  private _hasTitleEnd = false;
-
-  @state()
-  private _hasDecorator = false;
-
-  @state()
-  private _hasAILabel = false;
-
-  @state()
-  private _hasLabel = false;
-
-  @state()
-  private _hasDescription = false;
-
-  @state()
-  private _hasHeaderActions = false;
-
-  @state()
-  private _hasExtraContent = false;
-
-  @state()
-  private _isMobileOrNarrow = false;
+  @state() private _hasTitleStart = false;
+  @state() private _hasTitleEnd = false;
+  @state() private _hasDecorator = false;
+  @state() private _hasAILabel = false;
+  @state() private _hasLabel = false;
+  @state() private _hasDescription = false;
+  @state() private _hasHeaderActions = false;
+  @state() private _hasExtraContent = false;
+  @state() private _isMobileOrNarrow = false;
 
   private mdMediaQuery = `(max-width: ${breakpoints.md.width})`;
   private isMobileDevice = new MatchMediaController(
@@ -112,8 +94,11 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
     false
   );
 
+  /** uniqueId of the parent cds-tearsheet, read once in connectedCallback. */
+  private _uniqueId: string = '';
+
   private get isNarrowVariant(): boolean {
-    return tearsheetSignal.get().variant === 'narrow';
+    return getTearsheetState(this._uniqueId).variant === 'narrow';
   }
 
   protected override firstUpdated(): void {
@@ -124,10 +109,9 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
     // Register containers in intentional order:
     // 1. `this` (light DOM) — finds header-action buttons and AI label (slot="decorator")
     // 2. `this.shadowRoot` — finds close button (cds-icon-button) and decorator slot host
-    const uniqueId = tearsheetSignal.get().uniqueId;
-    if (uniqueId) {
-      registerFocusableContainers(this, uniqueId);
-      registerFocusableContainers(this.shadowRoot, uniqueId);
+    if (this._uniqueId) {
+      registerFocusableContainers(this, this._uniqueId);
+      registerFocusableContainers(this.shadowRoot, this._uniqueId);
     }
   }
 
@@ -152,12 +136,8 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
    *
    * Priority order (desktop/wide):  close button → header-action button → AI label
    * Priority order (mobile/narrow): close button → AI label → header-action button
-   *
-   * Called by the parent cds-tearsheet (via querySelector) so focus logic stays
-   * in the component that owns the DOM — no shared signal reads needed.
    */
   getFirstFocusable(): HTMLElement | null {
-    // header-actions: consumer may slot a button directly OR wrap in a div
     const headerActionSlot = this.querySelector<HTMLElement>(
       '[slot="header-actions"]'
     );
@@ -171,12 +151,10 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
           )
       : null;
 
-    // close button — lives in this component's own shadow DOM
     const closeBtn = this.shadowRoot?.querySelector<HTMLElement>(
       `.${blockClass}__close-button ${carbonPrefix}-icon-button:not([disabled])`
     );
 
-    // AI label — consumer may slot cds-ai-label directly OR wrap it in a div
     const decoratorSlot = this.querySelector<HTMLElement>('[slot="decorator"]');
     const aiLabel = decoratorSlot
       ? decoratorSlot.matches(`${carbonPrefix}-ai-label`)
@@ -191,11 +169,8 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
 
   /**
    * Handle the tearsheet-opened event dispatched by the parent cds-tearsheet.
-   * Scoped per-instance (non-bubbling event) so only this header-content reacts
-   * to its own tearsheet opening — no cross-instance focus stealing in stacking.
-   *
-   * The tearsheet slides in via CSS transform (~240ms). Browsers refuse to focus
-   * an off-screen/mid-transform element, so we defer 100ms into the animation.
+   * Scoped per-instance (non-bubbling) so only this header-content reacts to
+   * its own tearsheet opening.
    */
   private _handleTearsheetOpened = (event: Event) => {
     const { selectorPrimaryFocus } = (event as CustomEvent).detail;
@@ -211,21 +186,16 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
       let focusTarget: HTMLElement | null = null;
 
       if (selectorPrimaryFocus) {
-        // Consumer-specified selector: search this tearsheet's own light DOM.
         const match =
           this.closest(`${prefix}-tearsheet`)?.querySelector<HTMLElement>(
             selectorPrimaryFocus
           ) ?? null;
-        // Drill into shadow root for the real focusable if it's a custom element
-        // (e.g. cds-button → <button>, cds-text-input → <input>).
         focusTarget =
           match?.shadowRoot?.querySelector<HTMLElement>(
             'button:not([disabled]), input:not([disabled]):not([type="hidden"])'
           ) ?? match;
       }
 
-      // Fall back to the priority-ordered first focusable in the header when
-      // selectorPrimaryFocus was empty, or matched nothing in the DOM.
       if (!focusTarget) {
         const first = this.getFirstFocusable();
         focusTarget =
@@ -240,18 +210,11 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
 
   /**
    * Applies `inert` to collapsed header regions so they are removed from
-   * the tab order and AT tree. CSS alone (opacity:0 / max-block-size:0)
-   * does not prevent keyboard focus on hidden elements.
-   *
-   * Collapsed regions:
-   *   - Everything in header-content except the title wrapper
-   *     (description, label, extra slot content, "Read more" button)
-   *   - Header-actions on small/narrow screens
+   * the tab order and AT tree.
    */
   private _updateInertState(): void {
-    const { fullyCollapsed } = tearsheetSignal.get();
+    const { fullyCollapsed } = getTearsheetState(this._uniqueId);
 
-    // Header-content children except title wrapper
     const headerContent = this.shadowRoot?.querySelector(
       `.${blockClass}__header-content`
     );
@@ -265,7 +228,6 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
         });
     }
 
-    // Header-actions: inert on small/narrow when collapsed
     const headerActions = this.shadowRoot?.querySelector<HTMLElement>(
       `.${blockClass}__header-actions`
     );
@@ -277,28 +239,24 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
 
   private _checkSlots() {
     if (this._titleStartSlot) {
-      const assignedNodes = this._titleStartSlot.assignedElements();
-      this._hasTitleStart = assignedNodes.length > 0;
+      this._hasTitleStart = this._titleStartSlot.assignedElements().length > 0;
     }
     if (this._titleEndSlot) {
-      const assignedNodes = this._titleEndSlot.assignedElements();
-      this._hasTitleEnd = assignedNodes.length > 0;
+      this._hasTitleEnd = this._titleEndSlot.assignedElements().length > 0;
     }
     if (this._labelSlot) {
-      const assignedNodes = this._labelSlot.assignedElements();
-      this._hasLabel = assignedNodes.length > 0;
+      this._hasLabel = this._labelSlot.assignedElements().length > 0;
     }
     if (this._descriptionSlot) {
-      const assignedNodes = this._descriptionSlot.assignedElements();
-      this._hasDescription = assignedNodes.length > 0;
+      this._hasDescription =
+        this._descriptionSlot.assignedElements().length > 0;
     }
     if (this._headerActionsSlot) {
-      const assignedNodes = this._headerActionsSlot.assignedElements();
-      this._hasHeaderActions = assignedNodes.length > 0;
+      this._hasHeaderActions =
+        this._headerActionsSlot.assignedElements().length > 0;
     }
     if (this._defaultSlot) {
-      const assignedNodes = this._defaultSlot.assignedElements();
-      this._hasExtraContent = assignedNodes.length > 0;
+      this._hasExtraContent = this._defaultSlot.assignedElements().length > 0;
     }
   }
 
@@ -317,19 +275,14 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
           break;
         }
       }
-      // Set decorator size based on collapse state
-      const { fullyCollapsed } = tearsheetSignal.get();
+      const { fullyCollapsed } = getTearsheetState(this._uniqueId);
       childItems[0].setAttribute('size', fullyCollapsed ? 'xs' : 'sm');
 
-      // Push decorator state into signal so cds-tearsheet can read it
-      // without a tag-name querySelector
-      updateTearsheetSignals({
+      updateTearsheetState(this._uniqueId, {
         hasDecorator: true,
         hasAILabel: this._hasAILabel,
       });
 
-      // Update host attributes for CSS targeting.
-      // Walk ancestors with instanceof — tag-name independent.
       let ancestor = this.parentElement;
       while (ancestor && !(ancestor instanceof CDSTearsheetHeader)) {
         ancestor = ancestor.parentElement;
@@ -339,8 +292,10 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
         ancestor.removeAttribute(this._hasAILabel ? 'decorator' : 'ai-label');
       }
     } else {
-      // Push cleared decorator state into signal
-      updateTearsheetSignals({ hasDecorator: false, hasAILabel: false });
+      updateTearsheetState(this._uniqueId, {
+        hasDecorator: false,
+        hasAILabel: false,
+      });
 
       let ancestor = this.parentElement;
       while (ancestor && !(ancestor instanceof CDSTearsheetHeader)) {
@@ -351,12 +306,11 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
         ancestor.removeAttribute('ai-label');
       }
     }
-    // Update header offset CSS variable
     this._updateHeaderOffset();
   }
 
   private _updateDecoratorSize() {
-    const { fullyCollapsed } = tearsheetSignal.get();
+    const { fullyCollapsed } = getTearsheetState(this._uniqueId);
     const assigned = this._decoratorSlot?.assignedElements({ flatten: true });
     if (assigned?.length) {
       assigned[0].setAttribute('size', fullyCollapsed ? 'xs' : 'sm');
@@ -364,13 +318,8 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
   }
 
   private _updateHeaderOffset() {
-    const { open, isSm } = tearsheetSignal.get();
-    if (!open) {
-      return;
-    }
-    // Mirror React: querySelector `.cds--ai-label` and read clientWidth.
-    // clientWidth is available synchronously after render (no rAF needed).
-    // React: `AILabelWidth + 24 + (isSm ? 8 : 0)`
+    const { open, isSm } = getTearsheetState(this._uniqueId);
+    if (!open) return;
     const AILabelWidth =
       this.querySelector('[slot="decorator"]')?.clientWidth ?? 0;
     const offset = AILabelWidth + 24 + (isSm ? 8 : 0);
@@ -381,8 +330,10 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
   }
 
   render() {
+    // getTearsheetSignal(id).get() subscribes SignalWatcher to only this
+    // instance's signal — changes in other tearsheets never trigger a re-render.
     const { fullyCollapsed, hideCloseButton, closeIconDescription, onClose } =
-      tearsheetSignal.get();
+      getTearsheetSignal(this._uniqueId).get();
 
     const decoratorTemplate = html`
       <div
@@ -446,7 +397,6 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
 
     const headerContentTemplate = html`
       <div class="${blockClass}__header-content">
-        <!-- Label -->
         ${this._hasLabel
           ? html`
               <div class="${blockClass}__header-label">
@@ -461,7 +411,6 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
 
         <div class="${blockClass}__content__title-wrapper">
           <h2 class="${titleClasses}" id="${this._titleId}">
-            <!-- Title Start -->
             ${this._hasTitleStart
               ? html`
                   <span class="${blockClass}__title-start">
@@ -474,17 +423,12 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
                   name="title-start"
                   @slotchange="${this._handleSlotChange}"></slot>`}
 
-            <!-- Title (main text) — limit to 1 line when collapsed so it fits
-                 in the reduced-height collapsed bar -->
             <cds-truncated-text
               class="${blockClass}__content__title"
               id="${blockClass}__header-title__truncatedText"
               value="${this.title}"
-              lines="${tearsheetSignal.get().fullyCollapsed
-                ? 1
-                : 2}"></cds-truncated-text>
+              lines="${fullyCollapsed ? 1 : 2}"></cds-truncated-text>
 
-            <!-- Title End -->
             ${this._hasTitleEnd
               ? html`
                   <span class="${blockClass}__title-end">
@@ -499,7 +443,6 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
           </h2>
         </div>
 
-        <!-- Description -->
         ${this._hasDescription
           ? html`
               <div class="${blockClass}__header-description">
@@ -511,8 +454,6 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
           : html`<slot
               name="description"
               @slotchange="${this._handleSlotChange}"></slot>`}
-
-        <!-- Extra children -->
         ${this._hasExtraContent
           ? html`
               <div class="${blockClass}__header-content--extra">
@@ -526,10 +467,6 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
     // DOM order drives tab order:
     //   Desktop/Wide: header-actions → decorator → close-button → header-content
     //   Mobile/Narrow: decorator → close-button → header-content → header-actions
-    //
-    // On mobile the decorator and close button are position:absolute (top-right corner),
-    // so they are visually first. Placing them first in DOM order aligns tab order with
-    // visual order: AI label → close button → content → header-actions.
     return this._isMobileOrNarrow
       ? html`${decoratorTemplate} ${closeButtonTemplate}
         ${headerContentTemplate} ${headerActionsTemplate}`
@@ -542,6 +479,8 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
 
   connectedCallback(): void {
     super.connectedCallback();
+    this._uniqueId = getParentTearsheetId(this);
+
     let el: Element | null = this.parentElement;
     while (el) {
       if (el.tagName.toLowerCase() === `${prefix}-tearsheet`) {

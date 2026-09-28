@@ -15,7 +15,7 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 import { classMap } from 'lit-html/directives/class-map.js';
 import styles from './tearsheet.scss?lit';
 import { SignalWatcher } from '@lit-labs/signals';
-import { tearsheetSignal } from './tearsheet-signal';
+import { getTearsheetSignal, getParentTearsheetId } from './tearsheet-signal';
 
 const blockClass = `${prefix}--tearsheet`;
 
@@ -37,22 +37,20 @@ class CDSTearsheetSummaryContent extends SignalWatcher(
   @property({ type: Boolean, reflect: true, attribute: 'is-flush' })
   isFlush: boolean = false;
 
-  /**
-   * In mobile screens right side summary-content section won't be visible by default.
-   * This prop can be toggled to open/close right panel in this case.
-   */
   @property({ type: Boolean, reflect: true, attribute: 'summary-panel-open' })
   summaryPanelOpen: boolean = false;
 
-  /**
-   * Optional aria-label for the summary panel. Defaults to "Summary panel".
-   */
   @property({ attribute: 'summary-panel-aria-label' })
   summaryPanelAriaLabel: string = 'Summary panel';
 
-  /**
-   * Handler for closing the summary panel
-   */
+  /** uniqueId of the parent cds-tearsheet, read once in connectedCallback. */
+  private _uniqueId: string = '';
+
+  connectedCallback(): void {
+    super.connectedCallback();
+    this._uniqueId = getParentTearsheetId(this);
+  }
+
   private handleClose = () => {
     this.summaryPanelOpen = false;
     this.dispatchEvent(
@@ -68,7 +66,9 @@ class CDSTearsheetSummaryContent extends SignalWatcher(
   }
 
   render() {
-    const { isSm } = tearsheetSignal.get();
+    // getTearsheetSignal(id).get() subscribes SignalWatcher to only this
+    // instance's signal — changes in other tearsheets never trigger a re-render.
+    const { isSm } = getTearsheetSignal(this._uniqueId).get();
 
     const classes = classMap({
       [`${blockClass}__flush`]: this.isFlush,

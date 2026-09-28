@@ -17,7 +17,12 @@ import styles from './tearsheet.scss?lit';
 import { SignalWatcher } from '@lit-labs/signals';
 
 import { CollapsibleController } from '../../globals/js/utils/collapsible-controller';
-import { tearsheetSignal, updateTearsheetSignals } from './tearsheet-signal';
+import {
+  getTearsheetSignal,
+  getTearsheetState,
+  updateTearsheetState,
+  getParentTearsheetId,
+} from './tearsheet-signal';
 
 const blockClass = `${prefix}--tearsheet`;
 
@@ -44,44 +49,38 @@ class CDSTearsheetBody extends SignalWatcher(HostListenerMixin(LitElement)) {
   @state()
   private _hasSummaryContent = false;
 
+  /** uniqueId of the parent cds-tearsheet, read once in connectedCallback. */
+  private _uniqueId: string = '';
+
   // @ts-expect-error // CollapsibleController uses 'this' before super() in strict mode
   private _collapsibleController = new CollapsibleController(this, {
     container: () => this.getMainContentContainer(),
     triggerCollapse: (collapse: boolean) => this.collapseHeader(collapse),
-    disable: () => {
-      const { disableHeaderCollapse } = tearsheetSignal.get();
-
-      return disableHeaderCollapse;
-    },
+    disable: () => getTearsheetState(this._uniqueId).disableHeaderCollapse,
   });
 
+  connectedCallback(): void {
+    super.connectedCallback();
+    this._uniqueId = getParentTearsheetId(this);
+  }
+
   private getMainContentContainer(): HTMLElement | null {
-    // Query the shadow DOM for the main content container
     return this.querySelector('[slot="main-content"]') || null;
   }
 
   private collapseHeader(collapse: boolean) {
     const scrollContainer =
       this.shadowRoot?.querySelector(`.${blockClass}__main-content`) || null;
-    if (!scrollContainer) {
-      return;
-    }
+    if (!scrollContainer) return;
 
     if (collapse) {
-      // Collapse header only when there is scroll
       const canScroll =
         scrollContainer.scrollHeight > scrollContainer.clientHeight;
-
       if (canScroll) {
-        updateTearsheetSignals({
-          fullyCollapsed: true,
-        });
+        updateTearsheetState(this._uniqueId, { fullyCollapsed: true });
       }
     } else if (scrollContainer.scrollTop === 0) {
-      // Expand header when scroll reaches top
-      updateTearsheetSignals({
-        fullyCollapsed: false,
-      });
+      updateTearsheetState(this._uniqueId, { fullyCollapsed: false });
     }
   }
 
@@ -91,8 +90,8 @@ class CDSTearsheetBody extends SignalWatcher(HostListenerMixin(LitElement)) {
 
   private _checkSummaryContent() {
     if (this._summaryContentSlot) {
-      const assignedNodes = this._summaryContentSlot.assignedElements();
-      this._hasSummaryContent = assignedNodes.length > 0;
+      this._hasSummaryContent =
+        this._summaryContentSlot.assignedElements().length > 0;
     }
   }
 
@@ -101,7 +100,9 @@ class CDSTearsheetBody extends SignalWatcher(HostListenerMixin(LitElement)) {
   }
 
   render() {
-    const { hasAILabel } = tearsheetSignal.get();
+    // getTearsheetSignal(id).get() subscribes SignalWatcher to only this
+    // instance's signal — changes in other tearsheets never trigger a re-render.
+    const { hasAILabel } = getTearsheetSignal(this._uniqueId).get();
 
     const mainContentClasses = classMap({
       [`${blockClass}__main-content`]: true,
