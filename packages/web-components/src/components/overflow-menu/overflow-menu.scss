@@ -41,7 +41,7 @@
 }
 
 :host(#{$prefix}-overflow-menu) {
-  cds-tooltip button.#{$prefix}--overflow-menu:focus {
+  #{$prefix}-tooltip button.#{$prefix}--overflow-menu:focus {
     background-color: $background-active;
   }
 
