@@ -7,8 +7,38 @@
 
 export type ThemeMode = 'light' | 'dark';
 export type SurfaceContext = 'surface' | 'surface-light' | 'surface-dark';
+
+/**
+ * Canonical ordered list of surface contexts. Import this everywhere —
+ * the index order controls DTCG token numbering (surface-01, -02, -03)
+ * and validation iteration. Never redeclare this array in other files.
+ */
+export const surfaceContexts: SurfaceContext[] = [
+  'surface',
+  'surface-light',
+  'surface-dark',
+];
+
+/**
+ * Design-review status of a generated token rule.
+ * - `confirmed`   — matches the design reference; safe to ship.
+ * - `experimental`— implemented but awaiting design sign-off.
+ * - `unresolved`  — open question; do not rely on the value.
+ */
 export type RuleStatus = 'confirmed' | 'experimental' | 'unresolved';
 
+/**
+ * Interactive states that every theme must provide a color for.
+ * To add a new state: add its key here, then add one entry per mode in
+ * `defaultSpecification.[light|dark].interactive`. Nothing else changes.
+ */
+export type InteractiveState = 'hover' | 'selected' | 'active' | 'disabled';
+
+/**
+ * Metadata describing the design rule behind a non-interactive generated
+ * token. Interactive state tokens carry their own rule inline via
+ * `InteractiveStateSpec` — they do not appear in `tokenRules`.
+ */
 export type TokenRule =
   | { type: 'fixed'; status: RuleStatus; reason?: string }
   | {
@@ -25,6 +55,41 @@ export type TokenRule =
     }
   | { type: 'alias'; status: RuleStatus; token: string; reason?: string };
 
+/**
+ * Describes how a single interactive state color is computed from the
+ * default surface of the current mode.
+ *
+ * - `lightness-delta` — shift surface L by `delta` (hover / selected / active).
+ * - `opacity`         — use the surface color at reduced alpha (disabled).
+ *
+ * `status` and `reason` live here so each state is one self-contained entry
+ * with no parallel registry to keep in sync.
+ */
+export type InteractiveStateSpec =
+  | {
+      type: 'lightness-delta';
+      status: RuleStatus;
+      delta: number;
+      reason?: string;
+    }
+  | {
+      type: 'opacity';
+      status: RuleStatus;
+      chroma: number;
+      alpha: number;
+      reason?: string;
+    };
+
+/**
+ * One `InteractiveStateSpec` per `InteractiveState`.
+ * TypeScript enforces completeness — missing or extra keys are compile errors.
+ */
+export type InteractiveStateModeSpec = Record<
+  InteractiveState,
+  InteractiveStateSpec
+>;
+
+/** Numeric parameters that vary between light and dark modes. */
 export interface ThemeModeSpecification {
   surfaceLightness: number;
   surfaceStep: number;
@@ -36,6 +101,12 @@ export interface ThemeModeSpecification {
   textSecondaryLightness: number;
   iconPrimaryLightness: number;
   iconSecondaryLightness: number;
+  /**
+   * One spec entry per interactive state. The generator iterates this record —
+   * adding a new state here automatically produces a new token with no other
+   * changes required.
+   */
+  interactive: InteractiveStateModeSpec;
 }
 
 export interface OklchThemeSpecification {
@@ -58,6 +129,12 @@ export interface OklchThemeSpecification {
   dark: ThemeModeSpecification;
 }
 
+/**
+ * Design-rule metadata for every non-interactive generated token.
+ * `status` and `reason` record the current confidence level against
+ * the design reference. Interactive states are not listed here — see
+ * `defaultSpecification.[light|dark].interactive`.
+ */
 export const tokenRules = {
   brand: { type: 'fixed', status: 'confirmed' },
   base: { type: 'fixed', status: 'confirmed' },
@@ -124,6 +201,13 @@ export const tokenRules = {
   },
 } as const satisfies Record<string, TokenRule>;
 
+/**
+ * Carbon v12 default theme specification — neutral hue 262, chroma 0.004
+ * (slightly bluish neutral, matching IBM's palette).
+ *
+ * Override individual fields by passing `overrides` to `generateTheme()`.
+ * Partial `interactive` overrides deep-merge, preserving unspecified states.
+ */
 export const defaultSpecification: OklchThemeSpecification = {
   neutral: {
     hue: 262,
@@ -151,6 +235,22 @@ export const defaultSpecification: OklchThemeSpecification = {
     textSecondaryLightness: 0.48,
     iconPrimaryLightness: 0.24,
     iconSecondaryLightness: 0.48,
+    // Light interactive states darken the surface (negative delta).
+    interactive: {
+      hover: { type: 'lightness-delta', status: 'experimental', delta: -0.03 },
+      selected: {
+        type: 'lightness-delta',
+        status: 'experimental',
+        delta: -0.06,
+      },
+      active: { type: 'lightness-delta', status: 'experimental', delta: -0.09 },
+      disabled: {
+        type: 'opacity',
+        status: 'experimental',
+        chroma: 0.004,
+        alpha: 0.25,
+      },
+    },
   },
   dark: {
     surfaceLightness: 0.2,
@@ -163,9 +263,37 @@ export const defaultSpecification: OklchThemeSpecification = {
     textSecondaryLightness: 0.72,
     iconPrimaryLightness: 0.94,
     iconSecondaryLightness: 0.72,
+    // Dark interactive states lighten the surface (positive delta).
+    interactive: {
+      hover: { type: 'lightness-delta', status: 'experimental', delta: 0.04 },
+      selected: {
+        type: 'lightness-delta',
+        status: 'experimental',
+        delta: 0.08,
+      },
+      active: { type: 'lightness-delta', status: 'experimental', delta: 0.12 },
+      disabled: {
+        type: 'opacity',
+        status: 'experimental',
+        chroma: 0.004,
+        alpha: 0.25,
+        reason:
+          'Fixed low-chroma color at 25% opacity. Applied uniformly in both modes.',
+      },
+    },
   },
 };
 
+/**
+ * Design-reference OKLCH lightness values used for visual regression and
+ * documentation. These reflect the expected output of `generateTheme()` for
+ * the default specification — update this object whenever `defaultSpecification`
+ * numeric values change.
+ *
+ * Interactive values are relative to the default surface for each mode
+ * (surface context = 'surface'). Expressions are written as arithmetic so the
+ * relationship to the spec is visible at a glance.
+ */
 export const designReferenceLightness = {
   light: {
     brand: 0.5565,
@@ -193,6 +321,12 @@ export const designReferenceLightness = {
       'surface-dark': 0.85,
     },
     skeleton: { surface: 0.93, 'surface-light': 0.96, 'surface-dark': 0.9 },
+    interactive: {
+      hover: 0.97 - 0.03, // surfaceLightness + hoverDelta
+      selected: 0.97 - 0.06, // surfaceLightness + selectedDelta
+      active: 0.97 - 0.09, // surfaceLightness + activeDelta
+      disabled: { chroma: 0.004, alpha: 0.25 }, // opacity — no lightness shift
+    },
   },
   dark: {
     brand: 0.5565,
@@ -220,5 +354,11 @@ export const designReferenceLightness = {
       'surface-dark': 0.28,
     },
     skeleton: { surface: 0.14, 'surface-light': 0.18, 'surface-dark': 0 },
+    interactive: {
+      hover: 0.2 + 0.04, // surfaceLightness + hoverDelta
+      selected: 0.2 + 0.08, // surfaceLightness + selectedDelta
+      active: 0.2 + 0.12, // surfaceLightness + activeDelta
+      disabled: { chroma: 0.004, alpha: 0.25 }, // opacity — no lightness shift
+    },
   },
 } as const;

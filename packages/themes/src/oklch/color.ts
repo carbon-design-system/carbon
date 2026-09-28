@@ -5,32 +5,51 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+/** A color in the OKLCH perceptual color space. Lightness is 0–1. */
 export interface OklchColor {
+  /** Perceived lightness, 0 (black) to 1 (white). */
   lightness: number;
+  /** Chroma (colorfulness). 0 is achromatic; typical values are 0–0.4. */
   chroma: number;
+  /** Hue angle in degrees, 0–360. */
   hue: number;
 }
 
+/** A color in the sRGB color space, channels in the range 0–1. */
 export interface SrgbColor {
   red: number;
   green: number;
   blue: number;
 }
 
+/** Normalizes any hue angle into [0, 360). */
 function normalizeHue(hue: number) {
   return ((hue % 360) + 360) % 360;
 }
 
+/**
+ * Clamps lightness to [0, 1] and rounds to 12 decimal places.
+ * The rounding prevents floating-point drift from accumulating across
+ * repeated delta operations (e.g. surface → field → accent).
+ */
 export function clampLightness(lightness: number) {
   return Number(Math.min(1, Math.max(0, lightness)).toFixed(12));
 }
 
+/** Formats an OklchColor as a CSS `oklch()` string with 6 significant figures. */
 export function formatOklch({ lightness, chroma, hue }: OklchColor) {
   return `oklch(${formatNumber(lightness)} ${formatNumber(chroma)} ${formatNumber(
     normalizeHue(hue)
   )})`;
 }
 
+/**
+ * Converts an OKLCH color to linear-light sRGB using the standard OKLab
+ * matrix coefficients. The result may be outside [0, 1] for out-of-gamut
+ * colors — call `isInSrgbGamut` to check before use.
+ *
+ * Reference: https://bottosson.github.io/posts/oklab/
+ */
 export function oklchToLinearSrgb({
   lightness,
   chroma,
@@ -53,12 +72,21 @@ export function oklchToLinearSrgb({
   };
 }
 
+/** Returns true if all linear-sRGB channels are within [0, 1]. */
 export function isInSrgbGamut(color: OklchColor) {
   return Object.values(oklchToLinearSrgb(color)).every(
     (channel) => channel >= 0 && channel <= 1
   );
 }
 
+/**
+ * Returns the nearest in-gamut OKLCH color by binary-searching for the
+ * highest chroma that still passes `isInSrgbGamut`. Lightness and hue are
+ * preserved; only chroma is reduced.
+ *
+ * 40 iterations give ~1e-12 precision on chroma, which is well below the
+ * 8-bit quantization step (~0.004) of the output hex.
+ */
 export function mapToSrgbGamut(color: OklchColor): OklchColor {
   if (isInSrgbGamut(color)) {
     return color;
@@ -78,6 +106,7 @@ export function mapToSrgbGamut(color: OklchColor): OklchColor {
   return { ...color, chroma: passingChroma };
 }
 
+/** Converts an OKLCH color to gamma-encoded sRGB (channels 0–1). */
 export function oklchToSrgb(color: OklchColor): SrgbColor {
   const linear = oklchToLinearSrgb(color);
   return {
@@ -87,11 +116,16 @@ export function oklchToSrgb(color: OklchColor): SrgbColor {
   };
 }
 
+/** Converts an OKLCH color to a 6-digit lowercase hex string (e.g. `#0f62fe`). */
 export function oklchToHex(color: OklchColor) {
   const { red, green, blue } = oklchToSrgb(color);
   return `#${toHexByte(red)}${toHexByte(green)}${toHexByte(blue)}`;
 }
 
+/**
+ * Applies the IEC 61966-2-1 sRGB gamma transfer function to a single
+ * linear-light channel. Values outside [0, 1] are clamped first.
+ */
 function encodeSrgb(channel: number) {
   const clamped = Math.min(1, Math.max(0, channel));
   return clamped <= 0.0031308
@@ -99,12 +133,14 @@ function encodeSrgb(channel: number) {
     : 1.055 * clamped ** (1 / 2.4) - 0.055;
 }
 
+/** Converts a gamma-encoded sRGB channel (0–1) to a 2-digit hex byte. */
 function toHexByte(channel: number) {
   return Math.round(channel * 255)
     .toString(16)
     .padStart(2, '0');
 }
 
+/** Rounds a number to 6 decimal places for compact CSS output. */
 function formatNumber(value: number) {
   return Number(value.toFixed(6));
 }

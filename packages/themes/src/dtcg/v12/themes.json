@@ -899,6 +899,110 @@
             }
           }
         }
+      },
+      "state": {
+        "hover": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.94,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#eaebee"
+          },
+          "$description": "Interactive hover state background.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "experimental",
+              "source": {
+                "type": "interactive-state",
+                "state": "hover",
+                "delta": -0.03
+              },
+              "fallback": "#eaebee"
+            }
+          }
+        },
+        "selected": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.91,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#e0e1e4"
+          },
+          "$description": "Interactive selected state background.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "experimental",
+              "source": {
+                "type": "interactive-state",
+                "state": "selected",
+                "delta": -0.06
+              },
+              "fallback": "#e0e1e4"
+            }
+          }
+        },
+        "active": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.88,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#d6d7da"
+          },
+          "$description": "Interactive active state background.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "experimental",
+              "source": {
+                "type": "interactive-state",
+                "state": "active",
+                "delta": -0.09
+              },
+              "fallback": "#d6d7da"
+            }
+          }
+        },
+        "disabled": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.97,
+              0.004,
+              262
+            ],
+            "alpha": 0.25,
+            "hex": "#f4f5f8"
+          },
+          "$description": "Interactive disabled state background.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "experimental",
+              "source": {
+                "type": "interactive-opacity",
+                "state": "disabled",
+                "chroma": 0.004,
+                "alpha": 0.25
+              },
+              "fallback": "#f4f5f8",
+              "alpha": 0.25
+            }
+          }
+        }
       }
     },
     "dark": {
@@ -1790,6 +1894,110 @@
                 "relativeTo": "surface-dark"
               },
               "fallback": "#030304"
+            }
+          }
+        }
+      },
+      "state": {
+        "hover": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.24,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#1e1f21"
+          },
+          "$description": "Interactive hover state background.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "experimental",
+              "source": {
+                "type": "interactive-state",
+                "state": "hover",
+                "delta": 0.04
+              },
+              "fallback": "#1e1f21"
+            }
+          }
+        },
+        "selected": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.28,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#28292b"
+          },
+          "$description": "Interactive selected state background.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "experimental",
+              "source": {
+                "type": "interactive-state",
+                "state": "selected",
+                "delta": 0.08
+              },
+              "fallback": "#28292b"
+            }
+          }
+        },
+        "active": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.32,
+              0.004,
+              262
+            ],
+            "alpha": 1,
+            "hex": "#323335"
+          },
+          "$description": "Interactive active state background.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "experimental",
+              "source": {
+                "type": "interactive-state",
+                "state": "active",
+                "delta": 0.12
+              },
+              "fallback": "#323335"
+            }
+          }
+        },
+        "disabled": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "oklch",
+            "components": [
+              0.2,
+              0.004,
+              262
+            ],
+            "alpha": 0.25,
+            "hex": "#151618"
+          },
+          "$description": "Interactive disabled state background.",
+          "$extensions": {
+            "org.carbon": {
+              "status": "experimental",
+              "source": {
+                "type": "interactive-opacity",
+                "state": "disabled",
+                "chroma": 0.004,
+                "alpha": 0.25
+              },
+              "fallback": "#151618",
+              "alpha": 0.25
             }
           }
         }

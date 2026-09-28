@@ -16,32 +16,59 @@ import {
 import { findLightnessForContrast, getContrastRatio } from './contrast';
 import {
   defaultSpecification,
+  surfaceContexts,
   tokenRules,
+  type InteractiveState,
+  type InteractiveStateSpec,
   type OklchThemeSpecification,
   type RuleStatus,
   type SurfaceContext,
   type ThemeMode,
 } from './specification';
 
+/**
+ * Records how a token's color was computed. Stored on every `GeneratedColorToken`
+ * so consumers and validators can audit provenance without re-running the pipeline.
+ */
 type CalculationSource =
   | { type: 'fixed' }
   | { type: 'lightness-delta'; delta: number; relativeTo: SurfaceContext }
   | { type: 'contrast'; target: number; relativeTo: SurfaceContext }
-  | { type: 'alias'; token: string };
+  | { type: 'alias'; token: string }
+  | { type: 'interactive-state'; state: InteractiveState; delta: number }
+  | {
+      type: 'interactive-opacity';
+      state: InteractiveState;
+      chroma: number;
+      alpha: number;
+    };
 
+/** A single resolved color token produced by `generateTheme`. */
 export interface GeneratedColorToken {
+  /** CSS custom-property stem (e.g. `"surface"` → `--cds-surface`). */
   name: string;
   status: RuleStatus;
+  /** Present on contextual tokens that vary across surface layers. */
   context?: SurfaceContext;
+  /** How this token's color was derived — see `CalculationSource`. */
   source: CalculationSource;
+  /** The resolved OKLCH color (may be outside sRGB gamut for brand tokens). */
   color: OklchColor;
+  /** Pre-formatted CSS `oklch()` string. */
   oklch: string;
+  /** Gamut-mapped hex fallback for `oklch()`-unaware environments. */
   fallback: string;
+  /** True when `color` is within the sRGB gamut without mapping. */
   inSrgbGamut: boolean;
+  /** True when `fallback` was produced by chroma-reduction, not exact conversion. */
   gamutMapped: boolean;
+  /** WCAG contrast ratio against the contextual surface. Present on contrast tokens only. */
   contrast?: number;
+  /** Alpha (0–1) for `opacity`-type interactive state tokens. Absent on all other tokens. */
+  alpha?: number;
 }
 
+/** The full set of color tokens produced for a single theme mode. */
 export interface GeneratedOklchTheme {
   mode: ThemeMode;
   brand: GeneratedColorToken;
@@ -60,10 +87,24 @@ export interface GeneratedOklchTheme {
   strongBorders: Record<SurfaceContext, GeneratedColorToken>;
   subtleBorders: Record<SurfaceContext, GeneratedColorToken>;
   skeletons: Record<SurfaceContext, GeneratedColorToken>;
+  /** Interactive state tokens keyed by state name. */
+  interactive: Record<InteractiveState, GeneratedColorToken>;
 }
 
-const contexts: SurfaceContext[] = ['surface', 'surface-light', 'surface-dark'];
+// Local alias — surfaceContexts drives iteration order and DTCG numbering.
+const contexts = surfaceContexts;
 
+/**
+ * Generates all color tokens for the given `mode` from the OKLCH specification.
+ *
+ * Pass `overrides` to customize individual values without replacing the full
+ * specification. Partial `interactive` overrides deep-merge — unspecified
+ * states keep their default values.
+ *
+ * Throws if the specification produces contrast targets that cannot be met
+ * (e.g. extreme `surfaceLightness` values). The error message names the
+ * failing token and suggests which spec fields to adjust.
+ */
 export function generateTheme(
   mode: ThemeMode,
   overrides: Partial<OklchThemeSpecification> = {}
@@ -227,9 +268,84 @@ export function generateTheme(
       surfaces,
       modeSpecification.skeletonDelta
     ),
+    interactive: createInteractiveTokens(
+      modeSpecification.interactive,
+      surfaces['surface'],
+      chroma,
+      hue
+    ),
   };
 }
 
+/**
+ * Generates all interactive-state tokens relative to the default surface color
+ * for the current mode. Iterates over the `InteractiveStateModeSpec` record so
+ * adding a new state requires only one entry in the specification — no changes
+ * here.
+ *
+ * - `lightness-delta` states: shift the surface L by `delta`.
+ * - `opacity` states: keep the surface color but apply an alpha channel.
+ */
+function createInteractiveTokens(
+  spec: OklchThemeSpecification['light']['interactive'],
+  surface: GeneratedColorToken,
+  chroma: number,
+  hue: number
+): Record<InteractiveState, GeneratedColorToken> {
+  const baseLightness = surface.color.lightness;
+
+  return Object.fromEntries(
+    (Object.entries(spec) as [InteractiveState, InteractiveStateSpec][]).map(
+      ([state, stateSpec]) => {
+        // status comes from the spec entry — no separate tokenRules lookup needed.
+        const { status } = stateSpec;
+        let base: GeneratedColorToken;
+        let token: GeneratedColorToken;
+
+        if (stateSpec.type === 'lightness-delta') {
+          base = createToken({
+            name: `state-${state}`,
+            status,
+            source: {
+              type: 'interactive-state',
+              state,
+              delta: stateSpec.delta,
+            },
+            color: {
+              lightness: clampLightness(baseLightness + stateSpec.delta),
+              chroma,
+              hue,
+            },
+          });
+          token = base;
+        } else {
+          base = createToken({
+            name: `state-${state}`,
+            status,
+            source: {
+              type: 'interactive-opacity',
+              state,
+              chroma: stateSpec.chroma,
+              alpha: stateSpec.alpha,
+            },
+            color: { lightness: baseLightness, chroma: stateSpec.chroma, hue },
+          });
+          token = { ...base, alpha: stateSpec.alpha };
+        }
+
+        return [state, token];
+      }
+    )
+  ) as Record<InteractiveState, GeneratedColorToken>;
+}
+
+/**
+ * Applies `create` to each surface context and returns the result as a
+ * `Record<SurfaceContext, GeneratedColorToken>`. The `_name` and `_status`
+ * params are accepted for call-site symmetry with `createDeltaTokens` but
+ * are not used here — the caller's `create` function is responsible for
+ * embedding them in the token it returns.
+ */
 function mapDeltaOrContrast(
   _name: string,
   _status: RuleStatus,
@@ -299,13 +415,23 @@ function createContrastToken(
   chroma: number,
   hue: number
 ) {
-  const color = findLightnessForContrast({
-    background,
-    target,
-    direction: mode === 'light' ? 'darker' : 'lighter',
-    chroma,
-    hue,
-  });
+  let color: OklchColor;
+  try {
+    color = findLightnessForContrast({
+      background,
+      target,
+      direction: mode === 'light' ? 'darker' : 'lighter',
+      chroma,
+      hue,
+    });
+  } catch (cause) {
+    throw new Error(
+      `generateTheme(${mode}): cannot meet ${target}:1 contrast for token "${name}" ` +
+        `in context "${context}" against surface L=${background.lightness.toFixed(4)}. ` +
+        `Check surfaceLightness and contrastTargets in your specification.`,
+      { cause }
+    );
+  }
   return createToken({
     name,
     status,
@@ -376,7 +502,27 @@ function mergeSpecification(
       ...defaultSpecification.contrastTargets,
       ...overrides.contrastTargets,
     },
-    light: { ...defaultSpecification.light, ...overrides.light },
-    dark: { ...defaultSpecification.dark, ...overrides.dark },
+    light: mergeModeSpec(defaultSpecification.light, overrides.light),
+    dark: mergeModeSpec(defaultSpecification.dark, overrides.dark),
+  };
+}
+
+/**
+ * Merges a mode specification, deep-merging the `interactive` record so that
+ * a partial override (e.g. changing only `hover`) does not silently drop the
+ * other interactive states.
+ */
+function mergeModeSpec(
+  base: OklchThemeSpecification['light'],
+  override: Partial<OklchThemeSpecification['light']> | undefined
+): OklchThemeSpecification['light'] {
+  if (!override) return base;
+  return {
+    ...base,
+    ...override,
+    interactive: {
+      ...base.interactive,
+      ...override.interactive,
+    },
   };
 }

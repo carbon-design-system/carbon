@@ -6,12 +6,13 @@
  */
 
 import { generateTheme, type GeneratedColorToken } from './generate-theme';
+import { surfaceContexts } from './specification';
 import type { SurfaceContext, ThemeMode } from './specification';
 
 interface DtcgColorValue {
   colorSpace: 'oklch';
   components: [number, number, number];
-  alpha: 1;
+  alpha: number;
   hex: string;
 }
 
@@ -24,6 +25,7 @@ interface DtcgColorToken {
       status: GeneratedColorToken['status'];
       source: GeneratedColorToken['source'];
       fallback: string;
+      alpha?: number;
     };
   };
 }
@@ -44,7 +46,7 @@ export interface GeneratedV12DtcgThemes {
   };
 }
 
-const contexts: SurfaceContext[] = ['surface', 'surface-light', 'surface-dark'];
+const contexts = surfaceContexts;
 
 function buildThemeTokens(mode: ThemeMode) {
   const theme = generateTheme(mode);
@@ -105,6 +107,14 @@ function buildThemeTokens(mode: ThemeMode) {
       'Contextual skeleton background',
       'background-'
     ),
+    state: Object.fromEntries(
+      (
+        Object.entries(theme.interactive) as [string, GeneratedColorToken][]
+      ).map(([state, token]) => [
+        state,
+        toDtcgToken(token, `Interactive ${state} state background.`),
+      ])
+    ),
   };
 }
 
@@ -149,12 +159,13 @@ function toDtcgToken(
   token: GeneratedColorToken,
   description: string
 ): DtcgColorToken {
+  const alpha = token.alpha ?? 1;
   return {
     $type: 'color',
     $value: {
       colorSpace: 'oklch',
       components: [token.color.lightness, token.color.chroma, token.color.hue],
-      alpha: 1,
+      alpha,
       hex: token.fallback,
     },
     $description: description,
@@ -163,6 +174,7 @@ function toDtcgToken(
         status: token.status,
         source: token.source,
         fallback: token.fallback,
+        ...(token.alpha !== undefined ? { alpha: token.alpha } : {}),
       },
     },
   };

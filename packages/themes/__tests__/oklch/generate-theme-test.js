@@ -43,7 +43,7 @@ describe('V12 OKLCH theme generation', () => {
         expect(theme.helperText[context].contrast).toBeGreaterThanOrEqual(4.5);
         expect(theme.strongBorders[context].contrast).toBeGreaterThanOrEqual(3);
       }
-      expect(validateTheme(theme)).toEqual({ valid: true, issues: [] });
+      expect(validateTheme(theme)).toMatchObject({ valid: true, issues: [] });
     }
   );
 
