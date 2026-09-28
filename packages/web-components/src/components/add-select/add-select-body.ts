@@ -175,10 +175,15 @@ class CDSAddSelectBody extends LitElement {
       case ' ':
         event.preventDefault();
         if (currentRow) {
-          // The checkbox/radio is inside the row's shadow DOM
-          const input = currentRow.shadowRoot?.querySelector<HTMLInputElement>(
-            'input[type="checkbox"], input[type="radio"]'
+          // The checkbox/radio host sits in the row's shadow DOM; the actual
+          // <input> lives one level deeper inside that component's own shadow.
+          const controlHost = currentRow.shadowRoot?.querySelector<HTMLElement>(
+            `${prefix}-checkbox, ${prefix}-radio-button`
           );
+          const input =
+            controlHost?.shadowRoot?.querySelector<HTMLInputElement>(
+              'input[type="checkbox"], input[type="radio"]'
+            );
           input?.click();
         }
         handled = true;
