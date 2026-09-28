@@ -432,3 +432,33 @@ export const TabTipExperimentalAutoAlign = () => {
     </div>
   );
 };
+
+export const ExperimentalAutoAlignStressTest = () => (
+  <div
+    style={{
+      display: 'grid',
+      placeContent: 'center',
+      gridTemplateColumns: 'repeat(10, auto)',
+      gap: '24px',
+      width: '200vw',
+      height: '200vh',
+    }}>
+    {Array.from({ length: 50 }, (_, i) => (
+      <Popover key={i} open autoAlign align="bottom">
+        <div className="playground-trigger">
+          <CheckboxIcon />
+        </div>
+        <PopoverContent className="p-3">
+          <p className="popover-title">Popover {i + 1}</p>
+        </PopoverContent>
+      </Popover>
+    ))}
+  </div>
+);
+
+ExperimentalAutoAlignStressTest.storyName =
+  'Experimental auto align – stress test (50 instances)';
+
+ExperimentalAutoAlignStressTest.parameters = {
+  controls: { disable: true },
+};

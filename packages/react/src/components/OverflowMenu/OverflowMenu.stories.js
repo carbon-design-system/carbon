@@ -113,3 +113,32 @@ export const Default = (args) => (
     <OverflowMenuItem hasDivider isDelete itemText="Delete app" />
   </OverflowMenu>
 );
+
+export const ExperimentalAutoAlignStressTest = () => (
+  <div
+    style={{
+      display: 'grid',
+      placeContent: 'center',
+      gridTemplateColumns: 'repeat(10, auto)',
+      gap: '8px',
+      width: '200vw',
+      height: '200vh',
+    }}>
+    {Array.from({ length: 50 }, (_, i) => (
+      <OverflowMenu key={i} label={`Options ${i + 1}`} autoAlign>
+        <MenuItem label="Stop app" />
+        <MenuItem label="Restart app" />
+        <MenuItem label="Rename app" />
+        <MenuItemDivider />
+        <MenuItem label="Delete app" kind="danger" />
+      </OverflowMenu>
+    ))}
+  </div>
+);
+
+ExperimentalAutoAlignStressTest.storyName =
+  'Experimental auto align – stress test (50 instances)';
+
+ExperimentalAutoAlignStressTest.parameters = {
+  controls: { disable: true },
+};

@@ -262,3 +262,33 @@ ExperimentalAutoAlign.args = {
   defaultOpen: true,
 };
 ExperimentalAutoAlign.argTypes = experimentalArgTypes;
+
+export const ExperimentalAutoAlignStressTest = () => (
+  <div
+    style={{
+      display: 'grid',
+      placeContent: 'center',
+      gridTemplateColumns: 'repeat(8, auto)',
+      gap: '80px',
+      width: '200vw',
+      height: '200vh',
+    }}>
+    {Array.from({ length: 50 }, (_, i) => (
+      <Toggletip key={i} align="bottom" autoAlign defaultOpen>
+        <ToggletipButton label={`Show information ${i + 1}`}>
+          <Information />
+        </ToggletipButton>
+        <ToggletipContent>
+          <p>Toggletip {i + 1}</p>
+        </ToggletipContent>
+      </Toggletip>
+    ))}
+  </div>
+);
+
+ExperimentalAutoAlignStressTest.storyName =
+  'Experimental auto align – stress test (50 instances)';
+
+ExperimentalAutoAlignStressTest.parameters = {
+  controls: { disable: true },
+};

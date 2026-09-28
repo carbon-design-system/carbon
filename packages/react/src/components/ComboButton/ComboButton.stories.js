@@ -79,18 +79,10 @@ export default {
     MenuItem,
     MenuItemDivider,
   },
-  decorators: [
-    (Story) => (
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <Story />
-      </div>
-    ),
-  ],
   parameters: {
     docs: {
       page: mdx,
     },
-    layout: 'centered',
   },
 };
 
@@ -136,6 +128,33 @@ export const ExperimentalAutoAlign = (args) => (
 ExperimentalAutoAlign.args = sharedArgs;
 ExperimentalAutoAlign.argTypes = sharedArgTypes;
 ExperimentalAutoAlign.parameters = sharedParameters;
+
+export const ExperimentalAutoAlignStressTest = () => (
+  <div
+    style={{
+      display: 'grid',
+      placeContent: 'center',
+      gridTemplateColumns: 'repeat(8, auto)',
+      gap: '16px',
+      width: '200vw',
+      height: '200vh',
+    }}>
+    {Array.from({ length: 50 }, (_, i) => (
+      <ComboButton key={i} label={`Primary ${i + 1}`}>
+        <MenuItem label="Second action with a long label description" />
+        <MenuItem label="Third action" />
+        <MenuItem label="Fourth action" disabled />
+      </ComboButton>
+    ))}
+  </div>
+);
+
+ExperimentalAutoAlignStressTest.storyName =
+  'Experimental auto align – stress test (50 instances)';
+
+ExperimentalAutoAlignStressTest.parameters = {
+  controls: { disable: true },
+};
 
 export const WithDanger = (args) => {
   return (
