@@ -151,7 +151,7 @@ $motion-duration: $duration-moderate-02;
   ::slotted([slot='navigation-bar'])::before {
     position: absolute;
     z-index: 1;
-    background: rgba(0, 0, 0, 0.12);
+    background: $border-subtle-01;
     block-size: 1px;
     content: '';
     inline-size: 100vw;
