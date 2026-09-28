@@ -210,7 +210,10 @@ $block-class: #{$prefix}--add-select__next;
     inset-block-start: 50%;
     inset-inline-end: $spacing-05;
     padding-inline-start: 0;
-    transform: translateY(-50%);
+    // Use the standalone `translate` property instead of `transform: translateY()`
+    // so this element does not become a containing block for position:fixed
+    // descendants (tooltip popovers from the remove cds-icon-button).
+    translate: 0 -50%;
   }
 
   // Remove button is hidden until hover/focus

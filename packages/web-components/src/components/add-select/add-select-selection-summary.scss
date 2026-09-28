@@ -47,11 +47,13 @@ $block-class: #{$prefix}--add-select__next;
   }
 
   .#{$block-class}__selection-summary-body {
-    overflow: auto;
     flex: 1;
+    overflow-x: clip;
+    overflow-y: auto;
 
     @supports (overflow-block: auto) {
       overflow-block: auto;
+      overflow-inline: clip;
     }
   }
 }

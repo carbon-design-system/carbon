@@ -82,8 +82,9 @@ $block-class: #{$prefix}--add-select__next;
   }
 
   .#{$block-class}__content {
-    overflow: auto;
     flex: 1;
+    overflow-x: clip;
+    overflow-y: auto;
   }
 
   .#{$block-class}-list-body {
