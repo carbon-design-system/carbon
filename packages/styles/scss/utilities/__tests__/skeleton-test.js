@@ -38,30 +38,8 @@ describe('scss/utilities/skeleton', () => {
     expect(findDeclaration(rule, 'overflow')).toBeUndefined();
   });
 
-  it('does not emit border-radius in v11 when a token is passed', async () => {
+  it('applies the border-radius token', async () => {
     const { result } = await render(`
-      @use '../skeleton';
-      @use '../../border-radius';
-
-      .test {
-        @include skeleton.skeleton($border-radius: border-radius.$border-radius-04);
-      }
-    `);
-    const { stylesheet } = css.parse(result.css.toString());
-    const rule = stylesheet.rules.find((candidate) => {
-      return candidate.selectors && candidate.selectors.includes('.test');
-    });
-
-    expect(findDeclaration(rule, 'border-radius')).toBeUndefined();
-  });
-
-  it('applies the configured token in v12', async () => {
-    const { result } = await render(`
-      @use '../../feature-flags' with (
-        $feature-flags: (
-          'enable-v12-release': true,
-        )
-      );
       @use '../skeleton';
       @use '../../border-radius';
 
