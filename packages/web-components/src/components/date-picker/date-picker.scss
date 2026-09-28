@@ -191,7 +191,7 @@ $css--plex: true !default;
   }
 
   .#{$prefix}--label {
-    @include skeleton;
+    @include skeleton($border-radius: $border-radius-04);
 
     block-size: rem(14px);
 

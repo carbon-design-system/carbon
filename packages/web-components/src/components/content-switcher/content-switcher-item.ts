@@ -63,6 +63,12 @@ class CDSContentSwitcherItem extends FocusMixin(LitElement) {
   icon = false;
 
   /**
+   * `true` to use the low contrast version. Synced from the parent switcher.
+   */
+  @property({ type: Boolean, reflect: true, attribute: 'low-contrast' })
+  lowContrast = false;
+
+  /**
    * The tooltip element rendered inside this item (only present when `icon` is true).
    */
   @query(`${prefix}-tooltip`)
