@@ -34,6 +34,33 @@ function renderTree({ nodes, expanded, withIcons = false, withLinks = false }) {
   );
 }
 
+const sharedArgs = {
+  hideLabel: false,
+  label: 'Tree View',
+  multiselect: false,
+  onSelect: action('onSelect'),
+  size: 'sm',
+};
+
+const sharedArgTypes = {
+  hideLabel: {
+    control: { type: 'boolean' },
+  },
+  label: {
+    control: { type: 'text' },
+  },
+  multiselect: {
+    control: { type: 'boolean' },
+  },
+  onSelect: {
+    action: 'onSelect',
+  },
+  size: {
+    options: ['xs', 'sm'],
+    control: { type: 'select' },
+  },
+};
+
 export default {
   title: 'components/TreeView',
   component: TreeView,
@@ -45,12 +72,11 @@ export default {
       page: mdx,
     },
     controls: {
-      exclude: ['label'],
+      exclude: ['active', 'children', 'onActivate', 'selected'],
     },
   },
-  args: {
-    onSelect: action('onSelect'),
-  },
+  args: sharedArgs,
+  argTypes: sharedArgTypes,
 };
 
 export const Default = (args) => {
@@ -230,20 +256,7 @@ export const Default = (args) => {
   );
 };
 
-Default.args = {
-  hideLabel: false,
-  multiselect: false,
-};
-
-Default.argTypes = {
-  active: { control: { type: 'text' } },
-  size: {
-    options: ['xs', 'sm'],
-    control: { type: 'select' },
-  },
-};
-
-export const WithIcons = () => {
+export const WithIcons = (args) => {
   const nodes = [
     {
       id: '1',
@@ -414,13 +427,12 @@ export const WithIcons = () => {
     ));
   }
   return (
-    <TreeView label="Tree View">
-      {renderTree({ nodes, withIcons: true })}
-    </TreeView>
+    <TreeView {...args}>{renderTree({ nodes, withIcons: true })}</TreeView>
   );
 };
 
-const TreeViewWithLinks = React.memo(({ setCurrentPage }) => {
+const TreeViewWithLinks = React.memo(({ setCurrentPage, ...args }) => {
+  const { onSelect, ...treeViewArgs } = args;
   const nodes = [
     {
       id: '1',
@@ -600,24 +612,26 @@ const TreeViewWithLinks = React.memo(({ setCurrentPage }) => {
 
   return (
     <TreeView
-      label="Tree View"
-      hideLabel
+      {...treeViewArgs}
       active="1"
       selected={['1']}
-      onSelect={(event, node) => setCurrentPage(node.value)}>
+      onSelect={(event, node) => {
+        onSelect(event, node);
+        setCurrentPage(node.value);
+      }}>
       {renderTree({ nodes, withLinks: true })}
     </TreeView>
   );
 });
 
-export const WithLinks = () => {
+export const WithLinks = (args) => {
   const [currentPage, setCurrentPage] = React.useState(
     'Artificial Intelligence'
   );
 
   return (
     <div id="page-body">
-      <TreeViewWithLinks setCurrentPage={setCurrentPage} />
+      <TreeViewWithLinks {...args} setCurrentPage={setCurrentPage} />
       <main>
         <h3>The current page is: {currentPage}</h3>
       </main>
@@ -625,7 +639,11 @@ export const WithLinks = () => {
   );
 };
 
-export const WithControlledExpansion = () => {
+WithLinks.args = {
+  hideLabel: true,
+};
+
+export const WithControlledExpansion = (args) => {
   const nodes = [
     {
       id: '1',
@@ -805,7 +823,7 @@ export const WithControlledExpansion = () => {
         &nbsp;
         <Button onClick={() => setExpanded(false)}>Collapse all</Button>
       </div>
-      <TreeView label="Tree View">{renderTree({ nodes, expanded })}</TreeView>
+      <TreeView {...args}>{renderTree({ nodes, expanded })}</TreeView>
     </>
   );
 };
@@ -816,7 +834,7 @@ const Nested = () => {
 
 export const WithComplexNesting = (args) => {
   return (
-    <TreeView label="Tree View with Complex Nesting" {...args}>
+    <TreeView {...args}>
       <TreeNode id="1" value="A.I." label="A.I." isExpanded>
         {/* Pattern 1: A TreeNode wrapped in a simple <div> */}
         <div>
@@ -839,6 +857,7 @@ export const WithComplexNesting = (args) => {
 
 WithComplexNesting.args = {
   hideLabel: true,
+  label: 'Tree View with Complex Nesting',
   multiselect: true,
   selected: ['1-1'],
 };

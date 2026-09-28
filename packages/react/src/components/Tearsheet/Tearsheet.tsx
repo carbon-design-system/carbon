@@ -437,7 +437,9 @@ const TearsheetInternal: React.ForwardRefExoticComponent<
                 [`${blockClass}__body-layout--has-influencer`]:
                   influencer && !isSm,
               })}
-              ref={bodyRef}>
+              ref={bodyRef}
+              // @ts-expect-error ModalBody passes rest props to Layer which accepts level
+              level={0}>
               {influencer}
 
               {body}
