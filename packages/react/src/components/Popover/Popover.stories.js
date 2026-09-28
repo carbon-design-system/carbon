@@ -433,6 +433,28 @@ export const TabTipExperimentalAutoAlign = () => {
   );
 };
 
+const StressTestItem = ({ i }) => {
+  const [open, setOpen] = useState(false);
+  return (
+    <Popover
+      autoAlign
+      align="bottom"
+      open={open}
+      onRequestClose={() => setOpen(false)}>
+      <button
+        className="playground-trigger"
+        type="button"
+        aria-expanded={open}
+        onClick={() => setOpen((o) => !o)}>
+        <CheckboxIcon />
+      </button>
+      <PopoverContent className="p-3">
+        <p className="popover-title">Popover {i + 1}</p>
+      </PopoverContent>
+    </Popover>
+  );
+};
+
 export const ExperimentalAutoAlignStressTest = () => (
   <div
     style={{
@@ -444,14 +466,7 @@ export const ExperimentalAutoAlignStressTest = () => (
       height: '200vh',
     }}>
     {Array.from({ length: 50 }, (_, i) => (
-      <Popover key={i} open autoAlign align="bottom">
-        <div className="playground-trigger">
-          <CheckboxIcon />
-        </div>
-        <PopoverContent className="p-3">
-          <p className="popover-title">Popover {i + 1}</p>
-        </PopoverContent>
-      </Popover>
+      <StressTestItem key={i} i={i} />
     ))}
   </div>
 );

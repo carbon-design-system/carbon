@@ -10,7 +10,7 @@ import { OverflowMenu } from './';
 import { default as OverflowMenuItem } from '../OverflowMenuItem';
 import { MenuItem, MenuItemDivider } from '../Menu';
 import { Filter } from '@carbon/icons-react';
-import { useFeatureFlag } from '../FeatureFlags';
+import { FeatureFlags, useFeatureFlag } from '../FeatureFlags';
 import mdx from './OverflowMenu.mdx';
 
 const args = {
@@ -115,25 +115,27 @@ export const Default = (args) => (
 );
 
 export const ExperimentalAutoAlignStressTest = () => (
-  <div
-    style={{
-      display: 'grid',
-      placeContent: 'center',
-      gridTemplateColumns: 'repeat(10, auto)',
-      gap: '8px',
-      width: '200vw',
-      height: '200vh',
-    }}>
-    {Array.from({ length: 50 }, (_, i) => (
-      <OverflowMenu key={i} label={`Options ${i + 1}`} autoAlign>
-        <MenuItem label="Stop app" />
-        <MenuItem label="Restart app" />
-        <MenuItem label="Rename app" />
-        <MenuItemDivider />
-        <MenuItem label="Delete app" kind="danger" />
-      </OverflowMenu>
-    ))}
-  </div>
+  <FeatureFlags enableV12Overflowmenu>
+    <div
+      style={{
+        display: 'grid',
+        placeContent: 'center',
+        gridTemplateColumns: 'repeat(10, auto)',
+        gap: '8px',
+        width: '200vw',
+        height: '200vh',
+      }}>
+      {Array.from({ length: 50 }, (_, i) => (
+        <OverflowMenu key={i} label={`Options ${i + 1}`} autoAlign>
+          <MenuItem label="Stop app" />
+          <MenuItem label="Restart app" />
+          <MenuItem label="Rename app" />
+          <MenuItemDivider />
+          <MenuItem label="Delete app" kind="danger" />
+        </OverflowMenu>
+      ))}
+    </div>
+  </FeatureFlags>
 );
 
 ExperimentalAutoAlignStressTest.storyName =
