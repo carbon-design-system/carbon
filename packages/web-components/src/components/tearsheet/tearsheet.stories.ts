@@ -76,7 +76,7 @@ export const Default = {
         variant="${args.variant}"
         ?open="${args.open}"
         ?prevent-close-on-click-outside="${args.preventCloseOnClickOutside}"
-        selector-primary-focus="[data-tearsheet-primary-focus]"
+        selector-primary-focus="#input1"
         @cds-tearsheet-collapse-change="${handleCollapseChange}">
         <cds-tearsheet-header
           ?hide-close-button="${args.hideCloseButton}"

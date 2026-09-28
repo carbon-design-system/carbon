@@ -105,6 +105,22 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
   ariaLabel: string = '';
 
   /**
+   * Optional reference to the element that triggered the tearsheet to open.
+   * When provided, focus is explicitly returned to this element on close.
+   * If omitted, the component falls back to whichever element had focus at
+   * open time (document.activeElement capture).
+   *
+   * Useful for stacking — the launcher is inside another open tearsheet so
+   * automatic capture may pick up the wrong element after signal-driven re-renders.
+   *
+   * @example
+   * // In consumer JS, after getting a ref to the trigger button:
+   * tearsheetEl.launcherButtonRef = openButton;
+   */
+  @property({ attribute: false })
+  launcherButtonRef?: HTMLElement;
+
+  /**
    * Unique ID for this tearsheet instance
    */
   private uniqueId: string = `tearsheet-${Math.random().toString(36).substr(2, 9)}`;
@@ -128,6 +144,8 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
 
   private _trapFocusAPI: { cleanup: () => void } | null = null;
   private _wasOpen = false;
+  /** Fallback launcher captured from document.activeElement at open time. */
+  private _launcher: Element | null = null;
   private smMediaQuery = `(max-width: ${breakpoints.md.width})`;
   private isSmallDevice = new MatchMediaController(
     this,
@@ -262,12 +280,12 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
       this.updateStackProperties();
     }
 
-    // Initialize focus trap when tearsheet opens
     if (!wasOpen && isOpen) {
-      // `focusableContainers` holds the containers where we can query DOM elements.
-      // Our strategy here is to let child/slotted components register their containers,
-      // which are then passed to `trapFocus`. This allows the utility to query elements
-      // directly without being blocked by shadow DOM boundaries.
+      // Capture the deeply-focused element before any rAF/setTimeout moves focus.
+      // document.activeElement stops at shadow-host boundaries, so we pierce through
+      // nested shadow roots to find the actual focused element (e.g. a cds-button
+      // inside a story component's shadow root).
+      this._launcher = CDSTearsheet._getDeepActiveElement(this.ownerDocument);
 
       // Update signal with current uniqueId and selectorPrimaryFocus so children can register
       updateTearsheetSignals({
@@ -275,18 +293,41 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
         selectorPrimaryFocus: this.selectorPrimaryFocus,
       });
 
+      // Notify this tearsheet's own header-content to handle initial focus.
+      // Non-bubbling so it only reaches listeners attached directly to this
+      // element — prevents cross-instance focus stealing in stacking.
+      this.dispatchEvent(
+        new CustomEvent(`${prefix}-tearsheet-opened`, {
+          bubbles: false,
+          composed: false,
+          detail: {
+            selectorPrimaryFocus: this.selectorPrimaryFocus,
+            uniqueId: this.uniqueId,
+          },
+        })
+      );
+
       // Set up focus trap for Tab/Shift+Tab cycling.
-      // Initial focus is handled by cds-tearsheet-header-content._focusCloseButtonOnOpen()
-      // which runs in its own updated() lifecycle — no timing race.
+      // Pass getFirstFocusable as a lazy resolver so the trap always reflects the
+      // current DOM (header-action buttons may be added/removed while open).
       requestAnimationFrame(() => {
-        this._trapFocusAPI = trapFocus(this as HTMLElement, this.uniqueId);
+        this._trapFocusAPI = trapFocus(this as HTMLElement, this.uniqueId, () =>
+          this._getFirstFocusable()
+        );
       });
     }
 
+    if (wasOpen && !isOpen) {
+      // Prefer the explicit launcherButtonRef prop (adopter-provided). Fall back
+      // to the document.activeElement captured at open time.
+      const target = this.launcherButtonRef ?? this._launcher;
+      this._launcher = null;
+      if (target && typeof (target as HTMLElement).focus === 'function') {
+        (target as HTMLElement).focus();
+      }
+    }
+
     this._wasOpen = isOpen;
-    // Focus-return to the launcher is handled automatically by the inner <cds-modal>
-    // via its _launcher capture (document.activeElement at open time). No manual
-    // launcherButtonRef wiring needed from the consumer.
   }
 
   private updateCSSPropertiesIfNeeded(
@@ -435,6 +476,34 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
         );
       }
     }
+  }
+
+  /**
+   * Pierces nested shadow roots to return the truly-focused element.
+   * document.activeElement stops at the shadow-host boundary, so a <cds-button>
+   * inside a story component's shadow root would return the story element, not
+   * the button — making focus() on it a no-op.
+   */
+  private static _getDeepActiveElement(
+    doc: Document | null | undefined
+  ): Element | null {
+    if (!doc) return null;
+    let el: Element | null = doc.activeElement;
+    while (el?.shadowRoot?.activeElement) {
+      el = el.shadowRoot.activeElement;
+    }
+    return el;
+  }
+
+  /**
+   * Delegate to CDSTearsheetHeaderContent.getFirstFocusable() so the focus trap
+   * gets a per-instance, DOM-accurate first element without touching the shared signal.
+   */
+  private _getFirstFocusable(): HTMLElement | null {
+    const headerContent = this.querySelector(
+      `${prefix}-tearsheet-header-content`
+    ) as (HTMLElement & { getFirstFocusable(): HTMLElement | null }) | null;
+    return headerContent?.getFirstFocusable() ?? null;
   }
 
   /**

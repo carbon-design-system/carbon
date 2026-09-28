@@ -49,11 +49,25 @@ export class StackingTearsheetDemo extends LitElement {
     this._open1 = !this._open1;
   }
 
-  private _toggleTearsheet2() {
+  private _toggleTearsheet2(e?: Event) {
+    // Set launcherButtonRef so tearsheet 2 knows where to return focus on close.
+    // e.currentTarget is the cds-button the @click handler is attached to.
+    const tearsheet2 = this.shadowRoot?.querySelectorAll('cds-tearsheet')[1] as
+      | (HTMLElement & { launcherButtonRef?: HTMLElement })
+      | undefined;
+    if (e && tearsheet2) {
+      tearsheet2.launcherButtonRef = e.currentTarget as HTMLElement;
+    }
     this._open2 = !this._open2;
   }
 
-  private _toggleTearsheet3() {
+  private _toggleTearsheet3(e?: Event) {
+    const tearsheet3 = this.shadowRoot?.querySelectorAll('cds-tearsheet')[2] as
+      | (HTMLElement & { launcherButtonRef?: HTMLElement })
+      | undefined;
+    if (e && tearsheet3) {
+      tearsheet3.launcherButtonRef = e.currentTarget as HTMLElement;
+    }
     this._open3 = !this._open3;
   }
 
@@ -148,7 +162,7 @@ export class StackingTearsheetDemo extends LitElement {
                 <cds-button
                   size="sm"
                   kind="tertiary"
-                  @click="${this._toggleTearsheet2}"
+                  @click="${(e: Event) => this._toggleTearsheet2(e)}"
                   aria-haspopup="dialog">
                   Open Tearsheet 2
                 </cds-button>
@@ -201,7 +215,7 @@ export class StackingTearsheetDemo extends LitElement {
                 <cds-button
                   size="sm"
                   kind="tertiary"
-                  @click="${this._toggleTearsheet3}"
+                  @click="${(e: Event) => this._toggleTearsheet3(e)}"
                   aria-haspopup="dialog">
                   Open Tearsheet 3
                 </cds-button>

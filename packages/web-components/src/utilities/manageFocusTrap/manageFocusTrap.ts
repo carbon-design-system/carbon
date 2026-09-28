@@ -341,9 +341,7 @@ export const trapFocus = (
     }
 
     const elements = getAllFocusableElements(containerArray);
-    // Resolve first lazily on every keydown — always reflects current DOM state,
-    // no stale reference if header-actions content changes while tearsheet is open.
-    const first = getFirstFocusable?.() ?? elements[0];
+    const first = elements[0];
     const last = elements[elements.length - 1];
     const active = getRealActiveElement();
 

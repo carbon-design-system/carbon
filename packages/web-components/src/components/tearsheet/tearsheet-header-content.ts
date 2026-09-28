@@ -19,10 +19,7 @@ import '../truncated-text';
 import styles from './tearsheet-header-content.scss?lit';
 import { MatchMediaController } from '../../globals/js/utils/match-media-controller';
 import { breakpoints } from '@carbon/layout';
-import {
-  registerFocusableContainers,
-  getFocusableContainers,
-} from '../../utilities/manageFocusTrap/manageFocusTrap';
+import { registerFocusableContainers } from '../../utilities/manageFocusTrap/manageFocusTrap';
 import { tearsheetSignal, updateTearsheetSignals } from './tearsheet-signal';
 import CDSTearsheetHeader from './tearsheet-header';
 import { SignalWatcher } from '@lit-labs/signals';
@@ -146,82 +143,100 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
     this._updateDecoratorSize();
     this._updateHeaderOffset();
     this._updateInertState();
-    this._focusCloseButtonOnOpen();
+  }
+
+  private _focusTimer: ReturnType<typeof setTimeout> | null = null;
+
+  /**
+   * Returns the element that should receive focus when this tearsheet opens.
+   *
+   * Priority order (desktop/wide):  close button → header-action button → AI label
+   * Priority order (mobile/narrow): close button → AI label → header-action button
+   *
+   * Called by the parent cds-tearsheet (via querySelector) so focus logic stays
+   * in the component that owns the DOM — no shared signal reads needed.
+   */
+  getFirstFocusable(): HTMLElement | null {
+    // header-actions: consumer may slot a button directly OR wrap in a div
+    const headerActionSlot = this.querySelector<HTMLElement>(
+      '[slot="header-actions"]'
+    );
+    const headerActionBtn = headerActionSlot
+      ? headerActionSlot.matches(
+          `${carbonPrefix}-button:not([disabled]), button:not([disabled])`
+        )
+        ? headerActionSlot
+        : headerActionSlot.querySelector<HTMLElement>(
+            `${carbonPrefix}-button:not([disabled]), button:not([disabled])`
+          )
+      : null;
+
+    // close button — lives in this component's own shadow DOM
+    const closeBtn = this.shadowRoot?.querySelector<HTMLElement>(
+      `.${blockClass}__close-button ${carbonPrefix}-icon-button:not([disabled])`
+    );
+
+    // AI label — consumer may slot cds-ai-label directly OR wrap it in a div
+    const decoratorSlot = this.querySelector<HTMLElement>('[slot="decorator"]');
+    const aiLabel = decoratorSlot
+      ? decoratorSlot.matches(`${carbonPrefix}-ai-label`)
+        ? decoratorSlot
+        : decoratorSlot.querySelector<HTMLElement>(`${carbonPrefix}-ai-label`)
+      : null;
+
+    return this._isMobileOrNarrow
+      ? (closeBtn ?? aiLabel ?? headerActionBtn ?? null)
+      : (closeBtn ?? headerActionBtn ?? aiLabel ?? null);
   }
 
   /**
-   * Focus the close button when the tearsheet opens.
-   * Called from updated() when the signal's open flips true.
+   * Handle the tearsheet-opened event dispatched by the parent cds-tearsheet.
+   * Scoped per-instance (non-bubbling event) so only this header-content reacts
+   * to its own tearsheet opening — no cross-instance focus stealing in stacking.
    *
-   * The tearsheet panel slides in via a CSS transform transition (~moderate-02,
-   * ~240ms). Browsers will not focus an element that is off-screen or
-   * mid-transform, so we defer the focus call until after the animation
-   * completes. 300ms covers the longest Carbon motion duration with margin.
+   * The tearsheet slides in via CSS transform (~240ms). Browsers refuse to focus
+   * an off-screen/mid-transform element, so we defer 100ms into the animation.
    */
-  private _previousOpen = false;
-  private _focusTimer: ReturnType<typeof setTimeout> | null = null;
+  private _handleTearsheetOpened = (event: Event) => {
+    const { selectorPrimaryFocus } = (event as CustomEvent).detail;
 
-  private _focusCloseButtonOnOpen(): void {
-    const { open, hideCloseButton } = tearsheetSignal.get();
-
-    const justOpened = open && !this._previousOpen;
-    this._previousOpen = open;
-
-    // Cancel any pending focus from a previous open cycle
     if (this._focusTimer !== null) {
       clearTimeout(this._focusTimer);
       this._focusTimer = null;
     }
 
-    if (!justOpened || hideCloseButton) {
-      return;
-    }
-
     this._focusTimer = setTimeout(() => {
       this._focusTimer = null;
-      const { selectorPrimaryFocus } = tearsheetSignal.get();
 
-      // Consumer override — query the document for a custom primary focus target.
-      // The footer buttons live in cds-tearsheet's light DOM (page-level),
-      // so document.querySelector reaches them without shadow boundary issues.
+      let focusTarget: HTMLElement | null = null;
+
       if (selectorPrimaryFocus) {
-        // The target element may live inside a shadow root (e.g. cds-action-set's shadow),
-        // so document.querySelector can't reach it. Search all registered focusable
-        // containers instead — they include every shadow root the focus trap knows about.
-        const { uniqueId } = tearsheetSignal.get();
-        const allContainers = getFocusableContainers(uniqueId);
-        let match: HTMLElement | null = null;
-        for (const container of allContainers) {
-          const found =
-            container.querySelector<HTMLElement>(selectorPrimaryFocus);
-          if (found) {
-            match = found;
-            break;
-          }
-        }
-        // If the match is a custom element (e.g. cds-button), drill into its
-        // shadow root for the real focusable <button>; otherwise focus it directly.
-        const customTarget =
+        // Consumer-specified selector: search this tearsheet's own light DOM.
+        const match =
+          this.closest(`${prefix}-tearsheet`)?.querySelector<HTMLElement>(
+            selectorPrimaryFocus
+          ) ?? null;
+        // Drill into shadow root for the real focusable if it's a custom element
+        // (e.g. cds-button → <button>, cds-text-input → <input>).
+        focusTarget =
           match?.shadowRoot?.querySelector<HTMLElement>(
-            'button:not([disabled])'
+            'button:not([disabled]), input:not([disabled]):not([type="hidden"])'
           ) ?? match;
-        if (customTarget) {
-          customTarget.focus({ preventScroll: true });
-        }
-      } else {
-        // Default — focus the close button from our own shadow root
-        const btn = this.shadowRoot?.querySelector<HTMLElement>(
-          `.${blockClass}__close-button ${carbonPrefix}-icon-button:not([disabled])`
-        );
-        // Drill into cds-icon-button's shadow root for the real <button>.
-        const focusTarget =
-          btn?.shadowRoot?.querySelector<HTMLElement>(
-            'button:not([disabled])'
-          ) ?? btn;
-        focusTarget?.focus({ preventScroll: true });
       }
+
+      // Fall back to the priority-ordered first focusable in the header when
+      // selectorPrimaryFocus was empty, or matched nothing in the DOM.
+      if (!focusTarget) {
+        const first = this.getFirstFocusable();
+        focusTarget =
+          first?.shadowRoot?.querySelector<HTMLElement>(
+            'button:not([disabled])'
+          ) ?? first;
+      }
+
+      focusTarget?.focus({ preventScroll: true });
     }, 100);
-  }
+  };
 
   /**
    * Applies `inert` to collapsed header regions so they are removed from
@@ -522,8 +537,32 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
         ${closeButtonTemplate} ${headerContentTemplate}`;
   }
 
+  /** Reference to the parent cds-tearsheet, stored for listener cleanup. */
+  private _parentTearsheet: Element | null = null;
+
+  connectedCallback(): void {
+    super.connectedCallback();
+    let el: Element | null = this.parentElement;
+    while (el) {
+      if (el.tagName.toLowerCase() === `${prefix}-tearsheet`) {
+        this._parentTearsheet = el;
+        break;
+      }
+      el = el.parentElement;
+    }
+    this._parentTearsheet?.addEventListener(
+      `${prefix}-tearsheet-opened`,
+      this._handleTearsheetOpened as EventListener
+    );
+  }
+
   disconnectedCallback(): void {
     super.disconnectedCallback();
+    this._parentTearsheet?.removeEventListener(
+      `${prefix}-tearsheet-opened`,
+      this._handleTearsheetOpened as EventListener
+    );
+    this._parentTearsheet = null;
     if (this._focusTimer !== null) {
       clearTimeout(this._focusTimer);
       this._focusTimer = null;
