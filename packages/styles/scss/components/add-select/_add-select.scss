@@ -678,6 +678,7 @@
 
   .#{$prefix}--add-select__item-summary-panel {
     display: none;
+    overflow: hidden;
     block-size: 100%;
     inline-size: 100%;
     transform: translateX(0);
