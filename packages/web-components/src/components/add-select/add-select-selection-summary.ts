@@ -86,13 +86,13 @@ class CDSAddSelectSelectionSummary extends LitElement {
                   <div class="${blockClass}__selection-summary-header-actions">
                     <slot name="header-actions"></slot>
                     <cds-icon-button
-                      tooltip-text=${editIconDescription}
-                      autoalign
                       kind="ghost"
                       size="sm"
+                      autoalign
                       class="${blockClass}__selection-summary-edit-button"
                       @click=${this._handleEdit}>
                       ${iconLoader(Edit16, { slot: 'icon' })}
+                      <span slot="tooltip-content">${editIconDescription}</span>
                     </cds-icon-button>
                   </div>
                 `

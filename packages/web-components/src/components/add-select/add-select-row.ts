@@ -353,11 +353,13 @@ class CDSAddSelectRow extends LitElement {
                     class="${blockClass}__view-item-panel"
                     kind="ghost"
                     size="sm"
-                    tooltip-text=${itemPanelIconDescription}
                     autoalign
                     ?aria-pressed=${itemPanelOpen}
                     @click=${this._handleItemPanelClick}>
                     ${iconLoader(View16, { slot: 'icon' })}
+                    <span slot="tooltip-content"
+                      >${itemPanelIconDescription}</span
+                    >
                   </cds-icon-button>
                 `
               : nothing}

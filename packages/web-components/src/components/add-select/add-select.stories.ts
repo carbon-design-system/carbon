@@ -122,19 +122,19 @@ const AddSelectBodyTemplate = (args) => {
               ? html`
                   <cds-icon-button
                     slot="actions"
-                    tooltip-text="Sort"
-                    autoalign
                     kind="ghost"
-                    size="lg">
+                    size="lg"
+                    autoalign>
                     ${iconLoader(ArrowsVertical16, { slot: 'icon' })}
+                    <span slot="tooltip-content">Sort</span>
                   </cds-icon-button>
                   <cds-icon-button
                     slot="actions"
-                    tooltip-text="Filter"
-                    autoalign
                     kind="ghost"
-                    size="lg">
+                    size="lg"
+                    autoalign>
                     ${iconLoader(Filter16, { slot: 'icon' })}
+                    <span slot="tooltip-content">Filter</span>
                   </cds-icon-button>
                 `
               : nothing}
@@ -312,19 +312,19 @@ const AddSelectColumnTemplate = (args) => {
               ? html`
                   <cds-icon-button
                     slot="actions"
-                    tooltip-text="Sort"
-                    autoalign
                     kind="ghost"
-                    size="sm">
+                    size="sm"
+                    autoalign>
                     ${iconLoader(ArrowsVertical16, { slot: 'icon' })}
+                    <span slot="tooltip-content">Sort</span>
                   </cds-icon-button>
                   <cds-icon-button
                     slot="actions"
-                    tooltip-text="Filter"
-                    autoalign
                     kind="ghost"
-                    size="sm">
+                    size="sm"
+                    autoalign>
                     ${iconLoader(Filter16, { slot: 'icon' })}
+                    <span slot="tooltip-content">Filter</span>
                   </cds-icon-button>
                 `
               : nothing}

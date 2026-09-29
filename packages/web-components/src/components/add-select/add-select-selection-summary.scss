@@ -47,13 +47,11 @@ $block-class: #{$prefix}--add-select__next;
   }
 
   .#{$block-class}__selection-summary-body {
+    // No overflow set here — tooltips inside slotted shadow roots use
+    // position:fixed and are clipped by any overflow ancestor in the shadow
+    // layer. Scrolling is delegated to the host consumer's container instead.
+    overflow: visible;
     flex: 1;
-    overflow-x: clip;
-    overflow-y: auto;
-
-    @supports (overflow-block: auto) {
-      overflow-block: auto;
-      overflow-inline: clip;
-    }
+    min-block-size: 0;
   }
 }

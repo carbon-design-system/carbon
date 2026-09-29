@@ -25,6 +25,9 @@ $block-class: #{$prefix}--add-select__next;
     border-block-end: 1px solid $border-subtle-01;
 
     &:hover {
+      // Elevate above sibling items so the remove-button tooltip (which paints
+      // within this shadow layer) renders on top of adjacent rows.
+      z-index: 1;
       background-color: $layer-hover-01;
     }
   }

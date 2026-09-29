@@ -139,13 +139,13 @@ class CDSAddSelectItemPanel extends LitElement {
           ${showCloseButton
             ? html`
                 <cds-icon-button
-                  tooltip-text=${closeIconDescription}
-                  autoalign
                   kind="ghost"
                   size="sm"
+                  autoalign
                   class="${blockClass}__item-summary-panel-close"
                   @click=${this._handleClose}>
                   ${iconLoader(Close16, { slot: 'icon' })}
+                  <span slot="tooltip-content">${closeIconDescription}</span>
                 </cds-icon-button>
               `
             : nothing}

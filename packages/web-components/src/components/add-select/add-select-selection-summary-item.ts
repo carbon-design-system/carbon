@@ -148,16 +148,16 @@ class CDSAddSelectSelectionSummaryItem extends LitElement {
       <div
         class="${blockClass}__selection-summary-item-remove-button-container">
         <cds-icon-button
-          tooltip-text=${this.removeButtonLabel}
-          autoalign
           kind="ghost"
           size="sm"
+          autoalign
           class="${blockClass}__selection-summary-item-remove-button"
           @click=${(e: Event) => {
             e.stopPropagation();
             this._handleRemove();
           }}>
           ${iconLoader(SubtractAlt16, { slot: 'icon' })}
+          <span slot="tooltip-content">${this.removeButtonLabel}</span>
         </cds-icon-button>
       </div>
     `;
