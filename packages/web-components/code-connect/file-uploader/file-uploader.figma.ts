@@ -16,13 +16,7 @@ import {
 } from '../template-helpers';
 
 const instance = figma.selectedInstance;
-const type = instance.getEnum('Type', {
-  Default: 'default',
-  'Drag and drop': 'drag-and-drop',
-});
-const isSkeleton = instance.getEnum('State', {
-  Skeleton: true,
-});
+const isSkeleton = instance.getPropertyValue('State') === 'Skeleton';
 
 function createTemplate() {
   if (isSkeleton) {
@@ -36,6 +30,10 @@ function createTemplate() {
     };
   }
 
+  const type = instance.getEnum('Type', {
+    Default: 'default',
+    'Drag and drop': 'drag-and-drop',
+  });
   const labelDescription = instance.getString('Desc. text');
   const labelTitle = instance.getString('Label text');
   const disabled = instance.getEnum('State', {
