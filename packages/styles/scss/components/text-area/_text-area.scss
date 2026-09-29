@@ -31,7 +31,6 @@
     @include type-style('body-01');
     @include focus-outline('reset');
 
-    padding: convert.to-rem(11px) layout.density('padding-inline');
     border: none;
     background-color: $field;
     block-size: 100%;
@@ -41,6 +40,8 @@
     min-block-size: convert.to-rem(40px);
 
     min-inline-size: 10rem;
+    padding-block: convert.to-rem(11px) $spacing-03;
+    padding-inline: layout.density('padding-inline');
     resize: vertical;
     transition:
       background-color $duration-fast-01 motion(standard, productive),
