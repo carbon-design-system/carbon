@@ -5,14 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, {
-  forwardRef,
-  ForwardedRef,
-  ReactNode,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { forwardRef, ForwardedRef, ReactNode } from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import { IconButton, type IconButtonProps } from '../IconButton';
@@ -92,35 +85,8 @@ const AddSelectItemPanel = forwardRef<HTMLDivElement, AddSelectItemPanelProps>(
     const prefix = usePrefix();
     const blockClass = `${prefix}--add-select`;
 
-    const [closing, setClosing] = useState(false);
-
-    // prevOpenRef always holds the last *committed* value of open.
-    // We update it in a layout effect (after commit, before paint) so it is
-    // never clobbered by a re-render triggered from the same cycle.
-    const prevOpenRef = useRef(open);
-
-    useLayoutEffect(() => {
-      const prevOpen = prevOpenRef.current;
-      prevOpenRef.current = open;
-
-      if (prevOpen && !open) {
-        // open just went true → false: start exit animation.
-        setClosing(true);
-      } else if (open && !prevOpen) {
-        // open just went false → true: cancel any in-progress exit.
-        setClosing(false);
-      }
-    }, [open]);
-
-    const handleAnimationEnd = () => {
-      if (closing) {
-        setClosing(false);
-      }
-    };
-
     const panelClasses = cx(`${blockClass}__item-summary-panel`, className, {
       [`${blockClass}__item-summary-panel--open`]: open,
-      [`${blockClass}__item-summary-panel--closing`]: closing,
     });
 
     // Default content rendering — renders only labelled itemDetails tuples.
@@ -176,11 +142,7 @@ const AddSelectItemPanel = forwardRef<HTMLDivElement, AddSelectItemPanelProps>(
     };
 
     return (
-      <div
-        className={panelClasses}
-        ref={ref}
-        onAnimationEnd={handleAnimationEnd}
-        {...rest}>
+      <div className={panelClasses} ref={ref} {...rest}>
         {/* Header with title and close button */}
         <div className={`${blockClass}__item-summary-panel-header`}>
           <p className={`${blockClass}__item-summary-panel-title`}>{title}</p>
