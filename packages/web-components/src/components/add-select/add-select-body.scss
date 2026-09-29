@@ -83,13 +83,14 @@ $block-class: #{$prefix}--add-select__next;
 
   .#{$block-class}__content {
     flex: 1;
-    overflow-x: clip;
-    overflow-y: auto;
+    min-block-size: 0;
   }
 
   .#{$block-class}-list-body {
     display: flex;
     flex-direction: column;
+    overflow-x: clip;
+    overflow-y: auto;
 
     &--horizontal {
       flex-direction: row;
