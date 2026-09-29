@@ -89,9 +89,33 @@ describe('getDerivedStateFromProps', () => {
       expect(initialState.shouldShowBatchActions).toBe(false);
       const prevState = {
         shouldShowBatchActions: true,
+        rowsById: {
+          1: {
+            id: '1',
+            isSelected: true,
+            isExpanded: false,
+            disabled: false,
+          },
+        },
       };
       const nextState = getDerivedStateFromProps(mockProps, prevState);
       expect(nextState.shouldShowBatchActions).toBe(true);
+    });
+
+    it('should clear the previous batch action state when selected rows are removed', () => {
+      const prevState = {
+        shouldShowBatchActions: true,
+        rowsById: {
+          3: {
+            id: '3',
+            isSelected: true,
+            isExpanded: false,
+            disabled: false,
+          },
+        },
+      };
+      const nextState = getDerivedStateFromProps(mockProps, prevState);
+      expect(nextState.shouldShowBatchActions).toBe(false);
     });
   });
 });
