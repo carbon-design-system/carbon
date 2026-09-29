@@ -273,6 +273,8 @@ export const _WithLayer = (args) => {
   );
 };
 
+_WithLayer.args = { ...defaultArgs };
+
 export const withAILabel = (args) => {
   const { defaultWidth, textInputArgs } = getTextInputStoryArgs(args);
   const aiLabel = (
@@ -319,6 +321,8 @@ export const withAILabel = (args) => {
   );
 };
 
+withAILabel.args = { ...defaultArgs };
+
 export const Skeleton = ({ hideLabel, size }) => {
   return <TextInputSkeleton hideLabel={hideLabel} size={size} />;
 };
@@ -337,7 +341,7 @@ Skeleton.parameters = {
 // Hidden Test-Only Story. This story tests for a bug where the invalid-text would overlap with components below it. #19960
 export const TestInvalidTextNoOverlap = (args) => {
   return (
-    <div style={{ width: args.defaultWidth }}>
+    <div style={{ width: defaultWidth }}>
       <TextInput
         labelText="test invalid text, the invalid text should not overlap"
         invalid
@@ -350,6 +354,7 @@ export const TestInvalidTextNoOverlap = (args) => {
   );
 };
 
+TestInvalidTextNoOverlap.args = { ...defaultArgs };
 /*
  * This story will:
  * - Be excluded from the docs page

@@ -149,19 +149,11 @@ Default.args = {
 
 export const _WithLayer = (args) => (
   <WithLayer>
-    {(layer) => (
-      <TextArea
-        labelText="Text Area label"
-        helperText="Optional helper text"
-        rows={4}
-        id={`text-area-${layer}`}
-        {...args}
-      />
-    )}
+    {(layer) => <TextArea rows={4} id={`text-area-${layer}`} {...args} />}
   </WithLayer>
 );
 
-_WithLayer.args = { helperText: 'Optional helper text' };
+_WithLayer.args = { ...defaultArgs };
 export const withAILabel = (args) => {
   const aiLabel = (
     <AILabel className="ai-label-container">
@@ -194,19 +186,10 @@ export const withAILabel = (args) => {
     </AILabel>
   );
 
-  return (
-    <TextArea
-      labelText="Text Area label"
-      helperText="Optional helper text"
-      rows={4}
-      id="text-area-5"
-      decorator={aiLabel}
-      {...args}
-    />
-  );
+  return <TextArea rows={4} id="text-area-5" decorator={aiLabel} {...args} />;
 };
 
-withAILabel.args = { helperText: 'Optional helper text' };
+withAILabel.args = { ...defaultArgs };
 
 export const Skeleton = (args) => {
   return <TextAreaSkeleton {...args} />;
