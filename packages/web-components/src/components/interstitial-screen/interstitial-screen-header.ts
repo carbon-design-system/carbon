@@ -9,7 +9,6 @@ import { html, LitElement, nothing, PropertyValues } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import HostListenerMixin from '../../globals/mixins/host-listener';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { classMap } from 'lit/directives/class-map.js';
 import '../progress-indicator/index';
 import styles from './interstitial-screen-header.scss?lit';
@@ -24,10 +23,11 @@ const headerBlockClass = `${blockClass}--internal-header`;
  * interstitial-screen-header for header section
  * @element cds-interstitial-screen-header
  */
-@customElement(`${prefix}-interstitial-screen-header`)
 class CDSInterstitialScreenHeader extends SignalWatcher(
   HostListenerMixin(LitElement)
 ) {
+  static is = `${prefix}-interstitial-screen-header`;
+
   /**
    * Provide an optional title to be applied to the header.
    */

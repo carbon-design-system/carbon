@@ -9,7 +9,6 @@ import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import styles from './list.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * List item.
@@ -17,8 +16,9 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  * @element cds-list-item
  * @slot nested - The nested child list.
  */
-@customElement(`${prefix}-list-item`)
 class CDSListItem extends LitElement {
+  static is = `${prefix}-list-item`;
+
   /**
    * `true` if this list item is a child of a nested list.
    * `<cds-ordered-list>` or `<cds-unordered-list>` automatically sets this property.

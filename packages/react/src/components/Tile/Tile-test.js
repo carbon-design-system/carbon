@@ -194,24 +194,32 @@ describe('Tile', () => {
   });
 
   describe('Multi Select', () => {
-    it('should warn without throwing for interactive content in children', () => {
+    it('should throw for interactive content in children', () => {
       const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+      const errorSpy = jest
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
 
-      expect(() => {
-        render(
-          <SelectableTile id="tile-1">
-            Default tile <button type="button">Help</button>
-          </SelectableTile>
+      try {
+        expect(() => {
+          render(
+            <SelectableTile id="tile-1">
+              Default tile <button type="button">Help</button>
+            </SelectableTile>
+          );
+        }).toThrow(
+          'The SelectableTile component `children` prop must have no interactive content'
         );
-      }).not.toThrow();
 
-      expect(spy).toHaveBeenCalledWith(
-        expect.stringContaining(
-          'Warning: The SelectableTile component `children` prop must have no interactive content'
-        )
-      );
-
-      spy.mockRestore();
+        expect(errorSpy).toHaveBeenCalledWith(
+          expect.stringContaining(
+            'Error: The SelectableTile component `children` prop must have no interactive content'
+          )
+        );
+      } finally {
+        spy.mockRestore();
+        errorSpy.mockRestore();
+      }
     });
 
     it('should allow non-interactive content in children', () => {

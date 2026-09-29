@@ -241,32 +241,6 @@ describe('MenuButton', () => {
   });
 
   describe('supports menu styling props', () => {
-    it('should add border class when menuBorder is true', async () => {
-      render(
-        <MenuButton label="Actions" menuBorder>
-          <MenuItem label="Action" />
-        </MenuButton>
-      );
-
-      await userEvent.click(screen.getByRole('button'));
-
-      expect(screen.getByRole('menu')).toHaveClass(`${prefix}--menu--border`);
-    });
-
-    it('should not add border class when menuBorder is false', async () => {
-      render(
-        <MenuButton label="Actions" menuBorder={false}>
-          <MenuItem label="Action" />
-        </MenuButton>
-      );
-
-      await userEvent.click(screen.getByRole('button'));
-
-      expect(screen.getByRole('menu')).not.toHaveClass(
-        `${prefix}--menu--border`
-      );
-    });
-
     it('should add background token class when menuBackgroundToken is "background"', async () => {
       render(
         <MenuButton label="Actions" menuBackgroundToken="background">

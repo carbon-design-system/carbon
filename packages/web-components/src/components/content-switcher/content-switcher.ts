@@ -12,7 +12,6 @@ import { forEach, indexOf } from '../../globals/internal/collection-helpers';
 import { NAVIGATION_DIRECTION, CONTENT_SWITCHER_SIZE } from './defs';
 import CDSContentSwitcherItem from './content-switcher-item';
 import styles from './content-switcher.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 export { NAVIGATION_DIRECTION, CONTENT_SWITCHER_SIZE };
 
@@ -51,8 +50,9 @@ const capIndex = (index: number, length: number) => {
  *   Cancellation of this event stops changing the user-initiated selection.
  * @fires cds-content-switcher-selected - The custom event fired after a a content switcher item is selected upon a user gesture.
  */
-@customElement(`${prefix}-content-switcher`)
 class CDSContentSwitcher extends LitElement {
+  static is = `${prefix}-content-switcher`;
+
   /**
    * `true` once the first `updated()` cycle has completed. Used to distinguish
    * the mount update from subsequent programmatic property changes.

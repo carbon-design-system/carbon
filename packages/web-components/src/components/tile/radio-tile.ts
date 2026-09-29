@@ -13,7 +13,6 @@ import SelectableTile from './selectable-tile';
 import CheckmarkFilled16 from '@carbon/icons/es/checkmark--filled/16.js';
 import RadioButton16 from '@carbon/icons/es/radio-button/16.js';
 import RadioButtonChecked16 from '@carbon/icons/es/radio-button--checked/16.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import { isFeatureFlagEnabled } from '../feature-flags';
 
@@ -24,8 +23,9 @@ import { isFeatureFlagEnabled } from '../feature-flags';
  * @fires cds-radio-tile-selected
  *   The name of the custom event fired after this radio tile changes its selected state.
  */
-@customElement(`${prefix}-radio-tile`)
 class CDSRadioTile extends SelectableTile {
+  static is = `${prefix}-radio-tile`;
+
   private _hasRadioButtonIcons = false;
 
   connectedCallback() {

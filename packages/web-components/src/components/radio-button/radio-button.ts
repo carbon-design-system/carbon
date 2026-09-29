@@ -19,7 +19,6 @@ import RadioGroupManager, {
 } from '../../globals/internal/radio-group-manager';
 import { RADIO_BUTTON_LABEL_POSITION, RADIO_BUTTON_ORIENTATION } from './defs';
 import styles from './radio-button.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 export { RADIO_BUTTON_LABEL_POSITION };
 
@@ -109,8 +108,9 @@ class RadioButtonDelegate implements ManagedRadioButtonDelegate {
  * @element cds-radio-button
  * @fires cds-radio-button-changed - The custom event fired after this radio button changes its checked state.
  */
-@customElement(`${prefix}-radio-button`)
 class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
+  static is = `${prefix}-radio-button`;
+
   /**
    * The radio group manager associated with the radio button.
    */

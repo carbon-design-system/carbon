@@ -6,14 +6,15 @@
  */
 
 import { html, LitElement } from 'lit';
-import { property, customElement } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import styles from './heading.scss?lit';
 import { HEADING_LEVEL } from './defs';
 import { prefix } from '../../globals/settings';
 
-@customElement(`${prefix}-section`)
 export class CDSSection extends LitElement {
+  static is = `${prefix}-section`;
+
   /**
    * The level of the heading.
    */
@@ -50,8 +51,9 @@ export class CDSSection extends LitElement {
  *
  * @element cds-heading
  */
-@customElement(`${prefix}-heading`)
 class CDSHeading extends LitElement {
+  static is = `${prefix}-heading`;
+
   private _level: HEADING_LEVEL = 1;
 
   connectedCallback() {

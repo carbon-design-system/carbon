@@ -12,7 +12,6 @@
 import { LitElement, html } from 'lit';
 import { prefix } from '../../globals/settings';
 import styles from './page-header.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Page header.
@@ -21,8 +20,9 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  *   See https://github.com/carbon-design-system/carbon/issues/21926
  * @element cds-page-header
  */
-@customElement(`${prefix}-page-header`)
 class CDSPageHeader extends LitElement {
+  static is = `${prefix}-page-header`;
+
   render() {
     return html` <slot></slot>`;
   }

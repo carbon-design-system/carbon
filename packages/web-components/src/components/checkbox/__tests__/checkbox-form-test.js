@@ -6,16 +6,16 @@
  */
 
 import { expect, fixture, html } from '@open-wc/testing';
-import '@carbon/web-components/es/components/checkbox/next/index.js';
+import '@carbon/web-components/es/components/checkbox/index.js';
 
 const entries = (form) =>
   [...new FormData(form)].map(([k, v]) => `${k}=${v}`).join('|');
 
-describe('cds-preview-checkbox', function () {
+describe('cds-checkbox form association', function () {
   it('should submit its value when checked', async () => {
     const form = await fixture(
       html`<form>
-        <cds-preview-checkbox name="a" value="v" checked></cds-preview-checkbox>
+        <cds-checkbox name="a" value="v" checked></cds-checkbox>
       </form>`
     );
 
@@ -25,7 +25,7 @@ describe('cds-preview-checkbox', function () {
   it('should default the submitted value to `on`', async () => {
     const form = await fixture(
       html`<form>
-        <cds-preview-checkbox name="a" checked></cds-preview-checkbox>
+        <cds-checkbox name="a" checked></cds-checkbox>
       </form>`
     );
 
@@ -35,9 +35,8 @@ describe('cds-preview-checkbox', function () {
   it('should submit nothing when unchecked or disabled', async () => {
     const form = await fixture(
       html`<form>
-        <cds-preview-checkbox name="a" value="v"></cds-preview-checkbox>
-        <cds-preview-checkbox name="b" value="v" checked disabled>
-        </cds-preview-checkbox>
+        <cds-checkbox name="a" value="v"></cds-checkbox>
+        <cds-checkbox name="b" value="v" checked disabled> </cds-checkbox>
       </form>`
     );
 
@@ -49,7 +48,7 @@ describe('cds-preview-checkbox', function () {
     // the value can't be submitted twice
     const form = await fixture(
       html`<form>
-        <cds-preview-checkbox name="a" value="v" checked></cds-preview-checkbox>
+        <cds-checkbox name="a" value="v" checked></cds-checkbox>
       </form>`
     );
 
@@ -62,10 +61,10 @@ describe('cds-preview-checkbox', function () {
     // attribute
     const form = await fixture(
       html`<form>
-        <cds-preview-checkbox value="v" checked></cds-preview-checkbox>
+        <cds-checkbox value="v" checked></cds-checkbox>
       </form>`
     );
-    const el = form.querySelector('cds-preview-checkbox');
+    const el = form.querySelector('cds-checkbox');
     el.name = 'viaProperty';
 
     // `setFormValue()` reads the `name` content attribute, and Lit reflects
@@ -76,10 +75,10 @@ describe('cds-preview-checkbox', function () {
   it('should keep the submitted value in step synchronously', async () => {
     const form = await fixture(
       html`<form>
-        <cds-preview-checkbox name="a" value="v"></cds-preview-checkbox>
+        <cds-checkbox name="a" value="v"></cds-checkbox>
       </form>`
     );
-    form.querySelector('cds-preview-checkbox').checked = true;
+    form.querySelector('cds-checkbox').checked = true;
 
     // no await - a native control is never stale
     expect(entries(form)).to.equal('a=v');
@@ -88,10 +87,10 @@ describe('cds-preview-checkbox', function () {
   it('should appear in form.elements', async () => {
     const form = await fixture(
       html`<form>
-        <cds-preview-checkbox name="a"></cds-preview-checkbox>
+        <cds-checkbox name="a"></cds-checkbox>
       </form>`
     );
-    const el = form.querySelector('cds-preview-checkbox');
+    const el = form.querySelector('cds-checkbox');
 
     expect([...form.elements]).to.include(el);
     expect(el.form).to.equal(form);
@@ -101,10 +100,10 @@ describe('cds-preview-checkbox', function () {
     const form = await fixture(
       html`<form>
         <label for="cb" id="lbl">Label</label>
-        <cds-preview-checkbox id="cb" name="a"></cds-preview-checkbox>
+        <cds-checkbox id="cb" name="a"></cds-checkbox>
       </form>`
     );
-    const el = form.querySelector('cds-preview-checkbox');
+    const el = form.querySelector('cds-checkbox');
 
     expect(form.querySelector('#lbl').control).to.equal(el);
     expect([...el.labels]).to.include(form.querySelector('#lbl'));
@@ -113,11 +112,11 @@ describe('cds-preview-checkbox', function () {
   it('should restore the default checked state on form.reset()', async () => {
     const form = await fixture(
       html`<form>
-        <cds-preview-checkbox name="a" value="v" checked></cds-preview-checkbox>
-        <cds-preview-checkbox name="b" value="v"></cds-preview-checkbox>
+        <cds-checkbox name="a" value="v" checked></cds-checkbox>
+        <cds-checkbox name="b" value="v"></cds-checkbox>
       </form>`
     );
-    const [a, b] = form.querySelectorAll('cds-preview-checkbox');
+    const [a, b] = form.querySelectorAll('cds-checkbox');
     a.checked = false;
     b.checked = true;
 
@@ -132,8 +131,7 @@ describe('cds-preview-checkbox', function () {
     const form = await fixture(
       html`<form>
         <fieldset disabled>
-          <cds-preview-checkbox name="a" value="v" checked>
-          </cds-preview-checkbox>
+          <cds-checkbox name="a" value="v" checked> </cds-checkbox>
         </fieldset>
       </form>`
     );
@@ -145,12 +143,12 @@ describe('cds-preview-checkbox', function () {
     const form = await fixture(
       html`<form>
         <fieldset disabled>
-          <cds-preview-checkbox name="a"></cds-preview-checkbox>
-          <cds-preview-checkbox name="b" disabled></cds-preview-checkbox>
+          <cds-checkbox name="a"></cds-checkbox>
+          <cds-checkbox name="b" disabled></cds-checkbox>
         </fieldset>
       </form>`
     );
-    const [a, b] = form.querySelectorAll('cds-preview-checkbox');
+    const [a, b] = form.querySelectorAll('cds-checkbox');
     await a.updateComplete;
 
     // `disabled` now reports only the element's own attribute, same as
@@ -172,10 +170,10 @@ describe('cds-preview-checkbox', function () {
   it('should report a valid state', async () => {
     const form = await fixture(
       html`<form>
-        <cds-preview-checkbox name="a" value="v"></cds-preview-checkbox>
+        <cds-checkbox name="a" value="v"></cds-checkbox>
       </form>`
     );
-    const el = form.querySelector('cds-preview-checkbox');
+    const el = form.querySelector('cds-checkbox');
 
     expect(el.validity.valid).to.be.true;
     expect(form.checkValidity()).to.be.true;

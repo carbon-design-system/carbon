@@ -8,15 +8,15 @@
 import { LitElement } from 'lit';
 import { prefix } from '../../globals/settings';
 import styles from './skeleton-icon.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Skeleton icon.
  *
  * @element cds-skeleton-icon
  */
-@customElement(`${prefix}-skeleton-icon`)
 class CDSSkeletonIcon extends LitElement {
+  static is = `${prefix}-skeleton-icon`;
+
   static styles = styles;
 }
 

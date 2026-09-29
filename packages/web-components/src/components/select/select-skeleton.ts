@@ -7,15 +7,15 @@
 
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
 import styles from './select.scss?lit';
 
 /**
  * Skeleton of number input.
  */
-@customElement(`${prefix}-select-skeleton`)
 class CDSSelectSkeleton extends LitElement {
+  static is = `${prefix}-select-skeleton`;
+
   /**
    * `true` if the label should be hidden. Corresponds to the attribute with the same name.
    */

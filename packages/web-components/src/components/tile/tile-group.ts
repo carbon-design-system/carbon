@@ -12,7 +12,6 @@ import { NAVIGATION_DIRECTION } from '../../globals/internal/radio-group-manager
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import styles from './tile.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Map of navigation direction by key.
@@ -37,8 +36,9 @@ const navigationDirectionForKey = {
  * @fires cds-current-selectable-tile-selections
  *   The name of the custom event fired after a selectable tile changes its selected state.
  */
-@customElement(`${prefix}-tile-group`)
 class CDSTileGroup extends HostListenerMixin(LitElement) {
+  static is = `${prefix}-tile-group`;
+
   private _handleRadioClick(event) {
     const { target } = event;
     const { currentRadioSelection } = this;

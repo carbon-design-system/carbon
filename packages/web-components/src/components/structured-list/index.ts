@@ -5,11 +5,32 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './structured-list';
-import './structured-list-body';
-import './structured-list-cell';
-import './structured-list-head';
-import './structured-list-header-cell';
-import './structured-list-header-cell-skeleton';
-import './structured-list-header-row';
-import './structured-list-row';
+import { defineCustomElement } from '../../globals/register';
+import CDSStructuredList from './structured-list';
+import CDSStructuredListBody from './structured-list-body';
+import CDSStructuredListCell from './structured-list-cell';
+import CDSStructuredListHeader from './structured-list-head';
+import CDSStructuredListHeaderCell from './structured-list-header-cell';
+import CDSStructuredListHeaderCellSkeleton from './structured-list-header-cell-skeleton';
+import CDSStructuredListHeaderRow from './structured-list-header-row';
+import CDSStructuredListRow from './structured-list-row';
+
+export {
+  CDSStructuredList,
+  CDSStructuredListBody,
+  CDSStructuredListCell,
+  CDSStructuredListHeader,
+  CDSStructuredListHeaderCell,
+  CDSStructuredListHeaderCellSkeleton,
+  CDSStructuredListHeaderRow,
+  CDSStructuredListRow,
+};
+
+defineCustomElement(CDSStructuredList);
+defineCustomElement(CDSStructuredListBody);
+defineCustomElement(CDSStructuredListCell);
+defineCustomElement(CDSStructuredListHeader);
+defineCustomElement(CDSStructuredListHeaderCell);
+defineCustomElement(CDSStructuredListHeaderCellSkeleton);
+defineCustomElement(CDSStructuredListHeaderRow);
+defineCustomElement(CDSStructuredListRow);

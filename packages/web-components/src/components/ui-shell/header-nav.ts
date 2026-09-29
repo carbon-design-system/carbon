@@ -8,7 +8,6 @@
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import styles from './header.scss?lit';
 
 /**
@@ -18,8 +17,9 @@ import styles from './header.scss?lit';
  * @csspart menu-body The menu body.
  * @csspart divider The divider.
  */
-@customElement(`${prefix}-header-nav`)
 class CDSHeaderNav extends LitElement {
+  static is = `${prefix}-header-nav`;
+
   /**
    * The `aria-label` attribute for the menu bar UI.
    */

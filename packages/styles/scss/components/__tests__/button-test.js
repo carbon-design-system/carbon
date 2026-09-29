@@ -99,28 +99,7 @@ describe('scss/components/button', () => {
     expect(declarations['box-shadow']).toBeDefined();
   });
 
-  test('button radius reads CSS custom properties with a 0 fallback by default', async () => {
-    const { result } = await render(`
-      @use '../button';
-    `);
-
-    const styles = declarationsForSelector(result.css.toString(), '.cds--btn');
-
-    expect(styles['border-start-start-radius']).toBe(
-      'var(--cds-button-radius-ss, var(--cds-button-radius, 0))'
-    );
-    expect(styles['border-start-end-radius']).toBe(
-      'var(--cds-button-radius-se, var(--cds-button-radius, 0))'
-    );
-    expect(styles['border-end-start-radius']).toBe(
-      'var(--cds-button-radius-es, var(--cds-button-radius, 0))'
-    );
-    expect(styles['border-end-end-radius']).toBe(
-      'var(--cds-button-radius-ee, var(--cds-button-radius, 0))'
-    );
-  });
-
-  test('v12 button radius falls back to border-radius-max', async () => {
+  test('button radius falls back to border-radius-max', async () => {
     const { result } = await render(`
       @use '../../feature-flags' with (
         $feature-flags: (

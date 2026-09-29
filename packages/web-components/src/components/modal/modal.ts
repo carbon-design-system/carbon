@@ -12,7 +12,6 @@ import { prefix } from '../../globals/settings';
 import HostListener from '../../globals/decorators/host-listener';
 import { MODAL_SIZE } from './defs';
 import styles from './modal.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import CDSModalBase from './modal-base';
 import '../dialog/dialog';
 
@@ -28,8 +27,9 @@ export { MODAL_SIZE };
  *   Cancellation of this event stops the user-initiated action of closing this modal.
  * @fires cds-modal-closed - The custom event fired after this modal is closed upon a user gesture.
  */
-@customElement(`${prefix}-modal`)
 class CDSModal extends CDSModalBase {
+  static is = `${prefix}-modal`;
+
   /**
    * Enable the use of native dialog element instead of div with role="dialog"
    */

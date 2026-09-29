@@ -10,15 +10,15 @@ import { html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import CDSUnorderedList from './unordered-list';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Ordered list.
  *
  * @element cds-ordered-list
  */
-@customElement(`${prefix}-ordered-list`)
 class CDSOrderedList extends CDSUnorderedList {
+  static is = `${prefix}-ordered-list`;
+
   /**
    * Specify whether the ordered list should use native list styles instead of
    * custom counter

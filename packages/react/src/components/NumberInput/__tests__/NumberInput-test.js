@@ -31,29 +31,35 @@ function translateWithId(id) {
 }
 
 describe('NumberInput', () => {
-  it('should warn without throwing for interactive content in label', () => {
+  it('should throw for interactive content in label', () => {
     const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
 
-    expect(() => {
-      render(
-        <NumberInput
-          id="number-input"
-          label={
-            <>
-              NumberInput label <button type="button">Help</button>
-            </>
-          }
-        />
+    try {
+      expect(() => {
+        render(
+          <NumberInput
+            id="number-input"
+            label={
+              <>
+                NumberInput label <button type="button">Help</button>
+              </>
+            }
+          />
+        );
+      }).toThrow(
+        'The NumberInput component `label` prop must have no interactive content'
       );
-    }).not.toThrow();
 
-    expect(spy).toHaveBeenCalledWith(
-      expect.stringContaining(
-        'Warning: The NumberInput component `label` prop must have no interactive content'
-      )
-    );
-
-    spy.mockRestore();
+      expect(errorSpy).toHaveBeenCalledWith(
+        expect.stringContaining(
+          'Error: The NumberInput component `label` prop must have no interactive content'
+        )
+      );
+    } finally {
+      spy.mockRestore();
+      errorSpy.mockRestore();
+    }
   });
 
   it('should allow non-interactive content in label', () => {

@@ -11,6 +11,39 @@ import toHaveNoAxeViolations from '../matchers/toHaveNoAxeViolations.js';
 
 import '@testing-library/jest-dom';
 
+// `useFloating` positions with `computePosition()`, then commits the result in
+// `ReactDOM.flushSync` on a later microtask. That lands outside Testing
+// Library's `act()` and fails any test that mounts a floating element. Keep
+// the real hook for refs and focus, and replace the positioning callback so
+// that microtask never runs.
+//
+// `yarn test:scss-generator` enables native ESM via `--experimental-vm-modules`.
+// `jest.mock` calls `require` and throws there. That suite uses the Node
+// environment and does not render Floating UI, so register the mock only in
+// jsdom. `jest.doMock` is not hoisted, which keeps the call inside this guard.
+if (global.window) {
+  jest.doMock('@floating-ui/react', () => {
+    const actual = jest.requireActual('@floating-ui/react');
+
+    function useFloating(options = {}) {
+      const floating = actual.useFloating({
+        ...options,
+        whileElementsMounted: () => () => {},
+      });
+
+      return {
+        ...floating,
+        update: () => {},
+      };
+    }
+
+    return {
+      ...actual,
+      useFloating,
+    };
+  });
+}
+
 // We can extend `expect` using custom matchers as defined by:
 // https://jest-bot.github.io/jest/docs/expect.html#expectextendmatchers
 //
@@ -74,7 +107,9 @@ for (const methodName of consoleMethods) {
 }
 
 function formatConsoleCallStack(unexpectedConsoleCallStacks, methodName) {
-  const messages = unexpectedConsoleCallStacks.map(
+  // Drain the buffer before throwing. Otherwise the same calls are reported
+  // again by every later test in the file.
+  const messages = unexpectedConsoleCallStacks.splice(0).map(
     ([stack, message]) =>
       `${message}\n` +
       `${stack

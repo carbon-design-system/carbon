@@ -17,29 +17,37 @@ const prefix = 'cds';
 
 describe('Select', () => {
   describe('renders as expected - Component API', () => {
-    it('should warn without throwing for interactive content in labelText', () => {
+    it('should throw for interactive content in labelText', () => {
       const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+      const errorSpy = jest
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
 
-      expect(() => {
-        render(
-          <Select
-            id="select"
-            labelText={
-              <>
-                Select label <button type="button">Help</button>
-              </>
-            }
-          />
+      try {
+        expect(() => {
+          render(
+            <Select
+              id="select"
+              labelText={
+                <>
+                  Select label <button type="button">Help</button>
+                </>
+              }
+            />
+          );
+        }).toThrow(
+          'The Select component `labelText` prop must have no interactive content'
         );
-      }).not.toThrow();
 
-      expect(spy).toHaveBeenCalledWith(
-        expect.stringContaining(
-          'Warning: The Select component `labelText` prop must have no interactive content'
-        )
-      );
-
-      spy.mockRestore();
+        expect(errorSpy).toHaveBeenCalledWith(
+          expect.stringContaining(
+            'Error: The Select component `labelText` prop must have no interactive content'
+          )
+        );
+      } finally {
+        spy.mockRestore();
+        errorSpy.mockRestore();
+      }
     });
 
     it('should allow non-interactive content in labelText', () => {

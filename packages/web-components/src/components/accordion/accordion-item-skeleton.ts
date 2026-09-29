@@ -11,13 +11,13 @@ import ChevronRight16 from '@carbon/icons/es/chevron--right/16.js';
 import { prefix } from '../../globals/settings';
 import '../skeleton-text/index';
 import styles from './accordion.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Skeleton of accordion item.
  */
-@customElement(`${prefix}-accordion-item-skeleton`)
 class CDSAccordionItemSkeleton extends LitElement {
+  static is = `${prefix}-accordion-item-skeleton`;
+
   render() {
     return html`
       <span class="${prefix}--accordion__heading">

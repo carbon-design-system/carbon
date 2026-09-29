@@ -9,7 +9,6 @@ import type { PropertyValues } from 'lit';
 import { prefix } from '../../globals/settings';
 import CDSDropdownItem from '../dropdown/dropdown-item';
 import styles from './combo-box.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 type NextSiblingAttribute =
   | 'hovered-next-sibling'
@@ -21,8 +20,9 @@ type NextSiblingAttribute =
  *
  * @element cds-combo-box-item
  */
-@customElement(`${prefix}-combo-box-item`)
 class CDSComboBoxItem extends CDSDropdownItem {
+  static is = `${prefix}-combo-box-item`;
+
   private _nextSiblingRefs: Record<NextSiblingAttribute, Element | null> = {
     'hovered-next-sibling': null,
     'highlighted-next-sibling': null,

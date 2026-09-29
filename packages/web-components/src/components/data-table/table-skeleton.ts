@@ -8,7 +8,6 @@
 import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
 import styles from './data-table.scss?lit';
 
@@ -17,8 +16,9 @@ import styles from './data-table.scss?lit';
  *
  * @element cds-table-skeleton
  */
-@customElement(`${prefix}-table-skeleton`)
 class CDSTableSkeleton extends LitElement {
+  static is = `${prefix}-table-skeleton`;
+
   /**
    * Optionally specify the displayed headers
    */

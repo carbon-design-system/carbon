@@ -8,15 +8,15 @@
 import { LitElement, html } from 'lit';
 import { prefix } from '../../globals/settings';
 import styles from './modal.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Modal body content
  *
  * @element cds-modal-body-content
  */
-@customElement(`${prefix}-modal-body-content`)
 class CDSModalBodyContent extends LitElement {
+  static is = `${prefix}-modal-body-content`;
+
   render() {
     return html`<slot></slot>`;
   }

@@ -5,5 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './time-picker';
-import './time-picker-select';
+import { defineCustomElement } from '../../globals/register';
+import CDSTimePicker from './time-picker';
+import CDSTimePickerSelect from './time-picker-select';
+
+export { CDSTimePicker, CDSTimePickerSelect };
+
+defineCustomElement(CDSTimePicker);
+defineCustomElement(CDSTimePickerSelect);

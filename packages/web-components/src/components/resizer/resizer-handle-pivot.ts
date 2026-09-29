@@ -6,7 +6,6 @@
  */
 
 import { LitElement, html } from 'lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
 import styles from './resizer-handle-pivot.scss?lit';
 import { SELECTORS } from './defs';
@@ -17,8 +16,9 @@ import type CDSResizerHandle from './resizer-handle';
  * sibling `cds-resizer-handle[slot="handle-horizontal"]`.
  * @element cds-resizer-handle-pivot
  */
-@customElement(`${prefix}-resizer-handle-pivot`)
 class CDSResizerHandlePivot extends LitElement {
+  static is = `${prefix}-resizer-handle-pivot`;
+
   static styles = styles;
 
   private _cachedHandle: CDSResizerHandle | null = null;

@@ -15,7 +15,6 @@ import FocusMixin from '../../globals/mixins/focus';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import { TILE_COLOR_SCHEME } from './defs';
 import styles from './tile.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { iconLoader } from '../../globals/internal/icon-loader';
 
 /**
@@ -24,8 +23,9 @@ import { iconLoader } from '../../globals/internal/icon-loader';
  * @element cds-selectable-tile
  * @fires cds-selectable-tile-changed - The custom event fired after this selectable tile changes its selected state.
  */
-@customElement(`${prefix}-selectable-tile`)
 class CDSSelectableTile extends HostListenerMixin(FocusMixin(LitElement)) {
+  static is = `${prefix}-selectable-tile`;
+
   @query('input')
   protected _inputNode!: HTMLInputElement;
 

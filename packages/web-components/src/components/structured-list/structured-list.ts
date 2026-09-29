@@ -13,15 +13,15 @@ import { forEach } from '../../globals/internal/collection-helpers';
 import FocusMixin from '../../globals/mixins/focus';
 import CDSStructuredListRow from './structured-list-row';
 import styles from './structured-list.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Structured list wrapper.
  *
  * @element cds-structured-list
  */
-@customElement(`${prefix}-structured-list`)
 class CDSStructuredList extends FocusMixin(LitElement) {
+  static is = `${prefix}-structured-list`;
+
   /**
    * The `name` attribute for the `<input>` for selection.
    * If present, this structured list will be a selectable one.

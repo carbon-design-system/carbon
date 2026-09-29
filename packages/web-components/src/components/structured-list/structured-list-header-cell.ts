@@ -8,15 +8,15 @@
 import { LitElement, html } from 'lit';
 import { prefix } from '../../globals/settings';
 import styles from './structured-list.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Structured list header cell.
  *
  * @element cds-structured-list-header-cell
  */
-@customElement(`${prefix}-structured-list-header-cell`)
 class CDSStructuredListHeaderCell extends LitElement {
+  static is = `${prefix}-structured-list-header-cell`;
+
   connectedCallback() {
     if (!this.hasAttribute('role')) {
       this.setAttribute('role', 'columnheader');

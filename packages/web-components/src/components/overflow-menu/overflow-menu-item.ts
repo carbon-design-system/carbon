@@ -8,7 +8,6 @@
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import FocusMixin from '../../globals/mixins/focus';
 import { OVERFLOW_MENU_SIZE } from './defs';
 import styles from './overflow-menu.scss?lit';
@@ -19,8 +18,9 @@ import styles from './overflow-menu.scss?lit';
  * @element cds-overflow-menu-item
  * @fires cds-overflow-menu-item-clicked - The custom event fired when an overflow menu item is clicked.
  */
-@customElement(`${prefix}-overflow-menu-item`)
 class CDSOverflowMenuItem extends FocusMixin(LitElement) {
+  static is = `${prefix}-overflow-menu-item`;
+
   /**
    * Handles `click` event on this element.
    */

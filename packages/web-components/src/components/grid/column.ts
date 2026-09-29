@@ -7,7 +7,6 @@
 
 import { LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
 
 export type ColumnSpecSimple = `${number}` | `${number}%`;
@@ -23,8 +22,9 @@ export type ColumnSpec =
  *
  * @element cds-column
  */
-@customElement(`${prefix}-column`)
 class CDSColumn extends LitElement {
+  static is = `${prefix}-column`;
+
   /**
    * Specify column size
    * Keys sm, md, lg, xlg, max

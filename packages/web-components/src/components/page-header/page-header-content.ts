@@ -14,7 +14,6 @@ import { classMap } from 'lit/directives/class-map.js';
 import { property, state } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import styles from './page-header.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Page header content.
@@ -23,8 +22,9 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  *   See https://github.com/carbon-design-system/carbon/issues/21926
  * @element cds-page-header-content
  */
-@customElement(`${prefix}-page-header-content`)
 class CDSPageHeaderContent extends LitElement {
+  static is = `${prefix}-page-header-content`;
+
   /**
    * Set to `true` if there are contextual actions
    */

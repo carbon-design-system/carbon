@@ -10,7 +10,6 @@ import { property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { prefix } from '../../globals/settings';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import styles from './card.scss?lit';
 
 /**
@@ -23,8 +22,9 @@ import styles from './card.scss?lit';
  * @slot title-end - Trailing icon/content.
  * @slot description - Rich description rendered below the title (overrides `description` attr).
  */
-@customElement(`${prefix}-card-title`)
 class CDSCardTitle extends LitElement {
+  static is = `${prefix}-card-title`;
+
   /**
    * Enable truncation on the title text row.
    */

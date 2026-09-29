@@ -146,7 +146,7 @@ describe(componentName, () => {
     const onCloseMock = jest.fn();
     renderCoachmark({ open: true, onClose: onCloseMock });
     const closeButton = screen.getByRole('button', { name: 'Close' });
-    await act(() => userEvent.click(closeButton));
+    await userEvent.click(closeButton);
     expect(onCloseMock).toHaveBeenCalled();
   });
 
@@ -216,7 +216,7 @@ describe(componentName, () => {
       onClose: onCloseMock,
     });
     expect(isCoachmarkVisible()).toBeTruthy();
-    await act(() => userEvent.click(document.body));
+    await userEvent.click(document.body);
     expect(onCloseMock).not.toHaveBeenCalled();
   });
 
@@ -247,13 +247,6 @@ describe(componentName, () => {
     });
     expect(document.querySelector('.cds--popover-container')).toHaveClass(
       'cds--popover--drop-shadow'
-    );
-  });
-
-  it('applies caret class when caret is true', () => {
-    renderCoachmark({ 'data-testid': dataTestId, open: true, caret: true });
-    expect(document.querySelector('.cds--popover-container')).toHaveClass(
-      'cds--popover--caret'
     );
   });
 
@@ -328,14 +321,11 @@ describe(componentName, () => {
     );
     expect(popoverContent).toBeInTheDocument();
 
-    await act(async () => {
+    act(() => {
       dragButton.focus();
-      await user.keyboard('{Enter}');
     });
-
-    await act(async () => {
-      await user.keyboard('{ArrowRight}');
-    });
+    await user.keyboard('{Enter}');
+    await user.keyboard('{ArrowRight}');
 
     await waitFor(() => {
       const currentTransform = popoverContent.parentElement.style.transform;

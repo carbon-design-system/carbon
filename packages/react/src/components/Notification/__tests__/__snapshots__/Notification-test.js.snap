@@ -7,13 +7,6 @@ exports[`ActionableNotification should render 1`] = `
     class="cds--actionable-notification cds--actionable-notification--toast cds--actionable-notification--error"
     role="alertdialog"
   >
-    <span
-      class="cds--visually-hidden"
-      role="link"
-      tabindex="0"
-    >
-      Focus sentinel
-    </span>
     <div
       class="cds--actionable-notification__focus-wrapper"
     >
@@ -84,13 +77,6 @@ exports[`ActionableNotification should render 1`] = `
         </button>
       </div>
     </div>
-    <span
-      class="cds--visually-hidden"
-      role="link"
-      tabindex="0"
-    >
-      Focus sentinel
-    </span>
   </div>
 </DocumentFragment>
 `;

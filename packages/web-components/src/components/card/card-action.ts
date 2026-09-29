@@ -8,7 +8,6 @@
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import styles from './card.scss?lit';
 
 /**
@@ -19,8 +18,9 @@ import styles from './card.scss?lit';
  * @element cds-card-action
  * @slot - Default slot for a button or icon-button.
  */
-@customElement(`${prefix}-card-action`)
 class CDSCardAction extends LitElement {
+  static is = `${prefix}-card-action`;
+
   /**
    * Label shown in the overflow menu when this action is hidden.
    * If omitted, cds-card-actions resolves the label from the inner button.

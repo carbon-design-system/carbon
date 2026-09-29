@@ -11,7 +11,6 @@ import { prefix } from '../../globals/settings';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import { selectorTabbable } from '../../globals/settings';
 import { dateTimeFormat } from '@carbon/utilities';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { consume } from '@lit/context';
 import { dateTimeLocaleContext } from './date-time-context';
 import styles from './notification.scss?lit';
@@ -37,8 +36,9 @@ const dateTimeStyle = 'long' as DateTimeStyles;
  *   The custom event is fired when a notification is clicked or when the Enter key is pressed on it.
  * @fires cds-notification-dismiss - The custom event is fired when the notification is closed by a user gesture.
  */
-@customElement(`${prefix}-notification`)
 class CDSNotification extends HostListenerMixin(LitElement) {
+  static is = `${prefix}-notification`;
+
   /**
    * Sets the type of notification to display: 'error', 'warning', 'success', or 'informational'
    */

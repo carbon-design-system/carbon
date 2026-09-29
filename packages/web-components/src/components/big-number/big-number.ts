@@ -8,7 +8,6 @@
 import { LitElement, html, nothing } from 'lit';
 import { property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import type { CarbonIcon } from '../../globals/internal/icon-loader-utils';
 import ArrowUp16 from '@carbon/icons/es/arrow--up/16';
@@ -35,8 +34,9 @@ const blockClass = `${prefix}--big-number`;
  * @slot trending-icon - Displays an icon indicating trend direction. Can be customized to show a downward arrow when the trend is not upward.
  * @slot icon-button - Displays an icon button next to `value`.
  */
-@customElement(`${prefix}-big-number`)
 class CDSBigNumber extends LitElement {
+  static is = `${prefix}-big-number`;
+
   @property({ type: Number, attribute: 'fraction-digits', reflect: true })
   fractionDigits = 1;
 

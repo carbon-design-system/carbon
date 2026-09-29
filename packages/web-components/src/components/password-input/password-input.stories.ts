@@ -8,7 +8,7 @@
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import './index';
-import '../form/form-item';
+import '../form/index';
 import '../icon-button';
 import {
   INPUT_SIZE,

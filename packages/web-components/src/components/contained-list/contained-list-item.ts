@@ -10,7 +10,6 @@ import { property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { prefix } from '../../globals/settings';
 import styles from './contained-list.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Contained list item.
@@ -21,8 +20,9 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  * @slot action - The action slot for interactive elements
  * @fires cds-contained-list-item-click - Fires when clickable item is clicked
  */
-@customElement(`${prefix}-contained-list-item`)
 class CDSContainedListItem extends LitElement {
+  static is = `${prefix}-contained-list-item`;
+
   /**
    * Whether this item is clickable
    */

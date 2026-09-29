@@ -14,7 +14,6 @@ import { prefix } from '../../globals/settings';
 import getLoadingIcon from '../loading/loading-icon';
 import { INLINE_LOADING_STATE } from './defs';
 import styles from './inline-loading.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { iconLoader } from '../../globals/internal/icon-loader';
 
 export { INLINE_LOADING_STATE };
@@ -25,8 +24,9 @@ export { INLINE_LOADING_STATE };
  * @element cds-inline-loading
  * @fires cds-inline-loading-onsuccess The custom event fired when inline-loading has finished status
  */
-@customElement(`${prefix}-inline-loading`)
 class CDSInlineLoading extends LitElement {
+  static is = `${prefix}-inline-loading`;
+
   /**
    * @deprecated The 'assistive-text' property will be deprecated in the next major release. Please use `icon-description` instead.
    */

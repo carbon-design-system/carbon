@@ -5,13 +5,38 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './card';
-import './card-header';
-import './card-body';
-import './card-footer';
-import './card-media';
-import './card-header-media';
-import './card-title';
-import './card-title-media';
-import './card-actions';
-import './card-action';
+import { defineCustomElement } from '../../globals/register';
+import CDSCard from './card';
+import CDSCardHeader from './card-header';
+import CDSCardBody from './card-body';
+import CDSCardFooter from './card-footer';
+import CDSCardMedia from './card-media';
+import CDSCardHeaderMedia from './card-header-media';
+import CDSCardTitle from './card-title';
+import CDSCardTitleMedia from './card-title-media';
+import CDSCardActions from './card-actions';
+import CDSCardAction from './card-action';
+
+export {
+  CDSCard,
+  CDSCardHeader,
+  CDSCardBody,
+  CDSCardFooter,
+  CDSCardMedia,
+  CDSCardHeaderMedia,
+  CDSCardTitle,
+  CDSCardTitleMedia,
+  CDSCardActions,
+  CDSCardAction,
+};
+
+defineCustomElement(CDSCard);
+defineCustomElement(CDSCardHeader);
+defineCustomElement(CDSCardBody);
+defineCustomElement(CDSCardFooter);
+defineCustomElement(CDSCardMedia);
+defineCustomElement(CDSCardHeaderMedia);
+defineCustomElement(CDSCardTitle);
+defineCustomElement(CDSCardTitleMedia);
+defineCustomElement(CDSCardActions);
+defineCustomElement(CDSCardAction);

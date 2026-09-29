@@ -5,8 +5,23 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './interstitial-screen';
-import './interstitial-screen-header';
-import './interstitial-screen-body';
-import './interstitial-screen-body-item';
-import './interstitial-screen-footer';
+import { defineCustomElement } from '../../globals/register';
+import CDSInterstitialScreen from './interstitial-screen';
+import CDSInterstitialScreenHeader from './interstitial-screen-header';
+import CDSInterstitialScreenBody from './interstitial-screen-body';
+import CDSInterstitialScreenBodyItem from './interstitial-screen-body-item';
+import CDSInterstitialScreenFooter from './interstitial-screen-footer';
+
+export {
+  CDSInterstitialScreen,
+  CDSInterstitialScreenHeader,
+  CDSInterstitialScreenBody,
+  CDSInterstitialScreenBodyItem,
+  CDSInterstitialScreenFooter,
+};
+
+defineCustomElement(CDSInterstitialScreen);
+defineCustomElement(CDSInterstitialScreenHeader);
+defineCustomElement(CDSInterstitialScreenBody);
+defineCustomElement(CDSInterstitialScreenBodyItem);
+defineCustomElement(CDSInterstitialScreenFooter);

@@ -5,4 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './menu-button';
+import { defineCustomElement } from '../../globals/register';
+import '../button/index';
+import '../menu/index';
+import CDSMenuButton from './menu-button';
+
+export { CDSMenuButton };
+
+defineCustomElement(CDSMenuButton);

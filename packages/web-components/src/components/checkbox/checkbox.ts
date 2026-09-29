@@ -11,11 +11,12 @@ import { LitElement, html } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
-import FormMixin from '../../globals/mixins/form';
+import FormAssociatedMixin, {
+  type FormValue,
+} from '../../globals/mixins/form-associated';
 import styles from './checkbox.scss?lit';
 import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
 import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { iconLoader } from '../../globals/internal/icon-loader';
 
 /**
@@ -26,8 +27,9 @@ import { iconLoader } from '../../globals/internal/icon-loader';
  * @csspart input The checkbox.
  * @csspart label The label.
  */
-@customElement(`${prefix}-checkbox`)
-class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
+class CDSCheckbox extends FormAssociatedMixin(FocusMixin(LitElement)) {
+  static is = `${prefix}-checkbox`;
+
   @query('input')
   protected _checkboxNode!: HTMLInputElement;
 
@@ -66,6 +68,41 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
     if (!disabled && checked) {
       formData.append(name, value);
     }
+  }
+
+  /**
+   * A checkbox contributes its `value` only while checked, defaulting to `on`
+   * the way a native checkbox does.
+   */
+  _getFormValue(): FormValue {
+    if (this.disabled || !this.checked) {
+      return null;
+    }
+    return this.value ?? 'on';
+  }
+
+  /**
+   * The restorable state is the check, not the value — an unchecked
+   * checkbox submits nothing, so the value alone cannot describe it.
+   */
+  _getFormState(): FormValue {
+    return String(this.checked);
+  }
+
+  /**
+   * Restores the default checked state, which the content attributes define.
+   */
+  formResetCallback() {
+    this.checked = this._formDefaults?.checked ?? false;
+    this.indeterminate = this._formDefaults?.indeterminate ?? false;
+    this._syncFormValue();
+  }
+
+  /**
+   * Restores checkedness the browser preserved across a session restore.
+   */
+  formStateRestoreCallback(state: FormValue) {
+    this.checked = state === 'true';
   }
 
   /**

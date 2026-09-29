@@ -5,6 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './tooltip';
-import './tooltip-content';
-import './definition-tooltip';
+import { defineCustomElement } from '../../globals/register';
+import CDSTooltip from './tooltip';
+import CDSTooltipContent from './tooltip-content';
+import CDSDefinitionTooltip from './definition-tooltip';
+
+export { CDSTooltip, CDSTooltipContent, CDSDefinitionTooltip };
+
+defineCustomElement(CDSTooltip);
+defineCustomElement(CDSTooltipContent);
+defineCustomElement(CDSDefinitionTooltip);

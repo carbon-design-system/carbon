@@ -14,7 +14,6 @@ import { classMap } from 'lit/directives/class-map.js';
 import { prefix } from '../../globals/settings';
 import { property } from 'lit/decorators.js';
 import styles from './page-header.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Page header Breadcrumb Bar.
@@ -23,8 +22,9 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  *   See https://github.com/carbon-design-system/carbon/issues/21926
  * @element cds-page-header-breadcrumb
  */
-@customElement(`${prefix}-page-header-breadcrumb`)
 class CDSPageHeaderBreadcrumb extends LitElement {
+  static is = `${prefix}-page-header-breadcrumb`;
+
   /**
    * Specify if breadcrumb bar has bottom border.
    */

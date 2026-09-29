@@ -1616,7 +1616,11 @@ describe('PageHeader', () => {
       });
 
       // The overflow menu button is always present; verify hidden item label appears in DOM
-      expect(screen.getByLabelText('More page actions')).toBeInTheDocument();
+      expect(
+        screen.getByLabelText('More page actions', {
+          selector: '[aria-label="More page actions"]',
+        })
+      ).toBeInTheDocument();
       // The OverflowMenuItem for the hidden action renders its text into the list
       expect(screen.getByText('Delete')).toBeInTheDocument();
     });
@@ -1759,11 +1763,7 @@ describe('PageHeader', () => {
 
       const collapseBtn = screen.getByLabelText('Collapse');
       expect(collapseBtn).toBeInTheDocument();
-      // Click Collapse → covers !isFullyCollapsed branch in handleScroller (lines 47-52)
-      // Use async act to ensure floating-ui tooltip state updates are flushed
-      await act(async () => {
-        await userEvent.click(collapseBtn);
-      });
+      await userEvent.click(collapseBtn);
     });
   });
 
@@ -1817,9 +1817,7 @@ describe('PageHeader', () => {
           expect(screen.getByLabelText('Expand')).toBeInTheDocument();
         });
 
-        await act(async () => {
-          await userEvent.click(screen.getByLabelText('Expand'));
-        });
+        await userEvent.click(screen.getByLabelText('Expand'));
 
         expect(scrollToMock).toHaveBeenCalledWith(
           expect.objectContaining({ top: 0 })
@@ -1841,10 +1839,7 @@ describe('PageHeader', () => {
         </PageHeader.Root>
       );
       const btn = screen.getByLabelText('Collapse');
-      // Wrap in async act so floating-ui tooltip state updates are flushed
-      await act(async () => {
-        await userEvent.click(btn);
-      });
+      await userEvent.click(btn);
       // No scroll should have been attempted
       expect(true).toBe(true);
     });

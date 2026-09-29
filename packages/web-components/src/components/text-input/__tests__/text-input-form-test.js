@@ -6,16 +6,16 @@
  */
 
 import { expect, fixture, html } from '@open-wc/testing';
-import '@carbon/web-components/es/components/text-input/next/index.js';
+import '@carbon/web-components/es/components/text-input/index.js';
 
 const entries = (form) =>
   [...new FormData(form)].map(([k, v]) => `${k}=${v}`).join('|');
 
-describe('cds-preview-text-input', function () {
+describe('cds-text-input form association', function () {
   it('should submit its value', async () => {
     const form = await fixture(
       html`<form>
-        <cds-preview-text-input name="a" value="v"></cds-preview-text-input>
+        <cds-text-input name="a" value="v"></cds-text-input>
       </form>`
     );
 
@@ -25,8 +25,7 @@ describe('cds-preview-text-input', function () {
   it('should submit nothing when disabled', async () => {
     const form = await fixture(
       html`<form>
-        <cds-preview-text-input name="a" value="v" disabled>
-        </cds-preview-text-input>
+        <cds-text-input name="a" value="v" disabled> </cds-text-input>
       </form>`
     );
 
@@ -36,7 +35,7 @@ describe('cds-preview-text-input', function () {
   it('should submit exactly one entry, not one per mechanism', async () => {
     const form = await fixture(
       html`<form>
-        <cds-preview-text-input name="a" value="v"></cds-preview-text-input>
+        <cds-text-input name="a" value="v"></cds-text-input>
       </form>`
     );
 
@@ -46,10 +45,10 @@ describe('cds-preview-text-input', function () {
   it('should submit under a name set as a property', async () => {
     const form = await fixture(
       html`<form>
-        <cds-preview-text-input value="v"></cds-preview-text-input>
+        <cds-text-input value="v"></cds-text-input>
       </form>`
     );
-    const el = form.querySelector('cds-preview-text-input');
+    const el = form.querySelector('cds-text-input');
     el.name = 'viaProperty';
 
     // `setFormValue()` reads the `name` content attribute, and Lit reflects
@@ -60,10 +59,10 @@ describe('cds-preview-text-input', function () {
   it('should keep the submitted value in step synchronously', async () => {
     const form = await fixture(
       html`<form>
-        <cds-preview-text-input name="a" value="orig"></cds-preview-text-input>
+        <cds-text-input name="a" value="orig"></cds-text-input>
       </form>`
     );
-    form.querySelector('cds-preview-text-input').value = 'typed';
+    form.querySelector('cds-text-input').value = 'typed';
 
     // no await — a native control is never stale
     expect(entries(form)).to.equal('a=typed');
@@ -72,10 +71,10 @@ describe('cds-preview-text-input', function () {
   it('should appear in form.elements', async () => {
     const form = await fixture(
       html`<form>
-        <cds-preview-text-input name="a"></cds-preview-text-input>
+        <cds-text-input name="a"></cds-text-input>
       </form>`
     );
-    const el = form.querySelector('cds-preview-text-input');
+    const el = form.querySelector('cds-text-input');
 
     expect([...form.elements]).to.include(el);
     expect(el.form).to.equal(form);
@@ -85,22 +84,22 @@ describe('cds-preview-text-input', function () {
     const form = await fixture(
       html`<form>
         <label for="ti" id="lbl">Label</label>
-        <cds-preview-text-input id="ti" name="a"></cds-preview-text-input>
+        <cds-text-input id="ti" name="a"></cds-text-input>
       </form>`
     );
 
     expect(form.querySelector('#lbl').control).to.equal(
-      form.querySelector('cds-preview-text-input')
+      form.querySelector('cds-text-input')
     );
   });
 
   it('should restore the default value on form.reset()', async () => {
     const form = await fixture(
       html`<form>
-        <cds-preview-text-input name="a" value="orig"></cds-preview-text-input>
+        <cds-text-input name="a" value="orig"></cds-text-input>
       </form>`
     );
-    const el = form.querySelector('cds-preview-text-input');
+    const el = form.querySelector('cds-text-input');
     el.value = 'typed';
     // `value` reflects, so let the attribute update before resetting — otherwise
     // the reset reads a stale attribute and passes for the wrong reason.
@@ -117,7 +116,7 @@ describe('cds-preview-text-input', function () {
     const form = await fixture(
       html`<form>
         <fieldset disabled>
-          <cds-preview-text-input name="a" value="v"></cds-preview-text-input>
+          <cds-text-input name="a" value="v"></cds-text-input>
         </fieldset>
       </form>`
     );
@@ -128,10 +127,10 @@ describe('cds-preview-text-input', function () {
   it('should block submission when required and empty', async () => {
     const form = await fixture(
       html`<form>
-        <cds-preview-text-input name="a" required></cds-preview-text-input>
+        <cds-text-input name="a" required></cds-text-input>
       </form>`
     );
-    const el = form.querySelector('cds-preview-text-input');
+    const el = form.querySelector('cds-text-input');
 
     expect(el.validity.valueMissing).to.be.true;
     expect(form.checkValidity()).to.be.false;
@@ -145,10 +144,10 @@ describe('cds-preview-text-input', function () {
   it('should restore a value from formStateRestoreCallback', async () => {
     const form = await fixture(
       html`<form>
-        <cds-preview-text-input name="a" value="orig"></cds-preview-text-input>
+        <cds-text-input name="a" value="orig"></cds-text-input>
       </form>`
     );
-    const el = form.querySelector('cds-preview-text-input');
+    const el = form.querySelector('cds-text-input');
 
     el.formStateRestoreCallback('restored', 'restore');
 
@@ -156,9 +155,9 @@ describe('cds-preview-text-input', function () {
   });
 });
 
-describe('cds-preview-text-input downstream compatibility', function () {
+describe('cds-text-input downstream compatibility', function () {
   it('should hand a subclass the internals instead of failing silently', async () => {
-    const Base = customElements.get('cds-preview-text-input');
+    const Base = customElements.get('cds-text-input');
     class Subclassed extends Base {
       constructor() {
         super();

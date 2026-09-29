@@ -8,15 +8,15 @@
 import { LitElement, html } from 'lit';
 import { prefix } from '../../globals/settings';
 import styles from './tabs.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Skeleton of tab.
  *
  * @element cds-tab-skeleton
  */
-@customElement(`${prefix}-tab-skeleton`)
 export default class CDSTabSkeleton extends LitElement {
+  static is = `${prefix}-tab-skeleton`;
+
   render() {
     return html`
       <div class="${prefix}--tabs__nav-link">

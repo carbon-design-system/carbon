@@ -13,7 +13,6 @@ import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import styles from './page-header.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Page header Content Text.
@@ -22,8 +21,9 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  *   See https://github.com/carbon-design-system/carbon/issues/21926
  * @element cds-page-header-content-text
  */
-@customElement(`${prefix}-page-header-content-text`)
 class CDSPageHeaderContentText extends LitElement {
+  static is = `${prefix}-page-header-content-text`;
+
   /**
    * Subtitle text of the page-header-content
    */

@@ -8,7 +8,6 @@
 import { adoptStyles, html, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import '../button/button';
 import { CHAT_BUTTON_SIZE, CHAT_BUTTON_KIND } from './defs';
 import buttonStyles from '../button/button.scss?lit';
@@ -22,8 +21,9 @@ export { CHAT_BUTTON_SIZE, CHAT_BUTTON_KIND };
  * @element cds-chat-button
  *
  */
-@customElement(`${prefix}-chat-button`)
 class CDSChatButton extends LitElement {
+  static is = `${prefix}-chat-button`;
+
   /**
    * `true` if there is an icon.
    */

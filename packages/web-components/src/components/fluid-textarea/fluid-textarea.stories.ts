@@ -8,7 +8,7 @@
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import './index';
-import '../toggle-tip/toggletip';
+import '../toggle-tip/index';
 import { withLayers } from '../../../.storybook/decorators/with-layers';
 
 const args = {

@@ -6,7 +6,6 @@
  */
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
 
 import { error403SVG } from './assets/error403SVG';
@@ -37,8 +36,9 @@ const errorData = {
  *
  * @element cds-full-page-error
  */
-@customElement(elementName)
 class CDSFullPageError extends LitElement {
+  static is = elementName;
+
   static styles = styles;
 
   /**

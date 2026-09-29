@@ -12,7 +12,6 @@ import { prefix } from '../../globals/settings';
 import { CHAT_BUTTON_SIZE } from './defs';
 import buttonStyles from '../button/button.scss?lit';
 import styles from './chat-button.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 export { CHAT_BUTTON_SIZE };
 /**
@@ -20,8 +19,9 @@ export { CHAT_BUTTON_SIZE };
  *
  * @element cds-chat-button-skeleton
  */
-@customElement(`${prefix}-chat-button-skeleton`)
 class CDSChatButtonSkeleton extends LitElement {
+  static is = `${prefix}-chat-button-skeleton`;
+
   /**
    * Specify the size of the `ChatButtonSkeleton`, from the following list of sizes: 'sm', 'md', 'lg'
    */

@@ -5,4 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './full-page-error';
+import { defineCustomElement } from '../../globals/register';
+import CDSFullPageError from './full-page-error';
+
+export { CDSFullPageError };
+
+defineCustomElement(CDSFullPageError);

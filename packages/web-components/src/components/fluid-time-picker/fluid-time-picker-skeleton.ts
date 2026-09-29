@@ -8,7 +8,6 @@
 import { html, LitElement } from 'lit';
 import { classMap } from 'lit/directives/class-map.js';
 import { property } from 'lit/decorators.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
 import styles from './fluid-time-picker.scss?lit';
 import '../fluid-text-input/fluid-text-input-skeleton';
@@ -19,8 +18,9 @@ import '../fluid-select/fluid-select-skeleton';
  *
  * @element cds-fluid-time-picker-skeleton
  */
-@customElement(`${prefix}-fluid-time-picker-skeleton`)
 class CDSFluidTimePickerSkeleton extends LitElement {
+  static is = `${prefix}-fluid-time-picker-skeleton`;
+
   /**
    * Specify if there are only two TimePicker elements.
    */

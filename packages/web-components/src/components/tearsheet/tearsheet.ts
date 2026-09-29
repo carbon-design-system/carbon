@@ -16,7 +16,6 @@ import { prefix } from '../../globals/settings';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import { selectorTabbable } from '../../globals/settings';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import '../button/index';
 import '../layer/index';
 import '../button/button-set-base';
@@ -94,8 +93,9 @@ function tryFocusElems(elems: NodeListOf<HTMLElement>, reverse: boolean) {
  *   Cancellation of this event stops the user-initiated action of closing this tearsheet.
  * @fires cds-tearsheet-closed - The custom event fired after this tearsheet is closed upon a user gesture.
  */
-@customElement(`${prefix}-tearsheet`)
 class CDSTearsheet extends HostListenerMixin(LitElement) {
+  static is = `${prefix}-tearsheet`;
+
   /**
    * The element that had focus before this tearsheet gets open.
    */

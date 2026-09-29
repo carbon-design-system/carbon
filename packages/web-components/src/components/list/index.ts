@@ -5,6 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './list-item';
-import './ordered-list';
-import './unordered-list';
+import { defineCustomElement } from '../../globals/register';
+import CDSListItem from './list-item';
+import CDSOrderedList from './ordered-list';
+import CDSUnorderedList from './unordered-list';
+
+export { CDSListItem, CDSOrderedList, CDSUnorderedList };
+
+defineCustomElement(CDSListItem);
+defineCustomElement(CDSOrderedList);
+defineCustomElement(CDSUnorderedList);

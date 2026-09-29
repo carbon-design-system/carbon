@@ -29,7 +29,7 @@ import '../fluid-select/index';
 import '../fluid-search/index';
 import '../fluid-dropdown/index';
 import '../fluid-combo-box/index';
-import '../combo-box/combo-box-item';
+import '../combo-box/index';
 import '../fluid-multi-select/index';
 import '../fluid-date-picker/index';
 

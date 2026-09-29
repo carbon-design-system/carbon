@@ -7,7 +7,6 @@
 
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
 import styles from './password-input.scss?lit';
 
@@ -16,8 +15,9 @@ import styles from './password-input.scss?lit';
  *
  * Skeleton of password input.
  */
-@customElement(`${prefix}-password-input-skeleton`)
 class CDSPasswordInputSkeleton extends LitElement {
+  static is = `${prefix}-password-input-skeleton`;
+
   /**
    * Specify whether the label should be hidden, or not
    */

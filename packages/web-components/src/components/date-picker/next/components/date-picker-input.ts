@@ -20,7 +20,6 @@ import styles from './date-picker.scss?lit';
 import Calendar16 from '@carbon/icons/es/calendar/16.js';
 import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
 import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
-import { carbonElement as customElement } from '../../../../globals/decorators/carbon-element';
 import { iconLoader } from '../../../../globals/internal/icon-loader';
 
 export { DATE_PICKER_INPUT_COLOR_SCHEME, DATE_PICKER_INPUT_KIND };
@@ -30,8 +29,9 @@ export { DATE_PICKER_INPUT_COLOR_SCHEME, DATE_PICKER_INPUT_KIND };
  *
  * @element cds-preview-date-picker-input
  */
-@customElement(`${prefix}-preview-date-picker-input`)
 class CDSDatePickerInput extends FocusMixin(LitElement) {
+  static is = `${prefix}-preview-date-picker-input`;
+
   /**
    * `true` if there is an AI Label.
    */

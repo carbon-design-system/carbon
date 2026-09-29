@@ -10,15 +10,15 @@ import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import styles from './ai-skeleton.scss?lit';
 import '../skeleton-text/skeleton-text';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * AI skeleton text.
  *
  * @element cds-ai-skeleton-text
  */
-@customElement(`${prefix}-ai-skeleton-text`)
 class CDSAISkeletonText extends LitElement {
+  static is = `${prefix}-ai-skeleton-text`;
+
   /**
    * Generates skeleton text at a larger size.
    */

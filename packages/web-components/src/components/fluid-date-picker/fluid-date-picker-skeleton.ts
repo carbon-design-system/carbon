@@ -9,7 +9,6 @@ import { prefix } from '../../globals/settings';
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import Calendar16 from '@carbon/icons/es/calendar/16.js';
 import styles from './fluid-date-picker.scss?lit';
@@ -19,8 +18,9 @@ import styles from './fluid-date-picker.scss?lit';
  *
  * @element cds-fluid-date-picker-skeleton
  */
-@customElement(`${prefix}-fluid-date-picker-skeleton`)
 class CDSFluidDatePickerSkeleton extends LitElement {
+  static is = `${prefix}-fluid-date-picker-skeleton`;
+
   @property({ reflect: true, attribute: 'date-picker-type' })
   datePickerType: 'simple' | 'single' | 'range' = 'single';
 

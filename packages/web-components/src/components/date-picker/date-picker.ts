@@ -30,7 +30,6 @@ import rangePlugin from './range-plugin';
 import shadowDOMEventPlugin from './shadow-dom-events-plugin';
 import stateHandshakePlugin from './state-handshake-plugin';
 import styles from './date-picker.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Date picker modes.
@@ -72,8 +71,9 @@ flatpickr!.l10ns!.en!.weekdays.shorthand.forEach((_day, index) => {
  * @fires cds-date-picker-flatpickr-error
  *   The name of the custom event when Flatpickr throws an error.
  */
-@customElement(`${prefix}-date-picker`)
 class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
+  static is = `${prefix}-date-picker`;
+
   /**
    * The slotted `<cds-date-input kind="from">`.
    */

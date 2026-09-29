@@ -5,4 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './coachmark-tagline';
+import { defineCustomElement } from '../../../globals/register';
+import CDSCoachmarkTagline from './coachmark-tagline';
+
+export { CDSCoachmarkTagline };
+
+defineCustomElement(CDSCoachmarkTagline);

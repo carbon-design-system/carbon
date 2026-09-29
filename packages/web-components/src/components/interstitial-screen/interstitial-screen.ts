@@ -10,7 +10,6 @@ import { property, query, state } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import '../modal/index';
 import HostListenerMixin from '../../globals/mixins/host-listener';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import HostListener from '../../globals/decorators/host-listener';
 
 import styles from './interstitial-screen.scss?lit';
@@ -44,10 +43,11 @@ export type disableButtonConfigType = {
 
  */
 
-@customElement(`${prefix}-interstitial-screen`)
 class CDSInterstitialScreen extends SignalWatcher(
   HostListenerMixin(LitElement)
 ) {
+  static is = `${prefix}-interstitial-screen`;
+
   /**
    * Specifies whether the component is shown as a full-screen
    * experience, else it is shown as a modal by default.

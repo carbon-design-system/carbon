@@ -1085,7 +1085,7 @@ const ComboBox = forwardRef(
               type="text"
               tabIndex={0}
               aria-haspopup="listbox"
-              title={textInput?.current?.value}
+              title={textInput?.current?.value || undefined}
               {...getInputProps({
                 'aria-label': titleText
                   ? undefined

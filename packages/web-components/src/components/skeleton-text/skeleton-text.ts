@@ -11,7 +11,6 @@ import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import { SKELETON_TEXT_TYPE } from './defs';
 import styles from './skeleton-text.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 export { SKELETON_TEXT_TYPE };
 
@@ -25,8 +24,9 @@ function getRandomInt(min: number, max: number, n: number) {
  *
  * @element cds-skeleton-text
  */
-@customElement(`${prefix}-skeleton-text`)
 class CDSSkeletonText extends LitElement {
+  static is = `${prefix}-skeleton-text`;
+
   /**
    * Specify optional classes to be added to your SkeletonText
    */

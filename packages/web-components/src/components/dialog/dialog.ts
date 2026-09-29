@@ -11,7 +11,6 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { prefix } from '../../globals/settings';
 import HostListener from '../../globals/decorators/host-listener';
 import styles from './dialog.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import CDSModalBase from '../modal/modal-base';
 
 /**
@@ -25,8 +24,9 @@ import CDSModalBase from '../modal/modal-base';
  *   Cancellation of this event stops the user-initiated action of closing this dialog.
  * @fires cds-dialog-closed - The custom event fired after this dialog is closed upon a user gesture.
  */
-@customElement(`${prefix}-dialog`)
 class CDSDialog extends CDSModalBase {
+  static is = `${prefix}-dialog`;
+
   /**
    * Reference to the native dialog element
    */

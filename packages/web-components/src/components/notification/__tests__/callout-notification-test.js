@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import '@carbon/web-components/es/components/notification/index.js';
 import CDSCalloutNotification from '@carbon/web-components/es/components/notification/callout-notification.js';
-import '@carbon/web-components/es/components/notification/actionable-notification-button.js';
 import { expect, fixture } from '@open-wc/testing';
 
 const prefix = 'cds';

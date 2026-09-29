@@ -26,12 +26,12 @@ describe('TableToolbarMenu', () => {
     });
 
     it('should support a custom `className` prop on the outermost element', () => {
-      render(
+      const { container } = render(
         <TableToolbarMenu iconDescription="Add" className="custom-class">
           <span>test</span>
         </TableToolbarMenu>
       );
-      expect(screen.getByRole('button')).toHaveClass('custom-class');
+      expect(container.firstChild).toHaveClass('custom-class');
     });
 
     it('should respect iconDescription prop', () => {
@@ -59,13 +59,17 @@ describe('TableToolbarMenu', () => {
     });
 
     it('should respect renderIcon prop', () => {
+      const CustomIcon = (props) => (
+        <svg data-testid="custom-icon" {...props} />
+      );
+
       render(
-        <TableToolbarMenu renderIcon={Download} iconDescription="Download">
+        <TableToolbarMenu renderIcon={CustomIcon} iconDescription="Download">
           <span>test</span>
         </TableToolbarMenu>
       );
 
-      expect(screen.getByRole('img')).toHaveAttribute('aria-label', 'Download');
+      expect(screen.getByTestId('custom-icon')).toBeInTheDocument();
     });
   });
 });

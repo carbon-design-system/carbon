@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import './index';
 import { html } from 'lit';
 import { enabled } from '@carbon/feature-flags';
 import { OVERFLOW_MENU_SIZE } from './overflow-menu';

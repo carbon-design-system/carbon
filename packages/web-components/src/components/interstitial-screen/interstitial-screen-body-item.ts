@@ -8,7 +8,6 @@
 import { html, LitElement, PropertyValues } from 'lit';
 import { prefix } from '../../globals/settings';
 import HostListenerMixin from '../../globals/mixins/host-listener';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 import styles from './interstitial-screen-body-item.scss?lit';
 import { property } from 'lit/decorators.js';
@@ -22,8 +21,9 @@ import { registerFocusableContainers } from '../../utilities/manageFocusTrap/man
  * interstitial-screen-body-item for body children
  * @element cds-interstitial-screen-body-item
  */
-@customElement(`${prefix}-interstitial-screen-body-item`)
 class CDSInterstitialScreenBodyItem extends HostListenerMixin(LitElement) {
+  static is = `${prefix}-interstitial-screen-body-item`;
+
   /**
    * This will serve the labels for each step
    */

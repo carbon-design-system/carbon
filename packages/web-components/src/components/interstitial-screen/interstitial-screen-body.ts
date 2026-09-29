@@ -9,7 +9,6 @@ import { LitElement, html } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import HostListenerMixin from '../../globals/mixins/host-listener';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import styles from './interstitial-screen-body.scss?lit';
 import { InitCarousel, initCarousel } from '@carbon/utilities';
 import { ref, createRef } from 'lit/directives/ref.js';
@@ -27,10 +26,11 @@ const blockClass = `${prefix}--interstitial-screen`;
  * @fires cds-on-before-step-change - The name of the custom event fired at the start of  the step change.
  * @fires cds-on-after-step-change -  The name of the custom event fired at the end of  the step change.
  */
-@customElement(`${prefix}-interstitial-screen-body`)
 class CDSInterstitialScreenBody extends SignalWatcher(
   HostListenerMixin(LitElement)
 ) {
+  static is = `${prefix}-interstitial-screen-body`;
+
   @property({ reflect: true })
   slot = 'body';
 

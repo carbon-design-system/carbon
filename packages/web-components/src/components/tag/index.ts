@@ -5,8 +5,23 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './tag';
-import './dismissible-tag';
-import './tag-skeleton';
-import './selectable-tag';
-import './operational-tag';
+import { defineCustomElement } from '../../globals/register';
+import CDSTag from './tag';
+import CDSDismissibleTag from './dismissible-tag';
+import CDSTagSkeleton from './tag-skeleton';
+import CDSSelectableTag from './selectable-tag';
+import CDSOperationalTag from './operational-tag';
+
+export {
+  CDSTag,
+  CDSDismissibleTag,
+  CDSTagSkeleton,
+  CDSSelectableTag,
+  CDSOperationalTag,
+};
+
+defineCustomElement(CDSTag);
+defineCustomElement(CDSDismissibleTag);
+defineCustomElement(CDSTagSkeleton);
+defineCustomElement(CDSSelectableTag);
+defineCustomElement(CDSOperationalTag);

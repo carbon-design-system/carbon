@@ -6,7 +6,7 @@
  */
 
 import { expect, fixture, html } from '@open-wc/testing';
-import '@carbon/web-components/es/components/fluid-time-picker/fluid-time-picker-skeleton.js';
+import '@carbon/web-components/es/components/fluid-time-picker/index.js';
 
 describe('cds-fluid-time-picker-skeleton', () => {
   describe('renders as expected - Component API', () => {

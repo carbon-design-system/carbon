@@ -44,6 +44,9 @@ export const elementOrParentIsFloatingMenu = (
   if (node instanceof Element && typeof node.closest === 'function') {
     const allSelectorsFloatingMenus = [
       `.${prefix}--overflow-menu-options`,
+      // The `Menu`-based v12 `OverflowMenu`, `MenuButton`, and `ComboButton`
+      // all render their menu through this class.
+      `.${prefix}--menu`,
       `.${prefix}--tooltip`,
       '.flatpickr-calendar',
       ...selectorsFloatingMenus,

@@ -61,7 +61,8 @@ const FormAssociatedMixin = <T extends Constructor<HTMLElement>>(
     _syncValidity(): void;
     _validationAnchor(): HTMLElement | undefined;
     _handleFormdata(event: Event): void;
-    updated(changed: Map<PropertyKey, unknown>): void;
+    _applyFieldsetDisabledState(): void;
+    update(changed: Map<PropertyKey, unknown>): void;
     readonly form: HTMLFormElement | null;
     readonly labels: NodeList;
     readonly validity: ValidityState;
@@ -108,9 +109,9 @@ const FormAssociatedMixin = <T extends Constructor<HTMLElement>>(
      * Marks the element as a form-associated custom element.
      *
      * Read by the browser once, at `customElements.define()`. It cannot be
-     * toggled per instance or after registration, which is why form
-     * association is under separate `cds-preview-*` tags rather than behind
-     * a runtime feature flag.
+     * toggled per instance or after registration. Canonical form components
+     * set this in v3. Date picker still ships form association under
+     * `cds-preview-*` until that component's rewrite replaces the v2 tag.
      */
     static formAssociated = true;
 
@@ -313,10 +314,13 @@ const FormAssociatedMixin = <T extends Constructor<HTMLElement>>(
      * reach shadow content on its own — a shadow `<input>` inside a disabled
      * `<fieldset>` stays focusable and editable — so the rendered control is
      * disabled here to match what the platform does for a built-in.
+     *
+     * Called from `formDisabledCallback` so the inner control is disabled in
+     * the same turn the fieldset changes, and from `update()` so a render that
+     * created the control (or rebound `disabled` from the host) is corrected
+     * even when a subclass skips `super.updated()`.
      */
-    updated(changed: Map<PropertyKey, unknown>) {
-      // @ts-expect-error -- `updated` comes from LitElement.
-      super.updated(changed);
+    _applyFieldsetDisabledState() {
       const controls = this.shadowRoot?.querySelectorAll<HTMLInputElement>(
         'input, select, textarea, button'
       );
@@ -334,12 +338,16 @@ const FormAssociatedMixin = <T extends Constructor<HTMLElement>>(
       if (this._fieldsetDisabledControls.size === 0) {
         return;
       }
-      // Re-rendering does not undo this: the template binds the element's own
-      // `disabled`, which never changed, so Lit sees no change to apply.
       this._fieldsetDisabledControls.forEach((control) => {
         control.disabled = false;
       });
       this._fieldsetDisabledControls.clear();
+    }
+
+    update(changed: Map<PropertyKey, unknown>) {
+      // @ts-expect-error -- `update` comes from LitElement.
+      super.update(changed);
+      this._applyFieldsetDisabledState();
     }
 
     /**
@@ -398,6 +406,7 @@ const FormAssociatedMixin = <T extends Constructor<HTMLElement>>(
       // attribute, and the browser already excludes a fieldset-disabled
       // control from submission without help.
       this._fieldsetDisabled = disabled;
+      this._applyFieldsetDisabledState();
       this.requestUpdate();
     }
 

@@ -8,7 +8,6 @@
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import styles from './structured-list.scss?lit';
 
 /**
@@ -16,8 +15,9 @@ import styles from './structured-list.scss?lit';
  *
  * @element cds-structured-list-header-row
  */
-@customElement(`${prefix}-structured-list-header-row`)
 class CDSStructuredListHeaderRow extends LitElement {
+  static is = `${prefix}-structured-list-header-row`;
+
   /**
    * The `name` attribute for the `<input>` for selection.
    * If present, this structured list header row will show its selectable version of the UI.

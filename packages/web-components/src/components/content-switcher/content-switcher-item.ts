@@ -12,15 +12,15 @@ import { property, query } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import styles from './content-switcher.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Content switcher button.
  *
  * @element cds-content-switcher-item
  */
-@customElement(`${prefix}-content-switcher-item`)
 class CDSContentSwitcherItem extends FocusMixin(LitElement) {
+  static is = `${prefix}-content-switcher-item`;
+
   /**
    * `true` if this content switcher item should be disabled.
    */

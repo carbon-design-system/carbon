@@ -5,5 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './tree-node';
-import './tree-view';
+import { defineCustomElement } from '../../globals/register';
+import CDSTreeNode from './tree-node';
+import CDSTreeView from './tree-view';
+
+export { CDSTreeNode, CDSTreeView };
+
+defineCustomElement(CDSTreeNode);
+defineCustomElement(CDSTreeView);

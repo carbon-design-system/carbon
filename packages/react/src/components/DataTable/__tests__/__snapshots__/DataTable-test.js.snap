@@ -13,7 +13,7 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
       >
         <h2
           class="cds--data-table-header__title"
-          id="tc-_r_80_-title"
+          id="tc-_r_90_-title"
         >
           DataTable with selection
         </h2>
@@ -23,7 +23,7 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
       class="cds--data-table-content"
     >
       <table
-        aria-labelledby="tc-_r_80_-title"
+        aria-labelledby="tc-_r_90_-title"
         class="cds--data-table cds--data-table--lg"
       >
         <thead>
@@ -205,7 +205,7 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
       >
         <h2
           class="cds--data-table-header__title"
-          id="tc-_r_7n_-title"
+          id="tc-_r_8n_-title"
         >
           DataTable with selection
         </h2>
@@ -215,7 +215,7 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
       class="cds--data-table-content"
     >
       <table
-        aria-labelledby="tc-_r_7n_-title"
+        aria-labelledby="tc-_r_8n_-title"
         class="cds--data-table cds--data-table--lg"
       >
         <thead>
@@ -397,7 +397,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
       >
         <h2
           class="cds--data-table-header__title"
-          id="tc-_r_34_-title"
+          id="tc-_r_3i_-title"
         >
           DataTable with selection
         </h2>
@@ -599,11 +599,11 @@ exports[`DataTable behaves as expected selection should render and match snapsho
             </svg>
           </button>
         </div>
-        <span
-          class="cds--overflow-menu__wrapper"
+        <div
+          class="cds--toolbar-action cds--overflow-menu cds--overflow-menu__container cds--autoalign"
         >
           <span
-            class="cds--popover-container cds--popover--caret cds--popover--high-contrast cds--popover--top cds--tooltip cds--icon-tooltip"
+            class="cds--popover-container cds--popover--high-contrast cds--popover--auto-align cds--autoalign cds--popover--top cds--tooltip cds--icon-tooltip"
           >
             <div
               class="cds--tooltip-trigger__wrapper"
@@ -611,18 +611,17 @@ exports[`DataTable behaves as expected selection should render and match snapsho
               <button
                 aria-expanded="false"
                 aria-haspopup="true"
-                aria-labelledby="tooltip-_r_3d_"
-                class="cds--toolbar-action cds--overflow-menu cds--overflow-menu cds--btn cds--btn--ghost cds--btn--icon-only"
+                aria-labelledby="tooltip-_r_3t_"
+                class="cds--overflow-menu cds--btn cds--btn--ghost cds--btn--icon-only"
                 type="button"
               >
                 <svg
-                  aria-label="Settings"
+                  aria-hidden="true"
                   class="cds--overflow-menu__icon"
                   fill="currentColor"
                   focusable="false"
                   height="16"
                   preserveAspectRatio="xMidYMid meet"
-                  role="img"
                   viewBox="0 0 16 16"
                   width="16"
                   xmlns="http://www.w3.org/2000/svg"
@@ -639,20 +638,21 @@ exports[`DataTable behaves as expected selection should render and match snapsho
             <span
               aria-hidden="true"
               class="cds--popover"
-              id="tooltip-_r_3d_"
+              id="tooltip-_r_3t_"
               role="tooltip"
             >
               <span
                 class="cds--popover-content cds--tooltip-content"
+                style="position: fixed; left: 0px; top: 0px; visibility: visible; transform: translate(0px, 0px);"
               >
                 Settings
+                <span
+                  class="cds--popover-caret cds--popover--auto-align"
+                />
               </span>
-              <span
-                class="cds--popover-caret"
-              />
             </span>
           </span>
-        </span>
+        </div>
         <button
           class="cds--btn cds--btn--sm cds--layout--size-sm cds--btn--primary"
           type="button"
@@ -665,7 +665,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
       class="cds--data-table-content"
     >
       <table
-        aria-labelledby="tc-_r_34_-title"
+        aria-labelledby="tc-_r_3i_-title"
         class="cds--data-table cds--data-table--lg"
       >
         <thead>
@@ -859,7 +859,7 @@ exports[`DataTable renders as expected - Component API should render and match s
       >
         <h2
           class="cds--data-table-header__title"
-          id="tc-_r_e_-title"
+          id="tc-_r_g_-title"
         >
           DataTable with toolbar
         </h2>
@@ -1049,11 +1049,11 @@ exports[`DataTable renders as expected - Component API should render and match s
             </svg>
           </button>
         </div>
-        <span
-          class="cds--overflow-menu__wrapper"
+        <div
+          class="cds--toolbar-action cds--overflow-menu cds--overflow-menu__container cds--autoalign"
         >
           <span
-            class="cds--popover-container cds--popover--caret cds--popover--high-contrast cds--popover--top cds--tooltip cds--icon-tooltip"
+            class="cds--popover-container cds--popover--high-contrast cds--popover--auto-align cds--autoalign cds--popover--top cds--tooltip cds--icon-tooltip"
           >
             <div
               class="cds--tooltip-trigger__wrapper"
@@ -1061,18 +1061,17 @@ exports[`DataTable renders as expected - Component API should render and match s
               <button
                 aria-expanded="false"
                 aria-haspopup="true"
-                aria-labelledby="tooltip-_r_m_"
-                class="cds--toolbar-action cds--overflow-menu cds--overflow-menu cds--btn cds--btn--ghost cds--btn--icon-only"
+                aria-labelledby="tooltip-_r_q_"
+                class="cds--overflow-menu cds--btn cds--btn--ghost cds--btn--icon-only"
                 type="button"
               >
                 <svg
-                  aria-label="Settings"
+                  aria-hidden="true"
                   class="cds--overflow-menu__icon"
                   fill="currentColor"
                   focusable="false"
                   height="16"
                   preserveAspectRatio="xMidYMid meet"
-                  role="img"
                   viewBox="0 0 16 16"
                   width="16"
                   xmlns="http://www.w3.org/2000/svg"
@@ -1089,20 +1088,21 @@ exports[`DataTable renders as expected - Component API should render and match s
             <span
               aria-hidden="true"
               class="cds--popover"
-              id="tooltip-_r_m_"
+              id="tooltip-_r_q_"
               role="tooltip"
             >
               <span
                 class="cds--popover-content cds--tooltip-content"
+                style="position: fixed; left: 0px; top: 0px; visibility: visible; transform: translate(0px, 0px);"
               >
                 Settings
+                <span
+                  class="cds--popover-caret cds--popover--auto-align"
+                />
               </span>
-              <span
-                class="cds--popover-caret"
-              />
             </span>
           </span>
-        </span>
+        </div>
         <button
           class="cds--btn cds--btn--sm cds--layout--size-sm cds--btn--primary"
           type="button"
@@ -1115,7 +1115,7 @@ exports[`DataTable renders as expected - Component API should render and match s
       class="cds--data-table-content"
     >
       <table
-        aria-labelledby="tc-_r_e_-title"
+        aria-labelledby="tc-_r_g_-title"
         class="cds--data-table cds--data-table--lg cds--data-table--visible-overflow-menu"
       >
         <thead>

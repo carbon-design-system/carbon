@@ -5,14 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import './index';
 import { html } from 'lit';
 import { enabled } from '@carbon/feature-flags';
 import './breadcrumb';
 import './breadcrumb-item';
 import './breadcrumb-link';
 import './breadcrumb-overflow-menu';
-import '../overflow-menu/overflow-menu-body';
-import '../overflow-menu/overflow-menu-item';
 import '../overflow-menu/index';
 import '../menu/index';
 import './breadcrumb-skeleton';

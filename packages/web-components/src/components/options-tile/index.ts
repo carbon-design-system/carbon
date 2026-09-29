@@ -5,4 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './options-tile';
+import { defineCustomElement } from '../../globals/register';
+import CDSOptionsTile from './options-tile';
+
+export { CDSOptionsTile };
+
+defineCustomElement(CDSOptionsTile);

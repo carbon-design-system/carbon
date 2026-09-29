@@ -11,13 +11,13 @@ import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import { SEARCH_SIZE } from './defs';
 import styles from './search.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Skeleton of search.
  */
-@customElement(`${prefix}-search-skeleton`)
 class CDSSearchSkeleton extends LitElement {
+  static is = `${prefix}-search-skeleton`;
+
   /**
    * The search skeleton size.
    */

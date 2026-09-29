@@ -5,65 +5,65 @@
  * LICENSE file in the root directory of this source tree.
  */
 import { expect, fixture } from '@open-wc/testing';
-import '@carbon/web-components/es/components/checkbox/next/index.js';
-import '@carbon/web-components/es/components/text-input/next/index.js';
-import '@carbon/web-components/es/components/textarea/next/index.js';
-import '@carbon/web-components/es/components/number-input/next/index.js';
-import '@carbon/web-components/es/components/password-input/next/index.js';
-import '@carbon/web-components/es/components/select/next/index.js';
-import '@carbon/web-components/es/components/dropdown/next/index.js';
-import '@carbon/web-components/es/components/radio-button/next/index.js';
-import '@carbon/web-components/es/components/search/next/index.js';
-import '@carbon/web-components/es/components/slider/next/index.js';
-import '@carbon/web-components/es/components/multi-select/next/index.js';
-import '@carbon/web-components/es/components/combo-box/next/index.js';
-import '@carbon/web-components/es/components/time-picker/next/index.js';
+import '@carbon/web-components/es/components/checkbox/index.js';
+import '@carbon/web-components/es/components/text-input/index.js';
+import '@carbon/web-components/es/components/textarea/index.js';
+import '@carbon/web-components/es/components/number-input/index.js';
+import '@carbon/web-components/es/components/password-input/index.js';
+import '@carbon/web-components/es/components/select/index.js';
+import '@carbon/web-components/es/components/dropdown/index.js';
+import '@carbon/web-components/es/components/radio-button/index.js';
+import '@carbon/web-components/es/components/search/index.js';
+import '@carbon/web-components/es/components/slider/index.js';
+import '@carbon/web-components/es/components/multi-select/index.js';
+import '@carbon/web-components/es/components/combo-box/index.js';
+import '@carbon/web-components/es/components/time-picker/index.js';
 import '@carbon/web-components/es/components/date-picker/next/index.js';
-import '@carbon/web-components/es/components/fluid-text-input/next/index.js';
-import '@carbon/web-components/es/components/fluid-search/next/index.js';
-import '@carbon/web-components/es/components/fluid-select/next/index.js';
-import '@carbon/web-components/es/components/fluid-dropdown/next/index.js';
-import '@carbon/web-components/es/components/fluid-combo-box/next/index.js';
-import '@carbon/web-components/es/components/fluid-multi-select/next/index.js';
-import '@carbon/web-components/es/components/fluid-time-picker/next/index.js';
+import '@carbon/web-components/es/components/fluid-text-input/index.js';
+import '@carbon/web-components/es/components/fluid-search/index.js';
+import '@carbon/web-components/es/components/fluid-select/index.js';
+import '@carbon/web-components/es/components/fluid-dropdown/index.js';
+import '@carbon/web-components/es/components/fluid-combo-box/index.js';
+import '@carbon/web-components/es/components/fluid-multi-select/index.js';
+import '@carbon/web-components/es/components/fluid-time-picker/index.js';
 import '@carbon/web-components/es/components/fluid-date-picker/next/index.js';
 
 const entries = (form) =>
   [...new FormData(form)].map(([k, v]) => `${k}=${v}`).join('|');
 
 /**
- * all form-associated preview components must pass
+ * all form-associated components must pass
  */
 const TAGS = [
-  { tag: 'cds-preview-text-input', value: 'v' },
-  { tag: 'cds-preview-textarea', value: 'v' },
-  { tag: 'cds-preview-number-input', value: '3' },
-  { tag: 'cds-preview-password-input', value: 'v' },
-  { tag: 'cds-preview-select', value: 'v' },
-  { tag: 'cds-preview-dropdown', value: 'v' },
-  { tag: 'cds-preview-radio-button-group', value: 'v' },
-  { tag: 'cds-preview-search', value: 'v' },
-  { tag: 'cds-preview-slider', value: '3' },
+  { tag: 'cds-text-input', value: 'v' },
+  { tag: 'cds-textarea', value: 'v' },
+  { tag: 'cds-number-input', value: '3' },
+  { tag: 'cds-password-input', value: 'v' },
+  { tag: 'cds-select', value: 'v' },
+  { tag: 'cds-dropdown', value: 'v' },
+  { tag: 'cds-radio-button-group', value: 'v' },
+  { tag: 'cds-search', value: 'v' },
+  { tag: 'cds-slider', value: '3' },
   {
-    tag: 'cds-preview-combo-box',
+    tag: 'cds-combo-box',
     value: 'v',
     children: '<cds-combo-box-item value="v">V</cds-combo-box-item>',
   },
-  { tag: 'cds-preview-time-picker', value: 'v' },
-  { tag: 'cds-preview-time-picker-select', value: 'v' },
+  { tag: 'cds-time-picker', value: 'v' },
+  { tag: 'cds-time-picker-select', value: 'v' },
   { tag: 'cds-preview-date-picker', value: 'v' },
-  { tag: 'cds-preview-fluid-text-input', value: 'v' },
-  { tag: 'cds-preview-fluid-search', value: 'v' },
-  { tag: 'cds-preview-fluid-select', value: 'v' },
-  { tag: 'cds-preview-fluid-dropdown', value: 'v' },
+  { tag: 'cds-fluid-text-input', value: 'v' },
+  { tag: 'cds-fluid-search', value: 'v' },
+  { tag: 'cds-fluid-select', value: 'v' },
+  { tag: 'cds-fluid-dropdown', value: 'v' },
   {
-    tag: 'cds-preview-fluid-combo-box',
+    tag: 'cds-fluid-combo-box',
     value: 'v',
     children: '<cds-combo-box-item value="v">V</cds-combo-box-item>',
   },
-  { tag: 'cds-preview-fluid-time-picker', value: 'v' },
+  { tag: 'cds-fluid-time-picker', value: 'v' },
   { tag: 'cds-preview-fluid-date-picker', value: 'v' },
-  { tag: 'cds-preview-checkbox', value: 'v', needsChecked: true },
+  { tag: 'cds-checkbox', value: 'v', needsChecked: true },
 ];
 
 describe('FormAssociatedMixin contract', function () {
@@ -191,18 +191,18 @@ describe('FormAssociatedMixin contract', function () {
 });
 
 // `ces-preview-multi-select` derives value from its selection instead of `value`
-describe('cds-preview-multi-select', function () {
+describe('cds-multi-select', function () {
   const one = () =>
     fixture(
-      `<form><cds-preview-multi-select name="m">` +
+      `<form><cds-multi-select name="m">` +
         `<cds-multi-select-item value="a">A</cds-multi-select-item>` +
         `<cds-multi-select-item value="b">B</cds-multi-select-item>` +
-        `</cds-preview-multi-select></form>`
+        `</cds-multi-select></form>`
     );
 
   it('should participate in the form', async () => {
     const form = await one();
-    const el = form.querySelector('cds-preview-multi-select');
+    const el = form.querySelector('cds-multi-select');
 
     expect([...form.elements]).to.include(el);
     expect(el.form).to.equal(form);
@@ -210,7 +210,7 @@ describe('cds-preview-multi-select', function () {
 
   it('should keep the v2 joined wire format, synchronously', async () => {
     const form = await one();
-    form.querySelector('cds-preview-multi-select').value = 'a,b';
+    form.querySelector('cds-multi-select').value = 'a,b';
 
     // one entry with joined value, like v2, otherwise one entry per
     // selection requires API change
@@ -219,14 +219,14 @@ describe('cds-preview-multi-select', function () {
 
   it('should submit exactly one entry', async () => {
     const form = await one();
-    form.querySelector('cds-preview-multi-select').value = 'a';
+    form.querySelector('cds-multi-select').value = 'a';
 
     expect([...new FormData(form)]).to.have.lengthOf(1);
   });
 
   it('should submit nothing when disabled', async () => {
     const form = await one();
-    const el = form.querySelector('cds-preview-multi-select');
+    const el = form.querySelector('cds-multi-select');
     el.value = 'a';
     el.disabled = true;
 
@@ -234,14 +234,13 @@ describe('cds-preview-multi-select', function () {
   });
 });
 
-// test native controls for the preview components in each case and assert
-// they behvae identically
+// test native controls for the form-associated components in each case and assert
+// they behave identically
 const NATIVE_PAIRS = [
   {
     label: 'text input',
     native: '<input name="native" value="orig">',
-    preview:
-      '<cds-preview-text-input name="preview" value="orig"></cds-preview-text-input>',
+    preview: '<cds-text-input name="preview" value="orig"></cds-text-input>',
     edit: (el) => {
       el.value = 'edited';
     },
@@ -251,8 +250,7 @@ const NATIVE_PAIRS = [
   {
     label: 'checkbox',
     native: '<input type="checkbox" name="native" value="v" checked>',
-    preview:
-      '<cds-preview-checkbox name="preview" value="v" checked></cds-preview-checkbox>',
+    preview: '<cds-checkbox name="preview" value="v" checked></cds-checkbox>',
     edit: (el) => {
       el.checked = false;
     },
@@ -337,7 +335,7 @@ describe('parity with native form controls', function () {
           }
           const form = await fixture(
             `<form><input name="native" required>` +
-              `<cds-preview-text-input name="preview" required></cds-preview-text-input></form>`
+              `<cds-text-input name="preview" required></cds-text-input></form>`
           );
           const [n, p] = both(form);
           await p.updateComplete;

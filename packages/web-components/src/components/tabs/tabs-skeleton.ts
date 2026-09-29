@@ -8,7 +8,6 @@
 import { LitElement, html } from 'lit';
 import { prefix } from '../../globals/settings';
 import styles from './tabs.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { property } from 'lit/decorators.js';
 
 /**
@@ -16,8 +15,9 @@ import { property } from 'lit/decorators.js';
  *
  * @element cds-tabs-skeleton
  */
-@customElement(`${prefix}-tabs-skeleton`)
 export default class CDSTabsSkeleton extends LitElement {
+  static is = `${prefix}-tabs-skeleton`;
+
   /**
    * Provide the type of Tab
    */

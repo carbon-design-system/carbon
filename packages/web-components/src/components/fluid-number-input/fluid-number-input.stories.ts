@@ -5,9 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import './index';
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import '../toggle-tip/toggletip';
+import '../toggle-tip/index';
 import './fluid-number-input';
 import './fluid-number-input-skeleton';
 

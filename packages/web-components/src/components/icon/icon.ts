@@ -8,7 +8,6 @@
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { createIconTemplate } from '../../globals/internal/icon-loader-utils';
 import type { CarbonIcon } from '../../globals/internal/icon-loader-utils';
 
@@ -18,8 +17,9 @@ import type { CarbonIcon } from '../../globals/internal/icon-loader-utils';
  * @element cds-icon
  * @slot - The icon content (for custom SVG)
  */
-@customElement(`${prefix}-icon`)
 class CDSIcon extends LitElement {
+  static is = `${prefix}-icon`;
+
   /**
    * The imported icon
    */

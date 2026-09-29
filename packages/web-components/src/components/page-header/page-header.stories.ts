@@ -9,6 +9,7 @@
  * See https://github.com/carbon-design-system/carbon/issues/21926
  */
 
+import './index';
 import { html } from 'lit';
 
 export const Default = {

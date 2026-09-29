@@ -13,7 +13,6 @@ import { iconLoader } from '../../globals/internal/icon-loader';
 import { forEach } from '../../globals/internal/collection-helpers';
 import FocusMixin from '../../globals/mixins/focus';
 import styles from './side-nav.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Side nav menu.
@@ -32,8 +31,9 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  * @csspart title-icon-container The title icon container.
  * @csspart menu-body The menu body.
  */
-@customElement(`${prefix}-side-nav-menu`)
 class CDSSideNavMenu extends FocusMixin(LitElement) {
+  static is = `${prefix}-side-nav-menu`;
+
   /**
    * `true` if this menu has an icon.
    */

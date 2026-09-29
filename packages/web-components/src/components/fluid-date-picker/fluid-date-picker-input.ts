@@ -8,7 +8,6 @@
 import { prefix } from '../../globals/settings';
 import { html } from 'lit';
 import { property } from 'lit/decorators.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import CDSDatePickerInput from '../date-picker/date-picker-input';
 import styles from './fluid-date-picker.scss?lit';
 
@@ -17,8 +16,9 @@ import styles from './fluid-date-picker.scss?lit';
  *
  * @element cds-fluid-date-picker-input
  */
-@customElement(`${prefix}-fluid-date-picker-input`)
 class CDSFluidDatePickerInput extends CDSDatePickerInput {
+  static is = `${prefix}-fluid-date-picker-input`;
+
   /**
    * Specify whether the control is currently in warning state
    */

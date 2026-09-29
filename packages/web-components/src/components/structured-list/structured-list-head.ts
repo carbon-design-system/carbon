@@ -7,7 +7,6 @@
 
 import { LitElement, html } from 'lit';
 import { prefix } from '../../globals/settings';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import styles from './structured-list.scss?lit';
 
 /**
@@ -15,8 +14,9 @@ import styles from './structured-list.scss?lit';
  *
  * @element cds-structured-list-head
  */
-@customElement(`${prefix}-structured-list-head`)
 class CDSStructuredListHeader extends LitElement {
+  static is = `${prefix}-structured-list-head`;
+
   connectedCallback() {
     if (!this.hasAttribute('role')) {
       this.setAttribute('role', 'rowgroup');

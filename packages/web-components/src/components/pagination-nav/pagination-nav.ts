@@ -8,7 +8,6 @@
 
 import { LitElement, html } from 'lit';
 import { property, state } from 'lit/decorators.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
 import styles from './pagination-nav.scss?lit';
 import { classMap } from 'lit/directives/class-map.js';
@@ -58,8 +57,9 @@ const defaultTranslateWithId = (messageId: TranslationKey): string => {
  * @element cds-pagination-nav
  * @fires cds-page-changed - The custom event fired when the the page has been changed.
  */
-@customElement(`${prefix}-pagination-nav`)
 class CDSPaginationNav extends LitElement {
+  static is = `${prefix}-pagination-nav`;
+
   /**
    * Internal state for items displayed on page
    */

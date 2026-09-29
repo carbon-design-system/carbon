@@ -5,5 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './search';
-import './search-skeleton';
+import { defineCustomElement } from '../../globals/register';
+import CDSSearch from './search';
+import CDSSearchSkeleton from './search-skeleton';
+
+export { CDSSearch, CDSSearchSkeleton };
+
+defineCustomElement(CDSSearch);
+defineCustomElement(CDSSearchSkeleton);

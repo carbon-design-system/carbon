@@ -6,7 +6,7 @@
  */
 
 import { LitElement, html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import styles from './layout.scss?lit';
 import { type LayoutSize } from './layout';
@@ -17,8 +17,9 @@ import { type LayoutSize } from './layout';
  *
  * @element cds-layout-constraint
  */
-@customElement(`${prefix}-layout-constraint`)
 class CDSLayoutConstraint extends LitElement {
+  static is = `${prefix}-layout-constraint`;
+
   static styles = styles;
 
   @property({ attribute: 'size-default', reflect: true })

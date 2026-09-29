@@ -7,7 +7,6 @@
 
 import { LitElement, html } from 'lit';
 import { prefix } from '../../globals/settings';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import styles from './card.scss?lit';
 
 /**
@@ -16,8 +15,9 @@ import styles from './card.scss?lit';
  * @element cds-card-title-media
  * @slot - Default slot for an icon, avatar, or pictogram.
  */
-@customElement(`${prefix}-card-title-media`)
 class CDSCardTitleMedia extends LitElement {
+  static is = `${prefix}-card-title-media`;
+
   render() {
     return html`<div class="${prefix}--card__title-media"><slot></slot></div>`;
   }
