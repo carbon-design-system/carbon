@@ -247,8 +247,14 @@
   //-----------------------------
   // Skeleton
   //-----------------------------
+  .#{$prefix}--label.#{$prefix}--skeleton:has(
+      + .#{$prefix}--skeleton.#{$prefix}--text-input
+    ) {
+    @include skeleton($border-radius: $border-radius-04);
+  }
+
   .#{$prefix}--skeleton.#{$prefix}--text-input {
-    @include skeleton;
+    @include skeleton($border-radius: $border-radius-04);
   }
 
   //-----------------------------

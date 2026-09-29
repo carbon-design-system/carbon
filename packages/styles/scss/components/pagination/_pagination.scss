@@ -7,8 +7,10 @@
 
 @use '../button';
 @use '../select';
+@use '../../border-radius' as *;
 @use '../../layer' as *;
 @use '../../config' as *;
+@use '../../feature-flags' as *;
 @use '../../spacing' as *;
 @use '../../motion' as *;
 @use '../../type' as *;
@@ -43,6 +45,10 @@
     container-type: inline-size;
     inline-size: calc(100% - 1px);
     min-block-size: layout.size('height');
+
+    @if enabled('enable-v12-release') {
+      @include button.radius($border-radius-00);
+    }
 
     // 42rem = 'md' breakpoint
     @container pagination (min-width: 42rem) {
@@ -130,6 +136,35 @@
     .#{$prefix}--select__item-count
     .#{$prefix}--select-input {
     border-inline-end: 1px solid $border-subtle;
+  }
+
+  // Keep pagination fields flush with the bar. Standalone v12 Select/NumberInput
+  // rounded field chrome should not cascade into Pagination.
+  @if enabled('enable-v12-release') {
+    .#{$prefix}--pagination .#{$prefix}--select-input {
+      border: none;
+      border-radius: $border-radius-00;
+      background: transparent;
+      border-block-end: none;
+    }
+
+    .#{$prefix}--pagination
+      .#{$prefix}--select__item-count
+      .#{$prefix}--select-input {
+      border-inline-end: 1px solid $border-subtle;
+    }
+
+    .#{$prefix}--pagination .#{$prefix}--number input[type='number'],
+    .#{$prefix}--pagination .#{$prefix}--number input[type='text'] {
+      border: none;
+      border-radius: $border-radius-00;
+      background-color: transparent;
+      border-block-end: none;
+    }
+
+    .#{$prefix}--pagination .#{$prefix}--number__control-btn {
+      border-radius: $border-radius-00;
+    }
   }
 
   .#{$prefix}--pagination__right {
