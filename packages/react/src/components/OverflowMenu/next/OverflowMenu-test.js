@@ -7,7 +7,9 @@
 
 import React, { act } from 'react';
 import { OverflowMenu } from '.';
+import { OverflowMenu as OverflowMenuWrapper } from '..';
 import { MenuItem } from '../../Menu';
+import { FeatureFlags } from '../../FeatureFlags';
 import { Filter } from '@carbon/icons-react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -115,6 +117,36 @@ describe('OverflowMenu (enable-v12-overflowmenu)', () => {
           two
         </MenuItem>
       </OverflowMenu>
+    );
+
+    const tooltip = screen.getByRole('tooltip');
+    expect(tooltip).toHaveAttribute('aria-hidden', 'false');
+    expect(tooltip).toHaveTextContent('Options');
+
+    const button = screen.getByRole('button');
+    expect(button).toHaveAttribute('tabIndex', '-1');
+
+    const icon = button.querySelector('svg');
+    expect(icon).toHaveAttribute('aria-label', 'filter icon');
+  });
+
+  // TODO: V12 - Remove this test
+  it('should spread extra props on the button element through the wrapper', () => {
+    render(
+      <FeatureFlags enableV12Overflowmenu>
+        <OverflowMenuWrapper
+          label="Options"
+          renderIcon={() => <Filter aria-label="filter icon" />}
+          tabIndex={-1}
+          tooltipDefaultOpen>
+          <MenuItem label="item" className="test-child">
+            one
+          </MenuItem>
+          <MenuItem label="item" className="test-child">
+            two
+          </MenuItem>
+        </OverflowMenuWrapper>
+      </FeatureFlags>
     );
 
     const tooltip = screen.getByRole('tooltip');
