@@ -12,6 +12,10 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 export default {
+  // recycle a worker once it reaches this limit
+  // worker heap grows without it across suites and
+  // CI runners get OOM-killed mid-run
+  workerIdleMemoryLimit: '1GB',
   moduleFileExtensions: ['tsx', 'ts', 'js', 'json', 'node'],
   modulePathIgnorePatterns: ['/build/', '/es/', '/lib/', '/umd/', '/examples/'],
   reporters: ['default'],

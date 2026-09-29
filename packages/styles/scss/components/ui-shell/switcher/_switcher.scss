@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2023
+// Copyright IBM Corp. 2016, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -56,10 +56,12 @@
     color: $text-secondary;
     text-decoration: none;
 
-    &:hover:not(.#{$prefix}--switcher__item-link--selected) {
-      background: $layer-hover;
-      color: $text-primary;
-      cursor: pointer;
+    @media (any-hover: hover) {
+      &:hover:not(.#{$prefix}--switcher__item-link--selected) {
+        background: $layer-hover;
+        color: $text-primary;
+        cursor: pointer;
+      }
     }
 
     &:focus {

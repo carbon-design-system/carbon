@@ -9,13 +9,13 @@
 
 /**
  *
- * DTCG source files (g10.json, g90.json, g100.json) contain nodes that are
- * simultaneously token leaves (they have a `$value`) AND token groups (they
- * have non-`$`-prefixed children).  Style Dictionary v5 does not support this
- * pattern — when a node has `$value`, SD treats it as a leaf token and silently
- * drops any non-`$` children.
+ * The unified themes.json (and previously the individual per-theme files) can
+ * contain nodes that are simultaneously token leaves (they have a `$value`) AND
+ * token groups (they have non-`$`-prefixed children).  Style Dictionary v5 does
+ * not support this pattern — when a node has `$value`, SD treats it as a leaf
+ * token and silently drops any non-`$` children.
  *
- * Example (g10.json):
+ * Example:
  *
  *   background: {
  *     $type:  "color",

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -28,6 +28,17 @@ import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import mdx from './ComposedModal.mdx';
 
+const sharedControls = {
+  controls: {
+    exclude: [
+      'containerClassName',
+      'launcherButtonRef',
+      'selectorPrimaryFocus',
+      'selectorsFloatingMenus',
+    ],
+  },
+};
+
 export default {
   title: 'Components/ComposedModal',
   component: ComposedModal,
@@ -40,36 +51,70 @@ export default {
     docs: {
       page: mdx,
     },
-    controls: {
-      exclude: [
-        'containerClassName',
-        'launcherButtonRef',
-        'selectorPrimaryFocus',
-        'selectorsFloatingMenus',
-      ],
+    ...sharedControls,
+  },
+  argTypes: {
+    danger: { control: 'boolean' },
+    isFullWidth: { control: 'boolean' },
+    size: { control: 'radio', options: ['xs', 'sm', 'md', 'lg'] },
+    preventCloseOnClickOutside: { control: 'boolean' },
+    'aria-label': { control: 'text' },
+    selectorPrimaryFocus: { control: 'text' },
+    label: { control: 'text' },
+    title: { control: 'text' },
+    iconDescription: { control: 'text' },
+    primaryButtonText: { control: 'text' },
+    secondaryButtonText: { control: 'text' },
+    primaryButtonDisabled: { control: 'boolean' },
+    loadingStatus: {
+      control: 'select',
+      options: ['inactive', 'active', 'finished', 'error'],
     },
+    loadingDescription: { control: 'text' },
+    loadingIconDescription: { control: 'text' },
+    onClose: { action: 'onClose' },
+    onKeyDown: { action: 'onKeyDown' },
   },
-};
-
-const sharedArgTypes = {
-  onClose: {
-    action: 'onClose',
-  },
-  onKeyDown: {
-    action: 'onKeyDown',
+  args: {
+    danger: false,
+    isFullWidth: false,
+    size: null,
+    preventCloseOnClickOutside: false,
+    'aria-label': 'Composed Modal',
+    label: 'Account resources',
+    title: 'Add a custom domain',
+    iconDescription: 'Close the modal',
+    primaryButtonText: 'Add',
+    secondaryButtonText: 'Cancel',
+    primaryButtonDisabled: false,
+    loadingStatus: 'inactive',
+    loadingDescription: 'Deleting...',
+    loadingIconDescription: 'Loading',
   },
 };
 
 export const Default = (args) => {
   const [open, setOpen] = useState(true);
+  const {
+    iconDescription = 'Close the modal',
+    label = 'Account resources',
+    title = 'Add a custom domain',
+    primaryButtonText = 'Add',
+    secondaryButtonText = 'Cancel',
+    primaryButtonDisabled = false,
+    loadingStatus = 'inactive',
+    loadingDescription,
+    loadingIconDescription,
+    ...modalArgs
+  } = args;
   return (
     <>
       <Button onClick={() => setOpen(true)}>Launch composed modal</Button>
-      <ComposedModal {...args} open={open} onClose={() => setOpen(false)}>
+      <ComposedModal {...modalArgs} open={open} onClose={() => setOpen(false)}>
         <ModalHeader
-          label="Account resources"
-          title="Add a custom domain"
-          {...args}
+          label={label}
+          title={title}
+          iconDescription={iconDescription}
         />
         <ModalBody>
           <p style={{ marginBottom: '1rem' }}>
@@ -90,26 +135,44 @@ export const Default = (args) => {
           </Select>
         </ModalBody>
         <ModalFooter
-          primaryButtonText="Add"
-          secondaryButtonText="Cancel"
-          {...args}
+          primaryButtonText={primaryButtonText}
+          secondaryButtonText={secondaryButtonText}
+          primaryButtonDisabled={primaryButtonDisabled}
+          loadingStatus={loadingStatus}
+          loadingDescription={loadingDescription}
+          loadingIconDescription={loadingIconDescription}
         />
       </ComposedModal>
     </>
   );
 };
 
-Default.argTypes = { ...sharedArgTypes };
-
-export const FullWidth = () => {
+export const FullWidth = (args) => {
   const [open, setOpen] = useState(true);
+  const {
+    iconDescription = 'Close the modal',
+    label = 'An example of a modal with no padding',
+    title = 'Full Width Modal',
+    primaryButtonText = 'Add',
+    secondaryButtonText = 'Cancel',
+    primaryButtonDisabled = false,
+    loadingStatus = 'inactive',
+    loadingDescription,
+    loadingIconDescription,
+    ...modalArgs
+  } = args;
   return (
     <>
       <Button onClick={() => setOpen(true)}>Launch composed modal</Button>
-      <ComposedModal open={open} onClose={() => setOpen(false)} isFullWidth>
+      <ComposedModal
+        {...modalArgs}
+        open={open}
+        onClose={() => setOpen(false)}
+        isFullWidth>
         <ModalHeader
-          label="An example of a modal with no padding"
-          title="Full Width Modal"
+          label={label}
+          title={title}
+          iconDescription={iconDescription}
         />
         <ModalBody>
           <StructuredListWrapper>
@@ -160,27 +223,85 @@ export const FullWidth = () => {
             </StructuredListBody>
           </StructuredListWrapper>
         </ModalBody>
-        <ModalFooter primaryButtonText="Add" secondaryButtonText="Cancel" />
+        <ModalFooter
+          primaryButtonText={primaryButtonText}
+          secondaryButtonText={secondaryButtonText}
+          primaryButtonDisabled={primaryButtonDisabled}
+          loadingStatus={loadingStatus}
+          loadingDescription={loadingDescription}
+          loadingIconDescription={loadingIconDescription}
+        />
       </ComposedModal>
     </>
   );
 };
 
-export const PassiveModal = () => {
+FullWidth.args = {
+  isFullWidth: true,
+  label: 'An example of a modal with no padding',
+  title: 'Full Width Modal',
+};
+FullWidth.argTypes = {
+  isFullWidth: {
+    control: 'boolean',
+    table: {
+      readonly: true,
+    },
+  },
+};
+
+export const PassiveModal = (args) => {
   const [open, setOpen] = useState(true);
+  const {
+    iconDescription = 'Close the modal',
+    label,
+    title = 'You have been successfully signed out',
+    ...modalArgs
+  } = args;
   return (
     <>
       <Button onClick={() => setOpen(true)}>Launch composed modal</Button>
-      <ComposedModal open={open} onClose={() => setOpen(false)}>
-        <ModalHeader title="You have been successfully signed out" />
+      <ComposedModal {...modalArgs} open={open} onClose={() => setOpen(false)}>
+        <ModalHeader
+          label={label}
+          title={title}
+          iconDescription={iconDescription}
+        />
         <ModalBody />
       </ComposedModal>
     </>
   );
 };
 
-export const WithStateManager = () => {
+PassiveModal.args = {
+  title: 'You have been successfully signed out',
+};
+PassiveModal.parameters = {
+  controls: {
+    include: [
+      'aria-label',
+      'preventCloseOnClickOutside',
+      'size',
+      'title',
+      'iconDescription',
+    ],
+  },
+};
+
+export const WithStateManager = (args) => {
   const button = React.useRef();
+  const {
+    iconDescription = 'Close the modal',
+    label = 'Account resources',
+    title = 'Add a custom domain',
+    primaryButtonText = 'Add',
+    secondaryButtonText = 'Cancel',
+    primaryButtonDisabled = false,
+    loadingStatus = 'inactive',
+    loadingDescription,
+    loadingIconDescription,
+    ...modalArgs
+  } = args;
 
   /**
    * Simple state manager for modals.
@@ -211,12 +332,17 @@ export const WithStateManager = () => {
       )}>
       {({ open, setOpen }) => (
         <ComposedModal
+          {...modalArgs}
           open={open}
           onClose={() => {
             setOpen(false);
           }}
           launcherButtonRef={button}>
-          <ModalHeader label="Account resources" title="Add a custom domain" />
+          <ModalHeader
+            label={label}
+            title={title}
+            iconDescription={iconDescription}
+          />
           <ModalBody>
             <p style={{ marginBottom: '1rem' }}>
               Custom domains direct requests for your apps in this Cloud Foundry
@@ -235,20 +361,43 @@ export const WithStateManager = () => {
               <SelectItem value="us-east" text="US East" />
             </Select>
           </ModalBody>
-          <ModalFooter primaryButtonText="Add" secondaryButtonText="Cancel" />
+          <ModalFooter
+            primaryButtonText={primaryButtonText}
+            secondaryButtonText={secondaryButtonText}
+            primaryButtonDisabled={primaryButtonDisabled}
+            loadingStatus={loadingStatus}
+            loadingDescription={loadingDescription}
+            loadingIconDescription={loadingIconDescription}
+          />
         </ComposedModal>
       )}
     </ModalStateManager>
   );
 };
 
-export const WithScrollingContent = () => {
+export const WithScrollingContent = (args) => {
   const [open, setOpen] = useState(true);
+  const {
+    iconDescription = 'Close the modal',
+    label = 'Account resources',
+    title = 'Add a custom domain',
+    primaryButtonText = 'Add',
+    secondaryButtonText = 'Cancel',
+    primaryButtonDisabled = false,
+    loadingStatus = 'inactive',
+    loadingDescription,
+    loadingIconDescription,
+    ...modalArgs
+  } = args;
   return (
     <>
       <Button onClick={() => setOpen(true)}>Launch composed modal</Button>
-      <ComposedModal open={open} onClose={() => setOpen(false)}>
-        <ModalHeader label="Account resources" title="Add a custom domain" />
+      <ComposedModal {...modalArgs} open={open} onClose={() => setOpen(false)}>
+        <ModalHeader
+          label={label}
+          title={title}
+          iconDescription={iconDescription}
+        />
         <ModalBody hasScrollingContent>
           <p style={{ marginBottom: '1rem' }}>
             Custom domains direct requests for your apps in this Cloud Foundry
@@ -309,16 +458,33 @@ export const WithScrollingContent = () => {
             itemToString={(item) => (item ? item.text : '')}
           />
         </ModalBody>
-        <ModalFooter primaryButtonText="Add" secondaryButtonText="Cancel" />
+        <ModalFooter
+          primaryButtonText={primaryButtonText}
+          secondaryButtonText={secondaryButtonText}
+          primaryButtonDisabled={primaryButtonDisabled}
+          loadingStatus={loadingStatus}
+          loadingDescription={loadingDescription}
+          loadingIconDescription={loadingIconDescription}
+        />
       </ComposedModal>
     </>
   );
 };
 
-export const WithInlineLoading = () => {
+export const WithInlineLoading = (args) => {
   const [open, setOpen] = useState(true);
   const [status, setStatus] = useState('inactive');
   const [description, setDescription] = useState('Submitting...');
+  const {
+    iconDescription = 'Close the modal',
+    label = 'Account resources',
+    title = 'Add a custom domain',
+    primaryButtonText = 'Add',
+    secondaryButtonText = 'Cancel',
+    primaryButtonDisabled = false,
+    loadingIconDescription,
+    ...modalArgs
+  } = args;
 
   const fakePromise = () => {
     return new Promise((resolve) => {
@@ -345,8 +511,12 @@ export const WithInlineLoading = () => {
   return (
     <>
       <Button onClick={() => setOpen(true)}>Launch composed modal</Button>
-      <ComposedModal open={open} onClose={() => setOpen(false)}>
-        <ModalHeader label="Account resources" title="Add a custom domain" />
+      <ComposedModal {...modalArgs} open={open} onClose={() => setOpen(false)}>
+        <ModalHeader
+          label={label}
+          title={title}
+          iconDescription={iconDescription}
+        />
         <ModalBody>
           <p style={{ marginBottom: '1rem' }}>
             Custom domains direct requests for your apps in this Cloud Foundry
@@ -366,16 +536,32 @@ export const WithInlineLoading = () => {
           </Select>
         </ModalBody>
         <ModalFooter
-          primaryButtonText="Add"
-          secondaryButtonText="Cancel"
+          primaryButtonText={primaryButtonText}
+          secondaryButtonText={secondaryButtonText}
+          primaryButtonDisabled={primaryButtonDisabled}
           loadingStatus={status}
           loadingDescription={description}
+          loadingIconDescription={loadingIconDescription}
           onRequestSubmit={submit}
           onLoadingSuccess={resetStatus}
         />
       </ComposedModal>
     </>
   );
+};
+
+WithInlineLoading.parameters = {
+  controls: {
+    exclude: [
+      'loadingStatus',
+      'loadingDescription',
+      'loadingIconDescription',
+      'containerClassName',
+      'launcherButtonRef',
+      'selectorPrimaryFocus',
+      'selectorsFloatingMenus',
+    ],
+  },
 };
 
 const aiLabel = (
@@ -410,16 +596,48 @@ const aiLabel = (
 );
 
 export const _withAILabel = {
-  render: () => {
+  args: {
+    label: 'Account resources',
+    title: 'Add a custom domain',
+    primaryButtonText: 'Save',
+  },
+  parameters: {
+    ...sharedControls,
+  },
+  argTypes: {
+    label: { control: 'text' },
+    title: { control: 'text' },
+    primaryButtonText: { control: 'text' },
+    onClose: { action: 'onClose' },
+    onKeyDown: { action: 'onKeyDown' },
+  },
+  render: (args) => {
     const [open, setOpen] = useState(true); // eslint-disable-line
+    const {
+      iconDescription = 'Close the modal',
+      label = 'Account resources',
+      title = 'Add a custom domain',
+      primaryButtonText = 'Save',
+      secondaryButtonText = 'Cancel',
+      primaryButtonDisabled = false,
+      loadingStatus = 'inactive',
+      loadingDescription,
+      loadingIconDescription,
+      ...modalArgs
+    } = args;
     return (
       <div className="ai-label-modal">
         <Button onClick={() => setOpen(true)}>Launch composed modal</Button>
         <ComposedModal
+          {...modalArgs}
           open={open}
           onClose={() => setOpen(false)}
           decorator={aiLabel}>
-          <ModalHeader label="Account resources" title="Add a custom domain" />
+          <ModalHeader
+            label={label}
+            title={title}
+            iconDescription={iconDescription}
+          />
           <ModalBody>
             <p style={{ marginBottom: '1rem' }}>
               Custom domains direct requests for your apps in this Cloud Foundry
@@ -467,8 +685,12 @@ export const _withAILabel = {
           </ModalBody>
 
           <ModalFooter
-            primaryButtonText="Save"
-            secondaryButtons={[{ buttonText: 'Cancel' }]}
+            primaryButtonText={primaryButtonText}
+            secondaryButtonText={secondaryButtonText}
+            primaryButtonDisabled={primaryButtonDisabled}
+            loadingStatus={loadingStatus}
+            loadingDescription={loadingDescription}
+            loadingIconDescription={loadingIconDescription}
           />
         </ComposedModal>
       </div>

@@ -1,4 +1,3 @@
-/* eslint-disable prefer-spread */
 /**
  * Copyright IBM Corp. 2019, 2025
  *
@@ -18,12 +17,17 @@ import './structured-list-cell';
 import './structured-list-header-cell-skeleton';
 
 const defaultArgs = {
+  ariaLabel: 'Service status',
   condensed: false,
   flush: false,
   hasSelection: false,
 };
 
 const controls = {
+  ariaLabel: {
+    control: 'text',
+    description: 'Specify a label for the structured list.',
+  },
   condensed: {
     control: 'boolean',
     description: 'Specify if structured list is condensed, default is false.',
@@ -38,10 +42,33 @@ const controls = {
   },
 };
 
+const selectionRows = [
+  {
+    environment: 'Production',
+    region: 'Frankfurt',
+    purpose: 'Runs customer-facing services',
+  },
+  {
+    environment: 'Staging',
+    region: 'Dallas',
+    purpose: 'Validates releases before deployment',
+  },
+  {
+    environment: 'Development',
+    region: 'London',
+    purpose: 'Supports feature development and integration',
+  },
+  {
+    environment: 'Disaster recovery',
+    region: 'Sydney',
+    purpose: 'Provides a standby recovery environment',
+  },
+];
+
 export const Default = {
   args: defaultArgs,
   argTypes: controls,
-  render: ({ condensed, flush, hasSelection }) => {
+  render: ({ ariaLabel, condensed, flush, hasSelection }) => {
     const selectionName = !hasSelection
       ? undefined
       : 'structured-list-selection';
@@ -54,41 +81,39 @@ export const Default = {
         ];
     return html`
       <cds-structured-list
-      selection-name=${ifDefined(selectionName)}
-      ?condensed=${condensed}
-      ?flush=${flush}>
+        aria-label=${ifDefined(ariaLabel)}
+        selection-name=${ifDefined(selectionName)}
+        ?condensed=${condensed}
+        ?flush=${flush}>
         <cds-structured-list-head>
           <cds-structured-list-header-row>
             <cds-structured-list-header-cell>
-              ColumnA
+              Service
             </cds-structured-list-header-cell>
             <cds-structured-list-header-cell>
-              ColumnB
+              Status
             </cds-structured-list-header-cell>
             <cds-structured-list-header-cell>
-              ColumnC
+              Description
             </cds-structured-list-header-cell>
+          </cds-structured-list-header-row>
         </cds-structured-list-head>
         <cds-structured-list-body>
           <cds-structured-list-row
             selection-value=${ifDefined(selectionValues[0])}>
-            <cds-structured-list-cell>Row 1</cds-structured-list-cell>
-            <cds-structured-list-cell>Row 1</cds-structured-list-cell>
+            <cds-structured-list-cell>API gateway</cds-structured-list-cell>
+            <cds-structured-list-cell>Online</cds-structured-list-cell>
             <cds-structured-list-cell>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
-              magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere
-              sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque
-              vulputate nisl a porttitor interdum.</cds-structured-list-cell>
+              Routes and secures application traffic across environments.
+            </cds-structured-list-cell>
           </cds-structured-list-row>
           <cds-structured-list-row
             selection-value=${ifDefined(selectionValues[1])}>
-            <cds-structured-list-cell>Row 2</cds-structured-list-cell>
-            <cds-structured-list-cell>Row 2</cds-structured-list-cell>
+            <cds-structured-list-cell>Data warehouse</cds-structured-list-cell>
+            <cds-structured-list-cell>Maintenance</cds-structured-list-cell>
             <cds-structured-list-cell>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
-              magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere
-              sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque
-              vulputate nisl a porttitor interdum.</cds-structured-list-cell>
+              Scheduled maintenance begins Friday at 22:00 UTC.
+            </cds-structured-list-cell>
           </cds-structured-list-row>
         </cds-structured-list-body>
       </cds-structured-list>
@@ -97,48 +122,59 @@ export const Default = {
 };
 
 export const Selection = {
-  render: () => {
+  args: {
+    ariaLabel: 'Deployment environments',
+    condensed: false,
+    hasSelection: true,
+  },
+  argTypes: {
+    ariaLabel: controls.ariaLabel,
+    condensed: controls.condensed,
+    hasSelection: {
+      ...controls.hasSelection,
+      table: { readonly: true },
+    },
+  },
+  parameters: {
+    controls: {
+      include: ['ariaLabel', 'condensed'],
+    },
+  },
+  render: ({ ariaLabel, condensed, hasSelection }) => {
     const selectionName = 'structured-list-selection';
-    const selectionValues = [
-      'structured-list-selection-0',
-      'structured-list-selection-1',
-      'structured-list-selection-2',
-      'structured-list-selection-3',
-    ];
 
     return html`
-      <cds-structured-list selection-name=${ifDefined(selectionName)}>
+      <cds-structured-list
+        aria-label=${ifDefined(ariaLabel)}
+        selection-name=${ifDefined(hasSelection ? selectionName : undefined)}
+        ?condensed=${condensed}>
         <cds-structured-list-head>
           <cds-structured-list-header-row>
             <cds-structured-list-header-cell>
-              ColumnA
+              Environment
             </cds-structured-list-header-cell>
             <cds-structured-list-header-cell>
-              ColumnB
+              Region
             </cds-structured-list-header-cell>
             <cds-structured-list-header-cell>
-              ColumnC
+              Purpose
             </cds-structured-list-header-cell>
           </cds-structured-list-header-row>
         </cds-structured-list-head>
         <cds-structured-list-body>
-          ${selectionValues.map(
-            (selectionValue, index) =>
+          ${selectionRows.map(
+            (row, index) =>
               html` <cds-structured-list-row
-                selection-value=${ifDefined(selectionValue)}>
-                <cds-structured-list-cell
-                  >Row ${index}</cds-structured-list-cell
-                >
-                <cds-structured-list-cell
-                  >Row ${index}</cds-structured-list-cell
-                >
+                selection-value=${`structured-list-selection-${index}`}>
                 <cds-structured-list-cell>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-                  dui magna, finibus id tortor sed, aliquet bibendum augue.
-                  Aenean posuere sem vel euismod dignissim. Nulla ut cursus
-                  dolor. Pellentesque vulputate nisl a porttitor
-                  interdum.</cds-structured-list-cell
-                >
+                  ${row.environment}
+                </cds-structured-list-cell>
+                <cds-structured-list-cell>
+                  ${row.region}
+                </cds-structured-list-cell>
+                <cds-structured-list-cell>
+                  ${row.purpose}
+                </cds-structured-list-cell>
               </cds-structured-list-row>`
           )}
         </cds-structured-list-body>
@@ -149,33 +185,43 @@ export const Selection = {
 
 export const Skeleton = {
   decorators: [(story) => html`<div style="width: 800px">${story()}</div>`],
-  render: () => html`
-    ${Array.apply(null, Array(2)).map(
-      () => html`
-        <cds-structured-list>
-          <cds-structured-list-head>
-            <cds-structured-list-header-row>
-              ${Array.apply(null, Array(3)).map(
-                () => html`
-                  <cds-structured-list-header-cell-skeleton>
-                  </cds-structured-list-header-cell-skeleton>
-                `
-              )}
-            </cds-structured-list-header-row>
-          </cds-structured-list-head>
-          <cds-structured-list-body>
-            ${Array.apply(null, Array(5)).map(
-              () =>
-                html`<cds-structured-list-row>
-                  <cds-structured-list-cell></cds-structured-list-cell>
-                  <cds-structured-list-cell></cds-structured-list-cell>
-                  <cds-structured-list-cell></cds-structured-list-cell>
-                </cds-structured-list-row>`
-            )}
-          </cds-structured-list-body>
-        </cds-structured-list>
-      `
-    )}
+  args: {
+    rowCount: 5,
+  },
+  argTypes: {
+    rowCount: {
+      control: { type: 'number', min: 1, max: 10 },
+      description: 'Specify the number of skeleton rows.',
+    },
+  },
+  parameters: {
+    controls: {
+      include: ['rowCount'],
+    },
+  },
+  render: ({ rowCount }) => html`
+    <cds-structured-list>
+      <cds-structured-list-head>
+        <cds-structured-list-header-row>
+          ${Array.from({ length: 3 }).map(
+            () => html`
+              <cds-structured-list-header-cell-skeleton>
+              </cds-structured-list-header-cell-skeleton>
+            `
+          )}
+        </cds-structured-list-header-row>
+      </cds-structured-list-head>
+      <cds-structured-list-body>
+        ${Array.from({ length: rowCount }).map(
+          () =>
+            html`<cds-structured-list-row>
+              <cds-structured-list-cell></cds-structured-list-cell>
+              <cds-structured-list-cell></cds-structured-list-cell>
+              <cds-structured-list-cell></cds-structured-list-cell>
+            </cds-structured-list-row>`
+        )}
+      </cds-structured-list-body>
+    </cds-structured-list>
   `,
 };
 

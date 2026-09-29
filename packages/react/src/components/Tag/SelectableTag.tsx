@@ -83,7 +83,6 @@ export type SelectableTagProps<T extends React.ElementType> = PolymorphicProps<
   SelectableTagBaseProps
 >;
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const SelectableTag = forwardRef(
   <T extends React.ElementType>(
     {
@@ -119,7 +118,12 @@ const SelectableTag = forwardRef(
       const newElement = tagRef.current?.getElementsByClassName(
         `${prefix}--tag__label`
       )[0];
-      setIsEllipsisApplied(isEllipsisActive(newElement));
+      // React 19: setIsEllipsisApplied called synchronously inside
+      // useIsomorphicEffect (= useLayoutEffect) causes setState during commit
+      // → crash. Read the DOM value eagerly (must be synchronous), then defer
+      // only the setState call past the commit boundary via queueMicrotask.
+      const result = isEllipsisActive(newElement);
+      queueMicrotask(() => setIsEllipsisApplied(result));
     }, [prefix, tagRef]);
 
     const tooltipClasses = classNames(
@@ -178,6 +182,7 @@ const SelectableTag = forwardRef(
   }
 );
 
+SelectableTag.displayName = 'SelectableTag';
 SelectableTag.propTypes = {
   /**
    * Provide a custom className that is applied to the containing <span>

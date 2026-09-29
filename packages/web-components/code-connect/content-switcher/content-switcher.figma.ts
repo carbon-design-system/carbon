@@ -1,3 +1,7 @@
+// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=10151-402486&t=LoXqbMLZkoMgbrAS-4
+// source=https://github.com/carbon-design-system/carbon/blob/main/packages/web-components/src/components/content-switcher/content-switcher.ts
+// component=cds-content-switcher
+
 /**
  * Copyright IBM Corp. 2026
  *
@@ -5,55 +9,37 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import figma, { html } from '@figma/code-connect/html';
+import figma from 'figma';
+import {
+  renderBooleanAttribute,
+  renderStringAttribute,
+} from '../template-helpers';
 
-figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=10151-402486&t=LoXqbMLZkoMgbrAS-4',
-  {
-    props: {
-      children: figma.children(['_Content switcher text item']),
-      lowContrast: figma.boolean('Low contrast'),
-      size: figma.enum('Size', {
-        Large: 'lg',
-        Medium: 'md',
-        Small: 'sm',
-      }),
-    },
-    example: (props) =>
-      html`<cds-content-switcher
-        low-contrast=${props.lowContrast}
-        selected-index="0"
-        size=${props.size}>
-        ${props.children}
-      </cds-content-switcher>`,
-    imports: [
-      "import '@carbon/web-components/es/components/content-switcher/index.js'",
-    ],
-  }
-);
+const instance = figma.selectedInstance;
+const itemName = instance.getEnum('Type', { 'Icon only': true })
+  ? '_Content switcher icon item'
+  : '_Content switcher text item';
+const children = instance
+  .findConnectedInstances(
+    (child) => child.name === itemName && child.hasCodeConnect()
+  )
+  .map((child) => child.executeTemplate().example);
+const lowContrast = instance.getBoolean('Low contrast');
+const size = instance.getEnum('Size', {
+  Large: 'lg',
+  Medium: 'md',
+  Small: 'sm',
+});
 
-figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=10151-402486&t=LoXqbMLZkoMgbrAS-4',
-  {
-    variant: { Type: 'Icon only' },
-    props: {
-      children: figma.children(['_Content switcher icon item']),
-      lowContrast: figma.boolean('Low contrast'),
-      size: figma.enum('Size', {
-        Large: 'lg',
-        Medium: 'md',
-        Small: 'sm',
-      }),
-    },
-    example: (props) =>
-      html`<cds-content-switcher
-        low-contrast=${props.lowContrast}
-        selected-index="0"
-        size=${props.size}>
-        ${props.children}
-      </cds-content-switcher>`,
-    imports: [
-      "import '@carbon/web-components/es/components/content-switcher/index.js'",
-    ],
-  }
-);
+export default {
+  id: 'cds-content-switcher',
+  imports: [
+    "import '@carbon/web-components/es/components/content-switcher/index.js'",
+  ],
+  example: figma.code`<cds-content-switcher selected-index="0"${renderBooleanAttribute(
+    'low-contrast',
+    lowContrast
+  )}${renderStringAttribute('size', size)}>
+  ${children}
+</cds-content-switcher>`,
+};

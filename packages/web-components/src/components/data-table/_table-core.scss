@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2024
+// Copyright IBM Corp. 2019, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -350,11 +350,18 @@
 :host(#{$prefix}-table-row[expandable][expanded]),
 :host(#{$prefix}-table-row[selection-name][expandable][expanded]),
 :host(#{$prefix}-table-row[expandable][expanded][highlighted]),
-:host(#{$prefix}-table-row[selection-name][expandable][expanded][highlighted])
-  :host(#{$prefix}-table-row[expandable][expanded]:hover),
-:host(#{$prefix}-table-row[selection-name][expandable][expanded]:hover) {
+:host(#{$prefix}-table-row[selection-name][expandable][expanded][highlighted]) {
   .#{$prefix}--table-expand {
     border-block-end-color: transparent;
+  }
+}
+
+@media (any-hover: hover) {
+  :host(#{$prefix}-table-row[expandable][expanded]:hover),
+  :host(#{$prefix}-table-row[selection-name][expandable][expanded]:hover) {
+    .#{$prefix}--table-expand {
+      border-block-end-color: transparent;
+    }
   }
 }
 
@@ -372,15 +379,24 @@
 :host(#{$prefix}-table-row[expandable][expanded][selected][highlighted]),
 :host(
     #{$prefix}-table-row[selection-name][expandable][expanded][selected][highlighted]
-  ),
-:host(#{$prefix}-table-row[expandable][expanded][selected]:hover),
-:host(
-    #{$prefix}-table-row[selection-name][expandable][expanded][selected]:hover
   ) {
   ::slotted(#{$prefix}-table-cell),
   .#{$prefix}--table-expand,
   .#{$prefix}--table-column-checkbox {
     background-color: $layer-selected-hover;
+  }
+}
+
+@media (any-hover: hover) {
+  :host(#{$prefix}-table-row[expandable][expanded][selected]:hover),
+  :host(
+      #{$prefix}-table-row[selection-name][expandable][expanded][selected]:hover
+    ) {
+    ::slotted(#{$prefix}-table-cell),
+    .#{$prefix}--table-expand,
+    .#{$prefix}--table-column-checkbox {
+      background-color: $layer-selected-hover;
+    }
   }
 }
 
@@ -394,14 +410,25 @@
 }
 
 :host(#{$prefix}-table-row[expandable][highlighted]),
-:host(#{$prefix}-table-row[selection-name][expandable][highlighted]),
-:host(#{$prefix}-table-row[expandable]:hover),
-:host(#{$prefix}-table-row[selection-name][expandable]:hover) {
+:host(#{$prefix}-table-row[selection-name][expandable][highlighted]) {
   &:not([ai-label]) {
     ::slotted(#{$prefix}-table-cell),
     .#{$prefix}--table-expand,
     .#{$prefix}--table-column-checkbox {
       border-block-end-color: $border-subtle;
+    }
+  }
+}
+
+@media (any-hover: hover) {
+  :host(#{$prefix}-table-row[expandable]:hover),
+  :host(#{$prefix}-table-row[selection-name][expandable]:hover) {
+    &:not([ai-label]) {
+      ::slotted(#{$prefix}-table-cell),
+      .#{$prefix}--table-expand,
+      .#{$prefix}--table-column-checkbox {
+        border-block-end-color: $border-subtle;
+      }
     }
   }
 }
@@ -425,9 +452,7 @@
   }
 }
 
-:host(#{$prefix}-table-row[highlighted]),
-:host(#{$prefix}-table-row:hover),
-:host(#{$prefix}-table-expand-row:hover) {
+:host(#{$prefix}-table-row[highlighted]) {
   ::slotted(#{$prefix}-table-cell),
   ::slotted(#{$prefix}-table-cell-skeleton),
   .#{$prefix}--table-expand,
@@ -439,15 +464,41 @@
   }
 }
 
-:host(#{$prefix}-table-row[highlighted]),
-:host(#{$prefix}-table-row[even]:hover),
-:host(#{$prefix}-table-row[odd]:hover) {
+@media (any-hover: hover) {
+  :host(#{$prefix}-table-row:hover),
+  :host(#{$prefix}-table-expand-row:hover) {
+    ::slotted(#{$prefix}-table-cell),
+    ::slotted(#{$prefix}-table-cell-skeleton),
+    .#{$prefix}--table-expand,
+    .#{$prefix}--table-column-checkbox {
+      background-color: $background-hover;
+      border-block-end-color: $layer-hover;
+      border-block-start-color: $layer-hover;
+      color: $text-primary;
+    }
+  }
+}
+
+:host(#{$prefix}-table-row[highlighted]) {
   .#{$prefix}--table-expand,
   .#{$prefix}--table-column-checkbox,
   ::slotted(#{$prefix}-table-cell),
   ::slotted(#{$prefix}-table-cell-skeleton) {
     background-color: $background-hover;
     border-block-end: 1px solid $layer-hover;
+  }
+}
+
+@media (any-hover: hover) {
+  :host(#{$prefix}-table-row[even]:hover),
+  :host(#{$prefix}-table-row[odd]:hover) {
+    .#{$prefix}--table-expand,
+    .#{$prefix}--table-column-checkbox,
+    ::slotted(#{$prefix}-table-cell),
+    ::slotted(#{$prefix}-table-cell-skeleton) {
+      background-color: $background-hover;
+      border-block-end: 1px solid $layer-hover;
+    }
   }
 }
 
@@ -506,10 +557,12 @@
   background-attachment: fixed;
   box-shadow: inset 1px 0 $ai-border-strong;
 
-  &:hover {
-    @include ai-table-gradient('hover');
+  @media (any-hover: hover) {
+    &:hover {
+      @include ai-table-gradient('hover');
 
-    background-attachment: fixed;
+      background-attachment: fixed;
+    }
   }
 }
 

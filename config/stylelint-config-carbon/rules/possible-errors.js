@@ -40,11 +40,16 @@ export default {
 
     // Block
     'block-no-empty': true,
+    // TODO: re-evaluate when this issue is resolved
+    // https://github.com/carbon-design-system/carbon/issues/23136
+    'block-no-redundant-nested-style-rules': OFF,
 
     // Selector
     'selector-pseudo-class-no-unknown': true,
     'selector-pseudo-element-no-unknown': true,
-    'selector-type-no-unknown': true,
+    // custom elements are unknown to the HTML element list by definition; the
+    // rule still catches real typos, which have no hyphen
+    'selector-type-no-unknown': [true, { ignore: ['custom-elements'] }],
 
     // Media feature
     'media-feature-name-no-unknown': [
