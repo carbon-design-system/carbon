@@ -1,19 +1,15 @@
 // url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=2927-28166&t=yFGI7EFVWv0vtqIk-4
-// source=https://github.com/carbon-design-system/carbon/blob/main/packages/web-components/src/components/radio-button/radio-button-group.ts
-// component=cds-radio-button-group
+// source=https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/RadioButtonGroup/RadioButtonGroup.tsx
+// component=RadioButtonGroup
 
 /**
- * Copyright IBM Corp. 2026
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import figma from 'figma';
-import {
-  renderBooleanAttribute,
-  renderStringAttribute,
-} from '../template-helpers';
 
 const instance = figma.selectedInstance;
 const children = instance
@@ -26,7 +22,7 @@ const disabled = instance.getEnum('State', {
 const helperText = instance.getBoolean('Helper message')
   ? instance.getString('Helper text')
   : undefined;
-const readonly = instance.getEnum('State', {
+const readOnly = instance.getEnum('State', {
   'Read-only': true,
 });
 const invalid = instance.getEnum('State', {
@@ -42,28 +38,34 @@ const orientation = instance.getBoolean('Horizontal', {
 });
 
 export default {
-  id: 'cds-radio-button-group',
-  imports: [
-    "import '@carbon/web-components/es/components/radio-button/radio-button-group.js'",
-    "import '@carbon/web-components/es/components/radio-button/radio-button.js'",
-  ],
-  example: figma.code`<cds-radio-button-group${renderBooleanAttribute(
+  id: 'RadioButtonGroup',
+  imports: ["import { RadioButtonGroup } from '@carbon/react';"],
+  example: figma.code`<RadioButtonGroup${figma.helpers.react.renderProp(
+    'legendText',
+    legendText
+  )}${figma.helpers.react.renderProp(
     'disabled',
     disabled
-  )}${renderStringAttribute('helper-text', helperText)}${renderBooleanAttribute(
+  )}${figma.helpers.react.renderProp(
+    'helperText',
+    helperText
+  )}${figma.helpers.react.renderProp(
+    'readOnly',
+    readOnly
+  )}${figma.helpers.react.renderProp(
     'invalid',
     invalid
-  )}${renderStringAttribute('invalid-text', invalidText)}${renderStringAttribute(
-    'legend-text',
-    legendText
-  )}${renderStringAttribute('orientation', orientation)}${renderBooleanAttribute(
-    'readonly',
-    readonly
-  )}${renderBooleanAttribute(
+  )}${figma.helpers.react.renderProp(
+    'invalidText',
+    invalidText
+  )}${figma.helpers.react.renderProp(
     'warn',
     warn
-  )}${renderStringAttribute('warn-text', warnText)}>
-  ${children}
-</cds-radio-button-group>`,
+  )}${figma.helpers.react.renderProp(
+    'warnText',
+    warnText
+  )}${figma.helpers.react.renderProp('orientation', orientation)}>
+  ${figma.helpers.react.renderChildren(children)}
+</RadioButtonGroup>`,
   metadata: { nestable: true },
 };
