@@ -1,19 +1,15 @@
 // url=https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=14032-290635&mode=dev
-// source=https://github.com/carbon-design-system/carbon/blob/main/packages/web-components/src/components/dropdown/dropdown.ts
-// component=cds-dropdown
+// source=https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Dropdown/Dropdown.tsx
+// component=Dropdown
 
 /**
- * Copyright IBM Corp. 2026
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import figma from 'figma';
-import {
-  renderBooleanAttribute,
-  renderStringAttribute,
-} from '../template-helpers';
 
 const instance = figma.selectedInstance;
 const isSkeleton = instance.getEnum('State', {
@@ -29,14 +25,12 @@ function createTemplate() {
 
   if (isSkeleton) {
     return {
-      id: 'cds-dropdown-skeleton',
-      imports: [
-        "import '@carbon/web-components/es/components/dropdown/index.js'",
-      ],
-      example: figma.code`<cds-dropdown-skeleton${renderStringAttribute(
+      id: 'DropdownSkeleton',
+      imports: ["import { DropdownSkeleton } from '@carbon/react';"],
+      example: figma.code`<DropdownSkeleton${figma.helpers.react.renderProp(
         'size',
         size
-      )}></cds-dropdown-skeleton>`,
+      )} />`,
       metadata: { nestable: true },
     };
   }
@@ -65,32 +59,57 @@ function createTemplate() {
   });
 
   return {
-    id: 'cds-dropdown',
-    imports: [
-      "import '@carbon/web-components/es/components/dropdown/index.js'",
-    ],
-    example: figma.code`<cds-dropdown${renderBooleanAttribute(
+    id: 'Dropdown',
+    imports: ["import { Dropdown } from '@carbon/react';"],
+    example: figma.code`function Example() {
+  const items = [
+    {
+      id: 'option-0',
+      text: 'Option 0',
+    },
+    {
+      id: 'option-1',
+      text: 'Option 1',
+    },
+  ];
+
+  return (
+    <Dropdown${figma.helpers.react.renderProp(
+      'helperText',
+      helperText
+    )}${figma.helpers.react.renderProp(
+      'size',
+      size
+    )}${figma.helpers.react.renderProp(
+      'titleText',
+      titleText
+    )}${figma.helpers.react.renderProp(
+      'label',
+      label
+    )}${figma.helpers.react.renderProp(
+      'readOnly',
+      readOnly
+    )}${figma.helpers.react.renderProp(
       'disabled',
       disabled
-    )}${renderStringAttribute(
-      'helper-text',
-      helperText
-    )}${renderBooleanAttribute('invalid', invalid)}${renderStringAttribute(
-      'invalid-text',
+    )}${figma.helpers.react.renderProp(
+      'invalid',
+      invalid
+    )}${figma.helpers.react.renderProp(
+      'invalidText',
       invalidText
-    )}${renderStringAttribute('label', label)}${renderBooleanAttribute(
-      'read-only',
-      readOnly
-    )}${renderStringAttribute('size', size)}${renderStringAttribute(
-      'title-text',
-      titleText
-    )}${renderStringAttribute('type', type)}${renderBooleanAttribute(
+    )}${figma.helpers.react.renderProp(
       'warn',
       warn
-    )}${renderStringAttribute('warn-text', warnText)} value="option-0">
-  <cds-dropdown-item value="option-0">Option 0</cds-dropdown-item>
-  <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
-</cds-dropdown>`,
+    )}${figma.helpers.react.renderProp(
+      'warnText',
+      warnText
+    )}${figma.helpers.react.renderProp(
+      'type',
+      type
+    )} items={items} id="id" initialSelectedItem={items[0]} itemToString={(item) => (item ? item.text : '')} />
+  );
+}`,
     metadata: { nestable: false },
   };
 }
