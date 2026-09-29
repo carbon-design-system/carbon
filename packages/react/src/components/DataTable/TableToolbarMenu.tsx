@@ -16,6 +16,8 @@ import { useTableToolbar } from './TableToolbar';
 
 const defaultIconDescription = 'Settings';
 
+// Intentionally pinned to v11 since TableToolbarMenu only supports
+// v11-specific props like `iconDescription` (tracked in #23375).
 export type TableToolbarMenuProps = OverflowMenuV11Props;
 
 const TableToolbarMenu = ({
