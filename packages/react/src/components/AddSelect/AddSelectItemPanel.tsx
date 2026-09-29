@@ -9,7 +9,7 @@ import React, {
   forwardRef,
   ForwardedRef,
   ReactNode,
-  useEffect,
+  useLayoutEffect,
   useRef,
   useState,
 } from 'react';
@@ -92,29 +92,29 @@ const AddSelectItemPanel = forwardRef<HTMLDivElement, AddSelectItemPanelProps>(
     const prefix = usePrefix();
     const blockClass = `${prefix}--add-select`;
 
-    // Track whether the panel has ever been opened so we can show the exit
-    // animation on close. Before the first open, the panel stays display:none.
-    const [wasOpen, setWasOpen] = useState(false);
     const [closing, setClosing] = useState(false);
+
+    // prevOpenRef always holds the last *committed* value of open.
+    // We update it in a layout effect (after commit, before paint) so it is
+    // never clobbered by a re-render triggered from the same cycle.
     const prevOpenRef = useRef(open);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
       const prevOpen = prevOpenRef.current;
       prevOpenRef.current = open;
 
-      if (open) {
-        setWasOpen(true);
-        setClosing(false);
-      } else if (prevOpen && !open) {
-        // Transitioning from open → closed: play exit animation.
+      if (prevOpen && !open) {
+        // open just went true → false: start exit animation.
         setClosing(true);
+      } else if (open && !prevOpen) {
+        // open just went false → true: cancel any in-progress exit.
+        setClosing(false);
       }
     }, [open]);
 
     const handleAnimationEnd = () => {
       if (closing) {
         setClosing(false);
-        setWasOpen(false);
       }
     };
 
@@ -174,10 +174,6 @@ const AddSelectItemPanel = forwardRef<HTMLDivElement, AddSelectItemPanelProps>(
       // Priority 3: default template
       return defaultContent();
     };
-
-    if (!open && !closing && !wasOpen) {
-      return null;
-    }
 
     return (
       <div
