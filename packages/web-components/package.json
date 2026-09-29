@@ -76,6 +76,7 @@
     "@carbon/feature-flags": "^1.10.0",
     "@carbon/icon-helpers": "10.47.0",
     "@carbon/icons": "^11.89.0",
+    "@carbon/pictograms": "^12.85.0",
     "@carbon/styles": "^1.116.0",
     "@carbon/utilities": "^0.26.0",
     "@floating-ui/dom": "^1.6.3",

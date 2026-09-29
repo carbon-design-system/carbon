@@ -10,60 +10,22 @@ import { customElement, property } from 'lit/decorators.js';
 import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
 
 import '../components/EmptyState';
+import { carbonIconToSVG, type CarbonIcon } from '../../../globals/internal/icon-loader-utils';
 
-// ─── @carbon/pictograms imports ──────────────────────────────────────────────
-// Same mappings as the React EmptyStateWithPictogramIllustration:
-//   'First use'    → Container
-//   'Error'        → DoNot_02  (do-not--02)
-//   'Warning'      → Warning_01 (warning--01)
-//   'Success'      → Reliability
-//   'No access'    → Lock_02   (lock--02)
-//   'Prerequisites'→ Gear
-//   'Retry'        → Reset
-//   'Offline'      → Availability
-//   'Maintenance'  → CloudBuilderProfessionalServices (cloud--builder--professional--services)
-//   'Unavailable'  → DoNot
-//   'Search'       → VisualInspection (visual--inspection)
-//   'Filtered'     → Slider
-import Container from '@carbon/pictograms/es/container/index.js';
-import DoNot_02 from '@carbon/pictograms/es/do-not--02/index.js';
-import Warning_01 from '@carbon/pictograms/es/warning--01/index.js';
-import Reliability from '@carbon/pictograms/es/reliability/index.js';
-import Lock_02 from '@carbon/pictograms/es/lock--02/index.js';
-import Gear from '@carbon/pictograms/es/gear/index.js';
-import Reset from '@carbon/pictograms/es/reset/index.js';
-import Availability from '@carbon/pictograms/es/availability/index.js';
-import CloudBuilderProfessionalServices from '@carbon/pictograms/es/cloud--builder--professional--services/index.js';
-import DoNot from '@carbon/pictograms/es/do-not/index.js';
-import VisualInspection from '@carbon/pictograms/es/visual--inspection/index.js';
-import Slider from '@carbon/pictograms/es/slider/index.js';
-
-// ─── Minimal SVG serialiser (no external deps) ──────────────────────────────
-// Adapted from @carbon/icon-helpers. Works with @carbon/pictograms descriptors.
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function _elementToSVG(child: any): string {
-  if (typeof child === 'string') return child;
-  const attrs = Object.entries(child.attrs ?? {})
-    .map(([k, v]) => `${k}="${v}"`)
-    .join(' ');
-  const inner = (child.content ?? []).map(_elementToSVG).join('');
-  return `<${child.elem}${attrs ? ' ' + attrs : ''}>${inner}</${child.elem}>`;
-}
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function _descriptorToSVG(descriptor: any, extraAttrs: Record<string, string> = {}): string {
-  const d = descriptor?.default ?? descriptor;
-  // Start from descriptor attrs, but drop width/height so CSS (block-size/inline-size)
-  // controls the rendered size. Ensure fill is currentColor so the pictogram respects
-  // the theme text colour, matching the React implementation.
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { width: _w, height: _h, ...baseAttrs } = d.attrs ?? {};
-  const attrs = { fill: 'currentColor', ...baseAttrs, ...extraAttrs };
-  const attrStr = Object.entries(attrs)
-    .map(([k, v]) => `${k}="${v}"`)
-    .join(' ');
-  const inner = (d.content ?? []).map(_elementToSVG).join('');
-  return `<svg ${attrStr}>${inner}</svg>`;
-}
+import {
+  Container,
+  DoNot_02,
+  Warning_01,
+  Reliability,
+  Lock_02,
+  Gear,
+  Reset,
+  Availability,
+  CloudBuilderProfessionalServices,
+  DoNot,
+  VisualInspection,
+  Slider,
+} from '@carbon/pictograms';
 
 export type PictogramKey =
   | 'First use'
@@ -144,9 +106,9 @@ export class CDSEmptyStatePictogram extends LitElement {
   render() {
     const { pictogramKey, size, heading, subtitle, actionText, linkText, linkHref } = this;
     const descriptor = pictogramMap[pictogramKey] ?? pictogramMap['First use'];
-    // Render the pictogram as an inline SVG. The size class gives it the
-    // correct block-size / inline-size from _empty-state.scss.
-    const svgString = _descriptorToSVG(descriptor, {
+    // width/height override the descriptor's hard-coded 64px values so CSS controls sizing.
+    const svgString = carbonIconToSVG(descriptor as CarbonIcon, {
+      fill: 'currentColor',
       width: '100%',
       height: '100%',
       style: 'display:block',

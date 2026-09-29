@@ -4,35 +4,12 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * ─── PATTERN RECIPE ──────────────────────────────────────────────────────────
- * This file is a copy-and-customize recipe, NOT a published package export.
- * Copy it into your own codebase and adapt it to your needs.
- *
- * Mirrors the React `EmptyState.jsx` recipe, re-implemented as a Lit
- * custom element (`cds-empty-state`).
- *
- * Props (reflected as attributes / properties):
- *   size              'md' | 'sm'  — default 'md'
- *   illustration-src  string       — URL/src for an <img> illustration
- *   illustration-description  string — alt text for the illustration image
- *   heading           string       — main heading (required)
- *   subtitle          string       — body copy below the heading
- *   action-text       string       — label for the tertiary CTA button
- *   action-kind       string       — button kind, default 'tertiary'
- *   link-text         string       — label for the inline link
- *   link-href         string       — href for the inline link
- *   link-target       string       — target for the inline link
- *
- * Slots:
- *   illustration      — custom illustration node (overrides illustration-src)
- *
- * Events:
- *   cds-empty-state-action-click  — fired when the action button is clicked
- * ─────────────────────────────────────────────────────────────────────────────
+ * Recipe component — copy-and-customize, not a published package export.
  */
 
 import { LitElement, html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 
 // In a standalone project, replace these with:
 //   import '@carbon/web-components/es/components/button/index.js';
@@ -95,7 +72,10 @@ export class CDSEmptyStateRecipe extends LitElement {
 
   private _handleActionClick() {
     this.dispatchEvent(
-      new CustomEvent('cds-empty-state-action-click', { bubbles: true, composed: true })
+      new CustomEvent('cds-empty-state-action-click', {
+        bubbles: true,
+        composed: true,
+      })
     );
   }
 
@@ -106,8 +86,18 @@ export class CDSEmptyStateRecipe extends LitElement {
   }
 
   render() {
-    const { size, illustrationSrc, illustrationDescription, heading, subtitle,
-            actionText, actionKind, linkText, linkHref, linkTarget } = this;
+    const {
+      size,
+      illustrationSrc,
+      illustrationDescription,
+      heading,
+      subtitle,
+      actionText,
+      actionKind,
+      linkText,
+      linkHref,
+      linkTarget,
+    } = this;
 
     return html`
       <div class="${blockClass} ${blockClass}--${size}">
@@ -127,7 +117,8 @@ export class CDSEmptyStateRecipe extends LitElement {
           </p>
 
           ${subtitle
-            ? html`<p class="${blockClass}__subtitle${size === 'sm' ? ` ${blockClass}__subtitle--sm` : ''}">
+            ? html`<p
+                class="${blockClass}__subtitle${size === 'sm' ? ` ${blockClass}__subtitle--sm` : ''}">
                 ${subtitle}
               </p>`
             : nothing}
@@ -146,7 +137,7 @@ export class CDSEmptyStateRecipe extends LitElement {
             ? html`<cds-link
                 class="${blockClass}__link"
                 href="${linkHref}"
-                target="${linkTarget || nothing}">
+                target="${ifDefined(linkTarget || undefined)}">
                 ${linkText}
               </cds-link>`
             : nothing}

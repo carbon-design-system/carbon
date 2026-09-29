@@ -4,19 +4,7 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * ─── PATTERN RECIPE ──────────────────────────────────────────────────────────
- * This file is a copy-and-customize recipe, not a published package export.
- * Copy it into your own codebase and adapt it to your needs.
- *
- * What it shows:
- *   • EmptyState in a full UI Shell (header + side nav + main content)
- *   • EmptyState inside a DataTable (triggered by a search returning 0 rows)
- *   • EmptyState inside small tiles (vertical + horizontal placement)
- *   • Left-aligned vs centred empty-state placement — toggled via an attribute
- *
- * Dependencies (from @carbon/web-components):
- *   cds-empty-state, cds-table family, cds-tile, cds-grid, UI Shell elements
- * ─────────────────────────────────────────────────────────────────────────────
+ * Recipe component — copy-and-customize, not a published package export.
  */
 
 import { LitElement, html } from 'lit';
@@ -33,15 +21,9 @@ import '../../../../components/skip-to-content/index';
 import '../../../../components/tile/index';
 import '../../../../components/ui-shell/index';
 
-import Search20 from '@carbon/icons/es/search/20.js';
-import Settings16 from '@carbon/icons/es/settings/16.js';
+import { Search20, Settings16 } from '@carbon/icons';
 import { iconLoader } from '../../../../globals/internal/icon-loader';
-
 import '../components/EmptyState';
-
-// ─── Copy your own SVG assets ─────────────────────────────────────────────────
-// Use ?url to get the asset URL (not the inline SVG Lit template the vite-lit-loader
-// plugin produces for bare .svg imports).
 import notFoundSrc from '../assets/not-found.svg?url';
 import unauthorizedSrc from '../assets/unauthorized.svg?url';
 import errorSrc from '../assets/error.svg?url';

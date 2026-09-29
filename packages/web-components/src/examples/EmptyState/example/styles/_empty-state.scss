@@ -28,8 +28,6 @@
   inline-size: convert.rem(80px);
   margin-block-end: $spacing-05;
   overflow: hidden;
-  width: convert.rem(80px);
-  height: convert.rem(80px);
 }
 
 .#{$prefix}--empty-state__illustration--sm {
@@ -40,8 +38,6 @@
   inline-size: convert.rem(64px);
   margin-block-end: $spacing-04;
   overflow: hidden;
-  width: convert.rem(64px);
-  height: convert.rem(64px);
 }
 
 .#{$prefix}--empty-state__content {
