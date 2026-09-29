@@ -12,7 +12,7 @@ import figma from '@figma/code-connect';
 
 figma.connect(
   TextArea,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=14494-263111&t=4Ath5JqwaYJZxznq-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=14494-263111&t=4Ath5JqwaYJZxznq-4',
   {
     props: {
       labelText: figma.string('Label text'),
@@ -49,7 +49,7 @@ figma.connect(
 
 figma.connect(
   TextAreaSkeleton,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=14494-263111&t=4Ath5JqwaYJZxznq-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=14494-263111&t=4Ath5JqwaYJZxznq-4',
   {
     variant: { State: 'Skeleton' },
     props: {

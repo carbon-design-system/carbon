@@ -12,7 +12,7 @@ import figma from '@figma/code-connect';
 
 figma.connect(
   Menu,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=31131-96397&t=OdgMrt4NDVwZpNSx-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=31131-96397&t=OdgMrt4NDVwZpNSx-4',
   {
     props: {
       size: figma.enum('Size', {
