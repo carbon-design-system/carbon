@@ -8,6 +8,11 @@ on:
         description: 'release tag (ie. v12.0.0-alpha.0)'
         type: string
         default: 'v12.0.0-alpha.0'
+      dry_run:
+        required: true
+        description: 'Run dry run?'
+        type: boolean
+        default: true
 
 jobs:
   build:
@@ -20,6 +25,13 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+
+      - name: Configure git
+        run: |
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
 
       - name: Use Node.js version from .nvmrc
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
@@ -45,7 +57,7 @@ jobs:
         run: |
           npx serve -l 3000 packages/react/storybook-static-v12 &
           pid=$!
-          echo ::set-output name=pid::"$pid"
+          echo "pid=$pid" >> "$GITHUB_OUTPUT"
       - uses: ./actions/wait-for-it
         with:
           URL: 'http://localhost:3000'
@@ -66,19 +78,27 @@ jobs:
       - name: Run Continuous Integration checks
         run: yarn ci-check
 
+      - name: Preview version bumps (dry run)
+        if: ${{ github.event.inputs.dry_run == 'true' }}
+        run: |
+          yarn lerna version preminor --conventional-prerelease --preid alpha --no-git-tag-version --no-push --yes
+          git diff --stat
+          git diff -- '**/package.json' | grep '"version"'
+
       - name: Publish packages under the `v12-alpha` dist tag
+        if: ${{ github.event.inputs.dry_run != 'true' }}
         run:
-          yarn lerna publish preminor --conventional-prerelease --preid alpha --pre-dist-tag v12-alpha
+          yarn lerna publish preminor --conventional-prerelease --preid alpha --pre-dist-tag v12-alpha --yes
 
       - name: Create git tag
+        if: ${{ github.event.inputs.dry_run != 'true' }}
         run: |
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git config user.name "github-actions[bot]"
           git tag -a "${{ github.event.inputs.tag }}" -m "Release ${{ github.event.inputs.tag }}"
           git push origin "${{ github.event.inputs.tag }}"
 
       - name: Create Release
         id: create_release
+        if: ${{ github.event.inputs.dry_run != 'true' }}
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 #v9.0.0
         with:
           script: |
