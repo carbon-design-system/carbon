@@ -28,13 +28,21 @@ $block-class: #{$prefix}--add-select__next;
     padding: 0;
     background: $layer-01;
     inset: 0;
-    pointer-events: auto;
+    pointer-events: none;
     transform: translateX(100%);
-    transition: transform $duration-moderate-01 motion(standard, productive);
+    transition:
+      transform $duration-moderate-01 motion(standard, productive),
+      visibility 0s $duration-moderate-01;
+    visibility: hidden;
   }
 
   .#{$block-class}__item-summary-panel--open {
+    pointer-events: auto;
     transform: translateX(0);
+    transition:
+      transform $duration-moderate-01 motion(standard, productive),
+      visibility 0s 0s;
+    visibility: visible;
   }
 
   .#{$block-class}__item-summary-panel-header {
@@ -84,7 +92,11 @@ $block-class: #{$prefix}--add-select__next;
 
   @media screen and (prefers-reduced-motion: reduce) {
     .#{$block-class}__item-summary-panel {
-      transition: none;
+      transition: visibility 0s $duration-moderate-01;
+    }
+
+    .#{$block-class}__item-summary-panel--open {
+      transition: visibility 0s 0s;
     }
   }
 }
