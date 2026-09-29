@@ -25,6 +25,7 @@ import { mergeRefs } from '../../../tools/mergeRefs';
 import { useId } from '../../../internal/useId';
 import { usePrefix } from '../../../internal/usePrefix';
 import { useAttachedMenu } from '../../../internal/useAttachedMenu';
+import { deprecate } from '../../../prop-types/deprecate';
 import { deprecateValuesWithin } from '../../../prop-types/deprecateValuesWithin';
 import { mapPopoverAlign } from '../../../tools/mapPopoverAlign';
 
@@ -67,10 +68,26 @@ export interface OverflowMenuProps extends ComponentProps<'div'> {
   tooltipEnterDelayMs?: number;
 
   /**
+   * Specify the duration in milliseconds to delay before displaying the tooltip
+   * on the trigger button.
+   *
+   * @deprecated please use `tooltipEnterDelayMs` instead.
+   */
+  enterDelayMs?: number;
+
+  /**
    * Specify the duration in milliseconds to delay before hiding the tooltip
    * on the trigger button.
    */
   tooltipLeaveDelayMs?: number;
+
+  /**
+   * Specify the duration in milliseconds to delay before hiding the tooltip
+   * on the trigger button.
+   *
+   * @deprecated please use `tooltipLeaveDelayMs` instead.
+   */
+  leaveDelayMs?: number;
 
   /**
    * A label describing the options available. Is used in the trigger tooltip and as the menu's accessible label.
@@ -124,7 +141,9 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
       tooltipDefaultOpen,
       disabled,
       tooltipEnterDelayMs,
+      enterDelayMs: deprecatedEnterDelayMs,
       tooltipLeaveDelayMs,
+      leaveDelayMs: deprecatedLeaveDelayMs,
       label = 'Options',
       renderIcon: IconElement = OverflowMenuVertical,
       size = defaultSize,
@@ -243,10 +262,10 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
           className={triggerClasses}
           defaultOpen={tooltipDefaultOpen}
           disabled={disabled}
-          enterDelayMs={tooltipEnterDelayMs}
+          enterDelayMs={tooltipEnterDelayMs ?? deprecatedEnterDelayMs}
           kind="ghost"
           label={label}
-          leaveDelayMs={tooltipLeaveDelayMs}
+          leaveDelayMs={tooltipLeaveDelayMs ?? deprecatedLeaveDelayMs}
           ref={floatingRef}
           tabIndex={tabIndex}
           onClick={handleTriggerClick}
@@ -318,10 +337,32 @@ OverflowMenu.propTypes = {
   tooltipEnterDelayMs: PropTypes.number,
 
   /**
+   * Specify the duration in milliseconds to delay before displaying the tooltip
+   * on the trigger button.
+   *
+   * @deprecated please use `tooltipEnterDelayMs` instead.
+   */
+  enterDelayMs: deprecate(
+    PropTypes.number,
+    'This prop syntax has been deprecated. Please use the new `tooltipEnterDelayMs`.'
+  ),
+
+  /**
    * Specify the duration in milliseconds to delay before hiding the tooltip
    * on the trigger button.
    */
   tooltipLeaveDelayMs: PropTypes.number,
+
+  /**
+   * Specify the duration in milliseconds to delay before hiding the tooltip
+   * on the trigger button.
+   *
+   * @deprecated please use `tooltipLeaveDelayMs` instead.
+   */
+  leaveDelayMs: deprecate(
+    PropTypes.number,
+    'This prop syntax has been deprecated. Please use the new `tooltipLeaveDelayMs`.'
+  ),
 
   /**
    * A label describing the options available. Is used in the trigger tooltip and as the menu's accessible label.
