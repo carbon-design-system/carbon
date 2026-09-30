@@ -314,8 +314,14 @@
   }
 
   // Skeleton State
+  .#{$prefix}--label.#{$prefix}--skeleton:has(
+      + .#{$prefix}--select.#{$prefix}--skeleton
+    ) {
+    @include skeleton($border-radius: $border-radius-04);
+  }
+
   .#{$prefix}--select.#{$prefix}--skeleton {
-    @include skeleton;
+    @include skeleton($border-radius: $border-radius-04);
 
     block-size: 2.5rem;
 

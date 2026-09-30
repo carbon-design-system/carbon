@@ -72,7 +72,7 @@ prop.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TooltipStories.Default),
+      onClick: () => stackblitzPrefillConfig({ story: TooltipStories.Default }),
     },
   ]}
 />
@@ -117,7 +117,8 @@ your component.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TooltipStories.Alignment),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: TooltipStories.Alignment }),
     },
   ]}
 />
@@ -144,7 +145,8 @@ and its contents are hidden.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TooltipStories.Duration),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: TooltipStories.Duration }),
     },
   ]}
 />
