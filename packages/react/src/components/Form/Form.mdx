@@ -36,7 +36,7 @@ suit their needs.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(FormStories.Default),
+      onClick: () => stackblitzPrefillConfig({ story: FormStories.Default }),
     },
   ]}
 />
@@ -48,7 +48,8 @@ suit their needs.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(FormStories.withAILabel),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: FormStories.withAILabel }),
     },
   ]}
 />

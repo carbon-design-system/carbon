@@ -1,3 +1,7 @@
+// url=https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=4630-268268&mode=design&t=dSt5NCwcWajIQZR7-4
+// source=https://github.com/carbon-design-system/carbon/blob/main/packages/web-components/src/components/data-table/table.ts
+// component=cds-table
+
 /**
  * Copyright IBM Corp. 2026
  *
@@ -5,174 +9,104 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import figma, { html } from '@figma/code-connect/html';
+import figma from 'figma';
+import {
+  renderBooleanAttribute,
+  renderStringAttribute,
+} from '../template-helpers';
 
-const sharedTableProps = {
-  slot: figma.boolean('Slot', {
-    true: figma.instance('Swap slot'),
-  }),
-  toolbar: figma.boolean('Toolbar', {
-    true: figma.children(['Data table toolbar item']),
-  }),
-  pagination: figma.boolean('Pagination', {
-    true: figma.children(['Pagination - Table bar']),
-  }),
-  headerItem: figma.nestedProps('Data table header item', {
-    description: figma.boolean('Description', {
-      true: figma.string('Description text'),
-    }),
-    title: figma.string('Title text'),
-  }),
-  headerRow: figma.nestedProps('Data table header row item', {
-    size: figma.enum('Size', {
-      'Extra large': 'xl',
-      Large: 'lg',
-      Medium: 'md',
-      Small: 'sm',
-      'Extra small': 'xs',
-    }),
-    children: figma.children('Col*'),
-  }),
-  rowItems: figma.boolean('Body', {
-    true: figma.children(['Data table body row item']),
-  }),
+const instance = figma.selectedInstance;
+const type = instance.getEnum('Type', {
+  Expandable: 'expandable',
+  'Select checkbox': 'select-checkbox',
+  'Select radio': 'select-radio',
+  'Expandable + Selectable': 'expandable-selectable',
+});
+const slot = instance.getBoolean('Slot', {
+  true: instance.getInstanceSwap('Swap slot')?.executeTemplate().example,
+});
+const toolbarItems = instance
+  .findConnectedInstances(
+    (child) =>
+      child.name === 'Data table toolbar item' && child.hasCodeConnect()
+  )
+  .map((child) => child.executeTemplate().example);
+const toolbar = instance.getBoolean('Toolbar', {
+  true: toolbarItems,
+});
+const paginationItems = instance
+  .findConnectedInstances(
+    (child) => child.name === 'Pagination - Table bar' && child.hasCodeConnect()
+  )
+  .map((child) => child.executeTemplate().example);
+const pagination = instance.getBoolean('Pagination', {
+  true: paginationItems,
+});
+const headerItemLayer = instance.findInstance('Data table header item');
+const headerRowLayer = instance.findInstance('Data table header row item');
+const headerItem = {
+  description:
+    headerItemLayer.type !== 'ERROR'
+      ? headerItemLayer.getBoolean('Description', {
+          true: headerItemLayer.getString('Description text'),
+        })
+      : undefined,
+  title:
+    headerItemLayer.type !== 'ERROR'
+      ? headerItemLayer.getString('Title text')
+      : undefined,
 };
+// Data Table sizing is controlled through Figma Appearance, not a component property.
+const headerRow = {
+  children:
+    headerRowLayer.type !== 'ERROR'
+      ? headerRowLayer
+          .findConnectedInstances(
+            (child) => child.name.startsWith('Col') && child.hasCodeConnect()
+          )
+          .map((child) => child.executeTemplate().example)
+      : undefined,
+};
+const bodyRows = instance
+  .findConnectedInstances(
+    (child) =>
+      child.name === 'Data table body row item' && child.hasCodeConnect()
+  )
+  .map((child) => child.executeTemplate().example);
+const rowItems = instance.getBoolean('Body', {
+  true: bodyRows,
+});
+const expandable = type === 'expandable' || type === 'expandable-selectable';
+const checkboxSelection =
+  type === 'select-checkbox' || type === 'expandable-selectable';
+const radio = type === 'select-radio';
+const isSelectable = checkboxSelection || radio;
+const selectionName = checkboxSelection ? 'header' : undefined;
 
-figma.connect(
-  'https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=4630-268268&mode=design&t=dSt5NCwcWajIQZR7-4',
-  {
-    props: sharedTableProps,
-    example: (props) =>
-      html`<cds-table size=${props.headerRow.size}>
-        <cds-table-header-title slot="title"
-          >${props.headerItem.title}</cds-table-header-title
-        >
-        <cds-table-header-description slot="description"
-          >${props.headerItem.description}</cds-table-header-description
-        >
-        ${props.toolbar}
-        <cds-table-head>
-          <cds-table-header-row
-            >${props.headerRow.children}</cds-table-header-row
-          >
-        </cds-table-head>
-        <cds-table-body>${props.rowItems}</cds-table-body>
-        ${props.pagination} ${props.slot}
-      </cds-table>`,
-    imports: [
-      "import '@carbon/web-components/es/components/data-table/index.js'",
-    ],
-  }
-);
-
-figma.connect(
-  'https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=4630-268268&mode=design&t=dSt5NCwcWajIQZR7-4',
-  {
-    variant: { Type: 'Expandable' },
-    props: sharedTableProps,
-    example: (props) =>
-      html`<cds-table expandable size=${props.headerRow.size}>
-        <cds-table-header-title slot="title"
-          >${props.headerItem.title}</cds-table-header-title
-        >
-        <cds-table-header-description slot="description"
-          >${props.headerItem.description}</cds-table-header-description
-        >
-        ${props.toolbar}
-        <cds-table-head>
-          <cds-table-header-row
-            >${props.headerRow.children}</cds-table-header-row
-          >
-        </cds-table-head>
-        <cds-table-body>${props.rowItems}</cds-table-body>
-        ${props.pagination} ${props.slot}
-      </cds-table>`,
-    imports: [
-      "import '@carbon/web-components/es/components/data-table/index.js'",
-    ],
-  }
-);
-
-figma.connect(
-  'https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=4630-268268&mode=design&t=dSt5NCwcWajIQZR7-4',
-  {
-    variant: { Type: 'Select checkbox' },
-    props: sharedTableProps,
-    example: (props) =>
-      html`<cds-table is-selectable size=${props.headerRow.size}>
-        <cds-table-header-title slot="title"
-          >${props.headerItem.title}</cds-table-header-title
-        >
-        <cds-table-header-description slot="description"
-          >${props.headerItem.description}</cds-table-header-description
-        >
-        ${props.toolbar}
-        <cds-table-head>
-          <cds-table-header-row selection-name="header"
-            >${props.headerRow.children}</cds-table-header-row
-          >
-        </cds-table-head>
-        <cds-table-body>${props.rowItems}</cds-table-body>
-        ${props.pagination} ${props.slot}
-      </cds-table>`,
-    imports: [
-      "import '@carbon/web-components/es/components/data-table/index.js'",
-    ],
-  }
-);
-
-figma.connect(
-  'https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=4630-268268&mode=design&t=dSt5NCwcWajIQZR7-4',
-  {
-    variant: { Type: 'Select radio' },
-    props: sharedTableProps,
-    example: (props) =>
-      html`<cds-table is-selectable radio size=${props.headerRow.size}>
-        <cds-table-header-title slot="title"
-          >${props.headerItem.title}</cds-table-header-title
-        >
-        <cds-table-header-description slot="description"
-          >${props.headerItem.description}</cds-table-header-description
-        >
-        ${props.toolbar}
-        <cds-table-head>
-          <cds-table-header-row
-            >${props.headerRow.children}</cds-table-header-row
-          >
-        </cds-table-head>
-        <cds-table-body>${props.rowItems}</cds-table-body>
-        ${props.pagination} ${props.slot}
-      </cds-table>`,
-    imports: [
-      "import '@carbon/web-components/es/components/data-table/index.js'",
-    ],
-  }
-);
-
-figma.connect(
-  'https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=4630-268268&mode=design&t=dSt5NCwcWajIQZR7-4',
-  {
-    variant: { Type: 'Expandable + Selectable' },
-    props: sharedTableProps,
-    example: (props) =>
-      html`<cds-table expandable is-selectable size=${props.headerRow.size}>
-        <cds-table-header-title slot="title"
-          >${props.headerItem.title}</cds-table-header-title
-        >
-        <cds-table-header-description slot="description"
-          >${props.headerItem.description}</cds-table-header-description
-        >
-        ${props.toolbar}
-        <cds-table-head>
-          <cds-table-header-row selection-name="header"
-            >${props.headerRow.children}</cds-table-header-row
-          >
-        </cds-table-head>
-        <cds-table-body>${props.rowItems}</cds-table-body>
-        ${props.pagination} ${props.slot}
-      </cds-table>`,
-    imports: [
-      "import '@carbon/web-components/es/components/data-table/index.js'",
-    ],
-  }
-);
+export default {
+  id: 'cds-table',
+  imports: [
+    "import '@carbon/web-components/es/components/data-table/index.js'",
+  ],
+  example: figma.code`<cds-table${renderBooleanAttribute(
+    'expandable',
+    expandable
+  )}${renderBooleanAttribute(
+    'is-selectable',
+    isSelectable
+  )}${renderBooleanAttribute('radio', radio)}>
+  <cds-table-header-title slot="title">${headerItem.title}</cds-table-header-title>
+  <cds-table-header-description slot="description">${headerItem.description}</cds-table-header-description>
+  ${toolbar}
+  <cds-table-head>
+    <cds-table-header-row${renderStringAttribute(
+      'selection-name',
+      selectionName
+    )}>${headerRow.children}</cds-table-header-row>
+  </cds-table-head>
+  <cds-table-body>${rowItems}</cds-table-body>
+  ${pagination}
+  ${slot}
+</cds-table>`,
+  metadata: { nestable: true },
+};
