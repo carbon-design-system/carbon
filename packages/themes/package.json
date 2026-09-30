@@ -13,6 +13,14 @@
     "directory": "packages/themes"
   },
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "files": [
+    "es",
+    "lib",
+    "scss",
+    "umd",
+    "index.scss",
+    "telemetry.yml"
+  ],
   "keywords": [
     "ibm",
     "elements",
