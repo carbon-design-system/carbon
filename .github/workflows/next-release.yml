@@ -56,6 +56,6 @@ jobs:
       - name: Create git tag
         if: ${{ github.event.inputs.dry_run != 'true' }}
         run: |
-          git tag -a "${{ github.event.inputs.tag }}" -m "Release ${{ github.event.inputs.tag }}"
+          git tag -a "${{ github.event.inputs.tag }}" -m "${{ github.event.inputs.tag }}"
           git push origin "${{ github.event.inputs.tag }}"
 
