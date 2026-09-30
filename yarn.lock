@@ -2502,7 +2502,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@carbon/web-components@workspace:packages/web-components"
   dependencies:
-    "@carbon/feature-flags": "npm:^1.10.0"
     "@carbon/icon-helpers": "npm:10.47.0"
     "@carbon/icons": "npm:^11.89.0"
     "@carbon/layout": "npm:^11.60.0"
