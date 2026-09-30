@@ -164,5 +164,10 @@ export const Skeleton = {
 };
 
 export default {
+  decorators: [
+    (story) => {
+      return html`<div style="width: 400px">${story()}</div>`;
+    },
+  ],
   title: 'Components/Fluid Components/FluidTextInput',
 };

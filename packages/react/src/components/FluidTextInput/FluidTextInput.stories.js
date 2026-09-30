@@ -25,6 +25,11 @@ export default {
         <Story />
       </>
     ),
+    (Story) => (
+      <div style={{ width: 400 }}>
+        <Story />
+      </div>
+    ),
   ],
   parameters: {
     styles,
