@@ -130,3 +130,34 @@ export const WithLargeText = (args) => {
 
 WithLargeText.args = { ...defaultArgs };
 WithLargeText.argTypes = { ...argTypes };
+
+export const ExperimentalAutoAlignStressTest = () => (
+  <div
+    style={{
+      display: 'grid',
+      placeContent: 'center',
+      gridTemplateColumns: 'repeat(8, auto)',
+      gap: '80px',
+      width: '200vw',
+      height: '200vh',
+    }}>
+    {Array.from({ length: 50 }, (_, i) => (
+      <p key={i}>
+        <DefinitionTooltip
+          definition={`Definition for term ${i + 1}`}
+          align="bottom"
+          autoAlign
+          defaultOpen>
+          Term {i + 1}
+        </DefinitionTooltip>
+      </p>
+    ))}
+  </div>
+);
+
+ExperimentalAutoAlignStressTest.storyName =
+  'Experimental auto align – stress test (50 instances)';
+
+ExperimentalAutoAlignStressTest.parameters = {
+  controls: { disable: true },
+};

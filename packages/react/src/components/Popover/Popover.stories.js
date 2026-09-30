@@ -274,7 +274,7 @@ export const ExperimentalAutoAlign = (args) => {
 
   useEffect(() => {
     ref?.current?.scrollIntoView({ block: 'center', inline: 'center' });
-  });
+  }, []);
 
   return (
     <div style={autoAlignStoryContainerStyle}>
@@ -324,7 +324,7 @@ export const ExperimentalAutoAlignBoundary = (args) => {
 
   useEffect(() => {
     ref?.current?.scrollIntoView({ block: 'center', inline: 'center' });
-  });
+  }, []);
 
   return (
     <div
@@ -431,4 +431,49 @@ export const TabTipExperimentalAutoAlign = () => {
       </Popover>
     </div>
   );
+};
+
+const StressTestItem = ({ i }) => {
+  const [open, setOpen] = useState(false);
+  return (
+    <Popover
+      autoAlign
+      align="bottom"
+      open={open}
+      onRequestClose={() => setOpen(false)}>
+      <button
+        className="playground-trigger"
+        type="button"
+        aria-expanded={open}
+        onClick={() => setOpen((o) => !o)}>
+        <CheckboxIcon />
+      </button>
+      <PopoverContent className="p-3">
+        <p className="popover-title">Popover {i + 1}</p>
+      </PopoverContent>
+    </Popover>
+  );
+};
+
+export const ExperimentalAutoAlignStressTest = () => (
+  <div
+    style={{
+      display: 'grid',
+      placeContent: 'center',
+      gridTemplateColumns: 'repeat(10, auto)',
+      gap: '24px',
+      width: '200vw',
+      height: '200vh',
+    }}>
+    {Array.from({ length: 50 }, (_, i) => (
+      <StressTestItem key={i} i={i} />
+    ))}
+  </div>
+);
+
+ExperimentalAutoAlignStressTest.storyName =
+  'Experimental auto align – stress test (50 instances)';
+
+ExperimentalAutoAlignStressTest.parameters = {
+  controls: { disable: true },
 };

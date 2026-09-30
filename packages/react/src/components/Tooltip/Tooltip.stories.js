@@ -139,3 +139,30 @@ export const Duration = (args) => {
     </Tooltip>
   );
 };
+
+export const ExperimentalAutoAlignStressTest = () => (
+  <div
+    style={{
+      display: 'grid',
+      placeContent: 'center',
+      gridTemplateColumns: 'repeat(10, auto)',
+      gap: '32px',
+      width: '200vw',
+      height: '200vh',
+    }}>
+    {Array.from({ length: 50 }, (_, i) => (
+      <Tooltip key={i} label={`Tooltip ${i + 1}`} align="bottom" autoAlign>
+        <button className="sb-tooltip-trigger" type="button">
+          <OverflowMenuVertical />
+        </button>
+      </Tooltip>
+    ))}
+  </div>
+);
+
+ExperimentalAutoAlignStressTest.storyName =
+  'Experimental auto align – stress test (50 instances)';
+
+ExperimentalAutoAlignStressTest.parameters = {
+  controls: { disable: true },
+};
