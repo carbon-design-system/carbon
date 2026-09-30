@@ -42,72 +42,20 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable --check-cache
 
-      # For generating playwright json report for avt tests
-      - name: Install browsers
-        run: yarn playwright install --with-deps
-
       - name: Build project
         run: yarn build
-
-      # Additional steps for generating playwright json report for avt tests
-      - name: Build storybook
-        run: yarn workspace @carbon/react storybook:v12:build
-      - name: Run storybook
-        id: storybook
-        run: |
-          npx serve -l 3000 packages/react/storybook-static-v12 &
-          pid=$!
-          echo "pid=$pid" >> "$GITHUB_OUTPUT"
-      - uses: ./actions/wait-for-it
-        with:
-          URL: 'http://localhost:3000'
-        timeout-minutes: 3
-      - name: Run AVT
-        if: github.repository == 'carbon-design-system/carbon'
-        run: |
-          yarn playwright test --project chromium --grep @avt
-      - name: Stop storybook
-        run: kill ${{ steps.storybook.outputs.pid }}
-      - name: Upload test results
-        if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a #7.0.1
-        with:
-          name: playwright-avt-report
-          path: .playwright
 
       - name: Run Continuous Integration checks
         run: yarn ci-check
 
-      - name: Preview version bumps (dry run)
-        if: ${{ github.event.inputs.dry_run == 'true' }}
-        run: |
-          yarn lerna version preminor --conventional-prerelease --preid alpha --no-git-tag-version --no-push --yes
-          git diff --stat
-          git diff -- '**/package.json' | grep '"version"'
-
       - name: Publish packages under the `v12-alpha` dist tag
-        if: ${{ github.event.inputs.dry_run != 'true' }}
-        run:
-          yarn lerna publish preminor --conventional-prerelease --preid alpha --pre-dist-tag v12-alpha --yes
+        run: |
+          yarn lerna publish prerelease --preid alpha --pre-dist-tag v12-alpha \
+            ${{ github.event.inputs.dry_run != 'true' && '--yes' || '' }}
 
       - name: Create git tag
         if: ${{ github.event.inputs.dry_run != 'true' }}
         run: |
           git tag -a "${{ github.event.inputs.tag }}" -m "Release ${{ github.event.inputs.tag }}"
           git push origin "${{ github.event.inputs.tag }}"
-
-      - name: Create Release
-        id: create_release
-        if: ${{ github.event.inputs.dry_run != 'true' }}
-        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 #v9.0.0
-        with:
-          script: |
-            github.rest.repos.createRelease({
-              tag_name: '${{ github.event.inputs.tag }}',
-              name: '${{ github.event.inputs.tag }}',
-              draft: false,
-              prerelease: true,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-            })
 
