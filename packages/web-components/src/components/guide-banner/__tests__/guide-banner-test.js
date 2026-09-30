@@ -37,13 +37,14 @@ describe(`${prefix}-guide-banner`, () => {
     expect(titleEl?.textContent?.trim()).to.equal('My title');
   });
 
-  it('does not render title element when titleText is empty', async () => {
+  it('renders title element with empty content when titleText is empty', async () => {
     const el = await fixture(html`
       <cds-guide-banner title-text=""></cds-guide-banner>
     `);
     await el.updateComplete;
     const titleEl = el.shadowRoot?.querySelector(`.${blockClass}__title`);
-    expect(titleEl).to.be.null;
+    expect(titleEl).to.exist;
+    expect(titleEl.textContent.trim()).to.equal('');
   });
 
   it('reflects open attribute to property', async () => {

@@ -10,14 +10,15 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { usePrefix } from '../../internal/usePrefix';
-import { useFeatureFlag } from '../FeatureFlags';
-import OverflowMenu, { OverflowMenuProps } from '../OverflowMenu';
-import { OverflowMenu as OverflowMenuV12 } from '../OverflowMenu/next';
+import OverflowMenu from '../OverflowMenu';
+import { type OverflowMenuProps as OverflowMenuV11Props } from '../OverflowMenu/OverflowMenu';
 import { useTableToolbar } from './TableToolbar';
 
 const defaultIconDescription = 'Settings';
 
-export type TableToolbarMenuProps = OverflowMenuProps;
+// Intentionally pinned to v11 since TableToolbarMenu only supports
+// v11-specific props like `iconDescription` (tracked in #23375).
+export type TableToolbarMenuProps = OverflowMenuV11Props;
 
 const TableToolbarMenu = ({
   className,
@@ -28,7 +29,6 @@ const TableToolbarMenu = ({
   size: sizeProp,
   ...rest
 }: TableToolbarMenuProps) => {
-  const enableV12OverflowMenu = useFeatureFlag('enable-v12-overflowmenu');
   const toolbarContext = useTableToolbar();
   const size = sizeProp ?? toolbarContext.size;
   const prefix = usePrefix();
@@ -40,20 +40,6 @@ const TableToolbarMenu = ({
     menuOptionsClass,
     `${prefix}--toolbar-action__menu`
   );
-
-  if (enableV12OverflowMenu) {
-    return (
-      <OverflowMenuV12
-        renderIcon={renderIcon}
-        className={toolbarActionClasses}
-        label={iconDescription}
-        size={size}
-        menuAlignment="bottom-end"
-        {...rest}>
-        {children}
-      </OverflowMenuV12>
-    );
-  }
 
   return (
     <OverflowMenu

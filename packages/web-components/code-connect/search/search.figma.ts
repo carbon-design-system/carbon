@@ -1,3 +1,7 @@
+// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=2805-21056&t=6KMXKibN414b97hv-4
+// source=https://github.com/carbon-design-system/carbon/blob/main/packages/web-components/src/components/search/search.ts
+// component=cds-search
+
 /**
  * Copyright IBM Corp. 2026
  *
@@ -5,54 +9,59 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import figma, { html } from '@figma/code-connect/html';
+import figma from 'figma';
+import {
+  renderBooleanAttribute,
+  renderStringAttribute,
+} from '../template-helpers';
 
-const sharedSearchProps = {
-  size: figma.enum('Size', {
+const instance = figma.selectedInstance;
+
+function createTemplate() {
+  const isSkeleton = instance.getEnum('State', {
+    Skeleton: true,
+  });
+
+  if (isSkeleton) {
+    return {
+      id: 'cds-search-skeleton',
+      imports: [
+        "import '@carbon/web-components/es/components/search/search-skeleton.js'",
+      ],
+      example: figma.code`<cds-search-skeleton></cds-search-skeleton>`,
+      metadata: { nestable: true },
+    };
+  }
+
+  const expandable = instance.getEnum('Expandable', {
+    True: true,
+  });
+  const expanded = expandable ? instance.getBoolean('Expanded') : undefined;
+  const size = instance.getEnum('Size', {
     Large: 'lg',
     Medium: 'md',
     Small: 'sm',
-  }),
-  placeholder: figma.string('Placeholder text'),
-  disabled: figma.enum('State', {
+  });
+  const placeholder = instance.getString('Placeholder text');
+  const disabled = instance.getEnum('State', {
     Disabled: true,
-  }),
-};
+  });
 
-figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=2805-21056&t=6KMXKibN414b97hv-4',
-  {
-    variant: { Expandable: 'False' },
-    props: sharedSearchProps,
-    example: (props) =>
-      html`<cds-search
-        disabled=${props.disabled}
-        placeholder=${props.placeholder}
-        size=${props.size}></cds-search>`,
-    imports: ["import '@carbon/web-components/es/components/search/index.js'"],
-  }
-);
+  return {
+    id: 'cds-search',
+    imports: ["import '@carbon/web-components/es/components/search/search.js'"],
+    example: figma.code`<cds-search${renderBooleanAttribute(
+      'disabled',
+      disabled
+    )}${renderBooleanAttribute('expandable', expandable)}${renderBooleanAttribute(
+      'expanded',
+      expanded
+    )}${renderStringAttribute(
+      'placeholder',
+      placeholder
+    )}${renderStringAttribute('size', size)}></cds-search>`,
+    metadata: { nestable: true },
+  };
+}
 
-figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=2805-21056&t=6KMXKibN414b97hv-4',
-  {
-    variant: { Expandable: 'True' },
-    props: sharedSearchProps,
-    example: (props) =>
-      html`<cds-search
-        disabled=${props.disabled}
-        expandable
-        placeholder=${props.placeholder}
-        size=${props.size}></cds-search>`,
-    imports: ["import '@carbon/web-components/es/components/search/index.js'"],
-  }
-);
-
-figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=2805-21056&t=6KMXKibN414b97hv-4',
-  {
-    variant: { State: 'Skeleton' },
-    example: () => html`<cds-search-skeleton></cds-search-skeleton>`,
-    imports: ["import '@carbon/web-components/es/components/search/index.js'"],
-  }
-);
+export default createTemplate();
