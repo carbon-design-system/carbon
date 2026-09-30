@@ -2732,6 +2732,9 @@ Map {
       "showToolbar": {
         "type": "bool",
       },
+      "toolbarLabel": {
+        "type": "string",
+      },
       "size": {
         "args": [
           [
