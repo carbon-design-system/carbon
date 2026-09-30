@@ -5,6 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use '@carbon/themes/scss/config' as *;
 @use '@carbon/themes/scss/theme';
 @use '@carbon/themes/scss/v12' as v12;
 
@@ -19,9 +20,9 @@
 .v12-oklch-notice {
   display: grid;
   padding: 1rem;
-  background: #fcf4d6;
-  border-inline-start: 0.25rem solid #f1c21b;
-  color: #161616;
+  background: var(--#{$prefix}-notification-background-warning);
+  border-inline-start: 0.25rem solid var(--#{$prefix}-support-warning);
+  color: var(--#{$prefix}-text-primary);
   gap: 0.25rem;
   margin-block-end: 1rem;
   max-inline-size: 80rem;
@@ -40,23 +41,23 @@
 }
 
 .v12-oklch-theme {
-  border: 1px solid var(--cds-border-strong-01);
-  background: var(--cds-layer-01);
-  color: var(--cds-text-primary);
+  border: 1px solid var(--#{$prefix}-border-strong-01);
+  background: var(--#{$prefix}-layer-01);
+  color: var(--#{$prefix}-text-primary);
 }
 
 .v12-oklch-theme .cds--layer-one,
 .v12-oklch-theme .cds--layer-two,
 .v12-oklch-theme .cds--layer-three {
   padding: 1rem;
-  border-block-start: 1px solid var(--cds-border-subtle);
+  border-block-start: 1px solid var(--#{$prefix}-border-subtle);
 }
 
 .v12-oklch-layer__content {
   display: grid;
   padding: 1rem;
-  background: var(--cds-layer);
-  color: var(--cds-text-primary);
+  background: var(--#{$prefix}-layer);
+  color: var(--#{$prefix}-text-primary);
   gap: 1rem;
 }
 
@@ -66,7 +67,7 @@
 }
 
 .v12-oklch-layer__content p {
-  color: var(--cds-text-secondary);
+  color: var(--#{$prefix}-text-secondary);
 }
 
 .v12-oklch-layer__content label {
@@ -77,15 +78,15 @@
   box-sizing: border-box;
   padding: 0.75rem 1rem;
   border: 0;
-  background: var(--cds-field);
-  border-block-end: 1px solid var(--cds-border-strong);
+  background: var(--#{$prefix}-field);
+  border-block-end: 1px solid var(--#{$prefix}-border-strong);
   color: inherit;
   font: inherit;
   margin-block-start: 0.5rem;
 }
 
 .v12-oklch-layer__content small {
-  color: var(--cds-text-helper-01);
+  color: var(--#{$prefix}-text-helper-01);
   margin-block-start: 0.5rem;
 }
 
@@ -99,19 +100,19 @@
 }
 
 .v12-oklch-theme > header p {
-  color: var(--cds-text-secondary);
+  color: var(--#{$prefix}-text-secondary);
 }
 
 .v12-oklch-layer__accent {
   padding: 0.75rem;
-  background: var(--cds-layer-accent);
+  background: var(--#{$prefix}-layer-accent);
 }
 
 .v12-oklch-token-table {
   display: grid;
   padding: 0.75rem;
-  border: 1px solid var(--cds-border-subtle);
-  background: var(--cds-layer);
+  border: 1px solid var(--#{$prefix}-border-subtle);
+  background: var(--#{$prefix}-layer);
   gap: 0.25rem;
   margin-block-end: 0.75rem;
 }
@@ -127,14 +128,14 @@
 
 .v12-oklch-token-name {
   overflow: hidden;
-  color: var(--cds-text-secondary);
+  color: var(--#{$prefix}-text-secondary);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .v12-oklch-token-value {
   overflow: hidden;
-  color: var(--cds-text-primary);
+  color: var(--#{$prefix}-text-primary);
   font-weight: 600;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -147,7 +148,7 @@
 
 .v12-oklch-layer__skeleton span {
   display: block;
-  background: var(--cds-skeleton-background-01);
+  background: var(--#{$prefix}-skeleton-background-01);
   block-size: 0.75rem;
 }
 

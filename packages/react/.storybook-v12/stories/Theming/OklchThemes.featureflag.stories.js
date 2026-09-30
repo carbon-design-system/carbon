@@ -11,27 +11,31 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { Layer } from '../../../src/components/Layer';
+import { usePrefix } from '../../../src/internal/usePrefix';
 import './OklchThemes.stories.scss';
 
 // Reads the computed CSS custom property value from the nearest DOM ancestor.
-function useTokenValue(ref, token) {
+function useTokenValue(ref, token, prefix) {
   const [value, setValue] = useState('');
   useEffect(() => {
     if (!ref.current) return;
     const raw = getComputedStyle(ref.current)
-      .getPropertyValue(`--cds-${token}`)
+      .getPropertyValue(`--${prefix}-${token}`)
       .trim();
     setValue(raw);
-  });
+  }, [token, prefix]);
   return value;
 }
 
 function TokenRow({ label, token }) {
+  const prefix = usePrefix();
   const ref = useRef(null);
-  const value = useTokenValue(ref, token);
+  const value = useTokenValue(ref, token, prefix);
   return (
     <div ref={ref} className="v12-oklch-token-row">
-      <span className="v12-oklch-token-name">--cds-{token}</span>
+      <span className="v12-oklch-token-name">
+        --{prefix}-{token}
+      </span>
       <span className="v12-oklch-token-value">{value}</span>
     </div>
   );
