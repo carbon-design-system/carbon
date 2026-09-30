@@ -8,6 +8,7 @@
 @use 'sass:list';
 @use 'sass:math';
 @use 'sass:meta';
+@use '../../breakpoint' as *;
 @use '../../config' as *;
 
 /// The aspect ratios that are used to generate corresponding aspect ratio
@@ -67,6 +68,14 @@ $aspect-ratios: (
 
     .#{$prefix}--aspect-ratio--#{$width}x#{$height}::before {
       padding-block-start: math.percentage(math.div($height, $width));
+    }
+
+    @each $breakpoint in md, lg, xlg, max {
+      @include breakpoint($breakpoint) {
+        .#{$prefix}--aspect-ratio--#{$breakpoint}--#{$width}x#{$height}::before {
+          padding-block-start: math.percentage(math.div($height, $width));
+        }
+      }
     }
   }
 }
