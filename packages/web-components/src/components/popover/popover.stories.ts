@@ -54,6 +54,12 @@ const handlePopoverClose = (event: Event, onClose?: (event: Event) => void) => {
 const autoAlignStoryContainerStyle =
   'display: grid; place-items: center; width: 200vw; min-width: 1200px; height: 200vh; min-height: 1200px;';
 
+const alignmentAxisOffsetArgType = {
+  control: 'number',
+  description:
+    'Provide an offset value for the alignment axis when auto-align is enabled',
+};
+
 const sharedArgTypes = {
   align: {
     control: 'select',
@@ -61,9 +67,8 @@ const sharedArgTypes = {
     description: `Specify how the popover should align with the trigger element`,
   },
   alignmentAxisOffset: {
-    control: 'number',
-    description:
-      'Provide an offset value for the alignment axis when auto-align is enabled',
+    ...alignmentAxisOffsetArgType,
+    if: { arg: 'autoAlign' },
   },
   autoAlign: {
     control: 'boolean',
@@ -109,7 +114,7 @@ const sharedArgTypes = {
 
 const sharedAutoAlignArgTypes = {
   align: sharedArgTypes.align,
-  alignmentAxisOffset: sharedArgTypes.alignmentAxisOffset,
+  alignmentAxisOffset: alignmentAxisOffsetArgType,
   caret: {
     control: 'boolean',
     description: `Specify whether a caret should be rendered`,

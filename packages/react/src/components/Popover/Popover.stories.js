@@ -39,6 +39,7 @@ const argTypes = {
   },
   alignmentAxisOffset: {
     control: { type: 'number' },
+    if: { arg: 'autoAlign' },
   },
   autoAlign: {
     control: { type: 'boolean' },
