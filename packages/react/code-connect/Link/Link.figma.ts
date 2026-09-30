@@ -1,19 +1,15 @@
 // url=https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=50111-991&mode=design&t=kyFCPK0tCeufcNP2-4
-// source=https://github.com/carbon-design-system/carbon/blob/main/packages/web-components/src/components/link/link.ts
-// component=cds-link
+// source=https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Link/Link.tsx
+// component=Link
 
 /**
- * Copyright IBM Corp. 2026
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import figma from 'figma';
-import {
-  renderBooleanAttribute,
-  renderStringAttribute,
-} from '../template-helpers';
 
 const instance = figma.selectedInstance;
 const inline = instance.getEnum('Type', {
@@ -21,7 +17,9 @@ const inline = instance.getEnum('Type', {
   Standalone: false,
 });
 const linkText = instance.getString('Link text');
-const icon = instance.getInstanceSwap('Swap icon')?.executeTemplate().example;
+const renderIcon = instance
+  .getInstanceSwap('Swap icon')
+  ?.executeTemplate().example;
 const size = instance.getEnum('Size', {
   Large: 'lg',
   Medium: 'md',
@@ -32,17 +30,19 @@ const disabled = instance.getEnum('State', {
 });
 
 export default {
-  id: 'cds-link',
-  imports: ["import '@carbon/web-components/es/components/link/link.js'"],
-  example: figma.code`<cds-link href="#"${renderBooleanAttribute(
+  id: 'Link',
+  imports: ["import { Link } from '@carbon/react';"],
+  example: figma.code`<Link href="#"${figma.helpers.react.renderProp(
     'inline',
     inline
-  )}${renderStringAttribute('size', size)}${renderBooleanAttribute(
-    'disabled',
-    disabled
-  )}>
-  ${linkText}
-  ${icon ? figma.code`<span slot="icon">${icon}</span>` : null}
-</cds-link>`,
+  )}${figma.helpers.react.renderProp(
+    'renderIcon',
+    renderIcon
+  )}${figma.helpers.react.renderProp(
+    'size',
+    size
+  )}${figma.helpers.react.renderProp('disabled', disabled)}>
+  ${figma.helpers.react.renderChildren(linkText)}
+</Link>`,
   metadata: { nestable: true },
 };

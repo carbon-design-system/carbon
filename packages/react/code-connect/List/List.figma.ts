@@ -1,9 +1,9 @@
 // url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=3284-27553&t=Y6lD1uj5Q0yszbgL-4
-// source=https://github.com/carbon-design-system/carbon/blob/main/packages/web-components/src/components/list/index.ts
-// component=cds-unordered-list / cds-ordered-list
+// source=https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/UnorderedList/index.ts
+// component=UnorderedList / OrderedList
 
 /**
- * Copyright IBM Corp. 2026
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -23,14 +23,18 @@ const children = instance
   .map((child) => child.executeTemplate().example);
 
 export default {
-  id: isOrdered ? 'cds-ordered-list' : 'cds-unordered-list',
-  imports: ["import '@carbon/web-components/es/components/list/index.js'"],
+  id: isOrdered ? 'OrderedList' : 'UnorderedList',
+  imports: [
+    isOrdered
+      ? "import { OrderedList } from '@carbon/react';"
+      : "import { UnorderedList } from '@carbon/react';",
+  ],
   example: isOrdered
-    ? figma.code`<cds-ordered-list>
-  ${children}
-</cds-ordered-list>`
-    : figma.code`<cds-unordered-list>
-  ${children}
-</cds-unordered-list>`,
+    ? figma.code`<OrderedList>
+  ${figma.helpers.react.renderChildren(children)}
+</OrderedList>`
+    : figma.code`<UnorderedList>
+  ${figma.helpers.react.renderChildren(children)}
+</UnorderedList>`,
   metadata: { nestable: true },
 };
