@@ -10,6 +10,7 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { usePrefix } from '../../internal/usePrefix';
+import { useFeatureFlag } from '../FeatureFlags';
 import OverflowMenu from '../OverflowMenu';
 import { type OverflowMenuProps as OverflowMenuV11Props } from '../OverflowMenu/OverflowMenu';
 import { useTableToolbar } from './TableToolbar';
@@ -29,6 +30,7 @@ const TableToolbarMenu = ({
   size: sizeProp,
   ...rest
 }: TableToolbarMenuProps) => {
+  const enableV12OverflowMenu = useFeatureFlag('enable-v12-overflowmenu');
   const toolbarContext = useTableToolbar();
   const size = sizeProp ?? toolbarContext.size;
   const prefix = usePrefix();
@@ -36,6 +38,21 @@ const TableToolbarMenu = ({
     className,
     `${prefix}--toolbar-action ${prefix}--overflow-menu`
   );
+
+  if (enableV12OverflowMenu) {
+    return (
+      <OverflowMenu
+        renderIcon={renderIcon}
+        className={toolbarActionClasses}
+        label={iconDescription}
+        size={size}
+        menuAlignment="bottom-end"
+        {...rest}>
+        {children}
+      </OverflowMenu>
+    );
+  }
+
   const menuOptionsClasses = cx(
     menuOptionsClass,
     `${prefix}--toolbar-action__menu`
