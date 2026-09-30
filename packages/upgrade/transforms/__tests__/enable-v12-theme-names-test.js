@@ -19,3 +19,20 @@ defineTest(
   null,
   'enable-v12-theme-names-nested'
 );
+
+// Dynamic theme prop (variable reference) — cannot statically rename;
+// a data-v12-theme-todo attribute should be injected for manual follow-up.
+defineTest(
+  __dirname,
+  'enable-v12-theme-names',
+  null,
+  'enable-v12-theme-names-dynamic'
+);
+
+// g100 → dark: a comment noting the lost high-contrast distinction is injected.
+defineTest(
+  __dirname,
+  'enable-v12-theme-names',
+  null,
+  'enable-v12-theme-names-g100'
+);

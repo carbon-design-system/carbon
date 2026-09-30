@@ -112,23 +112,54 @@ function transform(fileInfo, api, options) {
   // Collect all <Theme theme="<v11-name>"> paths first, before any mutation.
   // We snapshot the original v11 name on each path so ancestor checks still
   // see the original values even after siblings have been rewritten.
+  //
+  // Separately, flag any <Theme theme={expr}> where the value is a dynamic
+  // expression — we cannot statically determine the v11 name so we insert a
+  // TODO comment to prompt manual review rather than silently skipping.
   const candidates = [];
+  let hasDynamicSites = false;
+
   root
     .find(j.JSXElement, { openingElement: { name: { name: 'Theme' } } })
     .forEach((path) => {
       const themeProp = path.node.openingElement.attributes.find(
-        (attr) =>
-          attr.type === 'JSXAttribute' &&
-          attr.name.name === 'theme' &&
-          isStringLiteral(attr.value) &&
-          V11_NAMES.has(attr.value.value)
+        (attr) => attr.type === 'JSXAttribute' && attr.name.name === 'theme'
       );
-      if (themeProp) {
+
+      if (!themeProp) return;
+
+      if (
+        isStringLiteral(themeProp.value) &&
+        V11_NAMES.has(themeProp.value.value)
+      ) {
         candidates.push({ path, themeProp, v11Name: themeProp.value.value });
+      } else if (
+        themeProp.value &&
+        themeProp.value.type === 'JSXExpressionContainer' &&
+        themeProp.value.expression.type !== 'StringLiteral' &&
+        themeProp.value.expression.type !== 'Literal'
+      ) {
+        // Dynamic expression — cannot statically rename. Insert a TODO attr so
+        // the developer knows this site needs manual attention. We do this
+        // during collection (before the early-return) so the flag is emitted
+        // even when there are no literal-string candidates in the same file.
+        path.node.openingElement.attributes.push(
+          j.jsxAttribute(
+            j.jsxIdentifier('data-v12-theme-todo'),
+            j.stringLiteral
+              ? j.stringLiteral(
+                  'TODO(v12): rename theme value (white/g10→light, g90/g100→dark)'
+                )
+              : j.literal(
+                  'TODO(v12): rename theme value (white/g10→light, g90/g100→dark)'
+                )
+          )
+        );
+        hasDynamicSites = true;
       }
     });
 
-  if (candidates.length === 0) {
+  if (candidates.length === 0 && !hasDynamicSites) {
     return null; // nothing to do
   }
 
@@ -185,6 +216,23 @@ function transform(fileInfo, api, options) {
     // Otherwise update the theme prop value in place.
     // Use j.literal for Babel-parser compatibility (j.stringLiteral is TSX-only).
     themeProp.value = j.literal(v12Name);
+
+    // g100 was a higher-contrast variant of g90 in v11. Both now map to the
+    // single v12 dark theme (the contrast difference is gone). Leave a trailing
+    // comment so the developer can audit whether any g100 sites relied on that
+    // extra contrast.
+    if (v11Name === 'g100') {
+      themeProp.value.innerComments = themeProp.value.innerComments || [];
+      // jscodeshift surfaces comments via leadingComments on sibling nodes.
+      // Use a JSX comment child instead — reliable across all parsers.
+      path.node.children.unshift(
+        j.jsxExpressionContainer(
+          j.identifier(
+            '/* migrated from g100: v12 dark has no separate high-contrast variant — audit if extra contrast was intentional */'
+          )
+        )
+      );
+    }
   });
 
   if (needsLayerImport) {

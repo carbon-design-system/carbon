@@ -18,14 +18,15 @@
 // overrides still take precedence as expected.
 
 @use 'theme';
-@use 'v12' as v12;
+@use 'generated/v12-light' as v12-light;
+@use 'generated/v12-dark' as v12-dark;
 
 [data-carbon-theme='white'],
 [data-carbon-theme='g10'] {
-  @include theme.theme(v12.$experimental-v12-light);
+  @include theme.theme(v12-light.$experimental-v12-light);
 }
 
 [data-carbon-theme='g90'],
 [data-carbon-theme='g100'] {
-  @include theme.theme(v12.$experimental-v12-dark);
+  @include theme.theme(v12-dark.$experimental-v12-dark);
 }
