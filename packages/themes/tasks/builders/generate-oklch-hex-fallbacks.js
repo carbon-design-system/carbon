@@ -37,19 +37,61 @@ const CONTEXT_SUFFIXES = {
   'surface-dark': '03',
 };
 
+/**
+ * Converts a hex color and an alpha value to a CSS `rgba()` string.
+ *
+ * Opacity-type tokens (e.g. `state-disabled`) carry `token.alpha < 1`.
+ * A bare hex fallback would silently discard that alpha and render as an
+ * opaque surface color in non-OKLCH browsers.  Using `rgba()` preserves the
+ * transparency and matches Carbon's existing V11 pattern (e.g. `rgba(69, 137,
+ * 255, 0.32)` in the g90 theme).
+ *
+ * @param {string} hex  Six-digit hex color, e.g. `#f4f5f8`.
+ * @param {number} alpha  Opacity in [0, 1].
+ * @returns {string}  e.g. `rgba(244, 245, 248, 0.25)`.
+ */
+function hexToRgba(hex, alpha) {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
+/**
+ * Returns the CSS fallback value for a token.  Tokens that carry a fractional
+ * alpha (opacity-type interactive states) emit `rgba(r, g, b, alpha)` so that
+ * the transparency is preserved in browsers without OKLCH support.  All other
+ * tokens emit their gamut-mapped hex value unchanged.
+ *
+ * @param {{ fallback: string, alpha?: number }} token
+ * @returns {string}
+ */
+function tokenFallback(token) {
+  if (token.alpha !== undefined && token.alpha < 1) {
+    return hexToRgba(token.fallback, token.alpha);
+  }
+  return token.fallback;
+}
+
 function getFallbacks(mode) {
   const theme = generateTheme(mode);
   const fallbacks = Object.entries(TOKENS).map(([key, name]) => [
     name,
-    theme[key].fallback,
+    tokenFallback(theme[key]),
   ]);
 
   for (const [collection, name] of Object.entries(COLLECTIONS)) {
     for (const token of Object.values(theme[collection])) {
       fallbacks.push([
         `${name}-${CONTEXT_SUFFIXES[token.context]}`,
-        token.fallback,
+        tokenFallback(token),
       ]);
+    }
+  }
+
+  if (theme.interactive) {
+    for (const [state, token] of Object.entries(theme.interactive)) {
+      fallbacks.push([`state-${state}`, tokenFallback(token)]);
     }
   }
 

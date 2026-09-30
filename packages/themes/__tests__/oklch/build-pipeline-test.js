@@ -50,7 +50,7 @@ describe('V12 theme build pipeline', () => {
     ).toBe('oklch(0.97 0.004 262)');
   });
 
-  it('generates light and dark fallback declarations', () => {
+  it('generates light and dark fallback declarations including interactive states', () => {
     const output = generateOklchHexFallbacks();
 
     expect(output).toContain('@supports not (color: oklch(0 0 0))');
@@ -58,5 +58,15 @@ describe('V12 theme build pipeline', () => {
     expect(output).toContain("[data-carbon-theme='dark']");
     expect(output).toContain('--cds-layer-01: #f4f5f8;');
     expect(output).toContain('--cds-layer-01: #151618;');
+    expect(output).toContain('--cds-state-hover:');
+    expect(output).toContain('--cds-state-active:');
+    expect(output).toContain('--cds-state-selected:');
+    // The disabled state carries alpha=0.25.  The fallback must be rgba() to
+    // preserve the opacity in browsers without OKLCH support — a bare hex value
+    // would silently discard the alpha and render as a fully opaque surface color.
+    expect(output).toContain(
+      '--cds-state-disabled: rgba(244, 245, 248, 0.25);'
+    );
+    expect(output).toContain('--cds-state-disabled: rgba(21, 22, 24, 0.25);');
   });
 });

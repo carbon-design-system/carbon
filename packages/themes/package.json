@@ -28,7 +28,7 @@
   },
   "scripts": {
     "ci-check": "carbon-cli check \"scss/**/*.scss\" -i \"**/generated/**\" -i \"**/compat/**\"",
-    "clean": "rimraf es lib umd scss/compat/generated scss/generated js/generated src/dtcg/v12",
+    "clean": "rimraf es lib umd scss/compat/generated scss/generated js/generated",
     "build:types": "tsc -p tsconfig.types.json",
     "babel-node": "node ../../node_modules/@babel/node/lib/babel-node.js",
     "build:js-tokens": "yarn babel-node --extensions '.js,.ts' --presets '@babel/preset-env,@babel/preset-typescript' tasks/generate-js-tokens.js",
