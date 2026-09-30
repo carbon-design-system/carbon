@@ -23,9 +23,9 @@
 .#{$prefix}--empty-state__illustration--md {
   display: block;
   flex-shrink: 0;
-  block-size: $spacing-11;
+  block-size: convert.rem(80px);
   fill: $icon-primary;
-  inline-size: $spacing-11;
+  inline-size: convert.rem(80px);
   margin-block-end: $spacing-05;
   overflow: hidden;
 }
@@ -33,9 +33,9 @@
 .#{$prefix}--empty-state__illustration--sm {
   display: block;
   flex-shrink: 0;
-  block-size: $spacing-10;
+  block-size: convert.rem(64px);
   fill: $icon-primary;
-  inline-size: $spacing-10;
+  inline-size: convert.rem(64px);
   margin-block-end: $spacing-04;
   overflow: hidden;
 }
