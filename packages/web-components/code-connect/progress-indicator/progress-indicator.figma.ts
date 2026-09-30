@@ -1,3 +1,7 @@
+// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=3925-58667&m=dev
+// source=https://github.com/carbon-design-system/carbon/blob/main/packages/web-components/src/components/progress-indicator/progress-indicator.ts
+// component=cds-progress-indicator
+
 /**
  * Copyright IBM Corp. 2026
  *
@@ -5,23 +9,28 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import figma, { html } from '@figma/code-connect/html';
+import figma from 'figma';
+import { renderBooleanAttribute } from '../template-helpers';
 
-figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=3925-58667&m=dev',
-  {
-    props: {
-      children: figma.children(['_Progress indicator item']),
-      vertical: figma.enum('Direction', {
-        Vertical: true,
-      }),
-    },
-    example: (props) =>
-      html`<cds-progress-indicator vertical=${props.vertical}>
-        ${props.children}
-      </cds-progress-indicator>`,
-    imports: [
-      "import '@carbon/web-components/es/components/progress-indicator/index.js'",
-    ],
-  }
-);
+const instance = figma.selectedInstance;
+const children = instance
+  .findConnectedInstances((child) => child.hasCodeConnect())
+  .map((child) => child.executeTemplate().example);
+const vertical = instance.getEnum('Direction', {
+  Vertical: true,
+});
+
+export default {
+  id: 'cds-progress-indicator',
+  imports: [
+    "import '@carbon/web-components/es/components/progress-indicator/progress-indicator.js'",
+    "import '@carbon/web-components/es/components/progress-indicator/progress-step.js'",
+  ],
+  example: figma.code`<cds-progress-indicator${renderBooleanAttribute(
+    'vertical',
+    vertical
+  )}>
+  ${children}
+</cds-progress-indicator>`,
+  metadata: { nestable: true },
+};

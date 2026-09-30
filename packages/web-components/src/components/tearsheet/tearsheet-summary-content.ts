@@ -1,0 +1,97 @@
+/**
+ *
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import { html, LitElement } from 'lit';
+import { property } from 'lit/decorators.js';
+import { prefix } from '../../globals/settings';
+import HostListenerMixin from '../../globals/mixins/host-listener';
+import '../side-panel/index';
+import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import { classMap } from 'lit-html/directives/class-map.js';
+import styles from './tearsheet.scss?lit';
+import { SignalWatcher } from '@lit-labs/signals';
+import { getTearsheetSignal, getParentTearsheetId } from './tearsheet-signal';
+
+const blockClass = `${prefix}--tearsheet`;
+
+/**
+ * Tearsheet Summary Content component - Right-side panel for summary details.
+ * Automatically converts to a slide-in panel on small screens.
+ *
+ * @element cds-tearsheet-summary-content
+ * @slot - Content for the summary panel
+ * @fires cds-tearsheet-summary-closed - Fired when the summary panel is closed (mobile only)
+ */
+@customElement(`${prefix}-tearsheet-summary-content`)
+class CDSTearsheetSummaryContent extends SignalWatcher(
+  HostListenerMixin(LitElement)
+) {
+  @property({ reflect: true })
+  slot = 'summary-content';
+
+  @property({ type: Boolean, reflect: true, attribute: 'is-flush' })
+  isFlush: boolean = false;
+
+  @property({ type: Boolean, reflect: true, attribute: 'summary-panel-open' })
+  summaryPanelOpen: boolean = false;
+
+  @property({ attribute: 'summary-panel-aria-label' })
+  summaryPanelAriaLabel: string = 'Summary panel';
+
+  /** uniqueId of the parent cds-tearsheet, read once in connectedCallback. */
+  private _uniqueId: string = '';
+
+  connectedCallback(): void {
+    super.connectedCallback();
+    this._uniqueId = getParentTearsheetId(this);
+  }
+
+  private handleClose = () => {
+    this.summaryPanelOpen = false;
+    this.dispatchEvent(
+      new CustomEvent(`${prefix}-tearsheet-summary-closed`, {
+        bubbles: true,
+        composed: true,
+      })
+    );
+  };
+
+  firstUpdated() {
+    this.classList.add(`${blockClass}__summary-content`);
+  }
+
+  render() {
+    // getTearsheetSignal(id).get() subscribes SignalWatcher to only this
+    // instance's signal — changes in other tearsheets never trigger a re-render.
+    const { isSm } = getTearsheetSignal(this._uniqueId).get();
+
+    const classes = classMap({
+      [`${blockClass}__flush`]: this.isFlush,
+    });
+
+    return !isSm
+      ? html` <aside
+          class="${classes}"
+          aria-label="${this.summaryPanelAriaLabel}">
+          <slot></slot>
+        </aside>`
+      : html` <cds-side-panel
+          size="sm"
+          ?slide-in=${true}
+          ?open="${this.summaryPanelOpen}"
+          placement="right"
+          aria-label="${this.summaryPanelAriaLabel}"
+          aria-modal="true"
+          @cds-side-panel-closed="${this.handleClose}">
+          <slot></slot>
+        </cds-side-panel>`;
+  }
+
+  static styles = styles;
+}
+export default CDSTearsheetSummaryContent;
