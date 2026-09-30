@@ -103,10 +103,10 @@ export const emptyStatePictogram = {
   `,
 };
 
-// ─── Story: empty state unit ──────────────────────────────────────────────────
+// ─── Story: empty state in a UI ──────────────────────────────────────────────
 
 export const emptyStateInUI = {
-  name: 'Empty State unit',
+  name: 'Empty State in a UI',
   args: { placement: 'left' },
   argTypes: {
     placement: {

@@ -10,7 +10,7 @@ import { customElement, property } from 'lit/decorators.js';
 import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
 
 import '../components/EmptyState';
-import { carbonIconToSVG, type CarbonIcon } from '../../../globals/internal/icon-loader-utils';
+import { carbonIconToSVG, type CarbonIcon } from '../../../../globals/internal/icon-loader-utils';
 
 import {
   Container,
