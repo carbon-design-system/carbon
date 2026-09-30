@@ -39,8 +39,8 @@ import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import {
   getInteractiveContent,
   getRoleContent,
-  useNoInteractiveChildren,
 } from '../../internal/useNoInteractiveChildren';
+import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useFeatureFlag } from '../FeatureFlags';
 import { useId } from '../../internal/useId';
@@ -567,7 +567,7 @@ export const SelectableTile = React.forwardRef<
         {normalizedDecorator}
       </div>
     ) : null;
-    useNoInteractiveChildren(
+    useNoInteractiveChildrenForLabel(
       labelRef,
       'The SelectableTile component `children` prop must have no interactive content'
     );

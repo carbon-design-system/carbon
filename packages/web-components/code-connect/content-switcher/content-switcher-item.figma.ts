@@ -1,3 +1,7 @@
+// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=10151-402337&t=Y6lD1uj5Q0yszbgL-4
+// source=https://github.com/carbon-design-system/carbon/blob/main/packages/web-components/src/components/content-switcher/content-switcher-item.ts
+// component=cds-content-switcher-item
+
 /**
  * Copyright IBM Corp. 2026
  *
@@ -5,48 +9,21 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import figma, { html } from '@figma/code-connect/html';
+import figma from 'figma';
+import { renderBooleanAttribute } from '../template-helpers';
 
-figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=10151-402337&t=Y6lD1uj5Q0yszbgL-4',
-  {
-    props: {
-      text: figma.string('Label text'),
-      disabled: figma.enum('State', {
-        Disabled: true,
-      }),
-    },
-    example: (props) =>
-      html`<cds-content-switcher-item
-        disabled=${props.disabled}
-        value="switch-value">
-        ${props.text}
-      </cds-content-switcher-item>`,
-    imports: [
-      "import '@carbon/web-components/es/components/content-switcher/index.js'",
-    ],
-  }
-);
+const instance = figma.selectedInstance;
+const text = instance.getString('Label text');
+const disabled = instance.getEnum('State', { Disabled: true });
 
-figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=21988-280553&t=Y6lD1uj5Q0yszbgL-4',
-  {
-    props: {
-      children: figma.children('*'),
-      disabled: figma.enum('State', {
-        Disabled: true,
-      }),
-    },
-    example: (props) =>
-      html`<cds-content-switcher-item
-        disabled=${props.disabled}
-        icon
-        value="icon-switch-value">
-        ${props.children}
-        <span slot="tooltip-content">Content switcher item</span>
-      </cds-content-switcher-item>`,
-    imports: [
-      "import '@carbon/web-components/es/components/content-switcher/index.js'",
-    ],
-  }
-);
+export default {
+  id: 'cds-content-switcher-item',
+  imports: [
+    "import '@carbon/web-components/es/components/content-switcher/index.js'",
+  ],
+  example: figma.code`<cds-content-switcher-item value="switch-value"${renderBooleanAttribute(
+    'disabled',
+    disabled
+  )}>${text}</cds-content-switcher-item>`,
+  metadata: { nestable: true },
+};
