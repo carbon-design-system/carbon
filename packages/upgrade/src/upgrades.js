@@ -487,6 +487,52 @@ export const upgrades = [
         },
       },
       {
+        name: 'enable-v12-theme-names',
+        description: `
+          Migrate v11 theme names to the v12 two-theme model.
+
+          Renames white/g10 → light and g90/g100 → dark on <Theme theme="...">
+          props. When an outer and inner <Theme> both map to the same v12 group
+          (e.g. g10 wrapping white, both light), the inner <Theme> is converted
+          to <Layer> to preserve the original layering contrast.
+
+          Example:
+          Before: <Theme theme="g10"><Theme theme="white"><Card /></Theme></Theme>
+          After:  <Theme theme="light"><Layer><Card /></Layer></Theme>
+        `,
+        migrate: async (options) => {
+          const transform = path.join(
+            TRANSFORM_DIR,
+            'enable-v12-theme-names.js'
+          );
+          const paths =
+            Array.isArray(options.paths) && options.paths.length > 0
+              ? options.paths
+              : await glob(['**/*.{js,jsx,ts,tsx}'], {
+                  cwd: options.workspaceDir,
+                  ignore: [
+                    '**/es/**',
+                    '**/lib/**',
+                    '**/umd/**',
+                    '**/node_modules/**',
+                    '**/storybook-static/**',
+                    '**/dist/**',
+                    '**/build/**',
+                    '**/*.d.ts',
+                    '**/coverage/**',
+                  ],
+                });
+
+          await runCodemod(options, {
+            dry: !options.write,
+            transform,
+            paths,
+            verbose: options.verbose,
+            parser: 'tsx',
+          });
+        },
+      },
+      {
         name: 'slug-prop-to-decorator-prop',
         description: `
           Replace slug prop with decorator

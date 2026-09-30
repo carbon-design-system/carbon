@@ -31,6 +31,21 @@ const themes = {
 };
 
 export * from '../js/generated/themes/white.js';
+
+// v11 → v12 theme aliases.
+// These re-export the v12 light/dark token objects under the legacy v11 names
+// so that code which passes theme objects directly (rather than using CSS
+// custom properties) continues to work after upgrading. The v11 names are
+// kept for backward compatibility and will be removed in a future major.
+/** @deprecated Use `experimentalV12Light`. In v12, `white` maps to `light`. */
+export const v12White = experimentalV12Light;
+/** @deprecated Use `experimentalV12Light`. In v12, `g10` maps to `light`. */
+export const v12G10 = experimentalV12Light;
+/** @deprecated Use `experimentalV12Dark`. In v12, `g90` maps to `dark`. */
+export const v12G90 = experimentalV12Dark;
+/** @deprecated Use `experimentalV12Dark`. In v12, `g100` maps to `dark`. */
+export const v12G100 = experimentalV12Dark;
+
 export {
   white,
   g10,

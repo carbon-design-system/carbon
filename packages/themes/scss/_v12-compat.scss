@@ -1,0 +1,31 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Runtime aliases: v11 theme names → v12 light/dark
+//
+// white and g10 were both light-background themes in v11. In v12 they
+// unify to a single `light` theme. Applying v12 custom properties under
+// their legacy data-carbon-theme selectors means consuming applications
+// continue to work after upgrading without touching their markup.
+//
+// g90 and g100 follow the same pattern on the dark side.
+//
+// These selectors are intentionally non-specific so component-level
+// overrides still take precedence as expected.
+
+@use 'theme';
+@use 'v12' as v12;
+
+[data-carbon-theme='white'],
+[data-carbon-theme='g10'] {
+  @include theme.theme(v12.$experimental-v12-light);
+}
+
+[data-carbon-theme='g90'],
+[data-carbon-theme='g100'] {
+  @include theme.theme(v12.$experimental-v12-dark);
+}

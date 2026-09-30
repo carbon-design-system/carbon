@@ -8,3 +8,6 @@
 @forward 'generated/v12-light' as experimental-v12-*;
 @forward 'generated/v12-dark' as experimental-v12-*;
 @forward 'generated/v12-fallbacks';
+// Runtime aliases — v11 theme name selectors emit v12 custom properties.
+// Import this file to get backward-compatible data-carbon-theme support.
+@forward 'v12-compat';
