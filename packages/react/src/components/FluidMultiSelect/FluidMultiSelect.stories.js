@@ -128,10 +128,6 @@ const sharedArgTypes = {
     control: { type: 'select' },
     options: ['top', 'fixed', 'top-after-reopen'],
   },
-  size: {
-    control: { type: 'select' },
-    options: ['xs', 'sm', 'md', 'lg'],
-  },
   titleText: {
     control: {
       type: 'text',
@@ -172,7 +168,6 @@ const sharedArgs = {
   locale: 'en',
   readOnly: false,
   selectionFeedback: 'top-after-reopen',
-  size: 'md',
   titleText: 'Label',
   useTitleInItem: false,
   warn: false,
@@ -208,7 +203,7 @@ Default.argTypes = {
 export const Filterable = (args) => {
   return (
     <FluidMultiSelect
-      initialSelectedItem={items[2]}
+      initialSelectedItems={[items[2]]}
       id="default"
       titleText="Label"
       label="Choose an option"
@@ -243,7 +238,6 @@ export const _FilterableWithLayer = (args) => {
           titleText="Multiselect title"
           items={items}
           itemToString={(item) => (item ? item.text : '')}
-          selectionFeedback="top-after-reopen"
           {...args}
         />
       )}
@@ -322,7 +316,7 @@ export const withAILabel = (args) => {
   );
   return (
     <FluidMultiSelect
-      initialSelectedItem={items[2]}
+      initialSelectedItems={[items[2]]}
       id="default"
       titleText="Label"
       label="Choose an option"
