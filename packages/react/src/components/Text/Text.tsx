@@ -31,11 +31,13 @@ export type TextProps<T extends ElementType> = PolymorphicComponentPropWithRef<
   TextBaseProps
 >;
 
-type TextComponent = <T extends ElementType = 'span'>(
-  props: TextProps<T> & { ref?: PolymorphicRef<T> }
-) => ReactElement | null;
+type TextComponent = {
+  <T extends ElementType = 'span'>(
+    props: TextProps<T> & { ref?: PolymorphicRef<T> }
+  ): ReactElement | null;
+  displayName?: string;
+};
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 export const Text = forwardRef<
   HTMLSpanElement,
   TextBaseProps & {
@@ -82,6 +84,8 @@ export const Text = forwardRef<
     </TextDirectionContext.Provider>
   );
 }) as TextComponent;
+
+Text.displayName = 'Text';
 
 // @ts-expect-error - `propTypes` isn't typed.
 Text.propTypes = {

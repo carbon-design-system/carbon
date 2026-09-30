@@ -8,7 +8,9 @@
 @use '../../button';
 @use '../../overflow-menu';
 @use '../../search';
+@use '../../../border-radius' as *;
 @use '../../../config' as *;
+@use '../../../feature-flags' as *;
 @use '../../../motion' as *;
 @use '../../../spacing' as *;
 @use '../../../theme' as *;
@@ -45,6 +47,10 @@
     block-size: layout.size('height');
     inline-size: 100%;
     min-block-size: layout.size('height');
+
+    @if enabled('enable-v12-release') {
+      @include button.radius($border-radius-00);
+    }
   }
 
   .#{$prefix}--toolbar-content {

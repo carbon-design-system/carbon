@@ -5,19 +5,29 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import styles from './fluid-text-input-story.scss?inline';
+
 import React from 'react';
 import FluidTextInput from '../FluidTextInput';
 import FluidTextInputSkeleton from './FluidTextInput.Skeleton';
 import { Toggletip, ToggletipButton, ToggletipContent } from '../Toggletip';
 import { Information } from '@carbon/icons-react';
 import './test.scss';
-import './fluid-text-input-story.scss';
 import mdx from './FluidTextInput.mdx';
 
 export default {
   title: 'Components/Fluid Components/FluidTextInput',
   component: FluidTextInput,
+  decorators: [
+    (Story) => (
+      <>
+        <style>{styles}</style>
+        <Story />
+      </>
+    ),
+  ],
   parameters: {
+    styles,
     docs: {
       page: mdx,
     },
@@ -30,21 +40,9 @@ export default {
   },
 };
 
-export const Default = (textInputArgs) => <FluidTextInput {...textInputArgs} />;
-
-const LabelToggletip = () => (
-  // Keep the toggletip outside `labelText`; interactive content is invalid in labels.
-  <span className="fluid-text-input-story__toggletip">
-    <Toggletip align="top-left">
-      <ToggletipButton label="Show information">
-        <Information />
-      </ToggletipButton>
-      <ToggletipContent>
-        <p>Additional field information here.</p>
-      </ToggletipContent>
-    </Toggletip>
-  </span>
-);
+export const Default = (args) => {
+  return <FluidTextInput {...args} />;
+};
 
 const sharedArgTypes = {
   className: {
@@ -140,12 +138,27 @@ Default.parameters = {
   controls: { include: sharedControls },
 };
 
-export const DefaultWithToggletip = (textInputArgs) => (
-  <div className="fluid-text-input-story">
-    <LabelToggletip />
-    <FluidTextInput {...textInputArgs} labelText="Label" />
-  </div>
-);
+export const DefaultWithToggletip = (args) => {
+  const labelToggletip = (
+    // Keep the toggletip outside `labelText`; interactive content is invalid in labels.
+    <span className="fluid-text-input-story__toggletip">
+      <Toggletip align="top-left">
+        <ToggletipButton label="Show information">
+          <Information />
+        </ToggletipButton>
+        <ToggletipContent>
+          <p>Additional field information here.</p>
+        </ToggletipContent>
+      </Toggletip>
+    </span>
+  );
+  return (
+    <div className="fluid-text-input-story">
+      {labelToggletip}
+      <FluidTextInput {...args} labelText="Label" />
+    </div>
+  );
+};
 
 DefaultWithToggletip.args = {
   ...sharedArgs,
@@ -159,4 +172,6 @@ DefaultWithToggletip.parameters = {
   },
 };
 
-export const Skeleton = () => <FluidTextInputSkeleton />;
+export const Skeleton = () => {
+  return <FluidTextInputSkeleton />;
+};
