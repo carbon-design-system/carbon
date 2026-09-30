@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { forwardRef } from 'react';
+import React, { forwardRef, type Ref } from 'react';
 import { useFeatureFlag } from '../FeatureFlags';
 import { MenuItem, type MenuItemProps } from '../Menu';
 import OverflowMenuItem from '../OverflowMenuItem';
@@ -43,7 +43,7 @@ const TableToolbarAction = frFn((props, ref) => {
 
     return (
       <MenuItem
-        ref={ref}
+        ref={ref as Ref<HTMLLIElement>}
         label={label}
         onClick={onClick as MenuItemProps['onClick']}
         {...(rest as Omit<MenuItemProps, 'label'>)}
@@ -53,7 +53,7 @@ const TableToolbarAction = frFn((props, ref) => {
 
   return (
     <OverflowMenuItem
-      ref={ref}
+      ref={ref as Ref<HTMLElement>}
       itemText={children}
       onClick={onClick as React.MouseEventHandler<HTMLDivElement>}
       {...rest}
