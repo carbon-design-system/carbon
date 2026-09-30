@@ -243,7 +243,10 @@ export function isFeatureFlagEnabled(
   context: HTMLElement
 ): boolean {
   const instance = findParentFeatureFlags(context);
-  const enabled = instance?.isFeatureFlagEnabled(flag) ?? false;
+  // Fall back to the global singleton so that calling `enable(flag)` from
+  // `@carbon/feature-flags` works without a `<feature-flags>` ancestor element.
+  const enabled =
+    instance?.isFeatureFlagEnabled(flag) ?? GlobalFeatureFlags.enabled(flag);
 
   if (process.env.NODE_ENV !== 'production') {
     notifyAvailableFlag(flag, enabled);

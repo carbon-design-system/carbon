@@ -563,6 +563,7 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
 
     const overflowMenuIconClasses = classNames(
       `${prefix}--overflow-menu__icon`,
+      `${prefix}--btn__icon`,
       iconClass
     );
 
@@ -653,7 +654,7 @@ OverflowMenu.displayName = 'OverflowMenu';
 
 OverflowMenu.propTypes = {
   /**
-   * Specify how the trigger should align with the tooltip
+   * Specify how the tooltip should be aligned with the button
    */
   align: deprecateValuesWithin(
     PropTypes.oneOf([

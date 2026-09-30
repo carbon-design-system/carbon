@@ -16,11 +16,12 @@ exports[`TableToolbarMenu renders as expected - Component API should render 1`] 
           aria-haspopup="true"
           aria-labelledby="tooltip-_r_3_"
           class="cds--overflow-menu cds--btn cds--btn--ghost cds--btn--icon-only"
+          tabindex="0"
           type="button"
         >
           <svg
             aria-hidden="true"
-            class="cds--overflow-menu__icon"
+            class="cds--overflow-menu__icon cds--btn__icon"
             fill="currentColor"
             focusable="false"
             height="16"

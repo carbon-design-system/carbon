@@ -6,6 +6,7 @@
  */
 
 import { expect, fixture, html } from '@open-wc/testing';
+import { FeatureFlags } from '@carbon/web-components/es/packages/feature-flags/es/index.js';
 import { isFeatureFlagEnabled } from '@carbon/web-components/es/components/feature-flags/index.js';
 import '@carbon/web-components/es/components/toggle/index.js';
 
@@ -289,6 +290,8 @@ describe('feature-flag', function () {
     });
 
     it('should call console.info when a v12 flag is available but not enabled', async () => {
+      // Disable enable-v12-release on the wrapper so enable-v12-overflowmenu
+      // is not implicitly enabled via the global scope.
       const el = await fixture(html`
         <feature-flags enable-v12-release="false">
           <div id="child"></div>
@@ -381,6 +384,11 @@ describe('feature-flag', function () {
             <div id="child"></div>
           </feature-flags>
         `);
+        // Explicitly disable the flag (and the v12 release flag) on the wrapper
+        // so its local scope shadows the global scope, giving a baseline of false.
+        el.setAttribute('enable-v12-release', 'false');
+        el.setAttribute(flag, 'false');
+        await el.updateComplete;
         const child = el.querySelector('#child');
         expect(isFeatureFlagEnabled(flag, child)).to.be.false;
 
@@ -389,6 +397,31 @@ describe('feature-flag', function () {
 
         expect(isFeatureFlagEnabled(flag, child)).to.be.true;
       });
+    });
+  });
+
+  describe('global scope fallback', function () {
+    const originalEnabled = FeatureFlags.enabled;
+
+    afterEach(() => {
+      FeatureFlags.enabled = originalEnabled;
+    });
+
+    it('should return true when the flag is enabled on the global scope and there is no <feature-flags> ancestor', async () => {
+      const el = await fixture(html`<div id="child"></div>`);
+      FeatureFlags.enabled = () => true;
+      expect(isFeatureFlagEnabled('enable-dialog-element', el)).to.be.true;
+    });
+
+    it('should prefer the nearest <feature-flags> ancestor over the global scope', async () => {
+      FeatureFlags.enabled = () => true;
+      const el = await fixture(html`
+        <feature-flags enable-dialog-element="false">
+          <div id="child"></div>
+        </feature-flags>
+      `);
+      const child = el.querySelector('#child');
+      expect(isFeatureFlagEnabled('enable-dialog-element', child)).to.be.false;
     });
   });
 });

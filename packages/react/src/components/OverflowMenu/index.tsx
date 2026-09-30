@@ -13,15 +13,22 @@ import {
 } from './next';
 import {
   OverflowMenu as OverflowMenuV11,
-  type OverflowMenuProps,
+  type OverflowMenuProps as OverflowMenuV11Props,
 } from './OverflowMenu';
+
+type OverflowMenuProps = OverflowMenuV11Props | OverflowMenuV12Props;
 
 const OverflowMenu = forwardRef<HTMLDivElement, OverflowMenuProps>(
   (props, ref) => {
     const enableV12OverflowMenu = useFeatureFlag('enable-v12-overflowmenu');
 
     if (!enableV12OverflowMenu) {
-      return <OverflowMenuV11 {...props} ref={ref as Ref<HTMLButtonElement>} />;
+      return (
+        <OverflowMenuV11
+          {...(props as OverflowMenuV11Props)}
+          ref={ref as Ref<HTMLButtonElement>}
+        />
+      );
     }
 
     const {
@@ -50,7 +57,7 @@ const OverflowMenu = forwardRef<HTMLDivElement, OverflowMenuProps>(
       open,
       selectorPrimaryFocus,
       ...rest
-    } = props as OverflowMenuProps &
+    } = props as OverflowMenuV11Props &
       Pick<OverflowMenuV12Props, 'label' | 'menuAlignment'>;
 
     const side = direction === 'top' ? 'top' : 'bottom';
