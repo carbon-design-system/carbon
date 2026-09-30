@@ -1,7 +1,7 @@
 {
   "name": "@carbon/themes",
   "description": "Themes for applying color in the Carbon Design System",
-  "version": "12.0.0-alpha.1",
+  "version": "12.0.0-alpha.2",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -45,8 +45,8 @@
   },
   "dependencies": {
     "@carbon/colors": "^12.0.0-alpha.1",
-    "@carbon/layout": "^12.0.0-alpha.1",
-    "@carbon/type": "^12.0.0-alpha.1",
+    "@carbon/layout": "^12.0.0-alpha.2",
+    "@carbon/type": "^12.0.0-alpha.2",
     "@ibm/telemetry-js": "^1.5.0",
     "color": "^4.0.0"
   },
