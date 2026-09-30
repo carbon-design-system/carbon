@@ -26,17 +26,17 @@
 
   .#{$prefix}--empty-state__illustration--md {
     flex-shrink: 0;
-    block-size: convert.rem(80px);
+    block-size: $spacing-11;
     fill: $icon-primary;
-    inline-size: convert.rem(80px);
+    inline-size: $spacing-11;
     margin-block-end: $spacing-05;
   }
 
   .#{$prefix}--empty-state__illustration--sm {
     flex-shrink: 0;
-    block-size: convert.rem(64px);
+    block-size: $spacing-10;
     fill: $icon-primary;
-    inline-size: convert.rem(64px);
+    inline-size: $spacing-10;
     margin-block-end: $spacing-04;
   }
 
@@ -69,6 +69,10 @@
     color: $text-secondary;
     margin-block: 0;
     margin-block-end: $spacing-04;
+  }
+
+  .#{$prefix}--empty-state__subtitle--sm {
+    margin-block-end: $spacing-03;
   }
 
   .#{$prefix}--empty-state__action {

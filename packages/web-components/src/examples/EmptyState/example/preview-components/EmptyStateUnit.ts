@@ -101,10 +101,10 @@ export class CDSEmptyStateUnit extends LitElement {
 
   private _clearSearch() {
     this._searchValue = '';
-    const search = this.renderRoot?.querySelector(
-      'cds-table-toolbar-search'
-    ) as HTMLInputElement | null;
-    if (search) search.value = '';
+    const input = this.renderRoot
+      ?.querySelector('cds-table-toolbar-search')
+      ?.querySelector('input');
+    if (input) input.value = '';
   }
 
   private _toggleSideNav() {

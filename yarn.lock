@@ -2507,6 +2507,7 @@ __metadata:
     "@carbon/icons": "npm:^11.89.0"
     "@carbon/layout": "npm:^11.60.0"
     "@carbon/motion": "npm:^11.53.0"
+    "@carbon/pictograms": "npm:^12.85.0"
     "@carbon/styles": "npm:^1.116.0"
     "@carbon/utilities": "npm:^0.26.0"
     "@floating-ui/dom": "npm:^1.6.3"

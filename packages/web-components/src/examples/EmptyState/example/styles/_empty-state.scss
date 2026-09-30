@@ -23,9 +23,9 @@
 .#{$prefix}--empty-state__illustration--md {
   display: block;
   flex-shrink: 0;
-  block-size: convert.rem(80px);
+  block-size: $spacing-11;
   fill: $icon-primary;
-  inline-size: convert.rem(80px);
+  inline-size: $spacing-11;
   margin-block-end: $spacing-05;
   overflow: hidden;
 }
@@ -33,9 +33,9 @@
 .#{$prefix}--empty-state__illustration--sm {
   display: block;
   flex-shrink: 0;
-  block-size: convert.rem(64px);
+  block-size: $spacing-10;
   fill: $icon-primary;
-  inline-size: convert.rem(64px);
+  inline-size: $spacing-10;
   margin-block-end: $spacing-04;
   overflow: hidden;
 }
@@ -68,9 +68,12 @@
   margin-block-end: $spacing-04;
 }
 
+.#{$prefix}--empty-state__subtitle--sm {
+  margin-block-end: $spacing-03;
+}
+
 .#{$prefix}--empty-state__action {
-  // cds-button is a custom element that renders as a block host by default.
-  // Constrain it to hug its content width, matching the React Button behaviour.
+
   display: inline-flex;
   margin-block: 0;
   margin-block-end: $spacing-04;
