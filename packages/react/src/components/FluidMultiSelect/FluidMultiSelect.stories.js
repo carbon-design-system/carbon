@@ -66,16 +66,18 @@ const items = [
   },
 ];
 
-export const Default = (multiSelectArgs) => (
-  <FluidMultiSelect
-    id="default"
-    titleText="Label"
-    label="Choose an option"
-    items={items}
-    itemToString={(item) => (item ? item.text : '')}
-    {...multiSelectArgs}
-  />
-);
+export const Default = (args) => {
+  return (
+    <FluidMultiSelect
+      id="default"
+      titleText="Label"
+      label="Choose an option"
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      {...args}
+    />
+  );
+};
 
 const sharedArgTypes = {
   autoAlign: {
@@ -203,17 +205,19 @@ Default.argTypes = {
   ...sharedArgTypes,
 };
 
-export const Filterable = (multiSelectArgs) => (
-  <FluidMultiSelect
-    initialSelectedItem={items[2]}
-    id="default"
-    titleText="Label"
-    label="Choose an option"
-    items={items}
-    itemToString={(item) => (item ? item.text : '')}
-    {...multiSelectArgs}
-  />
-);
+export const Filterable = (args) => {
+  return (
+    <FluidMultiSelect
+      initialSelectedItem={items[2]}
+      id="default"
+      titleText="Label"
+      label="Choose an option"
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      {...args}
+    />
+  );
+};
 
 Filterable.args = {
   ...sharedArgs,
@@ -230,20 +234,22 @@ Filterable.parameters = {
   },
 };
 
-export const _FilterableWithLayer = (multiSelectArgs) => (
-  <WithLayer>
-    {(layer) => (
-      <FluidMultiSelect
-        id={`carbon-multiselect-example-${layer}`}
-        titleText="Multiselect title"
-        items={items}
-        itemToString={(item) => (item ? item.text : '')}
-        selectionFeedback="top-after-reopen"
-        {...multiSelectArgs}
-      />
-    )}
-  </WithLayer>
-);
+export const _FilterableWithLayer = (args) => {
+  return (
+    <WithLayer>
+      {(layer) => (
+        <FluidMultiSelect
+          id={`carbon-multiselect-example-${layer}`}
+          titleText="Multiselect title"
+          items={items}
+          itemToString={(item) => (item ? item.text : '')}
+          selectionFeedback="top-after-reopen"
+          {...args}
+        />
+      )}
+    </WithLayer>
+  );
+};
 
 _FilterableWithLayer.args = {
   ...sharedArgs,
@@ -255,16 +261,18 @@ _FilterableWithLayer.args = {
 _FilterableWithLayer.argTypes = Filterable.argTypes;
 _FilterableWithLayer.parameters = Filterable.parameters;
 
-export const Condensed = (multiSelectArgs) => (
-  <FluidMultiSelect
-    id="default"
-    titleText="Label"
-    label="Choose an option"
-    items={items}
-    itemToString={(item) => (item ? item.text : '')}
-    {...multiSelectArgs}
-  />
-);
+export const Condensed = (args) => {
+  return (
+    <FluidMultiSelect
+      id="default"
+      titleText="Label"
+      label="Choose an option"
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      {...args}
+    />
+  );
+};
 
 Condensed.args = {
   ...sharedArgs,
@@ -281,49 +289,50 @@ Condensed.parameters = {
   },
 };
 
-const aiLabel = (
-  <AILabel className="ai-label-container">
-    <AILabelContent>
-      <div>
-        <p className="secondary">AI Explained</p>
-        <h2 className="ai-label-heading">84%</h2>
-        <p className="secondary bold">Confidence score</p>
-        <p className="secondary">
-          Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
-        </p>
-        <hr />
-        <p className="secondary">Model type</p>
-        <p className="bold">Foundation model</p>
-      </div>
-      <AILabelActions>
-        <IconButton kind="ghost" label="View">
-          <View />
-        </IconButton>
-        <IconButton kind="ghost" label="Open Folder">
-          <FolderOpen />
-        </IconButton>
-        <IconButton kind="ghost" label="Folders">
-          <Folders />
-        </IconButton>
-        <Button>View details</Button>
-      </AILabelActions>
-    </AILabelContent>
-  </AILabel>
-);
-
-export const withAILabel = (multiSelectArgs) => (
-  <FluidMultiSelect
-    initialSelectedItem={items[2]}
-    id="default"
-    titleText="Label"
-    label="Choose an option"
-    items={items}
-    itemToString={(item) => (item ? item.text : '')}
-    decorator={aiLabel}
-    {...multiSelectArgs}
-  />
-);
+export const withAILabel = (args) => {
+  const aiLabel = (
+    <AILabel className="ai-label-container">
+      <AILabelContent>
+        <div>
+          <p className="secondary">AI Explained</p>
+          <h2 className="ai-label-heading">84%</h2>
+          <p className="secondary bold">Confidence score</p>
+          <p className="secondary">
+            Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+          </p>
+          <hr />
+          <p className="secondary">Model type</p>
+          <p className="bold">Foundation model</p>
+        </div>
+        <AILabelActions>
+          <IconButton kind="ghost" label="View">
+            <View />
+          </IconButton>
+          <IconButton kind="ghost" label="Open Folder">
+            <FolderOpen />
+          </IconButton>
+          <IconButton kind="ghost" label="Folders">
+            <Folders />
+          </IconButton>
+          <Button>View details</Button>
+        </AILabelActions>
+      </AILabelContent>
+    </AILabel>
+  );
+  return (
+    <FluidMultiSelect
+      initialSelectedItem={items[2]}
+      id="default"
+      titleText="Label"
+      label="Choose an option"
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      decorator={aiLabel}
+      {...args}
+    />
+  );
+};
 
 withAILabel.args = {
   ...sharedArgs,
@@ -333,4 +342,6 @@ withAILabel.argTypes = {
   ...sharedArgTypes,
 };
 
-export const Skeleton = () => <FluidMultiSelectSkeleton />;
+export const Skeleton = () => {
+  return <FluidMultiSelectSkeleton />;
+};

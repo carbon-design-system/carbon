@@ -1,0 +1,10 @@
+{
+  "extends": "../../../config/typescript-config-carbon/tsconfig.base.json",
+  "compilerOptions": {
+    "declaration": false,
+    "emitDeclarationOnly": false,
+    "noEmit": true,
+    "types": ["@figma/code-connect/figma-types-no-require"]
+  },
+  "include": ["**/*.figma.ts"]
+}
