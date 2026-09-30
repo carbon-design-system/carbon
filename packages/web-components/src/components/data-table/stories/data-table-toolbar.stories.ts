@@ -6,6 +6,7 @@
  */
 
 import { html } from 'lit';
+import { enabled } from '@carbon/feature-flags';
 import { prefix } from '../../../globals/settings';
 import { TABLE_SIZE } from '../table';
 import Settings16 from '@carbon/icons/es/settings/16.js';
@@ -14,6 +15,7 @@ import storyDocs from './data-table.mdx';
 import '../index';
 import { iconLoader } from '../../../globals/internal/icon-loader';
 import '../../overflow-menu/';
+import '../../menu/index';
 
 const sizes = {
   [`xs (${TABLE_SIZE.XS})`]: TABLE_SIZE.XS,
@@ -70,6 +72,69 @@ const controls = {
   },
 };
 
+const renderToolbarOverflowMenu = () =>
+  enabled('enable-v12-overflowmenu')
+    ? html`
+        <cds-overflow-menu
+          enable-v12-overflowmenu
+          toolbar-action
+          label="Settings">
+          ${iconLoader(Settings16, {
+            slot: 'icon',
+            class: `${prefix}--overflow-menu__icon`,
+          })}
+          <cds-menu>
+            <cds-menu-item label="Action 1"></cds-menu-item>
+            <cds-menu-item label="Action 2"></cds-menu-item>
+            <cds-menu-item label="Action 3"></cds-menu-item>
+          </cds-menu>
+        </cds-overflow-menu>
+      `
+    : html`
+        <cds-overflow-menu toolbar-action>
+          ${iconLoader(Settings16, {
+            slot: 'icon',
+            class: `${prefix}--overflow-menu__icon`,
+          })}
+          <span slot="tooltip-content">Settings</span>
+          <cds-overflow-menu-body>
+            <cds-overflow-menu-item> Action 1 </cds-overflow-menu-item>
+            <cds-overflow-menu-item> Action 2 </cds-overflow-menu-item>
+            <cds-overflow-menu-item> Action 3 </cds-overflow-menu-item>
+          </cds-overflow-menu-body>
+        </cds-overflow-menu>
+      `;
+
+const renderRowOverflowMenu = () =>
+  enabled('enable-v12-overflowmenu')
+    ? html`
+        <cds-overflow-menu enable-v12-overflowmenu label="Options">
+          ${iconLoader(OverflowMenuVertical16, {
+            slot: 'icon',
+            class: `${prefix}--overflow-menu__icon`,
+          })}
+          <cds-menu>
+            <cds-menu-item label="Stop app"></cds-menu-item>
+            <cds-menu-item label="Restart app"></cds-menu-item>
+            <cds-menu-item label="Rename"></cds-menu-item>
+          </cds-menu>
+        </cds-overflow-menu>
+      `
+    : html`
+        <cds-overflow-menu toolbar-action>
+          ${iconLoader(OverflowMenuVertical16, {
+            slot: 'icon',
+            class: `${prefix}--overflow-menu__icon`,
+          })}
+          <span slot="tooltip-content"> Options </span>
+          <cds-overflow-menu-body flipped>
+            <cds-overflow-menu-item> Stop app </cds-overflow-menu-item>
+            <cds-overflow-menu-item> Restart app </cds-overflow-menu-item>
+            <cds-overflow-menu-item> Rename </cds-overflow-menu-item>
+          </cds-overflow-menu-body>
+        </cds-overflow-menu>
+      `;
+
 export const Default = {
   args: defaultArgs,
   argTypes: controls,
@@ -102,18 +167,7 @@ export const Default = {
           <cds-table-toolbar-search
             ?persistent=${persistent}
             placeholder="Filter table"></cds-table-toolbar-search>
-          <cds-overflow-menu toolbar-action>
-            ${iconLoader(Settings16, {
-              slot: 'icon',
-              class: `${prefix}--overflow-menu__icon`,
-            })}
-            <span slot="tooltip-content">Settings</span>
-            <cds-overflow-menu-body>
-              <cds-overflow-menu-item> Action 1 </cds-overflow-menu-item>
-              <cds-overflow-menu-item> Action 2 </cds-overflow-menu-item>
-              <cds-overflow-menu-item> Action 3 </cds-overflow-menu-item>
-            </cds-overflow-menu-body>
-          </cds-overflow-menu>
+          ${renderToolbarOverflowMenu()}
           <cds-button>Primary button</cds-button>
         </cds-table-toolbar-content>
       </cds-table-toolbar>
@@ -139,21 +193,7 @@ export const Default = {
           <cds-table-cell
             ><cds-link disabled>Disabled</cds-link></cds-table-cell
           >
-          <cds-table-cell>
-            <cds-overflow-menu toolbar-action>
-              ${iconLoader(OverflowMenuVertical16, {
-                slot: 'icon',
-                class: `${prefix}--overflow-menu__icon`,
-              })}
-              <span slot="tooltip-content"> Options </span>
-
-              <cds-overflow-menu-body flipped>
-                <cds-overflow-menu-item> Stop app </cds-overflow-menu-item>
-                <cds-overflow-menu-item> Restart app </cds-overflow-menu-item>
-                <cds-overflow-menu-item> Rename </cds-overflow-menu-item>
-              </cds-overflow-menu-body>
-            </cds-overflow-menu>
-          </cds-table-cell>
+          <cds-table-cell>${renderRowOverflowMenu()}</cds-table-cell>
         </cds-table-row>
         <cds-table-row selection-name="1">
           <cds-table-cell>Load Balancer 1</cds-table-cell>
@@ -162,20 +202,7 @@ export const Default = {
           <cds-table-cell>Round robin</cds-table-cell>
           <cds-table-cell>Maureen's VM Groups</cds-table-cell>
           <cds-table-cell><cds-link>Starting</cds-link></cds-table-cell>
-          <cds-table-cell>
-            <cds-overflow-menu toolbar-action>
-              ${iconLoader(OverflowMenuVertical16, {
-                slot: 'icon',
-              })}
-              <span slot="tooltip-content"> Options </span>
-
-              <cds-overflow-menu-body flipped>
-                <cds-overflow-menu-item> Stop app </cds-overflow-menu-item>
-                <cds-overflow-menu-item> Restart app </cds-overflow-menu-item>
-                <cds-overflow-menu-item> Rename </cds-overflow-menu-item>
-              </cds-overflow-menu-body>
-            </cds-overflow-menu>
-          </cds-table-cell>
+          <cds-table-cell>${renderRowOverflowMenu()}</cds-table-cell>
         </cds-table-row>
         <cds-table-row selection-name="2">
           <cds-table-cell>Load Balancer 2</cds-table-cell>
@@ -184,20 +211,7 @@ export const Default = {
           <cds-table-cell>DNS delegation</cds-table-cell>
           <cds-table-cell>Andrew's VM Groups</cds-table-cell>
           <cds-table-cell><cds-link>Active</cds-link></cds-table-cell>
-          <cds-table-cell>
-            <cds-overflow-menu toolbar-action>
-              ${iconLoader(OverflowMenuVertical16, {
-                slot: 'icon',
-              })}
-              <span slot="tooltip-content"> Options </span>
-
-              <cds-overflow-menu-body flipped>
-                <cds-overflow-menu-item> Stop app </cds-overflow-menu-item>
-                <cds-overflow-menu-item> Restart app </cds-overflow-menu-item>
-                <cds-overflow-menu-item> Rename </cds-overflow-menu-item>
-              </cds-overflow-menu-body>
-            </cds-overflow-menu>
-          </cds-table-cell>
+          <cds-table-cell>${renderRowOverflowMenu()}</cds-table-cell>
         </cds-table-row>
         <cds-table-row selection-name="3">
           <cds-table-cell>Load Balancer 6</cds-table-cell>
@@ -208,20 +222,7 @@ export const Default = {
           <cds-table-cell
             ><cds-link disabled>Disabled</cds-link></cds-table-cell
           >
-          <cds-table-cell>
-            <cds-overflow-menu toolbar-action>
-              ${iconLoader(OverflowMenuVertical16, {
-                slot: 'icon',
-              })}
-              <span slot="tooltip-content"> Options </span>
-
-              <cds-overflow-menu-body flipped>
-                <cds-overflow-menu-item> Stop app </cds-overflow-menu-item>
-                <cds-overflow-menu-item> Restart app </cds-overflow-menu-item>
-                <cds-overflow-menu-item> Rename </cds-overflow-menu-item>
-              </cds-overflow-menu-body>
-            </cds-overflow-menu>
-          </cds-table-cell>
+          <cds-table-cell>${renderRowOverflowMenu()}</cds-table-cell>
         </cds-table-row>
         <cds-table-row selection-name="4">
           <cds-table-cell>Load Balancer 4</cds-table-cell>
@@ -230,20 +231,7 @@ export const Default = {
           <cds-table-cell>Round robin</cds-table-cell>
           <cds-table-cell>Mel's VM Groups</cds-table-cell>
           <cds-table-cell><cds-link>Starting</cds-link></cds-table-cell>
-          <cds-table-cell>
-            <cds-overflow-menu toolbar-action>
-              ${iconLoader(OverflowMenuVertical16, {
-                slot: 'icon',
-              })}
-              <span slot="tooltip-content"> Options </span>
-
-              <cds-overflow-menu-body flipped>
-                <cds-overflow-menu-item> Stop app </cds-overflow-menu-item>
-                <cds-overflow-menu-item> Restart app </cds-overflow-menu-item>
-                <cds-overflow-menu-item> Rename </cds-overflow-menu-item>
-              </cds-overflow-menu-body>
-            </cds-overflow-menu>
-          </cds-table-cell>
+          <cds-table-cell>${renderRowOverflowMenu()}</cds-table-cell>
         </cds-table-row>
         <cds-table-row selection-name="5">
           <cds-table-cell>Load Balancer 5</cds-table-cell>
@@ -252,20 +240,7 @@ export const Default = {
           <cds-table-cell>DNS delegation</cds-table-cell>
           <cds-table-cell>Ronja's VM Groups</cds-table-cell>
           <cds-table-cell><cds-link>Active</cds-link></cds-table-cell>
-          <cds-table-cell>
-            <cds-overflow-menu toolbar-action>
-              ${iconLoader(OverflowMenuVertical16, {
-                slot: 'icon',
-              })}
-              <span slot="tooltip-content"> Options </span>
-
-              <cds-overflow-menu-body flipped>
-                <cds-overflow-menu-item> Stop app </cds-overflow-menu-item>
-                <cds-overflow-menu-item> Restart app </cds-overflow-menu-item>
-                <cds-overflow-menu-item> Rename </cds-overflow-menu-item>
-              </cds-overflow-menu-body>
-            </cds-overflow-menu>
-          </cds-table-cell>
+          <cds-table-cell>${renderRowOverflowMenu()}</cds-table-cell>
         </cds-table-row>
       </cds-table-body>
     </cds-table>
@@ -306,24 +281,7 @@ export const PersistentToolbar = {
           <cds-table-toolbar-search
             ?persistent=${persistent}
             placeholder="Filter table"></cds-table-toolbar-search>
-          <cds-overflow-menu toolbar-action>
-            ${iconLoader(Settings16, {
-              slot: 'icon',
-              class: `${prefix}--overflow-menu__icon`,
-            })}
-            <span slot="tooltip-content">Settings</span>
-            <cds-overflow-menu-body>
-              <cds-overflow-menu-item @click=${() => alert('Alert 1')}>
-                Action 1
-              </cds-overflow-menu-item>
-              <cds-overflow-menu-item @click=${() => alert('Alert 2')}>
-                Action 2
-              </cds-overflow-menu-item>
-              <cds-overflow-menu-item @click=${() => alert('Alert 3')}>
-                Action 3
-              </cds-overflow-menu-item>
-            </cds-overflow-menu-body>
-          </cds-overflow-menu>
+          ${renderToolbarOverflowMenu()}
           <cds-button>Primary button</cds-button>
         </cds-table-toolbar-content>
       </cds-table-toolbar>
@@ -431,18 +389,7 @@ export const SmallPersistentToolbar = {
           <cds-table-toolbar-search
             ?persistent=${persistent}
             placeholder="Filter table"></cds-table-toolbar-search>
-          <cds-overflow-menu toolbar-action>
-            ${iconLoader(Settings16, {
-              slot: 'icon',
-              class: `${prefix}--overflow-menu__icon`,
-            })}
-            <span slot="tooltip-content">Settings</span>
-            <cds-overflow-menu-body>
-              <cds-overflow-menu-item> Action 1 </cds-overflow-menu-item>
-              <cds-overflow-menu-item> Action 2 </cds-overflow-menu-item>
-              <cds-overflow-menu-item> Action 3 </cds-overflow-menu-item>
-            </cds-overflow-menu-body>
-          </cds-overflow-menu>
+          ${renderToolbarOverflowMenu()}
           <cds-button>Primary Button</cds-button>
         </cds-table-toolbar-content>
       </cds-table-toolbar>
@@ -545,24 +492,7 @@ export const WithOverflowMenu = {
           <cds-table-toolbar-search
             ?persistent=${persistent}
             placeholder="Filter table"></cds-table-toolbar-search>
-          <cds-overflow-menu toolbar-action>
-            ${iconLoader(Settings16, {
-              slot: 'icon',
-              class: `${prefix}--overflow-menu__icon`,
-            })}
-            <span slot="tooltip-content">Settings</span>
-            <cds-overflow-menu-body>
-              <cds-overflow-menu-item @click=${() => alert('Alert 1')}>
-                Action 1
-              </cds-overflow-menu-item>
-              <cds-overflow-menu-item @click=${() => alert('Alert 2')}>
-                Action 2
-              </cds-overflow-menu-item>
-              <cds-overflow-menu-item @click=${() => alert('Alert 3')}>
-                Action 3
-              </cds-overflow-menu-item>
-            </cds-overflow-menu-body>
-          </cds-overflow-menu>
+          ${renderToolbarOverflowMenu()}
           <cds-button>Primary button</cds-button>
         </cds-table-toolbar-content>
       </cds-table-toolbar>
@@ -588,21 +518,7 @@ export const WithOverflowMenu = {
           <cds-table-cell
             ><cds-link disabled>Disabled</cds-link></cds-table-cell
           >
-          <cds-table-cell>
-            <cds-overflow-menu toolbar-action>
-              ${iconLoader(OverflowMenuVertical16, {
-                slot: 'icon',
-                class: `${prefix}--overflow-menu__icon`,
-              })}
-              <span slot="tooltip-content"> Options </span>
-
-              <cds-overflow-menu-body flipped>
-                <cds-overflow-menu-item> Stop app </cds-overflow-menu-item>
-                <cds-overflow-menu-item> Restart app </cds-overflow-menu-item>
-                <cds-overflow-menu-item> Rename </cds-overflow-menu-item>
-              </cds-overflow-menu-body>
-            </cds-overflow-menu>
-          </cds-table-cell>
+          <cds-table-cell>${renderRowOverflowMenu()}</cds-table-cell>
         </cds-table-row>
         <cds-table-row>
           <cds-table-cell>Load Balancer 1</cds-table-cell>
@@ -611,21 +527,7 @@ export const WithOverflowMenu = {
           <cds-table-cell>Round robin</cds-table-cell>
           <cds-table-cell>Maureen's VM Groups</cds-table-cell>
           <cds-table-cell><cds-link>Starting</cds-link></cds-table-cell>
-          <cds-table-cell>
-            <cds-overflow-menu toolbar-action>
-              ${iconLoader(OverflowMenuVertical16, {
-                slot: 'icon',
-                class: `${prefix}--overflow-menu__icon`,
-              })}
-              <span slot="tooltip-content"> Options </span>
-
-              <cds-overflow-menu-body flipped>
-                <cds-overflow-menu-item> Stop app </cds-overflow-menu-item>
-                <cds-overflow-menu-item> Restart app </cds-overflow-menu-item>
-                <cds-overflow-menu-item> Rename </cds-overflow-menu-item>
-              </cds-overflow-menu-body>
-            </cds-overflow-menu>
-          </cds-table-cell>
+          <cds-table-cell>${renderRowOverflowMenu()}</cds-table-cell>
         </cds-table-row>
         <cds-table-row>
           <cds-table-cell>Load Balancer 2</cds-table-cell>
@@ -634,21 +536,7 @@ export const WithOverflowMenu = {
           <cds-table-cell>DNS delegation</cds-table-cell>
           <cds-table-cell>Andrew's VM Groups</cds-table-cell>
           <cds-table-cell><cds-link>Active</cds-link></cds-table-cell>
-          <cds-table-cell>
-            <cds-overflow-menu toolbar-action>
-              ${iconLoader(OverflowMenuVertical16, {
-                slot: 'icon',
-                class: `${prefix}--overflow-menu__icon`,
-              })}
-              <span slot="tooltip-content"> Options </span>
-
-              <cds-overflow-menu-body flipped>
-                <cds-overflow-menu-item> Stop app </cds-overflow-menu-item>
-                <cds-overflow-menu-item> Restart app </cds-overflow-menu-item>
-                <cds-overflow-menu-item> Rename </cds-overflow-menu-item>
-              </cds-overflow-menu-body>
-            </cds-overflow-menu>
-          </cds-table-cell>
+          <cds-table-cell>${renderRowOverflowMenu()}</cds-table-cell>
         </cds-table-row>
         <cds-table-row>
           <cds-table-cell>Load Balancer 6</cds-table-cell>
@@ -659,21 +547,7 @@ export const WithOverflowMenu = {
           <cds-table-cell
             ><cds-link disabled>Disabled</cds-link></cds-table-cell
           >
-          <cds-table-cell>
-            <cds-overflow-menu toolbar-action>
-              ${iconLoader(OverflowMenuVertical16, {
-                slot: 'icon',
-                class: `${prefix}--overflow-menu__icon`,
-              })}
-              <span slot="tooltip-content"> Options </span>
-
-              <cds-overflow-menu-body flipped>
-                <cds-overflow-menu-item> Stop app </cds-overflow-menu-item>
-                <cds-overflow-menu-item> Restart app </cds-overflow-menu-item>
-                <cds-overflow-menu-item> Rename </cds-overflow-menu-item>
-              </cds-overflow-menu-body>
-            </cds-overflow-menu>
-          </cds-table-cell>
+          <cds-table-cell>${renderRowOverflowMenu()}</cds-table-cell>
         </cds-table-row>
         <cds-table-row>
           <cds-table-cell>Load Balancer 4</cds-table-cell>
@@ -682,21 +556,7 @@ export const WithOverflowMenu = {
           <cds-table-cell>Round robin</cds-table-cell>
           <cds-table-cell>Mel's VM Groups</cds-table-cell>
           <cds-table-cell><cds-link>Starting</cds-link></cds-table-cell>
-          <cds-table-cell>
-            <cds-overflow-menu toolbar-action>
-              ${iconLoader(OverflowMenuVertical16, {
-                slot: 'icon',
-                class: `${prefix}--overflow-menu__icon`,
-              })}
-              <span slot="tooltip-content"> Options </span>
-
-              <cds-overflow-menu-body flipped>
-                <cds-overflow-menu-item> Stop app </cds-overflow-menu-item>
-                <cds-overflow-menu-item> Restart app </cds-overflow-menu-item>
-                <cds-overflow-menu-item> Rename </cds-overflow-menu-item>
-              </cds-overflow-menu-body>
-            </cds-overflow-menu>
-          </cds-table-cell>
+          <cds-table-cell>${renderRowOverflowMenu()}</cds-table-cell>
         </cds-table-row>
         <cds-table-row>
           <cds-table-cell>Load Balancer 5</cds-table-cell>
@@ -705,21 +565,7 @@ export const WithOverflowMenu = {
           <cds-table-cell>DNS delegation</cds-table-cell>
           <cds-table-cell>Ronja's VM Groups</cds-table-cell>
           <cds-table-cell><cds-link>Active</cds-link></cds-table-cell>
-          <cds-table-cell>
-            <cds-overflow-menu toolbar-action>
-              ${iconLoader(OverflowMenuVertical16, {
-                slot: 'icon',
-                class: `${prefix}--overflow-menu__icon`,
-              })}
-              <span slot="tooltip-content"> Options </span>
-
-              <cds-overflow-menu-body flipped>
-                <cds-overflow-menu-item> Stop app </cds-overflow-menu-item>
-                <cds-overflow-menu-item> Restart app </cds-overflow-menu-item>
-                <cds-overflow-menu-item> Rename </cds-overflow-menu-item>
-              </cds-overflow-menu-body>
-            </cds-overflow-menu>
-          </cds-table-cell>
+          <cds-table-cell>${renderRowOverflowMenu()}</cds-table-cell>
         </cds-table-row>
       </cds-table-body>
     </cds-table>
