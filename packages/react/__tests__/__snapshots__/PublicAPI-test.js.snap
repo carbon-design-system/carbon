@@ -5188,6 +5188,9 @@ Map {
       "rows": {
         "type": "number",
       },
+      "translateWithId": {
+        "type": "func",
+      },
       "value": {
         "args": [
           [
@@ -5272,6 +5275,9 @@ Map {
       },
       "readOnly": {
         "type": "bool",
+      },
+      "translateWithId": {
+        "type": "func",
       },
       "value": {
         "args": [
@@ -10757,6 +10763,9 @@ Map {
         "type": "number",
       },
       "slug": [Function],
+      "translateWithId": {
+        "type": "func",
+      },
       "value": {
         "args": [
           [
@@ -10868,6 +10877,9 @@ Map {
         "type": "oneOf",
       },
       "slug": [Function],
+      "translateWithId": {
+        "type": "func",
+      },
       "type": {
         "type": "string",
       },
@@ -13392,6 +13404,9 @@ Map {
       "rows": {
         "type": "number",
       },
+      "translateWithId": {
+        "type": "func",
+      },
       "value": {
         "args": [
           [
@@ -13476,6 +13491,9 @@ Map {
       },
       "readOnly": {
         "type": "bool",
+      },
+      "translateWithId": {
+        "type": "func",
       },
       "value": {
         "args": [
@@ -15432,6 +15450,9 @@ Map {
       "rows": {
         "type": "number",
       },
+      "translateWithId": {
+        "type": "func",
+      },
       "value": {
         "args": [
           [
@@ -15516,6 +15537,9 @@ Map {
       },
       "readOnly": {
         "type": "bool",
+      },
+      "translateWithId": {
+        "type": "func",
       },
       "value": {
         "args": [

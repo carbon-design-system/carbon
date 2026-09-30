@@ -8,7 +8,7 @@
 import React from 'react';
 import TextArea from '../TextArea';
 import userEvent from '@testing-library/user-event';
-import { fireEvent, waitFor } from '@testing-library/react';
+import { act, fireEvent, waitFor } from '@testing-library/react';
 import { render, screen, createEvent } from '@testing-library/react';
 import { AILabel } from '../AILabel';
 
@@ -678,6 +678,238 @@ describe('TextArea', () => {
           'one test pasted content that'
         );
       });
+    });
+  });
+
+  describe('translateWithId', () => {
+    const translations = {
+      'carbon.text-area.counter.characters.remaining': ({ count }) =>
+        count === 1 ? 'Resta 1 caractere.' : `Restam ${count} caracteres.`,
+      'carbon.text-area.counter.words.remaining': ({ count }) =>
+        count === 1 ? 'Resta 1 palavra.' : `Restam ${count} palavras.`,
+      'carbon.text-area.counter.characters.max-reached': () =>
+        'Máximo de caracteres atingido.',
+      'carbon.text-area.counter.words.max-reached': () =>
+        'Máximo de palavras atingido.',
+      'carbon.text-area.counter.characters.limit': ({ maxCount }) =>
+        `Limite de ${maxCount} caracteres`,
+      'carbon.text-area.counter.words.limit': ({ maxCount }) =>
+        `Limite de ${maxCount} palavras`,
+    };
+    const translateWithId = (id, args) => {
+      if (!translations[id]) {
+        throw new Error(`Unsupported id: ${id}`);
+      }
+      return translations[id](args);
+    };
+
+    beforeEach(() => {
+      jest.useFakeTimers();
+    });
+
+    afterEach(() => {
+      jest.useRealTimers();
+    });
+
+    it.each([
+      ['character', '123456789', 1000, '1 character left.'],
+      ['character', '12345', 1000, '5 characters left.'],
+      ['character', '1234567890', 1000, 'Maximum characters reached.'],
+      [
+        'word',
+        'one two three four five six seven eight nine',
+        2000,
+        '1 word left.',
+      ],
+      ['word', 'one two three four five', 2000, '5 words left.'],
+      [
+        'word',
+        'one two three four five six seven eight nine ten',
+        2000,
+        'Maximum words reached.',
+      ],
+    ])(
+      'should announce the default English message in %s mode for "%s"',
+      (counterMode, defaultValue, delay, message) => {
+        render(
+          <TextArea
+            id="textarea-1"
+            labelText="TextArea label"
+            enableCounter
+            maxCount={10}
+            counterMode={counterMode}
+            defaultValue={defaultValue}
+          />
+        );
+
+        act(() => {
+          jest.advanceTimersByTime(delay);
+        });
+
+        expect(screen.getByRole('alert')).toHaveTextContent(message);
+      }
+    );
+
+    it.each([
+      ['character', '123456789', 1000, 'Resta 1 caractere.'],
+      ['character', '12345', 1000, 'Restam 5 caracteres.'],
+      ['character', '1234567890', 1000, 'Máximo de caracteres atingido.'],
+      [
+        'word',
+        'one two three four five six seven eight nine',
+        2000,
+        'Resta 1 palavra.',
+      ],
+      ['word', 'one two three four five', 2000, 'Restam 5 palavras.'],
+      [
+        'word',
+        'one two three four five six seven eight nine ten',
+        2000,
+        'Máximo de palavras atingido.',
+      ],
+    ])(
+      'should announce the translated message in %s mode for "%s"',
+      (counterMode, defaultValue, delay, message) => {
+        render(
+          <TextArea
+            id="textarea-1"
+            labelText="TextArea label"
+            enableCounter
+            maxCount={10}
+            counterMode={counterMode}
+            defaultValue={defaultValue}
+            translateWithId={translateWithId}
+          />
+        );
+
+        act(() => {
+          jest.advanceTimersByTime(delay);
+        });
+
+        expect(screen.getByRole('alert')).toHaveTextContent(message);
+      }
+    );
+
+    it.each([
+      ['character', 'Character limit 10'],
+      ['word', 'Word limit 10'],
+    ])(
+      'should describe the default English limit in %s mode',
+      (counterMode, description) => {
+        render(
+          <TextArea
+            id="textarea-1"
+            labelText="TextArea label"
+            enableCounter
+            maxCount={10}
+            counterMode={counterMode}
+          />
+        );
+
+        expect(screen.getByRole('textbox')).toHaveAccessibleDescription(
+          description
+        );
+      }
+    );
+
+    it.each([
+      ['character', 'Limite de 10 caracteres'],
+      ['word', 'Limite de 10 palavras'],
+    ])(
+      'should describe the translated limit in %s mode',
+      (counterMode, description) => {
+        render(
+          <TextArea
+            id="textarea-1"
+            labelText="TextArea label"
+            enableCounter
+            maxCount={10}
+            counterMode={counterMode}
+            translateWithId={translateWithId}
+          />
+        );
+
+        expect(screen.getByRole('textbox')).toHaveAccessibleDescription(
+          description
+        );
+      }
+    );
+
+    it('should pass `count` and `maxCount` to `translateWithId`', () => {
+      const spy = jest.fn(translateWithId);
+
+      render(
+        <TextArea
+          id="textarea-1"
+          labelText="TextArea label"
+          enableCounter
+          maxCount={10}
+          defaultValue="123456789"
+          translateWithId={spy}
+        />
+      );
+
+      expect(spy).toHaveBeenCalledWith(
+        'carbon.text-area.counter.characters.remaining',
+        { count: 1, maxCount: 10 }
+      );
+      expect(spy).toHaveBeenCalledWith(
+        'carbon.text-area.counter.characters.limit',
+        { count: 10, maxCount: 10 }
+      );
+    });
+
+    it('should not pass `translateWithId` to the `<textarea>`', () => {
+      const errorSpy = jest
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
+
+      render(
+        <TextArea
+          id="textarea-1"
+          labelText="TextArea label"
+          translateWithId={translateWithId}
+        />
+      );
+
+      expect(screen.getByRole('textbox')).not.toHaveAttribute(
+        'translatewithid'
+      );
+      expect(errorSpy).not.toHaveBeenCalled();
+      errorSpy.mockRestore();
+    });
+
+    it('should not restart the announcement when `translateWithId` changes identity', () => {
+      const props = {
+        id: 'textarea-1',
+        labelText: 'TextArea label',
+        enableCounter: true,
+        maxCount: 10,
+        defaultValue: '123456789',
+      };
+      const { rerender } = render(
+        <TextArea
+          {...props}
+          translateWithId={(...args) => translateWithId(...args)}
+        />
+      );
+
+      act(() => {
+        jest.advanceTimersByTime(500);
+      });
+
+      rerender(
+        <TextArea
+          {...props}
+          translateWithId={(...args) => translateWithId(...args)}
+        />
+      );
+
+      act(() => {
+        jest.advanceTimersByTime(500);
+      });
+
+      expect(screen.getByRole('alert')).toHaveTextContent('Resta 1 caractere.');
     });
   });
 });
