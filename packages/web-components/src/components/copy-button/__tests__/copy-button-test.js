@@ -76,13 +76,13 @@ describe('Button props', () => {
     await expect(el).shadowDom.to.equalSnapshot();
   });
 
-  it('should default kind to ghost', async () => {
+  it('should default kind to primary', async () => {
     const el = await fixture(html`
       <cds-copy-button icon-description="Copy to clipboard"> </cds-copy-button>
     `);
 
     const copy = el.shadowRoot?.querySelector('cds-copy');
-    expect(copy).to.have.attribute('kind', 'ghost');
+    expect(copy).to.have.attribute('kind', 'primary');
   });
 
   it('should default size to lg', async () => {

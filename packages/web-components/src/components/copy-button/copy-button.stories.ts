@@ -29,12 +29,12 @@ const tooltipAlignments = {
 
 const defaultArgs = {
   align: POPOVER_ALIGNMENT.BOTTOM,
-  autoAlign: false,
+  autoAlign: true,
   disabled: false,
   feedback: 'Copied!',
   feedbackTimeout: 2000,
   iconDescription: 'Copy to clipboard',
-  kind: BUTTON_KIND.GHOST,
+  kind: BUTTON_KIND.PRIMARY,
   size: BUTTON_SIZE.LARGE,
 };
 
