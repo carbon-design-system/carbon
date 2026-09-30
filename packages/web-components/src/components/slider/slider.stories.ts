@@ -28,7 +28,6 @@ const sharedArgs = {
   minLabel: ' GB',
   name: 'storage-allocation',
   readOnly: false,
-  required: false,
   step: 1,
   stepMultiplier: 10,
   value: 50,
@@ -114,10 +113,6 @@ const sharedArgTypes = {
     control: 'boolean',
     description: 'Whether the slider should be read-only.',
   },
-  required: {
-    control: 'boolean',
-    description: '<code>true</code> to specify if the control is required.',
-  },
   step: {
     control: 'number',
     description:
@@ -182,10 +177,7 @@ const hiddenInputArgTypes = {
 
 const defaultFormatLabel = (value, label) => `${value}${label ?? ''}`;
 
-const renderSlider = (
-  args,
-  { controlled = false, formatLabel = defaultFormatLabel } = {}
-) => {
+const renderSlider = (args, { formatLabel = defaultFormatLabel } = {}) => {
   const {
     ariaLabelInput,
     disabled,
@@ -202,7 +194,6 @@ const renderSlider = (
     name,
     onChange,
     readOnly,
-    required,
     step,
     stepMultiplier,
     unstable_ariaLabelInputUpper,
@@ -217,7 +208,6 @@ const renderSlider = (
   return html`
     <cds-form-item>
       <cds-slider
-        ?controlled="${controlled}"
         ?disabled="${disabled}"
         ?hide-label="${hideLabel}"
         ?hide-text-input="${hideTextInput}"
@@ -241,7 +231,6 @@ const renderSlider = (
           aria-label="${ifDefined(ariaLabelInput)}"
           name="${ifDefined(name)}"
           type="${ifDefined(inputType)}"
-          ?required="${required}"
           slot="${ifDefined(hasTwoHandles ? 'lower-input' : undefined)}">
         </cds-slider-input>
         ${hasTwoHandles
@@ -249,8 +238,7 @@ const renderSlider = (
               <cds-slider-input
                 aria-label="${ifDefined(unstable_ariaLabelInputUpper)}"
                 name="${ifDefined(unstable_nameUpper)}"
-                type="${ifDefined(inputType)}"
-                ?required="${required}">
+                type="${ifDefined(inputType)}">
               </cds-slider-input>
             `
           : undefined}
@@ -299,14 +287,11 @@ const renderControlledSlider = (args) => {
   return html`
     <div class="controlled-slider">
       <button type="button" @click=${handleClick}>Randomize value</button>
-      ${renderSlider(
-        {
-          ...args,
-          onChange: handleChange,
-          value,
-        },
-        { controlled: true }
-      )}
+      ${renderSlider({
+        ...args,
+        onChange: handleChange,
+        value,
+      })}
       <p class="slider-current-value">Current value: ${value}</p>
     </div>
   `;
