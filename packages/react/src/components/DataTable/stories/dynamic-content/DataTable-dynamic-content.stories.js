@@ -101,6 +101,13 @@ export default {
   component: DataTable,
   args: dataTableArgs,
   argTypes: dataTableArgTypes,
+  parameters: {
+    docs: {
+      source: {
+        type: 'code',
+      },
+    },
+  },
 };
 
 export const Default = (args) => {
