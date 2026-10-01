@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,7 +12,7 @@
 import { expect, fixture, html } from '@open-wc/testing';
 import Bee32 from '@carbon/icons/es/bee/32.js';
 import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
-import '@carbon/web-components/es/components/page-header/index.js';
+import '@carbon/web-components/es/components/page-header-deprecated/index.js';
 
 describe('cds-page-header', function () {
   it('should render', async () => {
