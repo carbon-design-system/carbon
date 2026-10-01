@@ -1,4 +1,4 @@
-// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=2805-21056&t=6KMXKibN414b97hv-4
+// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=2805-21056&t=6KMXKibN414b97hv-4
 // source=https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Search/Search.tsx
 // component=Search
 
