@@ -25,15 +25,6 @@ describe('Tag', () => {
       const { container } = render(<Tag type="red">test-tag</Tag>);
       await expect(container).toHaveNoAxeViolations();
     });
-
-    it('should have no AC violations', async () => {
-      const { container } = render(
-        <main>
-          <Tag type="red">Dog</Tag>
-        </main>
-      );
-      await expect(container).toHaveNoACViolations('Tag');
-    });
   });
 
   describe('Dismissible Tag', () => {

@@ -147,16 +147,18 @@ const sharedArgs = {
 
 const sharedControls = Object.keys(sharedArgTypes);
 
-export const Default = (dropdownArgs) => (
-  <FluidDropdown
-    id="default"
-    titleText="Label"
-    label="Choose an option"
-    items={items}
-    itemToString={(item) => (item ? item.text : '')}
-    {...dropdownArgs}
-  />
-);
+export const Default = (args) => {
+  return (
+    <FluidDropdown
+      id="default"
+      titleText="Label"
+      label="Choose an option"
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      {...args}
+    />
+  );
+};
 
 Default.args = {
   ...sharedArgs,
@@ -170,16 +172,18 @@ Default.parameters = {
   controls: { include: sharedControls },
 };
 
-export const Condensed = (dropdownArgs) => (
-  <FluidDropdown
-    id="default"
-    titleText="Label"
-    label="Choose an option"
-    items={items}
-    itemToString={(item) => (item ? item.text : '')}
-    {...dropdownArgs}
-  />
-);
+export const Condensed = (args) => {
+  return (
+    <FluidDropdown
+      id="default"
+      titleText="Label"
+      label="Choose an option"
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      {...args}
+    />
+  );
+};
 
 Condensed.args = {
   ...sharedArgs,
@@ -198,49 +202,50 @@ Condensed.parameters = {
   controls: { include: sharedControls },
 };
 
-const aiLabel = (
-  <AILabel className="ai-label-container">
-    <AILabelContent>
-      <div>
-        <p className="secondary">AI Explained</p>
-        <h2 className="ai-label-heading">84%</h2>
-        <p className="secondary bold">Confidence score</p>
-        <p className="secondary">
-          Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
-        </p>
-        <hr />
-        <p className="secondary">Model type</p>
-        <p className="bold">Foundation model</p>
-      </div>
-      <AILabelActions>
-        <IconButton kind="ghost" label="View">
-          <View />
-        </IconButton>
-        <IconButton kind="ghost" label="Open Folder">
-          <FolderOpen />
-        </IconButton>
-        <IconButton kind="ghost" label="Folders">
-          <Folders />
-        </IconButton>
-        <Button>View details</Button>
-      </AILabelActions>
-    </AILabelContent>
-  </AILabel>
-);
-
-export const withAILabel = (dropdownArgs) => (
-  <FluidDropdown
-    initialSelectedItem={items[2]}
-    id="default"
-    titleText="Label"
-    label="Choose an option"
-    items={items}
-    itemToString={(item) => (item ? item.text : '')}
-    decorator={aiLabel}
-    {...dropdownArgs}
-  />
-);
+export const withAILabel = (args) => {
+  const aiLabel = (
+    <AILabel className="ai-label-container">
+      <AILabelContent>
+        <div>
+          <p className="secondary">AI Explained</p>
+          <h2 className="ai-label-heading">84%</h2>
+          <p className="secondary bold">Confidence score</p>
+          <p className="secondary">
+            Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+          </p>
+          <hr />
+          <p className="secondary">Model type</p>
+          <p className="bold">Foundation model</p>
+        </div>
+        <AILabelActions>
+          <IconButton kind="ghost" label="View">
+            <View />
+          </IconButton>
+          <IconButton kind="ghost" label="Open Folder">
+            <FolderOpen />
+          </IconButton>
+          <IconButton kind="ghost" label="Folders">
+            <Folders />
+          </IconButton>
+          <Button>View details</Button>
+        </AILabelActions>
+      </AILabelContent>
+    </AILabel>
+  );
+  return (
+    <FluidDropdown
+      initialSelectedItem={items[2]}
+      id="default"
+      titleText="Label"
+      label="Choose an option"
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      decorator={aiLabel}
+      {...args}
+    />
+  );
+};
 
 withAILabel.args = {
   ...sharedArgs,
