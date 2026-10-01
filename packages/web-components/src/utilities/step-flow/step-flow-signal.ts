@@ -15,27 +15,38 @@ type formStateType = Record<string, unknown>;
 /**
  * StepInstance — a ReactiveController that holds multi-step flow state.
  *
+ * Pass the host element to the constructor. The controller self-registers
+ * via `host.addController(this)` so every mutation automatically triggers
+ * `host.requestUpdate()` — no mixin needed on the consumer class.
+ *
  * Usage:
- *   private _stepInfo = new StepInstance();
+ *   private _stepInfo = new StepInstance(this);
  *   connectedCallback() {
  *     super.connectedCallback();
- *     this.addController(this._stepInfo);
  *     this._stepInfo.updateTotalStepCount = 3;
  *   }
  *
- * When any mutation method is called, the host element automatically
- * re-renders via requestUpdate() — no SignalWatcher mixin needed.
+ * The host argument is optional — omit it when using StepInstance outside
+ * a Lit element (e.g. in unit tests) where reactivity is not needed.
  */
 export class StepInstance implements ReactiveController {
-  private _host: ReactiveControllerHost;
+  private _host?: ReactiveControllerHost;
 
   #totalSteps = 0;
   #currentStep = 0;
   #formState: formStateType = {};
 
-  constructor(host: ReactiveControllerHost) {
-    this._host = host;
-    host.addController(this);
+  /**
+   * @param host - Optional Lit host element. When provided, the controller
+   *   registers itself via `host.addController(this)` so that every mutation
+   *   automatically triggers `host.requestUpdate()`.
+   *   Omit when constructing outside a Lit element (e.g. in unit tests).
+   */
+  constructor(host?: ReactiveControllerHost) {
+    if (host) {
+      this._host = host;
+      host.addController(this);
+    }
   }
 
   // ReactiveController lifecycle hooks
