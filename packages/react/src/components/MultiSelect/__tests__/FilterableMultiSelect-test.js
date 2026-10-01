@@ -362,8 +362,7 @@ describe('FilterableMultiSelect', () => {
       };
     });
     const generatedIds = controls.flatMap(
-      ({ listBox, combobox, toggleButton, menu, label }) => [
-        listBox.id,
+      ({ combobox, toggleButton, menu, label }) => [
         combobox.id,
         toggleButton.id,
         menu.id,
@@ -372,7 +371,8 @@ describe('FilterableMultiSelect', () => {
     );
 
     expect(new Set(generatedIds).size).toBe(generatedIds.length);
-    controls.forEach(({ combobox, toggleButton, menu, label }) => {
+    controls.forEach(({ listBox, combobox, toggleButton, menu, label }) => {
+      expect(listBox).toHaveAttribute('id', 'shared-filterable-multiselect');
       expect(label).toHaveAttribute('for', combobox.id);
       expect(combobox.id).toBe(label.getAttribute('for'));
       expect(toggleButton).toHaveAttribute('aria-controls', menu.id);
@@ -461,12 +461,13 @@ describe('FilterableMultiSelect', () => {
     );
   });
 
-  it('should scope the listbox wrapper id', async () => {
+  it('should preserve the listbox wrapper id', async () => {
     render(<FilterableMultiSelect {...mockProps} id="custom-id" />);
     await waitForPosition();
 
-    expect(document.querySelector(`.${prefix}--list-box`).id).toEqual(
-      expect.stringMatching(/^custom-id-id-.+$/)
+    expect(document.querySelector(`.${prefix}--list-box`)).toHaveAttribute(
+      'id',
+      'custom-id'
     );
   });
 
