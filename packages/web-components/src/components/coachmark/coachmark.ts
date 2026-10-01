@@ -118,7 +118,12 @@ class CDSCoachmark extends HostListenerMixin(LitElement) {
     if (this.keydownHandler) {
       document.removeEventListener('keydown', this.keydownHandler);
     }
-    this._updateState({ open: false, floating: false, isDragging: false });
+    // Only update context while still connected. Calling _updateState (which
+    // invokes requestUpdate) on a detached element is harmless in Lit, but it
+    // needlessly notifies already-torn-down @consume subscribers.
+    if (this.isConnected) {
+      this._updateState({ open: false, floating: false, isDragging: false });
+    }
   }
 
   private async setupDraggable() {
