@@ -8,8 +8,8 @@
  */
 
 import { html } from 'lit';
-import '../../../examples/components/import-modal/src/import-modal';
-import type { FileType } from '../../../examples/components/import-modal/src/import-modal';
+import './example/src/import-modal';
+import type { FileType } from './example/src/import-modal';
 
 export default {
   title: 'Examples/Import and Upload',

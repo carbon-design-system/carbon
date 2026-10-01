@@ -113,7 +113,7 @@ class ImportModal extends HostListenerMixin(LitElement) {
         fetchedFile.invalidFileType = isInvalidFileType(fetchedFile);
         fetchedFile.uuid = pendingFile.uuid;
         updateFiles([fetchedFile]);
-      } catch (err) {
+      } catch {
         const failedFile = {
           ...pendingFile,
           fetchError: true,
@@ -157,8 +157,6 @@ class ImportModal extends HostListenerMixin(LitElement) {
     };
 
     const onAddFile = (evt) => {
-      console.log(evt.detail.addedFiles);
-
       const addedFiles = evt.detail.addedFiles;
       evt.stopPropagation();
       updateFiles(addedFiles);
@@ -281,7 +279,7 @@ class ImportModal extends HostListenerMixin(LitElement) {
             kind="secondary"
             data-modal-close
             @click=${() => {
-              onCloseHandler;
+              onCloseHandler();
             }}
             >Cancel</cds-modal-footer-button
           >
