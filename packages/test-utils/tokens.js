@@ -10,6 +10,7 @@
 const Ajv = require('ajv');
 const addFormats = require('ajv-formats');
 const fs = require('fs');
+const { globSync } = require('glob');
 const path = require('path');
 const formatSchema = require('./tokens/schemas/2025.10/format.json');
 
@@ -121,13 +122,28 @@ function checkTokenFile(filepath) {
 }
 
 /**
- * Defines a Jest test for every rule and token file. Rules listed in
- * `knownFailures` are expected to fail and the test fails once they pass, so
- * the list can only shrink as files are brought into conformance.
+ * Defines a Jest test for every rule and token file. Token files are found
+ * with the `include` glob patterns (relative to `packageDir`), so new files
+ * are checked automatically; use `exclude` for generated files. Rules listed
+ * in `knownFailures` are expected to fail and the test fails once they pass,
+ * so the list can only shrink as files are brought into conformance.
  */
-function describeTokenConformance({ packageDir, files, knownFailures = {} }) {
+function describeTokenConformance({
+  packageDir,
+  include,
+  exclude = [],
+  knownFailures = {},
+}) {
+  const files = globSync(include, { cwd: packageDir, ignore: exclude })
+    .map((file) => file.split(path.sep).join('/'))
+    .sort();
+
   describe('design token conformance (DTCG 2025.10)', () => {
-    test('known failures reference listed files and rules', () => {
+    test('token files are found', () => {
+      expect(files).not.toEqual([]);
+    });
+
+    test('known failures reference found files and rules', () => {
       for (const [file, rules] of Object.entries(knownFailures)) {
         expect(files).toContain(file);
         for (const rule of rules) {
@@ -135,6 +151,10 @@ function describeTokenConformance({ packageDir, files, knownFailures = {} }) {
         }
       }
     });
+
+    if (files.length === 0) {
+      return;
+    }
 
     describe.each(files)('%s', (file) => {
       const results = checkTokenFile(path.join(packageDir, file));

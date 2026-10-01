@@ -2393,6 +2393,7 @@ __metadata:
     "@npmcli/arborist": "npm:9.1.6"
     ajv: "npm:^8.20.0"
     ajv-formats: "npm:^3.0.1"
+    glob: "npm:^13.0.6"
     npm-packlist: "npm:^10.0.1"
     prettier: "npm:^3.3.3"
     react: "npm:^19.2.3"

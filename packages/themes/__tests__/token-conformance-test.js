@@ -23,14 +23,9 @@ const themeTokenFailures = [
 
 describeTokenConformance({
   packageDir: path.resolve(__dirname, '..'),
-  files: [
-    'src/dtcg/themes.json',
-    'src/dtcg/components/button.json',
-    'src/dtcg/components/content-switcher.json',
-    'src/dtcg/components/notification.json',
-    'src/dtcg/components/status.json',
-    'src/dtcg/components/tag.json',
-  ],
+  include: ['src/dtcg/**/*.json'],
+  // generated from @carbon/colors during build
+  exclude: ['src/dtcg/color-palette.json'],
   knownFailures: {
     'src/dtcg/themes.json': themeTokenFailures,
     'src/dtcg/components/button.json': themeTokenFailures,
