@@ -93,6 +93,10 @@ import {
 The DTCG migration introduced per-component token sets. They are exported as
 named objects:
 
+> **Breaking change (11.78.0):** Prior to 11.78.0 these objects were
+> double-nested (e.g. `buttonTokens.buttonTokens`). The repeated property
+> is now `undefined` — drop it to get the flat object directly.
+
 ```js
 import {
   buttonTokens,
