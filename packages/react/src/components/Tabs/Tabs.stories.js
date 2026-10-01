@@ -45,6 +45,9 @@ const lineTabsSizeArgType = {
     control: { type: 'select' },
     options: ['sm', 'md'],
     description: 'Specify the size of the tabs',
+    table: {
+      category: 'TabList',
+    },
   },
 };
 
@@ -53,6 +56,9 @@ const tabsSizeArgType = {
     control: { type: 'select' },
     options: ['sm', 'md', 'lg'],
     description: 'Specify the size of the tabs',
+    table: {
+      category: 'TabList',
+    },
   },
 };
 
@@ -64,6 +70,447 @@ const lineTabsSizeArgs = {
   size: 'md',
 };
 
+const iconStoriesArgs = {
+  badgeIndicator: false,
+  defaultOpen: false,
+  iconTabClassName: '',
+  iconTabDisabled: false,
+  iconTabLabel: 'New Notifications',
+};
+
+const tabsArgTypes = {
+  tabsChildren: {
+    control: false,
+    description:
+      'Provide child elements to be rendered inside the `Tabs`. These elements should render either `TabsList` or `TabsPanels`',
+    name: 'children',
+    table: {
+      category: 'Tabs',
+    },
+  },
+  defaultSelectedIndex: {
+    control: { type: 'number' },
+    description:
+      'Specify which content tab should be initially selected when the component is first rendered',
+    table: {
+      category: 'Tabs',
+      defaultValue: {
+        summary: 0,
+      },
+    },
+  },
+  dismissable: {
+    control: { type: 'boolean' },
+    description: 'Whether the rendered Tab children should be dismissable.',
+    table: {
+      category: 'Tabs',
+    },
+  },
+  onChange: {
+    action: 'onChange',
+    description:
+      'Provide an optional function which is called whenever the state of the `Tabs` changes',
+    table: {
+      category: 'Tabs',
+    },
+  },
+  onTabCloseRequest: {
+    action: 'onTabCloseRequest',
+    description:
+      'If specifying the `onTabCloseRequest` prop, provide a callback function responsible for removing the tab when close button is pressed on one of the Tab elements',
+    table: {
+      category: 'Tabs',
+    },
+  },
+  selectedIndex: {
+    control: { type: 'number' },
+    description:
+      'Control which content panel is currently selected. This puts the component in a controlled mode and should be used along with `onChange`',
+    table: {
+      category: 'Tabs',
+    },
+  },
+};
+
+const tabListArgTypes = {
+  activation: {
+    control: { type: 'select' },
+    options: ['automatic', 'manual'],
+    description:
+      'Specify whether the content tab should be activated automatically or manually',
+    table: {
+      category: 'TabList',
+      defaultValue: {
+        summary: 'automatic',
+      },
+    },
+  },
+  tabListChildren: {
+    control: false,
+    description:
+      'Provide child elements to be rendered inside `ContentTabs`. These elements should render a `ContentTab`',
+    name: 'children',
+    table: {
+      category: 'TabList',
+    },
+  },
+  'aria-label': {
+    control: { type: 'text' },
+    description:
+      'Provide an accessible label to be read when a user interacts with this component',
+    table: {
+      category: 'TabList',
+    },
+  },
+  className: {
+    control: { type: 'text' },
+    description:
+      'Specify an optional className to be added to the container node',
+    table: {
+      category: 'TabList',
+    },
+  },
+  contained: {
+    control: { type: 'boolean' },
+    description: 'Specify whether component is contained type',
+    table: {
+      category: 'TabList',
+      defaultValue: {
+        summary: false,
+      },
+    },
+  },
+  fullWidth: {
+    control: { type: 'boolean' },
+    description:
+      'Used for tabs within a grid, this makes it so tabs span the full container width and have the same width. Only available on contained tabs with <9 children',
+    table: {
+      category: 'TabList',
+      defaultValue: {
+        summary: false,
+      },
+    },
+  },
+  iconSize: {
+    control: { type: 'select' },
+    options: ['default', 'lg'],
+    description: 'If using `IconTab`, specify the size of the icon being used.',
+    table: {
+      category: 'TabList',
+    },
+  },
+  leftOverflowButtonProps: {
+    control: { type: 'object' },
+    description: 'Provide the props that describe the left overflow button',
+    table: {
+      category: 'TabList',
+    },
+  },
+  rightOverflowButtonProps: {
+    control: { type: 'object' },
+    description: 'Provide the props that describe the right overflow button',
+    table: {
+      category: 'TabList',
+    },
+  },
+  scrollDebounceWait: {
+    control: { type: 'number' },
+    description:
+      'Optionally provide a delay (in milliseconds) passed to the lodash debounce of the onScroll handler. This will impact the responsiveness of scroll arrow buttons rendering when scrolling to the first or last tab.',
+    table: {
+      category: 'TabList',
+      defaultValue: {
+        summary: 200,
+      },
+    },
+  },
+  scrollIntoView: {
+    control: { type: 'boolean' },
+    description:
+      'Choose whether to automatically scroll to newly selected tabs on component rerender',
+    table: {
+      category: 'TabList',
+    },
+  },
+};
+
+const iconStoriesArgTypes = {
+  badgeIndicator: {
+    description: '**Experimental**: Display an empty dot badge on the Tab.',
+    control: {
+      type: 'boolean',
+    },
+    table: {
+      category: 'IconTab',
+    },
+  },
+  iconTabChildren: {
+    control: false,
+    description:
+      'Provide an icon to be rendered inside `IconTab` as the visual label for Tab.',
+    name: 'children',
+    table: {
+      category: 'IconTab',
+    },
+  },
+  iconTabClassName: {
+    control: { type: 'text' },
+    description: 'Specify an optional className to be added to your Tab',
+    name: 'className',
+    table: {
+      category: 'IconTab',
+    },
+  },
+  defaultOpen: {
+    control: { type: 'boolean' },
+    description:
+      'Specify whether the tooltip for the icon should be open when it first renders',
+    table: {
+      category: 'IconTab',
+      defaultValue: {
+        summary: false,
+      },
+    },
+  },
+  iconTabDisabled: {
+    control: { type: 'boolean' },
+    description: 'Specify whether your IconTab is disabled.',
+    name: 'disabled',
+    table: {
+      category: 'IconTab',
+    },
+  },
+  enterDelayMs: {
+    control: { type: 'number' },
+    description:
+      'Specify the duration in milliseconds to delay before displaying the tooltip for the icon.',
+    table: {
+      category: 'IconTab',
+    },
+  },
+  iconTabLabel: {
+    control: { type: 'text' },
+    description: 'Provide the label to be rendered inside the Tooltip.',
+    name: 'label',
+    table: {
+      category: 'IconTab',
+    },
+  },
+  leaveDelayMs: {
+    control: { type: 'number' },
+    description:
+      'Specify the duration in milliseconds to delay before hiding the tooltip',
+    table: {
+      category: 'IconTab',
+    },
+  },
+};
+
+const tabArgTypes = {
+  as: {
+    control: { type: 'text' },
+    description:
+      'Provide a custom element to render instead of the default button',
+    table: {
+      category: 'Tab',
+      defaultValue: {
+        summary: 'button',
+      },
+    },
+  },
+  tabChildren: {
+    control: false,
+    description: 'Provide child elements to be rendered inside `Tab`.',
+    name: 'children',
+    table: {
+      category: 'Tab',
+    },
+  },
+  tabClassName: {
+    control: { type: 'text' },
+    description: 'Specify an optional className to be added to your Tab',
+    name: 'className',
+    table: {
+      category: 'Tab',
+    },
+  },
+  disabled: {
+    control: { type: 'boolean' },
+    description: 'Whether your Tab is disabled.',
+    table: {
+      category: 'Tab',
+    },
+  },
+  onClick: {
+    action: 'onClick',
+    description:
+      'Provide a handler that is invoked when a user clicks on the control',
+    table: {
+      category: 'Tab',
+    },
+  },
+  onKeyDown: {
+    action: 'onKeyDown',
+    description:
+      'Provide a handler that is invoked on the key down event for the control',
+    table: {
+      category: 'Tab',
+    },
+  },
+  renderButton: {
+    control: false,
+    description:
+      'An optional parameter to allow overriding the anchor rendering. Useful for using Tab along with react-router or other client side router libraries.',
+    table: {
+      category: 'Tab',
+    },
+  },
+  renderIcon: {
+    control: false,
+    description: 'A component used to render an icon.',
+    table: {
+      category: 'Tab',
+    },
+  },
+  secondaryLabel: {
+    control: { type: 'text' },
+    description:
+      'An optional label to render under the primary tab label. Only useful for contained tabs.',
+    table: {
+      category: 'Tab',
+    },
+  },
+};
+
+const tabPanelsArgTypes = {
+  tabPanelsChildren: {
+    control: false,
+    description: 'Provide child elements to be rendered inside `TabPanels`.',
+    name: 'children',
+    table: {
+      category: 'TabPanels',
+    },
+  },
+};
+
+const tabPanelArgTypes = {
+  tabPanelChildren: {
+    control: false,
+    description: 'Provide child elements to be rendered inside `TabPanel`.',
+    name: 'children',
+    table: {
+      category: 'TabPanel',
+    },
+  },
+  tabPanelClassName: {
+    control: { type: 'text' },
+    description: 'Specify an optional className to be added to TabPanel.',
+    name: 'className',
+    table: {
+      category: 'TabPanel',
+    },
+  },
+};
+
+const tabsSkeletonArgTypes = {
+  skeletonClassName: {
+    control: { type: 'text' },
+    description: 'Specify an optional className to add.',
+    name: 'className',
+    table: {
+      category: 'TabsSkeleton',
+    },
+  },
+};
+
+const tabListVerticalArgTypes = {
+  activation: {
+    ...tabListArgTypes.activation,
+    table: {
+      category: 'TabListVertical',
+      defaultValue: {
+        summary: 'automatic',
+      },
+    },
+  },
+  tabListVerticalChildren: {
+    control: false,
+    description:
+      'Provide child elements to be rendered inside `ContentTabs`. These elements should render a `ContentTab`',
+    name: 'children',
+    table: {
+      category: 'TabListVertical',
+    },
+  },
+  'aria-label': {
+    ...tabListArgTypes['aria-label'],
+    table: {
+      category: 'TabListVertical',
+    },
+  },
+  className: {
+    ...tabListArgTypes.className,
+    table: {
+      category: 'TabListVertical',
+    },
+  },
+  scrollIntoView: {
+    ...tabListArgTypes.scrollIntoView,
+    table: {
+      category: 'TabListVertical',
+    },
+  },
+  size: {
+    control: { type: 'select' },
+    options: ['sm', 'md', 'lg', 'xl'],
+    description: 'Specify the size of the tabs.',
+    table: {
+      category: 'TabListVertical',
+    },
+  },
+};
+
+const tabsVerticalArgTypes = {
+  tabsVerticalChildren: {
+    control: false,
+    description:
+      'Provide child elements to be rendered inside the `TabsVertical`. These elements should render either `TabsListVertical` or `TabsPanels`',
+    name: 'children',
+    table: {
+      category: 'TabsVertical',
+    },
+  },
+  defaultSelectedIndex: {
+    ...tabsArgTypes.defaultSelectedIndex,
+    table: {
+      category: 'TabsVertical',
+      defaultValue: {
+        summary: 0,
+      },
+    },
+  },
+  height: {
+    control: { type: 'text' },
+    description:
+      'Option to set a height style only if using vertical variation',
+    table: {
+      category: 'TabsVertical',
+    },
+  },
+  onChange: {
+    ...tabsArgTypes.onChange,
+    table: {
+      category: 'TabsVertical',
+    },
+  },
+  selectedIndex: {
+    ...tabsArgTypes.selectedIndex,
+    table: {
+      category: 'TabsVertical',
+    },
+  },
+};
+
 export default {
   title: 'Components/Tabs',
   component: Tabs,
@@ -72,8 +519,10 @@ export default {
     TabList,
     TabListVertical,
     Tab,
+    IconTab,
     TabPanels,
     TabPanel,
+    TabsSkeleton,
   },
   parameters: {
     docs: {
@@ -81,6 +530,12 @@ export default {
     },
   },
   argTypes: {
+    children: {
+      table: {
+        disable: true,
+      },
+    },
+    // `light` is deprecated
     light: {
       table: {
         disable: true,
@@ -90,16 +545,67 @@ export default {
 };
 
 export const Default = (args) => {
+  const {
+    activation,
+    as,
+    className,
+    contained,
+    defaultSelectedIndex,
+    disabled,
+    dismissable,
+    fullWidth,
+    iconSize,
+    leftOverflowButtonProps,
+    onChange,
+    onClick,
+    onKeyDown,
+    onTabCloseRequest,
+    renderIcon,
+    rightOverflowButtonProps,
+    scrollDebounceWait,
+    scrollIntoView,
+    secondaryLabel,
+    selectedIndex,
+    size,
+    tabClassName,
+    tabPanelClassName,
+  } = args;
+
   return (
-    <Tabs onTabCloseRequest={() => {}}>
-      <TabList {...args}>
-        <Tab>Dashboard</Tab>
+    <Tabs
+      defaultSelectedIndex={defaultSelectedIndex}
+      dismissable={dismissable}
+      onChange={onChange}
+      onTabCloseRequest={onTabCloseRequest}
+      selectedIndex={selectedIndex}>
+      <TabList
+        activation={activation}
+        aria-label={args['aria-label']}
+        className={className}
+        contained={contained}
+        fullWidth={fullWidth}
+        iconSize={iconSize}
+        leftOverflowButtonProps={leftOverflowButtonProps}
+        rightOverflowButtonProps={rightOverflowButtonProps}
+        scrollDebounceWait={scrollDebounceWait}
+        scrollIntoView={scrollIntoView}
+        size={size}>
+        <Tab
+          as={as}
+          className={tabClassName}
+          disabled={disabled}
+          onClick={onClick}
+          onKeyDown={onKeyDown}
+          renderIcon={renderIcon}
+          secondaryLabel={secondaryLabel}>
+          Dashboard
+        </Tab>
         <Tab>Monitoring</Tab>
         <Tab>Activity</Tab>
         <Tab>Settings</Tab>
       </TabList>
       <TabPanels>
-        <TabPanel>Tab Panel 1</TabPanel>
+        <TabPanel className={tabPanelClassName}>Tab Panel 1</TabPanel>
         <TabPanel>Tab Panel 2</TabPanel>
         <TabPanel>Tab Panel 3</TabPanel>
         <TabPanel>Tab Panel 4</TabPanel>
@@ -109,6 +615,7 @@ export const Default = (args) => {
 };
 
 Default.args = {
+  defaultSelectedIndex: 0,
   contained: false,
   dismissable: false,
   ...lineTabsSizeArgs,
@@ -116,43 +623,12 @@ Default.args = {
 };
 
 Default.argTypes = {
-  activation: {
-    control: { type: 'select' },
-    options: ['automatic', 'manual'],
-  },
-  contained: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  dismissable: {
-    control: false,
-  },
-  iconSize: {
-    control: { type: 'select' },
-    options: ['default', 'lg'],
-  },
-  leftOverflowButtonProps: {
-    control: {
-      type: 'object',
-    },
-  },
-  rightOverflowButtonProps: {
-    control: {
-      type: 'object',
-    },
-  },
-  scrollDebounceWait: {
-    control: {
-      type: 'number',
-    },
-  },
-  scrollIntoView: {
-    control: {
-      type: 'boolean',
-    },
-  },
+  ...tabsArgTypes,
+  ...tabListArgTypes,
   ...lineTabsSizeArgType,
+  ...tabArgTypes,
+  ...tabPanelsArgTypes,
+  ...tabPanelArgTypes,
 };
 
 export const Dismissable = (args) => {
@@ -302,7 +778,7 @@ export const DismissableContained = (args) => {
 DismissableContained.argTypes = tabsSizeArgType;
 DismissableContained.args = containedTabsSizeArgs;
 
-export const DismissableWithIcons = ({ contained, size }) => {
+export const DismissableWithIcons = ({ size }) => {
   const tabs = [
     {
       label: 'Dashboard',
@@ -362,7 +838,7 @@ export const DismissableWithIcons = ({ contained, size }) => {
         onChange={handleTabChange}
         dismissable
         onTabCloseRequest={handleCloseTabRequest}>
-        <TabList contained={contained} size={size}>
+        <TabList size={size}>
           {renderedTabs.map((tab, index) => (
             <Tab key={index} disabled={tab.disabled} renderIcon={icons[index]}>
               {tab.label}
@@ -420,10 +896,10 @@ export const WithIcons = (args) => {
 WithIcons.argTypes = lineTabsSizeArgType;
 WithIcons.args = lineTabsSizeArgs;
 
-export const Manual = () => {
+export const Manual = (args) => {
   return (
     <Tabs>
-      <TabList activation="manual">
+      <TabList activation="manual" size={args.size}>
         <Tab>Dashboard</Tab>
         <Tab>Monitoring</Tab>
         <Tab title="Tab label 4">Activity</Tab>
@@ -457,7 +933,18 @@ export const Manual = () => {
   );
 };
 
-export const Icon20Only = (args) => {
+Manual.argTypes = lineTabsSizeArgType;
+Manual.args = lineTabsSizeArgs;
+
+export const Icon20Only = ({
+  badgeIndicator,
+  defaultOpen,
+  enterDelayMs,
+  iconTabClassName,
+  iconTabDisabled,
+  iconTabLabel,
+  leaveDelayMs,
+}) => {
   return (
     <Tabs>
       <TabList iconSize="lg">
@@ -467,7 +954,14 @@ export const Icon20Only = (args) => {
         <IconTab label="Activity">
           <Activity size={20} aria-label="Activity" />
         </IconTab>
-        <IconTab label="New Notifications" {...args}>
+        <IconTab
+          badgeIndicator={badgeIndicator}
+          className={iconTabClassName}
+          defaultOpen={defaultOpen}
+          disabled={iconTabDisabled}
+          enterDelayMs={enterDelayMs}
+          label={iconTabLabel}
+          leaveDelayMs={leaveDelayMs}>
           <Notification size={20} aria-label="Notification" />
         </IconTab>
         <IconTab label="Chat">
@@ -484,26 +978,36 @@ export const Icon20Only = (args) => {
   );
 };
 
-Icon20Only.argTypes = {
-  badgeIndicator: {
-    description: '**Experimental**: Display an empty dot badge on the Tab.',
-    control: {
-      type: 'boolean',
-    },
-  },
-};
+Icon20Only.argTypes = iconStoriesArgTypes;
+Icon20Only.args = iconStoriesArgs;
 
-export const IconOnly = (args) => {
+export const IconOnly = ({
+  badgeIndicator,
+  defaultOpen,
+  enterDelayMs,
+  iconTabClassName,
+  iconTabDisabled,
+  iconTabLabel,
+  leaveDelayMs,
+  size,
+}) => {
   return (
     <Tabs>
-      <TabList iconSize="default" size={args.size}>
+      <TabList iconSize="default" size={size}>
         <IconTab label="Analyze" disabled>
           <IbmWatsonDiscovery aria-label="Analyze" />
         </IconTab>
         <IconTab label="Activity">
           <Activity aria-label="Activity" />
         </IconTab>
-        <IconTab label="New Notifications" {...args}>
+        <IconTab
+          badgeIndicator={badgeIndicator}
+          className={iconTabClassName}
+          defaultOpen={defaultOpen}
+          disabled={iconTabDisabled}
+          enterDelayMs={enterDelayMs}
+          label={iconTabLabel}
+          leaveDelayMs={leaveDelayMs}>
           <Notification aria-label="Notification" />
         </IconTab>
         <IconTab label="Chat">
@@ -522,14 +1026,12 @@ export const IconOnly = (args) => {
 
 IconOnly.argTypes = {
   ...lineTabsSizeArgType,
-  badgeIndicator: {
-    description: '**Experimental**: Display an empty dot badge on the Tab.',
-    control: {
-      type: 'boolean',
-    },
-  },
+  ...iconStoriesArgTypes,
 };
-IconOnly.args = lineTabsSizeArgs;
+IconOnly.args = {
+  ...lineTabsSizeArgs,
+  ...iconStoriesArgs,
+};
 
 export const Contained = (args) => {
   return (
@@ -615,10 +1117,10 @@ export const ContainedWithIcons = (args) => {
 ContainedWithIcons.argTypes = tabsSizeArgType;
 ContainedWithIcons.args = containedTabsSizeArgs;
 
-export const ContainedWithSecondaryLabels = () => {
+export const ContainedWithSecondaryLabels = (args) => {
   return (
     <Tabs>
-      <TabList contained>
+      <TabList contained size={args.size}>
         <Tab secondaryLabel="(21/25)">Engage</Tab>
         <Tab secondaryLabel="(12/16)">Analyze</Tab>
         <Tab secondaryLabel="(0/7)">Remediate</Tab>
@@ -655,10 +1157,13 @@ export const ContainedWithSecondaryLabels = () => {
   );
 };
 
-export const ContainedWithSecondaryLabelsAndIcons = () => {
+ContainedWithSecondaryLabels.argTypes = tabsSizeArgType;
+ContainedWithSecondaryLabels.args = containedTabsSizeArgs;
+
+export const ContainedWithSecondaryLabelsAndIcons = (args) => {
   return (
     <Tabs>
-      <TabList contained>
+      <TabList contained size={args.size}>
         <Tab renderIcon={Task} secondaryLabel="(21/25)">
           Engage
         </Tab>
@@ -702,6 +1207,9 @@ export const ContainedWithSecondaryLabelsAndIcons = () => {
     </Tabs>
   );
 };
+
+ContainedWithSecondaryLabelsAndIcons.argTypes = tabsSizeArgType;
+ContainedWithSecondaryLabelsAndIcons.args = containedTabsSizeArgs;
 
 export const ContainedFullWidth = (args) => {
   return (
@@ -752,10 +1260,29 @@ export const ContainedFullWidth = (args) => {
 };
 
 export const Vertical = (args) => {
-  const { size, ...tabsVerticalArgs } = args;
+  const {
+    activation,
+    className,
+    defaultSelectedIndex,
+    height,
+    onChange,
+    scrollIntoView,
+    selectedIndex,
+    size,
+  } = args;
+
   return (
-    <TabsVertical {...tabsVerticalArgs}>
-      <TabListVertical size={size}>
+    <TabsVertical
+      defaultSelectedIndex={defaultSelectedIndex}
+      height={height}
+      onChange={onChange}
+      selectedIndex={selectedIndex}>
+      <TabListVertical
+        activation={activation}
+        aria-label={args['aria-label']}
+        className={className}
+        scrollIntoView={scrollIntoView}
+        size={size}>
         <Tab>Dashboard</Tab>
         <Tab>
           Extra long label that will go two lines then truncate when it goes
@@ -814,21 +1341,14 @@ export const Vertical = (args) => {
 };
 
 Vertical.args = {
+  defaultSelectedIndex: 0,
   height: '',
   size: 'xl',
 };
 
 Vertical.argTypes = {
-  height: {
-    control: {
-      type: 'text',
-    },
-  },
-  size: {
-    control: { type: 'select' },
-    options: ['sm', 'md', 'lg', 'xl'],
-    description: 'Specify the size of the vertical tabs',
-  },
+  ...tabsVerticalArgTypes,
+  ...tabListVerticalArgTypes,
 };
 
 Vertical.parameters = {
@@ -837,15 +1357,38 @@ Vertical.parameters = {
   },
 };
 
-export const Skeleton = () => {
+export const Skeleton = ({ skeletonClassName, ...args }) => {
   return (
     <div style={{ maxWidth: '100%' }}>
-      <TabsSkeleton />
+      <TabsSkeleton contained={args.contained} className={skeletonClassName} />
     </div>
   );
 };
 
-export const Icon20OnlyVisualSnapshots = (args) => {
+Skeleton.argTypes = {
+  ...tabsSkeletonArgTypes,
+  contained: {
+    control: { type: 'boolean' },
+    description: 'Provide the type of Tab',
+    table: {
+      category: 'TabsSkeleton',
+    },
+  },
+};
+Skeleton.args = {
+  contained: false,
+  skeletonClassName: '',
+};
+
+export const Icon20OnlyVisualSnapshots = ({
+  badgeIndicator,
+  defaultOpen,
+  enterDelayMs,
+  iconTabClassName,
+  iconTabDisabled,
+  iconTabLabel,
+  leaveDelayMs,
+}) => {
   return (
     <Tabs>
       <TabList iconSize="lg">
@@ -855,7 +1398,14 @@ export const Icon20OnlyVisualSnapshots = (args) => {
         <IconTab label="Activity">
           <Activity size={20} aria-label="Activity" />
         </IconTab>
-        <IconTab label="New Notifications" {...args}>
+        <IconTab
+          badgeIndicator={badgeIndicator}
+          className={iconTabClassName}
+          defaultOpen={defaultOpen}
+          disabled={iconTabDisabled}
+          enterDelayMs={enterDelayMs}
+          label={iconTabLabel}
+          leaveDelayMs={leaveDelayMs}>
           <Notification size={20} aria-label="Notification" />
         </IconTab>
         <IconTab label="Chat">
@@ -872,14 +1422,8 @@ export const Icon20OnlyVisualSnapshots = (args) => {
   );
 };
 
-Icon20OnlyVisualSnapshots.argTypes = {
-  badgeIndicator: {
-    description: '**Experimental**: Display an empty dot badge on the Tab.',
-    control: {
-      type: 'boolean',
-    },
-  },
-};
+Icon20OnlyVisualSnapshots.argTypes = iconStoriesArgTypes;
+Icon20OnlyVisualSnapshots.args = iconStoriesArgs;
 
 Icon20OnlyVisualSnapshots.play = async ({ userEvent }) => {
   await userEvent.keyboard('{Tab}');
@@ -887,7 +1431,15 @@ Icon20OnlyVisualSnapshots.play = async ({ userEvent }) => {
 
 Icon20OnlyVisualSnapshots.tags = ['!dev', '!autodocs'];
 
-export const IconOnlyVisualSnapshots = (args) => {
+export const IconOnlyVisualSnapshots = ({
+  badgeIndicator,
+  defaultOpen,
+  enterDelayMs,
+  iconTabClassName,
+  iconTabDisabled,
+  iconTabLabel,
+  leaveDelayMs,
+}) => {
   return (
     <Tabs>
       <TabList iconSize="default">
@@ -897,7 +1449,14 @@ export const IconOnlyVisualSnapshots = (args) => {
         <IconTab label="Activity">
           <Activity aria-label="Activity" />
         </IconTab>
-        <IconTab label="New Notifications" {...args}>
+        <IconTab
+          badgeIndicator={badgeIndicator}
+          className={iconTabClassName}
+          defaultOpen={defaultOpen}
+          disabled={iconTabDisabled}
+          enterDelayMs={enterDelayMs}
+          label={iconTabLabel}
+          leaveDelayMs={leaveDelayMs}>
           <Notification aria-label="Notification" />
         </IconTab>
         <IconTab label="Chat">
@@ -914,14 +1473,8 @@ export const IconOnlyVisualSnapshots = (args) => {
   );
 };
 
-IconOnlyVisualSnapshots.argTypes = {
-  badgeIndicator: {
-    description: '**Experimental**: Display an empty dot badge on the Tab.',
-    control: {
-      type: 'boolean',
-    },
-  },
-};
+IconOnlyVisualSnapshots.argTypes = iconStoriesArgTypes;
+IconOnlyVisualSnapshots.args = iconStoriesArgs;
 
 IconOnlyVisualSnapshots.play = async ({ userEvent }) => {
   await userEvent.keyboard('{Tab}');
