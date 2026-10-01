@@ -10,15 +10,15 @@
 import { html, LitElement } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 
-import '../../../../../components/button/index';
-import '../../../../../components/notification/toast-notification';
-import '../../../../../components/inline-loading/index';
+import '@carbon/web-components/es/components/button/index.js';
+import '@carbon/web-components/es/components/notification/toast-notification.js';
+import '@carbon/web-components/es/components/inline-loading/index.js';
 
 import { getCurrentTime } from './utils';
 import styles from './delete-and-remove.scss?lit';
 import TrashCan16 from '@carbon/icons/es/trash-can/16';
 import SubtractAlt16 from '@carbon/icons/es/subtract--alt/16';
-import { iconLoader } from '../../../../../globals/internal/icon-loader';
+import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 

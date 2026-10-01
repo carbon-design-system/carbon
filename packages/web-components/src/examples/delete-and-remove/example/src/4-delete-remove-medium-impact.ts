@@ -10,9 +10,9 @@
 import { html, LitElement } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 
-import '../../../../../components/button/index';
-import '../../../../../components/modal/index';
-import '../../../../../components/notification/toast-notification';
+import '@carbon/web-components/es/components/button/index.js';
+import '@carbon/web-components/es/components/modal/index.js';
+import '@carbon/web-components/es/components/notification/toast-notification.js';
 
 import { getCurrentTime } from './utils';
 import styles from './delete-and-remove.scss?lit';

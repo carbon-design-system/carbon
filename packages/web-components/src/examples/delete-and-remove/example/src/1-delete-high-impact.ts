@@ -10,11 +10,11 @@
 import { html, LitElement } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 
-import '../../../../../components/button/index';
-import '../../../../../components/modal/index';
-import '../../../../../components/form/form-item';
-import '../../../../../components/text-input/text-input';
-import '../../../../../components/notification/toast-notification';
+import '@carbon/web-components/es/components/button/index.js';
+import '@carbon/web-components/es/components/modal/index.js';
+import '@carbon/web-components/es/components/form/form-item.js';
+import '@carbon/web-components/es/components/text-input/text-input.js';
+import '@carbon/web-components/es/components/notification/toast-notification.js';
 
 import { getCurrentTime } from './utils';
 import styles from './delete-and-remove.scss?lit';

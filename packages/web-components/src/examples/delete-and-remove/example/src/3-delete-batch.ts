@@ -11,16 +11,16 @@ import { html, LitElement } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { map } from 'lit/directives/map.js';
 
-import '../../../../../components/button/index';
-import '../../../../../components/modal/index';
-import '../../../../../components/notification/toast-notification';
-import '../../../../../components/checkbox/checkbox';
-import '../../../../../components/link/link';
+import '@carbon/web-components/es/components/button/index.js';
+import '@carbon/web-components/es/components/modal/index.js';
+import '@carbon/web-components/es/components/notification/toast-notification.js';
+import '@carbon/web-components/es/components/checkbox/checkbox.js';
+import '@carbon/web-components/es/components/link/link.js';
 
 import { getCurrentTime } from './utils';
 import styles from './delete-and-remove.scss?lit';
 import Launch16 from '@carbon/icons/es/launch/16';
-import { iconLoader } from '../../../../../globals/internal/icon-loader';
+import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
 
 // example implementation of high impact batch deletion pattern
 @customElement('delete-batch')
