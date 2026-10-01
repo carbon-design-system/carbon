@@ -37,7 +37,7 @@ const sharedNotificationProps = {
 // Inline
 figma.connect(
   InlineNotification,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-Carbon-Design-System?node-id=4179-105911&t=nJ89fkK549fgCUuf-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=4179-105911&t=nJ89fkK549fgCUuf-4',
   {
     variant: { Actionable: 'False' },
     props: sharedNotificationProps,
@@ -56,7 +56,7 @@ figma.connect(
 // Inline - actionable
 figma.connect(
   ActionableNotification,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-Carbon-Design-System?node-id=4179-105911&t=nJ89fkK549fgCUuf-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=4179-105911&t=nJ89fkK549fgCUuf-4',
   {
     variant: { Actionable: 'True' },
     props: sharedNotificationProps,
@@ -80,7 +80,7 @@ figma.connect(
 // Toast
 figma.connect(
   ToastNotification,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-Carbon-Design-System?node-id=84336-35011&t=nJ89fkK549fgCUuf-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=84336-35011&t=nJ89fkK549fgCUuf-4',
   {
     variant: { Actionable: 'False' },
     props: {
@@ -125,7 +125,7 @@ figma.connect(
 // Toast -- actionable
 figma.connect(
   ActionableNotification,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-Carbon-Design-System?node-id=84336-35011&t=nJ89fkK549fgCUuf-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=84336-35011&t=nJ89fkK549fgCUuf-4',
   {
     variant: { Actionable: 'True' },
     props: sharedNotificationProps,
@@ -148,7 +148,7 @@ figma.connect(
 // Callout
 figma.connect(
   Callout,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-Carbon-Design-System?node-id=84336-36580&t=nJ89fkK549fgCUuf-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=84336-36580&t=nJ89fkK549fgCUuf-4',
   {
     props: {
       title: figma.boolean('Title', {

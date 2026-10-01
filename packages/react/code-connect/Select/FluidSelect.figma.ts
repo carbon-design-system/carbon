@@ -1,4 +1,4 @@
-// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=17650-275243&t=LS77peWFGhwOdxIw-4
+// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=17650-275243&t=LS77peWFGhwOdxIw-4
 // source=https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/FluidSelect/FluidSelect.tsx
 // component=FluidSelect
 
