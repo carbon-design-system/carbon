@@ -15,12 +15,11 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 import { classMap } from 'lit-html/directives/class-map.js';
 import styles from './tearsheet-header.scss?lit';
 import {
-  getTearsheetSignal,
-  getTearsheetState,
-  updateTearsheetState,
-  getParentTearsheetId,
-} from './tearsheet-signal';
-import { SignalWatcher } from '@lit-labs/signals';
+  tearsheetContext,
+  defaultTearsheetState,
+  type TearsheetContextValue,
+} from './tearsheet-context';
+import { consume } from '@lit/context';
 import { registerFocusableContainers } from '../../utilities/manageFocusTrap/manageFocusTrap';
 
 const blockClass = `${prefix}--tearsheet`;
@@ -36,7 +35,7 @@ const blockClass = `${prefix}--tearsheet`;
  *   this as the public `cds-tearsheet-collapse-change` event.
  */
 @customElement(`${prefix}-tearsheet-header`)
-class CDSTearsheetHeader extends SignalWatcher(HostListenerMixin(LitElement)) {
+class CDSTearsheetHeader extends HostListenerMixin(LitElement) {
   @property({ reflect: true })
   slot = 'header';
 
@@ -53,14 +52,13 @@ class CDSTearsheetHeader extends SignalWatcher(HostListenerMixin(LitElement)) {
   })
   disableHeaderCollapse: boolean = false;
 
-  /** uniqueId of the parent cds-tearsheet, read once in connectedCallback. */
-  private _uniqueId: string = '';
+  @consume({ context: tearsheetContext, subscribe: true })
+  private _tearsheetCtx?: TearsheetContextValue;
 
   connectedCallback() {
     super.connectedCallback();
-    this._uniqueId = getParentTearsheetId(this);
-    // Push initial prop values into this instance's keyed slice
-    updateTearsheetState(this._uniqueId, {
+    // Push initial prop values into context state
+    this._tearsheetCtx?.setState({
       disableHeaderCollapse: this.disableHeaderCollapse,
       closeIconDescription: this.closeIconDescription,
       hideCloseButton: this.hideCloseButton,
@@ -68,22 +66,27 @@ class CDSTearsheetHeader extends SignalWatcher(HostListenerMixin(LitElement)) {
   }
 
   protected firstUpdated() {
-    registerFocusableContainers(this.shadowRoot, this._uniqueId);
+    registerFocusableContainers(this.shadowRoot, this._getUniqueId());
+  }
+
+  private _getUniqueId(): string {
+    const host = this.closest(`${prefix}-tearsheet`);
+    return (host as HTMLElement & { uniqueId?: string })?.uniqueId ?? '';
   }
 
   protected updated(_changedProperties: PropertyValues) {
     if (_changedProperties.has('disableHeaderCollapse')) {
-      updateTearsheetState(this._uniqueId, {
+      this._tearsheetCtx?.setState({
         disableHeaderCollapse: this.disableHeaderCollapse,
       });
     }
     if (_changedProperties.has('closeIconDescription')) {
-      updateTearsheetState(this._uniqueId, {
+      this._tearsheetCtx?.setState({
         closeIconDescription: this.closeIconDescription,
       });
     }
     if (_changedProperties.has('hideCloseButton')) {
-      updateTearsheetState(this._uniqueId, {
+      this._tearsheetCtx?.setState({
         hideCloseButton: this.hideCloseButton,
       });
     }
@@ -91,7 +94,8 @@ class CDSTearsheetHeader extends SignalWatcher(HostListenerMixin(LitElement)) {
   }
 
   private updateCollapsedAttribute() {
-    const { fullyCollapsed, open } = getTearsheetState(this._uniqueId);
+    const { fullyCollapsed, open } =
+      this._tearsheetCtx?.state ?? defaultTearsheetState;
     const wasCollapsed = this.hasAttribute('collapsed');
 
     if (open) {
@@ -120,9 +124,8 @@ class CDSTearsheetHeader extends SignalWatcher(HostListenerMixin(LitElement)) {
   }
 
   render() {
-    // getTearsheetSignal(id).get() subscribes SignalWatcher to only this
-    // instance's signal — changes in other tearsheets never trigger a re-render.
-    const { fullyCollapsed } = getTearsheetSignal(this._uniqueId).get();
+    const { fullyCollapsed } =
+      this._tearsheetCtx?.state ?? defaultTearsheetState;
 
     const classes = classMap({
       [`${blockClass}__header`]: true,

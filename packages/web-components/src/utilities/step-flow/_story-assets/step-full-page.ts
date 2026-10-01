@@ -7,7 +7,6 @@
 
 import { LitElement, html, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { SignalWatcher } from '@lit-labs/signals';
 import styles from './step-full-page.scss?lit';
 import { StepInstance } from '../step-flow-signal';
 import '../../../components/progress-indicator/index';
@@ -24,7 +23,7 @@ interface FormStateType extends Record<string, unknown> {
 }
 
 @customElement('step-full-page')
-export class StepFullPage extends SignalWatcher(LitElement) {
+export class StepFullPage extends LitElement {
   @property({ type: Boolean })
   narrow: boolean = false;
   @state()
@@ -86,7 +85,7 @@ export class StepFullPage extends SignalWatcher(LitElement) {
     this._stepInfo.updateFormState = savedFormState;
   }
 
-  private _stepInfo = new StepInstance();
+  private _stepInfo = new StepInstance(this);
 
   connectedCallback(): void {
     super.connectedCallback();

@@ -21,13 +21,12 @@ import { MatchMediaController } from '../../globals/js/utils/match-media-control
 import { breakpoints } from '@carbon/layout';
 import { registerFocusableContainers } from '../../utilities/manageFocusTrap/manageFocusTrap';
 import {
-  getTearsheetSignal,
-  getTearsheetState,
-  updateTearsheetState,
-  getParentTearsheetId,
-} from './tearsheet-signal';
+  tearsheetContext,
+  defaultTearsheetState,
+  type TearsheetContextValue,
+} from './tearsheet-context';
 import CDSTearsheetHeader from './tearsheet-header';
-import { SignalWatcher } from '@lit-labs/signals';
+import { consume } from '@lit/context';
 import Close20 from '@carbon/icons/es/close/20.js';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import { prefix as carbonPrefix } from '../../globals/settings';
@@ -45,9 +44,7 @@ const blockClass = `${prefix}--tearsheet`;
  * @slot decorator - AI label or other decorative elements
  */
 @customElement(`${prefix}-tearsheet-header-content`)
-class CDSTearsheetHeaderContent extends SignalWatcher(
-  HostListenerMixin(LitElement)
-) {
+class CDSTearsheetHeaderContent extends HostListenerMixin(LitElement) {
   @property({ reflect: true })
   slot = 'header-content';
 
@@ -94,11 +91,13 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
     false
   );
 
-  /** uniqueId of the parent cds-tearsheet, read once in connectedCallback. */
-  private _uniqueId: string = '';
+  @consume({ context: tearsheetContext, subscribe: true })
+  private _tearsheetCtx?: TearsheetContextValue;
 
   private get isNarrowVariant(): boolean {
-    return getTearsheetState(this._uniqueId).variant === 'narrow';
+    return (
+      (this._tearsheetCtx?.state ?? defaultTearsheetState).variant === 'narrow'
+    );
   }
 
   protected override firstUpdated(): void {
@@ -109,10 +108,16 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
     // Register containers in intentional order:
     // 1. `this` (light DOM) — finds header-action buttons and AI label (slot="decorator")
     // 2. `this.shadowRoot` — finds close button (cds-icon-button) and decorator slot host
-    if (this._uniqueId) {
-      registerFocusableContainers(this, this._uniqueId);
-      registerFocusableContainers(this.shadowRoot, this._uniqueId);
+    const uniqueId = this._getUniqueId();
+    if (uniqueId) {
+      registerFocusableContainers(this, uniqueId);
+      registerFocusableContainers(this.shadowRoot, uniqueId);
     }
+  }
+
+  private _getUniqueId(): string {
+    const host = this.closest(`${prefix}-tearsheet`);
+    return (host as HTMLElement & { uniqueId?: string })?.uniqueId ?? '';
   }
 
   protected override updated(): void {
@@ -213,7 +218,8 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
    * the tab order and AT tree.
    */
   private _updateInertState(): void {
-    const { fullyCollapsed } = getTearsheetState(this._uniqueId);
+    const { fullyCollapsed } =
+      this._tearsheetCtx?.state ?? defaultTearsheetState;
 
     const headerContent = this.shadowRoot?.querySelector(
       `.${blockClass}__header-content`
@@ -275,10 +281,11 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
           break;
         }
       }
-      const { fullyCollapsed } = getTearsheetState(this._uniqueId);
+      const { fullyCollapsed } =
+        this._tearsheetCtx?.state ?? defaultTearsheetState;
       childItems[0].setAttribute('size', fullyCollapsed ? 'xs' : 'sm');
 
-      updateTearsheetState(this._uniqueId, {
+      this._tearsheetCtx?.setState({
         hasDecorator: true,
         hasAILabel: this._hasAILabel,
       });
@@ -292,7 +299,7 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
         ancestor.removeAttribute(this._hasAILabel ? 'decorator' : 'ai-label');
       }
     } else {
-      updateTearsheetState(this._uniqueId, {
+      this._tearsheetCtx?.setState({
         hasDecorator: false,
         hasAILabel: false,
       });
@@ -310,7 +317,8 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
   }
 
   private _updateDecoratorSize() {
-    const { fullyCollapsed } = getTearsheetState(this._uniqueId);
+    const { fullyCollapsed } =
+      this._tearsheetCtx?.state ?? defaultTearsheetState;
     const assigned = this._decoratorSlot?.assignedElements({ flatten: true });
     if (assigned?.length) {
       assigned[0].setAttribute('size', fullyCollapsed ? 'xs' : 'sm');
@@ -318,7 +326,7 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
   }
 
   private _updateHeaderOffset() {
-    const { open, isSm } = getTearsheetState(this._uniqueId);
+    const { open, isSm } = this._tearsheetCtx?.state ?? defaultTearsheetState;
     if (!open) return;
     const AILabelWidth =
       this.querySelector('[slot="decorator"]')?.clientWidth ?? 0;
@@ -330,10 +338,8 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
   }
 
   render() {
-    // getTearsheetSignal(id).get() subscribes SignalWatcher to only this
-    // instance's signal — changes in other tearsheets never trigger a re-render.
     const { fullyCollapsed, hideCloseButton, closeIconDescription, onClose } =
-      getTearsheetSignal(this._uniqueId).get();
+      this._tearsheetCtx?.state ?? defaultTearsheetState;
 
     const decoratorTemplate = html`
       <div
@@ -479,7 +485,6 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
 
   connectedCallback(): void {
     super.connectedCallback();
-    this._uniqueId = getParentTearsheetId(this);
 
     let el: Element | null = this.parentElement;
     while (el) {
