@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import styles from './fluid-select-story.scss?inline';
+
 import React from 'react';
 import { FluidSelect, FluidSelectSkeleton } from '.';
 import SelectItem from '../SelectItem';
@@ -13,7 +15,6 @@ import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { Information, View, FolderOpen, Folders } from '@carbon/icons-react';
-import './fluid-select-story.scss';
 import mdx from './FluidSelect.mdx';
 
 export default {
@@ -22,7 +23,16 @@ export default {
   subcomponents: {
     FluidSelectSkeleton,
   },
+  decorators: [
+    (Story) => (
+      <>
+        <style>{styles}</style>
+        <Story />
+      </>
+    ),
+  ],
   parameters: {
+    styles,
     docs: {
       page: mdx,
     },
@@ -103,28 +113,31 @@ const widthArgType = {
   control: { type: 'range', min: 300, max: 800, step: 50 },
 };
 
-export const Default = ({ defaultWidth, ...selectArgs }) => (
-  <div className="fluid-select-story" style={{ width: defaultWidth }}>
-    {/* Keep the toggletip outside `labelText`; interactive content is invalid in labels. */}
-    <span className="fluid-select-story__toggletip">
-      <Toggletip align="top-left">
-        <ToggletipButton label="Show information">
-          <Information />
-        </ToggletipButton>
-        <ToggletipContent>
-          <p>Additional field information here.</p>
-        </ToggletipContent>
-      </Toggletip>
-    </span>
-    <FluidSelect {...selectArgs} id="select-1">
-      <SelectItem value="" text="" />
-      <SelectItem value="option-1" text="Option 1" />
-      <SelectItem value="option-2" text="Option 2" />
-      <SelectItem value="option-3" text="Option 3" />
-      <SelectItem value="option-4" text="Option 4" />
-    </FluidSelect>
-  </div>
-);
+export const Default = (args) => {
+  const { defaultWidth, ...selectArgs } = args;
+  return (
+    <div className="fluid-select-story" style={{ width: defaultWidth }}>
+      {/* Keep the toggletip outside `labelText`; interactive content is invalid in labels. */}
+      <span className="fluid-select-story__toggletip">
+        <Toggletip align="top-left">
+          <ToggletipButton label="Show information">
+            <Information />
+          </ToggletipButton>
+          <ToggletipContent>
+            <p>Additional field information here.</p>
+          </ToggletipContent>
+        </Toggletip>
+      </span>
+      <FluidSelect {...selectArgs} id="select-1">
+        <SelectItem value="" text="" />
+        <SelectItem value="option-1" text="Option 1" />
+        <SelectItem value="option-2" text="Option 2" />
+        <SelectItem value="option-3" text="Option 3" />
+        <SelectItem value="option-4" text="Option 4" />
+      </FluidSelect>
+    </div>
+  );
+};
 
 Default.args = {
   ...sharedArgs,
@@ -140,55 +153,57 @@ Default.parameters = {
   controls: { include: [...sharedControls, 'defaultWidth'] },
 };
 
-const aiLabel = (
-  <AILabel className="ai-label-container">
-    <AILabelContent>
-      <div>
-        <p className="secondary">AI Explained</p>
-        <h2 className="ai-label-heading">84%</h2>
-        <p className="secondary bold">Confidence score</p>
-        <p className="secondary">
-          Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
-        </p>
-        <hr />
-        <p className="secondary">Model type</p>
-        <p className="bold">Foundation model</p>
-      </div>
-      <AILabelActions>
-        <IconButton kind="ghost" label="View">
-          <View />
-        </IconButton>
-        <IconButton kind="ghost" label="Open Folder">
-          <FolderOpen />
-        </IconButton>
-        <IconButton kind="ghost" label="Folders">
-          <Folders />
-        </IconButton>
-        <Button>View details</Button>
-      </AILabelActions>
-    </AILabelContent>
-  </AILabel>
-);
-
-export const withAILabel = ({ defaultWidth, ...selectArgs }) => (
-  <div style={{ width: defaultWidth }}>
-    <FluidSelect
-      id="select-1"
-      labelText="Select an option"
-      decorator={aiLabel}
-      {...selectArgs}>
-      <SelectItem value="" text="" />
-      <SelectItem
-        value="An example option that is really long to show what should be done to handle long text"
-        text="An example option that is really long to show what should be done to handle long text"
-      />
-      <SelectItem value="Option 2" text="Option 2" />
-      <SelectItem value="Option 3" text="Option 3" />
-      <SelectItem value="Option 4" text="Option 4" />
-    </FluidSelect>
-  </div>
-);
+export const withAILabel = (args) => {
+  const { defaultWidth, ...selectArgs } = args;
+  const aiLabel = (
+    <AILabel className="ai-label-container">
+      <AILabelContent>
+        <div>
+          <p className="secondary">AI Explained</p>
+          <h2 className="ai-label-heading">84%</h2>
+          <p className="secondary bold">Confidence score</p>
+          <p className="secondary">
+            Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+          </p>
+          <hr />
+          <p className="secondary">Model type</p>
+          <p className="bold">Foundation model</p>
+        </div>
+        <AILabelActions>
+          <IconButton kind="ghost" label="View">
+            <View />
+          </IconButton>
+          <IconButton kind="ghost" label="Open Folder">
+            <FolderOpen />
+          </IconButton>
+          <IconButton kind="ghost" label="Folders">
+            <Folders />
+          </IconButton>
+          <Button>View details</Button>
+        </AILabelActions>
+      </AILabelContent>
+    </AILabel>
+  );
+  return (
+    <div style={{ width: defaultWidth }}>
+      <FluidSelect
+        id="select-1"
+        labelText="Select an option"
+        decorator={aiLabel}
+        {...selectArgs}>
+        <SelectItem value="" text="" />
+        <SelectItem
+          value="An example option that is really long to show what should be done to handle long text"
+          text="An example option that is really long to show what should be done to handle long text"
+        />
+        <SelectItem value="Option 2" text="Option 2" />
+        <SelectItem value="Option 3" text="Option 3" />
+        <SelectItem value="Option 4" text="Option 4" />
+      </FluidSelect>
+    </div>
+  );
+};
 
 withAILabel.args = {
   ...sharedArgs,
@@ -204,11 +219,14 @@ withAILabel.parameters = {
   controls: { include: [...sharedControls, 'defaultWidth'] },
 };
 
-export const Skeleton = ({ defaultWidth }) => (
-  <div style={{ width: defaultWidth }}>
-    <FluidSelectSkeleton />
-  </div>
-);
+export const Skeleton = (args) => {
+  const { defaultWidth } = args;
+  return (
+    <div style={{ width: defaultWidth }}>
+      <FluidSelectSkeleton />
+    </div>
+  );
+};
 
 Skeleton.args = {
   defaultWidth: 400,

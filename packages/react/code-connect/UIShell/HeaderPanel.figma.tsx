@@ -12,7 +12,7 @@ import figma from '@figma/code-connect';
 
 figma.connect(
   HeaderPanel,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=2319-15100&t=wcK3P98b09VsrxXF-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=2319-15100&t=wcK3P98b09VsrxXF-4',
   {
     props: { children: figma.children('*') },
     example: ({ children }) => (
