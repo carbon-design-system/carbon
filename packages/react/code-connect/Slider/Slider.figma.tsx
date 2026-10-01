@@ -13,7 +13,7 @@ import figma from '@figma/code-connect';
 //single
 figma.connect(
   Slider,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=3673-40574&m=dev',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=3673-40574&m=dev',
   {
     props: {
       slider: figma.nestedProps('_Slider base', {
@@ -46,7 +46,7 @@ figma.connect(
 //two handle
 figma.connect(
   Slider,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=41061-1531&m=dev',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=41061-1531&m=dev',
   {
     props: {
       max: figma.string('Max range text'),
@@ -82,7 +82,7 @@ figma.connect(
 // single skeleton
 figma.connect(
   SliderSkeleton,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=3673-40574&m=dev',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=3673-40574&m=dev',
   {
     variant: { State: 'Skeleton' },
     example: () => <SliderSkeleton />,
@@ -92,7 +92,7 @@ figma.connect(
 // two handle skeleton
 figma.connect(
   SliderSkeleton,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=41061-1531&m=dev',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=41061-1531&m=dev',
   {
     variant: { State: 'Skeleton' },
     example: () => <SliderSkeleton twoHandles />,
