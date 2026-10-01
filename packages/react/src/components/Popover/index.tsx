@@ -388,7 +388,7 @@ export const Popover: PopoverComponent & {
                     }
                   : { mainAxis: enableV12Release ? 4 : 0 }
               ),
-              autoAlign &&
+              (enableV12Release || autoAlign) &&
                 flip({
                   fallbackPlacements: isTabTip
                     ? align.includes('bottom')
@@ -432,7 +432,7 @@ export const Popover: PopoverComponent & {
                 element: caretRef,
                 padding: enableV12Release ? 3 : 16,
               }),
-              autoAlign && hide(),
+              (enableV12Release || autoAlign) && hide(),
             ],
           }
         : {}
