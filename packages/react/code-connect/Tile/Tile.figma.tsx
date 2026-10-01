@@ -19,7 +19,7 @@ import figma from '@figma/code-connect';
 
 figma.connect(
   Tile,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/-v11--Carbon-Design-System?node-id=20125-279432&m=dev',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=20125-279432&m=dev',
   {
     props: {
       // TODO: Re-enable these props when Code Connect validation bug is fixed
@@ -45,7 +45,7 @@ figma.connect(
 
 // figma.connect(
 //   Tile,
-//   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=20125-279432&m=dev',
+//   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=20125-279432&m=dev',
 //   {
 //     // variant: { Type: 'Base' },
 //     props: {
@@ -69,7 +69,7 @@ figma.connect(
 
 // figma.connect(
 //   ClickableTile,
-//   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=20125-279432&m=dev',
+//   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=20125-279432&m=dev',
 //   {
 //     variant: { Type: 'Clickable' },
 //     props: {
@@ -93,7 +93,7 @@ figma.connect(
 
 // figma.connect(
 //   SelectableTile,
-//   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=20125-279432&m=dev',
+//   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=20125-279432&m=dev',
 //   {
 //     variant: { Type: 'Single-select' },
 //     props: {
@@ -118,7 +118,7 @@ figma.connect(
 
 // figma.connect(
 //   SelectableTile,
-//   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=20125-279432&m=dev',
+//   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=20125-279432&m=dev',
 //   {
 //     variant: { Type: 'Multi-select' },
 //     props: {
@@ -143,7 +143,7 @@ figma.connect(
 
 // figma.connect(
 //   ExpandableTile,
-//   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=20125-279432&m=dev',
+//   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=20125-279432&m=dev',
 //   {
 //     variant: { Type: 'Expandable' },
 //     props: {
@@ -171,7 +171,7 @@ figma.connect(
 
 // figma.connect(
 //   ExpandableTile,
-//   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=20125-279432&m=dev',
+//   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=20125-279432&m=dev',
 //   {
 //     variant: { Type: 'Expandable (Interactive)' },
 //     props: {

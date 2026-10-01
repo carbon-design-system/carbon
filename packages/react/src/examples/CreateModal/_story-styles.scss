@@ -1,0 +1,65 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/config' as carbon-config;
+
+.create-modal .#{carbon-config.$prefix}--modal-close {
+  display: none;
+}
+
+.create-modal .#{carbon-config.$prefix}--modal-container {
+  @include breakpoint(md) {
+    max-block-size: 95%;
+  }
+  @include breakpoint(lg) {
+    max-block-size: 95%;
+  }
+}
+
+.create-modal .#{carbon-config.$prefix}--modal-header {
+  border-block-end: 1px solid $layer-accent-01;
+  margin-block-end: 0;
+  padding-block-end: $spacing-03;
+  padding-inline-end: 20%;
+}
+
+.create-modal
+  .#{carbon-config.$prefix}--modal-footer
+  .#{carbon-config.$prefix}--btn {
+  max-inline-size: none;
+}
+
+.create-modal__subtitle {
+  @include type.type-style('body-compact-01');
+
+  color: $text-secondary;
+  margin-block-end: $spacing-03;
+}
+
+.create-modal__description {
+  @include type.type-style('body-01');
+
+  margin: $spacing-03 0 $spacing-05 0;
+  padding-inline-end: calc(20% - #{$spacing-05});
+}
+
+.create-modal__form .#{carbon-config.$prefix}--fieldset {
+  margin-block-end: 0;
+  min-inline-size: 100%;
+}
+
+.create-modal__form > * {
+  margin-block-end: $spacing-05;
+
+  &:last-child {
+    margin-block-end: 0;
+  }
+}

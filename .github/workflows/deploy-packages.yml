@@ -22,14 +22,13 @@ jobs:
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version-file: '.nvmrc'
-          registry-url: 'https://registry.npmjs.org'
       - name: Update dependencies
         run: |
           yarn upgrade \
-            @carbon/pictograms@next \
-            @carbon/pictograms-react@next \
-            @carbon/icons@next \
-            @carbon/icons-react@next \
+            @carbon/pictograms@latest \
+            @carbon/pictograms-react@latest \
+            @carbon/icons@latest \
+            @carbon/icons-react@latest \
       - name: Generate token
         uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
         id: generate_token

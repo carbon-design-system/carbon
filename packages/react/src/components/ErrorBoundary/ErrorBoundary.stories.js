@@ -39,6 +39,13 @@ export default {
   },
 };
 
+function ThrowError({ children, errorMessage, shouldThrowError }) {
+  if (shouldThrowError) {
+    throw new Error(errorMessage);
+  }
+  return children;
+}
+
 function DemoComponent({
   buttonLabel,
   children,
@@ -72,14 +79,6 @@ function DemoComponent({
   );
 }
 
-function ThrowError({ children, errorMessage, shouldThrowError }) {
-  if (shouldThrowError) {
-    throw new Error(errorMessage);
-  }
-
-  return children;
-}
-
 export const Default = (args) => {
   return <DemoComponent {...args} />;
 };
@@ -87,9 +86,10 @@ export const Default = (args) => {
 Default.args = { ...defaultArgs };
 Default.argTypes = { ...argTypes };
 
-export const WithCustomContext = ({ onLog = action('log'), ...args }) => {
+export const WithCustomContext = (args) => {
   return (
-    <ErrorBoundaryContext.Provider value={{ log: onLog }}>
+    <ErrorBoundaryContext.Provider
+      value={{ log: (...logArgs) => console.log(...logArgs) }}>
       <DemoComponent {...args} />
     </ErrorBoundaryContext.Provider>
   );
