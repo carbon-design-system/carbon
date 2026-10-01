@@ -78,6 +78,14 @@ $css--plex: true !default;
   padding-inline-end: $spacing-13;
 }
 
+// When the card has an AI label, shift the absolutely-positioned header
+// actions to the left so they don't overlap the decorator badge.
+:host(#{$prefix}-card-header)
+  .#{$prefix}--card__header[data-has-ai-label]
+  ::slotted(#{$prefix}-card-actions) {
+  inset-inline-end: calc($spacing-03 + $spacing-06 + $spacing-03);
+}
+
 :host-context(#{$prefix}-card-header[has-title-media])
   .#{$prefix}--card__title {
   grid-column: 2;
