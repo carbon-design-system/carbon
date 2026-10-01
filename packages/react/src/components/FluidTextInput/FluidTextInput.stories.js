@@ -25,6 +25,11 @@ export default {
         <Story />
       </>
     ),
+    (Story) => (
+      <div style={{ width: 400 }}>
+        <Story />
+      </div>
+    ),
   ],
   parameters: {
     styles,
@@ -41,85 +46,106 @@ export default {
 };
 
 export const Default = (args) => {
-  const { defaultWidth, ...textInputArgs } = args;
-  return (
-    <div style={{ width: defaultWidth }}>
-      <FluidTextInput {...textInputArgs} />
-    </div>
-  );
+  return <FluidTextInput {...args} />;
 };
 
-Default.args = {
-  defaultWidth: 300,
-  placeholder: 'Placeholder text',
+const sharedArgTypes = {
+  className: {
+    control: { type: 'text' },
+    description:
+      'Specify an optional className to be applied to the outer FluidForm wrapper.',
+    table: { defaultValue: { summary: 'undefined' } },
+  },
+  disabled: {
+    control: { type: 'boolean' },
+    description: 'Specify whether the `<input>` should be disabled.',
+    table: { defaultValue: { summary: false } },
+  },
+  enableCounter: {
+    control: { type: 'boolean' },
+    description: 'Specify whether to display the character counter.',
+    table: { defaultValue: { summary: false } },
+  },
+  invalid: {
+    control: { type: 'boolean' },
+    description: 'Specify whether the control is currently invalid.',
+    table: { defaultValue: { summary: false } },
+  },
+  invalidText: {
+    control: { type: 'text' },
+    description:
+      'Provide the text that is displayed when the control is in an invalid state.',
+    table: { defaultValue: { summary: 'undefined' } },
+  },
+  labelText: {
+    control: { type: 'text' },
+    description:
+      'Provide the text that will be read by a screen reader when visiting this control.',
+    table: { defaultValue: { summary: 'required' } },
+  },
+  maxCount: {
+    control: { type: 'number' },
+    description:
+      'Max character count allowed for the textInput. This is needed in order for enableCounter to display.',
+    table: { defaultValue: { summary: 'undefined' } },
+  },
+  placeholder: {
+    control: { type: 'text' },
+    description: 'Specify the placeholder attribute for the `<input>`.',
+    table: { defaultValue: { summary: 'undefined' } },
+  },
+  readOnly: {
+    control: { type: 'boolean' },
+    description: 'Whether or not the component is readonly.',
+    table: { defaultValue: { summary: false } },
+  },
+  warn: {
+    control: { type: 'boolean' },
+    description: 'Specify whether the control is currently in warning state.',
+    table: { defaultValue: { summary: false } },
+  },
+  warnText: {
+    control: { type: 'text' },
+    description:
+      'Provide the text that is displayed when the control is in warning state.',
+    table: { defaultValue: { summary: 'undefined' } },
+  },
+};
+
+const sharedArgs = {
+  className: 'test-class',
+  disabled: false,
+  enableCounter: false,
+  id: 'input-1',
   invalid: false,
   invalidText:
     'Error message that is really long can wrap to more lines but should not be excessively long.',
-  disabled: false,
   labelText: 'Label',
+  maxCount: 500,
+  placeholder: 'Placeholder text',
+  readOnly: false,
   warn: false,
   warnText:
     'Warning message that is really long can wrap to more lines but should not be excessively long.',
 };
 
-Default.argTypes = {
-  defaultWidth: {
-    control: { type: 'range', min: 300, max: 800, step: 50 },
-  },
-  className: {
-    control: {
-      type: 'text',
-    },
-  },
-  defaultValue: {
-    control: {
-      type: 'text',
-    },
-  },
-  placeholder: {
-    control: {
-      type: 'text',
-    },
-  },
-  invalid: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  invalidText: {
-    control: {
-      type: 'text',
-    },
-  },
-  disabled: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  labelText: {
-    control: {
-      type: 'text',
-    },
-  },
-  warn: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  warnText: {
-    control: {
-      type: 'text',
-    },
-  },
-  value: {
-    control: {
-      type: 'text',
-    },
-  },
+const sharedControls = Object.keys(sharedArgTypes);
+
+Default.args = {
+  ...sharedArgs,
 };
 
-export const DefaultWithToggletip = () => {
+Default.argTypes = {
+  ...sharedArgTypes,
+};
+
+Default.parameters = {
+  controls: { include: sharedControls },
+};
+
+export const DefaultWithToggletip = (args) => {
   const labelToggletip = (
+    // Keep the toggletip outside `labelText`; interactive content is invalid in labels.
     <span className="fluid-text-input-story__toggletip">
       <Toggletip align="top-left">
         <ToggletipButton label="Show information">
@@ -134,19 +160,23 @@ export const DefaultWithToggletip = () => {
   return (
     <div className="fluid-text-input-story">
       {labelToggletip}
-      <FluidTextInput labelText="Label" placeholder="Placeholder text" />
+      <FluidTextInput {...args} labelText="Label" />
     </div>
   );
 };
 
+DefaultWithToggletip.args = {
+  ...sharedArgs,
+};
+DefaultWithToggletip.argTypes = {
+  ...sharedArgTypes,
+};
+DefaultWithToggletip.parameters = {
+  controls: {
+    include: sharedControls.filter((control) => control !== 'labelText'),
+  },
+};
+
 export const Skeleton = () => {
-  return (
-    <div style={{ width: '300px' }}>
-      <FluidTextInputSkeleton
-        labelText="Label"
-        placeholder="Placeholder text"
-        id="input-1"
-      />
-    </div>
-  );
+  return <FluidTextInputSkeleton />;
 };
