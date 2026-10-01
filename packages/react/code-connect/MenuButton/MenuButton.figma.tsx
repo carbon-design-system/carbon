@@ -38,7 +38,7 @@ const sharedMenuButtonProps = {
 
 figma.connect(
   MenuButton,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=31420-317548&t=KXgYpEhuz2XzSITV-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=31420-317548&t=KXgYpEhuz2XzSITV-4',
   {
     props: sharedMenuButtonProps,
     example: ({ size, children, menuAlignment, button }) => (
@@ -56,7 +56,7 @@ figma.connect(
 
 figma.connect(
   MenuButton,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=31420-317548&t=KXgYpEhuz2XzSITV-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=31420-317548&t=KXgYpEhuz2XzSITV-4',
   {
     variant: { Open: 'True' },
     props: sharedMenuButtonProps,

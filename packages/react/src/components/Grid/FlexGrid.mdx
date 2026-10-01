@@ -60,7 +60,8 @@ import { FlexGrid, Row, Column } from '@carbon/react';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(FlexGridStories.ResponsiveGrid),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: FlexGridStories.ResponsiveGrid }),
     },
   ]}
 />
@@ -111,7 +112,8 @@ we will use the `sm`, `md`, and `lg` prop to specify how many columns the
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(FlexGridStories.ResponsiveGrid),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: FlexGridStories.ResponsiveGrid }),
     },
   ]}
 />
@@ -137,7 +139,8 @@ need to mix-and-match certain gutter modes to achieve a particular layout.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(FlexGridStories.FullWidth),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: FlexGridStories.FullWidth }),
     },
   ]}
 />
@@ -149,7 +152,7 @@ need to mix-and-match certain gutter modes to achieve a particular layout.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(FlexGridStories.Narrow),
+      onClick: () => stackblitzPrefillConfig({ story: FlexGridStories.Narrow }),
     },
   ]}
 />
@@ -161,7 +164,8 @@ need to mix-and-match certain gutter modes to achieve a particular layout.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(FlexGridStories.Condensed),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: FlexGridStories.Condensed }),
     },
   ]}
 />
@@ -173,7 +177,8 @@ need to mix-and-match certain gutter modes to achieve a particular layout.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(FlexGridStories.MixedGutterModes),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: FlexGridStories.MixedGutterModes }),
     },
   ]}
 />
@@ -199,7 +204,8 @@ and so on.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(FlexGridStories.AutoColumns),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: FlexGridStories.AutoColumns }),
     },
   ]}
 />
@@ -226,7 +232,7 @@ breakpoint. At the medium breakpoint, it will be offset by two columns.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(FlexGridStories.Offset),
+      onClick: () => stackblitzPrefillConfig({ story: FlexGridStories.Offset }),
     },
   ]}
 />
@@ -298,7 +304,8 @@ You can combine `withRowGap` with different gutter modes:
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(FlexGridStories.WithRowGap),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: FlexGridStories.WithRowGap }),
     },
   ]}
 />

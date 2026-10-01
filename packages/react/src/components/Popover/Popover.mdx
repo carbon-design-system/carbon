@@ -63,7 +63,7 @@ function CustomComponent() {
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(PopoverStories.Default),
+      onClick: () => stackblitzPrefillConfig({ story: PopoverStories.Default }),
     },
   ]}
 />
@@ -86,7 +86,7 @@ state in conjunction with the callback prop to set `open` to false when
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(PopoverStories.TabTip),
+      onClick: () => stackblitzPrefillConfig({ story: PopoverStories.TabTip }),
     },
   ]}
 />
@@ -116,7 +116,9 @@ If you are using `align="left"` or `align="right"`, you can use `top` or
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig(PopoverStories.ExperimentalAutoAlign),
+        stackblitzPrefillConfig({
+          story: PopoverStories.ExperimentalAutoAlign,
+        }),
     },
   ]}
 />
@@ -127,7 +129,9 @@ If you are using `align="left"` or `align="right"`, you can use `top` or
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig(PopoverStories.ExperimentalAutoAlignBoundary),
+        stackblitzPrefillConfig({
+          story: PopoverStories.ExperimentalAutoAlignBoundary,
+        }),
     },
   ]}
 />
@@ -138,7 +142,9 @@ If you are using `align="left"` or `align="right"`, you can use `top` or
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig(PopoverStories.TabTipExperimentalAutoAlign),
+        stackblitzPrefillConfig({
+          story: PopoverStories.TabTipExperimentalAutoAlign,
+        }),
     },
   ]}
 />

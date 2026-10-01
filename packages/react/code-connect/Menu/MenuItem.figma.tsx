@@ -23,7 +23,7 @@ const sharedMenuItemProps = {
 
 figma.connect(
   MenuItem,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=36234-38344&t=OdgMrt4NDVwZpNSx-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=36234-38344&t=OdgMrt4NDVwZpNSx-4',
   {
     props: sharedMenuItemProps,
     example: ({ disabled, label, kind }) => (
@@ -34,7 +34,7 @@ figma.connect(
 
 figma.connect(
   MenuItem,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=36234-38344&t=OdgMrt4NDVwZpNSx-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=36234-38344&t=OdgMrt4NDVwZpNSx-4',
   {
     variant: { Divider: 'True' },
     props: sharedMenuItemProps,
@@ -49,7 +49,7 @@ figma.connect(
 
 figma.connect(
   MenuItem,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=36234-38344&t=OdgMrt4NDVwZpNSx-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=36234-38344&t=OdgMrt4NDVwZpNSx-4',
   {
     variant: { 'Shortcuts or Trigger ': 'True' },
     props: sharedMenuItemProps,
@@ -61,7 +61,7 @@ figma.connect(
 
 figma.connect(
   MenuItem,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=36234-38344&t=OdgMrt4NDVwZpNSx-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=36234-38344&t=OdgMrt4NDVwZpNSx-4',
   {
     variant: { 'Shortcuts or Trigger ': 'True', Divider: 'True' },
     props: sharedMenuItemProps,
@@ -76,7 +76,7 @@ figma.connect(
 
 figma.connect(
   MenuItem,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=36234-38344&t=OdgMrt4NDVwZpNSx-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=36234-38344&t=OdgMrt4NDVwZpNSx-4',
   {
     variant: { Selected: 'True' },
     props: sharedMenuItemProps,
@@ -93,7 +93,7 @@ figma.connect(
 
 figma.connect(
   MenuItem,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=36234-38344&t=OdgMrt4NDVwZpNSx-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=36234-38344&t=OdgMrt4NDVwZpNSx-4',
   {
     variant: { Selected: 'True', Divider: 'True' },
     props: sharedMenuItemProps,

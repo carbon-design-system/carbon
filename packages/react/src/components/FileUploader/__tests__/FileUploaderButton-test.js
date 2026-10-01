@@ -116,8 +116,8 @@ describe('FileUploaderButton', () => {
     expect(getByText(container, 'tester')).toBeInstanceOf(HTMLElement);
   });
 
-  it('should not allow interactive content in labelText', () => {
-    const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+  it('should warn without throwing for interactive content in labelText', () => {
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
     expect(() => {
       render(
@@ -125,13 +125,17 @@ describe('FileUploaderButton', () => {
           labelText={
             <>
               FileUploaderButton label
-              <button type="button">Help</button>
+              <a href="/">Help</a>
             </>
           }
         />
       );
-    }).toThrow(
-      'The FileUploaderButton component `labelText` prop must have no interactive content'
+    }).not.toThrow();
+
+    expect(spy).toHaveBeenCalledWith(
+      expect.stringContaining(
+        'Warning: The FileUploaderButton component `labelText` prop must have no interactive content'
+      )
     );
 
     spy.mockRestore();

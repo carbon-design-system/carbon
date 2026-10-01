@@ -252,7 +252,7 @@
   }
 
   .#{$prefix}--skeleton .#{$prefix}--search-input {
-    @include skeleton;
+    @include skeleton($border-radius: $border-radius-04);
 
     inline-size: 100%;
 

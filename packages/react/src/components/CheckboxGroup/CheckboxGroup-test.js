@@ -31,8 +31,8 @@ describe('CheckboxGroup', () => {
     expect(container.firstChild).toHaveClass('test');
   });
 
-  it('should not allow interactive content in legendText', () => {
-    const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+  it('should warn without throwing for interactive content in legendText', () => {
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
     expect(() => {
       render(
@@ -44,8 +44,12 @@ describe('CheckboxGroup', () => {
           }
         />
       );
-    }).toThrow(
-      'The CheckboxGroup component `legendText` prop must have no interactive content'
+    }).not.toThrow();
+
+    expect(spy).toHaveBeenCalledWith(
+      expect.stringContaining(
+        'Warning: The CheckboxGroup component `legendText` prop must have no interactive content'
+      )
     );
 
     spy.mockRestore();
