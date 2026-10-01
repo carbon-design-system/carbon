@@ -19,7 +19,7 @@ import figma from '@figma/code-connect';
 
 figma.connect(
   Tabs,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=3890-50605&t=PaZ3ZnEGQGMgXgBW-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=3890-50605&t=PaZ3ZnEGQGMgXgBW-4',
   {
     props: {
       contained: figma.enum('Style', {
@@ -64,7 +64,7 @@ figma.connect(
 // vertical
 figma.connect(
   TabsVertical,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=75823-2818&t=PaZ3ZnEGQGMgXgBW-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=75823-2818&t=PaZ3ZnEGQGMgXgBW-4',
   {
     props: {
       children: figma.children(['_Vertical tabs items']),
