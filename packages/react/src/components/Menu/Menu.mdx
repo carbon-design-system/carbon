@@ -42,6 +42,12 @@ subcomponents:
 - [MenuItemSelectable](#menuitemselectable)
 - [MenuItemRadioGroup](#menuitemradiogroup)
 
+`Menu` is a primitive component and does not render its own trigger. The stories
+include a button trigger for documentation and accessibility testing, but
+consumers are expected to compose `Menu` with the interaction that opens and
+closes it. `MenuButton`, `ComboButton`, `OverflowMenu`, and `useContextMenu`
+show common Carbon compositions that provide that trigger behavior.
+
 ## Positioning
 
 You must provide a reference point for the `Menu` to position itself at. The
