@@ -121,8 +121,10 @@ class CDSTearsheet extends HostListenerMixin(LitElement) {
   @property({ attribute: false })
   launcherButtonRef?: HTMLElement;
 
-  /** Unique ID for this tearsheet instance. Private — never in the DOM. */
-  private readonly uniqueId: string = `tearsheet-${Math.random().toString(36).substr(2, 9)}`;
+  /** Unique ID for this tearsheet instance.
+   *  `protected` so child components can read it via `closest()` cast without
+   *  bypassing TypeScript visibility — avoids the `& { uniqueId?: string }` cast pattern. */
+  protected readonly uniqueId: string = `tearsheet-${Math.random().toString(36).substr(2, 9)}`;
 
   /**
    * Internal flag to track if stacking is enabled (via wrapper)
@@ -167,8 +169,7 @@ class CDSTearsheet extends HostListenerMixin(LitElement) {
     context: tearsheetContext,
     initialValue: {
       state: { ...defaultTearsheetState },
-      // setState is defined in connectedCallback so `this` is available
-      setState: () => {},
+      setState: (patch) => this._updateState(patch),
     },
   });
 
@@ -185,12 +186,6 @@ class CDSTearsheet extends HostListenerMixin(LitElement) {
 
   connectedCallback(): void {
     super.connectedCallback();
-
-    // Bind setState now that `this` is available and replace the placeholder.
-    this._ctx.setValue({
-      state: { ...this._ctx.value.state },
-      setState: (patch) => this._updateState(patch),
-    });
 
     // Listen for stack wrapper events first
     this.addEventListener(
@@ -392,6 +387,12 @@ class CDSTearsheet extends HostListenerMixin(LitElement) {
     this.removeEventListener(
       `${prefix}-tearsheet-stack-step-size-changed`,
       this.handleStackStepSizeChanged as EventListener
+    );
+    // Fix: this listener was added in connectedCallback but was never removed,
+    // causing a memory leak and a duplicate listener on reconnect.
+    this.removeEventListener(
+      `${prefix}-tearsheet-header-collapse-change`,
+      this.handleHeaderCollapseChange as EventListener
     );
 
     // Unsubscribe from the stack manager notification bus

@@ -24,6 +24,12 @@ import { registerFocusableContainers } from '../../utilities/manageFocusTrap/man
 
 const blockClass = `${prefix}--tearsheet`;
 
+/** Minimal interface used to read the protected uniqueId from CDSTearsheet
+ *  without importing the class (avoids circular dep). */
+interface CDSTearsheetHost extends HTMLElement {
+  readonly uniqueId: string;
+}
+
 /**
  * Tearsheet Header component - Contains the header section with title, description, and actions.
  *
@@ -55,23 +61,33 @@ class CDSTearsheetHeader extends HostListenerMixin(LitElement) {
   @consume({ context: tearsheetContext, subscribe: true })
   private _tearsheetCtx?: TearsheetContextValue;
 
+  /** Cached uniqueId of the parent cds-tearsheet. Resolved once in
+   *  connectedCallback via closest() so we avoid repeated DOM traversal. */
+  private _uniqueId: string = '';
+
   connectedCallback() {
     super.connectedCallback();
-    // Push initial prop values into context state
+    this._uniqueId = this._resolveUniqueId();
+  }
+
+  protected firstUpdated() {
+    // Push initial prop values into context now that @consume has resolved
+    // _tearsheetCtx. Doing this in connectedCallback was too early — the
+    // @consume decorator populates the field after the element connects, so
+    // the call there was always hitting undefined and silently doing nothing.
     this._tearsheetCtx?.setState({
       disableHeaderCollapse: this.disableHeaderCollapse,
       closeIconDescription: this.closeIconDescription,
       hideCloseButton: this.hideCloseButton,
     });
+    registerFocusableContainers(this.shadowRoot, this._uniqueId);
   }
 
-  protected firstUpdated() {
-    registerFocusableContainers(this.shadowRoot, this._getUniqueId());
-  }
-
-  private _getUniqueId(): string {
-    const host = this.closest(`${prefix}-tearsheet`);
-    return (host as HTMLElement & { uniqueId?: string })?.uniqueId ?? '';
+  private _resolveUniqueId(): string {
+    const host = this.closest<HTMLElement & CDSTearsheetHost>(
+      `${prefix}-tearsheet`
+    );
+    return host?.uniqueId ?? '';
   }
 
   protected updated(_changedProperties: PropertyValues) {

@@ -36,6 +36,12 @@ import { prefix as carbonPrefix } from '../../globals/settings';
 
 const blockClass = `${prefix}--tearsheet`;
 
+/** Minimal interface used to read the protected uniqueId from CDSTearsheet
+ *  without importing the class (avoids circular dep). */
+interface CDSTearsheetHost extends HTMLElement {
+  readonly uniqueId: string;
+}
+
 /**
  * Tearsheet Header Content component - Contains the title, description, and decorative elements.
  *
@@ -87,6 +93,11 @@ class CDSTearsheetHeaderContent extends HostListenerMixin(LitElement) {
   @state() private _hasExtraContent = false;
   @state() private _isMobileOrNarrow = false;
 
+  // Use the `sm` breakpoint (≤320 px) — this matches the tearsheet's narrow
+  // layout breakpoint at which the close button moves above the header-actions
+  // in the DOM. The previous `md` value (≤672 px) was too wide and caused the
+  // wrong container-registration order (and therefore wrong Tab order) on
+  // normal tablet viewports that are not actually narrow-layout.
   private smMediaQuery = `(max-width: ${breakpoints.sm.width})`;
   private isMobileDevice = new MatchMediaController(
     this,
@@ -124,7 +135,7 @@ class CDSTearsheetHeaderContent extends HostListenerMixin(LitElement) {
    * the containers back in the correct order.
    */
   private _registerContainers(): void {
-    const uniqueId = this._getUniqueId();
+    const uniqueId = this._uniqueId;
     if (!uniqueId) return;
 
     // Clear existing registrations so we can re-register in the correct order.
@@ -142,10 +153,9 @@ class CDSTearsheetHeaderContent extends HostListenerMixin(LitElement) {
     }
   }
 
-  private _getUniqueId(): string {
-    const host = this.closest(`${prefix}-tearsheet`);
-    return (host as HTMLElement & { uniqueId?: string })?.uniqueId ?? '';
-  }
+  /** Cached uniqueId of the parent cds-tearsheet. Resolved once in
+   *  connectedCallback so we avoid repeated DOM traversal on every update. */
+  private _uniqueId: string = '';
 
   protected override updated(): void {
     const previousIsMobileOrNarrow = this._isMobileOrNarrow;
@@ -515,14 +525,13 @@ class CDSTearsheetHeaderContent extends HostListenerMixin(LitElement) {
   connectedCallback(): void {
     super.connectedCallback();
 
-    let el: Element | null = this.parentElement;
-    while (el) {
-      if (el.tagName.toLowerCase() === `${prefix}-tearsheet`) {
-        this._parentTearsheet = el;
-        break;
-      }
-      el = el.parentElement;
-    }
+    // Cache the uniqueId once to avoid repeated closest() + cast on every update.
+    const host = this.closest<HTMLElement & CDSTearsheetHost>(
+      `${prefix}-tearsheet`
+    );
+    this._uniqueId = host?.uniqueId ?? '';
+    this._parentTearsheet = host ?? null;
+
     this._parentTearsheet?.addEventListener(
       `${prefix}-tearsheet-opened`,
       this._handleTearsheetOpened as EventListener

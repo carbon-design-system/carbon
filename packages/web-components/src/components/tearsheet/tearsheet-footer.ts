@@ -25,6 +25,12 @@ import { registerFocusableContainers } from '../../utilities/manageFocusTrap/man
 
 const blockClass = `${prefix}--tearsheet`;
 
+/** Minimal interface used to read the protected uniqueId from CDSTearsheet
+ *  without importing the class (avoids circular dep). */
+interface CDSTearsheetHost extends HTMLElement {
+  readonly uniqueId: string;
+}
+
 /**
  * Tearsheet Footer component - Contains action buttons at the bottom of the tearsheet.
  *
@@ -50,24 +56,31 @@ class CDSTearsheetFooter extends HostListenerMixin(LitElement) {
   @consume({ context: tearsheetContext, subscribe: true })
   private _tearsheetCtx?: TearsheetContextValue;
 
-  protected override firstUpdated(): void {
-    registerFocusableContainers(this, this._getUniqueId());
+  /** Cached uniqueId of the parent cds-tearsheet. Resolved once in
+   *  connectedCallback so we avoid repeated DOM traversal on every update. */
+  private _uniqueId: string = '';
+
+  connectedCallback(): void {
+    super.connectedCallback();
+    const host = this.closest<HTMLElement & CDSTearsheetHost>(
+      `${prefix}-tearsheet`
+    );
+    this._uniqueId = host?.uniqueId ?? '';
   }
 
-  private _getUniqueId(): string {
-    const host = this.closest(`${prefix}-tearsheet`);
-    return (host as HTMLElement & { uniqueId?: string })?.uniqueId ?? '';
+  protected override firstUpdated(): void {
+    registerFocusableContainers(this, this._uniqueId);
   }
 
   protected override updated(): void {
     if (
       this.actionSetElement?.shadowRoot &&
-      this._getUniqueId() &&
+      this._uniqueId &&
       !this._actionSetRegistered
     ) {
       registerFocusableContainers(
         this.actionSetElement.shadowRoot,
-        this._getUniqueId()
+        this._uniqueId
       );
       this._actionSetRegistered = true;
     }
