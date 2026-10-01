@@ -97,6 +97,20 @@ describe('<cds-number-input>', () => {
     expect(event.detail.direction).to.equal('up');
   });
 
+  it('should reflect typed value changes to the host attribute', async () => {
+    const el = await fixture(
+      html`<cds-number-input value="5" label="Label"></cds-number-input>`
+    );
+    const input = el.shadowRoot.querySelector('input');
+
+    input.value = '6';
+    input.dispatchEvent(new Event('input', { bubbles: true, composed: true }));
+    await el.updateComplete;
+
+    expect(el.value).to.equal('6');
+    expect(el.getAttribute('value')).to.equal('6');
+  });
+
   // From React parity
   it('should show helper text and invalid text', async () => {
     const el = await fixture(html`
@@ -1341,6 +1355,7 @@ describe('<cds-number-input>', () => {
         expect(lastEvent.detail.value).to.equal(51);
         expect(lastEvent.detail.direction).to.equal('up');
         expect(input.value).to.equal('51');
+        expect(el.getAttribute('value')).to.equal('51');
 
         // Simulate ArrowDown key press
         const arrowDownEvent = new KeyboardEvent('keydown', {
@@ -1356,6 +1371,7 @@ describe('<cds-number-input>', () => {
         expect(lastEvent.detail.value).to.equal(50);
         expect(lastEvent.detail.direction).to.equal('down');
         expect(input.value).to.equal('50');
+        expect(el.getAttribute('value')).to.equal('50');
       });
     });
 
