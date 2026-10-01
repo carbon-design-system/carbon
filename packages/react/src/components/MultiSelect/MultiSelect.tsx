@@ -381,9 +381,10 @@ export const MultiSelect = React.forwardRef(
             middleware: [
               autoAlign && flip({ crossAxis: false }),
               floatingSize({
-                apply({ rects, elements }) {
+                apply({ availableHeight, rects, elements }) {
                   Object.assign(elements.floating.style, {
                     width: `${rects.reference.width}px`,
+                    maxHeight: `${availableHeight}px`,
                   });
                 },
               }),
@@ -408,13 +409,7 @@ export const MultiSelect = React.forwardRef(
           }
         });
       }
-    }, [
-      enableFloatingStyles,
-      floatingStyles,
-      refs.floating,
-      middlewareData,
-      open,
-    ]);
+    }, [enableFloatingStyles, floatingStyles, refs.floating]);
 
     const {
       selectedItems: controlledSelectedItems,
