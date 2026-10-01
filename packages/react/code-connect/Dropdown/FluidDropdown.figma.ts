@@ -1,4 +1,4 @@
-// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=14505-302528&t=4Ath5JqwaYJZxznq-4
+// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=14505-302528&t=4Ath5JqwaYJZxznq-4
 // source=https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/FluidDropdown/FluidDropdown.tsx
 // component=FluidDropdown
 
