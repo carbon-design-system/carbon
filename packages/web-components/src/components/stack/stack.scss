@@ -28,6 +28,10 @@ $css--plex: true !default;
   @extend .#{$prefix}--stack-vertical;
 }
 
+:host(#{$prefix}-stack[orientation='vertical']) ::slotted(#{$prefix}-button) {
+  justify-self: start;
+}
+
 :host(#{$prefix}-stack[orientation='horizontal']) div {
   @extend .#{$prefix}--stack-horizontal;
 }
