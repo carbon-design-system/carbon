@@ -98,7 +98,6 @@ export interface ColumnComponent {
   ): ReactElement | null;
 }
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const Column = React.forwardRef<
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   any,
@@ -170,6 +169,8 @@ const spanPropType = enabled('enable-css-grid')
       }),
     ]);
 
+Column.displayName = 'Column';
+
 Column.propTypes = {
   /**
    * Provide a custom element to render instead of the default <div>
@@ -233,7 +234,7 @@ Column.propTypes = {
   xlg: spanPropType,
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any , react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
 const CSSGridColumn = React.forwardRef<any, ColumnProps<any>>(
   (
     {
@@ -273,6 +274,8 @@ const CSSGridColumn = React.forwardRef<any, ColumnProps<any>>(
     );
   }
 );
+
+CSSGridColumn.displayName = 'CSSGridColumn';
 
 CSSGridColumn.propTypes = {
   /**
