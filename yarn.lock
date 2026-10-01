@@ -2229,6 +2229,7 @@ __metadata:
   resolution: "@carbon/motion@workspace:packages/motion"
   dependencies:
     "@carbon/cli": "npm:^11.51.0"
+    "@carbon/test-utils": "npm:^10.41.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     rimraf: "npm:^6.0.1"
     style-dictionary: "npm:^5.5.0"
@@ -2389,11 +2390,16 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@carbon/test-utils@workspace:packages/test-utils"
   dependencies:
+    "@npmcli/arborist": "npm:9.1.6"
+    ajv: "npm:^8.20.0"
+    ajv-formats: "npm:^3.0.1"
+    npm-packlist: "npm:^10.0.1"
     prettier: "npm:^3.3.3"
     react: "npm:^19.2.3"
     react-dom: "npm:^19.2.3"
     resolve: "npm:^1.12.0"
     sass: "npm:^1.77.7"
+    typescript: "npm:^6.0.3"
   peerDependencies:
     react-dom: ^19.2.3
   languageName: unknown
@@ -2414,8 +2420,6 @@ __metadata:
     "@carbon/type": "npm:^11.68.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     "@types/color": "npm:^4.2.1"
-    ajv: "npm:^8.20.0"
-    ajv-formats: "npm:^3.0.1"
     change-case-all: "npm:^2.1.0"
     color: "npm:^4.0.0"
     core-js: "npm:^3.16.0"
