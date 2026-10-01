@@ -42,21 +42,38 @@ export default {
   },
 };
 
-export const Default = (args) => {
+export const Default = ({
+  ratio,
+  ratioSm,
+  ratioMd,
+  ratioLg,
+  ratioXlg,
+  ratioMax,
+  ...args
+}) => {
+  const aspectRatioProps = {
+    ratio,
+    ratioSm,
+    ratioMd,
+    ratioLg,
+    ratioXlg,
+    ratioMax,
+  };
+
   return (
     <div className="aspect-ratio-story">
       <Grid {...args}>
         <Column sm={1} md={2} lg={4}>
-          <AspectRatio {...args}>Content</AspectRatio>
+          <AspectRatio {...aspectRatioProps}>Content</AspectRatio>
         </Column>
         <Column sm={1} md={2} lg={4}>
-          <AspectRatio {...args}>Content</AspectRatio>
+          <AspectRatio {...aspectRatioProps}>Content</AspectRatio>
         </Column>
         <Column sm={1} md={2} lg={4}>
-          <AspectRatio {...args}>Content</AspectRatio>
+          <AspectRatio {...aspectRatioProps}>Content</AspectRatio>
         </Column>
         <Column sm={1} md={2} lg={4}>
-          <AspectRatio {...args}>Content</AspectRatio>
+          <AspectRatio {...aspectRatioProps}>Content</AspectRatio>
         </Column>
       </Grid>
     </div>
