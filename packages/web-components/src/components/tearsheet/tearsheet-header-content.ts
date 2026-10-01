@@ -19,7 +19,10 @@ import '../truncated-text';
 import styles from './tearsheet-header-content.scss?lit';
 import { MatchMediaController } from '../../globals/js/utils/match-media-controller';
 import { breakpoints } from '@carbon/layout';
-import { registerFocusableContainers } from '../../utilities/manageFocusTrap/manageFocusTrap';
+import {
+  registerFocusableContainers,
+  unregisterFocusableContainers,
+} from '../../utilities/manageFocusTrap/manageFocusTrap';
 import {
   tearsheetContext,
   defaultTearsheetState,
@@ -84,10 +87,10 @@ class CDSTearsheetHeaderContent extends HostListenerMixin(LitElement) {
   @state() private _hasExtraContent = false;
   @state() private _isMobileOrNarrow = false;
 
-  private mdMediaQuery = `(max-width: ${breakpoints.md.width})`;
+  private smMediaQuery = `(max-width: ${breakpoints.sm.width})`;
   private isMobileDevice = new MatchMediaController(
     this,
-    this.mdMediaQuery,
+    this.smMediaQuery,
     false
   );
 
@@ -105,11 +108,35 @@ class CDSTearsheetHeaderContent extends HostListenerMixin(LitElement) {
     this._isMobileOrNarrow =
       this.isMobileDevice?.matches || this.isNarrowVariant;
 
-    // Register containers in intentional order:
-    // 1. `this` (light DOM) — finds header-action buttons and AI label (slot="decorator")
-    // 2. `this.shadowRoot` — finds close button (cds-icon-button) and decorator slot host
+    this._registerContainers();
+  }
+
+  /**
+   * Registers focusable containers for the focus trap in the correct order for
+   * the current layout. Container registration order maps directly to the order
+   * `getAllFocusableElements` collects elements, so it must match the flattened
+   * DOM tab order:
+   *
+   * - Desktop/Wide:  light DOM first (header-actions), then shadow root (close btn)
+   * - Mobile/Narrow: shadow root first (close btn), then light DOM (header-actions)
+  
+   * Call this method whenever the layout changes so that re-registration puts
+   * the containers back in the correct order.
+   */
+  private _registerContainers(): void {
     const uniqueId = this._getUniqueId();
-    if (uniqueId) {
+    if (!uniqueId) return;
+
+    // Clear existing registrations so we can re-register in the correct order.
+    unregisterFocusableContainers(this, uniqueId);
+    unregisterFocusableContainers(this.shadowRoot, uniqueId);
+
+    if (this._isMobileOrNarrow) {
+      // Mobile/narrow: shadow DOM (close button) tabs before slotted header-actions
+      registerFocusableContainers(this.shadowRoot, uniqueId);
+      registerFocusableContainers(this, uniqueId);
+    } else {
+      // Desktop/wide: slotted header-actions tab before close button
       registerFocusableContainers(this, uniqueId);
       registerFocusableContainers(this.shadowRoot, uniqueId);
     }
@@ -126,6 +153,8 @@ class CDSTearsheetHeaderContent extends HostListenerMixin(LitElement) {
       this.isMobileDevice?.matches || this.isNarrowVariant;
 
     if (this._isMobileOrNarrow !== previousIsMobileOrNarrow) {
+      // Re-register containers in the correct order for the new layout.
+      this._registerContainers();
       this.requestUpdate();
     }
 
