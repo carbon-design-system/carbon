@@ -109,6 +109,58 @@ describe('Tooltip', () => {
     await userEvent.click(button);
     expect(popoverContainer).not.toHaveClass('cds--popover--open');
   });
+
+  // Tests for fix: cds-tooltip Escape dismissal (issue #22810)
+  // Per WAI-ARIA Tooltip pattern, Escape must always dismiss regardless of closeOnActivation.
+
+  it('should close on Escape regardless of `closeOnActivation`', async () => {
+    const { container } = render(
+      <Tooltip defaultOpen label="Close">
+        <button type="button">X</button>
+      </Tooltip>
+    );
+
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+    const popoverContainer = container.querySelector('.cds--popover-container');
+    expect(popoverContainer).toHaveClass('cds--popover--open');
+
+    await userEvent.keyboard('{Escape}');
+    expect(popoverContainer).not.toHaveClass('cds--popover--open');
+  });
+
+  it('should NOT close on Enter when `closeOnActivation` is false (default)', async () => {
+    const { container } = render(
+      <Tooltip label="Close">
+        <button type="button">X</button>
+      </Tooltip>
+    );
+
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+    const popoverContainer = container.querySelector('.cds--popover-container');
+
+    await userEvent.tab();
+    expect(popoverContainer).toHaveClass('cds--popover--open');
+
+    await userEvent.keyboard('{Enter}');
+    expect(popoverContainer).toHaveClass('cds--popover--open');
+  });
+
+  it('should close on Enter when `closeOnActivation` is true', async () => {
+    const { container } = render(
+      <Tooltip closeOnActivation label="Close">
+        <button type="button">X</button>
+      </Tooltip>
+    );
+
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+    const popoverContainer = container.querySelector('.cds--popover-container');
+
+    await userEvent.tab();
+    expect(popoverContainer).toHaveClass('cds--popover--open');
+
+    await userEvent.keyboard('{Enter}');
+    expect(popoverContainer).not.toHaveClass('cds--popover--open');
+  });
 });
 
 describe('Tooltip ARIA logic', () => {
