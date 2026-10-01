@@ -1,14 +1,12 @@
 {
-  "name": "theme-tokens-dtcg",
+  "name": "layout-explorer",
   "private": true,
   "scripts": {
     "develop": "next",
     "build": "next build"
   },
   "dependencies": {
-    "@carbon/colors": "link:../../../colors",
-    "@carbon/themes": "link:../../",
-    "d3": "^7.9.0",
+    "@carbon/layout": "link:../../",
     "next": "^16.3.3",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
