@@ -87,13 +87,10 @@ The pattern uses:
 
 1. **Copy Pattern Files**: Copy all pattern components from the example
    directory into your project
-2. **StepProvider Wrapper**: Always wrap `CreateFullPage` with `StepProvider`
-   for step management
-3. **Form State Management**: Use `useStepContext()` hook to access and update
    form state across steps
-4. **Close Handler**: Implement `onClose` callback to handle tearsheet dismissal
-5. **Submit Handler**: Implement `onRequestSubmit` callback for form submission
-6. **Customization**: Modify the copied pattern files to fit your specific needs
+3. **Close Handler**: Implement `onClose` callback to handle page dismissal
+4. **Submit Handler**: Implement `onRequestSubmit` callback for form submission
+5. **Customization**: Modify the copied pattern files to fit your specific needs
 
 ## Example Usage
 
@@ -245,15 +242,13 @@ The CreateFullPage pattern is built on top of:
 ### Step Management
 
 Steps are managed using the `StepProvider` and `useStepContext` from
-`@carbon/utilities-react`. The provider wraps the CreateFullPage and provides:
+`@carbon/utilities-react`. `CreateFullPage` renders `<StepProvider>`
+internally. The provider supplies:
 
 - Current step tracking
 - Navigation methods (`handleNext`, `handlePrevious`, `handleGoToStep`)
 - Form state management (`formState`, `setFormState`)
 - Total step count
-
-**Important**: Always wrap your `CreateFullPage` with `<StepProvider>` for
-proper step management.
 
 ### Layout Structure
 

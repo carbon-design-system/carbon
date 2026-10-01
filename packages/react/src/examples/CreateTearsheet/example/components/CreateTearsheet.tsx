@@ -48,7 +48,7 @@ export interface CreateTearsheetProps {
   cancelButtonText?: string;
   backButtonText?: string;
   nextButtonText?: string;
-  onRequestSubmit?: () => void | Promise<void>;
+  onRequestSubmit?: () => boolean | void | Promise<boolean | void>;
   onNext?: (context: {
     currentStep: number;
     totalSteps: number;
@@ -126,15 +126,17 @@ export const CreateTearsheet = ({
 
   const handleSubmit = async () => {
     setIsLoading(true);
-    const abortAction = await onRequestSubmit?.();
-
-    if (abortAction) {
-      return;
+    try {
+      const abortAction = await onRequestSubmit?.();
+      if (abortAction) {
+        return;
+      }
+      setOpen?.(false);
+      handleGoToStep(1);
+      setFormState({});
+    } finally {
+      setIsLoading(false);
     }
-    setOpen?.(false);
-    handleGoToStep(1);
-    setFormState({});
-    setIsLoading(false);
   };
 
   const handleNextClick = async () => {
