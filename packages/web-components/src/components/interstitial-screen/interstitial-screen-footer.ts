@@ -12,8 +12,11 @@ import HostListenerMixin from '../../globals/mixins/host-listener';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import '../button/index';
 import styles from './interstitial-screen-footer.scss?lit';
-import { interstitialDetailsSignal } from './interstitial-screen-context';
-import { SignalWatcher } from '@lit-labs/signals';
+import { consume } from '@lit/context';
+import {
+  interstitialContext,
+  InterstitialContextValue,
+} from './interstitial-screen-context';
 import '../inline-loading/index';
 import CDSModalFooter from '../modal/modal-footer';
 import ArrowRight from '@carbon/icons/es/arrow--right/16.js';
@@ -34,9 +37,7 @@ export type ActionType = 'close' | 'start' | 'skip' | 'back' | 'next';
  *  (either synchronously or with a promise) to allow navigation.
  */
 @customElement(`${prefix}-interstitial-screen-footer`)
-class CDSInterstitialScreenFooter extends SignalWatcher(
-  HostListenerMixin(CDSModalFooter)
-) {
+class CDSInterstitialScreenFooter extends HostListenerMixin(CDSModalFooter) {
   /**
    * The label for the Next button.
    */
@@ -74,6 +75,10 @@ class CDSInterstitialScreenFooter extends SignalWatcher(
   @state()
   loadingAction;
 
+  @consume({ context: interstitialContext, subscribe: true })
+  @state()
+  private _interstitialCtx?: InterstitialContextValue;
+
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected firstUpdated(_changedProperties?: PropertyValues): void {
     registerFocusableContainers(
@@ -84,24 +89,18 @@ class CDSInterstitialScreenFooter extends SignalWatcher(
   protected updated(_changedProperties: PropertyValues): void {
     super.updated(_changedProperties);
     if (_changedProperties.size === 0) {
-      // This logic ensures the start/next button receives focus when focus is lost from the "next" or "back" buttons
-      // during step navigation—particularly when those buttons are not rendered.
       this.updateComplete.then(() => {
-        const { stepDetails, currentStep } = interstitialDetailsSignal.get();
-
+        const stepDetails = this._interstitialCtx?.state?.stepDetails ?? [];
+        const currentStep = this._interstitialCtx?.state?.currentStep ?? 0;
         const isMultiStep =
           Array.isArray(stepDetails) && stepDetails.length > 0;
         const lastStepIndex = stepDetails?.length - 1;
 
-        if (!isMultiStep) {
-          return;
-        }
+        if (!isMultiStep) return;
 
         const focusButton = (selector: string) => {
           const btn = this.shadowRoot?.querySelector(selector);
-          if (btn instanceof HTMLButtonElement) {
-            btn.focus();
-          }
+          if (btn instanceof HTMLButtonElement) btn.focus();
         };
 
         if (currentStep === lastStepIndex) {
@@ -116,21 +115,17 @@ class CDSInterstitialScreenFooter extends SignalWatcher(
   private _handleUserInitiatedClose(
     triggeredBy: EventTarget | null | ActionType
   ) {
-    const init = {
-      bubbles: true,
-      cancelable: true,
-      composed: true,
-      detail: {
-        triggeredBy,
-      },
-    };
-
     this.dispatchEvent(
       new CustomEvent(
         (
           this.constructor as typeof CDSInterstitialScreenFooter
         ).eventRequestClose,
-        init
+        {
+          bubbles: true,
+          cancelable: true,
+          composed: true,
+          detail: { triggeredBy },
+        }
       )
     );
   }
@@ -143,7 +138,8 @@ class CDSInterstitialScreenFooter extends SignalWatcher(
   private handleAction = async (actionType: ActionType) => {
     this.loadingAction = actionType;
 
-    const { currentStep, stepDetails } = interstitialDetailsSignal.get();
+    const currentStep = this._interstitialCtx?.state?.currentStep ?? 0;
+    const stepDetails = this._interstitialCtx?.state?.stepDetails ?? [];
     const stepCount = stepDetails.length;
 
     let resolvePromise;
@@ -170,18 +166,13 @@ class CDSInterstitialScreenFooter extends SignalWatcher(
     );
 
     const eventNotCanceled = this.dispatchEvent(customEvent);
-
-    if (!eventNotCanceled) {
-      return;
-    }
+    if (!eventNotCanceled) return;
 
     const canProceed = this.asyncAction ? await proceedPromise : true;
-
     this.loadingAction = '';
 
     if (canProceed) {
-      const { carouselAPI } = interstitialDetailsSignal.get();
-
+      const carouselAPI = this._interstitialCtx?.state?.carouselAPI;
       if (actionType == 'next') {
         carouselAPI?.next();
       } else if (actionType === 'back') {
@@ -193,8 +184,9 @@ class CDSInterstitialScreenFooter extends SignalWatcher(
   };
 
   render() {
-    const { stepDetails, currentStep, disableActions } =
-      interstitialDetailsSignal.get();
+    const stepDetails = this._interstitialCtx?.state?.stepDetails ?? [];
+    const currentStep = this._interstitialCtx?.state?.currentStep ?? 0;
+    const disableActions = this._interstitialCtx?.state?.disableActions ?? {};
     const { start, next, back, skip } = disableActions;
     const isMulti = stepDetails?.length > 0;
     const progStepCeil = stepDetails?.length - 1;
@@ -203,68 +195,63 @@ class CDSInterstitialScreenFooter extends SignalWatcher(
       <div class="${blockClass}--footer">
         <cds-action-set size="xl">
           ${isMulti
-            ? html`
-                <cds-button
-                  class="${blockClass}--skip-btn"
-                  kind="ghost"
-                  size="xl"
-                  title="${this.skipButtonLabel}"
-                  @click="${this.handleSkip}"
-                  ?disabled="${skip}">
-                  ${this.skipButtonLabel}
-                </cds-button>
-              `
+            ? html`<cds-button
+                class="${blockClass}--skip-btn"
+                kind="ghost"
+                size="xl"
+                title="${this.skipButtonLabel}"
+                @click="${this.handleSkip}"
+                ?disabled="${skip}">
+                ${this.skipButtonLabel}
+              </cds-button>`
             : ''}
           ${isMulti && currentStep > 0
-            ? html`
-                <cds-button
-                  class="${blockClass}--prev-btn"
-                  kind="secondary"
-                  size="xl"
-                  title="${this.previousButtonLabel}"
-                  ?disabled="${back}"
-                  @click="${this.handleClickPrev}">
-                  ${this.previousButtonLabel}
-                  ${this.loadingAction === 'back'
-                    ? html` <cds-inline-loading slot="icon" aria-live="off">
-                      </cds-inline-loading>`
-                    : nothing}
-                </cds-button>
-              `
+            ? html`<cds-button
+                class="${blockClass}--prev-btn"
+                kind="secondary"
+                size="xl"
+                title="${this.previousButtonLabel}"
+                ?disabled="${back}"
+                @click="${this.handleClickPrev}">
+                ${this.previousButtonLabel}
+                ${this.loadingAction === 'back'
+                  ? html`<cds-inline-loading
+                      slot="icon"
+                      aria-live="off"></cds-inline-loading>`
+                  : nothing}
+              </cds-button>`
             : nothing}
           ${isMulti && currentStep < progStepCeil
-            ? html`
-                <cds-button
-                  class="${blockClass}--next-btn"
-                  kind="primary"
-                  size="xl"
-                  title="${this.nextButtonLabel}"
-                  ?disabled="${next}"
-                  @click="${this.handleClickNext}">
-                  ${this.nextButtonLabel}
-                  ${this.loadingAction === 'next'
-                    ? html` <cds-inline-loading slot="icon" aria-live="off">
-                      </cds-inline-loading>`
-                    : html`${iconLoader(ArrowRight, { slot: 'icon' })}`}
-                </cds-button>
-              `
+            ? html`<cds-button
+                class="${blockClass}--next-btn"
+                kind="primary"
+                size="xl"
+                title="${this.nextButtonLabel}"
+                ?disabled="${next}"
+                @click="${this.handleClickNext}">
+                ${this.nextButtonLabel}
+                ${this.loadingAction === 'next'
+                  ? html`<cds-inline-loading
+                      slot="icon"
+                      aria-live="off"></cds-inline-loading>`
+                  : html`${iconLoader(ArrowRight, { slot: 'icon' })}`}
+              </cds-button>`
             : nothing}
           ${(isMulti && currentStep === progStepCeil) || !isMulti
-            ? html`
-                <cds-button
-                  class="${blockClass}--start-btn"
-                  kind="primary"
-                  size="xl"
-                  title="${this.startButtonLabel}"
-                  ?disabled="${start}"
-                  @click="${this.handleStart}">
-                  ${this.startButtonLabel}
-                  ${this.loadingAction === 'start'
-                    ? html` <cds-inline-loading slot="icon" aria-live="off">
-                      </cds-inline-loading>`
-                    : html`${iconLoader(ArrowRight, { slot: 'icon' })}`}
-                </cds-button>
-              `
+            ? html`<cds-button
+                class="${blockClass}--start-btn"
+                kind="primary"
+                size="xl"
+                title="${this.startButtonLabel}"
+                ?disabled="${start}"
+                @click="${this.handleStart}">
+                ${this.startButtonLabel}
+                ${this.loadingAction === 'start'
+                  ? html`<cds-inline-loading
+                      slot="icon"
+                      aria-live="off"></cds-inline-loading>`
+                  : html`${iconLoader(ArrowRight, { slot: 'icon' })}`}
+              </cds-button>`
             : nothing}
         </cds-action-set>
       </div>
@@ -277,9 +264,6 @@ class CDSInterstitialScreenFooter extends SignalWatcher(
     return `${prefix}-request-close`;
   }
 
-  /**
-   * The name of the custom event fired just before the action.
-   */
   static get eventOnBeforeAction() {
     return `${prefix}-on-action`;
   }

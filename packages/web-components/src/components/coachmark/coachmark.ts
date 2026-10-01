@@ -11,13 +11,15 @@ import { prefix } from '../../globals/settings';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import styles from './coachmark.scss?lit';
-import { SignalWatcher } from '@lit-labs/signals';
 import '../popover/index';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
 import { makeDraggable } from '@carbon/utilities/makeDraggable';
+import { ContextProvider } from '@lit/context';
 import {
-  resetCoachmarkDetailsSignal,
-  updateCoachmarkDetailsSignal,
+  coachmarkContext,
+  CoachmarkState,
+  CoachmarkContextValue,
+  defaultCoachmarkState,
 } from './coachmark-context';
 
 export const blockClass = `${prefix}--coachmark`;
@@ -33,7 +35,7 @@ export const blockClass = `${prefix}--coachmark`;
  *   This event can be used to perform actions such as restoring focus when the coachmark is dismissed.
  */
 @customElement(`${prefix}-coachmark`)
-class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
+class CDSCoachmark extends HostListenerMixin(LitElement) {
   /**
    * Specifies whether the component is currently open.
    */
@@ -87,6 +89,27 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
   @state() private isDragging: boolean | null = null;
   @state() private moveAnnouncement: string = '';
 
+  /** Lit context provider — scoped to this element instance */
+  private _contextProvider = new ContextProvider(this, {
+    context: coachmarkContext,
+    initialValue: {
+      state: { ...defaultCoachmarkState },
+      setState: (patch) => this._updateState(patch),
+    } satisfies CoachmarkContextValue,
+  });
+
+  private _updateState(patch: Partial<CoachmarkState>) {
+    const current = this._contextProvider.value ?? {
+      state: { ...defaultCoachmarkState },
+      setState: (p) => this._updateState(p),
+    };
+    this._contextProvider.setValue({
+      ...current,
+      state: { ...current.state, ...patch },
+    });
+    this.requestUpdate();
+  }
+
   disconnectedCallback() {
     super.disconnectedCallback();
     if (this.dragCleanup) {
@@ -95,7 +118,7 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
     if (this.keydownHandler) {
       document.removeEventListener('keydown', this.keydownHandler);
     }
-    resetCoachmarkDetailsSignal();
+    this._updateState({ open: false, floating: false, isDragging: false });
   }
 
   private async setupDraggable() {
@@ -114,7 +137,7 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
       (el) => el.tagName.toLowerCase() === `${prefix}-coachmark-header`
     ) as LitElement & HTMLElement;
     // Wait for coachmark-header to finish rendering the drag handle
-    // (it re-renders based on the signal updated just before this call)
+    // (it re-renders based on the context updated just before this call)
     if (header?.updateComplete) {
       await header.updateComplete;
     }
@@ -152,7 +175,7 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
         if (dragHandle) {
           dragHandle.setAttribute('aria-label', dragActiveInstruction);
         }
-        updateCoachmarkDetailsSignal({ name: 'isDragging', detail: true });
+        this._updateState({ isDragging: true });
       };
 
       const onDragEnd = () => {
@@ -164,7 +187,7 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
         if (dragHandle) {
           dragHandle.setAttribute('aria-label', dragInactiveInstruction);
         }
-        updateCoachmarkDetailsSignal({ name: 'isDragging', detail: false });
+        this._updateState({ isDragging: false });
       };
 
       const onDragMove = (event: Event) => {
@@ -212,20 +235,14 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
       if (this.floating) {
         this.classList.add(`${blockClass}--floating`);
         this.setupDraggable();
-        updateCoachmarkDetailsSignal({
-          name: 'floating',
-          detail: this.floating,
-        });
+        this._updateState({ floating: this.floating });
       } else {
         this.classList.remove(`${blockClass}--floating`);
         if (this.dragCleanup) {
           this.dragCleanup();
           this.dragCleanup = null;
         }
-        updateCoachmarkDetailsSignal({
-          name: 'floating',
-          detail: false,
-        });
+        this._updateState({ floating: false });
       }
     }
 
@@ -251,11 +268,8 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
             init
           )
         );
-        // Sync floating state into the signal so the header renders correctly
-        updateCoachmarkDetailsSignal({
-          name: 'floating',
-          detail: this.floating ?? false,
-        });
+        // Sync floating state into context so the header renders correctly
+        this._updateState({ floating: this.floating ?? false });
         // Re-create the draggable on every open so the isDragging closure
         // variable always starts as false (e.g. after Escape-while-dragging).
         if (this.floating) {
@@ -324,12 +338,9 @@ class CDSCoachmark extends SignalWatcher(HostListenerMixin(LitElement)) {
             init
           )
         );
-        // Clear floating from the signal so the header hides the drag button
-        // while the popover is closed (signal persists across open/close cycles)
-        updateCoachmarkDetailsSignal({
-          name: 'floating',
-          detail: false,
-        });
+        // Clear floating from context so the header hides the drag button
+        // while the popover is closed (context persists across open/close cycles)
+        this._updateState({ floating: false });
 
         // Return focus to trigger element when coachmark closes
         requestAnimationFrame(() => {

@@ -13,10 +13,10 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 import styles from './interstitial-screen-body.scss?lit';
 import { InitCarousel, initCarousel } from '@carbon/utilities';
 import { ref, createRef } from 'lit/directives/ref.js';
-import { SignalWatcher } from '@lit-labs/signals';
+import { consume } from '@lit/context';
 import {
-  interstitialDetailsSignal,
-  updateInterstitialDetailsSignal,
+  interstitialContext,
+  InterstitialContextValue,
 } from './interstitial-screen-context';
 
 const blockClass = `${prefix}--interstitial-screen`;
@@ -28,14 +28,16 @@ const blockClass = `${prefix}--interstitial-screen`;
  * @fires cds-on-after-step-change -  The name of the custom event fired at the end of  the step change.
  */
 @customElement(`${prefix}-interstitial-screen-body`)
-class CDSInterstitialScreenBody extends SignalWatcher(
-  HostListenerMixin(LitElement)
-) {
+class CDSInterstitialScreenBody extends HostListenerMixin(LitElement) {
   @property({ reflect: true })
   slot = 'body';
 
   @state()
   stepType: 'single' | 'multi' = 'multi';
+
+  @consume({ context: interstitialContext, subscribe: true })
+  @state()
+  private _interstitialCtx?: InterstitialContextValue;
 
   private carouselAPI!: InitCarousel;
   private carouselElement = createRef<HTMLElement>();
@@ -44,7 +46,6 @@ class CDSInterstitialScreenBody extends SignalWatcher(
     const bodyItems = this.querySelectorAll(
       `${prefix}-interstitial-screen-body-item`
     );
-
     if (bodyItems.length === 1) {
       this.stepType = 'single';
     } else if (bodyItems.length > 1) {
@@ -54,13 +55,8 @@ class CDSInterstitialScreenBody extends SignalWatcher(
 
   updated(changedProps: Map<string | number | symbol, unknown>) {
     super.updated(changedProps);
-
-    // Watch for the open signal
-    const { open } = interstitialDetailsSignal.get();
-
-    // Initialize carousel when opened for the first time
+    const open = this._interstitialCtx?.state?.open ?? false;
     if (open && !this.carouselAPI && this.stepType === 'multi') {
-      // Use requestAnimationFrame to ensure the element is fully rendered
       requestAnimationFrame(() => {
         this._initCarousel();
       });
@@ -74,11 +70,8 @@ class CDSInterstitialScreenBody extends SignalWatcher(
       excludeSwipeSupport: true,
       useMaxHeight: true,
     });
-    interstitialDetailsSignal.set({
-      ...interstitialDetailsSignal.get(),
-      carouselAPI: this.carouselAPI,
-    });
-
+    // Write carouselAPI back into shared context so root component and footer can access it.
+    this._interstitialCtx?.setState({ carouselAPI: this.carouselAPI });
     this.updateAriaHiddenTabIndex(0);
   }
 
@@ -101,14 +94,10 @@ class CDSInterstitialScreenBody extends SignalWatcher(
       )
     );
   };
+
   private onViewChangeEnd = ({ currentIndex, lastIndex, totalViews }) => {
     this.updateAriaHiddenTabIndex(currentIndex);
-
-    updateInterstitialDetailsSignal({
-      name: 'currentStep',
-      detail: currentIndex,
-    });
-
+    this._interstitialCtx?.setState({ currentStep: currentIndex });
     this.dispatchEvent(
       new CustomEvent(
         (
@@ -130,21 +119,16 @@ class CDSInterstitialScreenBody extends SignalWatcher(
 
   private updateAriaHiddenTabIndex = (itemNumber: number) => {
     const allViews = this.carouselAPI?.allViews;
-
     if (allViews) {
       Object.values(allViews).forEach((item, idx) => {
         const isActive = idx === itemNumber;
-
         if (item) {
-          // Set aria-hidden based on active state
           item.setAttribute('aria-hidden', String(!isActive));
-
           if (!isActive) {
-            item.setAttribute('inert', ''); // Disable interactivity
+            item.setAttribute('inert', '');
           } else {
-            item.removeAttribute('inert'); // Re-enable interactivity
+            item.removeAttribute('inert');
           }
-
           item.removeAttribute('tabindex');
         }
       });
@@ -166,17 +150,13 @@ class CDSInterstitialScreenBody extends SignalWatcher(
       </div>
     `;
   }
+
   static styles = styles;
 
-  /**
-   * The name of the custom event fired at the start of  the step change.
-   */
   static get eventOnViewChangeStart() {
     return `${prefix}-on-before-step-change`;
   }
-  /**
-   * The name of the custom event fired at the end of  the step change.
-   */
+
   static get eventOnViewChangeEnd() {
     return `${prefix}-on-after-step-change`;
   }
