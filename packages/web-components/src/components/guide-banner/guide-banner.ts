@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { LitElement, html, nothing } from 'lit';
+import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { prefix } from '../../globals/settings';
@@ -83,10 +83,7 @@ class CDSGuideBanner extends HostListenerMixin(LitElement) {
   }
 
   private _getTitle() {
-    if (this.titleText) {
-      return html`<div class="${blockClass}__title">${this.titleText}</div>`;
-    }
-    return nothing;
+    return html`<div class="${blockClass}__title">${this.titleText}</div>`;
   }
 
   private _getButton() {

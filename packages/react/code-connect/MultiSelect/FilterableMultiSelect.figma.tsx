@@ -12,7 +12,7 @@ import figma from '@figma/code-connect';
 
 figma.connect(
   FilterableMultiSelect,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=14032-291673&t=aG4cJRjteQHcd71k-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=14032-291673&t=aG4cJRjteQHcd71k-4',
   {
     props: {
       size: figma.enum('Size', {
@@ -67,7 +67,7 @@ figma.connect(
 
 figma.connect(
   DropdownSkeleton,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=14032-291673&t=aG4cJRjteQHcd71k-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=14032-291673&t=aG4cJRjteQHcd71k-4',
   {
     variant: { State: 'Skeleton' },
     props: {
