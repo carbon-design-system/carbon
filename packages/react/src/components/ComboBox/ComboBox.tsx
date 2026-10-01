@@ -421,13 +421,15 @@ const ComboBox = forwardRef(
 
     const enableFloatingStyles =
       useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
+    const enableV12Release = useFeatureFlag('enable-v12-release');
 
     const { refs, floatingStyles, middlewareData } = useFloating(
       enableFloatingStyles
         ? {
             placement: direction,
             strategy: 'fixed',
-            middleware: autoAlign ? [flip(), hide()] : undefined,
+            middleware:
+              enableV12Release || autoAlign ? [flip(), hide()] : undefined,
             whileElementsMounted: autoUpdate,
           }
         : {}

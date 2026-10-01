@@ -158,6 +158,7 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
   ) => {
     const enableFloatingStyles =
       useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
+    const enableV12Release = useFeatureFlag('enable-v12-release');
 
     const { refs, floatingStyles, placement, middlewareData } = useFloating(
       enableFloatingStyles
@@ -168,15 +169,15 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
 
             // The floating element is positioned relative to its nearest
             // containing block (usually the viewport). It will in many cases
-            // also “break” the floating element out of a clipping ancestor.
+            // also "break" the floating element out of a clipping ancestor.
             // https://floating-ui.com/docs/misc#clipping
             strategy: 'fixed',
 
-            // Middleware are executed as an in-between “middle” step of the
+            // Middleware are executed as an in-between "middle" step of the
             // initial `placement` computation and eventual return of data for
             // rendering. Each middleware is executed in order.
             middleware: [
-              autoAlign &&
+              (enableV12Release || autoAlign) &&
                 flip({
                   // An explicit array of placements to try if the initial
                   // `placement` doesn’t fit on the axes in which overflow

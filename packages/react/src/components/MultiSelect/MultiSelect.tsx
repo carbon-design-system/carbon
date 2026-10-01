@@ -373,13 +373,13 @@ export const MultiSelect = React.forwardRef(
 
             // The floating element is positioned relative to its nearest
             // containing block (usually the viewport). It will in many cases also
-            // “break” the floating element out of a clipping ancestor.
+            // "break" the floating element out of a clipping ancestor.
             // https://floating-ui.com/docs/misc#clipping
             strategy: 'fixed',
 
             // Middleware order matters, arrow should be last
             middleware: [
-              autoAlign && flip({ crossAxis: false }),
+              (enableV12Release || autoAlign) && flip({ crossAxis: false }),
               floatingSize({
                 apply({ rects, elements }) {
                   Object.assign(elements.floating.style, {
@@ -387,7 +387,7 @@ export const MultiSelect = React.forwardRef(
                   });
                 },
               }),
-              autoAlign && hide(),
+              (enableV12Release || autoAlign) && hide(),
             ],
             whileElementsMounted: autoUpdate,
           }

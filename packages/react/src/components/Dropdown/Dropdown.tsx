@@ -326,6 +326,7 @@ const Dropdown = React.forwardRef(
     const enableFloatingStyles = useFeatureFlag(
       'enable-v12-dynamic-floating-styles'
     );
+    const enableV12Release = useFeatureFlag('enable-v12-release');
 
     const { refs, floatingStyles, middlewareData } = useFloating(
       enableFloatingStyles || autoAlign
@@ -334,7 +335,7 @@ const Dropdown = React.forwardRef(
 
             // The floating element is positioned relative to its nearest
             // containing block (usually the viewport). It will in many cases also
-            // “break” the floating element out of a clipping ancestor.
+            // "break" the floating element out of a clipping ancestor.
             // https://floating-ui.com/docs/misc#clipping
             strategy: 'fixed',
 
@@ -347,8 +348,8 @@ const Dropdown = React.forwardRef(
                   });
                 },
               }),
-              autoAlign && flip(),
-              autoAlign && hide(),
+              (enableV12Release || autoAlign) && flip(),
+              (enableV12Release || autoAlign) && hide(),
             ],
             whileElementsMounted: autoUpdate,
           }
