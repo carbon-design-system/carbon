@@ -14,14 +14,31 @@
  * token files (button.json, tag.json, …) use into flat per-theme tokens that
  * Style Dictionary can process natively.
  *
- * Input — one token node with no $value but a per-theme map in extensions:
+ * Input — one token node with no $value but a per-theme map in extensions.
+ * Two equivalent forms are accepted:
  *
+ *   Component-token form (legacy, bare strings + separate alphaModifiers):
  *   "button": {
  *     "danger-active": {
  *       "$type": "color",
  *       "$extensions": {
  *         "carbon.themes": { "white": "{red.80}", "g10": "{red.80}", ... },
  *         "org.carbon": { "alphaModifiers": { "g90": 0.3, "g100": 0.3 } }
+ *       }
+ *     }
+ *   }
+ *
+ *   Unified theme-token form (value + alpha co-located per theme):
+ *   "background": {
+ *     "hover": {
+ *       "$type": "color",
+ *       "$extensions": {
+ *         "carbon.themes": {
+ *           "white": { "value": "{gray.50}", "alpha": 0.12 },
+ *           "g10":   { "value": "{gray.50}", "alpha": 0.12 },
+ *           "g90":   "{gray.50}",
+ *           "g100":  "{gray.50}"
+ *         }
  *       }
  *     }
  *   }
@@ -80,9 +97,33 @@ function carbonComponentTokensPreprocessor(dictionary) {
       if (carbonThemes && value.$value === undefined) {
         const byTheme = {};
 
-        // Preserve original JSON key order (important for 'fallback' position)
-        for (const [theme, themeValue] of Object.entries(carbonThemes)) {
-          const alpha = alphaModifiers[theme];
+        // Preserve original JSON key order (important for 'fallback' position).
+        // Each entry in carbon.themes is either:
+        //   - a bare string/alias  → { "white": "{red.80}" }   (legacy component form)
+        //   - an object { value, alpha? } → unified theme form where value and
+        //     alpha are co-located under the same theme key.
+        // The legacy separate "org.carbon.alphaModifiers" map is still supported
+        // for backwards-compat with existing component token files.
+        for (const [theme, themeEntry] of Object.entries(carbonThemes)) {
+          // An entry can be:
+          //   1. A bare string alias/hex           → treat as the value directly
+          //   2. A composite color object           → { colorSpace, components, hex }
+          //      Used for hardcoded non-palette colors. Treat as the value directly.
+          //   3. A { value, alpha? } wrapper object → unified theme format
+          const isComposite =
+            themeEntry !== null &&
+            typeof themeEntry === 'object' &&
+            !Array.isArray(themeEntry) &&
+            'hex' in themeEntry;
+          const isWrapper =
+            themeEntry !== null &&
+            typeof themeEntry === 'object' &&
+            !Array.isArray(themeEntry) &&
+            !isComposite;
+          const themeValue = isWrapper ? themeEntry.value : themeEntry;
+          // Per-theme alpha: only { value, alpha } wrappers carry alpha.
+          // Legacy org.carbon.alphaModifiers map is the fallback for component files.
+          const alpha = isWrapper ? themeEntry.alpha : alphaModifiers[theme];
           const syntheticNode = {
             $type: value.$type ?? 'color',
             $value: themeValue,
@@ -95,12 +136,24 @@ function carbonComponentTokensPreprocessor(dictionary) {
           byTheme[theme] = syntheticNode;
         }
 
-        out[key] = {
+        // Build the expanded node: preserve DTCG metadata, add _by_theme, and
+        // recurse into any non-$ children (dual-role nodes in themes.json have
+        // both a carbon.themes value AND group children like `active`, `hover`).
+        const expandedNode = {
           ...(value.$type ? { $type: value.$type } : {}),
           ...(value.$description ? { $description: value.$description } : {}),
           // _by_theme is a DTCG group — each child is a leaf token with $value
           _by_theme: byTheme,
         };
+        for (const [childKey, childValue] of Object.entries(value)) {
+          if (childKey.startsWith('$') || childKey === '_by_theme') continue;
+          if (!childValue || typeof childValue !== 'object') continue;
+          // Wrap in a single-key object so walk() sees the key and can apply
+          // the carbon.themes expansion logic to it (walk iterates the entries
+          // of the object passed in, so childValue alone would skip expansion).
+          expandedNode[childKey] = walk({ [childKey]: childValue })[childKey];
+        }
+        out[key] = expandedNode;
       } else {
         // Recurse into nested groups
         out[key] = walk(value);

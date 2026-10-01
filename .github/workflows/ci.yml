@@ -3,10 +3,12 @@ on:
   push:
     branches:
       - main
+      - next
   pull_request:
     types: [opened, reopened, synchronize, ready_for_review]
     branches:
       - main
+      - next
   merge_group:
     types: [checks_requested]
 
@@ -116,7 +118,7 @@ jobs:
       - name: Merge coverage reports
         run: cat coverage/scss-generator/lcov.info >> coverage/lcov.info
       - name: Upload coverage reports to Codecov with GitHub Action
-        uses: codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f # v7.0.0
+        uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
         with:
           files: ./coverage/lcov.info
           flags: main-packages
@@ -156,7 +158,7 @@ jobs:
           cd packages/web-components
           yarn test --coverage
       - name: Upload web-components coverage reports to Codecov
-        uses: codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f # v7.0.0
+        uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
         with:
           files: ./packages/web-components/coverage/lcov.info
           flags: web-components
@@ -447,17 +449,18 @@ jobs:
             'packages/**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
+      # 👇 Merge queue builds are skipped below, so skip the setup they'd need
       - name: Install dependencies
+        if: github.event_name != 'merge_group'
         env:
           YARN_ENABLE_HARDENED_MODE: 0
         run: yarn install --immutable
       - name: Build project
+        if: github.event_name != 'merge_group'
         run: yarn build
-      - name: Build storybook
-        run: yarn workspace @carbon/react storybook:build --stats-json
       - id: chromatic
         name: Run Chromatic
-        uses: chromaui/action@2a0b63f30233c48591844a46d451b9cf68128186 # v18.7.2
+        uses: chromaui/action@6b3c2820222d23bad770d57a4ad5e2d1c91f92e9 # v18.9.5
         with:
           # 👇 Token is intentionally plaintext
           # https://www.chromatic.com/docs/github-actions/#run-chromatic-on-external-forks-of-open-source-projects
@@ -465,14 +468,18 @@ jobs:
           workingDir: packages/react
           buildScriptName: storybook:build
           zip: true # Runs Chromatic with the option to compress the build output
-          autoAcceptChanges: '{main,gh-readonly-queue/main/**}' # Option to accept all changes on main and merge queue
+          autoAcceptChanges: '{main,next}' # Option to accept all changes on main and next
+          skip: '**/gh-readonly-queue/**'
           # 👇 Add debug: true and print dependency trace for changed files to help with debugging:
           traceChanged: 'expanded'
           debug: true
           onlyChanged: true # 👈 Required option to enable TurboSnap
+          # 👇 Any match disables TurboSnap - only list files from actual build
+          # outputs. Excludes tests, docs, examples, READMEs, and package.json
           externals: |
-            packages/(colors|elements|feature-flags|grid|icons|icons-react|layout|motion|pictograms|pictograms-react|styles|themes|type|utilities|utilities-react)/**
-            *.sass
+            packages/(colors|elements|feature-flags|grid|icons|icons-react|layout|motion|pictograms|pictograms-react|styles|themes|type|utilities|utilities-react)/(src|scss|style-dictionary|tasks)/*(!(__tests__)/)!(*.md)
+            packages/(colors|elements|feature-flags|grid|icons|icons-react|layout|motion|pictograms|pictograms-react|styles|themes|type|utilities|utilities-react)/(index.scss|*.config.*)
+            packages/(feature-flags|icons|pictograms)/!(telemetry).yml
           untraced: |
             config/**
         env:
@@ -489,6 +496,7 @@ jobs:
   # PR timeline and the 'branch deployment' section at the bottom above the
   # status checks. This avoids noisy/large comments for deploy previews.
   react-storybook-preview:
+    if: github.event_name != 'merge_group'
     runs-on: ubuntu-latest
     needs: chromatic-react
     environment:

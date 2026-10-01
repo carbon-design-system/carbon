@@ -164,6 +164,13 @@ export default {
     },
     ...sharedParameters,
   },
+  argTypes: {
+    light: {
+      table: {
+        disable: true,
+      },
+    },
+  },
 };
 
 export const Default = ({ readOnly, ...args }) => {
