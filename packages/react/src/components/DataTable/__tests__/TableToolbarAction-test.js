@@ -8,6 +8,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
+import { FeatureFlags } from '../../FeatureFlags';
 import { TableToolbarAction } from '../';
 
 describe('TableToolbarAction', () => {
@@ -47,5 +48,20 @@ describe('TableToolbarAction', () => {
 
     expect(ref.current).toBe(screen.getByRole('menuitem'));
     expect(onClick).toHaveBeenCalled();
+  });
+
+  it('should render as a MenuItem when enable-v12-overflowmenu is enabled', () => {
+    render(
+      <FeatureFlags enableV12Overflowmenu>
+        <TableToolbarAction data-testid="toolbar-action" onClick={jest.fn()}>
+          Delete
+        </TableToolbarAction>
+      </FeatureFlags>
+    );
+
+    expect(screen.getByTestId('toolbar-action')).toHaveTextContent('Delete');
+    expect(screen.getByRole('menuitem')).toBe(
+      screen.getByTestId('toolbar-action')
+    );
   });
 });
