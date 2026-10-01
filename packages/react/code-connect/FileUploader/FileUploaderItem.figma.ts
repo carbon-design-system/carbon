@@ -1,4 +1,4 @@
-// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=3199-35182&t=D2RGrtNnHWaB9r1F-4
+// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=3199-35182&t=D2RGrtNnHWaB9r1F-4
 // source=https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/FileUploader/FileUploaderItem.tsx
 // component=FileUploaderItem
 
