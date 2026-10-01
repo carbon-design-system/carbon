@@ -7,6 +7,8 @@ on:
       - 'v*'
       # Ignore tags for v10, there is a separate v10-release.yml workflow for v10
       - '!v10*'
+      # Ignore tags for v12, there is a separate next-release.yml workflow for v12 alpha work
+      - '!v12*'
 
 jobs:
   build:

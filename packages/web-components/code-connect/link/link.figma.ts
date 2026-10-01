@@ -1,4 +1,4 @@
-// url=https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=50111-991&mode=design&t=kyFCPK0tCeufcNP2-4
+// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?type=design&node-id=50111-991&mode=design&t=kyFCPK0tCeufcNP2-4
 // source=https://github.com/carbon-design-system/carbon/blob/main/packages/web-components/src/components/link/link.ts
 // component=cds-link
 
