@@ -78,7 +78,7 @@ export interface SideNavLinkComponent {
 // First define a non-generic base component to work with forwardRef
 type SideNavLinkPropsWithoutRef = Omit<SideNavLinkProps<'a'>, 'ref'>;
 
-const frFn = forwardRef<HTMLAnchorElement, SideNavLinkPropsWithoutRef>;
+const frFn = forwardRef<HTMLElement, SideNavLinkPropsWithoutRef>;
 
 const SideNavLink = frFn((props, ref) => {
   const {
@@ -97,6 +97,7 @@ const SideNavLink = frFn((props, ref) => {
     isSideNavExpanded ?? contextIsSideNavExpanded;
 
   const prefix = usePrefix();
+  const linkProps = rest as LinkProps<ElementType>;
   const className = cx({
     [`${prefix}--side-nav__link`]: true,
     [`${prefix}--side-nav__link--current`]: isActive,
@@ -106,7 +107,7 @@ const SideNavLink = frFn((props, ref) => {
   return (
     <SideNavItem large={large}>
       <Link
-        {...(rest as LinkProps<'a'>)}
+        {...linkProps}
         className={className}
         ref={ref}
         tabIndex={
