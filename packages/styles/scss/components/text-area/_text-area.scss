@@ -37,7 +37,7 @@
     border-block-end: 1px solid $border-strong;
     color: $text-primary;
     font-family: inherit;
-    min-block-size: $spacing-08;
+    min-block-size: convert.to-rem(40px);
 
     min-inline-size: 10rem;
     padding-block: convert.to-rem(11px) $spacing-03;
