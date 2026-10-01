@@ -12,7 +12,7 @@ import figma from '@figma/code-connect';
 
 figma.connect(
   FluidMultiSelect,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=14530-300220&t=aG4cJRjteQHcd71k-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=14530-300220&t=aG4cJRjteQHcd71k-4',
   {
     props: {
       titleText: figma.boolean('Show toggletip', {
@@ -62,7 +62,7 @@ figma.connect(
 
 figma.connect(
   FluidDropdownSkeleton,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=14530-300220&t=aG4cJRjteQHcd71k-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=14530-300220&t=aG4cJRjteQHcd71k-4',
   {
     variant: { State: 'Skeleton' },
     example: () => {

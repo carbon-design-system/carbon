@@ -6,8 +6,11 @@
 //
 
 @use 'mixins' as *;
+@use '../button/radius' as button;
 @use '../copy-button';
+@use '../../border-radius' as *;
 @use '../../config' as *;
+@use '../../feature-flags' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
@@ -35,6 +38,10 @@ $copy-btn-feedback: $background-inverse !default;
 @mixin code-snippet {
   .#{$prefix}--snippet {
     @include reset;
+
+    @if enabled('enable-v12-release') {
+      @include button.radius($border-radius-00);
+    }
   }
 
   .#{$prefix}--snippet--disabled,
@@ -218,7 +225,7 @@ $copy-btn-feedback: $background-inverse !default;
     overflow-y: auto;
     transition: max-height $duration-moderate-01 motion(standard, productive);
 
-    &:focus {
+    &:focus-within {
       @include focus-outline('outline');
 
       outline-offset: 0;
@@ -233,14 +240,18 @@ $copy-btn-feedback: $background-inverse !default;
   }
 
   .#{$prefix}--snippet--multi.#{$prefix}--snippet--wraptext pre {
+    overflow-wrap: break-word;
     white-space: pre-wrap;
-    word-wrap: break-word;
   }
 
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre {
     overflow: auto;
     padding-block-end: $spacing-06;
     padding-inline-end: $spacing-06;
+
+    &:focus {
+      outline: none;
+    }
   }
 
   .#{$prefix}--snippet--multi.#{$prefix}--snippet--no-copy

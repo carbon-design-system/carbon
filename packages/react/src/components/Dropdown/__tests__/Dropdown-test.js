@@ -122,8 +122,8 @@ describe('Dropdown', () => {
   });
 
   describe('label', () => {
-    it('should not allow interactive content in label', () => {
-      const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+    it('should warn without throwing for interactive content in label', () => {
+      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
       expect(() => {
         render(
@@ -131,13 +131,17 @@ describe('Dropdown', () => {
             {...mockProps}
             label={
               <>
-                Choose an option <button type="button">Help</button>
+                Choose an option <a href="/">Help</a>
               </>
             }
           />
         );
-      }).toThrow(
-        'The Dropdown component `label` prop must have no interactive content'
+      }).not.toThrow();
+
+      expect(spy).toHaveBeenCalledWith(
+        expect.stringContaining(
+          'Warning: The Dropdown component `label` prop must have no interactive content'
+        )
       );
 
       spy.mockRestore();
@@ -160,8 +164,8 @@ describe('Dropdown', () => {
   });
 
   describe('title', () => {
-    it('should not allow interactive content in titleText', () => {
-      const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+    it('should warn without throwing for interactive content in titleText', () => {
+      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
       expect(() => {
         render(
@@ -174,8 +178,12 @@ describe('Dropdown', () => {
             }
           />
         );
-      }).toThrow(
-        'The Dropdown component `titleText` prop must have no interactive content'
+      }).not.toThrow();
+
+      expect(spy).toHaveBeenCalledWith(
+        expect.stringContaining(
+          'Warning: The Dropdown component `titleText` prop must have no interactive content'
+        )
       );
 
       spy.mockRestore();

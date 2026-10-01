@@ -56,10 +56,10 @@ Modal content can be customized via the `<ModalHeader>`, `<ModalBody>` and
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig(
-          ComposedModalStories.WithStateManager,
-          "import ReactDOM from 'react-dom';"
-        ),
+        stackblitzPrefillConfig({
+          story: ComposedModalStories.WithStateManager,
+          customImports: ["import ReactDOM from 'react-dom';"],
+        }),
     },
   ]}
 />
