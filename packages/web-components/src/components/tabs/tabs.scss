@@ -12,7 +12,10 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/border-radius' as *;
+@use '@carbon/styles/scss/feature-flags' as flags;
 @use '@carbon/styles/scss/components/button/index' as *;
+@use '@carbon/styles/scss/components/button/radius' as button-radius;
 @use '@carbon/styles/scss/components/tabs/index';
 @use '@carbon/styles/scss/components/tabs/vars' as *;
 @use '@carbon/styles/scss/utilities/button-reset';
@@ -548,20 +551,12 @@ $inset-transition: inset 110ms motion(standard, productive);
   margin-inline-start: $spacing-01;
 
   .#{$prefix}--tabs__nav-link {
-    @include skeleton;
-
     display: flex;
     align-items: center;
     padding: 0 layout.density('padding-inline');
-    background-color: transparent;
     block-size: 100%;
     border-block-end: 2px solid $skeleton-element;
     inline-size: 10rem;
-
-    &::before {
-      display: none;
-      content: none;
-    }
   }
 
   .#{$prefix}--tabs__nav-item {
@@ -778,6 +773,10 @@ $inset-transition: inset 110ms motion(standard, productive);
     align-items: center;
     inset-inline-start: calc(-#{$spacing-04} - 1px);
     margin-inline-start: calc(-#{$spacing-06} + 1px);
+
+    @if flags.enabled('enable-v12-release') {
+      @include button-radius.radius($border-radius-00);
+    }
 
     &[disabled] {
       pointer-events: none;

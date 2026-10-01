@@ -35,7 +35,8 @@ options that are available to the user, but there is a space constraint.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(OverflowMenuStories.Default),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: OverflowMenuStories.Default }),
     },
   ]}
 />
@@ -55,7 +56,9 @@ this attribute is found, the menu will be placed on `document.body`.
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig(OverflowMenuStories.RenderCustomIcon),
+        stackblitzPrefillConfig({
+          story: OverflowMenuStories.RenderCustomIcon,
+        }),
     },
   ]}
 />

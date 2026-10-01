@@ -42,7 +42,8 @@ function ExampleComponent() {
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(ShapeIndicatorStories.Default),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: ShapeIndicatorStories.Default }),
     },
   ]}
 />

@@ -55,7 +55,7 @@ what is in rendered inside of `Tab` and `TabPanel`.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TabsStories.Default),
+      onClick: () => stackblitzPrefillConfig({ story: TabsStories.Default }),
     },
   ]}
 />
@@ -67,7 +67,7 @@ what is in rendered inside of `Tab` and `TabPanel`.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TabsStories.Contained),
+      onClick: () => stackblitzPrefillConfig({ story: TabsStories.Contained }),
     },
   ]}
 />
@@ -79,7 +79,8 @@ what is in rendered inside of `Tab` and `TabPanel`.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TabsStories.ContainedFullWidth),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: TabsStories.ContainedFullWidth }),
     },
   ]}
 />
@@ -91,7 +92,8 @@ what is in rendered inside of `Tab` and `TabPanel`.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TabsStories.ContainedWithIcons),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: TabsStories.ContainedWithIcons }),
     },
   ]}
 />
@@ -104,7 +106,9 @@ what is in rendered inside of `Tab` and `TabPanel`.
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig(TabsStories.ContainedWithSecondaryLabels),
+        stackblitzPrefillConfig({
+          story: TabsStories.ContainedWithSecondaryLabels,
+        }),
     },
   ]}
 />
@@ -117,9 +121,9 @@ what is in rendered inside of `Tab` and `TabPanel`.
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig(
-          TabsStories.ContainedWithSecondaryLabelsAndIcons
-        ),
+        stackblitzPrefillConfig({
+          story: TabsStories.ContainedWithSecondaryLabelsAndIcons,
+        }),
     },
   ]}
 />
@@ -131,7 +135,7 @@ what is in rendered inside of `Tab` and `TabPanel`.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TabsStories.IconOnly),
+      onClick: () => stackblitzPrefillConfig({ story: TabsStories.IconOnly }),
     },
   ]}
 />
@@ -141,7 +145,7 @@ what is in rendered inside of `Tab` and `TabPanel`.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TabsStories.Icon20Only),
+      onClick: () => stackblitzPrefillConfig({ story: TabsStories.Icon20Only }),
     },
   ]}
 />
@@ -271,7 +275,8 @@ And there you have it! Working dismissable tabs.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TabsStories.Dismissable),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: TabsStories.Dismissable }),
     },
   ]}
 />
@@ -283,7 +288,8 @@ Dismissable With Icons:
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TabsStories.DismissableWithIcons),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: TabsStories.DismissableWithIcons }),
     },
   ]}
 />
@@ -294,7 +300,7 @@ Dismissable With Icons:
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TabsStories.Manual),
+      onClick: () => stackblitzPrefillConfig({ story: TabsStories.Manual }),
     },
   ]}
 />
@@ -306,7 +312,7 @@ Dismissable With Icons:
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TabsStories.Skeleton),
+      onClick: () => stackblitzPrefillConfig({ story: TabsStories.Skeleton }),
     },
   ]}
 />
@@ -318,7 +324,7 @@ Dismissable With Icons:
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TabsStories.WithIcons),
+      onClick: () => stackblitzPrefillConfig({ story: TabsStories.WithIcons }),
     },
   ]}
 />
@@ -330,7 +336,7 @@ Dismissable With Icons:
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TabsStories.Vertical),
+      onClick: () => stackblitzPrefillConfig({ story: TabsStories.Vertical }),
     },
   ]}
 />
