@@ -1,0 +1,40 @@
+<!--
+@license
+
+Copyright IBM Corp. 2025, 2025
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+  <head>
+    <title>Delete and Remove patterns</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="src/styles.scss" />
+    <script type="module" src="src/delete-and-remove.ts"></script>
+  </head>
+  <body>
+    <section>
+      <h4>Deletion patterns</h4>
+      <p>High impact deletion:</p>
+      <delete-high-impact></delete-high-impact>
+      <p>High impact deletion with connected items:</p>
+      <delete-connected-items></delete-connected-items>
+      <p>High impact batch deletion:</p>
+      <delete-batch></delete-batch>
+      <p>Medium impact deletion:</p>
+      <delete-remove-medium-impact action="delete"></delete-remove-medium-impact>
+      <p>Low impact deletion:</p>
+      <delete-remove-low-impact action="delete"></delete-remove-low-impact>
+    </section>
+
+    <section>
+      <h4>Removal patterns</h4>
+      <p>Medium impact removal:</p>
+      <delete-remove-medium-impact action="remove"></delete-remove-medium-impact>
+      <p>Low impact removal:</p>
+      <delete-remove-low-impact action="remove"></delete-remove-low-impact>
+    </section>
+  </body>
+</html>

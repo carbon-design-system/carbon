@@ -1,0 +1,28 @@
+/**
+ * @license
+ *
+* Copyright IBM Corp. 2025, 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '@carbon/styles/scss/reset';
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/themes';
+@use '@carbon/styles/scss/spacing' as *;
+
+:root {
+  @include theme.theme(themes.$white);
+  background-color: var(--cds-background);
+  color: var(--cds-text-primary);
+}
+
+section {
+  margin: $spacing-06;
+  border: $spacing-01 dotted var(--cds-border-strong-01, #000000);
+  padding: $spacing-06;
+  p {
+    margin: $spacing-04 0 $spacing-04;
+  }
+}

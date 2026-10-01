@@ -1,0 +1,35 @@
+/*
+* Copyright IBM Corp. 2025, 2025
+*
+* This source code is licensed under the Apache-2.0 license found in the
+* LICENSE file in the root directory of this source tree.
+*/
+@use '@carbon/styles/scss/spacing' as *;
+
+$carbon-prefix: 'cds';
+
+:host #{$carbon-prefix}-modal-body {
+  padding-bottom: 0;
+}
+
+.no-bullets {
+  list-style-type: none;
+  padding-inline-start: $spacing-07;
+  margin: 0;
+}
+
+.notification {
+  position: fixed;
+  right: $spacing-04;
+  top: $spacing-04;
+}
+
+#{$carbon-prefix}-button #{$carbon-prefix}-inline-loading {
+  position: absolute;
+  inset-block-start: 0;
+}
+
+.deletion-connected-items #{$carbon-prefix}-modal-body
+{
+  padding-block-end: 1rem;
+}
