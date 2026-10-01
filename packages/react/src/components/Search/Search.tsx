@@ -30,7 +30,7 @@ import { FormContext } from '../FluidForm';
 import { noopFn } from '../../internal/noopFn';
 import { Tooltip } from '../Tooltip';
 import { isSearchValuePresent } from './utils';
-import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
+import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
 
 type InputPropsBase = Omit<HTMLAttributes<HTMLInputElement>, 'onChange'>;
 export interface SearchProps extends InputPropsBase {
@@ -290,7 +290,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
       ) : (
         magnifierButton
       );
-    useNoInteractiveChildren(
+    useNoInteractiveChildrenForLabel(
       labelRef,
       'The Search component `labelText` prop must have no interactive content'
     );
