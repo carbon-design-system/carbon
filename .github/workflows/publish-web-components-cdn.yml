@@ -9,6 +9,7 @@ on:
       - 'v[0-9]+.[0-9]+.[0-9]+'
       - 'v[0-9]+.[0-9]+.[0-9]+-*'
       - '!v10*'
+      - '!v12*'
 
 concurrency:
   group: deploy-${{ github.ref }}
