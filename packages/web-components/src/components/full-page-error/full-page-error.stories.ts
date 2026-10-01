@@ -11,7 +11,7 @@ import './index';
 import styles from './story-styles.scss?lit';
 import '../breadcrumb/index';
 import '../ui-shell/index';
-import '../page-header/index';
+import '../page-header-deprecated/index';
 import User20 from '@carbon/icons/es/user--avatar/20';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import type { Meta } from '@storybook/web-components';
