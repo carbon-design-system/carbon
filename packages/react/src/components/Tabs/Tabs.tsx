@@ -51,6 +51,23 @@ import { useMatchMedia } from '../../internal/useMatchMedia';
 import { Text } from '../Text';
 import BadgeIndicator from '../BadgeIndicator';
 import { isComponentElement } from '../../internal';
+import type { TFunc } from '../../types/common';
+
+type TranslationKey =
+  | 'carbon.tabs.remove-tab'
+  | 'carbon.tabs.remove-tab-instructions';
+
+type TranslationArgs = { tabLabel: string; tabIndex: number };
+
+const defaultTranslateWithId: TFunc<TranslationKey, TranslationArgs> = (
+  messageId,
+  args
+) => {
+  const tab = args?.tabLabel ? `${args.tabLabel} tab` : 'tab';
+  return messageId === 'carbon.tabs.remove-tab'
+    ? `Remove ${tab}`
+    : `Press delete to remove ${tab}`;
+};
 
 const buttonWidth = 44;
 const verticalTabHeight = 64;
@@ -65,6 +82,7 @@ type TabsContextType = {
   setActiveIndex(index: number): void;
   selectedIndex: number;
   setSelectedIndex(index: number): void;
+  translateWithId: TFunc<TranslationKey, TranslationArgs>;
 };
 const TabsContext = React.createContext<TabsContextType>({
   baseId: '',
@@ -75,6 +93,7 @@ const TabsContext = React.createContext<TabsContextType>({
   setActiveIndex() {},
   selectedIndex: 0,
   setSelectedIndex() {},
+  translateWithId: defaultTranslateWithId,
 });
 
 // Used to keep track of position in a tablist
@@ -134,6 +153,11 @@ export interface TabsProps {
    * in a controlled mode and should be used along with `onChange`
    */
   selectedIndex?: number;
+
+  /**
+   * Translates dismissable tab labels, with the tab's accessible label and index.
+   */
+  translateWithId?: TFunc<TranslationKey, TranslationArgs>;
 }
 
 function Tabs({
@@ -143,6 +167,7 @@ function Tabs({
   selectedIndex: controlledSelectedIndex,
   dismissable,
   onTabCloseRequest,
+  translateWithId = defaultTranslateWithId,
 }: TabsProps) {
   const baseId = useId('ccs');
   if (dismissable && !onTabCloseRequest) {
@@ -169,6 +194,7 @@ function Tabs({
     setActiveIndex,
     selectedIndex,
     setSelectedIndex,
+    translateWithId,
   };
 
   return <TabsContext.Provider value={value}>{children}</TabsContext.Provider>;
@@ -216,6 +242,11 @@ Tabs.propTypes = {
    * in a controlled mode and should be used along with `onChange`
    */
   selectedIndex: PropTypes.number,
+
+  /**
+   * Translates dismissable tab labels, with the tab's accessible label and index.
+   */
+  translateWithId: PropTypes.func,
 };
 
 export interface TabsVerticalProps {
@@ -1321,6 +1352,7 @@ const Tab = forwardRef<HTMLElement, TabProps>(
       baseId,
       dismissable,
       onTabCloseRequest,
+      translateWithId,
     } = React.useContext(TabsContext);
     const { index, hasSecondaryLabel, contained } =
       React.useContext(TabContext);
@@ -1429,6 +1461,15 @@ const Tab = forwardRef<HTMLElement, TabProps>(
       onKeyDown?.(event);
     };
 
+    const translationArgs = {
+      tabLabel:
+        rest['aria-label'] ??
+        (typeof children === 'string' || typeof children === 'number'
+          ? String(children)
+          : ''),
+      tabIndex: index,
+    };
+
     const DismissIcon = (
       <div
         className={cx({
@@ -1451,15 +1492,16 @@ const Tab = forwardRef<HTMLElement, TabProps>(
             [`${prefix}--tabs__nav-item--close-icon--disabled`]: disabled,
           })}
           onClick={handleClose}
-          title={`Remove ${typeof children === 'string' ? children : ''} tab`}
+          title={translateWithId('carbon.tabs.remove-tab', translationArgs)}
           ref={dismissIconRef}>
           <Close
             aria-hidden={
               selectedIndex === index && dismissable ? 'false' : 'true'
             }
-            aria-label={`Press delete to remove ${
-              typeof children === 'string' ? children : ''
-            } tab`}
+            aria-label={translateWithId(
+              'carbon.tabs.remove-tab-instructions',
+              translationArgs
+            )}
           />
         </button>
       </div>

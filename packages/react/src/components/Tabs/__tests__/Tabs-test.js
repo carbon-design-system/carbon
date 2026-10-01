@@ -466,6 +466,37 @@ describe('Tab', () => {
     expect(screen.getByTestId('tab-testid-1')).toHaveFocus();
   });
 
+  it('translates dismissable tab labels and uses an explicit accessible name for rich content', async () => {
+    const onTabCloseRequest = jest.fn();
+    const translateWithId = (id, { tabLabel }) =>
+      id === 'carbon.tabs.remove-tab'
+        ? `Eliminar pestaña ${tabLabel}`
+        : `Pulsa Supr para eliminar la pestaña ${tabLabel}`;
+
+    render(
+      <Tabs
+        dismissable
+        onTabCloseRequest={onTabCloseRequest}
+        translateWithId={translateWithId}>
+        <TabList aria-label="Pestañas">
+          <Tab aria-label="Uno">
+            <span>Uno</span>
+          </Tab>
+          <Tab>Dos</Tab>
+        </TabList>
+      </Tabs>
+    );
+
+    expect(screen.getByTitle('Eliminar pestaña Uno')).toBeEnabled();
+    expect(
+      screen.getByLabelText('Pulsa Supr para eliminar la pestaña Uno')
+    ).toBeInTheDocument();
+    expect(screen.getByTitle('Eliminar pestaña Dos')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByTitle('Eliminar pestaña Uno'));
+    expect(onTabCloseRequest).toHaveBeenCalledWith(0);
+  });
+
   it('should render close icon if dismissable', () => {
     render(
       <Tabs dismissable onTabCloseRequest={() => {}}>

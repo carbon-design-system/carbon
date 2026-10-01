@@ -13,6 +13,18 @@ import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useFeatureFlag } from '../FeatureFlags';
+import type { TFunc } from '../../types/common';
+
+const defaultTranslations = {
+  'carbon.progress-bar.loading': 'Loading',
+  'carbon.progress-bar.finished': 'Done',
+  'carbon.progress-bar.error': 'Error',
+};
+
+type TranslationKey = keyof typeof defaultTranslations;
+
+const defaultTranslateWithId: TFunc<TranslationKey> = (messageId) =>
+  defaultTranslations[messageId];
 
 export interface ProgressBarProps {
   /**
@@ -51,6 +63,11 @@ export interface ProgressBarProps {
   status?: 'active' | 'finished' | 'error';
 
   /**
+   * Translates the loading, finished, and error status announcements.
+   */
+  translateWithId?: TFunc<TranslationKey>;
+
+  /**
    * Defines the alignment variant of the progress bar.
    */
   type?: 'default' | 'inline' | 'indented';
@@ -69,6 +86,7 @@ function ProgressBar({
   max = 100,
   size = 'big',
   status = 'active',
+  translateWithId = defaultTranslateWithId,
   type = 'default',
   value,
 }: ProgressBarProps) {
@@ -166,7 +184,7 @@ function ProgressBar({
       <div
         className={`${prefix}--progress-bar__track`}
         role="progressbar"
-        aria-busy={!isFinished}
+        aria-busy={!isFinished && !isError}
         aria-invalid={isError}
         aria-labelledby={labelId}
         aria-describedby={helperText ? helperTextId : undefined}
@@ -184,7 +202,13 @@ function ProgressBar({
             className={`${prefix}--visually-hidden`}
             aria-live="polite"
             id={helperId}>
-            {isFinished ? 'Done' : 'Loading'}
+            {translateWithId(
+              isError
+                ? 'carbon.progress-bar.error'
+                : isFinished
+                  ? 'carbon.progress-bar.finished'
+                  : 'carbon.progress-bar.loading'
+            )}
           </div>
         </div>
       )}
@@ -227,6 +251,11 @@ ProgressBar.propTypes = {
    * Specify the status.
    */
   status: PropTypes.oneOf(['active', 'finished', 'error']),
+
+  /**
+   * Translates the loading, finished, and error status announcements.
+   */
+  translateWithId: PropTypes.func,
 
   /**
    * Defines the alignment variant of the progress bar.
