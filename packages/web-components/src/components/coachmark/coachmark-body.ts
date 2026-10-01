@@ -11,14 +11,13 @@ import HostListenerMixin from '../../globals/mixins/host-listener';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 import styles from './coachmark-body.scss?lit';
-import { SignalWatcher } from '@lit-labs/signals';
 
 /**
  * coachmark-body for content body
  * @element cds-coachmark-body
  */
 @customElement(`${prefix}-coachmark-body`)
-class CDSCoachmarkBody extends SignalWatcher(HostListenerMixin(LitElement)) {
+class CDSCoachmarkBody extends HostListenerMixin(LitElement) {
   render() {
     return html` <slot></slot> `;
   }

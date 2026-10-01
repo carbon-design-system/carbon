@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 import { LitElement, html, nothing } from 'lit';
-import { property } from 'lit/decorators.js';
+import { property, state } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import '../button/index';
 import HostListenerMixin from '../../globals/mixins/host-listener';
@@ -13,11 +13,8 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 import styles from './coachmark-header.scss?lit';
 import Close from '@carbon/icons/es/close/16';
 import Draggable from '@carbon/icons/es/draggable/16';
-import { SignalWatcher } from '@lit-labs/signals';
-import {
-  coachmarkDetailsSignal,
-  updateCoachmarkDetailsSignal,
-} from './coachmark-context';
+import { consume } from '@lit/context';
+import { coachmarkContext, CoachmarkContextValue } from './coachmark-context';
 import { iconLoader } from '../../globals/internal/icon-loader';
 
 /**
@@ -25,7 +22,7 @@ import { iconLoader } from '../../globals/internal/icon-loader';
  * @element cds-coachmark-header
  */
 @customElement(`${prefix}-coachmark-header`)
-class CDSCoachmarkHeader extends SignalWatcher(HostListenerMixin(LitElement)) {
+class CDSCoachmarkHeader extends HostListenerMixin(LitElement) {
   /**
    * Tooltip text and aria label for the Close button icon.
    */
@@ -37,6 +34,10 @@ class CDSCoachmarkHeader extends SignalWatcher(HostListenerMixin(LitElement)) {
    */
   @property({ reflect: true })
   dragIconDescription?: string = '';
+
+  @consume({ context: coachmarkContext, subscribe: true })
+  @state()
+  private _coachmarkCtx?: CoachmarkContextValue;
 
   private _handleClick = (event: Event) => {
     event.stopPropagation();
@@ -55,14 +56,11 @@ class CDSCoachmarkHeader extends SignalWatcher(HostListenerMixin(LitElement)) {
       (coachmark as HTMLElement & { open: boolean }).open = false;
     }
 
-    updateCoachmarkDetailsSignal({
-      name: 'open',
-      detail: false,
-    });
+    this._coachmarkCtx?.setState({ open: false });
   };
 
   render() {
-    const { floating } = coachmarkDetailsSignal.get();
+    const floating = this._coachmarkCtx?.state?.floating ?? false;
     return html`
       ${floating
         ? html`
