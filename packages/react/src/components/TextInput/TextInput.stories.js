@@ -53,28 +53,6 @@ export default {
   subcomponents: {
     TextInputSkeleton,
   },
-  args: {
-    className: 'input-test-class',
-    id: 'text-input-1',
-    placeholder: 'Placeholder text',
-    invalid: false,
-    invalidText: 'Error message goes here',
-    disabled: false,
-    labelText: 'Label text',
-    helperText: 'Helper text',
-    warn: false,
-    warnText:
-      'Warning message that is really long can wrap to more lines but should not be excessively long.',
-    size: 'md',
-    readOnly: false,
-    inline: false,
-    hideLabel: false,
-    enableCounter: false,
-    maxCount: 10,
-    type: 'text',
-    defaultWidth: 300,
-    defaultValue: '',
-  },
   argTypes: {
     className: {
       control: {
@@ -192,6 +170,29 @@ export default {
   },
 };
 
+const defaultArgs = {
+  className: 'input-test-class',
+  id: 'text-input-1',
+  placeholder: 'Placeholder text',
+  invalid: false,
+  invalidText: 'Error message goes here',
+  disabled: false,
+  labelText: 'Label text',
+  helperText: 'Helper text',
+  warn: false,
+  warnText:
+    'Warning message that is really long can wrap to more lines but should not be excessively long.',
+  size: 'md',
+  readOnly: false,
+  inline: false,
+  hideLabel: false,
+  enableCounter: false,
+  maxCount: 10,
+  type: 'text',
+  defaultWidth: 300,
+  defaultValue: '',
+};
+
 export const Default = (args) => {
   const { defaultWidth, textInputArgs } = getTextInputStoryArgs(args);
 
@@ -201,6 +202,8 @@ export const Default = (args) => {
     </div>
   );
 };
+
+Default.args = { ...defaultArgs };
 
 export const Inline = (args) => {
   const { defaultWidth, textInputArgs } = getTextInputStoryArgs(args);
@@ -213,6 +216,7 @@ export const Inline = (args) => {
 };
 
 Inline.args = {
+  ...defaultArgs,
   defaultWidth: 450,
   inline: true,
 };
@@ -234,6 +238,7 @@ export const ReadOnly = (args) => {
 };
 
 ReadOnly.args = {
+  ...defaultArgs,
   defaultValue: "This is read only, you can't type more.",
   readOnly: true,
 };
@@ -267,6 +272,8 @@ export const _WithLayer = (args) => {
     </WithLayer>
   );
 };
+
+_WithLayer.args = { ...defaultArgs };
 
 export const withAILabel = (args) => {
   const { defaultWidth, textInputArgs } = getTextInputStoryArgs(args);
@@ -314,9 +321,16 @@ export const withAILabel = (args) => {
   );
 };
 
-export const Skeleton = ({ hideLabel, size }) => (
-  <TextInputSkeleton hideLabel={hideLabel} size={size} />
-);
+withAILabel.args = { ...defaultArgs };
+
+export const Skeleton = ({ hideLabel, size }) => {
+  return <TextInputSkeleton hideLabel={hideLabel} size={size} />;
+};
+
+Skeleton.args = {
+  hideLabel: defaultArgs.hideLabel,
+  size: defaultArgs.size,
+};
 
 Skeleton.parameters = {
   controls: {
@@ -327,7 +341,7 @@ Skeleton.parameters = {
 // Hidden Test-Only Story. This story tests for a bug where the invalid-text would overlap with components below it. #19960
 export const TestInvalidTextNoOverlap = (args) => {
   return (
-    <div style={{ width: args.defaultWidth }}>
+    <div style={{ width: defaultWidth }}>
       <TextInput
         labelText="test invalid text, the invalid text should not overlap"
         invalid
@@ -340,6 +354,7 @@ export const TestInvalidTextNoOverlap = (args) => {
   );
 };
 
+TestInvalidTextNoOverlap.args = { ...defaultArgs };
 /*
  * This story will:
  * - Be excluded from the docs page

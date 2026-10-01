@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023
+ * Copyright IBM Corp. 2023, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -52,35 +52,35 @@ export default {
   },
 };
 
-const Demo = () => (
-  <VStack gap={6}>
-    <HStack>
-      <TextInput labelText="<TextInput />" placeholder="Placeholder" />
-      <div style={{ display: 'flex', alignItems: 'flex-end' }}>
-        <Button>&lt;Button /&gt;</Button>
-      </div>
-      <div style={{ display: 'flex', alignItems: 'flex-end' }}>
-        <Tag>&lt;Tag /&gt;</Tag>
-      </div>
-      <TextInput
-        labelText='<TextInput size="sm" />'
-        size="sm"
-        placeholder="Placeholder"
-      />
-      <div style={{ display: 'flex', alignItems: 'flex-end' }}>
-        <Button size="sm">&lt;Button size=&quot;sm&quot; /&gt;</Button>
-      </div>
-      <div style={{ display: 'flex', alignItems: 'flex-end' }}>
-        <Tag size="sm">&lt;Tag size&quot;sm&quot; /&gt;</Tag>
-      </div>
-    </HStack>
-    <Accordion>
-      <AccordionItem title="<AccordionItem />">Content</AccordionItem>
-    </Accordion>
-  </VStack>
-);
-
 export const Default = (args) => {
+  const Demo = () => (
+    <VStack gap={6}>
+      <HStack>
+        <TextInput labelText="<TextInput />" placeholder="Placeholder" />
+        <div style={{ display: 'flex', alignItems: 'flex-end' }}>
+          <Button>&lt;Button /&gt;</Button>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'flex-end' }}>
+          <Tag>&lt;Tag /&gt;</Tag>
+        </div>
+        <TextInput
+          labelText='<TextInput size="sm" />'
+          size="sm"
+          placeholder="Placeholder"
+        />
+        <div style={{ display: 'flex', alignItems: 'flex-end' }}>
+          <Button size="sm">&lt;Button size=&quot;sm&quot; /&gt;</Button>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'flex-end' }}>
+          <Tag size="sm">&lt;Tag size&quot;sm&quot; /&gt;</Tag>
+        </div>
+      </HStack>
+      <Accordion>
+        <AccordionItem title="<AccordionItem />">Content</AccordionItem>
+      </Accordion>
+    </VStack>
+  );
+
   return (
     <VStack gap={10}>
       <h1>Layout demo</h1>

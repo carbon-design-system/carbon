@@ -181,84 +181,72 @@ const renderCodeSnippetWithLayer = ({ text, ...args }) => (
   </WithLayer>
 );
 
-export const Inline = {
-  args: {
-    ...codeSnippetArgs,
-    type: 'inline',
-  },
-  argTypes: variantArgTypes,
-  parameters: codeSnippetParameters,
-  render: renderCodeSnippet,
+export const Inline = ({ text, ...args }) => {
+  return <CodeSnippet {...args}>{text}</CodeSnippet>;
 };
+Inline.args = { ...codeSnippetArgs, type: 'inline' };
+Inline.argTypes = variantArgTypes;
+Inline.parameters = codeSnippetParameters;
 
-export const Multiline = {
-  args: {
-    ...codeSnippetArgs,
-    text: multilineCode,
-    type: 'multi',
-  },
-  argTypes: variantArgTypes,
-  parameters: codeSnippetParameters,
-  render: renderCodeSnippet,
+export const Multiline = ({ text, ...args }) => {
+  return <CodeSnippet {...args}>{text}</CodeSnippet>;
 };
+Multiline.args = { ...codeSnippetArgs, text: multilineCode, type: 'multi' };
+Multiline.argTypes = variantArgTypes;
+Multiline.parameters = codeSnippetParameters;
 
-export const Singleline = {
-  args: {
-    ...codeSnippetArgs,
-    text: singlelineCode,
-  },
-  argTypes: variantArgTypes,
-  parameters: codeSnippetParameters,
-  render: renderCodeSnippet,
+export const Singleline = ({ text, ...args }) => {
+  return <CodeSnippet {...args}>{text}</CodeSnippet>;
 };
+Singleline.args = { ...codeSnippetArgs, text: singlelineCode };
+Singleline.argTypes = variantArgTypes;
+Singleline.parameters = codeSnippetParameters;
 
-export const InlineWithLayer = {
-  args: {
-    ...codeSnippetArgs,
-    type: 'inline',
-  },
-  argTypes: variantArgTypes,
-  parameters: codeSnippetParameters,
-  render: renderCodeSnippetWithLayer,
+export const InlineWithLayer = ({ text, ...args }) => {
+  return (
+    <WithLayer>
+      <CodeSnippet {...args}>{text}</CodeSnippet>
+    </WithLayer>
+  );
 };
+InlineWithLayer.args = { ...codeSnippetArgs, type: 'inline' };
+InlineWithLayer.argTypes = variantArgTypes;
+InlineWithLayer.parameters = codeSnippetParameters;
 
-export const MultilineWithLayer = {
-  args: {
-    ...codeSnippetArgs,
-    text: multilineCode,
-    type: 'multi',
-  },
-  argTypes: variantArgTypes,
-  parameters: codeSnippetParameters,
-  render: renderCodeSnippetWithLayer,
+export const MultilineWithLayer = ({ text, ...args }) => {
+  return (
+    <WithLayer>
+      <CodeSnippet {...args}>{text}</CodeSnippet>
+    </WithLayer>
+  );
 };
+MultilineWithLayer.args = {
+  ...codeSnippetArgs,
+  text: multilineCode,
+  type: 'multi',
+};
+MultilineWithLayer.argTypes = variantArgTypes;
+MultilineWithLayer.parameters = codeSnippetParameters;
 
-export const SinglelineWithLayer = {
-  args: {
-    ...codeSnippetArgs,
-    text: singlelineCode,
-  },
-  argTypes: variantArgTypes,
-  parameters: codeSnippetParameters,
-  render: renderCodeSnippetWithLayer,
+export const SinglelineWithLayer = ({ text, ...args }) => {
+  return (
+    <WithLayer>
+      <CodeSnippet {...args}>{text}</CodeSnippet>
+    </WithLayer>
+  );
 };
+SinglelineWithLayer.args = { ...codeSnippetArgs, text: singlelineCode };
+SinglelineWithLayer.argTypes = variantArgTypes;
+SinglelineWithLayer.parameters = codeSnippetParameters;
 
-export const Skeleton = {
-  args: {
-    type: 'single',
+export const Skeleton = (args) => <CodeSnippetSkeleton {...args} />;
+Skeleton.args = { type: 'single' };
+Skeleton.argTypes = {
+  type: {
+    control: 'radio',
+    description: 'Specify the type of Code Snippet skeleton.',
+    options: ['single', 'multi'],
+    table: { defaultValue: { summary: '"single"' } },
   },
-  argTypes: {
-    type: {
-      control: 'radio',
-      description: 'Specify the type of Code Snippet skeleton.',
-      options: ['single', 'multi'],
-      table: { defaultValue: { summary: '"single"' } },
-    },
-  },
-  parameters: {
-    controls: {
-      include: ['type'],
-    },
-  },
-  render: (args) => <CodeSnippetSkeleton {...args} />,
 };
+Skeleton.parameters = { controls: { include: ['type'] } };

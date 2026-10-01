@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './story.scss';
+import styles from './story.scss?inline';
 import { Checkbox as CheckboxIcon } from '@carbon/icons-react';
 import React, { useState, useEffect, useRef } from 'react';
 import { Popover, PopoverContent } from '../Popover';
@@ -23,7 +23,16 @@ export default {
   subcomponents: {
     PopoverContent,
   },
+  decorators: [
+    (Story) => (
+      <>
+        <style>{styles}</style>
+        <Story />
+      </>
+    ),
+  ],
   parameters: {
+    styles,
     controls: {
       hideNoControlsWarning: true,
       exclude: ['relative'],
@@ -34,13 +43,13 @@ export default {
   },
 };
 
-const DefaultStory = (props) => {
-  const { align, caret, dropShadow, highContrast, open } = props;
+export const Default = (args) => {
+  const { align, caret, dropShadow, highContrast, open } = args;
   const [isOpen, setIsOpen] = useState(open);
 
   return (
     <Popover
-      {...props}
+      {...args}
       align={align}
       caret={caret}
       dropShadow={dropShadow}
@@ -158,8 +167,6 @@ TabTip.parameters = {
     exclude: ['align', 'autoAlign', 'caret', 'highContrast'],
   },
 };
-
-export const Default = DefaultStory.bind({});
 
 Default.args = {
   caret: true,
