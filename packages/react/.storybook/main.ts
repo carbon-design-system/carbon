@@ -54,6 +54,9 @@ const stories = glob.sync(storyGlobs, {
 const config: StorybookConfig = {
   addons: [
     'storybook-addon-accessibility-checker',
+    ...(process.env.NODE_ENV === 'development'
+      ? ['@github-ui/storybook-addon-performance-panel']
+      : []),
     {
       name: '@storybook/addon-docs',
       options: {

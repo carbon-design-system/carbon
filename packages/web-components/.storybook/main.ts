@@ -38,6 +38,9 @@ const config: StorybookConfig = {
   stories: stories,
   addons: [
     'storybook-addon-accessibility-checker',
+    ...(process.env.NODE_ENV === 'development'
+      ? ['@github-ui/storybook-addon-performance-panel/universal/preset']
+      : []),
     {
       name: '@storybook/addon-docs',
       options: {

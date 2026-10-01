@@ -7,6 +7,7 @@
 
 import { enable } from '@carbon/feature-flags';
 import { html } from 'lit';
+import { withPerformanceMonitor } from '@github-ui/storybook-addon-performance-panel/universal';
 
 import * as basePreview from '../.storybook/preview';
 import '../src/components/feature-flags/index';
@@ -121,6 +122,7 @@ export const globalTypes = {
   v12Release: v12ReleaseToolbar,
 };
 export const decorators = [
+  ...(process.env.NODE_ENV === 'development' ? [withPerformanceMonitor] : []),
   (story) => html`<feature-flags enable-v12-release>${story()}</feature-flags>`,
   ...(basePreview.decorators ?? []),
 ];

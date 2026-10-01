@@ -2284,7 +2284,9 @@ __metadata:
     "@carbon/test-utils": "npm:^10.41.0"
     "@carbon/themes": "npm:^11.82.0"
     "@carbon/utilities": "npm:^0.26.0"
+    "@figma/code-connect": "npm:^2.0.0"
     "@floating-ui/react": "npm:^0.27.4"
+    "@github-ui/storybook-addon-performance-panel": "npm:^1.1.4"
     "@ibm/telemetry-js": "npm:^1.5.0"
     "@rolldown/plugin-babel": "npm:^0.2.0"
     "@stackblitz/sdk": "npm:^1.11.0"
@@ -2510,6 +2512,7 @@ __metadata:
     "@carbon/styles": "npm:^1.116.0"
     "@carbon/utilities": "npm:^0.26.0"
     "@floating-ui/dom": "npm:^1.6.3"
+    "@github-ui/storybook-addon-performance-panel": "npm:^1.1.4"
     "@ibm/telemetry-js": "npm:^1.10.2"
     "@juggle/resize-observer": "npm:^3.4.0"
     "@lit-labs/signals": "npm:^0.3.0"
@@ -3546,6 +3549,39 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@figma/code-connect@npm:^2.0.0":
+  version: 2.0.1
+  resolution: "@figma/code-connect@npm:2.0.1"
+  dependencies:
+    boxen: "npm:5.1.1"
+    chalk: "npm:^4.1.2"
+    commander: "npm:^11.1.0"
+    compare-versions: "npm:^6.1.0"
+    cross-spawn: "npm:^7.0.3"
+    dotenv: "npm:^16.3.1"
+    esbuild-wasm: "npm:0.27.5"
+    fast-fuzzy: "npm:^1.12.0"
+    find-up: "npm:^5.0.0"
+    glob: "npm:^11.0.4"
+    jsdom: "npm:^24.1.1"
+    lodash: "npm:4.18.1"
+    minimatch: "npm:^9.0.3"
+    ora: "npm:^5.4.1"
+    parse5: "npm:^7.1.2"
+    prettier: "npm:^2.8.8"
+    prompts: "npm:^2.4.2"
+    strip-ansi: "npm:^6.0.0"
+    ts-morph: "npm:^27.0.0"
+    typescript: "npm:6.0.3"
+    undici: "npm:^7.19.1"
+    zod: "npm:3.25.58"
+    zod-validation-error: "npm:^3.2.0"
+  bin:
+    figma: bin/figma
+  checksum: 10/a25a0f336809cd258f098dc8eb1b7d942d93673e5ca81402b9859473ad4a2a5341d9627f987f9d6007d0a1036f31683479f6be1993450dd585ecfbfdf4dadb5b
+  languageName: node
+  linkType: hard
+
 "@floating-ui/core@npm:^1.6.0":
   version: 1.6.5
   resolution: "@floating-ui/core@npm:1.6.5"
@@ -3602,6 +3638,23 @@ __metadata:
   version: 1.0.3
   resolution: "@gar/promise-retry@npm:1.0.3"
   checksum: 10/0d13ea3bb1025755e055648f6e290d2a7e0c87affaf552218f09f66b3fcd9ea9d5c9cc5fe2aa6e285e1530437768e40f9448fe9a86f4f3417b216dcf488d3d1a
+  languageName: node
+  linkType: hard
+
+"@github-ui/storybook-addon-performance-panel@npm:^1.1.4":
+  version: 1.1.4
+  resolution: "@github-ui/storybook-addon-performance-panel@npm:1.1.4"
+  peerDependencies:
+    "@storybook/icons": ^2.0.0
+    "@storybook/react": ^10.0.0
+    react: ^19
+    storybook: ^10
+  peerDependenciesMeta:
+    "@storybook/react":
+      optional: true
+    react:
+      optional: true
+  checksum: 10/cd0fc201fb83a3e2998dbd965912a477eeb2471aeda124b3751e668cf762729069423d947d325848d9d7d65b1514f6476646a9750a238eeed6dbbc6a69182475
   languageName: node
   linkType: hard
 
@@ -12378,6 +12431,15 @@ __metadata:
   bin:
     esbuild: bin/esbuild
   checksum: 10/2e6a178ad5b61d782b2540cabbb8191008ae21fdba647b8ff3a98e1932f3769df42f3ae245c16268be85bfa8ae49d64c6d980f85a49deccc48fc4bd1d2dedf2f
+  languageName: node
+  linkType: hard
+
+"esbuild-wasm@npm:0.27.5":
+  version: 0.27.5
+  resolution: "esbuild-wasm@npm:0.27.5"
+  bin:
+    esbuild: bin/esbuild
+  checksum: 10/48ccda4aa2463ffa11dc983d176091db9e7c1e0a85bfb02b278737422816122a972b202209c33522b55643ed7d35f105c08be6289e28eefb1887ad9cd70f29e5
   languageName: node
   linkType: hard
 

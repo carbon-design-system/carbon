@@ -41,6 +41,20 @@ const devTools = {
       items: [{ value: false, title: 'None' }, 'condensed', 'normal'],
     },
   },
+  stressTestCount: {
+    description: 'Render N copies of this story for stress testing',
+    defaultValue: 1,
+    toolbar: {
+      title: 'dev :: Stress test instances',
+      items: [
+        { value: 1, title: '1× (off)' },
+        { value: 10, title: '10×' },
+        { value: 25, title: '25×' },
+        { value: 50, title: '50×' },
+        { value: 100, title: '100×' },
+      ],
+    },
+  },
 };
 
 // always use full locale code strings for values
@@ -226,6 +240,18 @@ function getThemeFromBackground(backgroundValue) {
 }
 
 export const decorators = [
+  ...(process.env.NODE_ENV === 'development'
+    ? [
+        function stressTestDecorator(story, context) {
+          const count = context.globals.stressTestCount ?? 1;
+          if (count <= 1) return story();
+          const instances = Array.from({ length: count }, () => story());
+          return html`<div style="display:flex;flex-wrap:wrap;gap:8px">
+            ${instances}
+          </div>`;
+        },
+      ]
+    : []),
   function decoratorContainer(story, context) {
     const result = story();
     const { hasMainTag } = result;
