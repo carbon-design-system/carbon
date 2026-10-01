@@ -18,7 +18,7 @@ import figma from '@figma/code-connect';
 
 figma.connect(
   Tag,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=16031-269750&t=RuAO38H8L12JZXpK-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=16031-269750&t=RuAO38H8L12JZXpK-4',
   {
     props: {
       renderIcon: figma.boolean('Icon', {
@@ -53,7 +53,7 @@ figma.connect(
 
 figma.connect(
   DismissibleTag,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=16031-269750&t=RuAO38H8L12JZXpK-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=16031-269750&t=RuAO38H8L12JZXpK-4',
   {
     variant: { Dismissible: 'True' },
     props: {
@@ -89,7 +89,7 @@ figma.connect(
 
 figma.connect(
   SelectableTag,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=46254-7550&t=RuAO38H8L12JZXpK-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=46254-7550&t=RuAO38H8L12JZXpK-4',
   {
     props: {
       renderIcon: figma.boolean('Icon', {
@@ -111,7 +111,7 @@ figma.connect(
 
 figma.connect(
   OperationalTag,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=46254-10165&t=RuAO38H8L12JZXpK-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=46254-10165&t=RuAO38H8L12JZXpK-4',
   {
     props: {
       renderIcon: figma.boolean('Icon', {
@@ -147,7 +147,7 @@ figma.connect(
 // skeleton
 figma.connect(
   TagSkeleton,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=16031-269750&t=RuAO38H8L12JZXpK-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=16031-269750&t=RuAO38H8L12JZXpK-4',
   {
     variant: { State: 'Skeleton' },
     props: {
@@ -161,7 +161,7 @@ figma.connect(
 
 figma.connect(
   TagSkeleton,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=16031-269750&t=RuAO38H8L12JZXpK-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=16031-269750&t=RuAO38H8L12JZXpK-4',
   {
     variant: { State: 'Skeleton' },
     props: {
@@ -175,7 +175,7 @@ figma.connect(
 
 figma.connect(
   TagSkeleton,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=46254-7550&t=RuAO38H8L12JZXpK-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=46254-7550&t=RuAO38H8L12JZXpK-4',
   {
     variant: { State: 'Skeleton' },
     props: {
@@ -189,7 +189,7 @@ figma.connect(
 
 figma.connect(
   TagSkeleton,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=46254-10165&t=RuAO38H8L12JZXpK-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=46254-10165&t=RuAO38H8L12JZXpK-4',
   {
     variant: { State: 'Skeleton' },
     props: {
