@@ -7,6 +7,7 @@
 
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
+import { classMap } from 'lit/directives/class-map.js';
 import { prefix } from '../../globals/settings';
 import styles from './number-input.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
@@ -27,16 +28,21 @@ class CDSNumberInputSkeleton extends LitElement {
    * Specify the size of the Number Input skeleton.
    */
   @property({ reflect: true })
-  size = INPUT_SIZE.MEDIUM;
+  size?: INPUT_SIZE;
 
   render() {
     const { hideLabel, size } = this;
+    const classes = classMap({
+      [`${prefix}--number`]: true,
+      [`${prefix}--skeleton`]: true,
+      [`${prefix}--number--${size}`]: size !== undefined, // TODO V12 - remove this class
+      [`${prefix}--layout--size-${size}`]: size !== undefined,
+    });
     return html`
       ${hideLabel
         ? ''
         : html` <span class="${prefix}--label ${prefix}--skeleton"></span> `}
-      <div
-        class="${prefix}--number ${prefix}--skeleton ${prefix}--number--${size}"></div>
+      <div class="${classes}"></div>
     `;
   }
 
