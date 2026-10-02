@@ -7,7 +7,7 @@ import { Meta } from '@storybook/addon-docs/blocks';
 Angular components for the
 [Carbon Design System](https://carbondesignsystem.com), built as thin wrappers
 over `@carbon/web-components`. Each Angular component registers its backing Web
-Component under a namespaced `cds-wc-*` tag at import time — no separate
+Component under a namespaced `cds-ng-*` tag at import time — no separate
 registration step is required.
 
 ## Install
@@ -20,8 +20,30 @@ yarn add @carbon/angular @carbon/web-components @carbon/styles
 
 ## Basic usage
 
+**Standalone component (preferred):**
+
+```ts
+// my.component.ts
+import { Component } from '@angular/core';
+import { ButtonComponent } from '@carbon/angular';
+
+@Component({
+  selector: 'app-root',
+  imports: [ButtonComponent],
+  template: `<cds-button kind="primary" (buttonClick)="onClick($event)"
+    >Click me</cds-button
+  >`,
+})
+export class AppComponent {
+  onClick(e: MouseEvent) {}
+}
+```
+
+**NgModule (also supported):**
+
 ```ts
 // app.module.ts
+import { NgModule } from '@angular/core';
 import { CDSAngularButtonModule } from '@carbon/angular';
 
 @NgModule({

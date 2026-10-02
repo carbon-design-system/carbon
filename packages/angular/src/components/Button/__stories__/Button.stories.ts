@@ -12,7 +12,6 @@ import { ButtonComponent } from '../Button.component';
 const meta: Meta<ButtonComponent> = {
   title: 'Components/Button',
   component: ButtonComponent,
-  tags: ['autodocs'],
   argTypes: {
     kind: {
       control: 'select',
@@ -179,7 +178,11 @@ export const IconButton: Story = {
       [tooltipText]="tooltipText"
       [tooltipPosition]="tooltipPosition"
       (buttonClick)="buttonClick($event)"
-    ><!-- icon slot --></cds-button>`,
+    ><svg slot="icon" focusable="false" preserveAspectRatio="xMidYMid meet"
+        xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+        aria-hidden="true" width="16" height="16" viewBox="0 0 32 32">
+        <path d="M17 15V8h-2v7H8v2h7v7h2v-7h7v-2z"/>
+      </svg></cds-button>`,
   }),
   play: async ({ canvasElement }) => {
     const wc = canvasElement.querySelector('cds-ng-button');

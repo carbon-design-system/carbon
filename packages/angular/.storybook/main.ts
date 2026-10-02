@@ -9,7 +9,11 @@ import type { StorybookConfig } from '@storybook/angular';
 import remarkGfm from 'remark-gfm';
 
 const config: StorybookConfig = {
-  stories: ['../src/**/*.stories.@(js|jsx|ts|tsx)', './docs/**/*.mdx'],
+  stories: [
+    '../src/**/*.stories.@(js|jsx|ts|tsx)',
+    '../src/**/*.mdx',
+    './docs/**/*.mdx',
+  ],
   addons: [
     'storybook-addon-accessibility-checker',
     {
