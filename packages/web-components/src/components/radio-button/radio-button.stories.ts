@@ -70,6 +70,20 @@ const radioButtonOptions = [
   { label: 'Radio button label', value: 'radio-3' },
 ];
 
+const aiLabelRadioButtonOptions = [
+  radioButtonOptions,
+  [
+    { label: 'Radio button label', value: 'radio-4' },
+    { label: 'Radio button label', value: 'radio-5' },
+    { label: 'Radio button label', value: 'radio-6' },
+  ],
+  [
+    { label: 'Radio button label', value: 'radio-7' },
+    { label: 'Radio button label', value: 'radio-8' },
+    { label: 'Radio button label', value: 'radio-9' },
+  ],
+];
+
 const groupArgs = {
   disabled: false,
   readOnly: false,
@@ -379,6 +393,8 @@ export const WithAILabel = {
       </cds-radio-button>
     `;
     const renderGroup = (groupNumber, aiLabels, groupAILabel) => {
+      const options = aiLabelRadioButtonOptions[groupNumber - 1];
+
       return html`
         <cds-radio-button-group
           ?readOnly="${readOnly}"
@@ -390,13 +406,13 @@ export const WithAILabel = {
           legend-text="${ifDefined(legendText)}"
           orientation="${ifDefined(orientation)}"
           name="${name}-group-${groupNumber}"
-          value="${radioButtonOptions[0].value}"
+          .value="${options[0].value}"
           ?required="${required}"
           ?warn="${warn}"
           warn-text="${ifDefined(warnText)}"
           @cds-radio-button-group-changed="${onChange}">
           ${groupAILabel}
-          ${radioButtonOptions.map((option, index) =>
+          ${options.map((option, index) =>
             renderRadioButton(option, index, aiLabels[index])
           )}
         </cds-radio-button-group>
@@ -404,35 +420,33 @@ export const WithAILabel = {
     };
 
     return html`
-      ${renderGroup(
-        1,
-        {},
-        html`<cds-ai-label slot="ai-label" alignment="bottom-left"
-          >${content}${actions}</cds-ai-label
-        >`
-      )}
-      ${renderGroup(2, {
-        0: html`<cds-ai-label slot="ai-label" alignment="bottom-left"
-          >${content}${actions}</cds-ai-label
-        >`,
-        1: html`<cds-ai-label slot="ai-label" alignment="bottom-left"
-          >${content}${actions}</cds-ai-label
-        >`,
-      })}
-      ${renderGroup(3, {
-        0: html`<cds-ai-label
-          slot="ai-label"
-          alignment="bottom-left"
-          kind="inline"
-          >${content}${actions}</cds-ai-label
-        >`,
-        1: html`<cds-ai-label
-          slot="ai-label"
-          alignment="bottom-left"
-          kind="inline"
-          >${content}${actions}</cds-ai-label
-        >`,
-      })}
+      <div style="width: 400px">
+        ${renderGroup(
+          1,
+          {},
+          html`<cds-ai-label alignment="bottom-left"
+            >${content}${actions}</cds-ai-label
+          >`
+        )}
+        <br />
+        ${renderGroup(2, {
+          0: html`<cds-ai-label alignment="bottom-left"
+            >${content}${actions}</cds-ai-label
+          >`,
+          1: html`<cds-ai-label alignment="bottom-left"
+            >${content}${actions}</cds-ai-label
+          >`,
+        })}
+        <br />
+        ${renderGroup(3, {
+          0: html`<cds-ai-label alignment="bottom-left" kind="inline"
+            >${content}${actions}</cds-ai-label
+          >`,
+          1: html`<cds-ai-label alignment="bottom-left" kind="inline"
+            >${content}${actions}</cds-ai-label
+          >`,
+        })}
+      </div>
     `;
   },
 };
