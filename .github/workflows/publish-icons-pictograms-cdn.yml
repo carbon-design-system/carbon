@@ -1,0 +1,104 @@
+name: Publish icons and pictograms to COS
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      # Matches stable release tags with the shape `vX.Y.Z`.
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+      - '!v[0-9]+.[0-9]+.[0-9]+-*'
+      - '!v10*'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-assets-cdn
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      COS_BUCKET: ${{ secrets.CARBON_CDN_BUCKET }}
+      COS_ENDPOINT_HOST: ${{ secrets.CARBON_CDN_ENDPOINT }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Use Node.js version from .nvmrc
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: '.nvmrc'
+
+      - name: Verify publishing configuration
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.CARBON_CDN_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.CARBON_CDN_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ secrets.CARBON_CDN_REGION }}
+        run: |
+          aws --version
+          test -n "${AWS_ACCESS_KEY_ID}"
+          test -n "${AWS_SECRET_ACCESS_KEY}"
+          test -n "${AWS_DEFAULT_REGION}"
+          test -n "${COS_BUCKET}"
+          test -n "${COS_ENDPOINT_HOST}"
+
+      - name: Install dependencies
+        env:
+          YARN_ENABLE_HARDENED_MODE: 0
+        run: yarn install --immutable
+
+      - name: Build icons and pictograms
+        run: |
+          yarn lerna run build \
+            --scope='@carbon/icons' \
+            --scope='@carbon/pictograms' \
+            --include-dependencies \
+            --stream
+
+      - name: Verify generated SVGs
+        run: |
+          test -n "$(find packages/icons/svg -type f -name '*.svg' -print -quit)"
+          test -n "$(find packages/pictograms/svg -type f -name '*.svg' -print -quit)"
+
+      - name: Upload icons
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.CARBON_CDN_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.CARBON_CDN_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ secrets.CARBON_CDN_REGION }}
+          AWS_EC2_METADATA_DISABLED: true
+        run: |
+          aws s3 sync \
+            packages/icons/svg \
+            "s3://${COS_BUCKET}/carbon/icons" \
+            --endpoint-url "https://${COS_ENDPOINT_HOST}" \
+            --no-progress \
+            --cache-control 'public,max-age=3600' \
+            --content-type 'image/svg+xml'
+
+      - name: Upload pictograms
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.CARBON_CDN_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.CARBON_CDN_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ secrets.CARBON_CDN_REGION }}
+          AWS_EC2_METADATA_DISABLED: true
+        run: |
+          aws s3 sync \
+            packages/pictograms/svg \
+            "s3://${COS_BUCKET}/carbon/pictograms" \
+            --endpoint-url "https://${COS_ENDPOINT_HOST}" \
+            --no-progress \
+            --cache-control 'public,max-age=3600' \
+            --content-type 'image/svg+xml'
+
+      - name: Verify public URLs and CORS
+        run: |
+          icon_headers=$(curl --fail --silent --show-error --head \
+            -H 'Origin: https://example.com' \
+            "https://${COS_BUCKET}.${COS_ENDPOINT_HOST}/carbon/icons/16/apps.svg")
+          pictogram_headers=$(curl --fail --silent --show-error --head \
+            -H 'Origin: https://example.com' \
+            "https://${COS_BUCKET}.${COS_ENDPOINT_HOST}/carbon/pictograms/accessibility.svg")
+
+          grep -qi '^access-control-allow-origin: \*' <<< "${icon_headers}"
+          grep -qi '^access-control-allow-origin: \*' <<< "${pictogram_headers}"
