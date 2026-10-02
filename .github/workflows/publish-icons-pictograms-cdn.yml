@@ -61,6 +61,8 @@ jobs:
           test -n "$(find packages/icons/svg -type f -name '*.svg' -print -quit)"
           test -n "$(find packages/pictograms/svg -type f -name '*.svg' -print -quit)"
 
+      # Upload icons to the `carbon/icons` folder
+      # ie. https://carbon-common.s3.us-south.cloud-object-storage.appdomain.cloud/carbon/icons/16/apps.svg
       - name: Upload icons
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.CARBON_CDN_ACCESS_KEY_ID }}
@@ -76,6 +78,8 @@ jobs:
             --cache-control 'public,max-age=3600' \
             --content-type 'image/svg+xml'
 
+      # Upload pictograms to the `carbon/pictograms` folder
+      # ie. https://carbon-common.s3.us-south.cloud-object-storage.appdomain.cloud/carbon/pictograms/accessibility.svg
       - name: Upload pictograms
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.CARBON_CDN_ACCESS_KEY_ID }}
