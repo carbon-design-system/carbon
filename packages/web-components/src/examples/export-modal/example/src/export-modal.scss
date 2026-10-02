@@ -1,0 +1,61 @@
+/*
+* Copyright IBM Corp. 2025, 2025
+*
+* This source code is licensed under the Apache-2.0 license found in the
+* LICENSE file in the root directory of this source tree.
+*/
+
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/theme' as *;
+
+$prefix: 'c4p';
+$block-class: #{$prefix}--export-modal;
+
+.#{$block-class} {
+  &__heading {
+    // no overrides needed; inherits cds-modal-header defaults
+  }
+
+  &__body-container {
+    // no overrides needed; inherits cds-modal-body defaults
+  }
+
+  &__body {
+    @include type-style('body-compact-01');
+
+    margin-block-end: $spacing-05;
+    color: $text-primary;
+  }
+
+  &__input-container {
+    margin-block-end: $spacing-05;
+
+    cds-text-input {
+      width: 100%;
+    }
+  }
+
+  &__messaging {
+    display: flex;
+    align-items: center;
+    min-block-size: $spacing-09;
+    gap: $spacing-03;
+
+    p {
+      @include type-style('body-compact-01');
+
+      margin: 0;
+    }
+  }
+
+  &__checkmark-icon {
+    flex-shrink: 0;
+    fill: $support-success;
+  }
+
+  &__error-icon {
+    flex-shrink: 0;
+    fill: $support-error;
+  }
+}
