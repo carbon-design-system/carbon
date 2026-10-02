@@ -126,8 +126,9 @@
       overflow: hidden;
       min-block-size: 0;
       padding-block: 0;
-      transition: padding-block $duration-moderate-01
-        motion(standard, productive);
+      transition:
+        padding-block $duration-moderate-01 motion(standard, productive),
+        overflow 0s allow-discrete;
       visibility: hidden;
     }
 
@@ -147,7 +148,9 @@
     grid-template-rows: 1fr;
 
     > .#{$prefix}--child-row-content {
+      overflow: visible;
       padding-block: 1rem 1.5rem;
+      transition-delay: 0s, $duration-moderate-01;
       visibility: visible;
     }
   }

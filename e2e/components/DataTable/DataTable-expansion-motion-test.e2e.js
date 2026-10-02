@@ -87,3 +87,39 @@ test('respects reduced motion when expanding a row', async ({ page }) => {
     await inner.evaluate((element) => element.getBoundingClientRect().height)
   ).toBe(0);
 });
+
+for (const reducedMotion of ['no-preference', 'reduce']) {
+  test(`preserves positioned content with ${reducedMotion} motion`, async ({
+    page,
+  }) => {
+    await page.emulateMedia({ reducedMotion });
+    await visitStory(page, {
+      component: 'DataTable',
+      id: 'components-datatable-expansion--default',
+    });
+    const inner = page.locator('.cds--child-row-inner-container').first();
+    await inner.evaluate((element) => {
+      const content = element.querySelector('.cds--child-row-content');
+      content.style.position = 'relative';
+      const button = document.createElement('button');
+      button.textContent = 'Positioned action';
+      button.style.cssText =
+        'position: absolute; top: 100%; left: 0; z-index: 10; height: 40px';
+      content.append(button);
+    });
+    await page.locator('tbody .cds--table-expand__button').first().click();
+    const actionVisible = await inner.evaluate(async (element) => {
+      await Promise.all(
+        element
+          .getAnimations({ subtree: true })
+          .map((animation) => animation.finished)
+      );
+      const button = element.querySelector('button');
+      const bounds = button.getBoundingClientRect();
+      return button.contains(
+        document.elementFromPoint(bounds.x + 8, bounds.y + 8)
+      );
+    });
+    expect(actionVisible).toBe(true);
+  });
+}
