@@ -272,6 +272,21 @@
     pointer-events: all;
   }
 
+  .#{$prefix}--contained-list-item--clickable.#{$prefix}--contained-list-item--with-action {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+
+    .#{$prefix}--contained-list-item__content {
+      position: relative;
+      padding-inline-end: layout.density('padding-inline');
+    }
+
+    .#{$prefix}--contained-list-item__action {
+      position: static;
+      align-self: start;
+    }
+  }
+
   .#{$prefix}--contained-list-item--with-icon
     .#{$prefix}--contained-list-item__content {
     display: grid;
