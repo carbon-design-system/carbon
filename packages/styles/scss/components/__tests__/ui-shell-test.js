@@ -81,4 +81,38 @@ describe('scss/components/ui-shell', () => {
         .map((rule) => rule.selector)
     ).toEqual([]);
   });
+
+  test('header menu item text in the side nav is truncated with an ellipsis', async () => {
+    const { result } = await render(`
+      @use '../ui-shell/side-nav';
+    `);
+    const truncatedRules = [];
+
+    postcss.parse(result.css.toString()).walkRules((rule) => {
+      if (
+        rule.selectors.includes(
+          '.cds--side-nav a.cds--header__menu-item .cds--text-truncate--end'
+        )
+      ) {
+        truncatedRules.push(rule);
+      }
+    });
+
+    expect(truncatedRules.length).toBeGreaterThan(0);
+    expect(
+      truncatedRules.some((rule) => {
+        const declarations = {};
+
+        rule.walkDecls((decl) => {
+          declarations[decl.prop] = decl.value;
+        });
+
+        return (
+          declarations.overflow === 'hidden' &&
+          declarations['text-overflow'] === 'ellipsis' &&
+          declarations['white-space'] === 'nowrap'
+        );
+      })
+    ).toBe(true);
+  });
 });
