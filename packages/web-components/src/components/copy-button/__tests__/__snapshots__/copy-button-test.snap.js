@@ -5,152 +5,11 @@ snapshots['CopyButton should set tabIndex if one is passed via props'] =
   `<cds-copy
   align="bottom"
   button-class-name="cds--copy-btn"
-  exportparts="button"
-  feedback="Copied!"
-  feedback-timeout="2000"
-  kind="primary"
-  size="lg"
-  tab-index="0"
-  tooltip-alignment=""
-  tooltip-position="top"
-  type="button"
->
-  <slot slot="tooltip-content">
-  </slot>
-</cds-copy>
-`;
-/* end snapshot CopyButton should set tabIndex if one is passed via props */
-
-snapshots['CopyButton should add extra classes via passed button-class-name'] =
-  `<cds-copy
-  align="bottom"
-  button-class-name="cds--copy-btn extra-class"
-  exportparts="button"
-  feedback="Copied!"
-  feedback-timeout="2000"
-  kind="primary"
-  size="lg"
-  tab-index="0"
-  tooltip-alignment=""
-  tooltip-position="top"
-  type="button"
->
-  <slot slot="tooltip-content">
-  </slot>
-</cds-copy>
-`;
-/* end snapshot CopyButton should add extra classes via passed button-class-name */
-
-snapshots['Button props should disable button if disabled prop is passed'] =
-  `<cds-copy
-  align="bottom"
-  button-class-name="cds--copy-btn"
-  disabled=""
-  exportparts="button"
-  feedback="Copied!"
-  feedback-timeout="2000"
-  kind="primary"
-  size="lg"
-  tab-index="0"
-  tooltip-alignment=""
-  tooltip-position="top"
-  type="button"
->
-  <slot slot="tooltip-content">
-  </slot>
-</cds-copy>
-`;
-/* end snapshot Button props should disable button if disabled prop is passed */
-
-snapshots['Button props should call the click handler'] = `<cds-copy
-  align="bottom"
-  button-class-name="cds--copy-btn"
-  exportparts="button"
-  feedback="Copied!"
-  feedback-timeout="2000"
-  kind="primary"
-  size="lg"
-  tab-index="0"
-  tooltip-alignment=""
-  tooltip-position="top"
-  type="button"
->
-  <slot slot="tooltip-content">
-  </slot>
-</cds-copy>
-`;
-/* end snapshot Button props should call the click handler */
-
-snapshots[
-  'Feedback should make the feedback visible for a limited amount of time'
-] = `<cds-copy
-  align="bottom"
-  button-class-name="cds--copy-btn"
-  exportparts="button"
-  feedback="Copied!"
-  feedback-timeout="500"
-  kind="primary"
-  size="lg"
-  tab-index="0"
-  tooltip-alignment=""
-  tooltip-position="top"
-  type="button"
->
-  <slot slot="tooltip-content">
-  </slot>
-</cds-copy>
-`;
-/* end snapshot Feedback should make the feedback visible for a limited amount of time */
-
-snapshots['Feedback should be able to specify the feedback message'] =
-  `<cds-copy
-  align="bottom"
-  button-class-name="cds--copy-btn"
-  exportparts="button"
-  feedback="Custom feedback message"
-  feedback-timeout="200"
-  kind="primary"
-  size="lg"
-  tab-index="0"
-  tooltip-alignment=""
-  tooltip-position="top"
-  type="button"
->
-  <slot slot="tooltip-content">
-  </slot>
-</cds-copy>
-`;
-/* end snapshot Feedback should be able to specify the feedback message */
-
-snapshots[
-  'Feedback should allow users to override default feedback timeout via prop'
-] = `<cds-copy
-  align="bottom"
-  button-class-name="cds--copy-btn"
-  exportparts="button"
-  feedback="Copied!"
-  feedback-timeout="100"
-  kind="primary"
-  size="lg"
-  tab-index="0"
-  tooltip-alignment=""
-  tooltip-position="top"
-  type="button"
->
-  <slot slot="tooltip-content">
-  </slot>
-</cds-copy>
-`;
-/* end snapshot Feedback should allow users to override default feedback timeout via prop */
-snapshots['CopyButton should set tabIndex if one is passed via props'] =
-  `<cds-copy
-  align="bottom"
-  button-class-name="cds--copy-btn"
   danger-description=""
   exportparts="button"
   feedback="Copied!"
   feedback-timeout="2000"
-  kind="primary"
+  kind="ghost"
   size="lg"
   tab-index="0"
   tooltip-alignment=""
@@ -171,7 +30,7 @@ snapshots['CopyButton should add extra classes via passed button-class-name'] =
   exportparts="button"
   feedback="Copied!"
   feedback-timeout="2000"
-  kind="primary"
+  kind="ghost"
   size="lg"
   tab-index="0"
   tooltip-alignment=""
@@ -193,7 +52,7 @@ snapshots['Button props should disable button if disabled prop is passed'] =
   exportparts="button"
   feedback="Copied!"
   feedback-timeout="2000"
-  kind="primary"
+  kind="ghost"
   size="lg"
   tab-index="0"
   tooltip-alignment=""
@@ -206,7 +65,8 @@ snapshots['Button props should disable button if disabled prop is passed'] =
 `;
 /* end snapshot Button props should disable button if disabled prop is passed */
 
-snapshots['Button props should call the click handler'] = `<cds-copy
+snapshots['Button props should set kind on the underlying cds-copy element'] =
+  `<cds-copy
   align="bottom"
   button-class-name="cds--copy-btn"
   danger-description=""
@@ -214,6 +74,47 @@ snapshots['Button props should call the click handler'] = `<cds-copy
   feedback="Copied!"
   feedback-timeout="2000"
   kind="primary"
+  size="lg"
+  tab-index="0"
+  tooltip-alignment=""
+  tooltip-position="top"
+  type="button"
+>
+  <slot slot="tooltip-content">
+  </slot>
+</cds-copy>
+`;
+/* end snapshot Button props should set kind on the underlying cds-copy element */
+
+snapshots['Button props should set size on the underlying cds-copy element'] =
+  `<cds-copy
+  align="bottom"
+  button-class-name="cds--copy-btn"
+  danger-description=""
+  exportparts="button"
+  feedback="Copied!"
+  feedback-timeout="2000"
+  kind="ghost"
+  size="sm"
+  tab-index="0"
+  tooltip-alignment=""
+  tooltip-position="top"
+  type="button"
+>
+  <slot slot="tooltip-content">
+  </slot>
+</cds-copy>
+`;
+/* end snapshot Button props should set size on the underlying cds-copy element */
+
+snapshots['Button props should call the click handler'] = `<cds-copy
+  align="bottom"
+  button-class-name="cds--copy-btn"
+  danger-description=""
+  exportparts="button"
+  feedback="Copied!"
+  feedback-timeout="2000"
+  kind="ghost"
   size="lg"
   tab-index="0"
   tooltip-alignment=""
@@ -235,7 +136,7 @@ snapshots[
   exportparts="button"
   feedback="Copied!"
   feedback-timeout="500"
-  kind="primary"
+  kind="ghost"
   size="lg"
   tab-index="0"
   tooltip-alignment=""
@@ -256,7 +157,7 @@ snapshots['Feedback should be able to specify the feedback message'] =
   exportparts="button"
   feedback="Custom feedback message"
   feedback-timeout="200"
-  kind="primary"
+  kind="ghost"
   size="lg"
   tab-index="0"
   tooltip-alignment=""
@@ -278,7 +179,7 @@ snapshots[
   exportparts="button"
   feedback="Copied!"
   feedback-timeout="100"
-  kind="primary"
+  kind="ghost"
   size="lg"
   tab-index="0"
   tooltip-alignment=""

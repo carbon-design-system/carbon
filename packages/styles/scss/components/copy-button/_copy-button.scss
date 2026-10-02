@@ -27,18 +27,7 @@
     justify-content: center;
     padding: 0;
     border: none;
-    background-color: $layer;
     cursor: pointer;
-
-    @media (any-hover: hover) {
-      &:hover {
-        background-color: $layer-hover;
-      }
-    }
-
-    &:active {
-      background-color: $layer-active;
-    }
 
     &::before {
       @include tooltip--caret;
@@ -85,7 +74,7 @@
     }
   }
 
-  .#{$prefix}--copy-btn svg {
+  .#{$prefix}--copy-btn .#{$prefix}--btn__icon {
     fill: $icon-primary;
   }
 
