@@ -7,7 +7,6 @@
 
 import { prefix } from '../../globals/settings';
 import { html } from 'lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import CDSTextareaSkeleton from '../textarea/textarea-skeleton';
 import styles from './fluid-textarea.scss?lit';
 
@@ -16,8 +15,9 @@ import styles from './fluid-textarea.scss?lit';
  *
  * @element cds-fluid-textarea-skeleton
  */
-@customElement(`${prefix}-fluid-textarea-skeleton`)
 class CDSFluidTextareaSkeleton extends CDSTextareaSkeleton {
+  static is = `${prefix}-fluid-textarea-skeleton`;
+
   render() {
     return html`
       <div class="${prefix}--text-area--fluid__skeleton ${prefix}--form-item">

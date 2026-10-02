@@ -12,15 +12,15 @@ import { BUTTON_KIND } from './defs';
 import styles from './button.scss?lit';
 import { prefix } from '../../globals/settings';
 import CDSButtonSetBase from './button-set-base';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Button set.
  *
  * @element cds-button-set
  */
-@customElement(`${prefix}-button-set`)
 class CDSButtonSet extends CDSButtonSetBase {
+  static is = `${prefix}-button-set`;
+
   /**
    * The slot element
    */

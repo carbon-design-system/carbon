@@ -5,4 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './stack';
+import { defineCustomElement } from '../../globals/register';
+import CDSStack from './stack';
+
+export { CDSStack };
+
+defineCustomElement(CDSStack);

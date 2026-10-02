@@ -10,7 +10,6 @@ import { property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { prefix } from '../../globals/settings';
 import HostListenerMixin from '../../globals/mixins/host-listener';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import styles from './user-avatar.scss?lit';
 import '../tooltip/index';
 import User from '@carbon/icons/es/user/16';
@@ -24,8 +23,9 @@ const blockClass = `${prefix}--user-avatar`;
  * @element cds-user-avatar
  */
 
-@customElement(`${prefix}-user-avatar`)
 class CDSUserAvatar extends HostListenerMixin(LitElement) {
+  static is = `${prefix}-user-avatar`;
+
   /**
    * Specify the text of the tooltip.
    * Can be string

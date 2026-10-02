@@ -13,12 +13,11 @@ import Search16 from '@carbon/icons/es/search/16.js';
 import Close16 from '@carbon/icons/es/close/16.js';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
 import FocusMixin from '../../globals/mixins/focus';
-import FormMixin from '../../globals/mixins/form';
+import FormAssociatedMixin from '../../globals/mixins/form-associated';
 import { SEARCH_SIZE } from './defs';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import styles from './search.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { iconLoader } from '../../globals/internal/icon-loader';
 
 export { SEARCH_SIZE };
@@ -34,8 +33,11 @@ export { SEARCH_SIZE };
  * @csspart close-icon The close icon.
  * @fires cds-search-input - The custom event fired after the search content is changed upon a user gesture.
  */
-@customElement(`${prefix}-search`)
-class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
+class CDSSearch extends FormAssociatedMixin(
+  HostListenerMixin(FocusMixin(LitElement))
+) {
+  static is = `${prefix}-search`;
+
   /**
    * The input element
    */

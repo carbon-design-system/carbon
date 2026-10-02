@@ -9,7 +9,6 @@ import { LitElement, html } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import styles from './menu-item.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { consume } from '@lit/context';
 import { MenuContext } from './menu-context';
 import Checkmark16 from '@carbon/icons/es/checkmark/16.js';
@@ -29,8 +28,9 @@ export const MENU_CLOSE_ROOT_EVENT = `${prefix}-menu-close-root-request`;
  *
  * @element cds-menu-item
  */
-@customElement(`${prefix}-menu-item`)
 class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
+  static is = `${prefix}-menu-item`;
+
   @consume({ context: MenuContext })
   context;
 

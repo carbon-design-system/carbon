@@ -10,7 +10,6 @@ import { property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { prefix } from '../../globals/settings';
 import styles from './contained-list.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 export type Variants = 'on-page' | 'disclosed';
 
@@ -22,8 +21,9 @@ export type Variants = 'on-page' | 'disclosed';
  * @slot action - The action slot for interactive elements in header
  * @slot label - The label text
  */
-@customElement(`${prefix}-contained-list`)
 class CDSContainedList extends LitElement {
+  static is = `${prefix}-contained-list`;
+
   /**
    * Specify whether the dividing lines in between list items should be inset.
    */

@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import './index';
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { NOTIFICATION_KIND } from './inline-notification';
@@ -13,7 +14,7 @@ import './actionable-notification-button';
 import storyDocs from './notification.mdx';
 import { prefix } from '../../globals/settings';
 import kinds from './stories/helper';
-import '../button/button';
+import '../button/index';
 
 const noop = () => {};
 
@@ -94,73 +95,63 @@ const argTypes = {
   },
 };
 
-export const Default = {
-  render: () => {
-    return html`
-      <cds-actionable-notification
-        kind="${NOTIFICATION_KIND.ERROR}"
-        title="Notification title"
-        subtitle="Subtitle text goes here">
-        <cds-actionable-notification-button slot="action"
-          >Action</cds-actionable-notification-button
-        >
-      </cds-actionable-notification>
-    `;
-  },
+const renderNotification = (args) => {
+  const {
+    actionButtonLabel,
+    caption,
+    closeOnEscape,
+    hasFocus,
+    kind,
+    title,
+    subtitle,
+    hideCloseButton,
+    lowContrast,
+    role,
+    inline,
+    statusIconDescription,
+    disableClose,
+    onBeforeClose = noop,
+    onClose = noop,
+  } = args ?? {};
+  const handleBeforeClose = (event: CustomEvent) => {
+    onBeforeClose(event);
+    if (disableClose) {
+      event.preventDefault();
+    }
+  };
+  return html`
+    <cds-actionable-notification
+      ?close-on-escape="${closeOnEscape}"
+      ?has-focus="${hasFocus}"
+      caption="${ifDefined(caption)}"
+      kind="${ifDefined(kind)}"
+      title="${ifDefined(title)}"
+      subtitle="${ifDefined(subtitle)}"
+      role="${ifDefined(role)}"
+      ?inline="${inline}"
+      ?hide-close-button="${hideCloseButton}"
+      ?low-contrast="${lowContrast}"
+      status-icon-description="${ifDefined(statusIconDescription)}"
+      @cds-notification-beingclosed="${handleBeforeClose}"
+      @cds-notification-closed="${onClose}">
+      <cds-actionable-notification-button slot="action"
+        >${actionButtonLabel}</cds-actionable-notification-button
+      >
+    </cds-actionable-notification>
+  `;
 };
 
-export const Playground = {
-  args,
-  argTypes,
-  render: (args) => {
-    const {
-      actionButtonLabel,
-      caption,
-      closeOnEscape,
-      hasFocus,
-      kind,
-      title,
-      subtitle,
-      hideCloseButton,
-      lowContrast,
-      role,
-      inline,
-      statusIconDescription,
-      disableClose,
-      onBeforeClose = noop,
-      onClose = noop,
-    } = args ?? {};
-    const handleBeforeClose = (event: CustomEvent) => {
-      onBeforeClose(event);
-      if (disableClose) {
-        event.preventDefault();
-      }
-    };
-    return html`
-      <cds-actionable-notification
-        ?close-on-escape="${closeOnEscape}"
-        ?has-focus="${hasFocus}"
-        caption="${ifDefined(caption)}"
-        kind="${ifDefined(kind)}"
-        title="${ifDefined(title)}"
-        subtitle="${ifDefined(subtitle)}"
-        role="${ifDefined(role)}"
-        ?inline="${inline}"
-        ?hide-close-button="${hideCloseButton}"
-        ?low-contrast="${lowContrast}"
-        status-icon-description="${ifDefined(statusIconDescription)}"
-        @cds-notification-beingclosed="${handleBeforeClose}"
-        @cds-notification-closed="${onClose}">
-        <cds-actionable-notification-button slot="action"
-          >${actionButtonLabel}</cds-actionable-notification-button
-        >
-      </cds-actionable-notification>
-    `;
+export const Default = {
+  args: {
+    kind: NOTIFICATION_KIND.ERROR,
   },
+  render: renderNotification,
 };
 
 const meta = {
   title: 'Components/Notifications/Actionable',
+  args,
+  argTypes,
   parameters: {
     docs: {
       page: storyDocs,

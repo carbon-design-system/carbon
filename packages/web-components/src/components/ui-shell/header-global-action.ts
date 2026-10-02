@@ -7,7 +7,6 @@
 
 import { LitElement } from 'lit';
 import { property, query } from 'lit/decorators.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import {
   BUTTON_TOOLTIP_POSITION,
   BUTTON_KIND,
@@ -23,8 +22,9 @@ import { prefix } from '../../globals/settings';
  *
  * @element cds-header-global-action
  */
-@customElement(`${prefix}-header-global-action`)
 class CDSHeaderGlobalAction extends CDSButton {
+  static is = `${prefix}-header-global-action`;
+
   @query('button')
   protected _buttonNode!: HTMLButtonElement;
 

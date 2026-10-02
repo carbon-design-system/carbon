@@ -17,7 +17,6 @@ import { TAG_SIZE, TAG_TYPE } from './defs';
 import CDSTag from '../tag/tag';
 import '../tooltip/index';
 import styles from './tag.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 export { TAG_SIZE, TAG_TYPE };
 
@@ -29,8 +28,9 @@ export { TAG_SIZE, TAG_TYPE };
  * @fires cds-dismissible-tag-beingclosed - The custom event fired as the element is being closed
  * @fires cds-dismissible-tag-closed - The custom event fired after the element has been closed
  */
-@customElement(`${prefix}-dismissible-tag`)
 class CDSDismissibleTag extends HostListenerMixin(FocusMixin(CDSTag)) {
+  static is = `${prefix}-dismissible-tag`;
+
   @query('button')
   protected _buttonNode!: HTMLButtonElement;
 

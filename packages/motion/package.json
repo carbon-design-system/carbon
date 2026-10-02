@@ -1,7 +1,7 @@
 {
   "name": "@carbon/motion",
   "description": "Motion helpers for digital and software products using the Carbon Design System",
-  "version": "11.52.0",
+  "version": "12.0.0-alpha.2",
   "license": "Apache-2.0",
   "sideEffects": [
     "index.scss",
@@ -17,6 +17,15 @@
     "directory": "packages/motion"
   },
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "files": [
+    "es",
+    "js/generated",
+    "lib",
+    "scss",
+    "umd",
+    "index.scss",
+    "telemetry.yml"
+  ],
   "keywords": [
     "ibm",
     "elements",
@@ -38,7 +47,7 @@
     "postinstall": "ibmtelemetry --config=telemetry.yml"
   },
   "devDependencies": {
-    "@carbon/cli": "^11.50.0",
+    "@carbon/cli": "^12.0.0-alpha.1",
     "rimraf": "^6.0.1",
     "style-dictionary": "^5.5.0",
     "typescript": "^6.0.3",

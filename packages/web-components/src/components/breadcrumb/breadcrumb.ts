@@ -11,14 +11,14 @@ import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import { BREADCRUMB_SIZE } from './defs';
 import styles from './breadcrumb.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 /**
  * Breadcrumb.
  *
  * @element cds-breadcrumb
  */
-@customElement(`${prefix}-breadcrumb`)
 class CDSBreadcrumb extends LitElement {
+  static is = `${prefix}-breadcrumb`;
+
   /**
    * Optional prop to omit the trailing slash for the breadcrumbs
    */

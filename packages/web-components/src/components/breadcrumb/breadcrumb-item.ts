@@ -8,15 +8,15 @@
 import { LitElement, html } from 'lit';
 import { prefix } from '../../globals/settings';
 import styles from './breadcrumb.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import type CDSOverflowMenuBody from '../overflow-menu/overflow-menu-body';
 /**
  * Breadcrumb item.
  *
  * @element cds-breadcrumb-item
  */
-@customElement(`${prefix}-breadcrumb-item`)
 class CDSBreadcrumbItem extends LitElement {
+  static is = `${prefix}-breadcrumb-item`;
+
   /**
    * Handles `slotchange` event.
    */

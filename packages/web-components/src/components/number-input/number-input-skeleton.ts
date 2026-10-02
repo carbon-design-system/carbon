@@ -9,14 +9,14 @@ import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import styles from './number-input.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { INPUT_SIZE } from '../text-input/text-input';
 
 /**
  * Skeleton of number input.
  */
-@customElement(`${prefix}-number-input-skeleton`)
 class CDSNumberInputSkeleton extends LitElement {
+  static is = `${prefix}-number-input-skeleton`;
+
   /**
    * `true` if the label should be hidden. Corresponds to the attribute with the same name.
    */

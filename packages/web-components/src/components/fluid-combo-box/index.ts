@@ -5,5 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './fluid-combo-box';
-import './fluid-combo-box-skeleton';
+import { defineCustomElement } from '../../globals/register';
+import CDSFluidComboBox from './fluid-combo-box';
+import CDSFluidComboBoxSkeleton from './fluid-combo-box-skeleton';
+
+export { CDSFluidComboBox, CDSFluidComboBoxSkeleton };
+
+defineCustomElement(CDSFluidComboBox);
+defineCustomElement(CDSFluidComboBoxSkeleton);

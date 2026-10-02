@@ -8,7 +8,6 @@
 import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import styles from './header.scss?lit';
@@ -18,8 +17,9 @@ import styles from './header.scss?lit';
  *
  * @element cds-switcher-item
  */
-@customElement(`${prefix}-switcher-item`)
 class CDSSwitcherItem extends FocusMixin(LitElement) {
+  static is = `${prefix}-switcher-item`;
+
   /**
    * Required props for accessibility label
    */

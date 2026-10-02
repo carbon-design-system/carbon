@@ -5,5 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './copy';
-import '../tooltip/tooltip-content';
+import { defineCustomElement } from '../../globals/register';
+import '../tooltip/index';
+import CDSCopy from './copy';
+
+export { CDSCopy };
+
+defineCustomElement(CDSCopy);

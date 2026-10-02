@@ -58,7 +58,7 @@ import {
   isComponentElement,
   isItemDisabled,
 } from '../../internal';
-import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
+import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
 
 const {
   InputBlur,
@@ -1048,7 +1048,7 @@ const ComboBox = forwardRef(
         }
       }
     }, [inputValue, typeaheadText]);
-    useNoInteractiveChildren(
+    useNoInteractiveChildrenForLabel(
       labelRef,
       'The ComboBox component `titleText` prop must have no interactive content'
     );
@@ -1085,7 +1085,7 @@ const ComboBox = forwardRef(
               type="text"
               tabIndex={0}
               aria-haspopup="listbox"
-              title={textInput?.current?.value}
+              title={textInput?.current?.value || undefined}
               {...getInputProps({
                 'aria-label': titleText
                   ? undefined

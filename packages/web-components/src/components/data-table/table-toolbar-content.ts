@@ -9,15 +9,15 @@ import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import styles from './data-table.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Table toolbar content.
  *
  * @element cds-table-toolbar-content
  */
-@customElement(`${prefix}-table-toolbar-content`)
 class CDSTableToolbarContent extends LitElement {
+  static is = `${prefix}-table-toolbar-content`;
+
   /**
    * `true` if this batch actions bar is active.
    */

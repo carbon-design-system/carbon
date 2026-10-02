@@ -23,7 +23,6 @@ import FloatingUIController from '../../globals/controllers/floating-controller'
 import iconButtonStyles from '../icon-button/icon-button.scss?lit';
 import styles from './overflow-menu.scss?lit';
 import CDSIconButton from '../icon-button/icon-button';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 export { OVERFLOW_MENU_SIZE };
 
@@ -61,11 +60,12 @@ const warnInDev = (message: string) => {
  * @element cds-overflow-menu
  * @slot icon - The icon for the trigger button.
  */
-@customElement(`${prefix}-overflow-menu`)
 class CDSOverflowMenu
   extends HostListenerMixin(FocusMixin(CDSIconButton))
   implements CDSFloatingMenuTrigger
 {
+  static is = `${prefix}-overflow-menu`;
+
   private _menuController = new FloatingUIController(this);
 
   /**
@@ -309,6 +309,7 @@ class CDSOverflowMenu
     // trigger after delegated programmatic focus.
     triggerButton.dispatchEvent(new FocusEvent('focus'));
     this.toggleAttribute('data-programmatic-focus', true);
+    this._tooltip?.toggleAttribute('data-programmatic-focus', true);
     triggerButton.addEventListener('blur', this._handleTriggerBlur, {
       once: true,
     });
@@ -340,6 +341,7 @@ class CDSOverflowMenu
     const hadProgrammaticFocus = this.hasAttribute('data-programmatic-focus');
 
     this.toggleAttribute('data-programmatic-focus', false);
+    this._tooltip?.toggleAttribute('data-programmatic-focus', false);
     triggerButton?.removeEventListener('blur', this._handleTriggerBlur);
     this.ownerDocument.removeEventListener(
       'pointerdown',

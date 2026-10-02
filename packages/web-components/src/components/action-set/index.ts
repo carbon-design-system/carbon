@@ -5,6 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './action-set';
+import { defineCustomElement } from '../../globals/register';
+import CDSActionSet from './action-set';
 
+export { CDSActionSet };
 export type { ActionButton, ButtonSize, ButtonKind } from './action-set';
+
+defineCustomElement(CDSActionSet);

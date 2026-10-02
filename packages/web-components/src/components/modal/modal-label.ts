@@ -9,15 +9,15 @@ import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import styles from './modal.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Modal label.
  *
  * @element cds-modal-label
  */
-@customElement(`${prefix}-modal-label`)
 class CDSModalLabel extends LitElement {
+  static is = `${prefix}-modal-label`;
+
   /**
    * The unique identifier for this label element
    */

@@ -13,7 +13,6 @@ import { prefix } from '../../globals/settings';
 import CDSLink from '../link/link';
 import ArrowRight16 from '@carbon/icons/es/arrow--right/16.js';
 import { iconLoader } from '../../globals/internal/icon-loader';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import {
   cardContext,
   cardDefaultContext,
@@ -32,8 +31,9 @@ export { CARD_DENSITY, CARD_MEDIA_POSITION };
  * @slot decorator - Slot for cds-ai-label. Sets `has-ai-label` attribute when populated.
  * @slot footer-icon - Override the default ArrowRight icon in the clickable footer.
  */
-@customElement(`${prefix}-card`)
 class CDSCard extends CDSLink {
+  static is = `${prefix}-card`;
+
   // ─── Context ──────────────────────────────────────────────────────────────
 
   @provide({ context: cardContext })

@@ -8,15 +8,15 @@
 import { LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * An option in select box.
  *
  * @element cds-select-item
  */
-@customElement(`${prefix}-select-item`)
 class CDSSelectItem extends LitElement {
+  static is = `${prefix}-select-item`;
+
   /**
    * `true` to disable this option.
    */

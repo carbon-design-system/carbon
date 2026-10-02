@@ -8,7 +8,6 @@
 import { LitElement, html } from 'lit';
 import { prefix } from '../../globals/settings';
 import styles from './contained-list.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Contained list description text.
@@ -16,8 +15,9 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  * @element cds-contained-list-description
  * @slot - The description text content
  */
-@customElement(`${prefix}-contained-list-description`)
 class CDSContainedListDescription extends LitElement {
+  static is = `${prefix}-contained-list-description`;
+
   render() {
     return html`<slot></slot>`;
   }

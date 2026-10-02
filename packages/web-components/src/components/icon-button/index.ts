@@ -5,4 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './icon-button';
+import { defineCustomElement } from '../../globals/register';
+import CDSIconButton from './icon-button';
+
+export { CDSIconButton };
+
+defineCustomElement(CDSIconButton);

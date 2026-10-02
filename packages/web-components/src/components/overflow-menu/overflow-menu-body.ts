@@ -14,7 +14,6 @@ import { NAVIGATION_DIRECTION, OVERFLOW_MENU_SIZE } from './defs';
 
 import CDSOverflowMenuItem from './overflow-menu-item';
 import HostListener from '../../globals/decorators/host-listener';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { html } from 'lit';
 import { indexOf } from '../../globals/internal/collection-helpers';
 import { prefix } from '../../globals/settings';
@@ -36,13 +35,16 @@ const capIndex = (index: number, length: number) => {
   return index;
 };
 
+const ignoredMenuItemKeys = new Set(['Home', 'End', 'ArrowLeft', 'ArrowRight']);
+
 /**
  * Overflow menu body.
  *
  * @element cds-overflow-menu-body
  */
-@customElement(`${prefix}-overflow-menu-body`)
 class CDSOverflowMenuBody extends CDSFloatingMenu {
+  static is = `${prefix}-overflow-menu-body`;
+
   /**
    * The menu direction.
    */
@@ -177,9 +179,21 @@ class CDSOverflowMenuBody extends CDSFloatingMenu {
       const items = this.querySelectorAll(
         CDSOverflowMenuBody.selectorItemEnabled
       );
-      const isInsideMenu = Array.from(items).some((item) =>
-        item.contains(document.activeElement)
+      const activeElement =
+        document.activeElement?.shadowRoot?.activeElement ??
+        document.activeElement;
+      const eventPath = event.composedPath();
+      const isInsideMenu = Array.from(items).some(
+        (item) =>
+          eventPath.includes(item) ||
+          item === document.activeElement ||
+          item.contains(activeElement)
       );
+
+      if (isInsideMenu && ignoredMenuItemKeys.has(key)) {
+        event.preventDefault();
+        return;
+      }
 
       if (isInsideMenu) {
         event.preventDefault();

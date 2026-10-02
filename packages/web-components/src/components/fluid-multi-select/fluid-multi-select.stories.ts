@@ -11,12 +11,12 @@ import './index';
 import View16 from '@carbon/icons/es/view/16.js';
 import FolderOpen16 from '@carbon/icons/es/folder--open/16.js';
 import Folders16 from '@carbon/icons/es/folders/16.js';
-import '../form/form-item';
+import '../form/index';
 import '../ai-label';
 import '../icon-button';
 import { iconLoader } from '../../globals/internal/icon-loader';
-import '../select/select-item';
-import '../toggle-tip/toggletip';
+import '../select/index';
+import '../toggle-tip/index';
 import {
   DROPDOWN_DIRECTION,
   SELECTION_FEEDBACK_OPTION,

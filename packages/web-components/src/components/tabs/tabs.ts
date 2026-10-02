@@ -16,6 +16,7 @@ import { forEach } from '../../globals/internal/collection-helpers';
 import ChevronLeft16 from '@carbon/icons/es/chevron--left/16.js';
 import ChevronRight16 from '@carbon/icons/es/chevron--right/16.js';
 import CDSContentSwitcher, {
+  type ContentSwitcherSelectionInteractionType,
   NAVIGATION_DIRECTION,
 } from '../content-switcher/content-switcher';
 import {
@@ -27,7 +28,6 @@ import {
 } from './defs';
 import CDSTab from './tab';
 import styles from './tabs.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 export {
   NAVIGATION_DIRECTION,
@@ -47,8 +47,9 @@ export {
  *   Cancellation of this event stops changing the user-initiated selection.
  * @fires cds-tabs-selected - The custom event fired after a a tab is selected upon a user gesture.
  */
-@customElement(`${prefix}-tabs`)
 export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
+  static is = `${prefix}-tabs`;
+
   /**
    * The latest status of this dropdown, for screen reader to accounce.
    */
@@ -407,7 +408,7 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
 
   protected _selectionDidChange(
     itemToSelect: CDSTab,
-    interactionType?: 'mouse' | 'keyboard' | undefined
+    interactionType?: ContentSwitcherSelectionInteractionType
   ) {
     super._selectionDidChange(itemToSelect, interactionType);
     this._assistiveStatusText = this.selectedItemAssistiveText;
@@ -775,20 +776,22 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
   protected _tabInitialLoad() {
     const { selectorTablist, selectorItemEnabled } = this
       .constructor as typeof CDSTabs;
-    const { selectionMode, selectedIndex } = this;
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
     const tablist = this.shadowRoot!.querySelector(selectorTablist)!;
     this.tablist = tablist;
-    const firstItem =
-      this.querySelectorAll<CDSTab>(selectorItemEnabled)[selectedIndex];
-    if (firstItem) {
-      if (selectionMode === 'manual') {
-        firstItem.highlighted = true;
+    if (this.selectionMode === 'manual') {
+      const items = this.querySelectorAll<CDSTab>(selectorItemEnabled);
+      // Highlight the consumer-selected tab if present, else the first enabled
+      // tab, so it becomes the manual navigation target. Selection itself is
+      // owned by the consumer-aware base init; do not force it here.
+      const highlighted =
+        Array.from(items).find((tab) => tab.selected) ?? items[0] ?? null;
+      if (highlighted) {
+        highlighted.highlighted = true;
       }
-      firstItem.selected = true;
-      this.value = firstItem.value;
     }
   }
+
   /**
    * Symbols of keys that triggers opening/closing menu and selecting/deselecting menu item.
    */

@@ -5,4 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './coachmark-beacon';
+import { defineCustomElement } from '../../../globals/register';
+import CDSCoachmarkBeacon from './coachmark-beacon';
+
+export { CDSCoachmarkBeacon };
+
+defineCustomElement(CDSCoachmarkBeacon);

@@ -5,8 +5,26 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './file-uploader';
-import './file-uploader-item';
-import './file-uploader-drop-container';
-import './file-uploader-button';
-import './file-uploader-skeleton';
+import { defineCustomElement } from '../../globals/register';
+import '../button/index';
+import '../loading/index';
+import '../skeleton-text/index';
+import CDSFileUploader from './file-uploader';
+import CDSFileUploaderItem from './file-uploader-item';
+import CDSFileUploaderDropContainer from './file-uploader-drop-container';
+import CDSFileUploaderButton from './file-uploader-button';
+import CDSFileUploaderSkeleton from './file-uploader-skeleton';
+
+export {
+  CDSFileUploader,
+  CDSFileUploaderItem,
+  CDSFileUploaderDropContainer,
+  CDSFileUploaderButton,
+  CDSFileUploaderSkeleton,
+};
+
+defineCustomElement(CDSFileUploader);
+defineCustomElement(CDSFileUploaderItem);
+defineCustomElement(CDSFileUploaderDropContainer);
+defineCustomElement(CDSFileUploaderButton);
+defineCustomElement(CDSFileUploaderSkeleton);

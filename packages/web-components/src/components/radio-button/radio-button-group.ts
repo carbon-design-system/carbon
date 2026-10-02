@@ -10,7 +10,7 @@ import { property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { prefix } from '../../globals/settings';
-import FormMixin from '../../globals/mixins/form';
+import FormAssociatedMixin from '../../globals/mixins/form-associated';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import HostListener from '../../globals/decorators/host-listener';
 import { find, forEach } from '../../globals/internal/collection-helpers';
@@ -19,7 +19,6 @@ import CDSRadioButton from './radio-button';
 import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
 import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
 import styles from './radio-button.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { iconLoader } from '../../globals/internal/icon-loader';
 
 export { RADIO_BUTTON_ORIENTATION };
@@ -32,8 +31,11 @@ export { RADIO_BUTTON_ORIENTATION };
  * @fires cds-radio-button-changed
  *   The name of the custom event fired after a radio button changes its checked state.
  */
-@customElement(`${prefix}-radio-button-group`)
-class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
+class CDSRadioButtonGroup extends FormAssociatedMixin(
+  HostListenerMixin(LitElement)
+) {
+  static is = `${prefix}-radio-button-group`;
+
   /**
    * Handles user-initiated change in selected radio button.
    */

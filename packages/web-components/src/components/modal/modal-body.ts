@@ -8,15 +8,15 @@
 import { LitElement, html } from 'lit';
 import { prefix } from '../../globals/settings';
 import styles from './modal.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Modal body.
  *
  * @element cds-modal-body
  */
-@customElement(`${prefix}-modal-body`)
 class CDSModalBody extends LitElement {
+  static is = `${prefix}-modal-body`;
+
   private userDefinedTabindex: string | null = null;
   private _resizeObserver?: ResizeObserver;
 

@@ -5,4 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './progress-bar';
+import { defineCustomElement } from '../../globals/register';
+import CDSProgressBar from './progress-bar';
+
+export { CDSProgressBar };
+
+defineCustomElement(CDSProgressBar);

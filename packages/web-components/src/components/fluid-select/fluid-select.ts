@@ -7,7 +7,6 @@
 
 import { prefix } from '../../globals/settings';
 import { html } from 'lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import CDSSelect from '../select/select';
 import styles from './fluid-select.scss?lit';
 import { classMap } from 'lit/directives/class-map.js';
@@ -18,8 +17,9 @@ import { state } from 'lit/decorators.js';
  *
  * @element cds-fluid-select
  */
-@customElement(`${prefix}-fluid-select`)
 class CDSFluidSelect extends CDSSelect {
+  static is = `${prefix}-fluid-select`;
+
   @state()
   private _hasFocus = false;
 

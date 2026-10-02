@@ -11,7 +11,6 @@ import { consume } from '@lit/context';
 import { classMap } from 'lit/directives/class-map.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { prefix } from '../../globals/settings';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import {
   cardContext,
   cardDefaultContext,
@@ -38,8 +37,9 @@ type AspectRatio =
  * @element cds-card-media
  * @slot - Default slot for an image, video, or other media content.
  */
-@customElement(`${prefix}-card-media`)
 class CDSCardMedia extends LitElement {
+  static is = `${prefix}-card-media`;
+
   @consume({ context: cardContext, subscribe: true })
   @state()
   private _cardContext: CardContextValue = cardDefaultContext;

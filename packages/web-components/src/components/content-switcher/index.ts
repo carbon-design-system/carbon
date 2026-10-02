@@ -5,7 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import '../tooltip/tooltip';
-import '../tooltip/tooltip-content';
-import './content-switcher';
-import './content-switcher-item';
+import { defineCustomElement } from '../../globals/register';
+import '../tooltip/index';
+import CDSContentSwitcher from './content-switcher';
+import CDSContentSwitcherItem from './content-switcher-item';
+
+export { CDSContentSwitcher, CDSContentSwitcherItem };
+
+defineCustomElement(CDSContentSwitcher);
+defineCustomElement(CDSContentSwitcherItem);

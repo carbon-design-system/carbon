@@ -9,6 +9,7 @@ import { LitElement, html } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { prefix } from '../../../../globals/settings';
 import FormMixin from '../../../../globals/mixins/form';
+import FormAssociatedMixin from '../../../../globals/mixins/form-associated';
 import HostListenerMixin from '../../../../globals/mixins/host-listener';
 import HostListener from '../../../../globals/decorators/host-listener';
 import CDSDatePickerInput from './date-picker-input';
@@ -26,7 +27,6 @@ import {
   ClickOutsideHandler,
 } from '@carbon/utilities/date-picker';
 import styles from './date-picker.scss?lit';
-import { carbonElement as customElement } from '../../../../globals/decorators/carbon-element';
 
 /**
  * Date picker modes.
@@ -55,8 +55,11 @@ enum DATE_PICKER_MODE {
  * @fires cds-preview-date-picker-changed - The custom event fired when the date selection changes.
  * @fires cds-preview-date-picker-error - The custom event fired when an error occurs.
  */
-@customElement(`${prefix}-preview-date-picker`)
-class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
+class CDSDatePicker extends FormAssociatedMixin(
+  HostListenerMixin(FormMixin(LitElement))
+) {
+  static is = `${prefix}-preview-date-picker`;
+
   /**
    * The slotted `<cds-date-input kind="from">`.
    */
@@ -207,14 +210,6 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
    *
    * @param {FormDataEvent} event - The form data event
    */
-  _handleFormdata(event: FormDataEvent) {
-    const { formData } = event;
-    const { disabled, name, value } = this;
-    if (!disabled) {
-      formData.append(name, value);
-    }
-  }
-
   /**
    * Handles `slotchange` event in the `<slot>`.
    *

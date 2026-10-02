@@ -5,8 +5,23 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './inline-notification';
-import './toast-notification';
-import './actionable-notification';
-import './actionable-notification-button';
-import './callout-notification';
+import { defineCustomElement } from '../../globals/register';
+import CDSInlineNotification from './inline-notification';
+import CDSToastNotification from './toast-notification';
+import CDSActionableNotification from './actionable-notification';
+import CDSActionableNotificationButton from './actionable-notification-button';
+import CDSCalloutNotification from './callout-notification';
+
+export {
+  CDSInlineNotification,
+  CDSToastNotification,
+  CDSActionableNotification,
+  CDSActionableNotificationButton,
+  CDSCalloutNotification,
+};
+
+defineCustomElement(CDSInlineNotification);
+defineCustomElement(CDSToastNotification);
+defineCustomElement(CDSActionableNotification);
+defineCustomElement(CDSActionableNotificationButton);
+defineCustomElement(CDSCalloutNotification);

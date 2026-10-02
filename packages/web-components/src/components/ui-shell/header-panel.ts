@@ -7,7 +7,6 @@
 
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import styles from './header.scss?lit';
 import { prefix } from '../../globals/settings';
 
@@ -16,8 +15,9 @@ import { prefix } from '../../globals/settings';
  *
  * @element cds-header-panel
  */
-@customElement(`${prefix}-header-panel`)
 class CDSHeaderPanel extends LitElement {
+  static is = `${prefix}-header-panel`;
+
   /**
    * Specify whether the panel is expanded
    */

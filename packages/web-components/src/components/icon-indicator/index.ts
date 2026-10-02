@@ -5,4 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './icon-indicator';
+import { defineCustomElement } from '../../globals/register';
+import '../tooltip/index';
+import CDSIconIndicator from './icon-indicator';
+
+export { CDSIconIndicator };
+
+defineCustomElement(CDSIconIndicator);

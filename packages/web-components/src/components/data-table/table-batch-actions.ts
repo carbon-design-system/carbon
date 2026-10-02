@@ -9,7 +9,6 @@ import { LitElement, html, nothing } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import styles from './data-table.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Table batch actions.
@@ -19,8 +18,9 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  * @fires cds-table-batch-actions-select-all-clicked - The custom event fired after the Select all button is clicked.
  */
 
-@customElement(`${prefix}-table-batch-actions`)
 class CDSTableBatchActions extends LitElement {
+  static is = `${prefix}-table-batch-actions`;
+
   /**
    * The slot element
    */

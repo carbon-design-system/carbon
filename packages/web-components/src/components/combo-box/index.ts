@@ -5,5 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './combo-box';
-import './combo-box-item';
+import { defineCustomElement } from '../../globals/register';
+import CDSComboBox from './combo-box';
+import CDSComboBoxItem from './combo-box-item';
+
+export { CDSComboBox, CDSComboBoxItem };
+
+defineCustomElement(CDSComboBox);
+defineCustomElement(CDSComboBoxItem);

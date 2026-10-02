@@ -7,7 +7,6 @@
 
 import { LitElement, html } from 'lit';
 import { property, query } from 'lit/decorators.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { prefix } from '../../globals/settings';
@@ -17,7 +16,9 @@ import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
 import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
 import View16 from '@carbon/icons/es/view/16.js';
 import ViewOff16 from '@carbon/icons/es/view--off/16.js';
-import FormMixin from '../../globals/mixins/form';
+import FormAssociatedMixin, {
+  type FormValue,
+} from '../../globals/mixins/form-associated';
 import ValidityMixin from '../../globals/mixins/validity';
 import {
   INPUT_COLOR_SCHEME,
@@ -44,8 +45,9 @@ export {
  * @slot label-text - The label text.
  * @slot validity-message - The validity message. If present and non-empty, this input shows the UI of its invalid state.
  */
-@customElement(`${prefix}-text-input`)
-class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
+class CDSTextInput extends FormAssociatedMixin(ValidityMixin(LitElement)) {
+  static is = `${prefix}-text-input`;
+
   /**
    * `true` if there is an AI Label.
    */
@@ -126,6 +128,15 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
     const { disabled, name, value } = this;
     if (!disabled) {
       formData.append(name, value);
+    }
+  }
+
+  /**
+   * Restores a value the browser preserved across a session restore.
+   */
+  formStateRestoreCallback(state: FormValue) {
+    if (typeof state === 'string') {
+      this.value = state;
     }
   }
 

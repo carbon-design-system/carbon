@@ -11,7 +11,6 @@ import { classMap } from 'lit/directives/class-map.js';
 import { prefix } from '../../globals/settings';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import styles from './options-tile.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import ChevronDown16 from '@carbon/icons/es/chevron--down/16';
 import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16';
 import Locked16 from '@carbon/icons/es/locked/16';
@@ -31,8 +30,9 @@ const blockEvent = `${prefix}-options-tile`;
  * @fires cds-options-tile-close Custom event fired when tile is closed
  * */
 
-@customElement(`${prefix}-options-tile`)
 class CDSOptionsTile extends HostListenerMixin(LitElement) {
+  static is = `${prefix}-options-tile`;
+
   /**
    * Determines if the tile is open by default
    */

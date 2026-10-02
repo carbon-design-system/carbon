@@ -8,7 +8,6 @@
 import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
 import { property, query } from 'lit/decorators.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
 import styles from './popover.scss?lit';
 import CDSPopoverContent from './popover-content';
@@ -18,6 +17,7 @@ import FloatingUIController from '../../globals/controllers/floating-controller'
 import { POPOVER_BACKGROUND_TOKEN } from './defs';
 import type { Boundary, Rect } from '@floating-ui/dom';
 import { deepShadowContains } from '../../globals/internal/deep-shadow-contains';
+import { isFeatureFlagEnabled } from '../feature-flags';
 
 /**
  * Popover.
@@ -26,8 +26,9 @@ import { deepShadowContains } from '../../globals/internal/deep-shadow-contains'
  * @fires cds-popover-beingclosed before the popover closes via focusout/outsideclick.
  * @fires cds-popover-closed when the popover closes via focusout/outsideclick
  */
-@customElement(`${prefix}-popover`)
 class CDSPopover extends HostListenerMixin(LitElement) {
+  static is = `${prefix}-popover`;
+
   /**
    * Create popover controller instance
    */
@@ -69,10 +70,24 @@ class CDSPopover extends HostListenerMixin(LitElement) {
   autoalign = false;
 
   /**
+   * @deprecated This prop has been deprecated and will be
+   * removed in the next major release of Carbon.
+   *
    * Specify whether a caret should be rendered
    */
   @property({ type: Boolean, reflect: true })
   caret = true;
+
+  /**
+   * v12 removes the caret from the popover and everything built on top of it,
+   * so the `caret` property no longer has an effect once the
+   * `enable-v12-release` feature flag is enabled.
+   */
+  protected get _caret() {
+    return isFeatureFlagEnabled('enable-v12-release', this)
+      ? false
+      : this.caret;
+  }
 
   /**
    * Specify whether a dropShadow should be rendered
@@ -410,7 +425,8 @@ class CDSPopover extends HostListenerMixin(LitElement) {
       'backgroundToken',
     ].forEach((name) => {
       if (changedProperties.has(name)) {
-        const { [name as keyof CDSPopover]: value } = this;
+        const value =
+          name === 'caret' ? this._caret : this[name as keyof CDSPopover];
         if (this.querySelector(selectorPopoverContent) as CDSPopoverContent) {
           (this.querySelector(selectorPopoverContent) as CDSPopoverContent)[
             name
@@ -436,14 +452,18 @@ class CDSPopover extends HostListenerMixin(LitElement) {
           trigger: button as HTMLElement,
           target: tooltip as HTMLElement,
           arrowElement:
-            this.caret && arrowElement
+            this._caret && arrowElement
               ? (arrowElement as HTMLElement)
               : undefined,
-          caret: this.caret,
+          caret: this._caret,
           flipArguments: { fallbackAxisSideDirection: 'start' },
           alignment: this.align,
           open: this.open,
           alignmentAxisOffset: this.alignmentAxisOffset,
+          mainAxisOffset:
+            this.tabTip && isFeatureFlagEnabled('enable-v12-release', this)
+              ? 4
+              : undefined,
           autoAlignBoundary: this._resolveAutoAlignBoundary(),
           isTabTip: this.tabTip,
         });
@@ -483,7 +503,7 @@ class CDSPopover extends HostListenerMixin(LitElement) {
 
     const classes = classMap({
       [`${prefix}--popover-container`]: true,
-      [`${prefix}--popover--caret`]: this.caret,
+      [`${prefix}--popover--caret`]: this._caret,
       [`${prefix}--popover--drop-shadow`]: dropShadow,
       [`${prefix}--popover--border`]: border,
       [`${prefix}--popover--high-contrast`]: highContrast,

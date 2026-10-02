@@ -9,15 +9,15 @@ import { prefix } from '../../globals/settings';
 import CDSPopoverContent from '../popover/popover-content';
 import styles from './tooltip.scss?lit';
 import popoverStyles from '../popover/popover.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Tooltip content.
  *
  * @element cds-tooltip-content
  */
-@customElement(`${prefix}-tooltip-content`)
 class CDSTooltipContent extends CDSPopoverContent {
+  static is = `${prefix}-tooltip-content`;
+
   connectedCallback() {
     if (!this.hasAttribute('aria-hidden')) {
       this.setAttribute('aria-hidden', 'true');

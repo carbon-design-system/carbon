@@ -7,7 +7,6 @@
 
 import { LitElement, html } from 'lit';
 import { property, state } from 'lit/decorators.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
 import styles from './resizer-handle.scss?lit';
 import type { ResizerAxis, Position } from './defs';
@@ -37,8 +36,9 @@ import {
  * @fires resize-end   - Fired when dragging ends (detail: { axis, delta, position })
  * @fires resize-reset - Fired on double-tap / double-click
  */
-@customElement(`${prefix}-resizer-handle`)
 class CDSResizerHandle extends LitElement {
+  static is = `${prefix}-resizer-handle`;
+
   static styles = styles;
 
   /** Resize axis — determined automatically from slot, or set explicitly. */

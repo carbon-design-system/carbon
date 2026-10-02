@@ -16,25 +16,37 @@ const prefix = 'cds';
 
 describe('TextArea', () => {
   describe('renders as expected - Component API', () => {
-    it('should not allow interactive content in labelText', () => {
-      const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+    it('should throw for interactive content in labelText', () => {
+      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+      const errorSpy = jest
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
 
-      expect(() => {
-        render(
-          <TextArea
-            id="textarea-1"
-            labelText={
-              <>
-                TextArea label <button type="button">Help</button>
-              </>
-            }
-          />
+      try {
+        expect(() => {
+          render(
+            <TextArea
+              id="textarea-1"
+              labelText={
+                <>
+                  TextArea label <button type="button">Help</button>
+                </>
+              }
+            />
+          );
+        }).toThrow(
+          'The TextArea component `labelText` prop must have no interactive content'
         );
-      }).toThrow(
-        'The TextArea component `labelText` prop must have no interactive content'
-      );
 
-      spy.mockRestore();
+        expect(errorSpy).toHaveBeenCalledWith(
+          expect.stringContaining(
+            'Error: The TextArea component `labelText` prop must have no interactive content'
+          )
+        );
+      } finally {
+        spy.mockRestore();
+        errorSpy.mockRestore();
+      }
     });
 
     it('should allow non-interactive content in labelText', () => {

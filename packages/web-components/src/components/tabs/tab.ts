@@ -12,7 +12,6 @@ import { prefix } from '../../globals/settings';
 import CDSContentSwitcherItem from '../content-switcher/content-switcher-item';
 import { TABS_ICON_SIZE, TABS_TYPE } from './defs';
 import styles from './tabs.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import HostListener from '../../globals/decorators/host-listener';
 import '../button/button';
@@ -29,8 +28,9 @@ import { classMap } from 'lit/directives/class-map.js';
  *   Cancellation of this event stops changing the user-initiated action.
  * @fires cds-tab-closed - The custom event fired after a a tab is closed upon a user gesture.
  */
-@customElement(`${prefix}-tab`)
 export default class CDSTab extends HostListenerMixin(CDSContentSwitcherItem) {
+  static is = `${prefix}-tab`;
+
   /**
    * `true` if this tab should be highlighted.
    * If `true`, parent `<cds-tabs>` selects/deselects this tab upon keyboard interaction.

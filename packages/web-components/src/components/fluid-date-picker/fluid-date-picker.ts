@@ -7,7 +7,6 @@
 
 import { prefix } from '../../globals/settings';
 import { html } from 'lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import CDSDatePicker from '../date-picker/date-picker';
 import styles from './fluid-date-picker.scss?lit';
 import { isFeatureFlagEnabled } from '../feature-flags';
@@ -20,8 +19,9 @@ import { isFeatureFlagEnabled } from '../feature-flags';
  * @fires cds-date-picker-flatpickr-error
  *   The name of the custom event when Flatpickr throws an error.
  */
-@customElement(`${prefix}-fluid-date-picker`)
 class CDSFluidDatePicker extends CDSDatePicker {
+  static is = `${prefix}-fluid-date-picker`;
+
   private _observer = new MutationObserver(() => this._syncInputState());
 
   private _syncInputState() {

@@ -8,15 +8,15 @@
 import { LitElement, html } from 'lit';
 import { prefix } from '../../globals/settings';
 import styles from './form-item.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Presentational element for form items
  *
  * @element cds-form-item
  */
-@customElement(`${prefix}-form-item`)
 class CDSFormItem extends LitElement {
+  static is = `${prefix}-form-item`;
+
   render() {
     return html` <slot></slot> `;
   }

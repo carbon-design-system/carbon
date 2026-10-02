@@ -7,7 +7,6 @@
 
 import { LitElement, html } from 'lit';
 import { classMap } from 'lit/directives/class-map.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
 import styles from './toggle.scss?lit';
 
@@ -16,8 +15,9 @@ import styles from './toggle.scss?lit';
  *
  * Skeleton of toggle.
  */
-@customElement(`${prefix}-toggle-skeleton`)
 class CDSToggleSkeleton extends LitElement {
+  static is = `${prefix}-toggle-skeleton`;
+
   render() {
     const skeletonClasses = classMap({
       [`${prefix}--toggle`]: true,

@@ -18,7 +18,6 @@ import RadioGroupManager, {
   ManagedRadioButtonDelegate,
 } from '../../globals/internal/radio-group-manager';
 import styles from './structured-list.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Map of navigation direction by key.
@@ -80,8 +79,9 @@ class StructuredListRowRadioButtonDelegate
  *
  * @element cds-structured-list-row
  */
-@customElement(`${prefix}-structured-list-row`)
 class CDSStructuredListRow extends HostListenerMixin(LitElement) {
+  static is = `${prefix}-structured-list-row`;
+
   /**
    * The radio group manager associated with the radio button.
    */

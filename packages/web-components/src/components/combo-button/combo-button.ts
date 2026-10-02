@@ -10,7 +10,6 @@ import { property, query } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import styles from './combo-button.scss?lit';
 import '../button/index';
 import '../menu/index';
@@ -30,8 +29,9 @@ export { COMBO_BUTTON_SIZE, COMBO_BUTTON_TOOLTIP_ALIGNMENT };
  * Combo button.
  * @element cds-combo-button
  */
-@customElement(`${prefix}-combo-button`)
 class CDSComboButton extends HostListenerMixin(LitElement) {
+  static is = `${prefix}-combo-button`;
+
   private _menuController = new FloatingUIController(this);
 
   @query(`${prefix}-icon-button`)

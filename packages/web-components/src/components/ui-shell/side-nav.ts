@@ -17,7 +17,6 @@ import { SIDE_NAV_COLLAPSE_MODE, SIDE_NAV_USAGE_MODE } from './defs';
 import CDSHeaderMenuButton from './header-menu-button';
 import CDSSideNavMenu from './side-nav-menu';
 import styles from './side-nav.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 export { SIDE_NAV_COLLAPSE_MODE, SIDE_NAV_USAGE_MODE };
 
@@ -28,8 +27,9 @@ export { SIDE_NAV_COLLAPSE_MODE, SIDE_NAV_USAGE_MODE };
  * @fires cds-header-menu-button-toggled
  *   The name of the custom event fired after the header menu button in the document is toggled upon a user gesture.
  */
-@customElement(`${prefix}-side-nav`)
 class CDSSideNav extends HostListenerMixin(LitElement) {
+  static is = `${prefix}-side-nav`;
+
   /**
    * `true` if this side nav is hovered.
    */

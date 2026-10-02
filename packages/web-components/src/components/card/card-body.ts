@@ -9,7 +9,6 @@ import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { prefix } from '../../globals/settings';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import styles from './card.scss?lit';
 
 /**
@@ -18,8 +17,9 @@ import styles from './card.scss?lit';
  * @element cds-card-body
  * @slot - Default slot for free-form content.
  */
-@customElement(`${prefix}-card-body`)
 class CDSCardBody extends LitElement {
+  static is = `${prefix}-card-body`;
+
   /**
    * Remove all padding so content sits flush to the card edges.
    */

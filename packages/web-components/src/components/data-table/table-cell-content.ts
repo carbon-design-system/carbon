@@ -8,15 +8,15 @@
 import { LitElement, html } from 'lit';
 import { prefix } from '../../globals/settings';
 import styles from './data-table.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Data table cell content.
  *
  * @element cds-table-cell-content
  */
-@customElement(`${prefix}-table-cell-content`)
 class CDSTableCellContent extends LitElement {
+  static is = `${prefix}-table-cell-content`;
+
   render() {
     return html` <slot></slot> `;
   }

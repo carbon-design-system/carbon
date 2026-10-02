@@ -11,7 +11,6 @@ import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import { BREADCRUMB_SIZE } from './defs';
 import styles from './breadcrumb.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 const renderItem = () => {
   return html`
@@ -24,8 +23,9 @@ const renderItem = () => {
 /**
  * Skeleton of breadcrumb.
  */
-@customElement(`${prefix}-breadcrumb-skeleton`)
 class CDSBreadcrumbSkeleton extends LitElement {
+  static is = `${prefix}-breadcrumb-skeleton`;
+
   /**
    * Specify the number of items
    */

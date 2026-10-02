@@ -8,7 +8,6 @@
 import { LitElement, html, nothing } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import {
   createOverflowHandler,
   type OverflowHandler,
@@ -42,8 +41,9 @@ interface ActionItem {
  * @element cds-card-actions
  * @slot - Default slot for cds-card-action elements.
  */
-@customElement(`${prefix}-card-actions`)
 class CDSCardActions extends LitElement {
+  static is = `${prefix}-card-actions`;
+
   /** Label for the overflow menu trigger button. */
   @property({ attribute: 'overflow-menu-label', reflect: true })
   overflowMenuLabel = 'More actions';

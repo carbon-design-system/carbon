@@ -7,7 +7,6 @@
 
 import { prefix } from '../../globals/settings';
 import { html } from 'lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import styles from './fluid-search.scss?lit';
 import CDSSearch from '../search/search';
 
@@ -16,8 +15,9 @@ import CDSSearch from '../search/search';
  *
  * @element cds-fluid-search
  */
-@customElement(`${prefix}-fluid-search`)
 class CDSFluidSearch extends CDSSearch {
+  static is = `${prefix}-fluid-search`;
+
   render() {
     const { labelText, id } = this;
 

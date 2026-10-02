@@ -24,7 +24,7 @@ import {
 import { FeatureFlags, useFeatureFlag } from '../FeatureFlags';
 import { ModalHeader } from './ModalHeader';
 import { ModalFooter } from './ModalFooter';
-import { TextInput, OverflowMenu, OverflowMenuItem } from '../../';
+import { TextInput, OverflowMenu, MenuItem } from '../../';
 import { AILabel, AILabelContent } from '../AILabel';
 
 const prefix = 'cds';
@@ -475,7 +475,7 @@ describe.each([
         const [open, setOpen] = useState(true);
         const focusRef = useRef();
         return (
-          <FeatureFlags enableDialogElement>
+          <FeatureFlags enableV12Release={false} enableDialogElement>
             <Component
               open={open}
               launcherButtonRef={focusRef}
@@ -505,7 +505,7 @@ describe.each([
     it('should call onClose when the dialog cancel event fires', () => {
       const onClose = jest.fn();
       render(
-        <FeatureFlags enableDialogElement>
+        <FeatureFlags enableV12Release={false} enableDialogElement>
           <Component open onClose={onClose}>
             <ModalHeader>Modal header</ModalHeader>
             <ModalBody>Modal content</ModalBody>
@@ -755,9 +755,9 @@ describe.each([
           <Component open onClose={onClose}>
             <ModalHeader>Modal with Overflow Menu</ModalHeader>
             <ModalBody>
-              <OverflowMenu iconDescription="More options">
-                <OverflowMenuItem itemText="Download" />
-                <OverflowMenuItem itemText="Share" />
+              <OverflowMenu label="More options">
+                <MenuItem label="Download" />
+                <MenuItem label="Share" />
               </OverflowMenu>
               <p>Test content</p>
             </ModalBody>
@@ -911,9 +911,9 @@ describe.each([
       <Component open onClose={onClose}>
         <ModalHeader>Modal with Overflow Menu</ModalHeader>
         <ModalBody>
-          <OverflowMenu iconDescription="More options">
-            <OverflowMenuItem itemText="Download" />
-            <OverflowMenuItem itemText="Share" />
+          <OverflowMenu label="More options">
+            <MenuItem label="Download" />
+            <MenuItem label="Share" />
           </OverflowMenu>
           <p>Modal content</p>
           <TextInput

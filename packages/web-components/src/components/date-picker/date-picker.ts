@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -25,12 +25,11 @@ import cssClassPlugin from './css-class-plugin';
 import fixEventsPlugin from './fix-events-plugin';
 import focusPlugin from './focus-plugin';
 import iconPlugin from './icon-plugin';
-import monthSelectPlugin from './month-select-plugin';
+import monthSelectPlugin, { updateCurrentMonth } from './month-select-plugin';
 import rangePlugin from './range-plugin';
 import shadowDOMEventPlugin from './shadow-dom-events-plugin';
 import stateHandshakePlugin from './state-handshake-plugin';
 import styles from './date-picker.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Date picker modes.
@@ -72,8 +71,9 @@ flatpickr!.l10ns!.en!.weekdays.shorthand.forEach((_day, index) => {
  * @fires cds-date-picker-flatpickr-error
  *   The name of the custom event when Flatpickr throws an error.
  */
-@customElement(`${prefix}-date-picker`)
 class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
+  static is = `${prefix}-date-picker`;
+
   /**
    * The slotted `<cds-date-input kind="from">`.
    */
@@ -287,8 +287,14 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
     const { disabled, dateFormat, open, readonly, minDate, maxDate, value } =
       this;
 
-    const { selectorInputFrom, selectorInputTo } = this
-      .constructor as typeof CDSDatePicker;
+    const {
+      selectorInputFrom,
+      selectorInputTo,
+      _selectorFlatpickrMonthYearContainer: selectorFlatpickrMonthYearContainer,
+      _selectorFlatpickrYearContainer: selectorFlatpickrYearContainer,
+      _selectorFlatpickrCurrentMonth: selectorFlatpickrCurrentMonth,
+      _classFlatpickrCurrentMonth: classFlatpickrCurrentMonth,
+    } = this.constructor as typeof CDSDatePicker;
     const inputFrom = this.querySelector(
       selectorInputFrom
     ) as CDSDatePickerInput;
@@ -350,6 +356,12 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
       }
       if (calendar) {
         calendar.setDate(dates);
+        updateCurrentMonth(calendar, {
+          selectorFlatpickrMonthYearContainer,
+          selectorFlatpickrYearContainer,
+          selectorFlatpickrCurrentMonth,
+          classFlatpickrCurrentMonth,
+        });
         [inputFrom, inputTo].forEach((input, i) => {
           if (input) {
             input.value = !dates[i]

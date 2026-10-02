@@ -14,7 +14,6 @@ import CDSCheckbox from '../checkbox/checkbox';
 import { TOGGLE_SIZE } from './defs';
 import styles from './toggle.scss?lit';
 import HostListenerMixin from '../../globals/mixins/host-listener';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 export { TOGGLE_SIZE };
 
@@ -27,8 +26,9 @@ export { TOGGLE_SIZE };
  * @slot unchecked-text - The text for the unchecked state.
  * @fires cds-toggle-changed - The custom event fired after this changebox changes its checked state.
  */
-@customElement(`${prefix}-toggle`)
 class CDSToggle extends HostListenerMixin(CDSCheckbox) {
+  static is = `${prefix}-toggle`;
+
   @query('button')
   protected _checkboxNode!: HTMLInputElement;
 

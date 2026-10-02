@@ -12,15 +12,15 @@ import { POPOVER_ALIGNMENT } from '../popover/defs';
 import '../popover/index';
 import popoverStyles from '../popover/popover.scss?lit';
 import styles from './tooltip.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Definition tooltip.
  *
  * @element cds-definition-tooltip
  */
-@customElement(`${prefix}-definition-tooltip`)
 class CDSDefinitionTooltip extends LitElement {
+  static is = `${prefix}-definition-tooltip`;
+
   /**
    * Specify how the trigger should align with the tooltip
    */

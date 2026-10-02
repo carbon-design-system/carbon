@@ -6,8 +6,8 @@
  */
 
 import { html, LitElement } from 'lit';
+import { defineCustomElement } from '../../globals/register';
 import { property } from 'lit/decorators.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 import { prefix } from '../../globals/settings';
 import { ifDefined } from 'lit/directives/if-defined.js';
@@ -23,8 +23,9 @@ import { FileData } from './stories/types';
  * and thus abstracting everything in a library won't be a good return on investment
  * vs. letting users copy code here and implement features that fit their needs.
  */
-@customElement(`${prefix}-ce-demo-file-uploader`)
 export default class CDSCEDemoFileUploader extends LitElement {
+  static is = `${prefix}-ce-demo-file-uploader`;
+
   /**
    * The files being uploaded.
    */
@@ -246,3 +247,5 @@ export default class CDSCEDemoFileUploader extends LitElement {
     `;
   }
 }
+
+defineCustomElement(CDSCEDemoFileUploader);

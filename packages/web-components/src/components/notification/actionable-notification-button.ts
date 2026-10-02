@@ -6,27 +6,33 @@
  */
 
 import { prefix } from '../../globals/settings';
-import CDSButton from '../button/button';
+import CDSButton, { BUTTON_SIZE } from '../button/button';
+import { property } from 'lit/decorators.js';
 import styles from './actionable-notification.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import buttonStyles from '../button/button.scss?lit';
 
 /**
  * Actionable notification action button.
  *
  * @element cds-actionable-notification-button
  */
-@customElement(`${prefix}-actionable-notification-button`)
 class CDSActionableNotificationButton extends CDSButton {
-  update(changedProperties) {
-    super.update(changedProperties);
+  static is = `${prefix}-actionable-notification-button`;
+
+  /**
+   * Specify the size of the button. Defaults to `sm` in actionable notification.
+   */
+  @property({ type: String, reflect: true })
+  size?: BUTTON_SIZE | string = BUTTON_SIZE.SMALL;
+
+  firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
     this.shadowRoot
       ?.getElementById('button')
       ?.classList.add(`${prefix}--actionable-notification__action-button`);
-
-    this.setAttribute('size', 'sm');
   }
 
-  static styles = styles;
+  static styles = [buttonStyles, styles];
 }
 
 export default CDSActionableNotificationButton;

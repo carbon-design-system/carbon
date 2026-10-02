@@ -11,7 +11,6 @@ import { LitElement, html } from 'lit';
 import { property, state, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import HostListener from '../../globals/decorators/host-listener';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import HostListenerMixin from '../../globals/mixins/host-listener';
@@ -44,8 +43,9 @@ export type TooltipAlignment = `${TOOLTIP_ALIGNMENT}`;
  * @fires cds-edit-in-place-cancel - Fired when the cancel button is clicked or Escape is pressed
  * @fires cds-edit-in-place-blur - Fired when the input loses focus (if onBlur handler is used)
  */
-@customElement(`${prefix}-edit-in-place`)
 class CDSEditInPlace extends HostListenerMixin(LitElement) {
+  static is = `${prefix}-edit-in-place`;
+
   /**
    * Label for the cancel button
    */

@@ -27,8 +27,8 @@ import {
   createScope,
   notifyAvailableFlag,
 } from '@carbon/feature-flags';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { LitElement, html } from 'lit';
+import { defineCustomElement } from '../../globals/register';
 
 type FeatureFlags = Record<string, boolean>;
 
@@ -72,8 +72,9 @@ const hasOwn = <T extends object>(obj: T, key: PropertyKey): key is keyof T =>
  * @attr {boolean} enable-experimental-focus-wrap-without-sentinels - Deprecated,
  * use `enable-focus-wrap-without-sentinels` instead.
  */
-@customElement('feature-flags')
 class FeatureFlagsElement extends LitElement {
+  static is = 'feature-flags';
+
   private scope = GlobalFeatureFlags;
   private flags: FeatureFlags = {};
 
@@ -242,7 +243,10 @@ export function isFeatureFlagEnabled(
   context: HTMLElement
 ): boolean {
   const instance = findParentFeatureFlags(context);
-  const enabled = instance?.isFeatureFlagEnabled(flag) ?? false;
+  // Fall back to the global singleton so that calling `enable(flag)` from
+  // `@carbon/feature-flags` works without a `<feature-flags>` ancestor element.
+  const enabled =
+    instance?.isFeatureFlagEnabled(flag) ?? GlobalFeatureFlags.enabled(flag);
 
   if (process.env.NODE_ENV !== 'production') {
     notifyAvailableFlag(flag, enabled);
@@ -250,3 +254,5 @@ export function isFeatureFlagEnabled(
 
   return enabled;
 }
+
+defineCustomElement(FeatureFlagsElement);

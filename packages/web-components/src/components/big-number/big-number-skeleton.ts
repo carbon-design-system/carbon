@@ -7,7 +7,6 @@
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import '../skeleton-text/index';
 import '../skeleton-placeholder/index';
 
@@ -22,8 +21,9 @@ const blockClass = `${prefix}--big-number-skeleton`;
  * Note: This component is only used within cds-big-number. It displays a skeleton version while content is loading (handled by the cds-big-number prop `loading`).
  */
 
-@customElement(`${prefix}-big-number-skeleton`)
 class CDSBigNumberSkeleton extends LitElement {
+  static is = `${prefix}-big-number-skeleton`;
+
   @property({ type: String, reflect: true })
   size?: BigNumberSizeValues = BigNumberSize.Default;
 

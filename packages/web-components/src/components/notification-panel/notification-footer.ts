@@ -12,7 +12,6 @@ import { selectorTabbable } from '../../globals/settings';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import Settings16 from '@carbon/icons/es/settings/16';
 import { iconLoader } from '../../globals/internal/icon-loader';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import styles from './notification-footer.scss?lit';
 
 const blockClass = `${prefix}--notifications-panel`;
@@ -26,8 +25,9 @@ const blockClass = `${prefix}--notifications-panel`;
  *   The custom event is fired when a user clicks on View All button.
  * @fires cds-notification-settings - The custom event is fired when User clicks on settings button.
  */
-@customElement(`${prefix}-notification-footer`)
 class CDSNotificationFooter extends HostListenerMixin(LitElement) {
+  static is = `${prefix}-notification-footer`;
+
   /**
    * Label for View All Text
    */

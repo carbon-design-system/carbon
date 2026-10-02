@@ -5,7 +5,20 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './accordion';
-import './accordion-item';
-import './accordion-item-skeleton';
-import './accordion-skeleton';
+import { defineCustomElement } from '../../globals/register';
+import CDSAccordion from './accordion';
+import CDSAccordionItem from './accordion-item';
+import CDSAccordionItemSkeleton from './accordion-item-skeleton';
+import CDSAccordionSkeleton from './accordion-skeleton';
+
+export {
+  CDSAccordion,
+  CDSAccordionItem,
+  CDSAccordionItemSkeleton,
+  CDSAccordionSkeleton,
+};
+
+defineCustomElement(CDSAccordion);
+defineCustomElement(CDSAccordionItem);
+defineCustomElement(CDSAccordionItemSkeleton);
+defineCustomElement(CDSAccordionSkeleton);

@@ -8,15 +8,15 @@
 import { LitElement, html } from 'lit';
 import { prefix } from '../../globals/settings';
 import styles from './modal.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Modal header.
  *
  * @element cds-modal-header
  */
-@customElement(`${prefix}-modal-header`)
 class CDSModalHeader extends LitElement {
+  static is = `${prefix}-modal-header`;
+
   /**
    * `true` if there is an AI Label.
    */

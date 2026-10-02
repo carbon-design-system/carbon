@@ -15,7 +15,6 @@ import popoverStyles from '../popover/popover.scss?lit';
 import toggletipStyles from '../toggle-tip/toggletip.scss?lit';
 import { SLUG_SIZE, SLUG_KIND } from './defs';
 import Undo16 from '@carbon/icons/es/undo/16.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { iconLoader } from '../../globals/internal/icon-loader';
 
 /**
@@ -24,8 +23,9 @@ import { iconLoader } from '../../globals/internal/icon-loader';
  * @deprecated This component has been deprecated, please use the <cds-ai-label> component instead.
  * @element cds-slug
  */
-@customElement(`${prefix}-slug`)
 export default class CDSSlug extends CDSToggleTip {
+  static is = `${prefix}-slug`;
+
   @property({ reflect: true })
   slot = 'slug';
   /**

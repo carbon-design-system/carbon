@@ -5,12 +5,36 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './modal';
-import './modal-body';
-import './modal-body-content';
-import './modal-close-button';
-import './modal-footer';
-import './modal-footer-button';
-import './modal-header';
-import './modal-heading';
-import './modal-label';
+import { defineCustomElement } from '../../globals/register';
+import '../dialog/index';
+import CDSModal from './modal';
+import CDSModalBody from './modal-body';
+import CDSModalBodyContent from './modal-body-content';
+import CDSModalCloseButton from './modal-close-button';
+import CDSModalFooter from './modal-footer';
+import CDSModalFooterButton from './modal-footer-button';
+import CDSModalHeader from './modal-header';
+import CDSModalHeading from './modal-heading';
+import CDSModalLabel from './modal-label';
+
+export {
+  CDSModal,
+  CDSModalBody,
+  CDSModalBodyContent,
+  CDSModalCloseButton,
+  CDSModalFooter,
+  CDSModalFooterButton,
+  CDSModalHeader,
+  CDSModalHeading,
+  CDSModalLabel,
+};
+
+defineCustomElement(CDSModal);
+defineCustomElement(CDSModalBody);
+defineCustomElement(CDSModalBodyContent);
+defineCustomElement(CDSModalCloseButton);
+defineCustomElement(CDSModalFooter);
+defineCustomElement(CDSModalFooterButton);
+defineCustomElement(CDSModalHeader);
+defineCustomElement(CDSModalHeading);
+defineCustomElement(CDSModalLabel);

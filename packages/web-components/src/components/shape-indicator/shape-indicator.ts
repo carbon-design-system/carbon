@@ -8,7 +8,6 @@
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
 import '../tooltip/definition-tooltip';
@@ -65,8 +64,9 @@ const shapeMap = {
  * Shape Indicator.
  * @element cds-shape-indicator
  */
-@customElement(`${prefix}-shape-indicator`)
 class CDSShapeIndicator extends LitElement {
+  static is = `${prefix}-shape-indicator`;
+
   /**
    * Specify how the tooltip should align with the shape in compact mode
    */

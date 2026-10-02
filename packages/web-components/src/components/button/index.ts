@@ -5,6 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './button';
-import './button-set';
-import './button-skeleton';
+import { defineCustomElement } from '../../globals/register';
+import CDSButton from './button';
+import CDSButtonSet from './button-set';
+import CDSButtonSkeleton from './button-skeleton';
+import CDSButtonSetBase from './button-set-base';
+
+export { CDSButton, CDSButtonSet, CDSButtonSkeleton, CDSButtonSetBase };
+
+defineCustomElement(CDSButton);
+defineCustomElement(CDSButtonSet);
+defineCustomElement(CDSButtonSkeleton);
+defineCustomElement(CDSButtonSetBase);

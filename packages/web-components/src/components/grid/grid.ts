@@ -9,7 +9,6 @@ import { LitElement, html } from 'lit';
 import { consume, provide } from '@lit/context';
 import { GridContext, gridContext } from './grid-context';
 import { property } from 'lit/decorators.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
 import styles from './grid.scss?lit';
 import { GridAlignmentType, SUB_GRID_MODE } from './defs';
@@ -18,8 +17,9 @@ export { GRID_ALIGNMENT } from './defs';
  * The grid component.
  *
  * @element cds-grid
- */ @customElement(`${prefix}-grid`)
-class CDSGrid extends LitElement {
+ */ class CDSGrid extends LitElement {
+  static is = `${prefix}-grid`;
+
   /**
    * Specify grid alignment. Default is center
    */

@@ -5,4 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './layer';
+import { defineCustomElement } from '../../globals/register';
+import CDSLayer from './layer';
+
+export { CDSLayer };
+
+defineCustomElement(CDSLayer);

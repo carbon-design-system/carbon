@@ -39,7 +39,7 @@
     "flatpickr@4.6.13": "patch:flatpickr@npm%3A4.6.13#./.yarn/patches/flatpickr-npm-4.6.13-06399933fc.patch",
     "@octokit/rest": "^22.0.0",
     "eslint": "9.39.5",
-    "typescript-eslint": "8.69.0",
+    "typescript-eslint": "8.70.0",
     "immutable": "^5.1.8",
     "tar@7.5.20": "7.5.22",
     "vite@5.0.10": "6.4.3",
@@ -74,10 +74,12 @@
     "@babel/preset-react": "^8.0.0",
     "@babel/runtime": "^8.0.0",
     "@carbon/cli": "workspace:packages/cli",
+    "@carbon/ibm-products": "latest",
     "@commitlint/cli": "^21.0.0",
     "@commitlint/config-conventional": "^21.0.0",
     "@eslint/compat": "^2.0.1",
     "@eslint/js": "^9.24.0",
+    "@figma/code-connect": "1.5.3",
     "@playwright/test": "^1.36.2",
     "@storybook/angular": "10.3.5",
     "@testing-library/dom": "^10.1.0",
@@ -95,7 +97,7 @@
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-playwright": "^2.0.0",
     "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-hooks": "^7.0.0",
     "eslint-plugin-testing-library": "^7.6.6",
     "fs-extra": "^11.0.0",
     "glob": "^13.0.0",
@@ -179,5 +181,8 @@
       "./config/stylelint-config-carbon/index.js"
     ]
   },
-  "packageManager": "yarn@4.10.3"
+  "packageManager": "yarn@4.10.3",
+  "dependencies": {
+    "unrun": "^0.3.1"
+  }
 }

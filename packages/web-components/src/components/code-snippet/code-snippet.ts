@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 /**  eslint-disable @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452 */
-import { LitElement, html } from 'lit';
+import { LitElement, html, nothing } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import ChevronDown16 from '@carbon/icons/es/chevron--down/16.js';
@@ -16,7 +16,6 @@ import Handle from '../../globals/internal/handle';
 import '../copy-button/index';
 import '../copy/copy';
 import '../button/button';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { iconLoader } from '../../globals/internal/icon-loader';
 
 export { CODE_SNIPPET_COLOR_SCHEME, CODE_SNIPPET_TYPE };
@@ -45,8 +44,9 @@ const observeResize = (observer: ResizeObserver, elem: Element) => {
  *
  * @element cds-code-snippet
  */
-@customElement(`${prefix}-code-snippet`)
 class CDSCodeSnippet extends FocusMixin(LitElement) {
+  static is = `${prefix}-code-snippet`;
+
   /**
    * The code snippet container element.
    */
@@ -429,29 +429,25 @@ class CDSCodeSnippet extends FocusMixin(LitElement) {
       `;
     }
 
+    const isSingle = type === CODE_SNIPPET_TYPE.SINGLE;
+    const isMulti = type === CODE_SNIPPET_TYPE.MULTI;
+
     return html`
       <div
-        role="${type === CODE_SNIPPET_TYPE.SINGLE ||
-        type === CODE_SNIPPET_TYPE.MULTI
-          ? 'textbox'
-          : null}"
-        tabindex="${(type === CODE_SNIPPET_TYPE.SINGLE ||
-          type === CODE_SNIPPET_TYPE.MULTI) &&
-        !disabled
-          ? 0
-          : null}"
+        role="${isSingle ? 'textbox' : nothing}"
+        tabindex="${isSingle && !disabled ? 0 : nothing}"
         class="${prefix}--snippet-container"
-        aria-label="${'code-snippet'}"
-        aria-readonly="${type === CODE_SNIPPET_TYPE.SINGLE ||
-        type === CODE_SNIPPET_TYPE.MULTI
-          ? true
-          : null}"
-        aria-multiline="${type === CODE_SNIPPET_TYPE.MULTI ? true : null}"
-        @scroll="${(type === CODE_SNIPPET_TYPE.SINGLE && handleScroll) ||
-        null}">
+        aria-label="${!isMulti ? 'code-snippet' : nothing}"
+        aria-readonly="${isSingle ? 'true' : nothing}"
+        @scroll="${(isSingle && handleScroll) || nothing}">
         <pre
-          @scroll="${(type === CODE_SNIPPET_TYPE.MULTI && handleScroll) ||
-          null}"><code><slot></slot></code></pre>
+          role="${isMulti ? 'textbox' : nothing}"
+          tabindex="${isMulti && !disabled ? 0 : nothing}"
+          aria-label="${isMulti ? 'code-snippet' : nothing}"
+          aria-readonly="${isMulti ? 'true' : nothing}"
+          aria-multiline="${isMulti ? 'true' : nothing}"
+          @scroll="${(isMulti && handleScroll) ||
+          nothing}"><code><slot></slot></code></pre>
       </div>
 
       ${hasLeftOverflow
@@ -472,6 +468,7 @@ class CDSCodeSnippet extends FocusMixin(LitElement) {
               button-class-name=${disabledCopyButtonClasses}
               feedback=${feedback}
               feedback-timeout=${feedbackTimeout}
+              size="${type === CODE_SNIPPET_TYPE.MULTI ? 'sm' : 'md'}"
               @click="${handleCopyClick}">
               ${tooltipContent}
             </cds-copy-button>

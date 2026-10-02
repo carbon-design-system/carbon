@@ -5,4 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './badge-indicator';
+import { defineCustomElement } from '../../globals/register';
+import CDSBadgeIndicator from './badge-indicator';
+
+export { CDSBadgeIndicator };
+
+defineCustomElement(CDSBadgeIndicator);

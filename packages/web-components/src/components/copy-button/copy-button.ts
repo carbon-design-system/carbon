@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,12 +7,12 @@
 
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import Copy16 from '@carbon/icons/es/copy/16.js';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import styles from './copy-button.scss?lit';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
+import { ICON_BUTTON_SIZE } from '../icon-button/defs';
 import '../copy/copy';
 import { iconLoader } from '../../globals/internal/icon-loader';
 
@@ -21,8 +21,9 @@ import { iconLoader } from '../../globals/internal/icon-loader';
  *
  * @element cds-copy-button
  */
-@customElement(`${prefix}-copy-button`)
 class CDSCopyButton extends FocusMixin(LitElement) {
+  static is = `${prefix}-copy-button`;
+
   /**
    * Specify an optional className to be added to your Button
    */
@@ -59,6 +60,12 @@ class CDSCopyButton extends FocusMixin(LitElement) {
   @property({ type: Number, attribute: 'feedback-timeout' })
   feedbackTimeout = 2000;
 
+  /**
+   * Specify the size of the Button. Defaults to `lg`.
+   */
+  @property({ reflect: true })
+  size?: ICON_BUTTON_SIZE | string = ICON_BUTTON_SIZE.LARGE;
+
   render() {
     const {
       buttonClassName,
@@ -67,6 +74,7 @@ class CDSCopyButton extends FocusMixin(LitElement) {
       feedbackTimeout,
       align,
       autoAlign,
+      size,
     } = this;
 
     let classes = `${prefix}--copy-btn`;
@@ -83,7 +91,8 @@ class CDSCopyButton extends FocusMixin(LitElement) {
         feedback-timeout=${feedbackTimeout}
         button-class-name=${classes}
         exportparts="button"
-        align=${align}>
+        align=${align}
+        size=${size}>
         ${iconLoader(Copy16, {
           slot: 'icon',
           class: `${prefix}--snippet__icon`,

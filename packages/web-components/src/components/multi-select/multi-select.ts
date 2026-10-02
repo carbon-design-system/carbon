@@ -19,7 +19,6 @@ import { iconLoader } from '../../globals/internal/icon-loader';
 import { SELECTION_FEEDBACK_OPTION } from './defs';
 import CDSMultiSelectItem from './multi-select-item';
 import styles from './multi-select.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import HostListener from '../../globals/decorators/host-listener';
 import CDSAILabel from '../ai-label/ai-label';
 
@@ -45,8 +44,9 @@ export { SELECTION_FEEDBACK_OPTION };
  * @fires cds-multi-select-toggled
  *   The custom event fired after the open state of this multi select is toggled upon a user gesture.
  */
-@customElement(`${prefix}-multi-select`)
 class CDSMultiSelect extends CDSDropdown {
+  static is = `${prefix}-multi-select`;
+
   @property({ type: Boolean })
   filterable;
 

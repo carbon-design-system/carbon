@@ -5,7 +5,20 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './progress-indicator';
-import './progress-indicator-skeleton';
-import './progress-step';
-import './progress-step-skeleton';
+import { defineCustomElement } from '../../globals/register';
+import CDSProgressIndicator from './progress-indicator';
+import CDSProgressIndicatorSkeleton from './progress-indicator-skeleton';
+import CDSProgressStep from './progress-step';
+import CDSProgressStepSkeleton from './progress-step-skeleton';
+
+export {
+  CDSProgressIndicator,
+  CDSProgressIndicatorSkeleton,
+  CDSProgressStep,
+  CDSProgressStepSkeleton,
+};
+
+defineCustomElement(CDSProgressIndicator);
+defineCustomElement(CDSProgressIndicatorSkeleton);
+defineCustomElement(CDSProgressStep);
+defineCustomElement(CDSProgressStepSkeleton);

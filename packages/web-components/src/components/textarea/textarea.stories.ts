@@ -12,7 +12,7 @@ import View16 from '@carbon/icons/es/view/16.js';
 import FolderOpen16 from '@carbon/icons/es/folder--open/16.js';
 import Folders16 from '@carbon/icons/es/folders/16.js';
 import './index';
-import '../form/form-item';
+import '../form/index';
 import '../ai-label';
 import '../icon-button';
 import { withLayers } from '../../../.storybook/decorators/with-layers';

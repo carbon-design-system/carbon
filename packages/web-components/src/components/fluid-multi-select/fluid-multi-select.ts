@@ -7,7 +7,6 @@
 
 import { prefix } from '../../globals/settings';
 import { html } from 'lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import styles from './fluid-multi-select.scss?lit';
 import { classMap } from 'lit/directives/class-map.js';
 import CDSMultiSelect from '../multi-select/multi-select';
@@ -18,8 +17,9 @@ import { property } from 'lit/decorators.js';
  *
  * @element cds-fluid-multi-select
  */
-@customElement(`${prefix}-fluid-multi-select`)
 class CDSFluidMultiSelect extends CDSMultiSelect {
+  static is = `${prefix}-fluid-multi-select`;
+
   /**
    * Specify if the `FluidMultiSelect` should render its menu items in condensed mode
    */

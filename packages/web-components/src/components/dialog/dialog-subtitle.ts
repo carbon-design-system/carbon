@@ -9,7 +9,6 @@ import { html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import styles from './dialog.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import CDSModalLabel from '../modal/modal-label';
 
 /**
@@ -17,8 +16,9 @@ import CDSModalLabel from '../modal/modal-label';
  *
  * @element cds-dialog-subtitle
  */
-@customElement(`${prefix}-dialog-subtitle`)
 class CDSDialogSubtitle extends CDSModalLabel {
+  static is = `${prefix}-dialog-subtitle`;
+
   /**
    * Specify an optional id for the subtitle element
    */

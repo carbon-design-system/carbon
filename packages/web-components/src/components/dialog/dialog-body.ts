@@ -7,7 +7,6 @@
 
 import { prefix } from '../../globals/settings';
 import styles from './dialog.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import CDSModalBody from '../modal/modal-body';
 
 /**
@@ -15,8 +14,9 @@ import CDSModalBody from '../modal/modal-body';
  *
  * @element cds-dialog-body
  */
-@customElement(`${prefix}-dialog-body`)
 class CDSDialogBody extends CDSModalBody {
+  static is = `${prefix}-dialog-body`;
+
   protected _getAriaLabelledBy() {
     const dialog = this.closest(`${prefix}-dialog`);
     if (!dialog) return null;

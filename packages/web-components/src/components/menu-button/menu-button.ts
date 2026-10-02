@@ -10,7 +10,6 @@ import { property, query } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import styles from './menu-button.scss?lit';
 import '../button/index';
 import '../menu/index';
@@ -29,8 +28,9 @@ export { MENU_BUTTON_KIND, MENU_BUTTON_SIZE };
  * Menu button.
  * @element cds-menu-button
  */
-@customElement(`${prefix}-menu-button`)
 class CDSMenuButton extends HostListenerMixin(LitElement) {
+  static is = `${prefix}-menu-button`;
+
   private _menuController = new FloatingUIController(this);
 
   @query(`${prefix}-button`)

@@ -5,4 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './skeleton-icon';
+import { defineCustomElement } from '../../globals/register';
+import CDSSkeletonIcon from './skeleton-icon';
+
+export { CDSSkeletonIcon };
+
+defineCustomElement(CDSSkeletonIcon);
