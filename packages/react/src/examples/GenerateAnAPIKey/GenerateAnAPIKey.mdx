@@ -1,0 +1,214 @@
+import {
+  Story,
+  Controls,
+  Source,
+  Canvas,
+  Meta,
+} from '@storybook/addon-docs/blocks';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+import * as stories from './GenerateAnAPIKey.stories';
+
+<Meta isTemplate />
+
+# Generate an API key
+
+[Usage guidelines](https://carbondesignsystem.com/patterns/generate-an-api-key/)
+|
+[Carbon modal usage guidelines](https://www.carbondesignsystem.com/components/modal/usage)
+|
+[Carbon modal documentation](https://react.carbondesignsystem.com/?path=/docs/components-modal)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Generate](#generate)
+- [Generate with error](#generate-with-error)
+- [Instant generate](#instant-generate)
+- [Custom generate](#custom-generate)
+- [Edit](#edit)
+- [Edit with error](#edit-with-error)
+- [Custom edit](#custom-edit)
+
+## Overview
+
+When designing for the generation of API keys, ensure users know what the key is
+created for, the security implications, and the end destination of the key.
+
+To build this pattern, we recommend including the following ingredients:
+
+- [ComposedModal](https://react.carbondesignsystem.com/?path=/docs/components-composedmodal)
+- [Button](https://react.carbondesignsystem.com/?path=/docs/components-button)
+- [TextInput](https://react.carbondesignsystem.com/?path=/docs/components-textinput)
+- [PasswordInput](https://react.carbondesignsystem.com/?path=/docs/components-passwordinput--overview)
+
+```jsx
+import { Button, Modal, TextInput, PasswordInput } from '@carbon/react';
+```
+
+## Example usage
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/react/src/examples/GenerateAnAPIKey/example)
+> example implementation.
+
+[![Edit react-patterns](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/react/src/examples/GenerateAnAPIKey/example)
+
+### Getting started
+
+```jsx
+import { Button, Modal, TextInput, PasswordInput } from '@carbon/react';
+import { InformationFilled, CheckmarkFilled } from '@carbon/react/icons';
+```
+
+```html
+<GenerateAnAPIKey
+  open={open}
+  onRequestClose={toggleModal}
+  primaryButtonDisabled={loading || name.length === 0}
+  secondaryButtonText="Close"
+  loadingDescription="Loading"
+  onLoadingSuccess={() => {}}
+  {...modalProps}
+>
+  {key ? (
+    <>
+      <PasswordInput
+        id="generated-api-key"
+        labelText="Unique API key"
+        value={key}
+        readOnly
+        showPasswordLabel="Show key"
+        hidePasswordLabel="Hide key"
+        tooltipPosition="left"
+        helperText="This is your unique API key and is non-recoverable. If you lose this API key, you will have to reset it."
+      />
+      <div className={`${blockClass}__messaging`}>
+        <InformationFilled size={16} />
+        <APIKeyDownloader
+          apiKey={key}
+          body="This is your unique API key and is non-recoverable. If you lose this API key, you will have to reset it."
+          fileName="apikey"
+          linkText="Download as JSON"
+          fileType="json"
+          downloadLinkLabel="Download API Key in Java Script File format"
+        />
+      </div>
+      <div className={`${blockClass}__messaging`}>
+        <CheckmarkFilled
+          size={20}
+          className={`${blockClass}__checkmark-icon`}
+        />
+        <p
+          className={`${blockClass}__messaging-text`}
+          role="alert"
+          aria-live="assertive"
+        >
+          API key successfully created
+        </p>
+      </div>
+    </>
+  ) : (
+    <>
+      <p style={{ marginBlockEnd: '1rem' }}>
+        (Optional description text) To connect securely to [product name],
+        your application or tool needs an API key with permission to
+        access resources such as [product resource name].
+      </p>
+      <TextInput
+        id="app-name"
+        labelText="Name your application"
+        placeholder="Application name"
+        value={name}
+        onChange={handleName}
+        disabled={loading}
+        helperText="Providing the application name will help you identify your API key later."
+      />
+    </>
+  )}
+</GenerateAnAPIKey>
+```
+
+## Generate
+
+<Canvas
+  of={stories.generate}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(stories.generate),
+    },
+  ]}
+/>
+
+## Generate with error
+
+<Canvas
+  of={stories.generateWithError}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(stories.generateWithError),
+    },
+  ]}
+/>
+
+## Instant generate
+
+<Canvas
+  of={stories.instantGenerate}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(stories.instantGenerate),
+    },
+  ]}
+/>
+
+## Custom generate
+
+<Canvas
+  of={stories.customGenerate}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(stories.customGenerate),
+    },
+  ]}
+/>
+
+## Edit
+
+<Canvas
+  of={stories.edit}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(stories.edit),
+    },
+  ]}
+/>
+
+## Edit with error
+
+<Canvas
+  of={stories.editWithError}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(stories.editWithError),
+    },
+  ]}
+/>
+
+## Custom edit
+
+<Canvas
+  of={stories.customEdit}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(stories.customEdit),
+    },
+  ]}
+/>
