@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -359,5 +359,85 @@ describe('Tag', () => {
 
     const selectableTag = screen.getByRole('button', { name: 'Tag content' });
     expect(selectableTag).toHaveAttribute('aria-pressed', 'false');
+  });
+
+  describe('tabIndex', () => {
+    it('should apply tabIndex to the tag when the label is not truncated', () => {
+      render(<Tag tabIndex={-1}>Tag content</Tag>);
+
+      expect(
+        screen.getByText('Tag content').closest(`.${prefix}--tag`)
+      ).toHaveAttribute('tabindex', '-1');
+    });
+
+    describe('when the label is truncated', () => {
+      let scrollWidthSpy;
+
+      beforeEach(() => {
+        scrollWidthSpy = jest
+          .spyOn(HTMLElement.prototype, 'scrollWidth', 'get')
+          .mockReturnValue(100);
+      });
+
+      afterEach(() => {
+        scrollWidthSpy.mockRestore();
+      });
+
+      it('should apply tabIndex to the tooltip trigger instead of the tag', async () => {
+        render(<Tag tabIndex={-1}>Tag content</Tag>);
+
+        const trigger = await screen.findByRole('button', {
+          name: 'Tag content',
+        });
+
+        expect(trigger).toHaveClass(`${prefix}--definition-term`);
+        expect(trigger).toHaveAttribute('tabindex', '-1');
+        expect(trigger.closest(`.${prefix}--tag`)).not.toHaveAttribute(
+          'tabindex'
+        );
+      });
+
+      it('should remove the tooltip trigger from the tab order when tabIndex is -1', async () => {
+        render(
+          <>
+            <Tag tabIndex={-1}>Tag content</Tag>
+            <button type="button">Next</button>
+          </>
+        );
+
+        await screen.findByRole('button', { name: 'Tag content' });
+        await userEvent.tab();
+
+        expect(screen.getByRole('button', { name: 'Next' })).toHaveFocus();
+      });
+
+      it('should have a single tab stop when tabIndex is 0', async () => {
+        render(
+          <>
+            <Tag tabIndex={0}>Tag content</Tag>
+            <button type="button">Next</button>
+          </>
+        );
+
+        const trigger = await screen.findByRole('button', {
+          name: 'Tag content',
+        });
+
+        await userEvent.tab();
+        expect(trigger).toHaveFocus();
+
+        await userEvent.tab();
+        expect(screen.getByRole('button', { name: 'Next' })).toHaveFocus();
+      });
+
+      it('should keep applying tabIndex to the OperationalTag button', async () => {
+        render(<OperationalTag tabIndex={-1} text="Tag content" />);
+
+        const button = await screen.findByRole('button');
+
+        expect(button).toHaveClass(`${prefix}--tag--operational`);
+        expect(button).toHaveAttribute('tabindex', '-1');
+      });
+    });
   });
 });
