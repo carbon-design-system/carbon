@@ -212,7 +212,8 @@ export const Dismissable = (args) => {
         selectedIndex={selectedIndex}
         onChange={handleTabChange}
         dismissable
-        onTabCloseRequest={handleCloseTabRequest}>
+        onTabCloseRequest={handleCloseTabRequest}
+        translateWithId={args.translateWithId}>
         <TabList size={args.size}>
           {renderedTabs.map((tab, index) => (
             <Tab key={index} disabled={tab.disabled}>
@@ -228,6 +229,16 @@ export const Dismissable = (args) => {
 
 Dismissable.argTypes = lineTabsSizeArgType;
 Dismissable.args = lineTabsSizeArgs;
+export const DismissableWithTranslations = Dismissable.bind({});
+DismissableWithTranslations.argTypes = lineTabsSizeArgType;
+DismissableWithTranslations.args = {
+  ...lineTabsSizeArgs,
+  translateWithId: (id, { tabLabel }) =>
+    id === 'carbon.tabs.remove-tab'
+      ? `Eliminar pestaña ${tabLabel}`
+      : `Pulsa Supr para eliminar la pestaña ${tabLabel}`,
+};
+
 export const DismissableContained = (args) => {
   const tabs = [
     {
