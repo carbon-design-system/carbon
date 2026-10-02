@@ -6,10 +6,17 @@
  */
 
 import React, { useState } from 'react';
-import { render, screen, within, fireEvent, act } from '@testing-library/react';
+import {
+  render,
+  screen,
+  within,
+  fireEvent,
+  act,
+  waitFor,
+} from '@testing-library/react';
+import { computePosition, autoUpdate } from '@floating-ui/react';
 import { useCombobox } from 'downshift';
 import userEvent from '@testing-library/user-event';
-import { useFloating } from '@floating-ui/react';
 import {
   findListBoxNode,
   assertMenuOpen,
@@ -23,12 +30,14 @@ import {
 import ComboBox from '../ComboBox';
 import { AILabel } from '../AILabel';
 
-jest.mock('@floating-ui/react', () => ({
-  ...jest.requireActual('@floating-ui/react'),
-  useFloating: jest.fn(),
-}));
-
-const actualFloatingUiReact = jest.requireActual('@floating-ui/react');
+jest.mock('@floating-ui/react', () => {
+  const actual = jest.requireActual('@floating-ui/react');
+  return {
+    ...actual,
+    computePosition: jest.fn(actual.computePosition),
+    autoUpdate: jest.fn(actual.autoUpdate),
+  };
+});
 
 const findInputNode = () => screen.getByRole('combobox');
 const openMenu = async () => {
@@ -76,8 +85,9 @@ describe('ComboBox', () => {
   let mockProps;
   window.HTMLElement.prototype.scrollIntoView = function () {};
   beforeEach(() => {
-    useFloating.mockReset();
-    useFloating.mockImplementation(actualFloatingUiReact.useFloating);
+    const actual = jest.requireActual('@floating-ui/react');
+    computePosition.mockImplementation(actual.computePosition);
+    autoUpdate.mockImplementation(actual.autoUpdate);
     mockProps = {
       id: 'test-combobox',
       items: generateItems(5, generateGenericItem),
@@ -1908,42 +1918,44 @@ describe('ComboBox', () => {
   });
 
   it('should apply floating styles when `autoAlign` is enabled', async () => {
-    const referenceNode = document.createElement('div');
-    const floatingNode = document.createElement('div');
-
-    Object.defineProperty(referenceNode, 'clientWidth', {
-      value: 320,
-      configurable: true,
+    computePosition.mockResolvedValue({
+      x: 8,
+      y: 12,
+      placement: 'bottom',
+      middlewareData: { hide: { referenceHidden: true } },
     });
-
-    useFloating.mockReturnValue({
-      refs: {
-        reference: { current: referenceNode },
-        floating: { current: floatingNode },
-        setReference: jest.fn(),
-        setFloating: jest.fn(),
-      },
-      floatingStyles: {
-        position: 'fixed',
-        top: '12px',
-        left: '8px',
-      },
-      middlewareData: {
-        hide: {
-          referenceHidden: true,
-        },
-      },
+    autoUpdate.mockImplementation((reference, floating, update) => {
+      update();
+      return () => {};
     });
 
     render(<ComboBox {...mockProps} autoAlign />);
+    await openMenu();
 
-    await waitForPosition();
+    // The menu is hidden (visibility:hidden) by the hide() middleware result,
+    // so query with { hidden: true } to bypass the a11y tree filter.
+    const floatingNode = await screen.findByRole('listbox', { hidden: true });
 
-    expect(floatingNode.style.position).toBe('fixed');
-    expect(floatingNode.style.top).toBe('12px');
-    expect(floatingNode.style.left).toBe('8px');
-    expect(floatingNode.style.visibility).toBe('hidden');
-    expect(floatingNode.style.width).toBe('320px');
+    await waitFor(() => {
+      // Styles from computePosition mock result written imperatively to the DOM
+      expect(floatingNode.style.top).toBe('12px');
+      expect(floatingNode.style.left).toBe('8px');
+      expect(floatingNode.style.visibility).toBe('hidden');
+    });
+
+    // autoUpdate should be registered while the menu is open
+    expect(autoUpdate).toHaveBeenCalledWith(
+      expect.any(HTMLElement),
+      floatingNode,
+      expect.any(Function)
+    );
+
+    // computePosition should be called with the correct placement and strategy
+    expect(computePosition).toHaveBeenCalledWith(
+      expect.any(HTMLElement),
+      floatingNode,
+      expect.objectContaining({ placement: 'bottom', strategy: 'fixed' })
+    );
   });
 
   it('should expose downshift actions through `downshiftActions`', () => {
