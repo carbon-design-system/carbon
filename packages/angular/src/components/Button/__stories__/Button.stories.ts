@@ -6,7 +6,7 @@
  */
 
 import type { Meta, StoryObj } from '@storybook/angular';
-import { expect, userEvent, within } from 'storybook/test';
+import { expect, userEvent } from 'storybook/test';
 import { ButtonComponent } from '../Button.component';
 
 const meta: Meta<ButtonComponent> = {
@@ -29,7 +29,7 @@ const meta: Meta<ButtonComponent> = {
     },
     size: {
       control: 'select',
-      options: ['sm', 'md', 'lg', 'xl', '2xl'],
+      options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl'],
       description: 'Size variant.',
     },
     type: {
@@ -76,13 +76,17 @@ export const Default: Story = {
     >Button</cds-button>`,
   }),
   play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const button = canvas.getByRole('button', { name: /button/i });
+    // The real <button> lives inside cds-ng-button's shadow root —
+    // testing-library cannot pierce shadow DOM, so we query it directly.
+    const host = canvasElement.querySelector('cds-ng-button') as HTMLElement;
+    const button = host?.shadowRoot?.querySelector(
+      'button'
+    ) as HTMLButtonElement;
 
     await expect(button).toBeVisible();
     await expect(button).not.toBeDisabled();
 
-    await userEvent.click(button);
+    await userEvent.click(host);
   },
 };
 
@@ -178,14 +182,14 @@ export const IconButton: Story = {
     ><!-- icon slot --></cds-button>`,
   }),
   play: async ({ canvasElement }) => {
-    const wc = canvasElement.querySelector('cds-wc-button');
+    const wc = canvasElement.querySelector('cds-ng-button');
     await expect(wc?.getAttribute('tooltip-text')).toBe('Add item');
     await expect(wc?.getAttribute('tooltip-position')).toBe('bottom');
   },
 };
 
 // WC: SetOfButtons
-// Uses StoryObj<Record<string, unknown>> — renders cds-wc-button-set which has
+// Uses StoryObj<Record<string, unknown>> — renders cds-ng-button-set which has
 // its own `stacked` arg, not a property of ButtonComponent.
 export const SetOfButtons: StoryObj<Record<string, unknown>> = {
   argTypes: {
@@ -197,28 +201,28 @@ export const SetOfButtons: StoryObj<Record<string, unknown>> = {
   },
   render: (args) => ({
     props: args,
-    // cds-wc-button-set is the namespaced WC tag registered by ButtonComponent.
+    // cds-ng-button-set is the namespaced WC tag registered by ButtonComponent.
     // Child cds-button elements are Angular components — no change needed there.
-    template: `<cds-wc-button-set [attr.stacked]="stacked || null">
+    template: `<cds-ng-button-set [attr.stacked]="stacked || null">
       <cds-button kind="secondary">Secondary</cds-button>
       <cds-button kind="primary">Primary</cds-button>
-    </cds-wc-button-set>`,
+    </cds-ng-button-set>`,
   }),
   play: async ({ canvasElement }) => {
-    const buttons = canvasElement.querySelectorAll('cds-wc-button');
+    const buttons = canvasElement.querySelectorAll('cds-ng-button');
     await expect(buttons.length).toBe(2);
   },
 };
 
 // WC: Skeleton
-// Uses StoryObj<Record<string, unknown>> — renders cds-wc-button-skeleton, not ButtonComponent.
+// Uses StoryObj<Record<string, unknown>> — renders cds-ng-button-skeleton, not ButtonComponent.
 export const Skeleton: StoryObj<Record<string, unknown>> = {
   render: () => ({
-    // cds-wc-button-skeleton is the namespaced WC tag registered by ButtonComponent.
-    template: `<cds-wc-button-skeleton size="md"></cds-wc-button-skeleton>`,
+    // cds-ng-button-skeleton is the namespaced WC tag registered by ButtonComponent.
+    template: `<cds-ng-button-skeleton size="md"></cds-ng-button-skeleton>`,
   }),
   play: async ({ canvasElement }) => {
-    const skeleton = canvasElement.querySelector('cds-wc-button-skeleton');
+    const skeleton = canvasElement.querySelector('cds-ng-button-skeleton');
     await expect(skeleton).not.toBeNull();
   },
 };
@@ -230,7 +234,7 @@ export const Disabled: Story = {
   args: { ...Default.args, disabled: true },
   render: Default.render,
   play: async ({ canvasElement }) => {
-    const wc = canvasElement.querySelector('cds-wc-button');
+    const wc = canvasElement.querySelector('cds-ng-button');
     await expect(wc?.getAttribute('disabled')).not.toBeNull();
   },
 };
@@ -259,11 +263,23 @@ export const AsLink: Story = {
     >Carbon Design System</cds-button>`,
   }),
   play: async ({ canvasElement }) => {
-    const wc = canvasElement.querySelector('cds-wc-button');
+    const wc = canvasElement.querySelector('cds-ng-button');
     await expect(wc?.getAttribute('href')).toBe(
       'https://carbondesignsystem.com'
     );
   },
+};
+
+// TODO(parity): Radius — demonstrates --cds-button-radius CSS custom property controls.
+// The CSS tokens apply identically to the Angular wrapper (they target the WC's shadow styles),
+// but the radiusArgType / radiusTokenScale helpers live in the WC story utilities and have
+// not yet been ported to the Angular Storybook.
+export const Radius: StoryObj<Record<string, unknown>> = {
+  tags: ['!dev', '!autodocs'],
+  render: () => ({
+    // TODO(parity): implement radius token showcase matching WC story.
+    template: `<cds-button kind="primary" style="--cds-button-radius: max">Button</cds-button>`,
+  }),
 };
 
 // TODO(parity): IconButtonWithBadge — requires cds-badge-indicator slot support in ButtonComponent.

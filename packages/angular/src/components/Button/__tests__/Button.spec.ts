@@ -15,7 +15,7 @@
  * Because jsdom does not implement shadow DOM or the custom-element lifecycle,
  * the WC classes are stubbed (see `src/__mocks__`). Tests assert that every
  * `@Input()` binding is forwarded as the correct HTML attribute on the
- * `cds-wc-button` host element — i.e. the Angular ↔ WC interface is sound.
+ * `cds-ng-button` host element — i.e. the Angular ↔ WC interface is sound.
  *
  * Shadow-DOM rendering, class names applied by the WC, and real browser
  * interaction are verified at Layer 2 (Playwright / Button.e2e.ts) where the
@@ -30,9 +30,9 @@ describe('ButtonComponent', () => {
   let fixture: ComponentFixture<ButtonComponent>;
   let component: ButtonComponent;
 
-  /** Returns the inner `cds-wc-button` element rendered by the Angular wrapper. */
+  /** Returns the inner `cds-ng-button` element rendered by the Angular wrapper. */
   const wc = () =>
-    fixture.nativeElement.querySelector('cds-wc-button') as HTMLElement;
+    fixture.nativeElement.querySelector('cds-ng-button') as HTMLElement;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -52,9 +52,9 @@ describe('ButtonComponent', () => {
   // ─── Selector isolation ────────────────────────────────────────────────────
   // Mirrors: WC test "should render an element with the button role"
 
-  it('consumer selector (cds-button) must differ from internal WC tag (cds-wc-button)', () => {
+  it('consumer selector (cds-button) must differ from internal WC tag (cds-ng-button)', () => {
     // Ensures no recursive matching: the Angular component renders a
-    // `cds-wc-button`, not a `cds-button`, so Angular never recursively
+    // `cds-ng-button`, not a `cds-button`, so Angular never recursively
     // instantiates ButtonComponent inside its own template.
     expect(wc()).not.toBeNull();
     const recursiveAngular = fixture.nativeElement.querySelector('cds-button');
@@ -73,7 +73,7 @@ describe('ButtonComponent', () => {
   // ─── disabled ─────────────────────────────────────────────────────────────
   // Mirrors: WC "should use the disabled prop to set disabled on the <button>"
 
-  it('should reflect [disabled] to the cds-wc-button element', () => {
+  it('should reflect [disabled] to the cds-ng-button element', () => {
     component.disabled = true;
     fixture.detectChanges();
     expect(wc().getAttribute('disabled')).not.toBeNull();
@@ -106,7 +106,7 @@ describe('ButtonComponent', () => {
   // Mirrors: WC "should render as an element with the role of `link` when the
   //          `href` prop is used"
 
-  it('should reflect [href] to the cds-wc-button element', () => {
+  it('should reflect [href] to the cds-ng-button element', () => {
     component.href = 'https://example.com';
     fixture.detectChanges();
     expect(wc().getAttribute('href')).toBe('https://example.com');
@@ -156,7 +156,7 @@ describe('ButtonComponent', () => {
   // ─── size ─────────────────────────────────────────────────────────────────
   // Mirrors: WC "supports props.size" describe block
 
-  const sizes = ['sm', 'md', 'lg', 'xl', '2xl'] as const;
+  const sizes = ['xs', 'sm', 'md', 'lg', 'xl', '2xl'] as const;
 
   sizes.forEach((size) => {
     it(`should reflect [size]="${size}" to the wc element`, () => {

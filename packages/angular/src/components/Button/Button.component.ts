@@ -21,16 +21,16 @@ import CDSButtonSkeleton from '@carbon/web-components/es/components/button/butto
 import { defineCustomElement } from '@carbon/web-components/es/globals/register.js';
 
 // Register backing WC elements under namespaced tags so the Angular selector
-// `cds-button` never matches the internal `cds-wc-button` element.
-defineCustomElement(CDSButton, { name: 'cds-wc-button' });
-defineCustomElement(CDSButtonSet, { name: 'cds-wc-button-set' });
-defineCustomElement(CDSButtonSkeleton, { name: 'cds-wc-button-skeleton' });
+// `cds-button` never matches the internal `cds-ng-button` element.
+defineCustomElement(CDSButton, { name: 'cds-ng-button' });
+defineCustomElement(CDSButtonSet, { name: 'cds-ng-button-set' });
+defineCustomElement(CDSButtonSkeleton, { name: 'cds-ng-button-skeleton' });
 
 /**
  * Angular wrapper for the Carbon `cds-button` Web Component.
  *
  * Consumer-facing selector : `cds-button`
- * Internal WC tag          : `cds-wc-button`  (registered above)
+ * Internal WC tag          : `cds-ng-button`  (registered above)
  *
  * @example
  * ```html
@@ -40,7 +40,7 @@ defineCustomElement(CDSButtonSkeleton, { name: 'cds-wc-button-skeleton' });
 @Component({
   selector: 'cds-button',
   template: `
-    <cds-wc-button
+    <cds-ng-button
       [attr.autofocus]="autofocus || null"
       [attr.batch-action]="batchAction || null"
       [attr.danger-description]="dangerDescription"
@@ -64,7 +64,7 @@ defineCustomElement(CDSButtonSkeleton, { name: 'cds-wc-button-skeleton' });
       [attr.type]="type"
       (click)="buttonClick.emit($event)"
       ><ng-content
-    /></cds-wc-button>
+    /></cds-ng-button>
   `,
   encapsulation: ViewEncapsulation.None,
   standalone: false,
@@ -131,9 +131,9 @@ export class ButtonComponent {
 
   /**
    * Size variant.
-   * One of: `"sm"` | `"md"` | `"lg"` | `"xl"` | `"2xl"`.
+   * One of: `"xs"` | `"sm"` | `"md"` | `"lg"` | `"xl"` | `"2xl"`.
    */
-  @Input() size: 'sm' | 'md' | 'lg' | 'xl' | '2xl' = 'md';
+  @Input() size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' = 'md';
 
   /** `tabindex` attribute. */
   @Input() tabIndex: number | undefined;

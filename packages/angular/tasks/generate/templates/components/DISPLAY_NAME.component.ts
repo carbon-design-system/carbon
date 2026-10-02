@@ -13,14 +13,14 @@ import {
 } from '@angular/core';
 
 /**
- * Angular wrapper for the `cds-wc-KEBAB_NAME` Web Component.
+ * Angular wrapper for the `cds-ng-KEBAB_NAME` Web Component.
  *
  * Consumer-facing selector: `cds-KEBAB_NAME`
- * Internal WC tag:          `cds-wc-KEBAB_NAME`  (registered via defineCustomElement)
+ * Internal WC tag:          `cds-ng-KEBAB_NAME`  (registered via defineCustomElement)
  */
 @Component({
   selector: 'cds-KEBAB_NAME',
-  template: `<cds-wc-KEBAB_NAME></cds-wc-KEBAB_NAME>`,
+  template: `<cds-ng-KEBAB_NAME></cds-ng-KEBAB_NAME>`,
   encapsulation: ViewEncapsulation.None,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   standalone: false,

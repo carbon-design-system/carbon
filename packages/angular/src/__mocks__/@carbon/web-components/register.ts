@@ -14,5 +14,9 @@
  * attributes on the host element, which Angular's template binding handles
  * without the real WC being defined.
  */
-export const defineCustomElement = () => {};
+export const defineCustomElement = <T>(
+  clazz: T,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _options?: { name?: string; registry?: CustomElementRegistry }
+): T => clazz;
 export default defineCustomElement;

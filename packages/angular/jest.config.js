@@ -14,7 +14,12 @@ export default {
     '<rootDir>/src/**/__tests__/**/*.spec.ts',
     '<rootDir>/src/**/*.spec.ts',
   ],
-  testPathIgnorePatterns: ['/node_modules/', '/esm2022/', '/fesm2022/'],
+  testPathIgnorePatterns: [
+    '/node_modules/',
+    '/esm2022/',
+    '/fesm2022/',
+    '/dist/',
+  ],
   // e2e tests run via Playwright, not Jest
   moduleNameMapper: {
     '\\.(css|scss)$': 'identity-obj-proxy',

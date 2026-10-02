@@ -11,8 +11,16 @@ import { defineConfig, devices } from '@playwright/test';
  * Playwright integration-test configuration for @carbon/angular.
  *
  * Layer 2 tests run against the built Storybook static site.
- * Start Storybook first:  yarn workspace @carbon/angular storybook:build
- * Then serve it and point STORYBOOK_URL at the origin before running tests.
+ *
+ * Local usage:
+ *   yarn workspace @carbon/angular storybook:build
+ *   yarn workspace @carbon/angular e2e
+ *
+ * CI: the `e2e` script runs storybook:build then starts http-server and
+ * runs playwright automatically via the webServer config below.
+ *
+ * NOTE: `serve` (the npm package) rewrites Storybook's iframe.html?... URLs.
+ * Use `http-server` instead — it serves files as-is without URL rewriting.
  */
 const storybookUrl = process.env.STORYBOOK_URL ?? 'http://localhost:6012';
 
@@ -31,6 +39,16 @@ export default defineConfig({
     baseURL: storybookUrl,
     trace: 'on-first-retry',
   },
+  // Automatically start http-server against the built Storybook static output
+  // when no external STORYBOOK_URL is provided (local dev and CI).
+  webServer: process.env.STORYBOOK_URL
+    ? undefined
+    : {
+        command: 'npx http-server storybook-static --port 6012 --silent',
+        url: 'http://localhost:6012',
+        reuseExistingServer: !process.env.CI,
+        timeout: 30_000,
+      },
   projects: [
     {
       name: 'chromium',

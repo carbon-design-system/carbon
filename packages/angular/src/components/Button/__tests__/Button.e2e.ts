@@ -30,12 +30,12 @@ test.describe('ButtonComponent (Layer 2)', () => {
     // Wait for the Angular component and its backing WC to be defined and rendered.
     await page.waitForSelector('cds-button');
     await page.waitForFunction(
-      () => customElements.get('cds-wc-button') !== undefined
+      () => customElements.get('cds-ng-button') !== undefined
     );
   });
 
-  test('renders a cds-wc-button inside cds-button', async ({ page }) => {
-    const wc = page.locator('cds-button cds-wc-button');
+  test('renders a cds-ng-button inside cds-button', async ({ page }) => {
+    const wc = page.locator('cds-button cds-ng-button');
     await expect(wc).toHaveCount(1);
   });
 
@@ -63,17 +63,17 @@ test.describe('ButtonComponent (Layer 2)', () => {
     );
     await page.waitForSelector('cds-button');
 
-    const wc = page.locator('cds-wc-button');
+    const wc = page.locator('cds-ng-button');
     await expect(wc).toHaveAttribute('disabled', '');
   });
 
-  test('cds-button selector differs from cds-wc-button (no recursive match)', async ({
+  test('cds-button selector differs from cds-ng-button (no recursive match)', async ({
     page,
   }) => {
     // Assert the Angular component element exists at the page root and is NOT
     // the same element as the inner WC tag.
     const angularEl = page.locator('cds-button');
-    const wcEl = page.locator('cds-button cds-wc-button');
+    const wcEl = page.locator('cds-button cds-ng-button');
 
     await expect(angularEl).toHaveCount(1);
     await expect(wcEl).toHaveCount(1);
@@ -84,6 +84,6 @@ test.describe('ButtonComponent (Layer 2)', () => {
     );
     const wcTag = await wcEl.evaluate((el) => el.tagName.toLowerCase());
     expect(angularTag).toBe('cds-button');
-    expect(wcTag).toBe('cds-wc-button');
+    expect(wcTag).toBe('cds-ng-button');
   });
 });

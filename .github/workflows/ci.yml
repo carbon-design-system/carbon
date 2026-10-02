@@ -551,3 +551,8 @@ jobs:
       - name: Build @carbon/angular Storybook
         run: yarn workspace @carbon/angular storybook:build
         working-directory: packages/angular
+      - name: Install Playwright browsers
+        run: yarn workspace @carbon/angular playwright:install
+      - name: Run @carbon/angular Playwright e2e tests
+        run: yarn workspace @carbon/angular e2e
+        working-directory: packages/angular
