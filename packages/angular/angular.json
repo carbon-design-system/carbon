@@ -1,0 +1,46 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "carbon-angular": {
+      "projectType": "library",
+      "root": "",
+      "sourceRoot": "src",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "ng-package.json",
+            "tsConfig": "tsconfig.json"
+          }
+        },
+        "storybook": {
+          "builder": "@storybook/angular:start-storybook",
+          "options": {
+            "configDir": ".storybook",
+            "browserTarget": "carbon-angular:build",
+            "tsConfig": "tsconfig.storybook.json",
+            "compodoc": false,
+            "port": 4011,
+            "styles": ["../../node_modules/@carbon/styles/css/styles.css"]
+          }
+        },
+        "build-storybook": {
+          "builder": "@storybook/angular:build-storybook",
+          "options": {
+            "configDir": ".storybook",
+            "browserTarget": "carbon-angular:build",
+            "tsConfig": "tsconfig.storybook.json",
+            "compodoc": false,
+            "outputDir": "storybook-static",
+            "styles": ["../../node_modules/@carbon/styles/css/styles.css"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": "c79241d9-7a79-4523-bf7f-0c97d5f6e82f"
+  }
+}

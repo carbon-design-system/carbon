@@ -1,0 +1,231 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as ButtonStories from './Button.stories';
+
+<Meta of={ButtonStories} />
+
+# Button
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/angular/src/components/Button)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/button/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/button/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Secondary Button](#secondary-button)
+- [Tertiary Button](#tertiary-button)
+- [Ghost Button](#ghost-button)
+- [Danger Button](#danger-button)
+- [Icon-only Button](#icon-only-button)
+- [Set of Buttons](#set-of-buttons)
+- [Skeleton state](#skeleton-state)
+- [Disabled](#disabled)
+- [Expressive](#expressive)
+- [As a link](#as-a-link)
+- [Component API](#component-api)
+  - [`kind`](#kind)
+  - [`size`](#size)
+  - [`href`](#href)
+  - [`tooltipText`](#tooltiptext)
+  - [`tooltipAlignment`](#tooltipalignment)
+  - [`tooltipPosition`](#tooltipposition)
+  - [`(buttonClick)`](#buttonclick)
+- [Angular-specific notes](#angular-specific-notes)
+- [References](#references)
+- [Feedback](#feedback)
+
+## Overview
+
+Buttons are clickable elements that are used to trigger actions. They
+communicate calls to action to the user and allow users to interact with pages
+in a variety of ways. `Button` labels express what action will occur when the
+user interacts with it.
+
+<Canvas of={ButtonStories.Default} />
+
+## Secondary Button
+
+<Canvas of={ButtonStories.Secondary} />
+
+## Tertiary Button
+
+<Canvas of={ButtonStories.Tertiary} />
+
+## Ghost Button
+
+<Canvas of={ButtonStories.Ghost} />
+
+## Danger Button
+
+The danger button has three different styles: primary, tertiary, and ghost.
+Determining which danger button style to use will depend on the level of
+emphasis you want to give to the danger action. Destructive actions that are
+considered a required or primary step in a workflow should use the primary
+danger button style. However, if a destructive action is just one of several
+actions a user could choose from, then a lower emphasis style like the danger
+tertiary button or the danger ghost button may be more appropriate.
+
+<Canvas of={ButtonStories.Danger} />
+<Canvas of={ButtonStories.DangerTertiary} />
+<Canvas of={ButtonStories.DangerGhost} />
+
+## Icon-only Button
+
+Icon buttons allow users to take actions, and make choices, with a single tap.
+Icon buttons can take the form of Primary, Secondary, Tertiary, and Ghost but
+most commonly will be styled as primary or ghost buttons. Icon only buttons do
+not support Danger, Danger tertiary, or Danger ghost.
+
+Provide `tooltipText` — this becomes the button's accessible label as well as
+the tooltip shown on hover.
+
+<Canvas of={ButtonStories.IconButton} />
+
+## Set of Buttons
+
+You can wrap two `cds-button` elements in a `cds-ng-button-set` when an action
+required by the user has more than one option. Always use a negative action
+button (secondary) paired with a positive action button (primary) in that order.
+Negative action buttons will be on the left. Positive action buttons should be
+on the right. When these two types of buttons are paired in the correct order,
+they will automatically space themselves apart.
+
+<Canvas of={ButtonStories.SetOfButtons} />
+
+## Skeleton state
+
+Use the skeleton variant to indicate that button content is loading.
+
+<Canvas of={ButtonStories.Skeleton} />
+
+## Disabled
+
+<Canvas of={ButtonStories.Disabled} />
+
+## Expressive
+
+<Canvas of={ButtonStories.Expressive} />
+
+## As a link
+
+Providing an `href` renders the underlying element as an `<a>` anchor instead of
+a `<button>`.
+
+<Canvas of={ButtonStories.AsLink} />
+
+## Component API
+
+<ArgTypes of={ButtonStories.Default} />
+
+### `kind`
+
+Carbon has seven types of buttons: `primary`, `secondary`, `tertiary`, `ghost`,
+`danger`, `danger-tertiary`, and `danger-ghost`. If no `kind` is specified, a
+`primary` button will be rendered. For more information on when to use each
+variant, see the
+[usage guidelines](https://www.carbondesignsystem.com/components/button/usage#overview).
+
+```html
+<cds-button kind="primary">Primary</cds-button>
+<cds-button kind="secondary">Secondary</cds-button>
+<cds-button kind="tertiary">Tertiary</cds-button>
+<cds-button kind="ghost">Ghost</cds-button>
+<cds-button kind="danger">Danger</cds-button>
+<cds-button kind="danger-tertiary">Danger tertiary</cds-button>
+<cds-button kind="danger-ghost">Danger ghost</cds-button>
+```
+
+### `size`
+
+Specifies the rendered size of the button. Valid values are `xs`, `sm`, `md`,
+`lg`, `xl`, and `2xl`. The default is `md`.
+
+```html
+<cds-button size="xs">Button</cds-button>
+<cds-button size="sm">Button</cds-button>
+<cds-button size="md">Button</cds-button>
+<cds-button size="lg">Button</cds-button>
+<cds-button size="xl">Button</cds-button>
+<cds-button size="2xl">Button</cds-button>
+```
+
+### `href`
+
+Providing an `href` turns the button into an anchor element.
+
+```html
+<cds-button href="https://www.carbondesignsystem.com" target="_blank">
+  Carbon Design System
+</cds-button>
+```
+
+### `tooltipText`
+
+Required for icon-only buttons. Sets both the visible tooltip and the
+`aria-label` for accessibility.
+
+```html
+<cds-button tooltipText="Add item" tooltipPosition="bottom">
+  <!-- icon projected here -->
+</cds-button>
+```
+
+### `tooltipAlignment`
+
+Controls where the tooltip caret is rendered relative to the button. Accepted
+values are `left` (start), `''` (center, default), and `right` (end).
+
+```html
+<cds-button [tooltipText]="'Add'" [tooltipAlignment]="'left'">…</cds-button>
+<cds-button [tooltipText]="'Add'" [tooltipAlignment]="''">…</cds-button>
+<cds-button [tooltipText]="'Add'" [tooltipAlignment]="'right'">…</cds-button>
+```
+
+### `tooltipPosition`
+
+Controls where the tooltip is positioned relative to the button. Accepted values
+are `top` (default), `right`, `bottom`, and `left`.
+
+```html
+<cds-button [tooltipText]="'Add'" [tooltipPosition]="'top'">…</cds-button>
+<cds-button [tooltipText]="'Add'" [tooltipPosition]="'right'">…</cds-button>
+<cds-button [tooltipText]="'Add'" [tooltipPosition]="'bottom'">…</cds-button>
+<cds-button [tooltipText]="'Add'" [tooltipPosition]="'left'">…</cds-button>
+```
+
+### `(buttonClick)`
+
+Emitted when the button or inner `<a>` is clicked. The event payload is the
+native `MouseEvent`.
+
+```html
+<cds-button (buttonClick)="handleClick($event)">Click me</cds-button>
+```
+
+## Angular-specific notes
+
+- **Standalone import:** `import { ButtonComponent } from '@carbon/angular'`
+- **NgModule import:**
+  `import { CDSAngularButtonModule } from '@carbon/angular'`
+- The backing Web Component is registered internally as `cds-ng-button` — you
+  will see this tag in DevTools. Your templates always use `cds-button`.
+- Radius is controlled via CSS custom properties that inherit through the shadow
+  boundary, not via an `@Input()`. See the
+  [web-components button docs](https://web-components.carbondesignsystem.com/?path=/docs/components-button--docs)
+  for the full `--cds-button-radius` API.
+
+## References
+
+[MDN: ARIA button role](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/button_role)
+
+[W3: Role attribute](https://www.w3.org/WAI/PF/HTML/wiki/RoleAttribute)
+
+[W3: ARIA button role example](https://www.w3.org/TR/2016/WD-wai-aria-practices-1.1-20160317/examples/button/button.html)
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/angular/src/components/Button/__stories__/Button.mdx).
