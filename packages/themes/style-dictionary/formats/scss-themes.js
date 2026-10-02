@@ -65,6 +65,7 @@ function toSassLiteral(value) {
   }
   if (
     value.startsWith('rgb') ||
+    value.startsWith('oklch') ||
     value.endsWith('px') ||
     value.endsWith('em') ||
     value.endsWith('%') ||
