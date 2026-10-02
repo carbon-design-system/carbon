@@ -35,6 +35,18 @@ $css--plex: true !default;
   transition: all $duration-fast-01 motion(standard, productive);
 }
 
+:host([kind]) .#{$prefix}--snippet__icon {
+  fill: currentColor;
+}
+
+:host([kind='ghost']:not([disabled])) .#{$prefix}--snippet__icon {
+  color: $icon-primary;
+}
+
+:host([kind='ghost'][disabled]) .#{$prefix}--snippet__icon {
+  color: $icon-disabled;
+}
+
 .#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-out {
   // https://github.com/stylelint/stylelint/issues/2363
   animation: $duration-fast-02 motion(standard, productive) hide-feedback;

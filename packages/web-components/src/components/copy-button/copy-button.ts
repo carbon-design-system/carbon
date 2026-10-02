@@ -14,6 +14,7 @@ import FocusMixin from '../../globals/mixins/focus';
 import styles from './copy-button.scss?lit';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
 import { ICON_BUTTON_SIZE } from '../icon-button/defs';
+import { BUTTON_KIND } from '../button/defs';
 import '../copy/copy';
 import { iconLoader } from '../../globals/internal/icon-loader';
 
@@ -66,6 +67,12 @@ class CDSCopyButton extends FocusMixin(LitElement) {
   @property({ reflect: true })
   size?: ICON_BUTTON_SIZE | string = ICON_BUTTON_SIZE.LARGE;
 
+  /**
+   * Button kind. If omitted, the button retains its default copy-button styling.
+   */
+  @property({ reflect: true })
+  kind?: BUTTON_KIND;
+
   render() {
     const {
       buttonClassName,
@@ -75,12 +82,14 @@ class CDSCopyButton extends FocusMixin(LitElement) {
       align,
       autoAlign,
       size,
+      kind,
     } = this;
 
-    let classes = `${prefix}--copy-btn`;
+    // The legacy copy styles override button variants, so use them only by default.
+    let classes = kind ? '' : `${prefix}--copy-btn`;
 
     if (buttonClassName) {
-      classes += ` ${buttonClassName}`;
+      classes = `${classes} ${buttonClassName}`.trim();
     }
 
     return html`
@@ -92,6 +101,7 @@ class CDSCopyButton extends FocusMixin(LitElement) {
         button-class-name=${classes}
         exportparts="button"
         align=${align}
+        kind=${kind ?? BUTTON_KIND.PRIMARY}
         size=${size}>
         ${iconLoader(Copy16, {
           slot: 'icon',

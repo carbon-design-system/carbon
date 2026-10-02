@@ -23,7 +23,13 @@ The copy button should be accompanied by a tooltip. Tooltip feedback text should
 be concise and describe the action taken when the user clicks the copy button.
 By default we display the text “Copied!”.
 
+Use `kind` to apply a standard button variant, such as `ghost` or `secondary`.
+If you omit `kind`, the button keeps its default copy-button appearance. Use
+`size="sm"`, `size="md"`, or `size="lg"` to set the button size.
+
 <Canvas of={CopyButtonStories.Default} />
+
+<Canvas of={CopyButtonStories.Ghost} />
 
 ## Component API
 
