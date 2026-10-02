@@ -9,8 +9,8 @@ import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
 
-import '../components/EmptyState';
-import { carbonIconToSVG, type CarbonIcon } from '../../../../globals/internal/icon-loader-utils';
+import '../components/empty-state';
+import { iconToSVG } from './icon-to-svg';
 
 import {
   Container,
@@ -107,7 +107,7 @@ export class CDSEmptyStatePictogram extends LitElement {
     const { pictogramKey, size, heading, subtitle, actionText, linkText, linkHref } = this;
     const descriptor = pictogramMap[pictogramKey] ?? pictogramMap['First use'];
     // width/height override the descriptor's hard-coded 64px values so CSS controls sizing.
-    const svgString = carbonIconToSVG(descriptor as CarbonIcon, {
+    const svgString = iconToSVG(descriptor, {
       fill: 'currentColor',
       width: '100%',
       height: '100%',

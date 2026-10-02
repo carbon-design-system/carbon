@@ -8,9 +8,9 @@
 import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
-import '../components/EmptyState';
+import '../components/empty-state';
 
-// Use ?url to get the asset URL (not the inline SVG Lit template the vite-lit-loader
+// Use ?url to get the asset URL (not the inline SVG template the vite-lit-loader
 // plugin produces for bare .svg imports).
 import noDataSrc from '../assets/no-data.svg?url';
 import notFoundSrc from '../assets/not-found.svg?url';

@@ -15,8 +15,8 @@
   color: var(--cds-text-primary);
 }
 
-// Global empty-state recipe styles (copied from styles/_empty-state.scss)
+// Global empty-state recipe styles
 @use './styles/empty-state';
 
-// Story layout styles (copied from styles/_story-styles.scss)
+// Story layout styles
 @use './styles/story-styles';

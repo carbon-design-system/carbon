@@ -37,9 +37,6 @@
   ],
   "exclude": [
     "src/**/*.stories.ts",
-    "src/globals/internal/storybook-cdn.ts",
-    "src/examples/**/example/main.ts",
-    "src/examples/**/example/vite.config.ts",
-    "src/examples/**/example/tsconfig.json"
+    "src/globals/internal/storybook-cdn.ts"
   ]
 }

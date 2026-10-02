@@ -11,11 +11,8 @@ import { LitElement, html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
-// In a standalone project, replace these with:
-//   import '@carbon/web-components/es/components/button/index.js';
-//   import '@carbon/web-components/es/components/link/index.js';
-import '../../../../components/button/index';
-import '../../../../components/link/index';
+import '@carbon/web-components/es/components/button/index.js';
+import '@carbon/web-components/es/components/link/index.js';
 
 const blockClass = 'cds--empty-state';
 
@@ -79,8 +76,6 @@ export class CDSEmptyStateRecipe extends LitElement {
     );
   }
 
-  // No Shadow DOM — renders into the light DOM so that styles from the
-  // host application (_empty-state.scss) apply directly.
   protected createRenderRoot() {
     return this;
   }

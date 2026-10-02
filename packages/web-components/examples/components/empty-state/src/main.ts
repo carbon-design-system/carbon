@@ -13,9 +13,9 @@ import '@carbon/web-components/es/components/tile/index.js';
 import '@carbon/web-components/es/components/ui-shell/index.js';
 
 // Register the recipe custom element
-import './components/EmptyState';
+import './components/empty-state';
 
 // Register preview custom elements
-import './preview-components/EmptyStateWithIsometricIllustration';
-import './preview-components/EmptyStateWithPictogramIllustration';
-import './preview-components/EmptyStateUnit';
+import './preview-components/empty-state-with-isometric-illustration';
+import './preview-components/empty-state-with-pictogram-illustration';
+import './preview-components/empty-state-unit';

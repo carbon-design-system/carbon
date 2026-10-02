@@ -9,15 +9,11 @@
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/theme' as *;
 
-
-
 .es-example__content {
   padding-block-start: calc(#{$spacing-09} + #{$spacing-07});
   padding-block-end: $spacing-07;
-  padding-inline-start: calc(16rem + #{$spacing-07});
-  padding-inline-end: $spacing-07;
+  padding-inline: $spacing-07;
 }
-
 
 .es-example__grid {
   display: grid;
@@ -37,7 +33,6 @@
   column-gap: $spacing-07;
 }
 
-
 .es-example__empty-wrap {
   display: flex;
   padding: $spacing-07 $spacing-05;
@@ -52,9 +47,7 @@
   }
 }
 
-
-// ─── Right-hand tile column — column 4, spans rows 1 and 2 ───────────────────
-
+// Right-hand tile column — column 4, spans rows 1 and 2
 .es-example__col--span-2 {
   display: flex;
   flex-direction: column;
@@ -83,9 +76,7 @@
   margin-block-end: $spacing-05;
 }
 
-
-// ─── Vertical tile: empty state centred in remaining vertical space ───────────
-
+// Vertical tile: empty state centred in remaining vertical space
 .es-example__tile-empty--vertical {
   display: flex;
   flex: 1;
@@ -98,9 +89,7 @@
   }
 }
 
-
-// ─── Horizontal tile: empty state anchored to start (or centred) ─────────────
-
+// Horizontal tile: empty state anchored to start (or centred)
 .es-example__tile-empty--horizontal {
   display: flex;
   inline-size: 100%;

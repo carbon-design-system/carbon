@@ -9,21 +9,21 @@
 
 import { LitElement, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
+import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
+
+import { iconToSVG } from './icon-to-svg';
 
 // ─── Import web component definitions ────────────────────────────────────────
-// In a standalone project, replace these with:
-//   import '@carbon/web-components/es/components/button/index.js'; etc.
-import '../../../../components/button/index';
-import '../../../../components/data-table/index';
-import '../../../../components/link/index';
-import '../../../../components/overflow-menu/index';
-import '../../../../components/skip-to-content/index';
-import '../../../../components/tile/index';
-import '../../../../components/ui-shell/index';
+import '@carbon/web-components/es/components/button/index.js';
+import '@carbon/web-components/es/components/data-table/index.js';
+import '@carbon/web-components/es/components/link/index.js';
+import '@carbon/web-components/es/components/overflow-menu/index.js';
+import '@carbon/web-components/es/components/tile/index.js';
+import '@carbon/web-components/es/components/ui-shell/index.js';
 
-import { Search20, Settings16 } from '@carbon/icons';
-import { iconLoader } from '../../../../globals/internal/icon-loader';
-import '../components/EmptyState';
+import Settings16 from '@carbon/icons/es/settings/16.js';
+
+import '../components/empty-state';
 import notFoundSrc from '../assets/not-found.svg?url';
 import unauthorizedSrc from '../assets/unauthorized.svg?url';
 import errorSrc from '../assets/error.svg?url';
@@ -41,16 +41,6 @@ const TABLE_ROWS = [
   { id: 'a', name: 'Load Balancer 1', protocol: 'HTTP', port: 443, rule: 'Round robin' },
   { id: 'b', name: 'Load Balancer 2', protocol: 'HTTP', port: 80, rule: 'DNS delegation' },
   { id: 'c', name: 'Load Balancer 3', protocol: 'HTTP', port: 3000, rule: 'Round robin' },
-];
-
-const SIDE_NAV_LINKS = [
-  'Overview',
-  'Assets',
-  'Monitoring',
-  'Activity',
-  'Configuration',
-  'Access',
-  'Billing',
 ];
 
 /**
@@ -84,9 +74,6 @@ export class CDSEmptyStateUnit extends LitElement {
   @state()
   private _searchValue = '';
 
-  @state()
-  private _sideNavExpanded = false;
-
   private get _filteredRows() {
     const q = this._searchValue.trim().toLowerCase();
     if (!q) return TABLE_ROWS;
@@ -107,18 +94,13 @@ export class CDSEmptyStateUnit extends LitElement {
     if (input) input.value = '';
   }
 
-  private _toggleSideNav() {
-    this._sideNavExpanded = !this._sideNavExpanded;
-  }
-
-  // No Shadow DOM — styles from _story-styles.scss and _empty-state.scss
-  // must reach the rendered HTML directly.
+  // No Shadow DOM — styles from src/index.scss must reach the rendered HTML directly.
   protected createRenderRoot() {
     return this;
   }
 
   render() {
-    const { placement, _filteredRows: filteredRows, _sideNavExpanded: expanded } = this;
+    const { placement, _filteredRows: filteredRows } = this;
     const isCentre = placement === 'centre';
     const noResults = filteredRows.length === 0;
     const emptyWrapMod = isCentre
@@ -128,30 +110,12 @@ export class CDSEmptyStateUnit extends LitElement {
     return html`
       <cds-header aria-label="IBM Platform">
         <cds-skip-to-content></cds-skip-to-content>
-        <cds-header-menu-button
-          aria-label="${expanded ? 'Close menu' : 'Open menu'}"
-          ?active="${expanded}"
-          @click="${this._toggleSideNav}">
-        </cds-header-menu-button>
         <cds-header-name href="#" prefix="IBM">[Platform]</cds-header-name>
         <cds-header-nav aria-label="IBM Platform">
           <cds-header-nav-item href="#">Link</cds-header-nav-item>
           <cds-header-nav-item href="#">Link</cds-header-nav-item>
           <cds-header-nav-item href="#">Link</cds-header-nav-item>
         </cds-header-nav>
-        <div class="cds--header__global">
-          <cds-header-global-action aria-label="Search" tooltip-text="Search">
-            ${iconLoader(Search20, { slot: 'icon' })}
-          </cds-header-global-action>
-        </div>
-        <cds-side-nav
-          aria-label="Side navigation"
-          ?expanded="${expanded}"
-          is-not-persistent>
-          ${SIDE_NAV_LINKS.map((label) => html`
-            <cds-side-nav-link href="#">${label}</cds-side-nav-link>
-          `)}
-        </cds-side-nav>
       </cds-header>
 
       <main class="es-example__content">
@@ -172,10 +136,10 @@ export class CDSEmptyStateUnit extends LitElement {
                     @cds-search-input="${this._handleSearch}">
                   </cds-table-toolbar-search>
                   <cds-overflow-menu toolbar-action>
-                    ${iconLoader(Settings16, {
+                    ${unsafeSVG(iconToSVG(Settings16, {
                       slot: 'icon',
                       class: 'cds--overflow-menu__icon',
-                    })}
+                    }))}
                     <span slot="tooltip-content">Settings</span>
                     <cds-overflow-menu-body flipped>
                       <cds-overflow-menu-item>Action 1</cds-overflow-menu-item>

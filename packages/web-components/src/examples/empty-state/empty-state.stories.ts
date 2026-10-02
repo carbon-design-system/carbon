@@ -8,13 +8,13 @@
 import { html } from 'lit';
 import type { Meta } from '@storybook/web-components';
 
-import DocsPage from './EmptyState.mdx';
+import DocsPage from './empty-state.mdx';
 
-import './example/styles/_empty-state.scss';
-import './example/styles/_story-styles.scss';
-import './example/preview-components/EmptyStateWithIsometricIllustration';
-import './example/preview-components/EmptyStateWithPictogramIllustration';
-import './example/preview-components/EmptyStateUnit';
+import '../../../examples/components/empty-state/src/styles/_empty-state.scss';
+import '../../../examples/components/empty-state/src/styles/_story-styles.scss';
+import '../../../examples/components/empty-state/src/preview-components/empty-state-with-isometric-illustration';
+import '../../../examples/components/empty-state/src/preview-components/empty-state-with-pictogram-illustration';
+import '../../../examples/components/empty-state/src/preview-components/empty-state-unit';
 
 // ─── Story: unit with isometric illustration ─────────────────────────────────
 
@@ -120,8 +120,6 @@ export const emptyStateInUI = {
     <cds-empty-state-unit placement="${args.placement}"></cds-empty-state-unit>
   `,
 };
-
-// ─── Meta ─────────────────────────────────────────────────────────────────────
 
 const meta: Meta = {
   title: 'Examples/EmptyState',
