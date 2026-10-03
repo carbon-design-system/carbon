@@ -89,6 +89,39 @@
             $border-strong 100%
           )
           border-box;
+
+      // padding-inline-end: button_size + inset_inline_end + $spacing-03 (8px gap).
+      // xs: 24px + 0px         + 8px = 32px
+      // sm: 24px + $spacing-02 + 8px = 36px
+      // md: 24px + $spacing-03 + 8px = 40px
+      // lg: 32px + $spacing-03 + 8px = 48px
+      // padding-inline-start stays as layout.size('height') (= icon_right_edge + gap):
+      // xs: (24+16)/2 + 4px gap = 24px; sm: 32px; md: 40px; lg: 48px — all equal layout.size('height').
+      .#{$prefix}--layout--size-xs & {
+        padding-inline-end: calc(#{convert.to-rem(24px)} + #{$spacing-03});
+      }
+
+      .#{$prefix}--layout--size-sm & {
+        padding-inline-end: calc(
+          #{convert.to-rem(24px)} + #{$spacing-02} + #{$spacing-03}
+        );
+      }
+
+      .#{$prefix}--layout--size-md & {
+        padding-inline-end: calc(
+          #{convert.to-rem(24px)} + #{$spacing-03} + #{$spacing-03}
+        );
+      }
+
+      .#{$prefix}--layout--size-lg & {
+        padding-inline-end: calc(
+          #{convert.to-rem(32px)} + #{$spacing-03} + #{$spacing-03}
+        );
+      }
+      // When close button is hidden (empty input), use $spacing-03 (8px) padding-inline-end.
+      &:has(~ .#{$prefix}--search-close--hidden) {
+        padding-inline-end: $spacing-03;
+      }
     }
 
     &:focus {
@@ -154,6 +187,11 @@
     background-clip: padding-box;
     inset-block-start: 0;
     inset-inline-end: 0;
+
+    @if enabled('enable-v12-release') {
+      inset-block-start: 50%;
+      transform: translateY(-50%);
+    }
   }
 
   .#{$prefix}--search-button {
@@ -210,6 +248,40 @@
     }
   }
 
+  .#{$prefix}--search-close {
+    @if enabled('enable-v12-release') {
+      // For v12: close button is smaller than the search field.
+      // lg search (48px) → sm button (32px); md/sm/xs search → xs button (24px).
+      @include layout.redefine-tokens(
+        (
+          size: (
+            height: (
+              xs: convert.to-rem(24px),
+              sm: convert.to-rem(24px),
+              md: convert.to-rem(24px),
+              lg: convert.to-rem(32px),
+            ),
+          ),
+        )
+      );
+      @include layout.use('size', $default: 'md', $min: 'xs', $max: 'lg');
+
+      // lg/md → 8px padding-inline-end; sm → 4px; xs → 0
+      border-radius: $border-radius-max;
+      block-size: layout.size('height');
+      inline-size: layout.size('height');
+      inset-inline-end: $spacing-03;
+
+      .#{$prefix}--layout--size-sm & {
+        inset-inline-end: $spacing-02;
+      }
+
+      .#{$prefix}--layout--size-xs & {
+        inset-inline-end: 0;
+      }
+    }
+  }
+
   // Preserve the field focus outline while the clear button is hovered.
   .#{$prefix}--search-input:focus ~ .#{$prefix}--search-close:hover {
     background-color: transparent;
@@ -223,6 +295,10 @@
       inset-block: $spacing-01;
       inset-inline: 0 $spacing-01;
       pointer-events: none;
+
+      @if enabled('enable-v12-release') {
+        border-radius: $border-radius-max;
+      }
     }
   }
 
