@@ -66,6 +66,25 @@ export default {
         type: 'select',
       },
     },
+    tooltipAlign: {
+      options: [
+        'top',
+        'top-start',
+        'top-end',
+        'bottom',
+        'bottom-start',
+        'bottom-end',
+        'left',
+        'left-start',
+        'left-end',
+        'right',
+        'right-start',
+        'right-end',
+      ],
+      control: {
+        type: 'select',
+      },
+    },
     value: {
       control: {
         type: 'text',
@@ -88,7 +107,7 @@ export default {
 
 const defaultParameters = {
   controls: {
-    exclude: ['isExpanded', 'renderIcon', 'role'],
+    exclude: ['isExpanded', 'renderIcon', 'role', 'tooltipAlign'],
   },
 };
 
