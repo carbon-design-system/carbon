@@ -13,8 +13,12 @@ import '../side-panel/index';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 import styles from './tearsheet.scss?lit';
-import { SignalWatcher } from '@lit-labs/signals';
-import { getTearsheetSignal, getParentTearsheetId } from './tearsheet-signal';
+import { consume } from '@lit/context';
+import {
+  tearsheetContext,
+  defaultTearsheetState,
+  type TearsheetContextValue,
+} from './tearsheet-context';
 import { prefix } from '../../globals/settings.js';
 
 /**
@@ -26,9 +30,7 @@ import { prefix } from '../../globals/settings.js';
  * @fires cds-tearsheet-influencer-closed - Fired when the influencer panel is closed (mobile only)
  */
 @customElement(`${prefix}-tearsheet-influencer`)
-class CDSTearsheetInfluencer extends SignalWatcher(
-  HostListenerMixin(LitElement)
-) {
+class CDSTearsheetInfluencer extends HostListenerMixin(LitElement) {
   @property({ reflect: true })
   slot = 'influencer';
 
@@ -45,13 +47,8 @@ class CDSTearsheetInfluencer extends SignalWatcher(
   @property({ attribute: 'influencer-panel-aria-label' })
   influencerPanelAriaLabel: string = 'Influencer panel';
 
-  /** uniqueId of the parent cds-tearsheet, read once in connectedCallback. */
-  private _uniqueId: string = '';
-
-  connectedCallback(): void {
-    super.connectedCallback();
-    this._uniqueId = getParentTearsheetId(this);
-  }
+  @consume({ context: tearsheetContext, subscribe: true })
+  private _tearsheetCtx?: TearsheetContextValue;
 
   private handleClose = () => {
     this.influencerPanelOpen = false;
@@ -64,9 +61,7 @@ class CDSTearsheetInfluencer extends SignalWatcher(
   };
 
   render() {
-    // getTearsheetSignal(id).get() subscribes SignalWatcher to only this
-    // instance's signal — changes in other tearsheets never trigger a re-render.
-    const { isSm } = getTearsheetSignal(this._uniqueId).get();
+    const { isSm } = this._tearsheetCtx?.state ?? defaultTearsheetState;
 
     return !isSm
       ? html` <aside aria-label="${this.influencerPanelAriaLabel}">

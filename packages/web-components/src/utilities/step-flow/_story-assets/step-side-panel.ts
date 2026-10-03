@@ -14,7 +14,6 @@ import '../../../components/text-input/index';
 import '../../../components/button/index';
 import '../../../components/progress-indicator/index';
 import { StepInstance } from '../step-flow-signal.js';
-import { SignalWatcher } from '@lit-labs/signals';
 import '../step-group.js';
 import styles from './step-side-panel.scss?lit';
 
@@ -27,7 +26,7 @@ interface FormStateType extends Record<string, unknown> {
 }
 
 @customElement('step-side-panel')
-export class StepSidePanel extends SignalWatcher(LitElement) {
+export class StepSidePanel extends LitElement {
   @state()
   open: boolean = true;
 
@@ -91,7 +90,7 @@ export class StepSidePanel extends SignalWatcher(LitElement) {
     this._stepInfo.updateFormState = savedFormState;
   }
 
-  private _stepInfo = new StepInstance();
+  private _stepInfo = new StepInstance(this);
 
   connectedCallback(): void {
     super.connectedCallback();
