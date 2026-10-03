@@ -35,5 +35,8 @@
     ".storybook/**/*.ts",
     ".storybook/**/*.tsx"
   ],
-  "exclude": ["src/**/*.stories.ts", "src/globals/internal/storybook-cdn.ts"]
+  "exclude": [
+    "src/**/*.stories.ts",
+    "src/globals/internal/storybook-cdn.ts"
+  ]
 }
