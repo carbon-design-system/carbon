@@ -2732,9 +2732,6 @@ Map {
       "showToolbar": {
         "type": "bool",
       },
-      "toolbarLabel": {
-        "type": "string",
-      },
       "size": {
         "args": [
           [
@@ -2746,6 +2743,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "toolbarLabel": {
+        "type": "string",
       },
       "zebra": {
         "type": "bool",
