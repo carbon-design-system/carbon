@@ -5,11 +5,70 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { expect, fixture, html, oneEvent } from '@open-wc/testing';
+import { expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
 import { sendKeys } from '@web/test-runner-commands';
 import '@carbon/web-components/es/components/tabs/index.js';
 
 describe('cds-tabs', function () {
+  for (const [dir, width] of [
+    ['ltr', 320],
+    ['ltr', 320.5],
+    ['rtl', 320],
+    ['rtl', 320.5],
+  ]) {
+    it(`should hide scroll buttons at the ${dir} boundaries with a ${width}px container`, async () => {
+      const host = await fixture(html`
+        <div dir=${dir} style=${`width: ${width}px`}>
+          <cds-tabs>
+            ${Array.from(
+              { length: 10 },
+              (_, i) => html`
+                <cds-tab value=${`tab-${i}`}>Tab number ${i}</cds-tab>
+              `
+            )}
+          </cds-tabs>
+        </div>
+      `);
+      const el = host.firstElementChild;
+      await el.updateComplete;
+      const container = el.shadowRoot.querySelector(
+        '.cds--tabs-nav-content-container'
+      );
+      const previous = el.shadowRoot.querySelector('[part="prev-button"]');
+      const next = el.shadowRoot.querySelector('[part="next-button"]');
+      const hidden = (button) => getComputedStyle(button).display === 'none';
+      await waitUntil(() => hidden(previous) && !hidden(next));
+      // Elastic overscroll can report a position before the start boundary.
+      Object.defineProperty(container, 'scrollLeft', {
+        configurable: true,
+        value: dir === 'rtl' ? 5 : -5,
+      });
+      try {
+        container.dispatchEvent(new Event('scroll'));
+        await el.updateComplete;
+        expect(hidden(previous)).to.be.true;
+      } finally {
+        delete container.scrollLeft;
+      }
+      next.click();
+      await waitUntil(() =>
+        dir === 'rtl' ? container.scrollLeft < 0 : container.scrollLeft > 0
+      );
+      container.scrollLeft = (dir === 'rtl' ? -1 : 1) * container.scrollWidth;
+      await waitUntil(() => hidden(next) && !hidden(previous));
+      previous.click();
+      await waitUntil(() => !hidden(next));
+      container.scrollLeft = 0;
+      await waitUntil(() => hidden(previous));
+      host.style.width = '2400px';
+      await waitUntil(() => hidden(previous) && hidden(next));
+      el.remove();
+      host.append(el);
+      host.style.width = `${width}px`;
+      await waitUntil(() => hidden(previous) && !hidden(next));
+    });
+  }
+
   /**
    * Helper to get the inner focusable `<a>` element of a `cds-tab`.
    */

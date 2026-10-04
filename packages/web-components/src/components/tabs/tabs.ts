@@ -331,30 +331,30 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
    *
    * @param _ Event object
    * @param [options] The options.
-   * @param [options.direction] `-1` to scroll forward, `1` to scroll backward.
+   * @param [options.direction] `-1` to scroll backward, `1` to scroll forward.
    */
   protected _handleScrollButtonClick(_, { direction }) {
-    if (!this.tablist) {
+    const container = this._contentContainerNode;
+    if (!this.tablist || !container) {
       return;
     }
-    const { scrollLeft, clientWidth, scrollWidth } =
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-      this._contentContainerNode!;
+    const { scrollLeft, clientWidth, scrollWidth } = container;
+    const scrollSign = getComputedStyle(container).direction === 'rtl' ? -1 : 1;
+    const scrollPosition = Math.max(0, scrollLeft * scrollSign);
     switch (direction) {
       case -1:
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-        this._contentContainerNode!.scrollLeft = Math.max(
-          scrollLeft - (scrollWidth / this._totalTabs) * 1.5,
-          0
-        );
+        container.scrollLeft =
+          scrollSign *
+          Math.max(scrollPosition - (scrollWidth / this._totalTabs) * 1.5, 0);
         break;
       case 1:
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-        this._contentContainerNode!.scrollLeft =
-          Math.min(
-            scrollLeft + (scrollWidth / this._totalTabs) * 1.5,
+        container.scrollLeft =
+          scrollSign *
+          (Math.min(
+            scrollPosition + (scrollWidth / this._totalTabs) * 1.5,
             scrollWidth - clientWidth
-          ) + 1;
+          ) +
+            1);
         break;
       default:
         break;
@@ -433,20 +433,6 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
   private _currentScrollPosition = 0;
 
   /**
-   * The left-hand sentinel to track intersection with the host element.
-   * If they intersect, the left-hand paginator button should be hidden.
-   */
-  @query(`.${prefix}--sub-content-left`)
-  private _intersectionLeftSentinelNode?: HTMLElement;
-
-  /**
-   * The right-hand sentinel to track intersection with the host element.
-   * If they intersect, the right-hand paginator button should be hidden.
-   */
-  @query(`.${prefix}--sub-content-right`)
-  private _intersectionRightSentinelNode?: HTMLElement;
-
-  /**
    * An assistive text for screen reader to announce, telling the open state.
    */
   @property({ attribute: 'selecting-items-assistive-text' })
@@ -506,85 +492,51 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
   @property({ type: Boolean, attribute: 'full-width', reflect: true })
   fullWidth = false;
 
-  /**
-   * `true` if left-hand scroll intersection sentinel intersects with the host element.
-   * In this condition, the left-hand paginator button should be hidden.
-   */
   @state()
-  private _isIntersectionLeftTrackerInContent = true;
+  private _isAtStart = true;
 
-  /**
-   * `true` if right-hand scroll intersection sentinel intersects with the host element.
-   * In this condition, the right-hand paginator button should be hidden.
-   */
   @state()
-  private _isIntersectionRightTrackerInContent = true;
+  private _isAtEnd = true;
 
-  /**
-   * The observer for the intersection of left-side content edge.
-   */
-  private _observerIntersection: IntersectionObserver | null = null;
+  private _resizeObserver: ResizeObserver | null = null;
 
-  /**
-   * The intersection observer callback for the scrolling container.
-   *
-   * @param records The intersection observer records.
-   */
-  private _observeIntersectionContainer = (records) => {
-    const {
-      _intersectionLeftSentinelNode: intersectionLeftSentinelNode,
-      _intersectionRightSentinelNode: intersectionRightSentinelNode,
-    } = this;
-
-    records.forEach(({ isIntersecting, target }) => {
-      if (target === intersectionLeftSentinelNode) {
-        this._isIntersectionLeftTrackerInContent = isIntersecting;
-      }
-      if (target === intersectionRightSentinelNode) {
-        this._isIntersectionRightTrackerInContent = isIntersecting;
-      }
-    });
+  private _updateScrollButtonVisibility = () => {
+    const container = this._contentContainerNode;
+    if (!container) {
+      return;
+    }
+    const scrollSign = getComputedStyle(container).direction === 'rtl' ? -1 : 1;
+    const position = container.scrollLeft * scrollSign;
+    const maxScroll = container.scrollWidth - container.clientWidth;
+    // Scroll dimensions are rounded, while tab widths can be fractional.
+    this._isAtStart = position <= 1;
+    this._isAtEnd = maxScroll - position <= 1;
   };
 
-  /**
-   * Cleans-up and creates the intersection observer for the scrolling container.
-   *
-   * @param [options] The options.
-   * @param [options.create] `true` to create the new intersection observer.
-   */
-  private _cleanAndCreateIntersectionObserverContainer({
-    create,
-  }: { create?: boolean } = {}) {
-    const {
-      _intersectionLeftSentinelNode: intersectionLeftSentinelNode,
-      _intersectionRightSentinelNode: intersectionRightSentinelNode,
-    } = this;
-
-    if (this._observerIntersection) {
-      this._observerIntersection.disconnect();
-      this._observerIntersection = null;
+  private _observeSize() {
+    this._resizeObserver?.disconnect();
+    this._resizeObserver = new ResizeObserver(
+      this._updateScrollButtonVisibility
+    );
+    if (this._contentContainerNode) {
+      this._resizeObserver.observe(this._contentContainerNode);
     }
+    if (this.tablist) {
+      this._resizeObserver.observe(this.tablist);
+    }
+    this._updateScrollButtonVisibility();
+  }
 
-    if (create) {
-      this._observerIntersection = new IntersectionObserver(
-        this._observeIntersectionContainer,
-        {
-          root: this,
-          threshold: 0,
-        }
-      );
-
-      if (intersectionLeftSentinelNode) {
-        this._observerIntersection.observe(intersectionLeftSentinelNode);
-      }
-      if (intersectionRightSentinelNode) {
-        this._observerIntersection.observe(intersectionRightSentinelNode);
-      }
+  connectedCallback() {
+    super.connectedCallback();
+    if (this.hasUpdated) {
+      this._observeSize();
     }
   }
 
   disconnectedCallback() {
-    this._cleanAndCreateIntersectionObserverContainer();
+    this._resizeObserver?.disconnect();
+    this._resizeObserver = null;
     super.disconnectedCallback();
   }
 
@@ -614,7 +566,7 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     // Call super to run content-switcher init logic (initial selection)
     super.firstUpdated();
     this._tabInitialLoad();
-    this._cleanAndCreateIntersectionObserverContainer({ create: true });
+    this._observeSize();
     this._syncSecondaryLabels();
     this._syncSizeToTabs();
   }
@@ -680,15 +632,11 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
    * Render the previous button if tablist is wider than container.
    */
   protected renderPreviousButton(): TemplateResult | null {
-    const {
-      _isIntersectionLeftTrackerInContent: isIntersectionLeftTrackerInContent,
-    } = this;
     const previousButtonClasses = classMap({
       [`${prefix}--tab--overflow-nav-button`]: true,
       [`${prefix}--tabs__nav-caret-left`]: true,
       [`${prefix}--tab--overflow-nav-button--previous`]: true,
-      [`${prefix}--tab--overflow-nav-button--hidden`]:
-        isIntersectionLeftTrackerInContent,
+      [`${prefix}--tab--overflow-nav-button--hidden`]: this._isAtStart,
     });
     return html`
       <button
@@ -709,15 +657,11 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
    * Render the next button if tablist is wider than container.
    */
   protected renderNextButton(): TemplateResult | null {
-    const {
-      _isIntersectionRightTrackerInContent: isIntersectionRightTrackerInContent,
-    } = this;
     const nextButtonClasses = classMap({
       [`${prefix}--tab--overflow-nav-button`]: true,
       [`${prefix}--tabs__nav-caret-right`]: true,
       [`${prefix}--tab--overflow-nav-button--next`]: true,
-      [`${prefix}--tab--overflow-nav-button--hidden`]:
-        isIntersectionRightTrackerInContent,
+      [`${prefix}--tab--overflow-nav-button--hidden`]: this._isAtEnd,
     });
     return html`
       <button
@@ -742,13 +686,13 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
 
     return html`
       ${this.renderPreviousButton()}
-      <div class="${prefix}--tabs-nav-content-container">
+      <div
+        class="${prefix}--tabs-nav-content-container"
+        @scroll=${this._updateScrollButtonVisibility}>
         <div class="${prefix}--tabs-nav-content">
           <div class="${prefix}--tabs-nav">
             <div id="tablist" role="tablist" class="${prefix}--tab--list">
-              <div class="${prefix}--sub-content-left"></div>
               <slot @slotchange=${handleSlotchange}></slot>
-              <div class="${prefix}--sub-content-right"></div>
             </div>
           </div>
         </div>
