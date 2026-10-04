@@ -311,15 +311,18 @@ describe('Toggletip', () => {
           </Toggletip>
         );
 
-        expect(screen.getByText('Toggle')).toHaveAttribute(
-          'aria-expanded',
-          'false'
-        );
+        const button = screen.getByText('Toggle');
+        const controls = button.getAttribute('aria-controls');
+        const content = document.getElementById(controls);
+
+        expect(button).toHaveAttribute('aria-expanded', 'false');
+        expect(content).toHaveTextContent('Content');
+        expect(button).not.toHaveAttribute('aria-describedby');
+
         await userEvent.click(screen.getByText('Toggle'));
-        expect(screen.getByText('Toggle')).toHaveAttribute(
-          'aria-expanded',
-          'true'
-        );
+        expect(button).toHaveAttribute('aria-expanded', 'true');
+        expect(button).toHaveAttribute('aria-controls', controls);
+        expect(button).not.toHaveAttribute('aria-describedby');
       });
     });
 
