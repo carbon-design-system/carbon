@@ -77,6 +77,18 @@ describe('Tag', () => {
       expect(screen.getByText('AI')).toBeInTheDocument();
     });
 
+    it('should render children as tag content', () => {
+      render(
+        <DismissibleTag type="red" title="Close tag">
+          <span data-testid="custom-content">Custom tag content</span>
+        </DismissibleTag>
+      );
+
+      expect(screen.getByTestId('custom-content')).toHaveTextContent(
+        'Custom tag content'
+      );
+    });
+
     it('should respect deprecated slug prop', () => {
       const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
       render(

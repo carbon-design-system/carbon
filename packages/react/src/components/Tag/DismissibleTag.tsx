@@ -32,6 +32,11 @@ import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 
 export interface DismissibleTagBaseProps {
   /**
+   * Provide custom content to be rendered inside of the tag.
+   */
+  children?: ReactNode;
+
+  /**
    * Provide a custom className that is applied to the containing <span>
    */
   className?: string;
@@ -112,6 +117,7 @@ export type DismissibleTagProps<T extends React.ElementType> = PolymorphicProps<
 const DismissibleTag = forwardRef(
   <T extends React.ElementType>(
     {
+      children,
       className,
       decorator,
       disabled,
@@ -171,6 +177,9 @@ const DismissibleTag = forwardRef(
     const { onClick, ...otherProps } = other;
 
     const dismissActionLabel = isEllipsisApplied ? dismissTooltipLabel : title;
+    const tagContent = children ?? text;
+    const tagLabelTitle =
+      tagTitle ?? (typeof tagContent === 'string' ? tagContent : text);
 
     return (
       <Tag
@@ -183,10 +192,8 @@ const DismissibleTag = forwardRef(
         id={tagId}
         {...otherProps}>
         <div className={`${prefix}--interactive--tag-children`}>
-          <Text
-            title={tagTitle ? tagTitle : text}
-            className={`${prefix}--tag__label`}>
-            {text}
+          <Text title={tagLabelTitle} className={`${prefix}--tag__label`}>
+            {tagContent}
           </Text>
           {slug ? (
             normalizedDecorator
@@ -220,6 +227,11 @@ const DismissibleTag = forwardRef(
 
 DismissibleTag.displayName = 'DismissibleTag';
 DismissibleTag.propTypes = {
+  /**
+   * Provide custom content to be rendered inside of the tag.
+   */
+  children: PropTypes.node,
+
   /**
    * Provide a custom className that is applied to the containing <span>
    */
