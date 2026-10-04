@@ -496,3 +496,31 @@ describe('Callout', () => {
     spy.mockRestore();
   });
 });
+
+describe('notification status icon', () => {
+  it.each([true, false])(
+    'exposes the default warning description with hideCloseButton=%s',
+    (hideCloseButton) => {
+      render(
+        <InlineNotification kind="warning" hideCloseButton={hideCloseButton} />
+      );
+      expect(screen.getByRole('img', { name: 'warning icon' })).toBeVisible();
+    }
+  );
+
+  it.each([
+    InlineNotification,
+    ToastNotification,
+    ActionableNotification,
+    Callout,
+  ])('exposes the custom status description for %p', (Component) => {
+    render(
+      <Component
+        kind="warning"
+        title="Check your changes"
+        statusIconDescription="Unsaved changes"
+      />
+    );
+    expect(screen.getByRole('img', { name: 'Unsaved changes' })).toBeVisible();
+  });
+});

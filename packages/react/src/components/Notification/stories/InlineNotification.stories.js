@@ -47,3 +47,13 @@ Default.args = {
   title: 'Notification title',
   subtitle: 'Subtitle text goes here',
 };
+
+export const WithoutCloseButton = (args) => <InlineNotification {...args} />;
+
+WithoutCloseButton.args = {
+  kind: 'warning',
+  hideCloseButton: true,
+  statusIconDescription: 'Warning',
+  title: 'Unsaved changes',
+  subtitle: 'Save your changes before leaving this page.',
+};
