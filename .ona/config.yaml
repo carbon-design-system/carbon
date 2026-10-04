@@ -1,0 +1,133 @@
+tasks:
+  install-dependencies:
+    name: Install dependencies
+    description: Install the locked Yarn workspace dependencies.
+    command: GIT_CONFIG_GLOBAL=/dev/null YARN_ENABLE_HARDENED_MODE=0 yarn install --immutable && node node_modules/puppeteer/install.mjs && node node_modules/@web/test-runner-puppeteer/node_modules/puppeteer/install.mjs
+    triggeredBy:
+      - manual
+      - postDevcontainerStart
+      - prebuild
+
+  build:
+    name: Build all packages
+    description: Build every package in dependency order.
+    command: GIT_CONFIG_GLOBAL=/dev/null yarn build
+    dependsOn:
+      - install-dependencies
+    triggeredBy:
+      - manual
+
+  format-check:
+    name: Check formatting
+    description: Verify formatting without changing files.
+    command: GIT_CONFIG_GLOBAL=/dev/null yarn format:diff '!packages/react/icons/index.js' '!packages/react/icons/index.esm.js'
+    dependsOn:
+      - install-dependencies
+    triggeredBy:
+      - manual
+
+  lint:
+    name: Lint code and styles
+    description: Run the JavaScript, TypeScript, and Sass linters.
+    command: GIT_CONFIG_GLOBAL=/dev/null yarn lint && GIT_CONFIG_GLOBAL=/dev/null yarn lint:styles
+    dependsOn:
+      - install-dependencies
+    triggeredBy:
+      - manual
+
+  test:
+    name: Run unit tests
+    description: Run the repository Jest unit test suite.
+    command: GIT_CONFIG_GLOBAL=/dev/null yarn test --ci
+    dependsOn:
+      - build
+    triggeredBy:
+      - manual
+
+  test-scss-generator:
+    name: Test SCSS generator
+    description: Run the SCSS generator test suite.
+    command: GIT_CONFIG_GLOBAL=/dev/null yarn test:scss-generator --ci
+    dependsOn:
+      - build
+    triggeredBy:
+      - manual
+
+  test-assets-e2e:
+    name: Test generated assets
+    description: Run the icon and pictogram end-to-end tests.
+    command: GIT_CONFIG_GLOBAL=/dev/null yarn test:e2e
+    dependsOn:
+      - build
+    triggeredBy:
+      - manual
+
+  test-web-components:
+    name: Test Web Components
+    description: Run the browser-based Web Components tests.
+    command: CI=1 GIT_CONFIG_GLOBAL=/dev/null yarn workspace @carbon/web-components test
+    dependsOn:
+      - build
+    triggeredBy:
+      - manual
+
+services:
+  react-storybook:
+    name: React Storybook
+    description: Run the current React component development server.
+    commands:
+      start: |
+        ona environment port open 3011 --admission creator_only --name "React Storybook" --protocol http
+        export ONA_EXPOSED_HOST="$(ona environment port get 3011 -f URL | cut -c 9-)"
+        export __VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS="$ONA_EXPOSED_HOST"
+        exec yarn workspace @carbon/react storybook --host 0.0.0.0 --ci
+      ready: curl -fsS http://localhost:3011/ >/dev/null
+    readinessTimeout: 900s
+    triggeredBy:
+      - manual
+      - postEnvironmentStart
+
+  react-v12-storybook:
+    name: React v12 Storybook
+    description: Run the React v12-preview component development server.
+    commands:
+      start: |
+        ona environment port open 3012 --admission creator_only --name "React v12 Storybook" --protocol http
+        export ONA_EXPOSED_HOST="$(ona environment port get 3012 -f URL | cut -c 9-)"
+        export __VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS="$ONA_EXPOSED_HOST"
+        exec yarn workspace @carbon/react storybook:v12 --host 0.0.0.0 --ci
+      ready: curl -fsS http://localhost:3012/ >/dev/null
+    readinessTimeout: 900s
+    triggeredBy:
+      - manual
+      - postEnvironmentStart
+
+  web-components-storybook:
+    name: Web Components Storybook
+    description: Run the current Web Components development server.
+    commands:
+      start: |
+        ona environment port open 6011 --admission creator_only --name "Web Components Storybook" --protocol http
+        export ONA_EXPOSED_HOST="$(ona environment port get 6011 -f URL | cut -c 9-)"
+        export __VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS="$ONA_EXPOSED_HOST"
+        exec yarn workspace @carbon/web-components storybook --host 0.0.0.0 --ci
+      ready: curl -fsS http://localhost:6011/ >/dev/null
+    readinessTimeout: 900s
+    triggeredBy:
+      - manual
+      - postEnvironmentStart
+
+  web-components-v12-storybook:
+    name: Web Components v12 Storybook
+    description: Run the Web Components v12-preview development server.
+    commands:
+      start: |
+        ona environment port open 6012 --admission creator_only --name "Web Components v12 Storybook" --protocol http
+        export ONA_EXPOSED_HOST="$(ona environment port get 6012 -f URL | cut -c 9-)"
+        export __VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS="$ONA_EXPOSED_HOST"
+        exec yarn workspace @carbon/web-components storybook:v12 --host 0.0.0.0 --ci
+      ready: curl -fsS http://localhost:6012/ >/dev/null
+    readinessTimeout: 900s
+    triggeredBy:
+      - manual
+      - postEnvironmentStart
