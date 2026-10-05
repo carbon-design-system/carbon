@@ -11,13 +11,6 @@
   padding-block-start: spacing.$spacing-07; // 2rem
 }
 
-// Storybook disabled toggle column — aligns the toggle button to the bottom
-.card-story-disabled-toggle {
-  display: flex;
-  align-items: flex-end;
-  padding-block-end: spacing.$spacing-05;
-}
-
 .story-time {
   display: flex;
   align-items: center;

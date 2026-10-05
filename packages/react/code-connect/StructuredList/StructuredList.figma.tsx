@@ -18,7 +18,7 @@ import figma from '@figma/code-connect';
 
 figma.connect(
   StructuredListWrapper,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=11797-285083&t=FNMM9qlCorQ1hEnC-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=11797-285083&t=FNMM9qlCorQ1hEnC-4',
   {
     props: {
       isCondensed: figma.enum('Size', {
@@ -40,7 +40,7 @@ figma.connect(
 // selectable
 figma.connect(
   StructuredListWrapper,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=61653-7458&t=RuAO38H8L12JZXpK-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=61653-7458&t=RuAO38H8L12JZXpK-4',
   {
     props: {
       isCondensed: figma.enum('Size', {
@@ -62,7 +62,7 @@ figma.connect(
 // header row
 figma.connect(
   StructuredListRow,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=11809-286209&t=FNMM9qlCorQ1hEnC-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=11809-286209&t=FNMM9qlCorQ1hEnC-4',
   {
     props: {
       children: figma.children('Col*'),
@@ -76,7 +76,7 @@ figma.connect(
 // row
 figma.connect(
   StructuredListRow,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=61634-3169&t=FNMM9qlCorQ1hEnC-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=61634-3169&t=FNMM9qlCorQ1hEnC-4',
   {
     props: {
       children: figma.children('Col*'),
@@ -90,7 +90,7 @@ figma.connect(
 // selectable header row
 figma.connect(
   StructuredListRow,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=61634-2136&t=RuAO38H8L12JZXpK-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=61634-2136&t=RuAO38H8L12JZXpK-4',
   {
     props: {
       children: figma.children('Col*'),
@@ -104,7 +104,7 @@ figma.connect(
 // selectable row
 figma.connect(
   StructuredListRow,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=11803-290100&t=RuAO38H8L12JZXpK-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=11803-290100&t=RuAO38H8L12JZXpK-4',
   {
     props: {
       children: figma.children('Col*'),
@@ -119,7 +119,7 @@ figma.connect(
 // header cell
 figma.connect(
   StructuredListCell,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=11871-287656&t=FNMM9qlCorQ1hEnC-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=11871-287656&t=FNMM9qlCorQ1hEnC-4',
   {
     props: {
       children: figma.string('Header text'),
@@ -133,7 +133,7 @@ figma.connect(
 // cell
 figma.connect(
   StructuredListCell,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=11801-289539&t=RuAO38H8L12JZXpK-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=11801-289539&t=RuAO38H8L12JZXpK-4',
   {
     props: {
       children: figma.string('Row text'),

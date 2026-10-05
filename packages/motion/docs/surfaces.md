@@ -32,14 +32,20 @@ What we added:
 - optional enter / exit keyframes on shared-element surfaces (used by `expand`
   for a CSS-replicable opacity / scale layer)
 - optional `origin: 'trigger'` on shared-element surfaces (used by `invoke`)
-- `getMotionSurface()`
-- `MotionSurfaceName`
+- `getMotionSurface()` — catalog name or inline definition
+- `MotionSurfaceName`, `MotionSurfaceInput`
+- `defineMotionSurface()` to author a custom surface
+- `describeSurface()` so custom-surface errors are not attributed to a catalog
+  name
+- validation of custom definitions (`kind`, keyframes, token names)
 
 Why:
 
 - to keep the motion intent in one shared place
 - to avoid putting React or Motion-specific values in the base definition
 - so Sass, React, and future engines can read the same named intents
+- so motion outside the catalog reuses the same shape without claiming a public
+  name
 
 What it uses:
 
@@ -94,11 +100,15 @@ What we added:
 - optional `animate` / `exit` keyframes on shared-element surfaces when the
   definition includes them (`expand`)
 - reduced-motion gating through `useMotionEnabled()`
+- accepts a catalog name or an inline definition (`MotionSurfaceInput`)
+- memo keyed on definition structure so inline objects stay stable across
+  renders
 
 Why:
 
 - to keep Motion-specific numeric forms out of `@carbon/motion`
 - to create a reusable React helper for every surface name
+- so a custom surface can be written inline in JSX without breaking memoization
 
 What it uses:
 
@@ -134,6 +144,7 @@ What we added:
 
 - `MotionSurface` for reveal and shared-element destinations
 - `MotionSurfaceOrigin` for shared-element sources, paired by `surfaceId`
+- `surface` prop is `MotionSurfaceInput` (catalog name or inline definition)
 - `layoutId` morphs for shared-element surfaces via Motion React
 - optional opacity / scale keyframes on top of the morph when the surface
   defines enter / exit (`expand`)
@@ -162,6 +173,7 @@ What we added:
 
 - shared-element resolution tests for `expand` and `invoke`
 - reveal resolution tests for `contextual`
+- inline definition resolution, memo stability, and validation tests
 - reduced-motion / `enabled` gating test
 
 ### `packages/react/src/internal/motion/__tests__/MotionSurface-test.js`
@@ -173,6 +185,7 @@ What we added:
 - open rendering test
 - reveal enter / exit behavior
 - shared-element pairing with `MotionSurfaceOrigin`
+- inline definition rendering test
 - reduced-motion mount / unmount behavior
 - `onExitComplete` behavior
 
@@ -235,6 +248,27 @@ What it uses:
 - `MotionSurfaceOrigin`
 - `DemoDialog`
 
+### `packages/react/.storybook-v12/stories/Motion/CustomSurface.featureflag.stories.js`
+
+This file is the Storybook proof of concept for custom surfaces.
+
+What we added:
+
+- `CustomSurfaceWithNativeCSS`: inline Sass map on `surface()`, toggles
+  `data-carbon-surface-state`
+- `CustomSurfaceWithMotion`: `defineMotionSurface()` passed to `MotionSurface`
+
+Why:
+
+- to show the same custom reveal driven by CSS and by Motion React
+- to keep custom surfaces out of the public catalog
+
+What it uses:
+
+- `defineMotionSurface`
+- `DemoDialog`
+- `surface()` mixin (via `surfaces.stories.scss`)
+
 ### `packages/react/src/components/Motion/DemoDialog.js`
 
 This file is story-only dialog chrome for the surface demos.
@@ -243,6 +277,7 @@ What we added:
 
 - modal overlay classes for the backdrop fade
 - a `MotionSurface` container so Motion owns the morph
+- `surface` accepts a catalog name or an inline definition
 - basic dialog semantics and a close control
 
 Why:
@@ -267,6 +302,7 @@ What we added:
   Motion
 - hover emphasis for the expand tile story
 - a larger destination size for the expand dialog
+- an inline `surface()` map for the custom-panel CSS story
 
 Why:
 
@@ -301,13 +337,18 @@ What changed:
 - added `surface()` Sass function
 - added `surface()` Sass mixin for reveal surfaces (`@starting-style` entrance,
   guarded by `prefers-reduced-motion: no-preference`)
-- shared-element surfaces are rejected by the mixin (no CSS-only form)
+- mixin accepts a catalog name or an inline definition map
+- `-resolve` / `-validate-reveal` / `-describe` so custom maps fail at build
+  time (Sass otherwise drops `null` declarations silently)
+- shared-element surfaces (named or inline) are rejected by the mixin (no
+  CSS-only form)
 
 Why:
 
 - Sass needs access to the same surface data
 - reveal surfaces can run in plain CSS; shared-element morphs need a JavaScript
   engine
+- custom surfaces reuse the mixin without being added to the public catalog
 
 ### `packages/motion/__tests__/motion-test.js`
 
@@ -317,6 +358,8 @@ What changed:
 - added Sass parity tests for expand and disclosure
 - added error handling for unknown surfaces and for applying the shared-element
   mixin in CSS
+- added custom-surface tests: `defineMotionSurface`, inline `getMotionSurface`,
+  Sass mixin maps, and validation of missing keys / unknown tokens
 
 ### `packages/motion/__tests__/__snapshots__/motion-test.js.snap`
 
@@ -330,6 +373,7 @@ What changed:
 
 - rewritten to match the current surface catalog and React adapter
 - documented reveal vs shared-element kinds, story demos, gaps, and limits
+- documented custom surfaces (inline Sass maps and `defineMotionSurface`)
 
 ### `packages/motion/package.json`
 
@@ -416,6 +460,77 @@ Tradeoff:
 Framework adapters bail before running, and the Sass reveal mixin wraps
 animation in `prefers-reduced-motion: no-preference`.
 
+### Custom surfaces
+
+Built-in names are public API. For motion the catalog does not cover, pass a
+definition of the same shape anywhere a name is accepted (`getMotionSurface`,
+`surface()` mixin, `MotionSurface`). Duration and easing stay token names —
+custom surfaces still use Carbon timing.
+
+#### Sass
+
+```scss
+.my-panel {
+  @include motion.surface(
+    (
+      kind: reveal,
+      duration: slow-01,
+      enter: (
+        opacity: 1,
+        clip-path: inset(0 0 0 0),
+      ),
+      exit: (
+        opacity: 0,
+        clip-path: inset(50% 0 50% 0),
+      ),
+      enter-easing: (
+        name: entrance,
+        mode: expressive,
+      ),
+      exit-easing: (
+        name: exit,
+        mode: expressive,
+      ),
+    )
+  );
+}
+```
+
+Easings are keyed (`name` / `mode`), not positional. Inline maps are validated
+up front: Sass drops `null` declarations silently, so a typo like `slo-01` would
+otherwise leave an element that never animates.
+
+Shared-element custom maps are rejected — no CSS-only form.
+
+#### React
+
+`defineMotionSurface()` returns the definition unchanged. It infers the correct
+union member at the definition site and validates at import rather than at first
+animation.
+
+```jsx
+import { defineMotionSurface } from '@carbon/motion';
+
+const panelReveal = defineMotionSurface({
+  kind: 'reveal',
+  duration: 'slow-01',
+  enter: { opacity: 1, clipPath: 'inset(0 0 0 0)' },
+  exit: { opacity: 0, clipPath: 'inset(50% 0 50% 0)' },
+  enterEasing: { name: 'entrance', mode: 'expressive' },
+  exitEasing: { name: 'exit', mode: 'expressive' },
+});
+
+<MotionSurface surface={panelReveal} open={open}>
+  {/* content */}
+</MotionSurface>;
+```
+
+`useMotionSurface` memos on the definition's structure, not identity, so an
+inline object in JSX is stable across renders.
+
+Sass uses kebab-case (`clip-path`, `enter-easing`); JavaScript uses camelCase
+(`clipPath`, `enterEasing`).
+
 ## Current references
 
 - Main architecture doc: `packages/motion/docs/surfaces.md`
@@ -424,6 +539,9 @@ animation in `prefers-reduced-motion: no-preference`.
   `packages/react/src/internal/motion/MotionSurface.tsx`
 - Expand story: `packages/react/src/components/Motion/Expand.stories.js`
 - Invoke story: `packages/react/src/components/Motion/Invoke.stories.js`
+- Custom surface story:
+  `packages/react/.storybook-v12/stories/Motion/CustomSurface.featureflag.stories.js`
+  (CSS mixin and Motion React driving the same dialog)
 - Carbon Modal story: `packages/react/src/components/Modal/Modal.stories.js`
 - Carbon Modal Sass: `packages/styles/scss/components/modal/_modal.scss`
 - Carbon Tile Sass: `packages/styles/scss/components/tile/_tile.scss`

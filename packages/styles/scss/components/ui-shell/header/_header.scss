@@ -8,8 +8,10 @@
 @use '../../button';
 @use '../mixins' as *;
 @use '../functions' as *;
+@use '../../../border-radius' as *;
 @use '../../../breakpoint' as *;
 @use '../../../config' as *;
+@use '../../../feature-flags' as *;
 @use '../../../layer' as *;
 @use '../../../motion' as *;
 @use '../../../spacing' as *;
@@ -36,6 +38,10 @@
     border-block-end: 1px solid $border-subtle;
     inset-block-start: 0;
     inset-inline: 0;
+
+    @if enabled('enable-v12-release') {
+      @include button.radius($border-radius-00);
+    }
   }
 
   .#{$prefix}--header__action {

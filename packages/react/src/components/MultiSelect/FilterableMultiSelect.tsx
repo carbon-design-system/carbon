@@ -72,7 +72,7 @@ import {
 import { hasHelperText } from '../../internal/hasHelperText';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
-import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
+import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
 import { useFeatureFlag } from '../FeatureFlags';
 
 const {
@@ -864,7 +864,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
   );
 
   const labelProps = getLabelProps();
-  useNoInteractiveChildren(
+  useNoInteractiveChildrenForLabel(
     labelRef,
     'The FilterableMultiSelect component `titleText` prop must have no interactive content'
   );

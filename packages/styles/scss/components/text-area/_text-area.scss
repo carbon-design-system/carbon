@@ -20,6 +20,7 @@
 @use '../../utilities/skeleton' as *;
 @use '../../utilities/layout';
 @use '../../utilities/visually-hidden' as *;
+@use '../../utilities/high-contrast-mode' as *;
 
 /// Text area styles
 /// @access public
@@ -49,6 +50,7 @@
   .#{$prefix}--text-area:focus,
   .#{$prefix}--text-area:active {
     @include focus-outline('outline');
+    @include high-contrast-mode('focus-lg');
   }
 
   .#{$prefix}--text-area::placeholder {
