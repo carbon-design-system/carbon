@@ -1,19 +1,15 @@
 // url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=16031-269750&t=RuAO38H8L12JZXpK-4
-// source=https://github.com/carbon-design-system/carbon/blob/main/packages/web-components/src/components/tag/tag.ts
-// component=cds-tag
+// source=https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Tag/Tag.tsx
+// component=Tag
 
 /**
- * Copyright IBM Corp. 2026
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import figma from 'figma';
-import {
-  renderBooleanAttribute,
-  renderStringAttribute,
-} from '../template-helpers';
 
 const instance = figma.selectedInstance;
 
@@ -30,14 +26,12 @@ function createTemplate() {
     });
 
     return {
-      id: 'cds-tag-skeleton',
-      imports: [
-        "import '@carbon/web-components/es/components/tag/tag-skeleton.js'",
-      ],
-      example: figma.code`<cds-tag-skeleton${renderStringAttribute(
+      id: 'TagSkeleton',
+      imports: ["import { TagSkeleton } from '@carbon/react';"],
+      example: figma.code`<TagSkeleton${figma.helpers.react.renderProp(
         'size',
         skeletonSize
-      )}></cds-tag-skeleton>`,
+      )} />`,
       metadata: { nestable: true },
     };
   }
@@ -71,36 +65,41 @@ function createTemplate() {
 
   if (isDismissible) {
     return {
-      id: 'cds-dismissible-tag',
-      imports: [
-        "import '@carbon/web-components/es/components/tag/dismissible-tag.js'",
-      ],
-      example: figma.code`<cds-dismissible-tag dismiss-tooltip-label="Dismiss"${renderBooleanAttribute(
-        'disabled',
-        disabled
-      )}${renderStringAttribute('size', size)}${renderStringAttribute(
+      id: 'DismissibleTag',
+      imports: ["import { DismissibleTag } from '@carbon/react';"],
+      example: figma.code`<DismissibleTag${figma.helpers.react.renderProp(
         'text',
         text
-      )}${renderStringAttribute('type', type)}>
-  <span slot="icon">${renderIcon}</span>
-</cds-dismissible-tag>`,
+      )}${figma.helpers.react.renderProp(
+        'size',
+        size
+      )}${figma.helpers.react.renderProp(
+        'type',
+        type
+      )}${figma.helpers.react.renderProp(
+        'renderIcon',
+        renderIcon
+      )}${figma.helpers.react.renderProp('disabled', disabled)} />`,
       metadata: { nestable: true },
     };
   }
 
   return {
-    id: 'cds-tag',
-    imports: ["import '@carbon/web-components/es/components/tag/tag.js'"],
-    example: figma.code`<cds-tag${renderBooleanAttribute(
-      'disabled',
-      disabled
-    )}${renderStringAttribute('size', size)}${renderStringAttribute(
+    id: 'Tag',
+    imports: ["import { Tag } from '@carbon/react';"],
+    example: figma.code`<Tag${figma.helpers.react.renderProp(
+      'size',
+      size
+    )}${figma.helpers.react.renderProp(
       'type',
       type
-    )}>
-  ${text}
-  <span slot="icon">${renderIcon}</span>
-</cds-tag>`,
+    )}${figma.helpers.react.renderProp(
+      'renderIcon',
+      renderIcon
+    )}${figma.helpers.react.renderProp(
+      'disabled',
+      disabled
+    )}>${figma.helpers.react.renderChildren(text)}</Tag>`,
     metadata: { nestable: true },
   };
 }
