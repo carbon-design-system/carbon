@@ -15,11 +15,18 @@ import './fluid-time-picker-skeleton';
 
 const args = {
   disabled: false,
+  hideLabel: false,
   invalid: false,
   invalidText: 'Error message goes here',
   labelText: 'Time',
   placeholder: 'hh:mm',
+  maxLength: 5,
+  name: 'time',
+  pattern: '[0-9]{1,2}:[0-9]{2}',
   readOnly: false,
+  required: false,
+  size: 'md',
+  value: '',
   warning: false,
   warningText: 'Warning message goes here',
 };
@@ -34,6 +41,10 @@ const argTypes = {
     description:
       'Provide the text that will be read by a screen reader when visiting this control.',
   },
+  hideLabel: {
+    control: 'boolean',
+    description: 'Specify whether the label should be visually hidden.',
+  },
   invalid: {
     control: 'boolean',
     description: 'Specify whether the control is currently invalid.',
@@ -47,9 +58,37 @@ const argTypes = {
     control: 'text',
     description: 'Specify the placeholder text for the input.',
   },
+  maxLength: {
+    control: 'number',
+    description: 'Specify the maximum input length.',
+  },
+  name: {
+    control: 'text',
+    description: 'Specify the input name.',
+  },
+  onInput: {
+    action: 'input',
+  },
+  pattern: {
+    control: 'text',
+    description: 'Specify the input validation pattern.',
+  },
   readOnly: {
     control: 'boolean',
     description: 'Whether or not the component is readonly.',
+  },
+  required: {
+    control: 'boolean',
+    description: 'Specify whether the input is required.',
+  },
+  size: {
+    control: 'select',
+    options: ['sm', 'md', 'lg'],
+    description: 'Specify the component size.',
+  },
+  value: {
+    control: 'text',
+    description: 'Specify the input value.',
   },
   warning: {
     control: 'boolean',
@@ -74,11 +113,19 @@ export const Default = {
   argTypes,
   render: ({
     disabled,
+    hideLabel,
     invalid,
     invalidText,
     labelText,
     placeholder,
+    maxLength,
+    name,
+    onInput,
+    pattern,
     readOnly,
+    required,
+    size,
+    value,
     warning,
     warningText,
   }) => html`
@@ -86,13 +133,21 @@ export const Default = {
       <cds-fluid-time-picker
         id="time-picker-1"
         ?disabled="${disabled}"
+        ?hide-label="${hideLabel}"
         ?invalid="${invalid}"
         invalid-text="${ifDefined(invalidText)}"
         label-text="${ifDefined(labelText)}"
         placeholder="${ifDefined(placeholder)}"
+        max-length="${ifDefined(maxLength)}"
+        name="${ifDefined(name)}"
+        pattern="${ifDefined(pattern)}"
         ?readonly="${readOnly}"
+        ?required="${required}"
+        size="${ifDefined(size)}"
+        value="${ifDefined(value)}"
         ?warning="${warning}"
-        warning-text="${ifDefined(warningText)}">
+        warning-text="${ifDefined(warningText)}"
+        @input="${onInput}">
         <cds-fluid-time-picker-select id="select-1" default-value="am">
           ${toggletipLabel}
           <cds-select-item value="am" selected="true">AM</cds-select-item>
@@ -116,12 +171,20 @@ export const Default = {
         id="time-picker-2"
         label-text="${ifDefined(labelText)}"
         placeholder="${ifDefined(placeholder)}"
+        max-length="${ifDefined(maxLength)}"
+        name="${ifDefined(name)}"
+        pattern="${ifDefined(pattern)}"
         ?disabled="${disabled}"
+        ?hide-label="${hideLabel}"
         ?invalid="${invalid}"
         invalid-text="${ifDefined(invalidText)}"
         ?readonly="${readOnly}"
+        ?required="${required}"
+        size="${ifDefined(size)}"
+        value="${ifDefined(value)}"
         ?warning="${warning}"
-        warning-text="${ifDefined(warningText)}">
+        warning-text="${ifDefined(warningText)}"
+        @input="${onInput}">
         <cds-fluid-time-picker-select id="select-3" default-value="am">
           ${toggletipLabel}
           <cds-select-item value="am" selected="true">AM</cds-select-item>

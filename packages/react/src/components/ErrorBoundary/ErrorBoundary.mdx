@@ -25,7 +25,8 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(ErrorBoundaryStories.Default),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: ErrorBoundaryStories.Default }),
     },
   ]}
 />

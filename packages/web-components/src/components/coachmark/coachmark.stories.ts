@@ -170,6 +170,9 @@ export const Floating = {
   },
 };
 
-const meta: Meta = { title: 'Components/Onboarding/Coachmark' };
+const meta: Meta = {
+  title: 'Components/Onboarding/Coachmark',
+  tags: ['ibm-products-migrated'],
+};
 
 export default meta;

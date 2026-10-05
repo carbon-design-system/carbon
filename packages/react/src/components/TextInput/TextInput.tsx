@@ -27,7 +27,7 @@ import { hasHelperText } from '../../internal/hasHelperText';
 import { Text } from '../Text';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
-import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
+import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
 
 type ExcludedAttributes = 'defaultValue' | 'id' | 'size' | 'value';
 
@@ -321,7 +321,7 @@ const TextInput = forwardRef<unknown, TextInputProps>(
       </Text>
     );
 
-    useNoInteractiveChildren(
+    useNoInteractiveChildrenForLabel(
       labelRef,
       'The TextInput component `labelText` prop must have no interactive content'
     );

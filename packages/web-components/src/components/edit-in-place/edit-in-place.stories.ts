@@ -132,6 +132,7 @@ const render = (args: Args) => {
 const meta: Meta = {
   title: 'Components/EditInPlace',
   component: 'cds-edit-in-place',
+  tags: ['ibm-products-migrated'],
   argTypes,
   render,
   decorators: [

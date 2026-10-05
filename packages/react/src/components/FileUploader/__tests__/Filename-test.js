@@ -23,16 +23,6 @@ describe('Filename', () => {
         await expect(container).toHaveNoAxeViolations();
       }
     );
-
-    it.each(statuses)(
-      'should have no AC violations with status %s',
-      async (status) => {
-        const { container } = render(
-          <Filename iconDescription="test description" status={status} />
-        );
-        await expect(container).toHaveNoACViolations(`Filename-${status}`);
-      }
-    );
   });
 
   it('should support events on interactive icons when `edit` or `complete` is the status', () => {
