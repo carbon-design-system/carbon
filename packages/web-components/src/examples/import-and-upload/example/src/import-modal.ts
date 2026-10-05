@@ -9,15 +9,15 @@
 
 import { LitElement, html } from 'lit';
 import { state } from 'lit/decorators.js';
-import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
-import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
-import '@carbon/web-components/es/components/modal/index.js';
-import '@carbon/web-components/es/components/icon-button/index.js';
-import '@carbon/web-components/es/components/button/index.js';
-import '@carbon/web-components/es/components/text-input/index.js';
-import '@carbon/web-components/es/components/file-uploader/file-uploader.js';
-import '@carbon/web-components/es/components/file-uploader/file-uploader-drop-container.js';
-import '@carbon/web-components/es/components/file-uploader/file-uploader-item.js';
+import HostListenerMixin from '../../../../globals/mixins/host-listener';
+import { carbonElement as customElement } from '../../../../globals/decorators/carbon-element';
+import '../../../../components/modal/index';
+import '../../../../components/icon-button/index';
+import '../../../../components/button/index';
+import '../../../../components/text-input/index';
+import '../../../../components/file-uploader/file-uploader';
+import '../../../../components/file-uploader/file-uploader-drop-container';
+import '../../../../components/file-uploader/file-uploader-item';
 import { ref } from 'lit/directives/ref.js';
 import styles from './import-modal.scss?lit';
 
