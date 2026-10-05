@@ -53,9 +53,9 @@ footer {
 } // Emits all theme tokens in CSS Custom Properties
 ```
 
-Some components such as `button`, `notification`, and `tag` have specific tokens
-per theme that need to emitted in the styles. You can do this for example by
-adding the following:
+Some components such as `button`, `notification`, `tag`, and `content switcher`
+have specific tokens per theme that need to emitted in the styles. You can do
+this for example by adding the following:
 
 ```css
 @use '@carbon/styles/scss/reset';
@@ -64,9 +64,14 @@ adding the following:
 @use '@carbon/styles/scss/components/button/tokens' as button-tokens;
 @use '@carbon/styles/scss/components/notification/tokens' as notification-tokens;
 @use '@carbon/styles/scss/components/tag/tokens' as tag-tokens;
+@use '@carbon/styles/scss/components/content-switcher/tokens' as
+  content-switcher-tokens;
 @include theme.add-component-tokens(button-tokens.$button-tokens);
 @include theme.add-component-tokens(notification-tokens.$notification-tokens);
 @include theme.add-component-tokens(tag-tokens.$tag-tokens);
+@include theme.add-component-tokens(
+  content-switcher-tokens.$content-switcher-tokens
+);
 ```
 
 ## Creating derived components with different style

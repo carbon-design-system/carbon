@@ -7,6 +7,8 @@ on:
       - 'v*'
       # Ignore tags for v10, there is a separate v10-release.yml workflow for v10
       - '!v10*'
+      # Ignore tags for v12, there is a separate next-release.yml workflow for v12 alpha work
+      - '!v12*'
 
 jobs:
   build:
@@ -65,10 +67,18 @@ jobs:
       - name: Run Continuous Integration checks
         run: yarn ci-check
 
-      - name: Publish packages under the `next` dist tag
-        run:
-          yarn lerna publish from-package --dist-tag next --no-verify-access
-          --yes
+      - name: Set dist-tag
+        run: |
+          if [[ "${{ github.ref_name }}" == *"-rc"* ]]; then
+            echo "DIST_TAG=next" >> $GITHUB_ENV
+          else
+            echo "DIST_TAG=latest" >> $GITHUB_ENV
+          fi
+
+      - name: Publish packages
+        run: |
+          yarn lerna publish from-package --dist-tag "$DIST_TAG" \
+            --no-verify-access --yes
 
       - name: Create Release
         id: create_release
@@ -87,16 +97,10 @@ jobs:
   packages:
     needs: build
     runs-on: ubuntu-latest
-    # only promote the packages to latest if the version is not a release candidate
+    # only trigger for stable releases, not release candidates
     if: contains(github.ref_name, '-rc') == false
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-
-      - name: Promote packages
-        uses: ./actions/promote
-        with:
-          NPM_TOKEN: ${{ secrets.CARBON_BOT_NPM_TOKEN }}
-          DRY_RUN: false
 
       # run deploy-packages workflow
       - name: Deploy packages
@@ -104,3 +108,12 @@ jobs:
         with:
           event-type: deploy-packages
 
+  publish-icons-pictograms-cdn:
+    # wait for `build` to publish to npm, so CDN only serves released assets
+    needs: build
+    # stable releases only, no prereleases
+    if: contains(github.ref_name, '-') == false
+    permissions:
+      contents: read
+    uses: ./.github/workflows/publish-icons-pictograms-cdn.yml
+    secrets: inherit

@@ -155,7 +155,7 @@ export type TreeNodeProps = {
    * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign?: boolean;
-} & Omit<React.LiHTMLAttributes<HTMLElement>, 'onSelect'>;
+} & Omit<React.LiHTMLAttributes<HTMLElement>, 'onSelect' | 'onToggle'>;
 
 const extractTextContent = (node: React.ReactNode): string => {
   if (node === null || node === undefined) return '';

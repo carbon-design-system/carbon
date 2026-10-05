@@ -12,12 +12,15 @@
  * stories and MDX files.
  */
 export const productMigratedStoryGlobs = [
+  '../src/components/ConditionBuilder/ConditionBuilder.stories.js',
   '../src/components/ActionSet/ActionSet.stories.js',
+  '../src/components/AddSelect/AddSelect.stories.js',
   '../src/components/NotificationsPanel/NotificationsPanel.stories.js',
   '../src/components/BigNumber/BigNumber.stories.js',
   '../src/components/FullPageError/FullPageError.stories.js',
   '../src/components/Coachmark/Coachmark.stories.js',
   '../src/components/OptionsTile/OptionsTile.stories.js',
+  '../src/components/PageHeader/PageHeader.stories.js',
   '../src/components/InterstitialScreen/InterstitialScreen.stories.js',
   '../src/components/Guidebanner/Guidebanner.stories.js',
   '../src/components/Resizer/Resizer.stories.js',
@@ -28,6 +31,19 @@ export const productMigratedStoryGlobs = [
   '../src/components/TagOverflow/TagOverflow.stories.js',
   '../src/components/UserAvatar/UserAvatar.stories.js',
   '../src/components/TruncatedText/TruncatedText.stories.js',
+  // Pattern examples migrated from ibm-products
+  '../src/examples/DeleteAndRemove/DeleteAndRemove.stories.js',
+  '../src/examples/DeleteAndRemove/DeleteAndRemove.mdx',
+  '../src/examples/CreateFullPage/CreateFullPage.stories.js',
+  '../src/examples/CreateFullPage/CreateFullPage.mdx',
+  '../src/examples/CreateModal/CreateModal.stories.js',
+  '../src/examples/CreateModal/CreateModal.mdx',
+  '../src/examples/CreateSidePanel/CreateSidePanel.stories.js',
+  '../src/examples/CreateSidePanel/CreateSidePanel.mdx',
+  '../src/examples/CreateTearsheet/CreateTearsheet.stories.js',
+  '../src/examples/CreateTearsheet/CreateTearsheet.mdx',
+  '../src/examples/CreateTearsheetNarrow/CreateTearsheet.stories.js',
+  '../src/examples/CreateTearsheetNarrow/CreateTearsheet.mdx',
 ];
 
 /**
@@ -42,6 +58,8 @@ export const productMigratedStoryGlobs = [
  *   2. Add its export to src/index.ts.
  */
 export const excludeProductsComponents = [
+  'src/components/AddSelect/**/*',
+  'src/components/ConditionBuilder/**/*',
   'src/components/BigNumber/**/*',
   'src/components/Coachmark/**/*',
   'src/components/Guidebanner/**/*',
@@ -51,6 +69,7 @@ export const excludeProductsComponents = [
   'src/components/ScrollGradient/**/*',
   'src/components/FullPageError/**/*',
   'src/components/OptionsTile/**/*',
+  'src/components/PageHeader/**/*',
   'src/components/InterstitialScreen/**/*',
   'src/components/Resizer/**/*',
   'src/components/SidePanel/**/*',

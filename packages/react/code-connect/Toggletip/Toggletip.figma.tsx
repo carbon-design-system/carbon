@@ -13,7 +13,7 @@ import figma from '@figma/code-connect';
 
 figma.connect(
   Toggletip,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=9384-402406&t=DU9vCm0ie6tvQBsY-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=9384-402406&t=DU9vCm0ie6tvQBsY-4',
   {
     props: {
       align: figma.enum('Position', {

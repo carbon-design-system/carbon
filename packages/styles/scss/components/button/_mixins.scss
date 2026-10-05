@@ -8,6 +8,7 @@
 @use 'sass:map';
 
 @use 'vars' as *;
+@use 'radius' as button-radius;
 @use '../../config' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
@@ -43,12 +44,12 @@ $button-focus-color: custom-property.get-var('button-focus-color', $focus);
 
   @include component-reset.reset;
   @include type-style('body-compact-01');
+  @include button-radius.apply;
 
   position: relative;
   display: inline-flex;
   flex-shrink: 0;
   justify-content: space-between;
-  border-radius: $button-border-radius;
   // Fix to remove added margins on buttons in safari (see #5155)
   margin: 0;
   cursor: pointer;
