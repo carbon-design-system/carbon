@@ -9,7 +9,6 @@ import React, { forwardRef, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
-import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { ButtonKind } from '../Button/Button';
 
 export interface ButtonSetProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -56,9 +55,14 @@ const ButtonSet = forwardRef<HTMLDivElement, ButtonSetProps>((props, ref) => {
   );
 
   /**
-   * Used to determine if the buttons are currently stacked
+   * Used to determine if the buttons are currently stacked.
+   * useEffect (not useLayoutEffect) is intentional: calling setState inside
+   * useLayoutEffect triggers a "setState during commit" warning in React 19,
+   * and queueMicrotask workarounds break act() in tests. useEffect fires after
+   * paint so there is a brief flash-of-unsorted-order risk, but it is
+   * act()-compatible and avoids the React 19 commit-phase constraint.
    */
-  useIsomorphicEffect(() => {
+  useEffect(() => {
     const checkStacking = () => {
       let newIsStacked = stacked || false;
 
@@ -71,19 +75,12 @@ const ButtonSet = forwardRef<HTMLDivElement, ButtonSetProps>((props, ref) => {
       return newIsStacked;
     };
 
-    // React 19: setIsStacked called synchronously inside useIsomorphicEffect
-    // (= useLayoutEffect in browser) causes setState during commit → crash.
-    // Capture the value eagerly (DOM must be read synchronously) then defer
-    // the setState call past the commit boundary via queueMicrotask.
-    const initialIsStacked = checkStacking();
-    queueMicrotask(() => setIsStacked(initialIsStacked));
+    setIsStacked(checkStacking());
 
     if (!fluidInnerRef.current) {
       return;
     }
 
-    // ResizeObserver callback fires outside the commit phase — safe to call
-    // setIsStacked synchronously here.
     const resizeObserver = new ResizeObserver(() => {
       setIsStacked(checkStacking());
     });
@@ -101,11 +98,9 @@ const ButtonSet = forwardRef<HTMLDivElement, ButtonSetProps>((props, ref) => {
         (isStacked ? -1 : 1)
       );
     });
-    // React 19: setSortedChildren inside useEffect can fire inside
-    // flushPassiveEffects → flushSpawnedWork during a flushSync call,
-    // incrementing nestedUpdateCount → crash.
-    // Defer past the current flush via queueMicrotask.
-    queueMicrotask(() => setSortedChildren(newSortedChildren));
+    // useEffect already runs after the commit phase, so setState here is safe
+    // in React 19 and is fully compatible with act() in tests.
+    setSortedChildren(newSortedChildren);
 
     // adding sortedChildren to deps causes an infinite loop
   }, [children, isStacked]);
