@@ -167,6 +167,7 @@ export const CoachmarkFixedExample = (args) => {
 
   return (
     <Theme theme={carbonTheme}>
+      <div className="coachmark-fixed-example">
       <Coachmark
         open={isOpen}
         onClose={handleClose}
@@ -259,6 +260,7 @@ export const CoachmarkFixedExample = (args) => {
           </Coachmark.ContentBody>
         </Coachmark.Content>
       </Coachmark>
+      </div>
     </Theme>
   );
 };

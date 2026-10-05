@@ -11,7 +11,7 @@ import {
   preview__CoachmarkBeacon as CoachmarkBeacon,
   preview__Coachmark as Coachmark,
 } from '@carbon/ibm-products';
-import { initCarousel } from '@carbon/utilities';
+import { InitCarousel, initCarousel } from '@carbon/utilities';
 import sampleImage from '../assets/sample-image.png';
 
 //fetching theme
@@ -60,14 +60,18 @@ function useCarbonTheme() {
 export const CoachmarkOverlayElementsExample = (args) => {
   const carbonTheme = useCarbonTheme();
   const [isOpen, setIsOpen] = useState(true);
-  const primaryButtonRef = useRef<HTMLButtonElement>(null);
-  const backRef = useRef<HTMLButtonElement>(null);
-  const beaconButtonRef = useRef<HTMLButtonElement>(null);
   const [currentViewIndex, setCurrentViewIndex] = useState(-1);
   const [lastViewIndex, setLastViewIndex] = useState(-1);
-  const carouselContainerRef = useRef(null);
-  const carouselInit = useRef(null);
+  //prettier-ignore
+  const carouselInit = useRef<InitCarousel>(null);
+  //prettier-ignore
+  const primaryButtonRef = useRef<HTMLButtonElement>(null);
+  //prettier-ignore
+  const backRef = useRef<HTMLButtonElement>(null);
+  const beaconButtonRef = useRef<HTMLButtonElement>(null);
+  const carouselContainerRef = useRef<HTMLDivElement | null>(null);
   const carouselItemsRef = useRef<(HTMLDivElement | null)[]>([]);
+
   const items = [
     {
       id: 1,
@@ -94,52 +98,33 @@ export const CoachmarkOverlayElementsExample = (args) => {
     setIsOpen((isOpen) => !isOpen);
   };
 
-  useEffect(() => {
-    if (carouselContainerRef && carouselContainerRef.current) {
-      carouselInit.current = initCarousel(carouselContainerRef.current, {
-        onViewChangeStart: onViewChangeStart,
-        onViewChangeEnd: onViewChangeEnd,
-      });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [carouselInit, isOpen]);
+  const handleViewStackUpdate = useCallback(({ currentIndex, lastIndex }) => {
+    setCurrentViewIndex(currentIndex);
+    setLastViewIndex(lastIndex);
+  }, []);
 
   const onViewChangeStart = () => {};
   const onViewChangeEnd = (options) => {
     handleViewStackUpdate(options);
   };
 
-  const updateCarouselItemsTabIndex = useCallback((activeIndex: number) => {
-    carouselItemsRef.current.forEach((item, idx) => {
-      if (!item) {
-        return;
-      }
+  useEffect(() => {
+    if (isOpen && carouselContainerRef.current) {
+      // Destroy stale event listeners from the previous instance before
+      // re-initializing, otherwise old transitionend listeners fire with a
+      // stale viewIndexStack and reset currentViewIndex back to 0.
+      setCurrentViewIndex(0);
+      setLastViewIndex(0);
+      carouselInit.current?.destroyEvents();
+      carouselInit.current = initCarousel(carouselContainerRef.current, {
+        onViewChangeStart: () => {},
+        onViewChangeEnd: (options) => handleViewStackUpdate(options),
+        useMaxHeight: true,
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [carouselInit, isOpen]);
 
-      const isActive = idx === activeIndex;
-
-      // Set aria-hidden based on active state
-      item.setAttribute('aria-hidden', String(!isActive));
-
-      if (!isActive) {
-        item.setAttribute('inert', ''); // Disable interactivity
-      } else {
-        item.removeAttribute('inert'); // Re-enable interactivity
-      }
-
-      item.removeAttribute('tabindex');
-    });
-  }, []);
-
-  const handleViewStackUpdate = useCallback(
-    ({ currentIndex, lastIndex }) => {
-      setCurrentViewIndex(currentIndex);
-      setLastViewIndex(lastIndex);
-
-      // Update inert attribute for carousel items
-      updateCarouselItemsTabIndex(currentIndex);
-    },
-    [updateCarouselItemsTabIndex]
-  );
   const onNext = (e) => {
     carouselInit?.current?.next();
   };
@@ -153,9 +138,9 @@ export const CoachmarkOverlayElementsExample = (args) => {
   };
   return (
     <Theme theme={carbonTheme}>
-      <main>
+      <main className="coachmark-overlay-example">
       <Coachmark
-        position={{ x: 151, y: 155 }}
+        position={{ x: 151, y: 355 }}
         open={isOpen}
         onClose={handleClose}
         align="top"

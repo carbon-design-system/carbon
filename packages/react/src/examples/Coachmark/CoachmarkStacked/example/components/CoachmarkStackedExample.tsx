@@ -418,6 +418,7 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
 
   return (
     <Theme theme={carbonTheme}>
+      <div className="coachmark-stacked-example">
       <Coachmark
         open={isOpen}
         onClose={handleClose}
@@ -576,7 +577,7 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
                               >
                                 <h2>{page.title}</h2>
                                 <p>{page.text}</p>
-                                <p>{page.button}</p>
+                                <div>{page.button}</div>
                               </div>
                             ))}
                           </div>
@@ -647,6 +648,7 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
           </Coachmark>
         );
       })}
+      </div>
     </Theme>
   );
 };

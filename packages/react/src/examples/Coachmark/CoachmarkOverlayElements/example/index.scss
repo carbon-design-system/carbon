@@ -28,87 +28,91 @@ $prefix: 'c4p' !default;
 
 $block-class: #{$prefix}--coachmark__next;
 
-// BUBBLE - content styling
-.#{$block-class}--coachmark-content {
-  inline-size: 288px;
+// All example-specific styles are scoped under the unique wrapper class
+// .coachmark-overlay-example so they cannot leak into or be overridden by
+// other Coachmark stories loaded in the same Storybook document.
+.coachmark-overlay-example {
+  // BUBBLE - content styling
+  .#{$block-class}--coachmark-content {
+    inline-size: 288px;
 
-  .#{$block-class}--content-body {
-    display: flex;
-    flex-direction: column;
+    .#{$block-class}--content-body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .#{$block-class}--content-body > h2 {
+      @include type.type-style('productive-heading-02');
+
+      margin: 0 0 $spacing-03;
+    }
+
+    .#{$block-class}--content-body > p {
+      @include type.type-style('body-long-01');
+    }
+
+    .#{$block-class}--content-body > button {
+      display: flex;
+      align-self: flex-end;
+      margin-block-start: $spacing-05;
+    }
+
+    // carousel
+    .exampleCarouselWrapper {
+      block-size: $spacing-10;
+    }
+
+    // Fix for carousel views blocking button clicks in Storybook
+    .carousel__view {
+      pointer-events: none;
+
+      // Re-enable pointer events for interactive content inside carousel views
+      * {
+        pointer-events: auto;
+      }
+    }
+
+    .carousel__view > h2 {
+      @include type.type-style('productive-heading-02');
+
+      margin: 0 0 $spacing-03;
+    }
+
+    .carousel__view > p {
+      @include type.type-style('body-long-01');
+    }
+
+    .carouselControls {
+      position: relative;
+
+      .nextButton {
+        position: absolute;
+        inset-inline-start: $spacing-07;
+      }
+
+      .prevButton {
+        position: absolute;
+        inset-inline-start: $spacing-07;
+      }
+    }
+
+    .carouselControlWrapper__footer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      margin-block-end: $spacing-05;
+
+      span {
+        justify-self: flex-start;
+        margin-inline-end: auto;
+      }
+    }
+
+    .carouselControlWrapper--controls-progress {
+      justify-self: flex-start;
+      margin-inline-end: auto;
+
+      @include type.type-style('helper-text-01');
+    }
   }
-
-  .#{$block-class}--content-body > h2 {
-    @include type.type-style('productive-heading-02');
-
-    margin: 0 0 $spacing-03;
-  }
-
-  .#{$block-class}--content-body > p {
-    @include type.type-style('body-long-01');
-  }
-
-  .#{$block-class}--content-body > button {
-    display: flex;
-    align-self: flex-end;
-    margin-block-start: $spacing-05;
-  }
-}
-
-//carousel
-.exampleCarouselWrapper {
-  block-size: $spacing-10;
-}
-
-// Fix for carousel views blocking button clicks in Storybook
-.carousel__view {
-  pointer-events: none;
-
-  // Re-enable pointer events for interactive content inside carousel views
-  * {
-    pointer-events: auto;
-  }
-}
-
-.carousel__view > h2 {
-  @include type.type-style('productive-heading-02');
-
-  margin: 0 0 $spacing-03;
-}
-
-.carousel__view > p {
-  @include type.type-style('body-long-01');
-}
-
-.carouselControls {
-  position: relative;
-
-  .nextButton {
-    position: absolute;
-    inset-inline-start: $spacing-07;
-  }
-
-  .prevButton {
-    position: absolute;
-    inset-inline-start: $spacing-07;
-  }
-}
-
-.carouselControlWrapper__footer {
-  span {
-    justify-self: flex-start;
-    margin-inline-end: auto;
-  }
-}
-
-.carouselControlWrapper__footer {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  margin-block-end: $spacing-05;
-}
-
-.carouselControlWrapper--controls-progress {
-  justify-self: flex-start;
-  margin-inline-end: auto;
-  @include type.type-style('helper-text-01');
 }
