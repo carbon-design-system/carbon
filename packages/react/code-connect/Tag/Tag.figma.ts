@@ -1,4 +1,4 @@
-// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=16031-269750&t=RuAO38H8L12JZXpK-4
+// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=16031-269750&t=RuAO38H8L12JZXpK-4
 // source=https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Tag/Tag.tsx
 // component=Tag
 

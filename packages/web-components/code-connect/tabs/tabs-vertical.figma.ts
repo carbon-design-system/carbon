@@ -1,4 +1,4 @@
-// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=75823-2818&t=PaZ3ZnEGQGMgXgBW-4
+// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=75823-2818&t=PaZ3ZnEGQGMgXgBW-4
 // source=https://github.com/carbon-design-system/carbon/blob/main/packages/web-components/src/components/tabs/tabs-vertical.ts
 // component=cds-tabs-vertical
 
