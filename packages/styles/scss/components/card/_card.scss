@@ -31,7 +31,7 @@
     color: $text-primary;
 
     @if enabled('enable-v12-release') {
-      @include button.radius($border-radius-00);
+      border-radius: $border-radius-08;
     }
   }
 
@@ -41,9 +41,6 @@
     border: 1px solid $border-tile-01;
     cursor: pointer;
 
-    @if enabled('enable-v12-release') {
-      border-radius: $border-radius-08;
-    }
     // Reset anchor defaults when card is rendered as <a>
     text-decoration: none;
     transition: background-color $duration-fast-02 motion(standard, productive);
@@ -149,62 +146,45 @@
 
   // ─── Footer action border-radius ─────────────────────────────────────
   @if enabled('enable-v12-release') {
+    // Square all button corners inside action-footer rows.
+    .#{$prefix}--card__footer:has(> .#{$prefix}--card__action) {
+      @include button.radius($border-radius-00);
+    }
+
+    // Bottom-left corner: first action that is NOT icon-only.
     .#{$prefix}--card__footer:has(> .#{$prefix}--card__action)
       > .#{$prefix}--card__action:first-child:not(
         :has(.#{$prefix}--btn--icon-only)
       ) {
-      border-end-start-radius: $border-radius-08;
+      @include button.radius($es: $border-radius-08);
     }
 
-    .#{$prefix}--card__footer:has(> .#{$prefix}--card__action)
-      > .#{$prefix}--card__action:first-child:not(
-        :has(.#{$prefix}--btn--icon-only)
-      )
-      .#{$prefix}--btn {
-      border-end-start-radius: $border-radius-08;
-    }
-
+    // Bottom-right corner: last action (icon-only or text).
     .#{$prefix}--card__footer:has(> .#{$prefix}--card__action)
       > .#{$prefix}--card__action:last-child {
-      border-end-end-radius: $border-radius-08;
-    }
-
-    .#{$prefix}--card__footer:has(> .#{$prefix}--card__action)
-      > .#{$prefix}--card__action:last-child
-      .#{$prefix}--btn {
-      border-end-end-radius: $border-radius-08;
+      @include button.radius($ee: $border-radius-08);
     }
 
     // ─── Horizontal card: suppress footer radius where media covers the corner ─
+    // Media-left: media occupies the bottom-left corner, so the first footer
+    // action's end-start corner must stay flush.
     .#{$prefix}--card--horizontal:has(
         > .#{$prefix}--card__media--horizontal:first-child
       )
       .#{$prefix}--card__footer:has(> .#{$prefix}--card__action)
-      > .#{$prefix}--card__action:first-child,
-    .#{$prefix}--card--horizontal:has(
-        > .#{$prefix}--card__media--horizontal:first-child
-      )
-      .#{$prefix}--card__footer:has(> .#{$prefix}--card__action)
-      > .#{$prefix}--card__action:first-child
-      .#{$prefix}--btn {
-      border-end-start-radius: 0;
+      > .#{$prefix}--card__action:first-child {
+      @include button.radius($es: $border-radius-00);
     }
 
     // Media-right: media occupies the bottom-right corner of the card.
-    // The footer's right edge is interior (against __content), not the card edge —
-    // suppress the bottom-right radius on the last footer action.
+    // The footer's right edge is interior (against __content), not the card
+    // edge — keep the bottom-right corner flush on the last footer action.
     .#{$prefix}--card--horizontal:has(
         > .#{$prefix}--card__media--horizontal:last-child
       )
       .#{$prefix}--card__footer:has(> .#{$prefix}--card__action)
-      > .#{$prefix}--card__action:last-child,
-    .#{$prefix}--card--horizontal:has(
-        > .#{$prefix}--card__media--horizontal:last-child
-      )
-      .#{$prefix}--card__footer:has(> .#{$prefix}--card__action)
-      > .#{$prefix}--card__action:last-child
-      .#{$prefix}--btn {
-      border-end-end-radius: 0;
+      > .#{$prefix}--card__action:last-child {
+      @include button.radius($ee: $border-radius-00);
     }
   }
 
@@ -231,14 +211,28 @@
     inline-size: 100%;
 
     @if enabled('enable-v12-release') {
+      // Top edge of card: round the top-start and top-end corners together.
       &:first-child {
         border-start-end-radius: $border-radius-08;
         border-start-start-radius: $border-radius-08;
       }
 
+      // Bottom edge of card: round the bottom-start and bottom-end corners.
       &:last-child {
         border-end-end-radius: $border-radius-08;
         border-end-start-radius: $border-radius-08;
+      }
+
+      // Clickable card has a 1px border — inset the media radius so it sits
+      // flush inside that border without creating a visible gap.
+      .#{$prefix}--card--clickable &:first-child {
+        border-start-end-radius: calc($border-radius-08 - 1px);
+        border-start-start-radius: calc($border-radius-08 - 1px);
+      }
+
+      .#{$prefix}--card--clickable &:last-child {
+        border-end-end-radius: calc($border-radius-08 - 1px);
+        border-end-start-radius: calc($border-radius-08 - 1px);
       }
     }
 
@@ -246,21 +240,6 @@
     &::before,
     &::after {
       display: none;
-    }
-  }
-
-  // ─── Media inside a bordered (clickable) card ────────────────────────
-  @if enabled('enable-v12-release') {
-    .#{$prefix}--card--clickable .#{$prefix}--card__media {
-      &:first-child {
-        border-start-end-radius: calc($border-radius-08 - 1px);
-        border-start-start-radius: calc($border-radius-08 - 1px);
-      }
-
-      &:last-child {
-        border-end-end-radius: calc($border-radius-08 - 1px);
-        border-end-start-radius: calc($border-radius-08 - 1px);
-      }
     }
   }
 
@@ -315,13 +294,13 @@
     align-self: stretch;
 
     @if enabled('enable-v12-release') {
-      // Media-left: clip to the card's top-left and bottom-left outer corners.
+      // Media-left: clip to the card's start-start and end-start outer corners.
       &:first-child {
         border-end-start-radius: $border-radius-08;
         border-start-start-radius: $border-radius-08;
       }
 
-      // Media-right: clip to the card's top-right and bottom-right outer corners.
+      // Media-right: clip to the card's start-end and end-end outer corners.
       &:last-child {
         border-end-end-radius: $border-radius-08;
         border-start-end-radius: $border-radius-08;
@@ -503,24 +482,14 @@
   }
 
   // createOverflowHandler marks overflowed items with [data-hidden].
+  // Hide them so only the overflow menu button remains visible.
   .#{$prefix}--card__actions [data-hidden]:not([data-fixed]) {
     display: none;
   }
 
-  // Reserve space for the absolutely-positioned actions box so the title
-  // text never slides under the buttons.  max-inline-size uses cqw so the
-  // 50% resolves against the header container width — the same reference
-  // box that the actions' own inline-size uses — regardless of how wide
-  // col1 (TitleMedia) is.
   .#{$prefix}--card__header:has(> .#{$prefix}--card__actions)
     > .#{$prefix}--card__title {
     max-inline-size: calc(50cqw - $spacing-03);
-  }
-
-  // The overflow handler sets data-hidden on action items that don't fit.
-  // Hide them so only the overflow menu button appears.
-  .#{$prefix}--card__actions [data-hidden]:not([data-fixed]) {
-    display: none;
   }
 
   // ─── AI Label (decorator) ─────────────────────────────────────────────
@@ -569,6 +538,7 @@
 
     position: absolute;
     display: block;
+    border-radius: if(enabled('enable-v12-release'), $border-radius-08, null);
     block-size: 100%;
     box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow;
     content: '';
@@ -577,10 +547,6 @@
     inset-inline-start: 0;
     opacity: 0;
     transition: opacity $duration-fast-02 motion(standard, productive);
-
-    @if enabled('enable-v12-release') {
-      border-radius: $border-radius-08;
-    }
   }
 
   .#{$prefix}--card--clickable.#{$prefix}--card--has-ai-label:hover::before {
