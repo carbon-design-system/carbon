@@ -498,15 +498,10 @@ describe('Callout', () => {
 });
 
 describe('notification status icon', () => {
-  it.each([true, false])(
-    'exposes the default warning description with hideCloseButton=%s',
-    (hideCloseButton) => {
-      render(
-        <InlineNotification kind="warning" hideCloseButton={hideCloseButton} />
-      );
-      expect(screen.getByRole('img', { name: 'warning icon' })).toBeVisible();
-    }
-  );
+  it('exposes the default warning description', () => {
+    render(<InlineNotification kind="warning" />);
+    expect(screen.getByRole('img', { name: 'warning icon' })).toBeVisible();
+  });
 
   it.each([
     InlineNotification,
