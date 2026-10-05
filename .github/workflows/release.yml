@@ -111,8 +111,8 @@ jobs:
   publish-icons-pictograms-cdn:
     # wait for `build` to publish to npm, so CDN only serves released assets
     needs: build
-    # stable releases only, no RCs
-    if: contains(github.ref_name, '-rc') == false
+    # stable releases only, no prereleases
+    if: contains(github.ref_name, '-') == false
     permissions:
       contents: read
     uses: ./.github/workflows/publish-icons-pictograms-cdn.yml
