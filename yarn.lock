@@ -12709,23 +12709,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"async@npm:^2.6.4":
-  version: 2.6.4
-  resolution: "async@npm:2.6.4"
-  dependencies:
-    lodash: "npm:^4.17.14"
-  checksum: 10/df8e52817d74677ab50c438d618633b9450aff26deb274da6dfedb8014130909482acdc7753bce9b72e6171ce9a9f6a92566c4ced34c3cb3714d57421d58ad27
-  languageName: node
-  linkType: hard
-
-"async@npm:^3.2.3":
-  version: 3.2.4
-  resolution: "async@npm:3.2.4"
-  checksum: 10/bebb5dc2258c45b83fa1d3be179ae0eb468e1646a62d443c8d60a45e84041b28fccebe1e2d1f234bfc3dcad44e73dcdbf4ba63d98327c9f6556e3dbd47c2ae8b
-  languageName: node
-  linkType: hard
-
-"async@npm:^3.2.6":
+"async@npm:^3.2.3, async@npm:^3.2.6":
   version: 3.2.6
   resolution: "async@npm:3.2.6"
   checksum: 10/cb6e0561a3c01c4b56a799cc8bab6ea5fef45f069ab32500b6e19508db270ef2dffa55e5aed5865c5526e9907b1f8be61b27530823b411ffafb5e1538c86c368
@@ -22757,7 +22741,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash@npm:4.18.1, lodash@npm:^4.17.14, lodash@npm:^4.17.20, lodash@npm:^4.17.21":
+"lodash@npm:4.18.1, lodash@npm:^4.17.20, lodash@npm:^4.17.21":
   version: 4.18.1
   resolution: "lodash@npm:4.18.1"
   checksum: 10/306fea53dfd39dad1f03d45ba654a2405aebd35797b673077f401edb7df2543623dc44b9effbb98f69b32152295fff725a4cec99c684098947430600c6af0c3f
@@ -23992,7 +23976,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mkdirp@npm:>=0.5 0, mkdirp@npm:^0.5.1, mkdirp@npm:^0.5.6":
+"mkdirp@npm:>=0.5 0, mkdirp@npm:^0.5.1":
   version: 0.5.6
   resolution: "mkdirp@npm:0.5.6"
   dependencies:
@@ -25932,24 +25916,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"portfinder@npm:^1.0.28":
+"portfinder@npm:^1.0.28, portfinder@npm:^1.0.32":
   version: 1.0.38
   resolution: "portfinder@npm:1.0.38"
   dependencies:
     async: "npm:^3.2.6"
     debug: "npm:^4.3.6"
   checksum: 10/369155c3e7efa10ad348cd6686eb9efe57f334a4638f9107fd6ad6705dc532841f9bd8346182591280b2c7837600d8fb0cf0d1ced69a78caa8544fc3bb43653a
-  languageName: node
-  linkType: hard
-
-"portfinder@npm:^1.0.32":
-  version: 1.0.32
-  resolution: "portfinder@npm:1.0.32"
-  dependencies:
-    async: "npm:^2.6.4"
-    debug: "npm:^3.2.7"
-    mkdirp: "npm:^0.5.6"
-  checksum: 10/842058052fb3c3da829589f3f44b13369cf504b16f6ab72fedec78a9438ac3fc53047f5c88a771511b17d6a94f50f83a94cef5fa625027b675d8f7241f7f2185
   languageName: node
   linkType: hard
 

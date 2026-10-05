@@ -14,7 +14,6 @@
  * to be present in the workspace during tests.
  */
 
- 
 class CDSStubElement extends HTMLElement {}
 
 export default CDSStubElement;
