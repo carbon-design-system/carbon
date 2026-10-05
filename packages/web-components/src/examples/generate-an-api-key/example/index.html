@@ -1,0 +1,41 @@
+<!--
+@license
+
+Copyright IBM Corp. 2025
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+<head>
+  <title>carbon-web-components APIKeyModal example</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="src/styles.scss" /> 
+  <script type="module" src="src/api-key-modal.ts"></script>
+</head>
+<body>
+  <section>
+    <h4>APIKeyModal patterns</h4>
+    <p>Generate</p>
+    <generate-apikey-modal></generate-apikey-modal>
+    <p>Generate With Error</p>
+    <generate-apikey-modal-error id="generateWithError"></generate-apikey-modal-error>
+    <p>Instant Generate</p>
+    <instant-generate></instant-generate>
+    <p>Custom Generate</p>
+    <custom-generate></custom-generate>
+    <p>Edit</p>
+    <edit-apikey-modal></edit-apikey-modal>
+    <p>Edit With Error</p>
+    <edit-apikey-modal-error></edit-apikey-modal-error>
+    <p>Custom Edit</p>
+    <custom-generate id="customGenerate"></custom-generate>
+  </section>
+
+  <script>
+    const el = document.getElementById('customGenerate');
+    el.editing = true;
+  </script>
+</body>
+</html> 
