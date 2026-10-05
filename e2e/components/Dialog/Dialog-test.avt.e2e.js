@@ -19,6 +19,7 @@ test.describe('@avt Dialog', () => {
         theme: 'white',
       },
     });
+    await expect(page.getByRole('dialog')).toHaveCSS('opacity', '1');
     await expect(page).toHaveNoACViolations('Dialog');
   });
   test('@avt-advanced-states modal', async ({ page }) => {

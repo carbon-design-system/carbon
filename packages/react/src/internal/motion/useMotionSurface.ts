@@ -12,7 +12,7 @@ import {
   resolveEasing,
   type EasingMode,
   type EasingName,
-  type MotionSurfaceName,
+  type MotionSurfaceInput,
 } from '@carbon/motion';
 import type { TargetAndTransition, Transition } from 'motion/react';
 import { useMotionEnabled } from './useMotionEnabled';
@@ -50,20 +50,27 @@ export type ResolvedMotionSurface =
   | ResolvedSharedElementSurface;
 
 /**
- * resolve named Carbon motion surfaces to Motion-ready values
+ * resolve Carbon motion surfaces to Motion-ready values
  * definitions stay in `@carbon/motion`; this hook only translates tokens
  * (duration/easing names) into the numeric forms `motion/react` consumes
+ *
+ * accepts a catalog name or an inline definition
  */
 export function useMotionSurface(
-  name: MotionSurfaceName
+  input: MotionSurfaceInput
 ): ResolvedMotionSurface {
   const enabled = useMotionEnabled();
+  // An inline definition is a fresh object on every render, which would defeat
+  // the memo below and hand Motion new target objects each time. Key on the
+  // definition's structure rather than its identity so callers are free to
+  // write the definition inline.
+  const key = typeof input === 'string' ? input : JSON.stringify(input);
 
   return useMemo(() => {
-    const surface = getMotionSurface(name);
+    const surface = getMotionSurface(input);
     const duration = toSeconds(resolveDuration(surface.duration));
-    const [enterName, enterMode] = surface.enterEasing;
-    const [exitName, exitMode] = surface.exitEasing;
+    const { name: enterName, mode: enterMode } = surface.enterEasing;
+    const { name: exitName, mode: exitMode } = surface.exitEasing;
     const enterTransition: Transition = {
       duration,
       ease: toEase(enterName, enterMode),
@@ -115,5 +122,8 @@ export function useMotionSurface(
     }
 
     return sharedElement;
-  }, [enabled, name]);
+    // `input` is omitted deliberately: `key` is its structural identity, so a
+    // stale reference here is always structurally equal to the current one.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [enabled, key]);
 }

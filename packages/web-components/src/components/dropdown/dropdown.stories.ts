@@ -611,7 +611,6 @@ export const WithToggletipLabel = {
     ...defaultArgs,
     label: 'placeholder',
     titleText: 'Label',
-    value: 'placeholder',
   },
   render: ({
     ariaLabel,
@@ -661,7 +660,13 @@ export const WithToggletipLabel = {
           <cds-button size="sm" slot="actions">Button</cds-button>
         </cds-toggletip>
       </span>
-      ${[]}
+      ${items.map(
+        (elem) => html`
+          <cds-dropdown-item ?disabled=${elem.disabled} value="${elem.value}"
+            >${elem.text}</cds-dropdown-item
+          >
+        `
+      )}
     </cds-dropdown>
   `,
 };
