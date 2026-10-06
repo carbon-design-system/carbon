@@ -21,12 +21,13 @@ exports[`ActionableNotification should render 1`] = `
         class="cds--actionable-notification__details"
       >
         <svg
-          aria-hidden="true"
+          aria-label="error icon"
           class="cds--toast-notification__icon"
           fill="currentColor"
           focusable="false"
           height="20"
           preserveAspectRatio="xMidYMid meet"
+          role="img"
           viewBox="0 0 20 20"
           width="20"
           xmlns="http://www.w3.org/2000/svg"
@@ -105,12 +106,13 @@ exports[`InlineNotification should render 1`] = `
       class="cds--inline-notification__details"
     >
       <svg
-        aria-hidden="true"
+        aria-label="error icon"
         class="cds--inline-notification__icon"
         fill="currentColor"
         focusable="false"
         height="20"
         preserveAspectRatio="xMidYMid meet"
+        role="img"
         viewBox="0 0 20 20"
         width="20"
         xmlns="http://www.w3.org/2000/svg"
@@ -171,12 +173,13 @@ exports[`ToastNotification should render 1`] = `
     role="status"
   >
     <svg
-      aria-hidden="true"
+      aria-label="error icon"
       class="cds--toast-notification__icon"
       fill="currentColor"
       focusable="false"
       height="20"
       preserveAspectRatio="xMidYMid meet"
+      role="img"
       viewBox="0 0 20 20"
       width="20"
       xmlns="http://www.w3.org/2000/svg"
