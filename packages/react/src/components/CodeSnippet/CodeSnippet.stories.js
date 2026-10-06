@@ -181,31 +181,31 @@ const renderCodeSnippetWithLayer = ({ text, ...args }) => (
   </WithLayer>
 );
 
-export const Inline = ({ text, ...args }) => {
-  return <CodeSnippet {...args}>{text}</CodeSnippet>;
+export const Inline = (args) => {
+  return <CodeSnippet {...args}>{args.text}</CodeSnippet>;
 };
 Inline.args = { ...codeSnippetArgs, type: 'inline' };
 Inline.argTypes = variantArgTypes;
 Inline.parameters = codeSnippetParameters;
 
-export const Multiline = ({ text, ...args }) => {
-  return <CodeSnippet {...args}>{text}</CodeSnippet>;
+export const Multiline = (args) => {
+  return <CodeSnippet {...args}>{args.text}</CodeSnippet>;
 };
 Multiline.args = { ...codeSnippetArgs, text: multilineCode, type: 'multi' };
 Multiline.argTypes = variantArgTypes;
 Multiline.parameters = codeSnippetParameters;
 
-export const Singleline = ({ text, ...args }) => {
-  return <CodeSnippet {...args}>{text}</CodeSnippet>;
+export const Singleline = (args) => {
+  return <CodeSnippet {...args}>{args.text}</CodeSnippet>;
 };
 Singleline.args = { ...codeSnippetArgs, text: singlelineCode };
 Singleline.argTypes = variantArgTypes;
 Singleline.parameters = codeSnippetParameters;
 
-export const InlineWithLayer = ({ text, ...args }) => {
+export const InlineWithLayer = (args) => {
   return (
     <WithLayer>
-      <CodeSnippet {...args}>{text}</CodeSnippet>
+      <CodeSnippet {...args}>{args.text}</CodeSnippet>
     </WithLayer>
   );
 };
@@ -213,10 +213,10 @@ InlineWithLayer.args = { ...codeSnippetArgs, type: 'inline' };
 InlineWithLayer.argTypes = variantArgTypes;
 InlineWithLayer.parameters = codeSnippetParameters;
 
-export const MultilineWithLayer = ({ text, ...args }) => {
+export const MultilineWithLayer = (args) => {
   return (
     <WithLayer>
-      <CodeSnippet {...args}>{text}</CodeSnippet>
+      <CodeSnippet {...args}>{args.text}</CodeSnippet>
     </WithLayer>
   );
 };
@@ -228,10 +228,10 @@ MultilineWithLayer.args = {
 MultilineWithLayer.argTypes = variantArgTypes;
 MultilineWithLayer.parameters = codeSnippetParameters;
 
-export const SinglelineWithLayer = ({ text, ...args }) => {
+export const SinglelineWithLayer = (args) => {
   return (
     <WithLayer>
-      <CodeSnippet {...args}>{text}</CodeSnippet>
+      <CodeSnippet {...args}>{args.text}</CodeSnippet>
     </WithLayer>
   );
 };

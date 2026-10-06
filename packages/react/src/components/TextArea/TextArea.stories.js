@@ -153,7 +153,11 @@ export const _WithLayer = (args) => (
   </WithLayer>
 );
 
-_WithLayer.args = { ...defaultArgs };
+_WithLayer.args = {
+  ...defaultArgs,
+  helperText: 'TextArea helper text',
+};
+
 export const withAILabel = (args) => {
   const aiLabel = (
     <AILabel className="ai-label-container">
@@ -189,7 +193,10 @@ export const withAILabel = (args) => {
   return <TextArea rows={4} id="text-area-5" decorator={aiLabel} {...args} />;
 };
 
-withAILabel.args = { ...defaultArgs };
+withAILabel.args = {
+  ...defaultArgs,
+  helperText: 'TextArea helper text',
+};
 
 export const Skeleton = (args) => {
   return <TextAreaSkeleton {...args} />;

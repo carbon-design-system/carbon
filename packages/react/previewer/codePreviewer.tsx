@@ -49,6 +49,7 @@ type StoryWithSourceCode = {
 
 interface PreviewerOptions {
   story: StoryWithSourceCode;
+  args?: Record<string, unknown>;
   customImports?: string[];
   customFunctionDefs?: string[];
   styles?: string;
@@ -83,50 +84,24 @@ export const stackblitzPrefillConfig = (
 
 const _stackblitzPrefillConfig = async ({
   story,
+  args: customArgs,
   customImports = [],
   customFunctionDefs = [],
   styles,
   title,
   additionalFiles = {},
 }: PreviewerOptions) => {
-  const args = story.args ?? {};
+  const args = {
+    ...(story.args ?? {}),
+    ...(customArgs ?? {}),
+  };
   const rawSource = story.parameters.docs.source.originalSource;
   // Inject const args if the story references `args` anywhere (spread, destructure, or direct call)
   const hasArgsSpread =
     /(\.\.\.\s*args)|(\{\s*[^}]*\.\.\.[^}]*\}\s*=\s*args)|\bargs\b/.test(
       rawSource
     );
-  // True when the signature is `({ a, b, ...args }) => {` — filterStoryCode rewrites
-  // named params to `const { a, b } = args;` so args must always be emitted.
-  const hasDestructuredParams = /^\s*\(\s*\{[^}]+\}\s*\)\s*=>/.test(rawSource);
-  let storyCode = filterStoryCode(rawSource, args);
-
-  // Fallback: if filterStoryCode didn't insert a `return`, but the first
-  // non-empty line is a bare arrow expression (starts with `(` or a plain
-  // identifier — not a statement keyword like `const`/`let`/`var`/`return`),
-  // convert it to a return. Only fires on the outermost story arrow.
-  //   Form 1: `({ x }) => (` — arrow with explicit paren wrap
-  //   Form 2: `({ x }) =>\n<` — arrow where JSX starts directly
-  const firstLine = storyCode.match(/^\s*(.+)/)?.[1] ?? '';
-  const isBareArrow =
-    /^\s*(\(|[a-zA-Z_$][a-zA-Z0-9_$]*\s*=>)/.test(firstLine) &&
-    !/^\s*(const|let|var|return|if|for|while|function)\b/.test(firstLine);
-  if (!/^\s*return\b/.test(storyCode) && isBareArrow) {
-    if (/=>\s*\(/.test(firstLine)) {
-      // Form 1: strip everything up to and including `=> (`
-      storyCode = storyCode.replace(/^[\s\S]*?=>\s*\(/, 'return (');
-    } else if (
-      /=>\s*[\n\r\s]*</.test(
-        storyCode.slice(
-          0,
-          storyCode.indexOf('\n', storyCode.indexOf('=>')) + 50
-        )
-      )
-    ) {
-      // Form 2: strip everything up to `=>`
-      storyCode = storyCode.replace(/^[\s\S]*?=>\s*/, 'return ');
-    }
-  }
+  const storyCode = filterStoryCode(rawSource, args);
 
   const componentNames = Object.keys(carbonComponents);
   const iconsNames = Object.keys(carbonIconsReact);
@@ -162,25 +137,17 @@ const _stackblitzPrefillConfig = async ({
 
   let styleImport = `${carbonBaseScss}${inlinedStoryScss}`;
   if (styles) {
-    styleImport += styles.replace(licenseCommentRegex, '');
+    styleImport += `\n${styles.replace(licenseCommentRegex, '')}`;
   }
 
-  // SCSS requires all @use rules to appear before any other declarations.
-  // Extract all @use blocks (including multi-line `@use '...' with ( ... );`),
-  // deduplicate by the module path, and hoist them to the top.
-  const useBlockRegex =
-    /@use\s+'[^']*'(?:\s+(?:as\s+\S+|with\s*\([\s\S]*?\)))?\s*;/g;
-  const seenUseModules = new Set<string>();
-  const useBlocks: string[] = [];
-  styleImport = styleImport.replace(useBlockRegex, (match) => {
-    const moduleMatch = match.match(/@use\s+'([^']+)'/);
-    const moduleKey = moduleMatch ? moduleMatch[1] : match;
-    if (seenUseModules.has(moduleKey)) return '';
-    seenUseModules.add(moduleKey);
-    useBlocks.push(match.trim());
-    return '';
-  });
-  styleImport = useBlocks.join('\n') + '\n' + styleImport.trimStart();
+  // All Sass @use rules must appear at the top of the stylesheet.
+  // Extract all @use statements, deduplicate, and place them at the start.
+  const useRegex = /@use\s+['"][^'"]+['"][^;]*;/g;
+  const useStatements = Array.from(
+    new Set(styleImport.match(useRegex) ?? [])
+  ).join('\n');
+  const scssWithoutUses = styleImport.replace(useRegex, '').trimStart();
+  const finalScss = `${useStatements}\n${scssWithoutUses}`;
 
   // Detect React hooks used in the story code and any custom function definitions
   const foundHooks = detectReactHooks(
@@ -197,7 +164,7 @@ ${customImports.length > 0 ? customImports.join('\n') : ''}
 ${matchedComponents.length > 0 ? `import { ${matchedComponents.join(', ')} } from "@carbon/react";` : ''}
 ${matchedIcons.length > 0 ? `import { ${matchedIcons.join(', ')} } from "@carbon/icons-react";` : ''}
 export default function App() {
-  ${hasArgsSpread || hasDestructuredParams ? formattedArgs : ''}
+  ${hasArgsSpread ? formattedArgs : ''}
   ${customFunctionDefs.length > 0 ? customFunctionDefs.join('\n') : ''}
   ${storyCode}
 }
@@ -223,7 +190,7 @@ export default function App() {
     'tsconfig.json': tsconfig,
     'src/main.tsx': main,
     'src/App.tsx': formattedApp,
-    'src/index.scss': styleImport,
+    'src/index.scss': finalScss,
     ...additionalFiles,
   };
 
@@ -252,40 +219,6 @@ const filterStoryCode = (
   let updated = storyCode
     // Strip local relative imports (./foo or ../foo) — those files don't exist in StackBlitz
     .replace(/^\s*import\s+.*?from\s+['"][./][^'"]*['"]\s*;?\s*$/gm, '')
-    // Preserve destructured arrow params as a const binding before stripping the wrapper.
-    // `({ label, level }) => {`        → `const { label, level } = args;`
-    // `({ nested, ...args }) => {`     → `const { nested, ...args } = args;`
-    //   Including ...args in the destructure rebinds `args` without the named params,
-    //   so `{...args}` spreads in the body won't leak extracted props (e.g. nested).
-    // The opening `{` is consumed here; the closing `}` is removed by the wrapper stripper below.
-    .replace(/^\s*\(\s*\{([^}]+)\}\s*\)\s*=>\s*\{/, (_, params) => {
-      const parts = params
-        .split(',')
-        .map((p) => p.trim())
-        .filter(Boolean);
-      const hasRest = parts.some((p) => p.startsWith('...'));
-      const named = parts.filter((p) => !p.startsWith('...')).join(', ');
-      // If there's a ...rest, include it so args is rebound without named params.
-      // Exception: if the rest element is named `...args`, omit it — `args` is
-      // already declared as `const args = {...}` above, so re-declaring it with
-      // `const { x, ...args } = args` would cause "Identifier already declared".
-      // Omitting it is safe because `args` in the body still refers to the full
-      // args object (all named params are also inlined by the arg-value loop).
-      const restPart = parts.find((p) => p.startsWith('...'));
-      const includeRest = hasRest && restPart !== '...args';
-      const destructure = includeRest ? parts.join(', ') : named;
-      return destructure ? `const { ${destructure} } = args;` : '';
-    })
-    // Remove arrow function wrapper with block body: (params) => { … } / args => { … }
-    .replace(/^\s*(\([^)]*\)|[\w]+)\s*=>\s*{\s*|}\s*;?\s*$/g, '')
-    // Remove empty arrow wrapper: () => {
-    .replace(/^\s*\(\)\s*=>\s*{/g, '')
-    // Replace `args =>` with `return`
-    .replace(/^\s*args\s*=>/g, 'return')
-    // Convert implicit arrow return with parens body: anything => ( → return (
-    // No `m` flag — only matches at the very start of the string to avoid
-    // replacing `=> (` inside inner functions like curried arrows.
-    .replace(/^.*?=>\s*\(/, 'return (')
     // Replace action('...') with console.log — handles quoted strings containing parens
     .replace(
       /action\((?:'[^']*'|"[^"]*"|[^)])*\)(\(\))?/g,
@@ -295,6 +228,17 @@ const filterStoryCode = (
     .replace(/context\.viewMode\s*!==\s*'docs'/g, 'false')
     // Remove surrounding quotes
     .replace(/^"|"$/g, '');
+
+  // Unwrap outermost arrow function into component body:
+  // Case 1: Block body `(...) => { ... }` -> unwrap outer curly braces
+  // Case 2: Implicit return `(...) => (...)` or `(...) => <...>` -> replace with `return `
+  if (/^\s*(?:\([^)]*\)|[\w]+)\s*=>\s*\{[\s\S]*\}\s*;?\s*$/.test(updated)) {
+    updated = updated
+      .replace(/^\s*(?:\([^)]*\)|[\w]+)\s*=>\s*\{\s*/, '')
+      .replace(/\s*\}\s*;?\s*$/, '');
+  } else if (/^\s*(?:\([^)]*\)|[\w]+)\s*=>/.test(updated)) {
+    updated = updated.replace(/^\s*(?:\([^)]*\)|[\w]+)\s*=>\s*/, 'return ');
+  }
 
   // Inline each arg value into the code
   Object.entries(args).forEach(([key, value]) => {
@@ -333,7 +277,7 @@ const findComponentImports = (
   storyCode: string
 ): string[] => {
   return componentNames.filter((name) =>
-    new RegExp(`<${name}\\b`, 'g').test(storyCode)
+    new RegExp(`(?:<${name}\\b|\\b${name}\\s*\\()`, 'g').test(storyCode)
   );
 };
 

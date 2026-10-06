@@ -91,9 +91,6 @@ function SomeComponent() {
       onClick: () =>
         stackblitzPrefillConfig({
           story: useContextMenu.SpecificElement,
-          customImports: [
-            "import { usePrefix, useContextMenu } from '@carbon/react';",
-          ],
         }),
     },
   ]}
@@ -116,7 +113,6 @@ therefore be configured by the user:
         stackblitzPrefillConfig({
           story: useContextMenu._useContextMenu,
           customFunctionDefs: [textDef],
-          customImports: ["import { useContextMenu } from '@carbon/react';"],
         }),
     },
   ]}

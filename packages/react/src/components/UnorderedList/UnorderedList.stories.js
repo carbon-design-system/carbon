@@ -54,7 +54,8 @@ export const Default = (args) => {
   );
 };
 
-export const Nested = ({ nested, ...listArgs }) => {
+export const Nested = (args) => {
+  const { nested, ...listArgs } = args;
   return (
     <UnorderedList {...listArgs}>
       <ListItem>
