@@ -679,3 +679,33 @@ SideNavWLargeSideNavItems.argTypes = {
   ...headerArgTypes,
   ...sideNavArgTypes,
 };
+
+export const SideNavWLongHeaderMenuItem = (args) => (
+  <Header aria-label={args.headerAriaLabel}>
+    <HeaderMenuButton aria-label="Close menu" isActive aria-expanded />
+    <HeaderName href="#" prefix={args.platformPrefix}>
+      {args.platformName}
+    </HeaderName>
+    <SideNav
+      aria-label={args.sideNavAriaLabel}
+      expanded={args.expanded}
+      isPersistent={false}>
+      <SideNavItems>
+        <HeaderSideNavItems>
+          <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
+          <HeaderMenuItem href="#">
+            Header menu item with a label long enough to be truncated in the
+            side nav
+          </HeaderMenuItem>
+        </HeaderSideNavItems>
+      </SideNavItems>
+    </SideNav>
+  </Header>
+);
+
+SideNavWLongHeaderMenuItem.args = {
+  ...headerArgs,
+  ...sideNavArgs,
+};
+
+SideNavWLongHeaderMenuItem.tags = ['!dev', '!autodocs'];
