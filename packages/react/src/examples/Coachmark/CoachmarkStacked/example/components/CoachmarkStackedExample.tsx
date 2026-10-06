@@ -1,5 +1,4 @@
 /**
- * @license
  *
  * Copyright IBM Corp. 2026
  *
@@ -65,9 +64,231 @@ function useCarbonTheme() {
 
   return themeValue;
 }
+interface SimpleNestedItem {
+  id: number;
+  title: string;
+  text: string;
+  type: 'simple';
+  button: React.ReactNode;
+}
 
-// eslint-disable-next-line react/prop-types
-export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
+interface CarouselNestedPage {
+  id: string;
+  title: string;
+  text: React.ReactNode;
+  button?: React.ReactNode;
+}
+
+interface CarouselNestedItem {
+  id: number;
+  type: 'carousel';
+  pages: CarouselNestedPage[];
+}
+
+type NestedItem = SimpleNestedItem | CarouselNestedItem;
+
+interface StackedCoachmarkItemProps {
+  item: { id: number; label: string };
+  isOpen: boolean;
+  onClose: () => void;
+  elementBlockClass: string;
+  stackedCoachmark: string;
+  stackedCoachmarkContentRefs: React.MutableRefObject<
+    (HTMLDivElement | null)[]
+  >;
+  nestedItems: NestedItem[];
+  carouselContainerRefs: React.MutableRefObject<{
+    [key: number]: HTMLDivElement | null;
+  }>;
+  carouselItemsRef: React.MutableRefObject<{
+    [key: number]: (HTMLDivElement | null)[];
+  }>;
+  carouselInit: React.MutableRefObject<InitCarousel | null>;
+  currentViewIndex: number;
+  backRefMap: React.MutableRefObject<{ [key: number]: HTMLButtonElement | null }>;
+  onPrev: () => void;
+  onNext: () => void;
+  handleCloseCarousel: () => void;
+  primaryButtonRefMap: React.MutableRefObject<{
+    [key: number]: HTMLButtonElement | null;
+  }>;
+}
+
+const StackedCoachmarkItem = ({
+  item,
+  isOpen,
+  onClose,
+  elementBlockClass,
+  stackedCoachmark,
+  stackedCoachmarkContentRefs,
+  nestedItems,
+  carouselContainerRefs,
+  carouselItemsRef,
+  carouselInit,
+  currentViewIndex,
+  backRefMap,
+  onPrev,
+  onNext,
+  handleCloseCarousel,
+  primaryButtonRefMap,
+}: StackedCoachmarkItemProps) => {
+  const [itemVisible, setItemVisible] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setItemVisible(true);
+        });
+      });
+    } else {
+      setItemVisible(false);
+    }
+  }, [isOpen]);
+
+  return (
+    <Coachmark
+      key={item.id}
+      open={isOpen}
+      onClose={onClose}
+      align="top"
+      caret={false}
+    >
+      <Button
+        style={{
+          display: 'none',
+        }}
+      >
+        {item.id}
+      </Button>
+      <Coachmark.Content
+        ref={(el) => {
+          if (el) {
+            stackedCoachmarkContentRefs.current[item.id] = el;
+          }
+        }}
+        className={cx(
+          `${elementBlockClass}`,
+          itemVisible && 'is-visible'
+        )}
+      >
+        <Coachmark.ContentHeader closeIconDescription="Close" />
+        <Coachmark.ContentBody>
+          {nestedItems
+            .filter((nested) => nested.id === item.id)
+            .map((nested) => {
+              if (nested.type === 'simple') {
+                return (
+                  <div
+                    key={nested.id}
+                    className={`${stackedCoachmark}__content`}
+                  >
+                    <h2 className={`${stackedCoachmark}__title`}>
+                      {nested.title}
+                    </h2>
+                    <p className={`${stackedCoachmark}__body`}>
+                      {nested.text}
+                    </p>
+                    <div className={`${stackedCoachmark}__button`}>
+                      {nested.button}
+                    </div>
+                  </div>
+                );
+              }
+              if (nested.type === 'carousel') {
+                return (
+                  <React.Fragment key={nested.id}>
+                    <div
+                      ref={(el) => {
+                        carouselContainerRefs.current[item.id] = el;
+                      }}
+                      className="exampleCarouselWrapper"
+                    >
+                      {nested.pages.map((page, index) => (
+                        <div
+                          key={page.id}
+                          ref={(el) => {
+                            if (!carouselItemsRef.current[item.id]) {
+                              carouselItemsRef.current[item.id] = [];
+                            }
+                            carouselItemsRef.current[item.id][index] = el;
+                          }}
+                        >
+                          <h2>{page.title}</h2>
+                          <p>{page.text}</p>
+                          <div>{page.button}</div>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className={'carouselControlWrapper__footer'}>
+                      <div
+                        className={
+                          'carouselControlWrapper--controls-progress'
+                        }
+                      >
+                        {nested.pages.map((page, index) => {
+                          if (
+                            carouselInit.current?.getActiveItem?.()
+                              ?.index === index
+                          ) {
+                            return (
+                              <span key={item.id}>
+                                {`${carouselInit.current?.getActiveItem?.()?.index + 1} / ${nested.pages.length}`}
+                              </span>
+                            );
+                          }
+                        })}
+                      </div>
+                      <div className={'carouselControlWrapper--buttons'}>
+                        {currentViewIndex !== 0 && (
+                          <Button
+                            ref={(el) => {
+                              backRefMap.current[item.id] = el;
+                            }}
+                            size="sm"
+                            iconDescription="Previous"
+                            kind="ghost"
+                            onClick={onPrev}
+                          >
+                            Back
+                          </Button>
+                        )}
+                        <Button
+                          id={`coachmark-stacked-primary-button-${item.id}`}
+                          size="sm"
+                          iconDescription={
+                            currentViewIndex < nested.pages.length - 1
+                              ? 'Next'
+                              : 'Done'
+                          }
+                          onClick={
+                            currentViewIndex < nested.pages.length - 1
+                              ? onNext
+                              : handleCloseCarousel
+                          }
+                          ref={(el) => {
+                            primaryButtonRefMap.current[item.id] = el;
+                          }}
+                        >
+                          {currentViewIndex < nested.pages.length - 1
+                            ? 'Next'
+                            : 'Done'}
+                        </Button>
+                      </div>
+                    </div>
+                  </React.Fragment>
+                );
+              }
+              return null;
+            })}
+        </Coachmark.ContentBody>
+      </Coachmark.Content>
+    </Coachmark>
+  );
+};
+
+export const CoachmarkStackedExample = (args) => {
   const carbonTheme = useCarbonTheme();
   const [isOpen, setIsOpen] = useState(true);
   const [currentViewIndex, setCurrentViewIndex] = useState(-1);
@@ -76,7 +297,7 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
   const carouselInit = useRef<InitCarousel | null>(null);
   const [parentHeight, setParentHeight] = useState(0);
   const stackHomeContentRef = useRef(null);
-  const stackedCoachmarkContentRefs = useRef([]);
+  const stackedCoachmarkContentRefs = useRef<(HTMLDivElement | null)[]>([]);
   // Use ref maps to store button refs for each example separately
   const primaryButtonRefMap = useRef<{
     [key: number]: HTMLButtonElement | null;
@@ -112,7 +333,7 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
     },
   ];
 
-  const nestedItems = [
+  const nestedItems: NestedItem[] = [
     {
       id: 1,
       title: 'Short Coachmark',
@@ -284,7 +505,6 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
         lastOpenIdRef.current = 0;
       }, 100);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [openId]);
 
   useEffect(() => {
@@ -316,11 +536,6 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [carouselInit, openId]);
 
-  const onViewChangeStart = () => {};
-  const onViewChangeEnd = (options) => {
-    handleViewStackUpdate(options);
-  };
-
   const handleViewStackUpdate = useCallback(({ currentIndex, lastIndex }) => {
     setCurrentViewIndex(currentIndex);
     setLastViewIndex(lastIndex);
@@ -340,11 +555,11 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
     }
   }, [currentViewIndex, lastViewIndex, openId]);
 
-  const onNext = (e) => {
+  const onNext = () => {
     carouselInit?.current?.next();
   };
 
-  const onPrev = (e) => {
+  const onPrev = () => {
     // Focus the primary button before navigation if Back button will be hidden
     if (currentViewIndex === 1) {
       const primaryButton = primaryButtonRefMap.current[openId];
@@ -488,166 +703,30 @@ export const CoachmarkStackedExample = ({ prefix = 'c4p', ...args }) => {
           </Coachmark.ContentBody>
         </Coachmark.Content>
       </Coachmark>
-      {items.map((item) => {
-        const isOpen = openId === item.id;
-        const [itemVisible, setItemVisible] = React.useState(false);
-
-        React.useEffect(() => {
-          if (isOpen) {
-            requestAnimationFrame(() => {
-              requestAnimationFrame(() => {
-                setItemVisible(true);
-              });
-            });
-          } else {
-            setItemVisible(false);
-          }
-        }, [isOpen]);
-
-        return (
-          <Coachmark
-            key={item.id}
-            open={isOpen}
-            onClose={() => {
-              // Prevent closing during carousel navigation
-              setOpenId(0);
-            }}
-            align="top"
-            caret={false}
-          >
-            <Button
-              style={{
-                display: 'none',
-              }}
-            >
-              {item.id}
-            </Button>
-            <Coachmark.Content
-              ref={(el) => {
-                if (el) {
-                  stackedCoachmarkContentRefs.current[item.id] = el;
-                }
-              }}
-              className={cx(
-                `${elementBlockClass}`,
-                itemVisible && 'is-visible'
-              )}
-            >
-              <Coachmark.ContentHeader closeIconDescription="Close" />
-              <Coachmark.ContentBody>
-                {nestedItems
-                  .filter((nested) => nested.id === item.id)
-                  .map((nested) => {
-                    if (nested.type === 'simple') {
-                      return (
-                        <div
-                          key={nested.id}
-                          className={`${stackedCoachmark}__content`}
-                        >
-                          <h2 className={`${stackedCoachmark}__title`}>
-                            {nested.title}
-                          </h2>
-                          <p className={`${stackedCoachmark}__body`}>
-                            {nested.text}
-                          </p>
-                          <div className={`${stackedCoachmark}__button`}>
-                            {nested.button}
-                          </div>
-                        </div>
-                      );
-                    }
-                    if (nested.type === 'carousel') {
-                      return (
-                        <React.Fragment key={nested.id}>
-                          <div
-                            ref={(el) => {
-                              carouselContainerRefs.current[item.id] = el;
-                            }}
-                            className="exampleCarouselWrapper"
-                          >
-                            {nested.pages.map((page, index) => (
-                              <div
-                                key={page.id}
-                                ref={(el) => {
-                                  if (!carouselItemsRef.current[item.id]) {
-                                    carouselItemsRef.current[item.id] = [];
-                                  }
-                                  carouselItemsRef.current[item.id][index] = el;
-                                }}
-                              >
-                                <h2>{page.title}</h2>
-                                <p>{page.text}</p>
-                                <div>{page.button}</div>
-                              </div>
-                            ))}
-                          </div>
-
-                          <div className={'carouselControlWrapper__footer'}>
-                            <div
-                              className={
-                                'carouselControlWrapper--controls-progress'
-                              }
-                            >
-                              {nested.pages.map((page, index) => {
-                                if (
-                                  carouselInit.current?.getActiveItem?.()
-                                    ?.index === index
-                                ) {
-                                  return (
-                                    <span key={item.id}>
-                                      {`${carouselInit.current?.getActiveItem?.()?.index + 1} / ${nested.pages.length}`}
-                                    </span>
-                                  );
-                                }
-                              })}
-                            </div>
-                            <div className={'carouselControlWrapper--buttons'}>
-                              {currentViewIndex !== 0 && (
-                                <Button
-                                  ref={(el) => {
-                                    backRefMap.current[item.id] = el;
-                                  }}
-                                  size="sm"
-                                  iconDescription="Previous"
-                                  kind="ghost"
-                                  onClick={onPrev}
-                                >
-                                  Back
-                                </Button>
-                              )}
-                              <Button
-                                id="coachmark-primary-button"
-                                size="sm"
-                                iconDescription={
-                                  currentViewIndex < nested.pages.length - 1
-                                    ? 'Next'
-                                    : 'Done'
-                                }
-                                onClick={
-                                  currentViewIndex < nested.pages.length - 1
-                                    ? onNext
-                                    : handleCloseCarousel
-                                }
-                                ref={(el) => {
-                                  primaryButtonRefMap.current[item.id] = el;
-                                }}
-                              >
-                                {currentViewIndex < nested.pages.length - 1
-                                  ? 'Next'
-                                  : 'Done'}
-                              </Button>
-                            </div>
-                          </div>
-                        </React.Fragment>
-                      );
-                    }
-                    return null;
-                  })}
-              </Coachmark.ContentBody>
-            </Coachmark.Content>
-          </Coachmark>
-        );
-      })}
+      {items.map((item) => (
+        <StackedCoachmarkItem
+          key={item.id}
+          item={item}
+          isOpen={openId === item.id}
+          onClose={() => {
+            // Prevent closing during carousel navigation
+            setOpenId(0);
+          }}
+          elementBlockClass={elementBlockClass}
+          stackedCoachmark={stackedCoachmark}
+          stackedCoachmarkContentRefs={stackedCoachmarkContentRefs}
+          nestedItems={nestedItems}
+          carouselContainerRefs={carouselContainerRefs}
+          carouselItemsRef={carouselItemsRef}
+          carouselInit={carouselInit}
+          currentViewIndex={currentViewIndex}
+          backRefMap={backRefMap}
+          onPrev={onPrev}
+          onNext={onNext}
+          handleCloseCarousel={handleCloseCarousel}
+          primaryButtonRefMap={primaryButtonRefMap}
+        />
+      ))}
       </div>
     </Theme>
   );

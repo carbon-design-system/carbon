@@ -114,11 +114,6 @@ export const CoachmarkFixedExample = (args) => {
     setLastViewIndex(lastIndex);
   }, []);
 
-  const onViewChangeStart = () => {};
-  const onViewChangeEnd = (options) => {
-    handleViewStackUpdate(options);
-  };
-
   useEffect(() => {
     if (isOpen) {
       // Use requestAnimationFrame to ensure the initial transform state is applied
@@ -173,7 +168,7 @@ export const CoachmarkFixedExample = (args) => {
         onClose={handleClose}
         align="top"
         caret={false}
-        selectorPrimaryFocus="#coachmark-primary-button"
+        selectorPrimaryFocus="#coachmark-fixed-primary-button"
         {...args}
       >
         <CoachmarkTagline
@@ -243,7 +238,7 @@ export const CoachmarkFixedExample = (args) => {
                   </Button>
                 )}
                 <Button
-                  id="coachmark-primary-button"
+                  id="coachmark-fixed-primary-button"
                   size="sm"
                   iconDescription={
                     currentViewIndex < items.length - 1 ? 'Next' : 'Done'

@@ -103,11 +103,6 @@ export const CoachmarkOverlayElementsExample = (args) => {
     setLastViewIndex(lastIndex);
   }, []);
 
-  const onViewChangeStart = () => {};
-  const onViewChangeEnd = (options) => {
-    handleViewStackUpdate(options);
-  };
-
   useEffect(() => {
     if (isOpen && carouselContainerRef.current) {
       // Destroy stale event listeners from the previous instance before
@@ -144,7 +139,7 @@ export const CoachmarkOverlayElementsExample = (args) => {
         open={isOpen}
         onClose={handleClose}
         align="top"
-        selectorPrimaryFocus="#coachmark-primary-button"
+        selectorPrimaryFocus="#coachmark-overlay-primary-button"
         {...args}
       >
         <CoachmarkBeacon
@@ -209,7 +204,7 @@ export const CoachmarkOverlayElementsExample = (args) => {
                   </Button>
                 )}
                 <Button
-                  id="coachmark-primary-button"
+                  id="coachmark-overlay-primary-button"
                   size="sm"
                   iconDescription={
                     currentViewIndex < items.length - 1 ? 'Next' : 'Done'
