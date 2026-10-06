@@ -64,6 +64,9 @@
             $border-strong 100%
           )
           border-box;
+
+      // Fixed 16px left padding across all sizes.
+      padding-inline-start: $spacing-05;
     }
 
     &:focus,
@@ -79,6 +82,23 @@
 
   .#{$prefix}--password-input {
     padding-inline-end: layout.size('height');
+
+    @if enabled('enable-v12-release') {
+      // Ensure 8px gap between input text and view button for all sizes.
+      // padding-inline-end = button_size + inset_inline_end + $spacing-03 (8px gap).
+      // xs: 24px + 0px         + 8px = 32px
+      // sm: 24px + $spacing-02 + 8px = 36px
+      // md/lg already match layout.size('height') — no override needed.
+      .#{$prefix}--layout--size-xs & {
+        padding-inline-end: calc(#{convert.to-rem(24px)} + #{$spacing-03});
+      }
+
+      .#{$prefix}--layout--size-sm & {
+        padding-inline-end: calc(
+          #{convert.to-rem(24px)} + #{$spacing-02} + #{$spacing-03}
+        );
+      }
+    }
   }
 
   .#{$prefix}--text-input::placeholder {
@@ -124,6 +144,14 @@
     aspect-ratio: 1;
     inset-block: 0;
     inset-inline-end: 0;
+
+    @if enabled('enable-v12-release') {
+      // In v12 the button is smaller; let the host shrink to the button size
+      // and centre it within the input height.
+      inset-block: auto;
+      inset-block-start: 50%;
+      transform: translateY(-50%);
+    }
   }
 
   .#{$prefix}--toggle-password-tooltip .#{$prefix}--tooltip-trigger__wrapper {
@@ -149,7 +177,36 @@
     transition: outline $duration-fast-01 motion(standard, productive);
 
     @if enabled('enable-v12-release') {
-      border-radius: $border-radius-04;
+      // lg → sm (32px); md/sm/xs → xs (24px)
+      @include layout.redefine-tokens(
+        (
+          size: (
+            height: (
+              xs: convert.to-rem(24px),
+              sm: convert.to-rem(24px),
+              md: convert.to-rem(24px),
+              lg: convert.to-rem(32px),
+            ),
+          ),
+        )
+      );
+      @include layout.use('size', $default: 'md', $min: 'xs', $max: 'lg');
+
+      // lg/md → 8px; sm → 4px; xs → 0
+      border-radius: $border-radius-max;
+      block-size: layout.size('height');
+      inline-size: layout.size('height');
+      inset-block-start: 50%;
+      inset-inline-end: $spacing-03;
+      transform: translateY(-50%);
+
+      .#{$prefix}--layout--size-sm & {
+        inset-inline-end: $spacing-02;
+      }
+
+      .#{$prefix}--layout--size-xs & {
+        inset-inline-end: 0;
+      }
     }
   }
 
