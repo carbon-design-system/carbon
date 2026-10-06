@@ -67,12 +67,6 @@ export const EditWithError = () => {
     setOpen(!open);
   };
 
-  const getLoadingStatus = (): 'inactive' | 'active' | 'finished' => {
-    if (success) return 'finished';
-    if (loading) return 'active';
-    return 'inactive';
-  };
-
   return (
     <div className="app">
       <Button onClick={toggleModal}>Edit API key</Button>
@@ -85,9 +79,6 @@ export const EditWithError = () => {
         primaryButtonText="Save API key"
         secondaryButtonText="Close"
         primaryButtonDisabled={loading || name.length === 0}
-        loadingStatus={getLoadingStatus()}
-        loadingDescription={loading ? 'Saving...' : ''}
-        onLoadingSuccess={() => {}}
       >
         <p style={{ marginBlockEnd: '1rem' }}>
           (Optional description text) To connect securely to [product name],

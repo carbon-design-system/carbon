@@ -32,9 +32,6 @@ export interface GenerateAnAPIKeyProps {
   primaryButtonText?: string;
   secondaryButtonText?: string;
   primaryButtonDisabled?: boolean;
-  loadingStatus?: 'inactive' | 'active' | 'finished';
-  loadingDescription?: string;
-  onLoadingSuccess?: () => void;
   children?: ReactNode;
   apiKeyLoaded?: boolean;
   copyIconDescription?: string;
@@ -55,9 +52,6 @@ export const GenerateAnAPIKey = ({
   primaryButtonText = 'Generate API key',
   secondaryButtonText = 'Close',
   primaryButtonDisabled = false,
-  loadingStatus = 'inactive',
-  loadingDescription = 'Loading',
-  onLoadingSuccess,
   children,
   apiKeyLoaded = false,
   copyIconDescription = 'Copy to clipboard',

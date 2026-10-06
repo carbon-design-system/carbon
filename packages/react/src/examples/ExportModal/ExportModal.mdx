@@ -67,43 +67,18 @@ import {
 The standard export modal presents a text input so the user can name the file
 before exporting.
 
-<Canvas
-  of={stories.Standard}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(stories.Standard),
-    },
-  ]}
-/>
+<Canvas of={stories.Standard} />
 
 ## With extension validation
 
 When the export format is constrained to a specific file extension, inline
 validation guides the user to provide a correctly formatted file name.
 
-<Canvas
-  of={stories.WithExtensionValidation}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(stories.WithExtensionValidation),
-    },
-  ]}
-/>
+<Canvas of={stories.WithExtensionValidation} />
 
 ## With preformatted extensions
 
 When several export formats are available, the user selects from a set of
 radio buttons instead of typing a file extension manually.
 
-<Canvas
-  of={stories.WithPreformattedExtensions}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig(stories.WithPreformattedExtensions),
-    },
-  ]}
-/>
+<Canvas of={stories.WithPreformattedExtensions} />

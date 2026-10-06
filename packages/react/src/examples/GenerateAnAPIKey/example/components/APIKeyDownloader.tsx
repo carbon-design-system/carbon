@@ -48,7 +48,6 @@ export const APIKeyDownloader = ({
           {...linkProps}
           className="apikey-modal-pattern__download-link"
           aria-label={downloadLinkLabel ?? linkText}
-          role="button"
         >
           {downloadLinkLabel ?? linkText}
         </a>

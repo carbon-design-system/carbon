@@ -67,8 +67,6 @@ import { InformationFilled, CheckmarkFilled } from '@carbon/react/icons';
   onRequestClose={toggleModal}
   primaryButtonDisabled={loading || name.length === 0}
   secondaryButtonText="Close"
-  loadingDescription="Loading"
-  onLoadingSuccess={() => {}}
   {...modalProps}
 >
   {key ? (
@@ -131,84 +129,28 @@ import { InformationFilled, CheckmarkFilled } from '@carbon/react/icons';
 
 ## Generate
 
-<Canvas
-  of={stories.generate}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(stories.generate),
-    },
-  ]}
-/>
+<Canvas of={stories.generate} />
 
 ## Generate with error
 
-<Canvas
-  of={stories.generateWithError}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(stories.generateWithError),
-    },
-  ]}
-/>
+<Canvas of={stories.generateWithError} />
 
 ## Instant generate
 
-<Canvas
-  of={stories.instantGenerate}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(stories.instantGenerate),
-    },
-  ]}
-/>
+<Canvas of={stories.instantGenerate} />
 
 ## Custom generate
 
-<Canvas
-  of={stories.customGenerate}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(stories.customGenerate),
-    },
-  ]}
-/>
+<Canvas of={stories.customGenerate} />
 
 ## Edit
 
-<Canvas
-  of={stories.edit}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(stories.edit),
-    },
-  ]}
-/>
+<Canvas of={stories.edit} />
 
 ## Edit with error
 
-<Canvas
-  of={stories.editWithError}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(stories.editWithError),
-    },
-  ]}
-/>
+<Canvas of={stories.editWithError} />
 
 ## Custom edit
 
-<Canvas
-  of={stories.customEdit}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(stories.customEdit),
-    },
-  ]}
-/>
+<Canvas of={stories.customEdit} />

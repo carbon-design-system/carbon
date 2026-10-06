@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Button, PasswordInput, InlineLoading } from '@carbon/react';
 import { GenerateAnAPIKey } from '../components/GenerateAnAPIKey';
 import { APIKeyDownloader } from '../components/APIKeyDownloader';
@@ -47,7 +47,7 @@ export const InstantGenerate = () => {
   return (
     <div className="app">
       {loading ? (
-        <Button renderIcon={InlineLoading}>Generating...</Button>
+        <InlineLoading description="Generating..." />
       ) : (
         <Button onClick={generateKey}>Generate</Button>
       )}

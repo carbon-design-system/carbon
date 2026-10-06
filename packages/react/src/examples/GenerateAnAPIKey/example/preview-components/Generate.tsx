@@ -62,11 +62,6 @@ export const Generate = () => {
     setOpen(!open);
   };
 
-  const getLoadingStatus = (): 'inactive' | 'active' | 'finished' => {
-    if (key) return 'finished';
-    if (loading) return 'active';
-    return 'inactive';
-  };
 
   const modalProps = key
     ? {
@@ -74,7 +69,6 @@ export const Generate = () => {
         modalLabel: 'An example of Generate API key',
         primaryButtonText: 'Copy',
         onRequestSubmit: copyKey,
-        loadingStatus: 'inactive' as const,
         apiKeyLoaded: true,
         apiKey: key,
         copyIconDescription: 'Copy',
@@ -85,7 +79,6 @@ export const Generate = () => {
         modalLabel: 'An example of Generate API key',
         primaryButtonText: 'Generate API key',
         onRequestSubmit: fetchKey,
-        loadingStatus: getLoadingStatus(),
         apiKeyLoaded: false,
       };
 
@@ -97,8 +90,6 @@ export const Generate = () => {
         onRequestClose={toggleModal}
         primaryButtonDisabled={loading || name.length === 0}
         secondaryButtonText="Close"
-        loadingDescription="Loading"
-        onLoadingSuccess={() => {}}
         {...modalProps}
       >
         <p style={{ marginBlockEnd: '1rem' }}>
