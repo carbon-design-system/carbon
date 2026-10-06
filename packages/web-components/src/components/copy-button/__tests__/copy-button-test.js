@@ -76,21 +76,23 @@ describe('Button props', () => {
     await expect(el).shadowDom.to.equalSnapshot();
   });
 
-  it('should not set kind attribute on host when kind is not specified', async () => {
+  it('should default kind to ghost', async () => {
     const el = await fixture(html`
       <cds-copy-button icon-description="Copy to clipboard"> </cds-copy-button>
     `);
 
-    expect(el).to.not.have.attribute('kind');
+    expect(el).to.have.attribute('kind', 'ghost');
+    const copy = el.shadowRoot?.querySelector('cds-copy');
+    expect(copy).to.have.attribute('kind', 'ghost');
   });
 
-  it('should default size to lg', async () => {
+  it('should default size to md', async () => {
     const el = await fixture(html`
       <cds-copy-button icon-description="Copy to clipboard"> </cds-copy-button>
     `);
 
     const copy = el.shadowRoot?.querySelector('cds-copy');
-    expect(copy).to.have.attribute('size', 'lg');
+    expect(copy).to.have.attribute('size', 'md');
   });
 
   it('should call the click handler', async () => {
