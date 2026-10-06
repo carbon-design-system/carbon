@@ -44,6 +44,12 @@ export const productMigratedStoryGlobs = [
   '../src/examples/CreateTearsheet/CreateTearsheet.mdx',
   '../src/examples/CreateTearsheetNarrow/CreateTearsheet.stories.js',
   '../src/examples/CreateTearsheetNarrow/CreateTearsheet.mdx',
+  '../src/examples/Coachmark/CoachmarkFixed/CoachmarkFixed.stories.js',
+  '../src/examples/Coachmark/CoachmarkFixed/CoachmarkFixed.mdx',
+  '../src/examples/Coachmark/CoachmarkOverlayElements/CoachmarkOverlayElements.stories.js',
+  '../src/examples/Coachmark/CoachmarkOverlayElements/CoachmarkOverlayElements.mdx',
+  '../src/examples/Coachmark/CoachmarkStacked/CoachmarkStacked.stories.js',
+  '../src/examples/Coachmark/CoachmarkStacked/CoachmarkStacked.mdx',
 ];
 
 /**
