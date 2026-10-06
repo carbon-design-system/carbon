@@ -112,6 +112,15 @@ export { default as CDSTextareaSkeleton } from './components/textarea/textarea-s
 export { default as CDSOverflowMenu } from './components/overflow-menu/overflow-menu';
 export { default as CDSOverflowMenuBody } from './components/overflow-menu/overflow-menu-body';
 export { default as CDSOverflowMenuItem } from './components/overflow-menu/overflow-menu-item';
+// TODO: uncomment in v12 — remove from product-migrated-components.mjs too
+// export { default as CDSPageHeader } from './components/page-header/page-header';
+// export { default as CDSPageHeaderBreadcrumb } from './components/page-header/page-header-breadcrumb';
+// export { default as CDSPageHeaderContent } from './components/page-header/page-header-content';
+// export { default as CDSPageHeaderContentText } from './components/page-header/page-header-content-text';
+// export { default as CDSPageHeaderHeroImage } from './components/page-header/page-header-hero-image';
+// export { default as CDSPageHeaderTabs } from './components/page-header/page-header-tabs';
+// export { default as CDSPageHeaderTitleBreadcrumb } from './components/page-header/page-header-title-breadcrumb';
+// export { default as CDSPageHeaderScroller } from './components/page-header/page-header-scroller';
 export { default as CDSPagination } from './components/pagination/pagination';
 export { default as CDSPopover } from './components/popover/popover';
 export { default as CDSPopoverContent } from './components/popover/popover-content';
