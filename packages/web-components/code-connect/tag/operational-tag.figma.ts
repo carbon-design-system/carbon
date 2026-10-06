@@ -1,6 +1,6 @@
-// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=16031-269750&t=RuAO38H8L12JZXpK-4
-// source=https://github.com/carbon-design-system/carbon/blob/main/packages/web-components/src/components/tag/tag.ts
-// component=cds-tag
+// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=46254-10165&t=RuAO38H8L12JZXpK-4
+// source=https://github.com/carbon-design-system/carbon/blob/main/packages/web-components/src/components/tag/operational-tag.ts
+// component=cds-operational-tag
 
 /**
  * Copyright IBM Corp. 2026
@@ -67,40 +67,21 @@ function createTemplate() {
     'High contrast': 'high-contrast',
     Outline: 'outline',
   });
-  const isDismissible = instance.getBoolean('Dismissible');
-
-  if (isDismissible) {
-    return {
-      id: 'cds-dismissible-tag',
-      imports: [
-        "import '@carbon/web-components/es/components/tag/dismissible-tag.js'",
-      ],
-      example: figma.code`<cds-dismissible-tag dismiss-tooltip-label="Dismiss"${renderBooleanAttribute(
-        'disabled',
-        disabled
-      )}${renderStringAttribute('size', size)}${renderStringAttribute(
-        'text',
-        text
-      )}${renderStringAttribute('type', type)}>
-  <span slot="icon">${renderIcon}</span>
-</cds-dismissible-tag>`,
-      metadata: { nestable: true },
-    };
-  }
 
   return {
-    id: 'cds-tag',
-    imports: ["import '@carbon/web-components/es/components/tag/tag.js'"],
-    example: figma.code`<cds-tag${renderBooleanAttribute(
+    id: 'cds-operational-tag',
+    imports: [
+      "import '@carbon/web-components/es/components/tag/operational-tag.js'",
+    ],
+    example: figma.code`<cds-operational-tag${renderBooleanAttribute(
       'disabled',
       disabled
     )}${renderStringAttribute('size', size)}${renderStringAttribute(
-      'type',
-      type
-    )}>
-  ${text}
+      'text',
+      text
+    )}${renderStringAttribute('type', type)}>
   <span slot="icon">${renderIcon}</span>
-</cds-tag>`,
+</cds-operational-tag>`,
     metadata: { nestable: true },
   };
 }

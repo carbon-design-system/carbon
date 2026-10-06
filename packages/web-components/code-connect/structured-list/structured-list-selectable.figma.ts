@@ -1,4 +1,4 @@
-// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=11797-285083&t=FNMM9qlCorQ1hEnC-4
+// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=61653-7458&t=RuAO38H8L12JZXpK-4
 // source=https://github.com/carbon-design-system/carbon/blob/main/packages/web-components/src/components/structured-list/structured-list.ts
 // component=cds-structured-list
 
@@ -23,23 +23,22 @@ const headerRowItems = instance
 const rowItems = instance
   .findConnectedInstances(
     (child) =>
-      child.name === '_Structured list row item' && child.hasCodeConnect()
+      child.name === '_Structured list row item - Selectable' &&
+      child.hasCodeConnect()
   )
   .map((child) => child.executeTemplate().example);
 const condensed = instance.getEnum('Size', {
   Condensed: true,
 });
-const flush = instance.getBoolean('Flush');
-
 export default {
   id: 'cds-structured-list',
   imports: [
     "import '@carbon/web-components/es/components/structured-list/index.js'",
   ],
-  example: figma.code`<cds-structured-list${renderBooleanAttribute(
+  example: figma.code`<cds-structured-list selection-name="structured-list-selection"${renderBooleanAttribute(
     'condensed',
     condensed
-  )}${renderBooleanAttribute('flush', flush)}>
+  )}>
   <cds-structured-list-head>${headerRowItems}</cds-structured-list-head>
   <cds-structured-list-body>${rowItems}</cds-structured-list-body>
 </cds-structured-list>`,
