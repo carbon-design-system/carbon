@@ -12,7 +12,7 @@ import figma from '@figma/code-connect';
 
 figma.connect(
   SideNav,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=6227-297201&t=wcK3P98b09VsrxXF-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=6227-297201&t=wcK3P98b09VsrxXF-4',
   {
     props: {
       expanded: figma.boolean('Compact', {
