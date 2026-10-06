@@ -155,7 +155,8 @@ export const _WithLayer = (args) => (
 
 _WithLayer.args = {
   ...defaultArgs,
-  helperText: 'TextArea helper text',
+  labelText: 'Text Area label',
+  helperText: 'Optional helper text',
 };
 
 export const withAILabel = (args) => {
@@ -195,7 +196,8 @@ export const withAILabel = (args) => {
 
 withAILabel.args = {
   ...defaultArgs,
-  helperText: 'TextArea helper text',
+  labelText: 'Text Area label',
+  helperText: 'Optional helper text',
 };
 
 export const Skeleton = (args) => {

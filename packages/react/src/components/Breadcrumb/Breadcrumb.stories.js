@@ -93,17 +93,15 @@ export const BreadcrumbWithOverflowMenu = (args) => {
       <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
       <BreadcrumbItem data-floating-menu-container>
         <OverflowMenu {...overflowMenuProps}>
-          {enableV12OverflowMenu ? (
-            <>
-              <MenuItem key="breadcrumb-3" label="Breadcrumb 3" />
-              <MenuItem key="breadcrumb-4" label="Breadcrumb 4" />
-            </>
-          ) : (
-            <>
-              <OverflowMenuItem key="breadcrumb-3" itemText="Breadcrumb 3" />
-              <OverflowMenuItem key="breadcrumb-4" itemText="Breadcrumb 4" />
-            </>
-          )}
+          {enableV12OverflowMenu
+            ? [
+                <MenuItem key="breadcrumb-3" label="Breadcrumb 3" />,
+                <MenuItem key="breadcrumb-4" label="Breadcrumb 4" />,
+              ]
+            : [
+                <OverflowMenuItem key="breadcrumb-3" itemText="Breadcrumb 3" />,
+                <OverflowMenuItem key="breadcrumb-4" itemText="Breadcrumb 4" />,
+              ]}
         </OverflowMenu>
       </BreadcrumbItem>
       <BreadcrumbItem href="#">Breadcrumb 5</BreadcrumbItem>
@@ -138,17 +136,15 @@ export const BreadcrumbWithOverflowMenuSizeSmall = (args) => {
       <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
       <BreadcrumbItem data-floating-menu-container>
         <OverflowMenu {...overflowMenuProps}>
-          {enableV12OverflowMenu ? (
-            <>
-              <MenuItem key="breadcrumb-3" label="Breadcrumb 3" />
-              <MenuItem key="breadcrumb-4" label="Breadcrumb 4" />
-            </>
-          ) : (
-            <>
-              <OverflowMenuItem key="breadcrumb-3" itemText="Breadcrumb 3" />
-              <OverflowMenuItem key="breadcrumb-4" itemText="Breadcrumb 4" />
-            </>
-          )}
+          {enableV12OverflowMenu
+            ? [
+                <MenuItem key="breadcrumb-3" label="Breadcrumb 3" />,
+                <MenuItem key="breadcrumb-4" label="Breadcrumb 4" />,
+              ]
+            : [
+                <OverflowMenuItem key="breadcrumb-3" itemText="Breadcrumb 3" />,
+                <OverflowMenuItem key="breadcrumb-4" itemText="Breadcrumb 4" />,
+              ]}
         </OverflowMenu>
       </BreadcrumbItem>
       <BreadcrumbItem href="#">Breadcrumb 5</BreadcrumbItem>
@@ -197,6 +193,15 @@ Skeleton.argTypes = {
 
 export const BreadcrumbWithOverflowVisualSnapshots = (args) => {
   const enableV12OverflowMenu = useFeatureFlag('enable-v12-overflowmenu');
+  const overflowMenuProps = enableV12OverflowMenu
+    ? {
+        label: 'Overflow menu in a breadcrumb',
+        tooltipAlignment: 'bottom',
+      }
+    : {
+        align: 'bottom',
+        'aria-label': 'Overflow menu in a breadcrumb',
+      };
 
   return (
     <Breadcrumb {...args} noTrailingSlash>
@@ -205,9 +210,16 @@ export const BreadcrumbWithOverflowVisualSnapshots = (args) => {
       </BreadcrumbItem>
       <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
       <BreadcrumbItem data-floating-menu-container>
-        <OverflowMenu
-          {...getBreadcrumbOverflowMenuProps(enableV12OverflowMenu)}>
-          {renderBreadcrumbOverflowMenuItems(enableV12OverflowMenu)}
+        <OverflowMenu {...overflowMenuProps}>
+          {enableV12OverflowMenu
+            ? [
+                <MenuItem key="breadcrumb-3" label="Breadcrumb 3" />,
+                <MenuItem key="breadcrumb-4" label="Breadcrumb 4" />,
+              ]
+            : [
+                <OverflowMenuItem key="breadcrumb-3" itemText="Breadcrumb 3" />,
+                <OverflowMenuItem key="breadcrumb-4" itemText="Breadcrumb 4" />,
+              ]}
         </OverflowMenu>
       </BreadcrumbItem>
       <BreadcrumbItem href="#">Breadcrumb 5</BreadcrumbItem>
