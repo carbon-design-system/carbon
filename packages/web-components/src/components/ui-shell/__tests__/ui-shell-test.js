@@ -15,6 +15,8 @@ describe('cds-side-nav-link', () => {
   });
 
   it('uses the inherited hover color for a top-level link', async () => {
+    expect(window.matchMedia('(any-hover: hover)').matches).to.be.true;
+
     const el = await fixture(html`
       <cds-side-nav-link
         href="#"
