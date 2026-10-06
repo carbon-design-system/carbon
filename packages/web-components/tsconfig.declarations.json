@@ -5,7 +5,7 @@
     "src/**/*.stories.ts",
     "src/globals/internal/storybook-cdn.ts",
     "src/polyfills/**",
-    "src/examples/**",
+    "src/examples/**/example/**",
     "tests/**",
     ".storybook/**"
   ]
