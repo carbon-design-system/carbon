@@ -36,13 +36,6 @@ $css--plex: true !default;
   }
 }
 
-.#{$prefix}--snippet__icon {
-  block-size: $spacing-05;
-  fill: $icon-primary;
-  inline-size: $spacing-05;
-  transition: all $duration-fast-01 motion(standard, productive);
-}
-
 .#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-out {
   // https://github.com/stylelint/stylelint/issues/2363
   animation: $duration-fast-02 motion(standard, productive) hide-feedback;

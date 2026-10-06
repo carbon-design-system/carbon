@@ -36,7 +36,7 @@ class CDSCopyButton extends FocusMixin(LitElement) {
    * Specify the kind of Button you want to create. Defaults to `ghost`.
    */
   @property({ reflect: true })
-  kind?: string = BUTTON_KIND.GHOST;
+  kind?: BUTTON_KIND | string = BUTTON_KIND.GHOST;
 
   /**
    * `true` if the button should be disabled.
