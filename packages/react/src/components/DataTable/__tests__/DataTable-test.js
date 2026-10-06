@@ -1127,6 +1127,78 @@ describe('DataTable', () => {
         expect(selectedRows.length).toBe(3);
       });
 
+      it('should clear selection state when selected rows are removed', async () => {
+        const renderSpy = jest.fn(() => null);
+        const { rerender } = render(
+          <DataTable
+            rows={mockProps.rows}
+            headers={mockProps.headers}
+            render={renderSpy}
+          />
+        );
+        await act(async () => {});
+
+        act(() => {
+          getLastCallFor(renderSpy)[0].selectRow('b');
+        });
+
+        let { getBatchActionProps, selectedRows } =
+          getLastCallFor(renderSpy)[0];
+        expect(getBatchActionProps().shouldShowBatchActions).toBe(true);
+        expect(selectedRows).toHaveLength(1);
+
+        await act(async () => {
+          rerender(
+            <DataTable
+              rows={mockProps.rows.filter((row) => row.id !== 'b')}
+              headers={mockProps.headers}
+              render={renderSpy}
+            />
+          );
+        });
+
+        ({ getBatchActionProps, selectedRows } = getLastCallFor(renderSpy)[0]);
+        expect(getBatchActionProps().shouldShowBatchActions).toBe(false);
+        expect(selectedRows).toHaveLength(0);
+      });
+
+      it('should keep selection state when unselected rows are removed', async () => {
+        const renderSpy = jest.fn(() => null);
+        const { rerender } = render(
+          <DataTable
+            rows={mockProps.rows}
+            headers={mockProps.headers}
+            render={renderSpy}
+          />
+        );
+        await act(async () => {});
+
+        act(() => {
+          getLastCallFor(renderSpy)[0].selectRow('b');
+        });
+
+        let { getBatchActionProps, selectedRows } =
+          getLastCallFor(renderSpy)[0];
+        expect(getBatchActionProps().shouldShowBatchActions).toBe(true);
+        expect(selectedRows).toHaveLength(1);
+        expect(selectedRows[0].id).toBe('b');
+
+        await act(async () => {
+          rerender(
+            <DataTable
+              rows={mockProps.rows.filter((row) => row.id !== 'a')}
+              headers={mockProps.headers}
+              render={renderSpy}
+            />
+          );
+        });
+
+        ({ getBatchActionProps, selectedRows } = getLastCallFor(renderSpy)[0]);
+        expect(getBatchActionProps().shouldShowBatchActions).toBe(true);
+        expect(selectedRows).toHaveLength(1);
+        expect(selectedRows[0].id).toBe('b');
+      });
+
       it('should update rows when receiving new props', async () => {
         const { rerender } = render(<DataTable {...mockProps} />);
         await act(async () => {});
@@ -1142,6 +1214,23 @@ describe('DataTable', () => {
 
         const nextArgs = getLastCallFor(mockProps.render)[0];
         expect(nextArgs.rows.map((row) => row.id)).toEqual(['c', 'a', 'b']);
+      });
+
+      it('should not update rows when receiving equivalent props', async () => {
+        const { rerender } = render(<DataTable {...mockProps} />);
+        await act(async () => {});
+        mockProps.render.mockClear();
+
+        await act(async () => {
+          rerender(
+            <DataTable
+              {...mockProps}
+              rows={mockProps.rows.map((row) => ({ ...row }))}
+            />
+          );
+        });
+
+        expect(mockProps.render).toHaveBeenCalledTimes(1);
       });
 
       it('should update cells when receiving new props', async () => {

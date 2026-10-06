@@ -11,6 +11,7 @@ collect:
         - _open
         - accept
         - action-button-label
+        - actions
         - active
         - ai-text
         - ai-text-label
@@ -38,6 +39,7 @@ collect:
         - button-label
         - button-label-active
         - button-label-inactive
+        - button-size
         - caption
         - caret
         - checked
@@ -52,6 +54,7 @@ collect:
         - close-on-activation
         - close-on-escape
         - close-on-select
+        - closeIconDescription
         - collapse-label
         - collapse-mode
         - color-scheme
@@ -68,6 +71,8 @@ collect:
         - default-open
         - default-value
         - defaultOpen
+        - defaultSelected
+        - density
         - description
         - direction
         - disable-wheel
@@ -106,9 +111,11 @@ collect:
         - hide-label
         - hide-password-label
         - hide-steppers
+        - hide-text-input
         - hidePasswordLabel
         - highContrast
         - highlighted
+        - horizontal
         - href
         - hreflang
         - icon
@@ -127,12 +134,14 @@ collect:
         - is-condensed
         - is-expressive
         - is-fluid
+        - is-flush
         - is-not-child-of-header
         - is-selectable
         - is-sortable
         - isExpressive
         - isFluid
         - isSelected
+        - isValid
         - kind
         - label
         - label-position
@@ -151,13 +160,16 @@ collect:
         - loading-success-delay
         - locale
         - low-contrast
+        - managed-focus
         - max
         - max-count
         - max-date
+        - max-label
         - max-length
         - menu-alignment
         - min
         - min-date
+        - min-label
         - multiple
         - name
         - nested
@@ -186,9 +198,11 @@ collect:
         - oncds-popover-beingclosed
         - oncds-popover-closed
         - oncds-radio-button-changed
+        - oncds-radio-button-group-changed
         - oncds-search-input
         - oncds-select-selected
         - oncds-selectable-tile-changed
+        - oncds-slider-changed
         - oncds-slider-input-changed
         - oncds-table-batch-actions-cancel-clicked
         - oncds-table-change-selection-all
@@ -238,7 +252,7 @@ collect:
         - selection-mode
         - selection-name
         - selection-value
-        - selector-initial-focus
+        - selector-primary-focus
         - short
         - shortcut
         - should-filter-item
@@ -251,6 +265,7 @@ collect:
         - status
         - status-icon-description
         - step
+        - step-multiplier
         - step-start-value
         - subtitle
         - tab-index
@@ -276,6 +291,7 @@ collect:
         - use-zebra-styles
         - validity-message
         - value
+        - value-upper
         - vertical
         - visited
         - warn
@@ -290,8 +306,6 @@ collect:
         - oncds-accordion-item-beingtoggled
         - oncds-accordion-item-toggled
         # cds-action-set
-        - actions
-        - button-size
         - disable-stacking
         # cds-ai-skeleton-icon
         - custom-styles
@@ -312,6 +326,18 @@ collect:
         - stacked
         # cds-callout-notification
         - title-id
+        # cds-card
+        - media-position
+        # cds-card-actions
+        - overflow-menu-label
+        # cds-card-media
+        - media-width
+        - ratio
+        # cds-card-title
+        - description-truncate
+        - label-truncate
+        - max-width
+        - title-truncate
         # cds-chat-button
         - is-quick-action
         - is-selected
@@ -324,11 +350,9 @@ collect:
         - oncds-coachmark-closed
         - oncds-coachmark-opened
         - position
-        - selector-primary-focus
         # cds-coachmark-beacon
         - oncds-coachmark-beacon-clicked
         # cds-coachmark-header
-        - closeIconDescription
         - dragIconDescription
         # cds-coachmark-tagline
         - oncds-coachmark-tagline-close
@@ -408,6 +432,11 @@ collect:
         # cds-grid
         - narrow
         - with-row-gap
+        # cds-guide-banner
+        - collapse-text
+        - expand-text
+        - oncds-guide-banner-close
+        - oncds-guide-banner-toggle
         # cds-header-global-action
         - panel-id
         # cds-header-menu
@@ -423,13 +452,32 @@ collect:
         # cds-inline-loading
         - oncds-inline-loading-onsuccess
         - success-delay
+        # cds-interstitial-screen
+        - fullscreen
+        - oncds-interstitial-beingclosed
+        - oncds-interstitial-closed
+        - oncds-interstitial-opened
+        # cds-interstitial-screen-body
+        - oncds-on-after-step-change
+        - oncds-on-before-step-change
+        # cds-interstitial-screen-body-item
+        - stepTitle
+        # cds-interstitial-screen-footer
+        - async-action
+        - nextButtonLabel
+        - oncds-on-action
+        - previousButtonLabel
+        - skipButtonLabel
+        - startButtonLabel
+        # cds-interstitial-screen-header
+        - header-subtitle
+        - header-title
+        - hideProgressIndicator
         # cds-layer
         - layers
         - level
         - oncds-use-layer
         - with-background
-        # cds-layout
-        - density
         # cds-layout-constraint
         - size-default
         - size-max
@@ -460,6 +508,25 @@ collect:
         - should-submit-on-enter
         # cds-multi-select-item
         - is-select-all
+        # cds-notification
+        - oncds-notification-dismiss
+        - timestamp
+        # cds-notification-footer
+        - oncds-notification-settings
+        - oncds-notification-view-all
+        - view-all-label
+        # cds-notification-panel
+        - date-time-locale
+        - dismiss-all-label
+        - donot-disturb-label
+        - empty-state-label
+        - oncds-notification-click-outside
+        - oncds-notification-dismiss-all
+        - oncds-notification-donot-disturb-change
+        - oncds-notification-panel-beingclosed
+        - previous-text
+        - today-text
+        - triggerButtonRef
         # cds-operational-tag
         - oncds-operational-tag-beforeselected
         - oncds-operational-tag-selected
@@ -526,9 +593,6 @@ collect:
         - spaceEqually
         # cds-radio-button
         - disabledItem
-        # cds-radio-button-group
-        - defaultSelected
-        - oncds-radio-button-group-changed
         # cds-radio-tile
         - oncds-radio-tile-selected
         # cds-resizer-handle
@@ -561,18 +625,11 @@ collect:
         - oncds-side-panel-navigate-back
         - placement
         - resizable
+        - selector-initial-focus
         - selector-page-content
         - slide-in
         # cds-skip-to-content
         - link-assistive-text
-        # cds-slider
-        - hide-text-input
-        - isValid
-        - max-label
-        - min-label
-        - oncds-slider-changed
-        - step-multiplier
-        - value-upper
         # cds-slider-input
         - hideTextInput
         # cds-slug
@@ -631,11 +688,31 @@ collect:
         # cds-tabs-vertical
         - custom-height
         # cds-tearsheet
-        - has-close-icon
-        - influencer-placement
+        - container-class-name
         - influencer-width
         - oncds-tearsheet-beingclosed
         - oncds-tearsheet-closed
+        - oncds-tearsheet-collapse-change
+        - selectors-floating-menus
+        - summary-content-width
+        - variant
+        - vertical-gap
+        # cds-tearsheet-header
+        - disable-header-collapse
+        - oncds-tearsheet-header-collapse-change
+        # cds-tearsheet-influencer
+        - influencer-panel-aria-label
+        - influencer-panel-open
+        - oncds-tearsheet-influencer-closed
+        # cds-tearsheet-scroller
+        - collapseText
+        - expandText
+        # cds-tearsheet-stack
+        - stack-step-size
+        # cds-tearsheet-summary-content
+        - oncds-tearsheet-summary-closed
+        - summary-panel-aria-label
+        - summary-panel-open
         # cds-tile-group
         - currentRadioSelection
         - currentSelections
@@ -672,15 +749,26 @@ collect:
         - enable-v12-tile-default-icons
         - enable-v12-tile-radio-icons
         - enable-v12-toggle-reduced-label-spacing
+        # stacking-tearsheet-demo
+        - tearsheet-type
         # tabs-story-wrapper
         - with-icons
       allowedAttributeStringValues:
         # General - boolean attributes
         - "true"
         - "false"
+        # General - button-size
+        - 2xl
+        - lg
+        - md
+        - sm
+        - xl
         # General - counter-mode
         - character
         - word
+        # General - density
+        - condensed
+        - normal
         # General - input-mode
         - decimal
         - email
@@ -719,16 +807,14 @@ collect:
         - top-left
         - top-right
         # General - type
+        - error
         - expand
+        - informational
         - number
+        - success
         - text
         - tooltip
-        # cds-action-set - button-size
-        - 2xl
-        - lg
-        - md
-        - sm
-        - xl
+        - warning
         # cds-edit-in-place - toggletip-alignment
         - bottom
         - bottom-left
@@ -742,9 +828,6 @@ collect:
         - range
         - simple
         - single
-        # cds-layout - density
-        - condensed
-        - normal
         # cds-layout-constraint - size-default
         - 2xl
         - lg
@@ -769,6 +852,13 @@ collect:
         # cds-resizer-handle - axis
         - x
         - y
+        # cds-tearsheet - variant
+        - narrow
+        - wide
+        # cds-tearsheet-stack - stack-step-size
+        - lg
+        - md
+        - sm
   npm:
     dependencies: null
   js:

@@ -39,7 +39,8 @@ default text input is for short, one-line content.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TextInputStories.Default),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: TextInputStories.Default }),
     },
   ]}
 />
@@ -51,7 +52,8 @@ default text input is for short, one-line content.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TextInputStories.ReadOnly),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: TextInputStories.ReadOnly }),
     },
   ]}
 />
@@ -63,7 +65,8 @@ default text input is for short, one-line content.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TextInputStories.Skeleton),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: TextInputStories.Skeleton }),
     },
   ]}
 />
@@ -75,7 +78,8 @@ default text input is for short, one-line content.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TextInputStories.withAILabel),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: TextInputStories.withAILabel }),
     },
   ]}
 />

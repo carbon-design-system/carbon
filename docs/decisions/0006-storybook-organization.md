@@ -186,6 +186,19 @@ export const Default = {
 - Map events to Storybook actions for Actions tab population instead of console
   logs
 
+### 3. Sidebar Order Is Configured, Not File Order
+
+Do not rely on the order of exports in a `.stories` file to control sidebar
+position. Within a component, stories sort as follows:
+
+1. Overview, then Default
+2. Remaining stories alphabetically
+3. Playground, Development, Deprecated, and Unstable last
+
+Top-level sections keep an explicit order so introductory docs stay first:
+Getting Started (React) or Introduction (Web Components), then Components,
+Deprecated, Elements, Helpers, Hooks, Layout, and Preview.
+
 ## Consequences
 
 **Positive:**
@@ -195,6 +208,8 @@ export const Default = {
 - Story-specific control visibility clarifies relevant props for each use case
 - Copy-pastable code reduces friction in component adoption
 - Consistent patterns across React and Web Components improve maintainability
+- Shared sidebar order (Default first, then A–Z) keeps React and Web Components
+  aligned without per-story sort metadata
 
 **Negative:**
 
