@@ -68,7 +68,15 @@ exist and introduces a build-time dependency that would slow down iteration.
   asserts the Angular ↔ WC interface only.
 - `@carbon/angular` takes a peer dependency on `@carbon/web-components`.
   Consumers must install both. This is an explicit, documented cost of the
-  approach.
+  approach. Concretely, `@carbon/web-components` must be listed in
+  `peerDependencies` in `package.json`, not `dependencies`. `ng-packagr` (the
+  build tool used to publish Angular libraries) hard-blocks the build if a
+  runtime dependency is not declared as a peer, unless it is explicitly
+  whitelisted via `allowedNonPeerDependencies` in `ng-package.json`. Bundled
+  utilities with no consumer-facing install requirement (e.g. `flatpickr`,
+  `lodash-es` in `carbon-components-angular`) are appropriate candidates for
+  that whitelist; `@carbon/web-components` is not — it is a full peer library
+  that consumers are expected to have installed.
 - A small number of intentional API breaks from CCA are required where the WC
   layer does not support the old model (e.g. `DataTableModel` removed,
   `notificationObj` removed, `[theme]` input removed). These are documented in

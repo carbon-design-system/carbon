@@ -12,12 +12,12 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 ## Quick start
 
-1. Install `@carbon/angular` and remove `carbon-components-angular`
-   (`@carbon/web-components` is bundled as a dependency and installs
-   automatically):
+1. Install `@carbon/angular` and its peer dependencies, then remove
+   `carbon-components-angular`. `@carbon/web-components` is a required peer
+   dependency — it must be installed explicitly alongside `@carbon/angular`:
 
    ```bash
-   npm install @carbon/angular
+   npm install @carbon/angular @carbon/web-components
    npm uninstall carbon-components-angular
    ```
 

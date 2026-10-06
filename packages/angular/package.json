@@ -32,10 +32,10 @@
     "@angular/common": ">=17",
     "@angular/core": ">=17",
     "@angular/forms": ">=17",
-    "@carbon/styles": ">=2"
+    "@carbon/styles": ">=2",
+    "@carbon/web-components": "workspace:^"
   },
   "dependencies": {
-    "@carbon/web-components": "workspace:^",
     "tslib": "^2.6.3"
   },
   "devDependencies": {
