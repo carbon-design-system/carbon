@@ -17,7 +17,8 @@
     "angular"
   ],
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "directory": "dist"
   },
   "scripts": {
     "build": "ng-packagr -p ng-package.json",
