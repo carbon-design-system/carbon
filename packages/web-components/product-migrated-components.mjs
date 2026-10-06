@@ -50,6 +50,8 @@ export const productMigratedStoryGlobs = [
   '../src/components/truncated-text/*.mdx',
   '../src/examples/export-modal/export-modal.stories.ts',
   '../src/examples/export-modal/*.mdx',
+  '../src/examples/delete-and-remove/delete-and-remove.stories.ts',
+  '../src/examples/delete-and-remove/*.mdx',
 ];
 
 /**
