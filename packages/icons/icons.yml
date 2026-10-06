@@ -13050,6 +13050,42 @@
     - secure
   sizes:
     - 32
+- name: ibm--sovereign-core
+  friendly_name: IBM® Sovereign Core
+  aliases:
+    - IBM
+    - sovereign
+    - core
+    - Sovereign Core
+    - shield
+    - easy to deploy
+    - AI
+    - AI-ready
+    - cloud
+    - dedicated
+    - local
+    - hybrid
+    - provider
+    - deployment
+  sizes:
+    - 32
+- name: ibm-sterling--b2b-integration-saas
+  friendly_name: IBM Sterling B2B Integration SaaS™
+  aliases:
+    - IBM
+    - Sterling
+    - B2B
+    - Integration
+    - SaaS
+    - diamond
+    - circle
+    - connection
+    - supply
+    - chain
+    - order
+    - management
+  sizes:
+    - 32
 - name: ibm--streamsets
   friendly_name: IBM StreamSets
   aliases:
@@ -14219,8 +14255,16 @@
     - control plane
   sizes:
     - 32
-- name: ibm-quantum--safe-advisor
-  friendly_name: IBM Quantum Safe™ Advisor
+- name: ibm-partner-plus
+  friendly_name: IBM Partner Plus
+  aliases:
+    - ibm partner plus
+    - partner plus
+    - partnership
+  sizes:
+    - 32
+- name: ibm-quantum--safe-cryptography-manager
+  friendly_name: IBM Quantum Safe® Cryptography Manager
   aliases:
     - research
     - scan
@@ -14249,10 +14293,11 @@
     - prioritization
     - posture
     - shield
+    - manager
   sizes:
     - 32
 - name: ibm-quantum--safe-explorer
-  friendly_name: IBM Quantum Safe™ Explorer
+  friendly_name: IBM Quantum Safe® Explorer
   aliases:
     - research
     - scan
@@ -14274,18 +14319,11 @@
     - CBOM
     - shield
     - security
+    - explorer
   sizes:
     - 32
-- name: ibm-partner-plus
-  friendly_name: IBM Partner Plus
-  aliases:
-    - ibm partner plus
-    - partner plus
-    - partnership
-  sizes:
-    - 32
-- name: ibm-quantum--safe-remediator
-  friendly_name: IBM Quantum Safe™ Remediator
+- name: ibm-quantum--safe-proxy
+  friendly_name: IBM Quantum Safe® Proxy
   aliases:
     - research
     - scan
@@ -14308,7 +14346,7 @@
     - automation
     - scalable
     - compliance
-    - remediation
+    - proxy
     - shield
   sizes:
     - 32
@@ -20302,6 +20340,31 @@
     - formatting
   sizes:
     - 32
+- name: parallelogram--outline
+  friendly_name: Parallelogram outline
+  aliases:
+    - parallelogram
+    - parallelogram outlined
+    - outlined parallelogram
+    - stroke
+    - border
+    - shape
+    - geometry
+    - vertical
+  sizes:
+    - 32
+- name: parallelogram--solid
+  friendly_name: Parallelogram solid
+  aliases:
+    - parallelogram
+    - parallelogram filed
+    - filled parallelogram
+    - solid
+    - shape
+    - geometry
+    - vertical
+  sizes:
+    - 32
 - name: parameter
   friendly_name: Parameter
   aliases:
@@ -21838,6 +21901,37 @@
   aliases:
     - quadrant plot
     - data
+  sizes:
+    - 32
+- name: quantum--computer
+  friendly_name: Quantum computer
+  aliases:
+    - quantum computer
+    - quantum processor
+    - quantum processing unit
+    - quantum hardware
+    - IBM Quantum
+    - chandelier
+    - qbits
+    - quantum computing
+    - AI
+    - Q
+  sizes:
+    - 32
+- name: quantum--QPU
+  friendly_name: Quantum Processing Unit (QPU)
+  aliases:
+    - quantum computer
+    - quantum processor
+    - quantum processing unit
+    - quantum hardware
+    - IBM Quantum
+    - QPU
+    - chip
+    - qbits
+    - quantum computing
+    - AI
+    - Q
   sizes:
     - 32
 - name: query
@@ -25208,6 +25302,19 @@
     - strawberry
     - fruit
     - food
+  sizes:
+    - 32
+- name: streaming--emgeedded
+  friendly_name: Embedded streaming
+  aliases:
+    - embedded
+    - streaming
+    - topics
+    - manage topics
+    - events
+    - publish
+    - schemas
+    - configure schemas
   sizes:
     - 32
 - name: stress-breath-editor
