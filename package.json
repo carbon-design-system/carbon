@@ -50,7 +50,8 @@
     "@angular-devkit/core": "^19.0.0",
     "@angular/animations": "^19.0.0",
     "@angular/cli": "^19.0.0",
-    "rxjs": "^7.4.0"
+    "rxjs": "^7.4.0",
+    "memfs": "4.65.0"
   },
   "devDependencies": {
     "@angular-devkit/architect": "^0.1900.0",
