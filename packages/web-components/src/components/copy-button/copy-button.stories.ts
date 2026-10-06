@@ -9,7 +9,8 @@ import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import type { Meta } from '@storybook/web-components-vite';
 import './copy-button';
-import { BUTTON_KIND, BUTTON_SIZE } from '../button/defs';
+import { BUTTON_KIND } from '../button/defs';
+import { ICON_BUTTON_SIZE } from '../icon-button/defs';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
 
 const tooltipAlignments = {
@@ -34,8 +35,8 @@ const defaultArgs = {
   feedback: 'Copied!',
   feedbackTimeout: 2000,
   iconDescription: 'Copy to clipboard',
-  kind: BUTTON_KIND.PRIMARY,
-  size: BUTTON_SIZE.LARGE,
+  kind: BUTTON_KIND.GHOST,
+  size: ICON_BUTTON_SIZE.LARGE,
 };
 
 const argTypes = {
@@ -72,7 +73,7 @@ const argTypes = {
   size: {
     control: 'select',
     description: 'Specify the size of the Button.',
-    options: Object.values(BUTTON_SIZE),
+    options: Object.values(ICON_BUTTON_SIZE),
   },
   onClick: {
     action: 'onClick',
