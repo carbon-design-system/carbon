@@ -50,19 +50,15 @@ const actions = html`
   <cds-ai-label-action-button>View details</cds-ai-label-action-button>
 `;
 
-const orientations = {
-  [`Horizontal (${RADIO_BUTTON_ORIENTATION.HORIZONTAL})`]:
-    RADIO_BUTTON_ORIENTATION.HORIZONTAL,
-  [`Vertical (${RADIO_BUTTON_ORIENTATION.VERTICAL})`]:
-    RADIO_BUTTON_ORIENTATION.VERTICAL,
-};
+const orientations = [
+  RADIO_BUTTON_ORIENTATION.HORIZONTAL,
+  RADIO_BUTTON_ORIENTATION.VERTICAL,
+];
 
-const labelPositions = {
-  [`Left (${RADIO_BUTTON_LABEL_POSITION.LEFT})`]:
-    RADIO_BUTTON_LABEL_POSITION.LEFT,
-  [`Right (${RADIO_BUTTON_LABEL_POSITION.RIGHT})`]:
-    RADIO_BUTTON_LABEL_POSITION.RIGHT,
-};
+const labelPositions = [
+  RADIO_BUTTON_LABEL_POSITION.LEFT,
+  RADIO_BUTTON_LABEL_POSITION.RIGHT,
+];
 
 const radioButtonOptions = [
   { label: 'Radio button label', value: 'radio-1' },
