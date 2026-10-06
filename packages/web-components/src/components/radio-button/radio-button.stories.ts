@@ -424,25 +424,31 @@ export const WithAILabel = {
         ${renderGroup(
           1,
           {},
-          html`<cds-ai-label alignment="bottom-left"
+          html`<cds-ai-label slot="ai-label" alignment="bottom-left"
             >${content}${actions}</cds-ai-label
           >`
         )}
         <br />
         ${renderGroup(2, {
-          0: html`<cds-ai-label alignment="bottom-left"
+          0: html`<cds-ai-label slot="ai-label" alignment="bottom-left"
             >${content}${actions}</cds-ai-label
           >`,
-          1: html`<cds-ai-label alignment="bottom-left"
+          1: html`<cds-ai-label slot="ai-label" alignment="bottom-left"
             >${content}${actions}</cds-ai-label
           >`,
         })}
         <br />
         ${renderGroup(3, {
-          0: html`<cds-ai-label alignment="bottom-left" kind="inline"
+          0: html`<cds-ai-label
+            slot="ai-label"
+            alignment="bottom-left"
+            kind="inline"
             >${content}${actions}</cds-ai-label
           >`,
-          1: html`<cds-ai-label alignment="bottom-left" kind="inline"
+          1: html`<cds-ai-label
+            slot="ai-label"
+            alignment="bottom-left"
+            kind="inline"
             >${content}${actions}</cds-ai-label
           >`,
         })}
