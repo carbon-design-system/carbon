@@ -12,13 +12,16 @@ import './feature-flags';
 import './internal/warnAboutDeprecatedReactVersion';
 
 export * from './components/Accordion';
+// TODO: uncomment in v12 — also remove from excludeProductsComponents
+// export { AddSelect } from './components/AddSelect';
+// export type { AddSelectProps } from './components/AddSelect';
 // export { ActionSet } from './components/ActionSet';
 // export type { ActionSetProps } from './components/ActionSet';
 // export {
 //   BigNumber as preview__BigNumber,
 //   BigNumberSkeleton as preview__BigNumberSkeleton,
 // } from './components/BigNumber';
-export type { BigNumberProps as preview__BigNumberProps } from './components/BigNumber';
+// export type { BigNumberProps as preview__BigNumberProps } from './components/BigNumber';
 // TODO: uncomment in v12 — also remove from excludeProductsComponents
 // export {
 //   Guidebanner as preview__Guidebanner,
@@ -594,7 +597,7 @@ export type { OrderedListProps } from './components/OrderedList/OrderedList';
 // export type { OptionsTileProps } from './components/OptionsTile';
 
 //overflow menu
-export type { OverflowMenuProps } from './components/OverflowMenu/OverflowMenu';
+export type { OverflowMenuProps } from './components/OverflowMenu/index';
 export type { OverflowMenuItemProps } from './components/OverflowMenuItem/OverflowMenuItem';
 
 //page header
