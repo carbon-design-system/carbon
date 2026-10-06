@@ -310,6 +310,17 @@ describe('Loading', () => {
 
       nativeDialog.showModal();
 
+      // jsdom silently returns false for unsupported pseudo-classes instead of
+      // throwing. Stub `matches` to throw for `:modal` so the test exercises
+      // the `catch { return true }` path in `isModalDialog` — the same code
+      // path a real engine without `:modal` support would trigger.
+      const { matches } = nativeDialog;
+      nativeDialog.matches = (selector) => {
+        if (selector === ':modal')
+          throw new DOMException('Not supported', 'SyntaxError');
+        return matches.call(nativeDialog, selector);
+      };
+
       const nativeButton = screen.getByTestId('native-button');
       nativeButton.focus();
 

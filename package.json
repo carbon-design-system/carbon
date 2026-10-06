@@ -51,7 +51,8 @@
     "@angular/animations": "^19.0.0",
     "@angular/cli": "^19.0.0",
     "rxjs": "^7.4.0",
-    "memfs": "4.65.0"
+    "memfs": "4.65.0",
+    "@playwright/test": "1.46.1"
   },
   "devDependencies": {
     "@angular-devkit/architect": "^0.1900.0",

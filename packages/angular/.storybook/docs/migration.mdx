@@ -12,11 +12,20 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 ## Quick start
 
-1. Install `@carbon/angular` and remove `carbon-components-angular`:
+1. Install `@carbon/angular` and remove `carbon-components-angular`
+   (`@carbon/web-components` is bundled as a dependency and installs
+   automatically):
 
    ```bash
-   npm install @carbon/angular @carbon/web-components @carbon/styles
+   npm install @carbon/angular
    npm uninstall carbon-components-angular
+   ```
+
+   If you customise or override Carbon SCSS, also install the `@carbon/styles`
+   peer dependency:
+
+   ```bash
+   npm install @carbon/styles
    ```
 
 2. Run the report codemod to see what needs changing:

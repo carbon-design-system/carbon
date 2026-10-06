@@ -3344,6 +3344,7 @@ __metadata:
     "@angular/platform-browser-dynamic": "npm:^19.0.0"
     "@carbon/styles": "workspace:^"
     "@carbon/web-components": "workspace:^"
+    "@playwright/test": "npm:^1.46.1"
     "@storybook/addon-docs": "npm:10.3.5"
     "@storybook/addon-links": "npm:10.3.5"
     "@storybook/angular": "npm:10.3.5"
@@ -3353,7 +3354,6 @@ __metadata:
     jest-environment-jsdom: "npm:^30.0.0"
     jest-preset-angular: "npm:^16.0.0"
     ng-packagr: "npm:^19.0.0"
-    playwright: "npm:^1.45.0"
     rimraf: "npm:^6.0.1"
     rxjs: "npm:^7.4.0"
     storybook: "npm:10.3.5"
@@ -3365,8 +3365,7 @@ __metadata:
     "@angular/common": ">=17"
     "@angular/core": ">=17"
     "@angular/forms": ">=17"
-    "@carbon/styles": ">=1"
-    "@carbon/web-components": ">=2"
+    "@carbon/styles": ">=2"
   languageName: unknown
   linkType: soft
 
@@ -8216,7 +8215,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@playwright/test@npm:^1.36.2":
+"@playwright/test@npm:1.46.1":
   version: 1.46.1
   resolution: "@playwright/test@npm:1.46.1"
   dependencies:
@@ -24775,7 +24774,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"playwright@npm:^1.45.0, playwright@npm:^1.53.0":
+"playwright@npm:^1.53.0":
   version: 1.63.0
   resolution: "playwright@npm:1.63.0"
   dependencies:
