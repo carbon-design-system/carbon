@@ -101,8 +101,8 @@ export const Default = {
           </cds-tearsheet-header-content>
         </cds-tearsheet-header>
 
-        <cds-tearsheet-body>
-          <div slot="main-content" ?is-flush="${args.isFlush}">
+        <cds-tearsheet-body ?is-flush="${args.isFlush}">
+          <div slot="main-content">
             ${args.showSummaryContent
               ? html`<div class="summaryPanelTrigger">
                   <cds-button

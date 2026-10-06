@@ -14,16 +14,13 @@ import CDSTearsheetStack from './tearsheet-stack';
 import { classMap } from 'lit-html/directives/class-map.js';
 import { MatchMediaController } from '../../globals/js/utils/match-media-controller';
 import { breakpoints } from '@carbon/layout';
+import { ContextProvider } from '@lit/context';
 import {
   blockClass,
-  registerTearsheetSignal,
-  updateTearsheetState,
-  removeTearsheetState,
-  getTearsheetSignal,
-  registerTearsheetElement,
-  unregisterTearsheetElement,
-} from './tearsheet-signal';
-import { SignalWatcher } from '@lit-labs/signals';
+  defaultTearsheetState,
+  tearsheetContext,
+  type TearsheetState,
+} from './tearsheet-context';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { stackManager } from './stack-signal';
@@ -45,7 +42,7 @@ import {
  * @fires cds-tearsheet-collapse-change - Fired when the header collapse state changes.
  *   `event.detail.collapsed` is `true` when collapsing, `false` when expanding.
  */
-class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
+class CDSTearsheet extends HostListenerMixin(LitElement) {
   static is = `${prefix}-tearsheet`;
   /**
    * Specifies whether the tearsheet is currently open.
@@ -114,7 +111,7 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
    * open time (document.activeElement capture).
    *
    * Useful for stacking — the launcher is inside another open tearsheet so
-   * automatic capture may pick up the wrong element after signal-driven re-renders.
+   * automatic capture may pick up the wrong element after context-driven re-renders.
    *
    * @example
    * // In consumer JS, after getting a ref to the trigger button:
@@ -123,16 +120,21 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
   @property({ attribute: false })
   launcherButtonRef?: HTMLElement;
 
-  /**
-   * Unique ID for this tearsheet instance
-   */
-  /** Unique ID for this tearsheet instance. Private — never in the DOM. */
-  private readonly uniqueId: string = `tearsheet-${Math.random().toString(36).substr(2, 9)}`;
+  /** Unique ID for this tearsheet instance.
+   *  `protected` so child components can read it via `closest()` cast without
+   *  bypassing TypeScript visibility — avoids the `& { uniqueId?: string }` cast pattern. */
+  protected readonly uniqueId: string = `tearsheet-${Math.random().toString(36).substr(2, 9)}`;
 
   /**
    * Internal flag to track if stacking is enabled (via wrapper)
    */
   private _stackingEnabled: boolean = false;
+
+  /**
+   * Unsubscribe function returned by stackManager.subscribe().
+   * Null when stacking is not enabled for this instance.
+   */
+  private _stackUnsubscribe: (() => void) | null = null;
 
   /**
    * Internal state for tracking if the tearsheet is in small screen mode
@@ -156,12 +158,33 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
     this.smMediaQuery,
     false
   );
+
+  /**
+   * Context provider — owns the per-instance TearsheetState and exposes a
+   * `setState` function so children can write back into it without needing any
+   * uniqueId registry or WeakMap lookups.
+   */
+  private _ctx = new ContextProvider(this, {
+    context: tearsheetContext,
+    initialValue: {
+      state: { ...defaultTearsheetState },
+      setState: (patch) => this._updateState(patch),
+    },
+  });
+
+  /** Merge a partial patch into the context state and trigger re-renders. */
+  private _updateState(patch: Partial<TearsheetState>): void {
+    this._ctx.setValue({
+      state: { ...this._ctx.value.state, ...patch },
+      setState: this._ctx.value.setState,
+    });
+    // ContextProvider.setValue notifies consumers but not the provider itself.
+    // Request an update so the parent's render() picks up hasAILabel/hasDecorator.
+    this.requestUpdate();
+  }
+
   connectedCallback(): void {
     super.connectedCallback();
-
-    // Publish this element in the WeakMap registry so children can resolve
-    // their uniqueId via getParentTearsheetId(child) without a DOM attribute.
-    registerTearsheetElement(this, this.uniqueId);
 
     // Listen for stack wrapper events first
     this.addEventListener(
@@ -200,11 +223,8 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
   protected override firstUpdated(): void {
     this.updateCSSCustomProperties();
     this.isSm = this.isSmallDevice?.matches || this.variant === 'narrow';
-    // Register this instance's own signal. Children resolve uniqueId by
-    // walking the DOM to this element and reading .uniqueId, then call
-    // getTearsheetSignal(id).get() in render() — so SignalWatcher subscribes
-    // only to that one signal and no other instance's state triggers a re-render.
-    registerTearsheetSignal(this.uniqueId, {
+    // Populate initial context state derived from element properties.
+    this._updateState({
       variant: this.variant,
       isSm: this.isSm,
       open: this.open,
@@ -220,7 +240,7 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
     this.updateCSSPropertiesIfNeeded(_changedProperties);
 
     if (_changedProperties.has('variant')) {
-      updateTearsheetState(this.uniqueId, { variant: this.variant });
+      this._updateState({ variant: this.variant });
     }
 
     if (_changedProperties.has('isSm')) {
@@ -235,7 +255,7 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
     this.isSm = this.isSmallDevice?.matches || this.variant === 'narrow';
 
     if (this.isSm !== previousIsSm) {
-      updateTearsheetState(this.uniqueId, { isSm: this.isSm });
+      this._updateState({ isSm: this.isSm });
     }
   }
 
@@ -246,7 +266,7 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
     const wasOpen = this._wasOpen;
     const isOpen = this.open;
 
-    updateTearsheetState(this.uniqueId, { open: this.open });
+    this._updateState({ open: this.open });
 
     // Only register with stack manager if stacking is enabled
     if (this._stackingEnabled && this.modalBodyElement) {
@@ -262,10 +282,8 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
 
     if (!wasOpen && isOpen) {
       // Reset collapse state every time the tearsheet opens fresh so it always
-      // starts expanded. (If it was already open and tearsheet-2 closed on top
-      // of it, open doesn't change so this branch doesn't fire — the user's
-      // in-session collapse state is preserved.)
-      updateTearsheetState(this.uniqueId, { fullyCollapsed: false });
+      // starts expanded.
+      this._updateState({ fullyCollapsed: false });
 
       this._launcher = CDSTearsheet._getDeepActiveElement(this.ownerDocument);
 
@@ -284,8 +302,6 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
       );
 
       // Set up focus trap for Tab/Shift+Tab cycling.
-      // Pass getFirstFocusable as a lazy resolver so the trap always reflects the
-      // current DOM (header-action buttons may be added/removed while open).
       requestAnimationFrame(() => {
         this._trapFocusAPI = trapFocus(this as HTMLElement, this.uniqueId, () =>
           this._getFirstFocusable()
@@ -294,8 +310,6 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
     }
 
     if (wasOpen && !isOpen) {
-      // Prefer the explicit launcherButtonRef prop (adopter-provided). Fall back
-      // to the document.activeElement captured at open time.
       const target = this.launcherButtonRef ?? this._launcher;
       this._launcher = null;
       if (target && typeof (target as HTMLElement).focus === 'function') {
@@ -320,7 +334,6 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
   }
 
   private updateStackPropertiesIfNeeded(): void {
-    // Only update if stacking is enabled
     if (!this._stackingEnabled) {
       return;
     }
@@ -361,10 +374,6 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
     this._trapFocusAPI?.cleanup();
     clearFocusableContainers();
 
-    // Remove from WeakMap registry and signal registry
-    unregisterTearsheetElement(this);
-    removeTearsheetState(this.uniqueId);
-
     // Remove event listeners
     this.removeEventListener(
       `${prefix}-tearsheet-header-close-button-clicked`,
@@ -378,6 +387,16 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
       `${prefix}-tearsheet-stack-step-size-changed`,
       this.handleStackStepSizeChanged as EventListener
     );
+    // Fix: this listener was added in connectedCallback but was never removed,
+    // causing a memory leak and a duplicate listener on reconnect.
+    this.removeEventListener(
+      `${prefix}-tearsheet-header-collapse-change`,
+      this.handleHeaderCollapseChange as EventListener
+    );
+
+    // Unsubscribe from the stack manager notification bus
+    this._stackUnsubscribe?.();
+    this._stackUnsubscribe = null;
 
     // Notify stack manager that this tearsheet is closing (only if stacking was enabled)
     if (this._stackingEnabled) {
@@ -426,7 +445,6 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
 
   /**
    * Update influencer visibility based on slot content and screen size
-   * Handles both slot changes and screen size changes
    */
   private updateInfluencerVisibility(slot?: HTMLSlotElement): void {
     const influencerSlot =
@@ -459,9 +477,6 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
 
   /**
    * Pierces nested shadow roots to return the truly-focused element.
-   * document.activeElement stops at the shadow-host boundary, so a <cds-button>
-   * inside a story component's shadow root would return the story element, not
-   * the button — making focus() on it a no-op.
    */
   private static _getDeepActiveElement(
     doc: Document | null | undefined
@@ -475,8 +490,7 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
   }
 
   /**
-   * Delegate to CDSTearsheetHeaderContent.getFirstFocusable() so the focus trap
-   * gets a per-instance, DOM-accurate first element without touching the shared signal.
+   * Delegate to CDSTearsheetHeaderContent.getFirstFocusable()
    */
   private _getFirstFocusable(): HTMLElement | null {
     const headerContent = this.querySelector(
@@ -489,11 +503,10 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
    * Check if this tearsheet is wrapped in a stack provider
    */
   private _checkForStackWrapper(): void {
-    // Check if there's a cds-tearsheet-stack ancestor
     let parent = this.parentElement;
     while (parent) {
       if (parent instanceof CDSTearsheetStack) {
-        this._stackingEnabled = true;
+        this._enableStacking();
         return;
       }
       parent = parent.parentElement;
@@ -501,12 +514,21 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
     this._stackingEnabled = false;
   }
 
+  /** Subscribe to stackManager so peer open/close events re-run CSS updates. */
+  private _enableStacking(): void {
+    if (this._stackingEnabled) return; // already subscribed
+    this._stackingEnabled = true;
+    this._stackUnsubscribe = stackManager.subscribe(() => {
+      this.updateStackProperties();
+    });
+  }
+
   /**
    * Handle stack wrapper connected event
    */
   private handleStackConnected = (event: Event) => {
     event.stopPropagation();
-    this._stackingEnabled = true;
+    this._enableStacking();
   };
 
   /**
@@ -514,8 +536,6 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
    */
   private handleStackStepSizeChanged = (event: Event) => {
     event.stopPropagation();
-    // Stack manager is already updated by the wrapper
-    // Just trigger a re-render of stack properties if needed
     if (this._stackingEnabled && this.open) {
       this.updateStackProperties();
     }
@@ -531,9 +551,6 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
 
   /**
    * Dispatches `cds-tearsheet-beingclosed` (cancelable).
-   * If cancelled, propagates the cancellation back to the modal so the modal
-   * does not proceed with closing.
-   * Bound to @cds-modal-beingclosed.
    */
   private handleBeingClosed = (event: Event) => {
     const beforeCloseEvent = new CustomEvent(
@@ -553,9 +570,6 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
 
   /**
    * Dispatches `cds-tearsheet-closed` after the modal has fully closed.
-   * Also resets open = false so the tearsheet property stays in sync when
-   * the modal closes via ESC or click-outside.
-   * Bound to @cds-modal-closed.
    */
   private handleClosed = () => {
     this.open = false;
@@ -570,10 +584,8 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
 
   /**
    * Handle close button click from the header
-   * This is an internal event that triggers the tearsheet to close
    */
   private handleHeaderCloseButtonClick = (event: Event) => {
-    // Stop the internal event from propagating
     event.stopPropagation();
     this.open = false;
   };
@@ -617,13 +629,8 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
   }
 
   render() {
-    // Subscribe to stackManager so stacking CSS vars update when peers open/close.
-    void stackManager.state;
-    // Subscribe to this instance's own signal so hasAILabel/hasDecorator CSS
-    // classes update reactively when the decorator slot changes.
-    const { hasAILabel, hasDecorator } = getTearsheetSignal(
-      this.uniqueId
-    ).get();
+    // Read from context value for reactive class bindings.
+    const { hasAILabel, hasDecorator } = this._ctx.value.state;
 
     const classes = classMap({
       [blockClass]: true,
@@ -668,7 +675,6 @@ class CDSTearsheet extends SignalWatcher(HostListenerMixin(LitElement)) {
 
   /**
    * Public event fired when the header collapse state changes.
-   * `event.detail.collapsed` is `true` when collapsing, `false` when expanding.
    */
   static get eventCollapseChange() {
     return `${prefix}-tearsheet-collapse-change`;
