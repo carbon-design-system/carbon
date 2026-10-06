@@ -12,7 +12,7 @@ import figma from '@figma/code-connect';
 
 figma.connect(
   TimePicker,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=17544-268301&t=qp8bdiovIuVIO7xb-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=17544-268301&t=qp8bdiovIuVIO7xb-4',
   {
     props: {
       size: figma.enum('Size', {

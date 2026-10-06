@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -26,6 +26,48 @@ describe('RadioButton', () => {
       <RadioButton name="test-name" value="test-value" labelText="test-label" />
     );
     expect(screen.getByRole('radio')).toHaveAttribute('id');
+  });
+
+  it('should warn without throwing for interactive content in labelText', () => {
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+    expect(() => {
+      render(
+        <RadioButton
+          name="test-name"
+          value="test-value"
+          labelText={
+            <>
+              test-label <button type="button">Help</button>
+            </>
+          }
+        />
+      );
+    }).not.toThrow();
+
+    expect(spy).toHaveBeenCalledWith(
+      expect.stringContaining(
+        'Warning: The RadioButton component `labelText` prop must have no interactive content'
+      )
+    );
+
+    spy.mockRestore();
+  });
+
+  it('should allow non-interactive content in labelText', () => {
+    expect(() => {
+      render(
+        <RadioButton
+          name="test-name"
+          value="test-value"
+          labelText={
+            <>
+              test-label <span>additional label content</span>
+            </>
+          }
+        />
+      );
+    }).not.toThrow();
   });
 
   it('should set checked on the <input> when checked is provided', () => {
@@ -149,6 +191,9 @@ describe('RadioButton', () => {
     expect(container.firstChild).toHaveClass(
       `${prefix}--radio-button-wrapper--decorator`
     );
+    expect(container.querySelector('label')).not.toContainElement(
+      screen.getByRole('button')
+    );
   });
 
   it('should update AILabel size', () => {
@@ -179,6 +224,9 @@ describe('RadioButton', () => {
 
     expect(container.firstChild).toHaveClass(
       `${prefix}--radio-button-wrapper--slug`
+    );
+    expect(container.querySelector('label')).not.toContainElement(
+      screen.getByRole('button')
     );
     spy.mockRestore();
   });

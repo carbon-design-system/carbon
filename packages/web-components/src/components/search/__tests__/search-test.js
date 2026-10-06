@@ -289,6 +289,42 @@ describe('cds-search', () => {
       expect(el.shadowRoot?.activeElement).to.equal(input);
     });
 
+    it('should not expand when disabled', async () => {
+      const el = await fixture(html`
+        <cds-search label-text="test-search" disabled expandable></cds-search>
+      `);
+
+      await el.updateComplete;
+
+      const magnifier = el.shadowRoot?.querySelector('.cds--search-magnifier');
+      expect(magnifier).to.exist;
+
+      magnifier?.click();
+      await el.updateComplete;
+
+      expect(el.expanded).to.be.false;
+
+      el.dispatchEvent(
+        new KeyboardEvent('keydown', {
+          key: 'Enter',
+          bubbles: true,
+        })
+      );
+      await el.updateComplete;
+
+      expect(el.expanded).to.be.false;
+
+      el.dispatchEvent(
+        new KeyboardEvent('keydown', {
+          key: ' ',
+          bubbles: true,
+        })
+      );
+      await el.updateComplete;
+
+      expect(el.expanded).to.be.false;
+    });
+
     it('should handle multiple clear operations correctly', async () => {
       const el = await fixture(html`
         <cds-search label-text="test-search" value="test1"></cds-search>

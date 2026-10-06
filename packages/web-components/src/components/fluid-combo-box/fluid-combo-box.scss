@@ -11,7 +11,9 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/combo-box' as *;
 @use '@carbon/styles/scss/components/list-box' as *;
 @use '@carbon/styles/scss/utilities/layout' as *;
+@use '@carbon/styles/scss/feature-flags' as flags;
 @use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/border-radius' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/type' as *;
 @use '@carbon/styles/scss/utilities/skeleton' as *;
@@ -27,12 +29,18 @@ $css--plex: true !default;
 
   outline: none;
 
+  @if enabled('enable-v12-release') {
+    border-radius: $border-radius-04;
+  }
+
   .#{$prefix}--list-box {
     box-sizing: border-box;
   }
 
-  .#{$prefix}--list-box--expanded {
-    border-block-end-color: $border-subtle;
+  @if not flags.enabled('enable-v12-release') {
+    .#{$prefix}--list-box--expanded {
+      border-block-end-color: $border-subtle;
+    }
   }
 
   .#{$prefix}--assistive-text {
@@ -45,9 +53,11 @@ $css--plex: true !default;
   }
 
   .#{$prefix}--list-box__menu {
-    inset-block-start: 100%;
-    margin-block-start: 1px;
     outline: none;
+    @if not flags.enabled('enable-v12-release') {
+      inset-block-start: 100%;
+      margin-block-start: 1px;
+    }
   }
 
   .#{$prefix}--list-box--disabled {
@@ -77,7 +87,17 @@ $css--plex: true !default;
   @extend .#{$prefix}--list-box__wrapper--fluid--invalid;
   @include focus-outline('invalid');
 
-  outline-offset: 0;
+  @if not flags.enabled('enable-v12-release') {
+    outline-offset: 0;
+  }
+}
+
+@if flags.enabled('enable-v12-release') {
+  :host(#{$prefix}-fluid-combo-box) {
+    .#{$prefix}--text-input:focus {
+      outline-offset: -1px;
+    }
+  }
 }
 
 // Direction top
@@ -209,6 +229,20 @@ $css--plex: true !default;
   .#{$prefix}--list-box__selection {
     pointer-events: none;
   }
+
+  @if flags.enabled('enable-v12-release') {
+    border-radius: $border-radius-00;
+
+    .#{$prefix}--list-box {
+      border-radius: $border-radius-00;
+      background: $field;
+      border-block-end-color: $border-subtle;
+    }
+
+    .#{$prefix}--text-input {
+      border-radius: $border-radius-00;
+    }
+  }
 }
 
 :host(#{$prefix}-fluid-combo-box[invalid]:not([disabled]):not([read-only])),
@@ -221,6 +255,10 @@ $css--plex: true !default;
 
   .#{$prefix}--list-box {
     border-block-end: 1px solid transparent;
+
+    @if flags.enabled('enable-v12-release') {
+      background: none;
+    }
   }
 
   .#{$prefix}--list-box.#{$prefix}--list-box--warning
@@ -229,6 +267,31 @@ $css--plex: true !default;
     inset-block-start: to-rem(81px);
     inset-inline-end: $spacing-05;
     pointer-events: none;
+  }
+}
+@if flags.enabled('enable-v12-release') {
+  :host(#{$prefix}-fluid-combo-box[warn]:not([disabled]):not([read-only])) {
+    border: 1px solid transparent;
+    border-radius: $border-radius-04;
+    background:
+      linear-gradient($field, $field) padding-box,
+      linear-gradient(
+          to bottom,
+          $border-subtle calc(100% - 4px),
+          $border-strong 100%
+        )
+        border-box;
+
+    // 2px to offset the wrapper's border, keeping the field 64px.
+    .#{$prefix}--list-box {
+      border: none;
+      min-block-size: to-rem(62px);
+    }
+    .#{$prefix}--label {
+      inline-size: calc(100% - 2rem + 2px);
+      inset-block-start: to-rem(12px);
+      inset-inline-start: calc(#{$spacing-05} - 1px);
+    }
   }
 }
 

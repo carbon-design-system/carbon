@@ -76,7 +76,6 @@ export interface FluidSelectProps {
   readOnly?: boolean;
 }
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const FluidSelect = React.forwardRef<HTMLSelectElement, FluidSelectProps>(
   ({ className, children, ...other }, ref) => {
     const prefix = usePrefix();
@@ -92,6 +91,7 @@ const FluidSelect = React.forwardRef<HTMLSelectElement, FluidSelectProps>(
   }
 );
 
+FluidSelect.displayName = 'FluidSelect';
 FluidSelect.propTypes = {
   /**
    * Provide the contents of your Select

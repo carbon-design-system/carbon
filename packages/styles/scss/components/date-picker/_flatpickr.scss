@@ -10,8 +10,10 @@
 @use '../../spacing' as *;
 @use '../../type' as *;
 @use '../../utilities/box-shadow' as *;
+@use '../../border-radius' as *;
 @use '../../utilities/convert';
 @use '../../utilities/focus-outline' as *;
+@use '../../feature-flags' as *;
 @use '../../utilities/high-contrast-mode' as *;
 
 @use '../button/tokens' as *;
@@ -276,6 +278,14 @@
     }
   }
 
+  @if enabled('enable-v12-release') {
+    .flatpickr-prev-month,
+    .flatpickr-next-month,
+    .flatpickr-day {
+      border-radius: $border-radius-04;
+    }
+  }
+
   .numInputWrapper {
     position: relative;
     inline-size: convert.to-rem(60px);
@@ -369,6 +379,44 @@
     &:active::after {
       border-block-end-color: $border-interactive;
       border-block-start-color: $border-interactive;
+    }
+  }
+
+  @include high-contrast-mode {
+    .numInputWrapper .arrowUp,
+    .numInputWrapper .arrowDown {
+      opacity: 1;
+    }
+
+    .numInput[disabled] ~ .arrowUp,
+    .numInput[disabled] ~ .arrowDown {
+      opacity: 0;
+    }
+
+    .numInputWrapper .arrowUp::after,
+    .numInputWrapper .arrowDown::after {
+      // Flatpickr renders year controls as CSS border triangles. Preserve the
+      // transparent sides so forced-colors mode does not render them as boxes.
+      border-color: transparent;
+      forced-color-adjust: none;
+    }
+
+    .numInputWrapper .arrowUp::after {
+      border-block-end-color: ButtonText;
+    }
+
+    .numInputWrapper .arrowDown::after {
+      border-block-start-color: ButtonText;
+    }
+
+    @media (any-hover: hover) {
+      .numInputWrapper .arrowUp:hover::after {
+        border-block-end-color: Highlight;
+      }
+
+      .numInputWrapper .arrowDown:hover::after {
+        border-block-start-color: Highlight;
+      }
     }
   }
 

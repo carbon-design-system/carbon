@@ -146,7 +146,7 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
     this.hasSubmenu = !!this.querySelector('[slot="submenu"]');
 
     this.dispatchIconDetect();
-    this.isRtl = document.dir === 'rtl';
+    this.isRtl = getComputedStyle(this).direction === 'rtl';
     this._registerSubMenuItems();
     this._parentMenu = this.closest(`${prefix}-menu`);
 
@@ -309,17 +309,10 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
   };
   _openSubmenu = () => {
     const { x, y, width, height } = this.getBoundingClientRect();
-    if (this.isRtl) {
-      this.boundaries = {
-        x: [-x, x - width],
-        y: [y, y + height],
-      };
-    } else {
-      this.boundaries = {
-        x: [x, x + width],
-        y: [y, y + height],
-      };
-    }
+    this.boundaries = {
+      x: [x, x + width],
+      y: [y, y + height],
+    };
     this.submenuOpen = true;
   };
   _registerSubMenuItems = () => {

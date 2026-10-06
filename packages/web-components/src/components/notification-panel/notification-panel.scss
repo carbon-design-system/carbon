@@ -1,0 +1,65 @@
+/*
+ * Copyright IBM Corp. 2023, 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+$css--plex: true !default;
+@use 'sass:map';
+
+/* Other Carbon settings. */
+@use '@carbon/styles/scss/reset';
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/utilities/convert' as *;
+@use '@carbon/styles/scss/utilities' as *;
+
+@use '@carbon/styles/scss/components/notifications-panel' as
+  notifications-panel-styles;
+@include notifications-panel-styles.notifications-panel;
+
+$block-class: #{$prefix}--notifications-panel;
+
+:host(#{$prefix}-notification-panel) {
+  .#{$block-class}__do-not-disturb-toggle {
+    display: block;
+  }
+
+  .#{$block-class}__header-container {
+    --#{$prefix}-heading-06-font-size: var(
+      --#{$prefix}-heading-compact-01-font-size
+    );
+    --#{$prefix}-heading-06-font-weight: var(
+      --#{$prefix}-heading-compact-01-font-weight
+    );
+    --#{$prefix}-heading-06-line-height: var(
+      --#{$prefix}-heading-compact-01-line-height
+    );
+    --#{$prefix}-heading-06-letter-spacing: var(
+      --#{$prefix}-heading-compact-01-letter-spacing
+    );
+  }
+
+  .#{$block-class}__dismiss-button {
+    --#{$prefix}-link-primary: var(--#{$prefix}-text-primary);
+    --#{$prefix}-link-primary-hover: var(--#{$prefix}-text-primary);
+  }
+
+  .#{$block-class}__empty-state-label {
+    padding: $spacing-05;
+    color: $text-secondary;
+  }
+
+  .#{$block-class}__bottom-actions-container {
+    position: sticky;
+    z-index: 2;
+    background-color: $layer-01;
+    block-size: $spacing-08;
+    border-block-start: 1px solid $border-subtle-01;
+    inset-block-end: 0;
+    min-block-size: $spacing-08;
+  }
+}

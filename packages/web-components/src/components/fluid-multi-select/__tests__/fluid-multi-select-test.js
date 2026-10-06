@@ -1272,9 +1272,14 @@ describe('cds-fluid-multi-select', function () {
       `);
 
       await el.updateComplete;
-      const clearButton = el.shadowRoot.querySelector('#selection-button');
+      const clearButton = el.shadowRoot.querySelector(
+        '#selection-button .cds--tag__close-icon'
+      );
       expect(clearButton).to.exist;
       expect(clearButton.getAttribute('title')).to.equal(
+        'Clear all selections'
+      );
+      expect(clearButton.getAttribute('aria-label')).to.equal(
         'Clear all selections'
       );
     });

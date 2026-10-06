@@ -6,6 +6,7 @@
 //
 
 @use 'accordion';
+@use 'add-select';
 @use 'action-set';
 @use 'ai-label';
 @use 'aspect-ratio';
@@ -14,6 +15,7 @@
 @use 'breadcrumb';
 @use 'button';
 @use 'card';
+@use 'ConditionBuilder';
 @use 'coachmark';
 @use 'chat-button';
 @use 'checkbox';
@@ -44,10 +46,11 @@
 @use 'fluid-text-input';
 @use 'fluid-time-picker';
 @use 'form';
-@use 'FullPageError';
+@use 'full-page-error';
+@use 'guidebanner';
 @use 'icon-indicator';
 @use 'inline-loading';
-@use 'InterstitialScreen';
+@use 'interstitial-screen';
 @use 'link';
 @use 'list';
 @use 'list-box';
@@ -57,9 +60,10 @@
 @use 'modal';
 @use 'multiselect';
 @use 'notification';
+@use 'notifications-panel';
 @use 'number-input';
 @use 'overflow-menu';
-@use 'OptionsTile';
+@use 'options-tile';
 @use 'page-header';
 @use 'pagination';
 @use 'pagination-nav';
@@ -79,7 +83,9 @@
 @use 'stack';
 @use 'structured-list';
 @use 'tabs';
+@use 'TagOverflow';
 @use 'tag';
+@use 'Tearsheet';
 @use 'text-area';
 @use 'text-input';
 @use 'tile';
@@ -90,5 +96,5 @@
 @use 'treeview';
 @use 'truncated-text';
 @use 'ui-shell';
-@use 'EditInPlace';
+@use 'edit-in-place';
 @use 'user-avatar';

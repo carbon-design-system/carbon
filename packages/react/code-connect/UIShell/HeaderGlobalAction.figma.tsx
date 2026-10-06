@@ -12,7 +12,7 @@ import figma from '@figma/code-connect';
 
 figma.connect(
   HeaderGlobalAction,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=2133-10716&t=A3oys5odsvKkcDFA-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=2133-10716&t=A3oys5odsvKkcDFA-4',
   {
     props: {
       children: figma.instance('Swap icon'),
