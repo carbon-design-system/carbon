@@ -25304,7 +25304,7 @@
     - food
   sizes:
     - 32
-- name: streaming--emgeedded
+- name: streaming--embedded
   friendly_name: Embedded streaming
   aliases:
     - embedded
