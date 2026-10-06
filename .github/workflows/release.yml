@@ -7,8 +7,6 @@ on:
       - 'v*'
       # Ignore tags for v10, there is a separate v10-release.yml workflow for v10
       - '!v10*'
-      # Ignore tags for v12, there is a separate next-release.yml workflow for v12 alpha work
-      - '!v12*'
 
 jobs:
   build:
@@ -31,34 +29,41 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable --check-cache
 
-      # For generating playwright json report for avt tests
+      # For generating playwright json report for avt tests.
+      # Skipped for v12 tags, including alpha releases.
       - name: Install browsers
+        if: startsWith(github.ref_name, 'v12') == false
         run: yarn playwright install --with-deps
 
       - name: Build project
         run: yarn build
 
-      # Additional steps for generating playwright json report for avt tests
+      # Additional steps for generating playwright json report for avt tests.
+      # Skipped for v12 tags, including alpha releases.
       - name: Build storybook
+        if: startsWith(github.ref_name, 'v12') == false
         run: yarn workspace @carbon/react storybook:build
       - name: Run storybook
         id: storybook
+        if: startsWith(github.ref_name, 'v12') == false
         run: |
           npx serve -l 3000 packages/react/storybook-static &
           pid=$!
           echo ::set-output name=pid::"$pid"
       - uses: ./actions/wait-for-it
+        if: startsWith(github.ref_name, 'v12') == false
         with:
           URL: 'http://localhost:3000'
         timeout-minutes: 3
       - name: Run AVT
-        if: github.repository == 'carbon-design-system/carbon'
+        if: github.repository == 'carbon-design-system/carbon' && startsWith(github.ref_name, 'v12') == false
         run: |
           yarn playwright test --project chromium --grep @avt
       - name: Stop storybook
+        if: startsWith(github.ref_name, 'v12') == false
         run: kill ${{ steps.storybook.outputs.pid }}
       - name: Upload test results
-        if: always()
+        if: always() && startsWith(github.ref_name, 'v12') == false
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a #7.0.1
         with:
           name: playwright-avt-report
@@ -69,7 +74,9 @@ jobs:
 
       - name: Set dist-tag
         run: |
-          if [[ "${{ github.ref_name }}" == *"-rc"* ]]; then
+          if [[ "${{ github.ref_name }}" == *"-alpha"* ]]; then
+            echo "DIST_TAG=v12-alpha" >> $GITHUB_ENV
+          elif [[ "${{ github.ref_name }}" == *"-rc"* ]]; then
             echo "DIST_TAG=next" >> $GITHUB_ENV
           else
             echo "DIST_TAG=latest" >> $GITHUB_ENV
@@ -82,6 +89,7 @@ jobs:
 
       - name: Create Release
         id: create_release
+        if: contains(github.ref_name, '-alpha') == false
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 #v9.0.0
         with:
           script: |
@@ -97,8 +105,8 @@ jobs:
   packages:
     needs: build
     runs-on: ubuntu-latest
-    # only trigger for stable releases, not release candidates
-    if: contains(github.ref_name, '-rc') == false
+    # only trigger for stable releases, not release candidates or v12 alphas
+    if: contains(github.ref_name, '-rc') == false && contains(github.ref_name, '-alpha') == false
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
@@ -107,3 +115,13 @@ jobs:
         uses: peter-evans/repository-dispatch@v4
         with:
           event-type: deploy-packages
+
+  publish-icons-pictograms-cdn:
+    # wait for `build` to publish to npm, so CDN only serves released assets
+    needs: build
+    # stable releases only, no prereleases
+    if: contains(github.ref_name, '-') == false
+    permissions:
+      contents: read
+    uses: ./.github/workflows/publish-icons-pictograms-cdn.yml
+    secrets: inherit
