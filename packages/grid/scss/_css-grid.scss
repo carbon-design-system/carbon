@@ -94,6 +94,7 @@
     --cds-grid-column-hang: calc(var(--cds-grid-gutter) / 2);
 
     display: grid;
+    box-sizing: border-box;
     grid-template-columns: repeat(var(--cds-grid-columns), minmax(0, 1fr));
     inline-size: 100%;
     margin-inline: auto;
