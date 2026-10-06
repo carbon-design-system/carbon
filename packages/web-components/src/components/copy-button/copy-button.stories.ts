@@ -35,7 +35,6 @@ const defaultArgs = {
   feedback: 'Copied!',
   feedbackTimeout: 2000,
   iconDescription: 'Copy to clipboard',
-  kind: BUTTON_KIND.GHOST,
   size: ICON_BUTTON_SIZE.LARGE,
 };
 
