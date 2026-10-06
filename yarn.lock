@@ -3366,6 +3366,7 @@ __metadata:
     "@angular/core": ">=17"
     "@angular/forms": ">=17"
     "@carbon/styles": ">=2"
+    "@carbon/web-components": "workspace:^"
   languageName: unknown
   linkType: soft
 
