@@ -80,13 +80,77 @@ describe('Tag', () => {
     it('should render children as tag content', () => {
       render(
         <DismissibleTag type="red" title="Close tag">
-          <span data-testid="custom-content">Custom tag content</span>
+          <span>Custom tag content</span>
         </DismissibleTag>
       );
 
-      expect(screen.getByTestId('custom-content')).toHaveTextContent(
+      expect(screen.getByText('Custom tag content')).toBeInTheDocument();
+    });
+
+    it('should render children instead of text when both are provided', () => {
+      render(
+        <DismissibleTag type="red" title="Close tag" text="Tag content">
+          <span>Custom tag content</span>
+        </DismissibleTag>
+      );
+
+      expect(screen.getByText('Custom tag content')).toBeInTheDocument();
+      expect(screen.queryByText('Tag content')).not.toBeInTheDocument();
+    });
+
+    it('should use string children as the tag content title', () => {
+      render(
+        <DismissibleTag type="red" title="Close tag" text="Tag content">
+          Custom tag content
+        </DismissibleTag>
+      );
+
+      expect(screen.getByTitle('Custom tag content')).toHaveTextContent(
         'Custom tag content'
       );
+    });
+
+    it('should use text as the tag content title when children is not a string', () => {
+      render(
+        <DismissibleTag type="red" title="Close tag" text="Tag content">
+          <span>Custom tag content</span>
+        </DismissibleTag>
+      );
+
+      expect(screen.getByTitle('Tag content')).toHaveTextContent(
+        'Custom tag content'
+      );
+    });
+
+    it('should use tagTitle as the tag content title over children and text', () => {
+      render(
+        <DismissibleTag
+          type="red"
+          title="Close tag"
+          text="Tag content"
+          tagTitle="Custom title">
+          Custom tag content
+        </DismissibleTag>
+      );
+
+      expect(screen.getByTitle('Custom title')).toHaveTextContent(
+        'Custom tag content'
+      );
+      expect(screen.queryByTitle('Tag content')).not.toBeInTheDocument();
+      expect(screen.queryByTitle('Custom tag content')).not.toBeInTheDocument();
+    });
+
+    it('should fall back to text for the title when tagTitle is empty', () => {
+      render(
+        <DismissibleTag
+          type="red"
+          title="Close tag"
+          text="Tag content"
+          tagTitle=""
+        />
+      );
+
+      expect(screen.getByTitle('Tag content')).toHaveTextContent('Tag content');
     });
 
     it('should respect deprecated slug prop', () => {

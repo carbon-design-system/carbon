@@ -32,7 +32,9 @@ import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 
 export interface DismissibleTagBaseProps {
   /**
-   * Provide custom content to be rendered inside of the tag.
+   * Provide custom content to be rendered inside of the tag. Takes precedence
+   * over `text`. When the content is not a string, provide `text` or
+   * `tagTitle` so that truncated content still has a `title`.
    */
   children?: ReactNode;
 
@@ -89,7 +91,9 @@ export interface DismissibleTagBaseProps {
   slug?: ReactNode;
 
   /**
-   * Provide text to be rendered inside of a the tag.
+   * Provide text to be rendered inside of a the tag. When `children` is
+   * provided, `text` is not rendered and is instead used as the `title` of
+   * the tag content if `children` is not a string.
    */
   text?: string;
 
@@ -178,8 +182,11 @@ const DismissibleTag = forwardRef(
 
     const dismissActionLabel = isEllipsisApplied ? dismissTooltipLabel : title;
     const tagContent = children ?? text;
-    const tagLabelTitle =
-      tagTitle ?? (typeof tagContent === 'string' ? tagContent : text);
+    const tagLabelTitle = tagTitle
+      ? tagTitle
+      : typeof tagContent === 'string'
+        ? tagContent
+        : text;
 
     return (
       <Tag
@@ -228,7 +235,9 @@ const DismissibleTag = forwardRef(
 DismissibleTag.displayName = 'DismissibleTag';
 DismissibleTag.propTypes = {
   /**
-   * Provide custom content to be rendered inside of the tag.
+   * Provide custom content to be rendered inside of the tag. Takes precedence
+   * over `text`. When the content is not a string, provide `text` or
+   * `tagTitle` so that truncated content still has a `title`.
    */
   children: PropTypes.node,
 
@@ -300,7 +309,9 @@ DismissibleTag.propTypes = {
   ),
 
   /**
-   * Provide text to be rendered inside of a the tag.
+   * Provide text to be rendered inside of a the tag. When `children` is
+   * provided, `text` is not rendered and is instead used as the `title` of
+   * the tag content if `children` is not a string.
    */
   text: PropTypes.string,
 
