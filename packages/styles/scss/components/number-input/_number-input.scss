@@ -354,7 +354,12 @@
   .#{$prefix}--number__invalid {
     position: absolute;
     fill: $support-error;
-    inset-inline-end: calc(2 * layout.size('height') + $spacing-05);
+
+    // Use clamp to get a icon->divider gap of 8px (spacing-03) for `xs`, `sm`, and 16px (spacing-05) for `md`, `lg`
+    inset-inline-end: calc(
+      2 * layout.size('height') +
+        clamp($spacing-03, layout.size('height') - $spacing-06, $spacing-05)
+    );
   }
 
   .#{$prefix}--number__invalid + .#{$prefix}--number__rule-divider {
@@ -559,7 +564,11 @@
 
   .#{$prefix}--number__input-wrapper--decorator .#{$prefix}--number__invalid,
   .#{$prefix}--number__input-wrapper--slug .#{$prefix}--number__invalid {
-    inset-inline-end: calc(layout.size('height') * 2 + $spacing-10);
+    // Use clamp to get a icon->divider gap of 8px for `xs`, `sm`, and 16px for `md`, `lg`
+    inset-inline-end: calc(
+      layout.size('height') * 2 + $spacing-09 +
+        clamp($spacing-03, layout.size('height') - $spacing-06, $spacing-05)
+    );
   }
 
   .#{$prefix}--number__input-wrapper--decorator:has(
