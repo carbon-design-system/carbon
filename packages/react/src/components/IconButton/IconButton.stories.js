@@ -69,7 +69,6 @@ export const Default = (args) => {
 
 Default.args = {
   align: 'bottom',
-  autoAlign: false,
   closeOnActivation: true,
   defaultOpen: true,
   disabled: false,

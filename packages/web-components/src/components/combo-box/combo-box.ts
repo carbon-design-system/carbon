@@ -18,7 +18,6 @@ import styles from './combo-box.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
 import spread from '../../globals/directives/spread';
-
 export { DROPDOWN_DIRECTION, DROPDOWN_SIZE } from '../dropdown/dropdown';
 
 type ShouldFilterItem = (input: {

@@ -186,7 +186,6 @@ function preserveCustomSearchResults(items) {
 
 const sharedArgs = {
   size: 'md',
-  autoAlign: false,
   type: 'default',
   titleText: 'Label',
   disabled: false,

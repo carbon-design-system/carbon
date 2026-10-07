@@ -36,6 +36,7 @@ import CDSDropdownItem from './dropdown-item';
 import styles from './dropdown.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import CDSAILabel from '../ai-label/ai-label';
+import { isFeatureFlagEnabled } from '../feature-flags';
 
 export {
   DROPDOWN_KEYBOARD_ACTION,
@@ -607,6 +608,13 @@ class CDSDropdown extends ValidityMixin(
     this._hasAILabel = Boolean(decoratorElements.length);
     decoratorElements[0]?.setAttribute('size', 'mini');
     this.requestUpdate();
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    if (!this.hasAttribute('autoalign')) {
+      this.autoalign = isFeatureFlagEnabled('enable-v12-release', this);
+    }
   }
 
   disconnectedCallback() {

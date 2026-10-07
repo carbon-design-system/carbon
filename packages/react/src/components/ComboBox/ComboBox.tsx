@@ -384,7 +384,7 @@ const ComboBox = forwardRef(
     const {
       ['aria-label']: ariaLabel = 'Choose an item',
       ariaLabel: deprecatedAriaLabel,
-      autoAlign = false,
+      autoAlign,
       className: containerClassName,
       decorator,
       direction = 'bottom',
@@ -419,15 +419,17 @@ const ComboBox = forwardRef(
       ...rest
     } = props;
 
+    const enableV12Release = useFeatureFlag('enable-v12-release');
+    const autoAlignValue = autoAlign ?? enableV12Release;
     const enableFloatingStyles =
-      useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
+      useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlignValue;
 
     const { refs, floatingStyles, middlewareData } = useFloating(
       enableFloatingStyles
         ? {
             placement: direction,
             strategy: 'fixed',
-            middleware: autoAlign ? [flip(), hide()] : undefined,
+            middleware: autoAlignValue ? [flip(), hide()] : undefined,
             whileElementsMounted: autoUpdate,
           }
         : {}

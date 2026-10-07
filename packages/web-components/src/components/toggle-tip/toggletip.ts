@@ -99,6 +99,9 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
 
   connectedCallback() {
     super.connectedCallback();
+    if (!this.hasAttribute('autoalign')) {
+      this.autoalign = isFeatureFlagEnabled('enable-v12-release', this);
+    }
     if (this.defaultOpen && !this.hasAttribute('open')) {
       this.open = true;
     }

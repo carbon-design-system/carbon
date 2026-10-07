@@ -367,6 +367,9 @@ class CDSOverflowMenu
       this.attachShadow({ mode: 'open' });
     }
     super.connectedCallback();
+    if (!this.hasAttribute('autoalign')) {
+      this.autoalign = isFeatureFlagEnabled('enable-v12-release', this);
+    }
 
     adoptStyles(this.renderRoot as ShadowRoot, [iconButtonStyles, styles]);
 

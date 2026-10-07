@@ -325,6 +325,9 @@ class CDSPopover extends HostListenerMixin(LitElement) {
 
   connectedCallback() {
     super.connectedCallback();
+    if (!this.hasAttribute('autoalign')) {
+      this.autoalign = isFeatureFlagEnabled('enable-v12-release', this);
+    }
     document.addEventListener('click', this._handleOutsideClick);
   }
 

@@ -262,7 +262,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
       value,
       href,
       align = 'bottom',
-      autoAlign = false,
+      autoAlign,
       // These props are fallback props if the TreeContext is not available or only TreeNode is used as a standalone component
       active: propActive,
       depth: propDepth,
@@ -287,6 +287,9 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
       label,
       detailsWrapperRef
     );
+
+    const enableV12Release = useFeatureFlag('enable-v12-release');
+    const autoAlignValue = autoAlign ?? enableV12Release;
 
     const enableTreeviewControllable = useFeatureFlag(
       'enable-treeview-controllable'
@@ -316,7 +319,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
             label={tooltipText}
             kind="ghost"
             align={align}
-            autoAlign={autoAlign}
+            autoAlign={autoAlignValue}
             className={`${prefix}--tree-node__label__text-button`}
             wrapperClasses={`${prefix}--popover-container`}>
             <span

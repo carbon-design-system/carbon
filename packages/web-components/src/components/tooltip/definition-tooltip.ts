@@ -13,6 +13,7 @@ import '../popover/index';
 import popoverStyles from '../popover/popover.scss?lit';
 import styles from './tooltip.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import { isFeatureFlagEnabled } from '../feature-flags';
 
 /**
  * Definition tooltip.
@@ -52,6 +53,9 @@ class CDSDefinitionTooltip extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
+    if (!this.hasAttribute('autoalign')) {
+      this.autoalign = isFeatureFlagEnabled('enable-v12-release', this);
+    }
 
     adoptStyles(this.renderRoot as ShadowRoot, [popoverStyles, styles]);
 

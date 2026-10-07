@@ -10,6 +10,7 @@ import { classMap } from 'lit/directives/class-map.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
+import { isFeatureFlagEnabled } from '../feature-flags';
 import '../tooltip/index';
 
 import styles from './truncated-text.scss?lit';
@@ -88,6 +89,9 @@ export class CDSTruncatedText extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
+    if (!this.hasAttribute('autoalign')) {
+      this.autoalign = isFeatureFlagEnabled('enable-v12-release', this);
+    }
     this._isLayered = !!this.closest(`${prefix}-layer`);
     this.type = this.type || 'tooltip';
   }

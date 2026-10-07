@@ -22,6 +22,7 @@ import { IconButton } from '../IconButton';
 import { noopFn } from '../../internal/noopFn';
 import { deprecateValuesWithin } from '../../prop-types/deprecateValuesWithin';
 import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
+import { useFeatureFlag } from '../FeatureFlags';
 import type {
   DeprecatedPopoverAlignment,
   NewPopoverAlignment,
@@ -78,7 +79,7 @@ export interface CopyProps
 
 export default function Copy({
   align = 'bottom',
-  autoAlign = false,
+  autoAlign,
   children,
   className,
   feedback = 'Copied!',
@@ -87,6 +88,9 @@ export default function Copy({
   onClick = noopFn,
   ...other
 }: PropsWithChildren<CopyProps>) {
+  const enableV12Release = useFeatureFlag('enable-v12-release');
+  const autoAlignValue = autoAlign ?? enableV12Release;
+
   const [animation, setAnimation] = useState('');
   const prefix = usePrefix();
   const classNames = classnames(className, `${prefix}--copy`, {
@@ -125,7 +129,7 @@ export default function Copy({
     <IconButton
       closeOnActivation={false}
       align={align}
-      autoAlign={autoAlign}
+      autoAlign={autoAlignValue}
       className={classNames}
       label={animation ? feedback : initialLabel}
       leaveDelayMs={animation ? feedbackTimeout : undefined}

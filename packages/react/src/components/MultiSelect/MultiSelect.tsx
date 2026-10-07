@@ -297,7 +297,7 @@ export interface MultiSelectProps<ItemType>
 export const MultiSelect = React.forwardRef(
   <ItemType,>(
     {
-      autoAlign = false,
+      autoAlign,
       className: containerClassName,
       decorator,
       id,
@@ -361,10 +361,11 @@ export const MultiSelect = React.forwardRef(
     const [topItems, setTopItems] = useState<ItemType[]>([]);
     const [itemsCleared, setItemsCleared] = useState(false);
 
-    const enableFloatingStyles =
-      useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
-
     const enableV12Release = useFeatureFlag('enable-v12-release');
+    const autoAlignValue = autoAlign ?? enableV12Release;
+
+    const enableFloatingStyles =
+      useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlignValue;
 
     const { refs, floatingStyles, middlewareData } = useFloating(
       enableFloatingStyles
@@ -379,7 +380,7 @@ export const MultiSelect = React.forwardRef(
 
             // Middleware order matters, arrow should be last
             middleware: [
-              autoAlign && flip({ crossAxis: false }),
+              autoAlignValue && flip({ crossAxis: false }),
               floatingSize({
                 apply({ rects, elements }) {
                   Object.assign(elements.floating.style, {
@@ -387,7 +388,7 @@ export const MultiSelect = React.forwardRef(
                   });
                 },
               }),
-              autoAlign && hide(),
+              autoAlignValue && hide(),
             ],
             whileElementsMounted: autoUpdate,
           }

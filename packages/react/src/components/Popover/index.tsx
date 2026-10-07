@@ -179,7 +179,7 @@ export const Popover: PopoverComponent & {
     isTabTip,
     align: initialAlign = isTabTip ? 'bottom-start' : 'bottom',
     as: BaseComponent = 'span' as E,
-    autoAlign = false,
+    autoAlign,
     autoAlignBoundary,
     backgroundToken = 'layer',
     caret: caretProp = !isTabTip,
@@ -202,9 +202,10 @@ export const Popover: PopoverComponent & {
   const floating = useRef<HTMLSpanElement>(null);
   const caretRef = useRef<HTMLSpanElement>(null);
   const popover = useRef<Element>(null);
-  const enableFloatingStyles =
-    useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
   const enableV12Release = useFeatureFlag('enable-v12-release');
+  const autoAlignValue = autoAlign ?? enableV12Release;
+  const enableFloatingStyles =
+    useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlignValue;
   // v12 removes the caret from Popover and everything built on top of it, so
   // the `caret` prop no longer has an effect once the flag is enabled
   const caret = enableV12Release ? false : caretProp;
@@ -388,7 +389,7 @@ export const Popover: PopoverComponent & {
                     }
                   : { mainAxis: enableV12Release ? 4 : 0 }
               ),
-              autoAlign &&
+              autoAlignValue &&
                 flip({
                   fallbackPlacements: isTabTip
                     ? align.includes('bottom')
@@ -432,7 +433,7 @@ export const Popover: PopoverComponent & {
                 element: caretRef,
                 padding: enableV12Release ? 3 : 16,
               }),
-              autoAlign && hide(),
+              autoAlignValue && hide(),
             ],
           }
         : {}
@@ -453,9 +454,9 @@ export const Popover: PopoverComponent & {
       floating,
       setFloating: refs.setFloating,
       caretRef,
-      autoAlign: autoAlign,
+      autoAlign: autoAlignValue,
     };
-  }, [refs.setFloating, autoAlign]);
+  }, [refs.setFloating, autoAlignValue]);
 
   if (isTabTip) {
     const tabTipAlignments: PopoverAlignment[] = ['bottom-start', 'bottom-end'];
@@ -515,7 +516,8 @@ export const Popover: PopoverComponent & {
   ]);
 
   const ref = useMergedRefs([forwardRef, popover]);
-  const currentAlignment = autoAlign && placement !== align ? placement : align;
+  const currentAlignment =
+    autoAlignValue && placement !== align ? placement : align;
   const className = cx(
     {
       [`${prefix}--popover-container`]: true,

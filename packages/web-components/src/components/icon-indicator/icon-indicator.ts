@@ -9,6 +9,7 @@ import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import { ICON_INDICATOR_KIND } from './defs';
+import { isFeatureFlagEnabled } from '../feature-flags';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
 import '../tooltip/definition-tooltip';
 import ErrorFilled16 from '@carbon/icons/es/error--filled/16.js';
@@ -141,6 +142,13 @@ class CDSIconIndicator extends LitElement {
    */
   @property()
   kind!: ICON_INDICATOR_KIND;
+
+  connectedCallback() {
+    super.connectedCallback();
+    if (!this.hasAttribute('autoalign')) {
+      this.autoalign = isFeatureFlagEnabled('enable-v12-release', this);
+    }
+  }
 
   render() {
     const IconComponent = iconMap[this.kind]?.[this.size];

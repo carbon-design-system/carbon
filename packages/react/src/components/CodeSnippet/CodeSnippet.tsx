@@ -24,6 +24,7 @@ import type {
   PopoverAlignment,
 } from '../Popover';
 import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
+import { useFeatureFlag } from '../FeatureFlags';
 
 const rowHeightInPixels = 16;
 const defaultMaxCollapsedNumberOfRows = 15;
@@ -155,7 +156,7 @@ export interface CodeSnippetProps {
 
 function CodeSnippet({
   align = 'bottom',
-  autoAlign = false,
+  autoAlign,
   className,
   type = 'single',
   children,
@@ -178,6 +179,9 @@ function CodeSnippet({
   minExpandedNumberOfRows = defaultMinExpandedNumberOfRows,
   ...rest
 }: PropsWithChildren<CodeSnippetProps>) {
+  const enableV12Release = useFeatureFlag('enable-v12-release');
+  const autoAlignValue = autoAlign ?? enableV12Release;
+
   const [expandedCode, setExpandedCode] = useState(false);
   const [shouldShowMoreLessBtn, setShouldShowMoreLessBtn] = useState(false);
   const { current: uid } = useRef(useId());
@@ -259,7 +263,7 @@ function CodeSnippet({
       <Copy
         {...rest}
         align={align}
-        autoAlign={autoAlign}
+        autoAlign={autoAlignValue}
         onClick={handleCopyClick}
         aria-label={deprecatedAriaLabel || ariaLabel}
         aria-describedby={uid}
@@ -329,7 +333,7 @@ function CodeSnippet({
       {!hideCopyButton && (
         <CopyButton
           align={align}
-          autoAlign={autoAlign}
+          autoAlign={autoAlignValue}
           size={type === 'multi' ? 'sm' : 'md'}
           disabled={disabled}
           onClick={handleCopyClick}

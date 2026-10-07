@@ -16,6 +16,7 @@ import styles from './tooltip.scss?lit';
 import popoverStyles from '../popover/popover.scss?lit';
 import CDSTooltipContent from './tooltip-content';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import { isFeatureFlagEnabled } from '../feature-flags';
 
 /**
  * Trigger button of tooltip.
@@ -211,6 +212,9 @@ class CDSTooltip extends HostListenerMixin(CDSPopover) {
     }
     window.addEventListener('keydown', this._handleKeydown, true);
     super.connectedCallback();
+    if (!this.hasAttribute('autoalign')) {
+      this.autoalign = isFeatureFlagEnabled('enable-v12-release', this);
+    }
 
     adoptStyles(this.renderRoot as ShadowRoot, [popoverStyles, styles]);
   }

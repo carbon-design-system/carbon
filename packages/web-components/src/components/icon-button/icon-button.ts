@@ -16,6 +16,7 @@ import { ICON_BUTTON_SIZE, ICON_BUTTON_TOOLTIP_ALIGNMENT } from './defs';
 import tooltipStyles from '../tooltip/tooltip.scss?lit';
 import buttonStyles from '../button/button.scss?lit';
 import styles from './icon-button.scss?lit';
+import { isFeatureFlagEnabled } from '../feature-flags';
 
 export { ICON_BUTTON_SIZE, ICON_BUTTON_TOOLTIP_ALIGNMENT };
 
@@ -74,6 +75,9 @@ class CDSIconButton extends CDSButton {
 
   connectedCallback() {
     super.connectedCallback();
+    if (!this.hasAttribute('autoalign')) {
+      this.autoalign = isFeatureFlagEnabled('enable-v12-release', this);
+    }
 
     adoptStyles(this.renderRoot as ShadowRoot, [
       tooltipStyles,

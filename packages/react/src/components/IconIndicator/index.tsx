@@ -11,6 +11,7 @@ import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import { DefinitionTooltip } from '../Tooltip';
 import { PopoverAlignment } from '../Popover';
+import { useFeatureFlag } from '../FeatureFlags';
 import {
   ErrorFilled,
   CheckmarkFilled,
@@ -94,7 +95,7 @@ export const IconIndicator = React.forwardRef(
   (
     {
       align = 'right',
-      autoAlign = false,
+      autoAlign,
       className: customClassName,
       compact = false,
       iconDescription,
@@ -104,6 +105,9 @@ export const IconIndicator = React.forwardRef(
     }: IconIndicatorProps,
     ref: React.Ref<HTMLDivElement>
   ) => {
+    const enableV12Release = useFeatureFlag('enable-v12-release');
+    const autoAlignValue = autoAlign ?? enableV12Release;
+
     const prefix = usePrefix();
     const classNames = cx(`${prefix}--icon-indicator`, customClassName, {
       [`${prefix}--icon-indicator--20`]: size === 20,
@@ -124,7 +128,7 @@ export const IconIndicator = React.forwardRef(
     const content = compact ? (
       <DefinitionTooltip
         align={align}
-        autoAlign={autoAlign}
+        autoAlign={autoAlignValue}
         openOnHover
         definition={label}
         triggerClassName={`${prefix}--icon-indicator__button`}>

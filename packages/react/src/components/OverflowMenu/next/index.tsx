@@ -135,7 +135,7 @@ export interface OverflowMenuProps extends ComponentProps<'div'> {
 const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
   (
     {
-      autoAlign = false,
+      autoAlign,
       children,
       className,
       tooltipDefaultOpen,
@@ -156,8 +156,11 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
     },
     forwardRef
   ) => {
+    const enableV12Release = useFeatureFlag('enable-v12-release');
+    const autoAlignValue = autoAlign ?? enableV12Release;
+
     const enableFloatingStyles =
-      useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
+      useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlignValue;
 
     const { refs, floatingStyles, placement, middlewareData } = useFloating(
       enableFloatingStyles
@@ -176,7 +179,7 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
             // initial `placement` computation and eventual return of data for
             // rendering. Each middleware is executed in order.
             middleware: [
-              autoAlign &&
+              autoAlignValue &&
                 flip({
                   // An explicit array of placements to try if the initial
                   // `placement` doesn’t fit on the axes in which overflow

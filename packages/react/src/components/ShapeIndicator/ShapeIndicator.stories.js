@@ -95,7 +95,6 @@ export const Default = (props) => {
 
 Default.args = {
   align: 'right',
-  autoAlign: false,
   compact: false,
   shapeDescription: 'Shape',
   textSize: 12,
@@ -128,7 +127,6 @@ export const DefaultWithTextSize14 = (props) => {
 
 DefaultWithTextSize14.args = {
   align: 'right',
-  autoAlign: false,
   compact: false,
   shapeDescription: 'Shape',
   textSize: 14,
