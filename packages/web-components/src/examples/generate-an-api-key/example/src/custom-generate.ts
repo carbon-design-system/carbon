@@ -13,6 +13,7 @@ import { carbonElement as customElement } from '@carbon/web-components/es/global
 import '@carbon/web-components/es/components/modal/index.js';
 import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/text-input/index.js';
+import '@carbon/web-components/es/components/password-input/index.js';
 import '@carbon/web-components/es/components/inline-loading/index.js';
 import '@carbon/web-components/es/components/form-group/index.js';
 import '@carbon/web-components/es/components/radio-button/index.js';
@@ -351,7 +352,7 @@ class CustomGenerate extends HostListenerMixin(LitElement) {
       <cds-modal
         class=${blockClass}
         size="sm"
-        ?open="false"
+        ?open=${false}
         ${ref((el) => (this.modalRef = el as HTMLElement))}
         prevent-close-on-click-outside
       >
@@ -365,15 +366,13 @@ class CustomGenerate extends HostListenerMixin(LitElement) {
             : html`
                 ${this.apiKey
                   ? html`
-                      <cds-text-input
+                      <cds-password-input
                         ${ref((el) => (this.passwordInputRef = el as HTMLElement))}
                         value=${this.apiKey}
                         label="API key"
-                        showPasswordLabel="Show key"
-                        hidePasswordLabel="Hide key"
-                        tooltipPosition="left"
-                        type="password"
-                        show-password-visibility-toggle="true"
+                        show-password-label="Show key"
+                        hide-password-label="Hide key"
+                        tooltip-position="left"
                         readonly="true"
                         helper-text="This is your unique API key and is non-recoverable. If you lose this API key, you will have to reset it."
                       />

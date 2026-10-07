@@ -36,6 +36,7 @@ To build this pattern, we recommend including the following components:
 - [cds-toggle](https://web-components.carbondesignsystem.com/?path=/docs/components-toggle)
 - [cds-inline-loading](https://web-components.carbondesignsystem.com/?path=/docs/components-inline-loading)
 - [cds-text-input](https://web-components.carbondesignsystem.com/?path=/docs/components-text-input)
+- [cds-password-input](https://web-components.carbondesignsystem.com/?path=/docs/components-password-input)
 - [cds-button](https://web-components.carbondesignsystem.com/?path=/docs/components-button)
 
 ## Example usage
@@ -54,6 +55,7 @@ Here's a quick example to get you started.
 import '@carbon/web-components/es/components/modal/index.js';
 import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/text-input/index.js';
+import '@carbon/web-components/es/components/password-input/index.js';
 import '@carbon/web-components/es/components/inline-loading/index.js';
 import '@carbon/web-components/es/components/form-group/index.js';
 import '@carbon/web-components/es/components/radio-button/index.js';
@@ -76,14 +78,12 @@ import '@carbon/web-components/es/components/toggle/index.js';
     </cds-modal-body-content>
 
     ${this.apiKey ? html`
-    <cds-text-input
+    <cds-password-input
       value="${this.apiKey}"
       label="API key"
-      showPasswordLabel="Show key"
-      hidePasswordLabel="Hide key"
-      tooltipPosition="left"
-      type="password"
-      show-password-visibility-toggle="true"
+      show-password-label="Show key"
+      hide-password-label="Hide key"
+      tooltip-position="left"
       readonly="true"
       helper-text="This is your unique API key and is non-recoverable. If you lose this API key, you will have to reset it."
     />

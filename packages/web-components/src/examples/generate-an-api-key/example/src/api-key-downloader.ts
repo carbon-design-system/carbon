@@ -58,7 +58,6 @@ export class APIKeyDownloader extends LitElement {
             download=${this.download || ''}
             class=${`${blockClass}__download-link`}
             aria-label=${this.downloadLinkLabel || this.linkText}
-            role="button"
           >
             ${this.downloadLinkLabel || this.linkText}
           </a>

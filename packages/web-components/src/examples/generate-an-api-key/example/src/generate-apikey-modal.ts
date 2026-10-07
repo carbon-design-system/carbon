@@ -13,6 +13,7 @@ import { carbonElement as customElement } from '@carbon/web-components/es/global
 import '@carbon/web-components/es/components/modal/index.js';
 import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/text-input/index.js';
+import '@carbon/web-components/es/components/password-input/index.js';
 import '@carbon/web-components/es/components/inline-loading/index.js';
 import CheckmarkFilled16 from '@carbon/icons/es/checkmark--filled/16.js';
 import ErrorFilled16 from '@carbon/icons/es/error--filled/16.js';
@@ -139,7 +140,7 @@ class GenerateApiKeyModal extends HostListenerMixin(LitElement) {
       <cds-modal
         class=${blockClass}
         size="sm"
-        ?open="false"
+        ?open=${false}
         prevent-close-on-click-outside
         ${ref((el) => (modalRef = el as HTMLElement))}
         @cds-modal-closed=${() => {
@@ -160,15 +161,13 @@ class GenerateApiKeyModal extends HostListenerMixin(LitElement) {
 
           ${this.apiKey
             ? html`
-                <cds-text-input
+                <cds-password-input
                   ${ref((el) => (this.passwordInputRef = el as HTMLElement))}
                   value=${this.apiKey}
                   label="API key"
-                  showPasswordLabel="Show key"
-                  hidePasswordLabel="Hide key"
-                  tooltipPosition="left"
-                  type="password"
-                  show-password-visibility-toggle="true"
+                  show-password-label="Show key"
+                  hide-password-label="Hide key"
+                  tooltip-position="left"
                   readonly="true"
                   helper-text="This is your unique API key and is non-recoverable. If you lose this API key, you will have to reset it."
                 />
