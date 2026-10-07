@@ -86,6 +86,16 @@ describe('DataTableSkeleton', () => {
       expect(toolbar).not.toBeInTheDocument();
     });
 
+    it('should respect the toolbarLabel prop', () => {
+      render(<DataTableSkeleton toolbarLabel="Barre d'outils du tableau" />);
+
+      expect(
+        screen.getByRole('region', {
+          name: "Barre d'outils du tableau",
+        })
+      ).toBeInTheDocument();
+    });
+
     it('should apply the default size when none is provided', () => {
       render(<DataTableSkeleton />);
 
