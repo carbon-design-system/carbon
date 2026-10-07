@@ -56,7 +56,7 @@
     "@babel/plugin-transform-react-constant-elements": "^8.0.0",
     "@babel/preset-env": "^8.0.0",
     "@babel/preset-react": "^8.0.0",
-    "@carbon/test-utils": "^10.42.0-rc.0",
+    "@carbon/test-utils": "^10.42.0",
     "babel-plugin-dev-expression": "^0.2.3",
     "babel-preset-carbon": "^0.9.0",
     "browserslist-config-carbon": "^11.2.0",
