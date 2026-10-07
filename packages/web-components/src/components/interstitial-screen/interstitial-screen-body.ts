@@ -56,14 +56,20 @@ class CDSInterstitialScreenBody extends HostListenerMixin(LitElement) {
   updated(changedProps: Map<string | number | symbol, unknown>) {
     super.updated(changedProps);
     const open = this._interstitialCtx?.state?.open ?? false;
-    if (open && !this.carouselAPI && this.stepType === 'multi') {
-      requestAnimationFrame(() => {
-        this._initCarousel();
-      });
+    if (
+      open &&
+      !this.carouselAPI &&
+      this.stepType === 'multi' &&
+      this.carouselElement.value
+    ) {
+      this._initCarousel();
     }
   }
 
   private _initCarousel() {
+    if (!this.carouselElement.value) {
+      return;
+    }
     this.carouselAPI = initCarousel(this.carouselElement.value as HTMLElement, {
       onViewChangeEnd: this.onViewChangeEnd,
       onViewChangeStart: this.onViewChangeStart,
