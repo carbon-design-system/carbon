@@ -12,6 +12,7 @@ import { property, query, state } from 'lit/decorators.js';
 import { carbonElement as customElement } from '../../../globals/decorators/carbon-element';
 import { repeat } from 'lit/directives/repeat.js';
 import '../../overflow-menu/index';
+import '../../menu/index';
 import OverflowMenuVertical16 from '@carbon/icons/es/overflow-menu--vertical/16.js';
 import { iconLoader } from '../../../globals/internal/icon-loader';
 import styles from './page-header-actions-set.scss?lit';
@@ -243,7 +244,7 @@ export default class CDSPageHeaderActionsSet extends LitElement {
             close-on-activation
             enter-delay-ms="0"
             leave-delay-ms="0"
-            align="left"
+            menu-alignment="bottom-end"
             data-floating-menu-container
             aria-label="${this.overflowAriaLabel}">
             ${iconLoader(OverflowMenuVertical16, {
@@ -251,18 +252,18 @@ export default class CDSPageHeaderActionsSet extends LitElement {
               slot: 'icon',
             })}
             <span slot="tooltip-content">More actions</span>
-            <cds-overflow-menu-body flipped>
+            <cds-menu>
               ${repeat(
                 this.hiddenItems ?? [],
                 (_item, index) => index,
                 (item, index) => html`
-                  <cds-overflow-menu-item
+                  <cds-menu-item
+                    label="${item.label}"
                     @click="${() => this.handleOverflowItemClick(index)}">
-                    ${item.label}
-                  </cds-overflow-menu-item>
+                  </cds-menu-item>
                 `
               )}
-            </cds-overflow-menu-body>
+            </cds-menu>
           </cds-overflow-menu>
         </div>
       </div>

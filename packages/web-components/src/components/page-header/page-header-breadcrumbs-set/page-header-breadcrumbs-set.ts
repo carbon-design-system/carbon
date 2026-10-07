@@ -15,6 +15,7 @@ import { repeat } from 'lit/directives/repeat.js';
 import { carbonElement as customElement } from '../../../globals/decorators/carbon-element';
 import '../../breadcrumb/index';
 import '../../overflow-menu/index';
+import '../../menu/index';
 import { createOverflowHandler } from '../utils';
 import OverflowMenuHorizontal16 from '@carbon/icons/es/overflow-menu--horizontal/16.js';
 import { iconLoader } from '../../../globals/internal/icon-loader';
@@ -187,17 +188,19 @@ export default class CDSPageHeaderBreadcrumbsSet extends LitElement {
               slot: 'icon',
             })}
             <span slot="tooltip-content">${this.overflowAriaLabel}</span>
-            <cds-overflow-menu-body size="sm">
+            <cds-menu size="sm">
               ${repeat(
                 this._hiddenItems ?? [],
                 (item) => item.href ?? item.text,
                 (item) => html`
-                  <cds-overflow-menu-item href=${item.href}>
-                    ${item.text}
-                  </cds-overflow-menu-item>
+                  <cds-menu-item
+                    label=${item.text}
+                    @click=${() => {
+                      if (item.href) window.location.href = item.href;
+                    }}></cds-menu-item>
                 `
               )}
-            </cds-overflow-menu-body>
+            </cds-menu>
           </cds-overflow-menu>
         </cds-breadcrumb-item>
         <cds-page-header-title-breadcrumb data-fixed>

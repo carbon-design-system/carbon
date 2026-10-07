@@ -168,7 +168,7 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-page-header-content) {
-  padding-block-start: $spacing-09;
+  padding-block-start: $spacing-06;
   // TODO: remove above styles when styles from React have been migrated
   // and use the extend below
   // @extend .#{$prefix}--page-header__content;
