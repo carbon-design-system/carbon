@@ -4,14 +4,14 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 export const prefixDef = `const prefix = 'cds';`;
 export const checkboxIconImport = `import { Checkbox as CheckboxIcon } from '@carbon/icons-react';`;
-export const autoAlignStoryContainerStyleDef = `const autoAlignStoryContainerStyle = {
-  display: 'grid',
-  placeItems: 'center',
-  width: '200vw',
-  minWidth: '1200px',
-  height: '200vh',
-  minHeight: '1200px',
-};`;
+export const useOpenStateDef = `const useOpenState = (open) => {
+  const [isOpen, setIsOpen] = useState(open);
+
+useEffect(() => { setIsOpen(open); }, [open]);
+
+return [isOpen, setIsOpen]; };`; export const autoAlignStoryContainerStyleDef = `const
+autoAlignStoryContainerStyle = { display: 'grid', placeItems: 'center', width: '200vw',
+minWidth: '1200px', height: '200vh', minHeight: '1200px', };`;
 
 <Meta isTemplate />
 
@@ -78,6 +78,7 @@ function CustomComponent() {
         stackblitzPrefillConfig({
           story: PopoverStories.Default,
           customImports: [checkboxIconImport],
+          customFunctionDefs: [useOpenStateDef],
           styles: PopoverStories.default.parameters.styles,
         }),
     },
@@ -105,7 +106,7 @@ state in conjunction with the callback prop to set `open` to false when
       onClick: () =>
         stackblitzPrefillConfig({
           story: PopoverStories.TabTip,
-          customFunctionDefs: [prefixDef],
+          customFunctionDefs: [prefixDef, useOpenStateDef],
           styles: PopoverStories.default.parameters.styles,
         }),
     },
@@ -140,7 +141,10 @@ If you are using `align="left"` or `align="right"`, you can use `top` or
         stackblitzPrefillConfig({
           story: PopoverStories.ExperimentalAutoAlign,
           customImports: [checkboxIconImport],
-          customFunctionDefs: [autoAlignStoryContainerStyleDef],
+          customFunctionDefs: [
+            autoAlignStoryContainerStyleDef,
+            useOpenStateDef,
+          ],
           styles: PopoverStories.default.parameters.styles,
         }),
     },
@@ -156,6 +160,7 @@ If you are using `align="left"` or `align="right"`, you can use `top` or
         stackblitzPrefillConfig({
           story: PopoverStories.ExperimentalAutoAlignBoundary,
           customImports: [checkboxIconImport],
+          customFunctionDefs: [useOpenStateDef],
           styles: PopoverStories.default.parameters.styles,
         }),
     },
@@ -171,7 +176,10 @@ If you are using `align="left"` or `align="right"`, you can use `top` or
         stackblitzPrefillConfig({
           story: PopoverStories.TabTipExperimentalAutoAlign,
           customImports: [checkboxIconImport],
-          customFunctionDefs: [autoAlignStoryContainerStyleDef],
+          customFunctionDefs: [
+            autoAlignStoryContainerStyleDef,
+            useOpenStateDef,
+          ],
           styles: PopoverStories.default.parameters.styles,
         }),
     },
