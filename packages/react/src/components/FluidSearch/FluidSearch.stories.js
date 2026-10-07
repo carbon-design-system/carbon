@@ -14,7 +14,6 @@ export default {
   component: FluidSearch,
   args: {
     autoComplete: 'off',
-    closeButtonLabelText: 'Clear search input',
     defaultWidth: 400,
     disabled: false,
     labelText: 'Search',
@@ -27,7 +26,9 @@ export default {
       control: { type: 'text' },
     },
     closeButtonLabelText: {
-      control: { type: 'text' },
+      table: {
+        disable: true,
+      },
     },
     defaultValue: {
       control: { type: 'text' },

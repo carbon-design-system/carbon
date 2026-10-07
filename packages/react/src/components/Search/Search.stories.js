@@ -18,7 +18,6 @@ export default {
   title: 'Components/Search',
   component: Search,
   args: {
-    closeButtonLabelText: 'Clear search input',
     disabled: false,
     defaultWidth: 800,
     labelText: 'Site search',
@@ -32,13 +31,13 @@ export default {
         disable: true,
       },
     },
+    closeButtonLabelText: {
+      table: {
+        disable: true,
+      },
+    },
     defaultWidth: {
       control: { type: 'range', min: 300, max: 800, step: 50 },
-    },
-    closeButtonLabelText: {
-      control: {
-        type: 'text',
-      },
     },
     disabled: {
       control: {
@@ -81,7 +80,7 @@ export default {
       page: mdx,
     },
     controls: {
-      exclude: ['id'],
+      exclude: ['id', 'translateWithId'],
     },
   },
 };
