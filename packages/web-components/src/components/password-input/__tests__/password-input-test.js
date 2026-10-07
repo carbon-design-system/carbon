@@ -137,6 +137,84 @@ describe('cds-password-input', () => {
     expect(error.textContent).to.include('This is invalid text');
   });
 
+  it('should not have invalid classname when is disabled', async () => {
+    const el = await fixture(html`
+      <cds-password-input
+        label="test-label"
+        invalid
+        invalid-text="Invalid message"
+        disabled>
+      </cds-password-input>
+    `);
+
+    const input = el.shadowRoot.querySelector('input');
+    expect(input.classList.contains('cds--text-input--invalid')).to.be.false;
+    expect(input.hasAttribute('data-invalid')).to.be.false;
+    const fieldWrapper = el.shadowRoot.querySelector(
+      '.cds--text-input__field-wrapper'
+    );
+    expect(fieldWrapper.hasAttribute('data-invalid')).to.be.false;
+  });
+
+  it('should not have invalid classname when is readonly', async () => {
+    const el = await fixture(html`
+      <cds-password-input
+        label="test-label"
+        invalid
+        invalid-text="Invalid message"
+        readonly>
+      </cds-password-input>
+    `);
+
+    const input = el.shadowRoot.querySelector('input');
+    expect(input.classList.contains('cds--text-input--invalid')).to.be.false;
+    expect(input.hasAttribute('data-invalid')).to.be.false;
+    const fieldWrapper = el.shadowRoot.querySelector(
+      '.cds--text-input__field-wrapper'
+    );
+    expect(fieldWrapper.hasAttribute('data-invalid')).to.be.false;
+  });
+
+  it('should not have warn classname when is disabled', async () => {
+    const el = await fixture(html`
+      <cds-password-input
+        label="test-label"
+        warn
+        warn-text="Warn message"
+        disabled>
+      </cds-password-input>
+    `);
+
+    const input = el.shadowRoot.querySelector('input');
+    expect(input.classList.contains('cds--text-input--warning')).to.be.false;
+    const fieldWrapper = el.shadowRoot.querySelector(
+      '.cds--text-input__field-wrapper'
+    );
+    expect(
+      fieldWrapper.classList.contains('cds--text-input__field-wrapper--warning')
+    ).to.be.false;
+  });
+
+  it('should not have warn classname when is readonly', async () => {
+    const el = await fixture(html`
+      <cds-password-input
+        label="test-label"
+        warn
+        warn-text="Warn message"
+        readonly>
+      </cds-password-input>
+    `);
+
+    const input = el.shadowRoot.querySelector('input');
+    expect(input.classList.contains('cds--text-input--warning')).to.be.false;
+    const fieldWrapper = el.shadowRoot.querySelector(
+      '.cds--text-input__field-wrapper'
+    );
+    expect(
+      fieldWrapper.classList.contains('cds--text-input__field-wrapper--warning')
+    ).to.be.false;
+  });
+
   it('should apply size attribute', async () => {
     const el = await fixture(html`
       <cds-password-input size="sm"></cds-password-input>
