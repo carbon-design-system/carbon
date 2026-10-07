@@ -1,0 +1,64 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '@carbon/react';
+@use '@carbon/styles/scss/components/button/tokens' as *;
+@use '@carbon/styles/scss/spacing' as *;
+
+$block-class: 'export-modal';
+
+.#{$block-class}__body {
+  margin-block-end: $spacing-05;
+  padding-inline-end: calc(20% - #{$spacing-05});
+}
+
+.#{$block-class}__messaging {
+  display: flex;
+  align-items: center;
+}
+
+.#{$block-class}__messaging p {
+  margin-inline-start: $spacing-03;
+}
+
+.#{$block-class}__checkmark-icon {
+  fill: $button-primary;
+}
+
+.#{$block-class}__error-icon {
+  fill: $button-danger-primary;
+}
+
+body {
+  background-color: var(--cds-background);
+  color: var(--cds-text-primary);
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.example-container {
+  margin-inline-start: $spacing-01;
+  max-inline-size: 1200px;
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 400;
+    margin-block-end: $spacing-07;
+  }
+
+  .example-section {
+    padding: $spacing-07;
+    border: 1px solid var(--cds-border-subtle);
+    background-color: var(--cds-layer-01);
+    margin-block-end: $spacing-09;
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-block: 0 $spacing-06;
+    }
+  }
+}

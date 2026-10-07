@@ -17,12 +17,104 @@ import { Settings } from '@carbon/icons-react';
 
 const prefix = 'cds';
 
+const alignments = [
+  'top',
+  'top-start',
+  'top-end',
+  'bottom',
+  'bottom-start',
+  'bottom-end',
+  'left',
+  'left-end',
+  'left-start',
+  'right',
+  'right-end',
+  'right-start',
+];
+
+const argTypes = {
+  align: {
+    options: alignments,
+    control: { type: 'select' },
+  },
+  alignmentAxisOffset: {
+    control: { type: 'number' },
+    if: { arg: 'autoAlign' },
+  },
+  autoAlign: {
+    control: { type: 'boolean' },
+  },
+  backgroundToken: {
+    options: ['layer', 'background'],
+    control: { type: 'select' },
+  },
+  border: {
+    control: { type: 'boolean' },
+  },
+  caret: {
+    control: { type: 'boolean' },
+  },
+  dropShadow: {
+    control: { type: 'boolean' },
+  },
+  highContrast: {
+    control: { type: 'boolean' },
+  },
+  onRequestClose: {
+    action: 'onRequestClose',
+  },
+  open: {
+    control: { type: 'boolean' },
+  },
+};
+
+const defaultArgs = {
+  align: 'bottom',
+  alignmentAxisOffset: 0,
+  autoAlign: false,
+  backgroundToken: 'layer',
+  border: false,
+  caret: true,
+  dropShadow: true,
+  highContrast: false,
+  open: true,
+};
+
+const autoAlignArgs = {
+  ...defaultArgs,
+  align: 'top',
+  autoAlign: true,
+};
+
+const defaultControls = Object.keys(argTypes);
+const autoAlignControls = defaultControls.filter(
+  (control) => control !== 'autoAlign'
+);
+const tabTipControls = [
+  'backgroundToken',
+  'border',
+  'dropShadow',
+  'onRequestClose',
+  'open',
+];
+
+const useOpenState = (open) => {
+  const [isOpen, setIsOpen] = useState(open);
+
+  useEffect(() => {
+    setIsOpen(open);
+  }, [open]);
+
+  return [isOpen, setIsOpen];
+};
+
 export default {
   title: 'Components/Popover',
   component: Popover,
   subcomponents: {
     PopoverContent,
   },
+  argTypes,
   decorators: [
     (Story) => (
       <>
@@ -35,7 +127,7 @@ export default {
     styles,
     controls: {
       hideNoControlsWarning: true,
-      exclude: ['relative'],
+      include: defaultControls,
     },
     docs: {
       page: mdx,
@@ -44,18 +136,19 @@ export default {
 };
 
 export const Default = (args) => {
-  const { align, caret, dropShadow, highContrast, open } = args;
-  const [isOpen, setIsOpen] = useState(open);
+  const { onRequestClose, open, ...popoverProps } = args;
+  const [isOpen, setIsOpen] = useOpenState(open);
+
+  const handleRequestClose = () => {
+    onRequestClose?.();
+    setIsOpen(false);
+  };
 
   return (
     <Popover
-      {...args}
-      align={align}
-      caret={caret}
-      dropShadow={dropShadow}
-      highContrast={highContrast}
+      {...popoverProps}
       open={isOpen}
-      onRequestClose={() => setIsOpen(false)}>
+      onRequestClose={handleRequestClose}>
       <button
         className="playground-trigger"
         aria-label="Checkbox"
@@ -77,18 +170,25 @@ export const Default = (args) => {
 };
 
 export const TabTip = (args) => {
-  const [open, setOpen] = useState(true);
+  const { onRequestClose, open: openArg, ...popoverProps } = args;
+  const [open, setOpen] = useOpenState(openArg);
   const [openTwo, setOpenTwo] = useState(false);
   const align = document?.dir === 'rtl' ? 'bottom-right' : 'bottom-left';
   const alignTwo = document?.dir === 'rtl' ? 'bottom-left' : 'bottom-right';
+
+  const handleRequestClose = (setOpenState) => {
+    onRequestClose?.();
+    setOpenState(false);
+  };
+
   return (
     <div className="popover-tabtip-story" style={{ display: 'flex' }}>
       <Popover
+        {...popoverProps}
         align={align}
         open={open}
         isTabTip
-        onRequestClose={() => setOpen(false)}
-        {...args}>
+        onRequestClose={() => handleRequestClose(setOpen)}>
         <button
           aria-label="Settings"
           type="button"
@@ -122,15 +222,15 @@ export const TabTip = (args) => {
       </Popover>
 
       <Popover
+        {...popoverProps}
         open={openTwo}
         isTabTip
         align={alignTwo}
-        onRequestClose={() => setOpenTwo(false)}
-        {...args}>
+        onRequestClose={() => handleRequestClose(setOpenTwo)}>
         <button
           aria-label="Settings"
           type="button"
-          aria-expanded={open}
+          aria-expanded={openTwo}
           onClick={() => {
             setOpenTwo(!openTwo);
           }}>
@@ -164,69 +264,20 @@ export const TabTip = (args) => {
 
 TabTip.parameters = {
   controls: {
-    exclude: ['align', 'autoAlign', 'caret', 'highContrast'],
+    include: tabTipControls,
   },
 };
-
-Default.args = {
-  caret: true,
+TabTip.args = {
+  backgroundToken: 'layer',
+  border: false,
   dropShadow: true,
-  highContrast: false,
   open: true,
 };
+
+Default.args = defaultArgs;
 Default.parameters = {
   controls: {
-    exclude: ['isTabTip'],
-  },
-};
-
-Default.argTypes = {
-  align: {
-    options: [
-      'top',
-      'top-start',
-      'top-end',
-
-      'bottom',
-      'bottom-start',
-      'bottom-end',
-
-      'left',
-      'left-end',
-      'left-start',
-
-      'right',
-      'right-end',
-      'right-start',
-    ],
-    control: {
-      type: 'select',
-    },
-  },
-  border: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  caret: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  dropShadow: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  highContrast: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  open: {
-    control: {
-      type: 'boolean',
-    },
+    include: defaultControls,
   },
 };
 
@@ -234,36 +285,6 @@ Default.story = {
   decorators: [
     (story) => <div className="mt-10 flex justify-center">{story()}</div>,
   ],
-};
-
-const autoAlignArgTypes = {
-  caret: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  align: {
-    options: [
-      'top',
-      'top-start',
-      'top-end',
-
-      'bottom',
-      'bottom-start',
-      'bottom-end',
-
-      'left',
-      'left-end',
-      'left-start',
-
-      'right',
-      'right-end',
-      'right-start',
-    ],
-    control: {
-      type: 'select',
-    },
-  },
 };
 
 const autoAlignStoryContainerStyle = {
@@ -276,7 +297,8 @@ const autoAlignStoryContainerStyle = {
 };
 
 export const ExperimentalAutoAlign = (args) => {
-  const [open, setOpen] = useState(true);
+  const { onRequestClose, open: openArg, ...popoverProps } = args;
+  const [open, setOpen] = useOpenState(openArg);
   const ref = useRef();
 
   useEffect(() => {
@@ -286,12 +308,14 @@ export const ExperimentalAutoAlign = (args) => {
   return (
     <div style={autoAlignStoryContainerStyle}>
       <Popover
+        {...popoverProps}
         open={open}
-        align="top"
         autoAlign
         ref={ref}
-        onRequestClose={() => setOpen(false)}
-        {...args}>
+        onRequestClose={() => {
+          onRequestClose?.();
+          setOpen(false);
+        }}>
         <button
           className="playground-trigger"
           aria-label="Checkbox"
@@ -318,14 +342,15 @@ export const ExperimentalAutoAlign = (args) => {
   );
 };
 
-ExperimentalAutoAlign.argTypes = autoAlignArgTypes;
+ExperimentalAutoAlign.args = autoAlignArgs;
 ExperimentalAutoAlign.parameters = {
   controls: {
-    exclude: ['autoAlign', 'highContrast', 'isTabTip'],
+    include: autoAlignControls,
   },
 };
 export const ExperimentalAutoAlignBoundary = (args) => {
-  const [open, setOpen] = useState(true);
+  const { onRequestClose, open: openArg, ...popoverProps } = args;
+  const [open, setOpen] = useOpenState(openArg);
   const ref = useRef();
   const [boundary, setBoundary] = useState();
 
@@ -356,13 +381,15 @@ export const ExperimentalAutoAlignBoundary = (args) => {
       />
       <div style={{ placeItems: 'center', height: '32px', width: '32px' }}>
         <Popover
+          {...popoverProps}
           open={open}
-          align="top"
           autoAlign
           autoAlignBoundary={boundary}
-          onRequestClose={() => setOpen(false)}
-          ref={ref}
-          {...args}>
+          onRequestClose={() => {
+            onRequestClose?.();
+            setOpen(false);
+          }}
+          ref={ref}>
           <button
             className="playground-trigger"
             aria-label="Checkbox"
@@ -397,15 +424,16 @@ export const ExperimentalAutoAlignBoundary = (args) => {
   );
 };
 
-ExperimentalAutoAlignBoundary.argTypes = autoAlignArgTypes;
+ExperimentalAutoAlignBoundary.args = autoAlignArgs;
 ExperimentalAutoAlignBoundary.parameters = {
   controls: {
-    exclude: ['autoAlign', 'highContrast', 'isTabTip'],
+    include: autoAlignControls,
   },
 };
 
-export const TabTipExperimentalAutoAlign = () => {
-  const [open, setOpen] = useState(true);
+export const TabTipExperimentalAutoAlign = (args) => {
+  const { onRequestClose, open: openArg, ...popoverProps } = args;
+  const [open, setOpen] = useOpenState(openArg);
   const ref = useRef();
 
   useEffect(() => {
@@ -414,14 +442,26 @@ export const TabTipExperimentalAutoAlign = () => {
 
   return (
     <div style={autoAlignStoryContainerStyle}>
-      <Popover open={open} align="bottom-right" autoAlign ref={ref} isTabTip>
-        <div className="playground-trigger">
-          <CheckboxIcon
-            onClick={() => {
-              setOpen(!open);
-            }}
-          />
-        </div>
+      <Popover
+        {...popoverProps}
+        open={open}
+        autoAlign
+        ref={ref}
+        isTabTip
+        onRequestClose={() => {
+          onRequestClose?.();
+          setOpen(false);
+        }}>
+        <button
+          className="playground-trigger"
+          aria-label="Checkbox"
+          aria-expanded={open}
+          type="button"
+          onClick={() => {
+            setOpen(!open);
+          }}>
+          <CheckboxIcon />
+        </button>
         <PopoverContent className="p-3">
           <div>
             <p className="popover-title">
@@ -438,4 +478,15 @@ export const TabTipExperimentalAutoAlign = () => {
       </Popover>
     </div>
   );
+};
+
+TabTipExperimentalAutoAlign.args = {
+  ...autoAlignArgs,
+  align: 'bottom-end',
+  caret: false,
+};
+TabTipExperimentalAutoAlign.parameters = {
+  controls: {
+    include: autoAlignControls.filter((control) => control !== 'caret'),
+  },
 };
