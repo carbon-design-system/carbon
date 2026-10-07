@@ -155,7 +155,7 @@ export const _WithLayer = (args) => (
 
 _WithLayer.args = {
   ...defaultArgs,
-  labelText: 'Text Area label',
+  labelText: 'TextArea label',
   helperText: 'Optional helper text',
 };
 
@@ -196,7 +196,7 @@ export const withAILabel = (args) => {
 
 withAILabel.args = {
   ...defaultArgs,
-  labelText: 'Text Area label',
+  labelText: 'TextArea label',
   helperText: 'Optional helper text',
 };
 
