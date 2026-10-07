@@ -23,6 +23,17 @@
 @use '../../utilities/z-index' as *;
 @use '../../utilities/layout';
 
+/// Space between the invalid/warning icon and the rule divider beside it.
+/// Clamps to 8px ($spacing-03) for `xs` and `sm`, and 16px ($spacing-05) for
+/// `md` and `lg`.
+/// @access private
+/// @group number-input
+$-icon-gap: clamp(
+  $spacing-03,
+  layout.size('height') - $spacing-06,
+  $spacing-05
+);
+
 /// Number input styles
 /// @access public
 /// @group number-input
@@ -43,7 +54,10 @@
   .#{$prefix}--number
     .#{$prefix}--number__input-wrapper--warning
     input[type='text'] {
-    padding-inline-end: calc(2 * layout.size('height') + 3 * $spacing-05);
+    // steppers + divider->icon gap + 16px icon + 16px padding
+    padding-inline-end: calc(
+      2 * layout.size('height') + #{$-icon-gap} + 2 * $spacing-05
+    );
   }
 
   .#{$prefix}--number input[type='number'],
@@ -67,6 +81,8 @@
     font-weight: 400;
     inline-size: 100%;
     min-inline-size: 9.375rem;
+
+    // steppers + 16px padding
     padding-inline: $spacing-05 calc(2 * layout.size('height') + $spacing-05);
     transition:
       background-color $duration-fast-01 motion(standard, productive),
@@ -110,7 +126,10 @@
     }
 
     &[data-invalid] {
-      padding-inline-end: calc(2 * layout.size('height') + 3 * $spacing-05);
+      // steppers + divider->icon gap + 16px icon + 16px padding
+      padding-inline-end: calc(
+        2 * layout.size('height') + #{$-icon-gap} + 2 * $spacing-05
+      );
     }
   }
 
@@ -355,11 +374,8 @@
     position: absolute;
     fill: $support-error;
 
-    // Use clamp to get a icon->divider gap of 8px (spacing-03) for `xs`, `sm`, and 16px (spacing-05) for `md`, `lg`
-    inset-inline-end: calc(
-      2 * layout.size('height') +
-        clamp($spacing-03, layout.size('height') - $spacing-06, $spacing-05)
-    );
+    // steppers + gap from divider to this icon
+    inset-inline-end: calc(2 * layout.size('height') + #{$-icon-gap});
   }
 
   .#{$prefix}--number__invalid + .#{$prefix}--number__rule-divider {
@@ -564,10 +580,9 @@
 
   .#{$prefix}--number__input-wrapper--decorator .#{$prefix}--number__invalid,
   .#{$prefix}--number__input-wrapper--slug .#{$prefix}--number__invalid {
-    // Use clamp to get a icon->divider gap of 8px for `xs`, `sm`, and 16px for `md`, `lg`
+    // steppers + AI label cluster + the gap from its divider to this icon
     inset-inline-end: calc(
-      layout.size('height') * 2 + $spacing-09 +
-        clamp($spacing-03, layout.size('height') - $spacing-06, $spacing-05)
+      2 * layout.size('height') + $spacing-09 + #{$-icon-gap}
     );
   }
 
@@ -587,6 +602,22 @@
 
   .#{$prefix}--number
     .#{$prefix}--number__input-wrapper--decorator
+    input[type='number'],
+  .#{$prefix}--number
+    .#{$prefix}--number__input-wrapper--decorator
+    input[type='text'],
+  .#{$prefix}--number
+    .#{$prefix}--number__input-wrapper--slug
+    input[type='number'],
+  .#{$prefix}--number
+    .#{$prefix}--number__input-wrapper--slug
+    input[type='text'] {
+    // steppers + 16px gap + 16px AI label + 16px padding
+    padding-inline-end: calc(2 * layout.size('height') + 3 * $spacing-05);
+  }
+
+  .#{$prefix}--number
+    .#{$prefix}--number__input-wrapper--decorator
     input[data-invalid],
   .#{$prefix}--number
     .#{$prefix}--number__input-wrapper--decorator.#{$prefix}--number__input-wrapper--warning
@@ -597,7 +628,10 @@
   .#{$prefix}--number
     .#{$prefix}--number__input-wrapper--slug.#{$prefix}--number__input-wrapper--warning
     input {
-    padding-inline-end: convert.to-rem(144px);
+    // steppers + AI label cluster + icon gap + icon + 16px padding
+    padding-inline-end: calc(
+      2 * layout.size('height') + $spacing-09 + #{$-icon-gap} + 2 * $spacing-05
+    );
   }
 
   .#{$prefix}--number__input-wrapper--decorator
@@ -639,8 +673,6 @@
     ),
   .#{$prefix}--number__input-wrapper--slug input[type='text']:disabled {
     @include ai-gradient;
-
-    padding-inline-end: convert.to-rem(145px);
 
     @if enabled('enable-v12-release') {
       border: 1px solid transparent;

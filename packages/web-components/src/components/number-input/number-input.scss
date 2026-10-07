@@ -111,8 +111,6 @@ $css--plex: true !default;
 :host(#{$prefix}-number-input[ai-label]) input {
   @include ai-gradient;
 
-  padding-inline-end: to-rem(145px);
-
   @if flags.enabled('enable-v12-release') {
     // Reset the bottom-edge color override from @include ai-gradient so the
     // border-box gradient layer controls all four sides uniformly.
