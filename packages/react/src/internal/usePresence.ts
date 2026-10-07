@@ -76,12 +76,12 @@ export const usePresence = (
 
     let cancelled = false;
 
-    Promise.all(animations.map((animation) => animation.finished)).finally(
-      () => {
+    Promise.all(animations.map((animation) => animation.finished))
+      .catch(() => {})
+      .finally(() => {
         if (cancelled) return;
         setExitState('finished');
-      }
-    );
+      });
 
     return () => {
       cancelled = true;
