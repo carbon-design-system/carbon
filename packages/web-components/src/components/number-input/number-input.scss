@@ -74,9 +74,10 @@ $css--plex: true !default;
     transform: translateY(-50%);
   }
 }
-:host(#{$prefix}-number-input) .#{$prefix}--number[data-invalid],
-:host(#{$prefix}-number-input[warn]),
-:host(#{$prefix}-number-input[invalid]) {
+:host(#{$prefix}-number-input:not([disabled]):not([readonly]))
+  .#{$prefix}--number[data-invalid],
+:host(#{$prefix}-number-input[warn]:not([disabled]):not([readonly])),
+:host(#{$prefix}-number-input[invalid]:not([disabled]):not([readonly])) {
   ::slotted(#{$prefix}-ai-label),
   ::slotted(#{$prefix}-slug) {
     &::after {

@@ -858,8 +858,8 @@ class CDSNumberInput extends CDSTextInput {
       buttonsDisabled: boolean;
     } = {
       disabled: this.disabled,
-      invalid: !this.readonly && !isValid,
-      warn: !this.readonly && isValid && this.warn,
+      invalid: !this.readonly && !this.disabled && !isValid,
+      warn: !this.readonly && !this.disabled && isValid && this.warn,
       'slot-name': '',
       'slot-text': '',
       icon: null,
