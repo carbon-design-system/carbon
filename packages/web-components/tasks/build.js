@@ -41,6 +41,7 @@ async function build() {
     '!src/**/*.d.ts',
     '!src/globals/internal/storybook-cdn.ts',
     '!src/polyfills',
+    '!src/examples/**/example/**',
   ]);
 
   const libInputs = await globby([

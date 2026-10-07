@@ -46,7 +46,7 @@
     "@carbon/react": "^1.118.0-rc.0",
     "@carbon/styles": "^1.117.0-rc.0",
     "@ibm/telemetry-js": "^1.5.0",
-    "chalk": "6.0.0"
+    "chalk": "6.0.1"
   },
   "devDependencies": {
     "@babel/core": "^8.0.0",
