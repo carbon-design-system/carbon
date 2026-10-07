@@ -46,7 +46,7 @@
     "@carbon/react": "^2.0.0-alpha.3",
     "@carbon/styles": "^2.0.0-alpha.3",
     "@ibm/telemetry-js": "^1.5.0",
-    "chalk": "6.0.0"
+    "chalk": "6.0.1"
   },
   "devDependencies": {
     "@babel/core": "^8.0.0",
@@ -56,7 +56,7 @@
     "@babel/plugin-transform-react-constant-elements": "^8.0.0",
     "@babel/preset-env": "^8.0.0",
     "@babel/preset-react": "^8.0.0",
-    "@carbon/test-utils": "^10.41.0",
+    "@carbon/test-utils": "^10.42.0-rc.0",
     "babel-plugin-dev-expression": "^0.2.3",
     "babel-preset-carbon": "^0.9.0",
     "browserslist-config-carbon": "^11.2.0",
