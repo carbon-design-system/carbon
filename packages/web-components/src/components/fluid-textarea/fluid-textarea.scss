@@ -10,9 +10,17 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/fluid-text-area/index';
 @use '@carbon/styles/scss/utilities/layout' as *;
 @use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/utilities/convert' as *;
 
 :host(#{$prefix}-fluid-textarea) {
   @include emit-layout-tokens();
 
   flex: 1 1 auto;
+}
+
+:host(#{$prefix}-fluid-textarea[disabled])
+  .#{$prefix}--text-area--fluid
+  .#{$prefix}--text-area:disabled {
+  border-block-end: to-rem(1px) solid $border-subtle;
 }

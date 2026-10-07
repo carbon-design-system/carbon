@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -71,6 +71,21 @@ describe('FluidTextInput', () => {
       );
 
       expect(screen.getByRole('textbox')).toBeDisabled();
+    });
+
+    it('should add disabled classes when disabled', () => {
+      const { container } = render(
+        <FluidTextInput
+          disabled
+          id="input-1"
+          labelText="FluidTextInput label"
+        />
+      );
+
+      expect(container.firstChild).toHaveClass(
+        `${prefix}--text-input--fluid--disabled`
+      );
+      expect(screen.getByLabelText('FluidTextInput label')).toBeDisabled();
     });
 
     it('should respect id prop', () => {
