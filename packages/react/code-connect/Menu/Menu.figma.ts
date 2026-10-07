@@ -31,7 +31,7 @@ export default {
     'size',
     size
   )}>
-  ${figma.helpers.react.renderChildren(children)}
+  ${children}
 </Menu>`,
   metadata: { nestable: true },
 };
