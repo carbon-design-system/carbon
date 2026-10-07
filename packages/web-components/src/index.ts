@@ -207,6 +207,16 @@ export { default as CDSLayout } from './components/layout/layout';
 export { default as CDSLayoutConstraint } from './components/layout/layout-constraint';
 
 // TODO: uncomment in v12 — remove from product-migrated-components.mjs and excludeProductsComponents too
+// export { default as CDSTearsheet } from './components/tearsheet/tearsheet';
+// export { default as CDSTearsheetBody } from './components/tearsheet/tearsheet-body';
+// export { default as CDSTearsheetFooter } from './components/tearsheet/tearsheet-footer';
+// export { default as CDSTearsheetHeader } from './components/tearsheet/tearsheet-header';
+// export { default as CDSTearsheetHeaderContent } from './components/tearsheet/tearsheet-header-content';
+// export { default as CDSTearsheetInfluencer } from './components/tearsheet/tearsheet-influencer';
+// export { default as CDSTearsheetNavigationBar } from './components/tearsheet/tearsheet-navigation-bar';
+// export { default as CDSTearsheetScroller } from './components/tearsheet/tearsheet-scroller';
+// export { default as CDSTearsheetStack } from './components/tearsheet/tearsheet-stack';
+// export { default as CDSTearsheetSummaryContent } from './components/tearsheet/tearsheet-summary-content';
 // export { default as CDSCoachmark } from './components/coachmark/coachmark';
 // export { default as CDSCoachmarkHeader } from './components/coachmark/coachmark-header';
 // export { default as CDSCoachmarkBody } from './components/coachmark/coachmark-body';
@@ -214,8 +224,12 @@ export { default as CDSLayoutConstraint } from './components/layout/layout-const
 // export { default as CDSCoachmarkTagline } from './components/coachmark/coachmark-tagline/coachmark-tagline';
 // export { default as CDSTruncatedText } from './components/truncated-text/truncated-text';
 // export { default as CDSActionSet } from './components/action-set/action-set';
+// export { default as CDSGuideBanner } from './components/guide-banner/guide-banner';
+// export { default as CDSGuideBannerElement } from './components/guide-banner/guide-banner-element';
 // export { default as CDSEditInPlace } from './components/edit-in-place/edit-in-place';
 // export { default as CDSSidePanel } from './components/side-panel/side-panel';
+// export { default as CDSInterstitialScreen } from './components/interstitial-screen/interstitial-screen';
+// export { default as CDSFullPageError } from './components/full-page-error/full-page-error';
 // export { default as CDSUserAvatar } from './components/user-avatar/user-avatar';
 // export { default as CDSBigNumber } from './components/big-number/big-number';
 // export { default as CDSOptionsTile } from './components/options-tile/options-tile';

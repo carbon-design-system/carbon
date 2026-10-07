@@ -68,7 +68,7 @@ import {
 } from '../../internal';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
-import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
+import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
 
 const {
   ItemClick,
@@ -728,11 +728,11 @@ export const MultiSelect = React.forwardRef(
     const labelProps = isValidElement(titleText)
       ? { id: allLabelProps.id }
       : allLabelProps;
-    useNoInteractiveChildren(
+    useNoInteractiveChildrenForLabel(
       titleRef,
       'The MultiSelect component `titleText` prop must have no interactive content'
     );
-    useNoInteractiveChildren(
+    useNoInteractiveChildrenForLabel(
       labelRef,
       'The MultiSelect component `label` prop must have no interactive content'
     );
