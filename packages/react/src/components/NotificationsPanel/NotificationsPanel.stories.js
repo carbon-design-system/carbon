@@ -26,6 +26,7 @@ const storyBlockClass = 'cds--notifications-panel__story';
 export default {
   title: 'Components/NotificationsPanel',
   component: NotificationsPanel,
+  tags: ['ibm-products-migrated'],
   parameters: {
     layout: 'fullscreen',
     docs: {

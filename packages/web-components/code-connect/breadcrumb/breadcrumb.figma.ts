@@ -1,4 +1,4 @@
-// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/-v11--Carbon-Design-System?node-id=104376-11673&m=dev
+// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=104376-11673&m=dev
 // source=https://github.com/carbon-design-system/carbon/blob/main/packages/web-components/src/components/breadcrumb/breadcrumb.ts
 // component=cds-breadcrumb
 
