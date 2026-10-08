@@ -508,9 +508,11 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     const scrollSign = getComputedStyle(container).direction === 'rtl' ? -1 : 1;
     const position = container.scrollLeft * scrollSign;
     const maxScroll = container.scrollWidth - container.clientWidth;
+    // Visible buttons reduce the viewport even when all tabs fit in the host.
+    const fitsWithoutButtons = container.scrollWidth <= this.clientWidth;
     // Scroll dimensions are rounded, while tab widths can be fractional.
-    this._isAtStart = position <= 1;
-    this._isAtEnd = maxScroll - position <= 1;
+    this._isAtStart = fitsWithoutButtons || position <= 1;
+    this._isAtEnd = fitsWithoutButtons || maxScroll - position <= 1;
   };
 
   private _observeSize() {
@@ -518,9 +520,7 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     this._resizeObserver = new ResizeObserver(
       this._updateScrollButtonVisibility
     );
-    if (this._contentContainerNode) {
-      this._resizeObserver.observe(this._contentContainerNode);
-    }
+    this._resizeObserver.observe(this);
     if (this.tablist) {
       this._resizeObserver.observe(this.tablist);
     }

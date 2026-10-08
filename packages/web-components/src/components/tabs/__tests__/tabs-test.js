@@ -62,6 +62,17 @@ describe('cds-tabs', function () {
       await waitUntil(() => hidden(previous));
       host.style.width = '2400px';
       await waitUntil(() => hidden(previous) && hidden(next));
+
+      const tablist = el.shadowRoot.querySelector('#tablist');
+      host.style.width = `${tablist.scrollWidth + 1}px`;
+      const firstTab = el.querySelector('cds-tab');
+      const originalLabel = firstTab.textContent;
+      firstTab.textContent =
+        'A longer tab label that changes the content width';
+      await waitUntil(() => hidden(previous) && !hidden(next));
+      firstTab.textContent = originalLabel;
+      await waitUntil(() => hidden(previous) && hidden(next));
+
       el.remove();
       host.append(el);
       host.style.width = `${width}px`;
