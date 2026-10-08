@@ -1,0 +1,39 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/config' with (
+  $font-path: '@ibm/plex'
+);
+@use '@carbon/styles';
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+
+body {
+  margin: 0;
+}
+
+.example-container {
+  display: grid;
+  padding: $spacing-05;
+  gap: $spacing-07;
+}
+
+.example-section {
+  display: grid;
+  gap: $spacing-05;
+}
+
+.example-surface {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid $border-subtle-01;
+  min-block-size: 24rem;
+}
+
+.example-content {
+  padding: $spacing-05;
+}
