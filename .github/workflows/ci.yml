@@ -477,7 +477,7 @@ jobs:
           # 👇 Any match disables TurboSnap - only list files from actual build
           # outputs. Excludes tests, docs, examples, READMEs, and package.json
           externals: |
-            packages/(colors|elements|feature-flags|grid|icons|icons-react|layout|motion|pictograms|pictograms-react|styles|themes|type|utilities|utilities-react)/(src|scss|style-dictionary|tasks)/*(!(__tests__)/)!(*.md)
+            packages/(colors|elements|feature-flags|grid|icons|icons-react|layout|motion|pictograms|pictograms-react|styles|themes|type|utilities|utilities-react)/(src|scss|style-dictionary|tasks|tokens)/*(!(__tests__)/)!(*.md)
             packages/(colors|elements|feature-flags|grid|icons|icons-react|layout|motion|pictograms|pictograms-react|styles|themes|type|utilities|utilities-react)/(index.scss|*.config.*)
             packages/(feature-flags|icons|pictograms)/!(telemetry).yml
           untraced: |

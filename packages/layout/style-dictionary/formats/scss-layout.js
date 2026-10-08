@@ -10,9 +10,9 @@
 /**
  * Style Dictionary format — carbon/scss-layout
  *
- * Generates per-category Sass files from layout.tokens.json whose content is
- * byte-for-byte identical to what build.mjs / @carbon/scss-generator produced,
- * so that nothing downstream breaks.
+ * Generates per-category Sass files from layout.tokens.json. The content is
+ * byte-for-byte identical to what the previous @carbon/scss-generator build
+ * produced, so that nothing downstream breaks.
  *
  * Files emitted:
  *   _spacing.scss        variables + map, !default
