@@ -1,0 +1,8 @@
+# Browserslist config for @carbon/angular Storybook / build-angular.
+# Pinned to avoid failures when caniuse-lite data lags behind newly
+# released browser versions. Update periodically alongside caniuse-lite.
+last 2 Chrome versions
+last 2 Firefox versions
+last 2 Safari versions
+last 2 Edge versions
+last 2 iOS versions

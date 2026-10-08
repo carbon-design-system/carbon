@@ -1,0 +1,72 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Introduction/Welcome" />
+
+# `@carbon/angular`
+
+Angular components for the
+[Carbon Design System](https://carbondesignsystem.com), built as thin wrappers
+over `@carbon/web-components`. Each Angular component registers its backing Web
+Component under a namespaced `cds-ng-*` tag at import time — no separate
+registration step is required.
+
+## Install
+
+```bash
+npm install @carbon/angular
+# or
+yarn add @carbon/angular
+```
+
+## Basic usage
+
+**Standalone component (preferred):**
+
+```ts
+// my.component.ts
+import { Component } from '@angular/core';
+import { ButtonComponent } from '@carbon/angular';
+
+@Component({
+  selector: 'app-root',
+  imports: [ButtonComponent],
+  template: `<cds-button kind="primary" (buttonClick)="onClick($event)"
+    >Click me</cds-button
+  >`,
+})
+export class AppComponent {
+  onClick(e: MouseEvent) {}
+}
+```
+
+**NgModule (also supported):**
+
+```ts
+// app.module.ts
+import { NgModule } from '@angular/core';
+import { CDSAngularButtonModule } from '@carbon/angular';
+
+@NgModule({
+  imports: [CDSAngularButtonModule],
+})
+export class AppModule {}
+```
+
+```html
+<!-- app.component.html -->
+<cds-button kind="primary" (buttonClick)="onClick($event)">Click me</cds-button>
+```
+
+## Styles
+
+Add the Carbon stylesheet to your `angular.json` styles array:
+
+```json
+"styles": ["node_modules/@carbon/styles/css/styles.css"]
+```
+
+## Migrating from `carbon-components-angular`?
+
+See the **[Migration guide](?path=/docs/introduction-migration--docs)** for a
+full list of API changes, before/after examples, and the automated codemods that
+handle most of the mechanical work.

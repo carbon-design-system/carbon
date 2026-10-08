@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "types": ["node"],
+    "noImplicitAny": false,
+    "strict": false
+  },
+  "include": [
+    "src/**/*.ts",
+    ".storybook/**/*.ts"
+  ],
+  "exclude": ["node_modules", "**/*.spec.ts", "**/*.e2e.ts"]
+}

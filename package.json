@@ -42,9 +42,31 @@
     "typescript-eslint": "8.70.0",
     "immutable": "^5.1.8",
     "tar@7.5.20": "7.5.22",
-    "vite@5.0.10": "6.4.3"
+    "vite@5.0.10": "6.4.3",
+    "caniuse-lite": "^1.0.30001810",
+    "@storybook/angular": "10.3.5",
+    "@angular-devkit/architect": "^0.1900.0",
+    "@angular-devkit/build-angular": "^19.0.0",
+    "@angular-devkit/core": "^19.0.0",
+    "@angular/animations": "^19.0.0",
+    "@angular/cli": "^19.0.0",
+    "rxjs": "^7.4.0",
+    "memfs": "4.65.0",
+    "@playwright/test": "1.46.1"
   },
   "devDependencies": {
+    "@angular-devkit/architect": "^0.1900.0",
+    "@angular-devkit/build-angular": "^19.0.0",
+    "@angular-devkit/core": "^19.0.0",
+    "@angular/animations": "^19.0.0",
+    "@angular/cli": "^19.0.0",
+    "@angular/common": "^19.0.0",
+    "@angular/compiler": "^19.0.0",
+    "@angular/compiler-cli": "^19.0.0",
+    "@angular/core": "^19.0.0",
+    "@angular/forms": "^19.0.0",
+    "@angular/platform-browser": "^19.0.0",
+    "@angular/platform-browser-dynamic": "^19.0.0",
     "@babel/core": "^8.0.0",
     "@babel/plugin-proposal-export-default-from": "^8.0.0",
     "@babel/plugin-transform-class-properties": "^8.0.0",
@@ -61,6 +83,7 @@
     "@eslint/js": "^9.24.0",
     "@figma/code-connect": "1.5.3",
     "@playwright/test": "^1.36.2",
+    "@storybook/angular": "10.3.5",
     "@testing-library/dom": "^10.1.0",
     "@testing-library/jest-dom": "^7.0.0",
     "@testing-library/react": "^16.0.0",
@@ -90,8 +113,10 @@
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "rimraf": "^6.0.1",
+    "rxjs": "^7.4.0",
     "stylelint": "^17.0.0",
-    "typescript-eslint": "^8.34.0"
+    "typescript-eslint": "^8.34.0",
+    "zone.js": "~0.15.0"
   },
   "commitlint": {
     "extends": [

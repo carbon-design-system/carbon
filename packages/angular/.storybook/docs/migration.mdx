@@ -1,0 +1,208 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Introduction/Migration" />
+
+# Migrating from `carbon-components-angular`
+
+> Already on `@carbon/angular`? Jump to the
+> **[Component stories](?path=/docs/components-button--docs)** or run the
+> codemods below.
+
+---
+
+## Quick start
+
+1. Install `@carbon/angular` and its peer dependencies, then remove
+   `carbon-components-angular`. `@carbon/web-components` is a required peer
+   dependency — it must be installed explicitly alongside `@carbon/angular`:
+
+   ```bash
+   npm install @carbon/angular @carbon/web-components
+   npm uninstall carbon-components-angular
+   ```
+
+   If you customise or override Carbon SCSS, also install the `@carbon/styles`
+   peer dependency:
+
+   ```bash
+   npm install @carbon/styles
+   ```
+
+2. Run the report codemod to see what needs changing:
+
+   ```bash
+   npx @carbon/upgrade migrate cca-report-imports
+   ```
+
+3. Run the write codemods to handle the mechanical changes automatically:
+
+   ```bash
+   npx @carbon/upgrade migrate cca-update-module-imports --write
+   npx @carbon/upgrade migrate cca-remove-table-model --write
+   npx @carbon/upgrade migrate cca-remove-notification-obj --write
+   npx @carbon/upgrade migrate cca-remove-pagination-model --write
+   npx @carbon/upgrade migrate cca-remove-theme-input --write
+   ```
+
+4. Fix any remaining `:not(:defined)` elements visible in the browser — these
+   indicate a component whose backing Web Component has not yet been registered.
+   Check that you have imported the relevant `CDSAngular*Module` (or the
+   component directly in standalone mode).
+
+---
+
+## What stays the same
+
+- **Selectors** — all `cds-*` selectors are preserved; your templates do not
+  change.
+- **`[(ngModel)]` and `[formControl]`** — reactive and template-driven forms
+  work identically via `ControlValueAccessor`.
+- **SCSS imports** — all `@carbon/styles` import paths are unchanged.
+
+---
+
+## Breaking changes
+
+> Full detail (Before / After / Why / Migration steps) is in
+> [`docs/guides/cca-to-angular.md`](https://github.com/carbon-design-system/carbon/blob/main/docs/guides/cca-to-angular.md).
+> This page is the discoverable entry point; the guide is the authoritative
+> reference.
+
+### Module import path
+
+**Before:**
+
+```ts
+import { ButtonModule } from 'carbon-components-angular';
+```
+
+**After:**
+
+```ts
+import { CDSAngularButtonModule } from '@carbon/angular';
+```
+
+Run `npx @carbon/upgrade migrate cca-update-module-imports --write` to automate
+this.
+
+---
+
+### `TableModel` / `TableHeaderItem` / `TableItem` removed
+
+The CCA model classes are replaced by plain object interfaces:
+
+**Before:**
+
+```ts
+model = new TableModel();
+model.header = [new TableHeaderItem({ data: 'Name' })];
+model.data = [[new TableItem({ data: 'Alice' })]];
+```
+
+**After:**
+
+```ts
+columns = [{ header: 'Name' }];
+rows = [{ cells: ['Alice'] }];
+```
+
+Run `npx @carbon/upgrade migrate cca-remove-table-model --write`.
+
+---
+
+### `notificationObj` removed — use flat `@Input()`s
+
+**Before:**
+
+```ts
+notificationObj = {
+  title: 'Error',
+  subtitle: 'Something went wrong',
+  type: 'error',
+};
+```
+
+```html
+<cds-notification [notificationObj]="notificationObj"></cds-notification>
+```
+
+**After:**
+
+```html
+<cds-notification
+  title="Error"
+  subtitle="Something went wrong"
+  kind="error"></cds-notification>
+```
+
+Run `npx @carbon/upgrade migrate cca-remove-notification-obj --write`.
+
+---
+
+### `PaginationModel` removed — use flat `@Input()`s
+
+**Before:**
+
+```ts
+paginationModel = new PaginationModel();
+paginationModel.totalDataLength = 100;
+paginationModel.pageLength = 10;
+```
+
+**After:**
+
+```html
+<cds-pagination [totalItems]="100" [pageSize]="10" [page]="1"></cds-pagination>
+```
+
+Run `npx @carbon/upgrade migrate cca-remove-pagination-model --write`.
+
+---
+
+### UI Shell: projected children replace array inputs
+
+`[navigationItems]`, `[menuItems]`, and `[headerItems]` array inputs are
+replaced with projected `<cds-header-item>` / `<cds-sidenav-item>` children.
+This change cannot be automated — see the migration guide for step-by-step
+instructions.
+
+Run `npx @carbon/upgrade migrate cca-report-ui-shell-nav` to identify affected
+files.
+
+---
+
+### `[theme]` input removed
+
+The `[theme]` input has been removed from all components. Use CSS custom
+properties via `@carbon/styles` to control theming globally.
+
+Run `npx @carbon/upgrade migrate cca-remove-theme-input --write`.
+
+---
+
+### `appendInline`, `dropUp`, `scrollableContainer` removed
+
+These positioning inputs have been removed. `@carbon/web-components` uses
+Floating UI for automatic placement — no replacement is needed.
+
+---
+
+## Codemods reference
+
+| Codemod                       | Type   | What it does                                                                     |
+| ----------------------------- | ------ | -------------------------------------------------------------------------------- |
+| `cca-report-imports`          | report | Lists all `carbon-components-angular` imports with `@carbon/angular` equivalents |
+| `cca-update-module-imports`   | write  | Rewrites import sources                                                          |
+| `cca-remove-table-model`      | write  | Replaces `TableModel` with flat `[rows]` / `[columns]`                           |
+| `cca-remove-notification-obj` | write  | Replaces `notificationObj` with flat inputs                                      |
+| `cca-remove-pagination-model` | write  | Replaces `PaginationModel` with flat inputs                                      |
+| `cca-remove-theme-input`      | write  | Removes `[theme]="theme"` bindings                                               |
+| `cca-report-ui-shell-nav`     | report | Flags `[navigationItems]` / `[menuItems]` array bindings                         |
+
+---
+
+## Running both versions side by side
+
+Because `@carbon/angular` registers its WC backing elements under `cds-ng-*`
+tags, it can coexist with `carbon-components-angular` on the same page without
+selector conflicts. This lets you migrate one module at a time.

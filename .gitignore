@@ -9,6 +9,12 @@ dist
 umd
 css
 docs/generated
+temp
+storybook-static
+storybook-static-v12
+
+# Angular
+/packages/angular/.angular/
 
 # Netlify deploy folder
 /demo/*
@@ -69,6 +75,7 @@ package-lock.json
 # Playwright
 .playwright
 blob-report
+test-results
 
 # Local token
 .env

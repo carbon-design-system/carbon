@@ -513,3 +513,125 @@ jobs:
           echo "- Storybook deploy preview: ${{ env.storybookUrl }}" >> $GITHUB_STEP_SUMMARY
           echo "- Commit: ${{ github.event.pull_request.head.sha }}" >> $GITHUB_STEP_SUMMARY
           echo "- Chromatic build URL: ${{ env.buildUrl }}" >> $GITHUB_STEP_SUMMARY
+
+  angular-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: dorny/paths-filter@ceb8a2b8f2d89434be7ff52d3de7ec3738c5cc9d # v4.0.3
+        id: filter
+        with:
+          token: ${{ github.token }}
+          filters: |
+            angular:
+              - 'packages/angular/**'
+      - name: Use Node.js version from .nvmrc
+        if: ${{ steps.filter.outputs.angular == 'true' }}
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: '.nvmrc'
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        if:
+          ${{ github.event_name != 'merge_group' && steps.filter.outputs.angular
+          == 'true' }}
+        id: cache
+        with:
+          path: |
+            node_modules
+            */**/node_modules
+          key:
+            ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
+            'packages/**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Install dependencies
+        if: ${{ steps.filter.outputs.angular == 'true' }}
+        env:
+          YARN_ENABLE_HARDENED_MODE: 0
+        run: yarn install --immutable
+      - name: Build @carbon/angular dependencies
+        if: ${{ steps.filter.outputs.angular == 'true' }}
+        run: >
+          yarn lerna run build
+          --scope='@carbon/web-components'
+          --scope='@carbon/styles'
+          --include-dependencies
+      - name: Build @carbon/angular
+        if: ${{ steps.filter.outputs.angular == 'true' }}
+        run: yarn workspace @carbon/angular build
+      - name: Run @carbon/angular tests
+        if: ${{ steps.filter.outputs.angular == 'true' }}
+        run: yarn workspace @carbon/angular test --ci --coverage
+      - name: Upload @carbon/angular coverage to Codecov
+        if: ${{ steps.filter.outputs.angular == 'true' }}
+        uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
+        with:
+          files: ./packages/angular/coverage/lcov.info
+          flags: angular
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+  angular-e2e:
+    needs: angular-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: dorny/paths-filter@ceb8a2b8f2d89434be7ff52d3de7ec3738c5cc9d # v4.0.3
+        id: filter
+        with:
+          token: ${{ github.token }}
+          filters: |
+            angular:
+              - 'packages/angular/**'
+      - name: Use Node.js version from .nvmrc
+        if: ${{ steps.filter.outputs.angular == 'true' }}
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: '.nvmrc'
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        if:
+          ${{ github.event_name != 'merge_group' && steps.filter.outputs.angular
+          == 'true' }}
+        id: cache
+        with:
+          path: |
+            node_modules
+            */**/node_modules
+          key:
+            ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
+            'packages/**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Install dependencies
+        if: ${{ steps.filter.outputs.angular == 'true' }}
+        env:
+          YARN_ENABLE_HARDENED_MODE: 0
+        run: yarn install --immutable
+      - name: Build @carbon/angular dependencies
+        if: ${{ steps.filter.outputs.angular == 'true' }}
+        run: >
+          yarn lerna run build
+          --scope='@carbon/web-components'
+          --scope='@carbon/styles'
+          --include-dependencies
+      - name: Build @carbon/angular
+        if: ${{ steps.filter.outputs.angular == 'true' }}
+        run: yarn workspace @carbon/angular build
+      - name: Build @carbon/angular Storybook
+        if: ${{ steps.filter.outputs.angular == 'true' }}
+        run: yarn workspace @carbon/angular storybook:build
+        working-directory: packages/angular
+      - name: Install Playwright browsers
+        if: ${{ steps.filter.outputs.angular == 'true' }}
+        run: yarn workspace @carbon/angular playwright:install
+      - name: Run @carbon/angular Playwright e2e tests
+        if: ${{ steps.filter.outputs.angular == 'true' }}
+        run: yarn workspace @carbon/angular e2e
+        working-directory: packages/angular
+      - name: Upload Playwright report
+        if: ${{ !cancelled() && steps.filter.outputs.angular == 'true' }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a #7.0.1
+        with:
+          name: angular-playwright-report
+          path: packages/angular/playwright-report
+          retention-days: 7
