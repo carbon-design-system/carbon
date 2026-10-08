@@ -52,6 +52,12 @@ export const productMigratedStoryGlobs = [
   '../src/examples/export-modal/*.mdx',
   '../src/examples/delete-and-remove/delete-and-remove.stories.ts',
   '../src/examples/delete-and-remove/*.mdx',
+  '../src/examples/coachmark/coachmark-fixed/coachmark-fixed.stories.ts',
+  '../src/examples/coachmark/coachmark-fixed/*.mdx',
+  '../src/examples/coachmark/coachmark-overlay-elements/coachmark-overlay-elements.stories.ts',
+  '../src/examples/coachmark/coachmark-overlay-elements/*.mdx',
+  '../src/examples/coachmark/coachmark-stacked/coachmark-stacked.stories.ts',
+  '../src/examples/coachmark/coachmark-stacked/*.mdx',
 ];
 
 /**
