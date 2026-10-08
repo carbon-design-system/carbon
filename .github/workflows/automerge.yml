@@ -1,0 +1,80 @@
+# This workflow merges the main branch into the next (v12) branch every night to keep the branch up to date.
+#
+# Merges are pushed directly to `next` as a merge commit so commits from `main`
+# are preserved - no queue and no squash. The push is made with the Carbon
+# Automation app token, which is on the bypass list of the `next` branch ruleset.
+name: Automerge
+
+on:
+  schedule:
+    - cron: '0 22 * * *'
+  workflow_dispatch: # Allows you to run this manually
+
+jobs:
+  merge:
+    name: Merge main into next
+    runs-on: ubuntu-latest
+    if: github.repository == 'carbon-design-system/carbon'
+    permissions:
+      contents: read
+    steps:
+      - name: Generate token
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        id: generate_token
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: '0'
+          ref: next
+          token: ${{ steps.generate_token.outputs.token }}
+
+      - name: Merge main into next
+        env:
+          GH_TOKEN: ${{ steps.generate_token.outputs.token }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          if git merge-base --is-ancestor origin/main HEAD; then
+            echo "next already contains main; nothing to merge."
+            exit 0
+          fi
+
+          if ! git merge origin/main --no-edit; then
+            echo "Merge conflict detected. Opening a draft PR from main into next."
+            git merge --abort
+
+            # Open a PR only if one doesn't already exist
+            EXISTING_PR=$(gh pr list --base next --head main --state open --json number --jq '.[0].number')
+            if [ -n "$EXISTING_PR" ]; then
+              echo "PR #$EXISTING_PR already open for main -> next; skipping."
+            else
+              gh pr create \
+                --draft \
+                --base next \
+                --head main \
+                --title "chore: merge main into next" \
+                --body "$(cat <<'EOF'
+          An automatic merge of `main` into `next` resulted in a merge conflict.
+
+          **Do not merge this PR or add it to the merge queue.** The queue would squash the commits from `main`. This PR is a notification only and closes itself once `next` contains `main`.
+
+          To resolve, a repository admin should:
+
+          ```sh
+          git fetch upstream
+          git switch -c sync/main-into-next upstream/next
+          git merge upstream/main
+          # resolve conflicts, run `yarn install` to fix yarn.lock, then commit
+          git push upstream sync/main-into-next:next
+          ```
+          EOF
+                )"
+            fi
+            exit 1
+          fi
+
+          git push origin HEAD:next
