@@ -84,9 +84,10 @@ icons, pictograms, layout, motion, themes, type), and tooling.
 - `carbon-components-react` is a deprecated package that re-exports
   `@carbon/react`
 - `@carbon/colors` color values are defined in
-  `packages/colors/src/dtcg/colors.json` (DTCG format). Do not edit generated
-  files under `packages/colors/js/generated/` or `packages/colors/scss/` — run
-  `yarn build` in that package to regenerate them.
+  `packages/colors/tokens/colors.tokens.json` (DTCG format). Do not edit
+  generated files under `packages/colors/js/generated/` or
+  `packages/colors/index.scss` — run `yarn build` in that package to regenerate
+  them.
 
 ## End user/practitioner guidance
 
