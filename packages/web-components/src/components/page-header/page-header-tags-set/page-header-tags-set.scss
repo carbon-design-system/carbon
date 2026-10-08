@@ -30,6 +30,11 @@ $block-class: #{$prefix}--page-header-tags-set;
     border: 0;
   }
 
+  // Hide overflow items marked by the overflow handler.
+  [data-hidden]:not([data-fixed]) {
+    display: none;
+  }
+
   .#{$block-class} {
     display: flex;
     // Spacing between tags.
