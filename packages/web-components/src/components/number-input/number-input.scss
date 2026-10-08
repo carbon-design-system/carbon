@@ -22,6 +22,14 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/utilities/layout';
 @use '@carbon/styles/scss/spacing' as *;
 
+/// Space between the AI label and each of the rule dividers surrounding it,
+/// 8px for `xs` and `sm` and 16px for `md`, + 1px to account for the divider itself
+$-ai-label-gap: clamp(
+  to-rem(9px),
+  layout.size('height') - $spacing-06,
+  to-rem(17px)
+);
+
 @include emit-layout-context-classes();
 
 :host(#{$prefix}-number-input),
@@ -73,7 +81,7 @@ $css--plex: true !default;
   ::slotted(#{$prefix}-slug) {
     position: absolute;
     inset-block-start: 50%;
-    inset-inline-end: calc(layout.size('height') * 2 + $spacing-05);
+    inset-inline-end: calc(2 * layout.size('height') + #{$-ai-label-gap});
   }
   ::slotted(#{$prefix}-ai-label:not([revert-active])),
   ::slotted(#{$prefix}-slug:not([revert-active])) {
@@ -91,7 +99,7 @@ $css--plex: true !default;
       block-size: 100%;
       content: '';
       inline-size: to-rem(1px);
-      inset-inline-start: -#{$spacing-05};
+      inset-inline-start: calc(-1 * #{$-ai-label-gap});
 
       @if flags.enabled('enable-v12-release') {
         display: none;

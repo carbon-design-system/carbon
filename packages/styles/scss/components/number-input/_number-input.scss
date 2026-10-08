@@ -34,6 +34,21 @@ $-icon-gap: clamp(
   $spacing-05
 );
 
+/// Space between the AI label and each of the rule dividers surrounding it,
+/// 8px for `xs` and `sm` and 16px for `md`, + 1px to account for the divider itself
+/// @access private
+/// @group number-input
+$-ai-label-gap: clamp(
+  convert.to-rem(9px),
+  layout.size('height') - $spacing-06,
+  convert.to-rem(17px)
+);
+
+/// The whole AI label cluster: a gap, the 16px icon, and another gap.
+/// @access private
+/// @group number-input
+$-ai-label-cluster: calc(2 * #{$-ai-label-gap} + #{convert.to-rem(16px)});
+
 /// Number input styles
 /// @access public
 /// @group number-input
@@ -481,7 +496,7 @@ $-icon-gap: clamp(
   .#{$prefix}--number__input-wrapper--slug .#{$prefix}--slug {
     position: absolute;
     inset-block-start: 50%;
-    inset-inline-end: calc(layout.size('height') * 2 + $spacing-05);
+    inset-inline-end: calc(2 * layout.size('height') + #{$-ai-label-gap});
     transform: translateY(-50%);
   }
 
@@ -523,7 +538,7 @@ $-icon-gap: clamp(
   .#{$prefix}--number__input-wrapper--slug .#{$prefix}--ai-label::before,
   .#{$prefix}--number__input-wrapper--slug .#{$prefix}--slug::before {
     display: none;
-    inset-inline-start: convert.to-rem(-16px);
+    inset-inline-start: calc(-1 * #{$-ai-label-gap});
   }
 
   .#{$prefix}--number__input-wrapper--decorator
@@ -582,7 +597,7 @@ $-icon-gap: clamp(
   .#{$prefix}--number__input-wrapper--slug .#{$prefix}--number__invalid {
     // steppers + AI label cluster + the gap from its divider to this icon
     inset-inline-end: calc(
-      2 * layout.size('height') + $spacing-09 + #{$-icon-gap}
+      2 * layout.size('height') + #{$-ai-label-cluster} + #{$-icon-gap}
     );
   }
 
@@ -612,8 +627,10 @@ $-icon-gap: clamp(
   .#{$prefix}--number
     .#{$prefix}--number__input-wrapper--slug
     input[type='text'] {
-    // steppers + 16px gap + 16px AI label + 16px padding
-    padding-inline-end: calc(2 * layout.size('height') + 3 * $spacing-05);
+    // steppers + divider->label gap + 16px AI label + 16px padding
+    padding-inline-end: calc(
+      2 * layout.size('height') + #{$-ai-label-gap} + 2 * $spacing-05
+    );
   }
 
   .#{$prefix}--number
@@ -630,7 +647,8 @@ $-icon-gap: clamp(
     input {
     // steppers + AI label cluster + icon gap + icon + 16px padding
     padding-inline-end: calc(
-      2 * layout.size('height') + $spacing-09 + #{$-icon-gap} + 2 * $spacing-05
+      2 * layout.size('height') + #{$-ai-label-cluster} + #{$-icon-gap} + 2 *
+        $spacing-05
     );
   }
 
