@@ -273,7 +273,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://web-components.carbondesignsystem.com/?path=/story/components-menu-button--default
+        url: https://web-components.carbondesignsystem.com/?path=/docs/components-menu-button
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/menu-buttons/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/menu-buttons/style.mdx
