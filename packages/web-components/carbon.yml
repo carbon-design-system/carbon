@@ -264,6 +264,21 @@ assets:
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/loading/style.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/loading/accessibility.mdx
       overviewPath: ./src/components/loading/docs/overview.mdx
+  menu-button:
+    name: Menu button
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/menu-buttons/usage
+    framework: web-component
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://web-components.carbondesignsystem.com/?path=/docs/components-menu-button
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/menu-buttons/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/menu-buttons/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/menu-buttons/accessibility.mdx
+      overviewPath: ./src/components/menu-button/menu-button.mdx
   modal:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/modal/usage
