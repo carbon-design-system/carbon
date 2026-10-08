@@ -6,6 +6,7 @@
  */
 import { expect, fixture, html, oneEvent } from '@open-wc/testing';
 import '@carbon/web-components/es/components/toggle-tip/index.js';
+import '@carbon/web-components/es/components/feature-flags/index.js';
 
 describe('cds-toggletip', function () {
   it('should render', async () => {
@@ -203,5 +204,35 @@ describe('cds-toggletip', function () {
     await el.updateComplete;
 
     expect(el.open).to.be.true;
+  });
+
+  it('should default autoalign to true with enable-v12-release', async () => {
+    const featureFlag = await fixture(html`
+      <feature-flags enable-v12-release="true">
+        <cds-toggletip button-label="More info">Toggle content</cds-toggletip>
+      </feature-flags>
+    `);
+    const el = featureFlag.querySelector('cds-toggletip');
+
+    await el.updateComplete;
+
+    expect(el.autoalign).to.be.true;
+    expect(el).to.have.attribute('autoalign');
+  });
+
+  it('should keep autoalign disabled when set to false with enable-v12-release', async () => {
+    const featureFlag = await fixture(html`
+      <feature-flags enable-v12-release="true">
+        <cds-toggletip .autoalign=${false} button-label="More info"
+          >Toggle content</cds-toggletip
+        >
+      </feature-flags>
+    `);
+    const el = featureFlag.querySelector('cds-toggletip');
+
+    await el.updateComplete;
+
+    expect(el.autoalign).to.be.false;
+    expect(el).to.not.have.attribute('autoalign');
   });
 });

@@ -612,9 +612,7 @@ class CDSDropdown extends ValidityMixin(
 
   connectedCallback() {
     super.connectedCallback();
-    if (!this.hasAttribute('autoalign')) {
-      this.autoalign = isFeatureFlagEnabled('enable-v12-release', this);
-    }
+    this.autoalign ??= isFeatureFlagEnabled('enable-v12-release', this);
   }
 
   disconnectedCallback() {
@@ -978,10 +976,11 @@ class CDSDropdown extends ValidityMixin(
   direction = DROPDOWN_DIRECTION.BOTTOM;
 
   /**
-   * Specify whether auto align functionality should be applied
+   * Specify whether auto align functionality should be applied. Defaults to
+   * `true` when `enable-v12-release` is enabled, and to `false` otherwise.
    */
   @property({ type: Boolean, reflect: true })
-  autoalign = false;
+  autoalign?: boolean;
 
   /**
    * `true` if this dropdown should be disabled.
@@ -1283,7 +1282,7 @@ class CDSDropdown extends ValidityMixin(
       [`${prefix}--dropdown--inline`]: inline,
       [`${prefix}--dropdown--selected`]: selectedItemsCount > 0,
       [`${prefix}--list-box__wrapper--decorator`]: this._hasAILabel,
-      [`${prefix}--autoalign`]: autoalign,
+      [`${prefix}--autoalign`]: Boolean(autoalign),
     });
   }
 

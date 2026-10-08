@@ -64,10 +64,11 @@ class CDSPopover extends HostListenerMixin(LitElement) {
   alignmentAxisOffset?: number;
 
   /**
-   * Specify whether a auto align functionality should be applied
+   * Specify whether a auto align functionality should be applied. Defaults to
+   * `true` when `enable-v12-release` is enabled, and to `false` otherwise.
    */
   @property({ type: Boolean, reflect: true })
-  autoalign = false;
+  autoalign?: boolean;
 
   /**
    * @deprecated This prop has been deprecated and will be
@@ -325,9 +326,7 @@ class CDSPopover extends HostListenerMixin(LitElement) {
 
   connectedCallback() {
     super.connectedCallback();
-    if (!this.hasAttribute('autoalign')) {
-      this.autoalign = isFeatureFlagEnabled('enable-v12-release', this);
-    }
+    this.autoalign ??= isFeatureFlagEnabled('enable-v12-release', this);
     document.addEventListener('click', this._handleOutsideClick);
   }
 

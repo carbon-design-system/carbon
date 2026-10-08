@@ -33,10 +33,11 @@ export class CDSTruncatedText extends LitElement {
   align = 'top';
 
   /**
-   * Specify whether a auto align functionality should be applied
+   * Specify whether a auto align functionality should be applied. Defaults to
+   * `true` when `enable-v12-release` is enabled, and to `false` otherwise.
    */
   @property({ type: Boolean, reflect: true })
-  autoalign = false;
+  autoalign?: boolean;
 
   /**
    * The label on the collapse button.
@@ -89,9 +90,7 @@ export class CDSTruncatedText extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    if (!this.hasAttribute('autoalign')) {
-      this.autoalign = isFeatureFlagEnabled('enable-v12-release', this);
-    }
+    this.autoalign ??= isFeatureFlagEnabled('enable-v12-release', this);
     this._isLayered = !!this.closest(`${prefix}-layer`);
     this.type = this.type || 'tooltip';
   }
@@ -243,7 +242,7 @@ export class CDSTruncatedText extends LitElement {
       ? html`
           <cds-tooltip
             align=${this.align}
-            ?autoalign=${this.autoalign}
+            .autoalign=${this.autoalign}
             enter-delay-ms="0"
             leave-delay-ms="0">
             <button

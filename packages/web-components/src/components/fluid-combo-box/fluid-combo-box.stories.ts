@@ -74,7 +74,6 @@ const items = [
 
 const args = {
   ariaLabel: '',
-  autoalign: false,
   direction: 'bottom',
   disabled: false,
   isCondensed: false,

@@ -49,10 +49,11 @@ class CDSCopyButton extends FocusMixin(LitElement) {
   align = POPOVER_ALIGNMENT.BOTTOM;
 
   /**
-   * Specify whether a auto align functionality should be applied
+   * Specify whether an auto align functionality should be applied. Defaults to
+   * `true` when `enable-v12-release` is enabled, and to `false` otherwise.
    */
   @property({ type: Boolean, reflect: true })
-  autoAlign = false;
+  autoAlign?: boolean;
 
   /**
    * The number in milliseconds to determine how long the tooltip should remain.
@@ -86,7 +87,7 @@ class CDSCopyButton extends FocusMixin(LitElement) {
     return html`
       <cds-copy
         ?disabled=${disabled}
-        ?autoalign=${autoAlign}
+        .autoalign=${autoAlign}
         feedback=${feedback}
         feedback-timeout=${feedbackTimeout}
         button-class-name=${classes}

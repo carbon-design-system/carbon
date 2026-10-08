@@ -38,10 +38,11 @@ class CDSIconButton extends CDSButton {
   align = 'top';
 
   /**
-   * Specify whether a auto align functionality should be applied
+   * Specify whether a auto align functionality should be applied. Defaults to
+   * `true` when `enable-v12-release` is enabled, and to `false` otherwise.
    */
   @property({ type: Boolean, reflect: true })
-  autoalign = false;
+  autoalign?: boolean;
 
   /**
    * Determines whether the tooltip should close when inner content is activated (click, Enter or Space)
@@ -75,9 +76,7 @@ class CDSIconButton extends CDSButton {
 
   connectedCallback() {
     super.connectedCallback();
-    if (!this.hasAttribute('autoalign')) {
-      this.autoalign = isFeatureFlagEnabled('enable-v12-release', this);
-    }
+    this.autoalign ??= isFeatureFlagEnabled('enable-v12-release', this);
 
     adoptStyles(this.renderRoot as ShadowRoot, [
       tooltipStyles,
@@ -123,7 +122,7 @@ class CDSIconButton extends CDSButton {
     } = this;
     return html`
       <cds-tooltip
-        ?autoalign=${autoalign}
+        .autoalign=${autoalign}
         align=${align}
         ?defaultOpen=${defaultOpen}
         ?closeOnActivation=${closeOnActivation}

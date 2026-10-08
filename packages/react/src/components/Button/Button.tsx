@@ -11,7 +11,6 @@ import { IconButton, IconButtonKind, IconButtonKinds } from '../IconButton';
 import { PopoverAlignment } from '../Popover';
 import ButtonBase from './ButtonBase';
 import { PolymorphicComponentPropWithRef } from '../../internal/PolymorphicProps';
-import { useFeatureFlag } from '../FeatureFlags';
 
 export const ButtonKinds = [
   'primary',
@@ -170,9 +169,6 @@ const Button: ButtonComponent = React.forwardRef(
       ...rest
     } = props;
 
-    const enableV12Release = useFeatureFlag('enable-v12-release');
-    const autoAlignValue = autoAlign ?? enableV12Release;
-
     if (ButtonImageElement && !children && !iconDescription) {
       // eslint-disable-next-line no-console
       console.error(
@@ -235,7 +231,7 @@ const Button: ButtonComponent = React.forwardRef(
           onMouseLeave={onMouseLeave}
           onFocus={onFocus}
           onBlur={onBlur}
-          autoAlign={autoAlignValue}
+          autoAlign={autoAlign}
           onClick={onClick}
           renderIcon={iconOnlyImage ? null : ButtonImageElement} // avoid doubling the icon.
         >

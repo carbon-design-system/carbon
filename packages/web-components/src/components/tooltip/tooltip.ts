@@ -32,10 +32,11 @@ class CDSTooltip extends HostListenerMixin(CDSPopover) {
   align = 'top';
 
   /**
-   * Specify whether a auto align functionality should be applied
+   * Specify whether a auto align functionality should be applied. Defaults to
+   * `true` when `enable-v12-release` is enabled, and to `false` otherwise.
    */
   @property({ type: Boolean, reflect: true })
-  autoalign = false;
+  autoalign?: boolean;
 
   /**
    * `true` if this tooltip is in a data table row
@@ -212,9 +213,7 @@ class CDSTooltip extends HostListenerMixin(CDSPopover) {
     }
     window.addEventListener('keydown', this._handleKeydown, true);
     super.connectedCallback();
-    if (!this.hasAttribute('autoalign')) {
-      this.autoalign = isFeatureFlagEnabled('enable-v12-release', this);
-    }
+    this.autoalign ??= isFeatureFlagEnabled('enable-v12-release', this);
 
     adoptStyles(this.renderRoot as ShadowRoot, [popoverStyles, styles]);
   }

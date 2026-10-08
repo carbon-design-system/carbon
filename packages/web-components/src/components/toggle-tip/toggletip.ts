@@ -65,10 +65,11 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
   alignmentAxisOffset = 0;
 
   /**
-   * Specify whether a auto align functionality should be applied
+   * Specify whether a auto align functionality should be applied. Defaults to
+   * `true` when `enable-v12-release` is enabled, and to `false` otherwise.
    */
   @property({ type: Boolean, reflect: true })
-  autoalign = false;
+  autoalign?: boolean;
 
   /**
    * The label for the toggle button
@@ -99,9 +100,7 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
 
   connectedCallback() {
     super.connectedCallback();
-    if (!this.hasAttribute('autoalign')) {
-      this.autoalign = isFeatureFlagEnabled('enable-v12-release', this);
-    }
+    this.autoalign ??= isFeatureFlagEnabled('enable-v12-release', this);
     if (this.defaultOpen && !this.hasAttribute('open')) {
       this.open = true;
     }

@@ -828,4 +828,42 @@ describe('cds-overflow-menu', () => {
       expect(tooltipContent?.hidden).to.be.true;
     });
   });
+
+  describe('enable-v12-release', () => {
+    it('should default autoalign to true', async () => {
+      const featureFlag = await fixture(html`
+        <feature-flags enable-v12-release="true">
+          <cds-overflow-menu label="Actions">
+            <cds-menu>
+              <cds-menu-item label="Stop app"></cds-menu-item>
+            </cds-menu>
+          </cds-overflow-menu>
+        </feature-flags>
+      `);
+      const el = featureFlag.querySelector('cds-overflow-menu');
+
+      await el.updateComplete;
+
+      expect(el.autoalign).to.be.true;
+      expect(el).to.have.attribute('autoalign');
+    });
+
+    it('should keep autoalign disabled when set to false', async () => {
+      const featureFlag = await fixture(html`
+        <feature-flags enable-v12-release="true">
+          <cds-overflow-menu .autoalign=${false} label="Actions">
+            <cds-menu>
+              <cds-menu-item label="Stop app"></cds-menu-item>
+            </cds-menu>
+          </cds-overflow-menu>
+        </feature-flags>
+      `);
+      const el = featureFlag.querySelector('cds-overflow-menu');
+
+      await el.updateComplete;
+
+      expect(el.autoalign).to.be.false;
+      expect(el).to.not.have.attribute('autoalign');
+    });
+  });
 });

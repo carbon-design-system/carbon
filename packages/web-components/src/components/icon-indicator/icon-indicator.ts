@@ -107,10 +107,11 @@ class CDSIconIndicator extends LitElement {
   align: POPOVER_ALIGNMENT = POPOVER_ALIGNMENT.RIGHT;
 
   /**
-   * Will auto-align the tooltip in compact mode
+   * Will auto-align the tooltip in compact mode. Defaults to `true` when
+   * `enable-v12-release` is enabled, and to `false` otherwise.
    */
   @property({ type: Boolean, reflect: false })
-  autoalign = false;
+  autoalign?: boolean;
 
   /**
    * When true, displays only the icon with the label in a tooltip
@@ -145,9 +146,7 @@ class CDSIconIndicator extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    if (!this.hasAttribute('autoalign')) {
-      this.autoalign = isFeatureFlagEnabled('enable-v12-release', this);
-    }
+    this.autoalign ??= isFeatureFlagEnabled('enable-v12-release', this);
   }
 
   render() {
@@ -158,7 +157,7 @@ class CDSIconIndicator extends LitElement {
       return html`
         <cds-definition-tooltip
           align=${this.align}
-          ?autoalign=${this.autoalign}
+          .autoalign=${this.autoalign}
           open-on-hover>
           ${iconElement}
           <span class="${prefix}--visually-hidden"

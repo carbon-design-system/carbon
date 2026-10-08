@@ -7,6 +7,7 @@
 
 import '@carbon/web-components/es/components/truncated-text/index.js';
 import '@carbon/web-components/es/components/layer/index.js';
+import '@carbon/web-components/es/components/feature-flags/index.js';
 import { fixture, html, expect } from '@open-wc/testing';
 
 const prefix = 'cds';
@@ -335,5 +336,35 @@ describe('cds-truncated-text', () => {
     const btn = el.shadowRoot.querySelector(`.${blockClass}_button-expand`);
     expect(btn.getAttribute('role')).to.equal('button');
     expect(btn.getAttribute('tabindex')).to.equal('0');
+  });
+
+  // ── autoalign ──────────────────────────────────────────────────────────────
+
+  it('should default autoalign to true with enable-v12-release', async () => {
+    const featureFlag = await fixture(html`
+      <feature-flags enable-v12-release="true">
+        <cds-truncated-text value="${shortText}"></cds-truncated-text>
+      </feature-flags>
+    `);
+    const el = featureFlag.querySelector('cds-truncated-text');
+
+    await el.updateComplete;
+
+    expect(el.autoalign).to.be.true;
+  });
+
+  it('should keep autoalign disabled when set to false with enable-v12-release', async () => {
+    const featureFlag = await fixture(html`
+      <feature-flags enable-v12-release="true">
+        <cds-truncated-text
+          .autoalign=${false}
+          value="${shortText}"></cds-truncated-text>
+      </feature-flags>
+    `);
+    const el = featureFlag.querySelector('cds-truncated-text');
+
+    await el.updateComplete;
+
+    expect(el.autoalign).to.be.false;
   });
 });
