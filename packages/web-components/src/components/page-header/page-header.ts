@@ -102,8 +102,6 @@ class CDSPageHeader extends LitElement {
       }
     );
 
-    const contentElement = this.querySelector(`${prefix}-page-header-content`);
-
     this.resizeObserver = new ResizeObserver((entries) => {
       const pageHeaderElement = entries[0];
       const contentEl = pageHeaderElement.target.querySelector(
@@ -142,8 +140,14 @@ class CDSPageHeader extends LitElement {
     });
     this.resizeObserver.observe(this);
 
+    this.actionsObserver = this._createActionsObserver();
+  }
+
+  firstUpdated() {
+    const contentElement = this.querySelector(`${prefix}-page-header-content`);
     const predefinedContentPadding = 24;
     const totalHeaderOffset = getHeaderOffset(this);
+
     this.contentObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -190,13 +194,12 @@ class CDSPageHeader extends LitElement {
       }
     );
 
-    this.actionsObserver = this._createActionsObserver();
     if (contentElement) {
       this.contentObserver.observe(contentElement);
       this.titleObserver.observe(contentElement);
       // actionsObserver starts on contentElement; once page-header-content fires
       // its registration event, it is rewired to the specific page-actions element.
-      this.actionsObserver.observe(contentElement);
+      this.actionsObserver?.observe(contentElement);
     }
   }
 
