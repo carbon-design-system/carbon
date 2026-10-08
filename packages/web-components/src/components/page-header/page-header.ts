@@ -60,6 +60,8 @@ class CDSPageHeader extends LitElement {
   private contentObserver: IntersectionObserver | undefined;
   private titleObserver: IntersectionObserver | undefined;
   private actionsObserver: IntersectionObserver | undefined;
+  /** Last header offset used to create intersection observers — used to detect when they need to be recreated. */
+  private _observerHeaderOffset: number | undefined;
 
   updated(changedProperties: Map<string, unknown>) {
     super.updated(changedProperties);
@@ -137,6 +139,13 @@ class CDSPageHeader extends LitElement {
         root: this,
         withContent: !!contentEl,
       };
+
+      // Recreate intersection observers when the shell header offset changes
+      // (e.g. UI shell collapses/expands on resize).
+      if (headerOffset !== this._observerHeaderOffset) {
+        this._observerHeaderOffset = headerOffset;
+        this._setupIntersectionObservers(contentEl);
+      }
     });
     this.resizeObserver.observe(this);
 
@@ -145,8 +154,22 @@ class CDSPageHeader extends LitElement {
 
   firstUpdated() {
     const contentElement = this.querySelector(`${prefix}-page-header-content`);
+    this._observerHeaderOffset = getHeaderOffset(this);
+    this._setupIntersectionObservers(contentElement);
+
+    if (contentElement) {
+      // actionsObserver starts on contentElement; once page-header-content fires
+      // its registration event, it is rewired to the specific page-actions element.
+      this.actionsObserver?.observe(contentElement);
+    }
+  }
+
+  private _setupIntersectionObservers(contentElement: Element | null) {
+    this.contentObserver?.disconnect();
+    this.titleObserver?.disconnect();
+
     const predefinedContentPadding = 24;
-    const totalHeaderOffset = getHeaderOffset(this);
+    const totalHeaderOffset = this._observerHeaderOffset ?? 0;
 
     this.contentObserver = new IntersectionObserver(
       (entries) => {
@@ -197,9 +220,6 @@ class CDSPageHeader extends LitElement {
     if (contentElement) {
       this.contentObserver.observe(contentElement);
       this.titleObserver.observe(contentElement);
-      // actionsObserver starts on contentElement; once page-header-content fires
-      // its registration event, it is rewired to the specific page-actions element.
-      this.actionsObserver?.observe(contentElement);
     }
   }
 
