@@ -15,7 +15,6 @@ import { Popover, PopoverContent } from '../Popover';
 import mdx from './Tag.mdx';
 import './story.scss';
 import './storyInteractiveTag.scss';
-import { Text } from '../Text';
 import Button from '../Button';
 
 export default {
