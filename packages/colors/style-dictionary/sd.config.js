@@ -10,7 +10,7 @@
 /**
  * Style Dictionary configuration for @carbon/colors.
  *
- * Reads:  src/dtcg/colors.json
+ * Reads:  tokens/colors.tokens.json
  * Writes:
  *   - js/generated/colors.js    (CJS module, consumed by src/index.ts → bundle)
  *   - js/generated/colors.d.ts  (TypeScript declarations)
@@ -24,7 +24,7 @@ const carbonScssColors = require('./formats/scss-colors');
 const carbonJsColors = require('./formats/js-colors');
 
 const ROOT = path.resolve(__dirname, '..');
-const DTCG_SOURCE = path.join(ROOT, 'src', 'dtcg', 'colors.json');
+const TOKENS_SOURCE = path.join(ROOT, 'tokens', 'colors.tokens.json');
 const JS_GENERATED = path.join(ROOT, 'js', 'generated');
 
 // ── Name transform ─────────────────────────────────────────────────────────────
@@ -41,15 +41,11 @@ const carbonNamePath = {
 function createBase() {
   const base = new StyleDictionary({});
   base.registerTransform(carbonNamePath);
-  // Use 'css' transform group transforms for value resolution (handles DTCG
-  // $value → token.value), then override name with our path-preserving transform.
+  // `color/css` converts each DTCG color object to a CSS hex string;
+  // `carbon/name-path` keeps the token path as its name.
   base.registerTransformGroup({
     name: 'carbon/colors',
-    transforms: [
-      'attribute/cti',
-      'carbon/name-path',
-      'color/css', // resolves DTCG $value hex strings into token.value
-    ],
+    transforms: ['attribute/cti', 'carbon/name-path', 'color/css'],
   });
   base.registerFormat(carbonScssColors);
   base.registerFormat(carbonJsColors);
@@ -57,7 +53,7 @@ function createBase() {
 }
 
 const sdConfig = {
-  source: [DTCG_SOURCE],
+  source: [TOKENS_SOURCE],
   platforms: {
     // Generates js/generated/colors.js + colors.d.ts
     // consumed by src/index.ts → carbon-cli bundle → es/ and lib/
