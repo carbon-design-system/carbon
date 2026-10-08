@@ -3118,6 +3118,9 @@ Map {
   "DismissibleTag" => {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": {
+      "children": {
+        "type": "node",
+      },
       "className": {
         "type": "string",
       },
