@@ -26,7 +26,7 @@ $css--plex: true !default;
 /// 8px for `xs` and `sm` and 16px for `md`, + 1px to account for the divider itself
 $-ai-label-gap: clamp(
   to-rem(9px),
-  layout.size('height') - $spacing-06,
+  layout.size('height') - $spacing-06 + to-rem(1px),
   to-rem(17px)
 );
 

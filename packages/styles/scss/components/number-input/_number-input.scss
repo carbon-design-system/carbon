@@ -40,7 +40,7 @@ $-icon-gap: clamp(
 /// @group number-input
 $-ai-label-gap: clamp(
   convert.to-rem(9px),
-  layout.size('height') - $spacing-06,
+  layout.size('height') - $spacing-06 + convert.to-rem(1px),
   convert.to-rem(17px)
 );
 
