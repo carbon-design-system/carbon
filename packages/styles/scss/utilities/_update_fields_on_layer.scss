@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2021
+// Copyright IBM Corp. 2021, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -27,10 +27,7 @@
   .#{$prefix}--number-input--fluid input[type='number'],
   .#{$prefix}--number-input--fluid input[type='text'],
   .#{$prefix}--number-input--fluid .#{$prefix}--number__control-btn::before,
-  .#{$prefix}--number-input--fluid .#{$prefix}--number__control-btn::after,
-  .#{$prefix}--date-picker--fluid
-    .c#{$prefix}ds--date-picker-input__wrapper
-    .#{$prefix}--date-picker__input {
+  .#{$prefix}--number-input--fluid .#{$prefix}--number__control-btn::after {
     background-color: $field;
   }
 

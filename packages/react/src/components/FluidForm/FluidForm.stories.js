@@ -604,6 +604,17 @@ export const InModalWithLayers = ({ disabled, readOnly, invalid }) => {
                     invalid={invalid}
                     invalidText="Choose an option"
                   />
+                  <FluidDatePicker datePickerType="single" readOnly={readOnly}>
+                    <FluidDatePickerInput
+                      id={`fluid-layer-date-${level}`}
+                      labelText={`Date on layer ${level}`}
+                      placeholder="mm/dd/yyyy"
+                      disabled={disabled}
+                      readOnly={readOnly}
+                      invalid={invalid}
+                      invalidText="Enter a date"
+                    />
+                  </FluidDatePicker>
                 </FluidForm>
               </Layer>
             ))}
