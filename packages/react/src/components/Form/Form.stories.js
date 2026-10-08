@@ -118,7 +118,7 @@ Default.argTypes = {
 };
 
 export const withAILabel = (args) => {
-  return <FormDemo {...args} size="md" aiLabel />;
+  return <FormDemo {...args} size="md" />;
 };
 
 withAILabel.args = {
