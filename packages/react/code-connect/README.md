@@ -22,14 +22,17 @@ To work on Code Connect within Carbon, you’ll need a Figma editor license. If
 you only need to view code snippets, you’ll just need a Dev Mode license.
 
 Follow the [documentation](https://developers.figma.com/docs/code-connect/) to
-connect a new component, or edit an existing config.
+connect a new component, or edit an existing config. New Code Connect files use
+Figma's
+[Template API](https://developers.figma.com/docs/code-connect/template-api/) to
+define the generated code snippets.
 
-Config files for each component currently live within the react package inside
-the code-connect folder. Eventually these will live alongside the component code
-and/or be integrated with Storybook code.
+Code Connect files for each component currently live within the react package
+inside the code-connect folder. Eventually these will live alongside the
+component code and/or be integrated with Storybook code.
 
 ```sh
-"packages/src/react/code-connect/ComponentName/ComponentName.figma.tsx"
+"packages/react/code-connect/ComponentName/ComponentName.figma.ts"
 ```
 
 ## Demo Figma File
