@@ -32,8 +32,8 @@
   },
   "scripts": {
     "build:types": "tsc -p tsconfig.types.json",
-    "build:dtcg": "node -e \"require('./style-dictionary/sd.config.js').run()\"",
-    "build": "yarn clean && yarn build:dtcg && carbon-cli bundle src/index.ts --name CarbonLayout && yarn build:types",
+    "build:tokens": "node -e \"require('./style-dictionary/sd.config.js').run()\"",
+    "build": "yarn clean && yarn build:tokens && carbon-cli bundle src/index.ts --name CarbonLayout && yarn build:types",
     "clean": "rimraf es lib umd scss/generated js/generated",
     "postinstall": "ibmtelemetry --config=telemetry.yml"
   },
