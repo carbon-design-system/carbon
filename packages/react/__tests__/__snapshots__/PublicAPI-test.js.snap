@@ -10749,6 +10749,8 @@ Map {
         "args": [
           [
             "sm",
+            "md",
+            "lg",
           ],
         ],
         "type": "oneOf",

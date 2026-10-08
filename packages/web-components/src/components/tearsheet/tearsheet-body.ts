@@ -14,15 +14,13 @@ import '../layer/index';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { classMap } from 'lit-html/directives/class-map.js';
 import styles from './tearsheet.scss?lit';
-import { SignalWatcher } from '@lit-labs/signals';
-
-import { CollapsibleController } from '../../globals/js/utils/collapsible-controller';
+import { consume } from '@lit/context';
 import {
-  getTearsheetSignal,
-  getTearsheetState,
-  updateTearsheetState,
-  getParentTearsheetId,
-} from './tearsheet-signal';
+  tearsheetContext,
+  defaultTearsheetState,
+  type TearsheetContextValue,
+} from './tearsheet-context';
+import { CollapsibleController } from '../../globals/js/utils/collapsible-controller';
 
 const blockClass = `${prefix}--tearsheet`;
 
@@ -36,7 +34,7 @@ const blockClass = `${prefix}--tearsheet`;
  * @slot summary-content - Right-side panel for summary details (use cds-tearsheet-summary-content)
  */
 @customElement(`${prefix}-tearsheet-body`)
-class CDSTearsheetBody extends SignalWatcher(HostListenerMixin(LitElement)) {
+class CDSTearsheetBody extends HostListenerMixin(LitElement) {
   @property({ reflect: true })
   slot = 'body';
 
@@ -49,20 +47,17 @@ class CDSTearsheetBody extends SignalWatcher(HostListenerMixin(LitElement)) {
   @state()
   private _hasSummaryContent = false;
 
-  /** uniqueId of the parent cds-tearsheet, read once in connectedCallback. */
-  private _uniqueId: string = '';
+  @consume({ context: tearsheetContext, subscribe: true })
+  private _tearsheetCtx?: TearsheetContextValue;
 
   // @ts-expect-error // CollapsibleController uses 'this' before super() in strict mode
   private _collapsibleController = new CollapsibleController(this, {
     container: () => this.getMainContentContainer(),
     triggerCollapse: (collapse: boolean) => this.collapseHeader(collapse),
-    disable: () => getTearsheetState(this._uniqueId).disableHeaderCollapse,
+    disable: () =>
+      (this._tearsheetCtx?.state ?? defaultTearsheetState)
+        .disableHeaderCollapse,
   });
-
-  connectedCallback(): void {
-    super.connectedCallback();
-    this._uniqueId = getParentTearsheetId(this);
-  }
 
   private getMainContentContainer(): HTMLElement | null {
     return this.querySelector('[slot="main-content"]') || null;
@@ -77,10 +72,10 @@ class CDSTearsheetBody extends SignalWatcher(HostListenerMixin(LitElement)) {
       const canScroll =
         scrollContainer.scrollHeight > scrollContainer.clientHeight;
       if (canScroll) {
-        updateTearsheetState(this._uniqueId, { fullyCollapsed: true });
+        this._tearsheetCtx?.setState({ fullyCollapsed: true });
       }
     } else if (scrollContainer.scrollTop === 0) {
-      updateTearsheetState(this._uniqueId, { fullyCollapsed: false });
+      this._tearsheetCtx?.setState({ fullyCollapsed: false });
     }
   }
 
@@ -100,9 +95,7 @@ class CDSTearsheetBody extends SignalWatcher(HostListenerMixin(LitElement)) {
   }
 
   render() {
-    // getTearsheetSignal(id).get() subscribes SignalWatcher to only this
-    // instance's signal — changes in other tearsheets never trigger a re-render.
-    const { hasAILabel } = getTearsheetSignal(this._uniqueId).get();
+    const { hasAILabel } = this._tearsheetCtx?.state ?? defaultTearsheetState;
 
     const mainContentClasses = classMap({
       [`${blockClass}__main-content`]: true,
