@@ -36,7 +36,7 @@
 
   .#{$prefix}--list--ordered:not(.#{$prefix}--list--nested),
   .#{$prefix}--list--ordered--native:not(.#{$prefix}--list--nested) {
-    margin-inline-start: convert.to-rem(24px);
+    padding-inline-start: $spacing-06;
   }
 
   .#{$prefix}--list--expressive,

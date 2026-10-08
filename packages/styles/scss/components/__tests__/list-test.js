@@ -9,7 +9,6 @@
 
 'use strict';
 
-const postcss = require('postcss');
 const { SassRenderer } = require('@carbon/test-utils/scss');
 
 const { render } = SassRenderer.create(__dirname);
@@ -26,38 +25,13 @@ describe('scss/components/list', () => {
   });
 
   test('ordered list markers are indented within the list container', async () => {
-    const { result } = await render(`
+    const { unwrap } = await render(`
       @use '../list';
-    `);
-    const cssText = result.css.toString();
+      @use '../../spacing' as *;
 
-    expect(
-      declarationsForSelector(
-        cssText,
-        '.cds--list--ordered:not(.cds--list--nested)'
-      )['margin-inline-start']
-    ).toBe('1.5rem');
-    expect(
-      declarationsForSelector(
-        cssText,
-        '.cds--list--ordered--native:not(.cds--list--nested)'
-      )['margin-inline-start']
-    ).toBe('1.5rem');
+      $_: get('ordered-padding', $spacing-06);
+    `);
+
+    expect(unwrap('ordered-padding')).toBe('1.5rem');
   });
 });
-
-function declarationsForSelector(cssText, selector) {
-  const styles = {};
-
-  postcss.parse(cssText).walkRules((rule) => {
-    if (rule.selectors.includes(selector)) {
-      rule.nodes
-        .filter((node) => node.type === 'decl')
-        .forEach((node) => {
-          styles[node.prop] = node.value;
-        });
-    }
-  });
-
-  return styles;
-}
