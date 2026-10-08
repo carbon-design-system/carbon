@@ -49,6 +49,14 @@ Import Carbon global styles once in your app entry:
 @use '@carbon/styles';
 ```
 
+## Planning & Architecture
+
+- **[Architecture & Implementation Plan](docs/plan.md)** — Core design
+  decisions, wrapper architecture, component tiers, CVA mapping, and test
+  strategy.
+- **[Implementation Milestones](docs/milestones.md)** — Step-by-step roadmap and
+  PR breakdown across six milestones.
+
 ## Migrating from `carbon-components-angular`
 
 See the [migration guide](../../docs/guides/cca-to-angular.md) _(added in
