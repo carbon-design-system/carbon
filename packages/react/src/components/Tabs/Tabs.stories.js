@@ -359,10 +359,8 @@ const tabArgTypes = {
   },
   renderButton: {
     control: false,
-    description:
-      'An optional parameter to allow overriding the anchor rendering. Useful for using Tab along with react-router or other client side router libraries.',
     table: {
-      category: 'Tab',
+      disable: true,
     },
   },
   renderIcon: {
