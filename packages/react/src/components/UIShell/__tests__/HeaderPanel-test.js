@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2025
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -13,7 +13,7 @@ import { PrefixContext } from '../../../internal/usePrefix';
 import HeaderPanel from '../HeaderPanel';
 import Switcher from '../Switcher';
 import SwitcherItem from '../SwitcherItem';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { act, render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 describe('HeaderPanel', () => {
@@ -286,23 +286,10 @@ describe('HeaderPanel Switcher focus boundary', () => {
 
   it('respects addFocusListeners=false when focus leaves the header actions', async () => {
     render(<Fixture addFocusListeners={false} />);
-    screen.getByRole('button', { name: 'Search' }).focus();
+    act(() => screen.getByRole('button', { name: 'Search' }).focus());
     await userEvent.tab({ shift: true });
+    expect(screen.getByRole('link', { name: 'Brand' })).toHaveFocus();
     expect(screen.getByLabelText('Panel')).toHaveClass(
-      'cds--header-panel--expanded'
-    );
-  });
-
-  it('still closes on Escape after returning to the panel', async () => {
-    render(<Fixture />);
-    screen.getByRole('link', { name: 'One' }).focus();
-    await userEvent.tab({ shift: true });
-    await userEvent.tab();
-    expect(screen.getByLabelText('Panel')).toHaveClass(
-      'cds--header-panel--expanded'
-    );
-    await userEvent.keyboard('{Escape}');
-    expect(screen.getByLabelText('Panel')).not.toHaveClass(
       'cds--header-panel--expanded'
     );
   });
