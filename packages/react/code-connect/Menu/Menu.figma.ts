@@ -1,16 +1,15 @@
 // url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=31131-96397&t=OdgMrt4NDVwZpNSx-4
-// source=https://github.com/carbon-design-system/carbon/blob/main/packages/web-components/src/components/menu/menu.ts
-// component=cds-menu
+// source=https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Menu/Menu.tsx
+// component=Menu
 
 /**
- * Copyright IBM Corp. 2026
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import figma from 'figma';
-import { renderStringAttribute } from '../template-helpers';
 
 const instance = figma.selectedInstance;
 const size = instance.getEnum('Size', {
@@ -25,15 +24,14 @@ const children = instance
   )
   .map((child) => child.executeTemplate().example);
 
-// Menu uses Lit's default menualignment attribute, unlike MenuButton.
 export default {
-  id: 'cds-menu',
-  imports: ["import '@carbon/web-components/es/components/menu/index.js'"],
-  example: figma.code`<cds-menu label="Actions" menualignment="bottom" open${renderStringAttribute(
+  id: 'Menu',
+  imports: ["import { Menu } from '@carbon/react';"],
+  example: figma.code`<Menu open label="Actions"${figma.helpers.react.renderProp(
     'size',
     size
   )}>
   ${children}
-</cds-menu>`,
+</Menu>`,
   metadata: { nestable: true },
 };
