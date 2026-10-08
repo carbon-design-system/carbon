@@ -1,0 +1,67 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type' as *;
+// ALIAS_STORY_STYLE_CONFIG is a Vite alias used in this repo's Storybook and
+// example-app builds. It resolves to the correct config entry point so that
+// $pkg-prefix picks up the dev prefix automatically (e.g. "dev-prefix--c4p"
+// in Storybook dev mode, "c4p" in production).
+//
+// In your own project, replace this @use with a direct import from the styles
+// package and hard-code your prefix if needed:
+//
+//   @use '@carbon/ibm-products-styles/scss/global/styles/project-settings'
+//     as c4p-settings;
+//
+// Then use the variable the same way:
+//   .#{c4p-settings.$pkg-prefix}--add-select__next-column { ... }
+//
+// Or simply hard-code the default prefix directly:
+//   .c4p--add-select__next-column { ... }
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
+
+// Multi Select With Scroll Pattern Component Styles
+.multi-select-with-scroll-pattern {
+  .#{c4p-settings.$pkg-prefix}--add-select__next-column {
+    padding-block-start: 0;
+  }
+  // ── Scroll-hint spacer ────────────────────────────────────────────────────
+  // This spacer sits at the bottom of the scroll container and adds just enough
+  // extra padding so that approximately half of the next row is visible above
+  // the tearsheet footer bar — hinting to the user that more items are below.
+  // Value: ~24px ≈ half of the standard 48px row height ($spacing-09).
+  &__scroll-hint-spacer {
+    block-size: calc(#{$spacing-09} / 2);
+  }
+
+  // ── No results state ──────────────────────────────────────────────────────
+  &__no-results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-07;
+    text-align: center;
+
+    h4 {
+      font-weight: 600;
+      margin-block-end: $spacing-03;
+    }
+
+    p {
+      color: var(--cds-text-secondary);
+    }
+  }
+
+  // ── Toast notification positioning ───────────────────────────────────────
+  &__notification {
+    position: fixed;
+    z-index: 9000;
+    inset-block-start: $spacing-09;
+    inset-inline-end: $spacing-05;
+  }
+}

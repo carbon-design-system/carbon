@@ -1,0 +1,179 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/theme' as *;
+
+// Add Single Item From Hierarchy Pattern Component Styles
+.add-single-item-from-hierarchy-pattern {
+  // No results state
+  &__no-results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-07;
+    text-align: center;
+
+    h4 {
+      @include type-style('heading-03');
+
+      margin-block-end: $spacing-03;
+    }
+
+    p {
+      @include type-style('body-01');
+
+      color: $text-secondary;
+    }
+  }
+
+  // Side panel styles
+  &__side-panel {
+    padding: $spacing-05;
+    block-size: 100%;
+    overflow-y: auto;
+  }
+
+  &__side-panel-title {
+    @include type-style('heading-03');
+
+    color: $text-primary;
+    margin-block-end: $spacing-05;
+  }
+
+  &__side-panel-content {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-05;
+  }
+
+  &__side-panel-header {
+    display: flex;
+    align-items: flex-start;
+    padding: $spacing-05;
+    border-block-end: 1px solid $border-subtle-01;
+    gap: $spacing-04;
+  }
+
+  &__side-panel-icon {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    block-size: 2rem;
+    inline-size: 2rem;
+
+    svg {
+      block-size: 100%;
+      inline-size: 100%;
+    }
+  }
+
+  &__side-panel-title-section {
+    flex: 1;
+    min-inline-size: 0;
+  }
+
+  &__side-panel-item-title {
+    @include type-style('heading-02');
+
+    margin: 0;
+    color: $text-primary;
+    margin-block-end: $spacing-02;
+    word-wrap: break-word;
+  }
+
+  &__side-panel-item-subtitle {
+    @include type-style('label-01');
+
+    margin: 0;
+    color: $text-secondary;
+  }
+
+  &__side-panel-section {
+    display: flex;
+    flex-direction: column;
+    padding: $spacing-05;
+    gap: $spacing-03;
+  }
+
+  &__side-panel-section-title {
+    @include type-style('label-01');
+
+    margin: 0;
+    color: $text-secondary;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  &__side-panel-description {
+    @include type-style('body-01');
+
+    // Limit to 4 lines as per design
+    display: -webkit-box;
+    overflow: hidden;
+    margin: 0;
+    -webkit-box-orient: vertical;
+    color: $text-primary;
+    -webkit-line-clamp: 4;
+    line-height: 1.5;
+  }
+
+  &__side-panel-details {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-03;
+  }
+
+  &__side-panel-detail-item {
+    @include type-style('body-01');
+
+    display: flex;
+    color: $text-primary;
+    gap: $spacing-02;
+  }
+
+  &__side-panel-detail-key {
+    color: $text-secondary;
+    font-weight: 600;
+  }
+
+  &__side-panel-detail-value {
+    color: $text-primary;
+  }
+
+  &__side-panel-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-03;
+  }
+
+  // Empty state styling
+  &__empty-state {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-07;
+    text-align: center;
+  }
+
+  &__empty-state-text {
+    @include type-style('body-01');
+
+    margin: 0;
+    color: $text-secondary;
+  }
+
+  // Toast notification positioning
+  .notification {
+    position: fixed;
+    z-index: 9000;
+    inset-block-end: $spacing-09;
+    inset-inline-end: $spacing-05;
+  }
+}
