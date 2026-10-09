@@ -1,0 +1,62 @@
+/*
+* Copyright IBM Corp. 2025, 2026
+*
+* This source code is licensed under the Apache-2.0 license found in the
+* LICENSE file in the root directory of this source tree.
+*/
+
+/* Carbon settings. */
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/themes';
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles';
+
+$prefix: 'c4p';
+$carbon-prefix: 'cds';
+
+$block-class: #{$prefix}--import-modal;
+
+:root {
+  @include theme.theme(themes.$white);
+  background-color: var(--cds-background);
+  color: var(--cds-text-primary);
+}
+
+.#{$block-class} {
+  .#{$block-class}__body-container {
+    padding-block: unset;
+  }
+
+  .#{$block-class}__label {
+    margin-block-start: $spacing-05;
+    margin-block-end: $spacing-03;
+  }
+
+  .#{$block-class}__input-group {
+    display: flex;
+    align-items: flex-end;
+
+    cds-text-input {
+      flex: 1;
+    }
+  }
+
+  .#{$block-class}__import-button {
+    margin-inline-start: $spacing-03;
+    flex-shrink: 0;
+  }
+
+  .#{$block-class}__file-container {
+    margin-block-start: $spacing-05;
+  }
+
+  .#{$block-class}__helper-text {
+    margin-block-end: $spacing-03;
+    color: var(--cds-text-secondary);
+  }
+
+  .#{$block-class}__file-uploader-item {
+    max-inline-size: none;
+    margin-block-end: 0;
+  }
+}
