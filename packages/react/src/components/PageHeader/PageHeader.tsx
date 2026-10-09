@@ -215,14 +215,19 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
       // breadcrumbBarHeight (40px) + any tabBar (40px) + shell offset = stickyTopHeight.
       // We add a small buffer (4px) to avoid false positives at exact boundary.
       const breadcrumbBarHeight =
-        refs?.contentRef?.current
-          ?.closest(`.cds--page-header__next`)
-          ?.querySelector(`.cds--page-header__breadcrumb-bar`)?.offsetHeight ??
-        40;
+        (
+          refs?.contentRef?.current
+            ?.closest(`.cds--page-header__next`)
+            ?.querySelector(
+              `.cds--page-header__breadcrumb-bar`
+            ) as HTMLElement | null
+        )?.offsetHeight ?? 40;
       const tabBarHeight =
-        refs?.contentRef?.current
-          ?.closest(`.cds--page-header__next`)
-          ?.querySelector(`.cds--page-header__tab-bar`)?.offsetHeight ?? 0;
+        (
+          refs?.contentRef?.current
+            ?.closest(`.cds--page-header__next`)
+            ?.querySelector(`.cds--page-header__tab-bar`) as HTMLElement | null
+        )?.offsetHeight ?? 0;
       const stickyTopHeight =
         totalHeaderOffset + breadcrumbBarHeight + tabBarHeight + 4;
 
