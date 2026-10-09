@@ -45,7 +45,7 @@ const sharedArgTypes = {
   warn: { control: { type: 'boolean' } },
   warnText: { control: { type: 'text' } },
   size: {
-    options: ['sm', 'md', 'lg'],
+    options: ['xs', 'sm', 'md', 'lg'],
     control: { type: 'select' },
   },
   label: { control: { type: 'text' } },

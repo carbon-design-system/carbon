@@ -18,10 +18,24 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/number-input/index';
 @use '@carbon/styles/scss/components/fluid-number-input' as *;
 @use '@carbon/styles/scss/utilities/ai-gradient' as *;
+@use '@carbon/styles/scss/utilities/layout' as *;
+@use '@carbon/styles/scss/utilities/layout';
 @use '@carbon/styles/scss/spacing' as *;
+
+/// Space between the AI label and each of the rule dividers surrounding it,
+/// 8px for `xs` and `sm` and 16px for `md`, + 1px to account for the divider itself
+$-ai-label-gap: clamp(
+  to-rem(9px),
+  layout.size('height') - $spacing-06 + to-rem(1px),
+  to-rem(17px)
+);
+
+@include emit-layout-context-classes();
 
 :host(#{$prefix}-number-input),
 :host(#{$prefix}-number-input-skeleton) {
+  @include emit-layout-tokens();
+
   // the base text-input class has a 100% so we need to propagate it up to the host element
   display: flex;
   flex-direction: column;
@@ -67,7 +81,7 @@ $css--plex: true !default;
   ::slotted(#{$prefix}-slug) {
     position: absolute;
     inset-block-start: 50%;
-    inset-inline-end: $spacing-12;
+    inset-inline-end: calc(2 * layout.size('height') + #{$-ai-label-gap});
   }
   ::slotted(#{$prefix}-ai-label:not([revert-active])),
   ::slotted(#{$prefix}-slug:not([revert-active])) {
@@ -85,7 +99,7 @@ $css--plex: true !default;
       block-size: 100%;
       content: '';
       inline-size: to-rem(1px);
-      inset-inline-start: -#{$spacing-05};
+      inset-inline-start: calc(-1 * #{$-ai-label-gap});
 
       @if flags.enabled('enable-v12-release') {
         display: none;
@@ -104,8 +118,6 @@ $css--plex: true !default;
 }
 :host(#{$prefix}-number-input[ai-label]) input {
   @include ai-gradient;
-
-  padding-inline-end: to-rem(145px);
 
   @if flags.enabled('enable-v12-release') {
     // Reset the bottom-edge color override from @include ai-gradient so the

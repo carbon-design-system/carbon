@@ -56,6 +56,7 @@ const actions = html`
 `;
 
 const sizes = {
+  [`Extra small size (${INPUT_SIZE.EXTRA_SMALL})`]: INPUT_SIZE.EXTRA_SMALL,
   [`Small size (${INPUT_SIZE.SMALL})`]: INPUT_SIZE.SMALL,
   [`Medium size (${INPUT_SIZE.MEDIUM})`]: INPUT_SIZE.MEDIUM,
   [`Large size (${INPUT_SIZE.LARGE})`]: INPUT_SIZE.LARGE,
