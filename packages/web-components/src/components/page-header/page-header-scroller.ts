@@ -95,8 +95,12 @@ export class PageHeaderScroller extends CDSButton {
   }
 
   private _handleScroller = () => {
-    const { root, fullyCollapsed } = this.context;
-    const contentElement = root.querySelector(`${prefix}-page-header-content`);
+    const { root, fullyCollapsed } = this.context ?? {};
+    const searchRoot: Element | null =
+      root ?? this.closest(`${prefix}-page-header`);
+    const contentElement = searchRoot?.querySelector<HTMLElement>(
+      `${prefix}-page-header-content`
+    );
     if (!contentElement) {
       return;
     }
