@@ -25,6 +25,7 @@ import { mergeRefs } from '../../../tools/mergeRefs';
 import { useId } from '../../../internal/useId';
 import { usePrefix } from '../../../internal/usePrefix';
 import { useAttachedMenu } from '../../../internal/useAttachedMenu';
+import { useSafeFloatingRefs } from '../../../internal/useSafeFloatingRefs';
 import { deprecate } from '../../../prop-types/deprecate';
 import { deprecateValuesWithin } from '../../../prop-types/deprecateValuesWithin';
 import { mapPopoverAlign } from '../../../tools/mapPopoverAlign';
@@ -193,6 +194,7 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
       // enabled, floating-ui will not be used
     );
 
+    const { setFloatingSafe, setReferenceSafe } = useSafeFloatingRefs(refs);
     const id = useId('overflowmenu');
     const prefix = usePrefix();
 
@@ -248,7 +250,7 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
       size !== defaultSize && `${prefix}--layout--size-${size}`
     );
 
-    const floatingRef = mergeRefs(triggerRef, refs.setReference);
+    const floatingRef = mergeRefs(triggerRef, setReferenceSafe);
 
     return (
       <div
@@ -279,7 +281,7 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
         </IconButton>
         <Menu
           containerRef={triggerRef}
-          ref={refs.setFloating}
+          ref={setFloatingSafe}
           menuAlignment={menuAlignment}
           className={menuClasses}
           id={id}
