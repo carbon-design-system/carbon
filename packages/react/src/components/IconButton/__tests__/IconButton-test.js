@@ -9,8 +9,31 @@ import { Edit } from '@carbon/icons-react';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { IconButton } from '../';
+import { FeatureFlags } from '../../FeatureFlags';
 
 describe('IconButton', () => {
+  it('should auto align its tooltip when `enable-v12-autoalign` is enabled', () => {
+    const { container } = render(
+      <FeatureFlags enableV12Autoalign>
+        <IconButton label="test">
+          <Edit />
+        </IconButton>
+      </FeatureFlags>
+    );
+    expect(container.firstChild).toHaveClass('cds--popover--auto-align');
+  });
+
+  it('should not auto align its tooltip when `autoAlign={false}` overrides the flag', () => {
+    const { container } = render(
+      <FeatureFlags enableV12Autoalign>
+        <IconButton label="test" autoAlign={false}>
+          <Edit />
+        </IconButton>
+      </FeatureFlags>
+    );
+    expect(container.firstChild).not.toHaveClass('cds--popover--auto-align');
+  });
+
   it('should support labelling with label', () => {
     render(
       <IconButton label="edit">

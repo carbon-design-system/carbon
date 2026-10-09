@@ -762,3 +762,49 @@ describe('cds-popover autoAlignBoundary', () => {
     expect(resolvedBoundary).to.have.property('height').that.is.a('number');
   });
 });
+
+describe('cds-popover enable-v12-autoalign', () => {
+  it('should not auto align by default', async () => {
+    const el = await fixture(html`<cds-popover></cds-popover>`);
+    expect(el.autoalign).to.be.false;
+    expect(el).not.to.have.attribute('autoalign');
+  });
+
+  it('should auto align by default when the flag is enabled', async () => {
+    const wrapper = await fixture(html`
+      <feature-flags enable-v12-autoalign>
+        <cds-popover></cds-popover>
+      </feature-flags>
+    `);
+    const el = wrapper.querySelector('cds-popover');
+    expect(el.autoalign).to.be.true;
+    expect(el).to.have.attribute('autoalign');
+  });
+
+  it('should be enabled by enable-v12-release', async () => {
+    const wrapper = await fixture(html`
+      <feature-flags enable-v12-release>
+        <cds-popover></cds-popover>
+      </feature-flags>
+    `);
+    expect(wrapper.querySelector('cds-popover').autoalign).to.be.true;
+  });
+
+  it('should let autoalign="false" override the flag', async () => {
+    const wrapper = await fixture(html`
+      <feature-flags enable-v12-autoalign>
+        <cds-popover autoalign="false"></cds-popover>
+      </feature-flags>
+    `);
+    expect(wrapper.querySelector('cds-popover').autoalign).to.be.false;
+  });
+
+  it('should let the autoalign property override the flag', async () => {
+    const wrapper = await fixture(html`
+      <feature-flags enable-v12-autoalign>
+        <cds-popover .autoalign=${false}></cds-popover>
+      </feature-flags>
+    `);
+    expect(wrapper.querySelector('cds-popover').autoalign).to.be.false;
+  });
+});

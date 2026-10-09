@@ -23,6 +23,10 @@ import Caution from '@carbon/icons/es/caution/index.js';
 import CircleFill from '@carbon/icons/es/circle-fill/index.js';
 import CircleStroke from '@carbon/icons/es/circle-stroke/index.js';
 import { SHAPE_INDICATOR_KIND } from './defs';
+import {
+  AutoAlignController,
+  autoAlignConverter,
+} from '../../globals/controllers/auto-align-controller';
 
 /**
  * Custom incomplete icon implementation.
@@ -76,8 +80,10 @@ class CDSShapeIndicator extends LitElement {
   /**
    * Will auto-align the tooltip in compact mode
    */
-  @property({ type: Boolean, reflect: false })
-  autoalign = false;
+  @property({ type: Boolean, reflect: false, converter: autoAlignConverter })
+  autoalign?: boolean;
+
+  protected _autoAlignController = new AutoAlignController(this);
 
   /**
    * When true, displays only the shape with the label in a tooltip
