@@ -29,7 +29,7 @@ const blockClass = `c4p--apikey-modal`;
 /**
  * GenerateApiKeyModalError.
  *
- * @element generate-api-key-modal-error
+ * @element generate-apikey-modal-error
  *
  * */
 

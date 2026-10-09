@@ -29,7 +29,7 @@ const blockClass = `c4p--apikey-modal`;
 /**
  * EditApiKeyModalError.
  *
- * @element edit-api-key-modal-error
+ * @element edit-apikey-modal-error
  *
  * */
 
@@ -275,7 +275,7 @@ class EditApiKeyModalError extends HostListenerMixin(LitElement) {
           <cds-modal-footer-button
             ?disabled=${this.isPrimaryButtonDisabled()}
             @click=${this._submitHandler}
-            >${this.apiKeyLoaded ? Copy16({ slot: 'icon' }) : 'Save API key'}
+            >${this.apiKeyLoaded ? html`Copy ${iconLoader(Copy16, { slot: 'icon' })}` : 'Save API key'}
           </cds-modal-footer-button>
         </cds-modal-footer>
       </cds-modal>

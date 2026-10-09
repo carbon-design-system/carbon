@@ -1,4 +1,3 @@
-// cspell:words litcss
 /**
  *
  * Copyright IBM Corp. 2025, 2026

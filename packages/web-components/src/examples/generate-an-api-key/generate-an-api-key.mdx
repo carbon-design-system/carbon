@@ -60,6 +60,11 @@ import '@carbon/web-components/es/components/inline-loading/index.js';
 import '@carbon/web-components/es/components/form-group/index.js';
 import '@carbon/web-components/es/components/radio-button/index.js';
 import '@carbon/web-components/es/components/toggle/index.js';
+import CheckmarkFilled16 from '@carbon/icons/es/checkmark--filled/16.js';
+import ErrorFilled16 from '@carbon/icons/es/error--filled/16.js';
+import InformationFilled16 from '@carbon/icons/es/information--filled/16.js';
+import Copy16 from '@carbon/icons/es/copy/16.js';
+import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
 ```
 
 ### HTML
@@ -107,7 +112,7 @@ import '@carbon/web-components/es/components/toggle/index.js';
     ` : null} ${this.copyError || this.error ? html`
     <div>
       <div>
-        ${ErrorFilled16({ slot: 'icon'})}
+        ${iconLoader(ErrorFilled16, { slot: 'icon' })}
       </div>
       <p
         class="${`${blockClass}__messaging-text`}"
@@ -119,7 +124,7 @@ import '@carbon/web-components/es/components/toggle/index.js';
     </div>
     ` : null} ${this.apiKeyLoaded ? html`
     <div>
-      ${InformationFilled16({ slot: 'icon', })} ${this.hasDownloadLink ? html`
+      ${iconLoader(InformationFilled16, { slot: 'icon' })} ${this.hasDownloadLink ? html`
       <api-key-downloader
         apiKey="${this.apiKey}"
         fileName="apikey"
@@ -140,7 +145,7 @@ import '@carbon/web-components/es/components/toggle/index.js';
     </div>
     ` : null} ${this.editSuccess || this.apiKeyLoaded ? html`
     <div>
-      ${CheckmarkFilled16({ slot: 'icon'})}
+      ${iconLoader(CheckmarkFilled16, { slot: 'icon' })}
       <p
         role="alert"
         aria-live="assertive"
@@ -159,8 +164,7 @@ import '@carbon/web-components/es/components/toggle/index.js';
     <cds-modal-footer-button
       ?disabled="${this.isPrimaryButtonDisabled()}"
       @click="${this._submitHandler}"
-      >${this.apiKeyLoaded ? html `Copy ${Copy16({ slot: 'icon' })}` : 'Generate
-      API key'}
+      >${this.apiKeyLoaded ? html`Copy ${iconLoader(Copy16, { slot: 'icon' })}` : 'Generate API key'}
     </cds-modal-footer-button>
   </cds-modal-footer>
 </cds-modal>

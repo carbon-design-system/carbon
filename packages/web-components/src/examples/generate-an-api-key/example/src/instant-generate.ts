@@ -67,10 +67,6 @@ class InstantGenerate extends HostListenerMixin(LitElement) {
 
   @state()
   open: boolean = false;
-  /**
-   * Handles `submit` in import modal.
-   *
-   */
 
   private apiKey: string = '123-456-789';
   private nameRequired = false;
