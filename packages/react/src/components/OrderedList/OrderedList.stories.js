@@ -67,7 +67,8 @@ export const Default = (args) => (
   </OrderedList>
 );
 
-export const Nested = ({ nested, ...listArgs }) => {
+export const Nested = (args) => {
+  const { nested, ...listArgs } = args;
   return (
     <OrderedList {...listArgs}>
       <ListItem>
@@ -99,7 +100,8 @@ Nested.argTypes = {
   },
 };
 
-export const NativeListStyles = ({ nested, ...listArgs }) => {
+export const NativeListStyles = (args) => {
+  const { nested, ...listArgs } = args;
   return (
     <OrderedList {...listArgs}>
       <ListItem>Ordered List level 1</ListItem>

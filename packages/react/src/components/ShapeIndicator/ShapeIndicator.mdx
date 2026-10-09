@@ -43,7 +43,12 @@ function ExampleComponent() {
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig({ story: ShapeIndicatorStories.Default }),
+        stackblitzPrefillConfig({
+          story: ShapeIndicatorStories.Default,
+          customImports: [
+            "import { preview__ShapeIndicator as ShapeIndicator } from '@carbon/react';",
+          ],
+        }),
     },
   ]}
 />

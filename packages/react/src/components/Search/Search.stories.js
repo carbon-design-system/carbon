@@ -14,18 +14,20 @@ import Search from '.';
 import SearchSkeleton from './Search.Skeleton';
 import mdx from './Search.mdx';
 
+const sharedArgs = {
+  closeButtonLabelText: 'Clear search input',
+  disabled: false,
+  defaultWidth: 800,
+  labelText: 'Site search',
+  placeholder: 'Placeholder text',
+  size: 'md',
+  type: 'search',
+};
+
 export default {
   title: 'Components/Search',
   component: Search,
-  args: {
-    closeButtonLabelText: 'Clear search input',
-    disabled: false,
-    defaultWidth: 800,
-    labelText: 'Site search',
-    placeholder: 'Placeholder text',
-    size: 'md',
-    type: 'search',
-  },
+  args: sharedArgs,
   argTypes: {
     light: {
       table: {
@@ -98,47 +100,63 @@ const expandableParameters = {
   },
 };
 
-export const Expandable = ({ defaultWidth, ...searchArgs }) => (
-  <div style={{ marginTop: '25px', width: defaultWidth }}>
-    <ExpandableSearch id="search-expandable-1" {...searchArgs} />
+export const Expandable = (args) => (
+  <div style={{ marginTop: '25px', width: args.defaultWidth }}>
+    <ExpandableSearch id="search-expandable-1" {...args} />
   </div>
 );
+Expandable.args = {
+  ...sharedArgs,
+};
 Expandable.parameters = { ...expandableParameters };
 
-export const _WithLayer = ({ defaultWidth, ...searchArgs }) => (
+export const _WithLayer = (args) => (
   <WithLayer>
     {(layer) => (
-      <div style={{ width: defaultWidth }}>
-        <Search id={`search-${layer}`} {...searchArgs} />
+      <div style={{ width: args.defaultWidth }}>
+        <Search id={`search-${layer}`} {...args} />
       </div>
     )}
   </WithLayer>
 );
+_WithLayer.args = {
+  ...sharedArgs,
+};
 _WithLayer.parameters = { ...defaultParameters };
 
-export const ExpandableWithLayer = ({ defaultWidth, ...searchArgs }) => (
+export const ExpandableWithLayer = (args) => (
   <WithLayer>
     {(layer) => (
-      <div style={{ marginTop: '25px', width: defaultWidth }}>
-        <ExpandableSearch id={`search-expandable-${layer}`} {...searchArgs} />
+      <div style={{ marginTop: '25px', width: args.defaultWidth }}>
+        <ExpandableSearch id={`search-expandable-${layer}`} {...args} />
       </div>
     )}
   </WithLayer>
 );
+ExpandableWithLayer.args = {
+  ...sharedArgs,
+};
 ExpandableWithLayer.parameters = { ...expandableParameters };
 
-export const Default = ({ defaultWidth, ...searchArgs }) => (
-  <div style={{ width: defaultWidth }}>
-    <Search id="search-default-1" {...searchArgs} />
+export const Default = (args) => (
+  <div style={{ width: args.defaultWidth }}>
+    <Search id="search-default-1" {...args} />
   </div>
 );
+Default.args = {
+  ...sharedArgs,
+};
 Default.parameters = { ...defaultParameters };
 
-export const Skeleton = ({ size, defaultWidth }) => (
-  <div style={{ width: defaultWidth }}>
-    <SearchSkeleton size={size} />
+export const Skeleton = (args) => (
+  <div style={{ width: args.defaultWidth }}>
+    <SearchSkeleton size={args.size} />
   </div>
 );
+Skeleton.args = {
+  defaultWidth: 800,
+  size: 'md',
+};
 Skeleton.argTypes = {
   size: {
     description: 'Specify the size of the SearchSkeleton',
