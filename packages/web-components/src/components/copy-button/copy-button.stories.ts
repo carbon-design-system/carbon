@@ -35,7 +35,7 @@ const defaultArgs = {
   feedback: 'Copied!',
   feedbackTimeout: 2000,
   iconDescription: 'Copy to clipboard',
-  kind: BUTTON_KIND.GHOST,
+  kind: '',
   size: ICON_BUTTON_SIZE.MEDIUM,
 };
 
@@ -68,7 +68,7 @@ const argTypes = {
   kind: {
     control: 'select',
     description: 'Specify the kind of Button you want to create.',
-    options: Object.values(BUTTON_KIND),
+    options: ['', ...Object.values(BUTTON_KIND)],
   },
   size: {
     control: 'select',
