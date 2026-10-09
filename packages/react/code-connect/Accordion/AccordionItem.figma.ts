@@ -1,4 +1,4 @@
-// url=https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=2154-8478&mode=design&t=0hF8pirV0i9mofd1-4
+// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?type=design&node-id=2154-8478&mode=design&t=0hF8pirV0i9mofd1-4
 // source=https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Accordion/AccordionItem.tsx
 // component=AccordionItem
 

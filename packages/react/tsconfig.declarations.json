@@ -13,6 +13,8 @@
     "**/*.mdx",
     "**/*.snap",
     ".storybook/**/*",
-    "icons/**/*"
+    "icons/**/*",
+    "src/examples/**/example/**",
+    "src/examples/**/*"
   ]
 }
