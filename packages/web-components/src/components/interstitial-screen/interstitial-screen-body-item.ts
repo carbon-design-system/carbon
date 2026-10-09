@@ -11,10 +11,11 @@ import HostListenerMixin from '../../globals/mixins/host-listener';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 import styles from './interstitial-screen-body-item.scss?lit';
-import { property } from 'lit/decorators.js';
+import { property, state } from 'lit/decorators.js';
+import { consume } from '@lit/context';
 import {
-  interstitialDetailsSignal,
-  updateInterstitialDetailsSignal,
+  interstitialContext,
+  InterstitialContextValue,
 } from './interstitial-screen-context';
 import { registerFocusableContainers } from '../../utilities/manageFocusTrap/manageFocusTrap';
 
@@ -24,11 +25,12 @@ import { registerFocusableContainers } from '../../utilities/manageFocusTrap/man
  */
 @customElement(`${prefix}-interstitial-screen-body-item`)
 class CDSInterstitialScreenBodyItem extends HostListenerMixin(LitElement) {
-  /**
-   * This will serve the labels for each step
-   */
   @property({ reflect: true })
   stepTitle: string = '';
+
+  @consume({ context: interstitialContext, subscribe: true })
+  @state()
+  private _interstitialCtx?: InterstitialContextValue;
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected firstUpdated(_changedProperties?: PropertyValues): void {
@@ -44,17 +46,21 @@ class CDSInterstitialScreenBodyItem extends HostListenerMixin(LitElement) {
       id: this.id || stepKey,
     };
 
-    const exists = interstitialDetailsSignal
-      .get()
-      .stepDetails?.some((step) => step.stepTitle === newStep.stepTitle);
+    const currentStepDetails = this._interstitialCtx?.state?.stepDetails ?? [];
+    const exists = currentStepDetails.some(
+      (step) => step.stepTitle === newStep.stepTitle
+    );
 
     if (!exists && newStep.stepTitle) {
-      updateInterstitialDetailsSignal({ name: 'stepDetails', detail: newStep });
+      // Append to the existing stepDetails array
+      this._interstitialCtx?.setState({
+        stepDetails: [...currentStepDetails, newStep],
+      });
     }
   }
 
   render() {
-    return html` <slot @slotchange=${this.updateStepDetails}></slot> `;
+    return html`<slot @slotchange=${this.updateStepDetails}></slot>`;
   }
 
   static styles = styles;

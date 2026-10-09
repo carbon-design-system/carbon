@@ -6,7 +6,6 @@
  */
 
 import { prefix } from '../../globals/settings';
-import { coachmarkDetailsSignal } from './coachmark-context';
 
 export const handleClick = () => {
   const coachmark = document.querySelector(`${prefix}-coachmark`);
@@ -19,10 +18,11 @@ export const handleDone = () => {
 };
 
 export const handleCoachmarkOpened = () => {
-  const details = coachmarkDetailsSignal.get();
+  const coachmark = document.querySelector(`${prefix}-coachmark`);
+  const isFloating = coachmark?.hasAttribute('floating') ?? false;
 
   setTimeout(() => {
-    if (details.floating) {
+    if (isFloating) {
       // Focus on drag handle for floating coachmark
       const header = document.querySelector(`${prefix}-coachmark-header`);
       const dragHandle = header?.shadowRoot?.querySelector(
