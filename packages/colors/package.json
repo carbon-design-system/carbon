@@ -18,6 +18,7 @@
     "js/generated",
     "lib",
     "scss",
+    "tokens",
     "umd",
     "index.scss",
     "telemetry.yml"
