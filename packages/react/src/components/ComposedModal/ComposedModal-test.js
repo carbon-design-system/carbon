@@ -849,6 +849,50 @@ describe.each([
     expect(onClose).toHaveBeenCalled();
   });
 
+  it('should close a passive modal on the second Escape press', async () => {
+    const ModalExample = () => {
+      const [open, setOpen] = useState(false);
+
+      return (
+        <>
+          <button type="button" onClick={() => setOpen(true)}>
+            Open modal
+          </button>
+          <Component
+            data-testid="modal"
+            open={open}
+            onClose={() => setOpen(false)}>
+            <ModalHeader>Modal header</ModalHeader>
+            <ModalBody>Modal body</ModalBody>
+          </Component>
+        </>
+      );
+    };
+
+    render(<ModalExample />);
+
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+
+    await userEvent.click(screen.getByRole('button', { name: 'Open modal' }));
+
+    expect(screen.getByRole('dialog')).toBeVisible();
+    expect(screen.getByRole('button', { name: 'Close' })).toHaveFocus();
+    expect(screen.getByRole('tooltip')).toBeInTheDocument();
+
+    await userEvent.keyboard('{Escape}');
+
+    expect(screen.getByRole('dialog')).toBeVisible();
+    expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+
+    await userEvent.keyboard('{Escape}');
+
+    await waitFor(() => {
+      expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    });
+    expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+  });
+
   it('should handle ESC key with AILabel - first ESC closes popover, second ESC closes modal', async () => {
     const onClose = jest.fn();
     const aiLabel = (
