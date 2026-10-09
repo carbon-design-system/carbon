@@ -9,7 +9,7 @@ import { expect, fixture, html } from '@open-wc/testing';
 import '@carbon/web-components/es/components/progress-bar/index.js';
 
 describe('cds-progress-bar', () => {
-  it('should update the bar transform when progress changes', async () => {
+  it('should update the bar size when progress changes', async () => {
     const el = await fixture(html`
       <cds-progress-bar max="200" value="50"></cds-progress-bar>
     `);
@@ -17,14 +17,15 @@ describe('cds-progress-bar', () => {
 
     expect(el._bar).to.exist;
     expect(el._bar).to.equal(bar);
-    expect(bar.style.transform).to.equal('scaleX(0.25)');
+    expect(bar.style.inlineSize).to.equal('25%');
 
     el.value = 100;
     await el.updateComplete;
-    expect(bar.style.transform).to.equal('scaleX(0.5)');
+    expect(bar.style.inlineSize).to.equal('50%');
 
     el.status = 'finished';
     await el.updateComplete;
     expect(bar.style.transform).to.equal('none');
+    expect(bar.style.inlineSize).to.equal('');
   });
 });

@@ -145,8 +145,6 @@ exports[`@carbon/motion public API Sass module index 1`] = `
 exports[`@carbon/motion public API published files 1`] = `
 [
   "README.md",
-  "docs/sass.md",
-  "docs/surfaces.md",
   "es/index.js",
   "index.scss",
   "js/generated/surfaces.d.ts",
@@ -160,22 +158,7 @@ exports[`@carbon/motion public API published files 1`] = `
   "package.json",
   "scss/generated/_surfaces.scss",
   "scss/generated/_tokens.scss",
-  "src/dtcg/motion.json",
-  "src/dtcg/surfaces.json",
-  "src/index.ts",
-  "src/surfaces.ts",
-  "src/tokens.ts",
-  "style-dictionary/formats/js-surfaces.js",
-  "style-dictionary/formats/js-tokens.js",
-  "style-dictionary/formats/scss-surfaces.js",
-  "style-dictionary/formats/scss-tokens.js",
-  "style-dictionary/sd.config.js",
-  "style-dictionary/transforms/cubic-bezier.js",
-  "style-dictionary/transforms/duration.js",
-  "style-dictionary/utils/dts-type-literal.js",
   "telemetry.yml",
-  "tsconfig.json",
-  "tsconfig.types.json",
   "umd/index.js",
 ]
 `;
