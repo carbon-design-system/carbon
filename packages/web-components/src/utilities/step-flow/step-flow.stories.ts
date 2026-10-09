@@ -65,5 +65,4 @@ export const SidePanel = {
 
 export default {
   title: 'Utilities/Step flows',
-  tags: ['ibm-products-migrated'],
 };

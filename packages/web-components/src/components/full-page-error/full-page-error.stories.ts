@@ -241,7 +241,6 @@ export const Error404 = {
 const meta: Meta = {
   title: 'Components/FullPageError',
   component: 'cds-full-page-error',
-  tags: ['ibm-products-migrated'],
 };
 
 export default meta;

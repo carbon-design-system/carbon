@@ -437,7 +437,6 @@ export const CustomHeader = {
 const meta = {
   title: 'Components/SidePanel',
   component: 'cds-side-panel',
-  tags: ['ibm-products-migrated'],
 };
 
 export default meta;

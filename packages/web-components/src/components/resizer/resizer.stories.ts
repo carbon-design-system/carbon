@@ -12,7 +12,6 @@ import { iconLoader } from '../../globals/internal/icon-loader';
 
 const meta = {
   title: 'Utilities/Resizer',
-  tags: ['ibm-products-migrated'],
   parameters: {
     layout: 'fullscreen',
   },
