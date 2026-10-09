@@ -352,11 +352,11 @@ exports[`@carbon/layout public API Sass module scss/utilities 1`] = `
 exports[`@carbon/layout public API published files 1`] = `
 [
   "README.md",
-  "docs/sass.md",
   "es/index.js",
   "index.scss",
   "js/generated/layout-tokens.d.ts",
   "js/generated/layout-tokens.js",
+  "lib/__tests__/tokens-test.d.ts",
   "lib/index.d.ts",
   "lib/index.js",
   "lib/tokens.d.ts",
@@ -373,16 +373,7 @@ exports[`@carbon/layout public API published files 1`] = `
   "scss/generated/_size.scss",
   "scss/generated/_spacing.scss",
   "scss/modules/_convert.scss",
-  "src/dtcg/README.md",
-  "src/dtcg/layout.json",
-  "src/index.ts",
-  "src/tokens.ts",
-  "style-dictionary/formats/js-layout.js",
-  "style-dictionary/formats/scss-layout.js",
-  "style-dictionary/sd.config.js",
   "telemetry.yml",
-  "tsconfig.json",
-  "tsconfig.types.json",
   "umd/index.js",
 ]
 `;
