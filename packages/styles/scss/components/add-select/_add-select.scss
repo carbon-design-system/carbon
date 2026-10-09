@@ -632,91 +632,33 @@
   // ──────────────────────────────────────────────────────────────
   // AddSelectItemPanel - Item details panel
   // ──────────────────────────────────────────────────────────────
-  @keyframes add-select-item-panel-entrance {
-    0% {
-      opacity: 0;
-      transform: translateX(100%);
-    }
-
-    100% {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  @keyframes add-select-item-panel-exit {
-    0% {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
-    100% {
-      opacity: 0;
-      transform: translateX(100%);
-    }
-  }
-
-  @keyframes add-select-item-panel-entrance-reduced {
-    0% {
-      opacity: 0;
-    }
-
-    100% {
-      opacity: 1;
-    }
-  }
-
-  @keyframes add-select-item-panel-exit-reduced {
-    0% {
-      opacity: 1;
-    }
-
-    100% {
-      opacity: 0;
-    }
-  }
-
   .#{$prefix}--add-select__item-summary-panel {
-    display: none;
+    display: flex;
     overflow: hidden;
+    flex-direction: column;
     block-size: 100%;
     inline-size: 100%;
-    transform: translateX(0);
-    transition-behavior: allow-discrete;
-    transition-duration: $duration-moderate-01;
-    transition-property: display, opacity, transform;
+    pointer-events: none;
+    transform: translateX(100%);
+    transition:
+      transform $duration-moderate-01 motion(standard, productive),
+      visibility 0s $duration-moderate-01;
+    visibility: hidden;
 
-    &--open {
-      display: flex;
-      flex-direction: column;
-      animation: add-select-item-panel-entrance $duration-moderate-01
-        motion(entrance, productive) forwards;
-
-      @starting-style {
-        opacity: 0;
-        transform: translateX(100%);
-      }
-
-      @media (prefers-reduced-motion) {
-        animation: add-select-item-panel-entrance-reduced $duration-moderate-01
-          motion(entrance, productive) forwards;
-
-        @starting-style {
-          opacity: 0;
-          transform: translateX(0);
-        }
-      }
+    @media screen and (prefers-reduced-motion: reduce) {
+      transition: visibility 0s $duration-moderate-01;
     }
 
-    &--closing {
-      display: flex;
-      flex-direction: column;
-      animation: add-select-item-panel-exit $duration-moderate-01
-        motion(exit, productive) forwards;
+    &--open {
+      pointer-events: auto;
+      transform: translateX(0);
+      transition:
+        transform $duration-moderate-01 motion(standard, productive),
+        visibility 0s 0s;
+      visibility: visible;
 
-      @media (prefers-reduced-motion) {
-        animation: add-select-item-panel-exit-reduced $duration-moderate-01
-          motion(exit, productive) forwards;
+      @media screen and (prefers-reduced-motion: reduce) {
+        transition: visibility 0s 0s;
       }
     }
 
