@@ -105,12 +105,14 @@ class CDSCard extends CDSLink {
     if (
       changed.has('clickable') ||
       changed.has('disabled') ||
-      changed.has('horizontal')
+      changed.has('horizontal') ||
+      changed.has('_hasAILabel')
     ) {
       this.cardContext = {
         clickable: this.clickable,
         disabled: this.disabled,
         horizontal: this.horizontal,
+        hasAILabel: this._hasAILabel,
       };
     }
   }
@@ -217,9 +219,11 @@ class CDSCard extends CDSLink {
       <div class=${this._cardClasses}>
         ${this._renderContent()}
         ${clickable ? this._renderClickableFooter() : nothing}
-        <slot
-          name="decorator"
-          @slotchange=${this._handleDecoratorSlotChange}></slot>
+        <div class="${prefix}--card__decorator">
+          <slot
+            name="decorator"
+            @slotchange=${this._handleDecoratorSlotChange}></slot>
+        </div>
       </div>
     `;
   }
