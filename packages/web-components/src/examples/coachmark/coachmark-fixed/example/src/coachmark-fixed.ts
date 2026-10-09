@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -185,10 +183,13 @@ export class CoachmarkFixedExample extends LitElement {
           });
         }
         
-        // When coachmark opens, focus Next button
+        // c4p-coachmark's own focus logic runs at setTimeout(100ms) + rAF and
+        // focuses the close button. Fire after it to focus the Next button.
         setTimeout(() => {
-          (this.shadowRoot?.querySelector('.next-btn') as HTMLElement | null)?.focus();
-        }, 100);
+          requestAnimationFrame(() => {
+            (this.shadowRoot?.querySelector('.next-btn') as HTMLElement | null)?.focus();
+          });
+        }, 150);
       } else {
         // Remove is-visible class when closing
         if (contentPart) {

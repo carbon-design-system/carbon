@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -12,7 +10,7 @@ import { customElement, state } from 'lit/decorators.js';
 import { POPOVER_ALIGNMENT } from '@carbon/web-components/es/components/popover/defs.js';
 import '@carbon/web-components/es/components/button/button.js';
 import { InitCarousel, initCarousel } from '@carbon/utilities';
-import sampleImage from './_story-assets/sample-image.png';
+import sampleImage from './_example-assets/sample-image.png';
 import styles from './styles.scss?lit';
 
 // Import coachmark components
@@ -117,9 +115,13 @@ export class CoachmarkOverlayElementsExample extends LitElement {
       if (this._open) {
         // When coachmark opens, initialize tabIndex and focus Next button
         this.updateAriaHiddenTabIndex(0);
+        // c4p-coachmark's own focus logic runs at setTimeout(100ms) + rAF and
+        // focuses the close button. Fire after it to focus the Next button.
         setTimeout(() => {
-          (this.shadowRoot?.querySelector('.next-btn') as HTMLElement | null)?.focus();
-        }, 100);
+          requestAnimationFrame(() => {
+            (this.shadowRoot?.querySelector('.next-btn') as HTMLElement | null)?.focus();
+          });
+        }, 150);
       } else {
         // When coachmark closes, return focus to beacon trigger
         setTimeout(() => {
