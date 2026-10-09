@@ -86,7 +86,6 @@
     "tslib": "^2.6.3"
   },
   "devDependencies": {
-    "@carbon/ibm-products-web-components": "latest",
     "@carbon/layout": "^11.61.0",
     "@carbon/motion": "^11.54.0",
     "@juggle/resize-observer": "^3.4.0",

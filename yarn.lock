@@ -2706,7 +2706,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@carbon/web-components@workspace:packages/web-components"
   dependencies:
-    "@carbon/ibm-products-web-components": "npm:latest"
     "@carbon/icon-helpers": "npm:10.47.0"
     "@carbon/icons": "npm:^11.90.0"
     "@carbon/layout": "npm:^11.61.0"
@@ -10393,6 +10392,7 @@ __metadata:
     "@babel/runtime": "npm:^8.0.0"
     "@carbon/cli": "workspace:packages/cli"
     "@carbon/ibm-products": "npm:latest"
+    "@carbon/ibm-products-web-components": "npm:latest"
     "@commitlint/cli": "npm:^21.0.0"
     "@commitlint/config-conventional": "npm:^21.0.0"
     "@eslint/compat": "npm:^2.0.1"
