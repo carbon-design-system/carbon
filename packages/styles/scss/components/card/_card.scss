@@ -298,12 +298,24 @@
       &:first-child {
         border-end-start-radius: $border-radius-08;
         border-start-start-radius: $border-radius-08;
+
+        // Clickable card has a 1px border — inset the media radius so it sits
+        // flush inside that border without creating a visible gap.
+        .#{$prefix}--card--clickable > & {
+          border-end-start-radius: calc($border-radius-08 - 1px);
+          border-start-start-radius: calc($border-radius-08 - 1px);
+        }
       }
 
       // Media-right: clip to the card's start-end and end-end outer corners.
       &:last-child {
         border-end-end-radius: $border-radius-08;
         border-start-end-radius: $border-radius-08;
+
+        .#{$prefix}--card--clickable > & {
+          border-end-end-radius: calc($border-radius-08 - 1px);
+          border-start-end-radius: calc($border-radius-08 - 1px);
+        }
       }
     }
   }
