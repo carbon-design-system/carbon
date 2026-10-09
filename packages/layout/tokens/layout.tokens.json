@@ -1,0 +1,393 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "$description": "Layout tokens for Carbon Design System — spacing, container, icon size, fluid spacing, size, border-radius, and deprecated layout scale.",
+  "spacing": {
+    "$description": "Spacing scale based on the 8px mini-unit grid.",
+    "spacing-01": {
+      "$type": "dimension",
+      "$value": {
+        "value": 0.125,
+        "unit": "rem"
+      },
+      "$description": "Spacing token — 2px. Use for the smallest internal padding or gaps between tightly-packed elements."
+    },
+    "spacing-02": {
+      "$type": "dimension",
+      "$value": {
+        "value": 0.25,
+        "unit": "rem"
+      },
+      "$description": "Spacing token — 4px. Use for compact padding within dense components."
+    },
+    "spacing-03": {
+      "$type": "dimension",
+      "$value": {
+        "value": 0.5,
+        "unit": "rem"
+      },
+      "$description": "Spacing token — 8px. Default small spacing unit for inset padding and icon gaps."
+    },
+    "spacing-04": {
+      "$type": "dimension",
+      "$value": {
+        "value": 0.75,
+        "unit": "rem"
+      },
+      "$description": "Spacing token — 12px. Use for comfortable inset padding in small components."
+    },
+    "spacing-05": {
+      "$type": "dimension",
+      "$value": {
+        "value": 1,
+        "unit": "rem"
+      },
+      "$description": "Spacing token — 16px. Standard spacing unit; use for typical component padding and gutters."
+    },
+    "spacing-06": {
+      "$type": "dimension",
+      "$value": {
+        "value": 1.5,
+        "unit": "rem"
+      },
+      "$description": "Spacing token — 24px. Use for section padding and medium gaps between components."
+    },
+    "spacing-07": {
+      "$type": "dimension",
+      "$value": {
+        "value": 2,
+        "unit": "rem"
+      },
+      "$description": "Spacing token — 32px. Use for group separation and larger layout gaps."
+    },
+    "spacing-08": {
+      "$type": "dimension",
+      "$value": {
+        "value": 2.5,
+        "unit": "rem"
+      },
+      "$description": "Spacing token — 40px. Use for generous padding between distinct sections."
+    },
+    "spacing-09": {
+      "$type": "dimension",
+      "$value": {
+        "value": 3,
+        "unit": "rem"
+      },
+      "$description": "Spacing token — 48px. Use for large vertical rhythm and section separation."
+    },
+    "spacing-10": {
+      "$type": "dimension",
+      "$value": {
+        "value": 4,
+        "unit": "rem"
+      },
+      "$description": "Spacing token — 64px. Use for major page section gaps."
+    },
+    "spacing-11": {
+      "$type": "dimension",
+      "$value": {
+        "value": 5,
+        "unit": "rem"
+      },
+      "$description": "Spacing token — 80px. Use for hero and large feature-area spacing."
+    },
+    "spacing-12": {
+      "$type": "dimension",
+      "$value": {
+        "value": 6,
+        "unit": "rem"
+      },
+      "$description": "Spacing token — 96px. Use for very large layout separations."
+    },
+    "spacing-13": {
+      "$type": "dimension",
+      "$value": {
+        "value": 10,
+        "unit": "rem"
+      },
+      "$description": "Spacing token — 160px. Use for the largest page-level spacing needs."
+    }
+  },
+  "fluid-spacing": {
+    "$description": "Viewport-relative fluid spacing tokens.",
+    "fluid-spacing-01": {
+      "$type": "number",
+      "$value": 0,
+      "$description": "Fluid spacing token — 0. Use when no fluid spacing is required."
+    },
+    "fluid-spacing-02": {
+      "$type": "number",
+      "$value": 2,
+      "$description": "Fluid spacing token — 2vw. Use for viewport-proportional small spacing in fluid layouts.",
+      "$extensions": {
+        "com.ibm.carbon": {
+          "layout": {
+            "unit": "vw"
+          }
+        }
+      }
+    },
+    "fluid-spacing-03": {
+      "$type": "number",
+      "$value": 5,
+      "$description": "Fluid spacing token — 5vw. Use for medium fluid spacing that scales with the viewport.",
+      "$extensions": {
+        "com.ibm.carbon": {
+          "layout": {
+            "unit": "vw"
+          }
+        }
+      }
+    },
+    "fluid-spacing-04": {
+      "$type": "number",
+      "$value": 10,
+      "$description": "Fluid spacing token — 10vw. Use for large fluid spacing in full-bleed or hero sections.",
+      "$extensions": {
+        "com.ibm.carbon": {
+          "layout": {
+            "unit": "vw"
+          }
+        }
+      }
+    }
+  },
+  "container": {
+    "$description": "Interactive element container height tokens.",
+    "container-01": {
+      "$type": "dimension",
+      "$value": {
+        "value": 1.5,
+        "unit": "rem"
+      },
+      "$description": "Container height token — 24px. Minimum interactive target height for compact UI elements."
+    },
+    "container-02": {
+      "$type": "dimension",
+      "$value": {
+        "value": 2,
+        "unit": "rem"
+      },
+      "$description": "Container height token — 32px. Small interactive element height."
+    },
+    "container-03": {
+      "$type": "dimension",
+      "$value": {
+        "value": 2.5,
+        "unit": "rem"
+      },
+      "$description": "Container height token — 40px. Default interactive element height."
+    },
+    "container-04": {
+      "$type": "dimension",
+      "$value": {
+        "value": 3,
+        "unit": "rem"
+      },
+      "$description": "Container height token — 48px. Large interactive element height."
+    },
+    "container-05": {
+      "$type": "dimension",
+      "$value": {
+        "value": 4,
+        "unit": "rem"
+      },
+      "$description": "Container height token — 64px. Extra-large interactive element height."
+    }
+  },
+  "size": {
+    "$description": "Named component size tokens (xs–2xl).",
+    "size-xs": {
+      "$type": "dimension",
+      "$value": {
+        "value": 1.5,
+        "unit": "rem"
+      },
+      "$description": "Component size token — XSmall, 24px. Use for the smallest component variant."
+    },
+    "size-sm": {
+      "$type": "dimension",
+      "$value": {
+        "value": 2,
+        "unit": "rem"
+      },
+      "$description": "Component size token — Small, 32px."
+    },
+    "size-md": {
+      "$type": "dimension",
+      "$value": {
+        "value": 2.5,
+        "unit": "rem"
+      },
+      "$description": "Component size token — Medium, 40px. Default component size."
+    },
+    "size-lg": {
+      "$type": "dimension",
+      "$value": {
+        "value": 3,
+        "unit": "rem"
+      },
+      "$description": "Component size token — Large, 48px."
+    },
+    "size-xl": {
+      "$type": "dimension",
+      "$value": {
+        "value": 4,
+        "unit": "rem"
+      },
+      "$description": "Component size token — XLarge, 64px."
+    },
+    "size-2xl": {
+      "$type": "dimension",
+      "$value": {
+        "value": 5,
+        "unit": "rem"
+      },
+      "$description": "Component size token — 2XLarge, 80px."
+    }
+  },
+  "icon-size": {
+    "$description": "Icon size tokens.",
+    "icon-size-01": {
+      "$type": "dimension",
+      "$value": {
+        "value": 1,
+        "unit": "rem"
+      },
+      "$description": "Icon size token — 16px. Standard icon size for inline and UI icons."
+    },
+    "icon-size-02": {
+      "$type": "dimension",
+      "$value": {
+        "value": 1.25,
+        "unit": "rem"
+      },
+      "$description": "Icon size token — 20px. Use for slightly larger icons that need more visual weight."
+    }
+  },
+  "border-radius": {
+    "$description": "Border radius tokens for component rounding.",
+    "border-radius-00": {
+      "$type": "dimension",
+      "$value": {
+        "value": 0,
+        "unit": "px"
+      },
+      "$description": "Border radius token — 0. No rounding; use for sharp-cornered elements."
+    },
+    "border-radius-02": {
+      "$type": "dimension",
+      "$value": {
+        "value": 0.125,
+        "unit": "rem"
+      },
+      "$description": "Border radius token — 2px. Subtle rounding for small components like tags and badges."
+    },
+    "border-radius-04": {
+      "$type": "dimension",
+      "$value": {
+        "value": 0.25,
+        "unit": "rem"
+      },
+      "$description": "Border radius token — 4px. Default rounding for inputs, cards, and general components."
+    },
+    "border-radius-08": {
+      "$type": "dimension",
+      "$value": {
+        "value": 0.5,
+        "unit": "rem"
+      },
+      "$description": "Border radius token — 8px. Moderate rounding for panels, modals, and containers."
+    },
+    "border-radius-16": {
+      "$type": "dimension",
+      "$value": {
+        "value": 1,
+        "unit": "rem"
+      },
+      "$description": "Border radius token — 16px. Strong rounding for large cards or featured containers."
+    },
+    "border-radius-24": {
+      "$type": "dimension",
+      "$value": {
+        "value": 1.5,
+        "unit": "rem"
+      },
+      "$description": "Border radius token — 24px. Very rounded corners for pill-adjacent components."
+    },
+    "border-radius-max": {
+      "$type": "dimension",
+      "$value": {
+        "value": 999999,
+        "unit": "px"
+      },
+      "$description": "Border radius token — pill/fully rounded. Use for pill buttons, chips, and circular elements."
+    }
+  },
+  "layout": {
+    "$description": "Deprecated layout scale tokens. Replaced by the spacing scale — do not use in new work.",
+    "layout-01": {
+      "$type": "dimension",
+      "$value": {
+        "value": 1,
+        "unit": "rem"
+      },
+      "$description": "Deprecated layout token — 16px. Replaced by spacing scale. Do not use in new work.",
+      "$deprecated": true
+    },
+    "layout-02": {
+      "$type": "dimension",
+      "$value": {
+        "value": 1.5,
+        "unit": "rem"
+      },
+      "$description": "Deprecated layout token — 24px. Replaced by spacing scale. Do not use in new work.",
+      "$deprecated": true
+    },
+    "layout-03": {
+      "$type": "dimension",
+      "$value": {
+        "value": 2,
+        "unit": "rem"
+      },
+      "$description": "Deprecated layout token — 32px. Replaced by spacing scale. Do not use in new work.",
+      "$deprecated": true
+    },
+    "layout-04": {
+      "$type": "dimension",
+      "$value": {
+        "value": 3,
+        "unit": "rem"
+      },
+      "$description": "Deprecated layout token — 48px. Replaced by spacing scale. Do not use in new work.",
+      "$deprecated": true
+    },
+    "layout-05": {
+      "$type": "dimension",
+      "$value": {
+        "value": 4,
+        "unit": "rem"
+      },
+      "$description": "Deprecated layout token — 64px. Replaced by spacing scale. Do not use in new work.",
+      "$deprecated": true
+    },
+    "layout-06": {
+      "$type": "dimension",
+      "$value": {
+        "value": 6,
+        "unit": "rem"
+      },
+      "$description": "Deprecated layout token — 96px. Replaced by spacing scale. Do not use in new work.",
+      "$deprecated": true
+    },
+    "layout-07": {
+      "$type": "dimension",
+      "$value": {
+        "value": 10,
+        "unit": "rem"
+      },
+      "$description": "Deprecated layout token — 160px. Replaced by spacing scale. Do not use in new work.",
+      "$deprecated": true
+    }
+  }
+}
