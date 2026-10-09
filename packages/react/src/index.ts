@@ -14,8 +14,6 @@ import './internal/warnAboutDeprecatedReactVersion';
 export * from './components/Accordion';
 export { AddSelect } from './components/AddSelect';
 export type { AddSelectProps } from './components/AddSelect';
-export { ActionSet } from './components/ActionSet';
-export type { ActionSetProps } from './components/ActionSet';
 export {
   BigNumber as preview__BigNumber,
   BigNumberSkeleton as preview__BigNumberSkeleton,
