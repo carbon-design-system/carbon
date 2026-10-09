@@ -1,8 +1,10 @@
 import { puppeteerLauncher } from '@web/test-runner-puppeteer';
 
-const chromeLaunchArgs = process.env.CI
-  ? ['--no-sandbox', '--disable-setuid-sandbox']
-  : [];
+const chromeLaunchArgs = [
+  // Headless Chrome may have no input devices. Test hover styles with a mouse.
+  '--blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4',
+  ...(process.env.CI ? ['--no-sandbox', '--disable-setuid-sandbox'] : []),
+];
 
 export default {
   browsers: [
