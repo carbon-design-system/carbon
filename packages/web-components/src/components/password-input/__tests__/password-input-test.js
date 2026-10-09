@@ -154,6 +154,9 @@ describe('cds-password-input', () => {
       '.cds--text-input__field-wrapper'
     );
     expect(fieldWrapper.hasAttribute('data-invalid')).to.be.false;
+    expect(el.shadowRoot.querySelector('.cds--form-requirement')).to.be.null;
+    expect(el.shadowRoot.querySelector('.cds--text-input__invalid-icon')).to.be
+      .null;
   });
 
   it('should not have invalid classname when is readonly', async () => {
@@ -173,6 +176,9 @@ describe('cds-password-input', () => {
       '.cds--text-input__field-wrapper'
     );
     expect(fieldWrapper.hasAttribute('data-invalid')).to.be.false;
+    expect(el.shadowRoot.querySelector('.cds--form-requirement')).to.be.null;
+    expect(el.shadowRoot.querySelector('.cds--text-input__invalid-icon')).to.be
+      .null;
   });
 
   it('should not have warn classname when is disabled', async () => {
@@ -193,6 +199,10 @@ describe('cds-password-input', () => {
     expect(
       fieldWrapper.classList.contains('cds--text-input__field-wrapper--warning')
     ).to.be.false;
+    expect(el.shadowRoot.querySelector('.cds--form-requirement')).to.be.null;
+    expect(
+      el.shadowRoot.querySelector('.cds--text-input__invalid-icon--warning')
+    ).to.be.null;
   });
 
   it('should not have warn classname when is readonly', async () => {
@@ -213,6 +223,10 @@ describe('cds-password-input', () => {
     expect(
       fieldWrapper.classList.contains('cds--text-input__field-wrapper--warning')
     ).to.be.false;
+    expect(el.shadowRoot.querySelector('.cds--form-requirement')).to.be.null;
+    expect(
+      el.shadowRoot.querySelector('.cds--text-input__invalid-icon--warning')
+    ).to.be.null;
   });
 
   it('should apply size attribute', async () => {
