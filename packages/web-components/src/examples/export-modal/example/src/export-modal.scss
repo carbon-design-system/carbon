@@ -29,8 +29,6 @@ $block-class: #{$prefix}--export-modal;
   }
 
   &__input-container {
-    margin-block-end: $spacing-05;
-
     cds-text-input {
       width: 100%;
     }
@@ -39,7 +37,6 @@ $block-class: #{$prefix}--export-modal;
   &__messaging {
     display: flex;
     align-items: center;
-    min-block-size: $spacing-09;
     gap: $spacing-03;
 
     p {
