@@ -239,3 +239,14 @@ export { default as CDSLayoutConstraint } from './components/layout/layout-const
 // export { default as CDSUserAvatar } from './components/user-avatar/user-avatar';
 // export { default as CDSBigNumber } from './components/big-number/big-number';
 // export { default as CDSOptionsTile } from './components/options-tile/options-tile';
+
+// TODO: uncomment in v12 — also remove from excludeProductsComponents
+// Re-export AddSelect utilities from @carbon/utilities
+// export { AddSelectData } from '@carbon/utilities';
+// export type {
+//   AddSelectItem,
+//   ItemDetailEntry,
+//   ItemDetails,
+//   ItemStatus,
+//   SearchOptions,
+// } from '@carbon/utilities';
