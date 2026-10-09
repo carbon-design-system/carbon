@@ -40,12 +40,20 @@ export const productMigratedStoryGlobs = [
   '../src/components/options-tile/*.mdx',
   '../src/components/resizer/resizer.stories.ts',
   '../src/components/resizer/*.mdx',
+  '../src/utilities/step-flow/step-flow.stories.ts',
+  '../src/utilities/step-flow/*.mdx',
   '../src/components/side-panel/side-panel.stories.ts',
   '../src/components/side-panel/*.mdx',
+  '../src/components/tearsheet/tearsheet.stories.ts',
+  '../src/components/tearsheet/*.mdx',
   '../src/components/user-avatar/user-avatar.stories.ts',
   '../src/components/user-avatar/*.mdx',
   '../src/components/truncated-text/truncated-text.stories.ts',
   '../src/components/truncated-text/*.mdx',
+  '../src/examples/export-modal/export-modal.stories.ts',
+  '../src/examples/export-modal/*.mdx',
+  '../src/examples/delete-and-remove/delete-and-remove.stories.ts',
+  '../src/examples/delete-and-remove/*.mdx',
 ];
 
 /**
@@ -74,6 +82,8 @@ export const excludeProductsComponents = [
   'src/components/options-tile/**/*',
   'src/components/resizer/**/*',
   'src/components/side-panel/**/*',
+  'src/components/tearsheet/**/*',
+  'src/utilities/step-flow/**/*',
   'src/components/user-avatar/**/*',
   'src/components/truncated-text/**/*',
 ];

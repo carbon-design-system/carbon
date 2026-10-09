@@ -9,6 +9,7 @@ on:
       - 'v[0-9]+.[0-9]+.[0-9]+'
       - 'v[0-9]+.[0-9]+.[0-9]+-*'
       - '!v10*'
+      - '!v12*'
 
 concurrency:
   group: deploy-${{ github.ref }}
@@ -28,7 +29,7 @@ jobs:
       - name: Install dependencies
         run: |
           yarn install
-          yarn lerna run build --scope '@carbon/feature-flags' --scope '@carbon/layout' --scope '@carbon/themes' --scope '@carbon/icons' --stream
+          yarn lerna run build --scope '@carbon/feature-flags' --scope '@carbon/layout' --scope '@carbon/themes' --scope '@carbon/icons' --scope '@carbon/motion' --scope '@carbon/utilities' --stream
           yarn --cwd packages/web-components build:cdn
       - name: Check release type
         if: contains(github.ref_name, '-rc.')
