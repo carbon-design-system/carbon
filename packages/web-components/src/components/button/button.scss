@@ -90,7 +90,7 @@ $css--plex: true !default;
     padding: $button-padding-ghost;
 
     &:focus {
-      outline: $spacing-01 solid $layer;
+      outline: $spacing-01 solid $text-on-color;
       outline-offset: -#{$spacing-01};
     }
   }
