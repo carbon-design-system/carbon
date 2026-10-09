@@ -655,6 +655,7 @@ export const MultiAddSelectWithGlobalActions = forwardRef<
       <Dropdown
         id="add-select-filter"
         titleText=""
+        aria-label="Filter by type"
         label="Filter by type"
         items={filterOptions}
         itemToString={(item) => (item ? item.text : '')}

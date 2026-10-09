@@ -692,6 +692,7 @@ export const MultiSelectWithBulkActions = forwardRef<
                           autoAlign
                           id="batch-role-multiselect"
                           titleText=""
+                          aria-label="Assign role"
                           label="Assign role"
                           type="inline"
                           items={modifierConfig.options}
@@ -780,6 +781,7 @@ export const MultiSelectWithBulkActions = forwardRef<
                                     autoAlign
                                     id={`edit-modifier-${item.id}`}
                                     titleText=""
+                                    aria-label={modifierConfig.label}
                                     type="inline"
                                     label={modifierConfig.label}
                                     items={modifierConfig.options}
@@ -804,6 +806,7 @@ export const MultiSelectWithBulkActions = forwardRef<
                                     autoAlign
                                     id={`edit-modifier-${item.id}`}
                                     titleText=""
+                                    aria-label={modifierConfig.label}
                                     type="inline"
                                     label={modifierConfig.label}
                                     items={modifierConfig.options}

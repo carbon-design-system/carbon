@@ -324,6 +324,7 @@ const ControlledColumn: React.FC<ColumnProps> = ({
               <Dropdown
                 id={`filter-${level}`}
                 titleText=""
+                aria-label="Filter by type"
                 label="Select type"
                 items={filterOptions}
                 itemToString={(item) => (item ? item.text : '')}
