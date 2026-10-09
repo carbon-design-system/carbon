@@ -210,7 +210,7 @@ const PlaceholderRows = () => {
 export default {
   title: 'Components/AddSelect',
   component: AddSelect,
-  tags: ['autodocs', 'ibm-products-migrated'],
+  tags: ['autodocs'],
   decorators: [
     (Story) => {
       return <div className={`${storyClass}__viewport`}>{Story()}</div>;

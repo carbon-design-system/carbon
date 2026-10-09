@@ -273,7 +273,6 @@ const defaultArgs = {
 const meta: Meta = {
   title: 'Preview/GuideBanner',
   component: 'cds-guide-banner',
-  tags: ['ibm-products-migrated'],
 };
 
 export default meta;
