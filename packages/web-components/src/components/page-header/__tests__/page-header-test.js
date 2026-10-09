@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { fixture, html, expect } from '@open-wc/testing';
+import { fixture, html, expect, waitUntil } from '@open-wc/testing';
 import '@carbon/web-components/es/components/page-header/index.js';
 import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/breadcrumb/index.js';
@@ -34,6 +34,24 @@ function stubIntersectionObserver() {
     callbacks,
     restore() {
       window.IntersectionObserver = OriginalIO;
+    },
+  };
+}
+
+/**
+ * Replace window.ResizeObserver with a no-op stub so that asynchronous
+ * ResizeObserver callbacks cannot race with direct `pageHeader.context`
+ * mutations made inside unit tests.
+ * Returns { restore } — call restore() in afterEach / after the test.
+ */
+function stubResizeObserver() {
+  const OriginalRO = window.ResizeObserver;
+  window.ResizeObserver = function () {
+    return { disconnect() {}, observe() {}, unobserve() {} };
+  };
+  return {
+    restore() {
+      window.ResizeObserver = OriginalRO;
     },
   };
 }
@@ -1344,6 +1362,7 @@ describe('cds-page-header', () => {
     });
 
     it('should show expandText when fully collapsed', async () => {
+      const roStub = stubResizeObserver();
       const pageHeader = await fixture(html`
         <cds-page-header>
           <cds-page-header-content title="Title" title-level="h1">
@@ -1366,13 +1385,21 @@ describe('cds-page-header', () => {
 
       pageHeader.context = { ...pageHeader.context, fullyCollapsed: true };
       await pageHeader.updateComplete;
-      await new Promise((resolve) => setTimeout(resolve, 0));
 
       const scroller = pageHeader.querySelector(
         `${prefix}-page-header-scroller`
       );
+      await waitUntil(
+        () =>
+          scroller?.shadowRoot
+            ?.querySelector('cds-icon-button')
+            ?.getAttribute('label') === 'Show header',
+        'expected scroller label to be Show header',
+        { timeout: 2000 }
+      );
       const iconBtn = scroller?.shadowRoot?.querySelector('cds-icon-button');
       expect(iconBtn?.getAttribute('label')).to.equal('Show header');
+      roStub.restore();
     });
   });
 
@@ -1382,6 +1409,7 @@ describe('cds-page-header', () => {
 
   describe('context propagation to child elements', () => {
     it('should add show class to content-actions wrapper when contentActionsClipped is true', async () => {
+      const roStub = stubResizeObserver();
       const pageHeader = await fixture(html`
         <cds-page-header>
           <cds-page-header-breadcrumb>
@@ -1405,8 +1433,18 @@ describe('cds-page-header', () => {
       const breadcrumb = pageHeader.querySelector(
         `${prefix}-page-header-breadcrumb`
       );
-      await breadcrumb.updateComplete;
-
+      await waitUntil(
+        () =>
+          breadcrumb.shadowRoot
+            ?.querySelector(
+              `.${prefix}--page-header__breadcrumb__content-actions-with-global-actions`
+            )
+            ?.classList.contains(
+              `${prefix}--page-header__breadcrumb__content-actions-with-global-actions--show`
+            ),
+        'expected content-actions show class to be present',
+        { timeout: 2000 }
+      );
       const actionsWrapper = breadcrumb.shadowRoot?.querySelector(
         `.${prefix}--page-header__breadcrumb__content-actions-with-global-actions`
       );
@@ -1415,6 +1453,7 @@ describe('cds-page-header', () => {
           `${prefix}--page-header__breadcrumb__content-actions-with-global-actions--show`
         )
       ).to.be.true;
+      roStub.restore();
     });
 
     it('should remove show class from content-actions wrapper when contentActionsClipped is false', async () => {
@@ -1683,6 +1722,7 @@ describe('cds-page-header', () => {
     });
 
     it('should become interactive when titleClipped is true', async () => {
+      const roStub = stubResizeObserver();
       const pageHeader = await fixture(html`
         <cds-page-header>
           <cds-page-header-breadcrumb>
@@ -1710,9 +1750,11 @@ describe('cds-page-header', () => {
         'cds-page-header-title-breadcrumb'
       );
       expect(titleBc.hasAttribute('inert')).to.be.false;
+      roStub.restore();
     });
 
     it('should become inert again when titleClipped returns to false', async () => {
+      const roStub = stubResizeObserver();
       const pageHeader = await fixture(html`
         <cds-page-header>
           <cds-page-header-breadcrumb>
@@ -1747,7 +1789,13 @@ describe('cds-page-header', () => {
       const titleBc = pageHeader.querySelector(
         'cds-page-header-title-breadcrumb'
       );
+      await waitUntil(
+        () => titleBc.hasAttribute('inert'),
+        'expected title-breadcrumb to be inert',
+        { timeout: 2000 }
+      );
       expect(titleBc.hasAttribute('inert')).to.be.true;
+      roStub.restore();
     });
 
     it('should be visible by default when there is no page-header-content (withContent false)', async () => {
