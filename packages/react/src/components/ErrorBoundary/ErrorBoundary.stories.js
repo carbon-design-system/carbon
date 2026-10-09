@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import { action } from 'storybook/actions';
 import { ErrorBoundary, ErrorBoundaryContext } from './';
 import DemoComponent from './stories/demo';
 import mdx from './ErrorBoundary.mdx';

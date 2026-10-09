@@ -2333,11 +2333,8 @@ __metadata:
   resolution: "@carbon/layout@workspace:packages/layout"
   dependencies:
     "@carbon/cli": "npm:^11.52.0"
-    "@carbon/cli-reporter": "npm:^10.9.0"
-    "@carbon/scss-generator": "npm:^10.20.0"
     "@carbon/test-utils": "npm:^10.42.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
-    core-js: "npm:^3.16.0"
     rimraf: "npm:^6.0.1"
     style-dictionary: "npm:^5.5.0"
     typescript: "npm:^6.0.3"
