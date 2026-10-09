@@ -228,9 +228,9 @@ export const WithTabs = (args) => {
         <Switch name="three" text="Third section" disabled={args.disabled} />
       </ContentSwitcher>
       <TabPanels>
-        <TabPanel><p>Tab 1</p></TabPanel>
-        <TabPanel><p>Tab 2</p></TabPanel>
-        <TabPanel><p>Tab 3</p></TabPanel>
+        <TabPanel>Tab 1</TabPanel>
+        <TabPanel>Tab 2</TabPanel>
+        <TabPanel>Tab 3</TabPanel>
       </TabPanels>
     </Tabs>
   );

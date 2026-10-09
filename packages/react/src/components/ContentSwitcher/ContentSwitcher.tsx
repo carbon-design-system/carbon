@@ -84,8 +84,6 @@ export interface ContentSwitcherProps
 }
 
 export const ContentSwitcher = ({
-  'aria-label': ariaLabel,
-  'aria-labelledby': ariaLabelledby,
   children,
   className,
   light,
@@ -120,7 +118,7 @@ export const ContentSwitcher = ({
       setSelectedIndex(selectedIndexProp);
       prevSelectedIndexRef.current = selectedIndexProp;
     }
-  }, [selectedIndexProp]);
+  }, [selectedIndexProp, setSelectedIndex]);
 
   const handleItemRef = (index: number) => (ref: HTMLButtonElement | null) => {
     if (ref) {
@@ -199,8 +197,6 @@ export const ContentSwitcher = ({
 
   return (
     <LayoutConstraint
-      aria-label={ariaLabel}
-      aria-labelledby={ariaLabelledby}
       size={{ default: 'md', min: 'sm', max: 'lg' }}
       {...other}
       className={classes}
