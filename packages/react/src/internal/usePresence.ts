@@ -18,7 +18,14 @@ export const usePresence = (
    * holds are outstanding, since those animations are invisible to
    * `getAnimations()`.
    */
-  exitHoldCount = 0
+  exitHoldCount = 0,
+  /**
+   * Override the animation-name prefix used to identify presence animations.
+   * Defaults to `${prefix}--presence` which matches the global convention.
+   * Pass a custom prefix when a component names its animations differently,
+   * e.g. `${prefix}--tearsheet--presence`.
+   */
+  animationNamePrefix?: string
 ) => {
   const prefix = usePrefix();
   const [exitState, setExitState] = useState<'idle' | 'active' | 'finished'>(
@@ -53,12 +60,13 @@ export const usePresence = (
     }
 
     // cover all animations that start with the presence prefix
+    const resolvedPrefix = animationNamePrefix ?? `${prefix}--presence`;
     const animations = ref.current
       .getAnimations({ subtree: true })
       .filter(
         (animation) =>
           animation instanceof CSSAnimation &&
-          animation.animationName.startsWith(`${prefix}--presence`)
+          animation.animationName.startsWith(resolvedPrefix)
       );
 
     if (!animations.length) {
@@ -78,7 +86,7 @@ export const usePresence = (
     return () => {
       cancelled = true;
     };
-  }, [ref, isExiting, prefix, exitHoldCount]);
+  }, [ref, isExiting, prefix, exitHoldCount, animationNamePrefix]);
 
   return {
     /**

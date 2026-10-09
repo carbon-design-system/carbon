@@ -203,6 +203,26 @@ describe('cds-fluid-dropdown', function () {
 
       expect(triggerButton).to.have.attribute('aria-expanded', 'true');
     });
+
+    it('should not render the helper text container', async () => {
+      const el = await fixture(fluidDropdown);
+      expect(el.shadowRoot.querySelector('.cds--form__helper-text')).to.not
+        .exist;
+    });
+
+    it('should not render helper text even when helper-text attribute is set', async () => {
+      const el = await fixture(html`
+        <cds-fluid-dropdown
+          helper-text="Optional helper text"
+          title-text="Dropdown Label">
+          <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+        </cds-fluid-dropdown>
+      `);
+
+      expect(el.shadowRoot.querySelector('.cds--form__helper-text')).to.not
+        .exist;
+      expect(el.shadowRoot.textContent).to.not.include('Optional helper text');
+    });
   });
 
   describe('events', () => {

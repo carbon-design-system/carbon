@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2021
+// Copyright IBM Corp. 2021, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -8,13 +8,22 @@
 @use 'keyframes';
 @use '../theme' as *;
 @use '../config' as *;
+@use '../feature-flags' as *;
 @use '../utilities/high-contrast-mode' as *;
 
 /// Skeleton loading animation
+///
+/// Pass `$border-radius` to round the skeleton. The radius is applied only
+/// when `enable-v12-release` is on, so existing call sites stay square until
+/// they opt in with a token such as `$border-radius-04`.
+///
+/// @param {Length | null} $border-radius [null] - Corner radius token. `null`
+/// leaves radius unset. `0` / `$border-radius-00` are valid square values.
 /// @access public
 /// @example @include skeleton;
+/// @example @include skeleton($border-radius: $border-radius-04);
 /// @group utilities
-@mixin skeleton {
+@mixin skeleton($border-radius: null) {
   position: relative;
   padding: 0;
   border: none;
@@ -22,6 +31,17 @@
   box-shadow: none;
   pointer-events: none;
 
+  // 0 / 0px are valid radius tokens but are falsy in Sass, so `!= null` is
+  // required to distinguish "unset" from "square".
+  // stylelint-disable scss/at-if-no-null
+  @if enabled('enable-v12-release') {
+    @if $border-radius != null {
+      overflow: hidden;
+      border-radius: $border-radius;
+    }
+  }
+
+  // stylelint-enable scss/at-if-no-null
   &:hover,
   &:focus,
   &:active {

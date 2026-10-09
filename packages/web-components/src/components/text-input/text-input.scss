@@ -8,9 +8,12 @@
 $css--plex: true !default;
 
 @use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/feature-flags' as flags;
 @use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/utilities/convert' as *;
 @use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/border-radius' as *;
 @use '@carbon/styles/scss/components/text-input/index';
 @use '@carbon/styles/scss/utilities/layout' as *;
 @use '@carbon/styles/scss/utilities/ai-gradient' as *;
@@ -24,6 +27,12 @@ $css--plex: true !default;
   // the base text-input class has a 100% so we need to propagate it up to the host element
   inline-size: 100%;
   outline: none;
+}
+
+:host(#{$prefix}-text-input-skeleton) {
+  .#{$prefix}--label.#{$prefix}--skeleton {
+    @include skeleton($border-radius: $border-radius-04);
+  }
 }
 
 :host(#{$prefix}-text-input) {
@@ -64,5 +73,25 @@ $css--plex: true !default;
     @include ai-gradient;
 
     padding-inline-end: $spacing-08;
+
+    @if flags.enabled('enable-v12-release') {
+      background:
+        linear-gradient(
+            0deg,
+            $ai-aura-start-sm 0%,
+            15%,
+            $ai-aura-end 50%,
+            transparent 100%
+          )
+          padding-box,
+        linear-gradient($field, $field) padding-box,
+        linear-gradient(
+            to bottom,
+            $ai-border-start calc(100% - 4px),
+            $ai-border-strong 100%
+          )
+          border-box;
+      border-block-end-color: transparent;
+    }
   }
 }

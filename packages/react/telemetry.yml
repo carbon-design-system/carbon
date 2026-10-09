@@ -14,12 +14,15 @@ collect:
         - action
         - actionButtonLabel
         - actions
+        - actionsSlot
         - activation
         - active
+        - addConditionSubGroupHandler
         - addFocusListeners
         - align
         - allowCustomValue
         - allowEmpty
+        - aria
         - aria-controls
         - aria-current
         - aria-describedby
@@ -30,9 +33,12 @@ collect:
         - autoAlign
         - autoComplete
         - backgroundToken
+        - badgeCount
         - border
         - buttonKind
+        - buttonLabel
         - buttonProps
+        - buttonSize
         - caption
         - caret
         - checked
@@ -45,12 +51,18 @@ collect:
         - closeIconDescription
         - closeModal
         - closeOnActivation
+        - closePopover
+        - collapseText
         - cols
         - colSpan
         - compact
         - compareItems
         - condensed
+        - condition
+        - conditionState
+        - config
         - contained
+        - containerClassName
         - count
         - danger
         - dangerDescription
@@ -67,6 +79,7 @@ collect:
         - dir
         - direction
         - disabled
+        - disablePortal
         - disableWheel
         - downshiftActions
         - downshiftProps
@@ -76,6 +89,7 @@ collect:
         - enterDelayMs
         - expanded
         - expandIconDescription
+        - expandText
         - feedback
         - feedbackTimeout
         - flipped
@@ -83,28 +97,38 @@ collect:
         - formatOptions
         - fullWidth
         - gap
+        - getActionsState
+        - getOptions
+        - group
         - hasDivider
         - hasIconOnly
         - hasRoundedCorners
         - hasScrollingContent
         - head
+        - headerActions
+        - headerContent
         - headers
         - heading
         - helperText
         - hideCloseButton
+        - hideConditionPreviewHandler
+        - hideConditionSubGroupPreviewHandler
         - hideLabel
         - hidePasswordLabel
+        - hideSearch
         - highContrast
         - href
         - iconClass
         - iconDescription
         - id
+        - illustrationTheme
         - indeterminate
         - index
         - initialSelectedItem
         - initialSelectedItems
         - inline
         - innerRef
+        - inputConfig
         - inputMode
         - inputProps
         - invalid
@@ -122,6 +146,8 @@ collect:
         - isSelected
         - isSideNavExpanded
         - isSortable
+        - item
+        - itemCount
         - items
         - itemText
         - itemToElement
@@ -152,6 +178,7 @@ collect:
         - menuOptionsClass
         - menuTarget
         - min
+        - modalAriaLabel
         - modalHeading
         - modalLabel
         - mode
@@ -162,6 +189,7 @@ collect:
         - noTrailingSlash
         - onActionButtonClick
         - onAddFiles
+        - onAddItem
         - onBlur
         - onCancel
         - onChange
@@ -182,23 +210,33 @@ collect:
         - onMouseEnter
         - onMouseLeave
         - onMouseUp
+        - onNavigate
         - onOpen
+        - onRemove
+        - onRemoveItem
         - onRequestClose
         - onRequestSubmit
+        - onSearch
         - onSecondarySubmit
         - onSelect
+        - onSelectAll
         - onToggle
         - onToggleClick
         - onTogglePasswordVisibility
         - open
         - ordered
         - orientation
+        - overflowAlign
+        - overflowMenuLabel
+        - overflowType
         - page
         - pageActions
         - paragraph
         - passiveModal
         - pattern
         - placeholder
+        - popOverSearchThreshold
+        - portalTarget
         - prefix
         - preventCloseOnClickOutside
         - primaryButtonDisabled
@@ -207,12 +245,17 @@ collect:
         - ref
         - rel
         - renderIcon
+        - renderItem
         - renderSelectedItem
         - required
         - role
         - rowCount
         - rows
+        - scroller
         - scrollIntoView
+        - searchLabel
+        - searchPlaceholder
+        - searchProps
         - secondaryButtons
         - secondaryButtonText
         - secondaryLabel
@@ -225,23 +268,34 @@ collect:
         - selectorPrimaryFocus
         - selectorsFloatingMenus
         - shouldFilterItem
+        - showAllTagsLabel
+        - showConditionPreviewHandler
+        - showConditionSubGroupPreviewHandler
         - showPasswordLabel
+        - showToolTip
         - size
         - slug
         - small
         - sortItems
+        - startActive
+        - startConditionLabel
+        - statementConfigCustom
         - status
         - statusIconDescription
         - step
         - stickyHeader
         - subtitle
         - tabIndex
+        - tagProps
         - target
         - text
         - theme
         - title
+        - titleEnd
         - titleId
+        - titleStart
         - titleText
+        - titleTruncate
         - tooltipAlignment
         - tooltipDropShadow
         - tooltipHighContrast
@@ -255,11 +309,14 @@ collect:
         - useTitleInItem
         - value
         - valueSelected
+        - variant
         - vertical
         - warn
         - warnText
         - width
         - withRowGap
+        - wrapperClasses
+        - wrapperClassName
         # AccordionItem
         - handleAnimationEnd
         - onHeadingClick
@@ -269,8 +326,59 @@ collect:
         - closeOnEscape
         - hasFocus
         # ActionSet
-        - buttonSize
         - disableStacking
+        # AddSelect
+        - onItemSelect
+        # AddSelectBody
+        - breadcrumbItemProps
+        - breadcrumbProps
+        - globalSearchLabel
+        - globalSearchPlaceholder
+        - itemsLabel
+        - layout
+        - linkProps
+        - onBreadcrumbClick
+        - path
+        - searchResultsTitle
+        - subHeaderActions
+        # AddSelectColumn
+        - allIndeterminate
+        - allSelected
+        - multi
+        - selectAllCheckboxProps
+        - showSelectAll
+        # AddSelectItemPanel
+        - closeIconButtonProps
+        # AddSelectRow
+        - checkboxProps
+        - hasChildren
+        - hasItemPanel
+        - icon
+        - itemId
+        - itemPanelIconButtonProps
+        - itemPanelIconDescription
+        - itemPanelOpen
+        - navIndicatorLabel
+        - onItemPanelClick
+        - parentId
+        - radioButtonProps
+        - rowContent
+        - skeleton
+        # AddSelectSelectionSummary
+        - editIconButtonProps
+        - editIconDescription
+        - emptyState
+        - onEdit
+        - selectedItemCount
+        - showEditIcon
+        # AddSelectSelectionSummaryItem
+        - accordionItemProps
+        - accordionProps
+        - removeButtonLabel
+        - removeIconButtonProps
+        - renderAccordionBody
+        - renderAccordionTitle
+        - useAccordion
         # AILabel
         - AILabelContent
         - aiText
@@ -300,22 +408,16 @@ collect:
         # Calendar
         - context
         - onDateSelect
-        - onNavigate
         # Card
         - clickable
         - horizontal
         - renderFooterIcon
-        # CardActions
-        - overflowMenuLabel
         # CardMedia
         - mediaWidth
         # CardTitle
         - descriptionTruncate
         - labelTruncate
         - maxWidth
-        - titleEnd
-        - titleStart
-        - titleTruncate
         # ChatButton
         - isQuickAction
         # ClickableTile
@@ -343,8 +445,38 @@ collect:
         - sm
         - span
         - xlg
-        # ComposedModal
-        - containerClassName
+        # ConditionBlock
+        - addConditionHandler
+        - conditionIndex
+        - conjunction
+        - isLastCondition
+        - isStatement
+        - onConnectorOperatorChange
+        - onStatementChange
+        # ConditionBuilderAdd
+        - enableSubGroup
+        # ConditionBuilderButton
+        - isInvalid
+        - tooltipAlign
+        - wrapperProps
+        # ConditionBuilderItem
+        - dialogAriaLabel
+        - popOverClassName
+        - renderChildren
+        # ConditionBuilderProvider
+        - actionState
+        - conditionBuilderRef
+        - rootState
+        - setActionState
+        - setRootState
+        # ConditionConnector
+        - operator
+        # ConditionGroupBuilder
+        - conditionRemovedText
+        - setStatusMessage
+        # ConditionPreview
+        - colorIndex
+        - previewType
         # ContainedList
         - isInset
         # ContentSwitcher
@@ -423,7 +555,6 @@ collect:
         - enableV12TileRadioIcons
         - flags
         # FileUploader
-        - buttonLabel
         - filenameStatus
         - labelDescription
         - labelTitle
@@ -444,6 +575,15 @@ collect:
         - messageText
         # GridSettings
         - subgrid
+        # Guidebanner
+        - collapseButtonLabel
+        - collapsible
+        - expandButtonLabel
+        - nextIconDescription
+        - previousIconDescription
+        - withLeftGutter
+        # GuidebannerElement
+        - button
         # HeaderContainer
         - render
         # HeaderMenu
@@ -456,9 +596,6 @@ collect:
         - renderMenuIcon
         # HeaderPanel
         - onHeaderPanelFocus
-        # IconButton
-        - badgeCount
-        - wrapperClasses
         # IconTab
         - badgeIndicator
         # InlineLoading
@@ -485,7 +622,7 @@ collect:
         - disableActionButton
         # Layer
         - withBackground
-        # LinkBase
+        # Link
         - visited
         # ListBox
         - invalidTextId
@@ -515,7 +652,6 @@ collect:
         # Modal
         - alert
         - closeButtonLabel
-        - modalAriaLabel
         - shouldSubmitOnEnter
         # ModalBody
         - hasForm
@@ -543,6 +679,43 @@ collect:
         - withHeader
         # NotificationButton
         - notificationType
+        # NotificationsEmptyState
+        - illustrationDescription
+        # NotificationsPanel
+        - data
+        - dateTimeLocale
+        - dateTimeStyle
+        - daysAgoText
+        - dismissAllLabel
+        - dismissSingleNotificationIconDescription
+        - doNotDisturbDefaultToggled
+        - doNotDisturbLabel
+        - emptyStateLabel
+        - hourAgoText
+        - hoursAgoText
+        - minuteAgoText
+        - minutesAgoText
+        - monthAgoText
+        - monthsAgoText
+        - nowText
+        - onClickOutside
+        - onDismissAllNotifications
+        - onDismissSingleNotification
+        - onDoNotDisturbChange
+        - onSettingsClick
+        - onViewAllClick
+        - previousLabel
+        - readLessLabel
+        - readMoreLabel
+        - secondsAgoText
+        - settingsIconDescription
+        - todayLabel
+        - triggerButtonRef
+        - viewAllLabel
+        - yearAgoText
+        - yearsAgoText
+        - yesterdayAtText
+        - yesterdayLabel
         # NumberInput
         - hideSteppers
         - onStepperBlur
@@ -555,22 +728,44 @@ collect:
         - summary
         # OrderedList
         - native
+        # OverflowMenu
+        - tooltipAutoAlign
+        - tooltipDefaultOpen
+        - tooltipEnterDelayMs
+        - tooltipLeaveDelayMs
         # OverflowMenuItem
         - closeMenu
         - handleOverflowMenuItemFocus
         - isDelete
         - requireTitle
-        - wrapperClassName
+        # PageHeader
+        - fullWidthGrid
+        - narrowGrid
+        - onContentActionsClipped
+        - onContentFullyCollapsed
+        - onTitleClipped
         # PageHeaderBreadcrumbBar
+        - actionsAriaLabel
         - contentActions
         - contentActionsFlush
         - pageActionsFlush
+        # PageHeaderBreadcrumbOverflow
+        - renderOverflowBreadcrumb
         # PageHeaderContent
         - contextualActions
+        - titleAs
         # PageHeaderContentPageActions
         - menuButtonLabel
+        # PageHeaderContentText
+        - subtitleAs
+        # PageHeaderHeroImage
+        - objectFit
         # PageHeaderTabBar
+        - disableStickyTabBar
         - tags
+        # PageHeaderTagOverflow
+        - renderOverflowTag
+        - renderPopoverContent
         # PageSelector
         - currentPage
         - totalPages
@@ -667,6 +862,8 @@ collect:
         # SliderSkeleton
         - twoHandles
         - unstable_ariaLabelHandleUpper
+        # StackProvider
+        - stackStepSize
         # StructuredListCell
         - noWrap
         # StructuredListWrapper
@@ -680,7 +877,6 @@ collect:
         - overflowMenuOnHover
         - useZebraStyles
         # TableBatchActions
-        - onSelectAll
         - shouldShowBatchActions
         - totalCount
         - totalSelected
@@ -717,8 +913,50 @@ collect:
         - onTabCloseRequest
         # TabsVertical
         - height
-        # TagBase
+        # Tag
         - filter
+        # TagOverflow
+        - allTagsModalAriaLabel
+        - allTagsModalSearchLabel
+        - allTagsModalSearchPlaceholderText
+        - allTagsModalTarget
+        - allTagsModalTitle
+        - containingElementRef
+        - maxVisible
+        - measurementOffset
+        - multiline
+        - onOverflowTagChange
+        - overflowClassName
+        - tagComponent
+        # TagOverflowModal
+        - allTags
+        - onTagClose
+        # TagOverflowPopover
+        - allTagsModalSearchThreshold
+        - onShowAllClick
+        - overflowTags
+        - popoverOpen
+        - setPopoverOpen
+        # Tearsheet
+        - influencerWidth
+        - keepMounted
+        - summaryContentWidth
+        - verticalGap
+        # TearsheetHeader
+        - disableHeaderCollapse
+        - onHeaderCollapse
+        # TearsheetHeaderActionItem
+        - overflowItemLabel
+        # TearsheetHeaderActions
+        - menuButtonProps
+        # TearsheetInfluencer
+        - influencerPanelAriaLabel
+        - influencerPanelOpen
+        - influencerPanelTriggerRef
+        # TearsheetSummaryContent
+        - summaryPanelAriaLabel
+        - summaryPanelOpen
+        - summaryPanelTriggerRef
         # TextArea
         - counterMode
         # TextDirection
@@ -750,8 +988,6 @@ collect:
         - lines
         # UserAvatar
         - backgroundColor
-        # WithCustomContext
-        - onLog
         # React
         - key
         - ref
@@ -803,6 +1039,10 @@ collect:
         - primary
         - secondary
         - tertiary
+        # General - buttonSize
+        - lg
+        - md
+        - sm
         # General - datePickerType
         - range
         - simple
@@ -819,6 +1059,9 @@ collect:
         # General - direction
         - bottom
         - top
+        # General - illustrationTheme
+        - dark
+        - light
         # General - inputMode
         - decimal
         - email
@@ -955,6 +1198,22 @@ collect:
         # General - orientation
         - horizontal
         - vertical
+        # General - overflowAlign
+        - bottom
+        - bottom-left
+        - bottom-right
+        - left
+        - left-bottom
+        - left-top
+        - right
+        - right-bottom
+        - right-top
+        - top
+        - top-left
+        - top-right
+        # General - overflowType
+        - default
+        - tag
         # General - role
         - alert
         - alertdialog
@@ -1025,8 +1284,17 @@ collect:
         - submit
         - teal
         - text
+        - textarea
         - tooltip
         - warm-gray
+        # General - variant
+        - Hierarchical
+        - narrow
+        - Non-Hierarchical
+        - wide
+        # AddSelectBody - layout
+        - horizontal
+        - vertical
         # AspectRatio - ratio
         - 16x9
         - 1x1
@@ -1037,6 +1305,13 @@ collect:
         - 3x4
         - 4x3
         - 9x16
+        # ConditionBlock - conjunction
+        - and
+        - or
+        # ConditionPreview - previewType
+        - condition
+        - newGroup
+        - subGroup
         # ContentSwitcher - selectionMode
         - automatic
         - manual
@@ -1082,6 +1357,30 @@ collect:
         - actionable
         - inline
         - toast
+        # NotificationsPanel - dateTimeStyle
+        - long
+        - narrow
+        - short
+        # PageHeader - fullWidthGrid
+        - xl
+        # PageHeaderContent - titleAs
+        - h1
+        - h2
+        - h3
+        - h4
+        - h5
+        - h6
+        # PageHeaderContentText - subtitleAs
+        - h2
+        - h3
+        - h4
+        - h5
+        - h6
+        # PageHeaderHeroImage - objectFit
+        - contain
+        - cover
+        - fill
+        - none
         # Pagination - backwardTextTooltipPosition
         - bottom
         - left
@@ -1100,6 +1399,10 @@ collect:
         # SidePanel - placement
         - left
         - right
+        # StackProvider - stackStepSize
+        - lg
+        - md
+        - sm
         # TableBody - aria-live
         - assertive
         - off

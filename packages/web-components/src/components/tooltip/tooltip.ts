@@ -238,7 +238,8 @@ class CDSTooltip extends HostListenerMixin(CDSPopover) {
 
     ['align', 'caret', 'autoalign', 'dropShadow'].forEach((name) => {
       if (changedProperties.has(name)) {
-        const { [name as keyof CDSTooltip]: value } = this;
+        const value =
+          name === 'caret' ? this._caret : this[name as keyof CDSTooltip];
         (toolTipContent as CDSTooltipContent)[name] = value;
       }
     });

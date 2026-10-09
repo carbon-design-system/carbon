@@ -6,7 +6,7 @@
  */
 
 import { LitElement, html, nothing } from 'lit';
-import { property } from 'lit/decorators.js';
+import { property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { prefix } from '../../globals/settings';
@@ -63,6 +63,13 @@ class CDSCardTitle extends LitElement {
   @property({ attribute: 'description-truncate', reflect: true })
   descriptionTruncate: string | null = null;
 
+  @state() private _hasTitleStart = false;
+
+  private _onTitleStartSlotChange(e: Event) {
+    const slot = e.target as HTMLSlotElement;
+    this._hasTitleStart = slot.assignedElements().length > 0;
+  }
+
   private _parseTruncate(value: string | null): false | true | number {
     if (value === null) return false;
     const num = Number(value);
@@ -105,6 +112,7 @@ class CDSCardTitle extends LitElement {
       [`${blockClass}__title-text-row`]: true,
       [`${blockClass}__title-text-row--truncate`]: titleTruncate === true,
       [`${blockClass}__title-text-row--truncate-multi`]: isTitleMulti,
+      [`${blockClass}__title-text-row--with-start-icon`]: this._hasTitleStart,
     });
 
     const labelClasses = classMap({
@@ -130,9 +138,15 @@ class CDSCardTitle extends LitElement {
         </slot>
 
         <span class=${textRowClasses} style=${styleMap(titleVars)}>
-          <slot name="title-start"></slot>
+          <span class="${blockClass}__title-start-icon">
+            <slot
+              name="title-start"
+              @slotchange=${this._onTitleStartSlotChange}></slot>
+          </span>
           <slot></slot>
-          <slot name="title-end"></slot>
+          <span class="${blockClass}__title-end-icon">
+            <slot name="title-end"></slot>
+          </span>
         </span>
 
         <slot name="description">

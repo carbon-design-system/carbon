@@ -5,10 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { action } from 'storybook/actions';
 import { ErrorBoundary, ErrorBoundaryContext } from './';
-import Button from '../Button';
+import DemoComponent from './stories/demo';
 import mdx from './ErrorBoundary.mdx';
 
 const defaultArgs = {
@@ -39,47 +39,6 @@ export default {
   },
 };
 
-function DemoComponent({
-  buttonLabel,
-  children,
-  errorMessage,
-  fallback,
-  shouldThrowError: shouldThrowErrorArg,
-}) {
-  const [shouldThrowError, setShouldThrowError] = useState(shouldThrowErrorArg);
-
-  useEffect(() => {
-    setShouldThrowError(shouldThrowErrorArg);
-  }, [shouldThrowErrorArg]);
-
-  function onClick() {
-    setShouldThrowError(!shouldThrowError);
-  }
-
-  return (
-    <>
-      <Button onClick={onClick}>{buttonLabel}</Button>
-      <div>
-        <ErrorBoundary fallback={fallback}>
-          <ThrowError
-            shouldThrowError={shouldThrowError}
-            errorMessage={errorMessage}>
-            {children}
-          </ThrowError>
-        </ErrorBoundary>
-      </div>
-    </>
-  );
-}
-
-function ThrowError({ children, errorMessage, shouldThrowError }) {
-  if (shouldThrowError) {
-    throw new Error(errorMessage);
-  }
-
-  return children;
-}
-
 export const Default = (args) => {
   return <DemoComponent {...args} />;
 };
@@ -87,9 +46,10 @@ export const Default = (args) => {
 Default.args = { ...defaultArgs };
 Default.argTypes = { ...argTypes };
 
-export const WithCustomContext = ({ onLog = action('log'), ...args }) => {
+export const WithCustomContext = (args) => {
   return (
-    <ErrorBoundaryContext.Provider value={{ log: onLog }}>
+    <ErrorBoundaryContext.Provider
+      value={{ log: (...logArgs) => console.log(...logArgs) }}>
       <DemoComponent {...args} />
     </ErrorBoundaryContext.Provider>
   );

@@ -24,7 +24,7 @@ $css--plex: true !default;
   outline: none;
 
   #{$prefix}-select[inline] {
-    --cds-background: $layer;
+    --cds-background: #{$layer};
   }
 
   .#{$prefix}-ce--pagination__divider {
