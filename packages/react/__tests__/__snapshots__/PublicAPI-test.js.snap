@@ -5866,6 +5866,10 @@ Map {
           [
             "primary",
             "secondary",
+            "danger",
+            "danger--primary",
+            "danger--ghost",
+            "danger--tertiary",
             "ghost",
             "tertiary",
           ],
@@ -5905,8 +5909,12 @@ Map {
   "IconButtonKinds" => {
     "0": "primary",
     "1": "secondary",
-    "2": "ghost",
-    "3": "tertiary",
+    "2": "danger",
+    "3": "danger--primary",
+    "4": "danger--ghost",
+    "5": "danger--tertiary",
+    "6": "ghost",
+    "7": "tertiary",
   },
   "IconSkeleton" => {
     "propTypes": {
