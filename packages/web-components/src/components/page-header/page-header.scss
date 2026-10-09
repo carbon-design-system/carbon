@@ -36,7 +36,7 @@ $css--plex: true !default;
 :host(#{$prefix}-page-header.#{$prefix}--page-header--disable-sticky-tab-bar) {
   position: static;
   // Add padding to compensate for fixed breadcrumb (40px height)
-  padding-block-start: convert.to-rem(40px);
+  padding-block-start: $spacing-08;
 }
 
 :host(#{$prefix}-page-header-breadcrumb),
@@ -52,7 +52,7 @@ $css--plex: true !default;
   z-index: 2;
   overflow: visible;
   background-color: $layer-01;
-  block-size: convert.to-rem(40px);
+  block-size: $spacing-08;
 
   /* custom css property used from calculation of breadcrumb offset */
   inset-block-start: var(--cds-page-header-breadcrumb-top);
@@ -73,7 +73,7 @@ $css--plex: true !default;
   position: fixed;
   z-index: z('header') - 1;
   background-color: $layer-01;
-  block-size: convert.to-rem(40px);
+  block-size: $spacing-08;
   inset-block-start: var(--cds-page-header-breadcrumb-top);
   inset-inline-end: 0;
   inset-inline-start: 0;
@@ -194,7 +194,7 @@ $css--plex: true !default;
     flex-direction: column;
     gap: $spacing-05;
     margin-block-end: $spacing-05;
-    min-block-size: convert.to-rem(40px);
+    min-block-size: $spacing-08;
 
     @include breakpoint('md') {
       display: grid;
@@ -242,12 +242,6 @@ $css--plex: true !default;
     // TODO: remove above styles when styles from React have been migrated
     // and use the extend below
     // @extend .#{$prefix}--page-header__content__contextual-actions;
-  }
-}
-
-:host(#{$prefix}-page-header-content[contextual-actions]) {
-  .#{$prefix}--page-header__content__title {
-    -webkit-line-clamp: 1;
   }
 }
 

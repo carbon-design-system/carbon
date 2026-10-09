@@ -109,18 +109,14 @@ class CDSPageHeader extends LitElement {
       const contentEl = pageHeaderElement.target.querySelector(
         `${prefix}-page-header-content`
       );
-      const contentHeight =
-        contentEl instanceof CDSPageHeaderContent ? contentEl.scrollHeight : 0;
+      const totalContentHeight =
+        contentEl instanceof CDSPageHeaderContent
+          ? contentEl.getBoundingClientRect().height
+          : 0;
       const paddingBlockStart =
         contentEl instanceof CDSPageHeaderContent
           ? parseFloat(getComputedStyle(contentEl)?.paddingBlockStart)
           : 0;
-      const paddingBlockEnd =
-        contentEl instanceof CDSPageHeaderContent
-          ? parseFloat(getComputedStyle(contentEl)?.paddingBlockEnd)
-          : 0;
-      const totalContentHeight =
-        contentHeight + paddingBlockStart + paddingBlockEnd;
       const headerOffset = getHeaderOffset(this);
       const contentPadding = paddingBlockStart;
 

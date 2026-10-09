@@ -129,7 +129,6 @@ export class PageHeaderScroller extends CDSButton {
       enterDelayMs,
       leaveDelayMs,
       disabled,
-      isSelected,
       size,
       context,
       autoalign,
@@ -145,7 +144,6 @@ export class PageHeaderScroller extends CDSButton {
       ?defaultOpen=${defaultOpen}
       ?disabled=${disabled}
       enter-delay-ms=${enterDelayMs}
-      ?isSelected=${isSelected}
       kind="ghost"
       leave-delay-ms=${leaveDelayMs}
       size=${size}

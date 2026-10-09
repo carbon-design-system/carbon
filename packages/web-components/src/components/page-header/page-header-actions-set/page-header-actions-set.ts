@@ -111,7 +111,9 @@ export default class CDSPageHeaderActionsSet extends LitElement {
     const slot = this.shadowRoot?.querySelector('slot') as HTMLSlotElement;
 
     const checkOverflow = () => {
-      const slottedElements = slot?.assignedElements() as HTMLElement[];
+      const slottedElements = (slot?.assignedElements() ?? []).filter(
+        (el): el is HTMLElement => el instanceof HTMLElement
+      );
 
       if (!slottedElements || slottedElements.length === 0) {
         return;

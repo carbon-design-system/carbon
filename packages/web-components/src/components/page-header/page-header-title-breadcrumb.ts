@@ -71,9 +71,7 @@ class CDSPageHeaderTitleBreadcrumb extends CDSBreadcrumbItem {
   }
   render() {
     return html`
-      <cds-breadcrumb-item
-        class="${prefix}--page-header-title-breadcrumb"
-        role="presentation">
+      <cds-breadcrumb-item class="${prefix}--page-header-title-breadcrumb">
         <slot></slot>
       </cds-breadcrumb-item>
     `;

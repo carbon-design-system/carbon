@@ -160,53 +160,25 @@ export const Default = {
           </cds-page-header-content>
           <cds-page-header-tabs>
             <cds-tabs value="tab-1">
-              <cds-tab
-                id="tab-1"
-                target="tab-panel-1"
-                value="tab-1"
-                role="presentation"
+              <cds-tab id="tab-1" target="tab-panel-1" value="tab-1"
                 >Tab 1</cds-tab
               >
-              <cds-tab
-                id="tab-2"
-                target="tab-panel-2"
-                value="tab-2"
-                role="presentation"
+              <cds-tab id="tab-2" target="tab-panel-2" value="tab-2"
                 >Tab 2</cds-tab
               >
-              <cds-tab
-                id="tab-3"
-                target="tab-panel-3"
-                value="tab-3"
-                role="presentation"
+              <cds-tab id="tab-3" target="tab-panel-3" value="tab-3"
                 >Tab 3</cds-tab
               >
-              <cds-tab
-                id="tab-4"
-                target="tab-panel-4"
-                value="tab-4"
-                role="presentation"
+              <cds-tab id="tab-4" target="tab-panel-4" value="tab-4"
                 >Tab 4</cds-tab
               >
-              <cds-tab
-                id="tab-5"
-                target="tab-panel-5"
-                value="tab-5"
-                role="presentation"
+              <cds-tab id="tab-5" target="tab-panel-5" value="tab-5"
                 >Tab 5</cds-tab
               >
-              <cds-tab
-                id="tab-6"
-                target="tab-panel-6"
-                value="tab-6"
-                role="presentation"
+              <cds-tab id="tab-6" target="tab-panel-6" value="tab-6"
                 >Tab 6</cds-tab
               >
-              <cds-tab
-                id="tab-7"
-                target="tab-panel-7"
-                value="tab-7"
-                role="presentation"
+              <cds-tab id="tab-7" target="tab-panel-7" value="tab-7"
                 >Tab 7</cds-tab
               >
             </cds-tabs>
@@ -627,53 +599,25 @@ export const TabBarWithTabsAndTags = {
         <cds-page-header-tabs>
           <cds-page-header-scroller slot="scroller"></cds-page-header-scroller>
           <cds-tabs value="tab-1">
-            <cds-tab
-              id="tab-1"
-              target="tab-panel-1"
-              value="tab-1"
-              role="presentation"
+            <cds-tab id="tab-1" target="tab-panel-1" value="tab-1"
               >Tab 1</cds-tab
             >
-            <cds-tab
-              id="tab-2"
-              target="tab-panel-2"
-              value="tab-2"
-              role="presentation"
+            <cds-tab id="tab-2" target="tab-panel-2" value="tab-2"
               >Tab 2</cds-tab
             >
-            <cds-tab
-              id="tab-3"
-              target="tab-panel-3"
-              value="tab-3"
-              role="presentation"
+            <cds-tab id="tab-3" target="tab-panel-3" value="tab-3"
               >Tab 3</cds-tab
             >
-            <cds-tab
-              id="tab-4"
-              target="tab-panel-4"
-              value="tab-4"
-              role="presentation"
+            <cds-tab id="tab-4" target="tab-panel-4" value="tab-4"
               >Tab 4</cds-tab
             >
-            <cds-tab
-              id="tab-5"
-              target="tab-panel-5"
-              value="tab-5"
-              role="presentation"
+            <cds-tab id="tab-5" target="tab-panel-5" value="tab-5"
               >Tab 5</cds-tab
             >
-            <cds-tab
-              id="tab-6"
-              target="tab-panel-6"
-              value="tab-6"
-              role="presentation"
+            <cds-tab id="tab-6" target="tab-panel-6" value="tab-6"
               >Tab 6</cds-tab
             >
-            <cds-tab
-              id="tab-7"
-              target="tab-panel-7"
-              value="tab-7"
-              role="presentation"
+            <cds-tab id="tab-7" target="tab-panel-7" value="tab-7"
               >Tab 7</cds-tab
             >
           </cds-tabs>
@@ -783,53 +727,25 @@ export const Compact = {
           </cds-page-header-breadcrumb>
           <cds-page-header-tabs>
             <cds-tabs value="tab-1">
-              <cds-tab
-                id="tab-1"
-                target="tab-panel-1"
-                value="tab-1"
-                role="presentation"
+              <cds-tab id="tab-1" target="tab-panel-1" value="tab-1"
                 >Tab 1</cds-tab
               >
-              <cds-tab
-                id="tab-2"
-                target="tab-panel-2"
-                value="tab-2"
-                role="presentation"
+              <cds-tab id="tab-2" target="tab-panel-2" value="tab-2"
                 >Tab 2</cds-tab
               >
-              <cds-tab
-                id="tab-3"
-                target="tab-panel-3"
-                value="tab-3"
-                role="presentation"
+              <cds-tab id="tab-3" target="tab-panel-3" value="tab-3"
                 >Tab 3</cds-tab
               >
-              <cds-tab
-                id="tab-4"
-                target="tab-panel-4"
-                value="tab-4"
-                role="presentation"
+              <cds-tab id="tab-4" target="tab-panel-4" value="tab-4"
                 >Tab 4</cds-tab
               >
-              <cds-tab
-                id="tab-5"
-                target="tab-panel-5"
-                value="tab-5"
-                role="presentation"
+              <cds-tab id="tab-5" target="tab-panel-5" value="tab-5"
                 >Tab 5</cds-tab
               >
-              <cds-tab
-                id="tab-6"
-                target="tab-panel-6"
-                value="tab-6"
-                role="presentation"
+              <cds-tab id="tab-6" target="tab-panel-6" value="tab-6"
                 >Tab 6</cds-tab
               >
-              <cds-tab
-                id="tab-7"
-                target="tab-panel-7"
-                value="tab-7"
-                role="presentation"
+              <cds-tab id="tab-7" target="tab-panel-7" value="tab-7"
                 >Tab 7</cds-tab
               >
             </cds-tabs>
@@ -986,53 +902,25 @@ export const CustomRenderWithCallbacks = {
             <cds-page-header-scroller slot="scroller">
             </cds-page-header-scroller>
             <cds-tabs value="tab-1">
-              <cds-tab
-                id="tab-1"
-                target="tab-panel-1"
-                value="tab-1"
-                role="presentation"
+              <cds-tab id="tab-1" target="tab-panel-1" value="tab-1"
                 >Tab 1</cds-tab
               >
-              <cds-tab
-                id="tab-2"
-                target="tab-panel-2"
-                value="tab-2"
-                role="presentation"
+              <cds-tab id="tab-2" target="tab-panel-2" value="tab-2"
                 >Tab 2</cds-tab
               >
-              <cds-tab
-                id="tab-3"
-                target="tab-panel-3"
-                value="tab-3"
-                role="presentation"
+              <cds-tab id="tab-3" target="tab-panel-3" value="tab-3"
                 >Tab 3</cds-tab
               >
-              <cds-tab
-                id="tab-4"
-                target="tab-panel-4"
-                value="tab-4"
-                role="presentation"
+              <cds-tab id="tab-4" target="tab-panel-4" value="tab-4"
                 >Tab 4</cds-tab
               >
-              <cds-tab
-                id="tab-5"
-                target="tab-panel-5"
-                value="tab-5"
-                role="presentation"
+              <cds-tab id="tab-5" target="tab-panel-5" value="tab-5"
                 >Tab 5</cds-tab
               >
-              <cds-tab
-                id="tab-6"
-                target="tab-panel-6"
-                value="tab-6"
-                role="presentation"
+              <cds-tab id="tab-6" target="tab-panel-6" value="tab-6"
                 >Tab 6</cds-tab
               >
-              <cds-tab
-                id="tab-7"
-                target="tab-panel-7"
-                value="tab-7"
-                role="presentation"
+              <cds-tab id="tab-7" target="tab-panel-7" value="tab-7"
                 >Tab 7</cds-tab
               >
             </cds-tabs>
@@ -1154,53 +1042,25 @@ export const WithDisabledStickyTabBar = {
           </cds-page-header-content>
           <cds-page-header-tabs disable-sticky-tab-bar>
             <cds-tabs value="tab-1">
-              <cds-tab
-                id="tab-1"
-                target="tab-panel-1"
-                value="tab-1"
-                role="presentation"
+              <cds-tab id="tab-1" target="tab-panel-1" value="tab-1"
                 >Tab 1</cds-tab
               >
-              <cds-tab
-                id="tab-2"
-                target="tab-panel-2"
-                value="tab-2"
-                role="presentation"
+              <cds-tab id="tab-2" target="tab-panel-2" value="tab-2"
                 >Tab 2</cds-tab
               >
-              <cds-tab
-                id="tab-3"
-                target="tab-panel-3"
-                value="tab-3"
-                role="presentation"
+              <cds-tab id="tab-3" target="tab-panel-3" value="tab-3"
                 >Tab 3</cds-tab
               >
-              <cds-tab
-                id="tab-4"
-                target="tab-panel-4"
-                value="tab-4"
-                role="presentation"
+              <cds-tab id="tab-4" target="tab-panel-4" value="tab-4"
                 >Tab 4</cds-tab
               >
-              <cds-tab
-                id="tab-5"
-                target="tab-panel-5"
-                value="tab-5"
-                role="presentation"
+              <cds-tab id="tab-5" target="tab-panel-5" value="tab-5"
                 >Tab 5</cds-tab
               >
-              <cds-tab
-                id="tab-6"
-                target="tab-panel-6"
-                value="tab-6"
-                role="presentation"
+              <cds-tab id="tab-6" target="tab-panel-6" value="tab-6"
                 >Tab 6</cds-tab
               >
-              <cds-tab
-                id="tab-7"
-                target="tab-panel-7"
-                value="tab-7"
-                role="presentation"
+              <cds-tab id="tab-7" target="tab-panel-7" value="tab-7"
                 >Tab 7</cds-tab
               >
             </cds-tabs>
