@@ -73,6 +73,21 @@ Default.argTypes = {
   ...sharedArgTypes,
 };
 
+export const WithTranslations = (args) => <ProgressBar {...args} />;
+
+WithTranslations.args = {
+  ...sharedArgs,
+  label: 'Subiendo archivos',
+  helperText: '75 MB de 100 MB',
+  translateWithId: (id) =>
+    ({
+      'carbon.progress-bar.loading': 'Cargando',
+      'carbon.progress-bar.finished': 'Completado',
+      'carbon.progress-bar.error': 'Error de carga',
+    })[id],
+};
+WithTranslations.argTypes = sharedArgTypes;
+
 export const Indeterminate = (args) => <ProgressBar {...args} />;
 
 Indeterminate.args = {
