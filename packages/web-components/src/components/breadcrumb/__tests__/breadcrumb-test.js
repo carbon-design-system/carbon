@@ -8,6 +8,7 @@
 import { expect, fixture, html } from '@open-wc/testing';
 import '@carbon/web-components/es/components/breadcrumb/index.js';
 import '@carbon/web-components/es/components/overflow-menu/index.js';
+import '@carbon/web-components/es/components/menu/index.js';
 
 describe('cds-breadcrumb', () => {
   it('should accept an `aria-label` for nav element', async () => {
@@ -71,8 +72,10 @@ describe('cds-breadcrumb', () => {
   it('should pass the size attribute to an overflow menu item', async () => {
     const el = await fixture(html`
       <cds-breadcrumb-item size="sm">
-        <cds-overflow-menu>
-          <cds-overflow-menu-body></cds-overflow-menu-body>
+        <cds-overflow-menu label="Options">
+          <cds-menu>
+            <cds-menu-item label="Option 1"></cds-menu-item>
+          </cds-menu>
         </cds-overflow-menu>
       </cds-breadcrumb-item>
     `);
