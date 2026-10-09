@@ -13,6 +13,7 @@ import { prefix } from '../../globals/settings';
 import styles from './popover.scss?lit';
 import CDSPopoverContent from './popover-content';
 import HostListener from '../../globals/decorators/host-listener';
+import AutoAlignMixin from '../../globals/mixins/auto-align';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import FloatingUIController from '../../globals/controllers/floating-controller';
 import { POPOVER_BACKGROUND_TOKEN } from './defs';
@@ -28,7 +29,7 @@ import { isFeatureFlagEnabled } from '../feature-flags';
  * @fires cds-popover-closed when the popover closes via focusout/outsideclick
  */
 @customElement(`${prefix}-popover`)
-class CDSPopover extends HostListenerMixin(LitElement) {
+class CDSPopover extends AutoAlignMixin(HostListenerMixin(LitElement)) {
   /**
    * Create popover controller instance
    */
@@ -65,7 +66,7 @@ class CDSPopover extends HostListenerMixin(LitElement) {
 
   /**
    * Specify whether a auto align functionality should be applied. Defaults to
-   * `true` when `enable-v12-release` is enabled, and to `false` otherwise.
+   * `true` when `enable-v12-autoalign` is enabled, and to `false` otherwise.
    */
   @property({ type: Boolean, reflect: true })
   autoalign?: boolean;
@@ -326,7 +327,6 @@ class CDSPopover extends HostListenerMixin(LitElement) {
 
   connectedCallback() {
     super.connectedCallback();
-    this.autoalign ??= isFeatureFlagEnabled('enable-v12-release', this);
     document.addEventListener('click', this._handleOutsideClick);
   }
 

@@ -13,7 +13,7 @@ import '../popover/index';
 import popoverStyles from '../popover/popover.scss?lit';
 import styles from './tooltip.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-import { isFeatureFlagEnabled } from '../feature-flags';
+import AutoAlignMixin from '../../globals/mixins/auto-align';
 
 /**
  * Definition tooltip.
@@ -21,7 +21,7 @@ import { isFeatureFlagEnabled } from '../feature-flags';
  * @element cds-definition-tooltip
  */
 @customElement(`${prefix}-definition-tooltip`)
-class CDSDefinitionTooltip extends LitElement {
+class CDSDefinitionTooltip extends AutoAlignMixin(LitElement) {
   /**
    * Specify how the trigger should align with the tooltip
    */
@@ -30,7 +30,7 @@ class CDSDefinitionTooltip extends LitElement {
 
   /**
    * Will auto-align Definition Tooltip. This prop is currently experimental and is subject to future changes.
-   * Defaults to `true` when `enable-v12-release` is enabled, and to `false`
+   * Defaults to `true` when `enable-v12-autoalign` is enabled, and to `false`
    * otherwise.
    */
   @property({ type: Boolean, reflect: true })
@@ -55,7 +55,6 @@ class CDSDefinitionTooltip extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.autoalign ??= isFeatureFlagEnabled('enable-v12-release', this);
 
     adoptStyles(this.renderRoot as ShadowRoot, [popoverStyles, styles]);
 

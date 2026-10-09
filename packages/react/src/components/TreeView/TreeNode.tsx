@@ -288,9 +288,6 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
       detailsWrapperRef
     );
 
-    const enableV12Release = useFeatureFlag('enable-v12-release');
-    const autoAlignValue = autoAlign ?? enableV12Release;
-
     const enableTreeviewControllable = useFeatureFlag(
       'enable-treeview-controllable'
     );
@@ -319,7 +316,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
             label={tooltipText}
             kind="ghost"
             align={align}
-            autoAlign={autoAlignValue}
+            autoAlign={autoAlign}
             className={`${prefix}--tree-node__label__text-button`}
             wrapperClasses={`${prefix}--popover-container`}>
             <span

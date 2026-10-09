@@ -16,7 +16,7 @@ import { ICON_BUTTON_SIZE, ICON_BUTTON_TOOLTIP_ALIGNMENT } from './defs';
 import tooltipStyles from '../tooltip/tooltip.scss?lit';
 import buttonStyles from '../button/button.scss?lit';
 import styles from './icon-button.scss?lit';
-import { isFeatureFlagEnabled } from '../feature-flags';
+import AutoAlignMixin from '../../globals/mixins/auto-align';
 
 export { ICON_BUTTON_SIZE, ICON_BUTTON_TOOLTIP_ALIGNMENT };
 
@@ -26,7 +26,7 @@ export { ICON_BUTTON_SIZE, ICON_BUTTON_TOOLTIP_ALIGNMENT };
  * @element cds-icon-button
  */
 @customElement(`${prefix}-icon-button`)
-class CDSIconButton extends CDSButton {
+class CDSIconButton extends AutoAlignMixin(CDSButton) {
   /**
    * Checks if a badge indicator is being used with incorrect properties
    */
@@ -39,7 +39,7 @@ class CDSIconButton extends CDSButton {
 
   /**
    * Specify whether a auto align functionality should be applied. Defaults to
-   * `true` when `enable-v12-release` is enabled, and to `false` otherwise.
+   * `true` when `enable-v12-autoalign` is enabled, and to `false` otherwise.
    */
   @property({ type: Boolean, reflect: true })
   autoalign?: boolean;
@@ -76,7 +76,6 @@ class CDSIconButton extends CDSButton {
 
   connectedCallback() {
     super.connectedCallback();
-    this.autoalign ??= isFeatureFlagEnabled('enable-v12-release', this);
 
     adoptStyles(this.renderRoot as ShadowRoot, [
       tooltipStyles,

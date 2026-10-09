@@ -16,7 +16,6 @@ import { usePrefix } from '../../internal/usePrefix';
 import { noopFn } from '../../internal/noopFn';
 import { deprecateValuesWithin } from '../../prop-types/deprecateValuesWithin';
 import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
-import { useFeatureFlag } from '../FeatureFlags';
 import type {
   DeprecatedPopoverAlignment,
   NewPopoverAlignment,
@@ -79,9 +78,6 @@ export default function CopyButton({
   onClick = noopFn,
   ...other
 }: CopyButtonProps) {
-  const enableV12Release = useFeatureFlag('enable-v12-release');
-  const autoAlignValue = autoAlign ?? enableV12Release;
-
   const prefix = usePrefix();
   return (
     <LayoutConstraint size={{ default: 'md', max: 'lg' }}>
@@ -90,7 +86,7 @@ export default function CopyButton({
         feedbackTimeout={feedbackTimeout}
         onClick={onClick}
         align={align}
-        autoAlign={autoAlignValue}
+        autoAlign={autoAlign}
         className={classnames(className, `${prefix}--copy-btn`)}
         aria-label={iconDescription}
         {...other}>

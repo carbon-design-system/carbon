@@ -74,6 +74,7 @@ import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps'
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
 import { useFeatureFlag } from '../FeatureFlags';
+import { useAutoAlign } from '../../internal/useAutoAlign';
 
 const {
   InputBlur,
@@ -331,7 +332,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
   ItemType,
 >(
   {
-    autoAlign,
+    autoAlign: autoAlignProp,
     className: containerClassName,
     clearSelectionDescription = 'Total items selected: ',
     clearSelectionText = 'To clear selection, press Delete or Backspace',
@@ -373,6 +374,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
   }: FilterableMultiSelectProps<ItemType>,
   ref: ForwardedRef<HTMLDivElement>
 ) {
+  const autoAlign = useAutoAlign(autoAlignProp);
   const { isFluid } = useContext(FormContext);
   const isFirstRender = useRef(true);
   const labelRef = useRef<HTMLLabelElement>(null);
@@ -395,7 +397,6 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
   const selectAll = filteredItems.some(isSelectAllItem);
 
   const enableV12Release = useFeatureFlag('enable-v12-release');
-  const autoAlignValue = autoAlign ?? enableV12Release;
 
   const {
     selectedItems: controlledSelectedItems,
@@ -451,7 +452,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
   }, [nonSelectAllItems, selectAllStatus, controlledSelectedItems, toggleAll]);
 
   const { refs, floatingStyles, middlewareData } = useFloating(
-    autoAlignValue
+    autoAlign
       ? {
           placement: direction,
 
@@ -479,7 +480,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
   );
 
   useIsomorphicEffect(() => {
-    if (autoAlignValue) {
+    if (autoAlign) {
       const updatedFloatingStyles = {
         ...floatingStyles,
         visibility: middlewareData.hide?.referenceHidden ? 'hidden' : 'visible',
@@ -490,7 +491,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
         }
       });
     }
-  }, [autoAlignValue, floatingStyles, refs.floating, middlewareData, open]);
+  }, [autoAlign, floatingStyles, refs.floating, middlewareData, open]);
 
   const textInput = useRef<HTMLInputElement>(null);
   const filterableMultiSelectInstanceId = useId();
@@ -569,7 +570,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
         isFluid && normalizedProps.invalid,
       [`${prefix}--list-box__wrapper--slug`]: slug,
       [`${prefix}--list-box__wrapper--decorator`]: decorator,
-      [`${prefix}--autoalign`]: autoAlignValue,
+      [`${prefix}--autoalign`]: autoAlign,
     }
   );
   const hasHelper = hasHelperText(helperText);
@@ -957,12 +958,12 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     () =>
       getMenuProps(
         {
-          ref: autoAlignValue ? refs.setFloating : null,
+          ref: autoAlign ? refs.setFloating : null,
           hidden: !isOpen,
         },
         { suppressRefError: true }
       ),
-    [autoAlignValue, getMenuProps, isOpen, refs.setFloating]
+    [autoAlign, getMenuProps, isOpen, refs.setFloating]
   );
 
   const mergedRef = mergeRefs(textInput, inputProp.ref);
@@ -1016,7 +1017,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
         size={size}>
         <div
           className={`${prefix}--list-box__field`}
-          ref={autoAlignValue ? refs.setReference : null}>
+          ref={autoAlign ? refs.setReference : null}>
           {controlledSelectedItems.length > 0 && (
             <ListBoxSelection
               readOnly={readOnly}

@@ -227,7 +227,7 @@ class CDSOverflowMenu
 
   /**
    * Experimental property. Enables automatic menu placement flipping to avoid clipping.
-   * Defaults to `true` when `enable-v12-release` is enabled, and to `false`
+   * Defaults to `true` when `enable-v12-autoalign` is enabled, and to `false`
    * otherwise.
    */
   @property({ type: Boolean, reflect: true })
@@ -369,7 +369,6 @@ class CDSOverflowMenu
       this.attachShadow({ mode: 'open' });
     }
     super.connectedCallback();
-    this.autoalign ??= isFeatureFlagEnabled('enable-v12-release', this);
 
     adoptStyles(this.renderRoot as ShadowRoot, [iconButtonStyles, styles]);
 

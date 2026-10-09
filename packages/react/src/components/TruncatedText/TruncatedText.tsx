@@ -12,7 +12,6 @@ import { usePrefix } from '../../internal/usePrefix';
 import useTruncatedText from './useTruncatedText';
 import Tooltip from '../Tooltip';
 import { PopoverAlignment } from '../Popover';
-import { useFeatureFlag } from '../FeatureFlags';
 
 export interface TruncatedTextProps {
   /**
@@ -71,9 +70,6 @@ export const TruncatedText = forwardRef<HTMLDivElement, TruncatedTextProps>(
       type = 'tooltip',
       ...rest
     } = props;
-    const enableV12Release = useFeatureFlag('enable-v12-release');
-    const autoAlignValue = autoAlign ?? enableV12Release;
-
     const [expanded, setExpanded] = useState(false);
     const { ref: contentRef, truncated } = useTruncatedText({
       lines,
@@ -111,7 +107,7 @@ export const TruncatedText = forwardRef<HTMLDivElement, TruncatedTextProps>(
       </span>
     );
     const tooltipVariant = truncated ? (
-      <Tooltip align={align} autoAlign={autoAlignValue} label={value}>
+      <Tooltip align={align} autoAlign={autoAlign} label={value}>
         <button
           type="button"
           className={`${blockClass}__tooltip-trigger`}

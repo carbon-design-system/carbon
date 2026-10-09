@@ -16,6 +16,8 @@ import {
 } from '..';
 import { Information } from '@carbon/react/icons';
 import userEvent from '@testing-library/user-event';
+import { FeatureFlags } from '../../FeatureFlags';
+import { waitForPosition } from '../../ListBox/test-helpers';
 
 describe('Toggletip', () => {
   describe('accessibility', () => {
@@ -718,5 +720,42 @@ describe('ToggletipLabel', () => {
     const label = screen.getByText('Label Text');
 
     expect(label).toHaveAttribute('data-custom', '123');
+  });
+});
+
+describe('Toggletip autoAlign default', () => {
+  it('should not enable `autoAlign` by default', async () => {
+    render(<Toggletip data-testid="toggletip">test</Toggletip>);
+    await waitForPosition();
+
+    expect(screen.getByTestId('toggletip')).not.toHaveClass(
+      `${prefix}--autoalign`
+    );
+  });
+
+  it('should enable `autoAlign` by default with `enable-v12-autoalign`', async () => {
+    render(
+      <FeatureFlags enableV12Autoalign>
+        <Toggletip data-testid="toggletip">test</Toggletip>
+      </FeatureFlags>
+    );
+    await waitForPosition();
+
+    expect(screen.getByTestId('toggletip')).toHaveClass(`${prefix}--autoalign`);
+  });
+
+  it('should respect `autoAlign={false}` with `enable-v12-autoalign`', async () => {
+    render(
+      <FeatureFlags enableV12Autoalign>
+        <Toggletip autoAlign={false} data-testid="toggletip">
+          test
+        </Toggletip>
+      </FeatureFlags>
+    );
+    await waitForPosition();
+
+    expect(screen.getByTestId('toggletip')).not.toHaveClass(
+      `${prefix}--autoalign`
+    );
   });
 });

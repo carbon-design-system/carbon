@@ -11,7 +11,6 @@ import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import { DefinitionTooltip } from '../Tooltip';
 import { PopoverAlignment } from '../Popover';
-import { useFeatureFlag } from '../FeatureFlags';
 import {
   Critical,
   CriticalSeverity,
@@ -133,9 +132,6 @@ export const ShapeIndicator = React.forwardRef(
     }: ShapeIndicatorProps,
     ref: React.Ref<HTMLDivElement>
   ) => {
-    const enableV12Release = useFeatureFlag('enable-v12-release');
-    const autoAlignValue = autoAlign ?? enableV12Release;
-
     const prefix = usePrefix();
     const classNames = cx(`${prefix}--shape-indicator`, customClassName, {
       [`${prefix}--shape-indicator--14`]: textSize == 14,
@@ -156,7 +152,7 @@ export const ShapeIndicator = React.forwardRef(
     const content = compact ? (
       <DefinitionTooltip
         align={align}
-        autoAlign={autoAlignValue}
+        autoAlign={autoAlign}
         openOnHover
         definition={label}
         triggerClassName={`${prefix}--shape-indicator__button`}>

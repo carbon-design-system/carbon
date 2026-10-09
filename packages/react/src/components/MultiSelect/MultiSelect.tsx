@@ -69,6 +69,7 @@ import {
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
+import { useAutoAlign } from '../../internal/useAutoAlign';
 
 const {
   ItemClick,
@@ -297,7 +298,7 @@ export interface MultiSelectProps<ItemType>
 export const MultiSelect = React.forwardRef(
   <ItemType,>(
     {
-      autoAlign,
+      autoAlign: autoAlignProp,
       className: containerClassName,
       decorator,
       id,
@@ -337,6 +338,7 @@ export const MultiSelect = React.forwardRef(
     }: MultiSelectProps<ItemType>,
     ref: ForwardedRef<HTMLButtonElement>
   ) => {
+    const autoAlign = useAutoAlign(autoAlignProp);
     const filteredItems = useMemo(() => {
       return items.filter((item) => {
         if (typeof item === 'object' && item !== null) {
@@ -361,11 +363,10 @@ export const MultiSelect = React.forwardRef(
     const [topItems, setTopItems] = useState<ItemType[]>([]);
     const [itemsCleared, setItemsCleared] = useState(false);
 
-    const enableV12Release = useFeatureFlag('enable-v12-release');
-    const autoAlignValue = autoAlign ?? enableV12Release;
-
     const enableFloatingStyles =
-      useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlignValue;
+      useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
+
+    const enableV12Release = useFeatureFlag('enable-v12-release');
 
     const { refs, floatingStyles, middlewareData } = useFloating(
       enableFloatingStyles
@@ -380,7 +381,7 @@ export const MultiSelect = React.forwardRef(
 
             // Middleware order matters, arrow should be last
             middleware: [
-              autoAlignValue && flip({ crossAxis: false }),
+              autoAlign && flip({ crossAxis: false }),
               floatingSize({
                 apply({ rects, elements }) {
                   Object.assign(elements.floating.style, {
@@ -388,7 +389,7 @@ export const MultiSelect = React.forwardRef(
                   });
                 },
               }),
-              autoAlignValue && hide(),
+              autoAlign && hide(),
             ],
             whileElementsMounted: autoUpdate,
           }

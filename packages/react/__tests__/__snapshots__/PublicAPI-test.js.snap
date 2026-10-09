@@ -3557,6 +3557,9 @@ Map {
       "enableTreeviewControllable": {
         "type": "bool",
       },
+      "enableV12Autoalign": {
+        "type": "bool",
+      },
       "enableV12DynamicFloatingStyles": {
         "type": "bool",
       },
@@ -11826,6 +11829,9 @@ Map {
       "enableTreeviewControllable": {
         "type": "bool",
       },
+      "enableV12Autoalign": {
+        "type": "bool",
+      },
       "enableV12DynamicFloatingStyles": {
         "type": "bool",
       },
@@ -14129,6 +14135,9 @@ Map {
         "type": "bool",
       },
       "enableTreeviewControllable": {
+        "type": "bool",
+      },
+      "enableV12Autoalign": {
         "type": "bool",
       },
       "enableV12DynamicFloatingStyles": {

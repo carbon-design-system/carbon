@@ -10,7 +10,7 @@ import { classMap } from 'lit/directives/class-map.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
-import { isFeatureFlagEnabled } from '../feature-flags';
+import AutoAlignMixin from '../../globals/mixins/auto-align';
 import '../tooltip/index';
 
 import styles from './truncated-text.scss?lit';
@@ -25,7 +25,7 @@ const elementName = `${prefix}-${componentName}`; // cds-truncated-text
  * @element cds-truncated-text
  */
 @customElement(elementName)
-export class CDSTruncatedText extends LitElement {
+export class CDSTruncatedText extends AutoAlignMixin(LitElement) {
   /**
    * Specify how the tooltip should align with the content.
    */
@@ -34,7 +34,7 @@ export class CDSTruncatedText extends LitElement {
 
   /**
    * Specify whether a auto align functionality should be applied. Defaults to
-   * `true` when `enable-v12-release` is enabled, and to `false` otherwise.
+   * `true` when `enable-v12-autoalign` is enabled, and to `false` otherwise.
    */
   @property({ type: Boolean, reflect: true })
   autoalign?: boolean;
@@ -90,7 +90,6 @@ export class CDSTruncatedText extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.autoalign ??= isFeatureFlagEnabled('enable-v12-release', this);
     this._isLayered = !!this.closest(`${prefix}-layer`);
     this.type = this.type || 'tooltip';
   }

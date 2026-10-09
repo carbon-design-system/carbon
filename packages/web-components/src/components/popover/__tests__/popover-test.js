@@ -765,18 +765,6 @@ describe('cds-popover autoAlignBoundary', () => {
 });
 
 describe('cds-popover autoalign default', () => {
-  it('should default autoalign to false', async () => {
-    const el = await fixture(html`
-      <cds-popover>
-        <button type="button">Test</button>
-        <cds-popover-content></cds-popover-content>
-      </cds-popover>
-    `);
-
-    expect(el.autoalign).to.be.false;
-    expect(el).to.not.have.attribute('autoalign');
-  });
-
   it('should default autoalign to true with enable-v12-release', async () => {
     const featureFlag = await fixture(html`
       <feature-flags enable-v12-release="true">

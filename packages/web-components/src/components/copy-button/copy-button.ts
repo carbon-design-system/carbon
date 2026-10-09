@@ -10,6 +10,7 @@ import { property } from 'lit/decorators.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import Copy16 from '@carbon/icons/es/copy/16.js';
 import { prefix } from '../../globals/settings';
+import AutoAlignMixin from '../../globals/mixins/auto-align';
 import FocusMixin from '../../globals/mixins/focus';
 import styles from './copy-button.scss?lit';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
@@ -23,7 +24,10 @@ import { iconLoader } from '../../globals/internal/icon-loader';
  * @element cds-copy-button
  */
 @customElement(`${prefix}-copy-button`)
-class CDSCopyButton extends FocusMixin(LitElement) {
+class CDSCopyButton extends AutoAlignMixin(
+  FocusMixin(LitElement),
+  'autoAlign'
+) {
   /**
    * Specify an optional className to be added to your Button
    */
@@ -50,7 +54,7 @@ class CDSCopyButton extends FocusMixin(LitElement) {
 
   /**
    * Specify whether an auto align functionality should be applied. Defaults to
-   * `true` when `enable-v12-release` is enabled, and to `false` otherwise.
+   * `true` when `enable-v12-autoalign` is enabled, and to `false` otherwise.
    */
   @property({ type: Boolean, reflect: true })
   autoAlign?: boolean;

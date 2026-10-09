@@ -9,7 +9,7 @@ import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import { ICON_INDICATOR_KIND } from './defs';
-import { isFeatureFlagEnabled } from '../feature-flags';
+import AutoAlignMixin from '../../globals/mixins/auto-align';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
 import '../tooltip/definition-tooltip';
 import ErrorFilled16 from '@carbon/icons/es/error--filled/16.js';
@@ -99,7 +99,7 @@ const iconMap = {
  * @element cds-icon-indicator
  */
 @customElement(`${prefix}-icon-indicator`)
-class CDSIconIndicator extends LitElement {
+class CDSIconIndicator extends AutoAlignMixin(LitElement) {
   /**
    * Specify how the tooltip should align with the icon in compact mode
    */
@@ -108,7 +108,7 @@ class CDSIconIndicator extends LitElement {
 
   /**
    * Will auto-align the tooltip in compact mode. Defaults to `true` when
-   * `enable-v12-release` is enabled, and to `false` otherwise.
+   * `enable-v12-autoalign` is enabled, and to `false` otherwise.
    */
   @property({ type: Boolean, reflect: false })
   autoalign?: boolean;
@@ -143,11 +143,6 @@ class CDSIconIndicator extends LitElement {
    */
   @property()
   kind!: ICON_INDICATOR_KIND;
-
-  connectedCallback() {
-    super.connectedCallback();
-    this.autoalign ??= isFeatureFlagEnabled('enable-v12-release', this);
-  }
 
   render() {
     const IconComponent = iconMap[this.kind]?.[this.size];

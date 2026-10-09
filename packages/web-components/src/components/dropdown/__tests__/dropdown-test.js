@@ -9,7 +9,6 @@ import { expect, fixture, html } from '@open-wc/testing';
 import { sendKeys } from '@web/test-runner-commands';
 import '@carbon/web-components/es/components/dropdown/index.js';
 import '@carbon/web-components/es/components/dropdown/dropdown-skeleton.js';
-import '@carbon/web-components/es/components/feature-flags/index.js';
 import '@carbon/web-components/es/components/ai-label/index.js';
 import '@carbon/web-components/es/components/slug/index.js';
 
@@ -502,57 +501,6 @@ describe('cds-dropdown', function () {
       } finally {
         el._floatingController.hostDisconnected = originalHostDisconnected;
       }
-    });
-
-    it('should default autoalign to false', async () => {
-      const el = await fixture(dropdown);
-
-      expect(el.autoalign).to.be.false;
-      expect(el).to.not.have.attribute('autoalign');
-    });
-
-    it('should default autoalign to true with enable-v12-release', async () => {
-      const featureFlag = await fixture(html`
-        <feature-flags enable-v12-release="true">
-          <cds-dropdown title-text="Dropdown Label"></cds-dropdown>
-        </feature-flags>
-      `);
-      const el = featureFlag.querySelector('cds-dropdown');
-
-      await el.updateComplete;
-
-      expect(el.autoalign).to.be.true;
-      expect(el).to.have.attribute('autoalign');
-    });
-
-    it('should keep autoalign disabled when set to false before connecting with enable-v12-release', async () => {
-      const featureFlag = await fixture(html`
-        <feature-flags enable-v12-release="true"></feature-flags>
-      `);
-      const el = document.createElement('cds-dropdown');
-      el.autoalign = false;
-      featureFlag.appendChild(el);
-
-      await el.updateComplete;
-
-      expect(el.autoalign).to.be.false;
-      expect(el).to.not.have.attribute('autoalign');
-    });
-
-    it('should keep autoalign disabled when bound to false with enable-v12-release', async () => {
-      const featureFlag = await fixture(html`
-        <feature-flags enable-v12-release="true">
-          <cds-dropdown
-            .autoalign=${false}
-            title-text="Dropdown Label"></cds-dropdown>
-        </feature-flags>
-      `);
-      const el = featureFlag.querySelector('cds-dropdown');
-
-      await el.updateComplete;
-
-      expect(el.autoalign).to.be.false;
-      expect(el).to.not.have.attribute('autoalign');
     });
   });
 

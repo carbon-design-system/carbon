@@ -34,6 +34,7 @@ import {
 import { useFeatureFlag } from '../FeatureFlags';
 import { PolymorphicComponentPropWithRef } from '../../internal/PolymorphicProps';
 import { deprecate } from '../../prop-types/deprecate';
+import { useAutoAlign } from '../../internal/useAutoAlign';
 
 export interface PopoverContext {
   setFloating: React.Ref<HTMLSpanElement>;
@@ -179,7 +180,7 @@ export const Popover: PopoverComponent & {
     isTabTip,
     align: initialAlign = isTabTip ? 'bottom-start' : 'bottom',
     as: BaseComponent = 'span' as E,
-    autoAlign,
+    autoAlign: autoAlignProp,
     autoAlignBoundary,
     backgroundToken = 'layer',
     caret: caretProp = !isTabTip,
@@ -198,14 +199,14 @@ export const Popover: PopoverComponent & {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   forwardRef: any
 ) {
+  const autoAlign = useAutoAlign(autoAlignProp);
   const prefix = usePrefix();
   const floating = useRef<HTMLSpanElement>(null);
   const caretRef = useRef<HTMLSpanElement>(null);
   const popover = useRef<Element>(null);
-  const enableV12Release = useFeatureFlag('enable-v12-release');
-  const autoAlignValue = autoAlign ?? enableV12Release;
   const enableFloatingStyles =
-    useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlignValue;
+    useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
+  const enableV12Release = useFeatureFlag('enable-v12-release');
   // v12 removes the caret from Popover and everything built on top of it, so
   // the `caret` prop no longer has an effect once the flag is enabled
   const caret = enableV12Release ? false : caretProp;
@@ -389,7 +390,7 @@ export const Popover: PopoverComponent & {
                     }
                   : { mainAxis: enableV12Release ? 4 : 0 }
               ),
-              autoAlignValue &&
+              autoAlign &&
                 flip({
                   fallbackPlacements: isTabTip
                     ? align.includes('bottom')
@@ -433,7 +434,7 @@ export const Popover: PopoverComponent & {
                 element: caretRef,
                 padding: enableV12Release ? 3 : 16,
               }),
-              autoAlignValue && hide(),
+              autoAlign && hide(),
             ],
           }
         : {}
@@ -454,9 +455,9 @@ export const Popover: PopoverComponent & {
       floating,
       setFloating: refs.setFloating,
       caretRef,
-      autoAlign: autoAlignValue,
+      autoAlign: autoAlign,
     };
-  }, [refs.setFloating, autoAlignValue]);
+  }, [refs.setFloating, autoAlign]);
 
   if (isTabTip) {
     const tabTipAlignments: PopoverAlignment[] = ['bottom-start', 'bottom-end'];
@@ -516,8 +517,7 @@ export const Popover: PopoverComponent & {
   ]);
 
   const ref = useMergedRefs([forwardRef, popover]);
-  const currentAlignment =
-    autoAlignValue && placement !== align ? placement : align;
+  const currentAlignment = autoAlign && placement !== align ? placement : align;
   const className = cx(
     {
       [`${prefix}--popover-container`]: true,

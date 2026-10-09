@@ -10,7 +10,7 @@ import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { iconLoader } from '../../globals/internal/icon-loader';
-import { isFeatureFlagEnabled } from '../feature-flags';
+import AutoAlignMixin from '../../globals/mixins/auto-align';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
 import '../tooltip/definition-tooltip';
 import styles from './shape-indicator.scss?lit';
@@ -67,7 +67,7 @@ const shapeMap = {
  * @element cds-shape-indicator
  */
 @customElement(`${prefix}-shape-indicator`)
-class CDSShapeIndicator extends LitElement {
+class CDSShapeIndicator extends AutoAlignMixin(LitElement) {
   /**
    * Specify how the tooltip should align with the shape in compact mode
    */
@@ -76,7 +76,7 @@ class CDSShapeIndicator extends LitElement {
 
   /**
    * Will auto-align the tooltip in compact mode. Defaults to `true` when
-   * `enable-v12-release` is enabled, and to `false` otherwise.
+   * `enable-v12-autoalign` is enabled, and to `false` otherwise.
    */
   @property({ type: Boolean, reflect: false })
   autoalign?: boolean;
@@ -111,11 +111,6 @@ class CDSShapeIndicator extends LitElement {
    */
   @property()
   kind!: SHAPE_INDICATOR_KIND;
-
-  connectedCallback() {
-    super.connectedCallback();
-    this.autoalign ??= isFeatureFlagEnabled('enable-v12-release', this);
-  }
 
   render() {
     const shape = shapeMap[this.kind];

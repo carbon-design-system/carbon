@@ -64,6 +64,7 @@ import {
   isItemDisabled,
 } from '../../internal';
 import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
+import { useAutoAlign } from '../../internal/useAutoAlign';
 
 const { ItemMouseMove, MenuMouseLeave, ToggleButtonBlur, FunctionCloseMenu } =
   useSelect.stateChangeTypes as UseSelectInterface['stateChangeTypes'] & {
@@ -289,7 +290,7 @@ function stateReducer(state, actionAndChanges) {
 const Dropdown = React.forwardRef(
   <ItemType,>(
     {
-      autoAlign,
+      autoAlign: autoAlignProp,
       className: containerClassName,
       decorator,
       disabled = false,
@@ -323,14 +324,13 @@ const Dropdown = React.forwardRef(
     }: DropdownProps<ItemType>,
     ref: ForwardedRef<HTMLButtonElement>
   ) => {
+    const autoAlign = useAutoAlign(autoAlignProp);
     const enableFloatingStyles = useFeatureFlag(
       'enable-v12-dynamic-floating-styles'
     );
-    const enableV12Release = useFeatureFlag('enable-v12-release');
-    const autoAlignValue = autoAlign ?? enableV12Release;
 
     const { refs, floatingStyles, middlewareData } = useFloating(
-      enableFloatingStyles || autoAlignValue
+      enableFloatingStyles || autoAlign
         ? {
             placement: direction,
 
@@ -349,8 +349,8 @@ const Dropdown = React.forwardRef(
                   });
                 },
               }),
-              autoAlignValue && flip(),
-              autoAlignValue && hide(),
+              autoAlign && flip(),
+              autoAlign && hide(),
             ],
             whileElementsMounted: autoUpdate,
           }
@@ -360,7 +360,7 @@ const Dropdown = React.forwardRef(
     );
 
     useEffect(() => {
-      if (enableFloatingStyles || autoAlignValue) {
+      if (enableFloatingStyles || autoAlign) {
         const updatedFloatingStyles = {
           ...floatingStyles,
           visibility: middlewareData.hide?.referenceHidden
@@ -374,7 +374,7 @@ const Dropdown = React.forwardRef(
         });
       }
       // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
-    }, [floatingStyles, autoAlignValue, refs.floating]);
+    }, [floatingStyles, autoAlign, refs.floating]);
 
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
@@ -472,7 +472,7 @@ const Dropdown = React.forwardRef(
       [`${prefix}--dropdown--readonly`]: readOnly,
       [`${prefix}--dropdown--${size}`]: size,
       [`${prefix}--list-box--up`]: direction === 'top',
-      [`${prefix}--autoalign`]: autoAlignValue,
+      [`${prefix}--autoalign`]: autoAlign,
     });
 
     const titleClasses = cx(`${prefix}--label`, {
@@ -604,9 +604,9 @@ const Dropdown = React.forwardRef(
     const menuProps = useMemo(
       () =>
         getMenuProps({
-          ref: enableFloatingStyles || autoAlignValue ? refs.setFloating : null,
+          ref: enableFloatingStyles || autoAlign ? refs.setFloating : null,
         }),
-      [autoAlignValue, getMenuProps, refs.setFloating, enableFloatingStyles]
+      [autoAlign, getMenuProps, refs.setFloating, enableFloatingStyles]
     );
 
     // AILabel is always size `mini`
@@ -649,9 +649,7 @@ const Dropdown = React.forwardRef(
           warnTextId={normalizedProps.warnId}
           light={light}
           isOpen={isOpen}
-          ref={
-            enableFloatingStyles || autoAlignValue ? refs.setReference : null
-          }
+          ref={enableFloatingStyles || autoAlign ? refs.setReference : null}
           id={id}>
           {normalizedProps.invalid && (
             <WarningFilled className={`${prefix}--list-box__invalid-icon`} />

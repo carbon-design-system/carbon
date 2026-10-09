@@ -21,7 +21,6 @@ import type {
   PopoverAlignment,
 } from '../Popover';
 import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
-import { useFeatureFlag } from '../FeatureFlags';
 
 export const IconButtonKinds = [
   'primary',
@@ -172,9 +171,6 @@ const IconButton = forwardRef<unknown, IconButtonProps>(
     },
     ref
   ) => {
-    const enableV12Release = useFeatureFlag('enable-v12-release');
-    const autoAlignValue = autoAlign ?? enableV12Release;
-
     const prefix = usePrefix();
 
     const tooltipClasses = classNames(
@@ -196,7 +192,7 @@ const IconButton = forwardRef<unknown, IconButtonProps>(
     return (
       <Tooltip
         align={align}
-        autoAlign={autoAlignValue}
+        autoAlign={autoAlign}
         closeOnActivation={closeOnActivation}
         className={tooltipClasses}
         defaultOpen={defaultOpen}

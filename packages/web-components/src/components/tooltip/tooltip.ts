@@ -16,7 +16,6 @@ import styles from './tooltip.scss?lit';
 import popoverStyles from '../popover/popover.scss?lit';
 import CDSTooltipContent from './tooltip-content';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-import { isFeatureFlagEnabled } from '../feature-flags';
 
 /**
  * Trigger button of tooltip.
@@ -33,7 +32,7 @@ class CDSTooltip extends HostListenerMixin(CDSPopover) {
 
   /**
    * Specify whether a auto align functionality should be applied. Defaults to
-   * `true` when `enable-v12-release` is enabled, and to `false` otherwise.
+   * `true` when `enable-v12-autoalign` is enabled, and to `false` otherwise.
    */
   @property({ type: Boolean, reflect: true })
   autoalign?: boolean;
@@ -213,7 +212,6 @@ class CDSTooltip extends HostListenerMixin(CDSPopover) {
     }
     window.addEventListener('keydown', this._handleKeydown, true);
     super.connectedCallback();
-    this.autoalign ??= isFeatureFlagEnabled('enable-v12-release', this);
 
     adoptStyles(this.renderRoot as ShadowRoot, [popoverStyles, styles]);
   }

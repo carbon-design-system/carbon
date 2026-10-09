@@ -12,6 +12,7 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 import { prefix } from '../../globals/settings';
 import Information16 from '@carbon/icons/es/information/16.js';
 import HostListener from '../../globals/decorators/host-listener';
+import AutoAlignMixin from '../../globals/mixins/auto-align';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import FocusMixin from '../../globals/mixins/focus';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
@@ -28,7 +29,9 @@ import { isFeatureFlagEnabled } from '../feature-flags';
  * @element cds-toggletip
  */
 @customElement(`${prefix}-toggletip`)
-class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
+class CDSToggletip extends AutoAlignMixin(
+  HostListenerMixin(FocusMixin(LitElement))
+) {
   /**
    * Create popover controller instance
    */
@@ -66,7 +69,7 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
 
   /**
    * Specify whether a auto align functionality should be applied. Defaults to
-   * `true` when `enable-v12-release` is enabled, and to `false` otherwise.
+   * `true` when `enable-v12-autoalign` is enabled, and to `false` otherwise.
    */
   @property({ type: Boolean, reflect: true })
   autoalign?: boolean;
@@ -100,7 +103,6 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
 
   connectedCallback() {
     super.connectedCallback();
-    this.autoalign ??= isFeatureFlagEnabled('enable-v12-release', this);
     if (this.defaultOpen && !this.hasAttribute('open')) {
       this.open = true;
     }
