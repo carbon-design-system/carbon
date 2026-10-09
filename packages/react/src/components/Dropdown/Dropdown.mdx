@@ -57,7 +57,8 @@ action to filter or sort existing content.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(DropdownStories.Default),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: DropdownStories.Default }),
     },
   ]}
 />
@@ -72,7 +73,7 @@ variant
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(DropdownStories.Inline),
+      onClick: () => stackblitzPrefillConfig({ story: DropdownStories.Inline }),
     },
   ]}
 />
@@ -85,7 +86,9 @@ variant
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig(DropdownStories.ExperimentalAutoAlign),
+        stackblitzPrefillConfig({
+          story: DropdownStories.ExperimentalAutoAlign,
+        }),
     },
   ]}
 />
@@ -101,7 +104,8 @@ be fetched from an external API.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(DropdownStories.Skeleton),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: DropdownStories.Skeleton }),
     },
   ]}
 />
@@ -113,7 +117,8 @@ be fetched from an external API.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(DropdownStories.withAILabel),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: DropdownStories.withAILabel }),
     },
   ]}
 />

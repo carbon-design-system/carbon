@@ -41,6 +41,7 @@ import { useId } from '../../internal/useId';
 import { Menu } from './Menu';
 import { MenuContext } from './MenuContext';
 import { useLayoutDirection } from '../LayoutDirection';
+import { useFeatureFlag } from '../FeatureFlags';
 import { Text } from '../Text';
 import { defaultItemToString } from '../../internal';
 
@@ -112,6 +113,14 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
     const [submenuOpen, setSubmenuOpen] = useState(false);
     const [rtl, setRtl] = useState(false);
 
+    const enableV12Release = useFeatureFlag('enable-v12-release');
+
+    // The submenu is positioned against the menu item, which in v12 is inset
+    // from the menu's edge by the menu's inline padding ($spacing-02 = 4px).
+    // Adjust the offset accordingly (by 4px).
+    const submenuMainAxisOffset = enableV12Release ? -2 : -6;
+    const submenuLeftMainAxisOffset = enableV12Release ? 14 : 10;
+
     const {
       refs,
       floatingStyles,
@@ -153,7 +162,9 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
       middleware: [
         flip(),
         offset(({ placement }) => ({
-          mainAxis: placement.startsWith('left') ? 10 : -6,
+          mainAxis: placement.startsWith('left')
+            ? submenuLeftMainAxisOffset
+            : submenuMainAxisOffset,
           crossAxis: -6,
         })),
       ],

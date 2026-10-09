@@ -67,10 +67,10 @@ class CDSIconButton extends CDSButton {
   leaveDelayMs = 100;
 
   /**
-   * Specify the size of the Button. Defaults to `md`.
+   * Specify the size of the Button. Defaults to `lg`.
    */
   @property({ reflect: true })
-  size?: ICON_BUTTON_SIZE | string = 'md';
+  size?: ICON_BUTTON_SIZE | string = 'lg';
 
   connectedCallback() {
     super.connectedCallback();

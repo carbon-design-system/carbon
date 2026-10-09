@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -256,7 +256,7 @@ describe('cds-menu-item', () => {
       expect(el.boundaries.y).to.deep.equal([200, 240]);
     });
 
-    it('should calculate correct boundaries for submenu in RTL mode', async () => {
+    it('should report physical boundaries for submenu in RTL mode', async () => {
       // Save original document direction
       const originalDir = document.dir;
 
@@ -280,7 +280,9 @@ describe('cds-menu-item', () => {
 
       el._openSubmenu();
 
-      expect(el.boundaries.x).to.deep.equal([-100, -50]);
+      // Boundaries stay in viewport coordinates regardless of direction.
+      // `cds-menu` converts them to inline-relative values.
+      expect(el.boundaries.x).to.deep.equal([100, 250]);
       expect(el.boundaries.y).to.deep.equal([200, 240]);
 
       // Restore original document direction

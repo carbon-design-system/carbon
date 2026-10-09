@@ -15,6 +15,7 @@ import './story.scss';
 export default {
   title: 'Utilities/Resizer',
   component: Resizer,
+  tags: ['autodocs', 'ibm-products-migrated'],
   parameters: {
     layout: 'centered',
     docs: {

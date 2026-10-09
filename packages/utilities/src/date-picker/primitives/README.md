@@ -350,6 +350,17 @@ The state machine uses the Temporal API for robust date handling:
 - isDateInRange(date: Temporal.PlainDate, min?: Date, max?: Date): boolean
 ```
 
+Every `Temporal.*` reference in these primitives is a bare global, so the global
+has to exist before any of them run. Temporal is not yet universally shipped —
+no version of Safari implements it, and Chrome/Edge only gained it in 144. The
+`date-picker` entry point (`src/date-picker/index.ts`) therefore imports
+`temporal-polyfill/global` ahead of the primitives; that module installs
+`globalThis.Temporal` only when the engine has none, so a native implementation
+always wins.
+
+Note: Reach the primitives through the `@carbon/utilities/date-picker` entry
+point. Importing a primitive module directly skips the install.
+
 ### Min/Max Date Constraints
 
 Dates outside the min/max range are automatically disabled:

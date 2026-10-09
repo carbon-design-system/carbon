@@ -32,11 +32,17 @@ interface DraggableProps {
 interface EventDetail {
   dragstart: { keyboard?: boolean; mouse?: boolean };
   dragend: { keyboard?: boolean; mouse?: boolean };
+  dragmove: { direction: 'left' | 'right' | 'up' | 'down'; distance: number };
 }
 
 /**
  * Makes a given element draggable using a handle element.
- *@param draggable - object which accepts el and optional attributes handle,focusableInHandle,dragStep and shiftDragStep
+ * @param {object} draggable - Configuration object for draggable behavior
+ * @param {HTMLElement} draggable.el - The element to make draggable
+ * @param {HTMLElement} [draggable.dragHandle] - Optional handle element for dragging
+ * @param {boolean} [draggable.focusableDragHandle] - Whether the drag handle should be focusable
+ * @param {number} [draggable.dragStep] - Step size for keyboard dragging (default: 10)
+ * @param {number} [draggable.shiftDragStep] - Step size for keyboard dragging with Shift key (default: 50)
  */
 export const makeDraggable = ({
   el,
@@ -132,7 +138,8 @@ export const makeDraggable = ({
   };
 
   const onKeyDown = (e: KeyboardEvent) => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
       isDragging = !isDragging;
       if (isDragging) {
         syncTransformState();
@@ -149,23 +156,30 @@ export const makeDraggable = ({
     switch (e.key) {
       case 'Enter':
       case ' ':
-        e.preventDefault();
         break;
       case 'ArrowLeft':
+        e.preventDefault();
         currentX -= distance;
         applyTransform(currentX, currentY);
+        dispatch('dragmove', { direction: 'left', distance });
         break;
       case 'ArrowRight':
+        e.preventDefault();
         currentX += distance;
         applyTransform(currentX, currentY);
+        dispatch('dragmove', { direction: 'right', distance });
         break;
       case 'ArrowUp':
+        e.preventDefault();
         currentY -= distance;
         applyTransform(currentX, currentY);
+        dispatch('dragmove', { direction: 'up', distance });
         break;
       case 'ArrowDown':
+        e.preventDefault();
         currentY += distance;
         applyTransform(currentX, currentY);
+        dispatch('dragmove', { direction: 'down', distance });
         break;
     }
   };

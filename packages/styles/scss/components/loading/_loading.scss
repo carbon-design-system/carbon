@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2023
+// Copyright IBM Corp. 2016, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -15,6 +15,7 @@
 @use '../../theme' as *;
 @use '../../utilities/component-reset';
 @use '../../utilities/convert';
+@use '../../utilities/focus-outline' as *;
 @use '../../utilities/z-index' as *;
 
 /// Loading styles
@@ -96,6 +97,11 @@
     inset-block-start: 0;
     inset-inline-start: 0;
     transition: background-color $duration-slow-02 motion(standard, expressive);
+    user-select: none;
+  }
+
+  .#{$prefix}--loading-overlay > [tabindex='-1']:focus {
+    @include focus-outline('reset');
   }
 
   .#{$prefix}--loading-overlay--stop {

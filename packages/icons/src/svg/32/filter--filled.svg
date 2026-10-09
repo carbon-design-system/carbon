@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        isolation: isolate;
+        opacity: .01;
+      }
+    </style>
+  </defs>
+  <path id="filter--filled" d="M18,28h-4c-1.1,0-2-.9-2-2v-7.59l-7.41-7.41c-.38-.37-.59-.88-.59-1.41v-3.59c0-1.1.9-2,2-2h20c1.1,0,2,.9,2,2v3.59c0,.53-.21,1.04-.59,1.41l-7.41,7.41v7.59c0,1.1-.9,2-2,2Z"/>
+  <rect id="Transparent_Rectangle" data-name="Transparent Rectangle" class="cls-1" width="32" height="32"/>
+</svg>

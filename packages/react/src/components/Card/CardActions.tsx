@@ -102,8 +102,13 @@ export const CardActions = ({
       return;
     }
 
+    const gap = parseFloat(
+      getComputedStyle(containerRef.current).columnGap || '0'
+    );
+
     const handler = createOverflowHandler({
       container: containerRef.current,
+      gap,
       onChange: (_visible, hidden) => {
         const hiddenIds = hidden.map((el) => el.dataset.id);
         setHiddenItems(
@@ -129,7 +134,7 @@ export const CardActions = ({
         style={{
           position: 'relative',
         }}>
-        <OverflowMenu size="sm" aria-label={overflowMenuLabel}>
+        <OverflowMenu size="sm" label={overflowMenuLabel}>
           {hiddenItems.map((item) => (
             <MenuItem
               key={item.id}

@@ -45,18 +45,18 @@ exports[`@carbon/styles/scss/motion Public API 1`] = `
           "opacity": 1,
           "transform": "scale(1)",
         },
-        "enter-easing": [
-          "entrance",
-          "expressive",
-        ],
+        "enter-easing": {
+          "mode": "expressive",
+          "name": "entrance",
+        },
         "exit": {
           "opacity": 0,
           "transform": "scale(0.96)",
         },
-        "exit-easing": [
-          "exit",
-          "expressive",
-        ],
+        "exit-easing": {
+          "mode": "expressive",
+          "name": "exit",
+        },
         "kind": "reveal",
       },
       "disclosure": {
@@ -65,18 +65,18 @@ exports[`@carbon/styles/scss/motion Public API 1`] = `
           "block-size": "auto",
           "opacity": 1,
         },
-        "enter-easing": [
-          "entrance",
-          "productive",
-        ],
+        "enter-easing": {
+          "mode": "productive",
+          "name": "entrance",
+        },
         "exit": {
           "block-size": 0,
           "opacity": 0,
         },
-        "exit-easing": [
-          "exit",
-          "productive",
-        ],
+        "exit-easing": {
+          "mode": "productive",
+          "name": "exit",
+        },
         "kind": "reveal",
       },
       "expand": {
@@ -85,52 +85,32 @@ exports[`@carbon/styles/scss/motion Public API 1`] = `
           "opacity": 1,
           "transform": "scale(1)",
         },
-        "enter-easing": [
-          "standard",
-          "productive",
-        ],
+        "enter-easing": {
+          "mode": "productive",
+          "name": "standard",
+        },
         "exit": {
           "opacity": 0,
           "transform": "scale(0.96)",
         },
-        "exit-easing": [
-          "standard",
-          "productive",
-        ],
+        "exit-easing": {
+          "mode": "productive",
+          "name": "standard",
+        },
         "kind": "shared-element",
       },
       "invoke": {
         "duration": "moderate-02",
-        "enter-easing": [
-          "standard",
-          "expressive",
-        ],
-        "exit-easing": [
-          "standard",
-          "expressive",
-        ],
+        "enter-easing": {
+          "mode": "expressive",
+          "name": "standard",
+        },
+        "exit-easing": {
+          "mode": "expressive",
+          "name": "standard",
+        },
         "kind": "shared-element",
         "origin": "trigger",
-      },
-      "stretch": {
-        "duration": "slow-01",
-        "enter": {
-          "clip-path": "inset(0 0 0 0)",
-          "opacity": 1,
-        },
-        "enter-easing": [
-          "entrance",
-          "expressive",
-        ],
-        "exit": {
-          "clip-path": "inset(50% 0 50% 0)",
-          "opacity": 0,
-        },
-        "exit-easing": [
-          "exit",
-          "expressive",
-        ],
-        "kind": "reveal",
       },
     },
     "transition-base": "250ms",

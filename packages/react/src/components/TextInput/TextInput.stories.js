@@ -7,14 +7,40 @@
 
 import React from 'react';
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
-import FluidForm from '../FluidForm';
-import { View, FolderOpen, Folders, Information } from '@carbon/icons-react';
+import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import mdx from './TextInput.mdx';
 
 import { default as TextInput, TextInputSkeleton } from '../TextInput';
+
+const getTextInputStoryArgs = ({
+  defaultWidth,
+  onChange,
+  onClick,
+  ...textInputArgs
+}) => {
+  const handleChange = (event) => {
+    onChange?.({
+      value: event.target.value,
+    });
+  };
+  const handleClick = (event) => {
+    onClick?.({
+      value: event.target.value,
+    });
+  };
+
+  return {
+    defaultWidth,
+    textInputArgs: {
+      ...textInputArgs,
+      onChange: handleChange,
+      onClick: handleClick,
+    },
+  };
+};
 
 export default {
   title: 'Components/TextInput',
@@ -26,28 +52,6 @@ export default {
   },
   subcomponents: {
     TextInputSkeleton,
-  },
-  args: {
-    className: 'input-test-class',
-    id: 'text-input-1',
-    placeholder: 'Placeholder text',
-    invalid: false,
-    invalidText: 'Error message goes here',
-    disabled: false,
-    labelText: 'Label text',
-    helperText: 'Helper text',
-    warn: false,
-    warnText:
-      'Warning message that is really long can wrap to more lines but should not be excessively long.',
-    size: 'md',
-    readOnly: false,
-    inline: false,
-    hideLabel: false,
-    enableCounter: false,
-    maxCount: 10,
-    type: 'text',
-    defaultWidth: 300,
-    defaultValue: '',
   },
   argTypes: {
     className: {
@@ -166,8 +170,31 @@ export default {
   },
 };
 
+const defaultArgs = {
+  className: 'input-test-class',
+  id: 'text-input-1',
+  placeholder: 'Placeholder text',
+  invalid: false,
+  invalidText: 'Error message goes here',
+  disabled: false,
+  labelText: 'Label text',
+  helperText: 'Helper text',
+  warn: false,
+  warnText:
+    'Warning message that is really long can wrap to more lines but should not be excessively long.',
+  size: 'md',
+  readOnly: false,
+  inline: false,
+  hideLabel: false,
+  enableCounter: false,
+  maxCount: 10,
+  type: 'text',
+  defaultWidth: 300,
+  defaultValue: '',
+};
+
 export const Default = (args) => {
-  const { defaultWidth, ...textInputArgs } = args;
+  const { defaultWidth, textInputArgs } = getTextInputStoryArgs(args);
 
   return (
     <div style={{ width: defaultWidth }}>
@@ -176,8 +203,10 @@ export const Default = (args) => {
   );
 };
 
+Default.args = { ...defaultArgs };
+
 export const Inline = (args) => {
-  const { defaultWidth, ...textInputArgs } = args;
+  const { defaultWidth, textInputArgs } = getTextInputStoryArgs(args);
 
   return (
     <div style={{ width: defaultWidth }}>
@@ -187,6 +216,7 @@ export const Inline = (args) => {
 };
 
 Inline.args = {
+  ...defaultArgs,
   defaultWidth: 450,
   inline: true,
 };
@@ -197,26 +227,8 @@ Inline.parameters = {
   },
 };
 
-export const Fluid = (args) => {
-  const { defaultWidth, ...textInputArgs } = args;
-
-  return (
-    <div style={{ width: defaultWidth }}>
-      <FluidForm>
-        <TextInput {...textInputArgs} />
-      </FluidForm>
-    </div>
-  );
-};
-
-Fluid.parameters = {
-  controls: {
-    exclude: ['helperText'],
-  },
-};
-
 export const ReadOnly = (args) => {
-  const { defaultWidth, ...textInputArgs } = args;
+  const { defaultWidth, textInputArgs } = getTextInputStoryArgs(args);
 
   return (
     <div style={{ width: defaultWidth }}>
@@ -226,6 +238,7 @@ export const ReadOnly = (args) => {
 };
 
 ReadOnly.args = {
+  ...defaultArgs,
   defaultValue: "This is read only, you can't type more.",
   readOnly: true,
 };
@@ -247,7 +260,7 @@ ReadOnly.parameters = {
 };
 
 export const _WithLayer = (args) => {
-  const { defaultWidth, ...textInputArgs } = args;
+  const { defaultWidth, textInputArgs } = getTextInputStoryArgs(args);
 
   return (
     <WithLayer>
@@ -260,8 +273,10 @@ export const _WithLayer = (args) => {
   );
 };
 
+_WithLayer.args = { ...defaultArgs };
+
 export const withAILabel = (args) => {
-  const { defaultWidth, ...textInputArgs } = args;
+  const { defaultWidth, textInputArgs } = getTextInputStoryArgs(args);
   const aiLabel = (
     <AILabel className="ai-label-container">
       <AILabelContent>
@@ -306,9 +321,16 @@ export const withAILabel = (args) => {
   );
 };
 
-export const Skeleton = ({ hideLabel, size }) => (
-  <TextInputSkeleton hideLabel={hideLabel} size={size} />
-);
+withAILabel.args = { ...defaultArgs };
+
+export const Skeleton = (args) => {
+  return <TextInputSkeleton {...args} />;
+};
+
+Skeleton.args = {
+  hideLabel: defaultArgs.hideLabel,
+  size: defaultArgs.size,
+};
 
 Skeleton.parameters = {
   controls: {
@@ -332,6 +354,7 @@ export const TestInvalidTextNoOverlap = (args) => {
   );
 };
 
+TestInvalidTextNoOverlap.args = { ...defaultArgs };
 /*
  * This story will:
  * - Be excluded from the docs page

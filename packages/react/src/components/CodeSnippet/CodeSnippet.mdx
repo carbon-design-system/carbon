@@ -1,5 +1,4 @@
-import { Story, ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
-import CodeSnippet from '../CodeSnippet';
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
 import * as CodeSnippetStories from './CodeSnippet.stories';
 import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
@@ -39,7 +38,8 @@ don't provide the copy functionality and recommend
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(CodeSnippetStories.Inline),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: CodeSnippetStories.Inline }),
     },
   ]}
 />
@@ -54,7 +54,8 @@ name or similar small piece of code from its surrounding text.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(CodeSnippetStories.Inline),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: CodeSnippetStories.Inline }),
     },
   ]}
 />
@@ -71,7 +72,8 @@ lines are longer than the container.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(CodeSnippetStories.Multiline),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: CodeSnippetStories.Multiline }),
     },
   ]}
 />
@@ -87,7 +89,8 @@ invocations, expressions etc.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(CodeSnippetStories.Singleline),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: CodeSnippetStories.Singleline }),
     },
   ]}
 />
@@ -103,7 +106,8 @@ being fetched from an external resource like an API.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(CodeSnippetStories.Skeleton),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: CodeSnippetStories.Skeleton }),
     },
   ]}
 />

@@ -11,7 +11,7 @@ import { usePrefix } from '../../internal/usePrefix';
 
 const componentName = 'CardTitle';
 
-export interface CardTitleProps {
+export interface CardTitleProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Provide the contents of the CardTitle.
    */

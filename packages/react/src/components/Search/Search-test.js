@@ -120,6 +120,44 @@ describe('Search', () => {
       );
     });
 
+    it('should warn without throwing for interactive content in labelText', () => {
+      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+      expect(() => {
+        render(
+          <Search
+            labelText={
+              <>
+                Search label <button type="button">Help</button>
+              </>
+            }
+          />
+        );
+      }).not.toThrow();
+
+      expect(spy).toHaveBeenCalledWith(
+        expect.stringContaining(
+          'Warning: The Search component `labelText` prop must have no interactive content'
+        )
+      );
+
+      spy.mockRestore();
+    });
+
+    it('should allow non-interactive content in labelText', () => {
+      expect(() => {
+        render(
+          <Search
+            labelText={
+              <>
+                Search label <span>additional label content</span>
+              </>
+            }
+          />
+        );
+      }).not.toThrow();
+    });
+
     it('should call onChange when expected', async () => {
       const onChange = jest.fn();
       render(<Search labelText="test-search" onChange={onChange} />);
@@ -163,6 +201,33 @@ describe('Search', () => {
       await userEvent.keyboard('[Enter]');
 
       expect(onExpand).toHaveBeenCalledTimes(3);
+    });
+
+    it('should not call onExpand if disabled', async () => {
+      const onExpand = jest.fn();
+      const { container } = render(
+        <Search
+          disabled
+          isExpanded={false}
+          labelText="test-search"
+          onExpand={onExpand}
+        />
+      );
+
+      const expandControl = screen.getAllByRole('button')[0];
+
+      expect(expandControl).toHaveAttribute('aria-disabled', 'true');
+      expect(expandControl).not.toHaveAttribute('tabIndex');
+      expect(
+        container.querySelector(`.${prefix}--search-magnifier-tooltip`)
+      ).toBeNull();
+
+      await userEvent.click(expandControl);
+      expandControl.focus();
+      await userEvent.keyboard('[Space]');
+      await userEvent.keyboard('[Enter]');
+
+      expect(onExpand).not.toHaveBeenCalled();
     });
 
     it('should call onKeyDown when expected', async () => {
@@ -249,6 +314,40 @@ describe('Search', () => {
 
       expect(input).toHaveAttribute('inert');
       expect(input).toHaveAttribute('tabIndex', '-1');
+    });
+
+    it('should apply tabIndex to the expand button if expandable and not expanded', () => {
+      const { container } = render(
+        <Search
+          labelText="test-search"
+          onExpand={() => {}}
+          isExpanded={false}
+          tabIndex={-1}
+        />
+      );
+
+      expect(screen.getAllByRole('button')[0]).toHaveAttribute(
+        'tabIndex',
+        '-1'
+      );
+      expect(container.querySelector('input')).toHaveAttribute(
+        'tabIndex',
+        '-1'
+      );
+    });
+
+    it('should not make the expand button tabbable if expandable and disabled', () => {
+      render(
+        <Search
+          labelText="test-search"
+          onExpand={() => {}}
+          isExpanded={false}
+          disabled
+          tabIndex={0}
+        />
+      );
+
+      expect(screen.getAllByRole('button')[0]).not.toHaveAttribute('tabIndex');
     });
 
     it('should have tabbable input and untabbable button if not expandable', async () => {
