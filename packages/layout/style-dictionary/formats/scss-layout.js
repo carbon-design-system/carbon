@@ -10,9 +10,9 @@
 /**
  * Style Dictionary format — carbon/scss-layout
  *
- * Generates per-category Sass files from layout.json whose content is
- * byte-for-byte identical to what build.mjs / @carbon/scss-generator produced,
- * so that nothing downstream breaks.
+ * Generates per-category Sass files from layout.tokens.json. The content is
+ * byte-for-byte identical to what the previous @carbon/scss-generator build
+ * produced, so that nothing downstream breaks.
  *
  * Files emitted:
  *   _spacing.scss        variables + map, !default
@@ -49,27 +49,6 @@ const VAR_COMMENT = `/// @type Number
 const MAP_COMMENT = `/// @type Map
 /// @access public
 /// @group @carbon/layout`;
-
-// ── Constants ─────────────────────────────────────────────────────────────────
-const BASE_FONT_SIZE = 16;
-const MINI_UNIT = 8;
-
-/**
- * Resolve a token's $value using carbon.layout.converter if present.
- * @param {string|number} value
- * @param {object|undefined} carbonLayout
- * @returns {string}
- */
-function resolveValue(value, carbonLayout) {
-  const converter = carbonLayout?.converter;
-  if (converter === 'miniUnits') {
-    return `${(Number(value) * MINI_UNIT) / BASE_FONT_SIZE}rem`;
-  }
-  if (converter === 'rem') {
-    return `${Number(value) / BASE_FONT_SIZE}rem`;
-  }
-  return String(value);
-}
 
 /**
  * Build a standard file: banner + (comment + $var: value !default;) * n + map.
@@ -123,14 +102,7 @@ function buildSizeFile(tokens) {
 function tokensForGroup(dictionary, groupName) {
   return dictionary.allTokens
     .filter((t) => t.path[0] === groupName)
-    .map((t) => {
-      const carbonLayout =
-        t.$extensions?.['carbon.layout'] ?? t.extensions?.['carbon.layout'];
-      return {
-        name: t.name,
-        resolved: resolveValue(t.value ?? t.$value, carbonLayout),
-      };
-    });
+    .map((t) => ({ name: t.name, resolved: t.$value }));
 }
 
 // ── Format functions — one per DTCG group ─────────────────────────────────────
