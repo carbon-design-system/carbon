@@ -109,20 +109,17 @@ class CDSPageHeader extends LitElement {
       const contentEl = pageHeaderElement.target.querySelector(
         `${prefix}-page-header-content`
       );
+      // scrollHeight gives the full rendered height of the content element
+      // (including its own padding). We want this complete height as the
+      // negative offset so the content scrolls entirely out of view while
+      // the sticky breadcrumb and tab bars remain visible.
       const totalContentHeight =
-        contentEl instanceof CDSPageHeaderContent
-          ? contentEl.getBoundingClientRect().height
-          : 0;
-      const paddingBlockStart =
-        contentEl instanceof CDSPageHeaderContent
-          ? parseFloat(getComputedStyle(contentEl)?.paddingBlockStart)
-          : 0;
+        contentEl instanceof CDSPageHeaderContent ? contentEl.scrollHeight : 0;
       const headerOffset = getHeaderOffset(this);
-      const contentPadding = paddingBlockStart;
 
       this.style.setProperty(
         `--${prefix}-page-header-header-top`,
-        `${(Math.round(totalContentHeight - contentPadding) - headerOffset) * -1}px`
+        `${(totalContentHeight - headerOffset) * -1}px`
       );
       this.style.setProperty(
         `--${prefix}-page-header-breadcrumb-top`,
