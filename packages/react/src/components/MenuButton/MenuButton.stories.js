@@ -177,14 +177,9 @@ export const WithNestedMenu = (args) => (
 
 WithNestedMenu.args = commonArgs;
 
-export const WithMenuAlignment = ({
-  disabled,
-  kind,
-  menuBackgroundToken,
-  menuBorder,
-  size,
-  tabIndex,
-}) => {
+export const WithMenuAlignment = (args) => {
+  const { disabled, kind, menuBackgroundToken, menuBorder, size, tabIndex } =
+    args;
   const sharedProps = {
     disabled,
     kind,
