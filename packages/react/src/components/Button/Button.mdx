@@ -5,9 +5,6 @@ import { Add, TrashCan } from '@carbon/icons-react';
 import * as ButtonStories from './Button.stories';
 import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
-export const getIconFromStringImport =
-  "import { Add, Notification, Filter } from '@carbon/icons-react';";
-
 export const getIconFromStringDef = `const getIconFromString = (iconName) => {
   const icons = {
     Add: (props) => <Add {...props} />,
@@ -75,7 +72,6 @@ user interacts with it.
       onClick: () =>
         stackblitzPrefillConfig({
           story: ButtonStories.Default,
-          customImports: [getIconFromStringImport],
           customFunctionDefs: [getIconFromStringDef],
         }),
     },
@@ -342,7 +338,6 @@ not support Danger, Danger tertiary, or Danger ghost.
       onClick: () =>
         stackblitzPrefillConfig({
           story: ButtonStories.IconButton,
-          customImports: [getIconFromStringImport],
           customFunctionDefs: [getIconFromStringDef],
         }),
     },

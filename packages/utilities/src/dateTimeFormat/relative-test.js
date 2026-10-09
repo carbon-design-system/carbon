@@ -41,6 +41,12 @@ describe(locale, () => {
 
       const rtf = new Intl.RelativeTimeFormat(locale, { style });
 
+      test(`+8 days → ${rtf.format(1, 'weeks')}`, () => {
+        const date = Date.now() + 1000 * 60 * 60 * 24 * 8;
+        const actualOutput = relative.format(date, { locale, style });
+        expect(actualOutput).toBe(rtf.format(1, 'weeks'));
+      });
+
       tests.forEach(([unit, unitsPassed, secondsInUnit]) => {
         const datePast = Date.now() - 1000 * unitsPassed * secondsInUnit;
         const expectedPast = rtf.format(unitsPassed * -1, unit);

@@ -129,7 +129,7 @@ const sharedParameters = {
   },
 };
 
-export const Default = ({ numberOfButtons, ...args }) => {
+export const Default = (args) => {
   const [open, setOpen] = useState(true);
   return (
     <>
@@ -145,7 +145,7 @@ export const Default = ({ numberOfButtons, ...args }) => {
         aria-label="Modal content"
         open={open}
         {...args}
-        {...modalFooter(numberOfButtons)}>
+        {...modalFooter(args.numberOfButtons)}>
         <p style={{ marginBottom: '2rem' }}>
           Custom domains direct requests for your apps in this Cloud Foundry
           organization to a URL that you own. A custom domain can be a shared
@@ -238,7 +238,7 @@ Default.argTypes = {
 
 Default.parameters = { ...sharedParameters };
 
-export const FullWidth = ({ numberOfButtons, ...args }) => {
+export const FullWidth = (args) => {
   const [open, setOpen] = useState(true);
   return (
     <>
@@ -252,7 +252,7 @@ export const FullWidth = ({ numberOfButtons, ...args }) => {
         primaryButtonText="Add"
         secondaryButtonText="Cancel"
         {...args}
-        {...modalFooter(numberOfButtons)}>
+        {...modalFooter(args.numberOfButtons)}>
         <StructuredListWrapper style={{ marginBottom: '48px' }}>
           <StructuredListHead>
             <StructuredListRow head>
@@ -292,7 +292,7 @@ export const FullWidth = ({ numberOfButtons, ...args }) => {
 
 FullWidth.parameters = { ...sharedParameters };
 
-export const DangerModal = ({ numberOfButtons, ...args }) => {
+export const DangerModal = (args) => {
   const [open, setOpen] = useState(true);
   return (
     <>
@@ -306,7 +306,7 @@ export const DangerModal = ({ numberOfButtons, ...args }) => {
         primaryButtonText="Delete"
         secondaryButtonText="Cancel"
         {...args}
-        {...modalFooter(numberOfButtons)}>
+        {...modalFooter(args.numberOfButtons)}>
         <p>
           Check for dependencies on the domain before deletion. For instance, if
           the domain is used as a primary domain for users or if it's associated
@@ -320,7 +320,7 @@ export const DangerModal = ({ numberOfButtons, ...args }) => {
 
 DangerModal.parameters = { ...sharedParameters };
 
-export const WithScrollingContent = ({ numberOfButtons, ...args }) => {
+export const WithScrollingContent = (args) => {
   const [open, setOpen] = useState(true);
   return (
     <>
@@ -334,7 +334,7 @@ export const WithScrollingContent = ({ numberOfButtons, ...args }) => {
         primaryButtonText="Add"
         secondaryButtonText="Cancel"
         {...args}
-        {...modalFooter(numberOfButtons)}>
+        {...modalFooter(args.numberOfButtons)}>
         <p style={{ marginBottom: '1rem' }}>
           Custom domains direct requests for your apps in this Cloud Foundry
           organization to a URL that you own. A custom domain can be a shared
@@ -400,7 +400,7 @@ export const WithScrollingContent = ({ numberOfButtons, ...args }) => {
 
 WithScrollingContent.parameters = { ...sharedParameters };
 
-export const WithStateManager = ({ numberOfButtons, ...args }) => {
+export const WithStateManager = (args) => {
   /**
    * Simple state manager for modals.
    */
@@ -441,7 +441,7 @@ export const WithStateManager = ({ numberOfButtons, ...args }) => {
           open={open}
           onRequestClose={() => setOpen(false)}
           {...args}
-          {...modalFooter(numberOfButtons)}>
+          {...modalFooter(args.numberOfButtons)}>
           <p style={{ marginBottom: '1rem' }}>
             Custom domains direct requests for your apps in this Cloud Foundry
             organization to a URL that you own. A custom domain can be a shared
@@ -466,7 +466,7 @@ export const WithStateManager = ({ numberOfButtons, ...args }) => {
 
 WithStateManager.parameters = { ...sharedParameters };
 
-export const PassiveModal = ({ numberOfButtons, ...args }) => {
+export const PassiveModal = (args) => {
   const [open, setOpen] = useState(true);
   return (
     <>
@@ -477,7 +477,7 @@ export const PassiveModal = ({ numberOfButtons, ...args }) => {
         passiveModal
         modalHeading="You are now signed out."
         {...args}
-        {...modalFooter(numberOfButtons)}
+        {...modalFooter(args.numberOfButtons)}
       />
     </>
   );

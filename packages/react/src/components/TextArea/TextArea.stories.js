@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -14,6 +14,7 @@ import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { default as TextArea, TextAreaSkeleton } from './';
 import mdx from './TextArea.mdx';
+
 export default {
   title: 'Components/TextArea',
   component: TextArea,
@@ -118,21 +119,22 @@ export default {
       },
     },
   },
-  args: {
-    enableCounter: false,
-    helperText: 'TextArea helper text',
-    labelText: 'TextArea label',
-    maxCount: 500,
-    disabled: false,
-    hideLabel: false,
-    invalid: false,
-    invalidText:
-      'Error message that is really long can wrap to more lines but should not be excessively long.',
-    placeholder: '',
-    rows: 4,
-    warn: false,
-    warnText: 'This is a warning message.',
-  },
+};
+
+const defaultArgs = {
+  enableCounter: false,
+  helperText: 'TextArea helper text',
+  labelText: 'TextArea label',
+  maxCount: 500,
+  disabled: false,
+  hideLabel: false,
+  invalid: false,
+  invalidText:
+    'Error message that is really long can wrap to more lines but should not be excessively long.',
+  placeholder: '',
+  rows: 4,
+  warn: false,
+  warnText: 'This is a warning message.',
 };
 
 export const Default = (args) => {
@@ -140,24 +142,22 @@ export const Default = (args) => {
 };
 
 Default.args = {
+  ...defaultArgs,
   enableCounter: true,
 };
 
 export const _WithLayer = (args) => (
   <WithLayer>
-    {(layer) => (
-      <TextArea
-        labelText="Text Area label"
-        helperText="Optional helper text"
-        rows={4}
-        id={`text-area-${layer}`}
-        {...args}
-      />
-    )}
+    {(layer) => <TextArea rows={4} id={`text-area-${layer}`} {...args} />}
   </WithLayer>
 );
 
-_WithLayer.args = { helperText: 'Optional helper text' };
+_WithLayer.args = {
+  ...defaultArgs,
+  labelText: 'TextArea label',
+  helperText: 'Optional helper text',
+};
+
 export const withAILabel = (args) => {
   const aiLabel = (
     <AILabel className="ai-label-container">
@@ -190,19 +190,14 @@ export const withAILabel = (args) => {
     </AILabel>
   );
 
-  return (
-    <TextArea
-      labelText="Text Area label"
-      helperText="Optional helper text"
-      rows={4}
-      id="text-area-5"
-      decorator={aiLabel}
-      {...args}
-    />
-  );
+  return <TextArea rows={4} id="text-area-5" decorator={aiLabel} {...args} />;
 };
 
-withAILabel.args = { helperText: 'Optional helper text' };
+withAILabel.args = {
+  ...defaultArgs,
+  labelText: 'TextArea label',
+  helperText: 'Optional helper text',
+};
 
 export const Skeleton = (args) => {
   return <TextAreaSkeleton {...args} />;

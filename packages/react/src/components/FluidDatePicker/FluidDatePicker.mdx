@@ -15,9 +15,6 @@ export const labelToggletipDef = `const LabelToggletip = () => (
   </span>
 );`;
 
-export const labelToggletipImport =
-  "import { Toggletip, ToggletipButton, ToggletipContent } from '@carbon/react';\nimport { Information } from '@carbon/icons-react';";
-
 <Meta isTemplate />
 
 # Fluid DatePicker
@@ -49,7 +46,6 @@ export const labelToggletipImport =
       onClick: () =>
         stackblitzPrefillConfig({
           story: FluidDatePickerStories.Simple,
-          customImports: [labelToggletipImport],
           customFunctionDefs: [labelToggletipDef],
           styles: FluidDatePickerStories.default.parameters.styles,
         }),
@@ -80,7 +76,6 @@ export const labelToggletipImport =
       onClick: () =>
         stackblitzPrefillConfig({
           story: FluidDatePickerStories.Single,
-          customImports: [labelToggletipImport],
           customFunctionDefs: [labelToggletipDef],
           styles: FluidDatePickerStories.default.parameters.styles,
         }),
@@ -98,7 +93,6 @@ export const labelToggletipImport =
       onClick: () =>
         stackblitzPrefillConfig({
           story: FluidDatePickerStories.RangeWithCalendar,
-          customImports: [labelToggletipImport],
           customFunctionDefs: [labelToggletipDef],
           styles: FluidDatePickerStories.default.parameters.styles,
         }),
