@@ -28,15 +28,6 @@ import { TabsContext } from '../Tabs/Tabs';
 
 export interface ContentSwitcherProps
   extends Omit<HTMLAttributes<HTMLElement>, 'onChange'> {
-  /**
-   * Specify the aria-label for cds--content-switcher
-   */
-  'aria-label'?: string;
-
-  /**
-   * Specify the aria-labelledby for cds--content-switcher
-   */
-  'aria-labelledby'?: string;
 
   /**
    * Pass in Switch components to be rendered in the ContentSwitcher
@@ -235,15 +226,6 @@ export const ContentSwitcher = ({
 
 ContentSwitcher.displayName = 'ContentSwitcher';
 ContentSwitcher.propTypes = {
-  /**
-   * Specify the aria-label for cds--content-switcher
-   */
-  ['aria-label']: PropTypes.string,
-
-  /**
-   * Specify the aria-labelledby for cds--content-switcher
-   */
-  ['aria-labelledby']: PropTypes.string,
 
   /**
    * Pass in Switch components to be rendered in the ContentSwitcher
