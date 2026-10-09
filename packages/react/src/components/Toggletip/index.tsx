@@ -26,6 +26,7 @@ import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import { PolymorphicProps } from '../../types/common';
 import { PolymorphicComponentPropWithRef } from '../../internal/PolymorphicProps';
+import { useAutoAlign } from '../../internal/useAutoAlign';
 
 type ToggletipLabelProps<E extends ElementType> = {
   as?: E;
@@ -103,12 +104,13 @@ export type ToggletipProps<T extends ElementType> =
 export function Toggletip<E extends ElementType = 'span'>({
   align,
   as,
-  autoAlign,
+  autoAlign: autoAlignProp,
   className: customClassName,
   children,
   defaultOpen = false,
   ...rest
 }: ToggletipProps<E>) {
+  const autoAlign = useAutoAlign(autoAlignProp);
   const ref = useRef<Element>(null);
   const [open, setOpen] = useState(defaultOpen);
   const prefix = usePrefix();

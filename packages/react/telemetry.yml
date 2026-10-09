@@ -548,6 +548,7 @@ collect:
         - enableFocusWrapWithoutSentinels
         - enablePresence
         - enableTreeviewControllable
+        - enableV12Autoalign
         - enableV12DynamicFloatingStyles
         - enableV12Overflowmenu
         - enableV12Release
@@ -1021,12 +1022,12 @@ collect:
         - top-start
         # General - aria-current
         - date
-        - "false"
+        - 'false'
         - location
         - page
         - step
         - time
-        - "true"
+        - 'true'
         # General - backgroundToken
         - background
         - layer
@@ -1072,8 +1073,8 @@ collect:
         - text
         - url
         # General - kind
-        - "403"
-        - "404"
+        - '403'
+        - '404'
         - caution-major
         - caution-minor
         - cautious
@@ -1113,9 +1114,9 @@ collect:
         - left
         - right
         # General - level
-        - "0"
-        - "1"
-        - "2"
+        - '0'
+        - '1'
+        - '2'
         # General - loadingStatus
         - active
         - error
@@ -1225,8 +1226,8 @@ collect:
         - top
         - top-after-reopen
         # General - size
-        - "16"
-        - "20"
+        - '16'
+        - '20'
         - 2xl
         - 2xs
         - big
@@ -1394,8 +1395,8 @@ collect:
         # Popover - autoAlignBoundary
         - clippingAncestors
         # ShapeIndicator - textSize
-        - "12"
-        - "14"
+        - '12'
+        - '14'
         # SidePanel - placement
         - left
         - right

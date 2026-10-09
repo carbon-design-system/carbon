@@ -36,6 +36,10 @@ import CDSDropdownItem from './dropdown-item';
 import styles from './dropdown.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import CDSAILabel from '../ai-label/ai-label';
+import {
+  AutoAlignController,
+  autoAlignConverter,
+} from '../../globals/controllers/auto-align-controller';
 
 export {
   DROPDOWN_KEYBOARD_ACTION,
@@ -972,8 +976,10 @@ class CDSDropdown extends ValidityMixin(
   /**
    * Specify whether auto align functionality should be applied
    */
-  @property({ type: Boolean, reflect: true })
-  autoalign = false;
+  @property({ type: Boolean, reflect: true, converter: autoAlignConverter })
+  autoalign?: boolean;
+
+  protected _autoAlignController = new AutoAlignController(this);
 
   /**
    * `true` if this dropdown should be disabled.
@@ -1275,7 +1281,7 @@ class CDSDropdown extends ValidityMixin(
       [`${prefix}--dropdown--inline`]: inline,
       [`${prefix}--dropdown--selected`]: selectedItemsCount > 0,
       [`${prefix}--list-box__wrapper--decorator`]: this._hasAILabel,
-      [`${prefix}--autoalign`]: autoalign,
+      [`${prefix}--autoalign`]: Boolean(autoalign),
     });
   }
 

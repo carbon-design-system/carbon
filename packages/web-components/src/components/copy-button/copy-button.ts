@@ -16,6 +16,10 @@ import { POPOVER_ALIGNMENT } from '../popover/defs';
 import { ICON_BUTTON_SIZE } from '../icon-button/defs';
 import '../copy/copy';
 import { iconLoader } from '../../globals/internal/icon-loader';
+import {
+  AutoAlignController,
+  autoAlignConverter,
+} from '../../globals/controllers/auto-align-controller';
 
 /**
  * Copy button.
@@ -51,8 +55,10 @@ class CDSCopyButton extends FocusMixin(LitElement) {
   /**
    * Specify whether a auto align functionality should be applied
    */
-  @property({ type: Boolean, reflect: true })
-  autoAlign = false;
+  @property({ type: Boolean, reflect: true, converter: autoAlignConverter })
+  autoAlign?: boolean;
+
+  protected _autoAlignController = new AutoAlignController(this, 'autoAlign');
 
   /**
    * The number in milliseconds to determine how long the tooltip should remain.

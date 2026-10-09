@@ -24,6 +24,7 @@ import iconButtonStyles from '../icon-button/icon-button.scss?lit';
 import styles from './overflow-menu.scss?lit';
 import CDSIconButton from '../icon-button/icon-button';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import { autoAlignConverter } from '../../globals/controllers/auto-align-controller';
 
 export { OVERFLOW_MENU_SIZE };
 
@@ -228,8 +229,8 @@ class CDSOverflowMenu
   /**
    * Experimental property. Enables automatic menu placement flipping to avoid clipping.
    */
-  @property({ type: Boolean, reflect: true })
-  autoalign = false;
+  @property({ type: Boolean, reflect: true, converter: autoAlignConverter })
+  autoalign?: boolean;
 
   /**
    * `true` if the dropdown should be open.

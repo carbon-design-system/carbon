@@ -13,6 +13,10 @@ import { prefix } from '../../globals/settings';
 import '../tooltip/index';
 
 import styles from './truncated-text.scss?lit';
+import {
+  AutoAlignController,
+  autoAlignConverter,
+} from '../../globals/controllers/auto-align-controller';
 
 const componentName = 'truncated-text';
 export const blockClass = `${prefix}--${componentName}`;
@@ -34,8 +38,10 @@ export class CDSTruncatedText extends LitElement {
   /**
    * Specify whether a auto align functionality should be applied
    */
-  @property({ type: Boolean, reflect: true })
-  autoalign = false;
+  @property({ type: Boolean, reflect: true, converter: autoAlignConverter })
+  autoalign?: boolean;
+
+  protected _autoAlignController = new AutoAlignController(this);
 
   /**
    * The label on the collapse button.

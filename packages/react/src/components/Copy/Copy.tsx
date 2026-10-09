@@ -78,7 +78,7 @@ export interface CopyProps
 
 export default function Copy({
   align = 'bottom',
-  autoAlign = false,
+  autoAlign,
   children,
   className,
   feedback = 'Copied!',

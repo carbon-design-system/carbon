@@ -74,6 +74,7 @@ import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps'
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
 import { useFeatureFlag } from '../FeatureFlags';
+import { useAutoAlign } from '../../internal/useAutoAlign';
 
 const {
   InputBlur,
@@ -331,7 +332,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
   ItemType,
 >(
   {
-    autoAlign = false,
+    autoAlign: autoAlignProp,
     className: containerClassName,
     clearSelectionDescription = 'Total items selected: ',
     clearSelectionText = 'To clear selection, press Delete or Backspace',
@@ -373,6 +374,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
   }: FilterableMultiSelectProps<ItemType>,
   ref: ForwardedRef<HTMLDivElement>
 ) {
+  const autoAlign = useAutoAlign(autoAlignProp);
   const { isFluid } = useContext(FormContext);
   const isFirstRender = useRef(true);
   const labelRef = useRef<HTMLLabelElement>(null);

@@ -69,6 +69,7 @@ import {
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
+import { useAutoAlign } from '../../internal/useAutoAlign';
 
 const {
   ItemClick,
@@ -297,7 +298,7 @@ export interface MultiSelectProps<ItemType>
 export const MultiSelect = React.forwardRef(
   <ItemType,>(
     {
-      autoAlign = false,
+      autoAlign: autoAlignProp,
       className: containerClassName,
       decorator,
       id,
@@ -337,6 +338,7 @@ export const MultiSelect = React.forwardRef(
     }: MultiSelectProps<ItemType>,
     ref: ForwardedRef<HTMLButtonElement>
   ) => {
+    const autoAlign = useAutoAlign(autoAlignProp);
     const filteredItems = useMemo(() => {
       return items.filter((item) => {
         if (typeof item === 'object' && item !== null) {

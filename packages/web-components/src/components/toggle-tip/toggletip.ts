@@ -21,6 +21,10 @@ import popoverStyles from '../popover/popover.scss?lit';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import { deepShadowContains } from '../../globals/internal/deep-shadow-contains';
 import { isFeatureFlagEnabled } from '../feature-flags';
+import {
+  AutoAlignController,
+  autoAlignConverter,
+} from '../../globals/controllers/auto-align-controller';
 
 /**
  * Definition tooltip.
@@ -67,8 +71,10 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
   /**
    * Specify whether a auto align functionality should be applied
    */
-  @property({ type: Boolean, reflect: true })
-  autoalign = false;
+  @property({ type: Boolean, reflect: true, converter: autoAlignConverter })
+  autoalign?: boolean;
+
+  protected _autoAlignController = new AutoAlignController(this);
 
   /**
    * The label for the toggle button

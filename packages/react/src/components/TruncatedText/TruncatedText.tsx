@@ -60,7 +60,7 @@ export const TruncatedText = forwardRef<HTMLDivElement, TruncatedTextProps>(
     const blockClass = `${prefix}--truncated-text`;
     const {
       align = 'top',
-      autoAlign = false,
+      autoAlign,
       className,
       collapseLabel,
       expandLabel,
