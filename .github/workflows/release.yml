@@ -94,7 +94,7 @@ jobs:
               repo: context.repo.repo,
             })
 
-  packages:
+  deploy-packages:
     needs: build
     runs-on: ubuntu-latest
     # only trigger for stable releases, not release candidates
@@ -116,4 +116,19 @@ jobs:
     permissions:
       contents: read
     uses: ./.github/workflows/publish-icons-pictograms-cdn.yml
+    secrets: inherit
+
+  publish-web-components-cdn:
+    needs: build
+    permissions:
+      contents: read
+    uses: ./.github/workflows/publish-web-components-cdn.yml
+    secrets: inherit
+
+  deploy-v12-storybooks:
+    needs: build
+    if: contains(github.ref_name, '-alpha') == true
+    permissions:
+      contents: read
+    uses: ./.github/workflows/deploy-v12-storybooks.yml
     secrets: inherit
