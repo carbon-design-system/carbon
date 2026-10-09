@@ -1,0 +1,25 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type' as *;
+
+.example-container {
+  padding: var(--cds-spacing-05);
+
+  h3 {
+    margin-block-end: var(--cds-spacing-03);
+  }
+
+  p {
+    color: var(--cds-text-secondary);
+    margin-block-end: var(--cds-spacing-05);
+  }
+
+  .launch-button {
+    margin-block-end: var(--cds-spacing-05);
+  }
+}
