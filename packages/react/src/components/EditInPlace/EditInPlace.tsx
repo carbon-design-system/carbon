@@ -434,7 +434,9 @@ export const EditInPlace = forwardRef<HTMLDivElement, EditInPlaceProps>(
               label={readOnlyLabel || 'Edit off'}
               kind="ghost"
               key="readonly"
-              onClick={onFocusHandler}>
+              onClick={(e) =>
+                onFocusHandler(e as unknown as React.FocusEvent<HTMLElement>)
+              }>
               <EditOff size={16} />
             </IconButton>
           ) : focused ? (
@@ -471,7 +473,9 @@ export const EditInPlace = forwardRef<HTMLDivElement, EditInPlaceProps>(
               })}
               size={size}
               label={editLabel}
-              onClick={onFocusHandler}
+              onClick={(e) =>
+                onFocusHandler(e as unknown as React.FocusEvent<HTMLElement>)
+              }
               kind="ghost"
               key="edit">
               <Edit size={16} />

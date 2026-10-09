@@ -26,7 +26,7 @@ const defaultArgs = {
 export default {
   title: 'Utilities/TruncatedText',
   component: TruncatedText,
-  tags: ['autodocs', 'ibm-products-migrated'],
+  tags: ['autodocs'],
   parameters: {
     layout: 'centered',
     docs: {

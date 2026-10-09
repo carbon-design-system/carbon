@@ -12,41 +12,36 @@ import './feature-flags';
 import './internal/warnAboutDeprecatedReactVersion';
 
 export * from './components/Accordion';
-// TODO: uncomment in v12 — also remove from excludeProductsComponents
-// export { AddSelect } from './components/AddSelect';
-// export type { AddSelectProps } from './components/AddSelect';
-// export { ActionSet } from './components/ActionSet';
-// export type { ActionSetProps } from './components/ActionSet';
-// export {
-//   BigNumber as preview__BigNumber,
-//   BigNumberSkeleton as preview__BigNumberSkeleton,
-// } from './components/BigNumber';
-// export type { BigNumberProps as preview__BigNumberProps } from './components/BigNumber';
-// TODO: uncomment in v12 — also remove from excludeProductsComponents
-// export {
-//   Guidebanner as preview__Guidebanner,
-//   GuidebannerElement as preview__GuidebannerElement,
-//   GuidebannerElementButton as preview__GuidebannerElementButton,
-//   GuidebannerElementLink as preview__GuidebannerElementLink,
-// } from './components/Guidebanner';
-// export type { GuidebannerProps } from './components/Guidebanner';
-// export type { GuidebannerElementProps } from './components/Guidebanner';
-// export type { GuidebannerElementButtonProps } from './components/Guidebanner';
-// export type { GuidebannerElementLinkProps } from './components/Guidebanner';
+export { AddSelect } from './components/AddSelect';
+export type { AddSelectProps } from './components/AddSelect';
+export {
+  BigNumber as preview__BigNumber,
+  BigNumberSkeleton as preview__BigNumberSkeleton,
+} from './components/BigNumber';
+export type { BigNumberProps as preview__BigNumberProps } from './components/BigNumber';
+export {
+  Guidebanner as preview__Guidebanner,
+  GuidebannerElement as preview__GuidebannerElement,
+  GuidebannerElementButton as preview__GuidebannerElementButton,
+  GuidebannerElementLink as preview__GuidebannerElementLink,
+} from './components/Guidebanner';
+export type { GuidebannerProps } from './components/Guidebanner';
+export type { GuidebannerElementProps } from './components/Guidebanner';
+export type { GuidebannerElementButtonProps } from './components/Guidebanner';
+export type { GuidebannerElementLinkProps } from './components/Guidebanner';
 export * from './components/AccordionItem';
 export * from './components/AspectRatio';
 export * from './components/Breadcrumb';
 export * from './components/Button';
 export * from './components/ButtonSet';
 export * as preview__Card from './components/Card';
-// export {
-//   ConditionBuilder,
-//   getEmptyState,
-//   ConditionBuilderContext,
-// } from './components/ConditionBuilder';
-// export type { ConditionBuilderProps } from './components/ConditionBuilder';
-// TODO: uncomment in v12 — also remove from excludeProductsComponents
-// export * from './components/Coachmark';
+export {
+  ConditionBuilder,
+  getEmptyState,
+  ConditionBuilderContext,
+} from './components/ConditionBuilder';
+export type { ConditionBuilderProps } from './components/ConditionBuilder';
+export * from './components/Coachmark';
 export * from './components/Checkbox';
 export * from './components/CheckboxGroup';
 export * from './components/ClassPrefix';
@@ -66,8 +61,7 @@ export * from './components/DatePicker';
 export * from './components/DatePickerInput';
 export * as preview__DatePicker from './components/DatePicker/next';
 export * from './components/Dropdown';
-// TODO: uncomment in v12 — also remove from excludeProductsComponents
-// export * from './components/EditInPlace';
+export * from './components/EditInPlace';
 export * from './components/ErrorBoundary';
 export * from './components/ExpandableSearch';
 export {
@@ -82,8 +76,7 @@ export {
   useFeatureFlags as preview_useFeatureFlags, // this export can be removed in v12
 } from './components/FeatureFlags';
 export * from './components/FileUploader';
-// TODO: uncomment in v12 — also remove from excludeProductsComponents
-// export * from './components/FullPageError';
+export * from './components/FullPageError';
 export * from './components/FluidForm';
 export * from './components/Form';
 export * from './components/FormGroup';
@@ -94,8 +87,7 @@ export * from './components/Icon/Icon.Skeleton';
 export * from './components/IdPrefix';
 export { InlineCheckbox } from './components/InlineCheckbox';
 export * from './components/InlineLoading';
-// TODO: uncomment in v12 — also remove from excludeProductsComponents
-// export * from './components/InterstitialScreen';
+export * from './components/InterstitialScreen';
 export * from './components/Link';
 export * from './components/ListItem';
 export * from './components/Loading';
@@ -105,32 +97,29 @@ export * from './components/Modal';
 export * from './components/ModalWrapper';
 export * from './components/MultiSelect';
 export * from './components/Notification';
-// TODO: uncomment in v12 — also remove from excludeProductsComponents
-// export { NotificationsPanel } from './components/NotificationsPanel';
-// export type { NotificationsPanelProps } from './components/NotificationsPanel';
+export { NotificationsPanel } from './components/NotificationsPanel';
+export type { NotificationsPanelProps } from './components/NotificationsPanel';
 export * from './components/NumberInput';
 export * from './components/OrderedList';
-// TODO: uncomment in v12 — also remove from excludeProductsComponents
-// export * from './components/OptionsTile';
+export * from './components/OptionsTile';
 export * from './components/OverflowMenu';
 export * from './components/OverflowMenuItem';
 export * as unstable__PageHeader from './components/PageHeaderDeprecated';
 export * as preview__PageHeader from './components/PageHeaderDeprecated';
-// TODO: uncomment in v12 — also remove from excludeProductsComponents
-// export {
-//   PageHeader,
-//   PageHeaderBreadcrumbBar,
-//   PageHeaderContent,
-//   PageHeaderContentPageActions,
-//   PageHeaderContentText,
-//   PageHeaderTabBar,
-//   PageHeaderHeroImage,
-//   PageHeaderScrollButton,
-//   PageHeaderTitleBreadcrumb,
-//   PageHeaderBreadcrumbOverflow,
-//   PageHeaderTagOverflow,
-//   PageHeaderBreadcrumbPageActions,
-// } from './components/PageHeader';
+export {
+  PageHeader,
+  PageHeaderBreadcrumbBar,
+  PageHeaderContent,
+  PageHeaderContentPageActions,
+  PageHeaderContentText,
+  PageHeaderTabBar,
+  PageHeaderHeroImage,
+  PageHeaderScrollButton,
+  PageHeaderTitleBreadcrumb,
+  PageHeaderBreadcrumbOverflow,
+  PageHeaderTagOverflow,
+  PageHeaderBreadcrumbPageActions,
+} from './components/PageHeader';
 export * as preview__Dialog from './components/Dialog';
 export * from './components/Pagination';
 export * from './components/Pagination/Pagination.Skeleton';
@@ -594,7 +583,7 @@ export type { NumberInputSkeletonProps } from './components/NumberInput/NumberIn
 export type { OrderedListProps } from './components/OrderedList/OrderedList';
 
 //options tile (migrated from @carbon/ibm-products)
-// export type { OptionsTileProps } from './components/OptionsTile';
+export type { OptionsTileProps } from './components/OptionsTile';
 
 //overflow menu
 export type { OverflowMenuProps } from './components/OverflowMenu/index';
@@ -605,24 +594,16 @@ export type {
   PageHeaderProps,
   PageHeaderBreadcrumbBarProps,
   PageHeaderContentProps,
-  PageHeaderHeroImageProps,
+  PageHeaderContentPageActionsProps,
+  PageHeaderContentTextProps,
   PageHeaderTabBarProps,
-} from './components/PageHeaderDeprecated';
-// TODO: uncomment in v12 — also remove from excludeProductsComponents
-// export type {
-//   PageHeaderProps,
-//   PageHeaderBreadcrumbBarProps,
-//   PageHeaderContentProps,
-//   PageHeaderContentPageActionsProps,
-//   PageHeaderContentTextProps,
-//   PageHeaderTabBarProps,
-//   PageHeaderHeroImageProps,
-//   PageHeaderScrollButtonProps,
-//   PageHeaderTagOverflowProps,
-//   PageHeaderBreadcrumbOverflowProps,
-//   PageHeaderBreadcrumbPageActionsProps,
-//   PageHeaderBreadcrumbPageActionItem,
-// } from './components/PageHeader';
+  PageHeaderHeroImageProps,
+  PageHeaderScrollButtonProps,
+  PageHeaderTagOverflowProps,
+  PageHeaderBreadcrumbOverflowProps,
+  PageHeaderBreadcrumbPageActionsProps,
+  PageHeaderBreadcrumbPageActionItem,
+} from './components/PageHeader';
 
 export type {
   DialogProps,
@@ -663,17 +644,16 @@ export type { RadioButtonSkeletonProps } from './components/RadioButton/RadioBut
 export type { RadioButtonGroupProps } from './components/RadioButtonGroup/RadioButtonGroup';
 export type { RadioTileProps } from './components/RadioTile/RadioTile';
 
-// TODO: uncomment in v12 — also remove from excludeProductsComponents (migrated from @carbon/ibm-products)
-// export { ScrollGradient } from './components/ScrollGradient';
-// export type { ScrollGradientProps } from './components/ScrollGradient';
+export { ScrollGradient } from './components/ScrollGradient';
+export type { ScrollGradientProps } from './components/ScrollGradient';
 
 //search
 export type { SearchProps } from './components/Search/Search';
 export type { SearchSkeletonProps } from './components/Search/Search.Skeleton';
 
 //side panel (migrated from @carbon/ibm-products)
-// export { SidePanel } from './components/SidePanel';
-// export type { SidePanelProps } from './components/SidePanel';
+export { SidePanel } from './components/SidePanel';
+export type { SidePanelProps } from './components/SidePanel';
 
 //select
 export type { SelectProps } from './components/Select/Select';
@@ -808,14 +788,14 @@ export type { BaseSwitcherProps } from './components/UIShell/Switcher';
 export type { SwitcherDividerProps } from './components/UIShell/SwitcherDivider';
 export type { SwitcherItemProps } from './components/UIShell/SwitcherItem';
 
-// TODO: ibm-products migration in progress — re-enable when component is ready
-// export { TruncatedText } from './components/TruncatedText';
-// export type { TruncatedTextProps } from './components/TruncatedText';
-// export * from './components/UserAvatar';
-// export type { TagOverflowItem, TagOverflowProps } from './components/TagOverflow';
-
-// TODO: uncomment in v12 — also remove from excludeProductsComponents
-// export * from './components/Tearsheet';
+export { TruncatedText } from './components/TruncatedText';
+export type { TruncatedTextProps } from './components/TruncatedText';
+export * from './components/UserAvatar';
+export type {
+  TagOverflowItem,
+  TagOverflowProps,
+} from './components/TagOverflow';
+export * from './components/Tearsheet';
 
 //unordered list
 export type { UnorderedListProps } from './components/UnorderedList/UnorderedList';

@@ -62,7 +62,7 @@ export default {
     PageHeaderBreadcrumbOverflow,
     PageHeaderTagOverflow,
   },
-  tags: ['autodocs', 'ibm-products-migrated'],
+  tags: ['autodocs'],
   argTypes: {
     children: {
       table: { disable: true },

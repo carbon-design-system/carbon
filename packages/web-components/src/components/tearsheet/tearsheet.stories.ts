@@ -552,7 +552,6 @@ const meta = {
       page: mdx,
     },
   },
-  tags: ['ibm-products-migrated'],
   // Shared argTypes inherited by every story
   argTypes: {
     decorator: {

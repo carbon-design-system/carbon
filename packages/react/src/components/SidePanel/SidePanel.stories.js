@@ -313,7 +313,6 @@ const renderUIShellHeader = () => (
 export default {
   title: 'Components/SidePanel',
   component: SidePanel,
-  tags: ['ibm-products-migrated'],
   parameters: {
     layout: 'fullscreen',
     docs: {

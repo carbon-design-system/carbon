@@ -32,7 +32,7 @@ import { HIERARCHICAL_VARIANT, NON_HIERARCHICAL_VARIANT } from './utils/util';
 export default {
   title: 'Components/ConditionBuilder',
   component: ConditionBuilder,
-  tags: ['autodocs', 'ibm-products-migrated'],
+  tags: ['autodocs'],
 
   parameters: {
     layout: 'fullscreen',
