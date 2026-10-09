@@ -579,6 +579,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
   const titleClasses = cx({
     [`${prefix}--label`]: true,
     [`${prefix}--label--disabled`]: disabled,
+    [`${prefix}--label--readonly`]: readOnly && !disabled,
     [`${prefix}--visually-hidden`]: hideLabel,
   });
   const helperClasses = cx({
@@ -858,7 +859,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
       [`${prefix}--multi-select--selected`]:
         controlledSelectedItems?.length > 0,
       [`${prefix}--multi-select--filterable--input-focused`]: inputFocused,
-      [`${prefix}--multi-select--readonly`]: readOnly,
+      [`${prefix}--multi-select--readonly`]: readOnly && !disabled,
       [`${prefix}--multi-select--selectall`]: selectAll,
     }
   );
@@ -1035,7 +1036,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
             {...inputProp}
             ref={mergedRef}
             {...readOnlyEventHandlers}
-            readOnly={readOnly}
+            {...(readOnly && !disabled ? { readOnly: true } : {})}
           />
           {normalizedProps.invalid && (
             <WarningFilled className={`${prefix}--list-box__invalid-icon`} />

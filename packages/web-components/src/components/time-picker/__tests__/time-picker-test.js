@@ -269,5 +269,18 @@ describe('cds-time-picker', () => {
       expect(timePickerEl).to.not.have.class('cds--time-picker--warning');
       expect(inputEl).to.not.have.class('cds--time-picker__input-field-error');
     });
+
+    it('should prioritize disabled over readOnly when both are true', async () => {
+      const el = await fixture(html`
+        <cds-time-picker disabled readonly></cds-time-picker>
+      `);
+      await el.updateComplete;
+
+      const input = el.shadowRoot.querySelector('input');
+
+      expect(input.hasAttribute('disabled')).to.be.true;
+      expect(input.disabled).to.be.true;
+      expect(input.readOnly).to.be.false;
+    });
   });
 });

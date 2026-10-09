@@ -455,8 +455,10 @@ class CDSComboBox extends CDSDropdown {
         aria-haspopup="listbox"
         aria-autocomplete="list"
         aria-expanded="${String(open)}"
-        aria-activedescendant="${open ? (activeDescendant ?? '') : ''}"
-        ?readonly=${readOnly}
+        aria-activedescendant="${ifDefined(
+          open ? (activeDescendant ?? activeDescendantFallback) : ''
+        )}"
+        ?readonly=${readOnly && !disabled}
         @input=${handleInput}
         @keydown=${handleInputKeydown}
         ...="${spread(this._normalizeInputProps(inputProps))}" />

@@ -250,7 +250,7 @@ const TextInput = forwardRef<unknown, TextInputProps>(
       className: textInputClasses,
       title: placeholder,
       disabled: normalizedProps.disabled,
-      readOnly,
+      ...(readOnly && !normalizedProps.disabled ? { readOnly: true } : {}),
       ['aria-describedby']:
         hasHelperText(helperText) && !normalizedProps.invalid
           ? normalizedProps.helperId
@@ -266,7 +266,8 @@ const TextInput = forwardRef<unknown, TextInputProps>(
       [classNames(`${prefix}--form-item`, className)],
       `${prefix}--text-input-wrapper`,
       {
-        [`${prefix}--text-input-wrapper--readonly`]: readOnly,
+        [`${prefix}--text-input-wrapper--readonly`]:
+          readOnly && !normalizedProps.disabled,
         [`${prefix}--text-input-wrapper--light`]: light,
         [`${prefix}--text-input-wrapper--inline`]: inline,
         [`${prefix}--text-input-wrapper--inline--invalid`]:
@@ -276,6 +277,7 @@ const TextInput = forwardRef<unknown, TextInputProps>(
     const labelClasses = classNames(`${prefix}--label`, {
       [`${prefix}--visually-hidden`]: hideLabel,
       [`${prefix}--label--disabled`]: normalizedProps.disabled,
+      [`${prefix}--label--readonly`]: readOnly && !normalizedProps.disabled,
       [`${prefix}--label--inline`]: inline,
       [`${prefix}--label--inline--${size}`]: inline && !!size, // TODO v12 - remove this class
     });
