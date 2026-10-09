@@ -3468,7 +3468,7 @@ Map {
         ],
         "type": "oneOf",
       },
-      "tooltipAlign": {
+      "tooltipAlignment": {
         "args": [
           [
             "top",
@@ -8747,7 +8747,7 @@ Map {
         ],
         "type": "oneOf",
       },
-      "tooltipAlign": {
+      "tooltipAlignment": {
         "args": [
           [
             "top",

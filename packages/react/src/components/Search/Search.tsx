@@ -121,7 +121,7 @@ export interface SearchProps extends InputPropsBase {
    * Specify how the magnifier tooltip aligns with the trigger when the
    * Search is expandable and collapsed (`ExpandableSearch`).
    */
-  tooltipAlign?: PopoverAlignment;
+  tooltipAlignment?: PopoverAlignment;
 
   /**
    * Specify the type of the `<input>`
@@ -157,7 +157,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
       role,
       size,
       tabIndex,
-      tooltipAlign = 'top',
+      tooltipAlignment = 'top',
       type = 'search',
       value,
       ...rest
@@ -291,7 +291,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
       onExpand && !isExpanded && !disabled ? (
         <Tooltip
           className={`${prefix}--search-tooltip ${prefix}--search-magnifier-tooltip ${prefix}--icon-tooltip`}
-          align={tooltipAlign}
+          align={tooltipAlignment}
           label="Search">
           {magnifierButton}
         </Tooltip>
@@ -450,7 +450,7 @@ Search.propTypes = {
    * Specify how the magnifier tooltip aligns with the trigger when the
    * Search is expandable and collapsed (`ExpandableSearch`).
    */
-  tooltipAlign: PropTypes.oneOf([
+  tooltipAlignment: PropTypes.oneOf([
     'top',
     'top-start',
     'top-end',

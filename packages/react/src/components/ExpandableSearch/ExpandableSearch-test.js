@@ -215,9 +215,9 @@ describe('ExpandableSearch', () => {
       ).toHaveClass(`${prefix}--popover--top`);
     });
 
-    it('supports a custom tooltipAlign for the collapsed magnifier', () => {
+    it('supports a custom tooltipAlignment for the collapsed magnifier', () => {
       const { container } = render(
-        <ExpandableSearch labelText="test-search" tooltipAlign="bottom" />
+        <ExpandableSearch labelText="test-search" tooltipAlignment="bottom" />
       );
       expect(
         container.querySelector(`.${prefix}--search-magnifier-tooltip`)
