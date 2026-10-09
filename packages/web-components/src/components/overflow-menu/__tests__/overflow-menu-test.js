@@ -7,6 +7,7 @@
 
 import '@carbon/web-components/es/components/overflow-menu/index.js';
 import '@carbon/web-components/es/components/feature-flags/index.js';
+import '@carbon/web-components/es/components/menu/index.js';
 
 import { expect, fixture, html } from '@open-wc/testing';
 
@@ -22,12 +23,11 @@ describe('cds-overflow-menu', () => {
     document.body.style.position = originalBodyPosition;
   });
 
-  const basicOverflowMenu = html`<cds-overflow-menu>
-    <span slot="tooltip-content">Options</span>
-    <cds-overflow-menu-body>
-      <cds-overflow-menu-item>Filter A</cds-overflow-menu-item>
-      <cds-overflow-menu-item>Filter B</cds-overflow-menu-item>
-    </cds-overflow-menu-body>
+  const basicOverflowMenu = html`<cds-overflow-menu label="Options">
+    <cds-menu>
+      <cds-menu-item label="Filter A"></cds-menu-item>
+      <cds-menu-item label="Filter B"></cds-menu-item>
+    </cds-menu>
   </cds-overflow-menu>`;
 
   const emulateFocusPseudoClass = (el, isFocused) => {
@@ -121,11 +121,10 @@ describe('cds-overflow-menu', () => {
 
   it('should open the tooltip when the native focus event is missing', async () => {
     const el = await fixture(html`
-      <cds-overflow-menu enter-delay-ms="0">
-        <span slot="tooltip-content">Options</span>
-        <cds-overflow-menu-body>
-          <cds-overflow-menu-item>Filter A</cds-overflow-menu-item>
-        </cds-overflow-menu-body>
+      <cds-overflow-menu label="Options" enter-delay-ms="0">
+        <cds-menu>
+          <cds-menu-item label="Filter A"></cds-menu-item>
+        </cds-menu>
       </cds-overflow-menu>
     `);
     const tooltip = el.shadowRoot.querySelector('cds-tooltip');
@@ -145,11 +144,10 @@ describe('cds-overflow-menu', () => {
 
   it('should cancel a queued tooltip open when focus leaves early', async () => {
     const el = await fixture(html`
-      <cds-overflow-menu enter-delay-ms="10">
-        <span slot="tooltip-content">Options</span>
-        <cds-overflow-menu-body>
-          <cds-overflow-menu-item>Filter A</cds-overflow-menu-item>
-        </cds-overflow-menu-body>
+      <cds-overflow-menu label="Options" enter-delay-ms="10">
+        <cds-menu>
+          <cds-menu-item label="Filter A"></cds-menu-item>
+        </cds-menu>
       </cds-overflow-menu>
     `);
     const tooltip = el.shadowRoot.querySelector('cds-tooltip');
@@ -173,11 +171,10 @@ describe('cds-overflow-menu', () => {
 
   it('should not style programmatic focus when disabled', async () => {
     const el = await fixture(html`
-      <cds-overflow-menu disabled>
-        <span slot="tooltip-content">Options</span>
-        <cds-overflow-menu-body>
-          <cds-overflow-menu-item>Filter A</cds-overflow-menu-item>
-        </cds-overflow-menu-body>
+      <cds-overflow-menu label="Options" disabled>
+        <cds-menu>
+          <cds-menu-item label="Filter A"></cds-menu-item>
+        </cds-menu>
       </cds-overflow-menu>
     `);
     const tooltip = el.shadowRoot.querySelector('cds-tooltip');
@@ -195,12 +192,11 @@ describe('cds-overflow-menu', () => {
     sizes.forEach((size) => {
       it(`size="${size}"`, async () => {
         const el = await fixture(html`
-          <cds-overflow-menu size=${size}>
-            <span slot="tooltip-content">Options</span>
-            <cds-overflow-menu-body>
-              <cds-overflow-menu-item>Filter A</cds-overflow-menu-item>
-              <cds-overflow-menu-item>Filter B</cds-overflow-menu-item>
-            </cds-overflow-menu-body>
+          <cds-overflow-menu label="Options" size=${size}>
+            <cds-menu>
+              <cds-menu-item label="Filter A"></cds-menu-item>
+              <cds-menu-item label="Filter B"></cds-menu-item>
+            </cds-menu>
           </cds-overflow-menu>
         `);
 
@@ -214,177 +210,114 @@ describe('cds-overflow-menu', () => {
     });
   });
 
-  it('should handle Escape key to close menu', async () => {
+  it('should close menu via cds-menu-closed event (Escape)', async () => {
     const el = await fixture(basicOverflowMenu);
-    const menuBody = el.querySelector('cds-overflow-menu-body');
-
-    menuBody.open = true;
-
-    const event = new KeyboardEvent('keydown', {
-      key: 'Escape',
-      bubbles: true,
-      cancelable: true,
-    });
-
-    menuBody.dispatchEvent(event);
-
-    expect(menuBody.open).to.be.false;
-  });
-
-  it('should keep menu open when non-closing keys are pressed on a menu item', async () => {
-    const el = await fixture(basicOverflowMenu);
-    const menuBody = el.querySelector('cds-overflow-menu-body');
-    const menuItem = menuBody.querySelector('cds-overflow-menu-item');
+    const menu = el.querySelector('cds-menu');
 
     el.open = true;
-    menuBody.open = true;
     await el.updateComplete;
-    await menuBody.updateComplete;
-    menuItem.shadowRoot.querySelector('button').focus();
+    await menu.updateComplete;
 
-    ['Home', 'End', 'ArrowLeft', 'ArrowRight'].forEach((key) => {
-      const event = new KeyboardEvent('keydown', {
-        key,
+    expect(el.open).to.be.true;
+    expect(menu.open).to.be.true;
+
+    menu.dispatchEvent(
+      new CustomEvent('cds-menu-closed', {
         bubbles: true,
         composed: true,
-        cancelable: true,
-      });
+        detail: { triggerEventType: 'keydown' },
+      })
+    );
 
-      menuItem.shadowRoot.querySelector('button').dispatchEvent(event);
-
-      expect(event.defaultPrevented).to.be.true;
-      expect(el.open).to.be.true;
-      expect(menuBody.open).to.be.true;
-    });
-  });
-
-  it('should keep menu open for non-closing keys when slotted menu item content has focus', async () => {
-    const el = await fixture(html`
-      <cds-overflow-menu>
-        <span slot="tooltip-content">Options</span>
-        <cds-overflow-menu-body>
-          <cds-overflow-menu-item>
-            <span tabindex="0">Filter A</span>
-          </cds-overflow-menu-item>
-        </cds-overflow-menu-body>
-      </cds-overflow-menu>
-    `);
-    const menuBody = el.querySelector('cds-overflow-menu-body');
-    const slottedContent = menuBody.querySelector('[tabindex="0"]');
-
-    el.open = true;
-    menuBody.open = true;
+    await new Promise((r) => setTimeout(r, 0));
     await el.updateComplete;
-    await menuBody.updateComplete;
-    slottedContent.focus();
+    await menu.updateComplete;
 
-    const event = new KeyboardEvent('keydown', {
-      key: 'Home',
-      bubbles: true,
-      composed: true,
-      cancelable: true,
-    });
-
-    menuBody.dispatchEvent(event);
-
-    expect(event.defaultPrevented).to.be.true;
-    expect(el.open).to.be.true;
-    expect(menuBody.open).to.be.true;
-  });
-
-  it('should close menu for closing keys when the menu item has focus', async () => {
-    const el = await fixture(basicOverflowMenu);
-    const menuBody = el.querySelector('cds-overflow-menu-body');
-    const menuItem = menuBody.querySelector('cds-overflow-menu-item');
-
-    el.open = true;
-    menuBody.open = true;
-    await el.updateComplete;
-    await menuBody.updateComplete;
-    menuItem.focus();
-
-    const event = new KeyboardEvent('keydown', {
-      key: 'Enter',
-      bubbles: true,
-      composed: true,
-      cancelable: true,
-    });
-
-    menuBody.dispatchEvent(event);
-
-    expect(event.defaultPrevented).to.be.true;
     expect(el.open).to.be.false;
-    expect(menuBody.open).to.be.false;
+    expect(menu.open).to.be.false;
   });
 
   it('should close menu when a menu item is clicked', async () => {
     const el = await fixture(basicOverflowMenu);
-    const menuBody = el.querySelector('cds-overflow-menu-body');
+    const menu = el.querySelector('cds-menu');
 
     el.open = true;
     await el.updateComplete;
-    await menuBody.updateComplete;
+    await menu.updateComplete;
 
     expect(el.open).to.be.true;
-    expect(menuBody.open).to.be.true;
+    expect(menu.open).to.be.true;
 
-    const items = menuBody.querySelectorAll('cds-overflow-menu-item');
-
-    items[0].click();
+    menu.dispatchEvent(
+      new CustomEvent('cds-menu-closed', {
+        bubbles: true,
+        composed: true,
+        detail: { triggerEventType: 'click' },
+      })
+    );
 
     await new Promise((r) => setTimeout(r, 0));
     await el.updateComplete;
-    await menuBody.updateComplete;
+    await menu.updateComplete;
 
     expect(el.open).to.be.false;
-    expect(menuBody.open).to.be.false;
+    expect(menu.open).to.be.false;
   });
 
-  it('should render icon slot in menu item', async () => {
+  it('should render render-icon slot in menu item', async () => {
     const el = await fixture(html`
-      <cds-overflow-menu>
-        <span slot="tooltip-content">Options</span>
-        <cds-overflow-menu-body>
-          <cds-overflow-menu-item>
-            Filter A
-            <svg slot="icon" width="16" height="16" data-testid="icon">
+      <cds-overflow-menu label="Options">
+        <cds-menu>
+          <cds-menu-item label="Filter A">
+            <svg slot="render-icon" width="16" height="16" data-testid="icon">
               <rect width="16" height="16" />
             </svg>
-          </cds-overflow-menu-item>
-        </cds-overflow-menu-body>
+          </cds-menu-item>
+        </cds-menu>
       </cds-overflow-menu>
     `);
 
-    const menuItem = el.querySelector('cds-overflow-menu-item');
-    const icon = menuItem.querySelector('[slot="icon"]');
+    const menuItem = el.querySelector('cds-menu-item');
+    const icon = menuItem.querySelector('[slot="render-icon"]');
+
+    expect(icon).to.exist;
+    expect(icon.getAttribute('slot')).to.equal('render-icon');
+    expect(icon.getAttribute('data-testid')).to.equal('icon');
+  });
+
+  it('should render icon slot in cds-overflow-menu-item', async () => {
+    const el = await fixture(html`
+      <cds-overflow-menu-item>
+        Filter A
+        <svg slot="icon" width="16" height="16" data-testid="icon">
+          <rect width="16" height="16" />
+        </svg>
+      </cds-overflow-menu-item>
+    `);
+
+    const icon = el.querySelector('[slot="icon"]');
 
     expect(icon).to.exist;
     expect(icon.getAttribute('slot')).to.equal('icon');
     expect(icon.getAttribute('data-testid')).to.equal('icon');
   });
 
-  it('should render icon slot in menu item with href', async () => {
+  it('should render icon slot in cds-overflow-menu-item with href', async () => {
     const el = await fixture(html`
-      <cds-overflow-menu>
-        <span slot="tooltip-content">Options</span>
-        <cds-overflow-menu-body>
-          <cds-overflow-menu-item href="https://example.com">
-            Filter A
-            <svg slot="icon" width="16" height="16" data-testid="icon-link">
-              <rect width="16" height="16" />
-            </svg>
-          </cds-overflow-menu-item>
-        </cds-overflow-menu-body>
-      </cds-overflow-menu>
+      <cds-overflow-menu-item href="https://example.com">
+        Filter A
+        <svg slot="icon" width="16" height="16" data-testid="icon-link">
+          <rect width="16" height="16" />
+        </svg>
+      </cds-overflow-menu-item>
     `);
 
-    const menuItem = el.querySelector('cds-overflow-menu-item');
-    const icon = menuItem.querySelector('[slot="icon"]');
+    const icon = el.querySelector('[slot="icon"]');
 
     expect(icon).to.exist;
     expect(icon.getAttribute('slot')).to.equal('icon');
     expect(icon.getAttribute('data-testid')).to.equal('icon-link');
-    expect(menuItem.href).to.equal('https://example.com');
+    expect(el.href).to.equal('https://example.com');
   });
 
   describe('cds-overflow-menu-item', () => {

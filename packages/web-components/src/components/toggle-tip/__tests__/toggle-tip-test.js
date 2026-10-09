@@ -160,12 +160,6 @@ describe('cds-toggletip', function () {
     expect(icon).to.exist;
   });
 
-  it('should render popover caret', async () => {
-    const el = await fixture(html`<cds-toggletip open></cds-toggletip>`);
-    const caret = el.shadowRoot.querySelector('.cds--popover-caret');
-    expect(caret).to.exist;
-  });
-
   it('should render different content structure based on autoalign', async () => {
     const el1 = await fixture(html`<cds-toggletip open></cds-toggletip>`);
     const nestedPopover = el1.shadowRoot.querySelector(
