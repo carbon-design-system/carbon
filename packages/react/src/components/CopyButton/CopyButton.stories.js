@@ -17,6 +17,8 @@ const defaultArgs = {
   feedback: 'Copied!',
   feedbackTimeout: 2000,
   iconDescription: 'Copy to clipboard',
+  kind: '',
+  size: 'md',
 };
 
 const argTypes = {
@@ -51,6 +53,24 @@ const argTypes = {
   },
   iconDescription: {
     control: 'text',
+  },
+  kind: {
+    control: 'select',
+    options: [
+      ' ',
+      'primary',
+      'secondary',
+      'tertiary',
+      'ghost',
+      'danger',
+      'danger--primary',
+      'danger--ghost',
+      'danger--tertiary',
+    ],
+  },
+  size: {
+    control: 'select',
+    options: ['sm', 'md', 'lg'],
   },
   onClick: {
     action: 'onClick',

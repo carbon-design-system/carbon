@@ -9,6 +9,8 @@ import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import type { Meta } from '@storybook/web-components-vite';
 import './copy-button';
+import { BUTTON_KIND } from '../button/defs';
+import { ICON_BUTTON_SIZE } from '../icon-button/defs';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
 
 const tooltipAlignments = {
@@ -28,11 +30,13 @@ const tooltipAlignments = {
 
 const defaultArgs = {
   align: POPOVER_ALIGNMENT.BOTTOM,
-  autoAlign: false,
+  autoAlign: true,
   disabled: false,
   feedback: 'Copied!',
   feedbackTimeout: 2000,
   iconDescription: 'Copy to clipboard',
+  kind: '',
+  size: ICON_BUTTON_SIZE.MEDIUM,
 };
 
 const argTypes = {
@@ -61,6 +65,16 @@ const argTypes = {
     control: 'text',
     description: `Provide a description for the icon representing the copy action that can be read by screen readers`,
   },
+  kind: {
+    control: 'select',
+    description: 'Specify the kind of Button you want to create.',
+    options: ['', ...Object.values(BUTTON_KIND)],
+  },
+  size: {
+    control: 'select',
+    description: 'Specify the size of the Button.',
+    options: Object.values(ICON_BUTTON_SIZE),
+  },
   onClick: {
     action: 'onClick',
     description:
@@ -83,6 +97,8 @@ const meta: Meta = {
     feedback,
     feedbackTimeout,
     iconDescription,
+    kind,
+    size,
     onClick,
   }) => html`
     <cds-copy-button
@@ -91,6 +107,8 @@ const meta: Meta = {
       ?disabled="${disabled}"
       feedback="${ifDefined(feedback)}"
       feedback-timeout="${ifDefined(feedbackTimeout)}"
+      kind="${ifDefined(kind)}"
+      size="${ifDefined(size)}"
       @click="${onClick}">
       ${iconDescription}
     </cds-copy-button>

@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2024
+// Copyright IBM Corp. 2019, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -28,11 +28,12 @@ $css--plex: true !default;
   outline: none;
 }
 
-.#{$prefix}--snippet__icon {
-  block-size: $spacing-05;
-  fill: $icon-primary;
-  inline-size: $spacing-05;
-  transition: all $duration-fast-01 motion(standard, productive);
+// Ghost kind uses $link-primary as its text color, so fill: currentColor would be blue.
+// The SVG is rendered in cds-copy-button's own shadow, so we target the host directly.
+:host([kind='ghost']) {
+  svg {
+    fill: $icon-primary;
+  }
 }
 
 .#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-out {

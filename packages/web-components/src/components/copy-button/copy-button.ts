@@ -7,11 +7,13 @@
 
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import Copy16 from '@carbon/icons/es/copy/16.js';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import styles from './copy-button.scss?lit';
+import { BUTTON_KIND } from '../button/defs';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
 import { ICON_BUTTON_SIZE } from '../icon-button/defs';
 import '../copy/copy';
@@ -29,6 +31,12 @@ class CDSCopyButton extends FocusMixin(LitElement) {
    */
   @property({ reflect: true, attribute: 'button-class-name' })
   buttonClassName;
+
+  /**
+   * Specify the kind of Button you want to create. Defaults to `ghost`.
+   */
+  @property({ reflect: true })
+  kind?: BUTTON_KIND | string = BUTTON_KIND.GHOST;
 
   /**
    * `true` if the button should be disabled.
@@ -61,10 +69,10 @@ class CDSCopyButton extends FocusMixin(LitElement) {
   feedbackTimeout = 2000;
 
   /**
-   * Specify the size of the Button. Defaults to `lg`.
+   * Specify the size of the Button. Defaults to `md`.
    */
   @property({ reflect: true })
-  size?: ICON_BUTTON_SIZE | string = ICON_BUTTON_SIZE.LARGE;
+  size?: ICON_BUTTON_SIZE | string = ICON_BUTTON_SIZE.MEDIUM;
 
   render() {
     const {
@@ -74,6 +82,7 @@ class CDSCopyButton extends FocusMixin(LitElement) {
       feedbackTimeout,
       align,
       autoAlign,
+      kind,
       size,
     } = this;
 
@@ -92,10 +101,11 @@ class CDSCopyButton extends FocusMixin(LitElement) {
         button-class-name=${classes}
         exportparts="button"
         align=${align}
+        kind=${ifDefined(kind)}
         size=${size}>
         ${iconLoader(Copy16, {
           slot: 'icon',
-          class: `${prefix}--snippet__icon`,
+          class: `${prefix}--btn__icon`,
         })}
         <slot slot="tooltip-content"></slot>
       </cds-copy>
