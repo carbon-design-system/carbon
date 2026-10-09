@@ -66,7 +66,7 @@ type TabsContextType = {
   selectedIndex: number;
   setSelectedIndex(index: number): void;
 };
-const TabsContext = React.createContext<TabsContextType>({
+export const TabsContext = React.createContext<TabsContextType>({
   baseId: '',
   activeIndex: 0,
   defaultSelectedIndex: 0,

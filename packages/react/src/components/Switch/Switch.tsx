@@ -15,6 +15,7 @@ import React, {
 import classNames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import { noopFn } from '../../internal/noopFn';
+import { TabsContext } from '../Tabs/Tabs';
 
 export interface SwitchEventHandlersParams {
   index?: number;
@@ -92,6 +93,10 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
       ...other
     } = props;
     const prefix = usePrefix();
+    const { baseId } = React.useContext(TabsContext);
+    const isInsideTabs = Boolean(baseId);
+    const id = isInsideTabs ? `${baseId}-tab-${index}` : other.id;
+    const panelId = isInsideTabs ? `${baseId}-tabpanel-${index}` : other['aria-controls'];
 
     const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
@@ -124,7 +129,10 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
         tabIndex={selected ? 0 : -1}
         aria-selected={selected}
         {...other}
-        {...commonProps}>
+        {...commonProps}
+        aria-controls={panelId}
+        id={id}
+      >
         <span className={`${prefix}--content-switcher__label`} title={text}>
           {text !== undefined ? text : children}
         </span>
