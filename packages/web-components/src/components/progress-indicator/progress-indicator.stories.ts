@@ -8,6 +8,10 @@
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { action } from 'storybook/actions';
+import { expect, fn, userEvent } from 'storybook/test';
+import type CDSProgressIndicator from './progress-indicator';
+import type CDSProgressStep from './progress-step';
+import type CDSProgressIndicatorSkeleton from './progress-indicator-skeleton';
 import './index';
 
 const args = {
@@ -48,6 +52,20 @@ const argTypes = {
 export const Default = {
   args,
   argTypes,
+  play: async ({ canvasElement, args }) => {
+    const indicator = canvasElement.querySelector(
+      'cds-progress-indicator'
+    ) as CDSProgressIndicator;
+    await indicator.updateComplete;
+    const step = indicator.querySelector(
+      'cds-progress-step'
+    ) as CDSProgressStep;
+    await step.updateComplete;
+    await expect(indicator.currentIndex).toBe(args.currentIndex);
+    await expect(indicator.vertical).toBe(args.vertical);
+    await expect(indicator.spaceEqually).toBe(args.spaceEqually);
+    await expect(step.secondaryLabel).toBe(args.secondaryLabel);
+  },
   render: ({ secondaryLabel, spaceEqually, vertical, currentIndex }) => html`
     <cds-progress-indicator
       ?vertical="${vertical}"
@@ -79,9 +97,33 @@ export const Default = {
 };
 
 export const Interactive = {
+  play: async ({ canvasElement, args }) => {
+    const indicator = canvasElement.querySelector(
+      'cds-progress-indicator'
+    ) as CDSProgressIndicator;
+    await indicator.updateComplete;
+    await expect(indicator.currentIndex).toBe(args.currentIndex);
+    await expect(indicator.vertical).toBe(args.vertical);
+    await expect(indicator.spaceEqually).toBe(args.spaceEqually);
+
+    const step = indicator.querySelector(
+      'cds-progress-step'
+    ) as CDSProgressStep;
+    await step.updateComplete;
+    args.onChange.mockClear();
+    const button = step.shadowRoot?.querySelector('[role="button"]');
+    if (!button) {
+      throw new Error('Expected an interactive progress step button');
+    }
+    await userEvent.click(button);
+    await expect(args.onChange).toHaveBeenCalledTimes(1);
+    await expect(args.onChange).toHaveBeenCalledWith(
+      expect.objectContaining({ detail: { index: 0 } })
+    );
+  },
   args: {
     currentIndex: 1,
-    onChange: action('onChange'),
+    onChange: fn(action('onChange')),
     spaceEqually: false,
     vertical: false,
   },
@@ -126,6 +168,13 @@ export const Skeleton = {
   },
   argTypes: {
     vertical: argTypes.vertical,
+  },
+  play: async ({ canvasElement, args }) => {
+    const indicator = canvasElement.querySelector(
+      'cds-progress-indicator-skeleton'
+    ) as CDSProgressIndicatorSkeleton;
+    await indicator.updateComplete;
+    await expect(indicator.vertical).toBe(args.vertical);
   },
   render: ({ vertical }) => html`
     <cds-progress-indicator-skeleton ?vertical="${vertical}">
