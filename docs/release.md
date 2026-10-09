@@ -252,13 +252,6 @@ After the release workflow for stable release is completed this will trigger the
       has been released and is on the
       [latest version](https://github.com/carbon-design-system/gatsby-theme-carbon/blob/main/packages/gatsby-theme-carbon/package.json)
       of Carbon
-- [ ] Run the
-      [Update Carbon and gatsby-theme-carbon deps workflow](https://github.com/carbon-design-system/carbon-website/actions/workflows/update-carbon-gatsby-deps.yml)
-      to automatically open a PR in the Carbon website to update to latest
-      Carbon and gatsby-theme-carbon versions.
-- [ ] Review and approve the
-      [pull request](https://github.com/carbon-design-system/carbon-website/pulls)
-      generate by the workflow.
 
 ### Post release
 
