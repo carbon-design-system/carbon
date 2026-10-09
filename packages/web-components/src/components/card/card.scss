@@ -80,10 +80,12 @@ $css--plex: true !default;
 
 // When the card has an AI label, shift the absolutely-positioned header
 // actions to the left so they don't overlap the decorator badge.
-:host(#{$prefix}-card-header)
-  .#{$prefix}--card__header[data-has-ai-label]
-  ::slotted(#{$prefix}-card-actions) {
-  inset-inline-end: calc($spacing-03 + $spacing-06 + $spacing-03);
+// ::slotted() cannot follow a descendant combinator, so we pass the offset
+// via a CSS custom property and consume it in the :host(cds-card-actions) rule.
+.#{$prefix}--card__header[data-has-ai-label] {
+  --#{$prefix}-card-actions-inset-inline-end: calc(
+    #{$spacing-03} + #{$spacing-06} + #{$spacing-03}
+  );
 }
 
 :host-context(#{$prefix}-card-header[has-title-media])
@@ -191,7 +193,10 @@ $css--plex: true !default;
   gap: $spacing-02;
   inline-size: 50%;
   inset-block-start: $spacing-03;
-  inset-inline-end: $spacing-03;
+  inset-inline-end: var(
+    --#{$prefix}-card-actions-inset-inline-end,
+    #{$spacing-03}
+  );
   max-inline-size: 50%;
 }
 
