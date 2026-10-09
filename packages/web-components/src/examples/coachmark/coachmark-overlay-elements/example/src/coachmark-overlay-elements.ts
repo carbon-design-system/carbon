@@ -7,7 +7,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, LitElement } from 'lit';
+import { html, LitElement, PropertyValues } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { POPOVER_ALIGNMENT } from '@carbon/web-components/es/components/popover/defs.js';
 import '@carbon/web-components/es/components/button/button.js';
@@ -47,6 +47,7 @@ export class CoachmarkOverlayElementsExample extends LitElement {
   private _lastViewIndex: number = items.length - 1;
 
   private carouselAPI: InitCarousel | null = null;
+  private _coachmarkOpenCheckInterval: ReturnType<typeof setInterval> | null = null;
 
   private get showBack() {
     return this._currentViewIndex !== 0;
@@ -71,12 +72,10 @@ export class CoachmarkOverlayElementsExample extends LitElement {
     setTimeout(() => {
       if (currentIndex === lastIndex) {
         // On last slide, focus the Done button
-        const doneBtn = this.shadowRoot?.querySelector('.done-btn') as HTMLElement;
-        doneBtn?.focus();
+        (this.shadowRoot?.querySelector('.done-btn') as HTMLElement | null)?.focus();
       } else {
         // On other slides, focus the Next button
-        const nextBtn = this.shadowRoot?.querySelector('.next-btn') as HTMLElement;
-        nextBtn?.focus();
+        (this.shadowRoot?.querySelector('.next-btn') as HTMLElement | null)?.focus();
       }
     }, 10);
   };
@@ -105,24 +104,11 @@ export class CoachmarkOverlayElementsExample extends LitElement {
 
   private handleNext() {
     this.carouselAPI?.next();
-        
+
     // Set initial inert state for inactive slides
     setTimeout(() => {
       this.updateAriaHiddenTabIndex(0);
     }, 50);
-   // Listen for coachmark close (when close button is clicked)
-    const coachmark = this.shadowRoot?.querySelector('c4p-coachmark') as any;
-    if (coachmark) {
-      // Watch the coachmark's open property directly
-      const checkOpen = () => {
-        if (this._open !== coachmark.open) {
-          this._open = coachmark.open;
-        }
-      };
-      
-      // Check periodically or on property change
-      setInterval(checkOpen, 100);
-    }
   }
 
   updated(changedProperties: Map<string, any>) {
@@ -132,20 +118,17 @@ export class CoachmarkOverlayElementsExample extends LitElement {
         // When coachmark opens, initialize tabIndex and focus Next button
         this.updateAriaHiddenTabIndex(0);
         setTimeout(() => {
-          const nextBtn = this.shadowRoot?.querySelector('.next-btn') as HTMLElement;
-          nextBtn?.focus();
+          (this.shadowRoot?.querySelector('.next-btn') as HTMLElement | null)?.focus();
         }, 100);
       } else {
-        // When coachmark closes, return focus to tagline trigger (same as React)
+        // When coachmark closes, return focus to beacon trigger
         setTimeout(() => {
-          // Try to find by ID first (same as React)
-          let beacon = document.getElementById('CoachmarkBeacon');
-          
-          // Fallback: query from shadowRoot if ID doesn't work
-          if (!beacon) {
-            beacon = this.shadowRoot?.querySelector('c4p-coachmark-beacon') as HTMLElement;
-          }
-          
+          const beacon =
+            document.getElementById('CoachmarkBeacon') ??
+            (this.shadowRoot?.querySelector('c4p-coachmark-beacon') instanceof HTMLElement
+              ? (this.shadowRoot?.querySelector('c4p-coachmark-beacon') as HTMLElement)
+              : null);
+
           beacon?.focus();
         }, 100);
       }
@@ -166,7 +149,8 @@ export class CoachmarkOverlayElementsExample extends LitElement {
     this._open = !this._open;
   }
 
-  firstUpdated() {
+  firstUpdated(changedProperties: PropertyValues) {
+    super.firstUpdated(changedProperties);
     // Initialize carousel after first render
     setTimeout(() => {
       const carouselContainer = this.shadowRoot?.querySelector('.exampleCarouselWrapper') as HTMLElement;
@@ -178,6 +162,25 @@ export class CoachmarkOverlayElementsExample extends LitElement {
         });
       }
     }, 100);
+
+    // Listen for coachmark close (when close button is clicked)
+    const coachmark = this.shadowRoot?.querySelector('c4p-coachmark') as any;
+    if (coachmark) {
+      const checkOpen = () => {
+        if (this._open !== coachmark.open) {
+          this._open = coachmark.open;
+        }
+      };
+      this._coachmarkOpenCheckInterval = setInterval(checkOpen, 100);
+    }
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    if (this._coachmarkOpenCheckInterval !== null) {
+      clearInterval(this._coachmarkOpenCheckInterval);
+      this._coachmarkOpenCheckInterval = null;
+    }
   }
 
   render() {

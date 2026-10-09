@@ -46,7 +46,7 @@ c4p-coachmark-body {
   }
 
   p {
-    @include type.type-style('body-long-01');
+    @include type.type-style('body-01');
 
     margin: 0 0 $spacing-03;
   }

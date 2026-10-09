@@ -85,7 +85,7 @@ $stacked-coachmark: 'stacked-coachmark';
   }
 
   p {
-    @include type.type-style('body-long-01');
+    @include type.type-style('body-01');
 
     margin: 0 0 $spacing-03;
   }
@@ -159,7 +159,7 @@ $stacked-coachmark: 'stacked-coachmark';
 }
 
 .carousel__view > p {
-  @include type.type-style('body-long-01');
+  @include type.type-style('body-01');
 }
 
 /* Carousel controls */
@@ -179,7 +179,7 @@ $stacked-coachmark: 'stacked-coachmark';
   }
 
   &__body {
-    @include type.type-style('body-long-01');
+    @include type.type-style('body-01');
   }
 
   &__footer {
@@ -200,7 +200,7 @@ $stacked-coachmark: 'stacked-coachmark';
   }
 
   &__body {
-    @include type.type-style('body-long-01');
+    @include type.type-style('body-01');
     margin: 0 0 $spacing-03;
   }
 

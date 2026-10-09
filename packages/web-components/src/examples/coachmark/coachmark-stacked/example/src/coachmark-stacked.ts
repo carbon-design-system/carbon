@@ -7,7 +7,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, LitElement } from 'lit';
+import { html, LitElement, PropertyValues } from 'lit';
 import { customElement, state, query } from 'lit/decorators.js';
 import { POPOVER_ALIGNMENT } from '@carbon/web-components/es/components/popover/defs.js';
 import '@carbon/web-components/es/components/button/button.js';
@@ -157,8 +157,7 @@ export class CoachmarkStackedExample extends LitElement {
         tagline.updateComplete.then(() => {
           // Wait for CSS transition to complete
           setTimeout(() => {
-            const taglineButton = tagline.shadowRoot?.querySelector('.c4p--coachmark-tagline__cta') as HTMLElement;
-            taglineButton?.focus();
+            (tagline.shadowRoot?.querySelector('.c4p--coachmark-tagline__cta') as HTMLElement | null)?.focus();
           }, 100);
         });
       }
@@ -170,9 +169,13 @@ export class CoachmarkStackedExample extends LitElement {
     this._parentOpen = nextParentOpen;
 
     if (nextParentOpen) {
-      requestAnimationFrame(() => {
-        (this.shadowRoot?.querySelector('#parent-button-1') as HTMLElement)?.focus();
-      });
+      // c4p-coachmark's own focus logic runs at setTimeout(100ms) + rAF and
+      // focuses the close button. Fire after it to focus the first nav item.
+      setTimeout(() => {
+        requestAnimationFrame(() => {
+          (this.shadowRoot?.querySelector('#parent-button-1') as HTMLElement | null)?.focus();
+        });
+      }, 150);
     }
   }
 
@@ -231,15 +234,13 @@ export class CoachmarkStackedExample extends LitElement {
     
     // Focus appropriate button
     setTimeout(() => {
-    const container = this.shadowRoot?.querySelector(`#child-${childId}`);
-    if (currentIndex === lastIndex) {
-    const doneBtn = container?.querySelector('.done-btn') as HTMLElement;
-    doneBtn?.focus();
-    } else {
-    const nextBtn = container?.querySelector('.next-btn') as HTMLElement;
-    nextBtn?.focus();
-    }
-}, 50);
+      const container = this.shadowRoot?.querySelector(`#child-${childId}`);
+      if (currentIndex === lastIndex) {
+        (container?.querySelector('.done-btn') as HTMLElement | null)?.focus();
+      } else {
+        (container?.querySelector('.next-btn') as HTMLElement | null)?.focus();
+      }
+    }, 50);
   };
 
   private handleNext(childId: number, event?: Event) {
@@ -256,11 +257,16 @@ export class CoachmarkStackedExample extends LitElement {
     carousel?.prev();
   }
 
-  firstUpdated() {
+  firstUpdated(changedProperties: PropertyValues) {
+    super.firstUpdated(changedProperties);
     this.captureParentHeight();
-    requestAnimationFrame(() => {
-      (this.shadowRoot?.querySelector('#parent-button-1') as HTMLElement)?.focus();
-    });
+    // c4p-coachmark's own focus logic runs at setTimeout(100ms) + rAF on open.
+    // Fire after it so the first nav item gets focus, not the close button.
+    setTimeout(() => {
+      requestAnimationFrame(() => {
+        (this.shadowRoot?.querySelector('#parent-button-1') as HTMLElement | null)?.focus();
+      });
+    }, 150);
   }
 
   private captureParentHeight() {
@@ -319,7 +325,7 @@ export class CoachmarkStackedExample extends LitElement {
 
     const popover = parentCoachmark.shadowRoot?.querySelector('cds-popover');
     const popoverContent = popover?.querySelector('cds-popover-content');
-    const parentWrapper = this.shadowRoot?.querySelector('.parent-coachmark c4p-coachmark')?.shadowRoot?.querySelector('.c4p--coachmark--wrapper') as HTMLElement;
+    const parentWrapper = this.shadowRoot?.querySelector('.parent-coachmark c4p-coachmark')?.shadowRoot?.querySelector('.c4p--coachmark--wrapper') as HTMLElement | null;
 
     if (this._parentHeight === 0 && parentWrapper) {
       const height = parentWrapper.clientHeight;
@@ -391,36 +397,42 @@ export class CoachmarkStackedExample extends LitElement {
 
     const nestedItem = nestedItems.find((item) => item.id === this._openChildId);
     const buttonSelector = nestedItem?.type === 'carousel' ? '.next-btn' : '.done-btn';
+    const openChildId = this._openChildId;
 
-    setTimeout(() => {
-      if (nestedItem?.type === 'carousel') {
+    if (nestedItem?.type === 'carousel') {
+      setTimeout(() => {
         const carouselContainer = this.shadowRoot?.querySelector(
-          `#child-${this._openChildId} .exampleCarouselWrapper`
-        ) as HTMLElement;
+          `#child-${openChildId} .exampleCarouselWrapper`
+        ) as HTMLElement | null;
 
         if (carouselContainer) {
           // Reset view indices when initializing carousel
           this._currentViewIndex = 0;
           this._lastViewIndex = 0;
-          
+
           const carousel = initCarousel(carouselContainer, {
-            onViewChangeEnd: this.onViewChangeEnd(this._openChildId),
+            onViewChangeEnd: this.onViewChangeEnd(openChildId),
             useMaxHeight: true,
           });
-          this.carouselAPIs.set(this._openChildId, carousel);
-          
+          this.carouselAPIs.set(openChildId, carousel);
+
           this.updateComplete.then(() => {
-            // Recalculate parent height after carousel is initialized
             requestAnimationFrame(() => {
               this.handleParentScaling();
-              (this.shadowRoot?.querySelector(`#child-${this._openChildId} ${buttonSelector}`) as HTMLElement)?.focus();
             });
           });
         }
-      } else {
-        (this.shadowRoot?.querySelector(`#child-${this._openChildId} ${buttonSelector}`) as HTMLElement)?.focus();
-      }
-    }, 100);
+      }, 100);
+    }
+
+    // c4p-coachmark's own focus logic runs at setTimeout(100ms) + rAF.
+    // We must fire AFTER that — setTimeout(~150ms) + rAF guarantees we win.
+    setTimeout(() => {
+      requestAnimationFrame(() => {
+        const childHost = this.shadowRoot?.querySelector(`#child-${openChildId}`);
+        (childHost?.querySelector(buttonSelector) as HTMLElement | null)?.focus();
+      });
+    }, 150);
   }
 
   render() {
@@ -504,6 +516,7 @@ export class CoachmarkStackedExample extends LitElement {
               id="coachmark-trigger-${item.id}"
               kind="ghost"
               size="sm"
+              aria-label=${item.label}
               class="coachmark-stacked-home__nav-link"
               @click=${(e: Event) => this.handleChildButtonClick(item.id, e)}
             >
