@@ -195,7 +195,7 @@ A new group (e.g. `gap`) also needs a change to the Style Dictionary pipeline:
 4. Run the build to regenerate the Sass and JS outputs:
    ```bash
    cd packages/layout
-   yarn build:tokens
+   yarn build
    ```
 5. Check the value in `js/generated/layout-tokens.js` and the matching
    `scss/generated/_*.scss` file.
