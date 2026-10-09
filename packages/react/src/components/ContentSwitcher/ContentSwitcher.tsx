@@ -24,9 +24,20 @@ import { PrefixContext } from '../../internal/usePrefix';
 import { isComponentElement } from '../../internal';
 import { IconSwitch, Switch } from '../Switch';
 import type { SwitchEventHandlersParams } from '../Switch/Switch';
+import { TabsContext } from '../Tabs/Tabs';
 
 export interface ContentSwitcherProps
   extends Omit<HTMLAttributes<HTMLElement>, 'onChange'> {
+  /**
+   * Specify the aria-label for cds--content-switcher
+   */
+  'aria-label'?: string;
+
+  /**
+   * Specify the aria-labelledby for cds--content-switcher
+   */
+  'aria-labelledby'?: string;
+
   /**
    * Pass in Switch components to be rendered in the ContentSwitcher
    */
@@ -73,6 +84,8 @@ export interface ContentSwitcherProps
 }
 
 export const ContentSwitcher = ({
+  'aria-label': ariaLabel,
+  'aria-labelledby': ariaLabelledby,
   children,
   className,
   light,
@@ -85,7 +98,17 @@ export const ContentSwitcher = ({
 }: ContentSwitcherProps) => {
   const prefix = useContext(PrefixContext);
 
-  const [selectedIndex, setSelectedIndex] = useState(selectedIndexProp);
+  const { selectedIndex: selectedIndexTabsContext, setSelectedIndex: setSelectedIndexTabsContext,  baseId } = React.useContext(TabsContext);
+
+  const isInsideTabs = Boolean(baseId);
+
+  const [selectedIndexLocal, setSelectedIndexLocal] =
+    useState(selectedIndexProp);
+  const selectedIndex = isInsideTabs
+    ? selectedIndexTabsContext
+    : selectedIndexLocal;
+
+  const setSelectedIndex = isInsideTabs ? setSelectedIndexTabsContext : setSelectedIndexLocal;
 
   const prevSelectedIndexRef = useRef(selectedIndexProp);
   const switchRefs = useRef<HTMLButtonElement[]>([]);
@@ -119,7 +142,7 @@ export const ContentSwitcher = ({
     typeof event === 'object' && event !== null && 'key' in event;
 
   const handleChildChange = (event: SwitchEventHandlersParams) => {
-    if (typeof event.index === 'undefined') return;
+    if (typeof event.index === 'undefined') { return; }
 
     const { index } = event;
 
@@ -129,7 +152,7 @@ export const ContentSwitcher = ({
     ) {
       const nextIndex = getNextIndex(event.key, index, childrenArray.length);
 
-      if (typeof nextIndex !== 'number') return;
+      if (typeof nextIndex !== 'number') { return; }
 
       focusSwitch(nextIndex);
 
@@ -176,6 +199,8 @@ export const ContentSwitcher = ({
 
   return (
     <LayoutConstraint
+      aria-label={ariaLabel}
+      aria-labelledby={ariaLabelledby}
       size={{ default: 'md', min: 'sm', max: 'lg' }}
       {...other}
       className={classes}
@@ -185,8 +210,9 @@ export const ContentSwitcher = ({
         if (
           !isComponentElement(child, Switch) &&
           !isComponentElement(child, IconSwitch)
-        )
+        ) {
           return child;
+        }
 
         const sharedProps = {
           index,
@@ -213,6 +239,16 @@ export const ContentSwitcher = ({
 
 ContentSwitcher.displayName = 'ContentSwitcher';
 ContentSwitcher.propTypes = {
+  /**
+   * Specify the aria-label for cds--content-switcher
+   */
+  ['aria-label']: PropTypes.string,
+
+  /**
+   * Specify the aria-labelledby for cds--content-switcher
+   */
+  ['aria-labelledby']: PropTypes.string,
+
   /**
    * Pass in Switch components to be rendered in the ContentSwitcher
    */

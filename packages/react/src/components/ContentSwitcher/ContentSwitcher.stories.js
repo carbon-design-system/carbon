@@ -9,6 +9,7 @@ import React from 'react';
 
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 import { ContentSwitcher } from './ContentSwitcher';
+import { TabPanel, TabPanels, Tabs } from '../Tabs';
 import { Switch, IconSwitch } from '../Switch';
 import mdx from './ContentSwitcher.mdx';
 import { TableOfContents, Workspace, ViewMode_2 } from '@carbon/icons-react';
@@ -106,21 +107,6 @@ export const Default = (args) => {
 Default.args = { ...sharedArgs };
 Default.argTypes = { ...sharedArgTypes };
 
-export const _WithLayer = (args) => {
-  return (
-    <WithLayer>
-      <ContentSwitcher {...args}>
-        <Switch name="one" text="First section" disabled={args.disabled} />
-        <Switch name="two" text="Second section" disabled={args.disabled} />
-        <Switch name="three" text="Third section" disabled={args.disabled} />
-      </ContentSwitcher>
-    </WithLayer>
-  );
-};
-
-_WithLayer.args = { ...sharedArgs };
-_WithLayer.argTypes = { ...sharedArgTypes };
-
 export const IconOnly = (args) => {
   return (
     <ContentSwitcher {...args}>
@@ -217,3 +203,39 @@ lowContrastIconOnly.argTypes = {
     },
   },
 };
+
+export const _WithLayer = (args) => {
+  return (
+    <WithLayer>
+      <ContentSwitcher {...args}>
+        <Switch name="one" text="First section" disabled={args.disabled} />
+        <Switch name="two" text="Second section" disabled={args.disabled} />
+        <Switch name="three" text="Third section" disabled={args.disabled} />
+      </ContentSwitcher>
+    </WithLayer>
+  );
+};
+
+_WithLayer.args = { ...sharedArgs };
+_WithLayer.argTypes = { ...sharedArgTypes };
+
+export const WithTabs = (args) => {
+  return (
+    <Tabs>
+      <ContentSwitcher {...args}>
+        <Switch name="one" text="First section" disabled={args.disabled} />
+        <Switch name="two" text="Second section" disabled={args.disabled} />
+        <Switch name="three" text="Third section" disabled={args.disabled} />
+      </ContentSwitcher>
+      <TabPanels>
+        <TabPanel><p>Tab 1</p></TabPanel>
+        <TabPanel><p>Tab 2</p></TabPanel>
+        <TabPanel><p>Tab 3</p></TabPanel>
+      </TabPanels>
+    </Tabs>
+  );
+};
+
+WithTabs.args = { ...sharedArgs };
+WithTabs.argTypes = { ...sharedArgTypes };
+
