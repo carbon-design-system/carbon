@@ -410,22 +410,7 @@ export const ProductiveAndExpressive = {
   `,
 };
 
-// ─── Shared ai-label body content and actions ─────────────────────────────────
-
-const aiLabelContent = html`
-  <div slot="body-text">
-    <p class="secondary">AI Explained</p>
-    <h2 class="ai-label-heading">84%</h2>
-    <p class="secondary bold">Confidence score</p>
-    <p class="secondary">
-      This content was generated using IBM AI services with high confidence
-      based on historical data patterns.
-    </p>
-    <hr />
-    <p class="secondary">Model type</p>
-    <p class="bold">Foundation model</p>
-  </div>
-`;
+// ─── Shared ai-label actions ──────────────────────────────────────────────────
 
 const aiLabelActions = html`
   <cds-icon-button kind="ghost" slot="actions" size="lg">
@@ -454,7 +439,19 @@ export const WithAILabel = {
             border indicating AI-generated content.
           </cds-card-body>
           <cds-ai-label alignment="bottom-left" slot="decorator">
-            ${aiLabelContent}${aiLabelActions}</cds-ai-label
+            <div slot="body-text">
+              <p class="secondary">AI Explained</p>
+              <h2 class="ai-label-heading">84%</h2>
+              <p class="secondary bold">Confidence score</p>
+              <p class="secondary">
+                This content was generated using IBM AI services with high
+                confidence based on historical data patterns.
+              </p>
+              <hr />
+              <p class="secondary">Model type</p>
+              <p class="bold">Foundation model</p>
+            </div>
+            ${aiLabelActions}</cds-ai-label
           >
         </cds-card>
       </cds-column>
