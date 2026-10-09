@@ -418,8 +418,8 @@ const aiLabelContent = html`
     <h2 class="ai-label-heading">84%</h2>
     <p class="secondary bold">Confidence score</p>
     <p class="secondary">
-      Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
-      eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+      This content was generated using IBM AI services with high confidence
+      based on historical data patterns.
     </p>
     <hr />
     <p class="secondary">Model type</p>
