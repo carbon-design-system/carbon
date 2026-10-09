@@ -28,7 +28,6 @@ const tooltipAlignments = {
 
 const defaultArgs = {
   align: POPOVER_ALIGNMENT.BOTTOM,
-  autoAlign: false,
   disabled: false,
   feedback: 'Copied!',
   feedbackTimeout: 2000,

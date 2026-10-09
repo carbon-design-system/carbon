@@ -17,7 +17,6 @@ import mdx from './overflow-menu.feature-flag.mdx';
 import '../../../.storybook/templates/with-feature-flags';
 
 const args = {
-  autoAlign: false,
   open: false,
   label: 'Options',
   menuAlignment: 'bottom-start',
@@ -99,7 +98,7 @@ const renderDefaultMenu = () => html`
 `;
 
 const renderOverflowMenu = ({
-  autoAlign = false,
+  autoAlign,
   label = 'Options',
   menu = renderDefaultMenu(),
   menuAlignment = 'bottom-start',

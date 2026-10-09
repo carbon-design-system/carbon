@@ -13,6 +13,7 @@ import '../popover/index';
 import popoverStyles from '../popover/popover.scss?lit';
 import styles from './tooltip.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import AutoAlignMixin from '../../globals/mixins/auto-align';
 
 /**
  * Definition tooltip.
@@ -20,7 +21,7 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  * @element cds-definition-tooltip
  */
 @customElement(`${prefix}-definition-tooltip`)
-class CDSDefinitionTooltip extends LitElement {
+class CDSDefinitionTooltip extends AutoAlignMixin(LitElement) {
   /**
    * Specify how the trigger should align with the tooltip
    */
@@ -29,9 +30,11 @@ class CDSDefinitionTooltip extends LitElement {
 
   /**
    * Will auto-align Definition Tooltip. This prop is currently experimental and is subject to future changes.
+   * Defaults to `true` when `enable-v12-autoalign` is enabled, and to `false`
+   * otherwise.
    */
   @property({ type: Boolean, reflect: true })
-  autoalign = false;
+  autoalign?: boolean;
 
   /**
    * Specify whether the tooltip should be open when it first renders
@@ -104,7 +107,7 @@ class CDSDefinitionTooltip extends LitElement {
         @mouseenter=${this._handleMouseEnter}
         @mouseleave=${this._handleMouseLeave}
         highContrast
-        ?autoalign=${this.autoalign}
+        .autoalign=${this.autoalign}
         .dropShadow=${false}
         align=${align}
         .open=${open}>

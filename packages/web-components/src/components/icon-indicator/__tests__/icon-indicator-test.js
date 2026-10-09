@@ -6,6 +6,7 @@
  */
 import { expect, fixture, html } from '@open-wc/testing';
 import '@carbon/web-components/es/components/icon-indicator/index.js';
+import '@carbon/web-components/es/components/feature-flags/index.js';
 
 describe('cds-icon-indicator', function () {
   const iconIndicator = html`<cds-icon-indicator
@@ -85,5 +86,42 @@ describe('cds-icon-indicator', function () {
       const svgElement = el.shadowRoot.querySelector('svg');
       expect(svgElement).to.exist;
     }
+  });
+
+  it('should default the compact tooltip autoalign to true with enable-v12-release', async () => {
+    const featureFlag = await fixture(html`
+      <feature-flags enable-v12-release="true">
+        <cds-icon-indicator
+          compact
+          kind="failed"
+          label="test label"></cds-icon-indicator>
+      </feature-flags>
+    `);
+    const el = featureFlag.querySelector('cds-icon-indicator');
+
+    await el.updateComplete;
+
+    expect(el.autoalign).to.be.true;
+    expect(el.shadowRoot.querySelector('cds-definition-tooltip').autoalign).to
+      .be.true;
+  });
+
+  it('should keep the compact tooltip autoalign disabled when set to false with enable-v12-release', async () => {
+    const featureFlag = await fixture(html`
+      <feature-flags enable-v12-release="true">
+        <cds-icon-indicator
+          compact
+          .autoalign=${false}
+          kind="failed"
+          label="test label"></cds-icon-indicator>
+      </feature-flags>
+    `);
+    const el = featureFlag.querySelector('cds-icon-indicator');
+
+    await el.updateComplete;
+
+    expect(el.autoalign).to.be.false;
+    expect(el.shadowRoot.querySelector('cds-definition-tooltip').autoalign).to
+      .be.false;
   });
 });

@@ -12,7 +12,6 @@ import { WithFeatureFlags } from '../../../.storybook/templates/WithFeatureFlags
 
 const defaultArgs = {
   'aria-label': '',
-  autoAlign: false,
   direction: 'bottom',
   disabled: false,
   helperText: 'Helper text',

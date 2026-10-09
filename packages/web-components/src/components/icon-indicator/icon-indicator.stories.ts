@@ -43,7 +43,6 @@ const alignments = {
 const defaultArgs = {
   align: POPOVER_ALIGNMENT.RIGHT,
   iconDescription: 'Icon',
-  autoalign: false,
   compact: false,
   kind: ICON_INDICATOR_KIND.FAILED,
   size: 16,

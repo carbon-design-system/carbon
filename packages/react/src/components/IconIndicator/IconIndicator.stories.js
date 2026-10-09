@@ -97,7 +97,6 @@ export const Default = (args) => {
 
 Default.args = {
   align: 'right',
-  autoAlign: false,
   iconDescription: 'Icon',
   compact: false,
   size: 16,

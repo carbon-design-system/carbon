@@ -10,6 +10,7 @@ import { classMap } from 'lit/directives/class-map.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
+import AutoAlignMixin from '../../globals/mixins/auto-align';
 import '../tooltip/index';
 
 import styles from './truncated-text.scss?lit';
@@ -24,7 +25,7 @@ const elementName = `${prefix}-${componentName}`; // cds-truncated-text
  * @element cds-truncated-text
  */
 @customElement(elementName)
-export class CDSTruncatedText extends LitElement {
+export class CDSTruncatedText extends AutoAlignMixin(LitElement) {
   /**
    * Specify how the tooltip should align with the content.
    */
@@ -32,10 +33,11 @@ export class CDSTruncatedText extends LitElement {
   align = 'top';
 
   /**
-   * Specify whether a auto align functionality should be applied
+   * Specify whether a auto align functionality should be applied. Defaults to
+   * `true` when `enable-v12-autoalign` is enabled, and to `false` otherwise.
    */
   @property({ type: Boolean, reflect: true })
-  autoalign = false;
+  autoalign?: boolean;
 
   /**
    * The label on the collapse button.
@@ -239,7 +241,7 @@ export class CDSTruncatedText extends LitElement {
       ? html`
           <cds-tooltip
             align=${this.align}
-            ?autoalign=${this.autoalign}
+            .autoalign=${this.autoalign}
             enter-delay-ms="0"
             leave-delay-ms="0">
             <button

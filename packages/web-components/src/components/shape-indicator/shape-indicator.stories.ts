@@ -40,7 +40,6 @@ const alignments = {
 const defaultArgs = {
   align: POPOVER_ALIGNMENT.RIGHT,
   shapeDescription: 'Shape',
-  autoAlign: false,
   compact: false,
   textSize: 12,
 };

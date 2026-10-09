@@ -18,13 +18,11 @@ import { WithFeatureFlags } from '../../../.storybook/templates/WithFeatureFlags
 import { FeatureFlags } from '../FeatureFlags';
 
 const args = {
-  autoAlign: false,
   disabled: false,
   label: 'Options',
   menuAlignment: 'bottom-start',
   size: 'md',
   tooltipAlignment: 'top',
-  tooltipAutoAlign: false,
   tooltipDefaultOpen: false,
   tooltipEnterDelayMs: 100,
   tooltipLeaveDelayMs: 100,

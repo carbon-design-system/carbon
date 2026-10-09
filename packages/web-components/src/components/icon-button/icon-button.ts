@@ -16,6 +16,7 @@ import { ICON_BUTTON_SIZE, ICON_BUTTON_TOOLTIP_ALIGNMENT } from './defs';
 import tooltipStyles from '../tooltip/tooltip.scss?lit';
 import buttonStyles from '../button/button.scss?lit';
 import styles from './icon-button.scss?lit';
+import AutoAlignMixin from '../../globals/mixins/auto-align';
 
 export { ICON_BUTTON_SIZE, ICON_BUTTON_TOOLTIP_ALIGNMENT };
 
@@ -25,7 +26,7 @@ export { ICON_BUTTON_SIZE, ICON_BUTTON_TOOLTIP_ALIGNMENT };
  * @element cds-icon-button
  */
 @customElement(`${prefix}-icon-button`)
-class CDSIconButton extends CDSButton {
+class CDSIconButton extends AutoAlignMixin(CDSButton) {
   /**
    * Checks if a badge indicator is being used with incorrect properties
    */
@@ -37,10 +38,11 @@ class CDSIconButton extends CDSButton {
   align = 'top';
 
   /**
-   * Specify whether a auto align functionality should be applied
+   * Specify whether a auto align functionality should be applied. Defaults to
+   * `true` when `enable-v12-autoalign` is enabled, and to `false` otherwise.
    */
   @property({ type: Boolean, reflect: true })
-  autoalign = false;
+  autoalign?: boolean;
 
   /**
    * Determines whether the tooltip should close when inner content is activated (click, Enter or Space)
@@ -119,7 +121,7 @@ class CDSIconButton extends CDSButton {
     } = this;
     return html`
       <cds-tooltip
-        ?autoalign=${autoalign}
+        .autoalign=${autoalign}
         align=${align}
         ?defaultOpen=${defaultOpen}
         ?closeOnActivation=${closeOnActivation}

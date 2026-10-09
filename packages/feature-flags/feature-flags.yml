@@ -61,6 +61,11 @@ feature-flags:
     description: >
       Enable components to utilize the native dialog element
     enabled: false
+  - name: enable-v12-autoalign
+    description: >
+      Enable autoAlign by default for components that support it, like Popover,
+      Tooltip, Toggletip, Dropdown, etc.
+    enabled: false
   - name: enable-v12-dynamic-floating-styles
     description: >
       Enable dynamic setting of floating styles for components like Popover,
