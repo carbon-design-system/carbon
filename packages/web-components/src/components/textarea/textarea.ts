@@ -236,7 +236,12 @@ class CDSTextarea extends CDSTextInput {
       this.helperText ||
       (this._slotHelperTextNode?.assignedNodes().length ?? 0) > 0;
 
-    const describedBy = hasHelperText ? 'helper-text' : undefined;
+    // The helper element is only rendered in the non-fluid layout (see the
+    // render branch below), so the reference has to be conditional on that
+    // too: pointing `aria-describedby` at an element that does not exist is
+    // the same as not describing the field at all.
+    const describedBy =
+      hasHelperText && !this.isFluid ? 'helper-text' : undefined;
 
     const helper = html`
       <div class="${helperTextClasses}" id="helper-text">

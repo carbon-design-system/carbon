@@ -60,6 +60,20 @@ describe('cds-textarea', () => {
     expect(textarea.getAttribute('aria-describedby')).to.equal('helper-text');
   });
 
+  it('should not set aria-describedby in the fluid variant, which does not render the helper text', async () => {
+    const el = await fixture(html`
+      <cds-textarea
+        is-fluid
+        label="Textarea label"
+        helper-text="Helpful info"></cds-textarea>
+    `);
+
+    const textarea = el.shadowRoot.querySelector('textarea');
+
+    expect(el.shadowRoot.querySelector('#helper-text')).to.not.exist;
+    expect(textarea.hasAttribute('aria-describedby')).to.be.false;
+  });
+
   it('should not set aria-describedby when there is no helper text', async () => {
     const el = await fixture(html`
       <cds-textarea label="Textarea label"></cds-textarea>
