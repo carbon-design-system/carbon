@@ -99,20 +99,21 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md)! 👀
 
 ### Modifying color values
 
-Color values are defined in [`src/dtcg/colors.json`](./src/dtcg/colors.json)
-using the [DTCG token format](https://tr.designtokens.org/format/). This is the
-single source of truth for the package — **do not edit generated files
+Color values are defined in
+[`tokens/colors.tokens.json`](./tokens/colors.tokens.json) using the
+[DTCG token format](https://www.designtokens.org/tr/2025.10/format/). This is
+the single source of truth for the package — **do not edit generated files
 directly**.
 
 The following files are generated at build time by Style Dictionary and should
 not be hand-edited:
 
 - `js/generated/colors.js` / `js/generated/colors.d.ts` — JS exports
-- `scss/` — Sass variables and maps
+- `index.scss` — Sass variables and maps
 
 To add or update a color:
 
-1. Edit `src/dtcg/colors.json`
+1. Edit `tokens/colors.tokens.json`
 2. Run `yarn build` in this package to regenerate all outputs
 3. Run `yarn test --testPathPatterns=packages/colors` from the repo root to
    confirm nothing regressed
