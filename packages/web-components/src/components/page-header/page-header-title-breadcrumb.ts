@@ -8,7 +8,7 @@
  */
 
 import { html } from 'lit';
-import { consume, ContextConsumer } from '@lit/context';
+import { ContextConsumer } from '@lit/context';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import CDSBreadcrumbItem from '../breadcrumb/breadcrumb-item';
 import { prefix } from '../../globals/settings';
@@ -22,9 +22,6 @@ import { pageHeaderContextType } from './page-header';
  */
 @customElement(`${prefix}-page-header-title-breadcrumb`)
 class CDSPageHeaderTitleBreadcrumb extends CDSBreadcrumbItem {
-  @consume({ context: pageHeaderContext, subscribe: true })
-  context;
-
   constructor() {
     super();
     // Use inert (not aria-hidden) to hide the element from both focus and
