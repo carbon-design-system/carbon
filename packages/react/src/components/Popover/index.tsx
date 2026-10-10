@@ -364,7 +364,7 @@ export const Popover: PopoverComponent & {
           : Number(caretProperty.split('rem', 1)[0]) * 16;
       }
     }
-  });
+  }, [caret, prefix]);
   const { refs, floatingStyles, placement, middlewareData, elements, update } =
     useFloating(
       enableFloatingStyles
