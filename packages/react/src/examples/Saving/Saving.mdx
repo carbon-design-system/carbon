@@ -1,0 +1,135 @@
+import { Story, Controls, Source, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as stories from './Saving.stories';
+
+<Meta isTemplate />
+
+# Saving
+
+[Usage guidelines](https://carbondesignsystem.com/patterns/saving/)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Auto save](#auto-save)
+- [Manual save](#manual-save)
+
+## Overview
+
+The Saving pattern provides a standard way to communicate the state of a save
+operation to the user. There are two variants:
+
+- **Auto** — saving happens automatically in the background (for example,
+  triggered by a debounced `onChange` handler). A short status string confirms
+  the current state.
+- **Manual** — the user initiates the save explicitly by clicking a button. The
+  save button reflects the current state via its label and icon; a Cancel button
+  is available only while saving is in progress.
+
+> NOTE: Patterns have multiple ways of accomplishing a user need and typically
+> use a combination of components with additional design considerations. The
+> pattern code we share is meant to serve as an example implementation that can
+> be built and extended further.
+
+To build this pattern, we recommend including the following components:
+
+- [Button](https://react.carbondesignsystem.com/?path=/docs/components-button)
+- [InlineLoading](https://react.carbondesignsystem.com/?path=/docs/components-inlineloading)
+- [TextArea](https://react.carbondesignsystem.com/?path=/docs/components-textarea)
+
+```jsx
+import { Button, InlineLoading, TextArea } from '@carbon/react';
+import {
+  CheckmarkOutline,
+  ErrorFilled,
+  ErrorOutline,
+  Save,
+} from '@carbon/react/icons';
+```
+
+## Example usage
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/react/src/examples/Saving/example)
+> example implementation.
+
+[![Edit react-patterns](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/react/src/examples/Saving/example)
+
+### Example
+
+Here's a quick example of the auto-save variant to get you started.
+
+```jsx
+export const AutoSaving = () => {
+  const [status, setStatus] = useState('default');
+  const [text, setText] = useState('');
+  const [dirtyInput, setDirtyInput] = useState(false);
+
+  useEffect(() => {
+    const timeoutId = setTimeout(async () => {
+      if (dirtyInput) {
+        setStatus('in-progress');
+        await wait(1000);
+        setStatus('success');
+      }
+    }, 1000);
+    return () => clearTimeout(timeoutId);
+  }, [text, dirtyInput]);
+
+  const onChangeHandler = (evt) => {
+    const { value } = evt.target;
+    if (!dirtyInput) setDirtyInput(true);
+    setText(value);
+  };
+
+  return (
+    <main>
+      <TextArea
+        id="save-auto-textarea"
+        onChange={onChangeHandler}
+        value={text}
+        labelText="Enter in the thing you wanted saved"
+        className="saving-story-textarea"
+      />
+      {dirtyInput && status !== 'default' && (
+        <Saving
+          type="auto"
+          status={status}
+          inProgressText="Saving..."
+          successText="Saved"
+          failText="Failed to save"
+        />
+      )}
+    </main>
+  );
+};
+```
+
+## Auto save
+
+The auto-save variant renders a status message only. The save is triggered
+automatically after a debounce delay following user input. No buttons are
+displayed — the user does not explicitly initiate the save.
+
+<Canvas of={stories.autoSaving} />
+
+## Manual save
+
+The manual-save variant renders a pair of buttons. The primary button initiates
+the save and updates its label and icon to reflect the current state. The
+secondary Cancel button is enabled only while saving is in progress, allowing
+the user to abort.
+
+<Canvas of={stories.manualSaving} />
+
+### Design guidelines
+
+- **Labels** — use sentence-case labels (e.g. "Save", "Saving…", "Saved",
+  "Failed to save").
+- **Icon descriptions** — always provide an accessible `iconDescription` for
+  each state's icon.
+- **Disabled states** — in the manual variant, disable the Save button while
+  `status === 'in-progress'` and disable Cancel whenever the status is not
+  `'in-progress'`.
+- **Auto mode** — hide the status indicator until the user has made their first
+  change (`dirtyInput`), and hide it again if the status returns to `'default'`.

@@ -56,6 +56,10 @@ export const productMigratedStoryGlobs = [
   '../src/examples/Coachmark/CoachmarkOverlayElements/CoachmarkOverlayElements.mdx',
   '../src/examples/Coachmark/CoachmarkStacked/CoachmarkStacked.stories.js',
   '../src/examples/Coachmark/CoachmarkStacked/CoachmarkStacked.mdx',
+  '../src/examples/Saving/Saving.stories.js',
+  '../src/examples/Saving/Saving.mdx',
+  '../src/examples/WebTerminal/WebTerminal.stories.js',
+  '../src/examples/WebTerminal/WebTerminal.mdx',
 ];
 
 /**
