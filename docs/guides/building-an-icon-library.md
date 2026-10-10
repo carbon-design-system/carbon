@@ -132,7 +132,7 @@ build({ cwd: path.resolve(__dirname, '../') }).catch((error) => {
 });
 ```
 
-The path to the `build` command is dependant on your implementation. The `build`
+The path to the `build` command is dependent on your implementation. The `build`
 command itself should take on the following shape:
 
 ```js

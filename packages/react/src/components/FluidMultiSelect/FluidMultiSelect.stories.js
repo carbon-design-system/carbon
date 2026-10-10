@@ -21,6 +21,13 @@ import mdx from './FluidMultiSelect.mdx';
 export default {
   title: 'Components/Fluid Components/FluidMultiSelect',
   component: FluidMultiSelect,
+  decorators: [
+    (Story) => (
+      <div style={{ width: 400 }}>
+        <Story />
+      </div>
+    ),
+  ],
   parameters: {
     docs: {
       page: mdx,
@@ -59,40 +66,36 @@ const items = [
   },
 ];
 
-export const Default = ({ defaultWidth, ...multiSelectArgs }) => (
-  <div style={{ width: defaultWidth }}>
+export const Default = (args) => {
+  return (
     <FluidMultiSelect
-      onChange={() => {}}
       id="default"
       titleText="Label"
       label="Choose an option"
       items={items}
       itemToString={(item) => (item ? item.text : '')}
-      {...multiSelectArgs}
+      {...args}
     />
-  </div>
-);
+  );
+};
 
 const sharedArgTypes = {
+  autoAlign: {
+    control: { type: 'boolean' },
+  },
   className: {
     control: {
       type: 'text',
-    },
-  },
-  isCondensed: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  isFilterable: {
-    control: {
-      type: 'boolean',
     },
   },
   disabled: {
     control: {
       type: 'boolean',
     },
+  },
+  direction: {
+    control: { type: 'select' },
+    options: ['top', 'bottom'],
   },
   invalid: {
     control: {
@@ -109,6 +112,22 @@ const sharedArgTypes = {
       type: 'text',
     },
   },
+  locale: {
+    control: { type: 'text' },
+  },
+  onChange: {
+    action: 'onChange',
+  },
+  onMenuChange: {
+    action: 'onMenuChange',
+  },
+  readOnly: {
+    control: { type: 'boolean' },
+  },
+  selectionFeedback: {
+    control: { type: 'select' },
+    options: ['top', 'fixed', 'top-after-reopen'],
+  },
   titleText: {
     control: {
       type: 'text',
@@ -124,113 +143,180 @@ const sharedArgTypes = {
       type: 'text',
     },
   },
+  clearSelectionDescription: {
+    control: { type: 'text' },
+  },
+  clearSelectionText: {
+    control: { type: 'text' },
+  },
+  useTitleInItem: {
+    control: { type: 'boolean' },
+  },
 };
 
-Default.args = {
-  defaultWidth: 400,
+const sharedArgs = {
+  autoAlign: false,
   className: 'test-class',
-  isCondensed: false,
-  isFilterable: false,
+  clearSelectionDescription: 'Total items selected: ',
+  clearSelectionText: 'To clear selection, press Delete or Backspace.',
+  direction: 'bottom',
   disabled: false,
   invalid: false,
   invalidText:
     'Error message that is really long can wrap to more lines but should not be excessively long.',
   label: 'Choose an option',
+  locale: 'en',
+  readOnly: false,
+  selectionFeedback: 'top-after-reopen',
   titleText: 'Label',
+  useTitleInItem: false,
   warn: false,
   warnText:
     'Warning message that is really long can wrap to more lines but should not be excessively long.',
 };
 
-Default.argTypes = {
+const filterableArgTypes = {
   ...sharedArgTypes,
-  defaultWidth: {
-    control: { type: 'range', min: 300, max: 800, step: 50 },
+  isFilterable: {
+    control: { type: 'boolean' },
+    table: { readonly: true },
+  },
+  onInputValueChange: {
+    action: 'onInputValueChange',
   },
 };
+const condensedArgTypes = {
+  ...sharedArgTypes,
+  isCondensed: {
+    control: { type: 'boolean' },
+    table: { readonly: true },
+  },
+};
+Default.args = {
+  ...sharedArgs,
+};
 
-export const Filterable = () => (
-  <div style={{ width: '400px' }}>
+Default.argTypes = {
+  ...sharedArgTypes,
+};
+
+export const Filterable = (args) => {
+  return (
     <FluidMultiSelect
-      isFilterable
-      onChange={() => {}}
-      initialSelectedItem={items[2]}
+      initialSelectedItems={[items[2]]}
       id="default"
       titleText="Label"
       label="Choose an option"
       items={items}
       itemToString={(item) => (item ? item.text : '')}
+      {...args}
     />
-  </div>
-);
+  );
+};
 
-export const _FilterableWithLayer = () => (
-  <WithLayer>
-    {(layer) => (
-      <div style={{ width: 300 }}>
+Filterable.args = {
+  ...sharedArgs,
+  isFilterable: true,
+};
+
+Filterable.argTypes = {
+  ...filterableArgTypes,
+};
+
+Filterable.parameters = {
+  controls: {
+    include: Object.keys(filterableArgTypes),
+  },
+};
+
+export const _FilterableWithLayer = (args) => {
+  return (
+    <WithLayer>
+      {(layer) => (
         <FluidMultiSelect
-          isFilterable
           id={`carbon-multiselect-example-${layer}`}
           titleText="Multiselect title"
           items={items}
           itemToString={(item) => (item ? item.text : '')}
-          selectionFeedback="top-after-reopen"
+          {...args}
         />
-      </div>
-    )}
-  </WithLayer>
-);
+      )}
+    </WithLayer>
+  );
+};
 
-export const Condensed = () => (
-  <div style={{ width: '400px' }}>
+_FilterableWithLayer.args = {
+  ...sharedArgs,
+  isFilterable: true,
+  label: '',
+  titleText: 'Multiselect title',
+};
+
+_FilterableWithLayer.argTypes = Filterable.argTypes;
+_FilterableWithLayer.parameters = Filterable.parameters;
+
+export const Condensed = (args) => {
+  return (
     <FluidMultiSelect
-      onChange={() => {}}
       id="default"
-      isCondensed
       titleText="Label"
       label="Choose an option"
       items={items}
       itemToString={(item) => (item ? item.text : '')}
+      {...args}
     />
-  </div>
-);
+  );
+};
 
-const aiLabel = (
-  <AILabel className="ai-label-container">
-    <AILabelContent>
-      <div>
-        <p className="secondary">AI Explained</p>
-        <h2 className="ai-label-heading">84%</h2>
-        <p className="secondary bold">Confidence score</p>
-        <p className="secondary">
-          Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
-        </p>
-        <hr />
-        <p className="secondary">Model type</p>
-        <p className="bold">Foundation model</p>
-      </div>
-      <AILabelActions>
-        <IconButton kind="ghost" label="View">
-          <View />
-        </IconButton>
-        <IconButton kind="ghost" label="Open Folder">
-          <FolderOpen />
-        </IconButton>
-        <IconButton kind="ghost" label="Folders">
-          <Folders />
-        </IconButton>
-        <Button>View details</Button>
-      </AILabelActions>
-    </AILabelContent>
-  </AILabel>
-);
+Condensed.args = {
+  ...sharedArgs,
+  isCondensed: true,
+};
 
-export const withAILabel = (args) => (
-  <div style={{ width: '400px' }}>
+Condensed.argTypes = {
+  ...condensedArgTypes,
+};
+
+Condensed.parameters = {
+  controls: {
+    include: Object.keys(condensedArgTypes),
+  },
+};
+
+export const withAILabel = (args) => {
+  const aiLabel = (
+    <AILabel className="ai-label-container">
+      <AILabelContent>
+        <div>
+          <p className="secondary">AI Explained</p>
+          <h2 className="ai-label-heading">84%</h2>
+          <p className="secondary bold">Confidence score</p>
+          <p className="secondary">
+            Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+          </p>
+          <hr />
+          <p className="secondary">Model type</p>
+          <p className="bold">Foundation model</p>
+        </div>
+        <AILabelActions>
+          <IconButton kind="ghost" label="View">
+            <View />
+          </IconButton>
+          <IconButton kind="ghost" label="Open Folder">
+            <FolderOpen />
+          </IconButton>
+          <IconButton kind="ghost" label="Folders">
+            <Folders />
+          </IconButton>
+          <Button>View details</Button>
+        </AILabelActions>
+      </AILabelContent>
+    </AILabel>
+  );
+  return (
     <FluidMultiSelect
-      onChange={() => {}}
-      initialSelectedItem={items[2]}
+      initialSelectedItems={[items[2]]}
       id="default"
       titleText="Label"
       label="Choose an option"
@@ -239,15 +325,17 @@ export const withAILabel = (args) => (
       decorator={aiLabel}
       {...args}
     />
-  </div>
-);
+  );
+};
+
+withAILabel.args = {
+  ...sharedArgs,
+};
 
 withAILabel.argTypes = {
   ...sharedArgTypes,
 };
 
-export const Skeleton = () => (
-  <div style={{ width: 400 }}>
-    <FluidMultiSelectSkeleton />
-  </div>
-);
+export const Skeleton = () => {
+  return <FluidMultiSelectSkeleton />;
+};

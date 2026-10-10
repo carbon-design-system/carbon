@@ -11,6 +11,7 @@ collect:
         - _open
         - accept
         - action-button-label
+        - actions
         - active
         - ai-text
         - ai-text-label
@@ -38,6 +39,7 @@ collect:
         - button-label
         - button-label-active
         - button-label-inactive
+        - button-size
         - caption
         - caret
         - checked
@@ -113,6 +115,7 @@ collect:
         - hidePasswordLabel
         - highContrast
         - highlighted
+        - horizontal
         - href
         - hreflang
         - icon
@@ -131,6 +134,7 @@ collect:
         - is-condensed
         - is-expressive
         - is-fluid
+        - is-flush
         - is-not-child-of-header
         - is-selectable
         - is-sortable
@@ -156,6 +160,7 @@ collect:
         - loading-success-delay
         - locale
         - low-contrast
+        - managed-focus
         - max
         - max-count
         - max-date
@@ -247,7 +252,7 @@ collect:
         - selection-mode
         - selection-name
         - selection-value
-        - selector-initial-focus
+        - selector-primary-focus
         - short
         - shortcut
         - should-filter-item
@@ -301,8 +306,6 @@ collect:
         - oncds-accordion-item-beingtoggled
         - oncds-accordion-item-toggled
         # cds-action-set
-        - actions
-        - button-size
         - disable-stacking
         # cds-ai-skeleton-icon
         - custom-styles
@@ -324,12 +327,9 @@ collect:
         # cds-callout-notification
         - title-id
         # cds-card
-        - horizontal
         - media-position
         # cds-card-actions
         - overflow-menu-label
-        # cds-card-body
-        - is-flush
         # cds-card-media
         - media-width
         - ratio
@@ -350,7 +350,6 @@ collect:
         - oncds-coachmark-closed
         - oncds-coachmark-opened
         - position
-        - selector-primary-focus
         # cds-coachmark-beacon
         - oncds-coachmark-beacon-clicked
         # cds-coachmark-header
@@ -433,6 +432,11 @@ collect:
         # cds-grid
         - narrow
         - with-row-gap
+        # cds-guide-banner
+        - collapse-text
+        - expand-text
+        - oncds-guide-banner-close
+        - oncds-guide-banner-toggle
         # cds-header-global-action
         - panel-id
         # cds-header-menu
@@ -621,6 +625,7 @@ collect:
         - oncds-side-panel-navigate-back
         - placement
         - resizable
+        - selector-initial-focus
         - selector-page-content
         - slide-in
         # cds-skip-to-content
@@ -683,11 +688,31 @@ collect:
         # cds-tabs-vertical
         - custom-height
         # cds-tearsheet
-        - has-close-icon
-        - influencer-placement
+        - container-class-name
         - influencer-width
         - oncds-tearsheet-beingclosed
         - oncds-tearsheet-closed
+        - oncds-tearsheet-collapse-change
+        - selectors-floating-menus
+        - summary-content-width
+        - variant
+        - vertical-gap
+        # cds-tearsheet-header
+        - disable-header-collapse
+        - oncds-tearsheet-header-collapse-change
+        # cds-tearsheet-influencer
+        - influencer-panel-aria-label
+        - influencer-panel-open
+        - oncds-tearsheet-influencer-closed
+        # cds-tearsheet-scroller
+        - collapseText
+        - expandText
+        # cds-tearsheet-stack
+        - stack-step-size
+        # cds-tearsheet-summary-content
+        - oncds-tearsheet-summary-closed
+        - summary-panel-aria-label
+        - summary-panel-open
         # cds-tile-group
         - currentRadioSelection
         - currentSelections
@@ -724,12 +749,20 @@ collect:
         - enable-v12-tile-default-icons
         - enable-v12-tile-radio-icons
         - enable-v12-toggle-reduced-label-spacing
+        # stacking-tearsheet-demo
+        - tearsheet-type
         # tabs-story-wrapper
         - with-icons
       allowedAttributeStringValues:
         # General - boolean attributes
         - "true"
         - "false"
+        # General - button-size
+        - 2xl
+        - lg
+        - md
+        - sm
+        - xl
         # General - counter-mode
         - character
         - word
@@ -782,12 +815,6 @@ collect:
         - text
         - tooltip
         - warning
-        # cds-action-set - button-size
-        - 2xl
-        - lg
-        - md
-        - sm
-        - xl
         # cds-edit-in-place - toggletip-alignment
         - bottom
         - bottom-left
@@ -825,6 +852,13 @@ collect:
         # cds-resizer-handle - axis
         - x
         - y
+        # cds-tearsheet - variant
+        - narrow
+        - wide
+        # cds-tearsheet-stack - stack-step-size
+        - lg
+        - md
+        - sm
   npm:
     dependencies: null
   js:

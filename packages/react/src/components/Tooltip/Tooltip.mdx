@@ -1,4 +1,4 @@
-import { Story, ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
 import * as TooltipStories from './Tooltip.stories';
 import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
@@ -72,7 +72,11 @@ prop.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TooltipStories.Default),
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: TooltipStories.Default,
+          styles: TooltipStories.default.parameters.styles,
+        }),
     },
   ]}
 />
@@ -117,7 +121,11 @@ your component.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TooltipStories.Alignment),
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: TooltipStories.Alignment,
+          styles: TooltipStories.default.parameters.styles,
+        }),
     },
   ]}
 />
@@ -144,7 +152,11 @@ and its contents are hidden.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TooltipStories.Duration),
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: TooltipStories.Duration,
+          styles: TooltipStories.default.parameters.styles,
+        }),
     },
   ]}
 />
