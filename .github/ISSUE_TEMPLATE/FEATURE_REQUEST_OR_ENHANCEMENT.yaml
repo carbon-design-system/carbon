@@ -130,7 +130,7 @@ body:
         '_Carbon is a collaborative system. We encourage teams to build
         components and submit them for integration as either add-ons or core
         components. To better understand our feature request process and what
-        happends after you submit this issue, [check out the
+        happens after you submit this issue, [check out the
         docs](https://github.com/carbon-design-system/carbon/blob/main/docs/guides/support.md#type-enhancement-)
         on Github._'
   - type: checkboxes
