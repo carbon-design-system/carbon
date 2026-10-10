@@ -275,6 +275,7 @@ export const WithInteractiveItemsAndActions = (args) => {
       hasIconOnly
       renderIcon={Close}
       aria-label="Dismiss"
+      onClick={action('onClick (Dismiss)')}
     />
   );
 

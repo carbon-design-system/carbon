@@ -28,6 +28,9 @@ import { withLayers } from '../../../.storybook/decorators/with-layers';
 const kinds = ['on-page', 'disclosed'];
 const sizes = ['sm', 'md', 'lg', 'xl'];
 
+// Icon buttons support sizes up to lg, even in an xl list.
+const getActionSize = (size?: string) => (size === 'xl' ? 'lg' : size);
+
 const sharedArgs = {
   label: 'List title',
   kind: 'on-page',
@@ -175,28 +178,40 @@ export const WithActions = {
       html`
         <cds-contained-list-item>
           List item
-          <cds-icon-button slot="action" kind="ghost" size="lg">
+          <cds-icon-button
+            slot="action"
+            kind="ghost"
+            size=${ifDefined(getActionSize(args.size))}>
             ${iconLoader(Close16, { slot: 'icon' })}
             <span slot="tooltip-content">Dismiss</span>
           </cds-icon-button>
         </cds-contained-list-item>
         <cds-contained-list-item disabled>
           List item
-          <cds-icon-button slot="action" kind="ghost" size="lg">
+          <cds-icon-button
+            slot="action"
+            kind="ghost"
+            size=${ifDefined(getActionSize(args.size))}>
             ${iconLoader(Close16, { slot: 'icon' })}
             <span slot="tooltip-content">Dismiss</span>
           </cds-icon-button>
         </cds-contained-list-item>
         <cds-contained-list-item>
           List item
-          <cds-icon-button slot="action" kind="ghost" size="lg">
+          <cds-icon-button
+            slot="action"
+            kind="ghost"
+            size=${ifDefined(getActionSize(args.size))}>
             ${iconLoader(Close16, { slot: 'icon' })}
             <span slot="tooltip-content">Dismiss</span>
           </cds-icon-button>
         </cds-contained-list-item>
         <cds-contained-list-item>
           List item
-          <cds-icon-button slot="action" kind="ghost" size="lg">
+          <cds-icon-button
+            slot="action"
+            kind="ghost"
+            size=${ifDefined(getActionSize(args.size))}>
             ${iconLoader(Close16, { slot: 'icon' })}
             <span slot="tooltip-content">Dismiss</span>
           </cds-icon-button>
@@ -289,28 +304,40 @@ export const WithInteractiveItemsAndActions = {
       html`
         <cds-contained-list-item clickable>
           List item
-          <cds-icon-button slot="action" kind="ghost" size="lg">
+          <cds-icon-button
+            slot="action"
+            kind="ghost"
+            size=${ifDefined(getActionSize(args.size))}>
             ${iconLoader(Close16, { slot: 'icon' })}
             <span slot="tooltip-content">Dismiss</span>
           </cds-icon-button>
         </cds-contained-list-item>
         <cds-contained-list-item clickable>
           List item
-          <cds-icon-button slot="action" kind="ghost" size="lg">
+          <cds-icon-button
+            slot="action"
+            kind="ghost"
+            size=${ifDefined(getActionSize(args.size))}>
             ${iconLoader(Close16, { slot: 'icon' })}
             <span slot="tooltip-content">Dismiss</span>
           </cds-icon-button>
         </cds-contained-list-item>
         <cds-contained-list-item clickable>
           List item
-          <cds-icon-button slot="action" kind="ghost" size="lg">
+          <cds-icon-button
+            slot="action"
+            kind="ghost"
+            size=${ifDefined(getActionSize(args.size))}>
             ${iconLoader(Close16, { slot: 'icon' })}
             <span slot="tooltip-content">Dismiss</span>
           </cds-icon-button>
         </cds-contained-list-item>
         <cds-contained-list-item clickable>
           List item
-          <cds-icon-button slot="action" kind="ghost" size="lg">
+          <cds-icon-button
+            slot="action"
+            kind="ghost"
+            size=${ifDefined(getActionSize(args.size))}>
             ${iconLoader(Close16, { slot: 'icon' })}
             <span slot="tooltip-content">Dismiss</span>
           </cds-icon-button>
