@@ -247,7 +247,9 @@ export const Default = {
                 >`
               : ``}
             ${numberOfButtons >= 2
-              ? html` <cds-modal-footer-button kind="secondary"
+              ? html` <cds-modal-footer-button
+                  kind="secondary"
+                  ?data-modal-close=${numberOfButtons === 2}
                   >${numberOfButtons === 2
                     ? html`Cancel`
                     : 'Rename'}</cds-modal-footer-button
@@ -826,103 +828,6 @@ export const WithScrollingContent = {
               >
             </cds-multi-select>
           </div>
-        </cds-modal-body>
-        ${passiveModal
-          ? ``
-          : html` <cds-modal-footer>
-              ${numberOfButtons > 2
-                ? html` <cds-modal-footer-button kind="secondary"
-                    >Keep both</cds-modal-footer-button
-                  >`
-                : ``}
-              ${numberOfButtons >= 2
-                ? html` <cds-modal-footer-button
-                    kind="secondary"
-                    ?data-modal-close=${numberOfButtons === 2}
-                    >${numberOfButtons === 2
-                      ? html`Cancel`
-                      : 'Rename'}</cds-modal-footer-button
-                  >`
-                : ``}
-
-              <cds-modal-footer-button
-                ?disabled=${primaryButtonDisabled}
-                kind="${danger ? 'danger' : 'primary'}"
-                >Add</cds-modal-footer-button
-              >
-            </cds-modal-footer>`}
-      </cds-modal>
-      <cds-button @click="${toggleButton}">Launch modal</cds-button>
-    `;
-  },
-};
-
-export const WithStateManager = {
-  args: {
-    ...defaultArgs,
-    modalLabel: 'Account Resources',
-    open: false,
-  },
-  argTypes: controls,
-  render: (args) => {
-    const {
-      alert,
-      ariaLabel,
-      danger,
-      open,
-      closeButtonLabel,
-      hasScrollingContent,
-      fullWidth,
-      modalHeading,
-      modalLabel,
-      numberOfButtons,
-      passiveModal,
-      preventCloseOnClickOutside,
-      primaryButtonDisabled,
-      size,
-      loadingDescription,
-      loadingStatus,
-      loadingIconDescription,
-      shouldSubmitOnEnter,
-    } = args ?? {};
-
-    return html`
-      <cds-modal
-        aria-label=${ariaLabel}
-        ?prevent-close-on-click-outside=${preventCloseOnClickOutside}
-        ?alert=${alert}
-        size="${size}"
-        ?open=${open}
-        ?full-width=${fullWidth}
-        ?has-scrolling-content="${hasScrollingContent}"
-        loading-description="${loadingDescription}"
-        loading-status="${loadingStatus}"
-        loading-icon-description="${loadingIconDescription}"
-        ?should-submit-on-enter="${shouldSubmitOnEnter}">
-        <cds-modal-header>
-          <cds-modal-close-button
-            close-button-label=${closeButtonLabel}></cds-modal-close-button>
-          ${modalLabel &&
-          html`<cds-modal-label>${modalLabel}</cds-modal-label>`}
-          <cds-modal-heading>${modalHeading}</cds-modal-heading>
-        </cds-modal-header>
-        <cds-modal-body>
-          <cds-modal-body-content description>
-            Custom domains direct requests for your apps in this Cloud Foundry
-            organization to a URL that you own. A custom domain can be a shared
-            domain, a shared subdomain, or a shared domain and host.
-          </cds-modal-body-content>
-          <div style="margin-bottom: 24px;">
-            <cds-text-input
-              data-modal-primary-focus
-              placeholder="e.g. github.com"
-              label="Domain name">
-            </cds-text-input>
-          </div>
-          <cds-select label-text="Domain name" placeholder="US South">
-            <cds-select-item value="us-south">Option 1</cds-select-item>
-            <cds-select-item value="us-east">Option 2</cds-select-item>
-          </cds-select>
         </cds-modal-body>
         ${passiveModal
           ? ``
