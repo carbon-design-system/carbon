@@ -1156,6 +1156,53 @@ describe('ComboBox', () => {
       );
     });
 
+    it('should highlight the controlled selected element when opened with ArrowDown', async () => {
+      render(<ControlledComboBox controlledItem={mockProps.items[2]} />);
+      act(() => {
+        findInputNode().focus();
+      });
+      await userEvent.keyboard('{ArrowDown}');
+      expect(screen.getAllByRole('option')[2]).toHaveClass(
+        'cds--list-box__menu-item--highlighted'
+      );
+
+      await userEvent.keyboard('{ArrowDown}');
+      expect(screen.getAllByRole('option')[3]).toHaveClass(
+        'cds--list-box__menu-item--highlighted'
+      );
+    });
+
+    it('should highlight the controlled selected element when opened with ArrowUp', async () => {
+      render(<ControlledComboBox controlledItem={mockProps.items[2]} />);
+      act(() => {
+        findInputNode().focus();
+      });
+      await userEvent.keyboard('{ArrowUp}');
+      expect(screen.getAllByRole('option')[2]).toHaveClass(
+        'cds--list-box__menu-item--highlighted'
+      );
+    });
+
+    it('should highlight the controlled selected element when opened by clicking the input', async () => {
+      render(<ControlledComboBox controlledItem={mockProps.items[2]} />);
+      await openMenu();
+      expect(screen.getAllByRole('option')[2]).toHaveClass(
+        'cds--list-box__menu-item--highlighted'
+      );
+    });
+
+    it('should highlight the controlled selected element when reopened after a selection', async () => {
+      render(<ControlledComboBox />);
+      await openMenu();
+      await userEvent.click(screen.getAllByRole('option')[3]);
+      expect(findInputNode()).toHaveDisplayValue('Item 3');
+
+      await userEvent.keyboard('{ArrowDown}');
+      expect(screen.getAllByRole('option')[3]).toHaveClass(
+        'cds--list-box__menu-item--highlighted'
+      );
+    });
+
     it('should highlight the selected element if user enter some other value click outside of combobox', async () => {
       render(<ComboBox {...mockProps} allowCustomValue={false} />);
       await openMenu();
@@ -1719,7 +1766,9 @@ describe('ComboBox', () => {
 
       // Second selection of same item with keyboard
       await openMenu();
-      await user.keyboard('{ArrowDown}{ArrowDown}{ArrowDown}');
+      expect(screen.getByRole('option', { name: 'Option 2' })).toHaveClass(
+        'cds--list-box__menu-item--highlighted'
+      );
       await user.keyboard('{Enter}'); // Option 2 should already be highlighted
 
       // Should NOT trigger another onChange
