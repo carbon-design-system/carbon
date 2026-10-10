@@ -105,6 +105,12 @@ export interface TagBaseProps {
   slug?: ReactNode;
 
   /**
+   * Specify the tab index of the `Tag`. When the label is truncated, it is
+   * applied to the tooltip trigger.
+   */
+  tabIndex?: number;
+
+  /**
    * @deprecated The `title` prop has been deprecated and will be removed in the next major version. Use `children` instead.
    */
   title?: string;
@@ -149,6 +155,7 @@ const TagBase = React.forwardRef<
       size,
       as: BaseComponent,
       slug,
+      tabIndex,
       ...other
     },
     forwardRef
@@ -224,7 +231,11 @@ const TagBase = React.forwardRef<
     if (filter) {
       const ComponentTag: ElementType = BaseComponent ?? 'div';
       return (
-        <ComponentTag className={tagClasses} id={tagId} {...other}>
+        <ComponentTag
+          className={tagClasses}
+          id={tagId}
+          tabIndex={tabIndex}
+          {...other}>
           {CustomIconElement && size !== 'sm' ? (
             <div className={`${prefix}--tag__custom-icon`}>
               <CustomIconElement />
@@ -262,6 +273,8 @@ const TagBase = React.forwardRef<
       [`${prefix}--tag__label`]: !isInteractiveTag,
     });
 
+    const hasDefinitionTooltip = isEllipsisApplied && !isInteractiveTag;
+
     return (
       <ComponentTag
         ref={ref}
@@ -269,6 +282,7 @@ const TagBase = React.forwardRef<
         className={tagClasses}
         id={tagId}
         type={ComponentTag === 'button' ? 'button' : undefined}
+        tabIndex={hasDefinitionTooltip ? undefined : tabIndex}
         {...other}>
         {CustomIconElement && size !== 'sm' ? (
           <div className={`${prefix}--tag__custom-icon`}>
@@ -277,9 +291,10 @@ const TagBase = React.forwardRef<
         ) : (
           ''
         )}
-        {isEllipsisApplied && !isInteractiveTag ? (
+        {hasDefinitionTooltip ? (
           <DefinitionTooltip
             openOnHover={false}
+            tabIndex={tabIndex}
             definition={
               children !== null && children !== undefined ? children : typeText
             }
@@ -395,6 +410,12 @@ Tag.propTypes = {
     PropTypes.node,
     'The `slug` prop has been deprecated and will be removed in the next major version. Use the decorator prop instead.'
   ),
+
+  /**
+   * Specify the tab index of the `Tag`. When the label is truncated, it is
+   * applied to the tooltip trigger.
+   */
+  tabIndex: PropTypes.number,
 
   /**
    * Text to show on clear filters
