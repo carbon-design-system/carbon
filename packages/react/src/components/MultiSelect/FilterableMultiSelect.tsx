@@ -464,9 +464,10 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
           middleware: [
             flip({ crossAxis: false }),
             floatingSize({
-              apply({ rects, elements }) {
+              apply({ availableHeight, rects, elements }) {
                 Object.assign(elements.floating.style, {
                   width: `${rects.reference.width}px`,
+                  maxHeight: `${availableHeight}px`,
                 });
               },
             }),
@@ -489,7 +490,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
         }
       });
     }
-  }, [autoAlign, floatingStyles, refs.floating, middlewareData, open]);
+  }, [autoAlign, floatingStyles, refs.floating, middlewareData]);
 
   const textInput = useRef<HTMLInputElement>(null);
   const filterableMultiSelectInstanceId = useId();

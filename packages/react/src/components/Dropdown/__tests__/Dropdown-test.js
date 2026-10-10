@@ -729,6 +729,15 @@ describe('Test useEffect ', () => {
     assertMenuClosed();
   });
 
+  it('should set maxHeight on the floating menu when autoAlign is enabled', async () => {
+    render(<Dropdown {...mockProps} autoAlign />);
+    await openMenu();
+    await waitForPosition();
+
+    const menu = document.querySelector('.cds--list-box__menu');
+    expect(menu.style.maxHeight).toBeDefined();
+  });
+
   it('should add certain label props when `titleText` is a string', () => {
     render(<Dropdown {...mockProps} titleText="Dropdown Title" />);
 
