@@ -5,24 +5,30 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import type { TFunc } from '../types/common';
+
+interface AnnouncementTranslationArgs {
+  count: number;
+  maxCount: number;
+}
+
 /** Returns an announcement message when the remaining count is low. */
-export const getAnnouncement = (
+export const getAnnouncement = <TranslationKey extends string>(
   count: number,
-  maxCount?: number,
-  singularEntityName = 'character',
-  pluralEntityName = 'characters'
+  maxCount: number | undefined,
+  translationIds: { remaining: TranslationKey; maxReached: TranslationKey },
+  t: TFunc<TranslationKey, AnnouncementTranslationArgs>
 ) => {
   if (typeof maxCount === 'undefined') return null;
 
   const remaining = maxCount - count;
 
   if (remaining <= 10 && remaining > 0) {
-    const entityName = remaining === 1 ? singularEntityName : pluralEntityName;
-    return `${remaining} ${entityName} left.`;
+    return t(translationIds.remaining, { count: remaining, maxCount });
   }
 
   if (remaining <= 0) {
-    return `Maximum ${pluralEntityName} reached.`;
+    return t(translationIds.maxReached, { count: maxCount, maxCount });
   }
 
   return null;
