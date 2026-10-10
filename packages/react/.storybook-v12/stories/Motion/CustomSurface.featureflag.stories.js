@@ -21,7 +21,7 @@ export default {
   },
 };
 
-// user-defined `stretch` reveal exapmle (not using built-in surface)
+// user-defined `stretch` reveal example (not using built-in surface)
 const stretchReveal = defineMotionSurface({
   kind: 'reveal',
   duration: 'slow-01',

@@ -63,7 +63,7 @@ test.describe('@avt Modal', () => {
     // Press the close button on Enter or Space
     await page.keyboard.press('Enter');
 
-    // The modal should no longer be open/visisble
+    // The modal should no longer be open/visible
     await expect(page.getByRole('dialog')).toBeHidden();
     // Focus moves to the button that opened the Modal
     await expect(button).toBeFocused();

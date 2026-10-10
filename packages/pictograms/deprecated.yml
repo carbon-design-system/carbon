@@ -18,7 +18,7 @@ deprecated:
   - name: handicap--active
     reason: This icon has been replaced by wheelchair-user--active  
   - name: mail--verse
-    reason: This icon is no longer relevent
+    reason: This icon is no longer relevant
   - name: workday
     reason: We've switched to SuccessFactor
   - name: user--research-tools

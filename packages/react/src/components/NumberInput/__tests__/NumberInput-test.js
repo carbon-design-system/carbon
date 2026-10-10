@@ -2512,7 +2512,7 @@ describe('NumberInput', () => {
           await userEvent.click(screen.getByLabelText('increment'));
           expect(input).toHaveValue('20%');
         });
-        it('should throw an error if group seperator is in wrong position', async () => {
+        it('should throw an error if group separator is in wrong position', async () => {
           render(
             <NumberInput
               type="text"
@@ -2532,7 +2532,7 @@ describe('NumberInput', () => {
           expect(screen.getByRole('textbox')).toHaveAttribute('data-invalid');
         });
 
-        it('should throw an error if group seperator is in wrong position for given locale', async () => {
+        it('should throw an error if group separator is in wrong position for given locale', async () => {
           render(
             <NumberInput
               type="text"

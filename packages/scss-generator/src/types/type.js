@@ -14,7 +14,7 @@ export function defineType(type, { fields = {}, generate } = {}) {
 
   /**
    * Support both object builder pattern and variadic arguments pattern. This
-   * allows type builders to be called using `t.Identifer({ name: 'value' })`
+   * allows type builders to be called using `t.Identifier({ name: 'value' })`
    * alongside `t.Identifier('value')`.
    *
    * In some cases, the former syntax is preferred while in other situations

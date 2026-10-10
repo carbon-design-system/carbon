@@ -376,7 +376,7 @@ class CDSMenu extends HostListenerMixin(LitElement) {
       },
     };
 
-    // Avoid that the Menu render incorrectly when the postion is set in the right side of the screen
+    // Avoid that the Menu render incorrectly when the position is set in the right side of the screen
     if (
       this.actionButtonWidth &&
       this.actionButtonWidth < axes.x.size &&

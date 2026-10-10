@@ -402,7 +402,7 @@ class CDSPopover extends HostListenerMixin(LitElement) {
       };
     }
 
-    // Fallback for browsers not suporting Visual Viewport API
+    // Fallback for browsers not supporting Visual Viewport API
     return {
       x: 0,
       y: 0,

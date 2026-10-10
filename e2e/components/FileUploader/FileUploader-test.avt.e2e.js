@@ -157,7 +157,7 @@ test.describe('@avt FileUploader', () => {
         page.getByText('test-upload-file-long-text-for-tooltip-to-show-up')
       ).toBeVisible();
 
-      // Deleteing the long file
+      // Deleting the long file
       await page.keyboard.press('Tab');
       await page.keyboard.press('Tab');
       await page.keyboard.press('Tab');
@@ -203,7 +203,7 @@ test.describe('@avt FileUploader', () => {
     await expect(page.locator('.cds--popover--open')).toBeVisible();
     await page.keyboard.press('Tab');
 
-    // Deleteing all files
+    // Deleting all files
     await page.keyboard.press('Enter');
     await expect(
       page.locator('#test-upload-file-long-text-for-tooltip-to-show-up.jpg')
