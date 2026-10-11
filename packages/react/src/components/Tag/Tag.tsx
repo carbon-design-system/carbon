@@ -280,6 +280,7 @@ const TagBase = React.forwardRef<
         {isEllipsisApplied && !isInteractiveTag ? (
           <DefinitionTooltip
             openOnHover={false}
+            tabIndex={other.tabIndex}
             definition={
               children !== null && children !== undefined ? children : typeText
             }
