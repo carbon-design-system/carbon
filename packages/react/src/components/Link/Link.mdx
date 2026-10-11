@@ -37,7 +37,7 @@ links, which should be used sparingly.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(LinkStories.Default),
+      onClick: () => stackblitzPrefillConfig({ story: LinkStories.Default }),
     },
   ]}
 />
@@ -49,7 +49,7 @@ links, which should be used sparingly.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(LinkStories.Inline),
+      onClick: () => stackblitzPrefillConfig({ story: LinkStories.Inline }),
     },
   ]}
 />
@@ -65,7 +65,8 @@ visually impaired users can comprehend the outcome of clicking the link.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(LinkStories.PairedWithIcon),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: LinkStories.PairedWithIcon }),
     },
   ]}
 />

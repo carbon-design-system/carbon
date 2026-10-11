@@ -738,8 +738,14 @@
 
   // Skeleton State
 
+  .#{$prefix}--label.#{$prefix}--skeleton:has(
+      + .#{$prefix}--number.#{$prefix}--skeleton
+    ) {
+    @include skeleton($border-radius: $border-radius-04);
+  }
+
   .#{$prefix}--number.#{$prefix}--skeleton {
-    @include skeleton;
+    @include skeleton($border-radius: $border-radius-04);
 
     inline-size: 100%;
 

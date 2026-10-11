@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2025, 2025
+// Copyright IBM Corp. 2025, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -8,11 +8,35 @@
 $css--plex: true !default;
 @use '@carbon/styles/scss/config' as *;
 @use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/border-radius' as *;
+@use '@carbon/styles/scss/feature-flags' as flags;
+@use '@carbon/styles/scss/components/button' as button;
 @use '@carbon/styles/scss/components/combo-button/index' as *;
 
 :host(#{$prefix}-combo-button) {
   @extend .#{$prefix}--combo-button__container;
+
+  @if flags.enabled('enable-v12-release') {
+    #{$prefix}-button {
+      @include button.radius(
+        $ss: $border-radius-max,
+        $se: $border-radius-00,
+        $es: $border-radius-max,
+        $ee: $border-radius-00
+      );
+    }
+
+    #{$prefix}-icon-button {
+      @include button.radius(
+        $ss: $border-radius-00,
+        $se: $border-radius-max,
+        $es: $border-radius-00,
+        $ee: $border-radius-max
+      );
+    }
+  }
 }
+
 :host(#{$prefix}-combo-button)[_open] #{$prefix}-icon-button svg {
   transform: rotate(180deg);
 }

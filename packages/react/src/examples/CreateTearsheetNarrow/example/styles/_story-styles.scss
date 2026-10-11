@@ -1,0 +1,15 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/spacing' as *;
+
+.create-tearsheet-narrow-stories__launcher-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-block-size: calc(100vh - #{$spacing-09});
+}

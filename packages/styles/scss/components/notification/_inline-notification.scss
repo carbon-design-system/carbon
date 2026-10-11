@@ -5,10 +5,11 @@
 // LICENSE file in the root directory of this source tree.
 //
 @use 'mixins' as *;
+@use '../../border-radius' as *;
 @use '../../breakpoint' as *;
 @use '../../colors' as *;
 @use '../../config' as *;
-@use '../../feature-flags';
+@use '../../feature-flags' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
@@ -35,6 +36,10 @@
   max-inline-size: convert.to-rem(288px);
   min-block-size: convert.to-rem(48px);
   min-inline-size: convert.to-rem(288px);
+
+  @if enabled('enable-v12-release') {
+    border-radius: $border-radius-04;
+  }
 
   @include breakpoint(md) {
     flex-wrap: nowrap;
@@ -65,6 +70,10 @@
   inset-block-start: 0;
   inset-inline-start: 0;
   pointer-events: none;
+  @if enabled('enable-v12-release') {
+    border-end-end-radius: $border-radius-04;
+    border-start-end-radius: $border-radius-04;
+  }
 }
 
 /// Inline notification low-contrast error variant styles
@@ -373,6 +382,17 @@
     inset-inline-end: 0;
     max-inline-size: convert.to-rem(48px);
     min-inline-size: convert.to-rem(48px);
+
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-max;
+      block-size: convert.to-rem(32px);
+      inline-size: convert.to-rem(32px);
+      inset-block-start: $spacing-03;
+      inset-inline-end: $spacing-03;
+      max-inline-size: convert.to-rem(32px);
+      min-inline-size: convert.to-rem(32px);
+    }
+
     transition:
       outline $duration-fast-02 motion(standard, productive),
       background-color $duration-fast-02 motion(standard, productive);
@@ -388,6 +408,10 @@
 
     @include breakpoint(md) {
       position: static;
+
+      @if enabled('enable-v12-release') {
+        margin: $spacing-03;
+      }
     }
   }
 

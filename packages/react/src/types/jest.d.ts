@@ -12,7 +12,6 @@
 declare module '@jest/expect' {
   interface Matchers<R extends void | Promise<void>, T = unknown> {
     toHaveNoAxeViolations(): R;
-    toHaveNoACViolations(label: string): R;
   }
 }
 
@@ -20,7 +19,6 @@ declare global {
   namespace jest {
     interface Matchers<R = void, T = unknown> {
       toHaveNoAxeViolations(): R;
-      toHaveNoACViolations(label: string): R;
     }
   }
 }

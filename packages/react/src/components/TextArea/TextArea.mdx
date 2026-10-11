@@ -31,7 +31,8 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TextAreaStories.Default),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: TextAreaStories.Default }),
     },
   ]}
 />
@@ -43,7 +44,8 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TextAreaStories.Skeleton),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: TextAreaStories.Skeleton }),
     },
   ]}
 />
@@ -55,7 +57,8 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TextAreaStories.withAILabel),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: TextAreaStories.withAILabel }),
     },
   ]}
 />

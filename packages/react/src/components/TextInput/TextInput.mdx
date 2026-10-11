@@ -1,9 +1,23 @@
-import { ArgTypes, Canvas, Story, Meta } from '@storybook/addon-docs/blocks';
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
 import * as TextInputStories from './TextInput.stories';
-import * as PasswordInputStories from './PasswordInput.stories';
 import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
+
+export const getTextInputStoryArgsDef = [
+  `const getTextInputStoryArgs = ({ defaultWidth, onChange, onClick, ...textInputArgs }) => {
+  const handleChange = (event) => {
+    onChange?.({ value: event.target.value });
+  };
+  const handleClick = (event) => {
+    onClick?.({ value: event.target.value });
+  };
+  return {
+    defaultWidth,
+    textInputArgs: { ...textInputArgs, onChange: handleChange, onClick: handleClick },
+  };
+};`,
+];
 
 # TextInput
 
@@ -39,7 +53,11 @@ default text input is for short, one-line content.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TextInputStories.Default),
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: TextInputStories.Default,
+          customFunctionDefs: getTextInputStoryArgsDef,
+        }),
     },
   ]}
 />
@@ -51,7 +69,11 @@ default text input is for short, one-line content.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TextInputStories.ReadOnly),
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: TextInputStories.ReadOnly,
+          customFunctionDefs: getTextInputStoryArgsDef,
+        }),
     },
   ]}
 />
@@ -63,7 +85,8 @@ default text input is for short, one-line content.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TextInputStories.Skeleton),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: TextInputStories.Skeleton }),
     },
   ]}
 />
@@ -75,7 +98,11 @@ default text input is for short, one-line content.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TextInputStories.withAILabel),
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: TextInputStories.withAILabel,
+          customFunctionDefs: getTextInputStoryArgsDef,
+        }),
     },
   ]}
 />
@@ -106,4 +133,4 @@ component instead.
 
 Help us improve this component by providing feedback, asking questions on Slack,
 or updating this file on
-[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/TextInput/TextInput.mdx).TextInputStories,
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/TextInput/TextInput.mdx).

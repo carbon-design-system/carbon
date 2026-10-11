@@ -6,6 +6,7 @@
 //
 @use 'mixins' as *;
 @use '../button';
+@use '../../border-radius' as *;
 @use '../../breakpoint' as *;
 @use '../../colors' as *;
 @use '../../config' as *;
@@ -33,6 +34,11 @@
   flex-wrap: wrap;
   block-size: auto;
   color: $text-inverse;
+
+  @if enabled('enable-v12-release') {
+    border-radius: $border-radius-08;
+  }
+
   inline-size: 100%;
   max-inline-size: convert.to-rem(288px);
   min-block-size: convert.to-rem(48px);
@@ -50,15 +56,27 @@
   @include breakpoint(max) {
     max-inline-size: convert.to-rem(832px);
   }
+
+  @if enabled('enable-v12-release') {
+    @include button.radius($border-radius-00);
+  }
 }
 /// Actionable notification toast variant base styles
 /// @access public
 /// @group notification
 @mixin actionable-notification-toast-base {
+  @if enabled('enable-v12-release') {
+    border-radius: $border-radius-08;
+  }
+
   flex-wrap: wrap;
   box-shadow: 0 2px 6px 0 rgb(0 0 0 / 20%);
   max-inline-size: convert.to-rem(288px);
   min-inline-size: convert.to-rem(288px);
+
+  .#{$prefix}--actionable-notification__text-wrapper {
+    padding: convert.to-rem(15px) 0 convert.to-rem(23px) 0;
+  }
 }
 
 /// Actionable notification low-contrast variant base styles
@@ -189,6 +207,10 @@
   inset-block-start: 0;
   inset-inline-start: 0;
   pointer-events: none;
+  @if enabled('enable-v12-release') {
+    border-end-end-radius: $border-radius-04;
+    border-start-end-radius: $border-radius-04;
+  }
 }
 
 /// Actionable notification styles
@@ -201,6 +223,12 @@
 
   .#{$prefix}--actionable-notification--toast {
     @include actionable-notification-toast-base;
+  }
+
+  @if enabled('enable-v12-release') {
+    .#{$prefix}--actionable-notification--callout {
+      border-radius: $border-radius-04;
+    }
   }
 
   .#{$prefix}--actionable-notification:not(
@@ -334,11 +362,6 @@
     display: flex;
   }
 
-  .#{$prefix}--actionable-notification--toast
-    .#{$prefix}--actionable-notification__text-wrapper {
-    padding: convert.to-rem(15px) 0 convert.to-rem(23px) 0;
-  }
-
   .#{$prefix}--actionable-notification__content {
     @include type-style('body-compact-01');
 
@@ -447,6 +470,9 @@
       #{$spacing-07} + #{convert.to-rem(20px)} - #{convert.to-rem(2px)}
     );
     padding-inline: $spacing-05;
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-max;
+    }
   }
 
   // Tertiary button styles by default use mostly "inverse" tokens. Since the non-low-contrast notification
@@ -559,6 +585,17 @@
     inset-inline-end: 0;
     max-inline-size: convert.to-rem(48px);
     min-inline-size: convert.to-rem(48px);
+
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-max;
+      block-size: convert.to-rem(32px);
+      inline-size: convert.to-rem(32px);
+      inset-block-start: $spacing-03;
+      inset-inline-end: $spacing-03;
+      max-inline-size: convert.to-rem(32px);
+      min-inline-size: convert.to-rem(32px);
+    }
+
     transition:
       outline $duration-fast-02 motion(standard, productive),
       background-color $duration-fast-02 motion(standard, productive);

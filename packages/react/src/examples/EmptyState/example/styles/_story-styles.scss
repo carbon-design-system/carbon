@@ -1,0 +1,85 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/theme' as *;
+
+
+.es-example__empty-wrap {
+  display: flex;
+  padding: $spacing-07 $spacing-05;
+  background-color: $layer;
+
+  &--centre {
+    justify-content: center;
+  }
+
+  &--left {
+    justify-content: flex-start;
+  }
+}
+
+
+.es-example__col--span-2 {
+  display: flex;
+  flex-direction: column;
+  grid-row: span 2;
+}
+
+
+.es-example__tile {
+  display: flex;
+  flex-direction: column;
+  block-size: 100%;
+  flex: 1;
+  padding: $spacing-05;
+}
+
+.es-example__tile-label {
+  @include type.type-style('label-01');
+
+  margin-block-end: $spacing-02;
+  color: $text-secondary;
+}
+
+.es-example__tile-title {
+  @include type.type-style('heading-compact-01');
+
+  margin-block-end: $spacing-05;
+}
+
+
+.es-example__tile-empty--vertical {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  &--centre {
+    align-items: center;
+  }
+}
+
+
+.es-example__tile-empty--horizontal {
+  display: flex;
+  inline-size: 100%;
+  justify-content: flex-start;
+
+  &--centre {
+    justify-content: center;
+  }
+}
+
+.es-example__launcher {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-block-size: calc(100vh - #{$spacing-09});
+}

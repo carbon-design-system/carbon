@@ -207,6 +207,16 @@ export { default as CDSLayout } from './components/layout/layout';
 export { default as CDSLayoutConstraint } from './components/layout/layout-constraint';
 
 // TODO: uncomment in v12 — remove from product-migrated-components.mjs and excludeProductsComponents too
+// export { default as CDSTearsheet } from './components/tearsheet/tearsheet';
+// export { default as CDSTearsheetBody } from './components/tearsheet/tearsheet-body';
+// export { default as CDSTearsheetFooter } from './components/tearsheet/tearsheet-footer';
+// export { default as CDSTearsheetHeader } from './components/tearsheet/tearsheet-header';
+// export { default as CDSTearsheetHeaderContent } from './components/tearsheet/tearsheet-header-content';
+// export { default as CDSTearsheetInfluencer } from './components/tearsheet/tearsheet-influencer';
+// export { default as CDSTearsheetNavigationBar } from './components/tearsheet/tearsheet-navigation-bar';
+// export { default as CDSTearsheetScroller } from './components/tearsheet/tearsheet-scroller';
+// export { default as CDSTearsheetStack } from './components/tearsheet/tearsheet-stack';
+// export { default as CDSTearsheetSummaryContent } from './components/tearsheet/tearsheet-summary-content';
 // export { default as CDSCoachmark } from './components/coachmark/coachmark';
 // export { default as CDSCoachmarkHeader } from './components/coachmark/coachmark-header';
 // export { default as CDSCoachmarkBody } from './components/coachmark/coachmark-body';

@@ -7,17 +7,18 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import classnames from 'classnames';
-import FileUploaderItem from '../FileUploaderItem';
-import FileUploaderDropContainer from '../FileUploaderDropContainer';
-import FormItem from '../../FormItem';
-import { useId } from '../../../internal/useId';
+import {
+  FileUploaderItem,
+  FileUploaderDropContainer,
+  FormItem,
+} from '@carbon/react';
 
 const prefix = 'cds';
 
 const ExampleDropContainerApp = (props) => {
   const [file, setFile] = useState();
   const uploaderButton = useRef(null);
-  const uniqueId = useId();
+  const uniqueId = React.useId();
   const { disabled, size } = props;
   const handleDrop = (e) => {
     e.preventDefault();

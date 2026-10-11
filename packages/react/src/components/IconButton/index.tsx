@@ -40,7 +40,7 @@ export type IconButtonAlignment = PopoverAlignment;
 export interface IconButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
-   * Specify how the trigger should align with the tooltip
+   * Specify how the tooltip should be aligned with the button
    */
   align?: IconButtonAlignment;
 

@@ -6,6 +6,7 @@
  */
 
 export * from '@internationalized/number';
+export * from './addSelect';
 export * from './carousel';
 export * from './datePartsOrder';
 export * from './dateTimeFormat';

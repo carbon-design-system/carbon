@@ -70,11 +70,14 @@ export default {
   },
 };
 
-export const Skeleton = ({ defaultWidth }) => (
-  <div style={{ width: defaultWidth }}>
-    <FluidSearchSkeleton />
-  </div>
-);
+export const Skeleton = (args) => {
+  const { defaultWidth } = args;
+  return (
+    <div style={{ width: defaultWidth }}>
+      <FluidSearchSkeleton />
+    </div>
+  );
+};
 
 Skeleton.parameters = {
   controls: {
@@ -82,8 +85,22 @@ Skeleton.parameters = {
   },
 };
 
-export const Default = ({ defaultWidth, ...searchArgs }) => (
-  <div style={{ width: defaultWidth }}>
-    <FluidSearch {...searchArgs} />
-  </div>
-);
+export const Default = (args) => {
+  const { defaultWidth, ...searchArgs } = args;
+  return (
+    <div style={{ width: defaultWidth }}>
+      <FluidSearch {...searchArgs} />
+    </div>
+  );
+};
+
+Default.args = {
+  autoComplete: 'off',
+  closeButtonLabelText: 'Clear search input',
+  defaultWidth: 400,
+  disabled: false,
+  labelText: 'Search',
+  placeholder: 'Prompt text',
+  role: 'searchbox',
+  type: 'search',
+};

@@ -52,7 +52,7 @@ import { Grid, Column } from '@carbon/react';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(GridStories.Default),
+      onClick: () => stackblitzPrefillConfig({ story: GridStories.Default }),
     },
   ]}
 />
@@ -103,7 +103,7 @@ we will use the `sm`, `md`, and `lg` prop to specify how many columns the
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(GridStories.Default),
+      onClick: () => stackblitzPrefillConfig({ story: GridStories.Default }),
     },
   ]}
 />
@@ -139,7 +139,7 @@ or the `narrow` prop to enable the narrow grid with a 16px gutter.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(GridStories.FullWidth),
+      onClick: () => stackblitzPrefillConfig({ story: GridStories.FullWidth }),
     },
   ]}
 />
@@ -151,7 +151,7 @@ or the `narrow` prop to enable the narrow grid with a 16px gutter.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(GridStories.Condensed),
+      onClick: () => stackblitzPrefillConfig({ story: GridStories.Condensed }),
     },
   ]}
 />
@@ -163,7 +163,7 @@ or the `narrow` prop to enable the narrow grid with a 16px gutter.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(GridStories.Narrow),
+      onClick: () => stackblitzPrefillConfig({ story: GridStories.Narrow }),
     },
   ]}
 />
@@ -206,7 +206,7 @@ function MyComponent() {
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(GridStories.WithRowGap),
+      onClick: () => stackblitzPrefillConfig({ story: GridStories.WithRowGap }),
     },
   ]}
 />
@@ -226,7 +226,7 @@ in a `Column` enables you to define responsive parameters for the column (`sm`,
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(GridStories.Subgrid),
+      onClick: () => stackblitzPrefillConfig({ story: GridStories.Subgrid }),
     },
   ]}
 />
@@ -252,7 +252,8 @@ subgrid definition. To achieve this you can wrap your nested `Grid` in
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(GridStories.WithGridSettings),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: GridStories.WithGridSettings }),
     },
   ]}
 />
@@ -269,7 +270,8 @@ gutter modes to achieve a particular layout.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(GridStories.MixedGutterModes),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: GridStories.MixedGutterModes }),
     },
   ]}
 />
@@ -293,7 +295,7 @@ behavior of columns.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(GridStories.Responsive),
+      onClick: () => stackblitzPrefillConfig({ story: GridStories.Responsive }),
     },
   ]}
 />
@@ -320,7 +322,7 @@ breakpoint. At the medium breakpoint, it will be offset by two columns.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(GridStories.Offset),
+      onClick: () => stackblitzPrefillConfig({ story: GridStories.Offset }),
     },
   ]}
 />
