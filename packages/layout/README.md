@@ -43,9 +43,10 @@ proposing the new addition!
 
 ### Modifying token values
 
-Token values are defined in [`src/dtcg/layout.json`](./src/dtcg/layout.json)
-using the [DTCG token format](https://tr.designtokens.org/format/). This is the
-single source of truth for the package — **do not edit generated files
+Token values are defined in
+[`tokens/layout.tokens.json`](./tokens/layout.tokens.json) using the
+[DTCG token format](https://www.designtokens.org/tr/2025.10/format/). This is
+the single source of truth for the package — **do not edit generated files
 directly**.
 
 The following files are generated at build time and should not be hand-edited:
@@ -56,13 +57,13 @@ The following files are generated at build time and should not be hand-edited:
 
 To add or update a token:
 
-1. Edit `src/dtcg/layout.json`
+1. Edit `tokens/layout.tokens.json`
 2. Run `yarn build` in this package to regenerate all outputs
 3. Run `yarn test --testPathPatterns=packages/layout` from the repo root to
    confirm nothing regressed
 
-For a detailed guide to the token format, converters, and how to add a new token
-category, see [`src/dtcg/README.md`](./src/dtcg/README.md).
+For a detailed guide to the token format and how to add a new token category,
+see [`tokens/README.md`](./tokens/README.md).
 
 ## 🙌 Contributing
 

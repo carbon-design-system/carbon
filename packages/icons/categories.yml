@@ -194,6 +194,8 @@ categories:
           - page-number
           - paint-brush
           - paint-brush--alt
+          - parallelogram--outline
+          - parallelogram--solid
           - paragraph
           - pen
           - pen--fountain
@@ -877,6 +879,8 @@ categories:
           - ibm--saas-console
           - ibm--sap-on-power
           - ibm--secure-infrastructure-on-vpc-for-regulated-industries
+          - ibm--sovereign-core
+          - ibm-sterling--b2b-integration-saas
           - ibm--streamsets
           - ibm--telehealth
           - ibm--test-accelerator-for-z
@@ -962,9 +966,9 @@ categories:
           - ibm-devops--control
           - ibm-federated-api-management
           - ibm-hybrid-control-plane
-          - ibm-quantum--safe-advisor
+          - ibm-quantum--safe-cryptography-manager
           - ibm-quantum--safe-explorer
-          - ibm-quantum--safe-remediator
+          - ibm-quantum--safe-proxy
           - ibm-software--watsonx--data--analyze-and-process
           - ibm-software--watsonx--data--structured--enrichment
           - ibm-software--watsonx--data--structured--import
@@ -1015,6 +1019,7 @@ categories:
           - state--definition
           - state--exhibit
           - stepzen--graph-server
+          - streaming--embedded
           - use-case--include
           - view--definition
           - virtual-private-cloud--alt
@@ -1248,6 +1253,8 @@ categories:
           - operation--gauge
           - operation--if
           - qiskit
+          - quantum--computer
+          - quantum--QPU
           - S
           - S--alt
           - T
