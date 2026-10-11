@@ -6,7 +6,12 @@
  */
 
 import cx from 'classnames';
-import { useCombobox, UseComboboxProps, UseComboboxActions } from 'downshift';
+import {
+  useCombobox,
+  UseComboboxProps,
+  UseComboboxActions,
+  type UseComboboxState,
+} from 'downshift';
 import PropTypes from 'prop-types';
 import React, {
   cloneElement,
@@ -608,7 +613,9 @@ const ComboBox = forwardRef(
         // When the menu opens, highlight the selected item if it is in the
         // list. Downshift only matches the selected item by reference and does
         // not know about a controlled `selectedItem`.
-        const highlightSelectedItemOnOpen = (nextChanges) => {
+        const highlightSelectedItemOnOpen = (
+          nextChanges: Partial<UseComboboxState<ItemType>>
+        ) => {
           if (state.isOpen || !nextChanges.isOpen) {
             return nextChanges;
           }
