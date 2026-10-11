@@ -4,6 +4,16 @@ import SelectItem from '../SelectItem';
 import * as SelectStories from './Select.stories';
 import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
+export const selectItemsDef = `const selectItems = (
+  <>
+    <SelectItem value="" text="Choose a region" />
+    <SelectItem value="us-south" text="Dallas (us-south)" />
+    <SelectItem value="us-east" text="Washington, DC (us-east)" />
+    <SelectItem value="eu-de" text="Frankfurt (eu-de)" />
+    <SelectItem value="au-syd" text="Sydney (au-syd)" />
+  </>
+);`;
+
 <Meta isTemplate />
 
 # Select
@@ -43,7 +53,11 @@ used option that is on the list.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig({ story: SelectStories.Default }),
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: SelectStories.Default,
+          customFunctionDefs: [selectItemsDef],
+        }),
     },
   ]}
 />
@@ -154,7 +168,11 @@ desired option.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig({ story: SelectStories.Inline }),
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: SelectStories.Inline,
+          customFunctionDefs: [selectItemsDef],
+        }),
     },
   ]}
 />
@@ -179,7 +197,10 @@ desired option.
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig({ story: SelectStories.withAILabel }),
+        stackblitzPrefillConfig({
+          story: SelectStories.withAILabel,
+          customFunctionDefs: [selectItemsDef],
+        }),
     },
   ]}
 />

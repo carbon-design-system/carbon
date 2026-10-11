@@ -26,9 +26,13 @@ architecture with StepFlow from `@carbon/utilities-react`.
 
 ### Local Development
 
-1. Install dependencies:
+1. Create an empty `yarn.lock`, then install dependencies. The lockfile is
+   intentionally not committed, and without it Yarn walks up to the root project
+   and fails with
+   `The nearest package directory [...] doesn't seem to be part of the project`:
 
 ```bash
+: > yarn.lock   # gitignored
 yarn install
 ```
 
