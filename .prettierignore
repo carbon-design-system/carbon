@@ -67,3 +67,6 @@ packages/upgrade/**/*.output.tsx
 # .github files
 CODEOWNERS
 PULL_REQUEST_TEMPLATE.md
+
+# Third-party schemas, kept identical to the published files
+packages/test-utils/tokens/schemas/*/*.json

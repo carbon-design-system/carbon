@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,7 +9,6 @@ import React, { forwardRef, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
-import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { ButtonKind } from '../Button/Button';
 
 export interface ButtonSetProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -56,9 +55,14 @@ const ButtonSet = forwardRef<HTMLDivElement, ButtonSetProps>((props, ref) => {
   );
 
   /**
-   * Used to determine if the buttons are currently stacked
+   * Used to determine if the buttons are currently stacked.
+   * useEffect (not useLayoutEffect) is intentional: calling setState inside
+   * useLayoutEffect triggers a "setState during commit" warning in React 19,
+   * and queueMicrotask workarounds break act() in tests. useEffect fires after
+   * paint so there is a brief flash-of-unsorted-order risk, but it is
+   * act()-compatible and avoids the React 19 commit-phase constraint.
    */
-  useIsomorphicEffect(() => {
+  useEffect(() => {
     const checkStacking = () => {
       let newIsStacked = stacked || false;
 
@@ -71,7 +75,6 @@ const ButtonSet = forwardRef<HTMLDivElement, ButtonSetProps>((props, ref) => {
       return newIsStacked;
     };
 
-    /* initial value not dependant on observer */
     setIsStacked(checkStacking());
 
     if (!fluidInnerRef.current) {
@@ -95,6 +98,8 @@ const ButtonSet = forwardRef<HTMLDivElement, ButtonSetProps>((props, ref) => {
         (isStacked ? -1 : 1)
       );
     });
+    // useEffect already runs after the commit phase, so setState here is safe
+    // in React 19 and is fully compatible with act() in tests.
     setSortedChildren(newSortedChildren);
 
     // adding sortedChildren to deps causes an infinite loop

@@ -14,12 +14,22 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 import { classMap } from 'lit-html/directives/class-map.js';
 import styles from './tearsheet.scss?lit';
 import type { ActionButton, ButtonSize } from '../action-set/index.js';
-import { getTearsheetSignal, getParentTearsheetId } from './tearsheet-signal';
-import { SignalWatcher } from '@lit-labs/signals';
+import {
+  tearsheetContext,
+  defaultTearsheetState,
+  type TearsheetContextValue,
+} from './tearsheet-context';
+import { consume } from '@lit/context';
 import '../action-set/index.js';
 import { registerFocusableContainers } from '../../utilities/manageFocusTrap/manageFocusTrap';
 
 const blockClass = `${prefix}--tearsheet`;
+
+/** Minimal interface used to read the protected uniqueId from CDSTearsheet
+ *  without importing the class (avoids circular dep). */
+interface CDSTearsheetHost extends HTMLElement {
+  readonly uniqueId: string;
+}
 
 /**
  * Tearsheet Footer component - Contains action buttons at the bottom of the tearsheet.
@@ -28,7 +38,7 @@ const blockClass = `${prefix}--tearsheet`;
  * @slot - Default slot for custom footer content (rendered before actions)
  */
 @customElement(`${prefix}-tearsheet-footer`)
-class CDSTearsheetFooter extends SignalWatcher(HostListenerMixin(LitElement)) {
+class CDSTearsheetFooter extends HostListenerMixin(LitElement) {
   @property({ reflect: true })
   slot = 'footer';
 
@@ -43,12 +53,19 @@ class CDSTearsheetFooter extends SignalWatcher(HostListenerMixin(LitElement)) {
 
   private _actionSetRegistered = false;
 
-  /** uniqueId of the parent cds-tearsheet, read once in connectedCallback. */
+  @consume({ context: tearsheetContext, subscribe: true })
+  private _tearsheetCtx?: TearsheetContextValue;
+
+  /** Cached uniqueId of the parent cds-tearsheet. Resolved once in
+   *  connectedCallback so we avoid repeated DOM traversal on every update. */
   private _uniqueId: string = '';
 
   connectedCallback(): void {
     super.connectedCallback();
-    this._uniqueId = getParentTearsheetId(this);
+    const host = this.closest<HTMLElement & CDSTearsheetHost>(
+      `${prefix}-tearsheet`
+    );
+    this._uniqueId = host?.uniqueId ?? '';
   }
 
   protected override firstUpdated(): void {
@@ -73,9 +90,7 @@ class CDSTearsheetFooter extends SignalWatcher(HostListenerMixin(LitElement)) {
     if (!this.actions || this.actions.length === 0) {
       return null;
     }
-    // getTearsheetSignal(id).get() subscribes SignalWatcher to only this
-    // instance's signal — changes in other tearsheets never trigger a re-render.
-    const { variant } = getTearsheetSignal(this._uniqueId).get();
+    const { variant } = this._tearsheetCtx?.state ?? defaultTearsheetState;
     const actionSetSize = variant === 'wide' ? '2xl' : 'lg';
     const buttonSize = this.buttonSize || (variant === 'wide' ? '2xl' : 'xl');
 

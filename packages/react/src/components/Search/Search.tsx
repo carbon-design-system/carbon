@@ -263,7 +263,9 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
         className={`${prefix}--search-magnifier`}
         onClick={disabled ? undefined : onExpand}
         onKeyDown={handleExpandButtonKeyDown}
-        tabIndex={isExpandableCollapsed ? (disabled ? undefined : 0) : -1}
+        tabIndex={
+          isExpandableCollapsed ? (disabled ? undefined : (tabIndex ?? 0)) : -1
+        }
         ref={expandButtonRef}
         aria-disabled={onExpand && disabled ? true : undefined}
         aria-expanded={
