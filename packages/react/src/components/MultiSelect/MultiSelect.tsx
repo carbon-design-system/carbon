@@ -409,7 +409,7 @@ export const MultiSelect = React.forwardRef(
           }
         });
       }
-    }, [enableFloatingStyles, floatingStyles, refs.floating]);
+    }, [enableFloatingStyles, floatingStyles, middlewareData, refs.floating]);
 
     const {
       selectedItems: controlledSelectedItems,

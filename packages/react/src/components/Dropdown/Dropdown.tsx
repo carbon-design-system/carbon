@@ -372,8 +372,13 @@ const Dropdown = React.forwardRef(
           }
         });
       }
-      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
-    }, [floatingStyles, autoAlign, refs.floating]);
+    }, [
+      enableFloatingStyles,
+      floatingStyles,
+      middlewareData,
+      autoAlign,
+      refs.floating,
+    ]);
 
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);

@@ -889,8 +889,8 @@ describe('MultiSelect', () => {
       );
 
       await waitFor(() => {
-        expect(listbox.style.visibility).toBe('visible');
-        expect(listbox.style.position).toBe('fixed');
+        expect(listbox.style.visibility).toBe('hidden');
+        expect(listbox.style.width).toBe('0px');
       });
     });
 
@@ -909,7 +909,7 @@ describe('MultiSelect', () => {
       await waitForPosition();
 
       const listbox = screen.getByRole('listbox', { hidden: true });
-      expect(listbox.style.maxHeight).toBeDefined();
+      expect(listbox.style.maxHeight).toMatch(/\d+px$/);
     });
 
     it('should accept a `ref` for the underlying button element', async () => {
