@@ -1,0 +1,132 @@
+tasks:
+  install-dependencies:
+    name: Install dependencies
+    description: Install the locked Yarn workspaces and Playwright browsers.
+    command: |
+      YARN_ENABLE_HARDENED_MODE=0 yarn install --immutable
+      yarn playwright install --with-deps
+    triggeredBy:
+      - manual
+      - postDevcontainerStart
+      - prebuild
+    prebuildRequiresSuccess: true
+
+  build:
+    name: Build all packages
+    description: Build every package in dependency order and regenerate package structure data.
+    command: yarn build
+    dependsOn:
+      - install-dependencies
+    triggeredBy:
+      - manual
+
+  test:
+    name: Run unit tests
+    description: Run the repository Jest test suite.
+    command: yarn test
+    dependsOn:
+      - install-dependencies
+    triggeredBy:
+      - manual
+
+  test-e2e:
+    name: Run package end-to-end tests
+    description: Run the repository package-level Jest end-to-end suite.
+    command: yarn test:e2e
+    dependsOn:
+      - install-dependencies
+    triggeredBy:
+      - manual
+
+  lint:
+    name: Lint JavaScript and TypeScript
+    description: Run ESLint across actions, configuration, and packages.
+    command: yarn lint
+    dependsOn:
+      - install-dependencies
+    triggeredBy:
+      - manual
+
+  lint-styles:
+    name: Lint Sass
+    description: Run Stylelint across the Sass sources.
+    command: yarn lint:styles
+    dependsOn:
+      - install-dependencies
+    triggeredBy:
+      - manual
+
+  check-formatting:
+    name: Check formatting
+    description: Check source files with Prettier without changing them.
+    command: yarn format:diff
+    dependsOn:
+      - install-dependencies
+    triggeredBy:
+      - manual
+
+  ci-check:
+    name: Run package CI checks
+    description: Run package-specific validation through Carbon CLI.
+    command: yarn ci-check
+    dependsOn:
+      - install-dependencies
+    triggeredBy:
+      - manual
+
+services:
+  react-storybook:
+    name: React Storybook
+    description: Component development server for the stable React implementation.
+    commands:
+      start: |
+        ona environment port open 3011 --admission creator_only --name "React Storybook"
+        export ONA_EXPOSED_HOST="$(ona environment port get 3011 -f URL | cut -c 9-)"
+        exec env __VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS="$ONA_EXPOSED_HOST" yarn workspace @carbon/react storybook --host 0.0.0.0
+      ready: curl -fsS http://localhost:3011/ >/dev/null
+    readinessTimeout: 600s
+    triggeredBy:
+      - manual
+      - postEnvironmentStart
+
+  react-v12-storybook:
+    name: React v12 Storybook
+    description: Component development server for the feature-flagged React v12 implementation.
+    commands:
+      start: |
+        ona environment port open 3012 --admission creator_only --name "React v12 Storybook"
+        export ONA_EXPOSED_HOST="$(ona environment port get 3012 -f URL | cut -c 9-)"
+        exec env __VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS="$ONA_EXPOSED_HOST" yarn workspace @carbon/react storybook:v12 --host 0.0.0.0
+      ready: curl -fsS http://localhost:3012/ >/dev/null
+    readinessTimeout: 600s
+    triggeredBy:
+      - manual
+      - postEnvironmentStart
+
+  web-components-storybook:
+    name: Web Components Storybook
+    description: Component development server for the stable Web Components implementation.
+    commands:
+      start: |
+        ona environment port open 6011 --admission creator_only --name "Web Components Storybook"
+        export ONA_EXPOSED_HOST="$(ona environment port get 6011 -f URL | cut -c 9-)"
+        exec env __VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS="$ONA_EXPOSED_HOST" yarn workspace @carbon/web-components storybook --host 0.0.0.0
+      ready: curl -fsS http://localhost:6011/ >/dev/null
+    readinessTimeout: 600s
+    triggeredBy:
+      - manual
+      - postEnvironmentStart
+
+  web-components-v12-storybook:
+    name: Web Components v12 Storybook
+    description: Component development server for the feature-flagged Web Components v12 implementation.
+    commands:
+      start: |
+        ona environment port open 6012 --admission creator_only --name "Web Components v12 Storybook"
+        export ONA_EXPOSED_HOST="$(ona environment port get 6012 -f URL | cut -c 9-)"
+        exec env __VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS="$ONA_EXPOSED_HOST" yarn workspace @carbon/web-components storybook:v12 --host 0.0.0.0
+      ready: curl -fsS http://localhost:6012/ >/dev/null
+    readinessTimeout: 600s
+    triggeredBy:
+      - manual
+      - postEnvironmentStart

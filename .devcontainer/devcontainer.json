@@ -1,0 +1,24 @@
+{
+  "name": "Carbon Design System",
+  "build": {
+    "context": ".",
+    "dockerfile": "Dockerfile"
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "moby": false
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "ms-azuretools.vscode-docker",
+        "ms-playwright.playwright",
+        "stylelint.vscode-stylelint",
+        "unifiedjs.vscode-mdx"
+      ]
+    }
+  }
+}
