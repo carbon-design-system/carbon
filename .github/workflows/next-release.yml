@@ -15,19 +15,25 @@ on:
         default: true
 
 jobs:
-  build:
-    name: Create Release
+  version:
+    name: Version and tag
     if: github.ref == 'refs/heads/next'
     runs-on: ubuntu-latest-larger-disk
     timeout-minutes: 60
-    # Needed as recommended by npm docs on publishing with provenance https://docs.npmjs.com/generating-provenance-statements
     permissions:
-      id-token: write
       contents: write
     steps:
+      - name: Generate token
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        id: generate_token
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
+          token: ${{ steps.generate_token.outputs.token }}
 
       - name: Configure git
         run: |
@@ -35,7 +41,7 @@ jobs:
           git config user.name "github-actions[bot]"
 
       - name: Use Node.js version from .nvmrc
-        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: '.nvmrc'
           registry-url: 'https://registry.npmjs.org'
@@ -43,20 +49,24 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable --check-cache
 
-      - name: Build project
-        run: yarn build
-
-      - name: Run Continuous Integration checks
-        run: yarn ci-check
-
-      - name: Publish packages under the `v12-alpha` dist tag
+      - name: Version packages
         run: |
-          yarn lerna publish prerelease --preid alpha --pre-dist-tag v12-alpha \
+          yarn lerna version prerelease --preid alpha --no-git-tag-version \
             ${{ github.event.inputs.dry_run != 'true' && '--yes' || '' }}
 
+      - name: Commit version bumps
+        if: github.event.inputs.dry_run != 'true'
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "lerna version produced no changes"
+            exit 1
+          fi
+          git add -A
+          git commit -m "chore(release): ${{ github.event.inputs.tag }}"
+          git push origin HEAD:next
+
       - name: Create git tag
-        if: ${{ github.event.inputs.dry_run != 'true' }}
+        if: github.event.inputs.dry_run != 'true'
         run: |
           git tag -a "${{ github.event.inputs.tag }}" -m "${{ github.event.inputs.tag }}"
-          git push origin "${{ github.event.inputs.tag }}"
-
+          git push origin "refs/tags/${{ github.event.inputs.tag }}"
