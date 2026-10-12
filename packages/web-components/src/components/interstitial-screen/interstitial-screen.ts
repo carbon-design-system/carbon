@@ -70,9 +70,9 @@ class CDSInterstitialScreen extends HostListenerMixin(LitElement) {
   private _wasOpen = false;
   private _trapFocusAPI: { cleanup: () => void } | null = null;
 
-  /** Lit context provider — scoped to this element instance.
-   *  `protected` (not private) so tests can inspect context state directly
-   *  without having to pierce the shadow DOM. */
+  /**
+   * Lit context provider, scoped to this element instance.
+   */
   protected _contextProvider = new ContextProvider(this, {
     context: interstitialContext,
     initialValue: {
@@ -90,7 +90,6 @@ class CDSInterstitialScreen extends HostListenerMixin(LitElement) {
       ...current,
       state: { ...current.state, ...patch },
     });
-    this.requestUpdate();
   }
 
   connectedCallback() {

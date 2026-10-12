@@ -29,14 +29,27 @@ const headerBlockClass = `${blockClass}--internal-header`;
  */
 @customElement(`${prefix}-interstitial-screen-header`)
 class CDSInterstitialScreenHeader extends HostListenerMixin(LitElement) {
+  /**
+   * Provide an optional title to be applied to the header.
+   */
   @property({ reflect: true, attribute: 'header-title' })
   headerTitle: string = '';
   @property({ reflect: true })
   slot = 'header';
+  /**
+   * Tooltip text and aria label for the Close button icon.
+   */
   @property({ reflect: true, attribute: 'header-subtitle' })
   headerSubTitle: string = '';
+  /**
+   * Tooltip text and aria label for the Close button icon.
+   */
   @property({ reflect: true })
   closeIconDescription: string = 'Close';
+
+  /**
+   * Optional parameter to hide the progress indicator when multiple steps are used.
+   */
   @property({ type: Boolean, reflect: true })
   hideProgressIndicator: boolean = false;
 
