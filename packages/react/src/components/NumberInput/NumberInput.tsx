@@ -715,7 +715,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     const numberInputClasses = cx({
       [`${prefix}--number`]: true,
       [`${prefix}--number--helpertext`]: true,
-      [`${prefix}--number--readonly`]: readOnly && !normalizedProps.disabled,
+      [`${prefix}--number--readonly`]: readOnly && !disabled,
       [`${prefix}--number--light`]: light,
       [`${prefix}--number--nolabel`]: hideLabel,
       [`${prefix}--number--nosteppers`]: hideSteppers,
