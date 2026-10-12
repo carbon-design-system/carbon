@@ -69,7 +69,12 @@ interactions that come with the calendar menu or a dropdown.
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig({ story: DatePickerStories.Simple }),
+        stackblitzPrefillConfig({
+          story: DatePickerStories.Simple,
+          customFunctionDefs: [
+            `const getDatePickerInputArgs = ${DatePickerStories.getDatePickerInputArgs.toString()};`,
+          ],
+        }),
     },
   ]}
 />
@@ -88,6 +93,9 @@ years, however they work best when used for recent or near future dates.
       onClick: () =>
         stackblitzPrefillConfig({
           story: DatePickerStories.SingleWithCalendar,
+          customFunctionDefs: [
+            `const getDatePickerInputArgs = ${DatePickerStories.getDatePickerInputArgs.toString()};`,
+          ],
         }),
     },
   ]}
@@ -98,7 +106,12 @@ years, however they work best when used for recent or near future dates.
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig({ story: DatePickerStories.RangeWithCalendar }),
+        stackblitzPrefillConfig({
+          story: DatePickerStories.RangeWithCalendar,
+          customFunctionDefs: [
+            `const getDatePickerInputArgs = ${DatePickerStories.getDatePickerInputArgs.toString()};`,
+          ],
+        }),
     },
   ]}
 />
@@ -115,7 +128,12 @@ You can use the `DatePickerSkeleton` component to render a skeleton variant of a
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig({ story: DatePickerStories.Skeleton }),
+        stackblitzPrefillConfig({
+          story: DatePickerStories.Skeleton,
+          customFunctionDefs: [
+            `const getDatePickerInputArgs = ${DatePickerStories.getDatePickerInputArgs.toString()};`,
+          ],
+        }),
     },
   ]}
 />
@@ -128,7 +146,12 @@ You can use the `DatePickerSkeleton` component to render a skeleton variant of a
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig({ story: DatePickerStories.withAILabel }),
+        stackblitzPrefillConfig({
+          story: DatePickerStories.withAILabel,
+          customFunctionDefs: [
+            `const getDatePickerInputArgs = ${DatePickerStories.getDatePickerInputArgs.toString()};`,
+          ],
+        }),
     },
   ]}
 />

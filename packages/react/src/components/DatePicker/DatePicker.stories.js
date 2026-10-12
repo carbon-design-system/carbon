@@ -38,7 +38,7 @@ const sharedArgs = {
   warnText: 'Warning message goes here',
 };
 
-const getDatePickerInputArgs = ({
+export const getDatePickerInputArgs = ({
   allowInput,
   closeOnSelect,
   dateFormat,
