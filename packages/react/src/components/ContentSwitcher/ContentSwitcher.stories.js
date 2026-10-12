@@ -239,3 +239,32 @@ export const WithTabs = (args) => {
 WithTabs.args = { ...sharedArgs };
 WithTabs.argTypes = { ...sharedArgTypes };
 
+export const WithTabsIcon = (args) => {
+  return (
+    <Tabs>
+      <ContentSwitcher {...args}>
+        <IconSwitch
+          name="one"
+          text="Table of Contents"
+          disabled={args.disabled}>
+          <TableOfContents />
+        </IconSwitch>
+        <IconSwitch name="two" text="Workspace Test" disabled={args.disabled}>
+          <Workspace />
+        </IconSwitch>
+        <IconSwitch name="three" text="View Mode" disabled={args.disabled}>
+          <ViewMode_2 />
+        </IconSwitch>
+      </ContentSwitcher>
+      <TabPanels>
+        <TabPanel>Tab 1</TabPanel>
+        <TabPanel>Tab 2</TabPanel>
+        <TabPanel>Tab 3</TabPanel>
+      </TabPanels>
+    </Tabs>
+  );
+};
+
+WithTabsIcon.args = { ...sharedArgs };
+WithTabsIcon.argTypes = { ...sharedArgTypes };
+

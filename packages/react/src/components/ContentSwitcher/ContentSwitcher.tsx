@@ -28,7 +28,6 @@ import { TabsContext } from '../Tabs/Tabs';
 
 export interface ContentSwitcherProps
   extends Omit<HTMLAttributes<HTMLElement>, 'onChange'> {
-
   /**
    * Pass in Switch components to be rendered in the ContentSwitcher
    */
