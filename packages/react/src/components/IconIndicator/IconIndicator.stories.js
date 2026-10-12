@@ -7,7 +7,6 @@
 
 import React from 'react';
 import IconIndicator from '.';
-import { IconIndicatorKinds } from './index';
 import mdx from './IconIndicator.mdx';
 
 export default {

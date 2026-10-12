@@ -8,60 +8,48 @@
  */
 
 /**
- * DTCG round-trip tests.
+ * Token round-trip tests.
  *
- * Verifies that every token in src/dtcg/layout.json is correctly resolved
- * by the Style Dictionary pipeline and present in both the JS and Sass
- * generated outputs with the expected resolved value.
- *
- * The converter logic under test:
- *   - "miniUnits": $value (grid steps) × 8 ÷ 16 → rem string
- *   - "rem":       $value (px) ÷ 16 → rem string
- *   - (none):      $value passed through as-is
+ * Verifies that every token in tokens/layout.tokens.json is present in both
+ * the JS and Sass generated outputs with the expected CSS value:
+ *   - dimension: `{ value, unit }` → "<value><unit>"
+ *   - number:    the number, followed by the `com.ibm.carbon` layout unit
+ *                when one is set
  */
 
 import { SassRenderer } from '@carbon/test-utils/scss';
-import dtcg from '../src/dtcg/layout.json';
+import tokens from '../tokens/layout.tokens.json';
 
 const { render } = SassRenderer.create(__dirname);
 
-const BASE_FONT_SIZE = 16;
-const MINI_UNIT = 8;
-
 /**
- * Apply the same converter logic as the SD formats so the test is
- * independent of the generated files — it derives expected values
- * directly from the JSON.
+ * Derive the expected value directly from the JSON so the test is
+ * independent of the Style Dictionary formats.
  */
-function resolveExpected(value, carbonLayout) {
-  const converter = carbonLayout?.converter;
-  if (converter === 'miniUnits') {
-    return `${(Number(value) * MINI_UNIT) / BASE_FONT_SIZE}rem`;
+function resolveExpected(token) {
+  const { $value } = token;
+  if (typeof $value === 'object') {
+    return `${$value.value}${$value.unit}`;
   }
-  if (converter === 'rem') {
-    return `${Number(value) / BASE_FONT_SIZE}rem`;
-  }
+  const unit = token.$extensions?.['com.ibm.carbon']?.layout?.unit;
   // Unitless zero is preserved as the number 0 in JS exports.
-  if (value === '0' || value === 0) return 0;
-  return String(value);
+  return unit ? `${$value}${unit}` : $value;
 }
 
-// Build test cases from the grouped DTCG JSON — one entry per leaf token.
+// Build test cases from the grouped token JSON — one entry per leaf token.
 // Structure: { groupName: { $description, tokenName: { $type, $value, ... } } }
 const testCases = [];
-for (const [groupKey, groupVal] of Object.entries(dtcg)) {
+for (const [groupKey, groupVal] of Object.entries(tokens)) {
   if (groupKey.startsWith('$')) continue; // skip $schema, $description
   for (const [tokenKey, tokenDef] of Object.entries(groupVal)) {
     if (tokenKey.startsWith('$')) continue; // skip $description on group
-    const carbonLayout = tokenDef.$extensions?.['carbon.layout'];
-    const expected = resolveExpected(tokenDef.$value, carbonLayout);
-    testCases.push([tokenKey, expected]);
+    testCases.push([tokenKey, resolveExpected(tokenDef)]);
   }
 }
 
 // ── JS round-trip ─────────────────────────────────────────────────────────────
 
-describe('DTCG → JS round-trip', () => {
+describe('tokens → JS round-trip', () => {
   it.each(testCases)(
     'token `%s` resolves to correct JS value',
     async (tokenName, expected) => {
@@ -80,7 +68,7 @@ describe('DTCG → JS round-trip', () => {
 
 // ── Sass round-trip ───────────────────────────────────────────────────────────
 
-describe('DTCG → Sass round-trip', () => {
+describe('tokens → Sass round-trip', () => {
   it.each(testCases)(
     'token `%s` resolves to correct Sass variable value',
     async (tokenName, expected) => {

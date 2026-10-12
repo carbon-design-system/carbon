@@ -74,6 +74,11 @@ $inset-transition: inset 110ms motion(standard, productive);
   }
 }
 
+// RTL caret display
+:host(#{$prefix}-tabs:dir(rtl)) .#{$prefix}--tab--overflow-nav-button svg {
+  transform: scaleX(-1);
+}
+
 :host(#{$prefix}-tabs) {
   @include focus-outline('reset');
 

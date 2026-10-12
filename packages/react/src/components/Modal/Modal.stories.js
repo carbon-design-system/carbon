@@ -12,8 +12,6 @@ import Modal from './Modal';
 import Button from '../Button';
 import Select from '../Select';
 import { MultiSelect } from '../MultiSelect';
-import { Checkbox as CheckboxIcon } from '@carbon/icons-react';
-import { Popover, PopoverContent } from '../Popover';
 import Dropdown from '../Dropdown';
 import SelectItem from '../SelectItem';
 import TextInput from '../TextInput';
@@ -133,7 +131,6 @@ const sharedParameters = {
 
 export const Default = (args) => {
   const [open, setOpen] = useState(true);
-  const [popoverOpen, setPopoverOpen] = useState(false);
   return (
     <>
       <Button onClick={() => setOpen(true)}>Launch modal</Button>
