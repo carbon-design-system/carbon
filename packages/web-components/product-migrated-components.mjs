@@ -12,6 +12,10 @@
  * migrated component's stories and MDX files.
  */
 export const productMigratedStoryGlobs = [
+  '../src/examples/import-and-upload/import-and-upload.stories.ts',
+  '../src/examples/import-and-upload/*.mdx',
+  '../src/components/add-select/add-select.stories.ts',
+  '../src/components/add-select/*.mdx',
   '../src/components/action-set/action-set.stories.ts',
   '../src/components/action-set/*.mdx',
   '../src/components/full-page-error/full-page-error.stories.ts',
@@ -48,6 +52,18 @@ export const productMigratedStoryGlobs = [
   '../src/components/user-avatar/*.mdx',
   '../src/components/truncated-text/truncated-text.stories.ts',
   '../src/components/truncated-text/*.mdx',
+  '../src/examples/generate-an-api-key/generate-an-api-key.stories.ts',
+  '../src/examples/generate-an-api-key/*.mdx',
+  '../src/examples/export-modal/export-modal.stories.ts',
+  '../src/examples/export-modal/*.mdx',
+  '../src/examples/delete-and-remove/delete-and-remove.stories.ts',
+  '../src/examples/delete-and-remove/*.mdx',
+  '../src/examples/coachmark/coachmark-fixed/coachmark-fixed.stories.ts',
+  '../src/examples/coachmark/coachmark-fixed/*.mdx',
+  '../src/examples/coachmark/coachmark-overlay-elements/coachmark-overlay-elements.stories.ts',
+  '../src/examples/coachmark/coachmark-overlay-elements/*.mdx',
+  '../src/examples/coachmark/coachmark-stacked/coachmark-stacked.stories.ts',
+  '../src/examples/coachmark/coachmark-stacked/*.mdx',
 ];
 
 /**
@@ -64,6 +80,7 @@ export const productMigratedStoryGlobs = [
  */
 export const excludeProductsComponents = [
   'src/components/action-set/**/*',
+  'src/components/add-select/**/*',
   'src/components/full-page-error/**/*',
   'src/components/truncated-text/**/*',
   'src/components/big-number/**/*',
