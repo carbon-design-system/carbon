@@ -12,6 +12,8 @@
  * migrated component's stories and MDX files.
  */
 export const productMigratedStoryGlobs = [
+  '../src/examples/import-and-upload/import-and-upload.stories.ts',
+  '../src/examples/import-and-upload/*.mdx',
   '../src/components/add-select/add-select.stories.ts',
   '../src/components/add-select/*.mdx',
   '../src/components/action-set/action-set.stories.ts',
