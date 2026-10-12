@@ -7,7 +7,6 @@
 
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
-import { ifDefined } from 'lit/directives/if-defined.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import Copy16 from '@carbon/icons/es/copy/16.js';
 import { prefix } from '../../globals/settings';
@@ -33,10 +32,11 @@ class CDSCopyButton extends FocusMixin(LitElement) {
   buttonClassName;
 
   /**
-   * Specify the kind of Button you want to create. Defaults to `ghost`.
+   * Optionally specify the kind of Button you want to create. When not set,
+   * the copy button renders with its default copy-button styles.
    */
   @property({ reflect: true })
-  kind?: BUTTON_KIND | string = BUTTON_KIND.GHOST;
+  kind?: BUTTON_KIND;
 
   /**
    * `true` if the button should be disabled.
@@ -69,10 +69,10 @@ class CDSCopyButton extends FocusMixin(LitElement) {
   feedbackTimeout = 2000;
 
   /**
-   * Specify the size of the Button. Defaults to `md`.
+   * Specify the size of the Button. Defaults to `lg`.
    */
   @property({ reflect: true })
-  size?: ICON_BUTTON_SIZE | string = ICON_BUTTON_SIZE.MEDIUM;
+  size?: ICON_BUTTON_SIZE | string = ICON_BUTTON_SIZE.LARGE;
 
   render() {
     const {
@@ -101,7 +101,7 @@ class CDSCopyButton extends FocusMixin(LitElement) {
         button-class-name=${classes}
         exportparts="button"
         align=${align}
-        kind=${ifDefined(kind)}
+        kind=${kind ?? ''}
         size=${size}>
         ${iconLoader(Copy16, {
           slot: 'icon',

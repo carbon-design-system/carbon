@@ -28,8 +28,8 @@ $css--plex: true !default;
   outline: none;
 }
 
-// Ghost kind uses $link-primary as its text color, so fill: currentColor would be blue.
-// The SVG is rendered in cds-copy-button's own shadow, so we target the host directly.
+// Ghost kind uses $link-primary as its text color via currentColor, so the icon
+// fill needs to be overridden to remain $icon-primary.
 :host([kind='ghost']) {
   svg {
     fill: $icon-primary;

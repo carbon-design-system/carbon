@@ -76,23 +76,23 @@ describe('Button props', () => {
     await expect(el).shadowDom.to.equalSnapshot();
   });
 
-  it('should default kind to ghost', async () => {
+  it('should not set kind by default', async () => {
     const el = await fixture(html`
       <cds-copy-button icon-description="Copy to clipboard"> </cds-copy-button>
     `);
 
-    expect(el).to.have.attribute('kind', 'ghost');
+    expect(el).to.not.have.attribute('kind');
     const copy = el.shadowRoot?.querySelector('cds-copy');
-    expect(copy).to.have.attribute('kind', 'ghost');
+    expect(copy).to.have.attribute('kind', '');
   });
 
-  it('should default size to md', async () => {
+  it('should default size to lg', async () => {
     const el = await fixture(html`
       <cds-copy-button icon-description="Copy to clipboard"> </cds-copy-button>
     `);
 
     const copy = el.shadowRoot?.querySelector('cds-copy');
-    expect(copy).to.have.attribute('size', 'md');
+    expect(copy).to.have.attribute('size', 'lg');
   });
 
   it('should call the click handler', async () => {
