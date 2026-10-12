@@ -137,6 +137,64 @@ describe('cds-password-input', () => {
     expect(error.textContent).to.include('This is invalid text');
   });
 
+  it('should not show invalid state when disabled or readonly', async () => {
+    const states = ['disabled', 'readonly'];
+
+    for (const state of states) {
+      const el = await fixture(html`
+        <cds-password-input
+          ?disabled="${state === 'disabled'}"
+          invalid
+          invalid-text="Invalid message"
+          label="test-label"
+          ?readonly="${state === 'readonly'}">
+        </cds-password-input>
+      `);
+      const input = el.shadowRoot.querySelector('input');
+      const fieldWrapper = el.shadowRoot.querySelector(
+        '.cds--text-input__field-wrapper'
+      );
+
+      expect(input.classList.contains('cds--text-input--invalid')).to.be.false;
+      expect(input.hasAttribute('data-invalid')).to.be.false;
+      expect(fieldWrapper.hasAttribute('data-invalid')).to.be.false;
+      expect(el.shadowRoot.querySelector('.cds--form-requirement')).to.be.null;
+      expect(el.shadowRoot.querySelector('.cds--text-input__invalid-icon')).to
+        .be.null;
+    }
+  });
+
+  it('should not show warning state when disabled or readonly', async () => {
+    const states = ['disabled', 'readonly'];
+
+    for (const state of states) {
+      const el = await fixture(html`
+        <cds-password-input
+          ?disabled="${state === 'disabled'}"
+          label="test-label"
+          ?readonly="${state === 'readonly'}"
+          warn
+          warn-text="Warn message">
+        </cds-password-input>
+      `);
+      const input = el.shadowRoot.querySelector('input');
+      const fieldWrapper = el.shadowRoot.querySelector(
+        '.cds--text-input__field-wrapper'
+      );
+
+      expect(input.classList.contains('cds--text-input--warning')).to.be.false;
+      expect(
+        fieldWrapper.classList.contains(
+          'cds--text-input__field-wrapper--warning'
+        )
+      ).to.be.false;
+      expect(el.shadowRoot.querySelector('.cds--form-requirement')).to.be.null;
+      expect(
+        el.shadowRoot.querySelector('.cds--text-input__invalid-icon--warning')
+      ).to.be.null;
+    }
+  });
+
   it('should apply size attribute', async () => {
     const el = await fixture(html`
       <cds-password-input size="sm"></cds-password-input>

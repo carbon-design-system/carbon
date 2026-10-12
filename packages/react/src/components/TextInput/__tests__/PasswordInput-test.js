@@ -359,6 +359,74 @@ describe('PasswordInput', () => {
         `${prefix}--form-requirement`
       );
     });
+
+    it('should not show invalid state when disabled or readOnly', () => {
+      ['disabled', 'readOnly'].forEach((state) => {
+        const { container, unmount } = render(
+          <PasswordInput
+            id="input-1"
+            labelText="PasswordInput label"
+            disabled={state === 'disabled'}
+            invalid
+            invalidText="Invalid message"
+            readOnly={state === 'readOnly'}
+          />
+        );
+
+        const input = screen.getByLabelText('PasswordInput label');
+        expect(input).not.toHaveClass(`${prefix}--text-input--invalid`);
+        expect(input).not.toHaveAttribute('data-invalid');
+        expect(input).not.toHaveAttribute('aria-invalid');
+        expect(screen.queryByText('Invalid message')).not.toBeInTheDocument();
+
+        // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+        const fieldWrapper = container.querySelector(
+          `.${prefix}--text-input__field-wrapper`
+        );
+        expect(fieldWrapper).not.toHaveAttribute('data-invalid');
+        // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+        expect(
+          container.querySelector(`svg.${prefix}--text-input__invalid-icon`)
+        ).not.toBeInTheDocument();
+
+        unmount();
+      });
+    });
+
+    it('should not show warning state when disabled or readOnly', () => {
+      ['disabled', 'readOnly'].forEach((state) => {
+        const { container, unmount } = render(
+          <PasswordInput
+            id="input-1"
+            labelText="PasswordInput label"
+            disabled={state === 'disabled'}
+            readOnly={state === 'readOnly'}
+            warn
+            warnText="Warn message"
+          />
+        );
+
+        const input = screen.getByLabelText('PasswordInput label');
+        expect(input).not.toHaveClass(`${prefix}--text-input--warning`);
+        expect(screen.queryByText('Warn message')).not.toBeInTheDocument();
+
+        // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+        const fieldWrapper = container.querySelector(
+          `.${prefix}--text-input__field-wrapper`
+        );
+        expect(fieldWrapper).not.toHaveClass(
+          `${prefix}--text-input__field-wrapper--warning`
+        );
+        // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+        expect(
+          container.querySelector(
+            `svg.${prefix}--text-input__invalid-icon--warning`
+          )
+        ).not.toBeInTheDocument();
+
+        unmount();
+      });
+    });
   });
 
   describe('behaves as expected', () => {
