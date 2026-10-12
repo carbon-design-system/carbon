@@ -8,8 +8,10 @@
 import { action } from 'storybook/actions';
 import React, { useState } from 'react';
 import Button from '../../Button';
+import { MenuItem } from '../../Menu';
 import OverflowMenu from '../../OverflowMenu';
 import OverflowMenuItem from '../../OverflowMenuItem';
+import { useFeatureFlag } from '../../FeatureFlags';
 import {
   default as DataTable,
   TableContainer,
@@ -376,6 +378,7 @@ SmallPersistentToolbar.argTypes = {
 };
 
 export const WithOverflowMenu = ({ persistent, ...args }) => {
+  const enableV12OverflowMenu = useFeatureFlag('enable-v12-overflowmenu');
   const [searchValue, setSearchValue] = useState('');
 
   const filteredRows = rows.filter((row) => {
@@ -447,11 +450,19 @@ export const WithOverflowMenu = ({ persistent, ...args }) => {
                         </TableCell>
                       ))}
                       <TableCell className="cds--table-column-menu">
-                        <OverflowMenu size="sm" flipped>
-                          <OverflowMenuItem itemText="Stop app" />
-                          <OverflowMenuItem itemText="Restart app" />
-                          <OverflowMenuItem itemText="Rename app" />
-                        </OverflowMenu>
+                        {enableV12OverflowMenu ? (
+                          <OverflowMenu label="Options">
+                            <MenuItem label="Stop app" />
+                            <MenuItem label="Restart app" />
+                            <MenuItem label="Rename app" />
+                          </OverflowMenu>
+                        ) : (
+                          <OverflowMenu size="sm" flipped>
+                            <OverflowMenuItem itemText="Stop app" />
+                            <OverflowMenuItem itemText="Restart app" />
+                            <OverflowMenuItem itemText="Rename app" />
+                          </OverflowMenu>
+                        )}
                       </TableCell>
                     </TableRow>
                   ))}

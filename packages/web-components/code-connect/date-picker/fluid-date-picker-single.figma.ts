@@ -1,4 +1,4 @@
-// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=17544-267989&t=hgJuU7m9Y6EM076g-4
+// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=17544-267989&t=hgJuU7m9Y6EM076g-4
 // source=https://github.com/carbon-design-system/carbon/blob/main/packages/web-components/src/components/fluid-date-picker/fluid-date-picker.ts
 // component=cds-fluid-date-picker
 

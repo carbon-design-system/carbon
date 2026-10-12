@@ -225,7 +225,7 @@ $copy-btn-feedback: $background-inverse !default;
     overflow-y: auto;
     transition: max-height $duration-moderate-01 motion(standard, productive);
 
-    &:focus {
+    &:focus-within {
       @include focus-outline('outline');
 
       outline-offset: 0;
@@ -248,6 +248,10 @@ $copy-btn-feedback: $background-inverse !default;
     overflow: auto;
     padding-block-end: $spacing-06;
     padding-inline-end: $spacing-06;
+
+    &:focus {
+      outline: none;
+    }
   }
 
   .#{$prefix}--snippet--multi.#{$prefix}--snippet--no-copy

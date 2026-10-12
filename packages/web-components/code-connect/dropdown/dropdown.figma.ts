@@ -1,4 +1,4 @@
-// url=https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=14032-290635&mode=dev
+// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?type=design&node-id=14032-290635&mode=dev
 // source=https://github.com/carbon-design-system/carbon/blob/main/packages/web-components/src/components/dropdown/dropdown.ts
 // component=cds-dropdown
 

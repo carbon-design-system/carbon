@@ -1,4 +1,4 @@
-// url=https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=1854-1776&mode=dev
+// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?type=design&node-id=1854-1776&mode=dev
 // source=https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/Button/index.ts
 // component=Button
 

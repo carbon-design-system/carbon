@@ -12,7 +12,7 @@ import figma from '@figma/code-connect';
 
 figma.connect(
   FluidTextInput,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=15784-271289&t=4Ath5JqwaYJZxznq-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=15784-271289&t=4Ath5JqwaYJZxznq-4',
   {
     props: {
       labelText: figma.string('Label text'),
@@ -42,7 +42,7 @@ figma.connect(
 
 figma.connect(
   FluidTextInputSkeleton,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=15784-271289&t=4Ath5JqwaYJZxznq-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=15784-271289&t=4Ath5JqwaYJZxznq-4',
   {
     variant: { State: 'Skeleton' },
     example: () => <FluidTextInputSkeleton />,

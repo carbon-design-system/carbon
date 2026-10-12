@@ -1,4 +1,4 @@
-// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=3925-58667&m=dev
+// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=3925-58667&m=dev
 // source=https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/ProgressIndicator/ProgressIndicator.tsx
 // component=ProgressIndicator
 
@@ -34,7 +34,7 @@ export default {
 // This comment existed before the template file migration, figma issue is still open
 // figma.connect(
 //   ProgressIndicatorSkeleton,
-//   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=3925-58667&m=dev',
+//   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=3925-58667&m=dev',
 //   {
 //     variant: need nested variant selector here, https://github.com/figma/code-connect/issues/91
 //     props: {
