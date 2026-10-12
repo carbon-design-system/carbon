@@ -87,10 +87,28 @@ const HeaderPanel = React.forwardRef<HTMLDivElement, HeaderPanelProps>(
       Pick<ComponentProps<'header'>, 'onBlur' | 'onKeyDown'>
     > = {};
 
+    // Whether `element` is the header action that toggles this panel. Its own
+    // click handler toggles the panel, so closing it on blur as well would
+    // make it re-open.
+    const isPanelToggle = (element: Element | null) => {
+      if (!element) {
+        return false;
+      }
+      if (
+        href?.startsWith('#') &&
+        href.length > 1 &&
+        element.id === href.slice(1)
+      ) {
+        return true;
+      }
+      return !!element.closest(`.${prefix}--header__action--active`);
+    };
+
     if (addFocusListeners) {
       eventHandlers.onBlur = (event) => {
         if (
           !event.currentTarget.contains(event.relatedTarget) &&
+          !isPanelToggle(event.relatedTarget as Element | null) &&
           !lastClickedElement?.classList?.contains(
             `${prefix}--switcher__item-link`
           )

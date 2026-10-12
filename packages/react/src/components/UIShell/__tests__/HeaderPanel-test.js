@@ -9,6 +9,7 @@ import React from 'react';
 import HeaderPanel from '../HeaderPanel';
 import Switcher from '../Switcher';
 import SwitcherItem from '../SwitcherItem';
+import HeaderGlobalAction from '../HeaderGlobalAction';
 import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
@@ -181,5 +182,97 @@ describe('HeaderPanel', () => {
     await userEvent.click(document.body);
 
     expect(onHeaderPanelFocus).not.toHaveBeenCalled();
+  });
+  it('should close when the toggle button is clicked while a `SwitcherItem` has focus', async () => {
+    const SwitcherPanel = () => {
+      const [expanded, setExpanded] = React.useState(false);
+      const toggle = () => setExpanded((value) => !value);
+
+      return (
+        <>
+          <HeaderGlobalAction
+            aria-label="Switcher"
+            aria-expanded={expanded}
+            isActive={expanded}
+            onClick={toggle}
+            id="switcher-button">
+            <span />
+          </HeaderGlobalAction>
+          <HeaderPanel
+            data-testid="panel"
+            expanded={expanded}
+            onHeaderPanelFocus={toggle}
+            href="#switcher-button">
+            <Switcher aria-label="Switcher Container" expanded={expanded}>
+              <SwitcherItem aria-label="Link 1" href="#">
+                Link 1
+              </SwitcherItem>
+            </Switcher>
+          </HeaderPanel>
+        </>
+      );
+    };
+
+    render(<SwitcherPanel />);
+
+    const button = screen.getByRole('button', { name: 'Switcher' });
+    const panel = screen.getByTestId('panel');
+
+    await userEvent.click(button);
+    expect(panel).toHaveClass('cds--header-panel--expanded');
+
+    screen.getByRole('link', { name: 'Link 1' }).focus();
+    await userEvent.click(button);
+
+    expect(panel).not.toHaveClass('cds--header-panel--expanded');
+    expect(button).toHaveAttribute('aria-expanded', 'false');
+  });
+
+  it('should still close when another header action is clicked while a `SwitcherItem` has focus', async () => {
+    const SwitcherPanel = () => {
+      const [expanded, setExpanded] = React.useState(false);
+      const toggle = () => setExpanded((value) => !value);
+
+      return (
+        <>
+          <HeaderGlobalAction aria-label="Search" onClick={() => {}}>
+            <span />
+          </HeaderGlobalAction>
+          <HeaderGlobalAction
+            aria-label="Switcher"
+            aria-expanded={expanded}
+            isActive={expanded}
+            onClick={toggle}
+            id="switcher-button">
+            <span />
+          </HeaderGlobalAction>
+          <HeaderPanel
+            data-testid="panel"
+            expanded={expanded}
+            onHeaderPanelFocus={toggle}
+            href="#switcher-button">
+            <Switcher aria-label="Switcher Container" expanded={expanded}>
+              <SwitcherItem aria-label="Link 1" href="#">
+                Link 1
+              </SwitcherItem>
+            </Switcher>
+          </HeaderPanel>
+        </>
+      );
+    };
+
+    render(<SwitcherPanel />);
+
+    const button = screen.getByRole('button', { name: 'Switcher' });
+    const panel = screen.getByTestId('panel');
+
+    await userEvent.click(button);
+    expect(panel).toHaveClass('cds--header-panel--expanded');
+
+    screen.getByRole('link', { name: 'Link 1' }).focus();
+    await userEvent.click(screen.getByRole('button', { name: 'Search' }));
+
+    expect(panel).not.toHaveClass('cds--header-panel--expanded');
+    expect(button).toHaveAttribute('aria-expanded', 'false');
   });
 });
