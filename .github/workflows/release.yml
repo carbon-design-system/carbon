@@ -95,8 +95,8 @@ jobs:
   deploy-packages:
     needs: build
     runs-on: ubuntu-latest
-    # only trigger for stable releases, not release candidates
-    if: contains(github.ref_name, '-rc') == false
+    # only trigger for stable releases, not release candidates or alpha tags
+    if: contains(github.ref_name, '-rc') == false && contains(github.ref_name, '-alpha') == false
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
@@ -118,6 +118,8 @@ jobs:
 
   publish-web-components-cdn:
     needs: build
+    # skip for alpha tags
+    if: contains(github.ref_name, '-alpha') == false
     permissions:
       contents: read
     uses: ./.github/workflows/publish-web-components-cdn.yml
