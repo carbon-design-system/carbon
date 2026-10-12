@@ -119,6 +119,10 @@ export const Default = (args) => {
   return <Pagination {...args} />;
 };
 
+Default.args = {
+  ...args,
+};
+
 export const TooltipHover = {
   tags: ['!autodocs', '!dev'],
   parameters: {
@@ -141,6 +145,10 @@ export const MultiplePaginationComponents = (args) => {
   );
 };
 
+MultiplePaginationComponents.args = {
+  ...args,
+};
+
 MultiplePaginationComponents.storyName = 'Multiple Pagination components';
 
 export const PaginationWithCustomPageSizesLabel = (args) => {
@@ -160,6 +168,10 @@ export const PaginationWithCustomPageSizesLabel = (args) => {
   );
 };
 
+PaginationWithCustomPageSizesLabel.args = {
+  ...args,
+};
+
 PaginationWithCustomPageSizesLabel.storyName =
   'Pagination with custom page sizes label';
 PaginationWithCustomPageSizesLabel.parameters = {
@@ -176,6 +188,10 @@ export const PaginationUnknownPages = (args) => {
       <Pagination {...rest} pagesUnknown totalItems={undefined} />
     </div>
   );
+};
+
+PaginationUnknownPages.args = {
+  ...args,
 };
 
 PaginationUnknownPages.storyName = 'Unknown pages and items';
