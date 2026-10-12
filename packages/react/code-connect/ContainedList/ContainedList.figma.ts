@@ -1,4 +1,4 @@
-// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=16193-272726&t=cMvnFTYLPEhzhIpj-4
+// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=16193-272726&t=cMvnFTYLPEhzhIpj-4
 // source=https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/ContainedList/ContainedList.tsx
 // component=ContainedList
 

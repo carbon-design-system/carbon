@@ -597,7 +597,7 @@ export type { OrderedListProps } from './components/OrderedList/OrderedList';
 // export type { OptionsTileProps } from './components/OptionsTile';
 
 //overflow menu
-export type { OverflowMenuProps } from './components/OverflowMenu/OverflowMenu';
+export type { OverflowMenuProps } from './components/OverflowMenu/index';
 export type { OverflowMenuItemProps } from './components/OverflowMenuItem/OverflowMenuItem';
 
 //page header
@@ -819,3 +819,14 @@ export type { SwitcherItemProps } from './components/UIShell/SwitcherItem';
 
 //unordered list
 export type { UnorderedListProps } from './components/UnorderedList/UnorderedList';
+
+// TODO: uncomment in v12 — also remove from excludeProductsComponents
+// Re-export AddSelect utilities from @carbon/utilities
+// export { AddSelectData } from '@carbon/utilities';
+// export type {
+//   AddSelectItem,
+//   ItemDetailEntry,
+//   ItemDetails,
+//   ItemStatus,
+//   SearchOptions,
+// } from '@carbon/utilities';
