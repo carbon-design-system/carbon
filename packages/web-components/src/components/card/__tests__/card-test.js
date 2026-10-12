@@ -258,6 +258,90 @@ describe('cds-card-header', function () {
     });
   });
 
+  describe('data-has-ai-label reflection', () => {
+    const getHeaderDiv = (card) =>
+      card
+        .querySelector('cds-card-header')
+        .shadowRoot.querySelector('.cds--card__header');
+
+    it('should set data-has-ai-label when the card has an AI label', async () => {
+      const el = await fixture(html`
+        <cds-card>
+          <cds-ai-label slot="decorator"></cds-ai-label>
+          <cds-card-header><cds-card-title>T</cds-card-title></cds-card-header>
+        </cds-card>
+      `);
+      const header = el.querySelector('cds-card-header');
+      await el.updateComplete;
+      await header.updateComplete;
+      expect(getHeaderDiv(el).hasAttribute('data-has-ai-label')).to.be.true;
+    });
+
+    it('should not set data-has-ai-label when the card has no AI label', async () => {
+      const el = await fixture(html`
+        <cds-card>
+          <cds-card-header><cds-card-title>T</cds-card-title></cds-card-header>
+        </cds-card>
+      `);
+      const header = el.querySelector('cds-card-header');
+      await el.updateComplete;
+      await header.updateComplete;
+      expect(getHeaderDiv(el).hasAttribute('data-has-ai-label')).to.be.false;
+    });
+
+    it('should remove data-has-ai-label when the AI label is removed', async () => {
+      const el = await fixture(html`
+        <cds-card>
+          <cds-ai-label slot="decorator"></cds-ai-label>
+          <cds-card-header><cds-card-title>T</cds-card-title></cds-card-header>
+        </cds-card>
+      `);
+      const header = el.querySelector('cds-card-header');
+      await el.updateComplete;
+      await header.updateComplete;
+      expect(getHeaderDiv(el).hasAttribute('data-has-ai-label')).to.be.true;
+
+      el.querySelector('cds-ai-label').remove();
+      await oneEvent(
+        el.shadowRoot.querySelector('slot[name="decorator"]'),
+        'slotchange'
+      );
+      await el.updateComplete;
+      await header.updateComplete;
+
+      expect(el.hasAttribute('has-ai-label')).to.be.false;
+      expect(getHeaderDiv(el).hasAttribute('data-has-ai-label')).to.be.false;
+    });
+
+    it('should offset header actions when the card has an AI label and reset when removed', async () => {
+      const el = await fixture(html`
+        <cds-card>
+          <cds-ai-label slot="decorator"></cds-ai-label>
+          <cds-card-header>
+            <cds-card-title>T</cds-card-title>
+            <cds-card-actions></cds-card-actions>
+          </cds-card-header>
+        </cds-card>
+      `);
+      const header = el.querySelector('cds-card-header');
+      const actions = el.querySelector('cds-card-actions');
+      await el.updateComplete;
+      await header.updateComplete;
+      const withLabel = getComputedStyle(actions).insetInlineEnd;
+
+      el.querySelector('cds-ai-label').remove();
+      await oneEvent(
+        el.shadowRoot.querySelector('slot[name="decorator"]'),
+        'slotchange'
+      );
+      await el.updateComplete;
+      await header.updateComplete;
+      const withoutLabel = getComputedStyle(actions).insetInlineEnd;
+
+      expect(parseFloat(withLabel)).to.be.greaterThan(parseFloat(withoutLabel));
+    });
+  });
+
   it('should stop click propagation from decorator slot', async () => {
     let cardClicked = false;
     const el = await fixture(html`
