@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React from 'react';
 
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 
@@ -15,7 +15,7 @@ import DatePickerInput from '../DatePickerInput';
 import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
-import { View, FolderOpen, Folders, Information } from '@carbon/icons-react';
+import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import { useDocumentLang } from '../../internal/useDocumentLang';
 
 import mdx from './DatePicker.mdx';
@@ -153,7 +153,6 @@ export const Default = ({ readOnly, ...args }) => {
 };
 
 Default.args = { ...sharedArgs };
-
 Default.argTypes = {
   ...sharedArgTypes,
   datePickerType: {
@@ -239,6 +238,13 @@ export const SimpleWithLayer = (args) => {
   );
 };
 
+SimpleWithLayer.parameters = {
+  docs: {
+    source: {
+      type: 'code',
+    },
+  },
+};
 SimpleWithLayer.argTypes = { ...sharedArgTypes };
 
 export const SingleWithCalendarWithLayer = (args) => {
@@ -261,6 +267,13 @@ export const SingleWithCalendarWithLayer = (args) => {
   );
 };
 
+SingleWithCalendarWithLayer.parameters = {
+  docs: {
+    source: {
+      type: 'code',
+    },
+  },
+};
 SingleWithCalendarWithLayer.argTypes = { ...sharedArgTypes };
 
 export const RangeWithCalendarWithLayer = (args) => (
@@ -286,6 +299,13 @@ export const RangeWithCalendarWithLayer = (args) => (
   </WithLayer>
 );
 
+RangeWithCalendarWithLayer.parameters = {
+  docs: {
+    source: {
+      type: 'code',
+    },
+  },
+};
 RangeWithCalendarWithLayer.args = { ...sharedArgs };
 RangeWithCalendarWithLayer.argTypes = { ...sharedArgTypes };
 
