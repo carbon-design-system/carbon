@@ -1,13 +1,29 @@
-/**
- * Copyright IBM Corp. 2026
- *
- * This source code is licensed under the Apache-2.0 license found in the
- * LICENSE file in the root directory of this source tree.
- */
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/config' with (
+  $font-path: '@ibm/plex'
+);
 @use '@carbon/styles';
-@use '@carbon/ibm-products/css/index';
-@use '@carbon/react/scss/spacing' as *;
+
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/motion' as *;
+
+// IBM Products component styles — only the components used by this pattern:
+// AddSelect (AddSelect, AddSelectNext), Tearsheet (TearsheetNext),
+// EmptyStates (NoDataEmptyState), ActionSet (footer buttons),
+// UserAvatar (avatar icons in item rows)
+@use '@carbon/ibm-products/scss/components/AddSelect';
+@use '@carbon/ibm-products/scss/components/Tearsheet';
+@use '@carbon/ibm-products/scss/components/EmptyStates';
+@use '@carbon/ibm-products/scss/components/ActionSet';
+@use '@carbon/ibm-products/scss/components/UserAvatar';
 
 .example-container {
   padding: $spacing-05;

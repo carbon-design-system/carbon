@@ -6,26 +6,11 @@
  */
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type' as *;
-// ALIAS_STORY_STYLE_CONFIG is a Vite alias used in this repo's Storybook and
-// example-app builds. It resolves to the correct config entry point so that
-// $pkg-prefix picks up the dev prefix automatically (e.g. "dev-prefix--c4p"
-// in Storybook dev mode, "c4p" in production).
-//
-// In your own project, replace this @use with a direct import from the styles
-// package and hard-code your prefix if needed:
-//
-//   @use '@carbon/ibm-products-styles/scss/global/styles/project-settings'
-//     as c4p-settings;
-//
-// Then use the variable the same way:
-//   .#{c4p-settings.$pkg-prefix}--add-select__next-column { ... }
-//
-// Or simply hard-code the default prefix directly:
-//   .c4p--add-select__next-column { ... }
-@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
+// Prefix used by @carbon/ibm-products components (default: 'c4p').
+$c4p-prefix: 'c4p';
 
 .multi-add-select-with-bulk-actions-pattern {
-  .#{c4p-settings.$pkg-prefix}--add-select__next-column {
+  .#{$c4p-prefix}--add-select__next-column {
     padding-block-start: 0;
   }
 

@@ -17,6 +17,7 @@ export default {
   component: () => {},
   tags: ['autodocs'],
   parameters: {
+    layout: 'fullscreen',
     docs: {
       page: DocsPage,
     },
