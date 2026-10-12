@@ -2371,7 +2371,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/pictograms@npm:^12.86.0, @carbon/pictograms@workspace:packages/pictograms":
+"@carbon/pictograms@npm:^12.85.0, @carbon/pictograms@npm:^12.86.0, @carbon/pictograms@workspace:packages/pictograms":
   version: 0.0.0-use.local
   resolution: "@carbon/pictograms@workspace:packages/pictograms"
   dependencies:
