@@ -86,7 +86,11 @@ export const ContentSwitcher = ({
 }: ContentSwitcherProps) => {
   const prefix = useContext(PrefixContext);
 
-  const { selectedIndex: selectedIndexTabsContext, setSelectedIndex: setSelectedIndexTabsContext,  baseId } = React.useContext(TabsContext);
+  const {
+    selectedIndex: selectedIndexTabsContext,
+    setSelectedIndex: setSelectedIndexTabsContext,
+    baseId,
+  } = React.useContext(TabsContext);
 
   const isInsideTabs = Boolean(baseId);
 
@@ -96,7 +100,9 @@ export const ContentSwitcher = ({
     ? selectedIndexTabsContext
     : selectedIndexLocal;
 
-  const setSelectedIndex = isInsideTabs ? setSelectedIndexTabsContext : setSelectedIndexLocal;
+  const setSelectedIndex = isInsideTabs
+    ? setSelectedIndexTabsContext
+    : setSelectedIndexLocal;
 
   const prevSelectedIndexRef = useRef(selectedIndexProp);
   const switchRefs = useRef<HTMLButtonElement[]>([]);
@@ -130,7 +136,9 @@ export const ContentSwitcher = ({
     typeof event === 'object' && event !== null && 'key' in event;
 
   const handleChildChange = (event: SwitchEventHandlersParams) => {
-    if (typeof event.index === 'undefined') { return; }
+    if (typeof event.index === 'undefined') {
+      return;
+    }
 
     const { index } = event;
 
@@ -140,7 +148,9 @@ export const ContentSwitcher = ({
     ) {
       const nextIndex = getNextIndex(event.key, index, childrenArray.length);
 
-      if (typeof nextIndex !== 'number') { return; }
+      if (typeof nextIndex !== 'number') {
+        return;
+      }
 
       focusSwitch(nextIndex);
 
@@ -225,7 +235,6 @@ export const ContentSwitcher = ({
 
 ContentSwitcher.displayName = 'ContentSwitcher';
 ContentSwitcher.propTypes = {
-
   /**
    * Pass in Switch components to be rendered in the ContentSwitcher
    */

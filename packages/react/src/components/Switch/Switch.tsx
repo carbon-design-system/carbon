@@ -96,7 +96,9 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
     const { baseId } = React.useContext(TabsContext);
     const isInsideTabs = Boolean(baseId);
     const id = isInsideTabs ? `${baseId}-tab-${index}` : other.id;
-    const panelId = isInsideTabs ? `${baseId}-tabpanel-${index}` : other['aria-controls'];
+    const panelId = isInsideTabs
+      ? `${baseId}-tabpanel-${index}`
+      : other['aria-controls'];
 
     const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
@@ -131,8 +133,7 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
         {...other}
         {...commonProps}
         aria-controls={panelId}
-        id={id}
-      >
+        id={id}>
         <span className={`${prefix}--content-switcher__label`} title={text}>
           {text !== undefined ? text : children}
         </span>

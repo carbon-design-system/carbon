@@ -267,4 +267,3 @@ export const WithTabsIcon = (args) => {
 
 WithTabsIcon.args = { ...sharedArgs };
 WithTabsIcon.argTypes = { ...sharedArgTypes };
-
