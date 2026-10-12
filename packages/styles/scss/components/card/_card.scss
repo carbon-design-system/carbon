@@ -206,11 +206,11 @@
 
   // ─── Media (AspectRatio slot) ────────────────────────────────────────
   .#{$prefix}--card__media {
-    overflow: hidden;
     grid-column: 1 / -1;
     inline-size: 100%;
 
     @if enabled('enable-v12-release') {
+      overflow: hidden;
       // Top edge of card: round the top-start and top-end corners together.
       &:first-child {
         border-start-end-radius: $border-radius-08;
