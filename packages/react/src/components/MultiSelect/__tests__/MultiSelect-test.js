@@ -917,6 +917,24 @@ describe('MultiSelect', () => {
       }
     });
 
+    it('should set maxHeight on the listbox when autoAlign is enabled', async () => {
+      const items = generateItems(4, generateGenericItem);
+
+      render(
+        <MultiSelect
+          autoAlign
+          open
+          id="test"
+          label="test-label"
+          items={items}
+        />
+      );
+      await waitForPosition();
+
+      const listbox = screen.getByRole('listbox', { hidden: true });
+      expect(listbox.style.maxHeight).toBe('0px');
+    });
+
     it('should accept a `ref` for the underlying button element', async () => {
       const ref = React.createRef();
       const items = generateItems(4, generateGenericItem);
