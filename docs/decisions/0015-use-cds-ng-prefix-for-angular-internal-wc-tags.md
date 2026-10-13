@@ -1,4 +1,4 @@
-# 13. Use `cds-ng-*` as the internal custom element tag prefix for `@carbon/angular`
+# 15. Use `cds-ng-*` as the internal custom element tag prefix for `@carbon/angular`
 
 Date: 2026-09
 

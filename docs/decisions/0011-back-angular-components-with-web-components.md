@@ -1,4 +1,4 @@
-# 9. Back `@carbon/angular` with `@carbon/web-components` rather than reimplementing independently
+# 11. Back `@carbon/angular` with `@carbon/web-components` rather than reimplementing independently
 
 Date: 2026-09
 

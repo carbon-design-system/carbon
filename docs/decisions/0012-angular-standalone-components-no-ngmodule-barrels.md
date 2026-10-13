@@ -1,4 +1,4 @@
-# 10. Use Angular standalone components throughout; no NgModule barrel exports
+# 12. Use Angular standalone components throughout; no NgModule barrel exports
 
 Date: 2026-09
 

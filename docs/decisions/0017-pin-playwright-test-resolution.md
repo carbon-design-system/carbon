@@ -1,4 +1,4 @@
-# Use @playwright/test directly and pin via root resolutions
+# 17. Use @playwright/test directly and pin via root resolutions
 
 ## Status
 

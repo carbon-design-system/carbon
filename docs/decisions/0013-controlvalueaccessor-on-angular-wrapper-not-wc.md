@@ -1,4 +1,4 @@
-# 11. Implement `ControlValueAccessor` on the Angular wrapper, not on the Web Component
+# 13. Implement `ControlValueAccessor` on the Angular wrapper, not on the Web Component
 
 Date: 2026-09
 

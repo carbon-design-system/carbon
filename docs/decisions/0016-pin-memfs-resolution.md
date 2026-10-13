@@ -1,4 +1,4 @@
-# Pin memfs version via root resolutions
+# 16. Pin memfs version via root resolutions
 
 ## Status
 

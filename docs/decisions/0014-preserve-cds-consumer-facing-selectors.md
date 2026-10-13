@@ -1,4 +1,4 @@
-# 12. Preserve `cds-*` as the consumer-facing Angular component selector prefix
+# 14. Preserve `cds-*` as the consumer-facing Angular component selector prefix
 
 Date: 2026-09
 
@@ -33,7 +33,7 @@ element. If the WC element is also registered as `cds-button`, Angular would
 recursively match the WC element inside the wrapper template as another
 `ButtonComponent`, causing infinite instantiation.
 
-This collision is fully resolved by ADR 0013: the WC element is registered under
+This collision is fully resolved by ADR 0015: the WC element is registered under
 the internal `cds-ng-button` tag, not `cds-button`. The Angular selector and the
 WC tag are distinct, so there is no recursion and no collision.
 
@@ -68,7 +68,7 @@ Options 2 and 3 were rejected:
   `docs/guides/cca-to-angular.md`), but the element names in templates remain
   `<cds-button>`, `<cds-modal>`, etc.
 - The `cds-*` Angular selector and the `cds-*` WC tag coexist without collision
-  because the WC is registered under `cds-ng-*` internally (ADR 0013). The
+  because the WC is registered under `cds-ng-*` internally (ADR 0015). The
   Angular selector matches only Angular component instances; the WC tag
   `cds-button` is never registered in the global custom element registry by
   `@carbon/angular`.
