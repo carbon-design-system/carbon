@@ -25,6 +25,7 @@
     "clean": "rimraf esm2022 fesm2022",
     "e2e": "playwright test",
     "playwright:install": "playwright install chromium",
+    "scaffold:component": "node tasks/scaffold-component/index.js",
     "storybook": "npx ng run carbon-angular:storybook",
     "storybook:build": "npx ng run carbon-angular:build-storybook",
     "test": "jest --passWithNoTests"

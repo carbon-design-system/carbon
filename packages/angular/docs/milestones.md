@@ -31,8 +31,8 @@ Yarn workspace, build toolchain, test runners, Storybook, and CI job.
 - `packages/angular/playwright.config.ts` — points at the Storybook build URL
 - `packages/angular/.storybook/main.ts` + `.storybook/preview.ts`
   (`@storybook/angular`)
-- `packages/angular/tasks/generate/` — token-substitution scaffold generator for
-  new components
+- `packages/angular/tasks/scaffold-component/` — token-substitution scaffold
+  generator for new components (`yarn scaffold:component <DisplayName>`)
   - `index.js`
   - `templates/index.ts`
   - `templates/components/DISPLAY_NAME.component.ts`

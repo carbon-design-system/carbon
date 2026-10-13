@@ -26,21 +26,23 @@ Peer dependencies required in your project:
 
 ## Usage
 
-Import the module for the component you need:
+Import the component directly into your standalone component or NgModule:
 
 ```ts
-// app.module.ts
-import { CDSAngularButtonModule } from '@carbon/angular';
+// my.component.ts
+import { Component } from '@angular/core';
+import { ButtonComponent } from '@carbon/angular';
 
-@NgModule({
-  imports: [CDSAngularButtonModule],
+@Component({
+  selector: 'app-root',
+  imports: [ButtonComponent],
+  template: `<cds-button kind="primary" (buttonClick)="onClick($event)"
+    >Click me</cds-button
+  >`,
 })
-export class AppModule {}
-```
-
-```html
-<!-- app.component.html -->
-<cds-button kind="primary" (click)="onClick()">Click me</cds-button>
+export class AppComponent {
+  onClick(e: MouseEvent) {}
+}
 ```
 
 Import Carbon global styles once in your app entry:
@@ -73,7 +75,26 @@ yarn workspace @carbon/angular test
 
 # Start Storybook
 yarn workspace @carbon/angular storybook
+
+# Scaffold a new component
+yarn workspace @carbon/angular scaffold:component <ComponentName>
 ```
+
+### Scaffolding new components
+
+To scaffold boilerplate for a new component:
+
+```bash
+yarn workspace @carbon/angular scaffold:component Modal
+```
+
+This generates the following structure under `src/components/Modal/`:
+
+- `Modal.component.ts` — Standalone Angular component wrapper rendering the
+  `cds-ng-modal` custom element
+- `index.ts` — Component barrel export
+- `__stories__/Modal.stories.ts` — Storybook story file
+- `__tests__/Modal.spec.ts` — Layer 1 Jest unit test suite
 
 ## License
 

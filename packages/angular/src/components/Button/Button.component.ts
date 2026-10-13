@@ -10,11 +10,9 @@ import {
   CUSTOM_ELEMENTS_SCHEMA,
   EventEmitter,
   Input,
-  NgModule,
   Output,
   ViewEncapsulation,
 } from '@angular/core';
-// CUSTOM_ELEMENTS_SCHEMA is used by CDSAngularButtonModule below.
 import CDSButton from '@carbon/web-components/es/components/button/button.js';
 import CDSButtonSet from '@carbon/web-components/es/components/button/button-set.js';
 import CDSButtonSkeleton from '@carbon/web-components/es/components/button/button-skeleton.js';
@@ -67,7 +65,8 @@ defineCustomElement(CDSButtonSkeleton, { name: 'cds-ng-button-skeleton' });
     /></cds-ng-button>
   `,
   encapsulation: ViewEncapsulation.None,
-  standalone: false,
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  standalone: true,
 })
 export class ButtonComponent {
   /** Mirrors the native `autofocus` attribute. */
@@ -167,11 +166,3 @@ export class ButtonComponent {
   /** Emitted when the button or inner `<a>` is clicked. */
   @Output() readonly buttonClick = new EventEmitter<MouseEvent>();
 }
-
-@NgModule({
-  declarations: [ButtonComponent],
-  exports: [ButtonComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-})
-// eslint-disable-next-line @typescript-eslint/no-extraneous-class
-export class CDSAngularButtonModule {}

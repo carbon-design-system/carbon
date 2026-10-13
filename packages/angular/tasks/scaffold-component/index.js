@@ -10,10 +10,12 @@
  * Component scaffold generator for @carbon/angular.
  *
  * Usage:
- *   node tasks/generate/index.js <DisplayName>
+ *   node tasks/scaffold-component/index.js <DisplayName>
+ *   # or
+ *   yarn scaffold:component <DisplayName>
  *
  * Example:
- *   node tasks/generate/index.js Button
+ *   yarn scaffold:component Button
  *
  * Generates the following files under src/components/<DisplayName>/:
  *   - <DisplayName>.component.ts
@@ -31,7 +33,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const DISPLAY_NAME = process.argv[2];
 
 if (!DISPLAY_NAME) {
-  console.error('Usage: node tasks/generate/index.js <DisplayName>');
+  console.error('Usage: yarn scaffold:component <DisplayName>');
   process.exit(1);
 }
 

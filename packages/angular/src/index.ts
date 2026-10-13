@@ -6,4 +6,4 @@
  */
 
 // Public API barrel — components exported here are part of the public surface.
-export { ButtonComponent, CDSAngularButtonModule } from './components/Button';
+export { ButtonComponent } from './components/Button';

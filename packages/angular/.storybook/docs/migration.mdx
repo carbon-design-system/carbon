@@ -46,8 +46,7 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 4. Fix any remaining `:not(:defined)` elements visible in the browser — these
    indicate a component whose backing Web Component has not yet been registered.
-   Check that you have imported the relevant `CDSAngular*Module` (or the
-   component directly in standalone mode).
+   Check that you have imported the component directly in your `imports` array.
 
 ---
 
@@ -68,7 +67,7 @@ import { Meta } from '@storybook/addon-docs/blocks';
 > This page is the discoverable entry point; the guide is the authoritative
 > reference.
 
-### Module import path
+### Component import path
 
 **Before:**
 
@@ -79,7 +78,7 @@ import { ButtonModule } from 'carbon-components-angular';
 **After:**
 
 ```ts
-import { CDSAngularButtonModule } from '@carbon/angular';
+import { ButtonComponent } from '@carbon/angular';
 ```
 
 Run `npx @carbon/upgrade migrate cca-update-module-imports --write` to automate

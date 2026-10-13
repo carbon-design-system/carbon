@@ -146,7 +146,7 @@ packages/
     │   ├── main.ts                       ← @storybook/angular
     │   └── preview.ts
     ├── tasks/
-    │   └── generate/
+    │   └── scaffold-component/
     │       ├── index.js                  ← token-substitution scaffold for new components
     │       └── templates/
     │           ├── index.ts
@@ -596,7 +596,22 @@ well-defined contract — every test can be fully specified from the `@Input()` 
 
 **Workflow per component:**
 
-1. **Write Layer 1 Jest tests first** (red). Derive test cases from:
+1. **Scaffold the component files:** Run the scaffold task to generate
+   boilerplate files under `src/components/<DisplayName>/`:
+
+   ```bash
+   yarn workspace @carbon/angular scaffold:component <DisplayName>
+   ```
+
+   This generates:
+
+   - `<DisplayName>.component.ts` — Standalone Angular wrapper class with
+     `cds-ng-*` custom element template
+   - `index.ts` — Component barrel export
+   - `__tests__/<DisplayName>.spec.ts` — Layer 1 Jest test starter
+   - `__stories__/<DisplayName>.stories.ts` — Storybook stories starter
+
+2. **Write Layer 1 Jest tests first** (red). Derive test cases from:
 
    - **The WC test suite for that component** — every scenario in
      `packages/web-components/src/components/<name>/__tests__/<name>-test.js` is
@@ -608,17 +623,25 @@ well-defined contract — every test can be fully specified from the `@Input()` 
      tests
    - Any new inputs added in §8 (DatePicker) or §7 (universal breaks/additions)
 
-2. **Write Layer 2 Playwright tests** (red). Derive interaction scenarios from:
+3. **Write Layer 2 Playwright tests** (red). Derive interaction scenarios from:
 
    - CCA spec keyboard/interaction cases that cannot run in jsdom
    - The WC package's own test suite for that element (confirms expected WC
      behaviour our wrapper depends on)
 
-3. **Implement the component** until all Layer 1 and Layer 2 tests pass (green).
+4. **Implement the component** until all Layer 1 and Layer 2 tests pass (green):
 
-4. **Add the Storybook story** with a `play()` function, maintaining one-for-one
-   parity with the WC story file (see §5 — Story parity rule). Every story
-   exported from
+   - Register the backing custom element using `defineCustomElement` with the
+     `cds-ng-*` prefix.
+   - Forward all inputs and attribute bindings to the inner `cds-ng-*` custom
+     element.
+   - Implement `ControlValueAccessor` (CVA) if the component is form-associated.
+   - Export the component from the root package barrel
+     (`packages/angular/src/index.ts`).
+
+5. **Complete the Storybook stories and docs** with a `play()` function,
+   maintaining one-for-one parity with the WC story file (see §5 — Story parity
+   rule). Every story exported from
    `packages/web-components/src/components/<name>/<name>.stories.ts` must have a
    matching named export in the Angular story file. Angular-only stories (CVA
    demos, `ReactiveFormsModule` usage) are appended after the parity block. Any
@@ -627,7 +650,7 @@ well-defined contract — every test can be fully specified from the `@Input()` 
    Access checker (`storybook-addon-accessibility-checker`) passes — this is
    Layer 3.
 
-5. **Refactor** — clean up implementation with all tests still green.
+6. **Refactor** — clean up implementation with all tests still green.
 
 This order means the test suite doubles as a living specification. Before any
 line of component code is written, the full set of acceptance criteria exists as

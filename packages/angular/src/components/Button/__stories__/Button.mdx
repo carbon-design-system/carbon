@@ -206,9 +206,9 @@ native `MouseEvent`.
 
 ## Angular-specific notes
 
-- **Standalone import:** `import { ButtonComponent } from '@carbon/angular'`
-- **NgModule import:**
-  `import { CDSAngularButtonModule } from '@carbon/angular'`
+- **Component import:** `import { ButtonComponent } from '@carbon/angular'` (use
+  in standalone `imports: [ButtonComponent]` or `NgModule`
+  `imports: [ButtonComponent]`)
 - The backing Web Component is registered internally as `cds-ng-button` — you
   will see this tag in DevTools. Your templates always use `cds-button`.
 - Radius is controlled via CSS custom properties that inherit through the shadow

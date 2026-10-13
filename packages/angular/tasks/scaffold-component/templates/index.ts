@@ -5,4 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { CDSAngularDISPLAY_NAMEModule } from './DISPLAY_NAME.component';
+export { DISPLAY_NAMEComponent } from './DISPLAY_NAME.component';

@@ -23,7 +23,6 @@
  */
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ButtonComponent } from '../Button.component';
 
 describe('ButtonComponent', () => {
@@ -36,8 +35,7 @@ describe('ButtonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ButtonComponent],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      imports: [ButtonComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ButtonComponent);

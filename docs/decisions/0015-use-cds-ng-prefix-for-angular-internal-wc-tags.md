@@ -79,6 +79,6 @@ no collision risk with either choice.
   there is no tag-name collision: the WC package registers `cds-button`, the
   Angular package registers `cds-ng-button`, and the consumer writes
   `<cds-button>` (the Angular selector).
-- The scaffold generator (`packages/angular/tasks/generate/`) uses
+- The scaffold generator (`packages/angular/tasks/scaffold-component/`) uses
   `cds-ng-KEBAB_NAME` as its template placeholder, enforcing the convention for
   all future components.

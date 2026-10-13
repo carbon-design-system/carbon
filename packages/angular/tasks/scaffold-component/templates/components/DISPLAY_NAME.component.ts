@@ -8,7 +8,6 @@
 import {
   Component,
   CUSTOM_ELEMENTS_SCHEMA,
-  NgModule,
   ViewEncapsulation,
 } from '@angular/core';
 
@@ -23,17 +22,9 @@ import {
   template: `<cds-ng-KEBAB_NAME></cds-ng-KEBAB_NAME>`,
   encapsulation: ViewEncapsulation.None,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  standalone: false,
+  standalone: true,
 })
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class DISPLAY_NAMEComponent {
   // TODO: add @Input() / @Output() bindings derived from the WC .d.ts
 }
-
-@NgModule({
-  declarations: [DISPLAY_NAMEComponent],
-  exports: [DISPLAY_NAMEComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-})
-// eslint-disable-next-line @typescript-eslint/no-extraneous-class
-export class CDSAngularDISPLAY_NAMEModule {}
