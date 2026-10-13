@@ -21,12 +21,40 @@
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/convert';
 @use '../../utilities/z-index' as *;
+@use '../../utilities/layout';
+
+/// Space between the invalid/warning icon and the rule divider beside it.
+/// Clamps to 8px ($spacing-03) for `xs` and `sm`, and 16px ($spacing-05) for
+/// `md` and `lg`.
+/// @access private
+/// @group number-input
+$-icon-gap: clamp(
+  $spacing-03,
+  layout.size('height') - $spacing-06,
+  $spacing-05
+);
+
+/// Space between the AI label and each of the rule dividers surrounding it,
+/// 8px for `xs` and `sm` and 16px for `md`, + 1px to account for the divider itself
+/// @access private
+/// @group number-input
+$-ai-label-gap: clamp(
+  convert.to-rem(9px),
+  layout.size('height') - $spacing-06 + convert.to-rem(1px),
+  convert.to-rem(17px)
+);
+
+/// The whole AI label cluster: a gap, the 16px icon, and another gap.
+/// @access private
+/// @group number-input
+$-ai-label-cluster: calc(2 * #{$-ai-label-gap} + #{convert.to-rem(16px)});
 
 /// Number input styles
 /// @access public
 /// @group number-input
 @mixin number-input {
   .#{$prefix}--number {
+    @include layout.use('size', $default: 'md', $min: 'xs', $max: 'lg');
     @include reset;
 
     position: relative;
@@ -41,7 +69,10 @@
   .#{$prefix}--number
     .#{$prefix}--number__input-wrapper--warning
     input[type='text'] {
-    padding-inline-end: convert.to-rem(128px);
+    // steppers + divider->icon gap + 16px icon + 16px padding
+    padding-inline-end: calc(
+      2 * layout.size('height') + #{$-icon-gap} + 2 * $spacing-05
+    );
   }
 
   .#{$prefix}--number input[type='number'],
@@ -58,14 +89,16 @@
     -moz-appearance: textfield;
     appearance: textfield;
     background-color: $field;
-    block-size: convert.to-rem(40px);
+    block-size: layout.size('height');
     border-block-end: convert.to-rem(1px) solid $border-strong;
     color: $text-primary;
     font-family: font-family('sans');
     font-weight: 400;
     inline-size: 100%;
     min-inline-size: 9.375rem;
-    padding-inline: $spacing-05 $spacing-12;
+
+    // steppers + 16px padding
+    padding-inline: $spacing-05 calc(2 * layout.size('height') + $spacing-05);
     transition:
       background-color $duration-fast-01 motion(standard, productive),
       outline $duration-fast-01 motion(standard, productive);
@@ -108,39 +141,10 @@
     }
 
     &[data-invalid] {
-      padding-inline-end: convert.to-rem(128px);
-    }
-  }
-
-  .#{$prefix}--number--lg.#{$prefix}--number {
-    input[type='number'],
-    input[type='text'] {
-      padding-inline-end: convert.to-rem(112px);
-
-      &[data-invalid] {
-        padding-inline-end: convert.to-rem(144px);
-      }
-    }
-
-    .#{$prefix}--number__input-wrapper--warning input[type='number'],
-    .#{$prefix}--number__input-wrapper--warning input[type='text'] {
-      padding-inline-end: convert.to-rem(144px);
-    }
-  }
-
-  .#{$prefix}--number--sm.#{$prefix}--number {
-    input[type='number'],
-    input[type='text'] {
-      padding-inline-end: convert.to-rem(80px);
-
-      &[data-invalid] {
-        padding-inline-end: convert.to-rem(112px);
-      }
-    }
-
-    .#{$prefix}--number__input-wrapper--warning input[type='number'],
-    .#{$prefix}--number__input-wrapper--warning input[type='text'] {
-      padding-inline-end: convert.to-rem(112px);
+      // steppers + divider->icon gap + 16px icon + 16px padding
+      padding-inline-end: calc(
+        2 * layout.size('height') + #{$-icon-gap} + 2 * $spacing-05
+      );
     }
   }
 
@@ -171,7 +175,7 @@
     align-items: center;
     justify-content: center;
     block-size: 100%;
-    inline-size: convert.to-rem(80px);
+    inline-size: calc(2 * layout.size('height'));
     // vertically center controls within parent container on IE11
     inset-block-start: 50%;
     inset-inline-end: 0;
@@ -384,32 +388,14 @@
   .#{$prefix}--number__invalid {
     position: absolute;
     fill: $support-error;
-    inset-inline-end: $spacing-12;
-  }
 
-  .#{$prefix}--number--lg .#{$prefix}--number__invalid {
-    inset-inline-end: convert.to-rem(112px);
-  }
-
-  .#{$prefix}--number--sm .#{$prefix}--number__invalid {
-    inset-inline-end: convert.to-rem(80px);
+    // steppers + gap from divider to this icon
+    inset-inline-end: calc(2 * layout.size('height') + #{$-icon-gap});
   }
 
   .#{$prefix}--number__invalid + .#{$prefix}--number__rule-divider {
     position: absolute;
-    inset-inline-end: convert.to-rem(80px);
-  }
-
-  .#{$prefix}--number--lg
-    .#{$prefix}--number__invalid
-    + .#{$prefix}--number__rule-divider {
-    inset-inline-end: $spacing-12;
-  }
-
-  .#{$prefix}--number--sm
-    .#{$prefix}--number__invalid
-    + .#{$prefix}--number__rule-divider {
-    inset-inline-end: convert.to-rem(64px);
+    inset-inline-end: calc(2 * layout.size('height'));
   }
 
   .#{$prefix}--number__control-btn.down-icon:hover
@@ -430,33 +416,6 @@
   .#{$prefix}--number__invalid--warning path:first-of-type {
     fill: $black-100;
     opacity: 1;
-  }
-
-  // Size Variant styles
-  .#{$prefix}--number--lg input[type='number'],
-  .#{$prefix}--number--lg input[type='text'] {
-    block-size: convert.to-rem(48px);
-  }
-
-  .#{$prefix}--number--lg .#{$prefix}--number__controls {
-    inline-size: $spacing-12;
-  }
-
-  .#{$prefix}--number--lg .#{$prefix}--number__control-btn {
-    inline-size: convert.to-rem(48px);
-  }
-
-  .#{$prefix}--number--sm input[type='number'],
-  .#{$prefix}--number--sm input[type='text'] {
-    block-size: convert.to-rem(32px);
-  }
-
-  .#{$prefix}--number--sm .#{$prefix}--number__controls {
-    inline-size: convert.to-rem(64px);
-  }
-
-  .#{$prefix}--number--sm .#{$prefix}--number__control-btn {
-    inline-size: convert.to-rem(32px);
   }
 
   //No label positioning adjustment
@@ -537,7 +496,7 @@
   .#{$prefix}--number__input-wrapper--slug .#{$prefix}--slug {
     position: absolute;
     inset-block-start: 50%;
-    inset-inline-end: $spacing-12;
+    inset-inline-end: calc(2 * layout.size('height') + #{$-ai-label-gap});
     transform: translateY(-50%);
   }
 
@@ -579,7 +538,7 @@
   .#{$prefix}--number__input-wrapper--slug .#{$prefix}--ai-label::before,
   .#{$prefix}--number__input-wrapper--slug .#{$prefix}--slug::before {
     display: none;
-    inset-inline-start: convert.to-rem(-16px);
+    inset-inline-start: calc(-1 * #{$-ai-label-gap});
   }
 
   .#{$prefix}--number__input-wrapper--decorator
@@ -606,7 +565,7 @@
   .#{$prefix}--number__input-wrapper--slug
     .#{$prefix}--number__control-btn::before {
     display: block;
-    inset-inline-end: $spacing-08;
+    inset-inline-end: calc(layout.size('height'));
   }
 
   .#{$prefix}--number__input-wrapper--decorator
@@ -636,7 +595,10 @@
 
   .#{$prefix}--number__input-wrapper--decorator .#{$prefix}--number__invalid,
   .#{$prefix}--number__input-wrapper--slug .#{$prefix}--number__invalid {
-    inset-inline-end: $spacing-13 - $spacing-05;
+    // steppers + AI label cluster + the gap from its divider to this icon
+    inset-inline-end: calc(
+      2 * layout.size('height') + #{$-ai-label-cluster} + #{$-icon-gap}
+    );
   }
 
   .#{$prefix}--number__input-wrapper--decorator:has(
@@ -655,6 +617,24 @@
 
   .#{$prefix}--number
     .#{$prefix}--number__input-wrapper--decorator
+    input[type='number'],
+  .#{$prefix}--number
+    .#{$prefix}--number__input-wrapper--decorator
+    input[type='text'],
+  .#{$prefix}--number
+    .#{$prefix}--number__input-wrapper--slug
+    input[type='number'],
+  .#{$prefix}--number
+    .#{$prefix}--number__input-wrapper--slug
+    input[type='text'] {
+    // steppers + divider->label gap + 16px AI label + 16px padding
+    padding-inline-end: calc(
+      2 * layout.size('height') + #{$-ai-label-gap} + 2 * $spacing-05
+    );
+  }
+
+  .#{$prefix}--number
+    .#{$prefix}--number__input-wrapper--decorator
     input[data-invalid],
   .#{$prefix}--number
     .#{$prefix}--number__input-wrapper--decorator.#{$prefix}--number__input-wrapper--warning
@@ -665,7 +645,11 @@
   .#{$prefix}--number
     .#{$prefix}--number__input-wrapper--slug.#{$prefix}--number__input-wrapper--warning
     input {
-    padding-inline-end: convert.to-rem(144px);
+    // steppers + AI label cluster + icon gap + icon + 16px padding
+    padding-inline-end: calc(
+      2 * layout.size('height') + #{$-ai-label-cluster} + #{$-icon-gap} + 2 *
+        $spacing-05
+    );
   }
 
   .#{$prefix}--number__input-wrapper--decorator
@@ -707,8 +691,6 @@
     ),
   .#{$prefix}--number__input-wrapper--slug input[type='text']:disabled {
     @include ai-gradient;
-
-    padding-inline-end: convert.to-rem(145px);
 
     @if enabled('enable-v12-release') {
       border: 1px solid transparent;
@@ -755,16 +737,8 @@
     }
   }
 
-  .#{$prefix}--number.#{$prefix}--skeleton.#{$prefix}--number--sm {
-    block-size: $spacing-07;
-  }
-
-  .#{$prefix}--number.#{$prefix}--skeleton.#{$prefix}--number--md {
-    block-size: $spacing-08;
-  }
-
-  .#{$prefix}--number.#{$prefix}--skeleton.#{$prefix}--number--lg {
-    block-size: $spacing-09;
+  .#{$prefix}--number.#{$prefix}--skeleton.#{$prefix}--number {
+    block-size: layout.size('height');
   }
 
   // Windows HCM fix
