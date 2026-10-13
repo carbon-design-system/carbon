@@ -799,3 +799,14 @@ export * from './components/Tearsheet';
 
 //unordered list
 export type { UnorderedListProps } from './components/UnorderedList/UnorderedList';
+
+// TODO: uncomment in v12 — also remove from excludeProductsComponents
+// Re-export AddSelect utilities from @carbon/utilities
+// export { AddSelectData } from '@carbon/utilities';
+// export type {
+//   AddSelectItem,
+//   ItemDetailEntry,
+//   ItemDetails,
+//   ItemStatus,
+//   SearchOptions,
+// } from '@carbon/utilities';

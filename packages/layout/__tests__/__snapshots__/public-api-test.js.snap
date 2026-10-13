@@ -374,6 +374,8 @@ exports[`@carbon/layout public API published files 1`] = `
   "scss/generated/_spacing.scss",
   "scss/modules/_convert.scss",
   "telemetry.yml",
+  "tokens/README.md",
+  "tokens/layout.tokens.json",
   "umd/index.js",
 ]
 `;

@@ -122,7 +122,7 @@ class StandardExportModal extends HostListenerMixin(LitElement) {
       <cds-modal
         class=${blockClass}
         size="sm"
-        ?open="false"
+        ?open=${false}
         ${ref((el) => (modalRef = el as HTMLElement))}
         @cds-modal-closed=${() => {
           modalRef?.removeAttribute('open');
@@ -158,36 +158,38 @@ class StandardExportModal extends HostListenerMixin(LitElement) {
                   ></cds-text-input>
                 </div>`
             : null}
-          <div aria-live="polite" class=${`${blockClass}__messaging`}>
-            ${this.loading
-              ? html`
-                  <cds-loading
-                    aria-live="off"
-                    small
-                    .withOverlay=${false}
-                  ></cds-loading>
-                  <p>Exporting file...</p>
-                `
-              : null}
-            ${this.successful
-              ? html`
-                  ${iconLoader(CheckmarkFilled16, {
-                    slot: 'icon',
-                    class: `${blockClass}__checkmark-icon`,
-                  })}
-                  <p>The file has been exported.</p>
-                `
-              : null}
-            ${this.error
-              ? html`
-                  ${iconLoader(ErrorFilled16, {
-                    slot: 'icon',
-                    class: `${blockClass}__error-icon`,
-                  })}
-                  <p>Server error 500</p>
-                `
-              : null}
-          </div>
+          ${submitted
+            ? html`<div aria-live="polite" class=${`${blockClass}__messaging`}>
+                ${this.loading
+                  ? html`
+                      <cds-loading
+                        aria-live="off"
+                        small
+                        .withOverlay=${false}
+                      ></cds-loading>
+                      <p>Exporting file...</p>
+                    `
+                  : null}
+                ${this.successful
+                  ? html`
+                      ${iconLoader(CheckmarkFilled16, {
+                        slot: 'icon',
+                        class: `${blockClass}__checkmark-icon`,
+                      })}
+                      <p>The file has been exported.</p>
+                    `
+                  : null}
+                ${this.error
+                  ? html`
+                      ${iconLoader(ErrorFilled16, {
+                        slot: 'icon',
+                        class: `${blockClass}__error-icon`,
+                      })}
+                      <p>Server error 500</p>
+                    `
+                  : null}
+              </div>`
+            : null}
         </cds-modal-body>
         ${!submitted
           ? html`<cds-modal-footer>
