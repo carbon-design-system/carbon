@@ -998,7 +998,7 @@ export const AddSelectItemPanel = {
 
 const meta = {
   title: 'Components/AddSelect',
-  tags: ['autodocs', 'ibm-products-migrated'],
+  tags: ['autodocs'],
   decorators: [
     (story) => html`<div class="${storyClass}__viewport">${story()}</div>`,
   ],
