@@ -150,7 +150,7 @@ class CDSDropdown extends ValidityMixin(
   private _slotSlugNode!: HTMLSlotElement;
 
   /**
-   * @param itemToSelect A dropdown item. Absense of this argument means clearing selection.
+   * @param itemToSelect A dropdown item. Absence of this argument means clearing selection.
    * @returns `true` if the selection of this dropdown should change if the given item is selected upon user interaction.
    */
   protected _selectionShouldChange(itemToSelect?: CDSDropdownItem) {
@@ -162,7 +162,7 @@ class CDSDropdown extends ValidityMixin(
    *
    * @param itemToSelect
    *   A dropdown item.
-   *   Absense of this argument means clearing selection, which may be handled by a derived class.
+   *   Absence of this argument means clearing selection, which may be handled by a derived class.
    */
   protected _selectionDidChange(itemToSelect?: CDSDropdownItem) {
     const constructor = this.constructor as typeof CDSDropdown;
@@ -632,7 +632,7 @@ class CDSDropdown extends ValidityMixin(
   /**
    * Handles user-initiated selection of a dropdown item.
    *
-   * @param [item] The dropdown item user wants to select. Absense of this argument means clearing selection.
+   * @param [item] The dropdown item user wants to select. Absence of this argument means clearing selection.
    */
   protected _handleUserInitiatedSelectItem(item?: CDSDropdownItem) {
     if (item?.hasAttribute('disabled')) {
