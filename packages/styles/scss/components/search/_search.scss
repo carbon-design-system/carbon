@@ -298,6 +298,8 @@
 
       @if enabled('enable-v12-release') {
         border-radius: $border-radius-max;
+        inset-block: 0;
+        inset-inline: 0;
       }
     }
   }
