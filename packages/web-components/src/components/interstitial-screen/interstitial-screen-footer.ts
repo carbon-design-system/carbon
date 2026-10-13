@@ -89,6 +89,8 @@ class CDSInterstitialScreenFooter extends HostListenerMixin(CDSModalFooter) {
   protected updated(_changedProperties: PropertyValues): void {
     super.updated(_changedProperties);
     if (_changedProperties.size === 0) {
+      // This logic ensures the start/next button receives focus when focus is lost from the "next" or "back" buttons
+      // during step navigation—particularly when those buttons are not rendered.
       this.updateComplete.then(() => {
         const stepDetails = this._interstitialCtx?.state?.stepDetails ?? [];
         const currentStep = this._interstitialCtx?.state?.currentStep ?? 0;
@@ -266,6 +268,9 @@ class CDSInterstitialScreenFooter extends HostListenerMixin(CDSModalFooter) {
     return `${prefix}-request-close`;
   }
 
+  /**
+   * The name of the custom event fired just before the action.
+   */
   static get eventOnBeforeAction() {
     return `${prefix}-on-action`;
   }

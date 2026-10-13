@@ -25,6 +25,9 @@ import { registerFocusableContainers } from '../../utilities/manageFocusTrap/man
  */
 @customElement(`${prefix}-interstitial-screen-body-item`)
 class CDSInterstitialScreenBodyItem extends HostListenerMixin(LitElement) {
+  /**
+   * This will serve the labels for each step
+   */
   @property({ reflect: true })
   stepTitle: string = '';
 

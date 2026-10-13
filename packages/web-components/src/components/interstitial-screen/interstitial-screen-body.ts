@@ -55,7 +55,11 @@ class CDSInterstitialScreenBody extends HostListenerMixin(LitElement) {
 
   updated(changedProps: Map<string | number | symbol, unknown>) {
     super.updated(changedProps);
+
+    // Watch for the open state from context
     const open = this._interstitialCtx?.state?.open ?? false;
+
+    // Initialize carousel when opened for the first time
     if (
       open &&
       !this.carouselAPI &&
@@ -129,11 +133,12 @@ class CDSInterstitialScreenBody extends HostListenerMixin(LitElement) {
       Object.values(allViews).forEach((item, idx) => {
         const isActive = idx === itemNumber;
         if (item) {
+          // Set aria-hidden based on active state
           item.setAttribute('aria-hidden', String(!isActive));
           if (!isActive) {
-            item.setAttribute('inert', '');
+            item.setAttribute('inert', ''); // Disable interactivity
           } else {
-            item.removeAttribute('inert');
+            item.removeAttribute('inert'); // Re-enable interactivity
           }
           item.removeAttribute('tabindex');
         }
@@ -159,10 +164,16 @@ class CDSInterstitialScreenBody extends HostListenerMixin(LitElement) {
 
   static styles = styles;
 
+  /**
+   * The name of the custom event fired at the start of  the step change.
+   */
   static get eventOnViewChangeStart() {
     return `${prefix}-on-before-step-change`;
   }
 
+  /**
+   * The name of the custom event fired at the end of  the step change.
+   */
   static get eventOnViewChangeEnd() {
     return `${prefix}-on-after-step-change`;
   }

@@ -70,6 +70,11 @@ class CDSInterstitialScreenHeader extends HostListenerMixin(LitElement) {
     return 'invalid';
   };
 
+  /**
+   * Handles user-initiated close request of this tearsheet.
+   *
+   * @param triggeredBy The element that triggered this close request.
+   */
   private _handleUserInitiatedClose(triggeredBy: EventTarget | null) {
     this.dispatchEvent(
       new CustomEvent(
@@ -139,7 +144,7 @@ class CDSInterstitialScreenHeader extends HostListenerMixin(LitElement) {
     const classes = classMap({
       [`${headerBlockClass}`]: true,
       [`${headerBlockClass}--has-title`]:
-        this.headerTitle || this.headerSubTitle,
+        this.headerTitle || this.headerSubTitle, // add check for children
     });
     return isFullScreen
       ? html`<header class="${classes}">${this.getHeaderContent()}</header>`
