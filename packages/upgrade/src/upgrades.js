@@ -631,6 +631,67 @@ export const upgrades = [
         },
       },
       {
+        name: 'enable-v12-tabs-contained-layer',
+        description: `
+          Opt in to enableV12TabsContainedLayer and remove the Layer placed
+          directly inside a TabPanel of contained or vertical tabs
+
+          Transforms:
+
+          <Tabs>
+            <TabList contained>...</TabList>
+            <TabPanels>
+              <TabPanel>
+                <Layer>...</Layer>
+              </TabPanel>
+            </TabPanels>
+          </Tabs>
+
+          Into:
+
+          <FeatureFlags enableV12TabsContainedLayer>
+            <Tabs>
+              <TabList contained>...</TabList>
+              <TabPanels>
+                <TabPanel>...</TabPanel>
+              </TabPanels>
+            </Tabs>
+          </FeatureFlags>
+        `,
+        migrate: async (options) => {
+          const transform = path.join(
+            TRANSFORM_DIR,
+            'enable-v12-tabs-contained-layer.js'
+          );
+          const paths =
+            Array.isArray(options.paths) && options.paths.length > 0
+              ? options.paths
+              : await glob(['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'], {
+                  cwd: options.workspaceDir,
+                  ignore: [
+                    '**/es/**',
+                    '**/lib/**',
+                    '**/umd/**',
+                    '**/node_modules/**',
+                    '**/storybook-static/**',
+                    '**/dist/**',
+                    '**/build/**',
+                    '**/*.d.ts',
+                    '**/coverage/**',
+                  ],
+                });
+
+          await runCodemod(options, {
+            dry: !options.write,
+            transform,
+            paths,
+            verbose: options.verbose,
+            parser: 'tsx',
+          });
+        },
+      },
+
+      {
         name: 'refactor-to-callout',
         description:
           'Rewrites imports and usages of StaticNotification to Callout',
