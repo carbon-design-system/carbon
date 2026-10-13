@@ -1096,7 +1096,6 @@ export const WithDisabledStickyTabBar = {
 
 const meta = {
   title: 'Components/PageHeader',
-  tags: ['ibm-products-migrated'],
   parameters: { layout: 'fullscreen' },
   decorators: [
     (story) =>
