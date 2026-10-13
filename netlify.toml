@@ -1,5 +1,6 @@
 [build.environment]
   YARN_FLAGS = "--immutable"
+  NODE_OPTIONS = "--max-old-space-size=8192"
 [[headers]]
    for = "/*"
    [headers.values]
