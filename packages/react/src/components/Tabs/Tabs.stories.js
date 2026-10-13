@@ -37,7 +37,6 @@ import {
   Chat,
   Task,
   Restart,
-  Icon,
 } from '@carbon/icons-react';
 
 const lineTabsSizeArgType = {
@@ -302,7 +301,8 @@ export const DismissableContained = (args) => {
 DismissableContained.argTypes = tabsSizeArgType;
 DismissableContained.args = containedTabsSizeArgs;
 
-export const DismissableWithIcons = ({ contained, size }) => {
+export const DismissableWithIcons = (args) => {
+  const { contained, size } = args;
   const tabs = [
     {
       label: 'Dashboard',
