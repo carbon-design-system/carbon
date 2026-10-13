@@ -2,14 +2,7 @@ name: Publish Web Components CDN artifacts to Cloud Object Storage
 
 on:
   workflow_dispatch:
-  push:
-    tags:
-      # Matches tags that have the shape `vX.Y.Z` or `vX.Y.Z-rc.X` Reference:
-      # https://help.github.com/en/articles/workflow-syntax-for-github-actions#onpushpull_requesttagsbranches
-      - 'v[0-9]+.[0-9]+.[0-9]+'
-      - 'v[0-9]+.[0-9]+.[0-9]+-*'
-      - '!v10*'
-      - '!v12*'
+  workflow_call:
 
 concurrency:
   group: deploy-${{ github.ref }}
