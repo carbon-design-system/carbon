@@ -600,6 +600,11 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
   );
   const menuId = `${instanceId}__menu`;
   const inputId = `${instanceId}-input`;
+  const legacyMenuId = `${id}__menu`;
+  const inputAriaControls =
+    inputProps?.['aria-controls'] === legacyMenuId
+      ? menuId
+      : inputProps?.['aria-controls'];
 
   useEffect(() => {
     if (!isOpen) {
@@ -893,7 +898,6 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
 
   const inputProp = getInputProps(
     getDropdownProps({
-      'aria-controls': isOpen ? menuId : undefined,
       'aria-describedby': hasHelper && showHelperText ? helperId : undefined,
       'aria-haspopup': 'listbox',
       // Remove excess aria `aria-labelledby`. HTML <label for>
@@ -903,6 +907,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
       placeholder,
       preventKeyAction: isOpen,
       ...inputProps,
+      'aria-controls': inputAriaControls ?? (isOpen ? menuId : undefined),
 
       onClick: () => handleMenuChange(true),
       onKeyDown(event: KeyboardEvent<HTMLElement>) {

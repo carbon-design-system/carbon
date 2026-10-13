@@ -1328,6 +1328,7 @@ describe('FilterableMultiSelect', () => {
       />
     );
     const input = screen.getByPlaceholderText('Type here');
+    const menu = document.querySelector('[role="listbox"]');
     const attributes = Array.from(input.attributes).reduce(
       (acc, { name, value }) => ({ ...acc, [name]: value }),
       {}
@@ -1337,7 +1338,7 @@ describe('FilterableMultiSelect', () => {
     expect(attributes).toEqual({
       'aria-activedescendant': '',
       'aria-autocomplete': 'list',
-      'aria-controls': 'test-combo__menu',
+      'aria-controls': menu.id,
       'aria-expanded': 'false',
       'aria-haspopup': 'listbox',
       'aria-label': 'Choose an item',
