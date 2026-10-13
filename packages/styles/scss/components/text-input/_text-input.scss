@@ -144,14 +144,6 @@
     aspect-ratio: 1;
     inset-block: 0;
     inset-inline-end: 0;
-
-    @if enabled('enable-v12-release') {
-      // In v12 the button is smaller; let the host shrink to the button size
-      // and centre it within the input height.
-      inset-block: auto;
-      inset-block-start: 50%;
-      transform: translateY(-50%);
-    }
   }
 
   .#{$prefix}--toggle-password-tooltip .#{$prefix}--tooltip-trigger__wrapper {
