@@ -1,0 +1,46 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+
+$block-class: 'import-and-upload-modal';
+
+.#{$block-class}__body {
+  margin-block-end: $spacing-06;
+  padding-inline-end: calc(20% - #{$spacing-05});
+}
+
+.#{$block-class}__body-container .#{$block-class}__file-drop-header,
+.#{$block-class}__body-container .#{$block-class}__label {
+  margin-block-end: $spacing-03;
+  @include type.type-style('heading-compact-01');
+}
+
+.#{$block-class}__body-container .#{$block-class}__helper-text {
+  margin-block: $spacing-06 $spacing-03;
+  @include type.type-style('helper-text-01');
+}
+
+.#{$block-class}__label {
+  margin-block-start: $spacing-03;
+}
+
+.#{$block-class}__input-group {
+  display: flex;
+
+  > button {
+    margin-inline-start: $spacing-03;
+  }
+}
+
+.#{$block-class}__file-container {
+  inline-size: 100%;
+
+  > span {
+    max-inline-size: none;
+  }
+}
