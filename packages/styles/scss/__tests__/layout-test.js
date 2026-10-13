@@ -56,7 +56,7 @@ describe('@carbon/styles/scss/layout', () => {
     expect(output).toContain('--cds-layout-size-height-2xl');
   });
 
-  test('emit-layout-tokens emits all size gap tokens', async () => {
+  test('emit-layout-tokens emits all icon gap tokens', async () => {
     const { result } = await render(`
       @use '../layout';
       .test {
