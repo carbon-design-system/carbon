@@ -1,0 +1,27 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+@use '@carbon/styles/scss/components/button/tokens' as *;
+@use '@carbon/styles/scss/spacing' as *;
+
+$block-class: 'export-modal';
+
+.#{$block-class}__messaging {
+  display: flex;
+  align-items: center;
+}
+
+.#{$block-class}__messaging p {
+  margin-inline-start: $spacing-03;
+}
+
+.#{$block-class}__checkmark-icon {
+  fill: $button-primary;
+}
+
+.#{$block-class}__error-icon {
+  fill: $button-danger-primary;
+}
