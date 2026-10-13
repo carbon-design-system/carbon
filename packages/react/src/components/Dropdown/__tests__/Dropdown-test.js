@@ -735,7 +735,7 @@ describe('Test useEffect ', () => {
     await waitForPosition();
 
     const menu = document.querySelector('.cds--list-box__menu');
-    expect(menu.style.maxHeight).toMatch(/\d+px$/);
+    expect(menu.style.maxHeight).toBe('0px');
   });
 
   it('should add certain label props when `titleText` is a string', () => {

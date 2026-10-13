@@ -909,7 +909,7 @@ describe('MultiSelect', () => {
       await waitForPosition();
 
       const listbox = screen.getByRole('listbox', { hidden: true });
-      expect(listbox.style.maxHeight).toMatch(/\d+px$/);
+      expect(listbox.style.maxHeight).toBe('0px');
     });
 
     it('should accept a `ref` for the underlying button element', async () => {
