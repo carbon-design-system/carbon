@@ -13,6 +13,7 @@ import { prefix } from '../../globals/settings';
 import AutoAlignMixin from '../../globals/mixins/auto-align';
 import FocusMixin from '../../globals/mixins/focus';
 import styles from './copy-button.scss?lit';
+import { BUTTON_KIND } from '../button/defs';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
 import { ICON_BUTTON_SIZE } from '../icon-button/defs';
 import '../copy/copy';
@@ -33,6 +34,13 @@ class CDSCopyButton extends AutoAlignMixin(
    */
   @property({ reflect: true, attribute: 'button-class-name' })
   buttonClassName;
+
+  /**
+   * Optionally specify the kind of Button you want to create. When not set,
+   * the copy button renders with its default copy-button styles.
+   */
+  @property({ reflect: true })
+  kind?: BUTTON_KIND;
 
   /**
    * `true` if the button should be disabled.
@@ -79,6 +87,7 @@ class CDSCopyButton extends AutoAlignMixin(
       feedbackTimeout,
       align,
       autoAlign,
+      kind,
       size,
     } = this;
 
@@ -97,10 +106,11 @@ class CDSCopyButton extends AutoAlignMixin(
         button-class-name=${classes}
         exportparts="button"
         align=${align}
+        kind=${kind ?? ''}
         size=${size}>
         ${iconLoader(Copy16, {
           slot: 'icon',
-          class: `${prefix}--snippet__icon`,
+          class: `${prefix}--btn__icon`,
         })}
         <slot slot="tooltip-content"></slot>
       </cds-copy>
