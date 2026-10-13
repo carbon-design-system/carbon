@@ -13,6 +13,7 @@ const fs = require('fs-extra');
 const path = require('path');
 const buildCompatThemesFile = require('./builders/compat/themes');
 const buildCompatTokensFile = require('./builders/compat/tokens');
+const generateTokenTable = require('./builders/token-table');
 const { runScss } = require('../style-dictionary/sd.config');
 
 async function build() {
@@ -44,6 +45,9 @@ async function build() {
 
   reporter.info('Generating SCSS files via Style Dictionary...');
   await runScss();
+
+  reporter.info('Generating the theme token table...');
+  await generateTokenTable();
 
   reporter.success('Done! 🎉');
 }
