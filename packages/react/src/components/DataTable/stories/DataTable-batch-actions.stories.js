@@ -7,7 +7,7 @@
 
 import React, { useState } from 'react';
 import { action } from 'storybook/actions';
-import { TrashCan, Save, Download, Add } from '@carbon/icons-react';
+import { TrashCan, Save, Download } from '@carbon/icons-react';
 
 import Button from '../../Button';
 import DataTable, {
@@ -67,6 +67,9 @@ export default {
   parameters: {
     docs: {
       page: mdx,
+      source: {
+        type: 'code',
+      },
     },
   },
 };
