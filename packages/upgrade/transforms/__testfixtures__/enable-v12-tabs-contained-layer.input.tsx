@@ -170,3 +170,46 @@ export const DynamicValue = ({ someDynamicVar }) => (
     </Tabs>
   </FeatureFlags>
 );
+
+export const ExplicitV12ReleaseFalse = () => (
+  <FeatureFlags enableV12Release={false}>
+    <Tabs>
+      <TabList aria-label="Wrapped" contained>
+        <Tab>One</Tab>
+      </TabList>
+      <TabPanels>
+        <TabPanel>
+          <Layer>
+            <TextInput id="e" labelText="E" />
+          </Layer>
+        </TabPanel>
+      </TabPanels>
+    </Tabs>
+  </FeatureFlags>
+);
+
+export const PureNestedTabs = () => (
+  <Tabs>
+    <TabList aria-label="Outer" contained>
+      <Tab>Outer</Tab>
+    </TabList>
+    <TabPanels>
+      <TabPanel>
+        <Layer>
+          <Tabs>
+            <TabList aria-label="Inner" contained>
+              <Tab>Inner</Tab>
+            </TabList>
+            <TabPanels>
+              <TabPanel>
+                <Layer>
+                  <TextInput id="nested" labelText="Nested" />
+                </Layer>
+              </TabPanel>
+            </TabPanels>
+          </Tabs>
+        </Layer>
+      </TabPanel>
+    </TabPanels>
+  </Tabs>
+);

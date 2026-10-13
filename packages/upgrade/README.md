@@ -233,8 +233,18 @@ This codemod, for each `Tabs` or `TabsVertical` that has a `TabList` with
 
 **Limitations:** a `Tabs` is left unchanged, and the file reported, when any of
 its panels has a `Layer` with props (such as `level`) or a `Layer` next to other
-children, because removing it would change the layer level. Tab lists rendered
-by a custom wrapper component are not detected. Review those by hand.
+children, because removing it would change the layer level.
+
+- Tab lists rendered by a custom wrapper component or with dynamic properties
+  (such as `contained={someVar}`) are not detected by the codemod. Review those
+  by hand.
+- If a shared or app-level `FeatureFlags` wrapper exists, enabling the flag on
+  it activates automatic layering for all nested contained/vertical tabs beneath
+  it (including those in other files). Consequently, any undetected tabs nested
+  under that wrapper that still have manual `<Layer>` wraps will end up
+  double-layered at runtime. To prevent this, either run the codemod over the
+  entire project in one pass, or manually remove the redundant `<Layer>`
+  wrappers first from those panels.
 
 **Example:**
 

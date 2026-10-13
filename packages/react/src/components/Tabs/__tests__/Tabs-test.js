@@ -2606,4 +2606,46 @@ describe('TabPanel contained layer', () => {
     expect(screen.getByTestId('field')).toBe(field);
     expect(screen.getByTestId('field')).toHaveValue('hello');
   });
+
+  it('should render the layer-two wrapper when enableV12Release is false but specific flag is enabled', () => {
+    render(
+      <FeatureFlags enableV12Release={false} enableV12TabsContainedLayer>
+        <Tabs>
+          <TabList aria-label="List of tabs" contained>
+            <Tab>Tab Label 1</Tab>
+          </TabList>
+          <TabPanels>
+            <TabPanel data-testid="panel-1">
+              <input data-testid="field" />
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
+      </FeatureFlags>
+    );
+
+    expect(
+      screen.getByTestId('panel-1').querySelector(layerSelector)
+    ).toBeInTheDocument();
+  });
+
+  it('should not render the layer-two wrapper when enableV12Release is false and specific flag is not enabled', () => {
+    render(
+      <FeatureFlags enableV12Release={false}>
+        <Tabs>
+          <TabList aria-label="List of tabs" contained>
+            <Tab>Tab Label 1</Tab>
+          </TabList>
+          <TabPanels>
+            <TabPanel data-testid="panel-1">
+              <input data-testid="field" />
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
+      </FeatureFlags>
+    );
+
+    expect(
+      screen.getByTestId('panel-1').querySelector(layerSelector)
+    ).not.toBeInTheDocument();
+  });
 });
