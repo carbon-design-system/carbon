@@ -17,7 +17,7 @@ import {
   Reliability,
   Reset,
   Slider,
-  VisualInspection,
+  VisualRecognition,
   Warning_01,
 } from '@carbon/pictograms-react';
 import EmptyStateJsx from '../components/EmptyState';
@@ -58,7 +58,7 @@ const pictogramMap: Record<PictogramKey, ComponentType<object>> = {
   Offline: Availability,
   Maintenance: CloudBuilderProfessionalServices,
   Unavailable: DoNot,
-  Search: VisualInspection,
+  Search: VisualRecognition,
   Filtered: Slider,
 };
 
