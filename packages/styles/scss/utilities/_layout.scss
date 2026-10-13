@@ -22,6 +22,14 @@ $layout-tokens: (
       xl: convert.to-rem(64px),
       2xl: convert.to-rem(80px),
     ),
+    icon-gap: (
+      xs: $spacing-02,
+      sm: $spacing-03,
+      md: $spacing-03,
+      lg: $spacing-04,
+      xl: $spacing-04,
+      2xl: $spacing-04,
+    ),
   ),
   density: (
     padding-inline: (
