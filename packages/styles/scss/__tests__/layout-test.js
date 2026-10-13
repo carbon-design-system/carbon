@@ -56,6 +56,23 @@ describe('@carbon/styles/scss/layout', () => {
     expect(output).toContain('--cds-layout-size-height-2xl');
   });
 
+  test('emit-layout-tokens emits all size gap tokens', async () => {
+    const { result } = await render(`
+      @use '../layout';
+      .test {
+        @include layout.emit-layout-tokens();
+      }
+    `);
+
+    const output = result.css.toString();
+    expect(output).toContain('--cds-layout-size-icon-gap-xs');
+    expect(output).toContain('--cds-layout-size-icon-gap-sm');
+    expect(output).toContain('--cds-layout-size-icon-gap-md');
+    expect(output).toContain('--cds-layout-size-icon-gap-lg');
+    expect(output).toContain('--cds-layout-size-icon-gap-xl');
+    expect(output).toContain('--cds-layout-size-icon-gap-2xl');
+  });
+
   test('emit-layout-tokens emits all density tokens', async () => {
     const { result } = await render(`
       @use '../layout';
