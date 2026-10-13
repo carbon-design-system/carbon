@@ -10,7 +10,7 @@ import {
   useCombobox,
   UseComboboxProps,
   UseComboboxActions,
-  type UseComboboxState,
+  type UseComboboxStateChangeOptions,
 } from 'downshift';
 import PropTypes from 'prop-types';
 import React, {
@@ -614,7 +614,7 @@ const ComboBox = forwardRef(
         // list. Downshift only matches the selected item by reference and does
         // not know about a controlled `selectedItem`.
         const highlightSelectedItemOnOpen = (
-          nextChanges: Partial<UseComboboxState<ItemType>>
+          nextChanges: UseComboboxStateChangeOptions<ItemType>['changes']
         ) => {
           if (state.isOpen || !nextChanges.isOpen) {
             return nextChanges;
