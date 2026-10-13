@@ -5,10 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import { action } from 'storybook/actions';
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
+import { autoAlignDecorator } from '../../../.storybook/templates/autoAlignDecorator';
 import mdx from './MultiSelect.mdx';
 
 import { FilterableMultiSelect, MultiSelect } from '.';
@@ -23,6 +24,7 @@ export default {
   subcomponents: {
     FilterableMultiSelect,
   },
+  decorators: [autoAlignDecorator],
   argTypes: {
     size: {
       options: ['xs', 'sm', 'md', 'lg'],
@@ -670,36 +672,22 @@ FilterableWithAILabel.parameters = {
     exclude: ['label'],
   },
 };
-export const ExperimentalAutoAlign = (args) => {
-  const ref = useRef();
-  useEffect(() => {
-    ref?.current?.scrollIntoView({ block: 'center', inline: 'center' });
-  });
-  return (
-    <div style={{ width: '5000px', height: '5000px' }}>
-      <div
-        style={{
-          position: 'absolute',
-          top: '2500px',
-          left: '2500px',
-          width: 300,
-        }}>
-        <MultiSelect
-          label="Multiselect Label"
-          id="carbon-multiselect-example"
-          titleText="Multiselect title"
-          helperText="This is helper text"
-          items={items}
-          itemToString={(item) => (item ? item.text : '')}
-          selectionFeedback="top-after-reopen"
-          ref={ref}
-          autoAlign
-          {...args}
-        />
-      </div>
-    </div>
-  );
-};
+
+export const ExperimentalAutoAlign = (args) => (
+  <div style={{ width: 300 }}>
+    <MultiSelect
+      label="Multiselect Label"
+      id="carbon-multiselect-example"
+      titleText="Multiselect title"
+      helperText="This is helper text"
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      selectionFeedback="top-after-reopen"
+      autoAlign
+      {...args}
+    />
+  </div>
+);
 
 ExperimentalAutoAlign.argTypes = {
   autoAlign: {
@@ -759,3 +747,37 @@ export const SelectAllWithDynamicItems = (args) => {
 };
 
 SelectAllWithDynamicItems.args = { ...sharedArgs };
+
+export const StressTest = (args) => {
+  return (
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(8, 300px)',
+        gap: '16px',
+      }}>
+      {Array.from({ length: 80 }, (_, i) => (
+        <MultiSelect
+          key={i}
+          label="Multiselect Label"
+          id={`carbon-multiselect-stress-${i}`}
+          titleText={`Multiselect ${i + 1}`}
+          helperText="This is helper text"
+          items={items}
+          itemToString={(item) => (item ? item.text : '')}
+          selectionFeedback="top-after-reopen"
+          autoAlign
+          {...args}
+        />
+      ))}
+    </div>
+  );
+};
+
+StressTest.argTypes = {
+  autoAlign: {
+    control: false,
+  },
+};
+
+StressTest.args = { ...sharedArgs, autoAlign: true };

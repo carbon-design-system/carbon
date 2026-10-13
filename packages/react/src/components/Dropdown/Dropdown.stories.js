@@ -9,6 +9,7 @@ import React from 'react';
 import { FolderOpen, Folders, View } from '@carbon/icons-react';
 
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
+import { autoAlignDecorator } from '../../../.storybook/templates/autoAlignDecorator';
 
 import { default as Dropdown, DropdownSkeleton } from './';
 import Button from '../Button';
@@ -141,6 +142,7 @@ export default {
   subcomponents: {
     DropdownSkeleton,
   },
+  decorators: [autoAlignDecorator],
   parameters: {
     docs: {
       page: mdx,
@@ -206,66 +208,32 @@ Default.argTypes = {
   ...sharedArgTypes,
 };
 
-export const ExperimentalAutoAlign = (args) => {
-  const items = [
-    {
-      text: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
-    },
-    {
-      text: 'Option 1',
-    },
-    {
-      text: 'Option 2',
-    },
-    {
-      text: 'Option 3',
-      disabled: true,
-    },
-    {
-      text: 'Option 4',
-    },
-    {
-      text: 'Option 5',
-    },
-    {
-      text: 'Option 6',
-    },
-    {
-      text: 'Option 7',
-    },
-    {
-      text: 'Option 8',
-    },
-  ];
-  return (
-    <div style={{ width: 400 }}>
-      <div style={{ height: 300 }}></div>
-      <Dropdown
-        autoAlign={true}
-        id="default"
-        titleText="Label"
-        helperText="Helper text"
-        initialSelectedItem={items[1]}
-        label="Option 1"
-        items={items}
-        itemToString={(item) => (item ? item.text : '')}
-        direction="top"
-        {...args}
-      />
-      <div style={{ height: 800 }}></div>
-    </div>
-  );
-};
+export const ExperimentalAutoAlign = (args) => (
+  <div style={{ width: 400 }}>
+    <Dropdown
+      id="default"
+      titleText="Label"
+      helperText="Helper text"
+      initialSelectedItem={items[1]}
+      label="Option 1"
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      autoAlign
+      {...args}
+    />
+  </div>
+);
 
 ExperimentalAutoAlign.argTypes = {
   ...sharedArgTypes,
+  autoAlign: {
+    control: false,
+  },
 };
 
 ExperimentalAutoAlign.args = {
   ...sharedArgs,
   autoAlign: true,
-  direction: 'top',
-  label: 'Option 1',
 };
 
 export const Inline = (args) => {

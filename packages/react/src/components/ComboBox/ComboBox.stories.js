@@ -7,6 +7,7 @@
 
 import React from 'react';
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
+import { autoAlignDecorator } from '../../../.storybook/templates/autoAlignDecorator';
 import ComboBox from '../ComboBox';
 import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
@@ -45,6 +46,7 @@ const items = [
 export default {
   title: 'Components/ComboBox',
   component: ComboBox,
+  decorators: [autoAlignDecorator],
   argTypes: {
     size: {
       options: ['xs', 'sm', 'md', 'lg'],
@@ -196,8 +198,7 @@ AutocompleteWithTypeahead.argTypes = {
 };
 
 export const ExperimentalAutoAlign = (args) => (
-  <div style={{ width: 400 }}>
-    <div style={{ height: 300 }}></div>
+  <div style={{ width: 300 }}>
     <ComboBox
       onChange={() => {}}
       id="carbon-combobox"
@@ -210,11 +211,19 @@ export const ExperimentalAutoAlign = (args) => (
       autoAlign={true}
       {...args}
     />
-    <div style={{ height: 800 }}></div>
   </div>
 );
 
-ExperimentalAutoAlign.argTypes = { ...sharedArgTypes };
+ExperimentalAutoAlign.argTypes = {
+  ...sharedArgTypes,
+  autoAlign: {
+    control: false,
+  },
+};
+
+ExperimentalAutoAlign.args = {
+  autoAlign: true,
+};
 
 export const _WithLayer = (args) => (
   <WithLayer>
