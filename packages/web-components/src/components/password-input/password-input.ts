@@ -155,6 +155,8 @@ class CDSPasswordInput extends CDSTextInput {
       class: `${prefix}--text-input__invalid-icon ${prefix}--text-input__invalid-icon--warning`,
     });
 
+    const isInteractive = !readonly && !disabled;
+
     const normalizedProps: {
       disabled: boolean;
       invalid: boolean;
@@ -164,8 +166,8 @@ class CDSPasswordInput extends CDSTextInput {
       icon: ReturnType<typeof iconLoader>;
     } = {
       disabled: !readonly && disabled,
-      invalid: !readonly && invalid,
-      warn: !readonly && !invalid && warn,
+      invalid: isInteractive && invalid,
+      warn: isInteractive && !invalid && warn,
       'slot-name': '',
       'slot-text': '',
       icon: null,
@@ -296,12 +298,14 @@ class CDSPasswordInput extends CDSTextInput {
               ${labelWrapper}
             </div>`}
         <div class="${fieldOuterWrapperClasses}">
-          <div class="${fieldWrapperClasses}" ?data-invalid="${invalid}">
+          <div
+            class="${fieldWrapperClasses}"
+            ?data-invalid="${normalizedProps.invalid}">
             ${normalizedProps.icon}
             <input
               ?autofocus="${this.autofocus}"
               class="${inputClasses}"
-              ?data-invalid="${invalid}"
+              ?data-invalid="${normalizedProps.invalid}"
               ?disabled="${disabled}"
               aria-describedby="helper-text"
               id="input"

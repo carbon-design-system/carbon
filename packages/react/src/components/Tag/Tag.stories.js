@@ -5,6 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import styles from './story.scss?inline';
+import aiLabelStyles from '../AILabel/ailabel-story.scss?inline';
+
 import React from 'react';
 import { default as Tag } from '../Tag';
 import TagSkeleton from '../Tag/Tag.Skeleton';
@@ -13,14 +16,23 @@ import { Asleep, View, FolderOpen, Folders } from '@carbon/icons-react';
 import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
-import '../AILabel/ailabel-story.scss';
 import mdx from './Tag.mdx';
-import './story.scss';
 
 export default {
   title: 'Components/Tag',
   component: Tag,
+  decorators: [
+    (Story) => (
+      <>
+        <style>{styles}</style>
+        <style>{aiLabelStyles}</style>
+        <Story />
+      </>
+    ),
+  ],
   parameters: {
+    styles,
+    aiLabelStyles,
     docs: {
       page: mdx,
     },

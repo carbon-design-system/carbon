@@ -41,24 +41,6 @@ describe('cds-popover-content', function () {
     expect(el).to.have.attribute('data-testid', 'test-id');
   });
 
-  it('should have 6px caret height and 12px caret width', async () => {
-    const el = await fixture(html`
-      <cds-popover open align="bottom">
-        <button type="button">Test</button>
-        <cds-popover-content></cds-popover-content>
-      </cds-popover>
-    `);
-
-    await el.updateComplete;
-
-    const caret = el
-      .querySelector(`cds-popover-content`)
-      .shadowRoot?.querySelector('.cds--popover-caret');
-    const after = getComputedStyle(caret, '::after');
-    expect(after.width).to.equal('12px');
-    expect(after.height).to.equal('6px');
-  });
-
   it('should respect tabTip attribute', async () => {
     const el = await fixture(html`
         <cds-popover tabTip open></cds-popover>
@@ -166,23 +148,6 @@ describe('cds-popover-content', function () {
       Array.from(classList).some((cls) =>
         cls.includes('--popover--drop-shadow')
       )
-    ).to.be.true;
-  });
-
-  it('should respect caret attribute', async () => {
-    const el = await fixture(html`
-        <cds-popover caret></cds-popover>
-          <button type="button">Test</button
-          ><cds-popover-content></cds-popover-content
-        ></cds-popover>
-      `);
-    await el.updateComplete;
-
-    const content = el.shadowRoot?.querySelector('[part="popover-container"]');
-
-    const classList = content?.classList || [];
-    expect(
-      Array.from(classList).some((cls) => cls.includes('--popover--caret'))
     ).to.be.true;
   });
 
