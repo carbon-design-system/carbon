@@ -56,7 +56,7 @@ class CDSCopyButton extends AutoAlignMixin(
    * Specify whether an auto align functionality should be applied. Defaults to
    * `true` when `enable-v12-autoalign` is enabled, and to `false` otherwise.
    */
-  @property({ type: Boolean, reflect: true })
+  @property({ type: Boolean, reflect: true, attribute: 'autoalign' })
   autoAlign?: boolean;
 
   /**

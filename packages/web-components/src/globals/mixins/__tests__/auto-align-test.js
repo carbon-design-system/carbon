@@ -47,6 +47,7 @@ const TAGS = [
     tag: 'cds-icon-button',
     children: '<span slot="tooltip-content">Label</span>',
   },
+  // The property is camelCase here, the attribute is still `autoalign`.
   { tag: 'cds-copy-button', property: 'autoAlign' },
   { tag: 'cds-overflow-menu' },
   { tag: 'cds-dropdown' },

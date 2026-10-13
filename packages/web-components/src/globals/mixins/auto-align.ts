@@ -8,6 +8,8 @@
 import type { LitElement } from 'lit';
 import { isFeatureFlagEnabled } from '../../components/feature-flags';
 
+// The attribute is `autoalign` on every component, whatever its property is
+// named.
 const attribute = 'autoalign';
 
 /**
@@ -37,6 +39,10 @@ const AutoAlignMixin = <T extends Constructor<LitElement>>(
       super.connectedCallback();
       // A value set through the attribute or the property always wins. When
       // neither is set, the `enable-v12-autoalign` feature flag decides.
+      //
+      // The flag is read once, here. Following later changes to it would mean
+      // telling a default apart from a value that was set, and the reflected
+      // `autoalign` attribute looks the same in both cases.
       const host = this as unknown as Record<string, boolean | undefined>;
       host[property] ??= isFeatureFlagEnabled('enable-v12-autoalign', this);
     }

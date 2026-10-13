@@ -236,4 +236,38 @@ describe('autoAlign', () => {
     expect(copy.autoalign).to.be.false;
     expect(copy.shadowRoot.querySelector('cds-tooltip').autoalign).to.be.false;
   });
+
+  it('should keep the tooltip autoalign disabled when the attribute is "false" with enable-v12-release', async () => {
+    const featureFlag = await fixture(html`
+      <feature-flags enable-v12-release="true">
+        <cds-copy-button
+          autoalign="false"
+          icon-description="Copy to clipboard"></cds-copy-button>
+      </feature-flags>
+    `);
+    const el = featureFlag.querySelector('cds-copy-button');
+
+    await el.updateComplete;
+
+    const copy = el.shadowRoot.querySelector('cds-copy');
+
+    await copy.updateComplete;
+
+    expect(el.autoAlign).to.be.false;
+    expect(copy.autoalign).to.be.false;
+    expect(copy.shadowRoot.querySelector('cds-tooltip').autoalign).to.be.false;
+  });
+
+  it('should reflect autoAlign to the autoalign attribute', async () => {
+    const el = await fixture(html`
+      <cds-copy-button
+        .autoAlign=${true}
+        icon-description="Copy to clipboard"></cds-copy-button>
+    `);
+
+    await el.updateComplete;
+
+    expect(el).to.have.attribute('autoalign');
+    expect(el).to.not.have.attribute('auto-align');
+  });
 });

@@ -62,8 +62,10 @@ const hasOwn = <T extends object>(obj: T, key: PropertyKey): key is keyof T =>
  * Becomes the default behavior in v12.
  * @attr {boolean} enable-v12-autoalign - Enable `autoalign` by default for
  * components that support it, like `cds-popover`, `cds-tooltip`, etc. An
- * explicit `autoalign` attribute or property always takes precedence. Becomes
- * the default behavior in v12.
+ * explicit `autoalign` attribute or property always takes precedence. A
+ * component reads this flag once, when it connects, so changing the flag later
+ * does not affect components that are already on the page. Becomes the default
+ * behavior in v12.
  * @attr {boolean} enable-v12-toggle-reduced-label-spacing - Enable a reduced
  * spacing between the toggle control and its label. Becomes the default
  * behavior in v12.
