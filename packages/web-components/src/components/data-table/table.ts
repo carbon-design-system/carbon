@@ -271,7 +271,7 @@ class CDSTable extends HostListenerMixin(LitElement) {
       (this.constructor as typeof CDSTable).selectorTableRow
     );
 
-    // update any row dependant features
+    // update any row dependent features
     this.updateExpandable();
   }
 
