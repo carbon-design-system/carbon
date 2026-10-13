@@ -238,6 +238,35 @@ describe('OverflowMenu (enable-v12-overflowmenu)', () => {
     );
   });
 
+  it('returns focus to the trigger when the menu was opened with a mouse click', async () => {
+    render(
+      <>
+        <button type="button">Focusable element</button>
+        <OverflowMenu>
+          <MenuItem label="one" />
+        </OverflowMenu>
+      </>
+    );
+
+    // Focus an element before the OverflowMenu.
+    const otherButton = screen.getByRole('button', {
+      name: 'Focusable element',
+    });
+    otherButton.focus();
+    expect(otherButton).toHaveFocus();
+
+    // Open the menu with a mouse click. Focus moves to the MenuItem.
+    const menuButton = screen.getByRole('button', { name: 'Options' });
+    await userEvent.click(menuButton);
+    const menuItem = screen.getByRole('menuitem', { name: 'one' });
+    expect(menuItem).toHaveFocus();
+
+    // Close the menu with Tab. Focus should move back to the trigger.
+    await userEvent.tab();
+    expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+    expect(menuButton).toHaveFocus();
+  });
+
   describe('supports props.menuAlignment', () => {
     const alignments = ['top-start', 'top-end', 'bottom-start', 'bottom-end'];
 

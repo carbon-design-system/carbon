@@ -90,6 +90,14 @@ export function useAttachedMenu(anchor): UseAttachedMenuReturn {
     // it and immediately re-open since "click" event is fired after
     // "blur" event.
     e.preventDefault();
+
+    // Because the default was prevented, the trigger does not receive
+    // focus on click. Focus it here so the menu can return focus to it
+    // on close. This must be skipped when the menu is already open since
+    // focusing the trigger would blur the menu, closing it.
+    if (!open && e.button === 0) {
+      e.currentTarget.focus();
+    }
   }
 
   return {
