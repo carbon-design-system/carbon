@@ -405,6 +405,7 @@ Map {
     },
     "render": [Function],
   },
+  "AddSelectData" => {},
   "AspectRatio" => {
     "propTypes": {
       "as": {
