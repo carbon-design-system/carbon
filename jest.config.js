@@ -35,6 +35,9 @@ export default {
     'packages/scss-generator/*',
     // e2e already covered by the `test:e2e` job via jest.e2e.config.js
     '<rootDir>/e2e/',
+    // @carbon/angular has its own jest-preset-angular config and is tested
+    // separately via `yarn workspace @carbon/angular test`.
+    '<rootDir>/packages/angular/',
   ],
   transformIgnorePatterns: [
     '<rootDir>/node_modules/(?!lodash-es|nanoid|chalk|@babel/|temporal-polyfill|temporal-utils)',

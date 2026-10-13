@@ -1,0 +1,25 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "outDir": "dist/spec",
+    "types": ["node", "jest"],
+    "paths": {
+      "@carbon/web-components/es/globals/register.js": [
+        "src/__mocks__/@carbon/web-components/register.ts"
+      ],
+      "@carbon/web-components/es/components/*": [
+        "src/__mocks__/@carbon/web-components/component.ts"
+      ]
+    }
+  },
+  "angularCompilerOptions": {
+    "compilationMode": "full",
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  },
+  "include": ["src/**/*.ts", "jest.setup.ts"],
+  "exclude": ["node_modules", "esm2022", "fesm2022"]
+}
