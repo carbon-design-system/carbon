@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025, 2025
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -21,6 +21,7 @@ const meta: Meta<ButtonComponent> = {
         'tertiary',
         'ghost',
         'danger',
+        'danger-primary',
         'danger-tertiary',
         'danger-ghost',
       ],
@@ -58,7 +59,7 @@ type Story = StoryObj<ButtonComponent>;
 export const Default: Story = {
   args: {
     kind: 'primary',
-    size: 'md',
+    size: 'lg',
     type: 'button',
     disabled: false,
     isExpressive: false,
@@ -246,7 +247,16 @@ export const Disabled: Story = {
 export const Expressive: Story = {
   args: { ...Default.args, isExpressive: true },
   render: Default.render,
-  play: Default.play,
+  play: async ({ canvasElement }) => {
+    // `isExpressive` must reach the WC as a property (the WC does not observe
+    // an `is-expressive` attribute), so assert on the rendered shadow DOM.
+    const host = canvasElement.querySelector('cds-ng-button') as HTMLElement;
+    await expect(host).not.toBeNull();
+    await (host as unknown as { updateComplete: Promise<boolean> })
+      .updateComplete;
+    const button = host.shadowRoot?.querySelector('button');
+    await expect(button?.classList.contains('cds--btn--expressive')).toBe(true);
+  },
 };
 
 // Demonstrates rendering as an anchor element via [href]

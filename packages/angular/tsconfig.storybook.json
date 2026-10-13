@@ -6,9 +6,6 @@
     "noImplicitAny": false,
     "strict": false
   },
-  "include": [
-    "src/**/*.ts",
-    ".storybook/**/*.ts"
-  ],
+  "include": ["src/**/*.ts", ".storybook/**/*.ts"],
   "exclude": ["node_modules", "**/*.spec.ts", "**/*.e2e.ts"]
 }

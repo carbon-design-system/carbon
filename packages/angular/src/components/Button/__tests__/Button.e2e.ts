@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025, 2025
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -16,13 +16,31 @@
  *  - WC shadow-DOM rendering and focus management
  *  - IBM Equal Access zero-violation assertion (supplement to Storybook Layer 3)
  *
- * Status: compile-only stub — not yet executed against a running Storybook.
- * Execution is wired up as part of Milestone 1 CI once storybook:build passes.
+ * Run by the `angular-e2e` CI job against the built Storybook
+ * (`yarn workspace @carbon/angular storybook:build`, then `e2e`).
  */
 
-import { test, expect } from '@playwright/test';
+import { test, expect, type Page } from '@playwright/test';
 
 const STORY_URL = '/iframe.html?id=components-button--default&viewMode=story';
+
+/**
+ * Listens for `buttonClick` emissions by attaching a click listener to the
+ * Angular host and recording the count on `window`. The Default story wires
+ * `(buttonClick)` to a Storybook action, so a DOM-level counter is the most
+ * direct way to observe activation from Playwright.
+ */
+const trackClicks = async (page: Page) => {
+  await page.evaluate(() => {
+    const w = window as unknown as { __clicks: number };
+    w.__clicks = 0;
+    document
+      .querySelector('cds-button')!
+      .addEventListener('click', () => (w.__clicks += 1));
+  });
+};
+const clickCount = (page: Page) =>
+  page.evaluate(() => (window as unknown as { __clicks: number }).__clicks);
 
 test.describe('ButtonComponent (Layer 2)', () => {
   test.beforeEach(async ({ page }) => {
@@ -39,22 +57,32 @@ test.describe('ButtonComponent (Layer 2)', () => {
     await expect(wc).toHaveCount(1);
   });
 
+  test('renders the real <button> in the WC shadow root', async ({ page }) => {
+    const button = page.locator('cds-ng-button button');
+    await expect(button).toBeVisible();
+    await expect(button).toHaveClass(/cds--btn--primary/);
+    // Default size matches @carbon/react and @carbon/web-components.
+    await expect(button).toHaveClass(/cds--btn--lg/);
+  });
+
   test('is clickable with a mouse', async ({ page }) => {
-    // The default story renders a primary button; click it and assert no JS error.
-    const button = page.locator('cds-button');
-    await button.click();
+    await trackClicks(page);
+    await page.locator('cds-ng-button button').click();
+    expect(await clickCount(page)).toBe(1);
   });
 
   test('is activatable with Enter key', async ({ page }) => {
-    const button = page.locator('cds-button');
-    await button.focus();
+    await trackClicks(page);
+    await page.locator('cds-ng-button button').focus();
     await page.keyboard.press('Enter');
+    expect(await clickCount(page)).toBe(1);
   });
 
   test('is activatable with Space key', async ({ page }) => {
-    const button = page.locator('cds-button');
-    await button.focus();
+    await trackClicks(page);
+    await page.locator('cds-ng-button button').focus();
     await page.keyboard.press('Space');
+    expect(await clickCount(page)).toBe(1);
   });
 
   test('disabled button is not interactive', async ({ page }) => {
@@ -63,8 +91,22 @@ test.describe('ButtonComponent (Layer 2)', () => {
     );
     await page.waitForSelector('cds-button');
 
-    const wc = page.locator('cds-ng-button');
-    await expect(wc).toHaveAttribute('disabled', '');
+    await expect(page.locator('cds-ng-button')).toHaveAttribute('disabled', '');
+    await expect(page.locator('cds-ng-button button')).toBeDisabled();
+  });
+
+  test('isExpressive reaches the WC (property binding, not attribute)', async ({
+    page,
+  }) => {
+    // Regression: the WC does not observe an `is-expressive` attribute, so the
+    // wrapper must bind the property. Assert on the rendered class.
+    await page.goto(
+      '/iframe.html?id=components-button--expressive&viewMode=story'
+    );
+    await page.waitForSelector('cds-button');
+    await expect(page.locator('cds-ng-button button')).toHaveClass(
+      /cds--btn--expressive/
+    );
   });
 
   test('cds-button selector differs from cds-ng-button (no recursive match)', async ({

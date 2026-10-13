@@ -18,11 +18,11 @@ yarn add @carbon/angular @carbon/web-components @carbon/styles
 
 Peer dependencies required in your project:
 
-| Package                  | Version |
-| ------------------------ | ------- |
-| `@angular/core`          | `>=17`  |
-| `@carbon/web-components` | `>=2`   |
-| `@carbon/styles`         | `>=1`   |
+| Package                  | Version  |
+| ------------------------ | -------- |
+| `@angular/core`          | `>=17`   |
+| `@carbon/web-components` | `^3.0.0` |
+| `@carbon/styles`         | `^2.0.0` |
 
 ## Usage
 
@@ -35,6 +35,7 @@ import { ButtonComponent } from '@carbon/angular';
 
 @Component({
   selector: 'app-root',
+  standalone: true, // optional on Angular 19+, where it is the default
   imports: [ButtonComponent],
   template: `<cds-button kind="primary" (buttonClick)="onClick($event)"
     >Click me</cds-button

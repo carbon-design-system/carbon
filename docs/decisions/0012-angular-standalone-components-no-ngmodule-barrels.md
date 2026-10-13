@@ -17,10 +17,11 @@ area — and have consumers import the modules they need into their own
 `carbon-components-angular` follows this pattern: consumers write
 `imports: [ButtonModule, ModalModule]` in their `NgModule` declaration.
 
-Angular 14 introduced standalone components as an opt-in, and Angular 17 made
-them the default. A standalone component declares its own dependencies and does
-not belong to any `NgModule`. It can be imported directly, like a class,
-wherever it is needed.
+Angular 14 introduced standalone components as an opt-in, Angular 17 made them
+the default for CLI-generated apps, and Angular 19 made `standalone: true` the
+default in the `@Component` decorator itself. A standalone component declares
+its own dependencies and does not belong to any `NgModule`. It can be imported
+directly, like a class, wherever it is needed.
 
 Two export strategies were considered for `@carbon/angular`:
 
@@ -34,8 +35,14 @@ Two export strategies were considered for `@carbon/angular`:
 ## Decision
 
 `@carbon/angular` uses Angular standalone components throughout. Every component
-class is decorated with `standalone: true` (the Angular 17+ default). No
-`NgModule` barrel classes are exported as part of the public API.
+class is explicitly decorated with `standalone: true`. The flag is redundant on
+Angular 19+ but required on Angular 17 and 18, which this package's peer range
+(`>=17`) still supports. No `NgModule` barrel classes are exported as part of
+the public API.
+
+> **Pending:** whether Angular 17 and 18 stay supported is not yet decided. See
+> [ADR 0018](0018-angular-supported-major-versions.md). If the floor moves to
+> 19, the explicit `standalone: true` can be dropped.
 
 NgModule barrels were rejected for three reasons:
 

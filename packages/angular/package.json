@@ -34,8 +34,8 @@
     "@angular/common": ">=17",
     "@angular/core": ">=17",
     "@angular/forms": ">=17",
-    "@carbon/styles": ">=2",
-    "@carbon/web-components": "workspace:^"
+    "@carbon/styles": "^2.0.0-alpha.3",
+    "@carbon/web-components": "^3.0.0-alpha.3"
   },
   "dependencies": {
     "tslib": "^2.6.3"
@@ -65,6 +65,7 @@
     "jest-environment-jsdom": "^30.0.0",
     "jest-preset-angular": "^16.0.0",
     "ng-packagr": "^19.0.0",
+    "remark-gfm": "^4.0.0",
     "rimraf": "^6.0.1",
     "rxjs": "^7.4.0",
     "storybook": "10.3.5",

@@ -1508,6 +1508,14 @@ old API unmaintainable>
    as part of the core library, providing single-package consumption without a
    separate `@carbon/ibm-products-angular` package.
 
+10. **Supported Angular major versions** — **Open.** The peer range is currently
+    `>=17`, but the package is only built and tested against Angular 19. The
+    floor needs to be validated against Angular's support policy, consumer
+    telemetry, and input from Angular experts before it is treated as a promise
+    to consumers. It also decides whether components keep an explicit
+    `standalone: true`. Tracked in
+    [`docs/decisions/0018-angular-supported-major-versions.md`](../../../docs/decisions/0018-angular-supported-major-versions.md).
+
 ---
 
 ## 16. Migration support

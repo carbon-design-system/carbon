@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025, 2025
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -16,8 +16,8 @@ import { defineConfig, devices } from '@playwright/test';
  *   yarn workspace @carbon/angular storybook:build
  *   yarn workspace @carbon/angular e2e
  *
- * CI: the `e2e` script runs storybook:build then starts http-server and
- * runs playwright automatically via the webServer config below.
+ * CI: the `angular-e2e` job runs `storybook:build` first, then `e2e`, which
+ * starts http-server against `storybook-static` via the webServer config below.
  *
  * NOTE: `serve` (the npm package) rewrites Storybook's iframe.html?... URLs.
  * Use `http-server` instead — it serves files as-is without URL rewriting.

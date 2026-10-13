@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025, 2025
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -20,6 +20,11 @@ import { defineCustomElement } from '@carbon/web-components/es/globals/register.
 
 // Register backing WC elements under namespaced tags so the Angular selector
 // `cds-button` never matches the internal `cds-ng-button` element.
+//
+// Binding note: `isExpressive`, `isSelected` and `openTooltip` are declared on
+// the WC without an explicit `attribute:` name, so Lit observes them as the
+// lowercased `isexpressive` / `isselected` / `opentooltip`. They are therefore
+// bound as properties below; kebab-case attribute bindings would be ignored.
 defineCustomElement(CDSButton, { name: 'cds-ng-button' });
 defineCustomElement(CDSButtonSet, { name: 'cds-ng-button-set' });
 defineCustomElement(CDSButtonSkeleton, { name: 'cds-ng-button-skeleton' });
@@ -46,11 +51,11 @@ defineCustomElement(CDSButtonSkeleton, { name: 'cds-ng-button-skeleton' });
       [attr.download]="download"
       [attr.href]="href"
       [attr.hreflang]="hreflang"
-      [attr.is-expressive]="isExpressive || null"
-      [attr.is-selected]="isSelected || null"
+      [isExpressive]="isExpressive"
+      [isSelected]="isSelected"
       [attr.kind]="kind"
       [attr.link-role]="linkRole"
-      [attr.open-tooltip]="openTooltip || null"
+      [openTooltip]="openTooltip"
       [attr.ping]="ping"
       [attr.rel]="rel"
       [attr.size]="size"
@@ -129,10 +134,11 @@ export class ButtonComponent {
   @Input() rel: string | undefined;
 
   /**
-   * Size variant.
+   * Size variant. Defaults to `"lg"`, matching `@carbon/react` and
+   * `@carbon/web-components`.
    * One of: `"xs"` | `"sm"` | `"md"` | `"lg"` | `"xl"` | `"2xl"`.
    */
-  @Input() size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' = 'md';
+  @Input() size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' = 'lg';
 
   /** `tabindex` attribute. */
   @Input() tabIndex: number | undefined;

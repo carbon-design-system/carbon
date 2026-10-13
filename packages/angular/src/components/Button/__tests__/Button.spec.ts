@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025, 2025
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -154,6 +154,10 @@ describe('ButtonComponent', () => {
   // ─── size ─────────────────────────────────────────────────────────────────
   // Mirrors: WC "supports props.size" describe block
 
+  it('should default [size] to "lg" (matches @carbon/react and the WC)', () => {
+    expect(wc().getAttribute('size')).toBe('lg');
+  });
+
   const sizes = ['xs', 'sm', 'md', 'lg', 'xl', '2xl'] as const;
 
   sizes.forEach((size) => {
@@ -164,33 +168,41 @@ describe('ButtonComponent', () => {
     });
   });
 
-  // ─── isExpressive ─────────────────────────────────────────────────────────
+  // ─── isExpressive / isSelected / openTooltip ──────────────────────────────
+  // The WC declares these without an explicit `attribute:` name, so Lit only
+  // observes the lowercased attribute (`isexpressive`, …). The wrapper must
+  // therefore bind them as *properties*; a kebab-case attribute is ignored by
+  // the real element. These tests assert the property is set and that no
+  // ineffective kebab-case attribute is emitted.
 
-  it('should reflect [isExpressive] as "is-expressive" attribute when true', () => {
+  const wcProps = () =>
+    wc() as HTMLElement & {
+      isExpressive?: boolean;
+      isSelected?: boolean;
+      openTooltip?: boolean;
+    };
+
+  it('should bind [isExpressive] as a property on the wc element', () => {
     component.isExpressive = true;
     fixture.detectChanges();
-    expect(wc().getAttribute('is-expressive')).not.toBeNull();
-  });
+    expect(wcProps().isExpressive).toBe(true);
+    expect(wc().hasAttribute('is-expressive')).toBe(false);
 
-  it('should omit "is-expressive" attribute when isExpressive is false', () => {
     component.isExpressive = false;
     fixture.detectChanges();
-    expect(wc().getAttribute('is-expressive')).toBeNull();
+    expect(wcProps().isExpressive).toBe(false);
   });
 
-  // ─── isSelected ───────────────────────────────────────────────────────────
   // Mirrors: WC "should set aria-pressed on a selected ghost icon button"
-
-  it('should reflect [isSelected] as "is-selected" attribute when true', () => {
+  it('should bind [isSelected] as a property on the wc element', () => {
     component.isSelected = true;
     fixture.detectChanges();
-    expect(wc().getAttribute('is-selected')).not.toBeNull();
-  });
+    expect(wcProps().isSelected).toBe(true);
+    expect(wc().hasAttribute('is-selected')).toBe(false);
 
-  it('should omit "is-selected" attribute when isSelected is false', () => {
     component.isSelected = false;
     fixture.detectChanges();
-    expect(wc().getAttribute('is-selected')).toBeNull();
+    expect(wcProps().isSelected).toBe(false);
   });
 
   // ─── tooltip ──────────────────────────────────────────────────────────────
@@ -231,16 +243,15 @@ describe('ButtonComponent', () => {
 
   // ─── openTooltip ──────────────────────────────────────────────────────────
 
-  it('should reflect [openTooltip] as "open-tooltip" attribute when true', () => {
+  it('should bind [openTooltip] as a property on the wc element', () => {
     component.openTooltip = true;
     fixture.detectChanges();
-    expect(wc().getAttribute('open-tooltip')).not.toBeNull();
-  });
+    expect(wcProps().openTooltip).toBe(true);
+    expect(wc().hasAttribute('open-tooltip')).toBe(false);
 
-  it('should omit "open-tooltip" attribute when openTooltip is false', () => {
     component.openTooltip = false;
     fixture.detectChanges();
-    expect(wc().getAttribute('open-tooltip')).toBeNull();
+    expect(wcProps().openTooltip).toBe(false);
   });
 
   // ─── batchAction ──────────────────────────────────────────────────────────
