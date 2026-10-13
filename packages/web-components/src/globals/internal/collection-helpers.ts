@@ -57,7 +57,7 @@ export const forEach = (
 /**
  * @param a A DOM collection.
  * @param item An item in the DOM collection.
- * @returns The index of the first occurence of the given item in the given collection. `-1` if no such item is found.
+ * @returns The index of the first occurrence of the given item in the given collection. `-1` if no such item is found.
  */
 export const indexOf = (
   a: NodeListOf<Node> | HTMLCollectionOf<Element>,
