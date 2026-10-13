@@ -19,6 +19,47 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 @customElement(`${prefix}-table-toolbar-content`)
 class CDSTableToolbarContent extends LitElement {
   /**
+   * Children that had a `size` attribute before the toolbar managed them.
+   */
+  private _childrenWithUserSize = new WeakSet<Element>();
+
+  /**
+   * Children whose `size` attribute was set by this toolbar.
+   */
+  private _childrenWithToolbarSize = new WeakSet<Element>();
+
+  /**
+   * Children whose `size` attribute was reflected by the child component.
+   */
+  private _childrenWithReflectedSize = new WeakSet<Element>();
+
+  /**
+   * `true` once initial child sizes have been captured.
+   */
+  private _hasCapturedInitialChildSizes = false;
+
+  /**
+   * `true` if the toolbar size changed before initial child sizes were captured.
+   */
+  private _shouldUpdateChildSizes = false;
+
+  /**
+   * Watches for child components reflecting their default `size`.
+   */
+  private _observer = new MutationObserver((records) => {
+    records.forEach(({ attributeName, oldValue, target }) => {
+      if (
+        attributeName === 'size' &&
+        oldValue === null &&
+        !this._childrenWithToolbarSize.has(target as Element)
+      ) {
+        this._childrenWithReflectedSize.add(target as Element);
+        this._childrenWithUserSize.delete(target as Element);
+      }
+    });
+  });
+
+  /**
    * `true` if this batch actions bar is active.
    */
   @property({ type: Boolean, reflect: true, attribute: 'has-batch-actions' })
@@ -30,6 +71,22 @@ class CDSTableToolbarContent extends LitElement {
   @property({ reflect: true })
   size;
 
+  connectedCallback() {
+    super.connectedCallback();
+
+    this._observer.observe(this, {
+      attributes: true,
+      attributeFilter: ['size'],
+      attributeOldValue: true,
+      subtree: true,
+    });
+  }
+
+  disconnectedCallback() {
+    this._observer.disconnect();
+    super.disconnectedCallback();
+  }
+
   updated(changedProperties) {
     if (this.hasBatchActions) {
       this.setAttribute('tabindex', '-1');
@@ -38,16 +95,48 @@ class CDSTableToolbarContent extends LitElement {
     }
 
     if (changedProperties.has('size')) {
-      [...this.children].forEach((e) => {
-        const size =
-          this.size === 'md' || this.size === 'xl' ? 'lg' : this.size;
-        e.setAttribute('size', size);
-      });
+      if (!this._hasCapturedInitialChildSizes) {
+        this._shouldUpdateChildSizes = true;
+        return;
+      }
+
+      this._updateChildSizes();
     }
   }
 
+  private _handleSlotChange({ target }) {
+    (target as HTMLSlotElement).assignedElements().forEach((e) => {
+      if (e.hasAttribute('size') && !this._childrenWithReflectedSize.has(e)) {
+        this._childrenWithUserSize.add(e);
+      }
+    });
+
+    this._hasCapturedInitialChildSizes = true;
+
+    if (this._shouldUpdateChildSizes || this.size) {
+      this._shouldUpdateChildSizes = false;
+      this._updateChildSizes();
+    }
+  }
+
+  private _updateChildSizes() {
+    const size = this.size === 'md' || this.size === 'xl' ? 'lg' : this.size;
+
+    [...this.children].forEach((e) => {
+      if (
+        this._childrenWithUserSize.has(e) &&
+        !this._childrenWithToolbarSize.has(e)
+      ) {
+        return;
+      }
+
+      e.setAttribute('size', size);
+      this._childrenWithToolbarSize.add(e);
+    });
+  }
+
   render() {
-    return html` <slot></slot> `;
+    return html` <slot @slotchange="${this._handleSlotChange}"></slot> `;
   }
 
   static styles = styles;
