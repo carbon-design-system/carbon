@@ -105,8 +105,8 @@ export interface TagBaseProps {
   slug?: ReactNode;
 
   /**
-   * Specify the tab index of the `Tag`. When the label is truncated, it is
-   * applied to the tooltip trigger.
+   * Specify the tab index of the `Tag`. When a `DefinitionTooltip` is rendered
+   * for a truncated label, `tabIndex` is applied to the tooltip trigger.
    */
   tabIndex?: number;
 
@@ -412,8 +412,8 @@ Tag.propTypes = {
   ),
 
   /**
-   * Specify the tab index of the `Tag`. When the label is truncated, it is
-   * applied to the tooltip trigger.
+   * Specify the tab index of the `Tag`. When a `DefinitionTooltip` is rendered
+   * for a truncated label, `tabIndex` is applied to the tooltip trigger.
    */
   tabIndex: PropTypes.number,
 
