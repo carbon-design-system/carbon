@@ -10,10 +10,12 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import type { StorybookConfig } from '@storybook/react-vite';
-import { mergeConfig } from 'vite';
+import babel from '@rolldown/plugin-babel';
+import { mergeConfig, type PluginOption } from 'vite';
 
 import baseConfig from '../.storybook/main.ts';
 import { productMigratedStoryGlobs } from '../product-migrated-components.mjs';
+import { limitSassConcurrency } from '../../../tasks/limit-sass-concurrency.mjs';
 
 const configDir = fileURLToPath(new URL('.', import.meta.url));
 const manifestPath = path.join(configDir, 'generated', 'manifest.json');
@@ -28,6 +30,35 @@ const replacedDocs = new Set(
   })
 );
 const v12FeatureFlags = `@use '@carbon/styles/scss/feature-flags' with ($feature-flags: ('enable-v12-release': true));\n`;
+
+function withoutProductionBabelSourceMaps(
+  plugins: PluginOption[] | undefined
+): PluginOption[] | undefined {
+  if (!plugins) {
+    return plugins;
+  }
+
+  return plugins.map((plugin) => {
+    if (Array.isArray(plugin)) {
+      return withoutProductionBabelSourceMaps(plugin) ?? [];
+    }
+
+    if (
+      plugin &&
+      typeof plugin === 'object' &&
+      'name' in plugin &&
+      plugin.name === '@rolldown/plugin-babel'
+    ) {
+      return babel({
+        presets: ['babel-preset-carbon'],
+        sourceMap: false,
+      });
+    }
+
+    return plugin;
+  });
+}
+
 const v12FeatureFlagPattern = /\benable-v12-[a-z0-9-]+\b/;
 const titlePatterns = {
   Deprecated: /(?:title:\s*['"`]|<Meta\s+title=["'])Deprecated(?:\/|['"`])/,
@@ -106,11 +137,25 @@ const config: StorybookConfig = {
   ...baseConfig,
   stories,
   async viteFinal(viteConfig, options) {
+    const isProductionBuild = options.configType === 'PRODUCTION';
+    if (isProductionBuild) {
+      limitSassConcurrency();
+    }
+
     const baseViteConfig = baseConfig.viteFinal
       ? await baseConfig.viteFinal(viteConfig, options)
       : viteConfig;
 
+    if (isProductionBuild) {
+      baseViteConfig.plugins = withoutProductionBabelSourceMaps(
+        baseViteConfig.plugins
+      );
+    }
+
     return mergeConfig(baseViteConfig, {
+      build: {
+        reportCompressedSize: false,
+      },
       css: {
         preprocessorOptions: {
           scss: {

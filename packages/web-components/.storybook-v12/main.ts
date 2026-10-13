@@ -14,6 +14,8 @@ import { mergeConfig } from 'vite';
 
 import baseConfig from '../.storybook/main.ts';
 import { productMigratedStoryGlobs } from '../product-migrated-components.mjs';
+import { litStyleEntryPlugin } from './lit-style-entry-plugin.mjs';
+import { limitSassConcurrency } from '../../../tasks/limit-sass-concurrency.mjs';
 
 const configDir = fileURLToPath(new URL('.', import.meta.url));
 const manifestPath = path.join(configDir, 'generated', 'manifest.json');
@@ -117,11 +119,19 @@ const config: StorybookConfig = {
   ...baseConfig,
   stories,
   async viteFinal(viteConfig, options) {
+    if (options.configType === 'PRODUCTION') {
+      limitSassConcurrency();
+    }
+
     const baseViteConfig = baseConfig.viteFinal
       ? await baseConfig.viteFinal(viteConfig, options)
       : viteConfig;
 
     return mergeConfig(baseViteConfig, {
+      plugins: [litStyleEntryPlugin()],
+      build: {
+        reportCompressedSize: false,
+      },
       css: {
         preprocessorOptions: {
           scss: {
