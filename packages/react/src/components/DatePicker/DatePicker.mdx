@@ -71,9 +71,6 @@ interactions that come with the calendar menu or a dropdown.
       onClick: () =>
         stackblitzPrefillConfig({
           story: DatePickerStories.Simple,
-          customFunctionDefs: [
-            `const getDatePickerInputArgs = ${DatePickerStories.getDatePickerInputArgs.toString()};`,
-          ],
         }),
     },
   ]}
@@ -93,9 +90,6 @@ years, however they work best when used for recent or near future dates.
       onClick: () =>
         stackblitzPrefillConfig({
           story: DatePickerStories.SingleWithCalendar,
-          customFunctionDefs: [
-            `const getDatePickerInputArgs = ${DatePickerStories.getDatePickerInputArgs.toString()};`,
-          ],
         }),
     },
   ]}
@@ -108,9 +102,6 @@ years, however they work best when used for recent or near future dates.
       onClick: () =>
         stackblitzPrefillConfig({
           story: DatePickerStories.RangeWithCalendar,
-          customFunctionDefs: [
-            `const getDatePickerInputArgs = ${DatePickerStories.getDatePickerInputArgs.toString()};`,
-          ],
         }),
     },
   ]}
@@ -130,9 +121,6 @@ You can use the `DatePickerSkeleton` component to render a skeleton variant of a
       onClick: () =>
         stackblitzPrefillConfig({
           story: DatePickerStories.Skeleton,
-          customFunctionDefs: [
-            `const getDatePickerInputArgs = ${DatePickerStories.getDatePickerInputArgs.toString()};`,
-          ],
         }),
     },
   ]}
@@ -148,9 +136,6 @@ You can use the `DatePickerSkeleton` component to render a skeleton variant of a
       onClick: () =>
         stackblitzPrefillConfig({
           story: DatePickerStories.withAILabel,
-          customFunctionDefs: [
-            `const getDatePickerInputArgs = ${DatePickerStories.getDatePickerInputArgs.toString()};`,
-          ],
         }),
     },
   ]}

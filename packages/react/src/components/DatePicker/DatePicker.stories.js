@@ -38,18 +38,6 @@ const sharedArgs = {
   warnText: 'Warning message goes here',
 };
 
-export const getDatePickerInputArgs = ({
-  allowInput,
-  closeOnSelect,
-  dateFormat,
-  maxDate,
-  minDate,
-  onClose,
-  onOpen,
-  short,
-  ...datePickerInputArgs
-}) => datePickerInputArgs;
-
 const sharedArgTypes = {
   allowInput: {
     control: 'boolean',
@@ -165,9 +153,21 @@ export default {
   },
 };
 
-export const Default = ({ readOnly, ...args }) => {
+export const Default = (args) => {
   const locale = useDocumentLang().split('-')[0];
-  const datePickerInputArgs = getDatePickerInputArgs({ ...args, readOnly });
+  const { readOnly } = args;
+  const {
+    allowInput,
+    closeOnSelect,
+    dateFormat,
+    datePickerType,
+    maxDate,
+    minDate,
+    onClose,
+    onOpen,
+    short,
+    ...datePickerInputArgs
+  } = args;
   return (
     <DatePicker
       datePickerType="single"
@@ -200,7 +200,18 @@ Default.argTypes = {
 Default.args = { ...sharedArgs };
 
 export const Simple = (args) => {
-  const datePickerInputArgs = getDatePickerInputArgs(args);
+  const {
+    allowInput,
+    closeOnSelect,
+    dateFormat,
+    datePickerType,
+    maxDate,
+    minDate,
+    onClose,
+    onOpen,
+    short,
+    ...datePickerInputArgs
+  } = args;
   return (
     <DatePicker datePickerType="simple" {...args}>
       <DatePickerInput
@@ -217,7 +228,18 @@ Simple.args = { ...sharedArgs };
 Simple.argTypes = { ...sharedArgTypes };
 
 export const SingleWithCalendar = (args) => {
-  const datePickerInputArgs = getDatePickerInputArgs(args);
+  const {
+    allowInput,
+    closeOnSelect,
+    dateFormat,
+    datePickerType,
+    maxDate,
+    minDate,
+    onClose,
+    onOpen,
+    short,
+    ...datePickerInputArgs
+  } = args;
   return (
     <DatePicker datePickerType="single" {...args}>
       <DatePickerInput
@@ -235,7 +257,18 @@ SingleWithCalendar.args = { ...sharedArgs };
 SingleWithCalendar.argTypes = { ...sharedArgTypes };
 
 export const RangeWithCalendar = (args) => {
-  const datePickerInputArgs = getDatePickerInputArgs(args);
+  const {
+    allowInput,
+    closeOnSelect,
+    dateFormat,
+    datePickerType,
+    maxDate,
+    minDate,
+    onClose,
+    onOpen,
+    short,
+    ...datePickerInputArgs
+  } = args;
   return (
     <DatePicker datePickerType="range" {...args}>
       <DatePickerInput
@@ -260,7 +293,18 @@ RangeWithCalendar.args = { ...sharedArgs };
 RangeWithCalendar.argTypes = { ...sharedArgTypes };
 
 export const SimpleWithLayer = (args) => {
-  const datePickerInputArgs = getDatePickerInputArgs(args);
+  const {
+    allowInput,
+    closeOnSelect,
+    dateFormat,
+    datePickerType,
+    maxDate,
+    minDate,
+    onClose,
+    onOpen,
+    short,
+    ...datePickerInputArgs
+  } = args;
   return (
     <WithLayer>
       {(layer) => (
@@ -290,7 +334,18 @@ SimpleWithLayer.argTypes = { ...sharedArgTypes };
 SimpleWithLayer.argTypes = Simple.argTypes;
 
 export const SingleWithCalendarWithLayer = (args) => {
-  const datePickerInputArgs = getDatePickerInputArgs(args);
+  const {
+    allowInput,
+    closeOnSelect,
+    dateFormat,
+    datePickerType,
+    maxDate,
+    minDate,
+    onClose,
+    onOpen,
+    short,
+    ...datePickerInputArgs
+  } = args;
   return (
     <WithLayer>
       {(layer) => (
@@ -320,7 +375,18 @@ SingleWithCalendarWithLayer.argTypes = { ...sharedArgTypes };
 SingleWithCalendarWithLayer.argTypes = SingleWithCalendar.argTypes;
 
 export const RangeWithCalendarWithLayer = (args) => {
-  const datePickerInputArgs = getDatePickerInputArgs(args);
+  const {
+    allowInput,
+    closeOnSelect,
+    dateFormat,
+    datePickerType,
+    maxDate,
+    minDate,
+    onClose,
+    onOpen,
+    short,
+    ...datePickerInputArgs
+  } = args;
   return (
     <WithLayer>
       {(layer) => (
@@ -372,7 +438,18 @@ Skeleton.parameters = {
 };
 
 export const withAILabel = (args) => {
-  const datePickerInputArgs = getDatePickerInputArgs(args);
+  const {
+    allowInput,
+    closeOnSelect,
+    dateFormat,
+    datePickerType,
+    maxDate,
+    minDate,
+    onClose,
+    onOpen,
+    short,
+    ...datePickerInputArgs
+  } = args;
   const aiLabel = (
     <AILabel className="ai-label-container">
       <AILabelContent>
