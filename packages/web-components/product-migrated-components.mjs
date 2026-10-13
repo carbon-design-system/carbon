@@ -66,6 +66,8 @@ export const productMigratedStoryGlobs = [
   '../src/examples/coachmark/coachmark-overlay-elements/*.mdx',
   '../src/examples/coachmark/coachmark-stacked/coachmark-stacked.stories.ts',
   '../src/examples/coachmark/coachmark-stacked/*.mdx',
+  '../src/examples/saving/saving.stories.ts',
+  '../src/examples/saving/*.mdx',
 ];
 
 /**
