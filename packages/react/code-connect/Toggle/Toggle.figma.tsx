@@ -11,7 +11,7 @@ import figma from '@figma/code-connect';
 
 figma.connect(
   Toggle,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=3038-25739&t=9zqAFF3e617gPBGE-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=3038-25739&t=9zqAFF3e617gPBGE-4',
   {
     props: {
       size: figma.enum('Size', {
@@ -40,7 +40,7 @@ figma.connect(
 //https://github.com/figma/code-connect/issues/45
 figma.connect(
   Toggle,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=3038-25739&t=9zqAFF3e617gPBGE-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=3038-25739&t=9zqAFF3e617gPBGE-4',
 
   {
     variant: { 'Toggle only': 'True' },
@@ -75,7 +75,7 @@ figma.connect(
 //https://github.com/figma/code-connect/issues/45
 figma.connect(
   Toggle,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=3038-25739&t=9zqAFF3e617gPBGE-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=3038-25739&t=9zqAFF3e617gPBGE-4',
 
   {
     variant: { 'Show value': 'False' },
@@ -122,7 +122,7 @@ figma.connect(
 
 figma.connect(
   ToggleSkeleton,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=3038-25739&t=9zqAFF3e617gPBGE-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=3038-25739&t=9zqAFF3e617gPBGE-4',
   {
     variant: { State: 'Skeleton' },
 
