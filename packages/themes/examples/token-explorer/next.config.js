@@ -20,7 +20,7 @@ module.exports = (phase, { defaultConfig }) => {
   if (phase === PHASE_PRODUCTION_BUILD) {
     return {
       ...nextConfig,
-      basePath: '/themes/examples/theme-tokens-dtcg',
+      basePath: '/themes/examples/token-explorer',
       output: 'export',
       distDir: 'build',
     };

@@ -18,12 +18,7 @@ import {
 import { TokenFormat, group } from '../../../../src/tokens';
 import * as componentGroups from '../../../../src/tokens/components';
 
-import themesJson from '../../../../src/dtcg/themes.json';
-import buttonJson from '../../../../src/dtcg/components/button.json';
-import contentSwitcherJson from '../../../../src/dtcg/components/content-switcher.json';
-import notificationJson from '../../../../src/dtcg/components/notification.json';
-import statusJson from '../../../../src/dtcg/components/status.json';
-import tagJson from '../../../../src/dtcg/components/tag.json';
+import { tokens } from '../tokens';
 
 // ─── Component token lookup: camelCase JS name → { whiteTheme, g10, g90, g100 } ──
 // The generated files use 'whiteTheme' as the key for the white theme.
@@ -36,58 +31,6 @@ const COMP_TOKENS = Object.assign(
   contentSwitcherTokens
 );
 const THEME_KEY = { white: 'whiteTheme', g10: 'g10', g90: 'g90', g100: 'g100' };
-
-// ─── DTCG helpers ─────────────────────────────────────────────────────────────
-
-function flattenDtcg(obj, themeName, prefix = '') {
-  const result = {};
-  for (const [key, val] of Object.entries(obj)) {
-    if (key.startsWith('$')) continue;
-    const name = prefix ? `${prefix}-${key}` : key;
-    if (val && typeof val === 'object') {
-      const carbonThemes = val.$extensions?.['carbon.themes'];
-      if (carbonThemes && themeName in carbonThemes) {
-        result[name] = { ...val, $value: carbonThemes[themeName] };
-      }
-      Object.assign(result, flattenDtcg(val, themeName, name));
-    }
-  }
-  return result;
-}
-
-function flattenComponentDtcg(obj, prefix = '') {
-  const result = {};
-  for (const [key, val] of Object.entries(obj)) {
-    if (key.startsWith('$')) continue;
-    const name = prefix ? `${prefix}-${key}` : key;
-    if (
-      val &&
-      typeof val === 'object' &&
-      '$extensions' in val &&
-      'carbon.themes' in val.$extensions
-    ) {
-      result[name] = val;
-    } else if (val && typeof val === 'object') {
-      Object.assign(result, flattenComponentDtcg(val, name));
-    }
-  }
-  return result;
-}
-
-const dtcgFlat = {
-  white: flattenDtcg(themesJson, 'white'),
-  g10: flattenDtcg(themesJson, 'g10'),
-  g90: flattenDtcg(themesJson, 'g90'),
-  g100: flattenDtcg(themesJson, 'g100'),
-};
-
-const componentDtcg = {
-  ...flattenComponentDtcg(buttonJson),
-  ...flattenComponentDtcg(contentSwitcherJson),
-  ...flattenComponentDtcg(notificationJson),
-  ...flattenComponentDtcg(statusJson),
-  ...flattenComponentDtcg(tagJson),
-};
 
 function resolveColor(theme, tokenName) {
   const jsName = TokenFormat.convert({
@@ -114,24 +57,9 @@ function resolveColor(theme, tokenName) {
 }
 
 function getAlias(theme, tokenName) {
-  if (componentDtcg[tokenName]) {
-    const entry = componentDtcg[tokenName];
-    const val =
-      entry.$extensions?.['carbon.themes']?.[theme] ??
-      entry.$extensions?.['carbon.themes']?.white ??
-      null;
-    const alpha =
-      entry.$extensions?.['org.carbon']?.alphaModifiers?.[theme] ??
-      entry.$extensions?.['org.carbon']?.alphaModifier ??
-      null;
-    if (!val) return null;
-    return alpha != null ? `${val} × ${alpha}α` : String(val);
-  }
-  const entry = dtcgFlat[theme]?.[tokenName] ?? dtcgFlat.white?.[tokenName];
+  const entry = tokens[theme]?.[tokenName] ?? tokens.white?.[tokenName];
   if (!entry) return null;
-  const ref = String(entry.$value ?? '');
-  const alpha = entry.$extensions?.['org.carbon']?.alphaModifier;
-  return alpha != null ? `${ref} × ${alpha}α` : ref;
+  return entry.alpha != null ? `${entry.alias} × ${entry.alpha}α` : entry.alias;
 }
 
 // ─── Static tree data ─────────────────────────────────────────────────────────
@@ -335,9 +263,7 @@ function CurvedLink({ fromNode, toNode }) {
 // ─── Description lookup ───────────────────────────────────────────────────────
 
 function getDescription(theme, tokenName) {
-  if (componentDtcg[tokenName])
-    return componentDtcg[tokenName].$description ?? null;
-  const entry = dtcgFlat[theme]?.[tokenName] ?? dtcgFlat.white?.[tokenName];
+  const entry = tokens[theme]?.[tokenName] ?? tokens.white?.[tokenName];
   return entry?.$description ?? null;
 }
 
