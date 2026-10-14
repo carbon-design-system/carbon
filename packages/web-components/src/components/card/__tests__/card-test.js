@@ -316,7 +316,6 @@ describe('cds-card-header', function () {
     it('should offset header actions when the card has an AI label and reset when removed', async () => {
       const el = await fixture(html`
         <cds-card>
-          <cds-ai-label slot="decorator"></cds-ai-label>
           <cds-card-header>
             <cds-card-title>T</cds-card-title>
             <cds-card-actions></cds-card-actions>
@@ -325,6 +324,17 @@ describe('cds-card-header', function () {
       `);
       const header = el.querySelector('cds-card-header');
       const actions = el.querySelector('cds-card-actions');
+      await el.updateComplete;
+      await header.updateComplete;
+      const defaultOffset = getComputedStyle(actions).insetInlineEnd;
+
+      const aiLabel = document.createElement('cds-ai-label');
+      aiLabel.slot = 'decorator';
+      el.prepend(aiLabel);
+      await oneEvent(
+        el.shadowRoot.querySelector('slot[name="decorator"]'),
+        'slotchange'
+      );
       await el.updateComplete;
       await header.updateComplete;
       const withLabel = getComputedStyle(actions).insetInlineEnd;
@@ -339,6 +349,7 @@ describe('cds-card-header', function () {
       const withoutLabel = getComputedStyle(actions).insetInlineEnd;
 
       expect(parseFloat(withLabel)).to.be.greaterThan(parseFloat(withoutLabel));
+      expect(parseFloat(withoutLabel)).to.equal(parseFloat(defaultOffset));
     });
   });
 
