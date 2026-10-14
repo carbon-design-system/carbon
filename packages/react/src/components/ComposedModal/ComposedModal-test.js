@@ -121,6 +121,26 @@ describe.each([
       );
     });
 
+    it('should be described by a provided aria-describedby', () => {
+      render(
+        <div>
+          <div id="description-modal-id">
+            This is the description of the modal
+          </div>
+          <Component aria-describedby="description-modal-id">
+            <ModalHeader>Modal header</ModalHeader>
+            <ModalBody>This is the modal body content</ModalBody>
+            <ModalFooter primaryButtonText="Add" secondaryButtonText="Cancel" />
+          </Component>
+        </div>
+      );
+
+      expect(screen.getByRole('dialog', { hidden: true })).toHaveAttribute(
+        'aria-describedby',
+        'description-modal-id'
+      );
+    });
+
     it('should change submit to danger button', () => {
       render(
         <Component danger open>
@@ -470,6 +490,30 @@ describe.each([
   });
 
   describe('enable-dialog-element feature flag', () => {
+    it('should pass aria-describedby through to the native dialog element', () => {
+      render(
+        <div>
+          <div id="description-modal-id">
+            This is the description of the modal
+          </div>
+          <FeatureFlags enableDialogElement>
+            <ComposedModal
+              aria-describedby="description-modal-id"
+              data-testid="modal"
+              open>
+              <ModalHeader>Modal header</ModalHeader>
+              <ModalBody>This is the modal body content</ModalBody>
+            </ComposedModal>
+          </FeatureFlags>
+        </div>
+      );
+
+      expect(screen.getByRole('dialog', { hidden: true })).toHaveAttribute(
+        'aria-describedby',
+        'description-modal-id'
+      );
+    });
+
     it('should bring launcherButtonRef element into focus on close when the ref is defined', async () => {
       const ComposedModalExample = () => {
         const [open, setOpen] = useState(true);
@@ -597,7 +641,7 @@ describe.each([
 
         // The background layer is used here instead of a button outside the
         // modal because a real user cannot interact with a button. The
-        // backround layer is in the way.
+        // background layer is in the way.
         const backgroundLayer = screen.getByRole('presentation', {
           hidden: true,
         });
@@ -625,7 +669,7 @@ describe.each([
 
         // The background layer is used here instead of a button outside the
         // modal because a real user cannot interact with a button. The
-        // backround layer is in the way.
+        // background layer is in the way.
         const backgroundLayer = screen.getByRole('presentation', {
           hidden: true,
         });
@@ -647,7 +691,7 @@ describe.each([
 
         // The background layer is used here instead of a button outside the
         // modal because a real user cannot interact with a button. The
-        // backround layer is in the way.
+        // background layer is in the way.
         const backgroundLayer = screen.getByRole('presentation', {
           hidden: true,
         });
@@ -680,7 +724,7 @@ describe.each([
 
         // The background layer is used here instead of a button outside the
         // modal because a real user cannot interact with a button. The
-        // backround layer is in the way.
+        // background layer is in the way.
         const backgroundLayer = screen.getByRole('presentation', {
           hidden: true,
         });
@@ -705,7 +749,7 @@ describe.each([
 
         // The background layer is used here instead of a button outside the
         // modal because a real user cannot interact with a button. The
-        // backround layer is in the way.
+        // background layer is in the way.
         const backgroundLayer = screen.getByRole('presentation', {
           hidden: true,
         });
@@ -735,7 +779,7 @@ describe.each([
 
         // The background layer is used here instead of a button outside the
         // modal because a real user cannot interact with a button. The
-        // backround layer is in the way.
+        // background layer is in the way.
         const backgroundLayer = screen.getByRole('presentation', {
           hidden: true,
         });
