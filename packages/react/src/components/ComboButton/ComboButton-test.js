@@ -187,6 +187,39 @@ describe('ComboButton', () => {
       ).toHaveTextContent(/^Additional action$/);
     });
 
+    it('returns focus to the trigger when the menu was opened with a mouse click', async () => {
+      render(
+        <>
+          <button type="button">Focusable element</button>
+          <ComboButton label="Primary action">
+            <MenuItem label="Additional action" />
+          </ComboButton>
+        </>
+      );
+
+      // Focus an element before the ComboButton.
+      const otherButton = screen.getByRole('button', {
+        name: 'Focusable element',
+      });
+      otherButton.focus();
+      expect(otherButton).toHaveFocus();
+
+      // Open the menu with a mouse click. Focus moves to the MenuItem.
+      // `hidden: true` because jsdom has no layout, so floating-ui sets the
+      // menu to `visibility: hidden`.
+      const trigger = screen.getByRole('button', {
+        name: 'Additional actions',
+      });
+      await userEvent.click(trigger);
+      expect(trigger).toHaveAttribute('aria-expanded', 'true');
+      expect(screen.getByRole('menuitem', { hidden: true })).toHaveFocus();
+
+      // Close the menu with Tab. Focus should move back to the trigger.
+      await userEvent.tab();
+      expect(trigger).toHaveAttribute('aria-expanded', 'false');
+      expect(trigger).toHaveFocus();
+    });
+
     it('supports ellipsis in ComboButton by checking the className', async () => {
       render(
         <ComboButton label="Primary action super long text to enable ellipsis">
