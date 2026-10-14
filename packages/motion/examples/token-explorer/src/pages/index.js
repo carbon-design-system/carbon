@@ -6,10 +6,10 @@
  */
 
 import React from 'react';
-import motionJson from '../../../../src/dtcg/motion.json';
-import surfacesJson from '../../../../src/dtcg/surfaces.json';
+import motionJson from '../../../../tokens/motion.tokens.json';
+import surfacesJson from '../../../../tokens/surfaces.tokens.json';
 
-// ── Flatten motion.json into a list of token objects ─────────────────────────
+// ── Flatten motion.tokens.json into a list of token objects ──────────────────
 
 function flattenMotion(obj, prefix = '') {
   const results = [];
@@ -44,7 +44,7 @@ function flattenMotion(obj, prefix = '') {
   return results;
 }
 
-// ── Flatten surfaces.json ─────────────────────────────────────────────────────
+// ── Flatten surfaces.tokens.json ──────────────────────────────────────────────
 
 function flattenSurfaces(obj, prefix = '') {
   const results = [];
@@ -55,9 +55,9 @@ function flattenSurfaces(obj, prefix = '') {
       value &&
       typeof value === 'object' &&
       '$extensions' in value &&
-      value.$extensions['carbon.motion']
+      value.$extensions['com.ibm.carbon']?.motion
     ) {
-      const recipe = value.$extensions['carbon.motion'];
+      const recipe = value.$extensions['com.ibm.carbon'].motion;
       results.push({
         name,
         resolved: recipe.duration ?? '—',

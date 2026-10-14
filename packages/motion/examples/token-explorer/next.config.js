@@ -20,7 +20,7 @@ module.exports = (phase, { defaultConfig }) => {
   if (phase === PHASE_PRODUCTION_BUILD) {
     return {
       ...nextConfig,
-      basePath: '/motion/examples/motion-tokens-dtcg',
+      basePath: '/motion/examples/token-explorer',
       output: 'export',
       distDir: 'build',
     };
