@@ -9,11 +9,6 @@
 
 $prefix: 'c4p' !default;
 
-@use '@carbon/styles/scss/config' with (
-  $font-path: '@ibm/plex'
-);
-@use '@carbon/styles';
-
 // Coachmark next (composable) + tagline styles from ibm-products
 @use '@carbon/ibm-products/scss/components/Coachmark';
 
