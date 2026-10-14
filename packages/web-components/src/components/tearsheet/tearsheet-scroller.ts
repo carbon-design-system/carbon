@@ -18,12 +18,11 @@ import '../popover/popover-content';
 import CDSButton from '../button/button';
 import { prefix } from '../../globals/settings';
 import {
-  getTearsheetSignal,
-  getTearsheetState,
-  updateTearsheetState,
-  getParentTearsheetId,
-} from './tearsheet-signal';
-import { SignalWatcher } from '@lit-labs/signals';
+  tearsheetContext,
+  defaultTearsheetState,
+  type TearsheetContextValue,
+} from './tearsheet-context';
+import { consume } from '@lit/context';
 
 const blockClass = `${prefix}--tearsheet`;
 
@@ -32,7 +31,7 @@ const blockClass = `${prefix}--tearsheet`;
  * @element cds-tearsheet-scroller
  */
 @customElement(`${prefix}-tearsheet-scroller`)
-export class CDSTearsheetScroller extends SignalWatcher(CDSButton) {
+export class CDSTearsheetScroller extends CDSButton {
   @property({ reflect: true })
   slot = 'scroller';
 
@@ -48,13 +47,8 @@ export class CDSTearsheetScroller extends SignalWatcher(CDSButton) {
   @property({ reflect: true })
   size = 'md';
 
-  /** uniqueId of the parent cds-tearsheet, read once in connectedCallback. */
-  private _uniqueId: string = '';
-
-  connectedCallback(): void {
-    super.connectedCallback();
-    this._uniqueId = getParentTearsheetId(this);
-  }
+  @consume({ context: tearsheetContext, subscribe: true })
+  private _tearsheetCtx?: TearsheetContextValue;
 
   protected _renderTooltipContent() {
     return html`
@@ -65,16 +59,14 @@ export class CDSTearsheetScroller extends SignalWatcher(CDSButton) {
   }
 
   private _handleScroller = () => {
-    const { fullyCollapsed } = getTearsheetState(this._uniqueId);
-    updateTearsheetState(this._uniqueId, {
-      fullyCollapsed: !fullyCollapsed,
-    });
+    const { fullyCollapsed } =
+      this._tearsheetCtx?.state ?? defaultTearsheetState;
+    this._tearsheetCtx?.setState({ fullyCollapsed: !fullyCollapsed });
   };
 
   render() {
-    // getTearsheetSignal(id).get() subscribes SignalWatcher to only this
-    // instance's signal — changes in other tearsheets never trigger a re-render.
-    const { fullyCollapsed } = getTearsheetSignal(this._uniqueId).get();
+    const { fullyCollapsed } =
+      this._tearsheetCtx?.state ?? defaultTearsheetState;
 
     const iconClasses = classMap({
       [`scroller-collapsed`]: !!fullyCollapsed,
