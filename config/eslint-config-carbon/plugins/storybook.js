@@ -31,7 +31,7 @@ module.exports = {
         // Story files should have a default export
         'storybook/default-exports': 'error',
 
-        // Deprecated hierachy separator in title property
+        // Deprecated hierarchy separator in title property
         'storybook/hierarchy-separator': 'error',
 
         'storybook/no-redundant-story-name': 'error',
