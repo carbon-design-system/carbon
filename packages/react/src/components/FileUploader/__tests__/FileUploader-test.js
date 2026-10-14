@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, act, screen } from '@testing-library/react';
+import { render, act, fireEvent, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import FileUploader from '../';
@@ -207,6 +207,115 @@ describe('FileUploader', () => {
     expect(addedFiles[0].invalidFileType).toBeTruthy();
     // onChange should not be called since no valid files were added
     expect(onChange).not.toHaveBeenCalled();
+  });
+
+  it('should filter out selected files that do not match the accept prop', async () => {
+    const onAddFiles = jest.fn();
+    const onChange = jest.fn();
+    const { container } = render(
+      <FileUploader
+        {...requiredProps}
+        accept={['.json']}
+        onAddFiles={onAddFiles}
+        onChange={onChange}
+      />
+    );
+
+    const input = container.querySelector('input');
+    const invalidFile = new File(['plain text'], 'notes.txt', {
+      type: 'text/plain',
+    });
+
+    fireEvent.change(input, { target: { files: [invalidFile] } });
+
+    expect(screen.queryByText('notes.txt')).not.toBeInTheDocument();
+    expect(onAddFiles).toHaveBeenCalledTimes(1);
+    const addedFiles = onAddFiles.mock.calls[0][1].addedFiles;
+    expect(addedFiles[0]).toEqual(
+      expect.objectContaining({
+        name: 'notes.txt',
+        invalidFileType: true,
+      })
+    );
+    expect(onChange).not.toHaveBeenCalled();
+  });
+
+  it('should add selected files that match the accept prop', async () => {
+    const onAddFiles = jest.fn();
+    const onChange = jest.fn();
+    const { container } = render(
+      <FileUploader
+        {...requiredProps}
+        accept={['.json']}
+        onAddFiles={onAddFiles}
+        onChange={onChange}
+      />
+    );
+
+    const input = container.querySelector('input');
+    const acceptedFile = new File(['{}'], 'settings.json', {
+      type: 'application/json',
+    });
+
+    await userEvent.upload(input, acceptedFile);
+
+    expect(screen.getByText('settings.json')).toBeInTheDocument();
+    expect(onAddFiles).toHaveBeenCalledTimes(1);
+    const addedFiles = onAddFiles.mock.calls[0][1].addedFiles;
+    expect(addedFiles[0].invalidFileType).toBeUndefined();
+    expect(onChange).toHaveBeenCalledTimes(1);
+  });
+
+  it('should add selected files that match an exact MIME type in the accept prop', async () => {
+    const onAddFiles = jest.fn();
+    const onChange = jest.fn();
+    const { container } = render(
+      <FileUploader
+        {...requiredProps}
+        accept={['image/png']}
+        onAddFiles={onAddFiles}
+        onChange={onChange}
+      />
+    );
+
+    const input = container.querySelector('input');
+    const acceptedFile = new File(['image'], 'avatar.png', {
+      type: 'image/png',
+    });
+
+    await userEvent.upload(input, acceptedFile);
+
+    expect(screen.getByText('avatar.png')).toBeInTheDocument();
+    expect(onAddFiles).toHaveBeenCalledTimes(1);
+    const addedFiles = onAddFiles.mock.calls[0][1].addedFiles;
+    expect(addedFiles[0].invalidFileType).toBeUndefined();
+    expect(onChange).toHaveBeenCalledTimes(1);
+  });
+
+  it('should add selected files that match a wildcard MIME type in the accept prop', async () => {
+    const onAddFiles = jest.fn();
+    const onChange = jest.fn();
+    const { container } = render(
+      <FileUploader
+        {...requiredProps}
+        accept={['image/*']}
+        onAddFiles={onAddFiles}
+        onChange={onChange}
+      />
+    );
+
+    const input = container.querySelector('input');
+    const acceptedFile = new File(['image'], 'avatar.png', {
+      type: 'image/png',
+    });
+
+    await userEvent.upload(input, acceptedFile);
+
+    expect(screen.getByText('avatar.png')).toBeInTheDocument();
+    expect(onAddFiles).toHaveBeenCalledTimes(1);
+    const addedFiles = onAddFiles.mock.calls[0][1].addedFiles;
+    expect(addedFiles[0].invalidFileType).toBeUndefined();
+    expect(onChange).toHaveBeenCalledTimes(1);
   });
 
   it('should call onAddFiles with validated files after validation', async () => {
