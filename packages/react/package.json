@@ -53,6 +53,11 @@
     "react-is": "^16.13.1 || ^17.0.2 || ^18.3.1 || ^19.0.0",
     "sass": "^1.33.0"
   },
+  "peerDependenciesMeta": {
+    "sass": {
+      "optional": true
+    }
+  },
   "dependencies": {
     "@babel/runtime": "^8.0.0",
     "@carbon/feature-flags": "^1.10.0",
