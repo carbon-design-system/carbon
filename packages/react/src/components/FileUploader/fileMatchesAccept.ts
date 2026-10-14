@@ -5,11 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export function fileMatchesAccept(
-  file: File,
-  accept: readonly string[],
-  fileExtension?: string
-) {
+export function fileMatchesAccept(file: File, accept: readonly string[]) {
   if (!accept.length) {
     return true;
   }
@@ -25,10 +21,7 @@ export function fileMatchesAccept(
     }
 
     if (normalizedType.startsWith('.')) {
-      return (
-        fileName.endsWith(normalizedType) ||
-        fileExtension?.toLowerCase() === normalizedType
-      );
+      return fileName.endsWith(normalizedType);
     }
 
     if (normalizedType.endsWith('/*')) {

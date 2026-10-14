@@ -163,7 +163,7 @@ function FileUploaderDropContainer({
         return acc;
       }
 
-      if (fileMatchesAccept(curr, accept, fileExtension)) {
+      if (fileMatchesAccept(curr, accept)) {
         return acc.concat([curr]);
       }
 

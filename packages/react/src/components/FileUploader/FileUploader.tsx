@@ -233,13 +233,9 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
         files: Array<File & { invalidFileType?: boolean }>
       ): Array<File & { invalidFileType?: boolean }> => {
         return files.map((file) => {
-          const extensionIndex = file.name.lastIndexOf('.');
-          const fileExtension =
-            extensionIndex === -1 ? undefined : file.name.slice(extensionIndex);
-
           if (
             (maxFileSize && file.size > maxFileSize) ||
-            !fileMatchesAccept(file, accept ?? [], fileExtension)
+            !fileMatchesAccept(file, accept ?? [])
           ) {
             file.invalidFileType = true;
           }
