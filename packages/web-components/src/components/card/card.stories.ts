@@ -451,8 +451,8 @@ export const WithAILabel = {
               <p class="secondary">Model type</p>
               <p class="bold">Foundation model</p>
             </div>
-            ${aiLabelActions}</cds-ai-label
-          >
+            ${aiLabelActions}
+          </cds-ai-label>
         </cds-card>
       </cds-column>
 
