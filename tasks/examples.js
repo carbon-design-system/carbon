@@ -35,6 +35,23 @@ const IGNORE_EXAMPLE_DIRS = new Set([
   'colors-explorer',
 ]);
 
+// Install example app deps. Example lockfiles intentionally not committed.
+// Since Yarn defaults `enableImmutableInstalls` to true on CI, which would
+// fail with YN0028 as soon as the install populates, so the install has to opt
+// out with `--no-immutable`
+async function installExample(filepath, label) {
+  await fs.ensureFile(path.join(filepath, 'yarn.lock'));
+
+  const result = spawn.sync('yarn', ['install', '--no-immutable'], {
+    stdio: 'inherit',
+    cwd: filepath,
+  });
+
+  if (result.status !== 0) {
+    throw new Error(`Error installing dependencies for ${label}`);
+  }
+}
+
 /**
  * The goal here is to create a top-level `build` folder with content to be
  * displayed in the `gh-pages` branch. Specifically we want packages available
@@ -121,15 +138,10 @@ async function main() {
           await fs.ensureDir(exampleDir);
 
           if (packageJson.scripts.build) {
-            const installResult = spawn.sync('yarn', ['install'], {
-              stdio: 'inherit',
-              cwd: example.filepath,
-            });
-            if (installResult.status !== 0) {
-              throw new Error(
-                `Error installing dependencies for ${pkg.name}:${example.name}`
-              );
-            }
+            await installExample(
+              example.filepath,
+              `${pkg.name}:${example.name}`
+            );
 
             const buildResult = spawn.sync('yarn', ['build'], {
               stdio: 'inherit',
@@ -182,13 +194,10 @@ async function main() {
     'colors-explorer'
   );
   await fs.ensureDir(colorsExplorerDir);
-  const colorsExplorerInstall = spawn.sync('yarn', ['install'], {
-    stdio: 'inherit',
-    cwd: colorsExplorerExample.filepath,
-  });
-  if (colorsExplorerInstall.status !== 0) {
-    throw new Error('Error installing dependencies for colors:colors-explorer');
-  }
+  await installExample(
+    colorsExplorerExample.filepath,
+    'colors:colors-explorer'
+  );
   const colorsExplorerBuild = spawn.sync('yarn', ['build'], {
     stdio: 'inherit',
     cwd: colorsExplorerExample.filepath,
@@ -220,15 +229,7 @@ async function main() {
     'motion-tokens-dtcg'
   );
   await fs.ensureDir(motionDtcgDir);
-  const motionDtcgInstall = spawn.sync('yarn', ['install'], {
-    stdio: 'inherit',
-    cwd: motionDtcgExample.filepath,
-  });
-  if (motionDtcgInstall.status !== 0) {
-    throw new Error(
-      'Error installing dependencies for motion:motion-tokens-dtcg'
-    );
-  }
+  await installExample(motionDtcgExample.filepath, 'motion:motion-tokens-dtcg');
   const motionDtcgBuild = spawn.sync('yarn', ['build'], {
     stdio: 'inherit',
     cwd: motionDtcgExample.filepath,
@@ -258,15 +259,7 @@ async function main() {
     'theme-tokens-dtcg'
   );
   await fs.ensureDir(dtcgDir);
-  const dtcgInstall = spawn.sync('yarn', ['install'], {
-    stdio: 'inherit',
-    cwd: dtcgExample.filepath,
-  });
-  if (dtcgInstall.status !== 0) {
-    throw new Error(
-      'Error installing dependencies for themes:theme-tokens-dtcg'
-    );
-  }
+  await installExample(dtcgExample.filepath, 'themes:theme-tokens-dtcg');
   const dtcgBuild = spawn.sync('yarn', ['build'], {
     stdio: 'inherit',
     cwd: dtcgExample.filepath,

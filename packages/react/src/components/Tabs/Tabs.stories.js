@@ -37,7 +37,6 @@ import {
   Chat,
   Task,
   Restart,
-  Icon,
 } from '@carbon/icons-react';
 
 const lineTabsSizeArgType = {
