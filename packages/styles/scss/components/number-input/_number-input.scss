@@ -49,6 +49,15 @@ $-ai-label-gap: clamp(
 /// @group number-input
 $-ai-label-cluster: calc(2 * #{$-ai-label-gap} + #{convert.to-rem(16px)});
 
+/// Size of the control button: 24px for `xs`, `sm`, and `md`, and 32px for `lg`.
+/// @access private
+/// @group number-input
+$-control-btn-size: clamp(
+  $spacing-06,
+  layout.size('height') - $spacing-05,
+  $spacing-07
+);
+
 /// Number input styles
 /// @access public
 /// @group number-input
@@ -219,8 +228,10 @@ $-ai-label-cluster: calc(2 * #{$-ai-label-gap} + #{convert.to-rem(16px)});
 
     @if enabled('enable-v12-release') {
       border: 1px solid transparent;
-      border-radius: $border-radius-04;
+      border-radius: $border-radius-max;
       background-clip: padding-box;
+      block-size: $-control-btn-size;
+      inline-size: $-control-btn-size;
 
       &:hover {
         box-shadow: none;
