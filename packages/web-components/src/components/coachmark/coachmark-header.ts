@@ -55,8 +55,6 @@ class CDSCoachmarkHeader extends HostListenerMixin(LitElement) {
 
       (coachmark as HTMLElement & { open: boolean }).open = false;
     }
-
-    this._coachmarkCtx?.setState({ open: false });
   };
 
   render() {

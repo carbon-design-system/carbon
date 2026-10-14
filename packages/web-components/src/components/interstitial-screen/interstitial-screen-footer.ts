@@ -137,16 +137,14 @@ class CDSInterstitialScreenFooter extends HostListenerMixin(CDSModalFooter) {
   private handleClickNext = () => this.handleAction('next');
   private handleClickPrev = () => this.handleAction('back');
 
-  // `protected` (not private) so tests can call it directly without
-  // bypassing TypeScript — avoids relying on TS privacy erasure at runtime.
-  protected handleAction = async (actionType: ActionType) => {
+  private handleAction = async (actionType: ActionType) => {
     this.loadingAction = actionType;
 
     const currentStep = this._interstitialCtx?.state?.currentStep ?? 0;
     const stepDetails = this._interstitialCtx?.state?.stepDetails ?? [];
     const stepCount = stepDetails.length;
 
-    let resolvePromise;
+    let resolvePromise!: (value: boolean) => void;
     const proceedPromise = new Promise<boolean>((resolve) => {
       resolvePromise = resolve;
     });

@@ -99,13 +99,9 @@ class CDSCoachmark extends HostListenerMixin(LitElement) {
   });
 
   private _updateState(patch: Partial<CoachmarkState>) {
-    const current = this._contextProvider.value ?? {
-      state: { ...defaultCoachmarkState },
-      setState: (p) => this._updateState(p),
-    };
     this._contextProvider.setValue({
-      ...current,
-      state: { ...current.state, ...patch },
+      ...this._contextProvider.value,
+      state: { ...this._contextProvider.value.state, ...patch },
     });
     this.requestUpdate();
   }
@@ -118,7 +114,7 @@ class CDSCoachmark extends HostListenerMixin(LitElement) {
     if (this.keydownHandler) {
       document.removeEventListener('keydown', this.keydownHandler);
     }
-    this._updateState({ open: false, floating: false, isDragging: false });
+    this._updateState({ floating: false });
   }
 
   private async setupDraggable() {
@@ -175,7 +171,6 @@ class CDSCoachmark extends HostListenerMixin(LitElement) {
         if (dragHandle) {
           dragHandle.setAttribute('aria-label', dragActiveInstruction);
         }
-        this._updateState({ isDragging: true });
       };
 
       const onDragEnd = () => {
@@ -187,7 +182,6 @@ class CDSCoachmark extends HostListenerMixin(LitElement) {
         if (dragHandle) {
           dragHandle.setAttribute('aria-label', dragInactiveInstruction);
         }
-        this._updateState({ isDragging: false });
       };
 
       const onDragMove = (event: Event) => {

@@ -7,15 +7,11 @@
 import { createContext } from '@lit/context';
 
 export interface CoachmarkState {
-  open: boolean;
   floating: boolean;
-  isDragging: boolean;
 }
 
 export const defaultCoachmarkState: CoachmarkState = {
-  open: false,
   floating: false,
-  isDragging: false,
 };
 
 export interface CoachmarkContextValue {

@@ -73,7 +73,7 @@ class CDSInterstitialScreen extends HostListenerMixin(LitElement) {
   /**
    * Lit context provider, scoped to this element instance.
    */
-  protected _contextProvider = new ContextProvider(this, {
+  private _contextProvider = new ContextProvider(this, {
     context: interstitialContext,
     initialValue: {
       state: { ...defaultInterstitialState },
@@ -82,13 +82,9 @@ class CDSInterstitialScreen extends HostListenerMixin(LitElement) {
   });
 
   private _updateState(patch: Partial<InterstitialState>) {
-    const current = this._contextProvider.value ?? {
-      state: { ...defaultInterstitialState },
-      setState: (p) => this._updateState(p),
-    };
     this._contextProvider.setValue({
-      ...current,
-      state: { ...current.state, ...patch },
+      ...this._contextProvider.value,
+      state: { ...this._contextProvider.value.state, ...patch },
     });
   }
 
@@ -99,7 +95,7 @@ class CDSInterstitialScreen extends HostListenerMixin(LitElement) {
 
   disconnectedCallback(): void {
     super.disconnectedCallback();
-    const { carouselAPI } = this._contextProvider.value?.state ?? {};
+    const { carouselAPI } = this._contextProvider.value.state;
     carouselAPI?.destroyEvents?.();
     this._trapFocusAPI?.cleanup();
     clearFocusableContainers();
@@ -134,7 +130,7 @@ class CDSInterstitialScreen extends HostListenerMixin(LitElement) {
 
   private dispatchInItializeEvent = () => {
     setTimeout(() => {
-      const { carouselAPI } = this._contextProvider.value?.state ?? {};
+      const { carouselAPI } = this._contextProvider.value.state;
       this.dispatchEvent(
         new CustomEvent(
           (
@@ -215,7 +211,7 @@ class CDSInterstitialScreen extends HostListenerMixin(LitElement) {
       );
 
       // Reset carousel and step after close event is dispatched
-      const { carouselAPI } = this._contextProvider.value?.state ?? {};
+      const { carouselAPI } = this._contextProvider.value.state;
       if (carouselAPI) {
         carouselAPI.reset();
       }
