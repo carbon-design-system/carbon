@@ -23,11 +23,9 @@ let patched = false;
  * the process.
  *
  * Set `STORYBOOK_SASS_CONCURRENCY` to raise the cap, or to `0` to leave
- * compilations uncapped.
- *
- * @param {number} [fallbackLimit]
+ * compilations uncapped. The default cap is 1.
  */
-export function limitSassConcurrency(fallbackLimit = 1) {
+export function limitSassConcurrency() {
   if (patched) {
     return;
   }
@@ -38,7 +36,7 @@ export function limitSassConcurrency(fallbackLimit = 1) {
     return;
   }
 
-  let max = fallbackLimit;
+  let max = 1;
   if (fromEnv != null && fromEnv !== '') {
     const parsed = Number(fromEnv);
     if (Number.isFinite(parsed) && parsed >= 1) {

@@ -14,7 +14,7 @@ import { mergeConfig } from 'vite';
 
 import baseConfig from '../.storybook/main.ts';
 import { productMigratedStoryGlobs } from '../product-migrated-components.mjs';
-import { litStyleEntryPlugin } from './lit-style-entry-plugin.mjs';
+import { litStyleEntryPlugin } from './lit-style-entry-plugin.ts';
 import { limitSassConcurrency } from '../../../tasks/limit-sass-concurrency.mjs';
 
 const configDir = fileURLToPath(new URL('.', import.meta.url));

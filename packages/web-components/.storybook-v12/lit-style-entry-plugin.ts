@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import type { Plugin } from 'vite';
+
 const virtualPrefix = '\0carbon-lit-style:';
 const virtualSuffix = '.js';
 
@@ -18,7 +20,7 @@ const virtualSuffix = '.js';
  * The virtual id must not end in a stylesheet extension. Vite treats any id
  * ending in `.scss` as CSS and would compile the generated JavaScript.
  */
-export function litStyleEntryPlugin() {
+export function litStyleEntryPlugin(): Plugin {
   return {
     name: 'carbon:lit-style-entry',
     enforce: 'pre',
