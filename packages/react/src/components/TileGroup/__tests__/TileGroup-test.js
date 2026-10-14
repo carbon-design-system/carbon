@@ -172,6 +172,28 @@ describe('TileGroup', () => {
       expect(fieldset).toBeDisabled();
     });
 
+    it('should support passing in aria-label to the <fieldset>', () => {
+      render(
+        <TileGroup
+          aria-label="Radio tile options"
+          defaultSelected="test-1"
+          name="test">
+          <RadioTile id="test-1" value="test-1">
+            Option 1
+          </RadioTile>
+          <RadioTile id="test-2" value="test-2">
+            Option 2
+          </RadioTile>
+        </TileGroup>
+      );
+
+      expect(
+        screen.getByRole('group', {
+          name: 'Radio tile options',
+        })
+      ).toBeInTheDocument();
+    });
+
     it('should support `defaultSelected` as a way to select a radio button', () => {
       render(
         <TileGroup
