@@ -53,26 +53,24 @@ What it uses:
 - `EasingName`
 - `EasingMode`
 
-### `packages/motion/tasks/build.mjs`
+### `packages/motion/tokens/surfaces.tokens.json`
 
-This file generates Sass from the TypeScript surface definition.
+This file is the source of truth for the built-in surfaces.
 
-What we added:
+What it contains:
 
-- a build script that reads the exported `surfaces`
-- conversion from JavaScript values to Sass values
-- output generation for `scss/generated/_surfaces.scss`
+- one `transition` token per surface, aliasing the duration and easing tokens in
+  `motion.tokens.json`
+- the surface recipe (kind, keyframes, easings, origin) in
+  `$extensions["com.ibm.carbon"].motion`
+
+The Style Dictionary build (`yarn build:tokens`) reads it and generates
+`js/generated/surfaces.{js,d.ts}` and `scss/generated/_surfaces.scss`.
 
 Why:
 
 - to keep TypeScript and Sass in sync
 - to follow the request that root definitions live in `@carbon/motion`
-
-What it uses:
-
-- `@carbon/scss-generator`
-- Node `fs/promises`
-- Node `path`
 
 ### `packages/motion/scss/generated/_surfaces.scss`
 
@@ -380,7 +378,6 @@ What changed:
 What changed:
 
 - added the surface Sass generation step to the build
-- added `@carbon/scss-generator`
 
 ### `packages/react/package.json`
 
