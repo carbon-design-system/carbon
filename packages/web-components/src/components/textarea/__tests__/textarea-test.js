@@ -63,10 +63,15 @@ describe('cds-textarea', () => {
   it('should not set aria-describedby in the fluid variant, which does not render the helper text', async () => {
     const el = await fixture(html`
       <cds-textarea
-        is-fluid
+        isFluid
         label="Textarea label"
         helper-text="Helpful info"></cds-textarea>
     `);
+
+    // Guard the precondition: if the attribute ever stops mapping to the
+    // property, this must fail loudly rather than pass because the component
+    // simply is not fluid.
+    expect(el.isFluid).to.be.true;
 
     const textarea = el.shadowRoot.querySelector('textarea');
 
