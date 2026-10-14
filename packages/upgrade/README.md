@@ -211,6 +211,73 @@ This codemod:
 </OverflowMenu>
 ```
 
+### Enable v12 tabs contained layer
+
+Opts in to `enable-v12-tabs-contained-layer`. With the flag, `TabPanel` wraps
+its content in a `Layer` when the tabs are contained or vertical, so the `Layer`
+you previously placed inside the panel is no longer needed.
+
+**Usage:**
+
+```bash
+npx @carbon/upgrade migrate enable-v12-tabs-contained-layer --write
+```
+
+This codemod, for each `Tabs` or `TabsVertical` that has a `TabList` with
+`contained` or a `TabListVertical` as a direct child:
+
+- removes a `Layer` that is the only child of a `TabPanel`
+- wraps the tabs with `<FeatureFlags enableV12TabsContainedLayer>`, or adds the
+  prop to the `FeatureFlags` that already wraps them
+- removes the `Layer` import when it is no longer used
+
+**Limitations:** a `Tabs` is left unchanged, and the file reported, when any of
+its panels has a `Layer` with props (such as `level`) or a `Layer` next to other
+children, because removing it would change the layer level.
+
+- Tab lists rendered by a custom wrapper component or with dynamic properties
+  (such as `contained={someVar}`) are not detected by the codemod. Review those
+  by hand.
+- If a shared or app-level `FeatureFlags` wrapper exists, enabling the flag on
+  it activates automatic layering for all nested contained/vertical tabs beneath
+  it (including those in other files). Consequently, any undetected tabs nested
+  under that wrapper that still have manual `<Layer>` wraps will end up
+  double-layered at runtime. To prevent this, either run the codemod over the
+  entire project in one pass, or manually remove the redundant `<Layer>`
+  wrappers first from those panels.
+
+**Example:**
+
+```jsx
+// Before
+<Tabs>
+  <TabList aria-label="Tabs" contained>
+    <Tab>One</Tab>
+  </TabList>
+  <TabPanels>
+    <TabPanel>
+      <Layer>
+        <TextInput id="name" labelText="Name" />
+      </Layer>
+    </TabPanel>
+  </TabPanels>
+</Tabs>
+
+// After
+<FeatureFlags enableV12TabsContainedLayer>
+  <Tabs>
+    <TabList aria-label="Tabs" contained>
+      <Tab>One</Tab>
+    </TabList>
+    <TabPanels>
+      <TabPanel>
+        <TextInput id="name" labelText="Name" />
+      </TabPanel>
+    </TabPanels>
+  </Tabs>
+</FeatureFlags>
+```
+
 ### Enable v12 tile radio icons
 
 Enables default icons for RadioTile components.

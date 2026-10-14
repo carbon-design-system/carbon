@@ -16,8 +16,10 @@ import {
   TabListVertical,
   IconTab,
 } from '../Tabs';
-import { act } from 'react';
+import { act, Fragment } from 'react';
 import { Notification } from '@carbon/icons-react';
+import { FeatureFlags } from '../../FeatureFlags';
+import { Layer } from '../../Layer';
 
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -2352,5 +2354,298 @@ describe('TabListVertical', () => {
     expect(container.querySelector(`.${prefix}--tabs`)).toHaveClass(
       `${prefix}--layout--size-sm`
     );
+  });
+});
+
+describe('TabPanel contained layer', () => {
+  beforeEach(() => {
+    jest.spyOn(hooks, 'useMatchMedia').mockImplementation(() => true);
+  });
+
+  const layerSelector = `.${prefix}--layer-two`;
+
+  const renderContained = ({ flag, contained = true, list } = {}) =>
+    render(
+      <FeatureFlags enableV12TabsContainedLayer={flag}>
+        <Tabs>
+          {list ?? (
+            <TabList aria-label="List of tabs" contained={contained}>
+              <Tab>Tab Label 1</Tab>
+              <Tab>Tab Label 2</Tab>
+            </TabList>
+          )}
+          <TabPanels>
+            <TabPanel data-testid="panel-1">
+              <input data-testid="field" />
+            </TabPanel>
+            <TabPanel>Tab Panel 2</TabPanel>
+          </TabPanels>
+        </Tabs>
+      </FeatureFlags>
+    );
+
+  it('should not wrap contained TabPanel content in a Layer by default', () => {
+    renderContained({ flag: false });
+
+    expect(
+      screen.getByTestId('panel-1').querySelector(layerSelector)
+    ).not.toBeInTheDocument();
+  });
+
+  it('should wrap contained TabPanel content in a Layer when the flag is enabled', () => {
+    renderContained({ flag: true });
+
+    const layer = screen.getByTestId('panel-1').querySelector(layerSelector);
+    expect(layer).toBeInTheDocument();
+    expect(layer).toContainElement(screen.getByTestId('field'));
+  });
+
+  it('should keep the Layer inside the panel element', () => {
+    renderContained({ flag: true });
+
+    const panel = screen.getByTestId('panel-1');
+    expect(panel).toHaveClass(`${prefix}--tab-content`);
+    expect(panel).not.toHaveClass(`${prefix}--layer-two`);
+  });
+
+  it('should not wrap non-contained TabPanel content in a Layer', () => {
+    renderContained({ flag: true, contained: false });
+
+    expect(
+      screen.getByTestId('panel-1').querySelector(layerSelector)
+    ).not.toBeInTheDocument();
+  });
+
+  it('should wrap vertical TabPanel content in a Layer when the flag is enabled', () => {
+    render(
+      <FeatureFlags enableV12TabsContainedLayer>
+        <TabsVertical>
+          <TabListVertical aria-label="List of tabs">
+            <Tab>Tab Label 1</Tab>
+            <Tab>Tab Label 2</Tab>
+          </TabListVertical>
+          <TabPanels>
+            <TabPanel data-testid="panel-1">Tab Panel 1</TabPanel>
+            <TabPanel>Tab Panel 2</TabPanel>
+          </TabPanels>
+        </TabsVertical>
+      </FeatureFlags>
+    );
+
+    expect(
+      screen.getByTestId('panel-1').querySelector(layerSelector)
+    ).toBeInTheDocument();
+  });
+
+  it('should detect a contained TabList rendered inside a Fragment', () => {
+    renderContained({
+      flag: true,
+      list: (
+        <Fragment>
+          <TabList aria-label="List of tabs" contained>
+            <Tab>Tab Label 1</Tab>
+            <Tab>Tab Label 2</Tab>
+          </TabList>
+        </Fragment>
+      ),
+    });
+
+    expect(
+      screen.getByTestId('panel-1').querySelector(layerSelector)
+    ).toBeInTheDocument();
+  });
+
+  it('should wrap every panel, including hidden ones', () => {
+    const { container } = renderContained({ flag: true });
+
+    const panels = container.querySelectorAll(`.${prefix}--tab-content`);
+    expect(panels).toHaveLength(2);
+    panels.forEach((panel) => {
+      expect(panel.querySelector(layerSelector)).toBeInTheDocument();
+    });
+  });
+
+  it('should wrap content on the first render without remounting it', () => {
+    const mounted = jest.fn();
+
+    function Probe() {
+      React.useEffect(() => {
+        mounted();
+      }, []);
+      return <input data-testid="field" />;
+    }
+
+    const { rerender } = render(
+      <FeatureFlags enableV12TabsContainedLayer>
+        <Tabs>
+          <TabList aria-label="List of tabs" contained>
+            <Tab>Tab Label 1</Tab>
+          </TabList>
+          <TabPanels>
+            <TabPanel>
+              <Probe />
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
+      </FeatureFlags>
+    );
+
+    expect(mounted).toHaveBeenCalledTimes(1);
+
+    rerender(
+      <FeatureFlags enableV12TabsContainedLayer>
+        <Tabs>
+          <TabList aria-label="List of tabs" contained size="sm">
+            <Tab>Tab Label 1</Tab>
+          </TabList>
+          <TabPanels>
+            <TabPanel>
+              <Probe />
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
+      </FeatureFlags>
+    );
+
+    expect(mounted).toHaveBeenCalledTimes(1);
+  });
+
+  it('should stack with an explicit Layer inside the panel', () => {
+    render(
+      <FeatureFlags enableV12TabsContainedLayer>
+        <Tabs>
+          <TabList aria-label="List of tabs" contained>
+            <Tab>Tab Label 1</Tab>
+          </TabList>
+          <TabPanels>
+            <TabPanel data-testid="panel-1">
+              <Layer>
+                <input data-testid="field" />
+              </Layer>
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
+      </FeatureFlags>
+    );
+
+    // The panel supplies layer two, so a manual Layer is one level deeper.
+    const panel = screen.getByTestId('panel-1');
+    expect(panel.querySelector(layerSelector)).toBeInTheDocument();
+    expect(panel.querySelector(`.${prefix}--layer-three`)).toContainElement(
+      screen.getByTestId('field')
+    );
+  });
+
+  it('should only apply the panel Layer of the closest Tabs when nested', () => {
+    render(
+      <FeatureFlags enableV12TabsContainedLayer>
+        <Tabs>
+          <TabList aria-label="Outer" contained>
+            <Tab>Outer</Tab>
+          </TabList>
+          <TabPanels>
+            <TabPanel data-testid="outer-panel">
+              <Tabs>
+                <TabList aria-label="Inner">
+                  <Tab>Inner</Tab>
+                </TabList>
+                <TabPanels>
+                  <TabPanel data-testid="inner-panel">
+                    <input data-testid="field" />
+                  </TabPanel>
+                </TabPanels>
+              </Tabs>
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
+      </FeatureFlags>
+    );
+
+    const innerPanel = screen.getByTestId('inner-panel');
+    expect(innerPanel.querySelector(layerSelector)).not.toBeInTheDocument();
+    expect(
+      screen.getByTestId('outer-panel').querySelectorAll(layerSelector)
+    ).toHaveLength(1);
+    expect(
+      screen.getByTestId('outer-panel').querySelector(layerSelector)
+    ).toContainElement(screen.getByTestId('field'));
+  });
+
+  it('should not detect a contained TabList rendered by a custom component', () => {
+    const CustomList = () => (
+      <TabList aria-label="List of tabs" contained>
+        <Tab>Tab Label 1</Tab>
+      </TabList>
+    );
+
+    render(
+      <FeatureFlags enableV12TabsContainedLayer>
+        <Tabs>
+          <CustomList />
+          <TabPanels>
+            <TabPanel data-testid="panel-1">Tab Panel 1</TabPanel>
+          </TabPanels>
+        </Tabs>
+      </FeatureFlags>
+    );
+
+    expect(
+      screen.getByTestId('panel-1').querySelector(layerSelector)
+    ).not.toBeInTheDocument();
+  });
+
+  it('should preserve field state when switching tabs', async () => {
+    renderContained({ flag: true });
+
+    const field = screen.getByTestId('field');
+    await userEvent.type(field, 'hello');
+
+    await userEvent.click(screen.getByText('Tab Label 2'));
+    await userEvent.click(screen.getByText('Tab Label 1'));
+
+    expect(screen.getByTestId('field')).toBe(field);
+    expect(screen.getByTestId('field')).toHaveValue('hello');
+  });
+
+  it('should render the layer-two wrapper when enableV12Release is false but specific flag is enabled', () => {
+    render(
+      <FeatureFlags enableV12Release={false} enableV12TabsContainedLayer>
+        <Tabs>
+          <TabList aria-label="List of tabs" contained>
+            <Tab>Tab Label 1</Tab>
+          </TabList>
+          <TabPanels>
+            <TabPanel data-testid="panel-1">
+              <input data-testid="field" />
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
+      </FeatureFlags>
+    );
+
+    expect(
+      screen.getByTestId('panel-1').querySelector(layerSelector)
+    ).toBeInTheDocument();
+  });
+
+  it('should not render the layer-two wrapper when enableV12Release is false and specific flag is not enabled', () => {
+    render(
+      <FeatureFlags enableV12Release={false}>
+        <Tabs>
+          <TabList aria-label="List of tabs" contained>
+            <Tab>Tab Label 1</Tab>
+          </TabList>
+          <TabPanels>
+            <TabPanel data-testid="panel-1">
+              <input data-testid="field" />
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
+      </FeatureFlags>
+    );
+
+    expect(
+      screen.getByTestId('panel-1').querySelector(layerSelector)
+    ).not.toBeInTheDocument();
   });
 });

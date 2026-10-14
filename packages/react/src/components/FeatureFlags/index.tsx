@@ -92,6 +92,14 @@ export interface FeatureFlagsProps {
   enableV12DynamicFloatingStyles?: boolean;
 
   /**
+   * Enable `TabPanel` to wrap its content in a `Layer` when the tabs are
+   * `contained` or vertical.
+   *
+   * Becomes the default behavior in v12.
+   */
+  enableV12TabsContainedLayer?: boolean;
+
+  /**
    * Enable enhanced functionality for the `FileUploader` component, including
    * richer callback data and expanded trigger events for `onChange` and
    * `onDelete`.
@@ -128,6 +136,7 @@ const PROP_TO_FLAG: Record<string, string> = {
   enableFocusWrapWithoutSentinels: 'enable-focus-wrap-without-sentinels',
   enableDialogElement: 'enable-dialog-element',
   enableV12DynamicFloatingStyles: 'enable-v12-dynamic-floating-styles',
+  enableV12TabsContainedLayer: 'enable-v12-tabs-contained-layer',
   enableEnhancedFileUploader: 'enable-enhanced-file-uploader',
   enablePresence: 'enable-presence',
 };
@@ -149,6 +158,7 @@ export const FeatureFlags = ({
   enableFocusWrapWithoutSentinels,
   enableDialogElement,
   enableV12DynamicFloatingStyles,
+  enableV12TabsContainedLayer,
   enableEnhancedFileUploader,
   enablePresence,
 }: FeatureFlagsProps) => {
@@ -168,6 +178,7 @@ export const FeatureFlags = ({
       enableFocusWrapWithoutSentinels,
       enableDialogElement,
       enableV12DynamicFloatingStyles,
+      enableV12TabsContainedLayer,
       enableEnhancedFileUploader,
       enablePresence,
     };
@@ -197,6 +208,7 @@ export const FeatureFlags = ({
     enableFocusWrapWithoutSentinels,
     enableDialogElement,
     enableV12DynamicFloatingStyles,
+    enableV12TabsContainedLayer,
     enableEnhancedFileUploader,
     enablePresence,
     flags,
@@ -230,6 +242,7 @@ FeatureFlags.propTypes = {
   enableFocusWrapWithoutSentinels: PropTypes.bool,
   enableDialogElement: PropTypes.bool,
   enableV12DynamicFloatingStyles: PropTypes.bool,
+  enableV12TabsContainedLayer: PropTypes.bool,
   enableEnhancedFileUploader: PropTypes.bool,
   enablePresence: PropTypes.bool,
 };
