@@ -17,15 +17,21 @@ const path = require('path');
 // ---------------------------------------------------------------------------
 
 const dtcgTokens = JSON.parse(
-  fs.readFileSync(path.resolve(__dirname, '../src/dtcg/motion.json'), 'utf8')
+  fs.readFileSync(
+    path.resolve(__dirname, '../tokens/motion.tokens.json'),
+    'utf8'
+  )
 );
 
 const dtcgSurfaces = JSON.parse(
-  fs.readFileSync(path.resolve(__dirname, '../src/dtcg/surfaces.json'), 'utf8')
+  fs.readFileSync(
+    path.resolve(__dirname, '../tokens/surfaces.tokens.json'),
+    'utf8'
+  )
 );
 
 // ---------------------------------------------------------------------------
-// Helpers — tokens (motion.json)
+// Helpers — tokens (motion.tokens.json)
 // ---------------------------------------------------------------------------
 
 /**
@@ -75,14 +81,14 @@ function resolveEasing(dtcgValue) {
 }
 
 // ---------------------------------------------------------------------------
-// Helpers — surfaces (surfaces.json)
+// Helpers — surfaces (surfaces.tokens.json)
 // ---------------------------------------------------------------------------
 
 /**
  * Walk the DTCG surface tree and collect all leaf nodes that carry a
- * carbon.motion extension. Returns a flat array of:
+ * `com.ibm.carbon` motion extension. Returns a flat array of:
  *   { name, description, $value, recipe }
- * where `recipe` is the full carbon.motion extension object.
+ * where `recipe` is the full `com.ibm.carbon` motion extension object.
  */
 function collectSurfaces(obj, pathSegments = []) {
   const results = [];
@@ -93,14 +99,14 @@ function collectSurfaces(obj, pathSegments = []) {
       value &&
       typeof value === 'object' &&
       value.$extensions &&
-      value.$extensions['carbon.motion']
+      value.$extensions['com.ibm.carbon']?.motion
     ) {
       results.push({
         pathName: segments.join('-'),
         name: key,
         description: value.$description || '',
         $value: value.$value,
-        recipe: value.$extensions['carbon.motion'],
+        recipe: value.$extensions['com.ibm.carbon'].motion,
       });
     } else if (value && typeof value === 'object') {
       results.push(...collectSurfaces(value, segments));
@@ -131,12 +137,14 @@ const sharedElementSurfaces = allSurfaces.filter(
 );
 
 // ---------------------------------------------------------------------------
-// Token file — src/dtcg/motion.json
+// Token file — tokens/motion.tokens.json
 // ---------------------------------------------------------------------------
 
-describe('@carbon/motion — DTCG token file (src/dtcg/motion.json)', () => {
+describe('@carbon/motion — DTCG token file (tokens/motion.tokens.json)', () => {
   test('has the correct $schema', () => {
-    expect(dtcgTokens.$schema).toBe('https://tr.designtokens.org/format/');
+    expect(dtcgTokens.$schema).toBe(
+      'https://www.designtokens.org/schemas/2025.10/format.json'
+    );
   });
 
   test('has at least one duration token', () => {
@@ -186,12 +194,14 @@ describe('@carbon/motion — DTCG token file (src/dtcg/motion.json)', () => {
 });
 
 // ---------------------------------------------------------------------------
-// Surface file — src/dtcg/surfaces.json
+// Surface file — tokens/surfaces.tokens.json
 // ---------------------------------------------------------------------------
 
-describe('@carbon/motion — DTCG surface file (src/dtcg/surfaces.json)', () => {
+describe('@carbon/motion — DTCG surface file (tokens/surfaces.tokens.json)', () => {
   test('has the correct $schema', () => {
-    expect(dtcgSurfaces.$schema).toBe('https://tr.designtokens.org/format/');
+    expect(dtcgSurfaces.$schema).toBe(
+      'https://www.designtokens.org/schemas/2025.10/format.json'
+    );
   });
 
   test('has at least one surface definition', () => {
@@ -203,7 +213,7 @@ describe('@carbon/motion — DTCG surface file (src/dtcg/surfaces.json)', () => 
       for (const [key, value] of Object.entries(obj)) {
         if (key.startsWith('$')) continue;
         if (value && typeof value === 'object') {
-          if (value.$extensions && value.$extensions['carbon.motion']) {
+          if (value.$extensions?.['com.ibm.carbon']?.motion) {
             expect(value.$type).toBe('transition');
           } else {
             checkTypes(value);
@@ -379,19 +389,19 @@ describe('@carbon/motion — every DTCG surface generates a JS export', () => {
     expect(typeof CarbonMotion.getMotionSurface).toBe('function');
   });
 
-  test('every surface in surfaces.json exists as a key in the JS surfaces map', () => {
+  test('every surface in surfaces.tokens.json exists as a key in the JS surfaces map', () => {
     for (const { name } of allSurfaces) {
       expect(CarbonMotion.surfaces).toHaveProperty(name);
     }
   });
 
-  test('JS surfaces map has exactly the same keys as surfaces.json', () => {
+  test('JS surfaces map has exactly the same keys as surfaces.tokens.json', () => {
     const jsKeys = Object.keys(CarbonMotion.surfaces).sort();
     const jsonKeys = [...surfaceNames].sort();
     expect(jsKeys).toEqual(jsonKeys);
   });
 
-  test('every surface recipe in JS matches the carbon.motion extension in surfaces.json', () => {
+  test('every surface recipe in JS matches the com.ibm.carbon motion extension in surfaces.tokens.json', () => {
     for (const { name, recipe } of allSurfaces) {
       expect(CarbonMotion.surfaces[name]).toEqual(recipe);
     }
@@ -418,7 +428,7 @@ describe('@carbon/motion — every DTCG surface generates a JS export', () => {
     }
   });
 
-  test('every surface enterEasing and exitEasing in JS match surfaces.json', () => {
+  test('every surface enterEasing and exitEasing in JS match surfaces.tokens.json', () => {
     for (const { name, recipe } of allSurfaces) {
       const jsSurface = CarbonMotion.surfaces[name];
       expect(jsSurface.enterEasing).toEqual(recipe.enterEasing);
@@ -426,7 +436,7 @@ describe('@carbon/motion — every DTCG surface generates a JS export', () => {
     }
   });
 
-  test('every surface duration in JS matches surfaces.json', () => {
+  test('every surface duration in JS matches surfaces.tokens.json', () => {
     for (const { name, recipe } of allSurfaces) {
       expect(CarbonMotion.surfaces[name].duration).toBe(recipe.duration);
     }
@@ -466,7 +476,7 @@ describe('@carbon/motion — generated surfaces.d.ts keeps literal types', () =>
     expect(dtsSource).not.toMatch(/origin:\s*string/);
   });
 
-  test('generated declaration file uses kind/duration/origin literals from surfaces.json', () => {
+  test('generated declaration file uses kind/duration/origin literals from surfaces.tokens.json', () => {
     for (const { recipe } of allSurfaces) {
       expect(dtsSource).toContain(`kind: ${JSON.stringify(recipe.kind)}`);
       expect(dtsSource).toContain(

@@ -34,7 +34,7 @@ const carbonScssMotionSurfaces = require('./formats/scss-surfaces');
 
 // ── Paths ──────────────────────────────────────────────────────────────────
 const ROOT = path.resolve(__dirname, '..');
-const DTCG_DIR = path.join(ROOT, 'src', 'dtcg');
+const TOKENS_DIR = path.join(ROOT, 'tokens');
 const SCSS_GENERATED = path.join(ROOT, 'scss', 'generated');
 const JS_GENERATED = path.join(ROOT, 'js', 'generated');
 
@@ -65,9 +65,9 @@ const CARBON_MOTION_TRANSFORMS = [
 // only invoke their respective platforms, matching the themes pattern where
 // each build step is independently callable.
 
-// motion.json — JS output
+// motion.tokens.json — JS output
 const jsTokensConfig = {
-  source: [path.join(DTCG_DIR, 'motion.json')],
+  source: [path.join(TOKENS_DIR, 'motion.tokens.json')],
   platforms: {
     'js/tokens': {
       transformGroup: 'carbon/motion',
@@ -88,9 +88,9 @@ const jsTokensConfig = {
   },
 };
 
-// motion.json — SCSS output
+// motion.tokens.json — SCSS output
 const scssTokensConfig = {
-  source: [path.join(DTCG_DIR, 'motion.json')],
+  source: [path.join(TOKENS_DIR, 'motion.tokens.json')],
   platforms: {
     'scss/tokens': {
       transformGroup: 'carbon/motion',
@@ -105,17 +105,17 @@ const scssTokensConfig = {
   },
 };
 
-// surfaces.json — JS output
+// surfaces.tokens.json — JS output
 //
-// Surfaces are processed by their formats reading surfaces.json directly;
-// SD still manages the build lifecycle and output directory creation.
-// motion.json is included so SD can resolve the alias references in
-// surfaces.json $value fields (even though the format reads $extensions
-// directly and does not consume the resolved values).
+// Surfaces are processed by their formats reading surfaces.tokens.json
+// directly; SD still manages the build lifecycle and output directory
+// creation. motion.tokens.json is included so SD can resolve the alias
+// references in surfaces.tokens.json $value fields (even though the format
+// reads $extensions directly and does not consume the resolved values).
 const jsSurfacesConfig = {
   source: [
-    path.join(DTCG_DIR, 'motion.json'),
-    path.join(DTCG_DIR, 'surfaces.json'),
+    path.join(TOKENS_DIR, 'motion.tokens.json'),
+    path.join(TOKENS_DIR, 'surfaces.tokens.json'),
   ],
   // The two source files both have a top-level $description; SD reports this
   // as a collision even though it is DTCG metadata, not a real token conflict.
@@ -140,11 +140,11 @@ const jsSurfacesConfig = {
   },
 };
 
-// surfaces.json — SCSS output
+// surfaces.tokens.json — SCSS output
 const scssSurfacesConfig = {
   source: [
-    path.join(DTCG_DIR, 'motion.json'),
-    path.join(DTCG_DIR, 'surfaces.json'),
+    path.join(TOKENS_DIR, 'motion.tokens.json'),
+    path.join(TOKENS_DIR, 'surfaces.tokens.json'),
   ],
   log: { warnings: 'disabled' },
   platforms: {

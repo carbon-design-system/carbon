@@ -13,9 +13,10 @@ import {
   type EasingName,
 } from './tokens';
 
-// Built-in surface definitions are generated from src/dtcg/surfaces.json by
-// `yarn build:tokens` (tasks/build.js) and written to js/generated/surfaces.js
-// before this file is bundled. Run `yarn build` to regenerate them.
+// Built-in surface definitions are generated from tokens/surfaces.tokens.json
+// by `yarn build:tokens` (tasks/build.js) and written to
+// js/generated/surfaces.js before this file is bundled. Run `yarn build` to
+// regenerate them.
 //
 // The generated `getMotionSurface` looks up a built-in name and nothing else.
 // It is wrapped below so the same entry point also accepts a custom surface.
