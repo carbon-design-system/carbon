@@ -5,10 +5,6 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-@use '@carbon/styles' with (
-  $font-path: '@ibm/plex'
-);
-
 @use '@carbon/utilities/scss/carousel/_index' as carousel;
 
 @use '@carbon/styles/scss/spacing' as *;
