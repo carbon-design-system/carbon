@@ -7,8 +7,8 @@
 
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import App from './App';
 import './carbon.scss';
+import App from './App';
 import './index.scss';
 
 // eslint-disable-next-line ssr-friendly/no-dom-globals-in-module-scope
