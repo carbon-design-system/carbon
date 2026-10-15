@@ -57,14 +57,18 @@ export const Default = {
       'cds-progress-indicator'
     ) as CDSProgressIndicator;
     await indicator.updateComplete;
-    const step = indicator.querySelector(
-      'cds-progress-step'
-    ) as CDSProgressStep;
-    await step.updateComplete;
+    const steps = Array.from(
+      indicator.querySelectorAll('cds-progress-step')
+    ) as CDSProgressStep[];
+    await Promise.all(steps.map((step) => step.updateComplete));
     await expect(indicator.currentIndex).toBe(args.currentIndex);
     await expect(indicator.vertical).toBe(args.vertical);
     await expect(indicator.spaceEqually).toBe(args.spaceEqually);
-    await expect(step.secondaryLabel).toBe(args.secondaryLabel);
+    await expect(steps[0].secondaryLabel).toBe(args.secondaryLabel);
+    for (const [index, step] of steps.entries()) {
+      await expect(step.complete).toBe(index < args.currentIndex);
+      await expect(step.current).toBe(index === args.currentIndex);
+    }
   },
   render: ({ secondaryLabel, spaceEqually, vertical, currentIndex }) => html`
     <cds-progress-indicator
@@ -74,12 +78,10 @@ export const Default = {
       <cds-progress-step
         description="Step 1: Getting started with Carbon Design System"
         label="First step"
-        secondary-label="${ifDefined(secondaryLabel)}"
-        complete></cds-progress-step>
+        secondary-label="${ifDefined(secondaryLabel)}"></cds-progress-step>
       <cds-progress-step
         description="Step 2: Getting started with Carbon Design System"
-        label="Second step with tooltip"
-        current></cds-progress-step>
+        label="Second step with tooltip"></cds-progress-step>
       <cds-progress-step
         description="Step 3: Getting started with Carbon Design System"
         label="Third step with tooltip"></cds-progress-step>

@@ -39,6 +39,22 @@ describe('ProgressIndicator story controls', () => {
     );
   });
 
+  it.each([0, 1, 3])(
+    'derives every default story step state from currentIndex %i',
+    (currentIndex) => {
+      render(<Default {...Default.args} currentIndex={currentIndex} />);
+
+      screen.getAllByRole('listitem').forEach((step, index) => {
+        expect(step.classList.contains('cds--progress-step--complete')).toBe(
+          index < currentIndex
+        );
+        expect(step.classList.contains('cds--progress-step--current')).toBe(
+          index === currentIndex
+        );
+      });
+    }
+  );
+
   it('updates the interactive story and calls the supplied onChange', async () => {
     const user = userEvent.setup();
     const onChange = jest.fn();

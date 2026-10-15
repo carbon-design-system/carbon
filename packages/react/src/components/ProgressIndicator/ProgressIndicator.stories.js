@@ -109,13 +109,11 @@ export const Default = (args) => {
   return (
     <ProgressIndicator {...progressIndicatorProps}>
       <ProgressStep
-        complete
         label="First step"
         description="Step 1: Getting started with Carbon Design System"
         secondaryLabel={secondaryLabel}
       />
       <ProgressStep
-        current
         label="Second step with tooltip"
         description="Step 2: Getting started with Carbon Design System"
       />
