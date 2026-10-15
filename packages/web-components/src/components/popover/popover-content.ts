@@ -26,7 +26,7 @@ class CDSPopoverContent extends LitElement {
   align = '';
 
   /**
-   * Specify whether a auto align functionality should be applied
+   * Specify whether auto-align is enabled
    */
   @property({ type: Boolean, reflect: true })
   autoalign = false;

@@ -1,6 +1,5 @@
-import { ArgTypes, Canvas, Story, Meta } from '@storybook/addon-docs/blocks';
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
 import * as TextInputStories from './TextInput.stories';
-import * as PasswordInputStories from './PasswordInput.stories';
 import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
@@ -38,6 +37,7 @@ export const getTextInputStoryArgsDef = [
   - [AI Label](#ai-label)
   - [With Layer](#with-layer)
   - [Password Input](#password-input)
+- [Translations](#translations)
 - [Component API](#component-api)
 - [Feedback](#feedback)
 
@@ -126,6 +126,36 @@ data format, such as types of characters allowed or date structure.
 [PasswordInput](https://react.carbondesignsystem.com/?path=/story/components-passwordinput--default)
 component instead.
 
+## Translations
+
+When `maxCount` is set, `TextInput` announces the remaining characters to screen
+readers as the value approaches the limit. These announcements can be translated
+with `translateWithId`. The function receives a translation ID and an object
+with `count` and `maxCount`, and must return the translated string. Use `count`
+to select the correct plural form.
+
+```jsx
+const translations = {
+  'carbon.text-input.counter.characters.remaining': ({ count }) =>
+    count === 1 ? '1 caractère restant.' : `${count} caractères restants.`,
+  'carbon.text-input.counter.characters.max-reached': () =>
+    'Nombre maximal de caractères atteint.',
+};
+
+<TextInput
+  id="text-input"
+  labelText="Label"
+  enableCounter
+  maxCount={100}
+  translateWithId={(id, args) => translations[id](args)}
+/>;
+```
+
+| Translation ID                                     | Default                                          | `count`              |
+| -------------------------------------------------- | ------------------------------------------------ | -------------------- |
+| `carbon.text-input.counter.characters.remaining`   | `1 character left.` / `{count} characters left.` | Remaining characters |
+| `carbon.text-input.counter.characters.max-reached` | `Maximum characters reached.`                    | `maxCount`           |
+
 ## Component API
 
 <ArgTypes />
@@ -134,4 +164,4 @@ component instead.
 
 Help us improve this component by providing feedback, asking questions on Slack,
 or updating this file on
-[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/TextInput/TextInput.mdx).TextInputStories,
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/TextInput/TextInput.mdx).

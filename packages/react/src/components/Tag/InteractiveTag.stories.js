@@ -16,7 +16,6 @@ import { default as DismissibleTag } from './DismissibleTag';
 import { Asleep } from '@carbon/icons-react';
 import { Popover, PopoverContent } from '../Popover';
 import mdx from './Tag.mdx';
-import { Text } from '../Text';
 import Button from '../Button';
 
 export default {
