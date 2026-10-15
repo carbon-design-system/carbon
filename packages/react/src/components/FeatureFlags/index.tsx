@@ -92,6 +92,15 @@ export interface FeatureFlagsProps {
   enableV12DynamicFloatingStyles?: boolean;
 
   /**
+   * Enable `autoAlign` by default for components that support it, like
+   * `Popover`, `Tooltip`, `Toggletip`, `Dropdown`, etc. An explicit
+   * `autoAlign` prop always takes precedence.
+   *
+   * Becomes the default behavior in v12.
+   */
+  enableV12Autoalign?: boolean;
+
+  /**
    * Enable enhanced functionality for the `FileUploader` component, including
    * richer callback data and expanded trigger events for `onChange` and
    * `onDelete`.
@@ -128,6 +137,7 @@ const PROP_TO_FLAG: Record<string, string> = {
   enableFocusWrapWithoutSentinels: 'enable-focus-wrap-without-sentinels',
   enableDialogElement: 'enable-dialog-element',
   enableV12DynamicFloatingStyles: 'enable-v12-dynamic-floating-styles',
+  enableV12Autoalign: 'enable-v12-autoalign',
   enableEnhancedFileUploader: 'enable-enhanced-file-uploader',
   enablePresence: 'enable-presence',
 };
@@ -149,6 +159,7 @@ export const FeatureFlags = ({
   enableFocusWrapWithoutSentinels,
   enableDialogElement,
   enableV12DynamicFloatingStyles,
+  enableV12Autoalign,
   enableEnhancedFileUploader,
   enablePresence,
 }: FeatureFlagsProps) => {
@@ -168,6 +179,7 @@ export const FeatureFlags = ({
       enableFocusWrapWithoutSentinels,
       enableDialogElement,
       enableV12DynamicFloatingStyles,
+      enableV12Autoalign,
       enableEnhancedFileUploader,
       enablePresence,
     };
@@ -197,6 +209,7 @@ export const FeatureFlags = ({
     enableFocusWrapWithoutSentinels,
     enableDialogElement,
     enableV12DynamicFloatingStyles,
+    enableV12Autoalign,
     enableEnhancedFileUploader,
     enablePresence,
     flags,
@@ -230,6 +243,7 @@ FeatureFlags.propTypes = {
   enableFocusWrapWithoutSentinels: PropTypes.bool,
   enableDialogElement: PropTypes.bool,
   enableV12DynamicFloatingStyles: PropTypes.bool,
+  enableV12Autoalign: PropTypes.bool,
   enableEnhancedFileUploader: PropTypes.bool,
   enablePresence: PropTypes.bool,
 };

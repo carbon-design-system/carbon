@@ -247,7 +247,7 @@ xdescribe('cds-select', () => {
       ).toBe('select-one');
     });
 
-    it('should unsupport multiple selection', async () => {
+    it('should not support multiple selection', async () => {
       render(template(), document.body);
       await Promise.resolve();
       const elem = document.body.querySelector('cds-select');

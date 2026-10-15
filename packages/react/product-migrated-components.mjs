@@ -44,6 +44,23 @@ export const productMigratedStoryGlobs = [
   '../src/examples/CreateTearsheet/CreateTearsheet.mdx',
   '../src/examples/CreateTearsheetNarrow/CreateTearsheet.stories.js',
   '../src/examples/CreateTearsheetNarrow/CreateTearsheet.mdx',
+  '../src/examples/ExportModal/ExportModal.stories.js',
+  '../src/examples/ExportModal/ExportModal.mdx',
+  '../src/examples/ImportAndUpload/ImportAndUpload.stories.js',
+  '../src/examples/ImportAndUpload/ImportAndUpload.mdx',
+  '../src/examples/GenerateAnAPIKey/GenerateAnAPIKey.stories.js',
+  '../src/examples/GenerateAnAPIKey/GenerateAnAPIKey.mdx',
+  '../src/examples/Coachmark/CoachmarkFixed/CoachmarkFixed.stories.js',
+  '../src/examples/Coachmark/CoachmarkFixed/CoachmarkFixed.mdx',
+  '../src/examples/Coachmark/CoachmarkOverlayElements/CoachmarkOverlayElements.stories.js',
+  '../src/examples/Coachmark/CoachmarkOverlayElements/CoachmarkOverlayElements.mdx',
+  '../src/examples/Coachmark/CoachmarkStacked/CoachmarkStacked.stories.js',
+  '../src/examples/Coachmark/CoachmarkStacked/CoachmarkStacked.mdx',
+  '../src/examples/AddSelect/AddSelectOverview.mdx',
+  '../src/examples/AddSelect/MultiAddSelect/MultiAddSelect.stories.jsx',
+  '../src/examples/AddSelect/MultiAddSelect/MultiAddSelect.mdx',
+  '../src/examples/AddSelect/SingleAddSelect/SingleAddSelect.stories.jsx',
+  '../src/examples/AddSelect/SingleAddSelect/SingleAddSelect.mdx',
 ];
 
 /**

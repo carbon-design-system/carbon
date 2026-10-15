@@ -69,6 +69,7 @@ import {
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
+import { useAutoAlign } from '../../internal/useAutoAlign';
 
 const {
   ItemClick,
@@ -297,7 +298,7 @@ export interface MultiSelectProps<ItemType>
 export const MultiSelect = React.forwardRef(
   <ItemType,>(
     {
-      autoAlign = false,
+      autoAlign: autoAlignProp,
       className: containerClassName,
       decorator,
       id,
@@ -337,6 +338,7 @@ export const MultiSelect = React.forwardRef(
     }: MultiSelectProps<ItemType>,
     ref: ForwardedRef<HTMLButtonElement>
   ) => {
+    const autoAlign = useAutoAlign(autoAlignProp);
     const filteredItems = useMemo(() => {
       return items.filter((item) => {
         if (typeof item === 'object' && item !== null) {
@@ -381,9 +383,10 @@ export const MultiSelect = React.forwardRef(
             middleware: [
               autoAlign && flip({ crossAxis: false }),
               floatingSize({
-                apply({ rects, elements }) {
+                apply({ availableHeight, rects, elements }) {
                   Object.assign(elements.floating.style, {
                     width: `${rects.reference.width}px`,
+                    maxHeight: `${availableHeight}px`,
                   });
                 },
               }),
@@ -408,13 +411,7 @@ export const MultiSelect = React.forwardRef(
           }
         });
       }
-    }, [
-      enableFloatingStyles,
-      floatingStyles,
-      refs.floating,
-      middlewareData,
-      open,
-    ]);
+    }, [enableFloatingStyles, floatingStyles, middlewareData, refs.floating]);
 
     const {
       selectedItems: controlledSelectedItems,
