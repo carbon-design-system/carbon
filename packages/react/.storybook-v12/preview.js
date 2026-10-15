@@ -83,6 +83,22 @@ export const parameters = {
         if (idB.includes('welcome')) {
           return 1;
         }
+        // A group-level `<parent>/Overview` docs page always comes first among
+        // its siblings (e.g. `Examples/Add and select/Overview`), even when
+        // sibling stories also have "overview" in their id.
+        const overviewSuffix = 'Overview';
+        if (
+          titleA.endsWith(`/${overviewSuffix}`) &&
+          titleB.startsWith(titleA.slice(0, -overviewSuffix.length))
+        ) {
+          return -1;
+        }
+        if (
+          titleB.endsWith(`/${overviewSuffix}`) &&
+          titleA.startsWith(titleB.slice(0, -overviewSuffix.length))
+        ) {
+          return 1;
+        }
         if (idA.includes('overview') && !idB.includes('overview')) {
           return -1;
         }
