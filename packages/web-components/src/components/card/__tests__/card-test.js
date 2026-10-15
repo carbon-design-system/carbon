@@ -258,7 +258,7 @@ describe('cds-card-header', function () {
     });
   });
 
-  describe('data-has-ai-label reflection', () => {
+  describe('data-has-ai-label propagation', () => {
     const getHeaderDiv = (card) =>
       card
         .querySelector('cds-card-header')

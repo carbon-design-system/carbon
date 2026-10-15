@@ -410,8 +410,6 @@ export const ProductiveAndExpressive = {
   `,
 };
 
-// ─── Shared ai-label actions ──────────────────────────────────────────────────
-
 const aiLabelActions = html`
   <cds-icon-button kind="ghost" slot="actions" size="lg">
     ${iconLoader(View16, { slot: 'icon' })}
