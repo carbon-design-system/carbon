@@ -833,7 +833,7 @@
 
     // Keep the cell border inside the compact row height
     &.#{$prefix}--data-table--sm tbody td.#{$prefix}--table-expand {
-      block-size: $spacing-07;
+      min-block-size: $spacing-07;
     }
 
     thead .#{$prefix}--table-expand {
@@ -945,10 +945,6 @@
 
     &.#{$prefix}--data-table--sm tr:not([data-child-row]) {
       min-block-size: convert.to-rem(32px);
-    }
-
-    &.#{$prefix}--data-table--sm tr.#{$prefix}--parent-row {
-      block-size: $spacing-07;
     }
 
     &.#{$prefix}--data-table--md tr:not([data-child-row]) {
