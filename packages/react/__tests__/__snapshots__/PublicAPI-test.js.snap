@@ -2747,6 +2747,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "toolbarLabel": {
+        "type": "string",
+      },
       "zebra": {
         "type": "bool",
       },
