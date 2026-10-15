@@ -13,6 +13,10 @@ import '../popover/index';
 import popoverStyles from '../popover/popover.scss?lit';
 import styles from './tooltip.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import {
+  AutoAlignController,
+  autoAlignConverter,
+} from '../../globals/controllers/auto-align-controller';
 
 /**
  * Definition tooltip.
@@ -30,8 +34,10 @@ class CDSDefinitionTooltip extends LitElement {
   /**
    * Will auto-align Definition Tooltip. This prop is currently experimental and is subject to future changes.
    */
-  @property({ type: Boolean, reflect: true })
-  autoalign = false;
+  @property({ type: Boolean, reflect: true, converter: autoAlignConverter })
+  autoalign?: boolean;
+
+  protected _autoAlignController = new AutoAlignController(this);
 
   /**
    * Specify whether the tooltip should be open when it first renders

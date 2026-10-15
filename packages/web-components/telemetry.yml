@@ -744,6 +744,7 @@ collect:
         - enable-experimental-focus-wrap-without-sentinels
         - enable-focus-wrap-without-sentinels
         - enable-treeview-controllable
+        - enable-v12-autoalign
         - enable-v12-dynamic-floating-styles
         - enable-v12-release
         - enable-v12-tile-default-icons
@@ -755,8 +756,8 @@ collect:
         - with-icons
       allowedAttributeStringValues:
         # General - boolean attributes
-        - "true"
-        - "false"
+        - 'true'
+        - 'false'
         # General - button-size
         - 2xl
         - lg

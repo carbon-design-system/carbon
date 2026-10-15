@@ -60,6 +60,10 @@ const hasOwn = <T extends object>(obj: T, key: PropertyKey): key is keyof T =>
  * @attr {boolean} enable-v12-dynamic-floating-styles - Enable dynamic setting
  * of floating styles for components like `cds-popover`, `cds-tooltip`, etc.
  * Becomes the default behavior in v12.
+ * @attr {boolean} enable-v12-autoalign - Enable `autoalign` by default for
+ * components that support it, like `cds-popover`, `cds-tooltip`, etc. An
+ * explicit `autoalign` attribute always takes precedence. Becomes the default
+ * behavior in v12.
  * @attr {boolean} enable-v12-toggle-reduced-label-spacing - Enable a reduced
  * spacing between the toggle control and its label. Becomes the default
  * behavior in v12.
@@ -91,6 +95,7 @@ class FeatureFlagsElement extends LitElement {
     'enable-dialog-element': 'CDS-MODAL',
     'enable-v12-dynamic-floating-styles': 'CDS-FLOATING',
     'enable-v12-toggle-reduced-label-spacing': 'CDS-TOGGLE',
+    'enable-v12-autoalign': null,
   } as const;
 
   static get observedAttributes() {

@@ -16,6 +16,7 @@ import styles from './tooltip.scss?lit';
 import popoverStyles from '../popover/popover.scss?lit';
 import CDSTooltipContent from './tooltip-content';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import { autoAlignConverter } from '../../globals/controllers/auto-align-controller';
 
 /**
  * Trigger button of tooltip.
@@ -33,8 +34,8 @@ class CDSTooltip extends HostListenerMixin(CDSPopover) {
   /**
    * Specify whether a auto align functionality should be applied
    */
-  @property({ type: Boolean, reflect: true })
-  autoalign = false;
+  @property({ type: Boolean, reflect: true, converter: autoAlignConverter })
+  autoalign?: boolean;
 
   /**
    * `true` if this tooltip is in a data table row

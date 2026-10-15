@@ -13,6 +13,7 @@ import { waitForPosition } from '../../ListBox/test-helpers';
 import RadioButton from '../../RadioButton';
 import RadioButtonGroup from '../../RadioButtonGroup';
 import { default as Checkbox } from '../../Checkbox';
+import { FeatureFlags } from '../../FeatureFlags';
 
 const prefix = 'cds';
 
@@ -21,6 +22,52 @@ describe('Popover', () => {
     <button type="button" ref={ref} {...props} />
   ));
   TriggerWithPopoverContentDisplayName.displayName = 'PopoverContent';
+
+  describe('enable-v12-autoalign', () => {
+    const autoAlignClass = `${prefix}--popover--auto-align`;
+
+    it('should not auto align by default', () => {
+      render(
+        <Popover open data-testid="popover">
+          <PopoverContent>test</PopoverContent>
+        </Popover>
+      );
+      expect(screen.getByTestId('popover')).not.toHaveClass(autoAlignClass);
+    });
+
+    it('should auto align by default when the flag is enabled', () => {
+      render(
+        <FeatureFlags enableV12Autoalign>
+          <Popover open data-testid="popover">
+            <PopoverContent>test</PopoverContent>
+          </Popover>
+        </FeatureFlags>
+      );
+      expect(screen.getByTestId('popover')).toHaveClass(autoAlignClass);
+    });
+
+    it('should let an explicit `autoAlign={false}` override the flag', () => {
+      render(
+        <FeatureFlags enableV12Autoalign>
+          <Popover open autoAlign={false} data-testid="popover">
+            <PopoverContent>test</PopoverContent>
+          </Popover>
+        </FeatureFlags>
+      );
+      expect(screen.getByTestId('popover')).not.toHaveClass(autoAlignClass);
+    });
+
+    it('should be enabled by `enableV12Release`', () => {
+      render(
+        <FeatureFlags enableV12Release>
+          <Popover open data-testid="popover">
+            <PopoverContent>test</PopoverContent>
+          </Popover>
+        </FeatureFlags>
+      );
+      expect(screen.getByTestId('popover')).toHaveClass(autoAlignClass);
+    });
+  });
 
   it('should support a ref on the outermost element', () => {
     const ref = jest.fn();

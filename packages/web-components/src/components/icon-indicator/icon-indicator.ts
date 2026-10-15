@@ -40,6 +40,10 @@ export { ICON_INDICATOR_KIND };
 import { iconLoader } from '../../globals/internal/icon-loader';
 import styles from './icon-indicator.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import {
+  AutoAlignController,
+  autoAlignConverter,
+} from '../../globals/controllers/auto-align-controller';
 
 const iconMap = {
   [ICON_INDICATOR_KIND.FAILED]: {
@@ -108,8 +112,10 @@ class CDSIconIndicator extends LitElement {
   /**
    * Will auto-align the tooltip in compact mode
    */
-  @property({ type: Boolean, reflect: false })
-  autoalign = false;
+  @property({ type: Boolean, reflect: false, converter: autoAlignConverter })
+  autoalign?: boolean;
+
+  protected _autoAlignController = new AutoAlignController(this);
 
   /**
    * When true, displays only the icon with the label in a tooltip

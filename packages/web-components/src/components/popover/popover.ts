@@ -19,6 +19,10 @@ import { POPOVER_BACKGROUND_TOKEN } from './defs';
 import type { Boundary, Rect } from '@floating-ui/dom';
 import { deepShadowContains } from '../../globals/internal/deep-shadow-contains';
 import { isFeatureFlagEnabled } from '../feature-flags';
+import {
+  AutoAlignController,
+  autoAlignConverter,
+} from '../../globals/controllers/auto-align-controller';
 
 /**
  * Popover.
@@ -66,8 +70,10 @@ class CDSPopover extends HostListenerMixin(LitElement) {
   /**
    * Specify whether a auto align functionality should be applied
    */
-  @property({ type: Boolean, reflect: true })
-  autoalign = false;
+  @property({ type: Boolean, reflect: true, converter: autoAlignConverter })
+  autoalign?: boolean;
+
+  protected _autoAlignController = new AutoAlignController(this);
 
   /**
    * @deprecated This prop has been deprecated and will be

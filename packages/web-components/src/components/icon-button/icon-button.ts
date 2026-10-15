@@ -16,6 +16,10 @@ import { ICON_BUTTON_SIZE, ICON_BUTTON_TOOLTIP_ALIGNMENT } from './defs';
 import tooltipStyles from '../tooltip/tooltip.scss?lit';
 import buttonStyles from '../button/button.scss?lit';
 import styles from './icon-button.scss?lit';
+import {
+  AutoAlignController,
+  autoAlignConverter,
+} from '../../globals/controllers/auto-align-controller';
 
 export { ICON_BUTTON_SIZE, ICON_BUTTON_TOOLTIP_ALIGNMENT };
 
@@ -39,8 +43,10 @@ class CDSIconButton extends CDSButton {
   /**
    * Specify whether a auto align functionality should be applied
    */
-  @property({ type: Boolean, reflect: true })
-  autoalign = false;
+  @property({ type: Boolean, reflect: true, converter: autoAlignConverter })
+  autoalign?: boolean;
+
+  protected _autoAlignController = new AutoAlignController(this);
 
   /**
    * Determines whether the tooltip should close when inner content is activated (click, Enter or Space)
