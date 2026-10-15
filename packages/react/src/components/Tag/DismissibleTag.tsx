@@ -186,7 +186,7 @@ const DismissibleTag = forwardRef(
       ? tagTitle
       : typeof tagContent === 'string'
         ? tagContent
-        : text;
+        : (text ?? '');
 
     return (
       <Tag

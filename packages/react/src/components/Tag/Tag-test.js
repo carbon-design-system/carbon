@@ -153,6 +153,19 @@ describe('Tag', () => {
       expect(screen.getByTitle('Tag content')).toHaveTextContent('Tag content');
     });
 
+    it('should not render an undefined title when non-string children have no fallback', () => {
+      render(
+        <DismissibleTag type="red" title="Close tag">
+          <span>Custom tag content</span>
+        </DismissibleTag>
+      );
+
+      expect(screen.getByText('Custom tag content')).not.toHaveAttribute(
+        'title',
+        'undefined'
+      );
+    });
+
     it('should respect deprecated slug prop', () => {
       const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
       render(
