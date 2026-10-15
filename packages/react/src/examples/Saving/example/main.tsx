@@ -1,5 +1,4 @@
 /**
- * @license
  *
  * Copyright IBM Corp. 2026
  *
