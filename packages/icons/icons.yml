@@ -217,7 +217,7 @@
     - wheelchair Accessible
     - convenience
     - accessible
-    - accessiblity color filled
+    - accessibility color filled
     - user accessibility
     - handicap
     - handicapped
@@ -1701,13 +1701,13 @@
     - rest
     - dark
     - new moon
-    - cresent
-    - cresent moon
-    - cresent moon light
-    - cresent moon outline
+    - crescent
+    - crescent moon
+    - crescent moon light
+    - crescent moon outline
     - light moon
-    - cresent light
-    - cresent outline
+    - crescent light
+    - crescent outline
   sizes:
     - 16
     - 32
@@ -1722,13 +1722,13 @@
     - rest
     - dark
     - new moon
-    - cresent
-    - cresent moon
-    - cresent moon dark
-    - cresent moon filled
+    - crescent
+    - crescent moon
+    - crescent moon dark
+    - crescent moon filled
     - dark moon
-    - cresent dark
-    - cresent filled
+    - crescent dark
+    - crescent filled
 - name: ASM
   friendly_name: Assembler file
   aliases:
@@ -1832,7 +1832,7 @@
 - name: assignment-action--usage
   friendly_name: Assignment action usage
   aliases:
-    - assigment
+    - assignment
     - assign
     - usage
     - diagram
@@ -3402,7 +3402,7 @@
     - pickup
     - car
     - travel
-    - transporation
+    - transportation
     - vehicle
   sizes:
     - 32
@@ -3421,7 +3421,7 @@
     - car front
     - car grill
     - travel
-    - transporation
+    - transportation
     - vehicle
 - name: carbon
   friendly_name: Carbon
@@ -3675,7 +3675,7 @@
     - book
     - list
     - schedule
-    - catagorize
+    - categorize
     - catalog
     - file
   sizes:
@@ -5342,7 +5342,7 @@
   friendly_name: Classification
   aliases:
     - classification
-    - catagory
+    - category
     - classify
   sizes:
     - 32
@@ -5502,7 +5502,7 @@
   sizes:
     - 32
   aliases:
-    - donwload
+    - download
     - compute
     - data
     - hybrid
@@ -6605,7 +6605,7 @@
   aliases:
     - credentials
     - documents
-    - indentification
+    - identification
   sizes:
     - 32
 - name: critical
@@ -8205,7 +8205,7 @@
   friendly_name: Direction merge filled
   aliases:
     - direction
-    - directin merge
+    - direction merge
     - direction merge filled
   sizes:
     - 32
@@ -8437,8 +8437,8 @@
     - 32
   aliases:
     - distribute
-    - distrubute horizontal center
-    - distrubute horizontal
+    - distribute horizontal center
+    - distribute horizontal
 - name: distribute--horizontal-left
   friendly_name: Distribute horizontal left
   sizes:
@@ -9703,7 +9703,7 @@
   friendly_name: Expand categories
   aliases:
     - expand categories
-    - opertions
+    - operations
     - expand
     - categories
   sizes:
@@ -13663,7 +13663,7 @@
   aliases:
     - hardware security module
     - cryptographic infrastructure
-    - cyrpto key
+    - crypto key
     - life cycle
     - security
     - crypto storage
@@ -17160,7 +17160,7 @@
     - location hierarchy
     - change
     - switch location
-    - cange location
+    - change location
     - change parent location
     - Maximo
   sizes:
@@ -18961,7 +18961,7 @@
   friendly_name: Moon
   aliases:
     - moon
-    - cresent
+    - crescent
     - phase
   sizes:
     - 32
@@ -21764,7 +21764,7 @@
 - name: progress-bar--round
   friendly_name: Progress bar round
   aliases:
-    - progreess bar round
+    - progress bar round
     - loading
   sizes:
     - 32
@@ -22523,7 +22523,7 @@
   friendly_name: Restart
   aliases:
     - undo
-    - rever
+    - revert
     - refresh
   sizes:
     - 16
@@ -25249,7 +25249,7 @@
     - shop
     - house
     - retail
-    - buisness
+    - business
     - online
     - ecommerce
     - market
@@ -25510,7 +25510,7 @@
     - minus
     - remove
     - deduct
-    - withold
+    - withhold
     - decrease
     - diminish
     - discount
@@ -25527,7 +25527,7 @@
     - minus
     - remove
     - deduct
-    - withold
+    - withhold
     - decrease
     - diminish
     - discount
@@ -25551,7 +25551,7 @@
     - large
     - minus
     - deduct
-    - withold
+    - withhold
     - decrease
     - diminish
     - discount
@@ -28600,7 +28600,7 @@
   friendly_name: Video player
   aliases:
     - rectangle
-    - triange
+    - triangle
     - video
     - player
   sizes:
