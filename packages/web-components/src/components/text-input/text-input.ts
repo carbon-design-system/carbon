@@ -341,7 +341,7 @@ class CDSTextInput extends FormAssociatedMixin(ValidityMixin(LitElement)) {
     // make sure that lit-element updates the right properties
     this.requestUpdate('value', oldValue);
     // we set the value directly on the input (when available)
-    // so that programatic manipulation updates the UI correctly
+    // so that programmatic manipulation updates the UI correctly
     if (this._input) {
       this._input.value = value;
     }

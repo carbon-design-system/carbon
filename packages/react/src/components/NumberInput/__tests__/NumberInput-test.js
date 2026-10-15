@@ -77,6 +77,35 @@ describe('NumberInput', () => {
     }).not.toThrow();
   });
 
+  describe('size', () => {
+    it('should apply size class', () => {
+      const { container } = render(
+        <NumberInput id="number-input" label="Label" size="xs" />
+      );
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+      const number = container.querySelector('.cds--number');
+
+      expect(number).toHaveClass('cds--number--xs'); // TODO: V12 - Remove this check
+      expect(number).toHaveClass('cds--layout--size-xs');
+    });
+
+    it('should not apply a size class when `size` is not provided', () => {
+      const { container } = render(
+        <NumberInput id="number-input" label="Label" />
+      );
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+      const number = container.querySelector('.cds--number');
+
+      expect(
+        Array.from(number.classList).filter(
+          (name) =>
+            /^cds--number--(xs|sm|md|lg)$/.test(name) || // TODO: V12 - Remove this check
+            name.startsWith('cds--layout--size-')
+        )
+      ).toEqual([]);
+    });
+  });
+
   // Controlled tests - tests where component state is managed externally via useState/value prop
   describe('Controlled', () => {
     it('should update externally to an empty value when `allowEmpty` is `true`', async () => {
@@ -2518,7 +2547,7 @@ describe('NumberInput', () => {
           await userEvent.click(screen.getByLabelText('increment'));
           expect(input).toHaveValue('20%');
         });
-        it('should throw an error if group seperator is in wrong position', async () => {
+        it('should throw an error if group separator is in wrong position', async () => {
           render(
             <NumberInput
               type="text"
@@ -2538,7 +2567,7 @@ describe('NumberInput', () => {
           expect(screen.getByRole('textbox')).toHaveAttribute('data-invalid');
         });
 
-        it('should throw an error if group seperator is in wrong position for given locale', async () => {
+        it('should throw an error if group separator is in wrong position for given locale', async () => {
           render(
             <NumberInput
               type="text"
