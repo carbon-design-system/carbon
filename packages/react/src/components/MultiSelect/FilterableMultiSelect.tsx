@@ -495,6 +495,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
   }, [autoAlign, floatingStyles, refs.floating, middlewareData]);
 
   const textInput = useRef<HTMLInputElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const filterableMultiSelectInstanceId = useId();
 
   const prefix = usePrefix();
@@ -578,7 +579,8 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
   const helperId = !hasHelper
     ? undefined
     : `filterablemultiselect-helper-text-${filterableMultiSelectInstanceId}`;
-  const labelId = `${id}-label`;
+  const instanceId = `${id}-${filterableMultiSelectInstanceId}`;
+  const labelId = `${instanceId}-label`;
   const titleClasses = cx({
     [`${prefix}--label`]: true,
     [`${prefix}--label--disabled`]: disabled,
@@ -598,8 +600,13 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
       {helperText}
     </div>
   );
-  const menuId = `${id}__menu`;
-  const inputId = `${id}-input`;
+  const menuId = `${instanceId}__menu`;
+  const inputId = `${instanceId}-input`;
+  const legacyMenuId = `${id}__menu`;
+  const inputAriaControls =
+    inputProps?.['aria-controls'] === legacyMenuId
+      ? menuId
+      : inputProps?.['aria-controls'];
 
   useEffect(() => {
     if (!isOpen) {
@@ -639,9 +646,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
 
       if (!(target instanceof Node)) return;
 
-      const wrapper = document
-        .getElementById(id)
-        ?.closest(`.${prefix}--multi-select__wrapper`);
+      const wrapper = wrapperRef.current;
 
       // If click is outside our component and menu is open or input is focused
       if (wrapper && !wrapper.contains(target)) {
@@ -660,7 +665,6 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
   }, [isOpen, inputFocused]);
 
   const {
@@ -678,7 +682,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     items: sortedItems,
     // defaultHighlightedIndex: 0, // after selection, highlight the first item.
     itemToString,
-    id,
+    id: instanceId,
     labelId,
     menuId,
     inputId,
@@ -896,7 +900,6 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
 
   const inputProp = getInputProps(
     getDropdownProps({
-      'aria-controls': isOpen ? menuId : undefined,
       'aria-describedby': hasHelper && showHelperText ? helperId : undefined,
       'aria-haspopup': 'listbox',
       // Remove excess aria `aria-labelledby`. HTML <label for>
@@ -906,6 +909,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
       placeholder,
       preventKeyAction: isOpen,
       ...inputProps,
+      'aria-controls': inputAriaControls ?? (isOpen ? menuId : undefined),
 
       onClick: () => handleMenuChange(true),
       onKeyDown(event: KeyboardEvent<HTMLElement>) {
@@ -995,7 +999,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
       : `${clearSelectionDescription} 0.`;
 
   return (
-    <div className={wrapperClasses}>
+    <div className={wrapperClasses} ref={wrapperRef}>
       {titleText ? (
         <label className={titleClasses} {...labelProps} ref={labelRef}>
           {titleText}
