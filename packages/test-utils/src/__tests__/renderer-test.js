@@ -54,10 +54,10 @@ describe('SassRenderer', () => {
     expect(unwrap('nullish')).toBeNull();
     expect(get('color').nativeValue).toBeInstanceOf(sass.SassColor);
     expect(() => get('missing')).toThrow(
-      'Unabled to find value with key: missing'
+      'Unable to find value with key: missing'
     );
     expect(() => unwrap('missing')).toThrow(
-      'Unabled to find value with key: missing'
+      'Unable to find value with key: missing'
     );
   });
 

@@ -12,6 +12,8 @@
  * migrated component's stories and MDX files.
  */
 export const productMigratedStoryGlobs = [
+  '../src/examples/import-and-upload/import-and-upload.stories.ts',
+  '../src/examples/import-and-upload/*.mdx',
   '../src/components/add-select/add-select.stories.ts',
   '../src/components/add-select/*.mdx',
   '../src/components/action-set/action-set.stories.ts',
@@ -42,6 +44,8 @@ export const productMigratedStoryGlobs = [
   '../src/components/resizer/*.mdx',
   '../src/utilities/step-flow/step-flow.stories.ts',
   '../src/utilities/step-flow/*.mdx',
+  '../src/components/page-header/page-header.stories.ts',
+  '../src/components/page-header/*.mdx',
   '../src/components/side-panel/side-panel.stories.ts',
   '../src/components/side-panel/*.mdx',
   '../src/components/tearsheet/tearsheet.stories.ts',
@@ -91,6 +95,7 @@ export const excludeProductsComponents = [
   'src/components/notification-panel/**/*',
   'src/components/options-tile/**/*',
   'src/components/resizer/**/*',
+  'src/components/page-header/**/*',
   'src/components/side-panel/**/*',
   'src/components/tearsheet/**/*',
   'src/utilities/step-flow/**/*',
