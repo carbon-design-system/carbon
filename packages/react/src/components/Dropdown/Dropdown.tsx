@@ -342,14 +342,15 @@ const Dropdown = React.forwardRef(
 
             // Middleware order matters, arrow should be last
             middleware: [
+              autoAlign && flip(),
               floatingSize({
-                apply({ rects, elements }) {
+                apply({ availableHeight, rects, elements }) {
                   Object.assign(elements.floating.style, {
                     width: `${rects.reference.width}px`,
+                    maxHeight: `${availableHeight}px`,
                   });
                 },
               }),
-              autoAlign && flip(),
               autoAlign && hide(),
             ],
             whileElementsMounted: autoUpdate,
@@ -373,8 +374,13 @@ const Dropdown = React.forwardRef(
           }
         });
       }
-      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
-    }, [floatingStyles, autoAlign, refs.floating]);
+    }, [
+      enableFloatingStyles,
+      floatingStyles,
+      middlewareData,
+      autoAlign,
+      refs.floating,
+    ]);
 
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
