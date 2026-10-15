@@ -459,6 +459,5 @@ export const FullScreenWithMultipleSteps = {
 
 const meta: Meta = {
   title: 'Components/Onboarding/InterstitialScreen',
-  tags: ['ibm-products-migrated'],
 };
 export default meta;

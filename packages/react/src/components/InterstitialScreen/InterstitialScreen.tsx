@@ -180,7 +180,7 @@ export const InterstitialScreen = React.forwardRef<
             className // Apply any supplied class names to the main HTML element.
           )}
           size="lg"
-          onClose={handleClose}
+          onClose={handleClose as unknown as (event: React.MouseEvent) => void}
           open={open}
           ref={_forwardedRef}
           aria-label={ariaLabel}

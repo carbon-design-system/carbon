@@ -18,7 +18,7 @@ import cx from 'classnames';
 import { blockClass, CoachmarkContext } from './context';
 import { Close, Draggable } from '@carbon/icons-react';
 import { usePrefix } from '../../internal/usePrefix';
-import { makeDraggable } from '../../../../utilities/src/makeDraggable';
+import { makeDraggable } from '@carbon/utilities';
 
 export interface CoachmarkContentHeaderProps {
   /**
@@ -200,7 +200,7 @@ export const CoachmarkContentHeader = forwardRef<
             className={`${contentHeaderBlockClass}--drag-icon`}
             aria-label={dragIconDescription}
             aria-describedby={dragInstructionsId}
-            aria-pressed={isDragging}
+            aria-pressed={isDragging || undefined}
           />
         </>
       )}
