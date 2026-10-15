@@ -511,7 +511,9 @@ describe('MenuItem', () => {
         </Menu>
       );
 
-      const parentItem = screen.getAllByRole('menuitem')[0];
+      const parentItem = screen.getByRole('menuitem', {
+        name: 'Parent Parent',
+      });
       parentItem.focus();
       expect(parentItem).toHaveFocus();
 

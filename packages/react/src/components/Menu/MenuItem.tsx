@@ -131,9 +131,8 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
         if (open) {
           setSubmenuOpen(true);
         } else {
-          // If the submenu wasn't actually open, there's nothing to close and
-          // focus shouldn't be stolen back to this item (e.g. this fires when
-          // focus simply moves to a sibling menu item via arrow key navigation).
+          // Ignore close notifications when the submenu is already closed to
+          // avoid stealing focus during arrow key navigation.
           if (!submenuOpen) {
             return;
           }
