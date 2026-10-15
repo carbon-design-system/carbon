@@ -19,7 +19,7 @@ export interface TruncatedTextProps {
    */
   align?: PopoverAlignment;
   /**
-   * Specify whether a auto align functionality should be applied in tooltip variant. Refer to Carbon tooltip docs for additional information.
+   * Specify whether auto-align is enabled in tooltip variant. Refer to Carbon tooltip docs for additional information.
    */
   autoAlign?: boolean;
   /**

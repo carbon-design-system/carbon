@@ -33,8 +33,8 @@ export class CDSTruncatedText extends AutoAlignMixin(LitElement) {
   align = 'top';
 
   /**
-   * Specify whether a auto align functionality should be applied. Defaults to
-   * `true` when `enable-v12-autoalign` is enabled, and to `false` otherwise.
+   * Specify whether auto-align is enabled. Defaults to `true` when
+   * `enable-v12-autoalign` is enabled, and to `false` otherwise.
    */
   @property({ type: Boolean, reflect: true })
   autoalign?: boolean;
