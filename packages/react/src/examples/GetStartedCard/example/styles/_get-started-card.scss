@@ -1,0 +1,133 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/colors';
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+
+// GetStartedCard look, layered on top of the composable Card. The selector is
+// paired with the Card's own class so it outranks the Card's `display` and
+// title rules regardless of stylesheet order.
+.#{$prefix}--card.#{$prefix}--get-started-card {
+  display: flex;
+  min-block-size: 12rem;
+  flex-direction: column;
+
+  .#{$prefix}--card__title-text-row {
+    @include type.type-style('heading-03');
+  }
+
+  // Push the metadata row to the bottom of the card.
+  .#{$prefix}--card__body {
+    margin-block-start: auto;
+    padding-block-start: 0;
+  }
+
+  // The clickable arrow shares the metadata row, at the trailing edge.
+  .#{$prefix}--card__clickable-footer {
+    position: absolute;
+    inset-block-end: 0;
+    inset-inline-end: 0;
+  }
+}
+
+// The brand colors only apply while the card is enabled, so a disabled card
+// keeps the Card's own disabled styles.
+.#{$prefix}--get-started-card:not(.#{$prefix}--card--disabled) {
+  border-color: colors.$purple-70;
+  background-image: linear-gradient(
+    180deg,
+    colors.$purple-80 50%,
+    colors.$purple-70 100%
+  );
+  color: colors.$white-0;
+
+  .#{$prefix}--card__title .#{$prefix}--card__label,
+  .#{$prefix}--card__title .#{$prefix}--card__description,
+  .#{$prefix}--card__clickable-footer {
+    color: colors.$white-0;
+  }
+
+  &.#{$prefix}--card--clickable:hover {
+    background-color: transparent;
+    background-image: linear-gradient(
+      180deg,
+      colors.$purple-70 50%,
+      colors.$purple-70-hover 100%
+    );
+  }
+}
+
+// With media the card becomes a two column grid: the header sits in the first
+// column, the metadata row spans the bottom, and the media spans both rows. The
+// media is centered on the card, so it overflows its top and bottom edges
+// equally when it is taller than the card.
+.#{$prefix}--card.#{$prefix}--get-started-card--with-media {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: 1fr auto;
+
+  // Card.Header contains its inline size by default, which would collapse the
+  // auto column. Size it by its content instead.
+  .#{$prefix}--card__header {
+    container-type: normal;
+    grid-column: 1;
+    grid-row: 1;
+    padding-inline-end: $spacing-07;
+  }
+
+  // Spanning both columns keeps the body from widening the first column.
+  .#{$prefix}--card__body {
+    position: relative;
+    z-index: 1;
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+}
+
+// The zero block size keeps the media from setting the card's height, while the
+// flex centering lets the image overflow the card equally on both sides.
+.#{$prefix}--get-started-card__media {
+  display: flex;
+  align-items: center;
+  align-self: center;
+  block-size: 0;
+  grid-column: 2;
+  grid-row: 1 / -1;
+  justify-self: start;
+
+  > * {
+    display: block;
+    max-inline-size: 100%;
+  }
+
+  @include breakpoint-down(lg) {
+    display: none;
+  }
+}
+
+// Large step number shown in place of the pictogram.
+.#{$prefix}--get-started-card__sequence {
+  @include type.type-style('heading-05');
+}
+
+.#{$prefix}--get-started-card__meta {
+  display: flex;
+  align-items: center;
+  gap: $spacing-05;
+}
+
+.#{$prefix}--get-started-card__meta-item {
+  @include type.type-style('label-01');
+
+  display: flex;
+  align-items: center;
+  gap: $spacing-02;
+  white-space: nowrap;
+}
