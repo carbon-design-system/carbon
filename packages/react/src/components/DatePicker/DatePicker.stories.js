@@ -127,7 +127,7 @@ const datePickerTypeArgType = {
 
 const sharedParameters = {
   controls: {
-    include: [...Object.keys(sharedArgTypes), 'datePickerType'],
+    include: Object.keys(sharedArgTypes),
   },
 };
 
@@ -155,7 +155,6 @@ export default {
 
 export const Default = (args) => {
   const locale = useDocumentLang().split('-')[0];
-  const { readOnly } = args;
   const {
     allowInput,
     closeOnSelect,
@@ -169,11 +168,7 @@ export const Default = (args) => {
     ...datePickerInputArgs
   } = args;
   return (
-    <DatePicker
-      datePickerType="single"
-      {...args}
-      readOnly={readOnly}
-      locale={locale}>
+    <DatePicker datePickerType="single" {...args} locale={locale}>
       <DatePickerInput
         placeholder="mm/dd/yyyy"
         labelText="Date Picker label"
@@ -198,6 +193,11 @@ Default.argTypes = {
   datePickerType: datePickerTypeArgType,
 };
 Default.args = { ...sharedArgs };
+Default.parameters = {
+  controls: {
+    include: [...sharedParameters.controls.include, 'datePickerType'],
+  },
+};
 
 export const Simple = (args) => {
   const {
@@ -330,7 +330,6 @@ SimpleWithLayer.parameters = {
     },
   },
 };
-SimpleWithLayer.argTypes = { ...sharedArgTypes };
 SimpleWithLayer.argTypes = Simple.argTypes;
 
 export const SingleWithCalendarWithLayer = (args) => {
@@ -371,7 +370,6 @@ SingleWithCalendarWithLayer.parameters = {
     },
   },
 };
-SingleWithCalendarWithLayer.argTypes = { ...sharedArgTypes };
 SingleWithCalendarWithLayer.argTypes = SingleWithCalendar.argTypes;
 
 export const RangeWithCalendarWithLayer = (args) => {
