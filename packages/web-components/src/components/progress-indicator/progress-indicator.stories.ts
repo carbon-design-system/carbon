@@ -15,7 +15,7 @@ import type CDSProgressIndicatorSkeleton from './progress-indicator-skeleton';
 import './index';
 
 const args = {
-  currentIndex: 0,
+  currentIndex: 1,
   vertical: false,
   spaceEqually: false,
   secondaryLabel: 'Optional label',

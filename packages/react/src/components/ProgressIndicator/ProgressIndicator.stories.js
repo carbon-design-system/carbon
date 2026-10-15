@@ -138,6 +138,7 @@ export const Default = (args) => {
 
 Default.args = {
   ...progressIndicatorArgs,
+  currentIndex: 1,
   secondaryLabel: 'Optional label',
 };
 
