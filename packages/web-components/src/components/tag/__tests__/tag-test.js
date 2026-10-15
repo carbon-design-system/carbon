@@ -51,9 +51,10 @@ describe('cds-tag', function () {
           <span>Custom tag content</span>
         </cds-dismissible-tag>`
       );
+      await el.updateComplete;
 
       const slot = el.shadowRoot.querySelector('.cds--tag__label slot');
-      const assigned = slot.assignedNodes({ flatten: true });
+      const assigned = slot.assignedElements({ flatten: true });
 
       expect(assigned[0].textContent.trim()).to.equal('Custom tag content');
       expect(el.shadowRoot.querySelector('.cds--tag__label').title).to.equal(
