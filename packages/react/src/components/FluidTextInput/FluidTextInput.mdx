@@ -29,7 +29,11 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(FluidTextInputStories.Default),
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: FluidTextInputStories.Default,
+          styles: FluidTextInputStories.default.parameters.styles,
+        }),
     },
   ]}
 />
@@ -41,7 +45,11 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(FluidTextInputStories.Skeleton),
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: FluidTextInputStories.Skeleton,
+          styles: FluidTextInputStories.default.parameters.styles,
+        }),
     },
   ]}
 />
@@ -54,7 +62,10 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig(FluidTextInputStories.DefaultWithToggletip),
+        stackblitzPrefillConfig({
+          story: FluidTextInputStories.DefaultWithToggletip,
+          styles: FluidTextInputStories.default.parameters.styles,
+        }),
     },
   ]}
 />

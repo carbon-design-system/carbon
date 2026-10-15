@@ -66,6 +66,10 @@ export default {
     'property-no-vendor-prefix': OFF,
     // Specify a whitelist of allowed properties.
     'property-allowed-list': OFF,
+    // Disallow deprecated properties.
+    // TODO: migrate the `clip` usages to `clip-path`
+    // https://github.com/carbon-design-system/carbon/issues/23136
+    'property-no-deprecated': OFF,
 
     // Declaration
     // Disallow longhand properties that can be combined into one shorthand
@@ -84,6 +88,11 @@ export default {
     // Specify a whitelist of allowed property and value pairs within
     // declarations.
     'declaration-property-value-allowed-list': OFF,
+    // Disallow deprecated keyword values within declarations
+    // TODO: replace the `word-break: break-word` with
+    // `overflow-wrap: anywhere`
+    // https://github.com/carbon-design-system/carbon/issues/23136
+    'declaration-property-value-keyword-no-deprecated': OFF,
 
     // Declaration block
     // Limit the number of declaration within single line declaration blocks.

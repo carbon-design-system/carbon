@@ -38,7 +38,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TileStories.Default),
+      onClick: () => stackblitzPrefillConfig({ story: TileStories.Default }),
     },
   ]}
 />
@@ -50,7 +50,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TileStories.Clickable),
+      onClick: () => stackblitzPrefillConfig({ story: TileStories.Clickable }),
     },
   ]}
 />
@@ -63,7 +63,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig(TileStories.ClickableWithCustomIcon),
+        stackblitzPrefillConfig({ story: TileStories.ClickableWithCustomIcon }),
     },
   ]}
 />
@@ -75,7 +75,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TileStories.Expandable),
+      onClick: () => stackblitzPrefillConfig({ story: TileStories.Expandable }),
     },
   ]}
 />
@@ -88,7 +88,9 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig(TileStories.ExpandableWithInteractive),
+        stackblitzPrefillConfig({
+          story: TileStories.ExpandableWithInteractive,
+        }),
     },
   ]}
 />
@@ -100,7 +102,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TileStories.Selectable),
+      onClick: () => stackblitzPrefillConfig({ story: TileStories.Selectable }),
     },
   ]}
 />
@@ -112,7 +114,8 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TileStories.MultiSelect),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: TileStories.MultiSelect }),
     },
   ]}
 />
@@ -124,7 +127,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TileStories.Radio),
+      onClick: () => stackblitzPrefillConfig({ story: TileStories.Radio }),
     },
   ]}
 />

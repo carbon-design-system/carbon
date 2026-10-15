@@ -44,7 +44,13 @@ function ExampleComponent() {
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(IconIndicatorStories.Default),
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: IconIndicatorStories.Default,
+          customImports: [
+            "import { preview__IconIndicator as IconIndicator } from '@carbon/react';",
+          ],
+        }),
     },
   ]}
 />

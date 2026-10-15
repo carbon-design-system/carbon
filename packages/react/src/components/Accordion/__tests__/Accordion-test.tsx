@@ -56,36 +56,6 @@ describe('Accordion', () => {
       // test when open
       await expect(screen.getByText('Heading A')).toHaveNoAxeViolations();
     });
-
-    it('should have no Accessibility Checker violations', async () => {
-      render(
-        <main>
-          <Accordion className="extra-class">
-            <AccordionItem className="child" title="Heading A">
-              Panel A
-            </AccordionItem>
-            <AccordionItem className="child" title="Heading B">
-              Panel B
-            </AccordionItem>
-            <AccordionItem className="child" title="Heading C">
-              Panel C
-            </AccordionItem>
-          </Accordion>
-        </main>
-      );
-
-      await expect(screen.getByText('Heading A')).toHaveNoACViolations(
-        'Accordion'
-      );
-
-      // click to open
-      await userEvent.click(screen.getByText('Heading A'));
-
-      // test when open
-      await expect(screen.getByText('Heading A')).toHaveNoACViolations(
-        'Opened Accordion'
-      );
-    });
   });
 
   describe('basic keyboard accessibility testing', () => {

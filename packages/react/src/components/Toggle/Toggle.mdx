@@ -33,7 +33,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(ToggleStories.Default),
+      onClick: () => stackblitzPrefillConfig({ story: ToggleStories.Default }),
     },
   ]}
 />
@@ -45,7 +45,8 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(ToggleStories.SmallToggle),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: ToggleStories.SmallToggle }),
     },
   ]}
 />
@@ -57,7 +58,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(ToggleStories.Skeleton),
+      onClick: () => stackblitzPrefillConfig({ story: ToggleStories.Skeleton }),
     },
   ]}
 />
@@ -70,7 +71,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig(ToggleStories.WithAccessibleLabels),
+        stackblitzPrefillConfig({ story: ToggleStories.WithAccessibleLabels }),
     },
   ]}
 />

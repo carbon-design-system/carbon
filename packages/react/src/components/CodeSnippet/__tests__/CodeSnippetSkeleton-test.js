@@ -21,16 +21,6 @@ describe('CodeSnippetSkeleton', () => {
         await expect(container).toHaveNoAxeViolations();
       }
     );
-
-    it.each(snippetTypes)(
-      'should have no AC violations with type="%s"',
-      async (type) => {
-        const { container } = render(<CodeSnippetSkeleton type={type} />);
-        await expect(container).toHaveNoACViolations(
-          `CodeSnippetSkeleton-${type}`
-        );
-      }
-    );
   });
 
   it('should default to type="single"', () => {

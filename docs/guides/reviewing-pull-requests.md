@@ -132,7 +132,7 @@
     components.
 - **useEffect Usage:**
   - [You might not need an effect](https://react.dev/learn/you-might-not-need-an-effect)!
-    Remove them if they're unecessary.
+    Remove them if they're unnecessary.
   - Ensure the dependency array is complete.
   - Check that any suppression comments (disabling eslint rules) are justified.
   - Confirm that missing dependency arrays aren’t hiding logic that belongs in

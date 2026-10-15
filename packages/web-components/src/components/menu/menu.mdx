@@ -1,5 +1,4 @@
-import { ArgTypes, Markdown, Meta } from '@storybook/addon-docs/blocks';
-import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import { Meta } from '@storybook/addon-docs/blocks';
 import * as MenuStories from './menu.stories';
 
 <Meta of={MenuStories} />
@@ -7,6 +6,8 @@ import * as MenuStories from './menu.stories';
 # Menu
 
 [Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/Menu)
+
+## Table of Contents
 
 {/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
 
@@ -66,7 +67,7 @@ where we pass `[x, x + width]` and `[y, y + height]` of the trigger button. This
 way, the `cds-menu` is able to automatically determine its ideal position on the
 screen (which side to open at and in which direction) while always staying
 visually attached to the trigger. Each `cds-menu-item` that has `children` and
-therfore a submenu uses the same approach under the hood to correctly position
+therefore a submenu uses the same approach under the hood to correctly position
 the submenu.
 
 ## Subcomponents
@@ -142,7 +143,8 @@ You can logically group multiple menu items by wrapping them inside a
 `cds-menu-item-group`. This doesn't affect the visual rendering but can
 tremendously improve the experience for assistive technology users. You'll
 always want to use a `cds-menu-item-group` if you have multiple
-[`cds-menu-item-selectable`](#menuitemselectable) that are relatd to each other.
+[`cds-menu-item-selectable`](#menuitemselectable) that are related to each
+other.
 
 ### cds-menu-item-selectable
 

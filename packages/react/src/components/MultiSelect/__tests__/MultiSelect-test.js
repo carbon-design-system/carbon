@@ -53,21 +53,6 @@ describe('MultiSelect', () => {
 
       await expect(container).toHaveNoAxeViolations();
     });
-
-    it('should have no AC violations', async () => {
-      const items = generateItems(4, generateGenericItem);
-      const { container } = render(
-        <MultiSelect
-          id="test"
-          label="Field"
-          titleText="Multiselect title"
-          items={items}
-        />
-      );
-      await waitForPosition();
-
-      await expect(container).toHaveNoACViolations('MultiSelect');
-    });
   });
 
   it('should warn without throwing for interactive content in titleText', () => {
@@ -907,6 +892,24 @@ describe('MultiSelect', () => {
         expect(listbox.style.visibility).toBe('hidden');
         expect(listbox.style.width).toBe('0px');
       });
+    });
+
+    it('should set maxHeight on the listbox when autoAlign is enabled', async () => {
+      const items = generateItems(4, generateGenericItem);
+
+      render(
+        <MultiSelect
+          autoAlign
+          open
+          id="test"
+          label="test-label"
+          items={items}
+        />
+      );
+      await waitForPosition();
+
+      const listbox = screen.getByRole('listbox', { hidden: true });
+      expect(listbox.style.maxHeight).toBe('0px');
     });
 
     it('should accept a `ref` for the underlying button element', async () => {

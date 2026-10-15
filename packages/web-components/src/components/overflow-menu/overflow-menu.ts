@@ -309,6 +309,7 @@ class CDSOverflowMenu
     // trigger after delegated programmatic focus.
     triggerButton.dispatchEvent(new FocusEvent('focus'));
     this.toggleAttribute('data-programmatic-focus', true);
+    this._tooltip?.toggleAttribute('data-programmatic-focus', true);
     triggerButton.addEventListener('blur', this._handleTriggerBlur, {
       once: true,
     });
@@ -340,6 +341,7 @@ class CDSOverflowMenu
     const hadProgrammaticFocus = this.hasAttribute('data-programmatic-focus');
 
     this.toggleAttribute('data-programmatic-focus', false);
+    this._tooltip?.toggleAttribute('data-programmatic-focus', false);
     triggerButton?.removeEventListener('blur', this._handleTriggerBlur);
     this.ownerDocument.removeEventListener(
       'pointerdown',

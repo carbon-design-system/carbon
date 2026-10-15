@@ -38,7 +38,7 @@ const sharedFluidTimePickerProps = {
 
 figma.connect(
   FluidTimePicker,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=17544-268399&t=qp8bdiovIuVIO7xb-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=17544-268399&t=qp8bdiovIuVIO7xb-4',
   {
     variant: { Inputs: '3' },
     props: sharedFluidTimePickerProps,
@@ -81,7 +81,7 @@ figma.connect(
 
 figma.connect(
   FluidTimePicker,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=17544-268399&t=qp8bdiovIuVIO7xb-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=17544-268399&t=qp8bdiovIuVIO7xb-4',
   {
     variant: { Inputs: '2' },
     props: sharedFluidTimePickerProps,
