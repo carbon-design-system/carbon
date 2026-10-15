@@ -9,6 +9,7 @@ import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import { ICON_INDICATOR_KIND } from './defs';
+import AutoAlignMixin from '../../globals/mixins/auto-align';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
 import '../tooltip/definition-tooltip';
 import ErrorFilled16 from '@carbon/icons/es/error--filled/16.js';
@@ -98,7 +99,7 @@ const iconMap = {
  * @element cds-icon-indicator
  */
 @customElement(`${prefix}-icon-indicator`)
-class CDSIconIndicator extends LitElement {
+class CDSIconIndicator extends AutoAlignMixin(LitElement) {
   /**
    * Specify how the tooltip should align with the icon in compact mode
    */
@@ -106,10 +107,11 @@ class CDSIconIndicator extends LitElement {
   align: POPOVER_ALIGNMENT = POPOVER_ALIGNMENT.RIGHT;
 
   /**
-   * Will auto-align the tooltip in compact mode
+   * Will auto-align the tooltip in compact mode. Defaults to `true` when
+   * `enable-v12-autoalign` is enabled, and to `false` otherwise.
    */
   @property({ type: Boolean, reflect: false })
-  autoalign = false;
+  autoalign?: boolean;
 
   /**
    * When true, displays only the icon with the label in a tooltip
@@ -150,7 +152,7 @@ class CDSIconIndicator extends LitElement {
       return html`
         <cds-definition-tooltip
           align=${this.align}
-          ?autoalign=${this.autoalign}
+          .autoalign=${this.autoalign}
           open-on-hover>
           ${iconElement}
           <span class="${prefix}--visually-hidden"
