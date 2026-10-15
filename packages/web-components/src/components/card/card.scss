@@ -78,6 +78,12 @@ $css--plex: true !default;
   padding-inline-end: $spacing-13;
 }
 
+.#{$prefix}--card__header[data-has-ai-label] {
+  --#{$prefix}-card-actions-inset-inline-end: calc(
+    #{$spacing-03} + #{$spacing-06} + #{$spacing-03}
+  );
+}
+
 :host-context(#{$prefix}-card-header[has-title-media])
   .#{$prefix}--card__title {
   grid-column: 2;
@@ -179,7 +185,10 @@ $css--plex: true !default;
   gap: $spacing-02;
   inline-size: 50%;
   inset-block-start: $spacing-03;
-  inset-inline-end: $spacing-03;
+  inset-inline-end: var(
+    --#{$prefix}-card-actions-inset-inline-end,
+    #{$spacing-03}
+  );
   max-inline-size: 50%;
 }
 
