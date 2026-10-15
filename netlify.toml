@@ -1,7 +1,5 @@
 [build.environment]
   YARN_FLAGS = "--immutable"
-[context.deploy-preview.environment]
-  NODE_OPTIONS = "--max-old-space-size=6144"
 [[headers]]
    for = "/*"
    [headers.values]
