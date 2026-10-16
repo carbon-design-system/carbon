@@ -152,6 +152,12 @@ what is in rendered inside of `Tab` and `TabPanel`.
 
 ### Dismissable Tabs
 
+Pass `translateWithId` to `Tabs` to localize `carbon.tabs.remove-tab` and
+`carbon.tabs.remove-tab-instructions`. Its second argument contains `tabLabel`
+and the zero-based `tabIndex`. `tabLabel` uses the `Tab`'s `aria-label`, then
+its string or numeric children. Provide `aria-label` for rich label content, or
+use `tabIndex` to look up a label in your translation function.
+
 You can implement dismissable tabs in your project using Carbon's `Tabs`
 components. In order to put this in place, there are some events and props we'll
 need to forward through the component's API that have been outlined here.

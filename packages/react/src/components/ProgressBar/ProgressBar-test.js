@@ -7,7 +7,7 @@
 
 import React from 'react';
 import ProgressBar from './ProgressBar';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 const prefix = 'cds';
 
@@ -23,6 +23,53 @@ describe('ProgressBar', () => {
   });
 
   describe('renders as expected', () => {
+    it.each([
+      ['active', 'Loading', 'true'],
+      ['finished', 'Done', 'false'],
+      ['error', 'Error', 'false'],
+    ])('announces the %s status', (status, announcement, busy) => {
+      wrapper.rerender(
+        <ProgressBar {...props} helperText="Upload status" status={status} />
+      );
+
+      expect(screen.getByText(announcement)).toHaveAttribute(
+        'aria-live',
+        'polite'
+      );
+      expect(screen.getByRole('progressbar')).toHaveAttribute(
+        'aria-busy',
+        busy
+      );
+    });
+
+    it('translates announcements as the status changes', () => {
+      const messages = {
+        'carbon.progress-bar.loading': 'Cargando',
+        'carbon.progress-bar.finished': 'Completado',
+        'carbon.progress-bar.error': 'Error de carga',
+      };
+      const translateWithId = (id) => messages[id];
+
+      for (const [status, message] of [
+        ['active', 'Cargando'],
+        ['error', 'Error de carga'],
+        ['finished', 'Completado'],
+      ]) {
+        wrapper.rerender(
+          <ProgressBar
+            {...props}
+            helperText="Estado de carga"
+            status={status}
+            translateWithId={translateWithId}
+          />
+        );
+        expect(screen.getByText(message)).toHaveAttribute(
+          'aria-live',
+          'polite'
+        );
+      }
+    });
+
     it('progress bar and label ids match', () => {
       // eslint-disable-next-line testing-library/prefer-screen-queries
       const bar = wrapper.getByRole('progressbar');

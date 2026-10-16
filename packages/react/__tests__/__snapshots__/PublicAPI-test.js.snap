@@ -8312,6 +8312,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "translateWithId": {
+        "type": "func",
+      },
       "type": {
         "args": [
           [
@@ -10575,6 +10578,9 @@ Map {
       "onTabCloseRequest": [Function],
       "selectedIndex": {
         "type": "number",
+      },
+      "translateWithId": {
+        "type": "func",
       },
     },
   },
