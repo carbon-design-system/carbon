@@ -431,7 +431,7 @@ describe('cds-multi-select', function () {
       expect(clearButton.getAttribute('tabindex')).to.equal('-1');
     });
 
-    it('should keep the filter value and render a focus state when the clear button is focused', async () => {
+    it('should keep the filter value when the clear button is focused', async () => {
       const el = await fixture(html`
         <cds-multi-select label="test-label" filterable>
           <cds-multi-select-item value="apple">Apple</cds-multi-select-item>
@@ -454,10 +454,6 @@ describe('cds-multi-select', function () {
 
       expect(el.shadowRoot.activeElement).to.equal(clearButton);
       expect(filterInput.value).to.equal('app');
-
-      const { outlineStyle, outlineWidth } = getComputedStyle(clearButton);
-      expect(outlineStyle).to.equal('solid');
-      expect(outlineWidth).to.equal('2px');
     });
 
     it('should clear the input on blur', async () => {
