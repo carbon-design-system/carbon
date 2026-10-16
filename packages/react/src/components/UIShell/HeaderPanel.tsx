@@ -104,11 +104,22 @@ const HeaderPanel = React.forwardRef<HTMLDivElement, HeaderPanelProps>(
       return !!element.closest(`.${prefix}--header__action--active`);
     };
 
+    // Safari doesn't focus a button when it's clicked, so `relatedTarget` is
+    // null when the toggle is clicked. Remember what the pointer was pressed
+    // on so `onBlur` can still tell the toggle is being clicked.
+    const pointerDownTarget = useRef<Element | null>(null);
+    useWindowEvent('pointerdown', (event: PointerEvent) => {
+      pointerDownTarget.current =
+        event.target instanceof Element ? event.target : null;
+    });
+
     if (addFocusListeners) {
       eventHandlers.onBlur = (event) => {
+        const nextFocus = (event.relatedTarget ??
+          pointerDownTarget.current) as Element | null;
         if (
           !event.currentTarget.contains(event.relatedTarget) &&
-          !isPanelToggle(event.relatedTarget as Element | null) &&
+          !isPanelToggle(nextFocus) &&
           !lastClickedElement?.classList?.contains(
             `${prefix}--switcher__item-link`
           )
@@ -133,6 +144,7 @@ const HeaderPanel = React.forwardRef<HTMLDivElement, HeaderPanelProps>(
 
     useWindowEvent('click', (event: MouseEvent) => {
       const { target } = event;
+      pointerDownTarget.current = null;
       if (!(target instanceof Element)) return;
       setLastClickedElement(target);
 
