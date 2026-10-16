@@ -28,10 +28,12 @@ function createTemplate() {
     Error: true,
   });
   const invalidText = invalid ? instance.getString('Error message') : undefined;
-  const warn = instance.getEnum('State', {
+  const warning = instance.getEnum('State', {
     Warning: true,
   });
-  const warnText = warn ? instance.getString('Warning message') : undefined;
+  const warningText = warning
+    ? instance.getString('Warning message')
+    : undefined;
   const hasTimezone = instance.getEnum('Inputs', {
     '3': true,
   });
@@ -62,9 +64,9 @@ function createTemplate() {
     )}${renderStringAttribute(
       'invalid-text',
       invalidText
-    )}${renderBooleanAttribute('warn', warn)}${renderStringAttribute(
-      'warn-text',
-      warnText
+    )}${renderBooleanAttribute('warning', warning)}${renderStringAttribute(
+      'warning-text',
+      warningText
     )}>
   <cds-fluid-time-picker-select id="select-1" default-value="am">
     <cds-select-item value="am">AM</cds-select-item>

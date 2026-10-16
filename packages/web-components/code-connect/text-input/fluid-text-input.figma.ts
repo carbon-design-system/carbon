@@ -24,7 +24,7 @@ function createTemplate() {
 
   if (isSkeleton) {
     return {
-      id: 'cds-text-input-skeleton',
+      id: 'cds-fluid-text-input-skeleton',
       imports: [
         "import '@carbon/web-components/es/components/fluid-text-input/fluid-text-input-skeleton.js'",
       ],

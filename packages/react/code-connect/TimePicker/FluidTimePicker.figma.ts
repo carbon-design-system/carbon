@@ -24,12 +24,11 @@ function createTemplate() {
     Error: true,
   });
   const invalidText = invalid ? instance.getString('Error message') : undefined;
-  const warning = instance.getEnum('State', {
+
+  const warn = instance.getEnum('State', {
     Warning: true,
   });
-  const warningText = warning
-    ? instance.getString('Warning message')
-    : undefined;
+  const warnText = warn ? instance.getString('Warning message') : undefined;
   const hasTimezone = instance.getEnum('Inputs', {
     '3': true,
   });
@@ -47,9 +46,9 @@ function createTemplate() {
     'invalidText',
     invalidText
   )}${figma.helpers.react.renderProp(
-    'warning',
-    warning
-  )}${figma.helpers.react.renderProp('warningText', warningText)}`;
+    'warn',
+    warn
+  )}${figma.helpers.react.renderProp('warnText', warnText)}`;
 
   const timezoneSelect = hasTimezone
     ? figma.code`
