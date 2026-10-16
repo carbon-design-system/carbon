@@ -199,7 +199,7 @@ describe('cds-tooltip keyboard interactions', () => {
     expect(trigger!.open).toBe(false);
   });
 
-  it('should NOT dismiss on Enter when closeOnActivation is false (default)', async () => {
+  it('should not dismiss on Enter when closeOnActivation is false (default)', async () => {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     trigger!.open = true;
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
