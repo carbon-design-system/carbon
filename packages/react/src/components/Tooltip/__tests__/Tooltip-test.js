@@ -110,9 +110,6 @@ describe('Tooltip', () => {
     expect(popoverContainer).not.toHaveClass('cds--popover--open');
   });
 
-  // Tests for fix: cds-tooltip Escape dismissal (issue #22810)
-  // Per WAI-ARIA Tooltip pattern, Escape must always dismiss regardless of closeOnActivation.
-
   it('should close on Escape regardless of `closeOnActivation`', async () => {
     const { container } = render(
       <Tooltip defaultOpen label="Close">
