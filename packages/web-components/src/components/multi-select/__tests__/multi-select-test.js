@@ -431,6 +431,35 @@ describe('cds-multi-select', function () {
       expect(clearButton.getAttribute('tabindex')).to.equal('-1');
     });
 
+    it('should keep the filter value and render a focus state when the clear button is focused', async () => {
+      const el = await fixture(html`
+        <cds-multi-select label="test-label" filterable>
+          <cds-multi-select-item value="apple">Apple</cds-multi-select-item>
+          <cds-multi-select-item value="banana">Banana</cds-multi-select-item>
+        </cds-multi-select>
+      `);
+
+      const trigger = el.shadowRoot.querySelector('.cds--list-box__field');
+      trigger.click();
+      await el.updateComplete;
+
+      const filterInput = el.shadowRoot.querySelector('input');
+      filterInput.value = 'app';
+      filterInput.dispatchEvent(new Event('input', { bubbles: true }));
+      await el.updateComplete;
+
+      const clearButton = el.shadowRoot.querySelector('#clear-button');
+      clearButton.focus();
+      await el.updateComplete;
+
+      expect(el.shadowRoot.activeElement).to.equal(clearButton);
+      expect(filterInput.value).to.equal('app');
+
+      const { outlineStyle, outlineWidth } = getComputedStyle(clearButton);
+      expect(outlineStyle).to.equal('solid');
+      expect(outlineWidth).to.equal('2px');
+    });
+
     it('should clear the input on blur', async () => {
       const el = await fixture(html`
         <cds-multi-select label="test-label" filterable>
