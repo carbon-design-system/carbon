@@ -12,7 +12,7 @@ import g10Theme from '@carbon/themes/tokens/themes/g10/theme.tokens.json';
 import g90Theme from '@carbon/themes/tokens/themes/g90/theme.tokens.json';
 import g100Theme from '@carbon/themes/tokens/themes/g100/theme.tokens.json';
 
-// ── Flatten colors into a flat list of token objects ─────────────────────────
+// Flatten colors into a flat list of token objects
 // colors = { blue: { 10: '#edf5ff', 20: '#d0e2ff', ... }, ... }
 
 const allTokens = [];
@@ -72,7 +72,7 @@ const THEME_OPTIONS = [
   { value: 'g100', label: 'G100' },
 ];
 
-// ── Theme token → color alias reverse map ────────────────────────────────────
+// Theme token → color alias reverse map
 // Flattens each theme's token file and builds:
 //   colorToThemeTokens['blue-60'] = { white: ['background-brand', ...], g10: [...], ... }
 
@@ -121,7 +121,7 @@ for (const [theme, flat] of Object.entries(themeTokens)) {
   }
 }
 
-// ── Graph layout constants ────────────────────────────────────────────────────
+// Graph layout constants
 
 const CAT_W = 110;
 const CAT_H = 44;
@@ -137,7 +137,7 @@ const REL_X = TOK_X + NODE_W + LEVEL_H;
 const DESC_W = 220;
 const DESC_GAP = 20;
 
-// ── Relations layout ──────────────────────────────────────────────────────────
+// Relations layout
 
 function buildRelationsLayout(filteredTokens, expandedSwatches, selectedColorToken, activeTheme) {
   const swatchMap = {};
@@ -294,7 +294,7 @@ function CurvedLink({ fromNode, toNode, isRelation }) {
   );
 }
 
-// ── Main page ─────────────────────────────────────────────────────────────────
+// Main page
 
 export default function IndexPage({ lastBuiltOn }) {
   const [activeView, setActiveView] = React.useState('table');
@@ -486,7 +486,7 @@ export default function IndexPage({ lastBuiltOn }) {
         </div>
       </header>
 
-      {/* ── TABLE VIEW ──────────────────────────────────────────────────── */}
+      {/* TABLE VIEW */}
       {!isGraph && (
         <div className="content">
           <table aria-labelledby="page-title">
@@ -541,7 +541,7 @@ export default function IndexPage({ lastBuiltOn }) {
         </div>
       )}
 
-      {/* ── GRAPH VIEW ──────────────────────────────────────────────────── */}
+      {/* GRAPH VIEW */}
       {isGraph && (
         <svg
           ref={svgRef}

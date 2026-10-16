@@ -156,7 +156,7 @@ function combineComponentTokens(themes) {
   );
 }
 
-// ── SCSS build ────────────────────────────────────────────────────────────────
+// SCSS build
 // Generates:
 //   scss/generated/_themes.scss
 //   scss/generated/_tokens.scss
@@ -178,7 +178,7 @@ async function runScss() {
   }
 }
 
-// ── JS build ──────────────────────────────────────────────────────────────────
+// JS build
 // Generates:
 //   js/generated/themes/{white,g10,g90,g100}.{js,d.ts}
 //   js/generated/component-tokens/{button,tag,…}.{js,d.ts}
@@ -204,7 +204,7 @@ async function runJs() {
   }
 }
 
-// ── Full build (SCSS + JS) ────────────────────────────────────────────────────
+// Full build (SCSS + JS)
 async function run() {
   await runScss();
   await runJs();

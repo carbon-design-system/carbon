@@ -19,8 +19,7 @@ import * as componentGroups from '../../../../src/tokens/components';
 
 import { tokens } from '../tokens';
 
-// ─── Component token lookup ───────────────────────────────────────────────────
-
+// Component token lookup
 const COMP_TOKENS = Object.assign(
   {},
   buttonTokens,
@@ -31,8 +30,7 @@ const COMP_TOKENS = Object.assign(
 );
 const THEME_KEY = { white: 'whiteTheme', g10: 'g10', g90: 'g90', g100: 'g100' };
 
-// ─── Color / alias helpers ────────────────────────────────────────────────────
-
+// Color / alias helpers
 function resolveColor(theme, tokenName) {
   const jsName = TokenFormat.convert({
     name: tokenName,
@@ -85,8 +83,7 @@ function getDescription(theme, tokenName) {
   return entry?.$description ?? null;
 }
 
-// ─── Static token list ────────────────────────────────────────────────────────
-
+// Static token list
 const baseTokens = group.getTokens().map((t) => ({ ...t, _category: 'Root' }));
 const componentTokens = Object.values(componentGroups).flatMap((g) =>
   g.getTokens().map((t) => ({ ...t, _category: g.name }))
@@ -114,8 +111,7 @@ const VIEW_OPTIONS = [
   { label: 'Graph', value: 'graph' },
 ];
 
-// ─── Graph layout constants ───────────────────────────────────────────────────
-
+// Graph layout constants
 const CAT_H = 44;
 const CAT_W = 140;
 const GRP_H = 36;
@@ -131,7 +127,7 @@ const TOK_X = GRP_X + GRP_W + LEVEL_H;
 const DESC_W = 260;
 const DESC_GAP = 24;
 
-// ─── Graph layout builder ─────────────────────────────────────────────────────
+// Graph layout builder
 // Takes the filtered token list and groups it into categories for the graph.
 
 function buildGraphCategories(filteredTokens) {
@@ -278,8 +274,7 @@ function buildLayout(graphCategories, expandedCats, expandedGroups, theme) {
   return { nodes, links };
 }
 
-// ─── SVG helpers ─────────────────────────────────────────────────────────────
-
+// SVG helpers
 function CurvedLink({ fromNode, toNode }) {
   if (!fromNode || !toNode) return null;
   const x1 = fromNode.cx + fromNode.w / 2;
@@ -297,10 +292,9 @@ function CurvedLink({ fromNode, toNode }) {
   );
 }
 
-// ─── Main page ────────────────────────────────────────────────────────────────
-
+// Main page
 export default function IndexPage({ lastBuiltOn }) {
-  // ── Shared filter state ──────────────────────────────────────────────────
+  // Shared filter state
   const [activeView, setActiveView] = React.useState('table');
   const [activeTheme, setActiveTheme] = React.useState('white');
   const [activeCategory, setActiveCategory] = React.useState('All');
@@ -308,7 +302,7 @@ export default function IndexPage({ lastBuiltOn }) {
   const [activeProperty, setActiveProperty] = React.useState('All');
   const [activeSet, setActiveSet] = React.useState('All');
 
-  // ── Graph-specific state ─────────────────────────────────────────────────
+  // Graph-specific state
   const [expandedCats, setExpandedCats] = React.useState(new Set());
   const [expandedGroups, setExpandedGroups] = React.useState(new Set());
   const [selectedTokens, setSelectedTokens] = React.useState(new Set());
@@ -317,7 +311,7 @@ export default function IndexPage({ lastBuiltOn }) {
   const svgRef = React.useRef(null);
   const dragging = React.useRef(null);
 
-  // ── Filtering ────────────────────────────────────────────────────────────
+  // Filtering
   const hasFilters =
     activeCategory !== 'All' ||
     activeGroup !== 'All' ||
@@ -348,7 +342,7 @@ export default function IndexPage({ lastBuiltOn }) {
     return true;
   });
 
-  // ── Graph categories derived from filtered tokens ────────────────────────
+  // Graph categories derived from filtered tokens
   const graphCategories = React.useMemo(
     () => buildGraphCategories(filteredTokens),
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -366,7 +360,7 @@ export default function IndexPage({ lastBuiltOn }) {
     [nodes]
   );
 
-  // ── Graph interaction ────────────────────────────────────────────────────
+  // Graph interaction
   function toggleCat(id) {
     setExpandedCats((prev) => {
       const next = new Set(prev);
@@ -446,7 +440,7 @@ export default function IndexPage({ lastBuiltOn }) {
     return () => el.removeEventListener('wheel', onWheel);
   }, [activeView]);
 
-  // ── Render ───────────────────────────────────────────────────────────────
+  // Render
   const isGraph = activeView === 'graph';
 
   return (
@@ -572,7 +566,7 @@ export default function IndexPage({ lastBuiltOn }) {
         </div>
       </header>
 
-      {/* ── TABLE VIEW ──────────────────────────────────────────────────── */}
+      {/* TABLE VIEW */}
       {!isGraph && (
         <div className="content">
           <table aria-labelledby="page-title">
@@ -668,7 +662,7 @@ export default function IndexPage({ lastBuiltOn }) {
         </div>
       )}
 
-      {/* ── GRAPH VIEW ──────────────────────────────────────────────────── */}
+      {/* GRAPH VIEW */}
       {isGraph && (
         <svg
           ref={svgRef}

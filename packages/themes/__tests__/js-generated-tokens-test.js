@@ -143,17 +143,12 @@ if (!jsGeneratedExists || !libExists) {
   );
 }
 
-// ---------------------------------------------------------------------------
 // kebab-case → camelCase (mirrors style-dictionary/formats/js.js)
-// ---------------------------------------------------------------------------
 function kebabToCamel(str) {
   return str.replace(/-([a-z0-9])/g, (_, ch) => ch.toUpperCase());
 }
 
-// ---------------------------------------------------------------------------
 // Helpers
-// ---------------------------------------------------------------------------
-
 /**
  * Parse named exports from a generated JS file.
  * Handles:
@@ -275,10 +270,7 @@ function diffTokenMaps(generated, lib) {
   return { missingInGenerated, extraInGenerated, valueMismatches };
 }
 
-// ---------------------------------------------------------------------------
 // Utilities to build a human-readable failure message
-// ---------------------------------------------------------------------------
-
 function formatDiff({ missingInGenerated, extraInGenerated, valueMismatches }) {
   const lines = [];
   if (missingInGenerated.length) {
@@ -303,10 +295,7 @@ function formatDiff({ missingInGenerated, extraInGenerated, valueMismatches }) {
   return lines.join('\n');
 }
 
-// ---------------------------------------------------------------------------
 // Themes
-// ---------------------------------------------------------------------------
-
 describe('JS generated theme files match lib output', () => {
   const themes = ['white', 'g10', 'g90', 'g100'];
 
@@ -372,10 +361,7 @@ describe('JS generated theme files match lib output', () => {
   });
 });
 
-// ---------------------------------------------------------------------------
 // Component tokens
-// ---------------------------------------------------------------------------
-
 describe('JS generated component token files match lib output', () => {
   const components = [
     { name: 'button', libKey: 'buttonTokens' },
@@ -436,10 +422,7 @@ describe('JS generated component token files match lib output', () => {
   });
 });
 
-// ---------------------------------------------------------------------------
 // Token files → js/generated/ parity
-// ---------------------------------------------------------------------------
-
 describe('JS generated theme files match the token files', () => {
   const themes = ['white', 'g10', 'g90', 'g100'];
 

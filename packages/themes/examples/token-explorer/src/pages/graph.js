@@ -20,7 +20,7 @@ import * as componentGroups from '../../../../src/tokens/components';
 
 import { tokens } from '../tokens';
 
-// ─── Component token lookup: camelCase JS name → { whiteTheme, g10, g90, g100 } ──
+// Component token lookup: camelCase JS name → { whiteTheme, g10, g90, g100 }
 // The generated files use 'whiteTheme' as the key for the white theme.
 const COMP_TOKENS = Object.assign(
   {},
@@ -62,7 +62,7 @@ function getAlias(theme, tokenName) {
   return entry.alpha != null ? `${entry.alias} × ${entry.alpha}α` : entry.alias;
 }
 
-// ─── Static tree data ─────────────────────────────────────────────────────────
+// Static tree data
 
 const rootSubGroups = group.getTokenGroups().filter((g) => g.name !== 'All');
 
@@ -85,7 +85,7 @@ const CATEGORIES = [
   })),
 ];
 
-// ─── Layout constants (left → right) ─────────────────────────────────────────
+// Layout constants (left → right)
 //
 //  CAT_X  GROUP_X  TOKEN_X   (horizontal levels, left to right)
 //    │       │        │
@@ -114,7 +114,7 @@ const THEME_OPTIONS = [
   { label: 'Gray 100 (g100)', key: 'g100' },
 ];
 
-// ─── Build layout (left → right) ─────────────────────────────────────────────
+// Build layout (left → right)
 
 function measureCatHeight(cat, expandedCats, expandedGroups) {
   if (!expandedCats.has(cat.id)) return CAT_H;
@@ -238,8 +238,7 @@ function buildLayout(expandedCats, expandedGroups, theme) {
   return { nodes, links };
 }
 
-// ─── SVG link (curved) ────────────────────────────────────────────────────────
-
+// SVG link (curved)
 function CurvedLink({ fromNode, toNode }) {
   if (!fromNode || !toNode || toNode.hidden) return null;
   // left→right: exit right edge of source, enter left edge of target
@@ -258,16 +257,16 @@ function CurvedLink({ fromNode, toNode }) {
   );
 }
 
-// ─── Page ─────────────────────────────────────────────────────────────────────
+// Page
 
-// ─── Description lookup ───────────────────────────────────────────────────────
+// Description lookup
 
 function getDescription(theme, tokenName) {
   const entry = tokens[theme]?.[tokenName] ?? tokens.white?.[tokenName];
   return entry?.$description ?? null;
 }
 
-// ─── Description node dimensions ─────────────────────────────────────────────
+// Description node dimensions
 
 const DESC_W = 260;
 const DESC_GAP = 24; // horizontal gap from right edge of token to left edge of desc node
@@ -608,9 +607,9 @@ export default function GraphPage() {
               return null;
             })}
 
-          {/* ── Description nodes for selected tokens ──
-              Stack vertically at a fixed X column (TOK_X + NODE_W + DESC_GAP)
-              so they never overlap each other or the token nodes.           */}
+          {/* Description nodes for selected tokens. Stack vertically at a
+              fixed X column (TOK_X + NODE_W + DESC_GAP) so they never overlap
+              each other or the token nodes. */}
           {(() => {
             const CHARS_PER_LINE = 38;
             const LINE_H = 13;

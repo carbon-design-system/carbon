@@ -81,8 +81,7 @@ th {
   --header-height: 5.5rem;
 }
 
-// ── Header ──────────────────────────────────────────────────────────────────
-
+// Header
 .header {
   position: fixed;
   top: 0;
@@ -166,8 +165,7 @@ th {
   color: #fff;
 }
 
-// ── Fit to screen button ──────────────────────────────────────────────────────
-
+// Fit to screen button
 .fit-btn {
   position: fixed;
   inset-block-end: 1.5rem;
@@ -191,15 +189,13 @@ th {
   }
 }
 
-// ── Content ──────────────────────────────────────────────────────────────────
-
+// Content
 .content {
   padding-top: calc(var(--header-height) + 1rem);
   padding-bottom: 2rem;
 }
 
-// ── Color swatch ─────────────────────────────────────────────────────────────
-
+// Color swatch
 .token-cell {
   display: flex;
   align-items: center;
@@ -235,8 +231,7 @@ th {
   font-size: 0.75rem;
 }
 
-// ── Token name cell ───────────────────────────────────────────────────────────
-
+// Token name cell
 .token-name a {
   color: #0f62fe;
   text-decoration: none;
@@ -247,8 +242,7 @@ th {
   text-decoration: underline;
 }
 
-// ── Description / Type / Properties cells ────────────────────────────────────
-
+// Description / Type / Properties cells
 .description-cell {
   font-size: 0.8125rem;
   color: #525252;
@@ -272,7 +266,7 @@ th {
   color: #525252;
 }
 
-// ── Utilities ────────────────────────────────────────────────────────────────
+// Utilities
 
 .no-results {
   padding: 2rem;
@@ -281,8 +275,7 @@ th {
   font-size: 0.875rem;
 }
 
-// ── Nav link ─────────────────────────────────────────────────────────────────
-
+// Nav link
 .nav-link {
   font-family: inherit;
   font-size: 0.8125rem;
@@ -299,8 +292,7 @@ th {
   }
 }
 
-// ── Tree ─────────────────────────────────────────────────────────────────────
-
+// Tree
 .tree-content {
   max-width: 860px;
 }
@@ -389,8 +381,7 @@ th {
   border-bottom: 1px solid #f4f4f4;
 }
 
-// ── Token leaf ────────────────────────────────────────────────────────────────
-
+// Token leaf
 .tree-token {
   display: flex;
   align-items: center;
