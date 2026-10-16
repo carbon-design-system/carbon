@@ -298,7 +298,8 @@ const TagBase = React.forwardRef<
             definition={
               children !== null && children !== undefined ? children : typeText
             }
-            className={`${prefix}--definition--tooltip--tag`}>
+            className={`${prefix}--definition--tooltip--tag`}
+            tabIndex={other.tabIndex}>
             <Text
               title={
                 children !== null &&

@@ -138,6 +138,11 @@ ReadOnly.argTypes = {
       type: 'select',
     },
   },
+  tabIndex: {
+    control: {
+      type: 'number',
+    },
+  },
 };
 
 export const Skeleton = (args) => (
