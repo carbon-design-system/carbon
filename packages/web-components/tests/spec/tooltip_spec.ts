@@ -160,8 +160,6 @@ xdescribe('cds-tooltip', () => {
   });
 });
 
-// Tests for fix: cds-tooltip Escape dismissal (issue #22810)
-// Per WAI-ARIA Tooltip pattern, Escape must always dismiss regardless of closeOnActivation.
 describe('cds-tooltip keyboard interactions', () => {
   let trigger: CDSTooltip | null;
 
