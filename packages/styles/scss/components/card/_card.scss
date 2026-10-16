@@ -500,9 +500,16 @@
     display: none;
   }
 
+  // The title reserves only the space the rendered actions actually occupy.
+  // CardActions publishes that clearance (0 when the title sits below the
+  // actions, e.g. under a header media slot) on __header. Before it is
+  // measured (first paint / SSR) fall back to the former 50% reservation.
   .#{$prefix}--card__header:has(> .#{$prefix}--card__actions)
     > .#{$prefix}--card__title {
-    max-inline-size: calc(50cqw - $spacing-03);
+    margin-inline-end: max(
+      $spacing-05,
+      calc(var(--#{$prefix}--card__actions-clearance, 50cqw) + $spacing-03)
+    );
   }
 
   // ─── AI Label (decorator) ─────────────────────────────────────────────
@@ -534,13 +541,8 @@
   }
 
   // AI label with actions: the actions box is shifted left by the decorator
-  // width; the title must clear that shifted edge.
-  .#{$prefix}--card--has-ai-label:has(.#{$prefix}--card__actions)
-    .#{$prefix}--card__header
-    > .#{$prefix}--card__title {
-    max-inline-size: calc(50cqw - $spacing-03 - $spacing-06 - $spacing-03 * 2);
-  }
-
+  // width. The title clearance is measured from the rendered buttons, so it
+  // already accounts for that shift.
   .#{$prefix}--card--has-ai-label .#{$prefix}--card__actions {
     inset-inline-end: calc($spacing-03 + $spacing-06 + $spacing-03);
   }
