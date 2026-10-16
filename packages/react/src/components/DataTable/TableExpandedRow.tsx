@@ -49,7 +49,10 @@ const TableExpandedRow = ({
       className={className}
       data-child-row>
       <TableCell colSpan={colSpan}>
-        <div className={`${prefix}--child-row-inner-container`}>{children}</div>
+        <div
+          className={`${prefix}--child-row-inner-container ${prefix}--child-row-inner-container--animated`}>
+          <div className={`${prefix}--child-row-content`}>{children}</div>
+        </div>
       </TableCell>
     </tr>
   );
