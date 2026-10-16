@@ -81,6 +81,131 @@ describe('cds-tooltip', () => {
     expect(getComputedStyle(caret).display).to.equal('none');
   });
 
+  const keyboardTemplate = ({
+    closeOnActivation = false,
+    defaultOpen = false,
+    enterDelayMs = 0,
+    leaveDelayMs = 0,
+  } = {}) => {
+    return html`
+      <cds-tooltip
+        .closeOnActivation=${closeOnActivation}
+        .defaultOpen=${defaultOpen}
+        enter-delay-ms=${enterDelayMs}
+        leave-delay-ms=${leaveDelayMs}>
+        <button type="button" aria-labelledby="content">Trigger</button>
+        <cds-tooltip-content id="content">Tooltip text</cds-tooltip-content>
+      </cds-tooltip>
+    `;
+  };
+
+  [false, true].forEach((closeOnActivation) => {
+    describe(`with closeOnActivation=${closeOnActivation}`, () => {
+      ['focus', 'hover'].forEach((interaction) => {
+        it(`should close immediately on Escape after ${interaction}`, async () => {
+          const tooltip = await fixture(
+            keyboardTemplate({ closeOnActivation, leaveDelayMs: 1000 })
+          );
+          const button = tooltip.querySelector('button');
+          const content = tooltip.querySelector('cds-tooltip-content');
+
+          if (interaction === 'focus') {
+            button.focus();
+          } else {
+            button.dispatchEvent(
+              new MouseEvent('mouseover', { bubbles: true })
+            );
+          }
+          await new Promise((resolve) =>
+            setTimeout(resolve, tooltip.enterDelayMs)
+          );
+          await tooltip.updateComplete;
+          expect(content).to.have.attribute('open');
+
+          if (interaction === 'hover') {
+            expect(document.activeElement).to.equal(document.body);
+          }
+          document.activeElement.dispatchEvent(
+            new KeyboardEvent('keydown', { key: 'Escape', bubbles: true })
+          );
+
+          expect(tooltip.open).to.be.false;
+          await tooltip.updateComplete;
+          expect(content).to.not.have.attribute('open');
+          if (interaction === 'focus') {
+            expect(document.activeElement).to.equal(button);
+          }
+        });
+      });
+
+      [
+        { name: 'Enter', key: 'Enter' },
+        { name: 'Space', key: ' ' },
+      ].forEach(({ name, key }) => {
+        it(`should ${closeOnActivation ? 'close' : 'remain open'} on ${name}`, async () => {
+          const tooltip = await fixture(
+            keyboardTemplate({ closeOnActivation, defaultOpen: true })
+          );
+          const content = tooltip.querySelector('cds-tooltip-content');
+          expect(content).to.have.attribute('open');
+
+          tooltip
+            .querySelector('button')
+            .dispatchEvent(
+              new KeyboardEvent('keydown', { key, bubbles: true })
+            );
+          await new Promise((resolve) =>
+            setTimeout(resolve, tooltip.leaveDelayMs)
+          );
+          await tooltip.updateComplete;
+
+          expect(content.hasAttribute('open')).to.equal(!closeOnActivation);
+        });
+      });
+    });
+  });
+
+  it('should cancel a pending opening when Escape is pressed', async () => {
+    const tooltip = await fixture(keyboardTemplate({ enterDelayMs: 50 }));
+    const button = tooltip.querySelector('button');
+    button.focus();
+
+    button.dispatchEvent(
+      new KeyboardEvent('keydown', { key: 'Escape', bubbles: true })
+    );
+    await new Promise((resolve) => setTimeout(resolve, tooltip.enterDelayMs));
+    await tooltip.updateComplete;
+
+    expect(tooltip.querySelector('cds-tooltip-content')).to.not.have.attribute(
+      'open'
+    );
+    expect(document.activeElement).to.equal(button);
+  });
+
+  it('should reopen on focus after dismissal with Escape', async () => {
+    const tooltip = await fixture(keyboardTemplate());
+    const button = tooltip.querySelector('button');
+    button.focus();
+    await new Promise((resolve) => setTimeout(resolve, tooltip.enterDelayMs));
+    await tooltip.updateComplete;
+    expect(tooltip.open).to.be.true;
+
+    button.dispatchEvent(
+      new KeyboardEvent('keydown', { key: 'Escape', bubbles: true })
+    );
+    await tooltip.updateComplete;
+    expect(tooltip.open).to.be.false;
+
+    button.blur();
+    button.focus();
+    await new Promise((resolve) => setTimeout(resolve, tooltip.enterDelayMs));
+    await tooltip.updateComplete;
+
+    expect(tooltip.querySelector('cds-tooltip-content')).to.have.attribute(
+      'open'
+    );
+  });
+
   it('should open when trigger button is focused and close when out of focus', async () => {
     const el = await fixture(html`
       <cds-tooltip enter-delay-ms="100" leave-delay-ms="300">
