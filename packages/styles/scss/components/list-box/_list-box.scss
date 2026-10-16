@@ -24,6 +24,7 @@
 @use '../../utilities/button-reset';
 @use '../../utilities/component-reset';
 @use '../../utilities/convert';
+@use '../../utilities/custom-property';
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/z-index' as *;
@@ -47,6 +48,152 @@ $list-box-inline-height: $list-box-height;
 /// @access public
 /// @group list-box
 $list-box-menu-width: convert.to-rem(300px);
+
+/// Position the chevron, clear button, AI label, and invalid or warning icon
+/// at the end of the list boxes matched by `$root`, from the end inward. The
+/// spacing derives from the contextual field height (24, 32, 40, and 48px) and
+/// icon gap (4, 8, 8, and 12px) layout tokens. Gaps that end at the chevron
+/// are measured to its 16px icon rather than to its 24px button. The selectors
+/// tie the specificity of the list box rules they replace and win by source
+/// order, so include this after those rules.
+/// @param {String} $root - Selector for the `.#{$prefix}--list-box` element
+/// @param {String} $with-status - Selector appended to `$root` while the
+///   invalid or warning icon is shown
+/// @param {String} $with-decorator - Selector appended to `$root` while an AI
+///   label or decorator is shown
+/// @param {String} $decorator - Selector for the AI label or decorator
+/// @access private
+/// @group list-box
+@mixin trailing-controls(
+  $root,
+  $with-status:
+    ':is([data-invalid], .#{$prefix}--list-box--invalid, .#{$prefix}--list-box--warning)',
+  $with-decorator:
+    ':has(.#{$prefix}--list-box__field ~ :where(.#{$prefix}--list-box__inner-wrapper--decorator, .#{$prefix}--ai-label, .#{$prefix}--slug))',
+  $decorator:
+    '.#{$prefix}--list-box__wrapper--decorator #{$root} .#{$prefix}--list-box__field ~ .#{$prefix}--list-box__inner-wrapper--decorator > *, .#{$prefix}--list-box__wrapper--slug #{$root} .#{$prefix}--list-box__field ~ :is(.#{$prefix}--ai-label, .#{$prefix}--slug)'
+) {
+  $height: layout.size('height');
+  $icon: convert.to-rem(16px);
+  // Field end to the chevron icon: 4, 8, 16, and 16px
+  $chevron-inset: clamp(
+    $spacing-02,
+    $height - convert.to-rem(24px),
+    $spacing-05
+  );
+  // Clear button to the chevron icon: 4, 12, 12, and 12px
+  $chevron-gap: clamp($spacing-02, $height - convert.to-rem(20px), $spacing-04);
+  // Between the chevron icon, AI label, and status icon: 8, 12, 12, and 20px
+  $icon-gap: calc(
+    layout.size('icon-gap') + max($spacing-02, $height - convert.to-rem(40px))
+  );
+  // Clear button size: 24, 24, 24, and 32px
+  $clear-size: max(convert.to-rem(24px), $height - convert.to-rem(16px));
+  $chevron-start: calc(#{$chevron-inset} + #{$icon});
+
+  #{$root} {
+    block-size: $height;
+
+    @include custom-property.declaration(
+      'list-box-clear-inset',
+      calc(#{$chevron-start} + #{$chevron-gap})
+    );
+    @include custom-property.declaration(
+      'list-box-decorator-inset',
+      calc(#{$chevron-start} + #{$icon-gap})
+    );
+    @include custom-property.declaration(
+      'list-box-status-inset',
+      custom-property.get-var('list-box-decorator-inset')
+    );
+    @include custom-property.declaration(
+      'list-box-content-inset',
+      $chevron-start
+    );
+  }
+
+  // The clear button, decorator, and status rules must keep equal specificity
+  // and this order, since each builds on the insets set before it
+  #{$root}:has(.#{$prefix}--list-box__selection) {
+    $clear-start: calc(
+      #{custom-property.get-var('list-box-clear-inset')} + #{$clear-size}
+    );
+
+    @include custom-property.declaration(
+      'list-box-decorator-inset',
+      calc(#{$clear-start} + #{layout.size('icon-gap')})
+    );
+    @include custom-property.declaration(
+      'list-box-content-inset',
+      $clear-start
+    );
+  }
+
+  #{$root}#{$with-decorator} {
+    $decorator-start: calc(
+      #{custom-property.get-var('list-box-decorator-inset')} + #{$icon}
+    );
+
+    @include custom-property.declaration(
+      'list-box-status-inset',
+      calc(#{$decorator-start} + #{$icon-gap})
+    );
+    @include custom-property.declaration(
+      'list-box-content-inset',
+      $decorator-start
+    );
+  }
+
+  #{$root}#{$with-status} {
+    @include custom-property.declaration(
+      'list-box-content-inset',
+      calc(#{custom-property.get-var('list-box-status-inset')} + #{$icon})
+    );
+  }
+
+  #{$root} .#{$prefix}--list-box__field {
+    padding-inline-end: calc(
+      #{custom-property.get-var('list-box-content-inset')} + #{$spacing-03}
+    );
+  }
+
+  #{$root} .#{$prefix}--list-box__field .#{$prefix}--text-input {
+    border: 0;
+    border-radius: $border-radius-00;
+    padding-inline-end: 0;
+  }
+
+  #{$root} .#{$prefix}--list-box__menu-icon {
+    inset-inline-end: calc(#{$chevron-inset} - #{$spacing-02});
+  }
+
+  #{$root} .#{$prefix}--list-box__selection {
+    border-radius: $border-radius-max;
+    block-size: $clear-size;
+    inline-size: $clear-size;
+    inset-inline-end: custom-property.get-var('list-box-clear-inset');
+
+    &::before,
+    &::after {
+      display: none;
+    }
+  }
+
+  #{$root}#{$with-status} .#{$prefix}--list-box__invalid-icon {
+    inset-inline-end: custom-property.get-var('list-box-status-inset');
+  }
+
+  #{$decorator} {
+    inset-inline-end: custom-property.get-var('list-box-decorator-inset');
+    margin-block-start: 0;
+    margin-inline-end: 0;
+
+    &::before,
+    &::after {
+      display: none;
+    }
+  }
+}
 
 /// List box styles
 /// @access public
