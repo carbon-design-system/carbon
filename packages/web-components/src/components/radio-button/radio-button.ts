@@ -481,7 +481,7 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
     });
     return html`
       <input
-        id="radio"
+        id="input"
         type="radio"
         class="${prefix}--radio-button"
         .checked=${checked}

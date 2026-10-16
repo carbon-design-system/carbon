@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <rect width="1600" height="900" fill="#edf5ff"/>
+  <!-- Image icon (32x32 at center) -->
+  <g transform="translate(768, 386)">
+    <rect x="0" y="0" width="64" height="56" rx="3" ry="3" fill="none" stroke="#4589ff" stroke-width="4"/>
+    <circle cx="20" cy="18" r="6" fill="none" stroke="#4589ff" stroke-width="4"/>
+    <polyline points="0,40 18,22 32,36 44,26 64,44" fill="none" stroke="#4589ff" stroke-width="4" stroke-linejoin="round"/>
+  </g>
+  <!-- "16:9" label -->
+  <text x="800" y="498" font-family="'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif" font-size="36" font-weight="400" fill="#4589ff" text-anchor="middle">16:9</text>
+  <!-- "Landscape" label -->
+  <text x="800" y="544" font-family="'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif" font-size="28" font-weight="400" fill="#4589ff" text-anchor="middle">Landscape</text>
+</svg>

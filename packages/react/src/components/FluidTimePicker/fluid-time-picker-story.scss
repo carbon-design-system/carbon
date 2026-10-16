@@ -1,0 +1,26 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/spacing';
+
+.fluid-time-picker-story {
+  position: relative;
+}
+
+.fluid-time-picker-story__toggletip {
+  position: absolute;
+  z-index: 2;
+  inset-block-start: 0.8125rem;
+}
+
+.fluid-time-picker-story__toggletip--three-inputs {
+  inset-inline-start: calc(8.5rem + spacing.$spacing-03);
+}
+
+.fluid-time-picker-story__toggletip--two-inputs {
+  inset-inline-start: calc(14rem + spacing.$spacing-03);
+}

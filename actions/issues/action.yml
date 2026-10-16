@@ -8,9 +8,10 @@ inputs:
     description: Carbon Automation token used for standard GitHub operations
     required: true
   BOB_GITHUB_TOKEN:
-    # Used only by the Bob plugin's managed-comment calls, never by the Bob CLI.
+    # This is optional at the shared action boundary because most issue events do
+    # not run Bob. The plugin runner requires it only after Bob's conditions pass.
     description: Bob Automation token used only for Bob's triage comment
-    required: true
+    required: false
   BOB_INFERENCE_API_KEY:
     # Used only by the Bob subprocess to produce preliminary triage text.
     description: Bob Shell inference key used to generate preliminary bug triage

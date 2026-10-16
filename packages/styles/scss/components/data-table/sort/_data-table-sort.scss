@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2023
+// Copyright IBM Corp. 2016, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -260,13 +260,47 @@
     .#{$prefix}--table-sort__icon-unsorted {
     margin-inline: auto convert.to-rem(8px);
   }
+
+  .#{$prefix}--table-sort__header--slug,
+  .#{$prefix}--table-sort__header--decorator {
+    position: relative;
+
+    .#{$prefix}--table-sort {
+      padding-inline-end: $spacing-06;
+    }
+
+    > .#{$prefix}--table-header-label--decorator-inner {
+      position: absolute;
+      z-index: 1;
+      inset-block-start: 50%;
+      inset-inline-end: $spacing-03;
+      margin-inline-end: 0;
+      transform: translateY(-50%);
+    }
+  }
+
   .#{$prefix}--table-sort__header--ai-label .#{$prefix}--ai-label,
-  .#{$prefix}--table-sort__header--ai-label .#{$prefix}--slug,
+  .#{$prefix}--table-sort__header--ai-label .#{$prefix}--slug {
+    display: block;
+    margin-inline-end: convert.to-rem(8px);
+  }
+
+  .#{$prefix}--table-sort__header--slug
+    .#{$prefix}--table-header-label--decorator-inner,
   .#{$prefix}--table-sort__header--decorator
     .#{$prefix}--table-header-label--decorator-inner,
   .#{$prefix}--table-sort__header--ai-label
     .#{$prefix}--table-header-label--decorator-inner {
     display: block;
-    margin-inline-end: convert.to-rem(8px);
+    margin-inline-end: 0;
+  }
+
+  .#{$prefix}--table-sort__header--ai-label
+    > .#{$prefix}--table-header-label--decorator-inner
+    .#{$prefix}--ai-label,
+  .#{$prefix}--table-sort__header--ai-label
+    > .#{$prefix}--table-header-label--decorator-inner
+    .#{$prefix}--slug {
+    margin-inline-end: 0;
   }
 }

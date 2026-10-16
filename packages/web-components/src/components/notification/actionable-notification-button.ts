@@ -1,13 +1,15 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import { prefix } from '../../globals/settings';
-import CDSButton from '../button/button';
+import CDSButton, { BUTTON_SIZE } from '../button/button';
+import { property } from 'lit/decorators.js';
 import styles from './actionable-notification.scss?lit';
+import buttonStyles from '../button/button.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
@@ -17,17 +19,20 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  */
 @customElement(`${prefix}-actionable-notification-button`)
 class CDSActionableNotificationButton extends CDSButton {
-  update(changedProperties) {
-    super.update(changedProperties);
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-    this.shadowRoot!.getElementById('button')?.classList.add(
-      `${prefix}--actionable-notification__action-button`
-    );
+  /**
+   * Specify the size of the button. Defaults to `sm` in actionable notification.
+   */
+  @property({ type: String, reflect: true })
+  size?: BUTTON_SIZE | string = BUTTON_SIZE.SMALL;
 
-    this.setAttribute('size', 'sm');
+  firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
+    this.shadowRoot
+      ?.getElementById('button')
+      ?.classList.add(`${prefix}--actionable-notification__action-button`);
   }
 
-  static styles = styles;
+  static styles = [buttonStyles, styles];
 }
 
 export default CDSActionableNotificationButton;

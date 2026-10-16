@@ -59,8 +59,8 @@ test.describe('@avt Select', () => {
     await page.keyboard.press('Tab');
     await expect(select).toBeFocused();
     await expect(select).toHaveValue('');
-    // Select Option 4
-    await select.selectOption('Option 4');
-    await expect(select).toHaveValue('option-4');
+    // Select a deployment region
+    await select.selectOption('Sydney (au-syd)');
+    await expect(select).toHaveValue('au-syd');
   });
 });

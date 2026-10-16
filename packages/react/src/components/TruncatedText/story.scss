@@ -1,0 +1,18 @@
+//
+// Copyright IBM Corp. 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Ensures the story canvas has enough space for the tooltip to render
+// and keeps the component centered with a constrained width.
+.sb-truncated-text-story {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  min-block-size: 250px;
+  inline-size: 100%;
+  max-inline-size: 900px;
+}

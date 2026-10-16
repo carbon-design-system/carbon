@@ -5,5 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import '../icon-button/icon-button';
 import './slug';
 import './slug-action-button';

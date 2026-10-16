@@ -82,7 +82,7 @@ test.describe('@avt Accordion', () => {
     await expect(accordion_btn2).toBeFocused();
     await page.keyboard.press('Space');
     await expect(accordion_btn2).toHaveAttribute('aria-expanded', 'true');
-    await page.keyboard.press('Escape');
+    await page.keyboard.press('Space');
     await expect(accordion_btn2).toHaveAttribute('aria-expanded', 'false');
   });
 

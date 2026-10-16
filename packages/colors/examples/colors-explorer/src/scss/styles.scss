@@ -1,0 +1,209 @@
+//
+// Copyright IBM Corp. 2018, 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+html { box-sizing: border-box; }
+*, *::before, *::after { box-sizing: inherit; }
+
+html, body, #__next {
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 1rem;
+  font-family: 'IBM Plex Mono', monospace;
+  background: #fff;
+  color: #161616;
+}
+
+h1 { margin: 0; font-size: 1.25rem; font-weight: 600; }
+ul { padding: 0; }
+li { list-style: none; }
+
+table {
+  text-align: left;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table, tr, td, th { border: 1px solid #e0e0e0; }
+
+td, th {
+  padding: 0.6rem 1rem;
+  vertical-align: middle;
+}
+
+th {
+  position: sticky;
+  top: var(--header-height);
+  background: #f4f4f4;
+  font-weight: 600;
+  z-index: 10;
+}
+
+[id] { scroll-margin-top: calc(var(--header-height) + 4rem); }
+
+:root { --header-height: 5.5rem; }
+
+// ── Header ───────────────────────────────────────────────────────────────────
+
+.header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  background: #fff;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 0 1.5rem;
+  height: var(--header-height);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.header-title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  white-space: nowrap;
+
+  p { margin: 0; font-size: 0.75rem; color: #6f6f6f; }
+}
+
+.controls {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 140px;
+
+  label {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #525252;
+  }
+
+  select {
+    font-family: inherit;
+    font-size: 0.875rem;
+    padding: 0.35rem 0.5rem;
+    border: 1px solid #8d8d8d;
+    background: #fff;
+    color: #161616;
+    cursor: pointer;
+    min-width: 140px;
+
+    &:focus {
+      outline: 2px solid #0f62fe;
+      outline-offset: -2px;
+    }
+  }
+}
+
+.reset-btn {
+  font-family: inherit;
+  font-size: 0.8125rem;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid #da1e28;
+  background: transparent;
+  color: #da1e28;
+  cursor: pointer;
+  align-self: flex-end;
+
+  &:hover { background: #da1e28; color: #fff; }
+}
+
+// ── Fit to screen button ───────────────────────────────────────────────────────
+
+.fit-btn {
+  position: fixed;
+  inset-block-end: 1.5rem;
+  inset-inline-end: 1.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1.25rem;
+  line-height: 1;
+  font-family: inherit;
+  border: 1px solid #0f62fe;
+  background: #fff;
+  color: #0f62fe;
+  cursor: pointer;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+
+  &:hover { background: #0f62fe; color: #fff; }
+}
+
+// ── Content ───────────────────────────────────────────────────────────────────
+
+.content {
+  padding-top: calc(var(--header-height) + 1rem);
+  padding-bottom: 2rem;
+}
+
+// ── Swatch cell ───────────────────────────────────────────────────────────────
+
+.color-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.color-swatch {
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: var(--swatch-color);
+  outline: 1px solid rgba(0,0,0,0.12);
+}
+
+.color-hex {
+  font-size: 0.875rem;
+  color: #161616;
+}
+
+// ── Token name ────────────────────────────────────────────────────────────────
+
+.token-name a {
+  color: #0f62fe;
+  text-decoration: none;
+  font-size: 0.875rem;
+
+  &:hover { text-decoration: underline; }
+}
+
+.no-results {
+  padding: 2rem;
+  text-align: center;
+  color: #6f6f6f;
+  font-size: 0.875rem;
+}
+
+// ── Graph ─────────────────────────────────────────────────────────────────────
+
+.graph-hint {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.75rem;
+  color: #6f6f6f;
+  pointer-events: none;
+  background: rgba(255,255,255,0.85);
+  padding: 0.25rem 0.75rem;
+  border: 1px solid #e0e0e0;
+}

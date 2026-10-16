@@ -1,25 +1,21 @@
 /**
- * Copyright IBM Corp. 2025, 2025
+ * @license
+ *
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-/**
- * @deprecated PageHeader has moved to Carbon for IBM Products.
- * See https://github.com/carbon-design-system/carbon/issues/21926
- */
 
 import { LitElement, html } from 'lit';
-import { property } from 'lit/decorators.js';
+import { property, state } from 'lit/decorators.js';
+import { unsafeStatic, html as staticHtml } from 'lit/static-html.js';
 import { prefix } from '../../globals/settings';
 import styles from './page-header.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Page header Content Text.
- * @deprecated This component has moved to Carbon for IBM Products and is now maintained in
- *   `@carbon/ibm-products-web-components`.
- *   See https://github.com/carbon-design-system/carbon/issues/21926
  * @element cds-page-header-content-text
  */
 @customElement(`${prefix}-page-header-content-text`)
@@ -30,14 +26,49 @@ class CDSPageHeaderContentText extends LitElement {
   @property()
   subtitle = '';
 
+  /**
+   * Heading level for the subtitle (h2-h6).
+   */
+  @property({ type: String, attribute: 'subtitle-level' })
+  subtitleLevel: 'h2' | 'h3' | 'h4' | 'h5' | 'h6' = 'h2';
+
+  /**
+   * Whether the `subtitle-content` slot has content assigned to it.
+   */
+  @state()
+  private _hasSubtitleSlotContent = false;
+
+  /**
+   * Handles `slotchange` for the subtitle-content slot.
+   */
+  protected _handleSubtitleSlotChange({ target }: Event) {
+    this._hasSubtitleSlotContent =
+      (target as HTMLSlotElement).assignedNodes({ flatten: true }).length > 0;
+  }
+
   render() {
-    const { subtitle } = this;
+    const {
+      subtitle,
+      subtitleLevel,
+      _hasSubtitleSlotContent: hasSubtitleSlotContent,
+    } = this;
+    const subtitleTag = unsafeStatic(subtitleLevel);
+
+    const showSubtitle = subtitle || hasSubtitleSlotContent;
 
     return html`
-      ${subtitle &&
-      html`<h3 class="${prefix}--page-header__content__subtitle">
-        ${subtitle}
-      </h3>`}
+      ${showSubtitle
+        ? staticHtml`<${subtitleTag} class="${prefix}--page-header__content__subtitle">
+            <slot
+              name="subtitle-content"
+              @slotchange=${this._handleSubtitleSlotChange}
+            ></slot>
+            ${!hasSubtitleSlotContent && subtitle ? subtitle : null}
+          </${subtitleTag}>`
+        : html`<slot
+            name="subtitle-content"
+            @slotchange=${this._handleSubtitleSlotChange}
+            style="display:none"></slot>`}
       <slot></slot>
     `;
   }

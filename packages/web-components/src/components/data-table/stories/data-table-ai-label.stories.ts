@@ -1,11 +1,12 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import { html } from 'lit';
+import { TABLE_SIZE } from '../table';
 import storyDocs from './data-table-ai-label.mdx';
 import View16 from '@carbon/icons/es/view/16.js';
 import FolderOpen16 from '@carbon/icons/es/folder--open/16.js';
@@ -15,6 +16,51 @@ import '../../icon-button/index';
 import '../../link/index';
 import '../../ai-label/index';
 import { iconLoader } from '../../../globals/internal/icon-loader';
+
+const sizes = {
+  [`xs (${TABLE_SIZE.XS})`]: TABLE_SIZE.XS,
+  [`sm (${TABLE_SIZE.SM})`]: TABLE_SIZE.SM,
+  [`md (${TABLE_SIZE.MD})`]: TABLE_SIZE.MD,
+  [`lg (${TABLE_SIZE.LG} - default)`]: TABLE_SIZE.LG,
+  [`xl (${TABLE_SIZE.XL})`]: TABLE_SIZE.XL,
+};
+
+const defaultArgs = {
+  isSortable: false,
+  locale: 'en',
+  radio: false,
+  size: TABLE_SIZE.LG,
+  useStaticWidth: false,
+  useZebraStyles: false,
+};
+
+const controls = {
+  isSortable: {
+    control: 'boolean',
+    description: 'Enable sorting for the table headers.',
+  },
+  locale: {
+    control: 'text',
+    description: 'Provide a locale for the table.',
+  },
+  radio: {
+    control: 'boolean',
+    description: 'Use radio selection instead of multi-selection.',
+  },
+  size: {
+    control: 'select',
+    description: 'Change the row height of the table.',
+    options: sizes,
+  },
+  useStaticWidth: {
+    control: 'boolean',
+    description: 'Use a width of auto instead of 100%.',
+  },
+  useZebraStyles: {
+    control: 'boolean',
+    description: 'Add zebra striping to the table rows.',
+  },
+};
 
 const content = html`
   <div slot="body-text">
@@ -48,9 +94,19 @@ const actions = html`
 `;
 
 export const _AILabelWithExpansion = {
-  render: () => {
+  argTypes: { radio: { control: false } },
+  render: (args) => {
     return html`
-      <cds-table with-row-ai-labels expandable batch-expansion>
+      <cds-table
+        with-row-ai-labels
+        expandable
+        batch-expansion
+        ?is-sortable=${args.isSortable}
+        locale="${args.locale}"
+        ?radio=${args.radio}
+        size="${args.size}"
+        ?use-static-width=${args.useStaticWidth}
+        ?use-zebra-styles=${args.useZebraStyles}>
         <cds-table-header-title slot="title">DataTable</cds-table-header-title>
         <cds-table-header-description slot="description"
           >With sorting</cds-table-header-description
@@ -159,9 +215,20 @@ export const _AILabelWithExpansion = {
 };
 
 export const _AILabelWithRadioSelection = {
-  render: () => {
+  args: { radio: true },
+  argTypes: {
+    radio: { table: { readonly: true } },
+  },
+  render: (args) => {
     return html`
-      <cds-table radio with-row-ai-labels>
+      <cds-table
+        with-row-ai-labels
+        ?is-sortable=${args.isSortable}
+        locale="${args.locale}"
+        ?radio=${args.radio}
+        size="${args.size}"
+        ?use-static-width=${args.useStaticWidth}
+        ?use-zebra-styles=${args.useZebraStyles}>
         <cds-table-header-title slot="title">DataTable</cds-table-header-title>
         <cds-table-header-description slot="description"
           >With selection</cds-table-header-description
@@ -249,9 +316,16 @@ export const _AILabelWithRadioSelection = {
 };
 
 export const _AILabelWithSelection = {
-  render: () => {
+  render: (args) => {
     return html`
-      <cds-table with-row-ai-labels>
+      <cds-table
+        with-row-ai-labels
+        ?is-sortable=${args.isSortable}
+        locale="${args.locale}"
+        ?radio=${args.radio}
+        size="${args.size}"
+        ?use-static-width=${args.useStaticWidth}
+        ?use-zebra-styles=${args.useZebraStyles}>
         <cds-table-header-title slot="title">DataTable</cds-table-header-title>
         <cds-table-header-description slot="description"
           >With selection</cds-table-header-description
@@ -336,9 +410,18 @@ export const _AILabelWithSelection = {
 };
 
 export const AILabelWithSelectionAndExpansion = {
-  render: () => {
+  render: (args) => {
     return html`
-      <cds-table expandable batch-expansion with-row-ai-labels>
+      <cds-table
+        expandable
+        batch-expansion
+        with-row-ai-labels
+        ?is-sortable=${args.isSortable}
+        locale="${args.locale}"
+        ?radio=${args.radio}
+        size="${args.size}"
+        ?use-static-width=${args.useStaticWidth}
+        ?use-zebra-styles=${args.useZebraStyles}>
         <cds-table-header-title slot="title">DataTable</cds-table-header-title>
         <cds-table-header-description slot="description"
           >With selection</cds-table-header-description
@@ -447,9 +530,20 @@ export const AILabelWithSelectionAndExpansion = {
 };
 
 export const _ColumnAILabelSort = {
-  render: () => {
+  args: { isSortable: true },
+  argTypes: {
+    isSortable: { table: { readonly: true } },
+    radio: { control: false },
+  },
+  render: (args) => {
     return html`
-      <cds-table is-sortable>
+      <cds-table
+        ?is-sortable=${args.isSortable}
+        locale="${args.locale}"
+        ?radio=${args.radio}
+        size="${args.size}"
+        ?use-static-width=${args.useStaticWidth}
+        ?use-zebra-styles=${args.useZebraStyles}>
         <cds-table-header-title slot="title">DataTable</cds-table-header-title>
         <cds-table-header-description slot="description"
           >With sorting</cds-table-header-description
@@ -530,9 +624,17 @@ export const _ColumnAILabelSort = {
 };
 
 export const _ColumnAILabelWithSelectionAndExpansion = {
-  render: () => {
+  render: (args) => {
     return html`
-      <cds-table expandable batch-expansion>
+      <cds-table
+        expandable
+        batch-expansion
+        ?is-sortable=${args.isSortable}
+        locale="${args.locale}"
+        ?radio=${args.radio}
+        size="${args.size}"
+        ?use-static-width=${args.useStaticWidth}
+        ?use-zebra-styles=${args.useZebraStyles}>
         <cds-table-header-title slot="title">DataTable</cds-table-header-title>
         <cds-table-header-description slot="description"
           >With expansion</cds-table-header-description
@@ -638,6 +740,8 @@ export const _ColumnAILabelWithSelectionAndExpansion = {
 
 const meta = {
   title: 'Components/DataTable/WithAILabel',
+  args: defaultArgs,
+  argTypes: controls,
   parameters: {
     docs: {
       page: storyDocs,

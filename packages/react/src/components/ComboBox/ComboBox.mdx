@@ -51,7 +51,8 @@ and is typically used when there are a large amount of options to choose from.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(ComboBoxStories.Default),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: ComboBoxStories.Default }),
     },
   ]}
 />
@@ -106,7 +107,9 @@ custom values and typeahead suggestions.
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig(ComboBoxStories.AutocompleteWithTypeahead),
+        stackblitzPrefillConfig({
+          story: ComboBoxStories.AutocompleteWithTypeahead,
+        }),
     },
   ]}
 />
@@ -178,7 +181,8 @@ You can use `selectedItem` for a fully controlled component.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(ComboBoxStories.Controlled),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: ComboBoxStories.Controlled }),
     },
   ]}
 />
@@ -313,7 +317,8 @@ callback.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(ComboBoxStories.AllowCustomValue),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: ComboBoxStories.AllowCustomValue }),
     },
   ]}
 />
@@ -350,7 +355,8 @@ both `helperText` and `invalidText`/`warnText`.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(ComboBoxStories.withAILabel),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: ComboBoxStories.withAILabel }),
     },
   ]}
 />

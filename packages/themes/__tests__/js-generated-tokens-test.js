@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -31,11 +31,164 @@ const JS_GENERATED_DIR = path.resolve(__dirname, '../js/generated');
 const LIB_DIR = path.resolve(__dirname, '../lib');
 const DTCG_DIR = path.resolve(__dirname, '../src/dtcg');
 
-const {
-  convertDTCGToTheme,
-  convertDTCGComponentTokens,
-  normalizeComponentThemeName,
-} = require('../tasks/builders/dtcg-converter');
+// SD transform pipeline helpers (replaces dtcg-converter which was deleted)
+const alphaModifierTransform = require('../style-dictionary/transforms/alpha-modifier');
+const colorFlattenTransform = require('../style-dictionary/transforms/color-flatten');
+const componentTokensPreprocessor = require('../style-dictionary/preprocessors/component-tokens');
+const themeMetadataPreprocessor = require('../style-dictionary/preprocessors/theme-metadata');
+
+/**
+ * Normalize component theme key for JS output, e.g. 'white' → 'whiteTheme'.
+ */
+function normalizeComponentThemeName(theme) {
+  if (theme === 'white') return 'whiteTheme';
+  return theme;
+}
+
+function buildPaletteAliasMap() {
+  const palette = JSON.parse(
+    fs.readFileSync(path.join(DTCG_DIR, 'color-palette.json'), 'utf8')
+  );
+  const map = new Map();
+  for (const [family, scales] of Object.entries(palette)) {
+    if (family.startsWith('$')) continue;
+    for (const [scale, token] of Object.entries(scales)) {
+      if (token.$value?.hex) map.set(`{${family}.${scale}}`, token.$value.hex);
+    }
+  }
+  return map;
+}
+
+const paletteMap = buildPaletteAliasMap();
+
+function resolveAlias(value) {
+  if (typeof value === 'string' && value.startsWith('{') && value.endsWith('}'))
+    return paletteMap.get(value) ?? value;
+  return value;
+}
+
+function applyTransforms(node) {
+  const resolvedValue = resolveAlias(node.$value);
+  const syntheticToken = {
+    $type: node.$type ?? 'color',
+    $value: node.$value,
+    value: resolvedValue,
+    $extensions: node.$extensions,
+    extensions: node.$extensions,
+  };
+  if (alphaModifierTransform.filter(syntheticToken))
+    syntheticToken.value = syntheticToken.$value =
+      alphaModifierTransform.transform(syntheticToken);
+  if (colorFlattenTransform.filter(syntheticToken))
+    syntheticToken.value = colorFlattenTransform.transform(syntheticToken);
+  return syntheticToken.value;
+}
+
+/**
+ * Convert the unified themes.json for a single theme into a flat token map.
+ *
+ * Pipeline mirrors sd.config.js themeConfig():
+ *   1. carbonComponentTokensPreprocessor  — expands carbon.themes entries into
+ *      _by_theme.<theme> synthetic leaves (handles {value,alpha} objects too)
+ *   2. themeMetadataPreprocessor          — lifts color-scheme into color.scheme
+ *   3. Walk the tree, pick each token's value for `themeName` from _by_theme,
+ *      synthesise a $value node, apply transforms, collect keyed by kebab name.
+ */
+const THEME_COLOR_SCHEME = {
+  white: 'light',
+  g10: 'light',
+  g90: 'dark',
+  g100: 'dark',
+};
+
+function convertDTCGToTheme(dtcgTokens, themeName) {
+  // Step 1: expand carbon.themes → _by_theme per-theme leaves
+  const expanded = componentTokensPreprocessor.preprocessor(dtcgTokens);
+  // Step 2: re-inject per-theme color-scheme onto root $extensions so
+  // themeMetadataPreprocessor can lift it into the synthetic color.scheme token
+  // (mirrors what themeConfig() does in sd.config.js).
+  const expandedWithScheme = {
+    ...expanded,
+    $extensions: {
+      ...(expanded.$extensions ?? {}),
+      'org.carbon': {
+        ...(expanded.$extensions?.['org.carbon'] ?? {}),
+        'color-scheme': THEME_COLOR_SCHEME[themeName],
+      },
+    },
+  };
+  // Step 3: lift color-scheme metadata
+  const preprocessed =
+    themeMetadataPreprocessor.preprocessor(expandedWithScheme);
+
+  const theme = {};
+
+  const colorSchemeNode = preprocessed.color?.scheme;
+  if (colorSchemeNode?.$value !== undefined)
+    theme['color-scheme'] = applyTransforms(colorSchemeNode);
+
+  // Step 3: walk tree; each leaf-or-dual-role node now has a `_by_theme` child
+  function traverse(obj, pathParts = []) {
+    for (const [key, value] of Object.entries(obj)) {
+      if (key.startsWith('$') || !value || typeof value !== 'object') continue;
+      let tokenPath = pathParts;
+      if (pathParts[0] === 'color' && key !== 'scheme')
+        tokenPath = pathParts.slice(1);
+      const tokenPath2 = [...tokenPath, key];
+
+      const role = value.$extensions?.['org.carbon']?.role;
+
+      if (key === '_by_theme') {
+        // _by_theme group itself — skip; parent handles it below.
+        continue;
+      }
+
+      if (value._by_theme) {
+        // Node was a leaf/dual-role in themes.json — pick this theme's leaf.
+        const leaf = value._by_theme[themeName];
+        if (leaf && role !== 'reference') {
+          const name = tokenPath2.join('-');
+          if (name !== 'color-scheme') theme[name] = applyTransforms(leaf);
+        }
+        // Also recurse into group children (dual-role nodes have both _by_theme
+        // AND non-$ child keys for their sub-tokens).
+        for (const [childKey, childValue] of Object.entries(value)) {
+          if (childKey.startsWith('$') || childKey === '_by_theme') continue;
+          if (!childValue || typeof childValue !== 'object') continue;
+          traverse({ [childKey]: childValue }, tokenPath2);
+        }
+      } else if (role !== 'reference' && value.$value !== undefined) {
+        // Fallback: plain $value token (palette reference tokens from source:)
+        const name = tokenPath2.join('-');
+        if (name !== 'color-scheme') theme[name] = applyTransforms(value);
+      } else if (Object.keys(value).some((k) => !k.startsWith('$'))) {
+        traverse(value, tokenPath2);
+      }
+    }
+  }
+  traverse(preprocessed);
+  return theme;
+}
+
+function convertDTCGComponentTokens(dtcgTokens) {
+  const preprocessed = componentTokensPreprocessor.preprocessor(dtcgTokens);
+  const result = {};
+  function walk(obj, pathParts = []) {
+    for (const [key, value] of Object.entries(obj)) {
+      if (key.startsWith('$') || !value || typeof value !== 'object') continue;
+      if (key === '_by_theme') {
+        const tokenName = pathParts.join('-');
+        result[tokenName] = result[tokenName] ?? {};
+        for (const [theme, themeNode] of Object.entries(value))
+          result[tokenName][theme] = applyTransforms(themeNode);
+        continue;
+      }
+      walk(value, [...pathParts, key]);
+    }
+  }
+  walk(preprocessed);
+  return result;
+}
 
 const jsGeneratedExists = fs.existsSync(JS_GENERATED_DIR);
 const libExists = fs.existsSync(LIB_DIR);
@@ -361,11 +514,12 @@ describe('JS generated theme files match DTCG JSON source', () => {
         );
 
         // Build the expected map the same way the builder does:
-        // convertDTCGToTheme → kebab keys → camelCase
+        // convertDTCGToTheme(themeName) → kebab keys → camelCase
+        // Source is now the unified themes.json, not individual theme files.
         const dtcgJson = JSON.parse(
-          fs.readFileSync(path.join(DTCG_DIR, `${themeName}.json`), 'utf8')
+          fs.readFileSync(path.join(DTCG_DIR, 'themes.json'), 'utf8')
         );
-        const rawTheme = convertDTCGToTheme(dtcgJson);
+        const rawTheme = convertDTCGToTheme(dtcgJson, themeName);
         expected = {};
         for (const [kebabKey, value] of Object.entries(rawTheme)) {
           expected[kebabToCamel(kebabKey)] = value;

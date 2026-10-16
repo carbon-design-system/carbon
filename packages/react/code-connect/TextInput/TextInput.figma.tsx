@@ -12,7 +12,7 @@ import figma from '@figma/code-connect';
 
 figma.connect(
   TextInput,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=15784-271032&m=dev',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=15784-271032&m=dev',
   {
     props: {
       labelText: figma.string('Label text'),
@@ -50,7 +50,7 @@ figma.connect(
 
 figma.connect(
   TextInputSkeleton,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=15784-271032&m=dev',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=15784-271032&m=dev',
   {
     variant: { State: 'Skeleton' },
     example: () => <TextInputSkeleton />,

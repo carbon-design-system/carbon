@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023
+ * Copyright IBM Corp. 2023, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -54,7 +54,6 @@ export interface LayoutProps extends HTMLAttributes<HTMLElement> {
   size?: Size;
 }
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const Layout = React.forwardRef<ReactNode, LayoutProps>(
   (
     { as: BaseComponent = 'div', children, className, density, size, ...rest },
@@ -75,6 +74,8 @@ const Layout = React.forwardRef<ReactNode, LayoutProps>(
     );
   }
 );
+
+Layout.displayName = 'Layout';
 
 Layout.propTypes = {
   /**
@@ -145,7 +146,6 @@ export interface LayoutConstraintProps extends HTMLAttributes<HTMLElement> {
     max?: Size | null;
   } | null;
 }
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const LayoutConstraint = React.forwardRef<ReactNode, LayoutConstraintProps>(
   (
     { as: BaseComponent = 'div', children, className, density, size, ...rest },
@@ -175,6 +175,8 @@ const LayoutConstraint = React.forwardRef<ReactNode, LayoutConstraintProps>(
     );
   }
 );
+
+LayoutConstraint.displayName = 'LayoutConstraint';
 
 LayoutConstraint.propTypes = {
   /**

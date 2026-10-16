@@ -4,37 +4,27 @@
 * This source code is licensed under the Apache-2.0 license found in the
 * LICENSE file in the root directory of this source tree.
 */
-@use 'sass:map';
-
 @use '@carbon/styles/scss/config' as *;
 @use '@carbon/styles/scss/type' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/border-radius' as *;
+@use '@carbon/styles/scss/feature-flags' as flags;
 @use '@carbon/styles/scss/utilities/convert' as *;
 @use '@carbon/styles/scss/utilities/layout' as *;
 @use '@carbon/styles/scss/utilities/ai-gradient' as *;
+@use '@carbon/styles/scss/components/button/radius' as button;
+@use '@carbon/styles/scss/utilities/high-contrast-mode' as *;
 @use '@carbon/styles/scss/components/slug/index' as *;
-
-// importing tag color tokens for the styling slug in tag component
-@use '@carbon/styles/scss/components/tag/tokens' as tag-tokens;
-
-$colorMap: (
-  'red': tag-tokens.$tag-color-red,
-  'magenta': tag-tokens.$tag-color-magenta,
-  'purple': tag-tokens.$tag-color-purple,
-  'blue': tag-tokens.$tag-color-blue,
-  'cyan': tag-tokens.$tag-color-cyan,
-  'teal': tag-tokens.$tag-color-teal,
-  'green': tag-tokens.$tag-color-green,
-  'gray': tag-tokens.$tag-color-gray,
-  'cool-gray': tag-tokens.$tag-color-cool-gray,
-  'warm-gray': tag-tokens.$tag-color-warm-gray,
-  'high-contrast': $text-inverse,
-);
 
 :host(#{$prefix}-ai-label) {
   @extend .#{$prefix}--slug;
+
+  .#{$prefix}--slug__button {
+    border-color: transparent;
+    color: currentColor;
+  }
 
   .#{$prefix}--slug__text {
     @include font-family('sans');
@@ -52,19 +42,35 @@ $colorMap: (
       -56px 64px 64px -24px $ai-popover-shadow-outer-02;
     color: $text-primary;
     min-inline-size: to-rem(280px);
+
+    // The gradient is only background-image layers, which forced colors mode drops
+    @include high-contrast-mode {
+      background-color: Canvas;
+    }
   }
 
   .#{$prefix}--toggletip-actions {
     position: absolute;
     justify-content: flex-end;
     backdrop-filter: blur(85px);
-    background: rgba(0, 0, 0, 0.01);
+    background: rgb(0, 0, 0, 0.01);
     border-end-end-radius: $spacing-03;
     border-end-start-radius: $spacing-03;
     column-gap: 0;
     inline-size: 100%;
     inset-block-end: 0;
     inset-inline-end: 0;
+  }
+
+  @if flags.enabled('enable-v12-release') {
+    ::slotted([slot='actions']) {
+      @include button.radius($border-radius-00);
+    }
+
+    ::slotted([slot='actions']:last-child),
+    ::slotted([kind='primary']) {
+      @include button.radius($ee: calc(#{$border-radius-08} - 1px));
+    }
   }
 
   .#{$prefix}--toggletip-content {
@@ -125,11 +131,24 @@ $colorMap: (
 
 :host(#{$prefix}-ai-label-action-button) {
   @include emit-layout-tokens();
+
+  display: inline-flex;
+
+  .#{$prefix}--btn {
+    flex-grow: 1;
+    max-inline-size: 100%;
+  }
+
   .#{$prefix}--btn--primary {
     order: 1;
-    border-end-end-radius: to-rem(7px);
+
+    @if not flags.enabled('enable-v12-release') {
+      border-end-end-radius: to-rem(7px);
+    }
   }
 }
+
+@include emit-layout-tokens-to-shadow-host('#{$prefix}-ai-label-action-button');
 
 :host(
     #{$prefix}-ai-label[kind='inline']:not([size='md']):not([size='lg']):not(
@@ -315,24 +334,29 @@ $colorMap: (
   }
 }
 
-@each $color, $token in $colorMap {
-  :host(#{$prefix}-ai-label[tag='#{$color}']) {
-    .#{$prefix}--slug__text {
-      color: $token;
-    }
+:host(#{$prefix}-ai-label[tag]) {
+  .#{$prefix}--slug__button {
+    margin-inline-start: to-rem(1px);
+  }
 
-    .#{$prefix}--slug__text::before {
-      background: $token;
-    }
+  .#{$prefix}--slug__text::before {
+    background-color: currentColor;
+  }
 
-    @media (any-hover: hover) {
-      button:hover {
-        border-color: $token;
+  @media (any-hover: hover) {
+    .#{$prefix}--slug__button:hover {
+      border-color: currentColor;
+      background: transparent;
+      box-shadow: none;
+      color: currentColor;
 
-        .#{$prefix}--slug__text::before {
-          background-color: $token;
-        }
+      .#{$prefix}--slug__text::before {
+        background-color: currentColor;
       }
+    }
+
+    .#{$prefix}--slug__button:hover:active {
+      color: $text-secondary;
     }
   }
 }

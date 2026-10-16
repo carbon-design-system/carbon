@@ -6,14 +6,11 @@
  */
 
 import { html } from 'lit';
-import { ifDefined } from 'lit/directives/if-defined.js';
+import './index';
 
 const defaultArgs = {
-  inactive: false,
   active: true,
-  assistiveText: 'Loading',
-  description: 'Loading',
-  type: null,
+  description: 'Loading account settings',
   withOverlay: false,
   small: false,
 };
@@ -40,21 +37,10 @@ const controls = {
 export const Default = {
   args: defaultArgs,
   argTypes: controls,
-  render: ({
-    active,
-    inactive,
-    assistiveText,
-    description,
-    type,
-    withOverlay,
-    small,
-  }) => html`
+  render: ({ active, description, withOverlay, small }) => html`
     <cds-loading
-      ?inactive=${inactive}
       ?active=${active}
       description=${description}
-      assistive-text=${assistiveText}
-      type=${ifDefined(type)}
       ?small=${small}
       ?overlay=${withOverlay}></cds-loading>
   `,

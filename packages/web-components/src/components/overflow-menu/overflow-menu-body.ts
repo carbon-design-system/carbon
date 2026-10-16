@@ -36,6 +36,8 @@ const capIndex = (index: number, length: number) => {
   return index;
 };
 
+const ignoredMenuItemKeys = new Set(['Home', 'End', 'ArrowLeft', 'ArrowRight']);
+
 /**
  * Overflow menu body.
  *
@@ -177,9 +179,21 @@ class CDSOverflowMenuBody extends CDSFloatingMenu {
       const items = this.querySelectorAll(
         CDSOverflowMenuBody.selectorItemEnabled
       );
-      const isInsideMenu = Array.from(items).some((item) =>
-        item.contains(document.activeElement)
+      const activeElement =
+        document.activeElement?.shadowRoot?.activeElement ??
+        document.activeElement;
+      const eventPath = event.composedPath();
+      const isInsideMenu = Array.from(items).some(
+        (item) =>
+          eventPath.includes(item) ||
+          item === document.activeElement ||
+          item.contains(activeElement)
       );
+
+      if (isInsideMenu && ignoredMenuItemKeys.has(key)) {
+        event.preventDefault();
+        return;
+      }
 
       if (isInsideMenu) {
         event.preventDefault();

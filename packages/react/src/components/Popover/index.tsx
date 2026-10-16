@@ -33,6 +33,8 @@ import {
 } from '@floating-ui/react';
 import { useFeatureFlag } from '../FeatureFlags';
 import { PolymorphicComponentPropWithRef } from '../../internal/PolymorphicProps';
+import { deprecate } from '../../prop-types/deprecate';
+import { useAutoAlign } from '../../internal/useAutoAlign';
 
 export interface PopoverContext {
   setFloating: React.Ref<HTMLSpanElement>;
@@ -110,6 +112,9 @@ export interface PopoverBaseProps {
   autoAlignBoundary?: Boundary;
 
   /**
+   * @deprecated This prop has been deprecated and will be
+   * removed in the next major release of Carbon.
+   *
    * Specify whether a caret should be rendered
    */
   caret?: boolean;
@@ -175,10 +180,10 @@ export const Popover: PopoverComponent & {
     isTabTip,
     align: initialAlign = isTabTip ? 'bottom-start' : 'bottom',
     as: BaseComponent = 'span' as E,
-    autoAlign = false,
+    autoAlign: autoAlignProp,
     autoAlignBoundary,
     backgroundToken = 'layer',
-    caret = !isTabTip,
+    caret: caretProp = !isTabTip,
     className: customClassName,
     children,
     border = false,
@@ -194,12 +199,17 @@ export const Popover: PopoverComponent & {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   forwardRef: any
 ) {
+  const autoAlign = useAutoAlign(autoAlignProp);
   const prefix = usePrefix();
   const floating = useRef<HTMLSpanElement>(null);
   const caretRef = useRef<HTMLSpanElement>(null);
   const popover = useRef<Element>(null);
   const enableFloatingStyles =
     useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
+  const enableV12Release = useFeatureFlag('enable-v12-release');
+  // v12 removes the caret from Popover and everything built on top of it, so
+  // the `caret` prop no longer has an effect once the flag is enabled
+  const caret = enableV12Release ? false : caretProp;
   const lastClickWasInsidePopoverContent = useRef(false);
 
   const isTargetInDatePickerInsidePopover = (target: Node) => {
@@ -378,7 +388,7 @@ export const Popover: PopoverComponent & {
                       // Use 4px spacing when no caret, otherwise use the caret offset
                       mainAxis: caret ? popoverDimensions?.current?.offset : 4,
                     }
-                  : 0
+                  : { mainAxis: enableV12Release ? 4 : 0 }
               ),
               autoAlign &&
                 flip({
@@ -422,7 +432,7 @@ export const Popover: PopoverComponent & {
                 }),
               arrow({
                 element: caretRef,
-                padding: 16,
+                padding: enableV12Release ? 3 : 16,
               }),
               autoAlign && hide(),
             ],
@@ -701,9 +711,15 @@ Popover.propTypes = {
   ]) as PropTypes.Validator<Boundary | null | undefined>,
 
   /**
+   * @deprecated This prop has been deprecated and will be
+   * removed in the next major release of Carbon.
+   *
    * Specify whether a caret should be rendered
    */
-  caret: PropTypes.bool,
+  caret: deprecate(
+    PropTypes.bool,
+    'The `caret` prop has been deprecated and will be removed in the next major release of Carbon.'
+  ),
 
   /**
    * Specify whether a border should be rendered on the popover

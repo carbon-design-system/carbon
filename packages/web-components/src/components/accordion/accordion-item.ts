@@ -117,15 +117,6 @@ class CDSAccordionItem extends FocusMixin(LitElement) {
   }
 
   /**
-   * Handler for the `keydown` event on the expando button.
-   */
-  private _handleKeydownExpando = ({ key }: KeyboardEvent) => {
-    if (this.open && (key === 'Esc' || key === 'Escape')) {
-      this._handleUserInitiatedToggle(false);
-    }
-  };
-
-  /**
    * The `ResizeObserver` instance for observing element resizes for re-positioning floating menu position.
    */
   // TODO: Wait for `.d.ts` update to support `ResizeObserver`
@@ -187,7 +178,6 @@ class CDSAccordionItem extends FocusMixin(LitElement) {
       open,
       _currentBreakpoint: currentBreakpoint,
       _handleClickExpando: handleClickExpando,
-      _handleKeydownExpando: handleKeydownExpando,
     } = this;
     const { _classesBreakpoints: classesBreakpoints } = this
       .constructor as typeof CDSAccordionItem;
@@ -205,8 +195,7 @@ class CDSAccordionItem extends FocusMixin(LitElement) {
         class="${prefix}--accordion__heading"
         aria-controls="content"
         aria-expanded="${open}"
-        @click="${handleClickExpando}"
-        @keydown="${handleKeydownExpando}">
+        @click="${handleClickExpando}">
         ${iconLoader(ChevronRight16, {
           part: 'expando-icon',
           class: `${prefix}--accordion__arrow`,

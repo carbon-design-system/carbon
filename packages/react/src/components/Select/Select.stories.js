@@ -20,15 +20,6 @@ import mdx from './Select.mdx';
 export default {
   title: 'Components/Select',
   component: Select,
-  args: {
-    disabled: false,
-    inline: false,
-    noLabel: false,
-    hideLabel: false,
-    invalid: false,
-    warn: false,
-    size: 'md',
-  },
   argTypes: {
     light: {
       table: {
@@ -52,56 +43,137 @@ export default {
   },
 };
 
+const sharedArgTypes = {
+  disabled: {
+    control: 'boolean',
+  },
+  helperText: {
+    control: 'text',
+  },
+  hideLabel: {
+    control: 'boolean',
+  },
+  inline: {
+    control: 'boolean',
+  },
+  invalid: {
+    control: 'boolean',
+  },
+  invalidText: {
+    control: 'text',
+  },
+  labelText: {
+    control: 'text',
+  },
+  onChange: {
+    action: 'onChange',
+  },
+  readOnly: {
+    control: 'boolean',
+  },
+  size: {
+    control: 'select',
+    options: ['xs', 'sm', 'md', 'lg'],
+  },
+  warn: {
+    control: 'boolean',
+  },
+  warnText: {
+    control: 'text',
+  },
+};
+
+const sharedArgs = {
+  disabled: false,
+  helperText: 'Select the region where your resources will be hosted.',
+  hideLabel: false,
+  inline: false,
+  invalid: false,
+  invalidText: 'Select a deployment region.',
+  labelText: 'Deployment region',
+  readOnly: false,
+  size: 'md',
+  warn: false,
+  warnText: 'This region has limited availability.',
+};
+
+const sharedControls = Object.keys(sharedArgTypes);
+
+const selectItems = (
+  <>
+    <SelectItem value="" text="Choose a region" />
+    <SelectItem value="us-south" text="Dallas (us-south)" />
+    <SelectItem value="us-east" text="Washington, DC (us-east)" />
+    <SelectItem value="eu-de" text="Frankfurt (eu-de)" />
+    <SelectItem value="au-syd" text="Sydney (au-syd)" />
+  </>
+);
+
 export const Inline = (args) => {
   return (
     <div>
-      <Select
-        inline
-        id="select-1"
-        labelText="Select an option"
-        helperText="Optional helper text"
-        {...args}>
-        <SelectItem value="" text="" />
-        <SelectItem value="option-1" text="Option 1" />
-        <SelectItem value="option-2" text="Option 2" />
-        <SelectItem value="option-3" text="Option 3" />
-        <SelectItem value="option-4" text="Option 4" />
+      <Select inline id="select-1" {...args}>
+        {selectItems}
       </Select>
     </div>
   );
 };
 
 Inline.args = {
+  ...sharedArgs,
   inline: true,
 };
 
-export const Skeleton = () => {
-  return <SelectSkeleton />;
+Inline.argTypes = {
+  ...sharedArgTypes,
+  inline: {
+    ...sharedArgTypes.inline,
+    table: { readonly: true },
+  },
+};
+
+Inline.parameters = {
+  controls: { include: sharedControls },
+};
+
+export const Skeleton = (args) => {
+  return <SelectSkeleton {...args} />;
+};
+
+Skeleton.args = {
+  hideLabel: false,
+};
+
+Skeleton.argTypes = {
+  hideLabel: {
+    control: 'boolean',
+  },
+};
+
+Skeleton.parameters = {
+  controls: { include: ['hideLabel'] },
 };
 
 export const _WithLayer = (args) => (
   <WithLayer>
     {(layer) => (
-      <Select
-        id={`select-${layer}`}
-        labelText=""
-        helperText="Optional helper text"
-        {...args}>
-        <SelectItem value="" text="" />
-        <SelectItem
-          value="An example option that is really long to show what should be done to handle long text"
-          text="An example option that is really long to show what should be done to handle long text"
-        />
-        <SelectItem value="option-2" text="Option 2" />
+      <Select id={`select-${layer}`} {...args}>
+        {selectItems}
       </Select>
     )}
   </WithLayer>
 );
 
+_WithLayer.args = {
+  ...sharedArgs,
+};
+
 _WithLayer.argTypes = {
-  inline: {
-    control: false,
-  },
+  ...sharedArgTypes,
+};
+
+_WithLayer.parameters = {
+  controls: { include: sharedControls },
 };
 
 export const withAILabel = (args) => {
@@ -113,8 +185,8 @@ export const withAILabel = (args) => {
           <h2 className="ai-label-heading">84%</h2>
           <p className="secondary bold">Confidence score</p>
           <p className="secondary">
-            Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
-            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+            This recommendation is based on current service availability and the
+            location of your existing resources.
           </p>
           <hr />
           <p className="secondary">Model type</p>
@@ -138,57 +210,43 @@ export const withAILabel = (args) => {
 
   return (
     <div>
-      <Select
-        id="select-1"
-        labelText="Select an option"
-        helperText="Optional helper text"
-        decorator={aiLabel}
-        {...args}>
-        <SelectItem value="" text="" />
-        <SelectItem
-          value="An example option that is really long to show what should be done to handle long text"
-          text="An example option that is really long to show what should be done to handle long text"
-        />
-        <SelectItem value="option-2" text="Option 2" />
-        <SelectItem value="option-3" text="Option 3" />
-        <SelectItem value="option-4" text="Option 4" />
+      <Select id="select-1" decorator={aiLabel} {...args}>
+        {selectItems}
       </Select>
     </div>
   );
 };
 
+withAILabel.args = {
+  ...sharedArgs,
+};
+
 withAILabel.argTypes = {
-  inline: {
-    control: false,
-  },
+  ...sharedArgTypes,
+};
+
+withAILabel.parameters = {
+  controls: { include: sharedControls },
 };
 
 export const Default = (args) => {
   return (
     <div>
-      <Select
-        id="select-1"
-        labelText="Select an option"
-        helperText="Optional helper text"
-        {...args}>
-        <SelectItem value="" text="" />
-        <SelectItem
-          value="An example option that is really long to show what should be done to handle long text"
-          text="An example option that is really long to show what should be done to handle long text"
-        />
-        <SelectItem value="option-2" text="Option 2" />
-        <SelectItem value="option-3" text="Option 3" />
-        <SelectItem value="option-4" text="Option 4" />
+      <Select id="select-1" {...args}>
+        {selectItems}
       </Select>
     </div>
   );
 };
 
+Default.args = {
+  ...sharedArgs,
+};
+
 Default.argTypes = {
-  helperText: {
-    control: 'text',
-  },
-  invalidText: { control: 'text' },
-  labelText: { control: 'text' },
-  warnText: { control: 'text' },
+  ...sharedArgTypes,
+};
+
+Default.parameters = {
+  controls: { include: sharedControls },
 };

@@ -30,7 +30,8 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(InlineLoadingStories.Default),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: InlineLoadingStories.Default }),
     },
   ]}
 />
@@ -40,7 +41,8 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(InlineLoadingStories.UxExample),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: InlineLoadingStories.UxExample }),
     },
   ]}
 />

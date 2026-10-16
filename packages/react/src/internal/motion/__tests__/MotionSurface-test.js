@@ -61,6 +61,43 @@ describe('MotionSurface', () => {
     expect(screen.getByTestId('surface')).toHaveAttribute('style');
   });
 
+  // Custom surfaces compose a definition instead of taking a public name.
+  it('accepts an inline definition', async () => {
+    const panelReveal = {
+      kind: 'reveal',
+      duration: 'slow-01',
+      enter: { opacity: 1, clipPath: 'inset(0 0 0 0)' },
+      exit: { opacity: 0, clipPath: 'inset(50% 0 50% 0)' },
+      enterEasing: { name: 'entrance', mode: 'expressive' },
+      exitEasing: { name: 'exit', mode: 'expressive' },
+    };
+    const onExitComplete = jest.fn();
+    const { rerender } = render(
+      <MotionSurface
+        surface={panelReveal}
+        data-testid="surface"
+        onExitComplete={onExitComplete}>
+        content
+      </MotionSurface>
+    );
+
+    expect(screen.getByTestId('surface')).toHaveAttribute('style');
+    expect(screen.getByText('content')).toBeInTheDocument();
+
+    rerender(
+      <MotionSurface
+        surface={panelReveal}
+        open={false}
+        data-testid="surface"
+        onExitComplete={onExitComplete}>
+        content
+      </MotionSurface>
+    );
+
+    await waitFor(() => expect(onExitComplete).toHaveBeenCalledTimes(1));
+    expect(screen.queryByText('content')).not.toBeInTheDocument();
+  });
+
   it('runs the exit before unmounting and reports completion', async () => {
     const onExitComplete = jest.fn();
     const { rerender } = render(

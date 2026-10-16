@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023
+ * Copyright IBM Corp. 2023, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -13,9 +13,86 @@ import {
   MenuItemRadioGroup,
   MenuItemSelectable,
 } from '../Menu';
-import { OverflowMenu } from './';
+import { OverflowMenu } from './next';
 import { WithFeatureFlags } from '../../../.storybook/templates/WithFeatureFlags';
 import { FeatureFlags } from '../FeatureFlags';
+
+const args = {
+  disabled: false,
+  label: 'Options',
+  menuAlignment: 'bottom-start',
+  size: 'md',
+  tooltipAlignment: 'top',
+  tooltipDefaultOpen: false,
+  tooltipEnterDelayMs: 100,
+  tooltipLeaveDelayMs: 100,
+};
+
+const tooltipAlignmentOptions = [
+  'top',
+  'top-start',
+  'top-end',
+  'bottom',
+  'bottom-start',
+  'bottom-end',
+  'left',
+  'left-start',
+  'left-end',
+  'right',
+  'right-start',
+  'right-end',
+];
+
+const argTypes = {
+  autoAlign: {
+    control: { type: 'boolean' },
+    description:
+      'Will attempt to automatically align the menu with the trigger button to avoid collisions with the viewport',
+  },
+  disabled: {
+    control: { type: 'boolean' },
+    description: 'Specify whether the trigger button should be disabled',
+  },
+  label: {
+    control: { type: 'text' },
+  },
+  menuAlignment: {
+    options: ['bottom-start', 'bottom-end', 'top-start', 'top-end'],
+    control: { type: 'select' },
+    description:
+      'Specify how the menu should align with the trigger button `bottom-start` `bottom-end` `top-start` `top-end`',
+  },
+  size: {
+    options: ['xs', 'sm', 'md', 'lg'],
+    control: { type: 'select' },
+  },
+  tooltipAlignment: {
+    options: tooltipAlignmentOptions,
+    control: { type: 'select' },
+    description:
+      'Specify how the tooltip on the trigger button should be aligned',
+  },
+  tooltipAutoAlign: {
+    control: { type: 'boolean' },
+    description:
+      'Will attempt to automatically align the tooltip on the trigger button to avoid collisions with the viewport',
+  },
+  tooltipDefaultOpen: {
+    control: { type: 'boolean' },
+    description:
+      'Specify whether the tooltip on the trigger button should be open when it first renders',
+  },
+  tooltipEnterDelayMs: {
+    control: { type: 'number' },
+    description:
+      'Specify the duration in milliseconds to delay before displaying the tooltip on the trigger button',
+  },
+  tooltipLeaveDelayMs: {
+    control: { type: 'number' },
+    description:
+      'Specify the duration in milliseconds to delay before hiding the tooltip on the trigger button',
+  },
+};
 
 export default {
   title: 'Components/OverflowMenu/Feature Flag',
@@ -35,9 +112,16 @@ export default {
       </WithFeatureFlags>
     ),
   ],
+  args,
+  argTypes,
+  parameters: {
+    controls: {
+      exclude: ['renderIcon', 'menuTarget'],
+    },
+  },
 };
 
-export const AutoAlign = () => {
+export const AutoAlign = (args) => {
   const ref = useRef();
 
   useEffect(() => {
@@ -53,7 +137,7 @@ export const AutoAlign = () => {
           left: '2450px',
         }}
         ref={ref}>
-        <OverflowMenu autoAlign={true}>
+        <OverflowMenu {...args}>
           <MenuItem label="Stop app" />
           <MenuItem label="Restart app" />
           <MenuItem label="Rename app" />
@@ -66,14 +150,24 @@ export const AutoAlign = () => {
   );
 };
 
-export const Nested = () => {
+AutoAlign.args = {
+  autoAlign: true,
+};
+
+AutoAlign.argTypes = {
+  autoAlign: {
+    table: { readonly: true },
+  },
+};
+
+export const Nested = (args) => {
   return (
     <FeatureFlags
       flags={{
         'enable-v12-overflowmenu': true,
         'enable-v12-dynamic-floating-styles': false,
       }}>
-      <OverflowMenu>
+      <OverflowMenu {...args}>
         <MenuItem label="Level 1" />
         <MenuItem label="Level 1" />
         <MenuItem label="Level 1">
@@ -93,10 +187,13 @@ export const Nested = () => {
 };
 
 export const WithMenuAlignment = (args) => {
+  const { autoAlign, label, size } = args;
+  const menuArgs = { autoAlign, label, size };
+
   return (
     <>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <OverflowMenu {...args} menuAlignment="bottom-start">
+        <OverflowMenu {...menuArgs} menuAlignment="bottom-start">
           <MenuItem label="Stop app" />
           <MenuItem label="Restart app" />
           <MenuItem label="Rename app" />
@@ -105,7 +202,7 @@ export const WithMenuAlignment = (args) => {
           <MenuItem label="Delete app" kind="danger" />
         </OverflowMenu>
 
-        <OverflowMenu {...args} menuAlignment="bottom-end">
+        <OverflowMenu {...menuArgs} menuAlignment="bottom-end">
           <MenuItem label="Stop app" />
           <MenuItem label="Restart app" />
           <MenuItem label="Rename app" />
@@ -122,7 +219,7 @@ export const WithMenuAlignment = (args) => {
           justifyContent: 'space-between',
         }}>
         <OverflowMenu
-          {...args}
+          {...menuArgs}
           menuAlignment="top-start"
           tooltipAlignment="bottom">
           <MenuItem label="Stop app" />
@@ -134,7 +231,7 @@ export const WithMenuAlignment = (args) => {
         </OverflowMenu>
 
         <OverflowMenu
-          {...args}
+          {...menuArgs}
           menuAlignment="top-end"
           tooltipAlignment="bottom">
           <MenuItem label="Stop app" />
@@ -149,10 +246,16 @@ export const WithMenuAlignment = (args) => {
   );
 };
 
-export const FloatingStyles = () => {
+WithMenuAlignment.parameters = {
+  controls: {
+    include: ['autoAlign', 'label', 'size'],
+  },
+};
+
+export const FloatingStyles = (args) => {
   return (
     <div>
-      <OverflowMenu>
+      <OverflowMenu {...args}>
         <MenuItem label="Stop app" />
         <MenuItem label="Restart app" />
         <MenuItem label="Rename app" />
@@ -175,23 +278,4 @@ export const Default = (args) => {
       <MenuItem label="Delete app" kind="danger" />
     </OverflowMenu>
   );
-};
-
-Default.args = {
-  label: 'Options',
-};
-
-Default.parameters = {
-  controls: {
-    exclude: ['renderIcon', 'menuTarget'],
-  },
-};
-Default.argTypes = {
-  menuAlignment: {
-    options: ['bottom-start', 'bottom-end', 'top-start', 'top-end'],
-    control: { type: 'select' },
-    description:
-      'Specify how the menu should align with the button element `bottom-start` `bottom-end` `top-start` `top-end`',
-    default: 'bottom-start',
-  },
 };

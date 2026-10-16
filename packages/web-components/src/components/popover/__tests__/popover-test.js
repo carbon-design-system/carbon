@@ -8,6 +8,7 @@
 import { expect, fixture, html } from '@open-wc/testing';
 import { sendKeys } from '@web/test-runner-commands';
 import '@carbon/web-components/es/components/popover/index.js';
+import '@carbon/web-components/es/components/feature-flags/index.js';
 
 describe('cds-popover', function () {
   it('should support a custom class', async () => {
@@ -760,5 +761,43 @@ describe('cds-popover autoAlignBoundary', () => {
     expect(resolvedBoundary).to.have.property('y').that.is.a('number');
     expect(resolvedBoundary).to.have.property('width').that.is.a('number');
     expect(resolvedBoundary).to.have.property('height').that.is.a('number');
+  });
+});
+
+describe('cds-popover autoalign default', () => {
+  it('should default autoalign to true with enable-v12-release', async () => {
+    const featureFlag = await fixture(html`
+      <feature-flags enable-v12-release="true">
+        <cds-popover>
+          <button type="button">Test</button>
+          <cds-popover-content></cds-popover-content>
+        </cds-popover>
+      </feature-flags>
+    `);
+    const el = featureFlag.querySelector('cds-popover');
+
+    await el.updateComplete;
+
+    expect(el.autoalign).to.be.true;
+    expect(el).to.have.attribute('autoalign');
+    expect(el.querySelector('cds-popover-content').autoalign).to.be.true;
+  });
+
+  it('should keep autoalign disabled when set to false with enable-v12-release', async () => {
+    const featureFlag = await fixture(html`
+      <feature-flags enable-v12-release="true">
+        <cds-popover .autoalign=${false}>
+          <button type="button">Test</button>
+          <cds-popover-content></cds-popover-content>
+        </cds-popover>
+      </feature-flags>
+    `);
+    const el = featureFlag.querySelector('cds-popover');
+
+    await el.updateComplete;
+
+    expect(el.autoalign).to.be.false;
+    expect(el).to.not.have.attribute('autoalign');
+    expect(el.querySelector('cds-popover-content').autoalign).to.not.be.true;
   });
 });

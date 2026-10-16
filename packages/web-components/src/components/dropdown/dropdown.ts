@@ -14,6 +14,7 @@ import { iconLoader } from '../../globals/internal/icon-loader';
 import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
 import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
 import ChevronDown16 from '@carbon/icons/es/chevron--down/16.js';
+import AutoAlignMixin from '../../globals/mixins/auto-align';
 import FocusMixin from '../../globals/mixins/focus';
 import FormMixin from '../../globals/mixins/form';
 import HostListenerMixin from '../../globals/mixins/host-listener';
@@ -64,8 +65,8 @@ export {
  * @fires cds-dropdown-toggled - The custom event fired after the open state of this dropdown is toggled upon a user gesture.
  */
 @customElement(`${prefix}-dropdown`)
-class CDSDropdown extends ValidityMixin(
-  HostListenerMixin(FormMixin(FocusMixin(LitElement)))
+class CDSDropdown extends AutoAlignMixin(
+  ValidityMixin(HostListenerMixin(FormMixin(FocusMixin(LitElement))))
 ) {
   /**
    * `true` if there is an AI Label.
@@ -138,7 +139,19 @@ class CDSDropdown extends ValidityMixin(
   protected _slotTitleTextNode!: HTMLSlotElement;
 
   /**
-   * @param itemToSelect A dropdown item. Absense of this argument means clearing selection.
+   * The `<slot>` element for the AI label in the shadow DOM.
+   */
+  @query("slot[name='ai-label']")
+  private _slotAILabelNode!: HTMLSlotElement;
+
+  /**
+   * The `<slot>` element for the slug in the shadow DOM.
+   */
+  @query("slot[name='slug']")
+  private _slotSlugNode!: HTMLSlotElement;
+
+  /**
+   * @param itemToSelect A dropdown item. Absence of this argument means clearing selection.
    * @returns `true` if the selection of this dropdown should change if the given item is selected upon user interaction.
    */
   protected _selectionShouldChange(itemToSelect?: CDSDropdownItem) {
@@ -150,7 +163,7 @@ class CDSDropdown extends ValidityMixin(
    *
    * @param itemToSelect
    *   A dropdown item.
-   *   Absense of this argument means clearing selection, which may be handled by a derived class.
+   *   Absence of this argument means clearing selection, which may be handled by a derived class.
    */
   protected _selectionDidChange(itemToSelect?: CDSDropdownItem) {
     const constructor = this.constructor as typeof CDSDropdown;
@@ -620,7 +633,7 @@ class CDSDropdown extends ValidityMixin(
   /**
    * Handles user-initiated selection of a dropdown item.
    *
-   * @param [item] The dropdown item user wants to select. Absense of this argument means clearing selection.
+   * @param [item] The dropdown item user wants to select. Absence of this argument means clearing selection.
    */
   protected _handleUserInitiatedSelectItem(item?: CDSDropdownItem) {
     if (item?.hasAttribute('disabled')) {
@@ -958,10 +971,11 @@ class CDSDropdown extends ValidityMixin(
   direction = DROPDOWN_DIRECTION.BOTTOM;
 
   /**
-   * Specify whether auto align functionality should be applied
+   * Specify whether auto-align is enabled. Defaults to `true` when
+   * `enable-v12-autoalign` is enabled, and to `false` otherwise.
    */
   @property({ type: Boolean, reflect: true })
-  autoalign = false;
+  autoalign?: boolean;
 
   /**
    * `true` if this dropdown should be disabled.
@@ -1149,19 +1163,17 @@ class CDSDropdown extends ValidityMixin(
       this.removeAttribute('ai-label');
     }
 
-    const label = this.shadowRoot?.querySelector("slot[name='ai-label']");
+    const label = this._slotAILabelNode;
     if (label) {
       label?.classList.toggle(
         `${prefix}--slug--revert`,
         this.querySelector(`${prefix}-ai-label`)?.hasAttribute('revert-active')
       );
     } else {
-      this.shadowRoot
-        ?.querySelector("slot[name='slug']")
-        ?.classList.toggle(
-          `${prefix}--slug--revert`,
-          this.querySelector(`${prefix}-slug`)?.hasAttribute('revert-active')
-        );
+      this._slotSlugNode?.classList.toggle(
+        `${prefix}--slug--revert`,
+        this.querySelector(`${prefix}-slug`)?.hasAttribute('revert-active')
+      );
     }
 
     if (
@@ -1243,8 +1255,7 @@ class CDSDropdown extends ValidityMixin(
   /**
    * The CSS class list for dropdown listbox
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  protected get _classes(): any {
+  protected get _classes(): ReturnType<typeof classMap> {
     const { size, type, open, autoalign } = this;
     const inline = type === DROPDOWN_TYPE.INLINE;
     const normalizedProps = this._normalizedProps;
@@ -1266,7 +1277,7 @@ class CDSDropdown extends ValidityMixin(
       [`${prefix}--dropdown--inline`]: inline,
       [`${prefix}--dropdown--selected`]: selectedItemsCount > 0,
       [`${prefix}--list-box__wrapper--decorator`]: this._hasAILabel,
-      [`${prefix}--autoalign`]: autoalign,
+      [`${prefix}--autoalign`]: Boolean(autoalign),
     });
   }
 
@@ -1296,13 +1307,6 @@ class CDSDropdown extends ValidityMixin(
     const inline = type === DROPDOWN_TYPE.INLINE;
     const normalizedProps = this._normalizedProps;
 
-    let activeDescendantFallback: string | undefined;
-    if (open && !activeDescendant) {
-      const constructor = this.constructor as typeof CDSDropdown;
-      const items = this.querySelectorAll(constructor.selectorItem);
-      activeDescendantFallback = items[0]?.id;
-    }
-
     const helperClasses = classMap({
       [`${prefix}--form__helper-text`]: true,
       [`${prefix}--form__helper-text--disabled`]: normalizedProps.disabled,
@@ -1329,11 +1333,12 @@ class CDSDropdown extends ValidityMixin(
           class: `${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`,
           'aria-label': toggleLabel,
         });
-    const helperMessage = normalizedProps.invalid
+    const validationMessage = normalizedProps.invalid
       ? invalidText
       : normalizedProps.warn
         ? warnText
-        : helperText;
+        : undefined;
+    const helperMessage = validationMessage ?? helperText;
     const menuBody = html`
       <div
         aria-labelledby="${ifDefined(ariaLabel ? undefined : 'dropdown-label')}"
@@ -1387,7 +1392,7 @@ class CDSDropdown extends ValidityMixin(
             !shouldTriggerBeFocusable
               ? undefined
               : open
-                ? (activeDescendant ?? activeDescendantFallback)
+                ? (activeDescendant ?? '')
                 : ''
           )}">
           ${this._renderPrecedingLabel()}${this._renderLabel()}${this._renderFollowingLabel()}
@@ -1402,15 +1407,21 @@ class CDSDropdown extends ValidityMixin(
         <slot name="slug" @slotchange=${handleAILabelSlotChange}></slot>
         ${menuBody}
       </div>
-      <div
-        part="helper-text"
-        class="${helperClasses}"
-        ?hidden="${(inline && !this.warn && !normalizedProps.invalid) ||
-        !hasHelperText}">
-        <slot name="helper-text" @slotchange="${handleSlotchangeHelperText}"
-          >${helperMessage}</slot
-        >
-      </div>
+      ${this.isFluid
+        ? validationMessage
+          ? html`<div part="helper-text" class="${helperClasses}">
+              ${validationMessage}
+            </div>`
+          : null
+        : html`<div
+            part="helper-text"
+            class="${helperClasses}"
+            ?hidden="${(inline && !this.warn && !normalizedProps.invalid) ||
+            !hasHelperText}">
+            <slot name="helper-text" @slotchange="${handleSlotchangeHelperText}"
+              >${helperMessage}</slot
+            >
+          </div>`}
     `;
   }
 

@@ -1,3 +1,7 @@
+// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=103086-4853&t=qzeFExzcZKEytj8o-4
+// source=https://github.com/carbon-design-system/carbon/blob/main/packages/web-components/src/components/tabs/tab.ts
+// component=cds-tab
+
 /**
  * Copyright IBM Corp. 2026
  *
@@ -5,79 +9,61 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import figma, { html } from '@figma/code-connect/html';
+import figma from 'figma';
+import {
+  renderBooleanAttribute,
+  renderStringAttribute,
+} from '../template-helpers';
 
-const sharedTabProps = {
-  label: figma.string('Label text'),
-  disabled: figma.enum('State', {
+const instance = figma.selectedInstance;
+
+function createTemplate() {
+  const label = instance.getString('Label text');
+  const disabled = instance.getEnum('State', {
     Disabled: true,
-  }),
-  icon: figma.instance('Swap icon'),
-  secondaryLabel: figma.boolean('Show 2nd label', {
-    true: figma.textContent('2nd label'),
-  }),
-};
+  });
+  const icon = instance.getInstanceSwap('Swap icon')?.executeTemplate().example;
+  const isIconOnly = instance.getEnum('Type', {
+    'Icon only': true,
+  });
 
-figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/-v11--Carbon-Design-System?node-id=103086-4853&t=qzeFExzcZKEytj8o-4',
-  {
-    variant: { Type: 'Text + Icon' },
-    props: sharedTabProps,
-    example: (props) =>
-      html`<cds-tab disabled=${props.disabled}>
-        ${props.label} ${props.icon}
-      </cds-tab>`,
-    imports: ["import '@carbon/web-components/es/components/tabs/index.js'"],
+  if (isIconOnly) {
+    return {
+      id: 'cds-tab',
+      imports: ["import '@carbon/web-components/es/components/tabs/tab.js'"],
+      example: figma.code`<cds-tab icon-only${renderBooleanAttribute(
+        'disabled',
+        disabled
+      )}${renderStringAttribute('aria-label', label)}>
+  ${icon}
+</cds-tab>`,
+      metadata: { nestable: true },
+    };
   }
-);
 
-figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/-v11--Carbon-Design-System?node-id=103086-4853&t=qzeFExzcZKEytj8o-4',
-  {
-    variant: {
-      Type: 'Text + Icon',
-      Style: 'Contained',
-      'Show 2nd label': 'True',
-    },
-    props: sharedTabProps,
-    example: (props) =>
-      html`<cds-tab
-        disabled=${props.disabled}
-        secondary-label=${props.secondaryLabel}>
-        ${props.label} ${props.icon}
-      </cds-tab>`,
-    imports: ["import '@carbon/web-components/es/components/tabs/index.js'"],
-  }
-);
+  const isContained = instance.getEnum('Style', {
+    Contained: true,
+  });
+  const secondaryLabelLayer =
+    isContained && instance.getBoolean('Show 2nd label')
+      ? instance.findText('2nd label')
+      : null;
+  const secondaryLabel =
+    secondaryLabelLayer && secondaryLabelLayer.type !== 'ERROR'
+      ? secondaryLabelLayer.textContent
+      : undefined;
 
-figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/-v11--Carbon-Design-System?node-id=103086-4853&t=qzeFExzcZKEytj8o-4',
-  {
-    variant: { Type: 'Icon only' },
-    props: sharedTabProps,
-    example: (props) =>
-      html`<cds-tab
-        icon-only
-        disabled=${props.disabled}
-        aria-label=${props.label}>
-        ${props.icon}
-      </cds-tab>`,
+  return {
+    id: 'cds-tab',
     imports: ["import '@carbon/web-components/es/components/tabs/index.js'"],
-  }
-);
+    example: figma.code`<cds-tab${renderBooleanAttribute(
+      'disabled',
+      disabled
+    )}${renderStringAttribute('secondary-label', secondaryLabel)}>
+  ${label} ${icon}
+</cds-tab>`,
+    metadata: { nestable: true },
+  };
+}
 
-// vertical tabs items
-figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=75769-1965&t=PaZ3ZnEGQGMgXgBW-4',
-  {
-    props: {
-      label: figma.string('Text'),
-      disabled: figma.enum('State', {
-        Disabled: true,
-      }),
-    },
-    example: (props) =>
-      html`<cds-tab disabled=${props.disabled}>${props.label}</cds-tab>`,
-    imports: ["import '@carbon/web-components/es/components/tabs/index.js'"],
-  }
-);
+export default createTemplate();

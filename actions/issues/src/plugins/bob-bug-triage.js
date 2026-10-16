@@ -6,23 +6,26 @@
  */
 
 /**
- * Plugin for a read-only Bob assessment of newly opened formal Bugs. Bob sees
- * issue context and repository guidance, returns plain text, and never receives
- * a GitHub token; the Bob Automation client posts validated output afterward.
+ * Plugin for one read-only Bob assessment when an issue opens or becomes a
+ * formal Bug. Bob sees issue context and repository guidance, streams
+ * content-free progress diagnostics, and never receives a GitHub token; the
+ * Bob Automation client posts validated output afterward.
  */
 import * as core from '@actions/core';
-import { execFile } from 'node:child_process';
+import { spawn } from 'node:child_process';
 import { access, mkdir, rm, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
-import { promisify } from 'node:util';
-import { events } from '../conditions.js';
+import { events, or } from '../conditions.js';
 import { manageComment } from '../manage-comment.js';
 
-const execFileAsync = promisify(execFile);
 const BOB_COMMENT_HEADER = '<!-- bob-preliminary-triage -->';
 const BOB_CONTEXT_DIRECTORY = '.bob-triage';
 const BOB_CONTEXT_FILE = 'issue.json';
 const BOB_TIMEOUT = 12 * 60 * 1000;
+const BOB_FORCE_KILL_DELAY = 5 * 1000;
+const BOB_HEARTBEAT_INTERVAL = 60 * 1000;
+const BOB_MAX_COMMENT_OUTPUT = 1024 * 1024;
+const BOB_STDERR_TAIL_LENGTH = 8 * 1024;
 // Use an allowlist rather than copying process.env. Action inputs are exposed as
 // environment variables, so copying everything would leak the GitHub token.
 const BOB_ENVIRONMENT_VARIABLES = [
@@ -133,6 +136,39 @@ function buildIssueContext(context) {
 }
 
 /**
+ * Look for Bob's hidden header before spending inference time. The `typed`
+ * fallback may arrive after an `opened` run, so this read makes the two eligible
+ * events behave as one logical operation.
+ *
+ * @param {object} context
+ * @param {object} octokit
+ * @returns {Promise<boolean>}
+ */
+async function hasExistingBobTriage(context, octokit) {
+  const { issue, repository } = context.payload;
+  core.info(
+    `[bob-triage] Checking issue #${issue.number} for an existing managed Bob comment`
+  );
+  const comments = await octokit.paginate(octokit.rest.issues.listComments, {
+    owner: repository.owner.login,
+    repo: repository.name,
+    issue_number: issue.number,
+    per_page: 100,
+  });
+  const existingComment = comments.find((comment) => {
+    return comment.body?.trim().startsWith(BOB_COMMENT_HEADER);
+  });
+  if (existingComment) {
+    core.info(
+      `[bob-triage] Found managed Bob comment ${existingComment.id}; skipping duplicate inference`
+    );
+    return true;
+  }
+  core.info('[bob-triage] No managed Bob comment exists; inference is needed');
+  return false;
+}
+
+/**
  * Give Bob only the environment it needs, explicitly excluding GitHub tokens.
  *
  * @param {object} environment
@@ -146,14 +182,129 @@ export function createBobEnvironment(environment, apiKey) {
       bobEnvironment[name] = environment[name];
     }
   }
-  bobEnvironment.BOB_INFERENCE_API_KEY = apiKey;
+  // Keep the GitHub Actions secret/input name descriptive, then translate it
+  // at the process boundary to the fixed environment variable Bob Shell 1.0.6
+  // reads when `--auth-method api-key` is used.
+  bobEnvironment.BOBSHELL_API_KEY = apiKey;
   return bobEnvironment;
 }
 
 /**
- * Invoke the pinned Bob executable in the repository workspace. Bob's custom
- * mode supplies read-only capabilities and the child environment supplies only
- * the explicit allowlist plus its API key.
+ * Convert one newline-delimited Bob stream event into a safe log message.
+ * Message content, tool parameters, and tool output are deliberately discarded
+ * so Actions logs show progress without exposing Bob's reasoning or inputs.
+ *
+ * Lines that are not recognized stream events are returned as final comment
+ * output. With `--hide-intermediary-output`, Bob writes only its final answer
+ * this way.
+ *
+ * @param {string} line
+ * @param {Map<string, string>} toolNames
+ * @returns {{ output?: string, stage?: string, message?: string }}
+ */
+export function parseBobStreamLine(line, toolNames = new Map()) {
+  let event;
+  try {
+    event = JSON.parse(line);
+  } catch {
+    return { output: line };
+  }
+
+  if (!event || typeof event !== 'object' || typeof event.type !== 'string') {
+    return { output: line };
+  }
+
+  if (event.type === 'init') {
+    return {
+      stage: 'initialized',
+      message: '[bob-triage] Bob stream initialized',
+    };
+  }
+
+  if (event.type === 'message') {
+    // Content-bearing model messages are intentionally neither returned nor
+    // logged. The heartbeat still reports that Bob is generating a response.
+    return { stage: 'generating response' };
+  }
+
+  if (event.type === 'tool_use') {
+    // Tool names and statuses should be fixed protocol values. Restrict them to
+    // a small character set before interpolating them into workflow logs.
+    const toolName = /^[\w.:-]{1,80}$/.test(event.tool_name)
+      ? event.tool_name
+      : 'unknown-tool';
+    if (typeof event.tool_id === 'string') {
+      toolNames.set(event.tool_id, toolName);
+    }
+    return {
+      stage: `running ${toolName}`,
+      message: `[bob-triage] Bob started tool=${toolName}`,
+    };
+  }
+
+  if (event.type === 'tool_result') {
+    const toolName = toolNames.get(event.tool_id) ?? 'unknown-tool';
+    const status = /^[\w.:-]{1,40}$/.test(event.status)
+      ? event.status
+      : 'unknown-status';
+    return {
+      stage: `completed ${toolName} (${status})`,
+      message: `[bob-triage] Bob completed tool=${toolName}; status=${status}`,
+    };
+  }
+
+  if (event.type === 'result') {
+    const status = /^[\w.:-]{1,40}$/.test(event.status)
+      ? event.status
+      : event.success === true
+        ? 'success'
+        : event.success === false
+          ? 'error'
+          : 'unknown';
+    return {
+      stage: `result ${status}`,
+      message: `[bob-triage] Bob emitted result event; status=${status}`,
+    };
+  }
+
+  const eventType = /^[\w.:-]{1,80}$/.test(event.type)
+    ? event.type
+    : 'unknown-event';
+  return {
+    stage: `event ${eventType}`,
+    message: `[bob-triage] Bob emitted event type=${eventType}`,
+  };
+}
+
+/**
+ * Keep only the tail of diagnostic text so a failure remains useful without
+ * retaining unbounded child-process output in memory.
+ */
+function appendTail(current, addition, maximumLength) {
+  return `${current}${addition}`.slice(-maximumLength);
+}
+
+/**
+ * Redact common credential shapes before diagnostic stderr reaches Actions.
+ * GitHub also masks registered secrets, but this provides defense in depth.
+ */
+function redactBobDiagnostic(value, apiKey) {
+  let diagnostic = stripTerminalCharacters(value);
+  if (apiKey) {
+    diagnostic = diagnostic.replaceAll(apiKey, '[REDACTED]');
+  }
+  return diagnostic
+    .replace(/Bearer\s+\S+/gi, 'Bearer [REDACTED]')
+    .replace(
+      /\b(api[_ -]?key|authorization|token)(\s*[:=]\s*)\S+/gi,
+      '$1$2[REDACTED]'
+    );
+}
+
+/**
+ * Invoke the pinned Bob executable in the repository workspace. Structured
+ * streaming makes long runs visible while the custom mode and environment keep
+ * the process read-only and exclude every GitHub token.
  */
 async function executeBob(workspace, apiKey) {
   // Passing the prompt as an argv value avoids shell interpolation of any issue
@@ -164,32 +315,154 @@ async function executeBob(workspace, apiKey) {
     'api-key',
     '--chat-mode',
     'bug-triage',
+    '--debug',
     '--hide-intermediary-output',
     '--output-format',
-    'text',
+    'stream-json',
     'Follow @/.github/prompts/bob-bug-triage.md to triage @/.bob-triage/issue.json. Return only the comment text.',
   ];
 
   core.info(
-    '[bob-triage] Starting Bob CLI with bug-triage mode and no GitHub token in its environment'
+    `[bob-triage] Starting Bob CLI with bug-triage mode, structured progress, debug diagnostics, and a ${BOB_TIMEOUT / 60000}-minute timeout; mapping the inference input to BOBSHELL_API_KEY and excluding GitHub tokens`
   );
-  const result = await execFileAsync('bob', argumentsList, {
-    cwd: workspace,
-    env: createBobEnvironment(process.env, apiKey),
-    maxBuffer: 1024 * 1024,
-    timeout: BOB_TIMEOUT,
-  });
-  core.info('[bob-triage] Bob CLI exited successfully');
-  if (result.stderr?.trim()) {
+
+  return new Promise((resolve, reject) => {
+    const startedAt = Date.now();
+    const toolNames = new Map();
+    const finalOutputLines = [];
+    let finalOutputLength = 0;
+    let stdoutBuffer = '';
+    let stderrTail = '';
+    let stdoutBytes = 0;
+    let stderrBytes = 0;
+    let lastStage = 'starting';
+    let timedOut = false;
+    let closed = false;
+
+    const child = spawn('bob', argumentsList, {
+      cwd: workspace,
+      env: createBobEnvironment(process.env, apiKey),
+      stdio: ['ignore', 'pipe', 'pipe'],
+    });
     core.info(
-      `[bob-triage] Bob stderr: ${stripTerminalCharacters(result.stderr)}`
+      `[bob-triage] Bob process spawned; pid=${child.pid ?? 'unavailable'}`
     );
-  }
-  return result.stdout;
+
+    /** Parse a complete stdout line as either progress or final comment text. */
+    function handleStdoutLine(line) {
+      const parsed = parseBobStreamLine(line, toolNames);
+      if (parsed.stage) {
+        lastStage = parsed.stage;
+      }
+      if (parsed.message) {
+        core.info(parsed.message);
+      }
+      if (parsed.output !== undefined) {
+        finalOutputLength += Buffer.byteLength(parsed.output);
+        if (finalOutputLength > BOB_MAX_COMMENT_OUTPUT) {
+          core.error(
+            `[bob-triage] Bob final output exceeded ${BOB_MAX_COMMENT_OUTPUT} bytes; terminating the process`
+          );
+          child.kill('SIGTERM');
+          return;
+        }
+        finalOutputLines.push(parsed.output);
+      }
+    }
+
+    child.stdout.on('data', (chunk) => {
+      stdoutBytes += chunk.length;
+      stdoutBuffer += chunk.toString('utf8');
+      const lines = stdoutBuffer.split(/\r?\n/);
+      stdoutBuffer = lines.pop() ?? '';
+      for (const line of lines) {
+        handleStdoutLine(line);
+      }
+    });
+
+    child.stderr.on('data', (chunk) => {
+      stderrBytes += chunk.length;
+      stderrTail = appendTail(
+        stderrTail,
+        chunk.toString('utf8'),
+        BOB_STDERR_TAIL_LENGTH
+      );
+    });
+
+    const heartbeat = setInterval(() => {
+      const elapsedSeconds = Math.round((Date.now() - startedAt) / 1000);
+      core.info(
+        `[bob-triage] Bob CLI is still running after ${elapsedSeconds}s; last stage=${lastStage}; stdout bytes=${stdoutBytes}; stderr bytes=${stderrBytes}`
+      );
+    }, BOB_HEARTBEAT_INTERVAL);
+
+    const timeout = setTimeout(() => {
+      timedOut = true;
+      const elapsedSeconds = Math.round((Date.now() - startedAt) / 1000);
+      core.error(
+        `[bob-triage] Bob exceeded its ${elapsedSeconds}s timeout; sending SIGTERM; last stage=${lastStage}; stdout bytes=${stdoutBytes}; stderr bytes=${stderrBytes}`
+      );
+      child.kill('SIGTERM');
+      setTimeout(() => {
+        if (!closed) {
+          core.error(
+            `[bob-triage] Bob did not exit within ${BOB_FORCE_KILL_DELAY / 1000}s of SIGTERM; sending SIGKILL`
+          );
+          child.kill('SIGKILL');
+        }
+      }, BOB_FORCE_KILL_DELAY).unref();
+    }, BOB_TIMEOUT);
+
+    child.on('error', (error) => {
+      clearInterval(heartbeat);
+      clearTimeout(timeout);
+      reject(
+        new Error(
+          `Could not start Bob CLI: ${error.message}; last stage=${lastStage}`
+        )
+      );
+    });
+
+    child.on('close', (code, signal) => {
+      closed = true;
+      clearInterval(heartbeat);
+      clearTimeout(timeout);
+      if (stdoutBuffer) {
+        handleStdoutLine(stdoutBuffer);
+      }
+
+      const elapsedSeconds = Math.round((Date.now() - startedAt) / 1000);
+      core.info(
+        `[bob-triage] Bob process closed after ${elapsedSeconds}s; exit code=${code ?? 'none'}; signal=${signal ?? 'none'}; timed out=${timedOut}; last stage=${lastStage}; stdout bytes=${stdoutBytes}; stderr bytes=${stderrBytes}`
+      );
+
+      const diagnosticTail = redactBobDiagnostic(stderrTail, apiKey);
+      if (diagnosticTail) {
+        const level = timedOut || code !== 0 ? core.error : core.info;
+        level(
+          `[bob-triage] Bob stderr tail (${Buffer.byteLength(diagnosticTail)} bytes after sanitizing):\n${diagnosticTail}`
+        );
+      }
+
+      if (timedOut || code !== 0) {
+        reject(
+          new Error(
+            `Bob CLI ${timedOut ? 'timed out' : 'failed'} after ${elapsedSeconds}s (exit code=${code ?? 'none'}, signal=${signal ?? 'none'}, last stage=${lastStage}, stdout bytes=${stdoutBytes}, stderr bytes=${stderrBytes})`
+          )
+        );
+        return;
+      }
+
+      core.info('[bob-triage] Bob CLI exited successfully');
+      resolve(finalOutputLines.join('\n'));
+    });
+  });
 }
 
 /**
- * Generate and post Bob's preliminary triage for a newly opened formal Bug.
+ * Generate and post Bob's preliminary triage once for a formal Bug. Supporting
+ * both opened and typed handles GitHub applying an issue form's type in a
+ * separate event without producing duplicate inference or comments.
  *
  * @param {object} context
  * @param {object} octokit
@@ -205,7 +478,14 @@ export async function runBobBugTriage(context, octokit, runBob = executeBob) {
     return;
   }
 
+  if (await hasExistingBobTriage(context, octokit)) {
+    return;
+  }
+
   const apiKey = core.getInput('BOB_INFERENCE_API_KEY', { required: true });
+  // Register the inference key with Actions' masker before Bob can emit any
+  // diagnostics. The child-process redaction remains a second safeguard.
+  core.setSecret(apiKey);
   core.info('[bob-triage] Bob API key input is present');
   const workspace = process.env.GITHUB_WORKSPACE || process.cwd();
   const contextDirectory = join(workspace, BOB_CONTEXT_DIRECTORY);
@@ -258,7 +538,17 @@ export async function runBobBugTriage(context, octokit, runBob = executeBob) {
 
 const plugin = {
   name: 'Generate preliminary Bob bug triage',
-  conditions: [events.issues.opened],
+  conditions: [
+    or(events.issues.opened, events.issues.typed),
+    {
+      // Check the formal type before the runner requests Bob's optional token.
+      // Labels are user-editable and are not a trusted substitute for Issue Type.
+      key: 'formal_bug',
+      run(context) {
+        return context.payload.issue?.type?.name === 'Bug';
+      },
+    },
+  ],
   // The runner creates an Octokit client from this input only for this plugin.
   // That makes Bob's managed comment the Bob Automation app's only output.
   githubTokenInput: 'BOB_GITHUB_TOKEN',

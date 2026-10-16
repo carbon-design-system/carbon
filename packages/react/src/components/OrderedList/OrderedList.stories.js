@@ -10,6 +10,30 @@ import OrderedList from '../OrderedList';
 import ListItem from '../ListItem';
 import mdx from './OrderedList.mdx';
 
+const args = {
+  isExpressive: false,
+  native: false,
+  nested: false,
+};
+
+const argTypes = {
+  isExpressive: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  native: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  nested: {
+    control: {
+      type: 'boolean',
+    },
+  },
+};
+
 export default {
   title: 'Components/OrderedList',
   component: OrderedList,
@@ -21,6 +45,8 @@ export default {
       page: mdx,
     },
   },
+  args,
+  argTypes,
 };
 
 export const Default = (args) => (
@@ -41,40 +67,17 @@ export const Default = (args) => (
   </OrderedList>
 );
 
-Default.args = {
-  isExpressive: false,
-  native: false,
-  nested: false,
-};
-
-Default.argTypes = {
-  isExpressive: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  native: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  nested: {
-    control: {
-      type: 'boolean',
-    },
-  },
-};
-
-export const Nested = () => {
+export const Nested = (args) => {
+  const { nested, ...listArgs } = args;
   return (
-    <OrderedList>
+    <OrderedList {...listArgs}>
       <ListItem>
         Ordered List level 1
-        <OrderedList nested>
+        <OrderedList {...listArgs} nested={nested}>
           <ListItem>Ordered List level 2</ListItem>
           <ListItem>
             Ordered List level 2
-            <OrderedList nested>
+            <OrderedList {...listArgs} nested={nested}>
               <ListItem>Ordered List level 3</ListItem>
               <ListItem>Ordered List level 3</ListItem>
             </OrderedList>
@@ -87,15 +90,26 @@ export const Nested = () => {
   );
 };
 
-export const NativeListStyles = () => {
+Nested.args = {
+  nested: true,
+};
+
+Nested.argTypes = {
+  nested: {
+    control: false,
+  },
+};
+
+export const NativeListStyles = (args) => {
+  const { nested, ...listArgs } = args;
   return (
-    <OrderedList native>
+    <OrderedList {...listArgs}>
       <ListItem>Ordered List level 1</ListItem>
       <ListItem>Ordered List level 1</ListItem>
       <ListItem>Ordered List level 1</ListItem>
       <ListItem>
         Ordered List level 1
-        <OrderedList nested>
+        <OrderedList {...listArgs} nested={nested}>
           <ListItem>Ordered List level 2</ListItem>
           <ListItem>Ordered List level 2</ListItem>
           <ListItem>Ordered List level 2</ListItem>
@@ -112,4 +126,18 @@ export const NativeListStyles = () => {
       <ListItem>Ordered List level 1</ListItem>
     </OrderedList>
   );
+};
+
+NativeListStyles.args = {
+  native: true,
+  nested: true,
+};
+
+NativeListStyles.argTypes = {
+  native: {
+    control: false,
+  },
+  nested: {
+    control: false,
+  },
 };

@@ -81,7 +81,6 @@ const items = [
 
 const defaultArgs = {
   ariaLabel: '',
-  autoalign: false,
   direction: DROPDOWN_DIRECTION.BOTTOM,
   disabled: false,
   hideLabel: false,
@@ -172,6 +171,23 @@ const controls = {
   warnText: {
     control: 'text',
     description: `Provide the text that is displayed when the control is in warning state`,
+  },
+};
+
+const skeletonArgs = {
+  hideLabel: false,
+  size: DROPDOWN_SIZE.MEDIUM,
+};
+
+const skeletonControls = {
+  hideLabel: {
+    control: 'boolean',
+    description: 'Specify whether the label should be hidden, or not.',
+  },
+  size: {
+    control: 'select',
+    options: sizes,
+    description: 'Specify the size of the ListBox.',
   },
 };
 
@@ -419,9 +435,13 @@ export const InlineWithLayer = {
 };
 
 export const Skeleton = {
-  argTypes: controls,
-  args: defaultArgs,
-  render: () => html` <cds-dropdown-skeleton></cds-dropdown-skeleton> `,
+  argTypes: skeletonControls,
+  args: skeletonArgs,
+  render: ({ hideLabel, size }) => html`
+    <cds-dropdown-skeleton
+      ?hide-label=${hideLabel}
+      size=${size}></cds-dropdown-skeleton>
+  `,
 };
 
 const content = html`
@@ -590,7 +610,6 @@ export const WithToggletipLabel = {
     ...defaultArgs,
     label: 'placeholder',
     titleText: 'Label',
-    value: 'placeholder',
   },
   render: ({
     ariaLabel,
@@ -598,6 +617,7 @@ export const WithToggletipLabel = {
     open,
     direction,
     disabled,
+    helperText,
     hideLabel,
     invalid,
     invalidText,
@@ -616,6 +636,7 @@ export const WithToggletipLabel = {
       ?open=${open}
       ?disabled="${disabled}"
       ?hide-label=${hideLabel}
+      helper-text=${helperText}
       ?invalid=${invalid}
       ?read-only=${readOnly}
       invalid-text=${invalidText}
@@ -638,7 +659,13 @@ export const WithToggletipLabel = {
           <cds-button size="sm" slot="actions">Button</cds-button>
         </cds-toggletip>
       </span>
-      ${[]}
+      ${items.map(
+        (elem) => html`
+          <cds-dropdown-item ?disabled=${elem.disabled} value="${elem.value}"
+            >${elem.text}</cds-dropdown-item
+          >
+        `
+      )}
     </cds-dropdown>
   `,
 };

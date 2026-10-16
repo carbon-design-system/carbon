@@ -96,9 +96,7 @@ Map {
       "border": {
         "type": "bool",
       },
-      "caret": {
-        "type": "bool",
-      },
+      "caret": [Function],
       "children": {
         "type": "node",
       },
@@ -1598,6 +1596,9 @@ Map {
   "ComposedModal" => {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": {
+      "aria-describedby": {
+        "type": "string",
+      },
       "aria-label": {
         "type": "string",
       },
@@ -2746,6 +2747,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "toolbarLabel": {
+        "type": "string",
+      },
       "zebra": {
         "type": "bool",
       },
@@ -2757,9 +2761,7 @@ Map {
       "allowInput": {
         "type": "bool",
       },
-      "appendTo": {
-        "type": "object",
-      },
+      "appendTo": [Function],
       "children": {
         "type": "node",
       },
@@ -2782,15 +2784,9 @@ Map {
         ],
         "type": "oneOf",
       },
-      "disable": {
-        "type": "array",
-      },
-      "enable": {
-        "type": "array",
-      },
-      "inline": {
-        "type": "bool",
-      },
+      "disable": [Function],
+      "enable": [Function],
+      "inline": [Function],
       "invalid": {
         "type": "bool",
       },
@@ -2911,9 +2907,7 @@ Map {
       "onOpen": {
         "type": "func",
       },
-      "parseDate": {
-        "type": "func",
-      },
+      "parseDate": [Function],
       "prevMonthAriaLabel": {
         "type": "string",
       },
@@ -3569,6 +3563,9 @@ Map {
       "enableTreeviewControllable": {
         "type": "bool",
       },
+      "enableV12Autoalign": {
+        "type": "bool",
+      },
       "enableV12DynamicFloatingStyles": {
         "type": "bool",
       },
@@ -3786,6 +3783,9 @@ Map {
       },
       "pattern": {
         "type": "string",
+      },
+      "required": {
+        "type": "bool",
       },
       "role": [Function],
       "tabIndex": [Function],
@@ -5197,6 +5197,9 @@ Map {
       "rows": {
         "type": "number",
       },
+      "translateWithId": {
+        "type": "func",
+      },
       "value": {
         "args": [
           [
@@ -5281,6 +5284,9 @@ Map {
       },
       "readOnly": {
         "type": "bool",
+      },
+      "translateWithId": {
+        "type": "func",
       },
       "value": {
         "args": [
@@ -7438,6 +7444,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -7500,6 +7507,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -7887,18 +7895,12 @@ Map {
       },
       "pageSizes": {
         "args": [
-          [
-            {
-              "args": [
+          {
+            "args": [
+              [
                 {
-                  "isRequired": true,
                   "type": "number",
                 },
-              ],
-              "type": "arrayOf",
-            },
-            {
-              "args": [
                 {
                   "args": [
                     {
@@ -7912,16 +7914,14 @@ Map {
                       },
                     },
                   ],
-                  "isRequired": true,
                   "type": "shape",
                 },
               ],
-              "type": "arrayOf",
-            },
-          ],
+            ],
+            "type": "oneOfType",
+          },
         ],
-        "isRequired": true,
-        "type": "oneOfType",
+        "type": "arrayOf",
       },
       "pageText": {
         "type": "func",
@@ -8231,9 +8231,7 @@ Map {
       "border": {
         "type": "bool",
       },
-      "caret": {
-        "type": "bool",
-      },
+      "caret": [Function],
       "children": {
         "type": "node",
       },
@@ -8362,6 +8360,7 @@ Map {
     },
   },
   "ProgressStep" => {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": {
       "className": {
         "type": "string",
@@ -8404,6 +8403,7 @@ Map {
         "type": "func",
       },
     },
+    "render": [Function],
   },
   "RadioButton" => {
     "$$typeof": Symbol(react.forward_ref),
@@ -10654,6 +10654,9 @@ Map {
         "type": "oneOf",
       },
       "slug": [Function],
+      "tabIndex": {
+        "type": "number",
+      },
       "title": [Function],
       "type": {
         "args": [
@@ -10686,6 +10689,8 @@ Map {
         "args": [
           [
             "sm",
+            "md",
+            "lg",
           ],
         ],
         "type": "oneOf",
@@ -10774,6 +10779,9 @@ Map {
         "type": "number",
       },
       "slug": [Function],
+      "translateWithId": {
+        "type": "func",
+      },
       "value": {
         "args": [
           [
@@ -10885,6 +10893,9 @@ Map {
         "type": "oneOf",
       },
       "slug": [Function],
+      "translateWithId": {
+        "type": "func",
+      },
       "type": {
         "type": "string",
       },
@@ -11388,9 +11399,7 @@ Map {
       "border": {
         "type": "bool",
       },
-      "caret": {
-        "type": "bool",
-      },
+      "caret": [Function],
       "children": {
         "type": "node",
       },
@@ -11843,6 +11852,9 @@ Map {
       "enableTreeviewControllable": {
         "type": "bool",
       },
+      "enableV12Autoalign": {
+        "type": "bool",
+      },
       "enableV12DynamicFloatingStyles": {
         "type": "bool",
       },
@@ -12147,6 +12159,68 @@ Map {
       },
     },
   },
+  "preview__Card" => {
+    "Card": {
+      "$$typeof": Symbol(react.forward_ref),
+      "Action": [Function],
+      "Actions": [Function],
+      "Body": {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      },
+      "Footer": {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      },
+      "Header": {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      },
+      "HeaderMedia": [Function],
+      "Media": [Function],
+      "Title": {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      },
+      "TitleMedia": {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      },
+      "render": [Function],
+    },
+    "CardAction": {
+      "displayName": "Card.Action",
+    },
+    "CardActions": {
+      "displayName": "Card.Actions",
+    },
+    "CardBody": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "CardFooter": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "CardHeader": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "CardHeaderMedia": {
+      "displayName": "Card.HeaderMedia",
+    },
+    "CardMedia": {
+      "displayName": "Card.Media",
+    },
+    "CardTitle": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "CardTitleMedia": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+  },
   "preview__ChatButton" => {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": {
@@ -12219,6 +12293,16 @@ Map {
         "type": "oneOf",
       },
     },
+  },
+  "preview__DatePicker" => {
+    "DatePicker": {
+      "displayName": "DatePicker",
+    },
+    "DatePickerInput": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "DatePickerSkeleton": {},
   },
   "preview__Dialog" => {
     "Dialog": {
@@ -13339,6 +13423,9 @@ Map {
       "rows": {
         "type": "number",
       },
+      "translateWithId": {
+        "type": "func",
+      },
       "value": {
         "args": [
           [
@@ -13423,6 +13510,9 @@ Map {
       },
       "readOnly": {
         "type": "bool",
+      },
+      "translateWithId": {
+        "type": "func",
       },
       "value": {
         "args": [
@@ -13967,9 +14057,7 @@ Map {
       "border": {
         "type": "bool",
       },
-      "caret": {
-        "type": "bool",
-      },
+      "caret": [Function],
       "children": {
         "type": "node",
       },
@@ -14076,6 +14164,9 @@ Map {
         "type": "bool",
       },
       "enableTreeviewControllable": {
+        "type": "bool",
+      },
+      "enableV12Autoalign": {
         "type": "bool",
       },
       "enableV12DynamicFloatingStyles": {
@@ -15381,6 +15472,9 @@ Map {
       "rows": {
         "type": "number",
       },
+      "translateWithId": {
+        "type": "func",
+      },
       "value": {
         "args": [
           [
@@ -15465,6 +15559,9 @@ Map {
       },
       "readOnly": {
         "type": "bool",
+      },
+      "translateWithId": {
+        "type": "func",
       },
       "value": {
         "args": [
@@ -16009,9 +16106,7 @@ Map {
       "border": {
         "type": "bool",
       },
-      "caret": {
-        "type": "bool",
-      },
+      "caret": [Function],
       "children": {
         "type": "node",
       },

@@ -1,0 +1,222 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:math';
+@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/type';
+
+// Container that the overflow handler observes.
+// Width/height constraints are applied via modifier classes.
+.overflow-handler-container {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  box-sizing: border-box;
+  max-inline-size: 100%;
+  background: theme.$highlight;
+}
+
+.overflow-handler-container [data-hidden]:not([data-fixed]) {
+  display: none;
+}
+
+.overflow-handler-container::before,
+.overflow-handler-container::after {
+  content: none;
+}
+
+.overflow-handler-show-gap {
+  background: color-mix(in srgb, #{theme.$support-warning} 35%, transparent);
+}
+
+// Leftover room after items. Negative margin cancels the flex gap before
+// this pseudo so gap color only appears between real items.
+.overflow-handler-show-gap::after {
+  flex: 1 1 auto;
+  min-block-size: 0;
+  min-inline-size: 0;
+  background: theme.$highlight;
+  content: '';
+  pointer-events: none;
+}
+
+.overflow-handler-show-offset-value::before {
+  position: absolute;
+  z-index: 0;
+  background: theme.$support-info;
+  content: '';
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.overflow-handler-container-horizontal {
+  flex-direction: row;
+  resize: horizontal;
+  inline-size: 100%;
+}
+
+.overflow-handler-container-horizontal.overflow-handler-show-offset-value::before {
+  inset-block: 0;
+  inset-inline-end: 0;
+  inline-size: var(--overflow-handler-offset-value, 0);
+}
+
+.overflow-handler-container-horizontal.overflow-handler-show-gap::after {
+  margin-inline-start: calc(-1 * var(--overflow-handler-gap, 0));
+}
+
+.overflow-handler-container-vertical {
+  flex-direction: column;
+  resize: vertical;
+  block-size: 14rem;
+  inline-size: 12.5rem;
+}
+
+.overflow-handler-container-vertical.overflow-handler-show-offset-value::before {
+  inset-block-end: 0;
+  inset-inline: 0;
+  block-size: var(--overflow-handler-offset-value, 0);
+}
+
+.overflow-handler-container-vertical.overflow-handler-show-gap::after {
+  margin-block-start: calc(-1 * var(--overflow-handler-gap, 0));
+}
+
+// Individual items rendered inside the container.
+.overflow-handler-item {
+  @include type.type-style('code-01');
+
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  background: theme.$layer-accent;
+  white-space: nowrap;
+}
+
+.overflow-handler-container-horizontal .overflow-handler-item {
+  padding: 0 spacing.$spacing-04;
+  block-size: spacing.$spacing-07;
+  line-height: spacing.$spacing-07;
+}
+
+.overflow-handler-container-vertical .overflow-handler-item {
+  padding: math.div(spacing.$spacing-04, 2) spacing.$spacing-04;
+  inline-size: 100%;
+}
+
+// Fixed (always-visible) item variant.
+.overflow-handler-item-fixed {
+  background: theme.$support-success;
+  color: theme.$text-on-color;
+}
+
+// The reserved-space offset element ("+N more" indicator).
+.overflow-handler-offset {
+  @include type.type-style('code-01');
+
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  margin: 0;
+  border: 0;
+  background: var(--cds-button-secondary);
+  color: theme.$text-on-color;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.overflow-handler-container-horizontal .overflow-handler-offset {
+  padding: 0 spacing.$spacing-04;
+  block-size: spacing.$spacing-07;
+  line-height: spacing.$spacing-07;
+}
+
+.overflow-handler-container-vertical .overflow-handler-offset {
+  padding: math.div(spacing.$spacing-04, 2) spacing.$spacing-04;
+  inline-size: 100%;
+}
+
+// Legend row beneath the container.
+.overflow-handler-legend {
+  @include type.type-style('code-01');
+
+  display: flex;
+  flex-wrap: wrap;
+  margin-block-start: spacing.$spacing-04;
+  gap: spacing.$spacing-05;
+  color: theme.$text-secondary;
+}
+
+.overflow-handler-legend-offset {
+  display: none;
+}
+
+.overflow-handler-demo:has([data-offset]:not([data-hidden]))
+  .overflow-handler-legend-offset {
+  display: revert;
+}
+
+// Colour swatches used in the legend.
+.overflow-handler-swatch {
+  display: inline-block;
+  flex-shrink: 0;
+  margin-inline-end: math.div(spacing.$spacing-04, 2);
+  block-size: spacing.$spacing-04;
+  inline-size: spacing.$spacing-04;
+  vertical-align: middle;
+}
+
+.overflow-handler-swatch-regular {
+  background: theme.$layer-accent;
+}
+
+.overflow-handler-swatch-fixed {
+  background: theme.$support-success;
+}
+
+.overflow-handler-swatch-offset {
+  background: var(--cds-button-secondary);
+}
+
+.overflow-handler-swatch-available {
+  background: theme.$highlight;
+}
+
+.overflow-handler-swatch-gap {
+  background: theme.$support-warning;
+  opacity: 0.35;
+}
+
+.overflow-handler-swatch-offset-value {
+  background: theme.$support-info;
+  opacity: 0.6;
+}
+
+// Live log output beneath the legend.
+.overflow-handler-log {
+  @include type.type-style('code-01');
+
+  margin-block-start: spacing.$spacing-04;
+  padding: 0;
+  background: none;
+  color: theme.$text-secondary;
+  white-space: pre-wrap;
+}
+
+// Wrapper for a single duplicated instance.
+.overflow-handler-instance {
+  margin-block-start: spacing.$spacing-06;
+  padding-block-start: spacing.$spacing-06;
+  border-block-start: 1px solid theme.$border-subtle;
+}
+
+.overflow-handler-instance:first-of-type {
+  margin-block-start: spacing.$spacing-04;
+  padding-block-start: 0;
+  border-block-start: none;
+}

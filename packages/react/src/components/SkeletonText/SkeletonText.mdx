@@ -27,7 +27,8 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(SkeletonTextStories.Default),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: SkeletonTextStories.Default }),
     },
   ]}
 />

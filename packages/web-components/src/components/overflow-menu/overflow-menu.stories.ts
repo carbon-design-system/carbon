@@ -6,9 +6,11 @@
  */
 
 import { html } from 'lit';
+import { enabled } from '@carbon/feature-flags';
 import { OVERFLOW_MENU_SIZE } from './overflow-menu';
 import './overflow-menu-body';
 import './overflow-menu-item';
+import '../menu/index';
 import { prefix } from '../../globals/settings';
 import OverflowMenuVertical16 from '@carbon/icons/es/overflow-menu--vertical/16.js';
 import Filter16 from '@carbon/icons/es/filter/16.js';
@@ -56,57 +58,74 @@ const argTypes = {
   },
 };
 
+const defaultMenu = html`
+  <cds-overflow-menu-item>Stop app</cds-overflow-menu-item>
+  <cds-overflow-menu-item>Restart app</cds-overflow-menu-item>
+  <cds-overflow-menu-item>Rename app</cds-overflow-menu-item>
+  <cds-overflow-menu-item disabled>Clone and move app</cds-overflow-menu-item>
+  <cds-overflow-menu-item>Edit routes and access</cds-overflow-menu-item>
+  <cds-overflow-menu-item divider danger>Delete app</cds-overflow-menu-item>
+`;
+
+const filterMenu = html`
+  <cds-overflow-menu-item>Filter A</cds-overflow-menu-item>
+  <cds-overflow-menu-item>Filter B</cds-overflow-menu-item>
+`;
+
+const filterMenuV12 = html`
+  <cds-menu>
+    <cds-menu-item label="Filter A"></cds-menu-item>
+    <cds-menu-item label="Filter B"></cds-menu-item>
+  </cds-menu>
+`;
+
+const renderOverflowMenu = (args, icon, menu = defaultMenu) => {
+  const { flipped, iconDescription, open, index, size } = args ?? {};
+  return html`
+    <cds-overflow-menu ?open="${open}" size="${size}" index=${index}>
+      ${iconLoader(icon, {
+        class: `${prefix}--overflow-menu__icon`,
+        slot: 'icon',
+      })}
+      <span slot="tooltip-content"> ${iconDescription} </span>
+      <cds-overflow-menu-body ?flipped="${flipped}">
+        ${menu}
+      </cds-overflow-menu-body>
+    </cds-overflow-menu>
+  `;
+};
+
+const renderV12OverflowMenu = (args, icon, menu) => {
+  const { iconDescription, open, size } = args ?? {};
+  return html`
+    <cds-overflow-menu
+      ?open="${open}"
+      size="${size}"
+      label="${iconDescription}">
+      ${iconLoader(icon, {
+        class: `${prefix}--overflow-menu__icon`,
+        slot: 'icon',
+      })}
+      ${menu}
+    </cds-overflow-menu>
+  `;
+};
+
 export const Default = {
-  args,
-  argTypes,
-  render: (args) => {
-    const { flipped, iconDescription, open, index, size } = args ?? {};
-    return html`
-      <cds-overflow-menu ?open="${open}" size="${size}" index=${index}>
-        ${iconLoader(OverflowMenuVertical16, {
-          class: `${prefix}--overflow-menu__icon`,
-          slot: 'icon',
-        })}
-        <span slot="tooltip-content"> ${iconDescription} </span>
-        <cds-overflow-menu-body ?flipped="${flipped}">
-          <cds-overflow-menu-item>Stop app</cds-overflow-menu-item>
-          <cds-overflow-menu-item>Restart app</cds-overflow-menu-item>
-          <cds-overflow-menu-item>Rename app</cds-overflow-menu-item>
-          <cds-overflow-menu-item disabled
-            >Clone and move app</cds-overflow-menu-item
-          >
-          <cds-overflow-menu-item
-            >Edit routes and access</cds-overflow-menu-item
-          >
-          <cds-overflow-menu-item divider danger>
-            Delete app
-          </cds-overflow-menu-item>
-        </cds-overflow-menu-body>
-      </cds-overflow-menu>
-    `;
-  },
+  render: (args) => renderOverflowMenu(args, OverflowMenuVertical16),
 };
 
 export const RenderCustomIcon = {
-  render: () => {
-    return html`
-      <cds-overflow-menu>
-        ${iconLoader(Filter16, {
-          class: `${prefix}--overflow-menu__icon`,
-          slot: 'icon',
-        })}
-        <span slot="tooltip-content">Options</span>
-        <cds-overflow-menu-body>
-          <cds-overflow-menu-item>Filter A</cds-overflow-menu-item>
-          <cds-overflow-menu-item>Filter B</cds-overflow-menu-item>
-        </cds-overflow-menu-body>
-      </cds-overflow-menu>
-    `;
-  },
+  render: (args) =>
+    enabled('enable-v12-overflowmenu')
+      ? renderV12OverflowMenu(args, Filter16, filterMenuV12)
+      : renderOverflowMenu(args, Filter16, filterMenu),
 };
 
 const meta = {
   title: 'Components/OverflowMenu',
+  args,
+  argTypes,
 };
 
 export default meta;

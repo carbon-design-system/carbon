@@ -425,7 +425,7 @@ describe('cds-multi-select', function () {
       filterInput.dispatchEvent(new Event('input', { bubbles: true }));
       await el.updateComplete;
 
-      // Clear buttton should render with tabindex="-1"
+      // Clear button should render with tabindex="-1"
       const clearButton = el.shadowRoot.querySelector('#clear-button');
       expect(clearButton).to.exist;
       expect(clearButton.getAttribute('tabindex')).to.equal('-1');
@@ -1727,9 +1727,14 @@ describe('cds-multi-select', function () {
 
       await el.updateComplete;
 
-      const clearButton = el.shadowRoot.querySelector('#selection-button');
+      const clearButton = el.shadowRoot.querySelector(
+        '#selection-button .cds--tag__close-icon'
+      );
       expect(clearButton).to.exist;
       expect(clearButton.getAttribute('title')).to.equal(
+        'Clear all selections'
+      );
+      expect(clearButton.getAttribute('aria-label')).to.equal(
         'Clear all selections'
       );
     });

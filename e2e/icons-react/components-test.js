@@ -11,12 +11,13 @@
 
 const { Metadata } = require('@carbon/icon-build-helpers');
 const path = require('path');
+const { verifyIconPackage } = require('../test-utils/icon-package');
 
 const PACKAGE_DIR = path.resolve(__dirname, '../../packages/icons-react');
 const ICONS_PACKAGE_DIR = path.resolve(__dirname, '../../packages/icons');
 
 describe('@carbon/icons-react', () => {
-  let metadata;
+  let failures;
 
   beforeAll(async () => {
     const mock = jest.spyOn(console, 'error').mockImplementation((error) => {
@@ -27,7 +28,7 @@ describe('@carbon/icons-react', () => {
       }
     });
 
-    metadata = await Metadata.load({
+    const metadata = await Metadata.load({
       input: {
         svg: path.join(ICONS_PACKAGE_DIR, 'src/svg'),
         extensions: ICONS_PACKAGE_DIR,
@@ -42,27 +43,24 @@ describe('@carbon/icons-react', () => {
     });
 
     mock.mockRestore();
+
+    failures = verifyIconPackage({
+      packageName: '@carbon/icons-react',
+      packageDir: PACKAGE_DIR,
+      entries: metadata.icons.map(({ moduleInfo }) => ({
+        name: moduleInfo.global,
+        filepath: moduleInfo.filepath,
+      })),
+    });
   });
 
-  it('should export each SVG asset', async () => {
-    const CarbonIconsReactCommonJS = require('@carbon/icons-react');
-    const CarbonIconsReactESM = await import('@carbon/icons-react');
-
-    for (const { moduleInfo } of metadata.icons) {
-      expect(CarbonIconsReactCommonJS[moduleInfo.global]).toBeDefined();
-      expect(CarbonIconsReactESM[moduleInfo.global]).toBeDefined();
-    }
+  it('should export each SVG asset', () => {
+    expect(failures.entryPoint.sample).toEqual([]);
+    expect(failures.entryPoint.total).toBe(0);
   });
 
-  it('should export each SVG asset as a direct path', async () => {
-    for (const { moduleInfo } of metadata.icons) {
-      const esm = path.join(PACKAGE_DIR, 'es', moduleInfo.filepath);
-      const commonjs = path.join(PACKAGE_DIR, 'lib', moduleInfo.filepath);
-
-      expect(() => {
-        require(commonjs);
-      }).not.toThrow();
-      await expect(import(esm)).resolves.toBeDefined();
-    }
+  it('should export each SVG asset as a direct path', () => {
+    expect(failures.directPath.sample).toEqual([]);
+    expect(failures.directPath.total).toBe(0);
   });
 });

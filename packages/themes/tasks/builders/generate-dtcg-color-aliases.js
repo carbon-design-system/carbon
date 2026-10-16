@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -22,7 +22,7 @@
  *     }
  *   }
  *
- * The $value shape matches what white.json / g10.json use:
+ * The $value shape matches what themes.json uses:
  *   - Solid colors:  { colorSpace, components (0–1 floats), hex }
  *
  * All tokens in @carbon/colors are fully opaque hex values — there are no
@@ -73,7 +73,7 @@ function hexToComponents(hex) {
 
 /**
  * Build the DTCG $value object for a solid (fully opaque) color, matching the
- * shape used throughout white.json / g10.json etc.
+ * shape used throughout themes.json.
  *
  * @param {string} hex
  * @returns {{ colorSpace: string, components: number[], hex: string }}
@@ -157,6 +157,12 @@ function generateDTCGColorAliases() {
       $type: 'color',
       $value: solidColorValue(value),
       $description: `${family} ${scale}`,
+      // Mark every palette entry as a reference token so Style Dictionary
+      // (and the carbon/scss-themes format) can filter them out of theme-map
+      // output — palette tokens are inputs to alias resolution, not outputs.
+      $extensions: {
+        'org.carbon': { role: 'reference' },
+      },
     };
   }
 

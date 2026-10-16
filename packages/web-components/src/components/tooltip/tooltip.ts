@@ -31,10 +31,11 @@ class CDSTooltip extends HostListenerMixin(CDSPopover) {
   align = 'top';
 
   /**
-   * Specify whether a auto align functionality should be applied
+   * Specify whether auto-align is enabled. Defaults to `true` when
+   * `enable-v12-autoalign` is enabled, and to `false` otherwise.
    */
   @property({ type: Boolean, reflect: true })
-  autoalign = false;
+  autoalign?: boolean;
 
   /**
    * `true` if this tooltip is in a data table row
@@ -242,7 +243,8 @@ class CDSTooltip extends HostListenerMixin(CDSPopover) {
 
     ['align', 'caret', 'autoalign', 'dropShadow'].forEach((name) => {
       if (changedProperties.has(name)) {
-        const { [name as keyof CDSTooltip]: value } = this;
+        const value =
+          name === 'caret' ? this._caret : this[name as keyof CDSTooltip];
         (toolTipContent as CDSTooltipContent)[name] = value;
       }
     });

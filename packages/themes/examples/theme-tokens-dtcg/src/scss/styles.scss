@@ -1,0 +1,436 @@
+//
+// Copyright IBM Corp. 2018, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Reset
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html,
+body,
+#__next {
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 1rem;
+  font-family: 'IBM Plex Mono', monospace;
+  background: #fff;
+  color: #161616;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+table {
+  text-align: left;
+  vertical-align: middle;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table,
+tr,
+td,
+th {
+  border: 1px solid #e0e0e0;
+}
+
+td,
+th {
+  padding: 0.75rem 1rem;
+  vertical-align: middle;
+}
+
+th {
+  position: sticky;
+  top: var(--header-height);
+  background: #f4f4f4;
+  font-weight: 600;
+  z-index: 10;
+}
+
+[id] {
+  scroll-margin-top: calc(var(--header-height) + 4rem);
+}
+
+:root {
+  --header-height: 5.5rem;
+}
+
+// ── Header ──────────────────────────────────────────────────────────────────
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 0 1.5rem;
+  height: var(--header-height);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.header-title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  white-space: nowrap;
+}
+
+.header-title p {
+  margin: 0;
+  font-size: 0.75rem;
+  color: #6f6f6f;
+}
+
+.controls {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 160px;
+}
+
+.control-group label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #525252;
+}
+
+.control-group select {
+  font-family: inherit;
+  font-size: 0.875rem;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid #8d8d8d;
+  background: #fff;
+  color: #161616;
+  cursor: pointer;
+  min-width: 140px;
+}
+
+.control-group select:focus {
+  outline: 2px solid #0f62fe;
+  outline-offset: -2px;
+}
+
+.reset-btn {
+  font-family: inherit;
+  font-size: 0.8125rem;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid #da1e28;
+  background: transparent;
+  color: #da1e28;
+  cursor: pointer;
+  align-self: flex-end;
+}
+
+.reset-btn:hover {
+  background: #da1e28;
+  color: #fff;
+}
+
+// ── Fit to screen button ──────────────────────────────────────────────────────
+
+.fit-btn {
+  position: fixed;
+  inset-block-end: 1.5rem;
+  inset-inline-end: 1.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1.25rem;
+  line-height: 1;
+  font-family: inherit;
+  border: 1px solid #0f62fe;
+  background: #fff;
+  color: #0f62fe;
+  cursor: pointer;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+
+  &:hover {
+    background: #0f62fe;
+    color: #fff;
+  }
+}
+
+// ── Content ──────────────────────────────────────────────────────────────────
+
+.content {
+  padding-top: calc(var(--header-height) + 1rem);
+  padding-bottom: 2rem;
+}
+
+// ── Color swatch ─────────────────────────────────────────────────────────────
+
+.token-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.color-swatch {
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: var(--swatch-color);
+  outline: 1px solid #8a3ffc;
+}
+
+.token-value-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  font-size: 0.8125rem;
+}
+
+.token-ref {
+  color: #161616;
+}
+
+.token-ref--fallback {
+  color: #6f6f6f;
+  font-style: italic;
+}
+
+.token-hex {
+  color: #6f6f6f;
+  font-size: 0.75rem;
+}
+
+// ── Token name cell ───────────────────────────────────────────────────────────
+
+.token-name a {
+  color: #0f62fe;
+  text-decoration: none;
+  font-size: 0.875rem;
+}
+
+.token-name a:hover {
+  text-decoration: underline;
+}
+
+// ── Description / Type / Properties cells ────────────────────────────────────
+
+.description-cell {
+  font-size: 0.8125rem;
+  color: #525252;
+  max-width: 280px;
+}
+
+.type-cell {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #0043ce;
+}
+
+.properties-cell ul {
+  margin: 0;
+  padding: 0;
+}
+
+.properties-cell li {
+  list-style: none;
+  font-size: 0.8125rem;
+  color: #525252;
+}
+
+// ── Utilities ────────────────────────────────────────────────────────────────
+
+.no-results {
+  padding: 2rem;
+  text-align: center;
+  color: #6f6f6f;
+  font-size: 0.875rem;
+}
+
+// ── Nav link ─────────────────────────────────────────────────────────────────
+
+.nav-link {
+  font-family: inherit;
+  font-size: 0.8125rem;
+  color: #0f62fe;
+  text-decoration: none;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid #0f62fe;
+  white-space: nowrap;
+  align-self: flex-end;
+
+  &:hover {
+    background: #0f62fe;
+    color: #fff;
+  }
+}
+
+// ── Tree ─────────────────────────────────────────────────────────────────────
+
+.tree-content {
+  max-width: 860px;
+}
+
+.tree-category {
+  border: 1px solid #e0e0e0;
+  margin-bottom: 0.5rem;
+}
+
+.tree-category-toggle,
+.tree-group-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 0.75rem 1rem;
+
+  &:hover {
+    background: #f4f4f4;
+  }
+}
+
+.tree-category-toggle {
+  background: #f4f4f4;
+  font-size: 0.9375rem;
+  font-weight: 600;
+
+  &:hover {
+    background: #e8e8e8;
+  }
+
+  &.tree-category-toggle--open {
+    background: #e8e8e8;
+    border-bottom: 1px solid #e0e0e0;
+  }
+}
+
+.tree-group-toggle {
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem 0.5rem 2rem;
+  border-bottom: 1px solid #f4f4f4;
+
+  &.tree-group-toggle--open {
+    border-bottom: 1px solid #e0e0e0;
+  }
+}
+
+.tree-chevron {
+  font-size: 0.75rem;
+  width: 1rem;
+  flex-shrink: 0;
+  color: #525252;
+}
+
+.tree-category-name {
+  flex: 1;
+  color: #161616;
+}
+
+.tree-group-name {
+  flex: 1;
+  color: #393939;
+}
+
+.tree-group-count {
+  font-size: 0.75rem;
+  color: #6f6f6f;
+  font-weight: 400;
+  background: #e0e0e0;
+  padding: 0.125rem 0.5rem;
+  border-radius: 1rem;
+}
+
+.tree-category-children {
+  padding: 0.25rem 0;
+}
+
+.tree-group-tokens {
+  padding: 0.25rem 0;
+  border-bottom: 1px solid #f4f4f4;
+}
+
+// ── Token leaf ────────────────────────────────────────────────────────────────
+
+.tree-token {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.4rem 1rem 0.4rem 3rem;
+  border-bottom: 1px solid #f9f9f9;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background: #f9f9f9;
+  }
+}
+
+.tree-swatch {
+  flex-shrink: 0;
+  width: 1.75rem;
+  height: 1.75rem;
+  outline: 1px solid #8a3ffc;
+}
+
+.tree-token-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.075rem;
+}
+
+.tree-token-name {
+  font-size: 0.8125rem;
+  color: #0f62fe;
+}
+
+.tree-alias {
+  font-size: 0.75rem;
+  color: #525252;
+}
+
+.tree-hex {
+  font-size: 0.6875rem;
+  color: #8d8d8d;
+}

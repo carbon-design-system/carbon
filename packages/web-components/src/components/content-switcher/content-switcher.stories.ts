@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -15,6 +15,7 @@ import { withLayers } from '../../../.storybook/decorators/with-layers';
 
 import { CONTENT_SWITCHER_SIZE } from './content-switcher';
 import { html } from 'lit';
+import { ifDefined } from 'lit/directives/if-defined.js';
 
 const forwardEventDetail = (handler) => (event) => {
   handler?.(event.detail);
@@ -26,7 +27,7 @@ const sizes = {
   [`Large (${CONTENT_SWITCHER_SIZE.LARGE})`]: CONTENT_SWITCHER_SIZE.LARGE,
 };
 
-const args = {
+const sharedArgs = {
   size: null,
   selectionMode: 'automatic',
   selectedIndex: 0,
@@ -36,20 +37,34 @@ const args = {
 
 const argTypes = {
   selectedIndex: {
-    control: 'number',
+    control: {
+      type: 'number',
+      min: 0,
+      max: 2,
+      step: 1,
+    },
     description: 'Specify a selected index for the initially selected content',
+    table: {
+      defaultValue: { summary: 0 },
+    },
   },
   selectionMode: {
     control: 'radio',
     options: ['automatic', 'manual'],
     description:
       'Choose whether or not to automatically change selection on focus when left/right arrow pressed. Defaults to `automatic`',
+    table: {
+      defaultValue: { summary: '"automatic"' },
+    },
   },
   size: {
     control: 'radio',
     options: sizes,
     description:
       'Specify the size of the Content Switcher. Currently supports either sm, md (default) or lg as an option.',
+    table: {
+      defaultValue: { summary: '"md"' },
+    },
   },
   onBeforeSelect: {
     action: `${prefix}-content-switcher-beingselected`,
@@ -60,16 +75,29 @@ const argTypes = {
   lowContrast: {
     control: 'boolean',
     description: '`true` to use the low contrast version.',
+    table: {
+      defaultValue: { summary: false },
+    },
   },
   disabled: {
     control: 'boolean',
     description: 'Specify disabled attribute to `true` to disable a button.',
+    table: {
+      defaultValue: { summary: false },
+    },
+  },
+};
+
+const sharedParameters = {
+  controls: {
+    include: Object.keys(sharedArgs),
   },
 };
 
 export const Default = {
-  args,
+  args: { ...sharedArgs },
   argTypes,
+  parameters: sharedParameters,
   render: ({
     onBeforeSelect,
     onChange,
@@ -82,8 +110,8 @@ export const Default = {
     return html`
       <cds-content-switcher
         selection-mode="${selectionMode}"
-        selected-index="${selectedIndex}"
-        size="${size}"
+        .selectedIndex=${selectedIndex}
+        size=${ifDefined(size ?? undefined)}
         ?low-contrast="${lowContrast}"
         @cds-content-switcher-beingselected="${forwardEventDetail(
           onBeforeSelect
@@ -92,22 +120,19 @@ export const Default = {
         <cds-content-switcher-item
           value="all"
           name="one"
-          ?disabled="${disabled}"
-          ?low-contrast="${lowContrast}">
+          ?disabled="${disabled}">
           First section
         </cds-content-switcher-item>
         <cds-content-switcher-item
           value="cloudFoundry"
           name="two"
-          ?disabled="${disabled}"
-          ?low-contrast="${lowContrast}">
+          ?disabled="${disabled}">
           Second section
         </cds-content-switcher-item>
         <cds-content-switcher-item
           value="staging"
           name="three"
-          ?disabled="${disabled}"
-          ?low-contrast="${lowContrast}">
+          ?disabled="${disabled}">
           Third section
         </cds-content-switcher-item>
       </cds-content-switcher>
@@ -116,8 +141,9 @@ export const Default = {
 };
 
 export const IconOnly = {
-  args,
+  args: { ...sharedArgs },
   argTypes,
+  parameters: sharedParameters,
   render: ({
     onBeforeSelect,
     onChange,
@@ -128,35 +154,26 @@ export const IconOnly = {
     disabled,
   }) => html`
     <cds-content-switcher
-      size="${size}"
+      size=${ifDefined(size ?? undefined)}
       selection-mode="${selectionMode}"
-      selected-index="${selectedIndex}"
+      .selectedIndex=${selectedIndex}
       ?low-contrast="${lowContrast}"
       @cds-content-switcher-beingselected="${forwardEventDetail(
         onBeforeSelect
       )}"
       @cds-content-switcher-selected="${forwardEventDetail(onChange)}">
-      <cds-content-switcher-item
-        icon
-        value="all"
-        ?disabled="${disabled}"
-        ?low-contrast="${lowContrast}">
+      <cds-content-switcher-item icon value="all" ?disabled="${disabled}">
         ${iconLoader(TableOfContents16)}
         <span slot="tooltip-content">Table of Contents</span>
       </cds-content-switcher-item>
       <cds-content-switcher-item
         icon
         value="cloudFoundry"
-        ?disabled="${disabled}"
-        ?low-contrast="${lowContrast}">
+        ?disabled="${disabled}">
         ${iconLoader(Workspace16)}
         <span slot="tooltip-content">Workspace Test</span>
       </cds-content-switcher-item>
-      <cds-content-switcher-item
-        icon
-        value="staging"
-        ?disabled="${disabled}"
-        ?low-contrast="${lowContrast}">
+      <cds-content-switcher-item icon value="staging" ?disabled="${disabled}">
         ${iconLoader(ViewMode2_16)}
         <span slot="tooltip-content">View Mode</span>
       </cds-content-switcher-item>
@@ -165,10 +182,11 @@ export const IconOnly = {
 };
 
 export const IconOnlyWithLayer = {
-  args,
+  args: { ...sharedArgs },
   argTypes,
   decorators: [withLayers],
   parameters: {
+    ...sharedParameters,
     layout: 'fullscreen',
   },
   render: ({
@@ -181,35 +199,26 @@ export const IconOnlyWithLayer = {
     disabled,
   }) => html`
     <cds-content-switcher
-      size="${size}"
+      size=${ifDefined(size ?? undefined)}
       selection-mode="${selectionMode}"
-      selected-index="${selectedIndex}"
+      .selectedIndex=${selectedIndex}
       ?low-contrast="${lowContrast}"
       @cds-content-switcher-beingselected="${forwardEventDetail(
         onBeforeSelect
       )}"
       @cds-content-switcher-selected="${forwardEventDetail(onChange)}">
-      <cds-content-switcher-item
-        icon
-        value="all"
-        ?disabled="${disabled}"
-        ?low-contrast="${lowContrast}">
+      <cds-content-switcher-item icon value="all" ?disabled="${disabled}">
         ${iconLoader(TableOfContents16)}
         <span slot="tooltip-content">Table of Contents</span>
       </cds-content-switcher-item>
       <cds-content-switcher-item
         icon
         value="cloudFoundry"
-        ?disabled="${disabled}"
-        ?low-contrast="${lowContrast}">
+        ?disabled="${disabled}">
         ${iconLoader(Workspace16)}
         <span slot="tooltip-content">Workspace Test</span>
       </cds-content-switcher-item>
-      <cds-content-switcher-item
-        icon
-        value="staging"
-        ?disabled="${disabled}"
-        ?low-contrast="${lowContrast}">
+      <cds-content-switcher-item icon value="staging" ?disabled="${disabled}">
         ${iconLoader(ViewMode2_16)}
         <span slot="tooltip-content">View Mode</span>
       </cds-content-switcher-item>
@@ -219,10 +228,20 @@ export const IconOnlyWithLayer = {
 
 export const LowContrast = {
   args: {
-    ...args,
+    ...sharedArgs,
     lowContrast: true,
   },
-  argTypes,
+  argTypes: {
+    ...argTypes,
+    lowContrast: {
+      ...argTypes.lowContrast,
+      table: {
+        ...argTypes.lowContrast.table,
+        readonly: true,
+      },
+    },
+  },
+  parameters: sharedParameters,
   render: ({
     onBeforeSelect,
     onChange,
@@ -235,8 +254,8 @@ export const LowContrast = {
     return html`
       <cds-content-switcher
         selection-mode="${selectionMode}"
-        selected-index="${selectedIndex}"
-        size="${size}"
+        .selectedIndex=${selectedIndex}
+        size=${ifDefined(size ?? undefined)}
         ?low-contrast="${lowContrast}"
         @cds-content-switcher-beingselected="${forwardEventDetail(
           onBeforeSelect
@@ -244,7 +263,6 @@ export const LowContrast = {
         @cds-content-switcher-selected="${forwardEventDetail(onChange)}">
         <cds-content-switcher-item
           ?disabled="${disabled}"
-          ?low-contrast="${lowContrast}"
           value="all"
           name="one">
           First section
@@ -252,14 +270,12 @@ export const LowContrast = {
         <cds-content-switcher-item
           value="cloudFoundry"
           name="two"
-          ?disabled="${disabled}"
-          ?low-contrast="${lowContrast}">
+          ?disabled="${disabled}">
           Second section
         </cds-content-switcher-item>
         <cds-content-switcher-item
           name="three"
           ?disabled="${disabled}"
-          ?low-contrast="${lowContrast}"
           value="staging">
           Third section
         </cds-content-switcher-item>
@@ -270,10 +286,20 @@ export const LowContrast = {
 
 export const lowContrastIconOnly = {
   args: {
-    ...args,
+    ...sharedArgs,
     lowContrast: true,
   },
-  argTypes,
+  argTypes: {
+    ...argTypes,
+    lowContrast: {
+      ...argTypes.lowContrast,
+      table: {
+        ...argTypes.lowContrast.table,
+        readonly: true,
+      },
+    },
+  },
+  parameters: sharedParameters,
   render: ({
     onBeforeSelect,
     onChange,
@@ -284,35 +310,26 @@ export const lowContrastIconOnly = {
     disabled,
   }) => html`
     <cds-content-switcher
-      size="${size}"
+      size=${ifDefined(size ?? undefined)}
       selection-mode="${selectionMode}"
-      selected-index="${selectedIndex}"
+      .selectedIndex=${selectedIndex}
       ?low-contrast="${lowContrast}"
       @cds-content-switcher-beingselected="${forwardEventDetail(
         onBeforeSelect
       )}"
       @cds-content-switcher-selected="${forwardEventDetail(onChange)}">
-      <cds-content-switcher-item
-        icon
-        value="all"
-        ?disabled="${disabled}"
-        ?low-contrast="${lowContrast}">
+      <cds-content-switcher-item icon value="all" ?disabled="${disabled}">
         ${iconLoader(TableOfContents16)}
         <span slot="tooltip-content">Table of Contents</span>
       </cds-content-switcher-item>
       <cds-content-switcher-item
         icon
         value="cloudFoundry"
-        ?disabled="${disabled}"
-        ?low-contrast="${lowContrast}">
+        ?disabled="${disabled}">
         ${iconLoader(Workspace16)}
         <span slot="tooltip-content">Workspace Test</span>
       </cds-content-switcher-item>
-      <cds-content-switcher-item
-        icon
-        value="staging"
-        ?disabled="${disabled}"
-        ?low-contrast="${lowContrast}">
+      <cds-content-switcher-item icon value="staging" ?disabled="${disabled}">
         ${iconLoader(ViewMode2_16)}
         <span slot="tooltip-content">View Mode</span>
       </cds-content-switcher-item>
@@ -321,10 +338,11 @@ export const lowContrastIconOnly = {
 };
 
 export const WithLayer = {
-  args,
+  args: { ...sharedArgs },
   argTypes,
   decorators: [withLayers],
   parameters: {
+    ...sharedParameters,
     layout: 'fullscreen',
   },
   render: ({
@@ -337,31 +355,25 @@ export const WithLayer = {
     disabled,
   }) => html`
     <cds-content-switcher
-      size="${size}"
+      size=${ifDefined(size ?? undefined)}
       selection-mode="${selectionMode}"
-      selected-index="${selectedIndex}"
+      .selectedIndex=${selectedIndex}
       ?low-contrast="${lowContrast}"
       @cds-content-switcher-beingselected="${forwardEventDetail(
         onBeforeSelect
       )}"
       @cds-content-switcher-selected="${forwardEventDetail(onChange)}">
-      <cds-content-switcher-item
-        ?disabled="${disabled}"
-        ?low-contrast="${lowContrast}"
-        value="all"
-        name="one">
+      <cds-content-switcher-item ?disabled="${disabled}" value="all" name="one">
         First section
       </cds-content-switcher-item>
       <cds-content-switcher-item
         ?disabled="${disabled}"
-        ?low-contrast="${lowContrast}"
         value="cloudFoundry"
         name="two">
         Second section
       </cds-content-switcher-item>
       <cds-content-switcher-item
         ?disabled="${disabled}"
-        ?low-contrast="${lowContrast}"
         value="staging"
         name="three">
         Third section

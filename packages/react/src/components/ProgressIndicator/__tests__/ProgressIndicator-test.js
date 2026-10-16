@@ -204,6 +204,16 @@ describe('ProgressStep', () => {
       expect(container.firstChild).toHaveClass('custom-class');
     });
 
+    it('should support a ref on the outermost element', () => {
+      const ref = React.createRef();
+      const { container } = render(
+        <ProgressStep label="First step" ref={ref} />
+      );
+
+      expect(ref.current).toBe(container.firstChild);
+      expect(ref.current.tagName).toBe('LI');
+    });
+
     it('should respect complete prop', () => {
       render(<ProgressStep label="First step" complete />);
 

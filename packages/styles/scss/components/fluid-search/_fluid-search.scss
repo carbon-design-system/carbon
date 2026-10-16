@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2022
+// Copyright IBM Corp. 2022, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -9,6 +9,7 @@
 // Fluid Search
 //-----------------------------
 @use '../../config' as *;
+@use '../../feature-flags' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
@@ -117,8 +118,10 @@
     cursor: not-allowed;
   }
 
-  .#{$prefix}--search--fluid.#{$prefix}--search--disabled
-    .#{$prefix}--search-input[disabled] {
-    border-block-end: 1px solid $border-subtle;
+  @if not enabled('enable-v12-release') {
+    .#{$prefix}--search--fluid.#{$prefix}--search--disabled
+      .#{$prefix}--search-input[disabled] {
+      border-block-end: 1px solid $border-subtle;
+    }
   }
 }

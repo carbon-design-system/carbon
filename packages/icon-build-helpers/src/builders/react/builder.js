@@ -131,7 +131,7 @@ const didWarnAboutDeprecation = {};`;
       deps: {
         neverBundle: external,
       },
-      failOnWarn: false,
+      failOnWarn: true,
       format: format === 'commonjs' ? 'cjs' : 'esm',
       logLevel: 'warn',
       inputOptions(inputOptions) {
@@ -167,7 +167,7 @@ const didWarnAboutDeprecation = {};`;
     deps: {
       neverBundle: external,
     },
-    failOnWarn: false,
+    failOnWarn: true,
     format: 'iife',
     globalName: 'CarbonIconsReact',
     logLevel: 'warn',

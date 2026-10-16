@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2023
+// Copyright IBM Corp. 2023, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -7,6 +7,8 @@
 
 @use '../button';
 @use '../menu';
+@use '../../border-radius' as *;
+@use '../../feature-flags' as *;
 @use '../../config' as *;
 @use '../../motion' as *;
 @use '../../utilities/convert';
@@ -31,6 +33,26 @@
     .#{$prefix}--combo-button__container--#{$size}
       .#{$prefix}--combo-button__primary-action {
       min-inline-size: 10rem - convert.to-rem(1px) - $trigger;
+    }
+  }
+
+  @if enabled('enable-v12-release') {
+    .#{$prefix}--combo-button__primary-action {
+      @include button.radius(
+        $ss: $border-radius-max,
+        $se: $border-radius-00,
+        $es: $border-radius-max,
+        $ee: $border-radius-00
+      );
+    }
+
+    .#{$prefix}--combo-button__trigger {
+      @include button.radius(
+        $ss: $border-radius-00,
+        $se: $border-radius-max,
+        $es: $border-radius-00,
+        $ee: $border-radius-max
+      );
     }
   }
 

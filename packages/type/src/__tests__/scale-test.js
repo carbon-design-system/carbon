@@ -14,6 +14,14 @@ describe('scale', () => {
     expect(scale).toMatchSnapshot();
   });
 
+  it('should keep the scalar steps in sync with the derived values', () => {
+    // `scale01`–`scale23` hardcode the values that `getTypeSize()` derives.
+    // Guard against the two drifting apart.
+    expect(scale).toEqual(
+      Array.from({ length: 23 }, (_, i) => getTypeSize(i + 1))
+    );
+  });
+
   describe('getTypeSize', () => {
     it('should return the base font for steps <= 1', () => {
       expect(getTypeSize(1)).toBe(12);

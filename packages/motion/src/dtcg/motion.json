@@ -1,0 +1,80 @@
+{
+  "$schema": "https://tr.designtokens.org/format/",
+  "$description": "Motion tokens for the Carbon Design System — durations and easing curves",
+  "duration": {
+    "fast": {
+      "01": {
+        "$type": "duration",
+        "$value": { "value": 70, "unit": "ms" },
+        "$description": "Micro-interactions such as button and toggle. Instant response to user action."
+      },
+      "02": {
+        "$type": "duration",
+        "$value": { "value": 110, "unit": "ms" },
+        "$description": "Micro-interactions such as fade in. Subtle entrance or exit of small UI elements."
+      }
+    },
+    "moderate": {
+      "01": {
+        "$type": "duration",
+        "$value": { "value": 150, "unit": "ms" },
+        "$description": "Micro-interactions, small expansion, short distance movements. Default transition speed."
+      },
+      "02": {
+        "$type": "duration",
+        "$value": { "value": 240, "unit": "ms" },
+        "$description": "Expansion, system communication, toast. Slightly longer interactions with more visual weight."
+      }
+    },
+    "slow": {
+      "01": {
+        "$type": "duration",
+        "$value": { "value": 400, "unit": "ms" },
+        "$description": "Large expansion, important system notifications. Deliberate, prominent transitions."
+      },
+      "02": {
+        "$type": "duration",
+        "$value": { "value": 700, "unit": "ms" },
+        "$description": "Background dimming, large hero transitions. Slow, immersive motion for maximum emphasis."
+      }
+    }
+  },
+  "easing": {
+    "standard": {
+      "productive": {
+        "$type": "cubicBezier",
+        "$value": [0.2, 0, 0.38, 0.9],
+        "$description": "Standard easing for productive motion. Used for UI elements that move within the viewport."
+      },
+      "expressive": {
+        "$type": "cubicBezier",
+        "$value": [0.4, 0.14, 0.3, 1],
+        "$description": "Standard easing for expressive motion. Used for elements with more prominent, fluid movement."
+      }
+    },
+    "entrance": {
+      "productive": {
+        "$type": "cubicBezier",
+        "$value": [0, 0, 0.38, 0.9],
+        "$description": "Entrance easing for productive motion. Used when elements enter the screen."
+      },
+      "expressive": {
+        "$type": "cubicBezier",
+        "$value": [0, 0, 0.3, 1],
+        "$description": "Entrance easing for expressive motion. Used for prominent element entrances."
+      }
+    },
+    "exit": {
+      "productive": {
+        "$type": "cubicBezier",
+        "$value": [0.2, 0, 1, 0.9],
+        "$description": "Exit easing for productive motion. Used when elements leave the screen."
+      },
+      "expressive": {
+        "$type": "cubicBezier",
+        "$value": [0.4, 0.14, 1, 1],
+        "$description": "Exit easing for expressive motion. Used for prominent element exits."
+      }
+    }
+  }
+}

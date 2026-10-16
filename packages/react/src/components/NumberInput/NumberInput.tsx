@@ -37,6 +37,7 @@ import { keys, match } from '../../internal/keyboard';
 import { NumberFormatOptionsPropType } from './NumberFormatPropTypes';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
+import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
 
 const translationIds = {
   'increment.number': 'increment.number',
@@ -266,7 +267,7 @@ export interface NumberInputProps
   /**
    * Specify the size of the Number Input.
    */
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'md' | 'lg';
 
   /**
    * @deprecated please use `decorator` instead.
@@ -588,7 +589,6 @@ export const validateNumberSeparators = (
   return fullRegex.test(input);
 };
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
   (props: NumberInputProps, forwardRef) => {
     const {
@@ -618,7 +618,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       onKeyUp,
       pattern = '[0-9]*',
       readOnly,
-      size = 'md',
+      size,
       slug,
       step = 1,
       translateWithId: t = defaultTranslateWithId,
@@ -719,7 +719,8 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       [`${prefix}--number--light`]: light,
       [`${prefix}--number--nolabel`]: hideLabel,
       [`${prefix}--number--nosteppers`]: hideSteppers,
-      [`${prefix}--number--${size}`]: size,
+      [`${prefix}--number--${size}`]: size, // TODO: V12 - Remove this class
+      [`${prefix}--layout--size-${size}`]: size,
     });
     const isInputValid = getInputValidity({
       allowEmpty,
@@ -1127,6 +1128,8 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
   }
 );
 
+NumberInput.displayName = 'NumberInput';
+
 NumberInput.propTypes = {
   /**
    * `true` to allow empty string.
@@ -1300,7 +1303,7 @@ NumberInput.propTypes = {
   /**
    * Specify the size of the Number Input.
    */
-  size: PropTypes.oneOf(['sm', 'md', 'lg']),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
 
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the
@@ -1367,15 +1370,20 @@ interface LabelProps {
 
 const Label = ({ disabled, id, hideLabel, label }: LabelProps) => {
   const prefix = usePrefix();
+  const labelRef = useRef<HTMLLabelElement>(null);
   const className = cx({
     [`${prefix}--label`]: true,
     [`${prefix}--label--disabled`]: disabled,
     [`${prefix}--visually-hidden`]: hideLabel,
   });
+  useNoInteractiveChildrenForLabel(
+    labelRef,
+    'The NumberInput component `label` prop must have no interactive content'
+  );
 
   if (label) {
     return (
-      <Text as="label" htmlFor={id} className={className}>
+      <Text as="label" htmlFor={id} className={className} ref={labelRef}>
         {label}
       </Text>
     );

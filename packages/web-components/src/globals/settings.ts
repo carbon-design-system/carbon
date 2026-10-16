@@ -55,6 +55,7 @@ const selectorTabbable = `
   ${prefix}-filter-tag,
   ${prefix}-textarea,
   ${prefix}-text-input,
+  ${prefix}-card,
   ${prefix}-clickable-tile,
   ${prefix}-expandable-tile,
   ${prefix}-radio-tile,
