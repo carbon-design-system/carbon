@@ -167,6 +167,28 @@ describe('Button', () => {
       expect(screen.getByLabelText('test')).toHaveClass('cds--btn--icon-only');
     });
 
+    it('should support danger tertiary without prop type warnings', () => {
+      const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+      render(
+        <Button
+          hasIconOnly
+          iconDescription="test"
+          kind="danger--tertiary"
+          renderIcon={Add}
+        />
+      );
+
+      try {
+        expect(spy).not.toHaveBeenCalled();
+        expect(screen.getByLabelText('test')).toHaveClass(
+          'cds--btn--danger--tertiary'
+        );
+      } finally {
+        spy.mockRestore();
+      }
+    });
+
     it('should support badge indicator', () => {
       render(
         <Button
