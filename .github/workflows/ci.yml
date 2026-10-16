@@ -460,7 +460,7 @@ jobs:
         run: yarn build
       - id: chromatic
         name: Run Chromatic
-        uses: chromaui/action@38afd264ef2241136f12d039093c2724748bec08 # v18.11.0
+        uses: chromaui/action@18599f2ae5010524d496b86099c9b69a37f5d8d2 # v18.12.2
         with:
           # 👇 Token is intentionally plaintext
           # https://www.chromatic.com/docs/github-actions/#run-chromatic-on-external-forks-of-open-source-projects
@@ -488,7 +488,7 @@ jobs:
             ${{ github.event.pull_request.head.ref || github.ref_name }}
           # 👇 Set to the PR head commit if it's a PR; otherwise to the ref (which typically resolves to the latest commit SHA)
           CHROMATIC_SHA: ${{ github.event.pull_request.head.sha || github.ref }}
-          # 👇 Makes sure this is always set to the corect owner/repo
+          # 👇 Makes sure this is always set to the correct owner/repo
           CHROMATIC_SLUG: ${{ github.repository }}
 
   # This takes the chromatic storybook url and pipes it into a github deployment

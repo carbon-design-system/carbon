@@ -1,0 +1,46 @@
+{
+  "name": "web-terminal-pattern-example",
+  "description": "An example showing how to implement the WebTerminal pattern using only @carbon/react and @carbon/styles.",
+  "keywords": [
+    "carbon",
+    "ibm",
+    "ibm-products",
+    "pattern",
+    "web-terminal"
+  ],
+  "license": "Apache-2.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@carbon/react": "latest",
+    "@carbon/styles": "latest",
+    "@ibm/plex": "latest",
+    "classnames": "^2.3.2",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@vitejs/plugin-react": "^4.3.4",
+    "sass": "^1.93.2",
+    "vite": "^8.0.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
