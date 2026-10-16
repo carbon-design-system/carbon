@@ -242,22 +242,30 @@ async function main() {
 
   // Build token-explorer separately (it's a Next.js app excluded from the
   // auto-generated links above, but its static export goes into the same build tree).
-  const dtcgExample = {
+  const tokenExplorerExample = {
     filepath: path.join(PACKAGES_DIR, 'themes', 'examples', 'token-explorer'),
     name: 'token-explorer',
   };
   reporter.info('Building example `token-explorer` in package `themes`');
-  const dtcgDir = path.join(BUILD_DIR, 'themes', 'examples', 'token-explorer');
-  await fs.ensureDir(dtcgDir);
-  await installExample(dtcgExample.filepath, 'themes:token-explorer');
-  const dtcgBuild = spawn.sync('yarn', ['build'], {
+  const tokenExplorerDir = path.join(
+    BUILD_DIR,
+    'themes',
+    'examples',
+    'token-explorer'
+  );
+  await fs.ensureDir(tokenExplorerDir);
+  await installExample(tokenExplorerExample.filepath, 'themes:token-explorer');
+  const tokenExplorerBuild = spawn.sync('yarn', ['build'], {
     stdio: 'inherit',
-    cwd: dtcgExample.filepath,
+    cwd: tokenExplorerExample.filepath,
   });
-  if (dtcgBuild.status !== 0) {
+  if (tokenExplorerBuild.status !== 0) {
     throw new Error('Error building example token-explorer for themes');
   }
-  await fs.copy(path.join(dtcgExample.filepath, 'build'), dtcgDir);
+  await fs.copy(
+    path.join(tokenExplorerExample.filepath, 'build'),
+    tokenExplorerDir
+  );
   reporter.success('Built example `token-explorer` in package `themes`');
 
   const links = packagesWithExamples.reduce((html, pkg) => {

@@ -73,14 +73,14 @@ const THEME_OPTIONS = [
 ];
 
 // ── Theme token → color alias reverse map ────────────────────────────────────
-// Flattens each theme's DTCG JSON and builds:
+// Flattens each theme's token file and builds:
 //   colorToThemeTokens['blue-60'] = { white: ['background-brand', ...], g10: [...], ... }
 
 // Maps every token in a theme's token file to the palette alias it uses. A
 // token value is either an alias string ("{blue.60}"), a color object that
 // references the components of a palette color (an alias with its own alpha),
 // or a color object of its own, which has no alias.
-function flattenDtcg(file) {
+function flattenThemeTokens(file) {
   const result = {};
   for (const [name, token] of Object.entries(file)) {
     if (name.startsWith('$')) continue;
@@ -96,11 +96,11 @@ function flattenDtcg(file) {
   return result;
 }
 
-const themeDtcg = {
-  white: flattenDtcg(whiteTheme),
-  g10: flattenDtcg(g10Theme),
-  g90: flattenDtcg(g90Theme),
-  g100: flattenDtcg(g100Theme),
+const themeTokens = {
+  white: flattenThemeTokens(whiteTheme),
+  g10: flattenThemeTokens(g10Theme),
+  g90: flattenThemeTokens(g90Theme),
+  g100: flattenThemeTokens(g100Theme),
 };
 
 // Convert DTCG alias "{blue.60}" → "blue-60"
@@ -111,7 +111,7 @@ function aliasToColorToken(alias) {
 
 // colorToThemeTokens['blue-60']['white'] = ['background-brand', 'focus', ...]
 const colorToThemeTokens = {};
-for (const [theme, flat] of Object.entries(themeDtcg)) {
+for (const [theme, flat] of Object.entries(themeTokens)) {
   for (const [tokenName, aliasVal] of Object.entries(flat)) {
     const colorToken = aliasToColorToken(aliasVal);
     if (!colorToken) continue;

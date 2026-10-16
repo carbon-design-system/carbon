@@ -61,7 +61,7 @@ function getAlias(theme, tokenName) {
   return entry.alpha != null ? `${entry.alias} × ${entry.alpha}α` : entry.alias;
 }
 
-function getDtcgEntry(theme, tokenName) {
+function getTokenEntry(theme, tokenName) {
   const entry = tokens[theme]?.[tokenName] ?? tokens.white?.[tokenName];
   if (!entry) return null;
   return {
@@ -463,7 +463,7 @@ export default function IndexPage({ lastBuiltOn }) {
       }>
       <header className="header">
         <div className="header-title">
-          <h1 id="page-title">Theme Tokens DTCG ({filteredTokens.length})</h1>
+          <h1 id="page-title">Theme Tokens ({filteredTokens.length})</h1>
           <p>Last built on {lastBuiltOn}</p>
         </div>
 
@@ -612,10 +612,10 @@ export default function IndexPage({ lastBuiltOn }) {
                           ? `rgba(${rawValue.r}, ${rawValue.g}, ${rawValue.b}, ${rawValue.a ?? 1})`
                           : JSON.stringify(rawValue)))
                       : String(rawValue);
-                const dtcgEntry = getDtcgEntry(activeTheme, token.name);
-                const isFallback = !!dtcgEntry?._isFallback;
-                const dtcgRef = formatAlias(dtcgEntry);
-                const dtcgDesc = dtcgEntry?.$description ?? '—';
+                const tokenEntry = getTokenEntry(activeTheme, token.name);
+                const isFallback = !!tokenEntry?._isFallback;
+                const tokenRef = formatAlias(tokenEntry);
+                const tokenDesc = tokenEntry?.$description ?? '—';
 
                 return (
                   <tr key={token.name} id={token.name}>
@@ -632,14 +632,14 @@ export default function IndexPage({ lastBuiltOn }) {
                           />
                         )}
                         <div className="token-value-details">
-                          {dtcgRef && (
+                          {tokenRef && (
                             <span
                               className={
                                 isFallback
                                   ? 'token-ref token-ref--fallback'
                                   : 'token-ref'
                               }>
-                              {dtcgRef}
+                              {tokenRef}
                             </span>
                           )}
                           {resolvedValue && (
@@ -648,7 +648,7 @@ export default function IndexPage({ lastBuiltOn }) {
                         </div>
                       </div>
                     </td>
-                    <td className="description-cell">{dtcgDesc}</td>
+                    <td className="description-cell">{tokenDesc}</td>
                     <td className="properties-cell">
                       {token.properties ? (
                         <ul>

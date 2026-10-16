@@ -391,7 +391,7 @@ export default function GraphPage() {
       }}>
       <header className="header">
         <div className="header-title">
-          <h1>Theme Tokens DTCG — Graph</h1>
+          <h1>Theme Tokens — Graph</h1>
           <p>
             Scroll to pan · Shift+scroll to pan horizontally · Ctrl+scroll to
             zoom · Drag to pan
