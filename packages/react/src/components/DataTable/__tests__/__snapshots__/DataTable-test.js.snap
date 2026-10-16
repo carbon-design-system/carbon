@@ -603,7 +603,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
           class="cds--overflow-menu__wrapper"
         >
           <span
-            class="cds--popover-container cds--popover--caret cds--popover--high-contrast cds--popover--top cds--tooltip cds--icon-tooltip"
+            class="cds--popover-container cds--popover--caret cds--popover--high-contrast cds--popover--top cds--tooltip cds--icon-tooltip cds--icon-button-tooltip"
           >
             <div
               class="cds--tooltip-trigger__wrapper"
@@ -1053,7 +1053,7 @@ exports[`DataTable renders as expected - Component API should render and match s
           class="cds--overflow-menu__wrapper"
         >
           <span
-            class="cds--popover-container cds--popover--caret cds--popover--high-contrast cds--popover--top cds--tooltip cds--icon-tooltip"
+            class="cds--popover-container cds--popover--caret cds--popover--high-contrast cds--popover--top cds--tooltip cds--icon-tooltip cds--icon-button-tooltip"
           >
             <div
               class="cds--tooltip-trigger__wrapper"
