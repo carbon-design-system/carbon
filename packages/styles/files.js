@@ -30,7 +30,7 @@ const files = [
   'scss/_themes.scss',
   'scss/_zone.scss',
 
-  // Compatability with previous versions
+  // Compatibility with previous versions
   'scss/compat/_theme.scss',
   'scss/compat/_themes.scss',
 

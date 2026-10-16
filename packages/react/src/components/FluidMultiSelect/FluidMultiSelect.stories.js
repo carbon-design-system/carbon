@@ -155,7 +155,6 @@ const sharedArgTypes = {
 };
 
 const sharedArgs = {
-  autoAlign: false,
   className: 'test-class',
   clearSelectionDescription: 'Total items selected: ',
   clearSelectionText: 'To clear selection, press Delete or Backspace.',

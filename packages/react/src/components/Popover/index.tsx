@@ -34,6 +34,7 @@ import {
 import { useFeatureFlag } from '../FeatureFlags';
 import { PolymorphicComponentPropWithRef } from '../../internal/PolymorphicProps';
 import { deprecate } from '../../prop-types/deprecate';
+import { useAutoAlign } from '../../internal/useAutoAlign';
 
 export interface PopoverContext {
   setFloating: React.Ref<HTMLSpanElement>;
@@ -179,7 +180,7 @@ export const Popover: PopoverComponent & {
     isTabTip,
     align: initialAlign = isTabTip ? 'bottom-start' : 'bottom',
     as: BaseComponent = 'span' as E,
-    autoAlign = false,
+    autoAlign: autoAlignProp,
     autoAlignBoundary,
     backgroundToken = 'layer',
     caret: caretProp = !isTabTip,
@@ -198,6 +199,7 @@ export const Popover: PopoverComponent & {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   forwardRef: any
 ) {
+  const autoAlign = useAutoAlign(autoAlignProp);
   const prefix = usePrefix();
   const floating = useRef<HTMLSpanElement>(null);
   const caretRef = useRef<HTMLSpanElement>(null);
