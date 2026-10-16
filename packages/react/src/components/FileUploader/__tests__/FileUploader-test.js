@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -21,6 +21,54 @@ const requiredProps = {
 };
 
 describe('FileUploader', () => {
+  it.each([false, true])(
+    'should size the button and uploaded files as xs with enhanced uploader enabled: %s',
+    async (enhanced) => {
+      render(
+        <FeatureFlags enableEnhancedFileUploader={enhanced}>
+          <FileUploader
+            {...requiredProps}
+            buttonLabel="Upload"
+            filenameStatus="edit"
+            size="xs"
+          />
+        </FeatureFlags>
+      );
+
+      expect(screen.getByRole('button', { name: 'Upload' })).toHaveClass(
+        'cds--btn--xs',
+        'cds--layout--size-xs'
+      );
+
+      const file = new File(['test'], 'test.png', { type: 'image/png' });
+      await userEvent.upload(screen.getByLabelText('Upload'), file);
+
+      expect(screen.getByText('test.png').closest('span')).toHaveClass(
+        'cds--layout--size-xs'
+      );
+    }
+  );
+
+  it.each([
+    ['small', 'sm'],
+    ['field', 'md'],
+  ])('should preserve the %s size alias', async (size, expectedSize) => {
+    render(
+      <FileUploader {...requiredProps} buttonLabel="Upload" size={size} />
+    );
+
+    expect(screen.getByRole('button', { name: 'Upload' })).toHaveClass(
+      `cds--layout--size-${expectedSize}`
+    );
+
+    const file = new File(['test'], 'test.png', { type: 'image/png' });
+    await userEvent.upload(screen.getByLabelText('Upload'), file);
+
+    expect(screen.getByText('test.png').closest('span')).toHaveClass(
+      `cds--layout--size-${expectedSize}`
+    );
+  });
+
   it('should support a custom class name on the root element', () => {
     const { container } = render(
       <FileUploader {...requiredProps} className="test" />

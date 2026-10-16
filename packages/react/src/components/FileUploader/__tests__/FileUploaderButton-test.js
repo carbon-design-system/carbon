@@ -12,6 +12,17 @@ import { FileUploaderButton } from '../';
 import userEvent from '@testing-library/user-event';
 
 describe('FileUploaderButton', () => {
+  it('should not apply an explicit layout size when size is omitted', () => {
+    render(<FileUploaderButton labelText="Upload" />);
+
+    const button = screen.getByRole('button', { name: 'Upload' });
+    expect(
+      Array.from(button.classList).some((name) =>
+        name.startsWith('cds--layout--size-')
+      )
+    ).toBe(false);
+  });
+
   describe('automated accessibility tests', () => {
     it('should have no axe violations', async () => {
       const { container } = render(<FileUploaderButton name="test" />);
