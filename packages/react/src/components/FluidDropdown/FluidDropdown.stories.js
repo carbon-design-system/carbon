@@ -129,7 +129,6 @@ const sharedArgTypes = {
 };
 
 const sharedArgs = {
-  autoAlign: false,
   className: 'test-class',
   direction: 'bottom',
   disabled: false,

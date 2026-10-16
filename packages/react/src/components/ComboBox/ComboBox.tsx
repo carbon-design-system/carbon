@@ -64,6 +64,7 @@ import {
   isItemDisabled,
 } from '../../internal';
 import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
+import { useAutoAlign } from '../../internal/useAutoAlign';
 
 const {
   InputBlur,
@@ -390,7 +391,7 @@ const ComboBox = forwardRef(
     const {
       ['aria-label']: ariaLabel = 'Choose an item',
       ariaLabel: deprecatedAriaLabel,
-      autoAlign = false,
+      autoAlign: autoAlignProp,
       className: containerClassName,
       decorator,
       direction = 'bottom',
@@ -424,6 +425,7 @@ const ComboBox = forwardRef(
       inputProps,
       ...rest
     } = props;
+    const autoAlign = useAutoAlign(autoAlignProp);
 
     const enableFloatingStyles =
       useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;

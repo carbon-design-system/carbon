@@ -12,13 +12,14 @@ import { POPOVER_ALIGNMENT } from '../popover/defs';
 import '../popover/index';
 import popoverStyles from '../popover/popover.scss?lit';
 import styles from './tooltip.scss?lit';
+import AutoAlignMixin from '../../globals/mixins/auto-align';
 
 /**
  * Definition tooltip.
  *
  * @element cds-definition-tooltip
  */
-class CDSDefinitionTooltip extends LitElement {
+class CDSDefinitionTooltip extends AutoAlignMixin(LitElement) {
   static is = `${prefix}-definition-tooltip`;
 
   /**
@@ -29,9 +30,11 @@ class CDSDefinitionTooltip extends LitElement {
 
   /**
    * Will auto-align Definition Tooltip. This prop is currently experimental and is subject to future changes.
+   * Defaults to `true` when `enable-v12-autoalign` is enabled, and to `false`
+   * otherwise.
    */
   @property({ type: Boolean, reflect: true })
-  autoalign = false;
+  autoalign?: boolean;
 
   /**
    * Specify whether the tooltip should be open when it first renders
@@ -104,7 +107,7 @@ class CDSDefinitionTooltip extends LitElement {
         @mouseenter=${this._handleMouseEnter}
         @mouseleave=${this._handleMouseLeave}
         highContrast
-        ?autoalign=${this.autoalign}
+        .autoalign=${this.autoalign}
         .dropShadow=${false}
         align=${align}
         .open=${open}>

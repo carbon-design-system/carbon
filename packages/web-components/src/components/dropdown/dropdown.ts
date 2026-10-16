@@ -14,6 +14,7 @@ import { iconLoader } from '../../globals/internal/icon-loader';
 import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
 import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
 import ChevronDown16 from '@carbon/icons/es/chevron--down/16.js';
+import AutoAlignMixin from '../../globals/mixins/auto-align';
 import FocusMixin from '../../globals/mixins/focus';
 import FormAssociatedMixin from '../../globals/mixins/form-associated';
 import HostListenerMixin from '../../globals/mixins/host-listener';
@@ -62,8 +63,8 @@ export {
  * @fires cds-dropdown-selected - The custom event fired after a dropdown item is selected upon a user gesture.
  * @fires cds-dropdown-toggled - The custom event fired after the open state of this dropdown is toggled upon a user gesture.
  */
-class CDSDropdown extends FormAssociatedMixin(
-  ValidityMixin(HostListenerMixin(FocusMixin(LitElement)))
+class CDSDropdown extends AutoAlignMixin(
+  FormAssociatedMixin(ValidityMixin(HostListenerMixin(FocusMixin(LitElement))))
 ) {
   static is = `${prefix}-dropdown`;
 
@@ -970,10 +971,11 @@ class CDSDropdown extends FormAssociatedMixin(
   direction = DROPDOWN_DIRECTION.BOTTOM;
 
   /**
-   * Specify whether auto align functionality should be applied
+   * Specify whether auto-align is enabled. Defaults to `true` when
+   * `enable-v12-autoalign` is enabled, and to `false` otherwise.
    */
   @property({ type: Boolean, reflect: true })
-  autoalign = false;
+  autoalign?: boolean;
 
   /**
    * `true` if this dropdown should be disabled.
@@ -1275,7 +1277,7 @@ class CDSDropdown extends FormAssociatedMixin(
       [`${prefix}--dropdown--inline`]: inline,
       [`${prefix}--dropdown--selected`]: selectedItemsCount > 0,
       [`${prefix}--list-box__wrapper--decorator`]: this._hasAILabel,
-      [`${prefix}--autoalign`]: autoalign,
+      [`${prefix}--autoalign`]: Boolean(autoalign),
     });
   }
 

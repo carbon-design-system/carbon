@@ -132,13 +132,13 @@ const StoryContent = ({ useResponsiveOffset = true }) => {
               <br />
               <br />
               To better understand the purpose and function of the UI shell,
-              consider the “shell” of MacOS, which contains the Apple menu,
+              consider the “shell” of macOS, which contains the Apple menu,
               top-level navigation, and universal, OS-level controls at the top
               of the screen, as well as a universal dock along the bottom or
               side of the screen. The Carbon UI shell is roughly analogous in
               function to these parts of the Mac UI. For example, the app
               switcher portion of the shell can be compared to the dock in
-              MacOS.
+              macOS.
             </p>
             <h2 style="margin: 30px 0px">Header responsive behavior</h2>
             <p>

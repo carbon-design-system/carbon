@@ -10,13 +10,12 @@ import { prefix } from '../../globals/settings';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 
 import styles from './coachmark-body.scss?lit';
-import { SignalWatcher } from '@lit-labs/signals';
 
 /**
  * coachmark-body for content body
  * @element cds-coachmark-body
  */
-class CDSCoachmarkBody extends SignalWatcher(HostListenerMixin(LitElement)) {
+class CDSCoachmarkBody extends HostListenerMixin(LitElement) {
   static is = `${prefix}-coachmark-body`;
 
   render() {
