@@ -13,7 +13,6 @@ import React from 'react';
 
 const defaultArgs = {
   align: 'top',
-  autoAlign: false,
   collapseLabel: 'View less',
   expandLabel: 'View more',
   id: 'example-id',

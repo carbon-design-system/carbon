@@ -7,7 +7,6 @@
 
 import React from 'react';
 import IconIndicator from '.';
-import { IconIndicatorKinds } from './index';
 import mdx from './IconIndicator.mdx';
 
 export default {
@@ -97,7 +96,6 @@ export const Default = (args) => {
 
 Default.args = {
   align: 'right',
-  autoAlign: false,
   iconDescription: 'Icon',
   compact: false,
   size: 16,

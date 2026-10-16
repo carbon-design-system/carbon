@@ -8,12 +8,11 @@
 import React from 'react';
 
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
-import { View, FolderOpen, Folders, Information } from '@carbon/icons-react';
+import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { default as TextArea, TextAreaSkeleton } from './';
-import { Tooltip } from '../Tooltip';
 import mdx from './TextArea.mdx';
 
 export default {

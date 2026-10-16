@@ -21,7 +21,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Use Node.js version from .nvmrc
-        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: '.nvmrc'
           registry-url: 'https://registry.npmjs.org'
@@ -102,7 +102,7 @@ jobs:
               repo: context.repo.repo,
             })
 
-  packages:
+  deploy-packages:
     needs: build
     runs-on: ubuntu-latest
     # only trigger for stable releases, not release candidates or v12 alphas
@@ -124,4 +124,21 @@ jobs:
     permissions:
       contents: read
     uses: ./.github/workflows/publish-icons-pictograms-cdn.yml
+    secrets: inherit
+
+  publish-web-components-cdn:
+    needs: build
+    # skip for alpha tags
+    if: contains(github.ref_name, '-alpha') == false
+    permissions:
+      contents: read
+    uses: ./.github/workflows/publish-web-components-cdn.yml
+    secrets: inherit
+
+  deploy-v12-storybooks:
+    needs: build
+    if: contains(github.ref_name, '-alpha') == true
+    permissions:
+      contents: read
+    uses: ./.github/workflows/deploy-v12-storybooks.yml
     secrets: inherit
