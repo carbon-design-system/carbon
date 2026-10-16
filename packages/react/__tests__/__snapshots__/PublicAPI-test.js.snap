@@ -4293,6 +4293,9 @@ Map {
       "className": {
         "type": "string",
       },
+      "disabled": {
+        "type": "bool",
+      },
       "invalid": {
         "type": "bool",
       },
@@ -12609,6 +12612,9 @@ Map {
       "className": {
         "type": "string",
       },
+      "disabled": {
+        "type": "bool",
+      },
       "invalid": {
         "type": "bool",
       },
@@ -14657,6 +14663,9 @@ Map {
       },
       "className": {
         "type": "string",
+      },
+      "disabled": {
+        "type": "bool",
       },
       "invalid": {
         "type": "bool",
