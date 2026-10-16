@@ -104,13 +104,60 @@ describe('cds-radio-button', () => {
     expect(el.checked).to.be.false;
   });
 
-  it('should set aria-readonly on the inner input when readonly', async () => {
-    const el = await fixture(
-      html`<cds-radio-button readOnly value="test-value"></cds-radio-button>`
-    );
-    const input = el.shadowRoot.querySelector('input[type="radio"]');
+  describe('aria-readonly', () => {
+    const states = {
+      unchecked: html`<cds-radio-button
+        label-text="Radio"
+        value="test-value"></cds-radio-button>`,
+      checked: html`<cds-radio-button
+        checked
+        label-text="Radio"
+        value="test-value"></cds-radio-button>`,
+      disabled: html`<cds-radio-button
+        disabled
+        label-text="Radio"
+        value="test-value"></cds-radio-button>`,
+      readonly: html`<cds-radio-button
+        readOnly
+        label-text="Radio"
+        value="test-value"></cds-radio-button>`,
+      'readonly and checked': html`<cds-radio-button
+        readOnly
+        checked
+        label-text="Radio"
+        value="test-value"></cds-radio-button>`,
+    };
 
-    expect(input?.getAttribute('aria-readonly')).to.equal('true');
+    Object.entries(states).forEach(([state, template]) => {
+      it(`should not set aria-readonly on the inner input when ${state}`, async () => {
+        const el = await fixture(template);
+        const input = el.shadowRoot.querySelector('input[type="radio"]');
+
+        expect(input.getAttribute('aria-readonly')).to.be.null;
+        await expect(el).to.be.accessible();
+      });
+    });
+
+    it('should not set aria-readonly when readOnly is toggled', async () => {
+      const el = await fixture(states.unchecked);
+      const input = el.shadowRoot.querySelector('input[type="radio"]');
+
+      el.readOnly = true;
+      await el.updateComplete;
+      expect(input.getAttribute('aria-readonly')).to.be.null;
+
+      el.readOnly = false;
+      await el.updateComplete;
+      expect(input.getAttribute('aria-readonly')).to.be.null;
+    });
+
+    it('should preserve checked and disabled state on the inner input', async () => {
+      const checked = await fixture(states.checked);
+      const disabled = await fixture(states.disabled);
+
+      expect(checked.shadowRoot.querySelector('input').checked).to.be.true;
+      expect(disabled.shadowRoot.querySelector('input').disabled).to.be.true;
+    });
   });
 
   it('should associate the label with the input via matching for/id', async () => {
