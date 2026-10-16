@@ -199,6 +199,14 @@
       .#{$prefix}--layout--size-xs & {
         inset-inline-end: 0;
       }
+
+      &:hover {
+        background-color: $background-hover;
+      }
+
+      &:active {
+        background-color: $background-active;
+      }
     }
   }
 
