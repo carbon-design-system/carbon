@@ -23,6 +23,12 @@ Repositories that use more than one Carbon package are counted once per package,
 so these are shares of package-repository pairs, not of distinct repositories.
 This is a point-in-time snapshot.
 
+Web component usage has grown over time. By monthly repository scans,
+`@carbon/web-components` rose from roughly 8% of instrumented package scans in
+January 2025 to roughly 25% in September 2026. Part of that rise falls after a
+period in spring 2026 when tracking stopped and was then repaired, so the two
+figures may not be directly comparable.
+
 When planning `@carbon/angular`, three architectural approaches were available:
 
 1. **Continue CCA's model** — maintain Angular components independently, written

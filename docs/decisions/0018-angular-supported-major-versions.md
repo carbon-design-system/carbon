@@ -54,10 +54,18 @@ Carbon telemetry (monthly unique repositories per instrumented package,
 Sep 2026) gives partial input only. Roughly 12% of instrumented
 package-repository pairs use `carbon-components-angular`, which makes Angular
 the third-largest framework audience after React and web components. By scan
-volume, Angular is roughly 8% of the total and looks flat to slightly down since
-spring 2026. This data is at package level. It does not show Angular major
-versions or whether consumers use `@angular/ssr`, which are the data points open
-question 2 needs.
+volume, Angular is roughly 8% of the total in September 2026, down from roughly
+10% in January 2025. Its scan volume roughly doubled during 2025 and has been
+mostly flat since, apart from a gap in spring 2026 when tracking stopped and was
+then repaired. This data is at package level. It does not show Angular major
+versions, which open question 2 still needs.
+
+The same telemetry shows very little server-side rendering among these
+consumers. Well under 1% of `carbon-components-angular` repositories also use
+`@angular/ssr`, and only one of those identifies as a Software product. This
+reflects existing CCA consumers, who have no SSR story today, so it does not
+measure demand from new `@carbon/angular` adopters. It does support treating SSR
+and hydration as out of scope for the initial release.
 
 ## Open questions
 
