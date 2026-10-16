@@ -155,7 +155,7 @@ export interface CodeSnippetProps {
 
 function CodeSnippet({
   align = 'bottom',
-  autoAlign = false,
+  autoAlign,
   className,
   type = 'single',
   children,
