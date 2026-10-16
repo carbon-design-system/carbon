@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -60,5 +60,22 @@ describe('SideNavLink', () => {
       </SideNavLink>
     );
     expect(ref).toHaveBeenCalledWith(screen.getByRole('link'));
+  });
+
+  it('should support rendering a button through the `as` prop', () => {
+    const onClick = jest.fn();
+
+    render(
+      <SideNavLink as="button" type="button" onClick={onClick}>
+        test
+      </SideNavLink>
+    );
+
+    screen.getByRole('button').click();
+
+    expect(screen.getByRole('button')).toHaveClass('cds--side-nav__link', {
+      exact: true,
+    });
+    expect(onClick).toHaveBeenCalledTimes(1);
   });
 });
