@@ -318,7 +318,7 @@ describe('HeaderPanel', () => {
     // Safari: pressing the button blurs the link without focusing the button,
     // so the blur has no `relatedTarget`.
     link.focus();
-    fireEvent.pointerDown(button);
+    fireEvent.mouseDown(button);
     fireEvent.blur(link, { relatedTarget: null });
     fireEvent.click(button);
 
