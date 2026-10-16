@@ -50,6 +50,15 @@ modern Angular API we can use (for example signal-based `input()` / `output()` /
 `model()`, built-in control flow, and zoneless change detection) and how much CI
 matrix we must maintain.
 
+Carbon telemetry (monthly unique repositories per instrumented package,
+Sep 2026) gives partial input only. Roughly 12% of instrumented
+package-repository pairs use `carbon-components-angular`, which makes Angular
+the third-largest framework audience after React and web components. By scan
+volume, Angular is roughly 8% of the total and looks flat to slightly down since
+spring 2026. This data is at package level. It does not show Angular major
+versions or whether consumers use `@angular/ssr`, which are the data points open
+question 2 needs.
+
 ## Open questions
 
 These need answers from outside this repo before a decision.

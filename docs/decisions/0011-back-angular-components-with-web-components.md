@@ -15,6 +15,14 @@ support, and platform capabilities — roughly 35 components vs. the React
 library's full set, with no AI component family, no fluid form variants, no
 complete UI Shell, and no automated accessibility testing.
 
+Carbon telemetry (monthly unique repositories per instrumented package,
+Sep 2026) shows both layers have substantial adoption. Roughly 12% of
+instrumented package-repository pairs use `carbon-components-angular`, which is
+the population that would migrate, and roughly 27% use `@carbon/web-components`.
+Repositories that use more than one Carbon package are counted once per package,
+so these are shares of package-repository pairs, not of distinct repositories.
+This is a point-in-time snapshot.
+
 When planning `@carbon/angular`, three architectural approaches were available:
 
 1. **Continue CCA's model** — maintain Angular components independently, written
@@ -51,8 +59,27 @@ Option 1 was rejected because it perpetuates the maintenance lag. Every feature
 added to `@carbon/react` and `@carbon/web-components` would require a separate
 Angular implementation. CCA's history shows this gap compounds over time.
 
-Option 3 was rejected because it requires new shared tooling that does not yet
-exist and introduces a build-time dependency that would slow down iteration.
+Option 3 was rejected for two reasons:
+
+- **It cannot preserve the CCA API.** Generators (for example Stencil's Angular
+  output target, or UI5's Angular wrappers) produce a 1:1 proxy of the web
+  component's API. Consumers would use slot-based, WC-shaped templates instead
+  of the CCA-shaped inputs they use today, such as `[items]` arrays or CCA-style
+  `@Input()` shapes. That would force teams to rewrite templates and would break
+  the selector and template continuity recorded in
+  [ADR 0014](0014-preserve-cds-consumer-facing-selectors.md). Keeping the
+  existing CCA API, and so lowering the migration cost for existing teams, is
+  the main reason the wrappers are hand-written.
+- **It requires new shared tooling** that does not yet exist and introduces a
+  build-time dependency that would slow down iteration.
+
+The cost of this choice is maintenance. Each wrapper contains hand-written
+mapping from the CCA-shaped API to WC slots, attributes and events, so wrapper
+drift is a risk that a generated approach would not have. Wrappers are therefore
+kept thin (see Consequences). A hybrid, where the mechanical parts (attribute
+reflection, `@Output` re-emission, `ControlValueAccessor` boilerplate) are
+generated and only the CCA-compatibility layer is hand-written, is not part of
+this decision. It can be revisited if the maintenance burden proves significant.
 
 ## Consequences
 
@@ -82,3 +109,11 @@ exist and introduces a build-time dependency that would slow down iteration.
   `notificationObj` removed, `[theme]` input removed). These are documented in
   `docs/guides/cca-to-angular.md` and automated via codemods in
   `@carbon/upgrade`.
+- Migration effort is reduced, not eliminated. Template selectors and most
+  `@Input()` / `@Output()` shapes carry over, but consumers still change import
+  paths (ADR 0012), adjust the documented API breaks above, and install
+  `@carbon/web-components` as a peer. Documentation should describe the lift as
+  "reduced" rather than "none".
+- Because the wrappers are hand-written, keeping them in sync with
+  `@carbon/web-components` depends on review discipline and the Angular ↔ WC
+  interface tests rather than on code generation.
