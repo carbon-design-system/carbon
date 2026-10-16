@@ -27,7 +27,7 @@ import {
 
 export { surfaces };
 
-// ── TypeScript types ─────────────────────────────────────────────────────────
+// TypeScript types
 // Hand-authored here rather than generated because they describe the
 // Carbon-specific structure of a surface recipe and are referenced by consumers
 // who need to type-check against the surface API.

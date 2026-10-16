@@ -24,7 +24,7 @@ const path = require('path');
 const fs = require('fs');
 const { default: StyleDictionary } = require('style-dictionary');
 
-// ── Custom plugins ─────────────────────────────────────────────────────────
+// Custom plugins
 const carbonMotionDuration = require('./transforms/duration');
 const carbonMotionCubicBezier = require('./transforms/cubic-bezier');
 const carbonJsMotionTokens = require('./formats/js-tokens');
@@ -32,13 +32,13 @@ const carbonJsMotionSurfaces = require('./formats/js-surfaces');
 const carbonScssMotionTokens = require('./formats/scss-tokens');
 const carbonScssMotionSurfaces = require('./formats/scss-surfaces');
 
-// ── Paths ──────────────────────────────────────────────────────────────────
+// Paths
 const ROOT = path.resolve(__dirname, '..');
 const TOKENS_DIR = path.join(ROOT, 'tokens');
 const SCSS_GENERATED = path.join(ROOT, 'scss', 'generated');
 const JS_GENERATED = path.join(ROOT, 'js', 'generated');
 
-// ── Custom name transform ──────────────────────────────────────────────────
+// Custom name transform
 //
 // Builds a kebab-case name from the token path segments.
 // e.g. ['duration', 'fast', '01'] → 'duration-fast-01'
@@ -51,7 +51,7 @@ const carbonMotionNameKebab = {
   },
 };
 
-// ── Transform group ────────────────────────────────────────────────────────
+// Transform group
 const CARBON_MOTION_TRANSFORMS = [
   'attribute/cti',
   'carbon/motion-name-kebab',
@@ -59,7 +59,7 @@ const CARBON_MOTION_TRANSFORMS = [
   'carbon/motion-cubic-bezier',
 ];
 
-// ── SD configs ────────────────────────────────────────────────────────────
+// SD configs
 //
 // Separate configs are used for JS and SCSS so that `runJs()` and `runScss()`
 // only invoke their respective platforms, matching the themes pattern where
@@ -161,7 +161,7 @@ const scssSurfacesConfig = {
   },
 };
 
-// ── Build a registered SD instance ────────────────────────────────────────
+// Build a registered SD instance
 // In SD v5, register* methods live on the instance, not the class.
 // We create one base instance with all plugins registered, then extend it
 // per-config so each build inherits the registrations.
@@ -181,7 +181,7 @@ function createBase() {
   return base;
 }
 
-// ── JS build ──────────────────────────────────────────────────────────────
+// JS build
 // Generates:
 //   js/generated/tokens.{js,d.ts}
 //   js/generated/surfaces.{js,d.ts}
@@ -192,7 +192,7 @@ async function runJs() {
   await (await base.extend(jsSurfacesConfig)).buildAllPlatforms();
 }
 
-// ── SCSS build ────────────────────────────────────────────────────────────
+// SCSS build
 // Generates:
 //   scss/generated/_tokens.scss
 //   scss/generated/_surfaces.scss
@@ -203,7 +203,7 @@ async function runScss() {
   await (await base.extend(scssSurfacesConfig)).buildAllPlatforms();
 }
 
-// ── Full build (JS + SCSS) ─────────────────────────────────────────────────
+// Full build (JS + SCSS)
 async function run() {
   await runJs();
   await runScss();

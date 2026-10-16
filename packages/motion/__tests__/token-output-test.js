@@ -12,28 +12,22 @@
 const fs = require('fs');
 const path = require('path');
 
-// ---------------------------------------------------------------------------
-// Load DTCG source files
-// ---------------------------------------------------------------------------
-
-const dtcgTokens = JSON.parse(
+// Load token files
+const motionTokenFile = JSON.parse(
   fs.readFileSync(
     path.resolve(__dirname, '../tokens/motion.tokens.json'),
     'utf8'
   )
 );
 
-const dtcgSurfaces = JSON.parse(
+const surfaceTokenFile = JSON.parse(
   fs.readFileSync(
     path.resolve(__dirname, '../tokens/surfaces.tokens.json'),
     'utf8'
   )
 );
 
-// ---------------------------------------------------------------------------
 // Helpers — tokens (motion.tokens.json)
-// ---------------------------------------------------------------------------
-
 /**
  * Walk the DTCG token tree and collect all leaf tokens that have a $value.
  * Returns a flat array of { name, type, value, description }.
@@ -71,19 +65,16 @@ function toV10Name(camel) {
 }
 
 /** Resolve a DTCG duration $value { value, unit } to a CSS string e.g. "70ms" */
-function resolveDuration(dtcgValue) {
-  return `${dtcgValue.value}${dtcgValue.unit}`;
+function resolveDuration(tokenValue) {
+  return `${tokenValue.value}${tokenValue.unit}`;
 }
 
 /** Resolve a DTCG cubicBezier $value array to a CSS string */
-function resolveEasing(dtcgValue) {
-  return `cubic-bezier(${dtcgValue.join(', ')})`;
+function resolveEasing(tokenValue) {
+  return `cubic-bezier(${tokenValue.join(', ')})`;
 }
 
-// ---------------------------------------------------------------------------
 // Helpers — surfaces (surfaces.tokens.json)
-// ---------------------------------------------------------------------------
-
 /**
  * Walk the DTCG surface tree and collect all leaf nodes that carry a
  * `com.ibm.carbon` motion extension. Returns a flat array of:
@@ -115,11 +106,8 @@ function collectSurfaces(obj, pathSegments = []) {
   return results;
 }
 
-// ---------------------------------------------------------------------------
 // Derived token sets
-// ---------------------------------------------------------------------------
-
-const allTokens = collectTokens(dtcgTokens);
+const allTokens = collectTokens(motionTokenFile);
 const durationTokens = allTokens.filter((t) => t.name.startsWith('duration-'));
 const easingTokens = allTokens.filter((t) => t.name.startsWith('easing-'));
 
@@ -129,20 +117,17 @@ const sassV10Names = durationTokens.map((t) =>
   t.name.replace(/^duration-/, '')
 );
 
-const allSurfaces = collectSurfaces(dtcgSurfaces);
+const allSurfaces = collectSurfaces(surfaceTokenFile);
 const surfaceNames = allSurfaces.map((s) => s.name);
 const revealSurfaces = allSurfaces.filter((s) => s.recipe.kind === 'reveal');
 const sharedElementSurfaces = allSurfaces.filter(
   (s) => s.recipe.kind === 'shared-element'
 );
 
-// ---------------------------------------------------------------------------
 // Token file — tokens/motion.tokens.json
-// ---------------------------------------------------------------------------
-
-describe('@carbon/motion — DTCG token file (tokens/motion.tokens.json)', () => {
+describe('@carbon/motion — token file (tokens/motion.tokens.json)', () => {
   test('has the correct $schema', () => {
-    expect(dtcgTokens.$schema).toBe(
+    expect(motionTokenFile.$schema).toBe(
       'https://www.designtokens.org/schemas/2025.10/format.json'
     );
   });
@@ -193,13 +178,10 @@ describe('@carbon/motion — DTCG token file (tokens/motion.tokens.json)', () =>
   });
 });
 
-// ---------------------------------------------------------------------------
 // Surface file — tokens/surfaces.tokens.json
-// ---------------------------------------------------------------------------
-
-describe('@carbon/motion — DTCG surface file (tokens/surfaces.tokens.json)', () => {
+describe('@carbon/motion — surface file (tokens/surfaces.tokens.json)', () => {
   test('has the correct $schema', () => {
-    expect(dtcgSurfaces.$schema).toBe(
+    expect(surfaceTokenFile.$schema).toBe(
       'https://www.designtokens.org/schemas/2025.10/format.json'
     );
   });
@@ -221,7 +203,7 @@ describe('@carbon/motion — DTCG surface file (tokens/surfaces.tokens.json)', (
         }
       }
     }
-    checkTypes(dtcgSurfaces);
+    checkTypes(surfaceTokenFile);
   });
 
   test('all surfaces have a non-empty $description', () => {
@@ -303,11 +285,8 @@ describe('@carbon/motion — DTCG surface file (tokens/surfaces.tokens.json)', (
   });
 });
 
-// ---------------------------------------------------------------------------
 // JS output — tokens
-// ---------------------------------------------------------------------------
-
-describe('@carbon/motion — every DTCG token generates a JS export', () => {
+describe('@carbon/motion — every token generates a JS export', () => {
   const CarbonMotion = require('../src');
 
   test('every duration token in the JSON has a matching V11 JS export with the correct value', () => {
@@ -372,11 +351,8 @@ describe('@carbon/motion — every DTCG token generates a JS export', () => {
   });
 });
 
-// ---------------------------------------------------------------------------
 // JS output — surfaces
-// ---------------------------------------------------------------------------
-
-describe('@carbon/motion — every DTCG surface generates a JS export', () => {
+describe('@carbon/motion — every surface generates a JS export', () => {
   const CarbonMotion = require('../src');
 
   test('surfaces export exists on the package', () => {
@@ -443,10 +419,7 @@ describe('@carbon/motion — every DTCG surface generates a JS export', () => {
   });
 });
 
-// ---------------------------------------------------------------------------
 // JS declaration output — surfaces
-// ---------------------------------------------------------------------------
-
 describe('@carbon/motion — generated surfaces.d.ts keeps literal types', () => {
   const {
     toDtsTypeLiteral,
@@ -504,11 +477,8 @@ describe('@carbon/motion — generated surfaces.d.ts keeps literal types', () =>
   });
 });
 
-// ---------------------------------------------------------------------------
 // Sass output — tokens
-// ---------------------------------------------------------------------------
-
-describe('@carbon/motion — every DTCG token generates a Sass variable', () => {
+describe('@carbon/motion — every token generates a Sass variable', () => {
   const scssSource = fs.readFileSync(
     path.resolve(__dirname, '../scss/generated/_tokens.scss'),
     'utf8'
@@ -551,11 +521,8 @@ describe('@carbon/motion — every DTCG token generates a Sass variable', () => 
   });
 });
 
-// ---------------------------------------------------------------------------
 // Sass output — surfaces
-// ---------------------------------------------------------------------------
-
-describe('@carbon/motion — every DTCG surface generates a Sass variable', () => {
+describe('@carbon/motion — every surface generates a Sass variable', () => {
   const scssSource = fs.readFileSync(
     path.resolve(__dirname, '../scss/generated/_surfaces.scss'),
     'utf8'

@@ -46,7 +46,7 @@ const SURFACES_PATH = path.resolve(
  * @returns {Array<{ name: string, description: string, recipe: object }>}
  */
 function collectSurfaces() {
-  const dtcg = JSON.parse(fs.readFileSync(SURFACES_PATH, 'utf8'));
+  const tokenFile = JSON.parse(fs.readFileSync(SURFACES_PATH, 'utf8'));
   const results = [];
 
   function traverse(obj, pathSegments) {
@@ -70,7 +70,7 @@ function collectSurfaces() {
     }
   }
 
-  traverse(dtcg, []);
+  traverse(tokenFile, []);
   return results;
 }
 
@@ -89,7 +89,7 @@ function carbonJsMotionSurfacesFormat({ options }) {
 
   const lines = [FILE_BANNER];
 
-  // ── Individual named surface exports ─────────────────────────────────────
+  // Individual named surface exports
   for (let i = 0; i < surfaceList.length; i++) {
     const { description, recipe } = surfaceList[i];
     const exportName = surfaceNames[i];
@@ -109,7 +109,7 @@ function carbonJsMotionSurfacesFormat({ options }) {
     lines.push('');
   }
 
-  // ── surfaces map ─────────────────────────────────────────────────────────
+  // surfaces map
   if (outputMode === 'js') {
     lines.push('export const surfaces = {');
     for (const name of surfaceNames) {
@@ -126,7 +126,7 @@ function carbonJsMotionSurfacesFormat({ options }) {
     lines.push('');
   }
 
-  // ── getMotionSurface ──────────────────────────────────────────────────────
+  // getMotionSurface
   if (outputMode === 'js') {
     lines.push(
       `export function getMotionSurface(name) {`,

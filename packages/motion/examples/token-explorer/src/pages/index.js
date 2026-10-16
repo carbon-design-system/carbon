@@ -9,8 +9,7 @@ import React from 'react';
 import motionJson from '../../../../tokens/motion.tokens.json';
 import surfacesJson from '../../../../tokens/surfaces.tokens.json';
 
-// ── Flatten motion.tokens.json into a list of token objects ──────────────────
-
+// Flatten motion.tokens.json into a list of token objects
 function flattenMotion(obj, prefix = '') {
   const results = [];
   for (const [key, value] of Object.entries(obj)) {
@@ -44,8 +43,7 @@ function flattenMotion(obj, prefix = '') {
   return results;
 }
 
-// ── Flatten surfaces.tokens.json ──────────────────────────────────────────────
-
+// Flatten surfaces.tokens.json
 function flattenSurfaces(obj, prefix = '') {
   const results = [];
   for (const [key, value] of Object.entries(obj)) {
@@ -84,8 +82,7 @@ const VIEW_OPTIONS = [
   { value: 'graph', label: 'Graph' },
 ];
 
-// ── Graph layout constants ────────────────────────────────────────────────────
-
+// Graph layout constants
 const CAT_W = 130;
 const CAT_H = 44;
 const GRP_W = 130;
@@ -182,8 +179,7 @@ function CurvedLink({ fromNode, toNode }) {
   );
 }
 
-// ── Duration bar preview (animated) ──────────────────────────────────────────
-
+// Duration bar preview (animated)
 function DurationBar({ resolved, easing = 'ease' }) {
   const [playing, setPlaying] = React.useState(false);
   const key = React.useRef(0);
@@ -212,8 +208,7 @@ function DurationBar({ resolved, easing = 'ease' }) {
   );
 }
 
-// ── Main page ─────────────────────────────────────────────────────────────────
-
+// Main page
 export default function IndexPage({ lastBuiltOn }) {
   const [activeView, setActiveView] = React.useState('table');
   const [activeCategory, setActiveCategory] = React.useState('All');
@@ -322,7 +317,7 @@ export default function IndexPage({ lastBuiltOn }) {
     <main style={isGraph ? { display: 'flex', flexDirection: 'column', height: '100vh', overflow: 'hidden' } : undefined}>
       <header className="header">
         <div className="header-title">
-          <h1 id="page-title">Motion Tokens DTCG ({filteredTokens.length})</h1>
+          <h1 id="page-title">Motion Tokens ({filteredTokens.length})</h1>
           <p>Last built on {lastBuiltOn}</p>
         </div>
 
@@ -359,7 +354,7 @@ export default function IndexPage({ lastBuiltOn }) {
         </div>
       </header>
 
-      {/* ── TABLE VIEW ──────────────────────────────────────────────────── */}
+      {/* TABLE VIEW */}
       {!isGraph && (
         <div className="content">
           <table aria-labelledby="page-title">
@@ -400,7 +395,7 @@ export default function IndexPage({ lastBuiltOn }) {
         </div>
       )}
 
-      {/* ── GRAPH VIEW ──────────────────────────────────────────────────── */}
+      {/* GRAPH VIEW */}
       {isGraph && (
         <svg
           ref={svgRef}

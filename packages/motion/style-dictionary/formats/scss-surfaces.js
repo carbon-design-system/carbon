@@ -47,7 +47,7 @@ const SURFACES_PATH = path.resolve(
  * @returns {Array<{ name: string, description: string, recipe: object }>}
  */
 function collectSurfaces() {
-  const dtcg = JSON.parse(fs.readFileSync(SURFACES_PATH, 'utf8'));
+  const tokenFile = JSON.parse(fs.readFileSync(SURFACES_PATH, 'utf8'));
   const results = [];
 
   function traverse(obj, pathSegments) {
@@ -71,7 +71,7 @@ function collectSurfaces() {
     }
   }
 
-  traverse(dtcg, []);
+  traverse(tokenFile, []);
   return results;
 }
 
