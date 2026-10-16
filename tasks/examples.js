@@ -74,7 +74,7 @@ async function main() {
       .map(async (name) => {
         // Verify that each file that we read from the packages directory is
         // actually a folder. Typically used to catch `.DS_store` files that
-        // accidentally appear when opening with MacOS Finder
+        // accidentally appear when opening with macOS Finder
         const filepath = path.join(PACKAGES_DIR, name);
         const stat = await fs.lstat(filepath);
         const descriptor = {

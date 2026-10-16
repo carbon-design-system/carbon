@@ -1,0 +1,168 @@
+import { Markdown, Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+
+import * as SingleAddSelectStories from './single-add-select.stories';
+
+<Meta of={SingleAddSelectStories} />
+
+# Single add select
+
+[Single add select usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/patterns/add-and-select/usage/#select-flow)
+
+## Overview
+
+The single add select pattern is used to add or select a single item from larger lists or hierarchies. It provides a streamlined interface for users to search, filter, and select one item from a collection.
+
+## Coded examples
+
+Patterns have multiple ways of accomplishing a user need and typically use a combination of components with additional design considerations. The pattern code we share is meant to serve as an example implementation that can be built and extended further.
+
+#### Ingredients
+
+To build this pattern, we recommend including the following components:
+
+- [cds-tearsheet](/docs/components-tearsheet--overview) - Container for the pattern
+- [cds-add-select](/docs/components-addselect--overview) - Wrapper component
+- [cds-add-select-body](/docs/components-addselect--overview) - Container with search and breadcrumb navigation
+- [cds-add-select-column](/docs/components-addselect--overview) - Column wrapper for hierarchical navigation
+- [cds-add-select-row](/docs/components-addselect--overview) - Individual selectable items
+- [cds-add-select-selection-summary](/docs/components-addselect--overview) - Side panel showing selected item details
+- [cds-tearsheet-summary-content](/docs/components-tearsheet--overview) - Right-side summary content slot in wide tearsheet
+- [cds-button](https://web-components.carbondesignsystem.com/?path=/docs/components-button--overview) - Action buttons
+- [cds-toast-notification](https://web-components.carbondesignsystem.com/?path=/docs/components-notifications-toast--overview) - Success feedback
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/src/examples/add-select/example)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/src/examples/add-select/example)
+
+## Variants
+
+### Default
+
+Simple single selection from a flat list. The tearsheet is narrow and uses `cds-add-select-body` directly wrapping `cds-add-select-row` items.
+
+<Canvas withSource="none">
+  <Story of={SingleAddSelectStories.Default} />
+</Canvas>
+
+### With Hierarchy
+
+Single selection with hierarchical navigation and breadcrumbs. Uses `cds-add-select-column` (with `hide-search`) inside `cds-add-select-body`. Items with children show a chevron — clicking navigates deeper. Breadcrumbs update accordingly.
+
+<Canvas withSource="none">
+  <Story of={SingleAddSelectStories.WithHierarchy} />
+</Canvas>
+
+### With Hierarchy and Side Panel
+
+Single selection with hierarchical multi-column navigation and a side panel for item details. Uses a wide tearsheet with `cds-tearsheet-summary-content` and `cds-add-select-selection-summary` to display selected item metadata. Clicking an item with `has-item-panel` shows details in the side panel.
+
+<Canvas withSource="none">
+  <Story of={SingleAddSelectStories.WithHierarchyAndSidePanel} />
+</Canvas>
+
+## Key features
+
+### Search and filter
+
+The pattern includes built-in search functionality that allows users to quickly find items by typing. The search filters items in real-time based on the item title and supports hierarchical navigation.
+
+### Single selection
+
+Users can select only one item at a time using radio buttons. The selected item is visually highlighted and the submit button is enabled only when an item is selected.
+
+### Hierarchical navigation
+
+The **With Hierarchy** and **With Hierarchy and Side Panel** variants support nested data structures with breadcrumb navigation, allowing users to drill down into categories and navigate back up the hierarchy.
+
+### Side panel for item details
+
+The **With Hierarchy and Side Panel** variant uses a wide tearsheet with `summary-content-width` set alongside `cds-tearsheet-summary-content` and `cds-add-select-selection-summary`. When no item is selected an empty state is shown; selecting an item populates the panel with description, details, and tags.
+
+### Event handling
+
+The pattern emits custom events for key interactions:
+
+- `cds-tearsheet-closed` - Fired when the tearsheet is closed
+- `cds-add-select-body-search` - Fired when search term changes; `detail: { searchTerm }`
+- `cds-add-select-body-breadcrumb-click` - Fired when breadcrumb is clicked; `detail: { index }`
+- `cds-add-select-row-select` - Fired when item is selected/deselected; `detail: { itemId, selected, value }`
+- `cds-add-select-row-navigate` - Fired when navigating to item children; `detail: { itemId, title, parentId }`
+- `cds-add-select-row-item-panel-click` - Fired when the view details icon is clicked; `detail: { itemId }`
+- `cds-add-select-column-search` - Fired when column-level search changes; `detail: { searchTerm }`
+
+## Component properties
+
+### cds-add-select
+
+| Property | Type    | Default | Description                                   |
+|----------|---------|---------|-----------------------------------------------|
+| `multi`  | Boolean | `false` | `false` for single-select (radio), `true` for multi-select (checkbox) |
+
+### cds-add-select-body
+
+| Property                    | Type    | Default          | Description                          |
+|-----------------------------|---------|------------------|--------------------------------------|
+| `global-search-label`       | String  | `''`             | Search input label                   |
+| `global-search-placeholder` | String  | `'Search'`       | Search placeholder text              |
+| `items-label`               | String  | `''`             | Label for items section              |
+| `search-results-title`      | String  | `'Search results'` | Title shown when searching          |
+| `item-count`                | Number  | `undefined`      | Item count badge next to label       |
+| `hide-search`               | Boolean | `false`          | Hide the search input                |
+| `path`                      | Array   | `[]`             | Breadcrumb navigation path `[{ id, title }]` |
+
+### cds-add-select-column
+
+| Property             | Type    | Default   | Description                           |
+|----------------------|---------|-----------|---------------------------------------|
+| `title`              | String  | `''`      | Column title                          |
+| `search-label`       | String  | `'Search'`| Column search label                   |
+| `search-placeholder` | String  | `'Search'`| Column search placeholder             |
+| `hide-search`        | Boolean | `false`   | Hide the column search input          |
+| `item-count`         | Number  | `0`       | Item count badge                      |
+
+### cds-add-select-row
+
+| Property                     | Type    | Default         | Description                       |
+|------------------------------|---------|-----------------|-----------------------------------|
+| `item-id`                    | String  | `''`            | Unique identifier                 |
+| `title`                      | String  | `''`            | Item title                        |
+| `subtitle`                   | String  | `''`            | Item subtitle                     |
+| `value`                      | String  | `''`            | Item value                        |
+| `selected`                   | Boolean | `false`         | Selection state                   |
+| `has-children`               | Boolean | `false`         | Whether item has child items      |
+| `has-item-panel`             | Boolean | `false`         | Show view-details icon button     |
+| `item-panel-open`            | Boolean | `false`         | Whether side panel is open        |
+| `item-panel-icon-description`| String  | `'View details'`| Accessible label for icon         |
+| `disabled`                   | Boolean | `false`         | Disabled state                    |
+
+### cds-add-select-selection-summary
+
+| Property              | Type    | Default           | Description                          |
+|-----------------------|---------|-------------------|--------------------------------------|
+| `title`               | String  | `'Selected items'`| Panel title                          |
+| `selected-item-count` | Number  | `undefined`       | Count badge; body shown when `> 0`   |
+| `show-edit-icon`      | Boolean | `false`           | Show edit icon in header             |
+
+### cds-tearsheet (relevant props)
+
+| Property                | Type   | Default | Description                              |
+|-------------------------|--------|---------|------------------------------------------|
+| `open`                  | Boolean| `false` | Controls tearsheet visibility            |
+| `variant`               | String | `'wide'`| `'narrow'` or `'wide'`                   |
+| `summary-content-width` | String | `''`    | Override right panel width, e.g. `22.5rem` |
+
+## Best practices
+
+1. **Use tearsheet for complex selections**: The tearsheet provides a focused environment for selection tasks without losing context.
+
+2. **Implement hierarchical data thoughtfully**: Use breadcrumbs to help users understand their location in the data hierarchy.
+
+3. **Enable search for large lists**: For lists with more than 10 items, search functionality becomes essential.
+
+4. **Show feedback**: Display a success notification after selection to confirm the action.
+
+5. **Handle empty states**: Provide helpful messages when no results are found or when navigating to empty categories.
+
+6. **Side panel for rich metadata**: Use the **With Hierarchy and Side Panel** variant when items carry rich metadata (descriptions, key-value details, tags) that aids the user's decision.
