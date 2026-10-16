@@ -28,6 +28,8 @@
 }
 
 :host(#{$prefix}-file-uploader-item) {
+  @include emit-layout-tokens();
+  @include use('size', $default: 'md', $min: 'xs', $max: 'lg');
   @extend .#{$prefix}--file__selected-file;
 
   .#{$prefix}--file-filename {
@@ -51,13 +53,11 @@
   @extend .#{$prefix}--file__selected-file--disabled;
 }
 
-:host(#{$prefix}-file-uploader-item[size='md']) {
-  @extend .#{$prefix}--file__selected-file--md;
+:host(#{$prefix}-file-uploader-button) {
+  @include emit-layout-tokens();
 }
 
-:host(#{$prefix}-file-uploader-item[size='sm']) {
-  @extend .#{$prefix}--file__selected-file--sm;
-}
+@include emit-layout-tokens-to-shadow-host('#{$prefix}-file-uploader-item');
 
 :host(#{$prefix}-file-uploader) {
   @include emit-layout-tokens();

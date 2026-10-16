@@ -95,7 +95,7 @@ export interface FileUploaderButtonProps
    * Specify the size of the FileUploaderButton, from a list of available
    * sizes.
    */
-  size?: 'sm' | 'small' | 'field' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'small' | 'field' | 'md' | 'lg';
 
   /**
    * @deprecated The `tabIndex` prop for `FileUploaderButton` has been deprecated since it now renders a button element by default.
@@ -116,7 +116,7 @@ function FileUploaderButton({
   multiple = false,
   onChange = noopFn,
   name,
-  size = 'md',
+  size,
 
   innerRef,
   ...other
@@ -128,14 +128,24 @@ function FileUploaderButton({
   const inputNode = useRef<HTMLInputElement>(null);
   const labelRef = useRef<HTMLLabelElement>(null);
   const mergedLabelRef = useMergedRefs([labelRef, innerRef]);
-  const classes = cx(`${prefix}--btn`, className, {
-    [`${prefix}--btn--${buttonKind}`]: buttonKind,
-    [`${prefix}--btn--disabled`]: disabled,
-    // V11: remove field, small
-    [`${prefix}--btn--md`]: size === 'field' || size === 'md',
-    [`${prefix}--btn--sm`]: size === 'small' || size === 'sm',
-    [`${prefix}--layout--size-${size}`]: size,
-  });
+  const normalizedSize =
+    size === 'field' || size === 'small'
+      ? { field: 'md', small: 'sm' }[size]
+      : size;
+  const classes = cx(
+    `${prefix}--btn`,
+    `${prefix}--file-uploader-button`,
+    className,
+    {
+      [`${prefix}--btn--${buttonKind}`]: buttonKind,
+      [`${prefix}--btn--disabled`]: disabled,
+      [`${prefix}--btn--xs`]: size === 'xs',
+      // V11: remove field, small
+      [`${prefix}--btn--md`]: size === 'field' || size === 'md',
+      [`${prefix}--btn--sm`]: size === 'small' || size === 'sm',
+      [`${prefix}--layout--size-${normalizedSize}`]: normalizedSize,
+    }
+  );
 
   useEffect(() => {
     setLabelText(ownerLabelText);
@@ -284,7 +294,7 @@ FileUploaderButton.propTypes = {
    * Specify the size of the FileUploaderButton, from a list of available
    * sizes.
    */
-  size: PropTypes.oneOf(['sm', 'md', 'lg']),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
 
   /**
    * Provide a custom tabIndex value for the `<FileUploaderButton>`

@@ -111,7 +111,7 @@ class CDSFileUploaderButton extends HostListenerMixin(LitElement) {
    * Button size.
    */
   @property({ reflect: true })
-  size = BUTTON_SIZE.MEDIUM;
+  size?: BUTTON_SIZE;
 
   /**
    * The file types the file input should accept, separated by space.
@@ -167,10 +167,11 @@ class CDSFileUploaderButton extends HostListenerMixin(LitElement) {
     });
     const buttonClasses = classMap({
       [`${prefix}--btn`]: true,
+      [`${prefix}--file-uploader-button`]: true,
       [`${prefix}--btn--${buttonKind}`]: buttonKind,
-      [`${prefix}--layout--size-${size}`]: size,
+      [`${prefix}--layout--size-${size}`]: size !== undefined,
       [`${prefix}--btn--disabled`]: disabled,
-      [`${prefix}--btn--${size}`]: size,
+      [`${prefix}--btn--${size}`]: size !== undefined,
     });
     return html`
       <button

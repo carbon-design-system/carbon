@@ -134,7 +134,7 @@ class CDSFileUploaderItem extends LitElement {
    * The size of this file uploader item.
    */
   @property({ reflect: true })
-  size = FILE_UPLOADER_ITEM_SIZE.MEDIUM;
+  size?: FILE_UPLOADER_ITEM_SIZE;
 
   /**
    * The state of this file uploader item.
