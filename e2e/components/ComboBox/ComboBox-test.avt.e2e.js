@@ -57,14 +57,11 @@ test.describe('@avt ComboBox', () => {
     const clearButton = page.getByRole('button', {
       name: 'Clear selected item',
     });
-    const exampleOption = page.getByRole('option', {
-      name: 'An example option that is really long to show what should be done to handle long text',
+    const northAmericaOption = page.getByRole('option', {
+      name: 'North America (United States, Canada, and Mexico)',
     });
-    const optionOne = page.getByRole('option', {
-      name: 'An example option that is really long to show what should be done to handle long text',
-    });
-    const optionTwo = page.getByRole('option', {
-      name: 'Option 2',
+    const asiaPacificOption = page.getByRole('option', {
+      name: 'Asia Pacific',
     });
 
     await expect(combobox).toBeVisible();
@@ -76,7 +73,7 @@ test.describe('@avt ComboBox', () => {
     await expect(menu).toBeVisible();
     // Expect focus to be on 1st item in menu after Arrow Down
     // when there is no initial selected item
-    await expect(exampleOption).toHaveClass(
+    await expect(northAmericaOption).toHaveClass(
       'cds--list-box__menu-item cds--list-box__menu-item--highlighted'
     );
     // Close with Escape, retain focus, and open with Spacebar
@@ -97,7 +94,7 @@ test.describe('@avt ComboBox', () => {
     await page.keyboard.press('ArrowDown');
     // Navigation inside the menu
     // move to first option
-    await expect(optionOne).toHaveClass(
+    await expect(northAmericaOption).toHaveClass(
       'cds--list-box__menu-item cds--list-box__menu-item--highlighted'
     );
     // select first option (should only select with enter)
@@ -105,7 +102,7 @@ test.describe('@avt ComboBox', () => {
     await expect(combobox).toHaveValue(' ');
     await page.keyboard.press('Enter');
     await expect(combobox).toHaveValue(
-      'An example option that is really long to show what should be done to handle long text'
+      'North America (United States, Canada, and Mexico)'
     );
     // focus comes back to the toggle button after selecting
     await expect(combobox).toBeFocused();
@@ -113,7 +110,7 @@ test.describe('@avt ComboBox', () => {
     await expect(clearButton).toBeVisible();
     // Expect focus to be on selected item when opening with Arrow Down
     await page.keyboard.press('ArrowDown');
-    await expect(exampleOption).toHaveClass(
+    await expect(northAmericaOption).toHaveClass(
       'cds--list-box__menu-item cds--list-box__menu-item--active cds--list-box__menu-item--highlighted'
     );
     // should only clear selection when escape is pressed when the menu is closed
@@ -122,14 +119,14 @@ test.describe('@avt ComboBox', () => {
     await expect(clearButton).toBeHidden();
     await expect(combobox).toHaveValue('');
     // should highlight menu items based on text input
-    await page.keyboard.press('2');
+    await page.keyboard.type('Asia');
     await expect(menu).toBeVisible();
-    await expect(optionTwo).toHaveClass(
+    await expect(asiaPacificOption).toHaveClass(
       'cds--list-box__menu-item cds--list-box__menu-item--highlighted'
     );
     // Should select and populate combobox with current filtered item
     await page.keyboard.press('Enter');
-    await expect(combobox).toHaveValue('Option 2');
+    await expect(combobox).toHaveValue('Asia Pacific');
     // clear to prep for general selection
     await page.keyboard.press('Escape');
     await expect(clearButton).toBeHidden();
@@ -140,7 +137,7 @@ test.describe('@avt ComboBox', () => {
     await page.keyboard.press('ArrowDown');
     await page.keyboard.press('Enter');
     await expect(combobox).toHaveValue(
-      'An example option that is really long to show what should be done to handle long text'
+      'North America (United States, Canada, and Mexico)'
     );
     await page.keyboard.press('Escape');
 
@@ -149,7 +146,7 @@ test.describe('@avt ComboBox', () => {
     await page.keyboard.press('ArrowDown');
     await page.keyboard.press('ArrowDown');
     await page.keyboard.press('Enter');
-    await expect(combobox).toHaveValue('Option 1');
+    await expect(combobox).toHaveValue('Europe');
     await page.keyboard.press('Escape');
   });
 });
