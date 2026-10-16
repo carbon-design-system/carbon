@@ -452,6 +452,23 @@ describe('TextArea', () => {
         expect(onChange).toHaveBeenCalledTimes(0);
       });
 
+      it('should prioritize disabled over readOnly when both are true', () => {
+        render(
+          <TextArea
+            id="textarea-1"
+            labelText="TextArea label"
+            disabled={true}
+            readOnly={true}
+          />
+        );
+
+        const textarea = screen.getByRole('textbox');
+        expect(textarea).toHaveAttribute('disabled', '');
+        expect(textarea.disabled).toBe(true);
+        expect(textarea.readOnly).toBe(false);
+        expect(textarea).not.toHaveAttribute('aria-readonly');
+      });
+
       it('should not render counter with only `enableCounter` prop passed in', () => {
         render(
           <TextArea id="textarea-1" labelText="TextArea label" enableCounter />

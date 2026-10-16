@@ -130,7 +130,6 @@ describe('cds-date-picker', () => {
       expect(input?.hasAttribute('readonly')).to.be.false;
       expect(input?.disabled).to.be.true;
       expect(input?.readOnly).to.be.false;
-      expect(input?.disabled).to.be.true;
     });
   });
 
