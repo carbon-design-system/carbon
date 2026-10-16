@@ -6,6 +6,7 @@
  */
 
 import '@carbon/web-components/es/components/menu/index.js';
+import CaretRight16 from '@carbon/icons/es/caret--right/16.js';
 import { expect, fixture, html } from '@open-wc/testing';
 
 describe('cds-menu-item', () => {
@@ -287,6 +288,77 @@ describe('cds-menu-item', () => {
 
       // Restore original document direction
       document.dir = originalDir;
+    });
+  });
+
+  describe('submenu indicator', () => {
+    let originalDir;
+
+    beforeEach(() => {
+      originalDir = document.dir;
+    });
+
+    afterEach(() => {
+      document.dir = originalDir;
+    });
+
+    const renderNested = () =>
+      fixture(html`
+        <cds-menu-item label="Level 1">
+          <cds-menu-item-group slot="submenu">
+            <cds-menu-item label="Level 2">
+              <cds-menu-item slot="submenu" label="Level 3"></cds-menu-item>
+            </cds-menu-item>
+          </cds-menu-item-group>
+        </cds-menu-item>
+      `);
+
+    const getIndicators = (el) =>
+      [el, el.querySelector('cds-menu-item[label="Level 2"]')].map((item) =>
+        item.shadowRoot.querySelector('.cds--menu-item__shortcut svg')
+      );
+
+    const pointsRight = (svg) => {
+      const d = svg.querySelector('path').getAttribute('d');
+      const isMirrored =
+        new DOMMatrix(getComputedStyle(svg).transform).a === -1;
+      return (d === CaretRight16.content[0].attrs.d) !== isMirrored;
+    };
+
+    it('should point towards the inline end in LTR', async () => {
+      document.dir = 'ltr';
+      const el = await renderNested();
+      await el.updateComplete;
+
+      getIndicators(el).forEach((svg) => {
+        expect(pointsRight(svg)).to.be.true;
+      });
+    });
+
+    it('should point towards the inline end in RTL', async () => {
+      document.dir = 'rtl';
+      const el = await renderNested();
+      await el.updateComplete;
+
+      getIndicators(el).forEach((svg) => {
+        expect(pointsRight(svg)).to.be.false;
+      });
+    });
+
+    it('should follow direction changes after the first render', async () => {
+      document.dir = 'ltr';
+      const el = await renderNested();
+      await el.updateComplete;
+
+      document.dir = 'rtl';
+      getIndicators(el).forEach((svg) => {
+        expect(pointsRight(svg)).to.be.false;
+      });
+
+      document.dir = 'ltr';
+      getIndicators(el).forEach((svg) => {
+        expect(pointsRight(svg)).to.be.true;
+      });
     });
   });
 });
