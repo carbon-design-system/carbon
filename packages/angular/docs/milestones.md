@@ -22,7 +22,9 @@ Yarn workspace, build toolchain, test runners, Storybook, and CI job.
 - `packages/angular/package.json`
   - `name: "@carbon/angular"`, `version: "0.0.0-prerelease.0"`
   - Peer deps: `@angular/common >=17`, `@angular/core >=17`,
-    `@angular/forms >=17`, `@carbon/styles >=2`
+    `@angular/forms >=17`, `@carbon/styles >=2` (the Angular range is changing
+    to `>=20`, see
+    [ADR 0018](../../../docs/decisions/0018-angular-supported-major-versions.md))
   - Deps: `@carbon/web-components` (hard dependency — Angular wraps WC directly)
 - `packages/angular/ng-package.json` — ng-packagr entry point
 - `packages/angular/tsconfig.json` — strict Angular + Ivy compiler options
