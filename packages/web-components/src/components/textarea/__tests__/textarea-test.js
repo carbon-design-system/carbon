@@ -62,6 +62,18 @@ describe('cds-textarea', () => {
     expect(textarea.disabled).to.be.true;
   });
 
+  it('should prioritize disabled over readonly when both are true', async () => {
+    const el = await fixture(html`
+      <cds-textarea readonly disabled></cds-textarea>
+    `);
+
+    const textarea = el.shadowRoot.querySelector('textarea');
+    expect(textarea.hasAttribute('disabled')).to.be.true;
+    expect(textarea.hasAttribute('readonly')).to.be.false;
+    expect(textarea.disabled).to.be.true;
+    expect(textarea.readOnly).to.be.false;
+  });
+
   it('should show invalid text when invalid is set', async () => {
     const el = await fixture(html`
       <cds-textarea invalid invalid-text="Error occurred"></cds-textarea>
