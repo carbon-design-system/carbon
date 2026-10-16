@@ -60,6 +60,7 @@ import {
   autoUpdate,
 } from '@floating-ui/react';
 import { useFeatureFlag } from '../FeatureFlags';
+import { useSafeFloatingRefs } from '../../internal/useSafeFloatingRefs';
 import { AILabel } from '../AILabel';
 import {
   defaultItemToString,
@@ -375,7 +376,7 @@ export const MultiSelect = React.forwardRef(
 
             // The floating element is positioned relative to its nearest
             // containing block (usually the viewport). It will in many cases also
-            // “break” the floating element out of a clipping ancestor.
+            // "break" the floating element out of a clipping ancestor.
             // https://floating-ui.com/docs/misc#clipping
             strategy: 'fixed',
 
@@ -396,6 +397,7 @@ export const MultiSelect = React.forwardRef(
           }
         : {}
     );
+    const { setFloatingSafe, setReferenceSafe } = useSafeFloatingRefs(refs);
 
     useIsomorphicEffect(() => {
       if (enableFloatingStyles) {
@@ -715,10 +717,10 @@ export const MultiSelect = React.forwardRef(
     const menuProps = useMemo(
       () =>
         getMenuProps({
-          ref: enableFloatingStyles ? refs.setFloating : null,
+          ref: enableFloatingStyles ? setFloatingSafe : null,
           hidden: !isOpen,
         }),
-      [enableFloatingStyles, getMenuProps, isOpen, refs.setFloating]
+      [enableFloatingStyles, getMenuProps, isOpen, setFloatingSafe]
     );
 
     const allLabelProps = getLabelProps();
@@ -800,7 +802,7 @@ export const MultiSelect = React.forwardRef(
           )}
           <div
             className={multiSelectFieldWrapperClasses}
-            ref={enableFloatingStyles ? refs.setReference : null}>
+            ref={enableFloatingStyles ? setReferenceSafe : null}>
             {selectedItems.length > 0 && (
               <ListBox.Selection
                 readOnly={readOnly}

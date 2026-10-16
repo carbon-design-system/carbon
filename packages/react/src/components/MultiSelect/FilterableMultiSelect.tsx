@@ -62,6 +62,7 @@ import {
   size as floatingSize,
   autoUpdate,
 } from '@floating-ui/react';
+import { useSafeFloatingRefs } from '../../internal/useSafeFloatingRefs';
 import type { TranslateWithId } from '../../types/common';
 import { AILabel } from '../AILabel';
 import {
@@ -458,7 +459,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
 
           // The floating element is positioned relative to its nearest
           // containing block (usually the viewport). It will in many cases also
-          // “break” the floating element out of a clipping ancestor.
+          // "break" the floating element out of a clipping ancestor.
           // https://floating-ui.com/docs/misc#clipping
           strategy: 'fixed',
 
@@ -479,6 +480,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
         }
       : {}
   );
+  const { setFloatingSafe, setReferenceSafe } = useSafeFloatingRefs(refs);
 
   useIsomorphicEffect(() => {
     if (autoAlign) {
@@ -963,12 +965,12 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     () =>
       getMenuProps(
         {
-          ref: autoAlign ? refs.setFloating : null,
+          ref: autoAlign ? setFloatingSafe : null,
           hidden: !isOpen,
         },
         { suppressRefError: true }
       ),
-    [autoAlign, getMenuProps, isOpen, refs.setFloating]
+    [autoAlign, getMenuProps, isOpen, setFloatingSafe]
   );
 
   const mergedRef = mergeRefs(textInput, inputProp.ref);
@@ -1022,7 +1024,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
         size={size}>
         <div
           className={`${prefix}--list-box__field`}
-          ref={autoAlign ? refs.setReference : null}>
+          ref={autoAlign ? setReferenceSafe : null}>
           {controlledSelectedItems.length > 0 && (
             <ListBoxSelection
               readOnly={readOnly}
