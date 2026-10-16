@@ -588,6 +588,50 @@ describe('cds-overflow-menu', () => {
       expect(menuSurface?.style.top).to.equal('');
     });
 
+    ['ltr', 'rtl'].forEach((dir) => {
+      it(`should align the menu with the inline start edge of the trigger in ${dir.toUpperCase()}`, async () => {
+        const originalDir = document.dir;
+        document.dir = dir;
+
+        try {
+          const featureFlag = await fixture(html`
+            <feature-flags enable-v12-overflowmenu="true">
+              <div style="padding-inline-start: 300px">
+                <cds-overflow-menu label="Actions">
+                  <cds-menu>
+                    <cds-menu-item label="Stop app"></cds-menu-item>
+                  </cds-menu>
+                </cds-overflow-menu>
+              </div>
+            </feature-flags>
+          `);
+          const el = featureFlag.querySelector('cds-overflow-menu');
+
+          el.open = true;
+          await el.updateComplete;
+
+          const menu = el.querySelector('cds-menu');
+          await menu.updateComplete;
+
+          const triggerRect = el.shadowRoot
+            .querySelector('button')
+            .getBoundingClientRect();
+          const menuRect = menu.shadowRoot
+            .querySelector('.cds--menu')
+            .getBoundingClientRect();
+
+          if (dir === 'rtl') {
+            expect(menuRect.right).to.equal(triggerRect.right);
+          } else {
+            expect(menuRect.left).to.equal(triggerRect.left);
+          }
+          expect(menuRect.top).to.equal(triggerRect.bottom);
+        } finally {
+          document.dir = originalDir;
+        }
+      });
+    });
+
     it('should apply floating UI styles when dynamic floating styles are enabled', async () => {
       const featureFlag = await fixture(html`
         <feature-flags
