@@ -12726,6 +12726,22 @@
     - performance
   sizes:
     - 32
+- name: ibm--integration-intelligence-hub
+  friendly_name: IBM® Integration Intelligence Hub
+  aliases:
+    - IBM
+    - Integration Intelligence Hub
+    - MCP
+    - server
+    - AI
+    - agent
+    - platform
+    - webMethods
+    - context engine
+    - connection
+    - model context protocol
+  sizes:
+    - 32
 - name: ibm--jrs
   friendly_name: IBM® Jazz Reporting Service
   aliases:
