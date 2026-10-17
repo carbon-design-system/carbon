@@ -485,6 +485,20 @@ describe('FilterableMultiSelect', () => {
     expect(screen.getByPlaceholderText('test')).toHaveDisplayValue('');
   });
 
+  it('should clear the input value when focus leaves without a related target', async () => {
+    render(<FilterableMultiSelect {...mockProps} placeholder="test" />);
+    await openMenu();
+
+    const input = screen.getByPlaceholderText('test');
+    await userEvent.type(input, '3');
+    act(() => {
+      input.blur();
+    });
+
+    expect(input).toHaveDisplayValue('');
+    expect(input).toHaveAttribute('aria-expanded', 'false');
+  });
+
   it('should respect slug prop', async () => {
     const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
     const { container } = render(

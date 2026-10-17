@@ -958,7 +958,10 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
           preventDownshiftDefault: boolean;
         }
       ) => {
-        if (event.relatedTarget === clearInputButton.current) {
+        if (
+          clearInputButton.current !== null &&
+          event.relatedTarget === clearInputButton.current
+        ) {
           // Focus moved to the clear input button, which is part of the
           // field. Keep the focus styling, the filter value and the menu as
           // they are so that the button survives long enough to be clicked.
