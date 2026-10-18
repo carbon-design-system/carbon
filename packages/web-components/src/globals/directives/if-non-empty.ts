@@ -8,7 +8,7 @@
 import { ifDefined } from 'lit/directives/if-defined.js';
 
 /**
- * A variant of `if-non-null` which stops rendering if the given value is an emptry string in addition to `null`/`undefined`.
+ * A variant of `if-non-null` which stops rendering if the given value is an empty string in addition to `null`/`undefined`.
  *
  * @param value The value.
  */
