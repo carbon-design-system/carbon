@@ -41,9 +41,9 @@ and HEX code:
 ```
 
 After editing the file, run `yarn build` in `packages/colors` to regenerate the
-JavaScript and Sass outputs. See the
-[`@carbon/colors` README](/packages/colors/README.md) for the list of generated
-files.
+JavaScript and Sass outputs. The
+[`@carbon/colors` README](/packages/colors/README.md) lists the generated files
+and the test command to run afterwards.
 
 ### Themes
 
