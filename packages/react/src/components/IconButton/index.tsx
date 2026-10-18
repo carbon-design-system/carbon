@@ -155,7 +155,7 @@ const IconButton = forwardRef<unknown, IconButtonProps>(
   (
     {
       align,
-      autoAlign = false,
+      autoAlign,
       badgeCount,
       children,
       className,
