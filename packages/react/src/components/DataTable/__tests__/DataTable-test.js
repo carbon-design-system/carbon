@@ -6,6 +6,8 @@
  */
 
 import React from 'react';
+import { flushSync } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import Button from '../../Button';
 import DataTable, {
   Table,
@@ -1545,6 +1547,70 @@ describe('DataTable', () => {
         expect(state.hasCells).toBe(true);
         expect(state.cellCount).toBe(2); // Should always have 2 cells for 2 headers
       });
+    });
+  });
+
+  describe('repeated synchronous commits', () => {
+    const headers = [{ key: 'fieldA', header: 'Field A' }];
+
+    // Each case makes DataTable re-derive its state on mount: a row field that
+    // isn't a header, or no rows at all.
+    it.each([
+      [
+        'rows with fields that are not headers',
+        (i) => [{ id: `row-${i}`, fieldA: `Value ${i}`, extra: i }],
+      ],
+      ['empty rows', () => []],
+    ])('should not exceed the maximum update depth with %s', (_, getRows) => {
+      // React's limit is 50 nested updates. Mounting tables one at a time
+      // with `flushSync` exceeds it if each mount leaves a pending update.
+      const count = 60;
+      const previousActEnvironment = global.IS_REACT_ACT_ENVIRONMENT;
+      global.IS_REACT_ACT_ENVIRONMENT = false;
+      const container = document.createElement('div');
+      document.body.appendChild(container);
+      const root = createRoot(container);
+
+      try {
+        expect(() => {
+          for (let mounted = 1; mounted <= count; mounted++) {
+            flushSync(() => {
+              root.render(
+                <>
+                  {Array.from({ length: mounted }, (_, i) => (
+                    <DataTable key={i} headers={headers} rows={getRows(i)}>
+                      {({ rows, getTableProps, getRowProps }) => (
+                        <Table {...getTableProps()}>
+                          <TableBody>
+                            {rows.map((row) => (
+                              <TableRow {...getRowProps({ row })} key={row.id}>
+                                {row.cells.map((cell) => (
+                                  <TableCell key={cell.id}>
+                                    {cell.value}
+                                  </TableCell>
+                                ))}
+                              </TableRow>
+                            ))}
+                          </TableBody>
+                        </Table>
+                      )}
+                    </DataTable>
+                  ))}
+                </>
+              );
+            });
+          }
+        }).not.toThrow();
+
+        expect(container.querySelectorAll('table')).toHaveLength(count);
+        expect(container.querySelectorAll('td')).toHaveLength(
+          getRows(0).length * count
+        );
+      } finally {
+        root.unmount();
+        container.remove();
+        global.IS_REACT_ACT_ENVIRONMENT = previousActEnvironment;
+      }
     });
   });
 });

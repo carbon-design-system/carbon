@@ -7,7 +7,6 @@
 
 import PropTypes from 'prop-types';
 import {
-  useEffect,
   useMemo,
   useState,
   type MouseEvent,
@@ -377,7 +376,16 @@ export const DataTable = <RowType, ColTypes extends any[]>(
     isExpandedAll: false,
   }));
 
-  useEffect(() => {
+  // Re-derive state during render when `headers` or `rows` change instead of
+  // in an effect. An effect commits stale state first and then schedules a
+  // follow-up update. In React 19, that pending update counts toward the
+  // nested update limit on every subsequent synchronous commit (e.g. repeated
+  // `flushSync` calls), which eventually throws "Maximum update depth
+  // exceeded".
+  // https://react.dev/learn/you-might-not-need-an-effect#adjusting-some-state-when-a-prop-changes
+  const [prevInputs, setPrevInputs] = useState({ headers, rows });
+
+  if (prevInputs.headers !== headers || prevInputs.rows !== rows) {
     const nextRowIds = rows.map((row) => row.id);
     const nextHeaders = headers.map((header) => header.key);
     const hasRowIdsChanged = !isEqual(nextRowIds, state.rowIds);
@@ -409,10 +417,10 @@ export const DataTable = <RowType, ColTypes extends any[]>(
     const hasRowsChanged = !isEqual(nextRows, currentRows);
 
     if (hasRowIdsChanged || hasHeadersChanged || hasRowsChanged) {
+      setPrevInputs({ headers, rows });
       setState((prev) => getDerivedStateFromProps(props, prev));
     }
-    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
-  }, [headers, rows]);
+  }
 
   const getHeaderProps: RenderProps['getHeaderProps'] = ({
     header,
