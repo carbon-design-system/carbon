@@ -84,12 +84,25 @@
   }
 
   // ─── Header ──────────────────────────────────────────────────────────
+  // Two layouts — both pure flex
+  //
+  // Without headerMedia:
+  //   __header (flex row)
+  //     children (__title, flex:1 min-inline-size:0)
+  //     __actions-slot (flex-shrink:0, max 50%)
+  //
+  // With headerMedia:
+  //   __header (flex column)
+  //     __header-top-row (flex row)
+  //       __header-media
+  //       __actions-slot
+  //     children (__title, full width naturally)
   .#{$prefix}--card__header {
     position: relative;
-    display: grid;
-    container-type: inline-size;
-    grid-template-columns: auto minmax(0, 1fr);
-    row-gap: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding-inline-start: $spacing-05;
   }
 
   // ─── Body ────────────────────────────────────────────────────────────
@@ -193,14 +206,29 @@
     display: inline-flex;
   }
 
+  // ─── Header top row (only rendered when headerMedia prop is set) ──────
+  // Holds __header-media (start) and __actions-slot (end) in a flex row.
+  // __header then switches to flex-column so children (__title) sit below
+  // this row at full width.
+  .#{$prefix}--card__header-top-row {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    inline-size: 100%;
+  }
+
+  // When __header-top-row is present the header becomes a column.
+  .#{$prefix}--card__header:has(.#{$prefix}--card__header-top-row) {
+    flex-direction: column;
+  }
+
   // ─── Header media (icon / avatar slot) ───────────────────────────────
   .#{$prefix}--card__header-media {
     display: flex;
+    flex: 1;
     align-items: flex-start;
     justify-content: flex-start;
-    grid-column: 1 / -1;
-    margin-block: $spacing-05;
-    margin-inline-start: $spacing-05;
+    margin-block-start: $spacing-05;
     max-block-size: $spacing-10;
   }
 
@@ -366,18 +394,30 @@
   }
 
   // ─── Title ───────────────────────────────────────────────────────────
-  // Always col 2 so it shares that column with __header-media above it.
+  // flex: 1 fills remaining inline space in the row-flex header, shrinking
+  // to make room for __actions-slot.
   .#{$prefix}--card__title {
     display: flex;
-    flex-direction: column;
-    gap: $spacing-01;
-    grid-column: 2;
-    margin-inline: $spacing-05;
+    overflow: hidden;
+    flex: 1;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: $spacing-05;
+    inline-size: 100%;
+    margin-block: $spacing-05;
     min-inline-size: 0;
   }
 
-  .#{$prefix}--card__header > .#{$prefix}--card__title {
-    margin-block: $spacing-05;
+  // Text wrapper (label + title-text-row + description).
+  // flex: 1 fills the remaining row width when __title-media is present.
+  // min-inline-size: 0 allows the cell to shrink below its content's intrinsic
+  // size so long words / titles cannot push __title-media out of the row.
+  .#{$prefix}--card__title-text {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: $spacing-01;
+    min-inline-size: 0;
   }
 
   .#{$prefix}--card--expressive .#{$prefix}--card__title-text-row {
@@ -416,11 +456,6 @@
     gap: $spacing-03;
   }
 
-  // Trailing icon — no override needed; icon span is inline-flex inside block text
-  .#{$prefix}--card__title-text-row--with-end-icon {
-    display: block;
-  }
-
   // Title leading icon wrapper
   .#{$prefix}--card__title-start-icon {
     display: flex;
@@ -435,6 +470,12 @@
     align-items: center;
     margin-inline-start: $spacing-03;
     vertical-align: middle;
+  }
+
+  // Leading icon + trailing icon: display as flex row (same as --with-start-icon)
+  .#{$prefix}--card__title-text-row--with-end-icon {
+    display: inline-flex;
+    align-items: center;
   }
 
   // ─── Description (nested inside __title via description prop) ──────────
@@ -463,46 +504,52 @@
   }
 
   // ─── Title media ─────────────────────────────────────────────────────
+  // Now rendered inside CardTitle (not a direct grid child). Displayed as a
+  // flex item to the left of the __title-text wrapper. No grid-column needed.
   .#{$prefix}--card__title-media {
     display: flex;
     flex-shrink: 0;
     align-items: flex-start;
     justify-content: center;
-    grid-column: 1;
-    margin-block-start: $spacing-05;
     max-block-size: $spacing-10;
-    padding-inline-end: $spacing-05;
-    padding-inline-start: $spacing-05;
   }
 
-  .#{$prefix}--card__header:has(> .#{$prefix}--card__title-media)
-    > .#{$prefix}--card__title {
-    margin-inline: 0 $spacing-05;
+  // ─── Actions slot wrapper ─────────────────────────────────────────────
+  // flex-shrink: 0 — never squeezed by the title.
+  // max-inline-size: 50% — actions can never exceed half the header width,
+  //   ensuring the title always has at least half the available space.
+  // inline-size: max-content — gives createOverflowHandler a concrete fixed
+  //   width to measure against (bounded by max-inline-size above).
+  .#{$prefix}--card__actions-slot {
+    display: flex;
+    flex-shrink: 0;
+    align-items: flex-start;
+    justify-content: flex-end;
+    inline-size: max-content;
+    max-inline-size: 50%;
+    padding-block-start: $spacing-03;
+    padding-inline-end: $spacing-03;
   }
 
-  // ─── Header actions ───────────────────────────────────────────────────
+  // ─── Header actions (CardActions component) ───────────────────────────
+  // __actions fills its slot wrapper so createOverflowHandler always has a
+  // concrete, fixed inline-size to measure against. Without inline-size:100%
+  // the container reports its intrinsic (uncapped) width and the handler
+  // never triggers overflow collapse.
   .#{$prefix}--card__actions {
-    position: absolute;
-    display: inline-flex;
+    display: flex;
+    overflow: hidden;
     align-items: center;
     justify-content: flex-end;
     block-size: $spacing-07;
     gap: $spacing-02;
-    inline-size: calc(50% - $spacing-03);
-    inset-block-start: $spacing-03;
-    inset-inline-end: $spacing-03;
-    max-inline-size: calc(50% - $spacing-03);
+    inline-size: 100%;
   }
 
   // createOverflowHandler marks overflowed items with [data-hidden].
   // Hide them so only the overflow menu button remains visible.
   .#{$prefix}--card__actions [data-hidden]:not([data-fixed]) {
     display: none;
-  }
-
-  .#{$prefix}--card__header:has(> .#{$prefix}--card__actions)
-    > .#{$prefix}--card__title {
-    max-inline-size: calc(50cqw - $spacing-03);
   }
 
   // ─── AI Label (decorator) ─────────────────────────────────────────────
@@ -525,24 +572,19 @@
     inset-inline-end: $spacing-03;
   }
 
-  // AI label without actions: title must clear the decorator ($spacing-07)
-  // plus its $spacing-03 inset from the card edge.
-  .#{$prefix}--card--has-ai-label:not(:has(.#{$prefix}--card__actions))
+  // AI label without actions: title must not overlap the absolutely-positioned
+  // decorator. Reserve space for its width ($spacing-07) plus end inset ($spacing-03).
+  .#{$prefix}--card--has-ai-label:not(:has(.#{$prefix}--card__actions-slot))
     .#{$prefix}--card__header
     > .#{$prefix}--card__title {
-    max-inline-size: calc(100cqw - $spacing-07 - $spacing-03);
+    max-inline-size: calc(100% - $spacing-07 - $spacing-03);
   }
 
-  // AI label with actions: the actions box is shifted left by the decorator
-  // width; the title must clear that shifted edge.
-  .#{$prefix}--card--has-ai-label:has(.#{$prefix}--card__actions)
-    .#{$prefix}--card__header
-    > .#{$prefix}--card__title {
-    max-inline-size: calc(50cqw - $spacing-03 - $spacing-06 - $spacing-03 * 2);
-  }
-
-  .#{$prefix}--card--has-ai-label .#{$prefix}--card__actions {
-    inset-inline-end: calc($spacing-03 + $spacing-06 + $spacing-03);
+  // AI label with actions: the decorator occupies the same corner as the
+  // actions-slot (col 2). Shift the slot's end padding inward so buttons
+  // do not render behind the decorator.
+  .#{$prefix}--card--has-ai-label .#{$prefix}--card__actions-slot {
+    padding-inline-end: calc($spacing-03 + $spacing-06 + $spacing-03);
   }
 
   // AI label hover state for clickable cards
