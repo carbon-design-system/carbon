@@ -155,8 +155,8 @@
   }
 
   @media (any-hover: hover) {
-    .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active):hover,
-    .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active)
+    .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active):hover
+      .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active)
       > .#{$prefix}--side-nav__submenu:hover,
     .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active)
       > .#{$prefix}--side-nav__link:hover,

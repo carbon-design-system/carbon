@@ -11,7 +11,7 @@ import React, { useEffect, useRef, useState, type HTMLAttributes } from 'react';
 import { matches, keys } from '../../internal/keyboard';
 import { useId } from '../../internal/useId';
 import { useMergedRefs } from '../../internal/useMergedRefs';
-import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
+import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
 import { usePrefix } from '../../internal/usePrefix';
 import { deprecate } from '../../prop-types/deprecate';
 import { noopFn } from '../../internal/noopFn';
@@ -172,7 +172,7 @@ function FileUploaderButton({
     onChange(event);
   }
 
-  useNoInteractiveChildren(
+  useNoInteractiveChildrenForLabel(
     labelRef,
     'The FileUploaderButton component `labelText` prop must have no interactive content'
   );

@@ -293,11 +293,16 @@ export const Operational = {
       control: 'text',
       description: 'Provide text to be rendered inside of a the tag.',
     },
+    showIcon: {
+      control: 'boolean',
+      description: 'Specify whether the Tag has an icon',
+    },
   },
   args: {
     ...defaultArgs,
+    showIcon: true,
   },
-  render: ({ disabled, size, text }) => {
+  render: ({ disabled, showIcon, size, text }) => {
     const togglePopover = (e) => {
       if (e instanceof PointerEvent) {
         const popoverElement = (e.target as HTMLElement)?.parentElement
@@ -369,7 +374,7 @@ export const Operational = {
               type=${tag.type}
               text="${text || tag.text}"
               size="${size}"
-              >${iconLoader(Asleep16, { slot: 'icon' })}
+              >${showIcon ? iconLoader(Asleep16, { slot: 'icon' }) : null}
             </cds-operational-tag>`
         )}
       </div>
@@ -387,7 +392,7 @@ export const Operational = {
               @keydown="${togglePopover}"
               ?disabled="${disabled}"
               text="${text || `Tag content`}">
-              ${iconLoader(Asleep16, { slot: 'icon' })}
+              ${showIcon ? iconLoader(Asleep16, { slot: 'icon' }) : null}
             </cds-operational-tag>
           </div>
           <cds-popover-content class="popover-content">
@@ -408,7 +413,7 @@ export const Operational = {
               @keydown="${togglePopover}"
               ?disabled="${disabled}"
               text="${text || `Tag content`}">
-              ${iconLoader(Asleep16, { slot: 'icon' })}
+              ${showIcon ? iconLoader(Asleep16, { slot: 'icon' }) : null}
             </cds-operational-tag>
           </div>
           <cds-popover-content>

@@ -60,7 +60,6 @@ const sizes = {
 
 const defaultArgs = {
   direction: DROPDOWN_DIRECTION.BOTTOM,
-  autoalign: false,
   allowCustomValue: false,
   disabled: false,
   helperText: 'Helper text',

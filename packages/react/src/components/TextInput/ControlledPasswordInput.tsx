@@ -15,7 +15,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import { useId } from '../../internal/useId';
 import { hasHelperText } from '../../internal/hasHelperText';
 import { noopFn } from '../../internal/noopFn';
-import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
+import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
 
 export interface ControlledPasswordInputProps
   extends HTMLAttributes<HTMLInputElement> {
@@ -197,7 +197,7 @@ const ControlledPasswordInput = forwardRef<
         {labelText}
       </label>
     );
-    useNoInteractiveChildren(
+    useNoInteractiveChildrenForLabel(
       labelRef,
       'The ControlledPasswordInput component `labelText` prop must have no interactive content'
     );

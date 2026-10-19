@@ -30,7 +30,11 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(FluidTextAreaStories.Default),
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: FluidTextAreaStories.Default,
+          styles: FluidTextAreaStories.default.parameters.styles,
+        }),
     },
   ]}
 />
@@ -42,7 +46,11 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(FluidTextAreaStories.Skeleton),
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: FluidTextAreaStories.Skeleton,
+          styles: FluidTextAreaStories.default.parameters.styles,
+        }),
     },
   ]}
 />
@@ -55,23 +63,17 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig(FluidTextAreaStories.DefaultWithToggletip),
+        stackblitzPrefillConfig({
+          story: FluidTextAreaStories.DefaultWithToggletip,
+          styles: FluidTextAreaStories.default.parameters.styles,
+        }),
     },
   ]}
 />
 
 ### Default With Layers
 
-<Canvas
-  of={FluidTextAreaStories.DefaultWithLayers}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () =>
-        stackblitzPrefillConfig(FluidTextAreaStories.DefaultWithLayers),
-    },
-  ]}
-/>
+<Canvas of={FluidTextAreaStories.DefaultWithLayers} />
 
 ## Accessibility Considerations
 

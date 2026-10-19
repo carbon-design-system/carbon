@@ -724,6 +724,7 @@ exports[`@carbon/pictograms-react should not update exports without a semver cha
   "IbmAtxOffice",
   "IbmAutomationPlatform",
   "IbmBob",
+  "IbmChampionStar",
   "IbmCloud",
   "IbmConcert",
   "IbmElm",

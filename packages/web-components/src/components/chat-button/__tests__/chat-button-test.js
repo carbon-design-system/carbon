@@ -103,6 +103,24 @@ describe('cds-chat-button', () => {
     );
   });
 
+  it('should restore kind and size when quick action is turned off', async () => {
+    const el = await fixture(html`
+      <cds-chat-button is-quick-action kind="secondary" size="md">
+        Chat
+      </cds-chat-button>
+    `);
+    const button = el.shadowRoot.querySelector('cds-button');
+
+    expect(el).to.have.attribute('kind', 'secondary');
+    expect(el).to.have.attribute('size', 'md');
+
+    el.isQuickAction = false;
+    await el.updateComplete;
+
+    expect(button).to.have.attribute('kind', 'secondary');
+    expect(button).to.have.attribute('size', 'md');
+  });
+
   it('should render a selected quick action', async () => {
     const el = await fixture(html`
       <cds-chat-button is-quick-action is-selected>Chat</cds-chat-button>

@@ -26,7 +26,8 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(PaginationNavStories.Default),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: PaginationNavStories.Default }),
     },
   ]}
 />

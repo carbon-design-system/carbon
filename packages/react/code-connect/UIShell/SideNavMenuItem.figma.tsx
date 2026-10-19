@@ -12,7 +12,7 @@ import figma from '@figma/code-connect';
 
 figma.connect(
   SideNavMenuItem,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=2346-16194&t=wcK3P98b09VsrxXF-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=2346-16194&t=wcK3P98b09VsrxXF-4',
   {
     props: {
       linkText: figma.string('Link text'),
@@ -30,7 +30,7 @@ figma.connect(
 
 figma.connect(
   SideNavLink,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=2346-16194&t=wcK3P98b09VsrxXF-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=2346-16194&t=wcK3P98b09VsrxXF-4',
   {
     variant: { 'Icon left': 'True' },
     props: {
@@ -49,7 +49,7 @@ figma.connect(
 
 figma.connect(
   SideNavMenu,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=2346-16194&t=wcK3P98b09VsrxXF-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=2346-16194&t=wcK3P98b09VsrxXF-4',
   {
     variant: { Type: 'Sub-menu' },
     props: {
@@ -68,7 +68,7 @@ figma.connect(
 
 figma.connect(
   SideNavMenu,
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=2346-16194&t=wcK3P98b09VsrxXF-4',
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=2346-16194&t=wcK3P98b09VsrxXF-4',
   {
     variant: { Type: 'Sub-menu', 'Icon left': 'True' },
     props: {
@@ -87,7 +87,7 @@ figma.connect(
 
 // figma.connect(
 //   HeaderMenuItem,
-//   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=2346-16194&t=wcK3P98b09VsrxXF-4',
+//   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=2346-16194&t=wcK3P98b09VsrxXF-4',
 //   {
 //     variant: { Type: 'Divider' },
 //     example: () => <SwitcherDivider />,

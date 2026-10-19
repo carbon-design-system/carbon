@@ -9,12 +9,21 @@ $css--plex: true !default;
 
 @use '@carbon/styles/scss/colors' as *;
 @use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/border-radius' as *;
+@use '@carbon/styles/scss/feature-flags' as flags;
+@use '@carbon/styles/scss/components/button/radius' as button;
 @use '@carbon/styles/scss/components/coachmark/coachmark-tagline' as
   coachmark-tagline-styles;
 
 @include coachmark-tagline-styles.coachmark-tagline;
 
 $block-class: #{$prefix}--coachmark-tagline;
+
+:host(#{$prefix}-coachmark-tagline) {
+  @if flags.enabled('enable-v12-release') {
+    @include button.radius($border-radius-00);
+  }
+}
 
 .#{$block-class} {
   &--open {

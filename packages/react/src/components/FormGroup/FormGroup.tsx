@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import React, { useRef, type HTMLAttributes } from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
-import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
+import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
 
 export interface FormGroupProps extends HTMLAttributes<HTMLFieldSetElement> {
   /**
@@ -63,7 +63,7 @@ const FormGroup = ({
   const legendRef = useRef<HTMLLegendElement>(null);
 
   const classNamesFieldset = cx(`${prefix}--fieldset`, className);
-  useNoInteractiveChildren(
+  useNoInteractiveChildrenForLabel(
     legendRef,
     'The FormGroup component `legendText` prop must have no interactive content'
   );

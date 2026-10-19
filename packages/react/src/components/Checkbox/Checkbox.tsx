@@ -18,7 +18,7 @@ import { noopFn } from '../../internal/noopFn';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
-import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
+import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
 
 type ExcludedAttributes = 'id' | 'onChange' | 'onClick' | 'type';
 
@@ -186,7 +186,7 @@ const Checkbox = React.forwardRef(
           size: candidate.props.kind === 'inline' ? 'md' : 'mini',
         })
       : candidate;
-    useNoInteractiveChildren(
+    useNoInteractiveChildrenForLabel(
       labelRef,
       'The Checkbox component `labelText` prop must have no interactive content'
     );

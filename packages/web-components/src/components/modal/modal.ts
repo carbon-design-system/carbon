@@ -373,31 +373,38 @@ class CDSModal extends CDSModalBase {
   async updated(changedProperties) {
     if (changedProperties.has('open')) {
       if (this.open) {
+        // Always capture the launcher so focus can be returned on close,
+        // regardless of whether managedFocus is set.
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         this._launcher = this.ownerDocument!.activeElement;
-        const primaryFocusNode = this.querySelector(
-          (this.constructor as typeof CDSModal).selectorPrimaryFocus
-        );
-        await (this.constructor as typeof CDSModal)._delay();
-        if (primaryFocusNode) {
-          // For cases where a `carbon-web-components` component (e.g. `<cds-button>`) being `primaryFocusNode`,
-          // where its first update/render cycle that makes it focusable happens after `<cds-modal>`'s first update/render cycle
-          (primaryFocusNode as HTMLElement).focus();
-        } else {
-          const { primaryButton, secondaryButtons } = this._getFooterElements();
 
-          if (primaryButton) {
-            const kind = primaryButton?.getAttribute('kind');
-
-            if (kind === 'danger' && secondaryButtons[0]) {
-              secondaryButtons[0].focus();
-            } else {
-              primaryButton.focus();
-            }
+        // Skip built-in focus-on-open when a parent component owns it (e.g. cds-tearsheet).
+        if (!this.managedFocus) {
+          const primaryFocusNode = this.querySelector(
+            (this.constructor as typeof CDSModal).selectorPrimaryFocus
+          );
+          await (this.constructor as typeof CDSModal)._delay();
+          if (primaryFocusNode) {
+            // For cases where a `carbon-web-components` component (e.g. `<cds-button>`) being `primaryFocusNode`,
+            // where its first update/render cycle that makes it focusable happens after `<cds-modal>`'s first update/render cycle
+            (primaryFocusNode as HTMLElement).focus();
           } else {
-            const { first } = this.getFocusable();
+            const { primaryButton, secondaryButtons } =
+              this._getFooterElements();
 
-            first?.focus();
+            if (primaryButton) {
+              const kind = primaryButton?.getAttribute('kind');
+
+              if (kind === 'danger' && secondaryButtons[0]) {
+                secondaryButtons[0].focus();
+              } else {
+                primaryButton.focus();
+              }
+            } else {
+              const { first } = this.getFocusable();
+
+              first?.focus();
+            }
           }
         }
       } else if (

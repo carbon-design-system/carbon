@@ -55,4 +55,47 @@ describe('scss/components/ai-label', () => {
     expect(guardedHoverRules.length).toBeGreaterThan(0);
     expect(unguardedHoverRules.map((rule) => rule.selector)).toEqual([]);
   });
+
+  test('gives the AI Label and Slug callout an opaque background in Windows HCM', async () => {
+    const { result } = await render(`
+      @use '../ai-label';
+    `);
+    const calloutRulesInHcm = [];
+
+    postcss.parse(result.css.toString()).walkRules((rule) => {
+      if (
+        !rule.selector.includes('.cds--ai-label-content') &&
+        !rule.selector.includes('.cds--slug-content')
+      ) {
+        return;
+      }
+
+      let parent = rule.parent;
+
+      while (parent) {
+        if (
+          parent.type === 'atrule' &&
+          parent.name === 'media' &&
+          parent.params.includes('(forced-colors: active)')
+        ) {
+          calloutRulesInHcm.push(rule);
+          break;
+        }
+
+        parent = parent.parent;
+      }
+    });
+
+    expect(calloutRulesInHcm.length).toBeGreaterThan(0);
+    expect(
+      calloutRulesInHcm.some((rule) =>
+        rule.some(
+          (node) =>
+            node.type === 'decl' &&
+            node.prop === 'background-color' &&
+            node.value === 'Canvas'
+        )
+      )
+    ).toBe(true);
+  });
 });

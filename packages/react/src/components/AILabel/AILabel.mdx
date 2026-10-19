@@ -46,7 +46,7 @@ AI instances in a way that is identifiable across any IBM product.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(AILabelStories.Default),
+      onClick: () => stackblitzPrefillConfig({ story: AILabelStories.Default }),
     },
   ]}
 />
@@ -58,7 +58,7 @@ AI instances in a way that is identifiable across any IBM product.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(AILabelStories.Inline),
+      onClick: () => stackblitzPrefillConfig({ story: AILabelStories.Inline }),
     },
   ]}
 />
@@ -70,7 +70,8 @@ AI instances in a way that is identifiable across any IBM product.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(AILabelStories.InlineWithContent),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: AILabelStories.InlineWithContent }),
     },
   ]}
 />

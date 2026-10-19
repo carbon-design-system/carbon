@@ -27,7 +27,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(IconsStories.Default),
+      onClick: () => stackblitzPrefillConfig({ story: IconsStories.Default }),
     },
   ]}
 />
@@ -54,7 +54,8 @@ prop:
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(IconsStories.WithRelativeSize),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: IconsStories.WithRelativeSize }),
     },
   ]}
 />

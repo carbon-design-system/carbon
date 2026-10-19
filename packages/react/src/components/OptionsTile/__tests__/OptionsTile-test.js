@@ -130,6 +130,12 @@ describe(componentName, () => {
     expect(container.querySelector('details')).toBeFalsy();
   });
 
+  it('renders a toggle in the static variant when props.enabled is set', async () => {
+    render(<OptionsTile title="Static with toggle" enabled />);
+
+    expect(screen.getByRole('switch')).toHaveAttribute('aria-checked', 'true');
+  });
+
   it('renders invalid state when passed', () => {
     const invalidText = 'invalid explanation';
 
@@ -171,7 +177,29 @@ describe(componentName, () => {
 
     const summary = screen.getByRole('heading').nextSibling;
 
+    // In the expandable variant, summary is preserved; lockedText is shown in
+    // the expanded content area.
     expect(summary.textContent).toBe(summaryText);
+    expect(summary).toHaveClass(`${blockClass}__summary--locked`);
+  });
+
+  it('renders lockedText in static variant when both summary and lockedText are set', async () => {
+    const summaryText = 'summary of content';
+    const lockedText = 'locked explanation';
+
+    render(
+      <OptionsTile
+        title="Static locked"
+        summary={summaryText}
+        locked
+        lockedText={lockedText}
+      />
+    );
+
+    const summary = screen.getByRole('heading').nextSibling;
+
+    // In the static variant lockedText always replaces the summary
+    expect(summary.textContent).toBe(lockedText);
     expect(summary).toHaveClass(`${blockClass}__summary--locked`);
   });
 
@@ -185,12 +213,29 @@ describe(componentName, () => {
     expect(summary.textContent).toBe(lockedText);
   });
 
-  it('hides the summary when props.enabled = false', () => {
-    const summaryText = 'hidden summary';
+  it('shows the summary when the tile is collapsed regardless of enabled state', async () => {
+    const summaryText = 'visible summary';
     render(<OptionsTile {...props} summary={summaryText} enabled={false} />);
 
     const summary = screen.getByRole('heading').nextSibling;
     expect(summary.textContent).toBe(summaryText);
+    // Summary should NOT be hidden when tile is collapsed, even when enabled=false
+    expect(summary.getAttribute('aria-hidden')).not.toBe('true');
+  });
+
+  it('hides the summary when the tile is open (expanded)', async () => {
+    const summaryText = 'hidden when open';
+    const { container } = render(
+      <OptionsTile {...props} summary={summaryText} />
+    );
+
+    // Initially collapsed – summary is visible
+    const summary = screen.getByRole('heading').nextSibling;
+    expect(summary.getAttribute('aria-hidden')).not.toBe('true');
+
+    // Expand the tile
+    fireEvent.click(container.querySelector('summary'));
+    // Summary should now be hidden
     expect(summary.getAttribute('aria-hidden')).toBe('true');
   });
 

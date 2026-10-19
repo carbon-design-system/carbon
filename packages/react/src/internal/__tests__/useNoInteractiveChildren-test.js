@@ -47,6 +47,31 @@ describe('useNoInteractiveChildren', () => {
     expect(spy).toHaveBeenCalled();
     spy.mockRestore();
   });
+
+  it('should warn without throwing when configured as non-fatal', () => {
+    function TestComponent() {
+      const ref = useRef(null);
+      useNoInteractiveChildren(ref, undefined, { shouldThrow: false });
+      return (
+        <div ref={ref}>
+          <button type="button">Interactive</button>
+        </div>
+      );
+    }
+
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+    expect(() => {
+      render(<TestComponent />);
+    }).not.toThrow();
+
+    expect(spy).toHaveBeenCalledWith(
+      expect.stringContaining(
+        'Warning: component should have no interactive child nodes'
+      )
+    );
+    spy.mockRestore();
+  });
 });
 
 describe('useInteractiveChildrenNeedDescription', () => {

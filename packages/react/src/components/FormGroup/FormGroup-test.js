@@ -38,8 +38,8 @@ describe('FormGroup', () => {
     expect(screen.queryByText('legendtest')).toBeInTheDocument();
   });
 
-  it('should not allow interactive content in legendText', () => {
-    const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+  it('should warn without throwing for interactive content in legendText', () => {
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
     expect(() => {
       render(
@@ -53,8 +53,12 @@ describe('FormGroup', () => {
           FormGroup Test
         </FormGroup>
       );
-    }).toThrow(
-      'The FormGroup component `legendText` prop must have no interactive content'
+    }).not.toThrow();
+
+    expect(spy).toHaveBeenCalledWith(
+      expect.stringContaining(
+        'Warning: The FormGroup component `legendText` prop must have no interactive content'
+      )
     );
 
     spy.mockRestore();

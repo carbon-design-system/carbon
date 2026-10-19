@@ -9,13 +9,16 @@
 // Card
 //-----------------------------
 
+@use '../../border-radius' as *;
 @use '../../config' as *;
+@use '../../feature-flags' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
 @use '../../utilities/ai-gradient' as *;
 @use '../../utilities/focus-outline' as *;
+@use '../button';
 
 /// Card styles
 /// @access public
@@ -26,6 +29,10 @@
     position: relative;
     background-color: $layer;
     color: $text-primary;
+
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-08;
+    }
   }
 
   // ─── Clickable ───────────────────────────────────────────────────────
@@ -33,6 +40,7 @@
     display: block;
     border: 1px solid $border-tile-01;
     cursor: pointer;
+
     // Reset anchor defaults when card is rendered as <a>
     text-decoration: none;
     transition: background-color $duration-fast-02 motion(standard, productive);
@@ -53,7 +61,6 @@
   }
 
   // ─── Clickable footer affordance ─────────────────────────────────────
-  // Auto-rendered by Card when clickable is true.
   .#{$prefix}--card__clickable-footer {
     display: flex;
     align-items: center;
@@ -80,10 +87,8 @@
   .#{$prefix}--card__header {
     position: relative;
     display: grid;
-    // 16px gap between __title-media and __title
-    column-gap: $spacing-05;
-    grid-template-columns: auto 1fr;
-    // vertical rhythm is handled by margin-block on each child
+    container-type: inline-size;
+    grid-template-columns: auto minmax(0, 1fr);
     row-gap: 0;
   }
 
@@ -100,16 +105,13 @@
   }
 
   // ─── Footer ──────────────────────────────────────────────────────────
-  // Default: padded, no border (raw-content slot)
   .#{$prefix}--card__footer {
     display: flex;
     align-items: center;
     padding: $spacing-05;
   }
 
-  // Action-set layout: triggered when CardAction children are present
   .#{$prefix}--card__footer:has(> .#{$prefix}--card__action) {
-    overflow: hidden;
     padding: 0;
     border-block-start: 1px solid $border-subtle;
     gap: 1px;
@@ -142,21 +144,63 @@
     margin-inline-start: 0;
   }
 
+  // ─── Footer action border-radius ─────────────────────────────────────
+  @if enabled('enable-v12-release') {
+    // Square all button corners inside action-footer rows.
+    .#{$prefix}--card__footer:has(> .#{$prefix}--card__action) {
+      @include button.radius($border-radius-00);
+    }
+
+    // Bottom-left corner: first action that is NOT icon-only.
+    .#{$prefix}--card__footer:has(> .#{$prefix}--card__action)
+      > .#{$prefix}--card__action:first-child:not(
+        :has(.#{$prefix}--btn--icon-only)
+      ) {
+      @include button.radius($es: $border-radius-08);
+    }
+
+    // Bottom-right corner: last action (icon-only or text).
+    .#{$prefix}--card__footer:has(> .#{$prefix}--card__action)
+      > .#{$prefix}--card__action:last-child {
+      @include button.radius($ee: $border-radius-08);
+    }
+
+    // ─── Horizontal card: suppress footer radius where media covers the corner ─
+    // Media-left: media occupies the bottom-left corner, so the first footer
+    // action's end-start corner must stay flush.
+    .#{$prefix}--card--horizontal:has(
+        > .#{$prefix}--card__media--horizontal:first-child
+      )
+      .#{$prefix}--card__footer:has(> .#{$prefix}--card__action)
+      > .#{$prefix}--card__action:first-child {
+      @include button.radius($es: $border-radius-00);
+    }
+
+    // Media-right: media occupies the bottom-right corner of the card.
+    // The footer's right edge is interior (against __content), not the card
+    // edge — keep the bottom-right corner flush on the last footer action.
+    .#{$prefix}--card--horizontal:has(
+        > .#{$prefix}--card__media--horizontal:last-child
+      )
+      .#{$prefix}--card__footer:has(> .#{$prefix}--card__action)
+      > .#{$prefix}--card__action:last-child {
+      @include button.radius($ee: $border-radius-00);
+    }
+  }
+
   // ─── Action wrapper ───────────────────────────────────────────────────
   .#{$prefix}--card__action {
     display: inline-flex;
   }
 
   // ─── Header media (icon / avatar slot) ───────────────────────────────
-  // Spans both grid columns so it always sits above the title-media+title row.
   .#{$prefix}--card__header-media {
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
     grid-column: 1 / -1;
     margin-block: $spacing-05;
-    margin-inline: $spacing-05;
-    // 64px max height
+    margin-inline-start: $spacing-05;
     max-block-size: $spacing-10;
   }
 
@@ -164,6 +208,33 @@
   .#{$prefix}--card__media {
     grid-column: 1 / -1;
     inline-size: 100%;
+
+    @if enabled('enable-v12-release') {
+      overflow: hidden;
+      // Top edge of card: round the top-start and top-end corners together.
+      &:first-child {
+        border-start-end-radius: $border-radius-08;
+        border-start-start-radius: $border-radius-08;
+      }
+
+      // Bottom edge of card: round the bottom-start and bottom-end corners.
+      &:last-child {
+        border-end-end-radius: $border-radius-08;
+        border-end-start-radius: $border-radius-08;
+      }
+
+      // Clickable card has a 1px border — inset the media radius so it sits
+      // flush inside that border without creating a visible gap.
+      .#{$prefix}--card--clickable &:first-child {
+        border-start-end-radius: calc($border-radius-08 - 1px);
+        border-start-start-radius: calc($border-radius-08 - 1px);
+      }
+
+      .#{$prefix}--card--clickable &:last-child {
+        border-end-end-radius: calc($border-radius-08 - 1px);
+        border-end-start-radius: calc($border-radius-08 - 1px);
+      }
+    }
 
     // Disable Carbon's float-based padding-top trick
     &::before,
@@ -217,10 +288,37 @@
   }
 
   .#{$prefix}--card__media--horizontal {
-    overflow: hidden;
     flex-basis: var(--#{$prefix}--card--media-width, 33.33%);
     flex-shrink: 0;
     align-self: stretch;
+
+    @if enabled('enable-v12-release') {
+      // Media-left: clip to the card's start-start and end-start outer corners.
+      &:first-child {
+        border-end-start-radius: $border-radius-08;
+        border-start-end-radius: 0;
+        border-start-start-radius: $border-radius-08;
+
+        // Clickable card has a 1px border — inset the media radius so it sits
+        // flush inside that border without creating a visible gap.
+        .#{$prefix}--card--clickable > & {
+          border-end-start-radius: calc($border-radius-08 - 1px);
+          border-start-start-radius: calc($border-radius-08 - 1px);
+        }
+      }
+
+      // Media-right: clip to the card's start-end and end-end outer corners.
+      &:last-child {
+        border-end-end-radius: $border-radius-08;
+        border-end-start-radius: 0;
+        border-start-end-radius: $border-radius-08;
+
+        .#{$prefix}--card--clickable > & {
+          border-end-end-radius: calc($border-radius-08 - 1px);
+          border-start-end-radius: calc($border-radius-08 - 1px);
+        }
+      }
+    }
   }
 
   .#{$prefix}--card--horizontal > .#{$prefix}--card__content {
@@ -268,12 +366,12 @@
   }
 
   // ─── Title ───────────────────────────────────────────────────────────
+  // Always col 2 so it shares that column with __header-media above it.
   .#{$prefix}--card__title {
     display: flex;
-    overflow: hidden;
     flex-direction: column;
-    // 2px between label / text-row / description
     gap: $spacing-01;
+    grid-column: 2;
     margin-inline: $spacing-05;
     min-inline-size: 0;
   }
@@ -368,23 +466,18 @@
   .#{$prefix}--card__title-media {
     display: flex;
     flex-shrink: 0;
-    // top-align so it tracks the first line on long titles
     align-items: flex-start;
     justify-content: center;
     grid-column: 1;
-    // aligns top edge with title text top margin
     margin-block-start: $spacing-05;
-    // 16px from card edge
-    margin-inline-start: $spacing-05;
-    // 64px max height
     max-block-size: $spacing-10;
+    padding-inline-end: $spacing-05;
+    padding-inline-start: $spacing-05;
   }
 
   .#{$prefix}--card__header:has(> .#{$prefix}--card__title-media)
     > .#{$prefix}--card__title {
-    grid-column: 2;
-    // left margin is provided by the gap from __title-media
-    margin-inline-start: 0;
+    margin-inline: 0 $spacing-05;
   }
 
   // ─── Header actions ───────────────────────────────────────────────────
@@ -395,10 +488,21 @@
     justify-content: flex-end;
     block-size: $spacing-07;
     gap: $spacing-02;
-    inline-size: 50%;
+    inline-size: calc(50% - $spacing-03);
     inset-block-start: $spacing-03;
     inset-inline-end: $spacing-03;
-    max-inline-size: 50%;
+    max-inline-size: calc(50% - $spacing-03);
+  }
+
+  // createOverflowHandler marks overflowed items with [data-hidden].
+  // Hide them so only the overflow menu button remains visible.
+  .#{$prefix}--card__actions [data-hidden]:not([data-fixed]) {
+    display: none;
+  }
+
+  .#{$prefix}--card__header:has(> .#{$prefix}--card__actions)
+    > .#{$prefix}--card__title {
+    max-inline-size: calc(50cqw - $spacing-03);
   }
 
   // ─── AI Label (decorator) ─────────────────────────────────────────────
@@ -421,31 +525,20 @@
     inset-inline-end: $spacing-03;
   }
 
-  .#{$prefix}--card--has-ai-label .#{$prefix}--card__title {
-    padding-inline-end: calc($spacing-07 + $spacing-05);
+  // AI label without actions: title must clear the decorator ($spacing-07)
+  // plus its $spacing-03 inset from the card edge.
+  .#{$prefix}--card--has-ai-label:not(:has(.#{$prefix}--card__actions))
+    .#{$prefix}--card__header
+    > .#{$prefix}--card__title {
+    max-inline-size: calc(100cqw - $spacing-07 - $spacing-03);
   }
 
+  // AI label with actions: the actions box is shifted left by the decorator
+  // width; the title must clear that shifted edge.
   .#{$prefix}--card--has-ai-label:has(.#{$prefix}--card__actions)
-    .#{$prefix}--card__title {
-    padding-inline-end: $spacing-13;
-  }
-
-  .#{$prefix}--card--has-ai-label .#{$prefix}--card__label {
-    padding-inline-end: calc($spacing-07 + $spacing-05);
-  }
-
-  .#{$prefix}--card--has-ai-label:has(.#{$prefix}--card__actions)
-    .#{$prefix}--card__label {
-    padding-inline-end: $spacing-13;
-  }
-
-  .#{$prefix}--card--has-ai-label .#{$prefix}--card__description {
-    padding-inline-end: calc($spacing-07 + $spacing-05);
-  }
-
-  .#{$prefix}--card--has-ai-label:has(.#{$prefix}--card__actions)
-    .#{$prefix}--card__description {
-    padding-inline-end: $spacing-13;
+    .#{$prefix}--card__header
+    > .#{$prefix}--card__title {
+    max-inline-size: calc(50cqw - $spacing-03 - $spacing-06 - $spacing-03 * 2);
   }
 
   .#{$prefix}--card--has-ai-label .#{$prefix}--card__actions {
@@ -458,6 +551,7 @@
 
     position: absolute;
     display: block;
+    border-radius: if(enabled('enable-v12-release'), $border-radius-08, null);
     block-size: 100%;
     box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow;
     content: '';

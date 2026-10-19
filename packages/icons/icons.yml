@@ -217,7 +217,7 @@
     - wheelchair Accessible
     - convenience
     - accessible
-    - accessiblity color filled
+    - accessibility color filled
     - user accessibility
     - handicap
     - handicapped
@@ -1701,13 +1701,13 @@
     - rest
     - dark
     - new moon
-    - cresent
-    - cresent moon
-    - cresent moon light
-    - cresent moon outline
+    - crescent
+    - crescent moon
+    - crescent moon light
+    - crescent moon outline
     - light moon
-    - cresent light
-    - cresent outline
+    - crescent light
+    - crescent outline
   sizes:
     - 16
     - 32
@@ -1722,13 +1722,13 @@
     - rest
     - dark
     - new moon
-    - cresent
-    - cresent moon
-    - cresent moon dark
-    - cresent moon filled
+    - crescent
+    - crescent moon
+    - crescent moon dark
+    - crescent moon filled
     - dark moon
-    - cresent dark
-    - cresent filled
+    - crescent dark
+    - crescent filled
 - name: ASM
   friendly_name: Assembler file
   aliases:
@@ -1792,6 +1792,25 @@
     - asset
   sizes:
     - 32
+- name: asset--edit
+  friendly_name: Asset edit
+  aliases:
+    - technology
+    - edit
+    - pencil
+    - asset
+    - asset edit
+    - modify
+    - asset update
+    - asset modify
+    - asset management
+    - change asset
+    - asset record
+    - move asset
+    - swap asset
+    - modify record
+  sizes:
+    - 32
 - name: asset--view
   friendly_name: Asset view
   aliases:
@@ -1813,7 +1832,7 @@
 - name: assignment-action--usage
   friendly_name: Assignment action usage
   aliases:
-    - assigment
+    - assignment
     - assign
     - usage
     - diagram
@@ -2206,6 +2225,20 @@
     - technology
     - battery indicator
     - battery
+- name: beacon
+  friendly_name: Beacon
+  aliases:
+    - beacon
+    - lighthouse
+    - guidance
+    - direction
+    - signal
+    - clarity
+    - insight
+    - Trusted Guide
+    - star
+  sizes:
+    - 32
 - name: bee
   friendly_name: Bee
   aliases:
@@ -3369,7 +3402,7 @@
     - pickup
     - car
     - travel
-    - transporation
+    - transportation
     - vehicle
   sizes:
     - 32
@@ -3388,7 +3421,7 @@
     - car front
     - car grill
     - travel
-    - transporation
+    - transportation
     - vehicle
 - name: carbon
   friendly_name: Carbon
@@ -3642,7 +3675,7 @@
     - book
     - list
     - schedule
-    - catagorize
+    - categorize
     - catalog
     - file
   sizes:
@@ -5309,7 +5342,7 @@
   friendly_name: Classification
   aliases:
     - classification
-    - catagory
+    - category
     - classify
   sizes:
     - 32
@@ -5469,7 +5502,7 @@
   sizes:
     - 32
   aliases:
-    - donwload
+    - download
     - compute
     - data
     - hybrid
@@ -6244,6 +6277,82 @@
     - software
   sizes:
     - 32
+- name: content-navigator-edit-service--download
+  friendly_name: IBM® Content Navigator Edit Service Download
+  aliases:
+    - IBM
+    - Content Navigator Edit Service
+    - content
+    - navigator
+    - edit
+    - service
+    - download
+    - pencil
+    - arrow
+  sizes:
+    - 32
+- name: content-navigator-edit-service--upload
+  friendly_name: IBM® Content Navigator Edit Service Upload
+  aliases:
+    - IBM
+    - Content Navigator Edit Service
+    - content
+    - navigator
+    - edit
+    - service
+    - upload
+    - pencil
+    - arrow
+  sizes:
+    - 32
+- name: content-navigator-sync--error
+  friendly_name: IBM® Content Navigator Sync Error
+  aliases:
+    - IBM
+    - Content Navigator Sync
+    - content
+    - navigator
+    - sync
+    - error
+    - file
+  sizes:
+    - 32
+- name: content-navigator-sync--loading
+  friendly_name: IBM® Content Navigator Sync Loading
+  aliases:
+    - IBM
+    - Content Navigator Sync
+    - content
+    - navigator
+    - sync
+    - loading
+    - file
+  sizes:
+    - 32
+- name: content-navigator-sync--paused
+  friendly_name: IBM® Content Navigator Sync Paused
+  aliases:
+    - IBM
+    - Content Navigator Sync
+    - content
+    - navigator
+    - sync
+    - paused
+    - file
+  sizes:
+    - 32
+- name: content-navigator-sync--warning
+  friendly_name: IBM® Content Navigator Sync Warning
+  aliases:
+    - IBM
+    - Content Navigator Sync
+    - content
+    - navigator
+    - sync
+    - warning
+    - file
+  sizes:
+    - 32
 - name: content-view
   friendly_name: Content view
   aliases:
@@ -6496,7 +6605,7 @@
   aliases:
     - credentials
     - documents
-    - indentification
+    - identification
   sizes:
     - 32
 - name: critical
@@ -8096,7 +8205,7 @@
   friendly_name: Direction merge filled
   aliases:
     - direction
-    - directin merge
+    - direction merge
     - direction merge filled
   sizes:
     - 32
@@ -8328,8 +8437,8 @@
     - 32
   aliases:
     - distribute
-    - distrubute horizontal center
-    - distrubute horizontal
+    - distribute horizontal center
+    - distribute horizontal
 - name: distribute--horizontal-left
   friendly_name: Distribute horizontal left
   sizes:
@@ -9594,7 +9703,7 @@
   friendly_name: Expand categories
   aliases:
     - expand categories
-    - opertions
+    - operations
     - expand
     - categories
   sizes:
@@ -12941,6 +13050,42 @@
     - secure
   sizes:
     - 32
+- name: ibm--sovereign-core
+  friendly_name: IBM® Sovereign Core
+  aliases:
+    - IBM
+    - sovereign
+    - core
+    - Sovereign Core
+    - shield
+    - easy to deploy
+    - AI
+    - AI-ready
+    - cloud
+    - dedicated
+    - local
+    - hybrid
+    - provider
+    - deployment
+  sizes:
+    - 32
+- name: ibm-sterling--b2b-integration-saas
+  friendly_name: IBM Sterling B2B Integration SaaS™
+  aliases:
+    - IBM
+    - Sterling
+    - B2B
+    - Integration
+    - SaaS
+    - diamond
+    - circle
+    - connection
+    - supply
+    - chain
+    - order
+    - management
+  sizes:
+    - 32
 - name: ibm--streamsets
   friendly_name: IBM StreamSets
   aliases:
@@ -13518,7 +13663,7 @@
   aliases:
     - hardware security module
     - cryptographic infrastructure
-    - cyrpto key
+    - crypto key
     - life cycle
     - security
     - crypto storage
@@ -14110,8 +14255,16 @@
     - control plane
   sizes:
     - 32
-- name: ibm-quantum--safe-advisor
-  friendly_name: IBM Quantum Safe™ Advisor
+- name: ibm-partner-plus
+  friendly_name: IBM Partner Plus
+  aliases:
+    - ibm partner plus
+    - partner plus
+    - partnership
+  sizes:
+    - 32
+- name: ibm-quantum--safe-cryptography-manager
+  friendly_name: IBM Quantum Safe® Cryptography Manager
   aliases:
     - research
     - scan
@@ -14140,10 +14293,11 @@
     - prioritization
     - posture
     - shield
+    - manager
   sizes:
     - 32
 - name: ibm-quantum--safe-explorer
-  friendly_name: IBM Quantum Safe™ Explorer
+  friendly_name: IBM Quantum Safe® Explorer
   aliases:
     - research
     - scan
@@ -14165,18 +14319,11 @@
     - CBOM
     - shield
     - security
+    - explorer
   sizes:
     - 32
-- name: ibm-partner-plus
-  friendly_name: IBM Partner Plus
-  aliases:
-    - ibm partner plus
-    - partner plus
-    - partnership
-  sizes:
-    - 32
-- name: ibm-quantum--safe-remediator
-  friendly_name: IBM Quantum Safe™ Remediator
+- name: ibm-quantum--safe-proxy
+  friendly_name: IBM Quantum Safe® Proxy
   aliases:
     - research
     - scan
@@ -14199,7 +14346,7 @@
     - automation
     - scalable
     - compliance
-    - remediation
+    - proxy
     - shield
   sizes:
     - 32
@@ -17013,7 +17160,7 @@
     - location hierarchy
     - change
     - switch location
-    - cange location
+    - change location
     - change parent location
     - Maximo
   sizes:
@@ -18021,6 +18168,20 @@
     - forecast
   sizes:
     - 32
+- name: markdown
+  friendly_name: Markdown
+  aliases:
+    - format
+    - markdown
+    - language
+    - MD
+    - mdown
+    - mkd
+    - mkdn
+    - letter M
+    - M
+  sizes:
+    - 32
 - name: material-request
   friendly_name: Resourceful
   aliases:
@@ -18800,7 +18961,7 @@
   friendly_name: Moon
   aliases:
     - moon
-    - cresent
+    - crescent
     - phase
   sizes:
     - 32
@@ -20177,6 +20338,31 @@
   aliases:
     - paragraph
     - formatting
+  sizes:
+    - 32
+- name: parallelogram--outline
+  friendly_name: Parallelogram outline
+  aliases:
+    - parallelogram
+    - parallelogram outlined
+    - outlined parallelogram
+    - stroke
+    - border
+    - shape
+    - geometry
+    - vertical
+  sizes:
+    - 32
+- name: parallelogram--solid
+  friendly_name: Parallelogram solid
+  aliases:
+    - parallelogram
+    - parallelogram filed
+    - filled parallelogram
+    - solid
+    - shape
+    - geometry
+    - vertical
   sizes:
     - 32
 - name: parameter
@@ -21578,7 +21764,7 @@
 - name: progress-bar--round
   friendly_name: Progress bar round
   aliases:
-    - progreess bar round
+    - progress bar round
     - loading
   sizes:
     - 32
@@ -21715,6 +21901,37 @@
   aliases:
     - quadrant plot
     - data
+  sizes:
+    - 32
+- name: quantum--computer
+  friendly_name: Quantum computer
+  aliases:
+    - quantum computer
+    - quantum processor
+    - quantum processing unit
+    - quantum hardware
+    - IBM Quantum
+    - chandelier
+    - qbits
+    - quantum computing
+    - AI
+    - Q
+  sizes:
+    - 32
+- name: quantum--QPU
+  friendly_name: Quantum Processing Unit (QPU)
+  aliases:
+    - quantum computer
+    - quantum processor
+    - quantum processing unit
+    - quantum hardware
+    - IBM Quantum
+    - QPU
+    - chip
+    - qbits
+    - quantum computing
+    - AI
+    - Q
   sizes:
     - 32
 - name: query
@@ -21987,6 +22204,20 @@
     - refine
     - modify
     - diagram
+  sizes:
+    - 32
+- name: red-hat-ai-inference-on-ibm-cloud
+  friendly_name: Red Hat® AI Inference on IBM Cloud®
+  aliases:
+    - Red Hat
+    - AI
+    - inference
+    - IBM
+    - IBM Cloud
+    - models
+    - LLM
+    - machine learning
+    - star
   sizes:
     - 32
 - name: red-hat-ai-instructlab-on-ibm-cloud
@@ -22292,7 +22523,7 @@
   friendly_name: Restart
   aliases:
     - undo
-    - rever
+    - revert
     - refresh
   sizes:
     - 16
@@ -24884,6 +25115,17 @@
     - data analytics
   sizes:
     - 32
+- name: stepzen--graph-server
+  friendly_name: IBM® StepZen Graph Server
+  aliases:
+    - stepzen
+    - zen
+    - graph
+    - server
+    - api
+    - connect
+  sizes:
+    - 32
 - name: stethoscope
   friendly_name: Stethoscope
   aliases:
@@ -25007,7 +25249,7 @@
     - shop
     - house
     - retail
-    - buisness
+    - business
     - online
     - ecommerce
     - market
@@ -25060,6 +25302,19 @@
     - strawberry
     - fruit
     - food
+  sizes:
+    - 32
+- name: streaming--embedded
+  friendly_name: Embedded streaming
+  aliases:
+    - embedded
+    - streaming
+    - topics
+    - manage topics
+    - events
+    - publish
+    - schemas
+    - configure schemas
   sizes:
     - 32
 - name: stress-breath-editor
@@ -25255,7 +25510,7 @@
     - minus
     - remove
     - deduct
-    - withold
+    - withhold
     - decrease
     - diminish
     - discount
@@ -25272,7 +25527,7 @@
     - minus
     - remove
     - deduct
-    - withold
+    - withhold
     - decrease
     - diminish
     - discount
@@ -25296,7 +25551,7 @@
     - large
     - minus
     - deduct
-    - withold
+    - withhold
     - decrease
     - diminish
     - discount
@@ -28345,7 +28600,7 @@
   friendly_name: Video player
   aliases:
     - rectangle
-    - triange
+    - triangle
     - video
     - player
   sizes:
@@ -28391,6 +28646,42 @@
     - look
     - inspect
     - visible
+- name: view--matrix
+  friendly_name: Matrix view
+  aliases:
+    - data
+    - table
+    - tabular
+    - matrix
+    - cross-reference
+    - mapping
+    - relationship
+    - spreadsheet
+    - excel
+    - chart
+    - rows
+    - columns
+    - cells
+    - grid
+    - view
+  sizes:
+    - 32
+- name: view--table
+  friendly_name: Table view
+  aliases:
+    - data
+    - table
+    - tabular
+    - spreadsheet
+    - excel
+    - chart
+    - rows
+    - columns
+    - cells
+    - grid
+    - view
+  sizes:
+    - 32
 - name: view--mode-1
   friendly_name: View mode 1
   sizes:

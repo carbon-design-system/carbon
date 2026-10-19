@@ -120,8 +120,8 @@ describe('Search', () => {
       );
     });
 
-    it('should not allow interactive content in labelText', () => {
-      const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+    it('should warn without throwing for interactive content in labelText', () => {
+      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
       expect(() => {
         render(
@@ -133,8 +133,12 @@ describe('Search', () => {
             }
           />
         );
-      }).toThrow(
-        'The Search component `labelText` prop must have no interactive content'
+      }).not.toThrow();
+
+      expect(spy).toHaveBeenCalledWith(
+        expect.stringContaining(
+          'Warning: The Search component `labelText` prop must have no interactive content'
+        )
       );
 
       spy.mockRestore();
@@ -310,6 +314,40 @@ describe('Search', () => {
 
       expect(input).toHaveAttribute('inert');
       expect(input).toHaveAttribute('tabIndex', '-1');
+    });
+
+    it('should apply tabIndex to the expand button if expandable and not expanded', () => {
+      const { container } = render(
+        <Search
+          labelText="test-search"
+          onExpand={() => {}}
+          isExpanded={false}
+          tabIndex={-1}
+        />
+      );
+
+      expect(screen.getAllByRole('button')[0]).toHaveAttribute(
+        'tabIndex',
+        '-1'
+      );
+      expect(container.querySelector('input')).toHaveAttribute(
+        'tabIndex',
+        '-1'
+      );
+    });
+
+    it('should not make the expand button tabbable if expandable and disabled', () => {
+      render(
+        <Search
+          labelText="test-search"
+          onExpand={() => {}}
+          isExpanded={false}
+          disabled
+          tabIndex={0}
+        />
+      );
+
+      expect(screen.getAllByRole('button')[0]).not.toHaveAttribute('tabIndex');
     });
 
     it('should have tabbable input and untabbable button if not expandable', async () => {
