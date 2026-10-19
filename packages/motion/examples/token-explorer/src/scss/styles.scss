@@ -80,8 +80,7 @@ th {
   --header-height: 5.5rem;
 }
 
-// ── Header ──────────────────────────────────────────────────────────────────
-
+// Header
 .header {
   position: fixed;
   top: 0;
@@ -165,8 +164,7 @@ th {
   color: #fff;
 }
 
-// ── Fit to screen button ──────────────────────────────────────────────────────
-
+// Fit to screen button
 .fit-btn {
   position: fixed;
   inset-block-end: 1.5rem;
@@ -190,15 +188,13 @@ th {
   color: #fff;
 }
 
-// ── Content ──────────────────────────────────────────────────────────────────
-
+// Content
 .content {
   padding-top: calc(var(--header-height) + 1rem);
   padding-bottom: 2rem;
 }
 
-// ── Motion preview cell ──────────────────────────────────────────────────────
-
+// Motion preview cell
 .motion-preview {
   display: flex;
   align-items: center;
@@ -246,8 +242,7 @@ th {
   color: #6f6f6f;
 }
 
-// ── Token name ────────────────────────────────────────────────────────────────
-
+// Token name
 .token-name a {
   color: #0f62fe;
   text-decoration: none;
@@ -258,8 +253,7 @@ th {
   text-decoration: underline;
 }
 
-// ── Description ───────────────────────────────────────────────────────────────
-
+// Description
 .description-cell {
   font-size: 0.8125rem;
   color: #525252;
@@ -276,8 +270,7 @@ th {
   border-radius: 2px;
 }
 
-// ── No results ────────────────────────────────────────────────────────────────
-
+// No results
 .no-results {
   padding: 2rem;
   text-align: center;
