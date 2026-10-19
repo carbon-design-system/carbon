@@ -1,5 +1,5 @@
 {
-  "$schema": "https://tr.designtokens.org/format/",
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
   "$description": "Motion tokens for the Carbon Design System — durations and easing curves",
   "duration": {
     "fast": {
