@@ -1,0 +1,204 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "$description": "Tag component color tokens for all tag color variants and states.",
+  "tag-background-blue": {
+    "$type": "color",
+    "$value": "{blue.20}",
+    "$description": "Background color for blue tags. Use for informational tags or to categorize content with blue semantic meaning."
+  },
+  "tag-background-cool-gray": {
+    "$type": "color",
+    "$value": "{coolGray.20}",
+    "$description": "Background color for cool gray tags. Use for neutral categorization or when color semantics are not needed."
+  },
+  "tag-background-cyan": {
+    "$type": "color",
+    "$value": "{cyan.20}",
+    "$description": "Background color for cyan tags. Use for tags related to data, analytics, or technical information."
+  },
+  "tag-background-gray": {
+    "$type": "color",
+    "$value": "{gray.20}",
+    "$description": "Background color for gray tags. Use for default or neutral tags without specific semantic meaning."
+  },
+  "tag-background-green": {
+    "$type": "color",
+    "$value": "{green.20}",
+    "$description": "Background color for green tags. Use for success states, positive indicators, or approved/active status."
+  },
+  "tag-background-magenta": {
+    "$type": "color",
+    "$value": "{magenta.20}",
+    "$description": "Background color for magenta tags. Use for creative, design-related, or special category tags."
+  },
+  "tag-background-purple": {
+    "$type": "color",
+    "$value": "{purple.20}",
+    "$description": "Background color for purple tags. Use for premium features, special status, or priority indicators."
+  },
+  "tag-background-red": {
+    "$type": "color",
+    "$value": "{red.20}",
+    "$description": "Background color for red tags. Use for error states, critical issues, or urgent/high-priority items."
+  },
+  "tag-background-teal": {
+    "$type": "color",
+    "$value": "{teal.20}",
+    "$description": "Background color for teal tags. Use for tags related to support, help, or secondary informational content."
+  },
+  "tag-background-warm-gray": {
+    "$type": "color",
+    "$value": "{warmGray.20}",
+    "$description": "Background color for warm gray tags. Use for neutral categorization with a warmer tone than cool gray."
+  },
+  "tag-border-blue": {
+    "$type": "color",
+    "$value": "{blue.40}",
+    "$description": "Border color for blue tags. Provides visual definition and contrast for blue tag variants."
+  },
+  "tag-border-cool-gray": {
+    "$type": "color",
+    "$value": "{coolGray.40}",
+    "$description": "Border color for cool gray tags. Provides visual definition and contrast for cool gray tag variants."
+  },
+  "tag-border-cyan": {
+    "$type": "color",
+    "$value": "{cyan.40}",
+    "$description": "Border color for cyan tags. Provides visual definition and contrast for cyan tag variants."
+  },
+  "tag-border-gray": {
+    "$type": "color",
+    "$value": "{gray.40}",
+    "$description": "Border color for gray tags. Provides visual definition and contrast for gray tag variants."
+  },
+  "tag-border-green": {
+    "$type": "color",
+    "$value": "{green.40}",
+    "$description": "Border color for green tags. Provides visual definition and contrast for green tag variants."
+  },
+  "tag-border-magenta": {
+    "$type": "color",
+    "$value": "{magenta.40}",
+    "$description": "Border color for magenta tags. Provides visual definition and contrast for magenta tag variants."
+  },
+  "tag-border-purple": {
+    "$type": "color",
+    "$value": "{purple.40}",
+    "$description": "Border color for purple tags. Provides visual definition and contrast for purple tag variants."
+  },
+  "tag-border-red": {
+    "$type": "color",
+    "$value": "{red.40}",
+    "$description": "Border color for red tags. Provides visual definition and contrast for red tag variants."
+  },
+  "tag-border-teal": {
+    "$type": "color",
+    "$value": "{teal.40}",
+    "$description": "Border color for teal tags. Provides visual definition and contrast for teal tag variants."
+  },
+  "tag-border-warm-gray": {
+    "$type": "color",
+    "$value": "{warmGray.40}",
+    "$description": "Border color for warm gray tags. Provides visual definition and contrast for warm gray tag variants."
+  },
+  "tag-color-blue": {
+    "$type": "color",
+    "$value": "{blue.70}",
+    "$description": "Text color for blue tags. Ensures readable contrast against blue tag backgrounds."
+  },
+  "tag-color-cool-gray": {
+    "$type": "color",
+    "$value": "{coolGray.100}",
+    "$description": "Text color for cool gray tags. Ensures readable contrast against cool gray tag backgrounds."
+  },
+  "tag-color-cyan": {
+    "$type": "color",
+    "$value": "{cyan.70}",
+    "$description": "Text color for cyan tags. Ensures readable contrast against cyan tag backgrounds."
+  },
+  "tag-color-gray": {
+    "$type": "color",
+    "$value": "{gray.100}",
+    "$description": "Text color for gray tags. Ensures readable contrast against gray tag backgrounds."
+  },
+  "tag-color-green": {
+    "$type": "color",
+    "$value": "{green.70}",
+    "$description": "Text color for green tags. Ensures readable contrast against green tag backgrounds."
+  },
+  "tag-color-magenta": {
+    "$type": "color",
+    "$value": "{magenta.70}",
+    "$description": "Text color for magenta tags. Ensures readable contrast against magenta tag backgrounds."
+  },
+  "tag-color-purple": {
+    "$type": "color",
+    "$value": "{purple.70}",
+    "$description": "Text color for purple tags. Ensures readable contrast against purple tag backgrounds."
+  },
+  "tag-color-red": {
+    "$type": "color",
+    "$value": "{red.70}",
+    "$description": "Text color for red tags. Ensures readable contrast against red tag backgrounds."
+  },
+  "tag-color-teal": {
+    "$type": "color",
+    "$value": "{teal.70}",
+    "$description": "Text color for teal tags. Ensures readable contrast against teal tag backgrounds."
+  },
+  "tag-color-warm-gray": {
+    "$type": "color",
+    "$value": "{warmGray.100}",
+    "$description": "Text color for warm gray tags. Ensures readable contrast against warm gray tag backgrounds."
+  },
+  "tag-hover-blue": {
+    "$type": "color",
+    "$value": "{blue.20Hover}",
+    "$description": "Background color for blue tags on hover. Use when blue tags are interactive or dismissible."
+  },
+  "tag-hover-cool-gray": {
+    "$type": "color",
+    "$value": "{coolGray.20Hover}",
+    "$description": "Background color for cool gray tags on hover. Use when cool gray tags are interactive or dismissible."
+  },
+  "tag-hover-cyan": {
+    "$type": "color",
+    "$value": "{cyan.20Hover}",
+    "$description": "Background color for cyan tags on hover. Use when cyan tags are interactive or dismissible."
+  },
+  "tag-hover-gray": {
+    "$type": "color",
+    "$value": "{gray.20Hover}",
+    "$description": "Background color for gray tags on hover. Use when gray tags are interactive or dismissible."
+  },
+  "tag-hover-green": {
+    "$type": "color",
+    "$value": "{green.20Hover}",
+    "$description": "Background color for green tags on hover. Use when green tags are interactive or dismissible."
+  },
+  "tag-hover-magenta": {
+    "$type": "color",
+    "$value": "{magenta.20Hover}",
+    "$description": "Background color for magenta tags on hover. Use when magenta tags are interactive or dismissible."
+  },
+  "tag-hover-purple": {
+    "$type": "color",
+    "$value": "{purple.20Hover}",
+    "$description": "Background color for purple tags on hover. Use when purple tags are interactive or dismissible."
+  },
+  "tag-hover-red": {
+    "$type": "color",
+    "$value": "{red.20Hover}",
+    "$description": "Background color for red tags on hover. Use when red tags are interactive or dismissible."
+  },
+  "tag-hover-teal": {
+    "$type": "color",
+    "$value": "{teal.20Hover}",
+    "$description": "Background color for teal tags on hover. Use when teal tags are interactive or dismissible."
+  },
+  "tag-hover-warm-gray": {
+    "$type": "color",
+    "$value": "{warmGray.20Hover}",
+    "$description": "Background color for warm gray tags on hover. Use when warm gray tags are interactive or dismissible."
+  }
+}

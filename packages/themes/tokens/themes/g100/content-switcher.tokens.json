@@ -1,0 +1,31 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "$description": "Content switcher component color tokens for tab-like navigation between content views.",
+  "content-switcher-background": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": { "$ref": "#/black/$value/colorSpace" },
+      "components": { "$ref": "#/black/$value/components" },
+      "alpha": 0
+    },
+    "$description": "Background color for the content switcher container. Provides the base surface for unselected switcher options."
+  },
+  "content-switcher-background-hover": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": { "$ref": "#/gray/50/$value/colorSpace" },
+      "components": { "$ref": "#/gray/50/$value/components" },
+      "alpha": 0.12
+    },
+    "$description": "Background color for content switcher options on hover. Use to provide visual feedback when hovering over unselected options."
+  },
+  "content-switcher-selected": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": { "$ref": "#/gray/50/$value/colorSpace" },
+      "components": { "$ref": "#/gray/50/$value/components" },
+      "alpha": 0.24
+    },
+    "$description": "Background color for the selected content switcher option. Use to highlight the currently active view or tab."
+  }
+}

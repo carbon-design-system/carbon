@@ -1,0 +1,92 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "$description": "Button component color tokens for all button variants and states.",
+  "button-danger-active": {
+    "$type": "color",
+    "$value": "{red.80}",
+    "$description": "Background color for danger buttons in active/pressed state. Use when user clicks or presses a destructive action button."
+  },
+  "button-danger-hover": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "srgb",
+      "components": [0.721569, 0.098039, 0.129412],
+      "hex": "#b81921"
+    },
+    "$description": "Background color for danger buttons on hover. Use when user hovers over a destructive action button to provide visual feedback."
+  },
+  "button-danger-primary": {
+    "$type": "color",
+    "$value": "{red.60}",
+    "$description": "Background color for primary danger buttons in default state. Use for destructive actions like delete, remove, or cancel that require high emphasis."
+  },
+  "button-danger-secondary": {
+    "$type": "color",
+    "$value": "{red.50}",
+    "$description": "Border and text color for secondary danger buttons. Use for destructive actions that need less emphasis than primary danger buttons."
+  },
+  "button-disabled": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": { "$ref": "#/gray/50/$value/colorSpace" },
+      "components": { "$ref": "#/gray/50/$value/components" },
+      "alpha": 0.3
+    },
+    "$description": "Background color for disabled buttons across all variants. Use when a button action is temporarily unavailable or not applicable in the current context."
+  },
+  "button-primary": {
+    "$type": "color",
+    "$value": "{blue.60}",
+    "$description": "Background color for primary buttons in default state. Use for the main call-to-action on a page or in a workflow step."
+  },
+  "button-primary-active": {
+    "$type": "color",
+    "$value": "{blue.80}",
+    "$description": "Background color for primary buttons in active/pressed state. Use when user clicks or presses the primary action button."
+  },
+  "button-primary-hover": {
+    "$type": "color",
+    "$value": "{blue.60Hover}",
+    "$description": "Background color for primary buttons on hover. Use when user hovers over the primary action button to provide visual feedback."
+  },
+  "button-secondary": {
+    "$type": "color",
+    "$value": "{gray.60}",
+    "$description": "Background color for secondary buttons in default state. Use for secondary actions that support the primary action or provide alternative paths."
+  },
+  "button-secondary-active": {
+    "$type": "color",
+    "$value": "{gray.80}",
+    "$description": "Background color for secondary buttons in active/pressed state. Use when user clicks or presses a secondary action button."
+  },
+  "button-secondary-hover": {
+    "$type": "color",
+    "$value": "{gray.60Hover}",
+    "$description": "Background color for secondary buttons on hover. Use when user hovers over a secondary action button to provide visual feedback."
+  },
+  "button-separator": {
+    "$type": "color",
+    "$value": "{gray.100}",
+    "$description": "Border color for button separators in button groups or split buttons. Use to visually divide adjacent buttons while maintaining their connection.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "fallback": "{gray.20}"
+      }
+    }
+  },
+  "button-tertiary": {
+    "$type": "color",
+    "$value": "{white}",
+    "$description": "Text and icon color for tertiary buttons in default state. Use for low-emphasis actions or when multiple actions need equal visual weight."
+  },
+  "button-tertiary-active": {
+    "$type": "color",
+    "$value": "{gray.30}",
+    "$description": "Text and icon color for tertiary buttons in active/pressed state. Use when user clicks or presses a tertiary action button."
+  },
+  "button-tertiary-hover": {
+    "$type": "color",
+    "$value": "{gray.10}",
+    "$description": "Background color for tertiary buttons on hover. Use when user hovers over a tertiary action button to provide subtle visual feedback."
+  }
+}
