@@ -410,6 +410,7 @@ class CDSMultiSelect extends CDSDropdown {
 
     return html`
       <label
+        id="dropdown-label"
         part="title-text"
         class="${labelClasses}"
         ?hidden="${!hasTitleText}">
