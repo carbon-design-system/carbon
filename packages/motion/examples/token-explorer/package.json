@@ -1,5 +1,5 @@
 {
-  "name": "motion-tokens-dtcg",
+  "name": "token-explorer",
   "private": true,
   "scripts": {
     "develop": "next",
