@@ -148,7 +148,7 @@ describe('usePresence', () => {
 
       unmount();
       deferredAnimations[0].reject(new DOMException('Aborted', 'AbortError'));
-      await new Promise((resolve) => setTimeout(resolve, 50));
+      await new Promise((resolve) => setTimeout(resolve, 0));
 
       expect(rejections).toEqual([]);
     } finally {
