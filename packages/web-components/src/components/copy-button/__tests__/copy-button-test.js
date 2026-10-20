@@ -6,7 +6,6 @@
  */
 
 import '@carbon/web-components/es/components/copy-button/index.js';
-import '@carbon/web-components/es/components/feature-flags/index.js';
 import { expect, fixture, html, waitUntil } from '@open-wc/testing';
 
 describe('CopyButton', () => {
@@ -235,27 +234,10 @@ describe('Feedback', () => {
 });
 
 describe('autoAlign', () => {
-  it('should default the tooltip autoalign to false', async () => {
+  it('should default the tooltip autoalign to true', async () => {
     const el = await fixture(html`
       <cds-copy-button icon-description="Copy to clipboard"></cds-copy-button>
     `);
-    const copy = el.shadowRoot.querySelector('cds-copy');
-
-    await copy.updateComplete;
-
-    expect(copy.autoalign).to.be.false;
-  });
-
-  it('should default the tooltip autoalign to true with enable-v12-release', async () => {
-    const featureFlag = await fixture(html`
-      <feature-flags enable-v12-release="true">
-        <cds-copy-button icon-description="Copy to clipboard"></cds-copy-button>
-      </feature-flags>
-    `);
-    const el = featureFlag.querySelector('cds-copy-button');
-
-    await el.updateComplete;
-
     const copy = el.shadowRoot.querySelector('cds-copy');
 
     await copy.updateComplete;
@@ -264,43 +246,16 @@ describe('autoAlign', () => {
     expect(copy.shadowRoot.querySelector('cds-tooltip').autoalign).to.be.true;
   });
 
-  it('should keep the tooltip autoalign disabled when set to false with enable-v12-release', async () => {
-    const featureFlag = await fixture(html`
-      <feature-flags enable-v12-release="true">
-        <cds-copy-button
-          .autoAlign=${false}
-          icon-description="Copy to clipboard"></cds-copy-button>
-      </feature-flags>
+  it('should keep the tooltip autoalign disabled when set to false', async () => {
+    const el = await fixture(html`
+      <cds-copy-button .autoAlign=${false} icon-description="Copy to clipboard">
+      </cds-copy-button>
     `);
-    const el = featureFlag.querySelector('cds-copy-button');
-
-    await el.updateComplete;
 
     const copy = el.shadowRoot.querySelector('cds-copy');
 
     await copy.updateComplete;
 
-    expect(copy.autoalign).to.be.false;
-    expect(copy.shadowRoot.querySelector('cds-tooltip').autoalign).to.be.false;
-  });
-
-  it('should keep the tooltip autoalign disabled when the attribute is "false" with enable-v12-release', async () => {
-    const featureFlag = await fixture(html`
-      <feature-flags enable-v12-release="true">
-        <cds-copy-button
-          autoalign="false"
-          icon-description="Copy to clipboard"></cds-copy-button>
-      </feature-flags>
-    `);
-    const el = featureFlag.querySelector('cds-copy-button');
-
-    await el.updateComplete;
-
-    const copy = el.shadowRoot.querySelector('cds-copy');
-
-    await copy.updateComplete;
-
-    expect(el.autoAlign).to.be.false;
     expect(copy.autoalign).to.be.false;
     expect(copy.shadowRoot.querySelector('cds-tooltip').autoalign).to.be.false;
   });

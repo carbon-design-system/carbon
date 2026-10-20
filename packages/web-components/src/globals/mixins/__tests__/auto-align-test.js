@@ -92,46 +92,11 @@ describe('AutoAlignMixin', () => {
     const { tag, property = 'autoalign' } = entry;
 
     describe(tag, () => {
-      it('should default to false', async () => {
+      it('should default to true', async () => {
         const el = await render(entry);
 
-        expect(el[property]).to.be.false;
-        expect(el).to.not.have.attribute('autoalign');
-      });
-
-      it('should default to true with enable-v12-autoalign', async () => {
-        const el = await render(entry, { flag: 'enable-v12-autoalign' });
-
         expect(el[property]).to.be.true;
-      });
-
-      it('should default to true with enable-v12-release', async () => {
-        const el = await render(entry, { flag: 'enable-v12-release' });
-
-        expect(el[property]).to.be.true;
-      });
-
-      it('should be enabled by the autoalign attribute', async () => {
-        const el = await render(entry, { attribute: 'autoalign' });
-
-        expect(el[property]).to.be.true;
-      });
-
-      it('should let the property opt out of the flag', async () => {
-        const root = await fixture(
-          '<feature-flags enable-v12-autoalign></feature-flags>'
-        );
-        const el = document.createElement(tag);
-        Object.entries(entry.attributes ?? {}).forEach(([name, value]) => {
-          el.setAttribute(name, value);
-        });
-        el.innerHTML = entry.children ?? '';
-        el[property] = false;
-        root.appendChild(el);
-        await el.updateComplete;
-
-        expect(el[property]).to.be.false;
-        expect(el).to.not.have.attribute('autoalign');
+        expect(el).to.have.attribute('autoalign');
       });
 
       it('should let autoalign="false" opt out of the flag', async () => {
@@ -146,20 +111,11 @@ describe('AutoAlignMixin', () => {
       });
 
       it('should turn off when autoalign="false" is set after connecting', async () => {
-        const el = await render(entry, { flag: 'enable-v12-autoalign' });
+        const el = await render(entry);
         expect(el[property]).to.be.true;
 
         el.setAttribute('autoalign', 'false');
         await el.updateComplete;
-
-        expect(el[property]).to.be.false;
-        expect(el).to.not.have.attribute('autoalign');
-      });
-
-      it('should not keep autoalign="false" on an element that is already off', async () => {
-        const el = await render(entry);
-
-        el.setAttribute('autoalign', 'false');
 
         expect(el[property]).to.be.false;
         expect(el).to.not.have.attribute('autoalign');
