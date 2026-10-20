@@ -176,6 +176,7 @@ const IconButton = forwardRef<unknown, IconButtonProps>(
     const tooltipClasses = classNames(
       wrapperClasses,
       `${prefix}--icon-tooltip`,
+      `${prefix}--icon-button-tooltip`,
       {
         [`${prefix}--icon-tooltip--disabled`]: disabled,
       }
