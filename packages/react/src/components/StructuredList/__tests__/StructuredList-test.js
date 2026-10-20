@@ -339,11 +339,9 @@ describe('StructuredList', () => {
       expect(inputElement).toHaveAttribute('name', 'list-radio-input');
     });
     it('should render unique id with multiple inputs when no id prop is given', () => {
-      const { container } = renderSelectionVariant();
-      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-      const inputElements = container.querySelectorAll(
-        `[name=${inputNameValue}]`
-      );
+      renderSelectionVariant();
+      const inputElements = screen.getAllByRole('radio');
+      expect(inputElements).toHaveLength(4);
       const inputIds = Array.from(inputElements).map((input) => {
         return input.id;
       });
