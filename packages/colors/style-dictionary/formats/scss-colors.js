@@ -83,12 +83,12 @@ function carbonScssColorsFormat({ dictionary }) {
 
   const lines = [FILE_BANNER];
 
-  // ── Standalone: $black, $white ──────────────────────────────────────────────
+  // Standalone: $black, $white
   lines.push(`$black: ${standalone['black'] ?? '#000000'} !default;`);
   lines.push(`$white: ${standalone['white'] ?? '#ffffff'} !default;`);
   lines.push('');
 
-  // ── black-100 alias + family-grade variables ────────────────────────────────
+  // black-100 alias + family-grade variables
   lines.push(`$black-100: ${standalone['black'] ?? '#000000'} !default;`);
 
   for (const family of FAMILIES) {
@@ -109,7 +109,7 @@ function carbonScssColorsFormat({ dictionary }) {
   lines.push(`$white-0: ${standalone['white'] ?? '#ffffff'} !default;`);
   lines.push('');
 
-  // ── Hover variables ─────────────────────────────────────────────────────────
+  // Hover variables
   lines.push(
     `$white-hover: ${standalone['whiteHover'] ?? '#e8e8e8'} !default;`
   );
@@ -137,7 +137,7 @@ function carbonScssColorsFormat({ dictionary }) {
 
   lines.push('');
 
-  // ── $colors map (solid grades only) ─────────────────────────────────────────
+  // $colors map (solid grades only)
   lines.push(`/// Colors from the IBM Design Language`);
   lines.push(`/// @access public`);
   lines.push(`/// @group @carbon/colors`);
