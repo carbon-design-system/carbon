@@ -8,7 +8,7 @@
 'use strict';
 
 /**
- * Emits `js/generated/tokens.{js,d.ts}` from the motion DTCG tokens.
+ * Emits `js/generated/tokens.{js,d.ts}` from tokens/motion.tokens.json.
  *
  * The format receives all resolved tokens (duration + easing) and produces:
  *   - V11 duration exports        (durationFast01, durationFast02, …)
@@ -61,7 +61,7 @@ function carbonJsMotionTokensFormat({ dictionary, options }) {
 
   const lines = [FILE_BANNER];
 
-  // ── Duration tokens (V11 canonical) ──────────────────────────────────────
+  // Duration tokens (V11 canonical)
   lines.push('// Duration tokens (V11)');
   const durationTokens = dictionary.allTokens.filter((t) =>
     t.name.startsWith('duration-')
@@ -84,7 +84,7 @@ function carbonJsMotionTokensFormat({ dictionary, options }) {
     }
   }
 
-  // ── Duration tokens (V10 deprecated aliases) ──────────────────────────────
+  // Duration tokens (V10 deprecated aliases)
   lines.push('');
   lines.push('// Duration tokens (V10 — deprecated aliases)');
   const v10Camels = [];
@@ -102,7 +102,7 @@ function carbonJsMotionTokensFormat({ dictionary, options }) {
     }
   }
 
-  // ── Easing map ────────────────────────────────────────────────────────────
+  // Easing map
   lines.push('');
   lines.push('// Easing tokens');
 
@@ -127,7 +127,7 @@ function carbonJsMotionTokensFormat({ dictionary, options }) {
     lines.push('};');
   }
 
-  // ── unstable_tokens ───────────────────────────────────────────────────────
+  // unstable_tokens
   lines.push('');
   if (outputMode === 'dts') {
     lines.push('export declare const unstable_tokens: readonly string[];');
