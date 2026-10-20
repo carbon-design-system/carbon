@@ -8,6 +8,7 @@
 import React from 'react';
 import FluidDatePicker from '../FluidDatePicker';
 import FluidDatePickerInput from '../../FluidDatePickerInput';
+import DatePickerInput from '../../DatePickerInput';
 import { render, screen } from '@testing-library/react';
 
 const prefix = 'cds';
@@ -65,7 +66,7 @@ describe('FluidDatePicker', () => {
     it('should add disabled classes when disabled', () => {
       render(
         <FluidDatePicker disabled data-testid="datePicker">
-          <FluidDatePickerInput disabled labelText="Start date" id="start" />
+          <FluidDatePickerInput labelText="Start date" id="start" />
         </FluidDatePicker>
       );
 
@@ -74,5 +75,45 @@ describe('FluidDatePicker', () => {
       );
       expect(screen.getByLabelText('Start date')).toBeDisabled();
     });
+
+    it.each([FluidDatePickerInput, DatePickerInput])(
+      'should disable both range inputs when only the wrapper is disabled (%#)',
+      (Input) => {
+        const { rerender } = render(
+          <FluidDatePicker disabled datePickerType="range">
+            <Input labelText="Start date" id="start" disabled={false} />
+            <Input labelText="End date" id="end" />
+          </FluidDatePicker>
+        );
+
+        expect(screen.getByLabelText('Start date')).toBeDisabled();
+        expect(screen.getByLabelText('End date')).toBeDisabled();
+
+        rerender(
+          <FluidDatePicker disabled={false} datePickerType="range">
+            <Input labelText="Start date" id="start" disabled={false} />
+            <Input labelText="End date" id="end" />
+          </FluidDatePicker>
+        );
+
+        expect(screen.getByLabelText('Start date')).toBeEnabled();
+        expect(screen.getByLabelText('End date')).toBeEnabled();
+      }
+    );
+
+    it.each([undefined, false])(
+      'should preserve individually disabled inputs when disabled is %s',
+      (disabled) => {
+        render(
+          <FluidDatePicker disabled={disabled} datePickerType="range">
+            <FluidDatePickerInput labelText="Start date" id="start" disabled />
+            <FluidDatePickerInput labelText="End date" id="end" />
+          </FluidDatePicker>
+        );
+
+        expect(screen.getByLabelText('Start date')).toBeDisabled();
+        expect(screen.getByLabelText('End date')).toBeEnabled();
+      }
+    );
   });
 });

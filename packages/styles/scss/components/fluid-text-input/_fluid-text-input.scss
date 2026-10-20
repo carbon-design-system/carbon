@@ -251,11 +251,6 @@
     border-block-end: convert.to-rem(1px) solid $border-subtle;
   }
 
-  .#{$prefix}--text-input--fluid
-    .#{$prefix}--password-input.#{$prefix}--text-input--fluid--disabled {
-    border-block-end: convert.to-rem(1px) solid $border-subtle;
-  }
-
   // AILabel styles
   .#{$prefix}--text-input--fluid
     .#{$prefix}--text-input__field-wrapper--decorator

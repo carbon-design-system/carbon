@@ -8,6 +8,9 @@
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import DatePicker from '../DatePicker';
+import DatePickerInput from '../DatePickerInput';
+import FluidDatePickerInput from '../FluidDatePickerInput';
+import { isComponentElement } from '../../internal';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm/FormContext';
 import React from 'react';
@@ -51,14 +54,14 @@ const FluidDatePicker = React.forwardRef<
   HTMLInputElement,
   FluidDatePickerProps
 >(function FluidDatePicker(
-  { className, children, invalid, readOnly, warn, ...other },
+  { className, children, disabled, invalid, readOnly, warn, ...other },
   ref
 ) {
   const prefix = usePrefix();
   const classNames = classnames(className, {
     [`${prefix}--date-picker--fluid`]: true,
     [`${prefix}--date-picker--fluid--invalid`]: invalid,
-    [`${prefix}--date-picker--fluid--disabled`]: other.disabled,
+    [`${prefix}--date-picker--fluid--disabled`]: disabled,
     [`${prefix}--date-picker--fluid--readonly`]: readOnly,
     [`${prefix}--date-picker--fluid--warn`]: warn,
   });
@@ -72,7 +75,17 @@ const FluidDatePicker = React.forwardRef<
         className={classNames}
         ref={ref}
         {...other}>
-        {children}
+        {disabled
+          ? React.Children.map(children, (child) => {
+              if (
+                isComponentElement(child, DatePickerInput) ||
+                isComponentElement(child, FluidDatePickerInput)
+              ) {
+                return React.cloneElement(child, { disabled: true });
+              }
+              return child;
+            })
+          : children}
       </DatePicker>
     </FormContext.Provider>
   );
