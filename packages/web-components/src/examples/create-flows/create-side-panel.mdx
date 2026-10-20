@@ -1,0 +1,105 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as Stories from './create-side-panel.stories';
+
+<Meta of={Stories} />
+
+# Create sidepanel
+
+[Create sidepanel usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/patterns/create-flows/usage/#side-panel)
+
+## Overview
+
+Use with medium complexity creations when the user needs page context. On-page
+content can be seen and interacted with while the panel is open.
+
+Patterns have multiple ways of accomplishing a user need and typically use a
+combination of components with additional design considerations. The pattern
+code we share is meant to serve as an example implementation that can be built
+and extended further.
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/src/examples/create-flows/create-side-panel/example)
+> example implementation.
+
+### Ingredients
+
+To build this pattern, we recommend including the following components:
+
+- [c4p-side-panel](https://web-components.carbondesignsystem.com/?path=/docs/components-sidepanel--overview)
+- [cds-button](https://web-components.carbondesignsystem.com/?path=/docs/components-button--overview)
+- [cds-dropdown](https://web-components.carbondesignsystem.com/?path=/docs/components-dropdown--overview)
+- [cds-form-item](https://web-components.carbondesignsystem.com/?path=/docs/components-form--overview)
+- [cds-number-input](https://web-components.carbondesignsystem.com/?path=/docs/components-number-input--overview)
+- [cds-text-input](https://web-components.carbondesignsystem.com/?path=/docs/components-text-input--overview)
+
+Until `SidePanel` is exported from `@carbon/web-components`, import it from
+`@carbon/ibm-products-web-components`:
+
+```javascript
+import '@carbon/ibm-products-web-components/es/components/side-panel/index.js';
+import '@carbon/web-components/es/components/button/index.js';
+import '@carbon/web-components/es/components/dropdown/index.js';
+import '@carbon/web-components/es/components/form/form-item.js';
+import '@carbon/web-components/es/components/number-input/index.js';
+import '@carbon/web-components/es/components/text-input/index.js';
+```
+
+## Default
+
+<Canvas of={Stories.Default} />
+
+```html
+<c4p-side-panel
+  @c4p-side-panel-closed=${this._openHandler}
+  ?open=${this.open}
+  size="md"
+  title="Create partitions"
+>
+  <cds-form id="example-form">
+    <cds-form-item>
+      <cds-text-input
+        placeholder="Enter topic name"
+        label="Topic name"
+      ></cds-text-input>
+    </cds-form-item>
+  </cds-form>
+  <cds-button slot="actions" kind="secondary" @click=${this._openHandler}>
+    Cancel
+  </cds-button>
+  <cds-button slot="actions" kind="primary" @click=${this._openHandler}>
+    Create
+  </cds-button>
+</c4p-side-panel>
+```
+
+## With form validation
+
+<Canvas of={Stories.WithFormValidation} />
+
+This story extends the default pattern with basic form validation:
+
+- The **Create** button is disabled until the topic name field contains text
+- The topic name field shows an invalid state with error text when blurred while
+  empty
+- Form state resets when the panel is closed
+
+```html
+<cds-text-input
+  placeholder="Enter topic name"
+  label="Topic name"
+  value=${this.topicName}
+  ?invalid=${this.invalid}
+  invalid-text="This is a required field"
+  @input=${this._handleTopicNameInput}
+  @blur=${this._handleTopicNameBlur}
+></cds-text-input>
+
+<cds-button
+  slot="actions"
+  kind="primary"
+  ?disabled=${!this.topicName.length}
+  @click=${this._openHandler}
+>
+  Create
+</cds-button>
+```

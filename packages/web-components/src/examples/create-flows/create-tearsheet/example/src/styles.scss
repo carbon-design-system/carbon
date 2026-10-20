@@ -1,0 +1,47 @@
+/**
+ * @license
+ *
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '@carbon/styles/scss/reset';
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/themes';
+@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/type';
+@use './create-tearsheet.scss';
+
+:root {
+  @include theme.theme(themes.$white);
+  background-color: var(--cds-background);
+  color: var(--cds-text-primary);
+}
+
+body {
+  background: var(--cds-background);
+  color: var(--cds-text-primary);
+  font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+  padding: spacing.$spacing-05;
+}
+
+section {
+  margin-block-end: spacing.$spacing-07;
+  padding: spacing.$spacing-05;
+  border: 1px solid var(--cds-border-subtle);
+  border-radius: 4px;
+
+  h4 {
+    @include type.type-style('heading-03');
+    margin-block-end: spacing.$spacing-03;
+  }
+
+  p {
+    @include type.type-style('body-01');
+    color: var(--cds-text-secondary);
+    margin-block-end: spacing.$spacing-05;
+  }
+}
+
