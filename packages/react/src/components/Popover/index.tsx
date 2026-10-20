@@ -238,6 +238,14 @@ export const Popover: PopoverComponent & {
 
   let align = mapPopoverAlign(initialAlign);
 
+  if (isTabTip) {
+    const tabTipAlignments: PopoverAlignment[] = ['bottom-start', 'bottom-end'];
+
+    if (!tabTipAlignments.includes(align)) {
+      align = 'bottom-start';
+    }
+  }
+
   // Tracks clicks inside PopoverContent to prevent it from closing when clicked, this handles an edge
   // case where the popover will close when clicking non-focusable elements (e.g. text)
   useEvent(popover, 'mousedown', (event) => {
@@ -458,14 +466,6 @@ export const Popover: PopoverComponent & {
       autoAlign: autoAlign,
     };
   }, [refs.setFloating, autoAlign]);
-
-  if (isTabTip) {
-    const tabTipAlignments: PopoverAlignment[] = ['bottom-start', 'bottom-end'];
-
-    if (!tabTipAlignments.includes(align)) {
-      align = 'bottom-start';
-    }
-  }
 
   useEffect(() => {
     if (enableFloatingStyles) {
