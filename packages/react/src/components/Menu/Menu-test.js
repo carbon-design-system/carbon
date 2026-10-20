@@ -43,8 +43,7 @@ describe('Menu', () => {
     it('should place a className on the outermost element', () => {
       render(<Menu className="custom-class" open />);
 
-      // eslint-disable-next-line testing-library/no-node-access
-      expect(document.querySelector('.custom-class')).toBeDefined();
+      expect(screen.getByRole('menu')).toHaveClass('custom-class');
     });
 
     it('should spread props onto ul', () => {
@@ -143,8 +142,7 @@ describe('Menu', () => {
       el.classList.add('custom-class');
       render(<Menu open target={el} />);
 
-      // eslint-disable-next-line testing-library/no-node-access
-      expect(document.querySelector('.custom-class')).toBeInTheDocument();
+      expect(el).toContainElement(screen.getByRole('menu'));
       document.body.removeChild(el);
     });
   });
