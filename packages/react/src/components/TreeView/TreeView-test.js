@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -103,12 +103,8 @@ describe('TreeView', () => {
     });
 
     it('should support a custom `className` prop on the outermost element', () => {
-      const { container } = render(
-        <TreeView className="custom-class" label="Tree" />
-      );
-
-      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-      const ul = container?.getElementsByTagName('ul')[0];
+      render(<TreeView className="custom-class" label="Tree" />);
+      const ul = screen.getByRole('tree', { name: 'Tree' });
 
       expect(ul).toHaveClass('custom-class');
     });
