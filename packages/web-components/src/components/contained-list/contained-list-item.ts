@@ -48,6 +48,17 @@ class CDSContainedListItem extends LitElement {
   private _hasIcon = false;
 
   /**
+   * Handles slot change for action
+   */
+  private _handleActionSlotChange({ target }: Event) {
+    const slot = target as HTMLSlotElement;
+    this._hasAction = slot.assignedElements().length > 0;
+    this.requestUpdate();
+  }
+
+  private _hasAction = false;
+
+  /**
    * Handles click event
    */
   private _handleClick(event: MouseEvent) {
@@ -74,12 +85,13 @@ class CDSContainedListItem extends LitElement {
   }
 
   render() {
-    const { disabled, clickable, _hasIcon } = this;
+    const { disabled, clickable, _hasIcon, _hasAction } = this;
 
     const classes = classMap({
       [`${prefix}--contained-list-item`]: true,
       [`${prefix}--contained-list-item--clickable`]: clickable,
       [`${prefix}--contained-list-item--with-icon`]: _hasIcon,
+      [`${prefix}--contained-list-item--with-action`]: _hasAction,
     });
 
     const contentClasses = `${prefix}--contained-list-item__content`;
@@ -103,7 +115,9 @@ class CDSContainedListItem extends LitElement {
             `
           : html`<div class="${contentClasses}">${content}</div>`}
         <div class="${prefix}--contained-list-item__action">
-          <slot name="action"></slot>
+          <slot
+            name="action"
+            @slotchange="${this._handleActionSlotChange}"></slot>
         </div>
       </div>
     `;

@@ -6,6 +6,7 @@
  */
 
 import { expect, fixture, html } from '@open-wc/testing';
+import { sendKeys } from '@web/test-runner-commands';
 import '@carbon/web-components/es/components/contained-list/index.js';
 import '@carbon/web-components/es/components/search/index.js';
 
@@ -274,6 +275,129 @@ describe('cds-contained-list-item', function () {
   });
 
   describe('interactive', () => {
+    for (const dir of ['ltr', 'rtl']) {
+      for (const size of ['sm', 'md', 'lg', 'xl']) {
+        it(`keeps the primary focus outline separate from its action (${dir}, ${size})`, async () => {
+          const el = await fixture(html`
+            <cds-contained-list
+              label="Heading"
+              dir=${dir}
+              size=${size}
+              style="inline-size: 320px">
+              <cds-contained-list-item clickable>
+                List item
+                <button slot="action" style="inline-size: 48px">Edit</button>
+              </cds-contained-list-item>
+            </cds-contained-list>
+          `);
+          const item = el.querySelector('cds-contained-list-item');
+          await item.updateComplete;
+          const primary = item.shadowRoot.querySelector('button');
+          const action = item.querySelector('[slot="action"]');
+          primary.focus();
+
+          const primaryBounds = primary.getBoundingClientRect();
+          const actionBounds = action.getBoundingClientRect();
+          if (dir === 'ltr') {
+            expect(primaryBounds.right).to.be.at.most(actionBounds.left);
+          } else {
+            expect(primaryBounds.left).to.be.at.least(actionBounds.right);
+          }
+          expect(getComputedStyle(primary).position).to.equal('relative');
+          expect(
+            parseFloat(getComputedStyle(primary, '::after').width)
+          ).to.be.closeTo(primaryBounds.width, 1);
+        });
+      }
+    }
+
+    it('keeps primary and action keyboard activation independent', async () => {
+      let itemClicks = 0;
+      let actionClicks = 0;
+      const el = await fixture(html`
+        <cds-contained-list label="Heading">
+          <cds-contained-list-item
+            clickable
+            @cds-contained-list-item-click=${() => itemClicks++}>
+            List item
+            <button slot="action" tabindex="0" @click=${() => actionClicks++}>
+              Edit
+            </button>
+          </cds-contained-list-item>
+        </cds-contained-list>
+      `);
+      const item = el.querySelector('cds-contained-list-item');
+      await item.updateComplete;
+      const primary = item.shadowRoot.querySelector('button');
+      const action = item.querySelector('[slot="action"]');
+      primary.focus();
+      await sendKeys({ press: 'Enter' });
+      expect(itemClicks).to.equal(1);
+      expect(actionClicks).to.equal(0);
+      await sendKeys({ press: 'Tab' });
+      expect(document.activeElement === action).to.be.true;
+      await sendKeys({ press: 'Enter' });
+      expect(actionClicks).to.equal(1);
+      expect(itemClicks).to.equal(1);
+    });
+
+    it('updates the layout when an action is added and removed', async () => {
+      const el = await fixture(html`
+        <cds-contained-list label="Heading" style="inline-size: 320px">
+          <cds-contained-list-item clickable>List item</cds-contained-list-item>
+        </cds-contained-list>
+      `);
+      const item = el.querySelector('cds-contained-list-item');
+      const container = item.shadowRoot.querySelector(
+        `.${prefix}--contained-list-item`
+      );
+      const primary = item.shadowRoot.querySelector('button');
+      const slot = item.shadowRoot.querySelector('slot[name="action"]');
+      const action = document.createElement('button');
+      action.slot = 'action';
+      action.textContent = 'Edit';
+      const initialWidth = primary.getBoundingClientRect().width;
+      const added = new Promise((resolve) => {
+        slot.addEventListener('slotchange', resolve, { once: true });
+      });
+      item.append(action);
+      await added;
+      await item.updateComplete;
+      expect(getComputedStyle(container).display).to.equal('grid');
+      expect(primary.getBoundingClientRect().right).to.be.at.most(
+        action.getBoundingClientRect().left
+      );
+
+      const removed = new Promise((resolve) => {
+        slot.addEventListener('slotchange', resolve, { once: true });
+      });
+      action.remove();
+      await removed;
+      await item.updateComplete;
+      expect(getComputedStyle(container).display).to.equal('list-item');
+      expect(primary.getBoundingClientRect().width).to.equal(initialWidth);
+    });
+
+    it('reserves space for actions in non-clickable items', async () => {
+      const el = await fixture(html`
+        <cds-contained-list label="Heading">
+          <cds-contained-list-item>
+            List item
+            <button slot="action" style="inline-size: 48px">Edit</button>
+          </cds-contained-list-item>
+        </cds-contained-list>
+      `);
+      const item = el.querySelector('cds-contained-list-item');
+      await item.updateComplete;
+      const content = item.shadowRoot.querySelector(
+        `.${prefix}--contained-list-item__content`
+      );
+      expect(
+        parseFloat(getComputedStyle(content).paddingInlineEnd)
+      ).to.be.at.least(48);
+      expect(item.shadowRoot.querySelector('button')).not.to.exist;
+    });
+
     it('renders content as button when clickable', async () => {
       const el = await fixture(html`
         <cds-contained-list label="Heading">
