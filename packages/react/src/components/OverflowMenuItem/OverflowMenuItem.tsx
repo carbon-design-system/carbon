@@ -8,10 +8,11 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
-  forwardRef,
   type AnchorHTMLAttributes,
+  type ButtonHTMLAttributes,
   type HTMLAttributes,
   type ReactNode,
+  forwardRef,
 } from 'react';
 import { keys, match } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
@@ -19,14 +20,26 @@ import { warning } from '../../internal/warning';
 import { Text } from '../Text';
 import { useId } from '../../internal/useId';
 
+type AnchorAttributeNames =
+  | 'download'
+  | 'href'
+  | 'hrefLang'
+  | 'media'
+  | 'ping'
+  | 'referrerPolicy'
+  | 'rel'
+  | 'target'
+  | 'type';
+
 type AnchorAttributeProps = Omit<
   AnchorHTMLAttributes<HTMLAnchorElement>,
-  keyof HTMLAttributes<HTMLElement> | 'href' | 'type'
+  keyof OverflowMenuItemBaseProps | 'href' | 'type'
 >;
 
-export interface OverflowMenuItemProps
-  extends HTMLAttributes<HTMLElement>,
-    AnchorAttributeProps {
+type AnchorOnlyProps = AnchorAttributeProps;
+
+interface OverflowMenuItemBaseProps
+  extends Omit<HTMLAttributes<HTMLElement>, AnchorAttributeNames> {
   /**
    * The CSS class name to be placed on the button element
    */
@@ -56,11 +69,6 @@ export interface OverflowMenuItemProps
    * `true` to make this menu item a divider.
    */
   hasDivider?: boolean;
-
-  /**
-   * If given, overflow item will render as a link with the given href
-   */
-  href?: string;
 
   index?: number;
 
@@ -94,6 +102,21 @@ export interface OverflowMenuItemProps
    */
   wrapperClassName?: string;
 }
+
+type ButtonAttributeProps = Pick<
+  ButtonHTMLAttributes<HTMLButtonElement>,
+  'type'
+>;
+
+type ButtonOnlyProps = {
+  [key in keyof AnchorOnlyProps]?: never;
+};
+
+export type OverflowMenuItemProps =
+  | (OverflowMenuItemBaseProps &
+      ButtonAttributeProps &
+      ButtonOnlyProps & { href?: undefined })
+  | (OverflowMenuItemBaseProps & AnchorAttributeProps & { href: string });
 
 const frFn = forwardRef<HTMLElement, OverflowMenuItemProps>;
 
