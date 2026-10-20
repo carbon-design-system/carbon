@@ -579,22 +579,26 @@ To define a group's setting, follow the structure of
 `.#{$prefix}--layout--group-step` with the details below (e.g.
 `.#{$prefix}--layout--size-lg`):
 
-| Group     | Steps                                         | Properties       |
-| :-------- | :-------------------------------------------- | :--------------- |
-| `size`    | `xs`<br>`sm`<br>`md`<br>`lg`<br>`xl`<br>`2xl` | `height`         |
-| `density` | `condensed`<br>`normal`                       | `padding-inline` |
+| Group     | Steps                                         | Properties             |
+| :-------- | :-------------------------------------------- | :--------------------- |
+| `size`    | `xs`<br>`sm`<br>`md`<br>`lg`<br>`xl`<br>`2xl` | `height`<br>`icon-gap` |
+| `density` | `condensed`<br>`normal`                       | `padding-inline`       |
 
 Inside a layout context, the associated css custom properties are available with
 the following naming structure: `--#{$prefix}-layout-group-property` (e.g.
 `--cds-layout-size-height` or `--cds-layout-density-padding-inline`). These css
 custom properties can be used in components to automatically react to the layout
 context and _should_ (but don't have to) be set on the css properties their
-names suggest (e.g. `height: var(--cds-layout-size-height);`). Note that these
-css custom properties are not set if a component is not within a layout context,
-so you'll need to provide a fallback. This should be the component's default
-styling and can still rely on the layout tokens by explicitly defining the step.
-For example, a component that, by default, should have a height of `md` but
-participate in layout contexts could be built in the following way:
+names suggest (e.g. `height: var(--cds-layout-size-height);`). An exception is
+`icon-gap`, which has no matching css property: it defines the space between an
+icon and the element placed inline beside it (e.g. a divider or button inside an
+input) and can be used on properties like `gap`, `margin` or `padding`, or in
+calculations such as `calc()`. Note that these css custom properties are not set
+if a component is not within a layout context, so you'll need to provide a
+fallback. This should be the component's default styling and can still rely on
+the layout tokens by explicitly defining the step. For example, a component
+that, by default, should have a height of `md` but participate in layout
+contexts could be built in the following way:
 
 ```scss
 .my-component {
@@ -836,6 +840,9 @@ layout group.
 
   height: layout.size('height');
   // => height: var(--cds-layout-size-height-local);
+
+  column-gap: layout.size('icon-gap');
+  // => column-gap: var(--cds-layout-size-icon-gap-local);
 }
 ```
 

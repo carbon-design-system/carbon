@@ -2747,6 +2747,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "toolbarLabel": {
+        "type": "string",
+      },
       "zebra": {
         "type": "bool",
       },
@@ -3558,6 +3561,9 @@ Map {
         "type": "bool",
       },
       "enableTreeviewControllable": {
+        "type": "bool",
+      },
+      "enableV12Autoalign": {
         "type": "bool",
       },
       "enableV12DynamicFloatingStyles": {
@@ -7438,6 +7444,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -7500,6 +7507,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -10646,6 +10654,9 @@ Map {
         "type": "oneOf",
       },
       "slug": [Function],
+      "tabIndex": {
+        "type": "number",
+      },
       "title": [Function],
       "type": {
         "args": [
@@ -11839,6 +11850,9 @@ Map {
         "type": "bool",
       },
       "enableTreeviewControllable": {
+        "type": "bool",
+      },
+      "enableV12Autoalign": {
         "type": "bool",
       },
       "enableV12DynamicFloatingStyles": {
@@ -14150,6 +14164,9 @@ Map {
         "type": "bool",
       },
       "enableTreeviewControllable": {
+        "type": "bool",
+      },
+      "enableV12Autoalign": {
         "type": "bool",
       },
       "enableV12DynamicFloatingStyles": {
