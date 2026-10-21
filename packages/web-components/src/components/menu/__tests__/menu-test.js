@@ -45,6 +45,50 @@ describe('cds-menu', () => {
     expect(menu).to.have.class('cds--menu--lg');
   });
 
+  it('should render nested submenus with the root menu size', async () => {
+    const el = await fixture(html`
+      <cds-menu .size=${'md'} .x=${[20, 60]} .y=${[20, 60]} open>
+        <cds-menu-item label="Level 1">
+          <cds-menu-item-group slot="submenu">
+            <cds-menu-item label="Level 2">
+              <cds-menu-item-group slot="submenu">
+                <cds-menu-item label="Level 3"></cds-menu-item>
+              </cds-menu-item-group>
+            </cds-menu-item>
+          </cds-menu-item-group>
+        </cds-menu-item>
+      </cds-menu>
+    `);
+    await el.updateComplete;
+
+    const getItem = (label) =>
+      el.querySelector(`cds-menu-item[label="${label}"]`);
+
+    const openSubmenu = async (item) => {
+      item._openSubmenu();
+      await item.updateComplete;
+      const submenu = item.shadowRoot.querySelector('cds-menu');
+      await submenu.updateComplete;
+      return submenu;
+    };
+
+    const submenus = [
+      await openSubmenu(getItem('Level 1')),
+      await openSubmenu(getItem('Level 2')),
+    ];
+
+    submenus.forEach((submenu) => {
+      expect(submenu.size).to.equal('md');
+    });
+
+    const rootItemHeight = getItem('Level 1').getBoundingClientRect().height;
+    ['Level 2', 'Level 3'].forEach((label) => {
+      expect(getItem(label).getBoundingClientRect().height).to.equal(
+        rootItemHeight
+      );
+    });
+  });
+
   it('should set aria-label attribute', async () => {
     const el = await fixture(html`<cds-menu label="Test Menu"></cds-menu>`);
     const menu = el.shadowRoot.querySelector('[role="menu"]');

@@ -254,8 +254,7 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
             </div>
             <cds-menu
               className=${menuClassName}
-              size=${this.parentElement?.getAttribute('size') ??
-              MENU_SIZE.LARGE}
+              size=${this._parentMenu?.size ?? MENU_SIZE.LARGE}
               ?isChild="${this.hasSubmenu}"
               label="${label}"
               .open="${submenuOpen}"
