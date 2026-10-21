@@ -203,7 +203,9 @@ $content-padding: 0 0 0 $spacing-05 !default;
     writing-mode: horizontal-tb;
 
     @media screen and (prefers-reduced-motion: reduce) {
-      transition: none;
+      // Keep a near-zero duration instead of removing the transition so that
+      // `transitionend` still fires for `AccordionItem`'s `handleAnimationEnd`
+      transition-duration: 0.01ms;
     }
   }
 
