@@ -1,0 +1,27 @@
+{
+  "name": "carbon-web-components-about-modal-pattern-example",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Sample project for getting started with the About modal pattern using Carbon web components",
+  "license": "Apache-2",
+  "main": "index.html",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "clean": "rimraf node_modules dist .cache"
+  },
+  "dependencies": {
+    "@carbon/icons": "^11.87.0",
+    "@carbon/styles": "1.114.0",
+    "@carbon/web-components": "^2.62.0",
+    "lit": "^3.2.1",
+    "sass": "^1.93.2"
+  },
+  "devDependencies": {
+    "rimraf": "^3.0.2",
+    "typescript": "^5.5.3",
+    "vite": "^5.4.20",
+    "vite-plugin-lit-css": "^2.1.0"
+  }
+}
