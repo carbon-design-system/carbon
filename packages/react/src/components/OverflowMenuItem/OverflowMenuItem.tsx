@@ -20,26 +20,19 @@ import { warning } from '../../internal/warning';
 import { Text } from '../Text';
 import { useId } from '../../internal/useId';
 
-type AnchorAttributeNames =
-  | 'download'
-  | 'href'
-  | 'hrefLang'
-  | 'media'
-  | 'ping'
-  | 'referrerPolicy'
-  | 'rel'
-  | 'target'
-  | 'type';
+type AnchorAttributeNames = Exclude<
+  keyof AnchorHTMLAttributes<HTMLAnchorElement>,
+  keyof HTMLAttributes<HTMLElement>
+>;
 
 type AnchorAttributeProps = Omit<
-  AnchorHTMLAttributes<HTMLAnchorElement>,
-  keyof OverflowMenuItemBaseProps | 'href' | 'type'
+  Pick<AnchorHTMLAttributes<HTMLAnchorElement>, AnchorAttributeNames>,
+  'href' | 'type'
 >;
 
 type AnchorOnlyProps = AnchorAttributeProps;
 
-interface OverflowMenuItemBaseProps
-  extends Omit<HTMLAttributes<HTMLElement>, AnchorAttributeNames> {
+interface OverflowMenuItemBaseProps extends HTMLAttributes<HTMLElement> {
   /**
    * The CSS class name to be placed on the button element
    */
