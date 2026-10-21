@@ -95,4 +95,22 @@ describe(componentName, () => {
       expect(screen.getByText('+2')).toBeTruthy();
     });
   });
+
+  it('uses a unique popover id for each instance', async () => {
+    render(
+      <>
+        <TagOverflow {...tagOverflowProps} maxVisible={3} />
+        <TagOverflow {...tagOverflowProps} maxVisible={3} />
+      </>
+    );
+    const triggers = await screen.findAllByText('+2');
+    const controlledIds = triggers.map((trigger) =>
+      trigger.closest('[aria-controls]').getAttribute('aria-controls')
+    );
+
+    expect(new Set(controlledIds).size).toBe(2);
+    controlledIds.forEach((id) => {
+      expect(document.getElementById(id)).toHaveClass(`${prefix}--popover`);
+    });
+  });
 });
