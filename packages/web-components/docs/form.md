@@ -1,18 +1,22 @@
 # Using components in a form
 
-Though form elements in `@carbon/web-components` (e.g. `<cds-text-input>`) are
-not native form elements like `<input>`, they have some extra APIs that align
-well with web/framework standards.
+In v2, Carbon form components add their values to a form when it emits the
+`formdata` event. This behavior is deprecated and will be removed in v3.
 
-## `formdata` event
+Native form association through `ElementInternals` is available as a preview.
+See the
+[v3 migration guide](../../../docs/guides/cwc-v3-migration.md#form-participation-moves-to-elementinternals)
+for details.
 
-Browsers supporting
-[`formdata` event](https://www.chromestatus.com/feature/5662230242656256) fire
-that event when the user clicks on `<button type="submit">` in `<form>`. Our
-form components listen to that event to add their values to the `<form>`.
+## The `formdata` event
 
-To support other browsers, you can use a regular `<button>` and manually fire a
-custom event with the same name (`formdata`), like below:
+Browsers fire the
+[`formdata` event](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/formdata_event)
+when the user submits a `<form>`. Carbon form components listen for the event
+and add their values to the form.
+
+You can also fire the event yourself to collect the values without submitting
+the form:
 
 ```javascript
 const form = document.querySelector('form');
@@ -26,7 +30,7 @@ button.addEventListener('click', () => {
   });
   event.formData = formData;
   form.dispatchEvent(event);
-  // `formData` is populated with the data in components such as `<cds-text-input>` or `<cds-dropdown>`, etc. in the `<form>`.
-  // You can use `formData` with `fetch()`/XHR instead of letting `<form>` submit the data
+  // `formData` contains the values from components such as `<cds-text-input>`
+  // and `<cds-dropdown>` in the form. You can pass it to `fetch()` or XHR.
 });
 ```
