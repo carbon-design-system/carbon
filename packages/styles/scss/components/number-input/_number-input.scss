@@ -58,6 +58,50 @@ $-control-btn-size: clamp(
   $spacing-07
 );
 
+/// Size of the controls-margin: 0px for `xs`, 4px for `sm`, and 8px for `md` and `lg`.
+/// @access private
+/// @group number-input
+$-controls-margin: clamp(
+  0rem,
+  layout.size('height') - convert.to-rem(28px),
+  $spacing-03
+);
+
+/// Space between the control buttons: 0 for `xs`, and 4px for `sm`, `md`, and
+/// `lg`.
+/// @access private
+/// @group number-input
+$-controls-gap: clamp(
+  0rem,
+  layout.size('height') - convert.to-rem(28px),
+  $spacing-02
+);
+
+/// Full inline width the controls occupy: both buttons, the gap between them,
+/// and the margin at the inline end.
+/// @access private
+/// @group number-input
+$-controls-width: calc(
+  2 * #{$-control-btn-size} + #{$-controls-gap} + #{$-controls-margin}
+);
+
+/// Space between the decorator and the controls: 4px for `xs`, 8px for `sm` and
+/// `md`, and 12px for `lg`. Built from a 4px base plus a 4px step from `sm` up
+/// and another 4px step at `lg`, since the values are not linear.
+/// @access private
+/// @group number-input
+$-decorator-margin: calc(
+  #{$spacing-02} + #{clamp(
+      0rem,
+      layout.size('height') - convert.to-rem(24px),
+      $spacing-02
+    )} + #{clamp(
+      0rem,
+      layout.size('height') - convert.to-rem(40px),
+      $spacing-02
+    )}
+);
+
 /// Number input styles
 /// @access public
 /// @group number-input
@@ -189,6 +233,12 @@ $-control-btn-size: clamp(
     inset-block-start: 50%;
     inset-inline-end: 0;
     transform: translateY(-50%);
+
+    @if enabled('enable-v12-release') {
+      gap: $-controls-gap;
+      inline-size: fit-content;
+      margin-inline-end: $-controls-margin;
+    }
   }
 
   .#{$prefix}--number__control-btn {
@@ -288,6 +338,10 @@ $-control-btn-size: clamp(
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn:last-of-type:hover {
     box-shadow: -4px 0 0 -2px $focus inset;
+
+    @if enabled('enable-v12-release') {
+      box-shadow: none;
+    }
   }
 
   // add invalid box-shadow to number controls only when invalid input is not focused
@@ -300,6 +354,10 @@ $-control-btn-size: clamp(
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn:last-of-type:hover {
     box-shadow: -4px 0 0 -2px $support-error inset;
+
+    @if enabled('enable-v12-release') {
+      box-shadow: none;
+    }
   }
 
   .#{$prefix}--number
@@ -402,6 +460,11 @@ $-control-btn-size: clamp(
 
     // steppers + gap from divider to this icon
     inset-inline-end: calc(2 * layout.size('height') + #{$-icon-gap});
+
+    @if enabled('enable-v12-release') {
+      // controls + the same spacing used between the icon and the decorator
+      inset-inline-end: calc(#{$-controls-width} + #{$-decorator-margin});
+    }
   }
 
   .#{$prefix}--number__invalid + .#{$prefix}--number__rule-divider {
@@ -509,6 +572,12 @@ $-control-btn-size: clamp(
     inset-block-start: 50%;
     inset-inline-end: calc(2 * layout.size('height') + #{$-ai-label-gap});
     transform: translateY(-50%);
+
+    @if enabled('enable-v12-release') {
+      // sit directly next to the controls
+      inset-inline-end: $-controls-width;
+      margin-inline-end: $-decorator-margin;
+    }
   }
 
   .#{$prefix}--number__input-wrapper--decorator
@@ -550,6 +619,10 @@ $-control-btn-size: clamp(
   .#{$prefix}--number__input-wrapper--slug .#{$prefix}--slug::before {
     display: none;
     inset-inline-start: calc(-1 * #{$-ai-label-gap});
+
+    @if enabled('enable-v12-release') {
+      display: none;
+    }
   }
 
   .#{$prefix}--number__input-wrapper--decorator
@@ -577,6 +650,10 @@ $-control-btn-size: clamp(
     .#{$prefix}--number__control-btn::before {
     display: block;
     inset-inline-end: calc(layout.size('height'));
+
+    @if enabled('enable-v12-release') {
+      display: none;
+    }
   }
 
   .#{$prefix}--number__input-wrapper--decorator
@@ -610,6 +687,17 @@ $-control-btn-size: clamp(
     inset-inline-end: calc(
       2 * layout.size('height') + #{$-ai-label-cluster} + #{$-icon-gap}
     );
+
+    @if enabled('enable-v12-release') {
+      // controls + gap + 16px decorator + gap, so the icon sits next to the
+      // decorator
+      inset-inline-end: calc(
+        #{$-controls-width} +
+          #{$-decorator-margin} +
+          #{convert.to-rem(16px)} +
+          #{$-decorator-margin}
+      );
+    }
   }
 
   .#{$prefix}--number__input-wrapper--decorator:has(
@@ -624,6 +712,10 @@ $-control-btn-size: clamp(
   .#{$prefix}--number__input-wrapper--slug:has(.#{$prefix}--number__invalid)
     .#{$prefix}--slug::before {
     display: block;
+
+    @if enabled('enable-v12-release') {
+      display: none;
+    }
   }
 
   .#{$prefix}--number
