@@ -103,9 +103,9 @@ describe(componentName, () => {
         <TagOverflow {...tagOverflowProps} maxVisible={3} />
       </>
     );
-    const triggers = await screen.findAllByText('+2');
+    const triggers = await screen.findAllByRole('button', { name: '+2' });
     const controlledIds = triggers.map((trigger) =>
-      trigger.closest('[aria-controls]').getAttribute('aria-controls')
+      trigger.getAttribute('aria-controls')
     );
 
     expect(new Set(controlledIds).size).toBe(2);
