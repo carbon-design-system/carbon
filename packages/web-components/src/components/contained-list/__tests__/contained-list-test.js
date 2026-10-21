@@ -335,7 +335,7 @@ describe('cds-contained-list-item', function () {
       expect(itemClicks).to.equal(1);
       expect(actionClicks).to.equal(0);
       await sendKeys({ press: 'Tab' });
-      expect(document.activeElement === action).to.be.true;
+      expect(document.activeElement).to.equal(action);
       await sendKeys({ press: 'Enter' });
       expect(actionClicks).to.equal(1);
       expect(itemClicks).to.equal(1);

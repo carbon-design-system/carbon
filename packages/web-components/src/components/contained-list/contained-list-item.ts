@@ -51,8 +51,9 @@ class CDSContainedListItem extends LitElement {
    * Handles slot change for action
    */
   private _handleActionSlotChange({ target }: Event) {
-    const slot = target as HTMLSlotElement;
-    this._hasAction = slot.assignedElements().length > 0;
+    if (!(target instanceof HTMLSlotElement)) return;
+
+    this._hasAction = target.assignedElements().length > 0;
     this.requestUpdate();
   }
 
