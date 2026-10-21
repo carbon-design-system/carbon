@@ -102,6 +102,14 @@ $-decorator-margin: calc(
     )}
 );
 
+/// Inline-end padding when one 16px adornment (invalid/warning icon or
+/// decorator) sits beside the controls: 8px clear of the adornment.
+/// @access private
+/// @group number-input
+$-input-padding-end-with-icon-or-decorator: calc(
+  #{$-controls-width} + #{$-decorator-margin} + #{convert.to-rem(16px)} + #{$spacing-03}
+);
+
 /// Number input styles
 /// @access public
 /// @group number-input
@@ -126,6 +134,10 @@ $-decorator-margin: calc(
     padding-inline-end: calc(
       2 * layout.size('height') + #{$-icon-gap} + 2 * $spacing-05
     );
+
+    @if enabled('enable-v12-release') {
+      padding-inline-end: $-input-padding-end-with-icon-or-decorator;
+    }
   }
 
   .#{$prefix}--number input[type='number'],
@@ -168,6 +180,7 @@ $-decorator-margin: calc(
             $border-strong 100%
           )
           border-box;
+      padding-inline: $spacing-05 calc(#{$-controls-width} + #{$spacing-03});
     }
 
     &:focus {
@@ -198,6 +211,10 @@ $-decorator-margin: calc(
       padding-inline-end: calc(
         2 * layout.size('height') + #{$-icon-gap} + 2 * $spacing-05
       );
+
+      @if enabled('enable-v12-release') {
+        padding-inline-end: $-input-padding-end-with-icon-or-decorator;
+      }
     }
   }
 
@@ -734,6 +751,10 @@ $-decorator-margin: calc(
     padding-inline-end: calc(
       2 * layout.size('height') + #{$-ai-label-gap} + 2 * $spacing-05
     );
+
+    @if enabled('enable-v12-release') {
+      padding-inline-end: $-input-padding-end-with-icon-or-decorator;
+    }
   }
 
   .#{$prefix}--number
@@ -753,6 +774,18 @@ $-decorator-margin: calc(
       2 * layout.size('height') + #{$-ai-label-cluster} + #{$-icon-gap} + 2 *
         $spacing-05
     );
+
+    @if enabled('enable-v12-release') {
+      // Inline-end padding when both a decorator and the invalid/warning icon are
+      // present: 8px clear of the outermost icon.
+      padding-inline-end: calc(
+        #{$-controls-width} +
+          2 *
+          #{$-decorator-margin} +
+          #{convert.to-rem(32px)} +
+          #{$spacing-03}
+      );
+    }
   }
 
   .#{$prefix}--number__input-wrapper--decorator
