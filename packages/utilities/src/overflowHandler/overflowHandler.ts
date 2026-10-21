@@ -126,10 +126,16 @@ export function updateOverflowHandler({
         visibleItems.push(items[i]);
         accumulated += size;
       } else {
-        // Always show at least one item when the container has space: if nothing
-        // has been made visible yet and the container is not zero-sized, force
-        // the first item in so the container never appears completely empty.
-        if (visibleItems.length === 0 && i === 0 && containerSize > 0) {
+        // Always show at least one item when the container has space and there is no offset element:
+        // if nothing has been made visible yet, no offset element exists, and the container is not zero-sized,
+        // force the first item in so the container never appears completely empty.
+        // When an offset element exists, all items collapse into the overflow menu instead.
+        if (
+          visibleItems.length === 0 &&
+          i === 0 &&
+          containerSize > 0 &&
+          !offset
+        ) {
           visibleItems.push(items[i]);
           breakIndex = i + 1;
         } else {
