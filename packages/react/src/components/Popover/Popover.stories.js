@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './story.scss';
+import styles from './story.scss?inline';
 import { Checkbox as CheckboxIcon } from '@carbon/icons-react';
 import React, { useState, useEffect, useRef } from 'react';
 import { Popover, PopoverContent } from '../Popover';
@@ -71,7 +71,6 @@ const argTypes = {
 const defaultArgs = {
   align: 'bottom',
   alignmentAxisOffset: 0,
-  autoAlign: false,
   backgroundToken: 'layer',
   border: false,
   caret: true,
@@ -115,7 +114,16 @@ export default {
     PopoverContent,
   },
   argTypes,
+  decorators: [
+    (Story) => (
+      <>
+        <style>{styles}</style>
+        <Story />
+      </>
+    ),
+  ],
   parameters: {
+    styles,
     controls: {
       hideNoControlsWarning: true,
       include: defaultControls,

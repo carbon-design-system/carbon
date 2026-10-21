@@ -6,28 +6,23 @@
  */
 
 import React from 'react';
-import layoutJson from '../../../../src/dtcg/layout.json';
+import layoutJson from '../../../../tokens/layout.tokens.json';
 
-// ── Resolve token values from layout.json ─────────────────────────────────────
+// Resolve token values from layout.tokens.json
 
-const MINI_UNIT = 8;
-const BASE_FONT_SIZE = 16;
 // Max rem value across all tokens — used to scale dimension bars
 const MAX_REM = 10;
 
-function resolveValue(value, extensions) {
-  const converter = extensions?.['carbon.layout']?.converter;
-  if (converter === 'miniUnits') {
-    return `${(Number(value) * MINI_UNIT) / BASE_FONT_SIZE}rem`;
+function resolveValue(token) {
+  const { $value } = token;
+  if (typeof $value === 'object') {
+    return `${$value.value}${$value.unit}`;
   }
-  if (converter === 'rem') {
-    return `${Number(value) / BASE_FONT_SIZE}rem`;
-  }
-  return String(value);
+  const unit = token.$extensions?.['com.ibm.carbon']?.layout?.unit ?? '';
+  return `${$value}${unit}`;
 }
 
-// ── Flatten layout.json into groups ──────────────────────────────────────────
-
+// Flatten layout.tokens.json into groups
 function buildGroups(json) {
   const groups = [];
   for (const [groupKey, groupVal] of Object.entries(json)) {
@@ -35,9 +30,8 @@ function buildGroups(json) {
     const tokens = [];
     for (const [tokenKey, tokenVal] of Object.entries(groupVal)) {
       if (tokenKey.startsWith('$')) continue;
-      const resolved = resolveValue(tokenVal.$value, tokenVal.$extensions);
-      const deprecated =
-        tokenVal.$extensions?.['carbon.layout']?.deprecated === true;
+      const resolved = resolveValue(tokenVal);
+      const deprecated = Boolean(tokenVal.$deprecated);
       tokens.push({
         name: tokenKey,
         value: resolved,
@@ -57,8 +51,7 @@ function buildGroups(json) {
 const ALL_GROUPS = buildGroups(layoutJson);
 const GROUP_OPTIONS = ['All', ...ALL_GROUPS.map((g) => g.key)];
 
-// ── Dimension bar (proportional to rem value, capped at MAX_REM) ──────────────
-
+// Dimension bar (proportional to rem value, capped at MAX_REM)
 function DimensionBar({ value }) {
   if (!value || !value.endsWith('rem')) return null;
   const rem = parseFloat(value);
@@ -74,8 +67,7 @@ function DimensionBar({ value }) {
   );
 }
 
-// ── Main page ─────────────────────────────────────────────────────────────────
-
+// Main page
 export default function IndexPage({ lastBuiltOn }) {
   const [activeGroup, setActiveGroup] = React.useState('All');
   const [search, setSearch] = React.useState('');

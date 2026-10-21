@@ -108,7 +108,7 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
   async dispatchIconDetect() {
     const hasRenderIcon = !!this.querySelector('[slot="render-icon"]');
     if (hasRenderIcon) {
-      await undefined; // this is used to replace setTimeout with 0 time out, which is much fater.
+      await undefined; // this is used to replace setTimeout with 0 time out, which is much faster.
       this.dispatchEvent(
         new CustomEvent('icon-detect', {
           bubbles: true, // Allows event to bubble up the DOM
