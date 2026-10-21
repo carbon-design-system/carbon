@@ -306,18 +306,6 @@
     min-inline-size: 0;
   }
 
-  // Ensure menu dropdown stays within viewport bounds.
-  // Note: Carbon MenuButton renders its menu in a body-level portal, so this
-  // selector cannot be scoped under #{$block-class}. This intentionally applies
-  // to every open Carbon menu on any page that loads these styles — not just
-  // menus triggered by PageHeader. This is a known global side-effect; confirm
-  // with the design team if a more targeted scope is ever required.
-  .#{$prefix}--menu.#{$prefix}--menu--open {
-    // Prevent menu from being cut off at top of viewport
-    max-block-size: calc(100vh - #{$spacing-05});
-    overflow-y: auto;
-  }
-
   .#{$block-class}.#{$block-class}__next .#{$block-class}__content__subtitle {
     @include type.type-style('productive-heading-03');
 
