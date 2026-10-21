@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 import { expect, fixture } from '@open-wc/testing';
-import '@carbon/web-components/es/components/feature-flags/index.js';
 import '@carbon/web-components/es/components/popover/index.js';
 import '@carbon/web-components/es/components/tooltip/index.js';
 import '@carbon/web-components/es/components/toggle-tip/index.js';
@@ -54,13 +53,16 @@ const TAGS = [
   { tag: 'cds-combo-box' },
   { tag: 'cds-multi-select' },
   { tag: 'cds-truncated-text', attributes: { value: 'Text' } },
+  // These don't reflect the property, so there's no `autoalign` attribute.
   {
     tag: 'cds-icon-indicator',
     attributes: { kind: 'failed', label: 'Label' },
+    reflects: false,
   },
   {
     tag: 'cds-shape-indicator',
     attributes: { kind: 'failed', label: 'Label' },
+    reflects: false,
   },
 ];
 
@@ -72,16 +74,11 @@ const markup = ({ tag, attributes = {}, children = '' }, extra = '') => {
 };
 
 /**
- * Renders the element from markup, optionally inside a `<feature-flags>` scope
- * and with extra attributes on the element itself.
+ * Renders the element from markup, optionally with extra attributes on the
+ * element itself.
  */
-const render = async (entry, { flag, attribute } = {}) => {
-  const element = markup(entry, attribute);
-  const root = await fixture(
-    flag
-      ? `<feature-flags ${flag}>${element}</feature-flags>`
-      : `<div>${element}</div>`
-  );
+const render = async (entry, { attribute } = {}) => {
+  const root = await fixture(`<div>${markup(entry, attribute)}</div>`);
   const el = root.querySelector(entry.tag);
   await el.updateComplete;
   return el;
@@ -89,56 +86,20 @@ const render = async (entry, { flag, attribute } = {}) => {
 
 describe('AutoAlignMixin', () => {
   TAGS.forEach((entry) => {
-    const { tag, property = 'autoalign' } = entry;
+    const { tag, property = 'autoalign', reflects = true } = entry;
 
     describe(tag, () => {
-      it('should default to false', async () => {
+      it('should default to true', async () => {
         const el = await render(entry);
 
-        expect(el[property]).to.be.false;
-        expect(el).to.not.have.attribute('autoalign');
-      });
-
-      it('should default to true with enable-v12-autoalign', async () => {
-        const el = await render(entry, { flag: 'enable-v12-autoalign' });
-
         expect(el[property]).to.be.true;
+        if (reflects) {
+          expect(el).to.have.attribute('autoalign');
+        }
       });
 
-      it('should default to true with enable-v12-release', async () => {
-        const el = await render(entry, { flag: 'enable-v12-release' });
-
-        expect(el[property]).to.be.true;
-      });
-
-      it('should be enabled by the autoalign attribute', async () => {
-        const el = await render(entry, { attribute: 'autoalign' });
-
-        expect(el[property]).to.be.true;
-      });
-
-      it('should let the property opt out of the flag', async () => {
-        const root = await fixture(
-          '<feature-flags enable-v12-autoalign></feature-flags>'
-        );
-        const el = document.createElement(tag);
-        Object.entries(entry.attributes ?? {}).forEach(([name, value]) => {
-          el.setAttribute(name, value);
-        });
-        el.innerHTML = entry.children ?? '';
-        el[property] = false;
-        root.appendChild(el);
-        await el.updateComplete;
-
-        expect(el[property]).to.be.false;
-        expect(el).to.not.have.attribute('autoalign');
-      });
-
-      it('should let autoalign="false" opt out of the flag', async () => {
-        const el = await render(entry, {
-          flag: 'enable-v12-autoalign',
-          attribute: 'autoalign="false"',
-        });
+      it('should let autoalign="false" opt out of the default', async () => {
+        const el = await render(entry, { attribute: 'autoalign="false"' });
 
         expect(el[property]).to.be.false;
         // The attribute is dropped so that `[autoalign]` selectors stay accurate.
@@ -146,20 +107,11 @@ describe('AutoAlignMixin', () => {
       });
 
       it('should turn off when autoalign="false" is set after connecting', async () => {
-        const el = await render(entry, { flag: 'enable-v12-autoalign' });
+        const el = await render(entry);
         expect(el[property]).to.be.true;
 
         el.setAttribute('autoalign', 'false');
         await el.updateComplete;
-
-        expect(el[property]).to.be.false;
-        expect(el).to.not.have.attribute('autoalign');
-      });
-
-      it('should not keep autoalign="false" on an element that is already off', async () => {
-        const el = await render(entry);
-
-        el.setAttribute('autoalign', 'false');
 
         expect(el[property]).to.be.false;
         expect(el).to.not.have.attribute('autoalign');

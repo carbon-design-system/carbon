@@ -16,7 +16,6 @@ import {
 } from '..';
 import { Information } from '@carbon/react/icons';
 import userEvent from '@testing-library/user-event';
-import { FeatureFlags } from '../../FeatureFlags';
 import { waitForPosition } from '../../ListBox/test-helpers';
 
 describe('Toggletip', () => {
@@ -727,38 +726,26 @@ describe('ToggletipLabel', () => {
 });
 
 describe('Toggletip autoAlign default', () => {
-  it('should not enable `autoAlign` by default', async () => {
+  it('should enable `autoAlign` by default', async () => {
     render(<Toggletip data-testid="toggletip">test</Toggletip>);
-    await waitForPosition();
-
-    expect(screen.getByTestId('toggletip')).not.toHaveClass(
-      `${prefix}--autoalign`
-    );
-  });
-
-  it('should enable `autoAlign` by default with `enable-v12-autoalign`', async () => {
-    render(
-      <FeatureFlags enableV12Autoalign>
-        <Toggletip data-testid="toggletip">test</Toggletip>
-      </FeatureFlags>
-    );
     await waitForPosition();
 
     expect(screen.getByTestId('toggletip')).toHaveClass(`${prefix}--autoalign`);
   });
 
-  it('should respect `autoAlign={false}` with `enable-v12-autoalign`', async () => {
+  it('should keep the requested alignment with `autoAlign={false}`', async () => {
     render(
-      <FeatureFlags enableV12Autoalign>
-        <Toggletip autoAlign={false} data-testid="toggletip">
-          test
-        </Toggletip>
-      </FeatureFlags>
+      <Toggletip autoAlign={false} align="bottom-start" data-testid="toggletip">
+        test
+      </Toggletip>
     );
     await waitForPosition();
 
-    expect(screen.getByTestId('toggletip')).not.toHaveClass(
-      `${prefix}--autoalign`
+    // Dynamic floating styles still apply the auto-align class in v12; what
+    // `autoAlign={false}` disables is collision-based repositioning.
+    expect(screen.getByTestId('toggletip')).toHaveClass(`${prefix}--autoalign`);
+    expect(screen.getByTestId('toggletip')).toHaveClass(
+      `${prefix}--popover--bottom-start`
     );
   });
 });

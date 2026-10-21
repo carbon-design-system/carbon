@@ -16,24 +16,8 @@ const withFlags = (flags) =>
   };
 
 describe('useAutoAlign', () => {
-  it('should default to `false`', () => {
+  it('should default to `true`', () => {
     const { result } = renderHook(() => useAutoAlign());
-
-    expect(result.current).toBe(false);
-  });
-
-  it('should default to `true` with `enable-v12-autoalign`', () => {
-    const { result } = renderHook(() => useAutoAlign(), {
-      wrapper: withFlags({ enableV12Autoalign: true }),
-    });
-
-    expect(result.current).toBe(true);
-  });
-
-  it('should default to `true` with `enable-v12-release`', () => {
-    const { result } = renderHook(() => useAutoAlign(), {
-      wrapper: withFlags({ enableV12Release: true }),
-    });
 
     expect(result.current).toBe(true);
   });

@@ -939,10 +939,10 @@ describe('FeatureFlags', () => {
 
       // Ensure the default value is as defined and as expected
       expect(checkFlags).toHaveBeenLastCalledWith({
-        enableV12Autoalign: false,
+        enableV12Autoalign: true,
       });
       expect(checkFlag).toHaveBeenLastCalledWith({
-        enableV12Autoalign: false,
+        enableV12Autoalign: true,
       });
 
       // Enable the flag

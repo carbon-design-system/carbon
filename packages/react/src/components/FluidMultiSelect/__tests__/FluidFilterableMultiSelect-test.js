@@ -28,6 +28,7 @@ describe('FluidFilterableMultiSelect', () => {
       'cds--list-box__wrapper',
       'cds--list-box__wrapper--fluid',
       'test',
+      'cds--autoalign',
       { exact: true }
     );
   });
@@ -49,6 +50,7 @@ describe('FluidFilterableMultiSelect', () => {
       'cds--list-box__wrapper',
       'cds--list-box__wrapper--fluid',
       'cds--list-box__wrapper--fluid--condensed',
+      'cds--autoalign',
       { exact: true }
     );
   });
