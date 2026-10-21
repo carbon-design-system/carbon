@@ -487,6 +487,7 @@ collect:
         - columnCount
         - showHeader
         - showToolbar
+        - toolbarLabel
         - zebra
         # DatePicker
         - allowInput
@@ -548,6 +549,7 @@ collect:
         - enableFocusWrapWithoutSentinels
         - enablePresence
         - enableTreeviewControllable
+        - enableV12Autoalign
         - enableV12DynamicFloatingStyles
         - enableV12Overflowmenu
         - enableV12Release

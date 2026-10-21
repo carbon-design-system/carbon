@@ -12,7 +12,6 @@ import mdx from './CopyButton.mdx';
 
 const defaultArgs = {
   align: 'bottom',
-  autoAlign: true,
   disabled: false,
   feedback: 'Copied!',
   feedbackTimeout: 2000,

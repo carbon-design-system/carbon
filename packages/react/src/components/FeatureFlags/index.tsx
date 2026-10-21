@@ -100,6 +100,15 @@ export interface FeatureFlagsProps {
   enableV12TabsContainedLayer?: boolean;
 
   /**
+   * Enable `autoAlign` by default for components that support it, like
+   * `Popover`, `Tooltip`, `Toggletip`, `Dropdown`, etc. An explicit
+   * `autoAlign` prop always takes precedence.
+   *
+   * Becomes the default behavior in v12.
+   */
+  enableV12Autoalign?: boolean;
+
+  /**
    * Enable enhanced functionality for the `FileUploader` component, including
    * richer callback data and expanded trigger events for `onChange` and
    * `onDelete`.
@@ -137,6 +146,7 @@ const PROP_TO_FLAG: Record<string, string> = {
   enableDialogElement: 'enable-dialog-element',
   enableV12DynamicFloatingStyles: 'enable-v12-dynamic-floating-styles',
   enableV12TabsContainedLayer: 'enable-v12-tabs-contained-layer',
+  enableV12Autoalign: 'enable-v12-autoalign',
   enableEnhancedFileUploader: 'enable-enhanced-file-uploader',
   enablePresence: 'enable-presence',
 };
@@ -159,6 +169,7 @@ export const FeatureFlags = ({
   enableDialogElement,
   enableV12DynamicFloatingStyles,
   enableV12TabsContainedLayer,
+  enableV12Autoalign,
   enableEnhancedFileUploader,
   enablePresence,
 }: FeatureFlagsProps) => {
@@ -179,6 +190,7 @@ export const FeatureFlags = ({
       enableDialogElement,
       enableV12DynamicFloatingStyles,
       enableV12TabsContainedLayer,
+      enableV12Autoalign,
       enableEnhancedFileUploader,
       enablePresence,
     };
@@ -209,6 +221,7 @@ export const FeatureFlags = ({
     enableDialogElement,
     enableV12DynamicFloatingStyles,
     enableV12TabsContainedLayer,
+    enableV12Autoalign,
     enableEnhancedFileUploader,
     enablePresence,
     flags,
@@ -243,6 +256,7 @@ FeatureFlags.propTypes = {
   enableDialogElement: PropTypes.bool,
   enableV12DynamicFloatingStyles: PropTypes.bool,
   enableV12TabsContainedLayer: PropTypes.bool,
+  enableV12Autoalign: PropTypes.bool,
   enableEnhancedFileUploader: PropTypes.bool,
   enablePresence: PropTypes.bool,
 };

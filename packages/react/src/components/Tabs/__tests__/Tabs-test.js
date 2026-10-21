@@ -174,8 +174,10 @@ describe('Tab', () => {
         </TabPanels>
       </Tabs>
     );
-    // eslint-disable-next-line testing-library/no-node-access
-    expect(screen.getByText('Tab Label 1').parentElement.tagName).toBe('DIV');
+    expect(screen.getByRole('tab', { name: 'Tab Label 1' })).toHaveProperty(
+      'tagName',
+      'DIV'
+    );
   });
 
   it('should render secondaryLabel in contained tabs if provided', () => {
@@ -215,7 +217,6 @@ describe('Tab', () => {
         </TabPanels>
       </Tabs>
     );
-    // eslint-disable-next-line testing-library/no-node-access
     expect(screen.queryByText('test-secondary-label')).not.toBeInTheDocument();
   });
 
@@ -484,11 +485,9 @@ describe('Tab', () => {
       </Tabs>
     );
 
-    expect(
-      // eslint-disable-next-line testing-library/no-node-access
-      screen.getAllByLabelText('Press delete to remove Tab Label 1 tab')[0]
-        .parentElement
-    ).not.toHaveClass(`${prefix}--visually-hidden`);
+    expect(screen.getByTitle('Remove Tab Label 1 tab')).not.toHaveClass(
+      `${prefix}--visually-hidden`
+    );
   });
 
   it('should ignore hover on dismissable icon if it is a contained tab', async () => {
@@ -537,11 +536,9 @@ describe('Tab', () => {
       </Tabs>
     );
 
-    expect(
-      // eslint-disable-next-line testing-library/no-node-access
-      screen.queryAllByLabelText('Press delete to remove Tab Label 1 tab')[0]
-        .parentElement
-    ).toHaveClass(`${prefix}--visually-hidden`);
+    expect(screen.getByTitle('Remove Tab Label 1 tab')).toHaveClass(
+      `${prefix}--visually-hidden`
+    );
   });
 
   it('should call onCloseTabRequest when dismissable and close icon clicked', async () => {
