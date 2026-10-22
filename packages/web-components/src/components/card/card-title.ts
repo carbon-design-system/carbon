@@ -18,6 +18,7 @@ import styles from './card.scss?lit';
  *
  * @element cds-card-title
  * @slot - Title text (required).
+ * @slot title-media - Icon, avatar, or image rendered to the left of the title text block.
  * @slot label - Rich label content rendered above the title (overrides `label` attr).
  * @slot title-start - Leading icon/content (16px productive, 24px expressive).
  * @slot title-end - Trailing icon/content.
@@ -65,9 +66,16 @@ class CDSCardTitle extends LitElement {
 
   @state() private _hasTitleStart = false;
 
+  @state() private _hasTitleMedia = false;
+
   private _onTitleStartSlotChange(e: Event) {
     const slot = e.target as HTMLSlotElement;
     this._hasTitleStart = slot.assignedElements().length > 0;
+  }
+
+  private _onTitleMediaSlotChange(e: Event) {
+    const slot = e.target as HTMLSlotElement;
+    this._hasTitleMedia = slot.assignedNodes({ flatten: true }).length > 0;
   }
 
   private _parseTruncate(value: string | null): false | true | number {
@@ -127,35 +135,51 @@ class CDSCardTitle extends LitElement {
       [`${blockClass}__description--truncate-multi`]: isDescMulti,
     });
 
+    const titleClasses = classMap({
+      [`${blockClass}__title`]: true,
+      [`${blockClass}__title--has-media`]: this._hasTitleMedia,
+    });
+
+    // The media wrapper only exists when the slot is populated so that the
+    // flex gap between media and text isn't reserved for an empty slot.
+    const mediaSlot = html`<slot
+      name="title-media"
+      @slotchange=${this._onTitleMediaSlotChange}></slot>`;
+
     return html`
-      <div class="${blockClass}__title">
-        <slot name="label">
-          ${this.label
-            ? html`<div class=${labelClasses} style=${styleMap(labelVars)}>
-                ${this.label}
-              </div>`
-            : nothing}
-        </slot>
+      <div class=${titleClasses}>
+        ${this._hasTitleMedia
+          ? html`<div class="${blockClass}__title-media">${mediaSlot}</div>`
+          : mediaSlot}
+        <div class="${blockClass}__title-text">
+          <slot name="label">
+            ${this.label
+              ? html`<div class=${labelClasses} style=${styleMap(labelVars)}>
+                  ${this.label}
+                </div>`
+              : nothing}
+          </slot>
 
-        <span class=${textRowClasses} style=${styleMap(titleVars)}>
-          <span class="${blockClass}__title-start-icon">
-            <slot
-              name="title-start"
-              @slotchange=${this._onTitleStartSlotChange}></slot>
+          <span class=${textRowClasses} style=${styleMap(titleVars)}>
+            <span class="${blockClass}__title-start-icon">
+              <slot
+                name="title-start"
+                @slotchange=${this._onTitleStartSlotChange}></slot>
+            </span>
+            <slot></slot>
+            <span class="${blockClass}__title-end-icon">
+              <slot name="title-end"></slot>
+            </span>
           </span>
-          <slot></slot>
-          <span class="${blockClass}__title-end-icon">
-            <slot name="title-end"></slot>
-          </span>
-        </span>
 
-        <slot name="description">
-          ${this.description
-            ? html`<div class=${descClasses} style=${styleMap(descVars)}>
-                ${this.description}
-              </div>`
-            : nothing}
-        </slot>
+          <slot name="description">
+            ${this.description
+              ? html`<div class=${descClasses} style=${styleMap(descVars)}>
+                  ${this.description}
+                </div>`
+              : nothing}
+          </slot>
+        </div>
       </div>
     `;
   }
