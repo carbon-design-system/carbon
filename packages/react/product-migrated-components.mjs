@@ -65,6 +65,8 @@ export const productMigratedStoryGlobs = [
   '../src/examples/AddSelect/MultiAddSelect/MultiAddSelect.mdx',
   '../src/examples/AddSelect/SingleAddSelect/SingleAddSelect.stories.jsx',
   '../src/examples/AddSelect/SingleAddSelect/SingleAddSelect.mdx',
+  '../src/examples/AboutModal/AboutModal.stories.js',
+  '../src/examples/AboutModal/AboutModal.mdx',
 ];
 
 /**
