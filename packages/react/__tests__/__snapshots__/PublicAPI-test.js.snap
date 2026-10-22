@@ -9598,6 +9598,7 @@ Map {
     },
   },
   "Slider" => {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": {
       "ariaLabelInput": {
         "type": "string",
@@ -9700,6 +9701,7 @@ Map {
         "type": "node",
       },
     },
+    "render": [Function],
   },
   "SliderSkeleton" => {
     "propTypes": {
