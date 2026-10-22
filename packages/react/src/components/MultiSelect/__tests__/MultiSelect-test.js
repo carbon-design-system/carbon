@@ -918,21 +918,32 @@ describe('MultiSelect', () => {
     });
 
     it('should set maxHeight on the listbox when autoAlign is enabled', async () => {
+      // The shared Jest setup stubs out floating-ui positioning. This test
+      // asserts on the computed size, so it needs the real hook.
+      const useFloatingSpy = jest
+        .spyOn(jest.requireMock('@floating-ui/react'), 'useFloating')
+        .mockImplementation(
+          jest.requireActual('@floating-ui/react').useFloating
+        );
       const items = generateItems(4, generateGenericItem);
 
-      render(
-        <MultiSelect
-          autoAlign
-          open
-          id="test"
-          label="test-label"
-          items={items}
-        />
-      );
-      await waitForPosition();
+      try {
+        render(
+          <MultiSelect
+            autoAlign
+            open
+            id="test"
+            label="test-label"
+            items={items}
+          />
+        );
+        await waitForPosition();
 
-      const listbox = screen.getByRole('listbox', { hidden: true });
-      expect(listbox.style.maxHeight).toBe('0px');
+        const listbox = screen.getByRole('listbox', { hidden: true });
+        expect(listbox.style.maxHeight).toBe('0px');
+      } finally {
+        useFloatingSpy.mockRestore();
+      }
     });
 
     it('should accept a `ref` for the underlying button element', async () => {

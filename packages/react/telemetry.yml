@@ -487,6 +487,7 @@ collect:
         - columnCount
         - showHeader
         - showToolbar
+        - toolbarLabel
         - zebra
         # DatePicker
         - allowInput

@@ -701,14 +701,28 @@ describe('FilterableMultiSelect', () => {
   });
 
   it('should handle autoAlign prop', async () => {
-    const { container } = render(
-      <FilterableMultiSelect {...mockProps} autoAlign />
-    );
-    await waitForPosition();
+    // The shared Jest setup stubs out floating-ui positioning. This test
+    // asserts on the computed size, so it needs the real hook.
+    const useFloatingSpy = jest
+      .spyOn(jest.requireMock('@floating-ui/react'), 'useFloating')
+      .mockImplementation(jest.requireActual('@floating-ui/react').useFloating);
 
-    expect(container.firstChild).toHaveClass(`${prefix}--autoalign`);
-    const menu = container.querySelector('.cds--list-box__menu');
-    expect(menu.style.maxHeight).toBe('0px');
+    try {
+      const { container } = render(
+        <FilterableMultiSelect {...mockProps} autoAlign />
+      );
+      await waitForPosition();
+
+      expect(container.firstChild).toHaveClass(`${prefix}--autoalign`);
+
+      await openMenu();
+      await waitForPosition();
+
+      const menu = container.querySelector('.cds--list-box__menu');
+      expect(menu.style.maxHeight).toBe('0px');
+    } finally {
+      useFloatingSpy.mockRestore();
+    }
   });
 
   it('should handle inline type', async () => {

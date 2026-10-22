@@ -496,7 +496,7 @@ describe.each([
           <div id="description-modal-id">
             This is the description of the modal
           </div>
-          <FeatureFlags enableDialogElement>
+          <FeatureFlags enableV12Release={false} enableDialogElement>
             <ComposedModal
               aria-describedby="description-modal-id"
               data-testid="modal"

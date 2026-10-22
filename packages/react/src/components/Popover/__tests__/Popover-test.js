@@ -8,11 +8,12 @@
 import { render, screen } from '@testing-library/react';
 import React, { forwardRef } from 'react';
 import { Popover, PopoverContent } from '../../Popover';
+import { ClassPrefix } from '../../ClassPrefix';
 import userEvent from '@testing-library/user-event';
 import RadioButton from '../../RadioButton';
 import RadioButtonGroup from '../../RadioButtonGroup';
 import { default as Checkbox } from '../../Checkbox';
-import { FeatureFlags } from '../../FeatureFlags';
+import { waitForPosition } from '../../ListBox/test-helpers';
 
 const prefix = 'cds';
 
@@ -25,7 +26,7 @@ describe('Popover', () => {
   describe('autoAlign default', () => {
     const autoAlignClass = `${prefix}--popover--auto-align`;
 
-    it('should not enable `autoAlign` by default', async () => {
+    it('should enable `autoAlign` by default', async () => {
       render(
         <Popover open data-testid="popover">
           <PopoverContent>test</PopoverContent>
@@ -33,33 +34,27 @@ describe('Popover', () => {
       );
       await waitForPosition();
 
-      expect(screen.getByTestId('popover')).not.toHaveClass(autoAlignClass);
-    });
-
-    it('should enable `autoAlign` by default with `enable-v12-autoalign`', async () => {
-      render(
-        <FeatureFlags enableV12Autoalign>
-          <Popover open data-testid="popover">
-            <PopoverContent>test</PopoverContent>
-          </Popover>
-        </FeatureFlags>
-      );
-      await waitForPosition();
-
       expect(screen.getByTestId('popover')).toHaveClass(autoAlignClass);
     });
 
-    it('should respect `autoAlign={false}` with `enable-v12-autoalign`', async () => {
+    it('should keep the requested alignment with `autoAlign={false}`', async () => {
       render(
-        <FeatureFlags enableV12Autoalign>
-          <Popover open autoAlign={false} data-testid="popover">
-            <PopoverContent>test</PopoverContent>
-          </Popover>
-        </FeatureFlags>
+        <Popover
+          open
+          autoAlign={false}
+          align="bottom-start"
+          data-testid="popover">
+          <PopoverContent>test</PopoverContent>
+        </Popover>
       );
       await waitForPosition();
 
-      expect(screen.getByTestId('popover')).not.toHaveClass(autoAlignClass);
+      // Dynamic floating styles still apply the auto-align class in v12; what
+      // `autoAlign={false}` disables is collision-based repositioning.
+      expect(screen.getByTestId('popover')).toHaveClass(autoAlignClass);
+      expect(screen.getByTestId('popover')).toHaveClass(
+        `${prefix}--popover--bottom-start`
+      );
     });
   });
 

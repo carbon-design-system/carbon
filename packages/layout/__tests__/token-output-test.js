@@ -47,8 +47,7 @@ for (const [groupKey, groupVal] of Object.entries(tokens)) {
   }
 }
 
-// ── JS round-trip ─────────────────────────────────────────────────────────────
-
+// JS round-trip
 describe('tokens → JS round-trip', () => {
   it.each(testCases)(
     'token `%s` resolves to correct JS value',
@@ -66,8 +65,7 @@ describe('tokens → JS round-trip', () => {
   );
 });
 
-// ── Sass round-trip ───────────────────────────────────────────────────────────
-
+// Sass round-trip
 describe('tokens → Sass round-trip', () => {
   it.each(testCases)(
     'token `%s` resolves to correct Sass variable value',

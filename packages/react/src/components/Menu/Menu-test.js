@@ -43,8 +43,7 @@ describe('Menu', () => {
     it('should place a className on the outermost element', () => {
       render(<Menu className="custom-class" open />);
 
-      // eslint-disable-next-line testing-library/no-node-access
-      expect(document.querySelector('.custom-class')).toBeDefined();
+      expect(screen.getByRole('menu')).toHaveClass('custom-class');
     });
 
     it('should spread props onto ul', () => {
@@ -143,8 +142,7 @@ describe('Menu', () => {
       el.classList.add('custom-class');
       render(<Menu open target={el} />);
 
-      // eslint-disable-next-line testing-library/no-node-access
-      expect(document.querySelector('.custom-class')).toBeInTheDocument();
+      expect(el).toContainElement(screen.getByRole('menu'));
       document.body.removeChild(el);
     });
   });
@@ -502,6 +500,30 @@ describe('MenuItem', () => {
         expect(child).toHaveFocus();
       });
     });
+
+    it('should move focus to the next item when pressing ArrowDown while an item with a submenu is in focus', async () => {
+      render(
+        <Menu open label="Menu">
+          <MenuItem label="Parent">
+            <MenuItem label="Child" />
+          </MenuItem>
+          <MenuItem label="Sibling" />
+        </Menu>
+      );
+
+      const parentItem = screen.getByRole('menuitem', {
+        name: 'Parent Parent',
+      });
+      parentItem.focus();
+      expect(parentItem).toHaveFocus();
+
+      await userEvent.keyboard('{ArrowDown}');
+
+      const siblingItem = screen.getByRole('menuitem', { name: 'Sibling' });
+      await waitFor(() => {
+        expect(siblingItem).toHaveFocus();
+      });
+    });
   });
 
   it('navigates through dynamically added MenuItems in the correct order', async () => {
@@ -516,6 +538,27 @@ describe('MenuItem', () => {
     menu.focus();
 
     const expectedOrder = ['0', '1', '2', '3', '11', '4', '5', '6', '9'];
+    for (const label of expectedOrder) {
+      await userEvent.keyboard('{ArrowDown}');
+      expect(screen.getByRole('menuitem', { name: label })).toHaveFocus();
+    }
+  });
+
+  it('should move focus to each menu item on ArrowDown when rendered in React.StrictMode', async () => {
+    render(
+      <React.StrictMode>
+        <Menu open label="Menu">
+          <MenuItem label="Item 1" />
+          <MenuItem label="Item 2" />
+          <MenuItem label="Item 3" />
+        </Menu>
+      </React.StrictMode>
+    );
+
+    const item1 = await screen.findByRole('menuitem', { name: 'Item 1' });
+    expect(item1).toHaveFocus();
+
+    const expectedOrder = ['Item 2', 'Item 3', 'Item 1'];
     for (const label of expectedOrder) {
       await userEvent.keyboard('{ArrowDown}');
       expect(screen.getByRole('menuitem', { name: label })).toHaveFocus();

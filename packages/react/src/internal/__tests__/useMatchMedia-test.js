@@ -33,6 +33,7 @@ describe('useMatchMedia', () => {
     };
 
     Object.defineProperty(window, 'matchMedia', {
+      configurable: true,
       writable: true,
       value: jest.fn().mockImplementation((query) => {
         const MIN_WIDTH_REGEX = /\(min-width: (\d+)px\)/;

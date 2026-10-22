@@ -1,7 +1,7 @@
 {
   "name": "@carbon/styles",
   "description": "Styles for the Carbon Design System",
-  "version": "2.0.0-alpha.3",
+  "version": "2.0.0-alpha.4",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
@@ -40,13 +40,13 @@
     }
   },
   "dependencies": {
-    "@carbon/colors": "^12.0.0-alpha.1",
-    "@carbon/feature-flags": "^2.0.0-alpha.1",
-    "@carbon/grid": "^12.0.0-alpha.2",
-    "@carbon/layout": "^12.0.0-alpha.2",
-    "@carbon/motion": "^12.0.0-alpha.2",
-    "@carbon/themes": "^12.0.0-alpha.3",
-    "@carbon/type": "^12.0.0-alpha.2",
+    "@carbon/colors": "^12.0.0-alpha.2",
+    "@carbon/feature-flags": "^2.0.0-alpha.2",
+    "@carbon/grid": "^12.0.0-alpha.3",
+    "@carbon/layout": "^12.0.0-alpha.3",
+    "@carbon/motion": "^12.0.0-alpha.3",
+    "@carbon/themes": "^12.0.0-alpha.4",
+    "@carbon/type": "^12.0.0-alpha.3",
     "@ibm/plex": "6.4.1",
     "@ibm/plex-mono": "2.5.0",
     "@ibm/plex-sans": "1.1.0",
@@ -59,7 +59,7 @@
     "@ibm/telemetry-js": "^1.5.0"
   },
   "devDependencies": {
-    "@carbon/test-utils": "^10.42.0",
+    "@carbon/test-utils": "^10.43.0-alpha.0",
     "autoprefixer": "^10.4.7",
     "browserslist-config-carbon": "^11.2.0",
     "css": "^3.0.0",
