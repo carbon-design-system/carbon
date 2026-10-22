@@ -232,7 +232,6 @@ class CreateFullPageWithSections extends HostListenerMixin(LitElement) {
                     >
                     </cds-toggle>
                   </div>
-                </fieldset>
               </cds-column>
             </cds-grid>
 

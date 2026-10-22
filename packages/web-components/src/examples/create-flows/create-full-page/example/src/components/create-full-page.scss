@@ -13,7 +13,6 @@
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/config' as carbon-config;
 @use '@carbon/styles/scss/reset';
-@use '@carbon/styles/scss/breakpoint' as *;
 
 // Pattern-specific block classes
 $block-class: create-full-page-pattern;
