@@ -317,8 +317,7 @@ function toPx(value, heightRem) {
     .split(HEIGHT_VAR)
     .join(String(heightRem))
     .replace(/(\d*\.?\d+)rem/g, '$1')
-    .replace(/\bcalc\(/g, '(')
-    .replace(/\bclamp\(/g, 'clamp(');
+    .replace(/\bcalc\(/g, '(');
 
   // eslint-disable-next-line no-new-func
   const rem = new Function('clamp', `'use strict'; return (${expression});`)(

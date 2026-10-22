@@ -22,93 +22,7 @@
 @use '../../utilities/convert';
 @use '../../utilities/z-index' as *;
 @use '../../utilities/layout';
-
-/// Space between the invalid/warning icon and the rule divider beside it.
-/// Clamps to 8px ($spacing-03) for `xs` and `sm`, and 16px ($spacing-05) for
-/// `md` and `lg`.
-/// @access private
-/// @group number-input
-$-icon-gap: clamp(
-  $spacing-03,
-  layout.size('height') - $spacing-06,
-  $spacing-05
-);
-
-/// Space between the AI label and each of the rule dividers surrounding it,
-/// 8px for `xs` and `sm` and 16px for `md`, + 1px to account for the divider itself
-/// @access private
-/// @group number-input
-$-ai-label-gap: clamp(
-  convert.to-rem(9px),
-  layout.size('height') - $spacing-06 + convert.to-rem(1px),
-  convert.to-rem(17px)
-);
-
-/// The whole AI label cluster: a gap, the 16px icon, and another gap.
-/// @access private
-/// @group number-input
-$-ai-label-cluster: calc(2 * #{$-ai-label-gap} + #{convert.to-rem(16px)});
-
-/// Size of the control button: 24px for `xs`, `sm`, and `md`, and 32px for `lg`.
-/// @access private
-/// @group number-input
-$-control-btn-size: clamp(
-  $spacing-06,
-  layout.size('height') - $spacing-05,
-  $spacing-07
-);
-
-/// Size of the controls-margin: 0px for `xs`, 4px for `sm`, and 8px for `md` and `lg`.
-/// @access private
-/// @group number-input
-$-controls-margin: clamp(
-  0rem,
-  layout.size('height') - convert.to-rem(28px),
-  $spacing-03
-);
-
-/// Space between the control buttons: 0 for `xs`, and 4px for `sm`, `md`, and
-/// `lg`.
-/// @access private
-/// @group number-input
-$-controls-gap: clamp(
-  0rem,
-  layout.size('height') - convert.to-rem(28px),
-  $spacing-02
-);
-
-/// Full inline width the controls occupy: both buttons, the gap between them,
-/// and the margin at the inline end.
-/// @access private
-/// @group number-input
-$-controls-width: calc(
-  2 * #{$-control-btn-size} + #{$-controls-gap} + #{$-controls-margin}
-);
-
-/// Space between the decorator and the controls: 4px for `xs`, 8px for `sm` and
-/// `md`, and 12px for `lg`. Built from a 4px base plus a 4px step from `sm` up
-/// and another 4px step at `lg`, since the values are not linear.
-/// @access private
-/// @group number-input
-$-decorator-margin: calc(
-  #{$spacing-02} + #{clamp(
-      0rem,
-      layout.size('height') - convert.to-rem(24px),
-      $spacing-02
-    )} + #{clamp(
-      0rem,
-      layout.size('height') - convert.to-rem(40px),
-      $spacing-02
-    )}
-);
-
-/// Inline-end padding when one 16px adornment (invalid/warning icon or
-/// decorator) sits beside the controls: 8px clear of the adornment.
-/// @access private
-/// @group number-input
-$-input-padding-end-with-icon-or-decorator: calc(
-  #{$-controls-width} + #{$-decorator-margin} + #{convert.to-rem(16px)} + #{$spacing-03}
-);
+@use './vars' as *;
 
 /// Number input styles
 /// @access public
@@ -132,11 +46,11 @@ $-input-padding-end-with-icon-or-decorator: calc(
     input[type='text'] {
     // steppers + divider->icon gap + 16px icon + 16px padding
     padding-inline-end: calc(
-      2 * layout.size('height') + #{$-icon-gap} + 2 * $spacing-05
+      2 * layout.size('height') + #{$number-input-icon-gap} + 2 * $spacing-05
     );
 
     @if enabled('enable-v12-release') {
-      padding-inline-end: $-input-padding-end-with-icon-or-decorator;
+      padding-inline-end: $number-input-padding-end-with-icon-or-decorator;
     }
   }
 
@@ -180,7 +94,8 @@ $-input-padding-end-with-icon-or-decorator: calc(
             $border-strong 100%
           )
           border-box;
-      padding-inline: $spacing-05 calc(#{$-controls-width} + #{$spacing-03});
+      padding-inline: $spacing-05
+        calc(#{$number-input-controls-width} + #{$spacing-03});
     }
 
     &:focus {
@@ -209,11 +124,11 @@ $-input-padding-end-with-icon-or-decorator: calc(
     &[data-invalid] {
       // steppers + divider->icon gap + 16px icon + 16px padding
       padding-inline-end: calc(
-        2 * layout.size('height') + #{$-icon-gap} + 2 * $spacing-05
+        2 * layout.size('height') + #{$number-input-icon-gap} + 2 * $spacing-05
       );
 
       @if enabled('enable-v12-release') {
-        padding-inline-end: $-input-padding-end-with-icon-or-decorator;
+        padding-inline-end: $number-input-padding-end-with-icon-or-decorator;
       }
     }
   }
@@ -252,9 +167,9 @@ $-input-padding-end-with-icon-or-decorator: calc(
     transform: translateY(-50%);
 
     @if enabled('enable-v12-release') {
-      gap: $-controls-gap;
+      gap: $number-input-controls-gap;
       inline-size: fit-content;
-      margin-inline-end: $-controls-margin;
+      margin-inline-end: $number-input-controls-margin;
     }
   }
 
@@ -297,8 +212,8 @@ $-input-padding-end-with-icon-or-decorator: calc(
       border: 1px solid transparent;
       border-radius: $border-radius-max;
       background-clip: padding-box;
-      block-size: $-control-btn-size;
-      inline-size: $-control-btn-size;
+      block-size: $number-input-control-btn-size;
+      inline-size: $number-input-control-btn-size;
 
       &:hover {
         box-shadow: none;
@@ -476,11 +391,15 @@ $-input-padding-end-with-icon-or-decorator: calc(
     fill: $support-error;
 
     // steppers + gap from divider to this icon
-    inset-inline-end: calc(2 * layout.size('height') + #{$-icon-gap});
+    inset-inline-end: calc(
+      2 * layout.size('height') + #{$number-input-icon-gap}
+    );
 
     @if enabled('enable-v12-release') {
       // controls + the same spacing used between the icon and the decorator
-      inset-inline-end: calc(#{$-controls-width} + #{$-decorator-margin});
+      inset-inline-end: calc(
+        #{$number-input-controls-width} + #{$number-input-decorator-margin}
+      );
     }
   }
 
@@ -587,13 +506,15 @@ $-input-padding-end-with-icon-or-decorator: calc(
   .#{$prefix}--number__input-wrapper--slug .#{$prefix}--slug {
     position: absolute;
     inset-block-start: 50%;
-    inset-inline-end: calc(2 * layout.size('height') + #{$-ai-label-gap});
+    inset-inline-end: calc(
+      2 * layout.size('height') + #{$number-input-ai-label-gap}
+    );
     transform: translateY(-50%);
 
     @if enabled('enable-v12-release') {
       // sit directly next to the controls
-      inset-inline-end: $-controls-width;
-      margin-inline-end: $-decorator-margin;
+      inset-inline-end: $number-input-controls-width;
+      margin-inline-end: $number-input-decorator-margin;
     }
   }
 
@@ -635,11 +556,7 @@ $-input-padding-end-with-icon-or-decorator: calc(
   .#{$prefix}--number__input-wrapper--slug .#{$prefix}--ai-label::before,
   .#{$prefix}--number__input-wrapper--slug .#{$prefix}--slug::before {
     display: none;
-    inset-inline-start: calc(-1 * #{$-ai-label-gap});
-
-    @if enabled('enable-v12-release') {
-      display: none;
-    }
+    inset-inline-start: calc(-1 * #{$number-input-ai-label-gap});
   }
 
   .#{$prefix}--number__input-wrapper--decorator
@@ -702,17 +619,17 @@ $-input-padding-end-with-icon-or-decorator: calc(
   .#{$prefix}--number__input-wrapper--slug .#{$prefix}--number__invalid {
     // steppers + AI label cluster + the gap from its divider to this icon
     inset-inline-end: calc(
-      2 * layout.size('height') + #{$-ai-label-cluster} + #{$-icon-gap}
+      2 * layout.size('height') + #{$number-input-ai-label-cluster} + #{$number-input-icon-gap}
     );
 
     @if enabled('enable-v12-release') {
       // controls + gap + 16px decorator + gap, so the icon sits next to the
       // decorator
       inset-inline-end: calc(
-        #{$-controls-width} +
-          #{$-decorator-margin} +
+        #{$number-input-controls-width} +
+          #{$number-input-decorator-margin} +
           #{convert.to-rem(16px)} +
-          #{$-decorator-margin}
+          #{$number-input-decorator-margin}
       );
     }
   }
@@ -749,11 +666,11 @@ $-input-padding-end-with-icon-or-decorator: calc(
     input[type='text'] {
     // steppers + divider->label gap + 16px AI label + 16px padding
     padding-inline-end: calc(
-      2 * layout.size('height') + #{$-ai-label-gap} + 2 * $spacing-05
+      2 * layout.size('height') + #{$number-input-ai-label-gap} + 2 * $spacing-05
     );
 
     @if enabled('enable-v12-release') {
-      padding-inline-end: $-input-padding-end-with-icon-or-decorator;
+      padding-inline-end: $number-input-padding-end-with-icon-or-decorator;
     }
   }
 
@@ -771,17 +688,17 @@ $-input-padding-end-with-icon-or-decorator: calc(
     input {
     // steppers + AI label cluster + icon gap + icon + 16px padding
     padding-inline-end: calc(
-      2 * layout.size('height') + #{$-ai-label-cluster} + #{$-icon-gap} + 2 *
-        $spacing-05
+      2 * layout.size('height') + #{$number-input-ai-label-cluster} + #{$number-input-icon-gap} +
+        2 * $spacing-05
     );
 
     @if enabled('enable-v12-release') {
       // Inline-end padding when both a decorator and the invalid/warning icon are
       // present: 8px clear of the outermost icon.
       padding-inline-end: calc(
-        #{$-controls-width} +
+        #{$number-input-controls-width} +
           2 *
-          #{$-decorator-margin} +
+          #{$number-input-decorator-margin} +
           #{convert.to-rem(32px)} +
           #{$spacing-03}
       );
