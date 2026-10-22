@@ -75,6 +75,7 @@
   "dependencies": {
     "@carbon/icon-helpers": "10.47.0",
     "@carbon/icons": "^11.91.0",
+    "@carbon/pictograms": "^12.87.0",
     "@carbon/styles": "^1.118.0",
     "@carbon/utilities": "^0.28.0",
     "@floating-ui/dom": "^1.6.3",
