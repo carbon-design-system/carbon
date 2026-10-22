@@ -6,6 +6,7 @@
  */
 
 import React, {
+  forwardRef,
   useEffect,
   useMemo,
   useReducer,
@@ -331,8 +332,8 @@ export interface SliderProps
 }
 
 type State = {
-  value: ComponentProps<typeof Slider>['value'];
-  valueUpper: ComponentProps<typeof Slider>['unstable_valueUpper'];
+  value: SliderProps['value'];
+  valueUpper: SliderProps['unstable_valueUpper'];
   left: number;
   leftUpper: number;
   needsOnRelease: boolean;
@@ -344,7 +345,7 @@ type State = {
   isRtl: boolean;
 };
 
-const Slider = (props: SliderProps) => {
+const Slider = forwardRef<HTMLDivElement, SliderProps>((props, ref) => {
   const {
     ariaLabelInput,
     unstable_ariaLabelInputUpper: ariaLabelInputUpper,
@@ -1382,7 +1383,7 @@ const Slider = (props: SliderProps) => {
   };
 
   return (
-    <div className={classNames(`${prefix}--form-item`, className)}>
+    <div className={classNames(`${prefix}--form-item`, className)} ref={ref}>
       <Text
         as="label"
         htmlFor={twoHandles ? undefined : id}
@@ -1622,7 +1623,9 @@ const Slider = (props: SliderProps) => {
       )}
     </div>
   );
-};
+});
+
+Slider.displayName = 'Slider';
 
 Slider.propTypes = {
   /**
@@ -1800,4 +1803,4 @@ Slider.propTypes = {
   warnText: PropTypes.node,
 };
 
-export default Slider as (props: SliderProps) => ReactNode;
+export default Slider;
