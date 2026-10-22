@@ -85,6 +85,13 @@ export interface IconIndicatorProps {
   label: string;
 
   /**
+   * Optionally specify a color for the label text. Accepts any valid CSS color
+   * value or design token, e.g. `"var(--cds-text-primary)"`. Defaults to
+   * `$text-secondary`.
+   */
+  labelColor?: string;
+
+  /**
    * Specify the size of the Icon Indicator. Defaults to 16.
    */
   size?: 16 | 20;
@@ -100,6 +107,7 @@ export const IconIndicator = React.forwardRef(
       iconDescription,
       kind,
       label,
+      labelColor,
       size = 16,
     }: IconIndicatorProps,
     ref: React.Ref<HTMLDivElement>
@@ -140,8 +148,14 @@ export const IconIndicator = React.forwardRef(
       </>
     );
 
+    const style = labelColor
+      ? ({
+          [`--${prefix}-icon-indicator-label-color`]: labelColor,
+        } as React.CSSProperties)
+      : undefined;
+
     return (
-      <div className={classNames} ref={ref}>
+      <div className={classNames} ref={ref} style={style}>
         {content}
       </div>
     );
@@ -198,6 +212,13 @@ IconIndicator.propTypes = {
    * Label next to the icon.
    */
   label: PropTypes.string.isRequired,
+
+  /**
+   * Optionally specify a color for the label text. Accepts any valid CSS color
+   * value or design token, e.g. `"var(--cds-text-primary)"`. Defaults to
+   * `$text-secondary`.
+   */
+  labelColor: PropTypes.string,
 
   /**
    * Specify the size of the Icon Indicator. Defaults to 16.

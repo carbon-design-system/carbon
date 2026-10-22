@@ -110,4 +110,32 @@ describe('IconIndicator', () => {
       expect(container.firstChild).toHaveClass('cds--icon-indicator--20');
     });
   });
+
+  describe('labelColor prop', () => {
+    it('should set the CSS custom property when labelColor is provided', () => {
+      const { container } = render(
+        <IconIndicator
+          kind="failed"
+          label="label"
+          labelColor="var(--cds-text-primary)"
+        />
+      );
+      expect(
+        container.firstChild.style.getPropertyValue(
+          '--cds-icon-indicator-label-color'
+        )
+      ).toBe('var(--cds-text-primary)');
+    });
+
+    it('should not set inline style when labelColor is not provided', () => {
+      const { container } = render(
+        <IconIndicator kind="failed" label="label" />
+      );
+      expect(
+        container.firstChild.style.getPropertyValue(
+          '--cds-icon-indicator-label-color'
+        )
+      ).toBe('');
+    });
+  });
 });

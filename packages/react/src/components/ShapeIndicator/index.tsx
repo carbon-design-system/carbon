@@ -107,6 +107,13 @@ export interface ShapeIndicatorProps {
   label: string;
 
   /**
+   * Optionally specify a color for the label text. Accepts any valid CSS color
+   * value or design token, e.g. `"var(--cds-text-primary)"`. Defaults to
+   * `$text-secondary`.
+   */
+  labelColor?: string;
+
+  /**
    * Description for the shape announced to screen readers in compact mode.
    * Defaults to `label` when not provided.
    */
@@ -127,6 +134,7 @@ export const ShapeIndicator = React.forwardRef(
       compact = false,
       kind,
       label,
+      labelColor,
       shapeDescription,
       textSize = 12,
     }: ShapeIndicatorProps,
@@ -168,8 +176,14 @@ export const ShapeIndicator = React.forwardRef(
       </>
     );
 
+    const style = labelColor
+      ? ({
+          [`--${prefix}-shape-indicator-label-color`]: labelColor,
+        } as React.CSSProperties)
+      : undefined;
+
     return (
-      <div className={classNames} ref={ref}>
+      <div className={classNames} ref={ref} style={style}>
         {content}
       </div>
     );
@@ -220,6 +234,13 @@ ShapeIndicator.propTypes = {
    * Label next to the shape.
    */
   label: PropTypes.string.isRequired,
+
+  /**
+   * Optionally specify a color for the label text. Accepts any valid CSS color
+   * value or design token, e.g. `"var(--cds-text-primary)"`. Defaults to
+   * `$text-secondary`.
+   */
+  labelColor: PropTypes.string,
 
   /**
    * Description for the shape announced to screen readers in compact mode.
