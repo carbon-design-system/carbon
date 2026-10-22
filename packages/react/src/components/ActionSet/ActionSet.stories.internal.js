@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2024
+ * Copyright IBM Corp. 2021, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -28,7 +28,7 @@ const actionsMappingWithLabels = actionsMapping(
 export default {
   title: 'Utilities/ActionSet',
   component: ActionSet,
-  tags: ['autodocs', 'ibm-products-migrated'],
+  tags: ['autodocs'],
   parameters: {
     layout: 'centered',
     docs: {

@@ -27,7 +27,7 @@ const storyChildren = (
 export default {
   title: 'Utilities/ScrollGradient',
   component: ScrollGradient,
-  tags: ['autodocs', 'ibm-products-migrated'],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       page: mdx,
