@@ -45,8 +45,8 @@ describe('cds-menu', () => {
     expect(menu).to.have.class('cds--menu--lg');
   });
 
-  it('should render nested submenus with the root menu size', async () => {
-    const el = await fixture(html`
+  const renderNestedMenu = () =>
+    fixture(html`
       <cds-menu .size=${'md'} .x=${[20, 60]} .y=${[20, 60]} open>
         <cds-menu-item label="Level 1">
           <cds-menu-item-group slot="submenu">
@@ -59,6 +59,9 @@ describe('cds-menu', () => {
         </cds-menu-item>
       </cds-menu>
     `);
+
+  it('should render nested submenus with the root menu size', async () => {
+    const el = await renderNestedMenu();
     await el.updateComplete;
 
     const getItem = (label) =>
@@ -87,6 +90,20 @@ describe('cds-menu', () => {
         rootItemHeight
       );
     });
+  });
+
+  it('should update nested submenus when the root menu size changes', async () => {
+    const el = await renderNestedMenu();
+    await el.updateComplete;
+
+    el.size = 'xs';
+    await el.updateComplete;
+
+    for (const label of ['Level 1', 'Level 2']) {
+      const item = el.querySelector(`cds-menu-item[label="${label}"]`);
+      await item.updateComplete;
+      expect(item.shadowRoot.querySelector('cds-menu').size).to.equal('xs');
+    }
   });
 
   it('should set aria-label attribute', async () => {

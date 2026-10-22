@@ -191,6 +191,13 @@ class CDSMenu extends HostListenerMixin(LitElement) {
     return `${prefix}-menu-opened`;
   }
   updated(changedProperties) {
+    if (changedProperties.has('size')) {
+      // Nested submenus are sized from the root menu when their item renders,
+      // so the items need to render again to pick up the new size.
+      this.querySelectorAll<CDSmenuItem>(`${prefix}-menu-item`).forEach(
+        (item) => item.requestUpdate()
+      );
+    }
     if (changedProperties.has('open')) {
       if (this.open) {
         this._handleOpen();
