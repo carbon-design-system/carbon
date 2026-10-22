@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2022, 2023
+ * Copyright IBM Corp. 2020, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -29,6 +29,11 @@ export enum FILE_UPLOADER_ITEM_STATE {
  * File uploader item size.
  */
 export enum FILE_UPLOADER_ITEM_SIZE {
+  /**
+   * Extra-small size.
+   */
+  EXTRA_SMALL = 'xs',
+
   /**
    * Small size.
    */
