@@ -213,7 +213,9 @@ export const EditInPlace = forwardRef<HTMLDivElement, EditInPlaceProps>(
       onChange(e.target.value);
     };
 
-    const onFocusHandler = (e: React.FocusEvent<HTMLElement>) => {
+    const onFocusHandler = (
+      e: React.FocusEvent<HTMLElement> | React.MouseEvent<HTMLElement>
+    ) => {
       if (!isTargetingChild(e)) {
         inputRef.current?.focus();
       }
@@ -434,9 +436,7 @@ export const EditInPlace = forwardRef<HTMLDivElement, EditInPlaceProps>(
               label={readOnlyLabel || 'Edit off'}
               kind="ghost"
               key="readonly"
-              onClick={(e) =>
-                onFocusHandler(e as unknown as React.FocusEvent<HTMLElement>)
-              }>
+              onClick={onFocusHandler}>
               <EditOff size={16} />
             </IconButton>
           ) : focused ? (
@@ -473,9 +473,7 @@ export const EditInPlace = forwardRef<HTMLDivElement, EditInPlaceProps>(
               })}
               size={size}
               label={editLabel}
-              onClick={(e) =>
-                onFocusHandler(e as unknown as React.FocusEvent<HTMLElement>)
-              }
+              onClick={onFocusHandler}
               kind="ghost"
               key="edit">
               <Edit size={16} />
