@@ -3575,6 +3575,9 @@ Map {
       "enableV12Release": {
         "type": "bool",
       },
+      "enableV12TabsContainedLayer": {
+        "type": "bool",
+      },
       "enableV12TileDefaultIcons": {
         "type": "bool",
       },
@@ -11866,6 +11869,9 @@ Map {
       "enableV12Release": {
         "type": "bool",
       },
+      "enableV12TabsContainedLayer": {
+        "type": "bool",
+      },
       "enableV12TileDefaultIcons": {
         "type": "bool",
       },
@@ -14178,6 +14184,9 @@ Map {
         "type": "bool",
       },
       "enableV12Release": {
+        "type": "bool",
+      },
+      "enableV12TabsContainedLayer": {
         "type": "bool",
       },
       "enableV12TileDefaultIcons": {

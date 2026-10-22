@@ -1,0 +1,39 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Components/Tabs/Feature Flag" name="Flag details" />
+
+# Contained and vertical TabPanel layer
+
+## The feature flag `enable-v12-tabs-contained-layer` wraps `TabPanel` content in a `Layer`
+
+When the tabs are `contained` or vertical, the `TabPanel` sits on the `layer-01`
+surface, so fields inside it need the `layer-02` tokens. In v11 you have to wrap
+the panel content in `<Layer>` yourself. With this flag enabled, `TabPanel` does
+it for you.
+
+```js
+<FeatureFlags enableV12TabsContainedLayer>
+  <Tabs>
+    <TabList aria-label="List of tabs" contained>
+      <Tab>Tab 1</Tab>
+    </TabList>
+    <TabPanels>
+      <TabPanel>
+        <TextInput id="name" labelText="Name" />
+      </TabPanel>
+    </TabPanels>
+  </Tabs>
+</FeatureFlags>
+```
+
+Remove any `<Layer>` you previously placed directly inside a `TabPanel` to work
+around this, otherwise its content ends up one layer too deep. The
+`enable-v12-tabs-contained-layer` codemod does this for you:
+
+```bash
+npx @carbon/upgrade migrate enable-v12-tabs-contained-layer --write
+```
+
+`TabList` or `TabListVertical` must be a direct child of `Tabs` (or
+`TabsVertical`), optionally inside a fragment, for the contained state to be
+detected.

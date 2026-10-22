@@ -553,6 +553,7 @@ collect:
         - enableV12DynamicFloatingStyles
         - enableV12Overflowmenu
         - enableV12Release
+        - enableV12TabsContainedLayer
         - enableV12TileDefaultIcons
         - enableV12TileRadioIcons
         - flags
