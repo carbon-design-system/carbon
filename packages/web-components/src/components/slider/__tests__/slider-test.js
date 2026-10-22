@@ -164,6 +164,28 @@ describe('cds-slider', () => {
     expect(input).not.to.have.attribute('data-invalid');
   });
 
+  it('should prioritize disabled over readonly when both are true', async () => {
+    const el = await fixture(
+      html` <cds-slider
+        label-text="Slider Label"
+        max="100"
+        min="0"
+        step="1"
+        value="50"
+        disabled
+        readonly>
+        <cds-slider-input
+          aria-label="Slider value"
+          type="number"></cds-slider-input>
+      </cds-slider>`
+    );
+    await el.updateComplete;
+    const sliderInput = el.firstElementChild;
+    const input = sliderInput?.shadowRoot?.querySelector('.cds--text-input');
+    expect(input).to.have.attribute('disabled');
+    expect(input).not.to.have.attribute('readonly');
+  });
+
   it('should not render tooltip when text input is visible', async () => {
     const el = await fixture(
       html` <cds-slider

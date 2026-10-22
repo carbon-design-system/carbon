@@ -1246,7 +1246,7 @@ class CDSDropdown extends AutoAlignMixin(
   protected get _normalizedProps() {
     const { disabled, readOnly, invalid, warn } = this;
     return {
-      disabled: !readOnly && disabled,
+      disabled: disabled,
       invalid: !readOnly && !disabled && invalid,
       warn: !readOnly && !invalid && !disabled && warn,
     };

@@ -494,5 +494,25 @@ describe('CheckboxGroup', () => {
         'data-testid': 'non-checkbox',
       });
     });
+
+    it('should prioritize disabled over readOnly when both are true', () => {
+      render(
+        <CheckboxGroup
+          legendText="Checkbox heading"
+          disabled={true}
+          readOnly={true}>
+          <Checkbox labelText="Checkbox 1" id="checkbox-1" />
+          <Checkbox labelText="Checkbox 2" id="checkbox-2" />
+        </CheckboxGroup>
+      );
+
+      const fieldset = screen.getByRole('group');
+      expect(fieldset).toBeDisabled();
+      expect(fieldset).toHaveAttribute('aria-disabled', 'true');
+      const checkbox1 = screen.getByLabelText('Checkbox 1');
+      const checkbox2 = screen.getByLabelText('Checkbox 2');
+      expect(checkbox1).toBeDisabled();
+      expect(checkbox2).toBeDisabled();
+    });
   });
 });

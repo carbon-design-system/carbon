@@ -177,6 +177,22 @@ describe('cds-checkbox-group', function () {
     expect(fieldsetElement.hasAttribute('aria-disabled')).to.be.true;
   });
 
+  it('should prioritize disabled over readOnly when both are true', async () => {
+    const group = html` <cds-checkbox-group
+      legend-text="Checkbox heading"
+      disabled
+      readOnly>
+      <cds-checkbox default-checked>Checkbox label</cds-checkbox>
+      <cds-checkbox>Checkbox label</cds-checkbox>
+    </cds-checkbox-group>`;
+    const el = await fixture(group);
+
+    const fieldsetElement = el.shadowRoot.querySelector('fieldset');
+    expect(fieldsetElement.hasAttribute('disabled')).to.be.true;
+    expect(fieldsetElement.classList.contains('cds--checkbox-group--readonly'))
+      .to.be.false;
+  });
+
   it('should respect warn prop', async () => {
     const group = html` <cds-checkbox-group legend-text="Checkbox heading" warn>
       <cds-checkbox default-checked>Checkbox label</cds-checkbox>

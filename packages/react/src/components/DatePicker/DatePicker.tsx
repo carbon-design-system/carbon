@@ -559,10 +559,12 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
     const onHook = (_electedDates, _dateStr, instance) => {
       updateClassNames(instance, prefix, isFluid);
       if (startInputField?.current) {
-        startInputField.current.readOnly = readOnly;
+        startInputField.current.readOnly =
+          readOnly && !startInputField.current.disabled;
       }
       if (endInputField?.current) {
-        endInputField.current.readOnly = readOnly;
+        endInputField.current.readOnly =
+          readOnly && !endInputField.current.disabled;
       }
     };
 
