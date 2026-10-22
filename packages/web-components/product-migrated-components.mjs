@@ -70,6 +70,8 @@ export const productMigratedStoryGlobs = [
   '../src/examples/saving/*.mdx',
   '../src/examples/add-select/single-add-select/single-add-select.stories.ts',
   '../src/examples/add-select/single-add-select/*.mdx',
+  '../src/examples/about-modal/about-modal.stories.ts',
+  '../src/examples/about-modal/*.mdx',
 ];
 
 /**
