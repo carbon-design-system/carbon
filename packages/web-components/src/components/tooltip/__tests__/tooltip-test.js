@@ -8,6 +8,7 @@
 import '@carbon/web-components/es/components/tooltip/index.js';
 import '@carbon/web-components/es/components/feature-flags/index.js';
 import { fixture, html, expect } from '@open-wc/testing';
+import { sendKeys } from '@web/test-runner-commands';
 
 describe('cds-tooltip', () => {
   it('should support a custom class', async () => {
@@ -101,6 +102,38 @@ describe('cds-tooltip', () => {
 
   [false, true].forEach((closeOnActivation) => {
     describe(`with closeOnActivation=${closeOnActivation}`, () => {
+      it('should dismiss a nested tooltip before its parent popover on Escape', async () => {
+        const popover = await fixture(html`
+          <cds-popover open>
+            <button type="button">Popover trigger</button>
+            <cds-popover-content>
+              ${keyboardTemplate({ closeOnActivation })}
+            </cds-popover-content>
+          </cds-popover>
+        `);
+        const tooltip = popover.querySelector('cds-tooltip');
+        const button = tooltip.querySelector('button');
+
+        button.focus();
+        await new Promise((resolve) =>
+          setTimeout(resolve, tooltip.enterDelayMs)
+        );
+        await tooltip.updateComplete;
+        expect(tooltip.open).to.be.true;
+
+        await sendKeys({ press: 'Escape' });
+        await tooltip.updateComplete;
+        await popover.updateComplete;
+
+        expect(tooltip.open).to.be.false;
+        expect(popover).to.have.attribute('open');
+
+        await sendKeys({ press: 'Escape' });
+        await popover.updateComplete;
+
+        expect(popover).to.not.have.attribute('open');
+      });
+
       ['focus', 'hover'].forEach((interaction) => {
         it(`should close immediately on Escape after ${interaction}`, async () => {
           const tooltip = await fixture(
