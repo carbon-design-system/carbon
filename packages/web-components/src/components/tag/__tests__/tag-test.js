@@ -45,6 +45,23 @@ describe('cds-tag', function () {
       expect(el.shadowRoot.querySelector('button').disabled).to.equal(true);
     });
 
+    it('should render children as tag content', async () => {
+      const el = await fixture(
+        html`<cds-dismissible-tag tag-title="Close tag">
+          <span>Custom tag content</span>
+        </cds-dismissible-tag>`
+      );
+      await el.updateComplete;
+
+      const slot = el.shadowRoot.querySelector('.cds--tag__label slot');
+      const assigned = slot.assignedElements({ flatten: true });
+
+      expect(assigned[0].textContent.trim()).to.equal('Custom tag content');
+      expect(el.shadowRoot.querySelector('.cds--tag__label').title).to.equal(
+        'Close tag'
+      );
+    });
+
     it('should support onClose event', async () => {
       const el = await fixture(dismissibleTag);
       await el.updateComplete;
