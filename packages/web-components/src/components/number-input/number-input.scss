@@ -76,7 +76,7 @@ $css--plex: true !default;
     inset-block-start: 50%;
     @if flags.enabled('enable-v12-release') {
       inset-inline-end: calc(
-        #{$number-input-controls-width} + #{$number-input-decorator-margin}
+        #{$number-input-controls-width} + #{layout.size('icon-gap')}
       );
     } @else {
       inset-inline-end: calc(

@@ -398,7 +398,7 @@
     @if enabled('enable-v12-release') {
       // controls + the same spacing used between the icon and the decorator
       inset-inline-end: calc(
-        #{$number-input-controls-width} + #{$number-input-decorator-margin}
+        #{$number-input-controls-width} + #{layout.size('icon-gap')}
       );
     }
   }
@@ -514,7 +514,7 @@
     @if enabled('enable-v12-release') {
       // sit directly next to the controls
       inset-inline-end: $number-input-controls-width;
-      margin-inline-end: $number-input-decorator-margin;
+      margin-inline-end: layout.size('icon-gap');
     }
   }
 
@@ -627,9 +627,9 @@
       // decorator
       inset-inline-end: calc(
         #{$number-input-controls-width} +
-          #{$number-input-decorator-margin} +
+          #{layout.size('icon-gap')} +
           #{convert.to-rem(16px)} +
-          #{$number-input-decorator-margin}
+          #{layout.size('icon-gap')}
       );
     }
   }
@@ -698,7 +698,7 @@
       padding-inline-end: calc(
         #{$number-input-controls-width} +
           2 *
-          #{$number-input-decorator-margin} +
+          #{layout.size('icon-gap')} +
           #{convert.to-rem(32px)} +
           #{$spacing-03}
       );

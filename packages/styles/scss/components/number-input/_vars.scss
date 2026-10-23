@@ -49,23 +49,6 @@ $number-input-controls-width: calc(
   2 * #{$number-input-control-btn-size} + #{$number-input-controls-gap} + #{$number-input-controls-margin}
 );
 
-/// Space between the decorator and the controls: 4px for `xs`, 8px for `sm` and
-/// `md`, and 12px for `lg`. Built from a 4px base plus a 4px step from `sm` up
-/// and another 4px step at `lg`, since the values are not linear.
-/// @access public
-/// @group number-input
-$number-input-decorator-margin: calc(
-  #{$spacing-02} + #{clamp(
-      0rem,
-      layout.size('height') - convert.to-rem(24px),
-      $spacing-02
-    )} + #{clamp(
-      0rem,
-      layout.size('height') - convert.to-rem(40px),
-      $spacing-02
-    )}
-);
-
 /// Space between the invalid/warning icon and the rule divider beside it.
 /// Clamps to 8px ($spacing-03) for `xs` and `sm`, and 16px ($spacing-05) for
 /// `md` and `lg`.
@@ -99,7 +82,7 @@ $number-input-ai-label-cluster: calc(
 /// @access public
 /// @group number-input
 $number-input-padding-end-with-icon-or-decorator: calc(
-  #{$number-input-controls-width} + #{$number-input-decorator-margin} + #{convert.to-rem(
+  #{$number-input-controls-width} + #{layout.size('icon-gap')} + #{convert.to-rem(
       16px
     )} + #{$spacing-03}
 );
