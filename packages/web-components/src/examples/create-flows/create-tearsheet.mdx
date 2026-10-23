@@ -1,0 +1,102 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as Stories from './create-tearsheet.stories';
+
+<Meta of={Stories} />
+
+# CreateTearsheet
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/patterns/create-flows/usage/#wide-tearsheet)
+
+## Overview
+
+`CreateTearsheet` is a **pattern** (not a component) that provides a recipe for
+building multi-step workflow interfaces for creating resources or completing
+complex tasks. It demonstrates how to compose the tearsheet with Lit reactive
+state for managing step navigation and form state.
+
+Unlike components that are exported from the package, patterns are recipes that
+you copy into your codebase and customize to fit your needs.
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/src/examples/create-flows/create-tearsheet/example)
+> example implementation.
+
+The pattern consists of:
+
+- `create-tearsheet-base.ts`: the base workflow class
+- `create-tearsheet-step.ts`: the individual step wrapper
+
+Copy both files so step management and layout stay aligned.
+
+Until `Tearsheet` is exported from `@carbon/web-components`, import it from
+`@carbon/ibm-products-web-components`:
+
+```javascript
+import '@carbon/ibm-products-web-components/es/components/tearsheet-preview/index.js';
+import '@carbon/web-components/es/components/button/index.js';
+import '@carbon/web-components/es/components/progress-indicator/index.js';
+```
+
+### Key features
+
+- **Multi-step workflow**: guide users through complex creation processes
+- **Progress indication**: a vertical progress indicator in the influencer panel
+- **Step management**: back, next and submit navigation
+- **Form state management**: shared across steps through a `formData` object
+- **Auto-reset**: the tearsheet returns to the first step when closed
+
+## Multi step
+
+<Canvas of={Stories.MultiStep} />
+
+## Multi step with intro
+
+An intro-first flow with category-specific conditional steps.
+
+<Canvas of={Stories.MultiStepWithIntro} />
+
+## Multi step with step in error state
+
+Shows invalid step states in the progress indicator.
+
+<Canvas of={Stories.MultiStepWithStepInErrorState} />
+
+## Customization
+
+Because this is a pattern, you have full control over validation, footer
+actions and step layout. For example, to change when the **Next** button is
+disabled:
+
+```typescript
+protected isNextDisabledForStep(stepKey) {
+  switch (stepKey) {
+    case 'topic-information':
+      return !this.formData.topicName.trim();
+    default:
+      return false;
+  }
+}
+```
+
+The tearsheet markup is composed like this:
+
+```html
+<c4p-preview-tearsheet open variant="wide">
+  <c4p-tearsheet-header>
+    <c4p-tearsheet-header-content title="Create resource">
+      <div slot="description">
+        Specify details for the new resource you want to create
+      </div>
+    </c4p-tearsheet-header-content>
+  </c4p-tearsheet-header>
+  <c4p-tearsheet-influencer>
+    <cds-progress-indicator vertical>
+      <cds-progress-step label="Topic name" current></cds-progress-step>
+    </cds-progress-indicator>
+  </c4p-tearsheet-influencer>
+  <c4p-tearsheet-body>
+    <div slot="main-content"><!-- Step content --></div>
+  </c4p-tearsheet-body>
+  <c4p-tearsheet-footer variant="wide" .actions=${actions}></c4p-tearsheet-footer>
+</c4p-preview-tearsheet>
+```
