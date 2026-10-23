@@ -38,6 +38,7 @@ import {
 } from '../ComposedModal';
 import SelectItem from '../SelectItem';
 import { Stack } from '../Stack';
+import { Layer } from '../Layer';
 import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
@@ -562,4 +563,68 @@ Default.argTypes = {
     description:
       'Render the entire form inside a ComposedModal with a trigger button',
   },
+};
+
+export const InModalWithLayers = ({ disabled, readOnly, invalid }) => {
+  const [open, setOpen] = useState(true);
+
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Open layered form</Button>
+      <ComposedModal open={open} onClose={() => setOpen(false)}>
+        <ModalHeader title="Fluid fields on layers" />
+        <ModalBody hasScrollingContent>
+          <Stack gap={5}>
+            {[1, 2, 3].map((level) => (
+              <Layer level={level} key={level}>
+                <FluidForm>
+                  <FluidTextInput
+                    id={`fluid-layer-text-${level}`}
+                    labelText={`Text on layer ${level}`}
+                    disabled={disabled}
+                    readOnly={readOnly}
+                    invalid={invalid}
+                    invalidText="Enter a value"
+                  />
+                  <FluidNumberInput
+                    id={`fluid-layer-number-${level}`}
+                    label={`Number on layer ${level}`}
+                    disabled={disabled}
+                    readOnly={readOnly}
+                    invalid={invalid}
+                    invalidText="Enter a number"
+                  />
+                  <FluidDropdown
+                    id={`fluid-layer-dropdown-${level}`}
+                    titleText={`Dropdown on layer ${level}`}
+                    label="Choose an option"
+                    items={['First', 'Second']}
+                    disabled={disabled}
+                    readOnly={readOnly}
+                    invalid={invalid}
+                    invalidText="Choose an option"
+                  />
+                  <FluidDatePicker datePickerType="single" readOnly={readOnly}>
+                    <FluidDatePickerInput
+                      id={`fluid-layer-date-${level}`}
+                      labelText={`Date on layer ${level}`}
+                      placeholder="mm/dd/yyyy"
+                      disabled={disabled}
+                      readOnly={readOnly}
+                      invalid={invalid}
+                      invalidText="Enter a date"
+                    />
+                  </FluidDatePicker>
+                </FluidForm>
+              </Layer>
+            ))}
+          </Stack>
+        </ModalBody>
+      </ComposedModal>
+    </>
+  );
+};
+
+InModalWithLayers.parameters = {
+  controls: { include: ['disabled', 'readOnly', 'invalid'] },
 };
