@@ -7,15 +7,32 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { forwardRef } from 'react';
+import React, {
+  type AnchorHTMLAttributes,
+  type ButtonHTMLAttributes,
+  type HTMLAttributes,
+  type ReactNode,
+  forwardRef,
+} from 'react';
 import { keys, match } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
 import { warning } from '../../internal/warning';
 import { Text } from '../Text';
 import { useId } from '../../internal/useId';
 
-export interface OverflowMenuItemProps
-  extends React.HTMLAttributes<HTMLElement> {
+type AnchorAttributeNames = Exclude<
+  keyof AnchorHTMLAttributes<HTMLAnchorElement>,
+  keyof HTMLAttributes<HTMLElement>
+>;
+
+type AnchorAttributeProps = Omit<
+  Pick<AnchorHTMLAttributes<HTMLAnchorElement>, AnchorAttributeNames>,
+  'href' | 'type'
+>;
+
+type AnchorOnlyProps = AnchorAttributeProps;
+
+interface OverflowMenuItemBaseProps extends HTMLAttributes<HTMLElement> {
   /**
    * The CSS class name to be placed on the button element
    */
@@ -46,17 +63,12 @@ export interface OverflowMenuItemProps
    */
   hasDivider?: boolean;
 
-  /**
-   * If given, overflow item will render as a link with the given href
-   */
-  href?: string;
-
   index?: number;
 
   /**
    * The text to show for the menu item
    */
-  itemText?: React.ReactNode;
+  itemText?: ReactNode;
 
   /**
    * `true` to make this menu item a danger button.
@@ -83,6 +95,21 @@ export interface OverflowMenuItemProps
    */
   wrapperClassName?: string;
 }
+
+type ButtonAttributeProps = Pick<
+  ButtonHTMLAttributes<HTMLButtonElement>,
+  'type'
+>;
+
+type ButtonOnlyProps = {
+  [key in keyof AnchorOnlyProps]?: never;
+};
+
+export type OverflowMenuItemProps =
+  | (OverflowMenuItemBaseProps &
+      ButtonAttributeProps &
+      ButtonOnlyProps & { href?: undefined })
+  | (OverflowMenuItemBaseProps & AnchorAttributeProps & { href: string });
 
 const frFn = forwardRef<HTMLElement, OverflowMenuItemProps>;
 
