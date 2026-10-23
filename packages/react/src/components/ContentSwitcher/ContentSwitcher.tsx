@@ -24,6 +24,7 @@ import { PrefixContext } from '../../internal/usePrefix';
 import { isComponentElement } from '../../internal';
 import { IconSwitch, Switch } from '../Switch';
 import type { SwitchEventHandlersParams } from '../Switch/Switch';
+import { TabsContext } from '../Tabs/Tabs';
 
 export interface ContentSwitcherProps
   extends Omit<HTMLAttributes<HTMLElement>, 'onChange'> {
@@ -85,7 +86,23 @@ export const ContentSwitcher = ({
 }: ContentSwitcherProps) => {
   const prefix = useContext(PrefixContext);
 
-  const [selectedIndex, setSelectedIndex] = useState(selectedIndexProp);
+  const {
+    selectedIndex: selectedIndexTabsContext,
+    setSelectedIndex: setSelectedIndexTabsContext,
+    baseId,
+  } = React.useContext(TabsContext);
+
+  const isInsideTabs = Boolean(baseId);
+
+  const [selectedIndexLocal, setSelectedIndexLocal] =
+    useState(selectedIndexProp);
+  const selectedIndex = isInsideTabs
+    ? selectedIndexTabsContext
+    : selectedIndexLocal;
+
+  const setSelectedIndex = isInsideTabs
+    ? setSelectedIndexTabsContext
+    : setSelectedIndexLocal;
 
   const prevSelectedIndexRef = useRef(selectedIndexProp);
   const switchRefs = useRef<HTMLButtonElement[]>([]);
@@ -97,7 +114,7 @@ export const ContentSwitcher = ({
       setSelectedIndex(selectedIndexProp);
       prevSelectedIndexRef.current = selectedIndexProp;
     }
-  }, [selectedIndexProp]);
+  }, [selectedIndexProp, setSelectedIndex]);
 
   const handleItemRef = (index: number) => (ref: HTMLButtonElement | null) => {
     if (ref) {
@@ -119,7 +136,9 @@ export const ContentSwitcher = ({
     typeof event === 'object' && event !== null && 'key' in event;
 
   const handleChildChange = (event: SwitchEventHandlersParams) => {
-    if (typeof event.index === 'undefined') return;
+    if (typeof event.index === 'undefined') {
+      return;
+    }
 
     const { index } = event;
 
@@ -129,7 +148,9 @@ export const ContentSwitcher = ({
     ) {
       const nextIndex = getNextIndex(event.key, index, childrenArray.length);
 
-      if (typeof nextIndex !== 'number') return;
+      if (typeof nextIndex !== 'number') {
+        return;
+      }
 
       focusSwitch(nextIndex);
 
@@ -185,8 +206,9 @@ export const ContentSwitcher = ({
         if (
           !isComponentElement(child, Switch) &&
           !isComponentElement(child, IconSwitch)
-        )
+        ) {
           return child;
+        }
 
         const sharedProps = {
           index,
