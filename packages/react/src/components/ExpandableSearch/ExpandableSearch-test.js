@@ -222,5 +222,23 @@ describe('ExpandableSearch', () => {
         `${prefix}--search--expanded`
       );
     });
+
+    it('aligns the collapsed magnifier tooltip to the top by default', () => {
+      const { container } = render(
+        <ExpandableSearch labelText="test-search" />
+      );
+      expect(
+        container.querySelector(`.${prefix}--search-magnifier-tooltip`)
+      ).toHaveClass(`${prefix}--popover--top`);
+    });
+
+    it('supports a custom tooltipAlignment for the collapsed magnifier', () => {
+      const { container } = render(
+        <ExpandableSearch labelText="test-search" tooltipAlignment="bottom" />
+      );
+      expect(
+        container.querySelector(`.${prefix}--search-magnifier-tooltip`)
+      ).toHaveClass(`${prefix}--popover--bottom`);
+    });
   });
 });
