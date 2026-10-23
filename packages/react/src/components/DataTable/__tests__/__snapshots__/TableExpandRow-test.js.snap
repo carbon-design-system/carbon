@@ -51,8 +51,12 @@ exports[`DataTable.TableExpandRow renders as expected - Component API should ren
             colspan="1"
           >
             <div
-              class="cds--child-row-inner-container"
-            />
+              class="cds--child-row-inner-container cds--child-row-inner-container--animated"
+            >
+              <div
+                class="cds--child-row-content"
+              />
+            </div>
           </td>
         </tr>
       </tbody>
