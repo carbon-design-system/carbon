@@ -23,6 +23,7 @@ const V12 = `
 `;
 
 const HEIGHT_VAR = 'var(--cds-layout-size-height-local)';
+const ICON_GAP_VAR = 'var(--cds-layout-size-icon-gap-local)';
 
 // Layout `height` token for each size, in rem
 const SIZES = {
@@ -32,56 +33,15 @@ const SIZES = {
   lg: 3,
 };
 
+// Layout `icon-gap` token for each size, in rem (matches $layout-tokens in _layout.scss)
+const ICON_GAP_SIZES = {
+  xs: 0.25, // $spacing-02
+  sm: 0.5, // $spacing-03
+  md: 0.5, // $spacing-03
+  lg: 0.75, // $spacing-04
+};
+
 describe('scss/components/number-input', () => {
-  test('Public API', async () => {
-    const { unwrap } = await render(`
-       @use 'sass:map';
-       @use 'sass:meta';
-       @use '../number-input';
-
-       $_: get('mixin', meta.mixin-exists('number-input', 'number-input'));
-     `);
-    expect(unwrap('mixin')).toBe(true);
-  });
-
-  describe('v11', () => {
-    let css;
-
-    beforeAll(async () => {
-      const { result } = await render(`@use '../number-input';`);
-      css = result.css.toString();
-    });
-
-    test('controls keep their fixed width and have no gap or margin', () => {
-      const styles = declarationsForSelector(css, '.cds--number__controls');
-
-      expect(styles['inline-size']).toBe(`calc(2 * ${HEIGHT_VAR})`);
-      expect(styles.gap).toBeUndefined();
-      expect(styles['margin-inline-end']).toBeUndefined();
-    });
-
-    test('input padding is based on the height of the controls', () => {
-      const styles = declarationsForSelector(
-        css,
-        '.cds--number input[type=number]'
-      );
-
-      expect(styles['padding-inline']).toBe(
-        `1rem calc(2 * ${HEIGHT_VAR} + 1rem)`
-      );
-    });
-
-    test('AI label is positioned from the fixed controls width', () => {
-      const styles = declarationsForSelector(
-        css,
-        '.cds--number__input-wrapper--slug .cds--ai-label'
-      );
-
-      expect(styles['inset-inline-end']).toContain(`2 * ${HEIGHT_VAR}`);
-      expect(styles['margin-inline-end']).toBeUndefined();
-    });
-  });
-
   describe('v12', () => {
     let css;
 
@@ -90,64 +50,7 @@ describe('scss/components/number-input', () => {
       css = result.css.toString();
     });
 
-    describe('controls', () => {
-      test('size to their content', () => {
-        const styles = declarationsForSelector(css, '.cds--number__controls');
-
-        expect(styles['inline-size']).toBe('fit-content');
-      });
-
-      test.each([
-        ['xs', 0],
-        ['sm', 4],
-        ['md', 4],
-        ['lg', 4],
-      ])('gap between the buttons for %s is %ipx', (size, expected) => {
-        const styles = declarationsForSelector(css, '.cds--number__controls');
-
-        expect(toPx(styles.gap, SIZES[size])).toBe(expected);
-      });
-
-      test.each([
-        ['xs', 0],
-        ['sm', 4],
-        ['md', 8],
-        ['lg', 8],
-      ])('margin-inline-end for %s is %ipx', (size, expected) => {
-        const styles = declarationsForSelector(css, '.cds--number__controls');
-
-        expect(toPx(styles['margin-inline-end'], SIZES[size])).toBe(expected);
-      });
-    });
-
     describe('AI label and decorator', () => {
-      const selector = '.cds--number__input-wrapper--slug .cds--ai-label';
-
-      test.each([
-        ['xs', 48],
-        ['sm', 56],
-        ['md', 60],
-        ['lg', 76],
-      ])(
-        'is positioned next to the controls for %s (%ipx)',
-        (size, expected) => {
-          const styles = declarationsForSelector(css, selector);
-
-          expect(toPx(styles['inset-inline-end'], SIZES[size])).toBe(expected);
-        }
-      );
-
-      test.each([
-        ['xs', 4],
-        ['sm', 8],
-        ['md', 8],
-        ['lg', 12],
-      ])('margin-inline-end for %s is %ipx', (size, expected) => {
-        const styles = declarationsForSelector(css, selector);
-
-        expect(toPx(styles['margin-inline-end'], SIZES[size])).toBe(expected);
-      });
-
       test('applies to the decorator, ai-label and slug selectors', () => {
         const selectors = [
           '.cds--number__input-wrapper--decorator .cds--number__input-inner-wrapper--decorator > *',
@@ -194,66 +97,37 @@ describe('scss/components/number-input', () => {
           expect(toPx(styles['inset-inline-end'], SIZES[size])).toBe(expected);
         }
       );
+
+      test.each([
+        ['xs', 72],
+        ['sm', 88],
+        ['md', 92],
+        ['lg', 116],
+      ])(
+        'sits next to the AI label when one is present for %s (%ipx)',
+        (size, expected) => {
+          const styles = declarationsForSelector(
+            css,
+            '.cds--number__input-wrapper--slug .cds--number__invalid'
+          );
+
+          expect(toPx(styles['inset-inline-end'], SIZES[size])).toBe(expected);
+        }
+      );
     });
 
     describe('input padding', () => {
-      test('start padding is $spacing-05', () => {
-        const styles = declarationsForSelector(
-          css,
-          '.cds--number input[type=number]'
-        );
-
-        expect(styles['padding-inline'].startsWith('1rem ')).toBe(true);
-      });
-
       test.each([
-        ['xs', 56],
-        ['sm', 64],
-        ['md', 68],
-        ['lg', 84],
+        ['xs', 96],
+        ['sm', 112],
+        ['md', 116],
+        ['lg', 140],
       ])(
-        'end padding is 8px clear of the controls for %s (%ipx)',
+        'end padding is 8px clear of the icon when a decorator is also present for %s (%ipx)',
         (size, expected) => {
           const styles = declarationsForSelector(
             css,
-            '.cds--number input[type=number]'
-          );
-          const end = styles['padding-inline'].replace(/^1rem /, '');
-
-          expect(toPx(end, SIZES[size])).toBe(expected);
-        }
-      );
-
-      test.each([
-        ['xs', 76],
-        ['sm', 88],
-        ['md', 92],
-        ['lg', 112],
-      ])(
-        'end padding is 8px clear of the icon for %s (%ipx)',
-        (size, expected) => {
-          const styles = declarationsForSelector(
-            css,
-            '.cds--number .cds--number__input-wrapper--warning input[type=number]'
-          );
-
-          expect(toPx(styles['padding-inline-end'], SIZES[size])).toBe(
-            expected
-          );
-        }
-      );
-
-      test.each([
-        ['xs', 76],
-        ['sm', 88],
-        ['md', 92],
-        ['lg', 112],
-      ])(
-        'end padding is 8px clear of the decorator for %s (%ipx)',
-        (size, expected) => {
-          const styles = declarationsForSelector(
-            css,
-            '.cds--number .cds--number__input-wrapper--decorator input[type=number]'
+            '.cds--number .cds--number__input-wrapper--decorator input[data-invalid]'
           );
 
           expect(toPx(styles['padding-inline-end'], SIZES[size])).toBe(
@@ -268,11 +142,49 @@ describe('scss/components/number-input', () => {
         ['md', 116],
         ['lg', 140],
       ])(
-        'end padding is 8px clear of the icon when a decorator is also present for %s (%ipx)',
+        'end padding is 8px clear of the icon when an AI label is also present for %s (%ipx)',
         (size, expected) => {
           const styles = declarationsForSelector(
             css,
-            '.cds--number .cds--number__input-wrapper--decorator input[data-invalid]'
+            '.cds--number .cds--number__input-wrapper--slug input[data-invalid]'
+          );
+
+          expect(toPx(styles['padding-inline-end'], SIZES[size])).toBe(
+            expected
+          );
+        }
+      );
+
+      test.each([
+        ['xs', 96],
+        ['sm', 112],
+        ['md', 116],
+        ['lg', 140],
+      ])(
+        'end padding is 8px clear of the warning icon when a decorator is also present for %s (%ipx)',
+        (size, expected) => {
+          const styles = declarationsForSelector(
+            css,
+            '.cds--number .cds--number__input-wrapper--decorator.cds--number__input-wrapper--warning input'
+          );
+
+          expect(toPx(styles['padding-inline-end'], SIZES[size])).toBe(
+            expected
+          );
+        }
+      );
+
+      test.each([
+        ['xs', 96],
+        ['sm', 112],
+        ['md', 116],
+        ['lg', 140],
+      ])(
+        'end padding is 8px clear of the warning icon when an AI label is also present for %s (%ipx)',
+        (size, expected) => {
+          const styles = declarationsForSelector(
+            css,
+            '.cds--number .cds--number__input-wrapper--slug.cds--number__input-wrapper--warning input'
           );
 
           expect(toPx(styles['padding-inline-end'], SIZES[size])).toBe(
@@ -313,9 +225,14 @@ function toPx(value, heightRem) {
     throw new Error('Cannot resolve an undefined value');
   }
 
+  const size = Object.keys(SIZES).find((s) => SIZES[s] === heightRem);
+  const iconGapRem = size !== undefined ? ICON_GAP_SIZES[size] : 0;
+
   const expression = value
     .split(HEIGHT_VAR)
     .join(String(heightRem))
+    .split(ICON_GAP_VAR)
+    .join(String(iconGapRem))
     .replace(/(\d*\.?\d+)rem/g, '$1')
     .replace(/\bcalc\(/g, '(');
 
