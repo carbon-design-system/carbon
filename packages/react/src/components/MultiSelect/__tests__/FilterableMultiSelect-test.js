@@ -6,7 +6,7 @@
  */
 
 import React, { StrictMode } from 'react';
-import { act, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import { useCombobox } from 'downshift';
 import { getByText } from '@carbon/test-utils/dom';
 import userEvent from '@testing-library/user-event';
@@ -435,6 +435,68 @@ describe('FilterableMultiSelect', () => {
     await userEvent.click(clearButton);
 
     expect(screen.getByPlaceholderText('test')).toHaveDisplayValue('');
+  });
+
+  it('should move focus to the clear input button while it is pressed', async () => {
+    render(<FilterableMultiSelect {...mockProps} placeholder="test" />);
+    await openMenu();
+
+    await userEvent.type(screen.getByPlaceholderText('test'), '3');
+
+    const clearButton = screen.getByRole('button', {
+      name: 'Clear selected item',
+    });
+    fireEvent.mouseDown(clearButton);
+
+    expect(clearButton).toHaveFocus();
+    expect(screen.getByPlaceholderText('test')).toHaveDisplayValue('3');
+    expect(screen.getByRole('combobox')).toHaveAttribute(
+      'aria-expanded',
+      'true'
+    );
+  });
+
+  it('should return focus to the input after clearing the input value', async () => {
+    render(<FilterableMultiSelect {...mockProps} placeholder="test" />);
+    await openMenu();
+
+    await userEvent.type(screen.getByPlaceholderText('test'), '3');
+
+    await userEvent.click(
+      screen.getByRole('button', { name: 'Clear selected item' })
+    );
+
+    expect(screen.getByPlaceholderText('test')).toHaveDisplayValue('');
+    expect(screen.getByPlaceholderText('test')).toHaveFocus();
+  });
+
+  it('should clear the input value when focus moves elsewhere', async () => {
+    render(
+      <>
+        <FilterableMultiSelect {...mockProps} placeholder="test" />
+        <button type="button">outside</button>
+      </>
+    );
+    await openMenu();
+
+    await userEvent.type(screen.getByPlaceholderText('test'), '3');
+    await userEvent.click(screen.getByRole('button', { name: 'outside' }));
+
+    expect(screen.getByPlaceholderText('test')).toHaveDisplayValue('');
+  });
+
+  it('should clear the input value when focus leaves without a related target', async () => {
+    render(<FilterableMultiSelect {...mockProps} placeholder="test" />);
+    await openMenu();
+
+    const input = screen.getByPlaceholderText('test');
+    await userEvent.type(input, '3');
+    act(() => {
+      input.blur();
+    });
+
+    expect(input).toHaveDisplayValue('');
+    expect(input).toHaveAttribute('aria-expanded', 'false');
   });
 
   it('should respect slug prop', async () => {
