@@ -37,6 +37,7 @@ import { keys, match } from '../../internal/keyboard';
 import { NumberFormatOptionsPropType } from './NumberFormatPropTypes';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
+import { useFeatureFlag } from '../FeatureFlags';
 import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
 
 const translationIds = {
@@ -635,6 +636,8 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     const { isFluid } = useContext(FormContext);
     const [isFocused, setIsFocused] = useState(false);
 
+    const enableV12Release = useFeatureFlag('enable-v12-release');
+
     /**
      * The input value, only used when type=number
      */
@@ -1096,7 +1099,9 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
                   type="button">
                   <Subtract className="down-icon" />
                 </button>
-                <div className={`${prefix}--number__rule-divider`} />
+                {!enableV12Release && (
+                  <div className={`${prefix}--number__rule-divider`} />
+                )}
                 <button
                   aria-label={incrementNumLabel || iconDescription}
                   className={`${prefix}--number__control-btn up-icon`}
@@ -1108,7 +1113,9 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
                   type="button">
                   <Add className="up-icon" />
                 </button>
-                <div className={`${prefix}--number__rule-divider`} />
+                {!enableV12Release && (
+                  <div className={`${prefix}--number__rule-divider`} />
+                )}
               </div>
             )}
           </div>
