@@ -97,8 +97,7 @@ jobs:
             --endpoint-url "https://${COS_ENDPOINT_HOST}" \
             --no-progress \
             --cache-control 'public,max-age=3600' \
-            --content-type 'image/svg+xml' \
-            --delete
+            --content-type 'image/svg+xml'
 
       # Upload icons to a versioned folder
       # ie. https://ibm-dotcom-common.s3.us.cloud-object-storage.appdomain.cloud/common/carbon/icons/version/v11.89.0/16/apps.svg
@@ -115,8 +114,7 @@ jobs:
             --endpoint-url "https://${COS_ENDPOINT_HOST}" \
             --no-progress \
             --cache-control 'public,max-age=3600' \
-            --content-type 'image/svg+xml' \
-            --delete
+            --content-type 'image/svg+xml'
 
       # Upload pictograms to the `latest` tag folder
       # ie. https://ibm-dotcom-common.s3.us.cloud-object-storage.appdomain.cloud/common/carbon/pictograms/tag/v11/latest/accessibility.svg
@@ -133,8 +131,7 @@ jobs:
             --endpoint-url "https://${COS_ENDPOINT_HOST}" \
             --no-progress \
             --cache-control 'public,max-age=3600' \
-            --content-type 'image/svg+xml' \
-            --delete
+            --content-type 'image/svg+xml'
 
       # Upload pictograms to a versioned folder
       # ie. https://ibm-dotcom-common.s3.us.cloud-object-storage.appdomain.cloud/common/carbon/pictograms/version/v12.85.0/accessibility.svg
@@ -151,8 +148,7 @@ jobs:
             --endpoint-url "https://${COS_ENDPOINT_HOST}" \
             --no-progress \
             --cache-control 'public,max-age=3600' \
-            --content-type 'image/svg+xml' \
-            --delete
+            --content-type 'image/svg+xml'
 
       - name: Verify public URLs and CORS
         env:
