@@ -25,6 +25,10 @@ import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
 export const IconButtonKinds = [
   'primary',
   'secondary',
+  'danger',
+  'danger--primary',
+  'danger--ghost',
+  'danger--tertiary',
   'ghost',
   'tertiary',
 ] as const;
