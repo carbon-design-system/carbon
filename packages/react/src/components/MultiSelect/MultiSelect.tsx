@@ -427,15 +427,12 @@ export const MultiSelect = React.forwardRef(
     });
 
     const sortedItems = useMemo(() => {
-      let selectedItems = controlledSelectedItems;
-      if (selectionFeedback === 'fixed') {
-        selectedItems = [];
-      } else if (selectionFeedback === 'top-after-reopen') {
-        selectedItems = topItems;
-      }
-
       return sortItems(filteredItems, {
-        selectedItems,
+        selectedItems: {
+          top: controlledSelectedItems,
+          fixed: [],
+          'top-after-reopen': topItems,
+        }[selectionFeedback],
         itemToString,
         compareItems,
         locale,
