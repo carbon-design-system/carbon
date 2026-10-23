@@ -112,9 +112,9 @@ jobs:
         run: |
           yarn carbon-cli check --ignore '**/@(node_modules|examples|components|react|fixtures|compat)/**' 'packages/**/*.scss'
       - name: Run tests
-        run: yarn test --ci --collectCoverage
+        run: yarn test --ci --collectCoverage --cacheDirectory=${{ github.workspace }}/.jest-cache
       - name: Run scss-generator tests
-        run: yarn test:scss-generator --ci
+        run: yarn test:scss-generator --ci --cacheDirectory=${{ github.workspace }}/.jest-cache
       - name: Merge coverage reports
         run: cat coverage/scss-generator/lcov.info >> coverage/lcov.info
       - name: Upload coverage reports to Codecov with GitHub Action
