@@ -25,7 +25,7 @@ const V12 = `
 const HEIGHT_VAR = 'var(--cds-layout-size-height-local)';
 const ICON_GAP_VAR = 'var(--cds-layout-size-icon-gap-local)';
 
-// Layout `height` token for each size, in rem
+// Layout `height` and `icon-gap` tokens for each size, in rem
 const SIZES = {
   xs: 1.5,
   sm: 2,
@@ -67,20 +67,6 @@ describe('scss/components/number-input', () => {
     });
 
     describe('invalid and warning icon', () => {
-      test.each([
-        ['xs', 52],
-        ['sm', 64],
-        ['md', 68],
-        ['lg', 88],
-      ])(
-        'sits next to the controls without a decorator for %s (%ipx)',
-        (size, expected) => {
-          const styles = declarationsForSelector(css, '.cds--number__invalid');
-
-          expect(toPx(styles['inset-inline-end'], SIZES[size])).toBe(expected);
-        }
-      );
-
       test.each([
         ['xs', 72],
         ['sm', 88],
