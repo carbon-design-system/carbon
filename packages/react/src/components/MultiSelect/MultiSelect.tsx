@@ -426,12 +426,27 @@ export const MultiSelect = React.forwardRef(
       filteredItems,
     });
 
-    const sortOptions = {
-      selectedItems: controlledSelectedItems,
+    const sortedItems = useMemo(() => {
+      return sortItems(filteredItems, {
+        selectedItems: {
+          top: controlledSelectedItems,
+          fixed: [],
+          'top-after-reopen': topItems,
+        }[selectionFeedback],
+        itemToString,
+        compareItems,
+        locale,
+      });
+    }, [
+      filteredItems,
+      sortItems,
+      selectionFeedback,
+      controlledSelectedItems,
+      topItems,
       itemToString,
       compareItems,
       locale,
-    };
+    ]);
 
     const selectProps: UseSelectProps<ItemType> = {
       stateReducer,
@@ -448,7 +463,7 @@ export const MultiSelect = React.forwardRef(
         );
       },
       selectedItem: controlledSelectedItems as ItemType,
-      items: filteredItems,
+      items: sortedItems,
       isItemDisabled,
       ...downshiftProps,
     };
@@ -592,12 +607,6 @@ export const MultiSelect = React.forwardRef(
       [`${prefix}--multi-select--selectall`]: selectAll,
     });
 
-    if (selectionFeedback === 'fixed') {
-      sortOptions.selectedItems = [];
-    } else if (selectionFeedback === 'top-after-reopen') {
-      sortOptions.selectedItems = topItems;
-    }
-
     function stateReducer(state, actionAndChanges) {
       const { changes, props, type } = actionAndChanges;
       const { highlightedIndex } = changes;
@@ -643,7 +652,7 @@ export const MultiSelect = React.forwardRef(
           } else {
             return {
               ...changes,
-              highlightedIndex: filteredItems.indexOf(highlightedIndex),
+              highlightedIndex: sortedItems.indexOf(highlightedIndex),
             };
           }
         case ToggleButtonKeyDownArrowDown:
@@ -846,7 +855,7 @@ export const MultiSelect = React.forwardRef(
           </div>
           <ListBox.Menu {...menuProps}>
             {isOpen &&
-              sortItems(filteredItems, sortOptions).map((item, index) => {
+              sortedItems.map((item, index) => {
                 const {
                   hasIndividualSelections,
                   nonSelectAllSelectedCount,
