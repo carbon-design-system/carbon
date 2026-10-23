@@ -13,7 +13,6 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/components/button/tokens' as *;
 @use 'sass:map';
-@use '@carbon/styles';
 
 $prefix: 'c4p';
 $carbon-prefix: 'cds';

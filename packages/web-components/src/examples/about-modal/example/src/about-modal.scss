@@ -1,0 +1,114 @@
+/*
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+
+$block-class: 'c4p--about-modal';
+$carbon-prefix: 'cds';
+
+.#{$block-class}__logo {
+  margin: $spacing-05 $spacing-05 $spacing-07 $spacing-05;
+}
+
+.#{$block-class} #{$carbon-prefix}-modal-header {
+  padding: 0 20% 0 $spacing-05;
+  grid-row: auto;
+  margin-block-end: 0;
+  overflow-y: visible;
+}
+
+.#{$block-class} #{$carbon-prefix}-modal-heading {
+  @include type.type-style('heading-04');
+
+  color: $text-primary;
+  margin-block-end: $spacing-02;
+}
+
+.#{$block-class}__title-emphasis {
+  font-weight: type.font-weight('semibold');
+}
+
+.#{$block-class} #{$carbon-prefix}-modal-body {
+  @include type.type-style('body-compact-02');
+
+  overflow: hidden auto;
+  grid-row: auto;
+  min-block-size: $spacing-10;
+  padding-block-start: 0;
+  padding-inline: $spacing-05 20%;
+  margin-block-end: $spacing-06;
+  padding-block-end: 0;
+}
+
+.#{$block-class}__version {
+  color: $text-secondary;
+}
+
+.#{$block-class}__links-container {
+  @include type.type-style('body-compact-01');
+
+  margin-block-start: $spacing-06;
+
+  #{$carbon-prefix}-link {
+    display: inline-flex;
+    margin-block-end: $spacing-03;
+  }
+
+  #{$carbon-prefix}-link + #{$carbon-prefix}-link {
+    border-inline-start: 1px solid $border-strong-01;
+    margin-inline-start: $spacing-03;
+    padding-inline-start: $spacing-03;
+  }
+}
+
+.#{$block-class}__content,
+.#{$block-class}__copyright-text {
+  @include type.type-style('label-01');
+
+  color: $text-secondary;
+  margin-block: $spacing-06 0;
+}
+
+.#{$block-class}__copyright-text {
+  margin-block-start: $spacing-05;
+}
+
+.#{$block-class}__links-container + .#{$block-class}__content {
+  margin-block-start: $spacing-05;
+}
+
+.#{$block-class}__links-container + .#{$block-class}__copyright-text {
+  margin-block-start: $spacing-03;
+}
+
+.#{$block-class}__content:first-child,
+.#{$block-class}__copyright-text:first-child {
+  margin-block-start: $spacing-07;
+}
+
+.#{$block-class} #{$carbon-prefix}-modal-footer {
+  display: block;
+  padding: $spacing-05;
+  background-color: $layer-02;
+  block-size: auto;
+}
+
+.#{$block-class}__footer-label {
+  @include type.type-style('label-01');
+
+  color: $text-secondary;
+  margin-block-end: $spacing-02;
+}
+
+.#{$block-class}__tech-logo {
+  block-size: $spacing-06;
+  inline-size: $spacing-06;
+  margin-inline-end: $spacing-03;
+  object-fit: contain;
+}

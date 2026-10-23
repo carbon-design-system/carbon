@@ -1,0 +1,54 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "$description": "Status indicator component color tokens for displaying system and content states.",
+  "status-accessibility-background": {
+    "$type": "color",
+    "$value": "{white}",
+    "$description": "Background color for accessibility status indicators. Use to highlight accessibility-related features or compliance status."
+  },
+  "status-blue": {
+    "$type": "color",
+    "$value": "{blue.70}",
+    "$description": "Color for blue status indicators. Use for informational states, in-progress items, or neutral status without specific semantic meaning."
+  },
+  "status-gray": {
+    "$type": "color",
+    "$value": "{gray.60}",
+    "$description": "Color for gray status indicators. Use for inactive, disabled, or neutral states that don't require color semantics."
+  },
+  "status-green": {
+    "$type": "color",
+    "$value": "{green.50}",
+    "$description": "Color for green status indicators. Use for success states, completed items, active/running status, or positive conditions."
+  },
+  "status-orange": {
+    "$type": "color",
+    "$value": "{orange.40}",
+    "$description": "Color for orange status indicators. Use for warning states, items needing attention, or moderate priority issues."
+  },
+  "status-orange-outline": {
+    "$type": "color",
+    "$value": "{orange.60}",
+    "$description": "Outline/border color for orange status indicators in light themes. Provides visual definition for outlined warning status variants."
+  },
+  "status-purple": {
+    "$type": "color",
+    "$value": "{purple.60}",
+    "$description": "Color for purple status indicators. Use for special states, premium features, or custom priority levels."
+  },
+  "status-red": {
+    "$type": "color",
+    "$value": "{red.60}",
+    "$description": "Color for red status indicators. Use for error states, failed items, critical issues, or stopped/inactive status."
+  },
+  "status-yellow": {
+    "$type": "color",
+    "$value": "{yellow.30}",
+    "$description": "Color for yellow status indicators. Use for caution states, pending items, or situations requiring user awareness."
+  },
+  "status-yellow-outline": {
+    "$type": "color",
+    "$value": "{yellow.60}",
+    "$description": "Outline/border color for yellow status indicators in light themes. Provides visual definition for outlined caution status variants."
+  }
+}

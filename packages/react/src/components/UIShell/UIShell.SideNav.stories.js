@@ -73,12 +73,12 @@ const StoryContent = ({ useResponsiveOffset = true }) => {
             <br />
             <br />
             To better understand the purpose and function of the UI shell,
-            consider the “shell” of MacOS, which contains the Apple menu,
+            consider the “shell” of macOS, which contains the Apple menu,
             top-level navigation, and universal, OS-level controls at the top of
             the screen, as well as a universal dock along the bottom or side of
             the screen. The Carbon UI shell is roughly analogous in function to
             these parts of the Mac UI. For example, the app switcher portion of
-            the shell can be compared to the dock in MacOS.
+            the shell can be compared to the dock in macOS.
           </p>
           <h2 style={{ margin: '30px 0' }}>Header responsive behavior</h2>
           <p>
@@ -438,6 +438,72 @@ FixedSideNavWDivider.args = {
 };
 
 FixedSideNavWDivider.argTypes = {
+  ...headerArgTypes,
+  ...sideNavArgTypes,
+};
+
+export const FixedSideNavWMixedLinksAndButtons = (args) => (
+  <>
+    <Header aria-label={args.headerAriaLabel}>
+      <SkipToContent />
+      <HeaderName href="/" prefix={args.platformPrefix}>
+        {args.platformName}
+      </HeaderName>
+    </Header>
+    <SideNav
+      isFixedNav
+      expanded={args.expanded}
+      isChildOfHeader={false}
+      aria-label={args.sideNavAriaLabel}>
+      <SideNavItems>
+        <SideNavLink href="https://www.carbondesignsystem.com/">
+          Overview
+        </SideNavLink>
+        <SideNavLink
+          as="button"
+          type="button"
+          onClick={action('Open release notes')}>
+          Release notes
+        </SideNavLink>
+        <SideNavMenu title="Resources">
+          <SideNavMenuItem href="https://www.carbondesignsystem.com/">
+            Documentation
+          </SideNavMenuItem>
+          <SideNavMenuItem
+            as="button"
+            type="button"
+            onClick={action('Open version details')}>
+            Version details
+          </SideNavMenuItem>
+          <SideNavMenuItem href="https://www.carbondesignsystem.com/">
+            Support
+          </SideNavMenuItem>
+        </SideNavMenu>
+        <SideNavDivider />
+        <SideNavLink href="https://www.carbondesignsystem.com/" isActive>
+          Settings
+        </SideNavLink>
+        <SideNavLink
+          as="button"
+          type="button"
+          onClick={action('Open feedback modal')}>
+          Send feedback
+        </SideNavLink>
+      </SideNavItems>
+    </SideNav>
+    <StoryContent useResponsiveOffset={false} />
+  </>
+);
+
+FixedSideNavWMixedLinksAndButtons.storyName =
+  'Fixed Side Nav with Mixed Buttons and Links';
+
+FixedSideNavWMixedLinksAndButtons.args = {
+  ...headerArgs,
+  ...sideNavArgs,
+};
+
+FixedSideNavWMixedLinksAndButtons.argTypes = {
   ...headerArgTypes,
   ...sideNavArgTypes,
 };

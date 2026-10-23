@@ -81,4 +81,40 @@ describe('scss/components/ui-shell', () => {
         .map((rule) => rule.selector)
     ).toEqual([]);
   });
+
+  test('header links only show a focus border in Windows HCM when focused', async () => {
+    const { result } = await render(`
+      @use '../ui-shell/header';
+    `);
+    const borderColors = {};
+
+    postcss.parse(result.css.toString()).walkRules((rule) => {
+      let parent = rule.parent;
+
+      while (parent) {
+        if (
+          parent.type === 'atrule' &&
+          parent.name === 'media' &&
+          parent.params.includes('(forced-colors: active)')
+        ) {
+          rule.walkDecls('border-color', (decl) => {
+            rule.selectors.forEach((selector) => {
+              borderColors[selector] = decl.value;
+            });
+          });
+          break;
+        }
+
+        parent = parent.parent;
+      }
+    });
+
+    expect(borderColors['a.cds--header__name']).toBe('Canvas');
+    expect(borderColors['a.cds--header__menu-item']).toBe('Canvas');
+    expect(borderColors['a.cds--header__name:focus']).toBe('Highlight');
+    expect(borderColors['a.cds--header__menu-item:focus']).toBe('Highlight');
+    expect(
+      borderColors['a.cds--header__menu-item[aria-current=page]:focus']
+    ).toBe('Highlight');
+  });
 });
