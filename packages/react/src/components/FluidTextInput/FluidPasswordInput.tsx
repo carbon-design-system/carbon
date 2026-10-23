@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -113,7 +113,10 @@ const FluidPasswordInput = ({
   ...other
 }: FluidPasswordInputProps) => {
   const prefix = usePrefix();
-  const classNames = classnames(className, `${prefix}--text-input--fluid`);
+  const classNames = classnames(className, {
+    [`${prefix}--text-input--fluid`]: true,
+    [`${prefix}--text-input--fluid--disabled`]: other.disabled,
+  });
 
   return (
     <FormContext.Provider value={{ isFluid: true }}>

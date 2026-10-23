@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2025
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,6 +8,9 @@
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import DatePicker from '../DatePicker';
+import DatePickerInput from '../DatePickerInput';
+import FluidDatePickerInput from '../FluidDatePickerInput';
+import { isComponentElement } from '../../internal';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm/FormContext';
 import React from 'react';
@@ -21,6 +24,10 @@ export interface FluidDatePickerProps {
    * Specify an optional className to be applied to the outer FluidForm wrapper
    */
   className?: string;
+  /**
+   * Specify whether the `<input>` should be disabled
+   */
+  disabled?: boolean;
   /**
    * Specify whether or not the control is invalid
    */
@@ -47,13 +54,14 @@ const FluidDatePicker = React.forwardRef<
   HTMLInputElement,
   FluidDatePickerProps
 >(function FluidDatePicker(
-  { className, children, invalid, readOnly, warn, ...other },
+  { className, children, disabled, invalid, readOnly, warn, ...other },
   ref
 ) {
   const prefix = usePrefix();
   const classNames = classnames(className, {
     [`${prefix}--date-picker--fluid`]: true,
     [`${prefix}--date-picker--fluid--invalid`]: invalid,
+    [`${prefix}--date-picker--fluid--disabled`]: disabled,
     [`${prefix}--date-picker--fluid--readonly`]: readOnly,
     [`${prefix}--date-picker--fluid--warn`]: warn,
   });
@@ -67,7 +75,17 @@ const FluidDatePicker = React.forwardRef<
         className={classNames}
         ref={ref}
         {...other}>
-        {children}
+        {disabled
+          ? React.Children.map(children, (child) => {
+              if (
+                isComponentElement(child, DatePickerInput) ||
+                isComponentElement(child, FluidDatePickerInput)
+              ) {
+                return React.cloneElement(child, { disabled: true });
+              }
+              return child;
+            })
+          : children}
       </DatePicker>
     </FormContext.Provider>
   );
@@ -83,6 +101,11 @@ FluidDatePicker.propTypes = {
    * Specify an optional className to be applied to the outer FluidForm wrapper
    */
   className: PropTypes.string,
+
+  /**
+   * Specify whether or not the control is disabled
+   */
+  disabled: PropTypes.bool,
 
   /**
    * Specify whether or not the control is invalid
