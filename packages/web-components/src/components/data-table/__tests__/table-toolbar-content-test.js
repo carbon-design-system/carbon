@@ -9,6 +9,7 @@ import { expect, fixture, html } from '@open-wc/testing';
 import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/data-table/index.js';
 import '@carbon/web-components/es/components/multi-select/index.js';
+import '@carbon/web-components/es/components/overflow-menu/index.js';
 import '@carbon/web-components/es/components/tag/index.js';
 
 describe('cds-table-toolbar-content', () => {
@@ -50,75 +51,77 @@ describe('cds-table-toolbar-content', () => {
     expect(button?.getAttribute('size')).to.equal('xs');
   });
 
-  it('should preserve an explicitly set child size', async () => {
-    const el = await fixture(html`
-      <cds-table-toolbar-content size="xl">
-        <cds-tag size="sm">Tag</cds-tag>
-        <cds-multi-select size="sm"></cds-multi-select>
-      </cds-table-toolbar-content>
-    `);
+  ['xs', 'sm', 'md', 'lg', 'xl'].forEach((size) => {
+    it(`should preserve tag and multi-select sizes in a ${size} toolbar`, async () => {
+      const el = await fixture(html`
+        <cds-table-toolbar size=${size}>
+          <cds-table-toolbar-content>
+            <cds-tag size="sm">Small tag</cds-tag>
+            <cds-tag>Default tag</cds-tag>
+            <cds-tag size="lg">Large tag</cds-tag>
+            <cds-multi-select size="sm">
+              <cds-multi-select-item value="one" selected>
+                Option 1
+              </cds-multi-select-item>
+            </cds-multi-select>
+          </cds-table-toolbar-content>
+        </cds-table-toolbar>
+      `);
+      const content = el.querySelector('cds-table-toolbar-content');
+      const tags = [...el.querySelectorAll('cds-tag')];
+      const multiSelect = el.querySelector('cds-multi-select');
+      await content.updateComplete;
+      await Promise.all(tags.map((tag) => tag.updateComplete));
+      await multiSelect.updateComplete;
 
-    await el.updateComplete;
+      expect(tags.map((tag) => tag.size)).to.deep.equal(['sm', 'md', 'lg']);
+      expect(
+        tags.map((tag) => tag.getBoundingClientRect().height)
+      ).to.deep.equal([18, 24, 32]);
+      expect(multiSelect.size).to.equal('sm');
+      expect(
+        multiSelect.shadowRoot
+          .querySelector('.cds--tag')
+          .getBoundingClientRect().height
+      ).to.equal(18);
 
-    const tag = el.querySelector('cds-tag');
-    const multiSelect = el.querySelector('cds-multi-select');
+      el.size = size === 'xs' ? 'xl' : 'xs';
+      await el.updateComplete;
+      await content.updateComplete;
 
-    expect(tag?.getAttribute('size')).to.equal('sm');
-    expect(multiSelect?.getAttribute('size')).to.equal('sm');
+      expect(tags.map((tag) => tag.size)).to.deep.equal(['sm', 'md', 'lg']);
+      expect(
+        tags.map((tag) => tag.getBoundingClientRect().height)
+      ).to.deep.equal([18, 24, 32]);
+      expect(multiSelect.size).to.equal('sm');
+    });
   });
 
-  it('should preserve an explicitly set child size that matches a default child size', async () => {
-    const el = await fixture(html`
-      <cds-table-toolbar-content size="xl">
-        <cds-button size="lg"></cds-button>
-      </cds-table-toolbar-content>
-    `);
-
-    await el.updateComplete;
-
-    const button = el.querySelector('cds-button');
-    expect(button?.getAttribute('size')).to.equal('lg');
-
-    el.setAttribute('size', 'xs');
-    await el.updateComplete;
-
-    expect(button?.getAttribute('size')).to.equal('lg');
-  });
-
-  it('should set the size of children that reflect their default size', async () => {
+  it('should resize toolbar actions after they reflect their default sizes', async () => {
     const el = await fixture(html`
       <cds-table-toolbar-content>
-        <cds-tag>Tag</cds-tag>
+        <cds-button>Button</cds-button>
+        <cds-table-toolbar-search></cds-table-toolbar-search>
+        <cds-overflow-menu></cds-overflow-menu>
       </cds-table-toolbar-content>
     `);
+    const actions = [...el.children];
+    await Promise.all(actions.map((action) => action.updateComplete));
+    expect(el.querySelector('cds-button').size).to.equal('lg');
 
-    await el.updateComplete;
+    for (const [size, expectedSize] of [
+      ['xs', 'xs'],
+      ['md', 'lg'],
+      ['sm', 'sm'],
+      ['xl', 'lg'],
+    ]) {
+      el.size = size;
+      await el.updateComplete;
+      await Promise.all(actions.map((action) => action.updateComplete));
 
-    const tag = el.querySelector('cds-tag');
-    await tag?.updateComplete;
-    expect(tag?.getAttribute('size')).to.equal('md');
-
-    el.setAttribute('size', 'xs');
-    await el.updateComplete;
-
-    expect(tag?.getAttribute('size')).to.equal('xs');
-  });
-
-  it('should update sizes previously set by the toolbar', async () => {
-    const el = await fixture(html`
-      <cds-table-toolbar-content size="xl">
-        <cds-button></cds-button>
-      </cds-table-toolbar-content>
-    `);
-
-    await el.updateComplete;
-
-    const button = el.querySelector('cds-button');
-    expect(button?.getAttribute('size')).to.equal('lg');
-
-    el.setAttribute('size', 'xs');
-    await el.updateComplete;
-
-    expect(button?.getAttribute('size')).to.equal('xs');
+      actions.forEach((action) => {
+        expect(action.getAttribute('size')).to.equal(expectedSize);
+      });
+    }
   });
 });
