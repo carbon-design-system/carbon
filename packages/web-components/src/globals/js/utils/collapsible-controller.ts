@@ -24,6 +24,7 @@ export class CollapsibleController implements ReactiveController {
   }
 
   private onPointerDown = (e: PointerEvent) => {
+    if (this.options.disable?.()) return;
     this.startY = e.clientY;
     this.isDragging = true;
   };
@@ -32,6 +33,7 @@ export class CollapsibleController implements ReactiveController {
     if (!this.isDragging || this.startY === null) {
       return;
     }
+    if (this.options.disable?.()) return;
 
     const diffY = this.startY - e.clientY;
 
@@ -49,6 +51,10 @@ export class CollapsibleController implements ReactiveController {
   };
 
   private onWheel = (e: WheelEvent) => {
+    // Re-evaluate disable() on every event so that a prop change that arrives
+    // after hostConnected (e.g. disableHeaderCollapse set via context in
+    // firstUpdated) is respected at runtime, not just at connect time.
+    if (this.options.disable?.()) return;
     if (e.deltaY > 0) {
       this.options.triggerCollapse(true);
     } else if (e.deltaY < 0) {
@@ -57,10 +63,10 @@ export class CollapsibleController implements ReactiveController {
   };
 
   hostConnected() {
-    if (this.options.disable?.()) {
-      return;
-    }
-
+    // Always register listeners. The disable() check is re-evaluated inside
+    // each handler so that disableHeaderCollapse set after connect (e.g. via
+    // context in firstUpdated) is honoured. Checking only here means any prop
+    // that arrives after the element connects would be silently ignored.
     const container = this.options.container();
     if (!container) {
       return;

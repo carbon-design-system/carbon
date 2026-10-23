@@ -8,11 +8,13 @@
 import { render, screen } from '@testing-library/react';
 import React, { forwardRef } from 'react';
 import { Popover, PopoverContent } from '../../Popover';
+import { ClassPrefix } from '../../ClassPrefix';
 import userEvent from '@testing-library/user-event';
 import { waitForPosition } from '../../ListBox/test-helpers';
 import RadioButton from '../../RadioButton';
 import RadioButtonGroup from '../../RadioButtonGroup';
 import { default as Checkbox } from '../../Checkbox';
+import { FeatureFlags } from '../../FeatureFlags';
 
 const prefix = 'cds';
 
@@ -21,6 +23,47 @@ describe('Popover', () => {
     <button type="button" ref={ref} {...props} />
   ));
   TriggerWithPopoverContentDisplayName.displayName = 'PopoverContent';
+
+  describe('autoAlign default', () => {
+    const autoAlignClass = `${prefix}--popover--auto-align`;
+
+    it('should not enable `autoAlign` by default', async () => {
+      render(
+        <Popover open data-testid="popover">
+          <PopoverContent>test</PopoverContent>
+        </Popover>
+      );
+      await waitForPosition();
+
+      expect(screen.getByTestId('popover')).not.toHaveClass(autoAlignClass);
+    });
+
+    it('should enable `autoAlign` by default with `enable-v12-autoalign`', async () => {
+      render(
+        <FeatureFlags enableV12Autoalign>
+          <Popover open data-testid="popover">
+            <PopoverContent>test</PopoverContent>
+          </Popover>
+        </FeatureFlags>
+      );
+      await waitForPosition();
+
+      expect(screen.getByTestId('popover')).toHaveClass(autoAlignClass);
+    });
+
+    it('should respect `autoAlign={false}` with `enable-v12-autoalign`', async () => {
+      render(
+        <FeatureFlags enableV12Autoalign>
+          <Popover open autoAlign={false} data-testid="popover">
+            <PopoverContent>test</PopoverContent>
+          </Popover>
+        </FeatureFlags>
+      );
+      await waitForPosition();
+
+      expect(screen.getByTestId('popover')).not.toHaveClass(autoAlignClass);
+    });
+  });
 
   it('should support a ref on the outermost element', () => {
     const ref = jest.fn();
@@ -57,6 +100,52 @@ describe('Popover', () => {
       </Popover>
     );
     expect(container.firstChild).toHaveAttribute('data-testid', 'test');
+  });
+
+  it('should only read computed style for caret dimensions when relevant inputs change', () => {
+    const getComputedStyleSpy = jest
+      .spyOn(window, 'getComputedStyle')
+      .mockImplementation(() => ({
+        getPropertyValue: jest.fn(() => ''),
+      }));
+    const TestPopover = ({ caret = true, label = 'Settings', prefix }) => (
+      <ClassPrefix prefix={prefix}>
+        <Popover open={false} caret={caret}>
+          <button type="button">{label}</button>
+          <PopoverContent>test</PopoverContent>
+        </Popover>
+      </ClassPrefix>
+    );
+
+    try {
+      const { rerender } = render(<TestPopover prefix="cds" />);
+
+      expect(getComputedStyleSpy).toHaveBeenCalled();
+
+      getComputedStyleSpy.mockClear();
+
+      rerender(<TestPopover prefix="cds" label="Updated settings" />);
+
+      expect(getComputedStyleSpy).not.toHaveBeenCalled();
+
+      rerender(<TestPopover prefix="custom" label="Updated settings" />);
+
+      expect(getComputedStyleSpy).toHaveBeenCalled();
+
+      getComputedStyleSpy.mockClear();
+
+      rerender(
+        <TestPopover prefix="custom" label="Updated settings" caret={false} />
+      );
+
+      expect(getComputedStyleSpy).not.toHaveBeenCalled();
+
+      rerender(<TestPopover prefix="custom" label="Updated settings" />);
+
+      expect(getComputedStyleSpy).toHaveBeenCalled();
+    } finally {
+      getComputedStyleSpy.mockRestore();
+    }
   });
 
   describe('PopoverContent', () => {
