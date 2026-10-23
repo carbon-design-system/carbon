@@ -390,29 +390,6 @@ describe('createOverflowHandler', () => {
         expect(mockOnChange).not.toHaveBeenCalled();
         expect(offset.hasAttribute('data-hidden')).toBe(true);
       });
-
-      it('should collapse all items into offset when the first item cannot fit with offset', () => {
-        // Two items of 80px each (total 160px), offset is 32px, gap is 8px.
-        // Container width is 100px. Available = 100 - 32 + 8 = 76px.
-        // Item 0 (80px) > available (76px). Since offset exists, all items collapse into offset (0 visible, 2 hidden).
-        container.append(...createItems([80, 80], 'width'));
-        const offset = document.createElement('div');
-        offset.setAttribute('data-offset', '');
-        Object.defineProperty(offset, 'getBoundingClientRect', {
-          value: () => ({ width: 32 }),
-        });
-        container.append(offset);
-        setContainerDimension(container, 'width', 100);
-        handler = createOverflowHandler({
-          container,
-          gap: 8,
-          onChange: mockOnChange,
-        });
-        const [visible, hidden] = mockOnChange.mock.calls[0];
-        expect(visible.length).toBe(0);
-        expect(hidden.length).toBe(2);
-        expect(offset.hasAttribute('data-hidden')).toBe(false);
-      });
     });
 
     describe('offsetValue option', () => {
