@@ -45,6 +45,67 @@ describe('cds-menu', () => {
     expect(menu).to.have.class('cds--menu--lg');
   });
 
+  const renderNestedMenu = () =>
+    fixture(html`
+      <cds-menu .size=${'md'} .x=${[20, 60]} .y=${[20, 60]} open>
+        <cds-menu-item label="Level 1">
+          <cds-menu-item-group slot="submenu">
+            <cds-menu-item label="Level 2">
+              <cds-menu-item-group slot="submenu">
+                <cds-menu-item label="Level 3"></cds-menu-item>
+              </cds-menu-item-group>
+            </cds-menu-item>
+          </cds-menu-item-group>
+        </cds-menu-item>
+      </cds-menu>
+    `);
+
+  it('should render nested submenus with the root menu size', async () => {
+    const el = await renderNestedMenu();
+    await el.updateComplete;
+
+    const getItem = (label) =>
+      el.querySelector(`cds-menu-item[label="${label}"]`);
+
+    const openSubmenu = async (item) => {
+      item._openSubmenu();
+      await item.updateComplete;
+      const submenu = item.shadowRoot.querySelector('cds-menu');
+      await submenu.updateComplete;
+      return submenu;
+    };
+
+    const submenus = [
+      await openSubmenu(getItem('Level 1')),
+      await openSubmenu(getItem('Level 2')),
+    ];
+
+    submenus.forEach((submenu) => {
+      expect(submenu.size).to.equal('md');
+    });
+
+    const rootItemHeight = getItem('Level 1').getBoundingClientRect().height;
+    ['Level 2', 'Level 3'].forEach((label) => {
+      expect(getItem(label).getBoundingClientRect().height).to.equal(
+        rootItemHeight
+      );
+    });
+  });
+
+  it('should update nested submenus when the root menu size changes', async () => {
+    const el = await renderNestedMenu();
+    await el.updateComplete;
+
+    el.size = 'xs';
+    await el.updateComplete;
+
+    for (const label of ['Level 1', 'Level 2']) {
+      const item = el.querySelector(`cds-menu-item[label="${label}"]`);
+      await item.updateComplete;
+      expect(item.shadowRoot.querySelector('cds-menu').size).to.equal('xs');
+    }
+  });
+
   it('should set aria-label attribute', async () => {
     const el = await fixture(html`<cds-menu label="Test Menu"></cds-menu>`);
     const menu = el.shadowRoot.querySelector('[role="menu"]');
@@ -158,6 +219,145 @@ describe('cds-menu', () => {
       expect(el.position[0]).to.equal(el.spacing);
 
       document.dir = originalDir;
+    });
+
+    ['ltr', 'rtl'].forEach((dir) => {
+      describe(`in ${dir.toUpperCase()}`, () => {
+        let originalDir;
+
+        beforeEach(() => {
+          originalDir = document.dir;
+          document.dir = dir;
+        });
+
+        afterEach(() => {
+          document.dir = originalDir;
+        });
+
+        const getSurfaceRect = (menu) =>
+          menu.shadowRoot.querySelector('.cds--menu').getBoundingClientRect();
+
+        const openSubmenu = async (item) => {
+          item._openSubmenu();
+          await item.updateComplete;
+          const submenu = item.shadowRoot.querySelector('cds-menu');
+          await submenu.updateComplete;
+          return submenu;
+        };
+
+        it('should open nested submenus towards the inline end', async () => {
+          const el = await fixture(html`
+            <cds-menu .x=${[20, 60]} .y=${[20, 60]} open>
+              <cds-menu-item label="Level 1">
+                <cds-menu-item-group slot="submenu">
+                  <cds-menu-item label="Level 2">
+                    <cds-menu-item-group slot="submenu">
+                      <cds-menu-item label="Level 3"></cds-menu-item>
+                    </cds-menu-item-group>
+                  </cds-menu-item>
+                </cds-menu-item-group>
+              </cds-menu-item>
+            </cds-menu>
+          `);
+          await el.updateComplete;
+
+          const level1 = el.querySelector('cds-menu-item[label="Level 1"]');
+          const level2 = el.querySelector('cds-menu-item[label="Level 2"]');
+
+          const submenu1 = await openSubmenu(level1);
+          const submenu2 = await openSubmenu(level2);
+
+          [
+            [level1, submenu1],
+            [level2, submenu2],
+          ].forEach(([item, submenu]) => {
+            const itemRect = item.getBoundingClientRect();
+            const submenuRect = getSurfaceRect(submenu);
+
+            if (dir === 'rtl') {
+              expect(submenuRect.right).to.be.closeTo(itemRect.left, 8);
+              expect(submenuRect.left).to.be.below(itemRect.left);
+            } else {
+              expect(submenuRect.left).to.be.closeTo(itemRect.right, 8);
+              expect(submenuRect.right).to.be.above(itemRect.right);
+            }
+          });
+        });
+      });
+    });
+  });
+
+  describe('nested keyboard navigation', () => {
+    ['ltr', 'rtl'].forEach((dir) => {
+      describe(`in ${dir.toUpperCase()}`, () => {
+        let originalDir;
+
+        beforeEach(() => {
+          originalDir = document.dir;
+          document.dir = dir;
+        });
+
+        afterEach(() => {
+          document.dir = originalDir;
+        });
+
+        const renderNested = async () => {
+          const el = await fixture(html`
+            <cds-menu .x=${[300, 340]} .y=${[20, 60]} open>
+              <cds-menu-item label="Level 1">
+                <cds-menu-item-group slot="submenu">
+                  <cds-menu-item label="Level 2">
+                    <cds-menu-item-group slot="submenu">
+                      <cds-menu-item label="Level 3"></cds-menu-item>
+                    </cds-menu-item-group>
+                  </cds-menu-item>
+                </cds-menu-item-group>
+              </cds-menu-item>
+            </cds-menu>
+          `);
+          await el.updateComplete;
+          return el;
+        };
+
+        const getItem = (el, label) =>
+          el.querySelector(`cds-menu-item[label="${label}"]`);
+
+        const press = async (target, key) => {
+          target.dispatchEvent(
+            new KeyboardEvent('keydown', { key, bubbles: true, composed: true })
+          );
+          await new Promise((resolve) => setTimeout(resolve));
+        };
+
+        it('should open nested submenus with ArrowRight', async () => {
+          const el = await renderNested();
+          const level1 = getItem(el, 'Level 1');
+          const level2 = getItem(el, 'Level 2');
+
+          level1.focus();
+          await press(level1, 'ArrowRight');
+          expect(level1.submenuOpen).to.be.true;
+          expect(document.activeElement.label).to.equal('Level 2');
+
+          await press(level2, 'ArrowRight');
+          expect(level2.submenuOpen).to.be.true;
+          expect(document.activeElement.label).to.equal('Level 3');
+        });
+
+        it('should close a submenu with ArrowLeft and focus its parent item', async () => {
+          const el = await renderNested();
+          const level1 = getItem(el, 'Level 1');
+          const level2 = getItem(el, 'Level 2');
+
+          level1.focus();
+          await press(level1, 'ArrowRight');
+          await press(level2, 'ArrowLeft');
+
+          expect(level1.submenuOpen).to.be.false;
+          expect(document.activeElement.label).to.equal('Level 1');
+          expect(el.open).to.be.true;
+        });
+      });
     });
   });
 
