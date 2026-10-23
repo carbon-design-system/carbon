@@ -176,7 +176,7 @@ export const Default = {
             </cds-card-title>
             ${actionCount > 0
               ? html`
-                  <cds-card-actions>
+                  <cds-card-actions slot="actions">
                     ${_defaultActionIcons.slice(0, actionCount).map(
                       ({ icon, label: actionLabel }) => html`
                         <cds-card-action label=${actionLabel}>
@@ -458,9 +458,7 @@ export const WithAILabel = {
       <cds-column lg="4" md="4" sm="4">
         <cds-card>
           <cds-card-header>
-            <cds-card-header-media>
-              ${iconLoader(Analytics16)}
-            </cds-card-header-media>
+            <div slot="header-media">${iconLoader(Analytics16)}</div>
             <cds-card-title description="AI-generated summary">
               Performance Insights
             </cds-card-title>
@@ -491,7 +489,7 @@ export const WithAILabel = {
         <cds-card>
           <cds-card-header>
             <cds-card-title>Smart Recommendations Long title</cds-card-title>
-            <cds-card-actions>
+            <cds-card-actions slot="actions">
               <cds-card-action label="Edit">
                 <cds-icon-button kind="ghost" size="sm">
                   ${iconLoader(Edit16, { slot: 'icon' })}
@@ -588,7 +586,7 @@ export const WithHeaderActions = {
             <cds-card-title label="Project" description="Due in 3 days">
               Website Redesign
             </cds-card-title>
-            <cds-card-actions>
+            <cds-card-actions slot="actions">
               <cds-card-action label="Edit">
                 <cds-icon-button kind="ghost" size="sm">
                   ${iconLoader(Edit16, { slot: 'icon' })}
@@ -634,7 +632,7 @@ export const WithHeaderActions = {
               description="Last updated 2 hours ago">
               Project dashboard
             </cds-card-title>
-            <cds-card-actions>
+            <cds-card-actions slot="actions">
               <cds-card-action label="Edit">
                 <cds-icon-button kind="ghost" size="sm">
                   ${iconLoader(Edit16, { slot: 'icon' })}
@@ -709,7 +707,7 @@ export const WithHeaderActions = {
         <cds-card>
           <cds-card-header>
             <cds-card-title>Usage metrics</cds-card-title>
-            <cds-card-actions>
+            <cds-card-actions slot="actions">
               <cds-card-action>
                 <cds-button kind="tertiary" size="sm">Action</cds-button>
               </cds-card-action>
@@ -727,7 +725,7 @@ export const WithHeaderActions = {
         <cds-card>
           <cds-card-header>
             <cds-card-title>Usage metrics</cds-card-title>
-            <cds-card-actions>
+            <cds-card-actions slot="actions">
               <cds-card-action>
                 <cds-button kind="tertiary" size="sm">Export</cds-button>
               </cds-card-action>
@@ -756,7 +754,7 @@ export const WithHeaderActions = {
               This is a very long card title that wraps across multiple lines in
               a narrow container
             </cds-card-title>
-            <cds-card-actions>
+            <cds-card-actions slot="actions">
               <cds-card-action label="Edit">
                 <cds-icon-button kind="ghost" size="sm">
                   ${iconLoader(Edit16, { slot: 'icon' })}
@@ -798,10 +796,10 @@ export const WithHeaderMedia = {
       <cds-column lg="4" md="4" sm="4">
         <cds-card>
           <cds-card-header>
-            <cds-card-header-media>
+            <div slot="header-media">
               ${iconLoader(Analytics16, { style: 'display:block' })}
-            </cds-card-header-media>
-            <cds-card-actions>
+            </div>
+            <cds-card-actions slot="actions">
               <cds-card-action label="Edit">
                 <cds-icon-button kind="ghost" size="sm">
                   ${iconLoader(Edit16, { slot: 'icon' })}
@@ -830,12 +828,12 @@ export const WithHeaderMedia = {
       <cds-column lg="4" md="4" sm="4">
         <cds-card>
           <cds-card-header>
-            <cds-card-header-media>
+            <div slot="header-media">
               <img
                 src=${illustration1}
                 alt="A sample illustration"
                 style="width:48px;height:48px;border-radius:4px" />
-            </cds-card-header-media>
+            </div>
             <cds-card-title>Card with Image</cds-card-title>
           </cds-card-header>
           <cds-card-body
@@ -848,9 +846,9 @@ export const WithHeaderMedia = {
       <cds-column lg="4" md="4" sm="4">
         <cds-card>
           <cds-card-header>
-            <cds-card-header-media>
+            <div slot="header-media">
               <cds-tag type="blue">New</cds-tag>
-            </cds-card-header-media>
+            </div>
             <cds-card-title>Card with Tag</cds-card-title>
           </cds-card-header>
           <cds-card-body
@@ -863,12 +861,12 @@ export const WithHeaderMedia = {
       <cds-column lg="4" md="4" sm="4">
         <cds-card>
           <cds-card-header>
-            <cds-card-header-media>
+            <div slot="header-media">
               <cds-icon-indicator
                 kind="succeeded"
                 size="16"
                 label="Succeeded"></cds-icon-indicator>
-            </cds-card-header-media>
+            </div>
             <cds-card-title>Card with Status</cds-card-title>
           </cds-card-header>
           <cds-card-body>
@@ -891,9 +889,9 @@ export const WithIcon = {
       <cds-column lg="4" md="4" sm="4">
         <cds-card>
           <cds-card-header>
-            <cds-card-header-media>
+            <div slot="header-media">
               ${iconLoader(Analytics16, { style: 'display:block' })}
-            </cds-card-header-media>
+            </div>
             <cds-card-title description="Real-time metrics">
               Analytics Dashboard
             </cds-card-title>
@@ -928,9 +926,9 @@ export const WithIcon = {
       <cds-column lg="4" md="4" sm="4">
         <cds-card>
           <cds-card-header>
-            <cds-card-header-media>
+            <div slot="header-media">
               ${iconLoader(Favorite32, { style: 'display:block' })}
-            </cds-card-header-media>
+            </div>
             <cds-card-title description="Your saved content">
               Favorite Items
             </cds-card-title>
@@ -1085,15 +1083,15 @@ export const WithTitleMedia = {
       <cds-column lg="4" md="4" sm="4">
         <cds-card>
           <cds-card-header>
-            <cds-card-title-media>
-              <img
-                src=${rebusClassic}
-                alt="IBM Classic Rebus logo"
-                style="width:48px;height:48px;display:block" />
-            </cds-card-title-media>
             <cds-card-title
               label="Label"
               description="The title media slot positions an icon to the left of the title text">
+              <div slot="title-media">
+                <img
+                  src=${rebusClassic}
+                  alt="IBM Classic Rebus logo"
+                  style="width:48px;height:48px;display:block" />
+              </div>
               Card with title icon
             </cds-card-title>
           </cds-card-header>
@@ -1108,15 +1106,15 @@ export const WithTitleMedia = {
       <cds-column lg="4" md="4" sm="4">
         <cds-card>
           <cds-card-header>
-            <cds-card-title-media>
-              <img
-                src=${rebusClassic}
-                alt="IBM Classic Rebus logo"
-                style="width:64px;height:64px;display:block" />
-            </cds-card-title-media>
             <cds-card-title
               label="Label"
               description="The title media slot positions an icon to the left of the title text">
+              <div slot="title-media">
+                <img
+                  src=${rebusClassic}
+                  alt="IBM Classic Rebus logo"
+                  style="width:64px;height:64px;display:block" />
+              </div>
               Card with title icon
             </cds-card-title>
           </cds-card-header>
@@ -1126,22 +1124,25 @@ export const WithTitleMedia = {
         </cds-card>
       </cds-column>
 
-      <!-- 48px image + header actions -->
+      <!-- header media + 48px image + header actions -->
       <cds-column lg="4" md="4" sm="4">
         <cds-card>
           <cds-card-header>
-            <cds-card-title-media>
-              <img
-                src=${rebusClassic}
-                alt="IBM Classic Rebus logo"
-                style="width:48px;height:48px;display:block" />
-            </cds-card-title-media>
+            <div slot="header-media">
+              ${iconLoader(Analytics16, { style: 'display:block' })}
+            </div>
             <cds-card-title
               label="Label"
               description="The title media slot positions an icon to the left of the title text">
+              <div slot="title-media">
+                <img
+                  src=${rebusClassic}
+                  alt="IBM Classic Rebus logo"
+                  style="width:48px;height:48px;display:block" />
+              </div>
               Card with title icon
             </cds-card-title>
-            <cds-card-actions>
+            <cds-card-actions slot="actions">
               <cds-card-action label="Edit">
                 <cds-icon-button kind="ghost" size="sm">
                   ${iconLoader(Edit16, { slot: 'icon' })}
@@ -1156,7 +1157,9 @@ export const WithTitleMedia = {
               </cds-card-action>
             </cds-card-actions>
           </cds-card-header>
-          <cds-card-body> Title media alongside header actions. </cds-card-body>
+          <cds-card-body>
+            Header media and title media alongside header actions.
+          </cds-card-body>
         </cds-card>
       </cds-column>
 
@@ -1167,18 +1170,18 @@ export const WithTitleMedia = {
             <img src=${placeholder16x9} alt="Placeholder" style="width:100%" />
           </cds-card-media>
           <cds-card-header>
-            <cds-card-title-media>
-              <img
-                src=${rebusClassic}
-                alt="IBM Classic Rebus logo"
-                style="width:48px;height:48px;display:block" />
-            </cds-card-title-media>
             <cds-card-title
               label="Label"
               description="Full combination: card media, header media, title media and actions">
+              <div slot="title-media">
+                <img
+                  src=${rebusClassic}
+                  alt="IBM Classic Rebus logo"
+                  style="width:48px;height:48px;display:block" />
+              </div>
               Card with title icon
             </cds-card-title>
-            <cds-card-actions>
+            <cds-card-actions slot="actions">
               <cds-card-action label="Edit">
                 <cds-icon-button kind="ghost" size="sm">
                   ${iconLoader(Edit16, { slot: 'icon' })}

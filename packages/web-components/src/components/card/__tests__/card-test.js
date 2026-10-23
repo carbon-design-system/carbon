@@ -7,6 +7,7 @@
 
 import { expect, fixture, html, oneEvent } from '@open-wc/testing';
 import '@carbon/web-components/es/components/card/index.js';
+import '@carbon/web-components/es/components/ai-label/index.js';
 
 // ─── cds-card ────────────────────────────────────────────────────────────────
 
@@ -186,30 +187,6 @@ describe('cds-card', function () {
       expect(el.hasAttribute('has-ai-label')).to.be.false;
     });
   });
-  describe('has-actions reflection (rule 15)', () => {
-    it('should set has-actions when cds-card-actions is slotted', async () => {
-      const el = await fixture(html`
-        <cds-card>
-          <cds-card-header><cds-card-title>T</cds-card-title></cds-card-header>
-          <cds-card-actions>
-            <cds-card-action label="Edit"></cds-card-action>
-          </cds-card-actions>
-        </cds-card>
-      `);
-      await el.updateComplete;
-      expect(el.hasAttribute('has-actions')).to.be.true;
-    });
-
-    it('should remove has-actions when cds-card-actions is not present', async () => {
-      const el = await fixture(html`
-        <cds-card>
-          <cds-card-header><cds-card-title>T</cds-card-title></cds-card-header>
-        </cds-card>
-      `);
-      await el.updateComplete;
-      expect(el.hasAttribute('has-actions')).to.be.false;
-    });
-  });
 });
 
 // ─── cds-card-header ─────────────────────────────────────────────────────────
@@ -229,22 +206,54 @@ describe('cds-card-header', function () {
     expect(title.textContent.trim()).to.equal('My title');
   });
 
-  describe('has-title-media reflection (rule 16)', () => {
-    it('should set has-title-media when cds-card-title-media is slotted', async () => {
+  describe('header-media and actions slots', () => {
+    const getHeaderDiv = (header) =>
+      header.shadowRoot.querySelector('.cds--card__header');
+
+    it('should lay out title and actions in a single row without header-media', async () => {
       const el = await fixture(html`
         <cds-card>
           <cds-card-header id="hdr">
-            <cds-card-title-media></cds-card-title-media>
             <cds-card-title>T</cds-card-title>
+            <cds-card-actions slot="actions">
+              <cds-card-action label="Edit"></cds-card-action>
+            </cds-card-actions>
           </cds-card-header>
         </cds-card>
       `);
       const header = el.querySelector('#hdr');
       await header.updateComplete;
-      expect(header.hasAttribute('has-title-media')).to.be.true;
+      await header.updateComplete;
+      const root = header.shadowRoot;
+      expect(root.querySelector('.cds--card__header-top-row')).to.not.exist;
+      expect(root.querySelector('.cds--card__actions-slot')).to.exist;
+      expect(getHeaderDiv(header).hasAttribute('data-has-actions')).to.be.true;
     });
 
-    it('should not set has-title-media when cds-card-title-media is absent', async () => {
+    it('should render header-media and actions in a top row above the title', async () => {
+      const el = await fixture(html`
+        <cds-card>
+          <cds-card-header id="hdr">
+            <span slot="header-media" id="icon">★</span>
+            <cds-card-title>T</cds-card-title>
+            <cds-card-actions slot="actions">
+              <cds-card-action label="Edit"></cds-card-action>
+            </cds-card-actions>
+          </cds-card-header>
+        </cds-card>
+      `);
+      const header = el.querySelector('#hdr');
+      await header.updateComplete;
+      await header.updateComplete;
+      const topRow = header.shadowRoot.querySelector(
+        '.cds--card__header-top-row'
+      );
+      expect(topRow).to.exist;
+      expect(topRow.querySelector('.cds--card__header-media')).to.exist;
+      expect(topRow.querySelector('.cds--card__actions-slot')).to.exist;
+    });
+
+    it('should not render wrappers when the slots are empty', async () => {
       const el = await fixture(html`
         <cds-card>
           <cds-card-header id="hdr">
@@ -254,7 +263,11 @@ describe('cds-card-header', function () {
       `);
       const header = el.querySelector('#hdr');
       await header.updateComplete;
-      expect(header.hasAttribute('has-title-media')).to.be.false;
+      const root = header.shadowRoot;
+      expect(root.querySelector('.cds--card__header-top-row')).to.not.exist;
+      expect(root.querySelector('.cds--card__header-media')).to.not.exist;
+      expect(root.querySelector('.cds--card__actions-slot')).to.not.exist;
+      expect(getHeaderDiv(header).hasAttribute('data-has-actions')).to.be.false;
     });
   });
 
@@ -313,20 +326,24 @@ describe('cds-card-header', function () {
       expect(getHeaderDiv(el).hasAttribute('data-has-ai-label')).to.be.false;
     });
 
-    it('should offset header actions when the card has an AI label and reset when removed', async () => {
+    it('should reserve decorator clearance on the actions slot only while an AI label is present', async () => {
       const el = await fixture(html`
         <cds-card>
-          <cds-card-header>
+          <cds-card-header id="hdr">
             <cds-card-title>T</cds-card-title>
-            <cds-card-actions></cds-card-actions>
+            <cds-card-actions slot="actions">
+              <cds-card-action label="Edit"></cds-card-action>
+            </cds-card-actions>
           </cds-card-header>
         </cds-card>
       `);
-      const header = el.querySelector('cds-card-header');
-      const actions = el.querySelector('cds-card-actions');
+      const header = el.querySelector('#hdr');
       await el.updateComplete;
       await header.updateComplete;
-      const defaultOffset = getComputedStyle(actions).insetInlineEnd;
+      await header.updateComplete;
+      const getSlot = () =>
+        header.shadowRoot.querySelector('.cds--card__actions-slot');
+      const without = parseFloat(getComputedStyle(getSlot()).paddingInlineEnd);
 
       const aiLabel = document.createElement('cds-ai-label');
       aiLabel.slot = 'decorator';
@@ -337,7 +354,9 @@ describe('cds-card-header', function () {
       );
       await el.updateComplete;
       await header.updateComplete;
-      const withLabel = getComputedStyle(actions).insetInlineEnd;
+      const withLabel = parseFloat(
+        getComputedStyle(getSlot()).paddingInlineEnd
+      );
 
       el.querySelector('cds-ai-label').remove();
       await oneEvent(
@@ -346,10 +365,48 @@ describe('cds-card-header', function () {
       );
       await el.updateComplete;
       await header.updateComplete;
-      const withoutLabel = getComputedStyle(actions).insetInlineEnd;
+      const reset = parseFloat(getComputedStyle(getSlot()).paddingInlineEnd);
 
-      expect(parseFloat(withLabel)).to.be.greaterThan(parseFloat(withoutLabel));
-      expect(parseFloat(withoutLabel)).to.equal(parseFloat(defaultOffset));
+      expect(withLabel).to.be.greaterThan(without);
+      expect(reset).to.equal(without);
+    });
+
+    it('should keep a $spacing-03 (8px) gap between the last action and the AI label', async () => {
+      const el = await fixture(html`
+        <div style="width: 400px">
+          <cds-card>
+            <cds-ai-label slot="decorator"></cds-ai-label>
+            <cds-card-header id="hdr">
+              <cds-card-title>T</cds-card-title>
+              <cds-card-actions slot="actions">
+                <cds-card-action label="Edit">
+                  <cds-icon-button kind="ghost" size="sm"
+                    >E<span slot="tooltip-content">Edit</span></cds-icon-button
+                  >
+                </cds-card-action>
+                <cds-card-action label="Delete">
+                  <cds-icon-button kind="ghost" size="sm"
+                    >D<span slot="tooltip-content"
+                      >Delete</span
+                    ></cds-icon-button
+                  >
+                </cds-card-action>
+              </cds-card-actions>
+            </cds-card-header>
+          </cds-card>
+        </div>
+      `);
+      const card = el.querySelector('cds-card');
+      const header = el.querySelector('#hdr');
+      await card.updateComplete;
+      await header.updateComplete;
+      await new Promise((r) => setTimeout(r, 300));
+
+      const actions = el.querySelectorAll('cds-card-action');
+      const lastAction = actions[actions.length - 1].getBoundingClientRect();
+      const aiLabel = el.querySelector('cds-ai-label').getBoundingClientRect();
+      expect(aiLabel.width).to.be.greaterThan(0);
+      expect(aiLabel.left - lastAction.right).to.be.closeTo(8, 1);
     });
   });
 
@@ -530,6 +587,31 @@ describe('cds-card-title', function () {
     const icon = el.querySelector('#end-icon');
     expect(icon).to.exist;
   });
+
+  it('should render title-media slot and wrap text in __title-text', async () => {
+    const el = await fixture(html`
+      <cds-card-title>
+        <span slot="title-media" id="media">★</span>
+        Title
+      </cds-card-title>
+    `);
+    await el.updateComplete;
+    await el.updateComplete;
+    const root = el.shadowRoot;
+    expect(el.querySelector('#media')).to.exist;
+    expect(root.querySelector('.cds--card__title--has-media')).to.exist;
+    expect(root.querySelector('.cds--card__title-media')).to.exist;
+    expect(root.querySelector('.cds--card__title-text')).to.exist;
+  });
+
+  it('should not render title-media wrapper when the slot is empty', async () => {
+    const el = await fixture(html`<cds-card-title>Title</cds-card-title>`);
+    await el.updateComplete;
+    const root = el.shadowRoot;
+    expect(root.querySelector('.cds--card__title--has-media')).to.not.exist;
+    expect(root.querySelector('.cds--card__title-media')).to.not.exist;
+    expect(root.querySelector('.cds--card__title-text')).to.exist;
+  });
 });
 
 // ─── cds-card-media ──────────────────────────────────────────────────────────
@@ -635,5 +717,102 @@ describe('cds-card-actions', function () {
     await el.updateComplete;
     const action = el.querySelector('cds-card-action');
     expect(action.getAttribute('label')).to.equal('My action');
+  });
+
+  it('should publish the natural inline size as a custom property', async () => {
+    const el = await fixture(html`
+      <cds-card-actions>
+        <cds-card-action label="Edit">
+          <button type="button">Edit</button>
+        </cds-card-action>
+        <cds-card-action label="Share">
+          <button type="button">Share</button>
+        </cds-card-action>
+      </cds-card-actions>
+    `);
+    await el.updateComplete;
+    await el.updateComplete;
+    expect(
+      el.style.getPropertyValue('--cds--card--actions-inline-size')
+    ).to.match(/^\d+px$/);
+  });
+
+  it('should resolve labels from any button type and forward menu item clicks', async () => {
+    let clicks = 0;
+    const el = await fixture(html`
+      <div style="width: 120px">
+        <cds-card-actions>
+          <cds-card-action>
+            <button
+              type="button"
+              aria-label="From aria"
+              @click=${() => clicks++}>
+              A long visible action label
+            </button>
+          </cds-card-action>
+          <cds-card-action>
+            <button type="button" disabled>Disabled one</button>
+          </cds-card-action>
+          <cds-card-action></cds-card-action>
+        </cds-card-actions>
+      </div>
+    `);
+    const actions = el.querySelector('cds-card-actions');
+    await actions.updateComplete;
+    const items = actions._resolveActionItems(
+      Array.from(actions.querySelectorAll('cds-card-action'))
+    );
+    expect(items.map((i) => i.label)).to.deep.equal([
+      'From aria',
+      'Disabled one',
+      'Action 3',
+    ]);
+    expect(items.map((i) => i.disabled)).to.deep.equal([false, true, false]);
+
+    actions._handleMenuItemClick(items[0].el);
+    expect(clicks).to.equal(1);
+  });
+
+  it('should collapse text actions into the overflow menu when they do not fit', async () => {
+    const el = await fixture(html`
+      <div style="width: 360px">
+        <cds-card>
+          <cds-card-header id="hdr">
+            <cds-card-title>Usage metrics</cds-card-title>
+            <cds-card-actions slot="actions">
+              <cds-card-action>
+                <cds-button kind="tertiary" size="sm">Export</cds-button>
+              </cds-card-action>
+              <cds-card-action>
+                <cds-button kind="tertiary" size="sm">Share</cds-button>
+              </cds-card-action>
+              <cds-card-action>
+                <cds-button kind="tertiary" size="sm">View report</cds-button>
+              </cds-card-action>
+            </cds-card-actions>
+          </cds-card-header>
+        </cds-card>
+      </div>
+    `);
+    const actions = el.querySelector('cds-card-actions');
+    await actions.updateComplete;
+    await new Promise((r) => setTimeout(r, 300));
+    await actions.updateComplete;
+
+    // Items must keep their natural width instead of being flex-compressed.
+    const items = Array.from(actions.querySelectorAll('cds-card-action'));
+    const button = items[2].querySelector('cds-button');
+    expect(items[2].getBoundingClientRect().width).to.be.at.least(
+      button.getBoundingClientRect().width - 1
+    );
+    // Visible actions must not overlap each other.
+    const visible = items
+      .filter((i) => !i.hasAttribute('data-hidden'))
+      .map((i) => i.getBoundingClientRect());
+    for (let i = 1; i < visible.length; i++) {
+      expect(visible[i].left).to.be.at.least(visible[i - 1].right - 1);
+    }
+    // Everything beyond the cap is reachable through the overflow menu.
+    expect(actions.shadowRoot.querySelector('cds-overflow-menu')).to.exist;
   });
 });
