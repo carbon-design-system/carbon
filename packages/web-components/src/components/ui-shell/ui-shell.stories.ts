@@ -132,13 +132,13 @@ const StoryContent = ({ useResponsiveOffset = true }) => {
               <br />
               <br />
               To better understand the purpose and function of the UI shell,
-              consider the “shell” of MacOS, which contains the Apple menu,
+              consider the “shell” of macOS, which contains the Apple menu,
               top-level navigation, and universal, OS-level controls at the top
               of the screen, as well as a universal dock along the bottom or
               side of the screen. The Carbon UI shell is roughly analogous in
               function to these parts of the Mac UI. For example, the app
               switcher portion of the shell can be compared to the dock in
-              MacOS.
+              macOS.
             </p>
             <h2 style="margin: 30px 0px">Header responsive behavior</h2>
             <p>
@@ -192,7 +192,7 @@ export const FixedSideNav = {
   args: { ...sideNavArgs },
   argTypes: { ...sideNavArgTypes },
   render: ({ expanded, sideNavAriaLabel }) => {
-    const result = html`
+    return html`
       <style>
         ${styles}
       </style>
@@ -250,9 +250,6 @@ export const FixedSideNav = {
       </cds-side-nav>
       ${StoryContent({ useResponsiveOffset: false })}
     `;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-    (result as any).hasMainTag = true;
-    return result;
   },
 };
 
@@ -261,7 +258,7 @@ export const FixedSideNavDivider = {
   args: { ...sideNavArgs },
   argTypes: { ...sideNavArgTypes },
   render: ({ expanded, sideNavAriaLabel }) => {
-    const result = html`
+    return html`
       <style>
         ${styles}
       </style>
@@ -318,9 +315,6 @@ export const FixedSideNavDivider = {
       </cds-side-nav>
       ${StoryContent({ useResponsiveOffset: false })}
     `;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-    (result as any).hasMainTag = true;
-    return result;
   },
 };
 
@@ -329,7 +323,7 @@ export const FixedSideNavIcons = {
   args: { ...sideNavArgs },
   argTypes: { ...sideNavArgTypes },
   render: ({ expanded, sideNavAriaLabel }) => {
-    const result = html`
+    return html`
       <style>
         ${styles}
       </style>
@@ -390,9 +384,6 @@ export const FixedSideNavIcons = {
       </cds-side-nav>
       ${StoryContent({ useResponsiveOffset: false })}
     `;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-    (result as any).hasMainTag = true;
-    return result;
   },
 };
 
@@ -895,7 +886,7 @@ export const HeaderBaseWSideNav = {
     platformPrefix,
     sideNavAriaLabel,
   }) => {
-    const result = html`
+    return html`
       <style>
         ${styles}
       </style>
@@ -964,9 +955,6 @@ export const HeaderBaseWSideNav = {
       </cds-header>
       ${StoryContent({ useResponsiveOffset: true })}
     `;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-    (result as any).hasMainTag = true;
-    return result;
   },
 };
 
@@ -1210,7 +1198,7 @@ export const SideNavWLargeSideNavItems = {
   args: { ...sideNavArgs },
   argTypes: { ...sideNavArgTypes },
   render: ({ expanded, sideNavAriaLabel }) => {
-    const result = html`
+    return html`
       <style>
         ${styles}
       </style>
@@ -1254,9 +1242,6 @@ export const SideNavWLargeSideNavItems = {
       </cds-side-nav>
       ${StoryContent({ useResponsiveOffset: true })}
     `;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-    (result as any).hasMainTag = true;
-    return result;
   },
 };
 
