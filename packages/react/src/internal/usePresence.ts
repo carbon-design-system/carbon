@@ -76,12 +76,14 @@ export const usePresence = (
 
     let cancelled = false;
 
-    Promise.all(animations.map((animation) => animation.finished)).finally(
-      () => {
+    // `finished` rejects with an `AbortError` when an animation is cancelled
+    // (e.g. the element is removed mid-exit), which should not go unhandled.
+    Promise.all(animations.map((animation) => animation.finished))
+      .catch(() => {})
+      .finally(() => {
         if (cancelled) return;
         setExitState('finished');
-      }
-    );
+      });
 
     return () => {
       cancelled = true;
