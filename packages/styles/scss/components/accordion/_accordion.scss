@@ -165,6 +165,10 @@ $content-padding: 0 0 0 $spacing-05 !default;
 
     transition: all $duration-fast-02 motion(standard, productive);
 
+    @media screen and (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+
     & {
       flex: 0 0 1rem;
       block-size: 1rem;
@@ -197,6 +201,12 @@ $content-padding: 0 0 0 $spacing-05 !default;
     transition: all $duration-fast-02 motion(entrance, productive)
       allow-discrete;
     writing-mode: horizontal-tb;
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      // Keep a near-zero duration instead of removing the transition so that
+      // `transitionend` still fires for `AccordionItem`'s `handleAnimationEnd`
+      transition-duration: 0.01ms;
+    }
   }
 
   .#{$prefix}--accordion__content {
