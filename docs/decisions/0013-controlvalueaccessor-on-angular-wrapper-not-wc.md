@@ -37,8 +37,8 @@ top for `[formControl]` and `[(ngModel)]` compatibility.
 
 Concretely: each form-input wrapper class implements `ControlValueAccessor`,
 provides itself via `NG_VALUE_ACCESSOR`, and wires `writeValue` /
-`registerOnChange` / `registerOnTouched` to the underlying `cds-ng-*` element's
-value attribute and WC change events.
+`registerOnChange` / `registerOnTouched` to its host element (the web component,
+per ADR 0015) and the WC change events.
 
 Option 1 was rejected for two reasons:
 

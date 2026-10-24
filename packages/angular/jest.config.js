@@ -13,23 +13,22 @@ export default {
   testMatch: [
     '<rootDir>/src/**/__tests__/**/*.spec.ts',
     '<rootDir>/src/**/*.spec.ts',
+    '<rootDir>/legacy/**/__tests__/**/*.spec.ts',
+    '<rootDir>/legacy/**/*.spec.ts',
   ],
+  modulePathIgnorePatterns: ['<rootDir>/dist/'],
   testPathIgnorePatterns: [
     '/node_modules/',
     '/esm2022/',
     '/fesm2022/',
     '/dist/',
   ],
-  // e2e tests run via Playwright, not Jest
+  // e2e tests run via Playwright, not Jest.
+  // The real `@carbon/web-components` build (`es/`) is used, not stubs, so
+  // specs can assert on actual web component behavior. CI builds the package
+  // first; locally run `yarn workspace @carbon/web-components build`.
   moduleNameMapper: {
     '\\.(css|scss)$': 'identity-obj-proxy',
-    // @carbon/web-components ES output is not fully built in the workspace yet.
-    // Stub WC classes and the registration utility so Angular layer tests can
-    // compile without requiring the built dist.
-    '@carbon/web-components/es/globals/register\\.js':
-      '<rootDir>/src/__mocks__/@carbon/web-components/register.ts',
-    '@carbon/web-components/es/components/(.*)':
-      '<rootDir>/src/__mocks__/@carbon/web-components/component.ts',
   },
   transformIgnorePatterns: [
     '<rootDir>/node_modules/(?!@carbon/web-components|lit|@lit|@floating-ui)',

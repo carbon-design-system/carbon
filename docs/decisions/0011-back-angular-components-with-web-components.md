@@ -65,37 +65,72 @@ Option 1 was rejected because it perpetuates the maintenance lag. Every feature
 added to `@carbon/react` and `@carbon/web-components` would require a separate
 Angular implementation. CCA's history shows this gap compounds over time.
 
-Option 3 was rejected for two reasons:
+Option 3 (full code generation across all components) was originally evaluated
+and narrowed:
 
-- **It cannot preserve the CCA API.** Generators (for example Stencil's Angular
-  output target, or UI5's Angular wrappers) produce a 1:1 proxy of the web
-  component's API. Consumers would use slot-based, WC-shaped templates instead
-  of the CCA-shaped inputs they use today, such as `[items]` arrays or CCA-style
-  `@Input()` shapes. That would force teams to rewrite templates and would break
-  the selector and template continuity recorded in
-  [ADR 0014](0014-preserve-cds-consumer-facing-selectors.md). Keeping the
-  existing CCA API, and so lowering the migration cost for existing teams, is
-  the main reason the wrappers are hand-written.
-- **It requires new shared tooling** that does not yet exist and introduces a
-  build-time dependency that would slow down iteration.
+- **Pure 1:1 generators cannot preserve the legacy CCA API** for components that
+  require specialized Angular adapters (such as `[items]` array slot
+  materialization, custom CVA value mappings, or Angular-managed state machines
+  like `FileUploader`).
+- However, **components that never existed in `carbon-components-angular`** (the
+  IBM Products / Enterprise catalog, AI components, fluid form variants, and new
+  layout primitives — comprising ~65% of the total component catalog) carry
+  **zero legacy compatibility burden**. Their API is naturally 1:1 with
+  `@carbon/web-components`.
+- Furthermore, pure Tier 1 primitives (Checkbox, Toggle, Tag, Loading, etc.) are
+  already direct 1:1 attribute and event proxies to the backing Web Component.
 
-The cost of this choice is maintenance. Each wrapper contains hand-written
-mapping from the CCA-shaped API to WC slots, attributes and events, so wrapper
-drift is a risk that a generated approach would not have. Wrappers are therefore
-kept thin (see Consequences). A hybrid, where the mechanical parts (attribute
-reflection, `@Output` re-emission, `ControlValueAccessor` boilerplate) are
-generated and only the CCA-compatibility layer is hand-written, is not part of
-this decision. It can be revisited if the maintenance burden proves significant.
+### Automated Core & `@carbon/angular/legacy` Architecture
+
+To achieve both **zero legacy drift for new components** and **zero friction for
+migrating teams**, `@carbon/angular` structures the package with two entry
+points:
+
+1. **`@carbon/angular` (Root / Core — 100% Automated Wrappers):**
+
+   - Generated directly from `@carbon/web-components`' Custom Elements Manifest
+     (CEM / `custom-elements.json`).
+   - Pure 1:1 reflection of the Web Component API across all 110+ component
+     families (all 26+ IBM Products components, AI components, fluid forms, and
+     core primitives).
+   - Generates `defineCustomElement` registration under the default `cds-*` tag,
+     `@Component` standalone declarations whose host element is the web
+     component (ADR 0015), typed `@Input()` bindings, `@Output()` bindings for
+     custom events, and standard `ControlValueAccessor` boilerplate for
+     `formAssociated` elements.
+   - Zero maintenance lag; automatically tracks new Carbon Web Component
+     releases.
+
+2. **`@carbon/angular/legacy` (Secondary Entry Point — Deprecated Migration
+   Adapters):**
+   - Contains specialized, hand-crafted wrappers for the subset of components
+     where `carbon-components-angular` had divergent, non-1:1 API conventions
+     (such as `[items]` array slot materialization in `Dropdown` / `Select`,
+     `notificationObj` in `Notification`, or Angular-managed state in
+     `FileUploader`).
+   - Every component in `/legacy` shares the same consumer-facing `cds-*`
+     selector. Whether the legacy and core layers can coexist on one page is an
+     open question in ADR 0015.
+   - All legacy wrappers are marked `@deprecated` with migration JSDoc pointing
+     to the corresponding `@carbon/angular` core equivalent.
+   - Teams migrating from CCA can update their package imports to
+     `@carbon/angular/legacy` without template rewrites, and incrementally
+     modernize individual components to `@carbon/angular` over time.
 
 ## Consequences
 
-- `@carbon/angular` tracks `@carbon/react` feature-for-feature automatically:
-  component coverage grows from ~35 to ~87 at launch, and every future WC
-  addition is available to Angular consumers with a wrapper rather than a full
-  reimplementation.
+- `@carbon/angular` tracks `@carbon/react` and `@carbon/web-components`
+  feature-for-feature automatically: component coverage grows from ~35 in CCA to
+  110+ component families (297+ backing custom elements).
+- Greenfield consumers use pure, automated 1:1 wrappers from `@carbon/angular`
+  with zero legacy baggage.
+- Migrating consumers use `@carbon/angular/legacy` for low-friction drop-in
+  compatibility, modernizing to `@carbon/angular` at their own pace.
+- Time to implement the package is reduced from ~5–6.5 months to ~2.5–3 months,
+  as ~70+ wrapper families are generated automatically from CEM metadata.
 - The Angular layer is thin and predictable. Component wrappers are 50–200
   lines. The entire test strategy reduces to asserting that `@Input()` bindings
-  are reflected as the correct HTML attributes on the inner `cds-ng-*` element.
+  reach the web component on the wrapper's host element.
 - All behaviour correctness (keyboard, ARIA, animation, form participation) is
   guaranteed by the WC test suite, not the Angular test suite. The Angular suite
   asserts the Angular ↔ WC interface only.

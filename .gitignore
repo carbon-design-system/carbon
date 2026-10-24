@@ -95,3 +95,4 @@ playwright-report
 
 # Generated DTCG color palette (built from @carbon/colors at build time)
 packages/themes/src/dtcg/color-palette.json
+/packages/angular/src/generated/

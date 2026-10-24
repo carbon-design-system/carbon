@@ -5,5 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// Public API barrel — components exported here are part of the public surface.
-export { ButtonComponent } from './components/Button';
+// Public API barrel — exports all automated 1:1 Carbon Web Component wrappers.
+export * from './generated';

@@ -8,9 +8,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DISPLAY_NAMEComponent } from '../DISPLAY_NAME.component';
 
-describe('DISPLAY_NAMEComponent', () => {
-  let fixture: ComponentFixture<DISPLAY_NAMEComponent>;
+describe('Legacy DISPLAY_NAMEComponent', () => {
   let component: DISPLAY_NAMEComponent;
+  let fixture: ComponentFixture<DISPLAY_NAMEComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -22,9 +22,7 @@ describe('DISPLAY_NAMEComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create the legacy component', () => {
     expect(component).toBeTruthy();
   });
-
-  // TODO: add Layer 1 tests (input reflection, output emission, CVA)
 });

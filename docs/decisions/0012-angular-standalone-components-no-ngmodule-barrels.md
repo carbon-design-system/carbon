@@ -67,10 +67,11 @@ mechanical part of this migration for consumers.
   `import { ButtonModule } from 'carbon-components-angular'`.
 - Angular CLI's tree-shaking will only bundle components that are actually
   imported, reducing bundle size for apps that use a subset of the library.
-- `CUSTOM_ELEMENTS_SCHEMA` — required to suppress Angular's unknown-element
-  warnings for the `cds-ng-*` internal WC tags — is declared per component
-  wrapper class, scoped to that component only. It does not bleed into consumer
-  `NgModule` schemas.
+- `CUSTOM_ELEMENTS_SCHEMA`, if a wrapper needs it to suppress Angular's
+  unknown-element warnings, is declared per component wrapper class, scoped to
+  that component only. It does not bleed into consumer `NgModule` schemas. With
+  ADR 0015 the wrapper template contains only `<ng-content />`, and whether the
+  schema is still needed has not been checked.
 - The `cca-update-module-imports` codemod handles the import path change. The
   selector rename (`ButtonModule` → `ButtonComponent`) cannot be automated for
   all cases and requires a one-line manual edit per import site.

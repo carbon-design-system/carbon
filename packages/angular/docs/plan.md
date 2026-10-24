@@ -1,11 +1,40 @@
 # `@carbon/angular` — Planning Document
 
-**Status:** Pre-implementation planning **Last updated:** 2026-09 (updated post
-PR #23097 — v3 registration API, codemods, CEM, and ADR 0009 — IBM Products
-merge into Carbon Core) **Location in monorepo:** `packages/angular/` **Package
-name:** `@carbon/angular` **Versioning:** `0.0.0-prerelease.0` → `1.0.0-rc.0`
-(v12 RC) → `1.0.0` (v12 GA) **Angular component selector prefix:** `cds-*`
-(consumer-facing); `cds-ng-*` (internal WC registration)
+**Status:** Pre-implementation planning **Last updated:** 2026-09 (updated with
+Automated Core Wrapper Generator + `@carbon/angular/legacy` secondary entry
+point) **Location in monorepo:** `packages/angular/` **Package names:**
+`@carbon/angular` (Core / Automated) & `@carbon/angular/legacy` (CCA
+Compatibility) **Versioning:** `0.0.0-prerelease.0` → `1.0.0-rc.0` (v12 RC) →
+`1.0.0` (v12 GA) **Angular component selector prefix:** `cds-*` (both selector
+and WC tag — ADR 0015)
+
+---
+
+## Architecture: Dual Entry Points (`@carbon/angular` & `@carbon/angular/legacy`)
+
+`@carbon/angular` separates modern greenfield consumption from migration
+compatibility:
+
+1. **`@carbon/angular` (Core / Root Entry Point — 100% Automated):**
+
+   - Pure 1:1 Angular wrappers generated automatically from
+     `@carbon/web-components`' Custom Elements Manifest (CEM /
+     `custom-elements.json`).
+   - Covers all 110+ component families (297+ custom elements) with zero manual
+     adapter lag.
+   - Ideal for greenfield apps and modernized features.
+
+2. **`@carbon/angular/legacy` (Secondary Entry Point — Deprecated Migration
+   Adapters):**
+   - Houses hand-crafted, CCA-compatible wrappers for components with divergent
+     legacy APIs (e.g., `[items]` array slot materialization in `Dropdown` /
+     `Select`, `notificationObj` in `Notification`, and `FileUploader` state
+     tracking).
+   - Exports with the same `cds-*` selectors. Because Angular standalone
+     components resolve selectors per-template within each component's `imports`
+     array, there are no selector collisions.
+   - Marked `@deprecated` with `@see` pointers to encourage staged migration to
+     `@carbon/angular`.
 
 ---
 
@@ -140,38 +169,36 @@ provide it (see `FileUploader` state tracking, `Accordion` `closeOthers`,
 packages/
 └── angular/                              ← @carbon/angular
     ├── package.json                      ← name: "@carbon/angular", version: "0.0.0-prerelease.0"
-    ├── ng-package.json                   ← ng-packagr entry point
+    ├── ng-package.json                   ← Root ng-packagr entry point (@carbon/angular)
     ├── tsconfig.json                     ← Angular + strict compiler options
     ├── .storybook/
     │   ├── main.ts                       ← @storybook/angular
     │   └── preview.ts
     ├── tasks/
+    │   ├── generate-wrappers/            ← Code generator: CEM -> Angular wrappers & tests
     │   └── scaffold-component/
-    │       ├── index.js                  ← token-substitution scaffold for new components
-    │       └── templates/
-    │           ├── index.ts
-    │           ├── components/
-    │           │   └── DISPLAY_NAME.component.ts
-    │           ├── __stories__/
-    │           │   └── DISPLAY_NAME.stories.ts
-    │           └── __tests__/
-    │               └── DISPLAY_NAME.spec.ts
-    └── src/
-        ├── index.ts                      ← public barrel: re-exports all components
-        └── components/
-            ├── Button/
-            │   ├── Button.component.ts
-            │   └── index.ts
-            ├── Modal/
-            ├── Dropdown/
-            ├── ...
+    ├── src/                              ← Root entry point (@carbon/angular — 100% automated 1:1 WC wrappers)
+    │   ├── index.ts                      ← Barrel re-exporting all generated components
+    │   └── components/
+    │       ├── Button/
+    │       ├── Modal/
+    │       ├── Dropdown/
+    │       └── ... (110+ component families generated from CEM)
+    └── legacy/                           ← Secondary entry point (@carbon/angular/legacy)
+        ├── ng-package.json               ← Secondary ng-packagr entry point
+        └── src/
+            ├── index.ts                  ← Barrel exporting deprecated CCA-compatible wrappers
+            └── components/
+                ├── Dropdown/             ← [items] array adapter -> WC slots
+                ├── Select/               ← [items] array adapter
+                ├── FileUploader/         ← Angular-managed file state machine
+                └── ... (~15-20 specialized migration wrappers)
 ```
 
-All components are part of the single `@carbon/angular` package. There are no
-per-component sub-packages. Consumers import from the package root or from
-secondary entry points if configured in `ng-package.json` (e.g.
-`@carbon/angular/button`). Secondary entry points are optional for v1 and can be
-added later to enable more granular tree-shaking.
+`ng-packagr` builds both the root entry point (`@carbon/angular`) and the
+secondary entry point (`@carbon/angular/legacy`). Consumers import from
+`@carbon/angular` for greenfield code or `@carbon/angular/legacy` for
+low-friction migration.
 
 ---
 
@@ -300,29 +327,20 @@ This is the v3 registration API. Key changes shipped in that PR:
 `@carbon/angular` can use `defineCustomElement` right now against the current
 `@carbon/web-components` release — no `git:` branch dep needed. The WC peer dep
 can be pinned to the first release that includes PR #23097. The registration
-pattern works as follows:
+pattern works as follows (ADR 0015 — host-is-WC):
 
 ```ts
 import CDSModal from '@carbon/web-components/es/components/modal/modal.js';
 import { defineCustomElement } from '@carbon/web-components/es/globals/register.js';
 
-// Register under internal tag name. defineCustomElement is idempotent.
-// If the class already self-registered under 'cds-modal' (current v2 behaviour),
-// this registers a transparent subclass under 'cds-ng-modal' instead.
-defineCustomElement(CDSModal, { name: 'cds-ng-modal' });
-// Angular template uses <cds-ng-modal> internally.
-// Consumer-facing Angular selector remains <cds-modal>.
+// Register under the real tag — no renaming (ADR 0015).
+defineCustomElement(CDSModal);
+// Angular selector is also 'cds-modal'; host element IS the web component.
 ```
-
-The subclass fallback in `defineCustomElement` handles the transitional period:
-if the class has already self-registered (v2 `carbonElement` behaviour), calling
-`defineCustomElement` with a custom name registers an identical subclass under
-the custom name. Elements remain `instanceof CDSModal`.
 
 **`es-custom` is superseded for `@carbon/angular`'s purposes.** For
 `@carbon/angular`, neither `es-custom` nor `create-prefixed-build` is needed —
-`defineCustomElement` with a custom name provides exactly the right granularity
-per-component.
+`defineCustomElement` (no custom name) provides exactly the right contract.
 
 **Registration coverage audit:** PR #23097 also shipped
 `packages/web-components/tasks/registration-coverage.mjs` — a CI tool that
@@ -333,65 +351,44 @@ elements each barrel registers. The v3 barrel discipline — every barrel
 registers exactly the elements it renders, no transitive leakage — is the same
 contract `@carbon/angular` wrapper barrels should follow.
 
-### Internal WC tag prefix: `cds-ng-*`
+### WC registration pattern per component (ADR 0015)
 
-The internal tag prefix is **`cds-ng-*`** (e.g. `cds-ng-modal`,
-`cds-ng-button`).
+**Note:** An earlier version of this plan used a `cds-ng-*` internal tag prefix.
+That approach was superseded by ADR 0015 (host-is-WC). The section below
+reflects the current design.
 
-Rationale:
-
-- **`cds-ng-*` is unoccupied.** Confirmed: neither `@carbon/web-components` nor
-  `carbon-components-angular` use any `cds-ng-*` tag names. There is no
-  collision risk.
-- **Self-documenting.** `cds-ng-modal` reads as "the Carbon WC modal element,
-  used internally by the Angular wrapper" — unambiguous to anyone reading the
-  source.
-- **Not consumer-facing.** These tags appear only in Angular component
-  templates. Consumers never write `<cds-ng-modal>` directly; they write
-  `<cds-modal>` and get the Angular wrapper.
-
-### WC registration pattern per component
-
-Each Angular wrapper component registers its backing WC element as a side effect
-of its own module import, using the pure class + `cds-ng-*` tag name:
+Each Angular wrapper component registers its backing WC element under the real
+tag as a side effect of its own module import:
 
 ```ts
-// modal.component.ts
+// modal.component.ts — generated by tasks/generate-wrappers/index.js
 import CDSModal from '@carbon/web-components/es/components/modal/modal.js';
-import CDSModalHeader from '@carbon/web-components/es/components/modal/modal-header.js';
-import CDSModalBody from '@carbon/web-components/es/components/modal/modal-body.js';
-import CDSModalFooter from '@carbon/web-components/es/components/modal/modal-footer.js';
 import { defineCustomElement } from '@carbon/web-components/es/globals/register.js';
 
-// Internal tag names — consumers never write these
-defineCustomElement(CDSModal,       { name: 'cds-ng-modal' });
-defineCustomElement(CDSModalHeader, { name: 'cds-ng-modal-header' });
-defineCustomElement(CDSModalBody,   { name: 'cds-ng-modal-body' });
-defineCustomElement(CDSModalFooter, { name: 'cds-ng-modal-footer' });
+// Real tag — no renaming. Host element IS the web component.
+defineCustomElement(CDSModal);
 
 @Component({
-  selector: 'cds-modal',          // consumer-facing: matches current carbon-components-angular
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  template: `
-    <cds-ng-modal [open]="open" ...>
-      <cds-ng-modal-header ...>...</cds-ng-modal-header>
-      <cds-ng-modal-body><ng-content /></cds-ng-modal-body>
-      <cds-ng-modal-footer ...>...</cds-ng-modal-footer>
-    </cds-ng-modal>
-  `
+  selector: 'cds-modal', // same as the WC tag
+  template: `<ng-content />`,
+  standalone: true,
 })
-export class ModalComponent { ... }
+export class ModalComponent implements OnChanges {
+  @Input() open = false;
+  private readonly _el = inject(ElementRef<HTMLElement>);
+  ngOnChanges(changes: SimpleChanges): void {
+    for (const key of Object.keys(changes)) {
+      (this._el.nativeElement as any)[key] = changes[key].currentValue;
+    }
+  }
+}
 ```
 
-Consumer selector (`cds-modal`) ≠ internal WC tag (`cds-ng-modal`). No
-recursion, no `es-custom`, no import-order fragility.
+Selector (`cds-modal`) === WC tag. Host IS the web component. No inner element,
+no `CUSTOM_ELEMENTS_SCHEMA`, no `es-custom`.
 
-**`@carbon/web-components` peer dep:** `defineCustomElement` is available now
-(merged via PR #23097, commit `dd87f84`). Pin to the first
-`@carbon/web-components` release that includes that merge. No `git:` branch
-dependency is required. Until v3 pure class exports land, the subclass fallback
-path in `defineCustomElement` handles the case where a WC class has already
-self-registered; `cds-ng-*` tags will work correctly in either case.
+**`@carbon/web-components` peer dep:** `defineCustomElement` is available
+(merged via PR #23097, commit `dd87f84`).
 
 ---
 
@@ -433,12 +430,13 @@ Introduction/
   Form participation             ← packages/angular/.storybook/docs/form-participation.mdx
   Component registration         ← packages/angular/.storybook/docs/component-registration.mdx
 
-Components/                      ← Core + Migrated IBM Products, unified alphabetically
+Components/                      ← 100% Automated 1:1 WC wrappers (@carbon/angular), unified alphabetically
   Accordion/
   ActionSet/
   Button/
   Card/
   DataTable/
+  Dropdown/
   Modal/
   PageHeader/
   SidePanel/
@@ -456,6 +454,16 @@ Examples/                        ← Enterprise pattern demonstrations
   DeleteAndRemove/
   Export/
   ImportAndUpload/
+
+Legacy carbon-components-angular/  ← Deprecated CCA compatibility adapters (@carbon/angular/legacy)
+  Overview                          ← packages/angular/.storybook/docs/legacy-overview.mdx
+  Accordion/
+  DataTable/
+  Dropdown/
+  FileUploader/
+  Notification/
+  Select/
+  ...
 ```
 
 Storybook sidebar order is controlled by `storySort` in `.storybook/preview.ts`:
@@ -470,9 +478,21 @@ storySort: {
     'Components',
     'Utilities',
     'Examples',
+    'Legacy carbon-components-angular',
   ],
 },
 ```
+
+#### Story authoring policy (ADR 0019)
+
+Story files for `@carbon/angular` core wrappers are **scaffolded as stubs by the
+wrapper generator** then completed by maintainers. The generator emits a minimal
+but runnable stub with a `Default` story, correct import path, and
+`// TODO(parity):` comments for each WC story not yet covered. Story files for
+`@carbon/angular/legacy` are **fully hand-crafted** alongside their adapter
+component — no generation occurs. See
+[ADR 0019](../../../docs/decisions/0019-angular-storybook-story-authoring.md)
+for the full rationale, including why full automation was rejected.
 
 #### Story parity with `@carbon/web-components`
 
@@ -483,7 +503,7 @@ guideline.
 **Rule:** For each named export in
 `packages/web-components/src/components/<name>/<name>.stories.ts`, there must be
 an identically named export in
-`packages/angular/src/components/<Name>/__stories__/<Name>.stories.ts`.
+`packages/angular/src/stories/<Name>/__stories__/<Name>.stories.ts`.
 
 This gives consumers a side-by-side reference when comparing the two packages
 and keeps the Angular Storybook honest about feature coverage. It also surfaces
@@ -586,81 +606,45 @@ to the migration page. It does not duplicate migration content.
 
 ## 6. Component implementation plan
 
-### Development methodology: test-driven
+### Development methodology: Automated generation + Hand-crafted legacy adapters
 
-`@carbon/angular` is built TDD. The test suite is written first against the
-specified API contract; the component wrapper is implemented until the tests
-pass. This is viable here because the Angular layer has an unusually narrow,
-well-defined contract — every test can be fully specified from the `@Input()` /
-`@Output()` API design before any implementation exists.
+`@carbon/angular` uses an automated wrapper generator pipeline for
+`@carbon/angular` core, paired with targeted manual adapter authoring in
+`@carbon/angular/legacy`.
 
-**Workflow per component:**
+#### 1. Core `@carbon/angular` Pipeline (100% Automated from CEM)
 
-1. **Scaffold the component files:** Run the scaffold task to generate
-   boilerplate files under `src/components/<DisplayName>/`:
+The generator script (`packages/angular/tasks/generate-wrappers/`) reads the
+`custom-elements.json` manifest emitted by `@carbon/web-components` and
+generates:
 
-   ```bash
-   yarn workspace @carbon/angular scaffold:component <DisplayName>
-   ```
+- Standalone component classes
+  (`@Component({ selector: 'cds-<name>', template: '<ng-content />' })`)
+- `defineCustomElement` registration under the real tag (ADR 0015 — no
+  `cds-ng-*` renaming)
+- Typed `@Input()` properties forwarded to the host element in `ngOnChanges`
+- Boolean `@Input()` using `booleanAttribute` (so `<cds-button disabled>` works)
+- `@Output()` event emitters for **custom events only** (not native DOM events —
+  ADR 0015 §4)
+- `ControlValueAccessor` (CVA) providers for form-associated custom elements
+- Automated Layer 1 Jest unit tests (`<Name>.spec.ts`) asserting property
+  forwarding
 
-   This generates:
+Because the generator operates on the CEM source of truth, **over 110+ component
+families (297+ custom elements)** are generated and tested automatically.
 
-   - `<DisplayName>.component.ts` — Standalone Angular wrapper class with
-     `cds-ng-*` custom element template
-   - `index.ts` — Component barrel export
-   - `__tests__/<DisplayName>.spec.ts` — Layer 1 Jest test starter
-   - `__stories__/<DisplayName>.stories.ts` — Storybook stories starter
+#### 2. Secondary Entry Point `@carbon/angular/legacy` (Hand-crafted migration adapters)
 
-2. **Write Layer 1 Jest tests first** (red). Derive test cases from:
+For components where `carbon-components-angular` had divergent, non-1:1 APIs,
+specialized compatibility wrappers live in `legacy/src/components/`:
 
-   - **The WC test suite for that component** — every scenario in
-     `packages/web-components/src/components/<name>/__tests__/<name>-test.js` is
-     translated into an equivalent Angular attribute-reflection test (see §13 —
-     WC test mirroring).
-   - The CCA spec file for that component (scenarios rewritten for our API
-     boundary)
-   - The WC package's `.d.ts` for any inputs/outputs not yet covered by the WC
-     tests
-   - Any new inputs added in §8 (DatePicker) or §7 (universal breaks/additions)
-
-3. **Write Layer 2 Playwright tests** (red). Derive interaction scenarios from:
-
-   - CCA spec keyboard/interaction cases that cannot run in jsdom
-   - The WC package's own test suite for that element (confirms expected WC
-     behaviour our wrapper depends on)
-
-4. **Implement the component** until all Layer 1 and Layer 2 tests pass (green):
-
-   - Register the backing custom element using `defineCustomElement` with the
-     `cds-ng-*` prefix.
-   - Forward all inputs and attribute bindings to the inner `cds-ng-*` custom
-     element.
-   - Implement `ControlValueAccessor` (CVA) if the component is form-associated.
-   - Export the component from the root package barrel
-     (`packages/angular/src/index.ts`).
-
-5. **Complete the Storybook stories and docs** with a `play()` function,
-   maintaining one-for-one parity with the WC story file (see §5 — Story parity
-   rule). Every story exported from
-   `packages/web-components/src/components/<name>/<name>.stories.ts` must have a
-   matching named export in the Angular story file. Angular-only stories (CVA
-   demos, `ReactiveFormsModule` usage) are appended after the parity block. Any
-   WC story that cannot yet be reproduced must be tracked as a
-   `// TODO(parity):` comment in the Angular story file. Confirm the IBM Equal
-   Access checker (`storybook-addon-accessibility-checker`) passes — this is
-   Layer 3.
-
-6. **Refactor** — clean up implementation with all tests still green.
-
-This order means the test suite doubles as a living specification. Before any
-line of component code is written, the full set of acceptance criteria exists as
-failing tests.
-
-**Pre-implementation sprint (before Tier 1 coding begins):** Write the complete
-Layer 1 Jest test suite and Layer 2 Playwright test stubs for all components,
-based on CCA scenarios + WC `.d.ts` files. This sprint produces ~100+ failing
-tests that define the full API contract. Implementation tiers then work through
-making them pass in order.
+- **`Dropdown` / `Select` / `MultiSelect`:** Accepts `[items]` array and
+  materializes slot children.
+- **`FileUploader`:** Angular-managed file state machine.
+- **`DataTable`:** `[rows]` / `[columns]` data binding with `cellTemplate`
+  projection.
+- **`Tabs` / `Accordion`:** Compatibility adapters with `closeOthers` support.
+- **`Notification`:** Compatibility wrapper accepting `notificationObj` model.
 
 ---
 
@@ -1081,27 +1065,20 @@ merged to `main`; see §4 for full detail):
 
 ## 10. Effort estimate
 
-| Phase                                                                                                                                                                                      | Scope          | Estimate                                  |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------- | ----------------------------------------- |
-| Package scaffolding (ng-packagr, Storybook, Jest, Playwright config, barrel)                                                                                                               | Toolchain      | 2–3 days                                  |
-| PoC: Button — all 3 test layers red → green → Storybook a11y                                                                                                                               | PoC            | 2–3 days                                  |
-| **Pre-implementation test sprint** — Layer 1 Jest suite + Layer 2 Playwright stubs for all components (~300+ failing tests)                                                                | **TDD**        | **3–4 weeks**                             |
-| Tier 1 — Thin wrappers green (~26 components, Core + IBM Products primitives)                                                                                                              | Implementation | 2–3 weeks                                 |
-| Tier 2 — Slot materialisation green (~20 components, Core + IBM Products composite)                                                                                                        | Implementation | 3–4 weeks                                 |
-| Tier 3 — Compound components & adapters (Tabs, Accordion, ComboBox, Modal, FileUploader, UI Shell, Card, SidePanel, Tearsheet, PageHeader, Dialog, Coachmark, NotificationsPanel, Resizer) | Implementation | 6–8 weeks                                 |
-| Tier 4 — DataTable data adapter green                                                                                                                                                      | Implementation | 2–3 weeks                                 |
-| Tier 5 — Pure Angular & WC follow-ups (Stepper, ScrollGradient, TagOverflow, AddSelect)                                                                                                    | Implementation | 1–2 weeks                                 |
-| Layer 2 Playwright tests green — Tier 3–4 keyboard/interaction (~50 scenarios)                                                                                                             | Testing        | 2 weeks                                   |
-| Layer 3 Storybook `play()` + IBM Equal Access on all stories                                                                                                                               | Testing        | 1.5–2 weeks                               |
-| **Total**                                                                                                                                                                                  |                | **~5–6.5 months (1 engineer, full-time)** |
+| Phase                                                                                                                                  | Scope               | Estimate                                  |
+| -------------------------------------------------------------------------------------------------------------------------------------- | ------------------- | ----------------------------------------- |
+| Package scaffolding & `@carbon/angular/legacy` secondary entry point config                                                            | Toolchain           | 2–3 days                                  |
+| Automated wrapper generator (`tasks/generate-wrappers/`) & PoC validation                                                              | Generator Tooling   | 3–4 days                                  |
+| Automated Core Generation (~110+ components, 297+ custom elements, Layer 1 specs)                                                      | Core Implementation | 1 week                                    |
+| Specialized Legacy Adapters in `@carbon/angular/legacy` (`Dropdown`, `Select`, `FileUploader`, `DataTable`, `Tabs`, `Accordion`, etc.) | Legacy Adapters     | 3–4 weeks                                 |
+| Layer 2 Playwright tests & Layer 3 Storybook a11y (`play()` + IBM Equal Access)                                                        | Integration & A11y  | 2–3 weeks                                 |
+| Migration support (Codemods: CCA → `/legacy` and `/legacy` → Core + documentation)                                                     | Tooling & Guides    | 1–2 weeks                                 |
+| **Total**                                                                                                                              |                     | **~2.5–3 months (1 engineer, full-time)** |
 
-> The pre-implementation test sprint is the key TDD enabler — it produces ~300+
-> failing tests that define the full API contract before any component code is
-> written. Implementation tiers then work through making them green in order.
-> The estimate accounts for the full combined Core Carbon + IBM Products catalog
-> (~70+ wrapper directories covering ~110+ component variants and 297 backing
-> custom elements). Post-Milestone 2 implementation can be parallelized across 2
-> engineers to achieve delivery within ~3–3.5 calendar months.
+> By automating wrapper and Layer 1 test generation from the Custom Elements
+> Manifest, ~70% of the implementation burden is eliminated. Development effort
+> is concentrated on high-value legacy adapters, integration testing, and
+> migration tooling.
 
 ---
 
@@ -1400,15 +1377,30 @@ set.
 
 ---
 
-### Test file structure
+### Package file structure
 
-```
-src/components/Modal/
-├── Modal.component.ts
-├── index.ts
-└── __tests__/
-    ├── Modal.spec.ts          ← Layer 1: Jest unit (API boundary)
-    └── Modal.e2e.ts           ← Layer 2: Playwright (imported by root playwright.config.ts)
+```text
+packages/angular/
+├── src/
+│   ├── generated/                     # Automated 1:1 WC wrappers (gitignored)
+│   │   ├── Button/
+│   │   └── Modal/
+│   ├── stories/                       # Storybook stories and test suites
+│   │   └── Button/
+│   │       ├── __stories__/
+│   │       │   ├── Button.mdx
+│   │       │   └── Button.stories.ts
+│   │       └── __tests__/
+│   │           ├── Button.e2e.ts
+│   │           └── Button.spec.ts
+│   └── index.ts                       # Public API barrel (exports generated)
+├── legacy/                            # Secondary entry point (@carbon/angular/legacy)
+│   ├── src/
+│   │   ├── components/                # Hand-crafted CCA migration adapters (@deprecated)
+│   │   │   ├── Button/
+│   │   │   └── Dropdown/
+│   │   └── index.ts
+│   └── ng-package.json
 ```
 
 Storybook `play()` functions live in the story file alongside the component

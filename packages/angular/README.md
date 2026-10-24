@@ -62,6 +62,9 @@ Import Carbon global styles once in your app entry:
 - **[Architecture & Implementation Plan](docs/plan.md)** — Core design
   decisions, wrapper architecture, component tiers, CVA mapping, and test
   strategy.
+- **[Porting web component tests](docs/porting-web-component-tests.md)** — How
+  to reuse the `@carbon/web-components` tests to verify each wrapper. Required
+  for every new component, alongside its stories.
 - **[Implementation Milestones](docs/milestones.md)** — Step-by-step roadmap and
   PR breakdown across six milestones.
 
@@ -96,8 +99,8 @@ yarn workspace @carbon/angular scaffold:component Modal
 
 This generates the following structure under `src/components/Modal/`:
 
-- `Modal.component.ts` — Standalone Angular component wrapper rendering the
-  `cds-ng-modal` custom element
+- `Modal.component.ts` — Standalone Angular component wrapper (host IS the
+  `cds-modal` web component — ADR 0015)
 - `index.ts` — Component barrel export
 - `__stories__/Modal.stories.ts` — Storybook story file
 - `__tests__/Modal.spec.ts` — Layer 1 Jest unit test suite

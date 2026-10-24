@@ -4,15 +4,7 @@
     "module": "CommonJS",
     "moduleResolution": "node",
     "outDir": "dist/spec",
-    "types": ["node", "jest"],
-    "paths": {
-      "@carbon/web-components/es/globals/register.js": [
-        "src/__mocks__/@carbon/web-components/register.ts"
-      ],
-      "@carbon/web-components/es/components/*": [
-        "src/__mocks__/@carbon/web-components/component.ts"
-      ]
-    }
+    "types": ["node", "jest"]
   },
   "angularCompilerOptions": {
     "compilationMode": "full",

@@ -21,11 +21,12 @@
     "directory": "dist"
   },
   "scripts": {
-    "build": "ng-packagr -p ng-package.json",
-    "clean": "rimraf esm2022 fesm2022",
+    "build": "node tasks/generate-wrappers/index.js && ng-packagr -p ng-package.json",
+    "clean": "rimraf esm2022 fesm2022 dist src/generated",
     "e2e": "playwright test",
+    "generate:wrappers": "node tasks/generate-wrappers/index.js",
     "playwright:install": "playwright install chromium",
-    "scaffold:component": "node tasks/scaffold-component/index.js",
+    "scaffold:legacy": "node tasks/scaffold-legacy-component/index.js",
     "storybook": "npx ng run carbon-angular:storybook",
     "storybook:build": "npx ng run carbon-angular:build-storybook",
     "test": "jest --passWithNoTests"

@@ -7,8 +7,8 @@ import { Meta } from '@storybook/addon-docs/blocks';
 Angular components for the
 [Carbon Design System](https://carbondesignsystem.com), built as thin wrappers
 over `@carbon/web-components`. Each Angular component registers its backing Web
-Component under a namespaced `cds-ng-*` tag at import time — no separate
-registration step is required.
+Component under the real `cds-*` tag at import time — the wrapper's host element
+IS the web component (ADR 0015). No separate registration step is required.
 
 ## Install
 
@@ -66,8 +66,18 @@ Add the Carbon stylesheet to your `angular.json` styles array:
 "styles": ["node_modules/@carbon/styles/css/styles.css"]
 ```
 
-## Migrating from `carbon-components-angular`?
+## Two entry points
 
-See the **[Migration guide](?path=/docs/introduction-migration--docs)** for a
-full list of API changes, before/after examples, and the automated codemods that
-handle most of the mechanical work.
+`@carbon/angular` ships two entry points:
+
+| Entry point              | Purpose                                                                                       |
+| ------------------------ | --------------------------------------------------------------------------------------------- |
+| `@carbon/angular`        | All new development — 1:1 Angular wrappers generated from `@carbon/web-components`            |
+| `@carbon/angular/legacy` | Migrating from `carbon-components-angular` — drop-in compatible adapters matching the CCA API |
+
+If you are starting a new project, import everything from `@carbon/angular`.
+
+If you are migrating an existing `carbon-components-angular` application, see
+the **[Migration guide](?path=/docs/introduction-migration--docs)** — you can
+switch import paths to `@carbon/angular/legacy` first (no template changes
+required) and modernize to `@carbon/angular` incrementally.

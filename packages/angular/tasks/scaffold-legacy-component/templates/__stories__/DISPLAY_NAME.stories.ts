@@ -9,7 +9,7 @@ import type { Meta, StoryObj } from '@storybook/angular';
 import { DISPLAY_NAMEComponent } from '../DISPLAY_NAME.component';
 
 const meta: Meta<DISPLAY_NAMEComponent> = {
-  title: 'Components/DISPLAY_NAME',
+  title: 'Legacy Angular/DISPLAY_NAME',
   component: DISPLAY_NAMEComponent,
   tags: ['autodocs'],
 };

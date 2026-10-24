@@ -10,81 +10,94 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 ---
 
-## Quick start
+## Two-step migration path
 
-1. Install `@carbon/angular` and its peer dependencies, then remove
-   `carbon-components-angular`. `@carbon/web-components` is a required peer
-   dependency — it must be installed explicitly alongside `@carbon/angular`:
+`@carbon/angular` is designed to make migration low-friction by providing a
+dedicated `@carbon/angular/legacy` entry point that matches the
+`carbon-components-angular` API. You don't have to modernize everything at once.
 
-   ```bash
-   npm install @carbon/angular @carbon/web-components
-   npm uninstall carbon-components-angular
-   ```
+### Step 1 — Drop-in import swap (no template changes)
 
-   If you customise or override Carbon SCSS, also install the `@carbon/styles`
-   peer dependency:
+Install `@carbon/angular` and swap import paths to `@carbon/angular/legacy`.
+Your selectors (`cds-*`), templates, and most `@Input()` / `@Output()` bindings
+stay exactly as they are.
 
-   ```bash
-   npm install @carbon/styles
-   ```
+```bash
+npm install @carbon/angular @carbon/web-components
+npm uninstall carbon-components-angular
+```
 
-2. Run the report codemod to see what needs changing:
+```ts
+// Before
+import { ButtonModule } from 'carbon-components-angular';
 
-   ```bash
-   npx @carbon/upgrade migrate cca-report-imports
-   ```
+// After — legacy entry point, no template changes required
+import { ButtonComponent } from '@carbon/angular/legacy';
+```
 
-3. Run the write codemods to handle the mechanical changes automatically:
+Run the report codemod first to see what needs changing, then the write codemod
+to handle import paths automatically:
 
-   ```bash
-   npx @carbon/upgrade migrate cca-update-module-imports --write
-   npx @carbon/upgrade migrate cca-remove-table-model --write
-   npx @carbon/upgrade migrate cca-remove-notification-obj --write
-   npx @carbon/upgrade migrate cca-remove-pagination-model --write
-   npx @carbon/upgrade migrate cca-remove-theme-input --write
-   ```
+```bash
+npx @carbon/upgrade migrate cca-report-imports
+npx @carbon/upgrade migrate cca-to-legacy --write
+```
 
-4. Fix any remaining `:not(:defined)` elements visible in the browser — these
-   indicate a component whose backing Web Component has not yet been registered.
-   Check that you have imported the component directly in your `imports` array.
+The `@carbon/angular/legacy` components match the `carbon-components-angular`
+API exactly. See the
+**[Legacy carbon-components-angular](?path=/docs/legacy-carbon-components-angular-overview--docs)**
+section of this Storybook for the full list of available adapters and their
+usage examples.
+
+### Step 2 — Incremental modernization to `@carbon/angular`
+
+Once your application is running on `@carbon/angular/legacy`, migrate individual
+components to `@carbon/angular` at your own pace. The modern entry point uses
+the `@carbon/web-components` API directly — slot projection instead of `[items]`
+arrays, flat `@Input()`s instead of model objects.
+
+```ts
+// Legacy
+import { ButtonComponent } from '@carbon/angular/legacy';
+
+// Modern
+import { ButtonComponent } from '@carbon/angular';
+```
+
+Run the modernization codemod to handle import path changes:
+
+```bash
+npx @carbon/upgrade migrate cca-to-angular --write
+```
+
+Some components require manual template updates at this step — see
+[Breaking changes](#breaking-changes) below for the full list.
 
 ---
 
-## What stays the same
+## What stays the same across both steps
 
 - **Selectors** — all `cds-*` selectors are preserved; your templates do not
-  change.
+  change between CCA and `@carbon/angular/legacy`, and do not change again when
+  moving to `@carbon/angular`.
 - **`[(ngModel)]` and `[formControl]`** — reactive and template-driven forms
   work identically via `ControlValueAccessor`.
 - **SCSS imports** — all `@carbon/styles` import paths are unchanged.
+- **`@carbon/web-components` v12** — both entry points are backed by the same
+  Web Components, so you get full v12 design language, AI components, fluid form
+  variants, and complete UI Shell from Step 1 onwards.
 
 ---
 
 ## Breaking changes
 
+These apply when moving from `@carbon/angular/legacy` to `@carbon/angular` (Step
+2). Step 1 has no breaking changes.
+
 > Full detail (Before / After / Why / Migration steps) is in
 > [`docs/guides/cca-to-angular.md`](https://github.com/carbon-design-system/carbon/blob/main/docs/guides/cca-to-angular.md).
 > This page is the discoverable entry point; the guide is the authoritative
 > reference.
-
-### Component import path
-
-**Before:**
-
-```ts
-import { ButtonModule } from 'carbon-components-angular';
-```
-
-**After:**
-
-```ts
-import { ButtonComponent } from '@carbon/angular';
-```
-
-Run `npx @carbon/upgrade migrate cca-update-module-imports --write` to automate
-this.
-
----
 
 ### `TableModel` / `TableHeaderItem` / `TableItem` removed
 
@@ -188,20 +201,24 @@ Floating UI for automatic placement — no replacement is needed.
 
 ## Codemods reference
 
-| Codemod                       | Type   | What it does                                                                     |
-| ----------------------------- | ------ | -------------------------------------------------------------------------------- |
-| `cca-report-imports`          | report | Lists all `carbon-components-angular` imports with `@carbon/angular` equivalents |
-| `cca-update-module-imports`   | write  | Rewrites import sources                                                          |
-| `cca-remove-table-model`      | write  | Replaces `TableModel` with flat `[rows]` / `[columns]`                           |
-| `cca-remove-notification-obj` | write  | Replaces `notificationObj` with flat inputs                                      |
-| `cca-remove-pagination-model` | write  | Replaces `PaginationModel` with flat inputs                                      |
-| `cca-remove-theme-input`      | write  | Removes `[theme]="theme"` bindings                                               |
-| `cca-report-ui-shell-nav`     | report | Flags `[navigationItems]` / `[menuItems]` array bindings                         |
+| Codemod                       | Type   | What it does                                                                      |
+| ----------------------------- | ------ | --------------------------------------------------------------------------------- |
+| `cca-report-imports`          | report | Lists all `carbon-components-angular` imports with equivalents                    |
+| `cca-to-legacy`               | write  | Rewrites import paths to `@carbon/angular/legacy` (Step 1)                        |
+| `cca-to-angular`              | write  | Rewrites import paths from `@carbon/angular/legacy` to `@carbon/angular` (Step 2) |
+| `cca-remove-table-model`      | write  | Replaces `TableModel` with flat `[rows]` / `[columns]`                            |
+| `cca-remove-notification-obj` | write  | Replaces `notificationObj` with flat inputs                                       |
+| `cca-remove-pagination-model` | write  | Replaces `PaginationModel` with flat inputs                                       |
+| `cca-remove-theme-input`      | write  | Removes `[theme]="theme"` bindings                                                |
+| `cca-report-ui-shell-nav`     | report | Flags `[navigationItems]` / `[menuItems]` array bindings                          |
 
 ---
 
 ## Running both versions side by side
 
-Because `@carbon/angular` registers its WC backing elements under `cds-ng-*`
-tags, it can coexist with `carbon-components-angular` on the same page without
-selector conflicts. This lets you migrate one module at a time.
+`@carbon/angular` registers each WC backing element under its real `cds-*` tag
+(ADR 0015). Running both `@carbon/angular` and `carbon-components-angular` on
+the same page is an **open question** — see
+[ADR 0015](../../../docs/decisions/0015-angular-wrapper-host-is-the-web-component.md)
+for the current status. The legacy entry point (`@carbon/angular/legacy`) is the
+supported migration bridge and does not have this concern.

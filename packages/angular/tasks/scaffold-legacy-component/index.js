@@ -7,17 +7,20 @@
  */
 
 /**
- * Component scaffold generator for @carbon/angular.
+ * Legacy Component scaffold generator for @carbon/angular/legacy.
+ *
+ * Scaffolds backward-compatible legacy adapters preserving carbon-components-angular
+ * APIs and marking them @deprecated.
  *
  * Usage:
- *   node tasks/scaffold-component/index.js <DisplayName>
+ *   node tasks/scaffold-legacy-component/index.js <DisplayName>
  *   # or
- *   yarn scaffold:component <DisplayName>
+ *   yarn scaffold:legacy <DisplayName>
  *
  * Example:
- *   yarn scaffold:component Button
+ *   yarn scaffold:legacy TextInput
  *
- * Generates the following files under src/components/<DisplayName>/:
+ * Generates the following files under legacy/src/components/<DisplayName>/:
  *   - <DisplayName>.component.ts
  *   - index.ts
  *   - __stories__/<DisplayName>.stories.ts
@@ -33,7 +36,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const DISPLAY_NAME = process.argv[2];
 
 if (!DISPLAY_NAME) {
-  console.error('Usage: yarn scaffold:component <DisplayName>');
+  console.error('Usage: yarn scaffold:legacy <DisplayName>');
   process.exit(1);
 }
 
@@ -59,7 +62,11 @@ function readTemplate(relPath) {
     .replaceAll('KEBAB_NAME', kebab);
 }
 
-const OUTPUT_ROOT = join(__dirname, '../../src/components', DISPLAY_NAME);
+const OUTPUT_ROOT = join(
+  __dirname,
+  '../../legacy/src/components',
+  DISPLAY_NAME
+);
 
 /** Write a file, creating parent directories as needed. */
 function writeOut(relPath, content) {
@@ -87,4 +94,6 @@ writeOut(
   readTemplate('__tests__/DISPLAY_NAME.spec.ts')
 );
 
-console.log(`\nScaffolded ${DISPLAY_NAME} in src/components/${DISPLAY_NAME}/`);
+console.log(
+  `\nScaffolded legacy ${DISPLAY_NAME} in legacy/src/components/${DISPLAY_NAME}/\n`
+);

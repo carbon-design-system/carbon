@@ -1,0 +1,93 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Legacy carbon-components-angular/Overview" />
+
+# Legacy carbon-components-angular
+
+This section contains the **`@carbon/angular/legacy`** secondary entry point — a
+set of hand-crafted Angular adapters for teams migrating from
+[`carbon-components-angular`](https://angular.carbondesignsystem.com/) (CCA).
+
+## What this section is
+
+Every component in this section lives in the `legacy/` folder of the
+`@carbon/angular` package and is imported from the `@carbon/angular/legacy`
+entry point:
+
+```ts
+import { ButtonComponent } from '@carbon/angular/legacy';
+import { DropdownComponent } from '@carbon/angular/legacy';
+```
+
+These components are **`@deprecated`** — they are a migration bridge, not a
+destination. Use them to get your application running on `@carbon/angular`
+quickly, then move individual components to the modern entry point over time.
+
+## How it differs from `@carbon/angular`
+
+|               | `@carbon/angular/legacy`            | `@carbon/angular`                |
+| ------------- | ----------------------------------- | -------------------------------- |
+| **Purpose**   | CCA drop-in compatibility           | Modern 1:1 Angular wrappers      |
+| **Authoring** | Hand-crafted per adapter            | Auto-generated from CEM          |
+| **API shape** | Matches `carbon-components-angular` | Matches `@carbon/web-components` |
+| **Status**    | `@deprecated`                       | Active / supported               |
+| **Import**    | `@carbon/angular/legacy`            | `@carbon/angular`                |
+
+## What's under the hood
+
+All adapters — both legacy and modern — are backed by the same
+`@carbon/web-components` v12 custom elements. The legacy wrappers add a
+compatibility shim on top: for example, `DropdownComponent` accepts an `[items]`
+array and materialises `<cds-ng-dropdown-item>` slot children for you, exactly
+as CCA did. The Web Component handles all behaviour, keyboard navigation, ARIA,
+and styling.
+
+This means components in this section get the same v12 design language, AI
+components, fluid form variants, and full UI Shell that `@carbon/web-components`
+provides — even before you migrate to the modern `@carbon/angular` entry point.
+
+## Migration path
+
+**Step 1 — Drop-in import swap (no template changes required):**
+
+```ts
+// Before
+import { ButtonModule } from 'carbon-components-angular';
+
+// After
+import { ButtonComponent } from '@carbon/angular/legacy';
+```
+
+Selectors stay `cds-*`, so your HTML templates are unchanged.
+
+**Step 2 — Incremental modernization (component by component):**
+
+When you're ready to move a component to the modern API, swap its import:
+
+```ts
+// Legacy
+import { DropdownComponent } from '@carbon/angular/legacy';
+
+// Modern — slot projection instead of [items] array
+import { DropdownComponent } from '@carbon/angular';
+```
+
+For components with API differences (such as `[items]` → slot children,
+`notificationObj` removal, `TableModel` removal), see the full migration guide
+at **Introduction / Migrating from carbon-components-angular**.
+
+## Codemods
+
+The `@carbon/upgrade` package provides codemods to automate the import path
+changes:
+
+```sh
+# Report all carbon-components-angular imports in your project
+npx @carbon/upgrade migrate cca-report-imports
+
+# Rewrite imports to @carbon/angular/legacy (Step 1)
+npx @carbon/upgrade migrate cca-to-legacy --write
+
+# Rewrite imports from @carbon/angular/legacy to @carbon/angular (Step 2)
+npx @carbon/upgrade migrate cca-to-angular --write
+```
