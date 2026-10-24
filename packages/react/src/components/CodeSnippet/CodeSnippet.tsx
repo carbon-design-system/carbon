@@ -180,6 +180,7 @@ function CodeSnippet({
 }: PropsWithChildren<CodeSnippetProps>) {
   const [expandedCode, setExpandedCode] = useState(false);
   const [shouldShowMoreLessBtn, setShouldShowMoreLessBtn] = useState(false);
+  const [scrollbarBlockSize, setScrollbarBlockSize] = useState(0);
   const { current: uid } = useRef(useId());
   const codeContentRef = useRef<HTMLPreElement>(null);
   const codeContainerRef = useRef<HTMLDivElement>(null);
@@ -219,6 +220,11 @@ function CodeSnippet({
         ) {
           setExpandedCode(false);
         }
+      }
+      if (codeContentRef?.current && type === 'multi') {
+        const { offsetHeight, clientHeight } = codeContentRef.current;
+
+        setScrollbarBlockSize(offsetHeight - clientHeight);
       }
     },
   });
@@ -304,6 +310,12 @@ function CodeSnippet({
   const isSingle = type === 'single';
   const isMulti = type === 'multi';
   const label = deprecatedAriaLabel || ariaLabel || 'code-snippet';
+  const scrollbarStyle =
+    !expandedCode && scrollbarBlockSize > 0
+      ? {
+          [`--${prefix}-snippet-scrollbar-block-size`]: `${scrollbarBlockSize}px`,
+        }
+      : undefined;
 
   return (
     <div {...rest} className={codeSnippetClasses}>
@@ -314,7 +326,7 @@ function CodeSnippet({
         className={`${prefix}--snippet-container`}
         aria-label={!isMulti ? label : undefined}
         aria-readonly={isSingle ? true : undefined}
-        {...containerStyle}>
+        style={{ ...containerStyle.style, ...scrollbarStyle }}>
         <pre
           role={isMulti ? 'textbox' : undefined}
           tabIndex={isMulti && !disabled ? 0 : undefined}
