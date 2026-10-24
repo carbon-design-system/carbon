@@ -910,6 +910,56 @@ describe('FeatureFlags', () => {
       });
     });
 
+    it('enable-v12-autoalign - enableV12Autoalign', () => {
+      const checkFlags = jest.fn();
+      const checkFlag = jest.fn();
+
+      function TestComponent() {
+        const featureFlags = useFeatureFlags();
+        const enableV12Autoalign = useFeatureFlag('enable-v12-autoalign');
+
+        checkFlags({
+          enableV12Autoalign: featureFlags.enabled('enable-v12-autoalign'),
+        });
+
+        checkFlag({
+          enableV12Autoalign,
+        });
+
+        return null;
+      }
+
+      // Render the default
+      const { rerender } = render(
+        <FeatureFlags>
+          <TestComponent />
+        </FeatureFlags>
+      );
+
+      // Ensure the default value is as defined and as expected
+      expect(checkFlags).toHaveBeenLastCalledWith({
+        enableV12Autoalign: false,
+      });
+      expect(checkFlag).toHaveBeenLastCalledWith({
+        enableV12Autoalign: false,
+      });
+
+      // Enable the flag
+      rerender(
+        <FeatureFlags enableV12Autoalign>
+          <TestComponent />
+        </FeatureFlags>
+      );
+
+      // Ensure that when enabled, this flag does not error
+      expect(checkFlags).toHaveBeenLastCalledWith({
+        enableV12Autoalign: true,
+      });
+      expect(checkFlag).toHaveBeenLastCalledWith({
+        enableV12Autoalign: true,
+      });
+    });
+
     it('enable-enhanced-file-uploader - enableEnhancedFileUploader', () => {
       const checkFlags = jest.fn();
       const checkFlag = jest.fn();
