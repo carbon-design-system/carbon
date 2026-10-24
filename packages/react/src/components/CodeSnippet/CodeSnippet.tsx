@@ -326,9 +326,7 @@ function CodeSnippet({
         className={`${prefix}--snippet-container`}
         aria-label={!isMulti ? label : undefined}
         aria-readonly={isSingle ? true : undefined}
-        style={
-          { ...containerStyle.style, ...scrollbarStyle } as React.CSSProperties
-        }>
+        style={{ ...containerStyle.style, ...scrollbarStyle }}>
         <pre
           role={isMulti ? 'textbox' : undefined}
           tabIndex={isMulti && !disabled ? 0 : undefined}
