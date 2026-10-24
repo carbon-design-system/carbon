@@ -5,4 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { ButtonComponent } from './Button.component';
+export * from './components/Button';

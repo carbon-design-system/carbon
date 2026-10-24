@@ -5,4 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { DISPLAY_NAMEComponent } from './DISPLAY_NAME.component';
+export * from './Button.component';

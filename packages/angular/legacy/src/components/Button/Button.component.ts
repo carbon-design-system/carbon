@@ -18,26 +18,17 @@ import CDSButtonSet from '@carbon/web-components/es/components/button/button-set
 import CDSButtonSkeleton from '@carbon/web-components/es/components/button/button-skeleton.js';
 import { defineCustomElement } from '@carbon/web-components/es/globals/register.js';
 
-// Register backing WC elements under namespaced tags so the Angular selector
-// `cds-button` never matches the internal `cds-ng-button` element.
-//
-// Binding note: `isExpressive`, `isSelected` and `openTooltip` are declared on
-// the WC without an explicit `attribute:` name, so Lit observes them as the
-// lowercased `isexpressive` / `isselected` / `opentooltip`. They are therefore
-// bound as properties below; kebab-case attribute bindings would be ignored.
 defineCustomElement(CDSButton, { name: 'cds-ng-button' });
 defineCustomElement(CDSButtonSet, { name: 'cds-ng-button-set' });
 defineCustomElement(CDSButtonSkeleton, { name: 'cds-ng-button-skeleton' });
 
 /**
- * Angular wrapper for the Carbon `cds-button` Web Component.
+ * Legacy Angular wrapper for the Carbon `cds-button` Web Component.
  *
- * Consumer-facing selector : `cds-button`
- * Internal WC tag          : `cds-ng-button`  (registered above)
- *
- * @example
- * ```html
- * <cds-button kind="primary" (buttonClick)="onClick($event)">Click me</cds-button>
+ * @deprecated Legacy wrapper provided for backward compatibility with `carbon-components-angular`.
+ * For new development and modernized features, import from `@carbon/angular` directly:
+ * ```ts
+ * import { ButtonComponent } from '@carbon/angular';
  * ```
  */
 @Component({
@@ -109,7 +100,6 @@ export class ButtonComponent {
 
   /**
    * Visual variant.
-   * @see BUTTON_KIND
    */
   @Input() kind:
     | 'primary'
@@ -134,9 +124,7 @@ export class ButtonComponent {
   @Input() rel: string | undefined;
 
   /**
-   * Size variant. Defaults to `"lg"`, matching `@carbon/react` and
-   * `@carbon/web-components`.
-   * One of: `"xs"` | `"sm"` | `"md"` | `"lg"` | `"xl"` | `"2xl"`.
+   * Size variant. Defaults to `"lg"`.
    */
   @Input() size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' = 'lg';
 
@@ -148,13 +136,11 @@ export class ButtonComponent {
 
   /**
    * Tooltip alignment for icon-only buttons.
-   * One of: `"left"` | `""` (center) | `"right"`.
    */
   @Input() tooltipAlignment: 'left' | '' | 'right' = '';
 
   /**
    * Tooltip position for icon-only buttons.
-   * One of: `"top"` | `"right"` | `"bottom"` | `"left"`.
    */
   @Input() tooltipPosition: 'top' | 'right' | 'bottom' | 'left' = 'top';
 
@@ -165,7 +151,6 @@ export class ButtonComponent {
 
   /**
    * Native button `type` attribute.
-   * One of: `"button"` | `"reset"` | `"submit"`.
    */
   @Input() type: 'button' | 'reset' | 'submit' = 'button';
 

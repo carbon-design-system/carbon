@@ -7,11 +7,38 @@
 
 import type { Meta, StoryObj } from '@storybook/angular';
 import { expect, userEvent } from 'storybook/test';
-import { ButtonComponent } from '../Button.component';
+import { ButtonComponent } from '../../../generated/Button';
 
 const meta: Meta<ButtonComponent> = {
   title: 'Components/Button',
   component: ButtonComponent,
+  parameters: {
+    docs: {
+      description: {
+        component: `
+Buttons are clickable elements that trigger actions. Import from \`@carbon/angular\`
+for all new development.
+
+\`\`\`ts
+import { ButtonComponent } from '@carbon/angular';
+
+@Component({
+  standalone: true,
+  imports: [ButtonComponent],
+  template: \`
+    <cds-button kind="primary" size="lg" (buttonClick)="onClick($event)">
+      Save
+    </cds-button>
+  \`,
+})
+export class MyComponent {
+  onClick(event: MouseEvent) { /* ... */ }
+}
+\`\`\`
+        `.trim(),
+      },
+    },
+  },
   argTypes: {
     kind: {
       control: 'select',
@@ -46,7 +73,6 @@ const meta: Meta<ButtonComponent> = {
       options: ['left', '', 'right'],
       labels: { left: 'Start', '': 'Center', right: 'End' },
     },
-    buttonClick: { action: 'buttonClick' },
   },
 };
 
@@ -76,9 +102,9 @@ export const Default: Story = {
     >Button</cds-button>`,
   }),
   play: async ({ canvasElement }) => {
-    // The real <button> lives inside cds-ng-button's shadow root —
-    // testing-library cannot pierce shadow DOM, so we query it directly.
-    const host = canvasElement.querySelector('cds-ng-button') as HTMLElement;
+    // In the host-is-WC design (ADR 0015) the host element IS cds-button.
+    // The shadow root is on the host element itself.
+    const host = canvasElement.querySelector('cds-button') as HTMLElement;
     const button = host?.shadowRoot?.querySelector(
       'button'
     ) as HTMLButtonElement;
@@ -186,7 +212,8 @@ export const IconButton: Story = {
       </svg></cds-button>`,
   }),
   play: async ({ canvasElement }) => {
-    const wc = canvasElement.querySelector('cds-ng-button');
+    // Host IS the cds-button WC.
+    const wc = canvasElement.querySelector('cds-button');
     await expect(wc?.getAttribute('tooltip-text')).toBe('Add item');
     await expect(wc?.getAttribute('tooltip-position')).toBe('bottom');
   },
@@ -205,28 +232,28 @@ export const SetOfButtons: StoryObj<Record<string, unknown>> = {
   },
   render: (args) => ({
     props: args,
-    // cds-ng-button-set is the namespaced WC tag registered by ButtonComponent.
-    // Child cds-button elements are Angular components — no change needed there.
-    template: `<cds-ng-button-set [attr.stacked]="stacked || null">
+    // cds-button-set is the WC tag registered by the ButtonSetComponent wrapper.
+    // Both the set and the child buttons are Angular-managed host elements.
+    template: `<cds-button-set [attr.stacked]="stacked || null">
       <cds-button kind="secondary">Secondary</cds-button>
       <cds-button kind="primary">Primary</cds-button>
-    </cds-ng-button-set>`,
+    </cds-button-set>`,
   }),
   play: async ({ canvasElement }) => {
-    const buttons = canvasElement.querySelectorAll('cds-ng-button');
+    const buttons = canvasElement.querySelectorAll('cds-button');
     await expect(buttons.length).toBe(2);
   },
 };
 
 // WC: Skeleton
-// Uses StoryObj<Record<string, unknown>> — renders cds-ng-button-skeleton, not ButtonComponent.
+// Uses StoryObj<Record<string, unknown>> — renders cds-button-skeleton, not ButtonComponent.
 export const Skeleton: StoryObj<Record<string, unknown>> = {
   render: () => ({
-    // cds-ng-button-skeleton is the namespaced WC tag registered by ButtonComponent.
-    template: `<cds-ng-button-skeleton size="md"></cds-ng-button-skeleton>`,
+    // cds-button-skeleton is the WC tag registered by the ButtonSkeletonComponent wrapper.
+    template: `<cds-button-skeleton size="md"></cds-button-skeleton>`,
   }),
   play: async ({ canvasElement }) => {
-    const skeleton = canvasElement.querySelector('cds-ng-button-skeleton');
+    const skeleton = canvasElement.querySelector('cds-button-skeleton');
     await expect(skeleton).not.toBeNull();
   },
 };
@@ -238,7 +265,8 @@ export const Disabled: Story = {
   args: { ...Default.args, disabled: true },
   render: Default.render,
   play: async ({ canvasElement }) => {
-    const wc = canvasElement.querySelector('cds-ng-button');
+    // Host IS the cds-button WC; disabled is set directly on it.
+    const wc = canvasElement.querySelector('cds-button');
     await expect(wc?.getAttribute('disabled')).not.toBeNull();
   },
 };
@@ -250,7 +278,8 @@ export const Expressive: Story = {
   play: async ({ canvasElement }) => {
     // `isExpressive` must reach the WC as a property (the WC does not observe
     // an `is-expressive` attribute), so assert on the rendered shadow DOM.
-    const host = canvasElement.querySelector('cds-ng-button') as HTMLElement;
+    // Host IS cds-button — shadow root is directly on it.
+    const host = canvasElement.querySelector('cds-button') as HTMLElement;
     await expect(host).not.toBeNull();
     await (host as unknown as { updateComplete: Promise<boolean> })
       .updateComplete;
@@ -276,7 +305,8 @@ export const AsLink: Story = {
     >Carbon Design System</cds-button>`,
   }),
   play: async ({ canvasElement }) => {
-    const wc = canvasElement.querySelector('cds-ng-button');
+    // Host IS the cds-button WC.
+    const wc = canvasElement.querySelector('cds-button');
     await expect(wc?.getAttribute('href')).toBe(
       'https://carbondesignsystem.com'
     );

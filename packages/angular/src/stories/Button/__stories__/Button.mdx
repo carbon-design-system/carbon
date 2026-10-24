@@ -43,6 +43,31 @@ communicate calls to action to the user and allow users to interact with pages
 in a variety of ways. `Button` labels express what action will occur when the
 user interacts with it.
 
+### Importing
+
+```ts
+import { ButtonComponent } from '@carbon/angular';
+
+@Component({
+  standalone: true,
+  imports: [ButtonComponent],
+  template: `
+    <cds-button kind="primary" size="lg" (buttonClick)="onClick($event)">
+      Save
+    </cds-button>
+  `,
+})
+export class MyComponent {
+  onClick(event: MouseEvent) {
+    /* ... */
+  }
+}
+```
+
+Migrating from `carbon-components-angular`? See
+[Legacy carbon-components-angular/Button](?path=/docs/legacy-carbon-components-angular-button--docs)
+for the drop-in compatible adapter.
+
 <Canvas of={ButtonStories.Default} />
 
 ## Secondary Button
@@ -85,7 +110,7 @@ the tooltip shown on hover.
 
 ## Set of Buttons
 
-You can wrap two `cds-button` elements in a `cds-ng-button-set` when an action
+You can wrap two `cds-button` elements in a `cds-button-set` when an action
 required by the user has more than one option. Always use a negative action
 button (secondary) paired with a positive action button (primary) in that order.
 Negative action buttons will be on the left. Positive action buttons should be
@@ -210,8 +235,9 @@ native `MouseEvent`.
 - **Component import:** `import { ButtonComponent } from '@carbon/angular'` (use
   in standalone `imports: [ButtonComponent]` or `NgModule`
   `imports: [ButtonComponent]`)
-- The backing Web Component is registered internally as `cds-ng-button` — you
-  will see this tag in DevTools. Your templates always use `cds-button`.
+- The backing Web Component runs under its own `cds-button` tag (ADR 0015). The
+  Angular wrapper's host element IS the web component — you will see
+  `cds-button` in DevTools, with no inner element.
 - Radius is controlled via CSS custom properties that inherit through the shadow
   boundary, not via an `@Input()`. See the
   [web-components button docs](https://web-components.carbondesignsystem.com/?path=/docs/components-button--docs)
