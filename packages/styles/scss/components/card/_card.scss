@@ -543,6 +543,7 @@
   }
 
   // ─── Header actions (CardActions component) ───────────────────────────
+  // Actions use flush spacing (no gap between them).
   // CardActions publishes the width needed to show every action (collapsed
   // ones included) as a custom property. That value is independent of the
   // overflow state, so the slot width is stable for createOverflowHandler to
@@ -553,7 +554,7 @@
     align-items: center;
     justify-content: flex-end;
     block-size: $spacing-07;
-    gap: $spacing-02;
+    gap: 0;
     inline-size: var(--#{$prefix}--card--actions-inline-size, 100%);
     max-inline-size: 100%;
   }

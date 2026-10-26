@@ -71,7 +71,7 @@ const extractTextContent = (node: unknown): string => {
 
 /**
  * CardActions is a container for action buttons in the card header.
- * Positioned in the top-right corner with 8px gap between actions.
+ * Positioned in the top-right corner with flush spacing (no gap) between actions.
  * The actions slot is as wide as the actions need, capped at 50% of the header;
  * the title uses all remaining space. When the actions exceed the cap, the
  * overflow menu is shown.
