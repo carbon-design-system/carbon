@@ -218,6 +218,10 @@
       &:hover {
         box-shadow: none;
       }
+
+      &:active {
+        background-color: $background-active;
+      }
     }
   }
 
@@ -257,6 +261,7 @@
     outline-offset: -2px;
 
     @if enabled('enable-v12-release') {
+      border-width: 1px;
       border-color: transparent;
     }
   }
@@ -307,6 +312,7 @@
     outline-offset: -2px;
 
     @if enabled('enable-v12-release') {
+      border-width: 1px;
       border-color: transparent;
     }
   }
