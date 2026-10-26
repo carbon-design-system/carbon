@@ -25,6 +25,27 @@ describe('cds-popover', function () {
 
     expect(el).to.have.attribute('data-testid', 'test-id');
   });
+
+  it('should clean up the floating controller when disconnected', async () => {
+    const el = await fixture(html`
+      <cds-popover open>
+        <button type="button">Test</button>
+        <cds-popover-content></cds-popover-content>
+      </cds-popover>
+    `);
+    const originalHostDisconnected = el.popoverController.hostDisconnected;
+    let hostDisconnectedCalled = 0;
+    el.popoverController.hostDisconnected = () => {
+      hostDisconnectedCalled += 1;
+    };
+
+    try {
+      el.remove();
+      expect(hostDisconnectedCalled).to.equal(1);
+    } finally {
+      el.popoverController.hostDisconnected = originalHostDisconnected;
+    }
+  });
 });
 describe('cds-popover-content', function () {
   it('should support a custom class', async () => {
