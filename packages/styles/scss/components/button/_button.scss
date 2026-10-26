@@ -19,6 +19,7 @@
 @use '../../type' as *;
 @use '../../layer' as *;
 @use '../../utilities/convert';
+@use '../../utilities/custom-property';
 @use '../../utilities/focus-outline';
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/skeleton' as *;
@@ -215,6 +216,9 @@
       margin-inline-start: $spacing-03;
     }
 
+    // Ghost keeps a consistent 8px label/icon gap from the icon margin
+    @include button-v12-ghost-structure;
+
     // Apply hover styles only on devices that support hover
     @media (hover: hover) {
       &:hover {
@@ -258,6 +262,10 @@
 
     .#{$prefix}--btn__icon {
       position: static;
+
+      @if enabled('enable-v12-release') {
+        margin-inline-start: 0;
+      }
     }
 
     &.#{$prefix}--btn--ghost {
@@ -402,6 +410,8 @@
         margin-inline-start: $spacing-03;
       }
 
+      @include button-v12-ghost-structure;
+
       @media (hover: hover) {
         &:hover {
           color: $text-on-color;
@@ -468,6 +478,15 @@
 
     @if enabled('enable-v12-release') {
       @include button-radius.radius($border-radius-00);
+
+      // Buttons stretch to fill a set, so keep the label at the start and the
+      // icon at the end. Custom properties inherit into web component shadow
+      // roots.
+      @include custom-property.declaration(
+        'button-justify-content',
+        space-between
+      );
+      @include custom-property.declaration('button-text-align', start);
     }
   }
 

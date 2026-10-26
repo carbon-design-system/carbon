@@ -10,6 +10,7 @@
 @use 'vars' as *;
 @use 'radius' as button-radius;
 @use '../../config' as *;
+@use '../../feature-flags' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
@@ -104,6 +105,55 @@ $button-focus-color: custom-property.get-var('button-focus-color', $focus);
     );
     inset-inline-end: layout.density('padding-inline');
     margin-block-start: convert.to-rem(1px);
+  }
+
+  @include button-v12-structure {
+    // Equal inline padding and label/icon gap scale with the button height:
+    // xs 12px/4px, sm 16px/8px, md 20px/12px, lg 24px/16px.
+    // -1px to compensate for border width. Containers such as button sets
+    // override the alignment through inherited custom properties.
+    justify-content: custom-property.get-var('button-justify-content', center);
+    padding-inline: calc(layout.size('height') / 2 - convert.to-rem(1px));
+    text-align: custom-property.get-var('button-text-align', center);
+
+    // The gap is an icon margin rather than `column-gap` so variants and
+    // contexts that already space the icon with a margin replace it
+    .#{$prefix}--btn__icon {
+      position: static;
+      align-self: center;
+      margin-inline-start: calc(layout.size('height') / 2 - #{$spacing-03});
+    }
+  }
+}
+
+/// v12 ghost buttons use the size-based inline padding. Their fixed label/icon
+/// gap comes from the icon's existing `$spacing-03` inline-start margin
+/// @access private
+/// @group button
+@mixin button-v12-ghost-structure {
+  @include button-v12-structure {
+    padding-inline-end: calc(layout.size('height') / 2 - convert.to-rem(1px));
+  }
+}
+
+/// Scope v12 button structure styles. xl and 2xl buttons, whether sized
+/// directly or through a layout context, keep the v11 structure until their
+/// spacing is decided. Uses `:where()` so the specificity matches `.btn` and
+/// variant or contextual overrides later in the cascade still apply.
+/// @access private
+/// @group button
+@mixin button-v12-structure {
+  @if enabled('enable-v12-release') {
+    $legacy-sizes: '.#{$prefix}--layout--size-xl, .#{$prefix}--layout--size-2xl';
+
+    &:where(
+        :not(
+            #{$legacy-sizes},
+            :where(#{$legacy-sizes}) :not([class*='#{$prefix}--layout--size-'])
+          )
+      ) {
+      @content;
+    }
   }
 }
 

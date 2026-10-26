@@ -137,6 +137,86 @@ describe('scss/components/button', () => {
     );
   });
 
+  test('v12 button padding and label/icon gap scale with the button height', async () => {
+    const { result } = await render(`
+      @use '../../feature-flags' with (
+        $feature-flags: (
+          'enable-v12-release': true,
+        )
+      );
+      @use '../button';
+    `);
+
+    const css = result.css.toString();
+    const structure = findRule(css, (selector) =>
+      /^\.cds--btn:where\(:not\(/.test(selector)
+    );
+
+    expect(structure.selector).toContain(
+      '.cds--layout--size-xl, .cds--layout--size-2xl'
+    );
+    expect(structure.styles).toEqual({
+      'justify-content': 'var(--cds-button-justify-content, center)',
+      'padding-inline':
+        'calc(var(--cds-layout-size-height-local) / 2 - 0.0625rem)',
+      'text-align': 'var(--cds-button-text-align, center)',
+    });
+
+    const icon = findRule(
+      css,
+      (selector) =>
+        selector.startsWith('.cds--btn:where(') &&
+        selector.endsWith(' .cds--btn__icon')
+    );
+    expect(icon.styles).toEqual({
+      position: 'static',
+      'align-self': 'center',
+      'margin-inline-start':
+        'calc(var(--cds-layout-size-height-local) / 2 - 0.5rem)',
+    });
+
+    // Ghost variants keep their fixed 8px icon margin, and icon-only buttons
+    // reset it so the icon stays centered
+    for (const kind of ['ghost', 'danger--ghost']) {
+      expect(
+        declarationsForSelector(css, `.cds--btn--${kind} .cds--btn__icon`)[
+          'margin-inline-start'
+        ]
+      ).toBe('0.5rem');
+      expect(
+        findRule(css, (selector) =>
+          selector.startsWith(`.cds--btn--${kind}:where(`)
+        ).styles
+      ).toEqual({
+        'padding-inline-end':
+          'calc(var(--cds-layout-size-height-local) / 2 - 0.0625rem)',
+      });
+    }
+    expect(
+      declarationsForSelector(css, '.cds--btn--icon-only .cds--btn__icon')[
+        'margin-inline-start'
+      ]
+    ).toBe('0');
+
+    // Button sets, fluid or not, keep the label at the start and icon at the end
+    const set = declarationsForSelector(css, '.cds--btn-set');
+    expect(set['--cds-button-justify-content']).toBe('space-between');
+    expect(set['--cds-button-text-align']).toBe('start');
+  });
+
+  test('v11 button structure is unchanged without the v12 flag', async () => {
+    const { result } = await render(`
+      @use '../button';
+    `);
+
+    const css = result.css.toString();
+
+    expect(css).not.toContain(':where(:not(.cds--layout--size-xl');
+    expect(declarationsForSelector(css, '.cds--btn')['justify-content']).toBe(
+      'space-between'
+    );
+  });
+
   test('skeleton clips overflow so the shimmer follows button radius', async () => {
     const { result } = await render(`
       @use '../button';
@@ -166,6 +246,24 @@ describe('scss/components/button', () => {
     expect(styles['--cds-button-radius-ss']).toBeUndefined();
   });
 });
+
+function findRule(css, predicate) {
+  let found;
+  postcss.parse(css).walkRules((rule) => {
+    const selector = rule.selector.replace(/\s+/g, ' ');
+    if (found || !predicate(selector)) {
+      return;
+    }
+    const styles = {};
+    for (const node of rule.nodes) {
+      if (node.type === 'decl') {
+        styles[node.prop] = node.value;
+      }
+    }
+    found = { selector, styles };
+  });
+  return found;
+}
 
 function declarationsForSelector(css, selector) {
   const styles = {};
