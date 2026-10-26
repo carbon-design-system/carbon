@@ -1,4 +1,9 @@
-# Legacy compatibility matrix: `carbon-components-angular` to `@carbon/angular/legacy`
+# Compatibility matrix: `carbon-components-angular` to `@carbon/angular`
+
+> `@carbon/angular/legacy` was abandoned and removed on 2026-10-26. This file
+> was written to plan adapters for it. It is kept as a migration reference: the
+> "adapter" tier now means "a component whose migration is not a rename". The
+> filename is unchanged so existing links keep working.
 
 Generated from `temp/carbon-components-angular` (selectors,
 `@Input()`/`@Output()` names, `ControlValueAccessor`) and

@@ -26,7 +26,6 @@
     "e2e": "playwright test",
     "generate:wrappers": "node tasks/generate-wrappers/index.js",
     "playwright:install": "playwright install chromium",
-    "scaffold:legacy": "node tasks/scaffold-legacy-component/index.js",
     "storybook": "npx ng run carbon-angular:storybook",
     "storybook:build": "npx ng run carbon-angular:build-storybook",
     "test": "jest --passWithNoTests"

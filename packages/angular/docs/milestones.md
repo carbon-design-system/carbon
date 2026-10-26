@@ -1,13 +1,19 @@
 # `@carbon/angular` — Implementation Milestones
 
-**Status:** Pre-implementation **Source plan:** [`plan.md`](./plan.md) **Package
-location:** `packages/angular/` **Package names:** `@carbon/angular` (Automated
-Core) & `@carbon/angular/legacy` (Migration Adapters)
+**Status:** In progress, partly out of date. See
+[`status-and-open-questions.md`](./status-and-open-questions.md) for the current
+state. Milestones 0 and 1 are partly done (scaffolding, generator, Button only).
+**`@carbon/angular/legacy` was abandoned and removed on 2026-10-26**, so
+Milestone 3 is cancelled and Milestone 5 (codemods) needs rewriting; see
+[`migration-support.md`](./migration-support.md) and ADR 0020. The estimates
+below included legacy adapters and are no longer valid. **Source plan:**
+[`plan.md`](./plan.md) **Package location:** `packages/angular/` **Package
+name:** `@carbon/angular` (Automated Core)
 
 This document breaks the `@carbon/angular` implementation plan into seven
-focused milestones, leveraging the **automated core wrapper generator** and
-**`@carbon/angular/legacy` secondary entry point** to deliver full component
-coverage in **~2.5–3 months** (down from the original 5–6.5 month estimate).
+focused milestones, leveraging the **automated core wrapper generator**.
+Mentions of the `@carbon/angular/legacy` entry point below are the historical
+plan and are superseded.
 
 ---
 
@@ -25,7 +31,8 @@ runners, Storybook, and CI workflow.
   - Peer deps: `@angular/common >=20`, `@angular/core >=20`,
     `@angular/forms >=20`, `@carbon/styles >=2`
     ([ADR 0018](../../../docs/decisions/0018-angular-supported-major-versions.md))
-  - Deps: `@carbon/web-components` (hard dependency — wraps WC directly)
+  - Peer dependency: `@carbon/web-components` (ADR 0011; ADR 0020 proposes
+    bundling a prefixed copy instead)
 - `packages/angular/ng-package.json` — Root ng-packagr entry point
   (`@carbon/angular`)
 - `packages/angular/legacy/ng-package.json` — Secondary entry point
@@ -79,7 +86,8 @@ path (`Dropdown`).
 - Automated PoC: `src/generated/Button/` generated via pipeline, tested in
   `src/stories/Button/`
 - Legacy PoC: `legacy/src/components/Dropdown/` (CCA-compatible `[items]` array
-  adapter)
+  adapter) — **not built.** Only a legacy Button exists, and CCA's Button is an
+  attribute directive, so it does not demonstrate drop-in compatibility.
 - Layer 1 Jest test + Layer 2 Playwright test + Storybook story for Button and
   Dropdown
 - `.storybook/docs/welcome.mdx` & `.storybook/docs/migration.mdx` stubs
@@ -126,10 +134,19 @@ delivering 100% component coverage for `@carbon/angular` core.
 
 ## Milestone 3 — Specialized legacy adapters (`@carbon/angular/legacy`)
 
+> **Cancelled 2026-10-26.** The legacy entry point was abandoned and removed.
+> The text below is kept as the historical plan. The 3 to 4 weeks it covered are
+> not being spent; the cost moves to consumers and to the codemods in
+> Milestone 5.
+
 **Estimated effort:** 3–4 weeks **Depends on:** Milestone 2
 
 Hand-craft the ~15–20 compatibility wrappers in `@carbon/angular/legacy` to
 ensure drop-in migration for existing `carbon-components-angular` applications.
+
+> The compatibility matrix lists 57 adapter-tier components and 32 tag renames,
+> not 15 to 20, and the estimate below predates it. See
+> [`status-and-open-questions.md`](./status-and-open-questions.md).
 
 ### Deliverables
 
@@ -193,11 +210,19 @@ transitions.
 
 ### Deliverables
 
+> **Rewrite needed (2026-10-26).** The legacy entry point is gone, so the
+> two-step guide and the `cca-to-legacy` / `cca-to-angular` /
+> `cca-report-legacy-usage` codemods below no longer apply. The replacement
+> codemod set is the seven transforms in `plan.md` §16 plus tag, output and
+> directive transforms, with agent skills for the cases that cannot be
+> automated. See [`migration-support.md`](./migration-support.md).
+
 - **Migration Guide (`docs/guides/cca-to-angular.md`):** Complete guide
-  detailing:
-  - Step 1: Drop-in migration via `@carbon/angular/legacy`
-  - Step 2: Incremental modernization to `@carbon/angular`
-- **`@carbon/upgrade` Codemods (`packages/upgrade/transforms/`):**
+  detailing a single migration from `carbon-components-angular` to
+  `@carbon/angular`. (Originally planned as two steps via
+  `@carbon/angular/legacy`.)
+- **`@carbon/upgrade` Codemods (`packages/upgrade/transforms/`):** superseded
+  list, kept for history:
   - `cca-to-legacy` — Rewrites `carbon-components-angular` import paths to
     `@carbon/angular/legacy`
   - `cca-to-angular` — Modernizes imports from `@carbon/angular/legacy` to
@@ -222,9 +247,9 @@ Freezes the API and cuts the Release Candidate.
 
 ### Deliverables
 
-- Update `docs/migration/v12.md` with `@carbon/angular` and
-  `@carbon/angular/legacy` consumption details
-- Full test pass across both entry points in CI
+- Update `docs/migration/v12.md` with `@carbon/angular` consumption details (the
+  legacy entry point was removed)
+- Full test pass in CI
 - Version bump to `1.0.0-rc.0`
 
 ### Exit criteria

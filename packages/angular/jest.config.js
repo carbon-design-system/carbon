@@ -13,8 +13,6 @@ export default {
   testMatch: [
     '<rootDir>/src/**/__tests__/**/*.spec.ts',
     '<rootDir>/src/**/*.spec.ts',
-    '<rootDir>/legacy/**/__tests__/**/*.spec.ts',
-    '<rootDir>/legacy/**/*.spec.ts',
   ],
   modulePathIgnorePatterns: ['<rootDir>/dist/'],
   testPathIgnorePatterns: [

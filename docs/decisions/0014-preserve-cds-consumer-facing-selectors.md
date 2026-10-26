@@ -6,6 +6,15 @@ Date: 2026-09
 
 Accepted
 
+Proposed to be superseded by
+[ADR 0020](0020-angular-wholesale-cds-ng-prefix.md), which would replace `cds-*`
+with a wholesale `cds-ng-*` prefix. Until ADR 0020 is accepted this ADR stands.
+A spike with the CCA Modal (2026-10-26) showed that the real `cds-*` tag breaks
+a CCA modal on the same page; see ADR 0020 open question 1.
+
+`@carbon/angular/legacy` was removed from the repository on 2026-10-26, so the
+bullet below about the two layers sharing `cds-*` selectors no longer applies.
+
 ## Context
 
 `@carbon/angular` wraps `@carbon/web-components` elements. Both the WC elements

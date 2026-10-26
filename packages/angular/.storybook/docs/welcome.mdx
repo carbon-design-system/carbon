@@ -66,18 +66,8 @@ Add the Carbon stylesheet to your `angular.json` styles array:
 "styles": ["node_modules/@carbon/styles/css/styles.css"]
 ```
 
-## Two entry points
+## Migrating from `carbon-components-angular`
 
-`@carbon/angular` ships two entry points:
-
-| Entry point              | Purpose                                                                                       |
-| ------------------------ | --------------------------------------------------------------------------------------------- |
-| `@carbon/angular`        | All new development — 1:1 Angular wrappers generated from `@carbon/web-components`            |
-| `@carbon/angular/legacy` | Migrating from `carbon-components-angular` — drop-in compatible adapters matching the CCA API |
-
-If you are starting a new project, import everything from `@carbon/angular`.
-
-If you are migrating an existing `carbon-components-angular` application, see
-the **[Migration guide](?path=/docs/introduction-migration--docs)** — you can
-switch import paths to `@carbon/angular/legacy` first (no template changes
-required) and modernize to `@carbon/angular` incrementally.
+Import everything from `@carbon/angular`. If you are migrating an existing
+`carbon-components-angular` application, see the
+**[Migration guide](?path=/docs/introduction-migration--docs)**.

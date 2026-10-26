@@ -6,6 +6,18 @@ Date: 2026-10
 
 Proposed
 
+[ADR 0020](0020-angular-wholesale-cds-ng-prefix.md) proposes keeping the
+"wrapper host is the web component" part of this decision but replacing the
+"registered under the real `cds-*` tag" part with a wholesale `cds-ng-*` prefix
+over a prefixed build of the web components. The findings below remain the
+measured basis for both.
+
+`@carbon/angular/legacy` was removed from the repository on 2026-10-26. The
+"Legacy and generated wrappers on one page" open question and remaining-work
+item 7 below are therefore resolved by removal, and the legacy code they
+describe no longer exists. A spike with the CCA Modal showed that CCA and the
+real `cds-*` tag do not coexist; see ADR 0020 open question 1.
+
 ## Context
 
 `@carbon/angular` wraps `@carbon/web-components` elements as Angular components.
@@ -294,6 +306,16 @@ Done for the Button (Jest: 5 suites, 105 tests passing, 10 `it.todo`;
 ## Remaining work
 
 Nothing below has been done unless it is listed above.
+
+0. **Register child elements (added later, see ADR 0020 finding 2). Fixed:** the
+   generator now imports the component barrel, and
+   `src/__tests__/child-registration.spec.ts` guards it. The original problem:
+   the generator imported each component's class file and registers only that
+   class. Under pure exports this leaves the elements the component renders
+   undefined (`cds-modal` without `cds-dialog`). About 58 pure classes that
+   render other tags are certainly affected. Import the component barrel
+   instead. This also means the "Scope" open question above understates the gap:
+   more than the Button and `ModalFooter` are untested.
 
 1. **Run the Playwright checks.** `Button.e2e.ts` needs a built Storybook. Until
    it runs, the host `display: inline-flex` and 48px height claims are measured

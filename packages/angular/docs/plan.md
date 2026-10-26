@@ -1,40 +1,39 @@
 # `@carbon/angular` — Planning Document
 
+> **Update 2026-10-26: `@carbon/angular/legacy` has been abandoned and removed
+> from the repository.** The reasons recorded by the maintainers: migration is
+> not trivial even with adapters, and adapters create a two-step migration. The
+> package is a single automated entry point. This document was written when the
+> legacy entry point was part of the plan, and **many sections below still
+> describe it** (the §6 methodology, the effort table, the directory tree, the
+> Storybook ordering, the codemod list in §16). Treat every mention of
+> `@carbon/angular/legacy`, `cca-to-legacy` and "legacy adapters" as superseded.
+> Current state:
+> [`status-and-open-questions.md`](./status-and-open-questions.md) and
+> [`migration-support.md`](./migration-support.md). Effort estimates that
+> include legacy adapters are no longer valid.
+
 **Status:** Pre-implementation planning **Last updated:** 2026-09 (updated with
-Automated Core Wrapper Generator + `@carbon/angular/legacy` secondary entry
-point) **Location in monorepo:** `packages/angular/` **Package names:**
-`@carbon/angular` (Core / Automated) & `@carbon/angular/legacy` (CCA
-Compatibility) **Versioning:** `0.0.0-prerelease.0` → `1.0.0-rc.0` (v12 RC) →
-`1.0.0` (v12 GA) **Angular component selector prefix:** `cds-*` (both selector
-and WC tag — ADR 0015)
+Automated Core Wrapper Generator; legacy entry point since removed, see above)
+**Location in monorepo:** `packages/angular/` **Package name:**
+`@carbon/angular` (Automated) **Versioning:** `0.0.0-prerelease.0` →
+`1.0.0-rc.0` (v12 RC) → `1.0.0` (v12 GA) **Angular component selector prefix:**
+`cds-*` (both selector and WC tag — ADR 0015). Proposed to change to `cds-ng-*`
+in ADR 0020; a spike showed `cds-*` breaks a CCA modal on the same page.
 
 ---
 
-## Architecture: Dual Entry Points (`@carbon/angular` & `@carbon/angular/legacy`)
+## Architecture: single automated entry point
 
-`@carbon/angular` separates modern greenfield consumption from migration
-compatibility:
+`@carbon/angular` is generated automatically from `@carbon/web-components`:
 
-1. **`@carbon/angular` (Core / Root Entry Point — 100% Automated):**
-
-   - Pure 1:1 Angular wrappers generated automatically from
-     `@carbon/web-components`' Custom Elements Manifest (CEM /
-     `custom-elements.json`).
-   - Covers all 110+ component families (297+ custom elements) with zero manual
-     adapter lag.
-   - Ideal for greenfield apps and modernized features.
-
-2. **`@carbon/angular/legacy` (Secondary Entry Point — Deprecated Migration
-   Adapters):**
-   - Houses hand-crafted, CCA-compatible wrappers for components with divergent
-     legacy APIs (e.g., `[items]` array slot materialization in `Dropdown` /
-     `Select`, `notificationObj` in `Notification`, and `FileUploader` state
-     tracking).
-   - Exports with the same `cds-*` selectors. Because Angular standalone
-     components resolve selectors per-template within each component's `imports`
-     array, there are no selector collisions.
-   - Marked `@deprecated` with `@see` pointers to encourage staged migration to
-     `@carbon/angular`.
+- Pure 1:1 Angular wrappers generated from `@carbon/web-components`' Custom
+  Elements Manifest (CEM / `custom-elements.json`).
+- Covers all 110+ component families (297+ custom elements) with zero manual
+  adapter lag.
+- Migration from `carbon-components-angular` is a single move, supported by
+  documentation, codemods and agent skills. See
+  [`migration-support.md`](./migration-support.md).
 
 ---
 
@@ -283,9 +282,9 @@ This is the v3 registration API. Key changes shipped in that PR:
 - **`defineCustomElement(clazz, { name?, registry? })`** is now the public API,
   exported from `@carbon/web-components/es/globals/register.js` and implemented
   in
-  [`packages/web-components/src/globals/register.ts`](packages/web-components/src/globals/register.ts).
+  [`packages/web-components/src/globals/register.ts`](../../web-components/src/globals/register.ts).
   The decision is formalised in
-  [`docs/decisions/0007-provide-pure-class-exports-for-web-components.md`](docs/decisions/0007-provide-pure-class-exports-for-web-components.md).
+  [`docs/decisions/0007-provide-pure-class-exports-for-web-components.md`](../../../docs/decisions/0007-provide-pure-class-exports-for-web-components.md).
 - **`carbonElement` decorator is now deprecated** (development warning emitted).
   It continues to work throughout the v2→v3 transition period.
 - **`es-custom` build is now deprecated**; it still ships but will be removed in
@@ -353,9 +352,10 @@ contract `@carbon/angular` wrapper barrels should follow.
 
 ### WC registration pattern per component (ADR 0015)
 
-**Note:** An earlier version of this plan used a `cds-ng-*` internal tag prefix.
-That approach was superseded by ADR 0015 (host-is-WC). The section below
-reflects the current design.
+**Note:** An earlier version of this plan used a `cds-ng-*` _inner element_
+inside a `cds-*` wrapper. ADR 0015 replaced that with host-is-WC. A different
+idea, a wholesale `cds-ng-*` prefix over a prefixed build of the web components,
+is proposed in ADR 0020 and is not decided. The section below reflects ADR 0015.
 
 Each Angular wrapper component registers its backing WC element under the real
 tag as a side effect of its own module import:
@@ -386,6 +386,12 @@ export class ModalComponent implements OnChanges {
 
 Selector (`cds-modal`) === WC tag. Host IS the web component. No inner element,
 no `CUSTOM_ELEMENTS_SCHEMA`, no `es-custom`.
+
+**The snippet above is not what the generator emits.** It imports the `modal.js`
+class file and registers only `CDSModal`, so `cds-dialog`, `cds-modal-header`
+and the other elements that `cds-modal` renders were never defined. The
+generator now emits `import '…/components/modal/index.js'` (the folder barrel)
+instead. See ADR 0020 finding 2.
 
 **`@carbon/web-components` peer dep:** `defineCustomElement` is available
 (merged via PR #23097, commit `dd87f84`).
@@ -606,11 +612,11 @@ to the migration page. It does not duplicate migration content.
 
 ## 6. Component implementation plan
 
-### Development methodology: Automated generation + Hand-crafted legacy adapters
+### Development methodology: Automated generation
 
-`@carbon/angular` uses an automated wrapper generator pipeline for
-`@carbon/angular` core, paired with targeted manual adapter authoring in
-`@carbon/angular/legacy`.
+`@carbon/angular` uses an automated wrapper generator pipeline. (The paired
+hand-crafted `@carbon/angular/legacy` adapters that this section used to
+describe were removed on 2026-10-26.)
 
 #### 1. Core `@carbon/angular` Pipeline (100% Automated from CEM)
 
@@ -633,18 +639,12 @@ generates:
 Because the generator operates on the CEM source of truth, **over 110+ component
 families (297+ custom elements)** are generated and tested automatically.
 
-#### 2. Secondary Entry Point `@carbon/angular/legacy` (Hand-crafted migration adapters)
+#### 2. Secondary entry point `@carbon/angular/legacy`: removed
 
-For components where `carbon-components-angular` had divergent, non-1:1 APIs,
-specialized compatibility wrappers live in `legacy/src/components/`:
-
-- **`Dropdown` / `Select` / `MultiSelect`:** Accepts `[items]` array and
-  materializes slot children.
-- **`FileUploader`:** Angular-managed file state machine.
-- **`DataTable`:** `[rows]` / `[columns]` data binding with `cellTemplate`
-  projection.
-- **`Tabs` / `Accordion`:** Compatibility adapters with `closeOthers` support.
-- **`Notification`:** Compatibility wrapper accepting `notificationObj` model.
+Removed 2026-10-26. The components it was to hold (`Dropdown` / `Select` /
+`MultiSelect` with `[items]`, `FileUploader`, `DataTable`, `Tabs` / `Accordion`,
+`Notification` with `notificationObj`) are now migration cases handled by
+codemods and guidance. See [`migration-support.md`](./migration-support.md).
 
 ---
 
@@ -973,13 +973,21 @@ reveal additional CVA components:
 **The Angular wrapper targets the Preview DatePicker** —
 `cds-preview-date-picker` and `cds-preview-date-picker-input` — shipped in PR
 #22728 (merged Aug 5) at
-[`packages/web-components/src/components/date-picker/next/`](packages/web-components/src/components/date-picker/next/).
+[`packages/web-components/src/components/date-picker/next/`](../../web-components/src/components/date-picker/next/).
 Import from `@carbon/web-components/es/components/date-picker/next/index.js`.
 
 This is the definitive v12 DatePicker: built on the **Temporal API** and a
 framework-agnostic **state machine** (`@carbon/utilities/date-picker`), fully
-replacing Flatpickr. The classic `cds-date-picker` (Flatpickr-based) remains
-available in parallel under its own tag while consumers migrate.
+replacing Flatpickr. The classic `cds-date-picker` (Flatpickr-based) remains in
+`@carbon/web-components`, but `@carbon/angular` does not wrap it or any Fluid
+Date Picker
+([ADR 0021](../../../docs/decisions/0021-angular-drop-classic-date-picker.md)).
+
+> **Stale naming:** the `cds-ng-preview-*` names in this section and the
+> `cds-ng-<name>` queries in the §13 examples describe the earlier inner-element
+> design. Under ADR 0015 they are the real tags (`cds-preview-date-picker`, and
+> so on). They will be rewritten when those components are built (ADR 0015,
+> remaining work item 8). ADR 0020 would change them again.
 
 **Internal WC tag names for `@carbon/angular`:**
 
@@ -1048,16 +1056,17 @@ polyfill setup is required in the Angular package.
 With `defineCustomElement` now shipped in `@carbon/web-components` (PR #23097,
 merged to `main`; see §4 for full detail):
 
-- Each Angular wrapper component registers its WC backing element under a
-  `cds-ng-*` internal tag name on first import, using
-  `defineCustomElement(CDSModal, { name: 'cds-ng-modal' })`
+- Each Angular wrapper component registers its WC backing element on first
+  import (ADR 0015: under the real tag, using `defineCustomElement(CDSModal)`;
+  ADR 0020 proposes `cds-ng-*` through a prefixed build instead). The older text
+  here described `defineCustomElement(CDSModal, { name: 'cds-ng-modal' })`,
+  which renames one class only and breaks composites (ADR 0015 findings 2 and 3)
 - Consumers do not need to separately import WC side-effect modules
 - `defineCustomElement` is idempotent — re-registering the same class under the
   same tag is a no-op; if the WC class has already self-registered under
-  `cds-modal`, the helper registers a transparent subclass under `cds-ng-modal`
+  `cds-modal`, the helper registers a transparent subclass under the custom name
   instead (`instanceof CDSModal` still holds)
-- `es-custom` is not used — `defineCustomElement` with a custom name supersedes
-  it for per-component use cases
+- `es-custom` is not used
 - The `@carbon/web-components` peer dep can be pinned to the release containing
   commit `dd87f84` (PR #23097 merge); no `git:` branch dep is required
 
@@ -1106,8 +1115,8 @@ signals the instability period explicitly.
 - DataTable virtual scroll — use CDK Virtual Scroll independently; defer to v2
 - ~~TimePicker drop~~ — TimePicker is **in scope as a Tier 2 WC wrapper**
   (`cds-time-picker` confirmed in `@carbon/web-components`; Q7 closed)
-- Custom WC element name registration (not needed; `cds-*` Angular selectors and
-  `cds-ng-*` internal WC tags are distinct)
+- Custom WC element name registration at the `defineCustomElement` level. The
+  wholesale prefix in ADR 0020 is a different mechanism and is still proposed.
 - Porting CCA test files verbatim (see §14 for the correct migration strategy)
 - `DataGridInteractionModel` / datagrid keyboard mode — CCA-specific; complex;
   defer to v2
@@ -1180,8 +1189,8 @@ this baseline.
 
 CCA tests assert against CCA's rendered DOM. `modal.component.spec.ts` queries
 for `.cds--modal.cds--modal-tall.is-visible` — a CSS class applied by CCA's own
-Angular template. In `@carbon/angular`, the Modal renders `<cds-ng-modal>` and
-`.cds--modal` lives inside the WC's shadow DOM, invisible to
+Angular template. In `@carbon/angular`, the Modal host is the `<cds-modal>` web
+component and `.cds--modal` lives inside the WC's shadow DOM, invisible to
 `fixture.debugElement.query(By.css(...))`. Similarly, the Escape-key close test
 exercises logic now owned by the WC — `TestBed` does not invoke WC lifecycle in
 jsdom.
@@ -1197,8 +1206,8 @@ The WC test suite
 (`packages/web-components/src/components/<name>/__tests__/<name>-test.js`) is
 the **primary, authoritative source** for Layer 1 Jest test cases. For every
 scenario the WC tests verify on the element itself, a corresponding Angular test
-verifies that the Angular wrapper correctly forwards the same contract as an
-HTML attribute to `cds-ng-<name>`.
+verifies that the Angular wrapper correctly forwards the same contract as a
+property on the host `cds-<name>` element (ADR 0015).
 
 #### Why the WC tests are the best TDD source
 
@@ -1458,10 +1467,13 @@ old API unmaintainable>
    files) are not yet in main; until then the subclass fallback in
    `defineCustomElement` handles the transitional period cleanly.
 
-6. ~~**Selector prefix decision**~~ — **Closed.** `cds-*` Angular selectors
-   throughout. WC elements registered internally as `cds-ng-*` via
-   `defineCustomElement` — unoccupied namespace confirmed, consumers never write
-   these tags. No `es-custom`, no renaming.
+6. **Selector prefix decision** — **Reopened.** Previously closed as `cds-*`
+   Angular selectors with `cds-ng-*` internal tags; ADR 0015 replaced the
+   internal tags with host-is-WC under the real tag, and ADR 0020 now proposes a
+   wholesale `cds-ng-*` prefix. The coexistence spike
+   (`spikes/coexistence-spike.md`) has run for the Modal and the Dropdown and
+   supports the prefix; ADR 0020 stays Proposed until its other open questions
+   are answered.
 
 7. ~~**TimePicker — port forward or drop?**~~ — **Closed.** `cds-time-picker`
    exists in `@carbon/web-components` with full feature parity: `disabled`,
@@ -1476,7 +1488,7 @@ old API unmaintainable>
    Angular projection).
 
 8. ~~**Slider CVA range mode type**~~ — **Closed.** Verified from
-   [`packages/web-components/src/components/slider/slider.ts`](packages/web-components/src/components/slider/slider.ts):
+   [`packages/web-components/src/components/slider/slider.ts`](../../web-components/src/components/slider/slider.ts):
 
    - Single-handle mode: `value` property (`number`)
    - Two-handle mode: `value` (lower, `number`) + `unstable_valueUpper` (upper,
@@ -1494,7 +1506,7 @@ old API unmaintainable>
      for a stable rename.
 
 9. ~~**Carbon for IBM Products scope integration**~~ — **Closed.** Per ADR 0009
-   ([`docs/decisions/0009-ibm-products-to-core-migration.md`](docs/decisions/0009-ibm-products-to-core-migration.md)),
+   ([`docs/decisions/0009-ibm-products-to-core-migration.md`](../../../docs/decisions/0009-ibm-products-to-core-migration.md)),
    high-value IBM Products components are merged directly into `@carbon/react`
    and `@carbon/web-components`. `@carbon/angular` wraps these elements natively
    as part of the core library, providing single-package consumption without a
@@ -1533,8 +1545,10 @@ The CCA → `@carbon/angular` breaks are documented in the universal-breaks tabl
 in §7. In guide format each becomes a standalone entry. High-priority entries
 (those affecting the most consumers):
 
-1. **Selector stays `cds-*`** — no import path change needed; module path
-   changes from `carbon-components-angular` to `@carbon/angular`.
+1. **Selector** — ADR 0014 keeps `cds-*` for element selectors, but the Button
+   is an attribute directive in CCA (`<button cdsButton>`) and becomes an
+   element. The module path changes from `carbon-components-angular` to
+   `@carbon/angular`. ADR 0020 proposes `cds-ng-*` instead.
 2. **`TableModel` / `TableHeaderItem` / `TableItem` removed** — replace with
    flat `[rows]`, `[headers]`, `[size]` inputs.
 3. **`notificationObj` removed** on Toast, Inline, ActionableNotification —
@@ -1623,9 +1637,9 @@ npx @carbon/upgrade migrate cca-report-ui-shell-nav
 
 The WC v3 migration guide (`docs/guides/cwc-v3-migration.md`) notes that a
 Carbon element matching `:not(:defined)` at runtime means it was never
-registered. The same signal applies to `@carbon/angular` development: any
-`<cds-ng-*>` rendered but not registering indicates a missing
-`defineCustomElement` call in the wrapper component.
+registered. The same signal applies to `@carbon/angular` development: an
+unregistered `<cds-*>` element indicates a missing registration call in the
+wrapper component.
 
 For consumer migration, the equivalent runtime check is `<cds-*>`:
 
@@ -1642,9 +1656,9 @@ test setup.
 ### Relationship to `create-prefixed-build`
 
 `create-prefixed-build` (shipped in PR #23097) is not part of the
-`@carbon/angular` migration path — `@carbon/angular` uses `defineCustomElement`
-with `cds-ng-*` tags internally and does not conflict with the WC package's
-`cds-*` registry entries.
+`@carbon/angular` migration path. Under ADR 0015, `@carbon/angular` registers
+the real `cds-*` tags and does conflict with a separately loaded
+`@carbon/web-components`; ADR 0020 proposes a prefix that would avoid it.
 
 It _is_ relevant when a consumer runs both bare `@carbon/web-components` and
 `@carbon/angular` on the same page (e.g. a shell built with bare WC and an

@@ -49,7 +49,6 @@ const preview: Preview = {
           'Components',
           'Utilities',
           'Examples',
-          ['Legacy carbon-components-angular', ['Overview', '*']],
         ],
       },
     },

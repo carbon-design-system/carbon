@@ -6,6 +6,12 @@ Date: 2026-09
 
 Accepted
 
+> **Update 2026-10-26.** The `@carbon/angular/legacy` family described below was
+> removed from the repository (see
+> [ADR 0020](0020-angular-wholesale-cds-ng-prefix.md)). The decision about
+> generated story stubs for core wrappers stands. The parts about hand-crafted
+> legacy stories no longer apply.
+
 ## Context
 
 `@carbon/angular` has two distinct component families, each with different

@@ -6,6 +6,13 @@ Date: 2026-09
 
 Accepted
 
+> **Update 2026-10-26.** The `@carbon/angular/legacy` entry point described
+> below was abandoned and removed from the repository (see
+> [ADR 0020](0020-angular-wholesale-cds-ng-prefix.md)). The reasons were that
+> migration is not trivial even with adapters and that adapters would create a
+> two-step migration. `@carbon/angular` is now a single automated entry point.
+> Sections about `/legacy` are kept as the historical record of this decision.
+
 ## Context
 
 Carbon has two existing component implementations: `@carbon/react` and
@@ -155,6 +162,13 @@ points:
   paths (ADR 0012), adjust the documented API breaks above, and install
   `@carbon/web-components` as a peer. Documentation should describe the lift as
   "reduced" rather than "none".
-- Because the wrappers are hand-written, keeping them in sync with
-  `@carbon/web-components` depends on review discipline and the Angular ↔ WC
-  interface tests rather than on code generation.
+- The core wrappers are generated, so they track `@carbon/web-components`
+  through the generator. The hand-written `@carbon/angular/legacy` adapters do
+  not, and rely on review discipline and the Angular ↔ WC interface tests. (An
+  earlier version of this ADR said all wrappers were hand-written, which
+  contradicted the decision above.)
+- Open as of ADR 0020: whether the peer-dependency consequence above holds. ADR
+  0020 proposes a wholesale `cds-ng-*` prefix over a prefixed copy of the web
+  components, which could mean bundling that copy and dropping the peer
+  dependency. Whether the legacy entry point should exist at all is also under
+  review; see `packages/angular/docs/status-and-open-questions.md`.

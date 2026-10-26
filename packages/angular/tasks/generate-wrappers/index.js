@@ -35,12 +35,35 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
  *   node tasks/generate-wrappers/index.js --tag cds-button
  */
 
-const MANIFEST_PATH = join(
-  __dirname,
-  '../../../web-components/custom-elements.json'
-);
+const WC_ROOT = join(__dirname, '../../../web-components');
+const MANIFEST_PATH = join(WC_ROOT, 'custom-elements.json');
 
 const OUTPUT_DIR = join(__dirname, '../../src/generated');
+
+/**
+ * Resolve the `@carbon/web-components` barrel that registers a tag's family.
+ *
+ * Class files are pure (ADR 0007): importing one registers nothing, and it
+ * never registers the child elements the component renders (e.g. `cds-modal`
+ * renders `cds-dialog`). The folder barrel registers all of them.
+ *
+ * `tag.path` is `./src/components/<dir>/<file>.ts`. Folders can be nested
+ * (`date-picker/next`) and a folder without an `index.ts`
+ * (`date-picker/next/components`) is covered by its nearest parent barrel.
+ *
+ * @returns {string} import specifier, e.g.
+ *   `@carbon/web-components/es/components/modal/index.js`
+ */
+function resolveBarrelImport(tag) {
+  const segments = dirname(tag.path.replace(/^\.\/src\//, '')).split('/');
+  while (segments.length > 1) {
+    if (existsSync(join(WC_ROOT, 'src', ...segments, 'index.ts'))) {
+      return `@carbon/web-components/es/${segments.join('/')}/index.js`;
+    }
+    segments.pop();
+  }
+  throw new Error(`No barrel found for <${tag.name}> (${tag.path})`);
+}
 
 /** Helper to convert kebab-case or prefix-kebab to PascalCase */
 function toPascalCase(str) {
@@ -193,17 +216,12 @@ const VALUE_CHANGE_EVENT = /-(changed|selected|input)$/;
 
 function generateWrapperForTag(tag) {
   const tagName = tag.name; // e.g. "cds-button"
-  const tagWithoutPrefix = tagName.replace(/^cds-/, ''); // e.g. "button"
   const displayName = toPascalCase(tagName); // e.g. "Button"
   const className = `${displayName}Component`; // e.g. "ButtonComponent"
 
-  // Derive WC class name and import path
-  // e.g. path: "./src/components/button/button.ts" -> "@carbon/web-components/es/components/button/button.js"
-  const wcRelPath = tag.path
-    ? tag.path.replace(/^\.\/src\//, '').replace(/\.ts$/, '.js')
-    : `components/${tagWithoutPrefix}/${tagWithoutPrefix}.js`;
-  const wcImportPath = `@carbon/web-components/es/${wcRelPath}`;
-  const wcClassName = `CDS${displayName}`;
+  // Import the folder barrel, not the class file, so child elements register.
+  // e.g. path: "./src/components/modal/modal.ts" -> "@carbon/web-components/es/components/modal/index.js"
+  const wcImportPath = resolveBarrelImport(tag);
 
   // Form-associated elements with a `value`/`checked` get a ControlValueAccessor
   // so `ngModel`, `formControl` and `formControlName` work.
@@ -420,10 +438,7 @@ import {
       ? `\nimport { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';`
       : ''
   }
-import ${wcClassName} from '${wcImportPath}';
-import { defineCustomElement } from '@carbon/web-components/es/globals/register.js';
-
-defineCustomElement(${wcClassName});
+import '${wcImportPath}';
 ${propertyInputsConst}
 
 /**
