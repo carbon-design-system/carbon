@@ -44,6 +44,11 @@ export type IconButtonAlignment = PopoverAlignment;
 export interface IconButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
+   * Specify the message read by screen readers for the danger button variants
+   */
+  dangerDescription?: string;
+
+  /**
    * Specify how the tooltip should be aligned with the button
    */
   align?: IconButtonAlignment;
@@ -346,6 +351,11 @@ IconButton.propTypes = {
    * Specify the type of button to be used as the base for the IconButton
    */
   kind: PropTypes.oneOf(IconButtonKinds),
+
+  /**
+   * Specify the message read by screen readers for the danger button variants
+   */
+  dangerDescription: PropTypes.string,
 
   /**
    * Provide the label to be rendered inside of the Tooltip. The label will use

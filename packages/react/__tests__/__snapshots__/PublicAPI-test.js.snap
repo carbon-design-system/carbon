@@ -5855,6 +5855,9 @@ Map {
       "closeOnActivation": {
         "type": "bool",
       },
+      "dangerDescription": {
+        "type": "string",
+      },
       "defaultOpen": {
         "type": "bool",
       },
