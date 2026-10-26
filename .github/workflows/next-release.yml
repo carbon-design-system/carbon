@@ -33,7 +33,7 @@ jobs:
       - name: Determine next alpha tag
         id: next_tag
         run: |
-          latest=$(git tag --list 'v12.*-alpha.*' | grep -E '^v12\.[0-9]+\.[0-9]+-alpha\.[0-9]+$' | sort -V | tail -n 1 || true)
+          latest=$(git tag --list 'v12.*-alpha.*' --sort=-version:refname | grep -E '^v12\.[0-9]+\.[0-9]+-alpha\.[0-9]+$' | head -n 1 || true)
           if [ -z "$latest" ]; then
             echo "No existing alpha tag found"
             exit 1
