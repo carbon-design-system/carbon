@@ -200,6 +200,8 @@ const TimePicker = frFn((props, ref) => {
     warnText: warningText,
   });
 
+  const hasSelectChildren = React.Children.count(children) > 0;
+
   const timePickerInputClasses = cx(
     `${prefix}--time-picker__input-field`,
     `${prefix}--text-input`,
@@ -208,6 +210,7 @@ const TimePicker = frFn((props, ref) => {
       [`${prefix}--text-input--light`]: light,
       [`${prefix}--time-picker__input-field-error`]:
         normalizedProps.invalid || normalizedProps.warn,
+      [`${prefix}--time-picker__input-field--with-select`]: hasSelectChildren,
     }
   );
 
