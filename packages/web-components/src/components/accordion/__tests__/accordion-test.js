@@ -86,6 +86,49 @@ describe('cds-accordion', function () {
     });
   });
 
+  describe('animationend listener', () => {
+    it('should not add a new animationend listener on every toggle', async () => {
+      const el = await fixture(accordion);
+      const firstItem = el.firstElementChild;
+      const content = firstItem.shadowRoot.querySelector(
+        '.cds--accordion__content'
+      );
+      const listeners = [];
+      const addEventListener = content.addEventListener.bind(content);
+      content.addEventListener = (type, listener, options) => {
+        if (type === 'animationend') {
+          listeners.push(listener);
+        }
+        addEventListener(type, listener, options);
+      };
+
+      const button = firstItem.shadowRoot.querySelector('button');
+      for (let index = 0; index < 5; index++) {
+        button.click();
+        await firstItem.updateComplete;
+      }
+
+      expect(listeners).to.have.lengthOf(5);
+      expect(new Set(listeners).size).to.equal(1);
+    });
+
+    it('should clear expanding and collapsing when the animation ends', async () => {
+      const el = await fixture(accordion);
+      const firstItem = el.firstElementChild;
+      const content = firstItem.shadowRoot.querySelector(
+        '.cds--accordion__content'
+      );
+
+      firstItem.shadowRoot.querySelector('button').click();
+      expect(firstItem.hasAttribute('expanding')).to.be.true;
+
+      content.dispatchEvent(new Event('animationend'));
+
+      expect(firstItem.hasAttribute('expanding')).to.be.false;
+      expect(firstItem.hasAttribute('collapsing')).to.be.false;
+    });
+  });
+
   describe('Flush align', () => {
     it('should align to the left if prop isFlush is passed', async () => {
       const el = await fixture(
