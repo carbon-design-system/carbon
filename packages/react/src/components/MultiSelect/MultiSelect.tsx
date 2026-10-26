@@ -463,7 +463,7 @@ export const MultiSelect = React.forwardRef(
       setHighlightedIndex,
     } = useSelect<ItemType>(selectProps);
 
-    const toggleButtonProps = getToggleButtonProps({
+    const downshiftToggleButtonProps = getToggleButtonProps({
       onFocus: () => {
         setInputFocused(true);
       },
@@ -506,6 +506,12 @@ export const MultiSelect = React.forwardRef(
         }
       },
     });
+
+    const toggleButtonProps = {
+      ...downshiftToggleButtonProps,
+      'aria-activedescendant':
+        downshiftToggleButtonProps['aria-activedescendant'] || undefined,
+    };
 
     const toggleButtonRef = useRef<HTMLButtonElement>(null);
     const titleRef = useRef<HTMLLabelElement>(null);
