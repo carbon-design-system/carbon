@@ -45,11 +45,9 @@ describe('IconButton', () => {
       </IconButton>
     );
 
-    const button = screen.getByRole('button');
-    expect(button).toHaveAttribute('aria-describedby');
-    expect(
-      document.getElementById(button.getAttribute('aria-describedby'))
-    ).toHaveTextContent('Permanently deletes this item');
+    expect(screen.getByRole('button')).toHaveAccessibleDescription(
+      'Permanently deletes this item'
+    );
   });
 
   it('should enable `autoAlign` on its tooltip by default with `enable-v12-autoalign`', async () => {
