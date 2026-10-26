@@ -232,3 +232,44 @@ describe('Feedback', () => {
     await expect(el).shadowDom.to.equalSnapshot();
   });
 });
+
+describe('autoAlign', () => {
+  it('should default the tooltip autoalign to true', async () => {
+    const el = await fixture(html`
+      <cds-copy-button icon-description="Copy to clipboard"></cds-copy-button>
+    `);
+    const copy = el.shadowRoot.querySelector('cds-copy');
+
+    await copy.updateComplete;
+
+    expect(copy.autoalign).to.be.true;
+    expect(copy.shadowRoot.querySelector('cds-tooltip').autoalign).to.be.true;
+  });
+
+  it('should keep the tooltip autoalign disabled when set to false', async () => {
+    const el = await fixture(html`
+      <cds-copy-button .autoAlign=${false} icon-description="Copy to clipboard">
+      </cds-copy-button>
+    `);
+
+    const copy = el.shadowRoot.querySelector('cds-copy');
+
+    await copy.updateComplete;
+
+    expect(copy.autoalign).to.be.false;
+    expect(copy.shadowRoot.querySelector('cds-tooltip').autoalign).to.be.false;
+  });
+
+  it('should reflect autoAlign to the autoalign attribute', async () => {
+    const el = await fixture(html`
+      <cds-copy-button
+        .autoAlign=${true}
+        icon-description="Copy to clipboard"></cds-copy-button>
+    `);
+
+    await el.updateComplete;
+
+    expect(el).to.have.attribute('autoalign');
+    expect(el).to.not.have.attribute('auto-align');
+  });
+});

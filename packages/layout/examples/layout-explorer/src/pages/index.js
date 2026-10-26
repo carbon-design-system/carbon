@@ -8,7 +8,7 @@
 import React from 'react';
 import layoutJson from '../../../../tokens/layout.tokens.json';
 
-// ── Resolve token values from layout.tokens.json ─────────────────────────────
+// Resolve token values from layout.tokens.json
 
 // Max rem value across all tokens — used to scale dimension bars
 const MAX_REM = 10;
@@ -22,8 +22,7 @@ function resolveValue(token) {
   return `${$value}${unit}`;
 }
 
-// ── Flatten layout.tokens.json into groups ───────────────────────────────────
-
+// Flatten layout.tokens.json into groups
 function buildGroups(json) {
   const groups = [];
   for (const [groupKey, groupVal] of Object.entries(json)) {
@@ -52,8 +51,7 @@ function buildGroups(json) {
 const ALL_GROUPS = buildGroups(layoutJson);
 const GROUP_OPTIONS = ['All', ...ALL_GROUPS.map((g) => g.key)];
 
-// ── Dimension bar (proportional to rem value, capped at MAX_REM) ──────────────
-
+// Dimension bar (proportional to rem value, capped at MAX_REM)
 function DimensionBar({ value }) {
   if (!value || !value.endsWith('rem')) return null;
   const rem = parseFloat(value);
@@ -69,8 +67,7 @@ function DimensionBar({ value }) {
   );
 }
 
-// ── Main page ─────────────────────────────────────────────────────────────────
-
+// Main page
 export default function IndexPage({ lastBuiltOn }) {
   const [activeGroup, setActiveGroup] = React.useState('All');
   const [search, setSearch] = React.useState('');

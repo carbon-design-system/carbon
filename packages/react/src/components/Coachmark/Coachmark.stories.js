@@ -68,7 +68,7 @@ export default {
     CoachmarkBeacon,
     CoachmarkTagline,
   },
-  tags: ['autodocs', 'ibm-products-migrated'],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       page: mdx,

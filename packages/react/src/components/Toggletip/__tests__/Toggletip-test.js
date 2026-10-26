@@ -16,6 +16,7 @@ import {
 } from '..';
 import { Information } from '@carbon/react/icons';
 import userEvent from '@testing-library/user-event';
+import { waitForPosition } from '../../ListBox/test-helpers';
 
 describe('Toggletip', () => {
   describe('accessibility', () => {
@@ -311,15 +312,18 @@ describe('Toggletip', () => {
           </Toggletip>
         );
 
-        expect(screen.getByText('Toggle')).toHaveAttribute(
-          'aria-expanded',
-          'false'
-        );
+        const button = screen.getByText('Toggle');
+        const controls = button.getAttribute('aria-controls');
+        const content = document.getElementById(controls);
+
+        expect(button).toHaveAttribute('aria-expanded', 'false');
+        expect(content).toHaveTextContent('Content');
+        expect(button).not.toHaveAttribute('aria-describedby');
+
         await userEvent.click(screen.getByText('Toggle'));
-        expect(screen.getByText('Toggle')).toHaveAttribute(
-          'aria-expanded',
-          'true'
-        );
+        expect(button).toHaveAttribute('aria-expanded', 'true');
+        expect(button).toHaveAttribute('aria-controls', controls);
+        expect(button).not.toHaveAttribute('aria-describedby');
       });
     });
 
@@ -718,5 +722,30 @@ describe('ToggletipLabel', () => {
     const label = screen.getByText('Label Text');
 
     expect(label).toHaveAttribute('data-custom', '123');
+  });
+});
+
+describe('Toggletip autoAlign default', () => {
+  it('should enable `autoAlign` by default', async () => {
+    render(<Toggletip data-testid="toggletip">test</Toggletip>);
+    await waitForPosition();
+
+    expect(screen.getByTestId('toggletip')).toHaveClass(`${prefix}--autoalign`);
+  });
+
+  it('should keep the requested alignment with `autoAlign={false}`', async () => {
+    render(
+      <Toggletip autoAlign={false} align="bottom-start" data-testid="toggletip">
+        test
+      </Toggletip>
+    );
+    await waitForPosition();
+
+    // Dynamic floating styles still apply the auto-align class in v12; what
+    // `autoAlign={false}` disables is collision-based repositioning.
+    expect(screen.getByTestId('toggletip')).toHaveClass(`${prefix}--autoalign`);
+    expect(screen.getByTestId('toggletip')).toHaveClass(
+      `${prefix}--popover--bottom-start`
+    );
   });
 });

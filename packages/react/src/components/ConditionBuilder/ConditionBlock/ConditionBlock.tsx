@@ -137,7 +137,7 @@ const ConditionBlock = (props: ConditionBlockProps) => {
     custom: (config as PropertyConfigCustom['config'])?.component,
     textarea: ConditionBuilderItemText,
   };
-  const ItemComponent = itemComponents[type];
+  const ItemComponent = type ? itemComponents[type] : undefined;
 
   const showAllActionsHandler = () => {
     setShowAllActions(true);
@@ -193,7 +193,8 @@ const ConditionBlock = (props: ConditionBlockProps) => {
       return (config as ConfigType)?.operators;
     }
     return operatorConfig.filter(
-      (operator) => operator.type.indexOf(type) != -1 || operator.type == 'all'
+      (operator) =>
+        operator.type.indexOf(type ?? '') != -1 || operator.type == 'all'
     );
   };
   const getAriaAttributes = () => {

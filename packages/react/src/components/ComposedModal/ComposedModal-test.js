@@ -496,7 +496,7 @@ describe.each([
           <div id="description-modal-id">
             This is the description of the modal
           </div>
-          <FeatureFlags enableDialogElement>
+          <FeatureFlags enableV12Release={false} enableDialogElement>
             <ComposedModal
               aria-describedby="description-modal-id"
               data-testid="modal"
@@ -641,7 +641,7 @@ describe.each([
 
         // The background layer is used here instead of a button outside the
         // modal because a real user cannot interact with a button. The
-        // backround layer is in the way.
+        // background layer is in the way.
         const backgroundLayer = screen.getByRole('presentation', {
           hidden: true,
         });
@@ -669,7 +669,7 @@ describe.each([
 
         // The background layer is used here instead of a button outside the
         // modal because a real user cannot interact with a button. The
-        // backround layer is in the way.
+        // background layer is in the way.
         const backgroundLayer = screen.getByRole('presentation', {
           hidden: true,
         });
@@ -691,7 +691,7 @@ describe.each([
 
         // The background layer is used here instead of a button outside the
         // modal because a real user cannot interact with a button. The
-        // backround layer is in the way.
+        // background layer is in the way.
         const backgroundLayer = screen.getByRole('presentation', {
           hidden: true,
         });
@@ -724,7 +724,7 @@ describe.each([
 
         // The background layer is used here instead of a button outside the
         // modal because a real user cannot interact with a button. The
-        // backround layer is in the way.
+        // background layer is in the way.
         const backgroundLayer = screen.getByRole('presentation', {
           hidden: true,
         });
@@ -749,7 +749,7 @@ describe.each([
 
         // The background layer is used here instead of a button outside the
         // modal because a real user cannot interact with a button. The
-        // backround layer is in the way.
+        // background layer is in the way.
         const backgroundLayer = screen.getByRole('presentation', {
           hidden: true,
         });
@@ -779,7 +779,7 @@ describe.each([
 
         // The background layer is used here instead of a button outside the
         // modal because a real user cannot interact with a button. The
-        // backround layer is in the way.
+        // background layer is in the way.
         const backgroundLayer = screen.getByRole('presentation', {
           hidden: true,
         });

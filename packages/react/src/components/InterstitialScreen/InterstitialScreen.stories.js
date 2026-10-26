@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024, 2025
+ * Copyright IBM Corp. 2024, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -23,7 +23,7 @@ const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 export default {
   title: 'Components/InterstitialScreen',
   component: InterstitialScreen,
-  tags: ['autodocs', 'ibm-products-migrated'],
+  tags: ['autodocs'],
   subcomponents: {
     Header: InterstitialScreen.Header,
     Body: InterstitialScreen.Body,

@@ -12,6 +12,7 @@ import { prefix } from '../../globals/settings';
 import styles from './popover.scss?lit';
 import CDSPopoverContent from './popover-content';
 import HostListener from '../../globals/decorators/host-listener';
+import AutoAlignMixin from '../../globals/mixins/auto-align';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import FloatingUIController from '../../globals/controllers/floating-controller';
 import { POPOVER_BACKGROUND_TOKEN } from './defs';
@@ -26,7 +27,7 @@ import { isFeatureFlagEnabled } from '../feature-flags';
  * @fires cds-popover-beingclosed before the popover closes via focusout/outsideclick.
  * @fires cds-popover-closed when the popover closes via focusout/outsideclick
  */
-class CDSPopover extends HostListenerMixin(LitElement) {
+class CDSPopover extends AutoAlignMixin(HostListenerMixin(LitElement)) {
   static is = `${prefix}-popover`;
 
   /**
@@ -64,10 +65,11 @@ class CDSPopover extends HostListenerMixin(LitElement) {
   alignmentAxisOffset?: number;
 
   /**
-   * Specify whether a auto align functionality should be applied
+   * Specify whether auto-align is enabled. Defaults to `true` when
+   * `enable-v12-autoalign` is enabled, and to `false` otherwise.
    */
   @property({ type: Boolean, reflect: true })
-  autoalign = false;
+  autoalign?: boolean;
 
   /**
    * @deprecated This prop has been deprecated and will be
@@ -402,7 +404,7 @@ class CDSPopover extends HostListenerMixin(LitElement) {
       };
     }
 
-    // Fallback for browsers not suporting Visual Viewport API
+    // Fallback for browsers not supporting Visual Viewport API
     return {
       x: 0,
       y: 0,

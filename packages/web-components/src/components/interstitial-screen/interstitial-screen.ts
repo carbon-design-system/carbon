@@ -13,11 +13,12 @@ import HostListenerMixin from '../../globals/mixins/host-listener';
 import HostListener from '../../globals/decorators/host-listener';
 
 import styles from './interstitial-screen.scss?lit';
-import { SignalWatcher } from '@lit-labs/signals';
+import { ContextProvider } from '@lit/context';
 import {
-  interstitialDetailsSignal,
-  resetInterstitialDetailsSignal,
-  updateInterstitialDetailsSignal,
+  interstitialContext,
+  InterstitialContextValue,
+  InterstitialState,
+  defaultInterstitialState,
 } from './interstitial-screen-context';
 import {
   trapFocus,
@@ -43,9 +44,7 @@ export type disableButtonConfigType = {
 
  */
 
-class CDSInterstitialScreen extends SignalWatcher(
-  HostListenerMixin(LitElement)
-) {
+class CDSInterstitialScreen extends HostListenerMixin(LitElement) {
   static is = `${prefix}-interstitial-screen`;
 
   /**
@@ -71,25 +70,40 @@ class CDSInterstitialScreen extends SignalWatcher(
   private _wasOpen = false;
   private _trapFocusAPI: { cleanup: () => void } | null = null;
 
+  /**
+   * Lit context provider, scoped to this element instance.
+   */
+  private _contextProvider = new ContextProvider(this, {
+    context: interstitialContext,
+    initialValue: {
+      state: { ...defaultInterstitialState },
+      setState: (patch) => this._updateState(patch),
+    } satisfies InterstitialContextValue,
+  });
+
+  private _updateState(patch: Partial<InterstitialState>) {
+    this._contextProvider.setValue({
+      ...this._contextProvider.value,
+      state: { ...this._contextProvider.value.state, ...patch },
+    });
+  }
+
   connectedCallback() {
     super.connectedCallback();
     this.addEventListener(`${prefix}-request-close`, this._handleClose);
   }
+
   disconnectedCallback(): void {
     super.disconnectedCallback();
-    const { carouselAPI } = interstitialDetailsSignal.get();
+    const { carouselAPI } = this._contextProvider.value.state;
     carouselAPI?.destroyEvents?.();
     this._trapFocusAPI?.cleanup();
     clearFocusableContainers();
   }
+
   firstUpdated() {
     this.requestUpdate(); // Ensure re-render
-    resetInterstitialDetailsSignal();
-
-    updateInterstitialDetailsSignal({
-      name: 'isFullScreen',
-      detail: this.isFullScreen,
-    });
+    this._updateState({ isFullScreen: this.isFullScreen });
   }
 
   updated(changedProps: Map<string | number | symbol, unknown>) {
@@ -97,11 +111,8 @@ class CDSInterstitialScreen extends SignalWatcher(
       const wasOpen = this._wasOpen;
       const isOpen = this.open;
 
-      // Update the signal with the open state
-      updateInterstitialDetailsSignal({
-        name: 'open',
-        detail: isOpen,
-      });
+      // Sync open state into context
+      this._updateState({ open: isOpen });
 
       if (!wasOpen && isOpen) {
         this.dispatchInItializeEvent();
@@ -119,7 +130,7 @@ class CDSInterstitialScreen extends SignalWatcher(
 
   private dispatchInItializeEvent = () => {
     setTimeout(() => {
-      const { carouselAPI } = interstitialDetailsSignal.get();
+      const { carouselAPI } = this._contextProvider.value.state;
       this.dispatchEvent(
         new CustomEvent(
           (
@@ -165,7 +176,7 @@ class CDSInterstitialScreen extends SignalWatcher(
   };
 
   private setDisableActionButtons = (config: disableButtonConfigType) => {
-    updateInterstitialDetailsSignal({ name: 'disableActions', detail: config });
+    this._updateState({ disableActions: config });
   };
 
   _handleClose(e: Event) {
@@ -200,16 +211,13 @@ class CDSInterstitialScreen extends SignalWatcher(
       );
 
       // Reset carousel and step after close event is dispatched
-      const { carouselAPI } = interstitialDetailsSignal.get();
+      const { carouselAPI } = this._contextProvider.value.state;
       if (carouselAPI) {
         carouselAPI.reset();
       }
 
       // Reset the current step to 0
-      updateInterstitialDetailsSignal({
-        name: 'currentStep',
-        detail: 0,
-      });
+      this._updateState({ currentStep: 0 });
     }
   }
 

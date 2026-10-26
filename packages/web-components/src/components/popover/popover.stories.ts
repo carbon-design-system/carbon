@@ -157,7 +157,6 @@ export const Default = {
     highContrast: false,
     align: POPOVER_ALIGNMENT.BOTTOM,
     alignmentAxisOffset: 0,
-    autoAlign: false,
     backgroundToken: POPOVER_BACKGROUND_TOKEN.LAYER,
     dropShadow: true,
     open: true,

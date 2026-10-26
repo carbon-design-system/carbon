@@ -9,8 +9,34 @@ import { Edit } from '@carbon/icons-react';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { IconButton } from '../';
+import { waitForPosition } from '../../ListBox/test-helpers';
 
 describe('IconButton', () => {
+  it('should enable `autoAlign` on its tooltip by default', async () => {
+    const { container } = render(
+      <IconButton label="test">
+        <Edit />
+      </IconButton>
+    );
+    await waitForPosition();
+
+    expect(container.firstChild).toHaveClass('cds--popover--auto-align');
+  });
+
+  it('should keep the requested alignment with `autoAlign={false}`', async () => {
+    const { container } = render(
+      <IconButton label="test" autoAlign={false} align="bottom">
+        <Edit />
+      </IconButton>
+    );
+    await waitForPosition();
+
+    // Dynamic floating styles still apply the auto-align class in v12; what
+    // `autoAlign={false}` disables is collision-based repositioning.
+    expect(container.firstChild).toHaveClass('cds--popover--auto-align');
+    expect(container.firstChild).toHaveClass('cds--popover--bottom');
+  });
+
   it('should support labelling with label', () => {
     render(
       <IconButton label="edit">

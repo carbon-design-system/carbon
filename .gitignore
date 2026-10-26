@@ -15,6 +15,7 @@ storybook-static-v12
 
 # Angular
 /packages/angular/.angular/
+/packages/angular/src/generated/
 
 # Netlify deploy folder
 /demo/*
@@ -92,7 +93,3 @@ playwright-report
 **/.yarn/cache/
 **/.yarn/build-state.yml
 **/.yarn/install-state.gz
-
-# Generated DTCG color palette (built from @carbon/colors at build time)
-packages/themes/src/dtcg/color-palette.json
-/packages/angular/src/generated/

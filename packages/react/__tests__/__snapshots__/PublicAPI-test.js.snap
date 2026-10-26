@@ -377,6 +377,35 @@ Map {
       },
     },
   },
+  "AddSelect" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "Body": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "Column": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "ItemPanel": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "Row": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "SelectionSummary": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "SelectionSummaryItem": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "render": [Function],
+  },
+  "AddSelectData" => {},
   "AspectRatio" => {
     "propTypes": {
       "as": {
@@ -926,6 +955,22 @@ Map {
         ],
         "type": "oneOfType",
       },
+    },
+    "render": [Function],
+  },
+  "Coachmark" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "Content": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "ContentBody": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "ContentHeader": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
     },
     "render": [Function],
   },
@@ -1683,6 +1728,15 @@ Map {
     "render": [Function],
   },
   "ComposedModalPresence" => {},
+  "ConditionBuilder" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
+  "ConditionBuilderContext" => {
+    "$$typeof": Symbol(react.context),
+    "Consumer": "React.Consumer",
+    "Provider": "React.Provider",
+  },
   "ContainedList" => {
     "ContainedListItem": {
       "propTypes": {
@@ -2747,6 +2801,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "toolbarLabel": {
+        "type": "string",
+      },
       "zebra": {
         "type": "bool",
       },
@@ -3374,6 +3431,10 @@ Map {
       },
     },
   },
+  "EditInPlace" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
   "ErrorBoundary" => {
     "contextType": {
       "$$typeof": Symbol(react.context),
@@ -3558,6 +3619,9 @@ Map {
         "type": "bool",
       },
       "enableTreeviewControllable": {
+        "type": "bool",
+      },
+      "enableV12Autoalign": {
         "type": "bool",
       },
       "enableV12DynamicFloatingStyles": {
@@ -5453,6 +5517,10 @@ Map {
       },
     },
   },
+  "FullPageError" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
   "GlobalTheme" => {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": {
@@ -6162,6 +6230,26 @@ Map {
         "type": "string",
       },
     },
+  },
+  "InterstitialScreen" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "Body": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "Footer": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "Header": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "render": [Function],
+  },
+  "InterstitialScreenView" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
   },
   "Layer" => {
     "$$typeof": Symbol(react.forward_ref),
@@ -7173,6 +7261,10 @@ Map {
       },
     },
   },
+  "NotificationsPanel" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
   "NumberInput" => {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": {
@@ -7438,6 +7530,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -7500,6 +7593,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -7565,6 +7659,10 @@ Map {
         "type": "oneOf",
       },
     },
+    "render": [Function],
+  },
+  "OptionsTile" => {
+    "$$typeof": Symbol(react.forward_ref),
     "render": [Function],
   },
   "OrderedList" => {
@@ -7797,6 +7895,127 @@ Map {
         "type": "string",
       },
     },
+    "render": [Function],
+  },
+  "PageHeader" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "BreadcrumbBar": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "BreadcrumbOverflow": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "BreadcrumbPageActions": {
+      "displayName": "PageHeaderBreadcrumbPageActions",
+    },
+    "Content": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "ContentPageActions": {
+      "displayName": "PageHeaderContentPageActions",
+    },
+    "ContentText": {
+      "displayName": "PageHeaderContentText",
+    },
+    "HeroImage": {
+      "displayName": "PageHeaderHeroImage",
+    },
+    "Root": {
+      "$$typeof": Symbol(react.forward_ref),
+      "BreadcrumbBar": {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      },
+      "BreadcrumbOverflow": {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      },
+      "BreadcrumbPageActions": [Function],
+      "Content": {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      },
+      "ContentPageActions": [Function],
+      "ContentText": [Function],
+      "HeroImage": [Function],
+      "Root": [Circular],
+      "ScrollButton": {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      },
+      "TabBar": {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      },
+      "TagOverflow": {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      },
+      "TitleBreadcrumb": {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      },
+      "render": [Function],
+    },
+    "ScrollButton": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "TabBar": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "TagOverflow": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "TitleBreadcrumb": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "render": [Function],
+  },
+  "PageHeaderBreadcrumbBar" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
+  "PageHeaderBreadcrumbOverflow" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
+  "PageHeaderBreadcrumbPageActions" => {
+    "displayName": "PageHeaderBreadcrumbPageActions",
+  },
+  "PageHeaderContent" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
+  "PageHeaderContentPageActions" => {
+    "displayName": "PageHeaderContentPageActions",
+  },
+  "PageHeaderContentText" => {
+    "displayName": "PageHeaderContentText",
+  },
+  "PageHeaderHeroImage" => {
+    "displayName": "PageHeaderHeroImage",
+  },
+  "PageHeaderScrollButton" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
+  "PageHeaderTabBar" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
+  "PageHeaderTagOverflow" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
+  "PageHeaderTitleBreadcrumb" => {
+    "$$typeof": Symbol(react.forward_ref),
     "render": [Function],
   },
   "Pagination" => {
@@ -8663,6 +8882,10 @@ Map {
       },
     },
   },
+  "ScrollGradient" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
   "Search" => {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": {
@@ -9321,6 +9544,10 @@ Map {
     },
     "render": [Function],
   },
+  "SidePanel" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
   "SkeletonIcon" => {
     "propTypes": {
       "className": {
@@ -9371,6 +9598,7 @@ Map {
     },
   },
   "Slider" => {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": {
       "ariaLabelInput": {
         "type": "string",
@@ -9473,6 +9701,7 @@ Map {
         "type": "node",
       },
     },
+    "render": [Function],
   },
   "SliderSkeleton" => {
     "propTypes": {
@@ -9546,6 +9775,7 @@ Map {
     },
     "render": [Function],
   },
+  "StackProvider" => {},
   "StaticNotification" => {},
   "StructuredListBody" => {
     "propTypes": {
@@ -10646,6 +10876,9 @@ Map {
         "type": "oneOf",
       },
       "slug": [Function],
+      "tabIndex": {
+        "type": "number",
+      },
       "title": [Function],
       "type": {
         "args": [
@@ -10685,6 +10918,53 @@ Map {
         "type": "oneOf",
       },
     },
+  },
+  "Tearsheet" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "Body": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "Footer": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "Header": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "HeaderActionItem": {
+      "displayName": "TearsheetHeaderActionItem",
+    },
+    "HeaderActions": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "HeaderContent": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "Influencer": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "MainContent": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "NavigationBar": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "ScrollButton": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "SummaryContent": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "render": [Function],
   },
   "TextArea" => {
     "$$typeof": Symbol(react.forward_ref),
@@ -11749,6 +12029,10 @@ Map {
       },
     },
   },
+  "TruncatedText" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
   "UnorderedList" => {
     "propTypes": {
       "children": {
@@ -11764,6 +12048,10 @@ Map {
         "type": "bool",
       },
     },
+  },
+  "UserAvatar" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
   },
   "VStack" => {
     "$$typeof": Symbol(react.forward_ref),
@@ -11818,6 +12106,7 @@ Map {
     },
     "render": [Function],
   },
+  "getEmptyState" => {},
   "preview_FeatureFlags" => {
     "propTypes": {
       "children": {
@@ -11839,6 +12128,9 @@ Map {
         "type": "bool",
       },
       "enableTreeviewControllable": {
+        "type": "bool",
+      },
+      "enableV12Autoalign": {
         "type": "bool",
       },
       "enableV12DynamicFloatingStyles": {
@@ -12144,6 +12436,14 @@ Map {
         "type": "string",
       },
     },
+  },
+  "preview__BigNumber" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
+  "preview__BigNumberSkeleton" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
   },
   "preview__Card" => {
     "Card": {
@@ -13604,6 +13904,22 @@ Map {
       },
     },
   },
+  "preview__Guidebanner" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
+  "preview__GuidebannerElement" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
+  "preview__GuidebannerElementButton" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
+  "preview__GuidebannerElementLink" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
   "preview__IconIndicator" => {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": {
@@ -14150,6 +14466,9 @@ Map {
         "type": "bool",
       },
       "enableTreeviewControllable": {
+        "type": "bool",
+      },
+      "enableV12Autoalign": {
         "type": "bool",
       },
       "enableV12DynamicFloatingStyles": {
@@ -16182,6 +16501,7 @@ Map {
   "useLayer" => {},
   "usePrefersDarkScheme" => {},
   "usePrefix" => {},
+  "useStackContext" => {},
   "useTheme" => {},
   "validateNumberSeparators" => {},
   "withComposedModalPresence" => {},

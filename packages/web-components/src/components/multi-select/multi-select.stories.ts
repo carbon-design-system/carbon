@@ -156,6 +156,11 @@ const argTypes = {
     description:
       'Provide helper text that is used alongside the control label for additional help.',
   },
+  autoalign: {
+    control: 'boolean',
+    description:
+      'Specify whether the dropdown should be auto-aligned relative to its trigger.',
+  },
   hideLabel: {
     control: 'boolean',
     description: 'Specify whether the title text should be hidden or not.',
@@ -229,6 +234,7 @@ export const Default = {
   decorators: [(story) => html` <div style="width:300px">${story()}</div> `],
   render: (args) => {
     const {
+      autoalign,
       clearSelectionLabel,
       direction,
       disabled,
@@ -251,6 +257,7 @@ export const Default = {
       <cds-multi-select
         direction=${ifDefined(direction)}
         ?disabled=${disabled}
+        ?autoalign=${autoalign}
         ?invalid=${invalid}
         invalid-text=${ifDefined(invalidText)}
         clear-selection-label=${ifDefined(clearSelectionLabel)}
@@ -313,6 +320,7 @@ export const Controlled = {
       (multiSelect as HTMLSelectElement).value = selectedValues;
     };
     const {
+      autoalign,
       clearSelectionLabel,
       direction,
       disabled,
@@ -335,6 +343,7 @@ export const Controlled = {
       <cds-multi-select
         direction=${ifDefined(direction)}
         ?disabled=${disabled}
+        ?autoalign=${autoalign}
         ?invalid=${invalid}
         invalid-text=${ifDefined(invalidText)}
         clear-selection-label=${ifDefined(clearSelectionLabel)}
@@ -396,6 +405,7 @@ export const Filterable = {
   decorators: [(story) => html` <div style="width:300px">${story()}</div> `],
   render: (args) => {
     const {
+      autoalign,
       autocomplete,
       clearSelectionLabel,
       direction,
@@ -420,6 +430,7 @@ export const Filterable = {
         autocomplete=${ifDefined(autocomplete)}
         direction=${ifDefined(direction)}
         ?disabled=${disabled}
+        ?autoalign=${autoalign}
         ?invalid=${invalid}
         invalid-text=${ifDefined(invalidText)}
         clear-selection-label=${ifDefined(clearSelectionLabel)}
@@ -460,6 +471,7 @@ export const FilterableWithSelectAll = {
   decorators: [(story) => html` <div style="width:300px">${story()}</div> `],
   render: (args) => {
     const {
+      autoalign,
       autocomplete,
       clearSelectionLabel,
       direction,
@@ -484,6 +496,7 @@ export const FilterableWithSelectAll = {
         autocomplete=${ifDefined(autocomplete)}
         direction=${ifDefined(direction)}
         ?disabled=${disabled}
+        ?autoalign=${autoalign}
         ?invalid=${invalid}
         invalid-text=${ifDefined(invalidText)}
         clear-selection-label=${ifDefined(clearSelectionLabel)}
@@ -519,6 +532,7 @@ export const FilterableWithAILabel = {
   argTypes,
   render: (args) => {
     const {
+      autoalign,
       autocomplete,
       clearSelectionLabel,
       direction,
@@ -544,6 +558,7 @@ export const FilterableWithAILabel = {
           autocomplete=${ifDefined(autocomplete)}
           direction=${ifDefined(direction)}
           ?disabled=${disabled}
+          ?autoalign=${autoalign}
           ?invalid=${invalid}
           invalid-text=${ifDefined(invalidText)}
           clear-selection-label=${ifDefined(clearSelectionLabel)}
@@ -591,6 +606,7 @@ export const FilterableWithLayer = {
   argTypes,
   render: (args) => {
     const {
+      autoalign,
       autocomplete,
       clearSelectionLabel,
       direction,
@@ -616,6 +632,7 @@ export const FilterableWithLayer = {
           autocomplete=${ifDefined(autocomplete)}
           direction=${ifDefined(direction)}
           ?disabled=${disabled}
+          ?autoalign=${autoalign}
           ?invalid=${invalid}
           invalid-text=${ifDefined(invalidText)}
           clear-selection-label=${ifDefined(clearSelectionLabel)}
@@ -668,6 +685,7 @@ export const SelectAll = {
       multiSelect.requestUpdate();
     };
     const {
+      autoalign,
       clearSelectionLabel,
       direction,
       disabled,
@@ -689,6 +707,7 @@ export const SelectAll = {
       <cds-multi-select
         direction=${ifDefined(direction)}
         ?disabled=${disabled}
+        ?autoalign=${autoalign}
         ?invalid=${invalid}
         invalid-text=${ifDefined(invalidText)}
         clear-selection-label=${ifDefined(clearSelectionLabel)}
@@ -737,6 +756,7 @@ export const SelectAllWithDynamicItems = {
     };
 
     const {
+      autoalign,
       clearSelectionLabel,
       direction,
       disabled,
@@ -758,6 +778,7 @@ export const SelectAllWithDynamicItems = {
       <cds-multi-select
         direction=${ifDefined(direction)}
         ?disabled=${disabled}
+        ?autoalign=${autoalign}
         ?invalid=${invalid}
         invalid-text=${ifDefined(invalidText)}
         clear-selection-label=${ifDefined(clearSelectionLabel)}
@@ -811,6 +832,7 @@ export const WithAILabel = {
   argTypes,
   render: (args) => {
     const {
+      autoalign,
       clearSelectionLabel,
       direction,
       disabled,
@@ -834,6 +856,7 @@ export const WithAILabel = {
         <cds-multi-select
           direction=${ifDefined(direction)}
           ?disabled=${disabled}
+          ?autoalign=${autoalign}
           ?invalid=${invalid}
           invalid-text=${ifDefined(invalidText)}
           clear-selection-label=${ifDefined(clearSelectionLabel)}
@@ -878,6 +901,7 @@ export const WithInitialSelectedItems = {
   decorators: [(story) => html` <div style="width:300px">${story()}</div> `],
   render: (args) => {
     const {
+      autoalign,
       clearSelectionLabel,
       direction,
       disabled,
@@ -900,6 +924,7 @@ export const WithInitialSelectedItems = {
       <cds-multi-select
         direction=${ifDefined(direction)}
         ?disabled=${disabled}
+        ?autoalign=${autoalign}
         ?invalid=${invalid}
         invalid-text=${ifDefined(invalidText)}
         clear-selection-label=${ifDefined(clearSelectionLabel)}
@@ -945,6 +970,7 @@ export const WithLayer = {
   argTypes,
   render: (args) => {
     const {
+      autoalign,
       clearSelectionLabel,
       direction,
       disabled,
@@ -968,6 +994,7 @@ export const WithLayer = {
         <cds-multi-select
           direction=${ifDefined(direction)}
           ?disabled=${disabled}
+          ?autoalign=${autoalign}
           ?invalid=${invalid}
           invalid-text=${ifDefined(invalidText)}
           clear-selection-label=${ifDefined(clearSelectionLabel)}
@@ -1008,6 +1035,7 @@ export const WithToggletipLabel = {
   argTypes,
   render: (args) => {
     const {
+      autoalign,
       clearSelectionLabel,
       direction,
       disabled,
@@ -1038,6 +1066,7 @@ export const WithToggletipLabel = {
           ?hide-label=${hideLabel}
           locale=${ifDefined(locale)}
           ?read-only=${readOnly}
+          ?autoalign=${autoalign}
           title-text=${ifDefined(titleText)}
           selection-feedback=${ifDefined(selectionFeedback)}
           size=${ifDefined(size)}
@@ -1091,6 +1120,7 @@ export const WithCustomSorting = {
   decorators: [(story) => html` <div style="width:300px">${story()}</div> `],
   render: (args) => {
     const {
+      autoalign,
       clearSelectionLabel,
       direction,
       disabled,
@@ -1154,6 +1184,7 @@ export const WithCustomSorting = {
       <cds-multi-select
         direction=${ifDefined(direction)}
         ?disabled=${disabled}
+        ?autoalign=${autoalign}
         ?invalid=${invalid}
         invalid-text=${ifDefined(invalidText)}
         clear-selection-label=${ifDefined(clearSelectionLabel)}

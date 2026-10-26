@@ -1,0 +1,44 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "$description": "Status indicator component color tokens for displaying system and content states.",
+  "status-accessibility-background": {
+    "$type": "color",
+    "$value": "{gray.100}",
+    "$description": "Background color for accessibility status indicators. Use to highlight accessibility-related features or compliance status."
+  },
+  "status-blue": {
+    "$type": "color",
+    "$value": "{blue.50}",
+    "$description": "Color for blue status indicators. Use for informational states, in-progress items, or neutral status without specific semantic meaning."
+  },
+  "status-gray": {
+    "$type": "color",
+    "$value": "{gray.50}",
+    "$description": "Color for gray status indicators. Use for inactive, disabled, or neutral states that don't require color semantics."
+  },
+  "status-green": {
+    "$type": "color",
+    "$value": "{green.40}",
+    "$description": "Color for green status indicators. Use for success states, completed items, active/running status, or positive conditions."
+  },
+  "status-orange": {
+    "$type": "color",
+    "$value": "{orange.40}",
+    "$description": "Color for orange status indicators. Use for warning states, items needing attention, or moderate priority issues."
+  },
+  "status-purple": {
+    "$type": "color",
+    "$value": "{purple.50}",
+    "$description": "Color for purple status indicators. Use for special states, premium features, or custom priority levels."
+  },
+  "status-red": {
+    "$type": "color",
+    "$value": "{red.50}",
+    "$description": "Color for red status indicators. Use for error states, failed items, critical issues, or stopped/inactive status."
+  },
+  "status-yellow": {
+    "$type": "color",
+    "$value": "{yellow.30}",
+    "$description": "Color for yellow status indicators. Use for caution states, pending items, or situations requiring user awareness."
+  }
+}

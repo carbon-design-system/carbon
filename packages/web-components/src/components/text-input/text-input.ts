@@ -341,7 +341,7 @@ class CDSTextInput extends FormAssociatedMixin(ValidityMixin(LitElement)) {
     // make sure that lit-element updates the right properties
     this.requestUpdate('value', oldValue);
     // we set the value directly on the input (when available)
-    // so that programatic manipulation updates the UI correctly
+    // so that programmatic manipulation updates the UI correctly
     if (this._input) {
       this._input.value = value;
     }
@@ -390,6 +390,8 @@ class CDSTextInput extends FormAssociatedMixin(ValidityMixin(LitElement)) {
       class: `${prefix}--text-input__invalid-icon ${prefix}--text-input__invalid-icon--warning`,
     });
 
+    const isInteractive = !readonly && !disabled;
+
     const normalizedProps: {
       disabled: boolean;
       invalid: boolean;
@@ -399,8 +401,8 @@ class CDSTextInput extends FormAssociatedMixin(ValidityMixin(LitElement)) {
       icon: ReturnType<typeof iconLoader>;
     } = {
       disabled: !readonly && disabled,
-      invalid: !readonly && invalid,
-      warn: !readonly && !invalid && warn,
+      invalid: isInteractive && invalid,
+      warn: isInteractive && !invalid && warn,
       'slot-name': '',
       'slot-text': '',
       icon: null,
@@ -563,12 +565,14 @@ class CDSTextInput extends FormAssociatedMixin(ValidityMixin(LitElement)) {
               ${labelWrapper}
             </div>`}
         <div class="${fieldOuterWrapperClasses}">
-          <div class="${fieldWrapperClasses}" ?data-invalid="${invalid}">
+          <div
+            class="${fieldWrapperClasses}"
+            ?data-invalid="${normalizedProps.invalid}">
             <input
               autocomplete="${this.autocomplete}"
               ?autofocus="${this.autofocus}"
               class="${inputClasses}"
-              ?data-invalid="${invalid}"
+              ?data-invalid="${normalizedProps.invalid}"
               ?disabled="${disabled}"
               aria-describedby="${ifDefined(describedBy)}"
               id="input"

@@ -50,7 +50,7 @@ const iconButtonOptions = {
 export default {
   title: 'Preview/preview__BigNumber',
   component: BigNumber,
-  tags: ['autodocs', 'ibm-products-migrated'],
+  tags: ['autodocs'],
   argTypes: {
     // Hide props with no meaningful visual control
     className: { table: { disable: true } },
