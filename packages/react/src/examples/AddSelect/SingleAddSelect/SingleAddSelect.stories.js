@@ -24,39 +24,6 @@ export default {
   },
 };
 
-export const Overview = {
-  render: () => (
-    <div>
-      <h1>SingleAddSelect Pattern</h1>
-      <p>
-        The SingleAddSelect pattern provides complete, copy-paste ready
-        implementations for single-selection workflows with Tearsheet and
-        success notifications.
-      </p>
-      <h2>Variants</h2>
-      <ul>
-        <li>
-          <strong>Default</strong> - Simple single selection from a flat list
-        </li>
-        <li>
-          <strong>With Hierarchy</strong> - Single selection with hierarchical
-          navigation and breadcrumbs
-        </li>
-        <li>
-          <strong>With Hierarchy and Side Panel</strong> - Single selection with
-          hierarchical navigation and side panel for item details
-        </li>
-      </ul>
-      <h2>When to use</h2>
-      <ul>
-        <li>Users need to select exactly one item</li>
-        <li>Selection requires a modal/tearsheet interface</li>
-        <li>You need a complete pattern with success feedback</li>
-      </ul>
-    </div>
-  ),
-};
-
 export const Default = {
   render: (_args, context) => (
     <SingleAddSelectDefaultPreview initialOpen={context.viewMode !== 'docs'} />
