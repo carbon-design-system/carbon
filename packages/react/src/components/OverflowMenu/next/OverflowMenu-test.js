@@ -29,14 +29,14 @@ describe('OverflowMenu (enable-v12-overflowmenu)', () => {
       </OverflowMenu>
     );
 
-    // eslint-disable-next-line testing-library/no-node-access
-    const ul = document.querySelector('ul');
     expect(screen.getByRole('button')).toHaveAttribute(
       'aria-expanded',
       'false'
     );
 
-    expect(ul).toBe(null);
+    expect(
+      screen.queryByRole('menu', { hidden: true })
+    ).not.toBeInTheDocument();
   });
 
   it('should forward a ref', () => {
@@ -68,9 +68,9 @@ describe('OverflowMenu (enable-v12-overflowmenu)', () => {
     );
     await userEvent.type(screen.getByRole('button'), 'enter');
     expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
-    // eslint-disable-next-line testing-library/no-node-access
-    const ul = document.querySelector('ul');
-    expect(ul).toBeInTheDocument();
+    const menu = screen.getByRole('menu', { name: 'Options' });
+    expect(menu).toBeInTheDocument();
+    expect(menu).toHaveProperty('tagName', 'UL');
   });
 
   it('should add custom classNames', () => {
