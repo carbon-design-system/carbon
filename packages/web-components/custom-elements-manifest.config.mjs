@@ -19,6 +19,7 @@ export default {
     '**/_story-assets/**',
     '**/stories/**',
     'src/components/file-uploader/demo-file-uploader.ts',
+    'src/components/page-header-deprecated/**',
     'src/examples/**',
     'src/globals/internal/storybook-cdn.ts',
   ],
