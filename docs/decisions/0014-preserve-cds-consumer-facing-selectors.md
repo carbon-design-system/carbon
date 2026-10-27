@@ -4,8 +4,6 @@ Date: 2026-09
 
 ## Status
 
-Accepted
-
 Superseded by [ADR 0020](0020-angular-wholesale-cds-ng-prefix.md) (accepted
 2026-10-27), which replaces `cds-*` with a wholesale `cds-ng-*` prefix for
 `@carbon/angular`. A spike with the CCA Modal (2026-10-26) showed that the real

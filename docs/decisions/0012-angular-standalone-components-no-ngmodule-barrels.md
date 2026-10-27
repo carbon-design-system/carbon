@@ -40,9 +40,10 @@ Angular 19+ but required on Angular 17 and 18, which this package's peer range
 (`>=17`) still supports. No `NgModule` barrel classes are exported as part of
 the public API.
 
-> **Pending:** [ADR 0018](0018-angular-supported-major-versions.md) proposes a
-> peer floor of Angular 20. If it is accepted, the explicit `standalone: true`
-> can be dropped, because it is the decorator default from Angular 19.
+> **Update 2026-10-27.** [ADR 0018](0018-angular-supported-major-versions.md)
+> was accepted with a peer floor of Angular 20. The explicit `standalone: true`
+> can be dropped from components, because it is the decorator default from
+> Angular 19.
 
 NgModule barrels were rejected for three reasons:
 
@@ -67,11 +68,10 @@ mechanical part of this migration for consumers.
   `import { ButtonModule } from 'carbon-components-angular'`.
 - Angular CLI's tree-shaking will only bundle components that are actually
   imported, reducing bundle size for apps that use a subset of the library.
-- `CUSTOM_ELEMENTS_SCHEMA`, if a wrapper needs it to suppress Angular's
-  unknown-element warnings, is declared per component wrapper class, scoped to
-  that component only. It does not bleed into consumer `NgModule` schemas. With
-  ADR 0015 the wrapper template contains only `<ng-content />`, and whether the
-  schema is still needed has not been checked.
+- `CUSTOM_ELEMENTS_SCHEMA` is not needed. The wrapper template contains only
+  `<ng-content />` (ADR 0015), so there are no custom elements in the Angular
+  template for Angular to warn about. Confirmed removed from generated wrapper
+  output (see ADR 0015 open questions).
 - The `cca-update-module-imports` codemod handles the import path change. The
   selector rename (`ButtonModule` → `ButtonComponent`) cannot be automated for
   all cases and requires a one-line manual edit per import site.

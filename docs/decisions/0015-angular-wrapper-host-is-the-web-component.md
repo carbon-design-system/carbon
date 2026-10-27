@@ -4,14 +4,12 @@ Date: 2026-10
 
 ## Status
 
-Proposed
-
-[ADR 0020](0020-angular-wholesale-cds-ng-prefix.md) (accepted 2026-10-27) keeps
-the "wrapper host is the web component" part of this decision and replaces the
-"registered under the real `cds-*` tag" part with a wholesale `cds-ng-*` prefix
-over a prefixed build of the web components. The findings below remain the
-measured basis for both. The "registered under the real `cds-*` tag" text below
-is superseded.
+Partially superseded by [ADR 0020](0020-angular-wholesale-cds-ng-prefix.md)
+(accepted 2026-10-27) keeps the "wrapper host is the web component" part of this
+decision and replaces the "registered under the real `cds-*` tag" part with a
+wholesale `cds-ng-*` prefix over a prefixed build of the web components. The
+findings below remain the measured basis for both. The "registered under the
+real `cds-*` tag" text below is superseded.
 
 `@carbon/angular/legacy` was removed from the repository on 2026-10-26. The
 "Legacy and generated wrappers on one page" open question and remaining-work

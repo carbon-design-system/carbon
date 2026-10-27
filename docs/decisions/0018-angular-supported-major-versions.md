@@ -2,10 +2,7 @@
 
 ## Status
 
-Proposed
-
-**Proposed: a peer floor of Angular 20.** Do not mark the ADR accepted until the
-remaining open questions below have been answered.
+Accepted (2026-10-27)
 
 **Peer range updated 2026-10-27:** `package.json` peers are now `>=20`.
 `README.md` table updated. The build and test stack (`devDependencies`, CI
