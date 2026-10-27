@@ -120,7 +120,7 @@ class CDSCardActions extends LitElement {
 
     this._overflowHandler = createOverflowHandler({
       container: this,
-      gap: 8,
+      gap: 0,
       onChange: (_, hidden: HTMLElement[]) => {
         if (offsetEl) {
           offsetEl.style.display = hidden.length > 0 ? 'block' : 'none';

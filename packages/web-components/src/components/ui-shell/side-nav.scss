@@ -113,7 +113,7 @@ $css--plex: true !default;
   inline-size: auto;
   outline: none;
 
-  a.#{$prefix}--side-nav__link {
+  .#{$prefix}--side-nav__link {
     block-size: $spacing-07;
     font-weight: 400;
     min-block-size: $spacing-07;
@@ -122,7 +122,7 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-side-nav-menu-item[parent-has-icon])
-  a.#{$prefix}--side-nav__link {
+  .#{$prefix}--side-nav__link {
   padding-inline-start: 4.5rem;
 }
 

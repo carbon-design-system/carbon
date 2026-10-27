@@ -182,7 +182,7 @@ $css--plex: true !default;
   align-items: center;
   justify-content: flex-end;
   block-size: $spacing-07;
-  gap: $spacing-02;
+  gap: 0;
   inline-size: 50%;
   inset-block-start: $spacing-03;
   inset-inline-end: var(
