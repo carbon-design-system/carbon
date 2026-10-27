@@ -93,9 +93,9 @@ test.describe('ButtonComponent (Layer 2)', () => {
     // The shadow root is on the host element itself (host IS the WC).
     const button = page.locator('cds-ng-button button');
     await expect(button).toBeVisible();
-    await expect(button).toHaveClass(/cds--btn--primary/);
+    await expect(button).toHaveClass(/cds-ng--btn--primary/);
     // Default size matches @carbon/react and @carbon/web-components.
-    await expect(button).toHaveClass(/cds--btn--lg/);
+    await expect(button).toHaveClass(/cds-ng--btn--lg/);
   });
 
   test('host element has no unexpected nesting (host-is-WC, ADR 0020)', async ({
@@ -147,7 +147,7 @@ test.describe('ButtonComponent (Layer 2)', () => {
     await page.waitForSelector('cds-ng-button');
     // Host IS the WC; shadow DOM is directly on cds-ng-button.
     await expect(page.locator('cds-ng-button button')).toHaveClass(
-      /cds--btn--expressive/
+      /cds-ng--btn--expressive/
     );
   });
 });

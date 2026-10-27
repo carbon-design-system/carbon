@@ -167,8 +167,8 @@ points:
   not, and rely on review discipline and the Angular ↔ WC interface tests. (An
   earlier version of this ADR said all wrappers were hand-written, which
   contradicted the decision above.)
-- Open as of ADR 0020: whether the peer-dependency consequence above holds. ADR
-  0020 proposes a wholesale `cds-ng-*` prefix over a prefixed copy of the web
-  components, which could mean bundling that copy and dropping the peer
-  dependency. Whether the legacy entry point should exist at all is also under
-  review; see `packages/angular/docs/status-and-open-questions.md`.
+- Changed by ADR 0020 (accepted 2026-10-27): the peer-dependency consequence
+  above no longer holds. `@carbon/angular` bundles a `cds-ng-*` prefixed copy of
+  the web components and no longer peer-depends on `@carbon/web-components`. The
+  legacy entry point was removed; see
+  `packages/angular/docs/status-and-open-questions.md`.

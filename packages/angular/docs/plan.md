@@ -18,8 +18,8 @@ Automated Core Wrapper Generator; legacy entry point since removed, see above)
 **Location in monorepo:** `packages/angular/` **Package name:**
 `@carbon/angular` (Automated) **Versioning:** `0.0.0-prerelease.0` →
 `1.0.0-rc.0` (v12 RC) → `1.0.0` (v12 GA) **Angular component selector prefix:**
-`cds-*` (both selector and WC tag — ADR 0015). Proposed to change to `cds-ng-*`
-in ADR 0020; a spike showed `cds-*` breaks a CCA modal on the same page.
+`cds-ng-*` (selector and WC tag, ADR 0020, accepted 2026-10-27). The text below
+that says `cds-*` predates ADR 0020 and is rewritten in status step 11.
 
 ---
 
@@ -355,7 +355,8 @@ contract `@carbon/angular` wrapper barrels should follow.
 **Note:** An earlier version of this plan used a `cds-ng-*` _inner element_
 inside a `cds-*` wrapper. ADR 0015 replaced that with host-is-WC. A different
 idea, a wholesale `cds-ng-*` prefix over a prefixed build of the web components,
-is proposed in ADR 0020 and is not decided. The section below reflects ADR 0015.
+was accepted in ADR 0020 (2026-10-27) and replaces the real-tag registration
+below. The section below reflects ADR 0015 and is stale until step 11.
 
 Each Angular wrapper component registers its backing WC element under the real
 tag as a side effect of its own module import:
@@ -1058,9 +1059,10 @@ merged to `main`; see §4 for full detail):
 
 - Each Angular wrapper component registers its WC backing element on first
   import (ADR 0015: under the real tag, using `defineCustomElement(CDSModal)`;
-  ADR 0020 proposes `cds-ng-*` through a prefixed build instead). The older text
-  here described `defineCustomElement(CDSModal, { name: 'cds-ng-modal' })`,
-  which renames one class only and breaks composites (ADR 0015 findings 2 and 3)
+  ADR 0020, accepted, uses `cds-ng-*` through a prefixed build instead). The
+  older text here described
+  `defineCustomElement(CDSModal, { name: 'cds-ng-modal' })`, which renames one
+  class only and breaks composites (ADR 0015 findings 2 and 3)
 - Consumers do not need to separately import WC side-effect modules
 - `defineCustomElement` is idempotent — re-registering the same class under the
   same tag is a no-op; if the WC class has already self-registered under
@@ -1116,7 +1118,7 @@ signals the instability period explicitly.
 - ~~TimePicker drop~~ — TimePicker is **in scope as a Tier 2 WC wrapper**
   (`cds-time-picker` confirmed in `@carbon/web-components`; Q7 closed)
 - Custom WC element name registration at the `defineCustomElement` level. The
-  wholesale prefix in ADR 0020 is a different mechanism and is still proposed.
+  wholesale prefix in ADR 0020 (accepted) is a different mechanism.
 - Porting CCA test files verbatim (see §14 for the correct migration strategy)
 - `DataGridInteractionModel` / datagrid keyboard mode — CCA-specific; complex;
   defer to v2
@@ -1467,13 +1469,12 @@ old API unmaintainable>
    files) are not yet in main; until then the subclass fallback in
    `defineCustomElement` handles the transitional period cleanly.
 
-6. **Selector prefix decision** — **Reopened.** Previously closed as `cds-*`
-   Angular selectors with `cds-ng-*` internal tags; ADR 0015 replaced the
-   internal tags with host-is-WC under the real tag, and ADR 0020 now proposes a
-   wholesale `cds-ng-*` prefix. The coexistence spike
-   (`spikes/coexistence-spike.md`) has run for the Modal and the Dropdown and
-   supports the prefix; ADR 0020 stays Proposed until its other open questions
-   are answered.
+6. **Selector prefix decision** — **Closed 2026-10-27: wholesale `cds-ng-*` (ADR
+   0020, accepted).** Previously closed as `cds-*` Angular selectors with
+   `cds-ng-*` internal tags; ADR 0015 replaced the internal tags with host-is-WC
+   under the real tag, and ADR 0020 replaced the real tag with a wholesale
+   `cds-ng-*` prefix. The coexistence spike (`spikes/coexistence-spike.md`) ran
+   for the Modal and the Dropdown and supports it.
 
 7. ~~**TimePicker — port forward or drop?**~~ — **Closed.** `cds-time-picker`
    exists in `@carbon/web-components` with full feature parity: `disabled`,
@@ -1548,7 +1549,7 @@ in §7. In guide format each becomes a standalone entry. High-priority entries
 1. **Selector** — ADR 0014 keeps `cds-*` for element selectors, but the Button
    is an attribute directive in CCA (`<button cdsButton>`) and becomes an
    element. The module path changes from `carbon-components-angular` to
-   `@carbon/angular`. ADR 0020 proposes `cds-ng-*` instead.
+   `@carbon/angular`. ADR 0020 (accepted) uses `cds-ng-*` instead.
 2. **`TableModel` / `TableHeaderItem` / `TableItem` removed** — replace with
    flat `[rows]`, `[headers]`, `[size]` inputs.
 3. **`notificationObj` removed** on Toast, Inline, ActionableNotification —
@@ -1658,7 +1659,7 @@ test setup.
 `create-prefixed-build` (shipped in PR #23097) is not part of the
 `@carbon/angular` migration path. Under ADR 0015, `@carbon/angular` registers
 the real `cds-*` tags and does conflict with a separately loaded
-`@carbon/web-components`; ADR 0020 proposes a prefix that would avoid it.
+`@carbon/web-components`; ADR 0020 (accepted) uses a prefix that avoids it.
 
 It _is_ relevant when a consumer runs both bare `@carbon/web-components` and
 `@carbon/angular` on the same page (e.g. a shell built with bare WC and an

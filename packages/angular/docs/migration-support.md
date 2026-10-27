@@ -3,7 +3,7 @@
 **Status:** Draft, for discussion. Nothing in this document is implemented.
 **Related:**
 [ADR 0020](../../../docs/decisions/0020-angular-wholesale-cds-ng-prefix.md)
-(proposed `cds-ng-*` prefix),
+(accepted `cds-ng-*` prefix, 2026-10-27),
 [`legacy-compatibility-matrix.md`](./legacy-compatibility-matrix.md),
 [`plan.md`](./plan.md) §16, [`milestones.md`](./milestones.md) Milestone 5
 
@@ -51,18 +51,18 @@ an attribute directive (`[cdsButton], [ibmButton]`), confirmed in
 Ordered roughly by how much work each is likely to cost a team. The ordering is
 a judgment, not a measurement.
 
-| #   | Change                                                                                                                         | Scope                                      | Automation                              |
-| --- | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------ | --------------------------------------- |
-| 1   | Rendering moves into shadow DOM (**not in the 14 listed breaks**)                                                              | Every team that styles or tests Carbon DOM | Cannot be automated; needs review       |
-| 2   | Model-shaped inputs (`items`, `model`, `notificationObj`, `tree`…)                                                             | About 20 of 57 adapter-tier components     | Poor; agent skill with review           |
-| 3   | Services (`ModalService`, `NotificationService`…) rewritten                                                                    | 17 services                                | Poor; agent skill with review           |
-| 4   | Output names change (web component events are `cds-…` or native)                                                               | Every component with outputs               | Partial; needs a verified mapping table |
-| 5   | `ControlValueAccessor` value shapes change                                                                                     | 12 adapter-tier components                 | Manual or agent skill                   |
-| 6   | Attribute directives become elements (for example `[cdsButton]`)                                                               | 53 listed directives, 10 with behavior     | Partial; class toggles are mechanical   |
-| 7   | Tag changes                                                                                                                    | 63 same-tag (add prefix) plus 32 renamed   | Mechanical                              |
-| 8   | NgModule imports become standalone `imports: []`                                                                               | All consumers                              | Mechanical                              |
-| 9   | Import paths and package changes                                                                                               | All consumers                              | Mechanical                              |
-| 10  | Peer dependencies: `@carbon/styles` 1.x to 2.x, Angular `>=20` (proposed), `@carbon/web-components` (or bundled, see ADR 0020) | All consumers                              | Package manager, not codemod            |
+| #   | Change                                                                                                                             | Scope                                      | Automation                              |
+| --- | ---------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ | --------------------------------------- |
+| 1   | Rendering moves into shadow DOM (**not in the 14 listed breaks**)                                                                  | Every team that styles or tests Carbon DOM | Cannot be automated; needs review       |
+| 2   | Model-shaped inputs (`items`, `model`, `notificationObj`, `tree`…)                                                                 | About 20 of 57 adapter-tier components     | Poor; agent skill with review           |
+| 3   | Services (`ModalService`, `NotificationService`…) rewritten                                                                        | 17 services                                | Poor; agent skill with review           |
+| 4   | Output names change (web component events are `cds-…` or native)                                                                   | Every component with outputs               | Partial; needs a verified mapping table |
+| 5   | `ControlValueAccessor` value shapes change                                                                                         | 12 adapter-tier components                 | Manual or agent skill                   |
+| 6   | Attribute directives become elements (for example `[cdsButton]`)                                                                   | 53 listed directives, 10 with behavior     | Partial; class toggles are mechanical   |
+| 7   | Tag changes                                                                                                                        | 63 same-tag (add prefix) plus 32 renamed   | Mechanical                              |
+| 8   | NgModule imports become standalone `imports: []`                                                                                   | All consumers                              | Mechanical                              |
+| 9   | Import paths and package changes                                                                                                   | All consumers                              | Mechanical                              |
+| 10  | Peer dependencies: `@carbon/styles` 1.x to 2.x, Angular `>=20` (proposed), `@carbon/web-components` not needed (bundled, ADR 0020) | All consumers                              | Package manager, not codemod            |
 
 ### 1. Shadow DOM
 
@@ -120,14 +120,15 @@ A codemod changes only what it is certain about and reports everything else. An
 agent skill handles what needs reading the surrounding code. Both read one
 shared mapping file so they cannot disagree.
 
-### Why the `cds-ng-*` prefix helps (if ADR 0020 is accepted)
+### Why the `cds-ng-*` prefix helps (ADR 0020, accepted)
 
 - A tool can tell a CCA `<cds-modal>` from a migrated `<cds-ng-modal>`, so a
   codemod is idempotent and can run file by file.
 - The tag rule is simple: prepend `ng-` for same-tag components, use a lookup
   table for the 32 renamed ones. About 95 of 119 element selectors are covered.
 - Both libraries can be installed at once for incremental migration. This is
-  expected but not tested (ADR 0020 open question 1).
+  shown for the Modal and the Dropdown in the coexistence spike (ADR 0020 open
+  question 1); other components are untested.
 
 ### Tiers
 
@@ -245,8 +246,8 @@ and the first list needs tag, output and directive transforms added.
 
 ## Suggested order
 
-1. Resolve the `cds-*` versus `cds-ng-*` decision (ADR 0020). It changes every
-   rule above.
+1. ~~Resolve the `cds-*` versus `cds-ng-*` decision (ADR 0020).~~ Accepted
+   2026-10-27: `cds-ng-*`. Update every rule above to it.
 2. Verify the mapping data for the 32 tag renames and the roughly 20
    model-shaped components.
 3. Build Tier A for template files, using the CCA stories as fixtures.

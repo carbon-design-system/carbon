@@ -4,9 +4,9 @@ Date: 2026-10
 
 ## Status
 
-Proposed
+Accepted (2026-10-27)
 
-If accepted, this supersedes the selector decision in
+This supersedes the selector decision in
 [ADR 0014](0014-preserve-cds-consumer-facing-selectors.md), replaces the "host
 is registered under the real `cds-*` tag" part of
 [ADR 0015](0015-angular-wrapper-host-is-the-web-component.md), and changes the
@@ -14,13 +14,25 @@ peer-dependency consequence in
 [ADR 0011](0011-back-angular-components-with-web-components.md). The "wrapper
 host is the web component" part of ADR 0015 is kept.
 
-The coexistence spike has been run for the Modal and the Dropdown (open question
-1). It supports this ADR: under the real `cds-*` tag, the CCA modal stops
-rendering and the CCA dropdown is replaced by a different control, and under
-`cds-ng-*` both are unaffected, including with the `cds-ng-*` versions rendered
-on the same page. It covers two components, one browser and one Angular version,
-so see the limits listed there. The other blocking items under "Open questions"
-and "Verification needed before acceptance" are still open.
+What accepting covers: option B, the wholesale `cds-ng-*` prefix over a
+vendored, prefixed copy of the web components owned by `@carbon/angular`. It
+does not decide the manifest source (WCA or CEM, open question 4) or the items
+under "Follow-ups after acceptance" at the end of this document.
+
+Basis for accepting:
+
+- The coexistence spike (open question 1) ran for the Modal and the Dropdown.
+  Under the real `cds-*` tag the CCA modal stops rendering and the CCA dropdown
+  is replaced by a different control; under `cds-ng-*` both are unaffected,
+  including with the `cds-ng-*` versions rendered on the same page. It covers
+  two components, one browser and one Angular version.
+- No prefixed `@carbon/styles` is needed (open question 3), and `@carbon/styles`
+  1.x and 2.x on one page made no difference to seven vendored components in a
+  browser.
+- The Button Playwright checks pass in Chromium (9 of 9) against the `cds-ng-*`
+  Storybook build.
+- A packed `dist/` installed into an empty project resolves every import in the
+  vendored copy (open question 2).
 
 - DRI: Angular package maintainer
 - Input needed from: Angular experts, the migration/upgrade tooling owners. The
@@ -175,7 +187,7 @@ Finding 1 shows it breaks composites. It is the ADR 0015 option A failure again.
 
 ## Decision
 
-**Proposed: B.** `@carbon/angular` uses the `cds-ng-*` prefix for every Angular
+**Decided: B.** `@carbon/angular` uses the `cds-ng-*` prefix for every Angular
 selector and every registered custom element, over a build of
 `@carbon/web-components` made with `create-prefixed-build --prefix cds-ng`,
 owned and produced by `@carbon/angular`.
@@ -209,7 +221,8 @@ an either/or choice:
 | Runtime behavior, styles, registration                              | The **prefixed build** of the web components                                    |
 | Names, inputs, outputs, types, slots, docs for the Angular wrappers | A **manifest**, which still has to come from the unprefixed source or be mapped |
 
-Proposed:
+Direction (the manifest move to CEM is not decided by accepting this ADR, see
+open question 4):
 
 - The prefixed build replaces per-class registration, and the generator imports
   barrels from it.
@@ -249,7 +262,17 @@ Negative or risky:
   `@floating-ui/dom`, `@carbon/icons`, `@carbon/utilities`, `@ibm/telemetry-js`
   and others) become `@carbon/angular`'s concern: ADR 0011 notes that
   `ng-packagr` blocks non-peer runtime dependencies unless they are whitelisted.
-  How these are declared is unchecked.
+  Checked 2026-10-27: `build-entries` copies the web components' `dependencies`
+  into the published `package.json` (minus `@carbon/styles` and
+  `@ibm/telemetry-js`), adds `@carbon/layout` and `@carbon/motion`
+  (devDependencies upstream, imported by `stack` and `side-panel`), and
+  whitelists them in `allowedNonPeerDependencies`. `npm pack` of `dist/` into an
+  empty project resolved all 116 distinct bare specifiers in the 646 vendored
+  files and all 102 `#carbon-ng/*` wrapper imports, with no missing packages
+  other than the declared peers. One gap: the Tearsheet files import
+  `lit-html/directives/class-map.js`, which is not declared; it resolves only
+  because npm hoists `lit-html` from `lit`. A strict package manager (for
+  example pnpm) may not resolve it. Not tested.
 - **Version coupling.** `@carbon/angular` is pinned to one version of the web
   components. Bug fixes in the web components reach Angular consumers only
   through a new `@carbon/angular` release.
@@ -257,8 +280,9 @@ Negative or risky:
   check (open question 3) found none that needs a stylesheet outside shadow DOM,
   so no matching `$prefix` build of `@carbon/styles` is planned. Theme tokens
   stay unprefixed `--cds-*` and are shared with a CCA app on `@carbon/styles`
-  1.x, so token values from two `@carbon/styles` versions on one page could
-  differ. Not exercised in a browser.
+  1.x. The 1.x and 2.x token sets differ in three properties, none of which the
+  vendored components read through a selector they match, and a browser check
+  with both stylesheets on one page showed no difference (open question 3).
 - **Docs and examples.** Everything that shows `cds-*` for Angular changes,
   including about 32 `cds-ng-*` references in `plan.md` that currently mean
   something else.
@@ -537,12 +561,12 @@ Recorded 2026-10-26.
      `--tearsheet-*` properties (already unprefixed), `document.body` cursor,
      and unprefixed `.coachmark-body` in `coachmark-helpers.js`. None of these
      needs a prefixed stylesheet.
-   - **Unresolved, low risk:** `overflow-menu.js` adds
-     `cds-ng--layout--size-<size>` to the host (light DOM). The only matching
-     rule in the vendored styles is `.cds-ng--layout--size-*` inside the shadow
-     styles, which cannot match the host. Upstream does the same with
-     `cds--layout--size-*`. It looks inert, but a browser check is needed before
-     saying so for certain.
+   - **`overflow-menu` host class: confirmed inert 2026-10-27.**
+     `overflow-menu.js` adds `cds-ng--layout--size-<size>` to the host (light
+     DOM). The only matching rule in the vendored styles is
+     `.cds-ng--layout--size-*` inside the shadow styles, which cannot match the
+     host. In a browser the host stays 40x40 with and without `@carbon/styles`
+     loaded.
    - **Custom properties are not prefixed.** The vendored styles contain 0
      `--cds-ng-*` references and about 24,600 `var(--cds-*` references. Theme
      tokens therefore still come from a global `--cds-*` provider (the page's
@@ -556,9 +580,41 @@ Recorded 2026-10-26.
    references, so the two do not collide on class names. They do share `--cds-*`
    custom properties, which is the intended path for theming.
 
-   **Not checked:** 1.x and 2.x `@carbon/styles` loaded on one page (needs a
-   real page), whether differing token values between 1.x and 2.x would affect
-   vendored components, and the `overflow-menu` host class above.
+   **Browser check, 2026-10-27: 1.x and 2.x on one page do not affect the
+   vendored components.** Setup: the vendored `button`, `dropdown`, `tooltip`,
+   `overflow-menu`, `text-input`, `tag` and `menu` bundled with esbuild into one
+   page, in Chromium (Playwright), with five stylesheet variants: none, 1.118.0,
+   2.0.0-alpha.4, 1.x then 2.x, and 2.x then 1.x. A sixth case wrapped the
+   components in a CCA-style `.cds--layout--size-sm` element.
+
+   - **Token diff, 1.x vs 2.x `styles.css`:** 640 and 634 `--cds-*` custom
+     properties. One changed value (`--cds-popover-border-radius`: `2px` in 1.x,
+     `0.25rem` in 2.x), 11 only in 1.x (`--cds-layout-size-icon-gap*`), 5 only
+     in 2.x (`--cds-button-radius*`).
+   - **None of the three reaches a vendored component.** In both stylesheets
+     `--cds-popover-border-radius` is declared only on `.cds--tooltip`,
+     `.cds--definition-tooltip` and `.cds--toggletip`; `--cds-button-radius*`
+     (2.x) is declared only on `cds--*` class selectors; and
+     `--cds-layout-size-icon-gap` (1.x) only on `.cds--layout--size-*`. The
+     vendored copy uses none of those classes, so each `var()` takes its
+     fallback.
+   - **Measured result:** across the five stylesheet variants, button background
+     and radius, tertiary border colour, and dropdown, text input and
+     overflow-menu sizes were identical, as were the screenshots (byte-identical
+     for the four variants that load a stylesheet). No console errors. In the
+     wrapper case only the dropdown's `--cds-layout-size-icon-gap` (`0.5rem`),
+     the dropdown and trigger heights, and the overflow-menu size and host class
+     were measured; they matched the plain run. Loading no stylesheet changed
+     only widths by a few pixels (126 vs 130 px for a button) and left the theme
+     tokens empty, so the vendored components still need a `--cds-*` provider on
+     the page.
+
+   **Limits.** Seven components, one browser, no Angular (the vendored copy
+   bundled directly), no real CCA components on the page, light theme only. The
+   token diff is of the compiled CSS bundles, not of every theme and component
+   scope. The button is a full pill (`999999px` radius) in every variant. It is
+   the `var(--cds-button-radius, 999999px)` fallback in the vendored styles, so
+   it does not depend on the stylesheet.
 
 4. **Manifest: CEM spike.** Does `@custom-elements-manifest/analyzer` produce
    usable output for this codebase, and who owns producing it, the web
@@ -580,19 +636,50 @@ Recorded 2026-10-26.
 7. **v12 migration doc.** Whether `docs/migration/v12.md` needs an entry is
    unconfirmed (ADR 0015 open item 9).
 
-## Verification needed before acceptance
+## Verification before acceptance
 
-1. The coexistence spike in open question 1.
+Status at acceptance, 2026-10-27. Items 1 and 4 are done, items 2 and 3 are
+partly done and carried into "Follow-ups after acceptance" below.
+
+1. The coexistence spike in open question 1. **Done.**
 2. Run the generator against the prefixed build and load the Accordion, Modal
    and `ModalFooter` in a real browser, with the Playwright checks that ADR 0015
-   notes were never run.
+   notes were never run. **Partly done:** the Button Playwright checks pass (9
+   of 9, Chromium). The Accordion, Modal and `ModalFooter` have not been loaded
+   in a browser through Playwright.
 3. Confirm that the generator importing barrels registers the children of every
    composite class (about 70 to 76). The barrel change is made and Modal is
    covered by a Jest spec; the per-component check (similar to
    `registration-coverage.mjs`) across all composites is not yet written.
-4. Measure a real consumer bundle (not the whole-library size above) for one
-   component. Partly done: a Button-only app was 240 kB when the library held
-   only Button and 365 kB when the library also held the Date Picker wrappers,
-   because the entry point registers everything it imports (open question 2,
-   constraint 4). The real figure for 279 wrappers in one entry point, and for a
-   split into secondary entry points, is not measured.
+4. **Done for the vendored barrels.** Measure a real consumer bundle (not the
+   whole-library size above) for one component. Partly done: a Button-only app
+   was 240 kB when the library held only Button and 365 kB when the library also
+   held the Date Picker wrappers, because the entry point registers everything
+   it imports (open question 2, constraint 4). Re-measured 2026-10-27 on the
+   packed `dist/` installed into an empty project and bundled with esbuild
+   (`--bundle --minify`), importing the vendored barrels directly rather than
+   through an Angular app: `button` 145 kB (22 kB gzip); `button` + `dropdown` +
+   `modal` 934 kB (116 kB gzip); every vendored `components/*/index.js` (99
+   barrels, no Date Picker) 6.99 MB (818 kB gzip). So the split into secondary
+   entry points does keep a one-component app small. Not measured: a real
+   Angular app through the wrappers, and tree-shaking of the primary entry.
+
+## Follow-ups after acceptance
+
+Not blockers for the decision. Tracked in
+[`status-and-open-questions.md`](../../packages/angular/docs/status-and-open-questions.md).
+
+1. Declare `lit-html` in `build-entries`. The Tearsheet files import
+   `lit-html/directives/class-map.js`, which resolves today only through npm
+   hoisting from `lit`. Then check under pnpm.
+2. Load the Accordion, Modal and `ModalFooter` in a browser with Playwright, and
+   write the per-component child-registration check across all composites
+   (verification items 2 and 3).
+3. Measure a real Angular app through the wrappers, for size and tree-shaking of
+   the primary entry (verification item 4).
+4. Decide how to produce the manifest: stay on WCA or move to CEM (open question
+   4), and who owns it.
+5. Rewrite `plan.md`, `milestones.md` and the other docs that describe `cds-*`
+   selectors for Angular; add `docs/guides/cca-to-angular.md` with shadow DOM
+   guidance (open question 7 and `migration-support.md`).
+6. Decide whether `docs/migration/v12.md` needs an entry (open question 7).

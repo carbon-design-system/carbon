@@ -284,7 +284,9 @@ export const Expressive: Story = {
     await (host as unknown as { updateComplete: Promise<boolean> })
       .updateComplete;
     const button = host.shadowRoot?.querySelector('button');
-    await expect(button?.classList.contains('cds--btn--expressive')).toBe(true);
+    await expect(button?.classList.contains('cds-ng--btn--expressive')).toBe(
+      true
+    );
   },
 };
 

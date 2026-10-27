@@ -31,8 +31,8 @@ runners, Storybook, and CI workflow.
   - Peer deps: `@angular/common >=20`, `@angular/core >=20`,
     `@angular/forms >=20`, `@carbon/styles >=2`
     ([ADR 0018](../../../docs/decisions/0018-angular-supported-major-versions.md))
-  - Peer dependency: `@carbon/web-components` (ADR 0011; ADR 0020 proposes
-    bundling a prefixed copy instead)
+  - Peer dependency: `@carbon/web-components` (ADR 0011; superseded by ADR 0020,
+    accepted 2026-10-27, which bundles a prefixed copy instead)
 - `packages/angular/ng-package.json` — Root ng-packagr entry point
   (`@carbon/angular`)
 - `packages/angular/legacy/ng-package.json` — Secondary entry point

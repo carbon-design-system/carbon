@@ -14,7 +14,7 @@ something needs reconciling. The remaining work, in suggested order, is under
 | Build                                                                        | `yarn build`: generate-wrappers → build-entries → ng-packagr. 97 secondary entries + primary. ~30 s, 1.3 MB packed, no warnings.          |
 | Storybook                                                                    | Builds clean. Scripts prepend generate-wrappers + build-entries. Stories use `cds-ng-*` throughout via `tsconfig.storybook.json` aliases. |
 | Verified components                                                          | Button and `ModalFooter`, in jsdom. Jest: 5 suites, 104 passed, 10 `it.todo`. Modal child registration is covered too.                    |
-| Playwright                                                                   | `Button.e2e.ts` written and updated to `cds-ng-*`. Never been run against a real browser.                                                 |
+| Playwright                                                                   | `Button.e2e.ts`: 9 passed in Chromium against a fresh `storybook:build`. Two class assertions had to be fixed from `cds--` to `cds-ng--`. |
 | Legacy entry point                                                           | Abandoned and removed 2026-10-26.                                                                                                         |
 | Angular peer floor                                                           | Peers updated to `>=20` (2026-10-27). `devDependencies` and CI matrix still on `^19`; move to `^20` in a follow-up PR.                    |
 | Migration guide `docs/guides/cca-to-angular.md`                              | Does not exist.                                                                                                                           |
@@ -22,21 +22,22 @@ something needs reconciling. The remaining work, in suggested order, is under
 | `docs/migration/v12.md`                                                      | No Angular content.                                                                                                                       |
 
 Last run: Jest (104 passed), `tsc -p tsconfig.storybook.json --noEmit` (clean),
-`yarn build` (clean, ~30 s), Storybook build (clean). Not run: Playwright.
+`yarn build` (clean, ~30 s), Storybook build (clean), Playwright `e2e` (9
+passed, Chromium).
 
 ## Decisions on record
 
-| ADR                                                                                       | Status   | Summary                                                                                                            |
-| ----------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------ |
-| [0011](../../../docs/decisions/0011-back-angular-components-with-web-components.md)       | Accepted | Thin wrappers over `@carbon/web-components`; generated core plus a `legacy` entry point.                           |
-| [0012](../../../docs/decisions/0012-angular-standalone-components-no-ngmodule-barrels.md) | Accepted | Standalone components, no NgModule barrels.                                                                        |
-| [0013](../../../docs/decisions/0013-controlvalueaccessor-on-angular-wrapper-not-wc.md)    | Accepted | CVA lives on the Angular wrapper.                                                                                  |
-| [0014](../../../docs/decisions/0014-preserve-cds-consumer-facing-selectors.md)            | Accepted | Selectors stay `cds-*`. **Proposed to be superseded by ADR 0020.**                                                 |
-| [0015](../../../docs/decisions/0015-angular-wrapper-host-is-the-web-component.md)         | Proposed | Wrapper host is the web component under its real tag. Host-is-WC kept by ADR 0020; real-tag registration replaced. |
-| [0018](../../../docs/decisions/0018-angular-supported-major-versions.md)                  | Proposed | Peer floor of Angular 20. Peers set to `>=20` 2026-10-27; devDeps/CI still on 19.                                  |
-| [0019](../../../docs/decisions/0019-angular-storybook-story-authoring.md)                 | -        | Story authoring.                                                                                                   |
-| [0020](../../../docs/decisions/0020-angular-wholesale-cds-ng-prefix.md)                   | Proposed | Wholesale `cds-ng-*` prefix over a prefixed build of the web components.                                           |
-| [0021](../../../docs/decisions/0021-angular-drop-classic-date-picker.md)                  | Accepted | No classic or fluid Date Picker wrappers; Preview Date Picker only. Removes flatpickr. Generator not yet changed.  |
+| ADR                                                                                       | Status     | Summary                                                                                                            |
+| ----------------------------------------------------------------------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------ |
+| [0011](../../../docs/decisions/0011-back-angular-components-with-web-components.md)       | Accepted   | Thin wrappers over `@carbon/web-components`; generated core plus a `legacy` entry point.                           |
+| [0012](../../../docs/decisions/0012-angular-standalone-components-no-ngmodule-barrels.md) | Accepted   | Standalone components, no NgModule barrels.                                                                        |
+| [0013](../../../docs/decisions/0013-controlvalueaccessor-on-angular-wrapper-not-wc.md)    | Accepted   | CVA lives on the Angular wrapper.                                                                                  |
+| [0014](../../../docs/decisions/0014-preserve-cds-consumer-facing-selectors.md)            | Superseded | Selectors stay `cds-*`. **Superseded by ADR 0020 (2026-10-27).**                                                   |
+| [0015](../../../docs/decisions/0015-angular-wrapper-host-is-the-web-component.md)         | Proposed   | Wrapper host is the web component under its real tag. Host-is-WC kept by ADR 0020; real-tag registration replaced. |
+| [0018](../../../docs/decisions/0018-angular-supported-major-versions.md)                  | Proposed   | Peer floor of Angular 20. Peers set to `>=20` 2026-10-27; devDeps/CI still on 19.                                  |
+| [0019](../../../docs/decisions/0019-angular-storybook-story-authoring.md)                 | -          | Story authoring.                                                                                                   |
+| [0020](../../../docs/decisions/0020-angular-wholesale-cds-ng-prefix.md)                   | Accepted   | Wholesale `cds-ng-*` prefix over a prefixed build of the web components. Accepted 2026-10-27.                      |
+| [0021](../../../docs/decisions/0021-angular-drop-classic-date-picker.md)                  | Accepted   | No classic or fluid Date Picker wrappers; Preview Date Picker only. Removes flatpickr. Generator not yet changed.  |
 
 ## Component structure: what was learned
 
@@ -74,8 +75,8 @@ From this audit, new:
 | [`plan.md`](./plan.md)                                               | About 32 `cds-ng-*` references that describe the old inner-element design. States "no selector collisions" between core and legacy; ADR 0015 says the selectors do collide. §16 says "no import path change needed" for the selector while §7 lists import path changes. Open question 6 ("Selector prefix") is marked closed with the old design. |
 | [`milestones.md`](./milestones.md)                                   | Says "Pre-implementation". Describes `@carbon/web-components` as a hard dependency; `package.json` has it as a peer. Calls for a Dropdown legacy PoC; only Button exists. Milestone 3 estimates "~15 to 20" adapters; the matrix lists 57 adapter-tier rows plus 32 tag renames.                                                                   |
 | [`legacy-compatibility-matrix.md`](./legacy-compatibility-matrix.md) | Tag mappings are inferred and unverified; outputs are not compared. Its counts differ from a fresh grep of CCA by a few (118 versus 119 elements, 64 versus 58 modules).                                                                                                                                                                           |
-| ADR 0011                                                             | Says the wrappers "are hand-written" in its last consequence, but also that the core is "100% automated". Peer-dependency consequence changes if ADR 0020 is accepted.                                                                                                                                                                             |
-| ADR 0014                                                             | Superseded by ADR 0020 if accepted.                                                                                                                                                                                                                                                                                                                |
+| ADR 0011                                                             | Peer-dependency consequence updated for ADR 0020 (accepted 2026-10-27).                                                                                                                                                                                                                                                                            |
+| ADR 0014                                                             | Marked superseded by ADR 0020 (2026-10-27).                                                                                                                                                                                                                                                                                                        |
 | Codemod lists                                                        | `plan.md` §16 (seven transforms) and `milestones.md` Milestone 5 (three transforms) conflict. See [`migration-support.md`](./migration-support.md).                                                                                                                                                                                                |
 
 ### Fixed in the documentation pass
@@ -92,7 +93,7 @@ deciding the `cds-*` versus `cds-ng-*` question:
   the Dropdown PoC claim, a banner on Milestone 3, and a note on the codemod
   list conflict.
 - ADR 0011: the "wrappers are hand-written" contradiction, plus a note on what
-  ADR 0020 would change.
+  ADR 0020 changed.
 - ADR 0014: status note pointing at ADR 0020.
 - ADR 0015: status note and a new remaining-work item 0 for the child
   registration bug.
@@ -101,7 +102,7 @@ deciding the `cds-*` versus `cds-ng-*` question:
 
 - The `cds-ng-preview-*` names and `cds-ng-<name>` queries in `plan.md` §8 and
   §13 (about 25 lines). They now carry a "Stale naming" note rather than being
-  rewritten, because ADR 0020 would change them again.
+  rewritten, because ADR 0020 (now accepted) changes them again.
 - The codemod lists in `plan.md` §16 and `milestones.md` Milestone 5 are
   flagged, not reconciled. They belong to the `plan.md` and `milestones.md`
   rewrite (next step 11).
@@ -138,11 +139,12 @@ Grouped by what they block. "Blocking" means a decision should wait for it.
    skips those six tags. One entry point still ships every family it imports.
    Details, numbers and the list of what was not checked are in ADR 0020 open
    question 2. Blocking for implementation only.
-3. **`@carbon/styles` prefix.** Static check done 2026-10-27: nothing outside
-   shadow DOM needs a matching `$prefix`. The vendored copy loads no global
-   stylesheet and reads theme tokens as unprefixed `--cds-*`. Not checked in a
-   browser: `@carbon/styles` 1.x with 2.x on one page, and an `overflow-menu`
-   host class that looks inert. Details in ADR 0020 open question 3.
+3. **`@carbon/styles` prefix.** Answered 2026-10-27: nothing outside shadow DOM
+   needs a matching `$prefix`. The vendored copy loads no global stylesheet and
+   reads theme tokens as unprefixed `--cds-*`. Browser check done: 1.x, 2.x, and
+   both on one page give identical results for seven vendored components, and
+   the `overflow-menu` host class is inert. Details and limits in ADR 0020 open
+   question 3.
 4. **Manifest.** Does the standard CEM analyzer give usable output for this
    codebase? The WCA manifest is deprecated and slated for removal in v3.0.0
    (issue #20670).
@@ -188,7 +190,9 @@ telemetry (see [`migration-support.md`](./migration-support.md)).
 
 ### Quality and verification
 
-6. Run the Button Playwright checks. Never run.
+6. ~~Run the Button Playwright checks.~~ Done: 9 passed in Chromium. The
+   vendored WC renders `cds-ng--btn--*` classes, so `Button.e2e.ts` and the
+   `Expressive` story play function now assert on those.
 7. A consumer app with `strictTemplates`, including how `$event` typing looks
    for native-named events.
 8. Form controls (CVA), named-slot components, and `ActionSet` in a real
@@ -462,16 +466,17 @@ In order. Items marked ~~done~~ are complete; the remainder are open.
 4. **Trace the `CDSTooltip.updated` error** seen in coexistence run B3
    (`Cannot set properties of null (setting 'align')`), to see whether it is
    specific to the CCA host or a bug in the web components.
-5. ~~**`@carbon/styles` `$prefix`** (ADR 0020 question 3).~~ **Static check done
-   2026-10-27**: no prefixed stylesheet needed. Remaining, optional: load 1.x
-   and 2.x `@carbon/styles` on one page, and confirm the `overflow-menu` host
-   `cds-ng--layout--size-*` class is inert.
+5. ~~**`@carbon/styles` `$prefix`** (ADR 0020 question 3).~~ **Done
+   2026-10-27**: no prefixed stylesheet needed. Static check, then a browser
+   check with 1.x and 2.x on one page: no effect on the vendored components, and
+   the `overflow-menu` host class is inert.
 6. **CEM analyzer spike** for enum unions and typed event payloads. The current
    manifest is the deprecated WCA format. Gaps are listed in
    [`developer-experience.md`](./developer-experience.md).
-7. **Run the Button Playwright checks** (never run). The Storybook build part is
-   done (2026-10-28, see step 3). Needs `playwright:install`, a fresh
-   `storybook:build`, then `e2e`; the `angular-e2e` CI job does the same.
+7. ~~**Run the Button Playwright checks.**~~ **Done**: `playwright:install`,
+   fresh `storybook:build`, `e2e`: 9 passed. Two stale `cds--btn--*` assertions
+   (and the `Expressive` story play function) were corrected to
+   `cds-ng--btn--*`.
 8. **Verify form controls, named-slot components and `ActionSet`** in a real
    browser.
 9. **Define feature parity**, then decide what typing and slot work belongs in
@@ -487,10 +492,15 @@ In order. Items marked ~~done~~ are complete; the remainder are open.
 11. **Rewrite `plan.md` and `milestones.md`** now that legacy is gone, with new
     estimates.
 12. **Land the Angular 20 peer floor** (ADR 0018) in its own PR.
-13. **Decide whether to accept ADR 0020.** Item 5 (`$prefix`) is answered; the
-    entry-point split in item 3 is tried. The coexistence question (item 2)
-    already leans toward accepting. One risk to record as accepted or test: two
-    `@carbon/styles` versions on one page share unprefixed `--cds-*` tokens.
+13. ~~**Decide whether to accept ADR 0020.**~~ **Accepted 2026-10-27.** Basis:
+    coexistence spike, `$prefix` answered, 1.x and 2.x browser check, Button
+    Playwright 9 of 9, packed install resolves every import, Button barrel 145
+    kB (22 kB gzip). Follow-ups are listed at the end of the ADR:
+    - Declare `lit-html` in `build-entries` (the Tearsheet files import it; it
+      works under npm hoisting, untested under pnpm).
+    - Load the Accordion, Modal and `ModalFooter` in a browser, and write the
+      child-registration check across all composites (see step 8).
+    - Measure a real Angular app through the wrappers for size and tree-shaking.
 14. **Update `docs/migration/v12.md`** if confirmed needed (`AGENTS.md` says
     v12-affecting changes must).
 
