@@ -12,6 +12,43 @@ import { IconButton } from '../';
 import { waitForPosition } from '../../ListBox/test-helpers';
 
 describe('IconButton', () => {
+  it.each([
+    ['danger', 'cds--btn--danger'],
+    ['danger--primary', 'cds--btn--danger--primary'],
+    ['danger--ghost', 'cds--btn--danger--ghost'],
+    ['danger--tertiary', 'cds--btn--danger--tertiary'],
+  ])('supports the %s kind without prop type warnings', (kind, className) => {
+    const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+    render(
+      <IconButton label="test" kind={kind}>
+        <Edit />
+      </IconButton>
+    );
+
+    try {
+      expect(spy).not.toHaveBeenCalled();
+      expect(screen.getByRole('button')).toHaveClass(className);
+    } finally {
+      spy.mockRestore();
+    }
+  });
+
+  it('announces the danger description for an icon-only danger button', () => {
+    render(
+      <IconButton
+        label="Delete"
+        kind="danger"
+        dangerDescription="Permanently deletes this item">
+        <Edit />
+      </IconButton>
+    );
+
+    expect(screen.getByRole('button')).toHaveAccessibleDescription(
+      'Permanently deletes this item'
+    );
+  });
+
   it('should enable `autoAlign` on its tooltip by default', async () => {
     const { container } = render(
       <IconButton label="test">
