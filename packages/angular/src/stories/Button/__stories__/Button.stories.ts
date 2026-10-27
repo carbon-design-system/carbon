@@ -7,7 +7,7 @@
 
 import type { Meta, StoryObj } from '@storybook/angular';
 import { expect, userEvent } from 'storybook/test';
-import { ButtonComponent } from '../../../generated/Button';
+import { ButtonComponent } from '@carbon/angular/button';
 
 const meta: Meta<ButtonComponent> = {
   title: 'Components/Button',
@@ -26,9 +26,9 @@ import { ButtonComponent } from '@carbon/angular/button';
   standalone: true,
   imports: [ButtonComponent],
   template: \`
-    <cds-button kind="primary" size="lg" (buttonClick)="onClick($event)">
+    <cds-ng-button kind="primary" size="lg" (buttonClick)="onClick($event)">
       Save
-    </cds-button>
+    </cds-ng-button>
   \`,
 })
 export class MyComponent {
@@ -92,19 +92,19 @@ export const Default: Story = {
   },
   render: (args) => ({
     props: args,
-    template: `<cds-button
+    template: `<cds-ng-button
       [kind]="kind"
       [size]="size"
       [type]="type"
       [disabled]="disabled"
       [isExpressive]="isExpressive"
       (buttonClick)="buttonClick($event)"
-    >Button</cds-button>`,
+    >Button</cds-ng-button>`,
   }),
   play: async ({ canvasElement }) => {
-    // In the host-is-WC design (ADR 0015) the host element IS cds-button.
+    // In the host-is-WC design (ADR 0015) the host element IS cds-ng-button.
     // The shadow root is on the host element itself.
-    const host = canvasElement.querySelector('cds-button') as HTMLElement;
+    const host = canvasElement.querySelector('cds-ng-button') as HTMLElement;
     const button = host?.shadowRoot?.querySelector(
       'button'
     ) as HTMLButtonElement;
@@ -146,11 +146,11 @@ export const Danger: Story = {
   },
   render: (args) => ({
     props: args,
-    template: `<cds-button
+    template: `<cds-ng-button
       [kind]="kind"
       [dangerDescription]="dangerDescription"
       (buttonClick)="buttonClick($event)"
-    >Delete</cds-button>`,
+    >Delete</cds-ng-button>`,
   }),
   play: Default.play,
 };
@@ -164,11 +164,11 @@ export const DangerTertiary: Story = {
   },
   render: (args) => ({
     props: args,
-    template: `<cds-button
+    template: `<cds-ng-button
       [kind]="kind"
       [dangerDescription]="dangerDescription"
       (buttonClick)="buttonClick($event)"
-    >Delete</cds-button>`,
+    >Delete</cds-ng-button>`,
   }),
   play: Default.play,
 };
@@ -182,11 +182,11 @@ export const DangerGhost: Story = {
   },
   render: (args) => ({
     props: args,
-    template: `<cds-button
+    template: `<cds-ng-button
       [kind]="kind"
       [dangerDescription]="dangerDescription"
       (buttonClick)="buttonClick($event)"
-    >Delete</cds-button>`,
+    >Delete</cds-ng-button>`,
   }),
   play: Default.play,
 };
@@ -200,7 +200,7 @@ export const IconButton: Story = {
   },
   render: (args) => ({
     props: args,
-    template: `<cds-button
+    template: `<cds-ng-button
       [kind]="kind"
       [tooltipText]="tooltipText"
       [tooltipPosition]="tooltipPosition"
@@ -209,11 +209,11 @@ export const IconButton: Story = {
         xmlns="http://www.w3.org/2000/svg" fill="currentColor"
         aria-hidden="true" width="16" height="16" viewBox="0 0 32 32">
         <path d="M17 15V8h-2v7H8v2h7v7h2v-7h7v-2z"/>
-      </svg></cds-button>`,
+      </svg></cds-ng-button>`,
   }),
   play: async ({ canvasElement }) => {
-    // Host IS the cds-button WC.
-    const wc = canvasElement.querySelector('cds-button');
+    // Host IS the cds-ng-button WC.
+    const wc = canvasElement.querySelector('cds-ng-button');
     await expect(wc?.getAttribute('tooltip-text')).toBe('Add item');
     await expect(wc?.getAttribute('tooltip-position')).toBe('bottom');
   },
@@ -232,28 +232,28 @@ export const SetOfButtons: StoryObj<Record<string, unknown>> = {
   },
   render: (args) => ({
     props: args,
-    // cds-button-set is the WC tag registered by the ButtonSetComponent wrapper.
+    // cds-ng-button-set is the WC tag registered by the ButtonSetComponent wrapper.
     // Both the set and the child buttons are Angular-managed host elements.
-    template: `<cds-button-set [attr.stacked]="stacked || null">
-      <cds-button kind="secondary">Secondary</cds-button>
-      <cds-button kind="primary">Primary</cds-button>
-    </cds-button-set>`,
+    template: `<cds-ng-button-set [attr.stacked]="stacked || null">
+      <cds-ng-button kind="secondary">Secondary</cds-ng-button>
+      <cds-ng-button kind="primary">Primary</cds-ng-button>
+    </cds-ng-button-set>`,
   }),
   play: async ({ canvasElement }) => {
-    const buttons = canvasElement.querySelectorAll('cds-button');
+    const buttons = canvasElement.querySelectorAll('cds-ng-button');
     await expect(buttons.length).toBe(2);
   },
 };
 
 // WC: Skeleton
-// Uses StoryObj<Record<string, unknown>> — renders cds-button-skeleton, not ButtonComponent.
+// Uses StoryObj<Record<string, unknown>> — renders cds-ng-button-skeleton, not ButtonComponent.
 export const Skeleton: StoryObj<Record<string, unknown>> = {
   render: () => ({
-    // cds-button-skeleton is the WC tag registered by the ButtonSkeletonComponent wrapper.
-    template: `<cds-button-skeleton size="md"></cds-button-skeleton>`,
+    // cds-ng-button-skeleton is the WC tag registered by the ButtonSkeletonComponent wrapper.
+    template: `<cds-ng-button-skeleton size="md"></cds-ng-button-skeleton>`,
   }),
   play: async ({ canvasElement }) => {
-    const skeleton = canvasElement.querySelector('cds-button-skeleton');
+    const skeleton = canvasElement.querySelector('cds-ng-button-skeleton');
     await expect(skeleton).not.toBeNull();
   },
 };
@@ -265,8 +265,8 @@ export const Disabled: Story = {
   args: { ...Default.args, disabled: true },
   render: Default.render,
   play: async ({ canvasElement }) => {
-    // Host IS the cds-button WC; disabled is set directly on it.
-    const wc = canvasElement.querySelector('cds-button');
+    // Host IS the cds-ng-button WC; disabled is set directly on it.
+    const wc = canvasElement.querySelector('cds-ng-button');
     await expect(wc?.getAttribute('disabled')).not.toBeNull();
   },
 };
@@ -278,8 +278,8 @@ export const Expressive: Story = {
   play: async ({ canvasElement }) => {
     // `isExpressive` must reach the WC as a property (the WC does not observe
     // an `is-expressive` attribute), so assert on the rendered shadow DOM.
-    // Host IS cds-button — shadow root is directly on it.
-    const host = canvasElement.querySelector('cds-button') as HTMLElement;
+    // Host IS cds-ng-button — shadow root is directly on it.
+    const host = canvasElement.querySelector('cds-ng-button') as HTMLElement;
     await expect(host).not.toBeNull();
     await (host as unknown as { updateComplete: Promise<boolean> })
       .updateComplete;
@@ -298,15 +298,15 @@ export const AsLink: Story = {
   },
   render: (args) => ({
     props: args,
-    template: `<cds-button
+    template: `<cds-ng-button
       [kind]="kind"
       [href]="href"
       [target]="target"
-    >Carbon Design System</cds-button>`,
+    >Carbon Design System</cds-ng-button>`,
   }),
   play: async ({ canvasElement }) => {
-    // Host IS the cds-button WC.
-    const wc = canvasElement.querySelector('cds-button');
+    // Host IS the cds-ng-button WC.
+    const wc = canvasElement.querySelector('cds-ng-button');
     await expect(wc?.getAttribute('href')).toBe(
       'https://carbondesignsystem.com'
     );
@@ -321,7 +321,7 @@ export const Radius: StoryObj<Record<string, unknown>> = {
   tags: ['!dev', '!autodocs'],
   render: () => ({
     // TODO(parity): implement radius token showcase matching WC story.
-    template: `<cds-button kind="primary" style="--cds-button-radius: max">Button</cds-button>`,
+    template: `<cds-ng-button kind="primary" style="--cds-button-radius: max">Button</cds-ng-button>`,
   }),
 };
 

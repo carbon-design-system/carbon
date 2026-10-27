@@ -9,8 +9,14 @@
  * Layer 1 — Angular unit tests for ButtonComponent.
  *
  * Architecture (ADR 0015): the host element IS the web component. There is no
- * inner `cds-ng-button`. Every @Input() is forwarded to the host element as a
- * property via ngOnChanges.
+ * inner element. Every @Input() is forwarded to the host element as a property
+ * via ngOnChanges.
+ *
+ * NOTE: these tests import from `src/generated/Button` directly and use the
+ * `cds-button` selector from that source file. The published package exposes
+ * `cds-ng-button` (from `.entries/`). The selector difference is intentional:
+ * Jest tests the wrapper class logic; Storybook and e2e tests exercise the
+ * consumer-facing `cds-ng-button` tag.
  *
  * These tests use render() with bound templates to properly trigger ngOnChanges.
  * They assert that property forwarding is correct (the Angular input reaches the

@@ -98,10 +98,10 @@ notificationObj = {
 **After:**
 
 ```html
-<cds-notification
+<cds-ng-notification
   title="Error"
   subtitle="Something went wrong"
-  kind="error"></cds-notification>
+  kind="error"></cds-ng-notification>
 ```
 
 Run `npx @carbon/upgrade migrate cca-remove-notification-obj --write`.
@@ -121,7 +121,10 @@ paginationModel.pageLength = 10;
 **After:**
 
 ```html
-<cds-pagination [totalItems]="100" [pageSize]="10" [page]="1"></cds-pagination>
+<cds-ng-pagination
+  [totalItems]="100"
+  [pageSize]="10"
+  [page]="1"></cds-ng-pagination>
 ```
 
 Run `npx @carbon/upgrade migrate cca-remove-pagination-model --write`.
@@ -131,9 +134,9 @@ Run `npx @carbon/upgrade migrate cca-remove-pagination-model --write`.
 ### UI Shell: projected children replace array inputs
 
 `[navigationItems]`, `[menuItems]`, and `[headerItems]` array inputs are
-replaced with projected `<cds-header-item>` / `<cds-sidenav-item>` children.
-This change cannot be automated — see the migration guide for step-by-step
-instructions.
+replaced with projected `<cds-ng-header-nav-item>` / `<cds-ng-side-nav-link>`
+children. This change cannot be automated — see the migration guide for
+step-by-step instructions.
 
 Run `npx @carbon/upgrade migrate cca-report-ui-shell-nav` to identify affected
 files.
@@ -174,10 +177,14 @@ Planned, not yet built.
 
 ## Running both libraries side by side
 
-Under the real `cds-*` tags, the two libraries conflict. In a spike with the
-Modal, registering `@carbon/angular`'s `cds-modal` upgraded the
-`carbon-components-angular` modal's host element, and the modal stopped
-rendering. Whether `@carbon/angular` will ship under a separate `cds-ng-*`
-prefix to avoid this is proposed in
-[ADR 0020](../../../../docs/decisions/0020-angular-wholesale-cds-ng-prefix.md)
-and is not decided.
+`@carbon/angular` ships under `cds-ng-*` tags and coexists with
+`carbon-components-angular` on the same page. A coexistence spike confirmed this
+for the Modal and Dropdown (see
+[ADR 0020](../../../../docs/decisions/0020-angular-wholesale-cds-ng-prefix.md)):
+`cds-ng-modal` and `cds-ng-dropdown` rendered correctly alongside their CCA
+counterparts, with CCA's `(selected)` outputs and open/close behaviour
+unaffected.
+
+During an incremental migration you can render `<cds-ng-button>` next to CCA's
+`<cds-button>` in the same template — the registries are separate and neither
+library's elements interfere with the other's.

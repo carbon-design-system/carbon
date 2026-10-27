@@ -52,9 +52,9 @@ import { ButtonComponent } from '@carbon/angular/button';
   standalone: true,
   imports: [ButtonComponent],
   template: `
-    <cds-button kind="primary" size="lg" (buttonClick)="onClick($event)">
+    <cds-ng-button kind="primary" size="lg" (buttonClick)="onClick($event)">
       Save
-    </cds-button>
+    </cds-ng-button>
   `,
 })
 export class MyComponent {
@@ -152,13 +152,13 @@ variant, see the
 [usage guidelines](https://www.carbondesignsystem.com/components/button/usage#overview).
 
 ```html
-<cds-button kind="primary">Primary</cds-button>
-<cds-button kind="secondary">Secondary</cds-button>
-<cds-button kind="tertiary">Tertiary</cds-button>
-<cds-button kind="ghost">Ghost</cds-button>
-<cds-button kind="danger">Danger</cds-button>
-<cds-button kind="danger-tertiary">Danger tertiary</cds-button>
-<cds-button kind="danger-ghost">Danger ghost</cds-button>
+<cds-ng-button kind="primary">Primary</cds-ng-button>
+<cds-ng-button kind="secondary">Secondary</cds-ng-button>
+<cds-ng-button kind="tertiary">Tertiary</cds-ng-button>
+<cds-ng-button kind="ghost">Ghost</cds-ng-button>
+<cds-ng-button kind="danger">Danger</cds-ng-button>
+<cds-ng-button kind="danger-tertiary">Danger tertiary</cds-ng-button>
+<cds-ng-button kind="danger-ghost">Danger ghost</cds-ng-button>
 ```
 
 ### `size`
@@ -168,12 +168,12 @@ Specifies the rendered size of the button. Valid values are `xs`, `sm`, `md`,
 `@carbon/web-components`.
 
 ```html
-<cds-button size="xs">Button</cds-button>
-<cds-button size="sm">Button</cds-button>
-<cds-button size="md">Button</cds-button>
-<cds-button size="lg">Button</cds-button>
-<cds-button size="xl">Button</cds-button>
-<cds-button size="2xl">Button</cds-button>
+<cds-ng-button size="xs">Button</cds-ng-button>
+<cds-ng-button size="sm">Button</cds-ng-button>
+<cds-ng-button size="md">Button</cds-ng-button>
+<cds-ng-button size="lg">Button</cds-ng-button>
+<cds-ng-button size="xl">Button</cds-ng-button>
+<cds-ng-button size="2xl">Button</cds-ng-button>
 ```
 
 ### `href`
@@ -181,9 +181,9 @@ Specifies the rendered size of the button. Valid values are `xs`, `sm`, `md`,
 Providing an `href` turns the button into an anchor element.
 
 ```html
-<cds-button href="https://www.carbondesignsystem.com" target="_blank">
+<cds-ng-button href="https://www.carbondesignsystem.com" target="_blank">
   Carbon Design System
-</cds-button>
+</cds-ng-button>
 ```
 
 ### `tooltipText`
@@ -192,9 +192,9 @@ Required for icon-only buttons. Sets both the visible tooltip and the
 `aria-label` for accessibility.
 
 ```html
-<cds-button tooltipText="Add item" tooltipPosition="bottom">
+<cds-ng-button tooltipText="Add item" tooltipPosition="bottom">
   <!-- icon projected here -->
-</cds-button>
+</cds-ng-button>
 ```
 
 ### `tooltipAlignment`
@@ -203,9 +203,13 @@ Controls where the tooltip caret is rendered relative to the button. Accepted
 values are `left` (start), `''` (center, default), and `right` (end).
 
 ```html
-<cds-button [tooltipText]="'Add'" [tooltipAlignment]="'left'">…</cds-button>
-<cds-button [tooltipText]="'Add'" [tooltipAlignment]="''">…</cds-button>
-<cds-button [tooltipText]="'Add'" [tooltipAlignment]="'right'">…</cds-button>
+<cds-ng-button [tooltipText]="'Add'" [tooltipAlignment]="'left'"
+  >…</cds-ng-button
+>
+<cds-ng-button [tooltipText]="'Add'" [tooltipAlignment]="''">…</cds-ng-button>
+<cds-ng-button [tooltipText]="'Add'" [tooltipAlignment]="'right'"
+  >…</cds-ng-button
+>
 ```
 
 ### `tooltipPosition`
@@ -214,10 +218,16 @@ Controls where the tooltip is positioned relative to the button. Accepted values
 are `top` (default), `right`, `bottom`, and `left`.
 
 ```html
-<cds-button [tooltipText]="'Add'" [tooltipPosition]="'top'">…</cds-button>
-<cds-button [tooltipText]="'Add'" [tooltipPosition]="'right'">…</cds-button>
-<cds-button [tooltipText]="'Add'" [tooltipPosition]="'bottom'">…</cds-button>
-<cds-button [tooltipText]="'Add'" [tooltipPosition]="'left'">…</cds-button>
+<cds-ng-button [tooltipText]="'Add'" [tooltipPosition]="'top'">…</cds-ng-button>
+<cds-ng-button [tooltipText]="'Add'" [tooltipPosition]="'right'"
+  >…</cds-ng-button
+>
+<cds-ng-button [tooltipText]="'Add'" [tooltipPosition]="'bottom'"
+  >…</cds-ng-button
+>
+<cds-ng-button [tooltipText]="'Add'" [tooltipPosition]="'left'"
+  >…</cds-ng-button
+>
 ```
 
 ### `(buttonClick)`
@@ -226,7 +236,7 @@ Emitted when the button or inner `<a>` is clicked. The event payload is the
 native `MouseEvent`.
 
 ```html
-<cds-button (buttonClick)="handleClick($event)">Click me</cds-button>
+<cds-ng-button (buttonClick)="handleClick($event)">Click me</cds-ng-button>
 ```
 
 ## Angular-specific notes
@@ -234,9 +244,10 @@ native `MouseEvent`.
 - **Component import:**
   `import { ButtonComponent } from '@carbon/angular/button'` (use in standalone
   `imports: [ButtonComponent]` or `NgModule` `imports: [ButtonComponent]`)
-- The backing Web Component runs under its own `cds-button` tag (ADR 0015). The
-  Angular wrapper's host element IS the web component — you will see
-  `cds-button` in DevTools, with no inner element.
+- The host element in DevTools will be `cds-ng-button` — this is the web
+  component running under a prefixed tag (ADR 0020). There is no inner element.
+  The `cds-ng-*` prefix ensures `@carbon/angular` can coexist with
+  `carbon-components-angular` on the same page without tag-registry conflicts.
 - Radius is controlled via CSS custom properties that inherit through the shadow
   boundary, not via an `@Input()`. See the
   [web-components button docs](https://web-components.carbondesignsystem.com/?path=/docs/components-button--docs)

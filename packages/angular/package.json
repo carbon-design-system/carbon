@@ -26,8 +26,8 @@
     "e2e": "playwright test",
     "generate:wrappers": "node tasks/generate-wrappers/index.js",
     "playwright:install": "playwright install chromium",
-    "storybook": "npx ng run carbon-angular:storybook",
-    "storybook:build": "npx ng run carbon-angular:build-storybook",
+    "storybook": "node tasks/generate-wrappers/index.js && node tasks/build-entries/index.js && npx ng run carbon-angular:storybook",
+    "storybook:build": "node tasks/generate-wrappers/index.js && node tasks/build-entries/index.js && npx ng run carbon-angular:build-storybook",
     "test": "jest --passWithNoTests"
   },
   "peerDependencies": {

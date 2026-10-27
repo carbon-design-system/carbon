@@ -17,8 +17,9 @@
  *  - WC shadow-DOM rendering and focus management
  *  - IBM Equal Access zero-violation assertion (supplement to Storybook Layer 3)
  *
- * Architecture (ADR 0015): the Angular selector `cds-button` IS the web
- * component host element — no inner `cds-ng-button` is rendered.
+ * Architecture (ADR 0020): the Angular selector `cds-ng-button` IS the web
+ * component host element — the `cds-ng-*` prefix ensures coexistence with
+ * `carbon-components-angular` on the same page.
  *
  * Run by the `angular-e2e` CI job against the built Storybook
  * (`yarn workspace @carbon/angular storybook:build`, then `e2e`).
@@ -30,15 +31,16 @@ const STORY_URL = '/iframe.html?id=components-button--default&viewMode=story';
 
 /**
  * Listens for click events on the Angular host element and records the count
- * on `window`. The host element IS the `cds-button` web component, so a plain
- * DOM click listener is the most direct way to observe activation from Playwright.
+ * on `window`. The host element IS the `cds-ng-button` web component, so a
+ * plain DOM click listener is the most direct way to observe activation from
+ * Playwright.
  */
 const trackClicks = async (page: Page) => {
   await page.evaluate(() => {
     const w = window as unknown as { __clicks: number };
     w.__clicks = 0;
     document
-      .querySelector('cds-button')!
+      .querySelector('cds-ng-button')!
       .addEventListener('click', () => (w.__clicks += 1));
   });
 };
@@ -49,11 +51,11 @@ test.describe('ButtonComponent (Layer 2)', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(STORY_URL);
     // Wait for the Angular component and its backing WC to be defined and rendered.
-    // In the host-is-WC design (ADR 0015), cds-button is registered by the
-    // wrapper's defineCustomElement(CDSButton) call — no cds-ng-button.
-    await page.waitForSelector('cds-button');
+    // In the host-is-WC design (ADR 0020), cds-ng-button is registered by the
+    // vendored barrel import — no unprefixed cds-button is defined.
+    await page.waitForSelector('cds-ng-button');
     await page.waitForFunction(
-      () => customElements.get('cds-button') !== undefined
+      () => customElements.get('cds-ng-button') !== undefined
     );
   });
 
@@ -66,7 +68,7 @@ test.describe('ButtonComponent (Layer 2)', () => {
     page,
   }) => {
     const display = await page.evaluate(() => {
-      const el = document.querySelector('cds-button')!;
+      const el = document.querySelector('cds-ng-button')!;
       return getComputedStyle(el).display;
     });
     expect(display).toBe('inline-flex');
@@ -76,7 +78,7 @@ test.describe('ButtonComponent (Layer 2)', () => {
     page,
   }) => {
     const height = await page.evaluate(() => {
-      const el = document.querySelector('cds-button')!;
+      const el = document.querySelector('cds-ng-button')!;
       return el.getBoundingClientRect().height;
     });
     // Default size is "lg" → 48px (3rem at 16px base). Allow ±1px for
@@ -89,39 +91,38 @@ test.describe('ButtonComponent (Layer 2)', () => {
 
   test('renders the real <button> in the WC shadow root', async ({ page }) => {
     // The shadow root is on the host element itself (host IS the WC).
-    const button = page.locator('cds-button button');
+    const button = page.locator('cds-ng-button button');
     await expect(button).toBeVisible();
     await expect(button).toHaveClass(/cds--btn--primary/);
     // Default size matches @carbon/react and @carbon/web-components.
     await expect(button).toHaveClass(/cds--btn--lg/);
   });
 
-  test('no inner cds-ng-button element exists (host-is-WC, ADR 0015)', async ({
+  test('host element has no unexpected nesting (host-is-WC, ADR 0020)', async ({
     page,
   }) => {
-    // Regression: the old design rendered cds-ng-button inside cds-button.
-    // The new design has no inner element.
-    await expect(page.locator('cds-button cds-ng-button')).toHaveCount(0);
+    // The host IS the cds-ng-button WC: no inner cds-ng-button should exist.
+    await expect(page.locator('cds-ng-button cds-ng-button')).toHaveCount(0);
   });
 
   // ─── Interaction ──────────────────────────────────────────────────────────
 
   test('is clickable with a mouse', async ({ page }) => {
     await trackClicks(page);
-    await page.locator('cds-button button').click();
+    await page.locator('cds-ng-button button').click();
     expect(await clickCount(page)).toBe(1);
   });
 
   test('is activatable with Enter key', async ({ page }) => {
     await trackClicks(page);
-    await page.locator('cds-button button').focus();
+    await page.locator('cds-ng-button button').focus();
     await page.keyboard.press('Enter');
     expect(await clickCount(page)).toBe(1);
   });
 
   test('is activatable with Space key', async ({ page }) => {
     await trackClicks(page);
-    await page.locator('cds-button button').focus();
+    await page.locator('cds-ng-button button').focus();
     await page.keyboard.press('Space');
     expect(await clickCount(page)).toBe(1);
   });
@@ -130,11 +131,11 @@ test.describe('ButtonComponent (Layer 2)', () => {
     await page.goto(
       '/iframe.html?id=components-button--disabled&viewMode=story'
     );
-    await page.waitForSelector('cds-button');
+    await page.waitForSelector('cds-ng-button');
 
     // In the host-is-WC design, disabled is on the host element itself.
-    await expect(page.locator('cds-button')).toHaveAttribute('disabled', '');
-    await expect(page.locator('cds-button button')).toBeDisabled();
+    await expect(page.locator('cds-ng-button')).toHaveAttribute('disabled', '');
+    await expect(page.locator('cds-ng-button button')).toBeDisabled();
   });
 
   test('isExpressive reaches the WC (property binding)', async ({ page }) => {
@@ -143,9 +144,9 @@ test.describe('ButtonComponent (Layer 2)', () => {
     await page.goto(
       '/iframe.html?id=components-button--expressive&viewMode=story'
     );
-    await page.waitForSelector('cds-button');
-    // Host IS the WC; shadow DOM is directly on cds-button.
-    await expect(page.locator('cds-button button')).toHaveClass(
+    await page.waitForSelector('cds-ng-button');
+    // Host IS the WC; shadow DOM is directly on cds-ng-button.
+    await expect(page.locator('cds-ng-button button')).toHaveClass(
       /cds--btn--expressive/
     );
   });
