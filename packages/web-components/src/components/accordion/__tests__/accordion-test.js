@@ -86,6 +86,65 @@ describe('cds-accordion', function () {
     });
   });
 
+  describe('animationend listener', () => {
+    it('should keep a single animationend listener across toggles', async () => {
+      const el = await fixture(accordion);
+      const firstItem = el.firstElementChild;
+      const content = firstItem.shadowRoot.querySelector(
+        '.cds--accordion__content'
+      );
+      const button = firstItem.shadowRoot.querySelector('button');
+
+      for (let index = 0; index < 5; index++) {
+        button.click();
+        await firstItem.updateComplete;
+      }
+
+      let cleared = 0;
+      const removeAttribute = firstItem.removeAttribute.bind(firstItem);
+      firstItem.removeAttribute = (name) => {
+        if (name === 'expanding') {
+          cleared++;
+        }
+        removeAttribute(name);
+      };
+      content.dispatchEvent(new Event('animationend'));
+
+      expect(cleared).to.equal(1);
+    });
+
+    it('should clear expanding and collapsing when the animation ends', async () => {
+      const el = await fixture(accordion);
+      const firstItem = el.firstElementChild;
+      const content = firstItem.shadowRoot.querySelector(
+        '.cds--accordion__content'
+      );
+
+      firstItem.shadowRoot.querySelector('button').click();
+      expect(firstItem.hasAttribute('expanding')).to.be.true;
+
+      content.dispatchEvent(new Event('animationend'));
+
+      expect(firstItem.hasAttribute('expanding')).to.be.false;
+      expect(firstItem.hasAttribute('collapsing')).to.be.false;
+    });
+
+    it('should stop listening once the animation has ended', async () => {
+      const el = await fixture(accordion);
+      const firstItem = el.firstElementChild;
+      const content = firstItem.shadowRoot.querySelector(
+        '.cds--accordion__content'
+      );
+
+      firstItem.shadowRoot.querySelector('button').click();
+      content.dispatchEvent(new Event('animationend'));
+      firstItem.setAttribute('expanding', '');
+      content.dispatchEvent(new Event('animationend'));
+
+      expect(firstItem.hasAttribute('expanding')).to.be.true;
+    });
+  });
+
   describe('Flush align', () => {
     it('should align to the left if prop isFlush is passed', async () => {
       const el = await fixture(

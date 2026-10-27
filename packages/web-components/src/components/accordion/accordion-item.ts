@@ -68,6 +68,14 @@ class CDSAccordionItem extends FocusMixin(LitElement) {
   private _hObserveResize: Handle | null = null;
 
   /**
+   * Clears the expanding and collapsing state once the animation ends.
+   */
+  private _handleAnimationEnd = () => {
+    this.removeAttribute('expanding');
+    this.removeAttribute('collapsing');
+  };
+
+  /**
    * Handles user-initiated toggle request of this accordion item.
    *
    * @param open The new open state.
@@ -94,10 +102,13 @@ class CDSAccordionItem extends FocusMixin(LitElement) {
       } else {
         this.setAttribute('collapsing', '');
       }
-      this._accordionContent?.addEventListener('animationend', () => {
-        this.removeAttribute('expanding');
-        this.removeAttribute('collapsing');
-      });
+      // One shared handler so toggles never stack listeners, `once` so it
+      // removes itself after running
+      this._accordionContent?.addEventListener(
+        'animationend',
+        this._handleAnimationEnd,
+        { once: true }
+      );
 
       this.open = open;
       this.dispatchEvent(
