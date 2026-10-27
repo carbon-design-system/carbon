@@ -8,6 +8,8 @@
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/colors';
 @use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/utilities/custom-property';
 
 .welcome__container {
   position: fixed;
@@ -31,10 +33,24 @@
   font-weight: 600;
 }
 
-.welcome__link,
-.welcome__link:hover,
-.welcome__link.cds--link:visited {
-  color: colors.$blue-40;
+.welcome__link {
+  @include custom-property.declaration('link-text-color', theme.$link-inverse);
+  @include custom-property.declaration(
+    'link-hover-text-color',
+    theme.$link-inverse-hover
+  );
+  @include custom-property.declaration(
+    'link-visited-text-color',
+    theme.$link-inverse-visited
+  );
+  @include custom-property.declaration(
+    'link-focus-text-color',
+    theme.$focus-inverse
+  );
+  @include custom-property.declaration(
+    'link-active-text-color',
+    theme.$text-inverse
+  );
 }
 
 .welcome__links {
