@@ -78,6 +78,12 @@ $css--plex: true !default;
   padding-inline-end: $spacing-13;
 }
 
+.#{$prefix}--card__header[data-has-ai-label] {
+  --#{$prefix}-card-actions-inset-inline-end: calc(
+    #{$spacing-03} + #{$spacing-06} + #{$spacing-03}
+  );
+}
+
 :host-context(#{$prefix}-card-header[has-title-media])
   .#{$prefix}--card__title {
   grid-column: 2;
@@ -106,10 +112,6 @@ $css--plex: true !default;
     max-inline-size: none;
   }
 }
-
-// Icon-only actions: fixed width. The footer container's justify-content:flex-end
-// pushes the whole group to the trailing edge, so no per-item margin trick needed.
-// Original: .cds--card__footer > .cds--card__action:has(.cds--btn--icon-only)
 
 :host(#{$prefix}-card-action[icon-only]) {
   flex: 0 0 auto;
@@ -180,21 +182,20 @@ $css--plex: true !default;
   align-items: center;
   justify-content: flex-end;
   block-size: $spacing-07;
-  gap: $spacing-02;
+  gap: 0;
   inline-size: 50%;
   inset-block-start: $spacing-03;
-  inset-inline-end: $spacing-03;
+  inset-inline-end: var(
+    --#{$prefix}-card-actions-inset-inline-end,
+    #{$spacing-03}
+  );
   max-inline-size: 50%;
 }
 
 :host(#{$prefix}-card-actions) {
-  // Provide a positioning context for the shadow-DOM overflow menu.
   position: relative;
 }
 
-// The overflow menu renders in shadow DOM but visually aligns with the
-// sentinel (which is hidden when not overflowing). `position:absolute` takes
-// it out of flow; the host's `position:relative` is the containing block.
 :host(#{$prefix}-card-actions) .#{$prefix}--card__actions-overflow-menu {
   position: absolute;
   inset-block-start: 0;
@@ -205,8 +206,6 @@ $css--plex: true !default;
   display: block;
 }
 
-// The overflow handler sets data-hidden on items that don't fit.
-// This hides them from view while keeping them in the DOM for measurement.
 :host(#{$prefix}-card-action[data-hidden]) {
   display: none;
 }

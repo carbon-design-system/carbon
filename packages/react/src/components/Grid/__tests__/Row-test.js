@@ -1,11 +1,11 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { Row } from '../';
 
@@ -26,14 +26,12 @@ describe('Row', () => {
   });
 
   it('should render `children` that are given', () => {
-    const { container } = render(
+    render(
       <Row>
         <span id="test">Test</span>
       </Row>
     );
-    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-    const testNode = container.querySelector('#test');
-    expect(testNode).toBeInstanceOf(HTMLElement);
+    expect(screen.getByText('Test')).toHaveAttribute('id', 'test');
   });
 
   it('should support setting the condensed class through the `condensed` prop', () => {

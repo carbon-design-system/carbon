@@ -74,7 +74,7 @@ test.describe('@avt FluidTextArea', () => {
     await page.keyboard.press('Tab');
     await expect(textArea).toBeFocused();
 
-    // Writting a word to check functionality
+    // Writing a word to check functionality
     await textArea.fill('test');
     await expect(textArea).toHaveValue('test');
     await expect(page).toHaveNoACViolations('FluidTextArea default');
@@ -103,7 +103,7 @@ test.describe('@avt FluidTextArea', () => {
     await page.keyboard.press('Tab');
     await expect(textArea).toBeFocused();
 
-    // Writting a word to check functionality
+    // Writing a word to check functionality
     await textArea.fill('test');
     await expect(textArea).toHaveValue('test');
     await expect(page).toHaveNoACViolations('FluidTextArea with toggletip');

@@ -9,8 +9,73 @@ import { Edit } from '@carbon/icons-react';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { IconButton } from '../';
+import { FeatureFlags } from '../../FeatureFlags';
+import { waitForPosition } from '../../ListBox/test-helpers';
 
 describe('IconButton', () => {
+  it.each([
+    ['danger', 'cds--btn--danger'],
+    ['danger--primary', 'cds--btn--danger--primary'],
+    ['danger--ghost', 'cds--btn--danger--ghost'],
+    ['danger--tertiary', 'cds--btn--danger--tertiary'],
+  ])('supports the %s kind without prop type warnings', (kind, className) => {
+    const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+    render(
+      <IconButton label="test" kind={kind}>
+        <Edit />
+      </IconButton>
+    );
+
+    try {
+      expect(spy).not.toHaveBeenCalled();
+      expect(screen.getByRole('button')).toHaveClass(className);
+    } finally {
+      spy.mockRestore();
+    }
+  });
+
+  it('announces the danger description for an icon-only danger button', () => {
+    render(
+      <IconButton
+        label="Delete"
+        kind="danger"
+        dangerDescription="Permanently deletes this item">
+        <Edit />
+      </IconButton>
+    );
+
+    expect(screen.getByRole('button')).toHaveAccessibleDescription(
+      'Permanently deletes this item'
+    );
+  });
+
+  it('should enable `autoAlign` on its tooltip by default with `enable-v12-autoalign`', async () => {
+    const { container } = render(
+      <FeatureFlags enableV12Autoalign>
+        <IconButton label="test">
+          <Edit />
+        </IconButton>
+      </FeatureFlags>
+    );
+    await waitForPosition();
+
+    expect(container.firstChild).toHaveClass('cds--popover--auto-align');
+  });
+
+  it('should respect `autoAlign={false}` with `enable-v12-autoalign`', async () => {
+    const { container } = render(
+      <FeatureFlags enableV12Autoalign>
+        <IconButton label="test" autoAlign={false}>
+          <Edit />
+        </IconButton>
+      </FeatureFlags>
+    );
+    await waitForPosition();
+
+    expect(container.firstChild).not.toHaveClass('cds--popover--auto-align');
+  });
+
   it('should support labelling with label', () => {
     render(
       <IconButton label="edit">
