@@ -5,10 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@forward 'page-header';
 @forward 'page-header-next';
-@use 'page-header';
 @use 'page-header-next';
 
-@include page-header.page-header;
 @include page-header-next.page-header-next;

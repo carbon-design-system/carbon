@@ -6,8 +6,7 @@
  */
 
 import React from 'react';
-import { preview__PageHeader as PageHeader } from '@carbon/ibm-products';
-import { Button, Tabs, Tab, TabList, TabPanels, TabPanel } from '@carbon/react';
+import { PageHeader, Button, Tabs, Tab, TabList, TabPanels, TabPanel } from '@carbon/react';
 import { Lightning, Settings } from '@carbon/react/icons';
 
 // Test 1: Basic PageHeader with title only

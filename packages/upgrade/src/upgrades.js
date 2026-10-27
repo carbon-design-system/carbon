@@ -748,40 +748,9 @@ export const upgrades = [
         },
       },
       {
-        name: 'ibm-products-update-page-header',
-        description: 'Rewrites PageHeader imports to IBM Products packages',
-        migrate: async (options) => {
-          const transform = path.join(
-            TRANSFORM_DIR,
-            'ibm-products-update-page-header.js'
-          );
-          const paths =
-            Array.isArray(options.paths) && options.paths.length > 0
-              ? options.paths
-              : await glob(['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'], {
-                  cwd: options.workspaceDir,
-                  ignore: [
-                    '**/es/**',
-                    '**/lib/**',
-                    '**/umd/**',
-                    '**/node_modules/**',
-                    '**/storybook-static/**',
-                  ],
-                });
-
-          await runCodemod(options, {
-            dry: !options.write,
-            transform,
-            paths,
-            verbose: options.verbose,
-            parser: 'tsx',
-          });
-        },
-      },
-      {
         name: 'ibm-products-update-page-header-composable',
         description:
-          'Migrates stable PageHeader to composable PageHeader architecture',
+          'Migrates IBM Products PageHeader to composable @carbon/react PageHeader',
         migrate: async (options) => {
           const transform = path.join(
             TRANSFORM_DIR,

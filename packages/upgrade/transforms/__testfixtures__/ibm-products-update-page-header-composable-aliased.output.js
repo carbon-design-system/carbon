@@ -6,11 +6,15 @@
  */
 
 import React from 'react';
-import { preview__PageHeader as ProductsPageHeader } from '@carbon/ibm-products';
+import { SidePanel } from '@carbon/ibm-products';
 
-// Test: PageHeader with aliased import
+import { PageHeader as ProductsPageHeader } from "@carbon/react";
+
+// Test: PageHeader with aliased import and no @carbon/react import
 export const AliasedPageHeader = () => (
   <ProductsPageHeader><ProductsPageHeader.Content title="Page title"><ProductsPageHeader.ContentText subtitle="Optional subtitle" />
-    <p>Content</p>
-  </ProductsPageHeader.Content></ProductsPageHeader>
+      <p>Content</p>
+    </ProductsPageHeader.Content></ProductsPageHeader>
 );
+
+export const OtherProductsComponent = () => <SidePanel />;

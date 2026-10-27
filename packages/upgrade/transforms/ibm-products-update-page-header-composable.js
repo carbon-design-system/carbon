@@ -6,7 +6,8 @@
  */
 
 /**
- * Rewrites stable PageHeader to composable PageHeader
+ * Rewrites stable PageHeader to composable PageHeader, and moves its import
+ * from @carbon/ibm-products to @carbon/react
  *
  * Transforms:
  *
@@ -341,48 +342,61 @@ const transform = (fileInfo, api) => {
 
   // Update imports if transformation occurred
   if (dirtyFlag) {
-    root
+    const isPageHeaderSpecifier = (specifier) =>
+      specifier.type === 'ImportSpecifier' &&
+      specifier.imported &&
+      specifier.imported.name === 'PageHeader';
+
+    // Move PageHeader from @carbon/ibm-products to @carbon/react, preserving
+    // the local name (alias)
+    const productsImports = root
       .find(j.ImportDeclaration)
       .filter((path) => path.node.source.value === '@carbon/ibm-products')
-      .forEach((path) => {
-        const specifiers = path.node.specifiers;
-        let hasPageHeader = false;
+      .filter((path) => path.node.specifiers.some(isPageHeaderSpecifier));
 
-        // Check if PageHeader is imported
-        specifiers.forEach((specifier) => {
-          if (
-            specifier.type === 'ImportSpecifier' &&
-            specifier.imported &&
-            specifier.imported.name === 'PageHeader'
-          ) {
-            hasPageHeader = true;
-          }
-        });
+    productsImports.forEach((path) => {
+      path.node.specifiers = path.node.specifiers.filter(
+        (specifier) => !isPageHeaderSpecifier(specifier)
+      );
+    });
 
-        // If PageHeader is imported, update to preview version
-        if (hasPageHeader) {
-          const newSpecifiers = specifiers.map((specifier) => {
-            if (
-              specifier.type === 'ImportSpecifier' &&
-              specifier.imported &&
-              specifier.imported.name === 'PageHeader'
-            ) {
-              // Change to preview__PageHeader, preserving the local name (alias)
-              // If there's a local name (alias), preserve it; otherwise use 'PageHeader'
-              const localName = specifier.local
-                ? specifier.local.name
-                : 'PageHeader';
-              return j.importSpecifier(
-                j.identifier('preview__PageHeader'),
-                j.identifier(localName)
-              );
-            }
-            return specifier;
-          });
+    const pageHeaderSpecifier =
+      pageHeaderLocalName === 'PageHeader'
+        ? j.importSpecifier(j.identifier('PageHeader'))
+        : j.importSpecifier(
+            j.identifier('PageHeader'),
+            j.identifier(pageHeaderLocalName)
+          );
+    const reactImport = root
+      .find(j.ImportDeclaration)
+      .filter(
+        (path) =>
+          path.node.source.value === '@carbon/react' &&
+          path.node.importKind !== 'type' &&
+          path.node.specifiers.every(
+            (specifier) => specifier.type === 'ImportSpecifier'
+          )
+      )
+      .paths()[0];
 
-          path.node.specifiers = newSpecifiers;
-        }
-      });
+    if (reactImport) {
+      if (!reactImport.node.specifiers.some(isPageHeaderSpecifier)) {
+        reactImport.node.specifiers.unshift(pageHeaderSpecifier);
+      }
+    } else {
+      productsImports
+        .paths()[0]
+        .insertAfter(
+          j.importDeclaration(
+            [pageHeaderSpecifier],
+            j.stringLiteral('@carbon/react')
+          )
+        );
+    }
+
+    productsImports
+      .filter((path) => path.node.specifiers.length === 0)
+      .remove();
   }
 
   return root.toSource();
