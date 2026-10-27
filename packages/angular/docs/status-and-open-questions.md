@@ -336,7 +336,7 @@ single-entry baseline. The Angular CLI `application` builder keeps only the
 button barrel side effect; no other component's registration code is included.
 `ng-packagr` 19.2.2 builds both entries cleanly in 2 s. Open items remaining
 from constraint 4: entry naming, per-component vs per-family granularity, and
-build time for all 284 wrappers.
+build time for all 278 wrappers (measured: ~22 s).
 
 **Raw web components in Angular (jsdom probe, not kept).** `ngModel` and
 `formControl` fail with `NG01203`. Misspelled bindings are silently accepted
@@ -373,8 +373,8 @@ In order. Items marked ~~done~~ are complete; the remainder are open.
 1. ~~**Apply ADR 0021 in the generator.**~~ **Done 2026-10-27.** `SKIPPED_TAGS`
    set added to
    [`tasks/generate-wrappers/index.js`](../tasks/generate-wrappers/index.js).
-   284 wrappers emitted (manifest has grown since the 279 count; 6 skip). Jest:
-   5 suites, 104 passed, 0 failures. Type-check clean.
+   278 wrappers emitted (6 skipped; an earlier "284" counted stale folders).
+   Jest: 5 suites, 104 passed, 0 failures. Type-check clean.
 2. **Optional third coexistence sample**: a CCA form control with validation
    (for example `TextInput` with `ngModel`), and experiment D, the unmodified
    two-copies case. Brief in
@@ -388,17 +388,68 @@ In order. Items marked ~~done~~ are complete; the remainder are open.
      alarming but gzips to ~47 kB; 112 kB of it is `button.scss.js` (CSS inlined
      by Lit for shadow-root injection) which compresses 10:1. Angular + Lit
      (~128 kB raw) is the fixed per-app cost paid once.
-   - **Decide entry naming and granularity.** `ng-packagr` exposes a secondary
-     placed at `src/button/` as `@carbon/angular/src/button`. Conventional path
-     is `@carbon/angular/button`. Fix: place each secondary directly under
-     `src/<name>/` (one level, no `src/` prefix). Granularity: one secondary
-     entry per vendor barrel folder (99 folders → 99 entries) rather than one
-     per wrapper (284), so families like `button-set` stay in `button/`.
-   - **Build the full 284-wrapper library with secondary entries and time it.**
+   - ~~Decide entry naming and granularity.~~ **Done 2026-10-27.** One secondary
+     entry per top-level `components/<dir>` folder, named for the folder
+     (`@carbon/angular/button`). **278 wrappers group into 97 entries**; nested
+     barrels (`page-header/*-set`, `coachmark/*`, `date-picker/next`) fold into
+     their parent. The `src/<name>` path problem is avoided by generating a
+     separate build root, `.entries/`, via
+     [`tasks/build-entries`](../tasks/build-entries/index.js), with its own
+     primary `ng-package.json`. The primary entry is side-effect free.
+   - ~~Wire the vendoring step into the entries build.~~ **Done 2026-10-27.**
+     `build-entries` runs `create-prefixed-build --prefix cds-ng` into
+     `.entries/vendor`, drops `node_modules` (flatpickr), `stories`,
+     `__tests__`, `_story-assets` (except `overflowHandler.js`, which
+     `page-header/utils.js` imports), the root `index.js` barrel, the classic
+     and fluid `date-picker` folders, `.d.ts` and maps: **646 JS files, 9 MB**.
+     It rewrites the copied wrappers to `cds-ng-*` selectors and
+     `#carbon-ng/components/<dir>/index.js` imports, and writes `imports`,
+     `sideEffects: ["./vendor/**/*.js"]`, `assets`, the web components' runtime
+     dependencies (including `@carbon/layout` and `@carbon/motion`) and
+     `allowedNonPeerDependencies`. It fails if any vendored relative import is
+     missing or any bare import is not a declared dependency; that check found
+     the `_story-assets` and root-barrel problems on the first run.
+     `src/generated/` is unchanged (`cds-*`, peer `@carbon/web-components`) so
+     Jest and Storybook are unaffected.
+   - ~~Build the full library with secondary entries and time it.~~ **Done
+     2026-10-27.** `yarn build`: 98 entry points (97 + primary), no warnings,
+     **~22 s** for ng-packagr (single-entry build is ~5 s). The `exports` map
+     has all 97 subpaths; the tarball is 1.3 MB.
+   - ~~Consumer check against the real entries.~~ **Done 2026-10-27**
+     (`temp/pkg-spike/consumer`, Angular 19.2, Chromium). Installed the packed
+     tarball. `ButtonComponent` from `@carbon/angular/button`: bundle **240.95
+     kB raw / 47.11 kB gzipped**, the same as the spike's 239.57 kB. Button plus
+     Modal, Modal body and footer from `@carbon/angular/modal`: `cds-ng-button`,
+     `cds-ng-modal`, `-body`, `-footer`, `-dialog` and `-header` all defined, no
+     unprefixed `cds-*` tag defined, modal open and styled, no console errors.
+     Child registration for the other composites is still unchecked (ADR 0020
+     verification 3).
+   - **Open:** `ModalFooter.hasThreeButtons` read `false` with two buttons, as
+     expected; the three-button case was not run.
    - Try Angular 20+ and the `browser` and webpack builders.
-   - Decide whether wrappers need `.d.ts` for the vendored code.
-   - Wire the vendoring step into the Lerna build order (web components →
-     prefixed copy → `ng-packagr`).
+   - Decide whether wrappers need `.d.ts` for the vendored code. Not needed so
+     far: the wrappers import the vendor tree for side effects only, and the
+     consumer build type-checked.
+   - ~~Switch `build` to the entries layout.~~ **Done 2026-10-27.**
+     `yarn workspace @carbon/angular build` is now generate wrappers, then
+     `build-entries`, then `ng-packagr -p .entries/ng-package.json`, writing to
+     `dist/` (the `publishConfig.directory`) in ~30 s. The root
+     `ng-package.json` and `src/index.ts` were removed and `angular.json` points
+     the build target at `.entries/ng-package.json`. The Lerna and CI order
+     already builds `@carbon/web-components` first (`angular-test` and
+     `angular-e2e` in `.github/workflows/ci.yml`; `lerna ls --toposort` puts
+     web-components before angular), so `es/` exists. Storybook still builds,
+     Jest and `tsc` are clean. Docs now import from `@carbon/angular/button`.
+     **Left inconsistent on purpose:** the Button stories and MDX still show
+     `<cds-button>` because Storybook runs against `src/generated/` (`cds-*`,
+     peer web components), while the published package uses `cds-ng-button`.
+     Decide whether Storybook should build against `.entries/` so docs match
+     what consumers get.
+   - Decide what to do with the six duplicated tags: the manifest lists
+     `page-header`, `-breadcrumb`, `-content`, `-content-text`, `-hero-image`
+     and `-tabs` from both `page-header` and `page-header-deprecated`. They map
+     to one wrapper each, so the deprecated variants are not wrapped.
+     Unconfirmed with maintainers whether that is intended.
 4. **Trace the `CDSTooltip.updated` error** seen in coexistence run B3
    (`Cannot set properties of null (setting 'align')`), to see whether it is
    specific to the CCA host or a bug in the web components.

@@ -30,6 +30,13 @@ This directory contains the automated code generator for `@carbon/angular`.
 - **Do NOT manually edit files in `src/generated/`** — they are re-created on
   every generator run.
 
+The generator output in `src/generated/` is the source for the published
+package, but it is not what ships. `yarn build` also runs
+[`tasks/build-entries`](../build-entries/index.js), which regroups the wrappers
+into one secondary entry point per component folder (`@carbon/angular/button`),
+rewrites them to `cds-ng-*` over a vendored, prefixed copy of the web
+components, and builds `.entries/` with `ng-packagr` into `dist/` (ADR 0020).
+
 There is no `@carbon/angular/legacy` entry point. It was removed before release
 (see ADR 0020).
 
@@ -54,7 +61,7 @@ For each generated component the generator emits a stub story file at
 exists** at that path. The stub contains:
 
 - `title: 'Components/<Name>'`
-- `import { <Name>Component } from '@carbon/angular'`
+- `import { <Name>Component } from '@carbon/angular/<entry>'`
 - A runnable `Default` story
 - `// TODO(parity): <StoryName>` comments for every WC story that still needs an
   Angular equivalent

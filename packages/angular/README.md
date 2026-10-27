@@ -35,14 +35,14 @@ Import the component directly into your standalone component or NgModule:
 ```ts
 // my.component.ts
 import { Component } from '@angular/core';
-import { ButtonComponent } from '@carbon/angular';
+import { ButtonComponent } from '@carbon/angular/button';
 
 @Component({
   selector: 'app-root',
   standalone: true, // optional on Angular 19+, where it is the default
   imports: [ButtonComponent],
-  template: `<cds-button kind="primary" (buttonClick)="onClick($event)"
-    >Click me</cds-button
+  template: `<cds-ng-button kind="primary" (buttonClick)="onClick($event)"
+    >Click me</cds-ng-button
   >`,
 })
 export class AppComponent {

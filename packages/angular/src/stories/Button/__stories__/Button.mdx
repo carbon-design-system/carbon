@@ -46,7 +46,7 @@ user interacts with it.
 ### Importing
 
 ```ts
-import { ButtonComponent } from '@carbon/angular';
+import { ButtonComponent } from '@carbon/angular/button';
 
 @Component({
   standalone: true,
@@ -231,9 +231,9 @@ native `MouseEvent`.
 
 ## Angular-specific notes
 
-- **Component import:** `import { ButtonComponent } from '@carbon/angular'` (use
-  in standalone `imports: [ButtonComponent]` or `NgModule`
-  `imports: [ButtonComponent]`)
+- **Component import:**
+  `import { ButtonComponent } from '@carbon/angular/button'` (use in standalone
+  `imports: [ButtonComponent]` or `NgModule` `imports: [ButtonComponent]`)
 - The backing Web Component runs under its own `cds-button` tag (ADR 0015). The
   Angular wrapper's host element IS the web component — you will see
   `cds-button` in DevTools, with no inner element.

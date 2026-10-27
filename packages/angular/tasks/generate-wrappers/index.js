@@ -6,7 +6,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { readFileSync, mkdirSync, writeFileSync, existsSync } from 'node:fs';
+import {
+  readFileSync,
+  mkdirSync,
+  rmSync,
+  writeFileSync,
+  existsSync,
+} from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -532,6 +538,12 @@ function main() {
   console.log(
     `\n🚀 Generating ${tagsToProcess.length} Angular wrapper(s) from custom-elements.json...\n`
   );
+
+  // A full run starts from an empty folder, so wrappers for tags that are now
+  // skipped (ADR 0021) or removed from the manifest do not linger.
+  if (!targetTag) {
+    rmSync(OUTPUT_DIR, { recursive: true, force: true });
+  }
 
   const generatedExports = [];
 

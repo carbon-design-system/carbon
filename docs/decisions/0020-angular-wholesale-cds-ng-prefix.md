@@ -486,19 +486,30 @@ Recorded 2026-10-26.
       versus the single-entry 364.68 kB baseline. The secondary entry's FESM
       contains only the Button barrel side-effect import; the Angular CLI
       `application` builder does not pull in any other component. The scratch
-      library and consumer are in the gitignored `temp/pkg-spike/`. The
-      remaining open items are: how to name the secondary entries
-      (`@carbon/angular/button` vs `@carbon/angular/src/button`; the latter
-      matches the built directory path from `ng-packagr`), whether the generator
-      emits one entry per component or one per family (e.g. `button-set` shares
-      the `button` barrel), and the build time for 284 secondary entries.
+      library and consumer are in the gitignored `temp/pkg-spike/`. **Decided
+      and built 2026-10-27:** one secondary entry per top-level
+      `components/<dir>` folder, named for the folder
+      (`@carbon/angular/button`), 97 entries for 278 wrappers, assembled by
+      `packages/angular/tasks/build-entries` into a separate gitignored build
+      root (`.entries/`) so the path has no `src/` segment. The same task
+      vendors the `cds-ng` prefixed copy (646 JS files, 9 MB; no flatpickr,
+      stories, tests or root barrel), writes the `imports`, `sideEffects`,
+      `assets` and dependency declarations from constraints 1 and 2, and fails
+      if a vendored import does not resolve. The full `ng-packagr` build (98
+      entry points including a side-effect-free primary) takes about 22 s with
+      no warnings and packs to 1.3 MB. **Consumer check:** installed from the
+      tarball into a clean Angular 19.2 app, `ButtonComponent` from
+      `@carbon/angular/button` gives **240.95 kB raw / 47.11 kB gzipped**, and
+      Button plus Modal from `@carbon/angular/modal` renders styled in Chromium
+      with `cds-ng-button`, `-modal`, `-body`, `-footer`, `-dialog` and
+      `-header` defined, no unprefixed `cds-*` tag defined and no console
+      errors.
 
-   **Not checked.** A full 279-wrapper library build and its build time. Angular
-   20+. Other bundlers (webpack, Vite) and the Angular CLI `browser` builder.
-   Whether `.d.ts` for the vendored code is needed by the wrappers (the spike
-   used none, since the wrappers import it for side effects only). Whether
-   `yarn build` order and caching work in the repository's Lerna setup. Source
-   maps for the vendored code.
+   **Not checked.** Angular 20+. Other bundlers (webpack, Vite) and the Angular
+   CLI `browser` builder. Whether `.d.ts` for the vendored code is needed by the
+   wrappers (the spike used none, since the wrappers import it for side effects
+   only). Whether `yarn build` order and caching work in the repository's Lerna
+   setup. Source maps for the vendored code.
 
 3. **Does `@carbon/styles` need a matching `$prefix`** for anything outside
    shadow DOM, and what happens to a CCA app on `@carbon/styles` 1.x that also

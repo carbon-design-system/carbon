@@ -21,8 +21,8 @@
     "directory": "dist"
   },
   "scripts": {
-    "build": "node tasks/generate-wrappers/index.js && ng-packagr -p ng-package.json",
-    "clean": "rimraf esm2022 fesm2022 dist src/generated",
+    "build": "node tasks/generate-wrappers/index.js && node tasks/build-entries/index.js && ng-packagr -p .entries/ng-package.json",
+    "clean": "rimraf esm2022 fesm2022 dist src/generated .entries",
     "e2e": "playwright test",
     "generate:wrappers": "node tasks/generate-wrappers/index.js",
     "playwright:install": "playwright install chromium",

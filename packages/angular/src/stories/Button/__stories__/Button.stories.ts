@@ -16,11 +16,11 @@ const meta: Meta<ButtonComponent> = {
     docs: {
       description: {
         component: `
-Buttons are clickable elements that trigger actions. Import from \`@carbon/angular\`
+Buttons are clickable elements that trigger actions. Import from \`@carbon/angular/button\`
 for all new development.
 
 \`\`\`ts
-import { ButtonComponent } from '@carbon/angular';
+import { ButtonComponent } from '@carbon/angular/button';
 
 @Component({
   standalone: true,
