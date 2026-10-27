@@ -1,12 +1,14 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import './DataTable-expansion-story.scss';
+import '../datatable-story.scss';
 import React from 'react';
+import { Heading, Section } from '../../../Heading';
 import DataTable, {
   Table,
   TableBody,
@@ -97,8 +99,12 @@ export const Default = (args) => (
                   colSpan={headers.length + 1}
                   className="demo-expanded-td"
                   {...getExpandedRowProps({ row })}>
-                  <h6>Expandable row content</h6>
-                  <div>Description here</div>
+                  <Section as="div">
+                    <Heading className="demo-expanded-row-heading">
+                      Expandable row content
+                    </Heading>
+                    <div>Description here</div>
+                  </Section>
                 </TableExpandedRow>
               </React.Fragment>
             ))}
@@ -154,8 +160,12 @@ export const BatchExpansion = (args) => (
                   colSpan={headers.length + 1}
                   className="demo-expanded-td"
                   {...getExpandedRowProps({ row })}>
-                  <h6>Expandable row content</h6>
-                  <div>Description here</div>
+                  <Section as="div">
+                    <Heading className="demo-expanded-row-heading">
+                      Expandable row content
+                    </Heading>
+                    <div>Description here</div>
+                  </Section>
                 </TableExpandedRow>
               </React.Fragment>
             ))}
@@ -212,8 +222,12 @@ export const BatchExpansionMultipleTables = (args) => (
                     colSpan={headers.length + 1}
                     className="demo-expanded-td"
                     {...getExpandedRowProps({ row })}>
-                    <h6>Expandable row content</h6>
-                    <div>Description here</div>
+                    <Section as="div">
+                      <Heading className="demo-expanded-row-heading">
+                        Expandable row content
+                      </Heading>
+                      <div>Description here</div>
+                    </Section>
                   </TableExpandedRow>
                 </React.Fragment>
               ))}
@@ -266,8 +280,12 @@ export const BatchExpansionMultipleTables = (args) => (
                     colSpan={headers.length + 1}
                     className="demo-expanded-td"
                     {...getExpandedRowProps({ row })}>
-                    <h6>Expandable row content</h6>
-                    <div>Description here</div>
+                    <Section as="div">
+                      <Heading className="demo-expanded-row-heading">
+                        Expandable row content
+                      </Heading>
+                      <div>Description here</div>
+                    </Section>
                   </TableExpandedRow>
                 </React.Fragment>
               ))}

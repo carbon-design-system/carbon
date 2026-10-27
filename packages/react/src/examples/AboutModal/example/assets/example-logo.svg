@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="157px" height="157px" viewBox="0 0 157 157" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>Group</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="-9.94443222%" y1="50%" x2="106.211488%" y2="50%" id="linearGradient-1">
+            <stop stop-color="#BE95FF" offset="0%"></stop>
+            <stop stop-color="#4589FF" offset="100%"></stop>
+        </linearGradient>
+        <circle id="path-2" cx="86" cy="86" r="71"></circle>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group">
+            <g id="Oval">
+                <use fill="#D8D8D8" xlink:href="#path-2"></use>
+                <use fill="url(#linearGradient-1)" xlink:href="#path-2"></use>
+            </g>
+            <circle id="Oval" fill="#FFFFFF" cx="39.5" cy="39.5" r="39.5"></circle>
+        </g>
+    </g>
+</svg>
