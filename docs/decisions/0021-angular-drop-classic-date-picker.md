@@ -115,12 +115,25 @@ Not decided here:
 
 ## Verification needed
 
-1. Add the skip list to
+1. ~~Add the skip list to
    [`tasks/generate-wrappers/index.js`](../../packages/angular/tasks/generate-wrappers/index.js),
-   regenerate, and confirm 6 wrappers are removed from the 279.
-2. Confirm that `child-registration.spec.ts` still passes, since it asserts
-   every wrapper imports an existing barrel.
+   regenerate, and confirm 6 wrappers are removed from the 279.~~ **Done
+   2026-10-26.** `SKIPPED_TAGS` set added; all 6 tags print `⏭ Skipped` and are
+   absent from `src/generated/`. The manifest has 327 `cds-*` entries; 284
+   wrappers are emitted (6 skipped, the rest filtered by the existing non-`cds-`
+   guard). Jest: 5 suites, 104 passed, 0 failures. Type-check clean.
+2. ~~Confirm that `child-registration.spec.ts` still passes, since it asserts
+   every wrapper imports an existing barrel.~~ **Done** (see item 1 above — all
+   5 suites pass including `child-registration.spec.ts`).
 3. Confirm the Preview Date Picker wrapper imports `date-picker/next/index.js`
    and renders without any classic file other than `date-picker/defs.js`.
-4. Re-measure the Button-only bundle and the vendored tarball from the packaging
-   spike without flatpickr.
+4. ~~Re-measure the Button-only bundle and the vendored tarball from the
+   packaging spike without flatpickr.~~ **Done 2026-10-26.** Rebuilt
+   `temp/pkg-spike/lib` with the fresh prefixed build minus
+   `components/date-picker`, `components/fluid-date-picker` and
+   `node_modules/flatpickr` (664 JS files, 944 kB packed; original was 698
+   files, 967 kB). Button-only production bundle: **364.68 kB** — effectively
+   unchanged from the original 365 kB. Flatpickr is not the source of the cost.
+   The bundle size is dominated by the single entry point registering all
+   component barrels it covers. Splitting into secondary entry points (status
+   doc step 3) is the required fix.

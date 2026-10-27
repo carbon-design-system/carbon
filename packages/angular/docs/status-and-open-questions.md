@@ -15,7 +15,7 @@ The remaining work, in suggested order, is under
 | Verified components                                                          | Button and `ModalFooter`, in jsdom. Jest: 5 suites, 104 passed, 10 `it.todo`. Modal child registration is covered too.         |
 | Playwright                                                                   | `Button.e2e.ts` is written. ADR 0015 says it has never been run. We did not run it either.                                     |
 | Legacy entry point                                                           | Abandoned and removed 2026-10-26.                                                                                              |
-| Angular peer floor                                                           | ADR 0018 proposes `>=20`. `package.json` still says `>=17` with `^19` devDependencies.                                         |
+| Angular peer floor                                                           | Peers updated to `>=20` (2026-10-27). `devDependencies` and CI matrix still on `^19`; move to `^20` in a follow-up PR.         |
 | Migration guide `docs/guides/cca-to-angular.md`                              | Does not exist.                                                                                                                |
 | CCA codemods in `packages/upgrade`                                           | None.                                                                                                                          |
 | `docs/migration/v12.md`                                                      | No Angular content.                                                                                                            |
@@ -33,7 +33,7 @@ root `yarn build`.
 | [0013](../../../docs/decisions/0013-controlvalueaccessor-on-angular-wrapper-not-wc.md)    | Accepted | CVA lives on the Angular wrapper.                                                                                  |
 | [0014](../../../docs/decisions/0014-preserve-cds-consumer-facing-selectors.md)            | Accepted | Selectors stay `cds-*`. **Proposed to be superseded by ADR 0020.**                                                 |
 | [0015](../../../docs/decisions/0015-angular-wrapper-host-is-the-web-component.md)         | Proposed | Wrapper host is the web component under its real tag. Host-is-WC kept by ADR 0020; real-tag registration replaced. |
-| [0018](../../../docs/decisions/0018-angular-supported-major-versions.md)                  | Proposed | Peer floor of Angular 20.                                                                                          |
+| [0018](../../../docs/decisions/0018-angular-supported-major-versions.md)                  | Proposed | Peer floor of Angular 20. Peers set to `>=20` 2026-10-27; devDeps/CI still on 19.                                  |
 | [0019](../../../docs/decisions/0019-angular-storybook-story-authoring.md)                 | -        | Story authoring.                                                                                                   |
 | [0020](../../../docs/decisions/0020-angular-wholesale-cds-ng-prefix.md)                   | Proposed | Wholesale `cds-ng-*` prefix over a prefixed build of the web components.                                           |
 | [0021](../../../docs/decisions/0021-angular-drop-classic-date-picker.md)                  | Accepted | No classic or fluid Date Picker wrappers; Preview Date Picker only. Removes flatpickr. Generator not yet changed.  |
@@ -317,6 +317,27 @@ Button in the library and 365 kB when the library also exported the Date Picker,
 because everything an entry point imports is registered. The real figure for 279
 wrappers in one entry point is not measured.
 
+**Re-measurement without flatpickr (2026-10-26).** Rebuilt `temp/pkg-spike/lib`
+from a fresh `cds-ng` prefixed build, excluding `components/date-picker`,
+`components/fluid-date-picker` and `node_modules/flatpickr`. Packed size: 944 kB
+(down from 967 kB), 664 JS files (down from 698). Button-only production bundle:
+**364.68 kB** — effectively the same as the 365 kB original. Flatpickr (~90 kB
+JS, 9 files) is not the source of the cost. The bundle cost is the single entry
+point registering every component barrel it covers regardless of what the
+consumer actually imports. Entry-point splitting is the required fix.
+
+**Secondary entry point measurement (2026-10-27).** Added a secondary entry
+(`src/button/ng-package.json` + `index.ts`) to `temp/pkg-spike/lib`. The
+secondary entry holds only `button.component.ts` and its
+`#carbon-ng/components/button/index.js` barrel import. Consumer updated to
+`import { ButtonComponent } from '@spike/angular-lib/src/button'`. Production
+bundle: **239.57 kB** — a **125 kB / 34% reduction** vs the 364.68 kB
+single-entry baseline. The Angular CLI `application` builder keeps only the
+button barrel side effect; no other component's registration code is included.
+`ng-packagr` 19.2.2 builds both entries cleanly in 2 s. Open items remaining
+from constraint 4: entry naming, per-component vs per-family granularity, and
+build time for all 284 wrappers.
+
 **Raw web components in Angular (jsdom probe, not kept).** `ngModel` and
 `formControl` fail with `NG01203`. Misspelled bindings are silently accepted
 under `CUSTOM_ELEMENTS_SCHEMA`. See
@@ -342,33 +363,42 @@ editor behavior were not tested.
   references. A grep of `.github` and the root docs found none.
 - `packages/web-components/src/components/loading/Loading-test.js` had an
   unrelated change on the branch that was never investigated.
-- `package.json` peers are still `>=17`. ADR 0018 proposes `>=20`.
+- `package.json` peers are now `>=20`. `devDependencies` and CI matrix still on
+  `^19`; upgrading to Angular 20 is step 12, its own PR (ADR 0018).
 
 ## Suggested next steps
 
-In order. The barrel change and the coexistence runs for the Modal and the
-Dropdown are done.
+In order. Items marked ~~done~~ are complete; the remainder are open.
 
-1. **Apply ADR 0021 in the generator.** Skip `cds-date-picker`,
-   `cds-date-picker-input`, `cds-fluid-date-picker`,
-   `cds-fluid-date-picker-input`, `cds-fluid-date-picker-skeleton` and
-   `cds-preview-fluid-date-picker` in
-   [`tasks/generate-wrappers/index.js`](../tasks/generate-wrappers/index.js),
-   regenerate (279 should become 273), and run the Jest suite. Re-measure the
-   packaging numbers without flatpickr. The decision is recorded; the code is
-   not changed.
+1. ~~**Apply ADR 0021 in the generator.**~~ **Done 2026-10-27.** `SKIPPED_TAGS`
+   set added to
+   [`tasks/generate-wrappers/index.js`](../tasks/generate-wrappers/index.js).
+   284 wrappers emitted (manifest has grown since the 279 count; 6 skip). Jest:
+   5 suites, 104 passed, 0 failures. Type-check clean.
 2. **Optional third coexistence sample**: a CCA form control with validation
    (for example `TextInput` with `ngModel`), and experiment D, the unmodified
    two-copies case. Brief in
    [`spikes/coexistence-spike.md`](./spikes/coexistence-spike.md). Two
    components already point the same way, so this is confirmation and not a
    blocker.
-3. **Packaging follow-ups** (the spike itself is done, see ADR 0020 open
-   question 2): split the 279 wrappers into secondary entry points and measure
-   the Button-only bundle again; build the full 279-wrapper library and time it;
-   try Angular 20+ and the `browser` and webpack builders; decide whether the
-   wrappers need `.d.ts` for the vendored code; wire the vendoring step into the
-   Lerna build order (web components, prefixed copy, `ng-packagr`).
+3. **Packaging follow-ups** (the spike itself is done; see ADR 0020 open
+   question 2 and the evidence section below):
+   - ~~Split into secondary entry points and measure.~~ **Done 2026-10-27.**
+     239.57 kB (−34% vs 364.68 kB single-entry baseline). Note: 239 kB raw looks
+     alarming but gzips to ~47 kB; 112 kB of it is `button.scss.js` (CSS inlined
+     by Lit for shadow-root injection) which compresses 10:1. Angular + Lit
+     (~128 kB raw) is the fixed per-app cost paid once.
+   - **Decide entry naming and granularity.** `ng-packagr` exposes a secondary
+     placed at `src/button/` as `@carbon/angular/src/button`. Conventional path
+     is `@carbon/angular/button`. Fix: place each secondary directly under
+     `src/<name>/` (one level, no `src/` prefix). Granularity: one secondary
+     entry per vendor barrel folder (99 folders → 99 entries) rather than one
+     per wrapper (284), so families like `button-set` stay in `button/`.
+   - **Build the full 284-wrapper library with secondary entries and time it.**
+   - Try Angular 20+ and the `browser` and webpack builders.
+   - Decide whether wrappers need `.d.ts` for the vendored code.
+   - Wire the vendoring step into the Lerna build order (web components →
+     prefixed copy → `ng-packagr`).
 4. **Trace the `CDSTooltip.updated` error** seen in coexistence run B3
    (`Cannot set properties of null (setting 'align')`), to see whether it is
    specific to the CCA host or a bug in the web components.

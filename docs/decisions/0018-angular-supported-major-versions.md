@@ -4,15 +4,14 @@
 
 Proposed
 
-**Proposed: a peer floor of Angular 20.** The package is not yet released, and
-the current `>=17` range in `package.json` is unvalidated, so it should move to
-`>=20` with this proposal and not wait for acceptance. Do not mark the ADR
-accepted until the remaining open questions below have been answered.
+**Proposed: a peer floor of Angular 20.** Do not mark the ADR accepted until the
+remaining open questions below have been answered.
 
-**Follow-up needed as soon as possible, in a separate pull request:** move the
-peer range to `>=20` and upgrade the build and test stack from Angular 19 to 20.
-Until then the code still declares `>=17` and builds on 19, which does not match
-this proposal. See Consequences for the full list of changes.
+**Peer range updated 2026-10-27:** `package.json` peers are now `>=20`.
+`README.md` table updated. The build and test stack (`devDependencies`, CI
+matrix) still runs on Angular 19 and must move to Angular 20 in a follow-up pull
+request. Until then the published output is compiled with Angular 19, which is
+not the oldest supported major. See Consequences for the full list of changes.
 
 - DRI: Angular package maintainer
 - Input needed from: Angular experts on the Carbon team and in IBM product

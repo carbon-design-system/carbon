@@ -463,18 +463,35 @@ Recorded 2026-10-26.
       carried flatpickr (about 90 KB of JavaScript) for a picker the plan does
       not intend to expose. [ADR 0021](0021-angular-drop-classic-date-picker.md)
       resolves this by not wrapping the classic, fluid or Preview Fluid pickers,
-      so flatpickr can be left out of the vendored copy. Not measured: how much
-      of the 365 kB versus 240 kB difference in constraint 4 is flatpickr.
-   4. **Tree-shaking does not work at the package level.** With the
-      `sideEffects` fix, a consumer that imports only `ButtonComponent` from an
-      entry point that also exports the Date Picker wrapper still ships the Date
-      Picker and flatpickr: the production bundle was 240 kB with the library
-      holding only Button and 365 kB with the library also holding the date
-      picker wrappers. The generated `@carbon/angular` has 279 wrappers in one
-      entry point, so the bundle would carry the registration code for all of
-      them unless the entry points are split. This is the "tree-shaking of
-      import-time registration" question from ADR 0015, now measured. Splitting
-      into secondary entry points per component or family was not tried here.
+      so flatpickr can be left out of the vendored copy. **Measured 2026-10-26
+      (see ADR 0021 verification 4):** re-running the Button-only consumer
+      against a rebuilt `lib` that excludes `date-picker`, `fluid-date-picker`
+      and `node_modules/flatpickr` from the vendor tree (664 JS files, down from
+      698; 944 kB packed, down from 967 kB) gave a production bundle of **364.68
+      kB** — the same as the 365 kB original to within rounding. Flatpickr is
+      not the source of the button-only cost; the cost is the entry-point
+      registering every component barrel it covers, confirming constraint 4
+      below.
+   4. **Tree-shaking does not work at the package level, but secondary entry
+      points fix it.** With the `sideEffects` fix, a consumer that imports only
+      `ButtonComponent` from an entry point that also exports the Date Picker
+      wrapper still ships the Date Picker and flatpickr: the production bundle
+      was 240 kB with the library holding only Button and 365 kB with the
+      library also holding the date picker wrappers. The generated
+      `@carbon/angular` has 279 wrappers in one entry point, so the bundle would
+      carry the registration code for all of them unless the entry points are
+      split. **Measured 2026-10-27:** splitting `button.component.ts` into a
+      secondary entry (`@spike/angular-lib/src/button`) and importing from that
+      path gave a production bundle of **239.57 kB** — a 125 kB / 34% reduction
+      versus the single-entry 364.68 kB baseline. The secondary entry's FESM
+      contains only the Button barrel side-effect import; the Angular CLI
+      `application` builder does not pull in any other component. The scratch
+      library and consumer are in the gitignored `temp/pkg-spike/`. The
+      remaining open items are: how to name the secondary entries
+      (`@carbon/angular/button` vs `@carbon/angular/src/button`; the latter
+      matches the built directory path from `ng-packagr`), whether the generator
+      emits one entry per component or one per family (e.g. `button-set` shares
+      the `button` barrel), and the build time for 284 secondary entries.
 
    **Not checked.** A full 279-wrapper library build and its build time. Angular
    20+. Other bundlers (webpack, Vite) and the Angular CLI `browser` builder.

@@ -209,6 +209,23 @@ const NATIVE_DOM_EVENTS = new Set([
 ]);
 
 /**
+ * Tags that @carbon/angular intentionally does not wrap.
+ *
+ * ADR 0021: the classic and fluid Date Pickers bring in flatpickr.
+ * The Preview Date Picker (`cds-preview-date-picker*`) is still wrapped.
+ * The Preview Fluid Date Picker extends the classic fluid class, so it
+ * also carries flatpickr until the web components decouple that dependency.
+ */
+const SKIPPED_TAGS = new Set([
+  'cds-date-picker',
+  'cds-date-picker-input',
+  'cds-fluid-date-picker',
+  'cds-fluid-date-picker-input',
+  'cds-fluid-date-picker-skeleton',
+  'cds-preview-fluid-date-picker',
+]);
+
+/**
  * Events (besides `input`/`change`) that signal a form-associated element's
  * value changed, e.g. `cds-checkbox-changed`, `cds-dropdown-selected`.
  */
@@ -521,6 +538,12 @@ function main() {
   for (const tag of tagsToProcess) {
     // Skip sub-elements that don't need top-level component wrappers or internal helpers
     if (!tag.name.startsWith('cds-')) {
+      continue;
+    }
+
+    // Skip tags that @carbon/angular intentionally does not expose (ADR 0021).
+    if (SKIPPED_TAGS.has(tag.name)) {
+      console.log(`  ⏭  Skipped  <${tag.name}> (ADR 0021)`);
       continue;
     }
 
