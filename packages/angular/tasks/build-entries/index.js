@@ -116,9 +116,9 @@ const VENDOR_EXCLUDED_COMPONENTS = new Set([
 
 /**
  * Bare imports that are satisfied without being declared in `dependencies`.
- * `lit-html` is a dependency of `lit` and is imported by the Tearsheet files.
+ * Currently empty: all bare imports used by the vendored copy are declared.
  */
-const TRANSITIVE_BARE_IMPORTS = new Set(['lit-html']);
+const TRANSITIVE_BARE_IMPORTS = new Set();
 
 const header = `/**
  * Copyright IBM Corp. 2026
