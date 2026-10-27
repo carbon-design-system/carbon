@@ -7,7 +7,6 @@
 
 import { setCustomElementsManifest } from '@storybook/web-components-vite';
 import customElements from '../custom-elements.json';
-import container from './container';
 import { white, g10, g90, g100 } from '@carbon/themes';
 import { breakpoints } from '@carbon/layout';
 import theme from './theme';
@@ -240,7 +239,6 @@ function getThemeFromBackground(backgroundValue) {
 export const decorators = [
   function decoratorContainer(story, context) {
     const result = story();
-    const { hasMainTag } = result;
     const { locale, dir, layoutSize, layoutDensity } = context.globals;
     const backgroundValue = context.globals.backgrounds?.value;
     const theme = getThemeFromBackground(backgroundValue);
@@ -253,20 +251,18 @@ export const decorators = [
     document.documentElement.lang = locale;
     document.documentElement.dir = dir;
 
-    const containerResult = container({ hasMainTag, children: result });
-
     // Wrap in cds-layout when layout globals are set in dev mode
     if (layoutSize || layoutDensity) {
       return html`
         <cds-layout
           size=${ifDefined(layoutSize || undefined)}
           density=${ifDefined(layoutDensity || undefined)}>
-          ${containerResult}
+          ${result}
         </cds-layout>
       `;
     }
 
-    return containerResult;
+    return result;
   },
 ];
 

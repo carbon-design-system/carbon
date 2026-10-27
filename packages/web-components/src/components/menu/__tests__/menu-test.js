@@ -51,16 +51,10 @@ describe('cds-menu', () => {
     expect(menu).to.have.attribute('aria-label', 'Test Menu');
   });
 
-  it('should apply border class when border prop is true', async () => {
-    const el = await fixture(html`<cds-menu border></cds-menu>`);
-    const menu = el.shadowRoot.querySelector('.cds--menu');
-    expect(menu).to.have.class('cds--menu--border');
-  });
-
-  it('should not apply border class when border prop is false', async () => {
+  it('should apply border class', async () => {
     const el = await fixture(html`<cds-menu></cds-menu>`);
     const menu = el.shadowRoot.querySelector('.cds--menu');
-    expect(menu).to.not.have.class('cds--menu--border');
+    expect(menu).to.have.class('cds--menu--border');
   });
 
   it('should apply background token class when backgroundToken is "background"', async () => {

@@ -134,7 +134,7 @@ class CDSAILabel extends CDSToggleTip {
       ${revertActive
         ? html`
             <cds-icon-button
-              ?autoalign=${autoalign}
+              .autoalign=${autoalign}
               kind="ghost"
               size="sm"
               @click="${this._handleClick}">

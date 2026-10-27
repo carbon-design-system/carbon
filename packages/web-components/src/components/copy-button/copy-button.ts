@@ -9,8 +9,10 @@ import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import Copy16 from '@carbon/icons/es/copy/16.js';
 import { prefix } from '../../globals/settings';
+import AutoAlignMixin from '../../globals/mixins/auto-align';
 import FocusMixin from '../../globals/mixins/focus';
 import styles from './copy-button.scss?lit';
+import { BUTTON_KIND } from '../button/defs';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
 import { ICON_BUTTON_SIZE } from '../icon-button/defs';
 import '../copy/copy';
@@ -21,7 +23,10 @@ import { iconLoader } from '../../globals/internal/icon-loader';
  *
  * @element cds-copy-button
  */
-class CDSCopyButton extends FocusMixin(LitElement) {
+class CDSCopyButton extends AutoAlignMixin(
+  FocusMixin(LitElement),
+  'autoAlign'
+) {
   static is = `${prefix}-copy-button`;
 
   /**
@@ -29,6 +34,13 @@ class CDSCopyButton extends FocusMixin(LitElement) {
    */
   @property({ reflect: true, attribute: 'button-class-name' })
   buttonClassName;
+
+  /**
+   * Optionally specify the kind of Button you want to create. When not set,
+   * the copy button renders with its default copy-button styles.
+   */
+  @property({ reflect: true })
+  kind?: BUTTON_KIND;
 
   /**
    * `true` if the button should be disabled.
@@ -49,10 +61,11 @@ class CDSCopyButton extends FocusMixin(LitElement) {
   align = POPOVER_ALIGNMENT.BOTTOM;
 
   /**
-   * Specify whether a auto align functionality should be applied
+   * Specify whether auto-align is enabled. Defaults to `true` when
+   * `enable-v12-autoalign` is enabled, and to `false` otherwise.
    */
-  @property({ type: Boolean, reflect: true })
-  autoAlign = false;
+  @property({ type: Boolean, reflect: true, attribute: 'autoalign' })
+  autoAlign?: boolean;
 
   /**
    * The number in milliseconds to determine how long the tooltip should remain.
@@ -74,6 +87,7 @@ class CDSCopyButton extends FocusMixin(LitElement) {
       feedbackTimeout,
       align,
       autoAlign,
+      kind,
       size,
     } = this;
 
@@ -86,16 +100,17 @@ class CDSCopyButton extends FocusMixin(LitElement) {
     return html`
       <cds-copy
         ?disabled=${disabled}
-        ?autoalign=${autoAlign}
+        .autoalign=${autoAlign}
         feedback=${feedback}
         feedback-timeout=${feedbackTimeout}
         button-class-name=${classes}
         exportparts="button"
         align=${align}
+        kind=${kind ?? ''}
         size=${size}>
         ${iconLoader(Copy16, {
           slot: 'icon',
-          class: `${prefix}--snippet__icon`,
+          class: `${prefix}--btn__icon`,
         })}
         <slot slot="tooltip-content"></slot>
       </cds-copy>

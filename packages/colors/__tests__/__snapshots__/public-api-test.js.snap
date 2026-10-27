@@ -1013,6 +1013,7 @@ exports[`@carbon/colors public API published files 1`] = `
   "lib/rgb.d.ts",
   "package.json",
   "telemetry.yml",
+  "tokens/colors.tokens.json",
   "umd/index.js",
 ]
 `;

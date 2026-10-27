@@ -34,6 +34,7 @@ import {
 import { useFeatureFlag } from '../FeatureFlags';
 import { PolymorphicComponentPropWithRef } from '../../internal/PolymorphicProps';
 import { deprecate } from '../../prop-types/deprecate';
+import { useAutoAlign } from '../../internal/useAutoAlign';
 
 export interface PopoverContext {
   setFloating: React.Ref<HTMLSpanElement>;
@@ -179,7 +180,7 @@ export const Popover: PopoverComponent & {
     isTabTip,
     align: initialAlign = isTabTip ? 'bottom-start' : 'bottom',
     as: BaseComponent = 'span' as E,
-    autoAlign = false,
+    autoAlign: autoAlignProp,
     autoAlignBoundary,
     backgroundToken = 'layer',
     caret: caretProp = !isTabTip,
@@ -198,6 +199,7 @@ export const Popover: PopoverComponent & {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   forwardRef: any
 ) {
+  const autoAlign = useAutoAlign(autoAlignProp);
   const prefix = usePrefix();
   const floating = useRef<HTMLSpanElement>(null);
   const caretRef = useRef<HTMLSpanElement>(null);
@@ -235,6 +237,14 @@ export const Popover: PopoverComponent & {
   };
 
   let align = mapPopoverAlign(initialAlign);
+
+  if (isTabTip) {
+    const tabTipAlignments: PopoverAlignment[] = ['bottom-start', 'bottom-end'];
+
+    if (!tabTipAlignments.includes(align)) {
+      align = 'bottom-start';
+    }
+  }
 
   // Tracks clicks inside PopoverContent to prevent it from closing when clicked, this handles an edge
   // case where the popover will close when clicking non-focusable elements (e.g. text)
@@ -364,7 +374,7 @@ export const Popover: PopoverComponent & {
           : Number(caretProperty.split('rem', 1)[0]) * 16;
       }
     }
-  });
+  }, [caret, prefix]);
   const { refs, floatingStyles, placement, middlewareData, elements, update } =
     useFloating(
       enableFloatingStyles
@@ -456,14 +466,6 @@ export const Popover: PopoverComponent & {
       autoAlign: autoAlign,
     };
   }, [refs.setFloating, autoAlign]);
-
-  if (isTabTip) {
-    const tabTipAlignments: PopoverAlignment[] = ['bottom-start', 'bottom-end'];
-
-    if (!tabTipAlignments.includes(align)) {
-      align = 'bottom-start';
-    }
-  }
 
   useEffect(() => {
     if (enableFloatingStyles) {

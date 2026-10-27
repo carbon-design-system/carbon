@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2025
+ * Copyright IBM Corp. 2020, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -313,7 +313,6 @@ const renderUIShellHeader = () => (
 export default {
   title: 'Components/SidePanel',
   component: SidePanel,
-  tags: ['ibm-products-migrated'],
   parameters: {
     layout: 'fullscreen',
     docs: {

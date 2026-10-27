@@ -26,6 +26,8 @@ const defaults = {
 
 interface TagType {
   label: string;
+  filter?: boolean;
+  onClose?: () => void;
 }
 type AllTags = (TagType & Omit<React.ComponentProps<typeof Tag>, 'filter'>)[];
 
@@ -113,7 +115,8 @@ export const TagOverflowModal = ({
         hasForm
         hasScrollingContent
         aria-label={modalAriaLabel}>
-        {getFilteredItems().map(({ label, id, filter, onClose }) => {
+        {getFilteredItems().map((item) => {
+          const { label, id, filter, onClose } = item;
           const isFilterable =
             overflowType === 'tag' && (typeof onClose === 'function' || filter);
 

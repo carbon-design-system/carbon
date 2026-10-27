@@ -296,6 +296,30 @@ describe('MultiSelect', () => {
     ).toBeNull();
   });
 
+  it('should only set `aria-activedescendant` when an option is highlighted', async () => {
+    const items = generateItems(4, generateGenericItem);
+    render(<MultiSelect id="test" label="test-label" items={items} />);
+    await waitForPosition();
+
+    const combobox = screen.getByRole('combobox');
+    expect(combobox).not.toHaveAttribute('aria-activedescendant');
+
+    await userEvent.click(combobox);
+    expect(combobox).toHaveAttribute('aria-expanded', 'true');
+    expect(combobox).not.toHaveAttribute('aria-activedescendant');
+
+    await userEvent.keyboard('[ArrowDown]');
+    const options = screen.getAllByRole('option');
+    expect(combobox).toHaveAttribute('aria-activedescendant', options[0].id);
+
+    await userEvent.keyboard('[ArrowDown]');
+    expect(combobox).toHaveAttribute('aria-activedescendant', options[1].id);
+
+    await userEvent.keyboard('[Escape]');
+    expect(combobox).toHaveAttribute('aria-expanded', 'false');
+    expect(combobox).not.toHaveAttribute('aria-activedescendant');
+  });
+
   it('should move focus to the next control when the user tabs away with the menu open', async () => {
     jest.useFakeTimers();
 
@@ -912,6 +936,35 @@ describe('MultiSelect', () => {
           expect(listbox.style.visibility).toBe('hidden');
           expect(listbox.style.width).toBe('0px');
         });
+      } finally {
+        useFloatingSpy.mockRestore();
+      }
+    });
+
+    it('should set maxHeight on the listbox when autoAlign is enabled', async () => {
+      // The shared Jest setup stubs out floating-ui positioning. This test
+      // asserts on the computed size, so it needs the real hook.
+      const useFloatingSpy = jest
+        .spyOn(jest.requireMock('@floating-ui/react'), 'useFloating')
+        .mockImplementation(
+          jest.requireActual('@floating-ui/react').useFloating
+        );
+      const items = generateItems(4, generateGenericItem);
+
+      try {
+        render(
+          <MultiSelect
+            autoAlign
+            open
+            id="test"
+            label="test-label"
+            items={items}
+          />
+        );
+        await waitForPosition();
+
+        const listbox = screen.getByRole('listbox', { hidden: true });
+        expect(listbox.style.maxHeight).toBe('0px');
       } finally {
         useFloatingSpy.mockRestore();
       }

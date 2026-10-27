@@ -82,7 +82,6 @@ const items = [
 
 const defaultArgs = {
   ariaLabel: '',
-  autoalign: false,
   direction: DROPDOWN_DIRECTION.BOTTOM,
   disabled: false,
   hideLabel: false,

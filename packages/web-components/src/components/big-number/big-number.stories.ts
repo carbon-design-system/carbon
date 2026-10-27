@@ -279,7 +279,6 @@ export const Skeleton = {
 const meta: Meta = {
   title: 'Preview/BigNumber',
   component: 'cds-big-number',
-  tags: ['ibm-products-migrated'],
 };
 
 export default meta;

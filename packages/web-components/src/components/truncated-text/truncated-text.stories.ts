@@ -13,7 +13,6 @@ import '../layer/index';
 const storyPrefix = 'truncated-text-stories__';
 const defaultArgs = {
   align: 'top',
-  autoalign: false,
   collapseLabel: 'View less',
   expandLabel: 'View more',
   id: 'example-id',
@@ -301,7 +300,6 @@ export const typeExpand = {
 const meta = {
   title: 'Utilities/TruncatedText',
   component: 'cds-truncated-text',
-  tags: ['ibm-products-migrated'],
   decorators: [
     (story) =>
       html`<div class="${storyPrefix}story-container">

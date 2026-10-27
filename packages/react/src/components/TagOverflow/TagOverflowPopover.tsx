@@ -13,6 +13,7 @@ import { DismissibleTag } from '../Tag';
 import { Popover, PopoverContent } from '../Popover';
 import type { PopoverAlignment } from '../Popover';
 import { OperationalTag } from '../Tag';
+import { useId } from '../../internal/useId';
 import { useOutsideClick } from '../../internal/useOutsideClick';
 import { usePrefix } from '../../internal/usePrefix';
 import { TagOverflowItem } from './TagOverflow';
@@ -50,6 +51,7 @@ export const TagOverflowPopover = forwardRef(
       ...rest
     } = props;
     const overflowTagContent = useRef<HTMLDivElement>(null);
+    const overflowContentId = useId('overflow-content');
 
     useOutsideClick(ref as React.RefObject<HTMLSpanElement>, () => {
       if (popoverOpen) {
@@ -57,7 +59,7 @@ export const TagOverflowPopover = forwardRef(
       }
     });
 
-    const handleShowAllTagsClick = (evt: Event) => {
+    const handleShowAllTagsClick = (evt: React.MouseEvent | Event) => {
       evt.stopPropagation();
       evt.preventDefault();
       setPopoverOpen?.(false);
@@ -102,11 +104,9 @@ export const TagOverflowPopover = forwardRef(
             className={cx(`${blockClass}__trigger`)}
             text={`+${overflowTags.length}`}
             aria-expanded={popoverOpen}
-            aria-controls={`${prefix}-overflow-content`}
+            aria-controls={overflowContentId}
           />
-          <PopoverContent
-            id={`${prefix}-overflow-content`}
-            aria-hidden={!popoverOpen}>
+          <PopoverContent id={overflowContentId} aria-hidden={!popoverOpen}>
             <div ref={overflowTagContent} className={`${blockClass}__content`}>
               <ul className={`${blockClass}__tag-list`}>
                 {hasItems &&

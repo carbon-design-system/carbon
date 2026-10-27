@@ -160,36 +160,30 @@ describe('cds-toggletip', function () {
     expect(icon).to.exist;
   });
 
-  it('should render popover caret', async () => {
-    const el = await fixture(html`<cds-toggletip open></cds-toggletip>`);
-    const caret = el.shadowRoot.querySelector('.cds--popover-caret');
-    expect(caret).to.exist;
-  });
-
   it('should render different content structure based on autoalign', async () => {
     const el1 = await fixture(html`<cds-toggletip open></cds-toggletip>`);
-    const nestedPopover = el1.shadowRoot.querySelector(
-      '.cds--popover .cds--popover-content'
-    );
-    expect(nestedPopover).to.exist;
-
-    const el2 = await fixture(
-      html`<cds-toggletip autoalign open></cds-toggletip>`
-    );
-    const directContent = el2.shadowRoot.querySelector('.cds--popover-content');
-    const noNestedPopover = el2.shadowRoot.querySelector(
+    const directContent = el1.shadowRoot.querySelector('.cds--popover-content');
+    const noNestedPopover = el1.shadowRoot.querySelector(
       '.cds--popover .cds--popover-content'
     );
 
     expect(directContent).to.exist;
     expect(noNestedPopover).to.not.exist;
+
+    const el2 = await fixture(
+      html`<cds-toggletip autoalign="false" open></cds-toggletip>`
+    );
+    const nestedPopover = el2.shadowRoot.querySelector(
+      '.cds--popover .cds--popover-content'
+    );
+    expect(nestedPopover).to.exist;
   });
 
   it('should have default property values', async () => {
     const el = await fixture(html`<cds-toggletip></cds-toggletip>`);
 
     expect(el.alignment).to.equal('top');
-    expect(el.autoalign).to.be.false;
+    expect(el.autoalign).to.be.true;
     expect(el.open).to.be.false;
   });
 

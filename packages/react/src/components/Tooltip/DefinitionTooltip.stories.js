@@ -39,7 +39,6 @@ const deprecatedAlignOptions = [
 
 const defaultArgs = {
   align: 'bottom-start',
-  autoAlign: false,
   defaultOpen: false,
   definition:
     'Uniform Resource Locator; the address of a resource (such as a document or website) on the Internet.',

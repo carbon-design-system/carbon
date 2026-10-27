@@ -47,6 +47,12 @@ class CDSSideNavLink extends FocusMixin(LitElement) {
   active = false;
 
   /**
+   * The element to render for the side nav link.
+   */
+  @property()
+  as: 'a' | 'button' = 'a';
+
+  /**
    * Link `href`.
    */
   @property()
@@ -86,6 +92,7 @@ class CDSSideNavLink extends FocusMixin(LitElement) {
   render() {
     const {
       active,
+      as,
       href,
       rel,
       target,
@@ -96,27 +103,31 @@ class CDSSideNavLink extends FocusMixin(LitElement) {
       [`${prefix}--side-nav__link`]: true,
       [`${prefix}--side-nav__link--current`]: active,
     });
-    return html`
-      <a
-        part="link"
-        class="${classes}"
-        href="${href}"
-        rel="${ifDefined(rel)}"
-        target="${ifDefined(target)}">
-        <div
-          id="title-icon-container"
-          part="title-icon-container"
-          hidden
-          class="${prefix}--side-nav__icon">
-          <slot
-            name="title-icon"
-            @slotchange=${handleSlotChangeTitleIcon}></slot>
-        </div>
-        <span part="title" class="${prefix}--side-nav__link-text">
-          <slot>${title}</slot>
-        </span>
-      </a>
+    const content = html`
+      <div
+        id="title-icon-container"
+        part="title-icon-container"
+        hidden
+        class="${prefix}--side-nav__icon">
+        <slot name="title-icon" @slotchange=${handleSlotChangeTitleIcon}></slot>
+      </div>
+      <span part="title" class="${prefix}--side-nav__link-text">
+        <slot>${title}</slot>
+      </span>
     `;
+
+    return as === 'button'
+      ? html`<button type="button" part="link" class="${classes}">
+          ${content}
+        </button>`
+      : html`<a
+          part="link"
+          class="${classes}"
+          href="${href}"
+          rel="${ifDefined(rel)}"
+          target="${ifDefined(target)}">
+          ${content}
+        </a>`;
   }
 
   static shadowRootOptions = {

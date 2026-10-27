@@ -6,6 +6,7 @@
  */
 
 import '@carbon/web-components/es/components/tooltip/index.js';
+import '@carbon/web-components/es/components/feature-flags/index.js';
 import { fixture, html, expect } from '@open-wc/testing';
 
 describe('cds-tooltip', () => {
@@ -44,9 +45,7 @@ describe('cds-tooltip', () => {
     const popoverContent = content.shadowRoot.querySelector(
       '.cds--popover-content'
     );
-    const caret = content.shadowRoot.querySelector('.cds--popover-caret');
     expect(getComputedStyle(popoverContent).display).to.not.equal('none');
-    expect(getComputedStyle(caret).display).to.not.equal('none');
   });
 
   it('should close when item is activated and `closeOnActivation`', async () => {
@@ -65,9 +64,7 @@ describe('cds-tooltip', () => {
     const popoverContent = content.shadowRoot.querySelector(
       '.cds--popover-content'
     );
-    const caret = content.shadowRoot.querySelector('.cds--popover-caret');
     expect(getComputedStyle(popoverContent).display).to.not.equal('none');
-    expect(getComputedStyle(caret).display).to.not.equal('none');
 
     // click the button
     const button = el.querySelector('button');
@@ -77,7 +74,6 @@ describe('cds-tooltip', () => {
 
     expect(content).to.not.have.attribute('open');
     expect(getComputedStyle(popoverContent).display).to.equal('none');
-    expect(getComputedStyle(caret).display).to.equal('none');
   });
 
   it('should open when trigger button is focused and close when out of focus', async () => {
@@ -94,12 +90,10 @@ describe('cds-tooltip', () => {
     const popoverContent = content.shadowRoot.querySelector(
       '.cds--popover-content'
     );
-    const caret = content.shadowRoot.querySelector('.cds--popover-caret');
 
     // tooltip should render as closed
     expect(content).to.not.have.attribute('open');
     expect(getComputedStyle(popoverContent).display).to.equal('none');
-    expect(getComputedStyle(caret).display).to.equal('none');
 
     // tooltip should open after enter-delay-ms
     button.dispatchEvent(new FocusEvent('focus', { bubbles: true }));
@@ -108,7 +102,6 @@ describe('cds-tooltip', () => {
 
     expect(content).to.have.attribute('open');
     expect(getComputedStyle(popoverContent).display).to.not.equal('none');
-    expect(getComputedStyle(caret).display).to.not.equal('none');
 
     // tooltip should close after leave-delay-ms
     button.dispatchEvent(new FocusEvent('focusout', { bubbles: true }));
@@ -117,7 +110,6 @@ describe('cds-tooltip', () => {
 
     expect(content).to.not.have.attribute('open');
     expect(getComputedStyle(popoverContent).display).to.equal('none');
-    expect(getComputedStyle(caret).display).to.equal('none');
   });
 
   it('should render with highContrast by default', async () => {
@@ -153,7 +145,7 @@ describe('cds-tooltip', () => {
     ).to.be.true;
   });
 
-  it('should pass `align`, `caret`, `autoalign`, `dropShadow`, attributes to the tooltip content', async () => {
+  it('should pass `align`, `autoalign`, and `dropShadow` to the tooltip content', async () => {
     const el = await fixture(html`
       <cds-tooltip align="top" caret autoalign dropShadow>
         <button role="button" aria-labelledby="content"></button>
@@ -165,10 +157,44 @@ describe('cds-tooltip', () => {
 
     expect(content).to.exist;
     expect(content.align).to.equal('top');
-    expect(content.caret).to.be.true;
     expect(content.dropShadow).to.be.true;
     expect(content.highContrast).to.be.true;
     expect(content.autoalign).to.be.true;
+  });
+
+  it('should default autoalign to true with enable-v12-release', async () => {
+    const featureFlag = await fixture(html`
+      <feature-flags enable-v12-release="true">
+        <cds-tooltip>
+          <button role="button" aria-labelledby="content"></button>
+          <cds-tooltip-content id="content"> Options </cds-tooltip-content>
+        </cds-tooltip>
+      </feature-flags>
+    `);
+    const el = featureFlag.querySelector('cds-tooltip');
+
+    await el.updateComplete;
+
+    expect(el.autoalign).to.be.true;
+    expect(el.querySelector('cds-tooltip-content').autoalign).to.be.true;
+  });
+
+  it('should keep autoalign disabled when set to false with enable-v12-release', async () => {
+    const featureFlag = await fixture(html`
+      <feature-flags enable-v12-release="true">
+        <cds-tooltip .autoalign=${false}>
+          <button role="button" aria-labelledby="content"></button>
+          <cds-tooltip-content id="content"> Options </cds-tooltip-content>
+        </cds-tooltip>
+      </feature-flags>
+    `);
+    const el = featureFlag.querySelector('cds-tooltip');
+
+    await el.updateComplete;
+
+    expect(el.autoalign).to.be.false;
+    expect(el).to.not.have.attribute('autoalign');
+    expect(el.querySelector('cds-tooltip-content').autoalign).to.not.be.true;
   });
 });
 

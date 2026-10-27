@@ -157,6 +157,11 @@
     }
   }
 
+  .#{$prefix}--pagination-nav__page--select:focus option {
+    background-color: $layer;
+    color: $text-primary;
+  }
+
   .#{$prefix}--pagination-nav__select-icon-wrapper {
     position: absolute;
     block-size: 100%;
