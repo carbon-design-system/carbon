@@ -58,7 +58,7 @@ describe('getDerivedStateFromProps', () => {
     expect(stateB.headers).toEqual(headersB);
   });
 
-  it('should not update headers in state when props.headers is mutated in-place', () => {
+  it('should copy headers so that prop mutations do not affect already-derived state', () => {
     const headersA = [{ key: 'name', header: 'Name' }];
     const stateA = getDerivedStateFromProps(
       { rows: [], headers: headersA },
