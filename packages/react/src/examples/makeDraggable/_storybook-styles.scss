@@ -1,0 +1,63 @@
+/**
+ * Copyright IBM Corp. 2025, 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
+
+.make-draggable-story {
+  display: flex;
+  justify-content: center;
+  padding-block-start: $spacing-10;
+}
+
+// Div
+.make-draggable-story .draggable__div {
+  position: absolute;
+  background: $layer-01;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  inline-size: 300px;
+}
+
+.make-draggable-story .draggable__div-header {
+  display: flex;
+  justify-content: space-between;
+  background: $layer-accent-01;
+}
+
+.make-draggable-story .draggable__div-body {
+  padding: $spacing-03;
+}
+
+.make-draggable-story .is-dragging,
+.make-draggable-story .#{carbon-config.$prefix}--popover .is-dragging {
+  border-radius: 0;
+  box-shadow: 0 0 0 $spacing-02 $background-inverse;
+  outline: $spacing-01 solid $icon-inverse;
+}
+
+// Popover
+.make-draggable-story .popover-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.make-draggable-story .popover-details {
+  margin-inline-start: $spacing-05;
+  padding-block: $spacing-03;
+}
+
+.make-draggable-story .close-icon {
+  position: absolute;
+  border: none;
+  cursor: pointer;
+}
+
+.make-draggable-story .heading {
+  font-weight: bolder;
+  margin-inline-start: $spacing-05;
+}
