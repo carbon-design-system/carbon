@@ -1,6 +1,6 @@
 # `@carbon/angular`: status and open questions
 
-**As of:** 2026-10-28, branch `feat/angular` (35 commits ahead of `next`, 0
+**As of:** 2026-10-28, branch `feat/angular` (36 commits ahead of `next`, 0
 behind). This is the project's living state record. It supersedes nothing: where
 it disagrees with an ADR, the ADR is the decision record and this is a note that
 something needs reconciling. The remaining work, in suggested order, is under
@@ -138,8 +138,11 @@ Grouped by what they block. "Blocking" means a decision should wait for it.
    skips those six tags. One entry point still ships every family it imports.
    Details, numbers and the list of what was not checked are in ADR 0020 open
    question 2. Blocking for implementation only.
-3. **`@carbon/styles` prefix.** Does anything outside shadow DOM need a matching
-   `$prefix`? What happens with `@carbon/styles` 1.x and 2.x on one page?
+3. **`@carbon/styles` prefix.** Static check done 2026-10-27: nothing outside
+   shadow DOM needs a matching `$prefix`. The vendored copy loads no global
+   stylesheet and reads theme tokens as unprefixed `--cds-*`. Not checked in a
+   browser: `@carbon/styles` 1.x with 2.x on one page, and an `overflow-menu`
+   host class that looks inert. Details in ADR 0020 open question 3.
 4. **Manifest.** Does the standard CEM analyzer give usable output for this
    codebase? The WCA manifest is deprecated and slated for removal in v3.0.0
    (issue #20670).
@@ -459,14 +462,16 @@ In order. Items marked ~~done~~ are complete; the remainder are open.
 4. **Trace the `CDSTooltip.updated` error** seen in coexistence run B3
    (`Cannot set properties of null (setting 'align')`), to see whether it is
    specific to the CCA host or a bug in the web components.
-5. **`@carbon/styles` `$prefix`** (ADR 0020 question 3), including 1.x with 2.x
-   on one page.
+5. ~~**`@carbon/styles` `$prefix`** (ADR 0020 question 3).~~ **Static check done
+   2026-10-27**: no prefixed stylesheet needed. Remaining, optional: load 1.x
+   and 2.x `@carbon/styles` on one page, and confirm the `overflow-menu` host
+   `cds-ng--layout--size-*` class is inert.
 6. **CEM analyzer spike** for enum unions and typed event payloads. The current
    manifest is the deprecated WCA format. Gaps are listed in
    [`developer-experience.md`](./developer-experience.md).
-7. ~~**Run the Button Playwright checks** (never run) and the Storybook build.~~
-   **Storybook build done 2026-10-28** (see step 3 above). Playwright checks
-   still never run — moved to step 7 below.
+7. **Run the Button Playwright checks** (never run). The Storybook build part is
+   done (2026-10-28, see step 3). Needs `playwright:install`, a fresh
+   `storybook:build`, then `e2e`; the `angular-e2e` CI job does the same.
 8. **Verify form controls, named-slot components and `ActionSet`** in a real
    browser.
 9. **Define feature parity**, then decide what typing and slot work belongs in
@@ -482,9 +487,10 @@ In order. Items marked ~~done~~ are complete; the remainder are open.
 11. **Rewrite `plan.md` and `milestones.md`** now that legacy is gone, with new
     estimates.
 12. **Land the Angular 20 peer floor** (ADR 0018) in its own PR.
-13. **Decide whether to accept ADR 0020**, once item 5 (`$prefix`) is answered
-    and the entry-point split in item 3 is tried. The coexistence question
-    (item 2) already leans toward accepting.
+13. **Decide whether to accept ADR 0020.** Item 5 (`$prefix`) is answered; the
+    entry-point split in item 3 is tried. The coexistence question (item 2)
+    already leans toward accepting. One risk to record as accepted or test: two
+    `@carbon/styles` versions on one page share unprefixed `--cds-*` tokens.
 14. **Update `docs/migration/v12.md`** if confirmed needed (`AGENTS.md` says
     v12-affecting changes must).
 

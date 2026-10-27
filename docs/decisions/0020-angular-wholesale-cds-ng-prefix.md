@@ -253,11 +253,12 @@ Negative or risky:
 - **Version coupling.** `@carbon/angular` is pinned to one version of the web
   components. Bug fixes in the web components reach Angular consumers only
   through a new `@carbon/angular` release.
-- **Global class names.** `cds-ng--*` class names appear in the output. Whether
-  any are applied outside shadow DOM, and whether `@carbon/styles` would need a
-  matching `$prefix`, has not been checked. `@carbon/styles` exposes `$prefix`
-  (default `cds`), so a matching build is possible, but a CCA app on
-  `@carbon/styles` 1.x uses `cds`.
+- **Global class names.** `cds-ng--*` class names appear in the output. A static
+  check (open question 3) found none that needs a stylesheet outside shadow DOM,
+  so no matching `$prefix` build of `@carbon/styles` is planned. Theme tokens
+  stay unprefixed `--cds-*` and are shared with a CCA app on `@carbon/styles`
+  1.x, so token values from two `@carbon/styles` versions on one page could
+  differ. Not exercised in a browser.
 - **Docs and examples.** Everything that shows `cds-*` for Angular changes,
   including about 32 `cds-ng-*` references in `plan.md` that currently mean
   something else.
@@ -514,6 +515,51 @@ Recorded 2026-10-26.
 3. **Does `@carbon/styles` need a matching `$prefix`** for anything outside
    shadow DOM, and what happens to a CCA app on `@carbon/styles` 1.x that also
    loads `@carbon/styles` 2.x?
+
+   **Static check, 2026-10-27: no dependency found.** Searched the vendored copy
+   (`.entries/vendor`, 646 JS files: 119 `*.scss.js`, 179 logic files that
+   mention `cds-ng--`). Nothing was run in a browser.
+
+   - **Template classes** (`classMap`, `class=`, `iconLoader(..., { class })`)
+     render inside shadow roots and are styled by the component's `*.scss.js`.
+   - **DOM-touching hits** (`classList.*`, `querySelector`, `closest`,
+     `matches`, `composedPath`: 72 sites). Every class added to the host or a
+     light-DOM child was looked up in the component's `*.scss.js`, and a
+     matching `:host(...)`, `::slotted` or plain rule exists in each case (for
+     example `page-header`, `tabs-vertical`, `menu-item`, `popover` tab-tip, the
+     `slug--revert` toggle in `dropdown`, `select` and `text-input`). The
+     `querySelector` and `closest` sites target the component's own shadow root,
+     a `query()` field or another `cds-ng-*` element's shadow root. These were
+     read by pattern, not each one executed.
+   - **No vendored file** imports, links, injects or adopts a stylesheet, and
+     none references `@carbon/styles`. The only `document` access is `cds-ng-*`
+     tag lookups, `document.documentElement.style.setProperty` for
+     `--tearsheet-*` properties (already unprefixed), `document.body` cursor,
+     and unprefixed `.coachmark-body` in `coachmark-helpers.js`. None of these
+     needs a prefixed stylesheet.
+   - **Unresolved, low risk:** `overflow-menu.js` adds
+     `cds-ng--layout--size-<size>` to the host (light DOM). The only matching
+     rule in the vendored styles is `.cds-ng--layout--size-*` inside the shadow
+     styles, which cannot match the host. Upstream does the same with
+     `cds--layout--size-*`. It looks inert, but a browser check is needed before
+     saying so for certain.
+   - **Custom properties are not prefixed.** The vendored styles contain 0
+     `--cds-ng-*` references and about 24,600 `var(--cds-*` references. Theme
+     tokens therefore still come from a global `--cds-*` provider (the page's
+     `@carbon/styles` or `@carbon/themes` output, via inheritance through shadow
+     DOM). A `$prefix: cds-ng` build of `@carbon/styles` would not be needed for
+     the components, and could make token names diverge from what they read
+     unless it left custom properties alone (not checked).
+
+   **Conclusion:** do not build a `cds-ng` copy of `@carbon/styles`. A CCA app
+   on `@carbon/styles` 1.x uses the `cds--*` classes the vendored copy never
+   references, so the two do not collide on class names. They do share `--cds-*`
+   custom properties, which is the intended path for theming.
+
+   **Not checked:** 1.x and 2.x `@carbon/styles` loaded on one page (needs a
+   real page), whether differing token values between 1.x and 2.x would affect
+   vendored components, and the `overflow-menu` host class above.
+
 4. **Manifest: CEM spike.** Does `@custom-elements-manifest/analyzer` produce
    usable output for this codebase, and who owns producing it, the web
    components package or `@carbon/angular`?
