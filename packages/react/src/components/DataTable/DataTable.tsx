@@ -376,13 +376,6 @@ export const DataTable = <RowType, ColTypes extends any[]>(
     isExpandedAll: false,
   }));
 
-  // Re-derive state during render when `headers` or `rows` change instead of
-  // in an effect. An effect commits stale state first and then schedules a
-  // follow-up update. In React 19, that pending update counts toward the
-  // nested update limit on every subsequent synchronous commit (e.g. repeated
-  // `flushSync` calls), which eventually throws "Maximum update depth
-  // exceeded".
-  // https://react.dev/learn/you-might-not-need-an-effect#adjusting-some-state-when-a-prop-changes
   const [prevInputs, setPrevInputs] = useState({ headers, rows });
 
   if (prevInputs.headers !== headers || prevInputs.rows !== rows) {
@@ -417,6 +410,8 @@ export const DataTable = <RowType, ColTypes extends any[]>(
     const hasRowsChanged = !isEqual(nextRows, currentRows);
 
     if (hasRowIdsChanged || hasHeadersChanged || hasRowsChanged) {
+      // Only sync `prevInputs` on a meaningful change so that new-but-equal
+      // `rows`/`headers` references don't trigger an extra render.
       setPrevInputs({ headers, rows });
       setState((prev) => getDerivedStateFromProps(props, prev));
     }
