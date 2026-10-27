@@ -1,28 +1,28 @@
 # `@carbon/angular`: status and open questions
 
-**As of:** 2026-10-26, branch `feat/angular` (31 commits ahead of local `next`,
-0 behind). This is a point-in-time record written so work can resume without
-re-deriving state. It supersedes nothing: where it disagrees with an ADR, the
-ADR is the decision record and this is a note that something needs reconciling.
-The remaining work, in suggested order, is under
+**As of:** 2026-10-28, branch `feat/angular` (35 commits ahead of `next`, 0
+behind). This is the project's living state record. It supersedes nothing: where
+it disagrees with an ADR, the ADR is the decision record and this is a note that
+something needs reconciling. The remaining work, in suggested order, is under
 [Suggested next steps](#suggested-next-steps).
 
 ## Where things stand
 
-| Area                                                                         | State                                                                                                                          |
-| ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| Generator ([`tasks/generate-wrappers`](../tasks/generate-wrappers/index.js)) | Emits 279 wrappers into `src/generated/` (gitignored). 29 have a `ControlValueAccessor`. Host is the web component (ADR 0015). |
-| Verified components                                                          | Button and `ModalFooter`, in jsdom. Jest: 5 suites, 104 passed, 10 `it.todo`. Modal child registration is covered too.         |
-| Playwright                                                                   | `Button.e2e.ts` is written. ADR 0015 says it has never been run. We did not run it either.                                     |
-| Legacy entry point                                                           | Abandoned and removed 2026-10-26.                                                                                              |
-| Angular peer floor                                                           | Peers updated to `>=20` (2026-10-27). `devDependencies` and CI matrix still on `^19`; move to `^20` in a follow-up PR.         |
-| Migration guide `docs/guides/cca-to-angular.md`                              | Does not exist.                                                                                                                |
-| CCA codemods in `packages/upgrade`                                           | None.                                                                                                                          |
-| `docs/migration/v12.md`                                                      | No Angular content.                                                                                                            |
+| Area                                                                         | State                                                                                                                                     |
+| ---------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| Generator ([`tasks/generate-wrappers`](../tasks/generate-wrappers/index.js)) | Emits 278 wrappers into `src/generated/` (gitignored). 29 have a `ControlValueAccessor`. Host is the web component (ADR 0015, ADR 0020).  |
+| Build                                                                        | `yarn build`: generate-wrappers → build-entries → ng-packagr. 97 secondary entries + primary. ~30 s, 1.3 MB packed, no warnings.          |
+| Storybook                                                                    | Builds clean. Scripts prepend generate-wrappers + build-entries. Stories use `cds-ng-*` throughout via `tsconfig.storybook.json` aliases. |
+| Verified components                                                          | Button and `ModalFooter`, in jsdom. Jest: 5 suites, 104 passed, 10 `it.todo`. Modal child registration is covered too.                    |
+| Playwright                                                                   | `Button.e2e.ts` written and updated to `cds-ng-*`. Never been run against a real browser.                                                 |
+| Legacy entry point                                                           | Abandoned and removed 2026-10-26.                                                                                                         |
+| Angular peer floor                                                           | Peers updated to `>=20` (2026-10-27). `devDependencies` and CI matrix still on `^19`; move to `^20` in a follow-up PR.                    |
+| Migration guide `docs/guides/cca-to-angular.md`                              | Does not exist.                                                                                                                           |
+| CCA codemods in `packages/upgrade`                                           | None.                                                                                                                                     |
+| `docs/migration/v12.md`                                                      | No Angular content.                                                                                                                       |
 
-Run: Jest, `tsc -p tsconfig.storybook.json --noEmit` and the `ng-packagr` build
-(all clean after the barrel fix). Not run: Playwright, the Storybook build, the
-root `yarn build`.
+Last run: Jest (104 passed), `tsc -p tsconfig.storybook.json --noEmit` (clean),
+`yarn build` (clean, ~30 s), Storybook build (clean). Not run: Playwright.
 
 ## Decisions on record
 
@@ -438,13 +438,19 @@ In order. Items marked ~~done~~ are complete; the remainder are open.
      the build target at `.entries/ng-package.json`. The Lerna and CI order
      already builds `@carbon/web-components` first (`angular-test` and
      `angular-e2e` in `.github/workflows/ci.yml`; `lerna ls --toposort` puts
-     web-components before angular), so `es/` exists. Storybook still builds,
-     Jest and `tsc` are clean. Docs now import from `@carbon/angular/button`.
-     **Left inconsistent on purpose:** the Button stories and MDX still show
-     `<cds-button>` because Storybook runs against `src/generated/` (`cds-*`,
-     peer web components), while the published package uses `cds-ng-button`.
-     Decide whether Storybook should build against `.entries/` so docs match
-     what consumers get.
+     web-components before angular), so `es/` exists.
+   - ~~Point Storybook at `.entries/` so docs match what consumers get.~~ **Done
+     2026-10-28.** `storybook` and `storybook:build` scripts now prepend
+     `generate-wrappers` and `build-entries` (no `ng-packagr`). Two `paths`
+     aliases added to `tsconfig.storybook.json`: `@carbon/angular/*` →
+     `.entries/*/index.ts` and `#carbon-ng/*` → `.entries/vendor/*`. Button
+     stories, MDX and e2e tests updated to `cds-ng-*` throughout. `welcome.mdx`
+     and `migration.mdx` updated to match. `src/generated/` is still used by
+     Jest only (unit tests query `cds-button` intentionally — explained in
+     `Button.spec.ts`). Note: `baseUrl` must not appear in
+     `tsconfig.storybook.json` — it is deprecated under
+     `moduleResolution: "bundler"` and TypeScript 5.8 treats it as a hard error;
+     `paths` entries use `./` relative paths instead.
    - Decide what to do with the six duplicated tags: the manifest lists
      `page-header`, `-breadcrumb`, `-content`, `-content-text`, `-hero-image`
      and `-tabs` from both `page-header` and `page-header-deprecated`. They map
@@ -458,7 +464,9 @@ In order. Items marked ~~done~~ are complete; the remainder are open.
 6. **CEM analyzer spike** for enum unions and typed event payloads. The current
    manifest is the deprecated WCA format. Gaps are listed in
    [`developer-experience.md`](./developer-experience.md).
-7. **Run the Button Playwright checks** (never run) and the Storybook build.
+7. ~~**Run the Button Playwright checks** (never run) and the Storybook build.~~
+   **Storybook build done 2026-10-28** (see step 3 above). Playwright checks
+   still never run — moved to step 7 below.
 8. **Verify form controls, named-slot components and `ActionSet`** in a real
    browser.
 9. **Define feature parity**, then decide what typing and slot work belongs in
