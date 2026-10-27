@@ -15,6 +15,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/select';
 @use '@carbon/styles/scss/utilities/layout' as *;
 @use '@carbon/styles/scss/utilities/convert' as convert;
+@use '@carbon/styles/scss/feature-flags' as flags;
 
 :host(#{$prefix}-time-picker) {
   @include emit-layout-tokens();
@@ -47,4 +48,29 @@ $css--plex: true !default;
   line-height: 1;
   min-inline-size: auto;
   padding-inline-end: convert.to-rem(48px);
+}
+
+@if flags.enabled('enable-v12-release') {
+  // Non-last selects: remove all border-radius and the inline borders so
+  // they sit flush between the input and the last select.
+  :host(#{$prefix}-time-picker-select:not(:last-of-type))
+    .#{$prefix}--select-input {
+    border-radius: 0;
+    border-inline-end: none;
+    border-inline-start: none;
+  }
+
+  // Last select: only zero out the start-side radii (left top + left bottom)
+  // so the end-side (right) retains its natural border-radius.
+  :host(#{$prefix}-time-picker-select:last-of-type) .#{$prefix}--select-input {
+    border-end-start-radius: 0;
+    border-inline-start: none;
+    border-start-start-radius: 0;
+  }
+
+  // Invalid/warn: no border on the select.
+  :host(#{$prefix}-time-picker[invalid]) .#{$prefix}--select-input,
+  :host(#{$prefix}-time-picker[warning]) .#{$prefix}--select-input {
+    border: none;
+  }
 }

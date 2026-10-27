@@ -154,8 +154,8 @@ class CDSFluidTimePicker extends CDSTimePicker {
     this._syncSelectState();
   }
 
-  protected _handleSlotChange() {
-    super._handleSlotChange();
+  protected _handleSlotChange(event: Event) {
+    super._handleSlotChange(event);
     this._syncSelectState();
     this._syncHoverListeners();
   }
@@ -230,6 +230,7 @@ class CDSFluidTimePicker extends CDSTimePicker {
     const inputClasses = classMap({
       [`${prefix}--text-input`]: true,
       [`${prefix}--time-picker__input-field`]: true,
+      [`${prefix}--time-picker__input--with-select`]: selectCount > 0,
     });
 
     const validationMessage =
