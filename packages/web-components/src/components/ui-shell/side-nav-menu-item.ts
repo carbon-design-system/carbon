@@ -25,7 +25,8 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 @customElement(`${prefix}-side-nav-menu-item`)
 class CDSSideNavMenuItem extends FocusMixin(LitElement) {
   /**
-   * `true` if the menu item should be active.
+   * `true` if the menu item should be active. When rendered as a link, the
+   * inner `<a>` also gets `aria-current="page"`.
    */
   @property({ type: Boolean, reflect: true })
   active = false;
@@ -92,7 +93,8 @@ class CDSSideNavMenuItem extends FocusMixin(LitElement) {
           part="link"
           class="${classes}"
           href="${href}"
-          target="${ifDefined(target)}">
+          target="${ifDefined(target)}"
+          aria-current="${ifDefined(active ? 'page' : undefined)}">
           ${content}
         </a>`;
   }

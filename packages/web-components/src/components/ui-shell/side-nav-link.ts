@@ -41,7 +41,8 @@ class CDSSideNavLink extends FocusMixin(LitElement) {
   }
 
   /**
-   * `true` if the menu item should be active.
+   * `true` if the menu item should be active. When rendered as a link, the
+   * inner `<a>` also gets `aria-current="page"`.
    */
   @property({ type: Boolean, reflect: true })
   active = false;
@@ -125,7 +126,8 @@ class CDSSideNavLink extends FocusMixin(LitElement) {
           class="${classes}"
           href="${href}"
           rel="${ifDefined(rel)}"
-          target="${ifDefined(target)}">
+          target="${ifDefined(target)}"
+          aria-current="${ifDefined(active ? 'page' : undefined)}">
           ${content}
         </a>`;
   }
