@@ -8,7 +8,6 @@
 
 # Generated SCSS
 packages/colors/index.scss
-packages/colors/scss/**
 packages/themes/scss/**/generated/**
 packages/web-components/scss/**
 
