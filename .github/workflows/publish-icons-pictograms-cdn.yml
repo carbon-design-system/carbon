@@ -4,15 +4,15 @@ on:
   # called by `release.yml` only after package is actually published
   workflow_call:
     secrets:
-      CARBON_CDN_BUCKET:
+      COMMON_COS_BUCKET:
         required: true
-      CARBON_CDN_ENDPOINT:
+      COMMON_COS_ENDPOINT:
         required: true
-      CARBON_CDN_ACCESS_KEY_ID:
+      COMMON_COS_ACCESS_KEY_ID:
         required: true
-      CARBON_CDN_SECRET_ACCESS_KEY:
+      COMMON_COS_SECRET_ACCESS_KEY:
         required: true
-      CARBON_CDN_REGION:
+      COMMON_COS_REGION:
         required: true
   # manual republish, must be dispatched from a release tag
   workflow_dispatch:
@@ -30,8 +30,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
-      COS_BUCKET: ${{ secrets.CARBON_CDN_BUCKET }}
-      COS_ENDPOINT_HOST: ${{ secrets.CARBON_CDN_ENDPOINT }}
+      COS_BUCKET: ${{ secrets.COMMON_COS_BUCKET }}
+      COS_ENDPOINT_HOST: ${{ secrets.COMMON_COS_ENDPOINT }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
@@ -42,9 +42,9 @@ jobs:
 
       - name: Verify publishing configuration
         env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.CARBON_CDN_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.CARBON_CDN_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: ${{ secrets.CARBON_CDN_REGION }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.COMMON_COS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.COMMON_COS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ secrets.COMMON_COS_REGION }}
         run: |
           aws --version
           test -n "${AWS_ACCESS_KEY_ID}"
@@ -83,76 +83,72 @@ jobs:
           echo "pictograms_version=${pictograms_version}" >> "${GITHUB_OUTPUT}"
 
       # Upload icons to the `latest` tag folder
-      # ie. https://carbon-common.s3.us-south.cloud-object-storage.appdomain.cloud/carbon/icons/tag/v11/latest/16/apps.svg
+      # ie. https://ibm-dotcom-common.s3.us.cloud-object-storage.appdomain.cloud/common/carbon/icons/tag/v11/latest/16/apps.svg
       - name: Upload icons to latest
         env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.CARBON_CDN_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.CARBON_CDN_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: ${{ secrets.CARBON_CDN_REGION }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.COMMON_COS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.COMMON_COS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ secrets.COMMON_COS_REGION }}
           AWS_EC2_METADATA_DISABLED: true
         run: |
           aws s3 sync \
             packages/icons/svg \
-            "s3://${COS_BUCKET}/carbon/icons/tag/v${{ steps.versions.outputs.carbon_major }}/latest" \
+            "s3://${COS_BUCKET}/common/carbon/icons/tag/v${{ steps.versions.outputs.carbon_major }}/latest" \
             --endpoint-url "https://${COS_ENDPOINT_HOST}" \
             --no-progress \
             --cache-control 'public,max-age=3600' \
-            --content-type 'image/svg+xml' \
-            --delete
+            --content-type 'image/svg+xml'
 
       # Upload icons to a versioned folder
-      # ie. https://carbon-common.s3.us-south.cloud-object-storage.appdomain.cloud/carbon/icons/version/v11.89.0/16/apps.svg
+      # ie. https://ibm-dotcom-common.s3.us.cloud-object-storage.appdomain.cloud/common/carbon/icons/version/v11.89.0/16/apps.svg
       - name: Upload versioned icons
         env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.CARBON_CDN_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.CARBON_CDN_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: ${{ secrets.CARBON_CDN_REGION }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.COMMON_COS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.COMMON_COS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ secrets.COMMON_COS_REGION }}
           AWS_EC2_METADATA_DISABLED: true
         run: |
           aws s3 sync \
             packages/icons/svg \
-            "s3://${COS_BUCKET}/carbon/icons/version/v${{ steps.versions.outputs.icons_version }}" \
+            "s3://${COS_BUCKET}/common/carbon/icons/version/v${{ steps.versions.outputs.icons_version }}" \
             --endpoint-url "https://${COS_ENDPOINT_HOST}" \
             --no-progress \
             --cache-control 'public,max-age=3600' \
-            --content-type 'image/svg+xml' \
-            --delete
+            --content-type 'image/svg+xml'
 
       # Upload pictograms to the `latest` tag folder
-      # ie. https://carbon-common.s3.us-south.cloud-object-storage.appdomain.cloud/carbon/pictograms/tag/v11/latest/accessibility.svg
+      # ie. https://ibm-dotcom-common.s3.us.cloud-object-storage.appdomain.cloud/common/carbon/pictograms/tag/v11/latest/accessibility.svg
       - name: Upload pictograms to latest
         env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.CARBON_CDN_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.CARBON_CDN_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: ${{ secrets.CARBON_CDN_REGION }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.COMMON_COS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.COMMON_COS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ secrets.COMMON_COS_REGION }}
           AWS_EC2_METADATA_DISABLED: true
         run: |
           aws s3 sync \
             packages/pictograms/svg \
-            "s3://${COS_BUCKET}/carbon/pictograms/tag/v${{ steps.versions.outputs.carbon_major }}/latest" \
+            "s3://${COS_BUCKET}/common/carbon/pictograms/tag/v${{ steps.versions.outputs.carbon_major }}/latest" \
             --endpoint-url "https://${COS_ENDPOINT_HOST}" \
             --no-progress \
             --cache-control 'public,max-age=3600' \
-            --content-type 'image/svg+xml' \
-            --delete
+            --content-type 'image/svg+xml'
 
       # Upload pictograms to a versioned folder
-      # ie. https://carbon-common.s3.us-south.cloud-object-storage.appdomain.cloud/carbon/pictograms/version/v12.85.0/accessibility.svg
+      # ie. https://ibm-dotcom-common.s3.us.cloud-object-storage.appdomain.cloud/common/carbon/pictograms/version/v12.85.0/accessibility.svg
       - name: Upload versioned pictograms
         env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.CARBON_CDN_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.CARBON_CDN_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: ${{ secrets.CARBON_CDN_REGION }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.COMMON_COS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.COMMON_COS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ secrets.COMMON_COS_REGION }}
           AWS_EC2_METADATA_DISABLED: true
         run: |
           aws s3 sync \
             packages/pictograms/svg \
-            "s3://${COS_BUCKET}/carbon/pictograms/version/v${{ steps.versions.outputs.pictograms_version }}" \
+            "s3://${COS_BUCKET}/common/carbon/pictograms/version/v${{ steps.versions.outputs.pictograms_version }}" \
             --endpoint-url "https://${COS_ENDPOINT_HOST}" \
             --no-progress \
             --cache-control 'public,max-age=3600' \
-            --content-type 'image/svg+xml' \
-            --delete
+            --content-type 'image/svg+xml'
 
       - name: Verify public URLs and CORS
         env:
@@ -162,10 +158,10 @@ jobs:
         run: |
           base_url="https://${COS_BUCKET}.${COS_ENDPOINT_HOST}"
           urls=(
-            "${base_url}/carbon/icons/tag/v${CARBON_MAJOR}/latest/16/apps.svg"
-            "${base_url}/carbon/icons/version/v${ICONS_VERSION}/16/apps.svg"
-            "${base_url}/carbon/pictograms/tag/v${CARBON_MAJOR}/latest/accessibility.svg"
-            "${base_url}/carbon/pictograms/version/v${PICTOGRAMS_VERSION}/accessibility.svg"
+            "${base_url}/common/carbon/icons/tag/v${CARBON_MAJOR}/latest/16/apps.svg"
+            "${base_url}/common/carbon/icons/version/v${ICONS_VERSION}/16/apps.svg"
+            "${base_url}/common/carbon/pictograms/tag/v${CARBON_MAJOR}/latest/accessibility.svg"
+            "${base_url}/common/carbon/pictograms/version/v${PICTOGRAMS_VERSION}/accessibility.svg"
           )
 
           for url in "${urls[@]}"; do
