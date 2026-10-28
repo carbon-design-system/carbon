@@ -82,7 +82,7 @@ emptyStatePictogram.argTypes = {
 
 // ─── Story: empty state unit ──────────────────────────────────────────────────
 export const emptyStateInUI = (args) => <EmptyStateUnit {...args} />;
-emptyStateInUI.storyName = 'Empty State unit';
+emptyStateInUI.storyName = 'Empty State in a UI';
 emptyStateInUI.args = { placement: 'left' };
 emptyStateInUI.argTypes = {
   placement: {

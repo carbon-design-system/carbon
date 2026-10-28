@@ -87,6 +87,7 @@
   "devDependencies": {
     "@carbon/layout": "^12.0.0-alpha.4",
     "@carbon/motion": "^12.0.0-alpha.4",
+    "@carbon/pictograms": "^13.0.0-alpha.3",
     "@juggle/resize-observer": "^3.4.0",
     "@mordech/vite-lit-loader": "^0.40.0",
     "@open-wc/testing": "^5.0.0",
