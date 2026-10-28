@@ -394,20 +394,26 @@ export const UsageExamples = (args) => {
             key={i}
             action={
               <OverflowMenu {...overflowMenuProps}>
-                {enableV12OverflowMenu ? (
-                  <>
-                    <MenuItem label="View details" />
-                    <MenuItem label="Edit" />
-                    <MenuItemDivider />
-                    <MenuItem kind="danger" label="Remove" />
-                  </>
-                ) : (
-                  <>
-                    <OverflowMenuItem itemText="View details" />
-                    <OverflowMenuItem itemText="Edit" />
-                    <OverflowMenuItem itemText="Remove" isDelete hasDivider />
-                  </>
-                )}
+                {enableV12OverflowMenu
+                  ? [
+                      <MenuItem key="view-details" label="View details" />,
+                      <MenuItem key="edit" label="Edit" />,
+                      <MenuItemDivider key="divider" />,
+                      <MenuItem key="remove" kind="danger" label="Remove" />,
+                    ]
+                  : [
+                      <OverflowMenuItem
+                        key="view-details"
+                        itemText="View details"
+                      />,
+                      <OverflowMenuItem key="edit" itemText="Edit" />,
+                      <OverflowMenuItem
+                        key="remove"
+                        itemText="Remove"
+                        isDelete
+                        hasDivider
+                      />,
+                    ]}
               </OverflowMenu>
             }>
             List item
