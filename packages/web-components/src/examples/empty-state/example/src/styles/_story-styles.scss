@@ -99,10 +99,3 @@
     justify-content: center;
   }
 }
-
-.es-example__launcher {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-block-size: calc(100vh - #{$spacing-09});
-}

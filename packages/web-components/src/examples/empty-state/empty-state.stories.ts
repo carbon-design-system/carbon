@@ -10,11 +10,11 @@ import type { Meta } from '@storybook/web-components';
 
 import DocsPage from './empty-state.mdx';
 
-import '../../../examples/components/empty-state/src/styles/_empty-state.scss';
-import '../../../examples/components/empty-state/src/styles/_story-styles.scss';
-import '../../../examples/components/empty-state/src/preview-components/empty-state-with-isometric-illustration';
-import '../../../examples/components/empty-state/src/preview-components/empty-state-with-pictogram-illustration';
-import '../../../examples/components/empty-state/src/preview-components/empty-state-unit';
+import './example/src/styles/_empty-state.scss';
+import './example/src/styles/_story-styles.scss';
+import './example/src/preview-components/empty-state-with-isometric-illustration';
+import './example/src/preview-components/empty-state-with-pictogram-illustration';
+import './example/src/preview-components/empty-state-unit';
 
 // ─── Story: unit with isometric illustration ─────────────────────────────────
 
@@ -41,7 +41,7 @@ export const emptyStateIsometric = {
     size: { control: { type: 'select' }, options: ['md', 'sm'] },
   },
   render: (args) => html`
-    <cds-empty-state-isometric
+    <empty-state-isometric
       illustration-key="${args.illustrationKey}"
       size="${args.size}"
       heading="${args.heading}"
@@ -49,7 +49,7 @@ export const emptyStateIsometric = {
       action-text="${args.actionText}"
       link-text="${args.linkText}"
       link-href="${args.linkHref}">
-    </cds-empty-state-isometric>
+    </empty-state-isometric>
   `,
 };
 
@@ -91,7 +91,7 @@ export const emptyStatePictogram = {
     size: { control: { type: 'select' }, options: ['md', 'sm'] },
   },
   render: (args) => html`
-    <cds-empty-state-pictogram
+    <empty-state-pictogram
       pictogram-key="${args.pictogramKey}"
       size="${args.size}"
       heading="${args.heading}"
@@ -99,7 +99,7 @@ export const emptyStatePictogram = {
       action-text="${args.actionText}"
       link-text="${args.linkText}"
       link-href="${args.linkHref}">
-    </cds-empty-state-pictogram>
+    </empty-state-pictogram>
   `,
 };
 
@@ -117,7 +117,7 @@ export const emptyStateInUI = {
     },
   },
   render: (args) => html`
-    <cds-empty-state-unit placement="${args.placement}"></cds-empty-state-unit>
+    <empty-state-unit placement="${args.placement}"></empty-state-unit>
   `,
 };
 

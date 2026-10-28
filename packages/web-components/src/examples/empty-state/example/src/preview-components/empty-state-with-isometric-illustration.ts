@@ -10,8 +10,7 @@ import { customElement, property } from 'lit/decorators.js';
 
 import '../components/empty-state';
 
-// Use ?url to get the asset URL (not the inline SVG template the vite-lit-loader
-// plugin produces for bare .svg imports).
+// Use ?url to get the asset URL for the `<img>` illustration.
 import noDataSrc from '../assets/no-data.svg?url';
 import notFoundSrc from '../assets/not-found.svg?url';
 import unauthorizedSrc from '../assets/unauthorized.svg?url';
@@ -34,14 +33,14 @@ const illustrationMap: Record<IllustrationKey, string> = {
 };
 
 /**
- * `cds-empty-state-isometric`
+ * `empty-state-isometric`
  *
- * Preview component — wraps `cds-empty-state` with an isometric SVG illustration.
+ * Preview component — wraps `empty-state` with an isometric SVG illustration.
  *
- * @element cds-empty-state-isometric
+ * @element empty-state-isometric
  */
-@customElement('cds-empty-state-isometric')
-export class CDSEmptyStateIsometric extends LitElement {
+@customElement('empty-state-isometric')
+export class EmptyStateIsometric extends LitElement {
   /** Illustration key to display. @default 'No data' */
   @property({ attribute: 'illustration-key' })
   illustrationKey: IllustrationKey = 'No data';
@@ -78,7 +77,7 @@ export class CDSEmptyStateIsometric extends LitElement {
   render() {
     const src = illustrationMap[this.illustrationKey] ?? illustrationMap['No data'];
     return html`
-      <cds-empty-state
+      <empty-state
         illustration-src="${src}"
         illustration-description="${this.illustrationKey} illustration"
         size="${this.size}"
@@ -88,9 +87,9 @@ export class CDSEmptyStateIsometric extends LitElement {
         action-kind="tertiary"
         link-text="${this.linkText}"
         link-href="${this.linkHref}">
-      </cds-empty-state>
+      </empty-state>
     `;
   }
 }
 
-export default CDSEmptyStateIsometric;
+export default EmptyStateIsometric;

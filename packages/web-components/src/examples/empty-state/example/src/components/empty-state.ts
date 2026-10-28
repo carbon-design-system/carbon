@@ -7,7 +7,7 @@
  * Recipe component — copy-and-customize, not a published package export.
  */
 
-import { LitElement, html, nothing } from 'lit';
+import { LitElement, html, nothing, type TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
@@ -17,19 +17,22 @@ import '@carbon/web-components/es/components/link/index.js';
 const blockClass = 'cds--empty-state';
 
 /**
- * `cds-empty-state`
+ * `empty-state`
  *
  * Recipe component — copy-and-customize, not a published export.
  *
- * @element cds-empty-state
- * @fires cds-empty-state-action-click - Fired when the action button is clicked.
- * @slot illustration - Optional custom illustration node (overrides illustration-src).
+ * @element empty-state
+ * @fires empty-state-action-click - Fired when the action button is clicked.
  */
-@customElement('cds-empty-state')
-export class CDSEmptyStateRecipe extends LitElement {
+@customElement('empty-state')
+export class EmptyState extends LitElement {
   /** Size variant — controls illustration dimensions. @default 'md' */
   @property({ reflect: true })
   size: 'md' | 'sm' = 'md';
+
+  /** Custom illustration node, e.g. an inline pictogram (overrides illustration-src). */
+  @property({ attribute: false })
+  illustration?: TemplateResult;
 
   /** URL/src for an `<img>` illustration. */
   @property({ attribute: 'illustration-src' })
@@ -69,7 +72,7 @@ export class CDSEmptyStateRecipe extends LitElement {
 
   private _handleActionClick() {
     this.dispatchEvent(
-      new CustomEvent('cds-empty-state-action-click', {
+      new CustomEvent('empty-state-action-click', {
         bubbles: true,
         composed: true,
       })
@@ -83,6 +86,7 @@ export class CDSEmptyStateRecipe extends LitElement {
   render() {
     const {
       size,
+      illustration,
       illustrationSrc,
       illustrationDescription,
       heading,
@@ -96,15 +100,14 @@ export class CDSEmptyStateRecipe extends LitElement {
 
     return html`
       <div class="${blockClass} ${blockClass}--${size}">
-        <slot name="illustration">
-          ${illustrationSrc
-            ? html`<img
-                src="${illustrationSrc}"
-                alt="${illustrationDescription || heading}"
-                class="${blockClass}__illustration--${size}"
-              />`
-            : nothing}
-        </slot>
+        ${illustration ??
+        (illustrationSrc
+          ? html`<img
+              src="${illustrationSrc}"
+              alt="${illustrationDescription || heading}"
+              class="${blockClass}__illustration--${size}"
+            />`
+          : nothing)}
 
         <div class="${blockClass}__content">
           <p class="${blockClass}__heading ${blockClass}__heading--${size}">
@@ -142,4 +145,4 @@ export class CDSEmptyStateRecipe extends LitElement {
   }
 }
 
-export default CDSEmptyStateRecipe;
+export default EmptyState;

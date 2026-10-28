@@ -21,6 +21,7 @@ import '@carbon/web-components/es/components/overflow-menu/index.js';
 import '@carbon/web-components/es/components/tile/index.js';
 import '@carbon/web-components/es/components/ui-shell/index.js';
 
+import type CDSTableToolbarSearch from '@carbon/web-components/es/components/data-table/table-toolbar-search.js';
 import Settings16 from '@carbon/icons/es/settings/16.js';
 
 import '../components/empty-state';
@@ -44,7 +45,7 @@ const TABLE_ROWS = [
 ];
 
 /**
- * `cds-empty-state-unit`
+ * `empty-state-unit`
  *
  * Full UI Shell demo showing three empty-state placement scenarios:
  *  1. Inside a DataTable (no search results)
@@ -55,15 +56,15 @@ const TABLE_ROWS = [
  *
  * @example
  * <!-- Left-aligned (default) -->
- * <cds-empty-state-unit></cds-empty-state-unit>
+ * <empty-state-unit></empty-state-unit>
  *
  * <!-- Centred -->
- * <cds-empty-state-unit placement="centre"></cds-empty-state-unit>
+ * <empty-state-unit placement="centre"></empty-state-unit>
  *
- * @element cds-empty-state-unit
+ * @element empty-state-unit
  */
-@customElement('cds-empty-state-unit')
-export class CDSEmptyStateUnit extends LitElement {
+@customElement('empty-state-unit')
+export class EmptyStateUnit extends LitElement {
   /**
    * Alignment of every empty state relative to its own container.
    * @default 'left'
@@ -82,16 +83,17 @@ export class CDSEmptyStateUnit extends LitElement {
     );
   }
 
-  private _handleSearch(e: Event) {
-    this._searchValue = (e.target as HTMLInputElement).value ?? '';
+  private _handleSearch(e: CustomEvent<{ value: string }>) {
+    this._searchValue = e.detail.value ?? '';
   }
 
   private _clearSearch() {
     this._searchValue = '';
-    const input = this.renderRoot
-      ?.querySelector('cds-table-toolbar-search')
-      ?.querySelector('input');
-    if (input) input.value = '';
+    // The `<input>` lives in the search's shadow root; reset it via `value`.
+    const search = this.renderRoot?.querySelector<CDSTableToolbarSearch>(
+      'cds-table-toolbar-search'
+    );
+    if (search) search.value = '';
   }
 
   // No Shadow DOM — styles from src/index.scss must reach the rendered HTML directly.
@@ -175,15 +177,15 @@ export class CDSEmptyStateUnit extends LitElement {
             ${noResults
               ? html`
                   <div class="es-example__empty-wrap ${emptyWrapMod}">
-                    <cds-empty-state
+                    <empty-state
                       illustration-src="${notFoundSrc}"
                       illustration-description="No results illustration"
                       heading="No results match the current search"
                       subtitle="Clear the search field to see all results, or try a different search term."
                       action-text="Clear search"
                       action-kind="tertiary"
-                      @cds-empty-state-action-click="${this._clearSearch}">
-                    </cds-empty-state>
+                      @empty-state-action-click="${this._clearSearch}">
+                    </empty-state>
                   </div>
                 `
               : ''}
@@ -198,7 +200,7 @@ export class CDSEmptyStateUnit extends LitElement {
                 class="es-example__tile-empty--vertical${isCentre
                   ? ' es-example__tile-empty--vertical--centre'
                   : ''}">
-                <cds-empty-state
+                <empty-state
                   size="sm"
                   illustration-src="${errorSrc}"
                   illustration-description="Error illustration"
@@ -206,7 +208,7 @@ export class CDSEmptyStateUnit extends LitElement {
                   subtitle="Try loading the page once again after adding an asset."
                   link-text="Learn more"
                   link-href="https://carbondesignsystem.com/patterns/empty-states-pattern/">
-                </cds-empty-state>
+                </empty-state>
               </div>
             </cds-tile>
           </div>
@@ -223,7 +225,7 @@ export class CDSEmptyStateUnit extends LitElement {
                       class="es-example__tile-empty--horizontal${isCentre
                         ? ' es-example__tile-empty--horizontal--centre'
                         : ''}">
-                      <cds-empty-state
+                      <empty-state
                         size="sm"
                         illustration-src="${unauthorizedSrc}"
                         illustration-description="Unauthorized illustration"
@@ -231,7 +233,7 @@ export class CDSEmptyStateUnit extends LitElement {
                         subtitle="Unlock product insights by requesting view access from your admin."
                         action-text="Request access"
                         action-kind="tertiary">
-                      </cds-empty-state>
+                      </empty-state>
                     </div>
                   </cds-tile>
                 </div>
@@ -245,4 +247,4 @@ export class CDSEmptyStateUnit extends LitElement {
   }
 }
 
-export default CDSEmptyStateUnit;
+export default EmptyStateUnit;

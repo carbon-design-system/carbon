@@ -60,16 +60,16 @@ const pictogramMap: Record<PictogramKey, any> = {
 const blockClass = 'cds--empty-state';
 
 /**
- * `cds-empty-state-pictogram`
+ * `empty-state-pictogram`
  *
- * Preview component — wraps `cds-empty-state` with a Carbon pictogram illustration.
+ * Preview component — wraps `empty-state` with a Carbon pictogram illustration.
  * The pictogram SVG is rendered inline and inherits the current text colour via
  * `fill: currentColor`, matching the React implementation.
  *
- * @element cds-empty-state-pictogram
+ * @element empty-state-pictogram
  */
-@customElement('cds-empty-state-pictogram')
-export class CDSEmptyStatePictogram extends LitElement {
+@customElement('empty-state-pictogram')
+export class EmptyStatePictogram extends LitElement {
   /** Pictogram key to display. @default 'First use' */
   @property({ attribute: 'pictogram-key' })
   pictogramKey: PictogramKey = 'First use';
@@ -117,7 +117,10 @@ export class CDSEmptyStatePictogram extends LitElement {
     });
 
     return html`
-      <cds-empty-state
+      <empty-state
+        .illustration=${html`<span class="${blockClass}__illustration--${size}"
+          >${unsafeSVG(svgString)}</span
+        >`}
         size="${size}"
         heading="${heading}"
         subtitle="${subtitle}"
@@ -125,14 +128,9 @@ export class CDSEmptyStatePictogram extends LitElement {
         action-kind="tertiary"
         link-text="${linkText}"
         link-href="${linkHref}">
-        <span
-          slot="illustration"
-          class="${blockClass}__illustration--${size}">
-          ${unsafeSVG(svgString)}
-        </span>
-      </cds-empty-state>
+      </empty-state>
     `;
   }
 }
 
-export default CDSEmptyStatePictogram;
+export default EmptyStatePictogram;

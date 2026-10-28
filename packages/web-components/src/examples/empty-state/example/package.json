@@ -1,7 +1,13 @@
 {
   "name": "empty-state-pattern-example-web-components",
   "description": "An example showing use of the EmptyState pattern from @carbon/web-components.",
-  "keywords": ["carbon", "ibm", "pattern", "empty-state", "web-components"],
+  "keywords": [
+    "carbon",
+    "ibm",
+    "pattern",
+    "empty-state",
+    "web-components"
+  ],
   "license": "Apache-2.0",
   "type": "module",
   "private": true,
@@ -11,6 +17,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@carbon/icon-helpers": "latest",
+    "@carbon/icons": "latest",
     "@carbon/pictograms": "latest",
     "@carbon/styles": "latest",
     "@carbon/web-components": "latest",
@@ -24,7 +32,15 @@
     "vite-plugin-lit-css": "^2.1.0"
   },
   "browserslist": {
-    "production": [">0.2%", "not dead", "not op_mini all"],
-    "development": ["last 1 chrome version", "last 1 firefox version", "last 1 safari version"]
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
