@@ -304,21 +304,25 @@ class CDSActionableNotification extends HostListenerMixin(
   render() {
     const { _type: type } = this;
     return html`
-      <a
+      <span
         id="start-sentinel"
-        class="${prefix}--visually-hidden"
-        href="javascript:void 0"
-        role="navigation"></a>
+        tabIndex="0"
+        role="link"
+        class="cds--visually-hidden">
+        Focus sentinel
+      </span>
       <div class="${prefix}--${type}-notification__details">
         ${this._renderIcon()} ${this._renderText()}
       </div>
       <slot name="action"></slot>
       ${this._renderButton()}
-      <a
+      <span
         id="end-sentinel"
-        class="${prefix}--visually-hidden"
-        href="javascript:void 0"
-        role="navigation"></a>
+        tabIndex="0"
+        role="link"
+        class="cds--visually-hidden">
+        Focus sentinel
+      </span>
     `;
   }
 
