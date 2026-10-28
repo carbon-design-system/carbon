@@ -5,6 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use '@carbon/styles/scss/border-radius' as *;
+@use '@carbon/styles/scss/feature-flags' as *;
 @use '@carbon/styles/scss/spacing';
 
 .card-story__viewport {
@@ -52,5 +54,11 @@
 // Demo content box used in the WithFlushBody story to visualise padding behaviour
 .card-story__flush-demo-content {
   background: var(--cds-highlight);
+  border: 1px dashed var(--cds-link-primary);
   padding: spacing.$spacing-05;
+
+  @if enabled('enable-v12-release') {
+    border-end-start-radius: $border-radius-08;
+    border-end-end-radius: $border-radius-08;
+  }
 }

@@ -775,12 +775,7 @@ export const WithFlushBody = () => (
           <Card.Title>Flush body</Card.Title>
         </Card.Header>
         <Card.Body isFlush>
-          <div
-            style={{
-              background: 'var(--cds-highlight)',
-              border: '1px dashed var(--cds-link-primary)',
-              padding: '1rem',
-            }}>
+          <div className="card-story__flush-demo-content">
             Body flush to card edges
           </div>
         </Card.Body>
