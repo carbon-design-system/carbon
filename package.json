@@ -18,7 +18,7 @@
     "clean": "lerna run clean && lerna clean --yes && rimraf node_modules",
     "doctoc": "doctoc --title '## Table of Contents'",
     "format": "prettier --cache --write '**/*.{js,md,mdx,scss,ts,tsx}' '!**/{build,es,lib,storybook,ts,umd}/**'",
-    "format:diff": "prettier --list-different '**/*.{js,md,mdx,scss,ts,tsx}' '!**/{build,es,lib,storybook,ts,umd}/**' '!packages/components/**'",
+    "format:diff": "prettier --list-different '**/*.{js,md,mdx,scss,ts,tsx}' '!**/{build,es,lib,storybook,ts,umd}/**'",
     "lint": "eslint actions config packages",
     "lint:fix": "eslint --cache --fix --max-warnings 0 actions config packages",
     "lint:styles": "stylelint '**/*.scss' --report-needless-disables --report-invalid-scope-disables",
