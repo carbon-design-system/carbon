@@ -15,6 +15,7 @@ import {
 } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { vendorPrefixedCopy } from '../vendor.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -22,14 +23,14 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
  * Wrapper Generator for @carbon/angular.
  *
  * Automatically parses `packages/web-components/custom-elements.json` and emits:
- * - Standalone Angular component wrapper classes (@Component({ selector: 'cds-*' }))
- * - Custom element registrations with the default tag (no cds-ng-* renaming)
+ * - Standalone Angular component wrapper classes (@Component({ selector: 'cds-ng-*' }))
+ * - Custom element registrations with the cds-ng-* prefix (ADR 0020)
  * - Typed @Input() properties forwarded to the host element in ngOnChanges
  * - Typed @Output() event emitters — never for native DOM events (change/input/invalid)
  * - ControlValueAccessor for form-associated components
  * - Barrel index.ts files
  *
- * Architecture (ADR 0015): the Angular wrapper's selector IS the web component tag.
+ * Architecture (ADR 0015, ADR 0020): the Angular wrapper's selector IS the web component tag.
  * The template contains only <ng-content />, so the host element IS the web component.
  * Inputs are forwarded to this._el.nativeElement in ngOnChanges (host = WC element).
  *
@@ -47,24 +48,24 @@ const MANIFEST_PATH = join(WC_ROOT, 'custom-elements.json');
 const OUTPUT_DIR = join(__dirname, '../../src/generated');
 
 /**
- * Resolve the `@carbon/web-components` barrel that registers a tag's family.
+ * Resolve the vendored `@carbon/web-components` barrel that registers a tag's family.
  *
  * Class files are pure (ADR 0007): importing one registers nothing, and it
- * never registers the child elements the component renders (e.g. `cds-modal`
- * renders `cds-dialog`). The folder barrel registers all of them.
+ * never registers the child elements the component renders (e.g. `cds-ng-modal`
+ * renders `cds-ng-dialog`). The folder barrel registers all of them.
  *
  * `tag.path` is `./src/components/<dir>/<file>.ts`. Folders can be nested
  * (`date-picker/next`) and a folder without an `index.ts`
  * (`date-picker/next/components`) is covered by its nearest parent barrel.
  *
  * @returns {string} import specifier, e.g.
- *   `@carbon/web-components/es/components/modal/index.js`
+ *   `#carbon-ng/components/modal/index.js`
  */
 function resolveBarrelImport(tag) {
   const segments = dirname(tag.path.replace(/^\.\/src\//, '')).split('/');
   while (segments.length > 1) {
     if (existsSync(join(WC_ROOT, 'src', ...segments, 'index.ts'))) {
-      return `@carbon/web-components/es/${segments.join('/')}/index.js`;
+      return `#carbon-ng/${segments.join('/')}/index.js`;
     }
     segments.pop();
   }
@@ -74,7 +75,7 @@ function resolveBarrelImport(tag) {
 /** Helper to convert kebab-case or prefix-kebab to PascalCase */
 function toPascalCase(str) {
   return str
-    .replace(/^cds-/, '')
+    .replace(/^cds-(ng-)?/, '')
     .split('-')
     .map((seg) => seg.charAt(0).toUpperCase() + seg.slice(1))
     .join('');
@@ -123,7 +124,7 @@ function sanitizeDefault(defaultVal, type) {
     !defaultVal ||
     defaultVal === 'undefined' ||
     defaultVal === '""' ||
-    defaultVal === '""'
+    defaultVal === "''"
   ) {
     return undefined;
   }
@@ -237,11 +238,7 @@ const SKIPPED_TAGS = new Set([
  * instead of the `@customElement()` decorator, which the CEM analyser cannot
  * see.
  *
- * TODO(wc): Add `@customElement()` to CDSAccordionSkeleton, CDSCheckboxSkeleton,
- * and CDSDropdownSkeleton in packages/web-components so they appear in
- * custom-elements.json automatically and this list can be removed.
- *
- * Each entry mirrors the shape of a real manifest tag object.  The `path`
+ * Each entry mirrors the shape of a real manifest tag object. The `path`
  * field is relative to the WC package root (`./src/components/…`) and is used
  * by `resolveBarrelImport` to find the correct folder barrel.
  */
@@ -314,17 +311,16 @@ const SYNTHETIC_TAGS = [
 
 /**
  * Events (besides `input`/`change`) that signal a form-associated element's
- * value changed, e.g. `cds-checkbox-changed`, `cds-dropdown-selected`.
+ * value changed, e.g. `cds-ng-checkbox-changed`, `cds-ng-dropdown-selected`.
  */
 const VALUE_CHANGE_EVENT = /-(changed|selected|input)$/;
 
 function generateWrapperForTag(tag) {
-  const tagName = tag.name; // e.g. "cds-button"
-  const displayName = toPascalCase(tagName); // e.g. "Button"
+  const tagName = tag.name.replace(/^cds-/, 'cds-ng-'); // e.g. "cds-ng-button"
+  const displayName = toPascalCase(tag.name); // e.g. "Button"
   const className = `${displayName}Component`; // e.g. "ButtonComponent"
 
-  // Import the folder barrel, not the class file, so child elements register.
-  // e.g. path: "./src/components/modal/modal.ts" -> "@carbon/web-components/es/components/modal/index.js"
+  // Import the folder barrel of the vendored prefixed build so child elements register.
   const wcImportPath = resolveBarrelImport(tag);
 
   // Form-associated elements with a `value`/`checked` get a ControlValueAccessor
@@ -376,14 +372,15 @@ function generateWrapperForTag(tag) {
   const outputs = [];
   if (Array.isArray(tag.events)) {
     for (const ev of tag.events) {
-      const eventName = ev.name;
-      if (NATIVE_DOM_EVENTS.has(eventName)) {
+      const originalEventName = ev.name;
+      if (NATIVE_DOM_EVENTS.has(originalEventName)) {
         // No @Output — Angular's (eventName)="..." binding catches the DOM event
         // once directly on the host. Adding an @Output with the same name causes
         // a double-call or a call-stack overflow (measured: change → 580 calls).
         continue;
       }
-      let outputName = toCamelCase(eventName);
+      const eventName = originalEventName.replace(/^cds-/, 'cds-ng-');
+      let outputName = toCamelCase(originalEventName);
       if (processedNames.has(outputName)) {
         outputName = `${outputName}Change`;
       }
@@ -439,8 +436,6 @@ function generateWrapperForTag(tag) {
 
   // Forward each custom event to its @Output. The listener is on the host
   // element, which lives and dies with this component, so it needs no cleanup.
-  // The manifest name (`cds-x-y`) is rewritten to `cds-ng-x-y` in `.entries/`
-  // by `build-entries`, the same as the selector.
   const outputListeners = outputs
     .map(
       (out) =>
@@ -519,7 +514,7 @@ ${onInitBody}
 
   // Build TypeScript class members.
   // Boolean inputs use `booleanAttribute` so the bare-attribute form
-  // (`<cds-button disabled>`, which Angular passes as `""`) is treated as true.
+  // (`<cds-ng-button disabled>`, which Angular passes as `""`) is treated as true.
   const inputDeclarations = inputs
     .map((input) => {
       const doc = input.description
@@ -569,11 +564,10 @@ import {
   }
 import '${wcImportPath}';
 ${propertyInputsConst}
-
 /**
  * ${tag.description || `Angular wrapper for ${tagName}.`}
  *
- * Selector : \`${tagName}\` (host element IS the web component — ADR 0015)
+ * Selector : \`${tagName}\` (host element IS the web component — ADR 0015, ADR 0020)
  */
 @Component({
   selector: '${tagName}',
@@ -625,6 +619,9 @@ function main() {
     process.exit(1);
   }
 
+  // Ensure prefixed vendor build exists before emitting wrappers
+  vendorPrefixedCopy();
+
   const manifest = JSON.parse(readFileSync(MANIFEST_PATH, 'utf8'));
   // Merge synthetic tags (elements missing from the CEM analyser output) before
   // the main tag list so they receive identical treatment — SKIPPED_TAGS,
@@ -668,39 +665,49 @@ function main() {
       continue;
     }
 
-    const { displayName, code, indexCode } = generateWrapperForTag(tag);
-    const componentDir = join(OUTPUT_DIR, displayName);
-    mkdirSync(componentDir, { recursive: true });
+    try {
+      const { displayName, code, indexCode } = generateWrapperForTag(tag);
+      const componentDir = join(OUTPUT_DIR, displayName);
 
-    writeFileSync(
-      join(componentDir, `${displayName}.component.ts`),
-      code,
-      'utf8'
-    );
-    writeFileSync(join(componentDir, 'index.ts'), indexCode, 'utf8');
-    generatedExports.push(`export * from './${displayName}';`);
+      mkdirSync(componentDir, { recursive: true });
+      writeFileSync(
+        join(componentDir, `${displayName}.component.ts`),
+        code,
+        'utf8'
+      );
+      writeFileSync(join(componentDir, 'index.ts'), indexCode, 'utf8');
 
-    console.log(`  ✓ Generated <${tag.name}> -> src/generated/${displayName}/`);
+      generatedExports.push(displayName);
+      console.log(`  ✓ Generated <${tag.name}> -> ${displayName}Component`);
+    } catch (err) {
+      console.error(
+        `  ✗ Error generating wrapper for <${tag.name}>:`,
+        err.message
+      );
+    }
   }
 
-  const rootIndexCode = `/**
+  // Only rewrite root index.ts if doing a full generation run
+  if (!targetTag) {
+    const rootIndexContent = `/**
  * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-/* -------------------------------------------------------------------------
- * THIS FILE IS AUTOMATICALLY GENERATED FROM custom-elements.json.
- * DO NOT EDIT MANUALLY.
- * ------------------------------------------------------------------------- */
-
-${generatedExports.join('\n')}
+// Auto-generated root entry point
+${generatedExports
+  .sort()
+  .map((name) => `export * from './${name}';`)
+  .join('\n')}
 `;
+    writeFileSync(join(OUTPUT_DIR, 'index.ts'), rootIndexContent, 'utf8');
+  }
 
-  writeFileSync(join(OUTPUT_DIR, 'index.ts'), rootIndexCode, 'utf8');
-
-  console.log(`\n🎉 Wrapper generation completed successfully.\n`);
+  console.log(
+    `\n✨ Successfully generated ${generatedExports.length} Angular wrapper component(s).\n`
+  );
 }
 
 main();

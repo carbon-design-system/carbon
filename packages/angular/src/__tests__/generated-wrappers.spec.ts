@@ -22,10 +22,8 @@ import { render, settle } from '../testing/render';
  */
 
 // ─── Host-is-WC helper ───────────────────────────────────────────────────────
-// In the ADR 0015 design, the Angular component's host element IS the web
-// component — there is no inner cds-ng-* element. Querying by tag inside the
-// fixture still works (the host is placed in the test DOM by TestBed), but for
-// the component under test the host IS the element of interest.
+// In the ADR 0015 / ADR 0020 design, the Angular component's host element IS the
+// web component (cds-ng-*).
 
 function host(fixture: ComponentFixture<unknown>): HTMLElement {
   return fixture.nativeElement as HTMLElement;
@@ -37,8 +35,8 @@ function host(fixture: ComponentFixture<unknown>): HTMLElement {
   standalone: true,
   imports: [FormsModule, TextInputComponent, CheckboxComponent],
   template: `
-    <cds-text-input [(ngModel)]="text"></cds-text-input>
-    <cds-checkbox [(ngModel)]="checked"></cds-checkbox>
+    <cds-ng-text-input [(ngModel)]="text"></cds-ng-text-input>
+    <cds-ng-checkbox [(ngModel)]="checked"></cds-ng-checkbox>
   `,
 })
 class NgModelHostComponent {
@@ -49,26 +47,26 @@ class NgModelHostComponent {
 @Component({
   standalone: true,
   imports: [ReactiveFormsModule, TextInputComponent],
-  template: `<cds-text-input [formControl]="control"></cds-text-input>`,
+  template: `<cds-ng-text-input [formControl]="control"></cds-ng-text-input>`,
 })
 class ReactiveHostComponent {
   control = new FormControl('abc');
 }
 
 // ─── ModalFooter host component ───────────────────────────────────────────────
-// Regression test for ADR 0015 finding 3: cds-modal-footer counts slotted
-// children with `matches('cds-button')`. Under the host-is-WC design each
-// child IS a cds-button, so hasThreeButtons must be true.
+// Regression test for ADR 0015 finding 3: cds-ng-modal-footer counts slotted
+// children with `matches('cds-ng-button')`. Under the host-is-WC design each
+// child IS a cds-ng-button, so hasThreeButtons must be true.
 
 @Component({
   standalone: true,
   imports: [ModalFooterComponent, ButtonComponent],
   template: `
-    <cds-modal-footer>
-      <cds-button kind="secondary">Cancel</cds-button>
-      <cds-button kind="secondary">Back</cds-button>
-      <cds-button kind="primary">Submit</cds-button>
-    </cds-modal-footer>
+    <cds-ng-modal-footer>
+      <cds-ng-button kind="secondary">Cancel</cds-ng-button>
+      <cds-ng-button kind="secondary">Back</cds-ng-button>
+      <cds-ng-button kind="primary">Submit</cds-ng-button>
+    </cds-ng-modal-footer>
   `,
 })
 class ModalFooterThreeButtonsHost {}
@@ -79,8 +77,8 @@ describe('generated wrappers', () => {
       const fixture = TestBed.createComponent(NgModelHostComponent);
       fixture.detectChanges();
       await fixture.whenStable();
-      // Host IS the cds-text-input element.
-      const el = fixture.nativeElement.querySelector('cds-text-input');
+      // Host IS the cds-ng-text-input element.
+      const el = fixture.nativeElement.querySelector('cds-ng-text-input');
       expect((el as any).value).toBe('initial');
     });
 
@@ -89,7 +87,9 @@ describe('generated wrappers', () => {
       fixture.detectChanges();
       await fixture.whenStable();
 
-      const el = fixture.nativeElement.querySelector('cds-text-input') as any;
+      const el = fixture.nativeElement.querySelector(
+        'cds-ng-text-input'
+      ) as any;
       el.value = 'typed';
       el.dispatchEvent(new Event('input', { bubbles: true }));
       fixture.detectChanges();
@@ -102,10 +102,10 @@ describe('generated wrappers', () => {
       fixture.detectChanges();
       await fixture.whenStable();
 
-      const el = fixture.nativeElement.querySelector('cds-checkbox') as any;
+      const el = fixture.nativeElement.querySelector('cds-ng-checkbox') as any;
       el.checked = true;
       el.dispatchEvent(
-        new CustomEvent('cds-checkbox-changed', { bubbles: true })
+        new CustomEvent('cds-ng-checkbox-changed', { bubbles: true })
       );
       fixture.detectChanges();
 
@@ -117,7 +117,9 @@ describe('generated wrappers', () => {
       fixture.detectChanges();
       await fixture.whenStable();
 
-      const el = fixture.nativeElement.querySelector('cds-text-input') as any;
+      const el = fixture.nativeElement.querySelector(
+        'cds-ng-text-input'
+      ) as any;
       expect(el.value).toBe('abc');
 
       fixture.componentInstance.control.setValue('xyz');
@@ -130,35 +132,29 @@ describe('generated wrappers', () => {
   });
 
   // ─── ModalFooter compound-component (ADR 0015 finding 3) ──────────────────
-  // Regression: if the Angular wrapper placed an inner element around the WC,
-  // the slot children would be the wrapper elements (not cds-button), and
-  // matches('cds-button') would find zero buttons → hasThreeButtons = false.
-  // With the host-is-WC design the slotted nodes ARE cds-button elements.
   describe('ModalFooter — hasThreeButtons (ADR 0015 finding 3)', () => {
-    it('is true when three cds-button children are slotted', async () => {
+    it('is true when three cds-ng-button children are slotted', async () => {
       const fixture = TestBed.createComponent(ModalFooterThreeButtonsHost);
       fixture.detectChanges();
       await settle(fixture.nativeElement);
-      // cds-modal-footer runs _checkButtons in slotchange, which sets
-      // hasThreeButtons by counting matches('cds-button').
+      // cds-ng-modal-footer runs _checkButtons in slotchange, which sets
+      // hasThreeButtons by counting matches('cds-ng-button').
       const footer = fixture.nativeElement.querySelector(
-        'cds-modal-footer'
+        'cds-ng-modal-footer'
       ) as any;
       expect(footer.hasThreeButtons).toBe(true);
     });
   });
 
   // ─── Event count (ADR 0015 finding 5) ─────────────────────────────────────
-  // One consumer handler call per native change event. The old design with an
-  // @Output('change') caused 2 calls (double-dispatch). With no @Output for
-  // native events the DOM event reaches the consumer exactly once.
+  // One consumer handler call per native change event.
   describe('event count', () => {
     it('fires the consumer change handler exactly once per native change event', async () => {
       @Component({
         standalone: true,
         imports: [TextInputComponent],
-        template: `<cds-text-input
-          (change)="onChange($event)"></cds-text-input>`,
+        template: `<cds-ng-text-input
+          (change)="onChange($event)"></cds-ng-text-input>`,
       })
       class ChangeCountHost {
         count = 0;
@@ -172,22 +168,20 @@ describe('generated wrappers', () => {
       await fixture.whenStable();
 
       const el = fixture.nativeElement.querySelector(
-        'cds-text-input'
+        'cds-ng-text-input'
       ) as HTMLElement;
       el.dispatchEvent(new Event('change', { bubbles: true }));
       fixture.detectChanges();
 
-      // Measured (ADR 0015 §5): old design with @Output('change') gave 2.
-      // No @Output for native events → exactly 1.
       expect(fixture.componentInstance.count).toBe(1);
     });
-    // Regression: custom-event @Outputs were declared but never emitted.
+
     it('emits the @Output once when the web component dispatches its custom event', async () => {
       @Component({
         standalone: true,
         imports: [CheckboxComponent],
-        template: `<cds-checkbox
-          (checkboxChanged)="onToggled($event)"></cds-checkbox>`,
+        template: `<cds-ng-checkbox
+          (checkboxChanged)="onToggled($event)"></cds-ng-checkbox>`,
       })
       class OutputHost {
         count = 0;
@@ -201,9 +195,9 @@ describe('generated wrappers', () => {
       await fixture.whenStable();
 
       const el = fixture.nativeElement.querySelector(
-        'cds-checkbox'
+        'cds-ng-checkbox'
       ) as HTMLElement;
-      el.dispatchEvent(new CustomEvent('cds-checkbox-changed'));
+      el.dispatchEvent(new CustomEvent('cds-ng-checkbox-changed'));
       fixture.detectChanges();
 
       expect(fixture.componentInstance.count).toBe(1);
@@ -233,8 +227,6 @@ describe('generated wrappers', () => {
     });
 
     it('does not set internal property names on the host element as attributes', () => {
-      // In the host-is-WC design the host IS the web component element.
-      // The wrapper must not forward filtered internals.
       const fixture = TestBed.createComponent(TextInputComponent);
       fixture.detectChanges();
       const el = fixture.nativeElement as HTMLElement;
@@ -244,14 +236,11 @@ describe('generated wrappers', () => {
     });
 
     it('forwards boolean inputs to the host web component element', async () => {
-      // Use render() with a template binding to properly trigger ngOnChanges.
-      // AccordionComponent's host IS cds-accordion; the property should be
-      // forwarded from the Angular @Input to the host element's WC property.
       const { fixture } = await render(
-        `<cds-accordion [disabled]="true"></cds-accordion>`,
+        `<cds-ng-accordion [disabled]="true"></cds-ng-accordion>`,
         [AccordionComponent]
       );
-      const el = fixture.nativeElement.querySelector('cds-accordion') as any;
+      const el = fixture.nativeElement.querySelector('cds-ng-accordion') as any;
       expect(el.disabled).toBe(true);
     });
   });

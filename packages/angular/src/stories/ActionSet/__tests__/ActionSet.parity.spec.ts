@@ -13,8 +13,8 @@
  *
  * Each `it` keeps the WC test's title verbatim. The WC test renders
  * `<cds-action-set ...>` with open-wc `fixture(html\`...\`)`. This test renders
- * the Angular `<cds-action-set>` wrapper. Under ADR 0015 the host element IS the
- * web component.
+ * the Angular `<cds-ng-action-set>` wrapper. Under ADR 0015 and ADR 0020 the host
+ * element IS the cds-ng-action-set web component.
  *
  * Ported 1:1 unless noted. Tests that cannot run in jsdom are `it.todo` with
  * a reason.
@@ -22,16 +22,16 @@
 
 import { ActionSetComponent } from '../../../generated/ActionSet';
 import { ButtonComponent } from '../../../generated/Button';
-import { render } from '../../../testing/render';
+import { render, settle } from '../../../testing/render';
 
 const imports = [ActionSetComponent, ButtonComponent];
 
-const prefix = 'cds';
+const prefix = 'cds-ng';
 const blockClass = `${prefix}--action-set`;
 
-/** The cds-action-set host element. */
+/** The cds-ng-action-set host element. */
 const wc = (el: HTMLElement) =>
-  el.querySelector('cds-action-set') as HTMLElement & {
+  el.querySelector('cds-ng-action-set') as HTMLElement & {
     shadowRoot: ShadowRoot;
     size: string;
     stacked: boolean;
@@ -43,14 +43,14 @@ const buttonSet = (el: HTMLElement) =>
   (wc(el).shadowRoot?.querySelector(`div.${blockClass}`) as HTMLElement) ||
   null;
 
-describe('cds-action-set (parity with web-components action-set-test.js)', () => {
+describe('cds-ng-action-set (parity with web-components action-set-test.js)', () => {
   describe('Basic rendering', () => {
     it('renders with default properties', async () => {
       const { fixture } = await render(
-        `<cds-action-set>
-          <cds-button kind="secondary">Cancel</cds-button>
-          <cds-button kind="primary">Submit</cds-button>
-        </cds-action-set>`,
+        `<cds-ng-action-set>
+          <cds-ng-button kind="secondary">Cancel</cds-ng-button>
+          <cds-ng-button kind="primary">Submit</cds-ng-button>
+        </cds-ng-action-set>`,
         imports
       );
       expect(wc(fixture.nativeElement)).toBeTruthy();
@@ -61,10 +61,10 @@ describe('cds-action-set (parity with web-components action-set-test.js)', () =>
 
     it('applies correct CSS classes', async () => {
       const { fixture } = await render(
-        `<cds-action-set>
-          <cds-button kind="secondary">Cancel</cds-button>
-          <cds-button kind="primary">Submit</cds-button>
-        </cds-action-set>`,
+        `<cds-ng-action-set>
+          <cds-ng-button kind="secondary">Cancel</cds-ng-button>
+          <cds-ng-button kind="primary">Submit</cds-ng-button>
+        </cds-ng-action-set>`,
         imports
       );
       const bs = buttonSet(fixture.nativeElement);
@@ -75,10 +75,10 @@ describe('cds-action-set (parity with web-components action-set-test.js)', () =>
 
     it('renders buttons in correct order (secondary first, primary last)', async () => {
       const { fixture } = await render(
-        `<cds-action-set>
-          <cds-button kind="secondary">Cancel</cds-button>
-          <cds-button kind="primary">Submit</cds-button>
-        </cds-action-set>`,
+        `<cds-ng-action-set>
+          <cds-ng-button kind="secondary">Cancel</cds-ng-button>
+          <cds-ng-button kind="primary">Submit</cds-ng-button>
+        </cds-ng-action-set>`,
         imports
       );
       const buttons = fixture.nativeElement.querySelectorAll(
@@ -93,12 +93,12 @@ describe('cds-action-set (parity with web-components action-set-test.js)', () =>
   describe('Button ordering', () => {
     it('orders buttons correctly: ghost, tertiary, secondary, primary', async () => {
       const { fixture } = await render(
-        `<cds-action-set size="xl">
-          <cds-button kind="primary">Primary</cds-button>
-          <cds-button kind="ghost">Ghost</cds-button>
-          <cds-button kind="tertiary">Tertiary</cds-button>
-          <cds-button kind="secondary">Secondary</cds-button>
-        </cds-action-set>`,
+        `<cds-ng-action-set size="xl">
+          <cds-ng-button kind="primary">Primary</cds-ng-button>
+          <cds-ng-button kind="ghost">Ghost</cds-ng-button>
+          <cds-ng-button kind="tertiary">Tertiary</cds-ng-button>
+          <cds-ng-button kind="secondary">Secondary</cds-ng-button>
+        </cds-ng-action-set>`,
         imports
       );
       const buttons = Array.from(
@@ -115,7 +115,7 @@ describe('cds-action-set (parity with web-components action-set-test.js)', () =>
 
     it('reverses order when stacked', async () => {
       const { fixture } = await render(
-        `<cds-action-set size="sm" [actions]="actions"></cds-action-set>`,
+        `<cds-ng-action-set size="sm" [actions]="actions"></cds-ng-action-set>`,
         imports,
         {
           actions: [
@@ -140,10 +140,10 @@ describe('cds-action-set (parity with web-components action-set-test.js)', () =>
   describe('Stacking behavior', () => {
     it('stacks buttons when size is sm', async () => {
       const { fixture } = await render(
-        `<cds-action-set size="sm">
-          <cds-button kind="secondary">Cancel</cds-button>
-          <cds-button kind="primary">Submit</cds-button>
-        </cds-action-set>`,
+        `<cds-ng-action-set size="sm">
+          <cds-ng-button kind="secondary">Cancel</cds-ng-button>
+          <cds-ng-button kind="primary">Submit</cds-ng-button>
+        </cds-ng-action-set>`,
         imports
       );
       expect(wc(fixture.nativeElement).stacked).toBe(true);
@@ -153,11 +153,11 @@ describe('cds-action-set (parity with web-components action-set-test.js)', () =>
 
     it('stacks buttons when size is md and has 3+ buttons', async () => {
       const { fixture } = await render(
-        `<cds-action-set size="md">
-          <cds-button kind="tertiary">Cancel</cds-button>
-          <cds-button kind="secondary">Back</cds-button>
-          <cds-button kind="primary">Submit</cds-button>
-        </cds-action-set>`,
+        `<cds-ng-action-set size="md">
+          <cds-ng-button kind="tertiary">Cancel</cds-ng-button>
+          <cds-ng-button kind="secondary">Back</cds-ng-button>
+          <cds-ng-button kind="primary">Submit</cds-ng-button>
+        </cds-ng-action-set>`,
         imports
       );
       expect(wc(fixture.nativeElement).stacked).toBe(true);
@@ -165,10 +165,10 @@ describe('cds-action-set (parity with web-components action-set-test.js)', () =>
 
     it('does not stack when size is md with 2 buttons', async () => {
       const { fixture } = await render(
-        `<cds-action-set size="md">
-          <cds-button kind="secondary">Cancel</cds-button>
-          <cds-button kind="primary">Submit</cds-button>
-        </cds-action-set>`,
+        `<cds-ng-action-set size="md">
+          <cds-ng-button kind="secondary">Cancel</cds-ng-button>
+          <cds-ng-button kind="primary">Submit</cds-ng-button>
+        </cds-ng-action-set>`,
         imports
       );
       expect(wc(fixture.nativeElement).stacked).toBe(false);
@@ -176,10 +176,10 @@ describe('cds-action-set (parity with web-components action-set-test.js)', () =>
 
     it('respects disableStacking property', async () => {
       const { fixture } = await render(
-        `<cds-action-set size="sm" [disableStacking]="true">
-          <cds-button kind="secondary">Cancel</cds-button>
-          <cds-button kind="primary">Submit</cds-button>
-        </cds-action-set>`,
+        `<cds-ng-action-set size="sm" [disableStacking]="true">
+          <cds-ng-button kind="secondary">Cancel</cds-ng-button>
+          <cds-ng-button kind="primary">Submit</cds-ng-button>
+        </cds-ng-action-set>`,
         imports
       );
       expect(wc(fixture.nativeElement).disableStacking).toBe(true);
@@ -188,15 +188,12 @@ describe('cds-action-set (parity with web-components action-set-test.js)', () =>
   });
 
   describe('Size variants', () => {
-    // Each size needs its own test — calling render() twice in one `it` block
-    // hits "TestBed already instantiated" because render() calls
-    // TestBed.configureTestingModule and afterEach resets it between tests.
     ['sm', 'md', 'lg', 'xl', '2xl'].forEach((size) => {
       it(`applies correct class for size="${size}"`, async () => {
         const { fixture } = await render(
-          `<cds-action-set size="${size}">
-            <cds-button kind="primary">Submit</cds-button>
-          </cds-action-set>`,
+          `<cds-ng-action-set size="${size}">
+            <cds-ng-button kind="primary">Submit</cds-ng-button>
+          </cds-ng-action-set>`,
           imports
         );
         const bs = buttonSet(fixture.nativeElement);
@@ -208,9 +205,9 @@ describe('cds-action-set (parity with web-components action-set-test.js)', () =>
   describe('Button count classes', () => {
     it('applies row-single class for 1 button', async () => {
       const { fixture } = await render(
-        `<cds-action-set>
-          <cds-button kind="primary">Submit</cds-button>
-        </cds-action-set>`,
+        `<cds-ng-action-set>
+          <cds-ng-button kind="primary">Submit</cds-ng-button>
+        </cds-ng-action-set>`,
         imports
       );
       const bs = buttonSet(fixture.nativeElement);
@@ -219,10 +216,10 @@ describe('cds-action-set (parity with web-components action-set-test.js)', () =>
 
     it('applies row-double class for 2 buttons', async () => {
       const { fixture } = await render(
-        `<cds-action-set>
-          <cds-button kind="secondary">Cancel</cds-button>
-          <cds-button kind="primary">Submit</cds-button>
-        </cds-action-set>`,
+        `<cds-ng-action-set>
+          <cds-ng-button kind="secondary">Cancel</cds-ng-button>
+          <cds-ng-button kind="primary">Submit</cds-ng-button>
+        </cds-ng-action-set>`,
         imports
       );
       const bs = buttonSet(fixture.nativeElement);
@@ -231,11 +228,11 @@ describe('cds-action-set (parity with web-components action-set-test.js)', () =>
 
     it('applies row-triple class for 3 buttons', async () => {
       const { fixture } = await render(
-        `<cds-action-set size="lg">
-          <cds-button kind="tertiary">Cancel</cds-button>
-          <cds-button kind="secondary">Back</cds-button>
-          <cds-button kind="primary">Submit</cds-button>
-        </cds-action-set>`,
+        `<cds-ng-action-set size="lg">
+          <cds-ng-button kind="tertiary">Cancel</cds-ng-button>
+          <cds-ng-button kind="secondary">Back</cds-ng-button>
+          <cds-ng-button kind="primary">Submit</cds-ng-button>
+        </cds-ng-action-set>`,
         imports
       );
       const bs = buttonSet(fixture.nativeElement);
@@ -244,12 +241,12 @@ describe('cds-action-set (parity with web-components action-set-test.js)', () =>
 
     it('applies row-quadruple class for 4 buttons', async () => {
       const { fixture } = await render(
-        `<cds-action-set size="xl">
-          <cds-button kind="ghost">Help</cds-button>
-          <cds-button kind="tertiary">Cancel</cds-button>
-          <cds-button kind="secondary">Back</cds-button>
-          <cds-button kind="primary">Submit</cds-button>
-        </cds-action-set>`,
+        `<cds-ng-action-set size="xl">
+          <cds-ng-button kind="ghost">Help</cds-ng-button>
+          <cds-ng-button kind="tertiary">Cancel</cds-ng-button>
+          <cds-ng-button kind="secondary">Back</cds-ng-button>
+          <cds-ng-button kind="primary">Submit</cds-ng-button>
+        </cds-ng-action-set>`,
         imports
       );
       const bs = buttonSet(fixture.nativeElement);
@@ -260,10 +257,10 @@ describe('cds-action-set (parity with web-components action-set-test.js)', () =>
   describe('Button size property', () => {
     it('applies button-size to all buttons', async () => {
       const { fixture } = await render(
-        `<cds-action-set button-size="lg">
-          <cds-button kind="secondary">Cancel</cds-button>
-          <cds-button kind="primary">Submit</cds-button>
-        </cds-action-set>`,
+        `<cds-ng-action-set button-size="lg">
+          <cds-ng-button kind="secondary">Cancel</cds-ng-button>
+          <cds-ng-button kind="primary">Submit</cds-ng-button>
+        </cds-ng-action-set>`,
         imports
       );
       const buttons = fixture.nativeElement.querySelectorAll(
@@ -272,6 +269,243 @@ describe('cds-action-set (parity with web-components action-set-test.js)', () =>
       buttons.forEach((button: Element) => {
         expect(button.getAttribute('size')).toBe('lg');
       });
+    });
+  });
+
+  describe('Action set styling', () => {
+    it('adds action-button class to buttons', async () => {
+      const { fixture } = await render(
+        `<cds-ng-action-set>
+          <cds-ng-button kind="primary">Submit</cds-ng-button>
+        </cds-ng-action-set>`,
+        imports
+      );
+      const button = fixture.nativeElement.querySelector(`${prefix}-button`);
+      expect(button?.classList.contains(`${blockClass}__action-button`)).toBe(
+        true
+      );
+    });
+
+    it('adds ghost-specific class to ghost buttons', async () => {
+      const { fixture } = await render(
+        `<cds-ng-action-set size="lg">
+          <cds-ng-button kind="ghost">Help</cds-ng-button>
+          <cds-ng-button kind="primary">Submit</cds-ng-button>
+        </cds-ng-action-set>`,
+        imports
+      );
+      const ghostButton = Array.from(
+        fixture.nativeElement.querySelectorAll(`${prefix}-button`)
+      ).find((btn) => (btn as Element).getAttribute('kind') === 'ghost') as
+        | HTMLElement
+        | undefined;
+      expect(
+        ghostButton?.classList.contains(`${blockClass}__action-button--ghost`)
+      ).toBe(true);
+    });
+
+    it('sets is-expressive attribute on buttons', async () => {
+      const { fixture } = await render(
+        `<cds-ng-action-set>
+          <cds-ng-button kind="primary">Submit</cds-ng-button>
+        </cds-ng-action-set>`,
+        imports
+      );
+      const button = fixture.nativeElement.querySelector(`${prefix}-button`);
+      expect(button?.getAttribute('is-expressive')).toBe('true');
+    });
+  });
+
+  describe('Validation warnings', () => {
+    let warnings: string[];
+    let originalWarn: typeof console.warn;
+
+    beforeEach(() => {
+      warnings = [];
+      originalWarn = console.warn;
+      console.warn = (...args: unknown[]) => {
+        warnings.push(args.join(' '));
+      };
+    });
+
+    afterEach(() => {
+      console.warn = originalWarn;
+    });
+
+    const renderWithActions = (
+      attrs: string,
+      actions: Array<Record<string, unknown>>
+    ) =>
+      render(
+        `<cds-ng-action-set ${attrs} [actions]="actions"></cds-ng-action-set>`,
+        imports,
+        {
+          actions,
+        }
+      );
+
+    it('warns when more than 4 actions are provided', async () => {
+      await renderWithActions('size="xl"', [
+        { kind: 'ghost', label: 'Help' },
+        { kind: 'tertiary', label: 'Cancel' },
+        { kind: 'secondary', label: 'Back' },
+        { kind: 'secondary', label: 'Save' },
+        { kind: 'primary', label: 'Submit' },
+      ]);
+      expect(warnings.length).toBeGreaterThan(0);
+      expect(warnings[0]).toContain(
+        'you cannot have more than four actions in an ActionSet'
+      );
+    });
+
+    it('warns when more than 3 actions in stacking mode', async () => {
+      await renderWithActions('size="sm"', [
+        { kind: 'tertiary', label: 'Cancel' },
+        { kind: 'secondary', label: 'Back' },
+        { kind: 'secondary', label: 'Save' },
+        { kind: 'primary', label: 'Submit' },
+      ]);
+      expect(warnings.length).toBeGreaterThan(0);
+      expect(warnings[0]).toContain(
+        'you cannot have more than three actions in this size of ActionSet'
+      );
+    });
+
+    it('warns when more than one primary action', async () => {
+      await renderWithActions('', [
+        { kind: 'primary', label: 'Submit' },
+        { kind: 'primary', label: 'Save' },
+      ]);
+      expect(warnings.length).toBeGreaterThan(0);
+      expect(warnings[0]).toContain(
+        "you cannot have more than one 'primary' action in an ActionSet"
+      );
+    });
+
+    it('warns when more than one ghost action', async () => {
+      await renderWithActions('size="xl"', [
+        { kind: 'ghost', label: 'Help' },
+        { kind: 'danger--ghost', label: 'Delete' },
+        { kind: 'primary', label: 'Submit' },
+      ]);
+      expect(warnings.length).toBeGreaterThan(0);
+      expect(warnings[0]).toContain(
+        "you cannot have more than one 'ghost' action in an ActionSet"
+      );
+    });
+
+    it('warns when ghost button with other actions in stacking mode', async () => {
+      await renderWithActions('size="sm"', [
+        { kind: 'ghost', label: 'Help' },
+        { kind: 'primary', label: 'Submit' },
+      ]);
+      expect(warnings.length).toBeGreaterThan(0);
+      expect(warnings[0]).toContain(
+        "you cannot have a 'ghost' button in conjunction with other action types in this size of ActionSet"
+      );
+    });
+
+    it('does not warn for valid action configurations', async () => {
+      await renderWithActions('', [
+        { kind: 'secondary', label: 'Cancel' },
+        { kind: 'primary', label: 'Submit' },
+      ]);
+      expect(warnings.length).toBe(0);
+    });
+  });
+
+  describe('_hideSiblingMargin functionality', () => {
+    const buttonsIn = (root: ParentNode) =>
+      Array.from(root.querySelectorAll(`${prefix}-button`)) as HTMLElement[];
+
+    it('hides margin on focused button and its next sibling', async () => {
+      const { fixture } = await render(
+        `<cds-ng-action-set>
+          <cds-ng-button kind="tertiary">Cancel</cds-ng-button>
+          <cds-ng-button kind="secondary">Back</cds-ng-button>
+          <cds-ng-button kind="primary">Submit</cds-ng-button>
+        </cds-ng-action-set>`,
+        imports
+      );
+      const buttons = buttonsIn(fixture.nativeElement);
+      expect(buttons.length).toBe(3);
+
+      buttons[1].focus();
+      await settle(fixture.nativeElement);
+
+      expect(buttons[1].hasAttribute('hide-margin')).toBe(true);
+      expect(buttons[2].hasAttribute('hide-margin')).toBe(true);
+      expect(buttons[0].hasAttribute('hide-margin')).toBe(false);
+    });
+
+    it.todo('removes hide-margin when focus is lost');
+    it.todo('works with actions prop rendered buttons');
+
+    it('handles focus on last button correctly', async () => {
+      const { fixture } = await render(
+        `<cds-ng-action-set>
+          <cds-ng-button kind="secondary">Cancel</cds-ng-button>
+          <cds-ng-button kind="primary">Submit</cds-ng-button>
+        </cds-ng-action-set>`,
+        imports
+      );
+      const buttons = buttonsIn(fixture.nativeElement);
+
+      buttons[1].focus();
+      await settle(fixture.nativeElement);
+
+      expect(buttons[0].hasAttribute('hide-margin')).toBe(false);
+      expect(buttons[1].hasAttribute('hide-margin')).toBe(true);
+    });
+  });
+
+  describe('Actions prop with rest properties', () => {
+    it('passes rest properties to cds-ng-button', async () => {
+      const { fixture } = await render(
+        `<cds-ng-action-set [actions]="actions"></cds-ng-action-set>`,
+        imports,
+        {
+          actions: [
+            {
+              kind: 'primary',
+              label: 'Submit',
+              'data-testid': 'submit-button',
+              'aria-label': 'Submit form',
+            },
+          ],
+        }
+      );
+      const button = wc(fixture.nativeElement).shadowRoot.querySelector(
+        `${prefix}-button`
+      );
+      expect(button).toBeTruthy();
+      expect(button?.getAttribute('kind')).toBe('primary');
+    });
+
+    it('handles onClick callback from actions', async () => {
+      const onClick = jest.fn();
+      const { fixture } = await render(
+        `<cds-ng-action-set [actions]="actions"></cds-ng-action-set>`,
+        imports,
+        { actions: [{ kind: 'primary', label: 'Submit', onClick }] }
+      );
+      const button = wc(fixture.nativeElement).shadowRoot.querySelector(
+        `${prefix}-button`
+      ) as HTMLElement;
+      button.click();
+      expect(onClick).toHaveBeenCalledTimes(1);
+    });
+
+    it('handles loading state', async () => {
+      const { fixture } = await render(
+        `<cds-ng-action-set [actions]="actions"></cds-ng-action-set>`,
+        imports,
+        { actions: [{ kind: 'primary', label: 'Submit', loading: true }] }
+      );
+      const button = wc(fixture.nativeElement).shadowRoot.querySelector(
+        `${prefix}-button`
+      );
+      expect(button?.hasAttribute('disabled')).toBe(true);
     });
   });
 });

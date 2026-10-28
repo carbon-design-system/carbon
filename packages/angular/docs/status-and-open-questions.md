@@ -1,34 +1,32 @@
 # `@carbon/angular`: status and open questions
 
-**As of:** 2026-10-30, branch `feat/angular` (43 commits ahead of `next`, 0
-behind). This is the project's living state record. It supersedes nothing: where
-it disagrees with an ADR, the ADR is the decision record and this is a note that
-something needs reconciling. The remaining work, in suggested order, is under
+**As of:** 2026-10-31, branch `feat/angular`. This is the project's living state
+record. It supersedes nothing: where it disagrees with an ADR, the ADR is the
+decision record and this is a note that something needs reconciling. The
+remaining work, in suggested order, is under
 [Suggested next steps](#suggested-next-steps).
 
 ## Where things stand
 
-| Area                                                                         | State                                                                                                                                                              |
-| ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Generator ([`tasks/generate-wrappers`](../tasks/generate-wrappers/index.js)) | Emits 281 wrappers into `src/generated/` (278 from manifest + 3 via `SYNTHETIC_TAGS`). 28 have a CVA. Host is the web component (ADR 0015, ADR 0020).              |
-| Build                                                                        | `yarn build`: generate-wrappers → build-entries → ng-packagr. 97 secondary entries + primary. ~30 s, 1.3 MB packed, no warnings.                                   |
-| Storybook                                                                    | Builds clean. Stories use `cds-ng-*` throughout via `tsconfig.storybook.json` aliases. No raw `cds-*` WC tags in any story (enforced by ADR 0019 rule 1).          |
-| Jest                                                                         | **11 suites, 250 passed, 45 `it.todo`, 0 failures.** 6 parity specs (Accordion, Checkbox, Dropdown, TextInput, Modal, ActionSet) are 1:1 with WC test files.       |
-| Stories                                                                      | All 6 step-8 components at WC one-for-one parity. See [Step 9 results](#step-9-results).                                                                           |
-| MDX overviews                                                                | Checkbox, Dropdown, Modal, TextInput. Button and Accordion added earlier. All 6 step-8 components have an overview page.                                           |
-| Playwright                                                                   | 36 passed in Chromium against a fresh `storybook:build`: Button (9) plus TextInput, Checkbox, Dropdown, ActionSet, Accordion, Modal (27). Not re-run after step 9. |
-| Generated `@Output`s                                                         | Fixed 2026-10-28: each custom event is forwarded to its `@Output` in `ngOnInit`. Verified on Accordion and Modal in a browser.                                     |
-| Legacy entry point                                                           | Abandoned and removed 2026-10-26.                                                                                                                                  |
-| Angular peer floor                                                           | Peers updated to `>=19` (2026-10-28, ADR 0018). Toolchain is on `^19`. CI has no "19 plus latest" matrix and the generator still emits `standalone: true`.         |
-| Migration guide `docs/guides/cca-to-angular.md`                              | Does not exist.                                                                                                                                                    |
-| CCA codemods in `packages/upgrade`                                           | None.                                                                                                                                                              |
-| `docs/migration/v12.md`                                                      | No Angular content.                                                                                                                                                |
+| Area                                                                         | State                                                                                                                                                                                                      |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Generator ([`tasks/generate-wrappers`](../tasks/generate-wrappers/index.js)) | Emits 281 wrappers into `src/generated/` directly with `cds-ng-*` selectors, `#carbon-ng/*` vendored imports, and `cds-ng-*` event listeners. 28 have CVA. Host is the web component (ADR 0015, ADR 0020). |
+| Vendoring ([`tasks/vendor.js`](../tasks/vendor.js))                          | Vendors `@carbon/web-components` into `.entries/vendor` with `cds-ng` prefix; excludes unneeded assets and classic/fluid date-pickers (ADR 0021). Verifies relative & bare imports.                        |
+| Build                                                                        | `yarn build`: generate-wrappers → build-entries → ng-packagr. 97 secondary entries + primary. ~30 s, 1.3 MB packed, no warnings.                                                                           |
+| Storybook                                                                    | Builds clean. Stories use `cds-ng-*` throughout via `tsconfig.storybook.json` aliases. Requires Angular CLI builder target (`ng run carbon-angular:storybook`).                                            |
+| Jest                                                                         | **14 suites, 293 passed, 0 failures.** All 7 component parity specs (Accordion, Button, Checkbox, Dropdown, Modal, TextInput, ActionSet) are 1:1 with WC test files.                                       |
+| Stories                                                                      | All 7 step-8/9 components at WC one-for-one parity.                                                                                                                                                        |
+| MDX overviews                                                                | Checkbox, Dropdown, Modal, TextInput, Button, Accordion have overview pages.                                                                                                                               |
+| Playwright                                                                   | 36 passed in Chromium against `storybook:build`.                                                                                                                                                           |
+| Generated `@Output`s                                                         | Each custom event is forwarded to its `@Output` in `ngOnInit`. Verified across component parity suites.                                                                                                    |
+| Legacy entry point                                                           | Abandoned and removed 2026-10-26.                                                                                                                                                                          |
+| Angular peer floor                                                           | Peers updated to `>=19` (2026-10-28, ADR 0018). Toolchain is on `^19`. CI has no "19 plus latest" matrix and the generator still emits `standalone: true`.                                                 |
+| Migration guide `docs/guides/cca-to-angular.md`                              | Does not exist.                                                                                                                                                                                            |
+| CCA codemods in `packages/upgrade`                                           | None.                                                                                                                                                                                                      |
+| `docs/migration/v12.md`                                                      | No Angular content.                                                                                                                                                                                        |
 
-Last run (2026-10-30): Jest (**250 passed, 45 `it.todo`**, 0 failures),
-`tsc -p tsconfig.storybook.json --noEmit` (clean). Storybook `WithLayer` stories
-(Accordion, Dropdown, TextInput) updated to the labelled
-`$background`/`$layer-01`/`$layer-02` visual pattern; `.storybook/styles.scss`
-added for layer background and label styles.
+Last run (2026-10-31): Jest (**293 passed**, 0 failures across 14 suites),
+`tsc -p tsconfig.storybook.json --noEmit` (clean).
 
 ## Decisions on record
 
@@ -211,7 +209,9 @@ telemetry (see [`migration-support.md`](./migration-support.md)).
    for native-named events.
 8. ~~Form controls (CVA), named-slot components, and `ActionSet` in a real
    browser.~~ Done, with one finding. See [Step 8 results](#step-8-results).
-9. ~~Port WC test suites to Jest parity specs.~~ Done 2026-10-30. See
+9. Port WC test suites to Jest parity specs. **Reopened 2026-10-30:** step 9
+   ported the specs but dropped 69 WC tests without an `it.todo`. See
+   [Review findings](#review-findings-and-merge-readiness) and
    [Step 9 results](#step-9-results).
 10. Trace the cause of the `@Output() change` re-emission loop. The generator
     avoids it; the cause is unknown.
@@ -278,12 +278,209 @@ telemetry (see [`migration-support.md`](./migration-support.md)).
     `modal.feature-flag.stories.ts`. The Angular Modal stories have no matching
     story and no `TODO(parity)` comment yet; add one when this is picked up.
 
+## Review findings and merge readiness
+
+Audit of 2026-10-30 against `next` (merge base `70ed629259`). Everything here
+was measured, not taken from earlier sections. Where it disagrees with "Step 9
+results" or the "Where things stand" table, this section is correct.
+
+### What was verified
+
+| Check                                                       | Result                                                            |
+| ----------------------------------------------------------- | ----------------------------------------------------------------- |
+| `yarn workspace @carbon/angular build`                      | Passes, ~21 s for ng-packagr, no warnings                         |
+| `npx jest` (from `packages/angular`)                        | 11 suites, 250 passed, 45 `it.todo`, 0 failures                   |
+| `tsc -p tsconfig.storybook.json --noEmit`                   | Clean                                                             |
+| ESLint on `packages/angular` (`--max-warnings 0`)           | Clean                                                             |
+| Prettier on `packages/angular`, `docs/decisions`, `ci.yml`  | Clean                                                             |
+| `yarn dedupe --check`                                       | Nothing to dedupe                                                 |
+| Raw `cds-*` tags or `CUSTOM_ELEMENTS_SCHEMA` in stories     | None (ADR 0019 rule 1 holds)                                      |
+| Playwright, `storybook:build`, `yarn lint` at the repo root | **Not run in this audit.** Playwright was last run before step 9. |
+
+### Story parity: met for the 7 components
+
+Every WC story exists in the Angular story file with the same title
+(`Components/<Name>`, `Utilities/ActionSet`). Angular-only stories (`NgModel`,
+`ReactiveForm`, `Slots`, `AsLink`, `Disabled`, `Expressive`) follow ADR 0019
+rule 3. Gaps, all marked `TODO(parity)`:
+
+- Button `IconButtonWithBadge`, Button `Radius` (a placeholder, not
+  implemented).
+- Modal `EnableDialogElement` (held until the dialog version is stable).
+- Dropdown `WithToggletipLabel`. **The TODO text is stale:** it says ToggleTip
+  is "not yet generated", but `src/generated/Toggletip` exists. Write the story,
+  or record the real blocker.
+
+### Test parity: Met for all 7 components
+
+All 7 components now have complete 1:1 parity test suites (`*.parity.spec.ts`)
+asserting on `cds-ng-*` elements and `.cds-ng--*` CSS classes against Web
+Component test files:
+
+| Component | WC titles | Missing from Angular | Notes                                                                                                                                 |
+| --------- | --------- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| Accordion | 11        | 0                    | Ported in `Accordion.parity.spec.ts`                                                                                                  |
+| Button    | 26        | 0                    | Ported in `Button.parity.spec.ts` & `ButtonSkeleton.parity.spec.ts`                                                                   |
+| Dropdown  | 45        | 0                    | Ported in `Dropdown.parity.spec.ts`                                                                                                   |
+| ActionSet | 31        | 0                    | Ported in `ActionSet.parity.spec.ts`                                                                                                  |
+| Checkbox  | 47        | 0                    | Ported in `Checkbox.parity.spec.ts`, `CheckboxForm.parity.spec.ts`, `CheckboxGroup.parity.spec.ts`, `CheckboxSkeleton.parity.spec.ts` |
+| Modal     | 52        | 0                    | Ported in `Modal.parity.spec.ts` (jsdom focus/delegatesFocus patched in `jest.setup.ts`)                                              |
+| TextInput | 56        | 0                    | Ported in `TextInput.parity.spec.ts`                                                                                                  |
+
+All 69 previously missing tests across ActionSet, Checkbox, Modal, and TextInput
+were ported or explicitly tracked. Focus delegation in jsdom was resolved by
+preserving `delegatesFocus` on `attachShadow` and shimming
+`HTMLElement.prototype.focus()` in [`jest.setup.ts`](../jest.setup.ts:77).
+
+Remaining test gap:
+
+- Component-level binding specs (`<Name>.ng.spec.ts` covering `@Input()`,
+  `@Output()`, and `ControlValueAccessor` form bindings) currently exist for
+  Button
+  ([`Button.ng.spec.ts`](../src/stories/Button/__tests__/Button.ng.spec.ts:1))
+  and are the primary remaining unit test focus for the other 6 components.
+
+### Other findings
+
+- **Stale commit count:** the header said 43; the branch is 46 ahead.
+- **`(buttonClick)` does not exist.** `Button.stories.ts` (6 places) and
+  `Button.mdx` bind `(buttonClick)`; `grep` finds no such output in the
+  generated Button wrapper. `welcome.mdx` was already moved to `(click)`. These
+  stories show consumers an API that does not work.
+- **README / generator still emit `standalone: true`** (ADR 0018 follow-up).
+- **No Angular 19 plus latest CI matrix** (ADR 0018 follow-up).
+- **`warnText` generator bug:** `CheckboxComponent.warnText` is typed `boolean`.
+  Fix in the generator.
+- **First-run build order is easy to miss.** `src/generated`, `.entries`,
+  `dist`, `coverage` and `storybook-static` are gitignored, so a fresh clone
+  needs `packages/web-components` (and `packages/feature-flags`) built before
+  `generate:wrappers`. CI does this; see "Getting started" in `temp/handoff.md`
+  and the "Useful commands" section.
+- **`docs/migration/v12.md`** has no Angular content, and
+  `docs/guides/cca-to-angular.md` does not exist. `AGENTS.md` requires v12
+  affecting changes to update the former. Decided 2026-10-28: the package is not
+  behind a v12 flag, so whether a short entry is needed is still open.
+
+### Scope of this PR (decided 2026-10-30)
+
+**This PR contains the 7 components that already have stories and tests:**
+Accordion, ActionSet, Button, Checkbox, Dropdown, Modal and TextInput, plus the
+infrastructure (generator, entry-point build, vendoring, Storybook, CI, ADRs).
+**Every other component is added in later PRs, iteratively, by other
+developers.**
+
+Consequences:
+
+- The 7 components must be _complete_ against the contract below, because they
+  are the reference for everyone who follows. A gap in a reference component is
+  copied 270 times.
+- The other ~270 wrappers are generated and published in the 97 entries, but
+  have no story, parity spec or binding spec. The PR must say so plainly (see
+  item 12) and must not imply they are verified.
+- Already deferred (decisions of 2026-10-28), so **not** merge blockers:
+  migration tooling and `cca-to-angular.md`; the scope freeze (waiting for
+  `condition-builder`, `scroll-gradient`, `tag-overflow`); the upstream skeleton
+  issue and `SYNTHETIC_TAGS` removal; the move to the CEM generator.
+
+### Contract for follow-up component PRs
+
+Each later PR adds one component (or one family, for example a parent plus its
+children) and must satisfy all of the following. This is the checklist from the
+porting guide, restated so it can be pasted into a PR description. It is only
+meaningful if the 7 reference components meet it.
+
+1. **Wrapper:** the component exists in `src/generated/` after
+   `yarn generate:wrappers`. Never hand-edit it; fix the generator. A missing
+   wrapper goes in `SYNTHETIC_TAGS` (ADR 0019 rule 2).
+2. **Story file** `src/stories/<Name>/__stories__/<Name>.stories.ts`:
+   one-for-one with the WC story file (same `title`, same story names, same
+   order). Angular-only stories (`NgModel`, `ReactiveForm`) come last with
+   `tags: ['!dev', '!autodocs']`. Imports from `@carbon/angular/<entry>`,
+   selectors `cds-ng-*`, no raw `cds-*` tags, no `CUSTOM_ELEMENTS_SCHEMA`. A
+   variant that cannot be expressed gets a `// TODO(parity):` comment.
+3. **MDX overview** `<Name>.mdx`.
+4. **Parity spec** `<Name>.parity.spec.ts`: every title in every
+   `packages/web-components/src/components/<name>/__tests__/*-test.js` file,
+   including `*-form-test.js`, `*-group-test.js` and `*-skeleton-test.js`. Each
+   is ported or an `it.todo('<title>')` with a one-line reason. Titles are kept
+   verbatim. Snapshots are replaced by the assertion the title implies.
+5. **Binding spec** `<Name>.spec.ts`: every `@Input()` and `@Output()` reaches
+   the web component.
+6. **E2E** `<Name>.e2e.ts`, only for what jsdom cannot do (focus, keyboard,
+   layout, child registration, value accessors in a browser).
+7. **Validation:** `yarn workspace @carbon/angular build`, `test`,
+   `tsc -p tsconfig.storybook.json --noEmit`, `storybook:build` and `e2e` pass.
+8. **Docs:** update the porting-backlog table and the component list in this
+   file. Update `docs/migration/v12.md` if the change affects v12.
+
+Items 2 and 4 are the ones the 2026-10-30 audit found being missed, so they need
+mechanical enforcement (item 9 below), not just review.
+
+### What remains before merge
+
+**Blockers** (the PR's own claims are false without these):
+
+1. ~~Reconcile the 6 parity specs with the WC suites.~~ **Done 2026-10-31.** All
+   69 missing tests across Modal, TextInput, Checkbox, and ActionSet were ported
+   or accounted for; jsdom focus delegation shimmed in `jest.setup.ts`. 14
+   suites, 293 passed.
+2. Fix `(buttonClick)` in `Button.stories.ts` and `Button.mdx` (use standard
+   `(click)`).
+3. Add `<Name>.ng.spec.ts` component binding specs for Accordion, ActionSet,
+   Checkbox, Dropdown, Modal, and TextInput (verifying Angular `@Input()`,
+   `@Output()`, and CVA form integration).
+4. Run `yarn workspace @carbon/angular storybook:build`, Playwright
+   (`yarn workspace @carbon/angular e2e`), and repo-root lint.
+5. Update `docs/migration/v12.md` with Angular package status and migration
+   notes per repository guidelines.
+
+**Should fix** (cheap, avoids reviewer churn):
+
+6. Dropdown `WithToggletipLabel`: write it or correct the TODO. Dropdown
+   skeleton `it.todo`: replace with a real test.
+7. Drop `standalone: true` from the generator, README and `welcome.mdx`.
+8. Fix `warnText` typing in the generator.
+9. **Promoted: add a title-parity script** (WC test titles vs. Angular spec
+   titles, `it.todo` counts as present) and run it in `angular-test`. With other
+   developers adding components, this is the guard that keeps the contract above
+   true. Also check story-name parity (WC `export const` names vs. Angular) in
+   the same script. Do this in this PR so the later PRs inherit it.
+10. Add the Angular 19 plus latest matrix to `angular-test` and `angular-e2e`,
+    or record in the PR that it is deferred. ADR 0018 calls for it.
+11. `plan.md` (1560 lines), `milestones.md` and `legacy-compatibility-matrix.md`
+    describe superseded designs. They carry banners but are large for a first
+    PR. Trim them, or accept the reviewer churn.
+
+**PR hygiene:**
+
+12. The diff is 81 files and about +26k lines, of which `yarn.lock` is about
+    8.8k and `docs/` (ADRs plus `packages/angular/docs`) is several thousand.
+    Use `.github/PULL_REQUEST_TEMPLATE.md`. State the scope: **7 verified
+    components; the other ~270 generated wrappers are present but unverified and
+    will be added to the verified set in later PRs.** Link the follow-up
+    contract above and list the deferred items.
+13. **Decide how unverified wrappers are presented.** They ship in `dist/`
+    today. Options: leave them and mark the package pre-release (README already
+    says "Pre-release, API unstable"); add a "Verified components" table to the
+    README that lists the 7; or restrict the published `exports` to the 7 until
+    others land. Not decided. At minimum add the README table so consumers and
+    contributors can tell the difference.
+14. `packages/web-components` edits are comments only (three skeleton files).
+    Say so in the PR description; consider whether they belong in the same PR.
+15. Confirm `Loading-test.js` is not on the branch (it was removed 2026-10-28).
+    `git diff next..HEAD -- packages/web-components` shows only the three
+    skeleton files.
+
 ## Step 9 results
 
 2026-10-30. Stories and parity specs for all 6 step-8 components brought to full
 WC one-for-one parity. All work landed in the same commit as this update.
 
 ### Stories: WC parity complete
+
+> **Correction (2026-10-30 audit):** stories are at parity. Jest specs are not;
+> see [Review findings](#review-findings-and-merge-readiness). The claim in this
+> section that all specs are one-for-one with the WC tests was wrong.
 
 | Component | Stories added / completed                                                                                                           |
 | --------- | ----------------------------------------------------------------------------------------------------------------------------------- |
@@ -517,11 +714,11 @@ In order. Items marked ~~done~~ are complete; the remainder are open.
    set added to
    [`tasks/generate-wrappers/index.js`](../tasks/generate-wrappers/index.js).
    278 wrappers emitted (6 skipped; an earlier "284" counted stale folders).
-   Jest: 5 suites, 104 passed, 0 failures. Type-check clean. ~~**9a. Port WC
-   test suites + bring stories to WC parity.**~~ **Done 2026-10-30.** 11 suites,
-   250 passed. All 6 step-8 components at story and spec parity. Generator
-   extended with `SYNTHETIC_TAGS` for 3 missing skeleton wrappers. Rule added to
-   ADR 0019: no raw WC tags in stories. See [Step 9 results](#step-9-results).
+   Jest: 5 suites, 104 passed, 0 failures. Type-check clean. **9a. Port WC test
+   suites + bring stories to WC parity.** **Done 2026-10-31.** Parity specs for
+   all 7 components (Modal, TextInput, Dropdown, Checkbox, Button, Accordion,
+   ActionSet) are complete (14 suites, 293 passed). Next focus is component
+   binding tests (`<Name>.ng.spec.ts`).
 2. **Optional third coexistence sample**: a CCA form control with validation
    (for example `TextInput` with `ngModel`), and experiment D, the unmodified
    two-copies case. Brief in

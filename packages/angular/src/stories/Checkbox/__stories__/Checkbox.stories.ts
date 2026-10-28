@@ -417,3 +417,56 @@ export const ReactiveForm: StoryObj<Record<string, unknown>> = {
     `,
   }),
 };
+
+// FormAssociation: used by Checkbox.e2e.ts. Browser coverage for the WC
+// `checkbox-form-test.js` tests, which jsdom cannot run (see
+// CheckboxForm.parity.spec.ts). Each native <form> backs one test. `ngNoForm`
+// stops Angular's NgForm directive from intercepting them.
+export const FormAssociation: StoryObj<Record<string, unknown>> = {
+  tags: ['!dev', '!autodocs'],
+  render: () => ({
+    template: `
+      <form ngNoForm data-testid="checked">
+        <cds-ng-checkbox name="a" value="v" checked>Label</cds-ng-checkbox>
+      </form>
+      <form ngNoForm data-testid="default-value">
+        <cds-ng-checkbox name="a" checked>Label</cds-ng-checkbox>
+      </form>
+      <form ngNoForm data-testid="unchecked-or-disabled">
+        <cds-ng-checkbox name="a" value="v">Label</cds-ng-checkbox>
+        <cds-ng-checkbox name="b" value="v" checked disabled>Label</cds-ng-checkbox>
+      </form>
+      <form ngNoForm data-testid="name-property">
+        <cds-ng-checkbox value="v" checked>Label</cds-ng-checkbox>
+      </form>
+      <form ngNoForm data-testid="sync">
+        <cds-ng-checkbox name="a" value="v">Label</cds-ng-checkbox>
+      </form>
+      <form ngNoForm data-testid="elements">
+        <cds-ng-checkbox name="a">Label</cds-ng-checkbox>
+      </form>
+      <form ngNoForm data-testid="label-for">
+        <label for="cb-label-for" id="lbl-label-for">Label</label>
+        <cds-ng-checkbox id="cb-label-for" name="a"></cds-ng-checkbox>
+      </form>
+      <form ngNoForm data-testid="reset">
+        <cds-ng-checkbox name="a" value="v" checked>Label</cds-ng-checkbox>
+        <cds-ng-checkbox name="b" value="v">Label</cds-ng-checkbox>
+      </form>
+      <form ngNoForm data-testid="fieldset-submit">
+        <fieldset disabled>
+          <cds-ng-checkbox name="a" value="v" checked>Label</cds-ng-checkbox>
+        </fieldset>
+      </form>
+      <form ngNoForm data-testid="fieldset-state">
+        <fieldset disabled>
+          <cds-ng-checkbox name="a">Label</cds-ng-checkbox>
+          <cds-ng-checkbox name="b" disabled>Label</cds-ng-checkbox>
+        </fieldset>
+      </form>
+      <form ngNoForm data-testid="validity">
+        <cds-ng-checkbox name="a" value="v">Label</cds-ng-checkbox>
+      </form>
+    `,
+  }),
+};

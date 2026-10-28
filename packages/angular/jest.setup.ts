@@ -58,3 +58,42 @@ if (typeof ResizeObserver === 'undefined') {
     disconnect() {}
   };
 }
+
+/**
+ * jsdom does not implement `Element.prototype.scrollIntoView`. `cds-ai-label`
+ * (`CDSAILabel`, from the toggletip) calls it in `updated()`, and the resulting
+ * TypeError is an uncaught exception that ends the Jest worker. Shim it as a
+ * no-op; scrolling is layout behavior jsdom cannot verify anyway.
+ */
+if (typeof Element.prototype.scrollIntoView !== 'function') {
+  Element.prototype.scrollIntoView = () => undefined;
+}
+
+/**
+ * jsdom does not implement `delegatesFocus`. In real browsers, calling
+ * `focus()` on an element with `shadowRoot.delegatesFocus` sets it as
+ * `document.activeElement`. In jsdom, `attachShadow` drops `delegatesFocus`
+ * and `super.focus()` on a custom element without `tabIndex` is a no-op.
+ */
+const nativeAttachShadow = Element.prototype.attachShadow;
+Element.prototype.attachShadow = function patchedAttachShadow(
+  init: ShadowRootInit
+) {
+  const shadowRoot = nativeAttachShadow.call(this, init);
+  if (init && 'delegatesFocus' in init) {
+    Object.defineProperty(shadowRoot, 'delegatesFocus', {
+      value: init.delegatesFocus,
+      configurable: true,
+      writable: true,
+    });
+  }
+  return shadowRoot;
+};
+
+const nativeFocus = HTMLElement.prototype.focus;
+HTMLElement.prototype.focus = function patchedFocus(options?: FocusOptions) {
+  if (this.shadowRoot?.delegatesFocus && !this.hasAttribute('tabindex')) {
+    this.setAttribute('tabindex', '0');
+  }
+  nativeFocus.call(this, options);
+};

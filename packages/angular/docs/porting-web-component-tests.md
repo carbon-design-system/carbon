@@ -11,7 +11,7 @@ For each component you build out, you ship **three** things together:
 | ---------------------------- | ---------------------------------------------------- | --------------------------------------------------------------------------------- |
 | Stories                      | `src/stories/<Name>/__stories__/<Name>.stories.ts`   | See [ADR 0019](../../../docs/decisions/0019-angular-storybook-story-authoring.md) |
 | **Parity spec** (this guide) | `src/stories/<Name>/__tests__/<Name>.parity.spec.ts` | Port of the WC unit tests, run in Jest                                            |
-| Binding spec                 | `src/stories/<Name>/__tests__/<Name>.spec.ts`        | Every `@Input()` / `@Output()` reaches the WC                                     |
+| Binding spec                 | `src/stories/<Name>/__tests__/<Name>.ng.spec.ts`     | Every `@Input()` / `@Output()` reaches the WC                                     |
 | E2E (as needed)              | `src/stories/<Name>/__tests__/<Name>.e2e.ts`         | Layout, focus, keyboard — things jsdom cannot do                                  |
 
 The Button is the reference implementation. Open
@@ -57,27 +57,27 @@ verbatim. Matching titles make it easy to diff the two suites later.
 
 | Web component test                                | Angular parity test                                                                 |
 | ------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| `await fixture(html\`<cds-x foo="a">…</cds-x>\`)` | `await render('<cds-x foo="a">…</cds-x>', [XComponent])`                            |
+| `await fixture(html\`<cds-x foo="a">…</cds-x>\`)` | `await render('<cds-ng-x foo="a">…</cds-ng-x>', [XComponent])`                      |
 | `el.shadowRoot.querySelector('button')`           | `wc(el).shadowRoot.querySelector('button')` (see helpers below)                     |
 | `el.disabled = true; await el.updateComplete`     | `host.disabled = true; await update()` with `[disabled]="disabled"` in the template |
 | `expect(el).to.have.attribute('kind', 'ghost')`   | `expect(wc.getAttribute('kind')).toBe('ghost')`                                     |
-| `expect(x).to.have.class('foo')`                  | `expect(x.classList.contains('foo')).toBe(true)`                                    |
+| `expect(x).to.have.class('cds--foo')`             | `expect(x.classList.contains('cds-ng--foo')).toBe(true)`                            |
 | `expect(x).to.exist` / `to.not.exist`             | `toBeTruthy()` / `toBeNull()`                                                       |
 | `await expect(el).shadowDom.to.equalSnapshot()`   | Drop it — see "Snapshots" below                                                     |
 
 Define two tiny helpers at the top of each spec:
 
 ```ts
-// In the host-is-WC design (ADR 0015) the Angular wrapper's host IS the
-// web component — there is no inner cds-ng-* element.
+// In the host-is-WC design (ADR 0015, ADR 0020) the Angular wrapper's host IS the
+// web component (prefixed cds-ng-*).
 // TestBed places the component inside a fixture element, so we query down.
 const wc = (el: HTMLElement) =>
-  el.querySelector('cds-button') as HTMLElement & { shadowRoot: ShadowRoot };
+  el.querySelector('cds-ng-button') as HTMLElement & { shadowRoot: ShadowRoot };
 const inner = (el: HTMLElement, selector: string) =>
   wc(el).shadowRoot.querySelector(selector) as HTMLElement | null;
 ```
 
-`cds-<name>` is both the Angular selector and the web component tag. The host
+`cds-ng-<name>` is both the Angular selector and the web component tag. The host
 element IS the WC. **Always assert on the element's shadow DOM** by going
 through the `wc()` helper, not on Angular wrapper internals.
 
@@ -156,23 +156,25 @@ Two generator rules that have already caught real bugs:
 
 ## Porting backlog
 
-State as of 2026-10-28. Only Button has the full set. Everything else has
-generated wrappers and, for the six below, hand-written Playwright checks that
-were not derived from the WC tests.
+State as of 2026-10-30 (title-by-title comparison against the WC test files; see
+[`status-and-open-questions.md`](./status-and-open-questions.md#review-findings-and-merge-readiness)).
+A parity spec existing does not mean it is complete. "Missing" counts WC test
+titles that are neither ported nor an `it.todo`, which this guide forbids.
 
-| Component  | Parity spec | Binding spec       | E2E (hand-written, step 8) | WC tests to port                                                                                                      |
-| ---------- | ----------- | ------------------ | -------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| Button     | Done        | Done               | Done                       | None left (10 `it.todo`)                                                                                              |
-| Modal      | No          | `ModalFooter` only | Done                       | `modal/__tests__/modal-test.js`                                                                                       |
-| Accordion  | No          | One input only     | Done                       | `accordion/__tests__/accordion-test.js`                                                                               |
-| ActionSet  | No          | No                 | Done                       | `action-set/__tests__/action-set-test.js`                                                                             |
-| Checkbox   | No          | Value accessor     | Done                       | `checkbox/__tests__/checkbox-test.js`, `checkbox-form-test.js`, `checkbox-group-test.js`, `checkbox-skeleton-test.js` |
-| TextInput  | No          | Value accessor     | Done                       | `text-input/__tests__/`                                                                                               |
-| Dropdown   | No          | No                 | Done                       | `dropdown/__tests__/`                                                                                                 |
-| All others | No          | No                 | No                         | `<name>/__tests__/` for each of the ~270 remaining wrappers                                                           |
+| Component  | Parity spec | Missing WC tests | Binding spec  | E2E (hand-written) | Remaining work                                                                                            |
+| ---------- | ----------- | ---------------- | ------------- | ------------------ | --------------------------------------------------------------------------------------------------------- |
+| Button     | Complete    | 0 (3 expanded)   | Done          | Done               | 10 `it.todo` (8 RTL layout, 2 badge indicator)                                                            |
+| Accordion  | Complete    | 0                | One input     | Done               | Binding spec                                                                                              |
+| Dropdown   | Complete    | 0 (3 expanded)   | No            | Done               | Binding spec; skeleton `it.todo` has no WC source test                                                    |
+| ActionSet  | Partial     | **17**           | No            | Done               | Class and attribute tests, `warns when…`, hide-margin on focus, loading, `onClick`; binding spec          |
+| Checkbox   | Partial     | **22**           | Accessor      | Done               | All of `checkbox-form-test.js` (12), 9 of `checkbox-group-test.js`, 1 of `checkbox-test.js`; binding spec |
+| Modal      | Partial     | **14**           | `ModalFooter` | Done               | Focus on open, submit on Enter, `loading-status`, `no-fade`, body `tabindex`; binding spec                |
+| TextInput  | Partial     | **16**           | Accessor      | Done               | All of `text-input-form-test.js` (12), 4 of `text-input-skeleton-test.js`; binding spec                   |
+| All others | No          | n/a              | No            | No                 | `<name>/__tests__/` for each of the ~270 remaining wrappers                                               |
 
-Order suggestion: the six step 8 components first (their stories and e2e specs
-already exist), then the other 27 wrappers with a value accessor, then the
-composites that register children. Before porting file by file, cost a shared
-harness that runs a WC suite against its wrapper; at ~270 components, copying
-each file by hand is the expensive path.
+Order suggestion: close the 69 missing tests on the four partial components
+first, then the other 27 wrappers with a value accessor, then the composites
+that register children. Before porting file by file, cost a shared harness that
+runs a WC suite against its wrapper; at ~270 components, copying each file by
+hand is the expensive path. Add a title-parity script first so "missing" cannot
+grow unnoticed.

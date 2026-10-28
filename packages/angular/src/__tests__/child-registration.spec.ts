@@ -11,7 +11,7 @@ import { join } from 'node:path';
 /**
  * Regression for the generator importing class files instead of folder
  * barrels. Class files register nothing (ADR 0007), so child elements such as
- * `cds-dialog` were never defined for consumers who imported only the wrapper.
+ * `cds-ng-dialog` were never defined for consumers who imported only the wrapper.
  *
  * This file must import exactly one wrapper: jsdom's custom element registry is
  * per test file, so anything else imported here could mask a missing child.
@@ -19,16 +19,16 @@ import { join } from 'node:path';
 import '../generated/Modal';
 
 const GENERATED_DIR = join(__dirname, '../generated');
-const WC_ES_DIR = join(__dirname, '../../../web-components/es/components');
+const VENDOR_DIR = join(__dirname, '../../.entries/vendor');
 
 describe('web component registration through generated wrappers', () => {
   it('registers the children of a composite when only its wrapper is imported', () => {
     for (const tag of [
-      'cds-modal',
-      'cds-dialog',
-      'cds-modal-header',
-      'cds-modal-body',
-      'cds-modal-footer',
+      'cds-ng-modal',
+      'cds-ng-dialog',
+      'cds-ng-modal-header',
+      'cds-ng-modal-body',
+      'cds-ng-modal-footer',
     ]) {
       expect({ tag, defined: !!customElements.get(tag) }).toEqual({
         tag,
@@ -46,7 +46,7 @@ describe('web component registration through generated wrappers', () => {
       const file = join(GENERATED_DIR, dir.name, `${dir.name}.component.ts`);
       const source = readFileSync(file, 'utf8');
       const match = source.match(
-        /^import '@carbon\/web-components\/es\/(components\/[^']+)';$/m
+        /^import '#carbon-ng\/(components\/[^']+)';$/m
       );
       imports.push({ wrapper: dir.name, specifier: match?.[1] ?? '' });
     }
@@ -58,7 +58,7 @@ describe('web component registration through generated wrappers', () => {
     expect(notBarrels).toEqual([]);
 
     const unresolved = imports.filter(
-      ({ specifier }) => !existsSync(join(WC_ES_DIR, '..', specifier))
+      ({ specifier }) => !existsSync(join(VENDOR_DIR, specifier))
     );
     expect(unresolved).toEqual([]);
   });

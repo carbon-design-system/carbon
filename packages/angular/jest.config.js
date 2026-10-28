@@ -26,6 +26,7 @@ export default {
   // specs can assert on actual web component behavior. CI builds the package
   // first; locally run `yarn workspace @carbon/web-components build`.
   moduleNameMapper: {
+    '^#carbon-ng/(.*)$': '<rootDir>/.entries/vendor/$1',
     '\\.(css|scss)$': 'identity-obj-proxy',
   },
   transformIgnorePatterns: [

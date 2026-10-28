@@ -8,15 +8,9 @@
 /**
  * Layer 1 — Angular unit tests for ButtonComponent.
  *
- * Architecture (ADR 0015): the host element IS the web component. There is no
- * inner element. Every @Input() is forwarded to the host element as a property
- * via ngOnChanges.
- *
- * NOTE: these tests import from `src/generated/Button` directly and use the
- * `cds-button` selector from that source file. The published package exposes
- * `cds-ng-button` (from `.entries/`). The selector difference is intentional:
- * Jest tests the wrapper class logic; Storybook and e2e tests exercise the
- * consumer-facing `cds-ng-button` tag.
+ * Architecture (ADR 0015, ADR 0020): the host element IS the cds-ng-button web
+ * component. There is no inner element. Every @Input() is forwarded to the host
+ * element as a property via ngOnChanges.
  *
  * These tests use render() with bound templates to properly trigger ngOnChanges.
  * They assert that property forwarding is correct (the Angular input reaches the
@@ -31,26 +25,30 @@ import { render } from '../../../testing/render';
 const imports = [ButtonComponent];
 
 /**
- * The host element IS the cds-button web component (ADR 0015).
+ * The host element IS the cds-ng-button web component (ADR 0015, ADR 0020).
  * render() wraps the template in a fixture element, so we query inside it.
  */
 const host = (el: HTMLElement) =>
-  el.querySelector('cds-button') as HTMLElement & Record<string, any>;
+  el.querySelector('cds-ng-button') as HTMLElement & Record<string, any>;
 
 describe('ButtonComponent', () => {
   it('should create', async () => {
-    const { fixture } = await render(`<cds-button>text</cds-button>`, imports);
+    const { fixture } = await render(
+      `<cds-ng-button>text</cds-ng-button>`,
+      imports
+    );
     expect(host(fixture.nativeElement)).toBeTruthy();
   });
 
   // ─── Selector isolation ────────────────────────────────────────────────────
 
-  it('host element is the web component itself (no inner cds-ng-button)', async () => {
-    // ADR 0015: template = <ng-content /> only. The host IS the WC.
-    const { fixture } = await render(`<cds-button>text</cds-button>`, imports);
+  it('host element is the web component itself', async () => {
+    const { fixture } = await render(
+      `<cds-ng-button>text</cds-ng-button>`,
+      imports
+    );
     const el = host(fixture.nativeElement);
     expect(el).not.toBeNull();
-    expect(el.querySelector('cds-ng-button')).toBeNull();
   });
 
   // ─── tabIndex ─────────────────────────────────────────────────────────────
@@ -58,7 +56,7 @@ describe('ButtonComponent', () => {
 
   it('should forward [tabIndex] as a property on the host element', async () => {
     const { fixture } = await render(
-      `<cds-button [tabIndex]="-1">text</cds-button>`,
+      `<cds-ng-button [tabIndex]="-1">text</cds-ng-button>`,
       imports
     );
     expect(host(fixture.nativeElement).tabIndex).toBe(-1);
@@ -73,7 +71,7 @@ describe('ButtonComponent', () => {
       host: h,
       update,
     } = await render(
-      `<cds-button [disabled]="disabled">text</cds-button>`,
+      `<cds-ng-button [disabled]="disabled">text</cds-ng-button>`,
       imports,
       { disabled: false }
     );
@@ -88,7 +86,10 @@ describe('ButtonComponent', () => {
   // Mirrors: WC "should render with a default button type of button"
 
   it('should default [type] to "button"', async () => {
-    const { fixture } = await render(`<cds-button>text</cds-button>`, imports);
+    const { fixture } = await render(
+      `<cds-ng-button>text</cds-ng-button>`,
+      imports
+    );
     // Default is set by the component and forwarded on first ngOnChanges.
     expect(host(fixture.nativeElement).type).toBe('button');
   });
@@ -97,7 +98,7 @@ describe('ButtonComponent', () => {
   buttonTypes.forEach((type) => {
     it(`should forward [type]="${type}" as a property`, async () => {
       const { fixture } = await render(
-        `<cds-button type="${type}">text</cds-button>`,
+        `<cds-ng-button type="${type}">text</cds-ng-button>`,
         imports
       );
       expect(host(fixture.nativeElement).type).toBe(type);
@@ -108,7 +109,7 @@ describe('ButtonComponent', () => {
 
   it('should forward [href] as a property on the host element', async () => {
     const { fixture } = await render(
-      `<cds-button href="https://example.com">text</cds-button>`,
+      `<cds-ng-button href="https://example.com">text</cds-ng-button>`,
       imports
     );
     expect(host(fixture.nativeElement).href).toBe('https://example.com');
@@ -117,7 +118,10 @@ describe('ButtonComponent', () => {
   // ─── kind ─────────────────────────────────────────────────────────────────
 
   it('should default [kind] to "primary"', async () => {
-    const { fixture } = await render(`<cds-button>text</cds-button>`, imports);
+    const { fixture } = await render(
+      `<cds-ng-button>text</cds-ng-button>`,
+      imports
+    );
     expect(host(fixture.nativeElement).kind).toBe('primary');
   });
 
@@ -135,7 +139,7 @@ describe('ButtonComponent', () => {
   kinds.forEach((kind) => {
     it(`should forward [kind]="${kind}" as a property`, async () => {
       const { fixture } = await render(
-        `<cds-button kind="${kind}">text</cds-button>`,
+        `<cds-ng-button kind="${kind}">text</cds-ng-button>`,
         imports
       );
       expect(host(fixture.nativeElement).kind).toBe(kind);
@@ -146,7 +150,7 @@ describe('ButtonComponent', () => {
 
   it('should forward [dangerDescription] as a property', async () => {
     const { fixture } = await render(
-      `<cds-button dangerDescription="Gefahr">text</cds-button>`,
+      `<cds-ng-button dangerDescription="Gefahr">text</cds-ng-button>`,
       imports
     );
     expect(host(fixture.nativeElement).dangerDescription).toBe('Gefahr');
@@ -155,7 +159,10 @@ describe('ButtonComponent', () => {
   // ─── size ─────────────────────────────────────────────────────────────────
 
   it('should default [size] to "lg"', async () => {
-    const { fixture } = await render(`<cds-button>text</cds-button>`, imports);
+    const { fixture } = await render(
+      `<cds-ng-button>text</cds-ng-button>`,
+      imports
+    );
     expect(host(fixture.nativeElement).size).toBe('lg');
   });
 
@@ -164,7 +171,7 @@ describe('ButtonComponent', () => {
   sizes.forEach((size) => {
     it(`should forward [size]="${size}" as a property`, async () => {
       const { fixture } = await render(
-        `<cds-button size="${size}">text</cds-button>`,
+        `<cds-ng-button size="${size}">text</cds-ng-button>`,
         imports
       );
       expect(host(fixture.nativeElement).size).toBe(size);
@@ -179,7 +186,7 @@ describe('ButtonComponent', () => {
       host: h,
       update,
     } = await render(
-      `<cds-button [isExpressive]="isExpressive">text</cds-button>`,
+      `<cds-ng-button [isExpressive]="isExpressive">text</cds-ng-button>`,
       imports,
       { isExpressive: false }
     );
@@ -194,7 +201,7 @@ describe('ButtonComponent', () => {
 
   it('should forward [isSelected] as a property', async () => {
     const { fixture } = await render(
-      `<cds-button isSelected>text</cds-button>`,
+      `<cds-ng-button isSelected>text</cds-ng-button>`,
       imports
     );
     // booleanAttribute transform: bare attribute → true
@@ -205,7 +212,7 @@ describe('ButtonComponent', () => {
 
   it('should forward [tooltipText] as a property', async () => {
     const { fixture } = await render(
-      `<cds-button tooltipText="Add item">text</cds-button>`,
+      `<cds-ng-button tooltipText="Add item">text</cds-ng-button>`,
       imports
     );
     expect(host(fixture.nativeElement).tooltipText).toBe('Add item');
@@ -215,7 +222,7 @@ describe('ButtonComponent', () => {
   tooltipPositions.forEach((position) => {
     it(`should forward [tooltipPosition]="${position}" as a property`, async () => {
       const { fixture } = await render(
-        `<cds-button tooltipPosition="${position}">text</cds-button>`,
+        `<cds-ng-button tooltipPosition="${position}">text</cds-ng-button>`,
         imports
       );
       expect(host(fixture.nativeElement).tooltipPosition).toBe(position);
@@ -226,7 +233,7 @@ describe('ButtonComponent', () => {
   tooltipAlignments.forEach((alignment) => {
     it(`should forward [tooltipAlignment]="${alignment}" as a property`, async () => {
       const { fixture } = await render(
-        `<cds-button tooltipAlignment="${alignment}">text</cds-button>`,
+        `<cds-ng-button tooltipAlignment="${alignment}">text</cds-ng-button>`,
         imports
       );
       expect(host(fixture.nativeElement).tooltipAlignment).toBe(alignment);
@@ -235,7 +242,7 @@ describe('ButtonComponent', () => {
 
   it('should accept [tooltipAlignment] regardless of hasIconOnly', async () => {
     const { fixture } = await render(
-      `<cds-button tooltipAlignment="left">text</cds-button>`,
+      `<cds-ng-button tooltipAlignment="left">text</cds-ng-button>`,
       imports
     );
     expect(host(fixture.nativeElement).tooltipAlignment).toBe('left');
@@ -245,7 +252,7 @@ describe('ButtonComponent', () => {
 
   it('should forward [openTooltip] as a property', async () => {
     const { fixture } = await render(
-      `<cds-button [openTooltip]="true">text</cds-button>`,
+      `<cds-ng-button [openTooltip]="true">text</cds-ng-button>`,
       imports
     );
     expect(host(fixture.nativeElement).openTooltip).toBe(true);
@@ -255,7 +262,7 @@ describe('ButtonComponent', () => {
 
   it('should forward [batchAction]=true as a property', async () => {
     const { fixture } = await render(
-      `<cds-button [batchAction]="true">text</cds-button>`,
+      `<cds-ng-button [batchAction]="true">text</cds-ng-button>`,
       imports
     );
     expect(host(fixture.nativeElement).batchAction).toBe(true);
@@ -265,7 +272,7 @@ describe('ButtonComponent', () => {
 
   it('should forward [download] as a property', async () => {
     const { fixture } = await render(
-      `<cds-button download="file.pdf">text</cds-button>`,
+      `<cds-ng-button download="file.pdf">text</cds-ng-button>`,
       imports
     );
     expect(host(fixture.nativeElement).download).toBe('file.pdf');
@@ -273,7 +280,7 @@ describe('ButtonComponent', () => {
 
   it('should forward [hreflang] as a property', async () => {
     const { fixture } = await render(
-      `<cds-button hreflang="en">text</cds-button>`,
+      `<cds-ng-button hreflang="en">text</cds-ng-button>`,
       imports
     );
     expect(host(fixture.nativeElement).hreflang).toBe('en');
@@ -281,7 +288,7 @@ describe('ButtonComponent', () => {
 
   it('should forward [ping] as a property', async () => {
     const { fixture } = await render(
-      `<cds-button ping="https://example.com/ping">text</cds-button>`,
+      `<cds-ng-button ping="https://example.com/ping">text</cds-ng-button>`,
       imports
     );
     expect(host(fixture.nativeElement).ping).toBe('https://example.com/ping');
@@ -289,7 +296,7 @@ describe('ButtonComponent', () => {
 
   it('should forward [rel] as a property', async () => {
     const { fixture } = await render(
-      `<cds-button rel="noopener noreferrer">text</cds-button>`,
+      `<cds-ng-button rel="noopener noreferrer">text</cds-ng-button>`,
       imports
     );
     expect(host(fixture.nativeElement).rel).toBe('noopener noreferrer');
@@ -297,7 +304,7 @@ describe('ButtonComponent', () => {
 
   it('should forward [target] as a property', async () => {
     const { fixture } = await render(
-      `<cds-button target="_blank">text</cds-button>`,
+      `<cds-ng-button target="_blank">text</cds-ng-button>`,
       imports
     );
     expect(host(fixture.nativeElement).target).toBe('_blank');
@@ -305,7 +312,7 @@ describe('ButtonComponent', () => {
 
   it('should forward [linkRole] as a property', async () => {
     const { fixture } = await render(
-      `<cds-button linkRole="link">text</cds-button>`,
+      `<cds-ng-button linkRole="link">text</cds-ng-button>`,
       imports
     );
     expect(host(fixture.nativeElement).linkRole).toBe('link');

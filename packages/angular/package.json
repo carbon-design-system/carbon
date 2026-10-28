@@ -2,6 +2,7 @@
   "name": "@carbon/angular",
   "description": "Angular components for the Carbon Design System",
   "version": "0.0.0-prerelease.0",
+  "type": "module",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
@@ -19,6 +20,9 @@
   "publishConfig": {
     "access": "public",
     "directory": "dist"
+  },
+  "imports": {
+    "#carbon-ng/*": "./.entries/vendor/*"
   },
   "scripts": {
     "build": "node tasks/generate-wrappers/index.js && node tasks/build-entries/index.js && ng-packagr -p .entries/ng-package.json",

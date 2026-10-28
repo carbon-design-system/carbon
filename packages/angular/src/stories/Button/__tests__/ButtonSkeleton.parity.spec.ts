@@ -11,51 +11,40 @@
  * Source : packages/web-components/src/components/button/__tests__/button-skeleton-test.js
  * Guide  : packages/angular/docs/porting-web-component-tests.md
  *
- * `cds-button-skeleton` is not in the Custom Elements Manifest and therefore
- * has no generated Angular wrapper. It is registered as a side effect of
- * importing the `@carbon/web-components` button barrel. The tests run against
- * the web component directly via `render()`, which provides the same Angular
- * testing environment (TestBed + jsdom + real WC) as the other parity specs.
- *
- * In the host-is-WC design (ADR 0015) the rendered element IS the WC — there
- * is no inner element. Shadow DOM is queried directly on the `cds-button-skeleton`
- * element, exactly as the WC tests do.
- *
- * Snapshots (`await expect(el).shadowDom.to.equalSnapshot()`) are dropped per
- * the porting guide; they depend on the web component internals and are covered
- * by the WC suite itself.
+ * `cds-ng-button-skeleton` is registered as a side effect of
+ * importing the `#carbon-ng/components/button/index.js` barrel.
  */
 
-// Register cds-button-skeleton (and cds-button / cds-button-set) as a side effect.
-import '@carbon/web-components/es/components/button/index.js';
+// Register cds-ng-button-skeleton (and cds-ng-button / cds-ng-button-set) as a side effect.
+import '#carbon-ng/components/button/index.js';
 import { render } from '../../../testing/render';
 
-/** Returns the shadow root of the cds-button-skeleton host element. */
+/** Returns the shadow root of the cds-ng-button-skeleton host element. */
 function shadow(el: HTMLElement): HTMLElement | null {
   // render() wraps the template in a host fixture; query for the WC.
-  const host = el.querySelector('cds-button-skeleton') as HTMLElement & {
+  const host = el.querySelector('cds-ng-button-skeleton') as HTMLElement & {
     shadowRoot: ShadowRoot;
   };
   return host?.shadowRoot as unknown as HTMLElement;
 }
 
-describe('cds-button-skeleton', () => {
+describe('cds-ng-button-skeleton', () => {
   const sizes: [string, string][] = [
-    ['sm', 'cds--btn--sm'],
-    ['md', 'cds--btn--md'],
-    ['lg', 'cds--btn--lg'],
-    ['xl', 'cds--btn--xl'],
-    ['2xl', 'cds--btn--2xl'],
+    ['sm', 'cds-ng--btn--sm'],
+    ['md', 'cds-ng--btn--md'],
+    ['lg', 'cds-ng--btn--lg'],
+    ['xl', 'cds-ng--btn--xl'],
+    ['2xl', 'cds-ng--btn--2xl'],
   ];
 
   sizes.forEach(([size, className]) => {
     it(`should set the expected classes for the size: \`${size}\``, async () => {
       const { fixture } = await render(
-        `<cds-button-skeleton size="${size}"></cds-button-skeleton>`,
+        `<cds-ng-button-skeleton size="${size}"></cds-ng-button-skeleton>`,
         [] // no Angular wrappers — bare WC registration from the import above
       );
       const host = fixture.nativeElement.querySelector(
-        'cds-button-skeleton'
+        'cds-ng-button-skeleton'
       ) as HTMLElement;
 
       expect(host.getAttribute('size')).toBe(size);
@@ -70,11 +59,11 @@ describe('cds-button-skeleton', () => {
   describe('link variant', () => {
     it('should render an <a> when `href` is passed as a prop', async () => {
       const { fixture } = await render(
-        `<cds-button-skeleton href="/"></cds-button-skeleton>`,
+        `<cds-ng-button-skeleton href="/"></cds-ng-button-skeleton>`,
         []
       );
       const host = fixture.nativeElement.querySelector(
-        'cds-button-skeleton'
+        'cds-ng-button-skeleton'
       ) as HTMLElement;
       const link = (host as any).shadowRoot?.querySelector('a');
       expect(link).toBeTruthy();
@@ -84,11 +73,11 @@ describe('cds-button-skeleton', () => {
 
     it('should render with [role="button"]', async () => {
       const { fixture } = await render(
-        `<cds-button-skeleton href="/"></cds-button-skeleton>`,
+        `<cds-ng-button-skeleton href="/"></cds-ng-button-skeleton>`,
         []
       );
       const host = fixture.nativeElement.querySelector(
-        'cds-button-skeleton'
+        'cds-ng-button-skeleton'
       ) as HTMLElement;
       const link = (host as any).shadowRoot?.querySelector('a');
       expect(link).toBeTruthy();

@@ -13,10 +13,9 @@
  *
  * Each `it` keeps the WC test's title. The WC test renders
  * `<cds-button ...>` with open-wc `fixture(html\`...\`)`. This test renders
- * the Angular `<cds-button>` wrapper. Under ADR 0015 the host element IS the
- * web component — there is no inner `cds-ng-button`. Assertions run against
- * the shadow DOM of the `cds-button` host element directly, matching the
- * original WC tests.
+ * the Angular `<cds-ng-button>` wrapper. Under ADR 0015 and ADR 0020 the host
+ * element IS the cds-ng-button web component. Assertions run against the shadow DOM
+ * of the `cds-ng-button` host element directly, matching the original WC tests.
  *
  * Ported 1:1 unless noted. Tests that cannot run in jsdom are `it.todo` with a
  * reason, and are covered by Playwright (`Button.e2e.ts`) where marked.
@@ -28,22 +27,21 @@ import { render } from '../../../testing/render';
 const imports = [ButtonComponent];
 
 /**
- * The web component element. In the host-is-WC design (ADR 0015) the Angular
- * wrapper's host IS the `cds-button` custom element — there is no inner
- * `cds-ng-button`. TestBed wraps the component in a fixture element, so we
- * query for the first `cds-button` inside it.
+ * The web component element. In the host-is-WC design (ADR 0015, ADR 0020) the Angular
+ * wrapper's host IS the `cds-ng-button` custom element. TestBed wraps the component
+ * in a fixture element, so we query for the first `cds-ng-button` inside it.
  */
 const wc = (el: HTMLElement) =>
-  el.querySelector('cds-button') as HTMLElement & {
+  el.querySelector('cds-ng-button') as HTMLElement & {
     shadowRoot: ShadowRoot;
   };
 const inner = (el: HTMLElement, selector: string) =>
   wc(el).shadowRoot.querySelector(selector) as HTMLElement | null;
 
-describe('cds-button (parity with web-components button-test.js)', () => {
+describe('cds-ng-button (parity with web-components button-test.js)', () => {
   it('should support a custom tabIndex through props', async () => {
     const { fixture } = await render(
-      `<cds-button [tabIndex]="-1">test</cds-button>`,
+      `<cds-ng-button [tabIndex]="-1">test</cds-ng-button>`,
       imports
     );
     expect(wc(fixture.nativeElement).getAttribute('tab-index')).toBe('-1');
@@ -51,20 +49,23 @@ describe('cds-button (parity with web-components button-test.js)', () => {
 
   it('should support a custom className on the outermost element', async () => {
     const { query } = await render(
-      `<cds-button class="custom-class">test</cds-button>`,
+      `<cds-ng-button class="custom-class">test</cds-ng-button>`,
       imports
     );
-    expect(query('cds-button').classList).toContain('custom-class');
+    expect(query('cds-ng-button').classList).toContain('custom-class');
   });
 
   it('should render an element with the button role', async () => {
-    const { fixture } = await render(`<cds-button>test</cds-button>`, imports);
+    const { fixture } = await render(
+      `<cds-ng-button>test</cds-ng-button>`,
+      imports
+    );
     expect(inner(fixture.nativeElement, 'button')).toBeTruthy();
   });
 
   it('should use the disabled prop to set disabled on the <button>', async () => {
     const { fixture, host, update } = await render(
-      `<cds-button [disabled]="disabled">test</cds-button>`,
+      `<cds-ng-button [disabled]="disabled">test</cds-ng-button>`,
       imports,
       { disabled: false }
     );
@@ -77,7 +78,10 @@ describe('cds-button (parity with web-components button-test.js)', () => {
   });
 
   it('should render with a default button type of button', async () => {
-    const { fixture } = await render(`<cds-button>test</cds-button>`, imports);
+    const { fixture } = await render(
+      `<cds-ng-button>test</cds-ng-button>`,
+      imports
+    );
     expect(inner(fixture.nativeElement, 'button')!.getAttribute('type')).toBe(
       'button'
     );
@@ -86,7 +90,7 @@ describe('cds-button (parity with web-components button-test.js)', () => {
   ['button', 'submit', 'reset'].forEach((type) => {
     it(`should support changing the button type to ${type} with the \`type\` prop`, async () => {
       const { fixture } = await render(
-        `<cds-button type="${type}">test</cds-button>`,
+        `<cds-ng-button type="${type}">test</cds-ng-button>`,
         imports
       );
       expect(inner(fixture.nativeElement, 'button')!.getAttribute('type')).toBe(
@@ -97,7 +101,7 @@ describe('cds-button (parity with web-components button-test.js)', () => {
 
   it('should render as an element with the role of `link` when the `href` prop is used', async () => {
     const { fixture } = await render(
-      `<cds-button href="/">test</cds-button>`,
+      `<cds-ng-button href="/">test</cds-ng-button>`,
       imports
     );
     const link = inner(fixture.nativeElement, 'a');
@@ -107,7 +111,7 @@ describe('cds-button (parity with web-components button-test.js)', () => {
 
   it('should not error on tooltipAlignment even when hasIconOnly=false', async () => {
     const { fixture } = await render(
-      `<cds-button tooltipAlignment="start"></cds-button>`,
+      `<cds-ng-button tooltipAlignment="start"></cds-ng-button>`,
       imports
     );
     expect(wc(fixture.nativeElement).getAttribute('tooltip-alignment')).toBe(
@@ -116,20 +120,20 @@ describe('cds-button (parity with web-components button-test.js)', () => {
   });
 
   const kinds = [
-    ['primary', 'cds--btn--primary'],
-    ['secondary', 'cds--btn--secondary'],
-    ['ghost', 'cds--btn--ghost'],
-    ['danger', 'cds--btn--danger'],
-    ['danger--primary', 'cds--btn--danger--primary'],
-    ['danger-ghost', 'cds--btn--danger--ghost'],
-    ['danger-tertiary', 'cds--btn--danger--tertiary'],
-    ['tertiary', 'cds--btn--tertiary'],
+    ['primary', 'cds-ng--btn--primary'],
+    ['secondary', 'cds-ng--btn--secondary'],
+    ['ghost', 'cds-ng--btn--ghost'],
+    ['danger', 'cds-ng--btn--danger'],
+    ['danger--primary', 'cds-ng--btn--danger--primary'],
+    ['danger-ghost', 'cds-ng--btn--danger--ghost'],
+    ['danger-tertiary', 'cds-ng--btn--danger--tertiary'],
+    ['tertiary', 'cds-ng--btn--tertiary'],
   ];
 
   kinds.forEach(([kind, className]) => {
     it(`kind="${kind}"`, async () => {
       const { fixture } = await render(
-        `<cds-button kind="${kind}">test</cds-button>`,
+        `<cds-ng-button kind="${kind}">test</cds-ng-button>`,
         imports
       );
       expect(wc(fixture.nativeElement).getAttribute('kind')).toBe(kind);
@@ -141,19 +145,22 @@ describe('cds-button (parity with web-components button-test.js)', () => {
 
   it('does not render default danger assistive text when none is provided', async () => {
     const { fixture } = await render(
-      `<cds-button kind="danger">test</cds-button>`,
+      `<cds-ng-button kind="danger">test</cds-ng-button>`,
       imports
     );
-    expect(inner(fixture.nativeElement, '.cds--visually-hidden')).toBeNull();
+    expect(inner(fixture.nativeElement, '.cds-ng--visually-hidden')).toBeNull();
   });
 
   it('renders custom danger assistive text when provided', async () => {
     const { fixture } = await render(
-      `<cds-button kind="danger" dangerDescription="gefahr">test</cds-button>`,
+      `<cds-ng-button kind="danger" dangerDescription="gefahr">test</cds-ng-button>`,
       imports
     );
     const button = inner(fixture.nativeElement, 'button')!;
-    const hiddenText = inner(fixture.nativeElement, '.cds--visually-hidden')!;
+    const hiddenText = inner(
+      fixture.nativeElement,
+      '.cds-ng--visually-hidden'
+    )!;
 
     expect(button.getAttribute('aria-describedby')).toBe('danger-description');
     expect(hiddenText).toBeTruthy();
@@ -163,15 +170,15 @@ describe('cds-button (parity with web-components button-test.js)', () => {
 
   describe('supports props.size', () => {
     [
-      ['sm', 'cds--btn--sm'],
-      ['md', 'cds--btn--md'],
-      ['lg', 'cds--btn--lg'],
-      ['xl', 'cds--btn--xl'],
-      ['2xl', 'cds--btn--2xl'],
+      ['sm', 'cds-ng--btn--sm'],
+      ['md', 'cds-ng--btn--md'],
+      ['lg', 'cds-ng--btn--lg'],
+      ['xl', 'cds-ng--btn--xl'],
+      ['2xl', 'cds-ng--btn--2xl'],
     ].forEach(([size, className]) => {
       it(`size="${size}"`, async () => {
         const { fixture } = await render(
-          `<cds-button size="${size}">test</cds-button>`,
+          `<cds-ng-button size="${size}">test</cds-ng-button>`,
           imports
         );
         expect(wc(fixture.nativeElement).getAttribute('size')).toBe(size);
@@ -185,7 +192,7 @@ describe('cds-button (parity with web-components button-test.js)', () => {
   describe('Button with Icon variant', () => {
     it('should render the given icon within the <button> element', async () => {
       const { fixture } = await render(
-        `<cds-button>test<svg slot="icon" data-testid="svg"></svg></cds-button>`,
+        `<cds-ng-button>test<svg slot="icon" data-testid="svg"></svg></cds-ng-button>`,
         imports
       );
       // Projected through the wrapper into the web component's light DOM.
@@ -201,12 +208,12 @@ describe('cds-button (parity with web-components button-test.js)', () => {
     // it derives icon-only from slot content. Port asserts the rendered result.
     it('should set the icon-only class', async () => {
       const { fixture } = await render(
-        `<cds-button><svg slot="icon" data-testid="svg"></svg></cds-button>`,
+        `<cds-ng-button><svg slot="icon" data-testid="svg"></svg></cds-ng-button>`,
         imports
       );
       expect(
         inner(fixture.nativeElement, 'button')!.classList.contains(
-          'cds--btn--icon-only'
+          'cds-ng--btn--icon-only'
         )
       ).toBe(true);
     });
@@ -219,9 +226,9 @@ describe('cds-button (parity with web-components button-test.js)', () => {
 
     it('should set aria-pressed on a selected ghost icon button', async () => {
       const { fixture } = await render(
-        `<cds-button kind="ghost" isSelected tooltipText="Icon button">
+        `<cds-ng-button kind="ghost" isSelected tooltipText="Icon button">
            <svg slot="icon" data-testid="svg"></svg>
-         </cds-button>`,
+         </cds-ng-button>`,
         imports
       );
       expect(
@@ -231,9 +238,9 @@ describe('cds-button (parity with web-components button-test.js)', () => {
 
     it('should not set aria-pressed on a ghost icon button that is not selected', async () => {
       const { fixture } = await render(
-        `<cds-button kind="ghost" tooltipText="Icon button">
+        `<cds-ng-button kind="ghost" tooltipText="Icon button">
            <svg slot="icon" data-testid="svg"></svg>
-         </cds-button>`,
+         </cds-ng-button>`,
         imports
       );
       expect(
@@ -243,7 +250,7 @@ describe('cds-button (parity with web-components button-test.js)', () => {
 
     it('should not set aria-pressed on a non-icon ghost button', async () => {
       const { fixture } = await render(
-        `<cds-button kind="ghost" isSelected>test</cds-button>`,
+        `<cds-ng-button kind="ghost" isSelected>test</cds-ng-button>`,
         imports
       );
       expect(
@@ -257,57 +264,60 @@ describe('cds-button (parity with web-components button-test.js)', () => {
       ['start', 'center', 'end'].forEach((alignment) => {
         const expectedClass =
           position === 'top' || position === 'bottom'
-            ? `cds--popover--${position}-${alignment}`
-            : `cds--popover--${position}`;
+            ? `cds-ng--popover--${position}-${alignment}`
+            : `cds-ng--popover--${position}`;
 
         it(`uses "${expectedClass}" for tooltip-position="${position}" tooltip-alignment="${alignment}"`, async () => {
           const { fixture } = await render(
-            `<cds-button tooltipText="tip" tooltipPosition="${position}" tooltipAlignment="${alignment}">
+            `<cds-ng-button
+               tooltipText="tip"
+               tooltipPosition="${position}"
+               tooltipAlignment="${alignment}">
                <svg slot="icon" data-testid="svg"></svg>
-             </cds-button>`,
+             </cds-ng-button>`,
             imports
           );
           const container = inner(
             fixture.nativeElement,
-            '.cds--popover-container'
+            '.cds-ng--popover-container'
           );
           expect(container).toBeTruthy();
           expect(container!.classList.contains(expectedClass)).toBe(true);
-          expect(container!.classList.contains('cds--tooltip')).toBe(true);
-          expect(container!.classList.contains('cds--icon-tooltip')).toBe(true);
+          expect(container!.classList.contains('cds-ng--tooltip')).toBe(true);
+          expect(container!.classList.contains('cds-ng--icon-tooltip')).toBe(
+            true
+          );
         });
       });
     });
   });
 
-  // These measure `getBoundingClientRect()` of the rendered popover. jsdom has
-  // no layout engine (every rect is 0), so they cannot run here. Equivalent
-  // coverage lives in the web component suite itself; add a Playwright case to
-  // Button.e2e.ts if the Angular wrapper ever changes how `dir` is handled.
-  describe('Tooltip popover RTL alignment', () => {
+  // Layout-sensitive tests that cannot run in jsdom (getBoundingClientRect
+  // returns 0,0,0,0). All 8 are covered by Playwright in `Button.e2e.ts`.
+  describe('RTL auto-alignment (jsdom todo -> Playwright)', () => {
     it.todo(
-      'renders centered "top" tooltip horizontally aligned with the button in RTL'
+      'should automatically set alignment to end if the tooltip extends past the right edge (Playwright)'
     );
     it.todo(
-      'renders centered "bottom" tooltip horizontally aligned with the button in RTL'
+      'should automatically set alignment to start if the tooltip extends past the left edge (Playwright)'
     );
     it.todo(
-      'anchors "top-left" tooltip toward the button\'s inline-start edge in RTL'
+      'should automatically set position to top if the tooltip extends past the bottom edge (Playwright)'
     );
     it.todo(
-      'anchors "top-right" tooltip toward the button\'s inline-end edge in RTL'
+      'should automatically set position to bottom if the tooltip extends past the top edge (Playwright)'
     );
     it.todo(
-      'anchors "bottom-left" tooltip toward the button\'s inline-start edge in RTL'
+      'should automatically flip tooltipPosition when using RTL and position is left or right (Playwright)'
     );
     it.todo(
-      'anchors "bottom-right" tooltip toward the button\'s inline-end edge in RTL'
+      'should automatically flip tooltipAlignment when using RTL and position is top or bottom (Playwright)'
     );
     it.todo(
-      'keeps "right" tooltip on the same physical side of the button in RTL as in LTR'
+      'should not flip alignment if RTL and alignment is center (Playwright)'
     );
     it.todo(
-      'keeps "left" tooltip on the same physical side of the button in RTL as in LTR'
+      'should not flip position if RTL and position is center (Playwright)'
     );
   });
 });
