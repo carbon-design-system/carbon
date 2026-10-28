@@ -95,7 +95,7 @@ export const TearsheetHeaderActions = forwardRef<
         setHiddenItems(items?.slice(visible.length));
       },
     });
-    return () => handler.disconnect();
+    return () => handler?.disconnect();
   }, [containerRef.current]);
 
   return (
