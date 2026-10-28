@@ -21,6 +21,25 @@ $css--plex: true !default;
   @include emit-layout-tokens();
 }
 
+:host(#{$prefix}-time-picker-skeleton) {
+  display: inline-flex;
+
+  .#{$prefix}--time-picker--skeleton {
+    display: inline-flex;
+    align-items: flex-end;
+  }
+
+  #{$prefix}-text-input-skeleton,
+  #{$prefix}-select-skeleton {
+    flex: 0 0 auto;
+    inline-size: 4.875rem;
+  }
+
+  #{$prefix}-select-skeleton {
+    margin-inline-start: $spacing-01;
+  }
+}
+
 :host(#{$prefix}-time-picker-select) {
   @extend .#{$prefix}--select;
   @extend .#{$prefix}--time-picker__select;
@@ -51,6 +70,14 @@ $css--plex: true !default;
 }
 
 @if flags.enabled('enable-v12-release') {
+  :host(#{$prefix}-time-picker-skeleton) {
+    #{$prefix}-text-input-skeleton::part(label),
+    #{$prefix}-text-input-skeleton::part(text-input),
+    #{$prefix}-select-skeleton::part(select) {
+      border-radius: 0;
+    }
+  }
+
   // Non-last selects: remove all border-radius and the inline borders so
   // they sit flush between the input and the last select.
   :host(#{$prefix}-time-picker-select:not(:last-of-type))
