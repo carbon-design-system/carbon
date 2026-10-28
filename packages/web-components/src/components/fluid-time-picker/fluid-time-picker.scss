@@ -199,6 +199,21 @@ $css--plex: true !default;
 }
 
 @if flags.enabled('enable-v12-release') {
+  // All skeleton children: zero border-radius and remove bottom border.
+  :host(#{$prefix}-fluid-time-picker-skeleton)
+    #{$prefix}-fluid-text-input-skeleton,
+  :host(#{$prefix}-fluid-time-picker-skeleton)
+    #{$prefix}-fluid-select-skeleton::part(skeleton) {
+    border: none;
+    border-radius: 0;
+  }
+
+  // Last select skeleton: add inline-start border as divider.
+  :host(#{$prefix}-fluid-time-picker-skeleton)
+    #{$prefix}-fluid-select-skeleton::part(skeleton) {
+    border-inline-start: 1px solid $skeleton-element;
+  }
+
   // Input: zero the end-side radii and remove the inline-end border
   // so it sits flush against the first select.
   :host(#{$prefix}-fluid-time-picker)

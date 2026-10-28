@@ -258,6 +258,19 @@
   }
 
   @if enabled('enable-v12-release') {
+    .#{$prefix}--time-picker--fluid--skeleton {
+      .#{$prefix}--text-input--fluid__skeleton,
+      .#{$prefix}--skeleton.#{$prefix}--list-box {
+        border: none;
+        border-radius: 0;
+      }
+
+      .#{$prefix}--list-box__wrapper--fluid
+        .#{$prefix}--skeleton.#{$prefix}--list-box {
+        border-inline-start: 1px solid $skeleton-element;
+      }
+    }
+
     .#{$prefix}--time-picker__input--with-select .#{$prefix}--text-input {
       border-end-end-radius: 0;
       border-inline-end: none;
