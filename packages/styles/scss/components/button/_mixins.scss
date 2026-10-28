@@ -111,16 +111,23 @@ $button-focus-color: custom-property.get-var('button-focus-color', $focus);
     // Equal inline padding and label/icon gap scale with the button height:
     // xs 12px/4px, sm 16px/8px, md 20px/12px, lg 24px/16px.
     // -1px to compensate for border width. Containers such as button sets
-    // override the alignment through inherited custom properties.
+    // override the padding and alignment through inherited custom properties.
     justify-content: custom-property.get-var('button-justify-content', center);
-    padding-inline: calc(layout.size('height') / 2 - convert.to-rem(1px));
+    padding-inline: custom-property.get-var(
+      'button-padding-inline',
+      calc(layout.size('height') / 2 - convert.to-rem(1px))
+    );
     text-align: custom-property.get-var('button-text-align', center);
 
     // The gap is an icon margin rather than `column-gap` so variants and
-    // contexts that already space the icon with a margin replace it
+    // contexts that already space the icon with a margin replace it.
+    // Equal block margins make the icon's margin box one line of text tall,
+    // so it sits on the label line whether centered or, in tall footer
+    // buttons, aligned to the start.
     .#{$prefix}--btn__icon {
       position: static;
-      align-self: center;
+      align-self: custom-property.get-var('button-icon-align-self', center);
+      margin-block: calc((var(--temp-1lh) - #{convert.to-rem(16px)}) / 2);
       margin-inline-start: calc(layout.size('height') / 2 - #{$spacing-03});
     }
   }
@@ -132,7 +139,14 @@ $button-focus-color: custom-property.get-var('button-focus-color', $focus);
 /// @group button
 @mixin button-v12-ghost-structure {
   @include button-v12-structure {
-    padding-inline-end: calc(layout.size('height') / 2 - convert.to-rem(1px));
+    padding-inline-end: custom-property.get-var(
+      'button-padding-inline',
+      calc(layout.size('height') / 2 - convert.to-rem(1px))
+    );
+
+    .#{$prefix}--btn__icon {
+      align-self: custom-property.get-var('button-icon-align-self', center);
+    }
   }
 }
 
@@ -140,6 +154,8 @@ $button-focus-color: custom-property.get-var('button-focus-color', $focus);
 /// directly or through a layout context, keep the v11 structure until their
 /// spacing is decided. Uses `:where()` so the specificity matches `.btn` and
 /// variant or contextual overrides later in the cascade still apply.
+/// A button without its own size class is treated as xl or 2xl when any
+/// ancestor is, even if a closer layout context sets a smaller size.
 /// @access private
 /// @group button
 @mixin button-v12-structure {

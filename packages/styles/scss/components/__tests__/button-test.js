@@ -158,7 +158,7 @@ describe('scss/components/button', () => {
     expect(structure.styles).toEqual({
       'justify-content': 'var(--cds-button-justify-content, center)',
       'padding-inline':
-        'calc(var(--cds-layout-size-height-local) / 2 - 0.0625rem)',
+        'var(--cds-button-padding-inline, calc(var(--cds-layout-size-height-local) / 2 - 0.0625rem))',
       'text-align': 'var(--cds-button-text-align, center)',
     });
 
@@ -170,7 +170,8 @@ describe('scss/components/button', () => {
     );
     expect(icon.styles).toEqual({
       position: 'static',
-      'align-self': 'center',
+      'align-self': 'var(--cds-button-icon-align-self, center)',
+      'margin-block': 'calc((var(--temp-1lh) - 1rem) / 2)',
       'margin-inline-start':
         'calc(var(--cds-layout-size-height-local) / 2 - 0.5rem)',
     });
@@ -189,7 +190,7 @@ describe('scss/components/button', () => {
         ).styles
       ).toEqual({
         'padding-inline-end':
-          'calc(var(--cds-layout-size-height-local) / 2 - 0.0625rem)',
+          'var(--cds-button-padding-inline, calc(var(--cds-layout-size-height-local) / 2 - 0.0625rem))',
       });
     }
     expect(

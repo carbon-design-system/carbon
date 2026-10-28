@@ -16,6 +16,7 @@
 @use '../../type' as *;
 @use '../../utilities/ai-gradient' as *;
 @use '../../utilities/convert';
+@use '../../utilities/custom-property';
 @use '../../utilities/component-reset';
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
@@ -313,6 +314,25 @@
 
     @if enabled('enable-v12-release') {
       @include button.radius($border-radius-00);
+
+      // Keep the label at the start, the icon at the end and the v11 16px
+      // inset in footer buttons, as in a button set, with the icon on the
+      // label's first line. Custom properties inherit into web component
+      // shadow roots.
+      @include custom-property.declaration(
+        'button-justify-content',
+        space-between
+      );
+      @include custom-property.declaration('button-text-align', start);
+      // -1px to compensate for border width
+      @include custom-property.declaration(
+        'button-padding-inline',
+        calc(#{$spacing-05} - #{convert.to-rem(1px)})
+      );
+      @include custom-property.declaration(
+        'button-icon-align-self',
+        flex-start
+      );
     }
   }
 
