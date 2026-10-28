@@ -6,6 +6,7 @@
  */
 
 import { html } from 'lit';
+import './data-table-story.scss';
 import { TABLE_SIZE } from '../table';
 import '../index';
 import storyDocs from './data-table.mdx';
@@ -68,7 +69,7 @@ export const Default = {
             >
           </cds-table-row>
           <cds-table-expanded-row>
-            <h6>Expandable row content</h6>
+            <h3 class="demo-expanded-row-heading">Expandable row content</h3>
             <div>Description here</div>
           </cds-table-expanded-row>
           <cds-table-row>
@@ -80,7 +81,7 @@ export const Default = {
             <cds-table-cell><cds-link>Starting</cds-link></cds-table-cell>
           </cds-table-row>
           <cds-table-expanded-row>
-            <h6>Expandable row content</h6>
+            <h3 class="demo-expanded-row-heading">Expandable row content</h3>
             <div>Description here</div>
           </cds-table-expanded-row>
           <cds-table-row>
@@ -92,7 +93,7 @@ export const Default = {
             <cds-table-cell><cds-link>Active</cds-link></cds-table-cell>
           </cds-table-row>
           <cds-table-expanded-row>
-            <h6>Expandable row content</h6>
+            <h3 class="demo-expanded-row-heading">Expandable row content</h3>
             <div>Description here</div>
           </cds-table-expanded-row>
           <cds-table-row>
@@ -115,7 +116,7 @@ export const Default = {
             <cds-table-cell><cds-link>Starting</cds-link></cds-table-cell>
           </cds-table-row>
           <cds-table-expanded-row>
-            <h6>Expandable row content</h6>
+            <h3 class="demo-expanded-row-heading">Expandable row content</h3>
             <div>Description here</div>
           </cds-table-expanded-row>
           <cds-table-row>
@@ -137,7 +138,9 @@ export const Default = {
         size="${size}"
         ?use-static-width="${useStaticWidth}"
         ?use-zebra-styles="${useZebraStyles}">
-        <cds-table-header-title slot="title">DataTable</cds-table-header-title>
+        <cds-table-header-title slot="title">
+          <h2 class="demo-table-heading">DataTable</h2>
+        </cds-table-header-title>
         <cds-table-header-description slot="description"
           >With expansion</cds-table-header-description
         >
@@ -174,7 +177,9 @@ export const BatchExpansion = {
       size="${size}"
       ?use-static-width=${useStaticWidth}
       ?use-zebra-styles=${useZebraStyles}>
-      <cds-table-header-title slot="title">DataTable</cds-table-header-title>
+      <cds-table-header-title slot="title">
+        <h2 class="demo-table-heading">DataTable</h2>
+      </cds-table-header-title>
       <cds-table-header-description slot="description"
         >With expansion</cds-table-header-description
       >
@@ -201,7 +206,7 @@ export const BatchExpansion = {
           >
         </cds-table-row>
         <cds-table-expanded-row>
-          <h6>Expandable row content</h6>
+          <h3 class="demo-expanded-row-heading">Expandable row content</h3>
           <div>Description here</div>
         </cds-table-expanded-row>
         <cds-table-row>
@@ -221,7 +226,7 @@ export const BatchExpansion = {
           <cds-table-cell><cds-link>Active</cds-link></cds-table-cell>
         </cds-table-row>
         <cds-table-expanded-row>
-          <h6>Expandable row content</h6>
+          <h3 class="demo-expanded-row-heading">Expandable row content</h3>
           <div>Description here</div>
         </cds-table-expanded-row>
         <cds-table-row>
@@ -235,7 +240,7 @@ export const BatchExpansion = {
           >
         </cds-table-row>
         <cds-table-expanded-row>
-          <h6>Expandable row content</h6>
+          <h3 class="demo-expanded-row-heading">Expandable row content</h3>
           <div>Description here</div>
         </cds-table-expanded-row>
         <cds-table-row>
@@ -255,7 +260,7 @@ export const BatchExpansion = {
           <cds-table-cell><cds-link>Active</cds-link></cds-table-cell>
         </cds-table-row>
         <cds-table-expanded-row>
-          <h6>Expandable row content</h6>
+          <h3 class="demo-expanded-row-heading">Expandable row content</h3>
           <div>Description here</div>
         </cds-table-expanded-row>
       </cds-table-body>

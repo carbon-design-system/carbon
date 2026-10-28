@@ -886,6 +886,54 @@ describe('MultiSelect', () => {
       expect(optionsArray[2]).toHaveAttribute('aria-label', 'Item 2');
     });
 
+    it('should highlight and select the same item when `sortItems` returns a new array', async () => {
+      const items = [
+        { id: 'alpha', text: 'Alpha' },
+        { id: 'bravo', text: 'Bravo' },
+        { id: 'charlie', text: 'Charlie' },
+      ];
+      const onChange = jest.fn();
+      render(
+        <MultiSelect
+          id="custom-id"
+          label="test-label"
+          items={items}
+          itemToString={(item) => item?.text ?? ''}
+          sortItems={(list) =>
+            [...list].sort((a, b) => b.text.localeCompare(a.text))
+          }
+          onChange={onChange}
+        />
+      );
+      await waitForPosition();
+
+      await userEvent.tab();
+      await userEvent.keyboard('[ArrowDown]');
+
+      const combobox = screen.getByRole('combobox');
+      const options = screen.getAllByRole('option');
+      expect(options.map((option) => option.textContent)).toEqual([
+        'Charlie',
+        'Bravo',
+        'Alpha',
+      ]);
+      expect(options[0]).toHaveClass(
+        `${prefix}--list-box__menu-item--highlighted`
+      );
+      expect(combobox).toHaveAttribute('aria-activedescendant', options[0].id);
+
+      await userEvent.keyboard('[ArrowDown]');
+      expect(options[1]).toHaveClass(
+        `${prefix}--list-box__menu-item--highlighted`
+      );
+      expect(combobox).toHaveAttribute('aria-activedescendant', options[1].id);
+
+      await userEvent.keyboard('[Enter]');
+      expect(onChange).toHaveBeenLastCalledWith(
+        expect.objectContaining({ selectedItems: [items[1]] })
+      );
+    });
+
     it('should apply floating styles when `autoAlign` is enabled', async () => {
       const items = generateItems(4, generateGenericItem);
 

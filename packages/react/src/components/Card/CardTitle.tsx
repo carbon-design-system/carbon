@@ -37,6 +37,14 @@ export interface CardTitleProps extends React.HTMLAttributes<HTMLDivElement> {
   maxWidth?: string;
 
   /**
+   * Icon, avatar, or image rendered to the left of the title text block.
+   * Uses the same `__title-media` slot as the standalone `Card.TitleMedia`
+   * component, but accepted as a prop so `CardTitle` can manage its own
+   * internal flex layout without needing to be a multi-column grid child.
+   */
+  titleMedia?: ReactNode;
+
+  /**
    * Optional leading icon or content to display before the title text.
    * - Productive density: 16px icon recommended
    * - Expressive density: 24px icon recommended
@@ -92,6 +100,7 @@ export const CardTitle = forwardRef<HTMLDivElement, CardTitleProps>(
       className,
       titleTruncate = false,
       maxWidth = '100%',
+      titleMedia,
       titleStart,
       titleEnd,
       label,
@@ -109,7 +118,9 @@ export const CardTitle = forwardRef<HTMLDivElement, CardTitleProps>(
     const isLabelMulti = typeof labelTruncate === 'number';
     const isDescMulti = typeof descriptionTruncate === 'number';
 
-    const containerClasses = cx(`${blockClass}__title`, className);
+    const containerClasses = cx(`${blockClass}__title`, className, {
+      [`${blockClass}__title--has-media`]: titleMedia,
+    });
 
     // Truncation and icon classes live on the inner text-row so they never
     // override the outer container's display:flex flex-direction:column,
@@ -143,40 +154,47 @@ export const CardTitle = forwardRef<HTMLDivElement, CardTitleProps>(
 
     return (
       <div {...rest} ref={ref} className={containerClasses}>
-        {label && (
-          <div
-            className={cx(`${blockClass}__label`, {
-              [`${blockClass}__label--truncate`]: labelTruncate === true,
-              [`${blockClass}__label--truncate-multi`]: isLabelMulti,
-            })}
-            style={labelVars as React.CSSProperties}>
-            {label}
-          </div>
+        {titleMedia && (
+          <div className={`${blockClass}__title-media`}>{titleMedia}</div>
         )}
-        <span
-          className={textRowClasses}
-          style={titleVars as React.CSSProperties}>
-          {titleStart && (
-            <span className={`${blockClass}__title-start-icon`}>
-              {titleStart}
-            </span>
+        <div className={`${blockClass}__title-text`}>
+          {label && (
+            <div
+              className={cx(`${blockClass}__label`, {
+                [`${blockClass}__label--truncate`]: labelTruncate === true,
+                [`${blockClass}__label--truncate-multi`]: isLabelMulti,
+              })}
+              style={labelVars as React.CSSProperties}>
+              {label}
+            </div>
           )}
-          {children}
-          {titleEnd && (
-            <span className={`${blockClass}__title-end-icon`}>{titleEnd}</span>
+          <span
+            className={textRowClasses}
+            style={titleVars as React.CSSProperties}>
+            {titleStart && (
+              <span className={`${blockClass}__title-start-icon`}>
+                {titleStart}
+              </span>
+            )}
+            {children}
+            {titleEnd && (
+              <span className={`${blockClass}__title-end-icon`}>
+                {titleEnd}
+              </span>
+            )}
+          </span>
+          {description && (
+            <div
+              className={cx(`${blockClass}__description`, {
+                [`${blockClass}__description--truncate`]:
+                  descriptionTruncate === true,
+                [`${blockClass}__description--truncate-multi`]: isDescMulti,
+              })}
+              style={descVars as React.CSSProperties}>
+              {description}
+            </div>
           )}
-        </span>
-        {description && (
-          <div
-            className={cx(`${blockClass}__description`, {
-              [`${blockClass}__description--truncate`]:
-                descriptionTruncate === true,
-              [`${blockClass}__description--truncate-multi`]: isDescMulti,
-            })}
-            style={descVars as React.CSSProperties}>
-            {description}
-          </div>
-        )}
+        </div>
       </div>
     );
   }
