@@ -320,9 +320,7 @@ class CDSTearsheetHeaderContent extends HostListenerMixin(LitElement) {
           break;
         }
       }
-      const { fullyCollapsed } =
-        this._tearsheetCtx?.state ?? defaultTearsheetState;
-      childItems[0].setAttribute('size', fullyCollapsed ? 'xs' : 'sm');
+      childItems[0].setAttribute('size', 'sm');
 
       this._tearsheetCtx?.setState({
         hasDecorator: true,
@@ -356,20 +354,30 @@ class CDSTearsheetHeaderContent extends HostListenerMixin(LitElement) {
   }
 
   private _updateDecoratorSize() {
-    const { fullyCollapsed } =
-      this._tearsheetCtx?.state ?? defaultTearsheetState;
     const assigned = this._decoratorSlot?.assignedElements({ flatten: true });
     if (assigned?.length) {
-      assigned[0].setAttribute('size', fullyCollapsed ? 'xs' : 'sm');
+      assigned[0].setAttribute('size', 'sm');
     }
   }
 
+  /**
+   * Measures the rendered AI label and close button so that
+   * `--tearsheet-header-action-offset` stays accurate regardless of which
+   * elements are present. Each element that exists contributes its own width
+   * plus an 8px gap.
+   */
   private _updateHeaderOffset() {
-    const { open, isSm } = this._tearsheetCtx?.state ?? defaultTearsheetState;
+    const { open } = this._tearsheetCtx?.state ?? defaultTearsheetState;
     if (!open) return;
-    const AILabelWidth =
-      this.querySelector('[slot="decorator"]')?.clientWidth ?? 0;
-    const offset = AILabelWidth + 24 + (isSm ? 8 : 0);
+    const aiLabelWidth =
+      this.querySelector<HTMLElement>('[slot="decorator"]')?.offsetWidth ?? 0;
+    const closeButtonWidth =
+      this.shadowRoot?.querySelector<HTMLElement>(
+        `.${blockClass}__close-button`
+      )?.offsetWidth ?? 0;
+    const offset =
+      (aiLabelWidth > 0 ? aiLabelWidth + 8 : 0) +
+      (closeButtonWidth > 0 ? closeButtonWidth + 8 : 0);
     document.documentElement.style.setProperty(
       '--tearsheet-header-action-offset',
       `${offset}px`
@@ -398,8 +406,8 @@ class CDSTearsheetHeaderContent extends HostListenerMixin(LitElement) {
             <cds-icon-button
               class="${carbonPrefix}--modal-close"
               kind="ghost"
-              size="${fullyCollapsed ? 'md' : 'lg'}"
-              align="left"
+              size="md"
+              autoalign
               aria-label="${closeIconDescription || 'Close'}"
               @click="${() => {
                 onClose?.();

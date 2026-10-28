@@ -160,7 +160,7 @@ export class StackingTearsheetDemo extends LitElement {
               </span>
               <div slot="header-actions">
                 <cds-button
-                  size="sm"
+                  size="md"
                   kind="tertiary"
                   @click="${(e: Event) => this._toggleTearsheet2(e)}"
                   aria-haspopup="dialog">
@@ -213,7 +213,7 @@ export class StackingTearsheetDemo extends LitElement {
               </span>
               <div slot="header-actions">
                 <cds-button
-                  size="sm"
+                  size="md"
                   kind="tertiary"
                   @click="${(e: Event) => this._toggleTearsheet3(e)}"
                   aria-haspopup="dialog">
