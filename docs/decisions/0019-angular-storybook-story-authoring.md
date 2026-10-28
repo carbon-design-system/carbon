@@ -11,6 +11,19 @@ Accepted
 > [ADR 0020](0020-angular-wholesale-cds-ng-prefix.md)). The decision about
 > generated story stubs for core wrappers stands. The parts about hand-crafted
 > legacy stories no longer apply.
+>
+> **Update 2026-10-30.** A firm rule has been added (see "Story authoring rules"
+> below): Angular stories must **never** reference raw `cds-*` web component
+> tags directly. Every element used in a story template must be imported as an
+> Angular wrapper component from `@carbon/angular/<entry>`. Raw WC tags bypass
+> Angular's type system, lose `[binding]` / `(event)` checking, and silently
+> accept misspelled inputs — exactly the problem documented in ADR 0015 §3 and
+> measured in `developer-experience.md`. `CUSTOM_ELEMENTS_SCHEMA` must not be
+> added to story `moduleMetadata` as a workaround. If no Angular wrapper exists
+> for an element (e.g. a skeleton component missing from
+> `custom-elements.json`), add it to `SYNTHETIC_TAGS` in
+> `tasks/generate-wrappers/index.js` and regenerate — do not reach for
+> `CUSTOM_ELEMENTS_SCHEMA`.
 
 ## Context
 
@@ -123,6 +136,68 @@ occurs. The story must:
 - Cover the same variation breadth as the corresponding WC and core wrapper
   stories (all `kind`, `size`, state variants, etc.), using `// TODO(parity):`
   where a variation cannot yet be expressed by the legacy API
+
+## Story authoring rules
+
+The following rules apply to every story file under
+`packages/angular/src/stories/`. They are enforced by code review and must be
+communicated to any agent or developer working on stories.
+
+### 1. Never use raw `cds-*` web component tags in story templates
+
+All elements in a story template must be Angular wrapper components imported
+from `@carbon/angular/<entry>`. Using raw WC tags directly bypasses Angular's
+template type-checker and makes the story functionally different from what a
+consumer would write.
+
+**Wrong:**
+
+```ts
+// DO NOT DO THIS — raw WC tag, bypasses Angular
+template: `<cds-accordion-skeleton></cds-accordion-skeleton>`;
+```
+
+**Wrong:**
+
+```ts
+// DO NOT DO THIS — CUSTOM_ELEMENTS_SCHEMA silences the error but does not fix it
+moduleMetadata({ schemas: [CUSTOM_ELEMENTS_SCHEMA] });
+```
+
+**Correct:**
+
+```ts
+// Import the wrapper, use the cds-ng-* selector
+import { AccordionSkeletonComponent } from '@carbon/angular/accordion';
+// ...
+moduleMetadata({ imports: [AccordionSkeletonComponent] });
+// ...
+template: `<cds-ng-accordion-skeleton></cds-ng-accordion-skeleton>`;
+```
+
+### 2. If a wrapper does not exist, fix the generator — do not use CUSTOM_ELEMENTS_SCHEMA
+
+If an element you need in a story has no Angular wrapper (because it is missing
+from `custom-elements.json`), the correct fix is to add it to `SYNTHETIC_TAGS`
+in [`tasks/generate-wrappers/index.js`](../tasks/generate-wrappers/index.js) and
+regenerate. Also add a `// TODO(@carbon/web-components):` comment in the WC
+source file explaining the root fix (adding `@customElement()` to the class).
+See the `AccordionSkeleton`, `CheckboxSkeleton`, `DropdownSkeleton` entries in
+`SYNTHETIC_TAGS` as a worked example.
+
+### 3. WC-parity story ordering
+
+Stories are ordered to match the `@carbon/web-components` story file
+one-for-one. Angular-only stories (CVA, `ngModel`, `ReactiveFormsModule`) come
+after all WC parity stories and carry `tags: ['!dev', '!autodocs']`.
+
+### 4. Entry imports, not generated imports
+
+Stories import from `@carbon/angular/<entry>` (e.g.
+`@carbon/angular/accordion`), never from `../../generated/` or
+`../src/generated/`. The entry resolves via `tsconfig.storybook.json` path
+aliases to `.entries/<entry>/index.ts`, which uses `cds-ng-*` selectors and the
+vendored WC copy — exactly what consumers get.
 
 ## Consequences
 

@@ -1,0 +1,314 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/**
+ * Parity port of the web component tests.
+ *
+ * Source : packages/web-components/src/components/checkbox/__tests__/checkbox-test.js
+ * Guide  : packages/angular/docs/porting-web-component-tests.md
+ *
+ * Each `it` keeps the WC test's title verbatim. The WC test renders
+ * `<cds-checkbox ...>` with open-wc `fixture(html\`...\`)`. This test renders
+ * the Angular `<cds-checkbox>` wrapper. Under ADR 0015 the host element IS the
+ * web component — assertions run against the shadow DOM of the `cds-*` host
+ * elements directly.
+ *
+ * Ported 1:1 unless noted. Tests that cannot run in jsdom are `it.todo` with
+ * a reason. AI-Label / slug slot tests are `it.todo` (require AiLabelComponent).
+ */
+
+import { CheckboxComponent } from '../../../generated/Checkbox';
+import { render } from '../../../testing/render';
+
+const imports = [CheckboxComponent];
+
+/** The cds-checkbox host element. */
+const wc = (el: HTMLElement) =>
+  el.querySelector('cds-checkbox') as HTMLElement & {
+    shadowRoot: ShadowRoot;
+    updateComplete: Promise<void>;
+  };
+
+describe('cds-checkbox (parity with web-components checkbox-test.js)', () => {
+  it('should render', async () => {
+    const { fixture } = await render(
+      `<cds-checkbox>Checkbox Label</cds-checkbox>`,
+      imports
+    );
+    expect(wc(fixture.nativeElement)).toBeTruthy();
+  });
+
+  it('should set the `id` on the <input> element', async () => {
+    const { fixture } = await render(
+      `<cds-checkbox id="test"></cds-checkbox>`,
+      imports
+    );
+    const input = wc(fixture.nativeElement).shadowRoot.querySelector('input');
+    expect(input?.getAttribute('id')).toBe('test');
+  });
+
+  it('should label the input by the given label-text', async () => {
+    const { fixture } = await render(
+      `<cds-checkbox>test label</cds-checkbox>`,
+      imports
+    );
+    expect(wc(fixture.nativeElement).textContent?.trim()).toBe('test label');
+  });
+
+  it('should use default-checked to set the default value of the checkbox', async () => {
+    const { fixture } = await render(
+      `<cds-checkbox default-checked>Checkbox Label</cds-checkbox>`,
+      imports
+    );
+    expect(wc(fixture.nativeElement).hasAttribute('checked')).toBe(true);
+  });
+
+  it('should disable the <input> if disabled is provided as an attribute', async () => {
+    const { fixture } = await render(
+      `<cds-checkbox [disabled]="true">Checkbox Label</cds-checkbox>`,
+      imports
+    );
+    const input = wc(fixture.nativeElement).shadowRoot.querySelector('input');
+    expect(input?.hasAttribute('disabled')).toBe(true);
+  });
+
+  // WC test title: "should set checked on the checkbox if checked is provided as a prop"
+  // Split into two `it` blocks — calling render() twice in one `it` block hits
+  // "TestBed already instantiated" (render() calls configureTestingModule each
+  // time; afterEach resets it between tests, not within them).
+  it('should set checked on the checkbox if checked is provided as a prop — checked', async () => {
+    const { fixture } = await render(
+      `<cds-checkbox [checked]="true">Checkbox Label</cds-checkbox>`,
+      imports
+    );
+    expect(wc(fixture.nativeElement).hasAttribute('checked')).toBe(true);
+  });
+
+  it('should set checked on the checkbox if checked is provided as a prop — unchecked', async () => {
+    const { fixture } = await render(
+      `<cds-checkbox>Checkbox Label</cds-checkbox>`,
+      imports
+    );
+    expect(wc(fixture.nativeElement).hasAttribute('checked')).toBe(false);
+  });
+
+  it('should hide the label if hide-label is provided as an attribute', async () => {
+    const { fixture } = await render(
+      `<cds-checkbox [hideLabel]="true">Checkbox Label</cds-checkbox>`,
+      imports
+    );
+    const labelSpan = wc(fixture.nativeElement).shadowRoot.querySelector(
+      'label span'
+    );
+    expect(labelSpan?.classList.contains('cds--visually-hidden')).toBe(true);
+  });
+
+  it('should render helper-text', async () => {
+    const { fixture } = await render(
+      `<cds-checkbox helperText="Helper text">Checkbox Label</cds-checkbox>`,
+      imports
+    );
+    const helper = wc(fixture.nativeElement).shadowRoot.querySelector(
+      '.cds--form__helper-text'
+    );
+    expect(helper).toBeTruthy();
+    expect(helper?.textContent?.trim()).toBe('Helper text');
+  });
+
+  it('should display helper-text when invalid is true but disabled', async () => {
+    const { fixture } = await render(
+      `<cds-checkbox [disabled]="true" [invalid]="true" helperText="Helper text">Checkbox Label</cds-checkbox>`,
+      imports
+    );
+    const helper = wc(fixture.nativeElement).shadowRoot.querySelector(
+      '.cds--form__helper-text'
+    );
+    expect(helper).toBeTruthy();
+    expect(helper?.textContent?.trim()).toBe('Helper text');
+  });
+
+  it('should set data-invalid when invalid attribute is true', async () => {
+    const { fixture } = await render(
+      `<cds-checkbox [invalid]="true">Checkbox Label</cds-checkbox>`,
+      imports
+    );
+    const input = wc(fixture.nativeElement).shadowRoot.querySelector('input');
+    expect(input?.hasAttribute('data-invalid')).toBe(true);
+  });
+
+  it('should not set data-invalid when invalid attribute is true but readOnly', async () => {
+    const { fixture } = await render(
+      `<cds-checkbox [readonly]="true" [invalid]="true">Checkbox Label</cds-checkbox>`,
+      imports
+    );
+    const input = wc(fixture.nativeElement).shadowRoot.querySelector('input');
+    expect(input?.hasAttribute('data-invalid')).toBe(false);
+  });
+
+  it('should not set data-invalid when invalid attribute is true but disabled', async () => {
+    const { fixture } = await render(
+      `<cds-checkbox [disabled]="true" [invalid]="true">Checkbox Label</cds-checkbox>`,
+      imports
+    );
+    const input = wc(fixture.nativeElement).shadowRoot.querySelector('input');
+    expect(input?.hasAttribute('data-invalid')).toBe(false);
+  });
+
+  it('should display invalid-text if invalid prop is true', async () => {
+    const { fixture } = await render(
+      `<cds-checkbox [invalid]="true" invalidText="Invalid text">Checkbox Label</cds-checkbox>`,
+      imports
+    );
+    const invalidText = wc(fixture.nativeElement).shadowRoot.querySelector(
+      '.cds--form-requirement'
+    );
+    expect(invalidText).toBeTruthy();
+    expect(invalidText?.textContent?.trim()).toBe('Invalid text');
+  });
+
+  it('should not display invalid-text if invalid prop is true but readOnly', async () => {
+    const { fixture } = await render(
+      `<cds-checkbox [readonly]="true" [invalid]="true" invalidText="Invalid text">Checkbox Label</cds-checkbox>`,
+      imports
+    );
+    const invalidText = wc(fixture.nativeElement).shadowRoot.querySelector(
+      '.cds--form-requirement'
+    );
+    expect(invalidText).toBeNull();
+  });
+
+  it('should not display invalid-text if invalid prop is true but disabled', async () => {
+    const { fixture } = await render(
+      `<cds-checkbox [disabled]="true" [invalid]="true" invalidText="Invalid text">Checkbox Label</cds-checkbox>`,
+      imports
+    );
+    const invalidText = wc(fixture.nativeElement).shadowRoot.querySelector(
+      '.cds--form-requirement'
+    );
+    expect(invalidText).toBeNull();
+  });
+
+  it('should respect readOnly prop', async () => {
+    const { fixture } = await render(
+      `<cds-checkbox [readonly]="true">Checkbox Label</cds-checkbox>`,
+      imports
+    );
+    const input = wc(fixture.nativeElement).shadowRoot.querySelector('input');
+    expect(input?.hasAttribute('aria-readonly')).toBe(true);
+  });
+
+  it('should remain disabled when readOnly and disabled are both true', async () => {
+    const { fixture } = await render(
+      `<cds-checkbox [readonly]="true" [disabled]="true">Checkbox Label</cds-checkbox>`,
+      imports
+    );
+    const input = wc(fixture.nativeElement).shadowRoot.querySelector('input');
+    expect(input?.hasAttribute('disabled')).toBe(true);
+  });
+
+  it('should respect warn prop', async () => {
+    const { fixture } = await render(
+      `<cds-checkbox [warn]="true">Checkbox Label</cds-checkbox>`,
+      imports
+    );
+    const warnIcon = wc(fixture.nativeElement).shadowRoot.querySelector(
+      '.cds--checkbox__invalid-icon--warning'
+    );
+    expect(warnIcon).toBeTruthy();
+  });
+
+  it('should display warn-text if warn prop is true', async () => {
+    // NOTE: warnText is typed `boolean` in the generated wrapper (generator bug).
+    // Pass as a static attribute to avoid the boolean coercion.
+    const { fixture } = await render(
+      `<cds-checkbox warn warn-text="Warn text">Checkbox Label</cds-checkbox>`,
+      imports
+    );
+    const warnText = wc(fixture.nativeElement).shadowRoot.querySelector(
+      '.cds--form-requirement'
+    );
+    expect(warnText).toBeTruthy();
+    expect(warnText?.textContent?.trim()).toBe('Warn text');
+  });
+
+  it('should not display warn-text if warn prop is true but readOnly', async () => {
+    const { fixture } = await render(
+      `<cds-checkbox readonly warn warn-text="Warn text">Checkbox Label</cds-checkbox>`,
+      imports
+    );
+    const warnText = wc(fixture.nativeElement).shadowRoot.querySelector(
+      '.cds--form-requirement'
+    );
+    expect(warnText).toBeNull();
+  });
+
+  it('should not display warn-text if warn prop is true but disabled', async () => {
+    const { fixture } = await render(
+      `<cds-checkbox disabled warn warn-text="Warn text">Checkbox Label</cds-checkbox>`,
+      imports
+    );
+    const warnText = wc(fixture.nativeElement).shadowRoot.querySelector(
+      '.cds--form-requirement'
+    );
+    expect(warnText).toBeNull();
+  });
+
+  it('should fire cds-checkbox-changed event when checkbox is changed', async () => {
+    const { fixture } = await render(
+      `<cds-checkbox>Checkbox Label</cds-checkbox>`,
+      imports
+    );
+    const el = wc(fixture.nativeElement);
+    await el.updateComplete;
+    const input = el.shadowRoot.querySelector('input') as HTMLInputElement;
+
+    let eventDetail: { checked: boolean; indeterminate: boolean } | null = null;
+    el.addEventListener('cds-checkbox-changed', (e: Event) => {
+      eventDetail = (e as CustomEvent).detail;
+    });
+    input.click();
+
+    expect(eventDetail).toBeTruthy();
+    expect(eventDetail!.checked).toBe(true);
+    expect(eventDetail!.indeterminate).toBe(false);
+  });
+
+  it('should NOT fire cds-checkbox-changed event when readonly', async () => {
+    const { fixture } = await render(
+      `<cds-checkbox [readonly]="true">Checkbox Label</cds-checkbox>`,
+      imports
+    );
+    const el = wc(fixture.nativeElement);
+    await el.updateComplete;
+    const input = el.shadowRoot.querySelector('input') as HTMLInputElement;
+
+    let eventFired = false;
+    el.addEventListener('cds-checkbox-changed', () => {
+      eventFired = true;
+    });
+
+    const result = await Promise.race([
+      new Promise<string>((resolve) => {
+        el.addEventListener('cds-checkbox-changed', () => resolve('fired'));
+      }),
+      new Promise<string>((resolve) =>
+        setTimeout(() => resolve('timeout'), 100)
+      ),
+    ]);
+    input.click();
+
+    // Give any pending events a tick to fire
+    await new Promise((r) => setTimeout(r, 50));
+    expect(eventFired).toBe(false);
+    expect(result).toBe('timeout');
+  });
+
+  // Requires AiLabelComponent — slug and decorator slot tests are todo.
+  it.todo('should respect deprecated slug prop');
+  it.todo('should respect decorator prop');
+  it.todo('should set size to "md" when decorator kind is "inline"');
+});

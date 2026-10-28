@@ -18,7 +18,12 @@ import '../skeleton-text/index';
 import styles from './accordion.scss?lit';
 
 /**
- * Skeleton of code snippet.
+ * Skeleton of accordion.
+ *
+ * TODO(@carbon/web-components): Replace `export default` + manual
+ * `defineCustomElement()` registration in `index.ts` with the
+ * `@customElement()` decorator so this class appears in custom-elements.json
+ * and `@carbon/angular` can generate a typed wrapper automatically.
  */
 class CDSAccordionSkeleton extends LitElement {
   static is = `${prefix}-accordion-skeleton`;

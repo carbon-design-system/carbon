@@ -45,3 +45,16 @@ HTMLElement.prototype.attachInternals = function patchedAttachInternals() {
   }
   return internals;
 };
+
+/**
+ * jsdom does not implement `ResizeObserver`. Several web components
+ * (`CDSAccordionItem`, `CDSDropdownItem`, etc.) call `new ResizeObserver(...)`
+ * in their constructors. Shim it as a no-op so they can be instantiated.
+ */
+if (typeof ResizeObserver === 'undefined') {
+  (global as unknown as { ResizeObserver: unknown }).ResizeObserver = class {
+    observe() {}
+    unobserve() {}
+    disconnect() {}
+  };
+}

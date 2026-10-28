@@ -232,6 +232,87 @@ const SKIPPED_TAGS = new Set([
 ]);
 
 /**
+ * Synthetic tag descriptors for WC elements that are missing from
+ * custom-elements.json because their classes use `defineCustomElement()`
+ * instead of the `@customElement()` decorator, which the CEM analyser cannot
+ * see.
+ *
+ * TODO(wc): Add `@customElement()` to CDSAccordionSkeleton, CDSCheckboxSkeleton,
+ * and CDSDropdownSkeleton in packages/web-components so they appear in
+ * custom-elements.json automatically and this list can be removed.
+ *
+ * Each entry mirrors the shape of a real manifest tag object.  The `path`
+ * field is relative to the WC package root (`./src/components/…`) and is used
+ * by `resolveBarrelImport` to find the correct folder barrel.
+ */
+const SYNTHETIC_TAGS = [
+  {
+    name: 'cds-accordion-skeleton',
+    path: './src/components/accordion/accordion-skeleton.ts',
+    description: 'Skeleton of accordion.',
+    properties: [
+      {
+        name: 'alignment',
+        attribute: 'alignment',
+        description:
+          'Specify the alignment of the accordion heading title and chevron.',
+        type: 'string',
+        default: '"END"',
+      },
+      {
+        name: 'count',
+        attribute: 'count',
+        description: 'Set number of items to render.',
+        type: 'number',
+        default: '4',
+      },
+      {
+        name: 'isFlush',
+        attribute: 'isFlush',
+        description:
+          'Specify whether Accordion text should be flush, default is false, does not work with align="start".',
+        type: 'boolean',
+        default: 'false',
+      },
+      {
+        name: 'open',
+        attribute: 'open',
+        description: '`true` if the first accordion item should be open.',
+        type: 'boolean',
+        default: 'true',
+      },
+    ],
+  },
+  {
+    name: 'cds-checkbox-skeleton',
+    path: './src/components/checkbox/checkbox-skeleton.ts',
+    description: 'Skeleton of checkbox.',
+    properties: [],
+  },
+  {
+    name: 'cds-dropdown-skeleton',
+    path: './src/components/dropdown/dropdown-skeleton.ts',
+    description: 'Skeleton of dropdown.',
+    properties: [
+      {
+        name: 'hideLabel',
+        attribute: 'hide-label',
+        description: 'Specify whether the label should be hidden, or not.',
+        type: 'boolean',
+        default: 'false',
+      },
+      {
+        name: 'size',
+        attribute: 'size',
+        description: 'Specify the size of the ListBox.',
+        type: 'string',
+        default: '"md"',
+      },
+    ],
+  },
+];
+
+/**
  * Events (besides `input`/`change`) that signal a form-associated element's
  * value changed, e.g. `cds-checkbox-changed`, `cds-dropdown-selected`.
  */
@@ -545,7 +626,10 @@ function main() {
   }
 
   const manifest = JSON.parse(readFileSync(MANIFEST_PATH, 'utf8'));
-  const tags = manifest.tags || [];
+  // Merge synthetic tags (elements missing from the CEM analyser output) before
+  // the main tag list so they receive identical treatment — SKIPPED_TAGS,
+  // --tag filter, and full-run rmSync all apply to them normally.
+  const tags = [...SYNTHETIC_TAGS, ...(manifest.tags || [])];
 
   const args = process.argv.slice(2);
   const tagFilterIndex = args.indexOf('--tag');

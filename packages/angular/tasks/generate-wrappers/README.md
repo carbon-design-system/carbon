@@ -71,7 +71,7 @@ Maintainers complete the `// TODO` entries following the WC story file at
 reference. Re-running the generator never overwrites a story a maintainer has
 already filled in.
 
-## Adding New Automated Wrappers
+## Adding new automated wrappers
 
 When a new Web Component is added to `@carbon/web-components`:
 
@@ -81,3 +81,67 @@ When a new Web Component is added to `@carbon/web-components`:
 3. Complete the story's `// TODO(parity):` entries, following the WC story as a
    reference.
 4. Run `yarn test` to verify that all reflection assertions pass.
+
+## Handling WC elements missing from `custom-elements.json`
+
+Some WC elements are registered via `defineCustomElement()` inside their
+`index.ts` instead of using the `@customElement()` decorator. The CEM analyser
+only sees the decorator form, so these elements never appear in
+`custom-elements.json` and the generator produces no wrapper for them.
+
+**Do not work around this with `CUSTOM_ELEMENTS_SCHEMA`.** Adding that schema to
+a story's `moduleMetadata` silences Angular's template checker and allows the
+raw `cds-*` tag to pass through, but it defeats Angular's type system for the
+whole story module. It is never acceptable in `@carbon/angular` stories.
+
+**The correct fix is `SYNTHETIC_TAGS`.** Add a hand-authored descriptor to the
+`SYNTHETIC_TAGS` array at the top of `index.js`. Each entry mirrors the shape of
+a real manifest tag object — `name`, `path`, `description`, and `properties`:
+
+```js
+const SYNTHETIC_TAGS = [
+  {
+    name: 'cds-accordion-skeleton',
+    path: './src/components/accordion/accordion-skeleton.ts',
+    description: 'Skeleton of accordion.',
+    properties: [
+      {
+        name: 'alignment',
+        attribute: 'alignment',
+        description:
+          'Specify the alignment of the accordion heading title and chevron.',
+        type: 'string',
+        default: '"END"',
+      },
+      {
+        name: 'isFlush',
+        attribute: 'isFlush',
+        description: 'Specify whether Accordion text should be flush.',
+        type: 'boolean',
+        default: 'false',
+      },
+    ],
+  },
+  // ...
+];
+```
+
+The `path` field drives `resolveBarrelImport`, which walks up to the nearest
+`index.ts` folder — so it finds the existing `accordion/index.js` barrel that
+already registers the whole family including the skeleton.
+
+After adding a synthetic entry:
+
+1. Run `yarn generate:wrappers --tag cds-<name>` to generate the
+   `src/generated/` wrapper.
+2. Add the corresponding `.entries/<entry>/<Name>/` directory with the
+   `cds-ng-*` prefixed component file (copy the pattern from an existing entry
+   such as `.entries/text-input/TextInputSkeleton/`).
+3. Add `export * from './<Name>';` to `.entries/<entry>/index.ts`.
+4. Also add a `// TODO(@carbon/web-components):` comment in the WC source file
+   pointing to the root fix: adding `@customElement()` to the class so it
+   appears in `custom-elements.json` automatically and `SYNTHETIC_TAGS` can be
+   removed.
+
+See `AccordionSkeleton`, `CheckboxSkeleton`, and `DropdownSkeleton` in
+`SYNTHETIC_TAGS` as a complete worked example.
