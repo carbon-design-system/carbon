@@ -40,8 +40,8 @@ Angular 19+ but required on Angular 17 and 18, which this package's peer range
 (`>=17`) still supports. No `NgModule` barrel classes are exported as part of
 the public API.
 
-> **Update 2026-10-27.** [ADR 0018](0018-angular-supported-major-versions.md)
-> was accepted with a peer floor of Angular 20. The explicit `standalone: true`
+> **Update 2026-10-28.** [ADR 0018](0018-angular-supported-major-versions.md)
+> was accepted with a peer floor of Angular 19. The explicit `standalone: true`
 > can be dropped from components, because it is the decorator default from
 > Angular 19.
 

@@ -672,9 +672,11 @@ Not blockers for the decision. Tracked in
 1. Declare `lit-html` in `build-entries`. The Tearsheet files import
    `lit-html/directives/class-map.js`, which resolves today only through npm
    hoisting from `lit`. Then check under pnpm.
-2. Load the Accordion, Modal and `ModalFooter` in a browser with Playwright, and
-   write the per-component child-registration check across all composites
-   (verification items 2 and 3).
+2. ~~Load the Accordion, Modal and `ModalFooter` in a browser with Playwright.~~
+   Done 2026-10-28 (Accordion, Modal, `ModalFooter` with two and three buttons;
+   27 checks, all passing). Still open: the per-component child-registration
+   check across the other composites (about 70 to 76 in total; verification
+   items 2 and 3).
 3. Measure a real Angular app through the wrappers, for size and tree-shaking of
    the primary entry (verification item 4).
 4. Decide how to produce the manifest: stay on WCA or move to CEM (open question

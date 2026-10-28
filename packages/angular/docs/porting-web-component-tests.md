@@ -153,3 +153,26 @@ Two generator rules that have already caught real bugs:
 - [ ] `<Name>.spec.ts` covers each `@Input()` / `@Output()` binding
 - [ ] `<Name>.e2e.ts` covers anything listed under "Playwright" above
 - [ ] `yarn workspace @carbon/angular test` and `build` pass
+
+## Porting backlog
+
+State as of 2026-10-28. Only Button has the full set. Everything else has
+generated wrappers and, for the six below, hand-written Playwright checks that
+were not derived from the WC tests.
+
+| Component  | Parity spec | Binding spec       | E2E (hand-written, step 8) | WC tests to port                                                                                                      |
+| ---------- | ----------- | ------------------ | -------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| Button     | Done        | Done               | Done                       | None left (10 `it.todo`)                                                                                              |
+| Modal      | No          | `ModalFooter` only | Done                       | `modal/__tests__/modal-test.js`                                                                                       |
+| Accordion  | No          | One input only     | Done                       | `accordion/__tests__/accordion-test.js`                                                                               |
+| ActionSet  | No          | No                 | Done                       | `action-set/__tests__/action-set-test.js`                                                                             |
+| Checkbox   | No          | Value accessor     | Done                       | `checkbox/__tests__/checkbox-test.js`, `checkbox-form-test.js`, `checkbox-group-test.js`, `checkbox-skeleton-test.js` |
+| TextInput  | No          | Value accessor     | Done                       | `text-input/__tests__/`                                                                                               |
+| Dropdown   | No          | No                 | Done                       | `dropdown/__tests__/`                                                                                                 |
+| All others | No          | No                 | No                         | `<name>/__tests__/` for each of the ~270 remaining wrappers                                                           |
+
+Order suggestion: the six step 8 components first (their stories and e2e specs
+already exist), then the other 27 wrappers with a value accessor, then the
+composites that register children. Before porting file by file, cost a shared
+harness that runs a WC suite against its wrapper; at ~270 components, copying
+each file by hand is the expensive path.

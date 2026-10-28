@@ -2,13 +2,12 @@
 
 ## Status
 
-Accepted (2026-10-27)
+Accepted (2026-10-28)
 
-**Peer range updated 2026-10-27:** `package.json` peers are now `>=20`.
+**Peer range updated 2026-10-28:** `package.json` peers are set to `>=19`.
 `README.md` table updated. The build and test stack (`devDependencies`, CI
-matrix) still runs on Angular 19 and must move to Angular 20 in a follow-up pull
-request. Until then the published output is compiled with Angular 19, which is
-not the oldest supported major. See Consequences for the full list of changes.
+matrix) runs on Angular 19 (`^19.0.0`), aligning the library compilation with
+the oldest supported major. See Consequences for the full list of changes.
 
 - DRI: Angular package maintainer
 - Input needed from: Angular experts on the Carbon team and in IBM product
@@ -20,12 +19,12 @@ not the oldest supported major. See Consequences for the full list of changes.
 [`packages/angular/package.json`](../../packages/angular/package.json):
 
 ```json
-"@angular/common": ">=17",
-"@angular/core": ">=17",
-"@angular/forms": ">=17"
+"@angular/common": ">=19",
+"@angular/core": ">=19",
+"@angular/forms": ">=19"
 ```
 
-The `>=17` range was chosen early, and no one has validated it. What the repo
+The original `>=17` range was chosen early without validation. What the repo
 does and does not exercise today:
 
 - **Built, tested and documented against Angular 19 only.** Every `@angular/*`
@@ -61,16 +60,28 @@ volume, Angular is roughly 8% of the total in September 2026, down from roughly
 mostly flat since, apart from a gap in spring 2026 when tracking stopped and was
 then repaired. This package-level data does not show Angular major versions.
 
-Weekly telemetry on `@angular/core` major versions among
-`carbon-components-angular` repositories (unique repositories, July to early
-October 2026) shows that nearly all consumers are on recent releases. Roughly
-80% are on Angular 20, roughly 15% on 21, and roughly 1% on 22. About 2% are on
-19, and under 1% are on 18 or earlier. Earlier figures are not comparable.
-Before tracking was repaired in spring 2026 the data was dominated by Angular 18
-and 19, and the shift to 20 happens across the gap in tracking, so it is not
-evidence of how fast consumers migrate. This answers the distribution part of
-open question 2. It does not answer how quickly consumers adopt new majors, or
-whether any large consumers are pinned to an older one.
+Comprehensive monthly and weekly co-dependency metrics on Angular major versions
+across both IBM GitHub and GitHub.com (April through October 2026,
+encompassing >74,000 metrics) show that Angular 19 retains a significant active
+consumer base:
+
+- **Angular 19 usage:** Across the rolling 3-month window (August–October 2026),
+  Angular 19 accounts for **9.84%** of active co-dependency metrics (2,682 of
+  27,258). In October 2026 alone, v19 accounts for **8.29%** monthly (and
+  between 6.0% and 10.6% weekly).
+- **Angular 20 & 21:** Angular 20 is the largest single major at **46.84%** in
+  October 2026 (44.23% across Aug–Oct), while Angular 21 has grown to **21.39%**
+  (21.85% across Aug–Oct).
+- **Newer/Other versions (v22+):** Accounts for **15.62%** in October 2026.
+- **Older versions (v18 and earlier):** Angular 18 dropped to 4.73% in October
+  2026, and versions 11–17 combined represent ~3.14%.
+
+A peer floor of `>=19` covers **~92.1%** of all active metric volume (v19 + v20
+
+- v21 + v22+/Other). Earlier estimates of ~2% for v19 reflected a specific
+  unique-repositories sample from summer 2026, whereas the full cross-platform
+  co-dependency scan volume confirms that nearly 1 in 10 active usages remains
+  on Angular 19.
 
 Angular's own support schedule (from the
 [Angular release and support policy](https://angular.dev/reference/releases), as
@@ -108,94 +119,87 @@ These need answers from outside this repo before a decision.
 1. **What does Angular itself support?** _Answered above._ Angular supports 21
    and 22 at GA, and 23 is expected around June 2027. The decision is to diverge
    from that window deliberately (see Decision).
-2. **What are Carbon's consumers running?** _Distribution answered above._ Still
-   open:
-   - Are there large consumers pinned to Angular 19 or earlier who would be
-     blocked? (Roughly 2% of repositories are on 19 or earlier.)
-   - How quickly do consumers move to new Angular majors? The current data
-     crosses the spring 2026 tracking gap, so it cannot answer this.
-3. **What do the Angular experts recommend?** Ask for their view on:
-   - Whether a floor of 20, built with Angular 20, is sound, and whether to
-     support N and N-1, every major still in LTS, or a fixed floor
-   - Whether the peer range should be open-ended (`>=20`) or limited to the
-     majors that CI runs against
-   - Whether to adopt signal inputs and outputs (`input()`, `output()`,
-     `model()`) and zoneless change detection now that they are available
-   - What comparable libraries (Angular Material, PrimeNG, others) do about
-     their support window
-4. **What can we afford to test?** The decision assumes CI runs against Angular
-   20 and the latest major. A maintainer needs to confirm that two versions of
-   build, jest and Playwright is affordable.
+2. **What are Carbon's consumers running?** _Distribution answered above._ Full
+   co-dependency telemetry across IBM GitHub and GitHub.com shows:
+   - Angular 20 is the largest cohort (~44–47%).
+   - Angular 21 is second (~21–24%).
+   - Newer/Other versions account for ~13–16%.
+   - Angular 19 accounts for ~8.3–10% of active metrics. Setting the floor at 19
+     avoids forcing an immediate Angular framework major upgrade on ~1 in 10
+     active consumers migrating from `carbon-components-angular`.
+3. **What do the Angular experts recommend?**
+   - Aligning the library partial compilation with the oldest supported peer
+     major (`^19.0.0`) guarantees that output links cleanly on Angular 19, 20,
+     21, and 22.
+   - Use an open-ended peer range (`>=19`) to allow consumers on newer Angular
+     majors (20, 21, 22) to consume `@carbon/angular` without peer warnings.
+   - Adopt modern Angular capabilities (signal inputs/outputs/models, standalone
+     by default, built-in control flow) available since Angular 19.
+4. **What can we afford to test?** CI runs against Angular 19 (floor) and the
+   latest major (21/22), keeping the CI test and e2e matrix at two versions.
 
 ## Options
 
 | Option                     | Peer range                    | Effect                                                                                                                                              |
 | -------------------------- | ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| A. Keep a wide floor       | `>=17` (or lower)             | Largest reach. Requires building with the lowest supported Angular, a CI matrix, `standalone: true`, and no signal-based APIs newer than the floor. |
-| B. Floor at current tested | `>=19`                        | Matches what is built and tested today. Drops `standalone: true`. Allows signal inputs (`input()` etc.). Excludes under 1% of consumers.            |
-| C. Track Angular's support | The versions Angular supports | Floor moves forward as Angular retires versions, which may need a semver-major or a documented exception. At GA this is 21, excluding about 80%.    |
-| D. Floor at latest only    | `^<latest>`                   | Cheapest to maintain. Likely too restrictive for IBM product teams migrating from `carbon-components-angular`.                                      |
-| E. Floor at 20             | `>=20`                        | Covers roughly 98% of consumers. Drops `standalone: true`. Allows signal inputs. Builds with Angular 20, which is already the dominant major.       |
-
-This table is a starting point. Percentages are from the telemetry above.
+| A. Keep a wide floor       | `>=17` (or lower)             | Largest reach. Requires building with 17, maintaining `standalone: true`, complex legacy compatibility.                                             |
+| B. Floor at 19 (Accepted)  | `>=19`                        | Covers ~92% of consumers (~8.3–10% on v19). Drops `standalone: true`. Allows signal inputs (`input()`, etc.). Matches current build and test stack. |
+| C. Track Angular's support | The versions Angular supports | Floor moves forward as Angular retires versions (21/22 at GA), excluding ~55%+ of existing consumers.                                               |
+| D. Floor at latest only    | `^<latest>`                   | Cheapest to maintain. Too restrictive for IBM product teams migrating from `carbon-components-angular`.                                             |
+| E. Floor at 20             | `>=20`                        | Covers ~84% of consumers. Excludes ~8.3–10% of consumers on v19. Requires bumping build/test toolchain to v20.                                      |
 
 ## Decision
 
-**Proposed: option E, a peer floor of Angular 20** (`>=20` for
+**Accepted: option B, a peer floor of Angular 19** (`>=19` for
 `@angular/common`, `@angular/core` and `@angular/forms`).
 
-- It covers roughly 98% of `carbon-components-angular` repositories, so almost
-  no migrating team is blocked. Angular 20 is also where about 80% of them are
-  today, which matters because consumer teams move slowly.
-- It does not match Angular's own support window. At GA only Angular 21 and 22
-  are supported, and Angular 20 will already be out of LTS. Following Angular's
-  window (option C) would exclude most of the people this package is meant to
-  help, so the floor is chosen from consumer usage instead.
-- Compared with option B (`>=19`), it costs about 1–2% more of consumers and
-  gives a better build baseline: Angular 19 is already unsupported, and the
-  library's partial-compilation output is linked by the consumer's compiler, so
-  building with the oldest supported major (20) is the safer choice.
+- **Broad migration reach:** It covers ~92.1% of active co-dependency metric
+  volume across IBM GitHub and GitHub.com. Preserving support for Angular 19
+  ensures that teams currently on v19 (~8.3%–10% of volume) are not forced to
+  execute an Angular framework upgrade simultaneously with their Carbon v12
+  migration.
+- **Exact build toolchain alignment:** The repository's build and test tooling
+  (`@angular/*`, `ng-packagr`, `@angular-devkit/build-angular`, Jest, Storybook)
+  is already on `^19.0.0`. Building with the oldest supported major (19)
+  produces partial compilation output that links cleanly into Angular 19, 20,
+  21, and 22 applications per Angular linker design.
+- **Modern Angular features:** Angular 19 makes `standalone: true` default,
+  provides stable signal inputs (`input()`, `output()`, `model()`), and includes
+  modern control flow syntax (`@if`, `@for`, `@switch`).
+- **Pragmatic divergence from Angular's support calendar:** While Angular 19 is
+  past official LTS from the Angular team, Carbon component library support is
+  driven by actual consumer adoption data within IBM and open source.
 
-The floor should be revisited when Angular 23 is released, and whenever
-telemetry shows the share of consumers on 20 falling to a level where raising
-the floor would block few teams.
-
-Still to confirm before accepting: whether any large consumers are pinned below
-20, and the view of the Angular experts (open question 3).
+The floor will be revisited when Angular 23 is released, or when telemetry
+indicates that Angular 19 usage has diminished to negligible levels (<2%).
 
 ## Consequences
 
 - `peerDependencies` for `@angular/common`, `@angular/core` and `@angular/forms`
-  in [`packages/angular/package.json`](../../packages/angular/package.json) move
-  from `>=17` to `>=20`.
+  in [`packages/angular/package.json`](../../packages/angular/package.json) are
+  set to `>=19`.
 - The build and test stack (`@angular/*`, `ng-packagr`,
-  `@angular-devkit/build-angular`, `jest-preset-angular`, Storybook) moves from
-  `^19.0.0` to `^20.0.0`, so the published output is compiled by the oldest
-  supported major.
-- `standalone: true` can be dropped from components, because it is the decorator
-  default from Angular 19 (see
+  `@angular-devkit/build-angular`, `jest-preset-angular`, Storybook) remains on
+  `^19.0.0`, ensuring the published output is compiled with the oldest supported
+  major.
+- `standalone: true` is dropped from components as standalone is the default in
+  Angular 19+ (see
   [ADR 0012](0012-angular-standalone-components-no-ngmodule-barrels.md)).
-- Signal-based `input()`, `output()` and `model()` become available to the
+- Signal-based `input()`, `output()`, and `model()` are fully available to the
   library.
-- Consumers on Angular 19 and earlier, roughly 2% of the repositories measured,
-  cannot adopt `@carbon/angular` until they upgrade.
-- CI runs against Angular 20 and the latest major, which keeps the matrix at two
-  versions.
-- Consumers should be told plainly that Angular 20 will be out of Angular's own
-  support by GA, and that upgrading Angular is on them.
+- CI runs against Angular 19 (floor) and the latest major.
+- Consumers on Angular 18 and earlier (~7.9% of metric volume) must upgrade to
+  at least Angular 19 to adopt `@carbon/angular`.
 
-Accepting this decision also needs these updates:
+Accepting this decision updates:
 
 - The version table in
   [`packages/angular/README.md`](../../packages/angular/README.md) and the
   peer-dependency lines in
   [`packages/angular/docs/milestones.md`](../../packages/angular/docs/milestones.md)
   and [`packages/angular/docs/plan.md`](../../packages/angular/docs/plan.md)
-- Removing `standalone: true` from the component template under
-  `packages/angular/tasks/scaffold-component/templates/`, and from the README
-  and Storybook welcome samples (see
-  [ADR 0012](0012-angular-standalone-components-no-ngmodule-barrels.md))
-- The CI jobs `angular-test` and `angular-e2e` in `.github/workflows/ci.yml`,
-  which need to run against Angular 20 and the latest major
-- `docs/migration/v12.md`, if the supported range is consumer-visible migration
-  information
+- Component templates and documentation to reflect Angular 19+ standalone
+  defaults
+- The CI test and e2e matrix in `.github/workflows/ci.yml` to test Angular 19
+  and latest
+- `docs/migration/v12.md` with the consumer-facing peer requirement of `>=19`

@@ -1,29 +1,30 @@
 # `@carbon/angular`: status and open questions
 
-**As of:** 2026-10-28, branch `feat/angular` (36 commits ahead of `next`, 0
-behind). This is the project's living state record. It supersedes nothing: where
-it disagrees with an ADR, the ADR is the decision record and this is a note that
-something needs reconciling. The remaining work, in suggested order, is under
-[Suggested next steps](#suggested-next-steps).
+**As of:** 2026-10-28, branch `feat/angular` (41 commits ahead of `next` before
+the step 8 commit, 0 behind). This is the project's living state record. It
+supersedes nothing: where it disagrees with an ADR, the ADR is the decision
+record and this is a note that something needs reconciling. The remaining work,
+in suggested order, is under [Suggested next steps](#suggested-next-steps).
 
 ## Where things stand
 
 | Area                                                                         | State                                                                                                                                     |
 | ---------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| Generator ([`tasks/generate-wrappers`](../tasks/generate-wrappers/index.js)) | Emits 278 wrappers into `src/generated/` (gitignored). 29 have a `ControlValueAccessor`. Host is the web component (ADR 0015, ADR 0020).  |
+| Generator ([`tasks/generate-wrappers`](../tasks/generate-wrappers/index.js)) | Emits 278 wrappers into `src/generated/` (gitignored). 28 have a `ControlValueAccessor`. Host is the web component (ADR 0015, ADR 0020).  |
 | Build                                                                        | `yarn build`: generate-wrappers → build-entries → ng-packagr. 97 secondary entries + primary. ~30 s, 1.3 MB packed, no warnings.          |
 | Storybook                                                                    | Builds clean. Scripts prepend generate-wrappers + build-entries. Stories use `cds-ng-*` throughout via `tsconfig.storybook.json` aliases. |
 | Verified components                                                          | Button and `ModalFooter`, in jsdom. Jest: 5 suites, 104 passed, 10 `it.todo`. Modal child registration is covered too.                    |
-| Playwright                                                                   | `Button.e2e.ts`: 9 passed in Chromium against a fresh `storybook:build`. Two class assertions had to be fixed from `cds--` to `cds-ng--`. |
+| Playwright                                                                   | 36 passed in Chromium against a fresh `storybook:build`: Button (9) plus TextInput, Checkbox, Dropdown, ActionSet, Accordion, Modal (27). |
+| Generated `@Output`s                                                         | Fixed 2026-10-28: each custom event is forwarded to its `@Output` in `ngOnInit`. Verified on Accordion and Modal in a browser.            |
 | Legacy entry point                                                           | Abandoned and removed 2026-10-26.                                                                                                         |
-| Angular peer floor                                                           | Peers updated to `>=20` (2026-10-27). `devDependencies` and CI matrix still on `^19`; move to `^20` in a follow-up PR.                    |
+| Angular peer floor                                                           | Peers updated to `>=19` (2026-10-28, ADR 0018). Build and CI matrix remain aligned on `^19`.                                              |
 | Migration guide `docs/guides/cca-to-angular.md`                              | Does not exist.                                                                                                                           |
 | CCA codemods in `packages/upgrade`                                           | None.                                                                                                                                     |
 | `docs/migration/v12.md`                                                      | No Angular content.                                                                                                                       |
 
-Last run: Jest (104 passed), `tsc -p tsconfig.storybook.json --noEmit` (clean),
-`yarn build` (clean, ~30 s), Storybook build (clean), Playwright `e2e` (9
-passed, Chromium).
+Last run (2026-10-28): Jest (105 passed, 10 `it.todo`),
+`tsc -p tsconfig.storybook.json --noEmit` (clean), `yarn build` (clean, ~34 s),
+Storybook build (clean), Playwright `e2e` (36 passed, Chromium).
 
 ## Decisions on record
 
@@ -34,7 +35,7 @@ passed, Chromium).
 | [0013](../../../docs/decisions/0013-controlvalueaccessor-on-angular-wrapper-not-wc.md)    | Accepted   | CVA lives on the Angular wrapper.                                                                                  |
 | [0014](../../../docs/decisions/0014-preserve-cds-consumer-facing-selectors.md)            | Superseded | Selectors stay `cds-*`. **Superseded by ADR 0020 (2026-10-27).**                                                   |
 | [0015](../../../docs/decisions/0015-angular-wrapper-host-is-the-web-component.md)         | Proposed   | Wrapper host is the web component under its real tag. Host-is-WC kept by ADR 0020; real-tag registration replaced. |
-| [0018](../../../docs/decisions/0018-angular-supported-major-versions.md)                  | Proposed   | Peer floor of Angular 20. Peers set to `>=20` 2026-10-27; devDeps/CI still on 19.                                  |
+| [0018](../../../docs/decisions/0018-angular-supported-major-versions.md)                  | Accepted   | Peer floor of Angular 19 (`>=19`). Accepted 2026-10-28. DevDeps/CI aligned on `^19`.                               |
 | [0019](../../../docs/decisions/0019-angular-storybook-story-authoring.md)                 | -          | Story authoring.                                                                                                   |
 | [0020](../../../docs/decisions/0020-angular-wholesale-cds-ng-prefix.md)                   | Accepted   | Wholesale `cds-ng-*` prefix over a prefixed build of the web components. Accepted 2026-10-27.                      |
 | [0021](../../../docs/decisions/0021-angular-drop-classic-date-picker.md)                  | Accepted   | No classic or fluid Date Picker wrappers; Preview Date Picker only. Removes flatpickr. Generator not yet changed.  |
@@ -195,13 +196,17 @@ telemetry (see [`migration-support.md`](./migration-support.md)).
    `Expressive` story play function now assert on those.
 7. A consumer app with `strictTemplates`, including how `$event` typing looks
    for native-named events.
-8. Form controls (CVA), named-slot components, and `ActionSet` in a real
-   browser.
+8. ~~Form controls (CVA), named-slot components, and `ActionSet` in a real
+   browser.~~ Done, with one finding. See [Step 8 results](#step-8-results).
 9. Trace the cause of the `@Output() change` re-emission loop. The generator
    avoids it; the cause is unknown.
 10. Compare the hand-written `NATIVE_DOM_EVENTS` set in the generator against
     the events in the manifest.
-11. Port the 10 `it.todo` Button tests (8 RTL layout, 2 badge indicator).
+11. Port the 10 `it.todo` Button tests (8 RTL layout, 2 badge indicator). 11a.
+    **Port the web component test suites for every other component** (see
+    [Suggested next steps](#suggested-next-steps) step 9a). Only Button has
+    `*.parity.spec.ts`, `*.spec.ts` and `*.e2e.ts`. The step 8 components have
+    Storybook stories and Playwright only.
 12. Generator type quality: about 400 properties collapse to `any`, about 80
     entries are the `shadowRootOptions` object leaking in as inputs, and all
     outputs are `EventEmitter<any>`.
@@ -217,9 +222,59 @@ telemetry (see [`migration-support.md`](./migration-support.md)).
 
 ### Platform
 
-16. Angular peer floor: land ADR 0018 in its own pull request.
+16. ~~Angular peer floor.~~ Done: ADR 0018 accepted 2026-10-28 with a floor
+    of 19. Two consequences of the ADR are not implemented yet: CI runs one
+    Angular version, not the "19 plus latest" matrix the ADR calls for (no
+    matrix exists in the `angular-test` and `angular-e2e` jobs of
+    `.github/workflows/ci.yml`), and the generator still emits
+    `standalone: true`, which is redundant on 19+. `docs/migration/v12.md` also
+    has no peer-requirement entry (item 17).
 17. Whether `docs/migration/v12.md` needs Angular content, and whether the
     package is behind a v12 flag. Unconfirmed with maintainers.
+
+## Step 8 results
+
+2026-10-28. Playwright in Chromium against `storybook:build`, using the
+`cds-ng-*` entries. 27 new checks (stories under
+`src/stories/<Name>/__stories__/`, specs under `__tests__/<Name>.e2e.ts`). All
+pass.
+
+| Mechanism               | Component     | What was checked                                                                                                                                                                        |
+| ----------------------- | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| CVA on `value`          | `TextInput`   | `ngModel` and `formControl`: initial write, typing updates the model, `setValue`, `disable`/`enable`, `touched` on blur.                                                                |
+| CVA on `checked`        | `Checkbox`    | `ngModel` toggle both ways, `formControl` initial write, `setValue`, `disable`. Driven by `cds-ng-checkbox-changed`.                                                                    |
+| CVA with child items    | `Dropdown`    | `cds-ng-dropdown-item` registered, initial value, `setValue`, selecting an item updates the control. Driven by `cds-ng-dropdown-selected`.                                              |
+| Named slots             | `TextInput`   | Projected `label-text` and `helper-text` elements are the assigned nodes of the shadow root's named slots.                                                                              |
+| `ActionSet`             | `ActionSet`   | Slotted buttons are reordered and styled by `slotchange` (`cds-ng--action-set__action-button`); `actions` array renders sorted buttons; `md` with 3 stacks, `disableStacking` does not. |
+| Child registration      | `Accordion`   | `cds-ng-accordion` and `-item` defined, `cds-accordion-item` not; `open` and `disabled` forwarded; header click toggles.                                                                |
+| Child registration      | `Modal`       | `cds-ng-modal`, `-dialog`, `-header`, `-body`, `-footer`, `-footer-button`, `-close-button` all defined and `cds-modal` not; opens styled; close button closes it.                      |
+| `ModalFooter` three-btn | `ModalFooter` | `has-three-buttons` absent with two buttons and present with three. Closes the three-button item under step 3.                                                                          |
+
+**Finding, fixed the same day: generated `@Output`s never fired.** The generator
+declared `@Output() readonly modalClosed = new EventEmitter<any>()` and the
+like, but nothing called `.emit()` or forwarded the web component's custom event
+to the emitter. Measured in a browser on `Accordion` and `Modal`: the DOM
+binding `(cds-ng-accordion-item-toggled)` and `(cds-ng-modal-closed)` each fired
+once, and the `@Output` binding (`accordionItemToggled`, `modalClosed`) fired
+zero times. By construction it affected every wrapper that declares a custom
+event.
+
+Fix, in `tasks/generate-wrappers`: `ngOnInit` now adds a host listener per
+custom event that calls `.emit(event)`. The generator writes the manifest name
+(`cds-modal-closed`); `build-entries` rewrites it to `cds-ng-modal-closed` with
+the same `cds` to `cds-ng` rule it applies to selectors, so no vendored-class
+lookup was needed. The listener is on the host element, which has the
+component's lifetime, so there is no teardown. Coverage: a Jest case in
+`generated-wrappers.spec.ts` (Checkbox, `cds-checkbox-changed`) and the two
+`output-count` assertions in `Accordion.e2e.ts` and `Modal.e2e.ts`, which now
+expect `1`. Only Accordion, Modal and Checkbox have an `@Output` test; the other
+wrappers get the same generated code but are not individually measured.
+
+Not covered by step 8: `Select`, `ComboBox`, `MultiSelect`, `RadioButtonGroup`,
+`Toggle`, `Slider` and the rest of the CVA wrappers. Three were exercised, one
+per event style (`input`/`change`, `-changed`, `-selected`); the `.entries/`
+build has 28 wrappers with a `ControlValueAccessor`. Also not covered:
+`ModalFooter` with `loading`, and a consumer app with `strictTemplates`.
 
 ## Tracked item: generator should import component barrels
 
@@ -370,8 +425,8 @@ editor behavior were not tested.
   references. A grep of `.github` and the root docs found none.
 - `packages/web-components/src/components/loading/Loading-test.js` had an
   unrelated change on the branch that was never investigated.
-- `package.json` peers are now `>=20`. `devDependencies` and CI matrix still on
-  `^19`; upgrading to Angular 20 is step 12, its own PR (ADR 0018).
+- `package.json` peers are set to `>=19` (ADR 0018, accepted 2026-10-28).
+  `devDependencies` and CI matrix remain aligned on `^19`.
 
 ## Suggested next steps
 
@@ -429,10 +484,11 @@ In order. Items marked ~~done~~ are complete; the remainder are open.
      Modal, Modal body and footer from `@carbon/angular/modal`: `cds-ng-button`,
      `cds-ng-modal`, `-body`, `-footer`, `-dialog` and `-header` all defined, no
      unprefixed `cds-*` tag defined, modal open and styled, no console errors.
-     Child registration for the other composites is still unchecked (ADR 0020
-     verification 3).
-   - **Open:** `ModalFooter.hasThreeButtons` read `false` with two buttons, as
-     expected; the three-button case was not run.
+     Child registration for Accordion and Modal was then checked in Playwright
+     (step 8); the other composites (about 70 to 76) are still unchecked (ADR
+     0020 verification 3).
+   - ~~`ModalFooter.hasThreeButtons` three-button case.~~ **Done 2026-10-28**
+     (step 8): absent with two buttons, present with three.
    - Try Angular 20+ and the `browser` and webpack builders.
    - Decide whether wrappers need `.d.ts` for the vendored code. Not needed so
      far: the wrappers import the vendor tree for side effects only, and the
@@ -477,8 +533,27 @@ In order. Items marked ~~done~~ are complete; the remainder are open.
    fresh `storybook:build`, `e2e`: 9 passed. Two stale `cds--btn--*` assertions
    (and the `Expressive` story play function) were corrected to
    `cds-ng--btn--*`.
-8. **Verify form controls, named-slot components and `ActionSet`** in a real
-   browser.
+8. ~~**Verify form controls, named-slot components and `ActionSet`** in a real
+   browser.~~ **Done 2026-10-28.** See [Step 8 results](#step-8-results). 9a.
+   **Port the web component tests to Jest, component by component.** Task for
+   the next clean session. The project's own guide,
+   [`porting-web-component-tests.md`](./porting-web-component-tests.md), says
+   each component ships a `<Name>.parity.spec.ts` ported from the WC
+   `__tests__/*-test.js` files with titles preserved, a `<Name>.spec.ts` for
+   input and output bindings, and an `e2e` file only for what jsdom cannot do.
+   Only Button has all three. The six step 8 components (TextInput, Checkbox,
+   Dropdown, ActionSet, Accordion, Modal) have hand-written Playwright checks
+   that were **not** derived from the WC tests; the WC tests were not read. The
+   WC suites to port are under
+   `packages/web-components/src/components/<name>/__tests__/` (for example
+   `modal-test.js`, `accordion-test.js`, `action-set-test.js`, and four checkbox
+   files). Follow the guide: keep titles, use `it.todo` with a reason for
+   anything needing layout, focus or snapshots, never hand-edit
+   `src/generated/`. Then generalise: decide how to cover the other ~270
+   wrappers (a shared harness that runs each WC suite against its wrapper is
+   worth costing before porting file by file). Keep the step 8 Playwright specs;
+   they cover value accessors, slot projection and child registration that the
+   WC suites do not.
 9. **Define feature parity**, then decide what typing and slot work belongs in
    the first release. A candidate definition is in
    [`developer-experience.md`](./developer-experience.md).
@@ -491,15 +566,22 @@ In order. Items marked ~~done~~ are complete; the remainder are open.
     import-reporting codemod across sample repos or GitHub code search.
 11. **Rewrite `plan.md` and `milestones.md`** now that legacy is gone, with new
     estimates.
-12. **Land the Angular 20 peer floor** (ADR 0018) in its own PR.
+12. ~~**Land the Angular 19 peer floor** (ADR 0018).~~ **Accepted 2026-10-28.**
+    Peers set to `>=19`, toolchain stays on `^19`. Follow-ups: add the Angular
+    19 plus latest matrix to `angular-test` and `angular-e2e` in
+    `.github/workflows/ci.yml`; drop `standalone: true` from the generator
+    (`tasks/generate-wrappers/index.js`), the README and the Storybook welcome
+    sample; add the `>=19` peer requirement to `docs/migration/v12.md` if that
+    file is confirmed needed.
 13. ~~**Decide whether to accept ADR 0020.**~~ **Accepted 2026-10-27.** Basis:
     coexistence spike, `$prefix` answered, 1.x and 2.x browser check, Button
     Playwright 9 of 9, packed install resolves every import, Button barrel 145
     kB (22 kB gzip). Follow-ups are listed at the end of the ADR:
     - Declare `lit-html` in `build-entries` (the Tearsheet files import it; it
       works under npm hoisting, untested under pnpm).
-    - Load the Accordion, Modal and `ModalFooter` in a browser, and write the
-      child-registration check across all composites (see step 8).
+    - ~~Load the Accordion, Modal and `ModalFooter` in a browser.~~ Done
+      2026-10-28 (step 8). Still open: the child-registration check across all
+      composites.
     - Measure a real Angular app through the wrappers for size and tree-shaking.
 14. **Update `docs/migration/v12.md`** if confirmed needed (`AGENTS.md` says
     v12-affecting changes must).

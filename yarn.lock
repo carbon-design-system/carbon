@@ -3432,9 +3432,9 @@ __metadata:
     typescript: "npm:~5.8.3"
     zone.js: "npm:~0.15.0"
   peerDependencies:
-    "@angular/common": ">=20"
-    "@angular/core": ">=20"
-    "@angular/forms": ">=20"
+    "@angular/common": ">=19"
+    "@angular/core": ">=19"
+    "@angular/forms": ">=19"
     "@carbon/styles": ^2.0.0-alpha.3
     "@carbon/web-components": ^3.0.0-alpha.3
   languageName: unknown

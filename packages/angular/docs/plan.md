@@ -1513,13 +1513,11 @@ old API unmaintainable>
    as part of the core library, providing single-package consumption without a
    separate `@carbon/ibm-products-angular` package.
 
-10. **Supported Angular major versions** — **Proposed: floor of Angular 20.**
-    The peer range is currently `>=17`, but the package is only built and tested
-    against Angular 19. ADR 0018 proposes a peer floor of `>=20`, built and
-    tested against Angular 20 and the latest major, based on Angular's support
-    policy and consumer telemetry. Moving the code to match is a follow-up task
-    that should happen as soon as possible, in a separate pull request. It also
-    allows dropping the explicit `standalone: true`. Tracked in
+10. **Supported Angular major versions** — **Accepted: floor of Angular 19.**
+    ADR 0018 sets a peer floor of `>=19`, built and tested against Angular 19
+    and the latest major, aligning the library build toolchain with the lowest
+    supported major and covering over 92% of active consumer metrics. It also
+    allows dropping explicit `standalone: true`. Tracked in
     [`docs/decisions/0018-angular-supported-major-versions.md`](../../../docs/decisions/0018-angular-supported-major-versions.md).
 
 ---

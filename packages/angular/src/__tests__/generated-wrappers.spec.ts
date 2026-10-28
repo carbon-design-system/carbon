@@ -181,6 +181,33 @@ describe('generated wrappers', () => {
       // No @Output for native events → exactly 1.
       expect(fixture.componentInstance.count).toBe(1);
     });
+    // Regression: custom-event @Outputs were declared but never emitted.
+    it('emits the @Output once when the web component dispatches its custom event', async () => {
+      @Component({
+        standalone: true,
+        imports: [CheckboxComponent],
+        template: `<cds-checkbox
+          (checkboxChanged)="onToggled($event)"></cds-checkbox>`,
+      })
+      class OutputHost {
+        count = 0;
+        onToggled(_e: Event) {
+          this.count += 1;
+        }
+      }
+
+      const fixture = TestBed.createComponent(OutputHost);
+      fixture.detectChanges();
+      await fixture.whenStable();
+
+      const el = fixture.nativeElement.querySelector(
+        'cds-checkbox'
+      ) as HTMLElement;
+      el.dispatchEvent(new CustomEvent('cds-checkbox-changed'));
+      fixture.detectChanges();
+
+      expect(fixture.componentInstance.count).toBe(1);
+    });
   });
 
   describe('inputs', () => {

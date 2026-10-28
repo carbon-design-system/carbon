@@ -20,12 +20,11 @@ Peer dependencies required in your project:
 
 | Package                  | Version  |
 | ------------------------ | -------- |
-| `@angular/core`          | `>=20`   |
+| `@angular/core`          | `>=19`   |
 | `@carbon/web-components` | `^3.0.0` |
 | `@carbon/styles`         | `^2.0.0` |
 
-> **Note:** the package is built and tested against Angular 19 today. The
-> devDependencies and CI matrix move to Angular 20 in a follow-up change. See
+> **Note:** the package is built and tested against Angular 19. See
 > [ADR 0018](../../docs/decisions/0018-angular-supported-major-versions.md).
 
 ## Usage

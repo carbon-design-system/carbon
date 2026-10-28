@@ -62,7 +62,7 @@ a judgment, not a measurement.
 | 7   | Tag changes                                                                                                                        | 63 same-tag (add prefix) plus 32 renamed   | Mechanical                              |
 | 8   | NgModule imports become standalone `imports: []`                                                                                   | All consumers                              | Mechanical                              |
 | 9   | Import paths and package changes                                                                                                   | All consumers                              | Mechanical                              |
-| 10  | Peer dependencies: `@carbon/styles` 1.x to 2.x, Angular `>=20` (proposed), `@carbon/web-components` not needed (bundled, ADR 0020) | All consumers                              | Package manager, not codemod            |
+| 10  | Peer dependencies: `@carbon/styles` 1.x to 2.x, Angular `>=19` (ADR 0018), `@carbon/web-components` not needed (bundled, ADR 0020) | All consumers                              | Package manager, not codemod            |
 
 ### 1. Shadow DOM
 

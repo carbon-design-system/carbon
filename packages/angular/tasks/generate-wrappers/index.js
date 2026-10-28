@@ -333,7 +333,8 @@ function generateWrapperForTag(tag) {
 
   // All inputs need forwarding — host IS the WC, Angular doesn't set them.
   const hasInputs = inputs.length > 0;
-  const needsElementRef = hasInputs || cvaProp;
+  const hasOutputs = outputs.length > 0;
+  const needsElementRef = hasInputs || cvaProp || hasOutputs;
 
   const usesBooleanAttribute = inputs.some((input) => input.type === 'boolean');
   const angularImports = [
@@ -343,15 +344,41 @@ function generateWrapperForTag(tag) {
     'EventEmitter',
     'Input',
     ...(hasInputs ? ['OnChanges', 'SimpleChanges'] : []),
-    ...(cvaProp ? ['OnInit', 'forwardRef'] : []),
+    ...(cvaProp || hasOutputs ? ['OnInit'] : []),
+    ...(cvaProp ? ['forwardRef'] : []),
     'Output',
     'ViewEncapsulation',
   ].sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
 
   const implementsList = [
     ...(hasInputs ? ['OnChanges'] : []),
-    ...(cvaProp ? ['OnInit', 'ControlValueAccessor'] : []),
+    ...(cvaProp || hasOutputs ? ['OnInit'] : []),
+    ...(cvaProp ? ['ControlValueAccessor'] : []),
   ];
+
+  // Forward each custom event to its @Output. The listener is on the host
+  // element, which lives and dies with this component, so it needs no cleanup.
+  // The manifest name (`cds-x-y`) is rewritten to `cds-ng-x-y` in `.entries/`
+  // by `build-entries`, the same as the selector.
+  const outputListeners = outputs
+    .map(
+      (out) =>
+        `    el.addEventListener('${out.eventName}', (event: Event) =>
+      this.${out.outputName}.emit(event)
+    );`
+    )
+    .join('\n');
+  const cvaListeners = cvaProp
+    ? `    for (const eventName of [${uniqueCvaEvents
+        .map((name) => `'${name}'`)
+        .join(', ')}]) {
+      el.addEventListener(eventName, () =>
+        this._cvaOnChange(el.${cvaProp})
+      );
+    }
+    el.addEventListener('focusout', () => this._cvaOnTouched());`
+    : '';
+  const onInitBody = [outputListeners, cvaListeners].filter(Boolean).join('\n');
 
   const propertyInputsConst = hasInputs
     ? `\nconst PROPERTY_INPUTS = new Set<string>([${inputs
@@ -376,23 +403,21 @@ function generateWrapperForTag(tag) {
     }
   }`
       : '',
-    cvaProp
-      ? `  private _cvaOnChange: (value: any) => void = () => {};
+    cvaProp || hasOutputs
+      ? `${
+          cvaProp
+            ? `  private _cvaOnChange: (value: any) => void = () => {};
   private _cvaOnTouched: () => void = () => {};
 
-  ngOnInit(): void {
+`
+            : ''
+        }  ngOnInit(): void {
     const el = this._el.nativeElement as any;
-    for (const eventName of [${uniqueCvaEvents
-      .map((name) => `'${name}'`)
-      .join(', ')}]) {
-      el.addEventListener(eventName, () =>
-        this._cvaOnChange(el.${cvaProp})
-      );
-    }
-    el.addEventListener('focusout', () => this._cvaOnTouched());
-  }
-
-  writeValue(value: any): void {
+${onInitBody}
+  }`
+      : '',
+    cvaProp
+      ? `  writeValue(value: any): void {
     (this._el.nativeElement as any).${cvaProp} = value ?? ${cvaProp === 'checked' ? 'false' : "''"};
   }
 
