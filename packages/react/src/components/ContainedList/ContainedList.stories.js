@@ -23,6 +23,8 @@ import Button from '../Button';
 import Search from '../Search';
 import OverflowMenu from '../OverflowMenu';
 import OverflowMenuItem from '../OverflowMenuItem';
+import { MenuItem, MenuItemDivider } from '../Menu';
+import { useFeatureFlag } from '../FeatureFlags';
 import Tag from '../Tag';
 
 import mdx from './ContainedList.mdx';
@@ -362,6 +364,18 @@ _WithLayer.parameters = sharedParameters;
 
 export const UsageExamples = (args) => {
   const prefix = 'cds';
+  const enableV12OverflowMenu = useFeatureFlag('enable-v12-overflowmenu');
+  const overflowMenuProps = enableV12OverflowMenu
+    ? {
+        label: 'List item options',
+        menuAlignment: 'bottom-end',
+        size: 'lg',
+      }
+    : {
+        flipped: true,
+        size: 'lg',
+        ariaLabel: 'List item options',
+      };
 
   return (
     <>
@@ -379,10 +393,21 @@ export const UsageExamples = (args) => {
           <ContainedListItem
             key={i}
             action={
-              <OverflowMenu flipped size="lg" ariaLabel="List item options">
-                <OverflowMenuItem itemText="View details" />
-                <OverflowMenuItem itemText="Edit" />
-                <OverflowMenuItem itemText="Remove" isDelete hasDivider />
+              <OverflowMenu {...overflowMenuProps}>
+                {enableV12OverflowMenu ? (
+                  <>
+                    <MenuItem label="View details" />
+                    <MenuItem label="Edit" />
+                    <MenuItemDivider />
+                    <MenuItem kind="danger" label="Remove" />
+                  </>
+                ) : (
+                  <>
+                    <OverflowMenuItem itemText="View details" />
+                    <OverflowMenuItem itemText="Edit" />
+                    <OverflowMenuItem itemText="Remove" isDelete hasDivider />
+                  </>
+                )}
               </OverflowMenu>
             }>
             List item
