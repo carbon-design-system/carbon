@@ -11,6 +11,27 @@ below included legacy adapters and are no longer valid. **Source plan:**
 [`plan.md`](./plan.md) **Package location:** `packages/angular/` **Package
 name:** `@carbon/angular` (Automated Core)
 
+## Follow-up PRs (decided 2026-10-28)
+
+The first PR (`feat/angular`) lands the package, the generator, the entry-point
+build and 7 ported components. It does **not** wait for, and does not include,
+the items below. Each is a future PR.
+
+| Follow-up PR                              | What                                                                                                                                                                                                                                                                                                                | Milestone |
+| :---------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :-------- |
+| **Scope freeze and full coverage**        | Wait for `condition-builder`, `scroll-gradient` and `tag-overflow` (ADR 0009) and any other components that join `@carbon/web-components` before v12 scope is frozen. The generator needs no change: it wraps every `cds-` tag in the manifest. Add stories and parity specs for the remaining components.          | 2         |
+| **Skeleton classes and `SYNTHETIC_TAGS`** | File the upstream issue so `AccordionSkeleton`, `CheckboxSkeleton` and `DropdownSkeleton` use `@customElement()` and appear in the manifest. Then remove `SYNTHETIC_TAGS` from the generator. Until then it stays, documented as temporary in the generator README and the `TODO(@carbon/web-components)` comments. | 2         |
+| **Migration tooling**                     | Codemods, agent skills, template parsing, the mapping file and shadow DOM guidance. See Milestone 5 for the open questions. May be delegated to a developer.                                                                                                                                                        | 5         |
+| **CEM generator**                         | Move the generator to the Custom Elements Manifest when the dev lead's PR lands.                                                                                                                                                                                                                                    | 2         |
+| **`Loading-test.js`**                     | Separate PR for the `:modal` stub change. The patch is in the gitignored `temp/loading-test-modal-stub.patch`.                                                                                                                                                                                                      | —         |
+| **Modal `EnableDialogElement` story**     | Hold until the dialog version of Modal is stable.                                                                                                                                                                                                                                                                   | 4         |
+
+Not yet assigned to a PR (decided only that they are needed): the CI Angular
+version matrix and the `standalone: true` removal (Milestone 0, ADR 0018), and
+`docs/guides/cca-to-angular.md` (Milestone 5). Two decisions are also open: the
+`@carbon/styles` peer range, and whether `docs/migration/v12.md` gets a short
+entry (Milestone 6).
+
 This document breaks the `@carbon/angular` implementation plan into seven
 focused milestones, leveraging the **automated core wrapper generator**.
 Mentions of the `@carbon/angular/legacy` entry point below are the historical
@@ -49,7 +70,9 @@ runners, Storybook, and CI workflow.
 
 ### CI
 
-> **Not done.** `.github/workflows/ci.yml` has no Angular job yet.
+> **Partly done.** `.github/workflows/ci.yml` has `angular-test` and
+> `angular-e2e` jobs, skipped unless `packages/angular/**` changed. They run on
+> one Angular version. The version matrix below is not set up.
 
 Add a CI workflow that runs:
 
@@ -143,18 +166,20 @@ delivering 100% component coverage for `@carbon/angular` core.
   including components still merging from Carbon for IBM Products. The scope
   freeze waits for `condition-builder`, `scroll-gradient` and `tag-overflow`
   (ADR 0009), which are not yet in `packages/web-components/src/components/`.
+  **This is a follow-up PR; the first PR does not wait for it.**
 - **No classic or fluid Date Pickers.** Wait for a fluid picker without
   flatpickr in the web components.
 - **Manifest moves to CEM.** A PR from the dev lead is coming, and the generator
   pivots when it lands. No spike in this PR.
 - **Skeleton classes:** open an upstream issue with the Carbon team (not filed
-  yet). `SYNTHETIC_TAGS` stays documented as temporary until it is fixed.
+  yet). `SYNTHETIC_TAGS` stays documented as temporary until it is fixed. **The
+  issue and the removal are a follow-up PR.**
 
 ### Exit criteria
 
 - All generated components compile cleanly with `ng-packagr`
 - Jest suites pass in CI
-- Scope freeze done and every web component has a wrapper
+- Scope freeze done and every web component has a wrapper (follow-up PR)
 - Version bumped to `0.0.0-prerelease.1`
 
 ---
@@ -237,6 +262,9 @@ in parallel with Milestone 4)
 > codemods no longer apply. Migration support is now codemods plus agent skills,
 > with no convenience components in core. See
 > [`migration-support.md`](./migration-support.md).
+>
+> **Delivered in a future PR (decided 2026-10-28), not the first one.** Nothing
+> below is built.
 
 ### Deliverables
 

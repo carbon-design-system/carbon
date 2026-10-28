@@ -263,13 +263,16 @@ telemetry (see [`migration-support.md`](./migration-support.md)).
     appear when the web components land them and the manifest includes them. The
     scope freeze should wait for those three, and for any others that join. Also
     needed: stories and parity specs (only 7 components have them today).
+    **Decided 2026-10-28: the first PR does not wait for this.** It is captured
+    in the plan and milestones ("Follow-up PRs") and done in a future PR.
 19. **Upstream issue for the skeleton classes.** Decided 2026-10-28: open an
     issue with the Carbon team so `AccordionSkeleton`, `CheckboxSkeleton` and
     `DropdownSkeleton` use `@customElement()` and appear in the manifest. Until
     it is fixed upstream, `SYNTHETIC_TAGS` in the generator is a temporary
     workaround and is documented as such (generator README and the
     `TODO(@carbon/web-components)` comments). **Not filed yet.** Remove the
-    synthetic entries once the manifest includes them.
+    synthetic entries once the manifest includes them. **Decided 2026-10-28:
+    document now, file the issue and remove `SYNTHETIC_TAGS` in a future PR.**
 20. **Modal `EnableDialogElement` story.** Decided 2026-10-28: hold until the
     dialog version of Modal becomes stable. The WC story lives in
     `modal.feature-flag.stories.ts`. The Angular Modal stories have no matching
@@ -650,7 +653,7 @@ In order. Items marked ~~done~~ are complete; the remainder are open.
     import-reporting codemod across sample repos or GitHub code search.
     **Decided 2026-10-28:** this is part of the plan and milestones (Milestone
     5), delivered as codemods plus agent skills, and may be delegated to a
-    developer.
+    developer. **It ships in a future PR, not the first one.**
 11. **Rewrite `plan.md` and `milestones.md`** now that legacy is gone, with new
     estimates. Include the migration tooling (item 10) and the scope freeze
     (item 18).
@@ -674,9 +677,9 @@ In order. Items marked ~~done~~ are complete; the remainder are open.
     migration doc, because the package is not behind a v12 flag). Decide whether
     `docs/migration/v12.md` also needs a short entry (`AGENTS.md` says
     v12-affecting changes must update it).
-15. **Open the upstream issue for the skeleton classes** (item 19) and put the
-    `TODO(parity)` comment on the Modal stories for `EnableDialogElement` (item
-    20).
+15. **Open the upstream issue for the skeleton classes** (item 19; future PR)
+    and put the `TODO(parity)` comment on the Modal stories for
+    `EnableDialogElement` (item 20; the comment is done).
 16. **Move the generator to CEM** when the web components PR lands (open
     question 4).
 17. **Move the `Loading-test.js` change to its own PR.** Removed from this

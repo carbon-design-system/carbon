@@ -27,6 +27,11 @@
 > - The generator does not emit stories or tests. They are hand-written, and the
 >   `storybook:parity` check was dropped.
 > - Angular 19+ is the floor (ADR 0018).
+> - **Follow-up PRs.** The first PR does not wait for the scope freeze (the
+>   three web components still merging), does not include the upstream
+>   skeleton-class issue or the `SYNTHETIC_TAGS` removal, and does not include
+>   migration tooling. All three are future PRs; see "Follow-up PRs" in
+>   [`milestones.md`](./milestones.md).
 >
 > See [`milestones.md`](./milestones.md) for where each decision lands.
 
@@ -985,14 +990,14 @@ See §4 for the full history and mechanism. In short:
 > 2026-10-26. The remaining estimates are in [`milestones.md`](./milestones.md),
 > and the migration tooling estimate is still to be made (Milestone 5).
 
-| Phase                                                           | Status                            |
-| --------------------------------------------------------------- | --------------------------------- |
-| Package scaffolding and entry points                            | Done                              |
-| Wrapper generator and 281 wrappers                              | Done; moves to CEM when it lands  |
-| Stories, Jest and Playwright tests                              | 7 components done; the rest to do |
-| Scope freeze and full web component coverage                    | Waiting on 3 web components       |
-| Migration support (codemods, agent skills, `cca-to-angular.md`) | Not started; estimate to be made  |
-| CI matrix, `standalone: true` removal, RC hardening             | Not started                       |
+| Phase                                                           | Status                                 |
+| --------------------------------------------------------------- | -------------------------------------- |
+| Package scaffolding and entry points                            | Done                                   |
+| Wrapper generator and 281 wrappers                              | Done; moves to CEM when it lands       |
+| Stories, Jest and Playwright tests                              | 7 components done; the rest to do      |
+| Scope freeze and full web component coverage                    | Future PR; waiting on 3 web components |
+| Migration support (codemods, agent skills, `cca-to-angular.md`) | Future PR; estimate to be made         |
+| CI matrix, `standalone: true` removal, RC hardening             | Not started                            |
 
 ---
 
@@ -1430,10 +1435,10 @@ old API unmaintainable>
     allows dropping explicit `standalone: true`. Tracked in
     [`docs/decisions/0018-angular-supported-major-versions.md`](../../../docs/decisions/0018-angular-supported-major-versions.md).
 
-11. **Migration tooling** — **Open, may be delegated.** Where the agent skills
-    live, how `@carbon/upgrade` parses Angular templates, how the mapping file
-    is verified, shadow DOM styling guidance, services and directives. See
-    Milestone 5 in [`milestones.md`](./milestones.md).
+11. **Migration tooling** — **Open, may be delegated; future PR.** Where the
+    agent skills live, how `@carbon/upgrade` parses Angular templates, how the
+    mapping file is verified, shadow DOM styling guidance, services and
+    directives. See Milestone 5 in [`milestones.md`](./milestones.md).
 
 12. **`@carbon/styles` peer range** — **Open.** `^2.0.0-alpha.3` today. Whether
     to also allow 1.x is not decided (ADR 0020 open question 3).
@@ -1441,8 +1446,9 @@ old API unmaintainable>
 13. **`docs/migration/v12.md` entry** — **Open.** A short `@carbon/angular`
     entry pointing at the CCA guide, or none.
 
-14. **Upstream skeleton classes** — **Open.** An issue with the Carbon team is
-    to be filed. `SYNTHETIC_TAGS` stays temporary until it is fixed.
+14. **Upstream skeleton classes** — **Open; future PR.** An issue with the
+    Carbon team is to be filed. `SYNTHETIC_TAGS` stays temporary until it is
+    fixed, then is removed.
 
 ---
 
