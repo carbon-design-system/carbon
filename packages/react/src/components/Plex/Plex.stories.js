@@ -95,6 +95,17 @@ export const IBMPlexSans = (args) => {
   );
 };
 
+// Temporary story for testing and verifying the changes. Remove before merging.
+export const SubscriptAndSuperscript = () => (
+  <p dir="auto" className="text-sans">
+    Water: H<sub>2</sub>O. Area: 10 m<sup>2</sup>. Energy: E = mc<sup>2</sup>.
+  </p>
+);
+
+SubscriptAndSuperscript.parameters = {
+  controls: { disable: true },
+};
+
 export const IBMPlexSerif = (args) => {
   return (
     <p dir="auto" style={args} className="text-serif">
