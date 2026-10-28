@@ -37,6 +37,7 @@ import { keys, match } from '../../internal/keyboard';
 import { NumberFormatOptionsPropType } from './NumberFormatPropTypes';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
+import { useFeatureFlag } from '../FeatureFlags';
 import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
 
 const translationIds = {
@@ -267,7 +268,7 @@ export interface NumberInputProps
   /**
    * Specify the size of the Number Input.
    */
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'md' | 'lg';
 
   /**
    * @deprecated please use `decorator` instead.
@@ -618,7 +619,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       onKeyUp,
       pattern = '[0-9]*',
       readOnly,
-      size = 'md',
+      size,
       slug,
       step = 1,
       translateWithId: t = defaultTranslateWithId,
@@ -634,6 +635,8 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
     const [isFocused, setIsFocused] = useState(false);
+
+    const enableV12Release = useFeatureFlag('enable-v12-release');
 
     /**
      * The input value, only used when type=number
@@ -719,7 +722,8 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       [`${prefix}--number--light`]: light,
       [`${prefix}--number--nolabel`]: hideLabel,
       [`${prefix}--number--nosteppers`]: hideSteppers,
-      [`${prefix}--number--${size}`]: size,
+      [`${prefix}--number--${size}`]: size, // TODO: V12 - Remove this class
+      [`${prefix}--layout--size-${size}`]: size,
     });
     const isInputValid = getInputValidity({
       allowEmpty,
@@ -1095,7 +1099,9 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
                   type="button">
                   <Subtract className="down-icon" />
                 </button>
-                <div className={`${prefix}--number__rule-divider`} />
+                {!enableV12Release && (
+                  <div className={`${prefix}--number__rule-divider`} />
+                )}
                 <button
                   aria-label={incrementNumLabel || iconDescription}
                   className={`${prefix}--number__control-btn up-icon`}
@@ -1107,7 +1113,9 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
                   type="button">
                   <Add className="up-icon" />
                 </button>
-                <div className={`${prefix}--number__rule-divider`} />
+                {!enableV12Release && (
+                  <div className={`${prefix}--number__rule-divider`} />
+                )}
               </div>
             )}
           </div>
@@ -1302,7 +1310,7 @@ NumberInput.propTypes = {
   /**
    * Specify the size of the Number Input.
    */
-  size: PropTypes.oneOf(['sm', 'md', 'lg']),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
 
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the

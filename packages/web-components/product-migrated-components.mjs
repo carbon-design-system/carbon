@@ -12,6 +12,10 @@
  * migrated component's stories and MDX files.
  */
 export const productMigratedStoryGlobs = [
+  '../src/examples/import-and-upload/import-and-upload.stories.ts',
+  '../src/examples/import-and-upload/*.mdx',
+  '../src/components/add-select/add-select.stories.ts',
+  '../src/components/add-select/*.mdx',
   '../src/components/action-set/action-set.stories.ts',
   '../src/components/action-set/*.mdx',
   '../src/components/full-page-error/full-page-error.stories.ts',
@@ -40,6 +44,8 @@ export const productMigratedStoryGlobs = [
   '../src/components/resizer/*.mdx',
   '../src/utilities/step-flow/step-flow.stories.ts',
   '../src/utilities/step-flow/*.mdx',
+  '../src/components/page-header/page-header.stories.ts',
+  '../src/components/page-header/*.mdx',
   '../src/components/side-panel/side-panel.stories.ts',
   '../src/components/side-panel/*.mdx',
   '../src/components/tearsheet/tearsheet.stories.ts',
@@ -60,6 +66,12 @@ export const productMigratedStoryGlobs = [
   '../src/examples/coachmark/coachmark-overlay-elements/*.mdx',
   '../src/examples/coachmark/coachmark-stacked/coachmark-stacked.stories.ts',
   '../src/examples/coachmark/coachmark-stacked/*.mdx',
+  '../src/examples/saving/saving.stories.ts',
+  '../src/examples/saving/*.mdx',
+  '../src/examples/add-select/single-add-select/single-add-select.stories.ts',
+  '../src/examples/add-select/single-add-select/*.mdx',
+  '../src/examples/about-modal/about-modal.stories.ts',
+  '../src/examples/about-modal/*.mdx',
 ];
 
 /**
@@ -76,6 +88,7 @@ export const productMigratedStoryGlobs = [
  */
 export const excludeProductsComponents = [
   'src/components/action-set/**/*',
+  'src/components/add-select/**/*',
   'src/components/full-page-error/**/*',
   'src/components/truncated-text/**/*',
   'src/components/big-number/**/*',
@@ -86,6 +99,7 @@ export const excludeProductsComponents = [
   'src/components/notification-panel/**/*',
   'src/components/options-tile/**/*',
   'src/components/resizer/**/*',
+  'src/components/page-header/**/*',
   'src/components/side-panel/**/*',
   'src/components/tearsheet/**/*',
   'src/utilities/step-flow/**/*',

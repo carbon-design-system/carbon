@@ -6,6 +6,7 @@
  */
 
 import '@carbon/web-components/es/components/tooltip/index.js';
+import '@carbon/web-components/es/components/feature-flags/index.js';
 import { fixture, html, expect } from '@open-wc/testing';
 
 describe('cds-definition-tooltip', () => {
@@ -176,5 +177,39 @@ describe('cds-definition-tooltip', () => {
     await el.updateComplete;
 
     expect(trigger).to.have.attribute('aria-expanded', 'false');
+  });
+
+  it('should default autoalign to true with enable-v12-release', async () => {
+    const featureFlag = await fixture(html`
+      <feature-flags enable-v12-release="true">
+        <cds-definition-tooltip>
+          <span slot="definition">Example definition</span>
+          URL
+        </cds-definition-tooltip>
+      </feature-flags>
+    `);
+    const el = featureFlag.querySelector('cds-definition-tooltip');
+
+    await el.updateComplete;
+
+    expect(el.autoalign).to.be.true;
+    expect(el.shadowRoot.querySelector('cds-popover').autoalign).to.be.true;
+  });
+
+  it('should keep autoalign disabled when set to false with enable-v12-release', async () => {
+    const featureFlag = await fixture(html`
+      <feature-flags enable-v12-release="true">
+        <cds-definition-tooltip .autoalign=${false}>
+          <span slot="definition">Example definition</span>
+          URL
+        </cds-definition-tooltip>
+      </feature-flags>
+    `);
+    const el = featureFlag.querySelector('cds-definition-tooltip');
+
+    await el.updateComplete;
+
+    expect(el.autoalign).to.be.false;
+    expect(el.shadowRoot.querySelector('cds-popover').autoalign).to.be.false;
   });
 });
