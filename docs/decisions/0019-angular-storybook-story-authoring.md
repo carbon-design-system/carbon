@@ -24,6 +24,20 @@ Accepted
 > `custom-elements.json`), add it to `SYNTHETIC_TAGS` in
 > `tasks/generate-wrappers/index.js` and regenerate — do not reach for
 > `CUSTOM_ELEMENTS_SCHEMA`.
+>
+> **Update 2026-10-28.** Two parts of the decision below were never built:
+>
+> - **Generated story stubs (Option C).** The generator does not emit
+>   `<Name>.stories.ts` stubs. Stories under `src/stories/<Name>/__stories__/`
+>   are hand-written, import from `@carbon/angular/<entry>` (not
+>   `@carbon/angular`), and are completed to one-for-one parity with the web
+>   components stories. `// TODO(parity):` comments are written by hand to mark
+>   known gaps. The "Story authoring rules" section is what applies.
+> - **The `storybook:parity` CI check.** Dropped for now. Parity is maintained
+>   by hand and by review. Revisit if stories drift; a check would compare story
+>   export names only, not story content or behavior.
+>
+> The Context and Decision text below is kept as the historical record.
 
 ## Context
 
@@ -203,9 +217,6 @@ vendored WC copy — exactly what consumers get.
 
 - Generated core wrapper components are immediately browsable in Storybook
   without manual intervention; the `Default` story is runnable from day one.
-- The parity CI check (`storybook:parity`) can compare `// TODO(parity):` counts
-  against WC story exports to measure completion, rather than failing on missing
-  exports entirely.
 - Maintainers have a clear, low-friction workflow for closing parity gaps: each
   `// TODO` is one self-contained unit of work.
 - Re-running the generator on an already-completed story file is safe — it will

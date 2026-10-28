@@ -611,6 +611,9 @@ export const WithStateManager: Story = {
   }),
 };
 
+// TODO(parity): EnableDialogElement — lives in modal.feature-flag.stories.ts in
+// @carbon/web-components. On hold until the dialog version of Modal is stable.
+
 // ─── Angular-only: event count verification (used by Modal.e2e.ts) ────────────
 
 export const TwoButtons: Story = {

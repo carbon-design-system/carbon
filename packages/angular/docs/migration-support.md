@@ -240,9 +240,16 @@ and the first list needs tag, output and directive transforms added.
    with them. The codemod plan is the `plan.md` §16 set plus tag, output and
    directive transforms, and the migration cost moves to consumers, mostly in
    the roughly 20 model-shaped components. What was removed is listed in
-   [`status-and-open-questions.md`](./status-and-open-questions.md). Open
-   follow-on: whether a few convenience components in core are worth adding for
-   the hardest model-shaped cases.
+   [`status-and-open-questions.md`](./status-and-open-questions.md). **Decided
+   2026-10-28: no convenience components in core.** Start from a clean slate.
+   Migration support is a combination of codemods and agent skills.
+9. **Ownership of questions 1 to 7.** Decided 2026-10-28: they are part of the
+   plan and milestones (Milestone 5). The maintainer has no answers yet and may
+   delegate them to a developer.
+10. **Migration doc.** Decided 2026-10-28: `@carbon/angular` is not behind a v12
+    feature flag, so it gets its own migration doc,
+    `docs/guides/cca-to-angular.md`, for consumers coming from
+    `carbon-components-angular`. It does not yet exist.
 
 ## Suggested order
 

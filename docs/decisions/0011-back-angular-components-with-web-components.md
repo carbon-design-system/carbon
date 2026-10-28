@@ -169,6 +169,9 @@ points:
   contradicted the decision above.)
 - Changed by ADR 0020 (accepted 2026-10-27): the peer-dependency consequence
   above no longer holds. `@carbon/angular` bundles a `cds-ng-*` prefixed copy of
-  the web components and no longer peer-depends on `@carbon/web-components`. The
-  legacy entry point was removed; see
+  the web components, so `@carbon/web-components` is not a peer dependency.
+  **Done 2026-10-28:** removed from `peerDependencies` in
+  `packages/angular/package.json` and `yarn.lock`, and from the README install
+  instructions. It remains a `devDependency` for the build, generator and tests.
+  The legacy entry point was removed; see
   `packages/angular/docs/status-and-open-questions.md`.

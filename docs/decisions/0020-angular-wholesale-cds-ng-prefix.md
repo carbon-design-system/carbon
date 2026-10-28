@@ -616,9 +616,12 @@ Recorded 2026-10-26.
    the `var(--cds-button-radius, 999999px)` fallback in the vendored styles, so
    it does not depend on the stylesheet.
 
-4. **Manifest: CEM spike.** Does `@custom-elements-manifest/analyzer` produce
-   usable output for this codebase, and who owns producing it, the web
-   components package or `@carbon/angular`?
+4. **Manifest: CEM.** **Direction decided 2026-10-28:** move from the WCA
+   manifest to the standard Custom Elements Manifest (CEM). A PR from the web
+   components maintainers that produces a CEM is in progress. The generator will
+   pivot when it lands in the monorepo, and the web components package owns
+   producing it. No spike in this repo. Until then the generator reads
+   `custom-elements.json` in WCA format.
 5. **Fate of `@carbon/angular/legacy`: decided 2026-10-26, abandoned and
    removed.** Maintainer reasoning: migration is not trivial even with adapters,
    and adapters add a two-step migration that is not wanted. See
@@ -633,8 +636,11 @@ Recorded 2026-10-26.
    two registries, which should be harmless but has not been exercised. What
    "one for one" covers, and what the wrappers add today, is in
    [`developer-experience.md`](../../packages/angular/docs/developer-experience.md).
-7. **v12 migration doc.** Whether `docs/migration/v12.md` needs an entry is
-   unconfirmed (ADR 0015 open item 9).
+7. **v12 migration doc.** **Decided 2026-10-28:** `@carbon/angular` is not
+   behind a feature flag and is new as of v12. Consumers coming from
+   `carbon-components-angular` get a separate migration doc
+   (`docs/guides/cca-to-angular.md`). Whether `docs/migration/v12.md` also needs
+   a short entry is not decided (ADR 0015 open item 9).
 
 ## Verification before acceptance
 
@@ -644,9 +650,9 @@ partly done and carried into "Follow-ups after acceptance" below.
 1. The coexistence spike in open question 1. **Done.**
 2. Run the generator against the prefixed build and load the Accordion, Modal
    and `ModalFooter` in a real browser, with the Playwright checks that ADR 0015
-   notes were never run. **Partly done:** the Button Playwright checks pass (9
-   of 9, Chromium). The Accordion, Modal and `ModalFooter` have not been loaded
-   in a browser through Playwright.
+   notes were never run. **Partly done at acceptance:** the Button Playwright
+   checks pass (9 of 9, Chromium). **Done 2026-10-28:** Accordion, Modal and
+   `ModalFooter` were loaded through Playwright (see Follow-up 2).
 3. Confirm that the generator importing barrels registers the children of every
    composite class (about 70 to 76). The barrel change is made and Modal is
    covered by a Jest spec; the per-component check (similar to
@@ -669,9 +675,10 @@ partly done and carried into "Follow-ups after acceptance" below.
 Not blockers for the decision. Tracked in
 [`status-and-open-questions.md`](../../packages/angular/docs/status-and-open-questions.md).
 
-1. Declare `lit-html` in `build-entries`. The Tearsheet files import
-   `lit-html/directives/class-map.js`, which resolves today only through npm
-   hoisting from `lit`. Then check under pnpm.
+1. ~~Declare `lit-html` in `build-entries`.~~ `lit-html` is now a `dependencies`
+   entry in `packages/angular/package.json`, which `build-entries` copies into
+   the published `package.json`. The Tearsheet files import
+   `lit-html/directives/class-map.js`. Not checked under pnpm.
 2. ~~Load the Accordion, Modal and `ModalFooter` in a browser with Playwright.~~
    Done 2026-10-28 (Accordion, Modal, `ModalFooter` with two and three buttons;
    27 checks, all passing). Still open: the per-component child-registration
@@ -679,9 +686,10 @@ Not blockers for the decision. Tracked in
    items 2 and 3).
 3. Measure a real Angular app through the wrappers, for size and tree-shaking of
    the primary entry (verification item 4).
-4. Decide how to produce the manifest: stay on WCA or move to CEM (open question
-   4), and who owns it.
+4. ~~Decide how to produce the manifest.~~ **Decided 2026-10-28:** move to CEM
+   when the web components PR lands (open question 4). Pivot the generator then.
 5. Rewrite `plan.md`, `milestones.md` and the other docs that describe `cds-*`
    selectors for Angular; add `docs/guides/cca-to-angular.md` with shadow DOM
    guidance (open question 7 and `migration-support.md`).
-6. Decide whether `docs/migration/v12.md` needs an entry (open question 7).
+6. Decide whether `docs/migration/v12.md` needs an entry in addition to the
+   separate CCA migration doc (open question 7).

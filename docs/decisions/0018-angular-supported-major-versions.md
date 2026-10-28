@@ -5,9 +5,29 @@
 Accepted (2026-10-28)
 
 **Peer range updated 2026-10-28:** `package.json` peers are set to `>=19`.
-`README.md` table updated. The build and test stack (`devDependencies`, CI
-matrix) runs on Angular 19 (`^19.0.0`), aligning the library compilation with
-the oldest supported major. See Consequences for the full list of changes.
+`README.md` table updated. The build and test stack (`devDependencies`) runs on
+Angular 19 (`^19.0.0`), aligning the library compilation with the oldest
+supported major. See Consequences for the full list of changes.
+
+**Implementation status (2026-10-28).** Three consequences below are not done
+yet:
+
+- [ ] CI runs a single Angular version. The `angular-test` and `angular-e2e`
+      jobs in `.github/workflows/ci.yml` have no "19 plus latest" matrix.
+      "Latest" means the newest Angular major that Angular itself currently
+      supports (22 in the table below). Proposed: write that major number into
+      the matrix and bump it when a new major ships, so CI does not change
+      underneath us. The alternative is the floating `latest` npm dist-tag,
+      which stays current but can break CI the day a new major is published. Not
+      checked: whether the toolchain (`@storybook/angular`,
+      `jest-preset-angular`) supports Angular 22.
+- [ ] The generator (`tasks/generate-wrappers/index.js`) still emits
+      `standalone: true` on every component, and the README and Storybook
+      welcome samples still show it (as "optional on Angular 19+").
+- [ ] The peer requirement (`>=19`) belongs in the CCA migration doc
+      (`docs/guides/cca-to-angular.md`, not yet written). `@carbon/angular` is
+      not behind a v12 flag, so whether `docs/migration/v12.md` also needs an
+      entry is undecided.
 
 - DRI: Angular package maintainer
 - Input needed from: Angular experts on the Carbon team and in IBM product

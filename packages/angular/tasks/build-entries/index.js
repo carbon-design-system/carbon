@@ -325,8 +325,7 @@ function main() {
   };
   const dependencies = { ...pkg.dependencies, ...vendoredDependencies };
 
-  const peerDependencies = { ...pkg.peerDependencies };
-  delete peerDependencies['@carbon/web-components'];
+  const { peerDependencies } = pkg;
 
   const vendorFileCount = verifyVendorImports(
     new Set(Object.keys(dependencies))

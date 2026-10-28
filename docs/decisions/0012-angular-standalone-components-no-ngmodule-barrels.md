@@ -37,13 +37,16 @@ Two export strategies were considered for `@carbon/angular`:
 `@carbon/angular` uses Angular standalone components throughout. Every component
 class is explicitly decorated with `standalone: true`. The flag is redundant on
 Angular 19+ but required on Angular 17 and 18, which this package's peer range
-(`>=17`) still supports. No `NgModule` barrel classes are exported as part of
-the public API.
+(`>=17`) still supported when this was written. No `NgModule` barrel classes are
+exported as part of the public API.
 
 > **Update 2026-10-28.** [ADR 0018](0018-angular-supported-major-versions.md)
 > was accepted with a peer floor of Angular 19. The explicit `standalone: true`
 > can be dropped from components, because it is the decorator default from
 > Angular 19.
+>
+> **Update 2026-10-28.** The peer range is now `>=19`, but the generator still
+> emits `standalone: true`. Removing it is an open follow-up in ADR 0018.
 
 NgModule barrels were rejected for three reasons:
 

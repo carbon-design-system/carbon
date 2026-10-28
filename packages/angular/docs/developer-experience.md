@@ -95,8 +95,9 @@ Each of these is proposed, none is built:
   bundled copy is an implementation detail and `@carbon/angular` should own it.
   That is option B in ADR 0020.
 - **"Full feature parity" needs a definition.** Candidates: every `cds-*`
-  component has a wrapper (279 today), every public property and event is typed,
-  and every documented slot is addressable. Not yet agreed.
+  component has a wrapper (281 today; the six Date Picker tags in ADR 0021 are
+  deliberately skipped), every public property and event is typed, and every
+  documented slot is addressable. Not yet agreed.
 - **Legacy.** `@carbon/angular/legacy` was abandoned and removed on 2026-10-26.
   Because it is gone, the core wrappers' own developer experience carries the
   migration story, which raises the importance of the gaps listed above.

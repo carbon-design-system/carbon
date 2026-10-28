@@ -10,13 +10,15 @@ This directory contains the automated code generator for `@carbon/angular`.
 
 - Automatically generated from `@carbon/web-components` definitions/CEM
   (`custom-elements.json`).
-- Every Carbon Web Component has a 1:1 Angular standalone component with:
-  - Registration under the **real `cds-*` tag** (no `cds-ng-*` renaming — ADR
-    0015), by importing the component's folder barrel
+- Every Carbon Web Component (except the tags in `SKIPPED_TAGS`, ADR 0021) has a
+  1:1 Angular standalone component with:
+  - Registration by importing the component's folder barrel
     (`@carbon/web-components/es/components/<dir>/index.js`) so the child
-    elements it renders are registered too
+    elements it renders are registered too. `src/generated/` keeps the real
+    `cds-*` tags; `tasks/build-entries` rewrites them to `cds-ng-*` over a
+    vendored, prefixed copy of the web components (ADR 0020)
   - `@Component({ selector: 'cds-*', template: '<ng-content />' })` — the host
-    element IS the web component
+    element IS the web component (ADR 0015)
   - Typed `@Input()` properties forwarded to the host in `ngOnChanges`
   - Boolean `@Input()` properties use `booleanAttribute` (so bare
     `<cds-button disabled>` works)
@@ -25,8 +27,9 @@ This directory contains the automated code generator for `@carbon/angular`.
     double-calls (ADR 0015 §4)
   - `ControlValueAccessor` (CVA) for form-associated elements, reading/writing
     the host element
-  - Automated Layer 1 Jest unit reflection tests (`<Name>.spec.ts`)
-  - A stub Storybook story (`<Name>.stories.ts`) if none already exists
+- The generator does **not** emit tests or stories. Tests are hand-written
+  (`src/__tests__/` and `src/stories/<Name>/__tests__/`) and stories are
+  hand-written (`src/stories/<Name>/__stories__/`).
 - **Do NOT manually edit files in `src/generated/`** — they are re-created on
   every generator run.
 
@@ -42,7 +45,7 @@ There is no `@carbon/angular/legacy` entry point. It was removed before release
 
 See
 [ADR 0019](../../../../docs/decisions/0019-angular-storybook-story-authoring.md)
-for the full rationale behind this split.
+for how stories are authored.
 
 ## Running the Generator
 
@@ -54,33 +57,28 @@ yarn generate:wrappers
 node tasks/generate-wrappers/index.js --tag cds-button
 ```
 
-## Story stubs
+## Stories
 
-For each generated component the generator emits a stub story file at
-`src/stories/<Name>/__stories__/<Name>.stories.ts` **only if no story already
-exists** at that path. The stub contains:
-
-- `title: 'Components/<Name>'`
-- `import { <Name>Component } from '@carbon/angular/<entry>'`
-- A runnable `Default` story
-- `// TODO(parity): <StoryName>` comments for every WC story that still needs an
-  Angular equivalent
-
-Maintainers complete the `// TODO` entries following the WC story file at
-`packages/web-components/src/components/<name>/<name>.stories.ts` as a
-reference. Re-running the generator never overwrites a story a maintainer has
-already filled in.
+The generator does not emit stories. Stories live at
+`src/stories/<Name>/__stories__/<Name>.stories.ts`, are written by hand, and
+follow the WC story file at
+`packages/web-components/src/components/<name>/<name>.stories.ts` one for one.
+Mark a WC story that cannot be reproduced yet with a
+`// TODO(parity): <StoryName>` comment. See
+[ADR 0019](../../../../docs/decisions/0019-angular-storybook-story-authoring.md)
+"Story authoring rules".
 
 ## Adding new automated wrappers
 
 When a new Web Component is added to `@carbon/web-components`:
 
-1. Run `yarn generate:wrappers` in `packages/angular/`.
-2. The generator produces the wrapper, Layer 1 tests, and a story stub in
-   `src/generated/<Name>/` and `src/stories/<Name>/`.
-3. Complete the story's `// TODO(parity):` entries, following the WC story as a
-   reference.
-4. Run `yarn test` to verify that all reflection assertions pass.
+1. Run `yarn generate:wrappers` in `packages/angular/`. The generator writes the
+   wrapper to `src/generated/<Name>/`.
+2. Rebuild the secondary entries with `node tasks/build-entries/index.js`
+   (`yarn build` and `yarn storybook` do both steps).
+3. Write the stories and the parity spec by hand. See
+   [`porting-web-component-tests.md`](../../docs/porting-web-component-tests.md).
+4. Run `yarn test` from `packages/angular`.
 
 ## Handling WC elements missing from `custom-elements.json`
 
@@ -93,6 +91,13 @@ only sees the decorator form, so these elements never appear in
 a story's `moduleMetadata` silences Angular's template checker and allows the
 raw `cds-*` tag to pass through, but it defeats Angular's type system for the
 whole story module. It is never acceptable in `@carbon/angular` stories.
+
+> **Temporary.** `SYNTHETIC_TAGS` is a workaround until the web components fix
+> this upstream. An issue with the Carbon team (so the three skeleton classes
+> use `@customElement()` and appear in the manifest) is decided but not yet
+> filed. Remove the synthetic entries once the manifest includes them, and do
+> not add new ones without an upstream issue. The generator is also expected to
+> move to the standard CEM when that lands in the monorepo.
 
 **The correct fix is `SYNTHETIC_TAGS`.** Add a hand-authored descriptor to the
 `SYNTHETIC_TAGS` array at the top of `index.js`. Each entry mirrors the shape of

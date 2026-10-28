@@ -1,6 +1,6 @@
 # `@carbon/angular`: status and open questions
 
-**As of:** 2026-10-30, branch `feat/angular` (42 commits ahead of `next`, 0
+**As of:** 2026-10-30, branch `feat/angular` (43 commits ahead of `next`, 0
 behind). This is the project's living state record. It supersedes nothing: where
 it disagrees with an ADR, the ADR is the decision record and this is a note that
 something needs reconciling. The remaining work, in suggested order, is under
@@ -15,30 +15,36 @@ something needs reconciling. The remaining work, in suggested order, is under
 | Storybook                                                                    | Builds clean. Stories use `cds-ng-*` throughout via `tsconfig.storybook.json` aliases. No raw `cds-*` WC tags in any story (enforced by ADR 0019 rule 1).          |
 | Jest                                                                         | **11 suites, 250 passed, 45 `it.todo`, 0 failures.** 6 parity specs (Accordion, Checkbox, Dropdown, TextInput, Modal, ActionSet) are 1:1 with WC test files.       |
 | Stories                                                                      | All 6 step-8 components at WC one-for-one parity. See [Step 9 results](#step-9-results).                                                                           |
+| MDX overviews                                                                | Checkbox, Dropdown, Modal, TextInput. Button and Accordion added earlier. All 6 step-8 components have an overview page.                                           |
 | Playwright                                                                   | 36 passed in Chromium against a fresh `storybook:build`: Button (9) plus TextInput, Checkbox, Dropdown, ActionSet, Accordion, Modal (27). Not re-run after step 9. |
 | Generated `@Output`s                                                         | Fixed 2026-10-28: each custom event is forwarded to its `@Output` in `ngOnInit`. Verified on Accordion and Modal in a browser.                                     |
 | Legacy entry point                                                           | Abandoned and removed 2026-10-26.                                                                                                                                  |
-| Angular peer floor                                                           | Peers updated to `>=19` (2026-10-28, ADR 0018). Build and CI matrix remain aligned on `^19`.                                                                       |
+| Angular peer floor                                                           | Peers updated to `>=19` (2026-10-28, ADR 0018). Toolchain is on `^19`. CI has no "19 plus latest" matrix and the generator still emits `standalone: true`.         |
 | Migration guide `docs/guides/cca-to-angular.md`                              | Does not exist.                                                                                                                                                    |
 | CCA codemods in `packages/upgrade`                                           | None.                                                                                                                                                              |
 | `docs/migration/v12.md`                                                      | No Angular content.                                                                                                                                                |
 
 Last run (2026-10-30): Jest (**250 passed, 45 `it.todo`**, 0 failures),
-`tsc -p tsconfig.storybook.json --noEmit` (clean).
+`tsc -p tsconfig.storybook.json --noEmit` (clean). Storybook `WithLayer` stories
+(Accordion, Dropdown, TextInput) updated to the labelled
+`$background`/`$layer-01`/`$layer-02` visual pattern; `.storybook/styles.scss`
+added for layer background and label styles.
 
 ## Decisions on record
 
-| ADR                                                                                       | Status     | Summary                                                                                                            |
-| ----------------------------------------------------------------------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------ |
-| [0011](../../../docs/decisions/0011-back-angular-components-with-web-components.md)       | Accepted   | Thin wrappers over `@carbon/web-components`; generated core plus a `legacy` entry point.                           |
-| [0012](../../../docs/decisions/0012-angular-standalone-components-no-ngmodule-barrels.md) | Accepted   | Standalone components, no NgModule barrels.                                                                        |
-| [0013](../../../docs/decisions/0013-controlvalueaccessor-on-angular-wrapper-not-wc.md)    | Accepted   | CVA lives on the Angular wrapper.                                                                                  |
-| [0014](../../../docs/decisions/0014-preserve-cds-consumer-facing-selectors.md)            | Superseded | Selectors stay `cds-*`. **Superseded by ADR 0020 (2026-10-27).**                                                   |
-| [0015](../../../docs/decisions/0015-angular-wrapper-host-is-the-web-component.md)         | Proposed   | Wrapper host is the web component under its real tag. Host-is-WC kept by ADR 0020; real-tag registration replaced. |
-| [0018](../../../docs/decisions/0018-angular-supported-major-versions.md)                  | Accepted   | Peer floor of Angular 19 (`>=19`). Accepted 2026-10-28. DevDeps/CI aligned on `^19`.                               |
-| [0019](../../../docs/decisions/0019-angular-storybook-story-authoring.md)                 | -          | Story authoring.                                                                                                   |
-| [0020](../../../docs/decisions/0020-angular-wholesale-cds-ng-prefix.md)                   | Accepted   | Wholesale `cds-ng-*` prefix over a prefixed build of the web components. Accepted 2026-10-27.                      |
-| [0021](../../../docs/decisions/0021-angular-drop-classic-date-picker.md)                  | Accepted   | No classic or fluid Date Picker wrappers; Preview Date Picker only. Removes flatpickr. Generator not yet changed.  |
+| ADR                                                                                       | Status               | Summary                                                                                                                        |
+| ----------------------------------------------------------------------------------------- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| [0011](../../../docs/decisions/0011-back-angular-components-with-web-components.md)       | Accepted             | Thin wrappers over `@carbon/web-components`, generated. The `legacy` entry point was removed; peer changed by 0020.            |
+| [0012](../../../docs/decisions/0012-angular-standalone-components-no-ngmodule-barrels.md) | Accepted             | Standalone components, no NgModule barrels.                                                                                    |
+| [0013](../../../docs/decisions/0013-controlvalueaccessor-on-angular-wrapper-not-wc.md)    | Accepted             | CVA lives on the Angular wrapper.                                                                                              |
+| [0014](../../../docs/decisions/0014-preserve-cds-consumer-facing-selectors.md)            | Superseded           | Selectors stay `cds-*`. **Superseded by ADR 0020 (2026-10-27).**                                                               |
+| [0015](../../../docs/decisions/0015-angular-wrapper-host-is-the-web-component.md)         | Partially superseded | Wrapper host is the web component. Host-is-WC kept by ADR 0020; real-tag registration replaced.                                |
+| [0016](../../../docs/decisions/0016-pin-memfs-resolution.md)                              | Accepted             | Pin `memfs` via root `resolutions`.                                                                                            |
+| [0017](../../../docs/decisions/0017-pin-playwright-test-resolution.md)                    | Accepted             | Pin `@playwright/test` via root `resolutions`.                                                                                 |
+| [0018](../../../docs/decisions/0018-angular-supported-major-versions.md)                  | Accepted             | Peer floor of Angular 19 (`>=19`). Accepted 2026-10-28. CI matrix, `standalone: true` and v12 entry still open.                |
+| [0019](../../../docs/decisions/0019-angular-storybook-story-authoring.md)                 | Accepted             | Story authoring rules. Generated story stubs and `storybook:parity` were not built; stories are hand-written.                  |
+| [0020](../../../docs/decisions/0020-angular-wholesale-cds-ng-prefix.md)                   | Accepted             | Wholesale `cds-ng-*` prefix over a prefixed build of the web components. Accepted 2026-10-27.                                  |
+| [0021](../../../docs/decisions/0021-angular-drop-classic-date-picker.md)                  | Accepted             | No classic or fluid Date Picker wrappers; Preview Date Picker only. Removes flatpickr. Done in the generator (`SKIPPED_TAGS`). |
 
 ## Component structure: what was learned
 
@@ -109,7 +115,8 @@ deciding the `cds-*` versus `cds-ng-*` question:
   rewrite (next step 11).
 - [`legacy-compatibility-matrix.md`](./legacy-compatibility-matrix.md): counts
   and tag mappings are unverified and unchanged.
-- Angular peer range in `package.json` and `README.md` (still `>=17`).
+- ~~Angular peer range in `package.json` and `README.md` (still `>=17`).~~ Done:
+  both say `>=19`.
 
 ## Open questions, consolidated
 
@@ -146,9 +153,11 @@ Grouped by what they block. "Blocking" means a decision should wait for it.
    both on one page give identical results for seven vendored components, and
    the `overflow-menu` host class is inert. Details and limits in ADR 0020 open
    question 3.
-4. **Manifest.** Does the standard CEM analyzer give usable output for this
-   codebase? The WCA manifest is deprecated and slated for removal in v3.0.0
-   (issue #20670).
+4. **Manifest.** **Direction decided 2026-10-28:** move from the deprecated WCA
+   manifest (removal slated for v3.0.0, issue #20670) to the standard CEM. A PR
+   producing a CEM is coming from the web components maintainers. The generator
+   will pivot when it lands in the monorepo. Until then it reads the WCA
+   `custom-elements.json`.
 5. **Tree-shaking of import-time registration.** Open since ADR 0015.
 
 ### Legacy entry point
@@ -180,9 +189,13 @@ Consequences:
   `cca-to-legacy` set (marked as such) and needs a rewrite.
 - [`legacy-compatibility-matrix.md`](./legacy-compatibility-matrix.md) is now a
   migration reference, not an adapter backlog. Its title still says "legacy".
-- An alternative that was raised in the audit and is not decided: a small set of
-  convenience components in core for the hardest model-shaped cases (Dropdown,
-  ComboBox, Select, MultiSelect, Table, Pagination, Notification, Tabs).
+- **Decided 2026-10-28: no convenience components in core.** The idea of a small
+  set of hand-written components for the hardest model-shaped cases (Dropdown,
+  ComboBox, Select, MultiSelect, Table, Pagination, Notification, Tabs) is
+  dropped, and the package starts from a clean slate. Migration support is a
+  combination of codemods and agent skills (see
+  [`migration-support.md`](./migration-support.md) and `milestones.md` Milestone
+  5).
 - [`developer-experience.md`](./developer-experience.md) records what the core
   wrappers give over raw web components.
 
@@ -214,7 +227,9 @@ telemetry (see [`migration-support.md`](./migration-support.md)).
 13. Shadow DOM is not in the intentional-breaks list. It needs guidance. See
     [`migration-support.md`](./migration-support.md).
 14. Where agent skills live, how templates are parsed by the codemods, how the
-    mapping file is verified. Same document.
+    mapping file is verified. Same document. **Decided 2026-10-28:** these are
+    part of the plan and milestones (Milestone 5), not answered yet. The
+    maintainer has no answers and may delegate them to a developer.
 15. Audit CCA attribute directives (ADR 0015 item 10). The matrix already lists
     53; individual review of the 10 with behavior is still needed.
 
@@ -225,10 +240,40 @@ telemetry (see [`migration-support.md`](./migration-support.md)).
     Angular version, not the "19 plus latest" matrix the ADR calls for (no
     matrix exists in the `angular-test` and `angular-e2e` jobs of
     `.github/workflows/ci.yml`), and the generator still emits
-    `standalone: true`, which is redundant on 19+. `docs/migration/v12.md` also
-    has no peer-requirement entry (item 17).
-17. Whether `docs/migration/v12.md` needs Angular content, and whether the
-    package is behind a v12 flag. Unconfirmed with maintainers.
+    `standalone: true`, which is redundant on 19+. "Latest" means the newest
+    Angular major that Angular supports; pinning the number in the matrix is
+    proposed in ADR 0018.
+17. ~~Whether the package is behind a v12 flag.~~ **Decided 2026-10-28:** it is
+    not. `@carbon/angular` is new as of v12 and needs a separate migration doc
+    for consumers coming from `carbon-components-angular`
+    (`docs/guides/cca-to-angular.md`). Still undecided: whether
+    `docs/migration/v12.md` also gets a short entry, which `AGENTS.md` may
+    require for v12-affecting changes.
+
+### Scope and upstream dependencies
+
+18. **First release covers all of `@carbon/web-components`.** Decided
+    2026-10-28. Components still being merged into the web components from
+    Carbon for IBM Products must be captured before v12 scope is frozen. Of the
+    18 components ADR 0009 lists as migrating to core, 15 have a folder in
+    `packages/web-components/src/components/` and a secondary entry in
+    `.entries/`. These three do not exist in the web components yet:
+    `condition-builder`, `scroll-gradient` and `tag-overflow`. The generator
+    needs no change for them: it wraps every `cds-` tag in the manifest, so they
+    appear when the web components land them and the manifest includes them. The
+    scope freeze should wait for those three, and for any others that join. Also
+    needed: stories and parity specs (only 7 components have them today).
+19. **Upstream issue for the skeleton classes.** Decided 2026-10-28: open an
+    issue with the Carbon team so `AccordionSkeleton`, `CheckboxSkeleton` and
+    `DropdownSkeleton` use `@customElement()` and appear in the manifest. Until
+    it is fixed upstream, `SYNTHETIC_TAGS` in the generator is a temporary
+    workaround and is documented as such (generator README and the
+    `TODO(@carbon/web-components)` comments). **Not filed yet.** Remove the
+    synthetic entries once the manifest includes them.
+20. **Modal `EnableDialogElement` story.** Decided 2026-10-28: hold until the
+    dialog version of Modal becomes stable. The WC story lives in
+    `modal.feature-flag.stories.ts`. The Angular Modal stories have no matching
+    story and no `TODO(parity)` comment yet; add one when this is picked up.
 
 ## Step 9 results
 
@@ -591,8 +636,10 @@ In order. Items marked ~~done~~ are complete; the remainder are open.
    worth costing before porting file by file). Keep the step 8 Playwright specs;
    they cover value accessors, slot projection and child registration that the
    WC suites do not.
-9. **Define feature parity**, then decide what typing and slot work belongs in
-   the first release. A candidate definition is in
+9. ~~**Define feature parity.**~~ **Decided 2026-10-28:** the first release has
+   full coverage of `@carbon/web-components`, including the components still
+   being merged from Carbon for IBM Products (item 18). What typing and slot
+   work belongs in the first release is still open; a candidate definition is in
    [`developer-experience.md`](./developer-experience.md).
 10. **Migration tooling** per [`migration-support.md`](./migration-support.md):
     mapping file, codemods (`plan.md` section 16 plus tag, output and directive
@@ -601,15 +648,18 @@ In order. Items marked ~~done~~ are complete; the remainder are open.
     `.html` templates (its globs match only `.js/.jsx/.ts/.tsx`). Per-component
     CCA usage is not available from telemetry, so size it from an
     import-reporting codemod across sample repos or GitHub code search.
+    **Decided 2026-10-28:** this is part of the plan and milestones (Milestone
+    5), delivered as codemods plus agent skills, and may be delegated to a
+    developer.
 11. **Rewrite `plan.md` and `milestones.md`** now that legacy is gone, with new
-    estimates.
+    estimates. Include the migration tooling (item 10) and the scope freeze
+    (item 18).
 12. ~~**Land the Angular 19 peer floor** (ADR 0018).~~ **Accepted 2026-10-28.**
     Peers set to `>=19`, toolchain stays on `^19`. Follow-ups: add the Angular
     19 plus latest matrix to `angular-test` and `angular-e2e` in
     `.github/workflows/ci.yml`; drop `standalone: true` from the generator
     (`tasks/generate-wrappers/index.js`), the README and the Storybook welcome
-    sample; add the `>=19` peer requirement to `docs/migration/v12.md` if that
-    file is confirmed needed.
+    sample; put the `>=19` peer requirement in the CCA migration doc.
 13. ~~**Decide whether to accept ADR 0020.**~~ **Accepted 2026-10-27.** Basis:
     coexistence spike, `$prefix` answered, 1.x and 2.x browser check, Button
     Playwright 9 of 9, packed install resolves every import, Button barrel 145
@@ -620,12 +670,18 @@ In order. Items marked ~~done~~ are complete; the remainder are open.
       2026-10-28 (step 8). Still open: the child-registration check across all
       composites.
     - Measure a real Angular app through the wrappers for size and tree-shaking.
-14. **Update `docs/migration/v12.md`** if confirmed needed (`AGENTS.md` says
-    v12-affecting changes must).
-
-Also undecided: whether a few convenience components in core are worth adding
-for the hardest model-shaped CCA cases (Dropdown, ComboBox, Select, MultiSelect,
-Table, Pagination, Notification, Tabs). Raised in the audit, not analysed.
+14. **Write `docs/guides/cca-to-angular.md`** (decided 2026-10-28: a separate
+    migration doc, because the package is not behind a v12 flag). Decide whether
+    `docs/migration/v12.md` also needs a short entry (`AGENTS.md` says
+    v12-affecting changes must update it).
+15. **Open the upstream issue for the skeleton classes** (item 19) and put the
+    `TODO(parity)` comment on the Modal stories for `EnableDialogElement` (item
+    20).
+16. **Move the generator to CEM** when the web components PR lands (open
+    question 4).
+17. **Move the `Loading-test.js` change to its own PR.** Removed from this
+    branch 2026-10-28; the patch is saved in the gitignored
+    `temp/loading-test-modal-stub.patch`.
 
 ## Useful commands
 

@@ -4,8 +4,11 @@ Date: 2026-10
 
 ## Status
 
-Accepted, for now. Revisit if consumers ask for the fluid variant, or once the
-web components decouple the Preview Fluid Date Picker from the classic one.
+Accepted. **Decided 2026-10-28:** `@carbon/angular` does not offer the classic
+or fluid Date Picker at all. If there is no fluid picker that avoids flatpickr,
+we wait until one is available in `@carbon/web-components` and then bring it in.
+Revisit once the web components decouple the Preview Fluid Date Picker from the
+classic one.
 
 - DRI: Angular package maintainer
 - Decided by: Angular package maintainer, 2026-10-26
@@ -105,13 +108,16 @@ Negative or risky:
   copies all of `es/`, flatpickr is present but unused. It is only an unused
   file, not a bug, but it should be left out.
 
+Decided 2026-10-28:
+
+- The classic pickers will not be added later behind a secondary entry point. We
+  wait for a fluid picker in the web components that does not use flatpickr.
+- The decoupling change belongs to the web components, not this package.
+
 Not decided here:
 
 - Whether to file an issue against `@carbon/web-components` to decouple the
-  Preview Fluid Date Picker from the classic fluid class. That change belongs to
-  the web components, not this package.
-- Whether to add the classic pickers later behind a secondary entry point, for
-  consumers who need flatpickr behavior. Not needed for the CCA migration.
+  Preview Fluid Date Picker from the classic fluid class.
 
 ## Verification needed
 
@@ -120,13 +126,19 @@ Not decided here:
    regenerate, and confirm 6 wrappers are removed from the 279.~~ **Done
    2026-10-26.** `SKIPPED_TAGS` set added; all 6 tags print `⏭ Skipped` and are
    absent from `src/generated/`. The manifest has 327 `cds-*` entries; 284
-   wrappers are emitted (6 skipped, the rest filtered by the existing non-`cds-`
-   guard). Jest: 5 suites, 104 passed, 0 failures. Type-check clean.
+   wrappers were reported emitted at the time (6 skipped, the rest filtered by
+   the existing non-`cds-` guard). Jest: 5 suites, 104 passed, 0 failures.
+   Type-check clean. **Correction 2026-10-28:** the "284" counted stale folders.
+   A clean run emits 278 wrappers from the manifest plus 3 via `SYNTHETIC_TAGS`
+   (281 in `src/generated/`).
 2. ~~Confirm that `child-registration.spec.ts` still passes, since it asserts
    every wrapper imports an existing barrel.~~ **Done** (see item 1 above — all
    5 suites pass including `child-registration.spec.ts`).
 3. Confirm the Preview Date Picker wrapper imports `date-picker/next/index.js`
    and renders without any classic file other than `date-picker/defs.js`.
+   **Partly checked 2026-10-28:** the generated `PreviewDatePicker` and
+   `PreviewDatePickerInput` wrappers import `date-picker/next/index.js`. Not
+   checked: that it renders, and which files the vendored copy contains.
 4. ~~Re-measure the Button-only bundle and the vendored tarball from the
    packaging spike without flatpickr.~~ **Done 2026-10-26.** Rebuilt
    `temp/pkg-spike/lib` with the fresh prefixed build minus

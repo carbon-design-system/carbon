@@ -5,11 +5,11 @@ Date: 2026-10
 ## Status
 
 Partially superseded by [ADR 0020](0020-angular-wholesale-cds-ng-prefix.md)
-(accepted 2026-10-27) keeps the "wrapper host is the web component" part of this
-decision and replaces the "registered under the real `cds-*` tag" part with a
-wholesale `cds-ng-*` prefix over a prefixed build of the web components. The
-findings below remain the measured basis for both. The "registered under the
-real `cds-*` tag" text below is superseded.
+(accepted 2026-10-27). ADR 0020 keeps the "wrapper host is the web component"
+part of this decision and replaces the "registered under the real `cds-*` tag"
+part with a wholesale `cds-ng-*` prefix over a prefixed build of the web
+components. The findings below remain the measured basis for both. The
+"registered under the real `cds-*` tag" text below is superseded.
 
 `@carbon/angular/legacy` was removed from the repository on 2026-10-26. The
 "Legacy and generated wrappers on one page" open question and remaining-work
@@ -292,13 +292,23 @@ Negative or risky:
 
 ## Implementation status
 
+> **Update 2026-10-28.** This section and "Remaining work" describe the state
+> when the decision was written (Button only). Since then the generator covers
+> all wrappers, and Accordion, Checkbox, Dropdown, TextInput, Modal and
+> ActionSet have stories, parity specs and Playwright checks as well (36 passed
+> in Chromium, last run before the step 9 story additions; Jest: 11 suites, 250
+> passed, 45 `it.todo`). Remaining-work items 1, 4 and 7 are done or resolved
+> and are struck through below. For current state see
+> [`status-and-open-questions.md`](../../packages/angular/docs/status-and-open-questions.md).
+
 Done for the Button (Jest: 5 suites, 105 tests passing, 10 `it.todo`;
 `yarn build` passes):
 
 - Generator ported to this design in `tasks/generate-wrappers/index.js`.
 - `ModalFooter` three-button test asserting `hasThreeButtons` (jsdom).
 - Event-count test: one handler call per native `change` event (jsdom).
-- Playwright computed-layout check written in `Button.e2e.ts`. **Never run.**
+- Playwright computed-layout check written in `Button.e2e.ts`. **Never run**
+  when this was written; it has since run (9 passed in Chromium).
 - Button parity and skeleton specs, stories, Storybook docs, READMEs and the
   porting guide updated to the host-is-the-web-component shape.
 
@@ -316,18 +326,21 @@ Nothing below has been done unless it is listed above.
    instead. This also means the "Scope" open question above understates the gap:
    more than the Button and `ModalFooter` are untested.
 
-1. **Run the Playwright checks.** `Button.e2e.ts` needs a built Storybook. Until
-   it runs, the host `display: inline-flex` and 48px height claims are measured
-   only by the earlier scratch prototype, not by the committed test.
+1. ~~**Run the Playwright checks.** `Button.e2e.ts` needs a built Storybook.
+   Until it runs, the host `display: inline-flex` and 48px height claims are
+   measured only by the earlier scratch prototype, not by the committed test.~~
+   **Done:** 9 passed in Chromium.
 2. **Verify in a consumer app.** The `ng-packagr` build passes, but a consumer
    app with `strictTemplates` has not been tried. That would also show how
    `$event` typing for native-named events looks in an editor.
 3. **Tree-shaking.** Test how a consumer's bundler treats import-time
    registration with `"sideEffects": false`.
-4. **Other components in a real browser.** Only the Button and `ModalFooter`
+4. ~~**Other components in a real browser.** Only the Button and `ModalFooter`
    have been exercised. Form controls (the `ControlValueAccessor` path),
    components with named slots, and `ActionSet` still need checking, at least in
-   jsdom and ideally in a browser.
+   jsdom and ideally in a browser.~~ **Done for TextInput, Checkbox, Dropdown,
+   Accordion, Modal, `ModalFooter` and ActionSet.** The other wrappers are
+   untested.
 5. **Trace the event-loop case.** An `@Output() change` re-emitted from
    `@HostListener('change')` looped to a stack overflow. The generator now
    avoids it by emitting no such `@Output`, but the cause was never found. Check
@@ -335,18 +348,17 @@ Nothing below has been done unless it is listed above.
    generator's list. `NATIVE_DOM_EVENTS` was written by hand, so compare it
    against the events in `custom-elements.json`.
 6. **Port the 10 `it.todo` Button tests** (8 RTL layout, 2 badge-indicator).
-7. **Legacy layer.** Decide whether it exists and what it covers (separate
-   task). Until then, `legacy/` (including its Button, stories, spec and the
-   scaffold templates in `tasks/scaffold-legacy-component/`) still uses the
-   `cds-ng-*` shape, as does `docs/archive/`, which is a historical record and
-   should not change.
-8. **`docs/plan.md`** still has about 30 `cds-ng-*` references, mainly in the
-   date-picker section (`cds-ng-preview-*`), the Modal and Dropdown test
-   examples, and the testing-strategy sections. Update these when those
-   components are actually built.
-9. **v12 migration doc.** `docs/migration/v12.md` was not touched because this
-   package was judged not to be behind a v12 flag. Confirm that with the
-   maintainers.
+7. ~~**Legacy layer.** Decide whether it exists and what it covers (separate
+   task).~~ **Resolved:** removed 2026-10-26. `docs/archive/` is a historical
+   record and does not change.
+8. **`docs/plan.md`** still has stale references to the old design and the
+   removed legacy entry point. Rewrite is tracked as step 11 in
+   `status-and-open-questions.md`.
+9. **v12 migration doc.** **Decided 2026-10-28:** `@carbon/angular` is not
+   behind a feature flag. It is new as of v12 and gets a separate migration doc
+   for consumers coming from `carbon-components-angular`
+   (`docs/guides/cca-to-angular.md`). Whether `docs/migration/v12.md` also needs
+   a short entry is not decided; see `status-and-open-questions.md`.
 10. **Audit CCA attribute directives.** Button is one. Find how many other CCA
     components are attribute directives rather than elements, since each is a
     template change for migrating users (see ADR 0014).

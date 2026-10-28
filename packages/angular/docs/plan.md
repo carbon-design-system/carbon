@@ -3,23 +3,46 @@
 > **Update 2026-10-26: `@carbon/angular/legacy` has been abandoned and removed
 > from the repository.** The reasons recorded by the maintainers: migration is
 > not trivial even with adapters, and adapters create a two-step migration. The
-> package is a single automated entry point. This document was written when the
-> legacy entry point was part of the plan, and **many sections below still
-> describe it** (the §6 methodology, the effort table, the directory tree, the
-> Storybook ordering, the codemod list in §16). Treat every mention of
-> `@carbon/angular/legacy`, `cca-to-legacy` and "legacy adapters" as superseded.
-> Current state:
+> package is a single automated entry point. Sections were corrected on
+> 2026-10-28. Any remaining mention of `@carbon/angular/legacy`, `cca-to-legacy`
+> or "legacy adapters" is historical. Current state:
 > [`status-and-open-questions.md`](./status-and-open-questions.md) and
-> [`migration-support.md`](./migration-support.md). Effort estimates that
-> include legacy adapters are no longer valid.
+> [`migration-support.md`](./migration-support.md).
+>
+> **Update 2026-10-28: decisions recorded.**
+>
+> - `@carbon/angular` is **not behind a feature flag**. It is new in v12 and
+>   gets a separate migration guide for CCA users
+>   (`docs/guides/cca-to-angular.md`, not yet written). Whether
+>   `docs/migration/v12.md` also gets a short entry is undecided.
+> - `@carbon/web-components` is no longer a peer dependency (ADR 0020).
+> - **No convenience components in core.** Migration support is codemods plus
+>   agent skills. The first release has full `@carbon/web-components` coverage,
+>   so the scope freeze waits for the components still merging from Carbon for
+>   IBM Products.
+> - The manifest moves to the Custom Elements Manifest when the dev lead's PR
+>   lands.
+> - No classic or fluid Date Pickers until the web components have a fluid
+>   picker without flatpickr.
+> - The generator does not emit stories or tests. They are hand-written, and the
+>   `storybook:parity` check was dropped.
+> - Angular 19+ is the floor (ADR 0018).
+>
+> See [`milestones.md`](./milestones.md) for where each decision lands.
 
-**Status:** Pre-implementation planning **Last updated:** 2026-09 (updated with
-Automated Core Wrapper Generator; legacy entry point since removed, see above)
+**Status:** In progress. 281 generated wrappers, 97 secondary entry points, 7
+components ported with stories and tests. **Last updated:** 2026-10-28
 **Location in monorepo:** `packages/angular/` **Package name:**
-`@carbon/angular` (Automated) **Versioning:** `0.0.0-prerelease.0` →
-`1.0.0-rc.0` (v12 RC) → `1.0.0` (v12 GA) **Angular component selector prefix:**
-`cds-ng-*` (selector and WC tag, ADR 0020, accepted 2026-10-27). The text below
-that says `cds-*` predates ADR 0020 and is rewritten in status step 11.
+`@carbon/angular` **Versioning:** `0.0.0-prerelease.0` → `1.0.0-rc.0` (v12 RC) →
+`1.0.0` (v12 GA) **Component selector prefix:** `cds-ng-*` (selector and web
+component tag, ADR 0020, accepted 2026-10-27).
+
+> **How to read this document.** It began as a pre-implementation plan. Sections
+> were corrected on 2026-10-28 to match the code. Where a section still
+> describes the earlier design (hand-written tiers, `cds-*` selectors,
+> `@carbon/angular/legacy`), it carries a note saying so. Element names written
+> as `cds-<name>` in tables are **web component** names; the Angular selector is
+> `cds-ng-<name>`.
 
 ---
 
@@ -27,10 +50,12 @@ that says `cds-*` predates ADR 0020 and is rewritten in status step 11.
 
 `@carbon/angular` is generated automatically from `@carbon/web-components`:
 
-- Pure 1:1 Angular wrappers generated from `@carbon/web-components`' Custom
-  Elements Manifest (CEM / `custom-elements.json`).
-- Covers all 110+ component families (297+ custom elements) with zero manual
-  adapter lag.
+- Pure 1:1 Angular wrappers generated from the `@carbon/web-components` manifest
+  (`custom-elements.json` today; the standard Custom Elements Manifest once the
+  dev lead's PR lands).
+- Covers 110+ component families, currently 281 generated wrappers, with zero
+  manual adapter lag. The first release must cover every
+  `@carbon/web-components` component (decided 2026-10-28).
 - Migration from `carbon-components-angular` is a single move, supported by
   documentation, codemods and agent skills. See
   [`migration-support.md`](./migration-support.md).
@@ -47,7 +72,7 @@ Products into Carbon core (ADR 0009), `@carbon/angular` also inherits the
 complete enterprise and product component catalog directly in the same package.
 The table below shows what Angular developers gain by switching.
 
-### Component coverage: ~35 → 110+ (297+ Custom Elements)
+### Component coverage: ~35 → 110+ (281 generated wrappers)
 
 | Category                                | CCA     | @carbon/angular | Notes                                                                                                                                                                                                                                                      |
 | --------------------------------------- | ------- | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -60,63 +85,60 @@ The table below shows what Angular developers gain by switching.
 
 ### New capabilities on existing components
 
-| Capability                              | CCA     | @carbon/angular  | Detail                                                                                                                    |
-| --------------------------------------- | ------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| AI Label decoration                     | ✗       | ✓                | `<cds-ai-label>` slot on Button, Dropdown, DataTable rows, Tag — marks AI-generated content with a built-in revert action |
-| Fluid form variants                     | ✗       | ✓                | 12 full-width condensed variants; each inherits every property from its standard counterpart                              |
-| Warn state on inputs                    | ✗       | ✓                | `warn` / `warnText` distinct from `invalid` across all form components                                                    |
-| Native form participation               | ✗       | ✓                | WC elements are `formAssociated`; work inside `<form>` natively; Angular layer adds CVA on top                            |
-| Floating UI autoalign                   | ✗       | ✓                | Tooltip, Popover, Dropdown flip intelligently at viewport edges via `@floating-ui/dom`                                    |
-| Layer / theming context                 | ✗       | ✓                | `cds-layer` propagates level-0/1/2 CSS tokens; child components automatically use the correct background and field tokens |
-| Locale-aware DataTable sort             | ✗       | ✓                | `Intl.Collator` with configurable `locale` and pluggable `collator`; custom `filterRows` fn                               |
-| DataTable AI label rows                 | ✗       | ✓                | `withRowAILabels` — per-row AI provenance indicator                                                                       |
-| DataTable radio selection               | ✗       | ✓                | `radio` prop for single-select mode alongside existing checkbox mode                                                      |
-| DataTable `xs` / `xl` sizes             | ✗       | ✓                | Two additional size variants beyond the existing sm/md/lg                                                                 |
-| ComboBox typeahead                      | ✗       | ✓ (experimental) | `typeahead` prop; `allowCustomValue` for free-text entry; custom `shouldFilterItem` fn                                    |
-| MultiSelect `selectAll`                 | ✗       | ✓                | Built-in select-all checkbox; `selectionFeedback` modes (top / fixed / top-after-reopen)                                  |
-| Pagination i18n formatters              | ✗       | ✓                | All label text exposed as format callbacks (`formatLabelText`, `formatStatusWithDeterminateTotal`, etc.)                  |
-| Pagination unknown total                | ✗       | ✓                | `pagesUnknown` mode for open-ended data sets                                                                              |
-| Notification auto-dismiss               | ✗       | ✓                | `timeout` (ms) on inline and toast notifications                                                                          |
-| Notification low contrast               | ✗       | ✓                | `lowContrast` mode                                                                                                        |
-| Tooltip autoalign + delays              | ✗       | ✓                | `autoalign`, configurable `enterDelayMs` / `leaveDelayMs`, `keyboardOnly` activation, `closeOnActivation`                 |
-| Button link mode                        | Partial | ✓                | Full `href`, `download`, `rel`, `target`, `ping`, `hreflang` support                                                      |
-| Button built-in tooltip                 | ✗       | ✓                | `tooltipText`, `tooltipAlignment`, `tooltipPosition`, `openTooltip` — no wrapper element needed                           |
-| Modal `alert` / `fullWidth`             | ✗       | ✓                | `alert` mode; `fullWidth`; `shouldSubmitOnEnter`                                                                          |
-| Accordion `isFlush` / `alignment`       | ✗       | ✓                | Flush text mode; chevron start/end alignment; `size` cascades to children                                                 |
-| Tab `secondaryLabel` / `badgeIndicator` | ✗       | ✓                | Secondary label on contained tabs; badge dot per tab (experimental)                                                       |
-| DatePicker `enabledRange`               | ✗       | ✓                | Date range constraint; `allowInput`, `closeOnSelect`, `open` (programmatic), `name` (form)                                |
+| Capability                              | CCA     | @carbon/angular  | Detail                                                                                                                       |
+| --------------------------------------- | ------- | ---------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| AI Label decoration                     | ✗       | ✓                | `<cds-ng-ai-label>` slot on Button, Dropdown, DataTable rows, Tag — marks AI-generated content with a built-in revert action |
+| Fluid form variants                     | ✗       | ✓                | 12 full-width condensed variants; each inherits every property from its standard counterpart                                 |
+| Warn state on inputs                    | ✗       | ✓                | `warn` / `warnText` distinct from `invalid` across all form components                                                       |
+| Native form participation               | ✗       | ✓                | WC elements are `formAssociated`; work inside `<form>` natively; Angular layer adds CVA on top                               |
+| Floating UI autoalign                   | ✗       | ✓                | Tooltip, Popover, Dropdown flip intelligently at viewport edges via `@floating-ui/dom`                                       |
+| Layer / theming context                 | ✗       | ✓                | `cds-layer` propagates level-0/1/2 CSS tokens; child components automatically use the correct background and field tokens    |
+| Locale-aware DataTable sort             | ✗       | ✓                | `Intl.Collator` with configurable `locale` and pluggable `collator`; custom `filterRows` fn                                  |
+| DataTable AI label rows                 | ✗       | ✓                | `withRowAILabels` — per-row AI provenance indicator                                                                          |
+| DataTable radio selection               | ✗       | ✓                | `radio` prop for single-select mode alongside existing checkbox mode                                                         |
+| DataTable `xs` / `xl` sizes             | ✗       | ✓                | Two additional size variants beyond the existing sm/md/lg                                                                    |
+| ComboBox typeahead                      | ✗       | ✓ (experimental) | `typeahead` prop; `allowCustomValue` for free-text entry; custom `shouldFilterItem` fn                                       |
+| MultiSelect `selectAll`                 | ✗       | ✓                | Built-in select-all checkbox; `selectionFeedback` modes (top / fixed / top-after-reopen)                                     |
+| Pagination i18n formatters              | ✗       | ✓                | All label text exposed as format callbacks (`formatLabelText`, `formatStatusWithDeterminateTotal`, etc.)                     |
+| Pagination unknown total                | ✗       | ✓                | `pagesUnknown` mode for open-ended data sets                                                                                 |
+| Notification auto-dismiss               | ✗       | ✓                | `timeout` (ms) on inline and toast notifications                                                                             |
+| Notification low contrast               | ✗       | ✓                | `lowContrast` mode                                                                                                           |
+| Tooltip autoalign + delays              | ✗       | ✓                | `autoalign`, configurable `enterDelayMs` / `leaveDelayMs`, `keyboardOnly` activation, `closeOnActivation`                    |
+| Button link mode                        | Partial | ✓                | Full `href`, `download`, `rel`, `target`, `ping`, `hreflang` support                                                         |
+| Button built-in tooltip                 | ✗       | ✓                | `tooltipText`, `tooltipAlignment`, `tooltipPosition`, `openTooltip` — no wrapper element needed                              |
+| Modal `alert` / `fullWidth`             | ✗       | ✓                | `alert` mode; `fullWidth`; `shouldSubmitOnEnter`                                                                             |
+| Accordion `isFlush` / `alignment`       | ✗       | ✓                | Flush text mode; chevron start/end alignment; `size` cascades to children                                                    |
+| Tab `secondaryLabel` / `badgeIndicator` | ✗       | ✓                | Secondary label on contained tabs; badge dot per tab (experimental)                                                          |
+| DatePicker `enabledRange`               | ✗       | ✓                | Date range constraint; `allowInput`, `closeOnSelect`, `open` (programmatic), `name` (form)                                   |
 
 ### Platform-level gains
 
-| Capability                          | CCA     | @carbon/angular                                                                    |
-| ----------------------------------- | ------- | ---------------------------------------------------------------------------------- |
-| Standalone components (no NgModule) | ✗       | ✓ Angular 17+ throughout; import only what you use                                 |
-| OnPush change detection safe        | Partial | ✓ `markForCheck()` called after every WC event; safe by design                     |
-| IBM Equal Access a11y (automated)   | ✗       | ✓ Every story has a `play()` function; checker runs against live interactive state |
-| Feature flags                       | ✗       | ✓ Same flag surface as `@carbon/react` and `@carbon/web-components`                |
-| In-monorepo versioning              | ✗       | ✓ Ships with the Carbon v12 release cycle; no independent lag                      |
+| Capability                          | CCA | @carbon/angular                                                          |
+| ----------------------------------- | --- | ------------------------------------------------------------------------ |
+| Standalone components (no NgModule) | ✗   | ✓ Angular 19+ throughout; import from a per-family secondary entry point |
+| IBM Equal Access a11y (automated)   | ✗   | ✓ Checker runs on stories; only Button has `play()` functions so far     |
+| In-monorepo versioning              | ✗   | ✓ Ships with the Carbon v12 release cycle; no independent lag            |
 
 ### Migration cost — intentional API breaks
 
-Fourteen deliberate breaks from CCA (nine original + five new, identified from
-CCA source inspection), each documented in §14:
+Deliberate breaks from CCA, identified from CCA source inspection. The per-break
+detail is planned for the migration guide (§14, §16):
 
-| Break                                                                  | Old                                                                           | New                                                                       | Reason                                                              |
-| ---------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| DatePicker value type                                                  | `Date \| Date[]`                                                              | `string` (ISO8601)                                                        | Eliminates Flatpickr timezone bugs                                  |
-| DatePicker `(onChange)`                                                | `EventEmitter<Date[]>`                                                        | `EventEmitter<{selectedDates: string[], value: string}>`                  | Drops Flatpickr instance leak                                       |
-| Composition model                                                      | Explicit child components (`ibm-modal-header`, `ibm-date-picker-input`, etc.) | Flat `@Input()` + `ng-content`                                            | WC internalises slot structure                                      |
-| NgModule imports                                                       | `ButtonModule`                                                                | `ButtonComponent` (standalone)                                            | No barrel NgModules                                                 |
-| Per-component `theme` input                                            | `[theme]="'white'"` on 12+ components                                         | Global CSS custom properties                                              | Theming is a CSS concern                                            |
-| `[flatpickr]` / `[plugins]` input                                      | Raw Flatpickr config                                                          | Dropped; individual props instead                                         | Unmaintainable coupling                                             |
-| Pagination event shape                                                 | `{page: {number, length}}`                                                    | `{page: number, pageSize: number}`                                        | Matches WC event; simpler                                           |
-| Pagination model input                                                 | `[model]: PaginationModel`                                                    | Flat `[totalItems]`, `[page]`, `[pageSize]`, `[itemsPerPageOptions]`      | `PaginationModel` conflates page state and data; WC uses flat props |
-| Tabs / Accordion items API                                             | `[tabs]="[{label, content}]"` array                                           | Projected child components                                                | Array API blocks rich template content                              |
-| `DataTableModel` / `TableHeaderItem` / `TableItem` classes             | Mutable classes; `TableItem.template` per cell                                | Plain `DataTableRow[]` interfaces; `cellTemplate: TemplateRef` per column | Classes caused CD conflicts with WC sort/select                     |
-| UI Shell navigation arrays                                             | `[navigationItems]`, `[menuItems]`, `[headerItems]` arrays                    | Projected `<cds-header-item>`, `<cds-sidenav-item>` children              | Arrays prevent `routerLink`/`routerLinkActive` in slot content      |
-| `notificationObj` model input                                          | `notificationObj: NotificationContent / ActionableContent / ToastContent`     | Flat `@Input()`s per WC prop                                              | Object input is an unnecessary indirection over flat WC props       |
-| `appendInline` / `dropUp` / `scrollableContainer` on Dropdown/ComboBox | Manual positioning hacks                                                      | Dropped                                                                   | Floating UI autoalign in the WC supersedes all of these             |
-| `[isDataGrid]` on DataTable                                            | `DataGridInteractionModel` keyboard mode                                      | Deferred to v2                                                            | Complex keyboard interaction model; WC handles keyboard natively    |
+| Break                                                                  | Old                                                                           | New                                                                     | Reason                                                              |
+| ---------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| DatePicker (classic and fluid)                                         | `ibm-date-picker` with Flatpickr                                              | Not wrapped. Only `cds-ng-preview-date-picker` (ADR 0021)               | No flatpickr; wait for a fluid picker in the web components         |
+| Composition model                                                      | Explicit child components (`ibm-modal-header`, `ibm-date-picker-input`, etc.) | Flat `@Input()` + `ng-content`                                          | WC internalises slot structure                                      |
+| NgModule imports                                                       | `ButtonModule` from `carbon-components-angular`                               | `ButtonComponent` from `@carbon/angular/button` (standalone)            | No barrel NgModules (ADR 0012)                                      |
+| Per-component `theme` input                                            | `[theme]="'white'"` on 12+ components                                         | Global CSS custom properties                                            | Theming is a CSS concern                                            |
+| `[flatpickr]` / `[plugins]` input                                      | Raw Flatpickr config                                                          | Dropped; individual props instead                                       | Unmaintainable coupling                                             |
+| Pagination event shape                                                 | `{page: {number, length}}`                                                    | Raw WC `CustomEvent` (`(paginationChangedCurrent)`)                     | The wrapper re-emits the event unchanged                            |
+| Pagination model input                                                 | `[model]: PaginationModel`                                                    | Flat `[totalItems]`, `[page]`, `[pageSize]`                             | `PaginationModel` conflates page state and data; WC uses flat props |
+| Tabs / Accordion items API                                             | `[tabs]="[{label, content}]"` array                                           | Projected child components                                              | Array API blocks rich template content                              |
+| `DataTableModel` / `TableHeaderItem` / `TableItem` classes             | Mutable classes; `TableItem.template` per cell                                | Projected `cds-ng-table-*` children. No `[rows]` input (not built)      | Classes caused CD conflicts with WC sort/select                     |
+| UI Shell navigation arrays                                             | `[navigationItems]`, `[menuItems]`, `[headerItems]` arrays                    | Projected `<cds-ng-header-nav-item>`, `<cds-ng-side-nav-link>` children | Arrays prevent `routerLink`/`routerLinkActive` in slot content      |
+| `notificationObj` model input                                          | `notificationObj: NotificationContent / ActionableContent / ToastContent`     | Flat `title`, `subtitle`, `caption`, `kind` inputs                      | Object input is an unnecessary indirection over flat WC props       |
+| `appendInline` / `dropUp` / `scrollableContainer` on Dropdown/ComboBox | Manual positioning hacks                                                      | Dropped                                                                 | Floating UI autoalign in the WC supersedes all of these             |
+| `[isDataGrid]` on DataTable                                            | `DataGridInteractionModel` keyboard mode                                      | Deferred to v2                                                          | Complex keyboard interaction model; WC handles keyboard natively    |
 
 ---
 
@@ -124,10 +146,10 @@ CCA source inspection), each documented in §14:
 
 `@carbon/angular` is a new package in the Carbon monorepo (`packages/angular/`)
 that provides Angular components wrapping `@carbon/web-components` custom
-elements. It preserves as much of the existing `carbon-components-angular` API
-surface as possible so that migration is low-friction, while deliberately
-breaking from it where the old API was coupled to Flatpickr, child-component
-composition models, or types that no longer exist in the WC layer.
+elements. Each wrapper maps one web component 1:1. It does not try to preserve
+the `carbon-components-angular` API surface (ADR 0020, 2026-10-26): migration is
+a single move supported by codemods and agent skills, not by compatibility
+adapters.
 
 ### Why here, not Carbon Labs
 
@@ -147,93 +169,92 @@ ceremony at graduation). The versioning milestones are:
 
 The WC elements own all behaviour — keyboard navigation, focus management,
 accessibility attributes, selection state, sort logic, filter logic, open/close
-animation, form participation. The Angular layer owns only three things:
+animation, form participation. The Angular layer owns only three things, and the
+generator emits all of them:
 
-1. **Data binding** — accepting `@Input()` arrays and mapping them to WC slot
-   children via `*ngFor`
-2. **Property reflection** — mapping camelCase `@Input()` names to kebab-case WC
-   attributes
-3. **Event normalisation** — listening to WC custom events and re-emitting them
+1. **Property reflection** — forwarding camelCase `@Input()` values to the host
+   web component as properties in `ngOnChanges`
+2. **Event normalisation** — listening to WC custom events and re-emitting them
    as typed `@Output()` emitters
+3. **Forms** — a `ControlValueAccessor` on form-associated elements (28
+   wrappers)
 
-No behaviour logic is reimplemented in Angular unless the WC explicitly does not
-provide it (see `FileUploader` state tracking, `Accordion` `closeOthers`,
-`Pagination` event shape).
+There is no `[items]` / `[rows]` array materialisation and no hand-written
+compound adapter in core (decided 2026-10-28). Consumers compose the web
+components as slotted children.
 
 ---
 
 ## 2. Package structure
 
 ```
-packages/
-└── angular/                              ← @carbon/angular
-    ├── package.json                      ← name: "@carbon/angular", version: "0.0.0-prerelease.0"
-    ├── ng-package.json                   ← Root ng-packagr entry point (@carbon/angular)
-    ├── tsconfig.json                     ← Angular + strict compiler options
-    ├── .storybook/
-    │   ├── main.ts                       ← @storybook/angular
-    │   └── preview.ts
-    ├── tasks/
-    │   ├── generate-wrappers/            ← Code generator: CEM -> Angular wrappers & tests
-    │   └── scaffold-component/
-    ├── src/                              ← Root entry point (@carbon/angular — 100% automated 1:1 WC wrappers)
-    │   ├── index.ts                      ← Barrel re-exporting all generated components
-    │   └── components/
-    │       ├── Button/
-    │       ├── Modal/
-    │       ├── Dropdown/
-    │       └── ... (110+ component families generated from CEM)
-    └── legacy/                           ← Secondary entry point (@carbon/angular/legacy)
-        ├── ng-package.json               ← Secondary ng-packagr entry point
-        └── src/
-            ├── index.ts                  ← Barrel exporting deprecated CCA-compatible wrappers
-            └── components/
-                ├── Dropdown/             ← [items] array adapter -> WC slots
-                ├── Select/               ← [items] array adapter
-                ├── FileUploader/         ← Angular-managed file state machine
-                └── ... (~15-20 specialized migration wrappers)
+packages/angular/                       ← @carbon/angular
+├── package.json                        ← version 0.0.0-prerelease.0; peers: Angular >=19, @carbon/styles
+├── angular.json                        ← Storybook builders
+├── tasks/
+│   ├── generate-wrappers/              ← manifest -> src/generated (gitignored)
+│   └── build-entries/                  ← src/generated -> .entries (gitignored)
+├── src/
+│   ├── generated/                      ← 281 wrapper folders, one per element
+│   ├── stories/<Name>/                 ← hand-written stories, specs, e2e (7 components)
+│   ├── __tests__/                      ← generator and registration specs
+│   └── testing/                        ← test render helper
+├── .storybook/                         ← main.ts, preview.ts, docs/*.mdx
+├── docs/                               ← this document, milestones, status
+└── .entries/                           ← build output (gitignored)
+    ├── vendor/                         ← `cds-ng` prefixed copy of @carbon/web-components
+    ├── index.ts                        ← root entry; `export {}`
+    └── <entry>/                        ← 97 secondary entry points, each with ng-package.json
 ```
 
-`ng-packagr` builds both the root entry point (`@carbon/angular`) and the
-secondary entry point (`@carbon/angular/legacy`). Consumers import from
-`@carbon/angular` for greenfield code or `@carbon/angular/legacy` for
-low-friction migration.
+`build-entries` groups the generated wrappers into secondary entry points (for
+example `@carbon/angular/button`, `@carbon/angular/modal`) and vendors a
+prefixed copy of `@carbon/web-components` that they import through the
+`#carbon-ng/*` path alias. `ng-packagr` then builds `.entries/` as one package
+with many entry points. The root entry is side-effect free and exports nothing,
+so consumers always import from a secondary entry. There is no
+`@carbon/angular/legacy` (removed 2026-10-26).
 
 ---
 
 ## 3. Naming conventions
 
-| Framework      | Package name             | Component selector |
-| -------------- | ------------------------ | ------------------ |
-| React          | `@carbon/react`          | `<Button />`       |
-| Web Components | `@carbon/web-components` | `<cds-button>`     |
-| **Angular**    | **`@carbon/angular`**    | **`<cds-button>`** |
+| Framework      | Package name             | Component selector    |
+| -------------- | ------------------------ | --------------------- |
+| React          | `@carbon/react`          | `<Button />`          |
+| Web Components | `@carbon/web-components` | `<cds-button>`        |
+| **Angular**    | **`@carbon/angular`**    | **`<cds-ng-button>`** |
 
 Angular ships one package for all components. This is intentional — Angular's
 compilation model (Ivy, partial compilation, APF) is best served by a single
 `ng-packagr` project rather than dozens of independent packages.
 
-### Selector prefix: `cds-*`
+### Selector prefix: `cds-ng-*`
 
-`carbon-components-angular` already uses `cds-*` selectors (migrated from
-`ibm-*`):
+`carbon-components-angular` (CCA) uses `cds-*` selectors (migrated from
+`ibm-*`), and `@carbon/web-components` registers `cds-*` tags. A wrapper that
+reused `cds-*` would collide with both. ADR 0020 (accepted 2026-10-27) therefore
+applies one prefix, `cds-ng-*`, to every wrapper selector **and** to the web
+component it hosts, so `@carbon/angular` can load next to CCA or a separately
+loaded `@carbon/web-components` on the same page. The coexistence spike
+(`spikes/coexistence-spike.md`) ran the Modal and the Dropdown to confirm it.
 
-| Component  | Old selector (`ibm-*`) | Current selector (`cds-*`) |
-| ---------- | ---------------------- | -------------------------- |
-| Button set | `ibm-button-set`       | `cds-button-set`           |
-| Checkbox   | `ibm-checkbox`         | `cds-checkbox`             |
-| ComboBox   | `ibm-combo-box`        | `cds-combo-box`            |
-| DatePicker | `ibm-date-picker`      | `cds-date-picker`          |
-| Dropdown   | `ibm-dropdown`         | `cds-dropdown`             |
-| Modal      | `ibm-modal`            | `cds-modal`                |
-| Pagination | `ibm-pagination`       | `cds-pagination`           |
-| Tab        | `ibm-tab`              | `cds-tab`                  |
-| Tabs       | `ibm-tabs`             | `cds-tabs`                 |
+The rename from CCA is mechanical for most components:
 
-Using `cds-*` in `@carbon/angular` matches what current consumers already write
-and makes migration from `carbon-components-angular` a minimal-change upgrade.
-Since this package lives in the monorepo from day one as `@carbon/angular`,
-there is no graduation rename.
+| Component  | CCA selector     | `@carbon/angular` selector |
+| ---------- | ---------------- | -------------------------- |
+| Button     | `[cdsButton]`    | `cds-ng-button`            |
+| Checkbox   | `cds-checkbox`   | `cds-ng-checkbox`          |
+| ComboBox   | `cds-combo-box`  | `cds-ng-combo-box`         |
+| Dropdown   | `cds-dropdown`   | `cds-ng-dropdown`          |
+| Modal      | `cds-modal`      | `cds-ng-modal`             |
+| Pagination | `cds-pagination` | `cds-ng-pagination`        |
+| Tab        | `cds-tab`        | `cds-ng-tab`               |
+| Tabs       | `cds-tabs`       | `cds-ng-tabs`              |
+
+The Button is the exception. In CCA it is an attribute directive on a native
+`<button>`, and here it becomes an element. See
+[`migration-support.md`](./migration-support.md) for the full mapping.
 
 ---
 
@@ -242,13 +263,13 @@ there is no graduation rename.
 | Decision          | Choice                                                       | Rationale                                                                                                                                            |
 | ----------------- | ------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Build tool        | `ng-packagr`                                                 | Produces Angular Package Format (APF); correct `esm2022` + `fesm2022` outputs; Ivy-compatible; required for Angular CLI prod builds and lazy loading |
-| Module style      | Standalone components                                        | Angular 17+ default; no NgModule boilerplate; tree-shakeable                                                                                         |
-| WC schema         | `CUSTOM_ELEMENTS_SCHEMA` per component                       | Scoped to each wrapper; does not bleed into consumer NgModules                                                                                       |
-| Storybook         | `@storybook/angular`                                         | Separate port; Storybook static published to a companion repo (see §5)                                                                               |
-| Testing           | Jest + `@angular/core/testing`                               | Matches React package tooling; TestBed for component integration tests                                                                               |
-| Forms integration | `ControlValueAccessor`                                       | Required for `[formControl]` / `[(ngModel)]` compatibility                                                                                           |
-| WC registration   | Pure class imports + `defineCustomElement`                   | Side-effect-free imports; Angular wrapper registers WC under private names; no `es-custom` needed                                                    |
-| Change detection  | `ChangeDetectorRef.markForCheck()` after machine transitions | Ensures OnPush-compatible state propagation                                                                                                          |
+| Module style      | Standalone components                                        | Default on Angular 19+; the generated `standalone: true` is redundant and is being removed (ADR 0018)                                                |
+| WC schema         | None. The host element is the web component                  | No `CUSTOM_ELEMENTS_SCHEMA` in wrappers or stories (ADR 0019)                                                                                        |
+| Storybook         | `@storybook/angular`                                         | Separate port; see §5                                                                                                                                |
+| Testing           | Jest + `jest-preset-angular`; Playwright against Storybook   | Layer 1 and Layer 2 in §13                                                                                                                           |
+| Forms integration | `ControlValueAccessor`                                       | Generated for form-associated elements; required for `[formControl]` / `[(ngModel)]`                                                                 |
+| WC registration   | Wholesale `cds-ng` prefixed copy of `@carbon/web-components` | Built by `create-prefixed-build` during `build-entries`; no runtime renaming (ADR 0020)                                                              |
+| Change detection  | Property forwarding in `ngOnChanges`                         | Not yet verified under OnPush. Wrappers do not call `markForCheck()`                                                                                 |
 
 ### Why ng-packagr, not tsdown/rolldown
 
@@ -263,139 +284,95 @@ tree-shaking, and lazy loading. A single `ng-package.json` at
 
 ### WC registration and name clashing — resolved
 
-**Background — why this was a problem:**
+**Problem.** `carbon-components-angular` renders its own DOM and uses `cds-*`
+selectors. `@carbon/web-components` registers the same `cds-*` tags. A wrapper
+that used `cds-*` and hosted the real web component would clash with both, and
+Angular would match `<cds-modal>` inside the wrapper's own template.
 
-`carbon-components-angular` has zero dependency on `@carbon/web-components`. It
-renders its own DOM from Angular templates + SCSS, with `cds-*` selectors used
-for intra-package Angular component references. When `@carbon/angular` adopts
-`cds-*` selectors _and_ wraps WC elements (also `cds-*`), the Angular compiler
-would recursively match `<cds-modal>` inside the wrapper's own template against
-the declared `cds-modal` Angular selector. `es-custom` was the previous
-workaround — a full duplicate build with `cds-custom-*` tag names — which is why
-the other Angular team used it.
+**History.** Three designs were tried, in order:
 
-**The `@carbon/web-components` v3 pure class export API resolves this cleanly.**
+1. An inner `cds-ng-*` element inside a `cds-*` wrapper.
+2. ADR 0015: the host element IS the web component, registered under the real
+   `cds-*` tag with `defineCustomElement`. This broke composites. The generated
+   code imported `modal.js`, which registers only `CDSModal`, so `cds-dialog`,
+   `cds-modal-header` and the other elements the modal renders were never
+   defined (ADR 0020 finding 2).
+3. **ADR 0020 (accepted 2026-10-27), current:** one prefix, `cds-ng-*`, applied
+   to the wrappers and to a prefixed copy of the web components.
 
-**PR #23097 (`feat/wc-v3`) merged to `main` (2026-09-04, commit `dd87f84`).**
-This is the v3 registration API. Key changes shipped in that PR:
+**Current mechanism.** `tasks/build-entries/index.js`:
 
-- **`defineCustomElement(clazz, { name?, registry? })`** is now the public API,
-  exported from `@carbon/web-components/es/globals/register.js` and implemented
-  in
-  [`packages/web-components/src/globals/register.ts`](../../web-components/src/globals/register.ts).
-  The decision is formalised in
-  [`docs/decisions/0007-provide-pure-class-exports-for-web-components.md`](../../../docs/decisions/0007-provide-pure-class-exports-for-web-components.md).
-- **`carbonElement` decorator is now deprecated** (development warning emitted).
-  It continues to work throughout the v2→v3 transition period.
-- **`es-custom` build is now deprecated**; it still ships but will be removed in
-  v3. **`create-prefixed-build`**
-  (`packages/web-components/bin/create-prefixed-build.js`) is its replacement —
-  a CLI that copies the `es/` directory and rewrites every `cds-*` element name
-  to a custom prefix at build time, with no runtime cost. It preserves `--cds`
-  CSS custom properties so theming stays shared. `@carbon/angular` does not need
-  this tool (per-component `defineCustomElement` is sufficient), but it is the
-  supported path for consumers who run two full copies of Carbon on the same
-  page (micro-frontends, shell/app version mismatches). See §16.
-- **Two `@carbon/upgrade` codemods** now ship for the barrel-import migration:
-  - `wc-report-non-barrel-imports` — dry-run report of class-file imports and
-    their barrel equivalents (no changes made)
-  - `wc-add-barrel-imports` — rewrites class-file side-effect imports to
-    barrels; adds a side-effect barrel alongside kept value imports; idempotent
-  - Both live in `packages/upgrade/transforms/` and share `carbon-wc-imports.js`
-    — a jscodeshift utility that classifies `@carbon/web-components` imports.
-    This utility and the report-first / write-opt-in UX pattern are the **direct
-    model** for `@carbon/angular` migration codemods (see §16).
-- **`custom-elements.json` (WCA manifest) is deprecated** in v2 and removed in
-  v3, replaced by the standard
-  [Custom Elements Manifest (CEM)](https://github.com/webcomponents/custom-elements-manifest).
-  A `wca-deprecation.mjs` task now prints a deprecation warning at build time.
-  IDE tooling that consumed `custom-elements.json` should migrate to the CEM
-  schema. `@carbon/angular` should generate its own CEM (via
-  `@custom-elements-manifest/analyzer` or `@compodoc/compodoc`) rather than
-  re-using the WC one.
-- **Barrels preserve v2 behaviour.** Each component's `index.js` still calls
-  `defineCustomElement`, so importing the barrel registers the element exactly
-  as before — no consumer-facing change until v3 pure class exports land.
-- **v3 pure class exports (side-effect-free class files) are NOT yet in main.**
-  The current state is additive: `defineCustomElement` is available and
-  `carbonElement` is deprecated, but class files still self-register via the
-  decorator. Pure class files land with the v3 release.
+- runs `create-prefixed-build --prefix cds-ng` over `packages/web-components/es`
+  into `.entries/vendor`, and filters it to what the wrappers import. The
+  `--cds` custom properties are kept, so theming stays shared with
+  `@carbon/styles`;
+- regroups the wrappers into one secondary entry point per web component folder
+  and rewrites those **copies** in `.entries/` so each selector and each import
+  use the prefix. `src/generated/` is not changed: it keeps `cds-*` selectors
+  and the `@carbon/web-components` import. Jest specs run against it, while
+  Storybook, Playwright and the published package use the `cds-ng-*` copies;
+- imports the web component's **folder barrel** (`components/<name>/index.js`),
+  which registers the element and every child it renders.
 
-**What this means for `@carbon/angular` development today:**
+Each wrapper therefore registers its web component as a side effect of its own
+import, and a consumer never imports a web component directly.
 
-`@carbon/angular` can use `defineCustomElement` right now against the current
-`@carbon/web-components` release — no `git:` branch dep needed. The WC peer dep
-can be pinned to the first release that includes PR #23097. The registration
-pattern works as follows (ADR 0015 — host-is-WC):
+`@carbon/web-components` is **not a peer dependency**. The prefixed copy is part
+of the published package (peer removed 2026-10-28). `@carbon/styles` is a peer
+because the components read about 24,600 `var(--cds-*)` references and import no
+stylesheet; without it the tokens are empty.
+
+**`defineCustomElement` and `create-prefixed-build`.** Both shipped with
+`@carbon/web-components` v3 (PR #23097, commit `dd87f84`).
+`defineCustomElement(clazz, { name?, registry? })` is the public registration
+API (ADR 0007). `create-prefixed-build` is the supported way to run two full
+copies of Carbon on one page. `@carbon/angular` uses the latter.
+
+**Manifest.** The generator currently reads
+`packages/web-components/custom-elements.json`, which is the WCA format that
+`@carbon/web-components` deprecated in v2. It moves to the standard Custom
+Elements Manifest when the dev lead's PR lands (decided 2026-10-28).
+
+### Generated wrapper shape
+
+What ends up in `.entries/` for the Button, abbreviated, after `build-entries`
+has applied the prefix:
 
 ```ts
-import CDSModal from '@carbon/web-components/es/components/modal/modal.js';
-import { defineCustomElement } from '@carbon/web-components/es/globals/register.js';
-
-// Register under the real tag — no renaming (ADR 0015).
-defineCustomElement(CDSModal);
-// Angular selector is also 'cds-modal'; host element IS the web component.
-```
-
-**`es-custom` is superseded for `@carbon/angular`'s purposes.** For
-`@carbon/angular`, neither `es-custom` nor `create-prefixed-build` is needed —
-`defineCustomElement` (no custom name) provides exactly the right contract.
-
-**Registration coverage audit:** PR #23097 also shipped
-`packages/web-components/tasks/registration-coverage.mjs` — a CI tool that
-traverses the module graph from every component barrel and fails if a component
-renders an element its barrel cannot register. When developing
-`@carbon/angular`, this audit is a useful reference for confirming which WC
-elements each barrel registers. The v3 barrel discipline — every barrel
-registers exactly the elements it renders, no transitive leakage — is the same
-contract `@carbon/angular` wrapper barrels should follow.
-
-### WC registration pattern per component (ADR 0015)
-
-**Note:** An earlier version of this plan used a `cds-ng-*` _inner element_
-inside a `cds-*` wrapper. ADR 0015 replaced that with host-is-WC. A different
-idea, a wholesale `cds-ng-*` prefix over a prefixed build of the web components,
-was accepted in ADR 0020 (2026-10-27) and replaces the real-tag registration
-below. The section below reflects ADR 0015 and is stale until step 11.
-
-Each Angular wrapper component registers its backing WC element under the real
-tag as a side effect of its own module import:
-
-```ts
-// modal.component.ts — generated by tasks/generate-wrappers/index.js
-import CDSModal from '@carbon/web-components/es/components/modal/modal.js';
-import { defineCustomElement } from '@carbon/web-components/es/globals/register.js';
-
-// Real tag — no renaming. Host element IS the web component.
-defineCustomElement(CDSModal);
+import '#carbon-ng/components/button/index.js';
 
 @Component({
-  selector: 'cds-modal', // same as the WC tag
+  selector: 'cds-ng-button',
   template: `<ng-content />`,
-  standalone: true,
+  encapsulation: ViewEncapsulation.None,
+  standalone: true, // redundant on Angular 19+; to be removed (ADR 0018)
 })
-export class ModalComponent implements OnChanges {
-  @Input() open = false;
-  private readonly _el = inject(ElementRef<HTMLElement>);
+export class ButtonComponent implements OnChanges {
+  @Input({ transform: booleanAttribute }) disabled: boolean = false;
+  @Input() kind: string = 'primary';
+  // ...one @Input per manifest attribute or property
+
   ngOnChanges(changes: SimpleChanges): void {
     for (const key of Object.keys(changes)) {
-      (this._el.nativeElement as any)[key] = changes[key].currentValue;
+      if (PROPERTY_INPUTS.has(key)) {
+        (this._el.nativeElement as any)[key] = changes[key].currentValue;
+      }
     }
   }
 }
 ```
 
-Selector (`cds-modal`) === WC tag. Host IS the web component. No inner element,
-no `CUSTOM_ELEMENTS_SCHEMA`, no `es-custom`.
+Selector === web component tag. There is no inner element, no
+`CUSTOM_ELEMENTS_SCHEMA` and no `es-custom`. `@Output()` emitters are generated
+only for custom events the manifest declares, not for native DOM events, so a
+native `click` is consumed as `(click)`. Components that need it also get a
+`ControlValueAccessor` provider.
 
-**The snippet above is not what the generator emits.** It imports the `modal.js`
-class file and registers only `CDSModal`, so `cds-dialog`, `cds-modal-header`
-and the other elements that `cds-modal` renders were never defined. The
-generator now emits `import '…/components/modal/index.js'` (the folder barrel)
-instead. See ADR 0020 finding 2.
-
-**`@carbon/web-components` peer dep:** `defineCustomElement` is available
-(merged via PR #23097, commit `dd87f84`).
+**Registration coverage audit.** PR #23097 also shipped
+`packages/web-components/tasks/registration-coverage.mjs`, which fails if a
+component renders an element its barrel cannot register.
+`src/__tests__/child-registration.spec.ts` checks the same contract from the
+Angular side.
 
 ---
 
@@ -425,81 +402,39 @@ output for publishing.
 
 #### Storybook navigation structure
 
-The sidebar follows the unified structure established in ADR 0006 and ADR 0009
-(migrated IBM Products components sit alongside core components alphabetically
-without a separate product group). Migration content remains the **first group**
-— the top entry a CCA consumer sees when opening the Storybook.
-
-```
-Introduction/
-  Welcome                        ← packages/angular/.storybook/docs/welcome.mdx
-  Migrating from carbon-components-angular   ← packages/angular/.storybook/docs/migration.mdx
-  Form participation             ← packages/angular/.storybook/docs/form-participation.mdx
-  Component registration         ← packages/angular/.storybook/docs/component-registration.mdx
-
-Components/                      ← 100% Automated 1:1 WC wrappers (@carbon/angular), unified alphabetically
-  Accordion/
-  ActionSet/
-  Button/
-  Card/
-  DataTable/
-  Dropdown/
-  Modal/
-  PageHeader/
-  SidePanel/
-  Tearsheet/
-  ...
-
-Utilities/                       ← Utility & layout primitives
-  Layer/
-  Resizer/
-  ScrollGradient/
-  TruncatedText/
-
-Examples/                        ← Enterprise pattern demonstrations
-  CreateFlows/
-  DeleteAndRemove/
-  Export/
-  ImportAndUpload/
-
-Legacy carbon-components-angular/  ← Deprecated CCA compatibility adapters (@carbon/angular/legacy)
-  Overview                          ← packages/angular/.storybook/docs/legacy-overview.mdx
-  Accordion/
-  DataTable/
-  Dropdown/
-  FileUploader/
-  Notification/
-  Select/
-  ...
-```
-
-Storybook sidebar order is controlled by `storySort` in `.storybook/preview.ts`:
+The sidebar follows ADR 0006 and ADR 0009: migrated IBM Products components sit
+alongside core components alphabetically, with no separate product group.
+`.storybook/preview.ts` sets the order:
 
 ```ts
-// packages/angular/.storybook/preview.ts
 storySort: {
+  method: 'alphabetical',
   order: [
     'Introduction',
-    ['Welcome', 'Migrating from carbon-components-angular',
-     'Form participation', 'Component registration'],
+    ['Welcome', 'Migration', 'Form Participation', 'Component Registration'],
     'Components',
     'Utilities',
     'Examples',
-    'Legacy carbon-components-angular',
   ],
 },
 ```
 
+Only `Welcome` and `Migration` exist today (`.storybook/docs/welcome.mdx`,
+`.storybook/docs/migration.mdx`). `Form Participation` and
+`Component Registration` are named in the sort order but have no page yet. Seven
+components have stories: Accordion, ActionSet, Button, Checkbox, Dropdown,
+Modal, TextInput. The `Utilities` and `Examples` groups are planned and empty.
+There is no `Legacy` group because there is no legacy entry point.
+
 #### Story authoring policy (ADR 0019)
 
-Story files for `@carbon/angular` core wrappers are **scaffolded as stubs by the
-wrapper generator** then completed by maintainers. The generator emits a minimal
-but runnable stub with a `Default` story, correct import path, and
-`// TODO(parity):` comments for each WC story not yet covered. Story files for
-`@carbon/angular/legacy` are **fully hand-crafted** alongside their adapter
-component — no generation occurs. See
+Story files for `@carbon/angular` are **hand-written** under
+`src/stories/<Name>/__stories__/`, with `// TODO(parity):` comments marking WC
+stories that cannot be reproduced yet. ADR 0019 proposed generated stubs; they
+were not built (see its 2026-10-28 update). There is no `@carbon/angular/legacy`
+entry point. See
 [ADR 0019](../../../docs/decisions/0019-angular-storybook-story-authoring.md)
-for the full rationale, including why full automation was rejected.
+for the story authoring rules and why full automation was rejected.
 
 #### Story parity with `@carbon/web-components`
 
@@ -508,15 +443,19 @@ Angular story file for that component.** This is a hard requirement, not a
 guideline.
 
 **Rule:** For each named export in
-`packages/web-components/src/components/<name>/<name>.stories.ts`, there must be
-an identically named export in
-`packages/angular/src/stories/<Name>/__stories__/<Name>.stories.ts`.
+`packages/web-components/src/components/<name>/<name>.stories.ts`, there should
+be an identically named export in
+`packages/angular/src/stories/<Name>/__stories__/<Name>.stories.ts`, or a
+`// TODO(parity):` comment explaining why not.
 
 This gives consumers a side-by-side reference when comparing the two packages
 and keeps the Angular Storybook honest about feature coverage. It also surfaces
-any Angular-layer gaps — if a WC story cannot be reproduced in the Angular
-wrapper, that is a signal the `@Input()` or slot-materialisation API is
-incomplete.
+any Angular-layer gaps.
+
+**Status (2026-10-28):** a comparison across the 7 ported components found three
+web component stories without an Angular counterpart, all marked: Button
+`IconButtonWithBadge`, Dropdown `WithToggletipLabel`, and Modal
+`EnableDialogElement` (on hold until the dialog version of Modal is stable).
 
 **Additional Angular-only stories are allowed** when they demonstrate behaviour
 that is specific to Angular (e.g. `[(ngModel)]` two-way binding,
@@ -532,82 +471,21 @@ block appears first.
 - `Skeleton` stories for components whose Angular wrapper has no skeleton
   variant yet follow the same `TODO` pattern.
 
-**Enforcement:** A CI check (`yarn workspace @carbon/angular storybook:parity`)
-compares exported story names between the WC and Angular story files for each
-component and fails if any WC story is missing from the Angular file without a
-matching `// TODO(parity):` comment.
+**Enforcement:** Manual, through code review. An automated check
+(`storybook:parity`) was considered and dropped for now (ADR 0019, update
+2026-10-28).
 
-#### `migration.mdx` — the migration page
+#### `migration.mdx` and `welcome.mdx`
 
-`packages/angular/.storybook/docs/migration.mdx` is the primary migration
-reference. It lives in Storybook (not just `docs/guides/`) so it is co-located
-with the component examples a migrating developer is browsing. Content mirrors
-`docs/guides/cca-to-angular.md` but is formatted as an interactive Storybook
-page with live `<Canvas>` examples where the before/after difference is visible.
+`packages/angular/.storybook/docs/migration.mdx` is the migration page. It lives
+in Storybook so it sits next to the component examples a migrating developer is
+browsing. It is a stand-in until `docs/guides/cca-to-angular.md` exists (see
+§16). When the guide is written, the page becomes a short entry point that links
+to it.
 
-**Page structure:**
-
-```mdx
-<Meta title="Introduction/Migrating from carbon-components-angular" />
-
-# Migrating from carbon-components-angular
-
-> Already using `@carbon/angular`? Jump straight to the [component stories](#)
-> or run the codemods below.
-
-## Quick start
-
-1. Uninstall `carbon-components-angular` and install `@carbon/angular` —
-   `@carbon/web-components` comes with it automatically
-2. Install `@carbon/styles` if you need to customise or override Carbon SCSS
-   (`@carbon/styles` is a peer dependency, not bundled)
-3. Run `npx @carbon/upgrade migrate cca-report-imports` to see what needs
-   changing
-4. Run the write codemods (see [Codemods](#codemods) below)
-5. Fix any remaining `:not(:defined)` elements in the browser
-
-## What stays the same
-
-- Selectors stay `cds-*` — your templates do not change
-- `[(ngModel)]` and `[formControl]` bindings work identically
-- All `@carbon/styles` SCSS imports are unchanged
-
-## Breaking changes
-
-### Module imports
-
-### TableModel removed
-
-### notificationObj removed
-
-### PaginationModel removed
-
-### UI Shell: projected children replace arrays
-
-### [theme] input removed
-
-### appendInline / dropUp / scrollableContainer removed
-
-## Codemods
-
-npx @carbon/upgrade migrate cca-report-imports npx @carbon/upgrade migrate
-cca-update-module-imports --write ...
-
-## Running two versions side by side
-```
-
-The breaking-changes sections map 1:1 to the §7 universal-breaks table and §16
-migration guide. Full detail (Before/After/Why/Migration) is in
-`docs/guides/cca-to-angular.md`; the Storybook page is the discoverable entry
-point that links to it and surfaces the codemods commands where developers are
-actively working.
-
-#### `welcome.mdx`
-
-`packages/angular/.storybook/docs/welcome.mdx` — the `Introduction/Welcome` page
-— is concise: package description, install command, basic usage snippet, and a
-prominent **"Migrating from `carbon-components-angular`?"** call-to-action link
-to the migration page. It does not duplicate migration content.
+`welcome.mdx` is concise: package description, install command, a usage snippet,
+the stylesheet requirement and a link to the migration page. It does not
+duplicate migration content.
 
 ---
 
@@ -615,45 +493,65 @@ to the migration page. It does not duplicate migration content.
 
 ### Development methodology: Automated generation
 
-`@carbon/angular` uses an automated wrapper generator pipeline. (The paired
-hand-crafted `@carbon/angular/legacy` adapters that this section used to
-describe were removed on 2026-10-26.)
+`@carbon/angular` uses an automated wrapper generator. (The paired hand-crafted
+`@carbon/angular/legacy` adapters that this section used to describe were
+removed on 2026-10-26.)
 
-#### 1. Core `@carbon/angular` Pipeline (100% Automated from CEM)
+#### Generator output
 
-The generator script (`packages/angular/tasks/generate-wrappers/`) reads the
-`custom-elements.json` manifest emitted by `@carbon/web-components` and
-generates:
+`tasks/generate-wrappers/` reads `packages/web-components/custom-elements.json`
+and emits one folder per element under `src/generated/`:
 
-- Standalone component classes
-  (`@Component({ selector: 'cds-<name>', template: '<ng-content />' })`)
-- `defineCustomElement` registration under the real tag (ADR 0015 — no
-  `cds-ng-*` renaming)
+- A component class, `@Component({ selector, template: '<ng-content />' })`
 - Typed `@Input()` properties forwarded to the host element in `ngOnChanges`
-- Boolean `@Input()` using `booleanAttribute` (so `<cds-button disabled>` works)
-- `@Output()` event emitters for **custom events only** (not native DOM events —
-  ADR 0015 §4)
-- `ControlValueAccessor` (CVA) providers for form-associated custom elements
-- Automated Layer 1 Jest unit tests (`<Name>.spec.ts`) asserting property
-  forwarding
+- Boolean inputs with `booleanAttribute`, so `<cds-ng-button disabled>` works
+- `@Output()` emitters for **custom events only** (not native DOM events, ADR
+  0015 §4)
+- A `ControlValueAccessor` provider for form-associated elements (28 wrappers)
+- An `index.ts` per folder
 
-Because the generator operates on the CEM source of truth, **over 110+ component
-families (297+ custom elements)** are generated and tested automatically.
+It does **not** emit stories or tests. Those are hand-written (ADR 0019).
 
-#### 2. Secondary entry point `@carbon/angular/legacy`: removed
+The manifest has 327 tags, 290 of them `cds-` (284 unique). 281 wrapper folders
+are emitted: 278 from the manifest and 3 from `SYNTHETIC_TAGS`, a temporary list
+for skeleton classes that the manifest omits (to be fixed upstream). The classic
+and fluid Date Pickers are skipped on purpose (ADR 0021).
+
+#### Secondary entry points
+
+`build-entries` regroups the output into 97 secondary entry points, one per web
+component folder, so an app that imports `@carbon/angular/button` does not pay
+for every component's registration (ADR 0020 constraint 4).
+
+#### Secondary entry point `@carbon/angular/legacy`: removed
 
 Removed 2026-10-26. The components it was to hold (`Dropdown` / `Select` /
 `MultiSelect` with `[items]`, `FileUploader`, `DataTable`, `Tabs` / `Accordion`,
-`Notification` with `notificationObj`) are now migration cases handled by
-codemods and guidance. See [`migration-support.md`](./migration-support.md).
+`Notification` with `notificationObj`) are migration cases handled by codemods
+and agent skills. See [`migration-support.md`](./migration-support.md).
 
 ---
 
 ### Component tiers
 
-Components are grouped into implementation tiers based on wrapper complexity.
-The tiers include both core Carbon components and the newly integrated IBM
-Products component surface (ADR 0009).
+> **Planning content, not what was built (2026-10-28).** The tiers below were
+> written when the plan was to hand-write adapters. The decision since is **no
+> convenience components in core**, so nothing in Tiers 2 to 4 that materialises
+> children from an `[items]` / `[rows]` / `[tree]` array, or that owns state in
+> Angular, is being built. Every one of these components is currently a
+> generated 1:1 wrapper that consumers compose with slotted children. The tables
+> remain useful as a per-component record of the CCA API and the web component
+> equivalent, and as input to the codemods and agent skills (Milestone 5).
+> Element names are web component names; the Angular selector is
+> `cds-ng-<name>`.
+>
+> The tiers also predate full web component coverage as the first-release goal.
+> Components in "Tier 5" that have no web component yet (`ScrollGradient`,
+> `TagOverflow`, `ConditionBuilder`) are waiting on the web components, not on
+> an Angular implementation.
+
+The tiers include both core Carbon components and the IBM Products components
+that ADR 0009 merges into core.
 
 ### Tier 1 — Thin wrappers (~2–4 hours each)
 
@@ -691,8 +589,10 @@ Pure attribute-mapping wrappers. No slot materialisation, no behaviour logic.
 
 ### Tier 2 — Slot materialisation (~1–3 days each)
 
-Angular wrapper renders WC child elements via `*ngFor` from `[items]` input. All
-behaviour (keyboard navigation, selection, open/close) is owned by the WC.
+> **Not built as described.** The wrapper does not render children from an
+> `[items]` input. Consumers project the web component's child elements.
+
+All behaviour (keyboard navigation, selection, open/close) is owned by the WC.
 
 | Component          | WC element(s)                                                                      | Origin       | Key adapter work                                                                                                                                                                                                                                                                                                                          |
 | ------------------ | ---------------------------------------------------------------------------------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -720,8 +620,13 @@ behaviour (keyboard navigation, selection, open/close) is owned by the WC.
 
 ### Tier 3 — Compound components & complex adapters (~1–2 weeks each)
 
-Requires real Angular logic beyond slot materialisation, compound component
-authoring, or state coordination, but WC still owns all behaviour.
+> **Not built as described.** The Angular-side logic below (`closeOthers`,
+> `filterMode`, the `FileUploader` state machine, compound exports) is not in
+> core. Each element is a generated wrapper.
+
+Original plan: real Angular logic beyond slot materialisation, compound
+component authoring, or state coordination, with the WC still owning all
+behaviour.
 
 #### Tabs (`cds-tabs` + `cds-tab`)
 
@@ -850,7 +755,12 @@ fn), row selection (checkbox/radio), select-all, batch actions bar, row
 expansion, batch expansion, overflow menu hover, download, zebra striping, AI
 label support. It fires 8 distinct events.
 
-The Angular wrapper's only job is data binding:
+> **Not built as described.** The generated `Table`, `TableRow`, `TableCell` and
+> related wrappers are used with projected children. `[rows]` / `[columns]`
+> binding is a convenience component and is out of scope (decided 2026-10-28).
+> The text below is the original plan.
+
+The Angular wrapper's only job was to be data binding:
 
 - Accept `[rows]: DataTableRow[]` and `[columns]: DataTableColumn[]`
 - Render `cds-table-header-cell` per column via `*ngFor`
@@ -883,30 +793,30 @@ CCA's UI Shell uses array-based `[navigationItems]` / `[menuItems]` /
 migration break point:
 
 **Break from CCA:** replace `[navigationItems]="[...]"` arrays with projected
-`<cds-header-item>` / `<cds-sidenav-item>` children — the same composition model
-applied to Tabs and Accordion. The WC layer owns all keyboard navigation and
-ARIA; Angular's role is routing integration and slot binding.
+`<cds-ng-header-nav-item>` / `<cds-ng-side-nav-link>` children — the same
+composition model applied to Tabs and Accordion. The WC layer owns all keyboard
+navigation and ARIA.
 
-Key CCA router inputs to preserve on navigating items: `[useRouter]`, `[route]`,
-`[routeExtras]`, `[href]`, `[activeLinkClass]`, `[isCurrentPage]`. The
-`(navigation)` output (`EventEmitter<Promise<boolean>>`) should be preserved on
-all navigating children (`cds-header-item`, `cds-sidenav-item`,
-`cds-switcher-list-item`).
+CCA router inputs (`[useRouter]`, `[route]`, `[routeExtras]`,
+`[activeLinkClass]`, `[isCurrentPage]`) and the `(navigation)` output have no
+equivalent in the generated wrappers, which expose `href`, `rel` and `target`.
+`routerLink` integration is an **open question** for the migration tooling. It
+is not decided whether it becomes guidance, a directive, or a codemod target.
 
-### Tier 5 — Pure Angular & Web Component follow-ups
+### Tier 5 — Components without a web component yet
 
-Components that either have no `@carbon/web-components` equivalent and are
-implemented purely in Angular, or have migrated into `@carbon/react` in Carbon
-Core and await Web Component ports.
+Components that have no `@carbon/web-components` equivalent today, or that are
+in `@carbon/react` and await a web component port. Nothing is implemented purely
+in Angular.
 
-| Component        | Status / Architecture                              | Recommendation                                                                                                             |
-| ---------------- | -------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| Stepper          | Pure Angular                                       | Port forward from CCA — keep old API; frequently used in IBM product multi-step flows.                                     |
-| ScrollGradient   | In `@carbon/react`; WC port follow-up              | Implement temporary Angular directive/component with `@carbon/styles` CSS scroll indicators until WC lands.                |
-| TagOverflow      | In `@carbon/react`; WC port follow-up              | Implement Angular wrapper calculating container width / overflow tags using CDK / ResizeObserver until WC port lands.      |
-| AddSelect        | In `@carbon/react` (composable); WC port follow-up | Implement hierarchical modal / inline selection wrapper consuming `AddSelectData` utility; wrap WC element once available. |
-| ConditionBuilder | In `@carbon/react`; WC port follow-up              | Rule / criteria builder component; port to Angular once WC equivalent is delivered in `@carbon/web-components`.            |
-| StructuredList   | WC equivalent exists (`cds-structured-list`)       | Wrap it — see Tier 2. CCA CVA accepts `any`; preserve `selection`, `flushed`, `condensed` inputs and `(selected)` output.  |
+| Component        | Status / Architecture                          | Recommendation                                                                                                            |
+| ---------------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| Stepper          | CCA only; no web component                     | Not in core (decided 2026-10-28). `cds-progress-indicator` is the web component equivalent. Migration case.               |
+| ScrollGradient   | In `@carbon/react`; **no web component yet**   | Wrap it when the web component lands. The scope freeze waits for it (ADR 0009). No Angular-only stand-in.                 |
+| TagOverflow      | In `@carbon/react`; **no web component yet**   | Wrap it when the web component lands. The scope freeze waits for it. No Angular-only stand-in.                            |
+| AddSelect        | `cds-add-select*` exists in the web components | Already generated (`AddSelect`, `AddSelectBody`, and others).                                                             |
+| ConditionBuilder | In `@carbon/react`; **no web component yet**   | Wrap it when the web component lands. The scope freeze waits for it.                                                      |
+| StructuredList   | WC equivalent exists (`cds-structured-list`)   | Wrap it — see Tier 2. CCA CVA accepts `any`; preserve `selection`, `flushed`, `condensed` inputs and `(selected)` output. |
 
 ---
 
@@ -914,38 +824,45 @@ Core and await Web Component ports.
 
 ### Universal keeps
 
-Preserve unchanged across all components:
+Because each wrapper forwards web component properties, these carry over for
+free wherever the web component uses the same name:
 
-- All boolean flag `@Input()`s (`disabled`, `readOnly`, `invalid`, `hideLabel`,
+- Boolean flag `@Input()`s (`disabled`, `readOnly`, `invalid`, `hideLabel`,
   `open`, `checked`, `required`, …)
-- All string display `@Input()`s (`labelText`, `placeholder`, `invalidText`,
+- String display `@Input()`s (`labelText`, `placeholder`, `invalidText`,
   `warnText`, `helperText`, `title`, …)
-- All variant enums where WC uses the same string values (`kind`, `size`,
+- Variant enums where the WC uses the same string values (`kind`, `size`,
   `type`, `alignment`, …)
-- All `[items]` / `[rows]` / `[columns]` array `@Input()`s — wrapper
-  materialises the slots
+
+`[items]` / `[rows]` / `[columns]` array inputs are **not** kept. See the Tier
+notes in §6.
 
 ### Universal breaks
 
 Apply intentionally across all components:
 
-| Break                                                                           | Affected CCA components                                                                                                                                                                       | Reason                                                                                                                                       |
-| ------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Date` object types → `string`                                                  | DatePicker                                                                                                                                                                                    | State machine and WC operate on strings. Conversion layer introduces timezone edge cases with no team to maintain it.                        |
-| Child component composition models → flat `@Input()` + `ng-content`             | DatePicker (`ibm-date-picker-input`), Modal (`ibm-modal-header/content/footer`), Tabs/Accordion array inputs, UI Shell (`[navigationItems]` arrays)                                           | Wrapper internalises slot structure; consumers write a single flat element.                                                                  |
-| Flatpickr-specific `@Input()`s dropped                                          | DatePicker: `[flatpickr]`, `[appendTo]`, `[plugins]`                                                                                                                                          | The backing library is gone.                                                                                                                 |
-| Per-component `theme` `@Input()` dropped                                        | **All components** — CCA has `[theme]` on: CodeSnippet, ComboBox, DatePicker/DatePickerInput, Dropdown, NumberInput, Search, Select, Tabs, Tiles (all variants), TimePicker, TimepickerSelect | Theming is global via `@carbon/themes` CSS custom properties, not per-component.                                                             |
-| NgModule exports → standalone component exports                                 | All                                                                                                                                                                                           | Not a breaking change for component imports; barrel `*Module` imports need updating.                                                         |
-| `PaginationModel` object → flat `@Input()`s                                     | Pagination (also removes shared model with DataTable)                                                                                                                                         | CCA `[model]: PaginationModel` conflates page state with data; replace with `[totalItems]`, `[page]`, `[pageSize]`, `[itemsPerPageOptions]`. |
-| `TableModel` / `TableHeaderItem` / `TableItem` classes → plain `DataTableRow[]` | DataTable                                                                                                                                                                                     | Mutable class model causes CD conflicts; plain arrays are immutable-friendly.                                                                |
-| Array-based navigation inputs → projected children                              | UI Shell `[navigationItems]`, `[menuItems]`, `[headerItems]`                                                                                                                                  | Arrays block rich template content and Angular router integration; projected children allow `routerLink`, `routerLinkActive`, etc.           |
-| `notificationObj: NotificationContent` model → flat `@Input()`s                 | Notification (inline, toast, actionable)                                                                                                                                                      | Object input is an unnecessary indirection when WC exposes flat props.                                                                       |
+| Break                                                                       | Affected CCA components                                                                                                                                                                       | Reason                                                                                                                         |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `Date` object types → `string`                                              | DatePicker                                                                                                                                                                                    | State machine and WC operate on strings. Conversion layer introduces timezone edge cases with no team to maintain it.          |
+| Array and model inputs → projected web component children                   | Modal (`ibm-modal-header/content/footer`), Tabs/Accordion array inputs, UI Shell (`[navigationItems]` arrays), Dropdown/Select (`[items]`)                                                    | The wrapper does not build children; consumers project `cds-ng-*` elements.                                                    |
+| Flatpickr-specific `@Input()`s dropped                                      | DatePicker: `[flatpickr]`, `[appendTo]`, `[plugins]`                                                                                                                                          | The backing library is gone.                                                                                                   |
+| Per-component `theme` `@Input()` dropped                                    | **All components** — CCA has `[theme]` on: CodeSnippet, ComboBox, DatePicker/DatePickerInput, Dropdown, NumberInput, Search, Select, Tabs, Tiles (all variants), TimePicker, TimepickerSelect | Theming is global via `@carbon/themes` CSS custom properties, not per-component.                                               |
+| NgModule exports → standalone component exports                             | All                                                                                                                                                                                           | Barrel `*Module` imports are replaced by per-family imports such as `@carbon/angular/button`.                                  |
+| `PaginationModel` object → flat `@Input()`s                                 | Pagination (also removes shared model with DataTable)                                                                                                                                         | CCA `[model]: PaginationModel` conflates page state and data; replace with `[totalItems]`, `[page]`, `[pageSize]`.             |
+| `TableModel` / `TableHeaderItem` / `TableItem` classes → projected children | DataTable                                                                                                                                                                                     | Mutable class model causes CD conflicts. No `[rows]` input is built (out of scope).                                            |
+| Array-based navigation inputs → projected children                          | UI Shell `[navigationItems]`, `[menuItems]`, `[headerItems]`                                                                                                                                  | Arrays block rich template content. `routerLink` integration on the web component children is an open question (§6, UI Shell). |
+| `notificationObj: NotificationContent` model → flat `@Input()`s             | Notification (inline, toast, actionable)                                                                                                                                                      | Object input is an unnecessary indirection when WC exposes flat props.                                                         |
 
 ### Forms (ControlValueAccessor)
 
-Every form input implements `ControlValueAccessor`. CVA value types follow the
-WC, not the old Angular types. CCA's inspection and the IBM Products surface
-reveal additional CVA components:
+The generator adds a `ControlValueAccessor` to **28** form-associated wrappers:
+Checkbox, ComboBox, Dropdown, MultiSelect, NumberInput, PasswordInput,
+PreviewDatePicker, RadioButtonGroup, Search, Select, Slider, TableToolbarSearch,
+TextInput, Textarea, TimePicker, TimePickerSelect, Toggle, and the Fluid
+variants. CVA value types follow the WC, not the old Angular types. The table
+below is the original plan and lists the intended value types. `EditInPlace` and
+`OptionsTile` are in the table but have no CVA today, and `StructuredList` is
+unverified. `PreviewDatePickerInput` has none.
 
 | Component           | CVA type            | Notes                                                                                                                                                          |
 | ------------------- | ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -984,21 +901,15 @@ replacing Flatpickr. The classic `cds-date-picker` (Flatpickr-based) remains in
 Date Picker
 ([ADR 0021](../../../docs/decisions/0021-angular-drop-classic-date-picker.md)).
 
-> **Stale naming:** the `cds-ng-preview-*` names in this section and the
-> `cds-ng-<name>` queries in the §13 examples describe the earlier inner-element
-> design. Under ADR 0015 they are the real tags (`cds-preview-date-picker`, and
-> so on). They will be rewritten when those components are built (ADR 0015,
-> remaining work item 8). ADR 0020 would change them again.
-
-**Internal WC tag names for `@carbon/angular`:**
-
-| WC element                  | Angular-internal registration      |
-| --------------------------- | ---------------------------------- |
-| `CDSDatePicker` (next)      | `cds-ng-preview-date-picker`       |
-| `CDSDatePickerInput` (next) | `cds-ng-preview-date-picker-input` |
-
-The `cds-ng-preview-*` prefix keeps these distinct from both the consumer-facing
-`cds-*` Angular selectors and the raw WC preview tags.
+> **Current state (2026-10-28).** The wrapper is the generated
+> `PreviewDatePickerComponent` (selector `cds-ng-preview-date-picker`, with a
+> `ControlValueAccessor`) plus `PreviewDatePickerInput` and
+> `PreviewDatePickerCalendar` (no CVA). The generator does not hand-write the
+> `labelEnd` / `placeholderEnd` composition or the `(onOpen)` / `(onClose)`
+> outputs below, and the named output is `(previewDatePickerChanged)`, not
+> `(onChange)`. The API mapping is the original plan and is kept as input to the
+> migration guide. Consumers project `cds-ng-preview-date-picker-input`
+> children. There is no classic or fluid Date Picker (ADR 0021).
 
 ### API mapping
 
@@ -1029,10 +940,11 @@ The `cds-ng-preview-*` prefix keeps these distinct from both the consumer-facing
 | `(onClose)`                  | via `calendarChange`            | explicit `EventEmitter<void>`                                        | KEEP               |
 | `(calendarChange)`           | Flatpickr instance event        | dropped                                                              | **DROP**           |
 
-**Composition model change:** Old API required explicit
-`<ibm-date-picker-input>` child components. New wrapper internalises
-`cds-ng-preview-date-picker-input` children; consumer uses a single flat
-element.
+**Composition model change:** the old API used explicit
+`<ibm-date-picker-input>` child components. The web component also takes
+`cds-ng-preview-date-picker-input` children, so the structure is similar and the
+consumer still writes the children. (The earlier plan to hide them behind a
+single flat element was not built.)
 
 **CVA:** value type is `string`. Single mode: `"01/15/2026"`. Range mode is
 `/`-separated: `"01/10/2026/01/20/2026"`. This resolves Open Question #1 —
@@ -1041,9 +953,8 @@ strings and `Temporal.PlainDate` internally.
 
 **`(onChange)` event detail:** `selectedDates` is `Temporal.PlainDate[]` (not
 `string[]` as originally planned in the pre-PR design). `value` is the formatted
-string. The Angular output type should be
-`{ selectedDates: Temporal.PlainDate[], value: string }`. The WC fires
-`cds-preview-date-picker-changed`.
+string. The WC fires `cds-preview-date-picker-changed`, which the wrapper
+re-emits as `(previewDatePickerChanged)`.
 
 **Temporal polyfill:** `@carbon/utilities/date-picker` bundles
 [`temporal-polyfill`](https://github.com/fullcalendar/temporal-polyfill) and
@@ -1054,42 +965,34 @@ polyfill setup is required in the Angular package.
 
 ## 9. WC element registration
 
-With `defineCustomElement` now shipped in `@carbon/web-components` (PR #23097,
-merged to `main`; see §4 for full detail):
+See §4 for the full history and mechanism. In short:
 
-- Each Angular wrapper component registers its WC backing element on first
-  import (ADR 0015: under the real tag, using `defineCustomElement(CDSModal)`;
-  ADR 0020, accepted, uses `cds-ng-*` through a prefixed build instead). The
-  older text here described
-  `defineCustomElement(CDSModal, { name: 'cds-ng-modal' })`, which renames one
-  class only and breaks composites (ADR 0015 findings 2 and 3)
-- Consumers do not need to separately import WC side-effect modules
-- `defineCustomElement` is idempotent — re-registering the same class under the
-  same tag is a no-op; if the WC class has already self-registered under
-  `cds-modal`, the helper registers a transparent subclass under the custom name
-  instead (`instanceof CDSModal` still holds)
-- `es-custom` is not used
-- The `@carbon/web-components` peer dep can be pinned to the release containing
-  commit `dd87f84` (PR #23097 merge); no `git:` branch dep is required
+- `build-entries` vendors a `cds-ng` prefixed copy of `@carbon/web-components`
+  (ADR 0020). Each wrapper imports the **folder barrel** of its component, which
+  registers the element and its children as a side effect.
+- Consumers never import a web component. They import a wrapper from a secondary
+  entry point such as `@carbon/angular/modal`.
+- `@carbon/web-components` is not a peer dependency (removed 2026-10-28).
+- `es-custom` is not used. `defineCustomElement` is used inside the web
+  components; the Angular wrappers do not call it directly.
 
 ---
 
 ## 10. Effort estimate
 
-| Phase                                                                                                                                  | Scope               | Estimate                                  |
-| -------------------------------------------------------------------------------------------------------------------------------------- | ------------------- | ----------------------------------------- |
-| Package scaffolding & `@carbon/angular/legacy` secondary entry point config                                                            | Toolchain           | 2–3 days                                  |
-| Automated wrapper generator (`tasks/generate-wrappers/`) & PoC validation                                                              | Generator Tooling   | 3–4 days                                  |
-| Automated Core Generation (~110+ components, 297+ custom elements, Layer 1 specs)                                                      | Core Implementation | 1 week                                    |
-| Specialized Legacy Adapters in `@carbon/angular/legacy` (`Dropdown`, `Select`, `FileUploader`, `DataTable`, `Tabs`, `Accordion`, etc.) | Legacy Adapters     | 3–4 weeks                                 |
-| Layer 2 Playwright tests & Layer 3 Storybook a11y (`play()` + IBM Equal Access)                                                        | Integration & A11y  | 2–3 weeks                                 |
-| Migration support (Codemods: CCA → `/legacy` and `/legacy` → Core + documentation)                                                     | Tooling & Guides    | 1–2 weeks                                 |
-| **Total**                                                                                                                              |                     | **~2.5–3 months (1 engineer, full-time)** |
+> **Out of date.** The original estimate (about 2.5 to 3 months for one
+> engineer) included 3 to 4 weeks of legacy adapters, which were cancelled on
+> 2026-10-26. The remaining estimates are in [`milestones.md`](./milestones.md),
+> and the migration tooling estimate is still to be made (Milestone 5).
 
-> By automating wrapper and Layer 1 test generation from the Custom Elements
-> Manifest, ~70% of the implementation burden is eliminated. Development effort
-> is concentrated on high-value legacy adapters, integration testing, and
-> migration tooling.
+| Phase                                                           | Status                            |
+| --------------------------------------------------------------- | --------------------------------- |
+| Package scaffolding and entry points                            | Done                              |
+| Wrapper generator and 281 wrappers                              | Done; moves to CEM when it lands  |
+| Stories, Jest and Playwright tests                              | 7 components done; the rest to do |
+| Scope freeze and full web component coverage                    | Waiting on 3 web components       |
+| Migration support (codemods, agent skills, `cca-to-angular.md`) | Not started; estimate to be made  |
+| CI matrix, `standalone: true` removal, RC hardening             | Not started                       |
 
 ---
 
@@ -1111,6 +1014,10 @@ signals the instability period explicitly.
 
 ## 12. Out of scope for v1
 
+- Convenience components in core (decided 2026-10-28). Migration support is
+  codemods plus agent skills.
+- Classic and fluid Date Pickers (decided 2026-10-28). Wait for a fluid picker
+  without flatpickr in the web components.
 - Schematics / `ng add` support
 - i18n / localisation inputs (expose once WC layer implements them)
 - Server-side rendering (Angular Universal) — WC SSR is still evolving
@@ -1235,13 +1142,13 @@ The WC tests run in a real browser under Web Test Runner + Puppeteer. They use
 `fixture(html\`...\`)`to render real custom elements, and`el.shadowRoot.querySelector('button')`
 to inspect shadow DOM. None of that is available under Jest + jsdom:
 
-| Constraint        | WC tests                                | Angular unit tests                             |
-| ----------------- | --------------------------------------- | ---------------------------------------------- |
-| Runtime           | Real browser (Puppeteer)                | jsdom                                          |
-| Assertion library | Chai (`to.have.attribute`)              | Jest (`toBe`, `toBeNull`)                      |
-| What is inspected | `el.shadowRoot.querySelector('button')` | `nativeElement.querySelector('cds-ng-button')` |
-| WC lifecycle      | Real (`customElements.define`)          | Mocked (bare `HTMLElement` stub)               |
-| Shadow DOM        | Real                                    | Not available                                  |
+| Constraint        | WC tests                                | Angular unit tests                          |
+| ----------------- | --------------------------------------- | ------------------------------------------- |
+| Runtime           | Real browser (Puppeteer)                | jsdom                                       |
+| Assertion library | Chai (`to.have.attribute`)              | Jest (`toBe`, `toBeNull`)                   |
+| What is inspected | `el.shadowRoot.querySelector('button')` | `nativeElement.querySelector('cds-button')` |
+| WC lifecycle      | Real (`customElements.define`)          | Real, in jsdom, for the parity specs        |
+| Shadow DOM        | Real                                    | Available to the parity specs               |
 
 Importing the WC tests verbatim would also be wrong by design: the Angular tests
 assert a different contract. The WC tests confirm the WC renders correctly given
@@ -1255,7 +1162,8 @@ For each WC test scenario, the Angular translation follows a fixed pattern:
 ```
 WC:      expect(el.shadowRoot.querySelector('button')).to.have.attribute('type', 'submit')
 Angular: expect(wc().getAttribute('type')).toBe('submit')
-         // where wc() = fixture.nativeElement.querySelector('cds-ng-<name>')
+         // where wc() = fixture.nativeElement.querySelector('cds-<name>')
+         // Jest runs against src/generated, which keeps `cds-*` selectors.
 ```
 
 Boolean/presence attributes follow the same rule:
@@ -1270,6 +1178,11 @@ Angular: expect(wc().getAttribute('disabled')).toBeNull()
 
 Parametrised WC tests (e.g. `kinds.forEach(...)`, `sizes.forEach(...)`) become
 equivalent `forEach` loops in the Angular spec so coverage is identical.
+
+> **Parity specs.** Alongside the property-forwarding specs, each ported
+> component has a `<Name>.parity.spec.ts` that renders the web component and
+> asserts on its shadow DOM, mirroring the web component tests. Only the Button
+> has both kinds of spec.
 
 #### Reference implementation
 
@@ -1288,12 +1201,15 @@ the React and WC packages:
 #### Layer 1 — Jest unit tests (API boundary)
 
 **Runner:** Jest + `jest-preset-angular`, jsdom environment — consistent with
-`packages/react`.
+`packages/react`. Last run: 11 suites, 250 passed, 45 `it.todo`.
 
-Tests the Angular wrapper's responsibility: input reflection, output emission,
-slot materialisation, and CVA integration. WC Lit lifecycle does not run in
-jsdom; these tests confirm the Angular layer is wired correctly without
-depending on WC render output.
+Tests the Angular wrapper's responsibility: input reflection, output emission
+and CVA integration, against `src/generated`. The test selector there is
+`cds-*`.
+
+The examples below are the original plan. The `cds-ng-*` selectors and the
+slot-materialisation pattern do not apply to Jest, which uses `cds-*`, and slot
+materialisation was not built.
 
 Four test patterns, one file per component:
 
@@ -1334,9 +1250,10 @@ it('should set the value attribute on the WC when writeValue is called', () => {
 });
 ```
 
-**Coverage target:** Every confirmed CCA `it()` scenario has an equivalent Jest
-test rewritten for the API boundary. Minimum of ~100 `it()` cases across the
-component set.
+**Coverage target:** The web component tests are the source (see "WC test
+mirroring"). Every scenario in a ported component's web component test either
+has an equivalent Jest test or an `it.todo`. The CCA test files are not a
+source.
 
 #### Layer 2 — Playwright integration tests (real browser, WC lifecycle)
 
@@ -1345,13 +1262,14 @@ the Angular package's Storybook build.
 
 Tests that require WC lifecycle to execute — keyboard navigation, focus
 restoration, calendar open/close, datepicker range selection. These cannot run
-in jsdom.
+in jsdom. Last recorded: 36 passed in Chromium (not re-run after the latest
+story additions).
 
 ```ts
 // Example: Dropdown keyboard navigation
 test('opens on ArrowDown and closes on Escape', async ({ page }) => {
-  await page.goto(storybookUrl('cds-dropdown--default'));
-  const dropdown = page.locator('cds-dropdown');
+  await page.goto(storybookUrl('components-dropdown--default'));
+  const dropdown = page.locator('cds-ng-dropdown');
   await dropdown.focus();
   await page.keyboard.press('ArrowDown');
   await expect(page.locator('cds-ng-dropdown[open]')).toBeVisible();
@@ -1360,17 +1278,18 @@ test('opens on ArrowDown and closes on Escape', async ({ page }) => {
 });
 ```
 
-**Coverage target:** One Playwright test file per Tier 3–4 component (Modal,
-ComboBox, Tabs, Accordion, DataTable, DatePicker).
+**Coverage target:** One Playwright test file per ported component. Today:
+Button, Dropdown, Modal and others from the 7 ported components.
 
 #### Layer 3 — Storybook accessibility (IBM Equal Access)
 
-**Runner:** `storybook-addon-accessibility-checker` (IBM Equal Access) +
-`@storybook/test` `play()` functions.
+**Runner:** `storybook-addon-accessibility-checker` (IBM Equal Access), enabled
+in `.storybook/main.ts`, plus `play()` functions where a story needs an
+interacted state.
 
-Every component story includes a `play()` function that exercises the primary
-interactive scenario, so the IBM Equal Access checker runs against a live,
-interacted-with component state rather than a static initial render.
+The goal is that every story runs the checker against a live, interacted-with
+state rather than a static render. **Today only the Button stories have `play()`
+functions**, so most stories are checked in their initial render.
 
 `@storybook/addon-a11y` (axe-core) is **not included**. IBM Equal Access is the
 canonical accessibility standard for IBM products and covers a broader WCAG rule
@@ -1380,11 +1299,11 @@ set.
 
 ### Coverage target summary
 
-| Layer          | Runner                                                     | What it covers                                               | Target                   |
-| -------------- | ---------------------------------------------------------- | ------------------------------------------------------------ | ------------------------ |
-| Jest unit      | jsdom                                                      | Input reflection, output emission, slot materialisation, CVA | ~100+ `it()` (≥ CCA)     |
-| Playwright     | Real browser                                               | Keyboard nav, focus, WC lifecycle interactions               | ~30 scenarios (Tier 3–4) |
-| Storybook a11y | IBM Equal Access (`storybook-addon-accessibility-checker`) | Accessibility on every component story                       | All components           |
+| Layer          | Runner                                                     | What it covers                                            | Target                 |
+| -------------- | ---------------------------------------------------------- | --------------------------------------------------------- | ---------------------- |
+| Jest unit      | jsdom                                                      | Input reflection, output emission, CVA, shadow DOM parity | 250 passing today      |
+| Playwright     | Real browser                                               | Keyboard nav, focus, WC lifecycle interactions            | 36 passing today       |
+| Storybook a11y | IBM Equal Access (`storybook-addon-accessibility-checker`) | Accessibility on every component story                    | All stories (7 so far) |
 
 ---
 
@@ -1393,35 +1312,28 @@ set.
 ```text
 packages/angular/
 ├── src/
-│   ├── generated/                     # Automated 1:1 WC wrappers (gitignored)
-│   │   ├── Button/
-│   │   └── Modal/
-│   ├── stories/                       # Storybook stories and test suites
-│   │   └── Button/
-│   │       ├── __stories__/
-│   │       │   ├── Button.mdx
-│   │       │   └── Button.stories.ts
-│   │       └── __tests__/
-│   │           ├── Button.e2e.ts
-│   │           └── Button.spec.ts
-│   └── index.ts                       # Public API barrel (exports generated)
-├── legacy/                            # Secondary entry point (@carbon/angular/legacy)
-│   ├── src/
-│   │   ├── components/                # Hand-crafted CCA migration adapters (@deprecated)
-│   │   │   ├── Button/
-│   │   │   └── Dropdown/
-│   │   └── index.ts
-│   └── ng-package.json
+│   ├── generated/                     # 281 wrapper folders (gitignored)
+│   ├── stories/<Name>/                # 7 components so far
+│   │   ├── __stories__/
+│   │   │   ├── <Name>.mdx             # Button, Checkbox, Dropdown, Modal, TextInput
+│   │   │   └── <Name>.stories.ts
+│   │   └── __tests__/
+│   │       ├── <Name>.parity.spec.ts
+│   │       └── <Name>.e2e.ts          # Button, Dropdown, Modal, ...
+│   ├── __tests__/                     # generator and registration specs
+│   └── testing/render.ts
+└── .entries/                          # build output (gitignored): 97 entry points
 ```
 
 Storybook `play()` functions live in the story file alongside the component
-story.
+story (Button only so far).
 
 ---
 
 ## 14. Migration guide structure (per breaking change)
 
-Every intentional break in the package's changelog should follow this format:
+Every intentional break in the CCA migration guide
+(`docs/guides/cca-to-angular.md`, not yet written) should follow this format:
 
 ```markdown
 ## BREAKING: <short description>
@@ -1452,21 +1364,19 @@ old API unmaintainable>
    Angular `@Input`/`@Output` decorators via Compodoc, or rely solely on
    Storybook ArgTypes.
 
-3. **Secondary entry points** — whether to configure per-component secondary
-   entry points in `ng-package.json` (e.g. `@carbon/angular/button`) for more
-   granular tree-shaking, or rely on the single barrel export and let the
-   consumer's bundler tree-shake from there. Deferred to v1 release; Ivy +
-   modern bundlers handle single-barrel packages well.
+3. ~~**Secondary entry points**~~ — **Closed.** 97 secondary entry points, one
+   per web component folder, built by `build-entries`. A single entry point
+   registers every component barrel it imports and costs a Button-only app about
+   125 kB (ADR 0020 constraint 4). The root entry exports nothing.
 
-4. ~~**StructuredList**~~ — **Closed.** Wrap `cds-structured-list` (WC
-   equivalent exists). Preserve `selection`, `flushed`, `condensed` inputs and
-   `(selected)` output from CCA. CVA accepts `any`. See Tier 5 table in §6.
+4. ~~**StructuredList**~~ — **Closed.** Wrapped as a generated 1:1 wrapper of
+   `cds-structured-list`. CVA is not generated for it today.
 
 5. ~~**`feat/wc-class-exports` merge timeline**~~ — **Closed.** PR #23097 merged
-   to `main` (commit `dd87f84`). `defineCustomElement` is available now; pin the
-   `@carbon/web-components` peer dep to the first release that includes it. No
-   `git:` branch dep needed. Note: v3 pure class exports (side-effect-free class
-   files) are not yet in main; until then the subclass fallback in
+   to `main` (commit `dd87f84`). `defineCustomElement` is available. There is no
+   `@carbon/web-components` peer dependency any more (ADR 0020); the prefixed
+   copy is bundled. Note: v3 pure class exports (side-effect-free class files)
+   are not yet in main; until then the subclass fallback in
    `defineCustomElement` handles the transitional period cleanly.
 
 6. **Selector prefix decision** — **Closed 2026-10-27: wholesale `cds-ng-*` (ADR
@@ -1520,154 +1430,125 @@ old API unmaintainable>
     allows dropping explicit `standalone: true`. Tracked in
     [`docs/decisions/0018-angular-supported-major-versions.md`](../../../docs/decisions/0018-angular-supported-major-versions.md).
 
+11. **Migration tooling** — **Open, may be delegated.** Where the agent skills
+    live, how `@carbon/upgrade` parses Angular templates, how the mapping file
+    is verified, shadow DOM styling guidance, services and directives. See
+    Milestone 5 in [`milestones.md`](./milestones.md).
+
+12. **`@carbon/styles` peer range** — **Open.** `^2.0.0-alpha.3` today. Whether
+    to also allow 1.x is not decided (ADR 0020 open question 3).
+
+13. **`docs/migration/v12.md` entry** — **Open.** A short `@carbon/angular`
+    entry pointing at the CCA guide, or none.
+
+14. **Upstream skeleton classes** — **Open.** An issue with the Carbon team is
+    to be filed. `SYNTHETIC_TAGS` stays temporary until it is fixed.
+
 ---
 
 ## 16. Migration support
 
+> **Rewritten 2026-10-28.** The earlier version of this section listed seven
+> `cca-*` transforms from the time of the legacy entry point and described the
+> `cds-*` selector. Both are superseded. The authoritative design and the open
+> questions are in [`migration-support.md`](./migration-support.md), and the
+> work is tracked as Milestone 5 in [`milestones.md`](./milestones.md).
+
 ### Overview
 
-Migration from `carbon-components-angular` (CCA) to `@carbon/angular` involves
-three components: a **migration guide** (per breaking change), **codemods**
-(automated transforms via `@carbon/upgrade`), and a **runtime diagnostic**
-(`:not(:defined)` detection for un-registered WC elements). Together they match
-the migration quality bar set by the WC v3 migration in PR #23097.
+`@carbon/angular` has no compatibility layer and no convenience components in
+core (decided 2026-10-28). Migrating from `carbon-components-angular` (CCA) is a
+single move, supported by three things:
+
+1. **A migration guide** at `docs/guides/cca-to-angular.md`. **Not yet
+   written.** `@carbon/angular` is new in v12 and not behind a feature flag, so
+   CCA users need their own document. Whether `docs/migration/v12.md` also gets
+   a short pointer is undecided.
+2. **Codemods** in `@carbon/upgrade`, for the changes that are mechanical.
+3. **Agent skills**, for the changes that need reading the surrounding code.
+
+Codemods and skills read one shared CCA-to-Carbon mapping file so that they
+cannot disagree.
 
 ### Migration guide
 
-The guide lives at `docs/guides/cca-to-angular.md` (parallel to
-`docs/guides/cwc-v3-migration.md`). It is structured exactly as §14 specifies —
-one `## BREAKING:` block per intentional API break, with Before/After code, Why,
-and Migration steps. The guide is linked from `packages/angular/README.md` and
-the Storybook welcome MDX.
+Structured as §14 specifies: one `## BREAKING:` block per intentional API break,
+with Before and After code, Why and Migration steps. The Storybook page
+(`.storybook/docs/migration.mdx`) stands in until the guide exists.
 
-The CCA → `@carbon/angular` breaks are documented in the universal-breaks table
-in §7. In guide format each becomes a standalone entry. High-priority entries
-(those affecting the most consumers):
+The breaks are recorded in the universal-breaks table in §7. The ones that
+affect the most consumers:
 
-1. **Selector** — ADR 0014 keeps `cds-*` for element selectors, but the Button
-   is an attribute directive in CCA (`<button cdsButton>`) and becomes an
-   element. The module path changes from `carbon-components-angular` to
-   `@carbon/angular`. ADR 0020 (accepted) uses `cds-ng-*` instead.
-2. **`TableModel` / `TableHeaderItem` / `TableItem` removed** — replace with
-   flat `[rows]`, `[headers]`, `[size]` inputs.
-3. **`notificationObj` removed** on Toast, Inline, ActionableNotification —
-   replace with flat `[title]`, `[subtitle]`, `[caption]` inputs.
-4. **`PaginationModel` removed** on Pagination — replace with `[totalItems]`,
-   `[pageSize]`, `[page]`.
-5. **`[navigationItems]` / `[menuItems]` / `[headerItems]` removed** on UI Shell
-   — replace with projected children (`<cds-header-nav-item>`, etc.).
-6. **`[theme]` removed** on CodeSnippet, ComboBox, DatePicker, Dropdown, etc. —
-   use global Carbon theme via `@carbon/styles` body class or `CarbonTheme`
-   service.
-7. **`appendInline` / `dropUp` / `scrollableContainer`** removed on Dropdown,
-   ComboBox — Floating UI autoalign built into the WC supersedes them; no
-   replacement needed.
-8. **`carbonElement` import** — not a CCA break but relevant for consumers who
-   used it from the WC package. Migrate to `static is` + `defineCustomElement`
-   (Option B in `docs/guides/cwc-v3-migration.md`).
+1. **Selector and import.** Every wrapper uses a `cds-ng-*` selector and imports
+   from a per-family entry point, for example
+   `import { ModalComponent } from '@carbon/angular/modal'`. CCA's Button is an
+   attribute directive (`<button cdsButton>`) and becomes an element.
+2. **Shadow DOM.** Rendering moves into shadow DOM. This is the largest cost and
+   is not in the list of breaks. Global CSS overrides and tests that select
+   Carbon internals stop working.
+3. **`TableModel` / `TableHeaderItem` / `TableItem` removed.** Compose
+   `cds-ng-table-*` children. There is no `[rows]` input.
+4. **`notificationObj` removed** on toast, inline and actionable notifications.
+   Use flat `title`, `subtitle`, `caption` and `kind` inputs.
+5. **`PaginationModel` removed.** Use `[totalItems]`, `[pageSize]` and `[page]`.
+6. **`[navigationItems]` / `[menuItems]` / `[headerItems]` removed** on UI
+   Shell. Project `cds-ng-header-nav-item`, `cds-ng-side-nav-link` and the other
+   children. Not automatable.
+7. **`[theme]` removed.** Theming is global through `@carbon/styles`.
+8. **`appendInline` / `dropUp` / `scrollableContainer` removed.** Floating UI
+   autoalign in the web components supersedes them.
+9. **`@carbon/styles` is required** so that `--cds-*` tokens resolve.
+10. **Services** (for example `ModalService`, `NotificationService`) have no
+    equivalent in core.
 
 ### Codemods
 
-`@carbon/upgrade` is the established codemod host for this monorepo. Angular
-migration transforms go in `packages/upgrade/transforms/` and are registered in
-`packages/upgrade/src/upgrades.js`.
+`@carbon/upgrade` is the codemod host. Transforms go in
+`packages/upgrade/transforms/` and are registered in
+`packages/upgrade/src/upgrades.js`, following the `wc-*` conventions: a shared
+detection helper, report-first transforms, dry run by default, `--write` to
+apply.
 
-**Model:** The WC codemods from PR #23097 establish the exact conventions to
-follow:
+The transform inventory is **not settled**. `migration-support.md` proposes four
+tiers (deterministic, codemod plus report, agent skill, judgment) and lists the
+constraints, notably that `@carbon/upgrade` cannot parse Angular `.html`
+templates today. The names on `migration.mdx` (`cca-report-imports`,
+`cca-update-module-imports`, and so on) are placeholders and none is built.
 
-| Convention              | WC precedent                        | Angular equivalent           |
-| ----------------------- | ----------------------------------- | ---------------------------- |
-| Shared detection helper | `carbon-wc-imports.js`              | `carbon-angular-imports.js`  |
-| Report-first transform  | `wc-report-non-barrel-imports.js`   | `cca-report-breaking-api.js` |
-| Write transform         | `wc-add-barrel-imports.js`          | `cca-migrate-*` transforms   |
-| Parser                  | `module.exports.parser = 'tsx'`     | same                         |
-| UX                      | dry-run default; `--write` to apply | same                         |
+### Open questions
 
-**Proposed transform inventory** (7 transforms):
-
-| Transform name                | Type   | What it does                                                                                                   |
-| ----------------------------- | ------ | -------------------------------------------------------------------------------------------------------------- |
-| `cca-report-imports`          | report | Lists all `carbon-components-angular` imports; shows the `@carbon/angular` equivalent module path              |
-| `cca-update-module-imports`   | write  | Rewrites `carbon-components-angular` import sources to `@carbon/angular`                                       |
-| `cca-remove-table-model`      | write  | Replaces `TableModel` constructor + `[model]` binding with flat `[rows]`/`[headers]` inputs                    |
-| `cca-remove-notification-obj` | write  | Replaces `notificationObj` object literal binding with flat prop inputs                                        |
-| `cca-remove-pagination-model` | write  | Replaces `PaginationModel` binding with flat `[totalItems]`/`[pageSize]`/`[page]` inputs                       |
-| `cca-remove-theme-input`      | write  | Removes `[theme]="theme"` bindings (no replacement; body-class theming)                                        |
-| `cca-report-ui-shell-nav`     | report | Flags `[navigationItems]`/`[menuItems]` array bindings that require manual restructuring to projected children |
-
-Note: `cca-report-ui-shell-nav` is report-only because restructuring template
-slots is not safely automatable — it requires generating child element subtrees
-from data arrays.
-
-**Registering in `upgrades.js`:**
-
-Each transform is registered as a named migration. Following the WC pattern from
-`packages/upgrade/src/upgrades.js`:
-
-```js
-// packages/upgrade/src/upgrades.js
-{
-  name: 'cca-update-module-imports',
-  description: 'Update carbon-components-angular imports to @carbon/angular',
-  // ...
-}
-```
-
-**Running codemods:**
-
-```sh
-# See what needs changing (dry run)
-npx @carbon/upgrade migrate cca-report-imports
-
-# Apply import path rewrite
-npx @carbon/upgrade migrate cca-update-module-imports --write
-
-# Apply flat-input migrations
-npx @carbon/upgrade migrate cca-remove-table-model --write
-npx @carbon/upgrade migrate cca-remove-notification-obj --write
-npx @carbon/upgrade migrate cca-remove-pagination-model --write
-npx @carbon/upgrade migrate cca-remove-theme-input --write
-
-# Review UI Shell (manual restructuring required)
-npx @carbon/upgrade migrate cca-report-ui-shell-nav
-```
+Unanswered and possibly delegated to a developer: where the agent skills live,
+how `@carbon/upgrade` parses Angular templates, how the mapping file is verified
+against both packages, shadow DOM guidance, services, directives, and
+`routerLink` integration on UI Shell children. See Milestone 5 in
+[`milestones.md`](./milestones.md).
 
 ### Runtime diagnostic
 
-The WC v3 migration guide (`docs/guides/cwc-v3-migration.md`) notes that a
-Carbon element matching `:not(:defined)` at runtime means it was never
-registered. The same signal applies to `@carbon/angular` development: an
-unregistered `<cds-*>` element indicates a missing registration call in the
-wrapper component.
-
-For consumer migration, the equivalent runtime check is `<cds-*>`:
+A Carbon element matching `:not(:defined)` at runtime was never registered. For
+`@carbon/angular` the tag is prefixed, so the check is:
 
 ```js
 // In browser devtools or an integration test:
-document
-  .querySelectorAll('cds-*:not(:defined)')
-  .forEach((el) => console.warn('Un-upgraded Carbon element:', el.tagName));
+document.querySelectorAll('*').forEach((el) => {
+  if (el.localName.startsWith('cds-ng-') && !customElements.get(el.localName)) {
+    console.warn('Un-upgraded Carbon element:', el.localName);
+  }
+});
 ```
 
-This is a useful sanity check during migration and can be added to integration
-test setup.
+CSS cannot match a wildcard on tag names, so the earlier `cds-*:not(:defined)`
+selector does not work and was removed.
 
-### Relationship to `create-prefixed-build`
+### Coexistence
 
-`create-prefixed-build` (shipped in PR #23097) is not part of the
-`@carbon/angular` migration path. Under ADR 0015, `@carbon/angular` registers
-the real `cds-*` tags and does conflict with a separately loaded
-`@carbon/web-components`; ADR 0020 (accepted) uses a prefix that avoids it.
+Under ADR 0020, `@carbon/angular` (`cds-ng-*`), `carbon-components-angular`
+(`cds-*`) and a separately loaded `@carbon/web-components` (`cds-*`) can share a
+page without registering the same tag. This is shown for the Modal and the
+Dropdown in the coexistence spike; other components are untested. Because of
+this, an incremental migration can render `<cds-ng-button>` next to a CCA
+button.
 
-It _is_ relevant when a consumer runs both bare `@carbon/web-components` and
-`@carbon/angular` on the same page (e.g. a shell built with bare WC and an
-embedded micro-frontend built with Angular). In that case,
-`create-prefixed-build` can resolve the name conflict at build time:
-
-```sh
-npx -p @carbon/web-components create-prefixed-build --prefix shell --out ./vendor/carbon-shell
-```
-
-The migration guide should mention this as the supported coexistence path,
-linking to
-`docs/guides/cwc-v3-migration.md#a-prefixed-build-for-the-whole-package`.
+`create-prefixed-build` (shipped in PR #23097) is still the supported way to run
+two copies of the bare web components. It is not part of the `@carbon/angular`
+migration path, because `@carbon/angular` already ships its own prefixed copy.
