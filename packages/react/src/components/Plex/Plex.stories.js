@@ -95,10 +95,6 @@ export const IBMPlexSans = (args) => {
   );
 };
 
-SubscriptAndSuperscript.parameters = {
-  controls: { disable: true },
-};
-
 export const IBMPlexSerif = (args) => {
   return (
     <p dir="auto" style={args} className="text-serif">
