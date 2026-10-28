@@ -8,7 +8,7 @@
 'use strict';
 
 const { types: t } = require('@carbon/scss-generator');
-const { TokenFormat } = require('../../../src/tokens');
+const { formatTokenName } = require('../../../src/tools');
 const { tokens } = require('../../../src/v10');
 const { FILE_BANNER } = require('../shared');
 const { shouldIncludeToken } = require('./shared');
@@ -17,10 +17,7 @@ function buildCompatFile() {
   const variables = tokens.colors
     .filter(shouldIncludeToken)
     .flatMap((token) => {
-      const id = TokenFormat.convert({
-        name: token,
-        format: TokenFormat.formats.scss,
-      });
+      const id = formatTokenName(token);
 
       return [
         t.Newline(),

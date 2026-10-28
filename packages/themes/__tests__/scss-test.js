@@ -11,15 +11,14 @@
 
 const { SassRenderer } = require('@carbon/test-utils/scss');
 const { themes } = require('../src');
-const { group } = require('../src/tokens');
+const { tokens } = require('../js/generated/metadata.js');
 
 const { render } = SassRenderer.create(__dirname);
-const tokens = group.getTokens();
 
 describe('@carbon/themes/scss', () => {
   test('index.scss', async () => {
     const tokenVariables = tokens.map((token) => {
-      const variable = `themes.$${token.name}`;
+      const variable = `themes.$${token}`;
       return `$_: get('${variable}', ${variable});`;
     });
 
@@ -49,7 +48,7 @@ describe('@carbon/themes/scss', () => {
 
     // All tokens should be available as variables
     for (const token of tokens) {
-      const variable = `themes.$${token.name}`;
+      const variable = `themes.$${token}`;
       expect(unwrap(variable)).toBeDefined();
     }
   });
