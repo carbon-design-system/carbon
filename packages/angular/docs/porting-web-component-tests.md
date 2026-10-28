@@ -156,25 +156,25 @@ Two generator rules that have already caught real bugs:
 
 ## Porting backlog
 
-State as of 2026-10-30 (title-by-title comparison against the WC test files; see
+State as of 2026-10-28 (title-by-title comparison against the WC test files; see
 [`status-and-open-questions.md`](./status-and-open-questions.md#review-findings-and-merge-readiness)).
 A parity spec existing does not mean it is complete. "Missing" counts WC test
 titles that are neither ported nor an `it.todo`, which this guide forbids.
 
-| Component  | Parity spec | Missing WC tests | Binding spec  | E2E (hand-written) | Remaining work                                                                                            |
-| ---------- | ----------- | ---------------- | ------------- | ------------------ | --------------------------------------------------------------------------------------------------------- |
-| Button     | Complete    | 0 (3 expanded)   | Done          | Done               | 10 `it.todo` (8 RTL layout, 2 badge indicator)                                                            |
-| Accordion  | Complete    | 0                | One input     | Done               | Binding spec                                                                                              |
-| Dropdown   | Complete    | 0 (3 expanded)   | No            | Done               | Binding spec; skeleton `it.todo` has no WC source test                                                    |
-| ActionSet  | Partial     | **17**           | No            | Done               | Class and attribute tests, `warns when…`, hide-margin on focus, loading, `onClick`; binding spec          |
-| Checkbox   | Partial     | **22**           | Accessor      | Done               | All of `checkbox-form-test.js` (12), 9 of `checkbox-group-test.js`, 1 of `checkbox-test.js`; binding spec |
-| Modal      | Partial     | **14**           | `ModalFooter` | Done               | Focus on open, submit on Enter, `loading-status`, `no-fade`, body `tabindex`; binding spec                |
-| TextInput  | Partial     | **16**           | Accessor      | Done               | All of `text-input-form-test.js` (12), 4 of `text-input-skeleton-test.js`; binding spec                   |
-| All others | No          | n/a              | No            | No                 | `<name>/__tests__/` for each of the ~270 remaining wrappers                                               |
+| Component  | Parity spec | Missing WC tests | Binding spec | E2E (hand-written) | Remaining work                                              |
+| ---------- | ----------- | ---------------- | ------------ | ------------------ | ----------------------------------------------------------- |
+| Button     | Complete    | 0 (3 expanded)   | Done         | Done               | 10 `it.todo` (8 RTL layout, 2 badge indicator)              |
+| Accordion  | Complete    | 0                | Done         | Done               | —                                                           |
+| ActionSet  | Complete    | 0                | Done         | Done               | —                                                           |
+| Checkbox   | Complete    | 0                | Done         | Done               | —                                                           |
+| Dropdown   | Complete    | 0 (3 expanded)   | Done         | Done               | Skeleton `it.todo` has no WC source test                    |
+| Modal      | Complete    | 0                | Done         | Done               | —                                                           |
+| TextInput  | Complete    | 0                | Done         | Done               | —                                                           |
+| All others | No          | n/a              | No           | No                 | `<name>/__tests__/` for each of the ~270 remaining wrappers |
 
-Order suggestion: close the 69 missing tests on the four partial components
-first, then the other 27 wrappers with a value accessor, then the composites
-that register children. Before porting file by file, cost a shared harness that
-runs a WC suite against its wrapper; at ~270 components, copying each file by
-hand is the expensive path. Add a title-parity script first so "missing" cannot
-grow unnoticed.
+Next focus: add a title-parity script so "missing" cannot grow unnoticed as new
+components are added (see `status-and-open-questions.md` item 9). Then port the
+other 27 wrappers with a value accessor, then the composites that register
+children. Before porting file by file, cost a shared harness that runs a WC
+suite against its wrapper; at ~270 components, copying each file by hand is the
+expensive path.

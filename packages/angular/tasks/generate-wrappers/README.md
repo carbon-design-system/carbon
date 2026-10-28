@@ -13,12 +13,11 @@ This directory contains the automated code generator for `@carbon/angular`.
 - Every Carbon Web Component (except the tags in `SKIPPED_TAGS`, ADR 0021) has a
   1:1 Angular standalone component with:
   - Registration by importing the component's folder barrel
-    (`@carbon/web-components/es/components/<dir>/index.js`) so the child
-    elements it renders are registered too. `src/generated/` keeps the real
-    `cds-*` tags; `tasks/build-entries` rewrites them to `cds-ng-*` over a
-    vendored, prefixed copy of the web components (ADR 0020)
-  - `@Component({ selector: 'cds-*', template: '<ng-content />' })` — the host
-    element IS the web component (ADR 0015)
+    (`#carbon-ng/components/<dir>/index.js` — a vendored, `cds-ng`-prefixed copy
+    of the web components, ADR 0020) so all child elements the component renders
+    are registered when the wrapper is imported.
+  - `@Component({ selector: 'cds-ng-*', template: '<ng-content />' })` — the
+    host element IS the web component (ADR 0015, ADR 0020)
   - Typed `@Input()` properties forwarded to the host in `ngOnChanges`
   - Boolean `@Input()` properties use `booleanAttribute` (so bare
     `<cds-button disabled>` works)
@@ -33,12 +32,12 @@ This directory contains the automated code generator for `@carbon/angular`.
 - **Do NOT manually edit files in `src/generated/`** — they are re-created on
   every generator run.
 
-The generator output in `src/generated/` is the source for the published
-package, but it is not what ships. `yarn build` also runs
+The generator writes `cds-ng-*` selectors and `#carbon-ng/*` vendored imports
+directly into `src/generated/`. `yarn build` also runs
 [`tasks/build-entries`](../build-entries/index.js), which regroups the wrappers
 into one secondary entry point per component folder (`@carbon/angular/button`),
-rewrites them to `cds-ng-*` over a vendored, prefixed copy of the web
-components, and builds `.entries/` with `ng-packagr` into `dist/` (ADR 0020).
+copies the vendor tree, and builds `.entries/` with `ng-packagr` into `dist/`
+(ADR 0020). `build-entries` does not rewrite selectors or imports.
 
 There is no `@carbon/angular/legacy` entry point. It was removed before release
 (see ADR 0020).
@@ -139,11 +138,10 @@ After adding a synthetic entry:
 
 1. Run `yarn generate:wrappers --tag cds-<name>` to generate the
    `src/generated/` wrapper.
-2. Add the corresponding `.entries/<entry>/<Name>/` directory with the
-   `cds-ng-*` prefixed component file (copy the pattern from an existing entry
-   such as `.entries/text-input/TextInputSkeleton/`).
-3. Add `export * from './<Name>';` to `.entries/<entry>/index.ts`.
-4. Also add a `// TODO(@carbon/web-components):` comment in the WC source file
+2. Run `yarn build` (or `node tasks/build-entries/index.js`) — `build-entries`
+   reads `src/generated/` and rebuilds `.entries/` automatically. There is no
+   manual `.entries/` editing; `.entries/` is gitignored and fully generated.
+3. Also add a `// TODO(@carbon/web-components):` comment in the WC source file
    pointing to the root fix: adding `@customElement()` to the class so it
    appears in `custom-elements.json` automatically and `SYNTHETIC_TAGS` can be
    removed.
