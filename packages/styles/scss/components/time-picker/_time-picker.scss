@@ -148,4 +148,43 @@
     + .#{$prefix}--select__arrow {
     fill: $icon-disabled;
   }
+
+  // Skeleton styles
+  .#{$prefix}--time-picker--skeleton {
+    display: inline-flex;
+    align-items: flex-end;
+  }
+
+  .#{$prefix}--time-picker--skeleton > .#{$prefix}--form-item,
+  .#{$prefix}--time-picker--skeleton > * {
+    flex: 0 0 auto;
+  }
+
+  .#{$prefix}--time-picker--skeleton > *:not(:first-child) {
+    margin-inline-start: $spacing-01;
+  }
+
+  .#{$prefix}--time-picker--skeleton {
+    .#{$prefix}--skeleton.#{$prefix}--text-input,
+    .#{$prefix}--select.#{$prefix}--skeleton {
+      inline-size: 4.875rem;
+    }
+  }
+
+  @if enabled('enable-v12-release') {
+    .#{$prefix}--time-picker--skeleton {
+      .#{$prefix}--label.#{$prefix}--skeleton,
+      .#{$prefix}--label.#{$prefix}--skeleton:has(
+          + .#{$prefix}--skeleton.#{$prefix}--text-input
+        ),
+      .#{$prefix}--skeleton.#{$prefix}--text-input,
+      .#{$prefix}--select.#{$prefix}--skeleton {
+        border-radius: 0;
+      }
+
+      .#{$prefix}--select.#{$prefix}--skeleton {
+        border-inline-start: 1px solid transparent;
+      }
+    }
+  }
 }

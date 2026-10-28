@@ -11185,6 +11185,16 @@ Map {
     },
     "render": [Function],
   },
+  "TimePickerSkeleton" => {
+    "propTypes": {
+      "className": {
+        "type": "string",
+      },
+      "isOnlyTwo": {
+        "type": "bool",
+      },
+    },
+  },
   "ToastNotification" => {
     "propTypes": {
       "aria-label": {
