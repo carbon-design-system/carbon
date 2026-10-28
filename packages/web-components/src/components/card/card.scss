@@ -174,7 +174,7 @@ $css--plex: true !default;
   align-items: center;
   justify-content: flex-end;
   block-size: $spacing-07;
-  gap: $spacing-02;
+  gap: 0;
   inline-size: var(--#{$prefix}--card--actions-inline-size, 100%);
   max-inline-size: 100%;
   min-inline-size: 0;

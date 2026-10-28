@@ -164,11 +164,7 @@ class CDSCardActions extends LitElement {
 
     this._overflowHandler = createOverflowHandler({
       container: this,
-      gap,
-      // `clientWidth` is rounded to an integer, while item widths can be
-      // fractional. Allow 1px of tolerance so an item that exactly fills the
-      // slot is not flipped in and out every frame.
-      offsetValue: -1,
+      gap: 0,
       onChange: (_, hidden: HTMLElement[]) => {
         if (offsetEl) {
           offsetEl.style.display = hidden.length > 0 ? 'block' : 'none';
