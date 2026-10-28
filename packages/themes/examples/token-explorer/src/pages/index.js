@@ -21,7 +21,7 @@ import {
   tokenSets,
   componentGroups,
   toJsName,
-} from '../token-metadata';
+} from '../../../shared/token-metadata';
 
 import { tokens } from '../tokens';
 

@@ -8,12 +8,12 @@
 // The token names and metadata (group, CSS properties, state, layer set) as
 // they are written in the White theme's token files. Every theme has the same
 // metadata.
-import theme from '../../../tokens/themes/white/theme.tokens.json';
-import button from '../../../tokens/themes/white/button.tokens.json';
-import contentSwitcher from '../../../tokens/themes/white/content-switcher.tokens.json';
-import notification from '../../../tokens/themes/white/notification.tokens.json';
-import status from '../../../tokens/themes/white/status.tokens.json';
-import tag from '../../../tokens/themes/white/tag.tokens.json';
+import theme from '../../tokens/themes/white/theme.tokens.json';
+import button from '../../tokens/themes/white/button.tokens.json';
+import contentSwitcher from '../../tokens/themes/white/content-switcher.tokens.json';
+import notification from '../../tokens/themes/white/notification.tokens.json';
+import status from '../../tokens/themes/white/status.tokens.json';
+import tag from '../../tokens/themes/white/tag.tokens.json';
 
 const NAMESPACE = 'com.ibm.carbon';
 const LAYER_SETS = {
@@ -83,7 +83,7 @@ export const componentGroups = [
   { name: 'Tag', file: tag },
 ].map(({ name, file }) => ({ name, tokens: getTokens(file) }));
 
-// JS export name of a token, e.g. `background-over` > `backgroundHover
+// JS export name of a token, e.g. `background-hover` > `backgroundHover`
 export function toJsName(name) {
   return name.replace(/-([a-z0-9])/g, (_, char) => char.toUpperCase());
 }

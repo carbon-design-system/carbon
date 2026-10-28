@@ -14,7 +14,7 @@ import {
   properties,
   tokenSets,
   toJsName,
-} from '../token-metadata';
+} from '../../../shared/token-metadata';
 
 const colorsByValue = {};
 

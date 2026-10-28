@@ -15,7 +15,11 @@ import {
   statusTokens,
   contentSwitcherTokens,
 } from '../../../../src';
-import { groups, componentGroups, toJsName } from '../token-metadata';
+import {
+  groups,
+  componentGroups,
+  toJsName,
+} from '../../../shared/token-metadata';
 
 import { tokens } from '../tokens';
 
