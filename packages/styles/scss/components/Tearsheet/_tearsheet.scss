@@ -208,7 +208,10 @@
       }
     }
 
-    .#{$prefix}--modal-container--sm .#{$prefix}--modal-header {
+    // Scope to tearsheet's own modal container — avoids targeting any nested modal.
+    &.#{$block-class}
+      .#{$prefix}--modal-container--sm
+      .#{$prefix}--modal-header {
       padding-inline-end: $spacing-07;
     }
 
@@ -295,7 +298,7 @@
       }
     }
 
-    .#{$prefix}--modal-close {
+    .#{$block-class}__close-button .#{$prefix}--modal-close {
       transition: all $motion-duration ease;
 
       @media screen and (prefers-reduced-motion: reduce) {
@@ -395,7 +398,7 @@
         }
       }
 
-      .#{$prefix}--modal-close {
+      .#{$block-class}__close-button .#{$prefix}--modal-close {
         block-size: $spacing-08;
         inline-size: $spacing-08;
         transition: all $motion-duration ease;
@@ -528,6 +531,13 @@
 
   .#{$block-class}__header--no-close-icon {
     display: none;
+  }
+
+  // Override Carbon modal's flush (0) inset — tearsheet close button respects
+  // the 16px header padding grid.
+  .#{$block-class}__close-button.#{$prefix}--modal-close-button {
+    inset-block-start: $spacing-05;
+    inset-inline-end: $spacing-05;
   }
 
   .#{$block-class}__decorator {
@@ -779,10 +789,4 @@
       }
     }
   }
-}
-
-// todo:  this is to position close button and ai label , this can revisited and removed once modalv12 design intent changes is done
-.#{$prefix}--modal-close-button {
-  inset-block-start: $spacing-05;
-  inset-inline-end: $spacing-05;
 }
