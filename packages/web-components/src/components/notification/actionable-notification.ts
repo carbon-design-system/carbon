@@ -123,13 +123,13 @@ class CDSActionableNotification extends HostListenerMixin(
    * Node to track focus going outside of actionable notification content.
    */
   @query('#start-sentinel')
-  private _startSentinelNode!: HTMLAnchorElement;
+  private _startSentinelNode!: HTMLElement;
 
   /**
    * Node to track focus going outside of actionable notification content.
    */
   @query('#end-sentinel')
-  private _endSentinelNode!: HTMLAnchorElement;
+  private _endSentinelNode!: HTMLElement;
 
   /**
    * Handles `keydown` event on this event.

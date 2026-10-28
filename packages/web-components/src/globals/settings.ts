@@ -15,7 +15,7 @@ const selectorTabbable = `
   a[href]:not(#start-sentinel, #end-sentinel), area[href], input:not([disabled]):not([tabindex='-1']),
   button:not([disabled]):not([tabindex='-1']),select:not([disabled]):not([tabindex='-1']),
   textarea:not([disabled]):not([tabindex='-1']),
-  iframe, object, embed, *[tabindex]:not([tabindex='-1']), *[contenteditable=true],
+  iframe, object, embed, *[tabindex]:not([tabindex='-1']):not(#start-sentinel, #end-sentinel), *[contenteditable=true],
   ${prefix}-accordion-item,
   ${prefix}-actionable-notification-button,
   ${prefix}-ai-label,
