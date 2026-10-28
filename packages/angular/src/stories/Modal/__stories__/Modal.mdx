@@ -1,0 +1,231 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as ModalStories from './Modal.stories';
+
+<Meta of={ModalStories} />
+
+# Modal
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/angular/src/stories/Modal)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/modal/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/modal/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Danger Modal](#danger-modal)
+- [Full Width](#full-width)
+- [Passive Modal](#passive-modal)
+- [With AI Label](#with-ai-label)
+- [With Inline Loading](#with-inline-loading)
+- [With Scrolling Content](#with-scrolling-content)
+- [Component API](#component-api)
+  - [Opening and closing](#opening-and-closing)
+  - [Modal sizes](#modal-sizes)
+  - [Overflow content](#overflow-content)
+  - [Modal button variants](#modal-button-variants)
+  - [Focus management](#focus-management)
+- [Angular-specific notes](#angular-specific-notes)
+- [References](#references)
+- [Feedback](#feedback)
+
+## Overview
+
+The modal component delivers critical information that requires user action or
+acknowledgment. It uses a suite of sub-components to build its content:
+`cds-ng-modal-header`, `cds-ng-modal-heading`, `cds-ng-modal-body`, and
+`cds-ng-modal-footer`.
+
+### Importing
+
+```ts
+import {
+  ModalBodyComponent,
+  ModalBodyContentComponent,
+  ModalCloseButtonComponent,
+  ModalComponent,
+  ModalFooterButtonComponent,
+  ModalFooterComponent,
+  ModalHeaderComponent,
+  ModalHeadingComponent,
+  ModalLabelComponent,
+} from '@carbon/angular/modal';
+
+@Component({
+  standalone: true,
+  imports: [
+    ModalComponent,
+    ModalBodyComponent,
+    ModalBodyContentComponent,
+    ModalCloseButtonComponent,
+    ModalFooterButtonComponent,
+    ModalFooterComponent,
+    ModalHeaderComponent,
+    ModalHeadingComponent,
+    ModalLabelComponent,
+  ],
+  template: `
+    <cds-ng-modal [open]="isOpen" (modalClosed)="isOpen = false">
+      <cds-ng-modal-header>
+        <cds-ng-modal-close-button></cds-ng-modal-close-button>
+        <cds-ng-modal-label>Label (Optional)</cds-ng-modal-label>
+        <cds-ng-modal-heading>Add a custom domain</cds-ng-modal-heading>
+      </cds-ng-modal-header>
+      <cds-ng-modal-body>
+        <cds-ng-modal-body-content>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own.
+        </cds-ng-modal-body-content>
+      </cds-ng-modal-body>
+      <cds-ng-modal-footer>
+        <cds-ng-modal-footer-button kind="secondary" (click)="isOpen = false">
+          Cancel
+        </cds-ng-modal-footer-button>
+        <cds-ng-modal-footer-button kind="primary">
+          Save
+        </cds-ng-modal-footer-button>
+      </cds-ng-modal-footer>
+    </cds-ng-modal>
+  `,
+})
+export class MyComponent {
+  isOpen = false;
+}
+```
+
+Migrating from `carbon-components-angular`? See the
+[Migration guide](?path=/docs/introduction-migration--docs).
+
+<Canvas of={ModalStories.WithStateManager} />
+
+## Danger Modal
+
+Use the danger variant for destructive or irreversible actions. Set
+`[danger]="true"` on the modal and use a danger `kind` on the primary footer
+button.
+
+<Canvas of={ModalStories.DangerModal} />
+
+## Full Width
+
+Set `[fullWidth]="true"` to remove inner padding from the modal body, useful
+when the content (such as a data table) needs to extend to the edges.
+
+<Canvas of={ModalStories.FullWidth} />
+
+## Passive Modal
+
+A passive modal presents information or a confirmation without requiring user
+action to proceed. Set `[passiveModal]="true"` to hide the footer.
+
+<Canvas of={ModalStories.PassiveModal} />
+
+## With AI Label
+
+<Canvas of={ModalStories.WithAILabel} />
+
+## With Inline Loading
+
+<Canvas of={ModalStories.WithInlineLoading} />
+
+## With Scrolling Content
+
+When the modal body content may exceed the visible area, set
+`[hasScrollingContent]="true"` to add a visual fade at the bottom indicating
+overflow content.
+
+<Canvas of={ModalStories.WithScrollingContent} />
+
+## Component API
+
+<ArgTypes of={ModalStories.Default} />
+
+### Opening and closing
+
+Control modal visibility with the `[open]` binding. Toggle it programmatically
+in response to button clicks or other events.
+
+```html
+<button type="button" (click)="isOpen = true">Open modal</button>
+
+<cds-ng-modal [open]="isOpen" (modalClosed)="isOpen = false">
+  ...
+</cds-ng-modal>
+```
+
+### Modal sizes
+
+There are four responsive modal sizes: `xs`, `sm`, `md` (default), and `lg`. Set
+the `size` input.
+
+```html
+<cds-ng-modal size="lg">...</cds-ng-modal>
+```
+
+### Overflow content
+
+In cases where even the largest modal size does not fit all of the modal
+content, set `[hasScrollingContent]="true"` on the modal.
+
+```html
+<cds-ng-modal [hasScrollingContent]="true">
+  <cds-ng-modal-header>...</cds-ng-modal-header>
+  <cds-ng-modal-body>
+    <cds-ng-modal-body-content>
+      <!-- Long scrollable content -->
+    </cds-ng-modal-body-content>
+  </cds-ng-modal-body>
+  <cds-ng-modal-footer>...</cds-ng-modal-footer>
+</cds-ng-modal>
+```
+
+### Modal button variants
+
+With the modal component you can use up to three footer buttons. One must be
+primary, and the others secondary. Only the primary button can be a danger
+button.
+
+```html
+<cds-ng-modal-footer>
+  <cds-ng-modal-footer-button kind="secondary"
+    >Cancel</cds-ng-modal-footer-button
+  >
+  <cds-ng-modal-footer-button kind="primary">Save</cds-ng-modal-footer-button>
+</cds-ng-modal-footer>
+```
+
+### Focus management
+
+Once the modal opens, keyboard focus is restricted inside the modal:
+
+- **Tab** at the last focusable element moves focus back to the first.
+- **Shift+Tab** at the first focusable element moves focus to the last.
+
+To specify which element receives focus when the modal opens, add
+`data-modal-primary-focus` to that element.
+
+```html
+<cds-ng-modal-footer-button data-modal-primary-focus kind="primary">
+  Save
+</cds-ng-modal-footer-button>
+```
+
+## Angular-specific notes
+
+- All sub-components (`ModalBodyComponent`, `ModalCloseButtonComponent`, etc.)
+  must be listed individually in the standalone component's `imports` array.
+- Listen to `(modalClosed)` on `cds-ng-modal` to react when the user closes the
+  modal (e.g. via the close button or pressing Escape).
+- Use `[preventCloseOnClickOutside]="true"` to keep the modal open when the user
+  clicks outside it.
+
+## References
+
+- [Carbon Usage Guidelines](https://www.carbondesignsystem.com/components/modal/usage/)
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/angular/src/stories/Modal/__stories__/Modal.mdx).

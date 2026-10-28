@@ -341,26 +341,9 @@ export const WithLayer: Story = {
   render: (args) => ({
     props: args,
     template: `
-      <cds-ng-layer>
-        <div [style.width.px]="defaultWidth">
-          <cds-ng-text-input
-            [disabled]="disabled"
-            [helperText]="helperText"
-            [hideLabel]="hideLabel"
-            [inline]="inline"
-            [invalid]="invalid"
-            [invalidText]="invalidText"
-            [label]="labelText"
-            [placeholder]="placeholder"
-            [readonly]="readonly"
-            [size]="size"
-            [type]="type"
-            [value]="value"
-            [warn]="warn"
-            [warnText]="warnText"
-          ></cds-ng-text-input>
-        </div>
-        <cds-ng-layer>
+      <div class="cds--with-layer__background">
+        <div class="cds--with-layer__label">$background</div>
+        <div class="cds--with-layer__content">
           <div [style.width.px]="defaultWidth">
             <cds-ng-text-input
               [disabled]="disabled"
@@ -379,28 +362,58 @@ export const WithLayer: Story = {
               [warnText]="warnText"
             ></cds-ng-text-input>
           </div>
-          <cds-ng-layer>
-            <div [style.width.px]="defaultWidth">
-              <cds-ng-text-input
-                [disabled]="disabled"
-                [helperText]="helperText"
-                [hideLabel]="hideLabel"
-                [inline]="inline"
-                [invalid]="invalid"
-                [invalidText]="invalidText"
-                [label]="labelText"
-                [placeholder]="placeholder"
-                [readonly]="readonly"
-                [size]="size"
-                [type]="type"
-                [value]="value"
-                [warn]="warn"
-                [warnText]="warnText"
-              ></cds-ng-text-input>
+          <cds-ng-layer [withBackground]="true">
+            <div class="cds--with-layer__layer">
+              <div class="cds--with-layer__label">$layer-01</div>
+              <div class="cds--with-layer__content">
+                <div [style.width.px]="defaultWidth">
+                  <cds-ng-text-input
+                    [disabled]="disabled"
+                    [helperText]="helperText"
+                    [hideLabel]="hideLabel"
+                    [inline]="inline"
+                    [invalid]="invalid"
+                    [invalidText]="invalidText"
+                    [label]="labelText"
+                    [placeholder]="placeholder"
+                    [readonly]="readonly"
+                    [size]="size"
+                    [type]="type"
+                    [value]="value"
+                    [warn]="warn"
+                    [warnText]="warnText"
+                  ></cds-ng-text-input>
+                </div>
+                <cds-ng-layer [withBackground]="true">
+                  <div class="cds--with-layer__layer">
+                    <div class="cds--with-layer__label">$layer-02</div>
+                    <div class="cds--with-layer__content">
+                      <div [style.width.px]="defaultWidth">
+                        <cds-ng-text-input
+                          [disabled]="disabled"
+                          [helperText]="helperText"
+                          [hideLabel]="hideLabel"
+                          [inline]="inline"
+                          [invalid]="invalid"
+                          [invalidText]="invalidText"
+                          [label]="labelText"
+                          [placeholder]="placeholder"
+                          [readonly]="readonly"
+                          [size]="size"
+                          [type]="type"
+                          [value]="value"
+                          [warn]="warn"
+                          [warnText]="warnText"
+                        ></cds-ng-text-input>
+                      </div>
+                    </div>
+                  </div>
+                </cds-ng-layer>
+              </div>
             </div>
           </cds-ng-layer>
-        </cds-ng-layer>
-      </cds-ng-layer>
+        </div>
+      </div>
     `,
   }),
 };

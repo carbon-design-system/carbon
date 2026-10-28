@@ -345,34 +345,9 @@ export const InlineWithLayer: Story = {
   render: (args) => ({
     props: { ...args, items },
     template: `
-      <cds-ng-layer>
-        <div style="width:400px">
-          <cds-ng-dropdown
-            [ariaLabel]="ariaLabel"
-            [direction]="direction"
-            [disabled]="disabled"
-            [helperText]="helperText"
-            [hideLabel]="hideLabel"
-            [invalid]="invalid"
-            [invalidText]="invalidText"
-            [label]="label"
-            [open]="open"
-            [readOnly]="readOnly"
-            [size]="size || null"
-            [titleText]="titleText"
-            [type]="type || null"
-            [value]="value"
-            [warn]="warn"
-            [warnText]="warnText"
-          >
-            <cds-ng-dropdown-item
-              *ngFor="let item of items"
-              [value]="item.value"
-              [disabled]="item.disabled"
-            >{{item.text}}</cds-ng-dropdown-item>
-          </cds-ng-dropdown>
-        </div>
-        <cds-ng-layer>
+      <div class="cds--with-layer__background">
+        <div class="cds--with-layer__label">$background</div>
+        <div class="cds--with-layer__content">
           <div style="width:400px">
             <cds-ng-dropdown
               [ariaLabel]="ariaLabel"
@@ -399,36 +374,74 @@ export const InlineWithLayer: Story = {
               >{{item.text}}</cds-ng-dropdown-item>
             </cds-ng-dropdown>
           </div>
-          <cds-ng-layer>
-            <div style="width:400px">
-              <cds-ng-dropdown
-                [ariaLabel]="ariaLabel"
-                [direction]="direction"
-                [disabled]="disabled"
-                [helperText]="helperText"
-                [hideLabel]="hideLabel"
-                [invalid]="invalid"
-                [invalidText]="invalidText"
-                [label]="label"
-                [open]="open"
-                [readOnly]="readOnly"
-                [size]="size || null"
-                [titleText]="titleText"
-                [type]="type || null"
-                [value]="value"
-                [warn]="warn"
-                [warnText]="warnText"
-              >
-                <cds-ng-dropdown-item
-                  *ngFor="let item of items"
-                  [value]="item.value"
-                  [disabled]="item.disabled"
-                >{{item.text}}</cds-ng-dropdown-item>
-              </cds-ng-dropdown>
+          <cds-ng-layer [withBackground]="true">
+            <div class="cds--with-layer__layer">
+              <div class="cds--with-layer__label">$layer-01</div>
+              <div class="cds--with-layer__content">
+                <div style="width:400px">
+                  <cds-ng-dropdown
+                    [ariaLabel]="ariaLabel"
+                    [direction]="direction"
+                    [disabled]="disabled"
+                    [helperText]="helperText"
+                    [hideLabel]="hideLabel"
+                    [invalid]="invalid"
+                    [invalidText]="invalidText"
+                    [label]="label"
+                    [open]="open"
+                    [readOnly]="readOnly"
+                    [size]="size || null"
+                    [titleText]="titleText"
+                    [type]="type || null"
+                    [value]="value"
+                    [warn]="warn"
+                    [warnText]="warnText"
+                  >
+                    <cds-ng-dropdown-item
+                      *ngFor="let item of items"
+                      [value]="item.value"
+                      [disabled]="item.disabled"
+                    >{{item.text}}</cds-ng-dropdown-item>
+                  </cds-ng-dropdown>
+                </div>
+                <cds-ng-layer [withBackground]="true">
+                  <div class="cds--with-layer__layer">
+                    <div class="cds--with-layer__label">$layer-02</div>
+                    <div class="cds--with-layer__content">
+                      <div style="width:400px">
+                        <cds-ng-dropdown
+                          [ariaLabel]="ariaLabel"
+                          [direction]="direction"
+                          [disabled]="disabled"
+                          [helperText]="helperText"
+                          [hideLabel]="hideLabel"
+                          [invalid]="invalid"
+                          [invalidText]="invalidText"
+                          [label]="label"
+                          [open]="open"
+                          [readOnly]="readOnly"
+                          [size]="size || null"
+                          [titleText]="titleText"
+                          [type]="type || null"
+                          [value]="value"
+                          [warn]="warn"
+                          [warnText]="warnText"
+                        >
+                          <cds-ng-dropdown-item
+                            *ngFor="let item of items"
+                            [value]="item.value"
+                            [disabled]="item.disabled"
+                          >{{item.text}}</cds-ng-dropdown-item>
+                        </cds-ng-dropdown>
+                      </div>
+                    </div>
+                  </div>
+                </cds-ng-layer>
+              </div>
             </div>
           </cds-ng-layer>
-        </cds-ng-layer>
-      </cds-ng-layer>
+        </div>
+      </div>
     `,
   }),
 };
@@ -505,34 +518,9 @@ export const WithLayer: Story = {
   render: (args) => ({
     props: { ...args, items },
     template: `
-      <cds-ng-layer>
-        <div style="width:400px">
-          <cds-ng-dropdown
-            [ariaLabel]="ariaLabel"
-            [direction]="direction"
-            [disabled]="disabled"
-            [helperText]="helperText"
-            [hideLabel]="hideLabel"
-            [invalid]="invalid"
-            [invalidText]="invalidText"
-            [label]="label"
-            [open]="open"
-            [readOnly]="readOnly"
-            [size]="size || null"
-            [titleText]="titleText"
-            [type]="type || null"
-            [value]="value"
-            [warn]="warn"
-            [warnText]="warnText"
-          >
-            <cds-ng-dropdown-item
-              *ngFor="let item of items"
-              [value]="item.value"
-              [disabled]="item.disabled"
-            >{{item.text}}</cds-ng-dropdown-item>
-          </cds-ng-dropdown>
-        </div>
-        <cds-ng-layer>
+      <div class="cds--with-layer__background">
+        <div class="cds--with-layer__label">$background</div>
+        <div class="cds--with-layer__content">
           <div style="width:400px">
             <cds-ng-dropdown
               [ariaLabel]="ariaLabel"
@@ -559,36 +547,74 @@ export const WithLayer: Story = {
               >{{item.text}}</cds-ng-dropdown-item>
             </cds-ng-dropdown>
           </div>
-          <cds-ng-layer>
-            <div style="width:400px">
-              <cds-ng-dropdown
-                [ariaLabel]="ariaLabel"
-                [direction]="direction"
-                [disabled]="disabled"
-                [helperText]="helperText"
-                [hideLabel]="hideLabel"
-                [invalid]="invalid"
-                [invalidText]="invalidText"
-                [label]="label"
-                [open]="open"
-                [readOnly]="readOnly"
-                [size]="size || null"
-                [titleText]="titleText"
-                [type]="type || null"
-                [value]="value"
-                [warn]="warn"
-                [warnText]="warnText"
-              >
-                <cds-ng-dropdown-item
-                  *ngFor="let item of items"
-                  [value]="item.value"
-                  [disabled]="item.disabled"
-                >{{item.text}}</cds-ng-dropdown-item>
-              </cds-ng-dropdown>
+          <cds-ng-layer [withBackground]="true">
+            <div class="cds--with-layer__layer">
+              <div class="cds--with-layer__label">$layer-01</div>
+              <div class="cds--with-layer__content">
+                <div style="width:400px">
+                  <cds-ng-dropdown
+                    [ariaLabel]="ariaLabel"
+                    [direction]="direction"
+                    [disabled]="disabled"
+                    [helperText]="helperText"
+                    [hideLabel]="hideLabel"
+                    [invalid]="invalid"
+                    [invalidText]="invalidText"
+                    [label]="label"
+                    [open]="open"
+                    [readOnly]="readOnly"
+                    [size]="size || null"
+                    [titleText]="titleText"
+                    [type]="type || null"
+                    [value]="value"
+                    [warn]="warn"
+                    [warnText]="warnText"
+                  >
+                    <cds-ng-dropdown-item
+                      *ngFor="let item of items"
+                      [value]="item.value"
+                      [disabled]="item.disabled"
+                    >{{item.text}}</cds-ng-dropdown-item>
+                  </cds-ng-dropdown>
+                </div>
+                <cds-ng-layer [withBackground]="true">
+                  <div class="cds--with-layer__layer">
+                    <div class="cds--with-layer__label">$layer-02</div>
+                    <div class="cds--with-layer__content">
+                      <div style="width:400px">
+                        <cds-ng-dropdown
+                          [ariaLabel]="ariaLabel"
+                          [direction]="direction"
+                          [disabled]="disabled"
+                          [helperText]="helperText"
+                          [hideLabel]="hideLabel"
+                          [invalid]="invalid"
+                          [invalidText]="invalidText"
+                          [label]="label"
+                          [open]="open"
+                          [readOnly]="readOnly"
+                          [size]="size || null"
+                          [titleText]="titleText"
+                          [type]="type || null"
+                          [value]="value"
+                          [warn]="warn"
+                          [warnText]="warnText"
+                        >
+                          <cds-ng-dropdown-item
+                            *ngFor="let item of items"
+                            [value]="item.value"
+                            [disabled]="item.disabled"
+                          >{{item.text}}</cds-ng-dropdown-item>
+                        </cds-ng-dropdown>
+                      </div>
+                    </div>
+                  </div>
+                </cds-ng-layer>
+              </div>
             </div>
           </cds-ng-layer>
-        </cds-ng-layer>
-      </cds-ng-layer>
+        </div>
+      </div>
     `,
   }),
 };

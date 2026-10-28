@@ -23,7 +23,10 @@
             "tsConfig": "tsconfig.storybook.json",
             "compodoc": false,
             "port": 4011,
-            "styles": ["../../node_modules/@carbon/styles/css/styles.css"]
+            "styles": [
+              "../../node_modules/@carbon/styles/css/styles.css",
+              ".storybook/styles.scss"
+            ]
           }
         },
         "build-storybook": {
@@ -34,7 +37,10 @@
             "tsConfig": "tsconfig.storybook.json",
             "compodoc": false,
             "outputDir": "storybook-static",
-            "styles": ["../../node_modules/@carbon/styles/css/styles.css"]
+            "styles": [
+              "../../node_modules/@carbon/styles/css/styles.css",
+              ".storybook/styles.scss"
+            ]
           }
         }
       }

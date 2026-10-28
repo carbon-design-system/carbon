@@ -1,0 +1,159 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as CheckboxStories from './Checkbox.stories';
+
+<Meta of={CheckboxStories} />
+
+# Checkbox
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/angular/src/stories/Checkbox)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/checkbox/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/checkbox/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Horizontal](#horizontal)
+- [Single](#single)
+- [Skeleton state](#skeleton-state)
+- [With AI Label](#with-ai-label)
+- [Component API](#component-api)
+  - [`checked`](#checked)
+  - [`disabled`](#disabled)
+  - [`indeterminate`](#indeterminate)
+  - [`labelText`](#labeltext)
+  - [`readonly`](#readonly)
+  - [`(checkboxChanged)`](#checkboxchanged)
+- [Angular-specific notes](#angular-specific-notes)
+- [Feedback](#feedback)
+
+## Overview
+
+You can build a checkbox using `cds-ng-checkbox` in combination with a
+`cds-ng-checkbox-group` element to group controls, and `legendText` for the
+fieldset label.
+
+### Importing
+
+```ts
+import {
+  CheckboxComponent,
+  CheckboxGroupComponent,
+} from '@carbon/angular/checkbox';
+
+@Component({
+  standalone: true,
+  imports: [CheckboxComponent, CheckboxGroupComponent],
+  template: `
+    <cds-ng-checkbox-group legendText="Group label">
+      <cds-ng-checkbox>Checkbox label</cds-ng-checkbox>
+      <cds-ng-checkbox>Checkbox label</cds-ng-checkbox>
+    </cds-ng-checkbox-group>
+  `,
+})
+export class MyComponent {}
+```
+
+Migrating from `carbon-components-angular`? See the
+[Migration guide](?path=/docs/introduction-migration--docs).
+
+<Canvas of={CheckboxStories.Default} />
+
+## Horizontal
+
+Use `orientation="horizontal"` on the group to display checkboxes side by side
+instead of stacked.
+
+<Canvas of={CheckboxStories.Horizontal} />
+
+## Single
+
+Use a single `cds-ng-checkbox` outside of a group when you need a standalone
+checked/unchecked control (for example, an "I agree" confirmation).
+
+<Canvas of={CheckboxStories.Single} />
+
+## Skeleton state
+
+Use the `cds-ng-checkbox-skeleton` component to render a skeleton variant while
+checkbox content is loading.
+
+<Canvas of={CheckboxStories.Skeleton} />
+
+## With AI Label
+
+<Canvas of={CheckboxStories.WithAILabel} />
+
+## Component API
+
+<ArgTypes of={CheckboxStories.Default} />
+
+### `checked`
+
+Use the `checked` attribute to set the initial checked state of a checkbox.
+
+```html
+<cds-ng-checkbox [checked]="true">Checkbox label</cds-ng-checkbox>
+```
+
+### `disabled`
+
+Prevents user interaction and renders the checkbox in a visually muted state.
+
+```html
+<cds-ng-checkbox [disabled]="true">Checkbox label</cds-ng-checkbox>
+```
+
+### `indeterminate`
+
+Renders the checkbox in an indeterminate state — typically used for "select all"
+controls when some but not all children are selected.
+
+```html
+<cds-ng-checkbox [indeterminate]="true">Select all</cds-ng-checkbox>
+```
+
+### `labelText`
+
+The visible text label for the checkbox.
+
+```html
+<cds-ng-checkbox labelText="Accept the terms"></cds-ng-checkbox>
+<!-- or use content projection -->
+<cds-ng-checkbox>Accept the terms</cds-ng-checkbox>
+```
+
+### `readonly`
+
+Renders the checkbox in a read-only state. The user cannot change the value.
+
+```html
+<cds-ng-checkbox [readonly]="true">Read-only option</cds-ng-checkbox>
+```
+
+### `(checkboxChanged)`
+
+Emitted when the checkbox value changes. The event payload is the native
+`CustomEvent`.
+
+```html
+<cds-ng-checkbox (checkboxChanged)="handleChange($event)">
+  Accept the terms
+</cds-ng-checkbox>
+```
+
+## Angular-specific notes
+
+- Import `CheckboxComponent` and, when grouping checkboxes,
+  `CheckboxGroupComponent` from `@carbon/angular/checkbox`.
+- For Angular forms, `CheckboxComponent` implements `ControlValueAccessor`. Use
+  `[(ngModel)]` or `[formControl]` directly on `cds-ng-checkbox`.
+- The `cds-ng-checkbox-skeleton` component requires `CheckboxSkeletonComponent`
+  from `@carbon/angular/checkbox`.
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/angular/src/stories/Checkbox/__stories__/Checkbox.mdx).
