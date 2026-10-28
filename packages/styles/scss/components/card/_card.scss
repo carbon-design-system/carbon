@@ -461,12 +461,6 @@
     gap: $spacing-03;
   }
 
-  // Leading icon + trailing icon: display as flex row (same as --with-start-icon)
-  .#{$prefix}--card__title-text-row--with-end-icon {
-    display: inline-flex;
-    align-items: center;
-  }
-
   // Title leading icon wrapper
   .#{$prefix}--card__title-start-icon {
     display: flex;

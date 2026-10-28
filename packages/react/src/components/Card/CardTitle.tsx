@@ -129,7 +129,6 @@ export const CardTitle = forwardRef<HTMLDivElement, CardTitleProps>(
       [`${blockClass}__title-text-row--truncate`]: titleTruncate === true,
       [`${blockClass}__title-text-row--truncate-multi`]: isTitleMulti,
       [`${blockClass}__title-text-row--with-start-icon`]: titleStart,
-      [`${blockClass}__title-text-row--with-end-icon`]: titleEnd,
     });
 
     // Dynamic values passed as CSS custom properties so SCSS rules can read
