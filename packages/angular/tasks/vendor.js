@@ -44,15 +44,6 @@ export const VENDOR_EXCLUDED_DIRS = new Set([
 ]);
 
 /**
- * Component folders that are not wrapped (ADR 0021). They are the only ones
- * that reach flatpickr.
- */
-export const VENDOR_EXCLUDED_COMPONENTS = new Set([
-  'date-picker',
-  'fluid-date-picker',
-]);
-
-/**
  * Files inside an excluded directory that non-story code imports at runtime.
  * `page-header/utils.js` imports its overflow handler from `_story-assets`.
  * Paths are relative to the vendor root.
@@ -94,6 +85,13 @@ export function vendorPrefixedCopy() {
     process.exit(1);
   }
 
+  // Skip when the vendor tree already exists. Both generate-wrappers and
+  // build-entries call this function, so in a full build it would otherwise
+  // run twice. Remove VENDOR manually (or run `yarn clean`) to force a refresh.
+  if (existsSync(VENDOR)) {
+    return;
+  }
+
   mkdirSync(ENTRIES_ROOT, { recursive: true });
 
   const result = spawnSync(
@@ -130,9 +128,11 @@ export function vendorPrefixedCopy() {
       if (VENDOR_EXCLUDED_ROOT_FILES.has(rel)) return false;
       const segments = rel.split('/');
       if (segments.some((s) => VENDOR_EXCLUDED_DIRS.has(s))) return false;
+      // fluid-date-picker is entirely excluded (ADR 0021).
       if (segments[0] === 'components' && segments[1] === 'fluid-date-picker') {
         return false;
       }
+      // date-picker keeps only the folder itself, `next/`, and `defs.js`.
       if (segments[0] === 'components' && segments[1] === 'date-picker') {
         if (segments.length === 2) return true;
         if (segments[2] !== 'next' && segments[2] !== 'defs.js') {

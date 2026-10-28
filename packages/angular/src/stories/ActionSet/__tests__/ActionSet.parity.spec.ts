@@ -188,6 +188,9 @@ describe('cds-ng-action-set (parity with web-components action-set-test.js)', ()
   });
 
   describe('Size variants', () => {
+    // WC test uses one `it` that loops over all sizes.  Angular breaks it into
+    // per-size cases with different titles, so the WC title is recorded here.
+    it.todo('applies correct classes for different sizes');
     ['sm', 'md', 'lg', 'xl', '2xl'].forEach((size) => {
       it(`applies correct class for size="${size}"`, async () => {
         const { fixture } = await render(
@@ -460,6 +463,8 @@ describe('cds-ng-action-set (parity with web-components action-set-test.js)', ()
   });
 
   describe('Actions prop with rest properties', () => {
+    // WC title uses "cds-button"; Angular wrapper uses "cds-ng-button".
+    it.todo('passes rest properties to cds-button');
     it('passes rest properties to cds-ng-button', async () => {
       const { fixture } = await render(
         `<cds-ng-action-set [actions]="actions"></cds-ng-action-set>`,

@@ -303,6 +303,10 @@ describe('cds-ng-checkbox (parity with web-components checkbox-test.js)', () => 
     expect(result).toBe('timeout');
   });
 
+  // WC event titles use cds-checkbox-changed; Angular equivalents above use
+  // cds-ng-checkbox-changed (the prefixed event name under ADR 0020).
+  it.todo('should fire cds-checkbox-changed event when checkbox is changed');
+  it.todo('should NOT fire cds-checkbox-changed event when readonly');
   it.todo('should respect deprecated slug prop');
   it.todo('should respect decorator prop');
   it.todo('should set size to "md" when decorator kind is "inline"');

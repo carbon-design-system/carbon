@@ -2,7 +2,7 @@
 
 **Status:** In progress, partly out of date. See
 [`status-and-open-questions.md`](./status-and-open-questions.md) for the current
-state. Milestones 0, 1 and 2 are largely done (scaffolding, generator, 281
+state. Milestones 0, 1 and 2 are largely done (scaffolding, generator, 287
 generated wrappers, 97 secondary entries). **`@carbon/angular/legacy` was
 abandoned and removed on 2026-10-26**, so Milestone 3 is cancelled. Milestone 5
 was rewritten on 2026-10-28 around codemods plus agent skills; see
@@ -25,12 +25,14 @@ the items below. Each is a future PR.
 | **CEM generator**                         | Move the generator to the Custom Elements Manifest when the dev lead's PR lands.                                                                                                                                                                                                                                    | 2         |
 | **`Loading-test.js`**                     | Separate PR for the `:modal` stub change. The patch is in the gitignored `temp/loading-test-modal-stub.patch`.                                                                                                                                                                                                      | —         |
 | **Modal `EnableDialogElement` story**     | Hold until the dialog version of Modal is stable.                                                                                                                                                                                                                                                                   | 4         |
+| **Dropdown `WithToggletipLabel` story**   | `ToggletipComponent` is generated, but the WC story uses imperative Storybook controls that need an established Angular template pattern. Implement when the pattern is set for another component.                                                                                                                  | 2         |
 
 Not yet assigned to a PR (decided only that they are needed): the CI Angular
-version matrix and the `standalone: true` removal (Milestone 0, ADR 0018), and
-`docs/guides/cca-to-angular.md` (Milestone 5). Two decisions are also open: the
-`@carbon/styles` peer range, and whether `docs/migration/v12.md` gets a short
-entry (Milestone 6).
+version matrix (Milestone 0, ADR 0018), and `docs/guides/cca-to-angular.md`
+(Milestone 5). ~~`standalone: true` removal~~ — done 2026-10-28. Two decisions
+are also open: the `@carbon/styles` peer range, and whether
+`docs/migration/v12.md` gets a short entry (Milestone 6) — the section was
+added; confirm whether more is needed.
 
 This document breaks the `@carbon/angular` implementation plan into seven
 focused milestones, leveraging the **automated core wrapper generator**.

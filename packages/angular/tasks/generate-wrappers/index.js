@@ -87,8 +87,25 @@ function toCamelCase(str) {
   return pascal.charAt(0).toLowerCase() + pascal.slice(1);
 }
 
+/**
+ * Known manifest type errors, keyed by `"tagName.propertyName"`.
+ * The WCA analyser sometimes infers the wrong type from the default value
+ * rather than the declared TypeScript type. Fix the generator output here
+ * until the manifest is corrected upstream.
+ *
+ * TODO(@carbon/web-components): remove entries once the manifest is fixed.
+ */
+const MANIFEST_TYPE_OVERRIDES = {
+  // cds-checkbox: warnText is declared as `string` but the manifest emits
+  // `"type": "boolean"` because the default value is `""` (empty string),
+  // which the analyser misreads. Filed upstream.
+  'cds-checkbox.warnText': 'string',
+};
+
 /** Sanitize type strings into valid TypeScript types */
-function sanitizeType(typeStr) {
+function sanitizeType(typeStr, tagName, propName) {
+  const override = MANIFEST_TYPE_OVERRIDES[`${tagName}.${propName}`];
+  if (override) return override;
   if (!typeStr) return 'any';
   const trimmed = typeStr.trim();
   if (
@@ -351,11 +368,15 @@ function generateWrapperForTag(tag) {
       processedNames.add(prop.name);
 
       const propName = prop.name;
-      const type = sanitizeType(prop.type);
+      const type = sanitizeType(prop.type, tag.name, prop.name);
+      // isBoolean drives the `= false` default and booleanAttribute transform.
+      // Only set it when the resolved type is boolean — not when the manifest
+      // default happens to be "false" for a property that was overridden to string.
       const isBoolean =
         type === 'boolean' ||
-        prop.default === 'false' ||
-        prop.default === 'true';
+        (type !== 'string' &&
+          type !== 'string | undefined' &&
+          (prop.default === 'false' || prop.default === 'true'));
       const cleanDefault = sanitizeDefault(prop.default, type);
 
       inputs.push({
@@ -574,8 +595,7 @@ ${propertyInputsConst}
   template: \`
 ${template}
   \`,
-  encapsulation: ViewEncapsulation.None,
-  standalone: true,${
+  encapsulation: ViewEncapsulation.None,${
     cvaProp
       ? `
   providers: [

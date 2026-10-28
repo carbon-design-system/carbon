@@ -274,6 +274,8 @@ describe('cds-ng-dropdown (parity with web-components dropdown-test.js)', () => 
       expect(helperText?.textContent?.trim()).toBe('This is a warning');
     });
 
+    // WC test uses single `it` covering all sizes; Angular splits by size variant.
+    it.todo('should support different sizes');
     it('should support different sizes — sm', async () => {
       const { fixture } = await render(
         `<cds-ng-dropdown size="sm" titleText="Dropdown Label">
@@ -461,6 +463,9 @@ describe('cds-ng-dropdown (parity with web-components dropdown-test.js)', () => 
       expect(el.value).toBe('option-2');
     });
 
+    // WC event titles use unprefixed cds-dropdown-*; Angular equivalents above
+    // use cds-ng-dropdown-* (ADR 0020). Record the WC titles for parity tracking.
+    it.todo('should fire cds-dropdown-selected event when item is selected');
     it('should fire cds-ng-dropdown-toggled event when dropdown is opened/closed', async () => {
       const { fixture } = await render(defaultDropdown, imports);
       const el = wc(fixture.nativeElement);
@@ -481,6 +486,13 @@ describe('cds-ng-dropdown (parity with web-components dropdown-test.js)', () => 
       expect(eventFired).toBe(true);
       expect(openState).toBe(true);
     });
+
+    it.todo(
+      'should fire cds-dropdown-toggled event when dropdown is opened/closed'
+    );
+    it.todo(
+      'should not trigger dropdown actions when keypress events originate from AI Label'
+    );
   });
 });
 
@@ -625,8 +637,25 @@ describe('AI label and slug slot (@query decorator)', () => {
   it.todo(
     'should toggle cds-ng--slug--revert on slug slot when ai-label slot node is absent'
   );
+  // WC titles use unprefixed cds-ai-label / cds-slug (ADR 0020 maps to cds-ng-*).
+  it.todo('should set ai-label attribute when cds-ai-label is slotted');
+  it.todo(
+    'should toggle cds--slug--revert class on ai-label slot when revert-active is set'
+  );
+  it.todo(
+    'should not add cds--slug--revert to slug slot when only cds-slug is present (ai-label slot takes precedence in shadow DOM)'
+  );
+  it.todo(
+    'should not set cds--slug--revert on ai-label slot when revert-active is absent'
+  );
+  it.todo('should remove ai-label attribute when no cds-ai-label is slotted');
+  it.todo(
+    'should toggle cds--slug--revert on slug slot when ai-label slot node is absent'
+  );
 });
 
 describe('cds-ng-dropdown-skeleton', () => {
   it.todo('should render with the expected classes');
+  // WC title for size check in skeleton block.
+  it.todo('should respect size attribute');
 });

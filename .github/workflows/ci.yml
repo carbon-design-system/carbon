@@ -557,6 +557,9 @@ jobs:
       - name: Build @carbon/angular
         if: ${{ steps.filter.outputs.angular == 'true' }}
         run: yarn workspace @carbon/angular build
+      - name: Check @carbon/angular parity (test titles and story names)
+        if: ${{ steps.filter.outputs.angular == 'true' }}
+        run: yarn workspace @carbon/angular check:parity
       - name: Run @carbon/angular tests
         if: ${{ steps.filter.outputs.angular == 'true' }}
         run: yarn workspace @carbon/angular test --ci --coverage

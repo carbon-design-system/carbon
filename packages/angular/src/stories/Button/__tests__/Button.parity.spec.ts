@@ -295,6 +295,31 @@ describe('cds-ng-button (parity with web-components button-test.js)', () => {
   // Layout-sensitive tests that cannot run in jsdom (getBoundingClientRect
   // returns 0,0,0,0). All 8 are covered by Playwright in `Button.e2e.ts`.
   describe('RTL auto-alignment (jsdom todo -> Playwright)', () => {
+    // WC titles use template literals with ${position}/${alignment}; recorded
+    // verbatim below so the parity script can match them.
+    const positions = ['top', 'bottom'];
+    const anchors = [
+      { position: 'top', alignment: 'left', expectedAnchor: 'start' },
+      { position: 'top', alignment: 'right', expectedAnchor: 'end' },
+      { position: 'bottom', alignment: 'left', expectedAnchor: 'start' },
+      { position: 'bottom', alignment: 'right', expectedAnchor: 'end' },
+    ];
+    const sides = ['right', 'left'];
+    positions.forEach((position) => {
+      it.todo(
+        `renders centered "${position}" tooltip horizontally aligned with the button in RTL`
+      );
+    });
+    anchors.forEach(({ position, alignment, expectedAnchor }) => {
+      it.todo(
+        `anchors "${position}-${alignment}" tooltip toward the button's inline-${expectedAnchor} edge in RTL`
+      );
+    });
+    sides.forEach((position) => {
+      it.todo(
+        `keeps "${position}" tooltip on the same physical side of the button in RTL as in LTR`
+      );
+    });
     it.todo(
       'should automatically set alignment to end if the tooltip extends past the right edge (Playwright)'
     );

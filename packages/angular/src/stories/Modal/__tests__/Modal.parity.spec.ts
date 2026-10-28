@@ -99,6 +99,10 @@ describe('cds-ng-modal (parity with web-components modal-test.js)', () => {
       // Requires AiLabelComponent — skip for now.
       // WC test asserts el.hasAttribute('ai-label') after aiLabel is slotted.
     });
+    // WC title uses cds-ai-label; Angular equivalent above uses cds-ng-ai-label (ADR 0020).
+    it.todo(
+      'should set ai-label attribute on modal when cds-ai-label is slotted in the header'
+    );
 
     it('should render modal label', async () => {
       const { fixture } = await render(defaultModalTemplate, imports);

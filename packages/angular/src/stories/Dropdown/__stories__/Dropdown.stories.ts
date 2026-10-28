@@ -25,7 +25,10 @@ import {
 import { LayerComponent } from '@carbon/angular/layer';
 
 // ─── WC-parity stories (one-for-one with @carbon/web-components Dropdown) ─────
-// TODO(parity): WithToggletipLabel — requires ToggleTipComponent (not yet generated)
+// TODO(parity): WithToggletipLabel — ToggleTipComponent is generated but the
+// WC story uses imperative Storybook controls that don't map cleanly to the
+// Angular template model. Implement when the pattern for toggletip-in-label
+// is established for another component.
 
 const items = [
   {
