@@ -187,8 +187,8 @@
       margin-block: 0;
       max-block-size: 50vh;
       padding-block-end: 0;
-      padding-block-start: $spacing-06;
-      padding-inline: $spacing-07;
+      padding-block-start: $spacing-05;
+      padding-inline: $spacing-05;
 
       > * {
         flex-basis: 100%;
@@ -224,10 +224,13 @@
           1fr
         );
       inline-size: calc(100% - var(--tearsheet-header-action-offset));
+      padding-inline-start: $spacing-05;
 
       @include breakpoint-down(md) {
         display: flex;
         flex-direction: column;
+        gap: 0;
+        padding-inline-start: 0;
       }
     }
 
@@ -259,9 +262,12 @@
         ) {
         overflow: hidden;
         max-block-size: 50vh;
+        min-block-size: unset;
         opacity: 1;
+        padding-inline-start: $spacing-05;
         transition:
-          max-block-size $motion-duration motion(entrance, expressive),
+          $spacing-08 max-block-size $motion-duration
+            motion(entrance, expressive),
           opacity $motion-duration motion(entrance, expressive),
           margin $motion-duration motion(entrance, expressive),
           padding $motion-duration motion(entrance, expressive);
@@ -299,11 +305,14 @@
 
     // COLLAPSED STATE
     .#{$block-class}__header-collapsed {
-      padding-block-start: 0;
       transition: padding $motion-duration motion(entrance, expressive);
 
       @media screen and (prefers-reduced-motion: reduce) {
         transition: none;
+      }
+
+      .#{$block-class}__header-content-wrapper {
+        margin-block-end: $spacing-05;
       }
 
       > *:not(
@@ -335,11 +344,13 @@
         padding: 0;
         margin: 0;
         max-block-size: 0;
+        min-block-size: 0;
         opacity: 0;
         pointer-events: none;
         transition:
           opacity $motion-duration motion(entrance, expressive),
           max-block-size $motion-duration motion(entrance, expressive),
+          min-block-size $motion-duration motion(entrance, expressive),
           padding $motion-duration motion(entrance, expressive),
           margin $motion-duration motion(entrance, expressive);
         visibility: hidden;
@@ -350,7 +361,7 @@
       }
 
       .#{$block-class}__header-title {
-        @include type-style('label-02');
+        @include type-style('heading-03');
 
         align-items: center;
         gap: $spacing-03;
@@ -370,7 +381,7 @@
         .#{$block-class}__title-start,
         .#{$block-class}__title-end {
           svg {
-            inline-size: $spacing-05;
+            inline-size: $spacing-06;
           }
         }
       }
@@ -394,17 +405,7 @@
         }
       }
 
-      .#{$block-class}__decorator {
-        inset-block-start: $spacing-03;
-      }
-
-      .#{$block-class}__header-title {
-        block-size: $spacing-08;
-      }
-
       .#{$block-class}__content__header-actions {
-        block-size: $spacing-06;
-        margin-block-start: $spacing-03;
         transition: all $motion-duration ease;
 
         @media screen and (prefers-reduced-motion: reduce) {
@@ -418,7 +419,6 @@
         }
       }
 
-      .#{$block-class}__header-content-wrapper,
       .#{$block-class}__header-content,
       .#{$block-class}__content__title-wrapper,
       .#{$block-class}__header-actions,
@@ -443,7 +443,7 @@
         content: '';
         inline-size: calc(100% + $spacing-11);
         inset-block-start: 0;
-        inset-inline-start: -$spacing-07;
+        inset-inline-start: -$spacing-05;
         pointer-events: none;
       }
     }
@@ -532,8 +532,15 @@
 
   .#{$block-class}__decorator {
     position: absolute;
-    inset-block-start: convert.to-rem(10px);
-    inset-inline-end: $spacing-09;
+    inset-block-start: convert.to-rem(20px);
+    // Sit to the left of the close button (48px wide).
+    inset-inline-end: $spacing-10;
+
+    // When there is no close button, align to the same edge the close button
+    // would have occupied.
+    .#{$block-class}__header:not(.#{$block-class}__header--with-close-icon) & {
+      inset-inline-end: $spacing-05;
+    }
   }
 
   .#{$block-class}__navigation-bar {
@@ -542,18 +549,22 @@
     align-items: center;
     justify-content: space-between;
     gap: $spacing-01;
-    max-inline-size: calc(100% - $spacing-04);
+    max-inline-size: calc(100% - $spacing-08);
     min-block-size: $spacing-08;
+    padding-inline-start: $spacing-05;
 
     .#{$prefix}--tabs {
       margin-inline-start: -$spacing-05;
+    }
+    @include breakpoint-down(md) {
+      max-inline-size: calc(100% - $spacing-08);
     }
   }
 
   .#{$block-class}__scroller-container {
     position: absolute;
     inset-block-end: 0;
-    inset-inline-end: -$spacing-08;
+    inset-inline-start: 100%;
 
     @include breakpoint-down(md) {
       inset-inline-end: -$spacing-06;
@@ -573,12 +584,10 @@
     display: flex;
     overflow: hidden;
     flex: 0 0 auto;
-    align-items: center;
+    align-items: flex-start;
     justify-content: flex-end;
-    block-size: $spacing-07;
     gap: $spacing-03;
     inline-size: 100%;
-    margin-block-start: -14px;
 
     > * {
       flex-shrink: 0;
@@ -588,6 +597,12 @@
       justify-content: flex-start;
       margin-inline-end: 0;
     }
+  }
+
+  // createOverflowHandler marks overflowed items with [data-hidden].
+  // Hide them so only the overflow menu button remains visible.
+  .#{$block-class}__content__header-actions [data-hidden]:not([data-fixed]) {
+    display: none;
   }
 
   .#{$block-class}__header-content,
@@ -738,6 +753,9 @@
     .#{$block-class}__header-content-wrapper {
       display: flex;
       flex-direction: column;
+      justify-content: center;
+      gap: 0;
+      padding-inline-start: 0;
     }
 
     .#{$block-class}__header-title {
@@ -761,4 +779,10 @@
       }
     }
   }
+}
+
+// todo:  this is to position close button and ai label , this can revisited and removed once modalv12 design intent changes is done
+.#{$prefix}--modal-close-button {
+  inset-block-start: $spacing-05;
+  inset-inline-end: $spacing-05;
 }
