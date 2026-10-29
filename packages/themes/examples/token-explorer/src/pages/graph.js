@@ -15,8 +15,11 @@ import {
   statusTokens,
   contentSwitcherTokens,
 } from '../../../../src';
-import { TokenFormat, group } from '../../../../src/tokens';
-import * as componentGroups from '../../../../src/tokens/components';
+import {
+  groups,
+  componentGroups,
+  toJsName,
+} from '../../../shared/token-metadata';
 
 import { tokens } from '../tokens';
 
@@ -33,10 +36,7 @@ const COMP_TOKENS = Object.assign(
 const THEME_KEY = { white: 'whiteTheme', g10: 'g10', g90: 'g90', g100: 'g100' };
 
 function resolveColor(theme, tokenName) {
-  const jsName = TokenFormat.convert({
-    name: tokenName,
-    format: TokenFormat.formats.js,
-  });
+  const jsName = toJsName(tokenName);
   // Check component tokens first (they aren't in themes.white/g10/...)
   const compEntry = COMP_TOKENS[jsName];
   if (compEntry != null) {
@@ -64,7 +64,7 @@ function getAlias(theme, tokenName) {
 
 // Static tree data
 
-const rootSubGroups = group.getTokenGroups().filter((g) => g.name !== 'All');
+const rootSubGroups = groups.filter((g) => g.name !== 'All');
 
 const CATEGORIES = [
   {
@@ -73,15 +73,13 @@ const CATEGORIES = [
     groups: rootSubGroups.map((g) => ({
       id: `root-${g.name}`,
       label: g.name,
-      tokens: g.getTokens(),
+      tokens: g.tokens,
     })),
   },
-  ...Object.values(componentGroups).map((g) => ({
+  ...componentGroups.map((g) => ({
     id: `comp-${g.name}`,
     label: g.name,
-    groups: [
-      { id: `comp-${g.name}-group`, label: g.name, tokens: g.getTokens() },
-    ],
+    groups: [{ id: `comp-${g.name}-group`, label: g.name, tokens: g.tokens }],
   })),
 ];
 

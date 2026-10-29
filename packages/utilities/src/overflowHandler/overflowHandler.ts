@@ -126,15 +126,7 @@ export function updateOverflowHandler({
         visibleItems.push(items[i]);
         accumulated += size;
       } else {
-        // Always show at least one item when the container has space: if nothing
-        // has been made visible yet and the container is not zero-sized, force
-        // the first item in so the container never appears completely empty.
-        if (visibleItems.length === 0 && i === 0 && containerSize > 0) {
-          visibleItems.push(items[i]);
-          breakIndex = i + 1;
-        } else {
-          breakIndex = i;
-        }
+        breakIndex = i;
         break;
       }
     }

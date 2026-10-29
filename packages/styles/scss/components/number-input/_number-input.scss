@@ -22,32 +22,7 @@
 @use '../../utilities/convert';
 @use '../../utilities/z-index' as *;
 @use '../../utilities/layout';
-
-/// Space between the invalid/warning icon and the rule divider beside it.
-/// Clamps to 8px ($spacing-03) for `xs` and `sm`, and 16px ($spacing-05) for
-/// `md` and `lg`.
-/// @access private
-/// @group number-input
-$-icon-gap: clamp(
-  $spacing-03,
-  layout.size('height') - $spacing-06,
-  $spacing-05
-);
-
-/// Space between the AI label and each of the rule dividers surrounding it,
-/// 8px for `xs` and `sm` and 16px for `md`, + 1px to account for the divider itself
-/// @access private
-/// @group number-input
-$-ai-label-gap: clamp(
-  convert.to-rem(9px),
-  layout.size('height') - $spacing-06 + convert.to-rem(1px),
-  convert.to-rem(17px)
-);
-
-/// The whole AI label cluster: a gap, the 16px icon, and another gap.
-/// @access private
-/// @group number-input
-$-ai-label-cluster: calc(2 * #{$-ai-label-gap} + #{convert.to-rem(16px)});
+@use './vars' as *;
 
 /// Number input styles
 /// @access public
@@ -71,8 +46,12 @@ $-ai-label-cluster: calc(2 * #{$-ai-label-gap} + #{convert.to-rem(16px)});
     input[type='text'] {
     // steppers + divider->icon gap + 16px icon + 16px padding
     padding-inline-end: calc(
-      2 * layout.size('height') + #{$-icon-gap} + 2 * $spacing-05
+      2 * layout.size('height') + #{$number-input-icon-gap} + 2 * $spacing-05
     );
+
+    @if enabled('enable-v12-release') {
+      padding-inline-end: $number-input-padding-end-with-icon-or-decorator;
+    }
   }
 
   .#{$prefix}--number input[type='number'],
@@ -115,6 +94,8 @@ $-ai-label-cluster: calc(2 * #{$-ai-label-gap} + #{convert.to-rem(16px)});
             $border-strong 100%
           )
           border-box;
+      padding-inline: $spacing-05
+        calc(#{$number-input-controls-width} + #{$spacing-03});
     }
 
     &:focus {
@@ -143,8 +124,12 @@ $-ai-label-cluster: calc(2 * #{$-ai-label-gap} + #{convert.to-rem(16px)});
     &[data-invalid] {
       // steppers + divider->icon gap + 16px icon + 16px padding
       padding-inline-end: calc(
-        2 * layout.size('height') + #{$-icon-gap} + 2 * $spacing-05
+        2 * layout.size('height') + #{$number-input-icon-gap} + 2 * $spacing-05
       );
+
+      @if enabled('enable-v12-release') {
+        padding-inline-end: $number-input-padding-end-with-icon-or-decorator;
+      }
     }
   }
 
@@ -180,6 +165,12 @@ $-ai-label-cluster: calc(2 * #{$-ai-label-gap} + #{convert.to-rem(16px)});
     inset-block-start: 50%;
     inset-inline-end: 0;
     transform: translateY(-50%);
+
+    @if enabled('enable-v12-release') {
+      gap: $number-input-controls-gap;
+      inline-size: fit-content;
+      margin-inline-end: $number-input-controls-margin;
+    }
   }
 
   .#{$prefix}--number__control-btn {
@@ -219,11 +210,17 @@ $-ai-label-cluster: calc(2 * #{$-ai-label-gap} + #{convert.to-rem(16px)});
 
     @if enabled('enable-v12-release') {
       border: 1px solid transparent;
-      border-radius: $border-radius-04;
+      border-radius: $border-radius-max;
       background-clip: padding-box;
+      block-size: $number-input-control-btn-size;
+      inline-size: $number-input-control-btn-size;
 
       &:hover {
         box-shadow: none;
+      }
+
+      &:active {
+        background-color: $background-active;
       }
     }
   }
@@ -264,6 +261,7 @@ $-ai-label-cluster: calc(2 * #{$-ai-label-gap} + #{convert.to-rem(16px)});
     outline-offset: -2px;
 
     @if enabled('enable-v12-release') {
+      border-width: 1px;
       border-color: transparent;
     }
   }
@@ -277,6 +275,10 @@ $-ai-label-cluster: calc(2 * #{$-ai-label-gap} + #{convert.to-rem(16px)});
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn:last-of-type:hover {
     box-shadow: -4px 0 0 -2px $focus inset;
+
+    @if enabled('enable-v12-release') {
+      box-shadow: none;
+    }
   }
 
   // add invalid box-shadow to number controls only when invalid input is not focused
@@ -289,6 +291,10 @@ $-ai-label-cluster: calc(2 * #{$-ai-label-gap} + #{convert.to-rem(16px)});
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn:last-of-type:hover {
     box-shadow: -4px 0 0 -2px $support-error inset;
+
+    @if enabled('enable-v12-release') {
+      box-shadow: none;
+    }
   }
 
   .#{$prefix}--number
@@ -306,6 +312,7 @@ $-ai-label-cluster: calc(2 * #{$-ai-label-gap} + #{convert.to-rem(16px)});
     outline-offset: -2px;
 
     @if enabled('enable-v12-release') {
+      border-width: 1px;
       border-color: transparent;
     }
   }
@@ -390,7 +397,16 @@ $-ai-label-cluster: calc(2 * #{$-ai-label-gap} + #{convert.to-rem(16px)});
     fill: $support-error;
 
     // steppers + gap from divider to this icon
-    inset-inline-end: calc(2 * layout.size('height') + #{$-icon-gap});
+    inset-inline-end: calc(
+      2 * layout.size('height') + #{$number-input-icon-gap}
+    );
+
+    @if enabled('enable-v12-release') {
+      // controls + the same spacing used between the icon and the decorator
+      inset-inline-end: calc(
+        #{$number-input-controls-width} + #{layout.size('icon-gap')}
+      );
+    }
   }
 
   .#{$prefix}--number__invalid + .#{$prefix}--number__rule-divider {
@@ -496,8 +512,16 @@ $-ai-label-cluster: calc(2 * #{$-ai-label-gap} + #{convert.to-rem(16px)});
   .#{$prefix}--number__input-wrapper--slug .#{$prefix}--slug {
     position: absolute;
     inset-block-start: 50%;
-    inset-inline-end: calc(2 * layout.size('height') + #{$-ai-label-gap});
+    inset-inline-end: calc(
+      2 * layout.size('height') + #{$number-input-ai-label-gap}
+    );
     transform: translateY(-50%);
+
+    @if enabled('enable-v12-release') {
+      // sit directly next to the controls
+      inset-inline-end: $number-input-controls-width;
+      margin-inline-end: layout.size('icon-gap');
+    }
   }
 
   .#{$prefix}--number__input-wrapper--decorator
@@ -538,7 +562,7 @@ $-ai-label-cluster: calc(2 * #{$-ai-label-gap} + #{convert.to-rem(16px)});
   .#{$prefix}--number__input-wrapper--slug .#{$prefix}--ai-label::before,
   .#{$prefix}--number__input-wrapper--slug .#{$prefix}--slug::before {
     display: none;
-    inset-inline-start: calc(-1 * #{$-ai-label-gap});
+    inset-inline-start: calc(-1 * #{$number-input-ai-label-gap});
   }
 
   .#{$prefix}--number__input-wrapper--decorator
@@ -566,6 +590,10 @@ $-ai-label-cluster: calc(2 * #{$-ai-label-gap} + #{convert.to-rem(16px)});
     .#{$prefix}--number__control-btn::before {
     display: block;
     inset-inline-end: calc(layout.size('height'));
+
+    @if enabled('enable-v12-release') {
+      display: none;
+    }
   }
 
   .#{$prefix}--number__input-wrapper--decorator
@@ -597,8 +625,19 @@ $-ai-label-cluster: calc(2 * #{$-ai-label-gap} + #{convert.to-rem(16px)});
   .#{$prefix}--number__input-wrapper--slug .#{$prefix}--number__invalid {
     // steppers + AI label cluster + the gap from its divider to this icon
     inset-inline-end: calc(
-      2 * layout.size('height') + #{$-ai-label-cluster} + #{$-icon-gap}
+      2 * layout.size('height') + #{$number-input-ai-label-cluster} + #{$number-input-icon-gap}
     );
+
+    @if enabled('enable-v12-release') {
+      // controls + gap + 16px decorator + gap, so the icon sits next to the
+      // decorator
+      inset-inline-end: calc(
+        #{$number-input-controls-width} +
+          #{layout.size('icon-gap')} +
+          #{convert.to-rem(16px)} +
+          #{layout.size('icon-gap')}
+      );
+    }
   }
 
   .#{$prefix}--number__input-wrapper--decorator:has(
@@ -613,6 +652,10 @@ $-ai-label-cluster: calc(2 * #{$-ai-label-gap} + #{convert.to-rem(16px)});
   .#{$prefix}--number__input-wrapper--slug:has(.#{$prefix}--number__invalid)
     .#{$prefix}--slug::before {
     display: block;
+
+    @if enabled('enable-v12-release') {
+      display: none;
+    }
   }
 
   .#{$prefix}--number
@@ -629,8 +672,12 @@ $-ai-label-cluster: calc(2 * #{$-ai-label-gap} + #{convert.to-rem(16px)});
     input[type='text'] {
     // steppers + divider->label gap + 16px AI label + 16px padding
     padding-inline-end: calc(
-      2 * layout.size('height') + #{$-ai-label-gap} + 2 * $spacing-05
+      2 * layout.size('height') + #{$number-input-ai-label-gap} + 2 * $spacing-05
     );
+
+    @if enabled('enable-v12-release') {
+      padding-inline-end: $number-input-padding-end-with-icon-or-decorator;
+    }
   }
 
   .#{$prefix}--number
@@ -647,9 +694,21 @@ $-ai-label-cluster: calc(2 * #{$-ai-label-gap} + #{convert.to-rem(16px)});
     input {
     // steppers + AI label cluster + icon gap + icon + 16px padding
     padding-inline-end: calc(
-      2 * layout.size('height') + #{$-ai-label-cluster} + #{$-icon-gap} + 2 *
-        $spacing-05
+      2 * layout.size('height') + #{$number-input-ai-label-cluster} + #{$number-input-icon-gap} +
+        2 * $spacing-05
     );
+
+    @if enabled('enable-v12-release') {
+      // Inline-end padding when both a decorator and the invalid/warning icon are
+      // present: 8px clear of the outermost icon.
+      padding-inline-end: calc(
+        #{$number-input-controls-width} +
+          2 *
+          #{layout.size('icon-gap')} +
+          #{convert.to-rem(32px)} +
+          #{$spacing-03}
+      );
+    }
   }
 
   .#{$prefix}--number__input-wrapper--decorator

@@ -31,8 +31,9 @@ const IGNORE_EXAMPLE_DIRS = new Set([
   'storybook',
   'sass-modules',
   'token-explorer',
-  'motion-tokens-dtcg',
   'colors-explorer',
+  // modules shared by the examples of a package, not a standalone example
+  'shared',
 ]);
 
 // Install example app deps. Example lockfiles intentionally not committed.
@@ -211,34 +212,32 @@ async function main() {
   );
   reporter.success('Built example `colors-explorer` in package `colors`');
 
-  // Build motion-tokens-dtcg separately (same pattern as the themes token-explorer).
-  const motionDtcgExample = {
-    filepath: path.join(
-      PACKAGES_DIR,
-      'motion',
-      'examples',
-      'motion-tokens-dtcg'
-    ),
-    name: 'motion-tokens-dtcg',
+  // Build the motion token-explorer separately (same pattern as colors-explorer).
+  const motionExplorerExample = {
+    filepath: path.join(PACKAGES_DIR, 'motion', 'examples', 'token-explorer'),
+    name: 'token-explorer',
   };
-  reporter.info('Building example `motion-tokens-dtcg` in package `motion`');
-  const motionDtcgDir = path.join(
+  reporter.info('Building example `token-explorer` in package `motion`');
+  const motionExplorerDir = path.join(
     BUILD_DIR,
     'motion',
     'examples',
-    'motion-tokens-dtcg'
+    'token-explorer'
   );
-  await fs.ensureDir(motionDtcgDir);
-  await installExample(motionDtcgExample.filepath, 'motion:motion-tokens-dtcg');
-  const motionDtcgBuild = spawn.sync('yarn', ['build'], {
+  await fs.ensureDir(motionExplorerDir);
+  await installExample(motionExplorerExample.filepath, 'motion:token-explorer');
+  const motionExplorerBuild = spawn.sync('yarn', ['build'], {
     stdio: 'inherit',
-    cwd: motionDtcgExample.filepath,
+    cwd: motionExplorerExample.filepath,
   });
-  if (motionDtcgBuild.status !== 0) {
-    throw new Error('Error building example motion-tokens-dtcg for motion');
+  if (motionExplorerBuild.status !== 0) {
+    throw new Error('Error building example token-explorer for motion');
   }
-  await fs.copy(path.join(motionDtcgExample.filepath, 'build'), motionDtcgDir);
-  reporter.success('Built example `motion-tokens-dtcg` in package `motion`');
+  await fs.copy(
+    path.join(motionExplorerExample.filepath, 'build'),
+    motionExplorerDir
+  );
+  reporter.success('Built example `token-explorer` in package `motion`');
 
   // Build token-explorer separately (it's a Next.js app excluded from the
   // auto-generated links above, but its static export goes into the same build tree).
@@ -302,7 +301,7 @@ async function main() {
     <h2><pre style="display:inline;"><code>@carbon/motion</code></pre></h2>
   </header>
   <ul>
-    <li><a href="./motion/examples/motion-tokens-dtcg/">preview (v12)</a></li>
+    <li><a href="./motion/examples/token-explorer/">preview (v12)</a></li>
   </ul>
 </section>`;
 
