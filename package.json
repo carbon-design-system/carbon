@@ -42,10 +42,7 @@
     "typescript-eslint": "8.72.0",
     "immutable": "^5.1.8",
     "tar@7.5.20": "7.5.22",
-    "vite@5.0.10": "6.4.4",
-    "@playwright/test": "1.46.1",
-    "memfs": "4.65.0",
-    "caniuse-lite": "^1.0.30001810"
+    "vite@5.0.10": "6.4.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^19.0.0",

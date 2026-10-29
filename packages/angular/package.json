@@ -60,7 +60,7 @@
     "@angular/platform-browser-dynamic": "^19.0.0",
     "@carbon/styles": "workspace:^",
     "@carbon/web-components": "workspace:^",
-    "@playwright/test": "^1.46.1",
+    "@playwright/test": "^1.36.2",
     "@storybook/addon-docs": "10.3.5",
     "@storybook/addon-links": "10.3.5",
     "@storybook/angular": "10.3.5",

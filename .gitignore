@@ -9,9 +9,6 @@ dist
 umd
 css
 docs/generated
-temp
-storybook-static
-storybook-static-v12
 
 # Angular
 /packages/angular/.angular/
@@ -76,8 +73,6 @@ package-lock.json
 # Playwright
 .playwright
 blob-report
-test-results
-playwright-report
 
 # Local token
 .env
