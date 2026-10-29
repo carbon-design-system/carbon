@@ -29,10 +29,20 @@ export interface GetStartedCardMetadata {
 export interface GetStartedCardProps {
   /** Additional class applied to the card. */
   className?: string;
+  /**
+   * Decorative element, for example an icon, placed at the top-right of the
+   * card's content area. Its click and key events don't activate the card.
+   */
+  decorator?: ReactNode;
   /** Disables the card. */
   disabled?: boolean;
   /** Icon rendered at the trailing edge of the card. Defaults to ArrowRight. */
   footerActionIcon?: ElementType;
+  /**
+   * Renders the media as a full-height `Card.Media` column at the trailing edge
+   * of the card, instead of beside the header. Requires `media`.
+   */
+  horizontal?: boolean;
   /** Label displayed above the title. */
   label?: ReactNode;
   /**
@@ -58,7 +68,8 @@ export interface GetStartedCardProps {
  * - `Card.Header`'s `headerMedia` holds the pictogram, or the sequence number
  *   when `sequence` is provided.
  * - `media` sits beside the header and may bleed past the card's top and
- *   bottom edges.
+ *   bottom edges. With `horizontal`, it fills a `Card.Media` column at the
+ *   trailing edge of the card instead.
  * - `Card.Title` renders the label above the title.
  * - `Card.Body` holds the metadata row (time and skill level).
  * - A clickable `Card` renders the trailing arrow affordance itself and makes
@@ -68,8 +79,10 @@ export const GetStartedCard = forwardRef<HTMLDivElement, GetStartedCardProps>(
   function GetStartedCard(
     {
       className,
+      decorator,
       disabled = false,
       footerActionIcon,
+      horizontal = false,
       label,
       media,
       metadata = [],
@@ -86,6 +99,7 @@ export const GetStartedCard = forwardRef<HTMLDivElement, GetStartedCardProps>(
     const titleId = useId();
     const sequenceId = useId();
     const hasSequence = sequence !== undefined && sequence !== null;
+    const isHorizontal = horizontal && !!media;
 
     const headerMedia = hasSequence ? (
       <span id={sequenceId} className={`${blockClass}__sequence`}>
@@ -100,10 +114,13 @@ export const GetStartedCard = forwardRef<HTMLDivElement, GetStartedCardProps>(
         {...rest}
         ref={ref}
         className={cx(blockClass, className, {
-          [`${blockClass}--with-media`]: media,
+          [`${blockClass}--with-media`]: media && !isHorizontal,
+          [`${blockClass}--horizontal`]: isHorizontal,
         })}
         clickable
+        decorator={decorator}
         disabled={disabled}
+        horizontal={isHorizontal}
         onClick={onClick}
         renderFooterIcon={footerActionIcon}
         aria-labelledby={hasSequence ? `${sequenceId} ${titleId}` : titleId}>
@@ -112,7 +129,9 @@ export const GetStartedCard = forwardRef<HTMLDivElement, GetStartedCardProps>(
             {title}
           </Card.Title>
         </Card.Header>
-        {media && <div className={`${blockClass}__media`}>{media}</div>}
+        {media && !isHorizontal && (
+          <div className={`${blockClass}__media`}>{media}</div>
+        )}
         <Card.Body>
           <div className={`${blockClass}__meta`}>
             {metadata.map(({ id, icon: Icon, iconDescription }) => (
@@ -123,6 +142,7 @@ export const GetStartedCard = forwardRef<HTMLDivElement, GetStartedCardProps>(
             ))}
           </div>
         </Card.Body>
+        {isHorizontal && <Card.Media>{media}</Card.Media>}
       </Card>
     );
   }

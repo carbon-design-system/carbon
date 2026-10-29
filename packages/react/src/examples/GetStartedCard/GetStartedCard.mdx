@@ -14,6 +14,7 @@ import * as stories from './GetStartedCard.stories';
 - [With sequence](#with-sequence)
 - [With media and pictogram](#with-media-and-pictogram)
 - [With media and sequence](#with-media-and-sequence)
+- [With horizontal media](#with-horizontal-media)
 - [With disabled](#with-disabled)
 - [Feedback](#feedback)
 
@@ -149,6 +150,39 @@ breakpoint.
     {
       title: 'Open in Stackblitz',
       onClick: () => stackblitzPrefillConfig(stories.withMediaAndSequence),
+    },
+  ]}
+/>
+
+## With horizontal media
+
+Add `horizontal` alongside `media` to render the image as a full-height column
+at the trailing edge of the card, using `Card.Media`. The card keeps its content
+on the start side and the arrow moves to sit beside the image. As with the other
+media variants, the image is decorative and is hidden below the `lg` breakpoint.
+
+Use `decorator` to place a small icon at the top-right of the content area. It
+is passed to the `Card`'s `decorator` slot, so interacting with it doesn't
+activate the card. Keep it decorative; do not use it to convey information.
+
+```jsx
+<GetStartedCard
+  label="Label"
+  title="Title"
+  pictogram={Crossroads}
+  decorator={<Incomplete size={20} aria-hidden="true" />}
+  media={<img src={horizontalMedia} alt="" />}
+  horizontal
+  metadata={metadata}
+/>
+```
+
+<Canvas
+  of={stories.withHorizontalMedia}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(stories.withHorizontalMedia),
     },
   ]}
 />

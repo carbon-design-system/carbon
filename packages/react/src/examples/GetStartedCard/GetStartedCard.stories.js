@@ -12,6 +12,7 @@ import { Default } from './example/preview-components/Default';
 import { WithSequence } from './example/preview-components/WithSequence';
 import { WithMediaAndPictogram } from './example/preview-components/WithMediaAndPictogram';
 import { WithMediaAndSequence } from './example/preview-components/WithMediaAndSequence';
+import { WithHorizontalMedia } from './example/preview-components/WithHorizontalMedia';
 import { WithDisabled } from './example/preview-components/WithDisabled';
 
 export default {
@@ -72,6 +73,18 @@ withMediaAndSequence.args = {
   label: 'Label',
   title: 'Title',
   sequence: 3,
+  disabled: false,
+};
+
+const WithHorizontalMediaTemplate = (args) => {
+  return <WithHorizontalMedia {...args} />;
+};
+
+export const withHorizontalMedia = WithHorizontalMediaTemplate.bind({});
+withHorizontalMedia.storyName = 'With horizontal media';
+withHorizontalMedia.args = {
+  label: 'Label',
+  title: 'Get start card example content goes here',
   disabled: false,
 };
 

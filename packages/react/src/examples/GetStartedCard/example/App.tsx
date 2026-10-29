@@ -11,6 +11,7 @@ import { Default } from './preview-components/Default';
 import { WithSequence } from './preview-components/WithSequence';
 import { WithMediaAndPictogram } from './preview-components/WithMediaAndPictogram';
 import { WithMediaAndSequence } from './preview-components/WithMediaAndSequence';
+import { WithHorizontalMedia } from './preview-components/WithHorizontalMedia';
 import { WithDisabled } from './preview-components/WithDisabled';
 import './styles/_story-styles.scss';
 
@@ -22,6 +23,7 @@ export const App = () => (
       <WithSequence />
       <WithMediaAndPictogram />
       <WithMediaAndSequence />
+      <WithHorizontalMedia />
       <WithDisabled />
     </div>
   </FeatureFlags>

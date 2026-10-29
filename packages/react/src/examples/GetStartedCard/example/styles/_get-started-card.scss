@@ -35,6 +35,12 @@
     inset-block-end: 0;
     inset-inline-end: 0;
   }
+
+  // Give the decorator more breathing room than the Card's default inset.
+  .#{$prefix}--card__decorator {
+    inset-block-start: $spacing-06;
+    inset-inline-end: $spacing-06;
+  }
 }
 
 // The brand colors only apply while the card is enabled, so a disabled card
@@ -88,6 +94,53 @@
     z-index: 1;
     grid-column: 1 / -1;
     grid-row: 2;
+  }
+}
+
+// Horizontal media: `Card.Media` becomes a full-height column at the trailing
+// edge of the card. Card owns the flex layout and the media's corner radius, so
+// only the get-started specifics are set here. `Card.Media` sets its own
+// `--card--media-width` inline on the media element, which would override a
+// value set on the card, so the width lives in a get-started variable that
+// drives both the media column and the arrow. That keeps the arrow beside the
+// media instead of on top of it or floating away from it.
+.#{$prefix}--card.#{$prefix}--get-started-card--horizontal {
+  --#{$prefix}--get-started-card--media-width: 48%;
+
+  flex-direction: row;
+  min-block-size: 14rem;
+
+  // Push the metadata row to the bottom of the content column.
+  .#{$prefix}--card__content > .#{$prefix}--card__body {
+    flex: 0 0 auto;
+    margin-block-start: auto;
+  }
+
+  // The image fills the column without setting the card's height.
+  .#{$prefix}--card__media {
+    position: relative;
+    flex-basis: var(--#{$prefix}--get-started-card--media-width);
+
+    > * {
+      position: absolute;
+      inset: 0;
+    }
+  }
+
+  .#{$prefix}--card__clickable-footer {
+    inset-inline-end: var(--#{$prefix}--get-started-card--media-width);
+  }
+
+  // As with the inline media, the image is decorative and is dropped on small
+  // screens, where the arrow returns to the card's edge.
+  @include breakpoint-down(lg) {
+    .#{$prefix}--card__media {
+      display: none;
+    }
+
+    .#{$prefix}--card__clickable-footer {
+      inset-inline-end: 0;
+    }
   }
 }
 
