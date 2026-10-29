@@ -83,8 +83,8 @@ so you can write v3-ready code today.
   (`import { customElement } from 'lit/decorators.js'`).
 - **The `es-custom` build** (`cds-custom-*` elements), replaced by custom tag
   names, a prefixed build, and scoped registries.
-- **The `custom-elements.json` WCA manifest**, replaced by the standard Custom
-  Elements Manifest (CEM).
+- **The `custom-elements.json` WCA manifest**, replaced in v3 by the standard
+  Custom Elements Manifest (CEM) under the same file name.
 
 **Breaking in v3:** In v3, importing a component's class file no longer
 registers its element, e.g. importing `button/button.js` instead of

@@ -232,13 +232,67 @@ composite's internals have to be registered there too.
 
 ## The WCA manifest is replaced by CEM
 
-`custom-elements.json` is generated today in Web Component Analyzer (WCA)
-format. That format is deprecated in v2 and removed in v3, replaced by the
-standard
+`custom-elements.json` is now a standard
 [Custom Elements Manifest (CEM)](https://github.com/webcomponents/custom-elements-manifest).
-The deprecated manifest carries a `_deprecated` marker at the top of the file
-and the build prints a deprecation warning. Tracking:
+The Web Component Analyzer (WCA) format it used in v2 is gone, along with the
+`_deprecated` marker that announced the change. The file keeps its name and its
+`@carbon/web-components/custom-elements.json` export, and `package.json` now
+points tools at it through the `customElements` field. Tracking:
 [#20670](https://github.com/carbon-design-system/carbon/issues/20670).
+
+Editors, Storybook, and documentation tools that understand CEM need no changes.
+Code that reads the file itself has to move from the flat `tags` list to
+`modules`, where each element is a class declaration that has a `tagName`:
+
+```js
+// v2 (WCA)
+import manifest from '@carbon/web-components/custom-elements.json';
+
+for (const tag of manifest.tags) {
+  tag.name; // "cds-button"
+  tag.attributes; // [{ name, type, default, description }]
+  tag.properties; // [{ name, attribute, type, default, description }]
+  tag.events; // [{ name, description }]
+  tag.slots;
+  tag.cssParts;
+}
+```
+
+```js
+// v3 (CEM)
+import manifest from '@carbon/web-components/custom-elements.json' with { type: 'json' };
+
+for (const module of manifest.modules) {
+  for (const declaration of module.declarations ?? []) {
+    if (!declaration.tagName) continue;
+    declaration.tagName; // "cds-button"
+    declaration.attributes; // [{ name, fieldName, type: { text }, default, description }]
+    declaration.members; // properties and methods: [{ kind: 'field' | 'method', name, ... }]
+    declaration.events; // [{ name, type: { text }, description }]
+    declaration.slots;
+    declaration.cssParts;
+  }
+}
+```
+
+What else is different:
+
+- **Types are nested.** A type is `{ text: "boolean" }` rather than the string
+  `"boolean"`.
+- **Enumerated attributes list their values.** `kind` on `cds-button` is typed
+  `'primary' | 'secondary' | …` rather than `BUTTON_KIND`.
+- **Properties are `members`.** They sit alongside methods, each marked with a
+  `kind`. Members inherited from a base class or mixin carry `inheritedFrom`.
+  `private` members are left out; `protected` ones are included for subclasses
+  and marked with `privacy`.
+- **Attribute names are lowercase**, as the browser matches them. An attribute
+  WCA listed as `isFlush` is `isflush`.
+- **Modules name the shipped files.** `module.path` is the file under `es/` that
+  you import, such as `es/components/button/button.js`.
+- **Registration is recorded.** A module that registers an element exports a
+  `custom-element-definition` for it. That module is normally the barrel,
+  `es/components/button/index.js`, rather than the class file, which matches
+  what you import to use the element.
 
 ## Form participation moves to `ElementInternals`
 
