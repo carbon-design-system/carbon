@@ -689,7 +689,7 @@ export const HeaderBaseWNavigationActionsAndSideNav = {
               <cds-side-nav-menu-item href="${linksHref}">
                 Link
               </cds-side-nav-menu-item>
-              <cds-side-nav-menu-item aria-current="page" href="${linksHref}">
+              <cds-side-nav-menu-item href="${linksHref}">
                 Link
               </cds-side-nav-menu-item>
               <cds-side-nav-menu-item href="${linksHref}">
