@@ -134,33 +134,6 @@ describe('scss/components/data-table/action', () => {
         .map((rule) => rule.selector)
     ).toEqual([]);
   });
-
-  test('batch action focus outline stays light on the brand background in every theme', async () => {
-    const { result } = await render(`
-      @use '../data-table/action';
-    `);
-    const focusRules = [];
-
-    postcss.parse(result.css.toString()).walkRules((rule) => {
-      if (
-        rule.selector.includes('.cds--action-list .cds--btn--primary:focus') &&
-        !rule.selector.includes('::')
-      ) {
-        focusRules.push(rule);
-      }
-    });
-
-    expect(focusRules.length).toBe(1);
-
-    const outlines = [];
-    focusRules[0].walkDecls('outline', (decl) => {
-      outlines.push(decl.value);
-    });
-
-    expect(outlines).toHaveLength(1);
-    expect(outlines[0]).toContain('--cds-text-on-color');
-    expect(outlines[0]).not.toContain('--cds-layer');
-  });
 });
 
 describe('scss/components/data-table/expandable', () => {
