@@ -196,6 +196,7 @@ const meta: Meta<any> = {
   decorators: [
     moduleMetadata({
       imports: [
+        DropdownComponent,
         DropdownItemComponent,
         DropdownSkeletonComponent,
         AiLabelComponent,

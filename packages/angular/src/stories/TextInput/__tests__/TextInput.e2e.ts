@@ -19,7 +19,7 @@ const story = (id: string) => `/iframe.html?id=${id}&viewMode=story`;
 test.describe('TextInputComponent (Layer 2)', () => {
   test.describe('ngModel', () => {
     test.beforeEach(async ({ page }) => {
-      await page.goto(story('components-textinput--ng-model'));
+      await page.goto(story('components-text-input--ng-model'));
       await page.waitForSelector('cds-ng-text-input');
     });
 
@@ -37,7 +37,7 @@ test.describe('TextInputComponent (Layer 2)', () => {
 
   test.describe('reactive forms', () => {
     test.beforeEach(async ({ page }) => {
-      await page.goto(story('components-textinput--reactive-form'));
+      await page.goto(story('components-text-input--reactive-form'));
       await page.waitForSelector('cds-ng-text-input');
     });
 
@@ -69,7 +69,7 @@ test.describe('TextInputComponent (Layer 2)', () => {
   });
 
   test('projects named slots into the shadow root', async ({ page }) => {
-    await page.goto(story('components-textinput--slots'));
+    await page.goto(story('components-text-input--slots'));
     await page.waitForSelector('cds-ng-text-input');
     await expect(page.getByTestId('label-slot')).toBeVisible();
     await expect(page.getByTestId('helper-slot')).toBeVisible();

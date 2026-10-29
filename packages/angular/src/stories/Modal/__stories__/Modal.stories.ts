@@ -31,6 +31,7 @@ import {
 // ─── WC-parity stories (one-for-one with @carbon/web-components Modal) ────────
 
 const modalImports = [
+  ModalComponent,
   ModalBodyComponent,
   ModalBodyContentComponent,
   ModalCloseButtonComponent,

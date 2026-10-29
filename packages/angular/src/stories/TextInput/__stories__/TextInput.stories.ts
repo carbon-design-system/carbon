@@ -174,6 +174,7 @@ const meta: Meta<any> = {
   decorators: [
     moduleMetadata({
       imports: [
+        TextInputComponent,
         TextInputSkeletonComponent,
         AiLabelComponent,
         AiLabelActionButtonComponent,

@@ -325,6 +325,8 @@ export const Events: Story = {
           (accordionItemToggled)="outputCount = outputCount + 1"
           (cds-ng-accordion-item-toggled)="domCount = domCount + 1"
         >Content 1</cds-ng-accordion-item>
+        <cds-ng-accordion-item title="Section 2" [open]="true">Content 2</cds-ng-accordion-item>
+        <cds-ng-accordion-item title="Section 3" [disabled]="true">Content 3</cds-ng-accordion-item>
       </cds-ng-accordion>
       <p data-testid="output-count">{{ outputCount }}</p>
       <p data-testid="dom-count">{{ domCount }}</p>

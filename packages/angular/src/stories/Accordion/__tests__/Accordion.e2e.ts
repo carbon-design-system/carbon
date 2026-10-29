@@ -27,7 +27,7 @@ test.describe('AccordionComponent (Layer 2)', () => {
   });
 
   test('forwards open and disabled to the items', async ({ page }) => {
-    await page.goto(story('components-accordion--default'));
+    await page.goto(story('components-accordion--events'));
     await page.waitForSelector('cds-ng-accordion-item');
     const items = page.locator('cds-ng-accordion-item');
     await expect(items.nth(0)).not.toHaveAttribute('open', /.*/);
@@ -48,7 +48,7 @@ test.describe('AccordionComponent (Layer 2)', () => {
   }) => {
     await page.goto(story('components-accordion--events'));
     await page.waitForSelector('cds-ng-accordion-item');
-    await page.locator('cds-ng-accordion-item button').click();
+    await page.locator('cds-ng-accordion-item button').first().click();
     await expect(page.getByTestId('dom-count')).toHaveText('1');
     // The generated `accordionItemToggled` @Output must fire once as well, not
     // twice and not zero times.
