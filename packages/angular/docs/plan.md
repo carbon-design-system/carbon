@@ -1051,6 +1051,12 @@ signals the instability period explicitly.
 
 ## 13. Test strategy
 
+> **Update 2026-10-29: superseded.** The web components' test suites are the
+> source of truth and run against the vendored copy (`yarn test:wc`); nothing is
+> ported per component. Angular tests only check that every wrapper mounts, that
+> inputs, outputs and forms work, and that every story renders. See ADR 0019,
+> "Tests". The rest of this section is the earlier plan, kept as a record.
+
 ### Test coverage in sibling packages
 
 Before defining the Angular test strategy, it is worth understanding what the

@@ -81,8 +81,9 @@ When a new Web Component is added to `@carbon/web-components`:
    wrapper to `.entries/<entry>/<Name>/`.
 2. Rebuild the secondary entries with `node tasks/build-entries/index.js`
    (`yarn build` and `yarn storybook` do both steps).
-3. Write the stories and the parity spec by hand. See
-   [`porting-web-component-tests.md`](../../docs/porting-web-component-tests.md).
+3. Write the stories by hand (ADR 0019). No component tests are needed:
+   `src/__tests__/wrappers.spec.ts` mounts every wrapper and
+   `src/__tests__/stories.e2e.ts` renders every story.
 4. Run `yarn test` from `packages/angular`.
 
 ## Manifest input

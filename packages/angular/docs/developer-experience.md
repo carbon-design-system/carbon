@@ -190,8 +190,7 @@ Each of these is proposed, none is built:
    (`provideExperimentalZonelessChangeDetection`) too. Unchecked; needs a
    zoneless test app.
 3. **Tests, stories and docs written for Angular**, so teams need not read the
-   web components documentation. Today only 7 of 296 components have stories and
-   parity specs.
+   web components documentation. Today only 7 of 296 components have stories.
 
 ## Implications for decisions
 

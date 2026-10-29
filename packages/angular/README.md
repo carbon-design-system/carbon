@@ -69,9 +69,6 @@ Import Carbon global styles once in your app entry:
 - **[Architecture & Implementation Plan](docs/plan.md)** — Core design
   decisions, wrapper architecture, component tiers, CVA mapping, and test
   strategy.
-- **[Porting web component tests](docs/porting-web-component-tests.md)** — How
-  to reuse the `@carbon/web-components` tests to verify each wrapper. Required
-  for every new component, alongside its stories.
 - **[Status and open questions](docs/status-and-open-questions.md)** — The
   living record of what is built, what is open, and the suggested next steps.
   `plan.md` and `milestones.md` are partly out of date; this file is current.
@@ -106,9 +103,10 @@ Building requires `packages/web-components/es/` to exist. Run
 ### Adding a component
 
 Wrappers are generated, not scaffolded. See the generator
-[README](tasks/generate-wrappers/README.md) for how to add one, and
-[`docs/porting-web-component-tests.md`](docs/porting-web-component-tests.md) for
-the stories and parity spec each component needs.
+[README](tasks/generate-wrappers/README.md) for how to add one. A new component
+needs stories (ADR 0019) but no tests of its own: the web components' suites run
+against the vendored copy (`yarn test:wc`), and every wrapper and story is
+checked automatically (`yarn test`, `yarn e2e`).
 
 ## License
 

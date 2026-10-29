@@ -226,8 +226,21 @@ uses `cds-ng-*` selectors and the vendored WC copy — exactly what consumers ge
   prevent re-evaluation of Option B in the future without the context of why it
   was rejected.
 
-## Related: tests ship with stories
+## Tests
 
-Each new component also needs a Jest parity spec ported from the corresponding
-`@carbon/web-components` unit tests, run against the real web component. See
-`packages/angular/docs/porting-web-component-tests.md`.
+**Update 2026-10-29.** Components do not get Angular test files. The
+`@carbon/web-components` test suites are the source of truth for component
+behavior: `yarn test:wc` runs them, rewritten for the `cds-ng` prefix, against
+the vendored copy that `@carbon/angular` ships. Angular tests cover only what is
+Angular's:
+
+- `src/__tests__/wrappers.spec.ts` mounts every generated wrapper.
+- `src/__tests__/generated-wrappers.spec.ts` covers input forwarding, outputs
+  and forms.
+- `src/__tests__/stories.e2e.ts` renders every story in Chromium and runs its
+  `play()` function, so Angular-specific checks for a component belong in its
+  stories.
+
+The per-component parity specs, binding specs and Playwright files, and the
+`check-parity.js` CI check, were removed. Nothing in CI enforces story parity
+(rule 3); it is checked in review.

@@ -314,24 +314,3 @@ export const WithLayer: StoryObj<typeof defaultArgs> = {
     `,
   }),
 };
-
-// Angular-only: Event count verification (used by Accordion.e2e.ts)
-export const Events: Story = {
-  tags: ['!dev', '!autodocs'],
-  render: () => ({
-    props: { outputCount: 0, domCount: 0 },
-    template: `
-      <cds-ng-accordion>
-        <cds-ng-accordion-item
-          title="Section 1"
-          (accordionItemToggled)="outputCount = outputCount + 1"
-          (cds-ng-accordion-item-toggled)="domCount = domCount + 1"
-        >Content 1</cds-ng-accordion-item>
-        <cds-ng-accordion-item title="Section 2" [open]="true">Content 2</cds-ng-accordion-item>
-        <cds-ng-accordion-item title="Section 3" [disabled]="true">Content 3</cds-ng-accordion-item>
-      </cds-ng-accordion>
-      <p data-testid="output-count">{{ outputCount }}</p>
-      <p data-testid="dom-count">{{ domCount }}</p>
-    `,
-  }),
-};

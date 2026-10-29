@@ -561,9 +561,6 @@ jobs:
       - name: Build @carbon/angular
         if: ${{ steps.filter.outputs.angular == 'true' }}
         run: yarn workspace @carbon/angular build
-      - name: Check @carbon/angular parity (test titles and story names)
-        if: ${{ steps.filter.outputs.angular == 'true' }}
-        run: yarn workspace @carbon/angular check:parity
       - name: Run @carbon/angular tests
         if: ${{ steps.filter.outputs.angular == 'true' }}
         run: yarn workspace @carbon/angular test --ci --coverage
@@ -575,6 +572,9 @@ jobs:
           flags: angular
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      - name: Run the web components tests against the vendored copy
+        if: ${{ steps.filter.outputs.angular == 'true' }}
+        run: yarn workspace @carbon/angular test:wc
       - name: Build @carbon/angular Storybook
         if: ${{ steps.filter.outputs.angular == 'true' }}
         run: yarn workspace @carbon/angular storybook:build

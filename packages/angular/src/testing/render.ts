@@ -19,8 +19,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
  * `render()` is the Angular counterpart of open-wc's `fixture(html\`...\`)`:
  * give it a template and it returns the host element, with the real web
  * components already rendered.
- *
- * See `docs/porting-web-component-tests.md`.
  */
 
 export interface Rendered<T> {

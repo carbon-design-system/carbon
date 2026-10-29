@@ -60,6 +60,36 @@ if (typeof ResizeObserver === 'undefined') {
 }
 
 /**
+ * jsdom does not implement `IntersectionObserver` or `matchMedia`, which some
+ * web components use when they connect. Shim them so every wrapper can mount.
+ */
+if (typeof IntersectionObserver === 'undefined') {
+  (
+    global as unknown as { IntersectionObserver: unknown }
+  ).IntersectionObserver = class {
+    observe() {}
+    unobserve() {}
+    disconnect() {}
+    takeRecords() {
+      return [];
+    }
+  };
+}
+if (typeof window.matchMedia !== 'function') {
+  window.matchMedia = (query: string) =>
+    ({
+      matches: false,
+      media: query,
+      onchange: null,
+      addEventListener: () => undefined,
+      removeEventListener: () => undefined,
+      addListener: () => undefined,
+      removeListener: () => undefined,
+      dispatchEvent: () => false,
+    }) as MediaQueryList;
+}
+
+/**
  * jsdom does not implement `Element.prototype.scrollIntoView`. `cds-ai-label`
  * (`CDSAILabel`, from the toggletip) calls it in `updated()`, and the resulting
  * TypeError is an uncaught exception that ends the Jest worker. Shim it as a

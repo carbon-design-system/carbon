@@ -14,12 +14,12 @@ remaining work, in suggested order, is under
 | Vendoring ([`tasks/vendor.js`](../tasks/vendor.js))                          | Vendors `@carbon/web-components` into `.entries/vendor` with `cds-ng` prefix. `vendorPrefixedCopy()` reuses the vendor tree until the `web-components/es` build changes (newest file time, kept in `.entries/vendor/.source-stamp`).                                                                                                                                        |
 | Build                                                                        | `yarn build`: generate-wrappers → build-entries → ng-packagr. 97 secondary entries + primary. ~57 s, 1.3 MB packed, no warnings.                                                                                                                                                                                                                                            |
 | Storybook                                                                    | Builds clean. Stories use `cds-ng-*` throughout via `tsconfig.storybook.json` aliases. Requires Angular CLI builder target (`ng run carbon-angular:storybook`).                                                                                                                                                                                                             |
-| Jest                                                                         | **20 suites, 384 passed, 88 `it.todo`, 0 failures.** All 7 parity specs and all 7 binding specs (`.ng.spec.ts`) complete.                                                                                                                                                                                                                                                   |
-| Parity CI script ([`tasks/check-parity.js`](../tasks/check-parity.js))       | Checks WC `it(` titles vs. Angular parity specs, and WC `export const` story names vs. Angular stories. Runs in the `angular` CI job after build, before Jest. Exits non-zero on any gap.                                                                                                                                                                                   |
+| Jest                                                                         | **3 suites, 308 passed, 1 skipped.** `wrappers.spec.ts` mounts every generated wrapper (9 known web component mount errors listed, Table skipped); `generated-wrappers.spec.ts` covers inputs, outputs and forms; `child-registration.spec.ts` covers barrel registration.                                                                                                  |
+| Web components tests ([`tasks/wc-tests.js`](../tasks/wc-tests.js))           | `yarn test:wc` runs the web components test suites, rewritten for the vendored `cds-ng` copy, with their own runner settings: 130 files, 2,268 passed. 7 files excluded with reasons (ADR 0021, a story asset, uppercase `CDS-` literals). Runs in the `angular` CI job.                                                                                                    |
 | Stories                                                                      | All 7 components at WC one-for-one parity. `WithToggletipLabel` TODO updated with accurate blocker.                                                                                                                                                                                                                                                                         |
 | MDX overviews                                                                | Checkbox, Dropdown, Modal, TextInput, Button, Accordion have overview pages.                                                                                                                                                                                                                                                                                                |
-| Playwright                                                                   | 36 passed in Chromium against `storybook:build`. Not re-run after the latest commit; should be re-confirmed before merge.                                                                                                                                                                                                                                                   |
-| Generated `@Output`s                                                         | Each custom event is forwarded to its `@Output` by a host listener. Verified across component parity suites.                                                                                                                                                                                                                                                                |
+| Playwright                                                                   | `src/__tests__/stories.e2e.ts` renders every story (61) in Chromium; each must render, pass its `play()` and throw no page errors.                                                                                                                                                                                                                                          |
+| Generated `@Output`s                                                         | Each custom event is forwarded to its `@Output` by a host listener. Covered by `generated-wrappers.spec.ts`.                                                                                                                                                                                                                                                                |
 | Legacy entry point                                                           | Abandoned and removed 2026-10-26.                                                                                                                                                                                                                                                                                                                                           |
 | Angular peer floor                                                           | Peers updated to `>=19` (2026-10-28, ADR 0018). Toolchain is on `^19`. `standalone: true` removed from generator. CI has no "19 plus latest" matrix (deferred).                                                                                                                                                                                                             |
 | Router integration (`cdsRouterLink`)                                         | Not built. Planned in Milestone 4.5. See [`milestones.md`](./milestones.md#milestone-45--router-integration-directives) and [`developer-experience.md`](./developer-experience.md).                                                                                                                                                                                         |
@@ -27,9 +27,9 @@ remaining work, in suggested order, is under
 | CCA codemods in `packages/upgrade`                                           | None (deferred to Milestone 5).                                                                                                                                                                                                                                                                                                                                             |
 | `docs/migration/v12.md`                                                      | `@carbon/angular` section added.                                                                                                                                                                                                                                                                                                                                            |
 
-Last run (2026-10-29): Jest (**384 passed**, 88 `it.todo`, 0 failures across 20
-suites), parity script clean (0 gaps), `tsc -p tsconfig.storybook.json --noEmit`
-(clean), `yarn workspace @carbon/angular build` (clean, no warnings).
+Last run (2026-10-29): Jest (308 passed, 1 skipped, 3 suites), `test:wc` (2,268
+passed, 130 files), Playwright (61 stories), `storybook:build` and
+`yarn workspace @carbon/angular build` (clean, no warnings).
 
 ## Decisions on record
 
@@ -304,9 +304,11 @@ results" or the "Where things stand" table, this section is correct.
 ### Story parity: met for the 7 components
 
 Every WC story exists in the Angular story file with the same title
-(`Components/<Name>`, `Utilities/ActionSet`). Angular-only stories (`NgModel`,
-`ReactiveForm`, `Slots`, `AsLink`, `Disabled`, `Expressive`) follow ADR 0019
-rule 3. Gaps, all marked `TODO(parity)`:
+(`Components/<Name>`, `Utilities/ActionSet`). Angular-only stories (Button
+`AsLink`, `Disabled`, `Expressive`) follow ADR 0019 rule 3. The hidden
+test-fixture stories (`NgModel`, `ReactiveForm`, `Slots` and others) were
+removed 2026-10-29 with the per-component e2e files they served. Gaps, all
+marked `TODO(parity)`:
 
 - Button `IconButtonWithBadge`, Button `Radius` (a placeholder, not
   implemented).
@@ -315,7 +317,24 @@ rule 3. Gaps, all marked `TODO(parity)`:
   is "not yet generated", but the `Toggletip` wrapper exists. Write the story,
   or record the real blocker.
 
-### Test parity: Met for all 7 components
+### Testing (decided 2026-10-29)
+
+The web components' test suites are the source of truth for component behavior;
+`@carbon/angular` does not port them. `yarn test:wc` runs them against the
+vendored `cds-ng` copy (130 files, 2,268 passed), which also checks that the
+prefix rewrite did not break anything. It found one bug that way: uppercase
+`'CDS-…'` `tagName` literals in 7 web component files are not rewritten (a
+follow-up web components PR; the affected suites are excluded until then).
+Angular tests cover only what is Angular's: every wrapper mounts
+(`wrappers.spec.ts`), inputs, outputs and forms work
+(`generated-wrappers.spec.ts`), barrels register their children
+(`child-registration.spec.ts`), and every story renders and passes its `play()`
+in Chromium (`stories.e2e.ts`). The per-component parity specs, binding specs,
+e2e files and `tasks/check-parity.js` were removed.
+
+The parity work below is kept as a record.
+
+#### Superseded: test parity for the 7 components
 
 All 7 components now have complete 1:1 parity test suites (`*.parity.spec.ts`)
 asserting on `cds-ng-*` elements and `.cds-ng--*` CSS classes against Web
@@ -404,35 +423,26 @@ meaningful if the 7 reference components meet it.
    `@carbon/web-components` (ADR 0019 rule 2).
 2. **Story file** `src/stories/<Name>/__stories__/<Name>.stories.ts`:
    one-for-one with the WC story file (same `title`, same story names, same
-   order). Angular-only stories (`NgModel`, `ReactiveForm`) come last with
-   `tags: ['!dev', '!autodocs']`. Imports from `@carbon/angular/<entry>`,
-   selectors `cds-ng-*`, no raw `cds-*` tags, no `CUSTOM_ELEMENTS_SCHEMA`. A
-   variant that cannot be expressed gets a `// TODO(parity):` comment.
+   order). Angular-only stories come last. Do not add hidden test-fixture
+   stories: put checks in a story's `play()` function. Imports from
+   `@carbon/angular/<entry>`, selectors `cds-ng-*`, no raw `cds-*` tags, no
+   `CUSTOM_ELEMENTS_SCHEMA`. A variant that cannot be expressed gets a
+   `// TODO(parity):` comment.
 3. **MDX overview** `<Name>.mdx`.
-4. **Parity spec** `<Name>.parity.spec.ts`: every title in every
-   `packages/web-components/src/components/<name>/__tests__/*-test.js` file,
-   including `*-form-test.js`, `*-group-test.js` and `*-skeleton-test.js`. Each
-   is ported or an `it.todo('<title>')` with a one-line reason. Titles are kept
-   verbatim. Snapshots are replaced by the assertion the title implies.
-5. **Binding spec** `<Name>.ng.spec.ts`: every `@Input()` and `@Output()`
-   reaches the web component — set the input, read the property back from
-   `nativeElement`.
-6. **E2E** `<Name>.e2e.ts`: covers focus, keyboard, layout, child registration,
-   and value accessors. **The component must be confirmed working in a real
-   browser (Chromium via Playwright) before the PR is marked ready for review.**
-   jsdom passing alone is not sufficient; it does not run the full Lit rendering
-   pipeline, CSS, or real pointer/keyboard events.
-7. **Validation:** `yarn workspace @carbon/angular build`, `test`,
+4. **No per-component tests.** Component behavior is tested once, by the web
+   components' own suites, which `yarn test:wc` runs against the vendored copy
+   (ADR 0019). `wrappers.spec.ts` mounts every wrapper and `stories.e2e.ts`
+   renders every story, so a new component and its stories are covered
+   automatically. Put Angular-specific checks (forms, bindings) in the story's
+   `play()` function. If a wrapper fails to mount, fix the generator or the web
+   component; list it in `KNOWN_MOUNT_ERRORS` only with a reason.
+5. **Validation:** `yarn workspace @carbon/angular build`, `test`, `test:wc`,
    `tsc -p tsconfig.storybook.json --noEmit`, `storybook:build` and `e2e` all
    pass with no warnings.
-8. **Docs:** update the porting-backlog table in
-   [`porting-web-component-tests.md`](./porting-web-component-tests.md) and the
-   component list in this file. Update `docs/migration/v12.md` if the change
-   affects v12.
+6. **Docs:** update the component list in this file. Update
+   `docs/migration/v12.md` if the change affects v12.
 
-Items 2, 4, and 6 are the highest-risk gaps: stories and test titles are
-mechanically enforced by `check-parity.js` in CI, but browser verification
-depends on the author running `e2e` locally before marking the PR ready.
+Story parity (item 2) is checked in review; nothing enforces it in CI.
 
 ### What remains before merge
 
@@ -836,10 +846,11 @@ In order. Items marked ~~done~~ are complete; the remainder are open.
    `cds-ng--btn--*`.
 8. ~~**Verify form controls, named-slot components and `ActionSet`** in a real
    browser.~~ **Done 2026-10-28.** See [Step 8 results](#step-8-results). 9a.
-   **Port the web component tests to Jest, component by component.** Task for
-   the next clean session. The project's own guide,
-   [`porting-web-component-tests.md`](./porting-web-component-tests.md), says
-   each component ships a `<Name>.parity.spec.ts` ported from the WC
+   ~~**Port the web component tests to Jest, component by component.**~~
+   **Superseded 2026-10-29:** the web components suites run against the vendored
+   copy instead (`yarn test:wc`); see "Testing" above. Original task: The
+   project's own guide, `porting-web-component-tests.md` (removed 2026-10-29),
+   says each component ships a `<Name>.parity.spec.ts` ported from the WC
    `__tests__/*-test.js` files with titles preserved, a `<Name>.spec.ts` for
    input and output bindings, and an `e2e` file only for what jsdom cannot do.
    Only Button has all three. The six step 8 components (TextInput, Checkbox,

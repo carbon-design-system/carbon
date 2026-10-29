@@ -6,7 +6,6 @@
  */
 
 import { NgFor } from '@angular/common';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import {
   moduleMetadata,
   type Meta,
@@ -202,7 +201,6 @@ const meta: Meta<any> = {
         AiLabelComponent,
         AiLabelActionButtonComponent,
         LayerComponent,
-        ReactiveFormsModule,
         NgFor,
       ],
     }),
@@ -619,25 +617,6 @@ export const WithLayer: Story = {
           </cds-ng-layer>
         </div>
       </div>
-    `,
-  }),
-};
-
-// ─── Angular-only stories (CVA / forms integration) ───────────────────────────
-
-// ReactiveForm: used by Dropdown.e2e.ts
-export const ReactiveForm: StoryObj<Record<string, unknown>> = {
-  tags: ['!dev', '!autodocs'],
-  render: () => ({
-    props: { control: new FormControl('1.1') },
-    template: `
-      <cds-ng-dropdown label="Select" title-text="TLS" [formControl]="control">
-        <cds-ng-dropdown-item value="1.0">1.0</cds-ng-dropdown-item>
-        <cds-ng-dropdown-item value="1.1">1.1</cds-ng-dropdown-item>
-        <cds-ng-dropdown-item value="1.2">1.2</cds-ng-dropdown-item>
-      </cds-ng-dropdown>
-      <p data-testid="value">{{ control.value }}</p>
-      <button type="button" data-testid="set" (click)="control.setValue('1.2')">set 1.2</button>
     `,
   }),
 };

@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   moduleMetadata,
   type Meta,
@@ -163,8 +162,6 @@ const meta: Meta<any> = {
         CheckboxSkeletonComponent,
         AiLabelComponent,
         AiLabelActionButtonComponent,
-        FormsModule,
-        ReactiveFormsModule,
       ],
     }),
   ],
@@ -386,87 +383,6 @@ export const WithAILabel: Story = {
           <cds-ng-checkbox>${checkboxLabel}</cds-ng-checkbox>
         </cds-ng-checkbox-group>
       </div>
-    `,
-  }),
-};
-
-// ─── Angular-only stories (CVA / forms integration) ───────────────────────────
-
-// NgModel: used by Checkbox.e2e.ts
-export const NgModel: StoryObj<Record<string, unknown>> = {
-  tags: ['!dev', '!autodocs'],
-  render: () => ({
-    props: { agreed: false },
-    template: `
-      <cds-ng-checkbox [(ngModel)]="agreed">Accept the terms</cds-ng-checkbox>
-      <p data-testid="model">{{ agreed }}</p>
-    `,
-  }),
-};
-
-// ReactiveForm: used by Checkbox.e2e.ts
-export const ReactiveForm: StoryObj<Record<string, unknown>> = {
-  tags: ['!dev', '!autodocs'],
-  render: () => ({
-    props: { control: new FormControl(true) },
-    template: `
-      <cds-ng-checkbox [formControl]="control">Accept the terms</cds-ng-checkbox>
-      <p data-testid="value">{{ control.value }}</p>
-      <button type="button" data-testid="set" (click)="control.setValue(false)">uncheck</button>
-      <button type="button" data-testid="disable" (click)="control.disable()">disable</button>
-    `,
-  }),
-};
-
-// FormAssociation: used by Checkbox.e2e.ts. Browser coverage for the WC
-// `checkbox-form-test.js` tests, which jsdom cannot run (see
-// CheckboxForm.parity.spec.ts). Each native <form> backs one test. `ngNoForm`
-// stops Angular's NgForm directive from intercepting them.
-export const FormAssociation: StoryObj<Record<string, unknown>> = {
-  tags: ['!dev', '!autodocs'],
-  render: () => ({
-    template: `
-      <form ngNoForm data-testid="checked">
-        <cds-ng-checkbox name="a" value="v" checked>Label</cds-ng-checkbox>
-      </form>
-      <form ngNoForm data-testid="default-value">
-        <cds-ng-checkbox name="a" checked>Label</cds-ng-checkbox>
-      </form>
-      <form ngNoForm data-testid="unchecked-or-disabled">
-        <cds-ng-checkbox name="a" value="v">Label</cds-ng-checkbox>
-        <cds-ng-checkbox name="b" value="v" checked disabled>Label</cds-ng-checkbox>
-      </form>
-      <form ngNoForm data-testid="name-property">
-        <cds-ng-checkbox value="v" checked>Label</cds-ng-checkbox>
-      </form>
-      <form ngNoForm data-testid="sync">
-        <cds-ng-checkbox name="a" value="v">Label</cds-ng-checkbox>
-      </form>
-      <form ngNoForm data-testid="elements">
-        <cds-ng-checkbox name="a">Label</cds-ng-checkbox>
-      </form>
-      <form ngNoForm data-testid="label-for">
-        <label for="cb-label-for" id="lbl-label-for">Label</label>
-        <cds-ng-checkbox id="cb-label-for" name="a"></cds-ng-checkbox>
-      </form>
-      <form ngNoForm data-testid="reset">
-        <cds-ng-checkbox name="a" value="v" checked>Label</cds-ng-checkbox>
-        <cds-ng-checkbox name="b" value="v">Label</cds-ng-checkbox>
-      </form>
-      <form ngNoForm data-testid="fieldset-submit">
-        <fieldset disabled>
-          <cds-ng-checkbox name="a" value="v" checked>Label</cds-ng-checkbox>
-        </fieldset>
-      </form>
-      <form ngNoForm data-testid="fieldset-state">
-        <fieldset disabled>
-          <cds-ng-checkbox name="a">Label</cds-ng-checkbox>
-          <cds-ng-checkbox name="b" disabled>Label</cds-ng-checkbox>
-        </fieldset>
-      </form>
-      <form ngNoForm data-testid="validity">
-        <cds-ng-checkbox name="a" value="v">Label</cds-ng-checkbox>
-      </form>
     `,
   }),
 };

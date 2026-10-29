@@ -27,14 +27,14 @@
   "scripts": {
     "build": "yarn build:entries && ng-packagr -p .entries/ng-package.json",
     "build:entries": "node tasks/generate-wrappers/index.js && node tasks/build-entries/index.js",
-    "check:parity": "node tasks/check-parity.js",
     "clean": "rimraf esm2022 fesm2022 dist .entries",
     "e2e": "playwright test",
     "generate:wrappers": "node tasks/generate-wrappers/index.js",
     "playwright:install": "playwright install chromium",
     "storybook": "yarn build:entries && ng run carbon-angular:storybook",
     "storybook:build": "yarn build:entries && ng run carbon-angular:build-storybook",
-    "test": "jest --passWithNoTests"
+    "test": "jest --passWithNoTests",
+    "test:wc": "node tasks/wc-tests.js && web-test-runner"
   },
   "peerDependencies": {
     "@angular/common": ">=19",
@@ -61,11 +61,15 @@
     "@angular/platform-browser-dynamic": "^19.0.0",
     "@carbon/styles": "workspace:^",
     "@carbon/web-components": "workspace:^",
+    "@open-wc/testing": "^5.0.0",
     "@playwright/test": "^1.36.2",
     "@storybook/addon-docs": "10.3.5",
     "@storybook/addon-links": "10.3.5",
     "@storybook/angular": "10.3.5",
     "@types/jest": "^30.0.0",
+    "@web/test-runner": "^0.20.0",
+    "@web/test-runner-commands": "^1.0.0",
+    "@web/test-runner-puppeteer": "^1.0.0",
     "http-server": "^14.1.1",
     "jest": "^30.0.0",
     "jest-environment-jsdom": "^30.0.0",

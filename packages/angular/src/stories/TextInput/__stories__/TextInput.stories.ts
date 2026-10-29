@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   moduleMetadata,
   type Meta,
@@ -179,8 +178,6 @@ const meta: Meta<any> = {
         AiLabelComponent,
         AiLabelActionButtonComponent,
         LayerComponent,
-        FormsModule,
-        ReactiveFormsModule,
       ],
     }),
   ],
@@ -415,49 +412,6 @@ export const WithLayer: Story = {
           </cds-ng-layer>
         </div>
       </div>
-    `,
-  }),
-};
-
-// ─── Angular-only stories (CVA / forms integration) ───────────────────────────
-
-// NgModel: used by TextInput.e2e.ts
-export const NgModel: StoryObj<Record<string, unknown>> = {
-  tags: ['!dev', '!autodocs'],
-  render: () => ({
-    props: { name: 'initial' },
-    template: `
-      <cds-ng-text-input label="Name" [(ngModel)]="name"></cds-ng-text-input>
-      <p data-testid="model">{{ name }}</p>
-    `,
-  }),
-};
-
-// ReactiveForm: used by TextInput.e2e.ts
-export const ReactiveForm: StoryObj<Record<string, unknown>> = {
-  tags: ['!dev', '!autodocs'],
-  render: () => ({
-    props: { control: new FormControl('initial') },
-    template: `
-      <cds-ng-text-input label="Name" [formControl]="control"></cds-ng-text-input>
-      <p data-testid="value">{{ control.value }}</p>
-      <p data-testid="touched">{{ control.touched }}</p>
-      <button type="button" data-testid="set" (click)="control.setValue('programmatic')">set</button>
-      <button type="button" data-testid="disable" (click)="control.disable()">disable</button>
-      <button type="button" data-testid="enable" (click)="control.enable()">enable</button>
-    `,
-  }),
-};
-
-// Slots: used by TextInput.e2e.ts
-export const Slots: StoryObj<Record<string, unknown>> = {
-  tags: ['!dev', '!autodocs'],
-  render: () => ({
-    template: `
-      <cds-ng-text-input>
-        <span slot="label-text" data-testid="label-slot">Projected label</span>
-        <span slot="helper-text" data-testid="helper-slot">Projected helper</span>
-      </cds-ng-text-input>
     `,
   }),
 };
