@@ -43,7 +43,10 @@ $css--plex: true !default;
 :host(#{$prefix}-time-picker-select) {
   @extend .#{$prefix}--select;
   @extend .#{$prefix}--time-picker__select;
+  @include emit-layout-tokens();
 }
+
+@include emit-layout-tokens-to-shadow-host('#{$prefix}-time-picker-select');
 
 :host(#{$prefix}-time-picker-select) .#{$prefix}--select {
   inline-size: 100%;
