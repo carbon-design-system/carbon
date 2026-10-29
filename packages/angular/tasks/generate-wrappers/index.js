@@ -486,6 +486,7 @@ function generateWrapperForTag(tag) {
   // All inputs need forwarding — host IS the WC, Angular doesn't set them.
   const hasInputs = inputs.length > 0;
   const hasOutputs = outputs.length > 0;
+  const hasDisabledInput = inputs.some((input) => input.name === 'disabled');
   const needsElementRef = hasInputs || cvaProp || hasOutputs;
 
   const usesBooleanAttribute = inputs.some((input) => input.type === 'boolean');
@@ -575,8 +576,7 @@ ${onInitBody}
   }
 
   setDisabledState(isDisabled: boolean): void {
-    this.disabled = isDisabled;
-    (this._el.nativeElement as any).disabled = isDisabled;
+${hasDisabledInput ? '    this.disabled = isDisabled;\n' : ''}    (this._el.nativeElement as any).disabled = isDisabled;
   }`
       : '',
   ].filter(Boolean);
