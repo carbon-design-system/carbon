@@ -150,9 +150,18 @@ Two generator rules that have already caught real bugs:
 - [ ] `<Name>.parity.spec.ts` ported from the WC `*-test.js` files, titles
       preserved
 - [ ] Every non-ported test is an `it.todo` with a reason
-- [ ] `<Name>.spec.ts` covers each `@Input()` / `@Output()` binding
+- [ ] `<Name>.ng.spec.ts` covers each `@Input()` / `@Output()` binding — confirm
+      every property **reaches** the underlying web component (set it, read it
+      back from `nativeElement`)
 - [ ] `<Name>.e2e.ts` covers anything listed under "Playwright" above
-- [ ] `yarn workspace @carbon/angular test` and `build` pass
+- [ ] **Functionality is thoroughly tested in a real browser.** jsdom is not a
+      browser: it does not run Lit's rendering pipeline fully, does not support
+      real focus or keyboard events, and does not execute CSS. Run
+      `yarn workspace @carbon/angular storybook:build && yarn workspace @carbon/angular e2e`
+      and confirm that the component renders, interacts, and behaves correctly
+      in Chromium before marking the PR ready.
+- [ ] `yarn workspace @carbon/angular test`, `build`, and
+      `tsc -p tsconfig.storybook.json --noEmit` pass with no warnings
 
 ## Porting backlog
 
@@ -172,9 +181,15 @@ titles that are neither ported nor an `it.todo`, which this guide forbids.
 | TextInput  | Complete    | 0                | Done         | Done               | —                                                           |
 | All others | No          | n/a              | No           | No                 | `<name>/__tests__/` for each of the ~270 remaining wrappers |
 
-Next focus: add a title-parity script so "missing" cannot grow unnoticed as new
-components are added (see `status-and-open-questions.md` item 9). Then port the
-other 27 wrappers with a value accessor, then the composites that register
-children. Before porting file by file, cost a shared harness that runs a WC
-suite against its wrapper; at ~270 components, copying each file by hand is the
-expensive path.
+The title-parity script (`tasks/check-parity.js`) now runs in CI and catches
+missing test titles automatically. Port the remaining components in family
+order: CVA components first (27 with a value accessor), then composites that
+register children, then simple display components. Before porting file by file,
+consider a shared harness that runs a WC suite against its wrapper; at ~270
+components, copying each file by hand is the expensive path.
+
+Each follow-up PR must pass the full validation suite — Jest, `build`,
+`storybook:build`, and `e2e` in Chromium — before being marked ready for review.
+jsdom passing alone is not sufficient to call a component verified. See the
+[contract in `status-and-open-questions.md`](./status-and-open-questions.md#contract-for-follow-up-component-prs)
+for the full list of requirements.

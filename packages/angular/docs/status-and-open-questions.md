@@ -8,27 +8,28 @@ remaining work, in suggested order, is under
 
 ## Where things stand
 
-| Area                                                                         | State                                                                                                                                                                                                                                |
-| ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Generator ([`tasks/generate-wrappers`](../tasks/generate-wrappers/index.js)) | Emits 287 wrappers into `src/generated/` with `cds-ng-*` selectors, `#carbon-ng/*` vendored imports, and `cds-ng-*` event listeners. No `standalone: true`. `MANIFEST_TYPE_OVERRIDES` patches known manifest type bugs. 28 have CVA. |
-| Vendoring ([`tasks/vendor.js`](../tasks/vendor.js))                          | Vendors `@carbon/web-components` into `.entries/vendor` with `cds-ng` prefix. `vendorPrefixedCopy()` skips if vendor already exists (no double-run). Dead `VENDOR_EXCLUDED_COMPONENTS` export removed.                               |
-| Build                                                                        | `yarn build`: generate-wrappers → build-entries → ng-packagr. 97 secondary entries + primary. ~30 s, 1.3 MB packed, no warnings.                                                                                                     |
-| Storybook                                                                    | Builds clean. Stories use `cds-ng-*` throughout via `tsconfig.storybook.json` aliases. Requires Angular CLI builder target (`ng run carbon-angular:storybook`).                                                                      |
-| Jest                                                                         | **20 suites, 384 passed, 88 `it.todo`, 0 failures.** All 7 parity specs and all 7 binding specs (`.ng.spec.ts`) complete. 24 new `it.todo` entries added by the parity script.                                                       |
-| Parity CI script ([`tasks/check-parity.js`](../tasks/check-parity.js))       | Checks WC `it(` titles vs. Angular parity specs, and WC `export const` story names vs. Angular stories. Runs in `angular-test` CI job after build, before Jest. Exits non-zero on any gap.                                           |
-| Stories                                                                      | All 7 components at WC one-for-one parity. `WithToggletipLabel` TODO updated with accurate blocker.                                                                                                                                  |
-| MDX overviews                                                                | Checkbox, Dropdown, Modal, TextInput, Button, Accordion have overview pages.                                                                                                                                                         |
-| Playwright                                                                   | 36 passed in Chromium against `storybook:build`. Not re-run after parity-script pass; should be confirmed before PR.                                                                                                                 |
-| Generated `@Output`s                                                         | Each custom event is forwarded to its `@Output` in `ngOnInit`. Verified across component parity suites.                                                                                                                              |
-| Legacy entry point                                                           | Abandoned and removed 2026-10-26.                                                                                                                                                                                                    |
-| Angular peer floor                                                           | Peers updated to `>=19` (2026-10-28, ADR 0018). Toolchain is on `^19`. `standalone: true` removed from generator. CI has no "19 plus latest" matrix (deferred).                                                                      |
-| Migration guide `docs/guides/cca-to-angular.md`                              | Does not exist (deferred to Milestone 5).                                                                                                                                                                                            |
-| CCA codemods in `packages/upgrade`                                           | None (deferred to Milestone 5).                                                                                                                                                                                                      |
-| `docs/migration/v12.md`                                                      | `@carbon/angular` section added.                                                                                                                                                                                                     |
+| Area                                                                         | State                                                                                                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Generator ([`tasks/generate-wrappers`](../tasks/generate-wrappers/index.js)) | Emits 287 wrappers into `src/generated/` with `cds-ng-*` selectors, `#carbon-ng/*` vendored imports, `cds-ng-*` event listeners, `ChangeDetectionStrategy.OnPush`, and string-literal union types for 214 enum-valued inputs. `MANIFEST_TYPE_OVERRIDES` patches known manifest type bugs. 28 have CVA. |
+| Vendoring ([`tasks/vendor.js`](../tasks/vendor.js))                          | Vendors `@carbon/web-components` into `.entries/vendor` with `cds-ng` prefix. `vendorPrefixedCopy()` skips if vendor already exists (no double-run).                                                                                                                                                   |
+| Build                                                                        | `yarn build`: generate-wrappers → build-entries → ng-packagr. 97 secondary entries + primary. ~57 s, 1.3 MB packed, no warnings.                                                                                                                                                                       |
+| Storybook                                                                    | Builds clean. Stories use `cds-ng-*` throughout via `tsconfig.storybook.json` aliases. Requires Angular CLI builder target (`ng run carbon-angular:storybook`).                                                                                                                                        |
+| Jest                                                                         | **20 suites, 384 passed, 88 `it.todo`, 0 failures.** All 7 parity specs and all 7 binding specs (`.ng.spec.ts`) complete.                                                                                                                                                                              |
+| Parity CI script ([`tasks/check-parity.js`](../tasks/check-parity.js))       | Checks WC `it(` titles vs. Angular parity specs, and WC `export const` story names vs. Angular stories. Runs in `angular-test` CI job after build, before Jest. Exits non-zero on any gap.                                                                                                             |
+| Stories                                                                      | All 7 components at WC one-for-one parity. `WithToggletipLabel` TODO updated with accurate blocker.                                                                                                                                                                                                    |
+| MDX overviews                                                                | Checkbox, Dropdown, Modal, TextInput, Button, Accordion have overview pages.                                                                                                                                                                                                                           |
+| Playwright                                                                   | 36 passed in Chromium against `storybook:build`. Not re-run after the latest commit; should be re-confirmed before merge.                                                                                                                                                                              |
+| Generated `@Output`s                                                         | Each custom event is forwarded to its `@Output` in `ngOnInit`. Verified across component parity suites.                                                                                                                                                                                                |
+| Legacy entry point                                                           | Abandoned and removed 2026-10-26.                                                                                                                                                                                                                                                                      |
+| Angular peer floor                                                           | Peers updated to `>=19` (2026-10-28, ADR 0018). Toolchain is on `^19`. `standalone: true` removed from generator. CI has no "19 plus latest" matrix (deferred).                                                                                                                                        |
+| Router integration (`cdsRouterLink`)                                         | Not built. Planned in Milestone 4.5. See [`milestones.md`](./milestones.md#milestone-45--router-integration-directives) and [`developer-experience.md`](./developer-experience.md).                                                                                                                    |
+| Migration guide `docs/guides/cca-to-angular.md`                              | Does not exist (deferred to Milestone 5).                                                                                                                                                                                                                                                              |
+| CCA codemods in `packages/upgrade`                                           | None (deferred to Milestone 5).                                                                                                                                                                                                                                                                        |
+| `docs/migration/v12.md`                                                      | `@carbon/angular` section added.                                                                                                                                                                                                                                                                       |
 
-Last run (2026-10-28, after should-fix pass): Jest (**384 passed**, 88
-`it.todo`, 0 failures across 20 suites), parity script clean (0 gaps),
-`tsc -p tsconfig.storybook.json --noEmit` (clean).
+Last run (2026-10-29): Jest (**384 passed**, 88 `it.todo`, 0 failures across 20
+suites), parity script clean (0 gaps), `tsc -p tsconfig.storybook.json --noEmit`
+(clean), `yarn workspace @carbon/angular build` (clean, no warnings).
 
 ## Decisions on record
 
@@ -217,12 +218,23 @@ telemetry (see [`migration-support.md`](./migration-support.md)).
    [Step 9 results](#step-9-results).
 10. Trace the cause of the `@Output() change` re-emission loop. The generator
     avoids it; the cause is unknown.
-11. Compare the hand-written `NATIVE_DOM_EVENTS` set in the generator against
-    the events in the manifest.
+11. ~~Compare the hand-written `NATIVE_DOM_EVENTS` set in the generator against
+    the events in the manifest.~~ **Done.** The manifest declares 39 native
+    events (`change`, `input`, `invalid`, `focus`, `focusout`) across 19
+    components. All 39 overlap with the `NATIVE_DOM_EVENTS` set and are
+    correctly excluded from `@Output()` generation. No gaps found.
 12. Port the 10 `it.todo` Button tests (8 RTL layout, 2 badge indicator).
-13. Generator type quality: about 400 properties collapse to `any`, about 80
+13. ~~Generator type quality: about 400 properties collapse to `any`, about 80
     entries are the `shadowRootOptions` object leaking in as inputs, and all
-    outputs are `EventEmitter<any>`.
+    outputs are `EventEmitter<any>`.~~ **Partially resolved.**
+    `shadowRootOptions` and other Lit internals are filtered by
+    `IGNORED_PROPERTIES`. Enum-typed manifest properties (e.g. `BUTTON_KIND`)
+    now resolve to string-literal unions — 214 inputs across 74 enums. Remaining
+    `any` inputs: 233 (down from ~400), of which ~75 are fixable via `@property`
+    decorator scraping and ~61 are genuinely complex object types; both
+    categories resolve when the generator pivots to CEM. All 196 `@Output()`s
+    remain `EventEmitter<any>` — typed payloads are a priority item for the CEM
+    integration PR. See [`developer-experience.md`](./developer-experience.md).
 
 ### Migration
 
@@ -238,13 +250,9 @@ telemetry (see [`migration-support.md`](./migration-support.md)).
 ### Platform
 
 16. ~~Angular peer floor.~~ Done: ADR 0018 accepted 2026-10-28 with a floor
-    of 19. Two consequences of the ADR are not implemented yet: CI runs one
-    Angular version, not the "19 plus latest" matrix the ADR calls for (no
-    matrix exists in the `angular-test` and `angular-e2e` jobs of
-    `.github/workflows/ci.yml`), and the generator still emits
-    `standalone: true`, which is redundant on 19+. "Latest" means the newest
-    Angular major that Angular supports; pinning the number in the matrix is
-    proposed in ADR 0018.
+    of 19. ~~`standalone: true` removed from generator.~~ Done. CI still runs
+    one Angular version — the "19 plus latest" matrix ADR 0018 calls for is not
+    yet set up in `angular-test` / `angular-e2e`. Deferred.
 17. ~~Whether the package is behind a v12 flag.~~ **Decided 2026-10-28:** it is
     not. `@carbon/angular` is new as of v12 and needs a separate migration doc
     for consumers coming from `carbon-components-angular`
@@ -411,17 +419,25 @@ meaningful if the 7 reference components meet it.
    including `*-form-test.js`, `*-group-test.js` and `*-skeleton-test.js`. Each
    is ported or an `it.todo('<title>')` with a one-line reason. Titles are kept
    verbatim. Snapshots are replaced by the assertion the title implies.
-5. **Binding spec** `<Name>.spec.ts`: every `@Input()` and `@Output()` reaches
-   the web component.
-6. **E2E** `<Name>.e2e.ts`, only for what jsdom cannot do (focus, keyboard,
-   layout, child registration, value accessors in a browser).
+5. **Binding spec** `<Name>.ng.spec.ts`: every `@Input()` and `@Output()`
+   reaches the web component — set the input, read the property back from
+   `nativeElement`.
+6. **E2E** `<Name>.e2e.ts`: covers focus, keyboard, layout, child registration,
+   and value accessors. **The component must be confirmed working in a real
+   browser (Chromium via Playwright) before the PR is marked ready for review.**
+   jsdom passing alone is not sufficient; it does not run the full Lit rendering
+   pipeline, CSS, or real pointer/keyboard events.
 7. **Validation:** `yarn workspace @carbon/angular build`, `test`,
-   `tsc -p tsconfig.storybook.json --noEmit`, `storybook:build` and `e2e` pass.
-8. **Docs:** update the porting-backlog table and the component list in this
-   file. Update `docs/migration/v12.md` if the change affects v12.
+   `tsc -p tsconfig.storybook.json --noEmit`, `storybook:build` and `e2e` all
+   pass with no warnings.
+8. **Docs:** update the porting-backlog table in
+   [`porting-web-component-tests.md`](./porting-web-component-tests.md) and the
+   component list in this file. Update `docs/migration/v12.md` if the change
+   affects v12.
 
-Items 2 and 4 are the ones the 2026-10-30 audit found being missed, so they need
-mechanical enforcement (item 9 below), not just review.
+Items 2, 4, and 6 are the highest-risk gaps: stories and test titles are
+mechanically enforced by `check-parity.js` in CI, but browser verification
+depends on the author running `e2e` locally before marking the PR ready.
 
 ### What remains before merge
 
@@ -433,8 +449,10 @@ mechanical enforcement (item 9 below), not just review.
 3. ~~Add `<Name>.ng.spec.ts` component binding specs for Accordion, ActionSet,
    Checkbox, Dropdown, Modal, and TextInput.~~ **Done 2026-10-28.** All 7
    binding specs complete. 20 suites, 384 passed.
-4. Run `yarn workspace @carbon/angular storybook:build`, Playwright
-   (`yarn workspace @carbon/angular e2e`), and repo-root lint.
+4. **Re-run Playwright** (`yarn workspace @carbon/angular e2e`) against the
+   current `storybook:build`. Last run was before the parity-script pass and the
+   generator improvements (OnPush, enum unions). Storybook build artifact
+   exists; Playwright has not been re-run.
 5. ~~Update `docs/migration/v12.md` with Angular package status and migration
    notes.~~ **Done 2026-10-28.** `@carbon/angular` section added.
 
