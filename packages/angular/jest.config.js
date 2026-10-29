@@ -31,9 +31,11 @@ export default {
   // specs can assert on actual web component behavior. CI builds the package
   // first; locally run `yarn workspace @carbon/web-components build`.
   moduleNameMapper: {
+    // The primary entry only re-exports `src/runtime` (build-entries copies it);
+    // use the source so coverage is measured on it.
+    '^@carbon/angular$': '<rootDir>/src/runtime/value-accessor.ts',
     // Wrappers are imported as consumers import them, resolved to the
     // generated source in `.entries/`.
-    '^@carbon/angular$': '<rootDir>/.entries/index.ts',
     '^@carbon/angular/(.*)$': '<rootDir>/.entries/$1/index.ts',
     '^#carbon-ng/(.*)$': '<rootDir>/.entries/vendor/$1',
     '\\.(css|scss)$': 'identity-obj-proxy',
@@ -42,5 +44,7 @@ export default {
     '<rootDir>/node_modules/(?!@carbon/web-components|lit|@lit|@floating-ui)',
   ],
   passWithNoTests: true,
-  collectCoverageFrom: ['src/**/*.ts', '!src/index.ts', '!src/**/*.spec.ts'],
+  // Only the hand-written code that ships. Stories, test helpers and specs are
+  // not shipped, and the generated wrappers are checked by the mount spec.
+  collectCoverageFrom: ['src/runtime/**/*.ts'],
 };
