@@ -64,7 +64,7 @@ const defaultArgs = {
   disabled: false,
   isFlush: false,
   size: 'md',
-};
+} as const;
 
 // WC: Default
 export const Default: Story = {
