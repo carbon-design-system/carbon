@@ -15,7 +15,7 @@
  * assertion the title implies: the element renders its skeleton markup.
  */
 
-import { CheckboxSkeletonComponent } from '../../../generated/CheckboxSkeleton';
+import { CheckboxSkeletonComponent } from '@carbon/angular/checkbox';
 import { render } from '../../../testing/render';
 
 describe('cds-ng-checkbox-skeleton', () => {

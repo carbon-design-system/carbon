@@ -6,6 +6,7 @@
     "noImplicitAny": false,
     "strict": false,
     "paths": {
+      "@carbon/angular": ["./.entries/index.ts"],
       "@carbon/angular/*": ["./.entries/*/index.ts"],
       "#carbon-ng/*": ["./.entries/vendor/*"]
     }

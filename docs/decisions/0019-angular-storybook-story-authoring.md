@@ -43,7 +43,7 @@ Accepted
 `@carbon/angular` has two distinct component families, each with different
 authoring dynamics:
 
-1. **`@carbon/angular` core (`src/generated/`)** — Angular wrappers generated
+1. **`@carbon/angular` core (`.entries/<entry>/`)** — Angular wrappers generated
    automatically from `@carbon/web-components`' Custom Elements Manifest (CEM)
    by `packages/angular/tasks/generate-wrappers/`. The component class files are
    100% machine-produced and must not be hand-edited; the generator re-creates
@@ -204,10 +204,9 @@ after all WC parity stories and carry `tags: ['!dev', '!autodocs']`.
 ### 4. Entry imports, not generated imports
 
 Stories import from `@carbon/angular/<entry>` (e.g.
-`@carbon/angular/accordion`), never from `../../generated/` or
-`../src/generated/`. The entry resolves via `tsconfig.storybook.json` path
-aliases to `.entries/<entry>/index.ts`, which uses `cds-ng-*` selectors and the
-vendored WC copy — exactly what consumers get.
+`@carbon/angular/accordion`), never by relative path. The entry resolves via
+`tsconfig.storybook.json` path aliases to `.entries/<entry>/index.ts`, which
+uses `cds-ng-*` selectors and the vendored WC copy — exactly what consumers get.
 
 ## Consequences
 

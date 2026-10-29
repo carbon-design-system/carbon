@@ -96,7 +96,7 @@ yarn workspace @carbon/angular test
 # Start Storybook
 yarn workspace @carbon/angular storybook
 
-# Regenerate the wrappers in src/generated/ only
+# Regenerate the wrappers in .entries/ only
 yarn workspace @carbon/angular generate:wrappers
 ```
 

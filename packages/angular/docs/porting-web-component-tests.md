@@ -1,9 +1,9 @@
 # Porting web component tests to `@carbon/angular`
 
-Every Angular wrapper in `src/generated/` renders a real
-`@carbon/web-components` element. That means the web component (WC) test suite
-is the best specification we have for how a component should behave, and we can
-reuse it instead of inventing new assertions.
+Every generated Angular wrapper renders a real `@carbon/web-components` element.
+That means the web component (WC) test suite is the best specification we have
+for how a component should behave, and we can reuse it instead of inventing new
+assertions.
 
 For each component you build out, you ship **three** things together:
 
@@ -124,11 +124,11 @@ All ported tests must pass and every skipped test must be an `it.todo`.
 
 Work out which layer is wrong before changing anything:
 
-1. **Wrapper binding.** Check `src/generated/<Name>/<Name>.component.ts`. Is the
-   input missing, bound under the wrong attribute, or typed incorrectly?
+1. **Wrapper binding.** Check `.entries/<entry>/<Name>/<Name>.component.ts`. Is
+   the input missing, bound under the wrong attribute, or typed incorrectly?
 2. **Generator.** If it's wrong in the generated file, fix
    `tasks/generate-wrappers/index.js` and re-run `yarn generate:wrappers`.
-   **Never hand-edit `src/generated/`.** Add a case to
+   **Never hand-edit the generated wrappers.** Add a case to
    `src/__tests__/generated-wrappers.spec.ts` for the rule you changed.
 3. **Test.** If the WC test uses something the wrapper intentionally doesn't
    expose, adjust the port and say why.
@@ -144,7 +144,8 @@ Two generator rules that have already caught real bugs:
 
 ## Checklist for a new component
 
-- [ ] `yarn generate:wrappers` run, and the component exists in `src/generated/`
+- [ ] `yarn generate:wrappers` run, and the component exists in
+      `.entries/<entry>/`
 - [ ] Stories completed (ADR 0019), `// TODO(parity)` entries resolved or
       ticketed
 - [ ] `<Name>.parity.spec.ts` ported from the WC `*-test.js` files, titles

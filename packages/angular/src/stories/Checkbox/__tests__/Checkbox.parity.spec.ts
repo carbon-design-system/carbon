@@ -23,7 +23,7 @@
  * a reason. AI-Label / slug slot tests are `it.todo` (require AiLabelComponent).
  */
 
-import { CheckboxComponent } from '../../../generated/Checkbox';
+import { CheckboxComponent } from '@carbon/angular/checkbox';
 import { render } from '../../../testing/render';
 
 const imports = [CheckboxComponent];

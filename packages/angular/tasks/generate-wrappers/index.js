@@ -8,16 +8,14 @@
 
 import {
   readFileSync,
+  readdirSync,
   mkdirSync,
   rmSync,
   writeFileSync,
   existsSync,
 } from 'node:fs';
 import { join, dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
-import { vendorPrefixedCopy, WC_ES, WC_ROOT } from '../vendor.js';
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
+import { ENTRIES_ROOT, vendorPrefixedCopy, WC_ES, WC_ROOT } from '../vendor.js';
 
 /**
  * Wrapper Generator for @carbon/angular.
@@ -43,8 +41,6 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
  */
 
 const MANIFEST_PATH = join(WC_ROOT, 'custom-elements.json');
-
-const OUTPUT_DIR = join(__dirname, '../../src/generated');
 
 /**
  * Resolve the vendored `@carbon/web-components` barrel that registers a tag's family.
@@ -182,45 +178,11 @@ function sanitizeDefault(defaultVal, type) {
   return undefined;
 }
 
-/** Internal properties on Lit elements to ignore */
-const IGNORED_PROPERTIES = new Set([
-  'styles',
-  'is',
-  '_hasIcon',
-  '_handleSlotChange',
-  '_handleDisabledClick',
-  '_checkBadgeWarning',
-  '_handleOver',
-  '_handleHoverOut',
-  '_handleFocus',
-  '_handleFocusout',
-  'hasMainContent',
-  'shadowRoot',
-  'shadowRootOptions',
-  'updateComplete',
-  'elementProperties',
-  'properties',
-  'elementStyles',
-  'TRIGGER_KEYS',
-  'TABLE_SORT_CYCLES',
-  'enabledWarnings',
-  'enableWarning',
-  'disableWarning',
-  'cardContext',
-  // Lit reactive-element internals
-  'renderRoot',
-  'isUpdatePending',
-  'hasUpdated',
-  // Form-associated / validity internals. These are read-only state owned by
-  // the web component (or the browser), not something a consumer can set.
-  'formAssociated',
-  'formValueProperties',
-  'form',
-  'labels',
-  'validity',
-  'validationMessage',
-  'willValidate',
-]);
+/**
+ * Public, writable fields that are internal state, not consumer API. Statics,
+ * protected and read-only members are already excluded by `toTag`.
+ */
+const IGNORED_PROPERTIES = new Set(['hasMainContent', 'cardContext']);
 
 /**
  * Native DOM event names that MUST NOT get an @Output — see ADR 0015 §4.
@@ -320,6 +282,18 @@ function toTag(declaration, modulePath) {
  */
 const VALUE_CHANGE_EVENT = /-(changed|selected|input)$/;
 
+/**
+ * The secondary entry point a wrapper belongs to: the web component folder
+ * whose barrel it imports, e.g. `button` for `#carbon-ng/components/button/…`.
+ */
+function entryForBarrel(barrelImport) {
+  const match = barrelImport.match(/^#carbon-ng\/components\/([^/]+)\//);
+  if (!match) {
+    throw new Error(`No entry point for barrel ${barrelImport}`);
+  }
+  return match[1];
+}
+
 function generateWrapperForTag(tag) {
   const tagName = tag.name.replace(/^cds-/, 'cds-ng-'); // e.g. "cds-ng-button"
   const displayName = toPascalCase(tag.name); // e.g. "Button"
@@ -339,8 +313,8 @@ function generateWrapperForTag(tag) {
         ? 'value'
         : null;
 
-  // Process properties. All inputs are forwarded as properties in ngOnChanges
-  // (host element = the web component itself). No [attr.x] bindings in template.
+  // Inputs have no Angular-side default: an unbound input is never forwarded,
+  // so the web component keeps its own default.
   const inputs = [];
   const processedNames = new Set();
 
@@ -354,17 +328,8 @@ function generateWrapperForTag(tag) {
       }
       processedNames.add(prop.name);
 
-      const propName = prop.name;
       let type = sanitizeType(prop.type, tag.name, prop.name);
-      // isBoolean drives the `= false` default and booleanAttribute transform.
-      // Only set it when the resolved type is boolean — not when the manifest
-      // default happens to be "false" for a property that was overridden to string.
-      const isBoolean =
-        type === 'boolean' ||
-        (type !== 'string' &&
-          type !== 'string | undefined' &&
-          (prop.default === 'false' || prop.default === 'true'));
-      const cleanDefault = sanitizeDefault(prop.default, type);
+      const manifestDefault = sanitizeDefault(prop.default, type);
 
       // A subclass can default an inherited property to a value outside the
       // union the parent declares (`cds-number-input` defaults `type` to
@@ -375,18 +340,16 @@ function generateWrapperForTag(tag) {
       if (
         literals.length > 0 &&
         /^("|')[^"']*("|')(\s*\|\s*("|')[^"']*("|'))*$/.test(type) &&
-        cleanDefault?.startsWith('"') &&
-        !literals.includes(cleanDefault.slice(1, -1))
+        manifestDefault?.startsWith('"') &&
+        !literals.includes(manifestDefault.slice(1, -1))
       ) {
-        type = `${type} | '${cleanDefault.slice(1, -1)}'`;
+        type = `${type} | '${manifestDefault.slice(1, -1)}'`;
       }
 
       inputs.push({
-        name: propName,
-        type: type,
-        isBoolean: isBoolean,
+        name: prop.name,
+        type,
         description: prop.description || '',
-        default: cleanDefault,
       });
     }
   }
@@ -415,122 +378,81 @@ function generateWrapperForTag(tag) {
     }
   }
 
-  // Template: only <ng-content /> — host element IS the web component.
-  // No inner element, no attribute bindings, no @ViewChild needed.
-  const template = `    <ng-content />`;
+  // Host listeners, keyed by event name. One event can feed an output and also
+  // report a form value, so each event maps to a list of statements. Host
+  // listeners need no ElementRef or cleanup, and Angular schedules change
+  // detection for them, which zoneless applications rely on.
+  const hostListeners = new Map();
+  const listen = (eventName, statement) => {
+    const statements = hostListeners.get(eventName) ?? [];
+    if (!statements.includes(statement)) {
+      statements.push(statement);
+    }
+    hostListeners.set(eventName, statements);
+  };
+  for (const out of outputs) {
+    listen(out.eventName, `${out.outputName}.emit($event)`);
+  }
+  if (cvaProp) {
+    const valueEvents = [
+      'input',
+      'change',
+      ...outputs
+        .map((out) => out.eventName)
+        .filter((name) => VALUE_CHANGE_EVENT.test(name)),
+    ];
+    for (const eventName of valueEvents) {
+      listen(eventName, 'handleValueEvent()');
+    }
+    listen('focusout', 'handleTouched()');
+  }
+  const hostMetadata = hostListeners.size
+    ? `
+  host: {
+${[...hostListeners]
+  .map(
+    ([eventName, statements]) =>
+      `    '(${eventName})': '${statements.join('; ')}',`
+  )
+  .join('\n')}
+  },`
+    : '';
 
-  // Events that tell a ControlValueAccessor the value changed.
-  // We listen on the host element (this._el.nativeElement) in ngOnInit.
-  const cvaEvents = cvaProp
-    ? [
-        'input',
-        'change',
-        ...outputs
-          .map((out) => out.eventName)
-          .filter((name) => VALUE_CHANGE_EVENT.test(name)),
-      ]
-    : [];
-  const uniqueCvaEvents = [...new Set(cvaEvents)];
-
-  // All inputs need forwarding — host IS the WC, Angular doesn't set them.
   const hasInputs = inputs.length > 0;
   const hasOutputs = outputs.length > 0;
-  const hasDisabledInput = inputs.some((input) => input.name === 'disabled');
-  const needsElementRef = hasInputs || cvaProp || hasOutputs;
 
   const usesBooleanAttribute = inputs.some((input) => input.type === 'boolean');
   const angularImports = [
     ...(usesBooleanAttribute ? ['booleanAttribute'] : []),
     'ChangeDetectionStrategy',
     'Component',
-    ...(needsElementRef ? ['ElementRef', 'inject'] : []),
-    'EventEmitter',
-    'Input',
-    ...(hasInputs ? ['OnChanges', 'SimpleChanges'] : []),
-    ...(cvaProp || hasOutputs ? ['OnInit'] : []),
+    ...(hasInputs && !cvaProp ? ['ElementRef', 'inject'] : []),
+    ...(hasOutputs ? ['EventEmitter', 'Output'] : []),
     ...(cvaProp ? ['forwardRef'] : []),
-    'Output',
+    ...(hasInputs ? ['Input', 'OnChanges', 'SimpleChanges'] : []),
     'ViewEncapsulation',
   ].sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
 
-  const implementsList = [
-    ...(hasInputs ? ['OnChanges'] : []),
-    ...(cvaProp || hasOutputs ? ['OnInit'] : []),
-    ...(cvaProp ? ['ControlValueAccessor'] : []),
-  ];
-
-  // Forward each custom event to its @Output. The listener is on the host
-  // element, which lives and dies with this component, so it needs no cleanup.
-  const outputListeners = outputs
-    .map(
-      (out) =>
-        `    el.addEventListener('${out.eventName}', (event: Event) =>
-      this.${out.outputName}.emit(event)
-    );`
-    )
-    .join('\n');
-  const cvaListeners = cvaProp
-    ? `    for (const eventName of [${uniqueCvaEvents
-        .map((name) => `'${name}'`)
-        .join(', ')}]) {
-      el.addEventListener(eventName, () =>
-        this._cvaOnChange(el.${cvaProp})
-      );
-    }
-    el.addEventListener('focusout', () => this._cvaOnTouched());`
-    : '';
-  const onInitBody = [outputListeners, cvaListeners].filter(Boolean).join('\n');
-
-  // In the host-is-WC design the element ref is obtained via inject(ElementRef)
-  // in the constructor, not @ViewChild — there is no inner element to query.
-  // PROPERTY_INPUTS Set removed: Angular only calls ngOnChanges for declared
-  // @Input() keys, so Object.keys(changes) is always a subset of inputs.
+  // Form wrappers get the host element from CdsValueAccessor.
+  const hostElement = cvaProp ? 'this.hostElement' : 'this._el.nativeElement';
   const classBodyExtras = [
-    needsElementRef
+    cvaProp
+      ? `  protected readonly valueProperty = '${cvaProp}' as const;`
+      : '',
+    hasInputs && !cvaProp
       ? `  private readonly _el = inject(ElementRef<HTMLElement>);`
       : '',
     hasInputs
       ? `  /** Forwards changed inputs to the host web component as properties. */
   ngOnChanges(changes: SimpleChanges): void {
-    const el = this._el.nativeElement;
+    const el = ${hostElement};
     for (const key of Object.keys(changes)) {
       (el as any)[key] = changes[key].currentValue;
     }
   }`
       : '',
-    cvaProp || hasOutputs
-      ? `${
-          cvaProp
-            ? `  private _cvaOnChange: (value: any) => void = () => {};
-  private _cvaOnTouched: () => void = () => {};
-
-`
-            : ''
-        }  ngOnInit(): void {
-    const el = this._el.nativeElement as any;
-${onInitBody}
-  }`
-      : '',
-    cvaProp
-      ? `  writeValue(value: any): void {
-    (this._el.nativeElement as any).${cvaProp} = value ?? ${cvaProp === 'checked' ? 'false' : "''"};
-  }
-
-  registerOnChange(fn: (value: any) => void): void {
-    this._cvaOnChange = fn;
-  }
-
-  registerOnTouched(fn: () => void): void {
-    this._cvaOnTouched = fn;
-  }
-
-  setDisabledState(isDisabled: boolean): void {
-${hasDisabledInput ? '    this.disabled = isDisabled;\n' : ''}    (this._el.nativeElement as any).disabled = isDisabled;
-  }`
-      : '',
   ].filter(Boolean);
 
-  // Build TypeScript class members.
   // Boolean inputs use `booleanAttribute` so the bare-attribute form
   // (`<cds-ng-button disabled>`, which Angular passes as `""`) is treated as true.
   const inputDeclarations = inputs
@@ -542,12 +464,6 @@ ${hasDisabledInput ? '    this.disabled = isDisabled;\n' : ''}    (this._el.nati
         input.type === 'boolean'
           ? '@Input({ transform: booleanAttribute })'
           : '@Input()';
-      if (input.default !== undefined) {
-        return `${doc}  ${decorator} ${input.name}: ${input.type} = ${input.default};`;
-      }
-      if (input.isBoolean) {
-        return `${doc}  ${decorator} ${input.name}: ${input.type} = false;`;
-      }
       return `${doc}  ${decorator} ${input.name}?: ${input.type};`;
     })
     .join('\n\n');
@@ -559,6 +475,10 @@ ${hasDisabledInput ? '    this.disabled = isDisabled;\n' : ''}    (this._el.nati
         : '';
       return `${doc}  @Output() readonly ${out.outputName} = new EventEmitter<any>();`;
     })
+    .join('\n\n');
+
+  const classBody = [inputDeclarations, outputDeclarations, ...classBodyExtras]
+    .filter(Boolean)
     .join('\n\n');
 
   const code = `/**
@@ -577,7 +497,7 @@ import {
   ${angularImports.join(',\n  ')},
 } from '@angular/core';${
     cvaProp
-      ? `\nimport { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';`
+      ? `\nimport { NG_VALUE_ACCESSOR } from '@angular/forms';\nimport { CdsValueAccessor } from '@carbon/angular';`
       : ''
   }
 import '${wcImportPath}';
@@ -589,11 +509,9 @@ import '${wcImportPath}';
  */
 @Component({
   selector: '${tagName}',
-  template: \`
-${template}
-  \`,
+  template: '<ng-content />',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,${
+  encapsulation: ViewEncapsulation.None,${hostMetadata}${
     cvaProp
       ? `
   providers: [
@@ -606,14 +524,10 @@ ${template}
       : ''
   }
 })
-export class ${className}${
-    implementsList.length ? ` implements ${implementsList.join(', ')}` : ''
+export class ${className}${cvaProp ? ' extends CdsValueAccessor' : ''}${
+    hasInputs ? ' implements OnChanges' : ''
   } {
-${inputDeclarations}
-
-${outputDeclarations}${
-    classBodyExtras.length ? '\n\n' + classBodyExtras.join('\n\n') : ''
-  }
+${classBody}
 }
 `;
 
@@ -627,7 +541,7 @@ ${outputDeclarations}${
 export * from './${displayName}.component';
 `;
 
-  return { displayName, code, indexCode };
+  return { displayName, entry: entryForBarrel(wcImportPath), code, indexCode };
 }
 
 function main() {
@@ -671,13 +585,25 @@ function main() {
     `\n🚀 Generating ${tagsToProcess.length} Angular wrapper(s) from custom-elements.json...\n`
   );
 
-  // A full run starts from an empty folder, so wrappers for tags that are now
-  // skipped (ADR 0021) or removed from the manifest do not linger.
+  // A full run removes every entry point folder (but not the vendored copy),
+  // so wrappers for tags that are now skipped (ADR 0021) or removed from the
+  // manifest do not linger.
   if (!targetTag) {
-    rmSync(OUTPUT_DIR, { recursive: true, force: true });
+    for (const dirent of readdirSync(ENTRIES_ROOT, { withFileTypes: true })) {
+      if (
+        dirent.isDirectory() &&
+        dirent.name !== 'vendor' &&
+        !dirent.name.startsWith('.')
+      ) {
+        rmSync(join(ENTRIES_ROOT, dirent.name), {
+          recursive: true,
+          force: true,
+        });
+      }
+    }
   }
 
-  const generatedExports = [];
+  let generatedCount = 0;
   const failedTags = [];
 
   for (const tag of tagsToProcess) {
@@ -693,8 +619,11 @@ function main() {
     }
 
     try {
-      const { displayName, code, indexCode } = generateWrapperForTag(tag);
-      const componentDir = join(OUTPUT_DIR, displayName);
+      const { displayName, entry, code, indexCode } =
+        generateWrapperForTag(tag);
+      // Wrappers are written straight into their secondary entry point folder;
+      // build-entries adds each entry's index.ts and ng-package.json.
+      const componentDir = join(ENTRIES_ROOT, entry, displayName);
 
       mkdirSync(componentDir, { recursive: true });
       writeFileSync(
@@ -704,8 +633,10 @@ function main() {
       );
       writeFileSync(join(componentDir, 'index.ts'), indexCode, 'utf8');
 
-      generatedExports.push(displayName);
-      console.log(`  ✓ Generated <${tag.name}> -> ${displayName}Component`);
+      generatedCount++;
+      console.log(
+        `  ✓ Generated <${tag.name}> -> ${entry}/${displayName}Component`
+      );
     } catch (err) {
       failedTags.push(tag.name);
       console.error(
@@ -722,26 +653,8 @@ function main() {
     process.exit(1);
   }
 
-  // Only rewrite root index.ts if doing a full generation run
-  if (!targetTag) {
-    const rootIndexContent = `/**
- * Copyright IBM Corp. 2026
- *
- * This source code is licensed under the Apache-2.0 license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-// Auto-generated root entry point
-${generatedExports
-  .sort()
-  .map((name) => `export * from './${name}';`)
-  .join('\n')}
-`;
-    writeFileSync(join(OUTPUT_DIR, 'index.ts'), rootIndexContent, 'utf8');
-  }
-
   console.log(
-    `\n✨ Successfully generated ${generatedExports.length} Angular wrapper component(s).\n`
+    `\n✨ Successfully generated ${generatedCount} Angular wrapper component(s).\n`
   );
 }
 

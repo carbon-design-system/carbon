@@ -24,7 +24,7 @@
 
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { TextInputComponent } from '../../../generated/TextInput';
+import { TextInputComponent } from '@carbon/angular/text-input';
 import { render } from '../../../testing/render';
 
 const imports = [TextInputComponent];

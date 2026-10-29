@@ -19,7 +19,7 @@
  * verified at Layer 2 (Playwright / Button.e2e.ts).
  */
 
-import { ButtonComponent } from '../../../generated/Button';
+import { ButtonComponent } from '@carbon/angular/button';
 import { render } from '../../../testing/render';
 
 const imports = [ButtonComponent];

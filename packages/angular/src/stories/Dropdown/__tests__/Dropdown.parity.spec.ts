@@ -22,8 +22,8 @@
  * Auto-align tests are `it.todo` (access internal `_floatingController`).
  */
 
-import { DropdownComponent } from '../../../generated/Dropdown';
-import { DropdownItemComponent } from '../../../generated/DropdownItem';
+import { DropdownComponent } from '@carbon/angular/dropdown';
+import { DropdownItemComponent } from '@carbon/angular/dropdown';
 import { render } from '../../../testing/render';
 
 const imports = [DropdownComponent, DropdownItemComponent];

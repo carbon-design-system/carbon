@@ -16,10 +16,26 @@ import { join } from 'node:path';
  * This file must import exactly one wrapper: jsdom's custom element registry is
  * per test file, so anything else imported here could mask a missing child.
  */
-import '../generated/Modal';
+import '@carbon/angular/modal';
 
-const GENERATED_DIR = join(__dirname, '../generated');
-const VENDOR_DIR = join(__dirname, '../../.entries/vendor');
+const ENTRIES_DIR = join(__dirname, '../../.entries');
+const VENDOR_DIR = join(ENTRIES_DIR, 'vendor');
+
+/** Every generated wrapper as `<entry>/<Wrapper>`. */
+function wrapperDirs(): string[] {
+  return readdirSync(ENTRIES_DIR, { withFileTypes: true })
+    .filter(
+      (entry) =>
+        entry.isDirectory() &&
+        entry.name !== 'vendor' &&
+        !entry.name.startsWith('.')
+    )
+    .flatMap((entry) =>
+      readdirSync(join(ENTRIES_DIR, entry.name), { withFileTypes: true })
+        .filter((wrapper) => wrapper.isDirectory())
+        .map((wrapper) => `${entry.name}/${wrapper.name}`)
+    );
+}
 
 describe('web component registration through generated wrappers', () => {
   it('registers the children of a composite when only its wrapper is imported', () => {
@@ -39,16 +55,14 @@ describe('web component registration through generated wrappers', () => {
 
   it('imports a folder barrel, never a class file, in every wrapper', () => {
     const imports: { wrapper: string; specifier: string }[] = [];
-    for (const dir of readdirSync(GENERATED_DIR, { withFileTypes: true })) {
-      if (!dir.isDirectory()) {
-        continue;
-      }
-      const file = join(GENERATED_DIR, dir.name, `${dir.name}.component.ts`);
+    for (const wrapper of wrapperDirs()) {
+      const name = wrapper.split('/')[1];
+      const file = join(ENTRIES_DIR, wrapper, `${name}.component.ts`);
       const source = readFileSync(file, 'utf8');
       const match = source.match(
         /^import '#carbon-ng\/(components\/[^']+)';$/m
       );
-      imports.push({ wrapper: dir.name, specifier: match?.[1] ?? '' });
+      imports.push({ wrapper, specifier: match?.[1] ?? '' });
     }
 
     expect(imports.length).toBeGreaterThan(0);

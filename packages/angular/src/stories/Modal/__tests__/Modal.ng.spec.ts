@@ -17,7 +17,7 @@
  */
 
 import { Component } from '@angular/core';
-import { ModalComponent } from '../../../generated/Modal';
+import { ModalComponent } from '@carbon/angular/modal';
 import { render } from '../../../testing/render';
 
 const imports = [ModalComponent];

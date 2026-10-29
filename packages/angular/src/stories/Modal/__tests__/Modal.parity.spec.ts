@@ -19,16 +19,16 @@
  * a reason.
  */
 
-import { InlineLoadingComponent } from '../../../generated/InlineLoading';
-import { ModalComponent } from '../../../generated/Modal';
-import { ModalBodyComponent } from '../../../generated/ModalBody';
-import { ModalBodyContentComponent } from '../../../generated/ModalBodyContent';
-import { ModalCloseButtonComponent } from '../../../generated/ModalCloseButton';
-import { ModalFooterButtonComponent } from '../../../generated/ModalFooterButton';
-import { ModalFooterComponent } from '../../../generated/ModalFooter';
-import { ModalHeaderComponent } from '../../../generated/ModalHeader';
-import { ModalHeadingComponent } from '../../../generated/ModalHeading';
-import { ModalLabelComponent } from '../../../generated/ModalLabel';
+import { InlineLoadingComponent } from '@carbon/angular/inline-loading';
+import { ModalComponent } from '@carbon/angular/modal';
+import { ModalBodyComponent } from '@carbon/angular/modal';
+import { ModalBodyContentComponent } from '@carbon/angular/modal';
+import { ModalCloseButtonComponent } from '@carbon/angular/modal';
+import { ModalFooterButtonComponent } from '@carbon/angular/modal';
+import { ModalFooterComponent } from '@carbon/angular/modal';
+import { ModalHeaderComponent } from '@carbon/angular/modal';
+import { ModalHeadingComponent } from '@carbon/angular/modal';
+import { ModalLabelComponent } from '@carbon/angular/modal';
 import { render, settle } from '../../../testing/render';
 
 const imports = [

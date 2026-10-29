@@ -20,8 +20,8 @@
  * a reason.
  */
 
-import { ActionSetComponent } from '../../../generated/ActionSet';
-import { ButtonComponent } from '../../../generated/Button';
+import { ActionSetComponent } from '@carbon/angular/action-set';
+import { ButtonComponent } from '@carbon/angular/button';
 import { render, settle } from '../../../testing/render';
 
 const imports = [ActionSetComponent, ButtonComponent];

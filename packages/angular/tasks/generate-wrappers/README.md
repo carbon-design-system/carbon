@@ -18,26 +18,32 @@ This directory contains the automated code generator for `@carbon/angular`.
     are registered when the wrapper is imported.
   - `@Component({ selector: 'cds-ng-*', template: '<ng-content />' })` — the
     host element IS the web component (ADR 0015, ADR 0020)
-  - Typed `@Input()` properties forwarded to the host in `ngOnChanges`
+  - Typed `@Input()` properties forwarded to the host in `ngOnChanges`. Inputs
+    have no Angular-side default: an unbound input is never forwarded, so the
+    web component keeps its own default.
   - Boolean `@Input()` properties use `booleanAttribute` (so bare
     `<cds-button disabled>` works)
   - `@Output()` event emitters for **custom events only** — native DOM events
     (`change`, `input`, `invalid`, etc.) never get an `@Output` to avoid
-    double-calls (ADR 0015 §4)
-  - `ControlValueAccessor` (CVA) for form-associated elements, reading/writing
-    the host element
+    double-calls (ADR 0015 §4). Outputs are fed by host listeners, so there is
+    no `ElementRef` or manual listener to clean up.
+  - `ControlValueAccessor` (CVA) for form-associated elements: the wrapper
+    extends `CdsValueAccessor` (`src/runtime/value-accessor.ts`, shipped in the
+    primary entry) and reports values from host listeners
 - The generator does **not** emit tests or stories. Tests are hand-written
   (`src/__tests__/` and `src/stories/<Name>/__tests__/`) and stories are
   hand-written (`src/stories/<Name>/__stories__/`).
-- **Do NOT manually edit files in `src/generated/`** — they are re-created on
-  every generator run.
+- **Do NOT manually edit the generated wrappers** — they are re-created on every
+  generator run.
 
-The generator writes `cds-ng-*` selectors and `#carbon-ng/*` vendored imports
-directly into `src/generated/`. `yarn build` also runs
-[`tasks/build-entries`](../build-entries/index.js), which regroups the wrappers
-into one secondary entry point per component folder (`@carbon/angular/button`),
-copies the vendor tree, and builds `.entries/` with `ng-packagr` into `dist/`
-(ADR 0020). `build-entries` does not rewrite selectors or imports.
+The generator writes each wrapper straight into its secondary entry point
+folder, `.entries/<entry>/<Name>/`, one entry per web component folder
+(`@carbon/angular/button`). `yarn build` also runs
+[`tasks/build-entries`](../build-entries/index.js), which writes each entry's
+`index.ts` and `ng-package.json`, ships `src/runtime/` in the primary entry, and
+builds `.entries/` with `ng-packagr` into `dist/` (ADR 0020). Tests and
+Storybook import the wrappers as `@carbon/angular/<entry>`, resolved to
+`.entries/`.
 
 There is no `@carbon/angular/legacy` entry point. It was removed before release
 (see ADR 0020).
@@ -72,7 +78,7 @@ Mark a WC story that cannot be reproduced yet with a
 When a new Web Component is added to `@carbon/web-components`:
 
 1. Run `yarn generate:wrappers` in `packages/angular/`. The generator writes the
-   wrapper to `src/generated/<Name>/`.
+   wrapper to `.entries/<entry>/<Name>/`.
 2. Rebuild the secondary entries with `node tasks/build-entries/index.js`
    (`yarn build` and `yarn storybook` do both steps).
 3. Write the stories and the parity spec by hand. See

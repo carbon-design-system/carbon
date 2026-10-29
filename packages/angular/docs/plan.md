@@ -196,10 +196,10 @@ packages/angular/                       ← @carbon/angular
 ├── package.json                        ← version 0.0.0-prerelease.0; peers: Angular >=19, @carbon/styles
 ├── angular.json                        ← Storybook builders
 ├── tasks/
-│   ├── generate-wrappers/              ← manifest -> src/generated (gitignored)
-│   └── build-entries/                  ← src/generated -> .entries (gitignored)
+│   ├── generate-wrappers/              ← manifest -> .entries/<entry>/<Wrapper> (gitignored)
+│   └── build-entries/                  ← entry index.ts and ng-package.json files
 ├── src/
-│   ├── generated/                      ← 281 wrapper folders, one per element
+│   ├── runtime/                        ← CdsValueAccessor, shipped in the primary entry
 │   ├── stories/<Name>/                 ← hand-written stories, specs, e2e (7 components)
 │   ├── __tests__/                      ← generator and registration specs
 │   └── testing/                        ← test render helper
@@ -310,11 +310,11 @@ Angular would match `<cds-modal>` inside the wrapper's own template.
   into `.entries/vendor`, and filters it to what the wrappers import. The
   `--cds` custom properties are kept, so theming stays shared with
   `@carbon/styles`;
-- regroups the wrappers into one secondary entry point per web component folder
-  and rewrites those **copies** in `.entries/` so each selector and each import
-  use the prefix. `src/generated/` is not changed: it keeps `cds-*` selectors
-  and the `@carbon/web-components` import. Jest specs run against it, while
-  Storybook, Playwright and the published package use the `cds-ng-*` copies;
+- writes the `index.ts` and `ng-package.json` of each secondary entry point, one
+  per web component folder. The generator writes the wrappers straight into
+  those folders with `cds-ng-*` selectors and `#carbon-ng/*` imports, so nothing
+  is rewritten. Jest specs, Storybook, Playwright and the published package all
+  use the same `.entries/` source;
 - imports the web component's **folder barrel** (`components/<name>/index.js`),
   which registers the element and every child it renders.
 
@@ -346,20 +346,20 @@ import '#carbon-ng/components/button/index.js';
 
 @Component({
   selector: 'cds-ng-button',
-  template: `<ng-content />`,
+  template: '<ng-content />',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  standalone: true, // redundant on Angular 19+; to be removed (ADR 0018)
 })
 export class ButtonComponent implements OnChanges {
-  @Input({ transform: booleanAttribute }) disabled: boolean = false;
-  @Input() kind: string = 'primary';
-  // ...one @Input per manifest attribute or property
+  @Input({ transform: booleanAttribute }) disabled?: boolean;
+  @Input() kind?: 'primary' | 'secondary' | 'tertiary' | 'ghost' | ...;
+  // ...one @Input per public, writable property, with no Angular-side default
+
+  private readonly _el = inject(ElementRef<HTMLElement>);
 
   ngOnChanges(changes: SimpleChanges): void {
     for (const key of Object.keys(changes)) {
-      if (PROPERTY_INPUTS.has(key)) {
-        (this._el.nativeElement as any)[key] = changes[key].currentValue;
-      }
+      (this._el.nativeElement as any)[key] = changes[key].currentValue;
     }
   }
 }
@@ -503,14 +503,16 @@ removed on 2026-10-26.)
 #### Generator output
 
 `tasks/generate-wrappers/` reads `packages/web-components/custom-elements.json`
-and emits one folder per element under `src/generated/`:
+and emits one folder per element under `.entries/<entry>/`:
 
 - A component class, `@Component({ selector, template: '<ng-content />' })`
-- Typed `@Input()` properties forwarded to the host element in `ngOnChanges`
+- Typed `@Input()` properties forwarded to the host element in `ngOnChanges`,
+  with no Angular-side default, so the web component keeps its own
 - Boolean inputs with `booleanAttribute`, so `<cds-ng-button disabled>` works
 - `@Output()` emitters for **custom events only** (not native DOM events, ADR
-  0015 §4)
-- A `ControlValueAccessor` provider for form-associated elements (28 wrappers)
+  0015 §4), fed by host listeners
+- For the 28 form-associated elements, a `ControlValueAccessor` that extends
+  `CdsValueAccessor` from the primary entry
 - An `index.ts` per folder
 
 It does **not** emit stories or tests. Those are hand-written (ADR 0019).
@@ -1171,8 +1173,8 @@ For each WC test scenario, the Angular translation follows a fixed pattern:
 ```
 WC:      expect(el.shadowRoot.querySelector('button')).to.have.attribute('type', 'submit')
 Angular: expect(wc().getAttribute('type')).toBe('submit')
-         // where wc() = fixture.nativeElement.querySelector('cds-<name>')
-         // Jest runs against src/generated, which keeps `cds-*` selectors.
+         // where wc() = fixture.nativeElement.querySelector('cds-ng-<name>')
+         // Jest imports the wrappers as `@carbon/angular/<entry>`.
 ```
 
 Boolean/presence attributes follow the same rule:
@@ -1213,8 +1215,8 @@ the React and WC packages:
 `packages/react`. Last run: 11 suites, 250 passed, 45 `it.todo`.
 
 Tests the Angular wrapper's responsibility: input reflection, output emission
-and CVA integration, against `src/generated`. The test selector there is
-`cds-*`.
+and CVA integration, importing the wrappers as `@carbon/angular/<entry>`. The
+test selector is `cds-ng-*`.
 
 The examples below are the original plan. The `cds-ng-*` selectors and the
 slot-materialisation pattern do not apply to Jest, which uses `cds-*`, and slot

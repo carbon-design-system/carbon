@@ -21,8 +21,8 @@
  * a reason.
  */
 
-import { AccordionComponent } from '../../../generated/Accordion';
-import { AccordionItemComponent } from '../../../generated/AccordionItem';
+import { AccordionComponent } from '@carbon/angular/accordion';
+import { AccordionItemComponent } from '@carbon/angular/accordion';
 import { render } from '../../../testing/render';
 
 const imports = [AccordionComponent, AccordionItemComponent];

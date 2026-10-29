@@ -21,7 +21,7 @@
  * reason, and are covered by Playwright (`Button.e2e.ts`) where marked.
  */
 
-import { ButtonComponent } from '../../../generated/Button';
+import { ButtonComponent } from '@carbon/angular/button';
 import { render } from '../../../testing/render';
 
 const imports = [ButtonComponent];

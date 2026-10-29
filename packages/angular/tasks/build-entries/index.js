@@ -7,9 +7,7 @@
  */
 
 import {
-  cpSync,
-  existsSync,
-  mkdirSync,
+  copyFileSync,
   readdirSync,
   readFileSync,
   writeFileSync,
@@ -24,9 +22,8 @@ import {
   WC_ROOT,
 } from '../vendor.js';
 
-const GENERATED = join(PKG_ROOT, 'src/generated');
-
-const BARREL_IMPORT = /import '#carbon-ng\/components\/([^/]+)\/[^']*';/;
+/** Hand-written runtime shipped in the primary entry, e.g. `CdsValueAccessor`. */
+const RUNTIME_FILES = ['value-accessor.ts'];
 
 const header = `/**
  * Copyright IBM Corp. 2026
@@ -41,39 +38,41 @@ function writeJson(path, value) {
 }
 
 function main() {
-  if (!existsSync(GENERATED)) {
-    console.error(`Error: ${GENERATED} not found. Run generate:wrappers.`);
-    process.exit(1);
-  }
-
   // Ensure vendor is up to date
   vendorPrefixedCopy();
 
+  // generate-wrappers writes each wrapper into its entry point folder
+  // (`.entries/<entry>/<Wrapper>/`). Every folder other than the vendored copy
+  // is an entry point.
   /** @type {Map<string, string[]>} entry name -> wrapper directory names */
   const groups = new Map();
-
-  for (const name of readdirSync(GENERATED, { withFileTypes: true })) {
-    if (!name.isDirectory()) continue;
-    const source = readFileSync(
-      join(GENERATED, name.name, `${name.name}.component.ts`),
-      'utf8'
-    );
-    const match = source.match(BARREL_IMPORT);
-    if (!match) {
-      throw new Error(`No web components barrel import in ${name.name}`);
+  for (const dirent of readdirSync(ENTRIES_ROOT, { withFileTypes: true })) {
+    if (
+      !dirent.isDirectory() ||
+      dirent.name === 'vendor' ||
+      dirent.name.startsWith('.')
+    ) {
+      continue;
     }
-    const entry = match[1];
-    if (!groups.has(entry)) groups.set(entry, []);
-    groups.get(entry).push(name.name);
+    const wrappers = readdirSync(join(ENTRIES_ROOT, dirent.name), {
+      withFileTypes: true,
+    })
+      .filter((wrapper) => wrapper.isDirectory())
+      .map((wrapper) => wrapper.name)
+      .sort();
+    if (wrappers.length > 0) {
+      groups.set(dirent.name, wrappers);
+    }
+  }
+  if (groups.size === 0) {
+    console.error(
+      `Error: No wrappers in ${ENTRIES_ROOT}. Run generate:wrappers.`
+    );
+    process.exit(1);
   }
 
   for (const [entry, wrappers] of [...groups].sort()) {
     const entryDir = join(ENTRIES_ROOT, entry);
-    mkdirSync(entryDir, { recursive: true });
-    for (const wrapper of wrappers.sort()) {
-      const wrapperDir = join(entryDir, wrapper);
-      cpSync(join(GENERATED, wrapper), wrapperDir, { recursive: true });
-    }
     writeFileSync(
       join(entryDir, 'index.ts'),
       `${header}\n${wrappers.map((w) => `export * from './${w}';`).join('\n')}\n`
@@ -106,8 +105,15 @@ function main() {
     new Set(Object.keys(dependencies))
   );
 
-  // Primary entry: deliberately side-effect free (ADR 0020 constraint 4).
-  writeFileSync(join(ENTRIES_ROOT, 'index.ts'), `${header}\nexport {};\n`);
+  // Primary entry: deliberately side-effect free (ADR 0020 constraint 4). It
+  // only exports the shared runtime the wrappers import.
+  for (const file of RUNTIME_FILES) {
+    copyFileSync(join(PKG_ROOT, 'src/runtime', file), join(ENTRIES_ROOT, file));
+  }
+  writeFileSync(
+    join(ENTRIES_ROOT, 'index.ts'),
+    `${header}\n${RUNTIME_FILES.map((file) => `export * from './${file.replace(/\.ts$/, '')}';`).join('\n')}\n`
+  );
   writeJson(join(ENTRIES_ROOT, 'ng-package.json'), {
     $schema: '../../../node_modules/ng-packagr/ng-package.schema.json',
     // Publish from `dist`, as `publishConfig.directory` in package.json says.

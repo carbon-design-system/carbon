@@ -19,7 +19,7 @@ prefixed copy of the web components (ADR 0020 option B).
 - **Raw web components:** a throwaway Jest spec (since deleted) used Angular's
   test bed with `CUSTOM_ELEMENTS_SCHEMA` and a `<cds-…>` element in a template.
   This ran under jsdom, not in a browser, and not in a real application build.
-- **Generated wrappers:** read from `packages/angular/src/generated/*`
+- **Generated wrappers:** read from `packages/angular/.entries/<entry>/*`
   (gitignored output of `tasks/generate-wrappers`) and from the generator
   source. Counts come from grepping that output.
 - **Not tested:** `ngDefaultControl`, editor and language-service behavior,
@@ -185,11 +185,10 @@ Each of these is proposed, none is built:
    the resulting API is more idiomatic for modern Angular.
 2. **Zoneless-friendly event handling.** With `OnPush` and zone.js the current
    event listener approach works: custom events bubble and zone.js catches them.
-   Under a fully zoneless application
-   (`provideExperimentalZonelessChangeDetection`) the native DOM listeners in
-   `ngOnInit` would not trigger change detection. The fix is injecting
-   `ChangeDetectorRef` and calling `markForCheck()` inside each listener.
-   Unchecked; needs a zoneless test app.
+   Outputs and form binding use declarative host listeners, and Angular
+   schedules change detection for host listeners in a fully zoneless application
+   (`provideExperimentalZonelessChangeDetection`) too. Unchecked; needs a
+   zoneless test app.
 3. **Tests, stories and docs written for Angular**, so teams need not read the
    web components documentation. Today only 7 of 296 components have stories and
    parity specs.

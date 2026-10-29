@@ -14,7 +14,12 @@ export default {
     '<rootDir>/src/**/__tests__/**/*.spec.ts',
     '<rootDir>/src/**/*.spec.ts',
   ],
-  modulePathIgnorePatterns: ['<rootDir>/dist/'],
+  // `.entries/package.json` is the publish manifest that build-entries writes;
+  // it repeats the package name, which Jest would report as a duplicate.
+  modulePathIgnorePatterns: [
+    '<rootDir>/dist/',
+    '<rootDir>/.entries/package.json',
+  ],
   testPathIgnorePatterns: [
     '/node_modules/',
     '/esm2022/',
@@ -26,6 +31,10 @@ export default {
   // specs can assert on actual web component behavior. CI builds the package
   // first; locally run `yarn workspace @carbon/web-components build`.
   moduleNameMapper: {
+    // Wrappers are imported as consumers import them, resolved to the
+    // generated source in `.entries/`.
+    '^@carbon/angular$': '<rootDir>/.entries/index.ts',
+    '^@carbon/angular/(.*)$': '<rootDir>/.entries/$1/index.ts',
     '^#carbon-ng/(.*)$': '<rootDir>/.entries/vendor/$1',
     '\\.(css|scss)$': 'identity-obj-proxy',
   },

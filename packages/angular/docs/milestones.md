@@ -145,7 +145,7 @@ delivering 100% component coverage for `@carbon/angular` core.
 
 ### Deliverables
 
-- Generated wrappers in `src/generated/` covering:
+- Generated wrappers in `.entries/<entry>/` covering:
   - Core primitives (Checkbox, Radio, Toggle, Tag, Loading, TextInput, TextArea,
     NumberInput, Search, Link, Layer, etc.)
   - Fluid form variants (12 variants)

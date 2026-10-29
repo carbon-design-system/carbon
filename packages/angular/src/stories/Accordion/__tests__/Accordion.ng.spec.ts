@@ -16,7 +16,7 @@
  * Computed layout and real browser interaction are in `Accordion.e2e.ts`.
  */
 
-import { AccordionComponent } from '../../../generated/Accordion';
+import { AccordionComponent } from '@carbon/angular/accordion';
 import { render } from '../../../testing/render';
 
 const imports = [AccordionComponent];

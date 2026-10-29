@@ -16,9 +16,9 @@
  * `cds-ng-checkbox-group` host.
  */
 
-import { CheckboxComponent } from '../../../generated/Checkbox';
-import { CheckboxGroupComponent } from '../../../generated/CheckboxGroup';
-import { AiLabelComponent } from '../../../generated/AiLabel';
+import { CheckboxComponent } from '@carbon/angular/checkbox';
+import { CheckboxGroupComponent } from '@carbon/angular/checkbox';
+import { AiLabelComponent } from '@carbon/angular/ai-label';
 import { render } from '../../../testing/render';
 
 const imports = [CheckboxGroupComponent, CheckboxComponent, AiLabelComponent];

@@ -8,11 +8,11 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
-import { ButtonComponent } from '../generated/Button';
-import { CheckboxComponent } from '../generated/Checkbox';
-import { ModalFooterComponent } from '../generated/ModalFooter';
-import { TextInputComponent } from '../generated/TextInput';
-import { AccordionComponent } from '../generated/Accordion';
+import { ButtonComponent } from '@carbon/angular/button';
+import { CheckboxComponent } from '@carbon/angular/checkbox';
+import { ModalFooterComponent } from '@carbon/angular/modal';
+import { TextInputComponent } from '@carbon/angular/text-input';
+import { AccordionComponent } from '@carbon/angular/accordion';
 import { render, settle } from '../testing/render';
 
 /**

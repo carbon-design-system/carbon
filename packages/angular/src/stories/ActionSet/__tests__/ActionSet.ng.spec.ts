@@ -17,8 +17,8 @@
  * Slot ordering and stacking layout are verified in `ActionSet.e2e.ts`.
  */
 
-import { ButtonComponent } from '../../../generated/Button';
-import { ActionSetComponent } from '../../../generated/ActionSet';
+import { ButtonComponent } from '@carbon/angular/button';
+import { ActionSetComponent } from '@carbon/angular/action-set';
 import { render } from '../../../testing/render';
 
 const imports = [ActionSetComponent, ButtonComponent];

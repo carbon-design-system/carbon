@@ -22,7 +22,7 @@
 
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CheckboxComponent } from '../../../generated/Checkbox';
+import { CheckboxComponent } from '@carbon/angular/checkbox';
 import { render } from '../../../testing/render';
 
 const imports = [CheckboxComponent];
