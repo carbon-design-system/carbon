@@ -99,6 +99,11 @@ test.describe('@avt Accordion', () => {
     });
     await accordion_btn1.click();
     await expect(accordion_btn1).toHaveAttribute('aria-expanded', 'true');
+    // The open animation fades content in from opacity 0. Wait until it
+    // finishes so contrast is measured on the fully visible text.
+    await expect(
+      page.locator('.cds--accordion__item--active .cds--accordion__wrapper')
+    ).toHaveCSS('opacity', '1');
 
     // Checking for ACViolation
     await expect(page).toHaveNoACViolations(
