@@ -6,10 +6,16 @@
  */
 
 import type { Meta, StoryObj } from '@storybook/angular';
-import { expect, userEvent } from 'storybook/test';
+import { expect, fn, userEvent } from 'storybook/test';
 import { ButtonComponent } from '@carbon/angular/button';
 
-const meta: Meta<ButtonComponent> = {
+// `cds-ng-button` has no custom click event, so stories bind the native
+// `(click)` to this spy arg.
+type ButtonStoryArgs = ButtonComponent & {
+  onClick: (event: MouseEvent) => void;
+};
+
+const meta: Meta<ButtonStoryArgs> = {
   title: 'Components/Button',
   component: ButtonComponent,
   parameters: {
@@ -26,7 +32,7 @@ import { ButtonComponent } from '@carbon/angular/button';
   standalone: true,
   imports: [ButtonComponent],
   template: \`
-    <cds-ng-button kind="primary" size="lg" (buttonClick)="onClick($event)">
+    <cds-ng-button kind="primary" size="lg" (click)="onClick($event)">
       Save
     </cds-ng-button>
   \`,
@@ -40,6 +46,12 @@ export class MyComponent {
     },
   },
   argTypes: {
+    // Storybook for Angular drops args that have no `action` or `control`
+    // argType before rendering, so the spy needs one to reach the template.
+    onClick: {
+      action: 'click',
+      description: 'Native `click` handler bound with `(click)`.',
+    },
     kind: {
       control: 'select',
       options: [
@@ -77,7 +89,7 @@ export class MyComponent {
 };
 
 export default meta;
-type Story = StoryObj<ButtonComponent>;
+type Story = StoryObj<ButtonStoryArgs>;
 
 // ─── WC-parity stories (one-for-one with @carbon/web-components Button) ──────
 
@@ -89,6 +101,7 @@ export const Default: Story = {
     type: 'button',
     disabled: false,
     isExpressive: false,
+    onClick: fn(),
   },
   render: (args) => ({
     props: args,
@@ -98,14 +111,14 @@ export const Default: Story = {
       [type]="type"
       [disabled]="disabled"
       [isExpressive]="isExpressive"
-      (buttonClick)="buttonClick($event)"
+      (click)="onClick($event)"
     >Button</cds-ng-button>`,
   }),
-  play: async ({ canvasElement }) => {
+  play: async ({ args, canvasElement }) => {
     // In the host-is-WC design (ADR 0015) the host element IS cds-ng-button.
     // The shadow root is on the host element itself.
     const host = canvasElement.querySelector('cds-ng-button') as HTMLElement;
-    const button = host?.shadowRoot?.querySelector(
+    const button = host.shadowRoot?.querySelector(
       'button'
     ) as HTMLButtonElement;
 
@@ -113,6 +126,7 @@ export const Default: Story = {
     await expect(button).not.toBeDisabled();
 
     await userEvent.click(host);
+    await expect(args.onClick).toHaveBeenCalled();
   },
 };
 
@@ -149,7 +163,7 @@ export const Danger: Story = {
     template: `<cds-ng-button
       [kind]="kind"
       [dangerDescription]="dangerDescription"
-      (buttonClick)="buttonClick($event)"
+      (click)="onClick($event)"
     >Delete</cds-ng-button>`,
   }),
   play: Default.play,
@@ -167,7 +181,7 @@ export const DangerTertiary: Story = {
     template: `<cds-ng-button
       [kind]="kind"
       [dangerDescription]="dangerDescription"
-      (buttonClick)="buttonClick($event)"
+      (click)="onClick($event)"
     >Delete</cds-ng-button>`,
   }),
   play: Default.play,
@@ -185,7 +199,7 @@ export const DangerGhost: Story = {
     template: `<cds-ng-button
       [kind]="kind"
       [dangerDescription]="dangerDescription"
-      (buttonClick)="buttonClick($event)"
+      (click)="onClick($event)"
     >Delete</cds-ng-button>`,
   }),
   play: Default.play,
@@ -204,7 +218,7 @@ export const IconButton: Story = {
       [kind]="kind"
       [tooltipText]="tooltipText"
       [tooltipPosition]="tooltipPosition"
-      (buttonClick)="buttonClick($event)"
+      (click)="onClick($event)"
     ><svg slot="icon" focusable="false" preserveAspectRatio="xMidYMid meet"
         xmlns="http://www.w3.org/2000/svg" fill="currentColor"
         aria-hidden="true" width="16" height="16" viewBox="0 0 32 32">

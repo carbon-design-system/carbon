@@ -49,7 +49,7 @@ import { ButtonComponent } from '@carbon/angular/button';
   selector: 'app-root',
   standalone: true, // optional on Angular 19+, where it is the default
   imports: [ButtonComponent],
-  template: `<cds-ng-button kind="primary" (buttonClick)="onClick($event)"
+  template: `<cds-ng-button kind="primary" (click)="onClick($event)"
     >Click me</cds-ng-button
   >`,
 })

@@ -31,7 +31,7 @@ import * as ButtonStories from './Button.stories';
   - [`tooltipText`](#tooltiptext)
   - [`tooltipAlignment`](#tooltipalignment)
   - [`tooltipPosition`](#tooltipposition)
-  - [`(buttonClick)`](#buttonclick)
+  - [`(click)`](#click)
 - [Angular-specific notes](#angular-specific-notes)
 - [References](#references)
 - [Feedback](#feedback)
@@ -52,7 +52,7 @@ import { ButtonComponent } from '@carbon/angular/button';
   standalone: true,
   imports: [ButtonComponent],
   template: `
-    <cds-ng-button kind="primary" size="lg" (buttonClick)="onClick($event)">
+    <cds-ng-button kind="primary" size="lg" (click)="onClick($event)">
       Save
     </cds-ng-button>
   `,
@@ -230,13 +230,13 @@ are `top` (default), `right`, `bottom`, and `left`.
 >
 ```
 
-### `(buttonClick)`
+### `(click)`
 
-Emitted when the button or inner `<a>` is clicked. The event payload is the
-native `MouseEvent`.
+`cds-ng-button` has no custom click event. Bind the native `click` event; the
+payload is the native `MouseEvent`.
 
 ```html
-<cds-ng-button (buttonClick)="handleClick($event)">Click me</cds-ng-button>
+<cds-ng-button (click)="handleClick($event)">Click me</cds-ng-button>
 ```
 
 ## Angular-specific notes

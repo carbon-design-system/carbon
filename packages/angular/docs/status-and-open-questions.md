@@ -342,8 +342,9 @@ No remaining test gap for the 7 reference components.
 
 ### Other findings
 
-- ~~**`(buttonClick)` does not exist.**~~ Resolved: no `buttonClick` reference
-  exists in the tree.
+- ~~**`(buttonClick)` does not exist.**~~ **Fixed 2026-10-29:** `cds-button`
+  dispatches no custom click event, so the README, Button docs and stories bind
+  the native `(click)`, and the Button `play()` asserts the handler runs.
 - ~~**`docs/migration/v12.md` has no Angular content.**~~ Resolved:
   `@carbon/angular` section added covering what's new, peer requirements, Date
   Picker exclusion, and CCA migration notes.
@@ -438,8 +439,8 @@ depends on the author running `e2e` locally before marking the PR ready.
 **Blockers** (the PR's own claims are false without these):
 
 1. ~~Reconcile the 6 parity specs with the WC suites.~~ **Done 2026-10-28.**
-2. ~~Fix `(buttonClick)` in `Button.stories.ts` and `Button.mdx`.~~ **Done:** no
-   such reference exists in the tree.
+2. ~~Fix `(buttonClick)` in `Button.stories.ts` and `Button.mdx`.~~ **Done
+   2026-10-29:** replaced with the native `(click)`.
 3. ~~Add `<Name>.ng.spec.ts` component binding specs for Accordion, ActionSet,
    Checkbox, Dropdown, Modal, and TextInput.~~ **Done 2026-10-28.** All 7
    binding specs complete. 20 suites, 384 passed.

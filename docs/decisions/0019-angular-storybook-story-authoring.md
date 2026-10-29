@@ -73,10 +73,10 @@ story file mirroring every WC story export, translating Lit
 format. This sounds appealing but is not feasible:
 
 - WC stories use Lit tagged templates with interpolated JavaScript expressions.
-  Angular story templates use binding syntax (`[kind]="kind"`,
-  `(buttonClick)=`). The two syntaxes are structurally different; no mechanical
-  translation preserves correctness for non-trivial stories (icon slots,
-  compound children, `play()` assertions against shadow DOM, etc.).
+  Angular story templates use binding syntax (`[kind]="kind"`, `(click)=`). The
+  two syntaxes are structurally different; no mechanical translation preserves
+  correctness for non-trivial stories (icon slots, compound children, `play()`
+  assertions against shadow DOM, etc.).
 - WC-specific story utilities (e.g. `radiusArgType`, `radiusTokenScale`,
   `radiusGroup`) have no Angular equivalent and cannot be generated into a
   working Angular story.
