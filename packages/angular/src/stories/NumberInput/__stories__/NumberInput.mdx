@@ -1,0 +1,99 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as NumberInputStories from './NumberInput.stories';
+
+<Meta of={NumberInputStories} />
+
+# Number Input
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/angular/src/stories/NumberInput)
+&nbsp;|&nbsp;
+[Usage guidelines](https://carbondesignsystem.com/components/number-input/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/number-input/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Skeleton](#skeleton)
+- [With AI Label](#with-ai-label)
+- [With Custom Validation](#with-custom-validation)
+- [With Type Of Text](#with-type-of-text)
+- [Component API](#component-api)
+- [Angular-specific notes](#angular-specific-notes)
+- [Feedback](#feedback)
+
+## Overview
+
+The `cds-ng-number-input` component allows users to enter numeric values. It
+supports stepping, min/max bounds, empty state handling, locale formatting, and
+AI labels.
+
+### Importing
+
+```ts
+import { NumberInputComponent } from '@carbon/angular/number-input';
+
+@Component({
+  standalone: true,
+  imports: [NumberInputComponent],
+  template: `
+    <cds-ng-number-input
+      label="NumberInput label"
+      helperText="Optional helper text"
+      [min]="0"
+      [max]="100"
+      [step]="1"
+      [value]="50"></cds-ng-number-input>
+  `,
+})
+export class MyComponent {}
+```
+
+<Canvas of={NumberInputStories.Default} />
+
+## Skeleton
+
+Use `cds-ng-number-input-skeleton` to render a placeholder state while data
+loads.
+
+<Canvas of={NumberInputStories.Skeleton} />
+
+## With AI Label
+
+<Canvas of={NumberInputStories.WithAILabel} />
+
+## With Custom Validation
+
+<Canvas of={NumberInputStories.WithTypeOfCustomValidation} />
+
+## With Type Of Text
+
+<Canvas of={NumberInputStories.WithTypeOfText} />
+
+## Component API
+
+<ArgTypes of={NumberInputStories.Default} />
+
+## Angular-specific notes
+
+### Forms integration (`ControlValueAccessor`)
+
+`NumberInputComponent` implements `ControlValueAccessor`, supporting both
+template-driven and reactive Angular forms:
+
+```html
+<!-- Reactive forms -->
+<cds-ng-number-input
+  [formControl]="quantityControl"
+  label="Quantity"></cds-ng-number-input>
+
+<!-- Template-driven forms -->
+<cds-ng-number-input
+  [(ngModel)]="quantity"
+  label="Quantity"></cds-ng-number-input>
+```
+
+## Feedback
+
+Help us improve this component by providing feedback, opening issues, or
+contributing on GitHub.

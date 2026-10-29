@@ -1,0 +1,81 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as TagStories from './Tag.stories';
+
+<Meta of={TagStories} />
+
+# Tag
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/angular/src/stories/Tag)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/tag/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/tag/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Dismissible](#dismissible)
+- [Selectable](#selectable)
+- [Operational](#operational)
+- [Skeleton](#skeleton)
+- [ReadOnly](#readonly)
+- [With AI Label](#with-ai-label)
+- [Feedback](#feedback)
+
+## Overview
+
+Tags are used for items that need to be labeled, categorized, or organized using
+keywords that describe them.
+
+### Importing
+
+```ts
+import {
+  TagComponent,
+  DismissibleTagComponent,
+  SelectableTagComponent,
+  OperationalTagComponent,
+  TagSkeletonComponent,
+} from '@carbon/angular/tag';
+
+@Component({
+  standalone: true,
+  imports: [TagComponent, DismissibleTagComponent, SelectableTagComponent],
+  template: `
+    <cds-ng-tag type="blue">Blue Tag</cds-ng-tag>
+    <cds-ng-dismissible-tag
+      type="magenta"
+      text="Dismissible Tag"></cds-ng-dismissible-tag>
+    <cds-ng-selectable-tag text="Selectable Tag"></cds-ng-selectable-tag>
+  `,
+})
+export class MyComponent {}
+```
+
+<Canvas of={TagStories.ReadOnly} />
+
+## Dismissible
+
+<Canvas of={TagStories.Dismissible} />
+
+## Selectable
+
+<Canvas of={TagStories.Selectable} />
+
+## Operational
+
+<Canvas of={TagStories.Operational} />
+
+## Skeleton
+
+<Canvas of={TagStories.Skeleton} />
+
+## With AI Label
+
+<Canvas of={TagStories.WithAILabel} />
+
+## Feedback
+
+Help us improve this component by providing feedback, submitting bugs and
+submitting features on
+[GitHub](https://github.com/carbon-design-system/carbon/issues/new/choose).

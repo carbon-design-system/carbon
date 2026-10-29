@@ -42,9 +42,14 @@
     "typescript-eslint": "8.72.0",
     "immutable": "^5.1.8",
     "tar@7.5.20": "7.5.22",
-    "vite@5.0.10": "6.4.4"
+    "vite@5.0.10": "6.4.4",
+    "@playwright/test": "1.46.1",
+    "memfs": "4.65.0",
+    "caniuse-lite": "^1.0.30001810"
   },
   "devDependencies": {
+    "@angular-devkit/build-angular": "^19.0.0",
+    "@angular/compiler-cli": "^19.0.0",
     "@babel/core": "^8.0.0",
     "@babel/plugin-proposal-export-default-from": "^8.0.0",
     "@babel/plugin-transform-class-properties": "^8.0.0",
@@ -62,6 +67,7 @@
     "@eslint/js": "^9.24.0",
     "@figma/code-connect": "1.5.3",
     "@playwright/test": "^1.36.2",
+    "@storybook/angular": "10.3.5",
     "@testing-library/dom": "^10.1.0",
     "@testing-library/jest-dom": "^7.0.0",
     "@testing-library/react": "^16.0.0",

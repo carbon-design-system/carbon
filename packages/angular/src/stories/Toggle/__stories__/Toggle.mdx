@@ -1,0 +1,81 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as ToggleStories from './Toggle.stories';
+
+<Meta of={ToggleStories} />
+
+# Toggle
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/angular/src/stories/Toggle)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/toggle/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/toggle/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Small Toggle](#small-toggle)
+- [Skeleton](#skeleton)
+- [With Accessible Labels](#with-accessible-labels)
+- [Angular-specific notes](#angular-specific-notes)
+- [Feedback](#feedback)
+
+## Overview
+
+A toggle is used to quickly switch between two possible states. They are
+commonly used for "on/off" switches.
+
+### Importing
+
+```ts
+import {
+  ToggleComponent,
+  ToggleSkeletonComponent,
+} from '@carbon/angular/toggle';
+
+@Component({
+  standalone: true,
+  imports: [ToggleComponent],
+  template: `
+    <cds-ng-toggle
+      labelText="Airplane mode"
+      labelA="On"
+      labelB="Off"
+      [toggled]="true"></cds-ng-toggle>
+  `,
+})
+export class MyComponent {}
+```
+
+<Canvas of={ToggleStories.Default} />
+
+## Small Toggle
+
+<Canvas of={ToggleStories.SmallToggle} />
+
+## Skeleton
+
+<Canvas of={ToggleStories.Skeleton} />
+
+## With Accessible Labels
+
+<Canvas of={ToggleStories.WithAccessibleLabels} />
+
+## Angular-specific notes
+
+### Forms Integration (`ControlValueAccessor`)
+
+`ToggleComponent` implements `ControlValueAccessor`, allowing two-way boolean
+binding via `[(ngModel)]` or `[formControl]`:
+
+```html
+<cds-ng-toggle
+  labelText="Notifications"
+  [(ngModel)]="notificationsEnabled"></cds-ng-toggle>
+```
+
+## Feedback
+
+Help us improve this component by providing feedback, submitting bugs and
+submitting features on
+[GitHub](https://github.com/carbon-design-system/carbon/issues/new/choose).

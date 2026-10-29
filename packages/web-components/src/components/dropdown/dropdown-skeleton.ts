@@ -14,6 +14,11 @@ import styles from './dropdown.scss?lit';
 
 /**
  * Skeleton version of dropdown.
+ *
+ * TODO(@carbon/web-components): Replace `export default` + manual
+ * `defineCustomElement()` registration in `index.ts` with the
+ * `@customElement()` decorator so this class appears in custom-elements.json
+ * and `@carbon/angular` can generate a typed wrapper automatically.
  */
 class CDSDropdownSkeleton extends LitElement {
   static is = `${prefix}-dropdown-skeleton`;
