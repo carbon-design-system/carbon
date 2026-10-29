@@ -11,11 +11,11 @@ remaining work, in suggested order, is under
 | Area                                                                         | State                                                                                                                                                                                                                                                                                                                                                                       |
 | ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Generator ([`tasks/generate-wrappers`](../tasks/generate-wrappers/index.js)) | Emits 296 wrappers straight into their entry folders in `.entries/` with `cds-ng-*` selectors, `#carbon-ng/*` vendored imports, host listeners for `cds-ng-*` events, no Angular-side input defaults, `ChangeDetectionStrategy.OnPush`, and string-literal union types for 248 enum-valued inputs. `MANIFEST_TYPE_OVERRIDES` patches known manifest type bugs. 28 have CVA. |
-| Vendoring ([`tasks/vendor.js`](../tasks/vendor.js))                          | Vendors `@carbon/web-components` into `.entries/vendor` with `cds-ng` prefix. `vendorPrefixedCopy()` skips if vendor already exists (no double-run).                                                                                                                                                                                                                        |
+| Vendoring ([`tasks/vendor.js`](../tasks/vendor.js))                          | Vendors `@carbon/web-components` into `.entries/vendor` with `cds-ng` prefix. `vendorPrefixedCopy()` reuses the vendor tree until the `web-components/es` build changes (newest file time, kept in `.entries/vendor/.source-stamp`).                                                                                                                                        |
 | Build                                                                        | `yarn build`: generate-wrappers → build-entries → ng-packagr. 97 secondary entries + primary. ~57 s, 1.3 MB packed, no warnings.                                                                                                                                                                                                                                            |
 | Storybook                                                                    | Builds clean. Stories use `cds-ng-*` throughout via `tsconfig.storybook.json` aliases. Requires Angular CLI builder target (`ng run carbon-angular:storybook`).                                                                                                                                                                                                             |
 | Jest                                                                         | **20 suites, 384 passed, 88 `it.todo`, 0 failures.** All 7 parity specs and all 7 binding specs (`.ng.spec.ts`) complete.                                                                                                                                                                                                                                                   |
-| Parity CI script ([`tasks/check-parity.js`](../tasks/check-parity.js))       | Checks WC `it(` titles vs. Angular parity specs, and WC `export const` story names vs. Angular stories. Runs in `angular-test` CI job after build, before Jest. Exits non-zero on any gap.                                                                                                                                                                                  |
+| Parity CI script ([`tasks/check-parity.js`](../tasks/check-parity.js))       | Checks WC `it(` titles vs. Angular parity specs, and WC `export const` story names vs. Angular stories. Runs in the `angular` CI job after build, before Jest. Exits non-zero on any gap.                                                                                                                                                                                   |
 | Stories                                                                      | All 7 components at WC one-for-one parity. `WithToggletipLabel` TODO updated with accurate blocker.                                                                                                                                                                                                                                                                         |
 | MDX overviews                                                                | Checkbox, Dropdown, Modal, TextInput, Button, Accordion have overview pages.                                                                                                                                                                                                                                                                                                |
 | Playwright                                                                   | 36 passed in Chromium against `storybook:build`. Not re-run after the latest commit; should be re-confirmed before merge.                                                                                                                                                                                                                                                   |
@@ -250,7 +250,7 @@ telemetry (see [`migration-support.md`](./migration-support.md)).
 16. ~~Angular peer floor.~~ Done: ADR 0018 accepted 2026-10-28 with a floor
     of 19. ~~`standalone: true` removed from generator.~~ Done. CI still runs
     one Angular version — the "19 plus latest" matrix ADR 0018 calls for is not
-    yet set up in `angular-test` / `angular-e2e`. Deferred.
+    yet set up in the `angular` CI job. Deferred.
 17. ~~Whether the package is behind a v12 flag.~~ **Decided 2026-10-28:** it is
     not. `@carbon/angular` is new as of v12 and needs a separate migration doc
     for consumers coming from `carbon-components-angular`
@@ -462,9 +462,9 @@ depends on the author running `e2e` locally before marking the PR ready.
    `MANIFEST_TYPE_OVERRIDES` added; `isBoolean` heuristic tightened.
 9. ~~Add a title-parity script and run it in `angular-test`.~~ **Done:**
    `tasks/check-parity.js` added, wired into CI, found and fixed 19 gaps.
-10. Add the Angular 19 plus latest matrix to `angular-test` and `angular-e2e`,
-    or record in the PR that it is deferred. ADR 0018 calls for it. **Decision
-    needed for PR description.**
+10. Add the Angular 19 plus latest matrix to the `angular` CI job, or record in
+    the PR that it is deferred. ADR 0018 calls for it. **Decision needed for PR
+    description.**
 11. `plan.md` (1560 lines), `milestones.md` and `legacy-compatibility-matrix.md`
     describe superseded designs. They carry banners but are large for a first
     PR. Trim them, or accept the reviewer churn.
@@ -876,8 +876,8 @@ In order. Items marked ~~done~~ are complete; the remainder are open.
     (item 18).
 12. ~~**Land the Angular 19 peer floor** (ADR 0018).~~ **Accepted 2026-10-28.**
     Peers set to `>=19`, toolchain stays on `^19`. Follow-ups: add the Angular
-    19 plus latest matrix to `angular-test` and `angular-e2e` in
-    `.github/workflows/ci.yml`; drop `standalone: true` from the generator
+    19 plus latest matrix to the `angular` job in `.github/workflows/ci.yml`;
+    drop `standalone: true` from the generator
     (`tasks/generate-wrappers/index.js`), the README and the Storybook welcome
     sample; put the `>=19` peer requirement in the CCA migration doc.
 13. ~~**Decide whether to accept ADR 0020.**~~ **Accepted 2026-10-27.** Basis:

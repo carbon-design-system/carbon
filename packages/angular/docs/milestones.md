@@ -72,9 +72,10 @@ runners, Storybook, and CI workflow.
 
 ### CI
 
-> **Partly done.** `.github/workflows/ci.yml` has `angular-test` and
-> `angular-e2e` jobs, skipped unless `packages/angular/**` changed. They run on
-> one Angular version. The version matrix below is not set up.
+> **Partly done.** `.github/workflows/ci.yml` has an `angular` job (build, Jest,
+> Storybook build, Playwright), skipped unless `packages/angular/**`,
+> `packages/web-components/**` or `packages/styles/**` changed. It runs on one
+> Angular version. The version matrix below is not set up.
 
 Add a CI workflow that runs:
 
