@@ -15,6 +15,7 @@ import * as stories from './GetStartedCard.stories';
 - [With media and pictogram](#with-media-and-pictogram)
 - [With media and sequence](#with-media-and-sequence)
 - [With horizontal media](#with-horizontal-media)
+- [With AI label and actions](#with-ai-label-and-actions)
 - [With disabled](#with-disabled)
 - [Feedback](#feedback)
 
@@ -183,6 +184,51 @@ activate the card. Keep it decorative; do not use it to convey information.
     {
       title: 'Open in Stackblitz',
       onClick: () => stackblitzPrefillConfig(stories.withHorizontalMedia),
+    },
+  ]}
+/>
+
+## With AI label and actions
+
+Set `clickable={false}` when the card needs controls of its own, such as an
+`AILabel` or header actions. Interactive elements shouldn't sit inside a
+clickable card, so the whole surface stops being a button. Instead:
+
+- `decorator` takes an `AILabel`, shown at the top-right of the header.
+- `headerActions` adds icon buttons beside the AI label. They collapse into an
+  overflow menu when there isn't room.
+- The metadata moves into `Card.Footer`, next to a separate arrow `IconButton`
+  that handles `onFooterActionClick`. Set its accessible name with
+  `footerActionLabel`.
+
+`media`, `horizontal` and `onClick` apply to clickable cards only.
+
+```jsx
+<GetStartedCard
+  clickable={false}
+  label="Label"
+  title="Title"
+  pictogram={Crossroads}
+  decorator={
+    <AILabel size="xs">
+      <AILabelContent>…</AILabelContent>
+    </AILabel>
+  }
+  headerActions={[
+    { id: 'progress', icon: Incomplete, label: 'View progress', onClick },
+  ]}
+  metadata={metadata}
+  footerActionLabel="Start"
+  onFooterActionClick={onStart}
+/>
+```
+
+<Canvas
+  of={stories.withAILabelAndActions}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(stories.withAILabelAndActions),
     },
   ]}
 />

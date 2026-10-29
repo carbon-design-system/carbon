@@ -13,6 +13,7 @@ import { WithSequence } from './example/preview-components/WithSequence';
 import { WithMediaAndPictogram } from './example/preview-components/WithMediaAndPictogram';
 import { WithMediaAndSequence } from './example/preview-components/WithMediaAndSequence';
 import { WithHorizontalMedia } from './example/preview-components/WithHorizontalMedia';
+import { WithAILabelAndActions } from './example/preview-components/WithAILabelAndActions';
 import { WithDisabled } from './example/preview-components/WithDisabled';
 
 export default {
@@ -83,6 +84,18 @@ const WithHorizontalMediaTemplate = (args) => {
 export const withHorizontalMedia = WithHorizontalMediaTemplate.bind({});
 withHorizontalMedia.storyName = 'With horizontal media';
 withHorizontalMedia.args = {
+  label: 'Label',
+  title: 'Get start card example content goes here',
+  disabled: false,
+};
+
+const WithAILabelAndActionsTemplate = (args) => {
+  return <WithAILabelAndActions {...args} />;
+};
+
+export const withAILabelAndActions = WithAILabelAndActionsTemplate.bind({});
+withAILabelAndActions.storyName = 'With AI label and actions';
+withAILabelAndActions.args = {
   label: 'Label',
   title: 'Get start card example content goes here',
   disabled: false,

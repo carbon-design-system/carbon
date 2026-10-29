@@ -70,6 +70,83 @@
   }
 }
 
+// Not clickable: the metadata sits in `Card.Footer` beside a separate arrow
+// button, and the header can hold an `AILabel` and icon buttons. The colors
+// below only apply while the card is enabled, so a disabled card keeps the
+// Card's own disabled styles.
+.#{$prefix}--card.#{$prefix}--get-started-card--static {
+  // Push the footer to the bottom of the card, like the metadata row. The Card's
+  // default footer padding plus a button would leave much more space below the
+  // metadata than the clickable card has. With a 32px button and $spacing-03
+  // block padding the footer is 48px tall, so the metadata row is centered 24px
+  // from the bottom edge, as in the clickable card. The end padding is trimmed
+  // because the arrow icon sits $spacing-03 inside its button, which puts it
+  // $spacing-05 from the card edge, like the clickable card's arrow.
+  .#{$prefix}--card__footer {
+    margin-block-start: auto;
+    padding-block: $spacing-03;
+    padding-inline-end: $spacing-03;
+  }
+
+  // The arrow button sits at the trailing edge of the footer.
+  .#{$prefix}--card__footer > :last-child {
+    margin-inline-start: auto;
+  }
+
+  // The base rule above insets the decorator for the clickable layouts. Here the
+  // AI label shares a row with the header actions, which start $spacing-03 from
+  // the top and are $spacing-07 tall, so the same top inset centers the 24px
+  // label on them.
+  .#{$prefix}--card__decorator {
+    inset-block-start: $spacing-03;
+    inset-inline-end: $spacing-05;
+  }
+
+  // The AI label sits $spacing-05 from the edge, so the actions need more room
+  // than the Card reserves by default to keep a gap before it.
+  &.#{$prefix}--card--has-ai-label .#{$prefix}--card__actions-slot {
+    padding-inline-end: $spacing-08;
+  }
+
+  // The brand gradient replaces the AI card's own aura, so its shadows are
+  // dropped too.
+  &.#{$prefix}--card--has-ai-label {
+    box-shadow: none;
+  }
+}
+
+.#{$prefix}--get-started-card--static:not(.#{$prefix}--card--disabled) {
+  // The AI label and the ghost icon buttons sit on the purple gradient, so
+  // they use white instead of the theme's colors.
+  .#{$prefix}--ai-label__button {
+    border-color: colors.$white-0;
+    color: colors.$white-0;
+  }
+
+  @media (any-hover: hover) {
+    .#{$prefix}--ai-label .#{$prefix}--ai-label__button:hover,
+    .#{$prefix}--ai-label .#{$prefix}--ai-label__button:hover:active {
+      background: colors.$white-0;
+      color: colors.$purple-70;
+    }
+  }
+
+  // `IconButton` renders its icon as a bare `svg` (no `btn__icon` class), and
+  // the ghost button fills `svg` with `$icon-primary` while enabled. Match that
+  // selector so the icon turns white.
+  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only:not([disabled]) svg {
+    fill: colors.$white-0;
+  }
+
+  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only:hover {
+    background-color: colors.$purple-70-hover;
+  }
+
+  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only:active {
+    background-color: colors.$purple-60;
+  }
+}
+
 // With media the card becomes a two column grid: the header sits in the first
 // column, the metadata row spans the bottom, and the media spans both rows. The
 // media is centered on the card, so it overflows its top and bottom edges
@@ -165,9 +242,14 @@
   }
 }
 
-// Large step number shown in place of the pictogram.
+// Large step number shown in place of the pictogram. `heading-05` has a 40px
+// line height, which would make the header media row 8px taller than it is with
+// a 32px pictogram and push the title down. Matching the line height to the
+// pictogram's size keeps the title in the same place for both.
 .#{$prefix}--get-started-card__sequence {
   @include type.type-style('heading-05');
+
+  line-height: 2rem;
 }
 
 .#{$prefix}--get-started-card__meta {
