@@ -1,6 +1,8 @@
 import { ArgTypes, Meta, Canvas } from '@storybook/addon-docs/blocks';
 import * as FileUploaderStories from './FileUploader.stories.js';
 import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+import dropContainerSrc from './stories/drop-container.js?raw';
+import dragAndDropSingleSrc from './stories/drag-and-drop-single.js?raw';
 
 <Meta isTemplate />
 
@@ -36,7 +38,8 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(FileUploaderStories.Default),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: FileUploaderStories.Default }),
     },
   ]}
 />
@@ -51,9 +54,16 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig(
-          FileUploaderStories.DragAndDropUploadContainerExampleApplication
-        ),
+        stackblitzPrefillConfig({
+          story:
+            FileUploaderStories.DragAndDropUploadContainerExampleApplication,
+          customImports: [
+            "import ExampleDropContainerApp from './stories/drop-container';",
+          ],
+          additionalFiles: {
+            'src/stories/drop-container.tsx': dropContainerSrc,
+          },
+        }),
     },
   ]}
 />
@@ -66,9 +76,16 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig(
-          FileUploaderStories.DragAndDropUploadSingleContainerExampleApplication
-        ),
+        stackblitzPrefillConfig({
+          story:
+            FileUploaderStories.DragAndDropUploadSingleContainerExampleApplication,
+          customImports: [
+            "import ExampleDropContainerAppSingle from './stories/drag-and-drop-single';",
+          ],
+          additionalFiles: {
+            'src/stories/drag-and-drop-single.tsx': dragAndDropSingleSrc,
+          },
+        }),
     },
   ]}
 />
@@ -83,7 +100,9 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig(FileUploaderStories._FileUploaderDropContainer),
+        stackblitzPrefillConfig({
+          story: FileUploaderStories._FileUploaderDropContainer,
+        }),
     },
   ]}
 />
@@ -96,7 +115,9 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig(FileUploaderStories._FileUploaderItem),
+        stackblitzPrefillConfig({
+          story: FileUploaderStories._FileUploaderItem,
+        }),
     },
   ]}
 />
@@ -108,7 +129,8 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(FileUploaderStories.Skeleton),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: FileUploaderStories.Skeleton }),
     },
   ]}
 />

@@ -85,6 +85,11 @@ export interface FileUploaderDropContainerProps
   pattern?: string;
 
   /**
+   * Specify if the file input is required
+   */
+  required?: boolean;
+
+  /**
    * Ref to pass to the inner button element
    */
   innerRef?: React.Ref<HTMLButtonElement>;
@@ -116,6 +121,7 @@ function FileUploaderDropContainer({
   onAddFiles = noopFn,
   onClick,
   pattern = '.[0-9a-z]+$',
+  required,
 
   innerRef,
   ...rest
@@ -168,19 +174,16 @@ function FileUploaderDropContainer({
     }, []);
   }
 
-  const handleFiles = (event: SyntheticEvent<HTMLElement>, files: File[]) => {
-    if (!files.length) return onAddFiles(event, { addedFiles: [] });
-
+  const getAddedFiles = (files: File[]) => {
+    if (!files.length) return [];
     const filesToValidate = multiple ? files : [files[0]];
-    const addedFiles = validateFiles(filesToValidate);
-
-    return onAddFiles(event, { addedFiles });
+    return validateFiles(filesToValidate);
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const files = [...(event.target.files ?? [])];
 
-    return handleFiles(event, files);
+    return onAddFiles(event, { addedFiles: getAddedFiles(files) });
   };
 
   const handleDrop = (event: DragEvent<HTMLDivElement>) => {
@@ -205,8 +208,19 @@ function FileUploaderDropContainer({
           return acc;
         }, [])
       : [...event.dataTransfer.files];
+    const addedFiles = getAddedFiles(files);
 
-    return handleFiles(event, files);
+    if (inputRef.current) {
+      try {
+        const dataTransfer = new DataTransfer();
+        addedFiles.forEach((file) => dataTransfer.items.add(file));
+        inputRef.current.files = dataTransfer.files;
+      } catch {
+        // Some environments reject programmatic file input assignments.
+      }
+    }
+
+    return onAddFiles(event, { addedFiles });
   };
 
   const handleClick = () => {
@@ -272,6 +286,7 @@ function FileUploaderDropContainer({
         disabled={disabled}
         accept={accept.join(',')}
         name={name}
+        required={required}
         multiple={multiple}
         onChange={handleChange}
         onClick={(evt) => {
@@ -340,6 +355,11 @@ FileUploaderDropContainer.propTypes = {
    * Provide a custom regex pattern for the acceptedTypes
    */
   pattern: PropTypes.string,
+
+  /**
+   * Specify if the file input is required
+   */
+  required: PropTypes.bool,
 
   /**
    * Provide an accessibility role for the `<FileUploaderButton>`

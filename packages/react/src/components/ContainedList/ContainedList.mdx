@@ -38,7 +38,8 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(ContainedListStories.Default),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: ContainedListStories.Default }),
     },
   ]}
 />
@@ -106,7 +107,9 @@ export const WithExpandableSearch = () => {
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig(ContainedListStories.WithExpandableSearch),
+        stackblitzPrefillConfig({
+          story: ContainedListStories.WithExpandableSearch,
+        }),
     },
   ]}
 />
@@ -170,7 +173,9 @@ export const WithPersistentSearch = () => {
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig(ContainedListStories.WithPersistentSearch),
+        stackblitzPrefillConfig({
+          story: ContainedListStories.WithPersistentSearch,
+        }),
     },
   ]}
 />
@@ -183,7 +188,7 @@ export const WithPersistentSearch = () => {
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig(ContainedListStories.UsageExamples),
+        stackblitzPrefillConfig({ story: ContainedListStories.UsageExamples }),
     },
   ]}
 />
@@ -195,7 +200,8 @@ export const WithPersistentSearch = () => {
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(ContainedListStories.Disclosed),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: ContainedListStories.Disclosed }),
     },
   ]}
 />
@@ -207,7 +213,8 @@ export const WithPersistentSearch = () => {
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(ContainedListStories.WithActions),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: ContainedListStories.WithActions }),
     },
   ]}
 />
@@ -219,7 +226,8 @@ export const WithPersistentSearch = () => {
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(ContainedListStories.WithIcons),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: ContainedListStories.WithIcons }),
     },
   ]}
 />
@@ -232,7 +240,9 @@ export const WithPersistentSearch = () => {
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig(ContainedListStories.WithInteractiveItems),
+        stackblitzPrefillConfig({
+          story: ContainedListStories.WithInteractiveItems,
+        }),
     },
   ]}
 />
@@ -245,9 +255,9 @@ export const WithPersistentSearch = () => {
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig(
-          ContainedListStories.WithInteractiveItemsAndActions
-        ),
+        stackblitzPrefillConfig({
+          story: ContainedListStories.WithInteractiveItemsAndActions,
+        }),
     },
   ]}
 />
@@ -260,7 +270,9 @@ export const WithPersistentSearch = () => {
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig(ContainedListStories.WithListTitleDecorators),
+        stackblitzPrefillConfig({
+          story: ContainedListStories.WithListTitleDecorators,
+        }),
     },
   ]}
 />

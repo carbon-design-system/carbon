@@ -8,7 +8,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { Layer } from '../../../src';
+import { Layer } from '../../../src/components/Layer';
 
 import { Annotation } from '../Annotation';
 import { prefix } from '../_prefix';

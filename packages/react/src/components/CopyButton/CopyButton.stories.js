@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,6 +9,78 @@
 import React from 'react';
 import CopyButton from './CopyButton';
 import mdx from './CopyButton.mdx';
+
+const defaultArgs = {
+  align: 'bottom',
+  disabled: false,
+  feedback: 'Copied!',
+  feedbackTimeout: 2000,
+  iconDescription: 'Copy to clipboard',
+  kind: '',
+  size: 'md',
+};
+
+const argTypes = {
+  align: {
+    control: 'select',
+    options: [
+      'top',
+      'top-start',
+      'top-end',
+      'bottom',
+      'bottom-start',
+      'bottom-end',
+      'left',
+      'left-start',
+      'left-end',
+      'right',
+      'right-start',
+      'right-end',
+    ],
+  },
+  autoAlign: {
+    control: 'boolean',
+  },
+  disabled: {
+    control: 'boolean',
+  },
+  feedback: {
+    control: 'text',
+  },
+  feedbackTimeout: {
+    control: { type: 'number', min: 1, step: 1 },
+  },
+  iconDescription: {
+    control: 'text',
+  },
+  kind: {
+    control: 'select',
+    options: [
+      ' ',
+      'primary',
+      'secondary',
+      'tertiary',
+      'ghost',
+      'danger',
+      'danger--primary',
+      'danger--ghost',
+      'danger--tertiary',
+    ],
+  },
+  size: {
+    control: 'select',
+    options: ['sm', 'md', 'lg'],
+  },
+  onClick: {
+    action: 'onClick',
+  },
+};
+
+const parameters = {
+  controls: {
+    include: Object.keys(argTypes),
+  },
+};
 
 export default {
   title: 'Components/CopyButton',
@@ -22,10 +94,8 @@ export default {
 
 // Note: autoAlign is used here only to make tooltips visible in StackBlitz,
 // autoAlign is in preview and not part of the actual implementation.
-export const Default = (args) => <CopyButton autoAlign {...args} />;
+export const Default = (args) => <CopyButton {...args} />;
 
-Default.argTypes = {
-  onClick: {
-    action: 'onClick',
-  },
-};
+Default.args = defaultArgs;
+Default.argTypes = argTypes;
+Default.parameters = parameters;

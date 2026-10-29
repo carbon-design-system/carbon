@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2018, 2023
+ * Copyright IBM Corp. 2018, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -30,7 +30,28 @@ const IGNORE_EXAMPLE_DIRS = new Set([
   'vue-cli',
   'storybook',
   'sass-modules',
+  'token-explorer',
+  'colors-explorer',
+  // modules shared by the examples of a package, not a standalone example
+  'shared',
 ]);
+
+// Install example app deps. Example lockfiles intentionally not committed.
+// Since Yarn defaults `enableImmutableInstalls` to true on CI, which would
+// fail with YN0028 as soon as the install populates, so the install has to opt
+// out with `--no-immutable`
+async function installExample(filepath, label) {
+  await fs.ensureFile(path.join(filepath, 'yarn.lock'));
+
+  const result = spawn.sync('yarn', ['install', '--no-immutable'], {
+    stdio: 'inherit',
+    cwd: filepath,
+  });
+
+  if (result.status !== 0) {
+    throw new Error(`Error installing dependencies for ${label}`);
+  }
+}
 
 /**
  * The goal here is to create a top-level `build` folder with content to be
@@ -54,7 +75,7 @@ async function main() {
       .map(async (name) => {
         // Verify that each file that we read from the packages directory is
         // actually a folder. Typically used to catch `.DS_store` files that
-        // accidentally appear when opening with MacOS Finder
+        // accidentally appear when opening with macOS Finder
         const filepath = path.join(PACKAGES_DIR, name);
         const stat = await fs.lstat(filepath);
         const descriptor = {
@@ -118,15 +139,10 @@ async function main() {
           await fs.ensureDir(exampleDir);
 
           if (packageJson.scripts.build) {
-            const installResult = spawn.sync('yarn', ['install'], {
-              stdio: 'inherit',
-              cwd: example.filepath,
-            });
-            if (installResult.status !== 0) {
-              throw new Error(
-                `Error installing dependencies for ${pkg.name}:${example.name}`
-              );
-            }
+            await installExample(
+              example.filepath,
+              `${pkg.name}:${example.name}`
+            );
 
             const buildResult = spawn.sync('yarn', ['build'], {
               stdio: 'inherit',
@@ -166,11 +182,103 @@ async function main() {
     })
   );
 
+  // Build colors-explorer separately (same pattern as the themes token-explorer).
+  const colorsExplorerExample = {
+    filepath: path.join(PACKAGES_DIR, 'colors', 'examples', 'colors-explorer'),
+    name: 'colors-explorer',
+  };
+  reporter.info('Building example `colors-explorer` in package `colors`');
+  const colorsExplorerDir = path.join(
+    BUILD_DIR,
+    'colors',
+    'examples',
+    'colors-explorer'
+  );
+  await fs.ensureDir(colorsExplorerDir);
+  await installExample(
+    colorsExplorerExample.filepath,
+    'colors:colors-explorer'
+  );
+  const colorsExplorerBuild = spawn.sync('yarn', ['build'], {
+    stdio: 'inherit',
+    cwd: colorsExplorerExample.filepath,
+  });
+  if (colorsExplorerBuild.status !== 0) {
+    throw new Error('Error building example colors-explorer for colors');
+  }
+  await fs.copy(
+    path.join(colorsExplorerExample.filepath, 'build'),
+    colorsExplorerDir
+  );
+  reporter.success('Built example `colors-explorer` in package `colors`');
+
+  // Build the motion token-explorer separately (same pattern as colors-explorer).
+  const motionExplorerExample = {
+    filepath: path.join(PACKAGES_DIR, 'motion', 'examples', 'token-explorer'),
+    name: 'token-explorer',
+  };
+  reporter.info('Building example `token-explorer` in package `motion`');
+  const motionExplorerDir = path.join(
+    BUILD_DIR,
+    'motion',
+    'examples',
+    'token-explorer'
+  );
+  await fs.ensureDir(motionExplorerDir);
+  await installExample(motionExplorerExample.filepath, 'motion:token-explorer');
+  const motionExplorerBuild = spawn.sync('yarn', ['build'], {
+    stdio: 'inherit',
+    cwd: motionExplorerExample.filepath,
+  });
+  if (motionExplorerBuild.status !== 0) {
+    throw new Error('Error building example token-explorer for motion');
+  }
+  await fs.copy(
+    path.join(motionExplorerExample.filepath, 'build'),
+    motionExplorerDir
+  );
+  reporter.success('Built example `token-explorer` in package `motion`');
+
+  // Build token-explorer separately (it's a Next.js app excluded from the
+  // auto-generated links above, but its static export goes into the same build tree).
+  const tokenExplorerExample = {
+    filepath: path.join(PACKAGES_DIR, 'themes', 'examples', 'token-explorer'),
+    name: 'token-explorer',
+  };
+  reporter.info('Building example `token-explorer` in package `themes`');
+  const tokenExplorerDir = path.join(
+    BUILD_DIR,
+    'themes',
+    'examples',
+    'token-explorer'
+  );
+  await fs.ensureDir(tokenExplorerDir);
+  await installExample(tokenExplorerExample.filepath, 'themes:token-explorer');
+  const tokenExplorerBuild = spawn.sync('yarn', ['build'], {
+    stdio: 'inherit',
+    cwd: tokenExplorerExample.filepath,
+  });
+  if (tokenExplorerBuild.status !== 0) {
+    throw new Error('Error building example token-explorer for themes');
+  }
+  await fs.copy(
+    path.join(tokenExplorerExample.filepath, 'build'),
+    tokenExplorerDir
+  );
+  reporter.success('Built example `token-explorer` in package `themes`');
+
   const links = packagesWithExamples.reduce((html, pkg) => {
-    const links = pkg.examples.reduce((acc, example) => {
+    let pkgLinks = pkg.examples.reduce((acc, example) => {
       const href = `./${pkg.name}/examples/${example.name}/`;
       return acc + `<li><a href="${href}">${example.name}</a></li>`;
     }, '');
+
+    if (pkg.name === 'colors') {
+      pkgLinks += `\n    <li><a href="./colors/examples/colors-explorer/">preview (v12)</a></li>`;
+    }
+    if (pkg.name === 'themes') {
+      pkgLinks += `\n    <li><a href="./themes/examples/token-explorer/">preview (v12)</a></li>`;
+    }
 
     return (
       html +
@@ -180,11 +288,22 @@ async function main() {
     <h2><pre style="display:inline;"><code>@carbon/${pkg.name}</code></pre></h2>
   </header>
   <ul>
-    ${links}
+    ${pkgLinks}
   </ul>
 </section>`
     );
   }, '');
+
+  // motion has no regular examples — append its section separately
+  const motionSection = `
+<section>
+  <header>
+    <h2><pre style="display:inline;"><code>@carbon/motion</code></pre></h2>
+  </header>
+  <ul>
+    <li><a href="./motion/examples/token-explorer/">preview (v12)</a></li>
+  </ul>
+</section>`;
 
   const indexFile = `
 <!DOCTYPE html>
@@ -195,7 +314,7 @@ async function main() {
   <title>Carbon Elements</title>
   <style>body { font-family: 'IBM Plex Mono', monospaces; }</style>
 </head>
-<body>${links}<footer>Last built on ${lastBuiltOn}</footer></body>
+<body>${links}${motionSection}<footer>Last built on ${lastBuiltOn}</footer></body>
 </html>
 `;
 

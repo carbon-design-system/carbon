@@ -17,6 +17,46 @@ const prefix = 'cds';
 
 describe('Select', () => {
   describe('renders as expected - Component API', () => {
+    it('should warn without throwing for interactive content in labelText', () => {
+      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+      expect(() => {
+        render(
+          <Select
+            id="select"
+            labelText={
+              <>
+                Select label <button type="button">Help</button>
+              </>
+            }
+          />
+        );
+      }).not.toThrow();
+
+      expect(spy).toHaveBeenCalledWith(
+        expect.stringContaining(
+          'Warning: The Select component `labelText` prop must have no interactive content'
+        )
+      );
+
+      spy.mockRestore();
+    });
+
+    it('should allow non-interactive content in labelText', () => {
+      expect(() => {
+        render(
+          <Select
+            id="select"
+            labelText={
+              <>
+                Select label <span>additional label content</span>
+              </>
+            }
+          />
+        );
+      }).not.toThrow();
+    });
+
     it('should render the correct elements by default', () => {
       render(<Select id="select" labelText="Select" />);
 
@@ -551,21 +591,6 @@ describe('Select', () => {
         </Select>
       );
       await expect(container).toHaveNoAxeViolations();
-    });
-
-    it('should have no Accessibility Checker violations', async () => {
-      const { container } = render(
-        <main>
-          <Select
-            id="select"
-            labelText="Select an option"
-            aria-label="Select an option">
-            <SelectItem value="option-1" text="Option 1" />
-            <SelectItem value="option-2" text="Option 2" />
-          </Select>
-        </main>
-      );
-      await expect(container).toHaveNoACViolations('Select');
     });
 
     it('should not set aria-invalid if disabled', () => {

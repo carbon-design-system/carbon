@@ -1,0 +1,181 @@
+//
+// Copyright IBM Corp. 2024, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+/* stylelint-disable declaration-no-important */
+
+@use '../../config' as *;
+@use '../../theme' as *;
+@use '../../type' as *;
+@use '../../spacing' as *;
+@use '../../breakpoint' as *;
+
+/// InterstitialScreen styles
+/// @access public
+/// @group interstitial-screen
+@mixin interstitial-screen {
+  $block-class: #{$prefix}--interstitial-screen;
+  $carousel-item: #{$prefix}--carousel__item;
+
+  .#{$block-class} {
+    $block: &;
+
+    &--body {
+      overflow: hidden auto;
+      flex-grow: 1;
+      padding: 0;
+      margin: 0;
+      background-color: $background;
+    }
+
+    &--progress {
+      overflow: auto;
+      margin-block-end: $spacing-04;
+    }
+
+    &__carousel {
+      block-size: 100%;
+
+      .#{$carousel-item} {
+        flex: 0 0 100%;
+        scroll-snap-align: start;
+      }
+    }
+
+    &--internal-body {
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+
+    &--content {
+      block-size: 100%;
+    }
+
+    // HEADER
+    &--internal-header {
+      position: relative;
+      background-color: $background;
+      margin-block-end: 0 !important;
+      padding-block-start: $spacing-06 !important;
+      padding-inline-start: $spacing-07 !important;
+
+      @include breakpoint-down(md) {
+        padding-inline: $spacing-05 !important;
+      }
+
+      &:empty {
+        min-block-size: 0;
+      }
+
+      .#{$block-class}--titleContainer {
+        margin-block-end: $spacing-05;
+
+        h1 {
+          @include type-style('productive-heading-04');
+
+          margin-block-end: $spacing-03;
+
+          &:empty {
+            padding: 0;
+          }
+        }
+
+        h2 {
+          @include type-style('productive-heading-03');
+
+          &:empty {
+            padding: 0;
+          }
+        }
+      }
+
+      &--has-title {
+        background: $layer-01;
+        border-block-end: 1px solid $border-subtle-01;
+
+        #{$block}--progress {
+          margin-block-start: 0;
+        }
+      }
+    }
+
+    // FOOTER
+    &--footer {
+      background: $background;
+      border-block-start: 1px solid $border-subtle-01;
+      inline-size: 100%;
+
+      @include breakpoint-down(md) {
+        block-size: auto;
+      }
+
+      // ButtonSet wrapper
+      .#{$prefix}--btn-set {
+        display: flex;
+        justify-content: flex-end;
+        inline-size: 100%;
+      }
+
+      // On small screens, split width equally among all buttons
+      @include breakpoint-down(md) {
+        .#{$prefix}--btn#{$block}--prev-btn,
+        .#{$prefix}--btn#{$block}--next-btn,
+        .#{$prefix}--btn#{$block}--start-btn,
+        .#{$prefix}--btn#{$block}--skip-btn {
+          flex: 1 1 0;
+          inline-size: auto;
+          max-inline-size: none;
+          min-inline-size: 0;
+        }
+      }
+
+      // On larger screens, fixed widths for action buttons, flexible skip
+      @include breakpoint(md) {
+        .#{$prefix}--btn#{$block}--prev-btn,
+        .#{$prefix}--btn#{$block}--next-btn,
+        .#{$prefix}--btn#{$block}--start-btn {
+          flex: 0 0 auto;
+          inline-size: calc($spacing-11 * 3);
+          max-inline-size: 15rem;
+        }
+
+        .#{$prefix}--btn#{$block}--skip-btn {
+          flex: 1 1 auto;
+          max-inline-size: none;
+        }
+      }
+
+      .#{$prefix}--inline-loading {
+        position: absolute;
+        inline-size: $spacing-07;
+        inset-block-start: 0;
+        inset-inline-end: 0;
+      }
+    }
+
+    &--footer-controls {
+      display: flex;
+      flex-direction: row;
+      margin-inline-start: auto;
+    }
+
+    // FULL SCREEN
+    &--full-screen {
+      position: fixed;
+      inset-block-start: 0;
+      inset-inline: 0;
+
+      #{$block}--container {
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+        margin: 0;
+        block-size: 100vh;
+        max-inline-size: 100vw;
+      }
+    }
+  }
+}

@@ -121,6 +121,26 @@ describe.each([
       );
     });
 
+    it('should be described by a provided aria-describedby', () => {
+      render(
+        <div>
+          <div id="description-modal-id">
+            This is the description of the modal
+          </div>
+          <Component aria-describedby="description-modal-id">
+            <ModalHeader>Modal header</ModalHeader>
+            <ModalBody>This is the modal body content</ModalBody>
+            <ModalFooter primaryButtonText="Add" secondaryButtonText="Cancel" />
+          </Component>
+        </div>
+      );
+
+      expect(screen.getByRole('dialog', { hidden: true })).toHaveAttribute(
+        'aria-describedby',
+        'description-modal-id'
+      );
+    });
+
     it('should change submit to danger button', () => {
       render(
         <Component danger open>
@@ -162,11 +182,13 @@ describe.each([
         </Component>
       );
 
-      await userEvent.click(screen.getByLabelText('Close'));
+      const closeButton = screen.getByLabelText('Close');
+      await userEvent.click(closeButton);
 
       expect(screen.getByRole('presentation', { hidden: true })).toHaveClass(
         'is-visible'
       );
+      expect(closeButton).toHaveFocus();
     });
 
     it('should focus selector on open', async () => {
@@ -368,6 +390,55 @@ describe.each([
       expect(button).toHaveFocus();
     });
 
+    it('should blur focused modal descendants before aria-hidden is applied on close', async () => {
+      const focusDuringClose = jest.fn();
+      const ComposedModalExample = () => {
+        const buttonRef = useRef(null);
+        const [isOpen, setIsOpen] = useState(false);
+
+        return (
+          <>
+            <button
+              ref={buttonRef}
+              type="button"
+              onClick={() => setIsOpen(true)}>
+              Launch modal
+            </button>
+            <Component
+              launcherButtonRef={buttonRef}
+              open={isOpen}
+              onClose={() => {
+                focusDuringClose(document.activeElement);
+                setIsOpen(false);
+              }}>
+              <ModalHeader>Header</ModalHeader>
+              <ModalFooter
+                primaryButtonText="Add"
+                secondaryButtonText="Cancel"
+              />
+            </Component>
+          </>
+        );
+      };
+      render(<ComposedModalExample />);
+
+      await userEvent.click(
+        screen.getByRole('button', { name: /Launch modal/ })
+      );
+
+      const overlay = screen.getByRole('presentation', { hidden: true });
+      const closeButton = screen.getByRole('button', { name: /Close/ });
+
+      await userEvent.click(closeButton);
+
+      expect(focusDuringClose).toHaveBeenCalledTimes(1);
+      expect(overlay.contains(focusDuringClose.mock.calls[0][0])).toBe(false);
+
+      if (!isPresence) {
+        expect(overlay).toHaveAttribute('aria-hidden', 'true');
+      }
+    });
+
     it('should change size based on size prop', () => {
       render(
         <Component open size="lg">
@@ -419,6 +490,30 @@ describe.each([
   });
 
   describe('enable-dialog-element feature flag', () => {
+    it('should pass aria-describedby through to the native dialog element', () => {
+      render(
+        <div>
+          <div id="description-modal-id">
+            This is the description of the modal
+          </div>
+          <FeatureFlags enableDialogElement>
+            <ComposedModal
+              aria-describedby="description-modal-id"
+              data-testid="modal"
+              open>
+              <ModalHeader>Modal header</ModalHeader>
+              <ModalBody>This is the modal body content</ModalBody>
+            </ComposedModal>
+          </FeatureFlags>
+        </div>
+      );
+
+      expect(screen.getByRole('dialog', { hidden: true })).toHaveAttribute(
+        'aria-describedby',
+        'description-modal-id'
+      );
+    });
+
     it('should bring launcherButtonRef element into focus on close when the ref is defined', async () => {
       const ComposedModalExample = () => {
         const [open, setOpen] = useState(true);
@@ -449,6 +544,31 @@ describe.each([
       await waitFor(() => {
         expect(focusElem).toHaveFocus();
       });
+    });
+
+    it('should call onClose when the dialog cancel event fires', () => {
+      const onClose = jest.fn();
+      render(
+        <FeatureFlags enableDialogElement>
+          <Component open onClose={onClose}>
+            <ModalHeader>Modal header</ModalHeader>
+            <ModalBody>Modal content</ModalBody>
+            <ModalFooter primaryButtonText="Add" secondaryButtonText="Cancel" />
+          </Component>
+        </FeatureFlags>
+      );
+
+      const dialog = screen.getByRole('dialog');
+
+      // Simulate a native cancel event on the dialog.
+      const cancelEvent = new Event('cancel', {
+        bubbles: false,
+        cancelable: true,
+      });
+      fireEvent(dialog, cancelEvent);
+
+      expect(cancelEvent.defaultPrevented).toBe(true);
+      expect(onClose).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -521,7 +641,7 @@ describe.each([
 
         // The background layer is used here instead of a button outside the
         // modal because a real user cannot interact with a button. The
-        // backround layer is in the way.
+        // background layer is in the way.
         const backgroundLayer = screen.getByRole('presentation', {
           hidden: true,
         });
@@ -549,7 +669,7 @@ describe.each([
 
         // The background layer is used here instead of a button outside the
         // modal because a real user cannot interact with a button. The
-        // backround layer is in the way.
+        // background layer is in the way.
         const backgroundLayer = screen.getByRole('presentation', {
           hidden: true,
         });
@@ -571,7 +691,7 @@ describe.each([
 
         // The background layer is used here instead of a button outside the
         // modal because a real user cannot interact with a button. The
-        // backround layer is in the way.
+        // background layer is in the way.
         const backgroundLayer = screen.getByRole('presentation', {
           hidden: true,
         });
@@ -604,7 +724,7 @@ describe.each([
 
         // The background layer is used here instead of a button outside the
         // modal because a real user cannot interact with a button. The
-        // backround layer is in the way.
+        // background layer is in the way.
         const backgroundLayer = screen.getByRole('presentation', {
           hidden: true,
         });
@@ -629,7 +749,7 @@ describe.each([
 
         // The background layer is used here instead of a button outside the
         // modal because a real user cannot interact with a button. The
-        // backround layer is in the way.
+        // background layer is in the way.
         const backgroundLayer = screen.getByRole('presentation', {
           hidden: true,
         });
@@ -659,7 +779,7 @@ describe.each([
 
         // The background layer is used here instead of a button outside the
         // modal because a real user cannot interact with a button. The
-        // backround layer is in the way.
+        // background layer is in the way.
         const backgroundLayer = screen.getByRole('presentation', {
           hidden: true,
         });

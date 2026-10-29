@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -14,9 +14,10 @@
  *
  * Two sets of assertions:
  *
- * 1. js/generated/ ↔ DTCG JSON source (convertDTCGToTheme / convertDTCGComponentTokens)
- *    The authoritative check: every token in the JSON must appear in the
- *    generated file with the correct value, and nothing extra must be generated.
+ * 1. js/generated/ ↔ token files (convertThemeTokens / convertComponentTokens)
+ *    The authoritative check: every token in `tokens/themes/` must appear in
+ *    the generated file with the correct value, and nothing extra must be
+ *    generated.
  *
  * 2. js/generated/ ↔ lib/ (built bundle)
  *    Confirms the bundler faithfully re-exports what the generated files declare.
@@ -29,13 +30,107 @@ const path = require('path');
 
 const JS_GENERATED_DIR = path.resolve(__dirname, '../js/generated');
 const LIB_DIR = path.resolve(__dirname, '../lib');
-const DTCG_DIR = path.resolve(__dirname, '../src/dtcg');
+const TOKENS_DIR = path.resolve(__dirname, '../tokens/themes');
+const PALETTE_FILE = path.resolve(
+  __dirname,
+  '../../colors/tokens/colors.tokens.json'
+);
+const EXTENSION_NAMESPACE = 'com.ibm.carbon';
+const THEME_NAMES = ['white', 'g10', 'g90', 'g100'];
 
-const {
-  convertDTCGToTheme,
-  convertDTCGComponentTokens,
-  normalizeComponentThemeName,
-} = require('../tasks/builders/dtcg-converter');
+/**
+ * Normalize component theme key for JS output, e.g. 'white' → 'whiteTheme'.
+ */
+function normalizeComponentThemeName(theme) {
+  if (theme === 'white') return 'whiteTheme';
+  return theme;
+}
+
+function readJson(filePath) {
+  return JSON.parse(fs.readFileSync(filePath, 'utf8'));
+}
+
+// The expected values are derived here without Style Dictionary, so that the
+// build's reference resolution and color conversion are checked independently.
+const palette = readJson(PALETTE_FILE);
+
+/**
+ * Resolve a curly-brace alias to a palette color, e.g. '{gray.50}'.
+ */
+function resolveAlias(alias) {
+  return alias
+    .slice(1, -1)
+    .split('.')
+    .reduce((node, key) => node[key], palette).$value;
+}
+
+/**
+ * Resolve a JSON Pointer into the palette,
+ * e.g. '#/gray/50/$value/components'.
+ */
+function resolvePointer(pointer) {
+  return pointer
+    .slice(2)
+    .split('/')
+    .reduce((node, key) => node[key], palette);
+}
+
+/**
+ * Convert a token `$value` to the CSS color the build should emit.
+ */
+function toCssColor($value) {
+  if (typeof $value === 'string') {
+    return resolveAlias($value).hex;
+  }
+  if ($value.alpha === undefined) {
+    return $value.hex;
+  }
+  const components = $value.components.$ref
+    ? resolvePointer($value.components.$ref)
+    : $value.components;
+  const [r, g, b] = components.map((c) => Math.round(c * 255));
+  return `rgba(${r}, ${g}, ${b}, ${$value.alpha})`;
+}
+
+function readTokenFile(themeName, name) {
+  const { $schema, $description, $extensions, ...tokens } = readJson(
+    path.join(TOKENS_DIR, themeName, `${name}.tokens.json`)
+  );
+  return { $extensions, tokens };
+}
+
+/**
+ * Convert the token file of a single theme into a flat token map.
+ */
+function convertThemeTokens(themeName) {
+  const { $extensions, tokens } = readTokenFile(themeName, 'theme');
+  const theme = {};
+  for (const [name, token] of Object.entries(tokens)) {
+    theme[name] = toCssColor(token.$value);
+  }
+  theme['color-scheme'] = $extensions[EXTENSION_NAMESPACE]['color-scheme'];
+  return theme;
+}
+
+/**
+ * Convert the token files of a component into a map of token name to its
+ * value in every theme.
+ */
+function convertComponentTokens(name) {
+  const result = {};
+  for (const themeName of THEME_NAMES) {
+    const { tokens } = readTokenFile(themeName, name);
+    for (const [tokenName, token] of Object.entries(tokens)) {
+      result[tokenName] ??= {};
+      const fallback = token.$extensions?.[EXTENSION_NAMESPACE]?.fallback;
+      if (fallback !== undefined) {
+        result[tokenName].fallback = toCssColor(fallback);
+      }
+      result[tokenName][themeName] = toCssColor(token.$value);
+    }
+  }
+  return result;
+}
 
 const jsGeneratedExists = fs.existsSync(JS_GENERATED_DIR);
 const libExists = fs.existsSync(LIB_DIR);
@@ -48,17 +143,12 @@ if (!jsGeneratedExists || !libExists) {
   );
 }
 
-// ---------------------------------------------------------------------------
-// kebab-case → camelCase (mirrors dtcg-js-themes.js / dtcg-js-component-tokens.js)
-// ---------------------------------------------------------------------------
+// kebab-case → camelCase (mirrors style-dictionary/formats/js.js)
 function kebabToCamel(str) {
   return str.replace(/-([a-z0-9])/g, (_, ch) => ch.toUpperCase());
 }
 
-// ---------------------------------------------------------------------------
 // Helpers
-// ---------------------------------------------------------------------------
-
 /**
  * Parse named exports from a generated JS file.
  * Handles:
@@ -180,10 +270,7 @@ function diffTokenMaps(generated, lib) {
   return { missingInGenerated, extraInGenerated, valueMismatches };
 }
 
-// ---------------------------------------------------------------------------
 // Utilities to build a human-readable failure message
-// ---------------------------------------------------------------------------
-
 function formatDiff({ missingInGenerated, extraInGenerated, valueMismatches }) {
   const lines = [];
   if (missingInGenerated.length) {
@@ -208,10 +295,7 @@ function formatDiff({ missingInGenerated, extraInGenerated, valueMismatches }) {
   return lines.join('\n');
 }
 
-// ---------------------------------------------------------------------------
 // Themes
-// ---------------------------------------------------------------------------
-
 describe('JS generated theme files match lib output', () => {
   const themes = ['white', 'g10', 'g90', 'g100'];
 
@@ -277,10 +361,7 @@ describe('JS generated theme files match lib output', () => {
   });
 });
 
-// ---------------------------------------------------------------------------
 // Component tokens
-// ---------------------------------------------------------------------------
-
 describe('JS generated component token files match lib output', () => {
   const components = [
     { name: 'button', libKey: 'buttonTokens' },
@@ -341,11 +422,8 @@ describe('JS generated component token files match lib output', () => {
   });
 });
 
-// ---------------------------------------------------------------------------
-// DTCG JSON → js/generated/ parity
-// ---------------------------------------------------------------------------
-
-describe('JS generated theme files match DTCG JSON source', () => {
+// Token files → js/generated/ parity
+describe('JS generated theme files match the token files', () => {
   const themes = ['white', 'g10', 'g90', 'g100'];
 
   themes.forEach((themeName) => {
@@ -360,29 +438,28 @@ describe('JS generated theme files match DTCG JSON source', () => {
           path.join(JS_GENERATED_DIR, 'themes', `${themeName}.js`)
         );
 
-        // Build the expected map the same way the builder does:
-        // convertDTCGToTheme → kebab keys → camelCase
-        const dtcgJson = JSON.parse(
-          fs.readFileSync(path.join(DTCG_DIR, `${themeName}.json`), 'utf8')
-        );
-        const rawTheme = convertDTCGToTheme(dtcgJson);
+        // convertThemeTokens(themeName) → kebab keys → camelCase
+        const rawTheme = convertThemeTokens(themeName);
         expected = {};
         for (const [kebabKey, value] of Object.entries(rawTheme)) {
           expected[kebabToCamel(kebabKey)] = value;
         }
       });
 
-      testOrSkip('every DTCG token is present in the generated file', () => {
+      testOrSkip('every token is present in the generated file', () => {
         const missing = Object.keys(expected).filter((k) => !(k in generated));
         expect(missing).toEqual([]);
       });
 
-      testOrSkip('no extra tokens in generated file beyond DTCG source', () => {
-        const extra = Object.keys(generated).filter((k) => !(k in expected));
-        expect(extra).toEqual([]);
-      });
+      testOrSkip(
+        'no extra tokens in generated file beyond the token files',
+        () => {
+          const extra = Object.keys(generated).filter((k) => !(k in expected));
+          expect(extra).toEqual([]);
+        }
+      );
 
-      testOrSkip('all token values match DTCG source exactly', () => {
+      testOrSkip('all token values match the token files exactly', () => {
         const { valueMismatches } = diffTokenMaps(generated, expected);
         expect(
           formatDiff({
@@ -396,7 +473,7 @@ describe('JS generated theme files match DTCG JSON source', () => {
   });
 });
 
-describe('JS generated component token files match DTCG JSON source', () => {
+describe('JS generated component token files match the token files', () => {
   const components = [
     { name: 'button' },
     { name: 'tag' },
@@ -417,16 +494,9 @@ describe('JS generated component token files match DTCG JSON source', () => {
           path.join(JS_GENERATED_DIR, 'component-tokens', `${name}.js`)
         );
 
-        // Build expected map the same way dtcg-js-component-tokens.js does:
-        // convertDTCGComponentTokens → kebab token name → camelCase
-        //                            → theme keys normalised → camelCase
-        const dtcgJson = JSON.parse(
-          fs.readFileSync(
-            path.join(DTCG_DIR, 'components', `${name}.json`),
-            'utf8'
-          )
-        );
-        const rawTokens = convertDTCGComponentTokens(dtcgJson);
+        // convertComponentTokens → kebab token name → camelCase
+        //                        → theme keys normalised → camelCase
+        const rawTokens = convertComponentTokens(name);
         expected = {};
         for (const [kebabName, themeValues] of Object.entries(rawTokens)) {
           const camelName = kebabToCamel(kebabName);
@@ -439,18 +509,21 @@ describe('JS generated component token files match DTCG JSON source', () => {
         }
       });
 
-      testOrSkip('every DTCG token is present in the generated file', () => {
+      testOrSkip('every token is present in the generated file', () => {
         const missing = Object.keys(expected).filter((k) => !(k in generated));
         expect(missing).toEqual([]);
       });
 
-      testOrSkip('no extra tokens in generated file beyond DTCG source', () => {
-        const extra = Object.keys(generated).filter((k) => !(k in expected));
-        expect(extra).toEqual([]);
-      });
+      testOrSkip(
+        'no extra tokens in generated file beyond the token files',
+        () => {
+          const extra = Object.keys(generated).filter((k) => !(k in expected));
+          expect(extra).toEqual([]);
+        }
+      );
 
       testOrSkip(
-        'all token values and theme entries match DTCG source exactly',
+        'all token values and theme entries match the token files exactly',
         () => {
           const { valueMismatches } = diffTokenMaps(generated, expected);
           expect(

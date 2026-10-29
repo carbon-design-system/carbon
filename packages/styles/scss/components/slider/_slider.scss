@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2023
+// Copyright IBM Corp. 2016, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -198,9 +198,11 @@
       background $duration-fast-02 motion(standard, productive),
       box-shadow $duration-fast-02 motion(standard, productive);
 
-    &:hover {
-      // 20px / 14px = 1.4286
-      transform: scale(1.4286);
+    @media (any-hover: hover) {
+      &:hover {
+        // 20px / 14px = 1.4286
+        transform: scale(1.4286);
+      }
     }
 
     &:focus {
@@ -248,11 +250,13 @@
       inset-inline-end: 0;
     }
 
-    &:hover {
-      transform: none;
+    @media (any-hover: hover) {
+      &:hover {
+        transform: none;
 
-      .#{$prefix}--slider__thumb-icon {
-        fill: $text-secondary;
+        .#{$prefix}--slider__thumb-icon {
+          fill: $text-secondary;
+        }
       }
     }
 
@@ -289,10 +293,15 @@
       inset-inline: 0 auto;
     }
 
-    &:hover,
     &:active,
     &:focus {
       transform: none;
+    }
+
+    @media (any-hover: hover) {
+      &:hover {
+        transform: none;
+      }
     }
   }
 
@@ -376,9 +385,11 @@
   .#{$prefix}--slider--disabled .#{$prefix}--slider__thumb {
     background-color: $border-disabled;
 
-    &:hover {
-      cursor: not-allowed;
-      transform: none;
+    @media (any-hover: hover) {
+      &:hover {
+        cursor: not-allowed;
+        transform: none;
+      }
     }
 
     &:focus {
@@ -400,10 +411,16 @@
     background-color: transparent;
 
     &:active,
-    &:hover,
     &:focus {
       background-color: transparent;
       transform: none;
+    }
+
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: transparent;
+        transform: none;
+      }
     }
 
     .#{$prefix}--slider__thumb-icon {
@@ -430,10 +447,16 @@
     transition: none;
 
     &:active,
-    &:focus,
-    &:hover {
+    &:focus {
       color: $text-disabled;
       outline: none;
+    }
+
+    @media (any-hover: hover) {
+      &:hover {
+        color: $text-disabled;
+        outline: none;
+      }
     }
   }
 

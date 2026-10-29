@@ -910,6 +910,56 @@ describe('FeatureFlags', () => {
       });
     });
 
+    it('enable-v12-autoalign - enableV12Autoalign', () => {
+      const checkFlags = jest.fn();
+      const checkFlag = jest.fn();
+
+      function TestComponent() {
+        const featureFlags = useFeatureFlags();
+        const enableV12Autoalign = useFeatureFlag('enable-v12-autoalign');
+
+        checkFlags({
+          enableV12Autoalign: featureFlags.enabled('enable-v12-autoalign'),
+        });
+
+        checkFlag({
+          enableV12Autoalign,
+        });
+
+        return null;
+      }
+
+      // Render the default
+      const { rerender } = render(
+        <FeatureFlags>
+          <TestComponent />
+        </FeatureFlags>
+      );
+
+      // Ensure the default value is as defined and as expected
+      expect(checkFlags).toHaveBeenLastCalledWith({
+        enableV12Autoalign: false,
+      });
+      expect(checkFlag).toHaveBeenLastCalledWith({
+        enableV12Autoalign: false,
+      });
+
+      // Enable the flag
+      rerender(
+        <FeatureFlags enableV12Autoalign>
+          <TestComponent />
+        </FeatureFlags>
+      );
+
+      // Ensure that when enabled, this flag does not error
+      expect(checkFlags).toHaveBeenLastCalledWith({
+        enableV12Autoalign: true,
+      });
+      expect(checkFlag).toHaveBeenLastCalledWith({
+        enableV12Autoalign: true,
+      });
+    });
+
     it('enable-enhanced-file-uploader - enableEnhancedFileUploader', () => {
       const checkFlags = jest.fn();
       const checkFlag = jest.fn();
@@ -1012,6 +1062,64 @@ describe('FeatureFlags', () => {
       expect(checkFlag).toHaveBeenLastCalledWith({
         enablePresence: true,
       });
+    });
+  });
+
+  // Notices are deduped per flag for the lifetime of the module, so each test
+  // uses a flag name of its own rather than resetting shared state.
+  describe('v12 flag notice', () => {
+    let info;
+
+    beforeEach(() => {
+      info = jest.spyOn(console, 'info').mockImplementation(() => {});
+    });
+
+    afterEach(() => {
+      info.mockRestore();
+    });
+
+    it('should notify when a v12 flag is available but not enabled', () => {
+      add('enable-v12-notice-available', false);
+
+      function TestComponent() {
+        useFeatureFlag('enable-v12-notice-available');
+        return null;
+      }
+
+      render(<TestComponent />);
+
+      expect(info).toHaveBeenCalledTimes(1);
+      expect(info.mock.calls[0][0]).toContain('enable-v12-notice-available');
+    });
+
+    it('should not notify for a flag enabled by the v12 release flag', () => {
+      add('enable-v12-notice-released', false);
+
+      function TestComponent() {
+        useFeatureFlag('enable-v12-notice-released');
+        return null;
+      }
+
+      render(
+        <FeatureFlags enableV12Release>
+          <TestComponent />
+        </FeatureFlags>
+      );
+
+      expect(info).not.toHaveBeenCalled();
+    });
+
+    it('should not notify for non-v12 flags', () => {
+      add('enable-notice-non-v12', false);
+
+      function TestComponent() {
+        useFeatureFlag('enable-notice-non-v12');
+        return null;
+      }
+
+      render(<TestComponent />);
+
+      expect(info).not.toHaveBeenCalled();
     });
   });
 });

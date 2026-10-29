@@ -1,13 +1,15 @@
 //
-// Copyright IBM Corp. 2016, 2025
+// Copyright IBM Corp. 2016, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
 @use '../form';
+@use '../../border-radius' as *;
 @use '../../colors' as *;
 @use '../../config' as *;
+@use '../../feature-flags' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
@@ -19,12 +21,15 @@
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/convert';
 @use '../../utilities/z-index' as *;
+@use '../../utilities/layout';
+@use './vars' as *;
 
 /// Number input styles
 /// @access public
 /// @group number-input
 @mixin number-input {
   .#{$prefix}--number {
+    @include layout.use('size', $default: 'md', $min: 'xs', $max: 'lg');
     @include reset;
 
     position: relative;
@@ -39,7 +44,14 @@
   .#{$prefix}--number
     .#{$prefix}--number__input-wrapper--warning
     input[type='text'] {
-    padding-inline-end: convert.to-rem(128px);
+    // steppers + divider->icon gap + 16px icon + 16px padding
+    padding-inline-end: calc(
+      2 * layout.size('height') + #{$number-input-icon-gap} + 2 * $spacing-05
+    );
+
+    @if enabled('enable-v12-release') {
+      padding-inline-end: $number-input-padding-end-with-icon-or-decorator;
+    }
   }
 
   .#{$prefix}--number input[type='number'],
@@ -56,17 +68,35 @@
     -moz-appearance: textfield;
     appearance: textfield;
     background-color: $field;
-    block-size: convert.to-rem(40px);
+    block-size: layout.size('height');
     border-block-end: convert.to-rem(1px) solid $border-strong;
     color: $text-primary;
     font-family: font-family('sans');
     font-weight: 400;
     inline-size: 100%;
     min-inline-size: 9.375rem;
-    padding-inline: $spacing-05 $spacing-12;
+
+    // steppers + 16px padding
+    padding-inline: $spacing-05 calc(2 * layout.size('height') + $spacing-05);
     transition:
       background-color $duration-fast-01 motion(standard, productive),
       outline $duration-fast-01 motion(standard, productive);
+
+    @if enabled('enable-v12-release') {
+      border: 1px solid transparent;
+      border-radius: $border-radius-04;
+      // (gray-20 → gray-50)
+      background:
+        linear-gradient($field, $field) padding-box,
+        linear-gradient(
+            to bottom,
+            $border-subtle calc(100% - 4px),
+            $border-strong 100%
+          )
+          border-box;
+      padding-inline: $spacing-05
+        calc(#{$number-input-controls-width} + #{$spacing-03});
+    }
 
     &:focus {
       @include focus-outline('outline');
@@ -92,39 +122,14 @@
     }
 
     &[data-invalid] {
-      padding-inline-end: convert.to-rem(128px);
-    }
-  }
+      // steppers + divider->icon gap + 16px icon + 16px padding
+      padding-inline-end: calc(
+        2 * layout.size('height') + #{$number-input-icon-gap} + 2 * $spacing-05
+      );
 
-  .#{$prefix}--number--lg.#{$prefix}--number {
-    input[type='number'],
-    input[type='text'] {
-      padding-inline-end: convert.to-rem(112px);
-
-      &[data-invalid] {
-        padding-inline-end: convert.to-rem(144px);
+      @if enabled('enable-v12-release') {
+        padding-inline-end: $number-input-padding-end-with-icon-or-decorator;
       }
-    }
-
-    .#{$prefix}--number__input-wrapper--warning input[type='number'],
-    .#{$prefix}--number__input-wrapper--warning input[type='text'] {
-      padding-inline-end: convert.to-rem(144px);
-    }
-  }
-
-  .#{$prefix}--number--sm.#{$prefix}--number {
-    input[type='number'],
-    input[type='text'] {
-      padding-inline-end: convert.to-rem(80px);
-
-      &[data-invalid] {
-        padding-inline-end: convert.to-rem(112px);
-      }
-    }
-
-    .#{$prefix}--number__input-wrapper--warning input[type='number'],
-    .#{$prefix}--number__input-wrapper--warning input[type='text'] {
-      padding-inline-end: convert.to-rem(112px);
     }
   }
 
@@ -133,6 +138,11 @@
     background-color: $field;
     color: $text-disabled;
     cursor: not-allowed;
+
+    @if enabled('enable-v12-release') {
+      border: none;
+      background: $field;
+    }
   }
 
   .#{$prefix}--number__input-wrapper {
@@ -150,11 +160,17 @@
     align-items: center;
     justify-content: center;
     block-size: 100%;
-    inline-size: convert.to-rem(80px);
+    inline-size: calc(2 * layout.size('height'));
     // vertically center controls within parent container on IE11
     inset-block-start: 50%;
     inset-inline-end: 0;
     transform: translateY(-50%);
+
+    @if enabled('enable-v12-release') {
+      gap: $number-input-controls-gap;
+      inline-size: fit-content;
+      margin-inline-end: $number-input-controls-margin;
+    }
   }
 
   .#{$prefix}--number__control-btn {
@@ -190,6 +206,22 @@
       border-block-end-color: transparent;
       color: $text-disabled;
       cursor: not-allowed;
+    }
+
+    @if enabled('enable-v12-release') {
+      border: 1px solid transparent;
+      border-radius: $border-radius-max;
+      background-clip: padding-box;
+      block-size: $number-input-control-btn-size;
+      inline-size: $number-input-control-btn-size;
+
+      &:hover {
+        box-shadow: none;
+      }
+
+      &:active {
+        background-color: $background-active;
+      }
     }
   }
 
@@ -227,6 +259,11 @@
     border-color: $focus;
     box-shadow: none;
     outline-offset: -2px;
+
+    @if enabled('enable-v12-release') {
+      border-width: 1px;
+      border-color: transparent;
+    }
   }
 
   .#{$prefix}--number
@@ -238,6 +275,10 @@
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn:last-of-type:hover {
     box-shadow: -4px 0 0 -2px $focus inset;
+
+    @if enabled('enable-v12-release') {
+      box-shadow: none;
+    }
   }
 
   // add invalid box-shadow to number controls only when invalid input is not focused
@@ -250,21 +291,30 @@
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn:last-of-type:hover {
     box-shadow: -4px 0 0 -2px $support-error inset;
+
+    @if enabled('enable-v12-release') {
+      box-shadow: none;
+    }
   }
 
   .#{$prefix}--number
     input[type='number'][data-invalid]:not(:focus)
     ~ .#{$prefix}--number__controls
-    .#{$prefix}--number__control-btn:hover,
+    .#{$prefix}--number__control-btn,
   .#{$prefix}--number
     input[type='text'][data-invalid]:not(:focus)
     ~ .#{$prefix}--number__controls
-    .#{$prefix}--number__control-btn:hover {
+    .#{$prefix}--number__control-btn {
     border-width: 2px 0;
     border-style: solid;
     border-color: $support-error;
     box-shadow: none;
     outline-offset: -2px;
+
+    @if enabled('enable-v12-release') {
+      border-width: 1px;
+      border-color: transparent;
+    }
   }
 
   .#{$prefix}--number
@@ -287,6 +337,10 @@
 
     &:first-of-type {
       order: 0;
+    }
+
+    @if enabled('enable-v12-release') {
+      display: none;
     }
   }
 
@@ -341,32 +395,23 @@
   .#{$prefix}--number__invalid {
     position: absolute;
     fill: $support-error;
-    inset-inline-end: $spacing-12;
-  }
 
-  .#{$prefix}--number--lg .#{$prefix}--number__invalid {
-    inset-inline-end: convert.to-rem(112px);
-  }
+    // steppers + gap from divider to this icon
+    inset-inline-end: calc(
+      2 * layout.size('height') + #{$number-input-icon-gap}
+    );
 
-  .#{$prefix}--number--sm .#{$prefix}--number__invalid {
-    inset-inline-end: convert.to-rem(80px);
+    @if enabled('enable-v12-release') {
+      // controls + the same spacing used between the icon and the decorator
+      inset-inline-end: calc(
+        #{$number-input-controls-width} + #{layout.size('icon-gap')}
+      );
+    }
   }
 
   .#{$prefix}--number__invalid + .#{$prefix}--number__rule-divider {
     position: absolute;
-    inset-inline-end: convert.to-rem(80px);
-  }
-
-  .#{$prefix}--number--lg
-    .#{$prefix}--number__invalid
-    + .#{$prefix}--number__rule-divider {
-    inset-inline-end: $spacing-12;
-  }
-
-  .#{$prefix}--number--sm
-    .#{$prefix}--number__invalid
-    + .#{$prefix}--number__rule-divider {
-    inset-inline-end: convert.to-rem(64px);
+    inset-inline-end: calc(2 * layout.size('height'));
   }
 
   .#{$prefix}--number__control-btn.down-icon:hover
@@ -387,33 +432,6 @@
   .#{$prefix}--number__invalid--warning path:first-of-type {
     fill: $black-100;
     opacity: 1;
-  }
-
-  // Size Variant styles
-  .#{$prefix}--number--lg input[type='number'],
-  .#{$prefix}--number--lg input[type='text'] {
-    block-size: convert.to-rem(48px);
-  }
-
-  .#{$prefix}--number--lg .#{$prefix}--number__controls {
-    inline-size: $spacing-12;
-  }
-
-  .#{$prefix}--number--lg .#{$prefix}--number__control-btn {
-    inline-size: convert.to-rem(48px);
-  }
-
-  .#{$prefix}--number--sm input[type='number'],
-  .#{$prefix}--number--sm input[type='text'] {
-    block-size: convert.to-rem(32px);
-  }
-
-  .#{$prefix}--number--sm .#{$prefix}--number__controls {
-    inline-size: convert.to-rem(64px);
-  }
-
-  .#{$prefix}--number--sm .#{$prefix}--number__control-btn {
-    inline-size: convert.to-rem(32px);
   }
 
   //No label positioning adjustment
@@ -449,11 +467,19 @@
   .#{$prefix}--number--readonly input[type='text'] {
     background: transparent;
     border-block-end-color: $border-subtle;
+
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-00;
+    }
   }
 
   .#{$prefix}--number--readonly .#{$prefix}--number__control-btn {
     color: $icon-disabled;
     pointer-events: none;
+
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-00;
+    }
 
     &:hover {
       background-color: transparent;
@@ -486,8 +512,16 @@
   .#{$prefix}--number__input-wrapper--slug .#{$prefix}--slug {
     position: absolute;
     inset-block-start: 50%;
-    inset-inline-end: $spacing-12;
+    inset-inline-end: calc(
+      2 * layout.size('height') + #{$number-input-ai-label-gap}
+    );
     transform: translateY(-50%);
+
+    @if enabled('enable-v12-release') {
+      // sit directly next to the controls
+      inset-inline-end: $number-input-controls-width;
+      margin-inline-end: layout.size('icon-gap');
+    }
   }
 
   .#{$prefix}--number__input-wrapper--decorator
@@ -516,6 +550,10 @@
     block-size: convert.to-rem(16px);
     content: '';
     inline-size: convert.to-rem(1px);
+
+    @if enabled('enable-v12-release') {
+      display: none;
+    }
   }
 
   .#{$prefix}--number__input-wrapper--decorator
@@ -524,7 +562,7 @@
   .#{$prefix}--number__input-wrapper--slug .#{$prefix}--ai-label::before,
   .#{$prefix}--number__input-wrapper--slug .#{$prefix}--slug::before {
     display: none;
-    inset-inline-start: convert.to-rem(-16px);
+    inset-inline-start: calc(-1 * #{$number-input-ai-label-gap});
   }
 
   .#{$prefix}--number__input-wrapper--decorator
@@ -540,6 +578,10 @@
   .#{$prefix}--number__control-btn::after {
     display: block;
     inset-inline-end: 0;
+
+    @if enabled('enable-v12-release') {
+      display: none;
+    }
   }
 
   .#{$prefix}--number__input-wrapper--decorator
@@ -547,7 +589,11 @@
   .#{$prefix}--number__input-wrapper--slug
     .#{$prefix}--number__control-btn::before {
     display: block;
-    inset-inline-end: $spacing-08;
+    inset-inline-end: calc(layout.size('height'));
+
+    @if enabled('enable-v12-release') {
+      display: none;
+    }
   }
 
   .#{$prefix}--number__input-wrapper--decorator
@@ -577,7 +623,21 @@
 
   .#{$prefix}--number__input-wrapper--decorator .#{$prefix}--number__invalid,
   .#{$prefix}--number__input-wrapper--slug .#{$prefix}--number__invalid {
-    inset-inline-end: $spacing-13 - $spacing-05;
+    // steppers + AI label cluster + the gap from its divider to this icon
+    inset-inline-end: calc(
+      2 * layout.size('height') + #{$number-input-ai-label-cluster} + #{$number-input-icon-gap}
+    );
+
+    @if enabled('enable-v12-release') {
+      // controls + gap + 16px decorator + gap, so the icon sits next to the
+      // decorator
+      inset-inline-end: calc(
+        #{$number-input-controls-width} +
+          #{layout.size('icon-gap')} +
+          #{convert.to-rem(16px)} +
+          #{layout.size('icon-gap')}
+      );
+    }
   }
 
   .#{$prefix}--number__input-wrapper--decorator:has(
@@ -592,6 +652,32 @@
   .#{$prefix}--number__input-wrapper--slug:has(.#{$prefix}--number__invalid)
     .#{$prefix}--slug::before {
     display: block;
+
+    @if enabled('enable-v12-release') {
+      display: none;
+    }
+  }
+
+  .#{$prefix}--number
+    .#{$prefix}--number__input-wrapper--decorator
+    input[type='number'],
+  .#{$prefix}--number
+    .#{$prefix}--number__input-wrapper--decorator
+    input[type='text'],
+  .#{$prefix}--number
+    .#{$prefix}--number__input-wrapper--slug
+    input[type='number'],
+  .#{$prefix}--number
+    .#{$prefix}--number__input-wrapper--slug
+    input[type='text'] {
+    // steppers + divider->label gap + 16px AI label + 16px padding
+    padding-inline-end: calc(
+      2 * layout.size('height') + #{$number-input-ai-label-gap} + 2 * $spacing-05
+    );
+
+    @if enabled('enable-v12-release') {
+      padding-inline-end: $number-input-padding-end-with-icon-or-decorator;
+    }
   }
 
   .#{$prefix}--number
@@ -606,7 +692,23 @@
   .#{$prefix}--number
     .#{$prefix}--number__input-wrapper--slug.#{$prefix}--number__input-wrapper--warning
     input {
-    padding-inline-end: convert.to-rem(144px);
+    // steppers + AI label cluster + icon gap + icon + 16px padding
+    padding-inline-end: calc(
+      2 * layout.size('height') + #{$number-input-ai-label-cluster} + #{$number-input-icon-gap} +
+        2 * $spacing-05
+    );
+
+    @if enabled('enable-v12-release') {
+      // Inline-end padding when both a decorator and the invalid/warning icon are
+      // present: 8px clear of the outermost icon.
+      padding-inline-end: calc(
+        #{$number-input-controls-width} +
+          2 *
+          #{layout.size('icon-gap')} +
+          #{convert.to-rem(32px)} +
+          #{$spacing-03}
+      );
+    }
   }
 
   .#{$prefix}--number__input-wrapper--decorator
@@ -649,13 +751,42 @@
   .#{$prefix}--number__input-wrapper--slug input[type='text']:disabled {
     @include ai-gradient;
 
-    padding-inline-end: convert.to-rem(145px);
+    @if enabled('enable-v12-release') {
+      border: 1px solid transparent;
+      border-radius: $border-radius-04;
+      // Reset the bottom-edge color override from @include ai-gradient so the
+      // border-box gradient layer controls all four sides uniformly.
+      background:
+        linear-gradient(
+            0deg,
+            $ai-aura-start-sm 0%,
+            15%,
+            $ai-aura-end 50%,
+            transparent 100%
+          )
+          padding-box,
+        linear-gradient($field, $field) padding-box,
+        // (ai-border-start → ai-border-end), mirroring the default v12 border gradient
+        linear-gradient(
+            to bottom,
+            $ai-border-start calc(100% - 4px),
+            $ai-border-strong 100%
+          )
+          border-box;
+      border-block-end-color: transparent;
+    }
   }
 
   // Skeleton State
 
+  .#{$prefix}--label.#{$prefix}--skeleton:has(
+      + .#{$prefix}--number.#{$prefix}--skeleton
+    ) {
+    @include skeleton($border-radius: $border-radius-04);
+  }
+
   .#{$prefix}--number.#{$prefix}--skeleton {
-    @include skeleton;
+    @include skeleton($border-radius: $border-radius-04);
 
     inline-size: 100%;
 
@@ -665,16 +796,8 @@
     }
   }
 
-  .#{$prefix}--number.#{$prefix}--skeleton.#{$prefix}--number--sm {
-    block-size: $spacing-07;
-  }
-
-  .#{$prefix}--number.#{$prefix}--skeleton.#{$prefix}--number--md {
-    block-size: $spacing-08;
-  }
-
-  .#{$prefix}--number.#{$prefix}--skeleton.#{$prefix}--number--lg {
-    block-size: $spacing-09;
+  .#{$prefix}--number.#{$prefix}--skeleton.#{$prefix}--number {
+    block-size: layout.size('height');
   }
 
   // Windows HCM fix
@@ -698,11 +821,13 @@
   display: none;
 }
 
-.#{$prefix}--number__input-wrapper--decorator
-  .#{$prefix}--number__control-btn:hover,
-.#{$prefix}--number__input-wrapper--slug
-  .#{$prefix}--number__control-btn:hover {
-  box-shadow: 0 -1px 0 $ai-border-strong inset;
+@if not enabled('enable-v12-release') {
+  .#{$prefix}--number__input-wrapper--decorator
+    .#{$prefix}--number__control-btn:hover,
+  .#{$prefix}--number__input-wrapper--slug
+    .#{$prefix}--number__control-btn:hover {
+    box-shadow: 0 -1px 0 $ai-border-strong inset;
+  }
 }
 
 //hide dividers on button focus

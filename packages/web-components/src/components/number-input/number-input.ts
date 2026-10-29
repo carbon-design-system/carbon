@@ -23,6 +23,7 @@ import styles from './number-input.scss?lit';
 import CDSTextInput, { INPUT_SIZE } from '../text-input/text-input';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { NumberFormatter, NumberParser } from '@carbon/utilities';
+import { isFeatureFlagEnabled } from '../feature-flags';
 
 export { NUMBER_INPUT_VALIDATION_STATUS };
 
@@ -113,7 +114,7 @@ class CDSNumberInput extends CDSTextInput {
           : 'down';
 
       this._dispatchInputEvent(value, direction);
-      this._value = value;
+      this._setValue(value);
       // Request update to update invalid state
       this.requestUpdate();
     } else if (this.type === NUMBER_INPUT_TYPE.TEXT) {
@@ -129,9 +130,9 @@ class CDSNumberInput extends CDSTextInput {
       // Update _value to keep it synchronized with the current numeric value
       // This ensures locale/formatOptions changes use the current value, not stale data
       if (!isNaN(parsedValue)) {
-        this._value = String(parsedValue);
+        this._setValue(String(parsedValue));
       } else if (this.allowEmpty && _value === '') {
-        this._value = '';
+        this._setValue('');
       }
 
       // Validate on input when validate function is provided
@@ -238,7 +239,7 @@ class CDSNumberInput extends CDSTextInput {
 
         this._numberValue = parsedFormattedValue;
         this._previousNumberValue = parsedFormattedValue;
-        this._value = String(parsedFormattedValue);
+        this._setValue(String(parsedFormattedValue));
         this._invalid = false;
       } else {
         this._invalid = true;
@@ -383,7 +384,7 @@ class CDSNumberInput extends CDSTextInput {
    * The input box size.
    */
   @property({ reflect: true })
-  size = INPUT_SIZE.MEDIUM;
+  size?: INPUT_SIZE;
 
   /**
    * **Experimental**: Specify if the input should be of type text or number.
@@ -460,8 +461,7 @@ class CDSNumberInput extends CDSTextInput {
         this._numberValue = NaN;
         this._previousNumberValue = NaN;
         this._inputValue = '';
-        this._value = '';
-        this.requestUpdate('value', oldValue);
+        this._setValue('');
         if (this._input) {
           this._input.value = '';
         }
@@ -737,11 +737,10 @@ class CDSNumberInput extends CDSTextInput {
     const valueChanged = currentValue !== newValue;
 
     if (this.type === NUMBER_INPUT_TYPE.NUMBER) {
-      this._value = String(newValue);
-      this.value = this._value;
+      this.value = String(newValue);
     } else if (this.type === NUMBER_INPUT_TYPE.TEXT) {
       // Synchronize text mode state after step operation
-      this._syncTextModeState(newValue);
+      this._syncTextModeState(newValue, true);
       this.requestUpdate();
     }
 
@@ -790,6 +789,16 @@ class CDSNumberInput extends CDSTextInput {
   }
 
   /**
+   * Updates the internal value and requests a property update so Lit reflects
+   * the host `value` attribute when user gestures change the value.
+   */
+  protected _setValue(value: string) {
+    const oldValue = this._value;
+    this._value = value;
+    this.requestUpdate('value', oldValue);
+  }
+
+  /**
    * Synchronizes text mode state by formatting a numeric value and updating all related state variables.
    * This centralizes the logic for managing _numberValue, _inputValue, _previousNumberValue, and _value.
    *
@@ -812,12 +821,13 @@ class CDSNumberInput extends CDSTextInput {
     this._numberValue = parsedValue;
     this._previousNumberValue = parsedValue;
     this._inputValue = formattedValue;
-    this._value = String(parsedValue);
 
     // Update DOM input if requested
     if (updateInput && this._input) {
       this._input.value = formattedValue;
     }
+
+    this._setValue(String(parsedValue));
   }
 
   render() {
@@ -859,7 +869,8 @@ class CDSNumberInput extends CDSTextInput {
 
     const wrapperClasses = classMap({
       [`${prefix}--number`]: true,
-      [`${prefix}--number--${this.size}`]: this.size,
+      [`${prefix}--number--${this.size}`]: this.size !== undefined, // TODO V12 - remove this class
+      [`${prefix}--layout--size-${this.size}`]: this.size !== undefined,
       [`${prefix}--number--nosteppers`]: this.hideSteppers,
       [`${prefix}--number--readonly`]: this.readonly,
     });
@@ -883,6 +894,8 @@ class CDSNumberInput extends CDSTextInput {
 
     const inputValue = this._getInputValue();
 
+    const enableV12Release = isFeatureFlagEnabled('enable-v12-release', this);
+
     const incrementButton = html`
       <button
         class="${prefix}--number__control-btn up-icon"
@@ -895,7 +908,9 @@ class CDSNumberInput extends CDSTextInput {
         @click=${handleUserInitiatedStepUp}>
         ${iconLoader(Add16)}
       </button>
-      <div class="${prefix}--number__rule-divider"></div>
+      ${!enableV12Release
+        ? html`<div class="${prefix}--number__rule-divider"></div>`
+        : null}
     `;
 
     const decrementButton = html`
@@ -910,7 +925,9 @@ class CDSNumberInput extends CDSTextInput {
         @click=${handleUserInitiatedStepDown}>
         ${iconLoader(Subtract16)}
       </button>
-      <div class="${prefix}--number__rule-divider"></div>
+      ${!enableV12Release
+        ? html`<div class="${prefix}--number__rule-divider"></div>`
+        : null}
     `;
 
     const input = html`

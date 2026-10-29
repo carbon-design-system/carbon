@@ -1,11 +1,12 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import React from 'react';
+import { Heading, Section } from '../../Heading';
 import DataTable, {
   Table,
   TableBody,
@@ -22,7 +23,7 @@ import DataTable, {
   TableExpandRow,
   TableExpandedRow,
 } from '..';
-import { rows, headers } from './shared';
+import { dataTableArgs, dataTableArgTypes, rows, headers } from './shared';
 import mdx from '../../AILabel/AILabelDataTable.mdx';
 import Button from '../../Button';
 import { IconButton } from '../../IconButton';
@@ -33,6 +34,14 @@ import './datatable-story.scss';
 export default {
   title: 'Components/DataTable/WithAILabel',
   component: DataTable,
+  args: { ...dataTableArgs, radio: false },
+  argTypes: {
+    ...dataTableArgTypes,
+    radio: {
+      control: 'boolean',
+      description: 'Use radio selection instead of multi-selection.',
+    },
+  },
   subcomponents: {
     TableSelectAll,
     TableSelectRow,
@@ -48,18 +57,9 @@ export default {
   parameters: {
     docs: {
       page: mdx,
-    },
-    controls: {
-      exclude: [
-        'filterRows',
-        'headers',
-        'isSortable',
-        'overflowMenuOnHover',
-        'radio',
-        'rows',
-        'translateWithId',
-        'sortRow',
-      ],
+      source: {
+        type: 'code',
+      },
     },
   },
 };
@@ -208,7 +208,7 @@ export const AILabelWithSelection = (args) => (
 );
 
 export const AILabelWithRadioSelection = (args) => (
-  <DataTable rows={rows} headers={headers} radio {...args}>
+  <DataTable rows={rows} headers={headers} {...args}>
     {({
       rows,
       headers,
@@ -257,6 +257,11 @@ export const AILabelWithRadioSelection = (args) => (
     )}
   </DataTable>
 );
+
+AILabelWithRadioSelection.args = { radio: true };
+AILabelWithRadioSelection.argTypes = {
+  radio: { table: { readonly: true } },
+};
 
 export const AILabelWithSelectionAndExpansion = (args) => (
   <DataTable rows={rows} headers={headers} {...args}>
@@ -312,8 +317,12 @@ export const AILabelWithSelectionAndExpansion = (args) => (
                   colSpan={headers.length + 3}
                   className="demo-expanded-td"
                   {...getExpandedRowProps({ row })}>
-                  <h6>Expandable row content</h6>
-                  <div>Description here</div>
+                  <Section as="div">
+                    <Heading className="demo-expanded-row-heading">
+                      Expandable row content
+                    </Heading>
+                    <div>Description here</div>
+                  </Section>
                 </TableExpandedRow>
               </React.Fragment>
             ))}
@@ -375,8 +384,12 @@ export const AILabelWithExpansion = (args) => (
                   colSpan={headers.length + 2}
                   className="demo-expanded-td"
                   {...getExpandedRowProps({ row })}>
-                  <h6>Expandable row content</h6>
-                  <div>Description here</div>
+                  <Section as="div">
+                    <Heading className="demo-expanded-row-heading">
+                      Expandable row content
+                    </Heading>
+                    <div>Description here</div>
+                  </Section>
                 </TableExpandedRow>
               </React.Fragment>
             ))}
@@ -386,6 +399,8 @@ export const AILabelWithExpansion = (args) => (
     )}
   </DataTable>
 );
+
+AILabelWithExpansion.argTypes = { radio: { control: false } };
 
 export const ColumnAILabelWithSelectionAndExpansion = (args) => (
   <DataTable rows={rows} headers={columnAILabelHeaders} {...args}>
@@ -443,8 +458,12 @@ export const ColumnAILabelWithSelectionAndExpansion = (args) => (
                     colSpan={headers.length + 2}
                     className="demo-expanded-td"
                     {...getExpandedRowProps({ row })}>
-                    <h6>Expandable row content</h6>
-                    <div>Description here</div>
+                    <Section as="div">
+                      <Heading className="demo-expanded-row-heading">
+                        Expandable row content
+                      </Heading>
+                      <div>Description here</div>
+                    </Section>
                   </TableExpandedRow>
                 </React.Fragment>
               );
@@ -476,7 +495,7 @@ export const ColumnAILabelSort = (args) => (
               {headers.map((header) => (
                 <TableHeader
                   key={header.key}
-                  {...getHeaderProps({ header, isSortable: true })}>
+                  {...getHeaderProps({ header, isSortable: args.isSortable })}>
                   {header.header}
                 </TableHeader>
               ))}
@@ -498,6 +517,12 @@ export const ColumnAILabelSort = (args) => (
     )}
   </DataTable>
 );
+
+ColumnAILabelSort.args = { isSortable: true };
+ColumnAILabelSort.argTypes = {
+  isSortable: { table: { readonly: true } },
+  radio: { control: false },
+};
 
 export const FullTableAI = (args) => (
   <DataTable rows={rows} headers={headers} {...args}>
@@ -521,7 +546,7 @@ export const FullTableAI = (args) => (
               {headers.map((header) => (
                 <TableHeader
                   key={header.key}
-                  {...getHeaderProps({ header, isSortable: true })}>
+                  {...getHeaderProps({ header, isSortable: args.isSortable })}>
                   {header.header}
                 </TableHeader>
               ))}
@@ -543,3 +568,9 @@ export const FullTableAI = (args) => (
     )}
   </DataTable>
 );
+
+FullTableAI.args = { isSortable: true };
+FullTableAI.argTypes = {
+  isSortable: { table: { readonly: true } },
+  radio: { control: false },
+};

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2018, 2025
+ * Copyright IBM Corp. 2018, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -510,6 +510,7 @@ As the author of this PR, before marking ready for review, confirm you:
 
 - [x] Reviewed every line of the diff
 - [x] Updated documentation and storybook examples
+- [x] Followed the required v12 migration documentation for any code change that affects v12, or struck through this item because the PR does not affect v12
 - [x] Wrote passing tests that cover this change
 - [x] Addressed any impact on accessibility (a11y)
 - [x] Tested for cross-browser consistency
@@ -610,6 +611,7 @@ Test it
 
 - [x] Reviewed every line of the diff
 - [x] Updated documentation and storybook examples
+- [ ] ~Followed the required v12 migration documentation for any code change that affects v12, or struck through this item because the PR does not affect v12~
 - [ ] ~Wrote passing tests that cover this change~
 - [x] Addressed any impact on accessibility (a11y)
 - [ ] ~Tested for cross-browser consistency~

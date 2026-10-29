@@ -105,6 +105,12 @@ export interface TagBaseProps {
   slug?: ReactNode;
 
   /**
+   * Specify the tab index of the `Tag`. When a `DefinitionTooltip` is rendered
+   * for a truncated label, `tabIndex` is applied to the tooltip trigger.
+   */
+  tabIndex?: number;
+
+  /**
    * @deprecated The `title` prop has been deprecated and will be removed in the next major version. Use `children` instead.
    */
   title?: string;
@@ -127,7 +133,6 @@ type TagComponent = <T extends React.ElementType = 'div'>(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
 ) => React.ReactElement | any;
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const TagBase = React.forwardRef<
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   any,
@@ -150,6 +155,7 @@ const TagBase = React.forwardRef<
       size,
       as: BaseComponent,
       slug,
+      tabIndex,
       ...other
     },
     forwardRef
@@ -178,7 +184,12 @@ const TagBase = React.forwardRef<
       const newElement = tagRef.current?.getElementsByClassName(
         `${prefix}--tag__label`
       )[0];
-      setIsEllipsisApplied(isEllipsisActive(newElement));
+      // React 19: setIsEllipsisApplied called synchronously inside
+      // useIsomorphicEffect (= useLayoutEffect) causes setState during commit
+      // → crash. Read the DOM value eagerly (must be synchronous), then defer
+      // only the setState call past the commit boundary via queueMicrotask.
+      const result = isEllipsisActive(newElement);
+      queueMicrotask(() => setIsEllipsisApplied(result));
     }, [prefix, tagRef]);
 
     const conditions = [
@@ -220,7 +231,11 @@ const TagBase = React.forwardRef<
     if (filter) {
       const ComponentTag: ElementType = BaseComponent ?? 'div';
       return (
-        <ComponentTag className={tagClasses} id={tagId} {...other}>
+        <ComponentTag
+          className={tagClasses}
+          id={tagId}
+          tabIndex={tabIndex}
+          {...other}>
           {CustomIconElement && size !== 'sm' ? (
             <div className={`${prefix}--tag__custom-icon`}>
               <CustomIconElement />
@@ -258,6 +273,8 @@ const TagBase = React.forwardRef<
       [`${prefix}--tag__label`]: !isInteractiveTag,
     });
 
+    const hasDefinitionTooltip = isEllipsisApplied && !isInteractiveTag;
+
     return (
       <ComponentTag
         ref={ref}
@@ -265,6 +282,7 @@ const TagBase = React.forwardRef<
         className={tagClasses}
         id={tagId}
         type={ComponentTag === 'button' ? 'button' : undefined}
+        tabIndex={hasDefinitionTooltip ? undefined : tabIndex}
         {...other}>
         {CustomIconElement && size !== 'sm' ? (
           <div className={`${prefix}--tag__custom-icon`}>
@@ -273,9 +291,10 @@ const TagBase = React.forwardRef<
         ) : (
           ''
         )}
-        {isEllipsisApplied && !isInteractiveTag ? (
+        {hasDefinitionTooltip ? (
           <DefinitionTooltip
             openOnHover={false}
+            tabIndex={tabIndex}
             definition={
               children !== null && children !== undefined ? children : typeText
             }
@@ -320,6 +339,8 @@ const TagBase = React.forwardRef<
     );
   }
 );
+
+TagBase.displayName = 'Tag';
 const Tag = TagBase as TagComponent;
 
 // @ts-expect-error - `propTypes` isn't typed.
@@ -389,6 +410,12 @@ Tag.propTypes = {
     PropTypes.node,
     'The `slug` prop has been deprecated and will be removed in the next major version. Use the decorator prop instead.'
   ),
+
+  /**
+   * Specify the tab index of the `Tag`. When a `DefinitionTooltip` is rendered
+   * for a truncated label, `tabIndex` is applied to the tooltip trigger.
+   */
+  tabIndex: PropTypes.number,
 
   /**
    * Text to show on clear filters

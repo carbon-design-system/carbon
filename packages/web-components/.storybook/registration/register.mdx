@@ -1,0 +1,198 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as RegisterStories from './register.stories';
+
+<Meta of={RegisterStories} />
+
+# Component registration
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/globals/register.ts)
+&nbsp;|&nbsp;
+[v3 migration guide](https://github.com/carbon-design-system/carbon/blob/main/docs/guides/cwc-v3-migration.md)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Default registration](#default-registration)
+- [Custom tag name](#custom-tag-name)
+- [Styling a custom tag](#styling-a-custom-tag)
+- [Scoped registry](#scoped-registry)
+- [Prefixed build](#prefixed-build)
+- [Feedback](#feedback)
+
+## Overview
+
+In v2, importing a component class registers it. The class carries a decorator
+that calls `customElements.define` as the module evaluates, so the import has a
+side effect you cannot opt out of.
+
+In v3 the class files are pure. Importing one gives you the class and nothing
+else. Registration becomes a call you make, or a call a barrel makes for you:
+
+```js
+import { defineCustomElement } from '@carbon/web-components/es/globals/register.js';
+
+defineCustomElement(SomeClass);
+```
+
+`defineCustomElement` is the only registration mechanism in the package. The tag
+comes from the class's `static is` and the registry is the global
+`customElements`, unless you override either. The call is idempotent, and it
+returns the class it registered so a barrel can register and re-export in one
+step.
+
+Everything on this page works in v2 today. What v3 changes is the default: class
+files stop registering themselves, and the calls below become the only way an
+element reaches a registry.
+
+For what to change in an application, the codemods that do it for you, and the
+full list of deprecations, see the
+[v3 migration guide](https://github.com/carbon-design-system/carbon/blob/main/docs/guides/cwc-v3-migration.md).
+
+## Default registration
+
+Importing a component barrel registers the elements that component renders. This
+is the most common use-case of Carbon, and it doesn't change in v3.
+
+```js
+import '@carbon/web-components/es/components/button/index.js';
+```
+
+<Canvas of={RegisterStories.DefaultRegistration} />
+
+**When to use.** You render Carbon's `cds-*` elements in your application.
+Nothing more is needed unless a `cds-*` tag is already taken, or you need more
+than one Carbon build running side by side.
+
+## Custom tag name
+
+Passing `name` registers the component under a tag you choose.
+
+```js
+import CDSButton from '@carbon/web-components/es/components/button/button.js';
+import { defineCustomElement } from '@carbon/web-components/es/globals/register.js';
+
+defineCustomElement(CDSButton, { name: 'cwc-custom-button' });
+```
+
+A class can only be registered once per registry. When the default tag is
+already defined, `defineCustomElement` registers an identical subclass under the
+new name instead, so elements created from it remain `instanceof CDSButton`.
+
+While this will register a working element, Carbon's host styles are written
+against the default tag, so the next section covers how to address that, along
+with a live example with those styles restored.
+
+**When to use.** A `cds-*` tag is already taken on the page, by another copy of
+Carbon or by an unrelated library, and you need to move a few elements out of
+the way. This is also the migration path for individual elements coming off
+`es-custom`.
+
+Note that this can be the wrong approach in two cases:
+
+- Renaming a composite does not rename what it renders internally, because those
+  tags are fixed at build time — a renamed `cwc-custom-table` still looks for
+  `cds-checkbox`. In this case, the [prefixed build](#prefixed-build) is the
+  path to take.
+- A custom name is still a global registration, so it will not isolate two
+  versions of Carbon from each other; that is a
+  [scoped registry](#scoped-registry).
+
+## Styling a custom tag
+
+Most of a component's styles are plain classes inside its shadow root, and while
+those apply to a renamed element already, the host rules (`:host(cds-button)`)
+do not.
+
+To carry the default styles over, re-declare that one block against the custom
+tag. Carbon's mixins do the work, so there are no values to copy:
+
+```scss
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/utilities/layout' as *;
+
+:host(cwc-custom-button) {
+  @include emit-layout-tokens();
+
+  display: inline-flex;
+
+  .#{$prefix}--btn {
+    flex-grow: 1;
+    max-inline-size: 100%;
+  }
+}
+```
+
+Then declare the subclass so it can carry those styles alongside the
+component's. `static is` is how a v3 component names its tag, and
+`defineCustomElement` reads it:
+
+```js
+import CDSButton from '@carbon/web-components/es/components/button/button.js';
+import { defineCustomElement } from '@carbon/web-components/es/globals/register.js';
+import hostStyles from './my-button.scss?lit';
+
+class CWCButton extends CDSButton {
+  static is = 'cwc-custom-button';
+  static styles = [CDSButton.styles, hostStyles].flat();
+}
+
+defineCustomElement(CWCButton);
+```
+
+<Canvas of={RegisterStories.CustomTagName} />
+
+**When you need this.** Any time you rename a component that has host-level
+styles, which is most of them.
+
+## Scoped registry
+
+Passing `registry` defines the element in a `CustomElementRegistry` you own
+rather than the global one. A shadow root then opts into that registry, and tags
+inside it resolve there:
+
+```js
+import CDSButton from '@carbon/web-components/es/components/button/button.js';
+import { defineCustomElement } from '@carbon/web-components/es/globals/register.js';
+
+const registry = new CustomElementRegistry();
+defineCustomElement(CDSButton, { registry });
+
+host.attachShadow({ mode: 'open', customElementRegistry: registry });
+```
+
+This needs native support or the `@webcomponents/scoped-custom-element-registry`
+polyfill, which is why there is no live example here.
+
+**When to use.** The same tag needs to mean different things in different parts
+of the page. Two versions of Carbon inside one application is the usual reason.
+Only the elements you register land in the scoped registry, so a composite's
+internals have to be registered there too.
+
+## Prefixed build
+
+`create-prefixed-build` outputs a copy of the entire package with every `cds-*`
+element renamed, composites included, rewriting the JavaScript and the Sass
+together:
+
+```sh
+npx -p @carbon/web-components create-prefixed-build --prefix foo --out ./vendor/carbon-foo
+```
+
+```js
+import './vendor/carbon-foo/components/button/index.js'; // registers <foo-button>
+```
+
+Design tokens keep the `--cds` prefix on purpose, so theming stays shared
+between prefixed and unprefixed Carbon on the same page.
+
+**When to use.** You want the whole package under your own prefix. This is the
+direct replacement for `es-custom`, without the fixed `cds-custom-` name. The
+rename happens at build time, so there is no polyfill, no runtime cost, and no
+load-order constraint. Use this over a custom tag name as soon as composites are
+involved.
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/.storybook/registration/register.mdx).

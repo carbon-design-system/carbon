@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2025
+// Copyright IBM Corp. 2016, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -154,30 +154,32 @@
     transition: background-color $duration-fast-01 motion(entrance, productive);
   }
 
-  .#{$prefix}--data-table tbody tr:not([data-child-row]):hover,
-  .#{$prefix}--data-table tbody tr[data-child-row]:hover > td {
-    background-color: $layer-hover;
-  }
+  @media (any-hover: hover) {
+    .#{$prefix}--data-table tbody tr:not([data-child-row]):hover,
+    .#{$prefix}--data-table tbody tr[data-child-row]:hover > td {
+      background-color: $layer-hover;
+    }
 
-  .#{$prefix}--data-table tbody tr:hover td,
-  .#{$prefix}--data-table tbody tr:hover th {
-    border-block-end: 1px solid $layer-hover;
-    border-block-start: 1px solid $layer-hover;
-    color: $text-primary;
-  }
+    .#{$prefix}--data-table tbody tr:hover td,
+    .#{$prefix}--data-table tbody tr:hover th {
+      border-block-end: 1px solid $layer-hover;
+      border-block-start: 1px solid $layer-hover;
+      color: $text-primary;
+    }
 
-  .#{$prefix}--data-table
-    tr:hover
-    .#{$prefix}--link:not(.#{$prefix}--popover-container .#{$prefix}--link) {
-    color: $link-secondary;
-  }
+    .#{$prefix}--data-table
+      tr:hover
+      .#{$prefix}--link:not(.#{$prefix}--popover-container .#{$prefix}--link) {
+      color: $link-secondary;
+    }
 
-  .#{$prefix}--data-table
-    tr:hover
-    .#{$prefix}--link--disabled:not(
-      .#{$prefix}--popover-container .#{$prefix}--link
-    ) {
-    color: $text-disabled;
+    .#{$prefix}--data-table
+      tr:hover
+      .#{$prefix}--link--disabled:not(
+        .#{$prefix}--popover-container .#{$prefix}--link
+      ) {
+      color: $text-disabled;
+    }
   }
 
   .#{$prefix}--data-table th,
@@ -336,13 +338,18 @@
   .#{$prefix}--data-table
     td.#{$prefix}--table-column-menu
     .#{$prefix}--overflow-menu:focus
-    .#{$prefix}--overflow-menu__icon,
-  .#{$prefix}--data-table
-    tr:hover
-    td.#{$prefix}--table-column-menu
-    .#{$prefix}--overflow-menu
     .#{$prefix}--overflow-menu__icon {
     opacity: 1;
+  }
+
+  @media (any-hover: hover) {
+    .#{$prefix}--data-table
+      tr:hover
+      td.#{$prefix}--table-column-menu
+      .#{$prefix}--overflow-menu
+      .#{$prefix}--overflow-menu__icon {
+      opacity: 1;
+    }
   }
 
   .#{$prefix}--table-row--menu-option
@@ -419,20 +426,22 @@
     background-color: $layer-accent;
   }
 
-  .#{$prefix}--data-table--zebra
-    tbody
-    tr:not(.#{$prefix}--parent-row):hover
-    td {
-    border-block-end: 1px solid $layer-hover;
-    border-block-start: 1px solid $layer-hover;
-  }
+  @media (any-hover: hover) {
+    .#{$prefix}--data-table--zebra
+      tbody
+      tr:not(.#{$prefix}--parent-row):hover
+      td {
+      border-block-end: 1px solid $layer-hover;
+      border-block-start: 1px solid $layer-hover;
+    }
 
-  .#{$prefix}--data-table--zebra
-    tbody
-    tr:not(.#{$prefix}--parent-row):not(
-      .#{$prefix}--data-table--selected
-    ):hover {
-    background-color: $layer-hover;
+    .#{$prefix}--data-table--zebra
+      tbody
+      tr:not(.#{$prefix}--parent-row):not(
+        .#{$prefix}--data-table--selected
+      ):hover {
+      background-color: $layer-hover;
+    }
   }
 
   //----------------------------------------------------------------------------
@@ -578,29 +587,31 @@
     border-block-end: 1px solid $layer-active;
   }
 
-  .#{$prefix}--data-table--zebra
-    tbody
-    tr:nth-child(even).#{$prefix}--data-table--selected:hover
-    td {
-    border-block-end: 1px solid $data-table-column-hover;
-  }
+  @media (any-hover: hover) {
+    .#{$prefix}--data-table--zebra
+      tbody
+      tr:nth-child(even).#{$prefix}--data-table--selected:hover
+      td {
+      border-block-end: 1px solid $data-table-column-hover;
+    }
 
-  // hover + zebra select - even child
-  .#{$prefix}--data-table--zebra
-    tbody
-    tr:nth-child(odd).#{$prefix}--data-table--selected:hover
-    td,
-  .#{$prefix}--data-table tbody .#{$prefix}--data-table--selected:hover td {
-    border-block-end: 1px solid $data-table-column-hover;
-    border-block-start: 1px solid $data-table-column-hover;
-    color: $text-primary;
-  }
+    // hover + zebra select - even child
+    .#{$prefix}--data-table--zebra
+      tbody
+      tr:nth-child(odd).#{$prefix}--data-table--selected:hover
+      td,
+    .#{$prefix}--data-table tbody .#{$prefix}--data-table--selected:hover td {
+      border-block-end: 1px solid $data-table-column-hover;
+      border-block-start: 1px solid $data-table-column-hover;
+      color: $text-primary;
+    }
 
-  .#{$prefix}--data-table--zebra
-    tbody
-    tr:nth-child(odd).#{$prefix}--data-table--selected:hover,
-  .#{$prefix}--data-table tbody .#{$prefix}--data-table--selected:hover {
-    background-color: $data-table-column-hover;
+    .#{$prefix}--data-table--zebra
+      tbody
+      tr:nth-child(odd).#{$prefix}--data-table--selected:hover,
+    .#{$prefix}--data-table tbody .#{$prefix}--data-table--selected:hover {
+      background-color: $data-table-column-hover;
+    }
   }
 
   // selected overflow menu
@@ -798,6 +809,8 @@
 
   .#{$prefix}--data-table--sticky-header {
     display: block;
+    inline-size: fit-content;
+    min-inline-size: 100%;
     overflow-y: scroll;
 
     thead,
@@ -811,10 +824,8 @@
     thead {
       position: sticky;
       z-index: 1;
-      overflow: scroll;
       inline-size: 100%;
       inset-block-start: 0;
-      // Hides ie scrollbar
       -ms-overflow-style: none;
       will-change: transform;
     }
@@ -825,23 +836,32 @@
 
     tbody {
       flex-direction: column;
-      // Hides ie scrollbar
       -ms-overflow-style: none;
-      overflow-x: scroll;
       will-change: transform;
     }
 
     tr.#{$prefix}--parent-row.#{$prefix}--expandable-row {
       block-size: auto;
-      min-block-size: 3rem;
     }
 
     tr.#{$prefix}--expandable-row:not(.#{$prefix}--parent-row) {
       block-size: auto;
     }
 
-    .#{$prefix}--table-expand {
-      max-inline-size: convert.to-rem(48px);
+    .#{$prefix}--child-row-inner-container {
+      inline-size: 100%;
+    }
+
+    // Match the rendered table column and prevent the flex item from shrinking
+    thead th.#{$prefix}--table-expand,
+    tbody td.#{$prefix}--table-expand {
+      flex: 0 0 $spacing-08;
+      block-size: auto;
+    }
+
+    // Keep the cell border inside the compact row height
+    &.#{$prefix}--data-table--sm tbody td.#{$prefix}--table-expand {
+      min-block-size: $spacing-07;
     }
 
     thead .#{$prefix}--table-expand {
@@ -855,18 +875,21 @@
     &:not(.#{$prefix}--data-table--xs):not(.#{$prefix}--data-table--xl):not(
         .#{$prefix}--data-table--sm
       )
-      td:not(.#{$prefix}--table-column-menu):not(
+      tr:not([data-child-row])
+      > td:not(.#{$prefix}--table-column-menu):not(
         .#{$prefix}--table-column-checkbox
-      ) {
+      ):not(.#{$prefix}--table-expand) {
       padding-block-start: convert.to-rem(14px);
     }
 
     // Taken from L125 _data-table-expandable
     // Used to hide white line when parent row is hovered when child is expanded
-    tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover
-      + tr[data-child-row]
-      td {
-      border-block-start: 1px solid $layer-hover;
+    @media (any-hover: hover) {
+      tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover
+        + tr[data-child-row]
+        td {
+        border-block-start: 1px solid $layer-hover;
+      }
     }
 
     tr.#{$prefix}--expandable-row:last-of-type {
@@ -937,31 +960,27 @@
       min-inline-size: 0;
     }
 
-    &.#{$prefix}--data-table--xs tr:not(.#{$prefix}--expandable-row),
-    &.#{$prefix}--data-table--sm tr:not(.#{$prefix}--expandable-row),
-    &.#{$prefix}--data-table--xl tr:not(.#{$prefix}--expandable-row) {
+    &.#{$prefix}--data-table--xs tr:not([data-child-row]),
+    &.#{$prefix}--data-table--sm tr:not([data-child-row]),
+    &.#{$prefix}--data-table--md tr:not([data-child-row]),
+    &.#{$prefix}--data-table--xl tr:not([data-child-row]) {
       block-size: auto;
     }
 
-    &.#{$prefix}--data-table--xs tr:not(.#{$prefix}--expandable-row) {
+    &.#{$prefix}--data-table--xs tr:not([data-child-row]) {
       min-block-size: convert.to-rem(24px);
     }
 
-    &.#{$prefix}--data-table--sm tr:not(.#{$prefix}--expandable-row) {
+    &.#{$prefix}--data-table--sm tr:not([data-child-row]) {
       min-block-size: convert.to-rem(32px);
     }
 
-    &.#{$prefix}--data-table--xl tr:not(.#{$prefix}--expandable-row) {
-      min-block-size: convert.to-rem(64px);
+    &.#{$prefix}--data-table--md tr:not([data-child-row]) {
+      min-block-size: $spacing-08;
     }
 
-    // Expansion overrides
-    &.#{$prefix}--data-table--xs tr td.#{$prefix}--table-expand {
-      padding-block-start: convert.to-rem(4px);
-    }
-
-    &.#{$prefix}--data-table--sm tr td.#{$prefix}--table-expand {
-      padding-block-start: convert.to-rem(8px);
+    &.#{$prefix}--data-table--xl tr:not([data-child-row]) {
+      min-block-size: $spacing-10;
     }
 
     .#{$prefix}--table-header-label {
@@ -1041,31 +1060,10 @@
   }
 
   // Remove table cell backgrounds that are overriding gradient background on row
-  .#{$prefix}--data-table
-    tbody
-    tr.#{$prefix}--data-table--ai-label-row:hover
-    td,
-  tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--expandable-row:hover
-    + .#{$prefix}--expandable-row[data-child-row]
-    td,
-  tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--expandable-row--hover
-    + .#{$prefix}--expandable-row[data-child-row]:hover
-    > td,
   tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--expandable-row--hover
     > td,
   tr.#{$prefix}--data-table--selected.#{$prefix}--data-table--ai-label-row.#{$prefix}--expandable-row
     + tr.#{$prefix}--expandable-row[data-child-row]
-    > td,
-  tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
-    td,
-  tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
-    td:first-of-type,
-  tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected:not(
-      .#{$prefix}--expandable-row
-    ):hover
-    > td,
-  tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
-    + tr[data-child-row]
     > td,
   tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row--hover
     > td,
@@ -1074,16 +1072,49 @@
     background-color: transparent;
   }
 
-  .#{$prefix}--data-table tbody tr.#{$prefix}--data-table--ai-label-row:hover,
-  tr.#{$prefix}--data-table--ai-label-row:hover
-    + .#{$prefix}--expandable-row[data-child-row],
-  tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--expandable-row--hover
-    + .#{$prefix}--expandable-row[data-child-row]:hover,
+  @media (any-hover: hover) {
+    .#{$prefix}--data-table
+      tbody
+      tr.#{$prefix}--data-table--ai-label-row:hover
+      td,
+    tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--expandable-row:hover
+      + .#{$prefix}--expandable-row[data-child-row]
+      td,
+    tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--expandable-row--hover
+      + .#{$prefix}--expandable-row[data-child-row]:hover
+      > td,
+    tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
+      td,
+    tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
+      td:first-of-type,
+    tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected:not(
+        .#{$prefix}--expandable-row
+      ):hover
+      > td,
+    tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
+      + tr[data-child-row]
+      > td {
+      background-color: transparent;
+    }
+  }
+
   tr.#{$prefix}--expandable-row--hover.#{$prefix}--data-table--ai-label-row,
   tr.#{$prefix}--data-table--selected.#{$prefix}--parent-row.#{$prefix}--expandable-row--hover.#{$prefix}--data-table--ai-label-row {
     @include ai-table-gradient('hover');
 
     background-attachment: fixed;
+  }
+
+  @media (any-hover: hover) {
+    .#{$prefix}--data-table tbody tr.#{$prefix}--data-table--ai-label-row:hover,
+    tr.#{$prefix}--data-table--ai-label-row:hover
+      + .#{$prefix}--expandable-row[data-child-row],
+    tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--expandable-row--hover
+      + .#{$prefix}--expandable-row[data-child-row]:hover {
+      @include ai-table-gradient('hover');
+
+      background-attachment: fixed;
+    }
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--data-table--slug-row,
@@ -1099,15 +1130,20 @@
     background-attachment: fixed;
   }
 
-  tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--data-table--selected td,
-  tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--data-table--selected:hover
-    td,
-  tbody tr.#{$prefix}--data-table--ai-label-row:hover td,
-  tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
-    td:not(.#{$prefix}--table-expand):not(
-      .#{$prefix}--table-column-checkbox
-    ):not(.#{$prefix}--table-column-slug) {
+  tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--data-table--selected td {
     border-block-end-color: $border-subtle;
+  }
+
+  @media (any-hover: hover) {
+    tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--data-table--selected:hover
+      td,
+    tbody tr.#{$prefix}--data-table--ai-label-row:hover td,
+    tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
+      td:not(.#{$prefix}--table-expand):not(
+        .#{$prefix}--table-column-checkbox
+      ):not(.#{$prefix}--table-column-slug) {
+      border-block-end-color: $border-subtle;
+    }
   }
 
   tr.#{$prefix}--expandable-row.#{$prefix}--data-table--selected.#{$prefix}--data-table--slug-row[data-parent-row]
@@ -1121,13 +1157,15 @@
     border-block-end: 1px solid $layer-selected;
   }
 
-  tr.#{$prefix}--parent-row.#{$prefix}--data-table--slug-row.#{$prefix}--expandable-row:hover
-    td:first-of-type,
-  tr.#{$prefix}--parent-row.#{$prefix}--data-table--ai-label-row.#{$prefix}--expandable-row:hover
-    td:first-of-type,
-  tr.#{$prefix}--parent-row.#{$prefix}--data-table--decoratorß-row.#{$prefix}--expandable-row:hover
-    td:first-of-type {
-    border-block-end: 1px solid transparent;
+  @media (any-hover: hover) {
+    tr.#{$prefix}--parent-row.#{$prefix}--data-table--slug-row.#{$prefix}--expandable-row:hover
+      td:first-of-type,
+    tr.#{$prefix}--parent-row.#{$prefix}--data-table--ai-label-row.#{$prefix}--expandable-row:hover
+      td:first-of-type,
+    tr.#{$prefix}--parent-row.#{$prefix}--data-table--decoratorß-row.#{$prefix}--expandable-row:hover
+      td:first-of-type {
+      border-block-end: 1px solid transparent;
+    }
   }
 
   .#{$prefix}--data-table

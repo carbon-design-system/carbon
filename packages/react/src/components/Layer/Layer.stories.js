@@ -21,14 +21,23 @@ export default {
       page: mdx,
     },
   },
-  args: {
-    level: 0,
+};
+
+const contentArgTypes = {
+  label: {
+    control: { type: 'text' },
   },
 };
 
-export const Default = () => {
+const contentParameters = {
+  controls: {
+    include: ['label'],
+  },
+};
+
+export const Default = (args) => {
   function TestComponent() {
-    return <div className="example-layer-test-component">Test component</div>;
+    return <div className="example-layer-test-component">{args.label}</div>;
   }
 
   return (
@@ -44,11 +53,17 @@ export const Default = () => {
   );
 };
 
-export const withBackground = () => {
+Default.args = {
+  label: 'Workspace settings',
+};
+Default.argTypes = contentArgTypes;
+Default.parameters = contentParameters;
+
+export const withBackground = (args) => {
   function TestComponent() {
     return (
       <div className="example-layer-test-component-no-background">
-        Test component
+        {args.label}
       </div>
     );
   }
@@ -66,28 +81,47 @@ export const withBackground = () => {
   );
 };
 
+withBackground.args = {
+  label: 'Workspace settings',
+};
+withBackground.argTypes = contentArgTypes;
+withBackground.parameters = contentParameters;
+
 export const CustomLevel = (args) => {
   function TestComponent() {
-    return <div className="example-layer-test-component">Test component</div>;
+    return <div className="example-layer-test-component">{args.label}</div>;
   }
 
   return (
-    <Layer level={2} {...args}>
+    <Layer level={args.level}>
       <TestComponent />
     </Layer>
   );
 };
 
 CustomLevel.args = {
+  label: 'Workspace settings',
   level: 2,
 };
+CustomLevel.argTypes = {
+  ...contentArgTypes,
+  level: {
+    control: { type: 'select' },
+    options: [0, 1, 2],
+  },
+};
+CustomLevel.parameters = {
+  controls: {
+    include: ['label', 'level'],
+  },
+};
 
-export const UseLayer = () => {
+export const UseLayer = (args) => {
   function ExampleComponent() {
     const { level } = useLayer();
     return (
       <div style={{ padding: '1rem', background: 'var(--cds-layer)' }}>
-        The current layer level is: {level}
+        {args.label}: {level}
       </div>
     );
   }
@@ -101,6 +135,12 @@ export const UseLayer = () => {
     </>
   );
 };
+
+UseLayer.args = {
+  label: 'Current layer level',
+};
+UseLayer.argTypes = contentArgTypes;
+UseLayer.parameters = contentParameters;
 
 UseLayer.story = {
   name: 'useLayer',

@@ -19,6 +19,53 @@ import {
 } from './';
 import { WithFeatureFlags } from '../../../.storybook/templates/WithFeatureFlags';
 
+const selectionArgs = {
+  'aria-label': 'Deployment environments',
+  isCondensed: false,
+  selection: true,
+};
+
+const selectionArgTypes = {
+  'aria-label': {
+    control: {
+      type: 'text',
+    },
+  },
+  isCondensed: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  selection: {
+    table: { readonly: true },
+  },
+};
+
+const selectionControls = ['aria-label', 'isCondensed'];
+
+const selectionRows = [
+  {
+    environment: 'Production',
+    region: 'Frankfurt',
+    purpose: 'Runs customer-facing services',
+  },
+  {
+    environment: 'Staging',
+    region: 'Dallas',
+    purpose: 'Validates releases before deployment',
+  },
+  {
+    environment: 'Development',
+    region: 'London',
+    purpose: 'Supports feature development and integration',
+  },
+  {
+    environment: 'Disaster recovery',
+    region: 'Sydney',
+    purpose: 'Provides a standby recovery environment',
+  },
+];
+
 export default {
   title: 'Components/StructuredList/Feature Flag',
   component: StructuredListWrapper,
@@ -40,16 +87,11 @@ export default {
 };
 
 const structuredListBodyRowGenerator = (numRows) => {
-  return Array.apply(null, Array(numRows)).map((n, i) => (
+  return selectionRows.slice(0, numRows).map((row, i) => (
     <StructuredListRow key={`row-${i}`} selection>
-      <StructuredListCell>Row {i}</StructuredListCell>
-      <StructuredListCell>Row {i}</StructuredListCell>
-      <StructuredListCell>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna,
-        finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem vel
-        euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a
-        porttitor interdum.
-      </StructuredListCell>
+      <StructuredListCell>{row.environment}</StructuredListCell>
+      <StructuredListCell>{row.region}</StructuredListCell>
+      <StructuredListCell>{row.purpose}</StructuredListCell>
       <StructuredListInput
         id={`row-${i}`}
         value={`row-${i}`}
@@ -63,12 +105,12 @@ const structuredListBodyRowGenerator = (numRows) => {
 
 export const Selection = (args) => {
   return (
-    <StructuredListWrapper selection {...args}>
+    <StructuredListWrapper {...args}>
       <StructuredListHead>
         <StructuredListRow head selection>
-          <StructuredListCell head>ColumnA</StructuredListCell>
-          <StructuredListCell head>ColumnB</StructuredListCell>
-          <StructuredListCell head>ColumnC</StructuredListCell>
+          <StructuredListCell head>Environment</StructuredListCell>
+          <StructuredListCell head>Region</StructuredListCell>
+          <StructuredListCell head>Purpose</StructuredListCell>
         </StructuredListRow>
       </StructuredListHead>
       <StructuredListBody>
@@ -78,27 +120,29 @@ export const Selection = (args) => {
   );
 };
 
+Selection.args = { ...selectionArgs };
+Selection.argTypes = { ...selectionArgTypes };
 Selection.parameters = {
   controls: {
-    exclude: ['isFlush', 'selection'],
+    include: selectionControls,
   },
 };
 
-export const WithBackgroundLayer = () => {
+export const WithBackgroundLayer = (args) => {
   const v12StructuredRadioIcons = useFeatureFlag(
     'enable-v12-structured-list-visible-icons'
   );
   return (
     <WithLayer>
-      <StructuredListWrapper selection>
+      <StructuredListWrapper {...args}>
         <StructuredListHead>
           <StructuredListRow head>
             {v12StructuredRadioIcons && (
               <StructuredListCell head></StructuredListCell>
             )}
-            <StructuredListCell head>ColumnA</StructuredListCell>
-            <StructuredListCell head>ColumnB</StructuredListCell>
-            <StructuredListCell head>ColumnC</StructuredListCell>
+            <StructuredListCell head>Environment</StructuredListCell>
+            <StructuredListCell head>Region</StructuredListCell>
+            <StructuredListCell head>Purpose</StructuredListCell>
           </StructuredListRow>
         </StructuredListHead>
         <StructuredListBody>
@@ -107,4 +151,12 @@ export const WithBackgroundLayer = () => {
       </StructuredListWrapper>
     </WithLayer>
   );
+};
+
+WithBackgroundLayer.args = { ...selectionArgs };
+WithBackgroundLayer.argTypes = { ...selectionArgTypes };
+WithBackgroundLayer.parameters = {
+  controls: {
+    include: selectionControls,
+  },
 };

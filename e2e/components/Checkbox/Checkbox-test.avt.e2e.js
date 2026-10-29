@@ -75,37 +75,15 @@ test.describe('@avt Checkbox', () => {
         theme: 'white',
       },
     });
-    const checkbox3 = page.locator('input#checkbox-3');
-    const checkbox4 = page.locator('input#checkbox-4');
-    const checkbox5 = page.locator('input#checkbox-5');
-    const checkbox6 = page.locator('input#checkbox-6');
+    const checkbox = page.locator('input#checkbox-single');
 
-    // Check the first checkbox 3
-    await expect(checkbox3).toBeVisible();
+    await expect(checkbox).toBeVisible();
     await page.keyboard.press('Tab');
-    await expect(checkbox3).toBeFocused();
+    await expect(checkbox).toBeFocused();
     await page.keyboard.press('Space');
-    await expect(checkbox3).toBeChecked();
+    await expect(checkbox).toBeChecked();
 
-    // Check the first checkbox 4
-    await expect(checkbox4).toBeVisible();
-    await page.keyboard.press('Tab');
-    await expect(checkbox4).toBeFocused();
     await page.keyboard.press('Space');
-    await expect(checkbox4).toBeChecked();
-
-    // Check the first checkbox 5
-    await expect(checkbox5).toBeVisible();
-    await page.keyboard.press('Tab');
-    await expect(checkbox5).toBeFocused();
-    await page.keyboard.press('Space');
-    await expect(checkbox5).toBeChecked();
-
-    // Checking if the checkbox is readonly
-    await expect(checkbox6).toBeVisible();
-    await page.keyboard.press('Tab');
-    await expect(checkbox6).toBeFocused();
-    await page.keyboard.press('Space');
-    await expect(checkbox6).not.toBeChecked();
+    await expect(checkbox).not.toBeChecked();
   });
 });

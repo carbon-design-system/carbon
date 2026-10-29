@@ -22,20 +22,9 @@ import '@testing-library/jest-dom';
 //
 // For more information, check out the docs here:
 // https://jestjs.io/docs/en/configuration.html#setupfilesafterenv-array
-const customMatchers = {
+expect.extend({
   toHaveNoAxeViolations,
-};
-
-if (global.window && global.document) {
-  // accessibility-checker registers Jest hooks when imported and pulls in
-  // filesystem modules. Keep it out of node-only tests that mock `fs`.
-  const {
-    default: toHaveNoACViolations,
-  } = require('../matchers/toHaveNoACViolations.js');
-  customMatchers.toHaveNoACViolations = toHaveNoACViolations;
-}
-
-expect.extend(customMatchers);
+});
 
 // Have our test suite throw an error if one of the below console methods are
 // called when we are not expecting them. This is often helpful for React

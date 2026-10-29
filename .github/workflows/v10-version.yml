@@ -21,7 +21,7 @@ jobs:
           fetch-tags: true
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
       - name: Use Node.js version from .nvmrc
-        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: '.nvmrc'
           registry-url: 'https://registry.npmjs.org'
@@ -96,7 +96,7 @@ jobs:
       - name: Generate token
         # Do not generate token for release commits
         if: steps.check-commit.outputs.is_release_commit != 'true'
-        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
         id: generate_token
         with:
           app-id: ${{ secrets.APP_ID }}

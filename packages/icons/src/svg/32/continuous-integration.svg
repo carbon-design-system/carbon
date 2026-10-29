@@ -1,13 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 26.3.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="32px" height="32px" viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
-<style type="text/css">
-	.st0{fill:none;}
-</style>
-<path d="M31.9,15.5l-5.7-10C25.9,5.2,25.6,5,25.3,5H6.7C6.4,5,6.1,5.2,5.9,5.5l-5.7,10C0,15.7,0,15.8,0,16s0,0.3,0.1,0.5l5.7,10
-	C6.1,26.8,6.4,27,6.7,27h18.5c0.4,0,0.7-0.2,0.9-0.5l5.7-10C32,16.3,32,16.2,32,16S32,15.7,31.9,15.5z M17.8,15h-8l4-7L17.8,15z
-	 M15.5,7h8l-4,7L15.5,7z M17.8,17l-4,7l-4-7H17.8z M19.5,18l4,7h-8L19.5,18z M21.2,17h8l-4,7L21.2,17z M21.2,15l4-7l4,7H21.2z
-	 M7.3,7H12l-4.6,8H2.7L7.3,7z M7.3,25l-4.6-8h4.7l4.6,8H7.3z"/>
-<rect id="_x3C_Transparent_Rectangle_x3E__589_" class="st0" width="32" height="32"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <path id="continuous-integration" d="M25.25,27H6.75c-.3579,0-.6885-.1914-.8667-.502L.1333,16.4985c-.1777-.3086-.1777-.6885,0-.9971L5.8833,5.5015c.1782-.3101.5088-.5015.8667-.5015h18.5c.3574,0,.6885.1914.8672.5015l5.75,10c.1768.3086.1768.6885,0,.9971l-5.75,9.9995c-.1787.3105-.5098.502-.8672.502ZM15.4785,25h8.043l-4.0215-6.9941-4.0215,6.9941ZM7.3286,25h4.6929l-4.6001-8H2.7285l4.6001,8ZM21.2285,17l4.0215,6.9941,4.0215-6.9941h-8.043ZM9.7285,17l4.0215,6.9941,4.0215-6.9941h-8.043ZM21.2285,15h8.043l-4.0215-6.9937-4.0215,6.9937ZM9.7285,15h8.043l-4.0215-6.9937-4.0215,6.9937ZM2.7285,15h4.6929l4.6001-8h-4.6929L2.7285,15ZM15.4785,7l4.0215,6.9937,4.0215-6.9937h-8.043Z"/>
+  <rect id="Transparent_Rectangle" data-name="Transparent Rectangle" class="cls-1" width="32" height="32"/>
 </svg>

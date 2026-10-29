@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,6 +9,8 @@ import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import type { Meta } from '@storybook/web-components-vite';
 import './copy-button';
+import { BUTTON_KIND } from '../button/defs';
+import { ICON_BUTTON_SIZE } from '../icon-button/defs';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
 
 const tooltipAlignments = {
@@ -27,25 +29,32 @@ const tooltipAlignments = {
 };
 
 const defaultArgs = {
+  align: POPOVER_ALIGNMENT.BOTTOM,
+  disabled: false,
   feedback: 'Copied!',
   feedbackTimeout: 2000,
   iconDescription: 'Copy to clipboard',
-  align: POPOVER_ALIGNMENT.BOTTOM,
+  kind: '',
+  size: ICON_BUTTON_SIZE.LARGE,
 };
 
-const controls = {
+const argTypes = {
   align: {
     control: 'select',
     description: 'Specify how the toggletip should align with the button',
-    options: tooltipAlignments,
+    options: Object.values(tooltipAlignments),
   },
   autoAlign: {
     control: 'boolean',
-    description: 'Specify how the toggletip should align with the button',
+    description: 'Specify whether the tooltip should auto-align.',
+  },
+  disabled: {
+    control: 'boolean',
+    description: 'Specify whether the button should be disabled.',
   },
   feedback: {
     control: 'text',
-    description: `Provide a description for the icon representing the copy action that can be read by screen readers`,
+    description: 'Specify the text displayed after the button is clicked.',
   },
   feedbackTimeout: {
     control: { type: 'number', min: 1, step: 1 },
@@ -55,32 +64,60 @@ const controls = {
     control: 'text',
     description: `Provide a description for the icon representing the copy action that can be read by screen readers`,
   },
+  kind: {
+    control: 'select',
+    description: 'Specify the kind of Button you want to create.',
+    options: ['', ...Object.values(BUTTON_KIND)],
+  },
+  size: {
+    control: 'select',
+    description: 'Specify the size of the Button.',
+    options: Object.values(ICON_BUTTON_SIZE),
+  },
+  onClick: {
+    action: 'onClick',
+    description:
+      'Provide a function that is called when the button is clicked.',
+  },
+};
+
+const parameters = {
+  controls: {
+    include: Object.keys(argTypes),
+  },
 };
 
 const meta: Meta = {
   title: 'Components/Copy button',
   render: ({
-    feedbackText,
-    feedbackTimeout,
-    onClick,
-    iconDescription,
     align,
     autoAlign,
+    disabled,
+    feedback,
+    feedbackTimeout,
+    iconDescription,
+    kind,
+    size,
+    onClick,
   }) => html`
     <cds-copy-button
       align="${align}"
       ?autoalign="${autoAlign}"
-      feedback="${ifDefined(feedbackText)}"
+      ?disabled="${disabled}"
+      feedback="${ifDefined(feedback)}"
       feedback-timeout="${ifDefined(feedbackTimeout)}"
+      kind="${ifDefined(kind)}"
+      size="${ifDefined(size)}"
       @click="${onClick}">
       ${iconDescription}
     </cds-copy-button>
   `,
-  args: defaultArgs,
 };
 
 export const Default = {
-  argTypes: controls,
+  argTypes,
+  args: defaultArgs,
+  parameters,
 };
 
 export default meta;

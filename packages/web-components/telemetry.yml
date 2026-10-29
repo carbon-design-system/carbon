@@ -11,6 +11,7 @@ collect:
         - _open
         - accept
         - action-button-label
+        - actions
         - active
         - ai-text
         - ai-text-label
@@ -20,6 +21,7 @@ collect:
         - alignment-axis-offset
         - allow-custom-value
         - allow-empty
+        - allow-input
         - aria-current
         - aria-label
         - aria-labelledby
@@ -37,6 +39,7 @@ collect:
         - button-label
         - button-label-active
         - button-label-inactive
+        - button-size
         - caption
         - caret
         - checked
@@ -50,7 +53,11 @@ collect:
         - close-icon-description
         - close-on-activation
         - close-on-escape
+        - close-on-select
+        - closeIconDescription
+        - collapse-label
         - collapse-mode
+        - collapseText
         - color-scheme
         - cols
         - compact
@@ -59,11 +66,14 @@ collect:
         - counter-mode
         - danger-description
         - data-table
+        - date-format
         - decrement-button-assistive-text
         - default-checked
         - default-open
         - default-value
         - defaultOpen
+        - defaultSelected
+        - density
         - description
         - direction
         - disable-wheel
@@ -72,11 +82,15 @@ collect:
         - download
         - dropShadow
         - enable-counter
+        - enable-dialog-element
         - enable-v12-overflowmenu
+        - enabled-range
         - enter-delay-ms
         - even
+        - expand-label
         - expandable
         - expanded
+        - expandText
         - feedback
         - feedback-timeout
         - filter
@@ -98,10 +112,13 @@ collect:
         - hide-divider
         - hide-label
         - hide-password-label
+        - hide-search
         - hide-steppers
+        - hide-text-input
         - hidePasswordLabel
         - highContrast
         - highlighted
+        - horizontal
         - href
         - hreflang
         - icon
@@ -119,12 +136,16 @@ collect:
         - is-active
         - is-condensed
         - is-expressive
+        - is-fluid
+        - is-flush
         - is-not-child-of-header
         - is-selectable
         - is-sortable
         - isExpressive
         - isFluid
         - isSelected
+        - isValid
+        - item-count
         - kind
         - label
         - label-position
@@ -135,6 +156,7 @@ collect:
         - legend-id
         - legend-text
         - lineCount
+        - lines
         - link-role
         - loading-description
         - loading-icon-description
@@ -142,11 +164,17 @@ collect:
         - loading-success-delay
         - locale
         - low-contrast
+        - managed-focus
         - max
         - max-count
+        - max-date
+        - max-label
         - max-length
         - menu-alignment
         - min
+        - min-date
+        - min-label
+        - multi
         - multiple
         - name
         - nested
@@ -158,6 +186,8 @@ collect:
         - oncds-combo-box-toggled
         - oncds-content-switcher-beingselected
         - oncds-content-switcher-selected
+        - oncds-date-picker-changed
+        - oncds-date-picker-flatpickr-error
         - oncds-dropdown-beingselected
         - oncds-dropdown-beingtoggled
         - oncds-dropdown-selected
@@ -173,9 +203,11 @@ collect:
         - oncds-popover-beingclosed
         - oncds-popover-closed
         - oncds-radio-button-changed
+        - oncds-radio-button-group-changed
         - oncds-search-input
         - oncds-select-selected
         - oncds-selectable-tile-changed
+        - oncds-slider-changed
         - oncds-slider-input-changed
         - oncds-table-batch-actions-cancel-clicked
         - oncds-table-change-selection-all
@@ -195,6 +227,7 @@ collect:
         - openTooltip
         - optional-classes
         - orientation
+        - overflow-aria-label
         - overflow-menu-on-hover
         - page
         - paragraph
@@ -225,7 +258,8 @@ collect:
         - selection-mode
         - selection-name
         - selection-value
-        - selector-initial-focus
+        - selector-primary-focus
+        - short
         - shortcut
         - should-filter-item
         - show-password-label
@@ -237,6 +271,7 @@ collect:
         - status
         - status-icon-description
         - step
+        - step-multiplier
         - step-start-value
         - subtitle
         - tab-index
@@ -262,6 +297,7 @@ collect:
         - use-zebra-styles
         - validity-message
         - value
+        - value-upper
         - vertical
         - visited
         - warn
@@ -275,10 +311,61 @@ collect:
         # cds-accordion-item
         - oncds-accordion-item-beingtoggled
         - oncds-accordion-item-toggled
+        # cds-action-set
+        - disable-stacking
+        # cds-add-select-body
+        - global-search-label
+        - global-search-placeholder
+        - items-label
+        - layout
+        - oncds-add-select-body-breadcrumb-click
+        - oncds-add-select-body-search
+        - path
+        - search-results-title
+        # cds-add-select-column
+        - all-indeterminate
+        - all-selected
+        - oncds-add-select-column-search
+        - oncds-add-select-column-select-all
+        - search-label
+        - search-placeholder
+        - show-select-all
+        # cds-add-select-item-panel
+        - oncds-add-select-item-panel-close
+        - show-close-button
+        # cds-add-select-row
+        - _column-multi
+        - has-children
+        - has-item-panel
+        - item-id
+        - item-panel-icon-description
+        - item-panel-open
+        - oncds-add-select-row-item-panel-click
+        - oncds-add-select-row-navigate
+        - oncds-add-select-row-select
+        - parent-id
+        - skeleton
+        # cds-add-select-selection-summary
+        - edit-icon-description
+        - oncds-add-select-selection-summary-edit
+        - selected-item-count
+        - show-edit-icon
+        # cds-add-select-selection-summary-item
+        - hide-remove-button
+        - oncds-add-select-selection-summary-item-remove
+        - remove-button-label
+        - use-accordion
         # cds-ai-skeleton-icon
         - custom-styles
         # cds-badge-indicator
         - count
+        # cds-big-number
+        - fraction-digits
+        - loading
+        - percentage
+        - total
+        - trending
+        - truncate
         # cds-breadcrumb
         - no-trailing-slash
         # cds-breadcrumb-link
@@ -287,12 +374,37 @@ collect:
         - stacked
         # cds-callout-notification
         - title-id
+        # cds-card
+        - media-position
+        # cds-card-actions
+        - overflow-menu-label
+        # cds-card-media
+        - media-width
+        - ratio
+        # cds-card-title
+        - description-truncate
+        - label-truncate
+        - max-width
+        - title-truncate
         # cds-chat-button
         - is-quick-action
         - is-selected
         # cds-clickable-tile
         - ai-label
         - slug
+        # cds-coachmark
+        - drag-aria-label
+        - floating
+        - oncds-coachmark-closed
+        - oncds-coachmark-opened
+        - position
+        # cds-coachmark-beacon
+        - oncds-coachmark-beacon-clicked
+        # cds-coachmark-header
+        - dragIconDescription
+        # cds-coachmark-tagline
+        - oncds-coachmark-tagline-close
+        - oncds-coachmark-tagline-cta-click
         # cds-code-snippet
         - copy-text
         - hide-copy-button
@@ -313,19 +425,6 @@ collect:
         - is-inset
         # cds-contained-list-item
         - oncds-contained-list-item-click
-        # cds-copy-button
-        - autoAlign
-        # cds-date-picker
-        - allow-input
-        - close-on-select
-        - date-format
-        - enabled-range
-        - max-date
-        - min-date
-        - oncds-date-picker-changed
-        - oncds-date-picker-flatpickr-error
-        # cds-date-picker-input
-        - short
         # cds-definition-tooltip
         - open-on-hover
         # cds-dialog
@@ -339,6 +438,19 @@ collect:
         - oncds-dismissible-tag-beingclosed
         - oncds-dismissible-tag-closed
         - tag-title
+        # cds-edit-in-place
+        - cancel-label
+        - edit-always-visible
+        - edit-label
+        - inherit-typography
+        - oncds-edit-in-place-blur
+        - oncds-edit-in-place-cancel
+        - oncds-edit-in-place-change
+        - oncds-edit-in-place-save
+        - read-only-label
+        - read-only-toggletip-text
+        - save-label
+        - toggletip-alignment
         # cds-expandable-tile
         - oncds-expandable-tile-beingtoggled
         - oncds-expandable-tile-toggled
@@ -356,6 +468,8 @@ collect:
         - error-subject
         - oncds-file-uploader-item-beingdeleted
         - oncds-file-uploader-item-deleted
+        # cds-fluid-date-picker-skeleton
+        - date-picker-type
         # cds-fluid-time-picker-skeleton
         - is-only-two
         # cds-form-group
@@ -364,6 +478,11 @@ collect:
         # cds-grid
         - narrow
         - with-row-gap
+        # cds-guide-banner
+        - collapse-text
+        - expand-text
+        - oncds-guide-banner-close
+        - oncds-guide-banner-toggle
         # cds-header-global-action
         - panel-id
         # cds-header-menu
@@ -379,13 +498,32 @@ collect:
         # cds-inline-loading
         - oncds-inline-loading-onsuccess
         - success-delay
+        # cds-interstitial-screen
+        - fullscreen
+        - oncds-interstitial-beingclosed
+        - oncds-interstitial-closed
+        - oncds-interstitial-opened
+        # cds-interstitial-screen-body
+        - oncds-on-after-step-change
+        - oncds-on-before-step-change
+        # cds-interstitial-screen-body-item
+        - stepTitle
+        # cds-interstitial-screen-footer
+        - async-action
+        - nextButtonLabel
+        - oncds-on-action
+        - previousButtonLabel
+        - skipButtonLabel
+        - startButtonLabel
+        # cds-interstitial-screen-header
+        - header-subtitle
+        - header-title
+        - hideProgressIndicator
         # cds-layer
         - layers
         - level
         - oncds-use-layer
         - with-background
-        # cds-layout
-        - density
         # cds-layout-constraint
         - size-default
         - size-max
@@ -410,25 +548,71 @@ collect:
         - renderIcon
         # cds-modal
         - container-class
-        - enable-dialog-element
         - has-scrolling-content
         - oncds-modal-beingclosed
         - oncds-modal-closed
         - should-submit-on-enter
         # cds-multi-select-item
         - is-select-all
+        # cds-notification
+        - oncds-notification-dismiss
+        - timestamp
+        # cds-notification-footer
+        - oncds-notification-settings
+        - oncds-notification-view-all
+        - view-all-label
+        # cds-notification-panel
+        - date-time-locale
+        - dismiss-all-label
+        - donot-disturb-label
+        - empty-state-label
+        - oncds-notification-click-outside
+        - oncds-notification-dismiss-all
+        - oncds-notification-donot-disturb-change
+        - oncds-notification-panel-beingclosed
+        - previous-text
+        - today-text
+        - triggerButtonRef
         # cds-operational-tag
         - oncds-operational-tag-beforeselected
         - oncds-operational-tag-selected
+        # cds-options-tile
+        - locked
+        - lockedText
+        - oncds-options-tile-close
+        - oncds-options-tile-open
+        - titleId
+        - titleText
+        - warnText
         # cds-ordered-list
         - native
         # cds-overflow-menu-item
         - danger
         - divider
         - oncds-overflow-menu-item-clicked
+        # cds-page-header
+        - full-width-grid
+        - narrow-grid
+        # cds-page-header-actions-set
+        - actions-data
+        - toolbar-aria-label
         # cds-page-header-breadcrumb
+        - actions-aria-label
         - content-actions-flush
         - page-actions-flush
+        # cds-page-header-breadcrumbs-set
+        - breadcrumb-aria-label
+        - breadcrumbs-data
+        # cds-page-header-content
+        - title-level
+        # cds-page-header-content-text
+        - subtitle-level
+        # cds-page-header-hero-image
+        - object-fit
+        # cds-page-header-tabs
+        - disable-sticky-tab-bar
+        # cds-page-header-tags-set
+        - tags-data
         # cds-pagination
         - backward-text
         - backward-text-tooltip-position
@@ -450,6 +634,19 @@ collect:
         - items-shown
         - loop
         - oncds-page-changed
+        # cds-preview-date-picker
+        - oncds-preview-date-picker-changed
+        - oncds-preview-date-picker-error
+        # cds-preview-date-picker-calendar
+        - dateFormat
+        - focusedDate
+        - maxDate
+        - minDate
+        - oncds-preview-date-picker-calendar-date-select
+        - oncds-preview-date-picker-calendar-month-change
+        - rangeMode
+        - selectedDates
+        - viewDate
         # cds-progress-indicator
         - current-index
         - ononChange
@@ -462,11 +659,14 @@ collect:
         - spaceEqually
         # cds-radio-button
         - disabledItem
-        # cds-radio-button-group
-        - defaultSelected
-        - oncds-radio-button-group-changed
         # cds-radio-tile
         - oncds-radio-tile-selected
+        # cds-resizer-handle
+        - axis
+        - onresize-drag
+        - onresize-end
+        - onresize-reset
+        - onresize-start
         # cds-selectable-tag
         - oncds-selectable-tag-beforeselected
         - oncds-selectable-tag-selected
@@ -481,6 +681,7 @@ collect:
         - oncds-side-nav-menu-toggled
         # cds-side-panel
         - animate-title
+        - close-icon-tooltip-alignment
         - condensed-actions
         - current-step
         - include-overlay
@@ -489,18 +690,12 @@ collect:
         - oncds-side-panel-closed
         - oncds-side-panel-navigate-back
         - placement
+        - resizable
+        - selector-initial-focus
         - selector-page-content
         - slide-in
         # cds-skip-to-content
         - link-assistive-text
-        # cds-slider
-        - hide-text-input
-        - isValid
-        - max-label
-        - min-label
-        - oncds-slider-changed
-        - step-multiplier
-        - value-upper
         # cds-slider-input
         - hideTextInput
         # cds-slug
@@ -559,11 +754,28 @@ collect:
         # cds-tabs-vertical
         - custom-height
         # cds-tearsheet
-        - has-close-icon
-        - influencer-placement
+        - container-class-name
         - influencer-width
         - oncds-tearsheet-beingclosed
         - oncds-tearsheet-closed
+        - oncds-tearsheet-collapse-change
+        - selectors-floating-menus
+        - summary-content-width
+        - variant
+        - vertical-gap
+        # cds-tearsheet-header
+        - disable-header-collapse
+        - oncds-tearsheet-header-collapse-change
+        # cds-tearsheet-influencer
+        - influencer-panel-aria-label
+        - influencer-panel-open
+        - oncds-tearsheet-influencer-closed
+        # cds-tearsheet-stack
+        - stack-step-size
+        # cds-tearsheet-summary-content
+        - oncds-tearsheet-summary-closed
+        - summary-panel-aria-label
+        - summary-panel-open
         # cds-tile-group
         - currentRadioSelection
         - currentSelections
@@ -586,15 +798,41 @@ collect:
         - is-expanded
         - oneventSelected
         - oneventToggled
+        # cds-user-avatar
+        - background-color
+        - image
+        - image-description
+        - theme
+        # feature-flags
+        - enable-experimental-focus-wrap-without-sentinels
+        - enable-focus-wrap-without-sentinels
+        - enable-treeview-controllable
+        - enable-v12-autoalign
+        - enable-v12-dynamic-floating-styles
+        - enable-v12-release
+        - enable-v12-tile-default-icons
+        - enable-v12-tile-radio-icons
+        - enable-v12-toggle-reduced-label-spacing
+        # stacking-tearsheet-demo
+        - tearsheet-type
         # tabs-story-wrapper
         - with-icons
       allowedAttributeStringValues:
         # General - boolean attributes
         - "true"
         - "false"
+        # General - button-size
+        - 2xl
+        - lg
+        - md
+        - sm
+        - xl
         # General - counter-mode
         - character
         - word
+        # General - density
+        - condensed
+        - normal
         # General - input-mode
         - decimal
         - email
@@ -617,17 +855,46 @@ collect:
         - dialog
         # General - size
         - 2xl
+        - default
         - lg
         - md
         - sm
         - xl
         - xs
+        # General - tooltip-alignment
+        - bottom
+        - bottom-left
+        - bottom-right
+        - left
+        - right
+        - top
+        - top-left
+        - top-right
         # General - type
+        - error
+        - expand
+        - informational
         - number
+        - success
         - text
-        # cds-layout - density
-        - condensed
-        - normal
+        - tooltip
+        - warning
+        # cds-add-select-body - layout
+        - horizontal
+        - vertical
+        # cds-edit-in-place - toggletip-alignment
+        - bottom
+        - bottom-left
+        - bottom-right
+        - left
+        - right
+        - top
+        - top-left
+        - top-right
+        # cds-fluid-date-picker-skeleton - date-picker-type
+        - range
+        - simple
+        - single
         # cds-layout-constraint - size-default
         - 2xl
         - lg
@@ -649,6 +916,34 @@ collect:
         - sm
         - xl
         - xs
+        # cds-page-header-content - title-level
+        - h1
+        - h2
+        - h3
+        - h4
+        - h5
+        - h6
+        # cds-page-header-content-text - subtitle-level
+        - h2
+        - h3
+        - h4
+        - h5
+        - h6
+        # cds-page-header-hero-image - object-fit
+        - contain
+        - cover
+        - fill
+        - none
+        # cds-resizer-handle - axis
+        - x
+        - y
+        # cds-tearsheet - variant
+        - narrow
+        - wide
+        # cds-tearsheet-stack - stack-step-size
+        - lg
+        - md
+        - sm
   npm:
     dependencies: null
   js:

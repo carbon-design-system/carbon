@@ -41,6 +41,7 @@ async function build() {
     '!src/**/*.d.ts',
     '!src/globals/internal/storybook-cdn.ts',
     '!src/polyfills',
+    '!src/examples/**/example/**',
   ]);
 
   const libInputs = await globby([
@@ -78,7 +79,7 @@ async function build() {
       deps: {
         neverBundle: external,
       },
-      failOnWarn: false,
+      failOnWarn: true,
       format: format.type,
       inputOptions: withInputCompatibilityAndPlugins,
       logLevel: 'warn',
@@ -198,6 +199,29 @@ async function postBuild() {
         await fs.promises.writeFile(file, updatedContent);
       })
     );
+
+    // Deprecate the `es-custom` build. It will be removed in v3.0.0, replaced by
+    // custom tag names, a build-time prefixed build, and scoped registries.
+    const noticeTarget = path.resolve(
+      targetDir,
+      'globals/decorators/carbon-element.js'
+    );
+    if (await fs.pathExists(noticeTarget)) {
+      const notice = [
+        '',
+        '// @deprecated The `es-custom` build is deprecated and will be removed in v3.0.0.',
+        'if (typeof console !== "undefined" && !globalThis.__CDS_ES_CUSTOM_DEPRECATED__) {',
+        '  globalThis.__CDS_ES_CUSTOM_DEPRECATED__ = true;',
+        '  console.warn(',
+        '    "[@carbon/web-components] The \\"es-custom\\" build (cds-custom-* elements) is deprecated and will be removed in v3.0.0. " +',
+        '    "See the v3 migration guide: " +',
+        '    "https://github.com/carbon-design-system/carbon/blob/main/docs/guides/cwc-v3-migration.md#the-es-custom-build-is-removed"',
+        '  );',
+        '}',
+        '',
+      ].join('\n');
+      await fs.promises.appendFile(noticeTarget, notice);
+    }
   }
 }
 
@@ -256,7 +280,7 @@ async function emitDeclarations(tsconfigPath, outDir) {
   }
 
   if (diagnostics.length > 0) {
-    console.warn(formatDiagnostics(diagnostics));
+    throw new Error(formatDiagnostics(diagnostics));
   }
 }
 

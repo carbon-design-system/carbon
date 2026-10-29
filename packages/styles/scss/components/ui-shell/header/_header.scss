@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2025
+// Copyright IBM Corp. 2016, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -8,8 +8,10 @@
 @use '../../button';
 @use '../mixins' as *;
 @use '../functions' as *;
+@use '../../../border-radius' as *;
 @use '../../../breakpoint' as *;
 @use '../../../config' as *;
+@use '../../../feature-flags' as *;
 @use '../../../layer' as *;
 @use '../../../motion' as *;
 @use '../../../spacing' as *;
@@ -18,6 +20,7 @@
 @use '../../../utilities/button-reset';
 @use '../../../utilities/component-reset';
 @use '../../../utilities/convert';
+@use '../../../utilities/high-contrast-mode' as *;
 @use '../../../utilities/z-index' as *;
 
 /// UI shell header
@@ -36,6 +39,10 @@
     border-block-end: 1px solid $border-subtle;
     inset-block-start: 0;
     inset-inline: 0;
+
+    @if enabled('enable-v12-release') {
+      @include button.radius($border-radius-00);
+    }
   }
 
   .#{$prefix}--header__action {
@@ -73,8 +80,10 @@
     display: inline;
   }
 
-  .#{$prefix}--header__action:hover {
-    background-color: $background-hover;
+  @media (any-hover: hover) {
+    .#{$prefix}--header__action:hover {
+      background-color: $background-hover;
+    }
   }
 
   .#{$prefix}--header__action--active {
@@ -106,8 +115,6 @@
     fill: $icon-secondary;
   }
 
-  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--header__action:hover
-    svg,
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--header__action:active
     svg,
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--header__action--active
@@ -115,13 +122,22 @@
     fill: $icon-primary;
   }
 
+  @media (any-hover: hover) {
+    .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--header__action:hover
+      svg {
+      fill: $icon-primary;
+    }
+  }
+
   .#{$prefix}--header__menu-trigger > svg {
     fill: $icon-primary;
   }
 
-  .#{$prefix}--header__menu-trigger:hover > svg {
-    fill: $icon-primary;
-    // TODO: ask design if this color changes on hover, missing spec for it
+  @media (any-hover: hover) {
+    .#{$prefix}--header__menu-trigger:hover > svg {
+      fill: $icon-primary;
+      // TODO: ask design if this color changes on hover, missing spec for it
+    }
   }
 
   .#{$prefix}--header__menu-toggle {
@@ -168,9 +184,14 @@
     font-weight: 400;
   }
 
-  a.#{$prefix}--header__name,
-  a.#{$prefix}--header__name:hover {
+  a.#{$prefix}--header__name {
     color: $text-primary;
+  }
+
+  @media (any-hover: hover) {
+    a.#{$prefix}--header__name:hover {
+      color: $text-primary;
+    }
   }
 
   .#{$prefix}--header__menu-toggle:not(.#{$prefix}--header__menu-toggle__hidden)
@@ -240,9 +261,11 @@
     user-select: none;
   }
 
-  a.#{$prefix}--header__menu-item:hover {
-    background-color: $background-hover;
-    color: $text-primary;
+  @media (any-hover: hover) {
+    a.#{$prefix}--header__menu-item:hover {
+      background-color: $background-hover;
+      color: $text-primary;
+    }
   }
 
   .#{$prefix}--header__action:active,
@@ -256,9 +279,14 @@
     outline: none;
   }
 
-  a.#{$prefix}--header__menu-item:hover > svg,
   a.#{$prefix}--header__menu-item:active > svg {
     fill: $icon-primary;
+  }
+
+  @media (any-hover: hover) {
+    a.#{$prefix}--header__menu-item:hover > svg {
+      fill: $icon-primary;
+    }
   }
 
   // Styles for selected state
@@ -358,11 +386,13 @@
     background-color: $layer;
   }
 
-  .#{$prefix}--header__menu-title[aria-expanded='true']
-    + .#{$prefix}--header__menu
-    .#{$prefix}--header__menu-item:hover {
-    background-color: $layer-hover;
-    color: $text-primary;
+  @media (any-hover: hover) {
+    .#{$prefix}--header__menu-title[aria-expanded='true']
+      + .#{$prefix}--header__menu
+      .#{$prefix}--header__menu-item:hover {
+      background-color: $layer-hover;
+      color: $text-primary;
+    }
   }
 
   .#{$prefix}--header__menu-title[aria-expanded='true']
@@ -378,8 +408,10 @@
     // used for both desktop and mobile
     background-color: $layer-selected;
 
-    &:hover {
-      background-color: $layer-selected-hover;
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: $layer-selected-hover;
+      }
     }
   }
 
@@ -436,5 +468,21 @@
     inset-inline-start: 0;
     // TODO: double check with design that these tokens are correct, missing spec for it
     outline: none;
+  }
+
+  // Forced colors paints the transparent borders the name and menu items
+  // reserve for focus, so every link looked focused. Hide them until focus.
+  @include high-contrast-mode {
+    a.#{$prefix}--header__name,
+    a.#{$prefix}--header__menu-item {
+      border-color: Canvas;
+    }
+
+    a.#{$prefix}--header__name:focus,
+    a.#{$prefix}--header__menu-item:focus,
+    a.#{$prefix}--header__menu-item[aria-current='page']:focus,
+    a.#{$prefix}--header__menu-item.#{$prefix}--header__menu-item--current:focus {
+      border-color: Highlight;
+    }
   }
 }

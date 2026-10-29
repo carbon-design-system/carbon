@@ -1,0 +1,150 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import { renderHook } from '@testing-library/react';
+import { useMotionEnabled } from '../useMotionEnabled';
+import { useMotionSurface } from '../useMotionSurface';
+
+jest.mock('../useMotionEnabled', () => ({
+  useMotionEnabled: jest.fn(() => true),
+}));
+
+describe('useMotionSurface', () => {
+  afterEach(() => {
+    useMotionEnabled.mockReturnValue(true);
+  });
+
+  it('resolves shared-element surfaces into Motion transitions', () => {
+    const { result } = renderHook(() => useMotionSurface('expand'));
+
+    expect(result.current.kind).toBe('shared-element');
+    expect(result.current.enabled).toBe(true);
+    expect(result.current.origin).toBeUndefined();
+    expect(result.current.enterTransition).toEqual({
+      duration: 0.24,
+      ease: [0.2, 0, 0.38, 0.9],
+    });
+    expect(result.current.exitTransition).toEqual({
+      duration: 0.24,
+      ease: [0.2, 0, 0.38, 0.9],
+    });
+    expect(result.current.animate).toEqual({
+      opacity: 1,
+      transform: 'scale(1)',
+      transition: { duration: 0.24, ease: [0.2, 0, 0.38, 0.9] },
+    });
+    expect(result.current.exit).toEqual({
+      opacity: 0,
+      transform: 'scale(0.96)',
+      transition: { duration: 0.24, ease: [0.2, 0, 0.38, 0.9] },
+    });
+  });
+
+  it('keeps the trigger origin of the invoke surface', () => {
+    const { result } = renderHook(() => useMotionSurface('invoke'));
+
+    expect(result.current.kind).toBe('shared-element');
+    expect(result.current.origin).toBe('trigger');
+    // standard/expressive
+    expect(result.current.enterTransition.ease).toEqual([0.4, 0.14, 0.3, 1]);
+    // invoke has no enter/exit keyframes - morph timing only
+    expect(result.current.animate).toBeUndefined();
+    expect(result.current.exit).toBeUndefined();
+  });
+
+  it('resolves reveal surfaces into enter/exit targets', () => {
+    const { result } = renderHook(() => useMotionSurface('contextual'));
+
+    expect(result.current.kind).toBe('reveal');
+    expect(result.current.initial).toEqual({
+      opacity: 0,
+      transform: 'scale(0.96)',
+    });
+    expect(result.current.animate).toEqual({
+      opacity: 1,
+      transform: 'scale(1)',
+      // fast-02 = 110ms, entrance/expressive
+      transition: { duration: 0.11, ease: [0, 0, 0.3, 1] },
+    });
+    expect(result.current.exit).toEqual({
+      opacity: 0,
+      transform: 'scale(0.96)',
+      // exit/expressive
+      transition: { duration: 0.11, ease: [0.4, 0.14, 1, 1] },
+    });
+  });
+
+  it('reports the accessibility gate', () => {
+    useMotionEnabled.mockReturnValue(false);
+
+    const { result } = renderHook(() => useMotionSurface('expand'));
+
+    expect(result.current.enabled).toBe(false);
+  });
+
+  // Custom surfaces compose a definition instead of taking a public name.
+  it('resolves an inline definition', () => {
+    const { result } = renderHook(() =>
+      useMotionSurface({
+        kind: 'reveal',
+        duration: 'slow-01',
+        enter: { opacity: 1, clipPath: 'inset(0 0 0 0)' },
+        exit: { opacity: 0, clipPath: 'inset(50% 0 50% 0)' },
+        enterEasing: { name: 'entrance', mode: 'expressive' },
+        exitEasing: { name: 'exit', mode: 'expressive' },
+      })
+    );
+
+    expect(result.current.kind).toBe('reveal');
+    expect(result.current.initial).toEqual({
+      opacity: 0,
+      clipPath: 'inset(50% 0 50% 0)',
+    });
+    expect(result.current.animate).toEqual({
+      opacity: 1,
+      clipPath: 'inset(0 0 0 0)',
+      // slow-01 = 400ms, entrance/expressive
+      transition: { duration: 0.4, ease: [0, 0, 0.3, 1] },
+    });
+  });
+
+  // An inline definition is a fresh object every render. Keying the memo on
+  // structure keeps the resolved targets referentially stable, so Motion is not
+  // handed new objects on each pass.
+  it('keeps resolved values stable across renders of an inline definition', () => {
+    const renderInline = () =>
+      useMotionSurface({
+        kind: 'reveal',
+        duration: 'slow-01',
+        enter: { opacity: 1 },
+        exit: { opacity: 0 },
+        enterEasing: { name: 'entrance', mode: 'expressive' },
+        exitEasing: { name: 'exit', mode: 'expressive' },
+      });
+
+    const { result, rerender } = renderHook(renderInline);
+    const first = result.current;
+
+    rerender();
+
+    expect(result.current).toBe(first);
+  });
+
+  it('surfaces validation errors from inline definitions', () => {
+    expect(() =>
+      renderHook(() =>
+        useMotionSurface({
+          kind: 'reveal',
+          duration: 'slow-01',
+          exit: { opacity: 0 },
+          enterEasing: { name: 'entrance', mode: 'expressive' },
+          exitEasing: { name: 'exit', mode: 'expressive' },
+        })
+      )
+    ).toThrow(/define `enter` as an object with at least one CSS property/);
+  });
+});

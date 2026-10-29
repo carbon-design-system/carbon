@@ -6,6 +6,7 @@
  */
 
 import { html } from 'lit';
+import { action } from 'storybook/actions';
 import { iconLoader } from '../../globals/internal/icon-loader';
 // Below path will be there when an application installs `@carbon/web-components` package.
 // In our dev env, we auto-generate the file and re-map below path to to point to the generated file.
@@ -26,6 +27,74 @@ import styles from './ui-shell-story.scss?lit';
 import { prefix } from '../../globals/settings';
 import '../badge-indicator/index';
 const linksHref = 'https://www.carbondesignsystem.com/';
+
+const headerArgs = {
+  headerAriaLabel: 'IBM Cloud',
+  platformName: 'Cloud console',
+  platformPrefix: 'IBM',
+};
+
+const headerArgTypes = {
+  headerAriaLabel: {
+    control: 'text',
+    description: 'Provide an accessible label for the header.',
+    table: { category: 'Header' },
+  },
+  platformName: {
+    control: 'text',
+    description: 'Specify the product name displayed in the header.',
+    table: { category: 'HeaderName' },
+  },
+  platformPrefix: {
+    control: 'text',
+    description: 'Specify the prefix displayed before the product name.',
+    table: { category: 'HeaderName' },
+  },
+};
+
+const navigationArgs = {
+  navigationAriaLabel: 'IBM Cloud',
+  navigationMenuLabel: 'Manage',
+};
+
+const navigationArgTypes = {
+  navigationAriaLabel: {
+    control: 'text',
+    description: 'Provide an accessible label for the header navigation.',
+    table: { category: 'HeaderNav' },
+  },
+  navigationMenuLabel: {
+    control: 'text',
+    description: 'Specify the label for the header navigation menu.',
+    table: { category: 'HeaderMenu' },
+  },
+};
+
+const sideNavAriaLabelArgs = {
+  sideNavAriaLabel: 'Side navigation',
+};
+
+const sideNavAriaLabelArgTypes = {
+  sideNavAriaLabel: {
+    control: 'text',
+    description: 'Provide an accessible label for the side navigation.',
+    table: { category: 'SideNav' },
+  },
+};
+
+const sideNavArgs = {
+  ...sideNavAriaLabelArgs,
+  expanded: true,
+};
+
+const sideNavArgTypes = {
+  ...sideNavAriaLabelArgTypes,
+  expanded: {
+    control: 'boolean',
+    description: 'Specify whether the side navigation is expanded.',
+    table: { category: 'SideNav' },
+  },
+};
 
 const StoryContent = ({ useResponsiveOffset = true }) => {
   const firstColumnClasses = classMap({
@@ -64,13 +133,13 @@ const StoryContent = ({ useResponsiveOffset = true }) => {
               <br />
               <br />
               To better understand the purpose and function of the UI shell,
-              consider the “shell” of MacOS, which contains the Apple menu,
+              consider the “shell” of macOS, which contains the Apple menu,
               top-level navigation, and universal, OS-level controls at the top
               of the screen, as well as a universal dock along the bottom or
               side of the screen. The Carbon UI shell is roughly analogous in
               function to these parts of the Mac UI. For example, the app
               switcher portion of the shell can be compared to the dock in
-              MacOS.
+              macOS.
             </p>
             <h2 style="margin: 30px 0px">Header responsive behavior</h2>
             <p>
@@ -121,17 +190,19 @@ const StoryContent = ({ useResponsiveOffset = true }) => {
 
 export const FixedSideNav = {
   name: 'Fixed Side Nav',
-  render: () => {
-    const result = html`
+  args: { ...sideNavArgs },
+  argTypes: { ...sideNavArgTypes },
+  render: ({ expanded, sideNavAriaLabel }) => {
+    return html`
       <style>
         ${styles}
       </style>
       <cds-side-nav
         is-not-child-of-header
         usage-mode="${SIDE_NAV_USAGE_MODE.REGULAR}"
-        aria-label="Side navigation"
+        aria-label="${sideNavAriaLabel}"
         collapse-mode="${SIDE_NAV_COLLAPSE_MODE.FIXED}"
-        expanded>
+        ?expanded="${expanded}">
         <cds-side-nav-items>
           <cds-side-nav-menu title="L0 menu">
             <cds-side-nav-menu-item href="${linksHref}">
@@ -180,24 +251,23 @@ export const FixedSideNav = {
       </cds-side-nav>
       ${StoryContent({ useResponsiveOffset: false })}
     `;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-    (result as any).hasMainTag = true;
-    return result;
   },
 };
 
 export const FixedSideNavDivider = {
   name: 'Fixed Side Nav with Divider',
-  render: () => {
-    const result = html`
+  args: { ...sideNavArgs },
+  argTypes: { ...sideNavArgTypes },
+  render: ({ expanded, sideNavAriaLabel }) => {
+    return html`
       <style>
         ${styles}
       </style>
       <cds-side-nav
         is-not-child-of-header
-        aria-label="Side navigation"
+        aria-label="${sideNavAriaLabel}"
         collapse-mode="${SIDE_NAV_COLLAPSE_MODE.FIXED}"
-        expanded>
+        ?expanded="${expanded}">
         <cds-side-nav-items>
           <cds-side-nav-menu title="L0 menu">
             <cds-side-nav-menu-item href="${linksHref}">
@@ -246,24 +316,69 @@ export const FixedSideNavDivider = {
       </cds-side-nav>
       ${StoryContent({ useResponsiveOffset: false })}
     `;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-    (result as any).hasMainTag = true;
-    return result;
   },
+};
+
+export const FixedSideNavWMixedLinksAndButtons = {
+  name: 'Fixed Side Nav with Mixed Buttons and Links',
+  args: { ...sideNavArgs },
+  argTypes: { ...sideNavArgTypes },
+  render: ({ expanded, sideNavAriaLabel }) => html`
+    <style>
+      ${styles}
+    </style>
+    <cds-side-nav
+      is-not-child-of-header
+      aria-label="${sideNavAriaLabel}"
+      collapse-mode="${SIDE_NAV_COLLAPSE_MODE.FIXED}"
+      ?expanded="${expanded}">
+      <cds-side-nav-items>
+        <cds-side-nav-link href="${linksHref}"> Overview </cds-side-nav-link>
+        <cds-side-nav-link as="button" @click="${action('Open release notes')}">
+          Release notes
+        </cds-side-nav-link>
+        <cds-side-nav-menu title="Resources">
+          <cds-side-nav-menu-item href="${linksHref}">
+            Documentation
+          </cds-side-nav-menu-item>
+          <cds-side-nav-menu-item
+            as="button"
+            @click="${action('Open version details')}">
+            Version details
+          </cds-side-nav-menu-item>
+          <cds-side-nav-menu-item href="${linksHref}">
+            Support
+          </cds-side-nav-menu-item>
+        </cds-side-nav-menu>
+        <cds-side-nav-divider></cds-side-nav-divider>
+        <cds-side-nav-link active href="${linksHref}">
+          Settings
+        </cds-side-nav-link>
+        <cds-side-nav-link
+          as="button"
+          @click="${action('Open feedback modal')}">
+          Send feedback
+        </cds-side-nav-link>
+      </cds-side-nav-items>
+    </cds-side-nav>
+    ${StoryContent({ useResponsiveOffset: false })}
+  `,
 };
 
 export const FixedSideNavIcons = {
   name: 'Fixed Side Nav with Icons',
-  render: () => {
-    const result = html`
+  args: { ...sideNavArgs },
+  argTypes: { ...sideNavArgTypes },
+  render: ({ expanded, sideNavAriaLabel }) => {
+    return html`
       <style>
         ${styles}
       </style>
       <cds-side-nav
         is-not-child-of-header
-        aria-label="Side navigation"
+        aria-label="${sideNavAriaLabel}"
         collapse-mode="${SIDE_NAV_COLLAPSE_MODE.FIXED}"
-        expanded>
+        ?expanded="${expanded}">
         <cds-side-nav-items>
           <cds-side-nav-menu title="Category title">
             ${iconLoader(Fade16, { slot: 'title-icon' })}
@@ -316,33 +431,34 @@ export const FixedSideNavIcons = {
       </cds-side-nav>
       ${StoryContent({ useResponsiveOffset: false })}
     `;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-    (result as any).hasMainTag = true;
-    return result;
   },
 };
 
 export const HeaderBase = {
-  render: () =>
+  args: { ...headerArgs },
+  argTypes: { ...headerArgTypes },
+  render: ({ headerAriaLabel, platformName, platformPrefix }) =>
     html` <style>
         ${styles}
       </style>
-      <cds-header aria-label="IBM Platform Name">
-        <cds-header-name href="javascript:void 0" prefix="IBM"
-          >[Platform]</cds-header-name
+      <cds-header aria-label="${headerAriaLabel}">
+        <cds-header-name href="javascript:void 0" prefix="${platformPrefix}"
+          >${platformName}</cds-header-name
         >
       </cds-header>`,
 };
 
 export const HeaderBaseWActions = {
   name: 'Header Base with Actions',
-  render: () =>
+  args: { ...headerArgs },
+  argTypes: { ...headerArgTypes },
+  render: ({ headerAriaLabel, platformName, platformPrefix }) =>
     html` <style>
         ${styles}
       </style>
-      <cds-header aria-label="IBM Platform Name">
-        <cds-header-name href="javascript:void 0" prefix="IBM"
-          >[Platform]</cds-header-name
+      <cds-header aria-label="${headerAriaLabel}">
+        <cds-header-name href="javascript:void 0" prefix="${platformPrefix}"
+          >${platformName}</cds-header-name
         >
         <div class="${prefix}--header__global">
           <cds-header-global-action aria-label="Search" tooltip-text="Search">
@@ -366,6 +482,7 @@ export const HeaderBaseWActions = {
 export const HeaderBaseWActionsRightPanel = {
   name: 'Header Base with Actions and Right Panel',
   argTypes: {
+    ...headerArgTypes,
     badgeCount: {
       control: 'number',
       description:
@@ -373,15 +490,16 @@ export const HeaderBaseWActionsRightPanel = {
     },
   },
   args: {
+    ...headerArgs,
     badgeCount: 4,
   },
-  render: ({ badgeCount }) =>
+  render: ({ badgeCount, headerAriaLabel, platformName, platformPrefix }) =>
     html` <style>
         ${styles}
       </style>
-      <cds-header aria-label="IBM Platform Name">
-        <cds-header-name href="javascript:void 0" prefix="IBM"
-          >[Platform]</cds-header-name
+      <cds-header aria-label="${headerAriaLabel}">
+        <cds-header-name href="javascript:void 0" prefix="${platformPrefix}"
+          >${platformName}</cds-header-name
         >
         <div class="${prefix}--header__global">
           <cds-header-global-action aria-label="Search" tooltip-text="Search">
@@ -412,13 +530,15 @@ export const HeaderBaseWActionsRightPanel = {
 
 export const HeaderBaseWActionsSwitcher = {
   name: 'Header Base with Actions and Switcher',
-  render: () =>
+  args: { ...headerArgs },
+  argTypes: { ...headerArgTypes },
+  render: ({ headerAriaLabel, platformName, platformPrefix }) =>
     html` <style>
         ${styles}
       </style>
-      <cds-header aria-label="IBM Platform Name">
-        <cds-header-name href="javascript:void 0" prefix="IBM"
-          >[Platform]</cds-header-name
+      <cds-header aria-label="${headerAriaLabel}">
+        <cds-header-name href="javascript:void 0" prefix="${platformPrefix}"
+          >${platformName}</cds-header-name
         >
         <div class="${prefix}--header__global">
           <cds-header-global-action aria-label="Search" tooltip-text="Search">
@@ -468,18 +588,35 @@ export const HeaderBaseWActionsSwitcher = {
 
 export const HeaderBaseWNavigationActionsAndSideNav = {
   name: 'Header Base with Navigation, Actions and Side Nav',
-  render: () =>
+  args: {
+    ...headerArgs,
+    ...navigationArgs,
+    ...sideNavAriaLabelArgs,
+  },
+  argTypes: {
+    ...headerArgTypes,
+    ...navigationArgTypes,
+    ...sideNavAriaLabelArgTypes,
+  },
+  render: ({
+    headerAriaLabel,
+    navigationAriaLabel,
+    navigationMenuLabel,
+    platformName,
+    platformPrefix,
+    sideNavAriaLabel,
+  }) =>
     html` <style>
         ${styles}
       </style>
-      <cds-header aria-label="IBM Platform Name">
+      <cds-header aria-label="${headerAriaLabel}">
         <cds-header-menu-button
           button-label-active="Close menu"
           button-label-inactive="Open menu"></cds-header-menu-button>
-        <cds-header-name href="javascript:void 0" prefix="IBM"
-          >[Platform]</cds-header-name
+        <cds-header-name href="javascript:void 0" prefix="${platformPrefix}"
+          >${platformName}</cds-header-name
         >
-        <cds-header-nav menu-bar-label="IBM [Platform]">
+        <cds-header-nav menu-bar-label="${navigationAriaLabel}">
           <cds-header-nav-item href="javascript:void 0"
             >Link 1</cds-header-nav-item
           >
@@ -489,7 +626,9 @@ export const HeaderBaseWNavigationActionsAndSideNav = {
           <cds-header-nav-item href="javascript:void 0"
             >Link 3</cds-header-nav-item
           >
-          <cds-header-menu menu-label="Link 4" trigger-content="Link 4">
+          <cds-header-menu
+            menu-label="${navigationMenuLabel}"
+            trigger-content="${navigationMenuLabel}">
             <cds-header-menu-item href="javascript:void 0"
               >Sub-link 1</cds-header-menu-item
             >
@@ -518,7 +657,7 @@ export const HeaderBaseWNavigationActionsAndSideNav = {
           </cds-header-global-action>
         </div>
         <cds-side-nav
-          aria-label="Side navigation"
+          aria-label="${sideNavAriaLabel}"
           collapse-mode="${SIDE_NAV_COLLAPSE_MODE.RESPONSIVE}">
           <cds-side-nav-items>
             <cds-header-side-nav-items has-divider>
@@ -595,18 +734,35 @@ export const HeaderBaseWNavigationActionsAndSideNav = {
 
 export const HeaderBaseWNavigationActions = {
   name: 'Header Base with Navigation and Actions',
-  render: () =>
+  args: {
+    ...headerArgs,
+    ...navigationArgs,
+    ...sideNavAriaLabelArgs,
+  },
+  argTypes: {
+    ...headerArgTypes,
+    ...navigationArgTypes,
+    ...sideNavAriaLabelArgTypes,
+  },
+  render: ({
+    headerAriaLabel,
+    navigationAriaLabel,
+    navigationMenuLabel,
+    platformName,
+    platformPrefix,
+    sideNavAriaLabel,
+  }) =>
     html` <style>
         ${styles}
       </style>
-      <cds-header aria-label="IBM Platform Name">
+      <cds-header aria-label="${headerAriaLabel}">
         <cds-header-menu-button
           button-label-active="Close menu"
           button-label-inactive="Open menu"></cds-header-menu-button>
-        <cds-header-name href="javascript:void 0" prefix="IBM"
-          >[Platform]</cds-header-name
+        <cds-header-name href="javascript:void 0" prefix="${platformPrefix}"
+          >${platformName}</cds-header-name
         >
-        <cds-header-nav menu-bar-label="IBM [Platform]">
+        <cds-header-nav menu-bar-label="${navigationAriaLabel}">
           <cds-header-nav-item href="javascript:void 0"
             >Link 1</cds-header-nav-item
           >
@@ -618,8 +774,8 @@ export const HeaderBaseWNavigationActions = {
           >
           <cds-header-menu
             is-active
-            menu-label="Link 4"
-            trigger-content="Link 4">
+            menu-label="${navigationMenuLabel}"
+            trigger-content="${navigationMenuLabel}">
             <cds-header-menu-item href="javascript:void 0"
               >Sub-link 1</cds-header-menu-item
             >
@@ -649,7 +805,7 @@ export const HeaderBaseWNavigationActions = {
         </div>
         <cds-side-nav
           is-not-persistent
-          aria-label="Side navigation"
+          aria-label="${sideNavAriaLabel}"
           collapse-mode="${SIDE_NAV_COLLAPSE_MODE.RESPONSIVE}">
           <cds-side-nav-items>
             <cds-side-nav-link href="javascript:void(0)">
@@ -679,18 +835,35 @@ export const HeaderBaseWNavigationActions = {
 
 export const HeaderBaseWNavigation = {
   name: 'Header Base with Navigation',
-  render: () =>
+  args: {
+    ...headerArgs,
+    ...navigationArgs,
+    ...sideNavAriaLabelArgs,
+  },
+  argTypes: {
+    ...headerArgTypes,
+    ...navigationArgTypes,
+    ...sideNavAriaLabelArgTypes,
+  },
+  render: ({
+    headerAriaLabel,
+    navigationAriaLabel,
+    navigationMenuLabel,
+    platformName,
+    platformPrefix,
+    sideNavAriaLabel,
+  }) =>
     html` <style>
         ${styles}
       </style>
-      <cds-header aria-label="IBM Platform Name">
+      <cds-header aria-label="${headerAriaLabel}">
         <cds-header-menu-button
           button-label-active="Close menu"
           button-label-inactive="Open menu"></cds-header-menu-button>
-        <cds-header-name href="javascript:void 0" prefix="IBM"
-          >[Platform]</cds-header-name
+        <cds-header-name href="javascript:void 0" prefix="${platformPrefix}"
+          >${platformName}</cds-header-name
         >
-        <cds-header-nav menu-bar-label="IBM [Platform]">
+        <cds-header-nav menu-bar-label="${navigationAriaLabel}">
           <cds-header-nav-item href="javascript:void 0"
             >Link 1</cds-header-nav-item
           >
@@ -700,7 +873,9 @@ export const HeaderBaseWNavigation = {
           <cds-header-nav-item href="javascript:void 0"
             >Link 3</cds-header-nav-item
           >
-          <cds-header-menu menu-label="Link 4" trigger-content="Link 4">
+          <cds-header-menu
+            menu-label="${navigationMenuLabel}"
+            trigger-content="${navigationMenuLabel}">
             <cds-header-menu-item href="javascript:void 0"
               >Sub-link 1</cds-header-menu-item
             >
@@ -714,7 +889,7 @@ export const HeaderBaseWNavigation = {
         </cds-header-nav>
         <cds-side-nav
           is-not-persistent
-          aria-label="Side navigation"
+          aria-label="${sideNavAriaLabel}"
           collapse-mode="${SIDE_NAV_COLLAPSE_MODE.RESPONSIVE}">
           <cds-side-nav-items>
             <cds-side-nav-link href="javascript:void(0)">
@@ -744,20 +919,33 @@ export const HeaderBaseWNavigation = {
 
 export const HeaderBaseWSideNav = {
   name: 'Header Base with Side Nav',
-  render: () => {
-    const result = html`
+  args: {
+    ...headerArgs,
+    ...sideNavAriaLabelArgs,
+  },
+  argTypes: {
+    ...headerArgTypes,
+    ...sideNavAriaLabelArgTypes,
+  },
+  render: ({
+    headerAriaLabel,
+    platformName,
+    platformPrefix,
+    sideNavAriaLabel,
+  }) => {
+    return html`
       <style>
         ${styles}
       </style>
-      <cds-header aria-label="IBM Platform Name">
+      <cds-header aria-label="${headerAriaLabel}">
         <cds-header-menu-button
           button-label-active="Close menu"
           button-label-inactive="Open menu"></cds-header-menu-button>
-        <cds-header-name href="javascript:void 0" prefix="IBM"
-          >[Platform]</cds-header-name
+        <cds-header-name href="javascript:void 0" prefix="${platformPrefix}"
+          >${platformName}</cds-header-name
         >
         <cds-side-nav
-          aria-label="Side navigation"
+          aria-label="${sideNavAriaLabel}"
           collapse-mode="${SIDE_NAV_COLLAPSE_MODE.RESPONSIVE}">
           <cds-side-nav-items>
             <cds-side-nav-menu title="Category title">
@@ -814,22 +1002,21 @@ export const HeaderBaseWSideNav = {
       </cds-header>
       ${StoryContent({ useResponsiveOffset: true })}
     `;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-    (result as any).hasMainTag = true;
-    return result;
   },
 };
 
 export const HeaderBaseWSkipToContent = {
   name: 'Header Base with SkipToContent',
-  render: () =>
+  args: { ...headerArgs },
+  argTypes: { ...headerArgTypes },
+  render: ({ headerAriaLabel, platformName, platformPrefix }) =>
     html` <style>
         ${styles}
       </style>
-      <cds-header aria-label="IBM Platform Name">
+      <cds-header aria-label="${headerAriaLabel}">
         <cds-skip-to-content></cds-skip-to-content>
-        <cds-header-name href="javascript:void 0" prefix="IBM"
-          >[Platform]</cds-header-name
+        <cds-header-name href="javascript:void 0" prefix="${platformPrefix}"
+          >${platformName}</cds-header-name
         >
         <div class="${prefix}--header__global">
           <cds-header-global-action aria-label="Search" tooltip-text="Search">
@@ -853,13 +1040,19 @@ export const HeaderBaseWSkipToContent = {
 
 export const SideNavRail = {
   name: 'Side Nav Rail',
-  render: () =>
+  args: {
+    ...sideNavAriaLabelArgs,
+    expanded: false,
+  },
+  argTypes: { ...sideNavArgTypes },
+  render: ({ expanded, sideNavAriaLabel }) =>
     html` <style>
         ${styles}
       </style>
       <cds-side-nav
-        aria-label="Side navigation"
-        collapse-mode="${SIDE_NAV_COLLAPSE_MODE.RAIL}">
+        aria-label="${sideNavAriaLabel}"
+        collapse-mode="${SIDE_NAV_COLLAPSE_MODE.RAIL}"
+        ?expanded="${expanded}">
         <cds-side-nav-items>
           <cds-side-nav-menu title="Category title">
             ${iconLoader(Fade16, { slot: 'title-icon' })}
@@ -917,18 +1110,37 @@ export const SideNavRail = {
 
 export const SideNavRailWHeader = {
   name: 'Side Nav Rail with Header',
-  render: () =>
+  args: {
+    ...headerArgs,
+    ...navigationArgs,
+    ...sideNavAriaLabelArgs,
+    expanded: false,
+  },
+  argTypes: {
+    ...headerArgTypes,
+    ...navigationArgTypes,
+    ...sideNavArgTypes,
+  },
+  render: ({
+    expanded,
+    headerAriaLabel,
+    navigationAriaLabel,
+    navigationMenuLabel,
+    platformName,
+    platformPrefix,
+    sideNavAriaLabel,
+  }) =>
     html` <style>
         ${styles}
       </style>
-      <cds-header aria-label="IBM Platform Name">
+      <cds-header aria-label="${headerAriaLabel}">
         <cds-header-menu-button
           button-label-active="Close menu"
           button-label-inactive="Open menu"></cds-header-menu-button>
-        <cds-header-name href="javascript:void 0" prefix="IBM"
-          >[Platform]</cds-header-name
+        <cds-header-name href="javascript:void 0" prefix="${platformPrefix}"
+          >${platformName}</cds-header-name
         >
-        <cds-header-nav menu-bar-label="IBM [Platform]">
+        <cds-header-nav menu-bar-label="${navigationAriaLabel}">
           <cds-header-nav-item href="javascript:void 0"
             >Link 1</cds-header-nav-item
           >
@@ -938,7 +1150,9 @@ export const SideNavRailWHeader = {
           <cds-header-nav-item href="javascript:void 0"
             >Link 3</cds-header-nav-item
           >
-          <cds-header-menu menu-label="Link 4" trigger-content="Link 4">
+          <cds-header-menu
+            menu-label="${navigationMenuLabel}"
+            trigger-content="${navigationMenuLabel}">
             <cds-header-menu-item href="javascript:void 0"
               >Sub-link 1</cds-header-menu-item
             >
@@ -967,8 +1181,9 @@ export const SideNavRailWHeader = {
           </cds-header-global-action>
         </div>
         <cds-side-nav
-          aria-label="Side navigation"
-          collapse-mode="${SIDE_NAV_COLLAPSE_MODE.RAIL}">
+          aria-label="${sideNavAriaLabel}"
+          collapse-mode="${SIDE_NAV_COLLAPSE_MODE.RAIL}"
+          ?expanded="${expanded}">
           <cds-side-nav-items>
             <cds-side-nav-menu title="Category title">
               ${iconLoader(Fade16, { slot: 'title-icon' })}
@@ -1027,16 +1242,18 @@ export const SideNavRailWHeader = {
 
 export const SideNavWLargeSideNavItems = {
   name: 'Side Nav with Large Side Nav Items',
-  render: () => {
-    const result = html`
+  args: { ...sideNavArgs },
+  argTypes: { ...sideNavArgTypes },
+  render: ({ expanded, sideNavAriaLabel }) => {
+    return html`
       <style>
         ${styles}
       </style>
       <cds-side-nav
         is-not-child-of-header
-        aria-label="Side navigation"
+        aria-label="${sideNavAriaLabel}"
         collapse-mode="${SIDE_NAV_COLLAPSE_MODE.FIXED}"
-        expanded>
+        ?expanded="${expanded}">
         <cds-side-nav-items>
           <cds-side-nav-menu large title="Large menu">
             <cds-side-nav-menu-item href="${linksHref}">
@@ -1072,9 +1289,6 @@ export const SideNavWLargeSideNavItems = {
       </cds-side-nav>
       ${StoryContent({ useResponsiveOffset: true })}
     `;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-    (result as any).hasMainTag = true;
-    return result;
   },
 };
 

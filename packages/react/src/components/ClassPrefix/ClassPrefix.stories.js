@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -20,17 +20,20 @@ export default {
   },
 };
 
-export const Default = () => {
-  function ExampleComponent() {
-    const prefix = usePrefix();
-    return <p>The current prefix is: {prefix}</p>;
-  }
+function ExampleComponent() {
+  const prefix = usePrefix();
+
+  return <p>The current prefix is: {prefix}</p>;
+}
+
+export const Default = (args) => {
   return (
-    <>
+    <ClassPrefix {...args}>
       <ExampleComponent />
-      <ClassPrefix prefix="custom">
-        <ExampleComponent />
-      </ClassPrefix>
-    </>
+    </ClassPrefix>
   );
+};
+
+Default.args = {
+  prefix: 'custom',
 };

@@ -32,8 +32,7 @@ import { useMergedRefs } from '../../internal/useMergedRefs';
  */
 const useIsTruncated = <T extends HTMLElement>(
   forwardedRef?: Ref<T>,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  deps: any[] = []
+  deps: unknown[] = []
 ) => {
   const localRef = useRef<T>(null);
   const mergedRef = useMergedRefs([

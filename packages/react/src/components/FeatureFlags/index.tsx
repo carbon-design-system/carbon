@@ -8,6 +8,7 @@
 import {
   FeatureFlags as GlobalFeatureFlags,
   createScope,
+  notifyAvailableFlag,
 } from '@carbon/feature-flags';
 import PropTypes from 'prop-types';
 import React, {
@@ -20,17 +21,96 @@ import { deprecate } from '../../prop-types/deprecate';
 
 export interface FeatureFlagsProps {
   children?: ReactNode;
+
+  /**
+   * Provide the feature flags to enable or disable in the current React tree.
+   *
+   * @deprecated Use the individual boolean props instead. Run the
+   * `featureflag-deprecate-flags-prop` codemod to migrate:
+   * `npx @carbon/upgrade migrate featureflag-deprecate-flags-prop --write`
+   */
   flags?: Record<string, boolean>;
+
+  /**
+   * Enable the features and functionality for the v12 Release.
+   *
+   * Enabling this turns on every `enableV12*` flag at once, as well as
+   * `enableFocusWrapWithoutSentinels`.
+   */
   enableV12Release?: boolean;
+
+  /**
+   * Enable rendering of default icons in the tile components.
+   *
+   * Becomes the default behavior in v12.
+   */
   enableV12TileDefaultIcons?: boolean;
+
+  /**
+   * Enable rendering of radio icons in the `RadioTile` component.
+   *
+   * Becomes the default behavior in v12.
+   */
   enableV12TileRadioIcons?: boolean;
+
+  /**
+   * Enable the use of the v12 `OverflowMenu` leveraging the `Menu`
+   * subcomponents.
+   *
+   * Becomes the default behavior in v12.
+   */
   enableV12Overflowmenu?: boolean;
+
+  /**
+   * Enable the new `TreeView` controllable API.
+   */
   enableTreeviewControllable?: boolean;
+
+  /**
+   * Enable the new focus wrap behavior that doesn't use sentinel nodes.
+   *
+   * @deprecated Use `enableFocusWrapWithoutSentinels` instead.
+   */
   enableExperimentalFocusWrapWithoutSentinels?: boolean;
+
+  /**
+   * Enable the new focus wrap behavior that doesn't use sentinel nodes.
+   */
   enableFocusWrapWithoutSentinels?: boolean;
+
+  /**
+   * Enable components to utilize the native `dialog` element.
+   */
   enableDialogElement?: boolean;
+
+  /**
+   * Enable dynamic setting of floating styles for components like `Popover`,
+   * `Tooltip`, etc.
+   *
+   * Becomes the default behavior in v12.
+   */
   enableV12DynamicFloatingStyles?: boolean;
+
+  /**
+   * Enable `autoAlign` by default for components that support it, like
+   * `Popover`, `Tooltip`, `Toggletip`, `Dropdown`, etc. An explicit
+   * `autoAlign` prop always takes precedence.
+   *
+   * Becomes the default behavior in v12.
+   */
+  enableV12Autoalign?: boolean;
+
+  /**
+   * Enable enhanced functionality for the `FileUploader` component, including
+   * richer callback data and expanded trigger events for `onChange` and
+   * `onDelete`.
+   */
   enableEnhancedFileUploader?: boolean;
+
+  /**
+   * Enable components to remain unmounted in closed state and mount in open
+   * state.
+   */
   enablePresence?: boolean;
 }
 
@@ -57,6 +137,7 @@ const PROP_TO_FLAG: Record<string, string> = {
   enableFocusWrapWithoutSentinels: 'enable-focus-wrap-without-sentinels',
   enableDialogElement: 'enable-dialog-element',
   enableV12DynamicFloatingStyles: 'enable-v12-dynamic-floating-styles',
+  enableV12Autoalign: 'enable-v12-autoalign',
   enableEnhancedFileUploader: 'enable-enhanced-file-uploader',
   enablePresence: 'enable-presence',
 };
@@ -78,6 +159,7 @@ export const FeatureFlags = ({
   enableFocusWrapWithoutSentinels,
   enableDialogElement,
   enableV12DynamicFloatingStyles,
+  enableV12Autoalign,
   enableEnhancedFileUploader,
   enablePresence,
 }: FeatureFlagsProps) => {
@@ -97,6 +179,7 @@ export const FeatureFlags = ({
       enableFocusWrapWithoutSentinels,
       enableDialogElement,
       enableV12DynamicFloatingStyles,
+      enableV12Autoalign,
       enableEnhancedFileUploader,
       enablePresence,
     };
@@ -126,6 +209,7 @@ export const FeatureFlags = ({
     enableFocusWrapWithoutSentinels,
     enableDialogElement,
     enableV12DynamicFloatingStyles,
+    enableV12Autoalign,
     enableEnhancedFileUploader,
     enablePresence,
     flags,
@@ -159,6 +243,7 @@ FeatureFlags.propTypes = {
   enableFocusWrapWithoutSentinels: PropTypes.bool,
   enableDialogElement: PropTypes.bool,
   enableV12DynamicFloatingStyles: PropTypes.bool,
+  enableV12Autoalign: PropTypes.bool,
   enableEnhancedFileUploader: PropTypes.bool,
   enablePresence: PropTypes.bool,
 };
@@ -169,7 +254,13 @@ FeatureFlags.propTypes = {
  */
 export const useFeatureFlag = (flag: string) => {
   const scope = useContext(FeatureFlagContext);
-  return scope.enabled(flag);
+  const enabled = scope.enabled(flag);
+
+  if (process.env.NODE_ENV !== 'production') {
+    notifyAvailableFlag(flag, enabled);
+  }
+
+  return enabled;
 };
 
 /**

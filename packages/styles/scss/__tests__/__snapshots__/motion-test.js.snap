@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`@carbon/styles/scss/motion Public API 1`] = `
 {
@@ -38,6 +38,81 @@ exports[`@carbon/styles/scss/motion Public API 1`] = `
     "slow-01": "400ms",
     "slow-02": "700ms",
     "standard-easing": "cubic-bezier(0.5, 0, 0.1, 1)",
+    "surfaces": {
+      "contextual": {
+        "duration": "fast-02",
+        "enter": {
+          "opacity": 1,
+          "transform": "scale(1)",
+        },
+        "enter-easing": {
+          "mode": "expressive",
+          "name": "entrance",
+        },
+        "exit": {
+          "opacity": 0,
+          "transform": "scale(0.96)",
+        },
+        "exit-easing": {
+          "mode": "expressive",
+          "name": "exit",
+        },
+        "kind": "reveal",
+      },
+      "disclosure": {
+        "duration": "moderate-01",
+        "enter": {
+          "block-size": "auto",
+          "opacity": 1,
+        },
+        "enter-easing": {
+          "mode": "productive",
+          "name": "entrance",
+        },
+        "exit": {
+          "block-size": 0,
+          "opacity": 0,
+        },
+        "exit-easing": {
+          "mode": "productive",
+          "name": "exit",
+        },
+        "kind": "reveal",
+      },
+      "expand": {
+        "duration": "moderate-02",
+        "enter": {
+          "opacity": 1,
+          "transform": "scale(1)",
+        },
+        "enter-easing": {
+          "mode": "productive",
+          "name": "standard",
+        },
+        "exit": {
+          "opacity": 0,
+          "transform": "scale(0.96)",
+        },
+        "exit-easing": {
+          "mode": "productive",
+          "name": "standard",
+        },
+        "kind": "shared-element",
+      },
+      "invoke": {
+        "duration": "moderate-02",
+        "enter-easing": {
+          "mode": "expressive",
+          "name": "standard",
+        },
+        "exit-easing": {
+          "mode": "expressive",
+          "name": "standard",
+        },
+        "kind": "shared-element",
+        "origin": "trigger",
+      },
+    },
     "transition-base": "250ms",
     "transition-expansion": "300ms",
   },

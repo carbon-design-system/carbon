@@ -5,7 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { useCallback, useRef, useMemo, type RefObject } from 'react';
+import {
+  createContext,
+  useCallback,
+  useRef,
+  useMemo,
+  useState,
+  type RefObject,
+} from 'react';
 import { usePresence } from './usePresence';
 
 export interface PresenceContext {
@@ -23,7 +30,23 @@ export interface PresenceContext {
    * Returns if the caller is exclusive to this presence context
    */
   isPresenceExclusive: (id: string) => boolean;
+
+  /**
+   * Registers a pending JS-driven exit animation (e.g. a motion surface)
+   * that `getAnimations()` cannot observe. The presence exit does not finish
+   * until the returned release function is called.
+   */
+  holdExit: () => () => void;
 }
+
+/**
+ * Generic channel for presence providers (ModalPresence,
+ * ComposedModalPresence). Lets presence-aware children — like MotionSurface —
+ * register exit holds without depending on component-level context modules.
+ */
+export const PresenceHoldContext = createContext<PresenceContext | undefined>(
+  undefined
+);
 
 /**
  * Returns if the presence node is present and the context value to be used by a presence context, e.g. ModalPresence.
@@ -35,6 +58,7 @@ export const usePresenceContext = (
   const presenceIdRef = useRef<string | null>(initialPresenceId);
   const presenceRef = useRef<HTMLDivElement | null>(null);
   const prevPresenceRef = useRef<HTMLDivElement | null>(null);
+  const [exitHoldCount, setExitHoldCount] = useState(0);
 
   // clean up the presence id, if not predefined and if the presence node was unmounted
   if (!initialPresenceId && prevPresenceRef.current && !presenceRef.current) {
@@ -43,7 +67,11 @@ export const usePresenceContext = (
 
   prevPresenceRef.current = presenceRef.current;
 
-  const { isPresent, isExiting } = usePresence(presenceRef, open);
+  const { isPresent, isExiting } = usePresence(
+    presenceRef,
+    open,
+    exitHoldCount
+  );
 
   const isPresenceExclusive = useCallback((id: string | null) => {
     if (!id) return false;
@@ -56,13 +84,25 @@ export const usePresenceContext = (
     return true;
   }, []);
 
+  const holdExit = useCallback(() => {
+    setExitHoldCount((count) => count + 1);
+
+    let released = false;
+    return () => {
+      if (released) return;
+      released = true;
+      setExitHoldCount((count) => count - 1);
+    };
+  }, []);
+
   const contextValue = useMemo<PresenceContext>(
     () => ({
       presenceRef,
       isPresenceExclusive,
       isExiting,
+      holdExit,
     }),
-    [presenceRef, isPresenceExclusive, isExiting]
+    [presenceRef, isPresenceExclusive, isExiting, holdExit]
   );
 
   return [isPresent, contextValue] as const;

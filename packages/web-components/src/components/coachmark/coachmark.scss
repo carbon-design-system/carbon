@@ -1,0 +1,42 @@
+//
+// Copyright IBM Corp. 2025, 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/config' as *;
+
+$block-class: #{$prefix}--coachmark;
+
+:host {
+  display: inline-block;
+}
+
+.#{$prefix}--visually-hidden {
+  position: absolute;
+  overflow: hidden;
+  padding: 0;
+  border: 0;
+  margin: -1px;
+  block-size: 1px;
+  clip: rect(0, 0, 0, 0);
+  inline-size: 1px;
+  visibility: inherit;
+  white-space: nowrap;
+}
+
+.#{$block-class}--popover {
+  position: fixed;
+
+  cds-popover-content.#{$block-class}--is-dragging::part(content) {
+    border-radius: 0;
+    box-shadow:
+      0 0 0 $spacing-01 $icon-inverse,
+      0 0 0 $spacing-02 $background-inverse;
+  }
+}

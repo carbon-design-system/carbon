@@ -234,6 +234,11 @@ After the release workflow for stable release is completed this will trigger the
 `deploy-packages` workflow to update both `design-language-website` and
 `gatsby-theme-carbon` to the latest version of the Carbon packages.
 
+- [ ] Ensure a Pull Request has been generated in the
+      [design-language-website](https://github.com/carbon-design-system/design-language-website/pulls).
+      Make sure the PR bumps up the icons and pictograms packages to the latest
+      version. Do not merge the PR as the brand team will review, approve and
+      merge the PR.
 - [ ] Review, approve and merge the Pull Request generated from this action in
       [gatsby-theme-carbon](https://github.com/carbon-design-system/gatsby-theme-carbon/pulls)
       to verify no breaking changes have occurred in this release. If the PR
@@ -247,13 +252,6 @@ After the release workflow for stable release is completed this will trigger the
       has been released and is on the
       [latest version](https://github.com/carbon-design-system/gatsby-theme-carbon/blob/main/packages/gatsby-theme-carbon/package.json)
       of Carbon
-- [ ] Run the
-      [Update Carbon and gatsby-theme-carbon deps workflow](https://github.com/carbon-design-system/carbon-website/actions/workflows/update-carbon-gatsby-deps.yml)
-      to automatically open a PR in the Carbon website to update to latest
-      Carbon and gatsby-theme-carbon versions.
-- [ ] Review and approve the
-      [pull request](https://github.com/carbon-design-system/carbon-website/pulls)
-      generate by the workflow.
 
 ### Post release
 

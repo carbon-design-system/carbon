@@ -7,6 +7,8 @@
 
 import type { StorybookConfig } from '@storybook/react-vite';
 
+import fs from 'node:fs';
+import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import remarkGfm from 'remark-gfm';
@@ -14,6 +16,8 @@ import glob from 'fast-glob';
 import babel from '@rolldown/plugin-babel';
 import react from '@vitejs/plugin-react';
 import { mergeConfig } from 'vite';
+
+import { productMigratedStoryGlobs } from '../product-migrated-components.mjs';
 
 const configDir = fileURLToPath(new URL('.', import.meta.url));
 
@@ -40,7 +44,12 @@ const storyGlobs = [
 ];
 
 const stories = glob.sync(storyGlobs, {
-  ignore: ['../src/**/docs/*.mdx', '../src/**/next/docs/*.mdx'],
+  ignore: [
+    '../src/**/docs/*.mdx',
+    '../src/**/next/docs/*.mdx',
+    // ibm-products components in migration are v12-only; exclude from v11 Storybook
+    ...productMigratedStoryGlobs,
+  ],
   cwd: configDir,
 });
 
@@ -75,11 +84,52 @@ const config: StorybookConfig = {
     reactDocgen: 'react-docgen', // Favor docgen from prop-types instead of TS interfaces
   },
   async viteFinal(config) {
+    // Sass importer that resolves @carbon/ibm-products-styles/ imports to the
+    // absolute path in the monorepo root node_modules. Vite's internal Sass
+    // resolver walks up from the importing file's directory, which fails for
+    // files deep in src/examples/*/example/ because the package is installed at
+    // the repo root, not in packages/react/node_modules/.
+    const ibmProductsStylesRoot = path.resolve(
+      configDir,
+      '../../../node_modules/@carbon/ibm-products'
+    );
+    const ibmProductsStylesImporter = {
+      canonicalize(url: string) {
+        if (!url.startsWith('@carbon/ibm-products/')) return null;
+        const rel = url.slice('@carbon/ibm-products/'.length);
+        // Try _<name>.scss, <name>.scss, <name>/_index.scss in order
+        const base = path.join(ibmProductsStylesRoot, rel);
+        const dir = path.dirname(base);
+        const name = path.basename(base);
+        const candidates = [
+          path.join(dir, `_${name}.scss`),
+          `${base}.scss`,
+          path.join(base, '_index.scss'),
+          path.join(base, 'index.scss'),
+        ];
+        for (const candidate of candidates) {
+          try {
+            fs.accessSync(candidate);
+            return new URL(`file://${candidate}`);
+          } catch {
+            // try next
+          }
+        }
+        return null;
+      },
+      load(canonicalUrl: URL) {
+        const filePath = canonicalUrl.pathname;
+        const contents = fs.readFileSync(filePath, 'utf-8');
+        return { contents, syntax: 'scss' as const };
+      },
+    };
+
     return mergeConfig(config, {
       css: {
         preprocessorOptions: {
           scss: {
             api: 'modern',
+            importers: [ibmProductsStylesImporter],
           },
         },
       },
@@ -94,6 +144,7 @@ const config: StorybookConfig = {
         },
       },
       optimizeDeps: {
+        exclude: ['@carbon/motion'],
         rolldownOptions: {
           moduleTypes: {
             '.js': 'jsx',

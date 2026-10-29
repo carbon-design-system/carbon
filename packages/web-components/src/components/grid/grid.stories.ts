@@ -9,24 +9,19 @@ import { html } from 'lit';
 import './index';
 import styles from './grid-story.scss?lit';
 
-const alignments = {
-  [`Start`]: 'start',
-  [`Center`]: 'center',
-  [`End`]: 'end',
-};
-
 const defaultArgs = {
   align: 'center',
   condensed: false,
-  narrow: false,
   fullWidth: false,
+  narrow: false,
+  withRowGap: false,
 };
 
-const controls = {
+const sharedArgTypes = {
   align: {
     control: 'radio',
     description: 'Specify grid alignment. Default is center',
-    options: alignments,
+    options: ['start', 'center', 'end'],
   },
   condensed: {
     control: 'boolean',
@@ -40,18 +35,22 @@ const controls = {
     control: 'boolean',
     description: 'Remove the default max width',
   },
+  withRowGap: {
+    control: 'boolean',
+    description:
+      'Add a row gap to the grid that matches the current gutter size',
+  },
 };
 
 export const Default = {
-  args: defaultArgs,
-  argTypes: controls,
-  render: ({ align, condensed, narrow, fullWidth }) =>
+  render: ({ align, condensed, fullWidth, narrow, withRowGap }) =>
     html`<cds-grid
         align=${align}
         class="sb-grid"
         ?condensed=${condensed}
+        ?full-width=${fullWidth}
         ?narrow=${narrow}
-        ?full-width=${fullWidth}>
+        ?with-row-gap=${withRowGap}>
         <cds-column class="sb-column" sm="4"></cds-column>
         <cds-column class="sb-column" sm="4"></cds-column>
         <cds-column class="sb-column" sm="4"></cds-column>
@@ -63,8 +62,25 @@ export const Default = {
 };
 
 export const Condensed = {
-  render: () =>
-    html`<cds-grid class="sb-grid" condensed>
+  args: {
+    condensed: true,
+  },
+  argTypes: {
+    condensed: {
+      ...sharedArgTypes.condensed,
+      table: {
+        readonly: true,
+      },
+    },
+  },
+  render: ({ align, condensed, fullWidth, narrow, withRowGap }) =>
+    html`<cds-grid
+        align=${align}
+        class="sb-grid"
+        ?condensed=${condensed}
+        ?full-width=${fullWidth}
+        ?narrow=${narrow}
+        ?with-row-gap=${withRowGap}>
         <cds-column class="sb-column" sm="4"></cds-column>
         <cds-column class="sb-column" sm="4"></cds-column>
         <cds-column class="sb-column" sm="4"></cds-column>
@@ -76,8 +92,25 @@ export const Condensed = {
 };
 
 export const FullWidth = {
-  render: () =>
-    html`<cds-grid class="sb-grid" full-width>
+  args: {
+    fullWidth: true,
+  },
+  argTypes: {
+    fullWidth: {
+      ...sharedArgTypes.fullWidth,
+      table: {
+        readonly: true,
+      },
+    },
+  },
+  render: ({ align, condensed, fullWidth, narrow, withRowGap }) =>
+    html`<cds-grid
+        align=${align}
+        class="sb-grid"
+        ?condensed=${condensed}
+        ?full-width=${fullWidth}
+        ?narrow=${narrow}
+        ?with-row-gap=${withRowGap}>
         <cds-column class="sb-column" sm="4"></cds-column>
         <cds-column class="sb-column" sm="4"></cds-column>
         <cds-column class="sb-column" sm="4"></cds-column>
@@ -90,15 +123,14 @@ export const FullWidth = {
 
 export const WithRowGap = {
   args: {
-    ...defaultArgs,
     withRowGap: true,
   },
   argTypes: {
-    ...controls,
     withRowGap: {
-      control: 'boolean',
-      description:
-        'Add a row gap to the grid that matches the current gutter size',
+      ...sharedArgTypes.withRowGap,
+      table: {
+        readonly: true,
+      },
     },
   },
   parameters: {
@@ -106,12 +138,13 @@ export const WithRowGap = {
       skip: true,
     },
   },
-  render: ({ condensed, narrow, fullWidth, withRowGap }) =>
+  render: ({ align, condensed, fullWidth, narrow, withRowGap }) =>
     html`<cds-grid
+        align=${align}
         class="sb-grid"
         ?condensed=${condensed}
-        ?narrow=${narrow}
         ?full-width=${fullWidth}
+        ?narrow=${narrow}
         ?with-row-gap=${withRowGap}>
         <cds-column class="sb-column" sm="4"></cds-column>
         <cds-column class="sb-column" sm="4"></cds-column>
@@ -128,8 +161,14 @@ export const WithRowGap = {
 };
 
 export const MixedGutterModes = {
-  render: () =>
-    html`<cds-grid class="sb-grid">
+  render: ({ align, condensed, fullWidth, narrow, withRowGap }) =>
+    html`<cds-grid
+        align=${align}
+        class="sb-grid"
+        ?condensed=${condensed}
+        ?full-width=${fullWidth}
+        ?narrow=${narrow}
+        ?with-row-gap=${withRowGap}>
         <cds-column class="sb-column" span="8">
           <cds-grid class="sb-sub-grid">
             <cds-column class="sb-column" span="8">
@@ -167,7 +206,13 @@ export const MixedGutterModes = {
           </cds-grid>
         </cds-column>
       </cds-grid>
-      <cds-grid class="sb-grid" narrow>
+      <cds-grid
+        align=${align}
+        class="sb-grid"
+        ?condensed=${condensed}
+        ?full-width=${fullWidth}
+        narrow
+        ?with-row-gap=${withRowGap}>
         <cds-column class="sb-column" span="8">
           <cds-grid class="sb-sub-grid">
             <cds-column class="sb-column" span="4"></cds-column>
@@ -196,8 +241,25 @@ export const MixedGutterModes = {
 };
 
 export const Narrow = {
-  render: () =>
-    html`<cds-grid class="sb-grid" narrow>
+  args: {
+    narrow: true,
+  },
+  argTypes: {
+    narrow: {
+      ...sharedArgTypes.narrow,
+      table: {
+        readonly: true,
+      },
+    },
+  },
+  render: ({ align, condensed, fullWidth, narrow, withRowGap }) =>
+    html`<cds-grid
+        align=${align}
+        class="sb-grid"
+        ?condensed=${condensed}
+        ?full-width=${fullWidth}
+        ?narrow=${narrow}
+        ?with-row-gap=${withRowGap}>
         <cds-column class="sb-column" sm="4"></cds-column>
         <cds-column class="sb-column" sm="4"></cds-column>
         <cds-column class="sb-column" sm="4"></cds-column>
@@ -209,8 +271,14 @@ export const Narrow = {
 };
 
 export const GridStartEnd = {
-  render: () =>
-    html`<cds-grid class="sb-grid">
+  render: ({ align, condensed, fullWidth, narrow, withRowGap }) =>
+    html`<cds-grid
+        align=${align}
+        class="sb-grid"
+        ?condensed=${condensed}
+        ?full-width=${fullWidth}
+        ?narrow=${narrow}
+        ?with-row-gap=${withRowGap}>
         <cds-column
           class="sb-column"
           sm="span:1 start:4"
@@ -239,8 +307,14 @@ export const GridStartEnd = {
 };
 
 export const Offset = {
-  render: () =>
-    html`<cds-grid class="sb-grid">
+  render: ({ align, condensed, fullWidth, narrow, withRowGap }) =>
+    html`<cds-grid
+        align=${align}
+        class="sb-grid"
+        ?condensed=${condensed}
+        ?full-width=${fullWidth}
+        ?narrow=${narrow}
+        ?with-row-gap=${withRowGap}>
         <cds-column
           class="sb-column"
           sm="span:0"
@@ -273,8 +347,14 @@ export const Offset = {
 };
 
 export const Responsive = {
-  render: () =>
-    html`<cds-grid class="sb-grid">
+  render: ({ align, condensed, fullWidth, narrow, withRowGap }) =>
+    html`<cds-grid
+        align=${align}
+        class="sb-grid"
+        ?condensed=${condensed}
+        ?full-width=${fullWidth}
+        ?narrow=${narrow}
+        ?with-row-gap=${withRowGap}>
         <cds-column class="sb-column" sm="2" md="4" lg="6">
           <p>Small: Span 2 of 4</p>
           <p>Medium: Span 4 of 8</p>
@@ -307,13 +387,14 @@ export const Responsive = {
 };
 
 export const Subgrid = {
-  args: defaultArgs,
-  render: ({ condensed, narrow, fullWidth }) =>
+  render: ({ align, condensed, fullWidth, narrow, withRowGap }) =>
     html`<cds-grid
+        align=${align}
         class="sb-grid"
         ?condensed=${condensed}
+        ?full-width=${fullWidth}
         ?narrow=${narrow}
-        ?full-width=${fullWidth}>
+        ?with-row-gap=${withRowGap}>
         <cds-column class="sb-column" sm="2" md="4" lg="3">
           <p>Small: Span 2 of 4</p>
           <p>Medium: Span 4 of 8</p>
@@ -379,23 +460,23 @@ export const Subgrid = {
 
 export const SubgridWithRowGap = {
   args: {
-    ...defaultArgs,
     withRowGap: true,
   },
   argTypes: {
-    ...controls,
     withRowGap: {
-      control: 'boolean',
-      description:
-        'Add a row gap to the grid that matches the current gutter size',
+      ...sharedArgTypes.withRowGap,
+      table: {
+        readonly: true,
+      },
     },
   },
-  render: ({ condensed, narrow, fullWidth, withRowGap }) =>
+  render: ({ align, condensed, fullWidth, narrow, withRowGap }) =>
     html`<cds-grid
+        align=${align}
         class="sb-grid"
         ?condensed=${condensed}
-        ?narrow=${narrow}
         ?full-width=${fullWidth}
+        ?narrow=${narrow}
         ?with-row-gap=${withRowGap}>
         <cds-column class="sb-column" sm="2" md="4" lg="16">
           <cds-grid class="sb-sub-grid" with-row-gap>
@@ -432,6 +513,8 @@ export const SubgridWithRowGap = {
 
 const meta = {
   title: 'Elements/Grid',
+  args: defaultArgs,
+  argTypes: sharedArgTypes,
   decorators: [
     (story) => {
       return html` <div class="sb-css-grid-container">${story()}</div> `;

@@ -33,9 +33,9 @@ const types = {
 };
 
 const args = {
-  helperText: 'Optional helper text',
+  helperText: '75 MB of 100 MB',
   hideLabel: false,
-  label: 'Progress bar label',
+  label: 'Uploading files',
   max: 100,
   size: PROGRESS_BAR_SIZE.BIG,
   status: PROGRESS_BAR_STATUS.ACTIVE,
@@ -81,29 +81,68 @@ const argTypes = {
   },
 };
 
+const renderProgressBar = ({
+  helperText,
+  hideLabel,
+  label,
+  max,
+  size,
+  status,
+  type,
+  value,
+}) => html`
+  <cds-progress-bar
+    max="${ifDefined(max)}"
+    ?hide-label="${hideLabel}"
+    label="${ifDefined(label)}"
+    helper-text="${ifDefined(helperText)}"
+    size="${ifDefined(size)}"
+    status="${ifDefined(status)}"
+    type="${ifDefined(type)}"
+    value="${ifDefined(value)}">
+  </cds-progress-bar>
+`;
+
 export const Default = {
   args,
   argTypes,
-  render: (args) => {
-    const { helperText, hideLabel, label, max, size, status, type, value } =
-      args ?? {};
-    return html`
-      <cds-progress-bar
-        max="${ifDefined(max)}"
-        ?hide-label="${hideLabel}"
-        label="${ifDefined(label)}"
-        helper-text="${ifDefined(helperText)}"
-        size="${ifDefined(size)}"
-        status="${ifDefined(status)}"
-        type="${ifDefined(type)}"
-        value="${value}">
-      </cds-progress-bar>
-    `;
-  },
+  render: renderProgressBar,
 };
 
 export const Determinate = {
-  render: () => {
+  args: {
+    ...args,
+    helperText: 'Fetching assets...',
+    label: 'Exporting data',
+    max: 728,
+    status: PROGRESS_BAR_STATUS.ACTIVE,
+    value: undefined,
+  },
+  argTypes: {
+    ...argTypes,
+    helperText: {
+      control: false,
+      table: { readonly: true },
+    },
+    max: {
+      control: false,
+      table: { readonly: true },
+    },
+    status: {
+      control: false,
+      table: { readonly: true },
+    },
+    value: {
+      control: false,
+      table: { readonly: true },
+    },
+  },
+  parameters: {
+    controls: {
+      include: ['hideLabel', 'label', 'size', 'type'],
+    },
+  },
+  render: ({ hideLabel, label, size: barSize, type }) => {
     const size = 728;
     let progress = 0;
 
@@ -135,39 +174,54 @@ export const Determinate = {
     return html`
       <cds-progress-bar
         max="${size}"
-        label="Export data"
+        ?hide-label="${hideLabel}"
+        label="${ifDefined(label)}"
         helper-text="Fetching assets..."
-        status="${PROGRESS_BAR_STATUS.ACTIVE}">
+        size="${ifDefined(barSize)}"
+        status="${PROGRESS_BAR_STATUS.ACTIVE}"
+        type="${ifDefined(type)}">
       </cds-progress-bar>
     `;
   },
 };
 
 export const Indeterminate = {
-  render: () => {
-    return html`
-      <cds-progress-bar
-        label="Progress bar label"
-        helper-text="Optional helper text">
-      </cds-progress-bar>
-    `;
+  args: {
+    ...args,
+    helperText: 'Preparing files...',
+    label: 'Preparing upload',
+    value: undefined,
   },
+  argTypes: {
+    ...argTypes,
+    status: {
+      table: { readonly: true },
+    },
+    value: {
+      control: false,
+      table: { readonly: true },
+    },
+  },
+  parameters: {
+    controls: {
+      include: ['helperText', 'hideLabel', 'label', 'size', 'status', 'type'],
+    },
+  },
+  render: renderProgressBar,
 };
 
 export const WithLayer = {
+  args: {
+    ...args,
+    helperText: '42 MB of 100 MB',
+    value: 42,
+  },
+  argTypes,
   decorators: [withLayers],
   parameters: {
     layout: 'fullscreen',
   },
-  render: () => {
-    return html`
-      <cds-progress-bar
-        label="Progress bar label"
-        helper-text="Optional helper text"
-        value="42">
-      </cds-progress-bar>
-    `;
-  },
+  render: renderProgressBar,
 };
 
 const meta = {

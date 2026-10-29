@@ -7,6 +7,7 @@
 
 'use strict';
 
+const os = require('os');
 const path = require('path');
 
 module.exports = {
@@ -22,6 +23,13 @@ module.exports = {
         'potentialrecommendation',
         'manual',
       ],
+  // don't share parallel workers
+  cacheFolder: path.join(
+    os.tmpdir(),
+    process.env.JEST_WORKER_ID
+      ? `accessibility-checker-${process.env.JEST_WORKER_ID}`
+      : 'accessibility-checker'
+  ),
   outputFormat: ['json'],
   outputFolder: path.join('.avt', 'reports'),
   baselineFolder: path.join('.avt', 'baseline'),

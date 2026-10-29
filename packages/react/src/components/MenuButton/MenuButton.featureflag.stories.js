@@ -22,10 +22,15 @@ export default {
       </WithFeatureFlags>
     ),
   ],
+  parameters: {
+    controls: {
+      include: ['label', 'menuAlignment'],
+    },
+  },
 };
 
 export const FloatingStyles = (args) => (
-  <MenuButton menuAlignment={args.menuAlignment} label="Actions">
+  <MenuButton {...args}>
     <MenuItem label="First action" />
     <MenuItem label="Second action that is a longer item to test overflow and title." />
     <MenuItem label="Third action" disabled />
@@ -33,10 +38,16 @@ export const FloatingStyles = (args) => (
 );
 
 FloatingStyles.args = {
+  label: 'Actions',
   menuAlignment: 'bottom',
 };
 
 FloatingStyles.argTypes = {
+  label: {
+    control: {
+      type: 'text',
+    },
+  },
   menuAlignment: {
     options: ['top', 'bottom'],
     control: {

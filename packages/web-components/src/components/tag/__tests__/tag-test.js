@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025, 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -31,6 +31,18 @@ describe('cds-tag', function () {
     it('should render', async () => {
       const el = await fixture(dismissibleTag);
       await expect(el).dom.to.equalSnapshot();
+    });
+
+    it('does not render a dismiss tooltip when disabled', async () => {
+      const el = await fixture(
+        html`<cds-dismissible-tag
+          disabled
+          text="Tag content"></cds-dismissible-tag>`
+      );
+      await el.updateComplete;
+
+      expect(el.shadowRoot.querySelector('cds-tooltip')).to.equal(null);
+      expect(el.shadowRoot.querySelector('button').disabled).to.equal(true);
     });
 
     it('should support onClose event', async () => {
@@ -304,6 +316,52 @@ describe('cds-tag', function () {
       const el = await fixture(operationalTag);
 
       expect(el.shadowRoot.querySelector('[part="tag"]')).to.exist;
+    });
+
+    it('should not set icon styles for label-only operational tag', async () => {
+      const el = await fixture(html`
+        <cds-operational-tag text="Tag content"></cds-operational-tag>
+      `);
+      const tag = el.shadowRoot.querySelector('cds-tag');
+
+      expect(tag.hasAttribute('has-custom-icon')).to.be.false;
+    });
+
+    it('should set icon styles when operational tag has an icon', async () => {
+      const el = await fixture(html`
+        <cds-operational-tag text="Tag content">
+          <span slot="icon"></span>
+        </cds-operational-tag>
+      `);
+      await el.updateComplete;
+      const tag = el.shadowRoot.querySelector('cds-tag');
+      await tag.updateComplete;
+
+      expect(tag.hasAttribute('has-custom-icon')).to.be.true;
+    });
+  });
+
+  describe('cds-selectable-tag', () => {
+    it('should not set icon styles for label-only selectable tag', async () => {
+      const el = await fixture(html`
+        <cds-selectable-tag text="Tag content"></cds-selectable-tag>
+      `);
+      const tag = el.shadowRoot.querySelector('cds-tag');
+
+      expect(tag.hasAttribute('has-custom-icon')).to.be.false;
+    });
+
+    it('should set icon styles when selectable tag has an icon', async () => {
+      const el = await fixture(html`
+        <cds-selectable-tag text="Tag content">
+          <span slot="icon"></span>
+        </cds-selectable-tag>
+      `);
+      await el.updateComplete;
+      const tag = el.shadowRoot.querySelector('cds-tag');
+      await tag.updateComplete;
+
+      expect(tag.hasAttribute('has-custom-icon')).to.be.true;
     });
   });
 

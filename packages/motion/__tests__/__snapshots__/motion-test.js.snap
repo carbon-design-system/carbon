@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`@carbon/motion @carbon/motion/scss/motion.scss 1`] = `
 [
@@ -15,11 +15,14 @@ exports[`@carbon/motion @carbon/motion/scss/motion.scss 1`] = `
   "moderate-02",
   "slow-01",
   "slow-02",
+  "surfaces",
 ]
 `;
 
 exports[`@carbon/motion Public API 1`] = `
 {
+  "defineMotionSurface": [Function],
+  "describeSurface": [Function],
   "durationFast01": "70ms",
   "durationFast02": "110ms",
   "durationModerate01": "150ms",
@@ -42,24 +45,102 @@ exports[`@carbon/motion Public API 1`] = `
   },
   "fast01": "70ms",
   "fast02": "110ms",
+  "getMotionSurface": [Function],
   "moderate01": "150ms",
   "moderate02": "240ms",
   "motion": [Function],
+  "resolveDuration": [Function],
+  "resolveEasing": [Function],
   "slow01": "400ms",
   "slow02": "700ms",
+  "surfaces": {
+    "contextual": {
+      "duration": "fast-02",
+      "enter": {
+        "opacity": 1,
+        "transform": "scale(1)",
+      },
+      "enterEasing": {
+        "mode": "expressive",
+        "name": "entrance",
+      },
+      "exit": {
+        "opacity": 0,
+        "transform": "scale(0.96)",
+      },
+      "exitEasing": {
+        "mode": "expressive",
+        "name": "exit",
+      },
+      "kind": "reveal",
+    },
+    "disclosure": {
+      "duration": "moderate-01",
+      "enter": {
+        "blockSize": "auto",
+        "opacity": 1,
+      },
+      "enterEasing": {
+        "mode": "productive",
+        "name": "entrance",
+      },
+      "exit": {
+        "blockSize": 0,
+        "opacity": 0,
+      },
+      "exitEasing": {
+        "mode": "productive",
+        "name": "exit",
+      },
+      "kind": "reveal",
+    },
+    "expand": {
+      "duration": "moderate-02",
+      "enter": {
+        "opacity": 1,
+        "transform": "scale(1)",
+      },
+      "enterEasing": {
+        "mode": "productive",
+        "name": "standard",
+      },
+      "exit": {
+        "opacity": 0,
+        "transform": "scale(0.96)",
+      },
+      "exitEasing": {
+        "mode": "productive",
+        "name": "standard",
+      },
+      "kind": "shared-element",
+    },
+    "invoke": {
+      "duration": "moderate-02",
+      "enterEasing": {
+        "mode": "expressive",
+        "name": "standard",
+      },
+      "exitEasing": {
+        "mode": "expressive",
+        "name": "standard",
+      },
+      "kind": "shared-element",
+      "origin": "trigger",
+    },
+  },
   "unstable_tokens": [
-    "fast01",
-    "fast02",
-    "moderate01",
-    "moderate02",
-    "slow01",
-    "slow02",
     "durationFast01",
     "durationFast02",
     "durationModerate01",
     "durationModerate02",
     "durationSlow01",
     "durationSlow02",
+    "fast01",
+    "fast02",
+    "moderate01",
+    "moderate02",
+    "slow01",
+    "slow02",
   ],
 }
 `;

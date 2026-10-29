@@ -6,6 +6,7 @@
  */
 
 import React, {
+  forwardRef,
   useEffect,
   useMemo,
   useReducer,
@@ -43,6 +44,7 @@ import type { TFunc, TranslateWithId } from '../../types/common';
 import { clamp } from '../../internal/clamp';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import { useId } from '../../internal/useId';
+import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
 
 interface ThumbWrapperProps
   extends Omit<
@@ -330,8 +332,8 @@ export interface SliderProps
 }
 
 type State = {
-  value: ComponentProps<typeof Slider>['value'];
-  valueUpper: ComponentProps<typeof Slider>['unstable_valueUpper'];
+  value: SliderProps['value'];
+  valueUpper: SliderProps['unstable_valueUpper'];
   left: number;
   leftUpper: number;
   needsOnRelease: boolean;
@@ -343,7 +345,7 @@ type State = {
   isRtl: boolean;
 };
 
-const Slider = (props: SliderProps) => {
+const Slider = forwardRef<HTMLDivElement, SliderProps>((props, ref) => {
   const {
     ariaLabelInput,
     unstable_ariaLabelInputUpper: ariaLabelInputUpper,
@@ -411,6 +413,7 @@ const Slider = (props: SliderProps) => {
   const thumbRefUpper = useRef<HTMLDivElement>(null);
   const filledTrackRef = useRef<HTMLDivElement>(null);
   const elementRef = useRef<HTMLDivElement>(null);
+  const labelRef = useRef<HTMLLabelElement>(null);
   const generatedId = useId();
   const prefix = usePrefix();
 
@@ -1289,6 +1292,10 @@ const Slider = (props: SliderProps) => {
     [`${prefix}--visually-hidden`]: hideLabel,
     [`${prefix}--label--disabled`]: disabled,
   });
+  useNoInteractiveChildrenForLabel(
+    labelRef,
+    'The Slider component `labelText` prop must have no interactive content'
+  );
 
   const containerClasses = classNames(`${prefix}--slider-container`, {
     [`${prefix}--slider-container--two-handles`]: twoHandles,
@@ -1376,12 +1383,13 @@ const Slider = (props: SliderProps) => {
   };
 
   return (
-    <div className={classNames(`${prefix}--form-item`, className)}>
+    <div className={classNames(`${prefix}--form-item`, className)} ref={ref}>
       <Text
         as="label"
         htmlFor={twoHandles ? undefined : id}
         className={labelClasses}
-        id={labelId}>
+        id={labelId}
+        ref={labelRef}>
         {labelText}
       </Text>
       <div className={containerClasses}>
@@ -1615,7 +1623,9 @@ const Slider = (props: SliderProps) => {
       )}
     </div>
   );
-};
+});
+
+Slider.displayName = 'Slider';
 
 Slider.propTypes = {
   /**
@@ -1793,4 +1803,4 @@ Slider.propTypes = {
   warnText: PropTypes.node,
 };
 
-export default Slider as (props: SliderProps) => ReactNode;
+export default Slider;
