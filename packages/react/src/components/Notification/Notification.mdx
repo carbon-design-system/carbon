@@ -21,8 +21,6 @@ import { Canvas, ArgTypes, Meta } from '@storybook/addon-docs/blocks';
 - [Component API](#component-api)
 - [Actionable](#actionable)
   - [Using the `role` prop](#using-the-role-prop)
-- [Inline](#inline)
-- [Toast](#toast)
 - [Feedback](#feedback)
 
 {/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
@@ -32,6 +30,8 @@ import { Canvas, ArgTypes, Meta } from '@storybook/addon-docs/blocks';
 There are 4 different types of notification components:
 `ActionableNotification`, `InlineNotification`, `ToastNotification`, and
 `Callout`.
+
+<Canvas />
 
 ### ActionableNotification
 
@@ -72,8 +72,6 @@ an `aria-describedby` on the interactive element with a value that matches the
 
 ## Actionable
 
-<Canvas id="components-notifications-actionable--default" />
-
 ### Using the `role` prop
 
 ActionableNotification's `role` prop allows you to provide a different
@@ -94,14 +92,6 @@ user. Two viable options include:
 - Collecting notifications in a persistent place in the app (a "drawer" or "side
   panel") and announcing to the user how they can navigate to that place to
   review all notifications and optionally take action on it.
-
-## Inline
-
-<Canvas id="components-notifications-inline--default" />
-
-## Toast
-
-<Canvas id="components-notifications-toast--default" />
 
 ## Feedback
 
