@@ -137,7 +137,10 @@ const controls = {
 };
 
 export const Default = {
-  args: defaultArgs,
+  args: {
+    ...defaultArgs,
+    open: false,
+  },
   argTypes: controls,
   render: ({
     alert,
