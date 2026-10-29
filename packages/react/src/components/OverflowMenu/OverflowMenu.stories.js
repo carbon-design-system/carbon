@@ -129,13 +129,35 @@ export const RenderCustomIcon = (args) => {
     </OverflowMenu>
   );
 };
-export const Default = (args) => (
-  <OverflowMenu aria-label="overflow-menu" {...args}>
-    <OverflowMenuItem itemText="Stop app" />
-    <OverflowMenuItem itemText="Restart app" />
-    <OverflowMenuItem itemText="Rename app" />
-    <OverflowMenuItem itemText="Clone and move app" disabled requireTitle />
-    <OverflowMenuItem itemText="Edit routes and access" requireTitle />
-    <OverflowMenuItem hasDivider isDelete itemText="Delete app" />
-  </OverflowMenu>
-);
+export const Default = (args) => {
+  const enableV12OverflowMenu = useFeatureFlag('enable-v12-overflowmenu');
+
+  return (
+    <OverflowMenu {...args} label="overflow-menu">
+      {enableV12OverflowMenu ? (
+        <>
+          <MenuItem label="Stop app" />
+          <MenuItem label="Restart app" />
+          <MenuItem label="Rename app" />
+          <MenuItem label="Clone and move app" disabled />
+          <MenuItem label="Edit routes and access" />
+          <MenuItemDivider />
+          <MenuItem label="Delete app" kind="danger" />
+        </>
+      ) : (
+        <>
+          <OverflowMenuItem itemText="Stop app" />
+          <OverflowMenuItem itemText="Restart app" />
+          <OverflowMenuItem itemText="Rename app" />
+          <OverflowMenuItem
+            itemText="Clone and move app"
+            disabled
+            requireTitle
+          />
+          <OverflowMenuItem itemText="Edit routes and access" requireTitle />
+          <OverflowMenuItem hasDivider isDelete itemText="Delete app" />
+        </>
+      )}
+    </OverflowMenu>
+  );
+};

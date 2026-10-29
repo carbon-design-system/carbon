@@ -19,6 +19,9 @@ test.describe('@avt OverflowMenu', () => {
         theme: 'white',
       },
     });
+    await expect(
+      page.getByRole('button', { name: 'overflow-menu' })
+    ).toBeVisible();
     await expect(page).toHaveNoACViolations('OverflowMenu');
   });
 
@@ -41,11 +44,11 @@ test.describe('@avt OverflowMenu', () => {
         theme: 'white',
       },
     });
-    await expect(page.getByRole('button')).toBeVisible();
+    const toggleButton = page.getByRole('button', { name: 'overflow-menu' });
+    await expect(toggleButton).toBeVisible();
 
     // Tab and open the toggle button for the OverflowMenu
     await page.keyboard.press('Tab');
-    const toggleButton = page.getByRole('button');
     await expect(toggleButton).toBeFocused();
     await page.keyboard.press('Enter');
     await expect(page.getByRole('menu')).toBeVisible();
@@ -73,7 +76,8 @@ test.describe('@avt OverflowMenu', () => {
     await expect(page).toHaveNoACViolations('OverflowMenu-custom-icon-open');
   });
 
-  test.slow('@avt-keyboard-nav overflow-menu', async ({ page }) => {
+  test('@avt-keyboard-nav overflow-menu', async ({ page }) => {
+    test.slow();
     await visitStory(page, {
       component: 'OverflowMenu',
       id: 'components-overflowmenu--default',
@@ -81,21 +85,21 @@ test.describe('@avt OverflowMenu', () => {
         theme: 'white',
       },
     });
-    await expect(page.getByRole('button')).toBeVisible();
+    const toggleButton = page.getByRole('button', { name: 'overflow-menu' });
+    await expect(toggleButton).toBeVisible();
 
     // Tab and open the OverflowMenu
     await page.keyboard.press('Tab');
-    const toggleButton = page.getByRole('button');
     await expect(toggleButton).toBeFocused();
     await page.keyboard.press('Enter');
     await expect(page.getByRole('menu')).toBeVisible();
     // Navigation inside the menu
     await expect(
-      page.locator('button').filter({ hasText: 'Stop app' })
+      page.getByRole('menuitem', { name: 'Stop app' })
     ).toBeFocused();
     await page.keyboard.press('ArrowDown');
     await expect(
-      page.locator('button').filter({ hasText: 'Restart app' })
+      page.getByRole('menuitem', { name: 'Restart app' })
     ).toBeFocused();
     await page.keyboard.press('Enter');
     // Once closed menu is no longer visible
