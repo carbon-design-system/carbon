@@ -25,14 +25,15 @@
     "#carbon-ng/*": "./.entries/vendor/*"
   },
   "scripts": {
-    "build": "node tasks/generate-wrappers/index.js && node tasks/build-entries/index.js && ng-packagr -p .entries/ng-package.json",
+    "build": "yarn build:entries && ng-packagr -p .entries/ng-package.json",
+    "build:entries": "node tasks/generate-wrappers/index.js && node tasks/build-entries/index.js",
     "check:parity": "node tasks/check-parity.js",
     "clean": "rimraf esm2022 fesm2022 dist .entries",
     "e2e": "playwright test",
     "generate:wrappers": "node tasks/generate-wrappers/index.js",
     "playwright:install": "playwright install chromium",
-    "storybook": "node tasks/generate-wrappers/index.js && node tasks/build-entries/index.js && npx ng run carbon-angular:storybook",
-    "storybook:build": "node tasks/generate-wrappers/index.js && node tasks/build-entries/index.js && npx ng run carbon-angular:build-storybook",
+    "storybook": "yarn build:entries && ng run carbon-angular:storybook",
+    "storybook:build": "yarn build:entries && ng run carbon-angular:build-storybook",
     "test": "jest --passWithNoTests"
   },
   "peerDependencies": {
