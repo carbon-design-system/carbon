@@ -803,10 +803,17 @@ composition model applied to Tabs and Accordion. The WC layer owns all keyboard
 navigation and ARIA.
 
 CCA router inputs (`[useRouter]`, `[route]`, `[routeExtras]`,
-`[activeLinkClass]`, `[isCurrentPage]`) and the `(navigation)` output have no
+`[activeLinkActive]`, `[isCurrentPage]`) and the `(navigation)` output have no
 equivalent in the generated wrappers, which expose `href`, `rel` and `target`.
-`routerLink` integration is an **open question** for the migration tooling. It
-is not decided whether it becomes guidance, a directive, or a codemod target.
+
+**Decided:** `routerLink` integration ships as a set of hand-written attribute
+directives (`CdsRouterLinkDirective`), one per navigating component family. This
+is **not** a codemod target and **not** migration guidance — it is a first-class
+feature of `@carbon/angular`. See Milestone 4.5 in
+[`milestones.md`](./milestones.md) for the full implementation spec. The
+migration codemod replaces CCA's `[route]` / `[useRouter]` with
+`[cdsRouterLink]`; guidance covers `[activeLinkClass]` → Angular's
+`routerLinkActive` on the wrapper element.
 
 ### Tier 5 — Components without a web component yet
 
@@ -846,17 +853,17 @@ notes in §6.
 
 Apply intentionally across all components:
 
-| Break                                                                       | Affected CCA components                                                                                                                                                                       | Reason                                                                                                                         |
-| --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| `Date` object types → `string`                                              | DatePicker                                                                                                                                                                                    | State machine and WC operate on strings. Conversion layer introduces timezone edge cases with no team to maintain it.          |
-| Array and model inputs → projected web component children                   | Modal (`ibm-modal-header/content/footer`), Tabs/Accordion array inputs, UI Shell (`[navigationItems]` arrays), Dropdown/Select (`[items]`)                                                    | The wrapper does not build children; consumers project `cds-ng-*` elements.                                                    |
-| Flatpickr-specific `@Input()`s dropped                                      | DatePicker: `[flatpickr]`, `[appendTo]`, `[plugins]`                                                                                                                                          | The backing library is gone.                                                                                                   |
-| Per-component `theme` `@Input()` dropped                                    | **All components** — CCA has `[theme]` on: CodeSnippet, ComboBox, DatePicker/DatePickerInput, Dropdown, NumberInput, Search, Select, Tabs, Tiles (all variants), TimePicker, TimepickerSelect | Theming is global via `@carbon/themes` CSS custom properties, not per-component.                                               |
-| NgModule exports → standalone component exports                             | All                                                                                                                                                                                           | Barrel `*Module` imports are replaced by per-family imports such as `@carbon/angular/button`.                                  |
-| `PaginationModel` object → flat `@Input()`s                                 | Pagination (also removes shared model with DataTable)                                                                                                                                         | CCA `[model]: PaginationModel` conflates page state and data; replace with `[totalItems]`, `[page]`, `[pageSize]`.             |
-| `TableModel` / `TableHeaderItem` / `TableItem` classes → projected children | DataTable                                                                                                                                                                                     | Mutable class model causes CD conflicts. No `[rows]` input is built (out of scope).                                            |
-| Array-based navigation inputs → projected children                          | UI Shell `[navigationItems]`, `[menuItems]`, `[headerItems]`                                                                                                                                  | Arrays block rich template content. `routerLink` integration on the web component children is an open question (§6, UI Shell). |
-| `notificationObj: NotificationContent` model → flat `@Input()`s             | Notification (inline, toast, actionable)                                                                                                                                                      | Object input is an unnecessary indirection when WC exposes flat props.                                                         |
+| Break                                                                       | Affected CCA components                                                                                                                                                                       | Reason                                                                                                                      |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `Date` object types → `string`                                              | DatePicker                                                                                                                                                                                    | State machine and WC operate on strings. Conversion layer introduces timezone edge cases with no team to maintain it.       |
+| Array and model inputs → projected web component children                   | Modal (`ibm-modal-header/content/footer`), Tabs/Accordion array inputs, UI Shell (`[navigationItems]` arrays), Dropdown/Select (`[items]`)                                                    | The wrapper does not build children; consumers project `cds-ng-*` elements.                                                 |
+| Flatpickr-specific `@Input()`s dropped                                      | DatePicker: `[flatpickr]`, `[appendTo]`, `[plugins]`                                                                                                                                          | The backing library is gone.                                                                                                |
+| Per-component `theme` `@Input()` dropped                                    | **All components** — CCA has `[theme]` on: CodeSnippet, ComboBox, DatePicker/DatePickerInput, Dropdown, NumberInput, Search, Select, Tabs, Tiles (all variants), TimePicker, TimepickerSelect | Theming is global via `@carbon/themes` CSS custom properties, not per-component.                                            |
+| NgModule exports → standalone component exports                             | All                                                                                                                                                                                           | Barrel `*Module` imports are replaced by per-family imports such as `@carbon/angular/button`.                               |
+| `PaginationModel` object → flat `@Input()`s                                 | Pagination (also removes shared model with DataTable)                                                                                                                                         | CCA `[model]: PaginationModel` conflates page state and data; replace with `[totalItems]`, `[page]`, `[pageSize]`.          |
+| `TableModel` / `TableHeaderItem` / `TableItem` classes → projected children | DataTable                                                                                                                                                                                     | Mutable class model causes CD conflicts. No `[rows]` input is built (out of scope).                                         |
+| Array-based navigation inputs → projected children                          | UI Shell `[navigationItems]`, `[menuItems]`, `[headerItems]`                                                                                                                                  | Arrays block rich template content. `[cdsRouterLink]` on the projected children replaces CCA router inputs (Milestone 4.5). |
+| `notificationObj: NotificationContent` model → flat `@Input()`s             | Notification (inline, toast, actionable)                                                                                                                                                      | Object input is an unnecessary indirection when WC exposes flat props.                                                      |
 
 ### Forms (ControlValueAccessor)
 
@@ -1505,7 +1512,10 @@ affect the most consumers:
    autoalign in the web components supersedes them.
 9. **`@carbon/styles` is required** so that `--cds-*` tokens resolve.
 10. **Services** (for example `ModalService`, `NotificationService`) have no
-    equivalent in core.
+    equivalent in v1.0 core. `[open]` / `[open]="isOpen"` is the intended
+    pattern for modals and side panels. Programmatic services may be added
+    post-v1.0 if there is demand; a GitHub issue tracks the request. See
+    `developer-experience.md` for the full rationale.
 
 ### Codemods
 
@@ -1525,9 +1535,9 @@ templates today. The names on `migration.mdx` (`cca-report-imports`,
 
 Unanswered and possibly delegated to a developer: where the agent skills live,
 how `@carbon/upgrade` parses Angular templates, how the mapping file is verified
-against both packages, shadow DOM guidance, services, directives, and
-`routerLink` integration on UI Shell children. See Milestone 5 in
-[`milestones.md`](./milestones.md).
+against both packages, shadow DOM guidance, and directives. `routerLink`
+integration and services are decided and documented in `milestones.md`. See
+Milestone 5 in [`milestones.md`](./milestones.md).
 
 ### Runtime diagnostic
 

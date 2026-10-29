@@ -22,7 +22,8 @@ the items below. Each is a future PR.
 | **Scope freeze and full coverage**        | Wait for `condition-builder`, `scroll-gradient` and `tag-overflow` (ADR 0009) and any other components that join `@carbon/web-components` before v12 scope is frozen. The generator needs no change: it wraps every `cds-` tag in the manifest. Add stories and parity specs for the remaining components.          | 2         |
 | **Skeleton classes and `SYNTHETIC_TAGS`** | File the upstream issue so `AccordionSkeleton`, `CheckboxSkeleton` and `DropdownSkeleton` use `@customElement()` and appear in the manifest. Then remove `SYNTHETIC_TAGS` from the generator. Until then it stays, documented as temporary in the generator README and the `TODO(@carbon/web-components)` comments. | 2         |
 | **Migration tooling**                     | Codemods, agent skills, template parsing, the mapping file and shadow DOM guidance. See Milestone 5 for the open questions. May be delegated to a developer.                                                                                                                                                        | 5         |
-| **CEM generator**                         | Move the generator to the Custom Elements Manifest when the dev lead's PR lands.                                                                                                                                                                                                                                    | 2         |
+| **CEM generator**                         | Move the generator to the Custom Elements Manifest when the dev lead's PR lands. Priority items once CEM lands: typed event payloads (`EventEmitter<any>` → `EventEmitter<T>`) and `@property`-typed inputs that WCA misses. See `developer-experience.md`.                                                         | 2         |
+| **Router integration directives**         | `CdsRouterLinkDirective` for side-nav links, header nav items, breadcrumb links, and navigation tabs. See Milestone 4.5 for the full spec.                                                                                                                                                                          | 4.5       |
 | **`Loading-test.js`**                     | Separate PR for the `:modal` stub change. The patch is in the gitignored `temp/loading-test-modal-stub.patch`.                                                                                                                                                                                                      | —         |
 | **Modal `EnableDialogElement` story**     | Hold until the dialog version of Modal is stable.                                                                                                                                                                                                                                                                   | 4         |
 | **Dropdown `WithToggletipLabel` story**   | `ToggletipComponent` is generated, but the WC story uses imperative Storybook controls that need an established Angular template pattern. Implement when the pattern is set for another component.                                                                                                                  | 2         |
@@ -254,6 +255,108 @@ Validates interactive behavior and accessibility against live browser runs.
 
 ---
 
+## Milestone 4.5 — Router integration directives
+
+**Estimated effort:** 3–5 days **Depends on:** Milestone 2 (can run in parallel
+with Milestone 4) **Priority:** ship before v1.0
+
+Angular SPAs navigate programmatically through the Angular `Router`. The web
+components that render `<a>` tags inside their shadow DOM
+(`cds-ng-side-nav-link`, `cds-ng-header-nav-item`, `cds-ng-breadcrumb-link`,
+`cds-ng-tab`) cannot participate in Angular's `[routerLink]` /
+`RouterLinkActive` mechanism directly because those directives attach to
+elements in Angular's component tree, not inside shadow roots. Without this
+milestone, a team building a Carbon SPA gets full-page reloads on every nav
+click and no active-route styling on the nav.
+
+### What the fix looks like
+
+A thin **attribute directive per navigating component family**, sharing a common
+base. The directive:
+
+1. Accepts `[cdsRouterLink]` — same input shape as Angular's built-in
+   `[routerLink]` (a string, an array of segments, or `null`).
+2. Resolves the URL via `Router.createUrlTree()` + `Router.serializeUrl()` and
+   writes the result to the host element's `href` property (forwarded to the
+   inner `<a>` by the web component).
+3. Intercepts the host element's `click` event and calls
+   `router.navigateByUrl(url, { replaceUrl })` instead of letting the browser
+   follow the `href`. This keeps the SPA navigation model intact and fires route
+   guards.
+4. Subscribes to `Router.events` (filtering `NavigationEnd`) and compares the
+   active URL to the directive's resolved URL. When they match it sets the web
+   component's `active` property to `true` (and clears all siblings); when they
+   don't it sets `active` to `false`. This replaces `RouterLinkActive`.
+5. Tears down cleanly: the `click` listener is removed in `ngOnDestroy` and the
+   `Router.events` subscription is unsubscribed.
+
+### Component families in scope
+
+| Directive selector                         | Host component             | WC property written                         |
+| ------------------------------------------ | -------------------------- | ------------------------------------------- |
+| `cds-ng-side-nav-link[cdsRouterLink]`      | `SideNavLinkComponent`     | `href`, `active`                            |
+| `cds-ng-side-nav-menu-item[cdsRouterLink]` | `SideNavMenuItemComponent` | `href`, `active`                            |
+| `cds-ng-header-nav-item[cdsRouterLink]`    | `HeaderNavItemComponent`   | `href`, `active`                            |
+| `cds-ng-header-menu-item[cdsRouterLink]`   | `HeaderMenuItemComponent`  | `href`, `active`                            |
+| `cds-ng-breadcrumb-link[cdsRouterLink]`    | `BreadcrumbLinkComponent`  | `href` (no `active`)                        |
+| `cds-ng-tab[cdsRouterLink]`                | `TabComponent`             | `href` (selection via `cds-ng-tabs` parent) |
+
+`cds-ng-link` (inline body links) uses the same directive. Tab active-state is
+more complex because selection is owned by the parent `cds-ng-tabs`; the
+directive sets `href` and lets the web component's own selection logic handle
+the rest.
+
+### Implementation notes
+
+- The base class `CdsRouterLinkBase` holds the URL resolution, click
+  interception, and `NavigationEnd` subscription. Each per-family directive
+  extends it and overrides the `active` property name if the WC uses a different
+  attribute (e.g. `aria-current` on breadcrumb links).
+- The directive must call `markForCheck()` when it sets `active`, since the
+  generated wrappers use `OnPush`.
+- The directive should be exported from the relevant secondary entry point (e.g.
+  `@carbon/angular/side-nav`, `@carbon/angular/ui-shell`) so consumers import
+  only what they use.
+- `[cdsRouterLink]="null"` disables the directive (removes the `href`, stops
+  interception). Mirrors Angular's own `[routerLink]="null"` behaviour.
+- Fragment (`#section`) and query-param support should follow Angular's
+  `[routerLink]` contract (`fragment`, `queryParams` inputs).
+
+### Migration codemod
+
+The `cca-to-angular` codemod replaces:
+
+- `[route]="path"` / `[useRouter]="true"` → `[cdsRouterLink]="path"`
+- `[activeLinkClass]="cls"` → `[routerLinkActive]="cls"` on the wrapper element
+  (Angular's built-in `RouterLinkActive` detects the `cdsRouterLink` directive
+  via the injected `RouterLink` token, which `CdsRouterLinkBase` provides).
+- `[isCurrentPage]="bool"` → `[active]="bool"` (pass-through to the WC `active`
+  property; not router-driven).
+
+### Deliverables
+
+- `packages/angular/src/directives/router-link/` — base class and per-family
+  directives
+- Jest specs: URL resolution, click interception, `NavigationEnd` active-state
+  toggle, `[cdsRouterLink]="null"` no-op, `ngOnDestroy` cleanup
+- Playwright e2e spec against a two-route Storybook story: clicking a
+  `cds-ng-side-nav-link` navigates without a page reload and the link gets
+  `active`; the previous link loses `active`
+- Storybook stories: `WithRouter` variant for SideNav and HeaderNav
+- Exports added to `@carbon/angular/side-nav` and `@carbon/angular/ui-shell`
+  secondary entries
+- `developer-experience.md` "What the wrappers give today" updated once shipped
+
+### Exit criteria
+
+- Jest suite green
+- Playwright `WithRouter` story passes in Chromium
+- `tsc -p tsconfig.storybook.json --noEmit` clean
+- CCA migration: `[route]` / `[useRouter]` / `[activeLinkClass]` noted in
+  `docs/guides/cca-to-angular.md` with the codemod target
+
+---
+
 ## Milestone 5 — Migration support & codemods
 
 **Estimated effort:** to be re-estimated. **Depends on:** Milestone 2 (can run
@@ -290,7 +393,11 @@ in parallel with Milestone 4)
 2. How does `@carbon/upgrade` parse Angular templates?
 3. How is the CCA-to-Carbon mapping file verified against both packages?
 4. What shadow DOM styling guidance do consumers get?
-5. How are CCA services handled?
+5. **CCA services (`ModalService`, `NotificationService`):** no v1.0 equivalent.
+   The migration guide tells consumers to use declarative `[open]="isOpen"`
+   bindings instead. A post-v1.0 GitHub issue tracks demand for programmatic
+   service helpers; if demand is confirmed they are scoped to a separate PR and
+   do not block the release. See `developer-experience.md` for rationale.
 6. How are CCA directives handled?
 
 ### Exit criteria
@@ -328,13 +435,15 @@ Freezes the API and cuts the Release Candidate.
 
 ## Summary
 
-| Milestone                  | Scope                                        | Estimate          | Version              |
-| :------------------------- | :------------------------------------------- | :---------------- | :------------------- |
-| **0 — Scaffolding**        | Workspace, dual entry points, toolchain      | 2–3 days          | —                    |
-| **1 — Generator & PoC**    | Wrapper generator, Button PoC                | 3–4 days          | —                    |
-| **2 — Automated Core**     | 281 wrappers generated; scope freeze pending | 1 week            | `0.0.0-prerelease.1` |
-| **3 — Legacy Adapters**    | Cancelled 2026-10-26                         | —                 | —                    |
-| **4 — Integration & A11y** | Playwright tests + IBM Equal Access checker  | 2–3 weeks         | `0.0.0-prerelease.x` |
-| **5 — Migration Tooling**  | Codemods, agent skills & CCA migration guide | to re-estimate    | —                    |
-| **6 — RC Hardening**       | Documentation, v12 guide, RC release         | 1 week            | `1.0.0-rc.0`         |
-| **Total**                  |                                              | **~2.5–3 months** | `1.0.0` (v12 GA)     |
+| Milestone                      | Scope                                                  | Estimate          | Version              |
+| :----------------------------- | :----------------------------------------------------- | :---------------- | :------------------- |
+| **0 — Scaffolding**            | Workspace, dual entry points, toolchain                | 2–3 days          | —                    |
+| **1 — Generator & PoC**        | Wrapper generator, Button PoC                          | 3–4 days          | —                    |
+| **2 — Automated Core**         | 287 wrappers generated; scope freeze pending           | 1 week            | `0.0.0-prerelease.1` |
+| **3 — Legacy Adapters**        | Cancelled 2026-10-26                                   | —                 | —                    |
+| **4 — Integration & A11y**     | Playwright tests + IBM Equal Access checker            | 2–3 weeks         | `0.0.0-prerelease.x` |
+| **4.5 — Router Integration**   | `CdsRouterLinkDirective` for all navigating components | 3–5 days          | `0.0.0-prerelease.x` |
+| **5 — Migration Tooling**      | Codemods, agent skills & CCA migration guide           | to re-estimate    | —                    |
+| **6 — RC Hardening**           | Documentation, v12 guide, RC release                   | 1 week            | `1.0.0-rc.0`         |
+| **Total**                      |                                                        | **~2.5–3 months** | `1.0.0` (v12 GA)     |
+| **Post-v1.0 — Services (TBD)** | Programmatic modal/notification helpers (demand-gated) | —                 | post-`1.0.0`         |

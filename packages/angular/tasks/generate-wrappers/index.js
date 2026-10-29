@@ -15,6 +15,7 @@ import {
 } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { globSync } from 'node:fs';
 import { vendorPrefixedCopy } from '../vendor.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -44,6 +45,41 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const WC_ROOT = join(__dirname, '../../../web-components');
 const MANIFEST_PATH = join(WC_ROOT, 'custom-elements.json');
+
+/**
+ * Resolved enum name → string-literal union type, built once at startup by
+ * scanning every `defs.ts` file in the web components source tree.
+ *
+ * Example:  BUTTON_KIND  →  '"primary" | "secondary" | "tertiary" | ...'
+ *
+ * Used in sanitizeType() to upgrade manifest entries that carry an all-caps
+ * enum name (e.g. `"type": "BUTTON_KIND"`) into a proper TypeScript union so
+ * Angular consumers get completion and type-narrowing instead of `string`.
+ */
+const ENUM_TYPE_MAP = buildEnumTypeMap();
+
+function buildEnumTypeMap() {
+  const map = new Map();
+  const defsFiles = globSync('src/components/**/defs.ts', {
+    cwd: WC_ROOT,
+  });
+  for (const rel of defsFiles) {
+    const src = readFileSync(join(WC_ROOT, rel), 'utf8');
+    // Match: export enum ENUM_NAME { ... }
+    for (const [, enumName, body] of src.matchAll(
+      /export\s+enum\s+([A-Z0-9_]+)\s*\{([\s\S]*?)\}/g
+    )) {
+      // Collect string values: FOO = 'value' or FOO = "value"
+      const values = [...body.matchAll(/=\s*['"]([^'"]*)['"]/g)].map(
+        (m) => m[1]
+      );
+      if (values.length > 0) {
+        map.set(enumName, values.map((v) => `"${v}"`).join(' | '));
+      }
+    }
+  }
+  return map;
+}
 
 const OUTPUT_DIR = join(__dirname, '../../src/generated');
 
@@ -127,11 +163,16 @@ function sanitizeType(typeStr, tagName, propName) {
   if (/^("|')[^"']*("|')(\s*\|\s*("|')[^"']*("|'))*$/.test(trimmed)) {
     return trimmed;
   }
+  // All-caps enum name (e.g. BUTTON_KIND) — resolve to a string-literal union
+  // from the defs.ts file so consumers get type-narrowing and completion.
   if (/^[A-Z0-9_]+$/.test(trimmed)) {
-    return 'string';
+    const union = ENUM_TYPE_MAP.get(trimmed);
+    return union ?? 'string';
   }
   if (/^[A-Z0-9_]+\s*\|\s*undefined$/.test(trimmed)) {
-    return 'string | undefined';
+    const base = trimmed.replace(/\s*\|\s*undefined$/, '');
+    const union = ENUM_TYPE_MAP.get(base);
+    return union ? `${union} | undefined` : 'string | undefined';
   }
   return 'any';
 }
@@ -140,6 +181,7 @@ function sanitizeDefault(defaultVal, type) {
   if (
     !defaultVal ||
     defaultVal === 'undefined' ||
+    defaultVal === '"undefined"' ||
     defaultVal === '""' ||
     defaultVal === "''"
   ) {
@@ -149,12 +191,23 @@ function sanitizeDefault(defaultVal, type) {
     return defaultVal === 'true' ? 'true' : 'false';
   }
   if (type === 'number') {
-    return !isNaN(Number(defaultVal)) ? defaultVal : undefined;
+    // The manifest sometimes wraps numbers in quotes (e.g. `"0"`).
+    const raw =
+      defaultVal.startsWith('"') && defaultVal.endsWith('"')
+        ? defaultVal.slice(1, -1)
+        : defaultVal;
+    return !isNaN(Number(raw)) ? raw : undefined;
   }
-  if (type === 'string' || type === 'string | undefined') {
-    if (defaultVal.startsWith('"') && defaultVal.endsWith('"')) {
-      return defaultVal;
+  // Accept a quoted string default for any type that is a string or a
+  // string-literal union (e.g. `"primary" | "secondary" | ...`).
+  if (defaultVal.startsWith('"') && defaultVal.endsWith('"')) {
+    // The manifest occasionally has `"'value'"` (inner single-quotes). Normalise
+    // to `"value"` so the emitted TypeScript literal is valid.
+    const inner = defaultVal.slice(1, -1);
+    if (inner.startsWith("'") && inner.endsWith("'")) {
+      return `"${inner.slice(1, -1)}"`;
     }
+    return defaultVal;
   }
   return undefined;
 }
@@ -438,6 +491,7 @@ function generateWrapperForTag(tag) {
   const usesBooleanAttribute = inputs.some((input) => input.type === 'boolean');
   const angularImports = [
     ...(usesBooleanAttribute ? ['booleanAttribute'] : []),
+    'ChangeDetectionStrategy',
     'Component',
     ...(needsElementRef ? ['ElementRef', 'inject'] : []),
     'EventEmitter',
@@ -477,14 +531,10 @@ function generateWrapperForTag(tag) {
     : '';
   const onInitBody = [outputListeners, cvaListeners].filter(Boolean).join('\n');
 
-  const propertyInputsConst = hasInputs
-    ? `\nconst PROPERTY_INPUTS = new Set<string>([${inputs
-        .map((input) => `'${input.name}'`)
-        .join(', ')}]);\n`
-    : '';
-
   // In the host-is-WC design the element ref is obtained via inject(ElementRef)
   // in the constructor, not @ViewChild — there is no inner element to query.
+  // PROPERTY_INPUTS Set removed: Angular only calls ngOnChanges for declared
+  // @Input() keys, so Object.keys(changes) is always a subset of inputs.
   const classBodyExtras = [
     needsElementRef
       ? `  private readonly _el = inject(ElementRef<HTMLElement>);`
@@ -494,9 +544,7 @@ function generateWrapperForTag(tag) {
   ngOnChanges(changes: SimpleChanges): void {
     const el = this._el.nativeElement;
     for (const key of Object.keys(changes)) {
-      if (PROPERTY_INPUTS.has(key)) {
-        (el as any)[key] = changes[key].currentValue;
-      }
+      (el as any)[key] = changes[key].currentValue;
     }
   }`
       : '',
@@ -584,7 +632,7 @@ import {
       : ''
   }
 import '${wcImportPath}';
-${propertyInputsConst}
+
 /**
  * ${tag.description || `Angular wrapper for ${tagName}.`}
  *
@@ -595,6 +643,7 @@ ${propertyInputsConst}
   template: \`
 ${template}
   \`,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,${
     cvaProp
       ? `
