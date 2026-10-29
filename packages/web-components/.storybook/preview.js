@@ -14,7 +14,19 @@ import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import './_container.scss';
 
-setCustomElementsManifest(customElements);
+// exclude subclass members so they don't show up in docs tables
+setCustomElementsManifest({
+  ...customElements,
+  modules: customElements.modules.map((module) => ({
+    ...module,
+    declarations: module.declarations?.map((declaration) => ({
+      ...declaration,
+      members: declaration.members?.filter(
+        (member) => !member.static && (member.privacy ?? 'public') === 'public'
+      ),
+    })),
+  })),
+});
 const devTools = {
   layoutSize: {
     description: "Set the layout context's size",
