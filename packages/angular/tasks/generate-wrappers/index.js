@@ -324,6 +324,61 @@ const SYNTHETIC_TAGS = [
       },
     ],
   },
+  {
+    name: 'cds-radio-button-skeleton',
+    path: './src/components/radio-button/radio-button-skeleton.ts',
+    description: 'Skeleton of radio button.',
+    properties: [],
+  },
+  {
+    name: 'cds-number-input-skeleton',
+    path: './src/components/number-input/number-input-skeleton.ts',
+    description: 'Skeleton of number input.',
+    properties: [
+      {
+        name: 'hideLabel',
+        attribute: 'hide-label',
+        description: '`true` if the label should be hidden.',
+        type: 'boolean',
+        default: 'false',
+      },
+      {
+        name: 'size',
+        attribute: 'size',
+        description: 'Specify the size of the Number Input skeleton.',
+        type: 'string',
+        default: '""',
+      },
+    ],
+  },
+  {
+    name: 'cds-search-skeleton',
+    path: './src/components/search/search-skeleton.ts',
+    description: 'Skeleton of search.',
+    properties: [
+      {
+        name: 'size',
+        attribute: 'size',
+        description: 'The search skeleton size.',
+        type: 'string',
+        default: '""',
+      },
+    ],
+  },
+  {
+    name: 'cds-select-skeleton',
+    path: './src/components/select/select-skeleton.ts',
+    description: 'Skeleton of select.',
+    properties: [
+      {
+        name: 'hideLabel',
+        attribute: 'hide-label',
+        description: '`true` if the label should be hidden.',
+        type: 'boolean',
+        default: 'false',
+      },
+    ],
+  },
 ];
 
 /**

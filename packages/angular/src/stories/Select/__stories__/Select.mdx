@@ -1,0 +1,102 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as SelectStories from './Select.stories';
+
+<Meta of={SelectStories} />
+
+# Select
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/angular/src/stories/Select)
+&nbsp;|&nbsp;
+[Usage guidelines](https://carbondesignsystem.com/components/select/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/select/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Inline](#inline)
+- [Skeleton](#skeleton)
+- [With AI Label](#with-ai-label)
+- [With Layer](#with-layer)
+- [Component API](#component-api)
+- [Angular-specific notes](#angular-specific-notes)
+- [Feedback](#feedback)
+
+## Overview
+
+The `cds-ng-select` component provides a standard dropdown menu for selecting a
+single item from a list.
+
+### Importing
+
+```ts
+import {
+  SelectComponent,
+  SelectItemComponent,
+  SelectItemGroupComponent,
+} from '@carbon/angular/select';
+
+@Component({
+  standalone: true,
+  imports: [SelectComponent, SelectItemComponent, SelectItemGroupComponent],
+  template: `
+    <cds-ng-select labelText="Deployment region" helperText="Select region">
+      <cds-ng-select-item value="us-south"
+        >Dallas (us-south)</cds-ng-select-item
+      >
+      <cds-ng-select-item value="eu-de">Frankfurt (eu-de)</cds-ng-select-item>
+    </cds-ng-select>
+  `,
+})
+export class MyComponent {}
+```
+
+<Canvas of={SelectStories.Default} />
+
+## Inline
+
+<Canvas of={SelectStories.Inline} />
+
+## Skeleton
+
+Use `cds-ng-select-skeleton` to display a placeholder loading skeleton.
+
+<Canvas of={SelectStories.Skeleton} />
+
+## With AI Label
+
+<Canvas of={SelectStories.WithAILabel} />
+
+## With Layer
+
+<Canvas of={SelectStories.WithLayer} />
+
+## Component API
+
+<ArgTypes of={SelectStories.Default} />
+
+## Angular-specific notes
+
+### Forms integration (`ControlValueAccessor`)
+
+`SelectComponent` implements `ControlValueAccessor`, supporting both
+template-driven and reactive Angular forms:
+
+```html
+<!-- Reactive forms -->
+<cds-ng-select [formControl]="regionControl" labelText="Region">
+  <cds-ng-select-item value="us-south">Dallas</cds-ng-select-item>
+  <cds-ng-select-item value="eu-de">Frankfurt</cds-ng-select-item>
+</cds-ng-select>
+
+<!-- Template-driven forms -->
+<cds-ng-select [(ngModel)]="selectedRegion" labelText="Region">
+  <cds-ng-select-item value="us-south">Dallas</cds-ng-select-item>
+  <cds-ng-select-item value="eu-de">Frankfurt</cds-ng-select-item>
+</cds-ng-select>
+```
+
+## Feedback
+
+Help us improve this component by providing feedback, opening issues, or
+contributing on GitHub.

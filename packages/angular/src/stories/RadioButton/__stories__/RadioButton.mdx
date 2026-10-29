@@ -1,0 +1,95 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as RadioButtonStories from './RadioButton.stories';
+
+<Meta of={RadioButtonStories} />
+
+# Radio Button
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/angular/src/stories/RadioButton)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/radio-button/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/radio-button/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Vertical](#vertical)
+- [Skeleton](#skeleton)
+- [With AI Label](#with-ai-label)
+- [Angular-specific notes](#angular-specific-notes)
+- [Feedback](#feedback)
+
+## Overview
+
+Use radio buttons when the user needs to select only one option from a
+predefined set of mutually exclusive choices.
+
+### Importing
+
+```ts
+import {
+  RadioButtonComponent,
+  RadioButtonGroupComponent,
+  RadioButtonSkeletonComponent,
+} from '@carbon/angular/radio-button';
+
+@Component({
+  standalone: true,
+  imports: [RadioButtonComponent, RadioButtonGroupComponent],
+  template: `
+    <cds-ng-radio-button-group
+      legendText="Radio Button group"
+      name="radio-group"
+      value="radio-1">
+      <cds-ng-radio-button
+        labelText="Option 1"
+        value="radio-1"></cds-ng-radio-button>
+      <cds-ng-radio-button
+        labelText="Option 2"
+        value="radio-2"></cds-ng-radio-button>
+    </cds-ng-radio-button-group>
+  `,
+})
+export class MyComponent {}
+```
+
+<Canvas of={RadioButtonStories.Default} />
+
+## Vertical
+
+<Canvas of={RadioButtonStories.Vertical} />
+
+## Skeleton
+
+<Canvas of={RadioButtonStories.Skeleton} />
+
+## With AI Label
+
+<Canvas of={RadioButtonStories.WithAILabel} />
+
+## Angular-specific notes
+
+### Forms Integration (`ControlValueAccessor`)
+
+`RadioButtonGroupComponent` implements `ControlValueAccessor`, allowing two-way
+binding via `[(ngModel)]` or `[formControl]`:
+
+```html
+<cds-ng-radio-button-group
+  name="plan-selection"
+  legendText="Select a Plan"
+  [(ngModel)]="selectedPlan">
+  <cds-ng-radio-button labelText="Basic" value="basic"></cds-ng-radio-button>
+  <cds-ng-radio-button labelText="Pro" value="pro"></cds-ng-radio-button>
+  <cds-ng-radio-button
+    labelText="Enterprise"
+    value="enterprise"></cds-ng-radio-button>
+</cds-ng-radio-button-group>
+```
+
+## Feedback
+
+Help us improve this component by providing feedback, submitting bugs and
+submitting features on
+[GitHub](https://github.com/carbon-design-system/carbon/issues/new/choose).
