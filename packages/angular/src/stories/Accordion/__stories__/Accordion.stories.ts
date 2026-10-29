@@ -13,12 +13,25 @@ import {
 } from '@carbon/angular/accordion';
 import { ButtonComponent, ButtonSetComponent } from '@carbon/angular/button';
 import { LayerComponent } from '@carbon/angular/layer';
+import { fn } from 'storybook/test';
 
 // ─── WC-parity stories (one-for-one with @carbon/web-components Accordion) ────
 
-const meta: Meta<AccordionComponent> = {
+// Handlers for the item outputs. They are not outputs of AccordionComponent, so
+// Storybook does not infer them.
+type AccordionStoryArgs = AccordionComponent & {
+  accordionItemBeingtoggled: (event: Event) => void;
+  accordionItemToggled: (event: Event) => void;
+};
+
+const meta: Meta<AccordionStoryArgs> = {
   title: 'Components/Accordion',
   component: AccordionComponent,
+  // Storybook for Angular drops args that have no `action` or `control`
+  // argType before rendering, so the handlers need one. Do not list them in
+  // `parameters.controls.exclude`: that removes their argType, and the
+  // handlers with it.
+  args: { accordionItemBeingtoggled: fn(), accordionItemToggled: fn() },
   decorators: [
     moduleMetadata({
       imports: [
@@ -31,6 +44,8 @@ const meta: Meta<AccordionComponent> = {
     }),
   ],
   argTypes: {
+    accordionItemBeingtoggled: { action: 'accordionItemBeingtoggled' },
+    accordionItemToggled: { action: 'accordionItemToggled' },
     alignment: {
       control: 'select',
       options: ['start', 'END'],
@@ -57,7 +72,7 @@ const meta: Meta<AccordionComponent> = {
 };
 
 export default meta;
-type Story = StoryObj<AccordionComponent>;
+type Story = StoryObj<AccordionStoryArgs>;
 
 const defaultArgs = {
   alignment: 'END',
@@ -69,11 +84,6 @@ const defaultArgs = {
 // WC: Default
 export const Default: Story = {
   args: defaultArgs,
-  parameters: {
-    controls: {
-      exclude: ['accordionItemToggled', 'accordionItemBeingtoggled'],
-    },
-  },
   render: (args) => ({
     props: args,
     template: `
@@ -85,29 +95,29 @@ export const Default: Story = {
       >
         <cds-ng-accordion-item
           title="Choose your plan"
-          (accordionItemBeingtoggled)="accordionItemBeingtoggled?.($event)"
-          (accordionItemToggled)="accordionItemToggled?.($event)"
+          (accordionItemBeingtoggled)="accordionItemBeingtoggled($event)"
+          (accordionItemToggled)="accordionItemToggled($event)"
         >
           <p>Compare plan features and select the option that best matches your team's expected usage.</p>
         </cds-ng-accordion-item>
         <cds-ng-accordion-item
           title="Add team members"
-          (accordionItemBeingtoggled)="accordionItemBeingtoggled?.($event)"
-          (accordionItemToggled)="accordionItemToggled?.($event)"
+          (accordionItemBeingtoggled)="accordionItemBeingtoggled($event)"
+          (accordionItemToggled)="accordionItemToggled($event)"
         >
           <p>Invite collaborators by email and assign their workspace roles before launch.</p>
         </cds-ng-accordion-item>
         <cds-ng-accordion-item
           title="Set payment details"
-          (accordionItemBeingtoggled)="accordionItemBeingtoggled?.($event)"
-          (accordionItemToggled)="accordionItemToggled?.($event)"
+          (accordionItemBeingtoggled)="accordionItemBeingtoggled($event)"
+          (accordionItemToggled)="accordionItemToggled($event)"
         >
           <p>Add billing information and choose whether to receive invoices by email.</p>
         </cds-ng-accordion-item>
         <cds-ng-accordion-item
           title="Review and confirm"
-          (accordionItemBeingtoggled)="accordionItemBeingtoggled?.($event)"
-          (accordionItemToggled)="accordionItemToggled?.($event)"
+          (accordionItemBeingtoggled)="accordionItemBeingtoggled($event)"
+          (accordionItemToggled)="accordionItemToggled($event)"
         >
           <p>Check your setup summary, then confirm to create the workspace for your team.</p>
         </cds-ng-accordion-item>
@@ -119,11 +129,6 @@ export const Default: Story = {
 // WC: Controlled (expand / collapse all via external buttons)
 export const Controlled: Story = {
   args: defaultArgs,
-  parameters: {
-    controls: {
-      exclude: ['accordionItemToggled', 'accordionItemBeingtoggled'],
-    },
-  },
   render: (args) => ({
     props: {
       ...args,
@@ -153,28 +158,28 @@ export const Controlled: Story = {
         <cds-ng-accordion-item
           controlled
           title="Choose your plan"
-          (accordionItemToggled)="accordionItemToggled?.($event)"
+          (accordionItemToggled)="accordionItemToggled($event)"
         >
           <p>Compare plan features and select the option that best matches your team's expected usage.</p>
         </cds-ng-accordion-item>
         <cds-ng-accordion-item
           controlled
           title="Add team members"
-          (accordionItemToggled)="accordionItemToggled?.($event)"
+          (accordionItemToggled)="accordionItemToggled($event)"
         >
           <p>Invite collaborators by email and assign their workspace roles before launch.</p>
         </cds-ng-accordion-item>
         <cds-ng-accordion-item
           controlled
           title="Set payment details"
-          (accordionItemToggled)="accordionItemToggled?.($event)"
+          (accordionItemToggled)="accordionItemToggled($event)"
         >
           <p>Add billing information and choose whether to receive invoices by email.</p>
         </cds-ng-accordion-item>
         <cds-ng-accordion-item
           controlled
           title="Review and confirm"
-          (accordionItemToggled)="accordionItemToggled?.($event)"
+          (accordionItemToggled)="accordionItemToggled($event)"
         >
           <p>Check your setup summary, then confirm to create the workspace for your team.</p>
         </cds-ng-accordion-item>
@@ -241,9 +246,6 @@ export const WithLayer: StoryObj<typeof defaultArgs> = {
   },
   parameters: {
     layout: 'fullscreen',
-    controls: {
-      exclude: ['accordionItemToggled', 'accordionItemBeingtoggled'],
-    },
   },
   render: (args) => ({
     props: args,

@@ -12,6 +12,7 @@ import {
   type StoryObj,
   type ArgTypes,
 } from '@storybook/angular';
+import { fn } from 'storybook/test';
 import {
   ModalBodyComponent,
   ModalBodyContentComponent,
@@ -179,6 +180,13 @@ const aiLabelActions = `<cds-ng-ai-label-action-button>View details</cds-ng-ai-l
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const meta: Meta<any> = {
   title: 'Components/Modal',
+  // Storybook for Angular drops args that have no `action` or `control`
+  // argType before rendering, so the output handlers need one.
+  args: { modalClosed: fn(), modalBeingclosed: fn() },
+  argTypes: {
+    modalClosed: { action: 'modalClosed' },
+    modalBeingclosed: { action: 'modalBeingclosed' },
+  },
   decorators: [
     moduleMetadata({
       imports: [
@@ -210,8 +218,8 @@ export const Default: Story = {
         [hasScrollingContent]="hasScrollingContent"
         [preventCloseOnClickOutside]="preventCloseOnClickOutside"
         [size]="size"
-        (modalClosed)="modalClosed?.($event)"
-        (modalBeingclosed)="modalBeingclosed?.($event)"
+        (modalClosed)="modalClosed($event)"
+        (modalBeingclosed)="modalBeingclosed($event)"
       >
         <cds-ng-modal-header>
           <cds-ng-modal-close-button [closeButtonLabel]="closeButtonLabel"></cds-ng-modal-close-button>
@@ -258,7 +266,7 @@ export const DangerModal: Story = {
         [hasScrollingContent]="hasScrollingContent"
         [preventCloseOnClickOutside]="preventCloseOnClickOutside"
         [size]="size"
-        (modalClosed)="modalClosed?.($event)"
+        (modalClosed)="modalClosed($event)"
       >
         <cds-ng-modal-header>
           <cds-ng-modal-close-button [closeButtonLabel]="closeButtonLabel"></cds-ng-modal-close-button>
@@ -302,7 +310,7 @@ export const FullWidth: Story = {
         [open]="open"
         [preventCloseOnClickOutside]="preventCloseOnClickOutside"
         [size]="size"
-        (modalClosed)="modalClosed?.($event)"
+        (modalClosed)="modalClosed($event)"
       >
         <cds-ng-modal-header>
           <cds-ng-modal-close-button [closeButtonLabel]="closeButtonLabel"></cds-ng-modal-close-button>
@@ -360,7 +368,7 @@ export const PassiveModal: Story = {
         [open]="open"
         [fullWidth]="fullWidth"
         [hasScrollingContent]="hasScrollingContent"
-        (modalClosed)="modalClosed?.($event)"
+        (modalClosed)="modalClosed($event)"
       >
         <cds-ng-modal-header>
           <cds-ng-modal-close-button [closeButtonLabel]="closeButtonLabel"></cds-ng-modal-close-button>
@@ -396,7 +404,7 @@ export const WithAILabel: Story = {
         [loadingStatus]="loadingStatus"
         [loadingIconDescription]="loadingIconDescription"
         [shouldSubmitOnEnter]="shouldSubmitOnEnter"
-        (modalClosed)="modalClosed?.($event)"
+        (modalClosed)="modalClosed($event)"
       >
         <cds-ng-modal-header>
           <cds-ng-modal-close-button [closeButtonLabel]="closeButtonLabel"></cds-ng-modal-close-button>
@@ -475,7 +483,7 @@ export const WithInlineLoading: Story = {
         [size]="size"
         loading-status="inactive"
         loading-description="Deleting..."
-        (modalClosed)="modalClosed?.($event)"
+        (modalClosed)="modalClosed($event)"
       >
         <cds-ng-modal-header>
           <cds-ng-modal-close-button [closeButtonLabel]="closeButtonLabel"></cds-ng-modal-close-button>
@@ -520,7 +528,7 @@ export const WithScrollingContent: Story = {
         [loadingStatus]="loadingStatus"
         [loadingIconDescription]="loadingIconDescription"
         [shouldSubmitOnEnter]="shouldSubmitOnEnter"
-        (modalClosed)="modalClosed?.($event)"
+        (modalClosed)="modalClosed($event)"
       >
         <cds-ng-modal-header>
           <cds-ng-modal-close-button [closeButtonLabel]="closeButtonLabel"></cds-ng-modal-close-button>
@@ -585,7 +593,7 @@ export const WithStateManager: Story = {
         [loadingStatus]="loadingStatus"
         [loadingIconDescription]="loadingIconDescription"
         [shouldSubmitOnEnter]="shouldSubmitOnEnter"
-        (modalClosed)="modalClosed?.($event)"
+        (modalClosed)="modalClosed($event)"
       >
         <cds-ng-modal-header>
           <cds-ng-modal-close-button [closeButtonLabel]="closeButtonLabel"></cds-ng-modal-close-button>
