@@ -55,8 +55,8 @@ export interface GetStartedCardProps {
 /**
  * GetStartedCard pattern composed from the composable `Card` component.
  *
- * - `Card.HeaderMedia` holds the pictogram, or the sequence number when
- *   `sequence` is provided.
+ * - `Card.Header`'s `headerMedia` holds the pictogram, or the sequence number
+ *   when `sequence` is provided.
  * - `media` sits beside the header and may bleed past the card's top and
  *   bottom edges.
  * - `Card.Title` renders the label above the title.
@@ -87,6 +87,14 @@ export const GetStartedCard = forwardRef<HTMLDivElement, GetStartedCardProps>(
     const sequenceId = useId();
     const hasSequence = sequence !== undefined && sequence !== null;
 
+    const headerMedia = hasSequence ? (
+      <span id={sequenceId} className={`${blockClass}__sequence`}>
+        {sequence}
+      </span>
+    ) : (
+      Pictogram && <Pictogram size={32} aria-hidden="true" />
+    );
+
     return (
       <Card
         {...rest}
@@ -99,20 +107,7 @@ export const GetStartedCard = forwardRef<HTMLDivElement, GetStartedCardProps>(
         onClick={onClick}
         renderFooterIcon={footerActionIcon}
         aria-labelledby={hasSequence ? `${sequenceId} ${titleId}` : titleId}>
-        <Card.Header>
-          {hasSequence ? (
-            <Card.HeaderMedia>
-              <span id={sequenceId} className={`${blockClass}__sequence`}>
-                {sequence}
-              </span>
-            </Card.HeaderMedia>
-          ) : (
-            Pictogram && (
-              <Card.HeaderMedia>
-                <Pictogram size={32} aria-hidden="true" />
-              </Card.HeaderMedia>
-            )
-          )}
+        <Card.Header headerMedia={headerMedia}>
           <Card.Title id={titleId} label={label}>
             {title}
           </Card.Title>
