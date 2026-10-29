@@ -306,8 +306,7 @@ Recorded 2026-10-26.
    upgrades CCA's `<cds-modal>` elements, because CCA's elements are Angular
    component hosts and not registered custom elements. This rests on CCA's Modal
    declaring `selector: "cds-modal, ibm-modal"`, rendering its own template, and
-   CCA having no dependency on `@carbon/web-components`. Brief and full setup:
-   [`coexistence-spike.md`](../../packages/angular/docs/spikes/coexistence-spike.md).
+   CCA having no dependency on `@carbon/web-components`.
 
    **Observed** (Chromium via Playwright; Angular 19.2.25;
    `carbon-components-angular` 5.72.3; `@carbon/styles` 1.118.0; the workspace

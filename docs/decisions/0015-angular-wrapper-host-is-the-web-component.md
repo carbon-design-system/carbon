@@ -349,8 +349,7 @@ Nothing below has been done unless it is listed above.
    against the events in `custom-elements.json`.
 6. **Port the 10 `it.todo` Button tests** (8 RTL layout, 2 badge-indicator).
 7. ~~**Legacy layer.** Decide whether it exists and what it covers (separate
-   task).~~ **Resolved:** removed 2026-10-26. `docs/archive/` is a historical
-   record and does not change.
+   task).~~ **Resolved:** removed 2026-10-26.
 8. **`docs/plan.md`** still has stale references to the old design and the
    removed legacy entry point. Rewrite is tracked as step 11 in
    `status-and-open-questions.md`.

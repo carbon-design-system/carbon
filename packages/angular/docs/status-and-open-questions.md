@@ -172,8 +172,8 @@ the secondary entry point config), `tasks/scaffold-legacy-component/`, the
 entry, and `.storybook/docs/legacy-overview.mdx`. Storybook docs that described
 it (`welcome.mdx`, `migration.mdx`, `Button.mdx`) and the generator README were
 rewritten. ADR 0011, 0014, 0015 and 0019 carry status notes; `plan.md` and
-`milestones.md` carry banners. Left alone on purpose: `docs/archive/*`, and the
-bodies of older ADRs and planning text, which are the historical record.
+`milestones.md` carry banners. Left alone on purpose: the bodies of older ADRs
+and planning text, which are the historical record.
 
 Not checked: whether anything outside `packages/angular` (CI, root docs, release
 config) referenced the legacy entry point. A grep of `.github` and the root docs
@@ -641,7 +641,7 @@ it uses it for typing.
 ## Evidence gathered
 
 **Coexistence spike (Modal and Dropdown).** Details and limits are in
-[`spikes/coexistence-spike.md`](./spikes/coexistence-spike.md) and ADR 0020 open
+[ADR 0020](../../../docs/decisions/0020-angular-wholesale-cds-ng-prefix.md) open
 question 1. Chromium via Playwright, Angular 19.2.25,
 `carbon-components-angular` 5.72.3, `@carbon/styles` 1.118.0.
 
@@ -741,8 +741,7 @@ In order. Items marked ~~done~~ are complete; the remainder are open.
    binding tests (`<Name>.ng.spec.ts`).
 2. **Optional third coexistence sample**: a CCA form control with validation
    (for example `TextInput` with `ngModel`), and experiment D, the unmodified
-   two-copies case. Brief in
-   [`spikes/coexistence-spike.md`](./spikes/coexistence-spike.md). Two
+   two-copies case. Results so far are in ADR 0020 open question 1. Two
    components already point the same way, so this is confirmation and not a
    blocker.
 3. **Packaging follow-ups** (the spike itself is done; see ADR 0020 open

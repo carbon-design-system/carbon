@@ -240,8 +240,8 @@ compilation model (Ivy, partial compilation, APF) is best served by a single
 reused `cds-*` would collide with both. ADR 0020 (accepted 2026-10-27) therefore
 applies one prefix, `cds-ng-*`, to every wrapper selector **and** to the web
 component it hosts, so `@carbon/angular` can load next to CCA or a separately
-loaded `@carbon/web-components` on the same page. The coexistence spike
-(`spikes/coexistence-spike.md`) ran the Modal and the Dropdown to confirm it.
+loaded `@carbon/web-components` on the same page. The coexistence spike (ADR
+0020 open question 1) ran the Modal and the Dropdown to confirm it.
 
 The rename from CCA is mechanical for most components:
 
@@ -1394,8 +1394,8 @@ old API unmaintainable>
    0020, accepted).** Previously closed as `cds-*` Angular selectors with
    `cds-ng-*` internal tags; ADR 0015 replaced the internal tags with host-is-WC
    under the real tag, and ADR 0020 replaced the real tag with a wholesale
-   `cds-ng-*` prefix. The coexistence spike (`spikes/coexistence-spike.md`) ran
-   for the Modal and the Dropdown and supports it.
+   `cds-ng-*` prefix. The coexistence spike (ADR 0020 open question 1) ran for
+   the Modal and the Dropdown and supports it.
 
 7. ~~**TimePicker — port forward or drop?**~~ — **Closed.** `cds-time-picker`
    exists in `@carbon/web-components` with full feature parity: `disabled`,
