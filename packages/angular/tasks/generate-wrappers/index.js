@@ -16,7 +16,7 @@ import {
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { globSync } from 'node:fs';
-import { vendorPrefixedCopy } from '../vendor.js';
+import { vendorPrefixedCopy, WC_ROOT } from '../vendor.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -43,7 +43,6 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
  *   node tasks/generate-wrappers/index.js --tag cds-button
  */
 
-const WC_ROOT = join(__dirname, '../../../web-components');
 const MANIFEST_PATH = join(WC_ROOT, 'custom-elements.json');
 
 /**
