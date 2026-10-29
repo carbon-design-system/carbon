@@ -114,6 +114,19 @@ describe('cds-side-nav-menu-item', () => {
     expect(link.hasAttribute('aria-current')).to.be.false;
   });
 
+  it('should remove `aria-current` from the link when it stops being active', async () => {
+    const el = await fixture(
+      html`<cds-side-nav-menu-item active href="#"
+        >Link</cds-side-nav-menu-item
+      >`
+    );
+    el.active = false;
+    await el.updateComplete;
+    const link = el.shadowRoot.querySelector('a');
+
+    expect(link.hasAttribute('aria-current')).to.be.false;
+  });
+
   it('should render and handle a button when `as` is set to `button`', async () => {
     const el = await fixture(
       html`<cds-side-nav-menu-item as="button">Button</cds-side-nav-menu-item>`
