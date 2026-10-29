@@ -14,6 +14,7 @@ import {
   readdirSync,
   rmSync,
   statSync,
+  writeFileSync,
 } from 'node:fs';
 import { dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -25,6 +26,8 @@ export const WC_ES = join(WC_ROOT, 'es');
 export const ENTRIES_ROOT = join(PKG_ROOT, '.entries');
 export const VENDOR = join(ENTRIES_ROOT, 'vendor');
 const PREFIXED_TMP = join(ENTRIES_ROOT, '.prefixed');
+/** Records the newest file time in `WC_ES` that the vendor tree was built from. */
+const STAMP = join(VENDOR, '.source-stamp');
 
 export const PREFIX = 'cds-ng';
 
@@ -85,10 +88,13 @@ export function vendorPrefixedCopy() {
     process.exit(1);
   }
 
-  // Skip when the vendor tree already exists. Both generate-wrappers and
-  // build-entries call this function, so in a full build it would otherwise
-  // run twice. Remove VENDOR manually (or run `yarn clean`) to force a refresh.
-  if (existsSync(VENDOR)) {
+  // Reuse the vendor tree while it matches the web components build. Both
+  // generate-wrappers and build-entries call this function, and rebuilding
+  // `web-components/es` must not leave a stale copy behind.
+  const stamp = String(
+    Math.max(...walk(WC_ES).map((file) => statSync(file).mtimeMs))
+  );
+  if (existsSync(STAMP) && readFileSync(STAMP, 'utf8') === stamp) {
     return;
   }
 
@@ -146,6 +152,7 @@ export function vendorPrefixedCopy() {
     },
   });
   rmSync(PREFIXED_TMP, { recursive: true, force: true });
+  writeFileSync(STAMP, stamp);
 }
 
 /**
