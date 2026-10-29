@@ -17,16 +17,15 @@ The first PR (`feat/angular`) lands the package, the generator, the entry-point
 build and 7 ported components. It does **not** wait for, and does not include,
 the items below. Each is a future PR.
 
-| Follow-up PR                              | What                                                                                                                                                                                                                                                                                                                | Milestone |
-| :---------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :-------- |
-| **Scope freeze and full coverage**        | Wait for `condition-builder`, `scroll-gradient` and `tag-overflow` (ADR 0009) and any other components that join `@carbon/web-components` before v12 scope is frozen. The generator needs no change: it wraps every `cds-` tag in the manifest. Add stories and parity specs for the remaining components.          | 2         |
-| **Skeleton classes and `SYNTHETIC_TAGS`** | File the upstream issue so `AccordionSkeleton`, `CheckboxSkeleton` and `DropdownSkeleton` use `@customElement()` and appear in the manifest. Then remove `SYNTHETIC_TAGS` from the generator. Until then it stays, documented as temporary in the generator README and the `TODO(@carbon/web-components)` comments. | 2         |
-| **Migration tooling**                     | Codemods, agent skills, template parsing, the mapping file and shadow DOM guidance. See Milestone 5 for the open questions. May be delegated to a developer.                                                                                                                                                        | 5         |
-| **CEM generator**                         | Move the generator to the Custom Elements Manifest when the dev lead's PR lands. Priority items once CEM lands: typed event payloads (`EventEmitter<any>` → `EventEmitter<T>`) and `@property`-typed inputs that WCA misses. See `developer-experience.md`.                                                         | 2         |
-| **Router integration directives**         | `CdsRouterLinkDirective` for side-nav links, header nav items, breadcrumb links, and navigation tabs. See Milestone 4.5 for the full spec.                                                                                                                                                                          | 4.5       |
-| **`Loading-test.js`**                     | Separate PR for the `:modal` stub change. The patch is in the gitignored `temp/loading-test-modal-stub.patch`.                                                                                                                                                                                                      | —         |
-| **Modal `EnableDialogElement` story**     | Hold until the dialog version of Modal is stable.                                                                                                                                                                                                                                                                   | 4         |
-| **Dropdown `WithToggletipLabel` story**   | `ToggletipComponent` is generated, but the WC story uses imperative Storybook controls that need an established Angular template pattern. Implement when the pattern is set for another component.                                                                                                                  | 2         |
+| Follow-up PR                            | What                                                                                                                                                                                                                                                                                                       | Milestone |
+| :-------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------- |
+| **Scope freeze and full coverage**      | Wait for `condition-builder`, `scroll-gradient` and `tag-overflow` (ADR 0009) and any other components that join `@carbon/web-components` before v12 scope is frozen. The generator needs no change: it wraps every `cds-` tag in the manifest. Add stories and parity specs for the remaining components. | 2         |
+| **Migration tooling**                   | Codemods, agent skills, template parsing, the mapping file and shadow DOM guidance. See Milestone 5 for the open questions. May be delegated to a developer.                                                                                                                                               | 5         |
+| **Manifest type gaps**                  | The generator reads the Custom Elements Manifest. Remaining gaps need the manifest to describe more: typed event payloads (`EventEmitter<any>` → `EventEmitter<T>`) and type aliases it leaves unresolved. See `developer-experience.md`.                                                                  | 2         |
+| **Router integration directives**       | `CdsRouterLinkDirective` for side-nav links, header nav items, breadcrumb links, and navigation tabs. See Milestone 4.5 for the full spec.                                                                                                                                                                 | 4.5       |
+| **`Loading-test.js`**                   | Separate PR for the `:modal` stub change. The patch is in the gitignored `temp/loading-test-modal-stub.patch`.                                                                                                                                                                                             | —         |
+| **Modal `EnableDialogElement` story**   | Hold until the dialog version of Modal is stable.                                                                                                                                                                                                                                                          | 4         |
+| **Dropdown `WithToggletipLabel` story** | `ToggletipComponent` is generated, but the WC story uses imperative Storybook controls that need an established Angular template pattern. Implement when the pattern is set for another component.                                                                                                         | 2         |
 
 Not yet assigned to a PR (decided only that they are needed): the CI Angular
 version matrix (Milestone 0, ADR 0018), and `docs/guides/cca-to-angular.md`
@@ -110,8 +109,8 @@ with the legacy entry point.)
 ### Deliverables
 
 - `packages/angular/tasks/generate-wrappers/`
-  - Reads `packages/web-components/custom-elements.json` (WCA format; moves to
-    the Custom Elements Manifest when the dev lead's PR lands)
+  - Reads `packages/web-components/custom-elements.json` (Custom Elements
+    Manifest since #23872)
   - Generates a standalone component class that imports the web component's
     folder barrel (ADR 0015, ADR 0020)
   - Reflects `@Input()` attributes & properties and maps `@Output()` custom
@@ -172,11 +171,9 @@ delivering 100% component coverage for `@carbon/angular` core.
   **This is a follow-up PR; the first PR does not wait for it.**
 - **No classic or fluid Date Pickers.** Wait for a fluid picker without
   flatpickr in the web components.
-- **Manifest moves to CEM.** A PR from the dev lead is coming, and the generator
-  pivots when it lands. No spike in this PR.
-- **Skeleton classes:** open an upstream issue with the Carbon team (not filed
-  yet). `SYNTHETIC_TAGS` stays documented as temporary until it is fixed. **The
-  issue and the removal are a follow-up PR.**
+- **Manifest moves to CEM.** Done 2026-10-29: the generator reads the CEM from
+  #23872, which also includes the skeleton classes, so `SYNTHETIC_TAGS` is
+  removed.
 
 ### Exit criteria
 
@@ -439,7 +436,7 @@ Freezes the API and cuts the Release Candidate.
 | :----------------------------- | :----------------------------------------------------- | :---------------- | :------------------- |
 | **0 — Scaffolding**            | Workspace, dual entry points, toolchain                | 2–3 days          | —                    |
 | **1 — Generator & PoC**        | Wrapper generator, Button PoC                          | 3–4 days          | —                    |
-| **2 — Automated Core**         | 287 wrappers generated; scope freeze pending           | 1 week            | `0.0.0-prerelease.1` |
+| **2 — Automated Core**         | 296 wrappers generated; scope freeze pending           | 1 week            | `0.0.0-prerelease.1` |
 | **3 — Legacy Adapters**        | Cancelled 2026-10-26                                   | —                 | —                    |
 | **4 — Integration & A11y**     | Playwright tests + IBM Equal Access checker            | 2–3 weeks         | `0.0.0-prerelease.x` |
 | **4.5 — Router Integration**   | `CdsRouterLinkDirective` for all navigating components | 3–5 days          | `0.0.0-prerelease.x` |

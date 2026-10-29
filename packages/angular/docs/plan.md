@@ -28,14 +28,13 @@
 >   `storybook:parity` check was dropped.
 > - Angular 19+ is the floor (ADR 0018).
 > - **Follow-up PRs.** The first PR does not wait for the scope freeze (the
->   three web components still merging), does not include the upstream
->   skeleton-class issue or the `SYNTHETIC_TAGS` removal, and does not include
->   migration tooling. All three are future PRs; see "Follow-up PRs" in
+>   three web components still merging) and does not include migration tooling.
+>   Both are future PRs; see "Follow-up PRs" in
 >   [`milestones.md`](./milestones.md).
 >
 > See [`milestones.md`](./milestones.md) for where each decision lands.
 
-**Status:** In progress. 281 generated wrappers, 97 secondary entry points, 7
+**Status:** In progress. 296 generated wrappers, 97 secondary entry points, 7
 components ported with stories and tests. **Last updated:** 2026-10-28
 **Location in monorepo:** `packages/angular/` **Package name:**
 `@carbon/angular` **Versioning:** `0.0.0-prerelease.0` → `1.0.0-rc.0` (v12 RC) →
@@ -58,7 +57,7 @@ component tag, ADR 0020, accepted 2026-10-27).
 - Pure 1:1 Angular wrappers generated from the `@carbon/web-components` manifest
   (`custom-elements.json` today; the standard Custom Elements Manifest once the
   dev lead's PR lands).
-- Covers 110+ component families, currently 281 generated wrappers, with zero
+- Covers 110+ component families, currently 296 generated wrappers, with zero
   manual adapter lag. The first release must cover every
   `@carbon/web-components` component (decided 2026-10-28).
 - Migration from `carbon-components-angular` is a single move, supported by
@@ -77,7 +76,7 @@ Products into Carbon core (ADR 0009), `@carbon/angular` also inherits the
 complete enterprise and product component catalog directly in the same package.
 The table below shows what Angular developers gain by switching.
 
-### Component coverage: ~35 → 110+ (281 generated wrappers)
+### Component coverage: ~35 → 110+ (296 generated wrappers)
 
 | Category                                | CCA     | @carbon/angular | Notes                                                                                                                                                                                                                                                      |
 | --------------------------------------- | ------- | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -333,10 +332,9 @@ stylesheet; without it the tokens are empty.
 API (ADR 0007). `create-prefixed-build` is the supported way to run two full
 copies of Carbon on one page. `@carbon/angular` uses the latter.
 
-**Manifest.** The generator currently reads
-`packages/web-components/custom-elements.json`, which is the WCA format that
-`@carbon/web-components` deprecated in v2. It moves to the standard Custom
-Elements Manifest when the dev lead's PR lands (decided 2026-10-28).
+**Manifest.** The generator reads
+`packages/web-components/custom-elements.json`, the standard Custom Elements
+Manifest that replaced the deprecated WCA format in #23872.
 
 ### Generated wrapper shape
 
@@ -517,10 +515,9 @@ and emits one folder per element under `src/generated/`:
 
 It does **not** emit stories or tests. Those are hand-written (ADR 0019).
 
-The manifest has 327 tags, 290 of them `cds-` (284 unique). 281 wrapper folders
-are emitted: 278 from the manifest and 3 from `SYNTHETIC_TAGS`, a temporary list
-for skeleton classes that the manifest omits (to be fixed upstream). The classic
-and fluid Date Pickers are skipped on purpose (ADR 0021).
+The manifest has 305 custom elements, 303 of them `cds-`. 296 wrapper folders
+are emitted. The classic and fluid Date Pickers (7 tags) are skipped on purpose
+(ADR 0021).
 
 #### Secondary entry points
 
@@ -1453,9 +1450,8 @@ old API unmaintainable>
 13. **`docs/migration/v12.md` entry** — **Open.** A short `@carbon/angular`
     entry pointing at the CCA guide, or none.
 
-14. **Upstream skeleton classes** — **Open; future PR.** An issue with the
-    Carbon team is to be filed. `SYNTHETIC_TAGS` stays temporary until it is
-    fixed, then is removed.
+14. **Upstream skeleton classes** — **Done 2026-10-29.** The Custom Elements
+    Manifest from #23872 includes them; `SYNTHETIC_TAGS` is removed.
 
 ---
 

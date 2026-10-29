@@ -10,7 +10,7 @@ remaining work, in suggested order, is under
 
 | Area                                                                         | State                                                                                                                                                                                                                                                                                                  |
 | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Generator ([`tasks/generate-wrappers`](../tasks/generate-wrappers/index.js)) | Emits 287 wrappers into `src/generated/` with `cds-ng-*` selectors, `#carbon-ng/*` vendored imports, `cds-ng-*` event listeners, `ChangeDetectionStrategy.OnPush`, and string-literal union types for 214 enum-valued inputs. `MANIFEST_TYPE_OVERRIDES` patches known manifest type bugs. 28 have CVA. |
+| Generator ([`tasks/generate-wrappers`](../tasks/generate-wrappers/index.js)) | Emits 296 wrappers into `src/generated/` with `cds-ng-*` selectors, `#carbon-ng/*` vendored imports, `cds-ng-*` event listeners, `ChangeDetectionStrategy.OnPush`, and string-literal union types for 248 enum-valued inputs. `MANIFEST_TYPE_OVERRIDES` patches known manifest type bugs. 28 have CVA. |
 | Vendoring ([`tasks/vendor.js`](../tasks/vendor.js))                          | Vendors `@carbon/web-components` into `.entries/vendor` with `cds-ng` prefix. `vendorPrefixedCopy()` skips if vendor already exists (no double-run).                                                                                                                                                   |
 | Build                                                                        | `yarn build`: generate-wrappers → build-entries → ng-packagr. 97 secondary entries + primary. ~57 s, 1.3 MB packed, no warnings.                                                                                                                                                                       |
 | Storybook                                                                    | Builds clean. Stories use `cds-ng-*` throughout via `tsconfig.storybook.json` aliases. Requires Angular CLI builder target (`ng run carbon-angular:storybook`).                                                                                                                                        |
@@ -152,11 +152,11 @@ Grouped by what they block. "Blocking" means a decision should wait for it.
    both on one page give identical results for seven vendored components, and
    the `overflow-menu` host class is inert. Details and limits in ADR 0020 open
    question 3.
-4. **Manifest.** **Direction decided 2026-10-28:** move from the deprecated WCA
-   manifest (removal slated for v3.0.0, issue #20670) to the standard CEM. A PR
-   producing a CEM is coming from the web components maintainers. The generator
-   will pivot when it lands in the monorepo. Until then it reads the WCA
-   `custom-elements.json`.
+4. ~~**Manifest.**~~ **Done 2026-10-29:** #23872 replaced the WCA manifest with
+   the standard CEM, and the generator now reads it. Enum unions, the skeleton
+   classes and inherited events come from the manifest. Still open: typed event
+   payloads and the type aliases the manifest leaves unresolved (see
+   [`developer-experience.md`](./developer-experience.md)).
 5. **Tree-shaking of import-time registration.** Open since ADR 0015.
 
 ### Legacy entry point
@@ -273,14 +273,10 @@ telemetry (see [`migration-support.md`](./migration-support.md)).
     needed: stories and parity specs (only 7 components have them today).
     **Decided 2026-10-28: the first PR does not wait for this.** It is captured
     in the plan and milestones ("Follow-up PRs") and done in a future PR.
-19. **Upstream issue for the skeleton classes.** Decided 2026-10-28: open an
-    issue with the Carbon team so `AccordionSkeleton`, `CheckboxSkeleton` and
-    `DropdownSkeleton` use `@customElement()` and appear in the manifest. Until
-    it is fixed upstream, `SYNTHETIC_TAGS` in the generator is a temporary
-    workaround and is documented as such (generator README and the
-    `TODO(@carbon/web-components)` comments). **Not filed yet.** Remove the
-    synthetic entries once the manifest includes them. **Decided 2026-10-28:
-    document now, file the issue and remove `SYNTHETIC_TAGS` in a future PR.**
+19. ~~**Upstream issue for the skeleton classes.**~~ **Done 2026-10-29:** the
+    CEM includes every skeleton class, so no upstream issue is needed.
+    `SYNTHETIC_TAGS` and the `TODO(@carbon/web-components)` comments are
+    removed.
 20. **Modal `EnableDialogElement` story.** Decided 2026-10-28: hold until the
     dialog version of Modal becomes stable. The WC story lives in
     `modal.feature-flag.stories.ts`. The Angular Modal stories have no matching
@@ -392,8 +388,7 @@ Consequences:
   item 12) and must not imply they are verified.
 - Already deferred (decisions of 2026-10-28), so **not** merge blockers:
   migration tooling and `cca-to-angular.md`; the scope freeze (waiting for
-  `condition-builder`, `scroll-gradient`, `tag-overflow`); the upstream skeleton
-  issue and `SYNTHETIC_TAGS` removal; the move to the CEM generator.
+  `condition-builder`, `scroll-gradient`, `tag-overflow`).
 
 ### Contract for follow-up component PRs
 
@@ -404,7 +399,8 @@ meaningful if the 7 reference components meet it.
 
 1. **Wrapper:** the component exists in `src/generated/` after
    `yarn generate:wrappers`. Never hand-edit it; fix the generator. A missing
-   wrapper goes in `SYNTHETIC_TAGS` (ADR 0019 rule 2).
+   wrapper means the element is missing from the manifest; fix that in
+   `@carbon/web-components` (ADR 0019 rule 2).
 2. **Story file** `src/stories/<Name>/__stories__/<Name>.stories.ts`:
    one-for-one with the WC story file (same `title`, same story names, same
    order). Angular-only stories (`NgModel`, `ReactiveForm`) come last with
@@ -520,8 +516,10 @@ instead of `@customElement()`. The CEM analyser only sees the decorator form.
 Fixed by adding `SYNTHETIC_TAGS` to `tasks/generate-wrappers/index.js` — a
 hand-authored descriptor array prepended to the manifest tag list before the
 generator loop. Three new wrappers were generated and wired into `.entries/`.
-`TODO(@carbon/web-components):` comments added to each WC source file. See the
-generator README for the full SYNTHETIC_TAGS workflow.
+`TODO(@carbon/web-components):` comments added to each WC source file.
+
+**Superseded 2026-10-29:** the CEM from #23872 includes the skeleton classes.
+`SYNTHETIC_TAGS` and the WC comments are removed.
 
 **Rule added (ADR 0019):** Angular stories must never use raw `cds-*` WC tags or
 `CUSTOM_ELEMENTS_SCHEMA`. If a wrapper is missing, fix the generator.
@@ -829,9 +827,9 @@ In order. Items marked ~~done~~ are complete; the remainder are open.
    2026-10-27**: no prefixed stylesheet needed. Static check, then a browser
    check with 1.x and 2.x on one page: no effect on the vendored components, and
    the `overflow-menu` host class is inert.
-6. **CEM analyzer spike** for enum unions and typed event payloads. The current
-   manifest is the deprecated WCA format. Gaps are listed in
-   [`developer-experience.md`](./developer-experience.md).
+6. **CEM follow-ups.** The generator reads the CEM (2026-10-29) and enum unions
+   come from it. Still open: typed event payloads and unresolved type aliases.
+   Gaps are listed in [`developer-experience.md`](./developer-experience.md).
 7. ~~**Run the Button Playwright checks.**~~ **Done**: `playwright:install`,
    fresh `storybook:build`, `e2e`: 9 passed. Two stale `cds--btn--*` assertions
    (and the `Expressive` story play function) were corrected to

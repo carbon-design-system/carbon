@@ -20,9 +20,8 @@ Accepted
 > accept misspelled inputs — exactly the problem documented in ADR 0015 §3 and
 > measured in `developer-experience.md`. `CUSTOM_ELEMENTS_SCHEMA` must not be
 > added to story `moduleMetadata` as a workaround. If no Angular wrapper exists
-> for an element (e.g. a skeleton component missing from
-> `custom-elements.json`), add it to `SYNTHETIC_TAGS` in
-> `tasks/generate-wrappers/index.js` and regenerate — do not reach for
+> for an element because it is missing from `custom-elements.json`, fix the
+> manifest in `@carbon/web-components` and regenerate — do not reach for
 > `CUSTOM_ELEMENTS_SCHEMA`.
 >
 > **Update 2026-10-28.** Two parts of the decision below were never built:
@@ -191,13 +190,10 @@ template: `<cds-ng-accordion-skeleton></cds-ng-accordion-skeleton>`;
 
 ### 2. If a wrapper does not exist, fix the generator — do not use CUSTOM_ELEMENTS_SCHEMA
 
-If an element you need in a story has no Angular wrapper (because it is missing
-from `custom-elements.json`), the correct fix is to add it to `SYNTHETIC_TAGS`
-in [`tasks/generate-wrappers/index.js`](../tasks/generate-wrappers/index.js) and
-regenerate. Also add a `// TODO(@carbon/web-components):` comment in the WC
-source file explaining the root fix (adding `@customElement()` to the class).
-See the `AccordionSkeleton`, `CheckboxSkeleton`, `DropdownSkeleton` entries in
-`SYNTHETIC_TAGS` as a worked example.
+If an element you need in a story has no Angular wrapper because it is missing
+from `custom-elements.json`, fix it in `@carbon/web-components` so the element
+appears in the manifest, then regenerate. The generator wraps every `cds-*`
+element in the manifest except the ones ADR 0021 skips.
 
 ### 3. WC-parity story ordering
 

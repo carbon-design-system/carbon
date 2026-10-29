@@ -49,14 +49,13 @@ Measured from the generated output and generator:
   `formAssociated` entries in the manifest), so `ngModel`, `formControl` and
   `formControlName` are expected to work. This has been unit-tested with Jest;
   it has not been exercised in a browser.
-- Declared `@Input`s (2197 in the generated output) with `booleanAttribute`
+- Declared `@Input`s (2186 in the generated output) with `booleanAttribute`
   transforms for boolean properties. A misspelled binding is a compile error
   instead of a silent no-op.
-- **String-literal union types for enum-valued inputs.** The generator reads
-  every `defs.ts` in the web components source and resolves all-caps manifest
-  enum names (e.g. `BUTTON_KIND`) to their actual values. `button[kind]` is
-  typed `"primary" | "secondary" | "tertiary" | "ghost" | "danger" | ...`
-  instead of `string`. 214 inputs across 74 enums now carry proper union types.
+- **String-literal union types for enum-valued inputs.** The Custom Elements
+  Manifest resolves enums to their values, so `button[kind]` is typed
+  `'primary' | 'secondary' | 'tertiary' | 'ghost' | 'danger' | ...` instead of
+  `string`. 248 inputs carry union types.
 - **`ChangeDetectionStrategy.OnPush`** on every generated component. The
   input-forwarding model (`ngOnChanges` → `nativeElement[key]`) is compatible:
   Angular tracks `@Input` reference changes and marks the view dirty. Custom
@@ -69,59 +68,46 @@ Measured from the generated output and generator:
 
 ## What the wrappers do not give today
 
-The four gaps below are ordered by their fixability. Two are blocked on the
-upstream CEM migration; two are architectural and belong in a later milestone.
+The four gaps below are ordered by their fixability. Two need the web components
+to describe more in the manifest; two are architectural and belong in a later
+milestone.
 
-### 1. Typed events (`EventEmitter<any>`) — blocked on CEM
+### 1. Typed events (`EventEmitter<any>`) — needs event types in the manifest
 
-All 202 generated `@Output`s are `EventEmitter<any>`. The current WCA manifest
-carries no payload type information for events — every event entry has only
-`name` and `description` fields. The detail shapes exist in the web components
-source (e.g. `cds-accordion-item-toggled` always dispatches
-`detail: { open: boolean }`, `cds-checkbox-changed` dispatches
+All 225 generated `@Output`s are `EventEmitter<any>`. The generator reads the
+Custom Elements Manifest, but its event entries carry no payload types: the
+`type` is `CustomEvent` or `Event` at most, never `CustomEvent<T>`. The detail
+shapes exist in the web components source (e.g. `cds-accordion-item-toggled`
+always dispatches `detail: { open: boolean }`, `cds-checkbox-changed` dispatches
 `detail: { checked: boolean, indeterminate: boolean }`) but they are inline
-object literals, not exported named types, and scraping them reliably from
-TypeScript source is fragile.
+object literals, not exported named types.
 
-**When CEM lands (open question 4):** CEM supports a `type` field on event
-entries natively. Once the generator pivots to CEM, typed event payloads become
-a direct generator change — read the event `type` from the manifest and emit
-`EventEmitter<{ open: boolean }>` instead of `EventEmitter<any>`. This should be
-treated as a **priority item for the CEM integration PR**. It is the single
-largest remaining ergonomic gap: every consumer who binds an `@Output` today
-gets `$event: any` and no IDE assistance.
+Once the web components declare event detail types so the manifest records them,
+typed payloads are a direct generator change: read the event `type` and emit
+`EventEmitter<{ open: boolean }>` instead of `EventEmitter<any>`. It is the
+single largest remaining ergonomic gap: every consumer who binds an `@Output`
+today gets `$event: any` and no IDE assistance.
 
-As an interim measure before CEM, a hand-maintained overlay file (similar to the
-existing `MANIFEST_TYPE_OVERRIDES` in the generator) could cover the
-highest-traffic events (checkbox changed, dropdown selected, accordion toggled,
-modal closed/being-closed, pagination changed). That is a lower-priority option
-if CEM is imminent.
+As an interim measure, a hand-maintained overlay (similar to the existing
+`MANIFEST_TYPE_OVERRIDES` in the generator) could cover the highest-traffic
+events (checkbox changed, dropdown selected, accordion toggled, modal
+closed/being-closed, pagination changed).
 
-### 2. Input quality (136 remaining `any` inputs) — partially blocked on CEM
+### 2. Input quality (145 remaining `any` inputs) — partly needs manifest fixes
 
-Of the 136 real consumer properties that still resolve to `any`:
+Moving to the Custom Elements Manifest reduced `any` inputs from 233 to 145. Of
+those that remain:
 
-- **~75 have a Lit `@property({ type: String|Number|Boolean })` decorator** in
-  the WC source but no TypeScript type annotation on the property itself. The
-  WCA analyser reads the declared TS type, not the decorator, so it emits no
-  type for them. Examples: `buttonClassName` (14 occurrences across components),
-  `disabled` on `cds-checkbox-group`, `label` on menu items. These are fixable
-  right now by the same source-scraping pattern the generator already uses for
-  enums — read `@property({ type: X })` from the source file and map
-  `String → string`, `Number → number`, `Boolean → boolean`.
-
-  **This should also be treated as a priority item for the CEM integration PR.**
-  CEM captures the Lit decorator metadata directly, so all 75 of these would be
-  resolved automatically once the generator reads CEM. Implementing the
-  source-scrape workaround now is optional: if CEM is weeks away, defer it; if
-  CEM is months away, the scrape is worth doing.
-
-- **~61 are genuinely complex types** — object shapes (`collator`, `context`),
-  Date objects (`viewDate`, `minDate`, `maxDate`), arrays (`currentSelections`,
-  `radioTiles`), or opaque compound-component state. These cannot be typed
-  without either re-exporting the WC interfaces or duplicating them in the
-  Angular package. CEM resolves this cleanly: the generator would emit the type
-  string verbatim from the manifest. Until CEM lands, these stay `any`.
+- **About 40 are type names the manifest does not resolve** — type aliases and
+  classes such as `ButtonSize`, `TooltipAlignment`, `AspectRatio`,
+  `BigNumberSizeValues`. These need the web components (or the manifest
+  configuration) to resolve the alias to its values.
+- **About 40 have no type in the manifest** at all.
+- **About 70 are genuinely complex types** — object shapes (`collator`,
+  `context`), Date objects (`viewDate`, `minDate`, `maxDate`), arrays
+  (`currentSelections`, `radioTiles`), functions, or opaque compound-component
+  state. These cannot be typed without either re-exporting the WC interfaces or
+  duplicating them in the Angular package.
 
 ### 3. Slot awareness — low priority, marginal payoff
 
@@ -205,7 +191,7 @@ Each of these is proposed, none is built:
    `ChangeDetectorRef` and calling `markForCheck()` inside each listener.
    Unchecked; needs a zoneless test app.
 3. **Tests, stories and docs written for Angular**, so teams need not read the
-   web components documentation. Today only 7 of 287 components have stories and
+   web components documentation. Today only 7 of 296 components have stories and
    parity specs.
 
 ## Implications for decisions
@@ -214,7 +200,7 @@ Each of these is proposed, none is built:
   bundled copy is an implementation detail and `@carbon/angular` should own it.
   That is option B in ADR 0020.
 - **"Full feature parity" needs a definition.** Candidates: every `cds-*`
-  component has a wrapper (281 today; the six Date Picker tags in ADR 0021 are
+  component has a wrapper (296 today; the seven Date Picker tags in ADR 0021 are
   deliberately skipped), every public property and event is typed, and every
   documented slot is addressable. Not yet agreed.
 - **Legacy.** `@carbon/angular/legacy` was abandoned and removed on 2026-10-26.

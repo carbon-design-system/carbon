@@ -130,7 +130,10 @@ Not decided here:
    the existing non-`cds-` guard). Jest: 5 suites, 104 passed, 0 failures.
    Type-check clean. **Correction 2026-10-28:** the "284" counted stale folders.
    A clean run emits 278 wrappers from the manifest plus 3 via `SYNTHETIC_TAGS`
-   (281 in `src/generated/`).
+   (281 in `src/generated/`). **Update 2026-10-29:** with the Custom Elements
+   Manifest (#23872) a clean run emits 296 wrappers, and
+   `cds-date-picker-input-skeleton`, which the old manifest did not list, is
+   skipped as a seventh tag.
 2. ~~Confirm that `child-registration.spec.ts` still passes, since it asserts
    every wrapper imports an existing barrel.~~ **Done** (see item 1 above — all
    5 suites pass including `child-registration.spec.ts`).

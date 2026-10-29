@@ -15,8 +15,7 @@ import {
 } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { globSync } from 'node:fs';
-import { vendorPrefixedCopy, WC_ROOT } from '../vendor.js';
+import { vendorPrefixedCopy, WC_ES, WC_ROOT } from '../vendor.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -45,41 +44,6 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const MANIFEST_PATH = join(WC_ROOT, 'custom-elements.json');
 
-/**
- * Resolved enum name → string-literal union type, built once at startup by
- * scanning every `defs.ts` file in the web components source tree.
- *
- * Example:  BUTTON_KIND  →  '"primary" | "secondary" | "tertiary" | ...'
- *
- * Used in sanitizeType() to upgrade manifest entries that carry an all-caps
- * enum name (e.g. `"type": "BUTTON_KIND"`) into a proper TypeScript union so
- * Angular consumers get completion and type-narrowing instead of `string`.
- */
-const ENUM_TYPE_MAP = buildEnumTypeMap();
-
-function buildEnumTypeMap() {
-  const map = new Map();
-  const defsFiles = globSync('src/components/**/defs.ts', {
-    cwd: WC_ROOT,
-  });
-  for (const rel of defsFiles) {
-    const src = readFileSync(join(WC_ROOT, rel), 'utf8');
-    // Match: export enum ENUM_NAME { ... }
-    for (const [, enumName, body] of src.matchAll(
-      /export\s+enum\s+([A-Z0-9_]+)\s*\{([\s\S]*?)\}/g
-    )) {
-      // Collect string values: FOO = 'value' or FOO = "value"
-      const values = [...body.matchAll(/=\s*['"]([^'"]*)['"]/g)].map(
-        (m) => m[1]
-      );
-      if (values.length > 0) {
-        map.set(enumName, values.map((v) => `"${v}"`).join(' | '));
-      }
-    }
-  }
-  return map;
-}
-
 const OUTPUT_DIR = join(__dirname, '../../src/generated');
 
 /**
@@ -89,17 +53,18 @@ const OUTPUT_DIR = join(__dirname, '../../src/generated');
  * never registers the child elements the component renders (e.g. `cds-ng-modal`
  * renders `cds-ng-dialog`). The folder barrel registers all of them.
  *
- * `tag.path` is `./src/components/<dir>/<file>.ts`. Folders can be nested
- * (`date-picker/next`) and a folder without an `index.ts`
- * (`date-picker/next/components`) is covered by its nearest parent barrel.
+ * `tag.path` is the manifest module path, `es/components/<dir>/<file>.js`.
+ * Folders can be nested (`date-picker/next`) and a folder without an
+ * `index.js` (`date-picker/next/components`) is covered by its nearest parent
+ * barrel.
  *
  * @returns {string} import specifier, e.g.
  *   `#carbon-ng/components/modal/index.js`
  */
 function resolveBarrelImport(tag) {
-  const segments = dirname(tag.path.replace(/^\.\/src\//, '')).split('/');
+  const segments = dirname(tag.path.replace(/^es\//, '')).split('/');
   while (segments.length > 1) {
-    if (existsSync(join(WC_ROOT, 'src', ...segments, 'index.ts'))) {
+    if (existsSync(join(WC_ES, ...segments, 'index.js'))) {
       return `#carbon-ng/${segments.join('/')}/index.js`;
     }
     segments.pop();
@@ -124,7 +89,7 @@ function toCamelCase(str) {
 
 /**
  * Known manifest type errors, keyed by `"tagName.propertyName"`.
- * The WCA analyser sometimes infers the wrong type from the default value
+ * The manifest analyser sometimes infers the wrong type from the default value
  * rather than the declared TypeScript type. Fix the generator output here
  * until the manifest is corrected upstream.
  *
@@ -162,16 +127,24 @@ function sanitizeType(typeStr, tagName, propName) {
   if (/^("|')[^"']*("|')(\s*\|\s*("|')[^"']*("|'))*$/.test(trimmed)) {
     return trimmed;
   }
-  // All-caps enum name (e.g. BUTTON_KIND) — resolve to a string-literal union
-  // from the defs.ts file so consumers get type-narrowing and completion.
+  // The manifest resolves most enums to string-literal unions. An enum name it
+  // leaves unresolved (e.g. LINK_SIZE_TYPE) is string-valued.
   if (/^[A-Z0-9_]+$/.test(trimmed)) {
-    const union = ENUM_TYPE_MAP.get(trimmed);
-    return union ?? 'string';
+    return 'string';
   }
   if (/^[A-Z0-9_]+\s*\|\s*undefined$/.test(trimmed)) {
-    const base = trimmed.replace(/\s*\|\s*undefined$/, '');
-    const union = ENUM_TYPE_MAP.get(base);
-    return union ? `${union} | undefined` : 'string | undefined';
+    return 'string | undefined';
+  }
+  // A union that already includes `string` (e.g. `BUTTON_SIZE | string |
+  // undefined`) accepts any string; keep only its nullish members.
+  const members = trimmed.split('|').map((member) => member.trim());
+  if (
+    members.includes('string') &&
+    members.every((member) => /^([\w.]+|'[^']*'|"[^"]*")$/.test(member))
+  ) {
+    return ['string', 'null', 'undefined']
+      .filter((member) => members.includes(member))
+      .join(' | ');
   }
   return 'any';
 }
@@ -198,14 +171,12 @@ function sanitizeDefault(defaultVal, type) {
     return !isNaN(Number(raw)) ? raw : undefined;
   }
   // Accept a quoted string default for any type that is a string or a
-  // string-literal union (e.g. `"primary" | "secondary" | ...`).
+  // string-literal union (e.g. `'primary' | 'secondary' | ...`). The manifest
+  // emits source literals (`'primary'`); normalise them to `"primary"`.
+  if (/^'[^'"\\]*'$/.test(defaultVal)) {
+    return `"${defaultVal.slice(1, -1)}"`;
+  }
   if (defaultVal.startsWith('"') && defaultVal.endsWith('"')) {
-    // The manifest occasionally has `"'value'"` (inner single-quotes). Normalise
-    // to `"value"` so the emitted TypeScript literal is valid.
-    const inner = defaultVal.slice(1, -1);
-    if (inner.startsWith("'") && inner.endsWith("'")) {
-      return `"${inner.slice(1, -1)}"`;
-    }
     return defaultVal;
   }
   return undefined;
@@ -295,6 +266,7 @@ const NATIVE_DOM_EVENTS = new Set([
 const SKIPPED_TAGS = new Set([
   'cds-date-picker',
   'cds-date-picker-input',
+  'cds-date-picker-input-skeleton',
   'cds-fluid-date-picker',
   'cds-fluid-date-picker-input',
   'cds-fluid-date-picker-skeleton',
@@ -302,81 +274,45 @@ const SKIPPED_TAGS = new Set([
 ]);
 
 /**
- * Synthetic tag descriptors for WC elements that are missing from
- * custom-elements.json because their classes use `defineCustomElement()`
- * instead of the `@customElement()` decorator, which the CEM analyser cannot
- * see.
+ * Convert a Custom Elements Manifest declaration into the tag shape the
+ * generator works with. Only public, writable instance fields become inputs:
+ * static members (`is`, `formAssociated`), protected members and read-only
+ * fields (getters and form internals such as `validity`) are not settable.
  *
- * Each entry mirrors the shape of a real manifest tag object. The `path`
- * field is relative to the WC package root (`./src/components/…`) and is used
- * by `resolveBarrelImport` to find the correct folder barrel.
+ * @param {object} declaration a `modules[].declarations[]` entry with a
+ *   `tagName`
+ * @param {string} modulePath the module path, e.g.
+ *   `es/components/button/button.js`
  */
-const SYNTHETIC_TAGS = [
-  {
-    name: 'cds-accordion-skeleton',
-    path: './src/components/accordion/accordion-skeleton.ts',
-    description: 'Skeleton of accordion.',
-    properties: [
-      {
-        name: 'alignment',
-        attribute: 'alignment',
-        description:
-          'Specify the alignment of the accordion heading title and chevron.',
-        type: 'string',
-        default: '"END"',
-      },
-      {
-        name: 'count',
-        attribute: 'count',
-        description: 'Set number of items to render.',
-        type: 'number',
-        default: '4',
-      },
-      {
-        name: 'isFlush',
-        attribute: 'isFlush',
-        description:
-          'Specify whether Accordion text should be flush, default is false, does not work with align="start".',
-        type: 'boolean',
-        default: 'false',
-      },
-      {
-        name: 'open',
-        attribute: 'open',
-        description: '`true` if the first accordion item should be open.',
-        type: 'boolean',
-        default: 'true',
-      },
-    ],
-  },
-  {
-    name: 'cds-checkbox-skeleton',
-    path: './src/components/checkbox/checkbox-skeleton.ts',
-    description: 'Skeleton of checkbox.',
-    properties: [],
-  },
-  {
-    name: 'cds-dropdown-skeleton',
-    path: './src/components/dropdown/dropdown-skeleton.ts',
-    description: 'Skeleton of dropdown.',
-    properties: [
-      {
-        name: 'hideLabel',
-        attribute: 'hide-label',
-        description: 'Specify whether the label should be hidden, or not.',
-        type: 'boolean',
-        default: 'false',
-      },
-      {
-        name: 'size',
-        attribute: 'size',
-        description: 'Specify the size of the ListBox.',
-        type: 'string',
-        default: '"md"',
-      },
-    ],
-  },
-];
+function toTag(declaration, modulePath) {
+  const members = declaration.members || [];
+  return {
+    name: declaration.tagName,
+    path: modulePath,
+    description: declaration.description || declaration.summary || '',
+    formAssociated: members.some(
+      (member) => member.name === 'formAssociated' && member.static
+    ),
+    properties: members
+      .filter(
+        (member) =>
+          member.kind === 'field' &&
+          !member.static &&
+          !member.readonly &&
+          (member.privacy ?? 'public') === 'public'
+      )
+      .map((member) => ({
+        name: member.name,
+        type: member.type?.text,
+        default: member.default,
+        description: member.description,
+      })),
+    events: (declaration.events || []).map((event) => ({
+      name: event.name,
+      description: event.description,
+    })),
+  };
+}
 
 /**
  * Events (besides `input`/`change`) that signal a form-associated element's
@@ -395,8 +331,7 @@ function generateWrapperForTag(tag) {
   // Form-associated elements with a `value`/`checked` get a ControlValueAccessor
   // so `ngModel`, `formControl` and `formControlName` work.
   const allPropNames = new Set((tag.properties || []).map((p) => p.name));
-  const isFormAssociated = allPropNames.has('formAssociated');
-  const cvaProp = !isFormAssociated
+  const cvaProp = !tag.formAssociated
     ? null
     : allPropNames.has('checked')
       ? 'checked'
@@ -420,7 +355,7 @@ function generateWrapperForTag(tag) {
       processedNames.add(prop.name);
 
       const propName = prop.name;
-      const type = sanitizeType(prop.type, tag.name, prop.name);
+      let type = sanitizeType(prop.type, tag.name, prop.name);
       // isBoolean drives the `= false` default and booleanAttribute transform.
       // Only set it when the resolved type is boolean — not when the manifest
       // default happens to be "false" for a property that was overridden to string.
@@ -430,6 +365,21 @@ function generateWrapperForTag(tag) {
           type !== 'string | undefined' &&
           (prop.default === 'false' || prop.default === 'true'));
       const cleanDefault = sanitizeDefault(prop.default, type);
+
+      // A subclass can default an inherited property to a value outside the
+      // union the parent declares (`cds-number-input` defaults `type` to
+      // 'number'). The element uses that value, so the input must accept it.
+      const literals = [...type.matchAll(/'([^']*)'|"([^"]*)"/g)].map(
+        (match) => match[1] ?? match[2]
+      );
+      if (
+        literals.length > 0 &&
+        /^("|')[^"']*("|')(\s*\|\s*("|')[^"']*("|'))*$/.test(type) &&
+        cleanDefault?.startsWith('"') &&
+        !literals.includes(cleanDefault.slice(1, -1))
+      ) {
+        type = `${type} | '${cleanDefault.slice(1, -1)}'`;
+      }
 
       inputs.push({
         name: propName,
@@ -683,7 +633,7 @@ export * from './${displayName}.component';
 function main() {
   if (!existsSync(MANIFEST_PATH)) {
     console.error(`Error: Manifest file not found at ${MANIFEST_PATH}`);
-    console.error(`Run 'yarn workspace @carbon/web-components wca' first.`);
+    console.error(`Run 'yarn workspace @carbon/web-components cem' first.`);
     process.exit(1);
   }
 
@@ -691,10 +641,18 @@ function main() {
   vendorPrefixedCopy();
 
   const manifest = JSON.parse(readFileSync(MANIFEST_PATH, 'utf8'));
-  // Merge synthetic tags (elements missing from the CEM analyser output) before
-  // the main tag list so they receive identical treatment — SKIPPED_TAGS,
-  // --tag filter, and full-run rmSync all apply to them normally.
-  const tags = [...SYNTHETIC_TAGS, ...(manifest.tags || [])];
+  const tags = (manifest.modules || []).flatMap((module) =>
+    (module.declarations || [])
+      .filter((declaration) => declaration.tagName)
+      .map((declaration) => toTag(declaration, module.path))
+  );
+
+  // An empty list means the manifest format changed, not that there is
+  // nothing to wrap. Fail instead of publishing a package without wrappers.
+  if (tags.length === 0) {
+    console.error(`Error: No custom elements found in ${MANIFEST_PATH}`);
+    process.exit(1);
+  }
 
   const args = process.argv.slice(2);
   const tagFilterIndex = args.indexOf('--tag');
@@ -720,6 +678,7 @@ function main() {
   }
 
   const generatedExports = [];
+  const failedTags = [];
 
   for (const tag of tagsToProcess) {
     // Skip sub-elements that don't need top-level component wrappers or internal helpers
@@ -748,11 +707,19 @@ function main() {
       generatedExports.push(displayName);
       console.log(`  ✓ Generated <${tag.name}> -> ${displayName}Component`);
     } catch (err) {
+      failedTags.push(tag.name);
       console.error(
         `  ✗ Error generating wrapper for <${tag.name}>:`,
         err.message
       );
     }
+  }
+
+  if (failedTags.length > 0) {
+    console.error(
+      `\nError: ${failedTags.length} wrapper(s) failed to generate: ${failedTags.join(', ')}`
+    );
+    process.exit(1);
   }
 
   // Only rewrite root index.ts if doing a full generation run

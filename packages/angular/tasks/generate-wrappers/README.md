@@ -79,72 +79,38 @@ When a new Web Component is added to `@carbon/web-components`:
    [`porting-web-component-tests.md`](../../docs/porting-web-component-tests.md).
 4. Run `yarn test` from `packages/angular`.
 
+## Manifest input
+
+The generator reads the Custom Elements Manifest that
+`yarn workspace @carbon/web-components cem` writes to
+`packages/web-components/custom-elements.json`:
+
+- Every `modules[].declarations[]` entry with a `tagName` gets a wrapper, except
+  the tags in `SKIPPED_TAGS`.
+- Inputs are the public, writable instance fields. Static members (`is`,
+  `formAssociated`), protected members and read-only fields (getters and form
+  internals such as `validity`) are not settable, so they get no `@Input()`.
+- Input types come from `type.text`. String-literal unions, `string`, `boolean`
+  and `number` are kept as they are. A union that includes `string` becomes
+  `string`. A type the manifest leaves as a name it does not resolve
+  (`ButtonSize`, `TooltipAlignment`) becomes `any`.
+- When an element defaults an inherited property to a value outside the union
+  its parent declares, the value is added to the union (`cds-number-input`
+  defaults `type` to `'number'`).
+- `MANIFEST_TYPE_OVERRIDES` corrects types the manifest gets wrong. Remove an
+  entry once the manifest is fixed.
+
+The generator exits with an error when the manifest has no custom elements or
+when any wrapper fails to generate, so a manifest problem fails the build
+instead of publishing a package with wrappers missing.
+
 ## Handling WC elements missing from `custom-elements.json`
 
-Some WC elements are registered via `defineCustomElement()` inside their
-`index.ts` instead of using the `@customElement()` decorator. The CEM analyser
-only sees the decorator form, so these elements never appear in
-`custom-elements.json` and the generator produces no wrapper for them.
+An element missing from the manifest gets no wrapper. Fix it in
+`@carbon/web-components` so the element appears in the manifest; the generator
+then picks it up on the next run.
 
 **Do not work around this with `CUSTOM_ELEMENTS_SCHEMA`.** Adding that schema to
 a story's `moduleMetadata` silences Angular's template checker and allows the
 raw `cds-*` tag to pass through, but it defeats Angular's type system for the
 whole story module. It is never acceptable in `@carbon/angular` stories.
-
-> **Temporary.** `SYNTHETIC_TAGS` is a workaround until the web components fix
-> this upstream. An issue with the Carbon team (so the three skeleton classes
-> use `@customElement()` and appear in the manifest) is decided but not yet
-> filed. Remove the synthetic entries once the manifest includes them, and do
-> not add new ones without an upstream issue. The generator is also expected to
-> move to the standard CEM when that lands in the monorepo.
-
-**The correct fix is `SYNTHETIC_TAGS`.** Add a hand-authored descriptor to the
-`SYNTHETIC_TAGS` array at the top of `index.js`. Each entry mirrors the shape of
-a real manifest tag object — `name`, `path`, `description`, and `properties`:
-
-```js
-const SYNTHETIC_TAGS = [
-  {
-    name: 'cds-accordion-skeleton',
-    path: './src/components/accordion/accordion-skeleton.ts',
-    description: 'Skeleton of accordion.',
-    properties: [
-      {
-        name: 'alignment',
-        attribute: 'alignment',
-        description:
-          'Specify the alignment of the accordion heading title and chevron.',
-        type: 'string',
-        default: '"END"',
-      },
-      {
-        name: 'isFlush',
-        attribute: 'isFlush',
-        description: 'Specify whether Accordion text should be flush.',
-        type: 'boolean',
-        default: 'false',
-      },
-    ],
-  },
-  // ...
-];
-```
-
-The `path` field drives `resolveBarrelImport`, which walks up to the nearest
-`index.ts` folder — so it finds the existing `accordion/index.js` barrel that
-already registers the whole family including the skeleton.
-
-After adding a synthetic entry:
-
-1. Run `yarn generate:wrappers --tag cds-<name>` to generate the
-   `src/generated/` wrapper.
-2. Run `yarn build` (or `node tasks/build-entries/index.js`) — `build-entries`
-   reads `src/generated/` and rebuilds `.entries/` automatically. There is no
-   manual `.entries/` editing; `.entries/` is gitignored and fully generated.
-3. Also add a `// TODO(@carbon/web-components):` comment in the WC source file
-   pointing to the root fix: adding `@customElement()` to the class so it
-   appears in `custom-elements.json` automatically and `SYNTHETIC_TAGS` can be
-   removed.
-
-See `AccordionSkeleton`, `CheckboxSkeleton`, and `DropdownSkeleton` in
-`SYNTHETIC_TAGS` as a complete worked example.

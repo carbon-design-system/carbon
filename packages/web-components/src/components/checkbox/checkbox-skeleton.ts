@@ -10,12 +10,7 @@ import { prefix } from '../../globals/settings';
 import styles from './checkbox.scss?lit';
 
 /**
- * Skeleton of checkbox.
- *
- * TODO(@carbon/web-components): Replace `export default` + manual
- * `defineCustomElement()` registration in `index.ts` with the
- * `@customElement()` decorator so this class appears in custom-elements.json
- * and `@carbon/angular` can generate a typed wrapper automatically.
+ * Skeleton of number input.
  */
 class CDSCheckboxSkeleton extends LitElement {
   static is = `${prefix}-checkbox-skeleton`;
