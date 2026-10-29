@@ -84,12 +84,26 @@
   }
 
   // ─── Header ──────────────────────────────────────────────────────────
+  // Two layouts — both pure flex
+  //
+  // Without headerMedia:
+  //   __header (flex row)
+  //     children (__title, takes the space the actions don't use)
+  //     __actions-slot (flex-shrink:0, sized to its actions, max 50%)
+  //
+  // With headerMedia:
+  //   __header (flex column)
+  //     __header-top-row (flex row)
+  //       __header-media
+  //       __actions-slot
+  //     children (__title, full width naturally)
   .#{$prefix}--card__header {
     position: relative;
-    display: grid;
-    container-type: inline-size;
-    grid-template-columns: auto minmax(0, 1fr);
-    row-gap: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: $spacing-03;
+    padding-inline: $spacing-05;
   }
 
   // ─── Body ────────────────────────────────────────────────────────────
@@ -193,14 +207,30 @@
     display: inline-flex;
   }
 
+  // ─── Header top row (only rendered when headerMedia prop is set) ──────
+  // Holds __header-media (start) and __actions-slot (end) in a flex row.
+  // __header then switches to flex-column so children (__title) sit below
+  // this row at full width.
+  .#{$prefix}--card__header-top-row {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: $spacing-03;
+    inline-size: 100%;
+  }
+
+  // When __header-top-row is present the header becomes a column.
+  .#{$prefix}--card__header:has(.#{$prefix}--card__header-top-row) {
+    flex-direction: column;
+  }
+
   // ─── Header media (icon / avatar slot) ───────────────────────────────
   .#{$prefix}--card__header-media {
     display: flex;
+    flex: 1;
     align-items: flex-start;
     justify-content: flex-start;
-    grid-column: 1 / -1;
-    margin-block: $spacing-05;
-    margin-inline-start: $spacing-05;
+    margin-block-start: $spacing-05;
     max-block-size: $spacing-10;
   }
 
@@ -366,18 +396,32 @@
   }
 
   // ─── Title ───────────────────────────────────────────────────────────
-  // Always col 2 so it shares that column with __header-media above it.
+  // Sized to its content and shrinks to whatever __actions-slot leaves free.
   .#{$prefix}--card__title {
     display: flex;
-    flex-direction: column;
-    gap: $spacing-01;
-    grid-column: 2;
-    margin-inline: $spacing-05;
+    flex: 0 1 auto;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: $spacing-05;
+    margin-block: $spacing-05;
     min-inline-size: 0;
   }
 
-  .#{$prefix}--card__header > .#{$prefix}--card__title {
-    margin-block: $spacing-05;
+  // When headerMedia is present, title sits in row 2 at full width.
+  .#{$prefix}--card__header-top-row + .#{$prefix}--card__title {
+    inline-size: 100%;
+  }
+
+  // Text wrapper (label + title-text-row + description).
+  // flex: 1 fills the remaining row width when __title-media is present.
+  // min-inline-size: 0 allows the cell to shrink below its content's intrinsic
+  // size so long words / titles cannot push __title-media out of the row.
+  .#{$prefix}--card__title-text {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: $spacing-01;
+    min-inline-size: 0;
   }
 
   .#{$prefix}--card--expressive .#{$prefix}--card__title-text-row {
@@ -391,6 +435,7 @@
   // ─── Title text row ──────────────────────────────────────────────────
   .#{$prefix}--card__title-text-row {
     display: block;
+    overflow-wrap: break-word;
   }
 
   .#{$prefix}--card__title-text-row--truncate {
@@ -416,9 +461,10 @@
     gap: $spacing-03;
   }
 
-  // Trailing icon — no override needed; icon span is inline-flex inside block text
+  // Leading icon + trailing icon: display as flex row (same as --with-start-icon)
   .#{$prefix}--card__title-text-row--with-end-icon {
-    display: block;
+    display: inline-flex;
+    align-items: center;
   }
 
   // Title leading icon wrapper
@@ -463,46 +509,60 @@
   }
 
   // ─── Title media ─────────────────────────────────────────────────────
+  // Now rendered inside CardTitle (not a direct grid child). Displayed as a
+  // flex item to the left of the __title-text wrapper. No grid-column needed.
   .#{$prefix}--card__title-media {
     display: flex;
     flex-shrink: 0;
     align-items: flex-start;
     justify-content: center;
-    grid-column: 1;
-    margin-block-start: $spacing-05;
     max-block-size: $spacing-10;
-    padding-inline-end: $spacing-05;
-    padding-inline-start: $spacing-05;
   }
 
-  .#{$prefix}--card__header:has(> .#{$prefix}--card__title-media)
-    > .#{$prefix}--card__title {
-    margin-inline: 0 $spacing-05;
+  // ─── Actions slot wrapper ─────────────────────────────────────────────
+  // flex: 0 0 auto — the slot is as wide as its actions need, so the title can
+  //   use any space the actions don't. It never shrinks, so actions keep their
+  //   share before the title does.
+  // max-inline-size: 50% — actions can never exceed half the header width.
+  // margin-inline-start: auto — pushes the slot to the end edge of the header.
+  // min-inline-size — always leaves room for the overflow menu button.
+  // margin-inline-end: -$spacing-03 — the header has padding-inline: $spacing-05
+  //   (16px) on both sides so the title gets its full 16px inset. Actions must
+  //   sit only $spacing-03 (8px) from the card edge, so the slot bleeds 8px
+  //   past the header's end padding: $spacing-05 - $spacing-03 = $spacing-03.
+  .#{$prefix}--card__actions-slot {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: flex-start;
+    justify-content: flex-end;
+    margin-inline-end: -$spacing-03;
+    margin-inline-start: auto;
+    max-inline-size: 50%;
+    min-inline-size: $spacing-07;
+    padding-block-start: $spacing-03;
   }
 
-  // ─── Header actions ───────────────────────────────────────────────────
+  // ─── Header actions (CardActions component) ───────────────────────────
+  // Actions use flush spacing (no gap between them).
+  // CardActions publishes the width needed to show every action (collapsed
+  // ones included) as a custom property. That value is independent of the
+  // overflow state, so the slot width is stable for createOverflowHandler to
+  // measure: it is the full width of the actions, or the 50% cap if smaller.
+  // Before the value is published, 100% falls back to the actions' own width.
   .#{$prefix}--card__actions {
-    position: absolute;
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: flex-end;
     block-size: $spacing-07;
-    gap: $spacing-02;
-    inline-size: calc(50% - $spacing-03);
-    inset-block-start: $spacing-03;
-    inset-inline-end: $spacing-03;
-    max-inline-size: calc(50% - $spacing-03);
+    gap: 0;
+    inline-size: var(--#{$prefix}--card--actions-inline-size, 100%);
+    max-inline-size: 100%;
   }
 
   // createOverflowHandler marks overflowed items with [data-hidden].
   // Hide them so only the overflow menu button remains visible.
   .#{$prefix}--card__actions [data-hidden]:not([data-fixed]) {
     display: none;
-  }
-
-  .#{$prefix}--card__header:has(> .#{$prefix}--card__actions)
-    > .#{$prefix}--card__title {
-    max-inline-size: calc(50cqw - $spacing-03);
   }
 
   // ─── AI Label (decorator) ─────────────────────────────────────────────
@@ -525,24 +585,27 @@
     inset-inline-end: $spacing-03;
   }
 
-  // AI label without actions: title must clear the decorator ($spacing-07)
-  // plus its $spacing-03 inset from the card edge.
-  .#{$prefix}--card--has-ai-label:not(:has(.#{$prefix}--card__actions))
+  // AI label without actions: title must not overlap the absolutely-positioned
+  // decorator. Reserve space for its width ($spacing-07) plus end inset ($spacing-03).
+  .#{$prefix}--card--has-ai-label:not(:has(.#{$prefix}--card__actions-slot))
     .#{$prefix}--card__header
     > .#{$prefix}--card__title {
-    max-inline-size: calc(100cqw - $spacing-07 - $spacing-03);
+    max-inline-size: calc(100% - $spacing-07 - $spacing-03);
   }
 
-  // AI label with actions: the actions box is shifted left by the decorator
-  // width; the title must clear that shifted edge.
-  .#{$prefix}--card--has-ai-label:has(.#{$prefix}--card__actions)
-    .#{$prefix}--card__header
-    > .#{$prefix}--card__title {
-    max-inline-size: calc(50cqw - $spacing-03 - $spacing-06 - $spacing-03 * 2);
-  }
-
-  .#{$prefix}--card--has-ai-label .#{$prefix}--card__actions {
-    inset-inline-end: calc($spacing-03 + $spacing-06 + $spacing-03);
+  // AI label with actions: the decorator is $spacing-06 wide and sits
+  // inset-inline-end: $spacing-03 from the card edge → its left edge is at
+  // $spacing-03 + $spacing-06 = 32px from the card edge.
+  // The slot's right edge is already at $spacing-03 (8px) from the card edge
+  // (header padding $spacing-05 minus slot margin-inline-end -$spacing-03).
+  // padding-inline-end must push buttons inward from that 8px point far enough
+  // to clear the decorator, plus a $spacing-03 gap between the actions and the
+  // AI label: 24px + 8px = $spacing-06 + $spacing-03.
+  .#{$prefix}--card--has-ai-label .#{$prefix}--card__actions-slot {
+    min-inline-size: calc(
+      $spacing-07 + $spacing-03 + $spacing-06 + $spacing-03 + $spacing-03
+    );
+    padding-inline-end: calc($spacing-06 + $spacing-03);
   }
 
   // AI label hover state for clickable cards

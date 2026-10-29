@@ -1,0 +1,265 @@
+import { Story, Controls, Source, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+import * as stories from './GetStartedCard.stories';
+
+<Meta isTemplate />
+
+# Get started card
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Default](#default)
+- [With sequence](#with-sequence)
+- [With media and pictogram](#with-media-and-pictogram)
+- [With media and sequence](#with-media-and-sequence)
+- [With horizontal media](#with-horizontal-media)
+- [With AI label and actions](#with-ai-label-and-actions)
+- [With disabled](#with-disabled)
+- [Feedback](#feedback)
+
+## Overview
+
+The Get started card is an entry point into an onboarding or getting started
+flow. It shows a label and title, how long the task takes and the skill level it
+needs, and makes the whole surface clickable.
+
+This example is composed from the composable `Card` component rather than
+built from scratch, so it inherits the Card's keyboard, focus, hover and
+disabled behavior.
+
+> NOTE: Patterns have multiple ways of accomplishing a user need and typically
+> use a combination of components with additional design considerations. The
+> pattern code we share is meant to serve as an example implementation that can
+> be built and extended further.
+
+To build this pattern, you can use the `GetStartedCard` component recipe from
+`example/components/GetStartedCard.tsx`, which composes:
+
+- `Card`, `Card.Header`, `Card.Title` and `Card.Body` from
+  `preview__Card`
+- [Icons](https://react.carbondesignsystem.com/?path=/docs/elements-icons--overview)
+  for the metadata row and the trailing action
+
+```jsx
+import { preview__Card } from '@carbon/react';
+
+const { Card } = preview__Card;
+```
+
+## Example usage
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/react/src/examples/GetStartedCard/example)
+> example implementation.
+
+[![Edit get-started-card-pattern](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/react/src/examples/GetStartedCard/example)
+
+### Example
+
+Here's a quick example to get you started.
+
+```jsx
+<GetStartedCard
+  label="Label"
+  title="Title"
+  pictogram={Crossroads}
+  metadata={[
+    { id: 'time', icon: Time, iconDescription: '2 mins' },
+    { id: 'skill', icon: SkillLevelBasic, iconDescription: 'Beginner' },
+  ]}
+  footerActionIcon={ArrowRight}
+  onClick={() => {}}
+/>
+```
+
+## Default
+
+Use a pictogram at the top of the card to represent the topic.
+
+<Canvas
+  of={stories.defaultCard}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(stories.defaultCard),
+    },
+  ]}
+/>
+
+## With sequence
+
+When cards describe ordered steps, pass `sequence` to show a step number in
+place of the pictogram. The number is included in the card's accessible name.
+
+<Canvas
+  of={stories.withSequence}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(stories.withSequence),
+    },
+  ]}
+/>
+
+## With media and pictogram
+
+Pass `media` to place a decorative image beside the header. The image is
+centered on the card and can bleed past its top and bottom edges. It is hidden
+below the `lg` breakpoint, so do not rely on it to convey information.
+
+```jsx
+<GetStartedCard
+  label="Label"
+  title="Title"
+  pictogram={Crossroads}
+  media={<img src={abstractImage} alt="" />}
+  metadata={metadata}
+/>
+```
+
+<Canvas
+  of={stories.withMediaAndPictogram}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(stories.withMediaAndPictogram),
+    },
+  ]}
+/>
+
+## With media and sequence
+
+Combine `media` with `sequence` to show a step number beside the decorative
+image. As with the pictogram variant, the media is hidden below the `lg`
+breakpoint.
+
+```jsx
+<GetStartedCard
+  label="Label"
+  title="Title"
+  sequence={3}
+  media={<img src={abstractImage} alt="" />}
+  metadata={metadata}
+/>
+```
+
+<Canvas
+  of={stories.withMediaAndSequence}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(stories.withMediaAndSequence),
+    },
+  ]}
+/>
+
+## With horizontal media
+
+Add `horizontal` alongside `media` to render the image as a full-height column
+at the trailing edge of the card, using `Card.Media`. The card keeps its content
+on the start side and the arrow moves to sit beside the image. As with the other
+media variants, the image is decorative and is hidden below the `lg` breakpoint.
+
+Use `decorator` to place a small icon at the top-right of the content area. It
+is passed to the `Card`'s `decorator` slot, so interacting with it doesn't
+activate the card. Keep it decorative; do not use it to convey information.
+
+```jsx
+<GetStartedCard
+  label="Label"
+  title="Title"
+  pictogram={Crossroads}
+  decorator={<Incomplete size={20} aria-hidden="true" />}
+  media={<img src={horizontalMedia} alt="" />}
+  horizontal
+  metadata={metadata}
+/>
+```
+
+<Canvas
+  of={stories.withHorizontalMedia}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(stories.withHorizontalMedia),
+    },
+  ]}
+/>
+
+## With AI label and actions
+
+Set `clickable={false}` when the card needs controls of its own, such as an
+`AILabel` or header actions. Interactive elements shouldn't sit inside a
+clickable card, so the whole surface stops being a button. Instead:
+
+- `decorator` takes an `AILabel`, shown at the top-right of the header.
+- `headerActions` adds icon buttons beside the AI label. They collapse into an
+  overflow menu when there isn't room.
+- The metadata moves into `Card.Footer`, next to a separate arrow `IconButton`
+  that handles `onFooterActionClick`. Set its accessible name with
+  `footerActionLabel`.
+
+`media`, `horizontal` and `onClick` apply to clickable cards only.
+
+```jsx
+<GetStartedCard
+  clickable={false}
+  label="Label"
+  title="Title"
+  pictogram={Crossroads}
+  decorator={
+    <AILabel size="xs">
+      <AILabelContent>…</AILabelContent>
+    </AILabel>
+  }
+  headerActions={[
+    { id: 'progress', icon: Incomplete, label: 'View progress', onClick },
+  ]}
+  metadata={metadata}
+  footerActionLabel="Start"
+  onFooterActionClick={onStart}
+/>
+```
+
+<Canvas
+  of={stories.withAILabelAndActions}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(stories.withAILabelAndActions),
+    },
+  ]}
+/>
+
+## With disabled
+
+Set `disabled` to show that the card is not currently available, for example
+when an earlier step must be completed first. A disabled card is not
+interactive, drops the brand gradient and uses the Card's disabled colors.
+
+```jsx
+<GetStartedCard
+  label="Label"
+  title="Title"
+  pictogram={Crossroads}
+  metadata={metadata}
+  disabled
+/>
+```
+
+<Canvas
+  of={stories.withDisabled}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(stories.withDisabled),
+    },
+  ]}
+/>
+
+## Feedback
+
+Help us improve this pattern by providing feedback through
+[GitHub issues](https://github.com/carbon-design-system/carbon/issues/new/choose).
