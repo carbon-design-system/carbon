@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -232,9 +232,24 @@ class CDSTextarea extends CDSTextInput {
       return null;
     };
 
+    const hasHelperText =
+      this.helperText ||
+      (this._slotHelperTextNode?.assignedNodes().length ?? 0) > 0;
+
+    // The helper element is only rendered in the non-fluid layout (see the
+    // render branch below), so the reference has to be conditional on that
+    // too: pointing `aria-describedby` at an element that does not exist is
+    // the same as not describing the field at all.
+    const describedBy =
+      hasHelperText && !this.isFluid ? 'helper-text' : undefined;
+
     const helper = html`
       <div class="${helperTextClasses}" id="helper-text">
-        <slot name="helper-text">${this.helperText}</slot>
+        <slot
+          name="helper-text"
+          @slotchange="${this._handleHelperTextSlotChange}">
+          ${this.helperText}
+        </slot>
       </div>
     `;
 
@@ -271,6 +286,7 @@ class CDSTextarea extends CDSTextInput {
           cols="${ifDefined(this.cols)}"
           ?data-invalid="${this.invalid}"
           ?disabled="${this.disabled}"
+          aria-describedby="${ifDefined(describedBy)}"
           id="input"
           name="${ifNonEmpty(this.name)}"
           pattern="${ifNonEmpty(this.pattern)}"
