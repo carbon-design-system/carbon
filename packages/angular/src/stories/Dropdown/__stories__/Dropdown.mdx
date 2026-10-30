@@ -1,0 +1,191 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as DropdownStories from './Dropdown.stories';
+
+<Meta of={DropdownStories} />
+
+# Dropdown
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/angular/src/stories/Dropdown)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/dropdown/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/dropdown/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+  - [Inline dropdown](#inline-dropdown)
+  - [Skeleton state](#skeleton-state)
+  - [AI label](#ai-label)
+  - [With Layer](#with-layer)
+- [Component API](#component-api)
+  - [`direction`](#direction)
+  - [`value`](#value)
+  - [`size`](#size)
+  - [`label`](#label)
+  - [`type`](#type)
+  - [`(dropdownBeingSelected)`](#dropdownbeingselected)
+  - [`(dropdownSelected)`](#dropdownselected)
+- [Angular-specific notes](#angular-specific-notes)
+- [References](#references)
+- [Feedback](#feedback)
+
+## Overview
+
+Dropdowns present a list of options from which a user can select one option, or
+several. A selected option can represent a value in a form, or can be used as an
+action to filter or sort existing content.
+
+### Importing
+
+```ts
+import {
+  DropdownComponent,
+  DropdownItemComponent,
+} from '@carbon/angular/dropdown';
+
+@Component({
+  standalone: true,
+  imports: [DropdownComponent, DropdownItemComponent],
+  template: `
+    <cds-ng-dropdown titleText="Label" label="Choose an option">
+      <cds-ng-dropdown-item value="option-1">Option 1</cds-ng-dropdown-item>
+      <cds-ng-dropdown-item value="option-2">Option 2</cds-ng-dropdown-item>
+      <cds-ng-dropdown-item value="option-3">Option 3</cds-ng-dropdown-item>
+    </cds-ng-dropdown>
+  `,
+})
+export class MyComponent {}
+```
+
+Migrating from `carbon-components-angular`? See the
+[Migration guide](?path=/docs/introduction-migration--docs).
+
+<Canvas of={DropdownStories.Default} />
+
+### Inline Dropdown
+
+You can place a dropdown inline with other content by setting `type="inline"`.
+
+<Canvas of={DropdownStories.Inline} />
+
+### Skeleton state
+
+Use the `cds-ng-dropdown-skeleton` component to render a skeleton variant while
+dropdown content is loading.
+
+<Canvas of={DropdownStories.Skeleton} />
+
+### AI label
+
+<Canvas of={DropdownStories.WithAILabel} />
+
+### With Layer
+
+<Canvas of={DropdownStories.WithLayer} />
+
+## Component API
+
+<ArgTypes of={DropdownStories.Default} />
+
+### `direction`
+
+When a dropdown is near the bottom of a page, you may want to render the menu
+upward. Set `direction="top"` to open the list above the trigger.
+
+```html
+<cds-ng-dropdown direction="top" titleText="Label" label="Select an option">
+  <cds-ng-dropdown-item value="0">Option 1</cds-ng-dropdown-item>
+  <cds-ng-dropdown-item value="1">Option 2</cds-ng-dropdown-item>
+</cds-ng-dropdown>
+```
+
+### `value`
+
+If you want the dropdown to render with an option already selected without fully
+controlling the component, set `value` to the matching option value.
+
+```html
+<cds-ng-dropdown [value]="'option-1'" titleText="Label">
+  <cds-ng-dropdown-item value="option-1"
+    >Initially selected</cds-ng-dropdown-item
+  >
+  <cds-ng-dropdown-item value="option-2">Option 2</cds-ng-dropdown-item>
+</cds-ng-dropdown>
+```
+
+### `size`
+
+There are three sizes of dropdown available: `sm`, `md` (the default), and `lg`.
+
+```html
+<cds-ng-dropdown size="sm" titleText="Label" label="Small">
+  <cds-ng-dropdown-item value="option-1">Option 1</cds-ng-dropdown-item>
+</cds-ng-dropdown>
+<cds-ng-dropdown size="md" titleText="Label" label="Medium">
+  <cds-ng-dropdown-item value="option-1">Option 1</cds-ng-dropdown-item>
+</cds-ng-dropdown>
+<cds-ng-dropdown size="lg" titleText="Label" label="Large">
+  <cds-ng-dropdown-item value="option-1">Option 1</cds-ng-dropdown-item>
+</cds-ng-dropdown>
+```
+
+### `label`
+
+The placeholder text shown in the trigger button before any option is selected.
+
+```html
+<cds-ng-dropdown label="Choose an option" titleText="Label">
+  <cds-ng-dropdown-item value="option-1">Option 1</cds-ng-dropdown-item>
+</cds-ng-dropdown>
+```
+
+### `type`
+
+Use `type="inline"` to place the dropdown inline with surrounding content.
+
+```html
+<cds-ng-dropdown type="inline" titleText="Label" label="Inline">
+  <cds-ng-dropdown-item value="option-1">Option 1</cds-ng-dropdown-item>
+</cds-ng-dropdown>
+```
+
+### `(dropdownBeingSelected)`
+
+Emitted while the user is making a selection (before it is committed). The event
+payload is the native `CustomEvent`.
+
+```html
+<cds-ng-dropdown (dropdownBeingSelected)="handleBeingSelected($event)">
+  ...
+</cds-ng-dropdown>
+```
+
+### `(dropdownSelected)`
+
+Emitted after the user selects an option. The event payload is the native
+`CustomEvent`.
+
+```html
+<cds-ng-dropdown (dropdownSelected)="handleSelected($event)">
+  ...
+</cds-ng-dropdown>
+```
+
+## Angular-specific notes
+
+- Import `DropdownComponent` and `DropdownItemComponent` from
+  `@carbon/angular/dropdown`. Both must be in `imports`.
+- `DropdownComponent` implements `ControlValueAccessor`. Use `[(ngModel)]` or
+  `[formControl]` directly on `cds-ng-dropdown`.
+- For the skeleton state, also import `DropdownSkeletonComponent`.
+
+## References
+
+- [Carbon Usage Guidelines](https://www.carbondesignsystem.com/components/dropdown/usage/)
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/angular/src/stories/Dropdown/__stories__/Dropdown.mdx).

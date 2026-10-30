@@ -1,0 +1,139 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as AccordionStories from './Accordion.stories';
+
+<Meta of={AccordionStories} />
+
+# Accordion
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/angular/src/stories/Accordion)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/accordion/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/accordion/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Controlled](#controlled)
+- [Skeleton state](#skeleton-state)
+- [With Layer](#with-layer)
+- [Component API](#component-api)
+  - [`alignment`](#alignment)
+  - [`size`](#size)
+  - [`isFlush`](#isflush)
+  - [`disabled`](#disabled)
+- [Angular-specific notes](#angular-specific-notes)
+- [Feedback](#feedback)
+
+## Overview
+
+The accordion component delivers large amounts of content in a small space
+through progressive disclosure. The user gets key details about the underlying
+content and can choose to expand to view the full content. Each accordion item
+can be opened or closed independently.
+
+### Importing
+
+```ts
+import {
+  AccordionComponent,
+  AccordionItemComponent,
+} from '@carbon/angular/accordion';
+
+@Component({
+  standalone: true,
+  imports: [AccordionComponent, AccordionItemComponent],
+  template: `
+    <cds-ng-accordion size="md">
+      <cds-ng-accordion-item title="Choose your plan">
+        Compare plan features and select the option that best matches your
+        team's expected usage.
+      </cds-ng-accordion-item>
+      <cds-ng-accordion-item title="Add team members">
+        Invite collaborators by email and assign their workspace roles before
+        launch.
+      </cds-ng-accordion-item>
+    </cds-ng-accordion>
+  `,
+})
+export class MyComponent {}
+```
+
+Migrating from `carbon-components-angular`? See the
+[Migration guide](?path=/docs/introduction-migration--docs).
+
+<Canvas of={AccordionStories.Default} />
+
+## Controlled
+
+Use the `controlled` attribute on accordion items together with external buttons
+to expand or collapse all items programmatically.
+
+<Canvas of={AccordionStories.Controlled} />
+
+## Skeleton state
+
+Use the skeleton variant while accordion content is loading.
+
+<Canvas of={AccordionStories.Skeleton} />
+
+## With Layer
+
+<Canvas of={AccordionStories.WithLayer} />
+
+## Component API
+
+<ArgTypes of={AccordionStories.Default} />
+
+### `alignment`
+
+Controls whether the chevron and title align to the `start` (left) or `END`
+(right, default). `isFlush` does not apply when `alignment="start"`.
+
+```html
+<cds-ng-accordion alignment="start">…</cds-ng-accordion>
+<cds-ng-accordion alignment="END">…</cds-ng-accordion>
+```
+
+### `size`
+
+Controls the height of each accordion heading row. Accepted values are `sm`,
+`md` (default), and `lg`.
+
+```html
+<cds-ng-accordion size="sm">…</cds-ng-accordion>
+<cds-ng-accordion size="md">…</cds-ng-accordion>
+<cds-ng-accordion size="lg">…</cds-ng-accordion>
+```
+
+### `isFlush`
+
+When `true`, removes the side padding so the accordion sits flush with the
+container edge. Does not apply when `alignment="start"`.
+
+```html
+<cds-ng-accordion [isFlush]="true">…</cds-ng-accordion>
+```
+
+### `disabled`
+
+Disables all accordion items at once.
+
+```html
+<cds-ng-accordion [disabled]="true">…</cds-ng-accordion>
+```
+
+## Angular-specific notes
+
+- Import `AccordionComponent` **and** `AccordionItemComponent` — both must be in
+  `imports`. The item component provides the `cds-ng-accordion-item` selector.
+- Listen to `(accordionItemToggled)` on `cds-ng-accordion-item` for open/close
+  events. The payload is the native `CustomEvent`.
+- The `controlled` attribute on an item suppresses the built-in toggle so
+  external state can drive open/close via `[open]="isOpen"`.
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/angular/src/stories/Accordion/__stories__/Accordion.mdx).

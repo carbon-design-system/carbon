@@ -1,0 +1,22 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "outDir": "dist/spec",
+    "types": ["node", "jest"],
+    "paths": {
+      "@carbon/angular": ["./src/runtime/value-accessor.ts"],
+      "@carbon/angular/*": ["./.entries/*/index.ts"],
+      "#carbon-ng/*": ["./.entries/vendor/*"]
+    }
+  },
+  "angularCompilerOptions": {
+    "compilationMode": "full",
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  },
+  "include": ["src/**/*.ts", "jest.setup.ts"],
+  "exclude": ["node_modules", "esm2022", "fesm2022"]
+}
