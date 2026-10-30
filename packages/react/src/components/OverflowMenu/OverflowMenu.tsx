@@ -401,6 +401,16 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
       });
     }, [open, closeMenu, focusMenuEl]);
 
+    const closeMenuOnTab = useCallback(() => {
+      const wasClicked = click;
+      const wasOpen = open;
+      closeMenu(() => {
+        if (wasOpen && !wasClicked) {
+          focusMenuEl();
+        }
+      });
+    }, [click, open, closeMenu, focusMenuEl]);
+
     const handleClick = (evt: MouseEvent<HTMLButtonElement>) => {
       setClick(true);
       if (
@@ -425,12 +435,21 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
         evt.preventDefault();
       }
 
-      // Close the overflow menu on escape or tab.
-      if (keyCodeMatches(evt, [keys.Escape, keys.Tab])) {
+      // Close the overflow menu on escape.
+      if (keyCodeMatches(evt, [keys.Escape])) {
         closeMenuOnEscape();
 
         // Stop the esc keypress from bubbling out and closing something it shouldn't
         evt.stopPropagation();
+        evt.preventDefault();
+      }
+
+      // Close the overflow menu on tab. When the menu was opened via mouse
+      // click, allow natural tab flow instead of forcing focus back to this
+      // trigger (which would move focus away from the previously keyboard-
+      // focused element).
+      if (keyCodeMatches(evt, [keys.Tab])) {
+        closeMenuOnTab();
 
         // Stop the tab key from making the browser focus somewhere else.
         evt.preventDefault();
