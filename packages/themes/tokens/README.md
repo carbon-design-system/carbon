@@ -148,10 +148,12 @@ each level, so `syntax-heading` follows `syntax-heading-1` … `syntax-heading-6
 
 ## Tokens that are not in every theme
 
-A component token can be left out of a theme. `notification-action-hover`, for
-example, is only defined for `white` and `g10`, so the generated Sass map and
-JavaScript object for it only have those two themes. Theme tokens must be
-defined in all four themes.
+A component token can be left out of a theme, and the generated Sass map and
+JavaScript object for it then only have the themes that define it. Consumers
+reading such a token for a missing theme get `undefined` in JavaScript and
+`null` from `map.get` in Sass, so define every component token in all four
+themes unless the gap is intentional. Theme tokens must be defined in all four
+themes.
 
 ## The resolver file
 

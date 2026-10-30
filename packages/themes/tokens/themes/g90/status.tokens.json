@@ -11,10 +11,20 @@
     "$value": "{orange.40}",
     "$description": "Color for orange status indicators. Use for warning states, items needing attention, or moderate priority issues."
   },
+  "status-orange-outline": {
+    "$type": "color",
+    "$value": "{orange.40}",
+    "$description": "Outline/border color for orange status indicators. Darker than the fill in light themes so the indicator keeps enough contrast; matches the fill in dark themes."
+  },
   "status-yellow": {
     "$type": "color",
     "$value": "{yellow.30}",
     "$description": "Color for yellow status indicators. Use for caution states, pending items, or situations requiring user awareness."
+  },
+  "status-yellow-outline": {
+    "$type": "color",
+    "$value": "{yellow.30}",
+    "$description": "Outline/border color for yellow status indicators. Darker than the fill in light themes so the indicator keeps enough contrast; matches the fill in dark themes."
   },
   "status-purple": {
     "$type": "color",
