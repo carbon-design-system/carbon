@@ -24,6 +24,7 @@ const getDerivedStateFromProps = (props, prevState) => {
   );
   const hasSelectedRows = rowIds.some((id) => isSelectedRow(rowsById[id]));
   const state = {
+    headers: props.headers.map((header) => ({ ...header })),
     rowIds,
     rowsById,
     cellsById,
