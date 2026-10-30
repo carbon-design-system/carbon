@@ -756,6 +756,7 @@ export type { TileGroupProps } from './components/TileGroup/TileGroup';
 
 //time picker
 export type { TimePickerProps } from './components/TimePicker/TimePicker';
+export type { TimePickerSkeletonProps } from './components/TimePicker/TimePicker.Skeleton';
 
 //time picker select
 export type { TimePickerSelectProps } from './components/TimePickerSelect/TimePickerSelect';

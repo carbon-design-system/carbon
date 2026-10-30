@@ -27,6 +27,7 @@ import '../password-input/index';
 import '../textarea/index';
 import '../button/index';
 import '../date-picker/index';
+import '../time-picker/index';
 import '../dropdown/index';
 import '../multi-select/index';
 import '../combo-box/index';
@@ -352,6 +353,11 @@ const renderDefaultForm = (args) => {
             `)}
             ${row(html`
               ${col(
+                html`<cds-time-picker-skeleton></cds-time-picker-skeleton>`
+              )}
+            `)}
+            ${row(html`
+              ${col(
                 html`<cds-number-input-skeleton></cds-number-input-skeleton>`
               )}
               ${col(html`<cds-select-skeleton></cds-select-skeleton>`)}
@@ -519,6 +525,40 @@ const renderDefaultForm = (args) => {
                   ${decorator()} ${dateHelper('Final delivery date.')}
                 </cds-date-picker-input>
               </cds-date-picker>
+            `)}
+          `)}
+          ${row(html`
+            ${col(html`
+              <cds-time-picker
+                id="kickoff-time"
+                label-text="Kickoff time"
+                placeholder="hh:mm"
+                size="${ifDefined(listBoxSize)}"
+                ?disabled="${disabled}"
+                ?readonly="${readOnly}"
+                ?invalid="${invalid}"
+                invalid-text="${ifDefined(invalidText)}"
+                ?warning="${warn}"
+                warning-text="${ifDefined(warnText)}">
+                <cds-time-picker-select
+                  id="kickoff-time-period"
+                  default-value="AM"
+                  aria-label="AM or PM">
+                  <cds-select-item value="AM">AM</cds-select-item>
+                  <cds-select-item value="PM">PM</cds-select-item>
+                </cds-time-picker-select>
+                <cds-time-picker-select
+                  id="kickoff-time-zone"
+                  default-value="Time zone 1"
+                  aria-label="Time zone">
+                  <cds-select-item value="Time zone 1"
+                    >Time zone 1</cds-select-item
+                  >
+                  <cds-select-item value="Time zone 2"
+                    >Time zone 2</cds-select-item
+                  >
+                </cds-time-picker-select>
+              </cds-time-picker>
             `)}
           `)}
           ${row(html`

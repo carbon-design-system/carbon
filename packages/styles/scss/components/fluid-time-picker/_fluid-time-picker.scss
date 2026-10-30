@@ -8,7 +8,9 @@
 //-----------------------------
 // Fluid Time Picker
 //-----------------------------
+@use '../../border-radius' as *;
 @use '../../config' as *;
+@use '../../feature-flags' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
@@ -118,7 +120,8 @@
     padding-block-start: convert.to-rem(30px);
   }
 
-  .#{$prefix}--time-picker--fluid
+  .#{$prefix}--time-picker--fluid--invalid
+    .#{$prefix}--time-picker--fluid
     .#{$prefix}--select--fluid:last-of-type
     .#{$prefix}--select-input {
     border-inline-end: 2px solid transparent;
@@ -141,6 +144,19 @@
 
   .#{$prefix}--time-picker--fluid--warning {
     position: relative;
+
+    @if enabled('enable-v12-release') {
+      border: 1px solid transparent;
+      border-radius: $border-radius-04;
+      background:
+        linear-gradient($field, $field) padding-box,
+        linear-gradient(
+            to bottom,
+            $border-subtle calc(100% - 4px),
+            $border-strong 100%
+          )
+          border-box;
+    }
   }
 
   .#{$prefix}--time-picker__icon {
@@ -239,5 +255,53 @@
   .#{$prefix}--time-picker--fluid--skeleton.#{$prefix}--time-picker--equal-width
     > *:first-child {
     inline-size: 50%;
+  }
+
+  @if enabled('enable-v12-release') {
+    .#{$prefix}--time-picker--fluid--skeleton {
+      .#{$prefix}--text-input--fluid__skeleton,
+      .#{$prefix}--skeleton.#{$prefix}--list-box {
+        border: none;
+        border-radius: 0;
+      }
+
+      .#{$prefix}--list-box__wrapper--fluid
+        .#{$prefix}--skeleton.#{$prefix}--list-box {
+        border-inline-start: 1px solid $skeleton-element;
+      }
+    }
+
+    .#{$prefix}--time-picker__input--with-select .#{$prefix}--text-input {
+      border-end-end-radius: 0;
+      border-inline-end: none;
+      border-start-end-radius: 0;
+    }
+
+    .#{$prefix}--time-picker--fluid__wrapper
+      > .#{$prefix}--select--fluid:not(:last-of-type)
+      .#{$prefix}--select-input {
+      border-radius: 0;
+      border-inline-end: none;
+      border-inline-start: none;
+    }
+
+    .#{$prefix}--time-picker--fluid__wrapper
+      > .#{$prefix}--select--fluid:last-of-type
+      .#{$prefix}--select-input {
+      border-end-start-radius: 0;
+      border-inline-start: none;
+      border-start-start-radius: 0;
+    }
+
+    .#{$prefix}--time-picker--fluid--warning .#{$prefix}--text-input,
+    .#{$prefix}--time-picker--fluid--warning .#{$prefix}--select-input,
+    .#{$prefix}--time-picker--fluid--warning
+      .#{$prefix}--select-input__wrapper {
+      border: none;
+    }
+
+    .#{$prefix}--time-picker--fluid--warning .#{$prefix}--form-requirement {
+      border-radius: $border-radius-04;
+    }
   }
 }

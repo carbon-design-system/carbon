@@ -9,6 +9,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/fluid-time-picker/index' as
   fluid-time-picker;
 @use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/feature-flags' as flags;
 @use '@carbon/styles/scss/utilities/layout' as *;
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/spacing' as *;
@@ -195,4 +196,55 @@ $css--plex: true !default;
 
 :host(#{$prefix}-fluid-time-picker-skeleton) {
   display: block;
+}
+
+@if flags.enabled('enable-v12-release') {
+  // All skeleton children: zero border-radius and remove bottom border.
+  :host(#{$prefix}-fluid-time-picker-skeleton)
+    #{$prefix}-fluid-text-input-skeleton,
+  :host(#{$prefix}-fluid-time-picker-skeleton)
+    #{$prefix}-fluid-select-skeleton::part(skeleton) {
+    border: none;
+    border-radius: 0;
+  }
+
+  // Last select skeleton: add inline-start border as divider.
+  :host(#{$prefix}-fluid-time-picker-skeleton)
+    #{$prefix}-fluid-select-skeleton::part(skeleton) {
+    border-inline-start: 1px solid $skeleton-element;
+  }
+
+  // Input: zero the end-side radii and remove the inline-end border
+  // so it sits flush against the first select.
+  :host(#{$prefix}-fluid-time-picker)
+    .#{$prefix}--time-picker__input--with-select {
+    border-end-end-radius: 0;
+    border-inline-end: none;
+    border-start-end-radius: 0;
+  }
+
+  // Non-last fluid selects: scoped inside the select's own shadow root via
+  // :host so :last-of-type resolves correctly in the light DOM.
+  :host(#{$prefix}-fluid-time-picker-select:not(:last-of-type))
+    .#{$prefix}--select-input {
+    border-radius: 0;
+    border-inline-end: none;
+    border-inline-start: none;
+  }
+
+  // Last fluid select: only zero the start-side radii (left top + left bottom).
+  :host(#{$prefix}-fluid-time-picker-select:last-of-type)
+    .#{$prefix}--select-input {
+    border-end-start-radius: 0;
+    border-inline-start: none;
+    border-start-start-radius: 0;
+  }
+
+  // Invalid/warn: no border on the select-input.
+  :host(#{$prefix}-fluid-time-picker-select[data-fluid-time-picker-invalid])
+    .#{$prefix}--select-input,
+  :host(#{$prefix}-fluid-time-picker-select[data-fluid-time-picker-warn])
+    .#{$prefix}--select-input {
+    border: none;
+  }
 }
