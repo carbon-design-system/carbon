@@ -365,6 +365,7 @@ const ModalDialog = React.forwardRef(function ModalDialog(
   const focusTrapWithoutSentinels =
     focusTrapWithoutSentinelsFlag || deprecatedFlag;
   const enableDialogElement = useFeatureFlag('enable-dialog-element');
+  const enableV12Release = useFeatureFlag('enable-v12-release');
   warning(
     !(focusTrapWithoutSentinels && enableDialogElement),
     '`<Modal>` detected both `focusTrapWithoutSentinels` and ' +
@@ -717,6 +718,7 @@ const ModalDialog = React.forwardRef(function ModalDialog(
         onClick={onRequestClose}
         aria-label={closeButtonLabel}
         align="left"
+        size={enableV12Release ? 'md' : undefined}
         ref={button}>
         <Close
           size={20}
@@ -776,6 +778,7 @@ const ModalDialog = React.forwardRef(function ModalDialog(
             onClick={onRequestClose}
             aria-label={closeButtonLabel}
             align="left"
+            size={enableV12Release ? 'md' : undefined}
             ref={button}>
             <Close
               size={20}
