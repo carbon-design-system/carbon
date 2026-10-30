@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023, 2025
+ * Copyright IBM Corp. 2023, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -210,6 +210,36 @@ describe('MenuButton', () => {
       await userEvent.keyboard(' ');
       expect(screen.queryByRole('menu')).not.toBeInTheDocument();
       expect(input).toHaveFocus();
+    });
+
+    it('returns focus to the trigger when the menu was opened with a mouse click', async () => {
+      render(
+        <>
+          <button type="button">Focusable element</button>
+          <MenuButton label="Actions">
+            <MenuItem label="Action" />
+          </MenuButton>
+        </>
+      );
+
+      // Focus an element before the MenuButton.
+      const otherButton = screen.getByRole('button', {
+        name: 'Focusable element',
+      });
+      otherButton.focus();
+      expect(otherButton).toHaveFocus();
+
+      // Open the menu with a mouse click. Focus moves to the MenuItem.
+      const menuButton = screen.getByRole('button', { name: 'Actions' });
+      await userEvent.click(menuButton);
+      expect(screen.getByRole('menu')).toBeInTheDocument();
+      const menuItem = screen.getByRole('menuitem', { name: 'Action' });
+      expect(menuItem).toHaveFocus();
+
+      // Close the menu with Tab. Focus should move back to the MenuButton.
+      await userEvent.tab();
+      expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+      expect(menuButton).toHaveFocus();
     });
   });
 
