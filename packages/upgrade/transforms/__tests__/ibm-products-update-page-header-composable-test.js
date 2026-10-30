@@ -10,3 +10,9 @@
 const { defineTest } = require('jscodeshift/dist/testUtils');
 
 defineTest(__dirname, 'ibm-products-update-page-header-composable');
+defineTest(
+  __dirname,
+  'ibm-products-update-page-header-composable',
+  null,
+  'ibm-products-update-page-header-composable-aliased'
+);

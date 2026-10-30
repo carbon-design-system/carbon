@@ -104,8 +104,6 @@ export * from './components/OrderedList';
 export * from './components/OptionsTile';
 export * from './components/OverflowMenu';
 export * from './components/OverflowMenuItem';
-export * as unstable__PageHeader from './components/PageHeaderDeprecated';
-export * as preview__PageHeader from './components/PageHeaderDeprecated';
 export {
   PageHeader,
   PageHeaderBreadcrumbBar,

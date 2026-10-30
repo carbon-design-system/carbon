@@ -16,7 +16,7 @@ import { stackblitzPrefillConfig } from '../../../../previewer/codePreviewer';
   - [PageHeader.Content with hero image](#pageheadercontent-with-hero-image)
 - [PageHeader.TabBar](#pageheadertabbar)
   - [PageHeader.TabBar with Tags](#pageheadertabbar-with-tags)
-- [Migration guidance from deprecated PageHeader to preview_PageHeader](#migration-guidance-from-deprecated-pageheader-to-preview_pageheader)
+- [Migration guidance from the IBM Products PageHeader](#migration-guidance-from-the-ibm-products-pageheader)
 
 ## Overview
 
@@ -781,35 +781,36 @@ To include the scroller button to expand and collapse the header, pass
 </Tabs>
 ```
 
-## Migration guidance from deprecated PageHeader to preview_PageHeader
+## Migration guidance from the IBM Products PageHeader
 
-If you are currently using the deprecated `PageHeader`, a **codemod** is
-available to automate the migration to `preview__PageHeader`. Run the following
-command at the root of your project:
+If you are currently using the `PageHeader` from `@carbon/ibm-products`, a
+**codemod** is available to automate the migration to the `PageHeader` from
+`@carbon/react`. Run the following command at the root of your project:
 
 ```sh
 npx @carbon/upgrade migrate ibm-products-update-page-header-composable
 ```
 
 The codemod will rewrite your existing `<PageHeader>` usages to the new
-composable structure. After running the codemod, review the diff and manually
-correct any changes that the codemod could not handle automatically.
+composable structure and move the import to `@carbon/react`. After running the
+codemod, review the diff and manually correct any changes that the codemod could
+not handle automatically.
 
 ### Overview
 
-The original `PageHeader` was a single monolithic component driven entirely by
-props. `preview__PageHeader` replaces it with a **composable family** of
-sub-components so that every zone (breadcrumb bar, content area, tab bar) can be
-composed, extended, or omitted independently.
+The IBM Products `PageHeader` was a single monolithic component driven entirely
+by props. The `@carbon/react` `PageHeader` replaces it with a **composable
+family** of sub-components so that every zone (breadcrumb bar, content area, tab
+bar) can be composed, extended, or omitted independently.
 
 ### Import path
 
 ```tsx
-// Before — deprecated
+// Before — IBM Products
 import { PageHeader } from '@carbon/ibm-products';
 
-// After — composable preview
-import { preview__PageHeader as PageHeader } from '@carbon/ibm-products';
+// After — Carbon
+import { PageHeader } from '@carbon/react';
 ```
 
 All sub-components are accessed directly on the namespace object, e.g.
@@ -862,7 +863,7 @@ All sub-components are accessed directly on the namespace object, e.g.
 
 ### Side-by-side example
 
-#### Before (deprecated)
+#### Before (IBM Products)
 
 ```tsx
 import { PageHeader } from '@carbon/ibm-products';
@@ -903,11 +904,11 @@ import { PageHeader } from '@carbon/ibm-products';
 />;
 ```
 
-#### After (preview\_\_PageHeader)
+#### After (Carbon)
 
 ```tsx
-import { preview__PageHeader as PageHeader } from '@carbon/ibm-products';
 import {
+  PageHeader,
   Breadcrumb,
   BreadcrumbItem,
   Tabs,

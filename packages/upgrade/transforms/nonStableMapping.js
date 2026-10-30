@@ -9,7 +9,6 @@ exports.reactPreviewMap = {
   unstable_FeatureFlags: 'preview_FeatureFlags',
   unstable_useFeatureFlag: 'preview_useFeatureFlag',
   unstable_useFeatureFlags: 'preview_useFeatureFlags',
-  unstable__PageHeader: 'preview__PageHeader',
   unstable__FluidComboBox: 'preview__FluidComboBox',
   unstable__FluidComboBoxSkeleton: 'preview__FluidComboBoxSkeleton',
   unstable__FluidDatePicker: 'preview__FluidDatePicker',
