@@ -29,6 +29,7 @@ import { deprecate } from '../../prop-types/deprecate';
 import { FormContext } from '../FluidForm';
 import { noopFn } from '../../internal/noopFn';
 import { Tooltip } from '../Tooltip';
+import type { PopoverAlignment } from '../Popover';
 import { isSearchValuePresent } from './utils';
 import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
 
@@ -117,6 +118,12 @@ export interface SearchProps extends InputPropsBase {
   size?: 'xs' | 'sm' | 'md' | 'lg';
 
   /**
+   * Specify how the magnifier tooltip aligns with the trigger when the
+   * Search is expandable and collapsed (`ExpandableSearch`).
+   */
+  tooltipAlignment?: PopoverAlignment;
+
+  /**
    * Specify the type of the `<input>`
    */
   type?: string;
@@ -150,6 +157,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
       role,
       size,
       tabIndex,
+      tooltipAlignment = 'top',
       type = 'search',
       value,
       ...rest
@@ -285,7 +293,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
       onExpand && !isExpanded && !disabled ? (
         <Tooltip
           className={`${prefix}--search-tooltip ${prefix}--search-magnifier-tooltip ${prefix}--icon-tooltip`}
-          align="top"
+          align={tooltipAlignment}
           label="Search">
           {magnifierButton}
         </Tooltip>
@@ -439,6 +447,25 @@ Search.propTypes = {
    * Specify the size of the Search
    */
   size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
+
+  /**
+   * Specify how the magnifier tooltip aligns with the trigger when the
+   * Search is expandable and collapsed (`ExpandableSearch`).
+   */
+  tooltipAlignment: PropTypes.oneOf([
+    'top',
+    'top-start',
+    'top-end',
+    'bottom',
+    'bottom-start',
+    'bottom-end',
+    'left',
+    'left-start',
+    'left-end',
+    'right',
+    'right-start',
+    'right-end',
+  ]),
 
   /**
    * Specify the type of the `<input>`
