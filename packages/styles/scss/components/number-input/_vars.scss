@@ -1,0 +1,88 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Size-aware spacing shared by the `NumberInput` styles in `@carbon/styles`
+// and the `cds-number-input` web component.
+
+@use '../../spacing' as *;
+@use '../../utilities/convert';
+@use '../../utilities/layout';
+
+/// Size of the control button: 24px for `xs`, `sm`, and `md`, and 32px for `lg`.
+/// @access public
+/// @group number-input
+$number-input-control-btn-size: clamp(
+  $spacing-06,
+  layout.size('height') - $spacing-05,
+  $spacing-07
+);
+
+/// Space at the inline end of the controls: 0px for `xs`, 4px for `sm`, and 8px
+/// for `md` and `lg`.
+/// @access public
+/// @group number-input
+$number-input-controls-margin: clamp(
+  0rem,
+  layout.size('height') - convert.to-rem(28px),
+  $spacing-03
+);
+
+/// Space between the control buttons: 0 for `xs`, and 4px for `sm`, `md`, and
+/// `lg`.
+/// @access public
+/// @group number-input
+$number-input-controls-gap: clamp(
+  0rem,
+  layout.size('height') - convert.to-rem(28px),
+  $spacing-02
+);
+
+/// Full inline width the controls occupy: both buttons, the gap between them,
+/// and the margin at the inline end.
+/// @access public
+/// @group number-input
+$number-input-controls-width: calc(
+  2 * #{$number-input-control-btn-size} + #{$number-input-controls-gap} + #{$number-input-controls-margin}
+);
+
+/// Space between the invalid/warning icon and the rule divider beside it.
+/// Clamps to 8px ($spacing-03) for `xs` and `sm`, and 16px ($spacing-05) for
+/// `md` and `lg`.
+/// @access public
+/// @group number-input
+$number-input-icon-gap: clamp(
+  $spacing-03,
+  layout.size('height') - $spacing-06,
+  $spacing-05
+);
+
+/// Space between the AI label and each of the rule dividers surrounding it,
+/// 8px for `xs` and `sm` and 16px for `md`, + 1px to account for the divider itself
+/// @access public
+/// @group number-input
+$number-input-ai-label-gap: clamp(
+  convert.to-rem(9px),
+  layout.size('height') - $spacing-06 + convert.to-rem(1px),
+  convert.to-rem(17px)
+);
+
+/// The whole AI label cluster: a gap, the 16px icon, and another gap.
+/// @access public
+/// @group number-input
+$number-input-ai-label-cluster: calc(
+  2 * #{$number-input-ai-label-gap} + #{convert.to-rem(16px)}
+);
+
+/// Inline-end padding when one 16px adornment (invalid/warning icon or
+/// decorator) sits beside the controls: 8px clear of the adornment.
+/// @access public
+/// @group number-input
+$number-input-padding-end-with-icon-or-decorator: calc(
+  #{$number-input-controls-width} + #{layout.size('icon-gap')} + #{convert.to-rem(
+      16px
+    )} + #{$spacing-03}
+);
