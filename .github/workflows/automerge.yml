@@ -1,8 +1,12 @@
 # This workflow merges the main branch into the next (v12) branch every night to keep the branch up to date.
 #
-# Merges are pushed directly to `next` as a merge commit so commits from `main`
-# are preserved - no queue and no squash. The push is made with the Carbon
-# Automation app token, which is on the bypass list of the `next` branch ruleset.
+# main is merged into a local checkout of next without creating a commit. AVT
+# tests and ci-check then run on that merged tree. The merge commit is created
+# and pushed to next only when there are no conflicts and both checks pass.
+# Otherwise a draft PR is opened and next is left unchanged.
+#
+# The push is a merge commit made with the Carbon Automation app token, which
+# is on the bypass list of the next branch ruleset. No queue and no squash.
 name: Automerge
 
 on:
@@ -31,34 +35,117 @@ jobs:
           ref: next
           token: ${{ steps.generate_token.outputs.token }}
 
-      - name: Merge main into next
-        env:
-          GH_TOKEN: ${{ steps.generate_token.outputs.token }}
+      - name: Configure git
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
+      - name: Merge main into next
+        id: merge
+        run: |
           if git merge-base --is-ancestor origin/main HEAD; then
             echo "next already contains main; nothing to merge."
+            echo "status=up-to-date" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
-          if ! git merge origin/main --no-edit; then
-            echo "Merge conflict detected. Opening a draft PR from main into next."
+          # Stage the merge without committing. The commit and push happen
+          # only after AVT and ci-check pass on this merged tree.
+          if git merge origin/main --no-commit --no-ff; then
+            echo "status=merged" >> "$GITHUB_OUTPUT"
+          else
+            echo "Merge conflict detected."
             git merge --abort
+            echo "status=conflict" >> "$GITHUB_OUTPUT"
+          fi
 
-            # Open a PR only if one doesn't already exist
-            EXISTING_PR=$(gh pr list --base next --head main --state open --json number --jq '.[0].number')
-            if [ -n "$EXISTING_PR" ]; then
-              echo "PR #$EXISTING_PR already open for main -> next; skipping."
-            else
-              gh pr create \
-                --draft \
-                --base next \
-                --head main \
-                --title "chore: merge main into next" \
-                --body "$(cat <<'EOF'
-          An automatic merge of `main` into `next` resulted in a merge conflict.
+      - name: Use Node.js version from .nvmrc
+        if: steps.merge.outputs.status == 'merged'
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: '.nvmrc'
+
+      - name: Install dependencies
+        if: steps.merge.outputs.status == 'merged'
+        run: yarn install --immutable --check-cache
+
+      - name: Install browsers
+        if: steps.merge.outputs.status == 'merged'
+        run: yarn playwright install --with-deps
+
+      - name: Build project
+        if: steps.merge.outputs.status == 'merged'
+        run: yarn build
+
+      - name: Build storybook
+        if: steps.merge.outputs.status == 'merged'
+        run: yarn workspace @carbon/react storybook:build
+
+      - name: Run storybook
+        id: storybook
+        if: steps.merge.outputs.status == 'merged'
+        run: |
+          npx serve -l 3000 packages/react/storybook-static &
+          echo "pid=$!" >> "$GITHUB_OUTPUT"
+
+      - name: Wait for storybook
+        if: steps.merge.outputs.status == 'merged'
+        uses: ./actions/wait-for-it
+        with:
+          URL: 'http://localhost:3000'
+        timeout-minutes: 3
+
+      - name: Run AVT
+        id: avt
+        if: steps.merge.outputs.status == 'merged' && github.repository == 'carbon-design-system/carbon'
+        run: yarn playwright test --project chromium --grep @avt
+
+      - name: Stop storybook
+        if: always() && steps.storybook.outcome == 'success'
+        run: kill ${{ steps.storybook.outputs.pid }}
+
+      - name: Upload test results
+        if: always() && steps.merge.outputs.status == 'merged'
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: playwright-avt-report
+          path: .playwright
+
+      - name: Run Continuous Integration checks
+        id: ci_check
+        if: steps.merge.outputs.status == 'merged'
+        run: yarn ci-check
+
+      - name: Commit and push merge to next
+        if: steps.merge.outputs.status == 'merged' && steps.avt.outcome == 'success' && steps.ci_check.outcome == 'success'
+        run: |
+          # yarn install enables Husky. Skip it so lint-staged does not rewrite
+          # or reject the automation commit after the checks have already passed.
+          HUSKY=0 git commit -m "chore: merge main into next"
+          git push origin HEAD:next
+
+      - name: Open a draft PR for conflicts or failing checks
+        if: |
+          always() && (
+            steps.merge.outputs.status == 'conflict' ||
+            (steps.merge.outputs.status == 'merged' && steps.ci_check.outcome != 'success')
+          )
+        env:
+          GH_TOKEN: ${{ steps.generate_token.outputs.token }}
+        run: |
+          EXISTING_PR=$(gh pr list --base next --head main --state open --json number --jq '.[0].number')
+          if [ -n "$EXISTING_PR" ]; then
+            echo "PR #$EXISTING_PR already open for main -> next; skipping."
+            exit 1
+          fi
+
+          gh pr create \
+            --draft \
+            --base next \
+            --head main \
+            --title "chore: merge main into next" \
+            --body "$(cat <<'EOF'
+          An automatic merge of `main` into `next` resulted in a merge conflict or failing AVT tests or ci-check.
 
           **Do not merge this PR or add it to the merge queue.** The queue would squash the commits from `main`. This PR is a notification only and closes itself once `next` contains `main`.
 
@@ -68,13 +155,9 @@ jobs:
           git fetch upstream
           git switch -c sync/main-into-next upstream/next
           git merge upstream/main
-          # resolve conflicts, run `yarn install` to fix yarn.lock, then commit
+          # resolve any merge conflicts, fix the AVT tests and ci-check, then commit
           git push upstream sync/main-into-next:next
           ```
           EOF
-                )"
-            fi
-            exit 1
-          fi
-
-          git push origin HEAD:next
+            )"
+          exit 1
