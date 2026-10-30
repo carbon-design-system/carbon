@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { act, useState, useEffect } from 'react';
 import DataTable, {
   Table,
   TableHead,
@@ -291,6 +291,10 @@ describe('TableExpandHeader', () => {
       };
 
       render(<PaginationExample />);
+      // PaginationExample's useEffect calls setRows, which re-renders DataTable,
+      // which schedules another queueMicrotask. Drain two act() rounds to settle.
+      await act(async () => {});
+      await act(async () => {});
 
       await userEvent.click(screen.getByLabelText('Expand all rows'));
 
