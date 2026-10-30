@@ -6,9 +6,11 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useRef } from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
+import { useMergedRefs } from '../../internal/useMergedRefs';
 import { DefinitionTooltip } from '../Tooltip';
 import { PopoverAlignment } from '../Popover';
 import {
@@ -85,6 +87,13 @@ export interface IconIndicatorProps {
   label: string;
 
   /**
+   * Optionally specify a color for the label text. Accepts any valid CSS color
+   * value or design token, e.g. `"var(--cds-text-primary)"`. Defaults to
+   * `$text-secondary`. Has no effect when `compact` is true.
+   */
+  labelColor?: string;
+
+  /**
    * Specify the size of the Icon Indicator. Defaults to 16.
    */
   size?: 16 | 20;
@@ -100,14 +109,40 @@ export const IconIndicator = React.forwardRef(
       iconDescription,
       kind,
       label,
+      labelColor,
       size = 16,
     }: IconIndicatorProps,
     ref: React.Ref<HTMLDivElement>
   ) => {
     const prefix = usePrefix();
+    const localRef = useRef<HTMLDivElement>(null);
+    const mergedRef = useMergedRefs([localRef, ref]);
+
     const classNames = cx(`${prefix}--icon-indicator`, customClassName, {
       [`${prefix}--icon-indicator--20`]: size === 20,
     });
+
+    useIsomorphicEffect(() => {
+      const el = localRef.current;
+      if (!el) {
+        return;
+      }
+      if (labelColor && !compact) {
+        el.style.setProperty(
+          `--${prefix}-icon-indicator-label-color`,
+          labelColor
+        );
+      } else {
+        el.style.removeProperty(`--${prefix}-icon-indicator-label-color`);
+        if (process.env.NODE_ENV !== 'production' && labelColor && compact) {
+          // eslint-disable-next-line no-console
+          console.warn(
+            '[IconIndicator] The `labelColor` prop has no effect when `compact` is true ' +
+              'because the label is displayed inside a tooltip, not as visible text.'
+          );
+        }
+      }
+    }, [compact, labelColor, prefix]);
 
     const IconForKind = iconTypes[kind];
     if (!IconForKind) {
@@ -141,7 +176,7 @@ export const IconIndicator = React.forwardRef(
     );
 
     return (
-      <div className={classNames} ref={ref}>
+      <div className={classNames} ref={mergedRef}>
         {content}
       </div>
     );
@@ -198,6 +233,13 @@ IconIndicator.propTypes = {
    * Label next to the icon.
    */
   label: PropTypes.string.isRequired,
+
+  /**
+   * Optionally specify a color for the label text. Accepts any valid CSS color
+   * value or design token, e.g. `"var(--cds-text-primary)"`. Defaults to
+   * `$text-secondary`. Has no effect when `compact` is true.
+   */
+  labelColor: PropTypes.string,
 
   /**
    * Specify the size of the Icon Indicator. Defaults to 16.
