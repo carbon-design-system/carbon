@@ -10,10 +10,12 @@
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/border-radius' as *;
 @use '@carbon/styles/scss/layer' as *;
 @use '@carbon/styles/scss/type' as *;
 @use '@carbon/styles/scss/utilities/convert' as *;
 @use '@carbon/styles/scss/utilities/ai-gradient' as *;
+@use '@carbon/styles/scss/utilities/custom-property' as custom-property;
 @use '@carbon/styles/scss/components/modal' as *;
 @use '@carbon/styles/scss/components/button' as *;
 @use '@carbon/styles/scss/utilities/focus-outline' as *;
@@ -138,6 +140,20 @@
   box-shadow: inherit;
 }
 
+// Round the outer footer button corners in v12 to follow the container radius
+// (container radius minus its 1px border).
+// first-of-type gets the block-start-end (es) corner rounded,
+// last-of-type gets the block-end-end (ee) corner rounded.
+@if enabled('enable-v12-release') {
+  :host(#{$prefix}-modal-footer-button:first-of-type) {
+    @include radius($es: calc(#{$border-radius-08} - 1px));
+  }
+
+  :host(#{$prefix}-modal-footer-button:last-of-type) {
+    @include radius($ee: calc(#{$border-radius-08} - 1px));
+  }
+}
+
 :host(#{$prefix}-modal-footer-button) {
   .#{$prefix}--btn {
     block-size: 100%;
@@ -224,11 +240,26 @@
   inset-inline-end: 0;
 }
 
+// Close button geometry (v12): inset from the container edge and md size.
+// $spacing-05 = 16px inset, $spacing-08 = 40px (md) size, $spacing-03 = 8px gap.
+// v12 header-padding-end: 16 + 40 + 8 = 64px (== $spacing-09).
+// Non-v12 header-padding-end: $spacing-09 (48px).
+
 :host(#{$prefix}-modal-header[close-button]) ::slotted(#{$prefix}-ai-label),
 :host(#{$prefix}-modal-header[close-button]) ::slotted(#{$prefix}-slug) {
   position: absolute;
   inset-block-start: to-rem(10px);
-  inset-inline-end: to-rem(48px);
+  // Non-v12: same 48px as before (to-rem(48px) == $spacing-09)
+  inset-inline-end: $spacing-09;
+
+  @if enabled('enable-v12-release') {
+    // v12: inset(16px) + md size(40px) + gap(8px) = 64px
+    inset-block-start: custom-property.get-var(
+      'modal-decorator-offset',
+      to-rem(20px)
+    );
+    inset-inline-end: $spacing-05 + $spacing-08 + $spacing-03;
+  }
 }
 
 // `enable-dialog-element` feature flag styles

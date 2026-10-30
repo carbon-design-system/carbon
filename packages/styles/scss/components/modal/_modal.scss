@@ -17,6 +17,7 @@
 @use '../../utilities/ai-gradient' as *;
 @use '../../utilities/convert';
 @use '../../utilities/component-reset';
+@use '../../utilities/custom-property';
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/update_fields_on_layer' as *;
@@ -93,6 +94,10 @@
     outline-offset: -3px;
     transform-origin: top center;
 
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-08;
+    }
+
     @include breakpoint(md) {
       position: relative;
       inline-size: 84%;
@@ -158,14 +163,27 @@
   // -----------------------------
   // Modal header
   // -----------------------------
+  // Close button geometry (v12): inset from the container edge and md size
+  $close-button-inset: $spacing-05;
+  $close-button-size: $spacing-08;
+
+  // Space reserved at the end of the header for the absolutely positioned
+  // close button, also used as the end offset of the AI label and decorator.
+  // In v12: inset (16px) + md size (40px) + gap (8px)
+  $header-padding-end: $spacing-09;
+
+  @if enabled('enable-v12-release') {
+    $header-padding-end: $close-button-inset + $close-button-size + $spacing-03;
+  }
+
   .#{$prefix}--modal-header {
     grid-column: 1/-1;
     grid-row: 1/1;
-    margin-block-end: $spacing-03;
+    margin-block-end: $spacing-05;
     max-block-size: 50vh;
     overflow-y: auto;
     padding-block-start: $spacing-05;
-    padding-inline: $spacing-05 $spacing-09;
+    padding-inline: $spacing-05 $header-padding-end;
   }
 
   .#{$prefix}--modal-header__label {
@@ -182,7 +200,7 @@
 
     color: $text-primary;
     // padding should take into account the left and right padding of modal container
-    padding-inline-end: calc(20% - $spacing-09);
+    padding-inline-end: calc(20% - $header-padding-end);
   }
 
   // -----------------------------
@@ -316,6 +334,19 @@
     }
   }
 
+  // Round the outer footer corners so buttons follow the container radius
+  // (container radius minus its 1px border)
+  //todo:  this can be revisited when we do design intent for modal footer
+  @if enabled('enable-v12-release') {
+    .#{$prefix}--modal-footer .#{$prefix}--btn:first-child {
+      @include button.radius($es: calc(#{$border-radius-08} - 1px));
+    }
+
+    .#{$prefix}--modal-footer .#{$prefix}--btn:last-child {
+      @include button.radius($ee: calc(#{$border-radius-08} - 1px));
+    }
+  }
+
   .#{$prefix}--modal-footer .#{$prefix}--btn {
     flex: 0 1 50%;
     align-items: baseline;
@@ -343,7 +374,8 @@
     inset-inline-end: 0;
 
     @if enabled('enable-v12-release') {
-      @include button.radius($border-radius-00);
+      inset-block-start: $close-button-inset;
+      inset-inline-end: $close-button-inset;
     }
   }
 
@@ -355,6 +387,12 @@
     cursor: pointer;
     inline-size: 3rem;
     transition: background-color $duration-fast-02 motion(standard, productive);
+
+    @if enabled('enable-v12-release') {
+      padding: 0;
+      block-size: $spacing-08;
+      inline-size: $spacing-08;
+    }
 
     @media (any-hover: hover) {
       &:hover {
@@ -472,7 +510,16 @@
     > .#{$prefix}--slug {
     position: absolute;
     inset-block-start: convert.to-rem(10px);
-    inset-inline-end: convert.to-rem(48px);
+    inset-inline-end: $header-padding-end;
+
+    // 20px from the top; the end offset (above) leaves 8px before the 40px
+    // (md) close button in v12
+    @if enabled('enable-v12-release') {
+      inset-block-start: custom-property.get-var(
+        'modal-decorator-offset',
+        convert.to-rem(20px)
+      );
+    }
   }
 
   .#{$prefix}--modal-header
@@ -481,10 +528,61 @@
     inset-block-start: 1rem;
   }
 
+  // Custom decorators have an unknown height, so in v12 their center line is
+  // placed on the center of the md (40px) close button: offset + half the
+  // close button size, then shifted up by half of their own height
+  @if enabled('enable-v12-release') {
+    .#{$prefix}--modal-header
+      > .#{$prefix}--modal--inner__decorator:not(:has(.#{$prefix}--ai-label))
+      > *,
+    .#{$prefix}--modal--decorator
+      .#{$prefix}--modal-container-body
+      > .#{$prefix}--modal--inner__decorator:not(:has(.#{$prefix}--ai-label))
+      > * {
+      inset-block-start: calc(
+        #{custom-property.get-var(
+            'modal-decorator-offset',
+            $close-button-inset
+          )} +
+          #{$close-button-size *
+          0.5}
+      );
+      transform: translateY(-50%);
+    }
+  }
+
   .#{$prefix}--modal-header
     > .#{$prefix}--modal--inner__decorator:has(.#{$prefix}--ai-label--revert)
     > * {
     inset-block-start: 1.475rem;
+  }
+
+  // The revert AI label is shifted up by half its height (`translateY(-50%)`
+  // in the AI label styles), so `inset-block-start` is its center line. In v12
+  // that is the center of the md (40px) close button: offset + half the close
+  // button size
+  //
+  // Horizontally, the same transform also moves the 32px box 8px toward the
+  // close button, while the 16px icon sits 8px inside that box. The two 8px
+  // shifts cancel, so the icon keeps the same `inset-inline-end` (64px) as the
+  // plain AI label and no extra inline offset is needed.
+  @if enabled('enable-v12-release') {
+    .#{$prefix}--modal-header
+      > .#{$prefix}--modal--inner__decorator:has(.#{$prefix}--ai-label--revert)
+      > *,
+    .#{$prefix}--modal--decorator
+      .#{$prefix}--modal-container-body
+      > .#{$prefix}--modal--inner__decorator:has(.#{$prefix}--ai-label--revert)
+      > * {
+      inset-block-start: calc(
+        #{custom-property.get-var(
+            'modal-decorator-offset',
+            $close-button-inset
+          )} +
+          #{$close-button-size *
+          0.5}
+      );
+    }
   }
 
   .#{$prefix}--modal--decorator
