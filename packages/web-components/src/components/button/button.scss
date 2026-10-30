@@ -153,6 +153,12 @@ $css--plex: true !default;
 :host(#{$prefix}-side-panel-button-set) {
   @extend .#{$prefix}--btn-set;
 
+  // The slot is the flex container, so it fills the set for buttons to
+  // stretch as they do in React
+  .#{$prefix}--btn-set {
+    inline-size: 100%;
+  }
+
   ::slotted(#{$prefix}-button) {
     inline-size: 100%;
     // 196px from design kit
