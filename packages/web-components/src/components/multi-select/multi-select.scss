@@ -55,8 +55,11 @@ $css--plex: true !default;
     border: none;
     padding-inline-start: 0;
 
+    // Keep the outline transparent instead of `none`, which would set its
+    // color to `currentColor` and flash a dark outline as it transitions back
+    // when the input blurs
     &:focus {
-      outline: none;
+      @include focus-outline('reset');
     }
   }
 
