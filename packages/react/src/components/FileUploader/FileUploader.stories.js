@@ -54,7 +54,7 @@ const fileUploaderItemArgTypes = {
   },
   name: { control: 'text', description: 'Name of the uploaded file' },
   onDelete: { action: 'onDelete' },
-  size: { control: 'select', options: ['sm', 'md', 'lg'] },
+  size: { control: 'select', options: ['xs', 'sm', 'md', 'lg'] },
   status: {
     control: 'inline-radio',
     options: filenameStatuses,
@@ -85,7 +85,7 @@ const dropContainerArgTypes = {
   name: { control: 'text' },
   onAddFiles: { action: 'onAddFiles' },
   onClick: { action: 'onClick' },
-  size: { control: 'select', options: ['sm', 'md', 'lg'] },
+  size: { control: 'select', options: ['xs', 'sm', 'md', 'lg'] },
 };
 
 const fileUploaderArgs = {
@@ -132,7 +132,7 @@ const fileUploaderArgTypes = {
   onChange: { action: 'onChange' },
   onClick: { action: 'onClick' },
   onDelete: { action: 'onDelete' },
-  size: { control: 'select', options: ['sm', 'md', 'lg'] },
+  size: { control: 'select', options: ['xs', 'sm', 'md', 'lg'] },
 };
 
 export default {

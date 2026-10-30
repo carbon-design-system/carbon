@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -14,6 +14,23 @@ import { keys } from '../../../internal/keyboard';
 const statuses = ['uploading', 'edit', 'complete'];
 
 describe('FileUploaderItem', () => {
+  it('should apply xs size and invalid classes to an invalid file', () => {
+    const { container } = render(
+      <FileUploaderItem
+        name="test.png"
+        size="xs"
+        status="edit"
+        invalid
+        errorSubject="File exceeds size limit"
+      />
+    );
+
+    expect(container.firstChild).toHaveClass(
+      'cds--layout--size-xs',
+      'cds--file__selected-file--invalid'
+    );
+  });
+
   describe('automated accessibility tests', () => {
     it.each(statuses)(
       'should have no axe violations with status %s',

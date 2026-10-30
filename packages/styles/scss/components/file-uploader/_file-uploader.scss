@@ -16,11 +16,23 @@
 @use '../../utilities/convert';
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
+@use '../../utilities/layout';
 @use '../../utilities/visually-hidden' as *;
 
 @use '../button';
 @use '../form';
 @use '../loading';
+
+/// Gap between the filename row and the error message, also used as block
+/// padding on invalid file items.
+/// Resolves to 0px for `xs`, 4px for `sm`, 8px for `md`, and 12px for `lg`.
+/// @access private
+/// @group file-uploader
+$-file-row-gap: clamp(
+  0px,
+  (layout.size('height') - $spacing-06) / 2,
+  $spacing-04
+);
 
 /// File uploader styles
 /// @access public
@@ -28,6 +40,10 @@
 @mixin file-uploader {
   .#{$prefix}--file {
     inline-size: 100%;
+  }
+
+  .#{$prefix}--file-uploader-button {
+    @include layout.use('size', $default: 'md', $min: 'xs', $max: '2xl');
   }
 
   .#{$prefix}--file--invalid {
@@ -145,15 +161,18 @@
   }
 
   .#{$prefix}--file__selected-file {
+    @include layout.use('size', $default: 'lg', $min: 'xs', $max: 'lg');
+
     display: grid;
     align-items: center;
     background-color: $layer;
-    gap: convert.to-rem(12px) 0;
+    gap: $-file-row-gap 0;
     grid-auto-rows: auto;
     grid-template-columns: 1fr auto;
+    grid-template-rows: minmax($spacing-06, auto);
     margin-block-end: $spacing-03;
     max-inline-size: convert.to-rem(320px);
-    min-block-size: $spacing-09;
+    min-block-size: layout.size('height');
     word-break: break-word;
 
     &:last-child {
@@ -244,16 +263,6 @@
     }
   }
 
-  .#{$prefix}--file__selected-file--md {
-    gap: $spacing-03 0;
-    min-block-size: convert.to-rem(40px);
-  }
-
-  .#{$prefix}--file__selected-file--sm {
-    gap: $spacing-02 0;
-    min-block-size: convert.to-rem(32px);
-  }
-
   // TODO: deprecate this block
   .#{$prefix}--file__selected-file--invalid__wrapper {
     @include focus-outline('invalid');
@@ -272,30 +281,18 @@
   .#{$prefix}--file__selected-file--invalid {
     @include focus-outline('invalid');
 
-    padding: convert.to-rem(12px) 0;
-  }
-
-  .#{$prefix}--file__selected-file--invalid.#{$prefix}--file__selected-file--sm {
-    padding: $spacing-02 0;
-  }
-
-  .#{$prefix}--file__selected-file--invalid.#{$prefix}--file__selected-file--md {
-    padding: $spacing-03 0;
+    padding-block: $-file-row-gap;
+    padding-inline: 0;
   }
 
   .#{$prefix}--file__selected-file--invalid .#{$prefix}--form-requirement {
     border-block-start: 1px solid $border-subtle;
-    padding-block-start: $spacing-05;
-  }
-
-  .#{$prefix}--file__selected-file--invalid.#{$prefix}--file__selected-file--sm
-    .#{$prefix}--form-requirement {
-    padding-block-start: convert.to-rem(7px);
-  }
-
-  .#{$prefix}--file__selected-file--invalid.#{$prefix}--file__selected-file--md
-    .#{$prefix}--form-requirement {
-    padding-block-start: convert.to-rem(11px);
+    // Account for the 1px divider and preserve existing error spacing.
+    padding-block: max(
+        calc((layout.size('height') - $spacing-05) / 2 - 1px),
+        calc(layout.size('height') - $spacing-07)
+      )
+      max(0px, calc(($spacing-07 - layout.size('height')) / 2));
   }
 
   .#{$prefix}--file__selected-file--invalid
