@@ -1,0 +1,220 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Introduction/Migration" />
+
+# Migrating from `carbon-components-angular`
+
+> Already on `@carbon/angular`? Jump to the
+> **[Component stories](?path=/docs/components-button--docs)**.
+
+---
+
+## Migration path
+
+> **Status.** `@carbon/angular` does not ship a CCA-compatible layer or
+> convenience components. Migration is a single move from
+> `carbon-components-angular` to `@carbon/angular`, component by component. The
+> codemods named on this page are placeholders and **none is built**; the real
+> set is not settled. This page is incomplete and some `After` examples below
+> show intended shapes, not verified ones. Plan and open questions:
+> [`migration-support.md`](https://github.com/carbon-design-system/carbon/blob/main/packages/angular/docs/migration-support.md).
+
+Migration is not trivial. Several `carbon-components-angular` components take
+model objects or arrays (`TableModel`, `notificationObj`, `[items]`), and
+`@carbon/angular` uses flat inputs and projected children instead. The
+[Breaking changes](#breaking-changes) below list the known cases.
+
+```bash
+npm install @carbon/angular
+```
+
+```ts
+// Before
+import { ButtonModule } from 'carbon-components-angular';
+
+// After: one entry point per component family; the root entry exports nothing
+import { ButtonComponent } from '@carbon/angular/button';
+```
+
+Selectors change too: `<cds-modal>` becomes `<cds-ng-modal>`, and CCA's
+attribute directive `<button cdsButton>` becomes the element `<cds-ng-button>`.
+Install `@carbon/styles` as well, since the components read its `--cds-*`
+tokens. Angular 19 or later is required.
+
+---
+
+## What stays the same
+
+- **`[(ngModel)]` and `[formControl]`** — reactive and template-driven forms
+  work via `ControlValueAccessor` on the 28 form-associated components. Value
+  shapes can differ from CCA's, so check each one.
+- **`@carbon/styles`** — the stylesheet is added the same way.
+
+## What does not stay the same
+
+- **Shadow DOM.** Carbon renders inside shadow DOM, so global CSS overrides and
+  tests that select Carbon's internal classes stop working. This is the largest
+  cost of migrating.
+- **Selectors, imports and outputs.** See above and the breaking changes below.
+- **Services** such as `ModalService` and `NotificationService` have no
+  equivalent.
+
+---
+
+## Breaking changes
+
+These apply when moving from `carbon-components-angular` to `@carbon/angular`.
+
+> A full guide with Before / After / Why / Migration steps is planned at
+> `docs/guides/cca-to-angular.md`. It does not exist yet. Until it does, this
+> page is the reference.
+
+### `TableModel` / `TableHeaderItem` / `TableItem` removed
+
+The CCA model classes are removed, and there is no `[rows]` / `[columns]` input.
+Compose the table from `cds-ng-table-*` children instead.
+
+**Before:**
+
+```ts
+model = new TableModel();
+model.header = [new TableHeaderItem({ data: 'Name' })];
+model.data = [[new TableItem({ data: 'Alice' })]];
+```
+
+**After:**
+
+```html
+<cds-ng-table>
+  <cds-ng-table-head>
+    <cds-ng-table-header-row>
+      <cds-ng-table-header-cell>Name</cds-ng-table-header-cell>
+    </cds-ng-table-header-row>
+  </cds-ng-table-head>
+  <cds-ng-table-body>
+    <cds-ng-table-row>
+      <cds-ng-table-cell>Alice</cds-ng-table-cell>
+    </cds-ng-table-row>
+  </cds-ng-table-body>
+</cds-ng-table>
+```
+
+Not automatable. A codemod can report affected files; an agent skill is planned
+for the rewrite.
+
+---
+
+### `notificationObj` removed — use flat `@Input()`s
+
+**Before:**
+
+```ts
+notificationObj = {
+  title: 'Error',
+  subtitle: 'Something went wrong',
+  type: 'error',
+};
+```
+
+```html
+<cds-notification [notificationObj]="notificationObj"></cds-notification>
+```
+
+**After:** there are separate wrappers per notification type.
+
+```html
+<cds-ng-inline-notification
+  title="Error"
+  subtitle="Something went wrong"
+  kind="error"></cds-ng-inline-notification>
+```
+
+`cds-ng-toast-notification` and `cds-ng-actionable-notification` take the same
+flat inputs. A codemod for this is planned, not built.
+
+---
+
+### `PaginationModel` removed — use flat `@Input()`s
+
+**Before:**
+
+```ts
+paginationModel = new PaginationModel();
+paginationModel.totalDataLength = 100;
+paginationModel.pageLength = 10;
+```
+
+**After:**
+
+```html
+<cds-ng-pagination
+  [totalItems]="100"
+  [pageSize]="10"
+  [page]="1"
+  (paginationChangedCurrent)="onPage($event)"></cds-ng-pagination>
+```
+
+The output re-emits the web component's `CustomEvent` unchanged, so the event
+shape differs from CCA's. A codemod for the inputs is planned, not built.
+
+---
+
+### UI Shell: projected children replace array inputs
+
+`[navigationItems]`, `[menuItems]`, and `[headerItems]` array inputs are
+replaced with projected `<cds-ng-header-nav-item>` / `<cds-ng-side-nav-link>`
+children. This change cannot be automated.
+
+The generated wrappers expose `href`, `rel` and `target`. CCA's router inputs
+(`[route]`, `[routeExtras]`, `[useRouter]`) and the `(navigation)` output have
+no equivalent, and how to use `routerLink` with these elements is still an open
+question. A report-only codemod to find affected files is planned, not built.
+
+---
+
+### `[theme]` input removed
+
+The `[theme]` input has been removed from all components. Use CSS custom
+properties via `@carbon/styles` to control theming globally. A codemod to remove
+the bindings is planned, not built.
+
+---
+
+### `appendInline`, `dropUp`, `scrollableContainer` removed
+
+These positioning inputs have been removed. `@carbon/web-components` uses
+Floating UI for automatic placement — no replacement is needed.
+
+---
+
+## Codemods reference
+
+Placeholder names from an earlier plan. None is built and the final set is not
+settled. See
+[`migration-support.md`](https://github.com/carbon-design-system/carbon/blob/main/packages/angular/docs/migration-support.md).
+
+| Codemod                       | Type   | What it does                                                   |
+| ----------------------------- | ------ | -------------------------------------------------------------- |
+| `cca-report-imports`          | report | Lists all `carbon-components-angular` imports with equivalents |
+| `cca-update-module-imports`   | write  | Rewrites imports and module usage to `@carbon/angular`         |
+| `cca-remove-table-model`      | write  | Replaces `TableModel` with flat `[rows]` / `[columns]`         |
+| `cca-remove-notification-obj` | write  | Replaces `notificationObj` with flat inputs                    |
+| `cca-remove-pagination-model` | write  | Replaces `PaginationModel` with flat inputs                    |
+| `cca-remove-theme-input`      | write  | Removes `[theme]="theme"` bindings                             |
+| `cca-report-ui-shell-nav`     | report | Flags `[navigationItems]` / `[menuItems]` array bindings       |
+
+---
+
+## Running both libraries side by side
+
+`@carbon/angular` ships under `cds-ng-*` tags and can coexist with
+`carbon-components-angular` on the same page. A coexistence spike confirmed this
+for the Modal and Dropdown only; other components are untested (see
+[ADR 0020](../../../../docs/decisions/0020-angular-wholesale-cds-ng-prefix.md)):
+`cds-ng-modal` and `cds-ng-dropdown` rendered correctly alongside their CCA
+counterparts, with CCA's `(selected)` outputs and open/close behaviour
+unaffected.
+
+During an incremental migration you can render `<cds-ng-button>` next to CCA's
+`<cds-button>` in the same template — the registries are separate and neither
+library's elements interfere with the other's.

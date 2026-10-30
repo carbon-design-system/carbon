@@ -75,20 +75,20 @@ test.describe('@avt Breadcrumb', () => {
     await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');
     // Verify icon-description
-    await expect(page.getByText('Options')).toBeVisible();
+    await expect(page.getByText('Overflow menu in a breadcrumb')).toBeVisible();
 
     // Entering and navigating the options
     await page.keyboard.press('Enter');
     await expect(
-      page.locator('button', { hasText: 'Breadcrumb 3' })
+      page.getByRole('menuitem', { name: 'Breadcrumb 3' })
     ).toBeFocused();
     await page.keyboard.press('ArrowDown');
     await expect(
-      page.locator('button', { hasText: 'Breadcrumb 4' })
+      page.getByRole('menuitem', { name: 'Breadcrumb 4' })
     ).toBeFocused();
 
     await page.keyboard.press('Escape');
-    await expect(page.getByText('Options')).toBeVisible();
+    await expect(page.getByText('Overflow menu in a breadcrumb')).toBeVisible();
 
     await page.keyboard.press('Tab');
     await expect(page.getByText('Breadcrumb 5')).toBeVisible();

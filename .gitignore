@@ -10,6 +10,9 @@ umd
 css
 docs/generated
 
+# Angular
+/packages/angular/.angular/
+
 # Netlify deploy folder
 /demo/*
 !/demo/index.html

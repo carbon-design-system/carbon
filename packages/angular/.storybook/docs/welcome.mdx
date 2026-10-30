@@ -1,0 +1,92 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Introduction/Welcome" />
+
+# `@carbon/angular`
+
+Angular components for the
+[Carbon Design System](https://carbondesignsystem.com), built as thin wrappers
+over `@carbon/web-components`. Each component is registered under a `cds-ng-*`
+prefixed tag, and the wrapper's host element IS the web component (ADR 0020). A
+prefixed copy of `@carbon/web-components` is bundled, so there is nothing else
+to install or register.
+
+The `cds-ng-*` prefix means `@carbon/angular` can be loaded alongside
+`carbon-components-angular`, or a separately loaded `@carbon/web-components`, on
+the same page without tag-registry conflicts.
+
+## Install
+
+```bash
+npm install @carbon/angular @carbon/styles
+# or
+yarn add @carbon/angular @carbon/styles
+```
+
+`@carbon/styles` is a peer dependency. The components read `--cds-*` tokens and
+import no stylesheet, so without it they render unstyled. Angular 19 or later is
+required.
+
+## Basic usage
+
+Import from a **secondary entry point** — one per component family:
+
+**Standalone component (preferred):**
+
+```ts
+// my.component.ts
+import { Component } from '@angular/core';
+import { ButtonComponent } from '@carbon/angular/button';
+
+@Component({
+  selector: 'app-root',
+  standalone: true, // optional on Angular 19+, where it is the default
+  imports: [ButtonComponent],
+  template: `<cds-ng-button kind="primary" (click)="onClick($event)"
+    >Click me</cds-ng-button
+  >`,
+})
+export class AppComponent {
+  onClick(e: MouseEvent) {}
+}
+```
+
+**NgModule (also supported):** the components are standalone, so add them to an
+`NgModule`'s `imports` array. There are no `*Module` classes.
+
+```ts
+// app.module.ts
+import { NgModule } from '@angular/core';
+import { ButtonComponent } from '@carbon/angular/button';
+
+@NgModule({
+  imports: [ButtonComponent],
+})
+export class AppModule {}
+```
+
+```html
+<!-- app.component.html -->
+<cds-ng-button kind="primary" (click)="onClick($event)">Click me</cds-ng-button>
+```
+
+> **Note:** The primary `@carbon/angular` entry is side-effect free and does not
+> export components. Always import from a secondary entry such as
+> `@carbon/angular/button`, `@carbon/angular/modal`, etc.
+
+## Styles
+
+Add the Carbon stylesheet to your `angular.json` styles array:
+
+```json
+"styles": ["node_modules/@carbon/styles/css/styles.css"]
+```
+
+Components render inside shadow DOM. Global CSS selectors that target Carbon's
+internal classes do not reach them. Theme with the `--cds-*` custom properties
+instead.
+
+## Migrating from `carbon-components-angular`
+
+If you are migrating an existing `carbon-components-angular` application, see
+the **[Migration guide](?path=/docs/introduction-migration--docs)**.

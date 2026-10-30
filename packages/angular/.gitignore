@@ -1,0 +1,7 @@
+# Secondary-entry build root (tasks/build-entries)
+/.entries/
+
+# Storybook build and Playwright output
+/storybook-static/
+/test-results/
+/playwright-report/

@@ -125,4 +125,70 @@ describe('theme token files', () => {
       );
     }
   );
+
+  test('every theme defines its component tokens in the same order', () => {
+    const { theme, ...components } = files;
+
+    for (const themes of Object.values(components)) {
+      const all = Object.values(themes).map(getTokenNames);
+      const reference = Array.from(new Set(all.flat()));
+      // a theme may leave out a token, but keeps the order of the others
+      for (const names of all) {
+        expect(names).toEqual(reference.filter((name) => names.includes(name)));
+      }
+      expect(all[0]).toEqual(reference);
+    }
+  });
+
+  test('every theme lists the same contextual tokens', () => {
+    const [reference, ...others] = Object.values(files.theme).map((file) => {
+      return file.$extensions[EXTENSION_NAMESPACE].contextual;
+    });
+
+    expect(reference.length).toBeGreaterThan(0);
+    for (const other of others) {
+      expect(other).toEqual(reference);
+    }
+  });
+
+  test.each(Object.entries(files.theme))(
+    '%s token metadata is well formed',
+    (themeName, file) => {
+      const tokenNames = new Set(getTokenNames(file));
+      const contextual = file.$extensions[EXTENSION_NAMESPACE].contextual;
+
+      for (const name of contextual) {
+        expect(tokenNames.has(name)).toBe(false);
+      }
+
+      for (const [, token] of getTokens(file)) {
+        const metadata = token.$extensions?.[EXTENSION_NAMESPACE] ?? {};
+        const { group, properties, state, ...rest } = metadata;
+        delete rest['layer-set'];
+
+        expect(rest).toEqual({});
+        if (group !== undefined) {
+          expect(typeof group).toBe('string');
+        }
+        if (properties !== undefined) {
+          expect(properties.length).toBeGreaterThan(0);
+          for (const property of properties) {
+            expect(typeof property).toBe('string');
+          }
+        }
+        if (state !== undefined) {
+          expect([
+            'active',
+            'disabled',
+            'hover',
+            'selected',
+            'visited',
+          ]).toContain(state);
+        }
+        if (metadata['layer-set'] !== undefined) {
+          expect(['base', '01', '02', '03']).toContain(metadata['layer-set']);
+        }
+      }
+    }
+  );
 });

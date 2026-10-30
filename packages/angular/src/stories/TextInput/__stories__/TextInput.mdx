@@ -1,0 +1,201 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as TextInputStories from './TextInput.stories';
+
+<Meta of={TextInputStories} />
+
+# Text Input
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/angular/src/stories/TextInput)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/text-input/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/text-input/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Read Only](#read-only)
+- [Skeleton state](#skeleton-state)
+- [With AI Label](#with-ai-label)
+- [With Layer](#with-layer)
+- [Component API](#component-api)
+  - [`labelText`](#labeltext)
+  - [`size`](#size)
+  - [`type`](#type)
+  - [`placeholder`](#placeholder)
+  - [`invalid` and `invalidText`](#invalid-and-invalidtext)
+  - [`warn` and `warnText`](#warn-and-warntext)
+  - [`readonly`](#readonly)
+  - [`disabled`](#disabled)
+  - [`enableCounter` and `maxCount`](#enablecounter-and-maxcount)
+- [Angular-specific notes](#angular-specific-notes)
+- [Feedback](#feedback)
+
+## Overview
+
+The `cds-ng-text-input` component enables users to enter free-form text data.
+The type of text field used should reflect the length of the content you expect
+the user to enter. The default text input is for short, one-line content.
+
+### Importing
+
+```ts
+import { TextInputComponent } from '@carbon/angular/text-input';
+
+@Component({
+  standalone: true,
+  imports: [TextInputComponent],
+  template: `
+    <cds-ng-text-input
+      label="Label text"
+      placeholder="Placeholder text"
+      helperText="Helper text"></cds-ng-text-input>
+  `,
+})
+export class MyComponent {}
+```
+
+Migrating from `carbon-components-angular`? See the
+[Migration guide](?path=/docs/introduction-migration--docs).
+
+<Canvas of={TextInputStories.Default} />
+
+## Read Only
+
+Use `[readonly]="true"` to prevent the user from editing the field value while
+still displaying the current content.
+
+<Canvas of={TextInputStories.ReadOnly} />
+
+## Skeleton state
+
+Use `cds-ng-text-input-skeleton` to render a skeleton variant while the input's
+content or configuration is loading.
+
+<Canvas of={TextInputStories.Skeleton} />
+
+## With AI Label
+
+<Canvas of={TextInputStories.WithAILabel} />
+
+## With Layer
+
+<Canvas of={TextInputStories.WithLayer} />
+
+## Component API
+
+<ArgTypes of={TextInputStories.Default} />
+
+### `labelText`
+
+The visible label shown above the input field.
+
+```html
+<cds-ng-text-input label="First name"></cds-ng-text-input>
+```
+
+### `size`
+
+Controls the height of the input field. Accepted values are `xs`, `sm`, `md`
+(default), and `lg`.
+
+```html
+<cds-ng-text-input size="sm" label="Label"></cds-ng-text-input>
+<cds-ng-text-input size="md" label="Label"></cds-ng-text-input>
+<cds-ng-text-input size="lg" label="Label"></cds-ng-text-input>
+```
+
+### `type`
+
+Sets the native `<input>` type attribute. Defaults to `text`. Use `password` to
+mask characters, `email` to trigger email-specific keyboards, etc.
+
+```html
+<cds-ng-text-input type="password" label="Password"></cds-ng-text-input>
+```
+
+### `placeholder`
+
+Descriptive placeholder text shown when the field is empty.
+
+```html
+<cds-ng-text-input
+  placeholder="Enter your name"
+  label="Name"></cds-ng-text-input>
+```
+
+### `invalid` and `invalidText`
+
+Use `[invalid]="true"` together with `invalidText` to indicate a validation
+error below the input.
+
+```html
+<cds-ng-text-input
+  [invalid]="true"
+  invalidText="Please enter a valid email address"
+  label="Email"></cds-ng-text-input>
+```
+
+### `warn` and `warnText`
+
+Use `[warn]="true"` together with `warnText` to display a non-blocking warning
+message below the input.
+
+```html
+<cds-ng-text-input
+  [warn]="true"
+  warnText="This email is already registered."
+  label="Email"></cds-ng-text-input>
+```
+
+### `readonly`
+
+Prevents editing while displaying the current value.
+
+```html
+<cds-ng-text-input
+  [readonly]="true"
+  value="Read-only value"
+  label="Label"></cds-ng-text-input>
+```
+
+### `disabled`
+
+Prevents user interaction and renders the input in a visually muted state.
+
+```html
+<cds-ng-text-input [disabled]="true" label="Label"></cds-ng-text-input>
+```
+
+### `enableCounter` and `maxCount`
+
+Set `[enableCounter]="true"` and `[maxCount]="n"` to show a character count
+indicator inside the field.
+
+```html
+<cds-ng-text-input
+  [enableCounter]="true"
+  [maxCount]="100"
+  label="Bio"></cds-ng-text-input>
+```
+
+## Angular-specific notes
+
+- Import `TextInputComponent` from `@carbon/angular/text-input`.
+- `TextInputComponent` implements `ControlValueAccessor`. Use `[(ngModel)]` or
+  `[formControl]` directly on `cds-ng-text-input`.
+- For the skeleton state, also import `TextInputSkeletonComponent`.
+- Content projection is supported for the `label-text` and `helper-text` slots:
+
+```html
+<cds-ng-text-input>
+  <span slot="label-text">Custom <strong>label</strong></span>
+  <span slot="helper-text">Helper with a <a href="#">link</a></span>
+</cds-ng-text-input>
+```
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/angular/src/stories/TextInput/__stories__/TextInput.mdx).

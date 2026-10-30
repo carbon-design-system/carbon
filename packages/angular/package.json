@@ -1,0 +1,86 @@
+{
+  "name": "@carbon/angular",
+  "description": "Angular components for the Carbon Design System",
+  "version": "0.0.0-prerelease.0",
+  "type": "module",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "directory": "packages/angular"
+  },
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "keywords": [
+    "ibm",
+    "carbon",
+    "carbon-design-system",
+    "components",
+    "angular"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "directory": "dist"
+  },
+  "imports": {
+    "#carbon-ng/*": "./.entries/vendor/*"
+  },
+  "scripts": {
+    "build": "yarn build:entries && ng-packagr -p .entries/ng-package.json",
+    "build:entries": "node tasks/generate-wrappers/index.js && node tasks/build-entries/index.js",
+    "clean": "rimraf esm2022 fesm2022 dist .entries",
+    "e2e": "playwright test",
+    "generate:wrappers": "node tasks/generate-wrappers/index.js",
+    "playwright:install": "playwright install chromium",
+    "storybook": "yarn build:entries && ng run carbon-angular:storybook",
+    "storybook:build": "yarn build:entries && ng run carbon-angular:build-storybook",
+    "test": "jest --passWithNoTests",
+    "test:wc": "node tasks/wc-tests.js && web-test-runner"
+  },
+  "peerDependencies": {
+    "@angular/common": ">=19",
+    "@angular/core": ">=19",
+    "@angular/forms": ">=19",
+    "@carbon/styles": "^2.0.0-alpha.3"
+  },
+  "dependencies": {
+    "lit-html": "^3.3.0",
+    "tslib": "^2.6.3"
+  },
+  "devDependencies": {
+    "@angular-devkit/architect": "^0.1900.0",
+    "@angular-devkit/build-angular": "^19.0.0",
+    "@angular-devkit/core": "^19.0.0",
+    "@angular/animations": "^19.0.0",
+    "@angular/cli": "^19.0.0",
+    "@angular/common": "^19.0.0",
+    "@angular/compiler": "^19.0.0",
+    "@angular/compiler-cli": "^19.0.0",
+    "@angular/core": "^19.0.0",
+    "@angular/forms": "^19.0.0",
+    "@angular/platform-browser": "^19.0.0",
+    "@angular/platform-browser-dynamic": "^19.0.0",
+    "@carbon/styles": "workspace:^",
+    "@carbon/web-components": "workspace:^",
+    "@open-wc/testing": "^5.0.0",
+    "@playwright/test": "^1.36.2",
+    "@storybook/addon-docs": "10.3.5",
+    "@storybook/addon-links": "10.3.5",
+    "@storybook/angular": "10.3.5",
+    "@types/jest": "^30.0.0",
+    "@web/test-runner": "^0.20.0",
+    "@web/test-runner-commands": "^1.0.0",
+    "@web/test-runner-puppeteer": "^1.0.0",
+    "http-server": "^14.1.1",
+    "jest": "^30.0.0",
+    "jest-environment-jsdom": "^30.0.0",
+    "jest-preset-angular": "^16.0.0",
+    "ng-packagr": "^19.0.0",
+    "remark-gfm": "^4.0.0",
+    "rimraf": "^6.0.1",
+    "rxjs": "^7.4.0",
+    "storybook": "10.3.5",
+    "storybook-addon-accessibility-checker": "^9.2.0-rc.4",
+    "typescript": "~5.8.3",
+    "zone.js": "~0.15.0"
+  }
+}
