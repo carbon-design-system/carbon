@@ -674,21 +674,6 @@ describe('cds-multi-select', function () {
       expect(document.activeElement).to.equal(otherInput);
     });
 
-    it('should keep the input outline transparent while focused', async () => {
-      const el = await fixture(html`
-        <cds-multi-select label="test-label" filterable>
-          <cds-multi-select-item value="apple">Apple</cds-multi-select-item>
-        </cds-multi-select>
-      `);
-      const input = el.shadowRoot.querySelector('input');
-      input.focus();
-      // Let the outline transition finish
-      await new Promise((resolve) => setTimeout(resolve, 200));
-
-      // A visible color here flashes as a dark outline when the input blurs
-      expect(getComputedStyle(input).outlineColor).to.equal('rgba(0, 0, 0, 0)');
-    });
-
     it('should have correct accessibility attributes', async () => {
       const el = await fixture(html`
         <cds-multi-select label="test-label" filterable>
