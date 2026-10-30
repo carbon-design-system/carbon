@@ -11,7 +11,7 @@ import { state } from 'lit/decorators.js';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
 import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
 import ArrowRight16 from '@carbon/icons/es/arrow--right/16';
-import '@carbon/ibm-products-web-components/es/components/tearsheet-preview/index.js';
+import '@carbon/web-components/es/components/tearsheet/index.js';
 import './create-tearsheet-step';
 import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/text-input/index.js';
@@ -293,38 +293,38 @@ export class CreateTearsheetBase extends HostListenerMixin(LitElement) {
       </cds-button>
       ${this.open
         ? html`
-            <c4p-preview-tearsheet
+            <cds-tearsheet
               class="${blockClass}"
               open
               variant="wide"
               prevent-close-on-click-outside
-              @c4p-preview-tearsheet-closed=${this.resetTearsheetState}
+              @cds-tearsheet-closed=${this.resetTearsheetState}
             >
-              <c4p-tearsheet-header>
-                <c4p-tearsheet-header-content title="${this.tearsheetTitle}">
+              <cds-tearsheet-header>
+                <cds-tearsheet-header-content title="${this.tearsheetTitle}">
                   ${this.tearsheetLabel
                     ? html`<label slot="label">${this.tearsheetLabel}</label>`
                     : nothing}
-                  <div slot="description" style="margin-top: 8px;">
+                  <div slot="description">
                     ${this.tearsheetDescription}
                   </div>
-                </c4p-tearsheet-header-content>
-              </c4p-tearsheet-header>
+                </cds-tearsheet-header-content>
+              </cds-tearsheet-header>
 
               ${showInfluencer
                 ? html`
-                    <c4p-tearsheet-influencer
+                    <cds-tearsheet-influencer
                       ?influencer-panel-open=${this.influencerPanelOpen}
                       @cds-tearsheet-influencer-closed=${this.handleInfluencerPanelClose}
                     >
                       <div class="${blockClass}__influencer">
                         ${this.renderProgressIndicator()}
                       </div>
-                    </c4p-tearsheet-influencer>
+                    </cds-tearsheet-influencer>
                   `
                 : nothing}
 
-              <c4p-tearsheet-body>
+              <cds-tearsheet-body>
                 <div slot="main-content" class="${blockClass}__body">
                   <cds-button
                     size="sm"
@@ -337,10 +337,9 @@ export class CreateTearsheetBase extends HostListenerMixin(LitElement) {
                   </cds-button>
                   ${keyed(currentStepKey, this.renderStep(currentStepKey))}
                 </div>
-              </c4p-tearsheet-body>
+              </cds-tearsheet-body>
 
-              <c4p-tearsheet-footer
-                variant="wide"
+              <cds-tearsheet-footer
                 .actions=${[
                   {
                     kind: 'ghost',
@@ -356,7 +355,7 @@ export class CreateTearsheetBase extends HostListenerMixin(LitElement) {
                   {
                     kind: 'primary',
                     label: this.isSubmitting
-                      ? html`${isLastStep ? this.submitButtonText : this.nextButtonText} <cds-inline-loading></cds-inline-loading>`
+                      ? html`${isLastStep ? this.submitButtonText : this.nextButtonText}<cds-inline-loading slot="icon"></cds-inline-loading>`
                       : isLastStep ? this.submitButtonText : this.nextButtonText,
                     onClick: () =>
                       isLastStep
@@ -368,8 +367,8 @@ export class CreateTearsheetBase extends HostListenerMixin(LitElement) {
                   },
                 ]}
               >
-              </c4p-tearsheet-footer>
-            </c4p-preview-tearsheet>
+              </cds-tearsheet-footer>
+            </cds-tearsheet>
           `
         : nothing}
     `;

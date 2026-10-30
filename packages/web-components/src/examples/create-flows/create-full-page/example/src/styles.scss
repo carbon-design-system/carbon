@@ -38,8 +38,8 @@ $block-class: 'create-full-page-pattern';
 }
 
 .#{$story-class}__content-container--with-global-header {
-  block-size: calc(100% - $spacing-10); // Subtract header height
-  margin-block-start: $spacing-10; // Header height
+  block-size: calc(100% - $spacing-09); // Subtract header height
+  margin-block-start: $spacing-09; // Header height
 }
 
 .form-field-wrapper {
