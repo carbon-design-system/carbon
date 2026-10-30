@@ -25,8 +25,9 @@ export type SideNavMenuItemProps<E extends ElementType = 'a'> = LinkProps<E> & {
 
   /**
    * Optionally specify whether the link is "active". An active link is one that
-   * has an href that is the same as the current page. Can also pass in
-   * `aria-current="page"`, as well.
+   * has an href that is the same as the current page. When `true`, the link
+   * also receives `aria-current="page"` unless `aria-current` is passed
+   * explicitly.
    */
   isActive?: boolean;
 
@@ -61,6 +62,7 @@ const SideNavMenuItem = frFn((props, ref) => {
     className: customClassName,
     as: Component = Link,
     isActive,
+    'aria-current': ariaCurrent,
     ...rest
   } = props;
   const className = cx(`${prefix}--side-nav__menu-item`, customClassName);
@@ -75,6 +77,9 @@ const SideNavMenuItem = frFn((props, ref) => {
     <li className={className}>
       <ComponentAsElementType
         {...rest}
+        // `isActive` marks the current page visually; expose the same state to
+        // assistive technology unless the consumer set `aria-current` themselves.
+        aria-current={ariaCurrent ?? (isActive ? 'page' : undefined)}
         className={linkClassName}
         ref={ref as Ref<ElementType>}>
         <SideNavLinkText>{children}</SideNavLinkText>
@@ -107,8 +112,9 @@ SideNavMenuItem.propTypes = {
 
   /**
    * Optionally specify whether the link is "active". An active link is one that
-   * has an href that is the same as the current page. Can also pass in
-   * `aria-current="page"`, as well.
+   * has an href that is the same as the current page. When `true`, the link
+   * also receives `aria-current="page"` unless `aria-current` is passed
+   * explicitly.
    */
   isActive: PropTypes.bool,
 };

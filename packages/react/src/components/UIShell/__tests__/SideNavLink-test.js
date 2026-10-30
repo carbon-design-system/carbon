@@ -10,7 +10,7 @@ import React from 'react';
 import SideNavLink from '../SideNavLink';
 
 describe('SideNavLink', () => {
-  it('should set the current class when `isActive` is true', () => {
+  it('should set the current class and aria-current when `isActive` is true', () => {
     render(
       <SideNavLink href="/" isActive>
         test
@@ -19,6 +19,30 @@ describe('SideNavLink', () => {
     expect(screen.getByRole('link')).toHaveClass(
       'cds--side-nav__link--current'
     );
+    expect(screen.getByRole('link')).toHaveAttribute('aria-current', 'page');
+  });
+
+  it('should not set aria-current when `isActive` is not true', () => {
+    render(<SideNavLink href="/">test</SideNavLink>);
+    expect(screen.getByRole('link')).not.toHaveAttribute('aria-current');
+  });
+
+  it('should keep a consumer-provided `aria-current` when `isActive` is true', () => {
+    render(
+      <SideNavLink href="/" isActive aria-current="true">
+        test
+      </SideNavLink>
+    );
+    expect(screen.getByRole('link')).toHaveAttribute('aria-current', 'true');
+  });
+
+  it('should set aria-current on a button rendered through `as` when `isActive` is true', () => {
+    render(
+      <SideNavLink as="button" type="button" isActive>
+        test
+      </SideNavLink>
+    );
+    expect(screen.getByRole('button')).toHaveAttribute('aria-current', 'page');
   });
 
   it('should support a custom icon through `renderIcon`', () => {
