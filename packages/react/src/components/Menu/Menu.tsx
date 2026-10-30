@@ -202,9 +202,23 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   function handleOpen() {
     if (menu.current) {
       const { activeElement, dir } = document;
+      const containerElement =
+        containerRef?.current instanceof HTMLElement
+          ? containerRef.current
+          : null;
 
-      focusReturn.current =
-        activeElement instanceof HTMLElement ? activeElement : null;
+      const focusableSelector =
+        'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+      // Use containerElement directly if focusable (OverflowMenu passes the
+      // trigger button itself); otherwise find the first focusable descendant
+      // (MenuButton/ComboButton wrap their trigger inside a <div>).
+      const focusTarget = containerElement?.matches(focusableSelector)
+        ? containerElement
+        : (containerElement?.querySelector<HTMLElement>(focusableSelector) ??
+          (activeElement instanceof HTMLElement ? activeElement : null));
+
+      focusReturn.current = focusTarget;
 
       if (legacyAutoalign) {
         const pos = calculatePosition();
