@@ -629,13 +629,13 @@
     );
 
     @if enabled('enable-v12-release') {
-      // controls + gap + 16px decorator + gap, so the icon sits next to the
-      // decorator
+      // controls + gap + 16px decorator + the size-based gap, so the icon sits
+      // next to the decorator
       inset-inline-end: calc(
         #{$number-input-controls-width} +
           #{layout.size('icon-gap')} +
           #{convert.to-rem(16px)} +
-          #{layout.size('icon-gap')}
+          #{$number-input-decorator-icon-gap}
       );
     }
   }
@@ -703,8 +703,8 @@
       // present: 8px clear of the outermost icon.
       padding-inline-end: calc(
         #{$number-input-controls-width} +
-          2 *
           #{layout.size('icon-gap')} +
+          #{$number-input-decorator-icon-gap} +
           #{convert.to-rem(32px)} +
           #{$spacing-03}
       );
