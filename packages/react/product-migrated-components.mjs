@@ -69,6 +69,12 @@ export const productMigratedStoryGlobs = [
   '../src/examples/AddSelect/SingleAddSelect/SingleAddSelect.mdx',
   '../src/examples/AboutModal/AboutModal.stories.js',
   '../src/examples/AboutModal/AboutModal.mdx',
+  '../src/examples/Carousel/Carousel.stories.js',
+  '../src/examples/Carousel/Carousel.mdx',
+  '../src/examples/DateTimeFormat/DateTimeFormat.stories.js',
+  '../src/examples/DateTimeFormat/DateTimeFormat.mdx',
+  '../src/examples/makeDraggable/makeDraggable.stories.js',
+  '../src/examples/makeDraggable/makeDraggable.mdx',
 ];
 
 /**
