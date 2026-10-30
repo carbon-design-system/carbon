@@ -25,6 +25,7 @@ import React, {
   useMemo,
   useRef,
   useState,
+  type FocusEvent,
   type ForwardedRef,
   type KeyboardEvent,
   type MouseEvent,
@@ -495,6 +496,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
   }, [autoAlign, floatingStyles, refs.floating, middlewareData]);
 
   const textInput = useRef<HTMLInputElement>(null);
+  const clearInputButton = useRef<HTMLButtonElement | null>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const filterableMultiSelectInstanceId = useId();
 
@@ -951,7 +953,21 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
         }
       },
       onFocus: () => setInputFocused(true),
-      onBlur: () => {
+      onBlur: (
+        event: FocusEvent<HTMLInputElement> & {
+          preventDownshiftDefault: boolean;
+        }
+      ) => {
+        if (
+          clearInputButton.current !== null &&
+          event.relatedTarget === clearInputButton.current
+        ) {
+          // Focus moved to the clear input button, which is part of the
+          // field. Keep the focus styling, the filter value and the menu as
+          // they are so that the button survives long enough to be clicked.
+          event.preventDownshiftDefault = true;
+          return;
+        }
         setInputFocused(false);
         setInputValue('');
       },
@@ -1059,7 +1075,12 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
               translateWithId={translateWithId}
               readOnly={readOnly}
               onMouseDown={(event) => {
+                // Browsers disagree on whether a <button> takes focus on
+                // mousedown, so focus is moved explicitly to render the focus
+                // state on every platform.
                 event.preventDefault();
+                clearInputButton.current = event.currentTarget;
+                event.currentTarget.focus();
               }}
               onMouseUp={(event: MouseEvent) => {
                 // If we do not stop this event from propagating,
