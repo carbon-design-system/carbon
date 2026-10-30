@@ -23,6 +23,10 @@ jobs:
             name: Web Components
             destination: v12-web-components-storybook
             cname: v12-web-components.carbondesignsystem.com
+          - package: angular
+            name: Angular
+            destination: v12-angular-storybook
+            cname: v12-angular.carbondesignsystem.com
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -39,18 +43,19 @@ jobs:
       - name: Build static ${{ matrix.name }} v12 storybook
         run: |
           cd packages/${{ matrix.package }}
-          yarn storybook:v12:build
+          yarn ${{ matrix.package == 'angular' && 'storybook:build' || 'storybook:v12:build' }}
       - name: Prepare static output
         run: |
-          touch packages/${{ matrix.package }}/storybook-static-v12/.nojekyll
-          echo "${{ matrix.cname }}" > packages/${{ matrix.package }}/storybook-static-v12/CNAME
+          dir=${{ matrix.package == 'angular' && 'storybook-static' || 'storybook-static-v12' }}
+          touch packages/${{ matrix.package }}/$dir/.nojekyll
+          echo "${{ matrix.cname }}" > packages/${{ matrix.package }}/$dir/CNAME
       - name: Push ${{ matrix.name }} v12 storybook
         uses: cpina/github-action-push-to-another-repository@55306faa4ed53b815ae49e564af8cfb359d32ae2 # v1.7.3
         env:
           API_TOKEN_GITHUB: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         with:
-          source-directory:
-            'packages/${{ matrix.package }}/storybook-static-v12'
+          source-directory: >-
+            packages/${{ matrix.package }}/${{ matrix.package == 'angular' && 'storybook-static' || 'storybook-static-v12' }}
           destination-github-username: 'carbon-design-system'
           destination-repository-name: ${{ matrix.destination }}
           user-name: carbon-bot
