@@ -1,0 +1,47 @@
+/*
+* Copyright IBM Corp. 2025, 2026
+*
+* This source code is licensed under the Apache-2.0 license found in the
+* LICENSE file in the root directory of this source tree.
+*/
+
+$css--plex: true !default;
+
+/* Other Carbon settings. */
+@use 'sass:map';
+@use '@carbon/styles';
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type';
+
+$prefix: 'c4p';
+$carbon-prefix: 'cds';
+
+$block-class: #{$prefix}--create-modal;
+
+.#{$block-class} #{$carbon-prefix}-modal-close-button {
+  display: none;
+}
+
+.#{$block-class}__heading {
+  border-block-end: 1px solid $layer-accent-01;
+  margin-block-end: 0;
+  padding-block-end: $spacing-03;
+  padding-inline-end: 20%;
+}
+
+.#{$block-class}__subtitle {
+  @include type.type-style('body-compact-01');
+
+  color: $text-secondary;
+
+  margin-block-end: $spacing-03;
+}
+
+.#{$block-class}__description {
+  @include type.type-style('body-01');
+
+  margin: $spacing-03 0 $spacing-05 0;
+  padding-inline-end: calc(20% - #{$spacing-05});
+}
+
