@@ -51,6 +51,18 @@ describe('cds-multi-select', function () {
     expect(el.hasAttribute('open')).to.be.false;
   });
 
+  it('should render label element with id dropdown-label when title-text is provided', async () => {
+    const el = await fixture(html`
+      <cds-multi-select title-text="Test title" label="test-label">
+        <cds-multi-select-item value="item-0">Item 0</cds-multi-select-item>
+      </cds-multi-select>
+    `);
+
+    const label = el.shadowRoot.querySelector('label[part="title-text"]');
+    expect(label).to.exist;
+    expect(label.id).to.equal('dropdown-label');
+  });
+
   it('should open the menu when a user clicks on the trigger', async () => {
     const el = await fixture(multiSelect);
 
