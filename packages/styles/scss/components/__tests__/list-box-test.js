@@ -74,6 +74,24 @@ describe('scss/components/list-box', () => {
     expect(
       declarationsForSelector(
         css,
+        '.test .cds--list-box__selection:not(:disabled):hover'
+      )
+    ).toEqual({
+      'background-color':
+        'var(--cds-background-hover, rgba(141, 141, 141, 0.12))',
+    });
+    expect(
+      declarationsForSelector(
+        css,
+        '.test .cds--list-box__selection:not(:disabled):active'
+      )
+    ).toEqual({
+      'background-color':
+        'var(--cds-background-active, rgba(141, 141, 141, 0.5))',
+    });
+    expect(
+      declarationsForSelector(
+        css,
         '.test .cds--list-box__field .cds--text-input'
       )
     ).toEqual({

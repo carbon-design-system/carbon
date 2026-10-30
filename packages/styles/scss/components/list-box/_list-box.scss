@@ -177,6 +177,15 @@ $list-box-menu-width: convert.to-rem(300px);
     &::after {
       display: none;
     }
+
+    // Disabled and read-only clear buttons keep no hover or active state
+    &:not(:disabled):hover {
+      background-color: $background-hover;
+    }
+
+    &:not(:disabled):active {
+      background-color: $background-active;
+    }
   }
 
   #{$root}#{$with-status} .#{$prefix}--list-box__invalid-icon {
