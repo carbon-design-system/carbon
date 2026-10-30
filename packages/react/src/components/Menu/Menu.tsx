@@ -202,9 +202,14 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   function handleOpen() {
     if (menu.current) {
       const { activeElement, dir } = document;
+      const containerElement =
+        containerRef?.current instanceof HTMLElement
+          ? containerRef.current
+          : null;
 
       focusReturn.current =
-        activeElement instanceof HTMLElement ? activeElement : null;
+        containerElement ??
+        (activeElement instanceof HTMLElement ? activeElement : null);
 
       if (legacyAutoalign) {
         const pos = calculatePosition();
