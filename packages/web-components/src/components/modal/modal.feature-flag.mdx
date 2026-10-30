@@ -19,3 +19,32 @@ import '@carbon/web-components/es/components/modal/modal.js';
   </cds-modal>
 </feature-flags>
 ```
+
+## `enable-v12-release`
+
+`Modal` supports the `enable-v12-release` feature flag. When enabled, the
+following design intent changes are applied:
+
+- **Rounded corners** — the modal container gains a border-radius, and the outer
+  footer button corners are rounded to follow the container radius.
+- **Close button repositioned** — the close button moves from the top-right
+  corner (flush) to an inset position (`16px` from the top and inline-end edges)
+  and uses the `md` (40×40 px) size instead of `lg`.
+- **AI label / decorator repositioned** — the decorator is shifted to align
+  vertically with the center of the repositioned close button.
+
+```
+import '@carbon/web-components/es/components/feature-flags/feature-flags.js';
+import '@carbon/web-components/es/components/modal/modal.js';
+
+<feature-flags enable-v12-release>
+  <cds-modal open>
+    <cds-modal-header>
+      <cds-modal-close-button></cds-modal-close-button>
+      <cds-modal-heading>Modal heading</cds-modal-heading>
+    </cds-modal-header>
+    <cds-modal-body> ... </cds-modal-body>
+    <cds-modal-footer> ... </cds-modal-footer>
+  </cds-modal>
+</feature-flags>
+```
