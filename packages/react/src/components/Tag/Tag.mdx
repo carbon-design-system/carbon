@@ -123,15 +123,15 @@ return (
           type={tag.type}
           className="some-class"
           renderIcon={Asleep}
-          text={tag.text}
           tagTitle={tag.tagTitle}
           title="Dismiss"
           onClose={(e) => {
             e.preventDefault();
             handleClose(tag);
           }}
-          {...args}
-        />
+          {...args}>
+          {tag.text}
+        </DismissibleTag>
       ))}
     </div>
   </>

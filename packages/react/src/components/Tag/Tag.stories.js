@@ -213,7 +213,9 @@ export const withAILabel = (args) => {
         className="some-class"
         type="purple"
         title="Clear Filter"
-        {...args}></DismissibleTag>
+        {...args}>
+        {args.text}
+      </DismissibleTag>
 
       <Tag
         renderIcon={Asleep}
@@ -231,7 +233,9 @@ export const withAILabel = (args) => {
         className="some-class"
         type="green"
         title="Clear Filter"
-        {...args}></DismissibleTag>
+        {...args}>
+        {args.text}
+      </DismissibleTag>
     </div>
   );
 };
