@@ -1,0 +1,173 @@
+name: Publish icons and pictograms to COS
+
+on:
+  # called by `release.yml` only after package is actually published
+  workflow_call:
+    secrets:
+      COMMON_COS_BUCKET:
+        required: true
+      COMMON_COS_ENDPOINT:
+        required: true
+      COMMON_COS_ACCESS_KEY_ID:
+        required: true
+      COMMON_COS_SECRET_ACCESS_KEY:
+        required: true
+      COMMON_COS_REGION:
+        required: true
+  # manual republish, must be dispatched from a release tag
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-assets-cdn
+
+jobs:
+  publish:
+    # only publish released code, either from release or manual dispatch from tag
+    if: startsWith(github.ref, 'refs/tags/v') && !contains(github.ref_name, '-')
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      COS_BUCKET: ${{ secrets.COMMON_COS_BUCKET }}
+      COS_ENDPOINT_HOST: ${{ secrets.COMMON_COS_ENDPOINT }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Use Node.js version from .nvmrc
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: '.nvmrc'
+
+      - name: Verify publishing configuration
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.COMMON_COS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.COMMON_COS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ secrets.COMMON_COS_REGION }}
+        run: |
+          aws --version
+          test -n "${AWS_ACCESS_KEY_ID}"
+          test -n "${AWS_SECRET_ACCESS_KEY}"
+          test -n "${AWS_DEFAULT_REGION}"
+          test -n "${COS_BUCKET}"
+          test -n "${COS_ENDPOINT_HOST}"
+
+      - name: Install dependencies
+        env:
+          YARN_ENABLE_HARDENED_MODE: 0
+        run: yarn install --immutable
+
+      - name: Build icons and pictograms
+        run: |
+          yarn lerna run build \
+            --scope='@carbon/icons' \
+            --scope='@carbon/pictograms' \
+            --include-dependencies \
+            --stream
+
+      - name: Verify generated SVGs
+        run: |
+          test -n "$(find packages/icons/svg -type f -name '*.svg' -print -quit)"
+          test -n "$(find packages/pictograms/svg -type f -name '*.svg' -print -quit)"
+
+      - name: Get release and package versions
+        id: versions
+        run: |
+          carbon_version="${GITHUB_REF_NAME#v}"
+          icons_version=$(node -p "require('./packages/icons/package.json').version")
+          pictograms_version=$(node -p "require('./packages/pictograms/package.json').version")
+
+          echo "carbon_major=${carbon_version%%.*}" >> "${GITHUB_OUTPUT}"
+          echo "icons_version=${icons_version}" >> "${GITHUB_OUTPUT}"
+          echo "pictograms_version=${pictograms_version}" >> "${GITHUB_OUTPUT}"
+
+      # Upload icons to the `latest` tag folder
+      # ie. https://ibm-dotcom-common.s3.us.cloud-object-storage.appdomain.cloud/common/carbon/icons/tag/v11/latest/16/apps.svg
+      - name: Upload icons to latest
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.COMMON_COS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.COMMON_COS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ secrets.COMMON_COS_REGION }}
+          AWS_EC2_METADATA_DISABLED: true
+        run: |
+          aws s3 sync \
+            packages/icons/svg \
+            "s3://${COS_BUCKET}/common/carbon/icons/tag/v${{ steps.versions.outputs.carbon_major }}/latest" \
+            --endpoint-url "https://${COS_ENDPOINT_HOST}" \
+            --no-progress \
+            --cache-control 'public,max-age=3600' \
+            --content-type 'image/svg+xml'
+
+      # Upload icons to a versioned folder
+      # ie. https://ibm-dotcom-common.s3.us.cloud-object-storage.appdomain.cloud/common/carbon/icons/version/v11.89.0/16/apps.svg
+      - name: Upload versioned icons
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.COMMON_COS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.COMMON_COS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ secrets.COMMON_COS_REGION }}
+          AWS_EC2_METADATA_DISABLED: true
+        run: |
+          aws s3 sync \
+            packages/icons/svg \
+            "s3://${COS_BUCKET}/common/carbon/icons/version/v${{ steps.versions.outputs.icons_version }}" \
+            --endpoint-url "https://${COS_ENDPOINT_HOST}" \
+            --no-progress \
+            --cache-control 'public,max-age=3600' \
+            --content-type 'image/svg+xml'
+
+      # Upload pictograms to the `latest` tag folder
+      # ie. https://ibm-dotcom-common.s3.us.cloud-object-storage.appdomain.cloud/common/carbon/pictograms/tag/v11/latest/accessibility.svg
+      - name: Upload pictograms to latest
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.COMMON_COS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.COMMON_COS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ secrets.COMMON_COS_REGION }}
+          AWS_EC2_METADATA_DISABLED: true
+        run: |
+          aws s3 sync \
+            packages/pictograms/svg \
+            "s3://${COS_BUCKET}/common/carbon/pictograms/tag/v${{ steps.versions.outputs.carbon_major }}/latest" \
+            --endpoint-url "https://${COS_ENDPOINT_HOST}" \
+            --no-progress \
+            --cache-control 'public,max-age=3600' \
+            --content-type 'image/svg+xml'
+
+      # Upload pictograms to a versioned folder
+      # ie. https://ibm-dotcom-common.s3.us.cloud-object-storage.appdomain.cloud/common/carbon/pictograms/version/v12.85.0/accessibility.svg
+      - name: Upload versioned pictograms
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.COMMON_COS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.COMMON_COS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ secrets.COMMON_COS_REGION }}
+          AWS_EC2_METADATA_DISABLED: true
+        run: |
+          aws s3 sync \
+            packages/pictograms/svg \
+            "s3://${COS_BUCKET}/common/carbon/pictograms/version/v${{ steps.versions.outputs.pictograms_version }}" \
+            --endpoint-url "https://${COS_ENDPOINT_HOST}" \
+            --no-progress \
+            --cache-control 'public,max-age=3600' \
+            --content-type 'image/svg+xml'
+
+      - name: Verify public URLs and CORS
+        env:
+          CARBON_MAJOR: ${{ steps.versions.outputs.carbon_major }}
+          ICONS_VERSION: ${{ steps.versions.outputs.icons_version }}
+          PICTOGRAMS_VERSION: ${{ steps.versions.outputs.pictograms_version }}
+        run: |
+          base_url="https://${COS_BUCKET}.${COS_ENDPOINT_HOST}"
+          urls=(
+            "${base_url}/common/carbon/icons/tag/v${CARBON_MAJOR}/latest/16/apps.svg"
+            "${base_url}/common/carbon/icons/version/v${ICONS_VERSION}/16/apps.svg"
+            "${base_url}/common/carbon/pictograms/tag/v${CARBON_MAJOR}/latest/accessibility.svg"
+            "${base_url}/common/carbon/pictograms/version/v${PICTOGRAMS_VERSION}/accessibility.svg"
+          )
+
+          for url in "${urls[@]}"; do
+            headers=$(curl --fail --silent --show-error --head \
+              -H 'Origin: https://example.com' \
+              "${url}")
+
+            grep -qi '^access-control-allow-origin: \*' <<< "${headers}"
+          done
