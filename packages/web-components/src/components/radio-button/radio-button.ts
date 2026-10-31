@@ -487,7 +487,6 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
         .checked=${checked}
         ?disabled="${disabledItem || disabled}"
         ?required=${this.required}
-        aria-readonly="${String(readOnly)}"
         name=${ifDefined(name)}
         value=${ifDefined(value)} />
       <label

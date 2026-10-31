@@ -183,6 +183,92 @@ describe('cds-radio-button-group', () => {
     expect(rb1?.checked).to.be.false;
     expect(rb2?.checked).to.be.true;
   });
+  describe('aria-readonly', () => {
+    const getInputs = (el) =>
+      Array.from(el.querySelectorAll('cds-radio-button')).map((rb) =>
+        rb.shadowRoot.querySelector('input[type="radio"]')
+      );
+
+    [
+      ['default', false, false],
+      ['readonly', true, false],
+      ['disabled', false, true],
+    ].forEach(([state, readonly, disabled]) => {
+      it(`should not set aria-readonly on the <fieldset> or inputs when ${state}`, async () => {
+        const el = await fixture(html`
+          <cds-radio-button-group
+            legend-text="Group"
+            name="test"
+            value="test-1"
+            ?readonly=${readonly}
+            ?disabled=${disabled}>
+            <cds-radio-button
+              label-text="One"
+              value="test-1"></cds-radio-button>
+            <cds-radio-button
+              label-text="Two"
+              value="test-2"></cds-radio-button>
+            <cds-radio-button
+              label-text="Three"
+              value="test-3"
+              disabled></cds-radio-button>
+          </cds-radio-button-group>
+        `);
+        const fieldset = el.shadowRoot.querySelector('fieldset');
+        const inputs = getInputs(el);
+
+        expect(fieldset.getAttribute('aria-readonly')).to.be.null;
+        expect(inputs).to.have.length(3);
+        inputs.forEach(
+          (input) => expect(input.getAttribute('aria-readonly')).to.be.null
+        );
+        expect(inputs.map((input) => input.checked)).to.deep.equal([
+          true,
+          false,
+          false,
+        ]);
+        await expect(el).to.be.accessible();
+      });
+    });
+
+    it('should keep the readonly class on the <fieldset>', async () => {
+      const el = await fixture(html`
+        <cds-radio-button-group readonly>
+          <cds-radio-button value="test-1"></cds-radio-button>
+        </cds-radio-button-group>
+      `);
+      const fieldset = el.shadowRoot.querySelector('fieldset');
+
+      expect(fieldset.classList.contains('cds--radio-button-group--readonly'))
+        .to.be.true;
+    });
+
+    it('should move the selection with arrow keys', async () => {
+      const el = await fixture(html`
+        <cds-radio-button-group name="keyboard-navigation" value="test-1">
+          <cds-radio-button value="test-1"></cds-radio-button>
+          <cds-radio-button value="test-2"></cds-radio-button>
+        </cds-radio-button-group>
+      `);
+      const [rb1, rb2] = el.querySelectorAll('cds-radio-button');
+
+      rb1.dispatchEvent(
+        new KeyboardEvent('keydown', {
+          key: 'ArrowRight',
+          bubbles: true,
+          composed: true,
+        })
+      );
+      await el.updateComplete;
+
+      expect(rb1.checked).to.be.false;
+      expect(rb2.checked).to.be.true;
+      expect(getInputs(el).map((input) => input.tabIndex)).to.deep.equal([
+        -1, 0,
+      ]);
+    });
+  });
+
   describe('Invalid and Warning States', () => {
     it('should show invalid message when invalid prop is true', async () => {
       const el = await fixture(html`
