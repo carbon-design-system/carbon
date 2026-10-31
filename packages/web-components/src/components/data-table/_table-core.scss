@@ -585,3 +585,17 @@
     max-inline-size: 80ch;
   }
 }
+
+//
+// Table skeleton
+//
+
+:host(#{$prefix}-table-skeleton) {
+  @include emit-layout-tokens();
+}
+
+// `cds-table-skeleton` renders a native table in its shadow root, which the
+// global reset doesn't reach, so clear the browser's default cell padding
+:host(#{$prefix}-table-skeleton) .#{$prefix}--data-table th {
+  padding-block: 0;
+}
