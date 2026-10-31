@@ -290,6 +290,25 @@ describe('cds-tabs', function () {
     expect(tabLink(tabs[1]).getAttribute('tabindex')).to.equal('-1');
   });
 
+  it('should set role="presentation" on cds-tab host and role="tab" on inner <a>', async () => {
+    const el = await fixture(html`
+      <cds-tabs>
+        <cds-tab value="tab-1" target="p-1">First</cds-tab>
+        <cds-tab value="tab-2" target="p-2">Second</cds-tab>
+        <cds-tab value="tab-3" target="p-3">Third</cds-tab>
+      </cds-tabs>
+    `);
+
+    await el.updateComplete;
+    const tabs = el.querySelectorAll('cds-tab');
+    await Promise.all(Array.from(tabs, (tab) => tab.updateComplete));
+
+    tabs.forEach((tab) => {
+      expect(tab.getAttribute('role')).to.equal('presentation');
+      expect(tabLink(tab).getAttribute('role')).to.equal('tab');
+    });
+  });
+
   it('should apply divider hiding on mount', async () => {
     const el = await fixture(html`
       <cds-tabs value="tab-1">

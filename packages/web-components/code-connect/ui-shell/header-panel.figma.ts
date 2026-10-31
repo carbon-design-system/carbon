@@ -1,3 +1,7 @@
+// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=2319-15100&t=wcK3P98b09VsrxXF-4
+// source=https://github.com/carbon-design-system/carbon/blob/main/packages/web-components/src/components/ui-shell/header-panel.ts
+// component=cds-header-panel
+
 /**
  * Copyright IBM Corp. 2026
  *
@@ -5,22 +9,21 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import figma, { html } from '@figma/code-connect/html';
+import figma from 'figma';
 
-figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=2319-15100&t=wcK3P98b09VsrxXF-4',
-  {
-    props: {
-      children: figma.children('*'),
-    },
-    example: (props) =>
-      html`<cds-header>
-        <cds-header-panel aria-label="Header panel" expanded>
-          ${props.children}
-        </cds-header-panel>
-      </cds-header>`,
-    imports: [
-      "import '@carbon/web-components/es/components/ui-shell/index.js'",
-    ],
-  }
-);
+const instance = figma.selectedInstance;
+const children = instance
+  .findConnectedInstances((child) => child.hasCodeConnect())
+  .map((child) => child.executeTemplate().example);
+
+export default {
+  id: 'cds-header-panel',
+  imports: ["import '@carbon/web-components/es/components/ui-shell/index.js'"],
+  example: figma.code`<cds-header>
+  <cds-header-panel aria-label="Header panel" expanded>
+    <!-- add custom components here -->
+    ${children}
+  </cds-header-panel>
+</cds-header>`,
+  metadata: { nestable: false },
+};

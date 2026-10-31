@@ -319,8 +319,8 @@ package/version landing page.
 ## Publishing
 
 `.github/workflows/deploy-v12-storybooks.yml` publishes the v12 Storybooks on
-every push to `main` and can also be run manually. It follows the existing Web
-Components Storybook publish flow:
+every `v12-alpha` release and can also be run manually. It follows the existing
+Web Components Storybook publish flow:
 
 1. install dependencies;
 2. build the project;

@@ -21,7 +21,7 @@ const args = {
     'Error message that is really long can wrap to more lines but should not be excessively long.',
   labelText: 'Label',
   placeholder: 'Placeholder text',
-  readonly: false,
+  readOnly: false,
   showPasswordLabel: 'Show password',
   size: 'md',
   tooltipAlignment: 'end',
@@ -113,9 +113,9 @@ const argTypes = {
       type: 'text',
     },
   },
-  readonly: {
+  readOnly: {
     control: 'boolean',
-    description: 'Read only (readonly)',
+    description: 'Read only (readOnly)',
   },
 };
 
@@ -134,7 +134,7 @@ export const Default = {
     labelText,
     onInput,
     placeholder,
-    readonly,
+    readOnly,
     showPasswordLabel,
     size,
     tooltipAlignment,
@@ -155,7 +155,7 @@ export const Default = {
         invalid-text="${ifDefined(invalidText)}"
         label="${ifDefined(labelText)}"
         placeholder="${ifDefined(placeholder)}"
-        ?readonly="${readonly}"
+        .readOnly="${readOnly}"
         show-password-label="${ifDefined(showPasswordLabel)}"
         size="${ifDefined(size)}"
         tooltip-alignment="${ifDefined(tooltipAlignment)}"

@@ -71,7 +71,12 @@ const ButtonBase = React.forwardRef(function ButtonBase<
     />
   );
 
-  const dangerButtonVariants = ['danger', 'danger--tertiary', 'danger--ghost'];
+  const dangerButtonVariants = [
+    'danger',
+    'danger--primary',
+    'danger--tertiary',
+    'danger--ghost',
+  ];
   const hasDangerDescription =
     dangerButtonVariants.includes(kind) && Boolean(dangerDescription);
 

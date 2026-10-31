@@ -43,33 +43,6 @@ function kebabToCamel(str) {
   return str.replace(/-([a-z0-9])/g, (_, ch) => ch.toUpperCase());
 }
 
-const BASE_FONT_SIZE = 16;
-const MINI_UNIT = 8;
-
-/**
- * Resolve a token's raw $value using the carbon.layout.converter extension.
- * - "miniUnits": steps × 8px ÷ 16 → rem string
- * - "rem":       px ÷ 16 → rem string
- * - (none):      value is already a resolved CSS string, returned as-is
- *
- * @param {string|number} value
- * @param {object|undefined} carbonLayout  — token.$extensions?.['carbon.layout']
- * @returns {string}
- */
-function resolveValue(value, carbonLayout) {
-  const converter = carbonLayout?.converter;
-  if (converter === 'miniUnits') {
-    return `${(Number(value) * MINI_UNIT) / BASE_FONT_SIZE}rem`;
-  }
-  if (converter === 'rem') {
-    return `${Number(value) / BASE_FONT_SIZE}rem`;
-  }
-  // Unitless zero — preserve as number 0, not the string "0", to match the
-  // original hand-authored export: `export const fluidSpacing01 = 0`
-  if (value === '0' || value === 0) return 0;
-  return String(value);
-}
-
 /**
  * @param {{ dictionary: import('style-dictionary').Dictionary, options: object }} args
  * @returns {string}
@@ -80,10 +53,9 @@ function carbonJsLayoutFormat({ dictionary, options }) {
 
   for (const token of dictionary.allTokens) {
     const camelName = kebabToCamel(token.name);
-    const carbonLayout =
-      token.$extensions?.['carbon.layout'] ??
-      token.extensions?.['carbon.layout'];
-    const resolved = resolveValue(token.value ?? token.$value, carbonLayout);
+    // Unitless zero — preserve as number 0, not the string "0", to match the
+    // original hand-authored export: `export const fluidSpacing01 = 0`
+    const resolved = token.$value === '0' ? 0 : token.$value;
 
     const tsType = resolved === 0 ? 'number' : 'string';
     if (outputMode === 'js') {
