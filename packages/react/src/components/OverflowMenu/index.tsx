@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { forwardRef, type Ref } from 'react';
+import React, { forwardRef, type DOMAttributes, type Ref } from 'react';
 import { useFeatureFlag } from '../FeatureFlags';
 import {
   OverflowMenu as OverflowMenuV12,
@@ -16,7 +16,16 @@ import {
   type OverflowMenuProps as OverflowMenuV11Props,
 } from './OverflowMenu';
 
-type OverflowMenuProps = OverflowMenuV11Props | OverflowMenuV12Props;
+type OverflowMenuEventHandlers = Omit<
+  DOMAttributes<HTMLElement>,
+  'children' | 'dangerouslySetInnerHTML'
+>;
+
+type OverflowMenuProps =
+  | (Omit<OverflowMenuV11Props, keyof OverflowMenuEventHandlers> &
+      OverflowMenuEventHandlers)
+  | (Omit<OverflowMenuV12Props, keyof OverflowMenuEventHandlers> &
+      OverflowMenuEventHandlers);
 
 const OverflowMenu = forwardRef<HTMLDivElement, OverflowMenuProps>(
   (props, ref) => {
