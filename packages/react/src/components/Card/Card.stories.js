@@ -49,10 +49,8 @@ export default {
     CardHeader: Card.Header,
     CardBody: Card.Body,
     CardFooter: Card.Footer,
-    CardHeaderMedia: Card.HeaderMedia,
     CardMedia: Card.Media,
     CardTitle: Card.Title,
-    CardTitleMedia: Card.TitleMedia,
     CardActions: Card.Actions,
     CardAction: Card.Action,
   },
@@ -154,7 +152,7 @@ export default {
       control: { type: 'select' },
       options: ['none', 'icon', 'tag', 'user-avatar', 'status-indicator'],
       description:
-        'Content shown in the Card.HeaderMedia slot above the title row.',
+        'Content shown in the Card.Header headerMedia prop above the title row.',
     },
     titleMedia: {
       control: { type: 'select' },
@@ -334,36 +332,32 @@ export const Default = {
               )}
             </Card.Media>
           )}
-          <Card.Header>
-            {HEADER_MEDIA_MAP[headerMedia] && (
-              <Card.HeaderMedia>
-                {HEADER_MEDIA_MAP[headerMedia]}
-              </Card.HeaderMedia>
-            )}
-            {TITLE_MEDIA_MAP[titleMedia] && (
-              <Card.TitleMedia>{TITLE_MEDIA_MAP[titleMedia]}</Card.TitleMedia>
-            )}
+          <Card.Header
+            headerMedia={HEADER_MEDIA_MAP[headerMedia] || undefined}
+            actions={
+              actionCount > 0 ? (
+                <Card.Actions>
+                  {ACTION_ICONS.slice(0, actionCount).map(
+                    ({ icon: Icon, label: iconLabel }) => (
+                      <Card.Action key={iconLabel}>
+                        <IconButton label={iconLabel} kind="ghost" size="sm">
+                          <Icon />
+                        </IconButton>
+                      </Card.Action>
+                    )
+                  )}
+                </Card.Actions>
+              ) : undefined
+            }>
             <Card.Title
               label={label || undefined}
               description={description || undefined}
               titleTruncate={titleTruncate}
+              titleMedia={TITLE_MEDIA_MAP[titleMedia] || undefined}
               {...(titleLeadingIcon && { titleStart: <BeeIcon size={16} /> })}
               {...(titleTrailingIcon && { titleEnd: <BeeIcon size={16} /> })}>
               {title}
             </Card.Title>
-            {actionCount > 0 && (
-              <Card.Actions>
-                {ACTION_ICONS.slice(0, actionCount).map(
-                  ({ icon: Icon, label: iconLabel }) => (
-                    <Card.Action key={iconLabel}>
-                      <IconButton label={iconLabel} kind="ghost" size="sm">
-                        <Icon />
-                      </IconButton>
-                    </Card.Action>
-                  )
-                )}
-              </Card.Actions>
-            )}
           </Card.Header>
           <Card.Body>{bodyText}</Card.Body>
           {!cardArgs.clickable && renderFooterActions(footerActions)}
@@ -679,10 +673,7 @@ export const WithAILabel = () => (
             </AILabelContent>
           </AILabel>
         }>
-        <Card.Header>
-          <Card.HeaderMedia>
-            <Analytics />
-          </Card.HeaderMedia>
+        <Card.Header headerMedia={<Analytics />}>
           <Card.Title description="AI-generated summary">
             Performance Insights
           </Card.Title>
@@ -712,34 +703,36 @@ export const WithAILabel = () => (
             </AILabelContent>
           </AILabel>
         }>
-        <Card.Header>
+        <Card.Header
+          actions={
+            <Card.Actions>
+              <Card.Action>
+                <IconButton
+                  label="Edit"
+                  kind="ghost"
+                  size="sm"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    console.log('Edit clicked');
+                  }}>
+                  <Edit />
+                </IconButton>
+              </Card.Action>
+              <Card.Action>
+                <IconButton
+                  label="Delete"
+                  kind="ghost"
+                  size="sm"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    console.log('Delete clicked');
+                  }}>
+                  <TrashCan />
+                </IconButton>
+              </Card.Action>
+            </Card.Actions>
+          }>
           <Card.Title>Smart Recommendations</Card.Title>
-          <Card.Actions>
-            <Card.Action>
-              <IconButton
-                label="Edit"
-                kind="ghost"
-                size="sm"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  console.log('Edit clicked');
-                }}>
-                <Edit />
-              </IconButton>
-            </Card.Action>
-            <Card.Action>
-              <IconButton
-                label="Delete"
-                kind="ghost"
-                size="sm"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  console.log('Delete clicked');
-                }}>
-                <TrashCan />
-              </IconButton>
-            </Card.Action>
-          </Card.Actions>
         </Card.Header>
         <Card.Body>3 products match your recent activity.</Card.Body>
         <Card.Footer>
@@ -763,8 +756,13 @@ export const WithFlushBody = () => (
           <Card.Title>Default body</Card.Title>
         </Card.Header>
         <Card.Body>
-          <div className={`${storyClass}__flush-demo-content`}>
-            Content with 16px body padding
+          <div
+            style={{
+              background: 'var(--cds-highlight)',
+              border: '1px dashed var(--cds-link-primary)',
+              padding: '1rem',
+            }}>
+            Body with default padding
           </div>
         </Card.Body>
       </Card>
@@ -776,15 +774,14 @@ export const WithFlushBody = () => (
         <Card.Header>
           <Card.Title>Flush body</Card.Title>
         </Card.Header>
-        <Card.Body
-          isFlush
-          style={{
-            overflow: 'hidden',
-            borderBottomLeftRadius: 'inherit',
-            borderBottomRightRadius: 'inherit',
-          }}>
-          <div className={`${storyClass}__flush-demo-content`}>
-            Content fills edge-to-edge
+        <Card.Body isFlush>
+          <div
+            style={{
+              background: 'var(--cds-highlight)',
+              border: '1px dashed var(--cds-link-primary)',
+              padding: '1rem',
+            }}>
+            Body flush to card edges
           </div>
         </Card.Body>
       </Card>
@@ -798,36 +795,38 @@ export const WithHeaderActions = () => (
   <Grid withRowGap>
     <Column lg={4} md={4} sm={4}>
       <Card onClick={() => console.log('Card clicked')}>
-        <Card.Header>
+        <Card.Header
+          actions={
+            <Card.Actions>
+              <Card.Action>
+                <IconButton
+                  label="Edit"
+                  kind="ghost"
+                  size="sm"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    console.log('Edit clicked');
+                  }}>
+                  <Edit />
+                </IconButton>
+              </Card.Action>
+              <Card.Action>
+                <IconButton
+                  label="Delete"
+                  kind="ghost"
+                  size="sm"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    console.log('Delete clicked');
+                  }}>
+                  <TrashCan />
+                </IconButton>
+              </Card.Action>
+            </Card.Actions>
+          }>
           <Card.Title label="Project" description="Due in 3 days">
             Website Redesign
           </Card.Title>
-          <Card.Actions>
-            <Card.Action>
-              <IconButton
-                label="Edit"
-                kind="ghost"
-                size="sm"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  console.log('Edit clicked');
-                }}>
-                <Edit />
-              </IconButton>
-            </Card.Action>
-            <Card.Action>
-              <IconButton
-                label="Delete"
-                kind="ghost"
-                size="sm"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  console.log('Delete clicked');
-                }}>
-                <TrashCan />
-              </IconButton>
-            </Card.Action>
-          </Card.Actions>
         </Card.Header>
         <Card.Body>
           Deployment pipeline ran successfully across all regions.
@@ -853,109 +852,135 @@ export const WithHeaderActions = () => (
     </Column>
     <Column lg={4} md={4} sm={4}>
       <Card>
-        <Card.Header>
+        <Card.Header
+          headerMedia={<Tag type="blue">New</Tag>}
+          actions={
+            <Card.Actions>
+              <Card.Action>
+                <IconButton kind="ghost" label="Edit" size="sm">
+                  <Edit />
+                </IconButton>
+              </Card.Action>
+              <Card.Action>
+                <IconButton kind="ghost" label="Favorite" size="sm">
+                  <Favorite />
+                </IconButton>
+              </Card.Action>
+              <Card.Action>
+                <IconButton kind="ghost" label="Analytics" size="sm">
+                  <Analytics />
+                </IconButton>
+              </Card.Action>
+              <Card.Action>
+                <IconButton kind="ghost" label="Share" size="sm">
+                  <Share />
+                </IconButton>
+              </Card.Action>
+              <Card.Action>
+                <IconButton kind="ghost" label="Download" size="sm">
+                  <Download />
+                </IconButton>
+              </Card.Action>
+              <Card.Action>
+                <IconButton kind="ghost" label="Settings" size="sm">
+                  <Settings />
+                </IconButton>
+              </Card.Action>
+              <Card.Action>
+                <IconButton kind="ghost" label="Notification" size="sm">
+                  <Notification />
+                </IconButton>
+              </Card.Action>
+              <Card.Action>
+                <IconButton kind="ghost" label="View" size="sm">
+                  <View />
+                </IconButton>
+              </Card.Action>
+              <Card.Action>
+                <IconButton kind="ghost" label="Copy" size="sm">
+                  <Copy />
+                </IconButton>
+              </Card.Action>
+              <Card.Action>
+                <IconButton kind="ghost" label="Delete" size="sm">
+                  <TrashCan />
+                </IconButton>
+              </Card.Action>
+            </Card.Actions>
+          }>
           <Card.Title label="Category" description="2 hours ago">
             Project dashboard
           </Card.Title>
-          <Card.Actions>
-            <Card.Action>
-              <IconButton kind="ghost" label="Edit" size="sm">
-                <Edit />
-              </IconButton>
-            </Card.Action>
-            <Card.Action>
-              <IconButton kind="ghost" label="Favorite" size="sm">
-                <Favorite />
-              </IconButton>
-            </Card.Action>
-            <Card.Action>
-              <IconButton kind="ghost" label="Analytics" size="sm">
-                <Analytics />
-              </IconButton>
-            </Card.Action>
-            <Card.Action>
-              <IconButton kind="ghost" label="Share" size="sm">
-                <Share />
-              </IconButton>
-            </Card.Action>
-            <Card.Action>
-              <IconButton kind="ghost" label="Download" size="sm">
-                <Download />
-              </IconButton>
-            </Card.Action>
-            <Card.Action>
-              <IconButton kind="ghost" label="Settings" size="sm">
-                <Settings />
-              </IconButton>
-            </Card.Action>
-            <Card.Action>
-              <IconButton kind="ghost" label="Notification" size="sm">
-                <Notification />
-              </IconButton>
-            </Card.Action>
-            <Card.Action>
-              <IconButton kind="ghost" label="View" size="sm">
-                <View />
-              </IconButton>
-            </Card.Action>
-            <Card.Action>
-              <IconButton kind="ghost" label="Copy" size="sm">
-                <Copy />
-              </IconButton>
-            </Card.Action>
-            <Card.Action>
-              <IconButton kind="ghost" label="Delete" size="sm">
-                <TrashCan />
-              </IconButton>
-            </Card.Action>
-          </Card.Actions>
         </Card.Header>
         <Card.Body>Last synced 4 minutes ago.</Card.Body>
       </Card>
     </Column>
     <Column lg={4} md={4} sm={4}>
       <Card>
-        <Card.Header>
+        <Card.Header
+          actions={
+            <Card.Actions>
+              <Card.Action>
+                <Button kind="tertiary" size="sm">
+                  Action
+                </Button>
+              </Card.Action>
+            </Card.Actions>
+          }>
           <Card.Title>Usage metrics</Card.Title>
-          <Card.Actions>
-            <Card.Action>
-              <Button kind="tertiary" size="sm">
-                Action
-              </Button>
-            </Card.Action>
-          </Card.Actions>
         </Card.Header>
         <Card.Body>API requests peaked at 3.2k/s on Thursday.</Card.Body>
       </Card>
     </Column>
     <Column lg={4} md={4} sm={4}>
       <Card>
-        <Card.Header>
+        <Card.Header
+          actions={
+            <Card.Actions>
+              <Card.Action>
+                <Button kind="tertiary" size="sm">
+                  Export
+                </Button>
+              </Card.Action>
+              <Card.Action>
+                <Button kind="tertiary" size="sm">
+                  Share
+                </Button>
+              </Card.Action>
+              <Card.Action>
+                <Button kind="tertiary" size="sm">
+                  View report
+                </Button>
+              </Card.Action>
+            </Card.Actions>
+          }>
           <Card.Title>Usage metrics</Card.Title>
-          <Card.Actions>
-            <Card.Action>
-              <Button kind="tertiary" size="sm">
-                Export
-              </Button>
-            </Card.Action>
-            <Card.Action>
-              <Button kind="tertiary" size="sm">
-                Share
-              </Button>
-            </Card.Action>
-            <Card.Action>
-              <Button kind="tertiary" size="sm">
-                View report
-              </Button>
-            </Card.Action>
-          </Card.Actions>
         </Card.Header>
         <Card.Body>Exports available in CSV, JSON, and PDF.</Card.Body>
       </Card>
     </Column>
     <Column lg={4} md={4} sm={4}>
       <Card>
-        <Card.Header>
+        <Card.Header
+          actions={
+            <Card.Actions>
+              <Card.Action>
+                <IconButton kind="ghost" label="Edit" size="sm">
+                  <Edit />
+                </IconButton>
+              </Card.Action>
+              <Card.Action>
+                <IconButton kind="ghost" label="Favorite" size="sm">
+                  <Favorite />
+                </IconButton>
+              </Card.Action>
+              <Card.Action>
+                <IconButton kind="ghost" label="Share" size="sm">
+                  <Share />
+                </IconButton>
+              </Card.Action>
+            </Card.Actions>
+          }>
           <Card.Title
             label="Category"
             labelTruncate
@@ -965,23 +990,6 @@ export const WithHeaderActions = () => (
             This is a very long card title that wraps across multiple lines in a
             narrow container
           </Card.Title>
-          <Card.Actions>
-            <Card.Action>
-              <IconButton kind="ghost" label="Edit" size="sm">
-                <Edit />
-              </IconButton>
-            </Card.Action>
-            <Card.Action>
-              <IconButton kind="ghost" label="Favorite" size="sm">
-                <Favorite />
-              </IconButton>
-            </Card.Action>
-            <Card.Action>
-              <IconButton kind="ghost" label="Share" size="sm">
-                <Share />
-              </IconButton>
-            </Card.Action>
-          </Card.Actions>
         </Card.Header>
         <Card.Body>Pipeline completed in 4m 12s with no warnings.</Card.Body>
       </Card>
@@ -995,53 +1003,53 @@ export const WithHeaderMedia = () => (
   <Grid withRowGap>
     <Column lg={4} md={4} sm={4}>
       <Card>
-        <Card.Header>
-          <Card.HeaderMedia>
-            <Analytics />
-          </Card.HeaderMedia>
+        <Card.Header
+          headerMedia={<Analytics />}
+          actions={
+            <Card.Actions>
+              <Card.Action>
+                <IconButton
+                  label="Edit"
+                  kind="ghost"
+                  size="sm"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    console.log('Edit clicked');
+                  }}>
+                  <Edit />
+                </IconButton>
+              </Card.Action>
+              <Card.Action>
+                <IconButton
+                  label="Delete"
+                  kind="ghost"
+                  size="sm"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    console.log('Delete clicked');
+                  }}>
+                  <TrashCan />
+                </IconButton>
+              </Card.Action>
+            </Card.Actions>
+          }>
           <Card.Title description="Real-time metrics">
             Analytics Dashboard
           </Card.Title>
-          <Card.Actions>
-            <Card.Action>
-              <IconButton
-                label="Edit"
-                kind="ghost"
-                size="sm"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  console.log('Edit clicked');
-                }}>
-                <Edit />
-              </IconButton>
-            </Card.Action>
-            <Card.Action>
-              <IconButton
-                label="Delete"
-                kind="ghost"
-                size="sm"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  console.log('Delete clicked');
-                }}>
-                <TrashCan />
-              </IconButton>
-            </Card.Action>
-          </Card.Actions>
         </Card.Header>
         <Card.Body>Request volume up 12% compared to last week.</Card.Body>
       </Card>
     </Column>
     <Column lg={4} md={4} sm={4}>
       <Card>
-        <Card.Header>
-          <Card.HeaderMedia>
+        <Card.Header
+          headerMedia={
             <img
               src={illustration1}
               alt="A sample illustration"
               style={{ width: '48px', height: '48px', borderRadius: '4px' }}
             />
-          </Card.HeaderMedia>
+          }>
           <Card.Title>Card with Image</Card.Title>
         </Card.Header>
         <Card.Body>4 deployments completed this week.</Card.Body>
@@ -1049,10 +1057,7 @@ export const WithHeaderMedia = () => (
     </Column>
     <Column lg={4} md={4} sm={4}>
       <Card>
-        <Card.Header>
-          <Card.HeaderMedia>
-            <Tag type="blue">New</Tag>
-          </Card.HeaderMedia>
+        <Card.Header headerMedia={<Tag type="blue">New</Tag>}>
           <Card.Title>Card with Tag</Card.Title>
         </Card.Header>
         <Card.Body>Feature flag enabled for 10% of users.</Card.Body>
@@ -1060,10 +1065,10 @@ export const WithHeaderMedia = () => (
     </Column>
     <Column lg={4} md={4} sm={4}>
       <Card>
-        <Card.Header>
-          <Card.HeaderMedia>
+        <Card.Header
+          headerMedia={
             <IconIndicator kind="succeeded" size={16} label="Succeeded" />
-          </Card.HeaderMedia>
+          }>
           <Card.Title>Card with Status</Card.Title>
         </Card.Header>
         <Card.Body>All systems operational. No incidents reported.</Card.Body>
@@ -1144,10 +1149,7 @@ export const WithHorizontalMedia = () => (
     </Column>
     <Column lg={8} md={4} sm={4}>
       <Card horizontal density="expressive">
-        <Card.Header>
-          <Card.HeaderMedia>
-            <DirectionFork size="32" />
-          </Card.HeaderMedia>
+        <Card.Header headerMedia={<DirectionFork size="32" />}>
           <Card.Title label="Prepare your data">
             Generate synthetic tabular data
           </Card.Title>
@@ -1183,30 +1185,30 @@ export const WithIcon = () => (
   <Grid withRowGap>
     <Column lg={4} md={4} sm={4}>
       <Card>
-        <Card.Header>
-          <Card.HeaderMedia>
-            <Analytics />
-          </Card.HeaderMedia>
+        <Card.Header
+          headerMedia={<Analytics />}
+          actions={
+            <Card.Actions>
+              <Card.Action>
+                <IconButton label="Edit" kind="ghost" size="sm">
+                  <Edit />
+                </IconButton>
+              </Card.Action>
+              <Card.Action>
+                <IconButton label="Share" kind="ghost" size="sm">
+                  <Share />
+                </IconButton>
+              </Card.Action>
+              <Card.Action>
+                <IconButton label="Download" kind="ghost" size="sm">
+                  <Download />
+                </IconButton>
+              </Card.Action>
+            </Card.Actions>
+          }>
           <Card.Title description="Real-time metrics">
             Analytics Dashboard
           </Card.Title>
-          <Card.Actions>
-            <Card.Action>
-              <IconButton label="Edit" kind="ghost" size="sm">
-                <Edit />
-              </IconButton>
-            </Card.Action>
-            <Card.Action>
-              <IconButton label="Share" kind="ghost" size="sm">
-                <Share />
-              </IconButton>
-            </Card.Action>
-            <Card.Action>
-              <IconButton label="Download" kind="ghost" size="sm">
-                <Download />
-              </IconButton>
-            </Card.Action>
-          </Card.Actions>
         </Card.Header>
         <Card.Body>Inbound traffic up 8% since last Tuesday.</Card.Body>
         <Card.Footer>
@@ -1218,7 +1220,7 @@ export const WithIcon = () => (
           <Card.Action>
             <Button
               kind="ghost"
-              iconDescription="Share"
+              label="View report"
               size="md"
               renderIcon={Share}
               hasIconOnly></Button>
@@ -1252,25 +1254,25 @@ export const WithIcon = () => (
     </Column>
     <Column lg={4} md={4} sm={4}>
       <Card>
-        <Card.Header>
-          <Card.HeaderMedia>
-            <Favorite size="32" />
-          </Card.HeaderMedia>
+        <Card.Header
+          headerMedia={<Favorite size="32" />}
+          actions={
+            <Card.Actions>
+              <Card.Action>
+                <IconButton label="Edit" kind="ghost" size="sm">
+                  <Edit />
+                </IconButton>
+              </Card.Action>
+              <Card.Action>
+                <IconButton label="Delete" kind="ghost" size="sm">
+                  <TrashCan />
+                </IconButton>
+              </Card.Action>
+            </Card.Actions>
+          }>
           <Card.Title description="Your saved content">
             Favorite Items
           </Card.Title>
-          <Card.Actions>
-            <Card.Action>
-              <IconButton label="Edit" kind="ghost" size="sm">
-                <Edit />
-              </IconButton>
-            </Card.Action>
-            <Card.Action>
-              <IconButton label="Delete" kind="ghost" size="sm">
-                <TrashCan />
-              </IconButton>
-            </Card.Action>
-          </Card.Actions>
         </Card.Header>
         <Card.Body>12 items saved across 3 workspaces.</Card.Body>
         <Card.Footer>
@@ -1309,7 +1311,7 @@ export const WithMedia = () => (
           <Card.Action>
             <Button
               kind="ghost"
-              iconDescription="Share"
+              label="View report"
               size="md"
               renderIcon={Share}
               hasIconOnly></Button>
@@ -1395,17 +1397,17 @@ export const WithTitleMedia = () => (
     <Column lg={4} md={4} sm={4}>
       <Card>
         <Card.Header>
-          <Card.TitleMedia>
-            <img
-              src={rebusClassic}
-              alt="IBM Classic Rebus logo"
-              width={48}
-              height={48}
-            />
-          </Card.TitleMedia>
           <Card.Title
             label="Label"
-            description="The title media slot positions an icon to the left of the title text">
+            description="The title media slot positions an icon to the left of the title text"
+            titleMedia={
+              <img
+                src={rebusClassic}
+                alt="IBM Classic Rebus logo"
+                width={48}
+                height={48}
+              />
+            }>
             Card with title icon
           </Card.Title>
         </Card.Header>
@@ -1415,17 +1417,17 @@ export const WithTitleMedia = () => (
     <Column lg={4} md={4} sm={4}>
       <Card>
         <Card.Header>
-          <Card.TitleMedia>
-            <img
-              src={rebusClassic}
-              alt="IBM Classic Rebus logo"
-              width={64}
-              height={64}
-            />
-          </Card.TitleMedia>
           <Card.Title
             label="Label"
-            description="The title media slot positions an icon to the left of the title text">
+            description="The title media slot positions an icon to the left of the title text"
+            titleMedia={
+              <img
+                src={rebusClassic}
+                alt="IBM Classic Rebus logo"
+                width={64}
+                height={64}
+              />
+            }>
             Card with title icon
           </Card.Title>
         </Card.Header>
@@ -1434,95 +1436,99 @@ export const WithTitleMedia = () => (
     </Column>
     <Column lg={4} md={4} sm={4}>
       <Card>
-        <Card.Header>
-          <Card.TitleMedia>
-            <img
-              src={rebusClassic}
-              alt="IBM Classic Rebus logo"
-              width={48}
-              height={48}
-            />
-          </Card.TitleMedia>
+        <Card.Header
+          actions={
+            <Card.Actions>
+              <Card.Action>
+                <IconButton
+                  label="Edit"
+                  kind="ghost"
+                  size="sm"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    console.log('Edit clicked');
+                  }}>
+                  <Edit />
+                </IconButton>
+              </Card.Action>
+              <Card.Action>
+                <IconButton
+                  label="Delete"
+                  kind="ghost"
+                  size="sm"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    console.log('Delete clicked');
+                  }}>
+                  <TrashCan />
+                </IconButton>
+              </Card.Action>
+            </Card.Actions>
+          }>
           <Card.Title
             label="Label"
-            description="The title media slot positions an icon to the left of the title text">
+            description="The title media slot positions an icon to the left of the title text"
+            titleMedia={
+              <img
+                src={rebusClassic}
+                alt="IBM Classic Rebus logo"
+                width={48}
+                height={48}
+              />
+            }>
             Card with title icon
           </Card.Title>
-          <Card.Actions>
-            <Card.Action>
-              <IconButton
-                label="Edit"
-                kind="ghost"
-                size="sm"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  console.log('Edit clicked');
-                }}>
-                <Edit />
-              </IconButton>
-            </Card.Action>
-            <Card.Action>
-              <IconButton
-                label="Delete"
-                kind="ghost"
-                size="sm"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  console.log('Delete clicked');
-                }}>
-                <TrashCan />
-              </IconButton>
-            </Card.Action>
-          </Card.Actions>
         </Card.Header>
         <Card.Body>Release tagged and deployment pipeline triggered.</Card.Body>
       </Card>
     </Column>
     <Column lg={4} md={4} sm={4}>
       <Card>
-        <Card.Header>
-          <Card.HeaderMedia>
+        <Card.Header
+          headerMedia={
             <IconIndicator kind="succeeded" size={16} label="Succeeded" />
-          </Card.HeaderMedia>
-          <Card.TitleMedia>
-            <img
-              src={rebusClassic}
-              alt="IBM Classic Rebus logo"
-              width={48}
-              height={48}
-            />
-          </Card.TitleMedia>
+          }
+          actions={
+            <Card.Actions>
+              <Card.Action>
+                <IconButton
+                  label="Edit"
+                  kind="ghost"
+                  size="sm"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    console.log('Edit clicked');
+                  }}>
+                  <Edit />
+                </IconButton>
+              </Card.Action>
+              <Card.Action>
+                <IconButton
+                  label="Delete"
+                  kind="ghost"
+                  size="sm"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    console.log('Delete clicked');
+                  }}>
+                  <TrashCan />
+                </IconButton>
+              </Card.Action>
+            </Card.Actions>
+          }>
           <Card.Title
             label="Label"
-            description="The title media slot positions an icon to the left of the title text">
+            description="The title media slot positions an icon to the left of the title text"
+            titleMedia={
+              <img
+                src={rebusClassic}
+                alt="IBM Classic Rebus logo"
+                width={48}
+                height={48}
+              />
+            }>
             Card with title icon
           </Card.Title>
-          <Card.Actions>
-            <Card.Action>
-              <IconButton
-                label="Edit"
-                kind="ghost"
-                size="sm"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  console.log('Edit clicked');
-                }}>
-                <Edit />
-              </IconButton>
-            </Card.Action>
-            <Card.Action>
-              <IconButton
-                label="Delete"
-                kind="ghost"
-                size="sm"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  console.log('Delete clicked');
-                }}>
-                <TrashCan />
-              </IconButton>
-            </Card.Action>
-          </Card.Actions>
         </Card.Header>
         <Card.Body>Build passed all 847 checks. Ready to merge.</Card.Body>
       </Card>
@@ -1585,7 +1591,22 @@ export const WithTruncatedTitle = {
     <Grid>
       <Column lg={4} md={4} sm={4}>
         <Card>
-          <Card.Header>
+          <Card.Header
+            actions={
+              actionCount > 0 ? (
+                <Card.Actions>
+                  {ACTION_ICONS.slice(0, actionCount).map(
+                    ({ icon: Icon, label: iconLabel }) => (
+                      <Card.Action key={iconLabel}>
+                        <IconButton label={iconLabel} kind="ghost" size="sm">
+                          <Icon />
+                        </IconButton>
+                      </Card.Action>
+                    )
+                  )}
+                </Card.Actions>
+              ) : undefined
+            }>
             <Card.Title
               label={label || undefined}
               description={description || undefined}
@@ -1594,19 +1615,6 @@ export const WithTruncatedTitle = {
               descriptionTruncate={descriptionTruncate}>
               {title}
             </Card.Title>
-            {actionCount > 0 && (
-              <Card.Actions>
-                {ACTION_ICONS.slice(0, actionCount).map(
-                  ({ icon: Icon, label: iconLabel }) => (
-                    <Card.Action key={iconLabel}>
-                      <IconButton label={iconLabel} kind="ghost" size="sm">
-                        <Icon />
-                      </IconButton>
-                    </Card.Action>
-                  )
-                )}
-              </Card.Actions>
-            )}
           </Card.Header>
           <Card.Body>{bodyText}</Card.Body>
           <Card.Footer>

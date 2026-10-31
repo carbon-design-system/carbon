@@ -6,6 +6,7 @@
  */
 
 import React from 'react';
+import { Heading, Section } from '../../Heading';
 import DataTable, {
   Table,
   TableBody,
@@ -316,8 +317,12 @@ export const AILabelWithSelectionAndExpansion = (args) => (
                   colSpan={headers.length + 3}
                   className="demo-expanded-td"
                   {...getExpandedRowProps({ row })}>
-                  <h6>Expandable row content</h6>
-                  <div>Description here</div>
+                  <Section as="div">
+                    <Heading className="demo-expanded-row-heading">
+                      Expandable row content
+                    </Heading>
+                    <div>Description here</div>
+                  </Section>
                 </TableExpandedRow>
               </React.Fragment>
             ))}
@@ -379,8 +384,12 @@ export const AILabelWithExpansion = (args) => (
                   colSpan={headers.length + 2}
                   className="demo-expanded-td"
                   {...getExpandedRowProps({ row })}>
-                  <h6>Expandable row content</h6>
-                  <div>Description here</div>
+                  <Section as="div">
+                    <Heading className="demo-expanded-row-heading">
+                      Expandable row content
+                    </Heading>
+                    <div>Description here</div>
+                  </Section>
                 </TableExpandedRow>
               </React.Fragment>
             ))}
@@ -449,8 +458,12 @@ export const ColumnAILabelWithSelectionAndExpansion = (args) => (
                     colSpan={headers.length + 2}
                     className="demo-expanded-td"
                     {...getExpandedRowProps({ row })}>
-                    <h6>Expandable row content</h6>
-                    <div>Description here</div>
+                    <Section as="div">
+                      <Heading className="demo-expanded-row-heading">
+                        Expandable row content
+                      </Heading>
+                      <div>Description here</div>
+                    </Section>
                   </TableExpandedRow>
                 </React.Fragment>
               );

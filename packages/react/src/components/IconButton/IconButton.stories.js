@@ -149,7 +149,16 @@ Default.argTypes = {
     control: {
       type: 'select',
     },
-    options: ['primary', 'secondary', 'ghost', 'tertiary'],
+    options: [
+      'primary',
+      'secondary',
+      'danger',
+      'danger--primary',
+      'danger--ghost',
+      'danger--tertiary',
+      'ghost',
+      'tertiary',
+    ],
   },
   leaveDelayMs: {
     control: {

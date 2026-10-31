@@ -1,6 +1,26 @@
 {
   "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
   "$description": "Notification component color tokens for inline and toast notifications across all severity levels.",
+  "notification-background-error": {
+    "$type": "color",
+    "$value": "{gray.90}",
+    "$description": "Background color for error notifications. Use to alert users of critical issues, failures, or actions that require immediate attention."
+  },
+  "notification-background-success": {
+    "$type": "color",
+    "$value": "{gray.90}",
+    "$description": "Background color for success notifications. Use to confirm successful actions, completed processes, or positive outcomes."
+  },
+  "notification-background-info": {
+    "$type": "color",
+    "$value": "{gray.90}",
+    "$description": "Background color for informational notifications. Use to provide helpful context, tips, or non-critical updates to users."
+  },
+  "notification-background-warning": {
+    "$type": "color",
+    "$value": "{gray.90}",
+    "$description": "Background color for warning notifications. Use to alert users of potential issues, cautions, or actions that need attention but aren't critical."
+  },
   "notification-action-tertiary-inverse": {
     "$type": "color",
     "$value": "{blue.60}",
@@ -25,25 +45,5 @@
     "$type": "color",
     "$value": "{gray.50}",
     "$description": "Text color for disabled tertiary action buttons in inverse notifications. Use when actions are temporarily unavailable in dark notifications."
-  },
-  "notification-background-error": {
-    "$type": "color",
-    "$value": "{gray.90}",
-    "$description": "Background color for error notifications. Use to alert users of critical issues, failures, or actions that require immediate attention."
-  },
-  "notification-background-info": {
-    "$type": "color",
-    "$value": "{gray.90}",
-    "$description": "Background color for informational notifications. Use to provide helpful context, tips, or non-critical updates to users."
-  },
-  "notification-background-success": {
-    "$type": "color",
-    "$value": "{gray.90}",
-    "$description": "Background color for success notifications. Use to confirm successful actions, completed processes, or positive outcomes."
-  },
-  "notification-background-warning": {
-    "$type": "color",
-    "$value": "{gray.90}",
-    "$description": "Background color for warning notifications. Use to alert users of potential issues, cautions, or actions that need attention but aren't critical."
   }
 }
