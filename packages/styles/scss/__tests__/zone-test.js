@@ -87,7 +87,7 @@ describe('zone', () => {
         const rule = stylesheet.rules.find((rule) => {
           return rule.selectors?.includes(`.cds--${theme}`);
         });
-        return rule.declarations.find((declaration) => {
+        return rule?.declarations.find((declaration) => {
           return declaration.property === `--cds-${token}`;
         })?.value;
       };
