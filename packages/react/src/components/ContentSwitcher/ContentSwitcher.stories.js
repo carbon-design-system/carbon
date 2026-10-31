@@ -140,6 +140,34 @@ export const IconOnly = (args) => {
 IconOnly.args = { ...sharedArgs };
 IconOnly.argTypes = { ...sharedArgTypes };
 
+export const IconAndText = (args) => {
+  return (
+    <ContentSwitcher {...args}>
+      <Switch
+        name="one"
+        text="Table of Contents"
+        renderIcon={TableOfContents}
+        disabled={args.disabled}
+      />
+      <Switch
+        name="two"
+        text="Workspace Test"
+        renderIcon={Workspace}
+        disabled={args.disabled}
+      />
+      <Switch
+        name="three"
+        text="View Mode"
+        renderIcon={ViewMode_2}
+        disabled={args.disabled}
+      />
+    </ContentSwitcher>
+  );
+};
+
+IconAndText.args = { ...sharedArgs };
+IconAndText.argTypes = { ...sharedArgTypes };
+
 export const IconOnlyWithLayer = (args) => {
   return (
     <WithLayer>
