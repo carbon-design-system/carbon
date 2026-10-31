@@ -73,4 +73,43 @@ describe('zone', () => {
       expect(includesComponentTokens).toBe(true);
     }
   });
+
+  describe('component tokens from @carbon/themes', () => {
+    let getToken;
+
+    beforeAll(async () => {
+      const { result } = await render(`
+        @use '../zone';
+      `);
+      const { stylesheet } = css.parse(result.css.toString());
+
+      getToken = (theme, token) => {
+        const rule = stylesheet.rules.find((rule) => {
+          return rule.selectors?.includes(`.cds--${theme}`);
+        });
+        return rule?.declarations.find((declaration) => {
+          return declaration.property === `--cds-${token}`;
+        })?.value;
+      };
+    });
+
+    // https://github.com/carbon-design-system/carbon/issues/18044
+    it('should emit notification-action-hover in every theme', () => {
+      expect(getToken('white', 'notification-action-hover')).toBe('#ffffff');
+      expect(getToken('g10', 'notification-action-hover')).toBe('#ffffff');
+      expect(getToken('g90', 'notification-action-hover')).toBe('#474747');
+      expect(getToken('g100', 'notification-action-hover')).toBe('#333333');
+    });
+
+    it('should emit status outline tokens in every theme', () => {
+      for (const theme of ['white', 'g10']) {
+        expect(getToken(theme, 'status-orange-outline')).toBe('#ba4e00');
+        expect(getToken(theme, 'status-yellow-outline')).toBe('#8e6a00');
+      }
+      for (const theme of ['g90', 'g100']) {
+        expect(getToken(theme, 'status-orange-outline')).toBe('#ff832b');
+        expect(getToken(theme, 'status-yellow-outline')).toBe('#f1c21b');
+      }
+    });
+  });
 });
