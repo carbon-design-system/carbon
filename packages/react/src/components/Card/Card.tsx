@@ -7,7 +7,7 @@
 
 import React, { forwardRef, isValidElement, useCallback, useMemo } from 'react';
 import cx from 'classnames';
-import { ArrowRight } from '@carbon/icons-react';
+import { ArrowRight, Error as ErrorIcon } from '@carbon/icons-react';
 import { AILabel } from '../AILabel';
 import { CardProps } from './Card.types';
 import { CardContext } from './CardContext';
@@ -200,7 +200,11 @@ const CardComponent = forwardRef<HTMLDivElement, CardProps>(
             <div
               className={`${blockClass}__clickable-footer`}
               aria-hidden="true">
-              <FooterIcon aria-hidden="true" />
+              {disabled ? (
+                <ErrorIcon aria-hidden="true" />
+              ) : (
+                <FooterIcon aria-hidden="true" />
+              )}
             </div>
           )}
         </BaseComponent>

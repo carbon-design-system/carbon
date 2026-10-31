@@ -278,6 +278,22 @@ describe('Card', () => {
     expect(footer.querySelector('svg')).toBeInTheDocument();
   });
 
+  it('renders the error icon instead of the footer icon when disabled', () => {
+    const CustomIcon = () => <svg data-testid="custom-icon" />;
+    const { container } = render(
+      <Card
+        clickable
+        disabled
+        renderFooterIcon={CustomIcon}
+        aria-label="Disabled card">
+        <CardBody>Content</CardBody>
+      </Card>
+    );
+    const footer = container.querySelector('.cds--card__clickable-footer');
+    expect(footer.querySelector('svg')).toBeInTheDocument();
+    expect(screen.queryByTestId('custom-icon')).not.toBeInTheDocument();
+  });
+
   it('renders a custom icon in clickable footer via renderFooterIcon', () => {
     const CustomIcon = () => <svg data-testid="custom-icon" />;
     render(
