@@ -25,6 +25,7 @@ import {
 } from '@floating-ui/react';
 import { useFeatureFlag } from '../FeatureFlags';
 import { mergeRefs } from '../../tools/mergeRefs';
+import { useSafeFloatingRefs } from '../../internal/useSafeFloatingRefs';
 
 const validButtonKinds = ['primary', 'tertiary', 'ghost'];
 const defaultButtonKind = 'primary';
@@ -161,6 +162,7 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
       middleware: middlewares,
       whileElementsMounted: autoUpdate,
     });
+    const { setFloatingSafe, setReferenceSafe } = useSafeFloatingRefs(refs);
     const ref = mergeRefs(forwardRef, triggerRef);
     const {
       open,
@@ -210,7 +212,7 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
         aria-owns={open ? id : undefined}
         className={containerClasses}>
         <Button
-          ref={refs.setReference}
+          ref={setReferenceSafe}
           className={triggerClasses}
           size={size}
           tabIndex={tabIndex}
@@ -228,7 +230,7 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
           containerRef={triggerRef}
           menuAlignment={menuAlignment}
           className={menuClasses}
-          ref={refs.setFloating}
+          ref={setFloatingSafe}
           id={id}
           legacyAutoalign={false}
           label={label}
