@@ -21,7 +21,8 @@ const {
 } = require('../tokens');
 
 function withFiles(files, callback) {
-  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'tokens-test-'));
+  const tmpBase = process.env.RUNNER_TEMP ?? os.tmpdir();
+  const directory = fs.mkdtempSync(path.join(tmpBase, 'tokens-test-'));
   for (const [name, contents] of Object.entries(files)) {
     fs.writeFileSync(path.join(directory, name), JSON.stringify(contents));
   }
