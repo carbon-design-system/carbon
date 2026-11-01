@@ -1,0 +1,38 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+
+// Multi Add Select with DataTable Pattern Styles
+.multi-add-select-data-table-pattern {
+  .multi-add-select-data-table-pattern__data-table-wrapper {
+    padding: 0;
+    block-size: 100%;
+  }
+
+  .multi-add-select-data-table-pattern__table-container {
+    padding: 0;
+  }
+
+  .multi-add-select-data-table-pattern__table {
+    inline-size: 100%;
+  }
+
+  .multi-add-select-data-table-pattern__no-results {
+    padding: $spacing-07;
+    text-align: center;
+
+    h4 {
+      font-weight: 600;
+      margin-block-end: $spacing-03;
+    }
+
+    p {
+      color: var(--cds-text-secondary);
+    }
+  }
+}

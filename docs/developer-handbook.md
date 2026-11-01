@@ -9,6 +9,7 @@
 - [Getting started](#getting-started)
 - [Common tasks](#common-tasks)
 - [Dependency management](#dependency-management)
+  - [Example apps](#example-apps)
   - [Continuous Integration](#continuous-integration)
 - [Package architecture and layout](#package-architecture-and-layout)
   - [Packages shipping Sass](#packages-shipping-sass)
@@ -123,6 +124,35 @@ yarn lerna run build
 
 We use `yarn.lock` as the source of truth for dependency resolution and enforce
 it in CI with `yarn install --immutable`.
+
+### Example apps
+
+Example apps under any `examples/` directory are the one exception: their
+lockfiles are gitignored and should not be committed. Examples are standalone
+projects outside the root workspace, so a committed lockfile pins their
+transitive dependencies indefinitely and those stale pins were the source of
+most of the repository's Dependabot alerts. Resolving fresh at build time picks
+up patched versions instead.
+
+`tasks/examples.js` handles this for CI: it creates the empty sentinel
+`yarn.lock` that Yarn requires in order to treat a nested directory as its own
+project, then installs with `--no-immutable`.
+
+To run an example by hand, create that sentinel first, otherwise Yarn walks up
+to the root project and fails with
+`The nearest package directory [...] doesn't seem to be part of the project`:
+
+```bash
+cd packages/colors/examples/preview
+: > yarn.lock   # gitignored
+yarn install
+yarn develop
+```
+
+Keep example dependency ranges as carets so they resolve to current patches, and
+raise the floor when an advisory affects a direct dependency — a caret range is
+still reported if it _admits_ a vulnerable version, even when it resolves above
+one.
 
 ### Continuous Integration
 
@@ -589,6 +619,9 @@ When installing a dependency, you can run `yarn add <dependency-name>` as
 normal. After adding or updating dependencies, commit the updated lockfile and
 manifest files (for example, `yarn.lock` and the relevant `package.json`
 changes). You do not need to commit any `.yarn/cache` tarballs.
+
+Example apps are the exception — commit the `package.json` change only, never
+the lockfile. See [Example apps](#example-apps).
 
 #### CI is failing during `yarn install`
 

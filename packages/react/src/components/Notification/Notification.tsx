@@ -291,6 +291,7 @@ function NotificationIcon({
   return (
     <IconForKind
       className={`${prefix}--${notificationType}-notification__icon`}
+      aria-label={iconDescription}
       size={20}>
       <title>{iconDescription}</title>
     </IconForKind>

@@ -1,3 +1,7 @@
+// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=36234-38344&t=OdgMrt4NDVwZpNSx-4
+// source=https://github.com/carbon-design-system/carbon/blob/main/packages/web-components/src/components/menu/menu-item.ts
+// component=cds-menu-item
+
 /**
  * Copyright IBM Corp. 2026
  *
@@ -5,105 +9,50 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import figma, { html } from '@figma/code-connect/html';
+import figma from 'figma';
+import {
+  renderBooleanAttribute,
+  renderStringAttribute,
+} from '../template-helpers';
 
-const sharedMenuItemProps = {
-  kind: figma.enum('State', {
-    'Danger hover': 'danger',
-    'Danger hover + Focus': 'danger',
-  }),
-  label: figma.string('Option text'),
-  disabled: figma.enum('State', {
-    Disabled: true,
-  }),
+const instance = figma.selectedInstance;
+const state = instance.getPropertyValue('State');
+const kind =
+  state === 'Danger hover' || state === 'Danger hover + Focus'
+    ? 'danger'
+    : undefined;
+const label = instance.getString('Option text');
+const disabled = state === 'Disabled';
+const divider = instance.getEnum('Divider', {
+  True: true,
+});
+const hasShortcut = instance.getEnum('Shortcuts or Trigger ', {
+  True: true,
+});
+const selected = instance.getEnum('Selected', {
+  True: true,
+});
+const tagName = selected ? 'cds-menu-item-selectable' : 'cds-menu-item';
+const shortcut = hasShortcut ? '⌘X' : undefined;
+
+// The selectable element exposes neither disabled nor kind.
+const menuItem = figma.code`<${tagName}${renderBooleanAttribute(
+  'disabled',
+  !selected && disabled
+)}${renderStringAttribute('kind', selected ? undefined : kind)}${renderStringAttribute(
+  'label',
+  label
+)}${renderStringAttribute('shortcut', shortcut)}${renderBooleanAttribute(
+  'selected',
+  selected
+)}></${tagName}>`;
+
+export default {
+  id: tagName,
+  imports: ["import '@carbon/web-components/es/components/menu/index.js'"],
+  example: divider
+    ? figma.code`<cds-menu-item-divider></cds-menu-item-divider>
+${menuItem}`
+    : menuItem,
+  metadata: { nestable: true },
 };
-
-figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=36234-38344&t=OdgMrt4NDVwZpNSx-4',
-  {
-    props: sharedMenuItemProps,
-    example: (props) =>
-      html`<cds-menu-item
-        disabled=${props.disabled}
-        kind=${props.kind}
-        label=${props.label}></cds-menu-item>`,
-    imports: ["import '@carbon/web-components/es/components/menu/index.js'"],
-  }
-);
-
-figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=36234-38344&t=OdgMrt4NDVwZpNSx-4',
-  {
-    variant: { Divider: 'True' },
-    props: sharedMenuItemProps,
-    example: (props) =>
-      html`<cds-menu-item-divider></cds-menu-item-divider>
-        <cds-menu-item
-          disabled=${props.disabled}
-          kind=${props.kind}
-          label=${props.label}></cds-menu-item>`,
-    imports: ["import '@carbon/web-components/es/components/menu/index.js'"],
-  }
-);
-
-figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=36234-38344&t=OdgMrt4NDVwZpNSx-4',
-  {
-    variant: { 'Shortcuts or Trigger ': 'True' },
-    props: sharedMenuItemProps,
-    example: (props) =>
-      html`<cds-menu-item
-        disabled=${props.disabled}
-        kind=${props.kind}
-        label=${props.label}
-        shortcut="⌘X"></cds-menu-item>`,
-    imports: ["import '@carbon/web-components/es/components/menu/index.js'"],
-  }
-);
-
-figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=36234-38344&t=OdgMrt4NDVwZpNSx-4',
-  {
-    variant: { 'Shortcuts or Trigger ': 'True', Divider: 'True' },
-    props: sharedMenuItemProps,
-    example: (props) =>
-      html`<cds-menu-item-divider></cds-menu-item-divider>
-        <cds-menu-item
-          disabled=${props.disabled}
-          kind=${props.kind}
-          label=${props.label}
-          shortcut="⌘X"></cds-menu-item>`,
-    imports: ["import '@carbon/web-components/es/components/menu/index.js'"],
-  }
-);
-
-figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=36234-38344&t=OdgMrt4NDVwZpNSx-4',
-  {
-    variant: { Selected: 'True' },
-    props: sharedMenuItemProps,
-    example: (props) =>
-      html`<cds-menu-item-selectable
-        disabled=${props.disabled}
-        kind=${props.kind}
-        label=${props.label}
-        selected></cds-menu-item-selectable>`,
-    imports: ["import '@carbon/web-components/es/components/menu/index.js'"],
-  }
-);
-
-figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=36234-38344&t=OdgMrt4NDVwZpNSx-4',
-  {
-    variant: { Selected: 'True', Divider: 'True' },
-    props: sharedMenuItemProps,
-    example: (props) =>
-      html`<cds-menu-item-divider></cds-menu-item-divider>
-        <cds-menu-item-selectable
-          disabled=${props.disabled}
-          kind=${props.kind}
-          label=${props.label}
-          selected></cds-menu-item-selectable>`,
-    imports: ["import '@carbon/web-components/es/components/menu/index.js'"],
-  }
-);

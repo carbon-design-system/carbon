@@ -1,4 +1,4 @@
-// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=31753-68447&t=aG4cJRjteQHcd71k-4
+// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=31753-68447&t=aG4cJRjteQHcd71k-4
 // source=https://github.com/carbon-design-system/carbon/blob/main/packages/web-components/src/components/combo-button/combo-button.ts
 // component=cds-combo-button
 

@@ -1,0 +1,189 @@
+import { Story, Controls, Source, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as stories from './WebTerminal.stories';
+
+<Meta isTemplate />
+
+# Web terminal
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/patterns/web-terminal/usage/)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [What is a Pattern?](#what-is-a-pattern)
+- [Getting started](#getting-started)
+- [Default](#default)
+- [With documentation links](#with-documentation-links)
+- [With actions](#with-actions)
+
+## Overview
+
+The `WebTerminal` pattern provides a recipe for exposing command-line workflows
+inside a product UI. It demonstrates how to compose `WebTerminal`,
+`WebTerminalProvider`, and `WebTerminalContentWrapper` so teams can add a
+persistent terminal surface that opens from application chrome and coexists with
+page content.
+
+> NOTE: Patterns have multiple ways of accomplishing a user need and typically
+> use a combination of components with additional design considerations. The
+> pattern code we share is meant to serve as an example implementation that can
+> be built and extended further.
+
+To build this pattern, we recommend including the following components:
+
+- WebTerminal - terminal shell and header controls
+- WebTerminalProvider — open/close state management
+- WebTerminalContentWrapper — adjusts page content width when the terminal is
+  open
+- Header / HeaderGlobalAction - application chrome and terminal launch trigger
+
+```jsx
+// Copy the pattern files from the example/components directory into your project
+import {
+  WebTerminal,
+  WebTerminalProvider,
+  WebTerminalContentWrapper,
+  useWebTerminal,
+} from './components'; // path to your copied pattern files
+import {
+  Header,
+  HeaderName,
+  HeaderGlobalAction,
+  HeaderGlobalBar,
+} from '@carbon/react';
+import { Terminal } from '@carbon/react/icons';
+```
+
+## What is a Pattern?
+
+Unlike components that are exported from the package, **patterns are recipes**
+that you copy into your codebase and customize to fit your specific needs. This
+approach offers:
+
+- **Full control**: Modify the code to match your exact requirements
+- **No breaking changes**: Updates to the pattern don't affect your
+  implementation
+- **Seamless customization**: Adapt the pattern without workarounds or prop
+  drilling
+- **Scalability**: Build upon the foundation with your own features
+
+The WebTerminal pattern consists of:
+
+- `WebTerminal.tsx` — terminal shell, header bar, and close button
+- `WebTerminalProvider.tsx` — React context for open/close state
+- `WebTerminalContentWrapper.tsx` — optional content layout adjustment
+
+## Getting started
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/react/src/examples/WebTerminal/example)
+> example implementation.
+
+[![Edit react-patterns](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/react/src/examples/WebTerminal/example)
+
+<Canvas withSource="none">
+  <Story of={stories.defaultWebTerminal} />
+</Canvas>
+
+1. **Copy the pattern code** from the
+   [example directory](https://github.com/carbon-design-system/ibm-products/tree/main/packages/ibm-products/src/patterns/webTerminal/example/components)
+   into your project
+2. **Install dependencies**: `@carbon/react`
+3. Wrap the area that launches or renders the terminal in `WebTerminalProvider`
+4. Use `useWebTerminal()` to open and close the terminal from your navigation or
+   page actions
+5. Pass your own terminal implementation as children to `WebTerminal`
+6. Optionally use `WebTerminalContentWrapper` to let the main content respond to
+   the open terminal state
+
+### Basic implementation
+
+```jsx
+const AppNavigation = () => {
+  const { toggleWebTerminal } = useWebTerminal();
+
+  return (
+    <HeaderGlobalAction aria-label="Web terminal" onClick={toggleWebTerminal}>
+      <Terminal size={20} />
+    </HeaderGlobalAction>
+  );
+};
+
+const App = () => (
+  <WebTerminalProvider>
+    <AppNavigation />
+    <WebTerminalContentWrapper>
+      <PageContent />
+    </WebTerminalContentWrapper>
+    <WebTerminal closeIconDescription="Close terminal">
+      <YourTerminalComponent />
+    </WebTerminal>
+  </WebTerminalProvider>
+);
+```
+
+### `useWebTerminal()` hook
+
+```jsx
+const { open, openWebTerminal, closeWebTerminal, toggleWebTerminal } =
+  useWebTerminal();
+```
+
+The hook returns four values:
+
+- `open` — current open state (`true` or `false`)
+- `openWebTerminal` — sets open state to `true`
+- `closeWebTerminal` — sets open state to `false`
+- `toggleWebTerminal` — toggles between `true` and `false`
+
+## Default
+
+The default terminal opens with the terminal icon in the application header bar.
+The close button in the top-right corner of the terminal dismisses it.
+
+## With documentation links
+
+Pass `documentationLinks` to expose helpful resources in the terminal header.
+This is useful for linking to command references, Kubernetes documentation, or
+product-specific help. Each link accepts `itemText`, `href`, and `onClick`.
+
+```jsx
+const documentationLinks = [
+  { itemText: 'BX/ICP docs', href: '#' },
+  { itemText: 'Kubernetes docs', href: '#' },
+  { itemText: 'Docker docs', href: '#' },
+  { itemText: 'Helm docs', href: '#' },
+];
+
+<WebTerminal
+  closeIconDescription="Close terminal"
+  documentationLinks={documentationLinks}
+  documentationLinksIconDescription="Show documentation links"
+>
+  <YourTerminalComponent />
+</WebTerminal>;
+```
+
+## With actions
+
+Pass `actions` to add custom icon buttons to the terminal header bar for common
+workflows such as copying logs, opening deployments, or triggering commands.
+
+```jsx
+const actions = [
+  {
+    renderIcon: Code,
+    onClick: () => {},
+    iconDescription: 'Create new deployment',
+  },
+  {
+    renderIcon: Copy,
+    onClick: () => {},
+    iconDescription: 'Copy logs',
+  },
+];
+
+<WebTerminal closeIconDescription="Close terminal" actions={actions}>
+  <YourTerminalComponent />
+</WebTerminal>;
+```

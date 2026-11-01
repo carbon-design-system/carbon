@@ -1,4 +1,4 @@
-// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=19893-290998&m=dev
+// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=19893-290998&m=dev
 // source=https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/NumberInput/NumberInput.tsx
 // component=NumberInput
 
