@@ -12,34 +12,33 @@ import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
-import { action } from 'storybook/actions';
 import mdx from './ComboBox.mdx';
 
 const items = [
   {
     id: 'option-0',
-    text: 'An example option that is really long to show what should be done to handle long text',
+    text: 'North America (United States, Canada, and Mexico)',
   },
   {
     id: 'option-1',
-    text: 'Option 1',
+    text: 'Europe',
   },
   {
     id: 'option-2',
-    text: 'Option 2',
+    text: 'Asia Pacific',
   },
   {
     id: 'option-3',
-    text: 'Option 3',
+    text: 'South America',
     disabled: true,
   },
   {
     id: 'option-4',
-    text: 'Option 4',
+    text: 'Middle East',
   },
   {
     id: 'option-5',
-    text: 'Option 5',
+    text: 'Africa',
   },
 ];
 export default {
@@ -73,7 +72,6 @@ export default {
         'selectedItem',
         'shouldFilterItem',
         'translateWithId',
-        'titleText',
         'type',
       ],
     },
@@ -81,66 +79,100 @@ export default {
 };
 
 const sharedArgTypes = {
+  allowCustomValue: {
+    control: 'boolean',
+  },
+  autoAlign: {
+    control: 'boolean',
+  },
+  direction: {
+    control: 'select',
+    options: ['top', 'bottom'],
+  },
+  disabled: {
+    control: 'boolean',
+  },
+  helperText: {
+    control: 'text',
+  },
+  invalid: {
+    control: 'boolean',
+  },
   onChange: {
     action: 'onChange',
   },
+  onInputChange: {
+    action: 'onInputChange',
+  },
   onToggleClick: {
-    action: 'clicked',
+    action: 'onToggleClick',
   },
   invalidText: {
     control: 'text',
+  },
+  placeholder: {
+    control: 'text',
+  },
+  readOnly: {
+    control: 'boolean',
+  },
+  size: {
+    control: 'select',
+    options: ['xs', 'sm', 'md', 'lg'],
+  },
+  titleText: {
+    control: 'text',
+  },
+  typeahead: {
+    control: 'boolean',
+  },
+  warn: {
+    control: 'boolean',
   },
   warnText: {
     control: 'text',
   },
 };
 
+const sharedArgs = {
+  allowCustomValue: false,
+  autoAlign: false,
+  direction: 'bottom',
+  disabled: false,
+  helperText: 'Choose the region where your resources will be hosted.',
+  invalid: false,
+  invalidText: 'Select a deployment region.',
+  placeholder: 'Select a region',
+  readOnly: false,
+  size: 'md',
+  titleText: 'Deployment region',
+  typeahead: false,
+  warn: false,
+  warnText: 'Confirm that this region meets your data residency requirements.',
+};
+
+const sharedControls = Object.keys(sharedArgTypes);
+
 export const Default = (args) => {
-  const items = [
-    {
-      id: 'option-0',
-      text: 'An example option that is really long to show what should be done to handle long text',
-    },
-    {
-      id: 'option-1',
-      text: 'Option 1',
-    },
-    {
-      id: 'option-2',
-      text: 'Option 2',
-    },
-    {
-      id: 'option-3',
-      text: 'Option 3',
-      disabled: true,
-    },
-    {
-      id: 'option-4',
-      text: 'Option 4',
-    },
-    {
-      id: 'option-5',
-      text: 'Option 5',
-    },
-  ];
   return (
     <div style={{ width: 300 }}>
       <ComboBox
         id="carbon-combobox"
         items={items}
         itemToString={(item) => (item ? item.text : '')}
-        titleText="Label"
-        helperText="Helper text"
-        invalidText="Error message goes here"
-        warnText="Warning message goes here"
-        onChange={action('onChange')}
         {...args}
       />
     </div>
   );
 };
 
+Default.args = { ...sharedArgs };
 Default.argTypes = { ...sharedArgTypes };
+Default.parameters = {
+  controls: {
+    include: sharedControls,
+  },
+};
 
 export const AllowCustomValue = (args) => {
   const filterItems = (menu) => {
@@ -149,29 +181,41 @@ export const AllowCustomValue = (args) => {
   return (
     <div style={{ width: 300 }}>
       <ComboBox
-        allowCustomValue
         shouldFilterItem={filterItems}
         id="carbon-combobox"
         items={['Apple', 'Orange', 'Banana', 'Pineapple', 'Raspberry', 'Lime']}
-        titleText="Label"
-        helperText="Helper text"
-        invalidText="Error message goes here"
-        warnText="Warning message goes here"
         {...args}
       />
     </div>
   );
 };
 
-AllowCustomValue.argTypes = { ...sharedArgTypes };
+AllowCustomValue.args = {
+  ...sharedArgs,
+  allowCustomValue: true,
+  helperText: 'Enter a fruit or choose one from the list.',
+  placeholder: 'Select or enter a fruit',
+  titleText: 'Favorite fruit',
+};
+AllowCustomValue.argTypes = {
+  ...sharedArgTypes,
+  allowCustomValue: {
+    ...sharedArgTypes.allowCustomValue,
+    table: {
+      readonly: true,
+    },
+  },
+};
+AllowCustomValue.parameters = {
+  controls: {
+    include: sharedControls,
+  },
+};
 
 export const AutocompleteWithTypeahead = (args) => {
   return (
     <div style={{ width: 300 }}>
       <ComboBox
-        helperText="Helper text"
-        invalidText="Error message goes here"
-        warnText="Warning message goes here"
         id="carbon-combobox"
         items={[
           'Apple',
@@ -182,9 +226,7 @@ export const AutocompleteWithTypeahead = (args) => {
           'Blueberry',
           'Cantaloupe',
         ]}
-        titleText="Label"
         {...args}
-        typeahead
       />
     </div>
   );
@@ -192,43 +234,66 @@ export const AutocompleteWithTypeahead = (args) => {
 
 AutocompleteWithTypeahead.argTypes = {
   ...sharedArgTypes,
-  onChange: { action: 'onChange' },
+  typeahead: {
+    ...sharedArgTypes.typeahead,
+    table: {
+      readonly: true,
+    },
+  },
+};
+AutocompleteWithTypeahead.args = {
+  ...sharedArgs,
+  helperText: 'Start typing to narrow the available fruits.',
+  placeholder: 'Search fruits',
+  titleText: 'Fruit',
+  typeahead: true,
+};
+AutocompleteWithTypeahead.parameters = {
+  controls: {
+    include: sharedControls,
+  },
 };
 
 export const ExperimentalAutoAlign = (args) => (
   <div style={{ width: 400 }}>
     <div style={{ height: 300 }}></div>
     <ComboBox
-      onChange={() => {}}
       id="carbon-combobox"
-      invalidText="Error message goes here"
-      warnText="Warning message goes here"
       items={items}
       itemToString={(item) => (item ? item.text : '')}
-      titleText="Label"
-      helperText="Helper text"
-      autoAlign={true}
       {...args}
     />
     <div style={{ height: 800 }}></div>
   </div>
 );
 
-ExperimentalAutoAlign.argTypes = { ...sharedArgTypes };
+ExperimentalAutoAlign.args = {
+  ...sharedArgs,
+  autoAlign: true,
+};
+ExperimentalAutoAlign.argTypes = {
+  ...sharedArgTypes,
+  autoAlign: {
+    ...sharedArgTypes.autoAlign,
+    table: {
+      readonly: true,
+    },
+  },
+};
+ExperimentalAutoAlign.parameters = {
+  controls: {
+    include: sharedControls,
+  },
+};
 
 export const _WithLayer = (args) => (
   <WithLayer>
     {(layer) => (
       <div style={{ width: 300 }}>
         <ComboBox
-          invalidText="Error message goes here"
-          warnText="Warning message goes here"
-          onChange={() => {}}
           id={`carbon-combobox-${layer}`}
           items={items}
           itemToString={(item) => (item ? item.text : '')}
-          titleText="Label"
-          helperText="Helper text"
           {...args}
         />
       </div>
@@ -236,7 +301,13 @@ export const _WithLayer = (args) => (
   </WithLayer>
 );
 
+_WithLayer.args = { ...sharedArgs };
 _WithLayer.argTypes = { ...sharedArgTypes };
+_WithLayer.parameters = {
+  controls: {
+    include: sharedControls,
+  },
+};
 
 export const withAILabel = (args) => {
   const aiLabel = (
@@ -247,12 +318,12 @@ export const withAILabel = (args) => {
           <h2 className="ai-label-heading">84%</h2>
           <p className="secondary bold">Confidence score</p>
           <p className="secondary">
-            Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
-            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+            This recommendation is based on service availability, latency, and
+            your organization&apos;s data residency requirements.
           </p>
           <hr />
           <p className="secondary">Model type</p>
-          <p className="bold">Foundation model</p>
+          <p className="bold">Regional placement model</p>
         </div>
         <AILabelActions>
           <IconButton kind="ghost" label="View">
@@ -269,44 +340,12 @@ export const withAILabel = (args) => {
       </AILabelContent>
     </AILabel>
   );
-  const items = [
-    {
-      id: 'option-0',
-      text: 'An example option that is really long to show what should be done to handle long text',
-    },
-    {
-      id: 'option-1',
-      text: 'Option 1',
-    },
-    {
-      id: 'option-2',
-      text: 'Option 2',
-    },
-    {
-      id: 'option-3',
-      text: 'Option 3',
-      disabled: true,
-    },
-    {
-      id: 'option-4',
-      text: 'Option 4',
-    },
-    {
-      id: 'option-5',
-      text: 'Option 5',
-    },
-  ];
   return (
     <div style={{ width: 300 }}>
       <ComboBox
-        invalidText="Error message goes here"
-        warnText="Warning message goes here"
-        onChange={action('onChange')}
         id="carbon-combobox"
         items={items}
         itemToString={(item) => (item ? item.text : '')}
-        titleText="Label"
-        helperText="Helper text"
         decorator={aiLabel}
         {...args}
       />
@@ -314,41 +353,45 @@ export const withAILabel = (args) => {
   );
 };
 
+withAILabel.args = { ...sharedArgs };
 withAILabel.argTypes = { ...sharedArgTypes };
+withAILabel.parameters = {
+  controls: {
+    include: sharedControls,
+  },
+};
 
 export const Controlled = (args) => {
   const options = [
     {
       id: 'option-1',
-      text: 'Option 1',
+      text: 'Europe',
     },
     {
       id: 'option-2',
-      text: 'Option 2',
+      text: 'Asia Pacific',
     },
     {
       id: 'option-3',
-      text: 'Option 3',
+      text: 'Middle East',
     },
   ];
   const [value, setValue] = React.useState(options[0]);
-  const onChange = ({ selectedItem }) => {
+  const onChange = (data) => {
+    const { selectedItem } = data;
     setValue(selectedItem);
+    args.onChange?.(data);
   };
 
   return (
     <div>
       <ComboBox
         {...args}
-        invalidText="Error message goes here"
-        warnText="Warning message goes here"
         onChange={onChange}
         id="carbon-combobox"
         items={options}
         selectedItem={value}
         itemToString={(item) => (item ? item.text : '')}
-        titleText="Label"
-        helperText="Helper text"
       />
       <div
         style={{
@@ -357,12 +400,18 @@ export const Controlled = (args) => {
           justifyContent: 'space-between',
         }}>
         <Button onClick={() => setValue(null)}>Clear</Button>
-        <Button onClick={() => setValue(options[0])}>Option 1</Button>
-        <Button onClick={() => setValue(options[1])}>Option 2</Button>
-        <Button onClick={() => setValue(options[2])}>Option 3</Button>
+        <Button onClick={() => setValue(options[0])}>Europe</Button>
+        <Button onClick={() => setValue(options[1])}>Asia Pacific</Button>
+        <Button onClick={() => setValue(options[2])}>Middle East</Button>
       </div>
     </div>
   );
 };
 
+Controlled.args = { ...sharedArgs };
 Controlled.argTypes = { ...sharedArgTypes };
+Controlled.parameters = {
+  controls: {
+    include: sharedControls,
+  },
+};
