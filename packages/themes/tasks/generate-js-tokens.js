@@ -8,11 +8,10 @@
 'use strict';
 
 const { reporter } = require('@carbon/cli-reporter');
-const generateV12DtcgThemes = require('./builders/generate-v12-dtcg-themes');
 const { runJs, runV12 } = require('../style-dictionary/sd.config');
 
 reporter.info('Generating JS token files via Style Dictionary...');
-Promise.all([runJs(), Promise.resolve(generateV12DtcgThemes()).then(runV12)])
+Promise.all([runJs(), runV12()])
   .then(() => {
     reporter.success('JS token files generated successfully! 🎉');
   })

@@ -7,7 +7,7 @@
  * @jest-environment node
  */
 
-import { generateV12DtcgThemes } from '../../src/oklch/generate-dtcg';
+import { generateV12Tokens } from '../../src/oklch/generate-tokens';
 import { generateTheme } from '../../src/oklch/generate-theme';
 import { defaultSpecification } from '../../src/oklch/specification';
 import { validateTheme } from '../../src/oklch/validate-theme';
@@ -81,33 +81,32 @@ describe('V12 OKLCH theme generation', () => {
     });
   });
 
-  it('generates DTCG-compatible V12 themes in a unified structure', () => {
-    const themes = generateV12DtcgThemes();
-
-    expect(themes.$extensions['org.carbon'].experimental).toBe(true);
+  it('generates one token file per theme with flat token names', () => {
+    const files = generateV12Tokens();
 
     for (const mode of ['light', 'dark']) {
-      expect(
-        themes.themes[mode].$extensions['org.carbon']['color-scheme']
-      ).toBe(mode);
+      expect(files[mode].$extensions['com.ibm.carbon']).toEqual({
+        experimental: true,
+        'color-scheme': mode,
+      });
     }
 
-    expect(themes.themes.light.layer['01']).toMatchObject({
+    expect(files.light['layer-01']).toMatchObject({
       $type: 'color',
       $value: {
         colorSpace: 'oklch',
         components: [0.97, 0.004, 262],
-        alpha: 1,
         hex: '#f4f5f8',
       },
       $extensions: {
-        'org.carbon': {
+        'com.ibm.carbon': {
           status: 'confirmed',
           source: { type: 'fixed' },
-          fallback: '#f4f5f8',
         },
       },
     });
+    expect(files.light['layer-01'].$value).not.toHaveProperty('alpha');
+    expect(files.light['state-disabled'].$value.alpha).toBe(0.25);
   });
 
   it('supports configuration overrides without mutating defaults', () => {

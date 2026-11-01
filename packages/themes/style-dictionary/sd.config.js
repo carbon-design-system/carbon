@@ -37,7 +37,7 @@ const ROOT = path.resolve(__dirname, '..');
 const RESOLVER = path.join(ROOT, 'tokens', 'themes.resolver.json');
 const SCSS_GENERATED = path.join(ROOT, 'scss', 'generated');
 const JS_GENERATED = path.join(ROOT, 'js', 'generated');
-const V12_THEMES = path.join(ROOT, 'src', 'dtcg', 'v12', 'themes.json');
+const V12_RESOLVER = path.join(ROOT, 'tokens', 'next', 'themes.resolver.json');
 
 const EXTENSION_NAMESPACE = 'com.ibm.carbon';
 const TOKEN_FILE_EXTENSION = '.tokens.json';
@@ -248,14 +248,16 @@ async function runJs() {
 //   scss/generated/_v12-{light,dark}.scss
 //   js/generated/v12/{light,dark}.{js,d.ts}
 async function runV12() {
-  const { themes } = fs.readJsonSync(V12_THEMES);
+  const resolver = readResolver(V12_RESOLVER);
   const files = {};
-  for (const [name, tokens] of Object.entries(themes)) {
+  for (const name of resolver.contexts('theme')) {
     const base = new StyleDictionary({});
+    base.registerParser(tokenFileParser);
     base.registerTransform(oklchFlatten);
 
     const sd = await base.extend({
-      tokens,
+      ...resolver.resolve({ theme: name }),
+      parsers: [tokenFileParser.name],
       platforms: {
         css: { transforms: [oklchFlatten.name] },
       },

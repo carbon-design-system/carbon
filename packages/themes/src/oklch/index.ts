@@ -7,7 +7,7 @@
 
 export * from './color';
 export * from './contrast';
-export * from './generate-dtcg';
+export * from './generate-tokens';
 export * from './generate-theme';
 export * from './specification';
 export * from './validate-theme';

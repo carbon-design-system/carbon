@@ -15,7 +15,6 @@ const buildCompatThemesFile = require('./builders/compat/themes');
 const buildCompatTokensFile = require('./builders/compat/tokens');
 const generateOklchHexFallbacks = require('./builders/generate-oklch-hex-fallbacks');
 const generateTokenTable = require('./builders/token-table');
-const generateV12DtcgThemes = require('./builders/generate-v12-dtcg-themes');
 const { runScss, runV12 } = require('../style-dictionary/sd.config');
 
 async function build() {
@@ -48,10 +47,7 @@ async function build() {
   reporter.info('Generating SCSS files via Style Dictionary...');
   await runScss();
 
-  reporter.info('Generating experimental V12 DTCG themes...');
-  for (const filepath of generateV12DtcgThemes()) {
-    reporter.success(`Written: ${filepath}`);
-  }
+  reporter.info('Generating experimental V12 themes...');
   await runV12();
 
   const fallbackFile = path.join(SCSS_DIR, 'generated', '_v12-fallbacks.scss');

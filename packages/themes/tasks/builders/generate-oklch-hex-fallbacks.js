@@ -7,40 +7,19 @@
 
 'use strict';
 
-const { generateTheme } = require('../../src/oklch/generate-theme');
+const fs = require('fs-extra');
+const path = require('path');
+const { readResolver } = require('../../style-dictionary/resolver');
 
-const COLLECTIONS = {
-  surfaces: 'layer',
-  fields: 'field',
-  accents: 'layer-accent',
-  helperText: 'text-helper',
-  placeholderText: 'text-placeholder',
-  helperIcons: 'icon-helper',
-  placeholderIcons: 'icon-placeholder',
-  strongBorders: 'border-strong',
-  subtleBorders: 'border-subtle',
-  skeletons: 'skeleton-background',
-};
-
-const TOKENS = {
-  brand: 'background-brand',
-  base: 'base',
-  textPrimary: 'text-primary',
-  textSecondary: 'text-secondary',
-  iconPrimary: 'icon-primary',
-  iconSecondary: 'icon-secondary',
-};
-
-const CONTEXT_SUFFIXES = {
-  surface: '01',
-  'surface-light': '02',
-  'surface-dark': '03',
-};
+const RESOLVER = path.resolve(
+  __dirname,
+  '../../tokens/next/themes.resolver.json'
+);
 
 /**
  * Converts a hex color and an alpha value to a CSS `rgba()` string.
  *
- * Opacity-type tokens (e.g. `state-disabled`) carry `token.alpha < 1`.
+ * Opacity-type tokens (e.g. `state-disabled`) carry `alpha < 1`.
  * A bare hex fallback would silently discard that alpha and render as an
  * opaque surface color in non-OKLCH browsers.  Using `rgba()` preserves the
  * transparency and matches Carbon's existing V11 pattern (e.g. `rgba(69, 137,
@@ -58,44 +37,29 @@ function hexToRgba(hex, alpha) {
 }
 
 /**
- * Returns the CSS fallback value for a token.  Tokens that carry a fractional
- * alpha (opacity-type interactive states) emit `rgba(r, g, b, alpha)` so that
- * the transparency is preserved in browsers without OKLCH support.  All other
- * tokens emit their gamut-mapped hex value unchanged.
+ * Returns the CSS fallback value of a color token value.  Values that carry a
+ * fractional alpha (opacity-type interactive states) emit `rgba(r, g, b, alpha)`
+ * so that the transparency is preserved in browsers without OKLCH support.  All
+ * other values emit their gamut-mapped hex value unchanged.
  *
- * @param {{ fallback: string, alpha?: number }} token
+ * @param {{ hex: string, alpha?: number }} value
  * @returns {string}
  */
-function tokenFallback(token) {
-  if (token.alpha !== undefined && token.alpha < 1) {
-    return hexToRgba(token.fallback, token.alpha);
+function tokenFallback({ hex, alpha }) {
+  if (alpha !== undefined && alpha < 1) {
+    return hexToRgba(hex, alpha);
   }
-  return token.fallback;
+  return hex;
 }
 
 function getFallbacks(mode) {
-  const theme = generateTheme(mode);
-  const fallbacks = Object.entries(TOKENS).map(([key, name]) => [
-    name,
-    tokenFallback(theme[key]),
-  ]);
+  const { source } = readResolver(RESOLVER).resolve({ theme: mode });
 
-  for (const [collection, name] of Object.entries(COLLECTIONS)) {
-    for (const token of Object.values(theme[collection])) {
-      fallbacks.push([
-        `${name}-${CONTEXT_SUFFIXES[token.context]}`,
-        tokenFallback(token),
-      ]);
-    }
-  }
-
-  if (theme.interactive) {
-    for (const [state, token] of Object.entries(theme.interactive)) {
-      fallbacks.push([`state-${state}`, tokenFallback(token)]);
-    }
-  }
-
-  return fallbacks;
+  return source.flatMap((file) =>
+    Object.entries(fs.readJsonSync(file))
+      .filter(([name]) => !name.startsWith('$'))
+      .map(([name, token]) => [name, tokenFallback(token.$value)])
+  );
 }
 
 function formatDeclarations(mode) {

@@ -11,31 +11,25 @@
 
 const fs = require('fs');
 const path = require('path');
-const generateV12DtcgThemes = require('../../tasks/builders/generate-v12-dtcg-themes');
 const generateOklchHexFallbacks = require('../../tasks/builders/generate-oklch-hex-fallbacks');
 const oklchFlatten = require('../../style-dictionary/transforms/oklch-flatten');
+const { generateV12Tokens } = require('../../src/oklch/generate-tokens');
 
 describe('V12 theme build pipeline', () => {
-  it('writes validated light and dark DTCG sources into a single themes.json', () => {
-    const paths = generateV12DtcgThemes();
+  it.each(['light', 'dark'])(
+    'keeps the %s token file in sync with the OKLCH specification',
+    (mode) => {
+      const file = path.resolve(
+        __dirname,
+        `../../tokens/next/themes/${mode}/theme.tokens.json`
+      );
 
-    expect(paths.map((filepath) => path.basename(filepath))).toEqual([
-      'themes.json',
-    ]);
-
-    const themes = JSON.parse(fs.readFileSync(paths[0], 'utf8'));
-    expect(themes.$extensions['org.carbon'].experimental).toBe(true);
-
-    for (const mode of ['light', 'dark']) {
-      expect(
-        themes.themes[mode].$extensions['org.carbon']['color-scheme']
-      ).toBe(mode);
-      expect(themes.themes[mode].layer['01'].$value.colorSpace).toBe('oklch');
-      expect(themes.themes[mode].layer['01'].$value.hex).toMatch(
-        /^#[\da-f]{6}$/i
+      // Out of sync? Run `yarn generate:v12` in `packages/themes`
+      expect(fs.readFileSync(file, 'utf8')).toBe(
+        JSON.stringify(generateV12Tokens()[mode], null, 2) + '\n'
       );
     }
-  });
+  );
 
   it('flattens DTCG OKLCH values for Style Dictionary outputs', () => {
     expect(
