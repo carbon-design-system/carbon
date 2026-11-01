@@ -17,6 +17,7 @@ import { IconButton, type IconButtonProps } from '../IconButton';
 import { usePrefix } from '../../internal/usePrefix';
 import { noopFn } from '../../internal/noopFn';
 import type { SwitchEventHandlersParams } from './Switch';
+import { TabsContext } from '../Tabs/Tabs';
 
 interface IconSwitchProps
   extends Omit<IconButtonProps, 'onClick' | 'onKeyDown' | 'label' | 'name'> {
@@ -80,6 +81,13 @@ const IconSwitch = frFn((props, ref) => {
     ...other
   } = props;
   const prefix = usePrefix();
+  const { baseId } = React.useContext(TabsContext);
+  const isInsideTabs = Boolean(baseId);
+  const id = isInsideTabs ? `${baseId}-tab-${index}` : other.id;
+  const panelId = isInsideTabs
+    ? `${baseId}-tabpanel-${index}`
+    : other['aria-controls'];
+
   const [isHovered, setIsHovered] = useState(false);
 
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
@@ -130,9 +138,11 @@ const IconSwitch = frFn((props, ref) => {
       wrapperClasses={iconButtonClasses}
       {...other}
       align={align}
+      aria-controls={panelId}
       className={classes}
       disabled={disabled}
       enterDelayMs={enterDelayMs}
+      id={id}
       leaveDelayMs={leaveDelayMs}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
