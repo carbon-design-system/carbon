@@ -7,14 +7,16 @@
 
 @use '@carbon/themes/scss/config' as *;
 @use '@carbon/themes/scss/theme';
-@use '@carbon/themes/scss/v12' as v12;
+@use '@carbon/themes/scss/generated/v12-dark';
+@use '@carbon/themes/scss/generated/v12-fallbacks';
+@use '@carbon/themes/scss/generated/v12-light';
 
 [data-carbon-theme='light'] {
-  @include theme.theme(v12.$experimental-v12-light);
+  @include theme.theme(v12-light.$light);
 }
 
 [data-carbon-theme='dark'] {
-  @include theme.theme(v12.$experimental-v12-dark);
+  @include theme.theme(v12-dark.$dark);
 }
 
 .v12-oklch-notice {

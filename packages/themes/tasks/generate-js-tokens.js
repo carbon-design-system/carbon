@@ -8,10 +8,10 @@
 'use strict';
 
 const { reporter } = require('@carbon/cli-reporter');
-const { runJs, runV12 } = require('../style-dictionary/sd.config');
+const { runJs } = require('../style-dictionary/sd.config');
 
 reporter.info('Generating JS token files via Style Dictionary...');
-Promise.all([runJs(), runV12()])
+runJs()
   .then(() => {
     reporter.success('JS token files generated successfully! 🎉');
   })
