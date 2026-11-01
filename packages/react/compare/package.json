@@ -1,0 +1,18 @@
+{
+  "name": "@carbon/react-compare",
+  "version": "1.0.0",
+  "description": "Capture and diff tool: Carbon React V11 vs V12, side by side",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "capture": "node capture.mjs",
+    "diff": "node diff.mjs",
+    "build": "node capture.mjs && node diff.mjs",
+    "serve": "node serve.mjs"
+  },
+  "devDependencies": {
+    "pixelmatch": "^7.2.0",
+    "playwright": "^1.63.0",
+    "pngjs": "^7.0.0"
+  }
+}

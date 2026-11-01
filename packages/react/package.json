@@ -45,7 +45,12 @@
     "storybook:v12": "yarn storybook:v12:prepare && storybook dev -p 3012 --config-dir .storybook-v12",
     "storybook:v12:build": "yarn storybook:v12:prepare && storybook build --config-dir .storybook-v12 --output-dir storybook-static-v12",
     "storybook:v12:prepare": "node ../../tasks/prepare-v12-storybook.mjs .",
-    "telemetry:config": "npx -y @ibm/telemetry-js-config-generator generate --id fd89d12b-6a39-48b4-adf4-30c94dc0dddd --endpoint https://www-api.ibm.com/ibm-telemetry/v1/metrics --files ./src/components/**/*.(tsx|js|jsx)"
+    "telemetry:config": "npx -y @ibm/telemetry-js-config-generator generate --id fd89d12b-6a39-48b4-adf4-30c94dc0dddd --endpoint https://www-api.ibm.com/ibm-telemetry/v1/metrics --files ./src/components/**/*.(tsx|js|jsx)",
+    "compare:capture": "node compare/capture.mjs",
+    "compare:diff": "node compare/diff.mjs",
+    "compare:build": "node compare/capture.mjs && node compare/diff.mjs",
+    "compare:serve": "node compare/serve.mjs",
+    "compare:sass-index": "node compare/sass-index.mjs"
   },
   "peerDependencies": {
     "react": "^16.8.6 || ^17.0.1 || ^18.2.0 || ^19.0.0",
