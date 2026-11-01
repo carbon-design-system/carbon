@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -31,6 +31,62 @@ describe('cds-textarea', () => {
     const helper = el.shadowRoot.querySelector('.cds--form__helper-text');
     expect(helper).to.exist;
     expect(helper.textContent).to.include('Helper text');
+  });
+
+  it('should describe the textarea with the helper text', async () => {
+    const el = await fixture(html`
+      <cds-textarea
+        label="Textarea label"
+        helper-text="Helpful info"></cds-textarea>
+    `);
+
+    const textarea = el.shadowRoot.querySelector('textarea');
+    const helper = el.shadowRoot.querySelector('.cds--form__helper-text');
+
+    expect(textarea.getAttribute('aria-describedby')).to.equal('helper-text');
+    expect(helper.id).to.equal('helper-text');
+  });
+
+  it('should describe the textarea with slotted helper text', async () => {
+    const el = await fixture(html`
+      <cds-textarea label="Textarea label">
+        <span slot="helper-text">Slotted helpful info</span>
+      </cds-textarea>
+    `);
+    await el.updateComplete;
+
+    const textarea = el.shadowRoot.querySelector('textarea');
+
+    expect(textarea.getAttribute('aria-describedby')).to.equal('helper-text');
+  });
+
+  it('should not set aria-describedby in the fluid variant, which does not render the helper text', async () => {
+    const el = await fixture(html`
+      <cds-textarea
+        isFluid
+        label="Textarea label"
+        helper-text="Helpful info"></cds-textarea>
+    `);
+
+    // Guard the precondition: if the attribute ever stops mapping to the
+    // property, this must fail loudly rather than pass because the component
+    // simply is not fluid.
+    expect(el.isFluid).to.be.true;
+
+    const textarea = el.shadowRoot.querySelector('textarea');
+
+    expect(el.shadowRoot.querySelector('#helper-text')).to.not.exist;
+    expect(textarea.hasAttribute('aria-describedby')).to.be.false;
+  });
+
+  it('should not set aria-describedby when there is no helper text', async () => {
+    const el = await fixture(html`
+      <cds-textarea label="Textarea label"></cds-textarea>
+    `);
+
+    const textarea = el.shadowRoot.querySelector('textarea');
+
+    expect(textarea.hasAttribute('aria-describedby')).to.be.false;
   });
 
   it('should reflect value to the textarea', async () => {
