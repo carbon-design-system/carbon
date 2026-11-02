@@ -136,7 +136,57 @@ describe('ProgressIndicator', () => {
 
       await userEvent.click(screen.getByTitle('First step'));
 
-      expect(onChange).toHaveBeenCalled();
+      expect(onChange).toHaveBeenCalledTimes(1);
+    });
+
+    it('should call onChange once when Enter or Space is pressed on non-current step', async () => {
+      const onChange = jest.fn();
+      render(
+        <ProgressIndicator onChange={onChange} currentIndex={1}>
+          <ProgressStep
+            complete
+            label="First step"
+            description="Step 1: Getting started with Carbon Design System"
+          />
+          <ProgressStep
+            current
+            label="Second step with tooltip"
+            description="Step 2: Getting started with Carbon Design System"
+          />
+        </ProgressIndicator>
+      );
+
+      const button = screen.getByTitle('First step');
+      button.focus();
+      await userEvent.keyboard('{Enter}');
+      expect(onChange).toHaveBeenCalledTimes(1);
+
+      await userEvent.keyboard(' ');
+      expect(onChange).toHaveBeenCalledTimes(2);
+    });
+
+    it('should not call onChange when Enter or Space is pressed on current step', async () => {
+      const onChange = jest.fn();
+      render(
+        <ProgressIndicator onChange={onChange} currentIndex={1}>
+          <ProgressStep
+            complete
+            label="First step"
+            description="Step 1: Getting started with Carbon Design System"
+          />
+          <ProgressStep
+            current
+            label="Second step with tooltip"
+            description="Step 2: Getting started with Carbon Design System"
+          />
+        </ProgressIndicator>
+      );
+
+      const currentButton = screen.getByTitle('Second step with tooltip');
+      currentButton.focus();
+      await userEvent.keyboard('{Enter}');
+      await userEvent.keyboard(' ');
+      expect(onChange).not.toHaveBeenCalled();
     });
 
     it('should respect spaceEqually prop', () => {
@@ -273,7 +323,31 @@ describe('ProgressStep', () => {
       render(<ProgressStep label="First step" onClick={onClick} />);
 
       await userEvent.click(screen.getByRole('button'));
-      expect(onClick).toHaveBeenCalled();
+      expect(onClick).toHaveBeenCalledTimes(1);
+    });
+
+    it('should call onClick once when Enter or Space is pressed', async () => {
+      const onClick = jest.fn();
+      render(<ProgressStep label="First step" onClick={onClick} />);
+
+      const button = screen.getByRole('button');
+      button.focus();
+      await userEvent.keyboard('{Enter}');
+      expect(onClick).toHaveBeenCalledTimes(1);
+
+      await userEvent.keyboard(' ');
+      expect(onClick).toHaveBeenCalledTimes(2);
+    });
+
+    it('should not call onClick when Enter or Space is pressed on current step', async () => {
+      const onClick = jest.fn();
+      render(<ProgressStep label="First step" current onClick={onClick} />);
+
+      const button = screen.getByRole('button');
+      button.focus();
+      await userEvent.keyboard('{Enter}');
+      await userEvent.keyboard(' ');
+      expect(onClick).not.toHaveBeenCalled();
     });
 
     it('should respect secondaryLabel prop', () => {

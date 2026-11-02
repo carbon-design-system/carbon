@@ -57,6 +57,7 @@ collect:
         - closeIconDescription
         - collapse-label
         - collapse-mode
+        - collapseText
         - color-scheme
         - cols
         - compact
@@ -89,6 +90,7 @@ collect:
         - expand-label
         - expandable
         - expanded
+        - expandText
         - feedback
         - feedback-timeout
         - filter
@@ -110,6 +112,7 @@ collect:
         - hide-divider
         - hide-label
         - hide-password-label
+        - hide-search
         - hide-steppers
         - hide-text-input
         - hidePasswordLabel
@@ -142,6 +145,7 @@ collect:
         - isFluid
         - isSelected
         - isValid
+        - item-count
         - kind
         - label
         - label-position
@@ -170,6 +174,7 @@ collect:
         - min
         - min-date
         - min-label
+        - multi
         - multiple
         - name
         - nested
@@ -222,6 +227,7 @@ collect:
         - openTooltip
         - optional-classes
         - orientation
+        - overflow-aria-label
         - overflow-menu-on-hover
         - page
         - paragraph
@@ -307,6 +313,48 @@ collect:
         - oncds-accordion-item-toggled
         # cds-action-set
         - disable-stacking
+        # cds-add-select-body
+        - global-search-label
+        - global-search-placeholder
+        - items-label
+        - layout
+        - oncds-add-select-body-breadcrumb-click
+        - oncds-add-select-body-search
+        - path
+        - search-results-title
+        # cds-add-select-column
+        - all-indeterminate
+        - all-selected
+        - oncds-add-select-column-search
+        - oncds-add-select-column-select-all
+        - search-label
+        - search-placeholder
+        - show-select-all
+        # cds-add-select-item-panel
+        - oncds-add-select-item-panel-close
+        - show-close-button
+        # cds-add-select-row
+        - _column-multi
+        - has-children
+        - has-item-panel
+        - item-id
+        - item-panel-icon-description
+        - item-panel-open
+        - oncds-add-select-row-item-panel-click
+        - oncds-add-select-row-navigate
+        - oncds-add-select-row-select
+        - parent-id
+        - skeleton
+        # cds-add-select-selection-summary
+        - edit-icon-description
+        - oncds-add-select-selection-summary-edit
+        - selected-item-count
+        - show-edit-icon
+        # cds-add-select-selection-summary-item
+        - hide-remove-button
+        - oncds-add-select-selection-summary-item-remove
+        - remove-button-label
+        - use-accordion
         # cds-ai-skeleton-icon
         - custom-styles
         # cds-badge-indicator
@@ -377,8 +425,6 @@ collect:
         - is-inset
         # cds-contained-list-item
         - oncds-contained-list-item-click
-        # cds-copy-button
-        - autoAlign
         # cds-definition-tooltip
         - open-on-hover
         # cds-dialog
@@ -544,9 +590,29 @@ collect:
         - danger
         - divider
         - oncds-overflow-menu-item-clicked
+        # cds-page-header
+        - full-width-grid
+        - narrow-grid
+        # cds-page-header-actions-set
+        - actions-data
+        - toolbar-aria-label
         # cds-page-header-breadcrumb
+        - actions-aria-label
         - content-actions-flush
         - page-actions-flush
+        # cds-page-header-breadcrumbs-set
+        - breadcrumb-aria-label
+        - breadcrumbs-data
+        # cds-page-header-content
+        - title-level
+        # cds-page-header-content-text
+        - subtitle-level
+        # cds-page-header-hero-image
+        - object-fit
+        # cds-page-header-tabs
+        - disable-sticky-tab-bar
+        # cds-page-header-tags-set
+        - tags-data
         # cds-pagination
         - backward-text
         - backward-text-tooltip-position
@@ -704,9 +770,6 @@ collect:
         - influencer-panel-aria-label
         - influencer-panel-open
         - oncds-tearsheet-influencer-closed
-        # cds-tearsheet-scroller
-        - collapseText
-        - expandText
         # cds-tearsheet-stack
         - stack-step-size
         # cds-tearsheet-summary-content
@@ -816,6 +879,9 @@ collect:
         - text
         - tooltip
         - warning
+        # cds-add-select-body - layout
+        - horizontal
+        - vertical
         # cds-edit-in-place - toggletip-alignment
         - bottom
         - bottom-left
@@ -850,6 +916,24 @@ collect:
         - sm
         - xl
         - xs
+        # cds-page-header-content - title-level
+        - h1
+        - h2
+        - h3
+        - h4
+        - h5
+        - h6
+        # cds-page-header-content-text - subtitle-level
+        - h2
+        - h3
+        - h4
+        - h5
+        - h6
+        # cds-page-header-hero-image - object-fit
+        - contain
+        - cover
+        - fill
+        - none
         # cds-resizer-handle - axis
         - x
         - y
