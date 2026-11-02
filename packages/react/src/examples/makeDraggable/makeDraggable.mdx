@@ -76,6 +76,7 @@ draggable.cleanup();
         kind="ghost"
         ref={dragRef}
         className="drag-icon"
+        aria-label="Drag handle"
         aria-describedby="drag-instructions"
       >
         <Draggable />
@@ -89,6 +90,7 @@ draggable.cleanup();
         kind="ghost"
         onClick={() => setIsOpen(false)}
         className="close-icon"
+        aria-label="Close"
       >
         <Close />
       </Button>

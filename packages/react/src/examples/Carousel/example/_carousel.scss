@@ -14,7 +14,9 @@
   margin-block-end: $spacing-05;
 }
 
-.carousel_item {
+// Nested under the wrapper so this wins over `.carousel__view { block-size: 100% }`
+// from the carousel utility regardless of stylesheet load order
+.exampleCarouselWrapper .carousel_item {
   block-size: 25rem;
 
   img {
@@ -105,7 +107,6 @@
   display: grid;
   block-size: 31.25rem;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  inline-size: 18.75rem;
   outline: thin dashed button.$button-danger-primary;
 }
 

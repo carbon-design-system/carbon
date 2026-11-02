@@ -81,8 +81,8 @@ const DraggableDiv = () => {
               kind="ghost"
               ref={dragRef}
               className="drag-icon-div"
-              aria-describedby="drag-instructions-div"
-            >
+              aria-label="Drag handle"
+              aria-describedby="drag-instructions-div">
               <Draggable />
             </Button>
             <span id="drag-instructions-div" className={`${prefix}--visually-hidden`}>
@@ -176,8 +176,8 @@ const DraggablePopoverTemplate = () => {
               kind="ghost"
               ref={dragRef}
               className="drag-icon"
-              aria-describedby="drag-instructions-popover"
-            >
+              aria-label="Drag handle"
+              aria-describedby="drag-instructions-popover">
               <Draggable />
             </Button>
             <span id="drag-instructions-popover" className={`${prefix}--visually-hidden`}>
@@ -189,7 +189,7 @@ const DraggablePopoverTemplate = () => {
               kind="ghost"
               onClick={() => setIsOpen(false)}
               className="close-icon"
-            >
+              aria-label="Close">
               <Close />
             </Button>
           </header>

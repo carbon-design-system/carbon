@@ -117,7 +117,7 @@ export const ViewStackExample = () => {
         ))}
         <Button
           size="sm"
-          kind="secondary"
+          kind="ghost"
           disabled={currentViewIndex === lastViewIndex}
           onClick={() => viewStackExampleRef.current?.next()}
         >
@@ -125,7 +125,7 @@ export const ViewStackExample = () => {
         </Button>
         <Button
           size="sm"
-          kind="secondary"
+          kind="ghost"
           disabled={viewStackHistory.length === 1}
           onClick={() => viewStackExampleRef.current?.prev()}
         >
@@ -133,7 +133,7 @@ export const ViewStackExample = () => {
         </Button>
         <Button
           size="sm"
-          kind="secondary"
+          kind="ghost"
           disabled={viewStackHistory.length === 1}
           onClick={() => viewStackExampleRef.current?.reset()}
         >
