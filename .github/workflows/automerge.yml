@@ -97,7 +97,7 @@ jobs:
 
       - name: Run AVT
         id: avt
-        if: steps.merge.outputs.status == 'merged' && github.repository == 'carbon-design-system/carbon'
+        if: steps.merge.outputs.status == 'merged'
         run: yarn playwright test --project chromium --grep @avt
 
       - name: Stop storybook
