@@ -11,7 +11,7 @@ import {
   findLightnessForContrast,
   getContrastRatio,
   getRelativeLuminance,
-} from '../../src/oklch/contrast';
+} from '../../src/theme-generator/contrast';
 
 describe('OKLCH contrast utilities', () => {
   it('calculates known WCAG contrast ratios', () => {

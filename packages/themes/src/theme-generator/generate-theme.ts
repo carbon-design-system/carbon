@@ -20,7 +20,7 @@ import {
   tokenRules,
   type InteractiveState,
   type InteractiveStateSpec,
-  type OklchThemeSpecification,
+  type ThemeSpecification,
   type RuleStatus,
   type SurfaceContext,
   type ThemeMode,
@@ -107,7 +107,7 @@ const contexts = surfaceContexts;
  */
 export function generateTheme(
   mode: ThemeMode,
-  overrides: Partial<OklchThemeSpecification> = {}
+  overrides: Partial<ThemeSpecification> = {}
 ): GeneratedOklchTheme {
   const specification = mergeSpecification(overrides);
   const modeSpecification = specification[mode];
@@ -287,7 +287,7 @@ export function generateTheme(
  * - `opacity` states: keep the surface color but apply an alpha channel.
  */
 function createInteractiveTokens(
-  spec: OklchThemeSpecification['light']['interactive'],
+  spec: ThemeSpecification['light']['interactive'],
   surface: GeneratedColorToken,
   chroma: number,
   hue: number
@@ -491,8 +491,8 @@ function createToken({
 }
 
 function mergeSpecification(
-  overrides: Partial<OklchThemeSpecification>
-): OklchThemeSpecification {
+  overrides: Partial<ThemeSpecification>
+): ThemeSpecification {
   return {
     ...defaultSpecification,
     ...overrides,
@@ -513,9 +513,9 @@ function mergeSpecification(
  * other interactive states.
  */
 function mergeModeSpec(
-  base: OklchThemeSpecification['light'],
-  override: Partial<OklchThemeSpecification['light']> | undefined
-): OklchThemeSpecification['light'] {
+  base: ThemeSpecification['light'],
+  override: Partial<ThemeSpecification['light']> | undefined
+): ThemeSpecification['light'] {
   if (!override) return base;
   return {
     ...base,

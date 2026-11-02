@@ -7,7 +7,11 @@
  * @jest-environment node
  */
 
-import { formatOklch, isInSrgbGamut, oklchToHex } from '../../src/oklch/color';
+import {
+  formatOklch,
+  isInSrgbGamut,
+  oklchToHex,
+} from '../../src/theme-generator/color';
 
 describe('OKLCH color utilities', () => {
   it('formats OKLCH colors deterministically', () => {

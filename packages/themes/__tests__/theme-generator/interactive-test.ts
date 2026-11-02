@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { generateTheme } from '../src/oklch/generate-theme';
-import { validateTheme } from '../src/oklch/validate-theme';
-import { defaultSpecification } from '../src/oklch/specification';
+import { generateTheme } from '../../src/theme-generator/generate-theme';
+import { validateTheme } from '../../src/theme-generator/validate-theme';
+import { defaultSpecification } from '../../src/theme-generator/specification';
 
 describe('generateTheme — interactive tokens', () => {
   const MODES = ['light', 'dark'] as const;

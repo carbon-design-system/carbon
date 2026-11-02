@@ -9,9 +9,9 @@
 
 const fs = require('fs-extra');
 const path = require('path');
-const { generateTheme } = require('../src/oklch/generate-theme');
-const { generateV12Tokens } = require('../src/oklch/generate-tokens');
-const { validateTheme } = require('../src/oklch/validate-theme');
+const { generateTheme } = require('../src/theme-generator/generate-theme');
+const { generateV12Tokens } = require('../src/theme-generator/generate-tokens');
+const { validateTheme } = require('../src/theme-generator/validate-theme');
 
 const TOKENS_DIR = path.resolve(__dirname, '../tokens/next/themes');
 

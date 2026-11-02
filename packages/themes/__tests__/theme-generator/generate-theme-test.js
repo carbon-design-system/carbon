@@ -7,10 +7,10 @@
  * @jest-environment node
  */
 
-import { generateV12Tokens } from '../../src/oklch/generate-tokens';
-import { generateTheme } from '../../src/oklch/generate-theme';
-import { defaultSpecification } from '../../src/oklch/specification';
-import { validateTheme } from '../../src/oklch/validate-theme';
+import { generateV12Tokens } from '../../src/theme-generator/generate-tokens';
+import { generateTheme } from '../../src/theme-generator/generate-theme';
+import { defaultSpecification } from '../../src/theme-generator/specification';
+import { validateTheme } from '../../src/theme-generator/validate-theme';
 
 const contexts = ['surface', 'surface-light', 'surface-dark'];
 

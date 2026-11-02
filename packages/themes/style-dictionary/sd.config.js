@@ -24,7 +24,6 @@ const { default: StyleDictionary } = require('style-dictionary');
 const { readResolver } = require('./resolver');
 const jsonPointerReferences = require('./preprocessors/json-pointer-references');
 const colorFlatten = require('./transforms/color-flatten');
-const oklchFlatten = require('./transforms/oklch-flatten');
 const scssThemes = require('./formats/scss-themes');
 const scssTokens = require('./formats/scss-tokens');
 const scssComponentTokens = require('./formats/scss-component-tokens');
@@ -253,13 +252,13 @@ async function runV12() {
   for (const name of resolver.contexts('theme')) {
     const base = new StyleDictionary({});
     base.registerParser(tokenFileParser);
-    base.registerTransform(oklchFlatten);
+    base.registerTransform(colorFlatten);
 
     const sd = await base.extend({
       ...resolver.resolve({ theme: name }),
       parsers: [tokenFileParser.name],
       platforms: {
-        css: { transforms: [oklchFlatten.name] },
+        css: { transforms: [colorFlatten.name] },
       },
       log: { warnings: 'error' },
     });

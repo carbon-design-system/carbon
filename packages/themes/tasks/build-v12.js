@@ -9,14 +9,14 @@
 
 const fs = require('fs-extra');
 const path = require('path');
-const generateOklchHexFallbacks = require('./builders/generate-oklch-hex-fallbacks');
+const generateColorFallbacks = require('./builders/generate-color-fallbacks');
 const { runV12 } = require('../style-dictionary/sd.config');
 
 async function buildV12() {
   await runV12();
   await fs.outputFile(
     path.resolve(__dirname, '../scss/generated/_v12-fallbacks.scss'),
-    generateOklchHexFallbacks()
+    generateColorFallbacks()
   );
 }
 

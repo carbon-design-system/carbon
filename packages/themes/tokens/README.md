@@ -187,7 +187,7 @@ which point each one at its numbered token (`layer-01`, `layer-02` or
 ## V12 tokens
 
 `next/themes/{light,dark}/theme.tokens.json` are generated from the OKLCH
-specification in `src/oklch`, so do not edit them directly. Change the
+specification in `src/theme-generator`, so do not edit them directly. Change the
 specification, then regenerate them and commit the result:
 
 ```bash

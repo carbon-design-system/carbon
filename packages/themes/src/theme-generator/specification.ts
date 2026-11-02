@@ -109,7 +109,7 @@ export interface ThemeModeSpecification {
   interactive: InteractiveStateModeSpec;
 }
 
-export interface OklchThemeSpecification {
+export interface ThemeSpecification {
   neutral: {
     hue: number;
     chroma: number;
@@ -208,7 +208,7 @@ export const tokenRules = {
  * Override individual fields by passing `overrides` to `generateTheme()`.
  * Partial `interactive` overrides deep-merge, preserving unspecified states.
  */
-export const defaultSpecification: OklchThemeSpecification = {
+export const defaultSpecification: ThemeSpecification = {
   neutral: {
     hue: 262,
     chroma: 0.004,

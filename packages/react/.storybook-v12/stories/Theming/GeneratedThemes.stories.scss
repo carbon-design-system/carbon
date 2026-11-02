@@ -19,7 +19,7 @@
   @include theme.theme(v12-dark.$dark);
 }
 
-.v12-oklch-notice {
+.v12-generated-notice {
   display: grid;
   padding: 1rem;
   background: var(--#{$prefix}-notification-background-warning);
@@ -30,32 +30,32 @@
   max-inline-size: 80rem;
 }
 
-.v12-oklch-comparison {
+.v12-generated-comparison {
   display: grid;
   gap: 2rem;
   max-inline-size: 80rem;
 }
 
 @media (width >= 66rem) {
-  .v12-oklch-comparison {
+  .v12-generated-comparison {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-.v12-oklch-theme {
+.v12-generated-theme {
   border: 1px solid var(--#{$prefix}-border-strong-01);
   background: var(--#{$prefix}-layer-01);
   color: var(--#{$prefix}-text-primary);
 }
 
-.v12-oklch-theme .cds--layer-one,
-.v12-oklch-theme .cds--layer-two,
-.v12-oklch-theme .cds--layer-three {
+.v12-generated-theme .cds--layer-one,
+.v12-generated-theme .cds--layer-two,
+.v12-generated-theme .cds--layer-three {
   padding: 1rem;
   border-block-start: 1px solid var(--#{$prefix}-border-subtle);
 }
 
-.v12-oklch-layer__content {
+.v12-generated-layer__content {
   display: grid;
   padding: 1rem;
   background: var(--#{$prefix}-layer);
@@ -63,20 +63,20 @@
   gap: 1rem;
 }
 
-.v12-oklch-layer__content h3,
-.v12-oklch-layer__content p {
+.v12-generated-layer__content h3,
+.v12-generated-layer__content p {
   margin: 0;
 }
 
-.v12-oklch-layer__content p {
+.v12-generated-layer__content p {
   color: var(--#{$prefix}-text-secondary);
 }
 
-.v12-oklch-layer__content label {
+.v12-generated-layer__content label {
   display: grid;
 }
 
-.v12-oklch-layer__content input {
+.v12-generated-layer__content input {
   box-sizing: border-box;
   padding: 0.75rem 1rem;
   border: 0;
@@ -87,30 +87,30 @@
   margin-block-start: 0.5rem;
 }
 
-.v12-oklch-layer__content small {
+.v12-generated-layer__content small {
   color: var(--#{$prefix}-text-helper-01);
   margin-block-start: 0.5rem;
 }
 
-.v12-oklch-theme > header {
+.v12-generated-theme > header {
   padding: 1rem;
 }
 
-.v12-oklch-theme > header h2,
-.v12-oklch-theme > header p {
+.v12-generated-theme > header h2,
+.v12-generated-theme > header p {
   margin: 0;
 }
 
-.v12-oklch-theme > header p {
+.v12-generated-theme > header p {
   color: var(--#{$prefix}-text-secondary);
 }
 
-.v12-oklch-layer__accent {
+.v12-generated-layer__accent {
   padding: 0.75rem;
   background: var(--#{$prefix}-layer-accent);
 }
 
-.v12-oklch-token-table {
+.v12-generated-token-table {
   display: grid;
   padding: 0.75rem;
   border: 1px solid var(--#{$prefix}-border-subtle);
@@ -119,7 +119,7 @@
   margin-block-end: 0.75rem;
 }
 
-.v12-oklch-token-row {
+.v12-generated-token-row {
   display: grid;
   font-family: SFMono-Regular, Consolas, Menlo, monospace;
   font-size: 0.75rem;
@@ -128,14 +128,14 @@
   line-height: 1.4;
 }
 
-.v12-oklch-token-name {
+.v12-generated-token-name {
   overflow: hidden;
   color: var(--#{$prefix}-text-secondary);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.v12-oklch-token-value {
+.v12-generated-token-value {
   overflow: hidden;
   color: var(--#{$prefix}-text-primary);
   font-weight: 600;
@@ -143,17 +143,17 @@
   white-space: nowrap;
 }
 
-.v12-oklch-layer__skeleton {
+.v12-generated-layer__skeleton {
   display: grid;
   gap: 0.5rem;
 }
 
-.v12-oklch-layer__skeleton span {
+.v12-generated-layer__skeleton span {
   display: block;
   background: var(--#{$prefix}-skeleton-background-01);
   block-size: 0.75rem;
 }
 
-.v12-oklch-layer__skeleton span:last-child {
+.v12-generated-layer__skeleton span:last-child {
   inline-size: 70%;
 }

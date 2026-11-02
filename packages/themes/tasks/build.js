@@ -13,7 +13,7 @@ const fs = require('fs-extra');
 const path = require('path');
 const buildCompatThemesFile = require('./builders/compat/themes');
 const buildCompatTokensFile = require('./builders/compat/tokens');
-const generateOklchHexFallbacks = require('./builders/generate-oklch-hex-fallbacks');
+const generateColorFallbacks = require('./builders/generate-color-fallbacks');
 const generateTokenTable = require('./builders/token-table');
 const { runScss, runV12 } = require('../style-dictionary/sd.config');
 
@@ -51,7 +51,7 @@ async function build() {
   await runV12();
 
   const fallbackFile = path.join(SCSS_DIR, 'generated', '_v12-fallbacks.scss');
-  await fs.outputFile(fallbackFile, generateOklchHexFallbacks());
+  await fs.outputFile(fallbackFile, generateColorFallbacks());
   reporter.success(`Written: ${fallbackFile}`);
 
   reporter.info('Generating the theme token table...');

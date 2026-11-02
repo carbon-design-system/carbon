@@ -12,7 +12,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Layer } from '../../../src/components/Layer';
 import { usePrefix } from '../../../src/internal/usePrefix';
-import './OklchThemes.stories.scss';
+import './GeneratedThemes.stories.scss';
 
 // Reads the computed CSS custom property value from the nearest DOM ancestor.
 function useTokenValue(ref, token, prefix) {
@@ -32,22 +32,22 @@ function TokenRow({ label, token }) {
   const ref = useRef(null);
   const value = useTokenValue(ref, token, prefix);
   return (
-    <div ref={ref} className="v12-oklch-token-row">
-      <span className="v12-oklch-token-name">
+    <div ref={ref} className="v12-generated-token-row">
+      <span className="v12-generated-token-name">
         --{prefix}-{token}
       </span>
-      <span className="v12-oklch-token-value">{value}</span>
+      <span className="v12-generated-token-value">{value}</span>
     </div>
   );
 }
 
 function LayerContent({ level }) {
   return (
-    <div className="v12-oklch-layer__content">
+    <div className="v12-generated-layer__content">
       <h3>Layer {level}</h3>
       <p>Contextual token values active at this layer level:</p>
 
-      <div className="v12-oklch-token-table">
+      <div className="v12-generated-token-table">
         <TokenRow label="Surface" token="layer" />
         <TokenRow label="Field" token="field" />
         <TokenRow label="Accent" token="layer-accent" />
@@ -62,8 +62,10 @@ function LayerContent({ level }) {
         <input placeholder="Enter a name" />
         <small>Contextual helper text</small>
       </label>
-      <div className="v12-oklch-layer__accent">Contextual accent</div>
-      <div className="v12-oklch-layer__skeleton" aria-label="Skeleton sample">
+      <div className="v12-generated-layer__accent">Contextual accent</div>
+      <div
+        className="v12-generated-layer__skeleton"
+        aria-label="Skeleton sample">
         <span />
         <span />
       </div>
@@ -73,7 +75,7 @@ function LayerContent({ level }) {
 
 function ThemePreview({ mode }) {
   return (
-    <section className="v12-oklch-theme" data-carbon-theme={mode}>
+    <section className="v12-generated-theme" data-carbon-theme={mode}>
       <header>
         <h2>{mode === 'light' ? 'Light theme' : 'Dark theme'}</h2>
         <p>Generated OKLCH theme · H 262 · C 0.004</p>
@@ -88,9 +90,9 @@ function ThemePreview({ mode }) {
   );
 }
 
-export const OklchGeneratedThemes = () => (
+export const GeneratedThemes = () => (
   <>
-    <aside className="v12-oklch-notice">
+    <aside className="v12-generated-notice">
       <strong>Experimental V12 generated-token preview</strong>
       <span>
         This story uses generated Style Dictionary Sass output and the existing
@@ -98,7 +100,7 @@ export const OklchGeneratedThemes = () => (
         shown are read live from computed CSS custom properties.
       </span>
     </aside>
-    <div className="v12-oklch-comparison">
+    <div className="v12-generated-comparison">
       <ThemePreview mode="light" />
       <ThemePreview mode="dark" />
     </div>

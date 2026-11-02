@@ -11,9 +11,11 @@
 
 const fs = require('fs');
 const path = require('path');
-const generateOklchHexFallbacks = require('../../tasks/builders/generate-oklch-hex-fallbacks');
-const oklchFlatten = require('../../style-dictionary/transforms/oklch-flatten');
-const { generateV12Tokens } = require('../../src/oklch/generate-tokens');
+const generateColorFallbacks = require('../../tasks/builders/generate-color-fallbacks');
+const colorFlatten = require('../../style-dictionary/transforms/color-flatten');
+const {
+  generateV12Tokens,
+} = require('../../src/theme-generator/generate-tokens');
 
 describe('V12 theme build pipeline', () => {
   it.each(['light', 'dark'])(
@@ -33,7 +35,7 @@ describe('V12 theme build pipeline', () => {
 
   it('flattens DTCG OKLCH values for Style Dictionary outputs', () => {
     expect(
-      oklchFlatten.transform({
+      colorFlatten.transform({
         $type: 'color',
         $value: {
           colorSpace: 'oklch',
@@ -45,7 +47,7 @@ describe('V12 theme build pipeline', () => {
   });
 
   it('generates light and dark fallback declarations including interactive states', () => {
-    const output = generateOklchHexFallbacks();
+    const output = generateColorFallbacks();
 
     expect(output).toContain('@supports not (color: oklch(0 0 0))');
     expect(output).toContain("[data-carbon-theme='light']");

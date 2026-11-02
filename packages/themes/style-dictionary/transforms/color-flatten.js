@@ -23,12 +23,27 @@
  *     { colorSpace: 'srgb', components: [r, g, b], alpha: 0.5 }
  *     → 'rgba(r, g, b, 0.5)'
  *
- * Plain strings and non-sRGB objects are passed through unchanged.
+ *   Shape C — OKLCH inline object, with or without alpha
+ *     { colorSpace: 'oklch', components: [l, c, h], alpha: 0.5, hex: '#rrggbb' }
+ *     → 'oklch(l c h / 0.5)'
+ *
+ * Plain strings and objects in any other color space are passed through
+ * unchanged.
  *
  * Shape B is how theme tokens apply their own alpha to a palette color: the
  * `carbon/json-pointer-references` preprocessor has already replaced the
  * references to the palette color's `colorSpace` and `components`.
  */
+
+/**
+ * @param {{ components: number[], alpha?: number }} value
+ * @returns {string}
+ */
+function toOklch({ components: [lightness, chroma, hue], alpha = 1 }) {
+  return alpha === 1
+    ? `oklch(${lightness} ${chroma} ${hue})`
+    : `oklch(${lightness} ${chroma} ${hue} / ${alpha})`;
+}
 
 module.exports = {
   name: 'carbon/color-flatten',
@@ -59,7 +74,12 @@ module.exports = {
     if ('$value' in v) {
       const inner = v.$value;
       if (typeof inner === 'string') return inner;
+      if (inner?.colorSpace === 'oklch') return toOklch(inner);
       if (inner?.hex) return inner.hex;
+    }
+
+    if (v.colorSpace === 'oklch' && Array.isArray(v.components)) {
+      return toOklch(v);
     }
 
     if (v.colorSpace !== 'srgb' || !Array.isArray(v.components)) {
