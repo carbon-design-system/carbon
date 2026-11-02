@@ -1,0 +1,241 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/components/button/tokens' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/config' as carbon-config;
+@use '@carbon/styles/scss/utilities/convert' as *;
+@use '@carbon/styles/scss/breakpoint' as *;
+
+$block-class: 'c4p--create-tearsheet';
+
+@keyframes step-entrance {
+  0% {
+    opacity: 0;
+    transform: translateY(-$spacing-04);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.#{$block-class}__launcher {
+  display: block;
+  inline-size: 100%;
+}
+
+.#{$block-class} {
+
+  &__influencer {
+    padding: $spacing-05;
+  }
+
+  &__progress {
+    margin-block-start: $spacing-06;
+  }
+
+  &__body {
+    padding: 0;
+  }
+
+  &__show-influencer {
+    display: none;
+    margin-block-end: $spacing-05;
+
+    @include breakpoint-down(md) {
+      display: inline-flex;
+      flex-grow: 0;
+    }
+    &::part(button) {
+      padding-left: 0 ;
+    }
+  }
+
+  &__step {
+    margin: $spacing-06 0 0;
+    opacity: 1;
+  }
+
+  &__step--animated {
+    animation: step-entrance $duration-slow-01;
+    animation-fill-mode: forwards;
+    animation-timing-function: $standard-easing;
+  }
+
+  &__step-title {
+    @include type.type-style('heading-03');
+    margin: 0 0 $spacing-05;
+  }
+
+  &__step-subtitle {
+    @include type.type-style('heading-compact-01');
+    margin: 0 0 $spacing-03;
+    color: $text-primary;
+  }
+
+  &__step-description {
+    @include type.type-style('body-01');
+    margin: 0 0 $spacing-06;
+    color: $text-secondary;
+    max-inline-size: 36rem;
+  }
+
+  &__step-header,
+  &__step-body,
+  &__step-fieldset,
+  &__step-content {
+    padding: 0;
+    margin: 0;
+  }
+
+  &__step-fieldset {
+    min-inline-size: 0;
+    border: 0;
+  }
+
+  &__step-fieldset legend {
+    @include type.type-style('heading-compact-01');
+    padding: 0;
+    margin: 0 0 $spacing-05;
+    color: $text-secondary;
+  }
+
+  &__step-item {
+    margin: 0 0 $spacing-05;
+  }
+
+  &__step-content--intro-layout  {
+    :host(cds-tile-group) fieldset {
+    display: flex;
+    flex-wrap: wrap;
+    }
+  }
+
+  &__step-fieldset > .#{$block-class}__step-item:last-child,
+  &__step-content > .#{$block-class}__step-item:last-child {
+    margin-block-end: 0;
+  }
+
+  &__inline-error {
+    margin-block-start: $spacing-03;
+  }
+
+  &__toggle {
+    margin-block-start: $spacing-05;
+  }
+
+  &__intro-step {
+    min-block-size: to-rem(400px);
+  }
+
+  &__category-fieldset {
+    display: flex;
+    flex-wrap: wrap;
+    min-inline-size: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  &__category-legend {
+    @include type.type-style('label-01');
+    margin: 0 0 $spacing-03;
+    padding: 0;
+    color: $text-secondary;
+  }
+
+  &__category-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-05;
+    inline-size: 100%;
+  }
+
+  &__category-group-fieldset {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-05;
+  }
+ 
+  &__category-tile-wrapper
+  {
+    display: flex;
+  }
+
+  &__category-tile {
+    position: relative;
+    display: flex;
+    min-block-size: to-rem(140px);
+    align-items: flex-end;
+    justify-content: flex-start;
+  }
+
+  &__tile-content {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-04;
+    padding: $spacing-05;
+    text-align: left;
+
+    h4 {
+      @include type.type-style('heading-02');
+      margin: 0;
+    }
+
+    p {
+      @include type.type-style('body-01');
+      color: $text-secondary;
+    }
+  }
+
+  &__tile-icon {
+    inline-size: to-rem(64px);
+    block-size: to-rem(64px);
+    fill: $layer-accent-01;
+    stroke: $icon-primary;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: to-rem(2px);
+  }
+
+  cds-text-input.#{$block-class}__topic-input {
+    display: block;
+    margin-block-end: $spacing-05;
+  }
+
+
+  .#{carbon-config.$prefix}--btn-set
+    .#{carbon-config.$prefix}--btn.#{carbon-config.$prefix}--btn--disabled {
+    box-shadow: to-rem(-1px) 0 0 0 $button-separator;
+  }
+
+  .#{carbon-config.$prefix}--fieldset {
+    margin-block-end: 0;
+  }
+
+  .#{carbon-config.$prefix}--grid + .#{carbon-config.$prefix}--grid {
+    padding-block-start: 0;
+    margin-block-start: $spacing-06;
+  }
+
+  .#{carbon-config.$prefix}--tile-group div {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .#{carbon-config.$prefix}--tile-group {
+    div {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+}
