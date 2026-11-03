@@ -382,6 +382,44 @@
     }
   }
 
+  @include high-contrast-mode {
+    .numInputWrapper .arrowUp,
+    .numInputWrapper .arrowDown {
+      opacity: 1;
+    }
+
+    .numInput[disabled] ~ .arrowUp,
+    .numInput[disabled] ~ .arrowDown {
+      opacity: 0;
+    }
+
+    .numInputWrapper .arrowUp::after,
+    .numInputWrapper .arrowDown::after {
+      // Flatpickr renders year controls as CSS border triangles. Preserve the
+      // transparent sides so forced-colors mode does not render them as boxes.
+      border-color: transparent;
+      forced-color-adjust: none;
+    }
+
+    .numInputWrapper .arrowUp::after {
+      border-block-end-color: ButtonText;
+    }
+
+    .numInputWrapper .arrowDown::after {
+      border-block-start-color: ButtonText;
+    }
+
+    @media (any-hover: hover) {
+      .numInputWrapper .arrowUp:hover::after {
+        border-block-end-color: Highlight;
+      }
+
+      .numInputWrapper .arrowDown:hover::after {
+        border-block-start-color: Highlight;
+      }
+    }
+  }
+
   .numInput[disabled] ~ .arrowUp::after {
     border-block-end-color: $text-disabled;
   }

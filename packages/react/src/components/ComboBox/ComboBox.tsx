@@ -6,7 +6,12 @@
  */
 
 import cx from 'classnames';
-import { useCombobox, UseComboboxProps, UseComboboxActions } from 'downshift';
+import {
+  useCombobox,
+  UseComboboxProps,
+  UseComboboxActions,
+  type UseComboboxStateChangeOptions,
+} from 'downshift';
 import PropTypes from 'prop-types';
 import React, {
   cloneElement,
@@ -58,13 +63,15 @@ import {
   isComponentElement,
   isItemDisabled,
 } from '../../internal';
-import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
+import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
+import { useAutoAlign } from '../../internal/useAutoAlign';
 
 const {
   InputBlur,
   InputKeyDownEnter,
   FunctionToggleMenu,
   ToggleButtonClick,
+  InputClick,
   ItemMouseMove,
   InputKeyDownArrowUp,
   InputKeyDownArrowDown,
@@ -384,7 +391,7 @@ const ComboBox = forwardRef(
     const {
       ['aria-label']: ariaLabel = 'Choose an item',
       ariaLabel: deprecatedAriaLabel,
-      autoAlign = false,
+      autoAlign: autoAlignProp,
       className: containerClassName,
       decorator,
       direction = 'bottom',
@@ -418,6 +425,7 @@ const ComboBox = forwardRef(
       inputProps,
       ...rest
     } = props;
+    const autoAlign = useAutoAlign(autoAlignProp);
 
     const enableFloatingStyles =
       useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
@@ -604,6 +612,40 @@ const ComboBox = forwardRef(
         const { type, changes } = actionAndChanges;
         const { highlightedIndex } = changes;
 
+        // When the menu opens, highlight the selected item if it is in the
+        // list. Downshift only matches the selected item by reference and does
+        // not know about a controlled `selectedItem`.
+        const highlightSelectedItemOnOpen = (
+          nextChanges: UseComboboxStateChangeOptions<ItemType>['changes']
+        ) => {
+          if (state.isOpen || !nextChanges.isOpen) {
+            return nextChanges;
+          }
+
+          const currentSelectedItem =
+            typeof selectedItemProp !== 'undefined'
+              ? selectedItemProp
+              : state.selectedItem;
+
+          if (
+            currentSelectedItem === null ||
+            typeof currentSelectedItem === 'undefined' ||
+            isItemDisabled(currentSelectedItem)
+          ) {
+            return nextChanges;
+          }
+
+          const selectedIndex = filterItems(
+            items,
+            itemToString,
+            inputValue
+          ).findIndex((item) => isEqual(item, currentSelectedItem));
+
+          return selectedIndex === -1
+            ? nextChanges
+            : { ...nextChanges, highlightedIndex: selectedIndex };
+        };
+
         switch (type) {
           case InputBlur: {
             // If custom values are allowed, treat whatever the user typed as
@@ -728,6 +770,9 @@ const ComboBox = forwardRef(
             // For `allowCustomValue` or if no matching item is found, keep the
             // menu open.
             return { ...changes, isOpen: true };
+          case InputClick:
+            return highlightSelectedItemOnOpen(changes);
+
           case FunctionToggleMenu:
           case ToggleButtonClick:
             // When closing the menu, apply the same normalization as blur.
@@ -749,20 +794,23 @@ const ComboBox = forwardRef(
               }
             }
 
-            return changes;
+            return highlightSelectedItemOnOpen(changes);
 
           case MenuMouseLeave:
             return { ...changes, highlightedIndex: state.highlightedIndex };
 
           case InputKeyDownArrowUp:
-          case InputKeyDownArrowDown:
-            if (highlightedIndex === -1) {
+          case InputKeyDownArrowDown: {
+            const nextChanges = highlightSelectedItemOnOpen(changes);
+
+            if (nextChanges.highlightedIndex === -1) {
               return {
-                ...changes,
+                ...nextChanges,
                 highlightedIndex: 0,
               };
             }
-            return changes;
+            return nextChanges;
+          }
 
           case ItemMouseMove:
             return { ...changes, highlightedIndex: state.highlightedIndex };
@@ -772,7 +820,14 @@ const ComboBox = forwardRef(
         }
       },
       // eslint-disable-next-line react-hooks/exhaustive-deps
-      [allowCustomValue, inputValue, itemToString, items, onChange]
+      [
+        allowCustomValue,
+        inputValue,
+        itemToString,
+        items,
+        onChange,
+        selectedItemProp,
+      ]
     );
 
     const handleToggleClick =
@@ -1048,7 +1103,7 @@ const ComboBox = forwardRef(
         }
       }
     }, [inputValue, typeaheadText]);
-    useNoInteractiveChildren(
+    useNoInteractiveChildrenForLabel(
       labelRef,
       'The ComboBox component `titleText` prop must have no interactive content'
     );

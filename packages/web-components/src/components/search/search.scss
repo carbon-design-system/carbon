@@ -11,6 +11,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/border-radius' as *;
 @use '@carbon/styles/scss/components/form';
 @use '@carbon/styles/scss/components/search' as *;
 @use '@carbon/styles/scss/layout' as *;
@@ -90,7 +91,7 @@ $css--plex: true !default;
   inline-size: 100%;
 
   .#{$prefix}--search-input {
-    @include skeleton;
+    @include skeleton($border-radius: $border-radius-04);
 
     inline-size: 100%;
 

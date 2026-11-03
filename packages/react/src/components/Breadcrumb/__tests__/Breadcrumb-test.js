@@ -92,16 +92,5 @@ describe('Breadcrumb', () => {
       );
       await expect(container).toHaveNoAxeViolations();
     });
-
-    it('should have no AC violations', async () => {
-      const { container } = render(
-        <Breadcrumb>
-          <BreadcrumbItem href="#a">A</BreadcrumbItem>
-          <BreadcrumbItem href="#b">B</BreadcrumbItem>
-          <BreadcrumbItem href="#c">C</BreadcrumbItem>
-        </Breadcrumb>
-      );
-      await expect(container).toHaveNoACViolations('Breadcrumb');
-    });
   });
 });

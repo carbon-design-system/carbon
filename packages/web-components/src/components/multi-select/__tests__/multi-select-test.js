@@ -425,7 +425,7 @@ describe('cds-multi-select', function () {
       filterInput.dispatchEvent(new Event('input', { bubbles: true }));
       await el.updateComplete;
 
-      // Clear buttton should render with tabindex="-1"
+      // Clear button should render with tabindex="-1"
       const clearButton = el.shadowRoot.querySelector('#clear-button');
       expect(clearButton).to.exist;
       expect(clearButton.getAttribute('tabindex')).to.equal('-1');

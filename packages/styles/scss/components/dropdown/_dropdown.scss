@@ -7,6 +7,7 @@
 
 @use '../list-box';
 @use '../../config' as *;
+@use '../../border-radius' as *;
 @use '../../feature-flags' as *;
 @use '../../layer' as *;
 @use '../../motion' as *;
@@ -27,7 +28,7 @@
   .#{$prefix}--dropdown__wrapper--inline {
     display: inline-grid;
     align-items: center;
-    grid-gap: 0 convert.to-rem(8px);
+    gap: 0 convert.to-rem(8px);
     grid-template: auto / auto min-content auto;
 
     &:has(.#{$prefix}--label.#{$prefix}--visually-hidden) {
@@ -488,7 +489,7 @@
   // Skeleton State
   .#{$prefix}--dropdown-v2.#{$prefix}--skeleton,
   .#{$prefix}--dropdown.#{$prefix}--skeleton {
-    @include skeleton;
+    @include skeleton($border-radius: $border-radius-04);
   }
 
   // Windows HCM fix

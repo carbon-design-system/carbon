@@ -98,6 +98,13 @@ describe('Slider', () => {
       expect(screen.getByLabelText(inputAriaValue)).toBeInTheDocument();
     });
 
+    it('should forward a ref to the outermost element', () => {
+      const ref = React.createRef();
+      const { container } = renderSlider({ ref });
+      expect(ref.current).toBeInstanceOf(HTMLDivElement);
+      expect(ref.current).toBe(container.firstChild);
+    });
+
     it('should apply the expected classes', () => {
       const labelTextValue = 'slider label text';
       const { container } = renderSlider({ labelText: labelTextValue });
@@ -110,8 +117,8 @@ describe('Slider', () => {
       ).toBeInTheDocument();
     });
 
-    it('should not allow interactive content in labelText', () => {
-      const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+    it('should warn without throwing for interactive content in labelText', () => {
+      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
       expect(() => {
         renderSlider({
@@ -122,8 +129,12 @@ describe('Slider', () => {
             </>
           ),
         });
-      }).toThrow(
-        'The Slider component `labelText` prop must have no interactive content'
+      }).not.toThrow();
+
+      expect(spy).toHaveBeenCalledWith(
+        expect.stringContaining(
+          'Warning: The Slider component `labelText` prop must have no interactive content'
+        )
       );
 
       spy.mockRestore();

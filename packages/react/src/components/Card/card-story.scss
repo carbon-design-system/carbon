@@ -8,14 +8,7 @@
 @use '@carbon/styles/scss/spacing';
 
 .card-story__viewport {
-  padding-block-start: spacing.$spacing-07; // 2rem
-}
-
-// Storybook disabled toggle column — aligns the toggle button to the bottom
-.card-story-disabled-toggle {
-  display: flex;
-  align-items: flex-end;
-  padding-block-end: spacing.$spacing-05;
+  padding-block-start: spacing.$spacing-07;
 }
 
 .story-time {
@@ -29,7 +22,7 @@
 // Metric pair row — used in the WithChart story to lay out two BigNumbers side by side
 .card-story-metrics {
   display: flex;
-  gap: spacing.$spacing-07; // 2rem
+  gap: spacing.$spacing-07;
   padding-block-end: spacing.$spacing-05;
 }
 
@@ -49,9 +42,15 @@
 .card-story-get-started-meta__item {
   display: flex;
   align-items: center;
-  font-size: 0.75rem; // label-01
+  font-size: 0.75rem;
   gap: spacing.$spacing-02;
   letter-spacing: 0.32px;
   line-height: 1rem;
   white-space: nowrap;
+}
+
+// Demo content box used in the WithFlushBody story to visualise padding behaviour
+.card-story__flush-demo-content {
+  background: var(--cds-highlight);
+  padding: spacing.$spacing-05;
 }

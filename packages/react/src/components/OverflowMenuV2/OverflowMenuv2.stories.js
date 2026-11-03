@@ -44,7 +44,6 @@ const tooltipAlignmentOptions = [
 ];
 
 const defaultArgs = {
-  autoAlign: false,
   label: 'Options',
   menuAlignment: 'bottom-start',
   size: 'md',

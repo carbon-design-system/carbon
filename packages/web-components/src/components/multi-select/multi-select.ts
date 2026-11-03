@@ -350,7 +350,7 @@ class CDSMultiSelect extends CDSDropdown {
   }
 
   /**
-   * Special andler for the `keypress` event, ensures space selection for filterable
+   * Special handler for the `keypress` event, ensures space selection for filterable
    * variation is disabled
    */
 

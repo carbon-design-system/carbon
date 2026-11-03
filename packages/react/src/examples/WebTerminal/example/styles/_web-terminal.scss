@@ -1,0 +1,234 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+// This file is used by the standalone Vite example app (example/main.tsx).
+// For Storybook, all styles are consolidated into _story-styles.scss because
+// parameters.styles only accepts a single ?inline import.
+//
+
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/themes' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type' as *;
+
+$block-class: 'web-terminal';
+$web-terminal-width: 40rem;
+
+// ─── Slide-in / slide-out animations ───────────────────────────────────────────
+
+@keyframes web-terminal-entrance {
+  from {
+    opacity: 0;
+    // stylelint-disable-next-line carbon/layout-use
+    transform: translateX(#{$web-terminal-width});
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes web-terminal-exit {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  to {
+    opacity: 0;
+    // stylelint-disable-next-line carbon/layout-use
+    transform: translateX(#{$web-terminal-width});
+  }
+}
+
+// ─── Terminal panel ─────────────────────────────────────────────────────────────
+
+.#{$block-class} {
+  @include theme($g90);
+
+  position: fixed;
+  z-index: 8000;
+  background-color: $background;
+  block-size: calc(100vh - #{$spacing-09});
+  border-inline-start: 1px solid $border-subtle-01;
+  color: $text-primary;
+  inline-size: 100%;
+  inset-block-end: 0;
+  inset-block-start: $spacing-09;
+  inset-inline-end: 0;
+  max-inline-size: $web-terminal-width;
+  @media screen and (prefers-reduced-motion: reduce) {
+    &--open {
+      // stylelint-disable-next-line carbon/motion-easing-use
+      animation: none;
+    }
+  }
+
+  &--open {
+    // stylelint-disable-next-line carbon/motion-easing-use
+    animation: web-terminal-entrance $duration-moderate-02
+      motion(standard, expressive);
+  }
+  @media screen and (prefers-reduced-motion: reduce) {
+    &--closed {
+      // stylelint-disable-next-line carbon/motion-easing-use
+      animation: none;
+    }
+  }
+
+  &--closed {
+    // stylelint-disable-next-line carbon/motion-easing-use
+    animation: web-terminal-exit forwards $duration-moderate-02
+      motion(standard, expressive);
+  }
+
+  @media (prefers-reduced-motion) {
+    animation: none;
+  }
+}
+
+// ─── Header bar ────────────────────────────────────────────────────────────────
+
+.#{$block-class}__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: $background;
+  block-size: $spacing-09;
+}
+
+// ─── Action buttons ────────────────────────────────────────────────────────────
+
+.#{$block-class}__actions {
+  display: flex;
+}
+
+.#{$block-class}__action-btn.cds--btn.cds--btn--ghost {
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  min-block-size: $spacing-09;
+  min-inline-size: $spacing-09;
+}
+
+// ─── Docs trigger ──────────────────────────────────────────────────────────────
+
+.#{$block-class}__docs-trigger-wrapper {
+  position: relative;
+}
+
+.#{$block-class}__docs-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  block-size: $spacing-09;
+  color: $icon-primary;
+  cursor: pointer;
+  inline-size: $spacing-09;
+
+  &:hover {
+    background-color: $background-hover;
+  }
+
+  &:focus {
+    outline: 2px solid $focus;
+    outline-offset: -2px;
+  }
+}
+
+// ─── Docs dropdown menu ────────────────────────────────────────────────────────
+
+.#{$block-class}__docs-menu {
+  @include theme($g100);
+
+  position: absolute;
+  z-index: 9000;
+  padding: 0;
+  margin: 0;
+  background-color: $layer-01;
+  box-shadow: 0 2px 6px $shadow;
+  inset-block-start: $spacing-09;
+  inset-inline-start: 0;
+  list-style: none;
+  min-inline-size: 12rem;
+}
+
+.#{$block-class}__docs-menu-item {
+  @include type-style('body-compact-01');
+
+  display: block;
+  padding: $spacing-04 $spacing-05;
+  color: $text-primary;
+  text-decoration: none;
+
+  &:hover {
+    background-color: $layer-hover-01;
+    color: $text-primary;
+    text-decoration: none;
+  }
+
+  &:focus {
+    outline: 2px solid $focus;
+    outline-offset: -2px;
+  }
+}
+
+// ─── Terminal body ──────────────────────────────────────────────────────────────
+
+.#{$block-class}__body {
+  block-size: calc(100vh - #{$spacing-09});
+  color: $text-primary;
+  overflow-y: auto;
+}
+
+// ─── Content wrapper ───────────────────────────────────────────────────────────
+
+@media screen and (prefers-reduced-motion: reduce) {
+  .web-terminal-content-wrapper {
+    block-size: 100%;
+    inline-size: 100vw;
+    // stylelint-disable-next-line carbon/motion-duration-use
+    transition: none;
+
+    &--open {
+      inline-size: calc(100vw - #{$web-terminal-width});
+    }
+  }
+}
+
+.web-terminal-content-wrapper {
+  block-size: 100%;
+  inline-size: 100vw;
+  // stylelint-disable-next-line carbon/motion-duration-use
+  transition: inline-size $duration-moderate-02 motion(standard, expressive);
+
+  &--open {
+    inline-size: calc(100vw - #{$web-terminal-width});
+  }
+}
+
+// ─── Carbon shell header — always dark ─────────────────────────────────────────
+.cds--header {
+  @include theme($g100);
+}
+
+// ─── Example terminal content ──────────────────────────────────────────────────
+.example-terminal {
+  padding: $spacing-05;
+  color: $text-primary;
+  font-family: 'IBM Plex Mono', monospace;
+
+  p {
+    @include type-style('body-compact-01');
+
+    padding-block-end: $spacing-07;
+  }
+}

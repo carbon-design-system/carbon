@@ -1,9 +1,28 @@
-import { ArgTypes, Canvas, Story, Meta } from '@storybook/addon-docs/blocks';
-import Loading from '../Loading';
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
 import * as LoadingStories from './Loading.stories';
 import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
+
+export const useStartLoadingDef = [
+  `const OVERLAY_LOADING_DURATION_MS = 2000;`,
+  `const useStartLoading = () => {
+  const [isActive, setIsActive] = useState(false);
+  const timeoutRef = useRef(null);
+  const startLoading = () => {
+    clearTimeout(timeoutRef.current);
+    setIsActive(true);
+    timeoutRef.current = setTimeout(
+      () => setIsActive(false),
+      OVERLAY_LOADING_DURATION_MS
+    );
+  };
+  useEffect(() => {
+    return () => clearTimeout(timeoutRef.current);
+  }, []);
+  return { isActive, startLoading };
+};`,
+];
 
 # Loading
 
@@ -32,7 +51,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(LoadingStories.Default),
+      onClick: () => stackblitzPrefillConfig({ story: LoadingStories.Default }),
     },
   ]}
 />
@@ -52,7 +71,11 @@ Select **Start** to trigger a two second loading state.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(LoadingStories.OverlayLoading),
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: LoadingStories.OverlayLoading,
+          customFunctionDefs: useStartLoadingDef,
+        }),
     },
   ]}
 />
@@ -72,7 +95,10 @@ instead of moving to the overlay underneath.
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig(LoadingStories.OverlayLoadingBehindModal),
+        stackblitzPrefillConfig({
+          story: LoadingStories.OverlayLoadingBehindModal,
+          customFunctionDefs: useStartLoadingDef,
+        }),
     },
   ]}
 />

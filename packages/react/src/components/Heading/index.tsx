@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -68,13 +68,14 @@ Section.propTypes = {
 };
 
 type HeadingProps = JSX.IntrinsicElements[`h${HeadingLevel}`];
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 export const Heading = React.forwardRef(
   (props: HeadingProps, ref: React.Ref<HTMLHeadingElement>) => {
     const HeadingIntrinsic = `h${React.useContext(HeadingContext)}` as const;
     return <HeadingIntrinsic ref={ref} {...props} />;
   }
 );
+
+Heading.displayName = 'Heading';
 
 Heading.propTypes = {
   /**

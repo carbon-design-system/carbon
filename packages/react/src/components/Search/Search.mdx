@@ -30,7 +30,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(SearchStories.Default),
+      onClick: () => stackblitzPrefillConfig({ story: SearchStories.Default }),
     },
   ]}
 />
@@ -42,7 +42,8 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(SearchStories.Expandable),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: SearchStories.Expandable }),
     },
   ]}
 />

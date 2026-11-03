@@ -16,8 +16,8 @@ import { FormContext } from '../FluidForm';
 const prefix = 'cds';
 
 describe('DatePicker', () => {
-  it('should not allow interactive content in DatePickerInput labelText', () => {
-    const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+  it('should warn without throwing for interactive content in DatePickerInput labelText', () => {
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
     expect(() => {
       render(
@@ -30,8 +30,12 @@ describe('DatePicker', () => {
           }
         />
       );
-    }).toThrow(
-      'The DatePickerInput component `labelText` prop must have no interactive content'
+    }).not.toThrow();
+
+    expect(spy).toHaveBeenCalledWith(
+      expect.stringContaining(
+        'Warning: The DatePickerInput component `labelText` prop must have no interactive content'
+      )
     );
 
     spy.mockRestore();
@@ -306,7 +310,7 @@ describe('DatePicker', () => {
 
   it('should respect parseDate prop', async () => {
     const parseDate = jest.fn();
-    parseDate.mockReturnValueOnce(new Date('1989/01/20'));
+    parseDate.mockReturnValue(new Date('1989/01/20'));
     render(
       <DatePicker
         onChange={() => {}}
@@ -326,6 +330,168 @@ describe('DatePicker', () => {
     );
     expect(parseDate).toHaveBeenCalled();
   });
+
+  it('should call onChange when a complete valid date is typed', async () => {
+    const onChange = jest.fn();
+    render(
+      <DatePicker onChange={onChange} datePickerType="single">
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="mm/dd/yyyy"
+          labelText="Date Picker label"
+        />
+      </DatePicker>
+    );
+
+    const input = screen.getByLabelText('Date Picker label');
+    await userEvent.type(input, '01/20/1989');
+
+    expect(onChange).toHaveBeenCalledTimes(1);
+    expect(onChange.mock.calls[0][0][0]).toEqual(new Date('1989/01/20'));
+    expect(onChange.mock.calls[0][1]).toBe('01/20/1989');
+
+    fireEvent.blur(input);
+    expect(onChange).toHaveBeenCalledTimes(1);
+  });
+
+  it('should call onChange when a previously typed date is typed after selecting another date', async () => {
+    const onChange = jest.fn();
+    const ref = createRef();
+    render(
+      <DatePicker ref={ref} onChange={onChange} datePickerType="single">
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="mm/dd/yyyy"
+          labelText="Date Picker label"
+        />
+      </DatePicker>
+    );
+
+    const input = screen.getByLabelText('Date Picker label');
+    await userEvent.type(input, '01/23/1989');
+
+    expect(onChange).toHaveBeenCalledTimes(1);
+    expect(onChange.mock.calls[0][1]).toBe('01/23/1989');
+
+    ref.current.calendar.setDate('01/24/1989', true, 'm/d/Y');
+
+    expect(onChange).toHaveBeenCalledTimes(2);
+    expect(onChange.mock.calls[1][1]).toBe('01/24/1989');
+
+    fireEvent.input(input, {
+      target: {
+        value: '01/23/1989',
+      },
+    });
+
+    expect(onChange).toHaveBeenCalledTimes(3);
+    expect(onChange.mock.calls[2][0][0]).toEqual(new Date('1989/01/23'));
+    expect(onChange.mock.calls[2][1]).toBe('01/23/1989');
+  });
+
+  it('should call onChange when a complete valid custom format date is typed', async () => {
+    const onChange = jest.fn();
+    render(
+      <DatePicker
+        onChange={onChange}
+        datePickerType="single"
+        dateFormat="d.m.Y">
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="dd.mm.yyyy"
+          labelText="Date Picker label"
+        />
+      </DatePicker>
+    );
+
+    await userEvent.type(
+      screen.getByLabelText('Date Picker label'),
+      '20.01.1989'
+    );
+
+    expect(onChange).toHaveBeenCalledTimes(1);
+    expect(onChange.mock.calls[0][0][0]).toEqual(new Date('1989/01/20'));
+    expect(onChange.mock.calls[0][1]).toBe('20.01.1989');
+  });
+
+  it('should call onChange when a complete valid variable-width custom format date is typed', async () => {
+    const onChange = jest.fn();
+    render(
+      <DatePicker
+        onChange={onChange}
+        datePickerType="single"
+        dateFormat="n/j/Y">
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="m/d/yyyy"
+          labelText="Date Picker label"
+        />
+      </DatePicker>
+    );
+
+    await userEvent.type(
+      screen.getByLabelText('Date Picker label'),
+      '1/2/1989'
+    );
+
+    expect(onChange).toHaveBeenCalledTimes(1);
+    expect(onChange.mock.calls[0][0][0]).toEqual(new Date('1989/01/02'));
+    expect(onChange.mock.calls[0][1]).toBe('1/2/1989');
+  });
+
+  it('should not call onChange for invalid typed custom format dates', async () => {
+    const onChange = jest.fn();
+    render(
+      <DatePicker
+        onChange={onChange}
+        datePickerType="single"
+        dateFormat="d/m/Y">
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="dd/mm/yyyy"
+          labelText="Date Picker label"
+        />
+      </DatePicker>
+    );
+
+    await userEvent.type(
+      screen.getByLabelText('Date Picker label'),
+      '34/34/3434'
+    );
+
+    expect(onChange).not.toHaveBeenCalled();
+  });
+
+  it.each([
+    ['disable', { disable: ['01/20/1989'] }],
+    ['enable', { enable: ['01/21/1989'] }],
+    ['minDate', { minDate: '01/21/1989' }],
+    ['maxDate', { maxDate: '01/19/1989' }],
+  ])(
+    'should not call onChange when a typed date is rejected by `%s`',
+    async (_propName, datePickerProps) => {
+      const onChange = jest.fn();
+      render(
+        <DatePicker
+          {...datePickerProps}
+          onChange={onChange}
+          datePickerType="single">
+          <DatePickerInput
+            id="date-picker-input-id-start"
+            placeholder="mm/dd/yyyy"
+            labelText="Date Picker label"
+          />
+        </DatePicker>
+      );
+
+      await userEvent.type(
+        screen.getByLabelText('Date Picker label'),
+        '01/20/1989'
+      );
+
+      expect(onChange).not.toHaveBeenCalled();
+    }
+  );
 
   it('invalid date month/day is correctly parsed when using the default format', async () => {
     render(
@@ -808,6 +974,130 @@ describe('Single date picker', () => {
 
     await userEvent.click(screen.getByText('clear'));
     expect(screen.getByLabelText('Date Picker label')).toHaveValue('');
+  });
+
+  it('should update the visible month when controlled value changes while calendar is open', async () => {
+    const ref = createRef();
+    const DatePickerExample = () => {
+      const [date, setDate] = useState('03/16/2026');
+      return (
+        <>
+          <DatePicker
+            ref={ref}
+            datePickerType="single"
+            value={date}
+            onChange={() => {}}>
+            <DatePickerInput
+              placeholder="mm/dd/yyyy"
+              labelText="Date Picker label"
+              id="date-picker-controlled-month"
+            />
+          </DatePicker>
+          <button
+            type="button"
+            onClick={() => {
+              setDate('01/01/2026');
+            }}>
+            set January
+          </button>
+        </>
+      );
+    };
+
+    render(<DatePickerExample />);
+    const input = screen.getByLabelText('Date Picker label');
+
+    await userEvent.click(input);
+    await userEvent.click(screen.getByText('set January'));
+
+    // eslint-disable-next-line testing-library/no-node-access
+    const monthElement = document.querySelector(
+      '.flatpickr-current-month .cur-month'
+    );
+
+    expect(input).toHaveValue('01/01/2026');
+    expect(ref.current.calendar.currentMonth).toBe(0);
+    expect(ref.current.calendar.currentYear).toBe(2026);
+    expect(monthElement).toHaveTextContent('January');
+  });
+
+  it('should not call onChange when controlled value changes externally', async () => {
+    const onChange = jest.fn();
+    const DatePickerExample = () => {
+      const [date, setDate] = useState('03/16/2026');
+      return (
+        <>
+          <DatePicker datePickerType="single" value={date} onChange={onChange}>
+            <DatePickerInput
+              placeholder="mm/dd/yyyy"
+              labelText="Date Picker label"
+              id="date-picker-controlled-on-change"
+            />
+          </DatePicker>
+          <button
+            type="button"
+            onClick={() => {
+              setDate('01/01/2026');
+            }}>
+            set January
+          </button>
+        </>
+      );
+    };
+
+    render(<DatePickerExample />);
+
+    await userEvent.click(screen.getByLabelText('Date Picker label'));
+    await userEvent.click(screen.getByText('set January'));
+
+    expect(onChange).not.toHaveBeenCalled();
+  });
+
+  it('should navigate from the externally controlled month after controlled value changes', async () => {
+    const ref = createRef();
+    const DatePickerExample = () => {
+      const [date, setDate] = useState('03/16/2026');
+      return (
+        <>
+          <DatePicker
+            ref={ref}
+            datePickerType="single"
+            value={date}
+            onChange={() => {}}>
+            <DatePickerInput
+              placeholder="mm/dd/yyyy"
+              labelText="Date Picker label"
+              id="date-picker-controlled-navigation"
+            />
+          </DatePicker>
+          <button
+            type="button"
+            onClick={() => {
+              setDate('01/01/2026');
+            }}>
+            set January
+          </button>
+        </>
+      );
+    };
+
+    render(<DatePickerExample />);
+
+    await userEvent.click(screen.getByLabelText('Date Picker label'));
+    await userEvent.click(screen.getByText('set January'));
+
+    // eslint-disable-next-line testing-library/no-node-access
+    const nextMonthButton = document.querySelector('.flatpickr-next-month');
+    await userEvent.click(nextMonthButton);
+
+    // eslint-disable-next-line testing-library/no-node-access
+    const monthElement = document.querySelector(
+      '.flatpickr-current-month .cur-month'
+    );
+
+    expect(ref.current.calendar.currentMonth).toBe(1);
+    expect(ref.current.calendar.currentYear).toBe(2026);
+    expect(monthElement).toHaveTextContent('February');
   });
 
   it('should clear calendar when value is set to null', async () => {

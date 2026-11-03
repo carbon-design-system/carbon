@@ -372,4 +372,27 @@ describe('SideNav', () => {
       expect(nav).not.toHaveAttribute('inert');
     });
   });
+
+  it('should set inert for collapsed fixed SideNav at or above lg breakpoint', async () => {
+    window.matchMedia.mockImplementationOnce((query) => ({
+      matches: true,
+      media: query,
+      onchange: null,
+      addListener: jest.fn(),
+      removeListener: jest.fn(),
+      addEventListener: jest.fn(),
+      removeEventListener: jest.fn(),
+      dispatchEvent: jest.fn(),
+    }));
+
+    render(
+      <SideNav aria-label="test" expanded={false} isFixedNav isRail={false} />
+    );
+
+    const nav = screen.getByRole('navigation');
+
+    await waitFor(() => {
+      expect(nav).toHaveAttribute('inert');
+    });
+  });
 });

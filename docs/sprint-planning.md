@@ -44,7 +44,7 @@ During sprint planning, the team will go through the following checkpoints:
 
 | Checkpoint                                                                    | Description                                                                                                                                       |
 | :---------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [Dev Sprint Planning Meeting](#dev-sprint-planning-meeting)                   | Load up the dev sprint in [Github Project](https://github.com/orgs/carbon-design-system/projects/39) with the sprint items and assign accordingly |
+| [Dev Sprint Planning Meeting](#dev-sprint-planning-meeting)                   | Load up the dev sprint in [GitHub Project](https://github.com/orgs/carbon-design-system/projects/39) with the sprint items and assign accordingly |
 | [System Squad Sprint Planning Meeting](#system-squad-sprint-planning-meeting) | Playback the sprint plan along with design leader to the wider team, identify and correct any issues                                              |
 
 #### Dev Sprint Planning Meeting

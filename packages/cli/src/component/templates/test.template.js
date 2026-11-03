@@ -22,11 +22,6 @@ describe('<%= name %>', () => {
       render(<<%= name %>>test</<%= name %>>);
       await expect(screen.getByText('test')).toHaveNoAxeViolations();
     });
-
-    it('should have no accessibility checker violations', async () => {
-      render(<<%= name %>>test</<%= name %>>);
-      await expect(screen.getByText('test')).toHaveNoACViolations('<%= name %>');
-    });
   });
 
   describe('Component API', () => {

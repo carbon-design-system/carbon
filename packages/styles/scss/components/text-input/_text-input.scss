@@ -26,6 +26,7 @@
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/button-reset';
 @use '../../utilities/visually-hidden' as *;
+@use '../../utilities/high-contrast-mode' as *;
 
 /// Text input styles
 /// @access public
@@ -63,11 +64,15 @@
             $border-strong 100%
           )
           border-box;
+
+      // Fixed 16px left padding across all sizes.
+      padding-inline-start: $spacing-05;
     }
 
     &:focus,
     &:active {
       @include focus-outline('outline');
+      @include high-contrast-mode('focus-lg');
     }
 
     &-wrapper svg[hidden] {
@@ -77,6 +82,23 @@
 
   .#{$prefix}--password-input {
     padding-inline-end: layout.size('height');
+
+    @if enabled('enable-v12-release') {
+      // Ensure 8px gap between input text and view button for all sizes.
+      // padding-inline-end = button_size + inset_inline_end + $spacing-03 (8px gap).
+      // xs: 24px + 0px         + 8px = 32px
+      // sm: 24px + $spacing-02 + 8px = 36px
+      // md/lg already match layout.size('height') — no override needed.
+      .#{$prefix}--layout--size-xs & {
+        padding-inline-end: calc(#{convert.to-rem(24px)} + #{$spacing-03});
+      }
+
+      .#{$prefix}--layout--size-sm & {
+        padding-inline-end: calc(
+          #{convert.to-rem(24px)} + #{$spacing-02} + #{$spacing-03}
+        );
+      }
+    }
   }
 
   .#{$prefix}--text-input::placeholder {
@@ -115,6 +137,20 @@
     opacity: 1;
   }
 
+  // Size the tooltip host to the toggle so v12 floating-ui has a real reference.
+  .#{$prefix}--password-input-wrapper:not(.#{$prefix}--text-input--fluid)
+    .#{$prefix}--toggle-password-tooltip {
+    position: absolute;
+    aspect-ratio: 1;
+    inset-block: 0;
+    inset-inline-end: 0;
+  }
+
+  .#{$prefix}--toggle-password-tooltip .#{$prefix}--tooltip-trigger__wrapper {
+    block-size: 100%;
+    inline-size: 100%;
+  }
+
   .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger {
     @include focus-outline('reset');
 
@@ -133,15 +169,45 @@
     transition: outline $duration-fast-01 motion(standard, productive);
 
     @if enabled('enable-v12-release') {
-      border-radius: $border-radius-04;
+      // lg → sm (32px); md/sm/xs → xs (24px)
+      @include layout.redefine-tokens(
+        (
+          size: (
+            height: (
+              xs: convert.to-rem(24px),
+              sm: convert.to-rem(24px),
+              md: convert.to-rem(24px),
+              lg: convert.to-rem(32px),
+            ),
+          ),
+        )
+      );
+      @include layout.use('size', $default: 'md', $min: 'xs', $max: 'lg');
+
+      // lg/md → 8px; sm → 4px; xs → 0
+      border-radius: $border-radius-max;
+      block-size: layout.size('height');
+      inline-size: layout.size('height');
+      inset-block-start: 50%;
+      inset-inline-end: $spacing-03;
+      transform: translateY(-50%);
+
+      .#{$prefix}--layout--size-sm & {
+        inset-inline-end: $spacing-02;
+      }
+
+      .#{$prefix}--layout--size-xs & {
+        inset-inline-end: 0;
+      }
+
+      &:hover {
+        background-color: $background-hover;
+      }
+
+      &:active {
+        background-color: $background-active;
+      }
     }
-  }
-
-  .#{$prefix}--toggle-password-tooltip .#{$prefix}--popover {
-    @include layout.use('size', $default: 'md', $min: 'xs', $max: 'lg');
-
-    gap: $spacing-02;
-    inset-inline-start: calc(-1 * (layout.size('height')));
   }
 
   .#{$prefix}--toggle-password-tooltip .#{$prefix}--popover-content {
@@ -238,8 +304,14 @@
   //-----------------------------
   // Skeleton
   //-----------------------------
+  .#{$prefix}--label.#{$prefix}--skeleton:has(
+      + .#{$prefix}--skeleton.#{$prefix}--text-input
+    ) {
+    @include skeleton($border-radius: $border-radius-04);
+  }
+
   .#{$prefix}--skeleton.#{$prefix}--text-input {
-    @include skeleton;
+    @include skeleton($border-radius: $border-radius-04);
   }
 
   //-----------------------------

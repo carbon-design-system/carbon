@@ -94,6 +94,20 @@ describe('<cds-number-input>', () => {
     expect(event.detail.direction).to.equal('up');
   });
 
+  it('should reflect typed value changes to the host attribute', async () => {
+    const el = await fixture(
+      html`<cds-number-input value="5" label="Label"></cds-number-input>`
+    );
+    const input = el.shadowRoot.querySelector('input');
+
+    input.value = '6';
+    input.dispatchEvent(new Event('input', { bubbles: true, composed: true }));
+    await el.updateComplete;
+
+    expect(el.value).to.equal('6');
+    expect(el.getAttribute('value')).to.equal('6');
+  });
+
   // From React parity
   it('should show helper text and invalid text', async () => {
     const el = await fixture(html`
@@ -277,6 +291,34 @@ describe('<cds-number-input>', () => {
     expect(decrement.getAttribute('aria-label')).to.equal('Less');
     expect(increment.getAttribute('aria-label')).to.equal('More');
   });
+
+  describe('size', () => {
+    it('should apply size class', async () => {
+      const el = await fixture(
+        html`<cds-number-input size="xs" label="Label"></cds-number-input>`
+      );
+      const wrapper = el.shadowRoot.querySelector('.cds--number');
+
+      expect(wrapper.classList.contains('cds--number--xs')).to.be.true; // TODO: V12 - Remove this check
+      expect(wrapper.classList.contains('cds--layout--size-xs')).to.be.true;
+    });
+
+    it('should render without a size class by default', async () => {
+      const el = await fixture(
+        html`<cds-number-input label="Label"></cds-number-input>`
+      );
+      const wrapper = el.shadowRoot.querySelector('.cds--number');
+
+      expect(
+        [...wrapper.classList].some(
+          (name) =>
+            name.startsWith('cds--number--') || // TODO: V12 - Remove this check
+            name.startsWith('cds--layout--size-')
+        )
+      ).to.be.false;
+    });
+  });
+
   describe('with type="text"', () => {
     it('should render an <input> with type="text"', async () => {
       const el = await fixture(
@@ -1289,6 +1331,7 @@ describe('<cds-number-input>', () => {
         expect(lastEvent.detail.value).to.equal(51);
         expect(lastEvent.detail.direction).to.equal('up');
         expect(input.value).to.equal('51');
+        expect(el.getAttribute('value')).to.equal('51');
 
         // Simulate ArrowDown key press
         const arrowDownEvent = new KeyboardEvent('keydown', {
@@ -1304,6 +1347,7 @@ describe('<cds-number-input>', () => {
         expect(lastEvent.detail.value).to.equal(50);
         expect(lastEvent.detail.direction).to.equal('down');
         expect(input.value).to.equal('50');
+        expect(el.getAttribute('value')).to.equal('50');
       });
     });
 

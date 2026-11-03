@@ -1,0 +1,93 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$prefix: 'c4p' !default;
+$carbon-prefix: 'cds';
+
+@use '@carbon/styles/scss/config' with (
+  $font-path: '@ibm/plex'
+);
+@use '@carbon/styles';
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type';
+
+body {
+  padding: $spacing-05;
+  margin: 0;
+}
+
+#root {
+  display: flex;
+  align-items: flex-start;
+}
+
+.example-container {
+  inline-size: 800px;
+  margin-inline-start: $spacing-02;
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 400;
+    margin-block-end: $spacing-07;
+  }
+
+  .example-section {
+    padding: $spacing-07;
+    border: 1px solid var(--cds-border-subtle);
+    background-color: var(--cds-layer-01);
+    margin-block-end: $spacing-05;
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-block: 0 $spacing-06;
+    }
+  }
+}
+
+.example-buttons {
+  display: flex;
+  gap: $spacing-03;
+  margin-block-end: $spacing-06;
+}
+
+.saving-story-textarea {
+  margin-block-end: $spacing-03;
+}
+
+// Saving pattern styles
+.saving-pattern {
+  display: inline-flex;
+  align-items: center;
+}
+
+.saving-pattern__buttons {
+  display: flex;
+
+  .#{$carbon-prefix}--btn .#{$carbon-prefix}--inline-loading {
+    min-block-size: auto;
+  }
+}
+
+.saving-pattern__message {
+  display: flex;
+  align-items: center;
+  gap: $spacing-02;
+}
+
+.saving-pattern__error-icon {
+  display: flex;
+  align-items: center;
+  color: $support-error;
+}
+
+.saving-pattern__text {
+  @include type.type-style('body-compact-01');
+
+  color: $text-secondary;
+}

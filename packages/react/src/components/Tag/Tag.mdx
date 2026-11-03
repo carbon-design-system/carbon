@@ -46,7 +46,11 @@ use optional decorative icons to delineate between multiple categories.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TagStories.ReadOnly),
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: TagStories.ReadOnly,
+          styles: TagStories.default.parameters.styles,
+        }),
     },
   ]}
 />
@@ -65,7 +69,13 @@ When to use:
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(InteractiveTagStories.Dismissible),
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: InteractiveTagStories.Dismissible,
+          styles:
+            InteractiveTagStories.default.parameters.styles +
+            InteractiveTagStories.default.parameters.interactiveTagStyles,
+        }),
     },
   ]}
 />
@@ -146,7 +156,13 @@ When to use:
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(InteractiveTagStories.Selectable),
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: InteractiveTagStories.Selectable,
+          styles:
+            InteractiveTagStories.default.parameters.styles +
+            InteractiveTagStories.default.parameters.interactiveTagStyles,
+        }),
     },
   ]}
 />
@@ -228,7 +244,13 @@ When not to use:
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(InteractiveTagStories.Operational),
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: InteractiveTagStories.Operational,
+          styles:
+            InteractiveTagStories.default.parameters.styles +
+            InteractiveTagStories.default.parameters.interactiveTagStyles,
+        }),
     },
   ]}
 />
@@ -244,7 +266,13 @@ when AI is present in the component.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TagStories.withAILabel),
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: TagStories.withAILabel,
+          styles:
+            TagStories.default.parameters.styles +
+            TagStories.default.parameters.aiLabelStyles,
+        }),
     },
   ]}
 />
@@ -256,7 +284,11 @@ when AI is present in the component.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TagStories.Skeleton),
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: TagStories.Skeleton,
+          styles: TagStories.default.parameters.styles,
+        }),
     },
   ]}
 />

@@ -54,7 +54,8 @@ Create Switch components for each section in the content switcher.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(ContentSwitcherStories.Default),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: ContentSwitcherStories.Default }),
     },
   ]}
 />
@@ -66,7 +67,8 @@ Create Switch components for each section in the content switcher.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(ContentSwitcherStories.IconOnly),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: ContentSwitcherStories.IconOnly }),
     },
   ]}
 />

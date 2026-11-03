@@ -5,19 +5,29 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import styles from './fluid-date-picker-story.scss?inline';
+
 import React from 'react';
 import FluidDatePicker from '../FluidDatePicker';
 import FluidDatePickerInput from '../FluidDatePickerInput';
 import FluidDatePickerSkeleton from './FluidDatePicker.Skeleton';
 import { Toggletip, ToggletipButton, ToggletipContent } from '../Toggletip';
 import { Information } from '@carbon/icons-react';
-import './fluid-date-picker-story.scss';
 import mdx from './FluidDatePicker.mdx';
 
 export default {
   title: 'Components/Fluid Components/FluidDatePicker',
   component: FluidDatePicker,
+  decorators: [
+    (Story) => (
+      <>
+        <style>{styles}</style>
+        <Story />
+      </>
+    ),
+  ],
   parameters: {
+    styles,
     docs: {
       page: mdx,
     },
@@ -165,19 +175,22 @@ const LabelToggletip = () => (
   </span>
 );
 
-export const Simple = ({ defaultWidth, ...args }) => (
-  <div className="fluid-date-picker-story" style={{ width: defaultWidth }}>
-    <LabelToggletip />
-    <FluidDatePicker datePickerType="simple" {...args}>
-      <FluidDatePickerInput
-        placeholder="mm/dd/yyyy"
-        labelText="Label"
-        id="date-picker-simple"
-        {...args}
-      />
-    </FluidDatePicker>
-  </div>
-);
+export const Simple = (args) => {
+  const { defaultWidth, ...datePickerArgs } = args;
+  return (
+    <div className="fluid-date-picker-story" style={{ width: defaultWidth }}>
+      <LabelToggletip />
+      <FluidDatePicker datePickerType="simple" {...datePickerArgs}>
+        <FluidDatePickerInput
+          placeholder="mm/dd/yyyy"
+          labelText="Label"
+          id="date-picker-simple"
+          {...datePickerArgs}
+        />
+      </FluidDatePicker>
+    </div>
+  );
+};
 
 Simple.args = {
   ...sharedArgs,
@@ -191,20 +204,23 @@ Simple.argTypes = {
 };
 Simple.parameters = sharedParameters;
 
-export const Single = ({ defaultWidth, ...args }) => (
-  <div className="fluid-date-picker-story" style={{ width: defaultWidth }}>
-    <LabelToggletip />
-    <FluidDatePicker datePickerType="single" {...args}>
-      <FluidDatePickerInput
-        style={{ width: defaultWidth }}
-        placeholder="mm/dd/yyyy"
-        labelText="Label"
-        id="date-picker-single"
-        {...args}
-      />
-    </FluidDatePicker>
-  </div>
-);
+export const Single = (args) => {
+  const { defaultWidth, ...datePickerArgs } = args;
+  return (
+    <div className="fluid-date-picker-story" style={{ width: defaultWidth }}>
+      <LabelToggletip />
+      <FluidDatePicker datePickerType="single" {...datePickerArgs}>
+        <FluidDatePickerInput
+          style={{ width: defaultWidth }}
+          placeholder="mm/dd/yyyy"
+          labelText="Label"
+          id="date-picker-single"
+          {...datePickerArgs}
+        />
+      </FluidDatePicker>
+    </div>
+  );
+};
 
 Single.args = {
   ...sharedArgs,
@@ -218,24 +234,25 @@ Single.argTypes = {
 };
 Single.parameters = sharedParameters;
 
-export const RangeWithCalendar = ({ defaultWidth, ...args }) => {
+export const RangeWithCalendar = (args) => {
+  const { defaultWidth, ...datePickerArgs } = args;
   return (
     <div className="fluid-date-picker-story" style={{ width: defaultWidth }}>
       <LabelToggletip />
-      <FluidDatePicker datePickerType="range" {...args}>
+      <FluidDatePicker datePickerType="range" {...datePickerArgs}>
         <FluidDatePickerInput
           id="date-picker-input-id-start"
           placeholder="mm/dd/yyyy"
           labelText="Label"
           size="md"
-          {...args}
+          {...datePickerArgs}
         />
         <FluidDatePickerInput
           id="date-picker-input-id-finish"
           placeholder="mm/dd/yyyy"
           labelText="End date"
           size="md"
-          {...args}
+          {...datePickerArgs}
         />
       </FluidDatePicker>
     </div>
@@ -254,35 +271,38 @@ RangeWithCalendar.argTypes = {
 };
 RangeWithCalendar.parameters = sharedParameters;
 
-export const Skeleton = ({ className, defaultWidth }) => (
-  <div style={{ width: defaultWidth }}>
-    <FluidDatePickerSkeleton
-      className={className}
-      datePickerType="simple"
-      labelText="Label"
-      placeholder="Placeholder text"
-      id="input-1"
-    />
-    <br />
-    <br />
-    <FluidDatePickerSkeleton
-      className={className}
-      datePickerType="single"
-      labelText="Label"
-      placeholder="Placeholder text"
-      id="input-2"
-    />
-    <br />
-    <br />
-    <FluidDatePickerSkeleton
-      className={className}
-      datePickerType="range"
-      labelText="Label"
-      placeholder="Placeholder text"
-      id="input-3"
-    />
-  </div>
-);
+export const Skeleton = (args) => {
+  const { className, defaultWidth } = args;
+  return (
+    <div style={{ width: defaultWidth }}>
+      <FluidDatePickerSkeleton
+        className={className}
+        datePickerType="simple"
+        labelText="Label"
+        placeholder="Placeholder text"
+        id="input-1"
+      />
+      <br />
+      <br />
+      <FluidDatePickerSkeleton
+        className={className}
+        datePickerType="single"
+        labelText="Label"
+        placeholder="Placeholder text"
+        id="input-2"
+      />
+      <br />
+      <br />
+      <FluidDatePickerSkeleton
+        className={className}
+        datePickerType="range"
+        labelText="Label"
+        placeholder="Placeholder text"
+        id="input-3"
+      />
+    </div>
+  );
+};
 
 Skeleton.args = {
   className: '',

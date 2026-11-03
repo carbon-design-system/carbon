@@ -291,8 +291,7 @@ describe('Pagination', () => {
       render(<Pagination pageSizes={[10]} pageInputDisabled />);
 
       expect(
-        // eslint-disable-next-line testing-library/no-node-access
-        document.querySelectorAll('.cds--select-input')[1]
+        screen.getByRole('combobox', { name: /^Page of \d+ pages?$/ })
       ).toHaveAttribute('disabled');
     });
 
@@ -370,8 +369,7 @@ describe('Pagination', () => {
       );
 
       expect(
-        // eslint-disable-next-line testing-library/no-node-access
-        document.querySelectorAll('.cds--select-input')[0]
+        screen.getByRole('combobox', { name: 'Items per page:' })
       ).toHaveAttribute('disabled');
     });
 

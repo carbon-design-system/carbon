@@ -94,7 +94,7 @@ export const IconIndicator = React.forwardRef(
   (
     {
       align = 'right',
-      autoAlign = false,
+      autoAlign,
       className: customClassName,
       compact = false,
       iconDescription,

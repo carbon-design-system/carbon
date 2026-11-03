@@ -5,56 +5,66 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render } from '@testing-library/react';
-import React from 'react';
 import { getAnnouncement } from '../getAnnouncement';
 
+const translationIds = {
+  remaining: 'test.remaining',
+  maxReached: 'test.max-reached',
+};
+
 describe('getAnnouncement', () => {
-  it('should emit announcement for characters', () => {
-    let value = null;
+  it('should return `null` when `maxCount` is undefined', () => {
+    const t = jest.fn(() => 'translated');
 
-    function TestComponent() {
-      value = getAnnouncement(9, 10);
-      return null;
-    }
-
-    render(<TestComponent />);
-    expect(value).toBe('1 character left.');
+    expect(getAnnouncement(9, undefined, translationIds, t)).toBeNull();
+    expect(t).not.toHaveBeenCalled();
   });
 
-  it('should emit announcement for words', () => {
-    let value = null;
+  it('should return `null` when more than 10 entities remain', () => {
+    const t = jest.fn(() => 'translated');
 
-    function TestComponent() {
-      value = getAnnouncement(9, 10, 'word', 'words');
-      return null;
-    }
-
-    render(<TestComponent />);
-    expect(value).toBe('1 word left.');
+    expect(getAnnouncement(0, 11, translationIds, t)).toBeNull();
+    expect(getAnnouncement(89, 100, translationIds, t)).toBeNull();
+    expect(t).not.toHaveBeenCalled();
   });
 
-  it('should emit announcement for maximum words reached', () => {
-    let value = null;
+  it.each([
+    [0, 10, 10],
+    [9, 10, 1],
+    [90, 100, 10],
+  ])(
+    'should translate the remaining announcement for count %i and maxCount %i',
+    (count, maxCount, remaining) => {
+      const t = jest.fn(() => 'translated');
 
-    function TestComponent() {
-      value = getAnnouncement(10, 10, 'word', 'words');
-      return null;
+      expect(getAnnouncement(count, maxCount, translationIds, t)).toBe(
+        'translated'
+      );
+      expect(t).toHaveBeenCalledTimes(1);
+      expect(t).toHaveBeenCalledWith('test.remaining', {
+        count: remaining,
+        maxCount,
+      });
     }
+  );
 
-    render(<TestComponent />);
-    expect(value).toBe('Maximum words reached.');
-  });
+  it.each([
+    [10, 10],
+    [12, 10],
+    [0, 0],
+  ])(
+    'should translate the maximum reached announcement for count %i and maxCount %i',
+    (count, maxCount) => {
+      const t = jest.fn(() => 'translated');
 
-  it('should emit announcement for maximum characters reached', () => {
-    let value = null;
-
-    function TestComponent() {
-      value = getAnnouncement(10, 10, 'character', 'characters');
-      return null;
+      expect(getAnnouncement(count, maxCount, translationIds, t)).toBe(
+        'translated'
+      );
+      expect(t).toHaveBeenCalledTimes(1);
+      expect(t).toHaveBeenCalledWith('test.max-reached', {
+        count: maxCount,
+        maxCount,
+      });
     }
-
-    render(<TestComponent />);
-    expect(value).toBe('Maximum characters reached.');
-  });
+  );
 });

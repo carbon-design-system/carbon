@@ -13,6 +13,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/utilities/convert' as *;
 @use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/border-radius' as *;
 @use '@carbon/styles/scss/components/text-input/index';
 @use '@carbon/styles/scss/utilities/layout' as *;
 @use '@carbon/styles/scss/utilities/ai-gradient' as *;
@@ -26,6 +27,12 @@ $css--plex: true !default;
   // the base text-input class has a 100% so we need to propagate it up to the host element
   inline-size: 100%;
   outline: none;
+}
+
+:host(#{$prefix}-text-input-skeleton) {
+  .#{$prefix}--label.#{$prefix}--skeleton {
+    @include skeleton($border-radius: $border-radius-04);
+  }
 }
 
 :host(#{$prefix}-text-input) {

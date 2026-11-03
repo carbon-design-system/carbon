@@ -529,7 +529,7 @@
   }
 }
 
-// alighs header with selection and expansion items
+// aligns header with selection and expansion items
 :host(#{$prefix}-table-header-row[rows-with-ai-label]) {
   .#{$prefix}--table-expand {
     padding-inline-start: $spacing-08;

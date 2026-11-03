@@ -17,6 +17,9 @@ export const useResizeObserver = ({
   const [width, setWidth] = useState(-1);
   const [height, setHeight] = useState(-1);
   const entriesToHandle = useRef<ResizeObserverEntry[] | null>(null);
+  const animationFrame = useRef<number | null>(null);
+  const currentSize = useRef({ width: -1, height: -1 });
+  const hasObservedSize = useRef(false);
   const cb = useRef(onResize);
 
   useEffect(() => {
@@ -55,6 +58,7 @@ export const useResizeObserver = ({
 
         setWidth(initialWidth);
         setHeight(initialHeight);
+        currentSize.current = { width: initialWidth, height: initialHeight };
       }
     };
     if (!ref?.current || (width >= 0 && height >= 0)) {
@@ -75,10 +79,24 @@ export const useResizeObserver = ({
       }
 
       const entry = entriesToHandle.current[0];
+      const nextSize = {
+        width: entry.contentRect.width,
+        height: entry.contentRect.height,
+      };
 
-      setWidth(entry.contentRect.width);
-      setHeight(entry.contentRect.height);
+      if (
+        hasObservedSize.current &&
+        currentSize.current.width === nextSize.width &&
+        currentSize.current.height === nextSize.height
+      ) {
+        return;
+      }
 
+      hasObservedSize.current = true;
+      currentSize.current = nextSize;
+
+      setWidth(nextSize.width);
+      setHeight(nextSize.height);
       cb.current?.(entry.contentRect);
     };
 
@@ -86,16 +104,27 @@ export const useResizeObserver = ({
       // always update entriesToHandle
       entriesToHandle.current = entries;
 
-      window.requestAnimationFrame(() => {
-        // do callbacks
-        doCallbacks();
-      });
+      if (animationFrame.current === null) {
+        animationFrame.current = 0;
+        const frameId = requestAnimationFrame(() => {
+          animationFrame.current = null;
+          doCallbacks();
+        });
+
+        if (animationFrame.current !== null) {
+          animationFrame.current = frameId;
+        }
+      }
     });
 
     // observe all refs passed
     observer.observe(ref.current);
 
     return () => {
+      if (animationFrame.current !== null) {
+        cancelAnimationFrame(animationFrame.current);
+        animationFrame.current = null;
+      }
       observer.disconnect();
     };
   }, []);
