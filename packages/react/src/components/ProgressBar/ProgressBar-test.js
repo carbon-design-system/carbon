@@ -94,6 +94,13 @@ describe('ProgressBar', () => {
       ).toHaveClass(className);
     });
 
+    it('is busy while active', () => {
+      expect(screen.getByRole('progressbar')).toHaveAttribute(
+        'aria-busy',
+        'true'
+      );
+    });
+
     it('supports finished status', () => {
       wrapper.rerender(<ProgressBar {...props} status="finished" />);
 
@@ -105,6 +112,11 @@ describe('ProgressBar', () => {
       expect(screen.getByRole('progressbar')).toHaveAttribute(
         'aria-valuenow',
         '100'
+      );
+
+      expect(screen.getByRole('progressbar')).toHaveAttribute(
+        'aria-busy',
+        'false'
       );
     });
 
@@ -124,6 +136,12 @@ describe('ProgressBar', () => {
       expect(screen.getByRole('progressbar')).toHaveAttribute(
         'aria-invalid',
         'true'
+      );
+
+      // The operation has stopped, so assistive tech shouldn't wait on it.
+      expect(screen.getByRole('progressbar')).toHaveAttribute(
+        'aria-busy',
+        'false'
       );
     });
   });

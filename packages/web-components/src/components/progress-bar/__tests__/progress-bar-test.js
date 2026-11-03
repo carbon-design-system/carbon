@@ -27,4 +27,22 @@ describe('cds-progress-bar', () => {
     await el.updateComplete;
     expect(bar.style.transform).to.equal('none');
   });
+
+  it('should only be busy while the status is active', async () => {
+    const el = await fixture(html`
+      <cds-progress-bar label="Progress" value="50"></cds-progress-bar>
+    `);
+    const track = () => el.shadowRoot.querySelector('[role="progressbar"]');
+
+    expect(track().getAttribute('aria-busy')).to.equal('true');
+
+    el.status = 'finished';
+    await el.updateComplete;
+    expect(track().getAttribute('aria-busy')).to.equal('false');
+
+    el.status = 'error';
+    await el.updateComplete;
+    expect(track().getAttribute('aria-busy')).to.equal('false');
+    expect(track().getAttribute('aria-invalid')).to.equal('true');
+  });
 });
