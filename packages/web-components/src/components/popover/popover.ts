@@ -332,6 +332,7 @@ class CDSPopover extends AutoAlignMixin(HostListenerMixin(LitElement)) {
 
   disconnectedCallback() {
     document.removeEventListener('click', this._handleOutsideClick);
+    super.disconnectedCallback();
   }
 
   /**
