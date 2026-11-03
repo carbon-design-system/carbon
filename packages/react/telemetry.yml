@@ -412,12 +412,15 @@ collect:
         - clickable
         - horizontal
         - renderFooterIcon
+        # CardHeader
+        - headerMedia
         # CardMedia
         - mediaWidth
         # CardTitle
         - descriptionTruncate
         - labelTruncate
         - maxWidth
+        - titleMedia
         # ChatButton
         - isQuickAction
         # ClickableTile
@@ -1082,6 +1085,9 @@ collect:
         - critical
         - custom
         - danger
+        - danger--ghost
+        - danger--primary
+        - danger--tertiary
         - default
         - disclosed
         - draft

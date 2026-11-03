@@ -211,7 +211,7 @@ export const Guidebanner = React.forwardRef<HTMLDivElement, GuidebannerProps>(
               className={`${blockClass}__toggle-button`}
               onClick={handleClickToggle}
               ref={toggleRef}
-              aria-controls={!open ? carouselContentId : undefined}
+              aria-controls={open ? carouselContentId : undefined}
               aria-expanded={open}>
               {open ? collapseButtonLabel : expandButtonLabel}
             </Button>
