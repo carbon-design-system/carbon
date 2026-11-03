@@ -68,6 +68,11 @@ describe('getDerivedStateFromProps', () => {
     expect(stateA.headers[0]).not.toBe(headersA[0]);
     headersA[0].key = 'newKey';
     expect(stateA.headers[0].key).toEqual('name');
+    const stateB = getDerivedStateFromProps(
+      { rows: [], headers: headersA },
+      stateA
+    );
+    expect(stateB.headers[0].key).toEqual('newKey');
   });
 
   describe('with previous state', () => {
