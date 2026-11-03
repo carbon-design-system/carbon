@@ -12,6 +12,7 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const customProperties = require('postcss-custom-properties');
 const rtlcss = require('rtlcss');
+const { getIbmAnalyticsHeads } = require('./ibm-analytics');
 
 const {
   STORYBOOK_USE_CUSTOM_PROPERTIES = 'false',
@@ -23,8 +24,15 @@ const {
 const useSassLoader = STORYBOOK_USE_SASS_LOADER === 'true';
 const useExternalCss = NODE_ENV === 'production';
 const useRtl = STORYBOOK_USE_RTL === 'true';
+const { managerAnalyticsHead, previewAnalyticsHead } = getIbmAnalyticsHeads(
+  'CarbonReactStorybookv10'
+);
 
 module.exports = {
+  // `head` contains manager-head.html/preview-head.html
+  managerHead: (head) => `${head}${managerAnalyticsHead}`,
+  previewHead: (head) => `${head}${previewAnalyticsHead}`,
+
   addons: [
     '@storybook/addon-storysource',
     '@storybook/addon-knobs',
