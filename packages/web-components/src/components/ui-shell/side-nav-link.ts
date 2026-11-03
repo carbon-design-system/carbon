@@ -48,6 +48,14 @@ class CDSSideNavLink extends FocusMixin(LitElement) {
   active = false;
 
   /**
+   * An explicit `aria-current` value for the inner `<a>`. It wins over the
+   * `"page"` that `active` sets, like an `aria-current` passed to the React
+   * `SideNavLink`.
+   */
+  @property({ attribute: 'aria-current' })
+  ariaCurrent;
+
+  /**
    * The element to render for the side nav link.
    */
   @property()
@@ -93,6 +101,7 @@ class CDSSideNavLink extends FocusMixin(LitElement) {
   render() {
     const {
       active,
+      ariaCurrent,
       as,
       href,
       rel,
@@ -127,7 +136,9 @@ class CDSSideNavLink extends FocusMixin(LitElement) {
           href="${href}"
           rel="${ifDefined(rel)}"
           target="${ifDefined(target)}"
-          aria-current="${ifDefined(active ? 'page' : undefined)}">
+          aria-current="${ifDefined(
+            ariaCurrent || (active ? 'page' : undefined)
+          )}">
           ${content}
         </a>`;
   }
