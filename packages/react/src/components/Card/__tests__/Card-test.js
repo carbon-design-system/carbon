@@ -420,6 +420,58 @@ describe('CardHeader', () => {
     );
     expect(ref).toHaveBeenCalledWith(expect.any(HTMLElement));
   });
+
+  it('renders headerMedia in top row above title when provided', () => {
+    const { container } = render(
+      <Card>
+        <CardHeader headerMedia={<span data-testid="media-icon">Icon</span>}>
+          <CardTitle>Title</CardTitle>
+        </CardHeader>
+      </Card>
+    );
+    expect(
+      container.querySelector('.cds--card__header-top-row')
+    ).toBeInTheDocument();
+    expect(
+      container.querySelector('.cds--card__header-media')
+    ).toBeInTheDocument();
+    expect(screen.getByTestId('media-icon')).toBeInTheDocument();
+    expect(screen.getByText('Title')).toBeInTheDocument();
+  });
+
+  it('renders actions slot when actions prop is provided', () => {
+    const { container } = render(
+      <Card>
+        <CardHeader actions={<span data-testid="action-btn">Action</span>}>
+          <CardTitle>Title</CardTitle>
+        </CardHeader>
+      </Card>
+    );
+    expect(
+      container.querySelector('.cds--card__actions-slot')
+    ).toBeInTheDocument();
+    expect(screen.getByTestId('action-btn')).toBeInTheDocument();
+  });
+
+  it('renders headerMedia and actions together in top row', () => {
+    const { container } = render(
+      <Card>
+        <CardHeader
+          headerMedia={<span data-testid="media-icon">Icon</span>}
+          actions={<span data-testid="action-btn">Action</span>}>
+          <CardTitle>Title</CardTitle>
+        </CardHeader>
+      </Card>
+    );
+    const topRow = container.querySelector('.cds--card__header-top-row');
+    expect(topRow).toBeInTheDocument();
+    expect(
+      topRow.querySelector('.cds--card__header-media')
+    ).toBeInTheDocument();
+    expect(
+      topRow.querySelector('.cds--card__actions-slot')
+    ).toBeInTheDocument();
+  });
 });
 
 // ---------------------------------------------------------------------------
@@ -755,6 +807,28 @@ describe('CardTitle', () => {
       container.querySelector('.cds--card__title-end-icon')
     ).not.toBeInTheDocument();
   });
+
+  it('renders titleMedia when provided', () => {
+    const { container } = render(
+      <Card>
+        <CardHeader>
+          <CardTitle titleMedia={<span data-testid="title-icon">Icon</span>}>
+            Title
+          </CardTitle>
+        </CardHeader>
+      </Card>
+    );
+    expect(
+      container.querySelector('.cds--card__title--has-media')
+    ).toBeInTheDocument();
+    expect(
+      container.querySelector('.cds--card__title-media')
+    ).toBeInTheDocument();
+    expect(
+      container.querySelector('.cds--card__title-text')
+    ).toBeInTheDocument();
+    expect(screen.getByTestId('title-icon')).toBeInTheDocument();
+  });
 });
 
 // ---------------------------------------------------------------------------
@@ -997,5 +1071,54 @@ describe('CardActions', () => {
       </Card>
     );
     expect(container.querySelector('.cds--overflow-menu')).toBeInTheDocument();
+  });
+
+  it('handles arbitrary button types and text children without throwing', () => {
+    const handleExport = jest.fn();
+    const handleShare = jest.fn();
+    const { container } = render(
+      <Card>
+        <CardHeader>
+          <CardActions>
+            <CardAction>
+              <button type="button" onClick={handleExport}>
+                Export
+              </button>
+            </CardAction>
+            <CardAction>
+              <a href="#share" onClick={handleShare}>
+                <span>Share report</span>
+              </a>
+            </CardAction>
+            <button type="button" aria-label="Direct button">
+              Direct
+            </button>
+          </CardActions>
+        </CardHeader>
+      </Card>
+    );
+    expect(screen.getByText('Export')).toBeInTheDocument();
+    expect(screen.getByText('Share report')).toBeInTheDocument();
+    expect(screen.getByText('Direct')).toBeInTheDocument();
+    expect(container.querySelector('.cds--overflow-menu')).toBeInTheDocument();
+  });
+
+  it('publishes the width needed by all actions as a custom property', () => {
+    const { container } = render(
+      <Card>
+        <CardHeader>
+          <CardActions>
+            <CardAction>
+              <button type="button">Export</button>
+            </CardAction>
+          </CardActions>
+        </CardHeader>
+      </Card>
+    );
+    expect(
+      container
+        .querySelector('.cds--card__actions')
+        .style.getPropertyValue('--cds--card--actions-inline-size')
+    ).toMatch(/^\d+px$/);
   });
 });
