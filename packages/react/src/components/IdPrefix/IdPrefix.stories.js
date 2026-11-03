@@ -13,14 +13,25 @@ import mdx from './IdPrefix.mdx';
 export default {
   title: 'Components/IdPrefix',
   component: IdPrefix,
+  args: {
+    prefix: 'custom',
+  },
+  argTypes: {
+    prefix: {
+      control: { type: 'text' },
+    },
+  },
   parameters: {
+    controls: {
+      exclude: ['children'],
+    },
     docs: {
       page: mdx,
     },
   },
 };
 
-export const Default = () => {
+export const Default = (args) => {
   function ExampleComponent() {
     const idPrefix = useIdPrefix();
     return <p>The current id prefix is: {idPrefix}</p>;
@@ -29,7 +40,7 @@ export const Default = () => {
   return (
     <>
       <ExampleComponent />
-      <IdPrefix prefix="custom">
+      <IdPrefix {...args}>
         <ExampleComponent />
       </IdPrefix>
     </>

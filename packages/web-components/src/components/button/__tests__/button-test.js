@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -208,6 +208,40 @@ describe('cds-button', () => {
       }
       expect(el).to.have.attribute('badge-count', '1200');
       await expect(el).shadowDom.to.equalSnapshot();
+    });
+
+    it('should set aria-pressed on a selected ghost icon button', async () => {
+      const el = await fixture(html`
+        <cds-button kind="ghost" isSelected tooltip-text="Icon button">
+          <svg slot="icon" data-testid="svg"></svg>
+        </cds-button>
+      `);
+      await el.updateComplete;
+
+      const button = el.shadowRoot?.querySelector('button');
+      expect(button).to.have.attribute('aria-pressed');
+    });
+
+    it('should not set aria-pressed on a ghost icon button that is not selected', async () => {
+      const el = await fixture(html`
+        <cds-button kind="ghost" tooltip-text="Icon button">
+          <svg slot="icon" data-testid="svg"></svg>
+        </cds-button>
+      `);
+      await el.updateComplete;
+
+      const button = el.shadowRoot?.querySelector('button');
+      expect(button).to.not.have.attribute('aria-pressed');
+    });
+
+    it('should not set aria-pressed on a non-icon ghost button', async () => {
+      const el = await fixture(html`
+        <cds-button kind="ghost" isSelected>test</cds-button>
+      `);
+      await el.updateComplete;
+
+      const button = el.shadowRoot?.querySelector('button');
+      expect(button).to.not.have.attribute('aria-pressed');
     });
   });
 

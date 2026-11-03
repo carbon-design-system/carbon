@@ -1,0 +1,127 @@
+/**
+ * Copyright IBM Corp. 2026, 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+.handle-content {
+  display: flex;
+  block-size: 100%;
+  inline-size: 100%;
+}
+
+.icon-container {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+  block-size: 100%;
+}
+
+:host {
+  display: grid;
+  background: var(--cds-border-subtle);
+  cursor: ns-resize;
+  min-block-size: max(1px, var(--resizer-thickness));
+  min-inline-size: max(1px, var(--resizer-thickness));
+  touch-action: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  .icon-container {
+    position: relative;
+
+    &::before {
+      position: absolute;
+      background-color: var(--resizer-grab-color);
+      block-size: calc(
+        max(1px, var(--resizer-thickness)) +
+          max(0px, var(--resizer-grab-thickness))
+      );
+      content: '';
+      inline-size: 100%;
+      inset-inline-start: 0;
+    }
+  }
+}
+
+:host(:hover),
+:host([data-synthetic-hover]) {
+  @media (prefers-reduced-motion: no-preference) {
+    background-color: var(--cds-border-interactive);
+    transition: background-color var(--cds-duration-moderate-01);
+  }
+}
+
+:host(:focus) {
+  background-color: var(--cds-border-interactive);
+  outline: none;
+}
+
+:host(:active),
+:host([data-synthetic-active]) {
+  background-color: var(--cds-border-interactive);
+}
+
+:host(:focus:not(:focus-visible)) {
+  box-shadow: none;
+  outline: none;
+}
+
+:host([slot='handle-horizontal']),
+:host([orientation='horizontal']) {
+  cursor: ew-resize;
+
+  .icon-container {
+    position: relative;
+
+    &::before {
+      position: absolute;
+      background-color: var(--resizer-grab-color);
+      block-size: 100%;
+      content: '';
+      inline-size: calc(
+        max(1px, var(--resizer-thickness)) +
+          max(0px, var(--resizer-grab-thickness))
+      );
+      inset-block-start: 0;
+      inset-inline-start: auto;
+    }
+  }
+}
+
+:host([slot='handle-vertical']),
+:host([orientation='vertical']) {
+  cursor: ns-resize;
+  min-inline-size: 0;
+
+  .icon-container {
+    position: relative;
+
+    &::before {
+      position: absolute;
+      background-color: var(--resizer-grab-color);
+      block-size: calc(
+        max(1px, var(--resizer-thickness)) +
+          max(0px, var(--resizer-grab-thickness))
+      );
+      content: '';
+      inline-size: 100%;
+      inset-inline-start: 0;
+    }
+  }
+}
+
+.sr-only {
+  position: absolute;
+  overflow: hidden;
+  padding: 0;
+  border: 0;
+  margin: -1px;
+  block-size: 1px;
+  clip: rect(0, 0, 0, 0);
+  inline-size: 1px;
+  white-space: nowrap;
+}

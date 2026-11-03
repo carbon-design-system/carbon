@@ -30,12 +30,9 @@ class CDSBreadcrumbItem extends LitElement {
       );
 
     items.forEach((item) => {
-      if (this.getAttribute('size')) {
-        (item as HTMLElement).setAttribute(
-          'breadcrumb-size',
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-          this.getAttribute('size')!
-        );
+      const size = this.getAttribute('size');
+      if (size) {
+        (item as HTMLElement).setAttribute('breadcrumb-size', size);
       }
 
       const overflowMenuBody = (item as HTMLElement).querySelector(

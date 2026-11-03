@@ -118,6 +118,20 @@ class CDSSelectableTag extends HostListenerMixin(FocusMixin(LitElement)) {
   @state()
   protected _hasEllipsisApplied = false;
 
+  /**
+   * `true` if there is a custom icon.
+   */
+  @state()
+  protected _hasCustomIcon = false;
+
+  /**
+   * Handles `slotchange` event.
+   */
+  protected _handleIconSlotChange({ target }: Event) {
+    this._hasCustomIcon =
+      (target as HTMLSlotElement).assignedNodes().length > 0;
+  }
+
   async updated() {
     await this.updateComplete;
 
@@ -135,17 +149,28 @@ class CDSSelectableTag extends HostListenerMixin(FocusMixin(LitElement)) {
       selected,
       size,
       text,
+      _handleIconSlotChange: handleIconSlotChange,
+      _hasCustomIcon: hasCustomIcon,
       _hasEllipsisApplied: hasEllipsisApplied,
     } = this;
 
-    return html` ${hasEllipsisApplied
+    const icon = html`<slot
+      name="icon"
+      slot="icon"
+      @slotchange="${handleIconSlotChange}"></slot>`;
+    const iconDetector = html`<slot
+      hidden
+      name="icon"
+      @slotchange="${handleIconSlotChange}"></slot>`;
+
+    return html`${hasCustomIcon ? null : iconDetector}
+    ${hasEllipsisApplied
       ? html` <cds-tooltip align="bottom" keyboard-only leave-delay-ms=${0}>
           <cds-tag
             ?aria-pressed="${selected}"
             size="${size}"
             ?disabled="${disabled}">
-            <slot name="icon" slot="icon"></slot>
-            ${text}
+            ${hasCustomIcon ? icon : null} ${text}
             <slot name="decorator" slot="decorator"></slot>
             <slot name="ai-label" slot="ai-label"></slot>
             <slot name="slug" slot="slug"></slot>
@@ -157,8 +182,7 @@ class CDSSelectableTag extends HostListenerMixin(FocusMixin(LitElement)) {
             ?aria-pressed="${selected}"
             size="${size}"
             ?disabled="${disabled}">
-            <slot name="icon" slot="icon"></slot>
-            ${text}
+            ${hasCustomIcon ? icon : null} ${text}
             <slot name="decorator" slot="decorator"></slot>
             <slot name="ai-label" slot="ai-label"></slot>
             <slot name="slug" slot="slug"></slot>

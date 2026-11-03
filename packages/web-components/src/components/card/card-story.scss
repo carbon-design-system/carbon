@@ -1,0 +1,29 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/spacing';
+
+#storybook-root {
+  // 2rem
+  padding-block-start: spacing.$spacing-07;
+}
+
+// Aligns the Enable/Disable toggle button to the card bottom in Disabled story
+.card-story-disabled-toggle {
+  display: flex;
+  align-items: flex-end;
+  padding-block-end: spacing.$spacing-05;
+}
+
+// Metadata row used in horizontal card footer (WithHorizontalMedia story)
+.card-story-time {
+  display: flex;
+  align-items: center;
+  padding: 0 spacing.$spacing-05;
+  font-size: calc(spacing.$spacing-04 + spacing.$spacing-01);
+  gap: spacing.$spacing-03;
+}

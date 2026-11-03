@@ -1,8 +1,10 @@
 import { puppeteerLauncher } from '@web/test-runner-puppeteer';
 
-const chromeLaunchArgs = process.env.CI
-  ? ['--no-sandbox', '--disable-setuid-sandbox']
-  : [];
+const chromeLaunchArgs = [
+  // Headless Chrome may have no input devices. Test hover styles with a mouse.
+  '--blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4',
+  ...(process.env.CI ? ['--no-sandbox', '--disable-setuid-sandbox'] : []),
+];
 
 export default {
   browsers: [
@@ -12,7 +14,8 @@ export default {
       },
     }),
   ],
-  files: 'src/components/**/__tests__/**/*.js',
+  // exclude snapshots from tests
+  files: ['src/**/__tests__/**/*.js', '!**/__snapshots__/**'],
   nodeResolve: {
     extensions: ['.js', '.ts'],
   },
@@ -81,4 +84,31 @@ export default {
       timeout: 5000,
     },
   },
+
+  // suppress ResizeObserver loops
+  testRunnerHtml: (testFramework) => `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <script>
+          window.addEventListener(
+            'error',
+            (event) => {
+              if (
+                typeof event.message === 'string' &&
+                event.message.includes('ResizeObserver loop')
+              ) {
+                event.stopImmediatePropagation();
+                event.preventDefault();
+              }
+            },
+            true
+          );
+        </script>
+      </head>
+      <body>
+        <script type="module" src="${testFramework}"></script>
+      </body>
+    </html>
+  `,
 };

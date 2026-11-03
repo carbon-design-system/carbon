@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,13 +8,84 @@
 import React from 'react';
 import TextInput from '../TextInput';
 import userEvent from '@testing-library/user-event';
-import { render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import { AILabel } from '../../AILabel';
+import { FeatureFlags } from '../../FeatureFlags';
 
 const prefix = 'cds';
 
 describe('TextInput', () => {
   describe('renders as expected - Component API', () => {
+    it('should warn without throwing for interactive content in labelText', () => {
+      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+      const errorSpy = jest
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
+
+      expect(() => {
+        render(
+          <TextInput
+            id="input-1"
+            labelText={
+              <>
+                TextInput label <a href="/">Help</a>
+              </>
+            }
+          />
+        );
+      }).not.toThrow();
+
+      expect(spy).toHaveBeenCalledWith(
+        expect.stringContaining(
+          'Warning: The TextInput component `labelText` prop must have no interactive content'
+        )
+      );
+      expect(errorSpy).not.toHaveBeenCalled();
+      expect(screen.getByRole('textbox')).toBeInTheDocument();
+      expect(screen.getByRole('link', { name: 'Help' })).toBeInTheDocument();
+
+      spy.mockRestore();
+      errorSpy.mockRestore();
+    });
+
+    it('should throw for interactive content in labelText when the v12 release flag is enabled', () => {
+      const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+      expect(() =>
+        render(
+          <FeatureFlags enableV12Release>
+            <TextInput
+              id="input-1"
+              labelText={
+                <span>
+                  Terms <a href="/terms">Terms & Conditions</a>
+                </span>
+              }
+            />
+          </FeatureFlags>
+        )
+      ).toThrow(
+        'The TextInput component `labelText` prop must have no interactive content'
+      );
+
+      spy.mockRestore();
+    });
+
+    it('should allow non-interactive content in labelText', () => {
+      expect(() => {
+        render(
+          <TextInput
+            id="input-1"
+            labelText={
+              <>
+                TextInput label <span>additional label content</span>
+              </>
+            }
+          />
+        );
+      }).not.toThrow();
+    });
+
     it('should spread extra props onto the input element', () => {
       render(
         <TextInput
@@ -479,6 +550,135 @@ describe('TextInput', () => {
       // Enable counter
       await userEvent.click(screen.getByText('Enable Counter'));
       expect(screen.getByText('9/15')).toBeInTheDocument();
+    });
+  });
+
+  describe('translateWithId', () => {
+    const translateWithId = (id, { count, maxCount }) => {
+      switch (id) {
+        case 'carbon.text-input.counter.characters.remaining':
+          return count === 1
+            ? `Resta 1 caractere de ${maxCount}.`
+            : `Restam ${count} caracteres de ${maxCount}.`;
+        case 'carbon.text-input.counter.characters.max-reached':
+          return `Limite de ${maxCount} caracteres atingido.`;
+        default:
+          throw new Error(`Unsupported id: ${id}`);
+      }
+    };
+
+    beforeEach(() => {
+      jest.useFakeTimers();
+    });
+
+    afterEach(() => {
+      jest.useRealTimers();
+    });
+
+    it.each([
+      ['123456789', '1 character left.'],
+      ['12345', '5 characters left.'],
+      ['1234567890', 'Maximum characters reached.'],
+    ])(
+      'should announce the default English message for "%s"',
+      (defaultValue, message) => {
+        render(
+          <TextInput
+            id="input-1"
+            labelText="TextInput label"
+            enableCounter
+            maxCount={10}
+            defaultValue={defaultValue}
+          />
+        );
+
+        act(() => {
+          jest.advanceTimersByTime(1000);
+        });
+
+        expect(screen.getByRole('alert')).toHaveTextContent(message);
+      }
+    );
+
+    it.each([
+      ['123456789', 'Resta 1 caractere de 10.'],
+      ['12345', 'Restam 5 caracteres de 10.'],
+      ['1234567890', 'Limite de 10 caracteres atingido.'],
+    ])(
+      'should announce the translated message for "%s"',
+      (defaultValue, message) => {
+        render(
+          <TextInput
+            id="input-1"
+            labelText="TextInput label"
+            enableCounter
+            maxCount={10}
+            defaultValue={defaultValue}
+            translateWithId={translateWithId}
+          />
+        );
+
+        act(() => {
+          jest.advanceTimersByTime(1000);
+        });
+
+        expect(screen.getByRole('alert')).toHaveTextContent(message);
+      }
+    );
+
+    it('should not pass `translateWithId` to the `<input>`', () => {
+      const errorSpy = jest
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
+
+      render(
+        <TextInput
+          id="input-1"
+          labelText="TextInput label"
+          translateWithId={translateWithId}
+        />
+      );
+
+      expect(screen.getByRole('textbox')).not.toHaveAttribute(
+        'translatewithid'
+      );
+      expect(errorSpy).not.toHaveBeenCalled();
+      errorSpy.mockRestore();
+    });
+
+    it('should not restart the announcement when `translateWithId` changes identity', () => {
+      const props = {
+        id: 'input-1',
+        labelText: 'TextInput label',
+        enableCounter: true,
+        maxCount: 10,
+        defaultValue: '123456789',
+      };
+      const { rerender } = render(
+        <TextInput
+          {...props}
+          translateWithId={(...args) => translateWithId(...args)}
+        />
+      );
+
+      act(() => {
+        jest.advanceTimersByTime(500);
+      });
+
+      rerender(
+        <TextInput
+          {...props}
+          translateWithId={(...args) => translateWithId(...args)}
+        />
+      );
+
+      act(() => {
+        jest.advanceTimersByTime(500);
+      });
+
+      expect(screen.getByRole('alert')).toHaveTextContent(
+        'Resta 1 caractere de 10.'
+      );
     });
   });
 });

@@ -291,6 +291,7 @@ function NotificationIcon({
   return (
     <IconForKind
       className={`${prefix}--${notificationType}-notification__icon`}
+      aria-label={iconDescription}
       size={20}>
       <title>{iconDescription}</title>
     </IconForKind>
@@ -1340,6 +1341,7 @@ export function Callout({
 
   const containerClassName = cx(className, {
     [`${prefix}--actionable-notification`]: true,
+    [`${prefix}--actionable-notification--callout`]: true,
     [`${prefix}--actionable-notification--low-contrast`]: lowContrast,
     [`${prefix}--actionable-notification--${kind}`]: kind,
     [`${prefix}--actionable-notification--hide-close-button`]: true,

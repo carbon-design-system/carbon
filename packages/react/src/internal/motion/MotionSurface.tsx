@@ -15,7 +15,7 @@ import React, {
   type ReactNode,
 } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
-import type { MotionSurfaceName } from '@carbon/motion';
+import { describeSurface, type MotionSurfaceInput } from '@carbon/motion';
 import { PresenceHoldContext } from '../usePresenceContext';
 import { warning } from '../warning';
 import { useMotionSurface } from './useMotionSurface';
@@ -27,7 +27,11 @@ type SafeDivProps = Omit<
 >;
 
 export interface MotionSurfaceProps extends SafeDivProps {
-  surface: MotionSurfaceName;
+  /**
+   * A named surface from `@carbon/motion`, or an inline definition of the same
+   * shape for a custom surface
+   */
+  surface: MotionSurfaceInput;
   surfaceId?: string;
   open?: boolean;
   onExitComplete?: () => void;
@@ -58,8 +62,8 @@ export const MotionSurface = forwardRef<HTMLDivElement, MotionSurfaceProps>(
 
     warning(
       !(resolved.kind === 'shared-element' && !surfaceId),
-      `MotionSurface: the ${surface} surface is a shared-element morph and ` +
-        'needs a `surfaceId` that matches a `MotionSurfaceOrigin`.'
+      `MotionSurface: the ${describeSurface(surface)} is a shared-element ` +
+        'morph and needs a `surfaceId` that matches a `MotionSurfaceOrigin`.'
     );
 
     // Carbon presence only watches CSS animations, so it can't see Motion's
@@ -147,7 +151,7 @@ export const MotionSurface = forwardRef<HTMLDivElement, MotionSurfaceProps>(
 );
 
 export interface MotionSurfaceOriginProps extends SafeDivProps {
-  surface: MotionSurfaceName;
+  surface: MotionSurfaceInput;
   surfaceId: string;
   children?: ReactNode;
 }
@@ -162,8 +166,8 @@ export const MotionSurfaceOrigin = forwardRef<
 
   warning(
     resolved.kind === 'shared-element',
-    `MotionSurfaceOrigin: the ${surface} surface is a reveal and has no ` +
-      'origin. Use MotionSurface directly instead.'
+    `MotionSurfaceOrigin: the ${describeSurface(surface)} is a reveal and ` +
+      'has no origin. Use MotionSurface directly instead.'
   );
 
   if (!resolved.enabled || resolved.kind !== 'shared-element') {

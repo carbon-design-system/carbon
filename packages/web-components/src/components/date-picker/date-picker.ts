@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -25,7 +25,7 @@ import cssClassPlugin from './css-class-plugin';
 import fixEventsPlugin from './fix-events-plugin';
 import focusPlugin from './focus-plugin';
 import iconPlugin from './icon-plugin';
-import monthSelectPlugin from './month-select-plugin';
+import monthSelectPlugin, { updateCurrentMonth } from './month-select-plugin';
 import rangePlugin from './range-plugin';
 import shadowDOMEventPlugin from './shadow-dom-events-plugin';
 import stateHandshakePlugin from './state-handshake-plugin';
@@ -94,11 +94,12 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
    * @returns The effective date picker mode, determined by the child `<cds-date-picker-input>`.
    */
   private get _mode() {
-    const { selectorInputTo } = this.constructor as typeof CDSDatePicker;
+    const { selectorInputTo, selectorInputSingle } = this
+      .constructor as typeof CDSDatePicker;
     if (this.querySelector(selectorInputTo)) {
       return DATE_PICKER_MODE.RANGE;
     }
-    if (this.querySelector(`${prefix}-date-picker-input[kind="single"]`)) {
+    if (this.querySelector(selectorInputSingle)) {
       return DATE_PICKER_MODE.SINGLE;
     }
     return DATE_PICKER_MODE.SIMPLE;
@@ -286,8 +287,14 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
     const { disabled, dateFormat, open, readonly, minDate, maxDate, value } =
       this;
 
-    const { selectorInputFrom, selectorInputTo } = this
-      .constructor as typeof CDSDatePicker;
+    const {
+      selectorInputFrom,
+      selectorInputTo,
+      _selectorFlatpickrMonthYearContainer: selectorFlatpickrMonthYearContainer,
+      _selectorFlatpickrYearContainer: selectorFlatpickrYearContainer,
+      _selectorFlatpickrCurrentMonth: selectorFlatpickrCurrentMonth,
+      _classFlatpickrCurrentMonth: classFlatpickrCurrentMonth,
+    } = this.constructor as typeof CDSDatePicker;
     const inputFrom = this.querySelector(
       selectorInputFrom
     ) as CDSDatePickerInput;
@@ -349,6 +356,12 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
       }
       if (calendar) {
         calendar.setDate(dates);
+        updateCurrentMonth(calendar, {
+          selectorFlatpickrMonthYearContainer,
+          selectorFlatpickrYearContainer,
+          selectorFlatpickrCurrentMonth,
+          classFlatpickrCurrentMonth,
+        });
         [inputFrom, inputTo].forEach((input, i) => {
           if (input) {
             input.value = !dates[i]
@@ -692,6 +705,15 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
    */
   static get selectorInputTo() {
     return `${prefix}-date-picker-input[kind="to"]`;
+  }
+
+  /**
+   * A selector that will return the single date input.
+   * Extracted from _mode getter so subclasses can override it
+   * to match their own input element names (e.g. fluid variant).
+   */
+  static get selectorInputSingle() {
+    return `${prefix}-date-picker-input[kind="single"]`;
   }
 
   /**

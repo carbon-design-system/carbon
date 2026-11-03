@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2023
+// Copyright IBM Corp. 2016, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -35,6 +35,17 @@
   // Shift collection of checkboxes up if label is present
   // to account for the 2px top margin for the first checkbox
   .#{$prefix}--label + .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper {
+    margin-block-start: -#{$spacing-01};
+  }
+
+  .#{$prefix}--checkbox-group-inner--decorator
+    + .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper,
+  .#{$prefix}--checkbox-group
+    > .#{$prefix}--ai-label
+    + .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper,
+  .#{$prefix}--checkbox-group
+    > .#{$prefix}--slug
+    + .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper {
     margin-block-start: -#{$spacing-01};
   }
 
@@ -387,55 +398,79 @@
   //-----------------------------------------------
   // Decorator
   //-----------------------------------------------
-  .#{$prefix}--checkbox-group--decorator legend.#{$prefix}--label,
-  .#{$prefix}--checkbox-wrapper--decorator .#{$prefix}--checkbox-label-text {
+  .#{$prefix}--checkbox-wrapper--decorator,
+  .#{$prefix}--checkbox-wrapper--slug {
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
   }
-  // Remove v12
-  .#{$prefix}--checkbox-group--slug legend.#{$prefix}--label,
-  .#{$prefix}--checkbox-wrapper--slug .#{$prefix}--checkbox-label-text {
-    display: flex;
+
+  .#{$prefix}--checkbox-group--decorator legend.#{$prefix}--label,
+  .#{$prefix}--checkbox-group--slug legend.#{$prefix}--label {
+    float: inline-start;
   }
 
   .#{$prefix}--checkbox-group--decorator
-    legend.#{$prefix}--label
-    .#{$prefix}--checkbox-group-inner--decorator
+    > .#{$prefix}--checkbox-group-inner--decorator,
+  .#{$prefix}--checkbox-group--slug > .#{$prefix}--ai-label,
+  .#{$prefix}--checkbox-group--slug > .#{$prefix}--slug {
+    float: inline-start;
+  }
+
+  .#{$prefix}--checkbox-group--decorator legend.#{$prefix}--label,
+  .#{$prefix}--checkbox-wrapper--decorator .#{$prefix}--checkbox-label-text,
+  .#{$prefix}--checkbox-group--decorator
+    > .#{$prefix}--checkbox-group-inner--decorator {
+    display: inline-flex;
+  }
+  // Remove v12
+  .#{$prefix}--checkbox-group--slug legend.#{$prefix}--label,
+  .#{$prefix}--checkbox-wrapper--slug .#{$prefix}--checkbox-label-text,
+  .#{$prefix}--checkbox-group--slug > .#{$prefix}--ai-label,
+  .#{$prefix}--checkbox-group--slug > .#{$prefix}--slug {
+    display: inline-flex;
+  }
+
+  .#{$prefix}--checkbox-group--decorator
+    > .#{$prefix}--checkbox-group-inner--decorator
     > *,
   .#{$prefix}--checkbox-wrapper--decorator
-    .#{$prefix}--checkbox-label-text
-    .#{$prefix}--checkbox-wrapper-inner--decorator
+    > .#{$prefix}--checkbox-wrapper-inner--decorator
     > * {
     margin-inline-start: $spacing-03;
   }
   // Remove v12
-  .#{$prefix}--checkbox-group--slug
-    legend.#{$prefix}--label
-    .#{$prefix}--ai-label,
-  .#{$prefix}--checkbox-wrapper--slug
-    .#{$prefix}--checkbox-label-text
-    .#{$prefix}--ai-label,
-  .#{$prefix}--checkbox-group--slug legend.#{$prefix}--label .#{$prefix}--slug,
-  .#{$prefix}--checkbox-wrapper--slug
-    .#{$prefix}--checkbox-label-text
-    .#{$prefix}--slug {
+  .#{$prefix}--checkbox-group--slug > .#{$prefix}--ai-label,
+  .#{$prefix}--checkbox-group--slug > .#{$prefix}--slug,
+  .#{$prefix}--checkbox-wrapper--slug > .#{$prefix}--ai-label,
+  .#{$prefix}--checkbox-wrapper--slug > .#{$prefix}--slug {
     margin-inline-start: $spacing-03;
   }
 
   .#{$prefix}--checkbox-wrapper--decorator
-    .#{$prefix}--checkbox-label-text
+    > .#{$prefix}--checkbox-wrapper-inner--decorator
     .#{$prefix}--ai-label__button--inline {
     line-height: inherit;
     margin-block-start: convert.to-rem(-1px);
   }
   // Remove v12
-  .#{$prefix}--checkbox-wrapper--slug
-    .#{$prefix}--checkbox-label-text
-    .#{$prefix}--ai-label__button--inline,
-  .#{$prefix}--checkbox-wrapper--slug
-    .#{$prefix}--checkbox-label-text
-    .#{$prefix}--slug__button--inline {
+  .#{$prefix}--checkbox-wrapper--slug .#{$prefix}--ai-label__button--inline,
+  .#{$prefix}--checkbox-wrapper--slug .#{$prefix}--slug__button--inline {
     line-height: inherit;
     margin-block-start: convert.to-rem(-1px);
+  }
+
+  .#{$prefix}--checkbox-wrapper--decorator > .#{$prefix}--form__helper-text,
+  .#{$prefix}--checkbox-wrapper--slug > .#{$prefix}--form__helper-text {
+    inline-size: 100%;
+  }
+
+  .#{$prefix}--checkbox-group--decorator
+    > .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper,
+  .#{$prefix}--checkbox-group--slug
+    > .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper {
+    clear: both;
   }
 
   //-----------------------------------------------
@@ -461,6 +496,14 @@
     }
 
     .#{$prefix}--label + .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper {
+      margin-block-start: 0;
+    }
+
+    .#{$prefix}--checkbox-group-inner--decorator
+      + .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper,
+    > .#{$prefix}--ai-label
+      + .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper,
+    > .#{$prefix}--slug + .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper {
       margin-block-start: 0;
     }
   }

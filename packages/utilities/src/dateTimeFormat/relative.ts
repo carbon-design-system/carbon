@@ -20,12 +20,12 @@ export function format(
   const now = Date.now();
 
   const seconds = Math.floor((now - d.getTime()) / 1000);
-  const minutes = Math.floor(seconds / 60);
-  const hours = Math.floor(minutes / 60);
-  const days = Math.floor(hours / 24);
-  const weeks = Math.floor(days / 7);
-  const months = Math.floor(weeks / 4);
-  const years = Math.floor(days / 365);
+  const minutes = Math.trunc(seconds / 60);
+  const hours = Math.trunc(minutes / 60);
+  const days = Math.trunc(hours / 24);
+  const weeks = Math.trunc(days / 7);
+  const months = Math.trunc(weeks / 4);
+  const years = Math.trunc(days / 365);
 
   if (Math.abs(seconds) < 60) {
     return new Intl.RelativeTimeFormat(options?.locale, {

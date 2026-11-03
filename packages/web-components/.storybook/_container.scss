@@ -14,10 +14,15 @@
 @use '@carbon/styles/scss/components/notification/tokens' as notification-tokens;
 @use '@carbon/styles/scss/components/tag/tokens' as tag-tokens;
 @use '@carbon/styles/scss/components/icon-indicator/tokens' as status-tokens;
+@use '@carbon/styles/scss/components/content-switcher/tokens' as
+  content-switcher-tokens;
 @include theme.add-component-tokens(button-tokens.$button-tokens);
 @include theme.add-component-tokens(notification-tokens.$notification-tokens);
 @include theme.add-component-tokens(tag-tokens.$tag-tokens);
 @include theme.add-component-tokens(status-tokens.$status-tokens);
+@include theme.add-component-tokens(
+  content-switcher-tokens.$content-switcher-tokens
+);
 
 // Emit css-grid styles
 @include grid.css-grid();

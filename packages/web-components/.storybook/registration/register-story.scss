@@ -1,0 +1,29 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Styles for the `Introduction/Registration` story's custom tag.
+//
+// Most of a Carbon component's styles are plain classes inside its shadow root,
+// so they already apply to an element registered under a different tag name.
+// What does not carry over are the `:host(cds-button)` rules.
+//
+// Re-declaring that one block against the custom tag is all that's needed, and
+// it reuses Carbon's own mixins rather than copying values.
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/utilities/layout' as *;
+
+:host(cwc-custom-button) {
+  @include emit-layout-tokens();
+
+  display: inline-flex;
+
+  .#{$prefix}--btn {
+    flex-grow: 1;
+    max-inline-size: 100%;
+  }
+}

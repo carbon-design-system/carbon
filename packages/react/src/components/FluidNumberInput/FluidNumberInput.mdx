@@ -32,7 +32,11 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(FluidNumberInputStories.Default),
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: FluidNumberInputStories.Default,
+          styles: FluidNumberInputStories.default.parameters.styles,
+        }),
     },
   ]}
 />
@@ -44,7 +48,11 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(FluidNumberInputStories.Skeleton),
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: FluidNumberInputStories.Skeleton,
+          styles: FluidNumberInputStories.default.parameters.styles,
+        }),
     },
   ]}
 />

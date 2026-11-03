@@ -171,7 +171,7 @@ export default class CDSTab extends HostListenerMixin(CDSContentSwitcherItem) {
 
   connectedCallback() {
     if (!this.hasAttribute('role')) {
-      this.setAttribute('role', 'listitem');
+      this.setAttribute('role', 'presentation');
     }
     super.connectedCallback();
   }
@@ -253,7 +253,10 @@ export default class CDSTab extends HostListenerMixin(CDSContentSwitcherItem) {
 
     if (isIconOnly && accessibleLabel && !disabled) {
       return html`
-        <cds-tooltip align="bottom" class="${prefix}--icon-tooltip">
+        <cds-tooltip
+          align="bottom"
+          class="${prefix}--icon-tooltip"
+          leave-delay-ms="0">
           ${tabLink}
           <cds-tooltip-content>${accessibleLabel}</cds-tooltip-content>
         </cds-tooltip>

@@ -200,7 +200,7 @@ const SideNav = frFn((props, ref) => {
 
   const lgMediaQuery = `(min-width: ${breakpoints.lg.width})`;
   const isLg = useMatchMedia(lgMediaQuery);
-  const inertEnabled = !isRail ? !(expanded || isLg) : false;
+  const inertEnabled = !isRail ? !(expanded || (isLg && !isFixedNav)) : false;
 
   useEffect(() => {
     const node = sideNavRef.current;

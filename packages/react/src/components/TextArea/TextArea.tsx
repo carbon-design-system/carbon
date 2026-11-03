@@ -29,9 +29,54 @@ import { noopFn } from '../../internal/noopFn';
 import { Text } from '../Text';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
+import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
+import type { TFunc, TranslateWithId } from '../../types/common';
+
+const translationIds = {
+  'carbon.text-area.counter.characters.remaining':
+    'carbon.text-area.counter.characters.remaining',
+  'carbon.text-area.counter.words.remaining':
+    'carbon.text-area.counter.words.remaining',
+  'carbon.text-area.counter.characters.max-reached':
+    'carbon.text-area.counter.characters.max-reached',
+  'carbon.text-area.counter.words.max-reached':
+    'carbon.text-area.counter.words.max-reached',
+  'carbon.text-area.counter.characters.limit':
+    'carbon.text-area.counter.characters.limit',
+  'carbon.text-area.counter.words.limit':
+    'carbon.text-area.counter.words.limit',
+} as const;
+
+type TranslationKey = keyof typeof translationIds;
+
+type TranslationArgs = { count: number; maxCount: number };
+
+const defaultTranslateWithId: TFunc<TranslationKey, TranslationArgs> = (
+  messageId,
+  args
+) => {
+  const count = args?.count ?? 0;
+  const maxCount = args?.maxCount ?? 0;
+
+  switch (messageId) {
+    case translationIds['carbon.text-area.counter.characters.remaining']:
+      return `${count} ${count === 1 ? 'character' : 'characters'} left.`;
+    case translationIds['carbon.text-area.counter.words.remaining']:
+      return `${count} ${count === 1 ? 'word' : 'words'} left.`;
+    case translationIds['carbon.text-area.counter.characters.max-reached']:
+      return 'Maximum characters reached.';
+    case translationIds['carbon.text-area.counter.words.max-reached']:
+      return 'Maximum words reached.';
+    case translationIds['carbon.text-area.counter.characters.limit']:
+      return `Character limit ${maxCount}`;
+    case translationIds['carbon.text-area.counter.words.limit']:
+      return `Word limit ${maxCount}`;
+  }
+};
 
 export interface TextAreaProps
-  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+  extends React.TextareaHTMLAttributes<HTMLTextAreaElement>,
+    TranslateWithId<TranslationKey, TranslationArgs> {
   /**
    * Provide a custom className that is applied to the wrapper node
    */
@@ -190,6 +235,7 @@ const TextArea = frFn((props, forwardRef) => {
     warnText = '',
     rows = 4,
     slug,
+    translateWithId: t = defaultTranslateWithId,
     ...other
   } = props;
   const prefix = usePrefix();
@@ -200,6 +246,7 @@ const TextArea = frFn((props, forwardRef) => {
 
   const wrapperRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const labelRef = useRef<HTMLLabelElement>(null);
   const helperTextRef = useRef<HTMLDivElement>(null);
   const errorTextRef = useRef<HTMLDivElement>(null);
   const warnTextRef = useRef<HTMLDivElement>(null);
@@ -382,9 +429,14 @@ const TextArea = frFn((props, forwardRef) => {
   });
 
   const label = typeof labelText !== 'undefined' && labelText !== null && (
-    <Text as="label" htmlFor={id} className={labelClasses}>
+    <Text as="label" htmlFor={id} className={labelClasses} ref={labelRef}>
       {labelText}
     </Text>
+  );
+
+  useNoInteractiveChildrenForLabel(
+    labelRef,
+    'The TextArea component `labelText` prop must have no interactive content'
   );
 
   const counter =
@@ -474,8 +526,16 @@ const TextArea = frFn((props, forwardRef) => {
   const ariaAnnouncement = getAnnouncement(
     textCount,
     maxCount,
-    counterMode === 'word' ? 'word' : undefined,
-    counterMode === 'word' ? 'words' : undefined
+    counterMode === 'word'
+      ? {
+          remaining: 'carbon.text-area.counter.words.remaining',
+          maxReached: 'carbon.text-area.counter.words.max-reached',
+        }
+      : {
+          remaining: 'carbon.text-area.counter.characters.remaining',
+          maxReached: 'carbon.text-area.counter.characters.max-reached',
+        },
+    t
   );
   useEffect(() => {
     if (ariaAnnouncement && ariaAnnouncement !== prevAnnouncement) {
@@ -540,8 +600,14 @@ const TextArea = frFn((props, forwardRef) => {
           id={counterDescriptionId}
           className={`${prefix}--visually-hidden`}>
           {counterMode === 'word'
-            ? `Word limit ${maxCount}`
-            : `Character limit ${maxCount}`}
+            ? t('carbon.text-area.counter.words.limit', {
+                count: maxCount,
+                maxCount,
+              })
+            : t('carbon.text-area.counter.characters.limit', {
+                count: maxCount,
+                maxCount,
+              })}
         </span>
       )}
       <div
@@ -709,6 +775,11 @@ TextArea.propTypes = {
     'The `slug` prop for `TextArea` has ' +
       'been deprecated in favor of the new `decorator` prop. It will be removed in the next major release.'
   ),
+
+  /**
+   * Translates component strings using your i18n tool.
+   */
+  translateWithId: PropTypes.func,
 
   /**
    * Provide the current value of the `<textarea>`

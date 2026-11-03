@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,9 +10,12 @@ import { property } from 'lit/decorators.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import Copy16 from '@carbon/icons/es/copy/16.js';
 import { prefix } from '../../globals/settings';
+import AutoAlignMixin from '../../globals/mixins/auto-align';
 import FocusMixin from '../../globals/mixins/focus';
 import styles from './copy-button.scss?lit';
+import { BUTTON_KIND } from '../button/defs';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
+import { ICON_BUTTON_SIZE } from '../icon-button/defs';
 import '../copy/copy';
 import { iconLoader } from '../../globals/internal/icon-loader';
 
@@ -22,12 +25,22 @@ import { iconLoader } from '../../globals/internal/icon-loader';
  * @element cds-copy-button
  */
 @customElement(`${prefix}-copy-button`)
-class CDSCopyButton extends FocusMixin(LitElement) {
+class CDSCopyButton extends AutoAlignMixin(
+  FocusMixin(LitElement),
+  'autoAlign'
+) {
   /**
    * Specify an optional className to be added to your Button
    */
   @property({ reflect: true, attribute: 'button-class-name' })
   buttonClassName;
+
+  /**
+   * Optionally specify the kind of Button you want to create. When not set,
+   * the copy button renders with its default copy-button styles.
+   */
+  @property({ reflect: true })
+  kind?: BUTTON_KIND;
 
   /**
    * `true` if the button should be disabled.
@@ -48,16 +61,23 @@ class CDSCopyButton extends FocusMixin(LitElement) {
   align = POPOVER_ALIGNMENT.BOTTOM;
 
   /**
-   * Specify whether a auto align functionality should be applied
+   * Specify whether auto-align is enabled. Defaults to `true` when
+   * `enable-v12-autoalign` is enabled, and to `false` otherwise.
    */
-  @property({ type: Boolean, reflect: true })
-  autoAlign = false;
+  @property({ type: Boolean, reflect: true, attribute: 'autoalign' })
+  autoAlign?: boolean;
 
   /**
    * The number in milliseconds to determine how long the tooltip should remain.
    */
   @property({ type: Number, attribute: 'feedback-timeout' })
   feedbackTimeout = 2000;
+
+  /**
+   * Specify the size of the Button. Defaults to `lg`.
+   */
+  @property({ reflect: true })
+  size?: ICON_BUTTON_SIZE | string = ICON_BUTTON_SIZE.LARGE;
 
   render() {
     const {
@@ -67,6 +87,8 @@ class CDSCopyButton extends FocusMixin(LitElement) {
       feedbackTimeout,
       align,
       autoAlign,
+      kind,
+      size,
     } = this;
 
     let classes = `${prefix}--copy-btn`;
@@ -78,15 +100,17 @@ class CDSCopyButton extends FocusMixin(LitElement) {
     return html`
       <cds-copy
         ?disabled=${disabled}
-        ?autoalign=${autoAlign}
+        .autoalign=${autoAlign}
         feedback=${feedback}
         feedback-timeout=${feedbackTimeout}
         button-class-name=${classes}
         exportparts="button"
-        align=${align}>
+        align=${align}
+        kind=${kind ?? ''}
+        size=${size}>
         ${iconLoader(Copy16, {
           slot: 'icon',
-          class: `${prefix}--snippet__icon`,
+          class: `${prefix}--btn__icon`,
         })}
         <slot slot="tooltip-content"></slot>
       </cds-copy>

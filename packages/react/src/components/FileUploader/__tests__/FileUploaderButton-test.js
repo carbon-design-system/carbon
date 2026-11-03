@@ -6,7 +6,6 @@
  */
 
 import { act, render, fireEvent, screen } from '@testing-library/react';
-import { getByText } from '@carbon/test-utils/dom';
 import React from 'react';
 import { FileUploaderButton } from '../';
 import userEvent from '@testing-library/user-event';
@@ -26,22 +25,17 @@ describe('FileUploaderButton', () => {
 
   it('should call `onClick` if the label is clicked', () => {
     const onClick = jest.fn();
-    const { container } = render(
-      <FileUploaderButton labelText="test" onClick={onClick} />
-    );
-    // eslint-disable-next-line testing-library/prefer-screen-queries
-    const label = getByText(container, 'test');
+    render(<FileUploaderButton labelText="test" onClick={onClick} />);
+    const label = screen.getByRole('button', { name: 'test' });
     fireEvent.click(label);
     expect(onClick).toHaveBeenCalledTimes(1);
   });
 
   it('should call `onChange` if the value of the input changes', async () => {
     const onChange = jest.fn();
-    const { container } = render(
-      <FileUploaderButton onChange={onChange} accept={['.png']} />
-    );
+    render(<FileUploaderButton onChange={onChange} accept={['.png']} />);
 
-    const input = container.querySelector('input');
+    const input = screen.getByLabelText('Add file');
     const file = new File(['test'], 'test.png', { type: 'image/png' });
 
     await userEvent.upload(input, file);
@@ -69,30 +63,27 @@ describe('FileUploaderButton', () => {
   });
 
   it('should not support multiple files by default', () => {
-    const { container } = render(<FileUploaderButton />);
-    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-    const input = container.querySelector('input');
+    render(<FileUploaderButton />);
+    const input = screen.getByLabelText('Add file');
     expect(input.getAttribute('multiple')).toBeFalsy();
   });
 
   it('should have a unique id', () => {
-    const { container } = render(
+    render(
       <>
         <FileUploaderButton />
         <FileUploaderButton />
       </>
     );
-    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-    const inputs = container.querySelectorAll('input');
+    const inputs = screen.getAllByLabelText('Add file');
+    expect(inputs).toHaveLength(2);
     expect(inputs[0].getAttribute('id')).not.toBe(inputs[1].getAttribute('id'));
   });
 
   it('should reset the input value when the label is clicked', async () => {
-    const { container } = render(
-      <FileUploaderButton accept={['.png']} labelText="test" />
-    );
+    render(<FileUploaderButton accept={['.png']} labelText="test" />);
 
-    const input = container.querySelector('input[type="file"]');
+    const input = screen.getByLabelText('test');
     const file = new File(['test'], 'test.png', { type: 'image/png' });
 
     await userEvent.upload(input, file);
@@ -106,23 +97,58 @@ describe('FileUploaderButton', () => {
   });
 
   it('should update the label text if it receives a new value from props', () => {
-    const container = document.createElement('div');
-    render(<FileUploaderButton labelText="test" />, { container });
-    // eslint-disable-next-line testing-library/prefer-screen-queries
-    expect(getByText(container, 'test')).toBeInstanceOf(HTMLElement);
+    const { rerender } = render(<FileUploaderButton labelText="test" />);
+    expect(screen.getByRole('button', { name: 'test' })).toBeInTheDocument();
 
-    render(<FileUploaderButton labelText="tester" />, { container });
-    // eslint-disable-next-line testing-library/prefer-screen-queries
-    expect(getByText(container, 'tester')).toBeInstanceOf(HTMLElement);
+    rerender(<FileUploaderButton labelText="tester" />);
+    expect(screen.getByRole('button', { name: 'tester' })).toBeInTheDocument();
+  });
+
+  it('should warn without throwing for interactive content in labelText', () => {
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+    expect(() => {
+      render(
+        <FileUploaderButton
+          labelText={
+            <>
+              FileUploaderButton label
+              <a href="/">Help</a>
+            </>
+          }
+        />
+      );
+    }).not.toThrow();
+
+    expect(spy).toHaveBeenCalledWith(
+      expect.stringContaining(
+        'Warning: The FileUploaderButton component `labelText` prop must have no interactive content'
+      )
+    );
+
+    spy.mockRestore();
+  });
+
+  it('should allow non-interactive content in labelText', () => {
+    expect(() => {
+      render(
+        <FileUploaderButton
+          labelText={
+            <>
+              FileUploaderButton label
+              <span>additional label content</span>
+            </>
+          }
+        />
+      );
+    }).not.toThrow();
   });
 
   describe('FileUploaderButton label', () => {
     it('should update the label when a file is selected', async () => {
-      const { container } = render(
-        <FileUploaderButton accept={['.png']} labelText="test" />
-      );
+      render(<FileUploaderButton accept={['.png']} labelText="test" />);
 
-      const input = container.querySelector('input');
+      const input = screen.getByLabelText('test');
 
       expect(screen.getByRole('button', { name: 'test' })).toBeInTheDocument();
 
@@ -137,11 +163,11 @@ describe('FileUploaderButton', () => {
     });
 
     it('should update the label when multiple files are selected', async () => {
-      const { container } = render(
+      render(
         <FileUploaderButton accept={['.png']} labelText="test" multiple />
       );
 
-      const input = container.querySelector('input');
+      const input = screen.getByLabelText('test');
 
       expect(screen.getByRole('button', { name: 'test' })).toBeInTheDocument();
 
@@ -159,7 +185,7 @@ describe('FileUploaderButton', () => {
     });
 
     it('should not update the label when files are selected but `disableLabelChanges` is false', async () => {
-      const { container } = render(
+      render(
         <FileUploaderButton
           accept={['.png']}
           labelText="test"
@@ -167,7 +193,7 @@ describe('FileUploaderButton', () => {
         />
       );
 
-      const input = container.querySelector('input');
+      const input = screen.getByLabelText('test');
 
       expect(screen.getByRole('button', { name: 'test' })).toBeInTheDocument();
 

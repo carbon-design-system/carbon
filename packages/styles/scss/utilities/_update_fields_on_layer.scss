@@ -29,7 +29,7 @@
   .#{$prefix}--number-input--fluid .#{$prefix}--number__control-btn::before,
   .#{$prefix}--number-input--fluid .#{$prefix}--number__control-btn::after,
   .#{$prefix}--date-picker--fluid
-    .c#{$prefix}ds--date-picker-input__wrapper
+    .#{$prefix}--date-picker-input__wrapper
     .#{$prefix}--date-picker__input {
     background-color: $field-01;
   }

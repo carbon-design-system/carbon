@@ -31,6 +31,44 @@ describe('CheckboxGroup', () => {
     expect(container.firstChild).toHaveClass('test');
   });
 
+  it('should warn without throwing for interactive content in legendText', () => {
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+    expect(() => {
+      render(
+        <CheckboxGroup
+          legendText={
+            <>
+              Checkbox heading <button type="button">Help</button>
+            </>
+          }
+        />
+      );
+    }).not.toThrow();
+
+    expect(spy).toHaveBeenCalledWith(
+      expect.stringContaining(
+        'Warning: The CheckboxGroup component `legendText` prop must have no interactive content'
+      )
+    );
+
+    spy.mockRestore();
+  });
+
+  it('should allow non-interactive content in legendText', () => {
+    expect(() => {
+      render(
+        <CheckboxGroup
+          legendText={
+            <>
+              Checkbox heading <span>additional legend content</span>
+            </>
+          }
+        />
+      );
+    }).not.toThrow();
+  });
+
   it('should render helperText', () => {
     render(
       <CheckboxGroup
@@ -337,6 +375,9 @@ describe('CheckboxGroup', () => {
     );
 
     expect(container.firstChild).toHaveClass(`${prefix}--checkbox-group--slug`);
+    expect(container.querySelector('legend')).not.toContainElement(
+      screen.getByRole('button')
+    );
     spy.mockRestore();
   });
 
@@ -351,6 +392,10 @@ describe('CheckboxGroup', () => {
 
     expect(container.firstChild).toHaveClass(
       `${prefix}--checkbox-group--decorator`
+    );
+    expect(screen.getAllByText('Checkbox heading')).toHaveLength(1);
+    expect(container.querySelector('legend')).not.toContainElement(
+      screen.getByRole('button')
     );
   });
 

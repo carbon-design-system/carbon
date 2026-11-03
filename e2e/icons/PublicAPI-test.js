@@ -9,10 +9,10 @@
 
 'use strict';
 
-const CarbonIcons = require('@carbon/icons');
+const { readPackageExports } = require('../test-utils/icon-package');
 
 describe('@carbon/icons', () => {
   it('should not update exports without a semver change', () => {
-    expect(Object.keys(CarbonIcons).sort()).toMatchSnapshot();
+    expect(readPackageExports('@carbon/icons')).toMatchSnapshot();
   });
 });

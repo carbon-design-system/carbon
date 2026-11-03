@@ -146,4 +146,39 @@ describe('cds-actionable-notification', () => {
 
     expect(actionButton).to.have.attribute('kind', 'tertiary');
   });
+
+  it('wraps focus to the notification when no tabbable content receives focus', async () => {
+    const el = await createActionable();
+    const closeButton = el.shadowRoot.querySelector('button');
+    const details = el.shadowRoot.querySelector(
+      `.${prefix}--actionable-notification__details`
+    );
+    const startSentinel = el.shadowRoot.querySelector('#start-sentinel');
+    const endSentinel = el.shadowRoot.querySelector('#end-sentinel');
+    let focusCount = 0;
+
+    closeButton.focus = () => {};
+    el.focus = () => {
+      focusCount++;
+    };
+
+    details.dispatchEvent(
+      new FocusEvent('focusout', {
+        bubbles: true,
+        relatedTarget: startSentinel,
+      })
+    );
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    expect(focusCount).to.equal(1);
+
+    details.dispatchEvent(
+      new FocusEvent('focusout', {
+        bubbles: true,
+        relatedTarget: endSentinel,
+      })
+    );
+    await new Promise((resolve) => setTimeout(resolve, 0));
+
+    expect(focusCount).to.equal(2);
+  });
 });

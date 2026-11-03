@@ -1,3 +1,7 @@
+// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=14494-263111&t=4Ath5JqwaYJZxznq-4
+// source=https://github.com/carbon-design-system/carbon/blob/main/packages/web-components/src/components/textarea/textarea.ts
+// component=cds-textarea
+
 /**
  * Copyright IBM Corp. 2026
  *
@@ -5,77 +9,87 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import figma, { html } from '@figma/code-connect/html';
+import figma from 'figma';
+import {
+  renderBooleanAttribute,
+  renderStringAttribute,
+} from '../template-helpers';
 
-figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=14494-263111&t=4Ath5JqwaYJZxznq-4',
-  {
-    props: {
-      label: figma.string('Label text'),
-      hideLabel: figma.boolean('Show label', {
-        true: false,
-        false: true,
-      }),
-      value: figma.boolean('Text filled', {
-        true: figma.string('Body text'),
-      }),
-      helperText: figma.boolean('Show helper', {
-        true: figma.string('Helper text'),
-      }),
-      enableCounter: figma.boolean('Show count'),
-      placeholder: figma.string('Placeholder text'),
-      disabled: figma.enum('State', {
-        Disabled: true,
-      }),
-      invalid: figma.enum('State', {
-        Error: true,
-      }),
-      invalidText: figma.string('Error text'),
-      warn: figma.enum('State', {
-        Warning: true,
-      }),
-      warnText: figma.string('Warning text'),
-      readonly: figma.enum('State', {
-        'Read-only': true,
-      }),
-    },
-    example: (props) =>
-      html`<cds-textarea
-        disabled=${props.disabled}
-        enable-counter=${props.enableCounter}
-        helper-text=${props.helperText}
-        hide-label=${props.hideLabel}
-        invalid=${props.invalid}
-        invalid-text=${props.invalidText}
-        label=${props.label}
-        placeholder=${props.placeholder}
-        readonly=${props.readonly}
-        value=${props.value}
-        warn=${props.warn}
-        warn-text=${props.warnText}>
-        ${props.value}
-      </cds-textarea>`,
-    imports: [
-      "import '@carbon/web-components/es/components/textarea/index.js'",
-    ],
-  }
-);
+const instance = figma.selectedInstance;
 
-figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=14494-263111&t=4Ath5JqwaYJZxznq-4',
-  {
-    variant: { State: 'Skeleton' },
-    props: {
-      hideLabel: figma.boolean('Show label', {
-        true: false,
-        false: true,
-      }),
-    },
-    example: (props) =>
-      html`<cds-textarea-skeleton
-        hide-label=${props.hideLabel}></cds-textarea-skeleton>`,
-    imports: [
-      "import '@carbon/web-components/es/components/textarea/index.js'",
-    ],
+function createTemplate() {
+  const isSkeleton = instance.getEnum('State', {
+    Skeleton: true,
+  });
+  const hideLabel = !instance.getBoolean('Show label');
+
+  if (isSkeleton) {
+    return {
+      id: 'cds-textarea-skeleton',
+      imports: [
+        "import '@carbon/web-components/es/components/textarea/textarea-skeleton.js'",
+      ],
+      example: figma.code`<cds-textarea-skeleton${renderBooleanAttribute(
+        'hide-label',
+        hideLabel
+      )}></cds-textarea-skeleton>`,
+      metadata: { nestable: true },
+    };
   }
-);
+
+  const label = instance.getString('Label text');
+  const placeholder = instance.getString('Placeholder text');
+  const value = instance.getBoolean('Text filled')
+    ? instance.getString('Body text')
+    : undefined;
+  const helperText = instance.getBoolean('Show helper')
+    ? instance.getString('Helper text')
+    : undefined;
+  const enableCounter = instance.getBoolean('Show count');
+  const disabled = instance.getEnum('State', {
+    Disabled: true,
+  });
+  const readonly = instance.getEnum('State', {
+    'Read-only': true,
+  });
+  const invalid = instance.getEnum('State', {
+    Error: true,
+  });
+  const invalidText = invalid ? instance.getString('Error text') : undefined;
+  const warn = instance.getEnum('State', {
+    Warning: true,
+  });
+  const warnText = warn ? instance.getString('Warning text') : undefined;
+
+  return {
+    id: 'cds-textarea',
+    imports: [
+      "import '@carbon/web-components/es/components/textarea/textarea.js'",
+    ],
+    example: figma.code`<cds-textarea${renderStringAttribute(
+      'label',
+      label
+    )}${renderBooleanAttribute('hide-label', hideLabel)}${renderStringAttribute(
+      'placeholder',
+      placeholder
+    )}${renderStringAttribute('value', value)}${renderStringAttribute(
+      'helper-text',
+      helperText
+    )}${renderBooleanAttribute(
+      'enable-counter',
+      enableCounter
+    )}${renderBooleanAttribute('disabled', disabled)}${renderBooleanAttribute(
+      'readonly',
+      readonly
+    )}${renderBooleanAttribute('invalid', invalid)}${renderStringAttribute(
+      'invalid-text',
+      invalidText
+    )}${renderBooleanAttribute('warn', warn)}${renderStringAttribute(
+      'warn-text',
+      warnText
+    )}></cds-textarea>`,
+    metadata: { nestable: true },
+  };
+}
+
+export default createTemplate();

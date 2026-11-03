@@ -227,9 +227,11 @@ class CDSOverflowMenu
 
   /**
    * Experimental property. Enables automatic menu placement flipping to avoid clipping.
+   * Defaults to `true` when `enable-v12-autoalign` is enabled, and to `false`
+   * otherwise.
    */
   @property({ type: Boolean, reflect: true })
-  autoalign = false;
+  autoalign?: boolean;
 
   /**
    * `true` if the dropdown should be open.
@@ -309,6 +311,7 @@ class CDSOverflowMenu
     // trigger after delegated programmatic focus.
     triggerButton.dispatchEvent(new FocusEvent('focus'));
     this.toggleAttribute('data-programmatic-focus', true);
+    this._tooltip?.toggleAttribute('data-programmatic-focus', true);
     triggerButton.addEventListener('blur', this._handleTriggerBlur, {
       once: true,
     });
@@ -340,6 +343,7 @@ class CDSOverflowMenu
     const hadProgrammaticFocus = this.hasAttribute('data-programmatic-focus');
 
     this.toggleAttribute('data-programmatic-focus', false);
+    this._tooltip?.toggleAttribute('data-programmatic-focus', false);
     triggerButton?.removeEventListener('blur', this._handleTriggerBlur);
     this.ownerDocument.removeEventListener(
       'pointerdown',

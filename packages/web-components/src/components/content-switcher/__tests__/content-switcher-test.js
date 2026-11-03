@@ -284,6 +284,15 @@ describe('cds-content-switcher', function () {
     `);
 
     expect(el.hasAttribute('low-contrast')).to.be.true;
+
+    const item = el.querySelector('cds-content-switcher-item');
+    await item.updateComplete;
+    expect(item).to.have.attribute('low-contrast');
+
+    el.lowContrast = false;
+    await el.updateComplete;
+    await item.updateComplete;
+    expect(item).to.not.have.attribute('low-contrast');
   });
 
   it('should apply iconOnly mode automatically if all items have icon attribute', async () => {

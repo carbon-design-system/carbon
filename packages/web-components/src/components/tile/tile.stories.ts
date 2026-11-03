@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -20,6 +20,8 @@ import { iconLoader } from '../../globals/internal/icon-loader';
 import storyDocs from './tile.mdx';
 import styles from './tile-story.scss?lit';
 import { withLayers } from '../../../.storybook/decorators/with-layers';
+import { action } from 'storybook/actions';
+import { TILE_COLOR_SCHEME } from './defs';
 
 const content = html`
   <div slot="body-text">
@@ -52,20 +54,167 @@ const actions = html`
   <cds-ai-label-action-button>View details</cds-ai-label-action-button>
 `;
 
-const defaultControls = {
-  args: {
-    disabled: false,
-  },
-  argTypes: {
-    disabled: {
-      control: 'boolean',
-    },
+const colorSchemeOptions = {
+  Regular: TILE_COLOR_SCHEME.REGULAR,
+  Light: TILE_COLOR_SCHEME.LIGHT,
+};
+
+const tileArgs = {
+  colorScheme: TILE_COLOR_SCHEME.REGULAR,
+};
+
+const tileArgTypes = {
+  colorScheme: {
+    control: 'select',
+    options: colorSchemeOptions,
   },
 };
 
+const tileControls = Object.keys(tileArgTypes);
+
+const clickableArgs = {
+  colorScheme: TILE_COLOR_SCHEME.REGULAR,
+  disabled: false,
+  href: 'https://www.carbondesignsystem.com/',
+  linkRole: 'button',
+  rel: '',
+  target: '_self',
+  onClick: action('onClick'),
+};
+
+const clickableArgTypes = {
+  colorScheme: {
+    control: 'select',
+    options: colorSchemeOptions,
+  },
+  disabled: {
+    control: 'boolean',
+  },
+  href: {
+    control: 'text',
+  },
+  linkRole: {
+    control: 'text',
+  },
+  rel: {
+    control: 'text',
+  },
+  target: {
+    control: 'select',
+    options: ['_self', '_blank', '_parent', '_top'],
+  },
+  onClick: {
+    action: 'onClick',
+  },
+};
+
+const clickableControls = Object.keys(clickableArgTypes);
+
+const selectableArgs = {
+  checkmarkLabel: 'Selected',
+  colorScheme: TILE_COLOR_SCHEME.REGULAR,
+  disabled: false,
+  selected: false,
+  onChange: action('onChange'),
+};
+
+const selectableArgTypes = {
+  checkmarkLabel: {
+    control: 'text',
+  },
+  colorScheme: {
+    control: 'select',
+    options: colorSchemeOptions,
+  },
+  disabled: {
+    control: 'boolean',
+  },
+  selected: {
+    control: 'boolean',
+  },
+  onChange: {
+    action: 'onChange',
+  },
+};
+
+const selectableControls = Object.keys(selectableArgTypes);
+
+const radioArgs = {
+  checkmarkLabel: 'Selected',
+  colorScheme: TILE_COLOR_SCHEME.REGULAR,
+  disabled: false,
+  name: 'options',
+  selectedValue: 'option-2',
+  onChange: action('onChange'),
+};
+
+const radioArgTypes = {
+  checkmarkLabel: {
+    control: 'text',
+  },
+  colorScheme: {
+    control: 'select',
+    options: colorSchemeOptions,
+  },
+  disabled: {
+    control: 'boolean',
+  },
+  name: {
+    control: 'text',
+  },
+  selectedValue: {
+    control: 'select',
+    options: ['option-1', 'option-2', 'option-3'],
+  },
+  onChange: {
+    action: 'onChange',
+  },
+};
+
+const radioControls = Object.keys(radioArgTypes);
+
+const expandableArgs = {
+  colorScheme: TILE_COLOR_SCHEME.REGULAR,
+  disableChange: false,
+  expanded: false,
+  onBeforeChange: action('onBeforeChange'),
+  onChange: action('onChange'),
+};
+
+const expandableArgTypes = {
+  colorScheme: {
+    control: 'select',
+    options: colorSchemeOptions,
+  },
+  disableChange: {
+    control: 'boolean',
+    description: 'Prevent user-initiated changes to the expanded state.',
+  },
+  expanded: {
+    control: 'boolean',
+  },
+  onBeforeChange: {
+    action: 'onBeforeChange',
+  },
+  onChange: {
+    action: 'onChange',
+  },
+};
+
+const expandableControls = Object.keys(expandableArgTypes);
+
+const withControls = (include: string[]) => ({
+  controls: {
+    include,
+  },
+});
+
 export const Default = {
-  render: () => html`
-    <cds-tile>
+  args: tileArgs,
+  argTypes: tileArgTypes,
+  parameters: withControls(tileControls),
+  render: ({ colorScheme }) => html`
+    <cds-tile color-scheme="${colorScheme}">
       Default tile
       <br />
       <br />
@@ -75,12 +224,15 @@ export const Default = {
 };
 
 export const DefaultWithLayer = {
+  args: tileArgs,
+  argTypes: tileArgTypes,
   decorators: [withLayers],
   parameters: {
     layout: 'fullscreen',
+    ...withControls(tileControls),
   },
-  render: () => html`
-    <cds-tile>
+  render: ({ colorScheme }) => html`
+    <cds-tile color-scheme="${colorScheme}">
       Default layer
       <br />
       <br />
@@ -90,41 +242,98 @@ export const DefaultWithLayer = {
 };
 
 export const clickable = {
-  ...defaultControls,
-  render: ({ disabled }) => html`
+  args: clickableArgs,
+  argTypes: clickableArgTypes,
+  parameters: withControls(clickableControls),
+  render: ({
+    colorScheme,
+    disabled,
+    href,
+    linkRole,
+    rel,
+    target,
+    onClick,
+  }) => html`
     <cds-clickable-tile
+      color-scheme="${colorScheme}"
       ?disabled="${disabled}"
-      href="https://www.carbondesignsystem.com/">
+      href="${href}"
+      link-role="${linkRole}"
+      rel="${rel}"
+      target="${target}"
+      @click="${onClick}">
       Clickable tile
     </cds-clickable-tile>
   `,
 };
 
 export const clickableWithCustomIcon = {
-  ...defaultControls,
-  render: ({ disabled }) => html`
+  args: clickableArgs,
+  argTypes: clickableArgTypes,
+  parameters: withControls(clickableControls),
+  render: ({
+    colorScheme,
+    disabled,
+    href,
+    linkRole,
+    rel,
+    target,
+    onClick,
+  }) => html`
     <cds-clickable-tile
+      color-scheme="${colorScheme}"
       ?disabled=${disabled}
-      href="https://www.carbondesignsystem.com/">
+      href="${href}"
+      link-role="${linkRole}"
+      rel="${rel}"
+      target="${target}"
+      @click="${onClick}">
       Clickable tile ${iconLoader(Launch16, { slot: 'icon' })}
     </cds-clickable-tile>
   `,
 };
 
 export const ClickableWithLayer = {
+  args: clickableArgs,
+  argTypes: clickableArgTypes,
   decorators: [withLayers],
   parameters: {
     layout: 'fullscreen',
+    ...withControls(clickableControls),
   },
-  render: () => html`
-    <cds-clickable-tile href="https://www.carbondesignsystem.com/">
+  render: ({
+    colorScheme,
+    disabled,
+    href,
+    linkRole,
+    rel,
+    target,
+    onClick,
+  }) => html`
+    <cds-clickable-tile
+      color-scheme="${colorScheme}"
+      ?disabled="${disabled}"
+      href="${href}"
+      link-role="${linkRole}"
+      rel="${rel}"
+      target="${target}"
+      @click="${onClick}">
       Clickable tile
     </cds-clickable-tile>
   `,
 };
 
 export const expandable = {
-  render: ({ expanded, disableChange, onBeforeChange, onChange }) => {
+  args: expandableArgs,
+  argTypes: expandableArgTypes,
+  parameters: withControls(expandableControls),
+  render: ({
+    colorScheme,
+    expanded,
+    disableChange,
+    onBeforeChange,
+    onChange,
+  }) => {
     const handleBeforeChanged = (event: CustomEvent) => {
       onBeforeChange(event);
       if (disableChange) {
@@ -134,9 +343,10 @@ export const expandable = {
     return html`
       <div style="width: 400px">
         <cds-expandable-tile
+          color-scheme="${colorScheme}"
           ?expanded="${expanded}"
-          @cds-expandable-tile-beingchanged=${handleBeforeChanged}
-          @cds-expandable-tile-changed=${onChange}>
+          @cds-expandable-tile-beingtoggled=${handleBeforeChanged}
+          @cds-expandable-tile-toggled=${onChange}>
           <cds-tile-above-the-fold-content
             slot="above-the-fold-content"
             style="height: 200px">
@@ -152,7 +362,16 @@ export const expandable = {
 };
 
 export const ExpandableWithInteractive = {
-  render: ({ expanded, disableChange, onBeforeChange, onChange }) => {
+  args: expandableArgs,
+  argTypes: expandableArgTypes,
+  parameters: withControls(expandableControls),
+  render: ({
+    colorScheme,
+    expanded,
+    disableChange,
+    onBeforeChange,
+    onChange,
+  }) => {
     const handleBeforeChanged = (event: CustomEvent) => {
       onBeforeChange(event);
       if (disableChange) {
@@ -162,10 +381,11 @@ export const ExpandableWithInteractive = {
     return html`
       <div style="width: 400px">
         <cds-expandable-tile
+          color-scheme="${colorScheme}"
           with-interactive
           ?expanded="${expanded}"
-          @cds-expandable-tile-beingchanged=${handleBeforeChanged}
-          @cds-expandable-tile-changed=${onChange}>
+          @cds-expandable-tile-beingtoggled=${handleBeforeChanged}
+          @cds-expandable-tile-toggled=${onChange}>
           <cds-tile-above-the-fold-content
             slot="above-the-fold-content"
             style="height: 200px; width: 200px">
@@ -185,11 +405,20 @@ export const ExpandableWithInteractive = {
 };
 
 export const ExpandableWithLayer = {
+  args: expandableArgs,
+  argTypes: expandableArgTypes,
   decorators: [withLayers],
   parameters: {
     layout: 'fullscreen',
+    ...withControls(expandableControls),
   },
-  render: ({ expanded, disableChange, onBeforeChange, onChange }) => {
+  render: ({
+    colorScheme,
+    expanded,
+    disableChange,
+    onBeforeChange,
+    onChange,
+  }) => {
     const handleBeforeChanged = (event: CustomEvent) => {
       onBeforeChange(event);
       if (disableChange) {
@@ -199,9 +428,10 @@ export const ExpandableWithLayer = {
     return html`
       <cds-expandable-tile
         style="width:400px"
+        color-scheme="${colorScheme}"
         ?expanded="${expanded}"
-        @cds-expandable-tile-beingchanged=${handleBeforeChanged}
-        @cds-expandable-tile-changed=${onChange}>
+        @cds-expandable-tile-beingtoggled=${handleBeforeChanged}
+        @cds-expandable-tile-toggled=${onChange}>
         <cds-tile-above-the-fold-content
           slot="above-the-fold-content"
           style="height: 100px">
@@ -216,14 +446,15 @@ export const ExpandableWithLayer = {
 };
 
 export const MultiSelect = {
-  ...defaultControls,
+  args: selectableArgs,
+  argTypes: selectableArgTypes,
+  parameters: withControls(selectableControls),
   render: ({
     checkmarkLabel,
+    colorScheme,
     disabled,
-    name,
     selected,
-    value,
-    onInput,
+    onChange,
   }) => html`
     <style>
       ${styles}
@@ -231,28 +462,28 @@ export const MultiSelect = {
     <cds-tile-group>
       <cds-selectable-tile
         checkmark-label="${ifDefined(checkmarkLabel)}"
-        name="${ifDefined(name)}"
+        color-scheme="${colorScheme}"
         ?selected="${selected}"
-        value="${ifDefined(value)}"
-        @input="${onInput}"
+        value="option-1"
+        @cds-selectable-tile-changed="${onChange}"
         ?disabled=${disabled}>
         Option 1
       </cds-selectable-tile>
       <cds-selectable-tile
         checkmark-label="${ifDefined(checkmarkLabel)}"
-        name="${ifDefined(name)}"
+        color-scheme="${colorScheme}"
         ?selected="${selected}"
-        value="${ifDefined(value)}"
-        @input="${onInput}"
+        value="option-2"
+        @cds-selectable-tile-changed="${onChange}"
         ?disabled=${disabled}>
         Option 2
       </cds-selectable-tile>
       <cds-selectable-tile
         checkmark-label="${ifDefined(checkmarkLabel)}"
-        name="${ifDefined(name)}"
+        color-scheme="${colorScheme}"
         ?selected="${selected}"
-        value="${ifDefined(value)}"
-        @input="${onInput}"
+        value="option-3"
+        @cds-selectable-tile-changed="${onChange}"
         ?disabled=${disabled}>
         Option 3
       </cds-selectable-tile>
@@ -261,30 +492,47 @@ export const MultiSelect = {
 };
 
 export const Radio = {
-  ...defaultControls,
-  render: ({ checkmarkLabel, disabled, name, value }) => html`
+  args: radioArgs,
+  argTypes: radioArgTypes,
+  parameters: withControls(radioControls),
+  render: ({
+    checkmarkLabel,
+    colorScheme,
+    disabled,
+    name,
+    selectedValue,
+    onChange,
+  }) => html`
     <cds-tile-group>
       <legend slot="legend">Radio tile group</legend>
       <cds-radio-tile
         checkmark-label="${ifDefined(checkmarkLabel)}"
+        color-scheme="${colorScheme}"
         name="${ifDefined(name)}"
-        value="${ifDefined(value)}"
-        ?disabled=${disabled}>
+        value="option-1"
+        ?disabled=${disabled}
+        ?selected="${selectedValue === 'option-1'}"
+        @cds-radio-tile-selected="${onChange}">
         Option 1
       </cds-radio-tile>
       <cds-radio-tile
         checkmark-label="${ifDefined(checkmarkLabel)}"
+        color-scheme="${colorScheme}"
         name="${ifDefined(name)}"
-        value="${ifDefined(value)}"
+        value="option-2"
         ?disabled=${disabled}
-        selected>
+        ?selected="${selectedValue === 'option-2'}"
+        @cds-radio-tile-selected="${onChange}">
         Option 2
       </cds-radio-tile>
       <cds-radio-tile
         checkmark-label="${ifDefined(checkmarkLabel)}"
+        color-scheme="${colorScheme}"
         name="${ifDefined(name)}"
-        value="${ifDefined(value)}"
-        ?disabled=${disabled}>
+        value="option-3"
+        ?disabled=${disabled}
+        ?selected="${selectedValue === 'option-3'}"
+        @cds-radio-tile-selected="${onChange}">
         Option 3
       </cds-radio-tile>
     </cds-tile-group>
@@ -292,34 +540,85 @@ export const Radio = {
 };
 
 export const RadioWithLayer = {
+  args: radioArgs,
+  argTypes: {
+    ...radioArgTypes,
+    selectedValue: {
+      ...radioArgTypes.selectedValue,
+      options: ['option-1', 'option-2'],
+    },
+  },
   decorators: [withLayers],
   parameters: {
     layout: 'fullscreen',
+    ...withControls(radioControls),
   },
-  render: () => html`
+  render: ({
+    checkmarkLabel,
+    colorScheme,
+    disabled,
+    name,
+    selectedValue,
+    onChange,
+  }) => html`
     <cds-tile-group>
       <legend slot="legend">Radio tile group</legend>
-      <cds-radio-tile name="options"> Option 1 </cds-radio-tile>
-      <cds-radio-tile name="options" selected> Option 2 </cds-radio-tile>
+      <cds-radio-tile
+        checkmark-label="${ifDefined(checkmarkLabel)}"
+        color-scheme="${colorScheme}"
+        name="${ifDefined(name)}"
+        value="option-1"
+        ?disabled=${disabled}
+        ?selected="${selectedValue === 'option-1'}"
+        @cds-radio-tile-selected="${onChange}">
+        Option 1
+      </cds-radio-tile>
+      <cds-radio-tile
+        checkmark-label="${ifDefined(checkmarkLabel)}"
+        color-scheme="${colorScheme}"
+        name="${ifDefined(name)}"
+        value="option-2"
+        ?disabled=${disabled}
+        ?selected="${selectedValue === 'option-2'}"
+        @cds-radio-tile-selected="${onChange}">
+        Option 2
+      </cds-radio-tile>
     </cds-tile-group>
   `,
 };
 
 export const Selectable = {
-  ...defaultControls,
-  render: (args) => html`
-    <cds-selectable-tile ?disabled=${args.disabled}>
+  args: selectableArgs,
+  argTypes: selectableArgTypes,
+  parameters: withControls(selectableControls),
+  render: ({
+    checkmarkLabel,
+    colorScheme,
+    disabled,
+    selected,
+    onChange,
+  }) => html`
+    <cds-selectable-tile
+      checkmark-label="${ifDefined(checkmarkLabel)}"
+      color-scheme="${colorScheme}"
+      ?disabled=${disabled}
+      ?selected="${selected}"
+      @cds-selectable-tile-changed="${onChange}">
       Selectable
     </cds-selectable-tile>
   `,
 };
 
 export const WithAILabel = {
+  args: {
+    hasRoundedCorners: false,
+  },
   argTypes: {
     hasRoundedCorners: {
       control: 'boolean',
     },
   },
+  parameters: withControls(['hasRoundedCorners']),
   render: (args) => {
     const { hasRoundedCorners } = args ?? {};
     return html`<style>

@@ -13,7 +13,6 @@
 
 @use '@carbon/styles/scss/config' as *;
 
-/* stylelint-disable selector-type-no-unknown */
 :host(sb-template-feature-flags) {
   position: relative;
   display: block;

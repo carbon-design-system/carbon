@@ -63,6 +63,8 @@ import {
   isComponentElement,
   isItemDisabled,
 } from '../../internal';
+import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
+import { useAutoAlign } from '../../internal/useAutoAlign';
 
 const { ItemMouseMove, MenuMouseLeave, ToggleButtonBlur, FunctionCloseMenu } =
   useSelect.stateChangeTypes as UseSelectInterface['stateChangeTypes'] & {
@@ -288,7 +290,7 @@ function stateReducer(state, actionAndChanges) {
 const Dropdown = React.forwardRef(
   <ItemType,>(
     {
-      autoAlign = false,
+      autoAlign: autoAlignProp,
       className: containerClassName,
       decorator,
       disabled = false,
@@ -322,6 +324,7 @@ const Dropdown = React.forwardRef(
     }: DropdownProps<ItemType>,
     ref: ForwardedRef<HTMLButtonElement>
   ) => {
+    const autoAlign = useAutoAlign(autoAlignProp);
     const enableFloatingStyles = useFeatureFlag(
       'enable-v12-dynamic-floating-styles'
     );
@@ -339,14 +342,15 @@ const Dropdown = React.forwardRef(
 
             // Middleware order matters, arrow should be last
             middleware: [
+              autoAlign && flip(),
               floatingSize({
-                apply({ rects, elements }) {
+                apply({ availableHeight, rects, elements }) {
                   Object.assign(elements.floating.style, {
                     width: `${rects.reference.width}px`,
+                    maxHeight: `${availableHeight}px`,
                   });
                 },
               }),
-              autoAlign && flip(),
               autoAlign && hide(),
             ],
             whileElementsMounted: autoUpdate,
@@ -370,8 +374,13 @@ const Dropdown = React.forwardRef(
           }
         });
       }
-      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
-    }, [floatingStyles, autoAlign, refs.floating]);
+    }, [
+      enableFloatingStyles,
+      floatingStyles,
+      middlewareData,
+      autoAlign,
+      refs.floating,
+    ]);
 
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
@@ -515,6 +524,8 @@ const Dropdown = React.forwardRef(
     };
 
     const buttonRef = useRef<HTMLButtonElement>(null);
+    const titleRef = useRef<HTMLLabelElement>(null);
+    const labelRef = useRef<HTMLSpanElement>(null);
     const mergedRef = mergeRefs<HTMLButtonElement>(
       toggleButtonProps.ref,
       ref,
@@ -615,14 +626,22 @@ const Dropdown = React.forwardRef(
     const labelProps = isValidElement(titleText)
       ? { id: allLabelProps.id }
       : allLabelProps;
+    useNoInteractiveChildrenForLabel(
+      titleRef,
+      'The Dropdown component `titleText` prop must have no interactive content'
+    );
+    useNoInteractiveChildrenForLabel(
+      labelRef,
+      'The Dropdown component `label` prop must have no interactive content'
+    );
 
     return (
       <div className={wrapperClasses} {...other}>
-        {titleText && (
-          <label className={titleClasses} {...labelProps}>
+        {titleText ? (
+          <label className={titleClasses} {...labelProps} ref={titleRef}>
             {titleText}
           </label>
-        )}
+        ) : null}
         <ListBox
           onFocus={handleFocus}
           onBlur={handleFocus}
@@ -672,7 +691,7 @@ const Dropdown = React.forwardRef(
             {...toggleButtonProps}
             {...readOnlyEventHandlers}
             ref={mergedRef}>
-            <span className={`${prefix}--list-box__label`}>
+            <span className={`${prefix}--list-box__label`} ref={labelRef}>
               {selectedItem
                 ? renderSelectedItem
                   ? renderSelectedItem(selectedItem)

@@ -40,14 +40,6 @@ export default {
     // Require a single space or disallow whitespace after the closing brace of @if statements.
     'scss/at-if-closing-brace-space-after': OFF,
 
-    // @-import
-    // Disallow leading underscore in partial names in @import.
-    'scss/at-import-no-partial-leading-underscore': OFF,
-    // Specify blacklist of disallowed file extensions for partial names in @import commands.
-    'scss/at-import-partial-extension-blacklist': OFF,
-    // Specify whitelist of allowed file extensions for partial names in @import commands.
-    'scss/at-import-partial-extension-whitelist': OFF,
-
     // @-mixin
     // Require or disallow parentheses in argumentless @mixin calls.
     'scss/at-mixin-argumentless-call-parentheses': OFF,

@@ -41,7 +41,8 @@ element to group controls and `<legend>` element for the label.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(CheckboxStories.Default),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: CheckboxStories.Default }),
     },
   ]}
 />
@@ -71,7 +72,8 @@ function ExampleComponent() {
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(CheckboxStories.Horizontal),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: CheckboxStories.Horizontal }),
     },
   ]}
 />
@@ -83,7 +85,7 @@ function ExampleComponent() {
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(CheckboxStories.Single),
+      onClick: () => stackblitzPrefillConfig({ story: CheckboxStories.Single }),
     },
   ]}
 />
@@ -99,7 +101,8 @@ fetched from an external resource like an API.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(CheckboxStories.Skeleton),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: CheckboxStories.Skeleton }),
     },
   ]}
 />
@@ -111,7 +114,8 @@ fetched from an external resource like an API.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(CheckboxStories.withAILabel),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: CheckboxStories.withAILabel }),
     },
   ]}
 />

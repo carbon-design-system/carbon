@@ -11,6 +11,7 @@
 
 const { Metadata } = require('@carbon/icon-build-helpers');
 const path = require('path');
+const { verifyIconPackage } = require('../test-utils/icon-package');
 
 const PICTOGRAMS_PACKAGE_DIR = path.resolve(
   __dirname,
@@ -18,7 +19,7 @@ const PICTOGRAMS_PACKAGE_DIR = path.resolve(
 );
 
 describe('@carbon/pictograms', () => {
-  let metadata;
+  let failures;
 
   beforeAll(async () => {
     const mock = jest.spyOn(console, 'error').mockImplementation((error) => {
@@ -29,7 +30,7 @@ describe('@carbon/pictograms', () => {
       }
     });
 
-    metadata = await Metadata.load({
+    const metadata = await Metadata.load({
       input: {
         svg: path.join(PICTOGRAMS_PACKAGE_DIR, 'src/svg'),
         extensions: PICTOGRAMS_PACKAGE_DIR,
@@ -43,36 +44,26 @@ describe('@carbon/pictograms', () => {
     });
 
     mock.mockRestore();
+
+    failures = verifyIconPackage({
+      packageName: '@carbon/pictograms',
+      packageDir: PICTOGRAMS_PACKAGE_DIR,
+      entries: metadata.icons.flatMap((asset) =>
+        asset.output.map(({ moduleName, filepath }) => ({
+          name: moduleName,
+          filepath,
+        }))
+      ),
+    });
   });
 
-  it('should export each SVG asset', async () => {
-    const CarbonPictogramsCommonJS = require('@carbon/pictograms');
-    const CarbonPictogramsESM = await import('@carbon/pictograms');
-
-    for (const asset of metadata.icons) {
-      for (const icon of asset.output) {
-        const { moduleName } = icon;
-        expect(CarbonPictogramsCommonJS[moduleName]).toBeDefined();
-        expect(CarbonPictogramsESM[moduleName]).toBeDefined();
-      }
-    }
+  it('should export each SVG asset', () => {
+    expect(failures.entryPoint.sample).toEqual([]);
+    expect(failures.entryPoint.total).toBe(0);
   });
 
-  it('should export each SVG asset as a direct path', async () => {
-    for (const asset of metadata.icons) {
-      for (const icon of asset.output) {
-        const esm = path.join(PICTOGRAMS_PACKAGE_DIR, 'es', icon.filepath);
-        const commonjs = path.join(
-          PICTOGRAMS_PACKAGE_DIR,
-          'lib',
-          icon.filepath
-        );
-
-        expect(() => {
-          require(commonjs);
-        }).not.toThrow();
-        await expect(import(esm)).resolves.toBeDefined();
-      }
-    }
+  it('should export each SVG asset as a direct path', () => {
+    expect(failures.directPath.sample).toEqual([]);
+    expect(failures.directPath.total).toBe(0);
   });
 });
