@@ -673,7 +673,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
             <th
               aria-live="off"
               class="cds--table-column-checkbox"
-              scope="col"
+              role="cell"
             >
               <div
                 class="cds--checkbox--inline"
