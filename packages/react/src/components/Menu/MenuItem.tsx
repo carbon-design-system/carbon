@@ -121,9 +121,6 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
     const submenuMainAxisOffset = enableV12Release ? -2 : -6;
     const submenuLeftMainAxisOffset = enableV12Release ? 14 : 10;
 
-    // Compute hasChildren early so it can be used in hook options below.
-    // useHover must be disabled for leaf items (no children/submenu) to prevent
-    // onOpenChange from firing on mouseleave and stealing focus from the trigger.
     const hasChildren = React.Children.toArray(children).length > 0;
 
     const {
@@ -184,10 +181,6 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
     const { getReferenceProps, getFloatingProps } = useInteractions([
       useHover(floatingContext, {
         delay: 100,
-        // Only enable hover interactions for items that have a submenu.
-        // Enabling useHover on leaf items causes onOpenChange(false) to fire
-        // on every mouseleave, which calls menuItem.current?.focus() and
-        // steals focus from the trigger button when the menu closes.
         enabled: hasChildren,
         handleClose: safePolygon({
           requireIntent: false,
