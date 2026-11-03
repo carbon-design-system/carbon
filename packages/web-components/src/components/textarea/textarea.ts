@@ -233,7 +233,7 @@ class CDSTextarea extends CDSTextInput {
     };
 
     const helper = html`
-      <div class="${helperTextClasses}" id="helper-text">
+      <div class="${helperTextClasses}" id="${this._helperTextId}">
         <slot name="helper-text">${this.helperText}</slot>
       </div>
     `;

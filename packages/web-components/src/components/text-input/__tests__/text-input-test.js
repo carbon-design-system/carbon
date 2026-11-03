@@ -424,8 +424,35 @@ describe('cds-text-input', () => {
     const input = el.shadowRoot.querySelector('input');
     const helper = el.shadowRoot.querySelector('.cds--form__helper-text');
 
-    expect(input.getAttribute('aria-describedby')).to.equal('helper-text');
-    expect(helper.id).to.equal('helper-text');
+    expect(helper.id).to.exist;
+    expect(input.getAttribute('aria-describedby')).to.equal(helper.id);
+  });
+
+  it('should give each instance its own helper and error text ids', async () => {
+    const el = await fixture(html`
+      <div>
+        <cds-text-input label="First" helper-text="Help"></cds-text-input>
+        <cds-text-input label="Second" helper-text="Help"></cds-text-input>
+        <cds-text-input
+          label="Third"
+          invalid
+          invalid-text="Wrong"></cds-text-input>
+        <cds-text-input
+          label="Fourth"
+          invalid
+          invalid-text="Wrong"></cds-text-input>
+      </div>
+    `);
+    const [first, second, third, fourth] = Array.from(
+      el.querySelectorAll('cds-text-input')
+    ).map((input) =>
+      input.shadowRoot.querySelector('input').getAttribute('aria-describedby')
+    );
+
+    expect(first).to.not.equal('helper-text');
+    expect(first).to.not.equal(second);
+    expect(third).to.not.equal('error-text');
+    expect(third).to.not.equal(fourth);
   });
 
   it('should not set aria-describedby when there is no helper text', async () => {
@@ -446,8 +473,8 @@ describe('cds-text-input', () => {
     const input = el.shadowRoot.querySelector('input');
     const errorText = el.shadowRoot.querySelector('.cds--form-requirement');
 
-    expect(input.getAttribute('aria-describedby')).to.equal('error-text');
-    expect(errorText.id).to.equal('error-text');
+    expect(errorText.id).to.exist;
+    expect(input.getAttribute('aria-describedby')).to.equal(errorText.id);
   });
 
   describe('AI label and slug slot (@query decorator)', () => {

@@ -989,7 +989,7 @@ class CDSNumberInput extends CDSTextInput {
     const helper = this.helperText
       ? html`<div
           class="${helperTextClasses}"
-          id="helper-text"
+          id="${this._helperTextId}"
           ?hidden="${normalizedProps.invalid || normalizedProps.warn}">
           <slot name="helper-text"> ${this.helperText} </slot>
         </div>`

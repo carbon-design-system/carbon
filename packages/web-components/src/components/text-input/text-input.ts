@@ -18,6 +18,7 @@ import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
 import View16 from '@carbon/icons/es/view/16.js';
 import ViewOff16 from '@carbon/icons/es/view--off/16.js';
 import FormMixin from '../../globals/mixins/form';
+import { uniqueId } from '../../globals/internal/unique-id';
 import ValidityMixin from '../../globals/mixins/validity';
 import {
   INPUT_COLOR_SCHEME,
@@ -93,6 +94,16 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
    */
   @query("slot[name='slug']")
   private _slotSlugNode!: HTMLSlotElement;
+
+  /**
+   * The id of the helper text, referenced by `aria-describedby`.
+   */
+  protected _helperTextId = uniqueId('text-input-helper-text');
+
+  /**
+   * The id of the invalid/warning message, referenced by `aria-describedby`.
+   */
+  protected _errorTextId = uniqueId('text-input-error-text');
 
   /**
    * The internal value.
@@ -514,7 +525,7 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
 
     const helper = html`<div
       class="${helperTextClasses}"
-      id="helper-text"
+      id="${this._helperTextId}"
       ?hidden="${normalizedProps.invalid ||
       normalizedProps.warn ||
       !hasHelperText}">
@@ -529,7 +540,7 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
       normalizedProps.invalid || normalizedProps.warn
         ? html`<div
             class="${prefix}--form-requirement"
-            id="error-text"
+            id="${this._errorTextId}"
             ?hidden="${!normalizedProps.invalid && !normalizedProps.warn}">
             <slot name="${normalizedProps['slot-name']}">
               ${normalizedProps['slot-text']}
@@ -541,9 +552,9 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
     // helper text, which is hidden while the input is invalid or in warning.
     let describedBy: string | undefined;
     if (normalizedProps.invalid || normalizedProps.warn) {
-      describedBy = 'error-text';
+      describedBy = this._errorTextId;
     } else if (hasHelperText) {
-      describedBy = 'helper-text';
+      describedBy = this._helperTextId;
     }
 
     return html`

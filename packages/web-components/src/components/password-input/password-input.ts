@@ -263,7 +263,7 @@ class CDSPasswordInput extends CDSTextInput {
     const helper = helperText
       ? html`<div
           class="${helperTextClasses}"
-          id="helper-text"
+          id="${this._helperTextId}"
           ?hidden="${normalizedProps.invalid || normalizedProps.warn}">
           <slot name="helper-text"> ${helperText} </slot>
         </div>`
@@ -318,7 +318,7 @@ class CDSPasswordInput extends CDSTextInput {
               class="${inputClasses}"
               ?data-invalid="${normalizedProps.invalid}"
               ?disabled="${disabled}"
-              aria-describedby="helper-text"
+              aria-describedby="${this._helperTextId}"
               id="input"
               name="${ifNonEmpty(this.name)}"
               pattern="${ifNonEmpty(this.pattern)}"
