@@ -40,7 +40,9 @@ export interface InlineLoadingProps
   description?: React.ReactNode;
 
   /**
-   * Specify the description for the inline loading text
+   * Specify the accessible label for the status icon. It is used for every
+   * status, so update it along with `status`. Defaults to "loading",
+   * "finished" or "error".
    */
   iconDescription?: string;
 
@@ -161,7 +163,9 @@ InlineLoading.propTypes = {
   description: PropTypes.node,
 
   /**
-   * Specify the description for the inline loading text
+   * Specify the accessible label for the status icon. It is used for every
+   * status, so update it along with `status`. Defaults to "loading",
+   * "finished" or "error".
    */
   iconDescription: PropTypes.string,
 

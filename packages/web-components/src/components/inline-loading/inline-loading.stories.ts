@@ -6,6 +6,7 @@
  */
 
 import { html } from 'lit';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { INLINE_LOADING_STATE } from './inline-loading';
 import '../button/index';
 
@@ -19,7 +20,6 @@ const states = {
 const noop = () => {};
 const defaultArgs = {
   description: 'Loading data...',
-  iconDescription: 'Loading',
   status: INLINE_LOADING_STATE.ACTIVE,
 };
 
@@ -32,7 +32,7 @@ const getControls = ({ disableControl }) => {
     iconDescription: {
       control: disableControl || 'text',
       description:
-        'Specify a description that would be used to best describe the loading state.',
+        'Specify the accessible label for the status icon. It is used for every status.',
     },
     status: {
       control: disableControl || 'select',
@@ -50,7 +50,7 @@ export const Default = {
       <cds-inline-loading
         status="${status}"
         success-delay=${2000}
-        icon-description=${iconDescription}
+        icon-description=${ifDefined(iconDescription)}
         }>
         ${description}
       </cds-inline-loading>
@@ -126,7 +126,6 @@ export const UxExample = {
         controlled
         style="display:none;margin-left:1rem"
         success-delay=${2000}
-        icon-description="Submitting"
         aria-live="off"
         @cds-inline-loading-onsuccess=${onSuccess}>
         Submitting
