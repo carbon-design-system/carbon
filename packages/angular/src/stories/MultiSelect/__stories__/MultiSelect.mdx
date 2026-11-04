@@ -1,0 +1,162 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as MultiSelectStories from './MultiSelect.stories';
+
+<Meta of={MultiSelectStories} />
+
+# Multi select
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/angular/src/stories/MultiSelect)
+&nbsp;|&nbsp;
+[Usage guidelines](https://carbondesignsystem.com/components/multiselect/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/multiselect/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Controlled](#controlled)
+- [Filterable](#filterable)
+- [Filterable with select all](#filterable-with-select-all)
+- [Filterable with AI Label](#filterable-with-ai-label)
+- [Filterable with Layer](#filterable-with-layer)
+- [Select all](#select-all)
+- [Select all with dynamic items](#select-all-with-dynamic-items)
+- [With AI Label](#with-ai-label)
+- [With initial selected items](#with-initial-selected-items)
+- [With Layer](#with-layer)
+- [With toggletip label](#with-toggletip-label)
+- [With custom sorting](#with-custom-sorting)
+- [Component API](#component-api)
+- [Angular-specific notes](#angular-specific-notes)
+- [Feedback](#feedback)
+
+## Overview
+
+The `cds-ng-multi-select` component lets users select several options from a
+list.
+
+### Importing
+
+```ts
+import {
+  MultiSelectComponent,
+  MultiSelectItemComponent,
+} from '@carbon/angular/multi-select';
+
+@Component({
+  standalone: true,
+  imports: [MultiSelectComponent, MultiSelectItemComponent],
+  template: `
+    <cds-ng-multi-select titleText="Label" label="Choose options">
+      <cds-ng-multi-select-item value="a">Option 1</cds-ng-multi-select-item>
+      <cds-ng-multi-select-item value="b">Option 2</cds-ng-multi-select-item>
+    </cds-ng-multi-select>
+  `,
+})
+export class MyComponent {}
+```
+
+<Canvas of={MultiSelectStories.Default} />
+
+## Controlled
+
+Set the `value` of the multi select (a comma-separated list of item values) to
+control the selection from outside the component.
+
+<Canvas of={MultiSelectStories.Controlled} />
+
+## Filterable
+
+Set `filterable` to let users filter the list by typing.
+
+<Canvas of={MultiSelectStories.Filterable} />
+
+## Filterable with select all
+
+<Canvas of={MultiSelectStories.FilterableWithSelectAll} />
+
+## Filterable with AI Label
+
+<Canvas of={MultiSelectStories.FilterableWithAILabel} />
+
+## Filterable with Layer
+
+<Canvas of={MultiSelectStories.FilterableWithLayer} />
+
+## Select all
+
+Set `selectAll` and mark one item with `isSelectAll` to render a "Select all"
+item.
+
+<Canvas of={MultiSelectStories.SelectAll} />
+
+## Select all with dynamic items
+
+<Canvas of={MultiSelectStories.SelectAllWithDynamicItems} />
+
+## With AI Label
+
+<Canvas of={MultiSelectStories.WithAILabel} />
+
+## With initial selected items
+
+Add the `selected` attribute to an item to select it initially.
+
+<Canvas of={MultiSelectStories.WithInitialSelectedItems} />
+
+## With Layer
+
+<Canvas of={MultiSelectStories.WithLayer} />
+
+## With toggletip label
+
+Project content into `slot="title-text"` to place a toggletip in the label.
+
+<Canvas of={MultiSelectStories.WithToggletipLabel} />
+
+## With custom sorting
+
+Pass a function to `sortItems` to control how items are ordered.
+
+<Canvas of={MultiSelectStories.WithCustomSorting} />
+
+## Component API
+
+<ArgTypes of={MultiSelectStories.Default} />
+
+## Angular-specific notes
+
+### Events
+
+The generated wrapper exposes the web component's custom events as outputs:
+
+| Output                       | Web component event                 |
+| ---------------------------- | ----------------------------------- |
+| `(multiSelectBeingselected)` | `cds-ng-multi-select-beingselected` |
+| `(multiSelectSelected)`      | `cds-ng-multi-select-selected`      |
+| `(multiSelectBeingtoggled)`  | `cds-ng-multi-select-beingtoggled`  |
+| `(multiSelectToggled)`       | `cds-ng-multi-select-toggled`       |
+
+### Forms integration (`ControlValueAccessor`)
+
+`MultiSelectComponent` implements `ControlValueAccessor`. The value is a
+comma-separated string of the selected item values:
+
+```html
+<!-- Reactive forms -->
+<cds-ng-multi-select [formControl]="rolesControl" titleText="Roles">
+  <cds-ng-multi-select-item value="editor">Editor</cds-ng-multi-select-item>
+  <cds-ng-multi-select-item value="owner">Owner</cds-ng-multi-select-item>
+</cds-ng-multi-select>
+
+<!-- Template-driven forms -->
+<cds-ng-multi-select [(ngModel)]="roles" titleText="Roles">
+  <cds-ng-multi-select-item value="editor">Editor</cds-ng-multi-select-item>
+  <cds-ng-multi-select-item value="owner">Owner</cds-ng-multi-select-item>
+</cds-ng-multi-select>
+```
+
+## Feedback
+
+Help us improve this component by providing feedback, opening issues, or
+contributing on GitHub.
