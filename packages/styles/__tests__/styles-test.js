@@ -53,6 +53,60 @@ describe('@carbon/styles', () => {
     });
   });
 
+  describe('Tile input capabilities', () => {
+    it('only emits hover styles for devices with a hover-capable input', async () => {
+      const { result } = await render(`
+        @use '../scss/components/tile/tile';
+        @include tile.tile();
+      `);
+      const rules = css.parse(result.css.toString()).stylesheet.rules;
+      const hoverRules = [];
+
+      function visit(nodes, supportsHover = false) {
+        for (const node of nodes) {
+          if (node.type === 'media') {
+            visit(
+              node.rules,
+              supportsHover || node.media === '(any-hover: hover)'
+            );
+          } else if (node.type === 'rule') {
+            for (const selector of node.selectors) {
+              if (selector.includes(':hover')) {
+                hoverRules.push(selector);
+                expect(supportsHover).toBe(true);
+              }
+            }
+          }
+        }
+      }
+
+      visit(rules);
+      expect(hoverRules.length).toBeGreaterThan(0);
+    });
+
+    it('keeps keyboard focus styles available without hover support', async () => {
+      const { result } = await render(`
+        @use '../scss/components/tile/tile';
+        @include tile.tile();
+      `);
+      const rules = css.parse(result.css.toString()).stylesheet.rules;
+      const checkmark = rules.find(
+        (rule) =>
+          rule.type === 'rule' &&
+          rule.selectors.includes(
+            '.cds--tile--clickable:focus .cds--tile__checkmark'
+          )
+      );
+
+      expect(checkmark).toBeDefined();
+      expect(checkmark.declarations).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({ property: 'opacity', value: '1' }),
+        ])
+      );
+    });
+  });
+
   describe('import order', () => {
     it('should support bringing in stylesheets independently', async () => {
       await expect(
