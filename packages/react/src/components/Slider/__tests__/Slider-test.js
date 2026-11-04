@@ -98,6 +98,13 @@ describe('Slider', () => {
       expect(screen.getByLabelText(inputAriaValue)).toBeInTheDocument();
     });
 
+    it('should forward a ref to the outermost element', () => {
+      const ref = React.createRef();
+      const { container } = renderSlider({ ref });
+      expect(ref.current).toBeInstanceOf(HTMLDivElement);
+      expect(ref.current).toBe(container.firstChild);
+    });
+
     it('should apply the expected classes', () => {
       const labelTextValue = 'slider label text';
       const { container } = renderSlider({ labelText: labelTextValue });

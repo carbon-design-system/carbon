@@ -26,9 +26,9 @@ motion modes: productive and expressive. It also provides duration tokens and
 named motion surfaces. You can access these using either Sass or JavaScript.
 
 > **Build note:** Token values are generated at build time from
-> `src/dtcg/motion.json` and `src/dtcg/surfaces.json`. Run `yarn build` (or
-> `npm run build`) once after cloning so that `js/generated/` and
-> `scss/generated/` are present.
+> `tokens/motion.tokens.json` and `tokens/surfaces.tokens.json`. Run
+> `yarn build` (or `npm run build`) once after cloning so that `js/generated/`
+> and `scss/generated/` are present.
 
 ### Sass
 

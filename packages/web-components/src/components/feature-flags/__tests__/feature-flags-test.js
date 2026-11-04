@@ -336,6 +336,7 @@ describe('feature-flag', function () {
       'enable-v12-tile-radio-icons',
       'enable-v12-overflowmenu',
       'enable-v12-dynamic-floating-styles',
+      'enable-v12-autoalign',
       'enable-v12-toggle-reduced-label-spacing',
       'enable-treeview-controllable',
       'enable-dialog-element',

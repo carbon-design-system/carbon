@@ -71,7 +71,6 @@ const argTypes = {
 const defaultArgs = {
   align: 'bottom',
   alignmentAxisOffset: 0,
-  autoAlign: false,
   backgroundToken: 'layer',
   border: false,
   caret: true,
