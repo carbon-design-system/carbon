@@ -241,6 +241,10 @@ const TextArea = frFn((props, forwardRef) => {
   const prefix = usePrefix();
   const { isFluid } = useContext(FormContext);
   const { defaultValue, value } = other;
+  const readOnly = other.readOnly;
+  const showValidation = !readOnly && !disabled;
+  const normalizedInvalid = showValidation && invalid;
+  const normalizedWarn = showValidation && !normalizedInvalid && warn;
 
   const textAreaInstanceId = useId();
 
@@ -296,7 +300,7 @@ const TextArea = frFn((props, forwardRef) => {
     resizeObserver.observe(wrapperRef.current);
 
     return () => resizeObserver && resizeObserver.disconnect();
-  }, [other.cols, invalid, warn]);
+  }, [other.cols, normalizedInvalid, normalizedWarn]);
 
   const textareaProps: {
     id: TextAreaProps['id'];
@@ -402,8 +406,8 @@ const TextArea = frFn((props, forwardRef) => {
 
   const textAreaWrapperClasses = classNames(`${prefix}--text-area__wrapper`, {
     [`${prefix}--text-area__wrapper--cols`]: other.cols,
-    [`${prefix}--text-area__wrapper--readonly`]: other.readOnly,
-    [`${prefix}--text-area__wrapper--warn`]: warn,
+    [`${prefix}--text-area__wrapper--readonly`]: readOnly,
+    [`${prefix}--text-area__wrapper--warn`]: normalizedWarn,
     [`${prefix}--text-area__wrapper--slug`]: slug,
     [`${prefix}--text-area__wrapper--decorator`]: decorator,
   });
@@ -415,8 +419,8 @@ const TextArea = frFn((props, forwardRef) => {
 
   const textareaClasses = classNames(`${prefix}--text-area`, {
     [`${prefix}--text-area--light`]: light,
-    [`${prefix}--text-area--invalid`]: invalid,
-    [`${prefix}--text-area--warn`]: warn,
+    [`${prefix}--text-area--invalid`]: normalizedInvalid,
+    [`${prefix}--text-area--warn`]: normalizedWarn,
   });
 
   const counterClasses = classNames(`${prefix}--label`, {
@@ -469,7 +473,7 @@ const TextArea = frFn((props, forwardRef) => {
 
   const errorId = id + '-error-msg';
 
-  const error = invalid ? (
+  const error = normalizedInvalid ? (
     <Text
       as="div"
       role="alert"
@@ -485,7 +489,7 @@ const TextArea = frFn((props, forwardRef) => {
 
   const warnId = id + '-warn-msg';
 
-  const warning = warn ? (
+  const warning = normalizedWarn ? (
     <Text
       as="div"
       role="alert"
@@ -503,9 +507,9 @@ const TextArea = frFn((props, forwardRef) => {
 
   let ariaDescribedBy;
   let ariaErrorMessage;
-  if (invalid) {
+  if (normalizedInvalid) {
     ariaErrorMessage = errorId;
-  } else if (warn && !isFluid) {
+  } else if (normalizedWarn && !isFluid) {
     ariaDescribedBy = warnId;
   } else {
     const ids: string[] = [];
@@ -570,14 +574,14 @@ const TextArea = frFn((props, forwardRef) => {
       {...other}
       {...textareaProps}
       placeholder={placeholder}
-      aria-readonly={other.readOnly}
+      aria-readonly={readOnly}
       className={textareaClasses}
-      aria-invalid={invalid}
+      aria-invalid={normalizedInvalid}
       aria-describedby={ariaDescribedBy}
       aria-errormessage={ariaErrorMessage}
       disabled={disabled}
       rows={rows}
-      readOnly={other.readOnly}
+      readOnly={readOnly}
       ref={ref}
     />
   );
@@ -613,11 +617,11 @@ const TextArea = frFn((props, forwardRef) => {
       <div
         ref={wrapperRef}
         className={textAreaWrapperClasses}
-        data-invalid={invalid || null}>
-        {invalid && !isFluid && (
+        data-invalid={normalizedInvalid || null}>
+        {normalizedInvalid && !isFluid && (
           <WarningFilled className={`${prefix}--text-area__invalid-icon`} />
         )}
-        {warn && !invalid && !isFluid && (
+        {normalizedWarn && !isFluid && (
           <WarningAltFilled
             className={`${prefix}--text-area__invalid-icon ${prefix}--text-area__invalid-icon--warning`}
           />
@@ -641,12 +645,12 @@ const TextArea = frFn((props, forwardRef) => {
           {ariaAnnouncement}
         </span>
         {isFluid && <hr className={`${prefix}--text-area__divider`} />}
-        {isFluid && invalid ? error : null}
-        {isFluid && warn && !invalid ? warning : null}
+        {isFluid && normalizedInvalid ? error : null}
+        {isFluid && normalizedWarn ? warning : null}
       </div>
-      {!invalid && !warn && !isFluid ? helper : null}
-      {invalid && !isFluid ? error : null}
-      {warn && !invalid && !isFluid ? warning : null}
+      {!normalizedInvalid && !normalizedWarn && !isFluid ? helper : null}
+      {normalizedInvalid && !isFluid ? error : null}
+      {normalizedWarn && !isFluid ? warning : null}
     </div>
   );
 });
