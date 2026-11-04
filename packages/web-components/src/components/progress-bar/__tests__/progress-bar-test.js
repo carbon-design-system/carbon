@@ -27,4 +27,25 @@ describe('cds-progress-bar', () => {
     await el.updateComplete;
     expect(bar.style.transform).to.equal('none');
   });
+
+  it('should announce the status in the helper text live region', async () => {
+    const el = await fixture(html`
+      <cds-progress-bar
+        label="Progress"
+        helper-text="Fetching assets"
+        value="50"></cds-progress-bar>
+    `);
+    const live = () =>
+      el.shadowRoot.querySelector('[aria-live="polite"]').textContent.trim();
+
+    expect(live()).to.equal('Loading');
+
+    el.status = 'finished';
+    await el.updateComplete;
+    expect(live()).to.equal('Done');
+
+    el.status = 'error';
+    await el.updateComplete;
+    expect(live()).to.equal('Error');
+  });
 });
