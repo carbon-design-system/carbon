@@ -394,7 +394,6 @@ export const Dismissible = (args) => {
             type={tag.type}
             className="some-class"
             renderIcon={Asleep}
-            text={tag.text}
             tagTitle={tag.tagTitle}
             title="Dismiss"
             dismissTooltipAlignment={args.dismissTooltipAlignment}
@@ -402,8 +401,9 @@ export const Dismissible = (args) => {
               e.preventDefault();
               handleClose(tag);
             }}
-            {...args}
-          />
+            {...args}>
+            {tag.text}
+          </DismissibleTag>
         ))}
       </div>
     </>

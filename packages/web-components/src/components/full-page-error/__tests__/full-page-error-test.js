@@ -29,7 +29,7 @@ const template = (props = defaultProps) => html`
     class=${props.class}
     title=${props.title}
     description=${props.description}
-    kind=${props.kind}>
+    .kind=${props.kind}>
     ${props.children}
   </cds-full-page-error>
 `;
@@ -39,6 +39,7 @@ const blockClass = `${prefix}--full-page-error`;
 describe('cds-full-page-error', () => {
   it('should render full page error', async () => {
     const el = await fixture(template());
+    await el.updateComplete;
     expect(el).to.exist;
     expect(el.tagName.toLowerCase()).to.equal('cds-full-page-error');
   });
@@ -56,12 +57,14 @@ describe('cds-full-page-error', () => {
   it('applies a class to the containing node', async () => {
     const className = 'a-test-class';
     const el = await fixture(template({ ...defaultProps, class: className }));
+    await el.updateComplete;
 
     expect(el.classList.contains('a-test-class')).to.be.true;
   });
 
   it('renders an error label', async () => {
     const el = await fixture(template());
+    await el.updateComplete;
 
     expect(el.label).to.equal(defaultProps.label);
     const labelNode = el.shadowRoot.querySelector(`.${blockClass}__label`);
@@ -71,6 +74,7 @@ describe('cds-full-page-error', () => {
 
   it('renders a description', async () => {
     const el = await fixture(template());
+    await el.updateComplete;
 
     expect(el.description).to.equal(defaultProps.description);
     const descNode = el.shadowRoot.querySelector(`.${blockClass}__description`);
@@ -80,6 +84,7 @@ describe('cds-full-page-error', () => {
 
   it('renders a title', async () => {
     const el = await fixture(template());
+    await el.updateComplete;
 
     expect(el.title).to.equal(defaultProps.title);
     const titleNode = el.shadowRoot.querySelector(`.${blockClass}__title`);
@@ -89,6 +94,7 @@ describe('cds-full-page-error', () => {
 
   it('renders custom svg illustration if kind is custom', async () => {
     const el = await fixture(template());
+    await el.updateComplete;
 
     expect(el.kind).to.equal(defaultProps.kind);
     const svgNode = el.shadowRoot.querySelector(
@@ -102,6 +108,7 @@ describe('cds-full-page-error', () => {
     const el = await fixture(
       template({ ...defaultProps, kind: Kind.Error404 })
     );
+    await el.updateComplete;
 
     expect(el.kind).to.equal(Kind.Error404);
     const svgNode = el.shadowRoot.querySelector(
@@ -115,6 +122,7 @@ describe('cds-full-page-error', () => {
     const el = await fixture(
       template({ ...defaultProps, kind: Kind.Error403 })
     );
+    await el.updateComplete;
 
     expect(el.kind).to.equal(Kind.Error403);
     const svgNode = el.shadowRoot.querySelector(

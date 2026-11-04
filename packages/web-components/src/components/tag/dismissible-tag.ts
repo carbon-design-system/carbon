@@ -217,7 +217,7 @@ class CDSDismissibleTag extends HostListenerMixin(FocusMixin(CDSTag)) {
         <span
           title="${tagTitle ? tagTitle : text}"
           class="${prefix}--tag__label">
-          ${text}
+          <slot>${text}</slot>
         </span>
         <slot name="decorator" @slotchange="${handleAILabelSlotChange}"></slot>
         <slot name="ai-label" @slotchange="${handleAILabelSlotChange}"></slot>

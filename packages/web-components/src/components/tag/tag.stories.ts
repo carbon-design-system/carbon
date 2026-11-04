@@ -203,13 +203,12 @@ export const Dismissible = {
           (tag) =>
             html`<cds-dismissible-tag
               ?disabled="${disabled}"
-              text="${text || tag.text}"
               tag-title="${tag.tagTitle}"
               type="${tag.type}"
               size="${size}"
               dismiss-tooltip-label="${dismissTooltipLabel}"
               dismiss-tooltip-alignment="${dismissTooltipAlignment}"
-              >${iconLoader(Asleep16, { slot: 'icon' })}
+              >${iconLoader(Asleep16, { slot: 'icon' })} ${text || tag.text}
             </cds-dismissible-tag>`
         )}
       </div>`;
@@ -500,7 +499,7 @@ export const WithAILabel = {
         ?disabled="${disabled}"
         size="${size}"
         dismiss-tooltip-label="${dismissTooltipLabel}"
-        text="${text}">
+        >${text}
         <cds-ai-label alignment="bottom-left">
           ${content}${actions}</cds-ai-label
         >
@@ -517,8 +516,7 @@ export const WithAILabel = {
         ?disabled="${disabled}"
         size="${size}"
         dismiss-tooltip-label="${dismissTooltipLabel}"
-        text="${text}">
-        ${iconLoader(Asleep16, { slot: 'icon' })}
+        >${text} ${iconLoader(Asleep16, { slot: 'icon' })}
         <cds-ai-label alignment="bottom-left">
           ${content}${actions}</cds-ai-label
         >
