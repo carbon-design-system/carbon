@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -95,7 +95,9 @@ const InlineLoading = ({
     let iconLabel = iconDescription ? iconDescription : status;
     if (status === 'error') {
       return (
-        <ErrorFilled className={`${prefix}--inline-loading--error`}>
+        <ErrorFilled
+          aria-label={iconLabel}
+          className={`${prefix}--inline-loading--error`}>
           <title>{iconLabel}</title>
         </ErrorFilled>
       );
@@ -103,6 +105,7 @@ const InlineLoading = ({
     if (status === 'finished') {
       return (
         <CheckmarkFilled
+          aria-label={iconLabel}
           className={`${prefix}--inline-loading__checkmark-container`}>
           <title>{iconLabel}</title>
         </CheckmarkFilled>
