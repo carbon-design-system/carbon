@@ -1,0 +1,85 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/config' as config;
+
+.date-time-format-story {
+  padding: $spacing-07;
+  background: $background;
+}
+
+.date-time-format-story__panel {
+  padding: $spacing-05;
+  background: $layer-01;
+  max-inline-size: 60rem;
+}
+
+.date-time-format-story__controls {
+  display: grid;
+  column-gap: $spacing-05;
+  grid-template-columns: 18rem 18rem;
+  margin-block-end: $spacing-06;
+  row-gap: $spacing-06;
+}
+
+.date-time-format-story__output-label {
+  @include type.type-style('label-01');
+
+  margin: 0 0 $spacing-03;
+
+  color: $text-primary;
+}
+
+.date-time-format-story__output-panel {
+  padding: $spacing-05;
+  background: $layer-02;
+}
+
+.date-time-format-story__output-group {
+  margin-block-end: $spacing-06;
+}
+
+.date-time-format-story__output-group:last-child {
+  margin-block-end: 0;
+}
+
+.date-time-format-story__output-name {
+  @include type.type-style('label-01');
+
+  margin: 0 0 $spacing-02;
+
+  color: $text-secondary;
+  text-transform: capitalize;
+}
+
+.date-time-format-story__output-value {
+  @include type.type-style('body-01');
+
+  color: $text-primary;
+}
+
+.date-time-format-story .#{config.$prefix}--date-picker,
+.date-time-format-story .#{config.$prefix}--date-picker-container,
+.date-time-format-story .#{config.$prefix}--dropdown__wrapper,
+.date-time-format-story .#{config.$prefix}--list-box__wrapper,
+.date-time-format-story .#{config.$prefix}--dropdown,
+.date-time-format-story .#{config.$prefix}--text-input-wrapper,
+.date-time-format-story .#{config.$prefix}--text-input {
+  inline-size: 100%;
+  min-inline-size: 0;
+}
+
+.date-time-format-story .#{config.$prefix}--date-picker-input__wrapper,
+.date-time-format-story .#{config.$prefix}--date-picker__input,
+.date-time-format-story .#{config.$prefix}--text-input,
+.date-time-format-story .#{config.$prefix}--list-box,
+.date-time-format-story .#{config.$prefix}--list-box__field {
+  background: $layer-02;
+}
