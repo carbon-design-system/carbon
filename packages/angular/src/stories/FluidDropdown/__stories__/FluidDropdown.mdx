@@ -1,0 +1,91 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as FluidDropdownStories from './FluidDropdown.stories';
+
+<Meta of={FluidDropdownStories} />
+
+# FluidDropdown
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/angular/src/stories/FluidDropdown)
+&nbsp;|&nbsp;
+[Usage guidelines](https://carbondesignsystem.com/components/dropdown/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://carbondesignsystem.com/components/dropdown/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Condensed](#condensed)
+- [Skeleton](#skeleton)
+- [With AI Label](#with-ai-label)
+- [Component API](#component-api)
+- [Angular-specific notes](#angular-specific-notes)
+- [Feedback](#feedback)
+
+## Overview
+
+The `cds-ng-fluid-dropdown` component is a fluid variant of the Dropdown,
+spanning the full width of its container with specialized styling.
+
+### Importing
+
+```ts
+import {
+  FluidDropdownComponent,
+  FluidDropdownSkeletonComponent,
+} from '@carbon/angular/fluid-dropdown';
+import { DropdownItemComponent } from '@carbon/angular/dropdown';
+
+@Component({
+  standalone: true,
+  imports: [FluidDropdownComponent, DropdownItemComponent],
+  template: `
+    <cds-ng-fluid-dropdown titleText="Label" label="Choose an option">
+      <cds-ng-dropdown-item value="option-0">Option 0</cds-ng-dropdown-item>
+      <cds-ng-dropdown-item value="option-1">Option 1</cds-ng-dropdown-item>
+    </cds-ng-fluid-dropdown>
+  `,
+})
+export class MyComponent {}
+```
+
+<Canvas of={FluidDropdownStories.Default} />
+
+## Condensed
+
+<Canvas of={FluidDropdownStories.Condensed} />
+
+## Skeleton
+
+<Canvas of={FluidDropdownStories.Skeleton} />
+
+## With AI Label
+
+<Canvas of={FluidDropdownStories.WithAILabel} />
+
+## Component API
+
+<ArgTypes of={FluidDropdownStories.Default} />
+
+## Angular-specific notes
+
+### Forms integration (`ControlValueAccessor`)
+
+`FluidDropdownComponent` implements `ControlValueAccessor`, supporting both
+template-driven and reactive Angular forms:
+
+```html
+<!-- Reactive forms -->
+<cds-ng-fluid-dropdown [formControl]="dropdownControl" titleText="Dropdown">
+  <cds-ng-dropdown-item value="opt-1">Option 1</cds-ng-dropdown-item>
+</cds-ng-fluid-dropdown>
+
+<!-- Template-driven forms -->
+<cds-ng-fluid-dropdown [(ngModel)]="selectedValue" titleText="Dropdown">
+  <cds-ng-dropdown-item value="opt-1">Option 1</cds-ng-dropdown-item>
+</cds-ng-fluid-dropdown>
+```
+
+## Feedback
+
+Help us improve this component by providing feedback, opening issues, or
+contributing on GitHub.

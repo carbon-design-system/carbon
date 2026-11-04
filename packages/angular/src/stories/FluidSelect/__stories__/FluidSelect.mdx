@@ -1,0 +1,93 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as FluidSelectStories from './FluidSelect.stories';
+
+<Meta of={FluidSelectStories} />
+
+# FluidSelect
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/angular/src/stories/FluidSelect)
+&nbsp;|&nbsp;
+[Usage guidelines](https://carbondesignsystem.com/components/select/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://carbondesignsystem.com/components/select/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [With Toggletip](#with-toggletip)
+- [Skeleton](#skeleton)
+- [With AI Label](#with-ai-label)
+- [Component API](#component-api)
+- [Angular-specific notes](#angular-specific-notes)
+- [Feedback](#feedback)
+
+## Overview
+
+The `cds-ng-fluid-select` component provides a fluid variant of the select
+input, spanning the full width of its container.
+
+### Importing
+
+```ts
+import {
+  FluidSelectComponent,
+  FluidSelectSkeletonComponent,
+} from '@carbon/angular/fluid-select';
+import { SelectItemComponent } from '@carbon/angular/select';
+
+@Component({
+  standalone: true,
+  imports: [FluidSelectComponent, SelectItemComponent],
+  template: `
+    <cds-ng-fluid-select labelText="Select an option">
+      <cds-ng-select-item value="opt-1">Option 1</cds-ng-select-item>
+      <cds-ng-select-item value="opt-2">Option 2</cds-ng-select-item>
+    </cds-ng-fluid-select>
+  `,
+})
+export class MyComponent {}
+```
+
+<Canvas of={FluidSelectStories.Default} />
+
+## With Toggletip
+
+<Canvas of={FluidSelectStories.WithToggletip} />
+
+## Skeleton
+
+<Canvas of={FluidSelectStories.Skeleton} />
+
+## With AI Label
+
+<Canvas of={FluidSelectStories.WithAILabel} />
+
+## Component API
+
+<ArgTypes of={FluidSelectStories.Default} />
+
+## Angular-specific notes
+
+### Forms integration (`ControlValueAccessor`)
+
+`FluidSelectComponent` implements `ControlValueAccessor`, supporting both
+template-driven and reactive Angular forms:
+
+```html
+<!-- Reactive forms -->
+<cds-ng-fluid-select [formControl]="selectControl" labelText="Region">
+  <cds-ng-select-item value="us-south">Dallas</cds-ng-select-item>
+  <cds-ng-select-item value="eu-de">Frankfurt</cds-ng-select-item>
+</cds-ng-fluid-select>
+
+<!-- Template-driven forms -->
+<cds-ng-fluid-select [(ngModel)]="selectedRegion" labelText="Region">
+  <cds-ng-select-item value="us-south">Dallas</cds-ng-select-item>
+  <cds-ng-select-item value="eu-de">Frankfurt</cds-ng-select-item>
+</cds-ng-fluid-select>
+```
+
+## Feedback
+
+Help us improve this component by providing feedback, opening issues, or
+contributing on GitHub.
