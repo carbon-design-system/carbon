@@ -1855,7 +1855,6 @@ describe('MultiSelect', () => {
       <MultiSelect
         id="multiselect"
         items={mockProps.items}
-        itemToString={(item) => (item ? item.text : '')}
         titleText="MultiSelect label"
         disabled={true}
         readOnly={true}
