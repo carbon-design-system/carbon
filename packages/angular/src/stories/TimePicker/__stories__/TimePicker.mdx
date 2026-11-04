@@ -1,0 +1,104 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as TimePickerStories from './TimePicker.stories';
+
+<Meta of={TimePickerStories} />
+
+# Time Picker
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/angular/src/stories/TimePicker)
+&nbsp;|&nbsp;
+[Usage guidelines](https://carbondesignsystem.com/components/time-picker/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/time-picker/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [With Layer](#with-layer)
+- [Component API](#component-api)
+- [Angular-specific notes](#angular-specific-notes)
+- [Feedback](#feedback)
+
+## Overview
+
+The `cds-ng-time-picker` component allows users to enter a specific time and
+select time zones or AM/PM periods using attached dropdowns.
+
+### Importing
+
+```ts
+import {
+  TimePickerComponent,
+  TimePickerSelectComponent,
+} from '@carbon/angular/time-picker';
+import { SelectItemComponent } from '@carbon/angular/select';
+
+@Component({
+  standalone: true,
+  imports: [
+    TimePickerComponent,
+    TimePickerSelectComponent,
+    SelectItemComponent,
+  ],
+  template: `
+    <cds-ng-time-picker labelText="Select a time" placeholder="hh:mm">
+      <cds-ng-time-picker-select defaultValue="AM" ariaLabel="Select AM/PM">
+        <cds-ng-select-item value="AM" [selected]="true">AM</cds-ng-select-item>
+        <cds-ng-select-item value="PM">PM</cds-ng-select-item>
+      </cds-ng-time-picker-select>
+      <cds-ng-time-picker-select
+        defaultValue="Time zone 1"
+        ariaLabel="Select timezone">
+        <cds-ng-select-item value="Time zone 1">Time zone 1</cds-ng-select-item>
+        <cds-ng-select-item value="Time zone 2" [selected]="true"
+          >Time zone 2</cds-ng-select-item
+        >
+      </cds-ng-time-picker-select>
+    </cds-ng-time-picker>
+  `,
+})
+export class MyComponent {}
+```
+
+<Canvas of={TimePickerStories.Default} />
+
+## With Layer
+
+<Canvas of={TimePickerStories.WithLayer} />
+
+## Component API
+
+<ArgTypes of={TimePickerStories.Default} />
+
+## Angular-specific notes
+
+### Forms integration (`ControlValueAccessor`)
+
+`TimePickerComponent` and `TimePickerSelectComponent` implement
+`ControlValueAccessor`, supporting both template-driven and reactive Angular
+forms:
+
+```html
+<!-- Reactive forms -->
+<cds-ng-time-picker [formControl]="timeControl" labelText="Select a time">
+  <cds-ng-time-picker-select
+    [formControl]="ampmControl"
+    ariaLabel="Select AM/PM">
+    <cds-ng-select-item value="AM" [selected]="true">AM</cds-ng-select-item>
+    <cds-ng-select-item value="PM">PM</cds-ng-select-item>
+  </cds-ng-time-picker-select>
+</cds-ng-time-picker>
+
+<!-- Template-driven forms -->
+<cds-ng-time-picker [(ngModel)]="timeValue" labelText="Select a time">
+  <cds-ng-time-picker-select [(ngModel)]="ampmValue" ariaLabel="Select AM/PM">
+    <cds-ng-select-item value="AM" [selected]="true">AM</cds-ng-select-item>
+    <cds-ng-select-item value="PM">PM</cds-ng-select-item>
+  </cds-ng-time-picker-select>
+</cds-ng-time-picker>
+```
+
+## Feedback
+
+Help us improve this component by providing feedback, opening issues, or
+contributing on GitHub.

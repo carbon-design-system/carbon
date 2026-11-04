@@ -1,0 +1,81 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as FluidTextInputStories from './FluidTextInput.stories';
+
+<Meta of={FluidTextInputStories} />
+
+# FluidTextInput
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/angular/src/stories/FluidTextInput)
+&nbsp;|&nbsp;
+[Usage guidelines](https://carbondesignsystem.com/components/text-input/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://carbondesignsystem.com/components/text-input/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Default with Toggletip](#default-with-toggletip)
+- [Skeleton](#skeleton)
+- [Component API](#component-api)
+- [Angular-specific notes](#angular-specific-notes)
+- [Feedback](#feedback)
+
+## Overview
+
+The `cds-ng-fluid-text-input` component provides a fluid variant of the text
+input, spanning the full width of its container with specialized styling.
+
+### Importing
+
+```ts
+import {
+  FluidTextInputComponent,
+  FluidTextInputSkeletonComponent,
+} from '@carbon/angular/fluid-text-input';
+
+@Component({
+  standalone: true,
+  imports: [FluidTextInputComponent],
+  template: `
+    <cds-ng-fluid-text-input label="Label" placeholder="Placeholder text">
+    </cds-ng-fluid-text-input>
+  `,
+})
+export class MyComponent {}
+```
+
+<Canvas of={FluidTextInputStories.Default} />
+
+## Default with Toggletip
+
+<Canvas of={FluidTextInputStories.DefaultWithToggletip} />
+
+## Skeleton
+
+<Canvas of={FluidTextInputStories.Skeleton} />
+
+## Component API
+
+<ArgTypes of={FluidTextInputStories.Default} />
+
+## Angular-specific notes
+
+### Forms integration (`ControlValueAccessor`)
+
+`FluidTextInputComponent` implements `ControlValueAccessor`, supporting both
+template-driven and reactive Angular forms:
+
+```html
+<!-- Reactive forms -->
+<cds-ng-fluid-text-input [formControl]="textControl" label="Name">
+</cds-ng-fluid-text-input>
+
+<!-- Template-driven forms -->
+<cds-ng-fluid-text-input [(ngModel)]="name" label="Name">
+</cds-ng-fluid-text-input>
+```
+
+## Feedback
+
+Help us improve this component by providing feedback, opening issues, or
+contributing on GitHub.

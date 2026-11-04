@@ -1,0 +1,87 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as SearchStories from './Search.stories';
+
+<Meta of={SearchStories} />
+
+# Search
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/angular/src/stories/Search)
+&nbsp;|&nbsp;
+[Usage guidelines](https://carbondesignsystem.com/components/search/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/search/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Expandable](#expandable)
+- [Skeleton](#skeleton)
+- [With Layer](#with-layer)
+- [Component API](#component-api)
+- [Angular-specific notes](#angular-specific-notes)
+- [Feedback](#feedback)
+
+## Overview
+
+The `cds-ng-search` component enables users to find specific data or items. It
+supports clear buttons, custom placeholder text, sizes, and an expandable mode.
+
+### Importing
+
+```ts
+import { SearchComponent } from '@carbon/angular/search';
+
+@Component({
+  standalone: true,
+  imports: [SearchComponent],
+  template: `
+    <cds-ng-search
+      labelText="Search"
+      placeholder="Search something..."></cds-ng-search>
+  `,
+})
+export class MyComponent {}
+```
+
+<Canvas of={SearchStories.Default} />
+
+## Expandable
+
+The expandable variant collapses into an icon when not focused, expanding when
+clicked.
+
+<Canvas of={SearchStories.Expandable} />
+
+## Skeleton
+
+Use `cds-ng-search-skeleton` to display a placeholder loading skeleton.
+
+<Canvas of={SearchStories.Skeleton} />
+
+## With Layer
+
+<Canvas of={SearchStories.WithLayer} />
+
+## Component API
+
+<ArgTypes of={SearchStories.Default} />
+
+## Angular-specific notes
+
+### Forms integration (`ControlValueAccessor`)
+
+`SearchComponent` implements `ControlValueAccessor`, supporting both
+template-driven and reactive Angular forms:
+
+```html
+<!-- Reactive forms -->
+<cds-ng-search [formControl]="searchQuery" labelText="Search"></cds-ng-search>
+
+<!-- Template-driven forms -->
+<cds-ng-search [(ngModel)]="query" labelText="Search"></cds-ng-search>
+```
+
+## Feedback
+
+Help us improve this component by providing feedback, opening issues, or
+contributing on GitHub.

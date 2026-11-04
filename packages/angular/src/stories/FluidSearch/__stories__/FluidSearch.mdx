@@ -1,0 +1,76 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as FluidSearchStories from './FluidSearch.stories';
+
+<Meta of={FluidSearchStories} />
+
+# FluidSearch
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/angular/src/stories/FluidSearch)
+&nbsp;|&nbsp;
+[Usage guidelines](https://carbondesignsystem.com/components/search/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://carbondesignsystem.com/components/search/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Skeleton](#skeleton)
+- [Component API](#component-api)
+- [Angular-specific notes](#angular-specific-notes)
+- [Feedback](#feedback)
+
+## Overview
+
+The `cds-ng-fluid-search` component provides a fluid search input variant
+spanning the full width of its container.
+
+### Importing
+
+```ts
+import {
+  FluidSearchComponent,
+  FluidSearchSkeletonComponent,
+} from '@carbon/angular/fluid-search';
+
+@Component({
+  standalone: true,
+  imports: [FluidSearchComponent],
+  template: `
+    <cds-ng-fluid-search labelText="Search" placeholder="Search...">
+    </cds-ng-fluid-search>
+  `,
+})
+export class MyComponent {}
+```
+
+<Canvas of={FluidSearchStories.Default} />
+
+## Skeleton
+
+<Canvas of={FluidSearchStories.Skeleton} />
+
+## Component API
+
+<ArgTypes of={FluidSearchStories.Default} />
+
+## Angular-specific notes
+
+### Forms integration (`ControlValueAccessor`)
+
+`FluidSearchComponent` implements `ControlValueAccessor`, supporting both
+template-driven and reactive Angular forms:
+
+```html
+<!-- Reactive forms -->
+<cds-ng-fluid-search [formControl]="searchControl" labelText="Search">
+</cds-ng-fluid-search>
+
+<!-- Template-driven forms -->
+<cds-ng-fluid-search [(ngModel)]="searchQuery" labelText="Search">
+</cds-ng-fluid-search>
+```
+
+## Feedback
+
+Help us improve this component by providing feedback, opening issues, or
+contributing on GitHub.

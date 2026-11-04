@@ -1,0 +1,86 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as FluidNumberInputStories from './FluidNumberInput.stories';
+
+<Meta of={FluidNumberInputStories} />
+
+# FluidNumberInput
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/angular/src/stories/FluidNumberInput)
+&nbsp;|&nbsp;
+[Usage guidelines](https://carbondesignsystem.com/components/number-input/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://carbondesignsystem.com/components/number-input/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Default with Toggletip](#default-with-toggletip)
+- [Skeleton](#skeleton)
+- [Component API](#component-api)
+- [Angular-specific notes](#angular-specific-notes)
+- [Feedback](#feedback)
+
+## Overview
+
+The `cds-ng-fluid-number-input` component provides a fluid variant of the number
+input, spanning the full width of its container with specialized styling.
+
+### Importing
+
+```ts
+import {
+  FluidNumberInputComponent,
+  FluidNumberInputSkeletonComponent,
+} from '@carbon/angular/fluid-number-input';
+
+@Component({
+  standalone: true,
+  imports: [FluidNumberInputComponent],
+  template: `
+    <cds-ng-fluid-number-input
+      label="Label"
+      [value]="50"
+      [min]="0"
+      [max]="100"
+      [step]="1">
+    </cds-ng-fluid-number-input>
+  `,
+})
+export class MyComponent {}
+```
+
+<Canvas of={FluidNumberInputStories.Default} />
+
+## Default with Toggletip
+
+<Canvas of={FluidNumberInputStories.DefaultWithToggletip} />
+
+## Skeleton
+
+<Canvas of={FluidNumberInputStories.Skeleton} />
+
+## Component API
+
+<ArgTypes of={FluidNumberInputStories.Default} />
+
+## Angular-specific notes
+
+### Forms integration (`ControlValueAccessor`)
+
+`FluidNumberInputComponent` implements `ControlValueAccessor`, supporting both
+template-driven and reactive Angular forms:
+
+```html
+<!-- Reactive forms -->
+<cds-ng-fluid-number-input [formControl]="numberControl" label="Quantity">
+</cds-ng-fluid-number-input>
+
+<!-- Template-driven forms -->
+<cds-ng-fluid-number-input [(ngModel)]="quantity" label="Quantity">
+</cds-ng-fluid-number-input>
+```
+
+## Feedback
+
+Help us improve this component by providing feedback, opening issues, or
+contributing on GitHub.

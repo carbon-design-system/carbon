@@ -1,0 +1,90 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as TextareaStories from './Textarea.stories';
+
+<Meta of={TextareaStories} />
+
+# Text Area
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/angular/src/stories/Textarea)
+&nbsp;|&nbsp;
+[Usage guidelines](https://carbondesignsystem.com/components/text-input/usage/#text-area)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/text-input/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Skeleton](#skeleton)
+- [With AI Label](#with-ai-label)
+- [With Layer](#with-layer)
+- [Component API](#component-api)
+- [Angular-specific notes](#angular-specific-notes)
+- [Feedback](#feedback)
+
+## Overview
+
+The `cds-ng-textarea` component allows users to enter multiline text. It
+supports character/word counters, validation states, helper text, and AI labels.
+
+### Importing
+
+```ts
+import { TextareaComponent } from '@carbon/angular/textarea';
+
+@Component({
+  standalone: true,
+  imports: [TextareaComponent],
+  template: `
+    <cds-ng-textarea
+      label="TextArea label"
+      helperText="TextArea helper text"
+      placeholder="Placeholder text"></cds-ng-textarea>
+  `,
+})
+export class MyComponent {}
+```
+
+<Canvas of={TextareaStories.Default} />
+
+## Skeleton
+
+Use `cds-ng-textarea-skeleton` to render a skeleton placeholder while content is
+loading.
+
+<Canvas of={TextareaStories.Skeleton} />
+
+## With AI Label
+
+<Canvas of={TextareaStories.WithAILabel} />
+
+## With Layer
+
+<Canvas of={TextareaStories.WithLayer} />
+
+## Component API
+
+<ArgTypes of={TextareaStories.Default} />
+
+## Angular-specific notes
+
+### Forms integration (`ControlValueAccessor`)
+
+`TextareaComponent` implements `ControlValueAccessor`, enabling seamless two-way
+binding via reactive forms or template-driven forms:
+
+```html
+<!-- Reactive forms -->
+<cds-ng-textarea
+  [formControl]="descriptionControl"
+  label="Description"></cds-ng-textarea>
+
+<!-- Template-driven forms -->
+<cds-ng-textarea
+  [(ngModel)]="description"
+  label="Description"></cds-ng-textarea>
+```
+
+## Feedback
+
+Help us improve this component by providing feedback, opening issues, or
+contributing on GitHub.
