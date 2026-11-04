@@ -132,6 +132,8 @@ function AccordionItem({
 }: PropsWithChildren<AccordionItemProps>) {
   const [isOpen, setIsOpen] = useState(open);
   const prevOpenRef = useRef(open);
+  const wrapperRef = useRef<HTMLDivElement | null>(null);
+  const prevIsOpenRef = useRef(isOpen);
   const accordionState = useContext(AccordionContext);
 
   const disabledIsControlled = typeof controlledDisabled === 'boolean';
@@ -152,6 +154,7 @@ function AccordionItem({
 
   const content = React.useCallback(
     (node: HTMLDivElement) => {
+      wrapperRef.current = node;
       if (!node) {
         return;
       }
@@ -169,6 +172,27 @@ function AccordionItem({
       prevOpenRef.current = open;
     }
   }, [open]);
+
+  // With `prefers-reduced-motion: reduce` the wrapper has no transition, so
+  // the browser never emits `transitionend`. Emit it ourselves so that
+  // `handleAnimationEnd` still runs after the panel toggles.
+  useEffect(() => {
+    if (prevIsOpenRef.current === isOpen) {
+      return;
+    }
+    prevIsOpenRef.current = isOpen;
+    if (
+      !handleAnimationEnd ||
+      typeof window === 'undefined' ||
+      typeof window.matchMedia !== 'function' ||
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
+      return;
+    }
+    wrapperRef.current?.dispatchEvent(
+      new Event('transitionend', { bubbles: true })
+    );
+  }, [isOpen, handleAnimationEnd]);
 
   // When the AccordionItem heading is clicked, toggle the open state of the
   // panel
