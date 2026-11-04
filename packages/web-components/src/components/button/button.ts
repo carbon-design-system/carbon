@@ -7,10 +7,12 @@
 
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { LitElement, html } from 'lit';
+import { LitElement, html, nothing } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
+import AutoAlignMixin from '../../globals/mixins/auto-align';
+import FloatingUIController from '../../globals/controllers/floating-controller';
 import {
   BUTTON_KIND,
   BUTTON_TYPE,
@@ -22,6 +24,7 @@ import styles from './button.scss?lit';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import { isFeatureFlagEnabled } from '../feature-flags';
 
 export {
   BUTTON_KIND,
@@ -38,11 +41,37 @@ export {
  * @csspart button The button.
  */
 @customElement(`${prefix}-button`)
-class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
+class CDSButton extends AutoAlignMixin(
+  HostListenerMixin(FocusMixin(LitElement))
+) {
   /**
    * `true` if there is an icon.
    */
   private _hasIcon = false;
+
+  /**
+   * Positions the tooltip when `autoalign` is enabled.
+   */
+  private _floatingController = new FloatingUIController(this);
+
+  /**
+   * `true` if the tooltip has a caret. v12 removes it, as in `cds-popover`.
+   */
+  private get _caret() {
+    return !isFeatureFlagEnabled('enable-v12-release', this);
+  }
+
+  /**
+   * The tooltip alignment, such as `top` or `top-start`.
+   */
+  private get _tooltipAlign() {
+    const { tooltipAlignment, tooltipPosition } = this;
+    return tooltipAlignment &&
+      (tooltipPosition === BUTTON_TOOLTIP_POSITION.TOP ||
+        tooltipPosition === BUTTON_TOOLTIP_POSITION.BOTTOM)
+      ? `${tooltipPosition}-${tooltipAlignment}`
+      : tooltipPosition;
+  }
 
   /**
    * Handles `slotchange` event.
@@ -83,6 +112,24 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
   updated(changedProperties) {
     super.updated?.(changedProperties);
     this._checkBadgeWarning();
+
+    const trigger = this.shadowRoot?.querySelector<HTMLElement>('#button');
+    const target = this.shadowRoot?.querySelector<HTMLElement>(
+      `.${prefix}--popover-content`
+    );
+    if (this.autoalign && this.openTooltip && trigger && target) {
+      const arrowElement = target.querySelector<HTMLElement>(
+        `.${prefix}--popover-caret`
+      );
+      this._floatingController.setPlacement({
+        trigger,
+        target,
+        arrowElement: (this._caret && arrowElement) || undefined,
+        caret: this._caret,
+        alignment: this._tooltipAlign,
+        open: this.openTooltip,
+      });
+    }
   }
 
   @HostListener('mouseover')
@@ -123,6 +170,13 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
   private _handleFocusout = async () => {
     this.openTooltip = false;
   };
+
+  /**
+   * Specify whether the tooltip auto-aligns. Defaults to `true` when
+   * `enable-v12-autoalign` is enabled, and to `false` otherwise.
+   */
+  @property({ type: Boolean, reflect: true })
+  autoalign?: boolean;
 
   /**
    * `true` if the button should have input focus when the page loads.
@@ -267,6 +321,7 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
 
   render() {
     const {
+      autoalign,
       autofocus,
       buttonClassName,
       dangerDescription,
@@ -284,8 +339,6 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
       size,
       tabIndex,
       target,
-      tooltipAlignment,
-      tooltipPosition,
       tooltipText,
       type,
       _hasIcon: hasIcon,
@@ -355,22 +408,23 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
           `;
     }
 
-    const alignmentClass =
-      tooltipAlignment &&
-      (tooltipPosition === BUTTON_TOOLTIP_POSITION.TOP ||
-        tooltipPosition === BUTTON_TOOLTIP_POSITION.BOTTOM)
-        ? `-${tooltipAlignment}`
-        : '';
-
     const tooltipClasses = classMap({
       [`${prefix}--popover-container`]: true,
-      [`${prefix}--popover--caret`]: true,
+      [`${prefix}--popover--caret`]: this._caret,
       [`${prefix}--popover--high-contrast`]: true,
       [`${prefix}--tooltip`]: true,
       [`${prefix}--icon-tooltip`]: hasIcon,
       [`${prefix}--popover--open`]: openTooltip,
-      [`${prefix}--popover--${tooltipPosition}${alignmentClass}`]: tooltipText,
+      [`${prefix}--popover--auto-align`]: Boolean(autoalign),
+      [`${prefix}--popover--${this._tooltipAlign}`]: tooltipText,
     });
+
+    // With `autoalign`, the caret moves into the content, as in React
+    const caret = html`<span
+      class="${classMap({
+        [`${prefix}--popover-caret`]: true,
+        [`${prefix}--popover--auto-align`]: Boolean(autoalign),
+      })}"></span>`;
 
     return tooltipText && !disabled
       ? html`
@@ -392,9 +446,9 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
             <span class="${prefix}--popover">
               <span
                 class="${prefix}--popover-content ${prefix}--tooltip-content">
-                ${tooltipText}
+                ${tooltipText} ${autoalign ? caret : nothing}
               </span>
-              <span class="${prefix}--popover-caret"></span>
+              ${autoalign ? nothing : caret}
             </span>
             ${html`<slot id="badge-indicator" name="badge-indicator"></slot>` ??
             !disabled}

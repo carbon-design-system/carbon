@@ -6,7 +6,8 @@
  */
 
 import '@carbon/web-components/es/components/button/index.js';
-import { expect, fixture, html } from '@open-wc/testing';
+import '@carbon/web-components/es/components/feature-flags/index.js';
+import { expect, fixture, html, waitUntil } from '@open-wc/testing';
 
 describe('cds-button', () => {
   it('should support a custom tabIndex through props', async () => {
@@ -277,6 +278,92 @@ describe('cds-button', () => {
           expect(container).to.have.class('cds--icon-tooltip');
         });
       });
+    });
+  });
+
+  describe('Tooltip caret', () => {
+    it('renders the tooltip caret by default', async () => {
+      const el = await fixture(html`
+        <cds-button has-icon-only tooltip-text="tip">
+          <svg slot="icon"></svg>
+        </cds-button>
+      `);
+      await el.updateComplete;
+
+      expect(
+        el.shadowRoot?.querySelector('.cds--popover-container')
+      ).to.have.class('cds--popover--caret');
+    });
+
+    it('does not render the tooltip caret with enable-v12-release', async () => {
+      const featureFlag = await fixture(html`
+        <feature-flags enable-v12-release="true">
+          <cds-button has-icon-only tooltip-text="tip">
+            <svg slot="icon"></svg>
+          </cds-button>
+        </feature-flags>
+      `);
+      const el = featureFlag.querySelector('cds-button');
+      await el.updateComplete;
+
+      expect(
+        el.shadowRoot?.querySelector('.cds--popover-container')
+      ).not.to.have.class('cds--popover--caret');
+    });
+  });
+
+  describe('Tooltip autoalign', () => {
+    it('does not auto-align the tooltip by default', async () => {
+      const el = await fixture(html`
+        <cds-button has-icon-only tooltip-text="tip">
+          <svg slot="icon"></svg>
+        </cds-button>
+      `);
+      await el.updateComplete;
+
+      expect(el.autoalign).to.be.false;
+      expect(
+        el.shadowRoot?.querySelector('.cds--popover-container')
+      ).not.to.have.class('cds--popover--auto-align');
+    });
+
+    it('auto-aligns the tooltip with enable-v12-release', async () => {
+      const featureFlag = await fixture(html`
+        <feature-flags enable-v12-release="true">
+          <cds-button has-icon-only tooltip-text="tip">
+            <svg slot="icon"></svg>
+          </cds-button>
+        </feature-flags>
+      `);
+      const el = featureFlag.querySelector('cds-button');
+      await el.updateComplete;
+
+      expect(el.autoalign).to.be.true;
+      expect(
+        el.shadowRoot?.querySelector('.cds--popover-container')
+      ).to.have.class('cds--popover--auto-align');
+
+      el.openTooltip = true;
+      const content = el.shadowRoot?.querySelector('.cds--popover-content');
+      await waitUntil(
+        () => content.hasAttribute('align'),
+        'Floating UI did not position the tooltip'
+      );
+      expect(content.style.position).to.equal('fixed');
+    });
+
+    it('keeps autoalign off when the attribute is "false" with enable-v12-release', async () => {
+      const featureFlag = await fixture(html`
+        <feature-flags enable-v12-release="true">
+          <cds-button autoalign="false" has-icon-only tooltip-text="tip">
+            <svg slot="icon"></svg>
+          </cds-button>
+        </feature-flags>
+      `);
+      const el = featureFlag.querySelector('cds-button');
+      await el.updateComplete;
+
+      expect(el.autoalign).to.be.false;
     });
   });
 

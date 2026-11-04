@@ -195,6 +195,13 @@ $css--plex: true !default;
   }
 }
 
+// Floating UI positions an auto-aligned tooltip with `position: fixed`, so the
+// container can stay the containing block of the badge indicator
+:host(#{$prefix}-button)
+  .#{$prefix}--popover-container.#{$prefix}--popover--auto-align {
+  position: relative;
+}
+
 :host(#{$prefix}-button[data-context='data-table']) {
   .#{$prefix}--btn {
     padding-inline: $spacing-05;
