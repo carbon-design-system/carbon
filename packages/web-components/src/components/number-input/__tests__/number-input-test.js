@@ -122,6 +122,38 @@ describe('<cds-number-input>', () => {
     expect(invalid?.textContent).to.include('Invalid');
   });
 
+  it('should point aria-describedby at the helper or error text', async () => {
+    const el = await fixture(html`
+      <div>
+        <cds-number-input label="Label" helper-text="Help"></cds-number-input>
+        <cds-number-input label="Label" helper-text="Help"></cds-number-input>
+        <cds-number-input
+          label="Label"
+          helper-text="Help"
+          invalid
+          invalid-text="Wrong"></cds-number-input>
+        <cds-number-input
+          label="Label"
+          helper-text="Help"
+          warn
+          warn-text="Careful"></cds-number-input>
+      </div>
+    `);
+    const [first, second, invalid, warn] = Array.from(
+      el.querySelectorAll('cds-number-input')
+    );
+    const describedBy = (host) =>
+      host.shadowRoot.querySelector('input').getAttribute('aria-describedby');
+    const idOf = (host, selector) => host.shadowRoot.querySelector(selector).id;
+
+    expect(describedBy(first)).to.equal(idOf(first, '.cds--form__helper-text'));
+    expect(describedBy(first)).to.not.equal(describedBy(second));
+    expect(describedBy(invalid)).to.equal(
+      idOf(invalid, '.cds--form-requirement')
+    );
+    expect(describedBy(warn)).to.equal(idOf(warn, '.cds--form-requirement'));
+  });
+
   it('should increment and decrement using buttons', async () => {
     const el = await fixture(
       html`<cds-number-input

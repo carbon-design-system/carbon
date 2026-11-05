@@ -273,12 +273,20 @@ class CDSPasswordInput extends CDSTextInput {
       normalizedProps.invalid || normalizedProps.warn
         ? html`<div
             class="${prefix}--form-requirement"
+            id="${this._errorTextId}"
             ?hidden="${!normalizedProps.invalid && !normalizedProps.warn}">
             <slot name="${normalizedProps['slot-name']}">
               ${normalizedProps['slot-text']}
             </slot>
           </div>`
         : null;
+
+    let describedBy: string | undefined;
+    if (normalizedProps.invalid || normalizedProps.warn) {
+      describedBy = this._errorTextId;
+    } else if (helperText) {
+      describedBy = this._helperTextId;
+    }
 
     let align = '';
 
@@ -318,7 +326,7 @@ class CDSPasswordInput extends CDSTextInput {
               class="${inputClasses}"
               ?data-invalid="${normalizedProps.invalid}"
               ?disabled="${disabled}"
-              aria-describedby="${this._helperTextId}"
+              aria-describedby="${ifNonEmpty(describedBy)}"
               id="input"
               name="${ifNonEmpty(this.name)}"
               pattern="${ifNonEmpty(this.pattern)}"
