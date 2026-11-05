@@ -63,8 +63,12 @@ class CDSCardMedia extends LitElement {
   updated() {
     if (this._cardContext.horizontal) {
       this.setAttribute('slot', 'media');
+      // Forward the CSS custom property to the host so the :host-context rule
+      // in card.scss can read it via flex-basis: var(--cds--card--media-width).
+      this.style.setProperty(`--${prefix}--card--media-width`, this.mediaWidth);
     } else {
       this.removeAttribute('slot');
+      this.style.removeProperty(`--${prefix}--card--media-width`);
     }
   }
 
