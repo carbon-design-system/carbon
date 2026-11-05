@@ -1,0 +1,17 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/resolver.json",
+  "name": "Carbon V12 themes",
+  "version": "2025.10",
+  "description": "Experimental Carbon V12 theme tokens, generated from the OKLCH specification. The `theme` modifier selects the light or dark theme.",
+  "modifiers": {
+    "theme": {
+      "description": "The Carbon V12 theme.",
+      "contexts": {
+        "light": [{ "$ref": "themes/light/theme.tokens.json" }],
+        "dark": [{ "$ref": "themes/dark/theme.tokens.json" }]
+      },
+      "default": "light"
+    }
+  },
+  "resolutionOrder": [{ "$ref": "#/modifiers/theme" }]
+}

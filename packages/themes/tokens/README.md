@@ -22,6 +22,9 @@ tokens/
     └── g100/
 ```
 
+`next/` holds the experimental V12 tokens, in the same layout. See
+[V12 tokens](#v12-tokens).
+
 Each theme has its own folder, and every file in it holds that theme's values
 only. To compare a token across themes, build the package and open
 `docs/generated/theme-tokens.md` at the root of the repository. It lists every
@@ -180,6 +183,22 @@ each `theme.tokens.json` names them for `unstable_metadata`. They are assigned
 at runtime by the layer sets in `packages/styles/scss/layer/_layer-sets.scss`,
 which point each one at its numbered token (`layer-01`, `layer-02` or
 `layer-03`) for the current layer level.
+
+## V12 tokens
+
+`next/themes/{light,dark}/theme.tokens.json` are generated from the OKLCH
+specification in `src/theme-generator`, so do not edit them directly. Change the
+specification, then regenerate them and commit the result:
+
+```bash
+cd packages/themes
+yarn generate:v12
+```
+
+The generator validates each theme, and a test fails when the files no longer
+match the specification. These tokens have their own resolver file,
+`next/themes.resolver.json`, and are built separately from the four themes
+below.
 
 ## Build
 

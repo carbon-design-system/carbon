@@ -23,9 +23,10 @@ describeTokenConformance({
 });
 
 describe('resolver conformance (DTCG 2025.10)', () => {
-  test('tokens/themes.resolver.json', () => {
-    expect(
-      checkResolverFile(path.join(packageDir, 'tokens/themes.resolver.json'))
-    ).toEqual([]);
+  test.each([
+    'tokens/themes.resolver.json',
+    'tokens/next/themes.resolver.json',
+  ])('%s', (file) => {
+    expect(checkResolverFile(path.join(packageDir, file))).toEqual([]);
   });
 });
