@@ -34,10 +34,16 @@ const COMPONENTS = path.resolve(__dirname, '..', 'src', 'components');
 const DECLARES = /@customElement\(\s*`\$\{prefix\}-([a-z0-9-]+)`/g;
 const IMPORTS = /from\s*['"]([^'"]+)['"]|import\s*['"]([^'"]+)['"]/g;
 
+// Story files and their `*-helpers.ts` demo templates are not component code.
 const componentFiles = (dir) =>
   fs
     .readdirSync(dir)
-    .filter((n) => n.endsWith('.ts') && !n.includes('.stories.'));
+    .filter(
+      (n) =>
+        n.endsWith('.ts') &&
+        !n.includes('.stories.') &&
+        !n.endsWith('-helpers.ts')
+    );
 
 const read = (file) => fs.readFileSync(file, 'utf8');
 
