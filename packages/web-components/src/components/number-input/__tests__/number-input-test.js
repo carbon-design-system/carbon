@@ -125,8 +125,14 @@ describe('<cds-number-input>', () => {
   it('should point aria-describedby at the helper or error text', async () => {
     const el = await fixture(html`
       <div>
-        <cds-number-input label="Label" helper-text="Help"></cds-number-input>
-        <cds-number-input label="Label" helper-text="Help"></cds-number-input>
+        <cds-number-input
+          label="Label"
+          value="1"
+          helper-text="Help"></cds-number-input>
+        <cds-number-input
+          label="Label"
+          value="1"
+          helper-text="Help"></cds-number-input>
         <cds-number-input
           label="Label"
           helper-text="Help"
@@ -134,6 +140,7 @@ describe('<cds-number-input>', () => {
           invalid-text="Wrong"></cds-number-input>
         <cds-number-input
           label="Label"
+          value="1"
           helper-text="Help"
           warn
           warn-text="Careful"></cds-number-input>
