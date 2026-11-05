@@ -573,11 +573,6 @@ exports[`@carbon/styles should have stable public scss entrypoints 1`] = `
     "relativePath": "scss/components/pagination/pagination",
   },
   {
-    "filepath": "scss/components/pagination/_unstable_pagination.scss",
-    "importPath": "@carbon/styles/scss/components/pagination/unstable_pagination",
-    "relativePath": "scss/components/pagination/unstable_pagination",
-  },
-  {
     "filepath": "scss/components/pagination-nav/_index.scss",
     "importPath": "@carbon/styles/scss/components/pagination-nav",
     "relativePath": "scss/components/pagination-nav",
