@@ -1,17 +1,15 @@
 name: Next release (v12 alpha)
 
-# On every push to next, bump prerelease versions and push a v12 alpha tag.
-# npm trusted publishing authorizes only release.yml, so this workflow does not
-# publish. The tag push starts release.yml, which publishes the v12-alpha
-# dist-tag. The tag is also the baseline Lerna uses to detect changed packages.
+# On every push to next, bump prerelease versions and push a v12 alpha git tag.
+# The git tag push starts release.yml, which publishes the v12-alpha
+# dist-tag. The git tag is also the baseline Lerna uses to detect changed packages.
 #
-# AVT tests and ci-check run before the tag is created. A failing check does
-# not push a commit or a tag.
+# AVT tests and ci-check run before the git tag is created. A failing check does
+# not push a commit or a git tag.
 #
-# The version bump commit starts with "chore(release):". That push must not
-# bump versions again. It uses its own concurrency group so it does not take
-# the version lock or cancel a real push that is already waiting. GitHub keeps
-# only one pending run per group.
+# The version bump commit starts with "chore(release):". For those commits, we don't want to trigger a new release. 
+# GitHub only lets one release wait in line. The version-bump push is kept in
+# its own line so it does not knock out a real code push that is waiting.
 on:
   push:
     branches:
@@ -29,8 +27,6 @@ jobs:
     if: |
       github.repository == 'carbon-design-system/carbon' &&
       !startsWith(github.event.head_commit.message, 'chore(release):')
-    # The version bump is pushed with the automation app token from checkout,
-    # which bypasses the next ruleset.
     permissions:
       contents: write
     steps:
@@ -107,7 +103,6 @@ jobs:
           yarn lerna version prerelease \
             --preid alpha \
             --no-git-tag-version \
-            --ci-behind-behavior skip \
             --yes
           if [ -z "$(git status --porcelain)" ]; then
             echo "No package changes to publish"
