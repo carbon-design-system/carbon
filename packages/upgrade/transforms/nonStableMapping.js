@@ -34,8 +34,6 @@ exports.reactPreviewMap = {
   unstable_LayoutDirection: 'preview_LayoutDirection',
   unstable_useLayoutDirection: 'preview_useLayoutDirection',
   unstable_Layout: 'preview_Layout',
-  unstable_PageSelector: 'preview_PageSelector',
-  unstable_Pagination: 'preview_Pagination',
   unstable__IconIndicator: 'preview__IconIndicator',
   unstable__ShapeIndicator: 'preview__ShapeIndicator',
   unstable__Slug: 'preview__Slug',

@@ -6,9 +6,6 @@
 //
 
 @forward 'pagination';
-@forward 'unstable_pagination';
 @use 'pagination';
-@use 'unstable_pagination';
 
 @include pagination.pagination;
-@include unstable_pagination.unstable_pagination;
