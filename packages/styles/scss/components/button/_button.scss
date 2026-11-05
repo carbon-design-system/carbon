@@ -19,6 +19,7 @@
 @use '../../type' as *;
 @use '../../layer' as *;
 @use '../../utilities/convert';
+@use '../../utilities/custom-property';
 @use '../../utilities/focus-outline';
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/skeleton' as *;
@@ -215,6 +216,9 @@
       margin-inline-start: $spacing-03;
     }
 
+    // Ghost keeps a consistent 8px label/icon gap from the icon margin
+    @include button-v12-ghost-structure;
+
     // Apply hover styles only on devices that support hover
     @media (hover: hover) {
       &:hover {
@@ -258,6 +262,10 @@
 
     .#{$prefix}--btn__icon {
       position: static;
+
+      @if enabled('enable-v12-release') {
+        margin-inline-start: 0;
+      }
     }
 
     &.#{$prefix}--btn--ghost {
@@ -283,11 +291,17 @@
     padding-block-start: 1.5px;
   }
 
-  // Adjust icon positioning in extra small, small, medium variants only
-  .#{$prefix}--btn--xs:not(.#{$prefix}--btn--icon-only) .#{$prefix}--btn__icon,
-  .#{$prefix}--btn--sm:not(.#{$prefix}--btn--icon-only) .#{$prefix}--btn__icon,
-  .#{$prefix}--btn--md:not(.#{$prefix}--btn--icon-only) .#{$prefix}--btn__icon {
-    margin-block-start: 0;
+  // Adjust icon positioning in extra small, small, medium variants only. v12
+  // icons size their own block margins.
+  @if not enabled('enable-v12-release') {
+    .#{$prefix}--btn--xs:not(.#{$prefix}--btn--icon-only)
+      .#{$prefix}--btn__icon,
+    .#{$prefix}--btn--sm:not(.#{$prefix}--btn--icon-only)
+      .#{$prefix}--btn__icon,
+    .#{$prefix}--btn--md:not(.#{$prefix}--btn--icon-only)
+      .#{$prefix}--btn__icon {
+      margin-block-start: 0;
+    }
   }
 
   .#{$prefix}--btn--icon-only.#{$prefix}--btn--selected {
@@ -402,6 +416,8 @@
         margin-inline-start: $spacing-03;
       }
 
+      @include button-v12-ghost-structure;
+
       @media (hover: hover) {
         &:hover {
           color: $text-on-color;
@@ -450,6 +466,16 @@
     inline-size: convert.to-rem(20px);
   }
 
+  .#{$prefix}--btn--expressive {
+    @include button-v12-structure {
+      .#{$prefix}--btn__icon {
+        margin-block: calc(
+          (var(--temp-expressive-1lh) - #{convert.to-rem(20px)}) / 2
+        );
+      }
+    }
+  }
+
   .#{$prefix}--btn-set .#{$prefix}--btn.#{$prefix}--btn--expressive {
     max-inline-size: convert.to-rem(320px);
   }
@@ -468,6 +494,20 @@
 
     @if enabled('enable-v12-release') {
       @include button-radius.radius($border-radius-00);
+
+      // Buttons stretch to fill a set, so keep the label at the start, the
+      // icon at the end and the v11 16px inset. Custom properties inherit into
+      // web component shadow roots.
+      @include custom-property.declaration(
+        'button-justify-content',
+        space-between
+      );
+      @include custom-property.declaration('button-text-align', start);
+      // -1px to compensate for border width
+      @include custom-property.declaration(
+        'button-padding-inline',
+        calc(#{$spacing-05} - #{convert.to-rem(1px)})
+      );
     }
   }
 
