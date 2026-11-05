@@ -20,8 +20,8 @@ import {
   VisualInspection,
   Warning_01,
 } from '@carbon/pictograms-react';
-import EmptyStateJsx from '../components/EmptyState';
-import '../styles/_empty-state.scss';
+import EmptyStateJsx from '../../components/EmptyState';
+import '../../styles/_empty-state.scss';
 
 interface EmptyStateProps {
   size?: 'md' | 'sm';
