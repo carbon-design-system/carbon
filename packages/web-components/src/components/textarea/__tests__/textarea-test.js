@@ -82,6 +82,38 @@ describe('cds-textarea', () => {
     expect(el.hasAttribute('warn')).to.be.true;
   });
 
+  it('should point aria-describedby at the helper or error text', async () => {
+    const el = await fixture(html`
+      <div>
+        <cds-textarea helper-text="Help"></cds-textarea>
+        <cds-textarea helper-text="Help"></cds-textarea>
+        <cds-textarea
+          helper-text="Help"
+          invalid
+          invalid-text="Wrong"></cds-textarea>
+        <cds-textarea
+          helper-text="Help"
+          warn
+          warn-text="Careful"></cds-textarea>
+      </div>
+    `);
+    const [first, second, invalid, warn] = Array.from(
+      el.querySelectorAll('cds-textarea')
+    );
+    const describedBy = (host) =>
+      host.shadowRoot
+        .querySelector('textarea')
+        .getAttribute('aria-describedby');
+    const idOf = (host, selector) => host.shadowRoot.querySelector(selector).id;
+
+    expect(describedBy(first)).to.equal(idOf(first, '.cds--form__helper-text'));
+    expect(describedBy(first)).to.not.equal(describedBy(second));
+    expect(describedBy(invalid)).to.equal(
+      idOf(invalid, '.cds--form-requirement')
+    );
+    expect(describedBy(warn)).to.equal(idOf(warn, '.cds--form-requirement'));
+  });
+
   it('should apply hide-label and visually hide the label', async () => {
     const el = await fixture(html`
       <cds-textarea label="Hidden label" hide-label></cds-textarea>

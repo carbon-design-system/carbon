@@ -62,6 +62,56 @@ describe('cds-password-input', () => {
     expect(helper.textContent).to.include('Helper text');
   });
 
+  it('should describe the input with its own helper text id', async () => {
+    const el = await fixture(html`
+      <div>
+        <cds-password-input helper-text="Help"></cds-password-input>
+        <cds-password-input helper-text="Help"></cds-password-input>
+      </div>
+    `);
+    const [first, second] = Array.from(
+      el.querySelectorAll('cds-password-input')
+    );
+    const describedBy = (input) =>
+      input.shadowRoot.querySelector('input').getAttribute('aria-describedby');
+
+    expect(describedBy(first)).to.equal(
+      first.shadowRoot.querySelector('.cds--form__helper-text').id
+    );
+    expect(describedBy(first)).to.not.equal('helper-text');
+    expect(describedBy(first)).to.not.equal(describedBy(second));
+  });
+
+  it('should point aria-describedby at the helper or error text', async () => {
+    const el = await fixture(html`
+      <div>
+        <cds-password-input helper-text="Help"></cds-password-input>
+        <cds-password-input helper-text="Help"></cds-password-input>
+        <cds-password-input
+          helper-text="Help"
+          invalid
+          invalid-text="Wrong"></cds-password-input>
+        <cds-password-input
+          helper-text="Help"
+          warn
+          warn-text="Careful"></cds-password-input>
+      </div>
+    `);
+    const [first, second, invalid, warn] = Array.from(
+      el.querySelectorAll('cds-password-input')
+    );
+    const describedBy = (host) =>
+      host.shadowRoot.querySelector('input').getAttribute('aria-describedby');
+    const idOf = (host, selector) => host.shadowRoot.querySelector(selector).id;
+
+    expect(describedBy(first)).to.equal(idOf(first, '.cds--form__helper-text'));
+    expect(describedBy(first)).to.not.equal(describedBy(second));
+    expect(describedBy(invalid)).to.equal(
+      idOf(invalid, '.cds--form-requirement')
+    );
+    expect(describedBy(warn)).to.equal(idOf(warn, '.cds--form-requirement'));
+  });
+
   it('should apply hide-label attribute', async () => {
     const el = await fixture(html`
       <cds-password-input
