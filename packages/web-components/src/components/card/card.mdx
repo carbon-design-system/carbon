@@ -77,14 +77,38 @@ Place `cds-ai-label` in the `decorator` slot. The card automatically adds the
 
 ## With Header Actions
 
-`cds-card-actions` renders action icon buttons in the header and automatically
-collapses overflow items into a `cds-overflow-menu`.
+Place `cds-card-actions` in the `actions` slot of `cds-card-header`. The actions
+sit end-aligned in the header and the title fills all remaining space, with no
+JavaScript measurement. The actions slot is capped at 50% of the header; items
+that do not fit collapse into a `cds-overflow-menu`, and selecting a menu item
+triggers the original button. Labels for the menu are resolved from the
+`cds-card-action` `label`, then the button's `label`, `aria-label`, `title` or
+text content.
+
+```html
+<cds-card-header>
+  <cds-card-title>Title</cds-card-title>
+  <cds-card-actions slot="actions">
+    <cds-card-action label="Edit">…</cds-card-action>
+  </cds-card-actions>
+</cds-card-header>
+```
 
 <Canvas of={CardStories.WithHeaderActions} />
 
 ## With Header Media
 
-`cds-card-header-media` renders a full-width icon or image above the title row.
+Place an icon, avatar, tag or image in the `header-media` slot of
+`cds-card-header`. It renders in a row above the title, sharing that row with
+any actions; the title drops to a full-width second row. The standalone
+`cds-card-header-media` element is still exported for backward compatibility.
+
+```html
+<cds-card-header>
+  <cds-tag slot="header-media">New</cds-tag>
+  <cds-card-title>Title</cds-card-title>
+</cds-card-header>
+```
 
 <Canvas of={CardStories.WithHeaderMedia} />
 
@@ -113,7 +137,16 @@ Override the default `ArrowRight` icon in the clickable footer via the
 
 ## With Title Media
 
-`cds-card-title-media` places a media element to the left of the title row.
+Place a media element in the `title-media` slot of `cds-card-title` to render it
+to the left of the title text block. The standalone `cds-card-title-media`
+element is still exported for backward compatibility.
+
+```html
+<cds-card-title>
+  <img slot="title-media" src="…" alt="" />
+  Title
+</cds-card-title>
+```
 
 <Canvas of={CardStories.WithTitleMedia} />
 
