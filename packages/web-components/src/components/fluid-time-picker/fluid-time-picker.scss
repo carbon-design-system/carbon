@@ -94,6 +94,10 @@ $css--plex: true !default;
     inset-inline-start: 0;
     opacity: 1;
     transition: opacity $duration-fast-01 motion(standard, productive);
+
+    @if flags.enabled('enable-v12-release') {
+      background-color: $border-subtle;
+    }
   }
 
   &:not([disabled]):hover .#{$prefix}--select-input__wrapper::before {

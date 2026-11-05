@@ -54,6 +54,10 @@
     inline-size: 1px;
     opacity: 1;
     transition: opacity $duration-fast-01 motion(standard, productive);
+
+    @if enabled('enable-v12-release') {
+      background-color: $border-subtle;
+    }
   }
 
   .#{$prefix}--select--readonly .#{$prefix}--select-input__wrapper::before {
@@ -106,6 +110,10 @@
     @include focus-outline('invalid');
 
     position: relative;
+
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-04;
+    }
   }
 
   .#{$prefix}--time-picker--fluid--invalid .#{$prefix}--text-input,
@@ -300,6 +308,7 @@
       border: none;
     }
 
+    .#{$prefix}--time-picker--fluid--invalid .#{$prefix}--form-requirement,
     .#{$prefix}--time-picker--fluid--warning .#{$prefix}--form-requirement {
       border-radius: $border-radius-04;
     }
