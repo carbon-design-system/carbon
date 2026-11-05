@@ -1272,7 +1272,7 @@ describe('DataTable', () => {
 
         // The render that happens after the sync effect still uses the
         // new versions of both headers and rows.
-        const lastCall = calls[1];
+        const lastCall = calls[calls.length - 1];
         expect(lastCall.headers.map((header) => header.key)).toEqual([
           'fieldB',
           'fieldC',
