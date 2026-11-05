@@ -1,0 +1,116 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as Stories from './create-full-page.stories';
+
+<Meta of={Stories} />
+
+# Create Full Page
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/patterns/create-flows/usage/#full-page)
+| [Carbon page usage guidelines](https://www.carbondesignsystem.com/patterns/common-actions/#create)
+
+## Overview
+
+`create-full-page` is a **pattern** (not a component) that provides a recipe for
+building multi-step workflow interfaces for creating resources using a full
+page experience. It composes a page header, a vertical progress indicator and
+step content.
+
+Unlike components that are exported from the package, patterns are recipes that
+you copy into your codebase and customize to fit your needs.
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/src/examples/create-flows/create-full-page/example)
+> example implementation.
+
+The pattern consists of:
+
+- `create-full-page`: the full-page wrapper
+- `create-full-page-step`: an individual step
+- `create-influencer`: the progress indicator
+
+Always set `slot="steps"` on `create-full-page-step` elements.
+
+Until the action set is exported from `@carbon/web-components`, import it from
+`@carbon/ibm-products-web-components`:
+
+```javascript
+import '@carbon/web-components/es/components/page-header/index.js';
+import '@carbon/ibm-products-web-components/es/components/action-set/index.js';
+import '@carbon/web-components/es/components/text-input/index.js';
+import '@carbon/web-components/es/components/grid/index.js';
+```
+
+### Key features
+
+- **Multi-step workflow**: guide users through complex creation processes
+- **Progress indication**: a vertical progress indicator
+- **Breadcrumb navigation**: optional breadcrumbs with overflow handling
+- **Step management**: back, next and submit navigation
+- **Global header integration**: works with Carbon's UI shell
+
+## Create full page
+
+<Canvas of={Stories.CreateFullPage} />
+
+## Create full page with sections
+
+Organizes form fields into logical sections within a step.
+
+<Canvas of={Stories.CreateFullPageWithSections} />
+
+## Create full page with header
+
+Shows breadcrumbs and a page title in the header.
+
+<Canvas of={Stories.CreateFullPageWithHeader} />
+
+## Create full page with step in error state
+
+Shows how an invalid step appears in the progress indicator.
+
+<Canvas of={Stories.CreateFullPageWithStepInErrorState} />
+
+## Create full page with global header
+
+Shows integration with the Carbon UI shell, including the global header and side
+navigation.
+
+<Canvas of={Stories.CreateFullPageWithGlobalHeader} />
+
+## Usage
+
+```html
+<create-full-page
+  secondary-title="Create topic"
+  next-button-text="Next"
+  back-button-text="Back"
+  cancel-button-text="Cancel"
+  submit-button-text="Create"
+>
+  <create-full-page-step
+    slot="steps"
+    title="Partition"
+    subtitle="One or more partitions make up a topic."
+    description="A partition is an ordered list of messages."
+  >
+    <cds-grid>
+      <cds-column xlg="5" lg="5" md="4" sm="4">
+        <cds-text-input
+          label="Topic name"
+          placeholder="Enter topic name"
+        ></cds-text-input>
+      </cds-column>
+    </cds-grid>
+  </create-full-page-step>
+</create-full-page>
+```
+
+## Form validation
+
+- Disable the submit button until all required inputs are filled in and valid
+- Show an invalid error on a required input only after it loses focus
+- Add `(optional)` in parentheses at the end of the label of every optional field
+- Use the `onNext` handler to perform async validation before proceeding
+
+For more information, see
+[Carbon's form usage guidelines](https://carbondesignsystem.com/components/form/usage/).
