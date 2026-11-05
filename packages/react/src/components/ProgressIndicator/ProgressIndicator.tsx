@@ -8,7 +8,6 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { keys, matches } from '../../internal/keyboard';
 import {
   CheckmarkOutline,
   Warning,
@@ -251,12 +250,6 @@ const ProgressStep = React.forwardRef<HTMLLIElement, ProgressStepProps>(
       [className ?? '']: className,
     });
 
-    const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
-      if (matches(e, [keys.Enter, keys.Space]) && onClick) {
-        onClick(e);
-      }
-    };
-
     interface SVGIconProps {
       complete?: boolean;
       current?: boolean;
@@ -326,7 +319,6 @@ const ProgressStep = React.forwardRef<HTMLLIElement, ProgressStepProps>(
           aria-disabled={disabled}
           tabIndex={disabled ? -1 : 0}
           onClick={!current ? onClick : undefined}
-          onKeyDown={handleKeyDown}
           title={label}
           {...rest}>
           <SVGIcon
