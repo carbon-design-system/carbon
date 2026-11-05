@@ -1,0 +1,127 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as ComboBoxStories from './ComboBox.stories';
+
+<Meta of={ComboBoxStories} />
+
+# Combo box
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/angular/src/stories/ComboBox)
+&nbsp;|&nbsp;
+[Usage guidelines](https://carbondesignsystem.com/components/combo-box/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/combo-box/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Allow custom value](#allow-custom-value)
+- [Autocomplete with typeahead](#autocomplete-with-typeahead)
+- [Experimental auto align](#experimental-auto-align)
+- [Controlled](#controlled)
+- [With AI Label](#with-ai-label)
+- [With Layer](#with-layer)
+- [Component API](#component-api)
+- [Angular-specific notes](#angular-specific-notes)
+- [Feedback](#feedback)
+
+## Overview
+
+The `cds-ng-combo-box` component lets users select an option from a list, or
+filter the list by typing into the input.
+
+### Importing
+
+```ts
+import {
+  ComboBoxComponent,
+  ComboBoxItemComponent,
+} from '@carbon/angular/combo-box';
+
+@Component({
+  standalone: true,
+  imports: [ComboBoxComponent, ComboBoxItemComponent],
+  template: `
+    <cds-ng-combo-box titleText="Label" helperText="Helper text">
+      <cds-ng-combo-box-item value="option-1">Option 1</cds-ng-combo-box-item>
+      <cds-ng-combo-box-item value="option-2">Option 2</cds-ng-combo-box-item>
+    </cds-ng-combo-box>
+  `,
+})
+export class MyComponent {}
+```
+
+<Canvas of={ComboBoxStories.Default} />
+
+## Allow custom value
+
+Set `allowCustomValue` to let users enter a value that is not in the list.
+
+<Canvas of={ComboBoxStories.AllowCustomValue} />
+
+## Autocomplete with typeahead
+
+Set `typeahead` (experimental) to autocomplete the input from the list.
+
+<Canvas of={ComboBoxStories.AutocompleteWithTypeahead} />
+
+## Experimental auto align
+
+Set `autoalign` (experimental) to flip the menu when there is not enough space.
+
+<Canvas of={ComboBoxStories.ExperimentalAutoAlign} />
+
+## Controlled
+
+Cancel `(comboBoxBeingselected)` with `event.preventDefault()` and set `value`
+yourself to take control of the selection.
+
+<Canvas of={ComboBoxStories.Controlled} />
+
+## With AI Label
+
+<Canvas of={ComboBoxStories.WithAILabel} />
+
+## With Layer
+
+<Canvas of={ComboBoxStories.WithLayer} />
+
+## Component API
+
+<ArgTypes of={ComboBoxStories.Default} />
+
+## Angular-specific notes
+
+### Events
+
+The generated wrapper exposes the web component's custom events as outputs:
+
+| Output                    | Web component event              |
+| ------------------------- | -------------------------------- |
+| `(comboBoxBeingselected)` | `cds-ng-combo-box-beingselected` |
+| `(comboBoxSelected)`      | `cds-ng-combo-box-selected`      |
+| `(comboBoxBeingtoggled)`  | `cds-ng-combo-box-beingtoggled`  |
+| `(comboBoxToggled)`       | `cds-ng-combo-box-toggled`       |
+
+### Forms integration (`ControlValueAccessor`)
+
+`ComboBoxComponent` implements `ControlValueAccessor`, supporting both
+template-driven and reactive Angular forms:
+
+```html
+<!-- Reactive forms -->
+<cds-ng-combo-box [formControl]="fruitControl" titleText="Fruit">
+  <cds-ng-combo-box-item value="apple">Apple</cds-ng-combo-box-item>
+  <cds-ng-combo-box-item value="banana">Banana</cds-ng-combo-box-item>
+</cds-ng-combo-box>
+
+<!-- Template-driven forms -->
+<cds-ng-combo-box [(ngModel)]="fruit" titleText="Fruit">
+  <cds-ng-combo-box-item value="apple">Apple</cds-ng-combo-box-item>
+  <cds-ng-combo-box-item value="banana">Banana</cds-ng-combo-box-item>
+</cds-ng-combo-box>
+```
+
+## Feedback
+
+Help us improve this component by providing feedback, opening issues, or
+contributing on GitHub.

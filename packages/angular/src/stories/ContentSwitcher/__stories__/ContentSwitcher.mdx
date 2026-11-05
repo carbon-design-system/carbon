@@ -1,0 +1,110 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as ContentSwitcherStories from './ContentSwitcher.stories';
+
+<Meta of={ContentSwitcherStories} />
+
+# Content switcher
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/angular/src/stories/ContentSwitcher)
+&nbsp;|&nbsp;
+[Usage guidelines](https://carbondesignsystem.com/components/content-switcher/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/content-switcher/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Icon only](#icon-only)
+- [Icon only with layer](#icon-only-with-layer)
+- [Low contrast](#low-contrast)
+- [Low contrast icon only](#low-contrast-icon-only)
+- [With layer](#with-layer)
+- [Component API](#component-api)
+- [Angular-specific notes](#angular-specific-notes)
+- [Feedback](#feedback)
+
+## Overview
+
+The `cds-ng-content-switcher` component lets users toggle between two or more
+content views within the same context.
+
+### Importing
+
+```ts
+import {
+  ContentSwitcherComponent,
+  ContentSwitcherItemComponent,
+} from '@carbon/angular/content-switcher';
+
+@Component({
+  standalone: true,
+  imports: [ContentSwitcherComponent, ContentSwitcherItemComponent],
+  template: `
+    <cds-ng-content-switcher
+      [selectedIndex]="0"
+      (contentSwitcherSelected)="onSelected($event.detail)">
+      <cds-ng-content-switcher-item value="all">
+        First section
+      </cds-ng-content-switcher-item>
+      <cds-ng-content-switcher-item value="cloudFoundry">
+        Second section
+      </cds-ng-content-switcher-item>
+    </cds-ng-content-switcher>
+  `,
+})
+export class MyComponent {
+  onSelected(detail: unknown) {}
+}
+```
+
+<Canvas of={ContentSwitcherStories.Default} />
+
+## Icon only
+
+Set `icon` on each `cds-ng-content-switcher-item` and project an icon with
+`slot="icon"`. Provide the tooltip text through the `tooltip-content` slot.
+
+<Canvas of={ContentSwitcherStories.IconOnly} />
+
+## Icon only with layer
+
+<Canvas of={ContentSwitcherStories.IconOnlyWithLayer} />
+
+## Low contrast
+
+<Canvas of={ContentSwitcherStories.LowContrast} />
+
+## Low contrast icon only
+
+<Canvas of={ContentSwitcherStories.lowContrastIconOnly} />
+
+## With layer
+
+<Canvas of={ContentSwitcherStories.WithLayer} />
+
+## Component API
+
+<ArgTypes of={ContentSwitcherStories.Default} />
+
+## Angular-specific notes
+
+### Events
+
+`ContentSwitcherComponent` exposes the web component custom events as outputs.
+The selected item is available on `event.detail`:
+
+| Output                         | Web component event                  |
+| ------------------------------ | ------------------------------------ |
+| `contentSwitcherBeingselected` | `cds-content-switcher-beingselected` |
+| `contentSwitcherSelected`      | `cds-content-switcher-selected`      |
+
+```html
+<cds-ng-content-switcher (contentSwitcherSelected)="onSelected($event.detail)">
+  ...
+</cds-ng-content-switcher>
+```
+
+## Feedback
+
+Help us improve this component by providing feedback, opening issues, or
+contributing on GitHub.
