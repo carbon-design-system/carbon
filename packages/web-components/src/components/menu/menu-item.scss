@@ -75,6 +75,10 @@ $css--plex: true !default;
   display: flex;
 }
 
+:host(#{$prefix}-menu-item:dir(rtl)) .#{$prefix}--menu-item__shortcut svg {
+  transform: scaleX(-1);
+}
+
 .#{$prefix}--menu-item__icon {
   display: var(--child-icon-property, none);
 }
