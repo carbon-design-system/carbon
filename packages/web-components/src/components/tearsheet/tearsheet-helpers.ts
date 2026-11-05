@@ -47,19 +47,6 @@ export const toggleButton = () => {
   document.querySelector(`${prefix}-tearsheet`)?.toggleAttribute('open');
 };
 
-/**
- * Handles `cds-tearsheet-collapse-change` events in stories.
- * Resizes header-action buttons to `xs` when collapsed, `sm` when expanded,
- * matching the React TearsheetHeaderActions behavior.
- */
-export const handleCollapseChange = (e: Event) => {
-  const { collapsed } = (e as CustomEvent).detail as { collapsed: boolean };
-  const tearsheet = e.currentTarget as Element;
-  tearsheet
-    .querySelectorAll('[slot="header-actions"] cds-button')
-    .forEach((btn) => btn.setAttribute('size', collapsed ? 'xs' : 'sm'));
-};
-
 export const toggleInfluencerPanel = () => {
   const influencer = document.querySelector(`${prefix}-tearsheet-influencer`);
   if (influencer) {
