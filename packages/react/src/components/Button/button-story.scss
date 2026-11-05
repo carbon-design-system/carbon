@@ -11,9 +11,21 @@
 
   > div {
     display: flex;
+    flex-wrap: wrap;
     align-items: flex-start;
     gap: 1rem;
+    min-inline-size: 0;
   }
+}
+
+.button-icon-multiline > button,
+.button-icon-multiline > a {
+  inline-size: 12rem;
+}
+
+.button-icon-alignment > div > button,
+.button-icon-alignment > div > a {
+  max-inline-size: 100%;
 }
 
 .container {

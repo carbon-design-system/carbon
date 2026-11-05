@@ -515,6 +515,14 @@ export const GhostWithIcon = (args) => {
           Expressive danger ghost
         </Button>
       </div>
+      <div className="button-icon-multiline">
+        <Button {...args} kind="ghost" size="lg" renderIcon={Add}>
+          Continue to the next page with your changes
+        </Button>
+        <Button {...args} kind="danger--ghost" size="lg" renderIcon={Add}>
+          Remove this item from the selected collection
+        </Button>
+      </div>
     </div>
   );
 };
