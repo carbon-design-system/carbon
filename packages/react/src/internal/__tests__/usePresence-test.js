@@ -29,11 +29,13 @@ const TestComponent = () => {
 
 const createDeferred = () => {
   let resolve;
-  const promise = new Promise((res) => {
+  let reject;
+  const promise = new Promise((res, rej) => {
     resolve = res;
+    reject = rej;
   });
 
-  return { promise, resolve };
+  return { promise, resolve, reject };
 };
 
 const mockPresenceAnimations = () => {
@@ -127,6 +129,30 @@ describe('usePresence', () => {
         expect(screen.queryByRole('dialog')).toBeInTheDocument()
       );
     } finally {
+      cleanup();
+    }
+  });
+
+  it('should not leave an unhandled rejection when an exit animation is aborted', async () => {
+    const { deferredAnimations, cleanup } = mockPresenceAnimations();
+    const rejections = [];
+    const onRejection = (reason) => rejections.push(reason);
+    process.on('unhandledRejection', onRejection);
+
+    try {
+      const { unmount } = render(<TestComponent />);
+
+      await userEvent.click(screen.getByRole('button', { name: 'Open' }));
+      await userEvent.click(screen.getByRole('button', { name: 'Close' }));
+      await waitFor(() => expect(deferredAnimations.length).toBe(1));
+
+      unmount();
+      deferredAnimations[0].reject(new DOMException('Aborted', 'AbortError'));
+      await new Promise((resolve) => setTimeout(resolve, 0));
+
+      expect(rejections).toEqual([]);
+    } finally {
+      process.off('unhandledRejection', onRejection);
       cleanup();
     }
   });
