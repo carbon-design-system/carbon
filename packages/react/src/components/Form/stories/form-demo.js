@@ -43,6 +43,9 @@ import {
   TextAreaSkeleton,
   TextInput,
   TextInputSkeleton,
+  TimePicker,
+  TimePickerSelect,
+  TimePickerSkeleton,
 } from '@carbon/react';
 import { FolderOpen, Folders, View } from '@carbon/icons-react';
 
@@ -178,6 +181,11 @@ const FormDemo = (args) => {
         </div>
         <div style={formRowStyle}>
           <div style={formColStyle}>
+            <TimePickerSkeleton />
+          </div>
+        </div>
+        <div style={formRowStyle}>
+          <div style={formColStyle}>
             <NumberInputSkeleton />
           </div>
           <div style={formColStyle}>
@@ -301,6 +309,30 @@ const FormDemo = (args) => {
                 {...sharedProps}
               />
             </DatePicker>
+          </div>
+        </div>
+
+        <div style={formRowStyle}>
+          <div style={formColStyle}>
+            <TimePicker
+              id="kickoff-time"
+              labelText="Kickoff time"
+              size={listBoxSize}
+              disabled={disabled}
+              readOnly={readOnly}
+              invalid={invalid}
+              invalidText={invalidText}
+              warning={warn}
+              warningText={warnText}>
+              <TimePickerSelect id="kickoff-time-period" aria-label="AM or PM">
+                <SelectItem value="AM" text="AM" />
+                <SelectItem value="PM" text="PM" />
+              </TimePickerSelect>
+              <TimePickerSelect id="kickoff-time-zone" aria-label="Time zone">
+                <SelectItem value="Time zone 1" text="Time zone 1" />
+                <SelectItem value="Time zone 2" text="Time zone 2" />
+              </TimePickerSelect>
+            </TimePicker>
           </div>
         </div>
 

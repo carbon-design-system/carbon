@@ -11,6 +11,7 @@ import { WithLayer } from '../../../.storybook/templates/WithLayer';
 
 import SelectItem from '../SelectItem';
 import TimePicker from './TimePicker';
+import TimePickerSkeleton from './TimePicker.Skeleton';
 import TimePickerSelect from '../TimePickerSelect';
 import mdx from './TimePicker.mdx';
 
@@ -18,6 +19,7 @@ export default {
   title: 'Components/TimePicker',
   component: TimePicker,
   subcomponents: {
+    TimePickerSkeleton,
     TimePickerSelect,
     SelectItem,
   },
@@ -105,3 +107,17 @@ export const _WithLayer = () => (
     )}
   </WithLayer>
 );
+
+export const Skeleton = () => {
+  return (
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '2rem',
+      }}>
+      <TimePickerSkeleton />
+      <TimePickerSkeleton isOnlyTwo />
+    </div>
+  );
+};

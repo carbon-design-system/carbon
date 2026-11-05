@@ -175,6 +175,15 @@ export const WithLayer = {
   `,
 };
 
+export const Skeleton = {
+  render: () => html`
+    <div style="display: flex; flex-direction: column; gap: 2rem;">
+      <cds-time-picker-skeleton></cds-time-picker-skeleton>
+      <cds-time-picker-skeleton is-only-two></cds-time-picker-skeleton>
+    </div>
+  `,
+};
+
 export default {
   title: 'Components/Time Picker',
 };

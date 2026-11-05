@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,7 +12,8 @@ import { prefix } from '../../globals/settings';
 import styles from './select.scss?lit';
 
 /**
- * Skeleton of number input.
+ * Skeleton of select.
+ * @csspart select The select.
  */
 @customElement(`${prefix}-select-skeleton`)
 class CDSSelectSkeleton extends LitElement {
@@ -25,9 +26,10 @@ class CDSSelectSkeleton extends LitElement {
   render() {
     const { hideLabel } = this;
     return html`
-      ${!hideLabel &&
-      html` <span class="${prefix}--label ${prefix}--skeleton"></span> `}
-      <div class="${prefix}--select ${prefix}--skeleton"></div>
+      ${!hideLabel
+        ? html`<span class="${prefix}--label ${prefix}--skeleton"></span>`
+        : null}
+      <div part="select" class="${prefix}--select ${prefix}--skeleton"></div>
     `;
   }
 
