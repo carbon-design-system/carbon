@@ -910,6 +910,60 @@ describe('FeatureFlags', () => {
       });
     });
 
+    it('enable-v12-tabs-contained-layer - enableV12TabsContainedLayer', () => {
+      const checkFlags = jest.fn();
+      const checkFlag = jest.fn();
+
+      function TestComponent() {
+        const featureFlags = useFeatureFlags();
+        const enableV12TabsContainedLayer = useFeatureFlag(
+          'enable-v12-tabs-contained-layer'
+        );
+
+        checkFlags({
+          enableV12TabsContainedLayer: featureFlags.enabled(
+            'enable-v12-tabs-contained-layer'
+          ),
+        });
+
+        checkFlag({
+          enableV12TabsContainedLayer,
+        });
+
+        return null;
+      }
+
+      // Render the default
+      const { rerender } = render(
+        <FeatureFlags>
+          <TestComponent />
+        </FeatureFlags>
+      );
+
+      // Ensure the default value is as defined and as expected
+      expect(checkFlags).toHaveBeenLastCalledWith({
+        enableV12TabsContainedLayer: false,
+      });
+      expect(checkFlag).toHaveBeenLastCalledWith({
+        enableV12TabsContainedLayer: false,
+      });
+
+      // Enable the flag
+      rerender(
+        <FeatureFlags enableV12TabsContainedLayer>
+          <TestComponent />
+        </FeatureFlags>
+      );
+
+      // Ensure that when enabled, this flag does not error
+      expect(checkFlags).toHaveBeenLastCalledWith({
+        enableV12TabsContainedLayer: true,
+      });
+      expect(checkFlag).toHaveBeenLastCalledWith({
+        enableV12TabsContainedLayer: true,
+      });
+    });
+
     it('enable-v12-autoalign - enableV12Autoalign', () => {
       const checkFlags = jest.fn();
       const checkFlag = jest.fn();

@@ -19,6 +19,7 @@ import React, {
   cloneElement,
   createContext,
   forwardRef,
+  Fragment,
   isValidElement,
   useCallback,
   useEffect,
@@ -36,7 +37,9 @@ import React, {
   type RefObject,
 } from 'react';
 import { Grid } from '../Grid';
+import { Layer } from '../Layer';
 import { Tooltip } from '../Tooltip';
+import { useFeatureFlag } from '../FeatureFlags';
 import { useControllableState } from '../../internal/useControllableState';
 import { useId } from '../../internal/useId';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
@@ -59,6 +62,11 @@ const verticalTabHeight = 64;
 type TabsContextType = {
   baseId: string;
   activeIndex: number;
+  /**
+   * Whether the tab list is contained (or vertical). Derived synchronously
+   * from the `Tabs` children so that `TabPanel` knows on the first render.
+   */
+  contained: boolean;
   defaultSelectedIndex: number;
   dismissable?: boolean;
   onTabCloseRequest?(index: number): void;
@@ -69,6 +77,7 @@ type TabsContextType = {
 const TabsContext = React.createContext<TabsContextType>({
   baseId: '',
   activeIndex: 0,
+  contained: false,
   defaultSelectedIndex: 0,
   dismissable: false,
   onTabCloseRequest() {},
@@ -136,6 +145,27 @@ export interface TabsProps {
   selectedIndex?: number;
 }
 
+/**
+ * Determine whether the given children render a contained `TabList` or a
+ * `TabListVertical`. Looks through fragments.
+ */
+function hasContainedTabList(children: ReactNode): boolean {
+  return Children.toArray(children).some((child) => {
+    if (!isValidElement<{ children?: ReactNode }>(child)) {
+      return false;
+    }
+
+    if (child.type === Fragment) {
+      return hasContainedTabList(child.props.children);
+    }
+
+    return (
+      isComponentElement(child, TabListVertical) ||
+      (isComponentElement(child, TabList) && !!child.props.contained)
+    );
+  });
+}
+
 function Tabs({
   children,
   defaultSelectedIndex = 0,
@@ -163,6 +193,7 @@ function Tabs({
   const value: TabsContextType = {
     baseId,
     activeIndex,
+    contained: hasContainedTabList(children),
     defaultSelectedIndex,
     dismissable,
     onTabCloseRequest,
@@ -1783,7 +1814,10 @@ const TabPanel = React.forwardRef<HTMLDivElement, TabPanelProps>(
   ({ children, className: customClassName, ...rest }, forwardRef) => {
     const prefix = usePrefix();
 
-    const { selectedIndex, baseId } = React.useContext(TabsContext);
+    const { selectedIndex, baseId, contained } = React.useContext(TabsContext);
+    const enableContainedLayer = useFeatureFlag(
+      'enable-v12-tabs-contained-layer'
+    );
     const index = React.useContext(TabPanelContext);
     const id = `${baseId}-tabpanel-${index}`;
     const tabId = `${baseId}-tab-${index}`;
@@ -1798,7 +1832,11 @@ const TabPanel = React.forwardRef<HTMLDivElement, TabPanelProps>(
         ref={forwardRef}
         role="tabpanel"
         hidden={selectedIndex !== index}>
-        {children}
+        {enableContainedLayer && contained ? (
+          <Layer>{children}</Layer>
+        ) : (
+          children
+        )}
       </div>
     );
   }
