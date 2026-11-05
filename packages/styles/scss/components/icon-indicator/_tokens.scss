@@ -74,11 +74,11 @@ $status-orange-outline: (
     ),
     (
       theme: themes.$g90,
-      value: map.get(status.$status-orange, g-90),
+      value: map.get(status.$status-orange-outline, g-90),
     ),
     (
       theme: themes.$g100,
-      value: map.get(status.$status-orange, g-100),
+      value: map.get(status.$status-orange-outline, g-100),
     ),
   ),
 ) !default;
@@ -120,11 +120,11 @@ $status-yellow-outline: (
     ),
     (
       theme: themes.$g90,
-      value: map.get(status.$status-yellow, g-90),
+      value: map.get(status.$status-yellow-outline, g-90),
     ),
     (
       theme: themes.$g100,
-      value: map.get(status.$status-yellow, g-100),
+      value: map.get(status.$status-yellow-outline, g-100),
     ),
   ),
 ) !default;
