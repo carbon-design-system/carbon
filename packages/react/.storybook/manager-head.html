@@ -46,33 +46,7 @@
   }, 1000);
 </script>
 
-<!-- Tealium/GA Set up -->
-<script type="text/javascript">
-  window._ibmAnalytics = {
-    settings: {
-      name: 'CarbonReactStorybook',
-      isSpa: true,
-      tealiumProfileName: 'ibm-web-app',
-    },
-    onLoad: [['ibmStats.pageview', []]],
-  };
-  digitalData = {
-    page: {
-      pageInfo: {
-        ibm: {
-          siteId: 'IBM_' + _ibmAnalytics.settings.name,
-        },
-      },
-      category: {
-        primaryCategory: 'PC100',
-      },
-    },
-  };
-</script>
-<script
-  src="//1.www.s81c.com/common/stats/ibm-common.js"
-  type="text/javascript"
-  async="async"></script>
+<!-- Tealium/GA set up is added via managerHead in main.ts (see tasks/storybook-ibm-analytics.mjs) -->
 
 <!-- 
   Ensure plex is loaded into the manager ui even when plex is not locally 
