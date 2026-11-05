@@ -11,7 +11,7 @@ import Button from '../../Button';
 import { DataTable } from '..';
 import Pagination from '../../Pagination';
 import { EmptyState } from '../../../examples/EmptyState/example/components/EmptyState';
-import notFoundIllustration from '../../../examples/EmptyState/example/assets/not-found.svg';
+import notFoundIllustration from '../../../examples/EmptyState/example/assets/not-found-light.svg';
 import mdx from '../DataTable.mdx';
 import './datatable-story.scss';
 import { dataTableArgs, dataTableArgTypes, headers } from './shared';
