@@ -110,4 +110,64 @@ describe('IconIndicator', () => {
       expect(container.firstChild).toHaveClass('cds--icon-indicator--20');
     });
   });
+
+  describe('labelColor prop', () => {
+    it('should set the CSS custom property when labelColor is provided', () => {
+      const { container } = render(
+        <IconIndicator
+          kind="failed"
+          label="label"
+          labelColor="var(--cds-text-primary)"
+        />
+      );
+      expect(
+        container.firstChild.style.getPropertyValue(
+          '--cds-icon-indicator-label-color'
+        )
+      ).toBe('var(--cds-text-primary)');
+    });
+
+    it('should remove the CSS custom property when labelColor is not provided', () => {
+      const { container } = render(
+        <IconIndicator kind="failed" label="label" />
+      );
+      expect(
+        container.firstChild.style.getPropertyValue(
+          '--cds-icon-indicator-label-color'
+        )
+      ).toBe('');
+    });
+
+    it('should not set the CSS custom property when compact is true', () => {
+      const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+      const { container } = render(
+        <IconIndicator
+          kind="failed"
+          label="label"
+          labelColor="var(--cds-text-primary)"
+          compact
+        />
+      );
+      expect(
+        container.firstChild.style.getPropertyValue(
+          '--cds-icon-indicator-label-color'
+        )
+      ).toBe('');
+      warnSpy.mockRestore();
+    });
+
+    it('should warn in dev when labelColor and compact are both set', () => {
+      const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+      render(
+        <IconIndicator
+          kind="failed"
+          label="label"
+          labelColor="var(--cds-text-primary)"
+          compact
+        />
+      );
+      expect(warnSpy).toHaveBeenCalledTimes(1);
+      warnSpy.mockRestore();
+    });
+  });
 });

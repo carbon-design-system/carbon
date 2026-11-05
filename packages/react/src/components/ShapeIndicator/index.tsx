@@ -6,9 +6,11 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useRef } from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
+import { useMergedRefs } from '../../internal/useMergedRefs';
 import { DefinitionTooltip } from '../Tooltip';
 import { PopoverAlignment } from '../Popover';
 import {
@@ -107,6 +109,13 @@ export interface ShapeIndicatorProps {
   label: string;
 
   /**
+   * Optionally specify a color for the label text. Accepts any valid CSS color
+   * value or design token, e.g. `"var(--cds-text-primary)"`. Defaults to
+   * `$text-secondary`. Has no effect when `compact` is true.
+   */
+  labelColor?: string;
+
+  /**
    * Description for the shape announced to screen readers in compact mode.
    * Defaults to `label` when not provided.
    */
@@ -127,15 +136,41 @@ export const ShapeIndicator = React.forwardRef(
       compact = false,
       kind,
       label,
+      labelColor,
       shapeDescription,
       textSize = 12,
     }: ShapeIndicatorProps,
     ref: React.Ref<HTMLDivElement>
   ) => {
     const prefix = usePrefix();
+    const localRef = useRef<HTMLDivElement>(null);
+    const mergedRef = useMergedRefs([localRef, ref]);
+
     const classNames = cx(`${prefix}--shape-indicator`, customClassName, {
       [`${prefix}--shape-indicator--14`]: textSize == 14,
     });
+
+    useIsomorphicEffect(() => {
+      const el = localRef.current;
+      if (!el) {
+        return;
+      }
+      if (labelColor && !compact) {
+        el.style.setProperty(
+          `--${prefix}-shape-indicator-label-color`,
+          labelColor
+        );
+      } else {
+        el.style.removeProperty(`--${prefix}-shape-indicator-label-color`);
+        if (process.env.NODE_ENV !== 'production' && labelColor && compact) {
+          // eslint-disable-next-line no-console
+          console.warn(
+            '[ShapeIndicator] The `labelColor` prop has no effect when `compact` is true ' +
+              'because the label is displayed inside a tooltip, not as visible text.'
+          );
+        }
+      }
+    }, [compact, labelColor, prefix]);
 
     const ShapeForKind = shapeTypes[kind];
     if (!ShapeForKind) {
@@ -169,7 +204,7 @@ export const ShapeIndicator = React.forwardRef(
     );
 
     return (
-      <div className={classNames} ref={ref}>
+      <div className={classNames} ref={mergedRef}>
         {content}
       </div>
     );
@@ -220,6 +255,13 @@ ShapeIndicator.propTypes = {
    * Label next to the shape.
    */
   label: PropTypes.string.isRequired,
+
+  /**
+   * Optionally specify a color for the label text. Accepts any valid CSS color
+   * value or design token, e.g. `"var(--cds-text-primary)"`. Defaults to
+   * `$text-secondary`. Has no effect when `compact` is true.
+   */
+  labelColor: PropTypes.string,
 
   /**
    * Description for the shape announced to screen readers in compact mode.
