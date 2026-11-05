@@ -42,7 +42,8 @@ export type SideNavLinkProps<E extends ElementType> = LinkProps<E> & {
   className?: string;
 
   /**
-   * Specify whether the link is the current page
+   * Specify whether the link is the current page. When `true`, the link also
+   * receives `aria-current="page"` unless `aria-current` is passed explicitly.
    */
   isActive?: boolean;
 
@@ -89,6 +90,7 @@ const SideNavLink = frFn((props, ref) => {
     isSideNavExpanded,
     large = false,
     tabIndex,
+    'aria-current': ariaCurrent,
     ...rest
   } = props;
   const { isRail, isSideNavExpanded: contextIsSideNavExpanded } =
@@ -108,6 +110,9 @@ const SideNavLink = frFn((props, ref) => {
     <SideNavItem large={large}>
       <Link
         {...linkProps}
+        // `isActive` marks the current page visually; expose the same state to
+        // assistive technology unless the consumer set `aria-current` themselves.
+        aria-current={ariaCurrent ?? (isActive ? 'page' : undefined)}
         className={className}
         ref={ref}
         tabIndex={
@@ -144,7 +149,8 @@ SideNavLink.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Specify whether the link is the current page
+   * Specify whether the link is the current page. When `true`, the link also
+   * receives `aria-current="page"` unless `aria-current` is passed explicitly.
    */
   isActive: PropTypes.bool,
 
