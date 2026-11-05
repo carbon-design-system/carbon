@@ -9727,6 +9727,19 @@ Map {
       "onKeyDown": {
         "type": "func",
       },
+      "renderIcon": {
+        "args": [
+          [
+            {
+              "type": "func",
+            },
+            {
+              "type": "object",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
       "selected": {
         "type": "bool",
       },

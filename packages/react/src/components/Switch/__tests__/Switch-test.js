@@ -6,6 +6,7 @@
  */
 
 import React from 'react';
+import { Search } from '@carbon/icons-react';
 import Switch from '../Switch';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
@@ -61,6 +62,39 @@ describe('Switch', () => {
       render(<Switch text="First section" />);
 
       expect(screen.getByText('First section')).toBeInTheDocument();
+    });
+
+    it('should report a prop violation error if `renderIcon` is passed without `text` and `children`', () => {
+      const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+      render(<Switch renderIcon={Search} />);
+
+      try {
+        expect(spy).toHaveBeenCalled();
+      } finally {
+        spy.mockRestore();
+      }
+    });
+
+    it('should not render an icon by default', () => {
+      const { container } = render(<Switch text="First section" />);
+
+      expect(
+        container.querySelector('.cds--content-switcher__icon')
+      ).not.toBeInTheDocument();
+    });
+
+    it('should render an icon alongside text when `renderIcon` is provided', () => {
+      const Icon = (props) => <svg data-testid="icon" {...props} />;
+      render(<Switch text="First section" renderIcon={Icon} />);
+
+      expect(screen.getByTestId('icon')).toHaveClass(
+        'cds--content-switcher__icon'
+      );
+      expect(screen.getByText('First section')).toBeInTheDocument();
+      expect(screen.getByRole('tab')).toContainElement(
+        screen.getByTestId('icon')
+      );
     });
   });
 });
