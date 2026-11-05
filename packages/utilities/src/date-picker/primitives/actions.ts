@@ -21,18 +21,18 @@ import type {
  */
 type ActionMap = Record<DatePickerState, Partial<Record<string, StateAction>>>;
 
-/** A Temporal duration accepted by `PlainDate.add` */
+// A Temporal duration accepted by `PlainDate.add`
 type DateDuration = { days?: number; months?: number; years?: number };
 
-/** Which configured limit constrains a move */
+// Which configured limit constrains a move
 type DateBound = 'min' | 'max';
 
-/** Derives the next date from the one navigation started at */
+// Derives the next date from the one navigation started at
 type DateStep = (date: Temporal.PlainDate) => Temporal.PlainDate;
 
-/* -------------------------------------------------------------------------- *
+/*
  * Date helpers
- * -------------------------------------------------------------------------- */
+ */
 
 /**
  * Resolve the date keyboard navigation should move from. Falls back through the
@@ -87,10 +87,10 @@ function dayOfWeek(date: Temporal.PlainDate): number {
   return new Date(date.year, date.month - 1, date.day).getDay();
 }
 
-/** Step to the Sunday that starts the date's week (US calendar) */
+// Step to the Sunday that starts the date's week (US calendar)
 const toStartOfWeek: DateStep = (date) => date.add({ days: -dayOfWeek(date) });
 
-/** Step to the Saturday that ends the date's week (US calendar) */
+// Step to the Saturday that ends the date's week (US calendar)
 const toEndOfWeek: DateStep = (date) => date.add({ days: 6 - dayOfWeek(date) });
 
 /**
@@ -103,9 +103,9 @@ function byDays(days: number): DateStep {
   return (date) => date.add({ days });
 }
 
-/* -------------------------------------------------------------------------- *
+/*
  * Shared action builders
- * -------------------------------------------------------------------------- */
+ */
 
 /**
  * Move keyboard focus within the grid. The visible month follows only when the
@@ -210,11 +210,11 @@ function openCalendar(
   };
 }
 
-/** Keep the existing focus, leaving the grid unfocused on a first open */
+// Keep the existing focus, leaving the grid unfocused on a first open
 const preserveFocus = (context: DatePickerContext) =>
   context.focusedDate || context.startDate || null;
 
-/** Focus the selection, or fall back to the month on display */
+// Focus the selection, or fall back to the month on display
 const focusSelectionOrView = (
   context: DatePickerContext,
   viewDate: Temporal.PlainDate
@@ -282,7 +282,7 @@ function commitRange(
   };
 }
 
-/** Record which input took focus */
+// Record which input took focus
 const focusInput: StateAction = (_context, event: DatePickerEvent) => {
   const payload = event.payload as InputFocusPayload;
 
@@ -292,17 +292,17 @@ const focusInput: StateAction = (_context, event: DatePickerEvent) => {
   };
 };
 
-/** Close the calendar */
+// Close the calendar
 const closeCalendar: StateAction = () => ({ isOpen: false });
 
-/** Close the calendar and drop any queued focus restoration */
+// Close the calendar and drop any queued focus restoration
 const closeCalendarAndCancelRestore: StateAction = () => ({
   isOpen: false,
   restoreFocusTo: null,
   shouldRestoreFocus: false,
 });
 
-/** Dismiss on an outside click: closed, blurred, nothing to restore */
+// Dismiss on an outside click: closed, blurred, nothing to restore
 const dismissCalendar: StateAction = () => ({
   isOpen: false,
   isFocused: false,
@@ -310,18 +310,18 @@ const dismissCalendar: StateAction = () => ({
   shouldRestoreFocus: false,
 });
 
-/** Close the calendar, honouring a restore target queued by a selection */
+// Close the calendar, honouring a restore target queued by a selection
 const closeCalendarRestoringFocus: StateAction = (context) => ({
   isOpen: false,
   restoreFocusTo: context.shouldRestoreFocus ? context.restoreFocusTo : null,
   shouldRestoreFocus: context.shouldRestoreFocus,
 });
 
-/* -------------------------------------------------------------------------- *
+/*
  * Shared event groups
- * -------------------------------------------------------------------------- */
+ */
 
-/** Grid navigation - identical wherever the calendar grid holds focus */
+// Grid navigation - identical wherever the calendar grid holds focus
 const gridNavigation: Record<string, StateAction> = {
   ARROW_UP: moveFocus(byDays(-7), 'min'),
   ARROW_DOWN: moveFocus(byDays(7), 'max'),
@@ -331,15 +331,15 @@ const gridNavigation: Record<string, StateAction> = {
   END_KEY: moveFocus(toEndOfWeek, 'max'),
 };
 
-/** Month paging from the calendar header controls */
+// Month paging from the calendar header controls
 const monthNavigation: Record<string, StateAction> = {
   PREV_MONTH: shiftView({ months: -1 }, { carryFocus: true }),
   NEXT_MONTH: shiftView({ months: 1 }, { carryFocus: true }),
 };
 
-/* -------------------------------------------------------------------------- *
+/*
  * State map
- * -------------------------------------------------------------------------- */
+ */
 
 /**
  * Actions for state transitions
@@ -553,24 +553,24 @@ export const actions: ActionMap = {
   },
 
   [DatePickerState.DISABLED]: {
-    /** Action for a DISABLE event */
+    // Action for a DISABLE event
     DISABLE: () => ({
       isDisabled: true,
       isOpen: false,
     }),
-    /** Action for ENABLE event */
+    // Action for ENABLE event
     ENABLE: () => ({
       isDisabled: false,
     }),
   },
 
   [DatePickerState.READONLY]: {
-    /** Action for SET_READONLY event */
+    // Action for SET_READONLY event
     SET_READONLY: () => ({
       isReadonly: true,
       isOpen: false,
     }),
-    /** Action for UNSET_READONLY event */
+    // Action for UNSET_READONLY event
     UNSET_READONLY: () => ({
       isReadonly: false,
     }),
@@ -591,12 +591,12 @@ export const actions: ActionMap = {
         errorMessage: payload?.message || 'Invalid date',
       };
     },
-    /** Action for CLEAR_ERROR event */
+    // Action for CLEAR_ERROR event
     CLEAR_ERROR: () => ({
       isInvalid: false,
       errorMessage: undefined,
     }),
-    /** Action for VALUE_CHANGE event */
+    // Action for VALUE_CHANGE event
     VALUE_CHANGE: () => ({
       isInvalid: false,
       errorMessage: undefined,
