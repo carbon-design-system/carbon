@@ -953,10 +953,11 @@ $list-box-menu-width: convert.to-rem(300px);
   .#{$prefix}--list-box__wrapper--slug .#{$prefix}--ai-label::after,
   .#{$prefix}--list-box__wrapper--slug .#{$prefix}--slug::after {
     position: absolute;
-    background-color: $border-subtle-01;
+     background-color: $border-subtle-01;
+    border-inline-start: 1px solid $border-subtle-01;
     block-size: convert.to-rem(16px);
     content: '';
-    inline-size: convert.to-rem(1px);
+    inline-size: 0;
   }
 
   .#{$prefix}--list-box__wrapper--decorator
@@ -1228,10 +1229,10 @@ $list-box-menu-width: convert.to-rem(300px);
   .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__menu-icon)
     .#{$prefix}--list-box__selection::after {
     position: absolute;
-    background-color: $border-subtle-01;
+    border-inline-start: 1px solid $border-subtle-01;
     block-size: convert.to-rem(16px);
     content: '';
-    inline-size: convert.to-rem(1px);
+    inline-size: 0;
     margin-inline-start: convert.to-rem(33px);
   }
 
@@ -1240,10 +1241,10 @@ $list-box-menu-width: convert.to-rem(300px);
     .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__menu-icon)
       .#{$prefix}--list-box__selection::before {
       position: absolute;
-      background-color: $border-subtle-01;
+      border-inline-start: 1px solid $border-subtle-01;
       block-size: convert.to-rem(16px);
       content: '';
-      inline-size: convert.to-rem(1px);
+      inline-size: 0;
       margin-inline-end: convert.to-rem(33px);
     }
   }
