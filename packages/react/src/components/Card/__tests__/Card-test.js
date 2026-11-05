@@ -638,6 +638,45 @@ describe('CardTitle', () => {
     expect(screen.getByText('My Title')).toBeInTheDocument();
   });
 
+  it('renders the title as an h2 heading by default', () => {
+    render(
+      <Card>
+        <CardHeader>
+          <CardTitle>My Title</CardTitle>
+        </CardHeader>
+      </Card>
+    );
+    expect(
+      screen.getByRole('heading', { level: 2, name: 'My Title' })
+    ).toBeInTheDocument();
+  });
+
+  it('renders the title with the heading level provided by `as`', () => {
+    render(
+      <Card>
+        <CardHeader>
+          <CardTitle as="h4">My Title</CardTitle>
+        </CardHeader>
+      </Card>
+    );
+    expect(
+      screen.getByRole('heading', { level: 4, name: 'My Title' })
+    ).toBeInTheDocument();
+  });
+
+  it('does not include the label or description in the heading', () => {
+    render(
+      <Card>
+        <CardHeader>
+          <CardTitle label="Category" description="A description">
+            My Title
+          </CardTitle>
+        </CardHeader>
+      </Card>
+    );
+    expect(screen.getByRole('heading')).toHaveTextContent(/^My Title$/);
+  });
+
   it('renders label when provided', () => {
     render(
       <Card>

@@ -435,6 +435,8 @@
   // ─── Title text row ──────────────────────────────────────────────────
   .#{$prefix}--card__title-text-row {
     display: block;
+    // Rendered as a heading element; drop the user-agent margins.
+    margin-block: 0;
     overflow-wrap: break-word;
   }
 
