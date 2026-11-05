@@ -7,7 +7,8 @@
     "paths": {},
     "include": ["code-connect/**/*.figma.ts", "code-connect/**/*.figma.tsx"],
     "documentUrlSubstitutions": {
-      "https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/": "https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/"
+      "https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/": "https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/",
+      "https://www.figma.com/design/0F9dKH2abAd7gSfvnacfWf/": "https://www.figma.com/design/0F9dKH2abAd7gSfvnacfWf/"
     },
     "label": "React",
     "language": "jsx"
