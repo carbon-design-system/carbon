@@ -1,3 +1,7 @@
+// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=2346-16194&t=wcK3P98b09VsrxXF-4
+// source=https://github.com/carbon-design-system/carbon/blob/main/packages/web-components/src/components/ui-shell/side-nav-menu-item.ts
+// component=cds-side-nav-menu-item
+
 /**
  * Copyright IBM Corp. 2026
  *
@@ -5,85 +9,89 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import figma, { html } from '@figma/code-connect/html';
+import figma from 'figma';
+import {
+  renderBooleanAttribute,
+  renderStringAttribute,
+} from '../template-helpers';
 
-figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=2346-16194&t=wcK3P98b09VsrxXF-4',
-  {
-    props: {
-      linkText: figma.string('Link text'),
-      isActive: figma.enum('State', {
-        Active: true,
-      }),
-    },
-    example: (props) =>
-      html`<cds-side-nav-menu-item href="#" active=${props.isActive}>
-        ${props.linkText}
-      </cds-side-nav-menu-item>`,
+const instance = figma.selectedInstance;
+
+function createTemplate() {
+  const linkText = instance.getString('Link text');
+  const isActive = instance.getEnum('State', {
+    Active: true,
+  });
+  const isSubMenu = instance.getEnum('Type', {
+    'Sub-menu': true,
+  });
+  const isDivider = instance.getEnum('Type', {
+    Divider: true,
+  });
+  const hasIcon = instance.getEnum('Icon left', {
+    True: true,
+  });
+
+  if (isDivider) {
+    return {
+      id: 'cds-side-nav-divider',
+      imports: [
+        "import '@carbon/web-components/es/components/ui-shell/index.js'",
+      ],
+      example: figma.code`<cds-side-nav-divider></cds-side-nav-divider>`,
+      metadata: { nestable: true },
+    };
+  }
+
+  if (isSubMenu) {
+    return {
+      id: 'cds-side-nav-menu',
+      imports: [
+        "import '@carbon/web-components/es/components/ui-shell/index.js'",
+      ],
+      example: figma.code`<cds-side-nav-menu${renderStringAttribute(
+        'title',
+        linkText
+      )}${renderBooleanAttribute('active', isActive)}>${
+        hasIcon
+          ? figma.code`
+  <span slot="title-icon">IconName</span>`
+          : null
+      }
+  <cds-side-nav-menu-item href="#">Nested link</cds-side-nav-menu-item>
+</cds-side-nav-menu>`,
+      metadata: { nestable: true },
+    };
+  }
+
+  if (hasIcon) {
+    return {
+      id: 'cds-side-nav-link',
+      imports: [
+        "import '@carbon/web-components/es/components/ui-shell/index.js'",
+      ],
+      example: figma.code`<cds-side-nav-link href="#"${renderBooleanAttribute(
+        'active',
+        isActive
+      )}>
+  <span slot="title-icon">IconName</span>
+  ${linkText}
+</cds-side-nav-link>`,
+      metadata: { nestable: true },
+    };
+  }
+
+  return {
+    id: 'cds-side-nav-menu-item',
     imports: [
       "import '@carbon/web-components/es/components/ui-shell/index.js'",
     ],
-  }
-);
+    example: figma.code`<cds-side-nav-menu-item href="#"${renderBooleanAttribute(
+      'active',
+      isActive
+    )}>${linkText}</cds-side-nav-menu-item>`,
+    metadata: { nestable: true },
+  };
+}
 
-figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=2346-16194&t=wcK3P98b09VsrxXF-4',
-  {
-    variant: { 'Icon left': 'True' },
-    props: {
-      linkText: figma.string('Link text'),
-      isActive: figma.enum('State', {
-        Active: true,
-      }),
-    },
-    example: (props) =>
-      html`<cds-side-nav-link href="#" active=${props.isActive}>
-        <span slot="title-icon">IconName</span>
-        ${props.linkText}
-      </cds-side-nav-link>`,
-    imports: [
-      "import '@carbon/web-components/es/components/ui-shell/index.js'",
-    ],
-  }
-);
-
-figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=2346-16194&t=wcK3P98b09VsrxXF-4',
-  {
-    variant: { Type: 'Sub-menu' },
-    props: {
-      linkText: figma.string('Link text'),
-      isActive: figma.enum('State', {
-        Active: true,
-      }),
-    },
-    example: (props) =>
-      html`<cds-side-nav-menu title=${props.linkText} active=${props.isActive}>
-        <cds-side-nav-menu-item href="#">Nested link</cds-side-nav-menu-item>
-      </cds-side-nav-menu>`,
-    imports: [
-      "import '@carbon/web-components/es/components/ui-shell/index.js'",
-    ],
-  }
-);
-
-figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=2346-16194&t=wcK3P98b09VsrxXF-4',
-  {
-    variant: { Type: 'Sub-menu', 'Icon left': 'True' },
-    props: {
-      linkText: figma.string('Link text'),
-      isActive: figma.enum('State', {
-        Active: true,
-      }),
-    },
-    example: (props) =>
-      html`<cds-side-nav-menu title=${props.linkText} active=${props.isActive}>
-        <span slot="title-icon">IconName</span>
-        <cds-side-nav-menu-item href="#">Nested link</cds-side-nav-menu-item>
-      </cds-side-nav-menu>`,
-    imports: [
-      "import '@carbon/web-components/es/components/ui-shell/index.js'",
-    ],
-  }
-);
+export default createTemplate();

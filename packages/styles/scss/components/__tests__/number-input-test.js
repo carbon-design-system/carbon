@@ -50,28 +50,23 @@ describe('scss/components/number-input', () => {
       css = result.css.toString();
     });
 
-    describe('AI label and decorator', () => {
-      test('applies to the decorator, ai-label and slug selectors', () => {
-        const selectors = [
-          '.cds--number__input-wrapper--decorator .cds--number__input-inner-wrapper--decorator > *',
-          '.cds--number__input-wrapper--slug .cds--ai-label',
-          '.cds--number__input-wrapper--slug .cds--slug',
-        ];
+    describe('decorator', () => {
+      test('applies inline-end margin to the decorator', () => {
+        const styles = declarationsForSelector(
+          css,
+          '.cds--number__input-wrapper--decorator .cds--number__input-inner-wrapper--decorator > *'
+        );
 
-        selectors.forEach((value) => {
-          const styles = declarationsForSelector(css, value);
-
-          expect(styles['margin-inline-end']).toBeDefined();
-        });
+        expect(styles['margin-inline-end']).toBeDefined();
       });
     });
 
     describe('invalid and warning icon', () => {
       test.each([
-        ['xs', 72],
-        ['sm', 88],
-        ['md', 92],
-        ['lg', 116],
+        ['xs', 76],
+        ['sm', 92],
+        ['md', 96],
+        ['lg', 124],
       ])(
         'sits next to the decorator when one is present for %s (%ipx)',
         (size, expected) => {
@@ -83,31 +78,14 @@ describe('scss/components/number-input', () => {
           expect(toPx(styles['inset-inline-end'], SIZES[size])).toBe(expected);
         }
       );
-
-      test.each([
-        ['xs', 72],
-        ['sm', 88],
-        ['md', 92],
-        ['lg', 116],
-      ])(
-        'sits next to the AI label when one is present for %s (%ipx)',
-        (size, expected) => {
-          const styles = declarationsForSelector(
-            css,
-            '.cds--number__input-wrapper--slug .cds--number__invalid'
-          );
-
-          expect(toPx(styles['inset-inline-end'], SIZES[size])).toBe(expected);
-        }
-      );
     });
 
     describe('input padding', () => {
       test.each([
-        ['xs', 96],
-        ['sm', 112],
-        ['md', 116],
-        ['lg', 140],
+        ['xs', 100],
+        ['sm', 116],
+        ['md', 120],
+        ['lg', 148],
       ])(
         'end padding is 8px clear of the icon when a decorator is also present for %s (%ipx)',
         (size, expected) => {
@@ -123,54 +101,16 @@ describe('scss/components/number-input', () => {
       );
 
       test.each([
-        ['xs', 96],
-        ['sm', 112],
-        ['md', 116],
-        ['lg', 140],
-      ])(
-        'end padding is 8px clear of the icon when an AI label is also present for %s (%ipx)',
-        (size, expected) => {
-          const styles = declarationsForSelector(
-            css,
-            '.cds--number .cds--number__input-wrapper--slug input[data-invalid]'
-          );
-
-          expect(toPx(styles['padding-inline-end'], SIZES[size])).toBe(
-            expected
-          );
-        }
-      );
-
-      test.each([
-        ['xs', 96],
-        ['sm', 112],
-        ['md', 116],
-        ['lg', 140],
+        ['xs', 100],
+        ['sm', 116],
+        ['md', 120],
+        ['lg', 148],
       ])(
         'end padding is 8px clear of the warning icon when a decorator is also present for %s (%ipx)',
         (size, expected) => {
           const styles = declarationsForSelector(
             css,
             '.cds--number .cds--number__input-wrapper--decorator.cds--number__input-wrapper--warning input'
-          );
-
-          expect(toPx(styles['padding-inline-end'], SIZES[size])).toBe(
-            expected
-          );
-        }
-      );
-
-      test.each([
-        ['xs', 96],
-        ['sm', 112],
-        ['md', 116],
-        ['lg', 140],
-      ])(
-        'end padding is 8px clear of the warning icon when an AI label is also present for %s (%ipx)',
-        (size, expected) => {
-          const styles = declarationsForSelector(
-            css,
-            '.cds--number .cds--number__input-wrapper--slug.cds--number__input-wrapper--warning input'
           );
 
           expect(toPx(styles['padding-inline-end'], SIZES[size])).toBe(
