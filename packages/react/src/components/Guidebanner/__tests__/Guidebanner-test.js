@@ -153,16 +153,21 @@ describe(componentName, () => {
 
     // starts expanded (open: true is in defaultProps)
     expect(toggleButton).toHaveAttribute('aria-expanded', 'true');
+    const controlledId = toggleButton.getAttribute('aria-controls');
+    expect(controlledId).toBeTruthy();
+    expect(document.getElementById(controlledId)).toBeInTheDocument();
 
     // Collapses on click
     fireEvent.click(toggleButton);
     expect(toggleButton).toHaveTextContent('Read more');
     expect(toggleButton).toHaveAttribute('aria-expanded', 'false');
+    expect(toggleButton).not.toHaveAttribute('aria-controls');
 
     // Expands back on second click
     fireEvent.click(toggleButton);
     expect(toggleButton).toHaveTextContent('Read less');
     expect(toggleButton).toHaveAttribute('aria-expanded', 'true');
+    expect(toggleButton).toHaveAttribute('aria-controls', controlledId);
   });
 
   it('renders the close button and triggers the onClose callback when provided', () => {
