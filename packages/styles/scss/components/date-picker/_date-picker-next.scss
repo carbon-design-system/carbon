@@ -311,6 +311,7 @@
     outline: none;
 
     @if enabled('enable-v12-release') {
+      padding: $spacing-02;
       border: 1px solid $border-subtle;
       border-radius: $border-radius-08;
     }
@@ -326,6 +327,10 @@
     align-items: center;
     justify-content: space-between;
     margin-block-end: $spacing-03;
+
+    @if enabled('enable-v12-release') {
+      margin-block-end: $spacing-02;
+    }
   }
 
   .#{$prefix}--date-picker__month-nav {
@@ -352,7 +357,7 @@
     }
 
     @if enabled('enable-v12-release') {
-      border-radius: $border-radius-04;
+      border-radius: $border-radius-max;
     }
   }
 
@@ -386,12 +391,55 @@
 
   // Days grid - 7 columns, 6 rows
   .#{$prefix}--date-picker__days {
+    position: relative;
+    z-index: 1;
     display: grid;
     gap: 0;
     grid-template-columns: repeat(7, 1fr);
+
+    @if enabled('enable-v12-release') {
+      row-gap: $spacing-02;
+
+      // Half-band behind start date connecting to the range on its right
+      // Only applies if the start date is not the last day of the week row
+      .#{$prefix}--date-picker__day.selected:not(:nth-child(7n)):has(
+          + .#{$prefix}--date-picker__day.inRange
+        ),
+      .#{$prefix}--date-picker__day.selected:not(:nth-child(7n)):has(
+          + .#{$prefix}--date-picker__day.selected
+        ) {
+        &::before {
+          position: absolute;
+          z-index: -1;
+          background-color: $highlight;
+          content: '';
+          inline-size: 50%;
+          inset-block: 0;
+          inset-inline-end: 0;
+        }
+      }
+
+      // Half-band behind end date connecting to the range on its left
+      // Only applies if the end date is not the first day of the week row
+      .#{$prefix}--date-picker__day.inRange
+        + .#{$prefix}--date-picker__day.selected:not(:nth-child(7n + 1)),
+      .#{$prefix}--date-picker__day.selected
+        + .#{$prefix}--date-picker__day.selected:not(:nth-child(7n + 1)) {
+        &::before {
+          position: absolute;
+          z-index: -1;
+          background-color: $highlight;
+          content: '';
+          inline-size: 50%;
+          inset-block: 0;
+          inset-inline-start: 0;
+        }
+      }
+    }
   }
 
   .#{$prefix}--date-picker__day {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -435,6 +483,10 @@
         inset-block-end: 4px;
         inset-inline-start: 50%;
         transform: translateX(-50%);
+
+        @if enabled('enable-v12-release') {
+          border-radius: $border-radius-max;
+        }
       }
     }
 
@@ -464,7 +516,23 @@
     }
 
     @if enabled('enable-v12-release') {
-      border-radius: $border-radius-04;
+      border-radius: $border-radius-max;
+
+      &.inRange {
+        border-radius: $border-radius-00;
+
+        // Leftmost button in week row (column 1)
+        &:nth-child(7n + 1) {
+          border-end-start-radius: $border-radius-04;
+          border-start-start-radius: $border-radius-04;
+        }
+
+        // Rightmost button in week row (column 7)
+        &:nth-child(7n) {
+          border-end-end-radius: $border-radius-04;
+          border-start-end-radius: $border-radius-04;
+        }
+      }
     }
   }
 }
