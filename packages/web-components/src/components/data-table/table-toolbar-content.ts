@@ -39,6 +39,15 @@ class CDSTableToolbarContent extends LitElement {
 
     if (changedProperties.has('size')) {
       [...this.children].forEach((e) => {
+        if (
+          !e.matches(
+            (this.constructor as typeof CDSTableToolbarContent)
+              .selectorToolbarActions
+          )
+        ) {
+          return;
+        }
+
         const size =
           this.size === 'md' || this.size === 'xl' ? 'lg' : this.size;
         e.setAttribute('size', size);
@@ -48,6 +57,13 @@ class CDSTableToolbarContent extends LitElement {
 
   render() {
     return html` <slot></slot> `;
+  }
+
+  /**
+   * The CSS selector to find actions that follow the toolbar size.
+   */
+  static get selectorToolbarActions() {
+    return `${prefix}-button, ${prefix}-table-toolbar-search, ${prefix}-overflow-menu`;
   }
 
   static styles = styles;
