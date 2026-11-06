@@ -13,8 +13,12 @@ import { litStyleLoader, litTemplateLoader } from '@mordech/vite-lit-loader';
 import glob from 'fast-glob';
 import remarkGfm from 'remark-gfm';
 import { productMigratedStoryGlobs } from '../product-migrated-components.mjs';
+import { getIbmAnalyticsHeads } from '../../../tasks/storybook-ibm-analytics.mjs';
 
 const configDir = fileURLToPath(new URL('.', import.meta.url));
+const { managerAnalyticsHead, previewAnalyticsHead } = getIbmAnalyticsHeads(
+  'CarbonWebComponentsStorybook'
+);
 
 const stories = glob.sync(
   [
@@ -35,6 +39,9 @@ const stories = glob.sync(
 );
 
 const config: StorybookConfig = {
+  // `head` contains manager-head.html/preview-head.html
+  managerHead: (head) => `${head}${managerAnalyticsHead}`,
+  previewHead: (head) => `${head}${previewAnalyticsHead}`,
   stories: stories,
   addons: [
     'storybook-addon-accessibility-checker',
