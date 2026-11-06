@@ -9,7 +9,7 @@ import React, { Children, isValidElement, useRef } from 'react';
 import classNames from 'classnames';
 import { useDatePicker } from '../hooks/useDatePicker';
 import { usePrefix } from '../../../../internal/usePrefix';
-import { Calendar } from './Calendar';
+import { Calendar, type CalendarProps } from './Calendar';
 import { formatPlainDate } from '@carbon/utilities/date-picker';
 import type { DatePickerInputProps } from './DatePickerInput';
 
@@ -42,6 +42,11 @@ export interface DatePickerProps {
    * Locale for date formatting
    */
   locale?: string;
+
+  /**
+   * Translates the calendar grid and month navigation labels.
+   */
+  translateWithId?: CalendarProps['translateWithId'];
 
   /**
    * Whether the picker is read-only
@@ -110,6 +115,7 @@ export function DatePicker({
   minDate,
   maxDate,
   locale = 'en',
+  translateWithId,
   readOnly = false,
   light = false,
   short = false,
@@ -294,6 +300,7 @@ export function DatePicker({
             onDateSelect={selectDate}
             onNavigate={handleNavigate}
             locale={locale}
+            translateWithId={translateWithId}
           />
         </div>
       )}
