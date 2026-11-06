@@ -28,6 +28,12 @@ import * as FileUploaderStories from './file-uploader.stories';
 
 ## Overview
 
+When `size` is omitted, upload buttons and file items inherit their size from
+the surrounding
+[layout context](../?path=/docs/preview-preview-layout--overview), within their
+supported size ranges. Without a size context, each component uses its default
+size. An explicit `size` takes precedence over the inherited size.
+
 <Canvas of={FileUploaderStories.Default} />
 
 ## Drag And Drop

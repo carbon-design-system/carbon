@@ -25,16 +25,14 @@ const kind = {
   [`Ghost button (${BUTTON_KIND.GHOST})`]: BUTTON_KIND.GHOST,
 };
 
-const states = {
-  [`Upload in progress (${FILE_UPLOADER_ITEM_STATE.UPLOADING})`]:
-    FILE_UPLOADER_ITEM_STATE.UPLOADING,
-  [`Upload complete (${FILE_UPLOADER_ITEM_STATE.COMPLETE})`]:
-    FILE_UPLOADER_ITEM_STATE.COMPLETE,
-  [`Edit upload (${FILE_UPLOADER_ITEM_STATE.EDIT})`]:
-    FILE_UPLOADER_ITEM_STATE.EDIT,
-};
+const states = [
+  FILE_UPLOADER_ITEM_STATE.EDIT,
+  FILE_UPLOADER_ITEM_STATE.COMPLETE,
+  FILE_UPLOADER_ITEM_STATE.UPLOADING,
+];
 
 const sizes = {
+  [`xs (${BUTTON_SIZE.EXTRA_SMALL})`]: BUTTON_SIZE.EXTRA_SMALL,
   [`sm (${BUTTON_SIZE.SMALL})`]: BUTTON_SIZE.SMALL,
   [`md (${BUTTON_SIZE.MEDIUM})`]: BUTTON_SIZE.MEDIUM,
   [`lg (${BUTTON_SIZE.LARGE})`]: BUTTON_SIZE.LARGE,
@@ -133,7 +131,7 @@ const fileUploaderItemArgs = {
   errorSubject: 'File size exceeds limit',
   iconDescription: 'Delete file',
   invalid: false,
-  name: 'README.md',
+  name: 'THIS IS A VERY LONG FILENAME WHICH WILL BE TRUNCATED',
   size: FILE_UPLOADER_ITEM_SIZE.MEDIUM,
   state: FILE_UPLOADER_ITEM_STATE.EDIT,
 };
@@ -143,25 +141,31 @@ const fileUploaderItemArgTypes = {
     control: 'boolean',
     description: 'Controls the disabled state of this file uploader item.',
   },
-  errorBody: { control: 'text' },
-  errorSubject: { control: 'text' },
+  errorBody: {
+    control: 'text',
+    description: 'Error message body for an invalid file upload',
+  },
+  errorSubject: {
+    control: 'text',
+    description: 'Error message subject for an invalid file upload',
+  },
   iconDescription: { control: 'text' },
-  invalid: { control: 'boolean' },
-  name: { control: 'text' },
+  invalid: {
+    control: 'boolean',
+    description: 'Specify if the currently uploaded file is invalid',
+  },
+  name: { control: 'text', description: 'Name of the uploaded file' },
   onDelete: {
     action: `${prefix}-file-uploader-item-deleted`,
   },
   size: {
     control: 'select',
-    options: {
-      Small: FILE_UPLOADER_ITEM_SIZE.SMALL,
-      Medium: FILE_UPLOADER_ITEM_SIZE.MEDIUM,
-      Large: FILE_UPLOADER_ITEM_SIZE.LARGE,
-    },
+    options: Object.values(FILE_UPLOADER_ITEM_SIZE),
   },
   state: {
-    control: 'select',
+    control: 'inline-radio',
     options: states,
+    description: 'Status of the file upload',
   },
 };
 
@@ -310,6 +314,9 @@ export const FileUploaderDropContainer = {
 export const FileUploaderItem = {
   argTypes: { ...fileUploaderItemArgTypes },
   args: { ...fileUploaderItemArgs },
+  parameters: {
+    controls: { include: Object.keys(fileUploaderItemArgTypes) },
+  },
   render: (args) => {
     const {
       disabled,
@@ -325,11 +332,11 @@ export const FileUploaderItem = {
     return html`
       <cds-file-uploader-item
         ?disabled=${disabled}
-        error-body="${errorBody}"
-        error-subject="${errorSubject}"
+        error-body="${invalid ? errorBody : ''}"
+        error-subject="${invalid ? errorSubject : ''}"
         icon-description="${iconDescription}"
         ?invalid=${invalid}
-        size="${size}"
+        size="${ifDefined(size)}"
         state="${state}"
         @cds-file-uploader-item-deleted=${onDelete}>
         ${name}
