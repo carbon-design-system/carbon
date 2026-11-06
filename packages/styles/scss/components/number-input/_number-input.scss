@@ -135,14 +135,15 @@
 
   .#{$prefix}--number input[type='number']:disabled,
   .#{$prefix}--number input[type='text']:disabled {
-    background-color: $field;
-    color: $text-disabled;
-    cursor: not-allowed;
-
     @if enabled('enable-v12-release') {
       border: none;
       background: $field;
     }
+
+    background-color: $field;
+    border-block-end: convert.to-rem(1px) solid $border-subtle;
+    color: $text-disabled;
+    cursor: not-allowed;
   }
 
   .#{$prefix}--number__input-wrapper {
