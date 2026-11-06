@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -145,6 +145,11 @@ class CDSSideNav extends HostListenerMixin(LitElement) {
         forEach(headerItems, (item) => {
           item.removeAttribute('tabindex');
         });
+      }
+      // The rail can also be toggled by the header menu button, focus or the
+      // overlay, not just by hover, so re-sync the child menus here.
+      if (this.collapseMode === SIDE_NAV_COLLAPSE_MODE.RAIL) {
+        this._updatedSideNavMenuForceCollapsedState();
       }
     }
 

@@ -118,3 +118,51 @@ describe('cds-header-global-action', () => {
     });
   });
 });
+
+describe('cds-side-nav', () => {
+  it('should keep menus in sync when the rail is toggled with the header menu button', async () => {
+    const el = await fixture(html`
+      <div>
+        <cds-header-menu-button></cds-header-menu-button>
+        <cds-side-nav collapse-mode="rail">
+          <cds-side-nav-items>
+            <cds-side-nav-menu title="Menu" expanded>
+              <cds-side-nav-menu-item href="#">Item</cds-side-nav-menu-item>
+            </cds-side-nav-menu>
+          </cds-side-nav-items>
+        </cds-side-nav>
+      </div>
+    `);
+    const headerButton = el
+      .querySelector('cds-header-menu-button')
+      .shadowRoot.querySelector('button');
+    const sideNav = el.querySelector('cds-side-nav');
+    const menu = el.querySelector('cds-side-nav-menu');
+    const nav = sideNav.shadowRoot.querySelector('.cds--side-nav__navigation');
+    const expando = menu.shadowRoot.querySelector('button');
+    const settle = async () => {
+      await sideNav.updateComplete;
+      await menu.updateComplete;
+    };
+
+    // Open and close the rail with the mouse.
+    nav.dispatchEvent(new MouseEvent('mouseover', { bubbles: true }));
+    nav.dispatchEvent(new MouseEvent('mouseout', { bubbles: true }));
+    await settle();
+    expect(menu.forceCollapsed).to.be.true;
+
+    // Reopen it with the header menu button.
+    headerButton.click();
+    await settle();
+    expect(sideNav.expanded).to.be.true;
+    expect(menu.forceCollapsed).to.be.false;
+    expect(expando.getAttribute('aria-expanded')).to.equal('true');
+
+    // Close it again with the header menu button.
+    headerButton.click();
+    await settle();
+    expect(sideNav.expanded).to.be.false;
+    expect(menu.forceCollapsed).to.be.true;
+    expect(expando.getAttribute('aria-expanded')).to.equal('false');
+  });
+});
