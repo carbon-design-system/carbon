@@ -26,6 +26,27 @@ import { deprecate } from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { AccordionContext } from './AccordionProvider';
 
+// `TransitionEvent` is missing in some environments, such as jsdom, so fall
+// back to an `Event` that carries the same fields.
+const createTransitionEndEvent = (propertyName: string): Event => {
+  const init = {
+    bubbles: true,
+    propertyName,
+    elapsedTime: 0,
+    pseudoElement: '',
+  };
+  if (typeof TransitionEvent === 'function') {
+    return new TransitionEvent('transitionend', init);
+  }
+  const event = new Event('transitionend', { bubbles: true });
+  Object.defineProperties(event, {
+    propertyName: { value: propertyName },
+    elapsedTime: { value: 0 },
+    pseudoElement: { value: '' },
+  });
+  return event;
+};
+
 export interface AccordionItemProps {
   /**
    * Specify an optional className to be
@@ -175,7 +196,8 @@ function AccordionItem({
 
   // With `prefers-reduced-motion: reduce` the wrapper has no transition, so
   // the browser never emits `transitionend`. Emit it ourselves so that
-  // `handleAnimationEnd` still runs after the panel toggles.
+  // `handleAnimationEnd` still runs after the panel toggles, with the same
+  // event fields a finished transition would have.
   useEffect(() => {
     if (prevIsOpenRef.current === isOpen) {
       return;
@@ -190,7 +212,7 @@ function AccordionItem({
       return;
     }
     wrapperRef.current?.dispatchEvent(
-      new Event('transitionend', { bubbles: true })
+      createTransitionEndEvent('max-block-size')
     );
   }, [isOpen, handleAnimationEnd]);
 
