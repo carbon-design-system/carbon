@@ -47,6 +47,38 @@ describe('cds-side-nav-link', () => {
 
     expect(getComputedStyle(link).backgroundColor).to.equal(background);
   });
+
+  it('should render and handle a button when `as` is set to `button`', async () => {
+    const el = await fixture(
+      html`<cds-side-nav-link as="button">Button</cds-side-nav-link>`
+    );
+    let clicked = false;
+    el.addEventListener('click', () => {
+      clicked = true;
+    });
+    const button = el.shadowRoot.querySelector('button');
+
+    expect(button).to.have.class('cds--side-nav__link');
+    button.click();
+    expect(clicked).to.be.true;
+  });
+});
+
+describe('cds-side-nav-menu-item', () => {
+  it('should render and handle a button when `as` is set to `button`', async () => {
+    const el = await fixture(
+      html`<cds-side-nav-menu-item as="button">Button</cds-side-nav-menu-item>`
+    );
+    let clicked = false;
+    el.addEventListener('click', () => {
+      clicked = true;
+    });
+    const button = el.shadowRoot.querySelector('button');
+
+    expect(button).to.have.class('cds--side-nav__link');
+    button.click();
+    expect(clicked).to.be.true;
+  });
 });
 
 describe('cds-header-global-action', () => {

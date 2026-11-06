@@ -28,6 +28,7 @@ import { useAttachedMenu } from '../../../internal/useAttachedMenu';
 import { deprecate } from '../../../prop-types/deprecate';
 import { deprecateValuesWithin } from '../../../prop-types/deprecateValuesWithin';
 import { mapPopoverAlign } from '../../../tools/mapPopoverAlign';
+import { useAutoAlign } from '../../../internal/useAutoAlign';
 
 const defaultSize = 'md';
 
@@ -135,7 +136,7 @@ export interface OverflowMenuProps extends ComponentProps<'div'> {
 const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
   (
     {
-      autoAlign = false,
+      autoAlign: autoAlignProp,
       children,
       className,
       tooltipDefaultOpen,
@@ -156,6 +157,7 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
     },
     forwardRef
   ) => {
+    const autoAlign = useAutoAlign(autoAlignProp);
     const enableFloatingStyles =
       useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
 

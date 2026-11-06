@@ -50,8 +50,7 @@ th {
 
 :root { --header-height: 5.5rem; }
 
-// ── Header ───────────────────────────────────────────────────────────────────
-
+// Header
 .header {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -126,8 +125,7 @@ th {
   &:hover { background: #da1e28; color: #fff; }
 }
 
-// ── Fit to screen button ───────────────────────────────────────────────────────
-
+// Fit to screen button
 .fit-btn {
   position: fixed;
   inset-block-end: 1.5rem;
@@ -148,15 +146,13 @@ th {
   &:hover { background: #0f62fe; color: #fff; }
 }
 
-// ── Content ───────────────────────────────────────────────────────────────────
-
+// Content
 .content {
   padding-top: calc(var(--header-height) + 1rem);
   padding-bottom: 2rem;
 }
 
-// ── Swatch cell ───────────────────────────────────────────────────────────────
-
+// Swatch cell
 .color-cell {
   display: flex;
   align-items: center;
@@ -176,8 +172,7 @@ th {
   color: #161616;
 }
 
-// ── Token name ────────────────────────────────────────────────────────────────
-
+// Token name
 .token-name a {
   color: #0f62fe;
   text-decoration: none;
@@ -193,8 +188,7 @@ th {
   font-size: 0.875rem;
 }
 
-// ── Graph ─────────────────────────────────────────────────────────────────────
-
+// Graph
 .graph-hint {
   position: absolute;
   bottom: 1rem;

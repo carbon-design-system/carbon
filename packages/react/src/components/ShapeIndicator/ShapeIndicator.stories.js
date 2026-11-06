@@ -95,7 +95,6 @@ export const Default = (args) => {
 
 Default.args = {
   align: 'right',
-  autoAlign: false,
   compact: false,
   shapeDescription: 'Shape',
   textSize: 12,
@@ -128,7 +127,6 @@ export const DefaultWithTextSize14 = (args) => {
 
 DefaultWithTextSize14.args = {
   align: 'right',
-  autoAlign: false,
   compact: false,
   shapeDescription: 'Shape',
   textSize: 14,
