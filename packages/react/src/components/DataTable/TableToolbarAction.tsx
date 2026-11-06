@@ -9,7 +9,9 @@ import PropTypes from 'prop-types';
 import React, { forwardRef, type Ref } from 'react';
 import { useFeatureFlag } from '../FeatureFlags';
 import { MenuItem, type MenuItemProps } from '../Menu';
-import OverflowMenuItem from '../OverflowMenuItem';
+import OverflowMenuItem, {
+  type OverflowMenuItemProps,
+} from '../OverflowMenuItem/OverflowMenuItem';
 
 export interface TableToolbarActionProps
   extends Omit<React.HTMLAttributes<HTMLElement>, 'onClick'> {
@@ -51,12 +53,14 @@ const TableToolbarAction = frFn((props, ref) => {
     );
   }
 
+  const overflowMenuItemProps = rest as OverflowMenuItemProps;
+
   return (
     <OverflowMenuItem
       ref={ref as Ref<HTMLElement>}
       itemText={children}
       onClick={onClick as React.MouseEventHandler<HTMLDivElement>}
-      {...rest}
+      {...overflowMenuItemProps}
     />
   );
 });
