@@ -227,6 +227,11 @@ describe('AccordionItem', () => {
       await userEvent.click(screen.getByRole('button'));
 
       expect(handleAnimationEnd).toHaveBeenCalledTimes(1);
+      expect(handleAnimationEnd.mock.calls[0][0]).toMatchObject({
+        type: 'transitionend',
+        propertyName: 'max-block-size',
+        elapsedTime: 0,
+      });
     });
 
     it('should not call handleAnimationEnd on toggle when reduced motion is not preferred', async () => {
