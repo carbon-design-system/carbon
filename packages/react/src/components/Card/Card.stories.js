@@ -1014,9 +1014,12 @@ export const WithHeaderActions = () => (
       <Card>
         <Card.Header
           actions={
-            <Card.Actions>
+            <Card.Actions overflowMenuLabel="More actions for Usage metrics">
               <Card.Action>
-                <Button kind="tertiary" size="sm">
+                <Button
+                  kind="tertiary"
+                  size="sm"
+                  aria-label="Action for Usage metrics">
                   Action
                 </Button>
               </Card.Action>
@@ -1031,25 +1034,34 @@ export const WithHeaderActions = () => (
       <Card>
         <Card.Header
           actions={
-            <Card.Actions>
+            <Card.Actions overflowMenuLabel="More actions for Usage exports">
               <Card.Action>
-                <Button kind="tertiary" size="sm">
+                <Button
+                  kind="tertiary"
+                  size="sm"
+                  aria-label="Export for Usage exports">
                   Export
                 </Button>
               </Card.Action>
               <Card.Action>
-                <Button kind="tertiary" size="sm">
+                <Button
+                  kind="tertiary"
+                  size="sm"
+                  aria-label="Share for Usage exports">
                   Share
                 </Button>
               </Card.Action>
               <Card.Action>
-                <Button kind="tertiary" size="sm">
+                <Button
+                  kind="tertiary"
+                  size="sm"
+                  aria-label="View report for Usage exports">
                   View report
                 </Button>
               </Card.Action>
             </Card.Actions>
           }>
-          <Card.Title>Usage metrics</Card.Title>
+          <Card.Title>Usage exports</Card.Title>
         </Card.Header>
         <Card.Body>Exports available in CSV, JSON, and PDF.</Card.Body>
       </Card>
