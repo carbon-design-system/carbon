@@ -293,7 +293,10 @@ export const Default = {
           })}
           {...(showAILabel && {
             decorator: (
-              <AILabel align="bottom" size="xs">
+              <AILabel
+                align="bottom"
+                size="xs"
+                aria-label={`Show information for ${title}`}>
                 <AILabelContent>
                   <div>
                     <h3 className="card-story__ai-heading secondary">
@@ -665,7 +668,10 @@ export const WithAILabel = () => (
     <Column lg={4} md={4} sm={4}>
       <Card
         decorator={
-          <AILabel align="bottom" size="xs">
+          <AILabel
+            align="bottom"
+            size="xs"
+            aria-label="Show information for Usage Analytics">
             <AILabelContent>
               <div>
                 <h3 className="card-story__ai-heading secondary">
@@ -697,7 +703,10 @@ export const WithAILabel = () => (
     <Column lg={4} md={4} sm={4}>
       <Card
         decorator={
-          <AILabel align="bottom" size="xs">
+          <AILabel
+            align="bottom"
+            size="xs"
+            aria-label="Show information for Performance Insights">
             <AILabelContent>
               <div>
                 <h3 className="card-story__ai-heading secondary">
@@ -731,7 +740,10 @@ export const WithAILabel = () => (
     <Column lg={4} md={4} sm={4}>
       <Card
         decorator={
-          <AILabel align="bottom" size="xs">
+          <AILabel
+            align="bottom"
+            size="xs"
+            aria-label="Show information for Smart Recommendations">
             <AILabelContent>
               <div>
                 <h3 className="card-story__ai-heading secondary">
