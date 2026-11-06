@@ -28,4 +28,14 @@ describe('cds-progress-bar', () => {
     expect(bar.style.transform).to.equal('none');
     expect(bar.style.inlineSize).to.equal('');
   });
+
+  it('should not report aria-busy when status is error', async () => {
+    const el = await fixture(html`
+      <cds-progress-bar value="50" status="error"></cds-progress-bar>
+    `);
+    const track = el.shadowRoot.querySelector('[role="progressbar"]');
+
+    expect(track.getAttribute('aria-invalid')).to.equal('true');
+    expect(track.getAttribute('aria-busy')).to.equal('false');
+  });
 });
