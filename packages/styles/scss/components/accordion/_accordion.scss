@@ -270,6 +270,7 @@ $content-padding: 0 0 0 $spacing-05 !default;
   @starting-style {
     .#{$prefix}--accordion__item--active {
       > .#{$prefix}--accordion__wrapper {
+        overflow: hidden;
         padding: 0;
         max-block-size: 0;
         opacity: 0;
