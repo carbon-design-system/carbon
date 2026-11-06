@@ -54,4 +54,30 @@ describe('scss/components/aspect-ratio', () => {
     );
     expect(selectors).toHaveLength(4);
   });
+
+  test('emits base ratios before responsive ratios in breakpoint order', async () => {
+    const { result } = await render(`
+      @use '../aspect-ratio';
+    `);
+    const selectors = [];
+
+    postcss.parse(result.css.toString()).walkRules((rule) => {
+      if (rule.selector.startsWith('.cds--aspect-ratio--')) {
+        selectors.push(rule.selector);
+      }
+    });
+
+    expect(selectors.indexOf('.cds--aspect-ratio--1x1::before')).toBeLessThan(
+      selectors.indexOf('.cds--aspect-ratio--md--16x9::before')
+    );
+    expect(
+      selectors.indexOf('.cds--aspect-ratio--md--1x1::before')
+    ).toBeLessThan(selectors.indexOf('.cds--aspect-ratio--lg--16x9::before'));
+    expect(
+      selectors.indexOf('.cds--aspect-ratio--lg--1x1::before')
+    ).toBeLessThan(selectors.indexOf('.cds--aspect-ratio--xlg--16x9::before'));
+    expect(
+      selectors.indexOf('.cds--aspect-ratio--xlg--1x1::before')
+    ).toBeLessThan(selectors.indexOf('.cds--aspect-ratio--max--16x9::before'));
+  });
 });
