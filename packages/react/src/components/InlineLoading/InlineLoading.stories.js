@@ -115,7 +115,6 @@ export const Default = (args) => <InlineLoading {...args} />;
 
 Default.args = {
   description: 'Loading',
-  iconDescription: 'Loading data...',
   status: 'active',
   onSuccess: action('onSuccess'),
   'aria-live': 'assertive',
