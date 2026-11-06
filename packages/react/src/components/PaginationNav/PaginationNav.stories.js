@@ -71,3 +71,22 @@ Default.argTypes = {
     },
   },
 };
+
+export const WithTranslations = () => {
+  const translations = {
+    'carbon.pagination-nav.next': 'Weiter',
+    'carbon.pagination-nav.previous': 'Zurück',
+    'carbon.pagination-nav.item': 'Seite',
+    'carbon.pagination-nav.active': 'Aktiv',
+    'carbon.pagination-nav.of': 'von',
+  };
+
+  return (
+    <PaginationNav
+      totalItems={20}
+      itemsShown={5}
+      page={9}
+      translateWithId={(id) => translations[id]}
+    />
+  );
+};

@@ -8,7 +8,7 @@
 import React from 'react';
 import PaginationNav from './PaginationNav';
 import userEvent from '@testing-library/user-event';
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
@@ -161,6 +161,128 @@ describe('PaginationNav', () => {
         document.querySelector('.cds--popover--right-end')
       ).toBeInTheDocument();
     });
+  });
+
+  describe('translateWithId', () => {
+    const messages = {
+      'carbon.pagination-nav.next': '下一頁',
+      'carbon.pagination-nav.previous': '上一頁',
+      'carbon.pagination-nav.item': '頁',
+      'carbon.pagination-nav.active': '目前',
+      'carbon.pagination-nav.of': '共',
+    };
+    const translateWithId = (messageId) => {
+      if (!Object.hasOwn(messages, messageId)) {
+        throw new Error(`Unexpected translation key: ${messageId}`);
+      }
+      return messages[messageId];
+    };
+
+    it('should translate both enabled overflow selectors', () => {
+      render(
+        <PaginationNav
+          totalItems={20}
+          itemsShown={5}
+          page={9}
+          translateWithId={translateWithId}
+        />
+      );
+
+      const selects = screen.getAllByRole('combobox', {
+        name: 'Select 頁 number',
+      });
+      expect(selects).toHaveLength(2);
+      for (const select of selects) {
+        expect(select).toBeEnabled();
+      }
+      expect(
+        screen.getByRole('button', { name: /目前, 頁\s*10$/ })
+      ).toHaveAttribute('aria-current', 'page');
+      expect(within(selects[0]).getByRole('option', { name: '2' })).toHaveValue(
+        '1'
+      );
+      expect(
+        within(selects[1]).getByRole('option', { name: '19' })
+      ).toHaveValue('18');
+    });
+
+    it('should translate both disabled overflow selectors without options', () => {
+      render(
+        <PaginationNav
+          totalItems={20}
+          itemsShown={5}
+          page={9}
+          disableOverflow
+          translateWithId={translateWithId}
+        />
+      );
+
+      const selects = screen.getAllByRole('combobox', {
+        name: 'Select 頁 number',
+      });
+      expect(selects).toHaveLength(2);
+      for (const select of selects) {
+        expect(select).toBeDisabled();
+        expect(within(select).queryAllByRole('option')).toHaveLength(0);
+      }
+      expect(
+        screen.getByRole('button', { name: /目前, 頁\s*10$/ })
+      ).toHaveAttribute('aria-current', 'page');
+    });
+
+    it.each([
+      { overflow: 'front', selectIndex: 0, value: '1', page: 2 },
+      { overflow: 'back', selectIndex: 1, value: '18', page: 19 },
+    ])(
+      'should preserve page selection through the translated $overflow overflow',
+      async ({ selectIndex, value, page }) => {
+        const onChange = jest.fn();
+        render(
+          <PaginationNav
+            totalItems={20}
+            itemsShown={5}
+            page={9}
+            translateWithId={translateWithId}
+            onChange={onChange}
+          />
+        );
+
+        const select = screen.getAllByRole('combobox', {
+          name: 'Select 頁 number',
+        })[selectIndex];
+        const option = within(select).getByRole('option', {
+          name: String(page),
+        });
+        expect(option).toHaveValue(value);
+        await userEvent.selectOptions(select, option);
+
+        expect(onChange).toHaveBeenCalledTimes(1);
+        expect(onChange).toHaveBeenCalledWith(Number(value));
+        expect(
+          screen.getByRole('button', {
+            name: new RegExp(`目前, 頁\\s*${page}$`),
+          })
+        ).toHaveAttribute('aria-current', 'page');
+      }
+    );
+
+    it.each([false, true])(
+      'should preserve both default overflow labels when disableOverflow is %s',
+      (disableOverflow) => {
+        render(
+          <PaginationNav
+            totalItems={20}
+            itemsShown={5}
+            page={9}
+            disableOverflow={disableOverflow}
+          />
+        );
+
+        expect(
+          screen.getAllByRole('combobox', { name: 'Select Page number' })
+        ).toHaveLength(2);
+      }
+    );
   });
 
   describe('behaves as expected', () => {

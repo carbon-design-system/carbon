@@ -15,6 +15,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 - [Overview](#overview)
 - [Component API](#component-api)
+- [Translations](#translations)
 - [Feedback](#feedback)
 
 {/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
@@ -35,6 +36,25 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 ## Component API
 
 <ArgTypes />
+
+## Translations
+
+Use `translateWithId` to translate the following messages, including the page
+label used by the overflow controls:
+
+| Message ID                       | Default value |
+| -------------------------------- | ------------- |
+| `carbon.pagination-nav.next`     | `Next`        |
+| `carbon.pagination-nav.previous` | `Previous`    |
+| `carbon.pagination-nav.item`     | `Page`        |
+| `carbon.pagination-nav.active`   | `Active`      |
+| `carbon.pagination-nav.of`       | `of`          |
+
+The overflow select label currently combines `Select `, the translated
+`carbon.pagination-nav.item`, and ` number`. The prefix and suffix are not
+translated by this callback.
+
+<Canvas of={PaginationNavStories.WithTranslations} />
 
 ## Feedback
 
