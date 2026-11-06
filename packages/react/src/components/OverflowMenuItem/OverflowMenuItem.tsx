@@ -30,8 +30,6 @@ type AnchorAttributeProps = Omit<
   'href' | 'type'
 >;
 
-type AnchorOnlyProps = AnchorAttributeProps;
-
 interface OverflowMenuItemBaseProps extends HTMLAttributes<HTMLElement> {
   /**
    * The CSS class name to be placed on the button element
@@ -102,7 +100,7 @@ type ButtonAttributeProps = Pick<
 >;
 
 type ButtonOnlyProps = {
-  [key in keyof AnchorOnlyProps]?: never;
+  [key in keyof AnchorAttributeProps]?: never;
 };
 
 export type OverflowMenuItemProps =
