@@ -20,7 +20,12 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 @customElement(`${prefix}-copy`)
 class CDSCopy extends CDSIconButton {
   /**
-   * Animation state for feedback tooltip.
+   * `true` to show the feedback tooltip and announce feedback.
+   */
+  private _showFeedback = false;
+
+  /**
+   * Animation state for feedback tooltip CSS classes.
    */
   private _animation = '';
 
@@ -30,7 +35,6 @@ class CDSCopy extends CDSIconButton {
       buttonClasses?.remove(`${prefix}--copy-btn--animating`);
       buttonClasses?.remove(`${prefix}--copy-btn--${this._animation}`);
       this._animation = '';
-      this.requestUpdate();
     }
   };
 
@@ -43,11 +47,13 @@ class CDSCopy extends CDSIconButton {
         clearTimeout(timeoutId);
         timeoutId = undefined;
       }
+      this._showFeedback = true;
       buttonClasses?.add(`${prefix}--copy-btn--animating`);
       this._animation = 'fade-in';
       buttonClasses?.add(`${prefix}--copy-btn--${this._animation}`);
       this.requestUpdate();
       timeoutId = setTimeout(() => {
+        this._showFeedback = false;
         this._animation = 'fade-out';
         buttonClasses?.remove(`${prefix}--copy-btn--fade-in`);
         buttonClasses?.add(`${prefix}--copy-btn--${this._animation}`);
@@ -83,7 +89,7 @@ class CDSCopy extends CDSIconButton {
   protected _renderTooltipContent() {
     return html`
       <cds-tooltip-content>
-        ${this._animation
+        ${this._showFeedback
           ? this.feedback
           : html`<slot name="tooltip-content"></slot>`}
       </cds-tooltip-content>
@@ -94,21 +100,17 @@ class CDSCopy extends CDSIconButton {
     this.closeOnActivation = false;
 
     this.addEventListener('click', this._handleClickButton);
+    this.shadowRoot?.addEventListener('animationend', this._handleAnimationEnd);
 
     super.connectedCallback();
   }
 
-  firstUpdated(changedProperties) {
-    super.firstUpdated?.(changedProperties);
-    this.shadowRoot
-      ?.querySelector('button')
-      ?.addEventListener('animationend', this._handleAnimationEnd);
-  }
-
   disconnectedCallback() {
-    this.shadowRoot
-      ?.querySelector('button')
-      ?.removeEventListener('animationend', this._handleAnimationEnd);
+    this.removeEventListener('click', this._handleClickButton);
+    this.shadowRoot?.removeEventListener(
+      'animationend',
+      this._handleAnimationEnd
+    );
     super.disconnectedCallback();
   }
 
@@ -133,10 +135,10 @@ class CDSCopy extends CDSIconButton {
       this.getAttribute('aria-label') ||
       'Copy to clipboard';
 
-    // When feedback animation is active, dynamically update the button's aria-label
+    // When feedback is active, dynamically update the button's aria-label
     // to the feedback message (e.g. "Copied!") so VoiceOver and other screen readers
     // immediately announce the action confirmation.
-    const currentLabel = this._animation ? this.feedback : initialLabel;
+    const currentLabel = this._showFeedback ? this.feedback : initialLabel;
 
     this.shadowRoot
       ?.querySelector('button')

@@ -289,6 +289,43 @@ describe('Feedback', () => {
       { timeout: 3000 }
     );
   });
+
+  it('should continue to handle feedback when disconnected and reconnected to DOM', async () => {
+    const container = await fixture(html`
+      <div>
+        <cds-copy-button
+          icon-description="Copy to clipboard"
+          feedback="Copied!"
+          feedback-timeout="200">
+        </cds-copy-button>
+      </div>
+    `);
+
+    const el = container.querySelector('cds-copy-button');
+    const copyComponent = el?.shadowRoot?.querySelector('cds-copy');
+    await el?.updateComplete;
+    await copyComponent?.updateComplete;
+
+    // Disconnect and reconnect
+    el?.remove();
+    container.appendChild(el);
+    await el?.updateComplete;
+    await copyComponent?.updateComplete;
+
+    const button = copyComponent?.shadowRoot?.querySelector('button');
+    expect(button?.getAttribute('aria-label')).to.equal('Copy to clipboard');
+
+    button?.click();
+    await copyComponent?.updateComplete;
+
+    expect(button?.getAttribute('aria-label')).to.equal('Copied!');
+
+    await waitUntil(
+      () => button?.getAttribute('aria-label') === 'Copy to clipboard',
+      'Expected aria-label to revert after timeout after reconnect',
+      { timeout: 3000 }
+    );
+  });
 });
 
 describe('autoAlign', () => {
