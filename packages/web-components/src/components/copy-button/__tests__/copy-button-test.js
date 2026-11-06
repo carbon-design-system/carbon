@@ -232,6 +232,100 @@ describe('Feedback', () => {
     );
     await expect(el).shadowDom.to.equalSnapshot();
   });
+
+  it('should update button aria-label to feedback message when clicked and revert after timeout', async () => {
+    const el = await fixture(html`
+      <cds-copy-button
+        icon-description="Copy to clipboard"
+        feedback="Copied!"
+        feedback-timeout="200">
+      </cds-copy-button>
+    `);
+
+    const copyComponent = el.shadowRoot?.querySelector('cds-copy');
+    await el.updateComplete;
+    await copyComponent?.updateComplete;
+
+    const button = copyComponent?.shadowRoot?.querySelector('button');
+    expect(button?.getAttribute('aria-label')).to.equal('Copy to clipboard');
+
+    button?.click();
+    await copyComponent?.updateComplete;
+
+    expect(button?.getAttribute('aria-label')).to.equal('Copied!');
+
+    await waitUntil(
+      () => button?.getAttribute('aria-label') === 'Copy to clipboard',
+      'Expected aria-label to revert to icon description',
+      { timeout: 3000 }
+    );
+  });
+
+  it('should support custom feedback in button aria-label', async () => {
+    const customFeedback = 'Custom feedback message';
+    const el = await fixture(html`
+      <cds-copy-button
+        icon-description="Copy code"
+        feedback="${customFeedback}"
+        feedback-timeout="200">
+      </cds-copy-button>
+    `);
+
+    const copyComponent = el.shadowRoot?.querySelector('cds-copy');
+    await el.updateComplete;
+    await copyComponent?.updateComplete;
+
+    const button = copyComponent?.shadowRoot?.querySelector('button');
+    expect(button?.getAttribute('aria-label')).to.equal('Copy code');
+
+    button?.click();
+    await copyComponent?.updateComplete;
+
+    expect(button?.getAttribute('aria-label')).to.equal(customFeedback);
+
+    await waitUntil(
+      () => button?.getAttribute('aria-label') === 'Copy code',
+      'Expected aria-label to revert to custom icon description',
+      { timeout: 3000 }
+    );
+  });
+
+  it('should continue to handle feedback when disconnected and reconnected to DOM', async () => {
+    const container = await fixture(html`
+      <div>
+        <cds-copy-button
+          icon-description="Copy to clipboard"
+          feedback="Copied!"
+          feedback-timeout="200">
+        </cds-copy-button>
+      </div>
+    `);
+
+    const el = container.querySelector('cds-copy-button');
+    const copyComponent = el?.shadowRoot?.querySelector('cds-copy');
+    await el?.updateComplete;
+    await copyComponent?.updateComplete;
+
+    // Disconnect and reconnect
+    el?.remove();
+    container.appendChild(el);
+    await el?.updateComplete;
+    await copyComponent?.updateComplete;
+
+    const button = copyComponent?.shadowRoot?.querySelector('button');
+    expect(button?.getAttribute('aria-label')).to.equal('Copy to clipboard');
+
+    button?.click();
+    await copyComponent?.updateComplete;
+
+    expect(button?.getAttribute('aria-label')).to.equal('Copied!');
+
+    await waitUntil(
+      () => button?.getAttribute('aria-label') === 'Copy to clipboard',
+      'Expected aria-label to revert after timeout after reconnect',
+      { timeout: 3000 }
+    );
+  });
 });
 
 describe('autoAlign', () => {

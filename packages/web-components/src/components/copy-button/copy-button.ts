@@ -74,6 +74,13 @@ class CDSCopyButton extends AutoAlignMixin(
   feedbackTimeout = 2000;
 
   /**
+   * Provide a description for the icon representing the copy action that can
+   * be read by screen readers
+   */
+  @property({ attribute: 'icon-description' })
+  iconDescription = 'Copy to clipboard';
+
+  /**
    * Specify the size of the Button. Defaults to `lg`.
    */
   @property({ reflect: true })
