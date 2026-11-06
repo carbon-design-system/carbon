@@ -1206,6 +1206,83 @@ describe('DataTable', () => {
           'Field 3:A!',
         ]);
       });
+
+      it('should never use mismatched headers and rows for render props while syncing new props', () => {
+        const childrenSpy = jest.fn(() => null);
+        const initialHeaders = [
+          { key: 'fieldA', header: 'Field A' },
+          { key: 'fieldB', header: 'Field B' },
+        ];
+        const initialRows = [
+          { id: 'a', fieldA: 'A:1', fieldB: 'B:1' },
+          { id: 'b', fieldA: 'A:2', fieldB: 'B:2' },
+        ];
+        const nextHeaders = [
+          { key: 'fieldB', header: 'Field B' },
+          { key: 'fieldC', header: 'Field C' },
+        ];
+        const nextRows = [
+          { id: 'a', fieldB: 'B:1', fieldC: 'C:1' },
+          { id: 'b', fieldB: 'B:2', fieldC: 'C:2' },
+          { id: 'c', fieldB: 'B:3', fieldC: 'C:3' },
+        ];
+
+        const { rerender } = render(
+          <DataTable headers={initialHeaders} rows={initialRows}>
+            {childrenSpy}
+          </DataTable>
+        );
+
+        // Every render must use headers and rows from the same version:
+        // each row has exactly one cell per header, in header order.
+        const expectCellsToMatchHeaders = ({ headers, rows }) => {
+          const headerKeys = headers.map((header) => header.key);
+          rows.forEach((row) => {
+            expect(row.cells.map((cell) => cell.info.header)).toEqual(
+              headerKeys
+            );
+          });
+        };
+
+        childrenSpy.mock.calls.forEach(([renderProps]) =>
+          expectCellsToMatchHeaders(renderProps)
+        );
+        childrenSpy.mockClear();
+
+        rerender(
+          <DataTable headers={nextHeaders} rows={nextRows}>
+            {childrenSpy}
+          </DataTable>
+        );
+
+        const calls = childrenSpy.mock.calls.map(
+          ([renderProps]) => renderProps
+        );
+
+        // The render that happens before the sync effect still exposes the
+        // previous version of both headers and rows.
+        expect(calls.length).toBeGreaterThan(1);
+        expect(calls[0].headers.map((header) => header.key)).toEqual([
+          'fieldA',
+          'fieldB',
+        ]);
+        expect(calls[0].rows.map((row) => row.id)).toEqual(['a', 'b']);
+
+        calls.forEach(expectCellsToMatchHeaders);
+
+        // The render that happens after the sync effect still uses the
+        // new versions of both headers and rows.
+        const lastCall = calls[calls.length - 1];
+        expect(lastCall.headers.map((header) => header.key)).toEqual([
+          'fieldB',
+          'fieldC',
+        ]);
+        expect(lastCall.rows.map((row) => row.id)).toEqual(['a', 'b', 'c']);
+        expect(lastCall.rows[2].cells.map((cell) => cell.value)).toEqual([
+          'B:3',
+          'C:3',
+        ]);
+      });
     });
 
     describe('row click behavior', () => {
