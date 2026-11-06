@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp.  2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -115,6 +115,44 @@ describe('cds-inline-loading', function () {
 
     const title = el.shadowRoot.querySelector('title');
     expect(title.textContent).to.equal('Custom loading text');
+  });
+
+  it('should give each status icon its own default label', async () => {
+    const el = await fixture(inlineLoading);
+    await el.updateComplete;
+    expect(el.shadowRoot.querySelector('title').textContent).to.equal(
+      'Loading'
+    );
+
+    el.status = 'finished';
+    await el.updateComplete;
+    expect(
+      el.shadowRoot
+        .querySelector('.cds--inline-loading__checkmark-container')
+        .getAttribute('aria-label')
+    ).to.equal('finished');
+
+    el.status = 'error';
+    await el.updateComplete;
+    expect(
+      el.shadowRoot
+        .querySelector('.cds--inline-loading--error')
+        .getAttribute('aria-label')
+    ).to.equal('error');
+  });
+
+  it('should use icon-description for every status icon', async () => {
+    const el = await fixture(
+      html`<cds-inline-loading
+        status="error"
+        icon-description="Upload failed"></cds-inline-loading>`
+    );
+    await el.updateComplete;
+    expect(
+      el.shadowRoot
+        .querySelector('.cds--inline-loading--error')
+        .getAttribute('aria-label')
+    ).to.equal('Upload failed');
   });
 
   it('should render different states correctly', async () => {
