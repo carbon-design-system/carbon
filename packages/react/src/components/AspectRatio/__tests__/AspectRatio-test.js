@@ -46,7 +46,17 @@ describe('AspectRatio', () => {
     });
 
     it('should respect ratio prop', () => {
-      const ratios = ['16x9', '9x16', '2x1', '1x2', '4x3', '3x4', '1x1'];
+      const ratios = [
+        '16x9',
+        '9x16',
+        '2x1',
+        '1x2',
+        '4x3',
+        '3x4',
+        '3x2',
+        '2x3',
+        '1x1',
+      ];
 
       ratios.forEach((ratio) => {
         render(
@@ -57,6 +67,28 @@ describe('AspectRatio', () => {
           `cds--aspect-ratio--${ratio}`
         );
       });
+    });
+
+    it('should respect responsive ratio props', () => {
+      render(
+        <AspectRatio
+          ratio="1x1"
+          ratioSm="2x1"
+          ratioMd="4x3"
+          ratioLg="16x9"
+          ratioXlg="3x2"
+          ratioMax="2x3"
+          data-testid="aspect-ratio"
+        />
+      );
+
+      expect(screen.getByTestId('aspect-ratio')).toHaveClass(
+        'cds--aspect-ratio--2x1',
+        'cds--aspect-ratio--md--4x3',
+        'cds--aspect-ratio--lg--16x9',
+        'cds--aspect-ratio--xlg--3x2',
+        'cds--aspect-ratio--max--2x3'
+      );
     });
   });
 });
