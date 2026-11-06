@@ -104,6 +104,14 @@
     vertical-align: baseline;
   }
 
+  sup {
+    vertical-align: super;
+  }
+
+  sub {
+    vertical-align: sub;
+  }
+
   // Chrome 62 fix
   button,
   select,

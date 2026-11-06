@@ -6,7 +6,7 @@
  */
 
 /**
- * Offical useSyncExternalStore shim for React <18
+ * Official useSyncExternalStore shim for React <18
  * @see https://github.com/reactwg/react-18/discussions/86
  */
 import React from 'react';

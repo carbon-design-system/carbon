@@ -1676,6 +1676,9 @@ Map {
   "ComposedModal" => {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": {
+      "aria-describedby": {
+        "type": "string",
+      },
       "aria-label": {
         "type": "string",
       },
@@ -2824,6 +2827,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "toolbarLabel": {
+        "type": "string",
+      },
       "zebra": {
         "type": "bool",
       },
@@ -3635,6 +3641,9 @@ Map {
         "type": "bool",
       },
       "enableTreeviewControllable": {
+        "type": "bool",
+      },
+      "enableV12Autoalign": {
         "type": "bool",
       },
       "enableV12DynamicFloatingStyles": {
@@ -5268,6 +5277,9 @@ Map {
       "rows": {
         "type": "number",
       },
+      "translateWithId": {
+        "type": "func",
+      },
       "value": {
         "args": [
           [
@@ -5352,6 +5364,9 @@ Map {
       },
       "readOnly": {
         "type": "bool",
+      },
+      "translateWithId": {
+        "type": "func",
       },
       "value": {
         "args": [
@@ -5920,6 +5935,9 @@ Map {
       "closeOnActivation": {
         "type": "bool",
       },
+      "dangerDescription": {
+        "type": "string",
+      },
       "defaultOpen": {
         "type": "bool",
       },
@@ -5946,6 +5964,10 @@ Map {
           [
             "primary",
             "secondary",
+            "danger",
+            "danger--primary",
+            "danger--ghost",
+            "danger--tertiary",
             "ghost",
             "tertiary",
           ],
@@ -5985,8 +6007,12 @@ Map {
   "IconButtonKinds" => {
     "0": "primary",
     "1": "secondary",
-    "2": "ghost",
-    "3": "tertiary",
+    "2": "danger",
+    "3": "danger--primary",
+    "4": "danger--ghost",
+    "5": "danger--tertiary",
+    "6": "ghost",
+    "7": "tertiary",
   },
   "IconSkeleton" => {
     "propTypes": {
@@ -7509,6 +7535,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -7571,6 +7598,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -9442,6 +9470,7 @@ Map {
     },
   },
   "Slider" => {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": {
       "ariaLabelInput": {
         "type": "string",
@@ -9544,6 +9573,7 @@ Map {
         "type": "node",
       },
     },
+    "render": [Function],
   },
   "SliderSkeleton" => {
     "propTypes": {
@@ -10717,6 +10747,9 @@ Map {
         "type": "oneOf",
       },
       "slug": [Function],
+      "tabIndex": {
+        "type": "number",
+      },
       "title": [Function],
       "type": {
         "args": [
@@ -10839,6 +10872,9 @@ Map {
         "type": "number",
       },
       "slug": [Function],
+      "translateWithId": {
+        "type": "func",
+      },
       "value": {
         "args": [
           [
@@ -10950,6 +10986,9 @@ Map {
         "type": "oneOf",
       },
       "slug": [Function],
+      "translateWithId": {
+        "type": "func",
+      },
       "type": {
         "type": "string",
       },
@@ -11904,6 +11943,9 @@ Map {
         "type": "bool",
       },
       "enableTreeviewControllable": {
+        "type": "bool",
+      },
+      "enableV12Autoalign": {
         "type": "bool",
       },
       "enableV12DynamicFloatingStyles": {
@@ -13474,6 +13516,9 @@ Map {
       "rows": {
         "type": "number",
       },
+      "translateWithId": {
+        "type": "func",
+      },
       "value": {
         "args": [
           [
@@ -13558,6 +13603,9 @@ Map {
       },
       "readOnly": {
         "type": "bool",
+      },
+      "translateWithId": {
+        "type": "func",
       },
       "value": {
         "args": [
@@ -14209,6 +14257,9 @@ Map {
         "type": "bool",
       },
       "enableTreeviewControllable": {
+        "type": "bool",
+      },
+      "enableV12Autoalign": {
         "type": "bool",
       },
       "enableV12DynamicFloatingStyles": {
@@ -15514,6 +15565,9 @@ Map {
       "rows": {
         "type": "number",
       },
+      "translateWithId": {
+        "type": "func",
+      },
       "value": {
         "args": [
           [
@@ -15598,6 +15652,9 @@ Map {
       },
       "readOnly": {
         "type": "bool",
+      },
+      "translateWithId": {
+        "type": "func",
       },
       "value": {
         "args": [

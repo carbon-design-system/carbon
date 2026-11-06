@@ -16,12 +16,19 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/border-radius' as *;
 @use '@carbon/styles/scss/components/form';
 @use '@carbon/styles/scss/components/number-input/index';
+@use '@carbon/styles/scss/components/number-input/vars' as *;
 @use '@carbon/styles/scss/components/fluid-number-input' as *;
 @use '@carbon/styles/scss/utilities/ai-gradient' as *;
+@use '@carbon/styles/scss/utilities/layout' as *;
+@use '@carbon/styles/scss/utilities/layout';
 @use '@carbon/styles/scss/spacing' as *;
+
+@include emit-layout-context-classes();
 
 :host(#{$prefix}-number-input),
 :host(#{$prefix}-number-input-skeleton) {
+  @include emit-layout-tokens();
+
   // the base text-input class has a 100% so we need to propagate it up to the host element
   display: flex;
   flex-direction: column;
@@ -67,7 +74,15 @@ $css--plex: true !default;
   ::slotted(#{$prefix}-slug) {
     position: absolute;
     inset-block-start: 50%;
-    inset-inline-end: $spacing-12;
+    @if flags.enabled('enable-v12-release') {
+      inset-inline-end: calc(
+        #{$number-input-controls-width} + #{layout.size('icon-gap')}
+      );
+    } @else {
+      inset-inline-end: calc(
+        2 * layout.size('height') + #{$number-input-ai-label-gap}
+      );
+    }
   }
   ::slotted(#{$prefix}-ai-label:not([revert-active])),
   ::slotted(#{$prefix}-slug:not([revert-active])) {
@@ -85,7 +100,7 @@ $css--plex: true !default;
       block-size: 100%;
       content: '';
       inline-size: to-rem(1px);
-      inset-inline-start: -#{$spacing-05};
+      inset-inline-start: calc(-1 * #{$number-input-ai-label-gap});
 
       @if flags.enabled('enable-v12-release') {
         display: none;
@@ -104,8 +119,6 @@ $css--plex: true !default;
 }
 :host(#{$prefix}-number-input[ai-label]) input {
   @include ai-gradient;
-
-  padding-inline-end: to-rem(145px);
 
   @if flags.enabled('enable-v12-release') {
     // Reset the bottom-edge color override from @include ai-gradient so the

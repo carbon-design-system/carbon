@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,7 +10,7 @@ import React from 'react';
 import SideNavLink from '../SideNavLink';
 
 describe('SideNavLink', () => {
-  it('should set the current class when `isActive` is true', () => {
+  it('should set the current class and aria-current when `isActive` is true', () => {
     render(
       <SideNavLink href="/" isActive>
         test
@@ -19,6 +19,30 @@ describe('SideNavLink', () => {
     expect(screen.getByRole('link')).toHaveClass(
       'cds--side-nav__link--current'
     );
+    expect(screen.getByRole('link')).toHaveAttribute('aria-current', 'page');
+  });
+
+  it('should not set aria-current when `isActive` is not true', () => {
+    render(<SideNavLink href="/">test</SideNavLink>);
+    expect(screen.getByRole('link')).not.toHaveAttribute('aria-current');
+  });
+
+  it('should keep a consumer-provided `aria-current` when `isActive` is true', () => {
+    render(
+      <SideNavLink href="/" isActive aria-current="true">
+        test
+      </SideNavLink>
+    );
+    expect(screen.getByRole('link')).toHaveAttribute('aria-current', 'true');
+  });
+
+  it('should set aria-current on a button rendered through `as` when `isActive` is true', () => {
+    render(
+      <SideNavLink as="button" type="button" isActive>
+        test
+      </SideNavLink>
+    );
+    expect(screen.getByRole('button')).toHaveAttribute('aria-current', 'page');
   });
 
   it('should support a custom icon through `renderIcon`', () => {
@@ -60,5 +84,22 @@ describe('SideNavLink', () => {
       </SideNavLink>
     );
     expect(ref).toHaveBeenCalledWith(screen.getByRole('link'));
+  });
+
+  it('should support rendering a button through the `as` prop', () => {
+    const onClick = jest.fn();
+
+    render(
+      <SideNavLink as="button" type="button" onClick={onClick}>
+        test
+      </SideNavLink>
+    );
+
+    screen.getByRole('button').click();
+
+    expect(screen.getByRole('button')).toHaveClass('cds--side-nav__link', {
+      exact: true,
+    });
+    expect(onClick).toHaveBeenCalledTimes(1);
   });
 });

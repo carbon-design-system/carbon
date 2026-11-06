@@ -4,10 +4,10 @@
 
 1. Download and install [GitHub Desktop](https://desktop.github.com/)
 2. Run the GitHub Desktop application
-3. Click the button labeled 'Sign in to Github.com'. This will open your browser
+3. Click the button labeled 'Sign in to GitHub.com'. This will open your browser
    and take you to an authorization page.
 4. Click the 'Authorize desktop' button, which may prompt you for your
-   Github.com password
+   GitHub.com password
 5. You will be asked to configure your Git installation. Set your username and
    email then click the button labeled 'Continue'
 6. Agree or disagree to periodic usage stats
@@ -49,9 +49,9 @@
    in the bottom left).
 5. Once you're finished with your work committed. Click the button on the right
    of the application labeled 'Publish branch'. This will push all your work
-   you've done locally to your forked copy of the repository on Github.com.
+   you've done locally to your forked copy of the repository on GitHub.com.
 6. Then click the 'Create Pull Request' button that replaced the previous button
-   which will take you to Github.com
+   which will take you to GitHub.com
 7. Here you can fill out the pull request title and template. After you're done
    click 'Create pull request' and you're done!
 8. If you want to amend or add more work to your pull request repeat steps 3 and

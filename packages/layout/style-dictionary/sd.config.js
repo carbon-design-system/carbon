@@ -22,13 +22,13 @@ const { default: StyleDictionary } = require('style-dictionary');
 const scssFormats = require('./formats/scss-layout');
 const carbonJsLayout = require('./formats/js-layout');
 
-// ── Paths ─────────────────────────────────────────────────────────────────────
+// Paths
 const ROOT = path.resolve(__dirname, '..');
 const TOKENS_SOURCE = path.join(ROOT, 'tokens', 'layout.tokens.json');
 const SCSS_GENERATED = path.join(ROOT, 'scss', 'generated');
 const JS_GENERATED = path.join(ROOT, 'js', 'generated');
 
-// ── Custom name transform ─────────────────────────────────────────────────────
+// Custom name transform
 // Uses only the token's own key (last path segment) as the name, discarding
 // the group prefix. With DTCG groups, path is ["spacing", "spacing-01"] so
 // joining would produce "spacing-spacing-01" — we want just "spacing-01".
@@ -40,7 +40,7 @@ const carbonNameKebab = {
   },
 };
 
-// ── Custom value transform ────────────────────────────────────────────────────
+// Custom value transform
 // Converts a token's $value to a CSS value string.
 //   dimension: { value, unit } → "0.125rem"
 //   number:    the number, followed by the `com.ibm.carbon` layout unit when
@@ -58,14 +58,14 @@ const carbonCssValue = {
   },
 };
 
-// ── Transform group ───────────────────────────────────────────────────────────
+// Transform group
 const CARBON_TRANSFORMS = [
   'attribute/cti',
   'carbon/name-kebab',
   'carbon/css-value',
 ];
 
-// ── SD config ─────────────────────────────────────────────────────────────────
+// SD config
 const config = {
   source: [TOKENS_SOURCE],
   platforms: {
@@ -107,7 +107,7 @@ const config = {
   },
 };
 
-// ── Build a registered SD instance ────────────────────────────────────────────
+// Build a registered SD instance
 function createInstance() {
   const sd = new StyleDictionary({});
   sd.registerTransform(carbonNameKebab);
@@ -118,7 +118,7 @@ function createInstance() {
   return sd;
 }
 
-// ── run ───────────────────────────────────────────────────────────────────────
+// run
 async function run() {
   const sd = await createInstance().extend(config);
   await sd.buildAllPlatforms();

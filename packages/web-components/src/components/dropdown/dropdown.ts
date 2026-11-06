@@ -14,6 +14,7 @@ import { iconLoader } from '../../globals/internal/icon-loader';
 import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
 import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
 import ChevronDown16 from '@carbon/icons/es/chevron--down/16.js';
+import AutoAlignMixin from '../../globals/mixins/auto-align';
 import FocusMixin from '../../globals/mixins/focus';
 import FormMixin from '../../globals/mixins/form';
 import HostListenerMixin from '../../globals/mixins/host-listener';
@@ -64,8 +65,8 @@ export {
  * @fires cds-dropdown-toggled - The custom event fired after the open state of this dropdown is toggled upon a user gesture.
  */
 @customElement(`${prefix}-dropdown`)
-class CDSDropdown extends ValidityMixin(
-  HostListenerMixin(FormMixin(FocusMixin(LitElement)))
+class CDSDropdown extends AutoAlignMixin(
+  ValidityMixin(HostListenerMixin(FormMixin(FocusMixin(LitElement))))
 ) {
   /**
    * `true` if there is an AI Label.
@@ -150,7 +151,7 @@ class CDSDropdown extends ValidityMixin(
   private _slotSlugNode!: HTMLSlotElement;
 
   /**
-   * @param itemToSelect A dropdown item. Absense of this argument means clearing selection.
+   * @param itemToSelect A dropdown item. Absence of this argument means clearing selection.
    * @returns `true` if the selection of this dropdown should change if the given item is selected upon user interaction.
    */
   protected _selectionShouldChange(itemToSelect?: CDSDropdownItem) {
@@ -162,7 +163,7 @@ class CDSDropdown extends ValidityMixin(
    *
    * @param itemToSelect
    *   A dropdown item.
-   *   Absense of this argument means clearing selection, which may be handled by a derived class.
+   *   Absence of this argument means clearing selection, which may be handled by a derived class.
    */
   protected _selectionDidChange(itemToSelect?: CDSDropdownItem) {
     const constructor = this.constructor as typeof CDSDropdown;
@@ -285,6 +286,8 @@ class CDSDropdown extends ValidityMixin(
               const menu = this.shadowRoot?.getElementById('menu-body');
               if (shouldKeepInputFocus && menuInputNode) {
                 menuInputNode.focus({ preventScroll: true });
+              } else if (initialItem) {
+                initialItem.focus();
               } else if (menu) {
                 menu.focus();
               }
@@ -304,13 +307,10 @@ class CDSDropdown extends ValidityMixin(
           break;
         case DROPDOWN_KEYBOARD_ACTION.NAVIGATING: {
           event.preventDefault();
-          const menu = this.shadowRoot?.getElementById('menu-body');
           const menuInputNode = this._menuInputNode;
           const shouldKeepInputFocus = this._shouldRetainMenuInputFocus(event);
           if (shouldKeepInputFocus && menuInputNode) {
             menuInputNode.focus({ preventScroll: true });
-          } else if (menu) {
-            menu.focus();
           }
           this._navigate(NAVIGATION_DIRECTION[key]);
           break;
@@ -632,7 +632,7 @@ class CDSDropdown extends ValidityMixin(
   /**
    * Handles user-initiated selection of a dropdown item.
    *
-   * @param [item] The dropdown item user wants to select. Absense of this argument means clearing selection.
+   * @param [item] The dropdown item user wants to select. Absence of this argument means clearing selection.
    */
   protected _handleUserInitiatedSelectItem(item?: CDSDropdownItem) {
     if (item?.hasAttribute('disabled')) {
@@ -783,6 +783,27 @@ class CDSDropdown extends ValidityMixin(
       const dropdownItem = listItem as CDSDropdownItem;
       dropdownItem.highlighted = dropdownItem === target;
       dropdownItem.removeAttribute('highlighted-next-sibling');
+      dropdownItem.setAttribute(
+        'tabindex',
+        dropdownItem === target ? '0' : '-1'
+      );
+    });
+
+    this._activeDescendant = target?.id;
+
+    const trigger = this.shadowRoot?.getElementById('trigger-button');
+    const input = this._menuInputNode;
+    const menu = this.shadowRoot?.getElementById('menu-body');
+    const focusTargets = [input, trigger, menu].filter(
+      Boolean
+    ) as (HTMLElement & {
+      ariaActiveDescendantElement?: Element | null;
+    })[];
+
+    focusTargets.forEach((node) => {
+      if ('ariaActiveDescendantElement' in node) {
+        node.ariaActiveDescendantElement = target ?? null;
+      }
     });
 
     if (target) {
@@ -791,16 +812,9 @@ class CDSDropdown extends ValidityMixin(
         nextSibling.setAttribute('highlighted-next-sibling', '');
       }
 
-      const itemId = target.id;
-      if (itemId) {
-        this._activeDescendant = itemId;
-      }
-
       if (scrollIntoView) {
         target.scrollIntoView({ block: 'nearest' });
       }
-    } else {
-      this._activeDescendant = undefined;
     }
   }
 
@@ -879,6 +893,10 @@ class CDSDropdown extends ValidityMixin(
 
     const nextItem = items[nextIndex] as CDSDropdownItem;
     this._setHighlightedItem(nextItem, { scrollIntoView: true });
+
+    if (!this._supportsMenuInputFiltering || !this._menuInputNode) {
+      nextItem.focus();
+    }
   }
 
   /**
@@ -970,10 +988,11 @@ class CDSDropdown extends ValidityMixin(
   direction = DROPDOWN_DIRECTION.BOTTOM;
 
   /**
-   * Specify whether auto align functionality should be applied
+   * Specify whether auto-align is enabled. Defaults to `true` when
+   * `enable-v12-autoalign` is enabled, and to `false` otherwise.
    */
   @property({ type: Boolean, reflect: true })
-  autoalign = false;
+  autoalign?: boolean;
 
   /**
    * `true` if this dropdown should be disabled.
@@ -1275,7 +1294,7 @@ class CDSDropdown extends ValidityMixin(
       [`${prefix}--dropdown--inline`]: inline,
       [`${prefix}--dropdown--selected`]: selectedItemsCount > 0,
       [`${prefix}--list-box__wrapper--decorator`]: this._hasAILabel,
-      [`${prefix}--autoalign`]: autoalign,
+      [`${prefix}--autoalign`]: Boolean(autoalign),
     });
   }
 
@@ -1345,6 +1364,9 @@ class CDSDropdown extends ValidityMixin(
         part="menu-body"
         class="${prefix}--list-box__menu"
         role="listbox"
+        aria-activedescendant="${ifDefined(
+          open ? (activeDescendant ?? undefined) : undefined
+        )}"
         tabindex="-1"
         ?hidden=${!open}
         @mouseover=${handleMouseoverInner}

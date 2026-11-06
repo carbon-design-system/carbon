@@ -114,7 +114,6 @@ export default {
 
 const codeSnippetArgs = {
   align: 'bottom',
-  autoAlign: false,
   'aria-label': 'Copy to clipboard',
   copyButtonDescription: 'Copy to clipboard',
   copyText: '',

@@ -412,12 +412,15 @@ collect:
         - clickable
         - horizontal
         - renderFooterIcon
+        # CardHeader
+        - headerMedia
         # CardMedia
         - mediaWidth
         # CardTitle
         - descriptionTruncate
         - labelTruncate
         - maxWidth
+        - titleMedia
         # ChatButton
         - isQuickAction
         # ClickableTile
@@ -487,6 +490,7 @@ collect:
         - columnCount
         - showHeader
         - showToolbar
+        - toolbarLabel
         - zebra
         # DatePicker
         - allowInput
@@ -548,6 +552,7 @@ collect:
         - enableFocusWrapWithoutSentinels
         - enablePresence
         - enableTreeviewControllable
+        - enableV12Autoalign
         - enableV12DynamicFloatingStyles
         - enableV12Overflowmenu
         - enableV12Release
@@ -1080,6 +1085,9 @@ collect:
         - critical
         - custom
         - danger
+        - danger--ghost
+        - danger--primary
+        - danger--tertiary
         - default
         - disclosed
         - draft
