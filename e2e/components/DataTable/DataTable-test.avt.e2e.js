@@ -337,6 +337,19 @@ test.describe('@avt DataTable', () => {
   });
 
   test.describe('@avt toolbar', () => {
+    test('@avt-advanced-states with-ghost-action', async ({ page }) => {
+      await visitStory(page, {
+        component: 'DataTable',
+        id: 'components-datatable-toolbar--with-ghost-action',
+        globals: {
+          theme: 'white',
+        },
+      });
+      await expect(page).toHaveNoACViolations(
+        'components-datatable-toolbar--with-ghost-action'
+      );
+    });
+
     test('@avt-default-state', async ({ page }) => {
       await visitStory(page, {
         component: 'DataTable',

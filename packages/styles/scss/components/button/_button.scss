@@ -211,7 +211,6 @@
 
     .#{$prefix}--btn__icon {
       position: static;
-      align-self: center;
       margin-inline-start: $spacing-03;
     }
 
@@ -288,6 +287,15 @@
   .#{$prefix}--btn--sm:not(.#{$prefix}--btn--icon-only) .#{$prefix}--btn__icon,
   .#{$prefix}--btn--md:not(.#{$prefix}--btn--icon-only) .#{$prefix}--btn__icon {
     margin-block-start: 0;
+  }
+
+  .#{$prefix}--btn--ghost:not(.#{$prefix}--btn--icon-only)
+    .#{$prefix}--btn__icon,
+  .#{$prefix}--btn--danger--ghost:not(.#{$prefix}--btn--icon-only)
+    .#{$prefix}--btn__icon {
+    // Align with the first line even when the button is taller than its content.
+    align-self: flex-start;
+    margin-block-start: calc((var(--temp-1lh) - convert.to-rem(16px)) / 2);
   }
 
   .#{$prefix}--btn--icon-only.#{$prefix}--btn--selected {
@@ -448,6 +456,19 @@
   .#{$prefix}--btn.#{$prefix}--btn--expressive .#{$prefix}--btn__icon {
     block-size: convert.to-rem(20px);
     inline-size: convert.to-rem(20px);
+  }
+
+  .#{$prefix}--btn--ghost.#{$prefix}--btn--expressive:not(
+      .#{$prefix}--btn--icon-only
+    )
+    .#{$prefix}--btn__icon,
+  .#{$prefix}--btn--danger--ghost.#{$prefix}--btn--expressive:not(
+      .#{$prefix}--btn--icon-only
+    )
+    .#{$prefix}--btn__icon {
+    margin-block-start: calc(
+      (var(--temp-expressive-1lh) - convert.to-rem(20px)) / 2
+    );
   }
 
   .#{$prefix}--btn-set .#{$prefix}--btn.#{$prefix}--btn--expressive {
