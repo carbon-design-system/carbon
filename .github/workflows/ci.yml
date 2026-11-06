@@ -18,7 +18,7 @@ concurrency:
 
 jobs:
   dedupe:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Use Node.js version from .nvmrc
@@ -26,10 +26,12 @@ jobs:
         with:
           node-version-file: '.nvmrc'
       - name: Run yarn dedupe
+        env:
+          TMPDIR: ${{ runner.temp }}
         run: yarn dedupe --check
 
   format:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Use Node.js version from .nvmrc
@@ -50,12 +52,15 @@ jobs:
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
+          TMPDIR: ${{ runner.temp }}
         run: yarn install --immutable
       - name: Check formatting of project files
+        env:
+          TMPDIR: ${{ runner.temp }}
         run: yarn format:diff
 
   lint:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Use Node.js version from .nvmrc
@@ -76,14 +81,19 @@ jobs:
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
+          TMPDIR: ${{ runner.temp }}
         run: yarn install --immutable
       - name: Lint code
+        env:
+          TMPDIR: ${{ runner.temp }}
         run: yarn lint
       - name: Lint styles
+        env:
+          TMPDIR: ${{ runner.temp }}
         run: yarn lint:styles
 
   test:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Use Node.js version from .nvmrc
@@ -105,16 +115,25 @@ jobs:
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
+          TMPDIR: ${{ runner.temp }}
         run: yarn install --immutable
       - name: Build project
+        env:
+          TMPDIR: ${{ runner.temp }}
         run: yarn build
       - name: Check generated styles
+        env:
+          TMPDIR: ${{ runner.temp }}
         run: |
           yarn carbon-cli check --ignore '**/@(node_modules|examples|components|react|fixtures|compat)/**' 'packages/**/*.scss'
       - name: Run tests
-        run: yarn test --ci --collectCoverage
+        env:
+          TMPDIR: ${{ runner.temp }}
+        run: yarn test --ci --collectCoverage --cacheDirectory=${{ github.workspace }}/.jest-cache
       - name: Run scss-generator tests
-        run: yarn test:scss-generator --ci
+        env:
+          TMPDIR: ${{ runner.temp }}
+        run: yarn test:scss-generator --ci --cacheDirectory=${{ github.workspace }}/.jest-cache
       - name: Merge coverage reports
         run: cat coverage/scss-generator/lcov.info >> coverage/lcov.info
       - name: Upload coverage reports to Codecov with GitHub Action
@@ -126,7 +145,7 @@ jobs:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   web-components-test:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Use Node.js version from .nvmrc
@@ -148,12 +167,17 @@ jobs:
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
+          TMPDIR: ${{ runner.temp }}
         run: yarn install --immutable
       - name: Build web-components project
+        env:
+          TMPDIR: ${{ runner.temp }}
         run:
           yarn lerna run build --scope='@carbon/web-components'
           --include-dependencies
       - name: Run tests
+        env:
+          TMPDIR: ${{ runner.temp }}
         run: |
           cd packages/web-components
           yarn test --coverage
@@ -167,7 +191,7 @@ jobs:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   elements-previews:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Use Node.js version from .nvmrc
@@ -188,15 +212,20 @@ jobs:
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
+          TMPDIR: ${{ runner.temp }}
         run: yarn install --immutable
       - name: Build project
+        env:
+          TMPDIR: ${{ runner.temp }}
         run: yarn build
       - name: Build elements previews
+        env:
+          TMPDIR: ${{ runner.temp }}
         run: node tasks/examples.js
 
   e2e:
     name: 'test:e2e'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       # Filter first so PRs that don't touch these paths skip install and build
@@ -242,10 +271,13 @@ jobs:
         if: ${{ steps.filter.outputs.e2e == 'true' }}
         env:
           YARN_ENABLE_HARDENED_MODE: 0
+          TMPDIR: ${{ runner.temp }}
         run: yarn install --immutable
       # These tests only need the icon and pictogram packages
       - name: Build icon and pictogram packages
         if: ${{ steps.filter.outputs.e2e == 'true' }}
+        env:
+          TMPDIR: ${{ runner.temp }}
         run:
           yarn lerna run build --scope='@carbon/icons'
           --scope='@carbon/icons-react' --scope='@carbon/icons-vue'
@@ -253,10 +285,12 @@ jobs:
           --include-dependencies
       - name: Run e2e tests
         if: ${{ steps.filter.outputs.e2e == 'true' }}
+        env:
+          TMPDIR: ${{ runner.temp }}
         run: yarn test:e2e
 
   avt-build:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Use Node.js version from .nvmrc
@@ -278,14 +312,17 @@ jobs:
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
+          TMPDIR: ${{ runner.temp }}
         run: yarn install --immutable
       - name: Build project
         env:
           NODE_OPTIONS: --max-old-space-size=6144
+          TMPDIR: ${{ runner.temp }}
         run: yarn lerna run build --scope='@carbon/react' --include-dependencies
       - name: Build storybook
         env:
           NODE_OPTIONS: --max-old-space-size=6144
+          TMPDIR: ${{ runner.temp }}
         run: yarn workspace @carbon/react storybook:build
       - name: Upload storybook static files
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
@@ -301,7 +338,7 @@ jobs:
       matrix:
         shardIndex: [1, 2, 3, 4]
         shardTotal: [4]
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Use Node.js version from .nvmrc
@@ -323,8 +360,11 @@ jobs:
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
+          TMPDIR: ${{ runner.temp }}
         run: yarn install --immutable
       - name: Install browsers
+        env:
+          TMPDIR: ${{ runner.temp }}
         run: yarn playwright install --with-deps
       - name: Download storybook artifacts
         uses: actions/download-artifact@v8
@@ -343,6 +383,8 @@ jobs:
         timeout-minutes: 3
       - name: Run AVT
         if: github.repository == 'carbon-design-system/carbon'
+        env:
+          TMPDIR: ${{ runner.temp }}
         run: |
           yarn playwright test --project chromium --grep @avt --shard="${{ matrix.shardIndex }}/${{ matrix.shardTotal }}"
       - name: Stop storybook
@@ -359,7 +401,7 @@ jobs:
 
   avt:
     if: ${{ always() }}
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     needs: avt-runner
     steps:
       - name: Check AVT Runner job status
@@ -373,7 +415,7 @@ jobs:
       github.event.pull_request.draft == false }}
     needs: [avt-runner]
 
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Use Node.js version from .nvmrc
@@ -395,6 +437,7 @@ jobs:
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
+          TMPDIR: ${{ runner.temp }}
         run: yarn install --immutable
 
       - name: Download avt blob reports from GitHub Actions Artifacts
@@ -420,7 +463,7 @@ jobs:
     if:
       ${{ github.repository == 'carbon-design-system/carbon' &&
       github.event.pull_request.draft == false }}
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     outputs:
       buildUrl: ${{ steps.chromatic.outputs.buildUrl }}
       storybookUrl: ${{ steps.chromatic.outputs.storybookUrl }}
@@ -454,9 +497,12 @@ jobs:
         if: github.event_name != 'merge_group'
         env:
           YARN_ENABLE_HARDENED_MODE: 0
+          TMPDIR: ${{ runner.temp }}
         run: yarn install --immutable
       - name: Build project
         if: github.event_name != 'merge_group'
+        env:
+          TMPDIR: ${{ runner.temp }}
         run: yarn build
       - id: chromatic
         name: Run Chromatic
@@ -483,6 +529,7 @@ jobs:
           untraced: |
             config/**
         env:
+          TMPDIR: ${{ runner.temp }}
           # 👇 Set to the PR branch if it's a PR; otherwise, falls back to the pushed branch name
           CHROMATIC_BRANCH:
             ${{ github.event.pull_request.head.ref || github.ref_name }}
@@ -497,7 +544,7 @@ jobs:
   # status checks. This avoids noisy/large comments for deploy previews.
   react-storybook-preview:
     if: github.event_name != 'merge_group'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     needs: chromatic-react
     environment:
       name: '@carbon/react storybook preview'
