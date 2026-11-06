@@ -407,6 +407,9 @@
         ),
       .#{$prefix}--date-picker__day.selected:not(:nth-child(7n)):has(
           + .#{$prefix}--date-picker__day.selected
+        ),
+      .#{$prefix}--date-picker__day.startRange:not(.endRange):not(
+          :nth-child(7n)
         ) {
         &::before {
           position: absolute;
@@ -424,7 +427,10 @@
       .#{$prefix}--date-picker__day.inRange
         + .#{$prefix}--date-picker__day.selected:not(:nth-child(7n + 1)),
       .#{$prefix}--date-picker__day.selected
-        + .#{$prefix}--date-picker__day.selected:not(:nth-child(7n + 1)) {
+        + .#{$prefix}--date-picker__day.selected:not(:nth-child(7n + 1)),
+      .#{$prefix}--date-picker__day.endRange:not(.startRange):not(
+          :nth-child(7n + 1)
+        ) {
         &::before {
           position: absolute;
           z-index: -1;
@@ -464,6 +470,10 @@
     &.selected {
       background-color: $interactive;
       color: $text-inverse;
+
+      @if enabled('enable-v12-release') {
+        border-radius: $border-radius-max;
+      }
     }
 
     // Today's date - blue dot indicator
@@ -518,7 +528,7 @@
     @if enabled('enable-v12-release') {
       border-radius: $border-radius-max;
 
-      &.inRange {
+      &.inRange:not(.selected) {
         border-radius: $border-radius-00;
 
         // Leftmost button in week row (column 1)
@@ -532,6 +542,13 @@
           border-end-end-radius: $border-radius-04;
           border-start-end-radius: $border-radius-04;
         }
+      }
+
+      // Selected dates always stay circular even when inRange or focused
+      &.selected,
+      &.selected:focus,
+      &.selected.focused {
+        border-radius: $border-radius-max;
       }
     }
   }
