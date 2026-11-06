@@ -63,9 +63,16 @@
   margin-block: 0;
 }
 
+.#{$prefix}--empty-state__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: $spacing-03;
+  margin-block-end: $spacing-04;
+}
+
 .#{$prefix}--empty-state__action {
   margin-block: 0;
-  margin-block-end: $spacing-04;
 }
 
 .#{$prefix}--empty-state__link {
