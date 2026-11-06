@@ -80,7 +80,7 @@
     "eslint-plugin-react-hooks": "^7.0.0",
     "eslint-plugin-testing-library": "^7.6.6",
     "fs-extra": "^11.0.0",
-    "glob": "^13.0.0",
+    "glob": "^14.0.0",
     "globals": "17.13.0",
     "husky": "^9.0.0",
     "jest": "^30.2.0",
