@@ -26,6 +26,7 @@ import {
   Notification,
   View,
   Copy,
+  Renew,
   ArrowRight,
   Launch,
   DirectionFork,
@@ -1361,14 +1362,26 @@ export const WithIcon = () => (
           </Card.Action>
           <Card.Action>
             <IconButton
-              label="View Analytics Dashboard"
+              label="Copy link to Analytics Dashboard"
               kind="ghost"
-              size="md"
-              onClick={(e) => {
-                e.stopPropagation();
-                console.log('View clicked');
-              }}>
-              <View />
+              size="md">
+              <Copy />
+            </IconButton>
+          </Card.Action>
+          <Card.Action>
+            <IconButton
+              label="Set up alerts for Analytics Dashboard"
+              kind="ghost"
+              size="md">
+              <Notification />
+            </IconButton>
+          </Card.Action>
+          <Card.Action>
+            <IconButton
+              label="Refresh Analytics Dashboard"
+              kind="ghost"
+              size="md">
+              <Renew />
             </IconButton>
           </Card.Action>
         </Card.Footer>
