@@ -408,9 +408,13 @@
       .#{$prefix}--date-picker__day.selected:not(:nth-child(7n)):has(
           + .#{$prefix}--date-picker__day.selected
         ),
-      .#{$prefix}--date-picker__day.startRange:not(.endRange):not(
+      // Preview start date when hovering/focusing a date before the start
+      .#{$prefix}--date-picker__day:not(
+          .selected,
+          .inRange,
+          :disabled,
           :nth-child(7n)
-        ) {
+        ):has(+ .#{$prefix}--date-picker__day.inRange) {
         &::before {
           position: absolute;
           z-index: -1;
@@ -426,11 +430,16 @@
       // Only applies if the end date is not the first day of the week row
       .#{$prefix}--date-picker__day.inRange
         + .#{$prefix}--date-picker__day.selected:not(:nth-child(7n + 1)),
-      .#{$prefix}--date-picker__day.selected
-        + .#{$prefix}--date-picker__day.selected:not(:nth-child(7n + 1)),
-      .#{$prefix}--date-picker__day.endRange:not(.startRange):not(
+      // Preview end date (hovered/focused) while the range is being selected
+      .#{$prefix}--date-picker__day.inRange
+        + .#{$prefix}--date-picker__day:not(
+          .selected,
+          .inRange,
+          :disabled,
           :nth-child(7n + 1)
-        ) {
+        ),
+      .#{$prefix}--date-picker__day.selected
+        + .#{$prefix}--date-picker__day.selected:not(:nth-child(7n + 1)) {
         &::before {
           position: absolute;
           z-index: -1;
