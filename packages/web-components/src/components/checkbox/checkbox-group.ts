@@ -189,7 +189,7 @@ class CDSCheckboxGroup extends LitElement {
 
     const fieldsetClasses = classMap({
       [`${prefix}--checkbox-group`]: true,
-      [`${prefix}--checkbox-group--readonly`]: readonly,
+      [`${prefix}--checkbox-group--readonly`]: readonly && !disabled,
       [`${prefix}--checkbox-group--invalid`]: normalizedProps.invalid,
       [`${prefix}--checkbox-group--warning`]: normalizedProps.warn,
       [`${prefix}--checkbox-group--slug`]: hasAILabel,

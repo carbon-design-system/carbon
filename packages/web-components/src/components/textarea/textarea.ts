@@ -192,7 +192,8 @@ class CDSTextarea extends CDSTextInput {
       [`${prefix}--text-area__wrapper`]: true,
       [`${prefix}--text-area__wrapper--cols`]: this.cols,
       [`${prefix}--text-area__wrapper--warn`]: this.warn,
-      [`${prefix}--text-area__wrapper--readonly`]: this.readonly,
+      [`${prefix}--text-area__wrapper--readonly`]:
+        this.readonly && !this.disabled,
     });
 
     const labelClasses = classMap({
@@ -275,7 +276,7 @@ class CDSTextarea extends CDSTextInput {
           name="${ifNonEmpty(this.name)}"
           pattern="${ifNonEmpty(this.pattern)}"
           placeholder="${ifNonEmpty(this.placeholder)}"
-          ?readonly="${this.readonly}"
+          ?readonly="${this.readonly && !this.disabled}"
           ?required="${this.required}"
           rows="${ifDefined(this.rows)}"
           .value="${this.value}"

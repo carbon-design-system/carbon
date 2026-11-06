@@ -252,7 +252,7 @@ class CDSSliderInput extends FocusMixin(LitElement) {
         class="${classes}"
         max="${max}"
         min="${min}"
-        ?readonly="${ifDefined(readonly)}"
+        ?readonly="${readonly && !disabled}"
         step="${step}"
         .value="${value}"
         @change="${handleChange}"
