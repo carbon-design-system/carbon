@@ -26,6 +26,8 @@ jobs:
         with:
           node-version-file: '.nvmrc'
       - name: Run yarn dedupe
+        env:
+          TMPDIR: ${{ runner.temp }}
         run: yarn dedupe --check
 
   format:
@@ -50,8 +52,11 @@ jobs:
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
+          TMPDIR: ${{ runner.temp }}
         run: yarn install --immutable
       - name: Check formatting of project files
+        env:
+          TMPDIR: ${{ runner.temp }}
         run: yarn format:diff
 
   lint:
@@ -76,10 +81,15 @@ jobs:
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
+          TMPDIR: ${{ runner.temp }}
         run: yarn install --immutable
       - name: Lint code
+        env:
+          TMPDIR: ${{ runner.temp }}
         run: yarn lint
       - name: Lint styles
+        env:
+          TMPDIR: ${{ runner.temp }}
         run: yarn lint:styles
 
   test:
@@ -105,15 +115,24 @@ jobs:
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
+          TMPDIR: ${{ runner.temp }}
         run: yarn install --immutable
       - name: Build project
+        env:
+          TMPDIR: ${{ runner.temp }}
         run: yarn build
       - name: Check generated styles
+        env:
+          TMPDIR: ${{ runner.temp }}
         run: |
           yarn carbon-cli check --ignore '**/@(node_modules|examples|components|react|fixtures|compat)/**' 'packages/**/*.scss'
       - name: Run tests
+        env:
+          TMPDIR: ${{ runner.temp }}
         run: yarn test --ci --collectCoverage --cacheDirectory=${{ github.workspace }}/.jest-cache
       - name: Run scss-generator tests
+        env:
+          TMPDIR: ${{ runner.temp }}
         run: yarn test:scss-generator --ci --cacheDirectory=${{ github.workspace }}/.jest-cache
       - name: Merge coverage reports
         run: cat coverage/scss-generator/lcov.info >> coverage/lcov.info
@@ -148,12 +167,17 @@ jobs:
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
+          TMPDIR: ${{ runner.temp }}
         run: yarn install --immutable
       - name: Build web-components project
+        env:
+          TMPDIR: ${{ runner.temp }}
         run:
           yarn lerna run build --scope='@carbon/web-components'
           --include-dependencies
       - name: Run tests
+        env:
+          TMPDIR: ${{ runner.temp }}
         run: |
           cd packages/web-components
           yarn test --coverage
@@ -188,10 +212,15 @@ jobs:
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
+          TMPDIR: ${{ runner.temp }}
         run: yarn install --immutable
       - name: Build project
+        env:
+          TMPDIR: ${{ runner.temp }}
         run: yarn build
       - name: Build elements previews
+        env:
+          TMPDIR: ${{ runner.temp }}
         run: node tasks/examples.js
 
   e2e:
@@ -242,10 +271,13 @@ jobs:
         if: ${{ steps.filter.outputs.e2e == 'true' }}
         env:
           YARN_ENABLE_HARDENED_MODE: 0
+          TMPDIR: ${{ runner.temp }}
         run: yarn install --immutable
       # These tests only need the icon and pictogram packages
       - name: Build icon and pictogram packages
         if: ${{ steps.filter.outputs.e2e == 'true' }}
+        env:
+          TMPDIR: ${{ runner.temp }}
         run:
           yarn lerna run build --scope='@carbon/icons'
           --scope='@carbon/icons-react' --scope='@carbon/icons-vue'
@@ -253,6 +285,8 @@ jobs:
           --include-dependencies
       - name: Run e2e tests
         if: ${{ steps.filter.outputs.e2e == 'true' }}
+        env:
+          TMPDIR: ${{ runner.temp }}
         run: yarn test:e2e
 
   avt-build:
@@ -278,14 +312,17 @@ jobs:
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
+          TMPDIR: ${{ runner.temp }}
         run: yarn install --immutable
       - name: Build project
         env:
           NODE_OPTIONS: --max-old-space-size=6144
+          TMPDIR: ${{ runner.temp }}
         run: yarn lerna run build --scope='@carbon/react' --include-dependencies
       - name: Build storybook
         env:
           NODE_OPTIONS: --max-old-space-size=6144
+          TMPDIR: ${{ runner.temp }}
         run: yarn workspace @carbon/react storybook:build
       - name: Upload storybook static files
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
@@ -323,8 +360,11 @@ jobs:
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
+          TMPDIR: ${{ runner.temp }}
         run: yarn install --immutable
       - name: Install browsers
+        env:
+          TMPDIR: ${{ runner.temp }}
         run: yarn playwright install --with-deps
       - name: Download storybook artifacts
         uses: actions/download-artifact@v8
@@ -343,6 +383,8 @@ jobs:
         timeout-minutes: 3
       - name: Run AVT
         if: github.repository == 'carbon-design-system/carbon'
+        env:
+          TMPDIR: ${{ runner.temp }}
         run: |
           yarn playwright test --project chromium --grep @avt --shard="${{ matrix.shardIndex }}/${{ matrix.shardTotal }}"
       - name: Stop storybook
@@ -395,6 +437,7 @@ jobs:
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
+          TMPDIR: ${{ runner.temp }}
         run: yarn install --immutable
 
       - name: Download avt blob reports from GitHub Actions Artifacts
@@ -454,9 +497,12 @@ jobs:
         if: github.event_name != 'merge_group'
         env:
           YARN_ENABLE_HARDENED_MODE: 0
+          TMPDIR: ${{ runner.temp }}
         run: yarn install --immutable
       - name: Build project
         if: github.event_name != 'merge_group'
+        env:
+          TMPDIR: ${{ runner.temp }}
         run: yarn build
       - id: chromatic
         name: Run Chromatic
@@ -483,6 +529,7 @@ jobs:
           untraced: |
             config/**
         env:
+          TMPDIR: ${{ runner.temp }}
           # 👇 Set to the PR branch if it's a PR; otherwise, falls back to the pushed branch name
           CHROMATIC_BRANCH:
             ${{ github.event.pull_request.head.ref || github.ref_name }}
