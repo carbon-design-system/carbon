@@ -8,6 +8,7 @@
 @use '@carbon/styles/scss/border-radius' as *;
 @use '@carbon/styles/scss/feature-flags' as *;
 @use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/type';
 
 .card-story__viewport {
   padding-block-start: spacing.$spacing-07;
@@ -61,4 +62,11 @@
     border-end-start-radius: $border-radius-08;
     border-end-end-radius: $border-radius-08;
   }
+}
+
+// Headings inside the AI label popover keep the compact label look
+.card-story__ai-heading {
+  @include type.type-style('body-compact-01');
+
+  margin: 0;
 }

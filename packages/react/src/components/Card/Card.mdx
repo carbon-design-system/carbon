@@ -148,9 +148,11 @@ Override the default `ArrowRight` icon using `renderFooterIcon`:
 
 ## Disabled state
 
-Pass `disabled` to mute the card visually and prevent all interaction. Manually
-pass `disabled` to any interactive elements inside the card (buttons, inputs)
-since the card itself does not propagate the disabled state.
+Pass `disabled` to mute the card visually and expose its disabled state.
+Manually pass `disabled` to any interactive elements inside the card (buttons,
+inputs) since the card does not set their native disabled state. A disabled,
+non-clickable card is exposed as a group with `aria-disabled="true"`; provide
+`aria-label` or `aria-labelledby` so assistive technology can identify it.
 
 <Canvas of={CardStories.Disabled} />
 
