@@ -13,6 +13,14 @@ const componentName = 'CardTitle';
 
 export interface CardTitleProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
+   * Specify the heading element used to render the title text so that
+   * assistive technology users can navigate cards by heading. Choose the level
+   * that fits the heading hierarchy of the surrounding page.
+   * @default 'h2'
+   */
+  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+
+  /**
    * Provide the contents of the CardTitle.
    */
   children?: ReactNode;
@@ -96,6 +104,7 @@ export interface CardTitleProps extends React.HTMLAttributes<HTMLDivElement> {
 export const CardTitle = forwardRef<HTMLDivElement, CardTitleProps>(
   (
     {
+      as: HeadingComponent = 'h2',
       children,
       className,
       titleTruncate = false,
@@ -167,7 +176,7 @@ export const CardTitle = forwardRef<HTMLDivElement, CardTitleProps>(
               {label}
             </div>
           )}
-          <span
+          <HeadingComponent
             className={textRowClasses}
             style={titleVars as React.CSSProperties}>
             {titleStart && (
@@ -181,7 +190,7 @@ export const CardTitle = forwardRef<HTMLDivElement, CardTitleProps>(
                 {titleEnd}
               </span>
             )}
-          </span>
+          </HeadingComponent>
           {description && (
             <div
               className={cx(`${blockClass}__description`, {

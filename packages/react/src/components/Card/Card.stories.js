@@ -26,6 +26,7 @@ import {
   Notification,
   View,
   Copy,
+  Renew,
   ArrowRight,
   Launch,
   DirectionFork,
@@ -87,7 +88,7 @@ export default {
     },
     disabled: {
       control: { type: 'boolean' },
-      description: 'Disables the card and all interactive elements',
+      description: 'Mutes the card; pass disabled to interactive children too.',
     },
     horizontal: {
       control: { type: 'boolean' },
@@ -223,26 +224,22 @@ const HEADER_MEDIA_MAP = {
 // Maps the titleMedia control value to a concrete React element.
 const TITLE_MEDIA_MAP = {
   none: null,
-  image: (
-    <img
-      src={rebusClassic}
-      alt="IBM Classic Rebus logo"
-      width={48}
-      height={48}
-    />
-  ),
+  image: <img src={rebusClassic} alt="" width={48} height={48} />,
 };
 
 // Renders the footer action combination selected via the footerActions control.
 // Not used when the card is clickable (clickable cards render their own footer).
-const renderFooterActions = (footerActions) => {
+const renderFooterActions = (footerActions, title) => {
   if (footerActions === 'none') return null;
   return (
     <Card.Footer>
       {(footerActions === 'ghost-button' ||
         footerActions === 'ghost-button-icons') && (
         <Card.Action>
-          <Button kind="ghost" size="md">
+          <Button
+            kind="ghost"
+            size="md"
+            aria-label={`View details for ${title}`}>
             View details
           </Button>
         </Card.Action>
@@ -251,12 +248,12 @@ const renderFooterActions = (footerActions) => {
         footerActions === 'icons-only') && (
         <>
           <Card.Action>
-            <IconButton label="Share" kind="ghost" size="md">
+            <IconButton label={`Share ${title}`} kind="ghost" size="md">
               <Share />
             </IconButton>
           </Card.Action>
           <Card.Action>
-            <IconButton label="Download" kind="ghost" size="md">
+            <IconButton label={`Download ${title}`} kind="ghost" size="md">
               <Download />
             </IconButton>
           </Card.Action>
@@ -297,12 +294,19 @@ export const Default = {
           })}
           {...(showAILabel && {
             decorator: (
-              <AILabel align="bottom" size="xs">
+              <AILabel
+                align="bottom"
+                size="xs"
+                aria-label={`Show information for ${title}`}>
                 <AILabelContent>
                   <div>
-                    <p className="secondary">AI Explained</p>
+                    <h3 className="card-story__ai-heading secondary">
+                      AI Explained
+                    </h3>
                     <h1>84%</h1>
-                    <p className="secondary bold">Confidence score</p>
+                    <h4 className="card-story__ai-heading secondary bold">
+                      Confidence score
+                    </h4>
                     <p className="secondary">
                       This content was generated using IBM AI services.
                     </p>
@@ -336,11 +340,14 @@ export const Default = {
             headerMedia={HEADER_MEDIA_MAP[headerMedia] || undefined}
             actions={
               actionCount > 0 ? (
-                <Card.Actions>
+                <Card.Actions overflowMenuLabel={`More actions for ${title}`}>
                   {ACTION_ICONS.slice(0, actionCount).map(
                     ({ icon: Icon, label: iconLabel }) => (
                       <Card.Action key={iconLabel}>
-                        <IconButton label={iconLabel} kind="ghost" size="sm">
+                        <IconButton
+                          label={`${iconLabel} ${title}`}
+                          kind="ghost"
+                          size="sm">
                           <Icon />
                         </IconButton>
                       </Card.Action>
@@ -360,7 +367,7 @@ export const Default = {
             </Card.Title>
           </Card.Header>
           <Card.Body>{bodyText}</Card.Body>
-          {!cardArgs.clickable && renderFooterActions(footerActions)}
+          {!cardArgs.clickable && renderFooterActions(footerActions, title)}
         </Card>
       </Column>
     </Grid>
@@ -395,7 +402,8 @@ export const Clickable = () => (
       <Card
         clickable
         onClick={() => alert('Card clicked')}
-        aria-labelledby="clickable-title-usage">
+        aria-labelledby="clickable-title-usage"
+        aria-describedby="clickable-body-usage">
         <Card.Media ratio="16x9">
           <img src={illustration16x9} alt="" width="100%" />
         </Card.Media>
@@ -404,7 +412,9 @@ export const Clickable = () => (
             Usage report
           </Card.Title>
         </Card.Header>
-        <Card.Body>Monthly summary across all active projects.</Card.Body>
+        <Card.Body id="clickable-body-usage">
+          Monthly summary across all active projects.
+        </Card.Body>
       </Card>
     </Column>
 
@@ -415,7 +425,9 @@ export const Clickable = () => (
         as="a"
         href="https://carbondesignsystem.com"
         target="_blank"
-        aria-labelledby="clickable-title-carbon">
+        rel="noopener noreferrer"
+        aria-labelledby="clickable-title-carbon"
+        aria-describedby="clickable-body-carbon">
         <Card.Media ratio="16x9">
           <img src={illustration2_16x9} alt="" width="100%" />
         </Card.Media>
@@ -424,7 +436,14 @@ export const Clickable = () => (
             Carbon Design System
           </Card.Title>
         </Card.Header>
-        <Card.Body>Read about tokens, components, and patterns.</Card.Body>
+        <Card.Body id="clickable-body-carbon">
+          Read about tokens, components, and patterns.
+          <span
+            id="clickable-new-window-carbon"
+            className="cds--visually-hidden">
+            (opens in a new window)
+          </span>
+        </Card.Body>
       </Card>
     </Column>
 
@@ -434,13 +453,16 @@ export const Clickable = () => (
         clickable
         onClick={() => alert('Launch clicked')}
         renderFooterIcon={Share}
-        aria-labelledby="clickable-title-share">
+        aria-labelledby="clickable-title-share"
+        aria-describedby="clickable-body-share">
         <Card.Header>
           <Card.Title id="clickable-title-share" label="Share">
             Share report
           </Card.Title>
         </Card.Header>
-        <Card.Body>Share this report with your team.</Card.Body>
+        <Card.Body id="clickable-body-share">
+          Share this report with your team.
+        </Card.Body>
       </Card>
     </Column>
 
@@ -450,13 +472,16 @@ export const Clickable = () => (
         clickable
         disabled
         onClick={() => alert('Should not fire')}
-        aria-labelledby="clickable-title-disabled">
+        aria-labelledby="clickable-title-disabled"
+        aria-describedby="clickable-body-disabled">
         <Card.Header>
           <Card.Title id="clickable-title-disabled" label="Status">
             Disabled card
           </Card.Title>
         </Card.Header>
-        <Card.Body>This card is not currently available.</Card.Body>
+        <Card.Body id="clickable-body-disabled">
+          This card is not currently available.
+        </Card.Body>
       </Card>
     </Column>
 
@@ -466,7 +491,8 @@ export const Clickable = () => (
         clickable
         density="expressive"
         onClick={() => alert('Expressive card clicked')}
-        aria-labelledby="clickable-title-launch">
+        aria-labelledby="clickable-title-launch"
+        aria-describedby="clickable-body-launch">
         <Card.Media ratio="16x9">
           <img src={illustration16x9} alt="" width="100%" />
         </Card.Media>
@@ -475,7 +501,9 @@ export const Clickable = () => (
             Product launch
           </Card.Title>
         </Card.Header>
-        <Card.Body>Highlights from the Q3 product launch.</Card.Body>
+        <Card.Body id="clickable-body-launch">
+          Highlights from the Q3 product launch.
+        </Card.Body>
       </Card>
     </Column>
 
@@ -486,13 +514,16 @@ export const Clickable = () => (
         density="expressive"
         as="a"
         href="#"
-        aria-labelledby="clickable-title-quarterly">
+        aria-labelledby="clickable-title-quarterly"
+        aria-describedby="clickable-body-quarterly">
         <Card.Header>
           <Card.Title id="clickable-title-quarterly" label="Report">
             Quarterly review
           </Card.Title>
         </Card.Header>
-        <Card.Body>Key findings and recommendations from Q3.</Card.Body>
+        <Card.Body id="clickable-body-quarterly">
+          Key findings and recommendations from Q3.
+        </Card.Body>
       </Card>
     </Column>
   </Grid>
@@ -512,9 +543,13 @@ export const Disabled = {
   }) => (
     <Grid withRowGap>
       <Column lg={4} md={4} sm={4}>
-        <Card density={density} disabled={disabled}>
+        <Card
+          density={density}
+          disabled={disabled}
+          aria-labelledby={disabled ? 'disabled-card-title' : undefined}>
           <Card.Header>
             <Card.Title
+              id="disabled-card-title"
               label={label || undefined}
               description={description || undefined}
               titleTruncate={titleTruncate}>
@@ -594,7 +629,10 @@ export const WithDensities = () => (
         <Card.Body>5,240 active users across 12 regions.</Card.Body>
         <Card.Footer>
           <Card.Action>
-            <Button kind="ghost" size="md">
+            <Button
+              kind="ghost"
+              size="md"
+              aria-label="View details for Card title (default density)">
               View details
             </Button>
           </Card.Action>
@@ -611,7 +649,10 @@ export const WithDensities = () => (
         <Card.Body>5,240 active users across 12 regions.</Card.Body>
         <Card.Footer>
           <Card.Action>
-            <Button kind="ghost" size="md">
+            <Button
+              kind="ghost"
+              size="md"
+              aria-label="View details for Card title (expressive density)">
               View details
             </Button>
           </Card.Action>
@@ -628,12 +669,19 @@ export const WithAILabel = () => (
     <Column lg={4} md={4} sm={4}>
       <Card
         decorator={
-          <AILabel align="bottom" size="xs">
+          <AILabel
+            align="bottom"
+            size="xs"
+            aria-label="Show information for Usage Analytics">
             <AILabelContent>
               <div>
-                <p className="secondary">AI Explained</p>
+                <h3 className="card-story__ai-heading secondary">
+                  AI Explained
+                </h3>
                 <h1>84%</h1>
-                <p className="secondary bold">Confidence score</p>
+                <h4 className="card-story__ai-heading secondary bold">
+                  Confidence score
+                </h4>
                 <p className="secondary">
                   This content was generated using IBM AI services with high
                   confidence based on historical data patterns.
@@ -656,12 +704,19 @@ export const WithAILabel = () => (
     <Column lg={4} md={4} sm={4}>
       <Card
         decorator={
-          <AILabel align="bottom" size="xs">
+          <AILabel
+            align="bottom"
+            size="xs"
+            aria-label="Show information for Performance Insights">
             <AILabelContent>
               <div>
-                <p className="secondary">AI Explained</p>
+                <h3 className="card-story__ai-heading secondary">
+                  AI Explained
+                </h3>
                 <h1>92%</h1>
-                <p className="secondary bold">Confidence score</p>
+                <h4 className="card-story__ai-heading secondary bold">
+                  Confidence score
+                </h4>
                 <p className="secondary">
                   Performance insights generated by AI analysis of system
                   metrics and user behavior patterns.
@@ -686,12 +741,19 @@ export const WithAILabel = () => (
     <Column lg={4} md={4} sm={4}>
       <Card
         decorator={
-          <AILabel align="bottom" size="xs">
+          <AILabel
+            align="bottom"
+            size="xs"
+            aria-label="Show information for Smart Recommendations">
             <AILabelContent>
               <div>
-                <p className="secondary">AI Explained</p>
+                <h3 className="card-story__ai-heading secondary">
+                  AI Explained
+                </h3>
                 <h1>88%</h1>
-                <p className="secondary bold">Confidence score</p>
+                <h4 className="card-story__ai-heading secondary bold">
+                  Confidence score
+                </h4>
                 <p className="secondary">
                   Smart recommendations powered by AI learning from user
                   preferences and behavior.
@@ -705,10 +767,10 @@ export const WithAILabel = () => (
         }>
         <Card.Header
           actions={
-            <Card.Actions>
+            <Card.Actions overflowMenuLabel="More actions for Smart Recommendations">
               <Card.Action>
                 <IconButton
-                  label="Edit"
+                  label="Edit Smart Recommendations"
                   kind="ghost"
                   size="sm"
                   onClick={(e) => {
@@ -720,7 +782,7 @@ export const WithAILabel = () => (
               </Card.Action>
               <Card.Action>
                 <IconButton
-                  label="Delete"
+                  label="Delete Smart Recommendations"
                   kind="ghost"
                   size="sm"
                   onClick={(e) => {
@@ -736,7 +798,10 @@ export const WithAILabel = () => (
         </Card.Header>
         <Card.Body>3 products match your recent activity.</Card.Body>
         <Card.Footer>
-          <Button size="sm" kind="tertiary">
+          <Button
+            size="sm"
+            kind="tertiary"
+            aria-label="View details for Smart Recommendations">
             View Details
           </Button>
         </Card.Footer>
@@ -792,10 +857,10 @@ export const WithHeaderActions = () => (
       <Card onClick={() => console.log('Card clicked')}>
         <Card.Header
           actions={
-            <Card.Actions>
+            <Card.Actions overflowMenuLabel="More actions for Website Redesign">
               <Card.Action>
                 <IconButton
-                  label="Edit"
+                  label="Edit Website Redesign"
                   kind="ghost"
                   size="sm"
                   onClick={(e) => {
@@ -807,7 +872,7 @@ export const WithHeaderActions = () => (
               </Card.Action>
               <Card.Action>
                 <IconButton
-                  label="Delete"
+                  label="Delete Website Redesign"
                   kind="ghost"
                   size="sm"
                   onClick={(e) => {
@@ -828,17 +893,23 @@ export const WithHeaderActions = () => (
         </Card.Body>
         <Card.Footer>
           <Card.Action>
-            <Button kind="ghost" size="md">
+            <Button
+              kind="ghost"
+              size="md"
+              aria-label="View report for Website Redesign">
               View report
             </Button>
           </Card.Action>
           <Card.Action>
-            <IconButton label="Share" kind="ghost" size="md">
+            <IconButton label="Share Website Redesign" kind="ghost" size="md">
               <Share />
             </IconButton>
           </Card.Action>
           <Card.Action>
-            <IconButton label="Download" kind="ghost" size="md">
+            <IconButton
+              label="Download Website Redesign"
+              kind="ghost"
+              size="md">
               <Download />
             </IconButton>
           </Card.Action>
@@ -850,54 +921,84 @@ export const WithHeaderActions = () => (
         <Card.Header
           headerMedia={<Tag type="blue">New</Tag>}
           actions={
-            <Card.Actions>
+            <Card.Actions overflowMenuLabel="More actions for Project dashboard">
               <Card.Action>
-                <IconButton kind="ghost" label="Edit" size="sm">
+                <IconButton
+                  kind="ghost"
+                  label="Edit Project dashboard"
+                  size="sm">
                   <Edit />
                 </IconButton>
               </Card.Action>
               <Card.Action>
-                <IconButton kind="ghost" label="Favorite" size="sm">
+                <IconButton
+                  kind="ghost"
+                  label="Favorite Project dashboard"
+                  size="sm">
                   <Favorite />
                 </IconButton>
               </Card.Action>
               <Card.Action>
-                <IconButton kind="ghost" label="Analytics" size="sm">
+                <IconButton
+                  kind="ghost"
+                  label="Analytics Project dashboard"
+                  size="sm">
                   <Analytics />
                 </IconButton>
               </Card.Action>
               <Card.Action>
-                <IconButton kind="ghost" label="Share" size="sm">
+                <IconButton
+                  kind="ghost"
+                  label="Share Project dashboard"
+                  size="sm">
                   <Share />
                 </IconButton>
               </Card.Action>
               <Card.Action>
-                <IconButton kind="ghost" label="Download" size="sm">
+                <IconButton
+                  kind="ghost"
+                  label="Download Project dashboard"
+                  size="sm">
                   <Download />
                 </IconButton>
               </Card.Action>
               <Card.Action>
-                <IconButton kind="ghost" label="Settings" size="sm">
+                <IconButton
+                  kind="ghost"
+                  label="Settings Project dashboard"
+                  size="sm">
                   <Settings />
                 </IconButton>
               </Card.Action>
               <Card.Action>
-                <IconButton kind="ghost" label="Notification" size="sm">
+                <IconButton
+                  kind="ghost"
+                  label="Notification Project dashboard"
+                  size="sm">
                   <Notification />
                 </IconButton>
               </Card.Action>
               <Card.Action>
-                <IconButton kind="ghost" label="View" size="sm">
+                <IconButton
+                  kind="ghost"
+                  label="View Project dashboard"
+                  size="sm">
                   <View />
                 </IconButton>
               </Card.Action>
               <Card.Action>
-                <IconButton kind="ghost" label="Copy" size="sm">
+                <IconButton
+                  kind="ghost"
+                  label="Copy Project dashboard"
+                  size="sm">
                   <Copy />
                 </IconButton>
               </Card.Action>
               <Card.Action>
-                <IconButton kind="ghost" label="Delete" size="sm">
+                <IconButton
+                  kind="ghost"
+                  label="Delete Project dashboard"
+                  size="sm">
                   <TrashCan />
                 </IconButton>
               </Card.Action>
@@ -914,9 +1015,12 @@ export const WithHeaderActions = () => (
       <Card>
         <Card.Header
           actions={
-            <Card.Actions>
+            <Card.Actions overflowMenuLabel="More actions for Usage metrics">
               <Card.Action>
-                <Button kind="tertiary" size="sm">
+                <Button
+                  kind="tertiary"
+                  size="sm"
+                  aria-label="Action for Usage metrics">
                   Action
                 </Button>
               </Card.Action>
@@ -931,25 +1035,34 @@ export const WithHeaderActions = () => (
       <Card>
         <Card.Header
           actions={
-            <Card.Actions>
+            <Card.Actions overflowMenuLabel="More actions for Usage exports">
               <Card.Action>
-                <Button kind="tertiary" size="sm">
+                <Button
+                  kind="tertiary"
+                  size="sm"
+                  aria-label="Export for Usage exports">
                   Export
                 </Button>
               </Card.Action>
               <Card.Action>
-                <Button kind="tertiary" size="sm">
+                <Button
+                  kind="tertiary"
+                  size="sm"
+                  aria-label="Share for Usage exports">
                   Share
                 </Button>
               </Card.Action>
               <Card.Action>
-                <Button kind="tertiary" size="sm">
+                <Button
+                  kind="tertiary"
+                  size="sm"
+                  aria-label="View report for Usage exports">
                   View report
                 </Button>
               </Card.Action>
             </Card.Actions>
           }>
-          <Card.Title>Usage metrics</Card.Title>
+          <Card.Title>Usage exports</Card.Title>
         </Card.Header>
         <Card.Body>Exports available in CSV, JSON, and PDF.</Card.Body>
       </Card>
@@ -958,19 +1071,28 @@ export const WithHeaderActions = () => (
       <Card>
         <Card.Header
           actions={
-            <Card.Actions>
+            <Card.Actions overflowMenuLabel="More actions for Automated daily pipeline run">
               <Card.Action>
-                <IconButton kind="ghost" label="Edit" size="sm">
+                <IconButton
+                  kind="ghost"
+                  label="Edit Automated daily pipeline run"
+                  size="sm">
                   <Edit />
                 </IconButton>
               </Card.Action>
               <Card.Action>
-                <IconButton kind="ghost" label="Favorite" size="sm">
+                <IconButton
+                  kind="ghost"
+                  label="Favorite Automated daily pipeline run"
+                  size="sm">
                   <Favorite />
                 </IconButton>
               </Card.Action>
               <Card.Action>
-                <IconButton kind="ghost" label="Share" size="sm">
+                <IconButton
+                  kind="ghost"
+                  label="Share Automated daily pipeline run"
+                  size="sm">
                   <Share />
                 </IconButton>
               </Card.Action>
@@ -1001,10 +1123,10 @@ export const WithHeaderMedia = () => (
         <Card.Header
           headerMedia={<Analytics />}
           actions={
-            <Card.Actions>
+            <Card.Actions overflowMenuLabel="More actions for Analytics Dashboard">
               <Card.Action>
                 <IconButton
-                  label="Edit"
+                  label="Edit Analytics Dashboard"
                   kind="ghost"
                   size="sm"
                   onClick={(e) => {
@@ -1016,7 +1138,7 @@ export const WithHeaderMedia = () => (
               </Card.Action>
               <Card.Action>
                 <IconButton
-                  label="Delete"
+                  label="Delete Analytics Dashboard"
                   kind="ghost"
                   size="sm"
                   onClick={(e) => {
@@ -1041,7 +1163,7 @@ export const WithHeaderMedia = () => (
           headerMedia={
             <img
               src={illustration1}
-              alt="A sample illustration"
+              alt=""
               style={{ width: '48px', height: '48px', borderRadius: '4px' }}
             />
           }>
@@ -1081,7 +1203,7 @@ export const WithHorizontalMedia = () => (
         <Card.Media>
           <img
             src={illustration1x1}
-            alt="Placeholder"
+            alt=""
             style={{ width: '100%', height: '100%' }}
           />
         </Card.Media>
@@ -1092,7 +1214,11 @@ export const WithHorizontalMedia = () => (
         </Card.Header>
         <Card.Body>Balanced dataset ready for model training.</Card.Body>
         <Card.Footer>
-          <Button kind="tertiary" size="md" renderIcon={ArrowRight}>
+          <Button
+            kind="tertiary"
+            size="md"
+            renderIcon={ArrowRight}
+            aria-label="Start Generate synthetic tabular data">
             Start
           </Button>
         </Card.Footer>
@@ -1103,7 +1229,7 @@ export const WithHorizontalMedia = () => (
         <Card.Media mediaWidth="50%">
           <img
             src={illustration2_16x9}
-            alt="Placeholder"
+            alt=""
             style={{ width: '100%', height: '100%' }}
           />
         </Card.Media>
@@ -1113,7 +1239,12 @@ export const WithHorizontalMedia = () => (
         <Card.Body>Revenue grew 18% year-over-year in this segment.</Card.Body>
         <Card.Footer>
           <Card.Action>
-            <Button kind="ghost" size="md" renderIcon={ArrowRight}>
+            <Button
+              kind="ghost"
+              size="md"
+              renderIcon={ArrowRight}
+              href="https://carbondesignsystem.com"
+              aria-label="Learn more about Custom media width">
               Learn more
             </Button>
           </Card.Action>
@@ -1128,7 +1259,12 @@ export const WithHorizontalMedia = () => (
         <Card.Body>Scheduled maintenance window starts at 02:00 UTC.</Card.Body>
         <Card.Footer>
           <Card.Action>
-            <Button kind="ghost" size="md" renderIcon={ArrowRight}>
+            <Button
+              kind="ghost"
+              size="md"
+              renderIcon={ArrowRight}
+              href="https://carbondesignsystem.com"
+              aria-label="Learn more about Content before media">
               Learn more
             </Button>
           </Card.Action>
@@ -1136,7 +1272,7 @@ export const WithHorizontalMedia = () => (
         <Card.Media>
           <img
             src={illustration2_1x1}
-            alt="Placeholder"
+            alt=""
             style={{ width: '100%', height: '100%' }}
           />
         </Card.Media>
@@ -1155,7 +1291,7 @@ export const WithHorizontalMedia = () => (
           </div>
           <Card.Action>
             <IconButton
-              label="Next"
+              label="Next: Generate synthetic tabular data"
               renderIcon={ArrowRight}
               kind="ghost"
               size="md"
@@ -1165,7 +1301,7 @@ export const WithHorizontalMedia = () => (
         <Card.Media>
           <img
             src={illustration1x1}
-            alt="Placeholder"
+            alt=""
             style={{ width: '100%', height: '100%' }}
           />
         </Card.Media>
@@ -1183,19 +1319,28 @@ export const WithIcon = () => (
         <Card.Header
           headerMedia={<Analytics />}
           actions={
-            <Card.Actions>
+            <Card.Actions overflowMenuLabel="More actions for Analytics Dashboard">
               <Card.Action>
-                <IconButton label="Edit" kind="ghost" size="sm">
+                <IconButton
+                  label="Edit Analytics Dashboard"
+                  kind="ghost"
+                  size="sm">
                   <Edit />
                 </IconButton>
               </Card.Action>
               <Card.Action>
-                <IconButton label="Share" kind="ghost" size="sm">
+                <IconButton
+                  label="Share Analytics Dashboard"
+                  kind="ghost"
+                  size="sm">
                   <Share />
                 </IconButton>
               </Card.Action>
               <Card.Action>
-                <IconButton label="Download" kind="ghost" size="sm">
+                <IconButton
+                  label="Download Analytics Dashboard"
+                  kind="ghost"
+                  size="sm">
                   <Download />
                 </IconButton>
               </Card.Action>
@@ -1208,37 +1353,35 @@ export const WithIcon = () => (
         <Card.Body>Inbound traffic up 8% since last Tuesday.</Card.Body>
         <Card.Footer>
           <Card.Action>
-            <Button kind="ghost" size="md">
+            <Button
+              kind="ghost"
+              size="md"
+              aria-label="View report for Analytics Dashboard">
               View report
             </Button>
           </Card.Action>
           <Card.Action>
-            <IconButton label="Share" kind="ghost" size="md">
-              <Share />
+            <IconButton
+              label="Copy link to Analytics Dashboard"
+              kind="ghost"
+              size="md">
+              <Copy />
             </IconButton>
           </Card.Action>
           <Card.Action>
             <IconButton
-              label="View"
+              label="Set up alerts for Analytics Dashboard"
               kind="ghost"
-              size="md"
-              onClick={(e) => {
-                e.stopPropagation();
-                console.log('View clicked');
-              }}>
-              <View />
+              size="md">
+              <Notification />
             </IconButton>
           </Card.Action>
           <Card.Action>
             <IconButton
-              label="Download"
+              label="Refresh Analytics Dashboard"
               kind="ghost"
-              size="md"
-              onClick={(e) => {
-                e.stopPropagation();
-                console.log('Download clicked');
-              }}>
-              <Download />
+              size="md">
+              <Renew />
             </IconButton>
           </Card.Action>
         </Card.Footer>
@@ -1249,14 +1392,17 @@ export const WithIcon = () => (
         <Card.Header
           headerMedia={<Favorite size="32" />}
           actions={
-            <Card.Actions>
+            <Card.Actions overflowMenuLabel="More actions for Favorite Items">
               <Card.Action>
-                <IconButton label="Edit" kind="ghost" size="sm">
+                <IconButton label="Edit Favorite Items" kind="ghost" size="sm">
                   <Edit />
                 </IconButton>
               </Card.Action>
               <Card.Action>
-                <IconButton label="Delete" kind="ghost" size="sm">
+                <IconButton
+                  label="Delete Favorite Items"
+                  kind="ghost"
+                  size="sm">
                   <TrashCan />
                 </IconButton>
               </Card.Action>
@@ -1268,7 +1414,11 @@ export const WithIcon = () => (
         </Card.Header>
         <Card.Body>12 items saved across 3 workspaces.</Card.Body>
         <Card.Footer>
-          <Button kind="tertiary" size="md">
+          <Button
+            kind="tertiary"
+            size="md"
+            href="https://carbondesignsystem.com"
+            aria-label="Learn more about Favorite Items">
             Learn more
           </Button>
         </Card.Footer>
@@ -1284,11 +1434,7 @@ export const WithMedia = () => (
     <Column lg={4} md={4} sm={4}>
       <Card>
         <Card.Media ratio="16x9">
-          <img
-            src={illustration16x9}
-            alt="Placeholder 16:9 ratio"
-            width="100%"
-          />
+          <img src={illustration16x9} alt="" width="100%" />
         </Card.Media>
         <Card.Header>
           <Card.Title label="Featured" description="Join us for the big reveal">
@@ -1301,7 +1447,10 @@ export const WithMedia = () => (
             <IconIndicator kind="in-progress" size={16} label="In progress" />
           </div>
           <Card.Action>
-            <IconButton label="Share" kind="ghost" size="md">
+            <IconButton
+              label="Share Product Launch Event"
+              kind="ghost"
+              size="md">
               <Share />
             </IconButton>
           </Card.Action>
@@ -1311,11 +1460,7 @@ export const WithMedia = () => (
     <Column lg={4} md={4} sm={4}>
       <Card>
         <Card.Media ratio="1x1">
-          <img
-            src={illustration2_1x1}
-            alt="Placeholder 1:1 ratio"
-            width="100%"
-          />
+          <img src={illustration2_1x1} alt="" width="100%" />
         </Card.Media>
         <Card.Header>
           <Card.Title description="Perfect for profile images">
@@ -1390,12 +1535,7 @@ export const WithTitleMedia = () => (
             label="Label"
             description="The title media slot positions an icon to the left of the title text"
             titleMedia={
-              <img
-                src={rebusClassic}
-                alt="IBM Classic Rebus logo"
-                width={48}
-                height={48}
-              />
+              <img src={rebusClassic} alt="" width={48} height={48} />
             }>
             Card with title icon
           </Card.Title>
@@ -1410,12 +1550,7 @@ export const WithTitleMedia = () => (
             label="Label"
             description="The title media slot positions an icon to the left of the title text"
             titleMedia={
-              <img
-                src={rebusClassic}
-                alt="IBM Classic Rebus logo"
-                width={64}
-                height={64}
-              />
+              <img src={rebusClassic} alt="" width={64} height={64} />
             }>
             Card with title icon
           </Card.Title>
@@ -1427,10 +1562,10 @@ export const WithTitleMedia = () => (
       <Card>
         <Card.Header
           actions={
-            <Card.Actions>
+            <Card.Actions overflowMenuLabel="More actions for Card with title icon">
               <Card.Action>
                 <IconButton
-                  label="Edit"
+                  label="Edit Card with title icon"
                   kind="ghost"
                   size="sm"
                   onClick={(e) => {
@@ -1442,7 +1577,7 @@ export const WithTitleMedia = () => (
               </Card.Action>
               <Card.Action>
                 <IconButton
-                  label="Delete"
+                  label="Delete Card with title icon"
                   kind="ghost"
                   size="sm"
                   onClick={(e) => {
@@ -1458,12 +1593,7 @@ export const WithTitleMedia = () => (
             label="Label"
             description="The title media slot positions an icon to the left of the title text"
             titleMedia={
-              <img
-                src={rebusClassic}
-                alt="IBM Classic Rebus logo"
-                width={48}
-                height={48}
-              />
+              <img src={rebusClassic} alt="" width={48} height={48} />
             }>
             Card with title icon
           </Card.Title>
@@ -1478,10 +1608,10 @@ export const WithTitleMedia = () => (
             <IconIndicator kind="succeeded" size={16} label="Succeeded" />
           }
           actions={
-            <Card.Actions>
+            <Card.Actions overflowMenuLabel="More actions for Card with title icon and status">
               <Card.Action>
                 <IconButton
-                  label="Edit"
+                  label="Edit Card with title icon and status"
                   kind="ghost"
                   size="sm"
                   onClick={(e) => {
@@ -1493,7 +1623,7 @@ export const WithTitleMedia = () => (
               </Card.Action>
               <Card.Action>
                 <IconButton
-                  label="Delete"
+                  label="Delete Card with title icon and status"
                   kind="ghost"
                   size="sm"
                   onClick={(e) => {
@@ -1509,14 +1639,9 @@ export const WithTitleMedia = () => (
             label="Label"
             description="The title media slot positions an icon to the left of the title text"
             titleMedia={
-              <img
-                src={rebusClassic}
-                alt="IBM Classic Rebus logo"
-                width={48}
-                height={48}
-              />
+              <img src={rebusClassic} alt="" width={48} height={48} />
             }>
-            Card with title icon
+            Card with title icon and status
           </Card.Title>
         </Card.Header>
         <Card.Body>Build passed all 847 checks. Ready to merge.</Card.Body>
@@ -1583,11 +1708,14 @@ export const WithTruncatedTitle = {
           <Card.Header
             actions={
               actionCount > 0 ? (
-                <Card.Actions>
+                <Card.Actions overflowMenuLabel={`More actions for ${title}`}>
                   {ACTION_ICONS.slice(0, actionCount).map(
                     ({ icon: Icon, label: iconLabel }) => (
                       <Card.Action key={iconLabel}>
-                        <IconButton label={iconLabel} kind="ghost" size="sm">
+                        <IconButton
+                          label={`${iconLabel} ${title}`}
+                          kind="ghost"
+                          size="sm">
                           <Icon />
                         </IconButton>
                       </Card.Action>
@@ -1608,12 +1736,12 @@ export const WithTruncatedTitle = {
           <Card.Body>{bodyText}</Card.Body>
           <Card.Footer>
             <Card.Action>
-              <IconButton label="Share" kind="ghost" size="md">
+              <IconButton label={`Share ${title}`} kind="ghost" size="md">
                 <Share />
               </IconButton>
             </Card.Action>
             <Card.Action>
-              <IconButton label="Download" kind="ghost" size="md">
+              <IconButton label={`Download ${title}`} kind="ghost" size="md">
                 <Download />
               </IconButton>
             </Card.Action>
@@ -1674,6 +1802,7 @@ export const WithVideo = () => (
         <Card.Media ratio="16x9">
           <video
             controls
+            aria-label="Product demo video"
             style={{
               width: '100%',
               height: '100%',
@@ -1699,7 +1828,7 @@ export const WithVideo = () => (
             height="100%"
             style={{ position: 'absolute' }}
             src="https://www.youtube.com/embed/Veg7njIKUm4?si=B9yWeUzcFHI4ITD1&amp;controls=0"
-            title="YouTube video player"
+            title="Tutorial series video"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerPolicy="strict-origin-when-cross-origin"></iframe>
@@ -1722,7 +1851,7 @@ export const WithVideo = () => (
             height={'100%'}
             style={{ position: 'absolute' }}
             src="https://www.youtube.com/embed/Veg7njIKUm4?si=B9yWeUzcFHI4ITD1&amp;controls=0"
-            title="YouTube video player"
+            title="Feature walkthrough video"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerPolicy="strict-origin-when-cross-origin"></iframe>

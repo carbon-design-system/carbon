@@ -50,7 +50,8 @@ export interface CardProps extends CardBaseProps {
    */
   onKeyDown?: (event: React.KeyboardEvent) => void;
   /**
-   * Disables the card and all interactive elements
+   * Disables the card surface and exposes its disabled state to assistive
+   * technology. Pass `disabled` separately to interactive elements inside.
    */
   disabled?: boolean;
   /**
