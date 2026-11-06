@@ -11,11 +11,11 @@ import { customElement, property } from 'lit/decorators.js';
 import '../components/empty-state';
 
 // Use ?url to get the asset URL for the `<img>` illustration.
-import noDataSrc from '../assets/no-data.svg?url';
-import notFoundSrc from '../assets/not-found.svg?url';
-import unauthorizedSrc from '../assets/unauthorized.svg?url';
-import errorSrc from '../assets/error.svg?url';
-import notificationSrc from '../assets/notification.svg?url';
+import noDataSrc from '../assets/no-data-light.svg?url';
+import notFoundSrc from '../assets/not-found-light.svg?url';
+import unauthorizedSrc from '../assets/unauthorized-light.svg?url';
+import errorSrc from '../assets/error-light.svg?url';
+import notificationSrc from '../assets/notification-light.svg?url';
 
 export type IllustrationKey =
   | 'No data'

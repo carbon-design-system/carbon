@@ -7,14 +7,147 @@
 
 import { html } from 'lit';
 import type { Meta } from '@storybook/web-components';
+import { action } from 'storybook/actions';
 
 import DocsPage from './empty-state.mdx';
 
 import './example/src/styles/_empty-state.scss';
 import './example/src/styles/_story-styles.scss';
+import customIllustration from './example/src/assets/custom-illustration.svg?url';
+import './example/src/preview-components/empty-state-preview';
 import './example/src/preview-components/empty-state-with-isometric-illustration';
 import './example/src/preview-components/empty-state-with-pictogram-illustration';
 import './example/src/preview-components/empty-state-unit';
+
+// ─── Stories: base empty-state (same as ibm-products) ────────────────────────
+
+const emptyStateCommonProps = {
+  heading: 'Start by adding data assets',
+  headingAs: 'h3',
+  size: 'md',
+  subtitleType: 'default',
+  illustrationSrc: '',
+  illustrationDescription: '',
+  actionType: 'none',
+  secondaryAction: false,
+  linkText: '',
+  linkTarget: '',
+};
+
+const baseArgTypes = {
+  subtitleType: {
+    name: 'subtitle-type',
+    control: { type: 'select' },
+    options: ['default', 'withTooltip'],
+  },
+  headingAs: {
+    name: 'heading-as',
+    control: { type: 'select' },
+    options: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
+  },
+  size: { control: { type: 'select' }, options: ['md', 'sm'] },
+  actionType: {
+    name: 'action-type',
+    control: { type: 'select' },
+    options: ['none', 'text', 'icon'],
+  },
+};
+
+const renderBase = (args) => html`
+  <empty-state-preview
+    heading-as="${args.headingAs}"
+    size="${args.size}"
+    heading="${args.heading}"
+    subtitle-type="${args.subtitleType}"
+    illustration-src="${args.illustrationSrc}"
+    illustration-description="${args.illustrationDescription}"
+    action-type="${args.actionType}"
+    ?secondary-action="${args.secondaryAction}"
+    link-text="${args.linkText}"
+    link-target="${args.linkTarget}"
+    @empty-state-action-click="${action('Clicked empty state action button')}"
+    @empty-state-secondary-action-click="${action('Clicked empty state secondary action button')}">
+  </empty-state-preview>
+`;
+
+export const Default = {
+  parameters: { layout: 'padded' },
+  args: { ...emptyStateCommonProps },
+  argTypes: baseArgTypes,
+  render: renderBase,
+};
+
+export const WithTooltipInSubtitle = {
+  name: 'With tooltip in subtitle',
+  parameters: { layout: 'padded' },
+  args: { ...emptyStateCommonProps, subtitleType: 'withTooltip' },
+  argTypes: baseArgTypes,
+  render: renderBase,
+};
+
+export const WithCustomIllustration = {
+  name: 'With custom illustration',
+  parameters: { layout: 'padded' },
+  args: {
+    ...emptyStateCommonProps,
+    illustrationSrc: customIllustration,
+    illustrationDescription: 'Test alt text',
+  },
+  argTypes: baseArgTypes,
+  render: renderBase,
+};
+
+export const WithAction = {
+  name: 'With action',
+  parameters: { layout: 'padded' },
+  args: { ...emptyStateCommonProps, actionType: 'text' },
+  argTypes: baseArgTypes,
+  render: renderBase,
+};
+
+export const WithActionIconButton = {
+  name: 'With action icon button',
+  parameters: { layout: 'padded' },
+  args: { ...emptyStateCommonProps, actionType: 'icon' },
+  argTypes: baseArgTypes,
+  render: renderBase,
+};
+
+export const WithSecondaryAction = {
+  name: 'With secondary action',
+  parameters: { layout: 'padded' },
+  args: {
+    ...emptyStateCommonProps,
+    actionType: 'text',
+    secondaryAction: true,
+  },
+  argTypes: baseArgTypes,
+  render: renderBase,
+};
+
+export const WithLink = {
+  name: 'With link',
+  parameters: { layout: 'padded' },
+  args: {
+    ...emptyStateCommonProps,
+    linkText: 'View documentation',
+    linkTarget: '_blank',
+  },
+  argTypes: baseArgTypes,
+  render: renderBase,
+};
+
+export const WithActionAndLink = {
+  name: 'With action and link',
+  parameters: { layout: 'padded' },
+  args: {
+    ...emptyStateCommonProps,
+    actionType: 'icon',
+    linkText: 'View documentation',
+  },
+  argTypes: baseArgTypes,
+  render: renderBase,
+};
 
 // ─── Story: unit with isometric illustration ─────────────────────────────────
 
@@ -122,7 +255,7 @@ export const emptyStateInUI = {
 };
 
 const meta: Meta = {
-  title: 'Examples/EmptyState',
+  title: 'Examples/EmptyStates/EmptyState',
   tags: ['autodocs'],
   parameters: {
     layout: 'fullscreen',

@@ -99,3 +99,24 @@
     justify-content: center;
   }
 }
+
+// Information icon trigger used by the "With tooltip in subtitle" story
+.es-example__tooltip-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  vertical-align: middle;
+
+  svg {
+    fill: $icon-primary;
+  }
+
+  &:focus {
+    outline: 2px solid $focus;
+  }
+}
