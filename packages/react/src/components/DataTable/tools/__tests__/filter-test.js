@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import React from 'react';
 import { defaultFilterRows } from '../filter';
 
 describe('defaultFilterRows', () => {
@@ -58,6 +59,67 @@ describe('defaultFilterRows', () => {
     expect(result).toEqual([]);
   });
 
+  it.each([
+    ['null', null],
+    ['undefined', undefined],
+  ])('should not match the text %s in an empty cell', (inputValue, value) => {
+    const result = defaultFilterRows({
+      ...defaultOptions,
+      rowIds: ['1'],
+      cellsById: {
+        ...cellsById,
+        '1-name': { value },
+      },
+      inputValue,
+    });
+
+    expect(result).toEqual([]);
+  });
+
+  it('should not match the string form of objects and React elements', () => {
+    const result = defaultFilterRows({
+      ...defaultOptions,
+      rowIds: ['1', '2'],
+      cellsById: {
+        ...cellsById,
+        '1-name': { value: { first: 'Alice' } },
+        '2-name': { value: <a href="#bob">Bob</a> },
+      },
+      inputValue: 'object',
+    });
+
+    expect(result).toEqual([]);
+  });
+
+  it('should match objects that define their own string form', () => {
+    const result = defaultFilterRows({
+      ...defaultOptions,
+      rowIds: ['1', '2'],
+      cellsById: {
+        ...cellsById,
+        '1-name': { value: ['Alice', 'Allison'] },
+        '2-name': { value: { toString: () => 'Allison' } },
+      },
+      inputValue: 'allison',
+    });
+
+    expect(result).toEqual(['1', '2']);
+  });
+
+  it('should match the number zero', () => {
+    const result = defaultFilterRows({
+      ...defaultOptions,
+      rowIds: ['1'],
+      cellsById: {
+        ...cellsById,
+        '1-age': { value: 0 },
+      },
+      inputValue: '0',
+    });
+
+    expect(result).toEqual(['1']);
+  });
+
   it('should perform a case-insensitive search', () => {
     const result = defaultFilterRows({
       ...defaultOptions,
@@ -81,6 +143,17 @@ describe('defaultFilterRows', () => {
       ...defaultOptions,
       rowIds: [],
       inputValue: 'alice',
+    });
+
+    expect(result).toEqual([]);
+  });
+
+  it('should not throw when no cell in a row matches and a cell is missing', () => {
+    const result = defaultFilterRows({
+      ...defaultOptions,
+      rowIds: ['1'],
+      cellsById: { '1-name': { value: 'Alice' } },
+      inputValue: 'xyz',
     });
 
     expect(result).toEqual([]);

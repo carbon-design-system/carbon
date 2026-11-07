@@ -6,8 +6,25 @@
  */
 
 /**
+ * Determines whether a cell value has text that a filter can match. Without this
+ * check, empty cells and values without a meaningful string form (e.g., React
+ * elements) would match on their `String()` output, such as `null`, `undefined`,
+ * or `[object Object]`.
+ */
+const hasFilterableText = (value: unknown) => {
+  if (value === null || value === undefined || typeof value === 'boolean') {
+    return false;
+  }
+
+  return (
+    typeof value !== 'object' || value.toString !== Object.prototype.toString
+  );
+};
+
+/**
  * Filters row IDs based on whether any of the cell values in the row include
- * the input value as a substring. Boolean cell values are ignored.
+ * the input value as a substring. Cell values without filterable text, such as
+ * booleans, empty cells, and React elements, are ignored.
  */
 export const defaultFilterRows = ({
   rowIds,
@@ -34,11 +51,11 @@ export const defaultFilterRows = ({
   return rowIds.filter((rowId) =>
     headers.some(({ key }) => {
       const cellId = getCellId(rowId, key);
-      const cell = cellsById[cellId];
+      const value = cellsById[cellId]?.value;
 
-      if (typeof cell.value === 'boolean') return false;
+      if (!hasFilterableText(value)) return false;
 
-      return String(cell.value).toLowerCase().includes(normalizedInput);
+      return String(value).toLowerCase().includes(normalizedInput);
     })
   );
 };
