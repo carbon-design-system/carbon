@@ -103,6 +103,66 @@ describe('cds-table', () => {
     expect(firstCellText).to.equal('Field 1');
   });
 
+  it('should sort rows with numeric text by their numeric value', async () => {
+    const el = await fixture(html`
+      <cds-table is-sortable>
+        <cds-table-head>
+          <cds-table-header-row>
+            <cds-table-header-cell>Value</cds-table-header-cell>
+          </cds-table-header-row>
+        </cds-table-head>
+        <cds-table-body>
+          ${['3', '-10', '3.25', '-1', '10', '-5', '3.10'].map(
+            (value) =>
+              html`<cds-table-row
+                ><cds-table-cell>${value}</cds-table-cell></cds-table-row
+              >`
+          )}
+        </cds-table-body>
+      </cds-table>
+    `);
+
+    const headerCell = el.querySelector('cds-table-header-cell');
+    const sortedListener = oneEvent(el, 'cds-table-sorted');
+
+    headerCell?.dispatchEvent(
+      new CustomEvent('cds-table-header-cell-sort', {
+        bubbles: true,
+        composed: true,
+        cancelable: true,
+        detail: {
+          oldSortDirection: 'none',
+          sortDirection: 'ascending',
+        },
+      })
+    );
+
+    await sortedListener;
+    await el.updateComplete;
+
+    const cellText = [...el.querySelectorAll('cds-table-cell')].map((cell) =>
+      cell.textContent?.trim()
+    );
+    expect(cellText).to.deep.equal([
+      '-10',
+      '-5',
+      '-1',
+      '3',
+      '3.10',
+      '3.25',
+      '10',
+    ]);
+  });
+
+  it('should keep sorting non-numeric text with the collator', () => {
+    const el = document.createElement('cds-table');
+    const collator = new Intl.Collator('en');
+
+    expect(el.customSortRow('10 MB', '9 MB', collator)).to.be.lessThan(0);
+    expect(el.customSortRow('b', 'a', collator)).to.be.greaterThan(0);
+    expect(el.customSortRow('', '5', collator)).to.be.lessThan(0);
+  });
+
   it('should filter rows when search input event is fired', async () => {
     const el = await fixture(html`
       <cds-table>
