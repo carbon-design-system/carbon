@@ -114,8 +114,10 @@ info, and should return -1, 0, or 1 as a result (mirroring the native sort
 behavior in JavaScript).
 
 The component uses a default `Intl.Collator` object created with the current set
-locale to sort the rows. The default sorting row function uses this collator,
-and as such it is needed in the custom sorting function.
+locale to sort the rows. The default sorting row function compares cells whose
+text represents a number (e.g., `-5` or `3.25`) by their numeric value, and uses
+this collator for all other cells. As such, the collator is needed in the custom
+sorting function.
 
 For example, this `customSortRow` function would take on the following shape:
 
