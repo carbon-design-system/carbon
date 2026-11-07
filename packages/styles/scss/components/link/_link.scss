@@ -28,6 +28,10 @@ $link-focus-text-color: custom-property.get-var(
   'link-focus-text-color',
   $focus
 );
+$link-active-text-color: custom-property.get-var(
+  'link-active-text-color',
+  $text-primary
+);
 
 /// Link styles
 /// @access public
@@ -54,7 +58,7 @@ $link-focus-text-color: custom-property.get-var(
     &:active:visited {
       @include focus-outline;
 
-      color: $link-text-color;
+      color: $link-active-text-color;
       outline-color: $link-focus-text-color;
       text-decoration: underline;
     }
@@ -76,7 +80,7 @@ $link-focus-text-color: custom-property.get-var(
       }
 
       &:active:not(.#{$prefix}--link--disabled):visited:hover {
-        color: $link-text-color;
+        color: $link-active-text-color;
       }
     }
   }
@@ -110,7 +114,7 @@ $link-focus-text-color: custom-property.get-var(
     .#{$prefix}--link.#{$prefix}--link--visited:active:not(
         .#{$prefix}--link--disabled
       ):visited:hover {
-      color: $link-text-color;
+      color: $link-active-text-color;
     }
   }
 

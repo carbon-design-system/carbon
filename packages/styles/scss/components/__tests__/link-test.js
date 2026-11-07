@@ -76,7 +76,7 @@ describe('scss/components/link', () => {
       expect.arrayContaining([
         {
           prop: 'color',
-          value: expect.stringContaining('--cds-link-text-color'),
+          value: expect.stringContaining('--cds-link-active-text-color'),
         },
       ]),
     ]);
@@ -97,7 +97,7 @@ describe('scss/components/link', () => {
       expect.arrayContaining([
         {
           prop: 'color',
-          value: expect.stringContaining('--cds-link-text-color'),
+          value: expect.stringContaining('--cds-link-active-text-color'),
         },
       ]),
     ]);
