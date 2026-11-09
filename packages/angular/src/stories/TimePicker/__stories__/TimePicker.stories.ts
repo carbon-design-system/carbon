@@ -16,7 +16,7 @@ import {
   TimePickerSelectComponent,
 } from '@carbon/angular/time-picker';
 import { SelectItemComponent } from '@carbon/angular/select';
-import { LayerComponent } from '@carbon/angular/layer';
+import { withLayers } from '../../../../.storybook/decorators/with-layers';
 
 // ─── WC-parity stories (one-for-one with @carbon/web-components Time Picker) ───
 
@@ -101,7 +101,6 @@ const meta: Meta<any> = {
         TimePickerComponent,
         TimePickerSelectComponent,
         SelectItemComponent,
-        LayerComponent,
       ],
     }),
   ],
@@ -155,6 +154,7 @@ export const Default: Story = {
 
 // WC: WithLayer
 export const WithLayer: Story = {
+  decorators: [withLayers],
   parameters: {
     layout: 'fullscreen',
   },
@@ -163,82 +163,22 @@ export const WithLayer: Story = {
   render: (args) => ({
     props: args,
     template: `
-      <div class="cds--with-layer__background">
-        <div class="cds--with-layer__label">$background</div>
-        <div class="cds--with-layer__content">
-          <cds-ng-time-picker
-            id="time-picker"
-            [labelText]="labelText"
-            [placeholder]="placeholder">
-            <cds-ng-time-picker-select
-              id="time-picker-select-1"
-              defaultValue="AM"
-              ariaLabel="Select AM/PM">
-              <cds-ng-select-item value="AM">AM</cds-ng-select-item>
-              <cds-ng-select-item value="PM" [selected]="true">PM</cds-ng-select-item>
-            </cds-ng-time-picker-select>
-            <cds-ng-time-picker-select
-              id="time-picker-select-2"
-              ariaLabel="Select timezone"
-              defaultValue="Time zone 1">
-              <cds-ng-select-item value="Time zone 1">Time zone 1</cds-ng-select-item>
-              <cds-ng-select-item value="Time zone 2" [selected]="true">Time zone 2</cds-ng-select-item>
-            </cds-ng-time-picker-select>
-          </cds-ng-time-picker>
-          <cds-ng-layer [withBackground]="true">
-            <div class="cds--with-layer__layer">
-              <div class="cds--with-layer__label">$layer-01</div>
-              <div class="cds--with-layer__content">
-                <cds-ng-time-picker
-                  id="time-picker-1"
-                  [labelText]="labelText"
-                  [placeholder]="placeholder">
-                  <cds-ng-time-picker-select
-                    id="time-picker-select-3"
-                    defaultValue="AM"
-                    ariaLabel="Select AM/PM">
-                    <cds-ng-select-item value="AM">AM</cds-ng-select-item>
-                    <cds-ng-select-item value="PM" [selected]="true">PM</cds-ng-select-item>
-                  </cds-ng-time-picker-select>
-                  <cds-ng-time-picker-select
-                    id="time-picker-select-4"
-                    ariaLabel="Select timezone"
-                    defaultValue="Time zone 1">
-                    <cds-ng-select-item value="Time zone 1">Time zone 1</cds-ng-select-item>
-                    <cds-ng-select-item value="Time zone 2" [selected]="true">Time zone 2</cds-ng-select-item>
-                  </cds-ng-time-picker-select>
-                </cds-ng-time-picker>
-                <cds-ng-layer [withBackground]="true">
-                  <div class="cds--with-layer__layer">
-                    <div class="cds--with-layer__label">$layer-02</div>
-                    <div class="cds--with-layer__content">
-                      <cds-ng-time-picker
-                        id="time-picker-2"
-                        [labelText]="labelText"
-                        [placeholder]="placeholder">
-                        <cds-ng-time-picker-select
-                          id="time-picker-select-5"
-                          defaultValue="AM"
-                          ariaLabel="Select AM/PM">
-                          <cds-ng-select-item value="AM">AM</cds-ng-select-item>
-                          <cds-ng-select-item value="PM" [selected]="true">PM</cds-ng-select-item>
-                        </cds-ng-time-picker-select>
-                        <cds-ng-time-picker-select
-                          id="time-picker-select-6"
-                          ariaLabel="Select timezone"
-                          defaultValue="Time zone 1">
-                          <cds-ng-select-item value="Time zone 1">Time zone 1</cds-ng-select-item>
-                          <cds-ng-select-item value="Time zone 2" [selected]="true">Time zone 2</cds-ng-select-item>
-                        </cds-ng-time-picker-select>
-                      </cds-ng-time-picker>
-                    </div>
-                  </div>
-                </cds-ng-layer>
-              </div>
-            </div>
-          </cds-ng-layer>
-        </div>
-      </div>
+      <cds-ng-time-picker
+        [labelText]="labelText"
+        [placeholder]="placeholder">
+        <cds-ng-time-picker-select
+          defaultValue="AM"
+          ariaLabel="Select AM/PM">
+          <cds-ng-select-item value="AM">AM</cds-ng-select-item>
+          <cds-ng-select-item value="PM" [selected]="true">PM</cds-ng-select-item>
+        </cds-ng-time-picker-select>
+        <cds-ng-time-picker-select
+          ariaLabel="Select timezone"
+          defaultValue="Time zone 1">
+          <cds-ng-select-item value="Time zone 1">Time zone 1</cds-ng-select-item>
+          <cds-ng-select-item value="Time zone 2" [selected]="true">Time zone 2</cds-ng-select-item>
+        </cds-ng-time-picker-select>
+      </cds-ng-time-picker>
     `,
   }),
 };
