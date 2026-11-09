@@ -3410,6 +3410,8 @@ __metadata:
     "@angular/forms": "npm:^19.0.0"
     "@angular/platform-browser": "npm:^19.0.0"
     "@angular/platform-browser-dynamic": "npm:^19.0.0"
+    "@carbon/icon-helpers": "workspace:^"
+    "@carbon/icons": "workspace:^"
     "@carbon/styles": "workspace:^"
     "@carbon/web-components": "workspace:^"
     "@open-wc/testing": "npm:^5.0.0"
@@ -3691,7 +3693,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/icon-helpers@npm:^11.0.0-alpha.2, @carbon/icon-helpers@workspace:packages/icon-helpers":
+"@carbon/icon-helpers@npm:^11.0.0-alpha.2, @carbon/icon-helpers@workspace:^, @carbon/icon-helpers@workspace:packages/icon-helpers":
   version: 0.0.0-use.local
   resolution: "@carbon/icon-helpers@workspace:packages/icon-helpers"
   dependencies:
@@ -3738,7 +3740,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/icons@npm:^12.0.0-alpha.3, @carbon/icons@workspace:packages/icons":
+"@carbon/icons@npm:^12.0.0-alpha.3, @carbon/icons@workspace:^, @carbon/icons@workspace:packages/icons":
   version: 0.0.0-use.local
   resolution: "@carbon/icons@workspace:packages/icons"
   dependencies:

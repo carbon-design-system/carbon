@@ -59,6 +59,8 @@
     "@angular/forms": "^19.0.0",
     "@angular/platform-browser": "^19.0.0",
     "@angular/platform-browser-dynamic": "^19.0.0",
+    "@carbon/icon-helpers": "workspace:^",
+    "@carbon/icons": "workspace:^",
     "@carbon/styles": "workspace:^",
     "@carbon/web-components": "workspace:^",
     "@open-wc/testing": "^5.0.0",

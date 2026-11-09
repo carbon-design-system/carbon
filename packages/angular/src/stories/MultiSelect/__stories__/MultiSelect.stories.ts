@@ -23,6 +23,10 @@ import {
 import { ButtonComponent, ButtonSetComponent } from '@carbon/angular/button';
 import { IconButtonComponent } from '@carbon/angular/icon-button';
 import { withLayers } from '../../../../.storybook/decorators/with-layers';
+import { iconToSvg } from '../../../../.storybook/helpers/icon-to-svg';
+import View16 from '@carbon/icons/es/view/16.js';
+import FolderOpen16 from '@carbon/icons/es/folder--open/16.js';
+import Folders16 from '@carbon/icons/es/folders/16.js';
 import { LinkComponent } from '@carbon/angular/link';
 import { ToggletipComponent } from '@carbon/angular/toggle-tip';
 
@@ -43,29 +47,17 @@ const content = `
   </div>
 `;
 
-// Inline copies of the Carbon `view`, `folder--open` and `folders` 16px icons.
-const iconAttrs =
-  'slot="icon" focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true" width="16" height="16"';
-
 const actions = `
   <cds-ng-icon-button kind="ghost" slot="actions" size="lg">
-    <svg ${iconAttrs} viewBox="0 0 16 16">
-      <path d="M15.5,7.8C14.3,4.7,11.3,2.6,8,2.5C4.7,2.6,1.7,4.7,0.5,7.8c0,0.1,0,0.2,0,0.3c1.2,3.1,4.1,5.2,7.5,5.3c3.3-0.1,6.3-2.2,7.5-5.3C15.5,8.1,15.5,7.9,15.5,7.8z M8,12.5c-2.7,0-5.4-2-6.5-4.5c1-2.5,3.8-4.5,6.5-4.5s5.4,2,6.5,4.5C13.4,10.5,10.6,12.5,8,12.5z"/>
-      <path d="M8,5C6.3,5,5,6.3,5,8s1.3,3,3,3s3-1.3,3-3S9.7,5,8,5z M8,10c-1.1,0-2-0.9-2-2s0.9-2,2-2s2,0.9,2,2S9.1,10,8,10z"/>
-    </svg>
+    ${iconToSvg(View16, { slot: 'icon' })}
     <span slot="tooltip-content"> View </span>
   </cds-ng-icon-button>
   <cds-ng-icon-button kind="ghost" slot="actions" size="lg">
-    <svg ${iconAttrs} viewBox="0 0 32 32">
-      <path d="M28,8H20.8284L17.4143,4.5859A2,2,0,0,0,16,4H4A2,2,0,0,0,2,6V26a2,2,0,0,0,2,2H28a2,2,0,0,0,2-2V10A2,2,0,0,0,28,8ZM8,26V14h8v6.17l-2.59-2.58L12,19l5,5,5-5-1.41-1.41L18,20.17V14a2.0025,2.0025,0,0,0-2-2H8a2.0025,2.0025,0,0,0-2,2V26H4V6H16l4,4h8v2H22v2h6V26Z"/>
-    </svg>
+    ${iconToSvg(FolderOpen16, { slot: 'icon' })}
     <span slot="tooltip-content"> Open folder</span>
   </cds-ng-icon-button>
   <cds-ng-icon-button kind="ghost" slot="actions" size="lg">
-    <svg ${iconAttrs} viewBox="0 0 32 32">
-      <path d="M26,28H6a2.0021,2.0021,0,0,1-2-2V11A2.0021,2.0021,0,0,1,6,9h5.6665a2.0119,2.0119,0,0,1,1.2007.4L16.3335,12H26a2.0021,2.0021,0,0,1,2,2V26A2.0021,2.0021,0,0,1,26,28ZM11.6665,11H5.9985L6,26H26V14H15.6665Z"/>
-      <path d="M28,9H17.6665l-4-3H6V4h7.6665a2.0119,2.0119,0,0,1,1.2007.4L18.3335,7H28Z"/>
-    </svg>
+    ${iconToSvg(Folders16, { slot: 'icon' })}
     <span slot="tooltip-content"> Folders </span>
   </cds-ng-icon-button>
   <cds-ng-ai-label-action-button>View details</cds-ng-ai-label-action-button>

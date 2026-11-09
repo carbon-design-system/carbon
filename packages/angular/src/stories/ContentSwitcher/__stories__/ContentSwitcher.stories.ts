@@ -12,7 +12,6 @@ import {
   type ArgTypes,
 } from '@storybook/angular';
 import { fn } from 'storybook/test';
-import { toString } from '@carbon/icon-helpers';
 import TableOfContents16 from '@carbon/icons/es/table-of-contents/16.js';
 import Workspace16 from '@carbon/icons/es/workspace/16.js';
 import ViewMode2_16 from '@carbon/icons/es/view--mode-2/16.js';
@@ -21,6 +20,7 @@ import {
   ContentSwitcherItemComponent,
 } from '@carbon/angular/content-switcher';
 import { withLayers } from '../../../../.storybook/decorators/with-layers';
+import { iconToSvg } from '../../../../.storybook/helpers/icon-to-svg';
 
 // ─── WC-parity stories (one-for-one with @carbon/web-components Content Switcher) ───
 
@@ -110,9 +110,9 @@ const textItemsTemplate = `
   </cds-ng-content-switcher-item>
 `;
 
-const tableOfContentsIcon = toString(TableOfContents16);
-const workspaceIcon = toString(Workspace16);
-const viewMode2Icon = toString(ViewMode2_16);
+const tableOfContentsIcon = iconToSvg(TableOfContents16);
+const workspaceIcon = iconToSvg(Workspace16);
+const viewMode2Icon = iconToSvg(ViewMode2_16);
 
 const iconItemsTemplate = `
   <cds-ng-content-switcher-item icon value="all" [disabled]="disabled">
