@@ -107,7 +107,13 @@ export type OverflowMenuItemProps =
   | (OverflowMenuItemBaseProps &
       ButtonAttributeProps &
       ButtonOnlyProps & { href?: undefined })
-  | (OverflowMenuItemBaseProps & AnchorAttributeProps & { href: string });
+  | (OverflowMenuItemBaseProps &
+      AnchorAttributeProps & {
+        /**
+         * If given, overflow item will render as a link with the given href
+         */
+        href: string;
+      });
 
 const frFn = forwardRef<HTMLElement, OverflowMenuItemProps>;
 
