@@ -12,11 +12,15 @@ import {
   type ArgTypes,
 } from '@storybook/angular';
 import { fn } from 'storybook/test';
+import { toString } from '@carbon/icon-helpers';
+import TableOfContents16 from '@carbon/icons/es/table-of-contents/16.js';
+import Workspace16 from '@carbon/icons/es/workspace/16.js';
+import ViewMode2_16 from '@carbon/icons/es/view--mode-2/16.js';
 import {
   ContentSwitcherComponent,
   ContentSwitcherItemComponent,
 } from '@carbon/angular/content-switcher';
-import { LayerComponent } from '@carbon/angular/layer';
+import { withLayers } from '../../../../.storybook/decorators/with-layers';
 
 // ─── WC-parity stories (one-for-one with @carbon/web-components Content Switcher) ───
 
@@ -106,12 +110,9 @@ const textItemsTemplate = `
   </cds-ng-content-switcher-item>
 `;
 
-const svgOpen = `<svg slot="icon" focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true" width="16" height="16" viewBox="0 0 32 32">`;
-
-// Carbon icons: table-of-contents/16, workspace/16, view--mode-2/16
-const tableOfContentsIcon = `${svgOpen}<path d="M4 6H22V8H4z"/><path d="M4 12H22V14H4z"/><path d="M4 18H22V20H4z"/><path d="M4 24H22V26H4z"/><path d="M26 6H28V8H26z"/><path d="M26 12H28V14H26z"/><path d="M26 18H28V20H26z"/><path d="M26 24H28V26H26z"/></svg>`;
-const workspaceIcon = `${svgOpen}<path d="M16,17v8H6V17H16m0-2H6a2,2,0,0,0-2,2v8a2,2,0,0,0,2,2H16a2,2,0,0,0,2-2V17a2,2,0,0,0-2-2Z"/><path d="M27,6v5H17V6H27m0-2H17a2,2,0,0,0-2,2v5a2,2,0,0,0,2,2H27a2,2,0,0,0,2-2V6a2,2,0,0,0-2-2Z"/><path d="M27,17v5H22V17h5m0-2H22a2,2,0,0,0-2,2v5a2,2,0,0,0,2,2h5a2,2,0,0,0,2-2V17a2,2,0,0,0-2-2Z"/><path d="M11,6v5H6V6h5m0-2H6A2,2,0,0,0,4,6v5a2,2,0,0,0,2,2h5a2,2,0,0,0,2-2V6a2,2,0,0,0-2-2Z"/></svg>`;
-const viewMode2Icon = `${svgOpen}<path d="M4 26H28V28H4z"/><path d="M4 19H28V21H4z"/><path d="M12,6v6H6V6h6m0-2H6A2,2,0,0,0,4,6v6a2,2,0,0,0,2,2h6a2,2,0,0,0,2-2V6a2,2,0,0,0-2-2Z"/><path d="M26,6v6H20V6h6m0-2H20a2,2,0,0,0-2,2v6a2,2,0,0,0,2,2h6a2,2,0,0,0,2-2V6a2,2,0,0,0-2-2Z"/></svg>`;
+const tableOfContentsIcon = toString(TableOfContents16);
+const workspaceIcon = toString(Workspace16);
+const viewMode2Icon = toString(ViewMode2_16);
 
 const iconItemsTemplate = `
   <cds-ng-content-switcher-item icon value="all" [disabled]="disabled">
@@ -140,33 +141,6 @@ const switcherTemplate = (items: string) => `
   </cds-ng-content-switcher>
 `;
 
-// Mirrors the `withLayers` decorator of the web components stories: the story
-// content rendered on $background, $layer-01 and $layer-02.
-const layeredTemplate = (items: string) => `
-  <div class="cds--with-layer__background">
-    <div class="cds--with-layer__label">$background</div>
-    <div class="cds--with-layer__content">
-      ${switcherTemplate(items)}
-      <cds-ng-layer [withBackground]="true">
-        <div class="cds--with-layer__layer">
-          <div class="cds--with-layer__label">$layer-01</div>
-          <div class="cds--with-layer__content">
-            ${switcherTemplate(items)}
-            <cds-ng-layer [withBackground]="true">
-              <div class="cds--with-layer__layer">
-                <div class="cds--with-layer__label">$layer-02</div>
-                <div class="cds--with-layer__content">
-                  ${switcherTemplate(items)}
-                </div>
-              </div>
-            </cds-ng-layer>
-          </div>
-        </div>
-      </cds-ng-layer>
-    </div>
-  </div>
-`;
-
 const lowContrastArgTypes: ArgTypes = {
   ...argTypes,
   lowContrast: {
@@ -186,11 +160,7 @@ const meta: Meta<any> = {
   args: { onBeforeSelect: fn(), onChange: fn() },
   decorators: [
     moduleMetadata({
-      imports: [
-        ContentSwitcherComponent,
-        ContentSwitcherItemComponent,
-        LayerComponent,
-      ],
+      imports: [ContentSwitcherComponent, ContentSwitcherItemComponent],
     }),
   ],
 };
@@ -222,6 +192,7 @@ export const IconOnly: Story = {
 
 // WC: IconOnlyWithLayer
 export const IconOnlyWithLayer: Story = {
+  decorators: [withLayers],
   args: { ...sharedArgs },
   argTypes,
   parameters: {
@@ -230,7 +201,7 @@ export const IconOnlyWithLayer: Story = {
   },
   render: (args) => ({
     props: args,
-    template: layeredTemplate(iconItemsTemplate),
+    template: switcherTemplate(iconItemsTemplate),
   }),
 };
 
@@ -264,6 +235,7 @@ export const lowContrastIconOnly: Story = {
 
 // WC: WithLayer
 export const WithLayer: Story = {
+  decorators: [withLayers],
   args: { ...sharedArgs },
   argTypes,
   parameters: {
@@ -272,6 +244,6 @@ export const WithLayer: Story = {
   },
   render: (args) => ({
     props: args,
-    template: layeredTemplate(textItemsTemplate),
+    template: switcherTemplate(textItemsTemplate),
   }),
 };

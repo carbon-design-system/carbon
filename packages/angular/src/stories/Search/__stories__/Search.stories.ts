@@ -16,7 +16,7 @@ import {
   SearchComponent,
   SearchSkeletonComponent,
 } from '@carbon/angular/search';
-import { LayerComponent } from '@carbon/angular/layer';
+import { withLayers } from '../../../../.storybook/decorators/with-layers';
 
 // ─── WC-parity stories (one-for-one with @carbon/web-components Search) ──────
 
@@ -108,7 +108,6 @@ const meta: Meta<any> = {
       imports: [
         SearchComponent,
         SearchSkeletonComponent,
-        LayerComponent,
         FormsModule,
         ReactiveFormsModule,
       ],
@@ -178,6 +177,7 @@ export const Expandable: Story = {
 
 // WC: ExpandableWithLayer
 export const ExpandableWithLayer: Story = {
+  decorators: [withLayers],
   args: { ...args, expanded: false },
   argTypes,
   parameters: {
@@ -186,72 +186,21 @@ export const ExpandableWithLayer: Story = {
   render: (args) => ({
     props: args,
     template: `
-      <div class="cds--with-layer__background">
-        <div class="cds--with-layer__label">$background</div>
-        <div class="cds--with-layer__content">
-          <div [style.width.px]="defaultWidth">
-            <cds-ng-search
-              [autoComplete]="autoComplete"
-              [autofocus]="autofocus"
-              [closeButtonLabelText]="closeButtonLabelText"
-              [disabled]="disabled"
-              [labelText]="labelText"
-              [placeholder]="placeholder"
-              [size]="size"
-              [type]="type"
-              [role]="role"
-              [value]="value"
-              [expandable]="true"
-              [expanded]="expanded">
-            </cds-ng-search>
-          </div>
-          <cds-ng-layer [withBackground]="true">
-            <div class="cds--with-layer__layer">
-              <div class="cds--with-layer__label">$layer-01</div>
-              <div class="cds--with-layer__content">
-                <div [style.width.px]="defaultWidth">
-                  <cds-ng-search
-                    [autoComplete]="autoComplete"
-                    [autofocus]="autofocus"
-                    [closeButtonLabelText]="closeButtonLabelText"
-                    [disabled]="disabled"
-                    [labelText]="labelText"
-                    [placeholder]="placeholder"
-                    [size]="size"
-                    [type]="type"
-                    [role]="role"
-                    [value]="value"
-                    [expandable]="true"
-                    [expanded]="expanded">
-                  </cds-ng-search>
-                </div>
-                <cds-ng-layer [withBackground]="true">
-                  <div class="cds--with-layer__layer">
-                    <div class="cds--with-layer__label">$layer-02</div>
-                    <div class="cds--with-layer__content">
-                      <div [style.width.px]="defaultWidth">
-                        <cds-ng-search
-                          [autoComplete]="autoComplete"
-                          [autofocus]="autofocus"
-                          [closeButtonLabelText]="closeButtonLabelText"
-                          [disabled]="disabled"
-                          [labelText]="labelText"
-                          [placeholder]="placeholder"
-                          [size]="size"
-                          [type]="type"
-                          [role]="role"
-                          [value]="value"
-                          [expandable]="true"
-                          [expanded]="expanded">
-                        </cds-ng-search>
-                      </div>
-                    </div>
-                  </div>
-                </cds-ng-layer>
-              </div>
-            </div>
-          </cds-ng-layer>
-        </div>
+      <div [style.width.px]="defaultWidth">
+        <cds-ng-search
+          [autoComplete]="autoComplete"
+          [autofocus]="autofocus"
+          [closeButtonLabelText]="closeButtonLabelText"
+          [disabled]="disabled"
+          [labelText]="labelText"
+          [placeholder]="placeholder"
+          [size]="size"
+          [type]="type"
+          [role]="role"
+          [value]="value"
+          [expandable]="true"
+          [expanded]="expanded">
+        </cds-ng-search>
       </div>
     `,
   }),
@@ -284,6 +233,7 @@ export const Skeleton: Story = {
 
 // WC: WithLayer
 export const WithLayer: Story = {
+  decorators: [withLayers],
   args,
   argTypes,
   parameters: {
@@ -292,66 +242,19 @@ export const WithLayer: Story = {
   render: (args) => ({
     props: args,
     template: `
-      <div class="cds--with-layer__background">
-        <div class="cds--with-layer__label">$background</div>
-        <div class="cds--with-layer__content">
-          <div [style.width.px]="defaultWidth">
-            <cds-ng-search
-              [autoComplete]="autoComplete"
-              [autofocus]="autofocus"
-              [closeButtonLabelText]="closeButtonLabelText"
-              [disabled]="disabled"
-              [labelText]="labelText"
-              [placeholder]="placeholder"
-              [size]="size"
-              [type]="type"
-              [role]="role"
-              [value]="value">
-            </cds-ng-search>
-          </div>
-          <cds-ng-layer [withBackground]="true">
-            <div class="cds--with-layer__layer">
-              <div class="cds--with-layer__label">$layer-01</div>
-              <div class="cds--with-layer__content">
-                <div [style.width.px]="defaultWidth">
-                  <cds-ng-search
-                    [autoComplete]="autoComplete"
-                    [autofocus]="autofocus"
-                    [closeButtonLabelText]="closeButtonLabelText"
-                    [disabled]="disabled"
-                    [labelText]="labelText"
-                    [placeholder]="placeholder"
-                    [size]="size"
-                    [type]="type"
-                    [role]="role"
-                    [value]="value">
-                  </cds-ng-search>
-                </div>
-                <cds-ng-layer [withBackground]="true">
-                  <div class="cds--with-layer__layer">
-                    <div class="cds--with-layer__label">$layer-02</div>
-                    <div class="cds--with-layer__content">
-                      <div [style.width.px]="defaultWidth">
-                        <cds-ng-search
-                          [autoComplete]="autoComplete"
-                          [autofocus]="autofocus"
-                          [closeButtonLabelText]="closeButtonLabelText"
-                          [disabled]="disabled"
-                          [labelText]="labelText"
-                          [placeholder]="placeholder"
-                          [size]="size"
-                          [type]="type"
-                          [role]="role"
-                          [value]="value">
-                        </cds-ng-search>
-                      </div>
-                    </div>
-                  </div>
-                </cds-ng-layer>
-              </div>
-            </div>
-          </cds-ng-layer>
-        </div>
+      <div [style.width.px]="defaultWidth">
+        <cds-ng-search
+          [autoComplete]="autoComplete"
+          [autofocus]="autofocus"
+          [closeButtonLabelText]="closeButtonLabelText"
+          [disabled]="disabled"
+          [labelText]="labelText"
+          [placeholder]="placeholder"
+          [size]="size"
+          [type]="type"
+          [role]="role"
+          [value]="value">
+        </cds-ng-search>
       </div>
     `,
   }),

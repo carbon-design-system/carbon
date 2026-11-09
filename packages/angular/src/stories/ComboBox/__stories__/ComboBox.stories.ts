@@ -22,7 +22,7 @@ import {
 } from '@carbon/angular/ai-label';
 import { ButtonComponent } from '@carbon/angular/button';
 import { IconButtonComponent } from '@carbon/angular/icon-button';
-import { LayerComponent } from '@carbon/angular/layer';
+import { withLayers } from '../../../../.storybook/decorators/with-layers';
 
 // ─── WC-parity stories (one-for-one with @carbon/web-components Combo Box) ───
 
@@ -213,33 +213,6 @@ const actions = `
   <cds-ng-ai-label-action-button>View details</cds-ng-ai-label-action-button>
 `;
 
-// Angular equivalent of the WC `withLayers` decorator: the same content at the
-// $background, $layer-01 and $layer-02 levels.
-const withLayersTemplate = (inner: string) => `
-  <div class="cds--with-layer__background">
-    <div class="cds--with-layer__label">$background</div>
-    <div class="cds--with-layer__content">
-      ${inner}
-      <cds-ng-layer [withBackground]="true">
-        <div class="cds--with-layer__layer">
-          <div class="cds--with-layer__label">$layer-01</div>
-          <div class="cds--with-layer__content">
-            ${inner}
-            <cds-ng-layer [withBackground]="true">
-              <div class="cds--with-layer__layer">
-                <div class="cds--with-layer__label">$layer-02</div>
-                <div class="cds--with-layer__content">
-                  ${inner}
-                </div>
-              </div>
-            </cds-ng-layer>
-          </div>
-        </div>
-      </cds-ng-layer>
-    </div>
-  </div>
-`;
-
 type ControlledComboBox = HTMLElement & { value: string; open: boolean };
 
 const getControlledComboBox = () =>
@@ -288,7 +261,6 @@ const meta: Meta<any> = {
         AiLabelActionButtonComponent,
         ButtonComponent,
         IconButtonComponent,
-        LayerComponent,
         NgFor,
       ],
     }),
@@ -455,6 +427,7 @@ export const WithAILabel: Story = {
 
 // WC: WithLayer
 export const WithLayer: Story = {
+  decorators: [withLayers],
   parameters: {
     layout: 'fullscreen',
   },
@@ -466,12 +439,12 @@ export const WithLayer: Story = {
   argTypes: controls,
   render: (args) => ({
     props: { ...args, items },
-    template: withLayersTemplate(`
+    template: `
       <div style="width:300px">
         <cds-ng-combo-box ${comboBoxBindings}>
           ${itemsTemplate}
         </cds-ng-combo-box>
       </div>
-    `),
+    `,
   }),
 };

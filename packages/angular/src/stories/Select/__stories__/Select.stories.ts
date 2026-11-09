@@ -22,7 +22,7 @@ import {
   AiLabelComponent,
   AiLabelActionButtonComponent,
 } from '@carbon/angular/ai-label';
-import { LayerComponent } from '@carbon/angular/layer';
+import { withLayers } from '../../../../.storybook/decorators/with-layers';
 
 // ─── WC-parity stories (one-for-one with @carbon/web-components Select) ──────
 
@@ -162,7 +162,6 @@ const meta: Meta<any> = {
         SelectSkeletonComponent,
         AiLabelComponent,
         AiLabelActionButtonComponent,
-        LayerComponent,
         FormsModule,
         ReactiveFormsModule,
       ],
@@ -304,6 +303,7 @@ export const WithAILabel: Story = {
 
 // WC: WithLayer
 export const WithLayer: Story = {
+  decorators: [withLayers],
   parameters: {
     layout: 'fullscreen',
   },
@@ -312,87 +312,25 @@ export const WithLayer: Story = {
   render: (args) => ({
     props: args,
     template: `
-      <div class="cds--with-layer__background">
-        <div class="cds--with-layer__label">$background</div>
-        <div class="cds--with-layer__content">
-          <div style="width: 400px;">
-            <cds-ng-select
-              [id]="id"
-              [inline]="false"
-              [disabled]="disabled"
-              [helperText]="helperText"
-              [hideLabel]="hideLabel"
-              [invalid]="invalid"
-              [invalidText]="invalidText"
-              [labelStylesDisable]="labelStylesDisable"
-              [labelText]="labelText"
-              [name]="name"
-              [placeholder]="placeholder"
-              [size]="size"
-              [readonly]="readOnly"
-              [warn]="warn"
-              [warnText]="warnText"
-              [value]="value">
-              ${selectItemsTemplate}
-            </cds-ng-select>
-          </div>
-          <cds-ng-layer [withBackground]="true">
-            <div class="cds--with-layer__layer">
-              <div class="cds--with-layer__label">$layer-01</div>
-              <div class="cds--with-layer__content">
-                <div style="width: 400px;">
-                  <cds-ng-select
-                    [id]="id"
-                    [inline]="false"
-                    [disabled]="disabled"
-                    [helperText]="helperText"
-                    [hideLabel]="hideLabel"
-                    [invalid]="invalid"
-                    [invalidText]="invalidText"
-                    [labelStylesDisable]="labelStylesDisable"
-                    [labelText]="labelText"
-                    [name]="name"
-                    [placeholder]="placeholder"
-                    [size]="size"
-                    [readonly]="readOnly"
-                    [warn]="warn"
-                    [warnText]="warnText"
-                    [value]="value">
-                    ${selectItemsTemplate}
-                  </cds-ng-select>
-                </div>
-                <cds-ng-layer [withBackground]="true">
-                  <div class="cds--with-layer__layer">
-                    <div class="cds--with-layer__label">$layer-02</div>
-                    <div class="cds--with-layer__content">
-                      <div style="width: 400px;">
-                        <cds-ng-select
-                          [id]="id"
-                          [inline]="false"
-                          [disabled]="disabled"
-                          [helperText]="helperText"
-                          [hideLabel]="hideLabel"
-                          [invalid]="invalid"
-                          [invalidText]="invalidText"
-                          [labelStylesDisable]="labelStylesDisable"
-                          [labelText]="labelText"
-                          [name]="name"
-                          [placeholder]="placeholder"
-                          [size]="size"
-                          [readonly]="readOnly"
-                          [warn]="warn"
-                          [warnText]="warnText"
-                          [value]="value">
-                          ${selectItemsTemplate}
-                        </cds-ng-select>
-                      </div>
-                    </div>
-                  </div>
-                </cds-ng-layer>
-              </div>
-            </div>
-          </cds-ng-layer>
-        </div>
+      <div style="width: 400px;">
+        <cds-ng-select
+          [inline]="false"
+          [disabled]="disabled"
+          [helperText]="helperText"
+          [hideLabel]="hideLabel"
+          [invalid]="invalid"
+          [invalidText]="invalidText"
+          [labelStylesDisable]="labelStylesDisable"
+          [labelText]="labelText"
+          [name]="name"
+          [placeholder]="placeholder"
+          [size]="size"
+          [readonly]="readOnly"
+          [warn]="warn"
+          [warnText]="warnText"
+          [value]="value">
+          ${selectItemsTemplate}
+        </cds-ng-select>
       </div>
     `,
   }),

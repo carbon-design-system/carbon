@@ -15,7 +15,7 @@ import {
   FluidTextareaComponent,
   FluidTextareaSkeletonComponent,
 } from '@carbon/angular/fluid-textarea';
-import { LayerComponent } from '@carbon/angular/layer';
+import { withLayers } from '../../../../.storybook/decorators/with-layers';
 import { ToggletipComponent } from '@carbon/angular/toggle-tip';
 
 // ─── WC-parity stories (one-for-one with @carbon/web-components Fluid Textarea) ───
@@ -114,7 +114,6 @@ const meta: Meta<any> = {
       imports: [
         FluidTextareaComponent,
         FluidTextareaSkeletonComponent,
-        LayerComponent,
         ToggletipComponent,
       ],
     }),
@@ -174,6 +173,7 @@ export const Skeleton: StoryObj<Record<string, unknown>> = {
 
 // WC: WithLayer
 export const WithLayer: Story = {
+  decorators: [withLayers],
   args,
   argTypes,
   parameters: {
@@ -182,78 +182,23 @@ export const WithLayer: Story = {
   render: (args) => ({
     props: args,
     template: `
-      <div class="cds--with-layer__background">
-        <div class="cds--with-layer__label">$background</div>
-        <div class="cds--with-layer__content">
-          <div [style.width.px]="defaultWidth">
-            <cds-ng-fluid-textarea
-              [enableCounter]="enableCounter"
-              [counterMode]="counterMode"
-              [invalid]="invalid"
-              [invalidText]="invalidText"
-              [label]="label"
-              [readonly]="readonly"
-              [value]="value"
-              [warn]="warn"
-              [warnText]="warnText"
-              [disabled]="disabled"
-              [maxCount]="maxCount"
-              [placeholder]="placeholder"
-              [rows]="rows"
-              [cols]="cols">
-            </cds-ng-fluid-textarea>
-          </div>
-          <cds-ng-layer [withBackground]="true">
-            <div class="cds--with-layer__layer">
-              <div class="cds--with-layer__label">$layer-01</div>
-              <div class="cds--with-layer__content">
-                <div [style.width.px]="defaultWidth">
-                  <cds-ng-fluid-textarea
-                    [enableCounter]="enableCounter"
-                    [counterMode]="counterMode"
-                    [invalid]="invalid"
-                    [invalidText]="invalidText"
-                    [label]="label"
-                    [readonly]="readonly"
-                    [value]="value"
-                    [warn]="warn"
-                    [warnText]="warnText"
-                    [disabled]="disabled"
-                    [maxCount]="maxCount"
-                    [placeholder]="placeholder"
-                    [rows]="rows"
-                    [cols]="cols">
-                  </cds-ng-fluid-textarea>
-                </div>
-                <cds-ng-layer [withBackground]="true">
-                  <div class="cds--with-layer__layer">
-                    <div class="cds--with-layer__label">$layer-02</div>
-                    <div class="cds--with-layer__content">
-                      <div [style.width.px]="defaultWidth">
-                        <cds-ng-fluid-textarea
-                          [enableCounter]="enableCounter"
-                          [counterMode]="counterMode"
-                          [invalid]="invalid"
-                          [invalidText]="invalidText"
-                          [label]="label"
-                          [readonly]="readonly"
-                          [value]="value"
-                          [warn]="warn"
-                          [warnText]="warnText"
-                          [disabled]="disabled"
-                          [maxCount]="maxCount"
-                          [placeholder]="placeholder"
-                          [rows]="rows"
-                          [cols]="cols">
-                        </cds-ng-fluid-textarea>
-                      </div>
-                    </div>
-                  </div>
-                </cds-ng-layer>
-              </div>
-            </div>
-          </cds-ng-layer>
-        </div>
+      <div [style.width.px]="defaultWidth">
+        <cds-ng-fluid-textarea
+          [enableCounter]="enableCounter"
+          [counterMode]="counterMode"
+          [invalid]="invalid"
+          [invalidText]="invalidText"
+          [label]="label"
+          [readonly]="readonly"
+          [value]="value"
+          [warn]="warn"
+          [warnText]="warnText"
+          [disabled]="disabled"
+          [maxCount]="maxCount"
+          [placeholder]="placeholder"
+          [rows]="rows"
+          [cols]="cols">
+        </cds-ng-fluid-textarea>
       </div>
     `,
   }),

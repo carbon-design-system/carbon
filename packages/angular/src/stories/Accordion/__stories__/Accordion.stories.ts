@@ -12,7 +12,7 @@ import {
   AccordionSkeletonComponent,
 } from '@carbon/angular/accordion';
 import { ButtonComponent, ButtonSetComponent } from '@carbon/angular/button';
-import { LayerComponent } from '@carbon/angular/layer';
+import { withLayers } from '../../../../.storybook/decorators/with-layers';
 import { fn } from 'storybook/test';
 
 // ─── WC-parity stories (one-for-one with @carbon/web-components Accordion) ────
@@ -39,7 +39,6 @@ const meta: Meta<AccordionStoryArgs> = {
         AccordionSkeletonComponent,
         ButtonComponent,
         ButtonSetComponent,
-        LayerComponent,
       ],
     }),
   ],
@@ -219,6 +218,7 @@ export const Skeleton: StoryObj<Record<string, unknown>> = {
 
 // WC: WithLayer
 export const WithLayer: StoryObj<typeof defaultArgs> = {
+  decorators: [withLayers],
   args: defaultArgs,
   argTypes: {
     alignment: {
@@ -250,67 +250,20 @@ export const WithLayer: StoryObj<typeof defaultArgs> = {
   render: (args) => ({
     props: args,
     template: `
-      <div class="cds--with-layer__background">
-        <div class="cds--with-layer__label">$background</div>
-        <div class="cds--with-layer__content">
-          <cds-ng-accordion [alignment]="alignment" [size]="size" [isFlush]="isFlush" [disabled]="disabled">
-            <cds-ng-accordion-item title="Choose your plan">
-              Compare plan features and select the option that best matches your team's expected usage.
-            </cds-ng-accordion-item>
-            <cds-ng-accordion-item title="Add team members">
-              Invite collaborators by email and assign their workspace roles before launch.
-            </cds-ng-accordion-item>
-            <cds-ng-accordion-item title="Set payment details">
-              Add billing information and choose whether to receive invoices by email.
-            </cds-ng-accordion-item>
-            <cds-ng-accordion-item title="Review and confirm">
-              Check your setup summary, then confirm to create the workspace for your team.
-            </cds-ng-accordion-item>
-          </cds-ng-accordion>
-          <cds-ng-layer [withBackground]="true">
-            <div class="cds--with-layer__layer">
-              <div class="cds--with-layer__label">$layer-01</div>
-              <div class="cds--with-layer__content">
-                <cds-ng-accordion [alignment]="alignment" [size]="size" [isFlush]="isFlush" [disabled]="disabled">
-                  <cds-ng-accordion-item title="Choose your plan">
-                    Compare plan features and select the option that best matches your team's expected usage.
-                  </cds-ng-accordion-item>
-                  <cds-ng-accordion-item title="Add team members">
-                    Invite collaborators by email and assign their workspace roles before launch.
-                  </cds-ng-accordion-item>
-                  <cds-ng-accordion-item title="Set payment details">
-                    Add billing information and choose whether to receive invoices by email.
-                  </cds-ng-accordion-item>
-                  <cds-ng-accordion-item title="Review and confirm">
-                    Check your setup summary, then confirm to create the workspace for your team.
-                  </cds-ng-accordion-item>
-                </cds-ng-accordion>
-                <cds-ng-layer [withBackground]="true">
-                  <div class="cds--with-layer__layer">
-                    <div class="cds--with-layer__label">$layer-02</div>
-                    <div class="cds--with-layer__content">
-                      <cds-ng-accordion [alignment]="alignment" [size]="size" [isFlush]="isFlush" [disabled]="disabled">
-                        <cds-ng-accordion-item title="Choose your plan">
-                          Compare plan features and select the option that best matches your team's expected usage.
-                        </cds-ng-accordion-item>
-                        <cds-ng-accordion-item title="Add team members">
-                          Invite collaborators by email and assign their workspace roles before launch.
-                        </cds-ng-accordion-item>
-                        <cds-ng-accordion-item title="Set payment details">
-                          Add billing information and choose whether to receive invoices by email.
-                        </cds-ng-accordion-item>
-                        <cds-ng-accordion-item title="Review and confirm">
-                          Check your setup summary, then confirm to create the workspace for your team.
-                        </cds-ng-accordion-item>
-                      </cds-ng-accordion>
-                    </div>
-                  </div>
-                </cds-ng-layer>
-              </div>
-            </div>
-          </cds-ng-layer>
-        </div>
-      </div>
+      <cds-ng-accordion [alignment]="alignment" [size]="size" [isFlush]="isFlush" [disabled]="disabled">
+        <cds-ng-accordion-item title="Choose your plan">
+          Compare plan features and select the option that best matches your team's expected usage.
+        </cds-ng-accordion-item>
+        <cds-ng-accordion-item title="Add team members">
+          Invite collaborators by email and assign their workspace roles before launch.
+        </cds-ng-accordion-item>
+        <cds-ng-accordion-item title="Set payment details">
+          Add billing information and choose whether to receive invoices by email.
+        </cds-ng-accordion-item>
+        <cds-ng-accordion-item title="Review and confirm">
+          Check your setup summary, then confirm to create the workspace for your team.
+        </cds-ng-accordion-item>
+      </cds-ng-accordion>
     `,
   }),
 };

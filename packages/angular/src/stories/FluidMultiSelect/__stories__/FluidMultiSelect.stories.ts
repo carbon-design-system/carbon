@@ -20,7 +20,7 @@ import {
   AiLabelComponent,
   AiLabelActionButtonComponent,
 } from '@carbon/angular/ai-label';
-import { LayerComponent } from '@carbon/angular/layer';
+import { withLayers } from '../../../../.storybook/decorators/with-layers';
 
 // ─── WC-parity stories (one-for-one with @carbon/web-components Fluid Multi Select) ───
 
@@ -186,7 +186,6 @@ const meta: Meta<any> = {
         MultiSelectItemComponent,
         AiLabelComponent,
         AiLabelActionButtonComponent,
-        LayerComponent,
       ],
     }),
   ],
@@ -306,6 +305,7 @@ export const Filterable: Story = {
 
 // WC: FilterableWithLayer
 export const FilterableWithLayer: Story = {
+  decorators: [withLayers],
   parameters: {
     layout: 'fullscreen',
   },
@@ -314,93 +314,28 @@ export const FilterableWithLayer: Story = {
   render: (args) => ({
     props: args,
     template: `
-      <div class="cds--with-layer__background">
-        <div class="cds--with-layer__label">$background</div>
-        <div class="cds--with-layer__content">
-          <div style="width: 400px;">
-            <cds-ng-fluid-multi-select
-              [autoalign]="autoalign"
-              [direction]="direction"
-              [disabled]="disabled"
-              [isCondensed]="isCondensed"
-              [invalid]="invalid"
-              [invalidText]="invalidText"
-              [clearSelectionLabel]="clearSelectionLabel"
-              [clearSelectionDescription]="clearSelectionDescription"
-              [clearSelectionText]="clearSelectionText"
-              [locale]="locale"
-              [readOnly]="readOnly"
-              [titleText]="titleText"
-              [selectionFeedback]="selectionFeedback"
-              [warn]="warn"
-              [warnText]="warnText"
-              [label]="label"
-              [value]="value"
-              [filterable]="true">
-              ${multiSelectItemsTemplate}
-            </cds-ng-fluid-multi-select>
-          </div>
-          <cds-ng-layer [withBackground]="true">
-            <div class="cds--with-layer__layer">
-              <div class="cds--with-layer__label">$layer-01</div>
-              <div class="cds--with-layer__content">
-                <div style="width: 400px;">
-                  <cds-ng-fluid-multi-select
-                    [autoalign]="autoalign"
-                    [direction]="direction"
-                    [disabled]="disabled"
-                    [isCondensed]="isCondensed"
-                    [invalid]="invalid"
-                    [invalidText]="invalidText"
-                    [clearSelectionLabel]="clearSelectionLabel"
-                    [clearSelectionDescription]="clearSelectionDescription"
-                    [clearSelectionText]="clearSelectionText"
-                    [locale]="locale"
-                    [readOnly]="readOnly"
-                    [titleText]="titleText"
-                    [selectionFeedback]="selectionFeedback"
-                    [warn]="warn"
-                    [warnText]="warnText"
-                    [label]="label"
-                    [value]="value"
-                    [filterable]="true">
-                    ${multiSelectItemsTemplate}
-                  </cds-ng-fluid-multi-select>
-                </div>
-                <cds-ng-layer [withBackground]="true">
-                  <div class="cds--with-layer__layer">
-                    <div class="cds--with-layer__label">$layer-02</div>
-                    <div class="cds--with-layer__content">
-                      <div style="width: 400px;">
-                        <cds-ng-fluid-multi-select
-                          [autoalign]="autoalign"
-                          [direction]="direction"
-                          [disabled]="disabled"
-                          [isCondensed]="isCondensed"
-                          [invalid]="invalid"
-                          [invalidText]="invalidText"
-                          [clearSelectionLabel]="clearSelectionLabel"
-                          [clearSelectionDescription]="clearSelectionDescription"
-                          [clearSelectionText]="clearSelectionText"
-                          [locale]="locale"
-                          [readOnly]="readOnly"
-                          [titleText]="titleText"
-                          [selectionFeedback]="selectionFeedback"
-                          [warn]="warn"
-                          [warnText]="warnText"
-                          [label]="label"
-                          [value]="value"
-                          [filterable]="true">
-                          ${multiSelectItemsTemplate}
-                        </cds-ng-fluid-multi-select>
-                      </div>
-                    </div>
-                  </div>
-                </cds-ng-layer>
-              </div>
-            </div>
-          </cds-ng-layer>
-        </div>
+      <div style="width: 400px;">
+        <cds-ng-fluid-multi-select
+          [autoalign]="autoalign"
+          [direction]="direction"
+          [disabled]="disabled"
+          [isCondensed]="isCondensed"
+          [invalid]="invalid"
+          [invalidText]="invalidText"
+          [clearSelectionLabel]="clearSelectionLabel"
+          [clearSelectionDescription]="clearSelectionDescription"
+          [clearSelectionText]="clearSelectionText"
+          [locale]="locale"
+          [readOnly]="readOnly"
+          [titleText]="titleText"
+          [selectionFeedback]="selectionFeedback"
+          [warn]="warn"
+          [warnText]="warnText"
+          [label]="label"
+          [value]="value"
+          [filterable]="true">
+          ${multiSelectItemsTemplate}
+        </cds-ng-fluid-multi-select>
       </div>
     `,
   }),

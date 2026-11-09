@@ -22,7 +22,7 @@ import {
 } from '@carbon/angular/ai-label';
 import { ButtonComponent, ButtonSetComponent } from '@carbon/angular/button';
 import { IconButtonComponent } from '@carbon/angular/icon-button';
-import { LayerComponent } from '@carbon/angular/layer';
+import { withLayers } from '../../../../.storybook/decorators/with-layers';
 import { LinkComponent } from '@carbon/angular/link';
 import { ToggletipComponent } from '@carbon/angular/toggle-tip';
 
@@ -277,33 +277,6 @@ const selectAllItems = (disabledValue: string) => `
   <cds-ng-multi-select-item value="uploader">Uploader</cds-ng-multi-select-item>
 `;
 
-// Angular equivalent of the WC `withLayers` decorator: the same content at the
-// $background, $layer-01 and $layer-02 levels.
-const withLayersTemplate = (inner: string) => `
-  <div class="cds--with-layer__background">
-    <div class="cds--with-layer__label">$background</div>
-    <div class="cds--with-layer__content">
-      ${inner}
-      <cds-ng-layer [withBackground]="true">
-        <div class="cds--with-layer__layer">
-          <div class="cds--with-layer__label">$layer-01</div>
-          <div class="cds--with-layer__content">
-            ${inner}
-            <cds-ng-layer [withBackground]="true">
-              <div class="cds--with-layer__layer">
-                <div class="cds--with-layer__label">$layer-02</div>
-                <div class="cds--with-layer__content">
-                  ${inner}
-                </div>
-              </div>
-            </cds-ng-layer>
-          </div>
-        </div>
-      </cds-ng-layer>
-    </div>
-  </div>
-`;
-
 type MultiSelectElement = HTMLElement & { value: string; label: string };
 
 const toggleSelectAll = (selectAll: boolean) => {
@@ -393,7 +366,6 @@ const meta: Meta<any> = {
         ButtonComponent,
         ButtonSetComponent,
         IconButtonComponent,
-        LayerComponent,
         LinkComponent,
         ToggletipComponent,
         NgFor,
@@ -516,6 +488,7 @@ export const FilterableWithAILabel: Story = {
 
 // WC: FilterableWithLayer
 export const FilterableWithLayer: Story = {
+  decorators: [withLayers],
   parameters: {
     layout: 'fullscreen',
   },
@@ -523,13 +496,13 @@ export const FilterableWithLayer: Story = {
   argTypes,
   render: (args) => ({
     props: args,
-    template: withLayersTemplate(`
+    template: `
       <div style="width:300px">
         <cds-ng-multi-select ${bindings} ${labelBinding} ${autocompleteBinding} [filterable]="true">
           ${items}
         </cds-ng-multi-select>
       </div>
-    `),
+    `,
   }),
 };
 
@@ -646,6 +619,7 @@ export const WithInitialSelectedItems: Story = {
 
 // WC: WithLayer
 export const WithLayer: Story = {
+  decorators: [withLayers],
   parameters: {
     layout: 'fullscreen',
     ...nonFilterableParameters,
@@ -654,13 +628,13 @@ export const WithLayer: Story = {
   argTypes,
   render: (args) => ({
     props: args,
-    template: withLayersTemplate(`
+    template: `
       <div style="width:300px">
         <cds-ng-multi-select ${bindings} ${labelBinding}>
           ${items}
         </cds-ng-multi-select>
       </div>
-    `),
+    `,
   }),
 };
 

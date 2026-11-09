@@ -17,7 +17,7 @@ import {
   SliderSkeletonComponent,
 } from '@carbon/angular/slider';
 import { FormItemComponent } from '@carbon/angular/form';
-import { LayerComponent } from '@carbon/angular/layer';
+import { withLayers } from '../../../../.storybook/decorators/with-layers';
 
 // ─── WC-parity stories (one-for-one with @carbon/web-components Slider) ──────
 
@@ -215,7 +215,6 @@ const meta: Meta<any> = {
         SliderInputComponent,
         SliderSkeletonComponent,
         FormItemComponent,
-        LayerComponent,
       ],
     }),
   ],
@@ -438,6 +437,7 @@ export const ControlledSlider: Story = {
 
 // WC: WithLayer
 export const WithLayer: Story = {
+  decorators: [withLayers],
   parameters: {
     ...singleHandleParameters,
     layout: 'fullscreen',
@@ -450,109 +450,39 @@ export const WithLayer: Story = {
       formatLabel: defaultFormatLabel,
     },
     template: `
-      <div class="cds--with-layer__background">
-        <div class="cds--with-layer__label">$background</div>
-        <div class="cds--with-layer__content">
-          <cds-ng-form-item>
-            <cds-ng-slider
-              [disabled]="disabled"
-              [hideLabel]="hideLabel"
-              [hideTextInput]="hideTextInput"
-              [invalid]="invalid"
-              [invalidText]="invalidText"
-              [labelText]="labelText"
-              [max]="max"
-              [maxLabel]="maxLabel"
-              [min]="min"
-              [minLabel]="minLabel"
-              [readonly]="readOnly"
-              [step]="step"
-              [stepMultiplier]="stepMultiplier"
-              [value]="value"
-              [warn]="warn"
-              [warnText]="warnText"
-              [formatLabel]="formatLabel">
-              <cds-ng-slider-input
-                [attr.aria-label]="ariaLabelInput"
-                [attr.name]="name"
-                [type]="inputType">
-              </cds-ng-slider-input>
-            </cds-ng-slider>
-          </cds-ng-form-item>
-          <cds-ng-layer [withBackground]="true">
-            <div class="cds--with-layer__layer">
-              <div class="cds--with-layer__label">$layer-01</div>
-              <div class="cds--with-layer__content">
-                <cds-ng-form-item>
-                  <cds-ng-slider
-                    [disabled]="disabled"
-                    [hideLabel]="hideLabel"
-                    [hideTextInput]="hideTextInput"
-                    [invalid]="invalid"
-                    [invalidText]="invalidText"
-                    [labelText]="labelText"
-                    [max]="max"
-                    [maxLabel]="maxLabel"
-                    [min]="min"
-                    [minLabel]="minLabel"
-                    [readonly]="readOnly"
-                    [step]="step"
-                    [stepMultiplier]="stepMultiplier"
-                    [value]="value"
-                    [warn]="warn"
-                    [warnText]="warnText"
-                    [formatLabel]="formatLabel">
-                    <cds-ng-slider-input
-                      [attr.aria-label]="ariaLabelInput"
-                      [attr.name]="name"
-                      [type]="inputType">
-                    </cds-ng-slider-input>
-                  </cds-ng-slider>
-                </cds-ng-form-item>
-                <cds-ng-layer [withBackground]="true">
-                  <div class="cds--with-layer__layer">
-                    <div class="cds--with-layer__label">$layer-02</div>
-                    <div class="cds--with-layer__content">
-                      <cds-ng-form-item>
-                        <cds-ng-slider
-                          [disabled]="disabled"
-                          [hideLabel]="hideLabel"
-                          [hideTextInput]="hideTextInput"
-                          [invalid]="invalid"
-                          [invalidText]="invalidText"
-                          [labelText]="labelText"
-                          [max]="max"
-                          [maxLabel]="maxLabel"
-                          [min]="min"
-                          [minLabel]="minLabel"
-                          [readonly]="readOnly"
-                          [step]="step"
-                          [stepMultiplier]="stepMultiplier"
-                          [value]="value"
-                          [warn]="warn"
-                          [warnText]="warnText"
-                          [formatLabel]="formatLabel">
-                          <cds-ng-slider-input
-                            [attr.aria-label]="ariaLabelInput"
-                            [attr.name]="name"
-                            [type]="inputType">
-                          </cds-ng-slider-input>
-                        </cds-ng-slider>
-                      </cds-ng-form-item>
-                    </div>
-                  </div>
-                </cds-ng-layer>
-              </div>
-            </div>
-          </cds-ng-layer>
-        </div>
-      </div>
+      <cds-ng-form-item>
+        <cds-ng-slider
+          [disabled]="disabled"
+          [hideLabel]="hideLabel"
+          [hideTextInput]="hideTextInput"
+          [invalid]="invalid"
+          [invalidText]="invalidText"
+          [labelText]="labelText"
+          [max]="max"
+          [maxLabel]="maxLabel"
+          [min]="min"
+          [minLabel]="minLabel"
+          [readonly]="readOnly"
+          [step]="step"
+          [stepMultiplier]="stepMultiplier"
+          [value]="value"
+          [warn]="warn"
+          [warnText]="warnText"
+          [formatLabel]="formatLabel">
+          <cds-ng-slider-input
+            [attr.aria-label]="ariaLabelInput"
+            [attr.name]="name"
+            [type]="inputType">
+          </cds-ng-slider-input>
+        </cds-ng-slider>
+      </cds-ng-form-item>
     `,
   }),
 };
 
 // WC: ControlledSliderWithLayer
 export const ControlledSliderWithLayer: Story = {
+  decorators: [withLayers],
   parameters: {
     ...singleHandleParameters,
     layout: 'fullscreen',
@@ -566,7 +496,16 @@ export const ControlledSliderWithLayer: Story = {
     props: {
       ...args,
       formatLabel: defaultFormatLabel,
-      randomize: (slider: HTMLElement & { value?: number }) => {
+      randomize: (event: Event) => {
+        const container = (event.target as HTMLElement).closest(
+          '.controlled-slider'
+        );
+        const slider = container?.querySelector<
+          HTMLElement & { value?: number }
+        >('cds-ng-slider');
+        if (!slider) {
+          return;
+        }
         const min = Number(args.min) || 0;
         const max = Number(args.max) || 100;
         const step = Number(args.step) || 1;
@@ -579,7 +518,6 @@ export const ControlledSliderWithLayer: Story = {
                 min + Math.round((Math.random() * range) / step) * step
               );
         slider.value = nextValue;
-        const container = slider.closest('.controlled-slider');
         const output = container?.querySelector('.slider-current-value');
         if (output) {
           output.textContent = `Current value: ${nextValue}`;
@@ -597,120 +535,36 @@ export const ControlledSliderWithLayer: Story = {
       },
     },
     template: `
-      <div class="cds--with-layer__background">
-        <div class="cds--with-layer__label">$background</div>
-        <div class="cds--with-layer__content">
-          <div class="controlled-slider">
-            <button type="button" (click)="randomize(slider1)">Randomize value</button>
-            <cds-ng-form-item>
-              <cds-ng-slider
-                #slider1
-                [disabled]="disabled"
-                [hideLabel]="hideLabel"
-                [hideTextInput]="hideTextInput"
-                [invalid]="invalid"
-                [invalidText]="invalidText"
-                [labelText]="labelText"
-                [max]="max"
-                [maxLabel]="maxLabel"
-                [min]="min"
-                [minLabel]="minLabel"
-                [readonly]="readOnly"
-                [step]="step"
-                [stepMultiplier]="stepMultiplier"
-                [value]="value"
-                [warn]="warn"
-                [warnText]="warnText"
-                [formatLabel]="formatLabel"
-                (sliderChanged)="onSliderChange($event)">
-                <cds-ng-slider-input
-                  [attr.aria-label]="ariaLabelInput"
-                  [attr.name]="name"
-                  [type]="inputType">
-                </cds-ng-slider-input>
-              </cds-ng-slider>
-            </cds-ng-form-item>
-            <p class="slider-current-value">Current value: {{ value }}</p>
-          </div>
-          <cds-ng-layer [withBackground]="true">
-            <div class="cds--with-layer__layer">
-              <div class="cds--with-layer__label">$layer-01</div>
-              <div class="cds--with-layer__content">
-                <div class="controlled-slider">
-                  <button type="button" (click)="randomize(slider2)">Randomize value</button>
-                  <cds-ng-form-item>
-                    <cds-ng-slider
-                      #slider2
-                      [disabled]="disabled"
-                      [hideLabel]="hideLabel"
-                      [hideTextInput]="hideTextInput"
-                      [invalid]="invalid"
-                      [invalidText]="invalidText"
-                      [labelText]="labelText"
-                      [max]="max"
-                      [maxLabel]="maxLabel"
-                      [min]="min"
-                      [minLabel]="minLabel"
-                      [readonly]="readOnly"
-                      [step]="step"
-                      [stepMultiplier]="stepMultiplier"
-                      [value]="value"
-                      [warn]="warn"
-                      [warnText]="warnText"
-                      [formatLabel]="formatLabel"
-                      (sliderChanged)="onSliderChange($event)">
-                      <cds-ng-slider-input
-                        [attr.aria-label]="ariaLabelInput"
-                        [attr.name]="name"
-                        [type]="inputType">
-                      </cds-ng-slider-input>
-                    </cds-ng-slider>
-                  </cds-ng-form-item>
-                  <p class="slider-current-value">Current value: {{ value }}</p>
-                </div>
-                <cds-ng-layer [withBackground]="true">
-                  <div class="cds--with-layer__layer">
-                    <div class="cds--with-layer__label">$layer-02</div>
-                    <div class="cds--with-layer__content">
-                      <div class="controlled-slider">
-                        <button type="button" (click)="randomize(slider3)">Randomize value</button>
-                        <cds-ng-form-item>
-                          <cds-ng-slider
-                            #slider3
-                            [disabled]="disabled"
-                            [hideLabel]="hideLabel"
-                            [hideTextInput]="hideTextInput"
-                            [invalid]="invalid"
-                            [invalidText]="invalidText"
-                            [labelText]="labelText"
-                            [max]="max"
-                            [maxLabel]="maxLabel"
-                            [min]="min"
-                            [minLabel]="minLabel"
-                            [readonly]="readOnly"
-                            [step]="step"
-                            [stepMultiplier]="stepMultiplier"
-                            [value]="value"
-                            [warn]="warn"
-                            [warnText]="warnText"
-                            [formatLabel]="formatLabel"
-                            (sliderChanged)="onSliderChange($event)">
-                            <cds-ng-slider-input
-                              [attr.aria-label]="ariaLabelInput"
-                              [attr.name]="name"
-                              [type]="inputType">
-                            </cds-ng-slider-input>
-                          </cds-ng-slider>
-                        </cds-ng-form-item>
-                        <p class="slider-current-value">Current value: {{ value }}</p>
-                      </div>
-                    </div>
-                  </div>
-                </cds-ng-layer>
-              </div>
-            </div>
-          </cds-ng-layer>
-        </div>
+      <div class="controlled-slider">
+        <button type="button" (click)="randomize($event)">Randomize value</button>
+        <cds-ng-form-item>
+          <cds-ng-slider
+            [disabled]="disabled"
+            [hideLabel]="hideLabel"
+            [hideTextInput]="hideTextInput"
+            [invalid]="invalid"
+            [invalidText]="invalidText"
+            [labelText]="labelText"
+            [max]="max"
+            [maxLabel]="maxLabel"
+            [min]="min"
+            [minLabel]="minLabel"
+            [readonly]="readOnly"
+            [step]="step"
+            [stepMultiplier]="stepMultiplier"
+            [value]="value"
+            [warn]="warn"
+            [warnText]="warnText"
+            [formatLabel]="formatLabel"
+            (sliderChanged)="onSliderChange($event)">
+            <cds-ng-slider-input
+              [attr.aria-label]="ariaLabelInput"
+              [attr.name]="name"
+              [type]="inputType">
+            </cds-ng-slider-input>
+          </cds-ng-slider>
+        </cds-ng-form-item>
+        <p class="slider-current-value">Current value: {{ value }}</p>
       </div>
     `,
   }),
