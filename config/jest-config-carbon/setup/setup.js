@@ -7,6 +7,11 @@
 
 'use strict';
 
+// The locked caniuse-lite data is older than browserslist's update window.
+// preset-env warns about that during transforms, and the suite fails any
+// unexpected console.warn. Keep the locked browser targets and skip the notice.
+process.env.BROWSERSLIST_IGNORE_OLD_DATA = '1';
+
 global.__DEV__ = true;
 
 jest.setTimeout(20000);
