@@ -25,6 +25,7 @@ collect:
         - aria-current
         - aria-label
         - aria-labelledby
+        - as
         - assistive-text
         - autoalign
         - autoalign-boundary
@@ -821,6 +822,9 @@ collect:
         # General - boolean attributes
         - "true"
         - "false"
+        # General - as
+        - a
+        - button
         # General - button-size
         - 2xl
         - lg
