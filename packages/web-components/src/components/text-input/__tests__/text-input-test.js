@@ -108,6 +108,90 @@ describe('cds-text-input', () => {
     expect(error.textContent).to.include('This is an error');
   });
 
+  it('should not have invalid classname when is disabled', async () => {
+    const el = await fixture(html`
+      <cds-text-input
+        label="test-label"
+        invalid
+        invalid-text="Invalid message"
+        disabled>
+      </cds-text-input>
+    `);
+
+    const input = el.shadowRoot.querySelector('input');
+    expect(input.classList.contains('cds--text-input--invalid')).to.be.false;
+    expect(input.hasAttribute('data-invalid')).to.be.false;
+    const fieldWrapper = el.shadowRoot.querySelector(
+      '.cds--text-input__field-wrapper'
+    );
+    expect(fieldWrapper.hasAttribute('data-invalid')).to.be.false;
+    expect(el.shadowRoot.querySelector('.cds--form-requirement')).to.be.null;
+    expect(el.shadowRoot.querySelector('.cds--text-input__invalid-icon')).to.be
+      .null;
+  });
+
+  it('should not have invalid classname when is readonly', async () => {
+    const el = await fixture(html`
+      <cds-text-input
+        label="test-label"
+        invalid
+        invalid-text="Invalid message"
+        readonly>
+      </cds-text-input>
+    `);
+
+    const input = el.shadowRoot.querySelector('input');
+    expect(input.classList.contains('cds--text-input--invalid')).to.be.false;
+    expect(input.hasAttribute('data-invalid')).to.be.false;
+    const fieldWrapper = el.shadowRoot.querySelector(
+      '.cds--text-input__field-wrapper'
+    );
+    expect(fieldWrapper.hasAttribute('data-invalid')).to.be.false;
+    expect(el.shadowRoot.querySelector('.cds--form-requirement')).to.be.null;
+    expect(el.shadowRoot.querySelector('.cds--text-input__invalid-icon')).to.be
+      .null;
+  });
+
+  it('should not have warn classname when is disabled', async () => {
+    const el = await fixture(html`
+      <cds-text-input label="test-label" warn warn-text="Warn message" disabled>
+      </cds-text-input>
+    `);
+
+    const input = el.shadowRoot.querySelector('input');
+    expect(input.classList.contains('cds--text-input--warning')).to.be.false;
+    const fieldWrapper = el.shadowRoot.querySelector(
+      '.cds--text-input__field-wrapper'
+    );
+    expect(
+      fieldWrapper.classList.contains('cds--text-input__field-wrapper--warning')
+    ).to.be.false;
+    expect(el.shadowRoot.querySelector('.cds--form-requirement')).to.be.null;
+    expect(
+      el.shadowRoot.querySelector('.cds--text-input__invalid-icon--warning')
+    ).to.be.null;
+  });
+
+  it('should not have warn classname when is readonly', async () => {
+    const el = await fixture(html`
+      <cds-text-input label="test-label" warn warn-text="Warn message" readonly>
+      </cds-text-input>
+    `);
+
+    const input = el.shadowRoot.querySelector('input');
+    expect(input.classList.contains('cds--text-input--warning')).to.be.false;
+    const fieldWrapper = el.shadowRoot.querySelector(
+      '.cds--text-input__field-wrapper'
+    );
+    expect(
+      fieldWrapper.classList.contains('cds--text-input__field-wrapper--warning')
+    ).to.be.false;
+    expect(el.shadowRoot.querySelector('.cds--form-requirement')).to.be.null;
+    expect(
+      el.shadowRoot.querySelector('.cds--text-input__invalid-icon--warning')
+    ).to.be.null;
+  });
+
   it('should render warning text', async () => {
     const el = await fixture(html`
       <cds-text-input

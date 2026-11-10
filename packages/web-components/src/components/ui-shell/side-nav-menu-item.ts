@@ -31,6 +31,12 @@ class CDSSideNavMenuItem extends FocusMixin(LitElement) {
   active = false;
 
   /**
+   * The element to render for the side nav menu item.
+   */
+  @property()
+  as: 'a' | 'button' = 'a';
+
+  /**
    * Link `href`.
    */
   @property()
@@ -67,22 +73,28 @@ class CDSSideNavMenuItem extends FocusMixin(LitElement) {
   }
 
   render() {
-    const { active, href, target, title } = this;
+    const { active, as, href, target, title } = this;
     const classes = classMap({
       [`${prefix}--side-nav__link`]: true,
       [`${prefix}--side-nav__link--current`]: active,
     });
-    return html`
-      <a
-        part="link"
-        class="${classes}"
-        href="${href}"
-        target="${ifDefined(target)}">
-        <span part="title" class="${prefix}--side-nav__link-text">
-          <slot>${title}</slot>
-        </span>
-      </a>
-    `;
+    const content = html`<span
+      part="title"
+      class="${prefix}--side-nav__link-text">
+      <slot>${title}</slot>
+    </span>`;
+
+    return as === 'button'
+      ? html`<button type="button" part="link" class="${classes}">
+          ${content}
+        </button>`
+      : html`<a
+          part="link"
+          class="${classes}"
+          href="${href}"
+          target="${ifDefined(target)}">
+          ${content}
+        </a>`;
   }
 
   /**

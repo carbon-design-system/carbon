@@ -64,6 +64,7 @@ describe('cds-overflow-menu', () => {
       expect(document.activeElement).to.equal(el);
       expect(el.shadowRoot?.activeElement).to.equal(triggerButton);
       expect(el).not.to.have.attribute('data-programmatic-focus');
+      expect(tooltip).not.to.have.attribute('data-programmatic-focus');
     } finally {
       restoreMatches();
       el.shadowRoot.querySelector('button').blur();
@@ -80,12 +81,14 @@ describe('cds-overflow-menu', () => {
     try {
       el.focus();
       expect(el).to.have.attribute('data-programmatic-focus');
+      expect(tooltip).to.have.attribute('data-programmatic-focus');
 
       document.body.dispatchEvent(
         new PointerEvent('pointerdown', { bubbles: true, composed: true })
       );
 
       expect(el).not.to.have.attribute('data-programmatic-focus');
+      expect(tooltip).not.to.have.attribute('data-programmatic-focus');
     } finally {
       restoreMatches();
       el.shadowRoot.querySelector('button').blur();
@@ -102,12 +105,14 @@ describe('cds-overflow-menu', () => {
     try {
       el.focus();
       expect(el).to.have.attribute('data-programmatic-focus');
+      expect(tooltip).to.have.attribute('data-programmatic-focus');
 
       document.body.dispatchEvent(
         new FocusEvent('focusin', { bubbles: true, composed: true })
       );
 
       expect(el).not.to.have.attribute('data-programmatic-focus');
+      expect(tooltip).not.to.have.attribute('data-programmatic-focus');
     } finally {
       restoreMatches();
       el.shadowRoot.querySelector('button').blur();
@@ -181,6 +186,7 @@ describe('cds-overflow-menu', () => {
     el.focus();
 
     expect(el).not.to.have.attribute('data-programmatic-focus');
+    expect(tooltip).not.to.have.attribute('data-programmatic-focus');
   });
 
   describe('supports size', () => {

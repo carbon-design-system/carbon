@@ -101,7 +101,7 @@ organized and separate from the main codebase. This makes it easier to manage
 your changes and submit them as a pull request (PR) later.
 
 ```sh
-git pull origin main
+git pull upstream main
 git checkout -b <your_branch_name>
 ```
 
@@ -169,7 +169,7 @@ Then, create a PR to the main Carbon repo by following GitHub's
 [guide to creating a pull request from a fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork).
 
 See
-[How to write the perfect pull request](https://github.com/blog/1943-how-to-write-the-perfect-pull-request)
+[How to write the perfect pull request](https://github.blog/developer-skills/github/how-to-write-the-perfect-pull-request/)
 for tips on writing a good PR description.
 
 Before a PR is merged, make sure the required reviews are complete:

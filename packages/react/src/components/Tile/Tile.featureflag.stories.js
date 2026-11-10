@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2025
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -21,18 +21,13 @@ import { TileGroup } from '../TileGroup';
 import { Layer } from '../Layer';
 import './tile-story.scss';
 import '../AILabel/ailabel-story.scss';
-import {
-  Launch,
-  ArrowRight,
-  View,
-  FolderOpen,
-  Folders,
-} from '@carbon/icons-react';
+import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 import { WithFeatureFlags } from '../../../.storybook/templates/WithFeatureFlags';
+import { action } from 'storybook/actions';
 
 export default {
   title: 'Components/Tile/Feature Flag',
@@ -65,6 +60,167 @@ export default {
 
 const previewClassname = 'preview-tile';
 
+const clickableArgs = {
+  clicked: false,
+  disabled: false,
+  href: 'https://www.carbondesignsystem.com/',
+  light: false,
+  rel: '',
+  title: '',
+  onClick: action('onClick'),
+  onKeyDown: action('onKeyDown'),
+};
+
+const clickableArgTypes = {
+  clicked: {
+    control: 'boolean',
+  },
+  disabled: {
+    control: 'boolean',
+  },
+  href: {
+    control: 'text',
+  },
+  light: {
+    control: 'boolean',
+  },
+  rel: {
+    control: 'text',
+  },
+  title: {
+    control: 'text',
+  },
+  onClick: {
+    action: 'onClick',
+  },
+  onKeyDown: {
+    action: 'onKeyDown',
+  },
+};
+
+const clickableControls = Object.keys(clickableArgTypes);
+
+const selectableArgs = {
+  disabled: false,
+  light: false,
+  selected: false,
+  tabIndex: 0,
+  title: 'Selectable tile',
+  onChange: action('onChange'),
+  onClick: action('onClick'),
+  onKeyDown: action('onKeyDown'),
+};
+
+const selectableArgTypes = {
+  disabled: {
+    control: 'boolean',
+  },
+  light: {
+    control: 'boolean',
+  },
+  selected: {
+    control: 'boolean',
+  },
+  tabIndex: {
+    control: 'number',
+  },
+  title: {
+    control: 'text',
+  },
+  onChange: {
+    action: 'onChange',
+  },
+  onClick: {
+    action: 'onClick',
+  },
+  onKeyDown: {
+    action: 'onKeyDown',
+  },
+};
+
+const selectableControls = Object.keys(selectableArgTypes);
+
+const radioArgs = {
+  disabled: false,
+  legend: 'Radio Tile Group',
+  name: 'radio tile group',
+  required: false,
+  valueSelected: 'radio-tile-2',
+  onChange: action('onChange'),
+};
+
+const radioArgTypes = {
+  disabled: {
+    control: 'boolean',
+  },
+  legend: {
+    control: 'text',
+  },
+  name: {
+    control: 'text',
+  },
+  required: {
+    control: 'boolean',
+  },
+  valueSelected: {
+    control: 'select',
+    options: ['radio-tile-1', 'radio-tile-2', 'radio-tile-3'],
+  },
+  onChange: {
+    action: 'onChange',
+  },
+};
+
+const radioControls = Object.keys(radioArgTypes);
+
+const expandableArgs = {
+  expanded: false,
+  light: false,
+  tileCollapsedIconText: 'Interact to expand tile',
+  tileCollapsedLabel: '',
+  tileExpandedIconText: 'Interact to collapse tile',
+  tileExpandedLabel: '',
+  tileMaxHeight: 0,
+  tilePadding: 0,
+  onClick: action('onClick'),
+  onKeyUp: action('onKeyUp'),
+};
+
+const expandableArgTypes = {
+  expanded: {
+    control: 'boolean',
+  },
+  light: {
+    control: 'boolean',
+  },
+  tileCollapsedIconText: {
+    control: 'text',
+  },
+  tileCollapsedLabel: {
+    control: 'text',
+  },
+  tileExpandedIconText: {
+    control: 'text',
+  },
+  tileExpandedLabel: {
+    control: 'text',
+  },
+  tileMaxHeight: {
+    control: 'number',
+  },
+  tilePadding: {
+    control: 'number',
+  },
+  onClick: {
+    action: 'onClick',
+  },
+  onKeyUp: {
+    action: 'onKeyUp',
+  },
+};
+
+const expandableControls = Object.keys(expandableArgTypes);
+
 export const Clickable = (args) => {
   return (
     <div className={previewClassname}>
@@ -79,31 +235,41 @@ export const Clickable = (args) => {
 };
 
 Clickable.args = {
-  disabled: false,
+  ...clickableArgs,
 };
 
-Clickable.argTypes = {
-  disabled: {
-    control: {
-      type: 'boolean',
-    },
+Clickable.argTypes = clickableArgTypes;
+
+Clickable.parameters = {
+  controls: {
+    include: clickableControls,
   },
 };
 
-export const ClickableWithLayer = () => {
+export const ClickableWithLayer = (args) => {
   return (
     <WithLayer>
       {(layer) => (
         <div className={previewClassname}>
-          <ClickableTile
-            id={`clickable-tile-${layer}`}
-            href="https://www.carbondesignsystem.com/">
+          <ClickableTile id={`clickable-tile-${layer}`} {...args}>
             Clickable Tile
           </ClickableTile>
         </div>
       )}
     </WithLayer>
   );
+};
+
+ClickableWithLayer.args = {
+  ...clickableArgs,
+};
+
+ClickableWithLayer.argTypes = clickableArgTypes;
+
+ClickableWithLayer.parameters = {
+  controls: {
+    include: clickableControls,
+  },
 };
 
 export const Selectable = (args) => {
@@ -121,14 +287,14 @@ export const Selectable = (args) => {
 };
 
 Selectable.args = {
-  disabled: false,
+  ...selectableArgs,
 };
 
-Selectable.argTypes = {
-  disabled: {
-    control: {
-      type: 'boolean',
-    },
+Selectable.argTypes = selectableArgTypes;
+
+Selectable.parameters = {
+  controls: {
+    include: selectableControls,
   },
 };
 
@@ -152,36 +318,34 @@ export const MultiSelect = (args) => {
 };
 
 MultiSelect.args = {
-  disabled: false,
+  ...selectableArgs,
 };
 
-MultiSelect.argTypes = {
-  disabled: {
-    control: {
-      type: 'boolean',
-    },
+MultiSelect.argTypes = selectableArgTypes;
+
+MultiSelect.parameters = {
+  controls: {
+    include: selectableControls,
   },
 };
 
 export const Radio = (args) => {
   return (
     <div className={previewClassname}>
-      <TileGroup legend="Radio Tile Group" name="radio tile group">
+      <TileGroup {...args}>
         <RadioTile
           id="radio-tile-1"
           value="radio-tile-1"
-          style={{ marginBottom: '.5rem' }}
-          {...args}>
+          style={{ marginBottom: '.5rem' }}>
           Option 1
         </RadioTile>
         <RadioTile
           id="radio-tile-2"
           value="radio-tile-2"
-          style={{ marginBottom: '.5rem' }}
-          {...args}>
+          style={{ marginBottom: '.5rem' }}>
           Option 2
         </RadioTile>
-        <RadioTile id="radio-tile-3" value="radio-tile-3" {...args} disabled>
+        <RadioTile id="radio-tile-3" value="radio-tile-3" disabled>
           Option 3
         </RadioTile>
       </TileGroup>
@@ -190,34 +354,30 @@ export const Radio = (args) => {
 };
 
 Radio.args = {
-  disabled: false,
+  ...radioArgs,
 };
 
-Radio.argTypes = {
-  disabled: {
-    control: {
-      type: 'boolean',
-    },
+Radio.argTypes = radioArgTypes;
+
+Radio.parameters = {
+  controls: {
+    include: radioControls,
   },
 };
 
-export const RadioWithLayer = () => {
+export const RadioWithLayer = (args) => {
   return (
     <WithLayer>
       {(layer) => (
         <div className={previewClassname}>
-          <TileGroup
-            legend="Radio Tile Group"
-            name={`radio-tile-group-${layer}`}>
+          <TileGroup {...args}>
             <RadioTile
               id={`radio-tile-${layer}-1`}
-              value={`radio-tile-${layer}-1`}
+              value="radio-tile-1"
               style={{ marginBottom: '.5rem' }}>
               Option 1
             </RadioTile>
-            <RadioTile
-              id={`radio-tile-${layer}-2`}
-              value={`radio-tile-${layer}-2`}>
+            <RadioTile id={`radio-tile-${layer}-2`} value="radio-tile-2">
               Option 2
             </RadioTile>
           </TileGroup>
@@ -227,12 +387,27 @@ export const RadioWithLayer = () => {
   );
 };
 
-export const Expandable = () => (
+RadioWithLayer.args = {
+  ...radioArgs,
+};
+
+RadioWithLayer.argTypes = {
+  ...radioArgTypes,
+  valueSelected: {
+    ...radioArgTypes.valueSelected,
+    options: ['radio-tile-1', 'radio-tile-2'],
+  },
+};
+
+RadioWithLayer.parameters = {
+  controls: {
+    include: radioControls,
+  },
+};
+
+export const Expandable = (args) => (
   <div style={{ width: '400px' }} className={previewClassname}>
-    <ExpandableTile
-      id="expandable-tile-1"
-      tileCollapsedIconText="Interact to Expand tile"
-      tileExpandedIconText="Interact to Collapse tile">
+    <ExpandableTile id="expandable-tile-1" {...args}>
       <TileAboveTheFoldContent>
         <div style={{ height: '200px' }}>Above the fold content here</div>
       </TileAboveTheFoldContent>
@@ -243,12 +418,21 @@ export const Expandable = () => (
   </div>
 );
 
-export const ExpandableWithInteractive = () => (
+Expandable.args = {
+  ...expandableArgs,
+};
+
+Expandable.argTypes = expandableArgTypes;
+
+Expandable.parameters = {
+  controls: {
+    include: expandableControls,
+  },
+};
+
+export const ExpandableWithInteractive = (args) => (
   <div style={{ width: '400px' }} className={previewClassname}>
-    <ExpandableTile
-      id="expandable-tile-1"
-      tileCollapsedIconText="Interact to Expand tile"
-      tileExpandedIconText="Interact to Collapse tile">
+    <ExpandableTile id="expandable-tile-1" {...args}>
       <TileAboveTheFoldContent>
         <div style={{ height: '200px', width: '200px' }}>
           Above the fold content here
@@ -267,15 +451,24 @@ export const ExpandableWithInteractive = () => (
   </div>
 );
 
-export const ExpandableWithLayer = () => {
+ExpandableWithInteractive.args = {
+  ...expandableArgs,
+};
+
+ExpandableWithInteractive.argTypes = expandableArgTypes;
+
+ExpandableWithInteractive.parameters = {
+  controls: {
+    include: expandableControls,
+  },
+};
+
+export const ExpandableWithLayer = (args) => {
   return (
     <WithLayer>
       {(layer) => (
         <div style={{ width: '400px' }} className={previewClassname}>
-          <ExpandableTile
-            id={`expandable-tile-${layer}`}
-            tileCollapsedIconText="Interact to Expand tile"
-            tileExpandedIconText="Interact to Collapse tile">
+          <ExpandableTile id={`expandable-tile-${layer}`} {...args}>
             <TileAboveTheFoldContent>
               <div style={{ height: '100px', width: '200px' }}>
                 Above the fold content here
@@ -297,6 +490,18 @@ export const ExpandableWithLayer = () => {
       )}
     </WithLayer>
   );
+};
+
+ExpandableWithLayer.args = {
+  ...expandableArgs,
+};
+
+ExpandableWithLayer.argTypes = expandableArgTypes;
+
+ExpandableWithLayer.parameters = {
+  controls: {
+    include: expandableControls,
+  },
 };
 
 const aiLabel = (
@@ -331,15 +536,17 @@ const aiLabel = (
 );
 
 export const _WithAILabel = {
+  args: {
+    hasRoundedCorners: false,
+  },
   argTypes: {
     hasRoundedCorners: {
-      control: {
-        type: 'boolean',
-      },
+      control: 'boolean',
     },
-    decorator: {
-      description:
-        '**Experimental**: Provide a `decorator` component to be rendered inside the component',
+  },
+  parameters: {
+    controls: {
+      include: ['hasRoundedCorners'],
     },
   },
   render: (args) => (

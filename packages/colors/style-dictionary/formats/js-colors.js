@@ -85,7 +85,7 @@ function carbonJsColorsFormat({ dictionary, options }) {
 function generateJs(standalone, byFamily) {
   const lines = [FILE_BANNER];
 
-  // ── black / white standalones ───────────────────────────────────────────────
+  // black / white standalones
   lines.push(`export const black = '${standalone['black'] ?? '#000000'}';`);
   lines.push(`export const black100 = black;`);
   lines.push(
@@ -99,7 +99,7 @@ function generateJs(standalone, byFamily) {
   );
   lines.push('');
 
-  // ── Per-family: solid grades, group object, hover grades, hover group ───────
+  // Per-family: solid grades, group object, hover grades, hover group
   for (const family of FAMILIES) {
     const grades = byFamily[family] ?? {};
 
@@ -135,7 +135,7 @@ function generateJs(standalone, byFamily) {
     lines.push('');
   }
 
-  // ── colors aggregate map ────────────────────────────────────────────────────
+  // colors aggregate map
   lines.push(`export const colors = {`);
   lines.push(`  black: { 100: black },`);
   for (const family of FAMILIES) {
@@ -153,7 +153,7 @@ function generateJs(standalone, byFamily) {
   lines.push(`};`);
   lines.push('');
 
-  // ── hoverColors aggregate map ───────────────────────────────────────────────
+  // hoverColors aggregate map
   lines.push(`export const hoverColors = {`);
   lines.push(`  blackHover,`);
   for (const family of FAMILIES) {

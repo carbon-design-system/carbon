@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <path id="parallelogram--outline" d="M20.5908,30H2.8379c-.6494,0-1.2603-.3164-1.6343-.8477-.374-.5303-.4673-1.2129-.249-1.8242L9.5259,3.3276c.2837-.7939,1.0405-1.3276,1.8833-1.3276h17.7529c.6494,0,1.2607.3169,1.6348.8477s.4668,1.2129.248,1.8247l-8.5713,23.9995c-.2852.7949-1.041,1.3281-1.8828,1.3281ZM11.4102,3.9995L2.8384,28h17.7524L29.1621,3.9995H11.4102Z"/>
+  <rect id="Transparent_Rectangle" data-name="Transparent Rectangle" class="cls-1" width="32" height="32"/>
+</svg>

@@ -1,0 +1,102 @@
+import { Story, Controls, Source, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+import * as stories from './CreateModal.stories';
+
+<Meta isTemplate />
+
+# Create Modal
+
+[Usage guidelines](https://carbondesignsystem.com/patterns/create-flows/usage/#modal)
+|
+[Carbon modal usage guidelines](https://www.carbondesignsystem.com/components/modal/usage)
+|
+[Carbon modal documentation](https://react.carbondesignsystem.com/?path=/docs/components-modal)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+  - [Create Modal](#create-modal)
+  - [Form validation](#form-validation)
+
+## Overview
+
+The `CreateModal` pattern provides a way for a user to quickly generate a new
+resource. It is triggered by a user's action, appears on top of the main page
+content, and is persistent until dismissed. The purpose of this modal should be
+immediately apparent to the user, with a clear and obvious path to completion.
+
+To build this pattern, we recommend including the following ingredients:
+
+- [Modal](https://react.carbondesignsystem.com/?path=/docs/components-modal)
+- [Button](https://react.carbondesignsystem.com/?path=/docs/components-button)
+- [Form](https://react.carbondesignsystem.com/?path=/docs/components-form)
+- [FormGroup](https://react.carbondesignsystem.com/?path=/docs/components-formgroup)
+- [TextInput](https://react.carbondesignsystem.com/?path=/docs/components-textinput)
+- [TextArea](https://react.carbondesignsystem.com/?path=/docs/components-textarea)
+- [RadioButton](https://react.carbondesignsystem.com/?path=/docs/components-radiobutton)
+- [Dropdown](https://react.carbondesignsystem.com/?path=/docs/components-dropdown)
+- [Loading](https://react.carbondesignsystem.com/?path=/docs/components-loading)
+
+```jsx
+import {
+  Button,
+  Form,
+  FormGroup,
+  Modal,
+  TextInput,
+  TextArea,
+  RadioButton,
+  Dropdown,
+  Loading,
+} from '@carbon/react';
+```
+
+## Example usage
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/react/src/examples/CreateModal/example)
+> example implementation.
+
+[![Edit react-patterns](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/react/src/examples/CreateModal/example)
+
+### Create Modal
+
+<Canvas
+  of={stories.CreateModal}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(stories.CreateModal),
+    },
+  ]}
+/>
+
+### With Form Validation
+
+<Canvas
+  of={stories.WithFormValidation}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(stories.WithFormValidation),
+    },
+  ]}
+/>
+
+### Form validation
+
+All forms, including that within the `CreateModal` should follow Carbon's
+guidelines for form validation.
+
+This includes the following:
+
+- The `Submit` button in the modal should be disabled, until all required inputs
+  are filled in and valid
+- All required inputs should only throw an invalid error after the element loses
+  focus
+- All optional form fields should have an `(optional)` text at the end of the
+  input `labelText`. Optional should always be in parentheses
+
+You can find more information on how to validate your form fields in
+[Carbon's Form usage page](https://carbondesignsystem.com/components/form/usage/).

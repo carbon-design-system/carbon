@@ -85,6 +85,11 @@ export interface FileUploaderDropContainerProps
   pattern?: string;
 
   /**
+   * Specify if the file input is required
+   */
+  required?: boolean;
+
+  /**
    * Ref to pass to the inner button element
    */
   innerRef?: React.Ref<HTMLButtonElement>;
@@ -116,6 +121,7 @@ function FileUploaderDropContainer({
   onAddFiles = noopFn,
   onClick,
   pattern = '.[0-9a-z]+$',
+  required,
 
   innerRef,
   ...rest
@@ -280,6 +286,7 @@ function FileUploaderDropContainer({
         disabled={disabled}
         accept={accept.join(',')}
         name={name}
+        required={required}
         multiple={multiple}
         onChange={handleChange}
         onClick={(evt) => {
@@ -348,6 +355,11 @@ FileUploaderDropContainer.propTypes = {
    * Provide a custom regex pattern for the acceptedTypes
    */
   pattern: PropTypes.string,
+
+  /**
+   * Specify if the file input is required
+   */
+  required: PropTypes.bool,
 
   /**
    * Provide an accessibility role for the `<FileUploaderButton>`

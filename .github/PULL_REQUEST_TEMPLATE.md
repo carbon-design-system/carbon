@@ -22,10 +22,10 @@ Closes #
 
 ## PR Checklist
 
-<!-- 
+<!--
   Do not remove checklist items.
   If some are incomplete, create a draft pull request using the create button dropdown.
-  If some do not apply, ~strike through the item text with tildes~.
+  If some do not apply, ~~strike through the item text with tildes~~.
 -->
 
 As the author of this PR, before marking ready for review, confirm you:
@@ -41,4 +41,4 @@ As the author of this PR, before marking ready for review, confirm you:
 - [ ] Tested for cross-browser consistency
 - [ ] Validated that this code is ready for review and status checks should pass
 
-More details can be found in the [pull request guide](https://github.com/carbon-design-system/carbon/blob/main/docs/guides/reviewing-pull-requests.md)
+More details can be found in the [pull request guide](https://github.com/carbon-design-system/carbon/blob/main/docs/guides/reviewing-pull-requests.md).

@@ -1,0 +1,100 @@
+/*
+* Copyright IBM Corp. 2025, 2026
+*
+* This source code is licensed under the Apache-2.0 license found in the
+* LICENSE file in the root directory of this source tree.
+*/
+
+/* stylelint-disable  */
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+
+$block-class: #{$prefix}--page-header-tags-set;
+
+:host {
+  inline-size: 100%;
+
+  // Visually-hidden live region for announcing overflow count changes to
+  // assistive technology — must remain in the accessibility tree.
+  .#{$block-class}__hidden-count-announcement {
+    position: absolute;
+    overflow: hidden;
+    inline-size: 1px;
+    block-size: 1px;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  // Hide overflow items marked by the overflow handler.
+  [data-hidden]:not([data-fixed]) {
+    display: none;
+  }
+
+  .#{$block-class} {
+    display: flex;
+    // Spacing between tags.
+    gap: $spacing-03;
+    box-sizing: border-box;
+    justify-content: flex-end;
+    inline-size: 100%;
+    white-space: nowrap;
+
+    &__popover-container {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-02;
+      padding: $spacing-05;
+
+      .#{$block-class}__popover-tag {
+        @include type.type-style('label-02');
+
+        margin: 0;
+      }
+    }
+
+    &__view-all {
+      --#{$prefix}-link-text-color: var(--#{$prefix}-link-inverse);
+      --#{$prefix}-link-hover-text-color: var(--#{$prefix}-link-inverse-hover);
+      --#{$prefix}-link-visited-text-color: var(
+        --#{$prefix}-link-inverse-visited
+      );
+      --#{$prefix}-link-focus-text-color: var(--#{$prefix}-focus-inverse);
+      margin-top: $spacing-03;
+      display: block;
+    }
+
+    &__modal-tags-search {
+      margin-block-start: $spacing-05;
+    }
+
+    &__modal-tags-container {
+      cds-dismissible-tag {
+        margin: $spacing-02 $spacing-03 $spacing-02 0;
+      }
+    }
+  }
+
+  // Suppress custom elements until styles are loaded
+  #{$prefix}-tag:not(:defined),
+  #{$prefix}-dismissible-tag:not(:defined),
+  #{$prefix}-operational-tag:not(:defined) {
+    display: none;
+  }
+
+  cds-modal-header {
+    padding-inline: $spacing-05;
+  }
+
+  cds-modal-body {
+    @extend .#{$prefix}--modal-scroll-content !optional;
+
+    cds-tag {
+      margin-inline-start: 0;
+    }
+  }
+}

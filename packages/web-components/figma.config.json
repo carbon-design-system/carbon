@@ -4,6 +4,9 @@
     "include": ["code-connect/**/*.figma.ts"],
     "label": "Web Components",
     "language": "html",
-    "interactiveSetupFigmaFileUrl": "https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System"
+    "interactiveSetupFigmaFileUrl": "https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/",
+    "documentUrlSubstitutions": {
+      "https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/": "https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/"
+    }
   }
 }

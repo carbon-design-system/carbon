@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { Grid, FlexGrid } from '../';
 
@@ -26,14 +26,12 @@ describe('FlexGrid', () => {
   });
 
   it('should render `children` that are given', () => {
-    const { container } = render(
+    render(
       <FlexGrid>
         <span id="test">Test</span>
       </FlexGrid>
     );
-    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-    const testNode = container.querySelector('#test');
-    expect(testNode).toBeInstanceOf(HTMLElement);
+    expect(screen.getByText('Test')).toHaveAttribute('id', 'test');
   });
 
   it('should support setting the condensed class through the `condensed` prop', () => {
@@ -109,14 +107,12 @@ describe('Grid', () => {
   });
 
   it('should render `children` that are given', () => {
-    const { container } = render(
+    render(
       <Grid>
         <span id="test">Test</span>
       </Grid>
     );
-    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-    const testNode = container.querySelector('#test');
-    expect(testNode).toBeInstanceOf(HTMLElement);
+    expect(screen.getByText('Test')).toHaveAttribute('id', 'test');
   });
 
   it('should support setting the condensed class through the `condensed` prop', () => {
