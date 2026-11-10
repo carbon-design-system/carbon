@@ -29,7 +29,7 @@ import { deprecate } from '../../prop-types/deprecate';
 import { FormContext } from '../FluidForm';
 import { noopFn } from '../../internal/noopFn';
 import { Tooltip } from '../Tooltip';
-import type { PopoverAlignment } from '../Popover';
+import type { NewPopoverAlignment } from '../Popover';
 import { isSearchValuePresent } from './utils';
 import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
 
@@ -121,7 +121,7 @@ export interface SearchProps extends InputPropsBase {
    * Specify how the magnifier tooltip aligns with the trigger when the
    * Search is expandable and collapsed (`ExpandableSearch`).
    */
-  tooltipAlignment?: PopoverAlignment;
+  tooltipAlignment?: NewPopoverAlignment;
 
   /**
    * Specify the type of the `<input>`
