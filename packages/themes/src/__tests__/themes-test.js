@@ -8,13 +8,10 @@
  */
 
 import { themes } from '../';
-import { group, TokenFormat } from '../tokens';
+import { tokens as tokenNames } from '../../js/generated/metadata.js';
 
-const tokens = group.getTokens().map((token) => {
-  return TokenFormat.convert({
-    name: token.name,
-    format: TokenFormat.formats.js,
-  });
+const tokens = tokenNames.map((name) => {
+  return name.replace(/-([a-z0-9])/g, (_, char) => char.toUpperCase());
 });
 
 describe('themes', () => {
