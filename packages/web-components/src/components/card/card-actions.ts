@@ -42,6 +42,17 @@ interface ActionItem {
 /** Custom property the actions publish so the header slot can size itself. */
 const ACTIONS_INLINE_SIZE_PROPERTY = `--${prefix}--card--actions-inline-size`;
 
+/** Attributes that feed the overflow menu entry's label and disabled state. */
+const MENU_ITEM_ATTRIBUTES = [
+  'label',
+  'aria-label',
+  'title',
+  'tooltip-text',
+  'tooltip-content',
+  'disabled',
+  'aria-disabled',
+];
+
 /**
  * Card actions
  *
@@ -73,8 +84,26 @@ class CDSCardActions extends LitElement {
 
   private _offsetEl: HTMLDivElement | undefined;
 
+  /**
+   * Re-renders when a slotted action's label or disabled state changes, since
+   * `slotchange` only fires when the set of slotted nodes changes.
+   */
+  private _attributeObserver: MutationObserver | undefined;
+
+  connectedCallback() {
+    super.connectedCallback();
+    this._attributeObserver = new MutationObserver(() => this.requestUpdate());
+    this._attributeObserver.observe(this, {
+      subtree: true,
+      attributes: true,
+      attributeFilter: MENU_ITEM_ATTRIBUTES,
+    });
+  }
+
   disconnectedCallback() {
     super.disconnectedCallback();
+    this._attributeObserver?.disconnect();
+    this._attributeObserver = undefined;
     this._overflowHandler?.disconnect();
     this._overflowHandler = undefined;
     this.style.removeProperty(ACTIONS_INLINE_SIZE_PROPERTY);
@@ -164,7 +193,11 @@ class CDSCardActions extends LitElement {
 
     this._overflowHandler = createOverflowHandler({
       container: this,
-      gap: 0,
+      gap,
+      // `clientWidth` is an integer while item widths can be fractional.
+      // Allow 1px of tolerance so an item that exactly fills the slot is not
+      // flipped in and out every frame (same as the React CardActions).
+      offsetValue: -1,
       onChange: (_, hidden: HTMLElement[]) => {
         if (offsetEl) {
           offsetEl.style.display = hidden.length > 0 ? 'block' : 'none';
@@ -193,7 +226,7 @@ class CDSCardActions extends LitElement {
 
   private _resolveActionItems(actions: HTMLElement[]): ActionItem[] {
     return actions.map((action, index) => {
-      const id = `card-action-${index}`;
+      const id = action.dataset.actionId ?? `card-action-${index}`;
       const button = this._getButton(action);
 
       // Label resolution hierarchy for any button type:
@@ -217,10 +250,15 @@ class CDSCardActions extends LitElement {
         button?.textContent?.trim() ||
         `Action ${index + 1}`;
 
+      const isAriaDisabled = (el?: Element | null) =>
+        el?.getAttribute('aria-disabled') === 'true';
+
       const disabled = Boolean(
         action.hasAttribute('disabled') ||
           button?.hasAttribute('disabled') ||
-          (button as HTMLButtonElement | null)?.disabled
+          (button as HTMLButtonElement | null)?.disabled ||
+          isAriaDisabled(action) ||
+          isAriaDisabled(button)
       );
 
       return { el: action, label, id, disabled };
@@ -235,7 +273,11 @@ class CDSCardActions extends LitElement {
   render() {
     const { _actionItems, _hiddenIds, overflowMenuLabel } = this;
     const hasHidden = _hiddenIds.size > 0;
-    const hiddenItems = _actionItems.filter(({ id }) => _hiddenIds.has(id));
+    // Label and disabled are re-resolved on every render so the menu reflects
+    // attribute changes made after the first slotchange.
+    const hiddenItems = this._resolveActionItems(
+      _actionItems.filter(({ id }) => _hiddenIds.has(id)).map(({ el }) => el)
+    );
 
     return html`
       <slot @slotchange=${this._handleSlotChange}></slot>
@@ -257,8 +299,9 @@ class CDSCardActions extends LitElement {
                       data-action-id=${id}
                       label=${label}
                       ?disabled=${disabled}
-                      @click=${() =>
-                        this._handleMenuItemClick(el)}></cds-menu-item>
+                      @click=${() => {
+                        if (!disabled) this._handleMenuItemClick(el);
+                      }}></cds-menu-item>
                   `
                 )}
               </cds-menu>

@@ -135,8 +135,7 @@ $css--plex: true !default;
 }
 
 // Standalone `cds-card-header-media` is superseded by the header's
-// `header-media` slot, which owns the spacing. The element remains for
-// backward compatibility.
+// `header-media` slot, which owns the spacing.
 :host(#{$prefix}-card-header-media) {
   display: flex;
   align-items: flex-start;

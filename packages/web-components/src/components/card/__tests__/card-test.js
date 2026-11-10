@@ -772,6 +772,68 @@ describe('cds-card-actions', function () {
     actions._handleMenuItemClick(items[0].el);
     expect(clicks).to.equal(1);
   });
+  it('should treat aria-disabled="true" on the button or the action as disabled', async () => {
+    const el = await fixture(html`
+      <cds-card-actions>
+        <cds-card-action>
+          <button type="button" aria-disabled="true">Inner</button>
+        </cds-card-action>
+        <cds-card-action aria-disabled="true">
+          <button type="button">Wrapper</button>
+        </cds-card-action>
+        <cds-card-action>
+          <button type="button" aria-disabled="false">Enabled</button>
+        </cds-card-action>
+      </cds-card-actions>
+    `);
+    await el.updateComplete;
+    const items = el._resolveActionItems(
+      Array.from(el.querySelectorAll('cds-card-action'))
+    );
+    expect(items.map((i) => i.disabled)).to.deep.equal([true, true, false]);
+  });
+
+  it('should not forward clicks from disabled overflow menu items', async () => {
+    let enabledClicks = 0;
+    let disabledClicks = 0;
+    const el = await fixture(html`
+      <div style="width: 60px">
+        <cds-card-actions>
+          <cds-card-action>
+            <button type="button" @click=${() => enabledClicks++}>
+              A long visible action label
+            </button>
+          </cds-card-action>
+          <cds-card-action>
+            <button
+              type="button"
+              aria-disabled="true"
+              @click=${() => disabledClicks++}>
+              Another long visible action label
+            </button>
+          </cds-card-action>
+        </cds-card-actions>
+      </div>
+    `);
+    const actions = el.querySelector('cds-card-actions');
+    await actions.updateComplete;
+    await new Promise((r) => setTimeout(r, 300));
+    await actions.updateComplete;
+
+    const menuItems = Array.from(
+      actions.shadowRoot.querySelectorAll('cds-menu-item')
+    );
+    expect(menuItems).to.have.length(2);
+    expect(menuItems.map((i) => i.hasAttribute('disabled'))).to.deep.equal([
+      false,
+      true,
+    ]);
+
+    menuItems.forEach((item) => item.click());
+
+    expect(enabledClicks).to.equal(1);
+    expect(disabledClicks).to.equal(0);
+  });
 
   it('should collapse text actions into the overflow menu when they do not fit', async () => {
     const el = await fixture(html`
@@ -814,5 +876,47 @@ describe('cds-card-actions', function () {
     }
     // Everything beyond the cap is reachable through the overflow menu.
     expect(actions.shadowRoot.querySelector('cds-overflow-menu')).to.exist;
+  });
+
+  it('should reflect label and disabled changes made after the first render in the overflow menu', async () => {
+    const el = await fixture(html`
+      <div style="width: 120px">
+        <cds-card-actions>
+          <cds-card-action>
+            <button type="button" aria-label="First">
+              A long visible action label
+            </button>
+          </cds-card-action>
+          <cds-card-action>
+            <button type="button" aria-label="Second">
+              Another long visible action label
+            </button>
+          </cds-card-action>
+        </cds-card-actions>
+      </div>
+    `);
+    const actions = el.querySelector('cds-card-actions');
+    await actions.updateComplete;
+    await new Promise((r) => setTimeout(r, 300));
+    await actions.updateComplete;
+
+    const hiddenId = Array.from(actions._hiddenIds)[0];
+    expect(hiddenId).to.exist;
+    const hiddenAction = actions.querySelector(
+      `[data-action-id="${hiddenId}"]`
+    );
+    const button = hiddenAction.querySelector('button');
+
+    button.setAttribute('aria-label', 'Renamed');
+    button.setAttribute('disabled', '');
+    // MutationObserver callbacks are microtasks; wait for the resulting render.
+    await Promise.resolve();
+    await actions.updateComplete;
+
+    const menuItem = actions.shadowRoot.querySelector(
+      `cds-menu-item[data-action-id="${hiddenId}"]`
+    );
+    expect(menuItem.getAttribute('label')).to.equal('Renamed');
+    expect(menuItem.hasAttribute('disabled')).to.be.true;
   });
 });
