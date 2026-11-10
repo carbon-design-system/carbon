@@ -10,7 +10,7 @@ import React from 'react';
 import SideNavMenuItem from '../SideNavMenuItem';
 
 describe('SideNavMenuItem', () => {
-  it('should set the current class when `isActive` is true', () => {
+  it('should set the current class and aria-current when `isActive` is true', () => {
     render(
       <SideNavMenuItem data-testid="test" isActive>
         test
@@ -19,6 +19,30 @@ describe('SideNavMenuItem', () => {
     expect(screen.getByTestId('test')).toHaveClass(
       'cds--side-nav__link--current'
     );
+    expect(screen.getByTestId('test')).toHaveAttribute('aria-current', 'page');
+  });
+
+  it('should not set aria-current when `isActive` is not true', () => {
+    render(<SideNavMenuItem data-testid="test">test</SideNavMenuItem>);
+    expect(screen.getByTestId('test')).not.toHaveAttribute('aria-current');
+  });
+
+  it('should keep a consumer-provided `aria-current` when `isActive` is true', () => {
+    render(
+      <SideNavMenuItem data-testid="test" isActive aria-current="true">
+        test
+      </SideNavMenuItem>
+    );
+    expect(screen.getByTestId('test')).toHaveAttribute('aria-current', 'true');
+  });
+
+  it('should set aria-current on a button rendered through `as` when `isActive` is true', () => {
+    render(
+      <SideNavMenuItem as="button" type="button" isActive>
+        test
+      </SideNavMenuItem>
+    );
+    expect(screen.getByRole('button')).toHaveAttribute('aria-current', 'page');
   });
 
   it('should support a custom `className` prop on the outermost element', () => {

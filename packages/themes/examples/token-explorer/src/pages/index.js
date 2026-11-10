@@ -14,8 +14,14 @@ import {
   statusTokens,
   contentSwitcherTokens,
 } from '../../../../src';
-import { TokenFormat, group, set as tokenSet } from '../../../../src/tokens';
-import * as componentGroups from '../../../../src/tokens/components';
+import {
+  tokens as themeTokens,
+  groups,
+  properties,
+  tokenSets,
+  componentGroups,
+  toJsName,
+} from '../../../shared/token-metadata';
 
 import { tokens } from '../tokens';
 
@@ -32,10 +38,7 @@ const THEME_KEY = { white: 'whiteTheme', g10: 'g10', g90: 'g90', g100: 'g100' };
 
 // Color / alias helpers
 function resolveColor(theme, tokenName) {
-  const jsName = TokenFormat.convert({
-    name: tokenName,
-    format: TokenFormat.formats.js,
-  });
+  const jsName = toJsName(tokenName);
   const compEntry = COMP_TOKENS[jsName];
   if (compEntry != null) {
     return compEntry[THEME_KEY[theme]] ?? compEntry[THEME_KEY.white] ?? null;
@@ -84,20 +87,13 @@ function getDescription(theme, tokenName) {
 }
 
 // Static token list
-const baseTokens = group.getTokens().map((t) => ({ ...t, _category: 'Root' }));
-const componentTokens = Object.values(componentGroups).flatMap((g) =>
-  g.getTokens().map((t) => ({ ...t, _category: g.name }))
+const baseTokens = themeTokens.map((t) => ({ ...t, _category: 'Root' }));
+const componentTokens = componentGroups.flatMap((g) =>
+  g.tokens.map((t) => ({ ...t, _category: g.name }))
 );
 const allTokens = [...baseTokens, ...componentTokens];
 
-const CATEGORIES = [
-  'All',
-  'Root',
-  ...Object.values(componentGroups).map((g) => g.name),
-];
-const groups = group.getTokenGroups();
-const properties = group.getTokenProperties();
-const tokenSets = tokenSet.getTokenSets();
+const CATEGORIES = ['All', 'Root', ...componentGroups.map((g) => g.name)];
 
 const THEME_OPTIONS = [
   { label: 'White', key: 'white' },
@@ -132,14 +128,14 @@ const DESC_GAP = 24;
 
 function buildGraphCategories(filteredTokens) {
   // Group filtered tokens by _category, preserving sub-group structure for Root
-  const rootSubGroups = group.getTokenGroups().filter((g) => g.name !== 'All');
+  const rootSubGroups = groups.filter((g) => g.name !== 'All');
   const filteredNames = new Set(filteredTokens.map((t) => t.name));
 
   const rootGroups = rootSubGroups
     .map((g) => ({
       id: `root-${g.name}`,
       label: g.name,
-      tokens: g.getTokens().filter((t) => filteredNames.has(t.name)),
+      tokens: g.tokens.filter((t) => filteredNames.has(t.name)),
     }))
     .filter((g) => g.tokens.length > 0);
 
@@ -148,10 +144,8 @@ function buildGraphCategories(filteredTokens) {
     cats.push({ id: 'root', label: 'Root', groups: rootGroups });
   }
 
-  for (const compGroup of Object.values(componentGroups)) {
-    const tokens = compGroup
-      .getTokens()
-      .filter((t) => filteredNames.has(t.name));
+  for (const compGroup of componentGroups) {
+    const tokens = compGroup.tokens.filter((t) => filteredNames.has(t.name));
     if (tokens.length > 0) {
       cats.push({
         id: `comp-${compGroup.name}`,
@@ -336,8 +330,8 @@ export default function IndexPage({ lastBuiltOn }) {
     )
       return false;
     if (activeSet !== 'All') {
-      const set = tokenSet.getTokenSet(activeSet);
-      if (!set.hasToken(token.name)) return false;
+      const set = tokenSets.find(({ name }) => name === activeSet);
+      if (!set.tokens.includes(token.name)) return false;
     }
     return true;
   });
@@ -587,10 +581,7 @@ export default function IndexPage({ lastBuiltOn }) {
                 </tr>
               )}
               {filteredTokens.map((token) => {
-                const jsName = TokenFormat.convert({
-                  name: token.name,
-                  format: TokenFormat.formats.js,
-                });
+                const jsName = toJsName(token.name);
                 const compEntry = COMP_TOKENS[jsName];
                 const rawValue =
                   compEntry != null

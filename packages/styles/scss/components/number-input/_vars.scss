@@ -77,6 +77,17 @@ $number-input-ai-label-cluster: calc(
   2 * #{$number-input-ai-label-gap} + #{convert.to-rem(16px)}
 );
 
+/// Space between an AI label and the invalid or warning
+/// @access public
+/// @group number-input
+$number-input-decorator-icon-gap: calc(
+  #{clamp($spacing-03, layout.size('height') - $spacing-05, $spacing-04)} + #{clamp(
+      0rem,
+      layout.size('height') - convert.to-rem(40px),
+      $spacing-03
+    )}
+);
+
 /// Inline-end padding when one 16px adornment (invalid/warning icon or
 /// decorator) sits beside the controls: 8px clear of the adornment.
 /// @access public
