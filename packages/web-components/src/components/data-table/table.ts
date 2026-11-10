@@ -156,7 +156,7 @@ class CDSTable extends HostListenerMixin(LitElement) {
   customSortRow(lhs, rhs, collator) {
     // Cell values are read from `textContent`, so numbers arrive as strings.
     if (isNumeric(lhs) && isNumeric(rhs)) {
-      return Number(lhs) - Number(rhs);
+      return Math.sign(Number(lhs) - Number(rhs));
     }
     return collator.compare(lhs, rhs);
   }

@@ -122,12 +122,15 @@ sorting function.
 For example, this `customSortRow` function would take on the following shape:
 
 ```js
-customSortRow(lhs, rhs, collator) {
-  if (typeof lhs === 'number' && typeof rhs === 'number') {
-    return lhs - rhs;
+const isNumeric = (value) =>
+  value.trim() !== '' && Number.isFinite(Number(value));
+
+const customSortRow = (lhs, rhs, collator) => {
+  if (isNumeric(lhs) && isNumeric(rhs)) {
+    return Math.sign(Number(lhs) - Number(rhs));
   }
   return collator.compare(lhs, rhs);
-}
+};
 
 document.querySelector('cds-table').customSortRow = customSortRow;
 ```

@@ -154,6 +154,15 @@ describe('cds-table', () => {
     ]);
   });
 
+  it('should return -1, 0, or 1 when comparing numeric text', () => {
+    const el = document.createElement('cds-table');
+    const collator = new Intl.Collator('en');
+
+    expect(el.customSortRow('1000', '1', collator)).to.equal(1);
+    expect(el.customSortRow('-1000', '1', collator)).to.equal(-1);
+    expect(el.customSortRow('1.0', '1', collator)).to.equal(0);
+  });
+
   it('should keep sorting non-numeric text with the collator', () => {
     const el = document.createElement('cds-table');
     const collator = new Intl.Collator('en');
