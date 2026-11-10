@@ -6,6 +6,7 @@
  */
 
 import { html } from 'lit';
+import './data-table-story.scss';
 import { TABLE_SIZE } from '../table';
 import storyDocs from './data-table-ai-label.mdx';
 import View16 from '@carbon/icons/es/view/16.js';
@@ -107,7 +108,9 @@ export const _AILabelWithExpansion = {
         size="${args.size}"
         ?use-static-width=${args.useStaticWidth}
         ?use-zebra-styles=${args.useZebraStyles}>
-        <cds-table-header-title slot="title">DataTable</cds-table-header-title>
+        <cds-table-header-title slot="title">
+          <h2 class="demo-table-heading">DataTable</h2>
+        </cds-table-header-title>
         <cds-table-header-description slot="description"
           >With sorting</cds-table-header-description
         >
@@ -134,7 +137,7 @@ export const _AILabelWithExpansion = {
             >
           </cds-table-row>
           <cds-table-expanded-row>
-            <h6>Expandable row content</h6>
+            <h3 class="demo-expanded-row-heading">Expandable row content</h3>
             <div>Description here</div>
           </cds-table-expanded-row>
           <cds-table-row>
@@ -149,7 +152,7 @@ export const _AILabelWithExpansion = {
             <cds-table-cell><cds-link>Starting</cds-link></cds-table-cell>
           </cds-table-row>
           <cds-table-expanded-row>
-            <h6>Expandable row content</h6>
+            <h3 class="demo-expanded-row-heading">Expandable row content</h3>
             <div>Description here</div>
           </cds-table-expanded-row>
           <cds-table-row>
@@ -161,7 +164,7 @@ export const _AILabelWithExpansion = {
             <cds-table-cell><cds-link>Active</cds-link></cds-table-cell>
           </cds-table-row>
           <cds-table-expanded-row>
-            <h6>Expandable row content</h6>
+            <h3 class="demo-expanded-row-heading">Expandable row content</h3>
             <div>Description here</div>
           </cds-table-expanded-row>
           <cds-table-row>
@@ -178,7 +181,7 @@ export const _AILabelWithExpansion = {
             >
           </cds-table-row>
           <cds-table-expanded-row>
-            <h6>Expandable row content</h6>
+            <h3 class="demo-expanded-row-heading">Expandable row content</h3>
             <div>Description here</div>
           </cds-table-expanded-row>
           <cds-table-row>
@@ -193,7 +196,7 @@ export const _AILabelWithExpansion = {
             <cds-table-cell><cds-link>Starting</cds-link></cds-table-cell>
           </cds-table-row>
           <cds-table-expanded-row>
-            <h6>Expandable row content</h6>
+            <h3 class="demo-expanded-row-heading">Expandable row content</h3>
             <div>Description here</div>
           </cds-table-expanded-row>
           <cds-table-row>
@@ -205,7 +208,7 @@ export const _AILabelWithExpansion = {
             <cds-table-cell><cds-link>Active</cds-link></cds-table-cell>
           </cds-table-row>
           <cds-table-expanded-row>
-            <h6>Expandable row content</h6>
+            <h3 class="demo-expanded-row-heading">Expandable row content</h3>
             <div>Description here</div>
           </cds-table-expanded-row>
         </cds-table-body>
@@ -422,7 +425,9 @@ export const AILabelWithSelectionAndExpansion = {
         size="${args.size}"
         ?use-static-width=${args.useStaticWidth}
         ?use-zebra-styles=${args.useZebraStyles}>
-        <cds-table-header-title slot="title">DataTable</cds-table-header-title>
+        <cds-table-header-title slot="title">
+          <h2 class="demo-table-heading">DataTable</h2>
+        </cds-table-header-title>
         <cds-table-header-description slot="description"
           >With selection</cds-table-header-description
         >
@@ -449,7 +454,7 @@ export const AILabelWithSelectionAndExpansion = {
             >
           </cds-table-row>
           <cds-table-expanded-row>
-            <h6>Expandable row content</h6>
+            <h3 class="demo-expanded-row-heading">Expandable row content</h3>
             <div>Description here</div>
           </cds-table-expanded-row>
           <cds-table-row selection-name="1">
@@ -464,7 +469,7 @@ export const AILabelWithSelectionAndExpansion = {
             <cds-table-cell><cds-link>Starting</cds-link></cds-table-cell>
           </cds-table-row>
           <cds-table-expanded-row>
-            <h6>Expandable row content</h6>
+            <h3 class="demo-expanded-row-heading">Expandable row content</h3>
             <div>Description here</div>
           </cds-table-expanded-row>
           <cds-table-row selection-name="2">
@@ -476,7 +481,7 @@ export const AILabelWithSelectionAndExpansion = {
             <cds-table-cell><cds-link>Active</cds-link></cds-table-cell>
           </cds-table-row>
           <cds-table-expanded-row>
-            <h6>Expandable row content</h6>
+            <h3 class="demo-expanded-row-heading">Expandable row content</h3>
             <div>Description here</div>
           </cds-table-expanded-row>
           <cds-table-row selection-name="3">
@@ -493,7 +498,7 @@ export const AILabelWithSelectionAndExpansion = {
             >
           </cds-table-row>
           <cds-table-expanded-row>
-            <h6>Expandable row content</h6>
+            <h3 class="demo-expanded-row-heading">Expandable row content</h3>
             <div>Description here</div>
           </cds-table-expanded-row>
           <cds-table-row selection-name="4">
@@ -508,7 +513,7 @@ export const AILabelWithSelectionAndExpansion = {
             <cds-table-cell><cds-link>Starting</cds-link></cds-table-cell>
           </cds-table-row>
           <cds-table-expanded-row>
-            <h6>Expandable row content</h6>
+            <h3 class="demo-expanded-row-heading">Expandable row content</h3>
             <div>Description here</div>
           </cds-table-expanded-row>
           <cds-table-row selection-name="5">
@@ -520,7 +525,7 @@ export const AILabelWithSelectionAndExpansion = {
             <cds-table-cell><cds-link>Active</cds-link></cds-table-cell>
           </cds-table-row>
           <cds-table-expanded-row>
-            <h6>Expandable row content</h6>
+            <h3 class="demo-expanded-row-heading">Expandable row content</h3>
             <div>Description here</div>
           </cds-table-expanded-row>
         </cds-table-body>
@@ -635,7 +640,9 @@ export const _ColumnAILabelWithSelectionAndExpansion = {
         size="${args.size}"
         ?use-static-width=${args.useStaticWidth}
         ?use-zebra-styles=${args.useZebraStyles}>
-        <cds-table-header-title slot="title">DataTable</cds-table-header-title>
+        <cds-table-header-title slot="title">
+          <h2 class="demo-table-heading">DataTable</h2>
+        </cds-table-header-title>
         <cds-table-header-description slot="description"
           >With expansion</cds-table-header-description
         >
@@ -667,7 +674,7 @@ export const _ColumnAILabelWithSelectionAndExpansion = {
             >
           </cds-table-row>
           <cds-table-expanded-row>
-            <h6>Expandable row content</h6>
+            <h3 class="demo-expanded-row-heading">Expandable row content</h3>
             <div>Description here</div>
           </cds-table-expanded-row>
           <cds-table-row selection-name="1">
@@ -679,7 +686,7 @@ export const _ColumnAILabelWithSelectionAndExpansion = {
             <cds-table-cell><cds-link>Starting</cds-link></cds-table-cell>
           </cds-table-row>
           <cds-table-expanded-row>
-            <h6>Expandable row content</h6>
+            <h3 class="demo-expanded-row-heading">Expandable row content</h3>
             <div>Description here</div>
           </cds-table-expanded-row>
           <cds-table-row selection-name="2">
@@ -691,7 +698,7 @@ export const _ColumnAILabelWithSelectionAndExpansion = {
             <cds-table-cell><cds-link>Active</cds-link></cds-table-cell>
           </cds-table-row>
           <cds-table-expanded-row>
-            <h6>Expandable row content</h6>
+            <h3 class="demo-expanded-row-heading">Expandable row content</h3>
             <div>Description here</div>
           </cds-table-expanded-row>
           <cds-table-row selection-name="3">
@@ -705,7 +712,7 @@ export const _ColumnAILabelWithSelectionAndExpansion = {
             >
           </cds-table-row>
           <cds-table-expanded-row>
-            <h6>Expandable row content</h6>
+            <h3 class="demo-expanded-row-heading">Expandable row content</h3>
             <div>Description here</div>
           </cds-table-expanded-row>
           <cds-table-row selection-name="4">
@@ -717,7 +724,7 @@ export const _ColumnAILabelWithSelectionAndExpansion = {
             <cds-table-cell><cds-link>Starting</cds-link></cds-table-cell>
           </cds-table-row>
           <cds-table-expanded-row>
-            <h6>Expandable row content</h6>
+            <h3 class="demo-expanded-row-heading">Expandable row content</h3>
             <div>Description here</div>
           </cds-table-expanded-row>
           <cds-table-row selection-name="5">
@@ -729,7 +736,7 @@ export const _ColumnAILabelWithSelectionAndExpansion = {
             <cds-table-cell><cds-link>Active</cds-link></cds-table-cell>
           </cds-table-row>
           <cds-table-expanded-row>
-            <h6>Expandable row content</h6>
+            <h3 class="demo-expanded-row-heading">Expandable row content</h3>
             <div>Description here</div>
           </cds-table-expanded-row>
         </cds-table-body>

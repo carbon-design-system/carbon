@@ -7,7 +7,7 @@
 
 import React from 'react';
 import DataTableSkeleton from '../DataTableSkeleton';
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 
 const prefix = 'cds';
 
@@ -63,11 +63,10 @@ describe('DataTableSkeleton', () => {
     });
 
     it('should respect the rowCount prop', () => {
-      const { container } = render(<DataTableSkeleton rowCount={20} />);
+      render(<DataTableSkeleton rowCount={20} />);
 
-      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-      const rows = container.querySelectorAll('tbody tr');
-      expect(rows.length).toEqual(20);
+      const [, body] = screen.getAllByRole('rowgroup');
+      expect(within(body).getAllByRole('row')).toHaveLength(20);
     });
 
     it('should respect the showHeader prop', () => {
@@ -79,10 +78,9 @@ describe('DataTableSkeleton', () => {
     });
 
     it('should respect the showToolbar prop', () => {
-      const { container } = render(<DataTableSkeleton showToolbar={false} />);
+      render(<DataTableSkeleton showToolbar={false} />);
 
-      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-      const toolbar = container.querySelector(`.${prefix}--table-toolbar`);
+      const toolbar = screen.queryByRole('region', { hidden: true });
       expect(toolbar).not.toBeInTheDocument();
     });
 

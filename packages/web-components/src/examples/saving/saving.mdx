@@ -1,0 +1,94 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+
+import SavingStories from './saving.stories';
+
+<Meta of={SavingStories} />
+
+# Saving
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Auto saving](#auto-saving)
+- [Manual saving](#manual-saving)
+
+## Overview
+
+Saving is the action of persisting information a user has entered or changed.
+Saving can happen automatically as the user makes changes, or manually when the
+user explicitly requests it. Both approaches should give clear feedback about
+the current state of the save.
+
+> NOTE: Patterns have multiple ways of accomplishing a user need and typically
+> use a combination of components with additional design considerations. The
+> pattern code we share is meant to serve as an example implementation that can
+> be built and extended further.
+
+To build this pattern, we recommend including the following components:
+
+- [cds-textarea](https://web-components.carbondesignsystem.com/?path=/docs/components-text-area--overview)
+- [cds-button](https://web-components.carbondesignsystem.com/?path=/docs/components-button--overview)
+- [cds-inline-loading](https://web-components.carbondesignsystem.com/?path=/docs/components-inline-loading--overview)
+
+The `auto-saving` and `manual-saving` example elements use these components to
+manage the save state.
+
+```javascript
+import '@carbon/web-components/es/components/textarea/index.js';
+import '@carbon/web-components/es/components/button/index.js';
+import '@carbon/web-components/es/components/inline-loading/index.js';
+```
+
+## Example usage
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/src/examples/saving/example)
+
+### Auto saving
+
+Changes are saved as the user types. A status message below the field shows
+whether the save is in progress, has succeeded, or has failed.
+
+<Canvas withSource="none">
+  <Story of={SavingStories.Auto} />
+</Canvas>
+
+#### HTML
+
+```html
+<cds-textarea
+  id="save-auto-textarea"
+  label="Enter in the thing you wanted saved"></cds-textarea>
+<div class="saving__message">
+  <!-- Rendered only after the user edits the field -->
+  <div class="saving__error-icon">
+    <!-- Rendered only when the save fails -->
+  </div>
+  <p class="saving__text">Saving...</p>
+</div>
+```
+
+### Manual saving
+
+The user saves explicitly by selecting a button. The button label and icon
+reflect the save state: default, in progress, saved, or failed.
+
+<Canvas withSource="none">
+  <Story of={SavingStories.Manual} />
+</Canvas>
+
+#### HTML
+
+```html
+<div class="saving__buttons">
+  <cds-button kind="secondary" disabled type="button">Cancel</cds-button>
+  <cds-button kind="primary" type="button">
+    Save
+    <cds-inline-loading
+      slot="icon"
+      active
+      description="Loading"
+      assistive-text="Loading"></cds-inline-loading>
+  </cds-button>
+</div>
+```

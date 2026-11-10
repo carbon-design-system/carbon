@@ -1,3 +1,7 @@
+// url=https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=92123-1663&t=UFUf7yvv8SJyoEK1-4
+// source=https://github.com/carbon-design-system/carbon/blob/main/packages/web-components/src/components/ui-shell/header.ts
+// component=cds-header
+
 /**
  * Copyright IBM Corp. 2026
  *
@@ -5,41 +9,45 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import figma, { html } from '@figma/code-connect/html';
+import figma from 'figma';
+import { renderStringAttribute } from '../template-helpers';
 
-figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/?node-id=92123-1663&t=UFUf7yvv8SJyoEK1-4',
-  {
-    props: {
-      prefix: figma.boolean('Site prefix', {
-        true: figma.string('Site prefix text'),
-      }),
-      name: figma.string('Site name'),
-      headerMenuButton: figma.boolean('Menu', {
-        true: figma.children('Menu trigger'),
-      }),
-      headerGlobalActions: figma.boolean('Actions', {
-        true: figma.children(['UI shell - Header actions']),
-      }),
-      headerMenuItems: figma.boolean('Navigation', {
-        true: figma.children(['UI shell - Header menu item']),
-      }),
-    },
-    example: (props) =>
-      html`<cds-header aria-label=${props.name}>
-        <cds-skip-to-content></cds-skip-to-content>
-        ${props.headerMenuButton}
-        <cds-header-name href="#" prefix=${props.prefix}>
-          ${props.name}
-        </cds-header-name>
-        <cds-header-nav menu-bar-label="IBM [Platform]">
-          ${props.headerMenuItems}
-        </cds-header-nav>
-        <div class="cds--header__global">${props.headerGlobalActions}</div>
-      </cds-header>`,
-    imports: [
-      "import '@carbon/web-components/es/components/ui-shell/index.js'",
-      "import '@carbon/web-components/es/components/skip-to-content/index.js'",
-    ],
-  }
-);
+const instance = figma.selectedInstance;
+const getChildren = (layer: string) =>
+  instance
+    .findConnectedInstances(
+      (child) => child.name === layer && child.hasCodeConnect()
+    )
+    .map((child) => child.executeTemplate().example);
+const name = instance.getString('Site name');
+const prefix = instance.getBoolean('Site prefix')
+  ? instance.getString('Site prefix text')
+  : undefined;
+const headerMenuButton = instance.getBoolean('Menu')
+  ? getChildren('Menu trigger')
+  : [];
+const headerMenuItems = instance.getBoolean('Navigation')
+  ? getChildren('UI shell - Header menu item')
+  : [];
+const headerGlobalActions = instance.getBoolean('Actions')
+  ? getChildren('UI shell - Header actions')
+  : [];
+
+export default {
+  id: 'cds-header',
+  imports: [
+    "import '@carbon/web-components/es/components/ui-shell/index.js'",
+    "import '@carbon/web-components/es/components/skip-to-content/index.js'",
+  ],
+  example: figma.code`<cds-header${renderStringAttribute('aria-label', name)}>
+  <cds-skip-to-content></cds-skip-to-content>
+  ${headerMenuButton}
+  <cds-header-name href="#"${renderStringAttribute(
+    'prefix',
+    prefix
+  )}>${name}</cds-header-name>
+  <cds-header-nav menu-bar-label="IBM [Platform]">${headerMenuItems}</cds-header-nav>
+  <div class="cds--header__global">${headerGlobalActions}</div>
+</cds-header>`,
+  metadata: { nestable: false },
+};
