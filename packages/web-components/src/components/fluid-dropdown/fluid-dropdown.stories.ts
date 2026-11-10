@@ -73,9 +73,8 @@ const items = [
 ];
 
 const args = {
-  defaultWidth: 400,
   ariaLabel: '',
-  autoAlign: false,
+  'auto-align': false,
   direction: 'bottom',
   disabled: false,
   isCondensed: false,
@@ -93,15 +92,12 @@ const args = {
 };
 
 const argTypes = {
-  defaultWidth: {
-    control: { type: 'range', min: 300, max: 800, step: 50 },
-  },
   ariaLabel: {
     control: 'text',
     description:
       'Specify a label to be read by screen readers on the container node.',
   },
-  autoAlign: {
+  'auto-align': {
     control: 'boolean',
     description:
       'Will auto-align the dropdown. This attribute is currently experimental and is subject to future changes.',
@@ -165,9 +161,8 @@ export const Default = {
   args,
   argTypes,
   render: ({
-    defaultWidth,
     ariaLabel,
-    autoAlign,
+    'auto-align': autoAlign,
     direction,
     disabled,
     isCondensed,
@@ -181,31 +176,29 @@ export const Default = {
     warn,
     warnText,
   }) => html`
-    <div style="width:${defaultWidth}px;">
-      <cds-fluid-dropdown
-        aria-label="${ifDefined(ariaLabel || undefined)}"
-        ?auto-align="${autoAlign}"
-        direction="${ifDefined(direction)}"
-        ?disabled="${disabled}"
-        ?is-condensed="${isCondensed}"
-        ?invalid="${invalid}"
-        invalid-text="${ifDefined(invalidText)}"
-        label="${ifDefined(label)}"
-        ?open="${open}"
-        ?read-only="${readOnly}"
-        title-text="${ifDefined(titleText)}"
-        value="${ifDefined(value || undefined)}"
-        ?warn="${warn}"
-        warn-text="${ifDefined(warnText)}">
-        ${items.map(
-          (elem) => html`
-            <cds-dropdown-item ?disabled=${elem.disabled} value="${elem.value}"
-              >${elem.text}</cds-dropdown-item
-            >
-          `
-        )}
-      </cds-fluid-dropdown>
-    </div>
+    <cds-fluid-dropdown
+      aria-label="${ifDefined(ariaLabel || undefined)}"
+      ?auto-align="${autoAlign}"
+      direction="${ifDefined(direction)}"
+      ?disabled="${disabled}"
+      ?is-condensed="${isCondensed}"
+      ?invalid="${invalid}"
+      invalid-text="${ifDefined(invalidText)}"
+      label="${ifDefined(label)}"
+      ?open="${open}"
+      ?read-only="${readOnly}"
+      title-text="${ifDefined(titleText)}"
+      value="${ifDefined(value || undefined)}"
+      ?warn="${warn}"
+      warn-text="${ifDefined(warnText)}">
+      ${items.map(
+        (elem) => html`
+          <cds-dropdown-item ?disabled=${elem.disabled} value="${elem.value}"
+            >${elem.text}</cds-dropdown-item
+          >
+        `
+      )}
+    </cds-fluid-dropdown>
   `,
 };
 
@@ -214,11 +207,16 @@ export const Condensed = {
     ...args,
     isCondensed: true,
   },
-  argTypes,
+  argTypes: {
+    ...argTypes,
+    isCondensed: {
+      ...argTypes.isCondensed,
+      table: { readonly: true },
+    },
+  },
   render: ({
-    defaultWidth,
     ariaLabel,
-    autoAlign,
+    'auto-align': autoAlign,
     direction,
     disabled,
     isCondensed,
@@ -232,31 +230,29 @@ export const Condensed = {
     warn,
     warnText,
   }) => html`
-    <div style="width:${defaultWidth}px;">
-      <cds-fluid-dropdown
-        aria-label="${ifDefined(ariaLabel || undefined)}"
-        ?auto-align="${autoAlign}"
-        direction="${ifDefined(direction)}"
-        ?disabled="${disabled}"
-        ?is-condensed="${isCondensed}"
-        ?invalid="${invalid}"
-        invalid-text="${ifDefined(invalidText)}"
-        label="${ifDefined(label)}"
-        ?open="${open}"
-        ?read-only="${readOnly}"
-        title-text="${ifDefined(titleText)}"
-        value="${ifDefined(value || undefined)}"
-        ?warn="${warn}"
-        warn-text="${ifDefined(warnText)}">
-        ${items.map(
-          (elem) => html`
-            <cds-dropdown-item ?disabled=${elem.disabled} value="${elem.value}"
-              >${elem.text}</cds-dropdown-item
-            >
-          `
-        )}
-      </cds-fluid-dropdown>
-    </div>
+    <cds-fluid-dropdown
+      aria-label="${ifDefined(ariaLabel || undefined)}"
+      ?auto-align="${autoAlign}"
+      direction="${ifDefined(direction)}"
+      ?disabled="${disabled}"
+      ?is-condensed="${isCondensed}"
+      ?invalid="${invalid}"
+      invalid-text="${ifDefined(invalidText)}"
+      label="${ifDefined(label)}"
+      ?open="${open}"
+      ?read-only="${readOnly}"
+      title-text="${ifDefined(titleText)}"
+      value="${ifDefined(value || undefined)}"
+      ?warn="${warn}"
+      warn-text="${ifDefined(warnText)}">
+      ${items.map(
+        (elem) => html`
+          <cds-dropdown-item ?disabled=${elem.disabled} value="${elem.value}"
+            >${elem.text}</cds-dropdown-item
+          >
+        `
+      )}
+    </cds-fluid-dropdown>
   `,
 };
 
@@ -266,19 +262,8 @@ export const Skeleton = {
       skip: true,
     },
   },
-  args: {
-    defaultWidth: 400,
-  },
-  argTypes: {
-    defaultWidth: {
-      control: { type: 'range', min: 300, max: 800, step: 50 },
-    },
-  },
-  render: ({ defaultWidth }) => html`
-    <div style="width: ${defaultWidth}px;">
-      <cds-fluid-dropdown-skeleton></cds-fluid-dropdown-skeleton>
-    </div>
-  `,
+  render: () =>
+    html`<cds-fluid-dropdown-skeleton></cds-fluid-dropdown-skeleton>`,
 };
 
 export const WithAILabel = {
@@ -287,9 +272,8 @@ export const WithAILabel = {
     ...argTypes,
   },
   render: ({
-    defaultWidth,
     ariaLabel,
-    autoAlign,
+    'auto-align': autoAlign,
     direction,
     disabled,
     isCondensed,
@@ -303,34 +287,30 @@ export const WithAILabel = {
     warn,
     warnText,
   }) => html`
-    <div style="width:${defaultWidth}px;">
-      <cds-fluid-dropdown
-        aria-label="${ifDefined(ariaLabel || undefined)}"
-        ?auto-align="${autoAlign}"
-        direction="${ifDefined(direction)}"
-        ?disabled="${disabled}"
-        ?is-condensed="${isCondensed}"
-        ?invalid="${invalid}"
-        invalid-text="${ifDefined(invalidText)}"
-        label="${ifDefined(label)}"
-        ?open="${open}"
-        ?read-only="${readOnly}"
-        title-text="${ifDefined(titleText)}"
-        value="${ifDefined(value || undefined)}"
-        ?warn="${warn}"
-        warn-text="${ifDefined(warnText)}">
-        <cds-ai-label alignment="bottom-left">
-          ${content}${actions}</cds-ai-label
-        >
-        ${items.map(
-          (elem) => html`
-            <cds-dropdown-item ?disabled=${elem.disabled} value="${elem.value}"
-              >${elem.text}</cds-dropdown-item
-            >
-          `
-        )}
-      </cds-fluid-dropdown>
-    </div>
+    <cds-fluid-dropdown
+      aria-label="${ifDefined(ariaLabel || undefined)}"
+      ?auto-align="${autoAlign}"
+      direction="${ifDefined(direction)}"
+      ?disabled="${disabled}"
+      ?is-condensed="${isCondensed}"
+      ?invalid="${invalid}"
+      invalid-text="${ifDefined(invalidText)}"
+      label="${ifDefined(label)}"
+      ?open="${open}"
+      ?read-only="${readOnly}"
+      title-text="${ifDefined(titleText)}"
+      value="${ifDefined(value || undefined)}"
+      ?warn="${warn}"
+      warn-text="${ifDefined(warnText)}">
+      <cds-ai-label alignment="bottom-left"> ${content}${actions}</cds-ai-label>
+      ${items.map(
+        (elem) => html`
+          <cds-dropdown-item ?disabled=${elem.disabled} value="${elem.value}"
+            >${elem.text}</cds-dropdown-item
+          >
+        `
+      )}
+    </cds-fluid-dropdown>
   `,
 };
 

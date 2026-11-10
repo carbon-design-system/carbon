@@ -13,7 +13,6 @@ import React from 'react';
 
 const defaultArgs = {
   align: 'top',
-  autoAlign: false,
   collapseLabel: 'View less',
   expandLabel: 'View more',
   id: 'example-id',
@@ -26,6 +25,7 @@ const defaultArgs = {
 export default {
   title: 'Utilities/TruncatedText',
   component: TruncatedText,
+  tags: ['autodocs', 'ibm-products-migrated'],
   parameters: {
     layout: 'centered',
     docs: {

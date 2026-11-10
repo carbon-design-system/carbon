@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,10 +12,69 @@
  * stories and MDX files.
  */
 export const productMigratedStoryGlobs = [
+  '../src/components/ConditionBuilder/ConditionBuilder.stories.js',
   '../src/components/ActionSet/ActionSet.stories.js',
-  '../src/components/TruncatedText/TruncatedText.stories.js',
+  '../src/components/AddSelect/AddSelect.stories.js',
+  '../src/components/NotificationsPanel/NotificationsPanel.stories.js',
+  '../src/components/BigNumber/BigNumber.stories.js',
+  '../src/components/FullPageError/FullPageError.stories.js',
+  '../src/components/Coachmark/Coachmark.stories.js',
+  '../src/components/OptionsTile/OptionsTile.stories.js',
+  '../src/components/PageHeader/PageHeader.stories.js',
+  '../src/components/InterstitialScreen/InterstitialScreen.stories.js',
+  '../src/components/Guidebanner/Guidebanner.stories.js',
   '../src/components/Resizer/Resizer.stories.js',
+  '../src/components/ScrollGradient/ScrollGradient.stories.js',
   '../src/components/SidePanel/SidePanel.stories.js',
+  '../src/components/EditInPlace/EditInPlace.stories.js',
+  '../src/components/Tearsheet/Tearsheet.stories.js',
+  '../src/components/TagOverflow/TagOverflow.stories.js',
+  '../src/components/UserAvatar/UserAvatar.stories.js',
+  '../src/components/TruncatedText/TruncatedText.stories.js',
+  // Pattern examples migrated from ibm-products
+  '../src/examples/DeleteAndRemove/DeleteAndRemove.stories.js',
+  '../src/examples/DeleteAndRemove/DeleteAndRemove.mdx',
+  '../src/examples/CreateFullPage/CreateFullPage.stories.js',
+  '../src/examples/CreateFullPage/CreateFullPage.mdx',
+  '../src/examples/CreateModal/CreateModal.stories.js',
+  '../src/examples/CreateModal/CreateModal.mdx',
+  '../src/examples/CreateSidePanel/CreateSidePanel.stories.js',
+  '../src/examples/CreateSidePanel/CreateSidePanel.mdx',
+  '../src/examples/CreateTearsheet/CreateTearsheet.stories.js',
+  '../src/examples/CreateTearsheet/CreateTearsheet.mdx',
+  '../src/examples/CreateTearsheetNarrow/CreateTearsheet.stories.js',
+  '../src/examples/CreateTearsheetNarrow/CreateTearsheet.mdx',
+  '../src/examples/ExportModal/ExportModal.stories.js',
+  '../src/examples/ExportModal/ExportModal.mdx',
+  '../src/examples/ImportAndUpload/ImportAndUpload.stories.js',
+  '../src/examples/ImportAndUpload/ImportAndUpload.mdx',
+  '../src/examples/GenerateAnAPIKey/GenerateAnAPIKey.stories.js',
+  '../src/examples/GenerateAnAPIKey/GenerateAnAPIKey.mdx',
+  '../src/examples/Coachmark/CoachmarkFixed/CoachmarkFixed.stories.js',
+  '../src/examples/Coachmark/CoachmarkFixed/CoachmarkFixed.mdx',
+  '../src/examples/Coachmark/CoachmarkOverlayElements/CoachmarkOverlayElements.stories.js',
+  '../src/examples/Coachmark/CoachmarkOverlayElements/CoachmarkOverlayElements.mdx',
+  '../src/examples/Coachmark/CoachmarkStacked/CoachmarkStacked.stories.js',
+  '../src/examples/Coachmark/CoachmarkStacked/CoachmarkStacked.mdx',
+  '../src/examples/GetStartedCard/GetStartedCard.stories.js',
+  '../src/examples/GetStartedCard/GetStartedCard.mdx',
+  '../src/examples/Saving/Saving.stories.js',
+  '../src/examples/Saving/Saving.mdx',
+  '../src/examples/WebTerminal/WebTerminal.stories.js',
+  '../src/examples/WebTerminal/WebTerminal.mdx',
+  '../src/examples/AddSelect/AddSelectOverview.mdx',
+  '../src/examples/AddSelect/MultiAddSelect/MultiAddSelect.stories.js',
+  '../src/examples/AddSelect/MultiAddSelect/MultiAddSelect.mdx',
+  '../src/examples/AddSelect/SingleAddSelect/SingleAddSelect.stories.js',
+  '../src/examples/AddSelect/SingleAddSelect/SingleAddSelect.mdx',
+  '../src/examples/AboutModal/AboutModal.stories.js',
+  '../src/examples/AboutModal/AboutModal.mdx',
+  '../src/examples/Carousel/Carousel.stories.js',
+  '../src/examples/Carousel/Carousel.mdx',
+  '../src/examples/DateTimeFormat/DateTimeFormat.stories.js',
+  '../src/examples/DateTimeFormat/DateTimeFormat.mdx',
+  '../src/examples/makeDraggable/makeDraggable.stories.js',
+  '../src/examples/makeDraggable/makeDraggable.mdx',
 ];
 
 /**
@@ -30,8 +89,24 @@ export const productMigratedStoryGlobs = [
  *   2. Add its export to src/index.ts.
  */
 export const excludeProductsComponents = [
+  'src/components/AddSelect/**/*',
+  'src/components/ConditionBuilder/**/*',
+  'src/components/BigNumber/**/*',
+  'src/components/Coachmark/**/*',
+  'src/components/Guidebanner/**/*',
   'src/components/Resizer/**/*',
   'src/components/ActionSet/**/*',
-  'src/components/TruncatedText/**/*',
+  'src/components/NotificationsPanel/**/*',
+  'src/components/ScrollGradient/**/*',
+  'src/components/FullPageError/**/*',
+  'src/components/OptionsTile/**/*',
+  'src/components/PageHeader/**/*',
+  'src/components/InterstitialScreen/**/*',
+  'src/components/Resizer/**/*',
   'src/components/SidePanel/**/*',
+  'src/components/EditInPlace/**/*',
+  'src/components/Tearsheet/**/*',
+  'src/components/TagOverflow/**/*',
+  'src/components/UserAvatar/**/*',
+  'src/components/TruncatedText/**/*',
 ];

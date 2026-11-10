@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -52,8 +52,7 @@ function tryFocusElems(elems: NodeListOf<HTMLElement>, reverse = false) {
     for (let i = 0; i < elems.length; ++i) {
       const elem = elems[i];
       elem.focus();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-      const active = elem.ownerDocument!.activeElement;
+      const active = elem.ownerDocument.activeElement;
       if (
         active === elem ||
         active?.contains(elem) ||
@@ -66,8 +65,7 @@ function tryFocusElems(elems: NodeListOf<HTMLElement>, reverse = false) {
     for (let i = elems.length - 1; i >= 0; --i) {
       const elem = elems[i];
       elem.focus();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-      const active = elem.ownerDocument!.activeElement;
+      const active = elem.ownerDocument.activeElement;
       if (
         active === elem ||
         active?.contains(elem) ||
@@ -125,13 +123,13 @@ class CDSActionableNotification extends HostListenerMixin(
    * Node to track focus going outside of actionable notification content.
    */
   @query('#start-sentinel')
-  private _startSentinelNode!: HTMLAnchorElement;
+  private _startSentinelNode!: HTMLElement;
 
   /**
    * Node to track focus going outside of actionable notification content.
    */
   @query('#end-sentinel')
-  private _endSentinelNode!: HTMLAnchorElement;
+  private _endSentinelNode!: HTMLElement;
 
   /**
    * Handles `keydown` event on this event.
@@ -188,8 +186,7 @@ class CDSActionableNotification extends HostListenerMixin(
         relatedTarget as Node
       );
       // tabbable elements in Shadow root
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-      const shadowElems = this.shadowRoot!.querySelectorAll(
+      const shadowElems = this.shadowRoot?.querySelectorAll(
         selectorTabbableForActionableNotification
       );
       // tabbable elements in light DOM
@@ -200,7 +197,8 @@ class CDSActionableNotification extends HostListenerMixin(
       if (relatedTarget === startSentinelNode || comparisonResult & PRECEDING) {
         await (this.constructor as typeof CDSActionableNotification)._delay();
         if (
-          !tryFocusElems(shadowElems as NodeListOf<HTMLElement>, true) &&
+          (!shadowElems ||
+            !tryFocusElems(shadowElems as NodeListOf<HTMLElement>, true)) &&
           !tryFocusElems(lightElems as NodeListOf<HTMLElement>, true) &&
           relatedTarget !== this
         ) {
@@ -213,7 +211,8 @@ class CDSActionableNotification extends HostListenerMixin(
         await (this.constructor as typeof CDSActionableNotification)._delay();
         if (
           !tryFocusElems(lightElems as NodeListOf<HTMLElement>) &&
-          !tryFocusElems(shadowElems as NodeListOf<HTMLElement>)
+          (!shadowElems ||
+            !tryFocusElems(shadowElems as NodeListOf<HTMLElement>))
         ) {
           this.focus();
         }
@@ -305,21 +304,25 @@ class CDSActionableNotification extends HostListenerMixin(
   render() {
     const { _type: type } = this;
     return html`
-      <a
+      <span
         id="start-sentinel"
-        class="${prefix}--visually-hidden"
-        href="javascript:void 0"
-        role="navigation"></a>
+        tabIndex="0"
+        role="link"
+        class="cds--visually-hidden">
+        Focus sentinel
+      </span>
       <div class="${prefix}--${type}-notification__details">
         ${this._renderIcon()} ${this._renderText()}
       </div>
       <slot name="action"></slot>
       ${this._renderButton()}
-      <a
+      <span
         id="end-sentinel"
-        class="${prefix}--visually-hidden"
-        href="javascript:void 0"
-        role="navigation"></a>
+        tabIndex="0"
+        role="link"
+        class="cds--visually-hidden">
+        Focus sentinel
+      </span>
     `;
   }
 

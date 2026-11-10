@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,17 +7,18 @@
 
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 import classnames from 'classnames';
-import FileUploaderItem from '../FileUploaderItem';
-import FileUploaderDropContainer from '../FileUploaderDropContainer';
-import FormItem from '../../FormItem';
-import { useId } from '../../../internal/useId';
+import {
+  FileUploaderItem,
+  FileUploaderDropContainer,
+  FormItem,
+} from '@carbon/react';
 
 const prefix = 'cds';
 
 const ExampleDropContainerApp = (props) => {
   const [files, setFiles] = useState([]);
   const uploaderButton = useRef(null);
-  const uniqueId = useId();
+  const uniqueId = React.useId();
   const handleDrop = (e) => {
     e.preventDefault();
   };
@@ -105,6 +106,8 @@ const ExampleDropContainerApp = (props) => {
   const onAddFiles = useCallback(
     (evt, { addedFiles }) => {
       evt.stopPropagation();
+      // eslint-disable-next-line react/prop-types
+      props.onAddFiles?.(evt, { addedFiles });
       const newFiles = addedFiles.map((file) => ({
         uuid: uniqueId + file.name + file.size,
         name: file.name,
@@ -123,7 +126,7 @@ const ExampleDropContainerApp = (props) => {
       }
     },
     // eslint-disable-next-line react/prop-types
-    [files, props.multiple]
+    [files, props.multiple, props.onAddFiles]
   );
 
   const handleFileUploaderItemClick = useCallback(

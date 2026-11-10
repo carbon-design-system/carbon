@@ -19,6 +19,7 @@ import {
 import Dropdown from '..';
 import DropdownSkeleton from '../Dropdown.Skeleton';
 import { AILabel } from '../../AILabel';
+import { FeatureFlags } from '../../FeatureFlags';
 import { Simulate } from 'react-dom/test-utils';
 
 const prefix = 'cds';
@@ -121,7 +122,89 @@ describe('Dropdown', () => {
     expect(emptySpanTargeting).toBeNull();
   });
 
+  describe('label', () => {
+    it('should warn without throwing for interactive content in label', () => {
+      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+      expect(() => {
+        render(
+          <Dropdown
+            {...mockProps}
+            label={
+              <>
+                Choose an option <a href="/">Help</a>
+              </>
+            }
+          />
+        );
+      }).not.toThrow();
+
+      expect(spy).toHaveBeenCalledWith(
+        expect.stringContaining(
+          'Warning: The Dropdown component `label` prop must have no interactive content'
+        )
+      );
+
+      spy.mockRestore();
+    });
+
+    it('should allow non-interactive content in label', () => {
+      expect(() => {
+        render(
+          <Dropdown
+            {...mockProps}
+            label={
+              <>
+                Choose an option <span>additional label content</span>
+              </>
+            }
+          />
+        );
+      }).not.toThrow();
+    });
+  });
+
   describe('title', () => {
+    it('should warn without throwing for interactive content in titleText', () => {
+      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+      expect(() => {
+        render(
+          <Dropdown
+            {...mockProps}
+            titleText={
+              <>
+                Dropdown label <button type="button">Help</button>
+              </>
+            }
+          />
+        );
+      }).not.toThrow();
+
+      expect(spy).toHaveBeenCalledWith(
+        expect.stringContaining(
+          'Warning: The Dropdown component `titleText` prop must have no interactive content'
+        )
+      );
+
+      spy.mockRestore();
+    });
+
+    it('should allow non-interactive content in titleText', () => {
+      expect(() => {
+        render(
+          <Dropdown
+            {...mockProps}
+            titleText={
+              <>
+                Dropdown label <span>additional title content</span>
+              </>
+            }
+          />
+        );
+      }).not.toThrow();
+    });
+
     it('renders a title', async () => {
       render(<Dropdown {...mockProps} titleText="Email Input" />);
       await waitForPosition();
@@ -413,6 +496,38 @@ describe('Dropdown', () => {
       );
       spy.mockRestore();
     });
+
+    it('should not enable `autoAlign` by default', async () => {
+      const { container } = render(<Dropdown {...mockProps} />);
+      await waitForPosition();
+      expect(container.querySelector(`.${prefix}--dropdown`)).not.toHaveClass(
+        `${prefix}--autoalign`
+      );
+    });
+
+    it('should enable `autoAlign` by default with `enable-v12-release`', async () => {
+      const { container } = render(
+        <FeatureFlags enableV12Release>
+          <Dropdown {...mockProps} />
+        </FeatureFlags>
+      );
+      await waitForPosition();
+      expect(container.querySelector(`.${prefix}--dropdown`)).toHaveClass(
+        `${prefix}--autoalign`
+      );
+    });
+
+    it('should respect `autoAlign={false}` with `enable-v12-release`', async () => {
+      const { container } = render(
+        <FeatureFlags enableV12Release>
+          <Dropdown {...mockProps} autoAlign={false} />
+        </FeatureFlags>
+      );
+      await waitForPosition();
+      expect(container.querySelector(`.${prefix}--dropdown`)).not.toHaveClass(
+        `${prefix}--autoalign`
+      );
+    });
   });
 });
 
@@ -647,6 +762,15 @@ describe('Test useEffect ', () => {
     assertMenuClosed();
   });
 
+  it('should set maxHeight on the floating menu when autoAlign is enabled', async () => {
+    render(<Dropdown {...mockProps} autoAlign />);
+    await openMenu();
+    await waitForPosition();
+
+    const menu = document.querySelector('.cds--list-box__menu');
+    expect(menu.style.maxHeight).toBe('0px');
+  });
+
   it('should add certain label props when `titleText` is a string', () => {
     render(<Dropdown {...mockProps} titleText="Dropdown Title" />);
 
@@ -655,12 +779,14 @@ describe('Test useEffect ', () => {
       (acc, { name, value }) => ({ ...acc, [name]: value }),
       {}
     );
+    const idPrefix = attributes.id.replace(/-label$/, '');
 
     expect(attributes).toEqual({
       class: 'cds--label',
-      for: 'downshift-_r_29_-toggle-button',
-      id: 'downshift-_r_29_-label',
+      for: attributes.for,
+      id: attributes.id,
     });
+    expect(attributes.for).toBe(`${idPrefix}-toggle-button`);
   });
 
   it('should add certain label props when `titleText` is an element', () => {
@@ -674,7 +800,7 @@ describe('Test useEffect ', () => {
 
     expect(attributes).toEqual({
       class: 'cds--label',
-      id: 'downshift-_r_2b_-label',
+      id: attributes.id,
     });
   });
 });

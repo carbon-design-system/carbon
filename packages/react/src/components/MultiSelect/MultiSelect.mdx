@@ -42,7 +42,7 @@ being selected.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(MultiSelect.Default),
+      onClick: () => stackblitzPrefillConfig({ story: MultiSelect.Default }),
     },
   ]}
 />
@@ -57,7 +57,9 @@ By passing items into the `initialSelectedItems` prop, they can be pre-selected.
     {
       title: 'Open in Stackblitz',
       onClick: () =>
-        stackblitzPrefillConfig(MultiSelect.WithInitialSelectedItems),
+        stackblitzPrefillConfig({
+          story: MultiSelect.WithInitialSelectedItems,
+        }),
     },
   ]}
 />
@@ -95,7 +97,7 @@ selectable items to a subset.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(Filterable),
+      onClick: () => stackblitzPrefillConfig({ story: Filterable }),
     },
   ]}
 />

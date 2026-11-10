@@ -51,7 +51,8 @@ accordion's panel.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(AccordionStories.Default),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: AccordionStories.Default }),
     },
   ]}
 />
@@ -63,7 +64,8 @@ accordion's panel.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(AccordionStories.Controlled),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: AccordionStories.Controlled }),
     },
   ]}
 />
@@ -79,7 +81,8 @@ fetched from an external resource like an API.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(AccordionStories.Skeleton),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: AccordionStories.Skeleton }),
     },
   ]}
 />

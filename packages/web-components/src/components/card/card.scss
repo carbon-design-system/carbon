@@ -1,0 +1,194 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type' as *;
+// `@use` runs the module's `_index.scss` once, which already includes the
+// `card.card` mixin — do not `@include` it again here or every rule from
+// the shared @carbon/styles card mixin gets emitted twice.
+@use '@carbon/styles/scss/components/card' as card;
+
+:host(#{$prefix}-card-title) .#{$prefix}--card__title-text-row {
+  // Base / fallback — productive is the default density.
+  @include type-style('heading-compact-02');
+}
+
+:host-context(#{$prefix}-card[density='productive'])
+  .#{$prefix}--card__title-text-row {
+  @include type-style('heading-compact-02');
+}
+
+:host-context(#{$prefix}-card[density='expressive'])
+  .#{$prefix}--card__title-text-row {
+  @include type-style('heading-03');
+}
+
+:host-context(#{$prefix}-card[disabled]) .#{$prefix}--card__label {
+  color: $text-disabled;
+}
+
+:host-context(#{$prefix}-card[disabled]) .#{$prefix}--card__description {
+  color: $text-disabled;
+}
+
+:host-context(#{$prefix}-card[horizontal]) .#{$prefix}--card__body {
+  flex: 1 0 auto;
+}
+
+:host-context(#{$prefix}-card[horizontal]) .#{$prefix}--card__footer {
+  margin-block-start: auto;
+}
+
+// ─── AI Label clearance ──────────────────────────────────────────────────────
+// The shared `:has()` rules cannot see across shadow roots, so the header
+// reproduces them from its own `data-has-ai-label` / `data-has-actions` flags.
+
+// Without actions the title must not run under the absolutely-positioned
+// decorator: reserve its width ($spacing-07) plus end inset ($spacing-03).
+.#{$prefix}--card__header[data-has-ai-label]:not([data-has-actions])
+  ::slotted(#{$prefix}-card-title) {
+  max-inline-size: calc(100% - #{$spacing-07} - #{$spacing-03});
+}
+
+// With actions the slot itself clears the decorator, so the title needs no
+// extra room. The slot's end edge is already $spacing-03 from the card edge;
+// the decorator ($spacing-06 wide, inset $spacing-03) ends $spacing-06 further
+// in, and the actions keep a further $spacing-03 gap from it.
+.#{$prefix}--card__header[data-has-ai-label] .#{$prefix}--card__actions-slot {
+  min-inline-size: calc(
+    #{$spacing-07} + #{$spacing-03} + #{$spacing-06} + #{$spacing-03} + #{$spacing-03}
+  );
+  padding-inline-end: calc(#{$spacing-06} + #{$spacing-03});
+}
+
+:host(#{$prefix}-card-footer[has-actions]) .#{$prefix}--card__footer {
+  overflow: hidden;
+  justify-content: flex-end;
+  padding: 0;
+  border-block-start: 1px solid $border-subtle;
+  gap: 1px;
+}
+
+// Footer actions split the available width evenly. Header actions are given a
+// `data-action-id` by `cds-card-actions`; they must keep their natural width so
+// the overflow handler can measure them and collapse the ones that don't fit.
+:host(#{$prefix}-card-action:not([icon-only]):not([data-action-id])) {
+  flex: 1 0 0;
+  min-inline-size: 0;
+
+  .#{$prefix}--card__action {
+    display: flex;
+    inline-size: 100%;
+  }
+
+  .#{$prefix}--card__action > ::slotted(*) {
+    inline-size: 100%;
+    max-inline-size: none;
+  }
+}
+
+:host(#{$prefix}-card-action[icon-only]),
+:host(#{$prefix}-card-action[data-action-id]) {
+  flex: 0 0 auto;
+}
+
+// ─── Host-level display ───────────────────────────────────────────────────────
+
+:host(#{$prefix}-card) {
+  display: block;
+}
+
+:host(#{$prefix}-card) a[part='link'] {
+  color: inherit;
+  text-decoration: none;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+:host(#{$prefix}-card-header) {
+  display: block;
+}
+
+:host(#{$prefix}-card-body) {
+  display: block;
+}
+
+:host(#{$prefix}-card-footer) {
+  display: block;
+}
+
+:host(#{$prefix}-card-media) {
+  display: block;
+}
+
+// Standalone `cds-card-header-media` is superseded by the header's
+// `header-media` slot, which owns the spacing.
+:host(#{$prefix}-card-header-media) {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  max-block-size: $spacing-10;
+}
+
+:host(#{$prefix}-card-header-media) .#{$prefix}--card__header-media {
+  display: contents;
+}
+
+// The title is a flex item of the header: it is as wide as its content and
+// shrinks to whatever the actions slot leaves free.
+:host(#{$prefix}-card-title) {
+  display: block;
+  flex: 0 1 auto;
+  min-inline-size: 0;
+}
+
+// With `header-media` the title drops to a full-width second row.
+.#{$prefix}--card__header-top-row + slot::slotted(#{$prefix}-card-title) {
+  inline-size: 100%;
+}
+
+:host(#{$prefix}-card-title-media) {
+  display: block;
+}
+
+// Plays the role of the React `__actions` element: the width needed to show
+// every action is published by `cds-card-actions` as a custom property, so the
+// slot in the header sizes itself without any container query.
+:host(#{$prefix}-card-actions) {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  block-size: $spacing-07;
+  gap: 0;
+  inline-size: var(--#{$prefix}--card--actions-inline-size, 100%);
+  max-inline-size: 100%;
+  min-inline-size: 0;
+}
+
+:host(#{$prefix}-card-actions) .#{$prefix}--card__actions-overflow-menu {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+}
+
+:host(#{$prefix}-card-action) {
+  display: block;
+}
+
+:host(#{$prefix}-card-action[data-hidden]) {
+  display: none;
+}

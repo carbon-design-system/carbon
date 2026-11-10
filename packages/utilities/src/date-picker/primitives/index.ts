@@ -52,7 +52,6 @@ export {
   isFuture,
   parseDateString,
   isTemporalAvailable,
-  getDateHandler,
 } from './temporal-utils.js';
 export type {
   DatePickerContext,

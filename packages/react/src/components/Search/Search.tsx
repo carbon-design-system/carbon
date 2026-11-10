@@ -29,7 +29,9 @@ import { deprecate } from '../../prop-types/deprecate';
 import { FormContext } from '../FluidForm';
 import { noopFn } from '../../internal/noopFn';
 import { Tooltip } from '../Tooltip';
+import type { NewPopoverAlignment } from '../Popover';
 import { isSearchValuePresent } from './utils';
+import { useNoInteractiveChildrenForLabel } from '../FeatureFlags/useNoInteractiveChildrenForLabel';
 
 type InputPropsBase = Omit<HTMLAttributes<HTMLInputElement>, 'onChange'>;
 export interface SearchProps extends InputPropsBase {
@@ -116,6 +118,12 @@ export interface SearchProps extends InputPropsBase {
   size?: 'xs' | 'sm' | 'md' | 'lg';
 
   /**
+   * Specify how the magnifier tooltip aligns with the trigger when the
+   * Search is expandable and collapsed (`ExpandableSearch`).
+   */
+  tooltipAlignment?: NewPopoverAlignment;
+
+  /**
    * Specify the type of the `<input>`
    */
   type?: string;
@@ -149,6 +157,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
       role,
       size,
       tabIndex,
+      tooltipAlignment = 'top',
       type = 'search',
       value,
       ...rest
@@ -162,6 +171,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
     const inputRef = useRef<HTMLInputElement>(null);
     const ref = useMergedRefs([forwardRef, inputRef]);
     const expandButtonRef = useRef<HTMLDivElement>(null);
+    const labelRef = useRef<HTMLLabelElement>(null);
     const inputId = useId('search-input');
     const uniqueId = id || inputId;
     const searchId = `${uniqueId}-search`;
@@ -242,6 +252,10 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
     }
 
     function handleExpandButtonKeyDown(event: KeyboardEvent<HTMLDivElement>) {
+      if (disabled) {
+        return;
+      }
+
       if (match(event, keys.Enter) || match(event, keys.Space)) {
         event.stopPropagation();
         if (onExpand) {
@@ -255,10 +269,13 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
         aria-labelledby={onExpand ? searchId : undefined}
         role={onExpand ? 'button' : undefined}
         className={`${prefix}--search-magnifier`}
-        onClick={onExpand}
+        onClick={disabled ? undefined : onExpand}
         onKeyDown={handleExpandButtonKeyDown}
-        tabIndex={isExpandableCollapsed ? 0 : -1}
+        tabIndex={
+          isExpandableCollapsed ? (disabled ? undefined : (tabIndex ?? 0)) : -1
+        }
         ref={expandButtonRef}
+        aria-disabled={onExpand && disabled ? true : undefined}
         aria-expanded={
           onExpand && isExpanded
             ? true
@@ -273,16 +290,20 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
 
     // Wrap magnifierButton in a tooltip if it's expandable
     const magnifierWithTooltip =
-      onExpand && !isExpanded ? (
+      onExpand && !isExpanded && !disabled ? (
         <Tooltip
           className={`${prefix}--search-tooltip ${prefix}--search-magnifier-tooltip ${prefix}--icon-tooltip`}
-          align="top"
+          align={tooltipAlignment}
           label="Search">
           {magnifierButton}
         </Tooltip>
       ) : (
         magnifierButton
       );
+    useNoInteractiveChildrenForLabel(
+      labelRef,
+      'The Search component `labelText` prop must have no interactive content'
+    );
 
     return (
       <div role="search" aria-labelledby={searchId} className={searchClasses}>
@@ -290,7 +311,11 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
         {/* the magnifier is used in ExpandableSearch as a click target to expand,
       however, it does not need a keyboard event bc the input element gets focus on keyboard nav and expands that way*/}
 
-        <label id={searchId} htmlFor={uniqueId} className={`${prefix}--label`}>
+        <label
+          id={searchId}
+          htmlFor={uniqueId}
+          className={`${prefix}--label`}
+          ref={labelRef}>
           {labelText}
         </label>
         <input
@@ -422,6 +447,25 @@ Search.propTypes = {
    * Specify the size of the Search
    */
   size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
+
+  /**
+   * Specify how the magnifier tooltip aligns with the trigger when the
+   * Search is expandable and collapsed (`ExpandableSearch`).
+   */
+  tooltipAlignment: PropTypes.oneOf([
+    'top',
+    'top-start',
+    'top-end',
+    'bottom',
+    'bottom-start',
+    'bottom-end',
+    'left',
+    'left-start',
+    'left-end',
+    'right',
+    'right-start',
+    'right-end',
+  ]),
 
   /**
    * Specify the type of the `<input>`

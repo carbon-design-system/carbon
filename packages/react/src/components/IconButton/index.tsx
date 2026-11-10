@@ -25,6 +25,10 @@ import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
 export const IconButtonKinds = [
   'primary',
   'secondary',
+  'danger',
+  'danger--primary',
+  'danger--ghost',
+  'danger--tertiary',
   'ghost',
   'tertiary',
 ] as const;
@@ -40,7 +44,12 @@ export type IconButtonAlignment = PopoverAlignment;
 export interface IconButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
-   * Specify how the trigger should align with the tooltip
+   * Specify the message read by screen readers for the danger button variants
+   */
+  dangerDescription?: string;
+
+  /**
+   * Specify how the tooltip should be aligned with the button
    */
   align?: IconButtonAlignment;
 
@@ -147,12 +156,11 @@ export interface IconButtonProps
   wrapperClasses?: string;
 }
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const IconButton = forwardRef<unknown, IconButtonProps>(
   (
     {
       align,
-      autoAlign = false,
+      autoAlign,
       badgeCount,
       children,
       className,
@@ -226,6 +234,7 @@ const IconButton = forwardRef<unknown, IconButtonProps>(
   }
 );
 
+IconButton.displayName = 'IconButton';
 IconButton.propTypes = {
   /**
    * Specify how the trigger should align with the tooltip
@@ -342,6 +351,11 @@ IconButton.propTypes = {
    * Specify the type of button to be used as the base for the IconButton
    */
   kind: PropTypes.oneOf(IconButtonKinds),
+
+  /**
+   * Specify the message read by screen readers for the danger button variants
+   */
+  dangerDescription: PropTypes.string,
 
   /**
    * Provide the label to be rendered inside of the Tooltip. The label will use

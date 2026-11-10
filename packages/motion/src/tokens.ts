@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// Token values are generated from src/dtcg/motion.json by `yarn build:tokens`
-// (tasks/build.js) and written to js/generated/tokens.js before this file is
-// bundled. Run `yarn build` to regenerate them.
+// Token values are generated from tokens/motion.tokens.json by
+// `yarn build:tokens` (tasks/build.js) and written to js/generated/tokens.js
+// before this file is bundled. Run `yarn build` to regenerate them.
 import {
   durationFast01,
   durationFast02,

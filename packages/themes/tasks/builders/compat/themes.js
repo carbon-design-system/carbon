@@ -8,7 +8,7 @@
 'use strict';
 
 const { types: t } = require('@carbon/scss-generator');
-const { TokenFormat } = require('../../../src/tokens');
+const { formatTokenName } = require('../../../src/tools');
 const { white, g10, g90, g100, tokens } = require('../../../src/v10');
 const { FILE_BANNER, primitive } = require('../shared');
 const { shouldIncludeToken } = require('./shared');
@@ -33,10 +33,7 @@ function buildCompatFile() {
               return tokens.colors.includes(token) && shouldIncludeToken(token);
             })
             .map(([token, value]) => {
-              const id = TokenFormat.convert({
-                name: token,
-                format: TokenFormat.formats.scss,
-              });
+              const id = formatTokenName(token);
               return t.SassMapProperty(t.Identifier(id), primitive(value));
             }),
         }),

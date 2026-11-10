@@ -1,0 +1,29 @@
+// Copyright IBM Corp. 2025, 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/reset';
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/components/big-number' as big-number-styles;
+
+// Emit Carbon big-number class rules at file root (not inside :host)
+@include big-number-styles.big-number;
+
+$block-class: #{$prefix}--big-number;
+
+:host(#{$prefix}-big-number) {
+  .#{$block-class}__trend {
+    margin-block-start: $spacing-03;
+    vertical-align: top;
+  }
+
+  .#{$block-class}--xl {
+    .#{$block-class}__trend {
+      margin-block-start: $spacing-04;
+    }
+  }
+}

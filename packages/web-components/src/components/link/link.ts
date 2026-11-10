@@ -44,10 +44,11 @@ class CDSLink extends FocusMixin(LitElement) {
    */
   protected _handleSlotChange({ target }: Event) {
     const { name } = target as HTMLSlotElement;
-    const hasContent = (target as HTMLSlotElement).assignedNodes().some(
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-      (node) => node.nodeType !== Node.TEXT_NODE || node!.textContent!.trim()
-    );
+    const hasContent = (target as HTMLSlotElement)
+      .assignedNodes()
+      .some(
+        (node) => node.nodeType !== Node.TEXT_NODE || node.textContent?.trim()
+      );
     this[name === 'icon' ? '_hasIcon' : ''] = hasContent;
     this.requestUpdate();
   }
@@ -58,8 +59,7 @@ class CDSLink extends FocusMixin(LitElement) {
   /**
    * The CSS class list for the link node.
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  protected get _classes(): any {
+  protected get _classes(): ReturnType<typeof classMap> {
     const { disabled, size, inline, visited, _hasIcon } = this;
     return classMap({
       [`${prefix}--link`]: true,

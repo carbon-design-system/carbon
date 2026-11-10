@@ -9,7 +9,8 @@ import { useEffect, type RefObject } from 'react';
 
 export const useNoInteractiveChildren = (
   ref: RefObject<HTMLElement | null>,
-  message = 'component should have no interactive child nodes'
+  message = 'component should have no interactive child nodes',
+  { shouldThrow = true }: { shouldThrow?: boolean } = {}
 ) => {
   useEffect(() => {
     if (process.env.NODE_ENV === 'production') return;
@@ -18,12 +19,19 @@ export const useNoInteractiveChildren = (
     const node = current ? getInteractiveContent(current) : null;
 
     if (node) {
-      const errorMessage = `Error: ${message}.\n\nInstead found: ${node.outerHTML}`;
+      const messagePrefix = shouldThrow ? 'Error' : 'Warning';
+      const validationMessage = `${messagePrefix}: ${message}.\n\nInstead found: ${node.outerHTML}`;
+
+      if (shouldThrow) {
+        // eslint-disable-next-line no-console
+        console.error(validationMessage);
+        throw new Error(validationMessage);
+      }
+
       // eslint-disable-next-line no-console
-      console.error(errorMessage);
-      throw new Error(errorMessage);
+      console.warn(validationMessage);
     }
-  }, [message, ref]);
+  }, [message, ref, shouldThrow]);
 };
 
 export const useInteractiveChildrenNeedDescription = (

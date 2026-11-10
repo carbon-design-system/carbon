@@ -8,6 +8,7 @@
 import { html, PropertyValues, TemplateResult } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { prefix } from '../../globals/settings';
 import Close16 from '@carbon/icons/es/close/16.js';
 import { filter, forEach } from '../../globals/internal/collection-helpers';
@@ -350,7 +351,7 @@ class CDSMultiSelect extends CDSDropdown {
   }
 
   /**
-   * Special andler for the `keypress` event, ensures space selection for filterable
+   * Special handler for the `keypress` event, ensures space selection for filterable
    * variation is disabled
    */
 
@@ -410,6 +411,7 @@ class CDSMultiSelect extends CDSDropdown {
 
     return html`
       <label
+        id="dropdown-label"
         part="title-text"
         class="${labelClasses}"
         ?hidden="${!hasTitleText}">
@@ -437,8 +439,6 @@ class CDSMultiSelect extends CDSDropdown {
     } = this;
 
     const selectionButtonClasses = classMap({
-      [`${prefix}--list-box__selection`]: true,
-      [`${prefix}--list-box__selection--multi`]: true,
       [`${prefix}--tag`]: true,
       [`${prefix}--tag--filter`]: true,
       [`${prefix}--tag--high-contrast`]: true,
@@ -447,18 +447,19 @@ class CDSMultiSelect extends CDSDropdown {
     return selectedItemsCount === 0
       ? undefined
       : html`
-          <div
-            id="selection-button"
-            role="button"
-            class="${selectionButtonClasses}"
-            tabindex="-1"
-            aria-disabled=${readOnly}
-            title="${clearSelectionLabel}">
-            ${selectedItemsCount}
-            ${iconLoader(Close16, {
-              'aria-label': clearSelectionLabel,
-              class: `${prefix}--tag__close-icon`,
-            })}
+          <div id="selection-button" class="${selectionButtonClasses}">
+            <span class="${prefix}--tag__label" title="${selectedItemsCount}"
+              >${selectedItemsCount}</span
+            >
+            <div
+              role="button"
+              tabindex="-1"
+              class="${prefix}--tag__close-icon"
+              aria-label="${clearSelectionLabel}"
+              title="${clearSelectionLabel}"
+              aria-disabled="${readOnly}">
+              ${iconLoader(Close16)}
+            </div>
           </div>
         `;
   }
@@ -493,6 +494,9 @@ class CDSMultiSelect extends CDSDropdown {
             role="combobox"
             aria-controls="menu-body"
             aria-expanded="${String(this.open)}"
+            aria-activedescendant="${ifDefined(
+              this.open ? (this._activeDescendant ?? undefined) : undefined
+            )}"
             aria-autocomplete="list"
             autocomplete="${autocomplete}"
             @input="${this._handleInput}" />
@@ -657,8 +661,7 @@ class CDSMultiSelect extends CDSDropdown {
   /**
    * The CSS class list for multi-select listbox
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  protected get _classes(): any {
+  protected get _classes(): ReturnType<typeof classMap> {
     const {
       disabled,
       size,
@@ -688,6 +691,7 @@ class CDSMultiSelect extends CDSDropdown {
       [`${prefix}--list-box--inline`]: inline,
       [`${prefix}--list-box--expanded`]: open,
       [`${prefix}--list-box--${size}`]: size,
+      [`${prefix}--layout--size-${size}`]: size,
       [`${prefix}--multi-select--invalid`]: normalizedProps.invalid,
       [`${prefix}--multi-select--warn`]: normalizedProps.warn,
       [`${prefix}--multi-select--inline`]: inline,
@@ -924,6 +928,10 @@ class CDSMultiSelect extends CDSDropdown {
 
   firstUpdated(changedProperties) {
     super.firstUpdated?.(changedProperties);
+
+    this.shadowRoot
+      ?.getElementById('menu-body')
+      ?.setAttribute('aria-multiselectable', 'true');
 
     // whenever more items are added/removed, recompute the state of the select all option
     if (!this.selectAll) return;

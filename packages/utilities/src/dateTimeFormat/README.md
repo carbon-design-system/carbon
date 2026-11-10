@@ -64,7 +64,7 @@ dateTimeFormat.absolute.formatDate(timestamp, { style: 'full' });
 ### Date and time
 
 - Supported styles: `"full" | "long" | "medium" | "short" | "tooltip"`
-  - `"tooltip"` is a shortand for `timeStyle: "long", dateStyle: "full"`
+  - `"tooltip"` is a shorthand for `timeStyle: "long", dateStyle: "full"`
 - Supported time styles: `"full" | "long" | "medium" | "short"`
 - Supported date styles: `"full" | "long" | "medium" | "short"`
 - Default time style: `"short"`

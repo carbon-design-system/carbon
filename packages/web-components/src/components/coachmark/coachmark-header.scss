@@ -1,0 +1,35 @@
+//
+// Copyright IBM Corp. 2025, 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/border-radius' as *;
+@use '@carbon/styles/scss/feature-flags' as flags;
+@use '@carbon/styles/scss/components/button/radius' as button;
+
+:host(#{$prefix}-coachmark-header) {
+  display: flex;
+  justify-content: flex-end;
+
+  @if flags.enabled('enable-v12-release') {
+    @include button.radius($border-radius-00);
+  }
+
+  .#{$prefix}--coachmark-header-drag-handle {
+    margin-inline-end: auto;
+  }
+
+  .#{$prefix}--coachmark-header-drag-icon {
+    fill: $background;
+  }
+
+  .#{$prefix}--coachmark-header-close-icon {
+    fill: $background;
+  }
+}

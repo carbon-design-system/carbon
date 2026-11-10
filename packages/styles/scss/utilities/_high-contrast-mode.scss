@@ -17,6 +17,11 @@
       outline: 1px solid Highlight;
     }
 
+    @if ($type == 'focus-lg') {
+      color: Highlight;
+      outline: 3px solid Highlight;
+    }
+
     @if ($type == 'outline') {
       outline: 1px solid transparent;
     }

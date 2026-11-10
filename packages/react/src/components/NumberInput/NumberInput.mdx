@@ -34,7 +34,8 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(NumberInputStories.Default),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: NumberInputStories.Default }),
     },
   ]}
 />
@@ -46,7 +47,8 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(NumberInputStories.Skeleton),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: NumberInputStories.Skeleton }),
     },
   ]}
 />
@@ -58,7 +60,8 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(NumberInputStories.withAILabel),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: NumberInputStories.withAILabel }),
     },
   ]}
 />
@@ -92,7 +95,8 @@ Setting `type="text"` changes the NumberInput behavior in the following ways:
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(NumberInputStories.WithTypeOfText),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: NumberInputStories.WithTypeOfText }),
     },
   ]}
 />

@@ -5,6 +5,11 @@
       "packages/react/src/*": "@carbon/react"
     },
     "paths": {},
-    "include": ["code-connect/**"]
+    "include": ["code-connect/**/*.figma.ts", "code-connect/**/*.figma.tsx"],
+    "documentUrlSubstitutions": {
+      "https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/": "https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/"
+    },
+    "label": "React",
+    "language": "jsx"
   }
 }

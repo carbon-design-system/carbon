@@ -40,7 +40,8 @@ can customize the term by providing your own `children` to this component.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(DefinitionTooltipStories.Default),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: DefinitionTooltipStories.Default }),
     },
   ]}
 />

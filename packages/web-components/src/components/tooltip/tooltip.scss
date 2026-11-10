@@ -40,6 +40,18 @@
   }
 }
 
+:host(#{$prefix}-tooltip) {
+  ::slotted(button.#{$prefix}--overflow-menu:focus) {
+    background-color: $background-active;
+  }
+}
+
+:host(#{$prefix}-tooltip[data-programmatic-focus]) {
+  ::slotted(button.#{$prefix}--overflow-menu) {
+    background-color: $background-active;
+  }
+}
+
 :host(#{$prefix}-tooltip-content) {
   word-break: break-word;
 

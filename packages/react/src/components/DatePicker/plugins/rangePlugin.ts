@@ -8,7 +8,7 @@
 import baseRangePlugin, {
   type Config,
 } from 'flatpickr/dist/plugins/rangePlugin';
-import { Instance } from 'flatpickr/dist/types/instance';
+import type { Instance } from 'flatpickr/dist/types/instance';
 import { isEmptyDateValue } from '../utils';
 
 /**

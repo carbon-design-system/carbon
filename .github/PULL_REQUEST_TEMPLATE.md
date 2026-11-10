@@ -22,19 +22,23 @@ Closes #
 
 ## PR Checklist
 
-<!-- 
+<!--
   Do not remove checklist items.
   If some are incomplete, create a draft pull request using the create button dropdown.
-  If some do not apply, ~strike through the item text with tildes~.
+  If some do not apply, ~~strike through the item text with tildes~~.
 -->
 
 As the author of this PR, before marking ready for review, confirm you:
 
 - [ ] Reviewed every line of the diff
 - [ ] Updated documentation and storybook examples
+- [ ] Followed the
+      [required v12 migration documentation](https://github.com/carbon-design-system/carbon/blob/main/docs/working-with-v12.md#required-v12-migration-documentation)
+      for any code change that affects v12, or struck through this item because
+      the PR does not affect v12
 - [ ] Wrote passing tests that cover this change
 - [ ] Addressed any impact on accessibility (a11y)
 - [ ] Tested for cross-browser consistency
 - [ ] Validated that this code is ready for review and status checks should pass
 
-More details can be found in the [pull request guide](https://github.com/carbon-design-system/carbon/blob/main/docs/guides/reviewing-pull-requests.md)
+More details can be found in the [pull request guide](https://github.com/carbon-design-system/carbon/blob/main/docs/guides/reviewing-pull-requests.md).

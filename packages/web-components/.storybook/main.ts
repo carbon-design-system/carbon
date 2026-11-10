@@ -12,22 +12,36 @@ import { mergeConfig } from 'vite';
 import { litStyleLoader, litTemplateLoader } from '@mordech/vite-lit-loader';
 import glob from 'fast-glob';
 import remarkGfm from 'remark-gfm';
+import { productMigratedStoryGlobs } from '../product-migrated-components.mjs';
+import { getIbmAnalyticsHeads } from '../../../tasks/storybook-ibm-analytics.mjs';
 
 const configDir = fileURLToPath(new URL('.', import.meta.url));
+const { managerAnalyticsHead, previewAnalyticsHead } = getIbmAnalyticsHeads(
+  'CarbonWebComponentsStorybook'
+);
 
 const stories = glob.sync(
   [
     '../docs/**/*.mdx',
     '../src/**/*.mdx',
     '../src/**/*.stories.@(js|jsx|ts|tsx)',
+    './**/*.mdx',
+    './**/*.stories.@(js|jsx|ts|tsx)',
   ],
   {
-    ignore: ['../src/**/docs/*.mdx'],
+    ignore: [
+      '../src/**/docs/*.mdx',
+      // ibm-products components in migration are v12-only; exclude from v11 Storybook
+      ...productMigratedStoryGlobs,
+    ],
     cwd: configDir,
   }
 );
 
 const config: StorybookConfig = {
+  // `head` contains manager-head.html/preview-head.html
+  managerHead: (head) => `${head}${managerAnalyticsHead}`,
+  previewHead: (head) => `${head}${previewAnalyticsHead}`,
   stories: stories,
   addons: [
     'storybook-addon-accessibility-checker',

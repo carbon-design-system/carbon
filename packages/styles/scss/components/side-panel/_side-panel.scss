@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2025
+// Copyright IBM Corp. 2020, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -8,6 +8,8 @@
 @use 'sass:map';
 
 @use '../../config' as *;
+@use '../../border-radius' as *;
+@use '../../feature-flags' as *;
 @use '../../theme' as *;
 @use '../../spacing' as *;
 @use '../../motion' as *;
@@ -15,6 +17,7 @@
 @use '../../breakpoint' as *;
 @use '../../utilities';
 @use '../button/tokens' as *;
+@use '../button/radius' as button;
 @use './side-panel-variables' as *;
 @use './animations' as *;
 
@@ -80,6 +83,11 @@ $resizer-class: #{$prefix}--resizer;
     display: grid;
     box-sizing: border-box;
     background-color: $layer-01;
+
+    @if enabled('enable-v12-release') {
+      @include button.radius($border-radius-00);
+    }
+
     block-size: calc(100% - 3rem);
     color: $text-primary;
     /* if the title does not scroll then we have a child scrolling section. */

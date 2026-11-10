@@ -42,5 +42,9 @@ explaining your reasoning.
 
 Return only the exact Markdown comment to post. Use either one paragraph of no
 more than three sentences or a list of two to three single-line bullet items,
-never both. Stay under 100 words and 600 characters. Do not add a heading,
-preamble, signoff, metadata, HTML comment, or code fence.
+never both. Your response MUST BE UNDER 100 WORDS AND 600 CHARACTERS. Count and
+double check your response before you send it - it cannot be over 100 words and
+600 characters. 101 words with 600 characters will fail. 100 words with 601
+characters will fail. You must be both under 100 words and also be under 600
+characters. Do not add a heading, preamble, signoff, metadata, HTML comment, or
+code fence.

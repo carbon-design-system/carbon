@@ -96,9 +96,7 @@ Map {
       "border": {
         "type": "bool",
       },
-      "caret": {
-        "type": "bool",
-      },
+      "caret": [Function],
       "children": {
         "type": "node",
       },
@@ -1598,6 +1596,9 @@ Map {
   "ComposedModal" => {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": {
+      "aria-describedby": {
+        "type": "string",
+      },
       "aria-label": {
         "type": "string",
       },
@@ -2746,6 +2747,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "toolbarLabel": {
+        "type": "string",
+      },
       "zebra": {
         "type": "bool",
       },
@@ -3470,6 +3474,25 @@ Map {
         ],
         "type": "oneOf",
       },
+      "tooltipAlignment": {
+        "args": [
+          [
+            "top",
+            "top-start",
+            "top-end",
+            "bottom",
+            "bottom-start",
+            "bottom-end",
+            "left",
+            "left-start",
+            "left-end",
+            "right",
+            "right-start",
+            "right-end",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "type": {
         "type": "string",
       },
@@ -3557,6 +3580,9 @@ Map {
         "type": "bool",
       },
       "enableTreeviewControllable": {
+        "type": "bool",
+      },
+      "enableV12Autoalign": {
         "type": "bool",
       },
       "enableV12DynamicFloatingStyles": {
@@ -3776,6 +3802,9 @@ Map {
       },
       "pattern": {
         "type": "string",
+      },
+      "required": {
+        "type": "bool",
       },
       "role": [Function],
       "tabIndex": [Function],
@@ -5187,6 +5216,9 @@ Map {
       "rows": {
         "type": "number",
       },
+      "translateWithId": {
+        "type": "func",
+      },
       "value": {
         "args": [
           [
@@ -5271,6 +5303,9 @@ Map {
       },
       "readOnly": {
         "type": "bool",
+      },
+      "translateWithId": {
+        "type": "func",
       },
       "value": {
         "args": [
@@ -5839,6 +5874,9 @@ Map {
       "closeOnActivation": {
         "type": "bool",
       },
+      "dangerDescription": {
+        "type": "string",
+      },
       "defaultOpen": {
         "type": "bool",
       },
@@ -5865,6 +5903,10 @@ Map {
           [
             "primary",
             "secondary",
+            "danger",
+            "danger--primary",
+            "danger--ghost",
+            "danger--tertiary",
             "ghost",
             "tertiary",
           ],
@@ -5904,8 +5946,12 @@ Map {
   "IconButtonKinds" => {
     "0": "primary",
     "1": "secondary",
-    "2": "ghost",
-    "3": "tertiary",
+    "2": "danger",
+    "3": "danger--primary",
+    "4": "danger--ghost",
+    "5": "danger--tertiary",
+    "6": "ghost",
+    "7": "tertiary",
   },
   "IconSkeleton" => {
     "propTypes": {
@@ -7428,6 +7474,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -7490,6 +7537,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -7877,18 +7925,12 @@ Map {
       },
       "pageSizes": {
         "args": [
-          [
-            {
-              "args": [
+          {
+            "args": [
+              [
                 {
-                  "isRequired": true,
                   "type": "number",
                 },
-              ],
-              "type": "arrayOf",
-            },
-            {
-              "args": [
                 {
                   "args": [
                     {
@@ -7902,16 +7944,14 @@ Map {
                       },
                     },
                   ],
-                  "isRequired": true,
                   "type": "shape",
                 },
               ],
-              "type": "arrayOf",
-            },
-          ],
+            ],
+            "type": "oneOfType",
+          },
         ],
-        "isRequired": true,
-        "type": "oneOfType",
+        "type": "arrayOf",
       },
       "pageText": {
         "type": "func",
@@ -8221,9 +8261,7 @@ Map {
       "border": {
         "type": "bool",
       },
-      "caret": {
-        "type": "bool",
-      },
+      "caret": [Function],
       "children": {
         "type": "node",
       },
@@ -8352,6 +8390,7 @@ Map {
     },
   },
   "ProgressStep" => {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": {
       "className": {
         "type": "string",
@@ -8394,6 +8433,7 @@ Map {
         "type": "func",
       },
     },
+    "render": [Function],
   },
   "RadioButton" => {
     "$$typeof": Symbol(react.forward_ref),
@@ -8736,6 +8776,25 @@ Map {
             "sm",
             "md",
             "lg",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "tooltipAlignment": {
+        "args": [
+          [
+            "top",
+            "top-start",
+            "top-end",
+            "bottom",
+            "bottom-start",
+            "bottom-end",
+            "left",
+            "left-start",
+            "left-end",
+            "right",
+            "right-start",
+            "right-end",
           ],
         ],
         "type": "oneOf",
@@ -9369,6 +9428,7 @@ Map {
     },
   },
   "Slider" => {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": {
       "ariaLabelInput": {
         "type": "string",
@@ -9471,6 +9531,7 @@ Map {
         "type": "node",
       },
     },
+    "render": [Function],
   },
   "SliderSkeleton" => {
     "propTypes": {
@@ -10644,6 +10705,9 @@ Map {
         "type": "oneOf",
       },
       "slug": [Function],
+      "tabIndex": {
+        "type": "number",
+      },
       "title": [Function],
       "type": {
         "args": [
@@ -10676,6 +10740,8 @@ Map {
         "args": [
           [
             "sm",
+            "md",
+            "lg",
           ],
         ],
         "type": "oneOf",
@@ -10764,6 +10830,9 @@ Map {
         "type": "number",
       },
       "slug": [Function],
+      "translateWithId": {
+        "type": "func",
+      },
       "value": {
         "args": [
           [
@@ -10875,6 +10944,9 @@ Map {
         "type": "oneOf",
       },
       "slug": [Function],
+      "translateWithId": {
+        "type": "func",
+      },
       "type": {
         "type": "string",
       },
@@ -11378,9 +11450,7 @@ Map {
       "border": {
         "type": "bool",
       },
-      "caret": {
-        "type": "bool",
-      },
+      "caret": [Function],
       "children": {
         "type": "node",
       },
@@ -11833,6 +11903,9 @@ Map {
       "enableTreeviewControllable": {
         "type": "bool",
       },
+      "enableV12Autoalign": {
+        "type": "bool",
+      },
       "enableV12DynamicFloatingStyles": {
         "type": "bool",
       },
@@ -12135,6 +12208,68 @@ Map {
       "width": {
         "type": "string",
       },
+    },
+  },
+  "preview__Card" => {
+    "Card": {
+      "$$typeof": Symbol(react.forward_ref),
+      "Action": [Function],
+      "Actions": [Function],
+      "Body": {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      },
+      "Footer": {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      },
+      "Header": {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      },
+      "HeaderMedia": [Function],
+      "Media": [Function],
+      "Title": {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      },
+      "TitleMedia": {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      },
+      "render": [Function],
+    },
+    "CardAction": {
+      "displayName": "Card.Action",
+    },
+    "CardActions": {
+      "displayName": "Card.Actions",
+    },
+    "CardBody": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "CardFooter": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "CardHeader": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "CardHeaderMedia": {
+      "displayName": "Card.HeaderMedia",
+    },
+    "CardMedia": {
+      "displayName": "Card.Media",
+    },
+    "CardTitle": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "CardTitleMedia": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
     },
   },
   "preview__ChatButton" => {
@@ -13339,6 +13474,9 @@ Map {
       "rows": {
         "type": "number",
       },
+      "translateWithId": {
+        "type": "func",
+      },
       "value": {
         "args": [
           [
@@ -13423,6 +13561,9 @@ Map {
       },
       "readOnly": {
         "type": "bool",
+      },
+      "translateWithId": {
+        "type": "func",
       },
       "value": {
         "args": [
@@ -13967,9 +14108,7 @@ Map {
       "border": {
         "type": "bool",
       },
-      "caret": {
-        "type": "bool",
-      },
+      "caret": [Function],
       "children": {
         "type": "node",
       },
@@ -14076,6 +14215,9 @@ Map {
         "type": "bool",
       },
       "enableTreeviewControllable": {
+        "type": "bool",
+      },
+      "enableV12Autoalign": {
         "type": "bool",
       },
       "enableV12DynamicFloatingStyles": {
@@ -15381,6 +15523,9 @@ Map {
       "rows": {
         "type": "number",
       },
+      "translateWithId": {
+        "type": "func",
+      },
       "value": {
         "args": [
           [
@@ -15465,6 +15610,9 @@ Map {
       },
       "readOnly": {
         "type": "bool",
+      },
+      "translateWithId": {
+        "type": "func",
       },
       "value": {
         "args": [
@@ -16009,9 +16157,7 @@ Map {
       "border": {
         "type": "bool",
       },
-      "caret": {
-        "type": "bool",
-      },
+      "caret": [Function],
       "children": {
         "type": "node",
       },

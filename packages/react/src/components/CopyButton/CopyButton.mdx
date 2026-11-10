@@ -31,7 +31,8 @@ By default we display the text “Copied!”.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(CopyButtonStories.Default),
+      onClick: () =>
+        stackblitzPrefillConfig({ story: CopyButtonStories.Default }),
     },
   ]}
 />

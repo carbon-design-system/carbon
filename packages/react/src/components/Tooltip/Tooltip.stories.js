@@ -1,11 +1,11 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import './story.scss';
+import styles from './story.scss?inline';
 
 import { OverflowMenuVertical } from '@carbon/icons-react';
 import React, { useRef, useEffect } from 'react';
@@ -17,6 +17,7 @@ export default {
   title: 'Components/Tooltip',
   component: Tooltip,
   parameters: {
+    styles,
     controls: {
       hideNoControlsWarning: true,
     },
@@ -67,12 +68,20 @@ export default {
   decorators: [
     (Story, context) => {
       if (context.name.toLowerCase().includes('auto align')) {
-        return <Story />;
+        return (
+          <>
+            <style>{styles}</style>
+            <Story />
+          </>
+        );
       }
       return (
-        <div className="sb-tooltip-story">
-          <Story />
-        </div>
+        <>
+          <style>{styles}</style>
+          <div className="sb-tooltip-story">
+            <Story />
+          </div>
+        </>
       );
     },
   ],
@@ -99,6 +108,15 @@ export const Alignment = (args) => {
   );
 };
 
+const autoAlignStoryContainerStyle = {
+  display: 'grid',
+  placeItems: 'center',
+  width: '200vw',
+  minWidth: '1200px',
+  height: '200vh',
+  minHeight: '1200px',
+};
+
 export const ExperimentalAutoAlign = (args) => {
   const ref = useRef();
   const tooltipLabel =
@@ -108,17 +126,10 @@ export const ExperimentalAutoAlign = (args) => {
     ref?.current?.scrollIntoView({ block: 'center', inline: 'center' });
   });
   return (
-    <div style={{ width: '5000px', height: '5000px' }}>
-      <div
-        style={{
-          position: 'absolute',
-          top: '2500px',
-          left: '2500px',
-        }}>
-        <Tooltip label={tooltipLabel} align="top" autoAlign {...args}>
-          <Button ref={ref}>This button has a tooltip</Button>
-        </Tooltip>
-      </div>
+    <div style={autoAlignStoryContainerStyle}>
+      <Tooltip label={tooltipLabel} align="top" autoAlign {...args}>
+        <Button ref={ref}>This button has a tooltip</Button>
+      </Tooltip>
     </div>
   );
 };

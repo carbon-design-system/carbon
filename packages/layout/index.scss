@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2018, 2023
+// Copyright IBM Corp. 2018, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -7,6 +7,7 @@
 
 @forward 'scss/convert';
 @forward 'scss/spacing';
+@forward 'scss/border-radius';
 @forward 'scss/generated/container';
 @forward 'scss/generated/icon-size';
 @forward 'scss/generated/size';

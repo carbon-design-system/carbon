@@ -16,7 +16,7 @@ import mdx from './Motion.mdx';
 import './surfaces.stories.scss';
 
 export default {
-  title: 'Elements/Motion',
+  title: 'Elements/Motion/Expand',
   parameters: {
     docs: {
       page: mdx,

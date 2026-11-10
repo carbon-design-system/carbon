@@ -49,10 +49,11 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
    */
   private _handleSlotChange({ target }: Event) {
     const { name } = target as HTMLSlotElement;
-    const hasContent = (target as HTMLSlotElement).assignedNodes().some(
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-      (node) => node.nodeType !== Node.TEXT_NODE || node!.textContent!.trim()
-    );
+    const hasContent = (target as HTMLSlotElement)
+      .assignedNodes()
+      .some(
+        (node) => node.nodeType !== Node.TEXT_NODE || node.textContent?.trim()
+      );
     this[name === 'icon' ? '_hasIcon' : 'hasMainContent'] = hasContent;
     this.requestUpdate();
   }
@@ -292,6 +293,10 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
       _handleSlotChange: handleSlotChange,
     } = this;
 
+    const isIconOnly = hasIcon && !hasMainContent;
+    const isGhostIconOnly = isIconOnly && kind === BUTTON_KIND.GHOST;
+    const ariaPressed = isGhostIconOnly && isSelected ? true : undefined;
+
     let defaultClasses = {
       [`${prefix}--btn`]: true,
       [`${prefix}--btn--${kind}`]: kind,
@@ -299,12 +304,12 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
         kind === BUTTON_KIND.DANGER_TERTIARY,
       [`${prefix}--btn--danger--ghost`]: kind === BUTTON_KIND.DANGER_GHOST,
       [`${prefix}--btn--disabled`]: disabled,
-      [`${prefix}--btn--icon-only`]: hasIcon && !hasMainContent,
+      [`${prefix}--btn--icon-only`]: isIconOnly,
       [`${prefix}--btn--${size}`]: !!size,
       [`${prefix}--layout--size-${size}`]: !!size,
       [`${prefix}-ce--btn--has-icon`]: hasIcon,
       [`${prefix}--btn--expressive`]: isExpressive,
-      [`${prefix}--btn--selected`]: isSelected && kind === 'ghost',
+      [`${prefix}--btn--selected`]: isGhostIconOnly && isSelected,
     };
 
     if (buttonClassName) {
@@ -379,6 +384,7 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
               tabindex="${tabIndex}"
               type="${ifDefined(type)}"
               aria-label="${ifDefined(tooltipText)}"
+              ?aria-pressed="${ariaPressed}"
               aria-describedby="badge-indicator">
               <slot @slotchange="${handleSlotChange}"></slot>
               <slot name="icon" @slotchange="${handleSlotChange}"></slot>
@@ -404,6 +410,7 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
             tabindex="${tabIndex}"
             type="${ifDefined(type)}"
             aria-label="${ifDefined(tooltipText)}"
+            ?aria-pressed="${ariaPressed}"
             aria-describedby="${ifDefined(
               hasDangerDescription ? 'danger-description' : undefined
             )}">

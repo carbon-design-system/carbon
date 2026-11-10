@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -22,38 +22,19 @@ import {
 
 const filenameStatuses = ['edit', 'complete', 'uploading'];
 
-export default {
-  title: 'Components/FileUploader',
-  component: FileUploader,
-  subcomponents: {
-    FileUploaderButton,
-    FileUploaderSkeleton,
-    FileUploaderItem,
-    FileUploaderDropContainer,
-  },
-  parameters: {
-    docs: {
-      page: mdx,
-    },
-  },
+const fileUploaderItemArgs = {
+  disabled: false,
+  errorBody: '1 MB max file size. Select a new file and try again.',
+  errorSubject: 'File size exceeds limit',
+  iconDescription: 'Delete file',
+  invalid: false,
+  name: 'THIS IS A VERY LONG FILENAME WHICH WILL BE TRUNCATED',
+  size: 'md',
+  status: 'edit',
+  uuid: 'storybook-file',
 };
 
-export const _FileUploaderItem = (args) => {
-  return (
-    <FileUploaderItem
-      errorBody="1 MB max file size. Select a new file and try again."
-      errorSubject="File size exceeds limit"
-      iconDescription="Delete file"
-      invalid={false}
-      name="THIS IS A VERY LONG FILENAME WHICH WILL BE TRUNCATED"
-      status="edit"
-      size="md"
-      {...args}
-    />
-  );
-};
-
-_FileUploaderItem.argTypes = {
+const fileUploaderItemArgTypes = {
   disabled: {
     control: 'boolean',
     description: 'Specify whether file uploader item is disabled',
@@ -76,7 +57,7 @@ _FileUploaderItem.argTypes = {
   size: { control: 'select', options: ['sm', 'md', 'lg'] },
   status: {
     control: 'inline-radio',
-    options: ['uploading', 'edit', 'complete'],
+    options: filenameStatuses,
     description: 'Status of the file upload',
   },
   uuid: {
@@ -85,64 +66,145 @@ _FileUploaderItem.argTypes = {
   },
 };
 
-// Remove all the props that don't apply to FileUploaderItem
-_FileUploaderItem.parameters = {
-  controls: {
-    exclude: [
-      'accept',
-      'buttonKind',
-      'buttonLabel',
-      'labelDescription',
-      'labelTitle',
-      'multiple',
-      'filenameStatus',
+const dropContainerArgs = {
+  accept: ['image/jpeg', 'image/png'],
+  disabled: false,
+  labelText: 'Drag and drop files here or click to upload',
+  maxFileSize: 1024 * 1024,
+  multiple: true,
+  name: '',
+  size: 'md',
+};
+
+const dropContainerArgTypes = {
+  accept: { control: 'object' },
+  disabled: { control: 'boolean' },
+  labelText: { control: 'text' },
+  maxFileSize: { control: { type: 'number', min: 0, step: 1 } },
+  multiple: { control: 'boolean' },
+  name: { control: 'text' },
+  onAddFiles: { action: 'onAddFiles' },
+  onClick: { action: 'onClick' },
+  size: { control: 'select', options: ['sm', 'md', 'lg'] },
+};
+
+const fileUploaderArgs = {
+  accept: ['.jpg', '.png'],
+  buttonKind: 'primary',
+  buttonLabel: 'Add file',
+  disabled: false,
+  filenameStatus: 'edit',
+  iconDescription: 'Delete file',
+  labelDescription: 'Max file size is 1 MB. Only .jpg files are supported.',
+  labelTitle: 'Upload files',
+  maxFileSize: 1024 * 1024,
+  multiple: true,
+  name: '',
+  size: 'md',
+};
+
+const fileUploaderArgTypes = {
+  accept: { control: 'object' },
+  buttonKind: {
+    control: 'select',
+    options: [
+      'primary',
+      'secondary',
+      'danger',
+      'ghost',
+      'danger--primary',
+      'tertiary',
     ],
+  },
+  buttonLabel: { control: 'text' },
+  disabled: { control: 'boolean' },
+  filenameStatus: {
+    control: 'select',
+    options: filenameStatuses,
+  },
+  iconDescription: { control: 'text' },
+  labelDescription: { control: 'text' },
+  labelTitle: { control: 'text' },
+  maxFileSize: { control: { type: 'number', min: 0, step: 1 } },
+  multiple: { control: 'boolean' },
+  name: { control: 'text' },
+  onAddFiles: { action: 'onAddFiles' },
+  onChange: { action: 'onChange' },
+  onClick: { action: 'onClick' },
+  onDelete: { action: 'onDelete' },
+  size: { control: 'select', options: ['sm', 'md', 'lg'] },
+};
+
+export default {
+  title: 'Components/FileUploader',
+  component: FileUploader,
+  subcomponents: {
+    FileUploaderButton,
+    FileUploaderSkeleton,
+    FileUploaderItem,
+    FileUploaderDropContainer,
+  },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
   },
 };
 
-export const _FileUploaderDropContainer = () => {
-  return (
-    <FileUploaderDropContainer
-      labelText="Drag and drop files here or click to upload"
-      multiple={true}
-      maxFileSize={1024 * 1024}
-      accept={['image/jpeg', 'image/png']}
-      disabled={false}
-      name=""
-    />
-  );
+export const _FileUploaderItem = (args) => {
+  return <FileUploaderItem {...args} />;
+};
+
+_FileUploaderItem.args = { ...fileUploaderItemArgs };
+_FileUploaderItem.argTypes = { ...fileUploaderItemArgTypes };
+
+// Remove all the props that don't apply to FileUploaderItem
+_FileUploaderItem.parameters = {
+  controls: {
+    include: Object.keys(fileUploaderItemArgTypes),
+  },
+};
+
+export const _FileUploaderDropContainer = (args) => {
+  return <FileUploaderDropContainer {...args} />;
+};
+
+_FileUploaderDropContainer.args = { ...dropContainerArgs };
+_FileUploaderDropContainer.argTypes = { ...dropContainerArgTypes };
+_FileUploaderDropContainer.parameters = {
+  controls: { include: Object.keys(dropContainerArgTypes) },
 };
 
 export const DragAndDropUploadContainerExampleApplication = (args) =>
   ExampleDropContainerApp(args);
 
 DragAndDropUploadContainerExampleApplication.args = {
-  labelText: 'Drag and drop files here or click to upload',
-  name: '',
-  multiple: true,
-  maxFileSize: 1024 * 1024,
-  accept: ['image/jpeg', 'image/png'],
-  disabled: false,
-  tabIndex: 0,
+  ...dropContainerArgs,
 };
 DragAndDropUploadContainerExampleApplication.argTypes = {
-  onChange: { action: 'onChange' },
+  ...dropContainerArgTypes,
+};
+DragAndDropUploadContainerExampleApplication.parameters = {
+  controls: { include: Object.keys(dropContainerArgTypes) },
 };
 
 export const DragAndDropUploadSingleContainerExampleApplication = (args) =>
   ExampleDropContainerAppSingle(args);
 
 DragAndDropUploadSingleContainerExampleApplication.args = {
+  ...dropContainerArgs,
   labelText: 'Drag and drop a file here or click to upload',
-  name: '',
   multiple: false,
-  maxFileSize: 1024 * 1024,
-  accept: ['image/jpeg', 'image/png'],
-  disabled: false,
-  tabIndex: 0,
 };
 DragAndDropUploadSingleContainerExampleApplication.argTypes = {
-  onChange: { action: 'onChange' },
+  ...dropContainerArgTypes,
+  multiple: {
+    ...dropContainerArgTypes.multiple,
+    table: { readonly: true },
+  },
+};
+DragAndDropUploadSingleContainerExampleApplication.parameters = {
+  controls: { include: Object.keys(dropContainerArgTypes) },
 };
 
 export const Skeleton = () => {
@@ -153,6 +215,8 @@ export const Skeleton = () => {
   );
 };
 
+Skeleton.parameters = { controls: { disable: true } };
+
 export const Default = (args) => {
   return (
     <div className="cds--file__container">
@@ -162,44 +226,12 @@ export const Default = (args) => {
 };
 
 Default.args = {
-  labelTitle: 'Upload files',
-  labelDescription: 'Max file size is 1 MB. Only .jpg files are supported.',
-  buttonLabel: 'Add file',
-  buttonKind: 'primary',
-  size: 'md',
-  filenameStatus: 'edit',
-  accept: ['.jpg', '.png'],
-  multiple: true,
-  maxFileSize: 1024 * 1024,
-  disabled: false,
-  iconDescription: 'Delete file',
-  name: '',
+  ...fileUploaderArgs,
 };
 Default.argTypes = {
-  onChange: { action: 'onChange' },
-  onClick: { action: 'onClick' },
-  onDelete: { action: 'onDelete' },
-  buttonKind: {
-    control: { type: 'select' },
-    options: [
-      'primary',
-      'secondary',
-      'danger',
-      'ghost',
-      'danger--primary',
-      'tertiary',
-    ],
-  },
-  filenameStatus: {
-    control: { type: 'select' },
-    options: filenameStatuses,
-  },
-  size: {
-    control: { type: 'select' },
-    options: ['sm', 'md', 'lg'],
-  },
+  ...fileUploaderArgTypes,
 };
 
 Default.parameters = {
-  controls: { exclude: ['accept', 'role'] },
+  controls: { include: Object.keys(fileUploaderArgTypes) },
 };

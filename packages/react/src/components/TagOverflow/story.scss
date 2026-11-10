@@ -1,0 +1,24 @@
+//
+// Copyright IBM Corp. 2024, 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Story-specific layout styles for TagOverflow.
+// Component styles are provided globally through @carbon/styles.
+
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '../../internal/DisplayBox';
+
+.custom-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid $text-primary;
+  border-radius: 50%;
+  block-size: $spacing-07;
+  inline-size: $spacing-07;
+  min-inline-size: $spacing-07;
+}

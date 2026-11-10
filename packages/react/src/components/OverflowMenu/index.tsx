@@ -7,20 +7,32 @@
 
 import React, { forwardRef, type Ref } from 'react';
 import { useFeatureFlag } from '../FeatureFlags';
-import { OverflowMenu as OverflowMenuV12 } from './next';
+import {
+  OverflowMenu as OverflowMenuV12,
+  type OverflowMenuProps as OverflowMenuV12Props,
+} from './next';
 import {
   OverflowMenu as OverflowMenuV11,
-  type OverflowMenuProps,
+  type OverflowMenuProps as OverflowMenuV11Props,
 } from './OverflowMenu';
+
+type OverflowMenuProps = OverflowMenuV11Props | OverflowMenuV12Props;
 
 const OverflowMenu = forwardRef<HTMLDivElement, OverflowMenuProps>(
   (props, ref) => {
     const enableV12OverflowMenu = useFeatureFlag('enable-v12-overflowmenu');
 
     return enableV12OverflowMenu ? (
-      <OverflowMenuV12 {...props} ref={ref} />
+      // The two implementations have different prop shapes and different host
+      // elements (v12 renders a div, v11 a button), so neither branch is
+      // assignable from the shared v11-typed props. The v11 branch already
+      // casts its ref for the same reason.
+      <OverflowMenuV12 {...(props as OverflowMenuV12Props)} ref={ref} />
     ) : (
-      <OverflowMenuV11 {...props} ref={ref as Ref<HTMLButtonElement>} />
+      <OverflowMenuV11
+        {...(props as OverflowMenuV11Props)}
+        ref={ref as Ref<HTMLButtonElement>}
+      />
     );
   }
 );

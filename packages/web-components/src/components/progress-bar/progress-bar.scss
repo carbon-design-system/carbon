@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2023, 2025
+// Copyright IBM Corp. 2023, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -10,6 +10,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/config' as *;
 @use '@carbon/styles/scss/components/progress-bar' as *;
 @use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/feature-flags' as flags;
 
 :host(#{$prefix}-progress-bar) {
   .#{$prefix}--progress-bar--inline .#{$prefix}--progress-bar__label {
@@ -19,5 +20,16 @@ $css--plex: true !default;
   .#{$prefix}--progress-bar--indented .#{$prefix}--progress-bar__label,
   .#{$prefix}--progress-bar--indented .#{$prefix}--progress-bar__helper-text {
     padding-inline: $spacing-05;
+  }
+
+  @if not flags.enabled('enable-v12-release') {
+    .#{$prefix}--progress-bar__bar:dir(rtl) {
+      transform-origin: 100% center;
+    }
+  }
+
+  .#{$prefix}--progress-bar--indeterminate
+    .#{$prefix}--progress-bar__track:dir(rtl)::after {
+    animation-name: #{$prefix}--progress-bar-indeterminate-rtl;
   }
 }
