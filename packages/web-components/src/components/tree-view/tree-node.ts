@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025, 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,10 +7,12 @@
 
 import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
-import { property, state } from 'lit/decorators.js';
+import { property, query, state } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import CaretDown16 from '@carbon/icons/es/caret--down/16.js';
+import '../tooltip/index';
+import type CDSTooltip from '../tooltip/tooltip';
 
 import styles from './tree-view.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
@@ -28,6 +30,130 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 class CDSTreeNode extends LitElement {
   private _hasChildren = false;
   private _hasIcon = false;
+  @state()
+  private _isLabelTruncated = false;
+  private _labelHovered = false;
+  private _nodeFocused = false;
+  private _tooltipDismissed = false;
+  private _tooltipTimeout?: number;
+  private _resizeObserver?: ResizeObserver;
+  private _observedLabel?: HTMLElement;
+
+  @query(`.${prefix}--tree-node__label__text`)
+  private _labelText?: HTMLElement;
+
+  @query(`${prefix}-tooltip`)
+  private _tooltip?: CDSTooltip;
+
+  @query('a')
+  private _link?: HTMLAnchorElement;
+
+  private _checkLabelOverflow = () => {
+    if (!this.isConnected) {
+      return;
+    }
+    const text = this._labelText;
+    const isLabelTruncated = !!(
+      text &&
+      text.clientWidth > 0 &&
+      text.scrollWidth > text.clientWidth
+    );
+    if (isLabelTruncated === this._isLabelTruncated) {
+      return;
+    }
+    this._isLabelTruncated = isLabelTruncated;
+    this._updateTooltip();
+  };
+
+  private _updateTooltip() {
+    window.clearTimeout(this._tooltipTimeout);
+    const tooltip = this._tooltip;
+    const open =
+      this._isLabelTruncated &&
+      !this._tooltipDismissed &&
+      (this._labelHovered || this._nodeFocused);
+
+    if (!open) {
+      if (tooltip) {
+        tooltip.open = false;
+      }
+      document.removeEventListener('keydown', this._handleTooltipEscape);
+      return;
+    }
+    document.addEventListener('keydown', this._handleTooltipEscape);
+    if (!tooltip?.open) {
+      this._tooltipTimeout = window.setTimeout(() => {
+        if (this._tooltip) {
+          this._tooltip.open = true;
+        }
+      }, tooltip?.enterDelayMs ?? 100);
+    }
+  }
+
+  private _handleLabelMouseEnter() {
+    this._labelHovered = true;
+    this._tooltipDismissed = false;
+    this._updateTooltip();
+  }
+
+  private _handleLabelMouseLeave() {
+    this._labelHovered = false;
+    window.clearTimeout(this._tooltipTimeout);
+    // Allow the pointer to cross the gap between the label and its tooltip.
+    this._tooltipTimeout = window.setTimeout(() => {
+      this._updateTooltip();
+    }, this._tooltip?.leaveDelayMs ?? 300);
+  }
+
+  private _handleNodeFocus = (event: FocusEvent) => {
+    const target = event.composedPath()[0];
+    // Ignore focus events from child nodes.
+    if (target !== this && target !== this._link) {
+      return;
+    }
+    this._nodeFocused = event.type === 'focusin';
+    if (this._nodeFocused) {
+      this._tooltipDismissed = false;
+    }
+    this._updateTooltip();
+  };
+
+  private _handleTooltipEscape = (event: KeyboardEvent) => {
+    if (event.key === 'Escape') {
+      this._tooltipDismissed = true;
+      this._updateTooltip();
+    }
+  };
+
+  private _renderLabelText() {
+    const text = html`<span class="${prefix}--tree-node__label__text"
+      >${this.label}</span
+    >`;
+    if (!this._isLabelTruncated) {
+      return text;
+    }
+    // Keep focus on the tree item or link. The node handles the tooltip events.
+    return html`<cds-tooltip
+      class="${prefix}--tree-node__label__tooltip"
+      autoalign
+      keyboard-only
+      .dropShadow=${false}>
+      ${text}
+      <cds-tooltip-content
+        @mousedown=${(event: MouseEvent) => {
+          // Keep focus on the tree item or link, not the popover content.
+          event.preventDefault();
+        }}
+        @click=${(event: Event) => {
+          // Reading the tooltip must not select the node or follow its link.
+          event.preventDefault();
+          event.stopPropagation();
+        }}
+        >${this.label}</cds-tooltip-content
+      >
+    </cds-tooltip>`;
+  }
+
   /**
    * Handles `slotchange` event.
    */
@@ -164,6 +290,9 @@ class CDSTreeNode extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
+    this.addEventListener('focusin', this._handleNodeFocus);
+    this.addEventListener('focusout', this._handleNodeFocus);
+    this.requestUpdate();
 
     // Detect children on first render
     this._hasChildren = Array.from(this.children).some(
@@ -185,6 +314,22 @@ class CDSTreeNode extends LitElement {
     if (!this.hasAttribute('aria-label')) {
       this.setAttribute('aria-label', this.label);
     }
+  }
+
+  disconnectedCallback() {
+    this._resizeObserver?.disconnect();
+    this._resizeObserver = undefined;
+    this._observedLabel = undefined;
+    window.clearTimeout(this._tooltipTimeout);
+    this._labelHovered = false;
+    this._nodeFocused = false;
+    if (this._tooltip) {
+      this._tooltip.open = false;
+    }
+    document.removeEventListener('keydown', this._handleTooltipEscape);
+    this.removeEventListener('focusin', this._handleNodeFocus);
+    this.removeEventListener('focusout', this._handleNodeFocus);
+    super.disconnectedCallback();
   }
 
   private _dispatchSelectedEvent(value) {
@@ -215,6 +360,17 @@ class CDSTreeNode extends LitElement {
   }
 
   updated(changedProperties) {
+    const text = this._labelText;
+    // The text element changes when the tooltip is added or removed.
+    if (this.isConnected && text && text !== this._observedLabel) {
+      this._resizeObserver?.disconnect();
+      this._resizeObserver ??= new ResizeObserver(this._checkLabelOverflow);
+      this._resizeObserver.observe(text);
+      this._observedLabel = text;
+    }
+    if (changedProperties.has('label')) {
+      this._checkLabelOverflow();
+    }
     if (changedProperties.has('_depth')) {
       this._handleStyles();
     }
@@ -261,7 +417,6 @@ class CDSTreeNode extends LitElement {
       isExpanded,
       href,
       id,
-      label,
       onClick,
       _hasChildren: hasChildren,
       _handleIconSlotChange: handleIconSlotChange,
@@ -305,16 +460,24 @@ class CDSTreeNode extends LitElement {
                       : undefined}
                   tabindex=${disabled ? -1 : undefined}
                   @click=${onClick}>
-                  <div id="label" class="${prefix}--tree-node__label">
+                  <div
+                    id="label"
+                    class="${prefix}--tree-node__label"
+                    @mouseenter=${this._handleLabelMouseEnter}
+                    @mouseleave=${this._handleLabelMouseLeave}>
                     <slot
                       name="icon"
                       @slotchange=${handleIconSlotChange}></slot>
-                    ${label}
+                    ${this._renderLabelText()}
                   </div>
                 </a>`
-              : html` <div id="label" class="${prefix}--tree-node__label">
+              : html` <div
+                  id="label"
+                  class="${prefix}--tree-node__label"
+                  @mouseenter=${this._handleLabelMouseEnter}
+                  @mouseleave=${this._handleLabelMouseLeave}>
                   <slot name="icon" @slotchange=${handleIconSlotChange}></slot>
-                  ${label}
+                  ${this._renderLabelText()}
                 </div>`}
           `
         : html`
@@ -327,7 +490,11 @@ class CDSTreeNode extends LitElement {
                     href=${!disabled ? href : undefined}
                     tabindex=${disabled ? -1 : undefined}
                     @click=${onClick}>
-                    <div id="label" class="${prefix}--tree-node__label">
+                    <div
+                      id="label"
+                      class="${prefix}--tree-node__label"
+                      @mouseenter=${this._handleLabelMouseEnter}
+                      @mouseleave=${this._handleLabelMouseLeave}>
                       <span
                         class="${prefix}--tree-parent-node__toggle"
                         ?disabled=${disabled}
@@ -338,7 +505,7 @@ class CDSTreeNode extends LitElement {
                         <slot
                           name="icon"
                           @slotchange=${handleIconSlotChange}></slot>
-                        ${label}
+                        ${this._renderLabelText()}
                       </span>
                     </div>
                   </a>
@@ -348,7 +515,11 @@ class CDSTreeNode extends LitElement {
                     class="${subTreeClasses}">
                     <slot @slotchange=${handleSlotChange}></slot>
                   </ul>`
-              : html`<div id="label" class="${prefix}--tree-node__label">
+              : html`<div
+                    id="label"
+                    class="${prefix}--tree-node__label"
+                    @mouseenter=${this._handleLabelMouseEnter}
+                    @mouseleave=${this._handleLabelMouseLeave}>
                     <span
                       class="${prefix}--tree-parent-node__toggle"
                       ?disabled=${disabled}
@@ -359,7 +530,7 @@ class CDSTreeNode extends LitElement {
                       <slot
                         name="icon"
                         @slotchange=${handleIconSlotChange}></slot>
-                      ${label}
+                      ${this._renderLabelText()}
                     </span>
                   </div>
                   <ul
