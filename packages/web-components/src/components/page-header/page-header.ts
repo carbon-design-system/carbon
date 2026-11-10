@@ -12,7 +12,6 @@ import { property, state } from 'lit/decorators.js';
 import { provide } from '@lit/context';
 import { prefix } from '../../globals/settings';
 import styles from './page-header.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { pageHeaderContext } from './context';
 import { getHeaderOffset } from './utils';
 import CDSPageHeaderContent from './page-header-content';
@@ -34,8 +33,9 @@ export interface pageHeaderContextType {
  * Page header.
  * @element cds-page-header
  */
-@customElement(`${prefix}-page-header`)
 class CDSPageHeader extends LitElement {
+  static is = `${prefix}-page-header`;
+
   /**
    * Set to `true` to use a full-width Carbon CSS grid (no max-width cap).
    */

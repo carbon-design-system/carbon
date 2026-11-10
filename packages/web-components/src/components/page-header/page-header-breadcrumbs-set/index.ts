@@ -7,4 +7,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './page-header-breadcrumbs-set';
+import { defineCustomElement } from '../../../globals/register';
+import CDSPageHeaderTitleBreadcrumb from '../page-header-title-breadcrumb';
+import CDSPageHeaderBreadcrumbsSet from './page-header-breadcrumbs-set';
+
+export { CDSPageHeaderTitleBreadcrumb, CDSPageHeaderBreadcrumbsSet };
+
+defineCustomElement(CDSPageHeaderTitleBreadcrumb);
+defineCustomElement(CDSPageHeaderBreadcrumbsSet);

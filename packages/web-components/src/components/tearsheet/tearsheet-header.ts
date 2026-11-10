@@ -11,7 +11,6 @@ import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import '../modal/index';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { classMap } from 'lit-html/directives/class-map.js';
 import styles from './tearsheet-header.scss?lit';
 import {
@@ -40,8 +39,9 @@ interface CDSTearsheetHost extends HTMLElement {
  * @fires cds-tearsheet-header-collapse-change - Internal event; parent tearsheet re-dispatches
  *   this as the public `cds-tearsheet-collapse-change` event.
  */
-@customElement(`${prefix}-tearsheet-header`)
 class CDSTearsheetHeader extends HostListenerMixin(LitElement) {
+  static is = `${prefix}-tearsheet-header`;
+
   @property({ reflect: true })
   slot = 'header';
 

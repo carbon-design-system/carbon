@@ -12,7 +12,6 @@ import { LitElement, html } from 'lit';
 import { property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { repeat } from 'lit/directives/repeat.js';
-import { carbonElement as customElement } from '../../../globals/decorators/carbon-element';
 import '../../breadcrumb/index';
 import '../../overflow-menu/index';
 import '../../menu/index';
@@ -21,7 +20,6 @@ import OverflowMenuHorizontal16 from '@carbon/icons/es/overflow-menu--horizontal
 import { iconLoader } from '../../../globals/internal/icon-loader';
 import '../../truncated-text';
 import styles from './page-header-breadcrumbs-set.scss?lit';
-import '../page-header-title-breadcrumb';
 import { prefix } from '../../../globals/settings';
 
 const blockClass = `${prefix}--page-header-breadcrumbs-set`;
@@ -31,8 +29,9 @@ interface Breadcrumb {
   href: string;
 }
 
-@customElement(`${prefix}-page-header-breadcrumbs-set`)
 export default class CDSPageHeaderBreadcrumbsSet extends LitElement {
+  static is = `${prefix}-page-header-breadcrumbs-set`;
+
   /**
    * Data items currently collapsed into the overflow menu.
    * Derived from the DOM nodes the overflow handler marks as hidden.

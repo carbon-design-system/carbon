@@ -9,7 +9,6 @@
 
 import { LitElement, html, nothing } from 'lit';
 import { property, state } from 'lit/decorators.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import '../button/index';
 import '../search/index';
 import '../tag/index';
@@ -30,8 +29,9 @@ const blockClass = `${prefix}--add-select__next`;
  * @fires cds-add-select-body-search - Fired when search term changes; detail: { searchTerm }
  * @fires cds-add-select-body-breadcrumb-click - Fired when a breadcrumb link is clicked; detail: { index }
  */
-@customElement(`${prefix}-add-select-body`)
 class CDSAddSelectBody extends LitElement {
+  static is = `${prefix}-add-select-body`;
+
   /**
    * Label for items section
    */

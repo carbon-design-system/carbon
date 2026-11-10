@@ -10,7 +10,6 @@
 import { LitElement, html, nothing } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import '../icon-button/index';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import Close16 from '@carbon/icons/es/close/16';
@@ -29,8 +28,9 @@ const blockClass = `${prefix}--add-select__next`;
  * @slot render-item - Medium priority: receives item for custom rendering
  * @fires cds-add-select-item-panel-close - Fired when close icon is clicked
  */
-@customElement(`${prefix}-add-select-item-panel`)
 class CDSAddSelectItemPanel extends LitElement {
+  static is = `${prefix}-add-select-item-panel`;
+
   /**
    * Panel title
    */

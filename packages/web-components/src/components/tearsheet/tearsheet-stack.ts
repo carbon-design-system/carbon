@@ -9,7 +9,6 @@
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { stackManager, StackStepSize } from './stack-signal';
 
 /**
@@ -21,8 +20,9 @@ import { stackManager, StackStepSize } from './stack-signal';
  * @element cds-tearsheet-stack
  * @slot - Default slot for tearsheet children
  */
-@customElement(`${prefix}-tearsheet-stack`)
 class CDSTearsheetStack extends LitElement {
+  static is = `${prefix}-tearsheet-stack`;
+
   /**
    * Defines the step size for stacking offset.
    * - 'sm': 0.5rem buffer

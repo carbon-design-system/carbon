@@ -9,12 +9,11 @@
 import { css, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import Chevron20 from '@carbon/icons/es/chevron--up/20';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import '../button/index';
 import '../icon-button/index';
-import '../popover/popover-content';
+import '../popover/index';
 import CDSButton from '../button/button';
 import { prefix } from '../../globals/settings';
 import {
@@ -30,8 +29,9 @@ const blockClass = `${prefix}--tearsheet`;
  * Tearsheet Scroller button
  * @element cds-tearsheet-scroller
  */
-@customElement(`${prefix}-tearsheet-scroller`)
 export class CDSTearsheetScroller extends CDSButton {
+  static is = `${prefix}-tearsheet-scroller`;
+
   @property({ reflect: true })
   slot = 'scroller';
 

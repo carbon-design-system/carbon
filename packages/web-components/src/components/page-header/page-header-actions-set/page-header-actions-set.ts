@@ -9,7 +9,6 @@
 
 import { LitElement, html } from 'lit';
 import { property, query, state } from 'lit/decorators.js';
-import { carbonElement as customElement } from '../../../globals/decorators/carbon-element';
 import { repeat } from 'lit/directives/repeat.js';
 import '../../overflow-menu/index';
 import '../../menu/index';
@@ -24,8 +23,9 @@ interface PageAction {
   label: string;
 }
 
-@customElement(`${prefix}-page-header-actions-set`)
 export default class CDSPageHeaderActionsSet extends LitElement {
+  static is = `${prefix}-page-header-actions-set`;
+
   /**
    * Hidden actions that will be rendered in the overflow menu.
    */

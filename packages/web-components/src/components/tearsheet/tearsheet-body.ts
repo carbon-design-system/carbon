@@ -11,7 +11,6 @@ import { property, query, state } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import '../layer/index';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { classMap } from 'lit-html/directives/class-map.js';
 import styles from './tearsheet.scss?lit';
 import { consume } from '@lit/context';
@@ -33,8 +32,9 @@ const blockClass = `${prefix}--tearsheet`;
  * @slot main-content - Primary content area
  * @slot summary-content - Right-side panel for summary details (use cds-tearsheet-summary-content)
  */
-@customElement(`${prefix}-tearsheet-body`)
 class CDSTearsheetBody extends HostListenerMixin(LitElement) {
+  static is = `${prefix}-tearsheet-body`;
+
   @property({ reflect: true })
   slot = 'body';
 
