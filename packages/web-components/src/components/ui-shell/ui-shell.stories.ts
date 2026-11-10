@@ -6,6 +6,7 @@
  */
 
 import { html } from 'lit';
+import { action } from 'storybook/actions';
 import { iconLoader } from '../../globals/internal/icon-loader';
 // Below path will be there when an application installs `@carbon/web-components` package.
 // In our dev env, we auto-generate the file and re-map below path to to point to the generated file.
@@ -192,7 +193,7 @@ export const FixedSideNav = {
   args: { ...sideNavArgs },
   argTypes: { ...sideNavArgTypes },
   render: ({ expanded, sideNavAriaLabel }) => {
-    const result = html`
+    return html`
       <style>
         ${styles}
       </style>
@@ -250,9 +251,6 @@ export const FixedSideNav = {
       </cds-side-nav>
       ${StoryContent({ useResponsiveOffset: false })}
     `;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-    (result as any).hasMainTag = true;
-    return result;
   },
 };
 
@@ -261,7 +259,7 @@ export const FixedSideNavDivider = {
   args: { ...sideNavArgs },
   argTypes: { ...sideNavArgTypes },
   render: ({ expanded, sideNavAriaLabel }) => {
-    const result = html`
+    return html`
       <style>
         ${styles}
       </style>
@@ -318,10 +316,53 @@ export const FixedSideNavDivider = {
       </cds-side-nav>
       ${StoryContent({ useResponsiveOffset: false })}
     `;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-    (result as any).hasMainTag = true;
-    return result;
   },
+};
+
+export const FixedSideNavWMixedLinksAndButtons = {
+  name: 'Fixed Side Nav with Mixed Buttons and Links',
+  args: { ...sideNavArgs },
+  argTypes: { ...sideNavArgTypes },
+  render: ({ expanded, sideNavAriaLabel }) => html`
+    <style>
+      ${styles}
+    </style>
+    <cds-side-nav
+      is-not-child-of-header
+      aria-label="${sideNavAriaLabel}"
+      collapse-mode="${SIDE_NAV_COLLAPSE_MODE.FIXED}"
+      ?expanded="${expanded}">
+      <cds-side-nav-items>
+        <cds-side-nav-link href="${linksHref}"> Overview </cds-side-nav-link>
+        <cds-side-nav-link as="button" @click="${action('Open release notes')}">
+          Release notes
+        </cds-side-nav-link>
+        <cds-side-nav-menu title="Resources">
+          <cds-side-nav-menu-item href="${linksHref}">
+            Documentation
+          </cds-side-nav-menu-item>
+          <cds-side-nav-menu-item
+            as="button"
+            @click="${action('Open version details')}">
+            Version details
+          </cds-side-nav-menu-item>
+          <cds-side-nav-menu-item href="${linksHref}">
+            Support
+          </cds-side-nav-menu-item>
+        </cds-side-nav-menu>
+        <cds-side-nav-divider></cds-side-nav-divider>
+        <cds-side-nav-link active href="${linksHref}">
+          Settings
+        </cds-side-nav-link>
+        <cds-side-nav-link
+          as="button"
+          @click="${action('Open feedback modal')}">
+          Send feedback
+        </cds-side-nav-link>
+      </cds-side-nav-items>
+    </cds-side-nav>
+    ${StoryContent({ useResponsiveOffset: false })}
+  `,
 };
 
 export const FixedSideNavIcons = {
@@ -329,7 +370,7 @@ export const FixedSideNavIcons = {
   args: { ...sideNavArgs },
   argTypes: { ...sideNavArgTypes },
   render: ({ expanded, sideNavAriaLabel }) => {
-    const result = html`
+    return html`
       <style>
         ${styles}
       </style>
@@ -390,9 +431,6 @@ export const FixedSideNavIcons = {
       </cds-side-nav>
       ${StoryContent({ useResponsiveOffset: false })}
     `;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-    (result as any).hasMainTag = true;
-    return result;
   },
 };
 
@@ -895,7 +933,7 @@ export const HeaderBaseWSideNav = {
     platformPrefix,
     sideNavAriaLabel,
   }) => {
-    const result = html`
+    return html`
       <style>
         ${styles}
       </style>
@@ -964,9 +1002,6 @@ export const HeaderBaseWSideNav = {
       </cds-header>
       ${StoryContent({ useResponsiveOffset: true })}
     `;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-    (result as any).hasMainTag = true;
-    return result;
   },
 };
 
@@ -1210,7 +1245,7 @@ export const SideNavWLargeSideNavItems = {
   args: { ...sideNavArgs },
   argTypes: { ...sideNavArgTypes },
   render: ({ expanded, sideNavAriaLabel }) => {
-    const result = html`
+    return html`
       <style>
         ${styles}
       </style>
@@ -1254,9 +1289,6 @@ export const SideNavWLargeSideNavItems = {
       </cds-side-nav>
       ${StoryContent({ useResponsiveOffset: true })}
     `;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-    (result as any).hasMainTag = true;
-    return result;
   },
 };
 

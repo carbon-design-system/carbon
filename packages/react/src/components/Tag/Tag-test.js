@@ -54,11 +54,10 @@ describe('Tag', () => {
     });
 
     it('should have an appropriate aria-label when (filterable)', () => {
-      const { container } = render(
+      render(
         <DismissibleTag type="red" title="Close tag" text="Tag content" />
       );
-      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-      const button = container.querySelector('[aria-label]');
+      const button = screen.getByRole('button', { name: /Close tag/i });
       const accessibilityLabel = button.getAttribute('aria-label');
       // This check would mirror our "Accessibility label must contain at least all of visible label"
       // requirement

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -13,26 +13,21 @@ import { render, screen } from '@testing-library/react';
 describe('ErrorBoundary', () => {
   it('should render children and not a fallback if no error is caught', () => {
     function MockComponent() {
-      return <span data-test-id="mock">mock</span>;
+      return <span>mock</span>;
     }
 
     function MockFallback() {
-      return <span data-test-id="fallback">mock</span>;
+      return <span>fallback</span>;
     }
 
-    const { container } = render(
+    render(
       <ErrorBoundary fallback={<MockFallback />}>
         <MockComponent />
       </ErrorBoundary>
     );
 
-    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-    const component = container.querySelector('[data-test-id="mock"]');
-    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-    const fallback = container.querySelector('[data-test-id="fallback"]');
-
-    expect(component).toBeDefined();
-    expect(fallback).toBe(null);
+    expect(screen.getByText('mock')).toBeInTheDocument();
+    expect(screen.queryByText('fallback')).not.toBeInTheDocument();
   });
 
   it('should render a fallback if an error is caught', () => {
@@ -43,12 +38,12 @@ describe('ErrorBoundary', () => {
     }
 
     function MockFallback() {
-      return <span data-test-id="fallback">mock</span>;
+      return <span>fallback</span>;
     }
 
     const log = jest.fn();
 
-    const { container } = render(
+    render(
       <ErrorBoundaryContext.Provider value={{ log }}>
         <ErrorBoundary fallback={<MockFallback />}>
           <MockComponent />
@@ -56,13 +51,8 @@ describe('ErrorBoundary', () => {
       </ErrorBoundaryContext.Provider>
     );
 
-    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-    const component = container.querySelector('[data-test-id="mock"]');
-    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-    const fallback = container.querySelector('[data-test-id="fallback"]');
-
-    expect(component).toBe(null);
-    expect(fallback).toBeDefined();
+    expect(screen.queryByText('mock')).not.toBeInTheDocument();
+    expect(screen.getByText('fallback')).toBeInTheDocument();
     expect(console.error).toHaveBeenCalled();
     expect(log).toHaveBeenCalled();
 
