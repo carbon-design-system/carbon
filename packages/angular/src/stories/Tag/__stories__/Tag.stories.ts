@@ -19,6 +19,8 @@ import {
   TagSkeletonComponent,
 } from '@carbon/angular/tag';
 import { ButtonComponent } from '@carbon/angular/button';
+import Asleep16 from '@carbon/icons/es/asleep/16.js';
+import { iconToSvg } from '../../../../.storybook/helpers/icon-to-svg';
 import {
   AiLabelComponent,
   AiLabelActionButtonComponent,
@@ -92,6 +94,8 @@ const meta: Meta = {
 export default meta;
 type Story = StoryObj;
 
+const asleepIcon = iconToSvg(Asleep16, { slot: 'icon' });
+
 // WC: Dismissible
 export const Dismissible: Story = {
   argTypes: {
@@ -158,6 +162,7 @@ export const Dismissible: Story = {
           [size]="size"
           [dismissTooltipLabel]="dismissTooltipLabel"
           [dismissTooltipAlignment]="dismissTooltipAlignment">
+          ${asleepIcon}
         </cds-ng-dismissible-tag>
       </div>
     `,
