@@ -116,6 +116,11 @@ export interface ShapeIndicatorProps {
    * Specify the text size of the Shape Indicator. Defaults to 12.
    */
   textSize?: 12 | 14;
+
+  /**
+   * Specify the tab index of the tooltip trigger in compact mode.
+   */
+  tabIndex?: number;
 }
 
 export const ShapeIndicator = React.forwardRef(
@@ -129,6 +134,7 @@ export const ShapeIndicator = React.forwardRef(
       label,
       shapeDescription,
       textSize = 12,
+      tabIndex,
     }: ShapeIndicatorProps,
     ref: React.Ref<HTMLDivElement>
   ) => {
@@ -155,7 +161,8 @@ export const ShapeIndicator = React.forwardRef(
         autoAlign={autoAlign}
         openOnHover
         definition={label}
-        triggerClassName={`${prefix}--shape-indicator__button`}>
+        triggerClassName={`${prefix}--shape-indicator__button`}
+        tabIndex={tabIndex}>
         {shapeElement}
         <span className={`${prefix}--visually-hidden`}>
           {shapeDescription ?? label}
@@ -231,6 +238,7 @@ ShapeIndicator.propTypes = {
    * Specify the text size of the Shape Indicator. Defaults to 12.
    */
   textSize: PropTypes.oneOf([12, 14]),
+  tabIndex: PropTypes.number,
 };
 
 export default ShapeIndicator;
