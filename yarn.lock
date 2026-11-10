@@ -3411,6 +3411,7 @@ __metadata:
     "@angular/platform-browser": "npm:^19.0.0"
     "@angular/platform-browser-dynamic": "npm:^19.0.0"
     "@carbon/styles": "workspace:^"
+    "@carbon/utilities": "workspace:^"
     "@carbon/web-components": "workspace:^"
     "@open-wc/testing": "npm:^5.0.0"
     "@playwright/test": "npm:^1.36.2"
@@ -4159,7 +4160,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/utilities@npm:^1.0.0-alpha.2, @carbon/utilities@workspace:packages/utilities":
+"@carbon/utilities@npm:^1.0.0-alpha.2, @carbon/utilities@workspace:^, @carbon/utilities@workspace:packages/utilities":
   version: 0.0.0-use.local
   resolution: "@carbon/utilities@workspace:packages/utilities"
   dependencies:
