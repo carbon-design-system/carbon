@@ -21,13 +21,12 @@ import {
   AiLabelComponent,
   AiLabelActionButtonComponent,
 } from '@carbon/angular/ai-label';
+import { ButtonComponent } from '@carbon/angular/button';
+import { LinkComponent } from '@carbon/angular/link';
+import { ToggletipComponent } from '@carbon/angular/toggle-tip';
 import { withLayers } from '../../../../.storybook/decorators/with-layers';
 
 // ─── WC-parity stories (one-for-one with @carbon/web-components Dropdown) ─────
-// TODO(parity): WithToggletipLabel — ToggleTipComponent is generated but the
-// WC story uses imperative Storybook controls that don't map cleanly to the
-// Angular template model. Implement when the pattern for toggletip-in-label
-// is established for another component.
 
 const items = [
   {
@@ -200,6 +199,9 @@ const meta: Meta<any> = {
         DropdownSkeletonComponent,
         AiLabelComponent,
         AiLabelActionButtonComponent,
+        ButtonComponent,
+        LinkComponent,
+        ToggletipComponent,
         NgFor,
       ],
     }),
@@ -469,6 +471,59 @@ export const WithLayer: Story = {
           [warn]="warn"
           [warnText]="warnText"
         >
+          <cds-ng-dropdown-item
+            *ngFor="let item of items"
+            [value]="item.value"
+            [disabled]="item.disabled"
+          >{{item.text}}</cds-ng-dropdown-item>
+        </cds-ng-dropdown>
+      </div>
+    `,
+  }),
+};
+
+// WC: WithToggletipLabel
+export const WithToggletipLabel: Story = {
+  args: {
+    ...defaultArgs,
+    label: 'placeholder',
+    titleText: 'Label',
+  },
+  argTypes: controls,
+  render: (args) => ({
+    props: { ...args, items },
+    template: `
+      <div style="width:400px">
+        <cds-ng-dropdown
+          [ariaLabel]="ariaLabel"
+          [direction]="direction"
+          [disabled]="disabled"
+          [helperText]="helperText"
+          [hideLabel]="hideLabel"
+          [invalid]="invalid"
+          [invalidText]="invalidText"
+          [label]="label"
+          [open]="open"
+          [readOnly]="readOnly"
+          [size]="size || null"
+          [titleText]="titleText"
+          [type]="type || null"
+          [value]="value"
+          [warn]="warn"
+          [warnText]="warnText"
+        >
+          <span slot="title-text" style="display: flex; align-items: center;">
+            {{ titleText }}
+            <cds-ng-toggletip alignment="bottom">
+              <p slot="body-text">
+                Lorem ipsum dolor sit amet, di os consectetur adipiscing elit,
+                sed do eiusmod tempor incididunt ut fsil labore et dolore magna
+                aliqua.
+              </p>
+              <cds-ng-link href="#" slot="actions">Link action</cds-ng-link>
+              <cds-ng-button size="sm" slot="actions">Button</cds-ng-button>
+            </cds-ng-toggletip>
+          </span>
           <cds-ng-dropdown-item
             *ngFor="let item of items"
             [value]="item.value"
