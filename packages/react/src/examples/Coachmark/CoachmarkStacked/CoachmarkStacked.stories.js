@@ -22,7 +22,7 @@ export default {
 };
 
 const CoachmarkStackedPattern = (args) => {
-  return <CoachmarkStackedExample {...args} prefix='c4p' />;
+  return <CoachmarkStackedExample {...args} prefix='cds' />;
 };
 
 export const CoachmarkStack = CoachmarkStackedPattern.bind({});

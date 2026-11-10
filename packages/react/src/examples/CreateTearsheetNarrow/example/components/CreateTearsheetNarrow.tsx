@@ -6,8 +6,7 @@
  */
 
 import React, { ReactNode, RefObject, useMemo } from 'react';
-import { preview__Tearsheet as Tearsheet } from '@carbon/ibm-products';
-import { Form } from '@carbon/react';
+import { Tearsheet, Form } from '@carbon/react';
 
 export interface CreateTearsheetNarrowProps {
   children?: ReactNode;

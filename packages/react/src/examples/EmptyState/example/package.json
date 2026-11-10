@@ -12,7 +12,7 @@
   "dependencies": {
     "@carbon/icons-react": "latest",
     "@carbon/pictograms-react": "latest",
-    "@carbon/react": "latest",
+    "@carbon/react": "v12-alpha",
     "@carbon/styles": "latest",
     "@ibm/plex": "latest",
     "react": "^19.1.0",

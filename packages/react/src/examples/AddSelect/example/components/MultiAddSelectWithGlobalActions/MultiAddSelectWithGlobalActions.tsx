@@ -20,15 +20,13 @@ import {
   Dropdown,
   OverflowMenu,
   MenuItem,
-} from '@carbon/react';
-import { ArrowsVertical } from '@carbon/react/icons';
-import {
-  preview__AddSelect as AddSelect,
-  preview__Tearsheet as Tearsheet,
+  AddSelect,
+  Tearsheet,
   AddSelectData,
   AddSelectItem,
   NoDataEmptyState,
-} from '@carbon/ibm-products';
+} from '@carbon/react';
+import { ArrowsVertical } from '@carbon/react/icons';
 import './MultiAddSelectWithGlobalActions.scss';
 
 const blockClass = `multi-add-select-global-actions-pattern`;

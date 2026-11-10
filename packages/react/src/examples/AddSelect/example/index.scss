@@ -15,15 +15,14 @@
 @use '@carbon/styles/scss/type' as *;
 @use '@carbon/styles/scss/motion' as *;
 
-// IBM Products component styles — only the components used by this pattern:
-// AddSelect (AddSelect, AddSelectNext), Tearsheet (TearsheetNext),
-// EmptyStates (NoDataEmptyState), ActionSet (footer buttons),
+// Component styles used by this pattern:
+// AddSelect, Tearsheet, ActionSet (footer buttons),
 // UserAvatar (avatar icons in item rows)
-@use '@carbon/ibm-products/scss/components/AddSelect';
-@use '@carbon/ibm-products/scss/components/Tearsheet';
-@use '@carbon/ibm-products/scss/components/EmptyStates';
-@use '@carbon/ibm-products/scss/components/ActionSet';
-@use '@carbon/ibm-products/scss/components/UserAvatar';
+// Note: there is no EmptyStates stylesheet in @carbon/styles yet.
+@use '@carbon/styles/scss/components/add-select';
+@use '@carbon/styles/scss/components/Tearsheet';
+@use '@carbon/styles/scss/components/action-set';
+@use '@carbon/styles/scss/components/user-avatar';
 
 .example-container {
   padding: $spacing-05;

@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@carbon/react": "^1.115.0",
+    "@carbon/react": "v12-alpha",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },

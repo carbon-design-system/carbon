@@ -6,8 +6,7 @@
  */
 
 import React, { PropsWithChildren, ReactNode, RefObject, useMemo } from 'react';
-import { SidePanel } from '@carbon/ibm-products';
-import { Form } from '@carbon/react';
+import { SidePanel, Form } from '@carbon/react';
 
 const blockClass = `create-side-panel`;
 

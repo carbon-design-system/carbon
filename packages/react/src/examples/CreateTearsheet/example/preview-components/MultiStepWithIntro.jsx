@@ -21,12 +21,12 @@ import {
   NumberInput,
   AILabel,
   AILabelContent,
+  NoDataEmptyState,
 } from '@carbon/react';
 import { StepProvider, useStepContext } from '@carbon/utilities-react';
 import cx from 'classnames';
 import { CreateTearsheet } from '../components/CreateTearsheet';
 import { CreateTearsheetStep } from '../components/CreateTearsheetStep';
-import { NoDataEmptyState } from '@carbon/ibm-products';
 
 const blockClass = `tearsheet-create-multi-step`;
 

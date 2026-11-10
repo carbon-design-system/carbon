@@ -15,8 +15,8 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { ToastNotification } from '@carbon/react';
 import {
+  ToastNotification,
   DataTable,
   Table,
   TableBody,
@@ -27,14 +27,12 @@ import {
   TableRow,
   TableSelectAll,
   TableSelectRow,
-} from '@carbon/react';
-import {
-  preview__AddSelect as AddSelect,
-  preview__Tearsheet as Tearsheet,
+  AddSelect,
+  Tearsheet,
   AddSelectData,
   AddSelectItem,
   NoDataEmptyState,
-} from '@carbon/ibm-products';
+} from '@carbon/react';
 import './MultiAddSelectWithDataTable.scss';
 
 const blockClass = `multi-add-select-data-table-pattern`;
