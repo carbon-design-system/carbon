@@ -3,7 +3,6 @@ name: Next release (v12 alpha)
 # On every push to next, bump prerelease versions and push a v12 alpha git tag.
 # The git tag push starts release.yml, which publishes the v12-alpha
 # dist-tag. The git tag is also the baseline Lerna uses to detect changed packages.
-# AVT and ci-check already ran on the commits that landed on next.
 #
 # The version bump commit starts with "chore(release):". For those commits, we don't want to trigger a new release. 
 # GitHub only lets one release wait in line. The version-bump push is kept in
