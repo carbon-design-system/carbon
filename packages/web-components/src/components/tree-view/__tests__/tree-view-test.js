@@ -7,6 +7,7 @@
 
 import '@carbon/web-components/es/components/tree-view/index.js';
 import '@carbon/web-components/es/components/feature-flags/index.js';
+import '@carbon/web-components/es/components/modal/index.js';
 import { aTimeout, expect, fixture, html, waitUntil } from '@open-wc/testing';
 import { sendKeys, sendMouse } from '@web/test-runner-commands';
 
@@ -38,6 +39,30 @@ function getDeepElementFromPoint(x, y) {
     element = nestedElement;
   }
   return element;
+}
+
+async function getTooltipPosition(node) {
+  const surface = getTooltipSurface(node);
+  let position;
+  let previousBounds;
+  // Positioning can still change after the tooltip first becomes visible.
+  await waitUntil(() => {
+    const rect = surface.getBoundingClientRect();
+    const bounds = [rect.x, rect.y, rect.width, rect.height].join(',');
+    const stable = bounds === previousBounds;
+    previousBounds = bounds;
+    position = [
+      Math.round(rect.x + rect.width / 2),
+      Math.round(rect.y + rect.height / 2),
+    ];
+    return (
+      getComputedStyle(surface).position === 'fixed' &&
+      getComputedStyle(surface).visibility === 'visible' &&
+      stable &&
+      getDeepElementFromPoint(...position) === surface
+    );
+  });
+  return position;
 }
 
 async function createTree(content, size = 'sm') {
@@ -119,6 +144,8 @@ describe('cds-tree-view label truncation', () => {
 
           const trigger = withLinks ? node.shadowRoot.querySelector('a') : node;
           if (node === nodes[0]) {
+            // Activate the page so programmatic focus dispatches focus events.
+            await sendMouse({ type: 'click', position: [0, 0] });
             trigger.focus();
           } else {
             await sendKeys({ press: 'ArrowDown' });
@@ -152,6 +179,107 @@ describe('cds-tree-view label truncation', () => {
   });
 
   for (const withLinks of [false, true]) {
+    it(`should reveal labels when indentation leaves no text width, links=${withLinks}`, async () => {
+      const { wrapper, nodes } = await createTree(html`
+        <cds-tree-node
+          label="Level one"
+          is-expanded
+          .href=${withLinks ? '#one' : undefined}>
+          <cds-tree-node
+            label="Level two"
+            is-expanded
+            .href=${withLinks ? '#two' : undefined}>
+            <cds-tree-node
+              label="Level three"
+              is-expanded
+              .href=${withLinks ? '#three' : undefined}>
+              <cds-tree-node
+                label="Level four"
+                is-expanded
+                .href=${withLinks ? '#four' : undefined}>
+                <cds-tree-node
+                  label="Level five"
+                  .href=${withLinks ? '#five' : undefined}></cds-tree-node>
+              </cds-tree-node>
+            </cds-tree-node>
+          </cds-tree-node>
+        </cds-tree-node>
+      `);
+      const node = nodes[3];
+      if (withLinks) {
+        wrapper.style.inlineSize = '80px';
+      }
+      await waitUntil(
+        () => node.checkVisibility() && getText(node).clientWidth === 0
+      );
+      expect(getText(node).scrollWidth).to.be.greaterThan(0);
+      const trigger = withLinks ? node.shadowRoot.querySelector('a') : node;
+      const firstTrigger = withLinks
+        ? nodes[0].shadowRoot.querySelector('a')
+        : nodes[0];
+      firstTrigger.focus();
+      for (let index = 0; index < 3; index++) {
+        await sendKeys({ press: 'ArrowDown' });
+      }
+      expect(getDeepActiveElement()).to.equal(trigger);
+      await waitUntil(() => getTooltip(node)?.open);
+      expect(
+        getTooltip(node).querySelector('cds-tooltip-content').textContent.trim()
+      ).to.equal('Level four');
+      expect(getDeepActiveElement()).to.equal(trigger);
+    });
+  }
+
+  it('should not create tooltips for collapsed descendants', async () => {
+    const {
+      nodes: [parent, child],
+    } = await createTree(html`
+      <cds-tree-node label="Parent">
+        <cds-tree-node label=${longLabel}></cds-tree-node>
+      </cds-tree-node>
+    `);
+    expect(child.checkVisibility()).to.be.false;
+    expect(getTooltip(child)).to.not.exist;
+    parent.isExpanded = true;
+    await waitUntil(() => getTooltip(child));
+    parent.isExpanded = false;
+    await waitUntil(() => !getTooltip(child));
+  });
+
+  for (const enableDialogElement of [false, true]) {
+    it(`should dismiss the tooltip before closing its modal, dialog=${enableDialogElement}`, async () => {
+      const modal = await fixture(html`
+        <cds-modal
+          open
+          managed-focus
+          ?enable-dialog-element=${enableDialogElement}>
+          <cds-modal-header>
+            <cds-modal-close-button></cds-modal-close-button>
+            <cds-modal-heading>Tree</cds-modal-heading>
+          </cds-modal-header>
+          <cds-modal-body>
+            <div style="inline-size: 160px">
+              <cds-tree-view label="Tree">
+                <cds-tree-node label=${longLabel}></cds-tree-node>
+              </cds-tree-view>
+            </div>
+          </cds-modal-body>
+        </cds-modal>
+      `);
+      const node = modal.querySelector('cds-tree-node');
+      await waitUntil(() => getTooltip(node));
+      node.focus();
+      await waitUntil(() => getTooltip(node)?.open);
+      await sendKeys({ press: 'Escape' });
+      expect(getTooltip(node).open).to.be.false;
+      expect(modal.open).to.be.true;
+      expect(getDeepActiveElement()).to.equal(node);
+      await sendKeys({ press: 'Escape' });
+      await waitUntil(() => !modal.open);
+    });
+  }
+
+  for (const withLinks of [false, true]) {
     it(`should preserve focus when clicking the tooltip, links=${withLinks}`, async () => {
       let clicks = 0;
       const {
@@ -168,26 +296,8 @@ describe('cds-tree-view label truncation', () => {
       const trigger = withLinks ? node.shadowRoot.querySelector('a') : node;
       trigger.focus();
       await waitUntil(() => getTooltip(node)?.open);
-      await waitUntil(
-        () =>
-          getComputedStyle(getTooltipSurface(node)).position === 'fixed' &&
-          getComputedStyle(getTooltipSurface(node)).visibility === 'visible'
-      );
       const surface = getTooltipSurface(node);
-      let position;
-      let previousBounds;
-      // Positioning can still change after the tooltip first becomes visible.
-      await waitUntil(() => {
-        const rect = surface.getBoundingClientRect();
-        const bounds = [rect.x, rect.y, rect.width, rect.height].join(',');
-        const stable = bounds === previousBounds;
-        previousBounds = bounds;
-        position = [
-          Math.round(rect.x + rect.width / 2),
-          Math.round(rect.y + rect.height / 2),
-        ];
-        return stable && getDeepElementFromPoint(...position) === surface;
-      });
+      const position = await getTooltipPosition(node);
       let tooltipClicked = false;
       surface.addEventListener(
         'mousedown',
@@ -225,7 +335,6 @@ describe('cds-tree-view label truncation', () => {
 
     wrapper.style.inlineSize = '800px';
     await waitUntil(() => !getTooltip(node));
-    expect(getTooltip(node)).to.not.exist;
     expect(node.shadowRoot.activeElement).to.equal(link);
     expect(node.shadowRoot.querySelector('a')).to.equal(link);
 
@@ -340,15 +449,14 @@ describe('cds-tree-view label truncation', () => {
     });
     await waitUntil(() => getTooltip(node)?.open);
 
-    const content = getTooltip(node).querySelector('cds-tooltip-content');
-    const surface = content.shadowRoot.querySelector('.cds--tooltip-content');
-    await waitUntil(() => getComputedStyle(surface).position === 'fixed');
+    const surface = getTooltipSurface(node);
+    const position = await getTooltipPosition(node);
     const rect = surface.getBoundingClientRect();
     expect(rect.width).to.be.greaterThan(labelRect.width);
     expect(rect.height).to.be.greaterThan(0);
     await sendMouse({
       type: 'move',
-      position: [Math.round(rect.x + 10), Math.round(rect.y + 10)],
+      position,
     });
     await aTimeout(350);
     expect(getTooltip(node)?.open).to.be.true;

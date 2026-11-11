@@ -55,7 +55,7 @@ class CDSTreeNode extends LitElement {
     const text = this._labelText;
     const isLabelTruncated = !!(
       text &&
-      text.clientWidth > 0 &&
+      text.getClientRects().length > 0 &&
       text.scrollWidth > text.clientWidth
     );
     if (isLabelTruncated === this._isLabelTruncated) {
@@ -77,10 +77,10 @@ class CDSTreeNode extends LitElement {
       if (tooltip) {
         tooltip.open = false;
       }
-      document.removeEventListener('keydown', this._handleTooltipEscape);
+      document.removeEventListener('keydown', this._handleTooltipEscape, true);
       return;
     }
-    document.addEventListener('keydown', this._handleTooltipEscape);
+    document.addEventListener('keydown', this._handleTooltipEscape, true);
     if (!tooltip?.open) {
       this._tooltipTimeout = window.setTimeout(() => {
         if (this._tooltip) {
@@ -120,6 +120,10 @@ class CDSTreeNode extends LitElement {
 
   private _handleTooltipEscape = (event: KeyboardEvent) => {
     if (event.key === 'Escape') {
+      if (this._tooltip?.open) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
       this._tooltipDismissed = true;
       this._updateTooltip();
     }
@@ -326,7 +330,7 @@ class CDSTreeNode extends LitElement {
     if (this._tooltip) {
       this._tooltip.open = false;
     }
-    document.removeEventListener('keydown', this._handleTooltipEscape);
+    document.removeEventListener('keydown', this._handleTooltipEscape, true);
     this.removeEventListener('focusin', this._handleNodeFocus);
     this.removeEventListener('focusout', this._handleNodeFocus);
     super.disconnectedCallback();
