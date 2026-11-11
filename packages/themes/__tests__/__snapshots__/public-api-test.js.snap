@@ -10900,6 +10900,8 @@ exports[`@carbon/themes public API published files 1`] = `
   "scss/generated/_tag-tokens.scss",
   "scss/generated/_themes.scss",
   "scss/generated/_tokens.scss",
+  "scss/modules/generated/_themes.scss",
+  "scss/modules/generated/_tokens.scss",
   "src/index.ts",
   "src/metadata.ts",
   "src/tools.ts",
