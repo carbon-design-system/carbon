@@ -10,6 +10,7 @@ import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { iconLoader } from '../../globals/internal/icon-loader';
+import AutoAlignMixin from '../../globals/mixins/auto-align';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
 import '../tooltip/definition-tooltip';
 import styles from './shape-indicator.scss?lit';
@@ -66,7 +67,7 @@ const shapeMap = {
  * @element cds-shape-indicator
  */
 @customElement(`${prefix}-shape-indicator`)
-class CDSShapeIndicator extends LitElement {
+class CDSShapeIndicator extends AutoAlignMixin(LitElement) {
   /**
    * Specify how the tooltip should align with the shape in compact mode
    */
@@ -74,10 +75,11 @@ class CDSShapeIndicator extends LitElement {
   align: POPOVER_ALIGNMENT = POPOVER_ALIGNMENT.RIGHT;
 
   /**
-   * Will auto-align the tooltip in compact mode
+   * Will auto-align the tooltip in compact mode. Defaults to `true` when
+   * `enable-v12-autoalign` is enabled, and to `false` otherwise.
    */
   @property({ type: Boolean, reflect: false })
-  autoalign = false;
+  autoalign?: boolean;
 
   /**
    * When true, displays only the shape with the label in a tooltip
@@ -127,7 +129,7 @@ class CDSShapeIndicator extends LitElement {
       return html`
         <cds-definition-tooltip
           align=${this.align}
-          ?autoalign=${this.autoalign}
+          .autoalign=${this.autoalign}
           open-on-hover>
           ${shapeElement}
           <span class="${prefix}--visually-hidden"

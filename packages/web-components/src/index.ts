@@ -101,7 +101,13 @@ export { default as CDSActionableNotification } from './components/notification/
 export { default as CDSActionableNotificationButton } from './components/notification/actionable-notification-button';
 export { default as CDSInlineNotification } from './components/notification/inline-notification';
 export { default as CDSToastNotification } from './components/notification/toast-notification';
-// TODO: uncomment in v12 — remove from product-migrated-components.mjs too
+// export { default as CDSAddSelect } from './components/add-select/add-select';
+// export { default as CDSAddSelectBody } from './components/add-select/add-select-body';
+// export { default as CDSAddSelectColumn } from './components/add-select/add-select-column';
+// export { default as CDSAddSelectRow } from './components/add-select/add-select-row';
+// export { default as CDSAddSelectSelectionSummary } from './components/add-select/add-select-selection-summary';
+// export { default as CDSAddSelectSelectionSummaryItem } from './components/add-select/add-select-selection-summary-item';
+// export { default as CDSAddSelectItemPanel } from './components/add-select/add-select-item-panel';
 // export { default as CDSNotificationPanel } from './components/notification-panel/notification-panel';
 // export { default as CDSNotification } from './components/notification-panel/notification';
 // export { default as CDSNotificationFooter } from './components/notification-panel/notification-footer';
@@ -112,6 +118,15 @@ export { default as CDSTextareaSkeleton } from './components/textarea/textarea-s
 export { default as CDSOverflowMenu } from './components/overflow-menu/overflow-menu';
 export { default as CDSOverflowMenuBody } from './components/overflow-menu/overflow-menu-body';
 export { default as CDSOverflowMenuItem } from './components/overflow-menu/overflow-menu-item';
+// TODO: uncomment in v12 — remove from product-migrated-components.mjs too
+// export { default as CDSPageHeader } from './components/page-header/page-header';
+// export { default as CDSPageHeaderBreadcrumb } from './components/page-header/page-header-breadcrumb';
+// export { default as CDSPageHeaderContent } from './components/page-header/page-header-content';
+// export { default as CDSPageHeaderContentText } from './components/page-header/page-header-content-text';
+// export { default as CDSPageHeaderHeroImage } from './components/page-header/page-header-hero-image';
+// export { default as CDSPageHeaderTabs } from './components/page-header/page-header-tabs';
+// export { default as CDSPageHeaderTitleBreadcrumb } from './components/page-header/page-header-title-breadcrumb';
+// export { default as CDSPageHeaderScroller } from './components/page-header/page-header-scroller';
 export { default as CDSPagination } from './components/pagination/pagination';
 export { default as CDSPopover } from './components/popover/popover';
 export { default as CDSPopoverContent } from './components/popover/popover-content';
@@ -233,3 +248,14 @@ export { default as CDSLayoutConstraint } from './components/layout/layout-const
 // export { default as CDSUserAvatar } from './components/user-avatar/user-avatar';
 // export { default as CDSBigNumber } from './components/big-number/big-number';
 // export { default as CDSOptionsTile } from './components/options-tile/options-tile';
+
+// TODO: uncomment in v12 — also remove from excludeProductsComponents
+// Re-export AddSelect utilities from @carbon/utilities
+// export { AddSelectData } from '@carbon/utilities';
+// export type {
+//   AddSelectItem,
+//   ItemDetailEntry,
+//   ItemDetails,
+//   ItemStatus,
+//   SearchOptions,
+// } from '@carbon/utilities';

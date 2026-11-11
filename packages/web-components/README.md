@@ -1,24 +1,14 @@
-# `@carbon/web-components`
+# @carbon/web-components
 
-> Web components for the Carbon Design System
+Web components for the Carbon Design System.
 
-## Getting started
-
-To install `@carbon/web-components` in your project, you will need to run the
-following command using [npm](https://www.npmjs.com/):
+## Installation
 
 ```bash
-npm install -S @carbon/web-components
+npm install @carbon/web-components
 ```
 
-If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
-instead:
-
-```bash
-yarn add @carbon/web-components
-```
-
-### Usage
+## Usage
 
 The `@carbon/web-components` package provides components for the Carbon Design
 System.
@@ -43,7 +33,7 @@ same manner as native HTML tags:
 </cds-dropdown>
 ```
 
-#### CDN
+### CDN
 
 CDN artifacts are also available and can be added directly to the page (starting
 at version `v1.16.0`):
@@ -54,7 +44,7 @@ at version `v1.16.0`):
   <head>
     <script
       type="module"
-      src="https://1.www.s81c.com/common/carbon/web-components/version/v2.24.0/dropdown.min.js"></script>
+      src="https://1.www.s81c.com/common/carbon/web-components/version/v2.65.0/dropdown.min.js"></script>
     <style type="text/css">
       <!-- hide custom element until it has been defined //-->
       cds-dropdown:not(:defined),
@@ -77,7 +67,7 @@ at version `v1.16.0`):
 </html>
 ```
 
-### Preparing for v3
+## Preparing for v3
 
 The next major release (v3) changes how components register. See the
 [v3 migration guide](../../docs/guides/cwc-v3-migration.md) to prepare.
@@ -102,27 +92,22 @@ registers its element, e.g. importing `button/button.js` instead of
 [`feat/web-components-v3`](https://github.com/carbon-design-system/carbon/tree/feat/web-components-v3)
 branch.
 
-### Other usage guides
+## Documentation
 
+For component documentation and usage guides, see:
+
+- [Storybook](https://web-components.carbondesignsystem.com/)
 - [Using components in a form](./docs/form.md)
 - [Using custom styles in components](./docs/styling.md)
 - [Migrating to v3](../../docs/guides/cwc-v3-migration.md)
 
-## 📖 API Documentation
+## Contributing
 
-If you're looking for `@carbon/web-components` API documentation, check out:
+See the [Contributing Guide](../../.github/CONTRIBUTING.md).
 
-- [Storybook](https://web-components.carbondesignsystem.com/)
+## License
 
-## 🙌 Contributing
-
-We're always looking for contributors to help us fix bugs, build new features,
-or help us improve the project documentation. If you're interested, definitely
-check out our [Contributing Guide](/.github/CONTRIBUTING.md)! 👀
-
-## 📝 License
-
-Licensed under the [Apache 2.0 License](/LICENSE).
+Licensed under the [Apache 2.0 License](../../LICENSE).
 
 ## <picture><source height="20" width="20" media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/ibm-telemetry/telemetry-js/main/docs/images/ibm-telemetry-dark.svg"><source height="20" width="20" media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/ibm-telemetry/telemetry-js/main/docs/images/ibm-telemetry-light.svg"><img height="20" width="20" alt="IBM Telemetry" src="https://raw.githubusercontent.com/ibm-telemetry/telemetry-js/main/docs/images/ibm-telemetry-light.svg"></picture> IBM Telemetry
 

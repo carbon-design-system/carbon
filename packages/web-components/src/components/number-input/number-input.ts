@@ -23,6 +23,7 @@ import styles from './number-input.scss?lit';
 import CDSTextInput, { INPUT_SIZE } from '../text-input/text-input';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { NumberFormatter, NumberParser } from '@carbon/utilities';
+import { isFeatureFlagEnabled } from '../feature-flags';
 
 export { NUMBER_INPUT_VALIDATION_STATUS };
 
@@ -383,7 +384,7 @@ class CDSNumberInput extends CDSTextInput {
    * The input box size.
    */
   @property({ reflect: true })
-  size = INPUT_SIZE.MEDIUM;
+  size?: INPUT_SIZE;
 
   /**
    * **Experimental**: Specify if the input should be of type text or number.
@@ -868,7 +869,8 @@ class CDSNumberInput extends CDSTextInput {
 
     const wrapperClasses = classMap({
       [`${prefix}--number`]: true,
-      [`${prefix}--number--${this.size}`]: this.size,
+      [`${prefix}--number--${this.size}`]: this.size !== undefined, // TODO V12 - remove this class
+      [`${prefix}--layout--size-${this.size}`]: this.size !== undefined,
       [`${prefix}--number--nosteppers`]: this.hideSteppers,
       [`${prefix}--number--readonly`]: this.readonly,
     });
@@ -892,6 +894,8 @@ class CDSNumberInput extends CDSTextInput {
 
     const inputValue = this._getInputValue();
 
+    const enableV12Release = isFeatureFlagEnabled('enable-v12-release', this);
+
     const incrementButton = html`
       <button
         class="${prefix}--number__control-btn up-icon"
@@ -904,7 +908,9 @@ class CDSNumberInput extends CDSTextInput {
         @click=${handleUserInitiatedStepUp}>
         ${iconLoader(Add16)}
       </button>
-      <div class="${prefix}--number__rule-divider"></div>
+      ${!enableV12Release
+        ? html`<div class="${prefix}--number__rule-divider"></div>`
+        : null}
     `;
 
     const decrementButton = html`
@@ -919,7 +925,9 @@ class CDSNumberInput extends CDSTextInput {
         @click=${handleUserInitiatedStepDown}>
         ${iconLoader(Subtract16)}
       </button>
-      <div class="${prefix}--number__rule-divider"></div>
+      ${!enableV12Release
+        ? html`<div class="${prefix}--number__rule-divider"></div>`
+        : null}
     `;
 
     const input = html`

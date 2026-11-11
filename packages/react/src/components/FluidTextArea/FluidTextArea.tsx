@@ -6,14 +6,15 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { type ComponentProps } from 'react';
 import classnames from 'classnames';
 import TextArea from '../TextArea';
 import { deprecate } from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm/FormContext';
 
-export interface FluidTextAreaProps {
+export interface FluidTextAreaProps
+  extends Pick<ComponentProps<typeof TextArea>, 'translateWithId'> {
   /**
    * Provide a custom className that is applied to the wrapper node
    */
@@ -228,6 +229,11 @@ FluidTextArea.propTypes = {
    * Specify the rows attribute for the `<textarea>`
    */
   rows: PropTypes.number,
+
+  /**
+   * Translates component strings using your i18n tool.
+   */
+  translateWithId: PropTypes.func,
 
   /**
    * Provide the current value of the `<textarea>`
