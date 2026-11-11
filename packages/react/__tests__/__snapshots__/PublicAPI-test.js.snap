@@ -929,6 +929,22 @@ Map {
     },
     "render": [Function],
   },
+  "Coachmark" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "Content": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "ContentBody": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "ContentHeader": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "render": [Function],
+  },
   "CodeSnippet" => {
     "propTypes": {
       "align": [Function],
@@ -7837,6 +7853,127 @@ Map {
     },
     "render": [Function],
   },
+  "PageHeader" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "BreadcrumbBar": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "BreadcrumbOverflow": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "BreadcrumbPageActions": {
+      "displayName": "PageHeaderBreadcrumbPageActions",
+    },
+    "Content": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "ContentPageActions": {
+      "displayName": "PageHeaderContentPageActions",
+    },
+    "ContentText": {
+      "displayName": "PageHeaderContentText",
+    },
+    "HeroImage": {
+      "displayName": "PageHeaderHeroImage",
+    },
+    "Root": {
+      "$$typeof": Symbol(react.forward_ref),
+      "BreadcrumbBar": {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      },
+      "BreadcrumbOverflow": {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      },
+      "BreadcrumbPageActions": [Function],
+      "Content": {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      },
+      "ContentPageActions": [Function],
+      "ContentText": [Function],
+      "HeroImage": [Function],
+      "Root": [Circular],
+      "ScrollButton": {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      },
+      "TabBar": {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      },
+      "TagOverflow": {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      },
+      "TitleBreadcrumb": {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      },
+      "render": [Function],
+    },
+    "ScrollButton": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "TabBar": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "TagOverflow": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "TitleBreadcrumb": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "render": [Function],
+  },
+  "PageHeaderBreadcrumbBar" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
+  "PageHeaderBreadcrumbOverflow" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
+  "PageHeaderBreadcrumbPageActions" => {
+    "displayName": "PageHeaderBreadcrumbPageActions",
+  },
+  "PageHeaderContent" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
+  "PageHeaderContentPageActions" => {
+    "displayName": "PageHeaderContentPageActions",
+  },
+  "PageHeaderContentText" => {
+    "displayName": "PageHeaderContentText",
+  },
+  "PageHeaderHeroImage" => {
+    "displayName": "PageHeaderHeroImage",
+  },
+  "PageHeaderScrollButton" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
+  "PageHeaderTabBar" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
+  "PageHeaderTagOverflow" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
+  "PageHeaderTitleBreadcrumb" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
   "Pagination" => {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": {
@@ -9605,6 +9742,7 @@ Map {
     },
     "render": [Function],
   },
+  "StackProvider" => {},
   "StaticNotification" => {},
   "StructuredListBody" => {
     "propTypes": {
@@ -10747,6 +10885,53 @@ Map {
         "type": "oneOf",
       },
     },
+  },
+  "Tearsheet" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "Body": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "Footer": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "Header": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "HeaderActionItem": {
+      "displayName": "TearsheetHeaderActionItem",
+    },
+    "HeaderActions": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "HeaderContent": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "Influencer": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "MainContent": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "NavigationBar": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "ScrollButton": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "SummaryContent": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "render": [Function],
   },
   "TextArea" => {
     "$$typeof": Symbol(react.forward_ref),
@@ -16250,6 +16435,7 @@ Map {
   "useLayer" => {},
   "usePrefersDarkScheme" => {},
   "usePrefix" => {},
+  "useStackContext" => {},
   "useTheme" => {},
   "validateNumberSeparators" => {},
   "withComposedModalPresence" => {},
