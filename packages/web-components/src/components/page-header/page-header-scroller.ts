@@ -11,7 +11,6 @@ import { html } from 'lit';
 import styles from './page-header.scss?lit';
 import { property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import Chevron20 from '@carbon/icons/es/chevron--up/20';
 import ChevronDown20 from '@carbon/icons/es/chevron--down/20';
 import { iconLoader } from '../../globals/internal/icon-loader';
@@ -26,8 +25,9 @@ import { scrollableAncestorInner } from './utils';
  * Page header Scroller button
  * @element cds-page-header-scroller
  */
-@customElement(`${prefix}-page-header-scroller`)
 export class PageHeaderScroller extends CDSButton {
+  static is = `${prefix}-page-header-scroller`;
+
   /**
    * Specify how the trigger should align with the tooltip
    */

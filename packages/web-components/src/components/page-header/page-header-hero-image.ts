@@ -11,7 +11,6 @@ import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import styles from './page-header.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Page header Hero Image.
@@ -20,8 +19,9 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  *   a descriptive `alt` attribute for informative images, or `alt=""` for
  *   decorative images, to meet WCAG 2.2 SC 1.1.1 (Non-text Content).
  */
-@customElement(`${prefix}-page-header-hero-image`)
 class CDSPageHeaderHeroImage extends LitElement {
+  static is = `${prefix}-page-header-hero-image`;
+
   /**
    * Specify how the image should fit within the container.
    * - 'cover': Image fills container, may crop edges (default for hero images)

@@ -10,7 +10,6 @@ import { html, LitElement } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import HostListenerMixin from '../../globals/mixins/host-listener';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { classMap } from 'lit-html/directives/class-map.js';
 import styles from './tearsheet.scss?lit';
 import type { ActionButton, ButtonSize } from '../action-set/index.js';
@@ -37,8 +36,9 @@ interface CDSTearsheetHost extends HTMLElement {
  * @element cds-tearsheet-footer
  * @slot - Default slot for custom footer content (rendered before actions)
  */
-@customElement(`${prefix}-tearsheet-footer`)
 class CDSTearsheetFooter extends HostListenerMixin(LitElement) {
+  static is = `${prefix}-tearsheet-footer`;
+
   @property({ reflect: true })
   slot = 'footer';
 

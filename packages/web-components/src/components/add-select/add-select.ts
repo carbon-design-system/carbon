@@ -9,7 +9,6 @@
 
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
 import styles from './add-select.scss?lit';
 
@@ -20,8 +19,9 @@ const blockClass = `${prefix}--add-select__next`;
  * @element cds-add-select
  * @slot default - The main content area containing cds-add-select-body
  */
-@customElement(`${prefix}-add-select`)
 class CDSAddSelect extends LitElement {
+  static is = `${prefix}-add-select`;
+
   /**
    * Whether this is a multi-select (checkboxes) or single-select (radio buttons)
    */

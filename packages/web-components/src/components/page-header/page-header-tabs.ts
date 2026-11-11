@@ -13,7 +13,6 @@ import { property, state } from 'lit/decorators.js';
 import { consume } from '@lit/context';
 import { prefix } from '../../globals/settings';
 import styles from './page-header.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import CDSPageHeader from './page-header';
 import { pageHeaderContext } from './context';
 
@@ -21,8 +20,9 @@ import { pageHeaderContext } from './context';
  * Page header Tabs Bar.
  * @element cds-page-header-tabs
  */
-@customElement(`${prefix}-page-header-tabs`)
 class CDSPageHeaderTabs extends LitElement {
+  static is = `${prefix}-page-header-tabs`;
+
   /**
    * Disable sticky positioning for the tab bar
    */

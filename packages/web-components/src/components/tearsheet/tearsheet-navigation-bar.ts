@@ -11,7 +11,6 @@ import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import '../modal/index';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 import styles from './tearsheet-navigation-bar.scss?lit';
 
@@ -19,8 +18,9 @@ import styles from './tearsheet-navigation-bar.scss?lit';
  * tearsheet navigation bar at the bottom of the header
  * @element cds-tearsheet-navigation-bar
  */
-@customElement(`${prefix}-tearsheet-navigation-bar`)
 class CDSTearsheetNavigationBar extends HostListenerMixin(LitElement) {
+  static is = `${prefix}-tearsheet-navigation-bar`;
+
   @property({ reflect: true })
   slot = 'navigation-bar';
 

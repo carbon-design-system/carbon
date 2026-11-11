@@ -13,7 +13,6 @@ import { prefix } from '../../globals/settings';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import '../modal/index';
 import '../icon-button/index';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import CDSAILabel from '../ai-label/ai-label';
 import '../truncated-text';
 import styles from './tearsheet-header-content.scss?lit';
@@ -52,8 +51,9 @@ interface CDSTearsheetHost extends HTMLElement {
  * @slot description - Custom description content below the title
  * @slot decorator - AI label or other decorative elements
  */
-@customElement(`${prefix}-tearsheet-header-content`)
 class CDSTearsheetHeaderContent extends HostListenerMixin(LitElement) {
+  static is = `${prefix}-tearsheet-header-content`;
+
   @property({ reflect: true })
   slot = 'header-content';
 

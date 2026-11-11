@@ -10,7 +10,6 @@
 import { LitElement, html, nothing } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import '../checkbox/index';
 import '../radio-button/index';
 import '../skeleton-text/index';
@@ -35,8 +34,9 @@ const blockClass = `${prefix}--add-select__next-row`;
  * @fires cds-add-select-row-navigate - Fired when navigating to children
  * @fires cds-add-select-row-item-panel-click - Fired when the item panel icon button is clicked
  */
-@customElement(`${prefix}-add-select-row`)
 class CDSAddSelectRow extends LitElement {
+  static is = `${prefix}-add-select-row`;
+
   /**
    * Whether this row renders a checkbox (multi) or radio button (single).
    * Set by the parent cds-add-select-column via the _column-multi attribute.

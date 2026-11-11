@@ -10,7 +10,6 @@ import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import '../side-panel/index';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 import styles from './tearsheet.scss?lit';
 import { consume } from '@lit/context';
@@ -29,8 +28,9 @@ import { prefix } from '../../globals/settings.js';
  * @slot - Content for the influencer panel
  * @fires cds-tearsheet-influencer-closed - Fired when the influencer panel is closed (mobile only)
  */
-@customElement(`${prefix}-tearsheet-influencer`)
 class CDSTearsheetInfluencer extends HostListenerMixin(LitElement) {
+  static is = `${prefix}-tearsheet-influencer`;
+
   @property({ reflect: true })
   slot = 'influencer';
 

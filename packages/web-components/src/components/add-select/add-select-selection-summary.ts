@@ -9,7 +9,6 @@
 
 import { LitElement, html, nothing } from 'lit';
 import { property } from 'lit/decorators.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import '../tag/index';
 import '../icon-button/index';
 import { iconLoader } from '../../globals/internal/icon-loader';
@@ -28,8 +27,9 @@ const blockClass = `${prefix}--add-select__next`;
  * @slot empty-state - Shown when selectedItemCount is 0 or not set
  * @fires cds-add-select-selection-summary-edit - Fired when edit icon is clicked
  */
-@customElement(`${prefix}-add-select-selection-summary`)
 class CDSAddSelectSelectionSummary extends LitElement {
+  static is = `${prefix}-add-select-selection-summary`;
+
   /**
    * Panel title
    */
