@@ -226,18 +226,20 @@ const TextInput = forwardRef<unknown, TextInputProps>(
     const labelRef = useRef<HTMLLabelElement>(null);
     const mergedRef = useMergedRefs([ref, inputRef]);
 
-    function getInitialTextCount(): number {
-      const targetValue =
-        defaultValue || value || inputRef.current?.value || '';
-      return targetValue.toString().length;
-    }
-
-    const [textCount, setTextCount] = useState(getInitialTextCount());
+    const isControlled = value != null;
+    const [uncontrolledTextCount, setTextCount] = useState(
+      () => (defaultValue || '').toString().length
+    );
+    // Keep controlled counts derived so rapid input doesn't queue extra state updates.
+    const textCount = value?.toString().length ?? uncontrolledTextCount;
 
     useEffect(() => {
-      setTextCount(getInitialTextCount());
-      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
-    }, [value, defaultValue, enableCounter]);
+      if (!isControlled) {
+        setTextCount(
+          (defaultValue || inputRef.current?.value || '').toString().length
+        );
+      }
+    }, [isControlled, defaultValue, enableCounter]);
 
     const normalizedProps = useNormalizedInputProps({
       id,
@@ -260,7 +262,9 @@ const TextInput = forwardRef<unknown, TextInputProps>(
       id,
       onChange: (evt) => {
         if (!normalizedProps.disabled) {
-          setTextCount(evt.target.value?.length);
+          if (!isControlled) {
+            setTextCount(evt.target.value?.length);
+          }
           onChange(evt);
         }
       },

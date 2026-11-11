@@ -373,6 +373,67 @@ describe('TextArea', () => {
     });
 
     describe('behaves as expected - Component API', () => {
+      it.each([
+        [false, 'character'],
+        [true, 'character'],
+        [false, 'word'],
+        [true, 'word'],
+      ])(
+        'should process rapid controlled input with enableCounter=%s and counterMode=%s',
+        async (enableCounter, counterMode) => {
+          const onChange = jest.fn();
+          const onError = jest.fn((event) => event.preventDefault());
+          const previousActEnvironment = globalThis.IS_REACT_ACT_ENVIRONMENT;
+          function ControlledTextArea() {
+            const [value, setValue] = React.useState('');
+            return (
+              <TextArea
+                id="textarea-1"
+                labelText="TextArea label"
+                value={value}
+                enableCounter={enableCounter}
+                counterMode={counterMode}
+                maxCount={200}
+                onChange={(event) => {
+                  onChange(event);
+                  setValue(event.target.value);
+                }}
+              />
+            );
+          }
+
+          const { unmount } = render(<ControlledTextArea />);
+          const textarea = screen.getByRole('textbox');
+          const setValue = Object.getOwnPropertyDescriptor(
+            HTMLTextAreaElement.prototype,
+            'value'
+          ).set;
+          const character = counterMode === 'word' ? 'word ' : 'x';
+          window.addEventListener('error', onError);
+          // Preserve the microtask burst instead of flushing each event with act.
+          globalThis.IS_REACT_ACT_ENVIRONMENT = false;
+          try {
+            for (let count = 1; count <= 150; count++) {
+              setValue.call(textarea, character.repeat(count));
+              textarea.dispatchEvent(new Event('input', { bubbles: true }));
+              await Promise.resolve();
+            }
+            await new Promise((resolve) => setTimeout(resolve, 50));
+
+            expect(onError).not.toHaveBeenCalled();
+            expect(onChange).toHaveBeenCalledTimes(150);
+            expect(textarea).toHaveValue(character.repeat(150));
+            if (enableCounter) {
+              expect(screen.getByText('150/200')).toBeInTheDocument();
+            }
+          } finally {
+            unmount();
+            window.removeEventListener('error', onError);
+            globalThis.IS_REACT_ACT_ENVIRONMENT = previousActEnvironment;
+          }
+        }
+      );
+
       it('should respect onChange prop', async () => {
         const onChange = jest.fn();
         render(
@@ -490,6 +551,53 @@ describe('TextArea', () => {
   });
 
   describe('word counter behaves as expected', () => {
+    it('should preserve the controlled value when pasted text exceeds the word limit', () => {
+      const onChange = jest.fn();
+      render(
+        <TextArea
+          id="input-1"
+          labelText="TextArea label"
+          value="one"
+          onChange={onChange}
+          enableCounter
+          counterMode="word"
+          maxCount={3}
+        />
+      );
+      const textarea = screen.getByRole('textbox');
+      const paste = createEvent.paste(textarea, {
+        clipboardData: { getData: () => 'two three four' },
+      });
+
+      fireEvent(textarea, paste);
+
+      expect(paste.defaultPrevented).toBe(true);
+      expect(textarea).toHaveValue('one');
+      expect(screen.getByText('1/3')).toBeInTheDocument();
+      expect(onChange).not.toHaveBeenCalled();
+    });
+
+    it('should count programmatic controlled values when switching counter modes', () => {
+      const props = {
+        id: 'input-1',
+        labelText: 'TextArea label',
+        enableCounter: true,
+        maxCount: 20,
+        onChange: jest.fn(),
+      };
+      const { rerender } = render(
+        <TextArea {...props} value="one two" counterMode="word" />
+      );
+      expect(screen.getByText('2/20')).toBeInTheDocument();
+
+      rerender(<TextArea {...props} value="one two" counterMode="character" />);
+      expect(screen.getByText('7/20')).toBeInTheDocument();
+
+      rerender(<TextArea {...props} value="" counterMode="word" />);
+      expect(screen.getByText('0/20')).toBeInTheDocument();
+      expect(screen.getByRole('textbox')).toHaveValue('');
+    });
+
     it('should correctly increase word count', async () => {
       render(
         <TextArea
@@ -709,6 +817,23 @@ describe('TextArea', () => {
 
     afterEach(() => {
       jest.useRealTimers();
+    });
+
+    it('should update announcements for controlled values without a visible counter', () => {
+      const props = {
+        id: 'textarea-1',
+        labelText: 'TextArea label',
+        maxCount: 10,
+        onChange: jest.fn(),
+      };
+      const { rerender } = render(<TextArea {...props} value="" />);
+
+      rerender(<TextArea {...props} value="abcdef" />);
+      act(() => {
+        jest.advanceTimersByTime(1000);
+      });
+
+      expect(screen.getByRole('alert')).toHaveTextContent('4 characters left.');
     });
 
     it.each([

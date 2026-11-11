@@ -14,6 +14,7 @@ import { IconButton } from '../IconButton';
 import mdx from './TextInput.mdx';
 
 import { default as TextInput, TextInputSkeleton } from '../TextInput';
+import TextArea from '../TextArea'; //need remove this later
 
 const getTextInputStoryArgs = ({
   defaultWidth,
@@ -362,3 +363,84 @@ TestInvalidTextNoOverlap.args = { ...defaultArgs };
  * - Still be a tested variant
  */
 TestInvalidTextNoOverlap.tags = ['!dev', '!autodocs'];
+
+// Temporary example for review. Remove before merging.
+function RapidInputExample({ kind, enableCounter }) {
+  const [value, setValue] = React.useState('');
+  const [result, setResult] = React.useState('');
+  const inputRef = React.useRef(null);
+  const changes = React.useRef(0);
+  const label = kind === 'native' ? 'Native input' : kind;
+  const Field = kind === 'TextInput' ? TextInput : TextArea;
+
+  function handleChange(event) {
+    changes.current++;
+    setValue(event.target.value);
+  }
+
+  async function handleTest() {
+    const input = inputRef.current;
+    const prototype =
+      kind === 'TextArea'
+        ? HTMLTextAreaElement.prototype
+        : HTMLInputElement.prototype;
+    const setInputValue = Object.getOwnPropertyDescriptor(
+      prototype,
+      'value'
+    ).set;
+    changes.current = 0;
+    setResult('Running...');
+    input.focus();
+
+    for (let count = 1; count <= 150; count++) {
+      setInputValue.call(input, 'x'.repeat(count));
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+      await Promise.resolve();
+    }
+    await new Promise((resolve) => setTimeout(resolve, 50));
+    setResult(`Last run: ${changes.current}/150 onChange calls`);
+  }
+
+  return (
+    <div style={{ width: 300 }}>
+      {kind === 'native' ? (
+        <label>
+          {label}
+          <input ref={inputRef} value={value} onChange={handleChange} />
+        </label>
+      ) : (
+        <Field
+          id={`rapid-input-${kind}`}
+          labelText={label}
+          ref={inputRef}
+          value={value}
+          onChange={handleChange}
+          enableCounter={enableCounter}
+          maxCount={200}
+        />
+      )}
+      <p>Current value: {value.length} characters</p>
+      <Button
+        kind="secondary"
+        disabled={result === 'Running...'}
+        onClick={handleTest}>
+        Send 150 input events
+      </Button>
+      <output aria-label={`${label} result`}>{result}</output>
+    </div>
+  );
+}
+
+export const TestRapidControlledInput = ({ enableCounter }) => (
+  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 32 }}>
+    {['TextInput', 'TextArea', 'native'].map((kind) => (
+      <RapidInputExample key={kind} kind={kind} enableCounter={enableCounter} />
+    ))}
+  </div>
+);
+
+TestRapidControlledInput.args = { enableCounter: false };
+TestRapidControlledInput.parameters = {
+  controls: { include: ['enableCounter'] },
+};
+TestRapidControlledInput.tags = ['!autodocs'];
