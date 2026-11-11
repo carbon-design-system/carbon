@@ -123,11 +123,15 @@ describe('cds-tree-view label truncation', () => {
           } else {
             await sendKeys({ press: 'ArrowDown' });
           }
-          await waitUntil(() => getTooltip(node)?.open);
+          expect(getDeepActiveElement(), `Focus on node ${index}`).to.equal(
+            trigger
+          );
+          await waitUntil(
+            () => getTooltip(node)?.open,
+            `Tooltip did not open: size=${size}, links=${withLinks}, node=${index}`
+          );
           expect(getTooltip(node).autoalign).to.be.true;
-          expect(
-            withLinks ? node.shadowRoot.activeElement : document.activeElement
-          ).to.equal(trigger);
+          expect(getDeepActiveElement()).to.equal(trigger);
           await sendKeys({ press: 'Escape' });
           expect(!!getTooltip(node)?.open).to.be.false;
         }
