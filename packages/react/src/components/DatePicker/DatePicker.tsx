@@ -855,7 +855,9 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
         closeOnSelect &&
         datePickerType == 'single'
       ) {
-        calendar.calendarContainer.classList.remove('open');
+        // Use `close()` rather than only removing the class so flatpickr's
+        // `isOpen` state is reset; otherwise a later click won't reopen it.
+        calendar.close();
       }
     }
 
