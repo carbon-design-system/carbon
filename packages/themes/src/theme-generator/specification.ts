@@ -50,7 +50,7 @@ export type TokenRule =
   | {
       type: 'contrast';
       status: RuleStatus;
-      relativeTo: 'surface';
+      relativeTo: 'surface' | 'field';
       reason?: string;
     }
   | { type: 'alias'; status: RuleStatus; token: string; reason?: string };
@@ -89,6 +89,35 @@ export type InteractiveStateModeSpec = Record<
   InteractiveStateSpec
 >;
 
+/**
+ * Colour of `border-interactive` for one mode.
+ * - `'brand'`  — use the brand colour (light theme, per the design reference).
+ * - an object  — an explicit L/C pair; hue is taken from `brand.hue`.
+ */
+export type BorderInteractiveSpec =
+  | 'brand'
+  | { lightness: number; chroma: number };
+
+/** Specification for a single support/status color. */
+export interface SupportColorSpec {
+  lightness: number;
+  chroma: number;
+  hue: number;
+  fallback: string;
+}
+
+/** Complete set of support colors for one theme mode. */
+export interface SupportSpecification {
+  error: SupportColorSpec;
+  success: SupportColorSpec;
+  warning: SupportColorSpec;
+  info: SupportColorSpec;
+  errorInverse: SupportColorSpec;
+  successInverse: SupportColorSpec;
+  warningInverse: SupportColorSpec;
+  infoInverse: SupportColorSpec;
+}
+
 /** Numeric parameters that vary between light and dark modes. */
 export interface ThemeModeSpecification {
   surfaceLightness: number;
@@ -97,10 +126,24 @@ export interface ThemeModeSpecification {
   accentDelta: number;
   subtleBorderDelta: number;
   skeletonDelta: number;
+  /**
+   * Minimum lightness for `layer-accent-*` tokens. Prevents nested accents
+   * from collapsing to pure black on dark surfaces (design chose a floor over
+   * black). Use 0 for no floor.
+   */
+  accentFloor: number;
+  /** Minimum lightness for `skeleton-background-*` tokens. Use 0 for no floor. */
+  skeletonFloor: number;
+  /** Lightness of `border-inverse` (neutral hue/chroma). */
+  borderInverseLightness: number;
+  /** Colour of `border-interactive`. */
+  borderInteractive: BorderInteractiveSpec;
   textPrimaryLightness: number;
   textSecondaryLightness: number;
   iconPrimaryLightness: number;
   iconSecondaryLightness: number;
+  /** Support / status alert colors for this mode. */
+  support: SupportSpecification;
   /**
    * One spec entry per interactive state. The generator iterates this record —
    * adding a new state here automatically produces a new token with no other
@@ -121,6 +164,13 @@ export interface ThemeSpecification {
     fallback: string;
   };
   baseLightness: number;
+  /** Colour of `text-on-color` (rendered on the brand colour). */
+  textOnColor: {
+    lightness: number;
+    chroma: number;
+    hue: number;
+    fallback: string;
+  };
   contrastTargets: {
     helperText: number;
     strongBorder: number;
@@ -128,6 +178,14 @@ export interface ThemeSpecification {
   light: ThemeModeSpecification;
   dark: ThemeModeSpecification;
 }
+
+/**
+ * Minimum WCAG contrast for `text-placeholder-*` against every `field-*`
+ * background. Deliberately NOT part of `contrastTargets`: it is an
+ * accessibility floor that a configured generation target cannot lower, in
+ * either the solver (`max(configured, floor)`) or `validateTheme`.
+ */
+export const PLACEHOLDER_TEXT_MIN_CONTRAST = 4.5;
 
 /**
  * Design-rule metadata for every non-interactive generated token.
@@ -146,17 +204,18 @@ export const tokenRules = {
   },
   accent: {
     type: 'lightness-delta',
-    status: 'unresolved',
+    status: 'experimental',
     relativeTo: 'surface',
     reason:
-      'Dark surface-dark is shown as black instead of the calculated value.',
+      'Design chose a lightness floor over black for dark accents (Slack, option A). The exact floor value (0.08) is an engineering proposal awaiting confirmation.',
   },
   textPrimary: { type: 'fixed', status: 'confirmed' },
   textSecondary: { type: 'fixed', status: 'confirmed' },
   iconPrimary: {
     type: 'fixed',
-    status: 'unresolved',
-    reason: 'The dark reference is shown as both 0.92 and 0.94.',
+    status: 'confirmed',
+    reason:
+      'Design calc cell says 0.92 but the value and hex are 0.94; 0.94 is used (matches text-primary).',
   },
   iconSecondary: { type: 'fixed', status: 'confirmed' },
   helperText: {
@@ -165,27 +224,30 @@ export const tokenRules = {
     relativeTo: 'surface',
   },
   placeholderText: {
-    type: 'alias',
-    status: 'unresolved',
-    token: 'helperText',
-    reason: 'Design is considering combining helper and placeholder tokens.',
+    type: 'contrast',
+    status: 'confirmed',
+    relativeTo: 'field',
+    reason:
+      'Placeholder text is rendered inside fields, so one shared value is solved against field-01, field-02 and field-03 (at least 4.5:1). Context-aware separation between helper and placeholder text confirmed with Design.',
   },
   helperIcon: {
     type: 'alias',
-    status: 'unresolved',
+    status: 'confirmed',
     token: 'helperText',
-    reason: 'The final icon contrast target and token name need confirmation.',
+    reason: 'Icon helper alias of text-helper-01 confirmed with Design.',
   },
   placeholderIcon: {
     type: 'alias',
-    status: 'unresolved',
-    token: 'helperText',
-    reason: 'The final icon contrast target and token name need confirmation.',
+    status: 'confirmed',
+    token: 'placeholderText',
+    reason: 'Icon placeholder alias of text-placeholder confirmed with Design.',
   },
   strongBorder: {
     type: 'contrast',
     status: 'confirmed',
     relativeTo: 'surface',
+    reason:
+      'Solved and validated at >= 3:1 against surfaces only. Contrast against field backgrounds is not enforced (light theme: about 2.3 to 2.8:1 on fields); extending it needs a Design decision.',
   },
   subtleBorder: {
     type: 'lightness-delta',
@@ -194,10 +256,86 @@ export const tokenRules = {
   },
   skeleton: {
     type: 'lightness-delta',
-    status: 'experimental',
+    status: 'confirmed',
     relativeTo: 'surface',
+  },
+  textOnColor: {
+    type: 'fixed',
+    status: 'confirmed',
     reason:
-      'The proposed values approximate current behavior and need design review.',
+      'Pure white (#ffffff, L=1.0) is the initial value: 5.00:1 WCAG AA contrast against brand background (#0f62fe) in light and dark themes (Design confirmed).',
+  },
+  borderInverse: {
+    type: 'fixed',
+    status: 'experimental',
+    reason:
+      'PROVISIONAL(Q2): Design: "at least 4.5:1 from background, based on text primary for now". Literal L 0.28 (light) / 0.92 (dark); validated >= 4.5:1 on every surface.',
+  },
+  borderInteractive: {
+    type: 'fixed',
+    status: 'confirmed',
+    reason:
+      'Design: light = brand; dark = oklch(0.647 0.189 262) (#4589ff), validated >= 3:1 on every surface.',
+  },
+  textDisabled: {
+    type: 'fixed',
+    status: 'confirmed',
+    reason:
+      'Design: disabled = parent colour with chroma 0.004 at 25% opacity. Parent is text-primary.',
+  },
+  iconDisabled: {
+    type: 'fixed',
+    status: 'confirmed',
+    reason:
+      'Design: disabled = parent colour with chroma 0.004 at 25% opacity. Parent is icon-primary.',
+  },
+  supportError: {
+    type: 'fixed',
+    status: 'confirmed',
+    reason:
+      'Error status fill, converted from canonical Carbon v11 palette anchor (Red 60 / Red 50).',
+  },
+  supportSuccess: {
+    type: 'fixed',
+    status: 'confirmed',
+    reason:
+      'Success status fill, converted from canonical Carbon v11 palette anchor (Green 50 / Green 40).',
+  },
+  supportWarning: {
+    type: 'fixed',
+    status: 'confirmed',
+    reason:
+      'Warning status fill, converted from canonical Carbon v11 palette anchor (Yellow 30).',
+  },
+  supportInfo: {
+    type: 'fixed',
+    status: 'confirmed',
+    reason:
+      'Info status fill, converted from canonical Carbon v11 palette anchor (Blue 70 / Blue 50).',
+  },
+  supportErrorInverse: {
+    type: 'fixed',
+    status: 'confirmed',
+    reason:
+      'Error inverse fill, converted from canonical Carbon v11 palette anchor (Red 50 / Red 60).',
+  },
+  supportSuccessInverse: {
+    type: 'fixed',
+    status: 'confirmed',
+    reason:
+      'Success inverse fill, converted from canonical Carbon v11 palette anchor (Green 40 / Green 50).',
+  },
+  supportWarningInverse: {
+    type: 'fixed',
+    status: 'confirmed',
+    reason:
+      'Warning inverse fill, converted from canonical Carbon v11 palette anchor (Yellow 30).',
+  },
+  supportInfoInverse: {
+    type: 'fixed',
+    status: 'confirmed',
+    reason:
+      'Info inverse fill, converted from canonical Carbon v11 palette anchor (Blue 50 / Blue 70).',
   },
 } as const satisfies Record<string, TokenRule>;
 
@@ -209,6 +347,10 @@ export const tokenRules = {
  * Partial `interactive` overrides deep-merge, preserving unspecified states.
  */
 export const defaultSpecification: ThemeSpecification = {
+  /**
+   * PROVISIONAL(Q5): Design states neutral hue is "tied to brand hue" while also
+   * fixing it at 262. Currently hardcoded to 262 with no dynamic linking to brand hue.
+   */
   neutral: {
     hue: 262,
     chroma: 0.004,
@@ -220,6 +362,12 @@ export const defaultSpecification: ThemeSpecification = {
     fallback: '#0f62fe',
   },
   baseLightness: 0.16,
+  textOnColor: {
+    lightness: 1,
+    chroma: 0,
+    hue: 0,
+    fallback: '#ffffff',
+  },
   contrastTargets: {
     helperText: 4.5,
     strongBorder: 3,
@@ -230,11 +378,66 @@ export const defaultSpecification: ThemeSpecification = {
     fieldDelta: -0.03,
     accentDelta: -0.06,
     subtleBorderDelta: -0.09,
+    /** Light skeleton delta (-0.04 yields 0.93 / 0.96 / 0.90; confirmed 0.90 for surface-dark). */
     skeletonDelta: -0.04,
+    accentFloor: 0,
+    skeletonFloor: 0,
+    borderInverseLightness: 0.28,
+    borderInteractive: 'brand',
     textPrimaryLightness: 0.24,
     textSecondaryLightness: 0.48,
     iconPrimaryLightness: 0.24,
     iconSecondaryLightness: 0.48,
+    support: {
+      error: {
+        lightness: 0.5692,
+        chroma: 0.2174,
+        hue: 25.93,
+        fallback: '#da1e28',
+      },
+      success: {
+        lightness: 0.6234,
+        chroma: 0.1661,
+        hue: 148.09,
+        fallback: '#24a148',
+      },
+      warning: {
+        lightness: 0.8321,
+        chroma: 0.1655,
+        hue: 90.44,
+        fallback: '#f1c21b',
+      },
+      info: {
+        lightness: 0.454,
+        chroma: 0.221,
+        hue: 262.63,
+        fallback: '#0043ce',
+      },
+      errorInverse: {
+        lightness: 0.6662,
+        chroma: 0.2088,
+        hue: 22.13,
+        fallback: '#fa4d56',
+      },
+      successInverse: {
+        lightness: 0.712,
+        chroma: 0.1677,
+        hue: 149.29,
+        fallback: '#42be65',
+      },
+      warningInverse: {
+        lightness: 0.8321,
+        chroma: 0.1655,
+        hue: 90.44,
+        fallback: '#f1c21b',
+      },
+      infoInverse: {
+        lightness: 0.647,
+        chroma: 0.1888,
+        hue: 260.58,
+        fallback: '#4589ff',
+      },
+    },
     // Light interactive states darken the surface (negative delta).
     interactive: {
       hover: { type: 'lightness-delta', status: 'experimental', delta: -0.03 },
@@ -259,10 +462,64 @@ export const defaultSpecification: ThemeSpecification = {
     accentDelta: -0.08,
     subtleBorderDelta: 0.12,
     skeletonDelta: -0.06,
+    accentFloor: 0.08,
+    skeletonFloor: 0.14,
+    borderInverseLightness: 0.92,
+    borderInteractive: { lightness: 0.647, chroma: 0.189 },
     textPrimaryLightness: 0.94,
     textSecondaryLightness: 0.72,
     iconPrimaryLightness: 0.94,
     iconSecondaryLightness: 0.72,
+    support: {
+      error: {
+        lightness: 0.6662,
+        chroma: 0.2088,
+        hue: 22.13,
+        fallback: '#fa4d56',
+      },
+      success: {
+        lightness: 0.712,
+        chroma: 0.1677,
+        hue: 149.29,
+        fallback: '#42be65',
+      },
+      warning: {
+        lightness: 0.8321,
+        chroma: 0.1655,
+        hue: 90.44,
+        fallback: '#f1c21b',
+      },
+      info: {
+        lightness: 0.647,
+        chroma: 0.1888,
+        hue: 260.58,
+        fallback: '#4589ff',
+      },
+      errorInverse: {
+        lightness: 0.5692,
+        chroma: 0.2174,
+        hue: 25.93,
+        fallback: '#da1e28',
+      },
+      successInverse: {
+        lightness: 0.6234,
+        chroma: 0.1661,
+        hue: 148.09,
+        fallback: '#24a148',
+      },
+      warningInverse: {
+        lightness: 0.8321,
+        chroma: 0.1655,
+        hue: 90.44,
+        fallback: '#f1c21b',
+      },
+      infoInverse: {
+        lightness: 0.454,
+        chroma: 0.221,
+        hue: 262.63,
+        fallback: '#0043ce',
+      },
+    },
     // Dark interactive states lighten the surface (positive delta).
     interactive: {
       hover: { type: 'lightness-delta', status: 'experimental', delta: 0.04 },
@@ -283,82 +540,3 @@ export const defaultSpecification: ThemeSpecification = {
     },
   },
 };
-
-/**
- * Design-reference OKLCH lightness values used for visual regression and
- * documentation. These reflect the expected output of `generateTheme()` for
- * the default specification — update this object whenever `defaultSpecification`
- * numeric values change.
- *
- * Interactive values are relative to the default surface for each mode
- * (surface context = 'surface'). Expressions are written as arithmetic so the
- * relationship to the spec is visible at a glance.
- */
-export const designReferenceLightness = {
-  light: {
-    brand: 0.5565,
-    base: 0.16,
-    surface: { surface: 0.97, 'surface-light': 1, 'surface-dark': 0.94 },
-    field: { surface: 0.94, 'surface-light': 0.97, 'surface-dark': 0.91 },
-    accent: { surface: 0.91, 'surface-light': 0.94, 'surface-dark': 0.88 },
-    textPrimary: 0.24,
-    textSecondary: 0.48,
-    iconPrimary: 0.24,
-    iconSecondary: 0.48,
-    helperText: {
-      surface: 0.5465,
-      'surface-light': 0.567,
-      'surface-dark': 0.5255,
-    },
-    strongBorder: {
-      surface: 0.647,
-      'surface-light': 0.669,
-      'surface-dark': 0.624,
-    },
-    subtleBorder: {
-      surface: 0.88,
-      'surface-light': 0.91,
-      'surface-dark': 0.85,
-    },
-    skeleton: { surface: 0.93, 'surface-light': 0.96, 'surface-dark': 0.9 },
-    interactive: {
-      hover: 0.97 - 0.03, // surfaceLightness + hoverDelta
-      selected: 0.97 - 0.06, // surfaceLightness + selectedDelta
-      active: 0.97 - 0.09, // surfaceLightness + activeDelta
-      disabled: { chroma: 0.004, alpha: 0.25 }, // opacity — no lightness shift
-    },
-  },
-  dark: {
-    brand: 0.5565,
-    base: 0.16,
-    surface: { surface: 0.2, 'surface-light': 0.24, 'surface-dark': 0.16 },
-    field: { surface: 0.16, 'surface-light': 0.2, 'surface-dark': 0.12 },
-    accent: { surface: 0.12, 'surface-light': 0.16, 'surface-dark': 0 },
-    textPrimary: 0.94,
-    textSecondary: 0.72,
-    iconPrimary: 0.94,
-    iconSecondary: 0.72,
-    helperText: {
-      surface: 0.596,
-      'surface-light': 0.62,
-      'surface-dark': 0.5781,
-    },
-    strongBorder: {
-      surface: 0.5,
-      'surface-light': 0.52,
-      'surface-dark': 0.483,
-    },
-    subtleBorder: {
-      surface: 0.32,
-      'surface-light': 0.36,
-      'surface-dark': 0.28,
-    },
-    skeleton: { surface: 0.14, 'surface-light': 0.18, 'surface-dark': 0 },
-    interactive: {
-      hover: 0.2 + 0.04, // surfaceLightness + hoverDelta
-      selected: 0.2 + 0.08, // surfaceLightness + selectedDelta
-      active: 0.2 + 0.12, // surfaceLightness + activeDelta
-      disabled: { chroma: 0.004, alpha: 0.25 }, // opacity — no lightness shift
-    },
-  },
-} as const;

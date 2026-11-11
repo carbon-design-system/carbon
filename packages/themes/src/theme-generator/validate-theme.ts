@@ -5,11 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { mapToSrgbGamut, oklchToHex } from './color';
+import { getContrastRatio, getHexContrastRatio } from './contrast';
 import type {
   GeneratedOklchTheme,
   GeneratedColorToken,
 } from './generate-theme';
 import {
+  PLACEHOLDER_TEXT_MIN_CONTRAST,
   surfaceContexts,
   type InteractiveState,
   type InteractiveStateSpec,
@@ -32,6 +35,18 @@ export interface ThemeValidationResult {
 }
 
 const contexts = surfaceContexts;
+
+/** Maximum per-channel (0–255) distance allowed between a brand `fallback` hex and its OKLCH value. */
+const BRAND_FALLBACK_CHANNEL_TOLERANCE = 3;
+
+/** WCAG AA contrast for normal-size text; `text-on-color` must meet it on the brand color. */
+const TEXT_ON_COLOR_TARGET = 4.5;
+
+/** Design: `border-inverse` is "at least 4.5:1 contrast from background". */
+const BORDER_INVERSE_TARGET = 4.5;
+
+/** `border-interactive` is a UI-component boundary, so WCAG 1.4.11 (3:1) applies. */
+const BORDER_INTERACTIVE_TARGET = 3;
 
 /**
  * The contextual token groups from `GeneratedOklchTheme` that are keyed by
@@ -60,6 +75,12 @@ export function validateTheme(
     surfaces: theme.surfaces,
     fields: theme.fields,
     accents: theme.accents,
+    layerHover: theme.layerHover,
+    layerActive: theme.layerActive,
+    layerSelected: theme.layerSelected,
+    fieldHover: theme.fieldHover,
+    accentHover: theme.accentHover,
+    accentActive: theme.accentActive,
     helperText: theme.helperText,
     placeholderText: theme.placeholderText,
     helperIcons: theme.helperIcons,
@@ -73,6 +94,12 @@ export function validateTheme(
     surfaces: 'surface',
     fields: 'field',
     accents: 'accent',
+    layerHover: 'layer-hover',
+    layerActive: 'layer-active',
+    layerSelected: 'layer-selected',
+    fieldHover: 'field-hover',
+    accentHover: 'layer-accent-hover',
+    accentActive: 'layer-accent-active',
     helperText: 'text-helper',
     placeholderText: 'text-placeholder',
     helperIcons: 'icon-helper',
@@ -107,14 +134,65 @@ export function validateTheme(
     theme.base,
     theme.textPrimary,
     theme.textSecondary,
+    theme.textOnColor,
     theme.iconPrimary,
     theme.iconSecondary,
+    theme.borderInverse,
+    theme.borderInteractive,
+    theme.textDisabled,
+    theme.iconDisabled,
   ]) {
     validateBaseToken(token.name, token, errors, warnings);
   }
 
-  validateContrast(theme, 'text-helper', theme.helperText, 4.5, errors);
-  validateContrast(theme, 'border-strong', theme.strongBorders, 3, errors);
+  const helperTarget = theme.contrastTargets.helperText;
+  const borderTarget = theme.contrastTargets.strongBorder;
+
+  validateContrast(
+    theme,
+    'text-helper',
+    theme.helperText,
+    helperTarget,
+    errors
+  );
+  validateContrast(
+    theme,
+    'border-strong',
+    theme.strongBorders,
+    borderTarget,
+    errors
+  );
+  validateFallbackContrast(
+    theme,
+    'text-helper',
+    theme.helperText,
+    helperTarget,
+    errors
+  );
+  validateFallbackContrast(
+    theme,
+    'border-strong',
+    theme.strongBorders,
+    borderTarget,
+    errors
+  );
+  validateSingleTokenContrast(
+    theme,
+    theme.borderInverse,
+    BORDER_INVERSE_TARGET,
+    errors
+  );
+  validateSingleTokenContrast(
+    theme,
+    theme.borderInteractive,
+    BORDER_INTERACTIVE_TARGET,
+    errors
+  );
+  validatePlaceholderText(theme, errors);
+  validateDisabledTokens(theme, errors);
+  validateBrandFallback(theme, errors);
+  validateTextOnColor(theme, errors);
+  validateSupportTokens(theme, errors, warnings);
   validateInteractiveTokens(theme, errors, warnings);
 
   return {
@@ -202,6 +280,27 @@ function validateInteractiveTokens(
   }
 }
 
+function validateSupportTokens(
+  theme: GeneratedOklchTheme,
+  errors: ValidationIssue[],
+  warnings: ValidationIssue[]
+) {
+  const supportTokens = [
+    { name: 'support-error', token: theme.supportError },
+    { name: 'support-success', token: theme.supportSuccess },
+    { name: 'support-warning', token: theme.supportWarning },
+    { name: 'support-info', token: theme.supportInfo },
+    { name: 'support-error-inverse', token: theme.supportErrorInverse },
+    { name: 'support-success-inverse', token: theme.supportSuccessInverse },
+    { name: 'support-warning-inverse', token: theme.supportWarningInverse },
+    { name: 'support-info-inverse', token: theme.supportInfoInverse },
+  ];
+
+  for (const { name, token } of supportTokens) {
+    validateBaseToken(name, token, errors, warnings);
+  }
+}
+
 /**
  * Reconstructs the effective `InteractiveStateSpec` variant from a generated
  * token's `source` field. This is the single source of truth — avoids coupling
@@ -229,6 +328,169 @@ function tokenSourceToSpec(token: GeneratedColorToken): InteractiveStateSpec {
       `source type "${source.type}". Only "interactive-state" and "interactive-opacity" ` +
       `sources are valid for interactive tokens.`
   );
+}
+
+/**
+ * Checks the contrast browsers without OKLCH support actually render: the 8-bit
+ * hex `fallback` of each contrast token against its surface's hex `fallback`.
+ */
+function validateFallbackContrast(
+  theme: GeneratedOklchTheme,
+  groupName: string,
+  group: GeneratedOklchTheme['helperText'],
+  target: number,
+  errors: ValidationIssue[]
+) {
+  for (const context of contexts) {
+    const ratio = getHexContrastRatio(
+      group[context].fallback,
+      theme.surfaces[context].fallback
+    );
+    if (ratio + Number.EPSILON < target) {
+      errors.push({
+        token: `${groupName}-${context}`,
+        severity: 'error',
+        message:
+          `Hex fallback expected at least ${target}:1 contrast against the ` +
+          `${context} fallback, received ${ratio.toFixed(4)}:1 in the ` +
+          `${theme.mode} theme`,
+      });
+    }
+  }
+}
+
+/**
+ * The brand `fallback` is a free-form hex supplied by the spec. Catch it
+ * drifting from the OKLCH brand color (e.g. after overriding brand L/C/H
+ * without updating the hex).
+ */
+function validateBrandFallback(
+  theme: GeneratedOklchTheme,
+  errors: ValidationIssue[]
+) {
+  const expected = oklchToHex(mapToSrgbGamut(theme.brand.color));
+  const distance = Math.max(
+    ...[1, 3, 5].map((index) =>
+      Math.abs(
+        parseInt(theme.brand.fallback.slice(index, index + 2), 16) -
+          parseInt(expected.slice(index, index + 2), 16)
+      )
+    )
+  );
+  if (distance > BRAND_FALLBACK_CHANNEL_TOLERANCE) {
+    errors.push({
+      token: theme.brand.name,
+      severity: 'error',
+      message:
+        `Brand fallback ${theme.brand.fallback} does not match the OKLCH brand ` +
+        `color (${expected}); update brand.fallback in the specification`,
+    });
+  }
+}
+
+/**
+ * Checks a non-contextual token against every surface, in both OKLCH math and
+ * the 8-bit hex fallbacks browsers without OKLCH support render.
+ */
+function validateSingleTokenContrast(
+  theme: GeneratedOklchTheme,
+  token: GeneratedColorToken,
+  target: number,
+  errors: ValidationIssue[]
+) {
+  for (const context of contexts) {
+    const surface = theme.surfaces[context];
+    const oklchRatio = getContrastRatio(token.color, surface.color);
+    const hexRatio = getHexContrastRatio(token.fallback, surface.fallback);
+    for (const [kind, ratio] of [
+      ['OKLCH', oklchRatio],
+      ['hex fallback', hexRatio],
+    ] as const) {
+      if (ratio + Number.EPSILON < target) {
+        errors.push({
+          token: `${token.name}-${context}`,
+          severity: 'error',
+          message:
+            `Expected at least ${target}:1 contrast (${kind}) against ${context}, ` +
+            `received ${ratio.toFixed(4)}:1 in the ${theme.mode} theme`,
+        });
+      }
+    }
+  }
+}
+
+/**
+ * Placeholder text is rendered inside fields, so every emitted
+ * `text-placeholder-*` value must reach `PLACEHOLDER_TEXT_MIN_CONTRAST` against
+ * EVERY `field-*` background, in OKLCH math and in the emitted hex fallbacks.
+ * The minimum is a constant, not `theme.contrastTargets`, so a lowered
+ * generation target cannot bypass it. Ratios are recomputed from the emitted
+ * colours rather than read from `token.contrast`.
+ */
+function validatePlaceholderText(
+  theme: GeneratedOklchTheme,
+  errors: ValidationIssue[]
+) {
+  for (const context of contexts) {
+    const placeholder = theme.placeholderText[context];
+    contexts.forEach((fieldContext, fieldIndex) => {
+      const field = theme.fields[fieldContext];
+      for (const [kind, ratio] of [
+        ['OKLCH', getContrastRatio(placeholder.color, field.color)],
+        [
+          'hex fallback',
+          getHexContrastRatio(placeholder.fallback, field.fallback),
+        ],
+      ] as const) {
+        if (ratio + Number.EPSILON < PLACEHOLDER_TEXT_MIN_CONTRAST) {
+          errors.push({
+            token: `text-placeholder-${context}`,
+            severity: 'error',
+            message:
+              `Expected at least ${PLACEHOLDER_TEXT_MIN_CONTRAST}:1 contrast (${kind}) against ` +
+              `field-0${fieldIndex + 1} (${fieldContext}), received ${ratio.toFixed(4)}:1 ` +
+              `in the ${theme.mode} theme`,
+          });
+        }
+      }
+    });
+  }
+}
+
+/** Disabled tokens must carry a fractional alpha, as the design rule is "25% opacity". */
+function validateDisabledTokens(
+  theme: GeneratedOklchTheme,
+  errors: ValidationIssue[]
+) {
+  for (const token of [theme.textDisabled, theme.iconDisabled]) {
+    if (token.alpha === undefined || token.alpha <= 0 || token.alpha >= 1) {
+      errors.push({
+        token: token.name,
+        severity: 'error',
+        message: `Disabled token must carry an alpha between 0 and 1 (exclusive); got ${token.alpha}`,
+      });
+    }
+  }
+}
+
+/** `text-on-color` is rendered on the brand color, so it must meet AA there. */
+function validateTextOnColor(
+  theme: GeneratedOklchTheme,
+  errors: ValidationIssue[]
+) {
+  const ratio = getHexContrastRatio(
+    theme.textOnColor.fallback,
+    theme.brand.fallback
+  );
+  if (ratio + Number.EPSILON < TEXT_ON_COLOR_TARGET) {
+    errors.push({
+      token: theme.textOnColor.name,
+      severity: 'error',
+      message:
+        `Expected at least ${TEXT_ON_COLOR_TARGET}:1 contrast against the brand ` +
+        `color, received ${ratio.toFixed(4)}:1 in the ${theme.mode} theme`,
+    });
+  }
 }
 
 function validateContrast(

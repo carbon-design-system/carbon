@@ -81,6 +81,86 @@ describe('generateTheme — interactive tokens', () => {
       });
     });
   }
+
+  describe('Per-parent neutral interactive state tokens (18 v11 names)', () => {
+    it.each(['light', 'dark'] as const)(
+      'generates all 18 per-parent neutral interactive tokens for %s mode',
+      (mode) => {
+        const theme = generateTheme(mode);
+        const contexts = ['surface', 'surface-light', 'surface-dark'] as const;
+        const hoverDelta = defaultSpecification[mode].interactive.hover.delta;
+        const activeDelta = defaultSpecification[mode].interactive.active.delta;
+        const selectedDelta =
+          defaultSpecification[mode].interactive.selected.delta;
+
+        for (const context of contexts) {
+          // layer-hover-01..03
+          const surfaceL = theme.surfaces[context].color.lightness;
+          expect(theme.layerHover[context].color.lightness).toBeCloseTo(
+            Math.min(1, Math.max(0, surfaceL + hoverDelta)),
+            10
+          );
+          expect(theme.layerHover[context].color.chroma).toBe(
+            theme.surfaces[context].color.chroma
+          );
+          expect(theme.layerHover[context].color.hue).toBe(
+            theme.surfaces[context].color.hue
+          );
+
+          // layer-active-01..03
+          expect(theme.layerActive[context].color.lightness).toBeCloseTo(
+            Math.min(1, Math.max(0, surfaceL + activeDelta)),
+            10
+          );
+
+          // layer-selected-01..03
+          expect(theme.layerSelected[context].color.lightness).toBeCloseTo(
+            Math.min(1, Math.max(0, surfaceL + selectedDelta)),
+            10
+          );
+
+          // field-hover-01..03
+          const fieldL = theme.fields[context].color.lightness;
+          expect(theme.fieldHover[context].color.lightness).toBeCloseTo(
+            Math.min(1, Math.max(0, fieldL + hoverDelta)),
+            10
+          );
+
+          // layer-accent-hover-01..03
+          const accentL = theme.accents[context].color.lightness;
+          expect(theme.accentHover[context].color.lightness).toBeCloseTo(
+            Math.min(1, Math.max(0, accentL + hoverDelta)),
+            10
+          );
+
+          // layer-accent-active-01..03
+          expect(theme.accentActive[context].color.lightness).toBeCloseTo(
+            Math.min(1, Math.max(0, accentL + activeDelta)),
+            10
+          );
+        }
+      }
+    );
+
+    it('inherits each token status from its interactive state spec', () => {
+      const theme = generateTheme('light', {
+        light: {
+          interactive: {
+            hover: {
+              type: 'lightness-delta',
+              status: 'confirmed',
+              delta: -0.03,
+            },
+          },
+        } as never,
+      });
+
+      expect(theme.layerHover.surface.status).toBe('confirmed');
+      expect(theme.fieldHover.surface.status).toBe('confirmed');
+      expect(theme.accentHover.surface.status).toBe('confirmed');
+      expect(theme.layerActive.surface.status).toBe('experimental');
+    });
+  });
 });
 
 describe('validateTheme — interactive tokens', () => {

@@ -56,20 +56,38 @@ describe('V12 OKLCH theme generation', () => {
       source: { type: 'fixed' },
       fallback: '#0f62fe',
     });
-    expect(theme.iconPrimary.status).toBe('unresolved');
+    expect(theme.iconPrimary.status).toBe('confirmed');
     expect(theme.accents.surface.source).toEqual({
       type: 'lightness-delta',
       delta: -0.08,
       relativeTo: 'surface',
     });
     expect(theme.placeholderText.surface).toMatchObject({
-      status: 'unresolved',
-      source: { type: 'alias', token: 'text-helper' },
-      color: theme.helperText.surface.color,
+      status: 'confirmed',
+      source: {
+        type: 'shared-contrast',
+        target: 4.5,
+        relativeTo: 'field',
+        contexts,
+      },
+    });
+    expect(theme.helperIcons.surface.source).toEqual({
+      type: 'alias',
+      token: 'text-helper',
     });
     expect(theme.skeletons.surface).toMatchObject({
-      status: 'experimental',
+      status: 'confirmed',
       color: { lightness: 0.14 },
+    });
+    expect(theme.supportError).toMatchObject({
+      status: 'confirmed',
+      source: { type: 'fixed' },
+      fallback: '#fa4d56',
+    });
+    expect(theme.supportSuccess).toMatchObject({
+      status: 'confirmed',
+      source: { type: 'fixed' },
+      fallback: '#42be65',
     });
   });
 
@@ -107,6 +125,12 @@ describe('V12 OKLCH theme generation', () => {
     });
     expect(files.light['layer-01'].$value).not.toHaveProperty('alpha');
     expect(files.light['state-disabled'].$value.alpha).toBe(0.25);
+    for (const mode of ['light', 'dark']) {
+      expect(files[mode]['text-disabled'].$value.alpha).toBe(0.25);
+      expect(files[mode]['icon-disabled'].$value.alpha).toBe(0.25);
+      expect(files[mode]['text-disabled'].$value.components[1]).toBe(0.004);
+      expect(files[mode]['border-interactive']).toBeDefined();
+    }
   });
 
   it('supports configuration overrides without mutating defaults', () => {
@@ -131,6 +155,157 @@ describe('V12 OKLCH theme generation', () => {
       lightness: 0.97,
       chroma: 0.004,
       hue: 262,
+    });
+  });
+
+  describe('Input validation and normalization', () => {
+    it('rejects unknown override keys', () => {
+      expect(() =>
+        generateTheme('light', {
+          // @ts-expect-error test invalid override
+          unknownTopLevel: 123,
+        })
+      ).toThrow(/Unknown override key "unknownTopLevel"/);
+
+      expect(() =>
+        generateTheme('light', {
+          neutral: {
+            hue: 200,
+            // @ts-expect-error test invalid override
+            invalidKey: 'test',
+          },
+        })
+      ).toThrow(/Unknown override key "invalidKey"/);
+
+      expect(() =>
+        generateTheme('light', {
+          light: {
+            // @ts-expect-error test invalid override
+            invalidModeField: true,
+          },
+        })
+      ).toThrow(/Unknown override key "invalidModeField"/);
+    });
+
+    it('rejects NaN and Infinity values', () => {
+      expect(() =>
+        generateTheme('light', {
+          neutral: { hue: NaN, chroma: 0.004 },
+        })
+      ).toThrow(/Invalid numeric value \(NaN\)/);
+
+      expect(() =>
+        generateTheme('light', {
+          neutral: { hue: 200, chroma: Infinity },
+        })
+      ).toThrow(/Invalid numeric value \(Infinity\)/);
+    });
+
+    it('rejects negative chroma', () => {
+      expect(() =>
+        generateTheme('light', {
+          neutral: { hue: 200, chroma: -0.01 },
+        })
+      ).toThrow(/Chroma must be non-negative/);
+
+      expect(() =>
+        generateTheme('light', {
+          brand: {
+            ...defaultSpecification.brand,
+            chroma: -0.1,
+          },
+        })
+      ).toThrow(/Chroma must be non-negative/);
+    });
+
+    it('rejects accent floor above surface', () => {
+      expect(() =>
+        generateTheme('light', {
+          light: {
+            ...defaultSpecification.light,
+            accentDelta: 0.05, // positive delta means lighter than surface in light mode
+          },
+        })
+      ).toThrow(/Accent delta must not be positive/);
+    });
+
+    it('rejects a non-delta spec for a state that drives per-parent tokens', () => {
+      expect(() =>
+        generateTheme('light', {
+          light: {
+            interactive: {
+              hover: {
+                type: 'opacity',
+                status: 'experimental',
+                chroma: 0.004,
+                alpha: 0.5,
+              },
+            },
+          },
+        })
+      ).toThrow(/interactive\.hover must be of type "lightness-delta"/);
+    });
+
+    it('derives field-hover from the same field tokens it exposes', () => {
+      const theme = generateTheme('dark');
+
+      for (const context of contexts) {
+        expect(theme.fieldHover[context].source).toMatchObject({
+          type: 'interactive-state',
+          state: 'hover',
+        });
+        expect(theme.fieldHover[context].color.lightness).toBeCloseTo(
+          theme.fields[context].color.lightness +
+            defaultSpecification.dark.interactive.hover.delta,
+          10
+        );
+      }
+    });
+
+    it('normalizes hue to [0, 360) everywhere including DTCG components', () => {
+      const theme = generateTheme('light', {
+        neutral: { hue: 390, chroma: 0.004 }, // 390 % 360 = 30
+      });
+
+      expect(theme.surfaces.surface.color.hue).toBe(30);
+
+      const negTheme = generateTheme('light', {
+        neutral: { hue: -45, chroma: 0.004 }, // -45 -> 315
+      });
+      expect(negTheme.surfaces.surface.color.hue).toBe(315);
+
+      const files = generateV12Tokens();
+      // DTCG components array format: [lightness, chroma, hue]
+      expect(
+        files.light['layer-01'].$value.components[2]
+      ).toBeGreaterThanOrEqual(0);
+      expect(files.light['layer-01'].$value.components[2]).toBeLessThan(360);
+    });
+
+    it('rounds contrast-solved lightness to 4 decimals and preserves contrast targets', () => {
+      const theme = generateTheme('light', {
+        contrastTargets: {
+          helperText: 5.0,
+          strongBorder: 3.5,
+        },
+      });
+
+      for (const context of contexts) {
+        const helperLightness = theme.helperText[context].color.lightness;
+        const helperDecimals = helperLightness.toString().split('.')[1] || '';
+        expect(helperDecimals.length).toBeLessThanOrEqual(4);
+        expect(theme.helperText[context].contrast).toBeGreaterThanOrEqual(5.0);
+
+        const borderLightness = theme.strongBorders[context].color.lightness;
+        const borderDecimals = borderLightness.toString().split('.')[1] || '';
+        expect(borderDecimals.length).toBeLessThanOrEqual(4);
+        expect(theme.strongBorders[context].contrast).toBeGreaterThanOrEqual(
+          3.5
+        );
+      }
+
+      // Validator reads configured contrastTargets from theme
+      expect(validateTheme(theme)).toMatchObject({ valid: true, issues: [] });
     });
   });
 });

@@ -55,7 +55,7 @@ module.exports = {
   transform(token) {
     // SD v5 stores the post-alias-resolution value in token.$value (the DTCG
     // field), NOT in token.value.  token.value is only set after transforms run.
-    // The golden-master test sets both; in that context token.value is preferred
+    // Tests that call this transform directly set both; in that context token.value is preferred
     // so the test can simulate resolution without running full SD.
     const v = token.value !== undefined ? token.value : token.$value;
 
