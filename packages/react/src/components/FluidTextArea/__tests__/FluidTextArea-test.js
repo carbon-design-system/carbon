@@ -54,6 +54,22 @@ describe('FluidTextArea', () => {
       expect(screen.getByText('This is default text')).toBeInTheDocument();
     });
 
+    it('should prioritize disabled over readonly when both are true', () => {
+      const { getByRole } = render(
+        <FluidTextArea
+          id="input-1"
+          labelText="FluidTextArea label"
+          disabled
+          readOnly
+          data-testid="test-id-disabled-readonly"
+        />
+      );
+
+      const textarea = getByRole('textbox');
+      expect(textarea).toBeDisabled();
+      expect(textarea).not.toHaveAttribute('readonly');
+    });
+
     it('should respect disabled prop', () => {
       render(
         <FluidTextArea

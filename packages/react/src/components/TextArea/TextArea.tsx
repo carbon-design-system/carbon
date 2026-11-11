@@ -236,6 +236,7 @@ const TextArea = frFn((props, forwardRef) => {
     rows = 4,
     slug,
     translateWithId: t = defaultTranslateWithId,
+    readOnly,
     ...other
   } = props;
   const prefix = usePrefix();
@@ -402,7 +403,7 @@ const TextArea = frFn((props, forwardRef) => {
 
   const textAreaWrapperClasses = classNames(`${prefix}--text-area__wrapper`, {
     [`${prefix}--text-area__wrapper--cols`]: other.cols,
-    [`${prefix}--text-area__wrapper--readonly`]: other.readOnly,
+    [`${prefix}--text-area__wrapper--readonly`]: readOnly && !disabled,
     [`${prefix}--text-area__wrapper--warn`]: warn,
     [`${prefix}--text-area__wrapper--slug`]: slug,
     [`${prefix}--text-area__wrapper--decorator`]: decorator,
@@ -570,14 +571,14 @@ const TextArea = frFn((props, forwardRef) => {
       {...other}
       {...textareaProps}
       placeholder={placeholder}
-      aria-readonly={other.readOnly}
+      aria-readonly={readOnly && !disabled ? true : undefined}
       className={textareaClasses}
       aria-invalid={invalid}
       aria-describedby={ariaDescribedBy}
       aria-errormessage={ariaErrorMessage}
       disabled={disabled}
       rows={rows}
-      readOnly={other.readOnly}
+      readOnly={readOnly && !disabled}
       ref={ref}
     />
   );

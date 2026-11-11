@@ -47,7 +47,7 @@ describe('cds-fluid-textarea', () => {
     `);
 
     const textarea = el.shadowRoot.querySelector('textarea');
-    expect(textarea.readOnly).to.be.true;
+    expect(textarea.readOnly).to.be.false;
     expect(textarea.disabled).to.be.true;
   });
 

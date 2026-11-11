@@ -1015,7 +1015,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
     const sliderClasses = classMap({
       [`${prefix}--slider`]: true,
       [`${prefix}--slider--disabled`]: disabled,
-      [`${prefix}--slider--readonly`]: readonly,
+      [`${prefix}--slider--readonly`]: readonly && !disabled,
     });
     const thumbLowerWrapperClasses = classMap({
       [`${prefix}--icon-tooltip`]: true,
