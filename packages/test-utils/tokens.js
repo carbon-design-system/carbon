@@ -13,9 +13,11 @@ const fs = require('fs');
 const { globSync } = require('glob');
 const path = require('path');
 const formatSchema = require('./tokens/schemas/2025.10/format.json');
+const resolverSchema = require('./tokens/schemas/2025.10/resolver.json');
 
 // the `$schema` URL token files must declare (the stored schema's own `$id`)
 const FORMAT_SCHEMA_URL = formatSchema.$id;
+const RESOLVER_SCHEMA_URL = resolverSchema.$id;
 const EXTENSION_NAMESPACE = 'com.ibm.carbon';
 
 /**
@@ -36,21 +38,26 @@ const RULES = {
   'extension-namespace': checkExtensionNamespace,
 };
 
-let validateFormat;
+const validators = new Map();
 
-function checkSchema(tokens) {
-  if (!validateFormat) {
+function validate(schema, document) {
+  if (!validators.has(schema)) {
     const ajv = new Ajv({ allErrors: true, strict: false });
     addFormats(ajv);
-    validateFormat = ajv.compile(formatSchema);
+    validators.set(schema, ajv.compile(schema));
   }
-  if (validateFormat(tokens)) {
+  const validator = validators.get(schema);
+  if (validator(document)) {
     return [];
   }
-  const messages = validateFormat.errors.map((error) => {
+  const messages = validator.errors.map((error) => {
     return `${error.instancePath || '/'} ${error.message}`;
   });
   return Array.from(new Set(messages));
+}
+
+function checkSchema(tokens) {
+  return validate(formatSchema, tokens);
 }
 
 function checkSchemaUrl(tokens) {
@@ -122,6 +129,36 @@ function checkTokenFile(filepath) {
 }
 
 /**
+ * Returns the violations in a resolver file: it validates against the DTCG
+ * 2025.10 resolver schema, declares that schema as its `$schema`, and only
+ * references token files that exist.
+ */
+function checkResolverFile(filepath) {
+  const resolver = JSON.parse(fs.readFileSync(filepath, 'utf8'));
+  const violations = validate(resolverSchema, resolver);
+  if (resolver.$schema !== RESOLVER_SCHEMA_URL) {
+    violations.push(`$schema is ${JSON.stringify(resolver.$schema)}`);
+  }
+
+  const sources = [
+    ...Object.values(resolver.sets ?? {}).map((set) => set.sources),
+    ...Object.values(resolver.modifiers ?? {}).flatMap((modifier) => {
+      return Object.values(modifier.contexts ?? {});
+    }),
+  ].flat();
+  for (const source of sources) {
+    const reference = source?.$ref;
+    if (typeof reference !== 'string' || reference.startsWith('#')) {
+      continue;
+    }
+    if (!fs.existsSync(path.resolve(path.dirname(filepath), reference))) {
+      violations.push(`${reference} does not exist`);
+    }
+  }
+  return violations;
+}
+
+/**
  * Defines a Jest test for every rule and token file. Token files are found
  * with the `include` glob patterns (relative to `packageDir`), so new files
  * are checked automatically; use `exclude` for generated files. Rules listed
@@ -178,7 +215,9 @@ function describeTokenConformance({
 module.exports = {
   EXTENSION_NAMESPACE,
   FORMAT_SCHEMA_URL,
+  RESOLVER_SCHEMA_URL,
   RULES,
+  checkResolverFile,
   checkTokenFile,
   describeTokenConformance,
 };

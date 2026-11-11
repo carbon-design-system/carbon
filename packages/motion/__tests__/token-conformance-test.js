@@ -14,9 +14,5 @@ const { describeTokenConformance } = require('@carbon/test-utils/tokens');
 
 describeTokenConformance({
   packageDir: path.resolve(__dirname, '..'),
-  include: ['src/dtcg/**/*.json'],
-  knownFailures: {
-    'src/dtcg/motion.json': ['schema-url'],
-    'src/dtcg/surfaces.json': ['schema-url', 'extension-namespace'],
-  },
+  include: ['tokens/**/*.tokens.json'],
 });
