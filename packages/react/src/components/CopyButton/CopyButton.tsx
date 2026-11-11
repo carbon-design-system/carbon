@@ -70,7 +70,7 @@ export interface CopyButtonProps extends ButtonProps<'button'> {
 }
 export default function CopyButton({
   align = 'bottom',
-  autoAlign = false,
+  autoAlign,
   feedback = 'Copied!',
   feedbackTimeout = 2000,
   iconDescription = 'Copy to clipboard',

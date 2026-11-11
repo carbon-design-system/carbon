@@ -18,10 +18,9 @@ export interface TagSkeletonProps
   className?: string;
 
   /**
-   * Specify the size of the Tag. Currently supports either `sm` or
-   * default sizes.
+   * Specify the size of the Tag.
    */
-  size?: 'sm';
+  size?: 'sm' | 'md' | 'lg';
 }
 
 function TagSkeleton({ className, size, ...rest }: TagSkeletonProps) {
@@ -45,10 +44,9 @@ TagSkeleton.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Specify the size of the Tag. Currently supports either `sm` or
-   * default sizes.
+   * Specify the size of the Tag.
    */
-  size: PropTypes.oneOf(['sm']),
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
 };
 
 export default TagSkeleton;

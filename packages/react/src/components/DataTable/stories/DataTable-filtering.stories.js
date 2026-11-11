@@ -56,6 +56,9 @@ export default {
   parameters: {
     docs: {
       page: mdx,
+      source: {
+        type: 'code',
+      },
     },
   },
 };

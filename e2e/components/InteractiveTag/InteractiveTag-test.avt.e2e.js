@@ -172,7 +172,7 @@ test.describe('@avt InteractiveTag', () => {
     await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');
 
-    // Expecte the OperationalTag with tooltip be focusable and visible
+    // Expect the OperationalTag with tooltip be focusable and visible
     await expect(page.getByRole('button').nth(10)).toBeFocused();
     await page.keyboard.press('Enter');
     await expect(page.getByText('Tag 1 name').first()).toBeVisible();

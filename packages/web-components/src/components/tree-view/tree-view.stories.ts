@@ -359,7 +359,7 @@ export const withLinks = {
         </cds-tree-node>
       </cds-tree-view>
       <main style="flex: 1">
-        <h3>The current page is: Artifical Intelligence</h3>
+        <h3>The current page is: Artificial Intelligence</h3>
       </main>
     </div>
   `,
