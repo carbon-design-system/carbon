@@ -100,9 +100,12 @@ class CDSCopy extends CDSIconButton {
     this.closeOnActivation = false;
 
     this.addEventListener('click', this._handleClickButton);
-    this.shadowRoot?.addEventListener('animationend', this._handleAnimationEnd);
 
     super.connectedCallback();
+
+    // The shadow root is created by `super.connectedCallback()` on first
+    // connection. Re-adding the same listener on reconnect is a no-op.
+    this.shadowRoot?.addEventListener('animationend', this._handleAnimationEnd);
   }
 
   disconnectedCallback() {
@@ -121,9 +124,11 @@ class CDSCopy extends CDSIconButton {
     const host =
       (this.getRootNode() as ShadowRoot)?.host ||
       (this.parentNode as ShadowRoot)?.host;
+    // Prefer the property over the attribute: it is the source of truth once set
+    // programmatically, while the attribute may be stale.
     const hostIconDescription =
-      host?.getAttribute('icon-description') ||
-      (host as { iconDescription?: string })?.iconDescription;
+      (host as { iconDescription?: string })?.iconDescription ||
+      host?.getAttribute('icon-description');
     const hostText = host?.textContent?.trim();
     const slottedContent = this.querySelector(
       '[slot=tooltip-content]'

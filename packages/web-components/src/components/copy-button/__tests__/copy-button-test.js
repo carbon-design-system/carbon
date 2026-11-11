@@ -326,6 +326,51 @@ describe('Feedback', () => {
       { timeout: 3000 }
     );
   });
+
+  it('should update button aria-label when icon-description changes after render', async () => {
+    const el = await fixture(html`
+      <cds-copy-button icon-description="Copy to clipboard"> </cds-copy-button>
+    `);
+
+    const copyComponent = el.shadowRoot?.querySelector('cds-copy');
+    await copyComponent?.updateComplete;
+    const button = copyComponent?.shadowRoot?.querySelector('button');
+    expect(button?.getAttribute('aria-label')).to.equal('Copy to clipboard');
+
+    el.iconDescription = 'Copy code';
+    await el.updateComplete;
+    await copyComponent?.updateComplete;
+
+    expect(button?.getAttribute('aria-label')).to.equal('Copy code');
+  });
+
+  it('should clean up animation classes on animationend after first connection', async () => {
+    const el = await fixture(html`
+      <cds-copy-button
+        icon-description="Copy to clipboard"
+        feedback-timeout="100">
+      </cds-copy-button>
+    `);
+
+    const copyComponent = el.shadowRoot?.querySelector('cds-copy');
+    await copyComponent?.updateComplete;
+    const button = copyComponent?.shadowRoot?.querySelector('button');
+
+    button?.click();
+    await copyComponent?.updateComplete;
+    expect(button?.classList.contains('cds--copy-btn--animating')).to.be.true;
+
+    await waitUntil(
+      () => button?.classList.contains('cds--copy-btn--fade-out'),
+      'Expected fade-out class after feedback timeout',
+      { timeout: 3000 }
+    );
+
+    button?.dispatchEvent(new Event('animationend', { bubbles: true }));
+
+    expect(button?.classList.contains('cds--copy-btn--animating')).to.be.false;
+    expect(button?.classList.contains('cds--copy-btn--fade-out')).to.be.false;
+  });
 });
 
 describe('autoAlign', () => {

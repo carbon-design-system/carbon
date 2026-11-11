@@ -86,6 +86,18 @@ class CDSCopyButton extends AutoAlignMixin(
   @property({ reflect: true })
   size?: ICON_BUTTON_SIZE | string = ICON_BUTTON_SIZE.LARGE;
 
+  updated(changedProperties) {
+    super.updated?.(changedProperties);
+
+    // `cds-copy` derives its accessible name from this element's
+    // `iconDescription`, so ask it to re-evaluate when that changes.
+    if (changedProperties.has('iconDescription')) {
+      (
+        this.shadowRoot?.querySelector('cds-copy') as LitElement | null
+      )?.requestUpdate();
+    }
+  }
+
   render() {
     const {
       buttonClassName,
