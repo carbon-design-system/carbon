@@ -60,6 +60,7 @@
     "@angular/platform-browser": "^19.0.0",
     "@angular/platform-browser-dynamic": "^19.0.0",
     "@carbon/styles": "workspace:^",
+    "@carbon/utilities": "workspace:^",
     "@carbon/web-components": "workspace:^",
     "@open-wc/testing": "^5.0.0",
     "@playwright/test": "^1.36.2",
