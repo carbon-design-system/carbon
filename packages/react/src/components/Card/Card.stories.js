@@ -88,7 +88,8 @@ export default {
     },
     disabled: {
       control: { type: 'boolean' },
-      description: 'Mutes the card; pass disabled to interactive children too.',
+      description:
+        'Disables the card surface and exposes its disabled state. Pass `disabled` to interactive children separately.',
     },
     horizontal: {
       control: { type: 'boolean' },
