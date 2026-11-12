@@ -348,6 +348,41 @@ describe('Show more button', () => {
     ).not.toBeInTheDocument();
   });
 
+  it('should expose the horizontal scrollbar size on the container only while collapsed', async () => {
+    render(
+      <CodeSnippet type="multi" maxCollapsedNumberOfRows={3}>
+        {multiLong}
+      </CodeSnippet>
+    );
+
+    const textBox = screen.getByRole('textbox');
+    const snippetContainer = textBox.parentElement;
+
+    Object.defineProperties(textBox, {
+      offsetHeight: { configurable: true, value: 48 },
+      clientHeight: { configurable: true, value: 33 },
+    });
+    jest
+      .spyOn(textBox.querySelector('code'), 'getBoundingClientRect')
+      .mockReturnValue({ height: 80 });
+
+    triggerResizeObserver();
+
+    expect(
+      snippetContainer.style.getPropertyValue(
+        '--cds-snippet-scrollbar-block-size'
+      )
+    ).toBe('15px');
+
+    await userEvent.click(screen.getByRole('button', { name: 'Show more' }));
+
+    expect(
+      snippetContainer.style.getPropertyValue(
+        '--cds-snippet-scrollbar-block-size'
+      )
+    ).toBe('');
+  });
+
   it('should omit expanded inline styles when expanded row limits are zero', async () => {
     render(
       <CodeSnippet
