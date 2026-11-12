@@ -146,8 +146,8 @@ export function Calendar({
             : startDate;
 
         return (
-          Temporal.PlainDate.compare(date, earlierDate) > 0 &&
-          Temporal.PlainDate.compare(date, laterDate) < 0
+          Temporal.PlainDate.compare(date, earlierDate) >= 0 &&
+          Temporal.PlainDate.compare(date, laterDate) <= 0
         );
       }
 

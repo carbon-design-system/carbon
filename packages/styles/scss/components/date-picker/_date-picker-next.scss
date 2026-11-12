@@ -407,14 +407,7 @@
         ),
       .#{$prefix}--date-picker__day.selected:not(:nth-child(7n)):has(
           + .#{$prefix}--date-picker__day.selected
-        ),
-      // Preview start date when hovering/focusing a date before the start
-      .#{$prefix}--date-picker__day:not(
-          .selected,
-          .inRange,
-          :disabled,
-          :nth-child(7n)
-        ):has(+ .#{$prefix}--date-picker__day.inRange) {
+        ) {
         &::before {
           position: absolute;
           z-index: -1;
@@ -430,14 +423,6 @@
       // Only applies if the end date is not the first day of the week row
       .#{$prefix}--date-picker__day.inRange
         + .#{$prefix}--date-picker__day.selected:not(:nth-child(7n + 1)),
-      // Preview end date (hovered/focused) while the range is being selected
-      .#{$prefix}--date-picker__day.inRange
-        + .#{$prefix}--date-picker__day:not(
-          .selected,
-          .inRange,
-          :disabled,
-          :nth-child(7n + 1)
-        ),
       .#{$prefix}--date-picker__day.selected
         + .#{$prefix}--date-picker__day.selected:not(:nth-child(7n + 1)) {
         &::before {
@@ -449,6 +434,46 @@
           inset-block: 0;
           inset-inline-start: 0;
         }
+      }
+
+      // Preview start/end date (hovered/focused) while selecting a range
+      .#{$prefix}--date-picker__day.inRange:not(.selected):has(
+          + .#{$prefix}--date-picker__day:not(.inRange, .selected)
+        ),
+      .#{$prefix}--date-picker__day:not(.inRange, .selected)
+        + .#{$prefix}--date-picker__day.inRange:not(.selected) {
+        border-radius: $border-radius-max;
+      }
+
+      // Half-band connecting the preview end date to the range
+      .#{$prefix}--date-picker__day.inRange:not(
+          .selected,
+          :nth-child(7n + 1)
+        ):has(
+          + .#{$prefix}--date-picker__day:not(.inRange, .selected)
+        )::before {
+        position: absolute;
+        z-index: -1;
+        background-color: $highlight;
+        content: '';
+        inline-size: 50%;
+        inset-block: 0;
+        inset-inline-start: 0;
+      }
+
+      // Half-band connecting the preview start date to the range
+      .#{$prefix}--date-picker__day:not(.inRange, .selected)
+        + .#{$prefix}--date-picker__day.inRange:not(
+          .selected,
+          :nth-child(7n)
+        )::before {
+        position: absolute;
+        z-index: -1;
+        background-color: $highlight;
+        content: '';
+        inline-size: 50%;
+        inset-block: 0;
+        inset-inline-end: 0;
       }
     }
   }
@@ -558,6 +583,19 @@
       &.selected:focus,
       &.selected.focused {
         border-radius: $border-radius-max;
+      }
+
+      // Today's indicator on a selected date
+      &.today.selected::after {
+        position: absolute;
+        border-radius: $border-radius-max;
+        background-color: currentcolor;
+        block-size: 4px;
+        content: '';
+        inline-size: 4px;
+        inset-block-end: 4px;
+        inset-inline-start: 50%;
+        transform: translateX(-50%);
       }
     }
   }
