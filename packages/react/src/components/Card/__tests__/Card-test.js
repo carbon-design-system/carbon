@@ -15,8 +15,6 @@ import {
   CardFooter,
   CardTitle,
   CardMedia,
-  CardHeaderMedia,
-  CardTitleMedia,
   CardActions,
   CardAction,
 } from '..';
@@ -898,70 +896,6 @@ describe('CardMedia', () => {
     expect(
       container.querySelector('.cds--card__media--horizontal')
     ).toBeInTheDocument();
-  });
-});
-
-// ---------------------------------------------------------------------------
-// CardHeaderMedia
-// ---------------------------------------------------------------------------
-
-describe('CardHeaderMedia', () => {
-  it('renders children', () => {
-    render(
-      <Card>
-        <CardHeader>
-          <CardHeaderMedia>
-            <img src="header.png" alt="header media" />
-          </CardHeaderMedia>
-        </CardHeader>
-      </Card>
-    );
-    expect(screen.getByAltText('header media')).toBeInTheDocument();
-  });
-
-  it('applies custom className', () => {
-    const { container } = render(
-      <Card>
-        <CardHeader>
-          <CardHeaderMedia className="custom-header-media">
-            <span />
-          </CardHeaderMedia>
-        </CardHeader>
-      </Card>
-    );
-    expect(container.querySelector('.custom-header-media')).toBeInTheDocument();
-  });
-});
-
-// ---------------------------------------------------------------------------
-// CardTitleMedia
-// ---------------------------------------------------------------------------
-
-describe('CardTitleMedia', () => {
-  it('renders children', () => {
-    render(
-      <Card>
-        <CardHeader>
-          <CardTitleMedia>
-            <span data-testid="title-media-icon" />
-          </CardTitleMedia>
-        </CardHeader>
-      </Card>
-    );
-    expect(screen.getByTestId('title-media-icon')).toBeInTheDocument();
-  });
-
-  it('applies custom className', () => {
-    const { container } = render(
-      <Card>
-        <CardHeader>
-          <CardTitleMedia className="custom-title-media">
-            <span />
-          </CardTitleMedia>
-        </CardHeader>
-      </Card>
-    );
-    expect(container.querySelector('.custom-title-media')).toBeInTheDocument();
   });
 });
 
