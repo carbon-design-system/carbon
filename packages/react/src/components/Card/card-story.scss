@@ -8,6 +8,7 @@
 @use '@carbon/styles/scss/border-radius' as *;
 @use '@carbon/styles/scss/feature-flags' as *;
 @use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/theme';
 @use '@carbon/styles/scss/type';
 
 .card-story__viewport {
@@ -69,4 +70,24 @@
   @include type.type-style('body-compact-01');
 
   margin: 0;
+}
+
+// Text styles inside the AI label popover. Scoped under the toggletip content
+// so they win over `.cds--toggletip-content p`.
+.cds--toggletip-content .card-story__ai-content {
+  .secondary {
+    color: theme.$text-secondary;
+  }
+
+  .bold {
+    font-weight: 600;
+  }
+
+  // Large metric value (not a heading)
+  .card-story__ai-metric {
+    font-size: 2.625rem;
+    font-weight: 300;
+    line-height: 1.2;
+    margin-block-end: 1rem;
+  }
 }

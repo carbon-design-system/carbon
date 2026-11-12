@@ -299,11 +299,11 @@ export const Default = {
                 size="xs"
                 aria-label={`Show information for ${title}`}>
                 <AILabelContent>
-                  <div>
+                  <div className="card-story__ai-content">
                     <h3 className="card-story__ai-heading secondary">
                       AI Explained
                     </h3>
-                    <h1>84%</h1>
+                    <p className="card-story__ai-metric">84%</p>
                     <h4 className="card-story__ai-heading secondary bold">
                       Confidence score
                     </h4>
@@ -674,11 +674,11 @@ export const WithAILabel = () => (
             size="xs"
             aria-label="Show information for Usage Analytics">
             <AILabelContent>
-              <div>
+              <div className="card-story__ai-content">
                 <h3 className="card-story__ai-heading secondary">
                   AI Explained
                 </h3>
-                <h1>84%</h1>
+                <p className="card-story__ai-metric">84%</p>
                 <h4 className="card-story__ai-heading secondary bold">
                   Confidence score
                 </h4>
@@ -709,11 +709,11 @@ export const WithAILabel = () => (
             size="xs"
             aria-label="Show information for Performance Insights">
             <AILabelContent>
-              <div>
+              <div className="card-story__ai-content">
                 <h3 className="card-story__ai-heading secondary">
                   AI Explained
                 </h3>
-                <h1>92%</h1>
+                <p className="card-story__ai-metric">92%</p>
                 <h4 className="card-story__ai-heading secondary bold">
                   Confidence score
                 </h4>
@@ -746,11 +746,11 @@ export const WithAILabel = () => (
             size="xs"
             aria-label="Show information for Smart Recommendations">
             <AILabelContent>
-              <div>
+              <div className="card-story__ai-content">
                 <h3 className="card-story__ai-heading secondary">
                   AI Explained
                 </h3>
-                <h1>88%</h1>
+                <p className="card-story__ai-metric">88%</p>
                 <h4 className="card-story__ai-heading secondary bold">
                   Confidence score
                 </h4>
