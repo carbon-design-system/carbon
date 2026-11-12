@@ -46,15 +46,28 @@ Included assets:
 
 Here's a quick example to get you started.
 
+> **Note:** `StepInstance` is a
+> [`ReactiveController`](https://lit.dev/docs/composition/controllers/). Pass
+> `this` to the constructor so the controller can call `requestUpdate()` on your
+> component whenever step state changes — no mixin required on your class.
+
 ### HTML
 
-Basic usage example, initializes a `StepInstance` and access the step data via
-`this._stepInfo.data`.
+Basic usage example, initializes a `StepInstance` and accesses the step data via
+`this._stepInfo.data`. Passing `this` to the constructor is what connects
+mutations to your component's render cycle.
 
 ```ts
 @customElement('my-stepped-component')
 export class MySteppedComponent extends LitElement {
-  private _stepInfo = new StepInstance();
+  // Pass `this` so mutations trigger requestUpdate() on this element.
+  private _stepInfo = new StepInstance(this);
+
+  connectedCallback() {
+    super.connectedCallback();
+    this._stepInfo.updateTotalStepCount = 3;
+  }
+
   render() {
     const { totalSteps, currentStep } = this._stepInfo.data;
     return html`
@@ -78,14 +91,19 @@ export class MySteppedComponent extends LitElement {
 }
 ```
 
-Updating form state example, uses `StepInstance.updateFormState` method to save
-form state within the step instance. This allows for storing form data that can
-be used in sub-sequent steps or when submitting.
+Updating form state example, uses `StepInstance.updateFormState` to save form
+state within the step instance. This allows for storing form data that can be
+used in subsequent steps or when submitting.
 
 ```ts
 @customElement('my-stepped-component')
 export class MySteppedComponent extends LitElement {
-  private _stepInfo = new StepInstance();
+  private _stepInfo = new StepInstance(this);
+
+  connectedCallback() {
+    super.connectedCallback();
+    this._stepInfo.updateTotalStepCount = 3;
+  }
 
   private _handleEmailInput(e: Event) {
     const savedFormState = structuredClone(
@@ -145,7 +163,12 @@ export class MySteppedComponent extends LitElement {
   @state()
   private _state: string = '';
 
-  private _stepInfo = new StepInstance();
+  private _stepInfo = new StepInstance(this);
+
+  connectedCallback() {
+    super.connectedCallback();
+    this._stepInfo.updateTotalStepCount = 3;
+  }
 
   private _handleCancelButton() {
     this._open = false;

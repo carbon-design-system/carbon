@@ -370,7 +370,7 @@ export const initCarousel = (
         const listener = (e: Event) => {
           removeReCycleClasses(viewItem);
           if (e.target === refs[viewIndexStack[0]]) {
-            //transitionend will trigger twice for pervious card and current card
+            //transitionend will trigger twice for previous card and current card
             transitionComplete(viewItem);
           }
           if (!supportsAnimations) {

@@ -35,9 +35,9 @@ const contentParameters = {
   },
 };
 
-export const Default = ({ label }) => {
+export const Default = (args) => {
   function TestComponent() {
-    return <div className="example-layer-test-component">{label}</div>;
+    return <div className="example-layer-test-component">{args.label}</div>;
   }
 
   return (
@@ -59,10 +59,12 @@ Default.args = {
 Default.argTypes = contentArgTypes;
 Default.parameters = contentParameters;
 
-export const withBackground = ({ label }) => {
+export const withBackground = (args) => {
   function TestComponent() {
     return (
-      <div className="example-layer-test-component-no-background">{label}</div>
+      <div className="example-layer-test-component-no-background">
+        {args.label}
+      </div>
     );
   }
 
@@ -85,13 +87,13 @@ withBackground.args = {
 withBackground.argTypes = contentArgTypes;
 withBackground.parameters = contentParameters;
 
-export const CustomLevel = ({ label, level }) => {
+export const CustomLevel = (args) => {
   function TestComponent() {
-    return <div className="example-layer-test-component">{label}</div>;
+    return <div className="example-layer-test-component">{args.label}</div>;
   }
 
   return (
-    <Layer level={level}>
+    <Layer level={args.level}>
       <TestComponent />
     </Layer>
   );
@@ -114,12 +116,12 @@ CustomLevel.parameters = {
   },
 };
 
-export const UseLayer = ({ label }) => {
+export const UseLayer = (args) => {
   function ExampleComponent() {
     const { level } = useLayer();
     return (
       <div style={{ padding: '1rem', background: 'var(--cds-layer)' }}>
-        {label}: {level}
+        {args.label}: {level}
       </div>
     );
   }

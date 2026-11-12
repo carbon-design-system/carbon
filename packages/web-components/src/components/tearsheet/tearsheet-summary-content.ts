@@ -14,8 +14,12 @@ import '../side-panel/index';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { classMap } from 'lit-html/directives/class-map.js';
 import styles from './tearsheet.scss?lit';
-import { SignalWatcher } from '@lit-labs/signals';
-import { getTearsheetSignal, getParentTearsheetId } from './tearsheet-signal';
+import { consume } from '@lit/context';
+import {
+  tearsheetContext,
+  defaultTearsheetState,
+  type TearsheetContextValue,
+} from './tearsheet-context';
 
 const blockClass = `${prefix}--tearsheet`;
 
@@ -28,9 +32,7 @@ const blockClass = `${prefix}--tearsheet`;
  * @fires cds-tearsheet-summary-closed - Fired when the summary panel is closed (mobile only)
  */
 @customElement(`${prefix}-tearsheet-summary-content`)
-class CDSTearsheetSummaryContent extends SignalWatcher(
-  HostListenerMixin(LitElement)
-) {
+class CDSTearsheetSummaryContent extends HostListenerMixin(LitElement) {
   @property({ reflect: true })
   slot = 'summary-content';
 
@@ -43,13 +45,8 @@ class CDSTearsheetSummaryContent extends SignalWatcher(
   @property({ attribute: 'summary-panel-aria-label' })
   summaryPanelAriaLabel: string = 'Summary panel';
 
-  /** uniqueId of the parent cds-tearsheet, read once in connectedCallback. */
-  private _uniqueId: string = '';
-
-  connectedCallback(): void {
-    super.connectedCallback();
-    this._uniqueId = getParentTearsheetId(this);
-  }
+  @consume({ context: tearsheetContext, subscribe: true })
+  private _tearsheetCtx?: TearsheetContextValue;
 
   private handleClose = () => {
     this.summaryPanelOpen = false;
@@ -66,9 +63,7 @@ class CDSTearsheetSummaryContent extends SignalWatcher(
   }
 
   render() {
-    // getTearsheetSignal(id).get() subscribes SignalWatcher to only this
-    // instance's signal — changes in other tearsheets never trigger a re-render.
-    const { isSm } = getTearsheetSignal(this._uniqueId).get();
+    const { isSm } = this._tearsheetCtx?.state ?? defaultTearsheetState;
 
     const classes = classMap({
       [`${blockClass}__flush`]: this.isFlush,

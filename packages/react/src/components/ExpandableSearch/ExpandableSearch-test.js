@@ -100,6 +100,23 @@ describe('ExpandableSearch', () => {
       expect(screen.getByRole('searchbox')).toHaveFocus();
     });
 
+    it('forwards tabIndex to the expand button when collapsed', () => {
+      render(<ExpandableSearch labelText="test-search" tabIndex={-1} />);
+
+      expect(screen.getAllByRole('button')[0]).toHaveAttribute(
+        'tabIndex',
+        '-1'
+      );
+    });
+
+    it('forwards tabIndex to the input when expanded', async () => {
+      render(<ExpandableSearch labelText="test-search" tabIndex={-1} />);
+
+      await userEvent.click(screen.getAllByRole('button')[0]);
+
+      expect(screen.getByRole('searchbox')).toHaveAttribute('tabIndex', '-1');
+    });
+
     it('supports a ref on the underlying input element', () => {
       const ref = jest.fn();
       const { container } = render(
@@ -204,6 +221,24 @@ describe('ExpandableSearch', () => {
       expect(container.firstChild).not.toHaveClass(
         `${prefix}--search--expanded`
       );
+    });
+
+    it('aligns the collapsed magnifier tooltip to the top by default', () => {
+      const { container } = render(
+        <ExpandableSearch labelText="test-search" />
+      );
+      expect(
+        container.querySelector(`.${prefix}--search-magnifier-tooltip`)
+      ).toHaveClass(`${prefix}--popover--top`);
+    });
+
+    it('supports a custom tooltipAlignment for the collapsed magnifier', () => {
+      const { container } = render(
+        <ExpandableSearch labelText="test-search" tooltipAlignment="bottom" />
+      );
+      expect(
+        container.querySelector(`.${prefix}--search-magnifier-tooltip`)
+      ).toHaveClass(`${prefix}--popover--bottom`);
     });
   });
 });

@@ -25,9 +25,9 @@
  *
  * Plain strings and non-sRGB objects are passed through unchanged.
  *
- * NOTE: The alias+alphaModifier case (Shape C) is handled upstream by the
- * carbon/alpha-modifier transform, which runs first (transitive: true ensures
- * the resolved alias value is already in scope when this transform fires).
+ * Shape B is how theme tokens apply their own alpha to a palette color: the
+ * `carbon/json-pointer-references` preprocessor has already replaced the
+ * references to the palette color's `colorSpace` and `components`.
  */
 
 module.exports = {

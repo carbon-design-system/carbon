@@ -1,0 +1,87 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type' as *;
+
+$carbon-prefix: 'cds';
+
+.example-container {
+  padding: $spacing-05;
+  max-width: 800px;
+
+  h3 {
+    @include type-style('heading-03');
+    margin-bottom: $spacing-03;
+  }
+
+  p {
+    @include type-style('body-01');
+    margin-bottom: $spacing-05;
+  }
+
+  .launch-button {
+    margin-block-start: $spacing-03;
+  }
+}
+
+.single-add-select-with-hierarchy-pattern {
+  // Remove extra padding from AddSelectColumn to match React implementation.
+  // The padding lives inside the Shadow DOM of cds-add-select-column, so the
+  // internal class is not reachable from outside. We target the exposed ::part
+  // instead.
+  cds-add-select-column::part(column) {
+    padding-block: 0;
+    padding-inline: 0;
+  }
+}
+
+// When disable-header-collapse is used on the tearsheet, the tearsheet's
+// __main-content layer is the sole scroll container. Setting overflow:hidden
+// on the cds-add-select-body host clips the shadow-root content to the host
+// box, preventing a second scrollbar from appearing inside __content.
+cds-add-select-body {
+  overflow: hidden;
+}
+
+.no-results {
+  padding: $spacing-09 $spacing-05;
+  text-align: center;
+
+  &__title {
+    @include type-style('heading-03');
+    color: $text-primary;
+    margin: 0 0 $spacing-03 0;
+  }
+
+  &__description {
+    @include type-style('body-01');
+    color: $text-secondary;
+    margin: 0;
+  }
+}
+
+.notification {
+  position: fixed;
+  inset-block-start: $spacing-05;
+  inset-inline-end: $spacing-05;
+  z-index: 9999;
+}
+
+// Equal-width footer action buttons
+.action-buttons {
+  display: flex;
+  width: 100%;
+  height: 100%;
+
+  > #{$carbon-prefix}-button {
+    flex: 1;
+    block-size: 100%;
+    max-inline-size: none;
+  }
+}

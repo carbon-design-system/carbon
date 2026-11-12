@@ -145,7 +145,7 @@ class CDSSelectableTile extends HostListenerMixin(FocusMixin(LitElement)) {
   colorScheme = TILE_COLOR_SCHEME.REGULAR;
 
   /**
-   * `true` if the seletable tile should be disabled.
+   * `true` if the selectable tile should be disabled.
    */
   @property({ type: Boolean, reflect: true })
   disabled = false;

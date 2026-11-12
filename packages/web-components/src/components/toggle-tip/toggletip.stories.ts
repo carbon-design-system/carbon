@@ -38,7 +38,6 @@ const toggletipAlignments = {
 const args = {
   alignment: 'bottom',
   alignmentAxisOffset: 0,
-  autoalign: false,
   bodyText:
     'Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.',
   buttonLabel: 'Show information',

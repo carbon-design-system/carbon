@@ -1,0 +1,179 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type' as *;
+
+$carbon-prefix: 'cds';
+
+.example-container {
+  padding: $spacing-05;
+  max-width: 800px;
+
+  h3 {
+    @include type-style('heading-03');
+    margin-bottom: $spacing-03;
+  }
+
+  p {
+    @include type-style('body-01');
+    margin-bottom: $spacing-05;
+  }
+
+  .launch-button {
+    margin-block-start: $spacing-03;
+  }
+}
+
+.no-results {
+  padding: $spacing-09 $spacing-05;
+  text-align: center;
+
+  &__title {
+    @include type-style('heading-03');
+    color: $text-primary;
+    margin: 0 0 $spacing-03 0;
+  }
+
+  &__description {
+    @include type-style('body-01');
+    color: $text-secondary;
+    margin: 0;
+  }
+}
+
+.notification {
+  position: fixed;
+  inset-block-start: $spacing-05;
+  inset-inline-end: $spacing-05;
+  z-index: 9999;
+}
+
+// When disable-header-collapse is used on the tearsheet, the tearsheet's
+// __main-content layer is the sole scroll container. Setting overflow:hidden
+// on the cds-add-select-body host clips the shadow-root content to the host
+// box, preventing a second scrollbar from appearing inside __content.
+cds-add-select-body {
+  overflow: hidden;
+}
+
+// Equal-width footer action buttons
+.action-buttons {
+  display: flex;
+  width: 100%;
+  height: 100%;
+
+  > #{$carbon-prefix}-button {
+    flex: 1;
+    block-size: 100%;
+    max-inline-size: none;
+  }
+}
+
+// Side panel content styles
+.side-panel-content {
+  display: flex;
+  flex-direction: column;
+  block-size: 100%;
+}
+
+.side-panel-header {
+  display: flex;
+  align-items: flex-start;
+  padding: $spacing-05;
+  border-block-end: 1px solid $border-subtle-01;
+  gap: $spacing-04;
+}
+
+.side-panel-title-section {
+  flex: 1;
+  min-inline-size: 0;
+}
+
+.side-panel-item-title {
+  @include type-style('heading-02');
+  margin: 0 0 $spacing-02 0;
+  color: $text-primary;
+  word-wrap: break-word;
+}
+
+.side-panel-item-subtitle {
+  @include type-style('label-01');
+  margin: 0;
+  color: $text-secondary;
+}
+
+.side-panel-section {
+  display: flex;
+  flex-direction: column;
+  padding: $spacing-05;
+  gap: $spacing-03;
+  border-block-end: 1px solid $border-subtle-01;
+}
+
+.side-panel-section-title {
+  @include type-style('label-01');
+  margin: 0;
+  color: $text-secondary;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.side-panel-description {
+  @include type-style('body-01');
+  display: -webkit-box;
+  overflow: hidden;
+  margin: 0;
+  -webkit-box-orient: vertical;
+  color: $text-primary;
+  -webkit-line-clamp: 4;
+  line-height: 1.5;
+}
+
+.side-panel-details {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-03;
+}
+
+.side-panel-detail-item {
+  @include type-style('body-01');
+  display: flex;
+  color: $text-primary;
+  gap: $spacing-02;
+}
+
+.side-panel-detail-key {
+  color: $text-secondary;
+  font-weight: 600;
+}
+
+.side-panel-detail-value {
+  color: $text-primary;
+}
+
+.side-panel-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-03;
+}
+
+// Empty state in selection summary
+.empty-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-07;
+  text-align: center;
+}
+
+.empty-state-text {
+  @include type-style('body-01');
+  margin: 0;
+  color: $text-secondary;
+}
