@@ -102,4 +102,8 @@ $tooltip-padding-inline: custom-property.get-var(
   .#{$prefix}--icon-tooltip .#{$prefix}--tooltip-content {
     @include type.type-style('body-compact-01');
   }
+
+  .#{$prefix}--icon-button-tooltip .#{$prefix}--tooltip-content {
+    padding-block: spacing.$spacing-05;
+  }
 }
