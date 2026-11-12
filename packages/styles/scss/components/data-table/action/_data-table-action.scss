@@ -414,7 +414,9 @@
 
   .#{$prefix}--action-list .#{$prefix}--btn--primary:focus,
   .#{$prefix}--batch-summary .#{$prefix}--btn--primary:focus {
-    outline: 2px solid $layer;
+    // The toolbar is $background-brand in every theme, so the ring has to be
+    // light in every theme too; $layer goes dark in g90 and g100.
+    outline: 2px solid $text-on-color;
     outline-offset: convert.to-rem(-2px);
   }
 
