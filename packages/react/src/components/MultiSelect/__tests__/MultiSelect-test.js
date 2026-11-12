@@ -21,6 +21,7 @@ import Button from '../../Button';
 import ButtonSet from '../../ButtonSet';
 import { MultiSelect } from '../';
 import userEvent from '@testing-library/user-event';
+import { tabbable } from 'tabbable';
 
 const prefix = 'cds';
 const waitForPosition = () => act(async () => {});
@@ -306,6 +307,19 @@ describe('MultiSelect', () => {
     await userEvent.keyboard('[Escape]');
     expect(combobox).toHaveAttribute('aria-expanded', 'false');
     expect(combobox).not.toHaveAttribute('aria-activedescendant');
+  });
+
+  it('should exclude the open menu contents from the tab order', async () => {
+    render(<MultiSelect {...mockProps} />);
+    await waitForPosition();
+
+    const combobox = screen.getByRole('combobox');
+    await userEvent.click(combobox);
+
+    const menu = screen.getByRole('listbox');
+    expect(screen.getAllByRole('option')).toHaveLength(mockProps.items.length);
+    expect(tabbable(menu, { displayCheck: 'none' })).toEqual([]);
+    expect(combobox).toHaveFocus();
   });
 
   it('should move focus to the next control when the user tabs away with the menu open', async () => {
