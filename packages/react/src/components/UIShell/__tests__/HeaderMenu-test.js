@@ -65,7 +65,9 @@ describe('HeaderMenu', () => {
         <HeaderMenuItem href="/c">c</HeaderMenuItem>
       </HeaderMenu>
     );
-    expect(ref).toHaveBeenCalledWith(screen.getByText('test-link'));
+    expect(ref).toHaveBeenCalledWith(
+      screen.getByText('test-link').closest('a')
+    );
   });
 
   it('should handle on click on the menu', async () => {

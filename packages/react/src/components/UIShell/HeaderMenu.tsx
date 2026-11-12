@@ -269,7 +269,7 @@ export const HeaderMenu = frFn((props, ref) => {
         ref={mergedButtonRef}
         tabIndex={0}
         {...accessibilityLabel}>
-        {menuLinkName}
+        <span className={`${prefix}--text-truncate--end`}>{menuLinkName}</span>
         {MenuContent ? (
           <MenuContent />
         ) : (
