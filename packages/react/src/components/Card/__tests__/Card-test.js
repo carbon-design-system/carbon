@@ -145,6 +145,63 @@ describe('Card', () => {
     expect(card).toHaveClass('cds--card--disabled');
   });
 
+  // Regression: `aria-disabled` on a role-less <div> is not exposed in the
+  // accessibility tree, so screen readers (e.g. JAWS in browse mode) did not
+  // announce the disabled state. The card must carry both attributes.
+  it('renders a disabled non-interactive card with role="group" and aria-disabled="true"', () => {
+    const { container } = render(
+      <Card disabled aria-label="Disabled card">
+        <CardBody>Content</CardBody>
+      </Card>
+    );
+    const card = container.firstChild;
+    expect(card).toHaveAttribute('role', 'group');
+    expect(card).toHaveAttribute('aria-disabled', 'true');
+    expect(screen.getByRole('group', { name: 'Disabled card' })).toBe(card);
+  });
+
+  it('names a disabled card through aria-labelledby on its title', () => {
+    render(
+      <Card disabled aria-labelledby="disabled-title">
+        <CardHeader>
+          <CardTitle id="disabled-title">Disabled title</CardTitle>
+        </CardHeader>
+      </Card>
+    );
+    expect(
+      screen.getByRole('group', { name: 'Disabled title' })
+    ).toHaveAttribute('aria-disabled', 'true');
+  });
+
+  it('does not set role="group" on a disabled clickable card', () => {
+    render(
+      <Card clickable disabled aria-label="Disabled card">
+        <CardBody>Content</CardBody>
+      </Card>
+    );
+    expect(screen.queryByRole('group')).not.toBeInTheDocument();
+    expect(screen.getByRole('button')).toHaveAttribute('aria-disabled', 'true');
+  });
+
+  it('does not add a group role or aria-disabled to an enabled card', () => {
+    const { container } = render(
+      <Card>
+        <CardBody>Content</CardBody>
+      </Card>
+    );
+    expect(screen.queryByRole('group')).not.toBeInTheDocument();
+    expect(container.firstChild).not.toHaveAttribute('aria-disabled');
+  });
+
+  it('allows the role of a disabled card to be overridden', () => {
+    render(
+      <Card disabled role="region" aria-label="Disabled card">
+        <CardBody>Content</CardBody>
+      </Card>
+    );
+    expect(screen.getByRole('region')).toHaveAttribute('aria-disabled', 'true');
+  });
+
   it('applies expressive density class', () => {
     const { container } = render(
       <Card density="expressive">
@@ -636,6 +693,45 @@ describe('CardTitle', () => {
       </Card>
     );
     expect(screen.getByText('My Title')).toBeInTheDocument();
+  });
+
+  it('renders the title as an h2 heading by default', () => {
+    render(
+      <Card>
+        <CardHeader>
+          <CardTitle>My Title</CardTitle>
+        </CardHeader>
+      </Card>
+    );
+    expect(
+      screen.getByRole('heading', { level: 2, name: 'My Title' })
+    ).toBeInTheDocument();
+  });
+
+  it('renders the title with the heading level provided by `as`', () => {
+    render(
+      <Card>
+        <CardHeader>
+          <CardTitle as="h4">My Title</CardTitle>
+        </CardHeader>
+      </Card>
+    );
+    expect(
+      screen.getByRole('heading', { level: 4, name: 'My Title' })
+    ).toBeInTheDocument();
+  });
+
+  it('does not include the label or description in the heading', () => {
+    render(
+      <Card>
+        <CardHeader>
+          <CardTitle label="Category" description="A description">
+            My Title
+          </CardTitle>
+        </CardHeader>
+      </Card>
+    );
+    expect(screen.getByRole('heading')).toHaveTextContent(/^My Title$/);
   });
 
   it('renders label when provided', () => {

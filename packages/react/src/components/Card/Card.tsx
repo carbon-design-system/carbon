@@ -129,6 +129,9 @@ const CardComponent = forwardRef<HTMLDivElement, CardProps>(
     const isAnchor = BaseComponent === 'a';
 
     const cardProps = {
+      // Give a disabled static card a role that exposes its aria-disabled state
+      // while assistive technology browses its content. Callers can override it.
+      ...(disabled && !clickable && !as && { role: 'group' }),
       ...rest,
       ref,
       className: cardClasses,

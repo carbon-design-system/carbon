@@ -174,6 +174,22 @@ describe('AILabelActions', () => {
       );
     });
 
+    it('should use a custom `aria-label` in the accessible name', () => {
+      render(<AILabel aiText="AI" aria-label="Show information for Card" />);
+      expect(screen.getByRole('button')).toHaveAttribute(
+        'aria-label',
+        'AI Show information for Card'
+      );
+    });
+
+    it('should prefer the deprecated `slugLabel` over `aria-label`', () => {
+      render(<AILabel aiText="AI" slugLabel="Legacy" aria-label="New" />);
+      expect(screen.getByRole('button')).toHaveAttribute(
+        'aria-label',
+        'AI Legacy'
+      );
+    });
+
     it('should let visible text serve as accessible name in inline mode', () => {
       render(<AILabel kind="inline" aiText="AI" textLabel="Text goes here" />);
       expect(
