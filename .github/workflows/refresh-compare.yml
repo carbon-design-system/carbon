@@ -1,0 +1,120 @@
+name: Refresh V11 vs V12 capture
+
+# Runs automatically after the V12 Storybook deploy completes (so the fresh
+# Storybook is live before the capture starts), plus a manual trigger and on
+# pushes that change the compare tooling itself.
+# The bot's own changelog commits only touch compare/data/, so they don't
+# retrigger deploy-v12-storybooks.yml and won't cause a loop.
+on:
+  workflow_run:
+    workflows: ["Deploy v12 storybooks to GH pages"]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - packages/react/compare/index.html
+      - packages/react/compare/capture.mjs
+      - packages/react/compare/diff.mjs
+      - packages/react/compare/sass-index.mjs
+
+permissions:
+  contents: write   # commit the refreshed changelog
+  pages: write
+  id-token: write
+
+concurrency:
+  group: refresh-compare
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    # For workflow_run triggers, only run if the upstream workflow succeeded.
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Install compare dependencies
+        run: |
+          cd packages/react/compare
+          npm ci
+          npx playwright install --with-deps chromium
+
+      # Previous run's raw captures and screenshots — so unchanged Storybook
+      # builds are skipped (incremental capture).
+      - name: Restore previous capture
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            packages/react/compare/data/stories
+            packages/react/compare/data/shots
+          key: compare-capture-${{ github.run_id }}
+          restore-keys: compare-capture-
+
+      - name: Build Sass token index
+        run: |
+          cd packages/react/compare
+          node sass-index.mjs
+
+      - name: Capture
+        run: |
+          cd packages/react/compare
+          node capture.mjs --concurrency 6
+
+      - name: Diff
+        run: |
+          cd packages/react/compare
+          node diff.mjs
+
+      - name: Save capture
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            packages/react/compare/data/stories
+            packages/react/compare/data/shots
+          key: compare-capture-${{ github.run_id }}
+
+      # Only the small text outputs go into git so the history shows what changed.
+      - name: Commit changelog
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add packages/react/compare/data/changelog.json packages/react/compare/data/run-diff.json packages/react/compare/data/CHANGELOG.md
+          if git diff --cached --quiet; then
+            echo "No changelog changes."
+          else
+            git commit -m "Refresh V11 vs V12 capture ($(date -u +%Y-%m-%d))"
+            git push
+          fi
+
+      - name: Assemble site
+        run: |
+          mkdir -p _site/compare-data
+          cp packages/react/compare/index.html .nojekyll _site/
+          echo "compare-react.carbondesignsystem.com" > _site/CNAME
+          cp packages/react/compare/data/changelog.json \
+             packages/react/compare/data/run-diff.json \
+             packages/react/compare/data/CHANGELOG.md \
+             _site/compare-data/
+          cp -r packages/react/compare/data/shots _site/compare-data/shots
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy
+        id: deploy
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,10 @@
+# Raw captures and screenshots are large (~90 MB/run) and change every run.
+# Only changelog.json, run-diff.json and CHANGELOG.md are committed.
+stories/
+shots/
+captures.json
+docs.json
+manifest.json
+meta.json
+tokens.json
+sass-index.json
