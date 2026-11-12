@@ -263,6 +263,28 @@ $-file-row-gap: clamp(
     }
   }
 
+  // TODO: V12 - Remove these aliases alongside the legacy React size classes.
+  // Keep the height local so legacy classes do not create a layout context.
+  @each $size in ('md', 'sm') {
+    .#{$prefix}--file__selected-file--#{$size}:not(
+        :where(
+            .#{$prefix}--layout--size-xs,
+            .#{$prefix}--layout--size-sm,
+            .#{$prefix}--layout--size-md,
+            .#{$prefix}--layout--size-lg,
+            .#{$prefix}--layout--size-xl,
+            .#{$prefix}--layout--size-2xl
+          )
+      ) {
+      --#{$prefix}-layout-size-height-local: var(
+        --#{$prefix}-layout-size-height-#{$size}
+      );
+
+      gap: $-file-row-gap 0;
+      min-block-size: layout.size('height');
+    }
+  }
+
   // TODO: deprecate this block
   .#{$prefix}--file__selected-file--invalid__wrapper {
     @include focus-outline('invalid');
