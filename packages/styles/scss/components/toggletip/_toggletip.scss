@@ -90,6 +90,10 @@
       'link-focus-text-color',
       theme.$focus-inverse
     );
+    @include custom-property.declaration(
+      'link-active-text-color',
+      theme.$text-inverse
+    );
     @include type.type-style('body-01');
 
     display: grid;
