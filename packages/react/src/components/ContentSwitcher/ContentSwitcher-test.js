@@ -10,6 +10,7 @@ import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { ContentSwitcher } from './ContentSwitcher';
 import { IconSwitch, Switch } from '../Switch';
+import { TabPanel, TabPanels, Tabs } from '../Tabs';
 
 describe('ContentSwitcher - RTL', () => {
   describe('renders API as expected', () => {
@@ -219,6 +220,41 @@ describe('ContentSwitcher - RTL', () => {
           'cds--content-switcher cds--content-switcher--icon-only cds--content-switcher--low-contrast cds--layout-constraint--size__default-md cds--layout-constraint--size__min-sm cds--layout-constraint--size__max-lg',
         role: 'tablist',
       });
+    });
+
+    it('should control tab panels when rendered in Tabs', async () => {
+      render(
+        <Tabs>
+          <ContentSwitcher onChange={() => {}}>
+            <Switch name="one" text="First section" />
+            <Switch name="two" text="Second section" />
+            <Switch name="three" text="Third section" />
+          </ContentSwitcher>
+          <TabPanels>
+            <TabPanel>Tab 1</TabPanel>
+            <TabPanel>Tab 2</TabPanel>
+            <TabPanel>Tab 3</TabPanel>
+          </TabPanels>
+        </Tabs>
+      );
+
+      expect(screen.getAllByRole('tabpanel')[0]).toHaveTextContent('Tab 1');
+      expect(screen.getAllByRole('tabpanel')[0]).not.toHaveAttribute('hidden');
+      expect(
+        screen.getAllByRole('tabpanel', { hidden: true })[1]
+      ).toHaveAttribute('hidden');
+
+      await userEvent.click(screen.getByText('Second section'));
+
+      expect(
+        screen.getAllByRole('tabpanel', { hidden: true })[0]
+      ).toHaveTextContent('Tab 1');
+      expect(
+        screen.getAllByRole('tabpanel', { hidden: true })[0]
+      ).toHaveAttribute('hidden');
+      expect(
+        screen.getAllByRole('tabpanel', { hidden: true })[1]
+      ).not.toHaveAttribute('hidden');
     });
   });
 });
