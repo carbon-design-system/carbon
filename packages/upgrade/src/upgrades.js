@@ -1101,6 +1101,42 @@ export const upgrades = [
           });
         },
       },
+      {
+        name: 'tagset-to-tagoverflow',
+        description:
+          'Migrates TagSet (deprecated) to TagOverflow: renames the import specifier and JSX element, renames tags→items and overflowAutoAlign→autoAlign, transforms per-item fields (type→tagType, injects id), removes onOverflowClick with a TODO comment, and annotates deprecated props containingElementRef/measurementOffset/multiline.',
+        migrate: async (options) => {
+          const transform = path.join(
+            TRANSFORM_DIR,
+            'tagset-to-tagoverflow.js'
+          );
+          const paths =
+            Array.isArray(options.paths) && options.paths.length > 0
+              ? options.paths
+              : await glob(['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'], {
+                  cwd: options.workspaceDir,
+                  ignore: [
+                    '**/es/**',
+                    '**/lib/**',
+                    '**/umd/**',
+                    '**/node_modules/**',
+                    '**/storybook-static/**',
+                    '**/dist/**',
+                    '**/build/**',
+                    '**/*.d.ts',
+                    '**/coverage/**',
+                  ],
+                });
+
+          await runCodemod(options, {
+            dry: !options.write,
+            transform,
+            paths,
+            verbose: options.verbose,
+            parser: 'tsx',
+          });
+        },
+      },
     ],
   },
   {
