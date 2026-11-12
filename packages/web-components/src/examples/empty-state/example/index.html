@@ -12,37 +12,51 @@
     <title>Empty State Pattern Example — @carbon/web-components</title>
     <link rel="stylesheet" href="./src/index.scss" />
     <script type="module" src="./src/main.ts"></script>
+    <script type="module" src="./src/stories-menu.ts"></script>
   </head>
   <body>
     <div>
-      <div style="padding: 1rem; background: #f4f4f4; margin-bottom: 2rem;">
+      <div style="padding: 1rem; background: #f4f4f4;">
         <h1 style="font-size: 1.5rem; margin-bottom: 1rem;">
           Empty State Pattern Examples
         </h1>
-
-        <section style="margin-bottom: 2rem;">
-          <h2 style="font-size: 1.125rem; margin-bottom: 1rem;">
-            Empty State unit with isometric illustration
-          </h2>
-          <empty-state-isometric></empty-state-isometric>
-        </section>
-
-        <section style="margin-bottom: 2rem;">
-          <h2 style="font-size: 1.125rem; margin-bottom: 1rem;">
-            Empty State unit with pictogram illustration
-          </h2>
-          <empty-state-pictogram></empty-state-pictogram>
-        </section>
+        <div
+          id="story-buttons"
+          style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+          <cds-button size="sm" kind="tertiary" data-story="default">
+            Default
+          </cds-button>
+          <cds-button size="sm" kind="tertiary" data-story="isometric">
+            Unit with isometric illustration
+          </cds-button>
+          <cds-button size="sm" kind="tertiary" data-story="pictogram">
+            Unit with pictogram illustration
+          </cds-button>
+          <cds-button size="sm" kind="tertiary" data-story="ui">
+            In a UI
+          </cds-button>
+          <cds-button size="sm" kind="tertiary" data-story="no-data">
+            NoDataEmptyState
+          </cds-button>
+          <cds-button size="sm" kind="tertiary" data-story="error">
+            ErrorEmptyState
+          </cds-button>
+          <cds-button size="sm" kind="tertiary" data-story="not-found">
+            NotFoundEmptyState
+          </cds-button>
+          <cds-button size="sm" kind="tertiary" data-story="notifications">
+            NotificationsEmptyState
+          </cds-button>
+          <cds-button size="sm" kind="tertiary" data-story="unauthorized">
+            UnauthorizedEmptyState
+          </cds-button>
+          <cds-button size="sm" kind="tertiary" data-story="no-tags">
+            NoTagsEmptyState
+          </cds-button>
+        </div>
       </div>
 
-      <section>
-        <div style="padding: 0.5rem 1rem; background: #e0e0e0;">
-          <h2 style="font-size: 1.125rem; margin: 0 0 0.5rem;">
-            Empty State unit
-          </h2>
-        </div>
-        <empty-state-unit></empty-state-unit>
-      </section>
+      <div id="story-outlet" style="padding: 2rem;"></div>
     </div>
   </body>
 </html>
