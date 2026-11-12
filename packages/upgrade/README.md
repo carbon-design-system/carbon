@@ -408,6 +408,45 @@ npx @carbon/upgrade migrate featureflag-deprecate-flags-prop --write
 </FeatureFlags>
 ```
 
+### Migrate `@carbon/ibm-products` imports to core
+
+Runs the Tearsheet, Coachmark and PageHeader codemods, then moves
+`@carbon/ibm-products` imports to `@carbon/react`, `@carbon/utilities` and the
+Carbon Labs packages. The `preview__` and `previewCandidate__` prefixes are
+dropped and usages are renamed. Imports that are not recognized are left as-is.
+
+**Usage:**
+
+```bash
+npx @carbon/upgrade migrate ibm-products-migrate-to-core --write
+```
+
+**Example:**
+
+```jsx
+// Before
+import {
+  preview__Tearsheet as Tearsheet,
+  previewCandidate__InlineTip as InlineTip,
+  AddSelectData,
+} from '@carbon/ibm-products';
+
+// After
+import { Tearsheet } from '@carbon/react';
+import { InlineTip } from '@carbon-labs/react-inline-tip';
+import { AddSelectData } from '@carbon/utilities';
+```
+
+**Notes:**
+
+- Cascade, Checklist, NonLinearReading and InlineTip move to their
+  `@carbon-labs/react-*` packages. When any of these are not installed, the
+  command detects your package manager (npm, Yarn, pnpm or Bun) and asks before
+  installing them. Nothing else in `package.json` is changed. Without `--write`
+  nothing is installed.
+- `@carbon-labs/react-inline-tip` might not be published to npm yet. If an
+  install fails, the command prints the manual install command.
+
 ## TypeScript Support
 
 All codemods support TypeScript files (`.ts` and `.tsx`) in addition to
