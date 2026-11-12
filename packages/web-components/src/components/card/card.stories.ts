@@ -1248,9 +1248,6 @@ export const WithTitleMedia = {
       <cds-column lg="4" md="4" sm="4">
         <cds-card>
           <cds-card-header>
-            <div slot="header-media">
-              ${iconLoader(Analytics16, { style: 'display:block' })}
-            </div>
             <cds-card-title
               label="Label"
               description="The title media slot positions an icon to the left of the title text">
