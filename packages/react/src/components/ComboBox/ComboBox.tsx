@@ -57,6 +57,7 @@ import { FormContext } from '../FluidForm';
 import { autoUpdate, flip, hide, useFloating } from '@floating-ui/react';
 import type { TranslateWithId } from '../../types/common';
 import { useFeatureFlag } from '../FeatureFlags';
+import { useSafeFloatingRefs } from '../../internal/useSafeFloatingRefs';
 import { AILabel } from '../AILabel';
 import {
   defaultItemToString,
@@ -440,6 +441,7 @@ const ComboBox = forwardRef(
           }
         : {}
     );
+    const { setFloatingSafe, setReferenceSafe } = useSafeFloatingRefs(refs);
     const referenceElement = refs?.reference?.current;
     const parentWidth =
       typeof HTMLElement !== 'undefined' &&
@@ -1080,7 +1082,7 @@ const ComboBox = forwardRef(
     const menuProps = useMemo(
       () =>
         getMenuProps({
-          ref: enableFloatingStyles ? refs.setFloating : null,
+          ref: enableFloatingStyles ? setFloatingSafe : null,
         }),
       // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
       [
@@ -1088,7 +1090,7 @@ const ComboBox = forwardRef(
         deprecatedAriaLabel,
         ariaLabel,
         getMenuProps,
-        refs.setFloating,
+        setFloatingSafe,
       ]
     );
 
@@ -1130,7 +1132,7 @@ const ComboBox = forwardRef(
           light={light}
           size={size}
           warn={normalizedProps.warn}
-          ref={enableFloatingStyles ? refs.setReference : null}
+          ref={enableFloatingStyles ? setReferenceSafe : null}
           warnText={warnText}
           warnTextId={warnTextId}>
           <div className={`${prefix}--list-box__field`}>

@@ -26,6 +26,7 @@ import {
 } from '@floating-ui/react';
 import { useFeatureFlag } from '../FeatureFlags';
 import { mergeRefs } from '../../tools/mergeRefs';
+import { useSafeFloatingRefs } from '../../internal/useSafeFloatingRefs';
 import { MenuAlignment } from '../MenuButton';
 import type { TFunc, TranslateWithId } from '../../types/common';
 import { deprecateValuesWithin } from '../../prop-types/deprecateValuesWithin';
@@ -144,7 +145,8 @@ const ComboButton = React.forwardRef<HTMLDivElement, ComboButtonProps>(
       middleware: middlewares,
       whileElementsMounted: autoUpdate,
     });
-    const ref = mergeRefs(forwardRef, containerRef, refs.setReference);
+    const { setFloatingSafe, setReferenceSafe } = useSafeFloatingRefs(refs);
+    const ref = mergeRefs(forwardRef, containerRef, setReferenceSafe);
     const {
       open,
       handleClick: hookOnClick,
@@ -207,7 +209,7 @@ const ComboButton = React.forwardRef<HTMLDivElement, ComboButtonProps>(
           </Button>
         </div>
         <IconButton
-          ref={refs.setReference}
+          ref={setReferenceSafe}
           className={triggerClasses}
           label={t('carbon.combo-button.additional-actions')}
           size={size}
@@ -224,7 +226,7 @@ const ComboButton = React.forwardRef<HTMLDivElement, ComboButtonProps>(
           containerRef={containerRef}
           menuAlignment={menuAlignment}
           className={menuClasses}
-          ref={refs.setFloating}
+          ref={setFloatingSafe}
           id={id}
           label={t('carbon.combo-button.additional-actions')}
           size={size}
