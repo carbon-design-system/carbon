@@ -373,8 +373,6 @@ exports[`@carbon/layout public API published files 1`] = `
   "scss/generated/_size.scss",
   "scss/generated/_spacing.scss",
   "scss/modules/_convert.scss",
-  "scss/modules/generated/_fluid-spacing.scss",
-  "scss/modules/generated/_spacing.scss",
   "src/index.ts",
   "src/tokens.ts",
   "style-dictionary/formats/js-layout.js",
