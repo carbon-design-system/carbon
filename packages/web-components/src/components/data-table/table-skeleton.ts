@@ -10,6 +10,7 @@ import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
+import { TABLE_SIZE } from './defs';
 import styles from './data-table.scss?lit';
 
 /**
@@ -50,6 +51,18 @@ class CDSTableSkeleton extends LitElement {
   showToolbar = true;
 
   /**
+   * Optionally specify the size of the table rows.
+   */
+  @property({ reflect: true })
+  size = TABLE_SIZE.LG;
+
+  /**
+   * Specify a label to be read by screen readers on the toolbar region.
+   */
+  @property({ attribute: 'toolbar-label' })
+  toolbarLabel = 'data table toolbar';
+
+  /**
    *  true to add useZebraStyles striping.
    */
   @property({ type: Boolean, reflect: true })
@@ -76,11 +89,13 @@ class CDSTableSkeleton extends LitElement {
    * @returns The header
    */
   protected _renderToolbar() {
-    const { showToolbar } = this;
+    const { showToolbar, toolbarLabel } = this;
     return !showToolbar
       ? undefined
       : html`
-          <section class="${prefix}--table-toolbar">
+          <section
+            aria-label="${toolbarLabel}"
+            class="${prefix}--table-toolbar">
             <div class="${prefix}--toolbar-content">
               <span
                 class="${prefix}--skeleton ${prefix}--btn ${prefix}--btn--sm"></span>
@@ -105,10 +120,11 @@ class CDSTableSkeleton extends LitElement {
   }
 
   render() {
-    const { columnCount, headers, rowCount, zebra } = this;
+    const { columnCount, headers, rowCount, size, zebra } = this;
     const classes = classMap({
       [`${prefix}--skeleton`]: true,
       [`${prefix}--data-table`]: true,
+      [`${prefix}--data-table--${size}`]: Boolean(size),
       [`${prefix}--data-table--zebra`]: zebra,
     });
     return html`
