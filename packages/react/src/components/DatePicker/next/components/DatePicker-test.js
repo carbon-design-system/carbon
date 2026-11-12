@@ -91,6 +91,33 @@ function createPlainDate(date) {
 /** @type {any} */ (globalThis).Temporal = mockTemporal;
 
 describe('DatePicker v12 focus restoration', () => {
+  it('translates calendar controls through the public DatePicker', async () => {
+    const user = userEvent.setup();
+    const messages = {
+      'carbon.date-picker.calendar': 'Calendario',
+      'carbon.date-picker.previous-month': 'Mes anterior',
+      'carbon.date-picker.next-month': 'Mes siguiente',
+    };
+    render(
+      <DatePicker locale="es" translateWithId={(id) => messages[id]}>
+        <DatePickerInput id="translated-date" labelText="Fecha" />
+      </DatePicker>
+    );
+
+    await user.click(screen.getByLabelText('Fecha'));
+    expect(
+      screen.getByRole('grid', { name: 'Calendario' })
+    ).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Mes anterior' })).toBeEnabled();
+    expect(screen.getByRole('button', { name: 'Mes siguiente' })).toBeEnabled();
+    expect(screen.getByText('enero de 2026')).toBeInTheDocument();
+
+    await user.click(screen.getByRole('button', { name: 'Mes siguiente' }));
+    expect(screen.getByText('febrero de 2026')).toBeInTheDocument();
+    await user.click(screen.getByRole('button', { name: 'Mes anterior' }));
+    expect(screen.getByText('enero de 2026')).toBeInTheDocument();
+  });
+
   it('returns focus to the input after selecting a date', async () => {
     const user = userEvent.setup();
 
