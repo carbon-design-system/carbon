@@ -1600,7 +1600,7 @@ $popover-caret-height: custom-property.get-var(
     block-size: 2px;
     content: '';
     inline-size: 100%;
-    inset-block-end: 0;
+    inset-block-end: -1px;
   }
 
   .#{$prefix}--popover--tab-tip__button svg {
