@@ -466,8 +466,16 @@ $copy-btn-feedback: $background-inverse !default;
 
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container {
     inline-size: 100%;
-    mask-composite: intersect;
+    // A mask applies to the scrollbar as well as the content, so the leading
+    // layer holds the scrollbar gutter opaque. Without it the fade washes the
+    // scrollbar out below the 3:1 required by WCAG 2.1 1.4.11.
+    mask-composite: add, intersect, intersect;
     mask-image: linear-gradient(
+        to left,
+        #000000 $spacing-05,
+        transparent $spacing-05
+      ),
+      linear-gradient(
         to right,
         #000000 calc(100% - #{$spacing-07}),
         transparent 100%
@@ -490,6 +498,11 @@ $copy-btn-feedback: $background-inverse !default;
 
   [dir='rtl'] .#{$prefix}--snippet--multi .#{$prefix}--snippet-container {
     mask-image: linear-gradient(
+        to right,
+        #000000 $spacing-05,
+        transparent $spacing-05
+      ),
+      linear-gradient(
         to left,
         #000000 calc(100% - #{$spacing-07}),
         transparent 100%
