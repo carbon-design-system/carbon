@@ -27,7 +27,6 @@ import {
   getButtonSize,
   getDecorator,
   toggleButton,
-  handleCollapseChange,
   toggleInfluencerPanel,
   toggleSummaryPanel,
   description,
@@ -76,8 +75,7 @@ export const Default = {
         variant="${args.variant}"
         ?open="${args.open}"
         ?prevent-close-on-click-outside="${args.preventCloseOnClickOutside}"
-        selector-primary-focus="#input1"
-        @cds-tearsheet-collapse-change="${handleCollapseChange}">
+        selector-primary-focus="#input1">
         <cds-tearsheet-header
           ?hide-close-button="${args.hideCloseButton}"
           ?disable-header-collapse="${args.disableHeaderCollapse}">
@@ -92,7 +90,7 @@ export const Default = {
               : ''}
             ${args.showHeaderActions
               ? html`<div slot="header-actions">
-                  <cds-button size="sm" kind="tertiary">
+                  <cds-button size="md" kind="tertiary">
                     Primary action ${iconLoader(Add16, { slot: 'icon' })}
                   </cds-button>
                 </div>`
@@ -169,9 +167,7 @@ export const WithInfluencer = {
         </div>
       </div>
 
-      <cds-tearsheet
-        variant="${args.variant ?? 'wide'}"
-        @cds-tearsheet-collapse-change="${handleCollapseChange}">
+      <cds-tearsheet variant="${args.variant ?? 'wide'}">
         <cds-tearsheet-header
           ?hide-close-button="${args.hideCloseButton}"
           ?disable-header-collapse="${args.disableHeaderCollapse}">
@@ -184,7 +180,7 @@ export const WithInfluencer = {
             })}
 
             <div slot="header-actions">
-              <cds-button size="sm" kind="tertiary">Action 1</cds-button>
+              <cds-button size="md" kind="tertiary">Action 1</cds-button>
             </div>
           </cds-tearsheet-header-content>
         </cds-tearsheet-header>
@@ -256,9 +252,7 @@ export const WithTabs = {
         </div>
       </div>
 
-      <cds-tearsheet
-        variant="${args.variant ?? 'wide'}"
-        @cds-tearsheet-collapse-change="${handleCollapseChange}">
+      <cds-tearsheet variant="${args.variant ?? 'wide'}">
         <cds-tearsheet-header
           ?hide-close-button="${args.hideCloseButton}"
           ?disable-header-collapse="${args.disableHeaderCollapse}">
@@ -271,7 +265,7 @@ export const WithTabs = {
             })}
 
             <div slot="header-actions">
-              <cds-button size="sm" kind="tertiary">Action 1</cds-button>
+              <cds-button size="md" kind="tertiary">Action 1</cds-button>
             </div>
           </cds-tearsheet-header-content>
           <cds-tearsheet-navigation-bar>
@@ -335,9 +329,7 @@ export const narrowTearsheet = {
         </div>
       </div>
 
-      <cds-tearsheet
-        variant="narrow"
-        @cds-tearsheet-collapse-change="${handleCollapseChange}">
+      <cds-tearsheet variant="narrow">
         <cds-tearsheet-header
           ?hide-close-button="${args.hideCloseButton}"
           ?disable-header-collapse="${args.disableHeaderCollapse}">
@@ -346,7 +338,7 @@ export const narrowTearsheet = {
             <label slot="label">Label</label>
             ${description}
             <div slot="header-actions">
-              <cds-button size="sm" kind="tertiary">
+              <cds-button size="md" kind="tertiary">
                 Primary action ${iconLoader(Add16, { slot: 'icon' })}
               </cds-button>
             </div>
@@ -474,8 +466,7 @@ export const WithCustomFooterActions = {
       <cds-tearsheet
         variant="${args.variant}"
         ?open="${args.open}"
-        prevent-close-on-click-outside
-        @cds-tearsheet-collapse-change="${handleCollapseChange}">
+        prevent-close-on-click-outside>
         <cds-tearsheet-header
           ?hide-close-button="${args.hideCloseButton}"
           ?disable-header-collapse="${args.disableHeaderCollapse}">
@@ -487,7 +478,7 @@ export const WithCustomFooterActions = {
               slot: 'title-start',
             })}
             <div slot="header-actions">
-              <cds-button size="sm" kind="tertiary">
+              <cds-button size="md" kind="tertiary">
                 Action 1 ${iconLoader(Add16, { slot: 'icon' })}
               </cds-button>
             </div>

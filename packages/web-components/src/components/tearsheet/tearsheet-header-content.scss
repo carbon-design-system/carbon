@@ -24,6 +24,9 @@ $motion-duration: $duration-moderate-02;
 :host-context(#{$prefix}-tearsheet[variant='narrow']) {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  gap: 0;
+  padding-inline-start: 0;
 
   .#{$block-class}__header-title {
     @include type.type-style('heading-03');
@@ -61,6 +64,7 @@ $motion-duration: $duration-moderate-02;
   // placed early in DOM order for correct keyboard tab sequence.
   // full width — close/decorator are abs-positioned, no offset needed
   display: grid;
+  box-sizing: border-box;
   flex-basis: unset;
   gap: $spacing-05;
   grid-template-columns: minmax(auto, 40rem) minmax(
@@ -68,6 +72,7 @@ $motion-duration: $duration-moderate-02;
       1fr
     );
   inline-size: 100%;
+  padding-inline-start: $spacing-05;
 
   .#{$block-class}__header-actions,
   .#{$block-class}__header-content
@@ -88,6 +93,8 @@ $motion-duration: $duration-moderate-02;
   @include breakpoint-down(md) {
     display: flex;
     flex-direction: column;
+    gap: 0;
+    padding-inline-start: 0;
 
     .#{$block-class}__header-actions {
       justify-content: flex-start;
@@ -98,22 +105,18 @@ $motion-duration: $duration-moderate-02;
 
 // ── Decorator (AI label) ─────────────────────────────────────────
 // DOM position: 2nd (after header-actions, before close, before header-content)
-// Visual position: absolute top-right (matches React TearsheetNext)
+// Visual position: absolute top-right (matches React Tearsheet)
 .#{$block-class}__decorator {
   position: absolute;
   z-index: 1;
-  inset-block-start: convert.to-rem(10px);
-  inset-inline-end: $spacing-09;
-  // Transition on base state so it animates in both directions (expand + collapse)
-  transition: inset-block-start $motion-duration motion(entrance, expressive);
+  inset-block-start: convert.to-rem(20px);
+  // Sit to the left of the close button (48px wide).
+  inset-inline-end: $spacing-10;
 
-  @media screen and (prefers-reduced-motion: reduce) {
-    transition: none;
-  }
-
-  // When header is collapsed, shift slightly down — matches React
-  :host-context(#{$prefix}-tearsheet-header[collapsed]) & {
-    inset-block-start: $spacing-03;
+  // When there is no close button, align to the same edge the close button
+  // would have occupied.
+  :host-context(#{$prefix}-tearsheet-header[hide-close-button]) & {
+    inset-inline-end: $spacing-05;
   }
 }
 
@@ -123,10 +126,9 @@ $motion-duration: $duration-moderate-02;
 .#{$block-class}__close-button {
   position: absolute;
   z-index: 1;
-  inset-block-start: 0;
-  inset-inline-end: 0;
+  inset-block-start: $spacing-05;
+  inset-inline-end: $spacing-05;
 
-  // Animate size change (lg → md on collapse) — matches React
   .#{$prefix}--modal-close {
     transition: all $motion-duration ease;
 
@@ -138,9 +140,9 @@ $motion-duration: $duration-moderate-02;
 
 .#{$block-class}__header-actions {
   display: flex;
+  align-items: flex-start;
   justify-content: flex-end;
   order: 2; /* Visual order: appears on the right on desktop */
-  margin-block-start: -14px;
 
   @include breakpoint-down(md) {
     order: 0; /* Reset to DOM order on mobile (header-actions first) */
@@ -180,11 +182,9 @@ $motion-duration: $duration-moderate-02;
 
   // Header title styling when collapsed
   .#{$block-class}__header-title {
-    @include type.type-style('label-02');
+    @include type.type-style('heading-03');
 
     align-items: center;
-    // Fixed block-size keeps the title row at the same height as the close button
-    block-size: $spacing-08;
     // Gap between title-start icon and title text when collapsed
     gap: $spacing-03;
     margin-block-start: $spacing-02;
@@ -233,7 +233,7 @@ $motion-duration: $duration-moderate-02;
   @include breakpoint(md) {
     .#{$block-class}__header-actions {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       margin-block: 0;
       transition: margin-block $motion-duration ease;
 
@@ -249,8 +249,8 @@ $motion-duration: $duration-moderate-02;
     align-items: center;
 
     ::slotted(*) {
-      block-size: $spacing-05;
-      inline-size: $spacing-05;
+      block-size: $spacing-06;
+      inline-size: $spacing-06;
     }
   }
 }

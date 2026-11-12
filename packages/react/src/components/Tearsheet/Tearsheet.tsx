@@ -222,22 +222,21 @@ const TearsheetInternal: React.ForwardRefExoticComponent<
     const [fullyCollapsed, setFullyCollapsed] = useState(false);
     const [disableHeaderCollapse, setDisableHeaderCollapse] = useState(false);
 
-    const arr = React.Children.toArray(children);
+    const arr = React.Children.toArray(children) as React.ReactElement[];
     const header = arr.find(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (child: any) => child.type === TearsheetHeader
+      (child: React.ReactElement) => child.type === TearsheetHeader
     );
+    const hideCloseButton =
+      (header as React.ReactElement<{ hideCloseButton?: boolean }>)?.props
+        ?.hideCloseButton ?? false;
     const influencer = arr.find(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (child: any) => child.type === Influencer
+      (child: React.ReactElement) => child.type === Influencer
     );
     const body = arr.find(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (child: any) => child.type === TearsheetBody
+      (child: React.ReactElement) => child.type === TearsheetBody
     );
     const footer = arr.find(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (child: any) => child.type === TearsheetFooter
+      (child: React.ReactElement) => child.type === TearsheetFooter
     );
 
     const uniqueId = useRef(useId());
@@ -267,10 +266,25 @@ const TearsheetInternal: React.ForwardRefExoticComponent<
 
     // Set CSS custom properties driven by props
     useIsomorphicEffect(() => {
-      const AILabelWidth =
-        localRef.current?.querySelector(`.${carbonPrefix}--ai-label`)
-          ?.clientWidth ?? 0;
-      const headerActionMarginRight = AILabelWidth + 24 + (isSm ? 8 : 0); // 24 is to compensate for close button
+      // Measure the actual rendered widths of the AI label and close button so
+      // that --tearsheet-header-action-offset stays accurate regardless of which
+      // elements are present.  Each element that exists contributes its own
+      // width plus an 8px gap to the right of the header-content-wrapper.
+      const root = localRef.current;
+      const aiLabel = root?.querySelector<HTMLElement>(
+        `.${carbonPrefix}--ai-label`
+      );
+      const closeButton = root?.querySelector<HTMLElement>(
+        `.${blockClass}__close-button`
+      );
+
+      const aiLabelWidth = aiLabel?.offsetWidth ?? 0;
+      const closeButtonWidth = closeButton?.offsetWidth ?? 0;
+
+      const headerActionMarginRight =
+        (aiLabelWidth > 0 ? aiLabelWidth + 8 : 0) +
+        (closeButtonWidth > 0 ? closeButtonWidth + 8 : 0);
+
       document.documentElement.style.setProperty(
         '--tearsheet-header-action-offset',
         `${headerActionMarginRight}px`
@@ -297,6 +311,7 @@ const TearsheetInternal: React.ForwardRefExoticComponent<
     }, [
       isSm,
       decorator,
+      hideCloseButton,
       influencerWidth,
       summaryContentWidth,
       verticalGap,

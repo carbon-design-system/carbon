@@ -41,12 +41,8 @@ $motion-duration: $duration-moderate-02;
     margin-block: 0;
     max-block-size: 50vh;
     padding-block-end: 0;
-    padding-block-start: $spacing-06;
-    padding-inline: $spacing-07;
-
-    @include breakpoint-down(md) {
-      padding-inline: $spacing-05;
-    }
+    padding-block-start: $spacing-05;
+    padding-inline: $spacing-05;
   }
 
   /* Animate all slotted children by default */
@@ -62,6 +58,18 @@ $motion-duration: $duration-moderate-02;
   ::slotted(*:not([slot='header-content'])) {
     flex-basis: 100%;
     margin-block-end: $spacing-06;
+  }
+
+  ::slotted(
+      *:not(
+          [slot='header-content'],
+          [slot='navigation-bar'],
+          [slot='decorator'],
+          .excludeFromCollapse
+        )
+    ) {
+    box-sizing: border-box;
+    padding-inline-start: $spacing-05;
   }
 
   ::slotted([slot='header-content']) {
@@ -119,8 +127,6 @@ $motion-duration: $duration-moderate-02;
 // ──────────────────────────────────────────────────────────────
 :host([collapsed]) {
   .#{$block-class}__header {
-    // Collapsed: remove top padding (was $spacing-04)
-    padding-block-start: 0;
     transition: padding $motion-duration motion(entrance, expressive);
 
     @media screen and (prefers-reduced-motion: reduce) {
@@ -143,7 +149,7 @@ $motion-duration: $duration-moderate-02;
   }
 
   ::slotted([slot='header-content']) {
-    // Remove bottom padding when collapsed (was $spacing-04)
+    margin-block-end: $spacing-05;
     min-block-size: $spacing-08;
   }
 

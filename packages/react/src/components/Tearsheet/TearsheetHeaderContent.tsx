@@ -16,9 +16,9 @@ import cx from 'classnames';
 import { TearsheetContext } from './context';
 import { TruncatedText } from '../TruncatedText';
 import { AILabel } from '../AILabel';
-import { IconButton } from '../IconButton';
 import { usePrefix } from '../../internal/usePrefix';
 import { Close } from '@carbon/icons-react';
+import Button from '../Button';
 
 export interface TearsheetHeaderContentProps {
   /**
@@ -86,7 +86,7 @@ const TearsheetHeaderContent = React.forwardRef<
     isValidElement(decorator) && decorator.type === AILabel;
   const normalizedDecorator = candidateIsAILabel
     ? cloneElement(decorator as ReactElement<{ size?: string }>, {
-        size: fullyCollapsed ? 'xs' : 'sm',
+        size: 'sm',
       })
     : decorator;
 
@@ -143,19 +143,15 @@ const TearsheetHeaderContent = React.forwardRef<
   const closeButtonElement = !hideCloseButton && (
     <div
       className={`${blockClass}__close-button ${carbonPrefix}--modal-close-button`}>
-      <IconButton
-        className={`${carbonPrefix}--modal-close`}
-        label={closeIconDescription || 'Close'}
+      <Button
+        kind="ghost"
+        size="md"
+        hasIconOnly
+        iconDescription={closeIconDescription || 'Close'}
+        renderIcon={Close}
+        autoAlign
         onClick={onClose}
-        align="left"
-        size={fullyCollapsed ? 'md' : undefined}>
-        <Close
-          size={20}
-          aria-hidden="true"
-          tabIndex="-1"
-          className={`${carbonPrefix}--modal-close__icon`}
-        />
-      </IconButton>
+      />
     </div>
   );
 
