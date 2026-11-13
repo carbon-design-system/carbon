@@ -175,11 +175,9 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   const ref = useMergedRefs([forwardRef, menu]);
 
   const [position, setPosition] = useState([-1, -1]);
+  // Disabled menu items remain focusable so assistive technology can announce them. (#24002)
   const focusableItems = useMemo(
-    () =>
-      childContext.state.items.filter(
-        (item) => !item.disabled && item.ref.current
-      ),
+    () => childContext.state.items.filter((item) => item.ref.current),
     [childContext.state.items]
   );
 

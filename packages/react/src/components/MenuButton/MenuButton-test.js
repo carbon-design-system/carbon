@@ -9,7 +9,8 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
-import { MenuItem } from '../Menu';
+import { MenuItem, MenuItemDivider } from '../Menu';
+import { FeatureFlags } from '../FeatureFlags';
 
 import { MenuButton } from './';
 
@@ -212,6 +213,90 @@ describe('MenuButton', () => {
       expect(input).toHaveFocus();
     });
   });
+
+  describe.each([false, true])(
+    'disabled menu items (enableV12Release=%s)',
+    (enableV12Release) => {
+      it('includes disabled items in arrow navigation without activating them', async () => {
+        const onClick = jest.fn();
+
+        render(
+          <FeatureFlags enableV12Release={enableV12Release}>
+            <MenuButton label="Actions">
+              <MenuItem label="First action" />
+              <MenuItem label="Disabled action" disabled onClick={onClick} />
+              <MenuItemDivider />
+              <MenuItem label="Last action" />
+            </MenuButton>
+          </FeatureFlags>
+        );
+
+        await userEvent.tab();
+        await userEvent.keyboard('{Enter}');
+
+        const first = screen.getByRole('menuitem', { name: 'First action' });
+        const disabled = screen.getByRole('menuitem', {
+          name: 'Disabled action',
+        });
+        const last = screen.getByRole('menuitem', { name: 'Last action' });
+
+        expect(first).toHaveFocus();
+        await userEvent.keyboard('{ArrowDown}');
+        expect(disabled).toHaveFocus();
+        expect(disabled).toHaveAttribute('aria-disabled', 'true');
+
+        await userEvent.keyboard('{Enter}');
+        await userEvent.keyboard(' ');
+        await userEvent.click(disabled);
+        expect(onClick).not.toHaveBeenCalled();
+        expect(screen.getByRole('menu')).toBeInTheDocument();
+        expect(disabled).toHaveFocus();
+
+        await userEvent.keyboard('{ArrowDown}');
+        expect(last).toHaveFocus();
+        await userEvent.keyboard('{ArrowDown}');
+        expect(first).toHaveFocus();
+        await userEvent.keyboard('{ArrowUp}');
+        expect(last).toHaveFocus();
+        await userEvent.keyboard('{ArrowUp}');
+        expect(disabled).toHaveFocus();
+        await userEvent.keyboard('{ArrowUp}');
+        expect(first).toHaveFocus();
+      });
+
+      it.each([false, true])(
+        'focuses a disabled first item on open (allDisabled=%s)',
+        async (allDisabled) => {
+          render(
+            <FeatureFlags enableV12Release={enableV12Release}>
+              <MenuButton label="Actions">
+                <MenuItem label="First action" disabled />
+                <MenuItem label="Last action" disabled={allDisabled} />
+              </MenuButton>
+            </FeatureFlags>
+          );
+
+          await userEvent.tab();
+          await userEvent.keyboard('{Enter}');
+
+          const first = screen.getByRole('menuitem', { name: 'First action' });
+          expect(first).toHaveFocus();
+          expect(first).toHaveAttribute('aria-disabled', 'true');
+
+          await userEvent.keyboard('{ArrowUp}');
+          expect(
+            screen.getByRole('menuitem', { name: 'Last action' })
+          ).toHaveFocus();
+          await userEvent.keyboard('{ArrowDown}');
+          expect(first).toHaveFocus();
+
+          await userEvent.keyboard('{Escape}');
+          expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+          expect(screen.getByRole('button', { name: 'Actions' })).toHaveFocus();
+        }
+      );
+    }
+  );
 
   describe('supports props.menuAlignment', () => {
     const alignments = [
