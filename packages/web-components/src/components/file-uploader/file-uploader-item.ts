@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2023
+ * Copyright IBM Corp. 2020, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -134,7 +134,7 @@ class CDSFileUploaderItem extends LitElement {
    * The size of this file uploader item.
    */
   @property({ reflect: true })
-  size = FILE_UPLOADER_ITEM_SIZE.MEDIUM;
+  size?: FILE_UPLOADER_ITEM_SIZE;
 
   /**
    * The state of this file uploader item.
