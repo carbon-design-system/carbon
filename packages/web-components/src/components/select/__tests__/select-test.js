@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -41,6 +41,30 @@ describe('cds-select', () => {
     const label = select.shadowRoot.querySelector('label');
     expect(helper.textContent).to.include('Helper text');
     expect(label.textContent).to.include('Select label');
+  });
+
+  it('should give each instance its own helper text id', async () => {
+    const el = await fixture(html`
+      <div>
+        <cds-select label-text="First" helper-text="Help">
+          <cds-select-item value="option-1">Option 1</cds-select-item>
+        </cds-select>
+        <cds-select label-text="Second" helper-text="Help">
+          <cds-select-item value="option-1">Option 1</cds-select-item>
+        </cds-select>
+      </div>
+    `);
+    const [first, second] = Array.from(el.querySelectorAll('cds-select'));
+    const describedBy = (select) =>
+      select.shadowRoot
+        .querySelector('select')
+        .getAttribute('aria-describedby');
+
+    expect(describedBy(first)).to.equal(
+      first.shadowRoot.querySelector('.cds--form__helper-text').id
+    );
+    expect(describedBy(first)).to.not.equal('helper-text');
+    expect(describedBy(first)).to.not.equal(describedBy(second));
   });
 
   it('should support the disabled attribute', async () => {
