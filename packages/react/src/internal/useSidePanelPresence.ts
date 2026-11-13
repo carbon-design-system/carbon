@@ -59,9 +59,15 @@ export const useSidePanelPresence = (
     }
 
     let cancelled = false;
-    Promise.all(animations.map((a) => a.finished)).finally(() => {
-      if (!cancelled) setShouldRender(false);
-    });
+    Promise.all(animations.map((a) => a.finished))
+      .finally(() => {
+        if (!cancelled) setShouldRender(false);
+      })
+      .catch(() => {
+        // `finished` rejects with an `AbortError` when an animation is
+        // canceled, e.g. when the panel unmounts mid-exit. The exit is over
+        // either way, so the rejection is expected and safe to ignore.
+      });
 
     return () => {
       cancelled = true;
