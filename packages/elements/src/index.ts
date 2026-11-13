@@ -161,13 +161,4 @@ export {
   spacing,
 } from '@carbon/layout';
 export * from '@carbon/themes';
-export {
-  fast01,
-  fast02,
-  moderate01,
-  moderate02,
-  slow01,
-  slow02,
-  easings,
-  motion,
-} from '@carbon/motion';
+export { easings, motion } from '@carbon/motion';

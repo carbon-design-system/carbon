@@ -56,14 +56,6 @@ function toCamelCase(name) {
   return name.replace(/-([a-z0-9])/gi, (_, ch) => ch.toUpperCase());
 }
 
-/** "durationFast01" → "fast01" */
-function toV10Name(camel) {
-  return (
-    camel.charAt('duration'.length).toLowerCase() +
-    camel.slice('duration'.length + 1)
-  );
-}
-
 /** Resolve a DTCG duration $value { value, unit } to a CSS string e.g. "70ms" */
 function resolveDuration(tokenValue) {
   return `${tokenValue.value}${tokenValue.unit}`;
@@ -111,11 +103,7 @@ const allTokens = collectTokens(motionTokenFile);
 const durationTokens = allTokens.filter((t) => t.name.startsWith('duration-'));
 const easingTokens = allTokens.filter((t) => t.name.startsWith('easing-'));
 
-const v11Names = durationTokens.map((t) => toCamelCase(t.name));
-const v10Names = v11Names.map(toV10Name);
-const sassV10Names = durationTokens.map((t) =>
-  t.name.replace(/^duration-/, '')
-);
+const durationNames = durationTokens.map((t) => toCamelCase(t.name));
 
 const allSurfaces = collectSurfaces(surfaceTokenFile);
 const surfaceNames = allSurfaces.map((s) => s.name);
@@ -289,19 +277,11 @@ describe('@carbon/motion — surface file (tokens/surfaces.tokens.json)', () => 
 describe('@carbon/motion — every token generates a JS export', () => {
   const CarbonMotion = require('../src');
 
-  test('every duration token in the JSON has a matching V11 JS export with the correct value', () => {
+  test('every duration token in the JSON has a matching JS export with the correct value', () => {
     for (const token of durationTokens) {
       const camel = toCamelCase(token.name);
       expect(CarbonMotion).toHaveProperty(camel);
       expect(CarbonMotion[camel]).toBe(resolveDuration(token.value));
-    }
-  });
-
-  test('every duration token in the JSON has a matching V10 alias JS export with the correct value', () => {
-    for (const token of durationTokens) {
-      const v10 = toV10Name(toCamelCase(token.name));
-      expect(CarbonMotion).toHaveProperty(v10);
-      expect(CarbonMotion[v10]).toBe(resolveDuration(token.value));
     }
   });
 
@@ -316,38 +296,16 @@ describe('@carbon/motion — every token generates a JS export', () => {
     }
   });
 
-  test('every V11 duration name is in unstable_tokens', () => {
+  test('every duration name is in unstable_tokens', () => {
     const tokenList = [...CarbonMotion.unstable_tokens];
-    for (const camel of v11Names) {
+    for (const camel of durationNames) {
       expect(tokenList).toContain(camel);
     }
   });
 
-  test('every V10 alias name is in unstable_tokens', () => {
+  test('unstable_tokens has exactly one entry per duration token', () => {
     const tokenList = [...CarbonMotion.unstable_tokens];
-    for (const v10 of v10Names) {
-      expect(tokenList).toContain(v10);
-    }
-  });
-
-  test('unstable_tokens has exactly one entry per V11 token and one per V10 alias', () => {
-    const tokenList = [...CarbonMotion.unstable_tokens];
-    expect(tokenList).toHaveLength(v11Names.length + v10Names.length);
-  });
-
-  test('V10 aliases point to their V11 canonical values', () => {
-    for (let i = 0; i < v11Names.length; i++) {
-      expect(CarbonMotion[v10Names[i]]).toBe(CarbonMotion[v11Names[i]]);
-    }
-  });
-
-  test('V11 names appear before V10 names in unstable_tokens', () => {
-    const tokenList = [...CarbonMotion.unstable_tokens];
-    const lastV11Index = Math.max(...v11Names.map((n) => tokenList.indexOf(n)));
-    const firstV10Index = Math.min(
-      ...v10Names.map((n) => tokenList.indexOf(n))
-    );
-    expect(lastV11Index).toBeLessThan(firstV10Index);
+    expect(tokenList).toHaveLength(durationNames.length);
   });
 });
 
@@ -504,19 +462,8 @@ describe('@carbon/motion — every token generates a Sass variable', () => {
     }
   });
 
-  test('every V10 Sass alias in the JSON appears in the Scss', () => {
-    for (const sassV10 of sassV10Names) {
-      expect(scssSource).toContain(`$${sassV10}:`);
-    }
-  });
-
-  test('Scss has exactly one V11 duration variable per duration token in the JSON', () => {
+  test('Scss has exactly one duration variable per duration token in the JSON', () => {
     const matches = scssSource.match(/\$duration-[a-z]+-\d+:/g) || [];
-    expect(matches).toHaveLength(durationTokens.length);
-  });
-
-  test('Scss has exactly one V10 alias per duration token in the JSON', () => {
-    const matches = scssSource.match(/\$[a-z]+-\d+: \$duration-/g) || [];
     expect(matches).toHaveLength(durationTokens.length);
   });
 });

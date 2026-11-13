@@ -18,7 +18,7 @@ import { selectorTabbable } from '../../globals/settings';
 import ArrowLeft16 from '@carbon/icons/es/arrow--left/16';
 import Close16 from '@carbon/icons/es/close/16';
 import { iconLoader } from '../../globals/internal/icon-loader';
-import { moderate02 } from '@carbon/motion';
+import { durationModerate02 } from '@carbon/motion';
 import Handle from '../../globals/internal/handle';
 import '../button/index';
 import '../icon-button/index';
@@ -407,7 +407,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
           inlineSize: '',
           transition: this._reducedMotion.matches
             ? 'none'
-            : `all ${moderate02}`,
+            : `all ${durationModerate02}`,
           transitionProperty: 'margin-inline-start, margin-inline-end',
         };
         if (this.open) {

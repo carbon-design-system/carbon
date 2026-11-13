@@ -31,12 +31,6 @@ exports[`@carbon/styles/scss/motion Public API 1`] = `
         "productive": "cubic-bezier(0.2, 0, 0.38, 0.9)",
       },
     },
-    "fast-01": "70ms",
-    "fast-02": "110ms",
-    "moderate-01": "150ms",
-    "moderate-02": "240ms",
-    "slow-01": "400ms",
-    "slow-02": "700ms",
     "standard-easing": "cubic-bezier(0.5, 0, 0.1, 1)",
     "surfaces": {
       "contextual": {

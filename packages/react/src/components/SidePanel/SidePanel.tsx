@@ -34,7 +34,7 @@ import { Resizer } from '../Resizer/Resizer';
 // Other standard imports.
 import { SIDE_PANEL_SIZES } from './constants';
 import cx from 'classnames';
-import { moderate02 } from '@carbon/motion';
+import { durationModerate02 } from '@carbon/motion';
 import { warning } from '../../internal/warning';
 
 const componentName = 'SidePanel';
@@ -747,13 +747,13 @@ export const SidePanel = React.forwardRef<HTMLDivElement, SidePanelProps>(
         if (placement && placement === 'right' && pageContentElement) {
           pageContentElement.style.marginInlineEnd = '0';
           pageContentElement.style.transition = !shouldReduceMotion
-            ? `margin-inline-end ${moderate02}`
+            ? `margin-inline-end ${durationModerate02}`
             : '';
           pageContentElement.style.marginInlineEnd = SIDE_PANEL_SIZES[size];
         } else if (pageContentElement) {
           pageContentElement.style.marginInlineStart = '0';
           pageContentElement.style.transition = !shouldReduceMotion
-            ? `margin-inline-start ${moderate02}`
+            ? `margin-inline-start ${durationModerate02}`
             : '';
           pageContentElement.style.marginInlineStart = SIDE_PANEL_SIZES[size];
         }
