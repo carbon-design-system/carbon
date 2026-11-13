@@ -109,6 +109,52 @@
     padding-block-end: 1.5rem;
   }
 
+  // The content wrapper lets the grid interpolate intrinsic height without
+  // imposing a maximum. Keep legacy markup on its existing layout.
+  tr.#{$prefix}--parent-row
+    + tr[data-child-row]
+    td
+    .#{$prefix}--child-row-inner-container.#{$prefix}--child-row-inner-container--animated {
+    display: grid;
+    grid-template-rows: 0fr;
+    max-block-size: none;
+    padding-block: 0;
+    transition: grid-template-rows $duration-moderate-01
+      motion(standard, productive);
+
+    > .#{$prefix}--child-row-content {
+      overflow: hidden;
+      min-block-size: 0;
+      padding-block: 0;
+      transition:
+        padding-block $duration-moderate-01 motion(standard, productive),
+        overflow 0s allow-discrete;
+      visibility: hidden;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+
+      > .#{$prefix}--child-row-content {
+        transition: none;
+      }
+    }
+  }
+
+  tr.#{$prefix}--parent-row.#{$prefix}--expandable-row
+    + tr[data-child-row]
+    td
+    .#{$prefix}--child-row-inner-container--animated {
+    grid-template-rows: 1fr;
+
+    > .#{$prefix}--child-row-content {
+      overflow: visible;
+      padding-block: 1rem 1.5rem;
+      transition-delay: 0s, $duration-moderate-01;
+      visibility: visible;
+    }
+  }
+
   // bottom border overrides
   .#{$prefix}--parent-row.#{$prefix}--expandable-row > td,
   .#{$prefix}--parent-row.#{$prefix}--expandable-row + tr[data-child-row] > td {
@@ -507,5 +553,13 @@
   // Windows HCM fix
   .#{$prefix}--table-expand__button:focus .#{$prefix}--table-expand__svg {
     @include high-contrast-mode('focus');
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .#{$prefix}--table-expand
+      .#{$prefix}--table-expand__button
+      .#{$prefix}--table-expand__svg {
+      transition: none;
+    }
   }
 }
