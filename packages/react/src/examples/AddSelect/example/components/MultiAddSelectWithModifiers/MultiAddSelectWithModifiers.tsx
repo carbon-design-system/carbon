@@ -15,14 +15,17 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Dropdown, Layer, MultiSelect, ToastNotification } from '@carbon/react';
 import {
-  preview__AddSelect as AddSelect,
-  preview__Tearsheet as Tearsheet,
+  Dropdown,
+  Layer,
+  MultiSelect,
+  ToastNotification,
+  AddSelect,
+  Tearsheet,
   AddSelectData,
   AddSelectItem,
   NoDataEmptyState,
-} from '@carbon/ibm-products';
+} from '@carbon/react';
 import './MultiAddSelectWithModifiers.scss';
 
 const blockClass = `multi-add-select-with-modifiers-pattern`;

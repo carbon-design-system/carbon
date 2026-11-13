@@ -8,8 +8,8 @@
 @use '@carbon/styles/scss/config' with (
   $font-path: '@ibm/plex'
 );
+// @carbon/styles already includes the Tearsheet styles.
 @use '@carbon/styles';
-@use '@carbon/ibm-products-styles/scss/components/Tearsheet';
 
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as theme;

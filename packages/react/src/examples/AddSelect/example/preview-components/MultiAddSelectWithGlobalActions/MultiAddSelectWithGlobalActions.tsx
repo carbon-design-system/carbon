@@ -6,8 +6,7 @@
  */
 
 import React, { useState } from 'react';
-import { Button } from '@carbon/react';
-import { AddSelectItem } from '@carbon/ibm-products';
+import { Button, AddSelectItem } from '@carbon/react';
 import { Document } from '@carbon/react/icons';
 import { MultiAddSelectWithGlobalActions as MultiAddSelectWithGlobalActionsComponent } from '../../components/MultiAddSelectWithGlobalActions/MultiAddSelectWithGlobalActions';
 import './MultiAddSelectWithGlobalActions.scss';

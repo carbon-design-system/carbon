@@ -6,9 +6,8 @@
  */
 
 import React, { useState } from 'react';
-import { Button } from '@carbon/react';
+import { Button, AddSelectItem } from '@carbon/react';
 import { MultiAddSelectWithDataTable } from '../../components/MultiAddSelectWithDataTable/MultiAddSelectWithDataTable';
-import { AddSelectItem } from '@carbon/ibm-products';
 import './MultiAddSelectWithDataTable.scss';
 
 // Sample data for the DataTable variant with extended fields

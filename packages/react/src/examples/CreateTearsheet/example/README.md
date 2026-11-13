@@ -53,7 +53,7 @@ the Storybook documentation.
 ## Key Features
 
 - **New Tearsheet Architecture**: Uses the new Tearsheet component from
-  `@carbon/ibm-products/es/components/Tearsheet/next`
+  `@carbon/react`
 - **StepFlow Integration**: Leverages `@carbon/utilities-react` for step
   management
 - **Progress Indicators**: Supports both vertical and horizontal progress

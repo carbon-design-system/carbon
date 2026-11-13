@@ -18,13 +18,13 @@ import {
   BreadcrumbItem,
   OverflowMenu,
   OverflowMenuItem,
+  PageHeader,
 } from '@carbon/react';
 import {
   StepProvider,
   StepGroup,
   useStepContext,
 } from '@carbon/utilities-react';
-import { preview__PageHeader as PageHeader } from '@carbon/ibm-products';
 import { CreateInfluencer } from './CreateInfluencer';
 
 const blockClass = 'create-full-page-pattern';

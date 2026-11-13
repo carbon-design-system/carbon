@@ -15,14 +15,14 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { ToastNotification } from '@carbon/react';
 import {
-  preview__AddSelect as AddSelect,
-  preview__Tearsheet as Tearsheet,
+  ToastNotification,
+  AddSelect,
+  Tearsheet,
   AddSelectData,
   AddSelectItem,
   NoDataEmptyState,
-} from '@carbon/ibm-products';
+} from '@carbon/react';
 import './MultiAddSelectWithHierarchyNoSelectAll.scss';
 
 const blockClass = `multi-add-select-hierarchy-no-select-all-pattern`;

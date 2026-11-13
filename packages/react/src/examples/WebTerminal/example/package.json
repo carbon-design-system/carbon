@@ -17,7 +17,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@carbon/react": "latest",
+    "@carbon/react": "v12-alpha",
     "@carbon/styles": "latest",
     "@ibm/plex": "latest",
     "classnames": "^2.3.2",

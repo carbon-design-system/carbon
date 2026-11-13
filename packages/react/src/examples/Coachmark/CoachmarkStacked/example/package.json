@@ -12,8 +12,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@carbon/ibm-products": "latest",
-    "@carbon/react": "latest",
+    "@carbon/react": "v12-alpha",
     "@carbon/utilities": "latest",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",

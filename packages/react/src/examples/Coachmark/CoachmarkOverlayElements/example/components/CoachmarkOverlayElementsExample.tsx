@@ -6,11 +6,7 @@
  */
 
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Button, Theme } from '@carbon/react';
-import {
-  preview__CoachmarkBeacon as CoachmarkBeacon,
-  preview__Coachmark as Coachmark,
-} from '@carbon/ibm-products';
+import { Button, Theme, CoachmarkBeacon, Coachmark } from '@carbon/react';
 import { InitCarousel, initCarousel } from '@carbon/utilities';
 import sampleImage from '../assets/sample-image.png';
 

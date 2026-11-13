@@ -14,10 +14,10 @@
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/utilities/hide-at-breakpoint' as *;
 @use '@carbon/styles/scss/config' as carbon-config;
-@use '@carbon/ibm-products/scss/components/Tearsheet';
-@use '@carbon/ibm-products/scss/components/EmptyStates';
+@use '@carbon/styles/scss/components/Tearsheet';
+// Note: there is no EmptyStates stylesheet in @carbon/styles yet.
 
-// CreateTearsheet uses the following IBM Products components:
+// CreateTearsheet uses the following components:
 // TearsheetShell
 
 @mixin hideAtLargeScreens() {

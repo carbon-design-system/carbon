@@ -34,16 +34,14 @@ import {
   TableHeader,
   TableBody,
   TableCell,
-} from '@carbon/react';
-import { Edit, TrashCan } from '@carbon/icons-react';
-import {
-  preview__AddSelect as AddSelect,
-  preview__Tearsheet as Tearsheet,
+  AddSelect,
+  Tearsheet,
   AddSelectData,
   AddSelectItem,
   NoDataEmptyState,
   StackProvider,
-} from '@carbon/ibm-products';
+} from '@carbon/react';
+import { Edit, TrashCan } from '@carbon/icons-react';
 import './MultiSelectWithBulkActions.scss';
 
 const blockClass = `multi-add-select-with-bulk-actions-pattern`;

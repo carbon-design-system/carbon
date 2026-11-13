@@ -6,10 +6,8 @@
  */
 
 import React, { useState } from 'react';
-import { Button } from '@carbon/react';
-import { UserAvatar } from '@carbon/ibm-products';
+import { Button, UserAvatar, AddSelectItem } from '@carbon/react';
 import { MultiSelectWithScroll } from '../../components/MultiSelectWithScroll/MultiSelectWithScroll';
-import { AddSelectItem } from '@carbon/ibm-products';
 import './MultiSelectWithScroll.scss';
 
 // ─── Sample dataset ──────────────────────────────────────────────────────────
