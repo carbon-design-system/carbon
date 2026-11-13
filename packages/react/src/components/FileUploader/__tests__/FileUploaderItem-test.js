@@ -5,10 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, screen } from '@testing-library/react';
 import { getByLabel, getByText } from '@carbon/test-utils/dom';
 import React from 'react';
 import { FileUploaderItem } from '../';
+import { FeatureFlags } from '../../FeatureFlags';
 import { keys } from '../../../internal/keyboard';
 
 const statuses = ['uploading', 'edit', 'complete'];
@@ -73,5 +74,205 @@ describe('FileUploaderItem', () => {
 
     fireEvent.keyDown(removeFile, keys.Space);
     expect(onDelete).not.toHaveBeenCalled();
+  });
+
+  describe('overflow tooltip', () => {
+    const name = 'A very long file name that will be truncated.pdf';
+    let scrollWidthSpy;
+    let offsetWidthSpy;
+
+    const mockTruncation = (isTruncated) => {
+      scrollWidthSpy = jest
+        .spyOn(HTMLElement.prototype, 'scrollWidth', 'get')
+        .mockReturnValue(isTruncated ? 300 : 100);
+      offsetWidthSpy = jest
+        .spyOn(HTMLElement.prototype, 'offsetWidth', 'get')
+        .mockReturnValue(150);
+    };
+
+    afterEach(() => {
+      scrollWidthSpy?.mockRestore();
+      offsetWidthSpy?.mockRestore();
+    });
+
+    it('should render a tooltip with the file name when the name is truncated', () => {
+      mockTruncation(true);
+      const { container } = render(<FileUploaderItem name={name} />);
+
+      expect(container.querySelector('.cds--popover-container')).toBeVisible();
+      expect(screen.getByRole('tooltip', { hidden: true })).toHaveTextContent(
+        name
+      );
+    });
+
+    it('should not render a tooltip when the name is not truncated', () => {
+      mockTruncation(false);
+      const { container } = render(<FileUploaderItem name={name} />);
+
+      expect(
+        container.querySelector('.cds--popover-container')
+      ).not.toBeInTheDocument();
+      expect(screen.queryByRole('tooltip', { hidden: true })).toBeNull();
+    });
+
+    it('should align the tooltip to the bottom by default', () => {
+      mockTruncation(true);
+      const { container } = render(<FileUploaderItem name={name} />);
+
+      expect(container.querySelector('.cds--popover-container')).toHaveClass(
+        'cds--popover--bottom'
+      );
+    });
+
+    it.each(['top', 'left', 'right-end', 'bottom-start'])(
+      'should align the tooltip with `align="%s"`',
+      (align) => {
+        mockTruncation(true);
+        const { container } = render(
+          <FileUploaderItem name={name} align={align} />
+        );
+        const popover = container.querySelector('.cds--popover-container');
+
+        expect(popover).toHaveClass(`cds--popover--${align}`);
+        expect(popover).not.toHaveClass('cds--popover--bottom');
+      }
+    );
+
+    it('should not render a tooltip for a non-truncated name when `align` is set', () => {
+      mockTruncation(false);
+      const { container } = render(
+        <FileUploaderItem name={name} align="top" />
+      );
+
+      expect(
+        container.querySelector('.cds--popover-container')
+      ).not.toBeInTheDocument();
+    });
+
+    it('should keep the tooltip behavior when `align` changes', () => {
+      mockTruncation(true);
+      const { container, rerender } = render(
+        <FileUploaderItem name={name} align="top" />
+      );
+      expect(container.querySelector('.cds--popover-container')).toHaveClass(
+        'cds--popover--top'
+      );
+
+      rerender(<FileUploaderItem name={name} align="left" />);
+
+      const popover = container.querySelector('.cds--popover-container');
+      expect(popover).toHaveClass('cds--popover--left');
+      expect(screen.getByRole('tooltip', { hidden: true })).toHaveTextContent(
+        name
+      );
+    });
+
+    it('should not forward `align` to the root element', () => {
+      mockTruncation(true);
+      const { container } = render(
+        <FileUploaderItem name={name} align="top" />
+      );
+
+      expect(container.firstChild).not.toHaveAttribute('align');
+    });
+
+    it('should render the tooltip in the invalid state', () => {
+      mockTruncation(true);
+      const { container } = render(
+        <FileUploaderItem
+          name={name}
+          invalid
+          errorSubject="Too large"
+          align="top"
+        />
+      );
+
+      expect(
+        container.querySelector('.cds--file-filename-container-wrap-invalid')
+      ).toBeInTheDocument();
+      expect(container.querySelector('.cds--popover-container')).toHaveClass(
+        'cds--popover--top'
+      );
+    });
+
+    describe('autoAlign', () => {
+      it('should not enable auto-align by default', () => {
+        mockTruncation(true);
+        const { container } = render(<FileUploaderItem name={name} />);
+
+        expect(
+          container.querySelector('.cds--popover-container')
+        ).not.toHaveClass('cds--popover--auto-align');
+      });
+
+      it('should enable auto-align on the tooltip with `autoAlign`', () => {
+        mockTruncation(true);
+        const { container } = render(
+          <FileUploaderItem name={name} autoAlign />
+        );
+
+        expect(container.querySelector('.cds--popover-container')).toHaveClass(
+          'cds--popover--auto-align'
+        );
+      });
+
+      it('should keep `align` as the preferred placement with `autoAlign`', () => {
+        mockTruncation(true);
+        const { container } = render(
+          <FileUploaderItem name={name} align="top" autoAlign />
+        );
+        const popover = container.querySelector('.cds--popover-container');
+
+        expect(popover).toHaveClass('cds--popover--auto-align');
+        expect(popover).toHaveClass('cds--popover--top');
+      });
+
+      it('should default to the `enable-v12-autoalign` feature flag', () => {
+        mockTruncation(true);
+        const { container } = render(
+          <FeatureFlags enableV12Autoalign>
+            <FileUploaderItem name={name} />
+          </FeatureFlags>
+        );
+
+        expect(container.querySelector('.cds--popover-container')).toHaveClass(
+          'cds--popover--auto-align'
+        );
+      });
+
+      it('should let `autoAlign={false}` override the feature flag', () => {
+        mockTruncation(true);
+        const { container } = render(
+          <FeatureFlags enableV12Autoalign>
+            <FileUploaderItem name={name} autoAlign={false} />
+          </FeatureFlags>
+        );
+
+        expect(
+          container.querySelector('.cds--popover-container')
+        ).not.toHaveClass('cds--popover--auto-align');
+      });
+
+      it('should not render a tooltip for a non-truncated name with `autoAlign`', () => {
+        mockTruncation(false);
+        const { container } = render(
+          <FileUploaderItem name={name} autoAlign />
+        );
+
+        expect(
+          container.querySelector('.cds--popover-container')
+        ).not.toBeInTheDocument();
+      });
+
+      it('should not forward `autoAlign` to the root element', () => {
+        mockTruncation(true);
+        const { container } = render(
+          <FileUploaderItem name={name} autoAlign />
+        );
+
+        expect(container.firstChild).not.toHaveAttribute('autoalign');
+        expect(container.firstChild).not.toHaveAttribute('autoAlign');
+      });
+    });
   });
 });
