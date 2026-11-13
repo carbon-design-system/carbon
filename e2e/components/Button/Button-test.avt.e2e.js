@@ -44,6 +44,17 @@ test.describe('@avt Button', () => {
     await expect(page).toHaveNoACViolations('Button-ghost');
   });
 
+  test('@avt-advanced-states ghost with icon', async ({ page }) => {
+    await visitStory(page, {
+      component: 'Button',
+      id: 'components-button--ghost-with-icon',
+      globals: {
+        theme: 'white',
+      },
+    });
+    await expect(page).toHaveNoACViolations('Button-ghost-with-icon');
+  });
+
   test('@avt-advanced-states icon-button', async ({ page }) => {
     await visitStory(page, {
       component: 'Button',

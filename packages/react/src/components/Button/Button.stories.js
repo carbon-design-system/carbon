@@ -492,6 +492,47 @@ Ghost.parameters = {
   },
 };
 
+export const GhostWithIcon = (args) => {
+  return (
+    <div className="button-icon-alignment">
+      {['xs', 'sm', 'md', 'lg', 'xl', '2xl'].map((size) => {
+        return (
+          <div key={size}>
+            <Button {...args} kind="ghost" size={size} renderIcon={Add}>
+              {size} ghost
+            </Button>
+            <Button {...args} kind="danger--ghost" size={size} renderIcon={Add}>
+              {size} danger ghost
+            </Button>
+          </div>
+        );
+      })}
+      <div>
+        <Button {...args} kind="ghost" isExpressive renderIcon={Add}>
+          Expressive ghost
+        </Button>
+        <Button {...args} kind="danger--ghost" isExpressive renderIcon={Add}>
+          Expressive danger ghost
+        </Button>
+      </div>
+      <div className="button-icon-multiline">
+        <Button {...args} kind="ghost" size="lg" renderIcon={Add}>
+          Continue to the next page with your changes
+        </Button>
+        <Button {...args} kind="danger--ghost" size="lg" renderIcon={Add}>
+          Remove this item from the selected collection
+        </Button>
+      </div>
+    </div>
+  );
+};
+
+GhostWithIcon.parameters = {
+  controls: {
+    include: ['disabled', 'href'],
+  },
+};
+
 export const Danger = (args) => {
   const { renderIcon, ...rest } = args;
   return (

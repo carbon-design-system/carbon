@@ -7,6 +7,7 @@
 
 import { action } from 'storybook/actions';
 import React, { useState } from 'react';
+import { Add } from '@carbon/icons-react';
 import Button from '../../Button';
 import { MenuItem } from '../../Menu';
 import OverflowMenu from '../../OverflowMenu';
@@ -162,6 +163,121 @@ export const Default = ({ persistent, ...args }) => {
 
 Default.args = { persistent: false };
 Default.argTypes = sharedArgTypes;
+
+export const WithGhostAction = ({
+  toolbarSize,
+  buttonSize,
+  actionLabel,
+  disabled,
+  ...args
+}) => {
+  const [tableRows, setTableRows] = useState(rows);
+  const resetRows = () => setTableRows(rows);
+
+  return (
+    <DataTable rows={tableRows} headers={headers} {...args}>
+      {({
+        rows,
+        headers,
+        getHeaderProps,
+        getRowProps,
+        getTableProps,
+        getToolbarProps,
+        getTableContainerProps,
+        getCellProps,
+        onInputChange,
+      }) => (
+        <TableContainer
+          title="Load balancers"
+          description="Add a load balancer with a ghost toolbar action."
+          {...getTableContainerProps()}>
+          <TableToolbar
+            {...getToolbarProps()}
+            aria-label="Load balancer actions"
+            size={toolbarSize === 'default' ? undefined : toolbarSize}>
+            <TableToolbarContent>
+              <TableToolbarSearch persistent onChange={onInputChange} />
+              <TableToolbarMenu>
+                <TableToolbarAction onClick={resetRows}>
+                  Reset rows
+                </TableToolbarAction>
+              </TableToolbarMenu>
+              <Button
+                kind="ghost"
+                size={buttonSize === 'default' ? undefined : buttonSize}
+                renderIcon={Add}
+                disabled={disabled}
+                onClick={() => {
+                  setTableRows((currentRows) => [
+                    ...currentRows,
+                    {
+                      ...currentRows[0],
+                      id: `new-${currentRows.length}`,
+                      name: `Load Balancer ${currentRows.length + 1}`,
+                    },
+                  ]);
+                }}>
+                {actionLabel}
+              </Button>
+            </TableToolbarContent>
+          </TableToolbar>
+          <Table {...getTableProps()} aria-label="Load balancers">
+            <TableHead>
+              <TableRow>
+                {headers.map((header) => (
+                  <TableHeader key={header.key} {...getHeaderProps({ header })}>
+                    {header.header}
+                  </TableHeader>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <TableRow {...getRowProps({ row })}>
+                  {row.cells.map((cell) => (
+                    <TableCell {...getCellProps({ cell })}>
+                      {cell.value}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )}
+    </DataTable>
+  );
+};
+
+WithGhostAction.args = {
+  toolbarSize: 'default',
+  buttonSize: 'sm',
+  actionLabel: 'Add row',
+  disabled: false,
+};
+WithGhostAction.argTypes = {
+  ...dataTableArgTypes,
+  toolbarSize: {
+    control: 'select',
+    options: ['default', 'xs', 'sm', 'lg'],
+    description: 'Choose the toolbar height independently of the table rows.',
+  },
+  buttonSize: {
+    control: 'select',
+    options: ['default', 'xs', 'sm', 'md', 'lg'],
+    description: 'Choose an explicit button size or use its default.',
+  },
+  actionLabel: { control: 'text' },
+  disabled: { control: 'boolean' },
+};
+WithGhostAction.parameters = {
+  docs: {
+    description: {
+      story:
+        'Compose a small ghost action with an independently sized toolbar. The action adds a row; the toolbar menu resets the rows.',
+    },
+  },
+};
 
 export const PersistentToolbar = ({ persistent, ...args }) => {
   const [searchValue, setSearchValue] = useState('');
