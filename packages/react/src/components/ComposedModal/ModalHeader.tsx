@@ -17,6 +17,7 @@ import cx from 'classnames';
 import { Close } from '@carbon/icons-react';
 import { usePrefix } from '../../internal/usePrefix';
 import { IconButton } from '../IconButton';
+import { useFeatureFlag } from '../FeatureFlags';
 import { useId } from '../../internal/useId';
 import { ComposedModalContext } from './ComposedModalContext';
 
@@ -100,6 +101,7 @@ export const ModalHeader = React.forwardRef<HTMLDivElement, ModalHeaderProps>(
   ) {
     const prefix = usePrefix();
     const modalId = useId();
+    const enableV12Release = useFeatureFlag('enable-v12-release');
     const { setLabelId, setTitleId } = useContext(ComposedModalContext);
 
     const generatedLabelId = `${prefix}--modal-header__label--${modalId}`;
@@ -165,7 +167,8 @@ export const ModalHeader = React.forwardRef<HTMLDivElement, ModalHeaderProps>(
             label={iconDescription}
             onClick={handleCloseButtonClick}
             aria-label={iconDescription}
-            align="left">
+            align="left"
+            size={enableV12Release ? 'md' : undefined}>
             <Close
               size={20}
               aria-hidden="true"
