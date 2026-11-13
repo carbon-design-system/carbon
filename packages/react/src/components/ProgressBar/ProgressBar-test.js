@@ -41,6 +41,23 @@ describe('ProgressBar', () => {
       expect(helperText).toHaveTextContent(text);
     });
 
+    it('announces the status in the helper text live region', () => {
+      const text = 'ProgressBar helper text';
+      wrapper.rerender(<ProgressBar {...props} helperText={text} />);
+      expect(screen.getByText('Loading')).toBeInTheDocument();
+
+      wrapper.rerender(
+        <ProgressBar {...props} helperText={text} status="finished" />
+      );
+      expect(screen.getByText('Done')).toBeInTheDocument();
+
+      wrapper.rerender(
+        <ProgressBar {...props} helperText={text} status="error" />
+      );
+      expect(screen.getByText('Error')).toBeInTheDocument();
+      expect(screen.queryByText('Loading')).not.toBeInTheDocument();
+    });
+
     it('still renders accessible label when hideLabel is passed', () => {
       wrapper.rerender(<ProgressBar {...props} hideLabel />);
       // eslint-disable-next-line testing-library/no-node-access
