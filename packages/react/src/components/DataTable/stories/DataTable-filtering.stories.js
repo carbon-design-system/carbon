@@ -27,7 +27,7 @@ import DataTable, {
   TableSelectRow,
 } from '..';
 import { EmptyState } from '../../../examples/EmptyState/example/components/EmptyState';
-import notFoundIllustration from '../../../examples/EmptyState/example/assets/not-found.svg';
+import notFoundIllustration from '../../../examples/EmptyState/example/assets/not-found-light.svg';
 import { dataTableArgs, dataTableArgTypes, rows, headers } from './shared';
 import mdx from '../DataTable.mdx';
 import TableToolbarFilter from './examples/TableToolbarFilter';
