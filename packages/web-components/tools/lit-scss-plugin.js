@@ -7,6 +7,7 @@
 
 import path from 'path';
 import fs from 'fs/promises';
+import { pathToFileURL } from 'url';
 import * as sass from 'sass';
 
 const noop = (s) => s;
@@ -131,7 +132,7 @@ export default function LitSCSS({
       const { includePaths, ...sassOptions } = options;
       const { css } = sass.compileString(finalContent, {
         ...sassOptions,
-        url: `file://${path.resolve(resolvedId)}`,
+        url: pathToFileURL(path.resolve(resolvedId)).href,
         loadPaths: includePaths || [],
       });
 
