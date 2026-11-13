@@ -298,8 +298,7 @@ class CDSRadioButtonGroup extends FormAssociatedMixin(
     return html` <fieldset
         class="${fieldsetClasses}"
         ?disabled="${disabled}"
-        aria-describedby="${ifDefined(describedBy)}"
-        aria-readonly="${readOnly}">
+        aria-describedby="${ifDefined(describedBy)}">
         ${legendText
           ? html` <legend class="${prefix}--label">
               ${legendText}
