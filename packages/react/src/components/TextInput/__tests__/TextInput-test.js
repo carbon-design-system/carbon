@@ -400,6 +400,60 @@ describe('TextInput', () => {
   });
 
   describe('behaves as expected - Component API', () => {
+    it.each([false, true])(
+      'should process rapid controlled input with enableCounter=%s',
+      async (enableCounter) => {
+        const onChange = jest.fn();
+        const onError = jest.fn((event) => event.preventDefault());
+        const previousActEnvironment = globalThis.IS_REACT_ACT_ENVIRONMENT;
+        function ControlledInput() {
+          const [value, setValue] = React.useState('');
+          return (
+            <TextInput
+              id="input-1"
+              labelText="TextInput label"
+              value={value}
+              enableCounter={enableCounter}
+              maxCount={200}
+              onChange={(event) => {
+                onChange(event);
+                setValue(event.target.value);
+              }}
+            />
+          );
+        }
+
+        const { unmount } = render(<ControlledInput />);
+        const input = screen.getByRole('textbox');
+        const setValue = Object.getOwnPropertyDescriptor(
+          HTMLInputElement.prototype,
+          'value'
+        ).set;
+        window.addEventListener('error', onError);
+        // Preserve the microtask burst instead of flushing each event with act.
+        globalThis.IS_REACT_ACT_ENVIRONMENT = false;
+        try {
+          for (let count = 1; count <= 150; count++) {
+            setValue.call(input, 'x'.repeat(count));
+            input.dispatchEvent(new Event('input', { bubbles: true }));
+            await Promise.resolve();
+          }
+          await new Promise((resolve) => setTimeout(resolve, 50));
+
+          expect(onError).not.toHaveBeenCalled();
+          expect(onChange).toHaveBeenCalledTimes(150);
+          expect(input).toHaveValue('x'.repeat(150));
+          if (enableCounter) {
+            expect(screen.getByText('150/200')).toBeInTheDocument();
+          }
+        } finally {
+          unmount();
+          window.removeEventListener('error', onError);
+          globalThis.IS_REACT_ACT_ENVIRONMENT = previousActEnvironment;
+        }
+      }
+    );
+
     it('should respect onChange prop', async () => {
       const onChange = jest.fn();
       render(
@@ -514,6 +568,47 @@ describe('TextInput', () => {
       expect(counter).toBeInTheDocument();
     });
 
+    it.each(['', 0, 'updated'])(
+      'should count programmatic controlled value %p',
+      (value) => {
+        const props = {
+          id: 'input-1',
+          labelText: 'TextInput label',
+          enableCounter: true,
+          maxCount: 20,
+          onChange: jest.fn(),
+        };
+        const { rerender } = render(<TextInput {...props} value="initial" />);
+
+        rerender(<TextInput {...props} value={value} />);
+
+        expect(screen.getByRole('textbox')).toHaveValue(value.toString());
+        expect(
+          screen.getByText(`${value.toString().length}/20`)
+        ).toBeInTheDocument();
+      }
+    );
+
+    it('should count the controlled value when the consumer rejects an edit', async () => {
+      const onChange = jest.fn();
+      render(
+        <TextInput
+          id="input-1"
+          labelText="TextInput label"
+          value="abc"
+          onChange={onChange}
+          enableCounter
+          maxCount={20}
+        />
+      );
+
+      await userEvent.type(screen.getByRole('textbox'), 'd');
+
+      expect(onChange).toHaveBeenCalledTimes(1);
+      expect(screen.getByRole('textbox')).toHaveValue('abc');
+      expect(screen.getByText('3/20')).toBeInTheDocument();
+    });
+
     it('should count ref value when enableCounter is toggled)', async () => {
       // Test for issue #18520: TextInput missing ref check for initial value
       const TestComponent = () => {
@@ -573,6 +668,23 @@ describe('TextInput', () => {
 
     afterEach(() => {
       jest.useRealTimers();
+    });
+
+    it('should update announcements for controlled values without a visible counter', () => {
+      const props = {
+        id: 'input-1',
+        labelText: 'TextInput label',
+        maxCount: 10,
+        onChange: jest.fn(),
+      };
+      const { rerender } = render(<TextInput {...props} value="" />);
+
+      rerender(<TextInput {...props} value="abcdef" />);
+      act(() => {
+        jest.advanceTimersByTime(1000);
+      });
+
+      expect(screen.getByRole('alert')).toHaveTextContent('4 characters left.');
     });
 
     it.each([
