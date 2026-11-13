@@ -80,6 +80,7 @@ const FluidTimePicker = React.forwardRef<
     ref
   ) => {
     const prefix = usePrefix();
+    const hasSelectChildren = React.Children.count(children) > 0;
     const classNames = classnames(className, {
       [`${prefix}--time-picker--fluid`]: true,
       [`${prefix}--time-picker--equal-width`]:
@@ -125,7 +126,10 @@ const FluidTimePicker = React.forwardRef<
     return (
       <div className={classNames}>
         <div className={`${prefix}--time-picker--fluid__wrapper`}>
-          <div className={`${prefix}--time-picker__input`}>
+          <div
+            className={classnames(`${prefix}--time-picker__input`, {
+              [`${prefix}--time-picker__input--with-select`]: hasSelectChildren,
+            })}>
             <FluidTextInput
               ref={ref}
               readOnly={readOnly}

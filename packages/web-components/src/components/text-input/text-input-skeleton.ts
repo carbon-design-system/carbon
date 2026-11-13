@@ -15,6 +15,8 @@ import { INPUT_SIZE } from './defs';
 
 /**
  * @element cds-text-input-skeleton
+ * @csspart label The label.
+ * @csspart text-input The text input.
  *
  * Skeleton of text input.
  */
@@ -44,8 +46,12 @@ class CDSTextInputSkeleton extends LitElement {
       <div class=${skeletonClasses}>
         ${hideLabel
           ? ''
-          : html`<span class="${prefix}--label ${prefix}--skeleton"></span>`}
-        <div class="${prefix}--text-input ${prefix}--skeleton"></div>
+          : html`<span
+              part="label"
+              class="${prefix}--label ${prefix}--skeleton"></span>`}
+        <div
+          part="text-input"
+          class="${prefix}--text-input ${prefix}--skeleton"></div>
       </div>
     `;
   }
