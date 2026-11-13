@@ -33,6 +33,10 @@ async function visitStory(page, options) {
     url = url + `&globals=${values}`;
   }
 
+  // Playwright loads iframe.html directly. ibm-common.js then injects IBM's
+  // "Your privacy choices" pill, which fails the accessibility scan.
+  await page.route('**/common/stats/ibm-common.js', (route) => route.abort());
+
   await page.goto(url);
   await expect(page).toContainAStory(options);
 

@@ -6,6 +6,7 @@
  */
 
 import { html } from 'lit';
+import { TABLE_SIZE } from '../table';
 import storyDocs from './data-table.mdx';
 import '../index';
 
@@ -23,6 +24,8 @@ const defaultArgs = {
   rowCount: 5,
   showHeader: true,
   showToolbar: true,
+  size: TABLE_SIZE.LG,
+  toolbarLabel: 'data table toolbar',
   zebra: false,
 };
 
@@ -43,6 +46,16 @@ const controls = {
     control: 'boolean',
     description: 'Show toolbar',
   },
+  size: {
+    control: 'radio',
+    description: 'Change the row height of table.',
+    options: Object.values(TABLE_SIZE),
+  },
+  toolbarLabel: {
+    control: 'text',
+    description:
+      'Specify a label to be read by screen readers on the toolbar region.',
+  },
   zebra: {
     control: 'boolean',
     description: 'Use zebra styles',
@@ -52,17 +65,29 @@ const controls = {
 export const Default = {
   args: defaultArgs,
   argTypes: controls,
-  render: ({ columnCount, rowCount, showHeader, showToolbar, zebra }) => {
+  render: ({
+    columnCount,
+    rowCount,
+    showHeader,
+    showToolbar,
+    size,
+    toolbarLabel,
+    zebra,
+  }) => {
     const dynamicHeaders = headers.slice(0, columnCount);
     return html`
-      <cds-table-skeleton
-        .headers=${dynamicHeaders}
-        column-count=${columnCount}
-        row-count=${rowCount}
-        ?show-header=${showHeader}
-        ?show-toolbar=${showToolbar}
-        ?zebra=${zebra}>
-      </cds-table-skeleton>
+      <div style="width: 800px">
+        <cds-table-skeleton
+          .headers=${dynamicHeaders}
+          column-count=${columnCount}
+          row-count=${rowCount}
+          ?show-header=${showHeader}
+          ?show-toolbar=${showToolbar}
+          size=${size}
+          toolbar-label=${toolbarLabel}
+          ?zebra=${zebra}>
+        </cds-table-skeleton>
+      </div>
     `;
   },
 };
