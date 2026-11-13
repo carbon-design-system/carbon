@@ -81,6 +81,14 @@ export const Default = {
   `,
 };
 
+// Temporary review example, I'll remove it after approvals.
+export const TruncatedLabels = {
+  ...Default,
+  decorators: [
+    (story) => html`<div style="inline-size: 12rem">${story()}</div>`,
+  ],
+};
+
 export const withControlledExpansion = {
   argTypes: controls,
   args: defaultArgs,
