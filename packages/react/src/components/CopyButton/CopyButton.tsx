@@ -75,10 +75,16 @@ export default function CopyButton({
   feedbackTimeout = 2000,
   iconDescription = 'Copy to clipboard',
   className,
+  kind,
   onClick = noopFn,
   ...other
 }: CopyButtonProps) {
   const prefix = usePrefix();
+  // `ButtonBase` turns an unset `kind` into `primary`, and the
+  // `.cds--btn--primary` styles override the default copy button colors. `null`
+  // renders no kind class, so the default styles apply, matching
+  // `cds-copy-button` without a `kind`.
+  const copyProps = { ...other, kind: kind || null };
   return (
     <LayoutConstraint size={{ default: 'md', max: 'lg' }}>
       <Copy
@@ -89,7 +95,7 @@ export default function CopyButton({
         autoAlign={autoAlign}
         className={classnames(className, `${prefix}--copy-btn`)}
         aria-label={iconDescription}
-        {...other}>
+        {...copyProps}>
         <CopyIcon className={`${prefix}--snippet__icon`} />
       </Copy>
     </LayoutConstraint>
