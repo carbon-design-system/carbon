@@ -200,7 +200,7 @@ export const CoachmarkContentHeader = forwardRef<
             className={`${contentHeaderBlockClass}--drag-icon`}
             aria-label={dragIconDescription}
             aria-describedby={dragInstructionsId}
-            aria-pressed={isDragging}
+            aria-pressed={isDragging ?? undefined}
           />
         </>
       )}
