@@ -553,7 +553,7 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
     let describedBy: string | undefined;
     if (normalizedProps.invalid || normalizedProps.warn) {
       describedBy = this._errorTextId;
-    } else if (hasHelperText) {
+    } else if (hasHelperText && !isFluid) {
       describedBy = this._helperTextId;
     }
 

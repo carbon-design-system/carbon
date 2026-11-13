@@ -259,7 +259,7 @@ class CDSTextarea extends CDSTextInput {
     let describedBy: string | undefined;
     if (normalizedProps.invalid || normalizedProps.warn) {
       describedBy = this._errorTextId;
-    } else if (this.helperText) {
+    } else if (this.helperText && !this.isFluid) {
       describedBy = this._helperTextId;
     }
 

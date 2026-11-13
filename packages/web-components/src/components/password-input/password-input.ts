@@ -284,7 +284,7 @@ class CDSPasswordInput extends CDSTextInput {
     let describedBy: string | undefined;
     if (normalizedProps.invalid || normalizedProps.warn) {
       describedBy = this._errorTextId;
-    } else if (helperText) {
+    } else if (helperText && !isFluid) {
       describedBy = this._helperTextId;
     }
 

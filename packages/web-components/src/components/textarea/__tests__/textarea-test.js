@@ -114,6 +114,16 @@ describe('cds-textarea', () => {
     expect(describedBy(warn)).to.equal(idOf(warn, '.cds--form-requirement'));
   });
 
+  it('should not reference the helper text when isFluid hides it', async () => {
+    const el = await fixture(html`
+      <cds-textarea isFluid helper-text="Help"></cds-textarea>
+    `);
+    const textarea = el.shadowRoot.querySelector('textarea');
+
+    expect(el.shadowRoot.querySelector('.cds--form__helper-text')).to.not.exist;
+    expect(textarea.hasAttribute('aria-describedby')).to.be.false;
+  });
+
   it('should apply hide-label and visually hide the label', async () => {
     const el = await fixture(html`
       <cds-textarea label="Hidden label" hide-label></cds-textarea>

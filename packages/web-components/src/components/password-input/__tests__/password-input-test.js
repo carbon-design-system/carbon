@@ -92,6 +92,16 @@ describe('cds-password-input', () => {
     expect(describedBy(warn)).to.equal(idOf(warn, '.cds--form-requirement'));
   });
 
+  it('should not reference the helper text when isFluid hides it', async () => {
+    const el = await fixture(html`
+      <cds-password-input isFluid helper-text="Help"></cds-password-input>
+    `);
+    const input = el.shadowRoot.querySelector('input');
+
+    expect(el.shadowRoot.querySelector('.cds--form__helper-text')).to.not.exist;
+    expect(input.hasAttribute('aria-describedby')).to.be.false;
+  });
+
   it('should apply hide-label attribute', async () => {
     const el = await fixture(html`
       <cds-password-input

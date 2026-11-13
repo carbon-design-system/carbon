@@ -462,6 +462,19 @@ describe('cds-text-input', () => {
     expect(input.hasAttribute('aria-describedby')).to.be.false;
   });
 
+  it('should not reference the helper text when isFluid hides it', async () => {
+    const el = await fixture(html`
+      <cds-text-input
+        label="Text input label"
+        isFluid
+        helper-text="Helpful info"></cds-text-input>
+    `);
+    const input = el.shadowRoot.querySelector('input');
+
+    expect(el.shadowRoot.querySelector('.cds--form__helper-text')).to.not.exist;
+    expect(input.hasAttribute('aria-describedby')).to.be.false;
+  });
+
   it('should describe the input with the validation message when invalid', async () => {
     const el = await fixture(html`
       <cds-text-input
