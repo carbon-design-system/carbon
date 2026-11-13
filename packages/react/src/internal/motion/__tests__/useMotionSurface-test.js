@@ -25,22 +25,22 @@ describe('useMotionSurface', () => {
     expect(result.current.enabled).toBe(true);
     expect(result.current.origin).toBeUndefined();
     expect(result.current.enterTransition).toEqual({
-      duration: 0.24,
-      ease: [0.2, 0, 0.38, 0.9],
+      duration: 0.22,
+      ease: [0.4, 0, 0.2, 1],
     });
     expect(result.current.exitTransition).toEqual({
-      duration: 0.24,
-      ease: [0.2, 0, 0.38, 0.9],
+      duration: 0.22,
+      ease: [0.4, 0, 0.2, 1],
     });
     expect(result.current.animate).toEqual({
       opacity: 1,
       transform: 'scale(1)',
-      transition: { duration: 0.24, ease: [0.2, 0, 0.38, 0.9] },
+      transition: { duration: 0.22, ease: [0.4, 0, 0.2, 1] },
     });
     expect(result.current.exit).toEqual({
       opacity: 0,
       transform: 'scale(0.96)',
-      transition: { duration: 0.24, ease: [0.2, 0, 0.38, 0.9] },
+      transition: { duration: 0.22, ease: [0.4, 0, 0.2, 1] },
     });
   });
 
@@ -50,7 +50,7 @@ describe('useMotionSurface', () => {
     expect(result.current.kind).toBe('shared-element');
     expect(result.current.origin).toBe('trigger');
     // standard/expressive
-    expect(result.current.enterTransition.ease).toEqual([0.4, 0.14, 0.3, 1]);
+    expect(result.current.enterTransition.ease).toEqual([0.8, 0, 0, 1]);
     // invoke has no enter/exit keyframes - morph timing only
     expect(result.current.animate).toBeUndefined();
     expect(result.current.exit).toBeUndefined();
@@ -67,14 +67,14 @@ describe('useMotionSurface', () => {
     expect(result.current.animate).toEqual({
       opacity: 1,
       transform: 'scale(1)',
-      // fast-02 = 110ms, entrance/expressive
-      transition: { duration: 0.11, ease: [0, 0, 0.3, 1] },
+      // fast-02 = 120ms, entrance/expressive
+      transition: { duration: 0.12, ease: [0, 0, 0, 1] },
     });
     expect(result.current.exit).toEqual({
       opacity: 0,
       transform: 'scale(0.96)',
       // exit/expressive
-      transition: { duration: 0.11, ease: [0.4, 0.14, 1, 1] },
+      transition: { duration: 0.12, ease: [0.8, 0, 1, 1] },
     });
   });
 
@@ -108,7 +108,7 @@ describe('useMotionSurface', () => {
       opacity: 1,
       clipPath: 'inset(0 0 0 0)',
       // slow-01 = 400ms, entrance/expressive
-      transition: { duration: 0.4, ease: [0, 0, 0.3, 1] },
+      transition: { duration: 0.4, ease: [0, 0, 0, 1] },
     });
   });
 

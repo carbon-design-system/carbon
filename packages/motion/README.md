@@ -61,8 +61,8 @@ Available duration variables:
 @use '@carbon/motion';
 
 .my-selector {
-  transition-duration: motion.$duration-fast-01; // 70ms
-  transition-duration: motion.$duration-moderate-01; // 150ms
+  transition-duration: motion.$duration-fast-01; // 80ms
+  transition-duration: motion.$duration-moderate-01; // 160ms
   transition-duration: motion.$duration-slow-01; // 400ms
 }
 ```
