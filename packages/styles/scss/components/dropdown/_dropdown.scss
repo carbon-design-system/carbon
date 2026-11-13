@@ -522,4 +522,10 @@
   .#{$prefix}--dropdown--readonly .#{$prefix}--list-box__menu-icon svg {
     fill: $icon-disabled;
   }
+
+  @if enabled('enable-v12-release') {
+    @include list-box.trailing-controls(
+      '.#{$prefix}--list-box.#{$prefix}--dropdown:not(.#{$prefix}--dropdown--inline, .#{$prefix}--combo-box, .#{$prefix}--list-box__wrapper--fluid *)'
+    );
+  }
 }
