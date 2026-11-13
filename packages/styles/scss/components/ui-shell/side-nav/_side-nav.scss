@@ -364,7 +364,7 @@
   .#{$prefix}--side-nav__link > .#{$prefix}--side-nav__link-text,
   .#{$prefix}--side-nav
     a.#{$prefix}--header__menu-item
-    .#{$prefix}--text-truncate-end {
+    .#{$prefix}--text-truncate--end {
     @include text-overflow();
 
     color: $text-secondary;
@@ -548,6 +548,7 @@
     a.#{$prefix}--header__menu-item:focus
     .#{$prefix}--header__menu-arrow,
   .#{$prefix}--side-nav .#{$prefix}--header__menu-arrow {
+    flex-shrink: 0;
     fill: $icon-secondary;
   }
 
