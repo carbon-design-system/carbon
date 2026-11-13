@@ -54,12 +54,16 @@ export function getIbmAnalyticsHeads(siteName) {
 
   /**
    * preview (iframe.html): only set up analytics when opened directly, since the
-   * manager already loads ibm-common.js when preview is embedded
+   * manager already loads ibm-common.js when preview is embedded.
+   *
+   * Skip automated browsers. Playwright opens this document as the top window,
+   * and ibm-common.js injects a third-party "Your privacy choices" control that
+   * fails the accessibility scan (aria-label on a paragraph).
    */
   const previewAnalyticsHead = `
   <!-- Tealium/GA set up -->
   <script type="text/javascript">
-    if (window.self === window.top) {${setGlobals}
+    if (window.self === window.top && !navigator.webdriver) {${setGlobals}
       var ibmCommonScript = document.createElement('script');
       ibmCommonScript.type = 'text/javascript';
       ibmCommonScript.async = true;
