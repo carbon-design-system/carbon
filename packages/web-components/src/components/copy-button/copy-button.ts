@@ -74,10 +74,29 @@ class CDSCopyButton extends AutoAlignMixin(
   feedbackTimeout = 2000;
 
   /**
+   * Provide a description for the icon representing the copy action that can
+   * be read by screen readers
+   */
+  @property({ attribute: 'icon-description' })
+  iconDescription = 'Copy to clipboard';
+
+  /**
    * Specify the size of the Button. Defaults to `lg`.
    */
   @property({ reflect: true })
   size?: ICON_BUTTON_SIZE | string = ICON_BUTTON_SIZE.LARGE;
+
+  updated(changedProperties) {
+    super.updated?.(changedProperties);
+
+    // `cds-copy` derives its accessible name from this element's
+    // `iconDescription`, so ask it to re-evaluate when that changes.
+    if (changedProperties.has('iconDescription')) {
+      (
+        this.shadowRoot?.querySelector('cds-copy') as LitElement | null
+      )?.requestUpdate();
+    }
+  }
 
   render() {
     const {
