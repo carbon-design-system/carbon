@@ -1208,6 +1208,101 @@ describe('DataTable', () => {
       });
     });
 
+    describe('expansion', () => {
+      const renderExpandableTable = () =>
+        render(
+          <DataTable
+            {...mockProps}
+            render={({
+              rows,
+              headers,
+              getHeaderProps,
+              getExpandHeaderProps,
+              getRowProps,
+              getExpandedRowProps,
+              getCellProps,
+            }) => (
+              <TableContainer title="Expandable table">
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableExpandHeader
+                        enableToggle
+                        {...getExpandHeaderProps()}
+                      />
+                      {headers.map((header) => (
+                        <TableHeader {...getHeaderProps({ header })}>
+                          {header.header}
+                        </TableHeader>
+                      ))}
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {rows.map((row) => (
+                      <React.Fragment key={row.id}>
+                        <TableExpandRow {...getRowProps({ row })}>
+                          {row.cells.map((cell) => (
+                            <TableCell {...getCellProps({ cell })}>
+                              {cell.value}
+                            </TableCell>
+                          ))}
+                        </TableExpandRow>
+                        {row.isExpanded && (
+                          <TableExpandedRow
+                            {...getExpandedRowProps({ row })}
+                            colSpan={headers.length + 1}>
+                            {`Details for ${row.id}`}
+                          </TableExpandedRow>
+                        )}
+                      </React.Fragment>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            )}
+          />
+        );
+
+      const expandEachRow = async () => {
+        for (const button of screen.getAllByRole('button', {
+          name: 'Expand current row',
+        })) {
+          await userEvent.click(button);
+        }
+      };
+
+      it('should collapse all rows on the first header click after expanding each row individually', async () => {
+        renderExpandableTable();
+
+        await expandEachRow();
+
+        expect(screen.getAllByText(/^Details for/)).toHaveLength(rows.length);
+
+        await userEvent.click(
+          screen.getByRole('button', { name: 'Collapse all rows' })
+        );
+
+        expect(screen.queryAllByText(/^Details for/)).toHaveLength(0);
+        expect(
+          screen.getByRole('button', { name: 'Expand all rows' })
+        ).toBeInTheDocument();
+      });
+
+      it('should expand all rows when a row was collapsed after expanding each row individually', async () => {
+        renderExpandableTable();
+
+        await expandEachRow();
+        await userEvent.click(
+          screen.getAllByRole('button', { name: 'Collapse current row' })[0]
+        );
+        await userEvent.click(
+          screen.getByRole('button', { name: 'Expand all rows' })
+        );
+
+        expect(screen.getAllByText(/^Details for/)).toHaveLength(rows.length);
+      });
+    });
+
     describe('row click behavior', () => {
       it('should call onClick handler passed via getRowProps when row is clicked', async () => {
         const handleClick = jest.fn();

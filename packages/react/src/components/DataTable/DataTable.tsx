@@ -794,17 +794,18 @@ export const DataTable = <RowType, ColTypes extends any[]>(
   const handleOnExpandRow = (rowId: string) => () => {
     setState((prev) => {
       const row = prev.rowsById[rowId];
-      const { isExpandedAll } = prev;
+      const rowsById = {
+        ...prev.rowsById,
+        [rowId]: {
+          ...row,
+          isExpanded: !row.isExpanded,
+        },
+      };
+
       return {
         ...prev,
-        isExpandedAll: row.isExpanded ? false : isExpandedAll,
-        rowsById: {
-          ...prev.rowsById,
-          [rowId]: {
-            ...row,
-            isExpanded: !row.isExpanded,
-          },
-        },
+        isExpandedAll: prev.rowIds.every((id) => rowsById[id].isExpanded),
+        rowsById,
       };
     });
   };
