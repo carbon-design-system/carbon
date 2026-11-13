@@ -38,9 +38,6 @@ export interface CardTitleProps extends React.HTMLAttributes<HTMLDivElement> {
 
   /**
    * Icon, avatar, or image rendered to the left of the title text block.
-   * Uses the same `__title-media` slot as the standalone `Card.TitleMedia`
-   * component, but accepted as a prop so `CardTitle` can manage its own
-   * internal flex layout without needing to be a multi-column grid child.
    */
   titleMedia?: ReactNode;
 

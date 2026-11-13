@@ -12227,13 +12227,8 @@ Map {
         "$$typeof": Symbol(react.forward_ref),
         "render": [Function],
       },
-      "HeaderMedia": [Function],
       "Media": [Function],
       "Title": {
-        "$$typeof": Symbol(react.forward_ref),
-        "render": [Function],
-      },
-      "TitleMedia": {
         "$$typeof": Symbol(react.forward_ref),
         "render": [Function],
       },
@@ -12257,17 +12252,10 @@ Map {
       "$$typeof": Symbol(react.forward_ref),
       "render": [Function],
     },
-    "CardHeaderMedia": {
-      "displayName": "Card.HeaderMedia",
-    },
     "CardMedia": {
       "displayName": "Card.Media",
     },
     "CardTitle": {
-      "$$typeof": Symbol(react.forward_ref),
-      "render": [Function],
-    },
-    "CardTitleMedia": {
       "$$typeof": Symbol(react.forward_ref),
       "render": [Function],
     },

@@ -157,8 +157,7 @@ export default {
     titleMedia: {
       control: { type: 'select' },
       options: ['none', 'image'],
-      description:
-        'Content shown in the Card.TitleMedia slot to the left of the title.',
+      description: 'Content shown to the left of the title.',
     },
     titleLeadingIcon: {
       control: { type: 'boolean' },

@@ -9,10 +9,8 @@ export {
   CardHeader,
   CardBody,
   CardFooter,
-  CardHeaderMedia,
   CardMedia,
   CardTitle,
-  CardTitleMedia,
   CardActions,
   CardAction,
 } from './Card';
@@ -22,10 +20,8 @@ export type {
   CardHeaderProps,
   CardBodyProps,
   CardFooterProps,
-  CardHeaderMediaProps,
   CardMediaProps,
   CardTitleProps,
-  CardTitleMediaProps,
   CardActionsProps,
   CardActionProps,
 } from './Card';
