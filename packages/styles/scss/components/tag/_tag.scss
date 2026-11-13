@@ -502,10 +502,9 @@
     place-items: center;
   }
 
-  .#{$prefix}--tag--filter
-    .#{$prefix}--tag__custom-icon
-    + span
-    > .#{$prefix}--interactive--tag-children {
+  // The inline-flex children wrapper does not shrink with its parent span, so
+  // cap it to the span's width to keep the label truncating inside the tag
+  .#{$prefix}--tag--filter > span > .#{$prefix}--interactive--tag-children {
     max-inline-size: 100%;
   }
 
