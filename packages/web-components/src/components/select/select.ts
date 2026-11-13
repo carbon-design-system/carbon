@@ -52,12 +52,12 @@ class CDSSelect extends FormMixin(LitElement) {
     .slice(2)}`;
 
   /**
-   * The id of the helper text, referenced by `aria-describedby`.
+   * The ID of the helper text, referenced by `aria-describedby`.
    */
   private _helperTextId = uniqueId('select-helper-text');
 
   /**
-   * The id of the invalid/warning message, referenced by `aria-describedby`.
+   * The ID of the invalid or warning message, referenced by `aria-describedby`.
    */
   private _errorTextId = uniqueId('select-error-text');
 

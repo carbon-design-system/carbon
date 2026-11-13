@@ -12,7 +12,7 @@ import { prefix } from '../settings';
  * such as `aria-describedby` reference within a component.
  *
  * @param name A name describing what the id is for.
- * @returns The id, prefixed with the Carbon prefix and the given name.
+ * @returns The ID, prefixed with the Carbon prefix and the given name.
  */
 export const uniqueId = (name: string) =>
   `${prefix}--${name}-${Math.random().toString(16).slice(2)}`;

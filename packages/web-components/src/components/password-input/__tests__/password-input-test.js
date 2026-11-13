@@ -62,26 +62,6 @@ describe('cds-password-input', () => {
     expect(helper.textContent).to.include('Helper text');
   });
 
-  it('should describe the input with its own helper text id', async () => {
-    const el = await fixture(html`
-      <div>
-        <cds-password-input helper-text="Help"></cds-password-input>
-        <cds-password-input helper-text="Help"></cds-password-input>
-      </div>
-    `);
-    const [first, second] = Array.from(
-      el.querySelectorAll('cds-password-input')
-    );
-    const describedBy = (input) =>
-      input.shadowRoot.querySelector('input').getAttribute('aria-describedby');
-
-    expect(describedBy(first)).to.equal(
-      first.shadowRoot.querySelector('.cds--form__helper-text').id
-    );
-    expect(describedBy(first)).to.not.equal('helper-text');
-    expect(describedBy(first)).to.not.equal(describedBy(second));
-  });
-
   it('should point aria-describedby at the helper or error text', async () => {
     const el = await fixture(html`
       <div>

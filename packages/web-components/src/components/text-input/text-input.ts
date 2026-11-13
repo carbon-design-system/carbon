@@ -96,12 +96,12 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
   private _slotSlugNode!: HTMLSlotElement;
 
   /**
-   * The id of the helper text, referenced by `aria-describedby`.
+   * The ID of the helper text, referenced by `aria-describedby`.
    */
   protected _helperTextId = uniqueId('text-input-helper-text');
 
   /**
-   * The id of the invalid/warning message, referenced by `aria-describedby`.
+   * The ID of the invalid or warning message, referenced by `aria-describedby`.
    */
   protected _errorTextId = uniqueId('text-input-error-text');
 
