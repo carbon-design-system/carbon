@@ -1244,7 +1244,7 @@ export const WithTitleMedia = {
         </cds-card>
       </cds-column>
 
-      <!-- header media + 48px image + header actions -->
+      <!-- 48px title image + header actions -->
       <cds-column lg="4" md="4" sm="4">
         <cds-card>
           <cds-card-header>

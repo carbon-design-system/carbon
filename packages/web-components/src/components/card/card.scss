@@ -58,10 +58,6 @@ $css--plex: true !default;
   margin-block-start: auto;
 }
 
-:host-context(#{$prefix}-card[has-ai-label]) .#{$prefix}--card__title {
-  padding-inline-end: calc($spacing-07 + $spacing-05);
-}
-
 // Without actions the title must not run under the absolutely-positioned
 // decorator: reserve its width ($spacing-07) plus end inset ($spacing-03).
 .#{$prefix}--card__header[data-has-ai-label]:not([data-has-actions])
@@ -151,7 +147,10 @@ $css--plex: true !default;
 // the inner shadow <div> (.cds--card__media--horizontal) cannot be reached by
 // the card's flex container. The CSS custom property --cds--card--media-width is
 // forwarded to the host via card-media.ts so `var()` resolves here.
-:host(#{$prefix}-card-media):host-context(#{$prefix}-card[horizontal]) {
+// `cds-card-media` sets `slot="media"` only while the card is horizontal, so
+// the slot attribute is used instead of `:host-context()`, which Firefox and
+// Safari do not support.
+:host(#{$prefix}-card-media[slot='media']) {
   overflow: hidden;
   flex-basis: var(--#{$prefix}--card--media-width, 33.33%);
   flex-shrink: 0;
