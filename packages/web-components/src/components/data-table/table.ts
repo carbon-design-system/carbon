@@ -29,6 +29,16 @@ import CDSTableExpandedRow from './table-expanded-row';
 export { TABLE_SIZE };
 
 /**
+ * @param value A cell value.
+ * @returns `true` if the given value is a number or a string representing one.
+ */
+const isNumeric = (value: unknown) =>
+  typeof value === 'number' ||
+  (typeof value === 'string' &&
+    value.trim() !== '' &&
+    Number.isFinite(Number(value)));
+
+/**
  * Data table.
  *
  * @element cds-table
@@ -144,8 +154,9 @@ class CDSTable extends HostListenerMixin(LitElement) {
    */
 
   customSortRow(lhs, rhs, collator) {
-    if (typeof lhs === 'number' && typeof rhs === 'number') {
-      return lhs - rhs;
+    // Cell values are read from `textContent`, so numbers arrive as strings.
+    if (isNumeric(lhs) && isNumeric(rhs)) {
+      return Math.sign(Number(lhs) - Number(rhs));
     }
     return collator.compare(lhs, rhs);
   }

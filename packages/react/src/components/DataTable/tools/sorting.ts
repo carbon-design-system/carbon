@@ -38,11 +38,24 @@ export const compare = (a: any, b: any, locale = 'en') => {
 };
 
 /**
- * Compares two strings using `localeCompare`.
+ * Determines whether a whole string represents a finite number (e.g., `-5` or
+ * `3.25`), as opposed to only starting with one (e.g., `10 MB`).
+ */
+const isNumericString = (value: string) =>
+  value.trim() !== '' && Number.isFinite(Number(value));
+
+/**
+ * Compares two strings by their numeric value if both represent a number.
+ * Otherwise, compares them using `localeCompare`.
  *
- * Note: Uses numeric comparison if strings are numeric.
+ * Note: `localeCompare` only sees digit sequences, so it can't order signs or
+ * decimals, but it still orders strings that start with a number by that number.
  */
 const compareStrings = (a: string, b: string, locale = 'en') => {
+  if (isNumericString(a) && isNumericString(b)) {
+    return Math.sign(Number(a) - Number(b));
+  }
+
   const isNumeric = !isNaN(parseFloat(a)) && !isNaN(parseFloat(b));
 
   return a.localeCompare(b, locale, { numeric: isNumeric });
