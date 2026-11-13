@@ -496,7 +496,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
   }, [autoAlign, floatingStyles, refs.floating, middlewareData]);
 
   const textInput = useRef<HTMLInputElement>(null);
-  const clearInputButton = useRef<HTMLButtonElement | null>(null);
+  const clearInputButton = useRef<HTMLButtonElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const filterableMultiSelectInstanceId = useId();
 
