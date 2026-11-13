@@ -142,6 +142,11 @@ describe('ProgressBar', () => {
         'aria-invalid',
         'true'
       );
+
+      expect(screen.getByRole('progressbar')).toHaveAttribute(
+        'aria-busy',
+        'false'
+      );
     });
   });
 
