@@ -13,8 +13,9 @@ const fs = require('fs-extra');
 const path = require('path');
 const buildCompatThemesFile = require('./builders/compat/themes');
 const buildCompatTokensFile = require('./builders/compat/tokens');
+const generateColorFallbacks = require('./builders/generate-color-fallbacks');
 const generateTokenTable = require('./builders/token-table');
-const { runScss } = require('../style-dictionary/sd.config');
+const { runScss, runV12 } = require('../style-dictionary/sd.config');
 
 async function build() {
   reporter.info('Building scss files for themes...');
@@ -45,6 +46,13 @@ async function build() {
 
   reporter.info('Generating SCSS files via Style Dictionary...');
   await runScss();
+
+  reporter.info('Generating experimental V12 themes...');
+  await runV12();
+
+  const fallbackFile = path.join(SCSS_DIR, 'generated', '_v12-fallbacks.scss');
+  await fs.outputFile(fallbackFile, generateColorFallbacks());
+  reporter.success(`Written: ${fallbackFile}`);
 
   reporter.info('Generating the theme token table...');
   await generateTokenTable();

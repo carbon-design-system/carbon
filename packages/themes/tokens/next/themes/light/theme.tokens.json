@@ -1,0 +1,1618 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "$description": "Experimental Carbon V12 light theme tokens generated from the OKLCH specification.",
+  "$extensions": {
+    "com.ibm.carbon": {
+      "experimental": true,
+      "color-scheme": "light"
+    }
+  },
+  "background-brand": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.5565,
+        0.243,
+        262
+      ],
+      "hex": "#0f62fe"
+    },
+    "$description": "Brand background color.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "confirmed",
+        "source": {
+          "type": "fixed"
+        }
+      }
+    }
+  },
+  "base": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.16,
+        0.004,
+        262
+      ],
+      "hex": "#0c0d0f"
+    },
+    "$description": "Shared dark base color.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "confirmed",
+        "source": {
+          "type": "fixed"
+        }
+      }
+    }
+  },
+  "layer-01": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.97,
+        0.004,
+        262
+      ],
+      "hex": "#f4f5f8"
+    },
+    "$description": "Contextual surface for surface context 1.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "confirmed",
+        "source": {
+          "type": "fixed"
+        }
+      }
+    }
+  },
+  "layer-02": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        1,
+        0.004,
+        262
+      ],
+      "hex": "#ffffff"
+    },
+    "$description": "Contextual surface for surface context 2.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "confirmed",
+        "source": {
+          "type": "fixed"
+        }
+      }
+    }
+  },
+  "layer-03": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.94,
+        0.004,
+        262
+      ],
+      "hex": "#eaebee"
+    },
+    "$description": "Contextual surface for surface context 3.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "confirmed",
+        "source": {
+          "type": "fixed"
+        }
+      }
+    }
+  },
+  "layer-hover-01": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.94,
+        0.004,
+        262
+      ],
+      "hex": "#eaebee"
+    },
+    "$description": "Contextual layer hover for surface context 1.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "experimental",
+        "source": {
+          "type": "interactive-state",
+          "state": "hover",
+          "delta": -0.03
+        }
+      }
+    }
+  },
+  "layer-hover-02": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.97,
+        0.004,
+        262
+      ],
+      "hex": "#f4f5f8"
+    },
+    "$description": "Contextual layer hover for surface context 2.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "experimental",
+        "source": {
+          "type": "interactive-state",
+          "state": "hover",
+          "delta": -0.03
+        }
+      }
+    }
+  },
+  "layer-hover-03": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.91,
+        0.004,
+        262
+      ],
+      "hex": "#e0e1e4"
+    },
+    "$description": "Contextual layer hover for surface context 3.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "experimental",
+        "source": {
+          "type": "interactive-state",
+          "state": "hover",
+          "delta": -0.03
+        }
+      }
+    }
+  },
+  "layer-active-01": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.88,
+        0.004,
+        262
+      ],
+      "hex": "#d6d7da"
+    },
+    "$description": "Contextual layer active for surface context 1.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "experimental",
+        "source": {
+          "type": "interactive-state",
+          "state": "active",
+          "delta": -0.09
+        }
+      }
+    }
+  },
+  "layer-active-02": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.91,
+        0.004,
+        262
+      ],
+      "hex": "#e0e1e4"
+    },
+    "$description": "Contextual layer active for surface context 2.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "experimental",
+        "source": {
+          "type": "interactive-state",
+          "state": "active",
+          "delta": -0.09
+        }
+      }
+    }
+  },
+  "layer-active-03": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.85,
+        0.004,
+        262
+      ],
+      "hex": "#ccced0"
+    },
+    "$description": "Contextual layer active for surface context 3.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "experimental",
+        "source": {
+          "type": "interactive-state",
+          "state": "active",
+          "delta": -0.09
+        }
+      }
+    }
+  },
+  "layer-selected-01": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.91,
+        0.004,
+        262
+      ],
+      "hex": "#e0e1e4"
+    },
+    "$description": "Contextual layer selected for surface context 1.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "experimental",
+        "source": {
+          "type": "interactive-state",
+          "state": "selected",
+          "delta": -0.06
+        }
+      }
+    }
+  },
+  "layer-selected-02": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.94,
+        0.004,
+        262
+      ],
+      "hex": "#eaebee"
+    },
+    "$description": "Contextual layer selected for surface context 2.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "experimental",
+        "source": {
+          "type": "interactive-state",
+          "state": "selected",
+          "delta": -0.06
+        }
+      }
+    }
+  },
+  "layer-selected-03": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.88,
+        0.004,
+        262
+      ],
+      "hex": "#d6d7da"
+    },
+    "$description": "Contextual layer selected for surface context 3.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "experimental",
+        "source": {
+          "type": "interactive-state",
+          "state": "selected",
+          "delta": -0.06
+        }
+      }
+    }
+  },
+  "layer-accent-01": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.91,
+        0.004,
+        262
+      ],
+      "hex": "#e0e1e4"
+    },
+    "$description": "Contextual accent for surface context 1.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "experimental",
+        "source": {
+          "type": "lightness-delta",
+          "delta": -0.06,
+          "relativeTo": "surface"
+        }
+      }
+    }
+  },
+  "layer-accent-02": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.94,
+        0.004,
+        262
+      ],
+      "hex": "#eaebee"
+    },
+    "$description": "Contextual accent for surface context 2.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "experimental",
+        "source": {
+          "type": "lightness-delta",
+          "delta": -0.06,
+          "relativeTo": "surface-light"
+        }
+      }
+    }
+  },
+  "layer-accent-03": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.88,
+        0.004,
+        262
+      ],
+      "hex": "#d6d7da"
+    },
+    "$description": "Contextual accent for surface context 3.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "experimental",
+        "source": {
+          "type": "lightness-delta",
+          "delta": -0.06,
+          "relativeTo": "surface-dark"
+        }
+      }
+    }
+  },
+  "layer-accent-hover-01": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.88,
+        0.004,
+        262
+      ],
+      "hex": "#d6d7da"
+    },
+    "$description": "Contextual accent hover for surface context 1.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "experimental",
+        "source": {
+          "type": "interactive-state",
+          "state": "hover",
+          "delta": -0.03
+        }
+      }
+    }
+  },
+  "layer-accent-hover-02": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.91,
+        0.004,
+        262
+      ],
+      "hex": "#e0e1e4"
+    },
+    "$description": "Contextual accent hover for surface context 2.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "experimental",
+        "source": {
+          "type": "interactive-state",
+          "state": "hover",
+          "delta": -0.03
+        }
+      }
+    }
+  },
+  "layer-accent-hover-03": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.85,
+        0.004,
+        262
+      ],
+      "hex": "#ccced0"
+    },
+    "$description": "Contextual accent hover for surface context 3.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "experimental",
+        "source": {
+          "type": "interactive-state",
+          "state": "hover",
+          "delta": -0.03
+        }
+      }
+    }
+  },
+  "layer-accent-active-01": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.82,
+        0.004,
+        262
+      ],
+      "hex": "#c3c4c7"
+    },
+    "$description": "Contextual accent active for surface context 1.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "experimental",
+        "source": {
+          "type": "interactive-state",
+          "state": "active",
+          "delta": -0.09
+        }
+      }
+    }
+  },
+  "layer-accent-active-02": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.85,
+        0.004,
+        262
+      ],
+      "hex": "#ccced0"
+    },
+    "$description": "Contextual accent active for surface context 2.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "experimental",
+        "source": {
+          "type": "interactive-state",
+          "state": "active",
+          "delta": -0.09
+        }
+      }
+    }
+  },
+  "layer-accent-active-03": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.79,
+        0.004,
+        262
+      ],
+      "hex": "#b9babd"
+    },
+    "$description": "Contextual accent active for surface context 3.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "experimental",
+        "source": {
+          "type": "interactive-state",
+          "state": "active",
+          "delta": -0.09
+        }
+      }
+    }
+  },
+  "field-01": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.94,
+        0.004,
+        262
+      ],
+      "hex": "#eaebee"
+    },
+    "$description": "Contextual field for surface context 1.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "confirmed",
+        "source": {
+          "type": "lightness-delta",
+          "delta": -0.03,
+          "relativeTo": "surface"
+        }
+      }
+    }
+  },
+  "field-02": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.97,
+        0.004,
+        262
+      ],
+      "hex": "#f4f5f8"
+    },
+    "$description": "Contextual field for surface context 2.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "confirmed",
+        "source": {
+          "type": "lightness-delta",
+          "delta": -0.03,
+          "relativeTo": "surface-light"
+        }
+      }
+    }
+  },
+  "field-03": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.91,
+        0.004,
+        262
+      ],
+      "hex": "#e0e1e4"
+    },
+    "$description": "Contextual field for surface context 3.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "confirmed",
+        "source": {
+          "type": "lightness-delta",
+          "delta": -0.03,
+          "relativeTo": "surface-dark"
+        }
+      }
+    }
+  },
+  "field-hover-01": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.91,
+        0.004,
+        262
+      ],
+      "hex": "#e0e1e4"
+    },
+    "$description": "Contextual field hover for surface context 1.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "experimental",
+        "source": {
+          "type": "interactive-state",
+          "state": "hover",
+          "delta": -0.03
+        }
+      }
+    }
+  },
+  "field-hover-02": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.94,
+        0.004,
+        262
+      ],
+      "hex": "#eaebee"
+    },
+    "$description": "Contextual field hover for surface context 2.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "experimental",
+        "source": {
+          "type": "interactive-state",
+          "state": "hover",
+          "delta": -0.03
+        }
+      }
+    }
+  },
+  "field-hover-03": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.88,
+        0.004,
+        262
+      ],
+      "hex": "#d6d7da"
+    },
+    "$description": "Contextual field hover for surface context 3.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "experimental",
+        "source": {
+          "type": "interactive-state",
+          "state": "hover",
+          "delta": -0.03
+        }
+      }
+    }
+  },
+  "text-primary": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.24,
+        0.004,
+        262
+      ],
+      "hex": "#1e1f21"
+    },
+    "$description": "Primary text color.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "confirmed",
+        "source": {
+          "type": "fixed"
+        }
+      }
+    }
+  },
+  "text-secondary": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.48,
+        0.004,
+        262
+      ],
+      "hex": "#5c5e60"
+    },
+    "$description": "Secondary text color.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "confirmed",
+        "source": {
+          "type": "fixed"
+        }
+      }
+    }
+  },
+  "text-on-color": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        1,
+        0,
+        0
+      ],
+      "hex": "#ffffff"
+    },
+    "$description": "Text on brand color background.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "confirmed",
+        "source": {
+          "type": "fixed"
+        }
+      }
+    }
+  },
+  "text-disabled": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.24,
+        0.004,
+        262
+      ],
+      "alpha": 0.25,
+      "hex": "#1e1f21"
+    },
+    "$description": "Disabled text color: primary text at reduced chroma and 25% opacity.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "confirmed",
+        "source": {
+          "type": "opacity",
+          "parent": "text-primary",
+          "chroma": 0.004,
+          "alpha": 0.25
+        }
+      }
+    }
+  },
+  "text-helper-01": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.5465,
+        0.004,
+        262
+      ],
+      "hex": "#6f7073"
+    },
+    "$description": "Contextual helper text for surface context 1.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "confirmed",
+        "source": {
+          "type": "contrast",
+          "target": 4.5,
+          "relativeTo": "surface"
+        }
+      }
+    }
+  },
+  "text-helper-02": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.5671,
+        0.004,
+        262
+      ],
+      "hex": "#757679"
+    },
+    "$description": "Contextual helper text for surface context 2.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "confirmed",
+        "source": {
+          "type": "contrast",
+          "target": 4.5,
+          "relativeTo": "surface-light"
+        }
+      }
+    }
+  },
+  "text-helper-03": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.5256,
+        0.004,
+        262
+      ],
+      "hex": "#696a6d"
+    },
+    "$description": "Contextual helper text for surface context 3.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "confirmed",
+        "source": {
+          "type": "contrast",
+          "target": 4.5,
+          "relativeTo": "surface-dark"
+        }
+      }
+    }
+  },
+  "text-placeholder-01": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.5046,
+        0.004,
+        262
+      ],
+      "hex": "#636467"
+    },
+    "$description": "Contextual placeholder text for surface context 1.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "confirmed",
+        "source": {
+          "type": "shared-contrast",
+          "target": 4.5,
+          "relativeTo": "field",
+          "contexts": [
+            "surface",
+            "surface-light",
+            "surface-dark"
+          ]
+        }
+      }
+    }
+  },
+  "text-placeholder-02": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.5046,
+        0.004,
+        262
+      ],
+      "hex": "#636467"
+    },
+    "$description": "Contextual placeholder text for surface context 2.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "confirmed",
+        "source": {
+          "type": "shared-contrast",
+          "target": 4.5,
+          "relativeTo": "field",
+          "contexts": [
+            "surface",
+            "surface-light",
+            "surface-dark"
+          ]
+        }
+      }
+    }
+  },
+  "text-placeholder-03": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.5046,
+        0.004,
+        262
+      ],
+      "hex": "#636467"
+    },
+    "$description": "Contextual placeholder text for surface context 3.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "confirmed",
+        "source": {
+          "type": "shared-contrast",
+          "target": 4.5,
+          "relativeTo": "field",
+          "contexts": [
+            "surface",
+            "surface-light",
+            "surface-dark"
+          ]
+        }
+      }
+    }
+  },
+  "icon-primary": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.24,
+        0.004,
+        262
+      ],
+      "hex": "#1e1f21"
+    },
+    "$description": "Primary icon color.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "confirmed",
+        "source": {
+          "type": "fixed"
+        }
+      }
+    }
+  },
+  "icon-secondary": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.48,
+        0.004,
+        262
+      ],
+      "hex": "#5c5e60"
+    },
+    "$description": "Secondary icon color.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "confirmed",
+        "source": {
+          "type": "fixed"
+        }
+      }
+    }
+  },
+  "icon-disabled": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.24,
+        0.004,
+        262
+      ],
+      "alpha": 0.25,
+      "hex": "#1e1f21"
+    },
+    "$description": "Disabled icon color: primary icon at reduced chroma and 25% opacity.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "confirmed",
+        "source": {
+          "type": "opacity",
+          "parent": "icon-primary",
+          "chroma": 0.004,
+          "alpha": 0.25
+        }
+      }
+    }
+  },
+  "icon-helper-01": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.5465,
+        0.004,
+        262
+      ],
+      "hex": "#6f7073"
+    },
+    "$description": "Contextual helper icon for surface context 1.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "confirmed",
+        "source": {
+          "type": "alias",
+          "token": "text-helper"
+        }
+      }
+    }
+  },
+  "icon-helper-02": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.5671,
+        0.004,
+        262
+      ],
+      "hex": "#757679"
+    },
+    "$description": "Contextual helper icon for surface context 2.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "confirmed",
+        "source": {
+          "type": "alias",
+          "token": "text-helper"
+        }
+      }
+    }
+  },
+  "icon-helper-03": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.5256,
+        0.004,
+        262
+      ],
+      "hex": "#696a6d"
+    },
+    "$description": "Contextual helper icon for surface context 3.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "confirmed",
+        "source": {
+          "type": "alias",
+          "token": "text-helper"
+        }
+      }
+    }
+  },
+  "icon-placeholder-01": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.5465,
+        0.004,
+        262
+      ],
+      "hex": "#6f7073"
+    },
+    "$description": "Contextual placeholder icon for surface context 1.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "confirmed",
+        "source": {
+          "type": "alias",
+          "token": "text-helper"
+        }
+      }
+    }
+  },
+  "icon-placeholder-02": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.5671,
+        0.004,
+        262
+      ],
+      "hex": "#757679"
+    },
+    "$description": "Contextual placeholder icon for surface context 2.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "confirmed",
+        "source": {
+          "type": "alias",
+          "token": "text-helper"
+        }
+      }
+    }
+  },
+  "icon-placeholder-03": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.5256,
+        0.004,
+        262
+      ],
+      "hex": "#696a6d"
+    },
+    "$description": "Contextual placeholder icon for surface context 3.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "confirmed",
+        "source": {
+          "type": "alias",
+          "token": "text-helper"
+        }
+      }
+    }
+  },
+  "border-inverse": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.28,
+        0.004,
+        262
+      ],
+      "hex": "#28292b"
+    },
+    "$description": "Inverse border color.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "experimental",
+        "source": {
+          "type": "fixed"
+        }
+      }
+    }
+  },
+  "border-interactive": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.5565,
+        0.243,
+        262
+      ],
+      "hex": "#0f62fe"
+    },
+    "$description": "Interactive border color.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "confirmed",
+        "source": {
+          "type": "fixed"
+        }
+      }
+    }
+  },
+  "support-error": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.5692,
+        0.2174,
+        25.930000000000007
+      ],
+      "hex": "#da1e28"
+    },
+    "$description": "Error color for critical states. Use for error messages, failed validations, and critical alerts.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "confirmed",
+        "source": {
+          "type": "fixed"
+        }
+      }
+    }
+  },
+  "support-success": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.6234,
+        0.1661,
+        148.09000000000003
+      ],
+      "hex": "#24a148"
+    },
+    "$description": "Success color for positive states. Use for success messages, completed actions, and confirmations.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "confirmed",
+        "source": {
+          "type": "fixed"
+        }
+      }
+    }
+  },
+  "support-warning": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.8321,
+        0.1655,
+        90.44
+      ],
+      "hex": "#f1c21b"
+    },
+    "$description": "Warning color for caution states. Use for warnings, potential issues, and items needing attention.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "confirmed",
+        "source": {
+          "type": "fixed"
+        }
+      }
+    }
+  },
+  "support-info": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.454,
+        0.221,
+        262.63
+      ],
+      "hex": "#0043ce"
+    },
+    "$description": "Info color for informational states. Use for helpful tips, neutral information, and guidance.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "confirmed",
+        "source": {
+          "type": "fixed"
+        }
+      }
+    }
+  },
+  "support-error-inverse": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.6662,
+        0.2088,
+        22.129999999999995
+      ],
+      "hex": "#fa4d56"
+    },
+    "$description": "Error color for dark backgrounds. Use for error indicators on inverse surfaces.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "confirmed",
+        "source": {
+          "type": "fixed"
+        }
+      }
+    }
+  },
+  "support-success-inverse": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.712,
+        0.1677,
+        149.28999999999996
+      ],
+      "hex": "#42be65"
+    },
+    "$description": "Success color for dark backgrounds. Use for success indicators on inverse surfaces.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "confirmed",
+        "source": {
+          "type": "fixed"
+        }
+      }
+    }
+  },
+  "support-warning-inverse": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.8321,
+        0.1655,
+        90.44
+      ],
+      "hex": "#f1c21b"
+    },
+    "$description": "Warning color for dark backgrounds. Use for warning indicators on inverse surfaces.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "confirmed",
+        "source": {
+          "type": "fixed"
+        }
+      }
+    }
+  },
+  "support-info-inverse": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.647,
+        0.1888,
+        260.5799999999999
+      ],
+      "hex": "#4589ff"
+    },
+    "$description": "Info color for dark backgrounds. Use for info indicators on inverse surfaces.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "confirmed",
+        "source": {
+          "type": "fixed"
+        }
+      }
+    }
+  },
+  "border-strong-01": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.647,
+        0.004,
+        262
+      ],
+      "hex": "#8d8e91"
+    },
+    "$description": "Contextual strong border for surface context 1.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "confirmed",
+        "source": {
+          "type": "contrast",
+          "target": 3,
+          "relativeTo": "surface"
+        }
+      }
+    }
+  },
+  "border-strong-02": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.6687,
+        0.004,
+        262
+      ],
+      "hex": "#939597"
+    },
+    "$description": "Contextual strong border for surface context 2.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "confirmed",
+        "source": {
+          "type": "contrast",
+          "target": 3,
+          "relativeTo": "surface-light"
+        }
+      }
+    }
+  },
+  "border-strong-03": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.6244,
+        0.004,
+        262
+      ],
+      "hex": "#86878a"
+    },
+    "$description": "Contextual strong border for surface context 3.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "confirmed",
+        "source": {
+          "type": "contrast",
+          "target": 3,
+          "relativeTo": "surface-dark"
+        }
+      }
+    }
+  },
+  "border-subtle-01": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.88,
+        0.004,
+        262
+      ],
+      "hex": "#d6d7da"
+    },
+    "$description": "Contextual subtle border for surface context 1.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "confirmed",
+        "source": {
+          "type": "lightness-delta",
+          "delta": -0.09,
+          "relativeTo": "surface"
+        }
+      }
+    }
+  },
+  "border-subtle-02": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.91,
+        0.004,
+        262
+      ],
+      "hex": "#e0e1e4"
+    },
+    "$description": "Contextual subtle border for surface context 2.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "confirmed",
+        "source": {
+          "type": "lightness-delta",
+          "delta": -0.09,
+          "relativeTo": "surface-light"
+        }
+      }
+    }
+  },
+  "border-subtle-03": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.85,
+        0.004,
+        262
+      ],
+      "hex": "#ccced0"
+    },
+    "$description": "Contextual subtle border for surface context 3.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "confirmed",
+        "source": {
+          "type": "lightness-delta",
+          "delta": -0.09,
+          "relativeTo": "surface-dark"
+        }
+      }
+    }
+  },
+  "skeleton-background-01": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.93,
+        0.004,
+        262
+      ],
+      "hex": "#e6e8eb"
+    },
+    "$description": "Contextual skeleton background for surface context 1.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "confirmed",
+        "source": {
+          "type": "lightness-delta",
+          "delta": -0.04,
+          "relativeTo": "surface"
+        }
+      }
+    }
+  },
+  "skeleton-background-02": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.96,
+        0.004,
+        262
+      ],
+      "hex": "#f0f2f4"
+    },
+    "$description": "Contextual skeleton background for surface context 2.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "confirmed",
+        "source": {
+          "type": "lightness-delta",
+          "delta": -0.04,
+          "relativeTo": "surface-light"
+        }
+      }
+    }
+  },
+  "skeleton-background-03": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.9,
+        0.004,
+        262
+      ],
+      "hex": "#dcdee1"
+    },
+    "$description": "Contextual skeleton background for surface context 3.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "confirmed",
+        "source": {
+          "type": "lightness-delta",
+          "delta": -0.04,
+          "relativeTo": "surface-dark"
+        }
+      }
+    }
+  },
+  "state-hover": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.94,
+        0.004,
+        262
+      ],
+      "hex": "#eaebee"
+    },
+    "$description": "Interactive hover state background.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "experimental",
+        "source": {
+          "type": "interactive-state",
+          "state": "hover",
+          "delta": -0.03
+        }
+      }
+    }
+  },
+  "state-selected": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.91,
+        0.004,
+        262
+      ],
+      "hex": "#e0e1e4"
+    },
+    "$description": "Interactive selected state background.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "experimental",
+        "source": {
+          "type": "interactive-state",
+          "state": "selected",
+          "delta": -0.06
+        }
+      }
+    }
+  },
+  "state-active": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.88,
+        0.004,
+        262
+      ],
+      "hex": "#d6d7da"
+    },
+    "$description": "Interactive active state background.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "experimental",
+        "source": {
+          "type": "interactive-state",
+          "state": "active",
+          "delta": -0.09
+        }
+      }
+    }
+  },
+  "state-disabled": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "oklch",
+      "components": [
+        0.97,
+        0.004,
+        262
+      ],
+      "alpha": 0.25,
+      "hex": "#f4f5f8"
+    },
+    "$description": "Interactive disabled state background.",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "status": "experimental",
+        "source": {
+          "type": "interactive-opacity",
+          "state": "disabled",
+          "chroma": 0.004,
+          "alpha": 0.25
+        }
+      }
+    }
+  }
+}

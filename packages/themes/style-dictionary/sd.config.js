@@ -36,6 +36,7 @@ const ROOT = path.resolve(__dirname, '..');
 const RESOLVER = path.join(ROOT, 'tokens', 'themes.resolver.json');
 const SCSS_GENERATED = path.join(ROOT, 'scss', 'generated');
 const JS_GENERATED = path.join(ROOT, 'js', 'generated');
+const V12_RESOLVER = path.join(ROOT, 'tokens', 'next', 'themes.resolver.json');
 
 const EXTENSION_NAMESPACE = 'com.ibm.carbon';
 const TOKEN_FILE_EXTENSION = '.tokens.json';
@@ -241,16 +242,58 @@ async function runJs() {
   }
 }
 
+// V12 build
+// Generates:
+//   scss/generated/_v12-{light,dark}.scss
+//   js/generated/v12/{light,dark}.{js,d.ts}
+async function runV12() {
+  const resolver = readResolver(V12_RESOLVER);
+  const files = {};
+  for (const name of resolver.contexts('theme')) {
+    const base = new StyleDictionary({});
+    base.registerParser(tokenFileParser);
+    base.registerTransform(colorFlatten);
+
+    const sd = await base.extend({
+      ...resolver.resolve({ theme: name }),
+      parsers: [tokenFileParser.name],
+      platforms: {
+        css: { transforms: [colorFlatten.name] },
+      },
+      log: { warnings: 'error' },
+    });
+    const { allTokens } = await sd.getPlatformTokens('css');
+    const theme = allTokens.map((token) => ({
+      name: token.path.join('-'),
+      value: token.$value,
+    }));
+
+    files[`v12/${name}.js`] = jsThemes(theme, 'js');
+    files[`v12/${name}.d.ts`] = jsThemes(theme, 'dts');
+    fs.outputFileSync(
+      path.join(SCSS_GENERATED, `_v12-${name}.scss`),
+      scssThemes([{ name, tokens: theme }]),
+      'utf8'
+    );
+  }
+
+  for (const [file, content] of Object.entries(files)) {
+    fs.outputFileSync(path.join(JS_GENERATED, file), content, 'utf8');
+  }
+}
+
 // Full build (SCSS + JS)
 async function run() {
   await runScss();
   await runJs();
+  await runV12();
 }
 
 module.exports = {
   run,
   runScss,
   runJs,
+  runV12,
   resolveThemes,
   combineComponentTokens,
 };
