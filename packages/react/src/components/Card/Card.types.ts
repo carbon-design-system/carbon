@@ -79,7 +79,21 @@ export interface CardProps extends CardBaseProps {
 /**
  * Props for CardHeader component
  */
-export type CardHeaderProps = CardBaseProps;
+export interface CardHeaderProps extends CardBaseProps {
+  /**
+   * Icon, avatar, tag, or any content rendered in the header media row above
+   * the title. When provided the media and actions share row 1; the title
+   * content drops to row 2 and spans the full card width.
+   */
+  headerMedia?: ReactNode;
+  /**
+   * Action buttons rendered end-aligned in the header. Pass
+   * `<Card.Actions>…</Card.Actions>` here; it will be placed as the
+   * trailing column of the header grid so the title gets exactly the
+   * remaining space — no JS measurement needed.
+   */
+  actions?: ReactNode;
+}
 
 /**
  * Props for CardBody component

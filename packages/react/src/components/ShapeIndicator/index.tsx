@@ -122,7 +122,7 @@ export const ShapeIndicator = React.forwardRef(
   (
     {
       align = 'right',
-      autoAlign = false,
+      autoAlign,
       className: customClassName,
       compact = false,
       kind,

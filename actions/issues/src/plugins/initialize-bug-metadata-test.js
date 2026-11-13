@@ -368,7 +368,7 @@ describe('initializeBugMetadata', () => {
     ['Medium (Severity 3) = description', 'medium'],
     ['Low (Severity 4) = description', 'low'],
   ])(
-    'adds community labels and the one-time comment for %s',
+    'posts the one-time comment without community labels for %s',
     async (answer, severity) => {
       const item = {
         id: 'item-id',
@@ -389,16 +389,7 @@ describe('initializeBugMetadata', () => {
         octokit
       );
 
-      expect(octokit.rest.issues.addLabels).toHaveBeenCalledWith(
-        expect.objectContaining({
-          labels: [
-            'status: help wanted 👐',
-            'needs: community contribution',
-            'needs: code contribution',
-            'good first issue 👋',
-          ],
-        })
-      );
+      expect(octokit.rest.issues.addLabels).not.toHaveBeenCalled();
       expect(manageComment).toHaveBeenCalledWith(
         expect.anything(),
         octokit,
@@ -410,7 +401,7 @@ describe('initializeBugMetadata', () => {
     }
   );
 
-  it('adds low-severity labels but does not comment on typed', async () => {
+  it('does not add community labels or comment on typed', async () => {
     const item = {
       id: 'item-id',
       project: { id: project.id },
@@ -436,15 +427,95 @@ describe('initializeBugMetadata', () => {
     context.payload.action = 'typed';
     await initializeBugMetadata(context, octokit);
 
-    expect(octokit.rest.issues.addLabels).toHaveBeenCalled();
+    expect(octokit.rest.issues.addLabels).not.toHaveBeenCalled();
     expect(manageComment).not.toHaveBeenCalled();
+  });
+
+  it('adds companion labels when good first issue is applied to a Bug', async () => {
+    const octokit = createOctokit();
+    const context = createContext({
+      labels: [{ name: 'good first issue 👋' }],
+    });
+    context.payload.action = 'labeled';
+    context.payload.label = { name: 'good first issue 👋' };
+
+    await initializeBugMetadata(context, octokit);
+
+    expect(octokit.rest.issues.addLabels).toHaveBeenCalledWith({
+      owner: 'carbon-design-system',
+      repo: 'carbon',
+      issue_number: 123,
+      labels: [
+        'status: help wanted 👐',
+        'needs: community contribution',
+        'needs: code contribution',
+      ],
+    });
+    expect(octokit.request).not.toHaveBeenCalled();
+    expect(octokit.graphql).not.toHaveBeenCalled();
+  });
+
+  it('adds only companion labels that are missing', async () => {
+    const octokit = createOctokit();
+    const context = createContext({
+      labels: [
+        { name: 'good first issue 👋' },
+        { name: 'status: help wanted 👐' },
+      ],
+    });
+    context.payload.action = 'labeled';
+    context.payload.label = { name: 'good first issue 👋' };
+
+    await initializeBugMetadata(context, octokit);
+
+    expect(octokit.rest.issues.addLabels).toHaveBeenCalledWith(
+      expect.objectContaining({
+        labels: ['needs: community contribution', 'needs: code contribution'],
+      })
+    );
+  });
+
+  it('does not add labels again when the companions are already present', async () => {
+    const octokit = createOctokit();
+    const context = createContext({
+      labels: [
+        { name: 'good first issue 👋' },
+        { name: 'status: help wanted 👐' },
+        { name: 'needs: community contribution' },
+        { name: 'needs: code contribution' },
+      ],
+    });
+    context.payload.action = 'labeled';
+    context.payload.label = { name: 'good first issue 👋' };
+
+    await initializeBugMetadata(context, octokit);
+
+    expect(octokit.rest.issues.addLabels).not.toHaveBeenCalled();
+  });
+
+  it('ignores unrelated label events', async () => {
+    const octokit = createOctokit();
+    const context = createContext({
+      labels: [{ name: 'status: help wanted 👐' }],
+    });
+    context.payload.action = 'labeled';
+    context.payload.label = { name: 'status: help wanted 👐' };
+
+    await initializeBugMetadata(context, octokit);
+
+    expect(octokit.rest.issues.addLabels).not.toHaveBeenCalled();
+    expect(octokit.request).not.toHaveBeenCalled();
+    expect(octokit.graphql).not.toHaveBeenCalled();
   });
 });
 
 describe('plugin conditions', () => {
-  it.each(['opened', 'typed'])('runs for the %s issue event', (action) => {
-    expect(plugin.conditions[0].run({ payload: { action } })).toBe(true);
-  });
+  it.each(['opened', 'typed', 'labeled'])(
+    'runs for the %s issue event',
+    (action) => {
+      expect(plugin.conditions[0].run({ payload: { action } })).toBe(true);
+    }
+  );
 
   it('does not run for unrelated issue events', () => {
     expect(plugin.conditions[0].run({ payload: { action: 'edited' } })).toBe(

@@ -69,7 +69,6 @@ const selectionFeedbackOptions = {
 };
 
 const args = {
-  autoalign: false,
   clearSelectionLabel: 'Clear all selected items',
   clearSelectionDescription: 'Total items selected: ',
   clearSelectionText: 'To clear selection, press Delete or Backspace.',

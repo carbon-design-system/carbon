@@ -107,6 +107,17 @@ class CDSPasswordInput extends CDSTextInput {
   isFluid = false;
 
   /**
+   * Specify if the component should be read-only.
+   */
+  get readOnly(): boolean {
+    return this.readonly;
+  }
+
+  set readOnly(value: boolean) {
+    this.readonly = value;
+  }
+
+  /**
    * Specify the direction of the tooltip for icon-only buttons.
    * Can be either top, right, bottom, or left.
    */

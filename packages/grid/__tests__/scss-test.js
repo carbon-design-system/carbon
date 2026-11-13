@@ -32,4 +32,24 @@ describe('@carbon/grid', () => {
       'flex-grid': true,
     });
   });
+
+  test('breakpoint-between applies the max-width hotfix to named upper breakpoints', async () => {
+    const { result } = await render(`
+      @use '../scss/breakpoint';
+
+      .test {
+        @include breakpoint.breakpoint-between('md', 'lg') {
+          color: red;
+        }
+      }
+    `);
+
+    expect(result.css).toMatchInlineSnapshot(`
+      "@media (min-width: 42rem) and (max-width: 65.98rem) {
+        .test {
+          color: red;
+        }
+      }"
+    `);
+  });
 });
