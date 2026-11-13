@@ -13,6 +13,7 @@ import * as ShapeIndicatorStories from './shape-indicator.stories';
   - [Size](#size)
   - [Compact mode](#compact-mode)
   - [Customizing the label](#customizing-the-label)
+  - [Customizing the label color](#customizing-the-label-color)
 - [Component API](#component-api)
 - [CDN](#cdn)
 - [Feedback](#feedback)
@@ -44,6 +45,18 @@ constrained layout.
 ## Customizing the label
 
 You can set a string to customize the label of the Shape indicator.
+
+## Customizing the label color
+
+By default, the label uses the `$text-secondary` token. To use a different
+color, such as `$text-primary`, set the `--cds-shape-indicator-label-color` CSS
+custom property on the component:
+
+```css
+cds-shape-indicator {
+  --cds-shape-indicator-label-color: var(--cds-text-primary);
+}
+```
 
 ## Component API
 

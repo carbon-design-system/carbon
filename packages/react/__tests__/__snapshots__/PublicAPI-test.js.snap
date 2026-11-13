@@ -13727,6 +13727,9 @@ Map {
         "isRequired": true,
         "type": "string",
       },
+      "labelColor": {
+        "type": "string",
+      },
       "size": {
         "args": [
           [
@@ -13997,6 +14000,9 @@ Map {
       },
       "label": {
         "isRequired": true,
+        "type": "string",
+      },
+      "labelColor": {
         "type": "string",
       },
       "shapeDescription": {
@@ -15776,6 +15782,9 @@ Map {
         "isRequired": true,
         "type": "string",
       },
+      "labelColor": {
+        "type": "string",
+      },
       "size": {
         "args": [
           [
@@ -16046,6 +16055,9 @@ Map {
       },
       "label": {
         "isRequired": true,
+        "type": "string",
+      },
+      "labelColor": {
         "type": "string",
       },
       "shapeDescription": {

@@ -18,6 +18,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 - [Size](#size)
 - [Compact mode](#compact-mode)
 - [Customizing the label](#customizing-the-label)
+- [Customizing the label color](#customizing-the-label-color)
 - [Component API](#component-api)
 - [Feedback](#feedback)
 
@@ -79,6 +80,28 @@ constrained layout.
 ## Customizing the label
 
 You can set a string to customize the label of the Icon indicator.
+
+## Customizing the label color
+
+By default, the label uses the `$text-secondary` token. To use a different
+color, pass any valid CSS color value or design token to the `labelColor` prop:
+
+```jsx
+<IconIndicator
+  kind="failed"
+  label="Failed"
+  labelColor="var(--cds-text-primary)"
+/>
+```
+
+Alternatively, you can set the `--cds-icon-indicator-label-color` CSS custom
+property directly via the `className` prop:
+
+```css
+.my-icon-indicator {
+  --cds-icon-indicator-label-color: var(--cds-text-primary);
+}
+```
 
 ## Component API
 
