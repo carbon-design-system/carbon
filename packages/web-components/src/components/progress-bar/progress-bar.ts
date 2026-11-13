@@ -181,7 +181,7 @@ class CDSProgressBar extends LitElement {
       <div
         class="${prefix}--progress-bar__track"
         role="progressbar"
-        aria-busy="${!isFinished}"
+        aria-busy="${!isFinished && !isError}"
         aria-invalid="${isError}"
         aria-valuemin="${!indeterminate ? 0 : null}"
         aria-valuemax="${!indeterminate ? max : null}"
