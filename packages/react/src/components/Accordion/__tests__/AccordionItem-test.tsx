@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { describe, expect, it, jest } from '@jest/globals';
+import { afterEach, describe, expect, it, jest } from '@jest/globals';
 import '@testing-library/jest-dom/jest-globals';
 import React from 'react';
 import type { AccordionToggleProps } from '../AccordionItem';
@@ -185,6 +185,69 @@ describe('AccordionItem', () => {
         'aria-expanded',
         'true'
       );
+    });
+  });
+
+  describe('handleAnimationEnd with reduced motion', () => {
+    const originalMatchMedia = window.matchMedia;
+
+    const mockMatchMedia = (matches: boolean) => {
+      Object.defineProperty(window, 'matchMedia', {
+        writable: true,
+        configurable: true,
+        value: jest.fn().mockImplementation((query: string) => ({
+          matches,
+          media: query,
+          addEventListener: jest.fn(),
+          removeEventListener: jest.fn(),
+        })),
+      });
+    };
+
+    afterEach(() => {
+      Object.defineProperty(window, 'matchMedia', {
+        writable: true,
+        configurable: true,
+        value: originalMatchMedia,
+      });
+    });
+
+    it('should call handleAnimationEnd after toggling when reduced motion is preferred', async () => {
+      mockMatchMedia(true);
+      const handleAnimationEnd = jest.fn();
+      render(
+        <AccordionItem
+          title="A heading"
+          handleAnimationEnd={handleAnimationEnd}>
+          Lorem ipsum.
+        </AccordionItem>
+      );
+      expect(handleAnimationEnd).not.toHaveBeenCalled();
+
+      await userEvent.click(screen.getByRole('button'));
+
+      expect(handleAnimationEnd).toHaveBeenCalledTimes(1);
+      expect(handleAnimationEnd.mock.calls[0][0]).toMatchObject({
+        type: 'transitionend',
+        propertyName: 'max-block-size',
+        elapsedTime: 0,
+      });
+    });
+
+    it('should not call handleAnimationEnd on toggle when reduced motion is not preferred', async () => {
+      mockMatchMedia(false);
+      const handleAnimationEnd = jest.fn();
+      render(
+        <AccordionItem
+          title="A heading"
+          handleAnimationEnd={handleAnimationEnd}>
+          Lorem ipsum.
+        </AccordionItem>
+      );
+
+      await userEvent.click(screen.getByRole('button'));
+
+      expect(handleAnimationEnd).not.toHaveBeenCalled();
     });
   });
 });
