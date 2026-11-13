@@ -16,8 +16,23 @@ import { noopFn } from '../../internal/noopFn';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { Text } from '../Text';
 import { Tooltip } from '../Tooltip';
+import type { PopoverAlignment } from '../Popover';
 
 export interface FileUploaderItemProps extends HTMLAttributes<HTMLSpanElement> {
+  /**
+   * Specify how the overflow tooltip, shown when the file name is truncated,
+   * should align with the file name
+   */
+  align?: PopoverAlignment;
+
+  /**
+   * **Experimental**: Will attempt to automatically align the overflow tooltip
+   * to avoid collisions with the viewport and being clipped by ancestor
+   * elements. Requires React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
+   */
+  autoAlign?: boolean;
+
   /**
    * Specify whether file uploader item is disabled
    */
@@ -79,6 +94,8 @@ export interface FileUploaderItemProps extends HTMLAttributes<HTMLSpanElement> {
   uuid?: string;
 }
 function FileUploaderItem({
+  align = 'bottom',
+  autoAlign,
   uuid,
   name,
   status = 'uploading',
@@ -131,7 +148,8 @@ function FileUploaderItem({
         <div className={isInvalid}>
           <Tooltip
             label={name}
-            align="bottom"
+            align={align}
+            autoAlign={autoAlign}
             className={`${prefix}--file-filename-tooltip`}>
             <button className={`${prefix}--file-filename-button`} type="button">
               <Text
@@ -205,6 +223,46 @@ function FileUploaderItem({
 }
 
 FileUploaderItem.propTypes = {
+  /**
+   * Specify how the overflow tooltip, shown when the file name is truncated,
+   * should align with the file name
+   */
+  align: PropTypes.oneOf([
+    'top',
+    'top-left', // deprecated use top-start instead
+    'top-right', // deprecated use top-end instead
+
+    'bottom',
+    'bottom-left', // deprecated use bottom-start instead
+    'bottom-right', // deprecated use bottom-end instead
+
+    'left',
+    'left-bottom', // deprecated use left-end instead
+    'left-top', // deprecated use left-start instead
+
+    'right',
+    'right-bottom', // deprecated use right-end instead
+    'right-top', // deprecated use right-start instead
+
+    // new values to match floating-ui
+    'top-start',
+    'top-end',
+    'bottom-start',
+    'bottom-end',
+    'left-end',
+    'left-start',
+    'right-end',
+    'right-start',
+  ]),
+
+  /**
+   * **Experimental**: Will attempt to automatically align the overflow tooltip
+   * to avoid collisions with the viewport and being clipped by ancestor
+   * elements. Requires React v17+
+   * @see https://github.com/carbon-design-system/carbon/issues/18714
+   */
+  autoAlign: PropTypes.bool,
+
   /**
    * Error message body for an invalid file upload
    */

@@ -3812,6 +3812,36 @@ Map {
   },
   "FileUploaderItem" => {
     "propTypes": {
+      "align": {
+        "args": [
+          [
+            "top",
+            "top-left",
+            "top-right",
+            "bottom",
+            "bottom-left",
+            "bottom-right",
+            "left",
+            "left-bottom",
+            "left-top",
+            "right",
+            "right-bottom",
+            "right-top",
+            "top-start",
+            "top-end",
+            "bottom-start",
+            "bottom-end",
+            "left-end",
+            "left-start",
+            "right-end",
+            "right-start",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "autoAlign": {
+        "type": "bool",
+      },
       "errorBody": {
         "type": "string",
       },
