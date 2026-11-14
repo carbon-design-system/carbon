@@ -24,7 +24,9 @@ export function format(
   const hours = Math.trunc(minutes / 60);
   const days = Math.trunc(hours / 24);
   const weeks = Math.trunc(days / 7);
-  const months = Math.trunc(weeks / 4);
+  // A month is counted as 4 weeks, which reaches 13 just before a full year,
+  // so cap it at 12
+  const months = Math.max(-12, Math.min(12, Math.trunc(weeks / 4)));
   const years = Math.trunc(days / 365);
 
   if (Math.abs(seconds) < 60) {
