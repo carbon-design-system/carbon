@@ -72,11 +72,11 @@ $aspect-ratios: (
   }
 
   @each $breakpoint in md, lg, xlg, max {
-    @each $aspect-ratio in $aspect-ratios {
-      $width: list.nth($aspect-ratio, 1);
-      $height: list.nth($aspect-ratio, 2);
+    @include breakpoint($breakpoint) {
+      @each $aspect-ratio in $aspect-ratios {
+        $width: list.nth($aspect-ratio, 1);
+        $height: list.nth($aspect-ratio, 2);
 
-      @include breakpoint($breakpoint) {
         .#{$prefix}--aspect-ratio--#{$breakpoint}--#{$width}x#{$height}::before {
           padding-block-start: math.percentage(math.div($height, $width));
         }
