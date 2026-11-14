@@ -190,6 +190,33 @@ describe('TextArea', () => {
       expect(invalidIcon).toBeInTheDocument();
     });
 
+    it('should not show invalid state when disabled or readOnly', () => {
+      const states = ['disabled', 'readOnly'];
+
+      states.forEach((state) => {
+        const { container, unmount } = render(
+          <TextArea
+            id={`textarea-${state}`}
+            labelText="TextArea"
+            disabled={state === 'disabled'}
+            readOnly={state === 'readOnly'}
+            invalid
+            invalidText="Some error"
+          />
+        );
+
+        expect(screen.getByRole('textbox')).not.toHaveClass(
+          `${prefix}--text-area--invalid`
+        );
+        expect(screen.queryByText('Some error')).not.toBeInTheDocument();
+        expect(
+          container.querySelector(`svg.${prefix}--text-area__invalid-icon`)
+        ).not.toBeInTheDocument();
+
+        unmount();
+      });
+    });
+
     it('should apply aria-invalid when invalid', () => {
       render(
         <TextArea
@@ -308,6 +335,37 @@ describe('TextArea', () => {
         `${prefix}--text-area--warn`
       );
       expect(warnIcon).toBeInTheDocument();
+    });
+
+    it('should not show warning state when disabled or readOnly', () => {
+      const states = ['disabled', 'readOnly'];
+
+      states.forEach((state) => {
+        const { container, unmount } = render(
+          <TextArea
+            id={`textarea-${state}`}
+            labelText="TextArea label"
+            disabled={state === 'disabled'}
+            readOnly={state === 'readOnly'}
+            warn
+            warnText="This is warning text"
+          />
+        );
+
+        expect(screen.getByRole('textbox')).not.toHaveClass(
+          `${prefix}--text-area--warn`
+        );
+        expect(
+          screen.queryByText('This is warning text')
+        ).not.toBeInTheDocument();
+        expect(
+          container.querySelector(
+            `svg.${prefix}--text-area__invalid-icon--warning`
+          )
+        ).not.toBeInTheDocument();
+
+        unmount();
+      });
     });
 
     it('should respect `warnText` prop', () => {
