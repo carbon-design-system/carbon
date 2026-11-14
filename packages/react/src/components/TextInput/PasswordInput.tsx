@@ -268,6 +268,7 @@ const PasswordInput = forwardRef<unknown, PasswordInputProps>(
         [`${prefix}--text-input-wrapper--inline--invalid`]:
           inline && normalizedProps.invalid,
         [`${prefix}--text-input--fluid`]: isFluid,
+        [`${prefix}--text-input--fluid--disabled`]: isFluid && disabled,
       }
     );
     const labelClasses = classNames(`${prefix}--label`, {

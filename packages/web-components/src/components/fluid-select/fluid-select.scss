@@ -58,3 +58,9 @@ $divider-width: 1px;
     }
   }
 }
+
+:host(#{$prefix}-fluid-select[disabled])
+  .#{$prefix}--select
+  .#{$prefix}--select-input:disabled {
+  border-block-end: to-rem(1px) solid $border-subtle;
+}
