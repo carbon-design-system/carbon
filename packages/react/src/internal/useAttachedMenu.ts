@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023
+ * Copyright IBM Corp. 2023, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -90,6 +90,14 @@ export function useAttachedMenu(anchor): UseAttachedMenuReturn {
     // it and immediately re-open since "click" event is fired after
     // "blur" event.
     e.preventDefault();
+
+    // Because the default was prevented, the trigger does not receive
+    // focus on click. Focus it here so the menu can return focus to it
+    // on close. This must be skipped when the menu is already open since
+    // focusing the trigger would blur the menu, closing it.
+    if (!open && e.button === 0) {
+      e.currentTarget.focus();
+    }
   }
 
   return {

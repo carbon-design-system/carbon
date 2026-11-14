@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023, 2026
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -236,6 +236,35 @@ describe('OverflowMenu (enable-v12-overflowmenu)', () => {
       'aria-expanded',
       'false'
     );
+  });
+
+  it('returns focus to the trigger when the menu was opened with a mouse click', async () => {
+    render(
+      <>
+        <button type="button">Focusable element</button>
+        <OverflowMenu>
+          <MenuItem label="one" />
+        </OverflowMenu>
+      </>
+    );
+
+    // Focus an element before the OverflowMenu.
+    const otherButton = screen.getByRole('button', {
+      name: 'Focusable element',
+    });
+    otherButton.focus();
+    expect(otherButton).toHaveFocus();
+
+    // Open the menu with a mouse click. Focus moves to the MenuItem.
+    const menuButton = screen.getByRole('button', { name: 'Options' });
+    await userEvent.click(menuButton);
+    const menuItem = screen.getByRole('menuitem', { name: 'one' });
+    expect(menuItem).toHaveFocus();
+
+    // Close the menu with Tab. Focus should move back to the trigger.
+    await userEvent.tab();
+    expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+    expect(menuButton).toHaveFocus();
   });
 
   describe('supports props.menuAlignment', () => {
