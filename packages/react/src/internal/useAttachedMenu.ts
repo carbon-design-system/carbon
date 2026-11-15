@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { MouseEventHandler, useState } from 'react';
+import { useState, type MouseEvent, type MouseEventHandler } from 'react';
 
 /**
  * Array of two numbers either representing [left, right] or [top, bottom].
@@ -36,7 +36,7 @@ export interface UseAttachedMenuReturn {
   /**
    * A function to be called when the trigger element receives a mousedown event.
    */
-  handleMousedown: MouseEventHandler;
+  handleMousedown: MouseEventHandler<HTMLButtonElement>;
 
   /**
    * A function to be called when the menu emits onClose.
@@ -84,7 +84,7 @@ export function useAttachedMenu(anchor): UseAttachedMenuReturn {
     }
   }
 
-  function handleMousedown(e) {
+  function handleMousedown(e: MouseEvent<HTMLButtonElement>) {
     // prevent default for mousedown on trigger element to avoid
     // the "blur" event from firing on the menu as this would close
     // it and immediately re-open since "click" event is fired after
