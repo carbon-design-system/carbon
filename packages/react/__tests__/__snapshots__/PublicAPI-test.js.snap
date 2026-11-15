@@ -519,6 +519,9 @@ Map {
       "autoAlign": {
         "type": "bool",
       },
+      "badgeCount": {
+        "type": "number",
+      },
       "children": {
         "type": "node",
       },
