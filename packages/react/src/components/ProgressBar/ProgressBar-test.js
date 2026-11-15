@@ -41,21 +41,24 @@ describe('ProgressBar', () => {
       expect(helperText).toHaveTextContent(text);
     });
 
-    it('announces the status in the helper text live region', () => {
+    it('should announce the status in the helper text live region', () => {
       const text = 'ProgressBar helper text';
       wrapper.rerender(<ProgressBar {...props} helperText={text} />);
-      expect(screen.getByText('Loading')).toBeInTheDocument();
+      const live = () =>
+        // eslint-disable-next-line testing-library/no-node-access
+        wrapper.container.querySelector('[aria-live="polite"]');
+
+      expect(live()).toHaveTextContent(/^Loading$/);
 
       wrapper.rerender(
         <ProgressBar {...props} helperText={text} status="finished" />
       );
-      expect(screen.getByText('Done')).toBeInTheDocument();
+      expect(live()).toHaveTextContent(/^Done$/);
 
       wrapper.rerender(
         <ProgressBar {...props} helperText={text} status="error" />
       );
-      expect(screen.getByText('Error')).toBeInTheDocument();
-      expect(screen.queryByText('Loading')).not.toBeInTheDocument();
+      expect(live()).toHaveTextContent(/^Error$/);
     });
 
     it('still renders accessible label when hideLabel is passed', () => {
