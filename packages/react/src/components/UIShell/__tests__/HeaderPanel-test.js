@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2025
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -228,14 +228,14 @@ describe('HeaderPanel', () => {
     expect(button).toHaveAttribute('aria-expanded', 'false');
   });
 
-  it('should still close when another header action is clicked while a `SwitcherItem` has focus', async () => {
+  it('should still close when another active header action is clicked while a `SwitcherItem` has focus', async () => {
     const SwitcherPanel = () => {
       const [expanded, setExpanded] = React.useState(false);
       const toggle = () => setExpanded((value) => !value);
 
       return (
         <>
-          <HeaderGlobalAction aria-label="Search" onClick={() => {}}>
+          <HeaderGlobalAction aria-label="Search" isActive onClick={() => {}}>
             <span />
           </HeaderGlobalAction>
           <HeaderGlobalAction
@@ -289,7 +289,7 @@ describe('HeaderPanel', () => {
             isActive={expanded}
             onClick={toggle}
             id="switcher-button">
-            <span />
+            <span data-testid="switcher-icon" />
           </HeaderGlobalAction>
           <HeaderPanel
             data-testid="panel"
@@ -316,9 +316,10 @@ describe('HeaderPanel', () => {
     expect(panel).toHaveClass('cds--header-panel--expanded');
 
     // Safari: pressing the button blurs the link without focusing the button,
-    // so the blur has no `relatedTarget`.
+    // so the blur has no `relatedTarget`. Press the icon inside the button,
+    // since that is usually what the mouse is over.
     link.focus();
-    fireEvent.mouseDown(button);
+    fireEvent.mouseDown(screen.getByTestId('switcher-icon'));
     fireEvent.blur(link, { relatedTarget: null });
     fireEvent.click(button);
 

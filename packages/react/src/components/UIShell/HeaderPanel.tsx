@@ -87,27 +87,21 @@ const HeaderPanel = React.forwardRef<HTMLDivElement, HeaderPanelProps>(
       Pick<ComponentProps<'header'>, 'onBlur' | 'onKeyDown'>
     > = {};
 
-    // Whether `element` is the header action that toggles this panel. Its own
-    // click handler toggles the panel, so closing it on blur as well would
-    // make it re-open.
+    // Whether `element` is, or is inside, the header action that toggles this
+    // panel. Its own click handler toggles the panel, so closing it on blur as
+    // well would make it re-open.
     const isPanelToggle = (element: Element | null) => {
-      if (!element) {
+      if (!element || !href?.startsWith('#') || href.length === 1) {
         return false;
       }
-      if (
-        href?.startsWith('#') &&
-        href.length > 1 &&
-        element.id === href.slice(1)
-      ) {
-        return true;
-      }
-      return !!element.closest(`.${prefix}--header__action--active`);
+      const toggle = element.ownerDocument.getElementById(href.slice(1));
+      return !!toggle?.contains(element);
     };
 
     // Safari doesn't focus a button when it's clicked, so `relatedTarget` is
     // null when the toggle is clicked. Remember what the mouse was pressed
     // on so `onBlur` can still tell the toggle is being clicked.
-    const mouseDownTarget = useRef<Element | null>(null);
+    const mouseDownTarget = useRef<Element>(null);
     useWindowEvent('mousedown', (event: MouseEvent) => {
       mouseDownTarget.current =
         event.target instanceof Element ? event.target : null;
@@ -115,8 +109,7 @@ const HeaderPanel = React.forwardRef<HTMLDivElement, HeaderPanelProps>(
 
     if (addFocusListeners) {
       eventHandlers.onBlur = (event) => {
-        const nextFocus = (event.relatedTarget ??
-          mouseDownTarget.current) as Element | null;
+        const nextFocus = event.relatedTarget ?? mouseDownTarget.current;
         if (
           !event.currentTarget.contains(event.relatedTarget) &&
           !isPanelToggle(nextFocus) &&
