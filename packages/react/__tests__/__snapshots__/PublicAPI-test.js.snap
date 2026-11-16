@@ -3682,6 +3682,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "small",
             "md",
@@ -3752,6 +3753,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -3833,6 +3835,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",

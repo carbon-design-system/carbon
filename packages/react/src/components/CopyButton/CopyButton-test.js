@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,6 +9,7 @@ import { render, screen, act, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import CopyButton from '../CopyButton';
+import { ButtonKinds } from '../Button';
 
 jest.useFakeTimers();
 const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
@@ -51,6 +52,29 @@ describe('Button props', () => {
     );
 
     expect(screen.getByTestId('copy-btn-3')).toBeDisabled();
+  });
+
+  it('should not apply a button kind class when kind is not set', () => {
+    render(<CopyButton iconDescription="icon description" />);
+
+    const button = screen.getByRole('button', { name: 'icon description' });
+    expect(button).toHaveClass(`${prefix}--copy-btn`);
+    for (const kind of ButtonKinds) {
+      expect(button).not.toHaveClass(`${prefix}--btn--${kind}`);
+    }
+  });
+
+  it('should apply the button kind class when kind is set', () => {
+    const { rerender } = render(
+      <CopyButton iconDescription="icon description" kind="primary" />
+    );
+
+    for (const kind of ButtonKinds) {
+      rerender(<CopyButton iconDescription="icon description" kind={kind} />);
+      expect(
+        screen.getByRole('button', { name: 'icon description' })
+      ).toHaveClass(`${prefix}--copy-btn`, `${prefix}--btn--${kind}`);
+    }
   });
 
   it('should call the click handler', async () => {
