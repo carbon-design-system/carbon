@@ -771,15 +771,11 @@ collect:
         # PageHeaderTagOverflow
         - renderOverflowTag
         - renderPopoverContent
-        # PageSelector
-        - currentPage
-        - totalPages
         # Pagination
         - backwardText
         - backwardTextTooltipPosition
         - forwardText
         - forwardTextTooltipPosition
-        - initialPage
         - isLastPage
         - itemRangeText
         - itemsPerPageText
