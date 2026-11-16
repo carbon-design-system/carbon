@@ -34,6 +34,11 @@
     margin-inline-start: $spacing-05;
   }
 
+  .#{$prefix}--list--ordered:not(.#{$prefix}--list--nested),
+  .#{$prefix}--list--ordered--native:not(.#{$prefix}--list--nested) {
+    padding-inline-start: $spacing-06;
+  }
+
   .#{$prefix}--list--expressive,
   .#{$prefix}--list--expressive .#{$prefix}--list--nested {
     @include type.type-style('body-02');

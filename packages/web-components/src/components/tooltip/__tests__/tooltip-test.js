@@ -6,6 +6,7 @@
  */
 
 import '@carbon/web-components/es/components/tooltip/index.js';
+import '@carbon/web-components/es/components/feature-flags/index.js';
 import { fixture, html, expect } from '@open-wc/testing';
 
 describe('cds-tooltip', () => {
@@ -169,6 +170,41 @@ describe('cds-tooltip', () => {
     expect(content.dropShadow).to.be.true;
     expect(content.highContrast).to.be.true;
     expect(content.autoalign).to.be.true;
+  });
+
+  it('should default autoalign to true with enable-v12-release', async () => {
+    const featureFlag = await fixture(html`
+      <feature-flags enable-v12-release="true">
+        <cds-tooltip>
+          <button role="button" aria-labelledby="content"></button>
+          <cds-tooltip-content id="content"> Options </cds-tooltip-content>
+        </cds-tooltip>
+      </feature-flags>
+    `);
+    const el = featureFlag.querySelector('cds-tooltip');
+
+    await el.updateComplete;
+
+    expect(el.autoalign).to.be.true;
+    expect(el.querySelector('cds-tooltip-content').autoalign).to.be.true;
+  });
+
+  it('should keep autoalign disabled when set to false with enable-v12-release', async () => {
+    const featureFlag = await fixture(html`
+      <feature-flags enable-v12-release="true">
+        <cds-tooltip .autoalign=${false}>
+          <button role="button" aria-labelledby="content"></button>
+          <cds-tooltip-content id="content"> Options </cds-tooltip-content>
+        </cds-tooltip>
+      </feature-flags>
+    `);
+    const el = featureFlag.querySelector('cds-tooltip');
+
+    await el.updateComplete;
+
+    expect(el.autoalign).to.be.false;
+    expect(el).to.not.have.attribute('autoalign');
+    expect(el.querySelector('cds-tooltip-content').autoalign).to.not.be.true;
   });
 });
 

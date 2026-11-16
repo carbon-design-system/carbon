@@ -49,6 +49,7 @@ type StoryWithSourceCode = {
 
 interface PreviewerOptions {
   story: StoryWithSourceCode;
+  args?: Record<string, unknown>;
   customImports?: string[];
   customFunctionDefs?: string[];
   styles?: string;
@@ -83,56 +84,34 @@ export const stackblitzPrefillConfig = (
 
 const _stackblitzPrefillConfig = async ({
   story,
+  args: customArgs,
   customImports = [],
   customFunctionDefs = [],
   styles,
   title,
   additionalFiles = {},
 }: PreviewerOptions) => {
-  const args = story.args ?? {};
+  const args = {
+    ...(story.args ?? {}),
+    ...(customArgs ?? {}),
+  };
   const rawSource = story.parameters.docs.source.originalSource;
   // Inject const args if the story references `args` anywhere (spread, destructure, or direct call)
   const hasArgsSpread =
     /(\.\.\.\s*args)|(\{\s*[^}]*\.\.\.[^}]*\}\s*=\s*args)|\bargs\b/.test(
       rawSource
     );
-  let storyCode = filterStoryCode(rawSource, args);
-
-  // Fallback: if filterStoryCode didn't insert a `return`, but the first
-  // non-empty line is a bare arrow expression (starts with `(` or a plain
-  // identifier — not a statement keyword like `const`/`let`/`var`/`return`),
-  // convert it to a return. Only fires on the outermost story arrow.
-  //   Form 1: `({ x }) => (` — arrow with explicit paren wrap
-  //   Form 2: `({ x }) =>\n<` — arrow where JSX starts directly
-  const firstLine = storyCode.match(/^\s*(.+)/)?.[1] ?? '';
-  const isBareArrow =
-    /^\s*(\(|[a-zA-Z_$][a-zA-Z0-9_$]*\s*=>)/.test(firstLine) &&
-    !/^\s*(const|let|var|return|if|for|while|function)\b/.test(firstLine);
-  if (!/^\s*return\b/.test(storyCode) && isBareArrow) {
-    if (/=>\s*\(/.test(firstLine)) {
-      // Form 1: strip everything up to and including `=> (`
-      storyCode = storyCode.replace(/^[\s\S]*?=>\s*\(/, 'return (');
-    } else if (
-      /=>\s*[\n\r\s]*</.test(
-        storyCode.slice(
-          0,
-          storyCode.indexOf('\n', storyCode.indexOf('=>')) + 50
-        )
-      )
-    ) {
-      // Form 2: strip everything up to `=>`
-      storyCode = storyCode.replace(/^[\s\S]*?=>\s*/, 'return ');
-    }
-  }
+  const storyCode = filterStoryCode(rawSource, args);
 
   const componentNames = Object.keys(carbonComponents);
   const iconsNames = Object.keys(carbonIconsReact);
 
-  // Find matched Carbon components
-  const matchedComponents = findComponentImports(componentNames, storyCode);
+  // Find matched Carbon components — scan story body and any custom function definitions
+  const scanCode = [storyCode, ...customFunctionDefs].join('\n');
+  const matchedComponents = findComponentImports(componentNames, scanCode);
 
   // Find matched Carbon icons
-  const matchedIcons = findIconImports(iconsNames, storyCode, componentNames);
+  const matchedIcons = findIconImports(iconsNames, scanCode, componentNames);
 
   // Only include story scss for components actually used
   const componentsWithStyles = [
@@ -158,11 +137,22 @@ const _stackblitzPrefillConfig = async ({
 
   let styleImport = `${carbonBaseScss}${inlinedStoryScss}`;
   if (styles) {
-    styleImport += styles.replace(licenseCommentRegex, '');
+    styleImport += `\n${styles.replace(licenseCommentRegex, '')}`;
   }
 
-  // Detect React hooks used in the story code
-  const foundHooks = detectReactHooks(storyCode);
+  // All Sass @use rules must appear at the top of the stylesheet.
+  // Extract all @use statements, deduplicate, and place them at the start.
+  const useRegex = /@use\s+['"][^'"]+['"][^;]*;/g;
+  const useStatements = Array.from(
+    new Set(styleImport.match(useRegex) ?? [])
+  ).join('\n');
+  const scssWithoutUses = styleImport.replace(useRegex, '').trimStart();
+  const finalScss = `${useStatements}\n${scssWithoutUses}`;
+
+  // Detect React hooks used in the story code and any custom function definitions
+  const foundHooks = detectReactHooks(
+    [storyCode, ...customFunctionDefs].join('\n')
+  );
   const hooksString =
     foundHooks.length > 0 ? `, { ${foundHooks.join(', ')} }` : '';
 
@@ -200,7 +190,7 @@ export default function App() {
     'tsconfig.json': tsconfig,
     'src/main.tsx': main,
     'src/App.tsx': formattedApp,
-    'src/index.scss': styleImport,
+    'src/index.scss': finalScss,
     ...additionalFiles,
   };
 
@@ -229,16 +219,6 @@ const filterStoryCode = (
   let updated = storyCode
     // Strip local relative imports (./foo or ../foo) — those files don't exist in StackBlitz
     .replace(/^\s*import\s+.*?from\s+['"][./][^'"]*['"]\s*;?\s*$/gm, '')
-    // Remove arrow function wrapper with block body: (params) => { … } / args => { … }
-    .replace(/^\s*(\([^)]*\)|[\w]+)\s*=>\s*{\s*|}\s*;?\s*$/g, '')
-    // Remove empty arrow wrapper: () => {
-    .replace(/^\s*\(\)\s*=>\s*{/g, '')
-    // Replace `args =>` with `return`
-    .replace(/^\s*args\s*=>/g, 'return')
-    // Convert implicit arrow return with parens body: anything => ( → return (
-    // No `m` flag — only matches at the very start of the string to avoid
-    // replacing `=> (` inside inner functions like curried arrows.
-    .replace(/^.*?=>\s*\(/, 'return (')
     // Replace action('...') with console.log — handles quoted strings containing parens
     .replace(
       /action\((?:'[^']*'|"[^"]*"|[^)])*\)(\(\))?/g,
@@ -248,6 +228,17 @@ const filterStoryCode = (
     .replace(/context\.viewMode\s*!==\s*'docs'/g, 'false')
     // Remove surrounding quotes
     .replace(/^"|"$/g, '');
+
+  // Unwrap outermost arrow function into component body:
+  // Case 1: Block body `(...) => { ... }` -> unwrap outer curly braces
+  // Case 2: Implicit return `(...) => (...)` or `(...) => <...>` -> replace with `return `
+  if (/^\s*(?:\([^)]*\)|[\w]+)\s*=>\s*\{[\s\S]*\}\s*;?\s*$/.test(updated)) {
+    updated = updated
+      .replace(/^\s*(?:\([^)]*\)|[\w]+)\s*=>\s*\{\s*/, '')
+      .replace(/\s*\}\s*;?\s*$/, '');
+  } else if (/^\s*(?:\([^)]*\)|[\w]+)\s*=>/.test(updated)) {
+    updated = updated.replace(/^\s*(?:\([^)]*\)|[\w]+)\s*=>\s*/, 'return ');
+  }
 
   // Inline each arg value into the code
   Object.entries(args).forEach(([key, value]) => {
@@ -286,7 +277,7 @@ const findComponentImports = (
   storyCode: string
 ): string[] => {
   return componentNames.filter((name) =>
-    new RegExp(`<${name}\\b`, 'g').test(storyCode)
+    new RegExp(`(?:<${name}\\b|\\b${name}\\s*\\()`, 'g').test(storyCode)
   );
 };
 
@@ -295,11 +286,26 @@ const findIconImports = (
   storyCode: string,
   componentNames: string[]
 ): string[] => {
+  // Strip string literals and JSX text content before bare identifier matching
+  // so that icon names appearing only as text (e.g. `label: 'Blockchain'` or
+  // `<ListItem>Review pull requests</ListItem>`) are not mistakenly imported.
+  const codeWithoutStrings = storyCode
+    .replace(/`[^`]*`|'[^']*'|"[^"]*"/g, '""')
+    .replace(/>[^\n<]+</g, '><');
+
   return iconNames.filter((name) => {
     const regexComponent = new RegExp(`<${name}\\b`, 'g');
     const regexCurlBraces = new RegExp(`{\\s*${name}\\s*}`, 'g');
+    // Bare identifier usage (arrays, prop values) — checked against string-stripped code
+    // e.g. `icons = [Dashboard, Activity]` or `renderIcon={Dashboard}`
+    // Negative lookahead `(?!\s*[.(])` prevents matching built-in calls like
+    // `Array.from(...)` or `Array(n)` which would emit
+    // `import { Array } from '@carbon/icons-react'`, shadowing the global.
+    const regexIdentifier = new RegExp(`\\b${name}\\b(?!\\s*[.(])`, 'g');
     return (
-      (regexComponent.test(storyCode) || regexCurlBraces.test(storyCode)) &&
+      (regexComponent.test(storyCode) ||
+        regexCurlBraces.test(storyCode) ||
+        regexIdentifier.test(codeWithoutStrings)) &&
       !componentNames.includes(name)
     );
   });

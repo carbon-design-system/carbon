@@ -6,3 +6,7 @@ updates:
     schedule:
       interval: 'weekly'
     labels: []
+    groups:
+      codeql-action:
+        patterns:
+          - 'github/codeql-action*'

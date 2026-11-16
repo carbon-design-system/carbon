@@ -8,8 +8,9 @@
 /**
  * Idempotent metadata initialization for formal Bug issues. It copies a
  * reporter's required severity suggestion only into an empty issue field,
- * waits for Project 39 automation before applying defaults, and adds
- * community-help metadata for Medium/Low.
+ * waits for Project 39 automation before applying defaults, and posts a
+ * community-help comment for Medium/Low. Applying `good first issue 👋` to a
+ * Bug adds the related contribution labels.
  */
 import * as core from '@actions/core';
 import { events, or } from '../conditions.js';
@@ -26,11 +27,13 @@ const EFFORT_FIELD_NAME = 'Effort';
 const SUPPORT_AREA_NAME = 'Support';
 const DEFAULT_EFFORT = 3;
 const MAX_PROJECT_LOOKUPS = 5;
-const COMMUNITY_CONTRIBUTION_LABELS = [
+const GOOD_FIRST_ISSUE_LABEL = 'good first issue 👋';
+// These follow a maintainer applying the good-first-issue label. They are not
+// inferred from severity.
+const GOOD_FIRST_ISSUE_COMPANION_LABELS = [
   'status: help wanted 👐',
   'needs: community contribution',
   'needs: code contribution',
-  'good first issue 👋',
 ];
 const COMMUNITY_COMMENT_HEADER = '<!-- lower-severity-community-help -->';
 
@@ -459,43 +462,68 @@ async function ensureProjectMetadata(context, octokit, delay) {
 }
 
 /**
- * Add the four contribution labels for Medium/Low Bugs on both opened and typed
- * events. The explanatory comment is restricted to opened and managed by a
- * stable header so rerunning the same webhook cannot create a duplicate.
+ * Add the contribution labels that accompany `good first issue 👋` on a formal
+ * Bug. Only the labeled event for that label runs this, so the labels it adds
+ * do not loop.
  */
-async function ensureCommunityContributionMetadata(context, octokit, severity) {
-  const normalizedSeverity = severity?.toLowerCase();
-  if (!['low', 'medium'].includes(normalizedSeverity)) {
+async function ensureGoodFirstIssueLabels(context, octokit) {
+  const { issue, label, repository } = context.payload;
+  if (label?.name !== GOOD_FIRST_ISSUE_LABEL) {
     core.info(
-      `[bug-metadata] Severity ${severity ?? 'unset'} does not need community-contribution defaults`
+      `[bug-metadata] Label ${label?.name ?? 'none'} does not add good-first-issue companion labels`
     );
     return;
   }
 
-  const { action, issue, repository } = context.payload;
-  const existingLabels = new Set((issue.labels ?? []).map(({ name }) => name));
-  const missingLabels = COMMUNITY_CONTRIBUTION_LABELS.filter(
-    (label) => !existingLabels.has(label)
-  );
-  core.info(
-    `[bug-metadata] ${severity} severity requires community-contribution metadata; missing labels=${missingLabels.join(', ') || 'none'}`
-  );
-
-  if (missingLabels.length > 0) {
-    await octokit.rest.issues.addLabels({
-      owner: repository.owner.login,
-      repo: repository.name,
-      issue_number: issue.number,
-      labels: missingLabels,
-    });
+  if (!isBug(issue)) {
     core.info(
-      `[bug-metadata] Added ${missingLabels.length} community-contribution labels`
+      '[bug-metadata] Formal issue type is not Bug; skipping good-first-issue companion labels'
     );
+    return;
   }
 
+  const existingLabels = new Set((issue.labels ?? []).map(({ name }) => name));
+  const missingLabels = GOOD_FIRST_ISSUE_COMPANION_LABELS.filter(
+    (name) => !existingLabels.has(name)
+  );
+  core.info(
+    `[bug-metadata] ${GOOD_FIRST_ISSUE_LABEL} is set; missing companion labels=${missingLabels.join(', ') || 'none'}`
+  );
+
+  if (missingLabels.length === 0) {
+    return;
+  }
+
+  await octokit.rest.issues.addLabels({
+    owner: repository.owner.login,
+    repo: repository.name,
+    issue_number: issue.number,
+    labels: missingLabels,
+  });
+  core.info(
+    `[bug-metadata] Added ${missingLabels.length} good-first-issue companion labels`
+  );
+}
+
+/**
+ * Post the lower-severity comment for Medium/Low Bugs. It is restricted to
+ * opened and managed by a stable header so rerunning the same webhook cannot
+ * create a duplicate.
+ */
+async function ensureLowerSeverityComment(context, octokit, severity) {
+  const normalizedSeverity = severity?.toLowerCase();
+  if (!['low', 'medium'].includes(normalizedSeverity)) {
+    core.info(
+      `[bug-metadata] Severity ${severity ?? 'unset'} does not need a lower-severity comment`
+    );
+    return;
+  }
+
+  const { action } = context.payload;
+
   if (action !== 'opened') {
-    // A later type change should initialize fields and labels, but the reporter
-    // should not receive an opening-time notice on an older issue.
+    // A later type change should initialize fields, but the reporter should not
+    // receive an opening-time notice on an older issue.
     core.info(
       `[bug-metadata] Action is ${action}; lower-severity comment is only managed on opened`
     );
@@ -524,6 +552,13 @@ async function ensureCommunityContributionMetadata(context, octokit, severity) {
  */
 export async function initializeBugMetadata(context, octokit, delay = wait) {
   const { action, issue } = context.payload;
+  // Label events must not re-run Bug field initialization. Companion labels are
+  // the only work this plugin does when a label is added.
+  if (action === 'labeled') {
+    await ensureGoodFirstIssueLabels(context, octokit);
+    return;
+  }
+
   core.info(
     `[bug-metadata] Initializing issue #${issue.number}; action=${action}; type=${issue.type?.name ?? 'none'}`
   );
@@ -551,20 +586,18 @@ export async function initializeBugMetadata(context, octokit, delay = wait) {
   core.info(
     `[bug-metadata] Effective Severity=${effectiveSeverity ?? 'unset'}`
   );
-  await ensureCommunityContributionMetadata(
-    context,
-    octokit,
-    effectiveSeverity
-  );
-  // Community labels/comments do not depend on ProjectV2. Apply them first so a
-  // project permission or propagation error does not suppress those defaults.
+  await ensureLowerSeverityComment(context, octokit, effectiveSeverity);
+  // The lower-severity comment does not depend on ProjectV2. Post it first so a
+  // project permission or propagation error does not suppress it.
   await ensureProjectMetadata(context, octokit, delay);
   core.info(`[bug-metadata] Finished initializing issue #${issue.number}`);
 }
 
 const plugin = {
   name: 'Initialize bug metadata',
-  conditions: [or(events.issues.opened, events.issues.typed)],
+  conditions: [
+    or(events.issues.opened, events.issues.typed, events.issues.labeled),
+  ],
   run: initializeBugMetadata,
 };
 

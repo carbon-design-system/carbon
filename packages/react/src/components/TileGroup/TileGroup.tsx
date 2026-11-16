@@ -80,6 +80,7 @@ export const TileGroup = <T extends string | number = string>({
   onChange = noopFn,
   valueSelected,
   required,
+  ...rest
 }: TileGroupProps<T>) => {
   const prefix = usePrefix();
   const [selected, setSelected] = useState<T | undefined>(
@@ -148,6 +149,7 @@ export const TileGroup = <T extends string | number = string>({
 
   return (
     <fieldset
+      {...rest}
       className={className ?? `${prefix}--tile-group`}
       disabled={disabled}>
       {legend && <legend className={`${prefix}--label`}>{legend}</legend>}

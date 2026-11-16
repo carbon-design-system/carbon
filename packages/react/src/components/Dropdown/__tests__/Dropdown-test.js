@@ -19,6 +19,7 @@ import {
 import Dropdown from '..';
 import DropdownSkeleton from '../Dropdown.Skeleton';
 import { AILabel } from '../../AILabel';
+import { FeatureFlags } from '../../FeatureFlags';
 import { Simulate } from 'react-dom/test-utils';
 
 const prefix = 'cds';
@@ -495,6 +496,38 @@ describe('Dropdown', () => {
       );
       spy.mockRestore();
     });
+
+    it('should not enable `autoAlign` by default', async () => {
+      const { container } = render(<Dropdown {...mockProps} />);
+      await waitForPosition();
+      expect(container.querySelector(`.${prefix}--dropdown`)).not.toHaveClass(
+        `${prefix}--autoalign`
+      );
+    });
+
+    it('should enable `autoAlign` by default with `enable-v12-release`', async () => {
+      const { container } = render(
+        <FeatureFlags enableV12Release>
+          <Dropdown {...mockProps} />
+        </FeatureFlags>
+      );
+      await waitForPosition();
+      expect(container.querySelector(`.${prefix}--dropdown`)).toHaveClass(
+        `${prefix}--autoalign`
+      );
+    });
+
+    it('should respect `autoAlign={false}` with `enable-v12-release`', async () => {
+      const { container } = render(
+        <FeatureFlags enableV12Release>
+          <Dropdown {...mockProps} autoAlign={false} />
+        </FeatureFlags>
+      );
+      await waitForPosition();
+      expect(container.querySelector(`.${prefix}--dropdown`)).not.toHaveClass(
+        `${prefix}--autoalign`
+      );
+    });
   });
 });
 
@@ -727,6 +760,15 @@ describe('Test useEffect ', () => {
     );
     await waitForPosition();
     assertMenuClosed();
+  });
+
+  it('should set maxHeight on the floating menu when autoAlign is enabled', async () => {
+    render(<Dropdown {...mockProps} autoAlign />);
+    await openMenu();
+    await waitForPosition();
+
+    const menu = document.querySelector('.cds--list-box__menu');
+    expect(menu.style.maxHeight).toBe('0px');
   });
 
   it('should add certain label props when `titleText` is a string', () => {

@@ -61,8 +61,8 @@ interface AddSelectItem {
   status?: ItemStatus;
   /** Whether the item is disabled and cannot be selected */
   disabled?: boolean;
-  /** Icon or visual element to display with the item */
-  icon?: ReactNode;
+  /** Icon or visual element to display with the item (React consumers should pass a ReactNode) */
+  icon?: unknown;
   /** Nested children items */
   children?: {
     entries: AddSelectItem[];

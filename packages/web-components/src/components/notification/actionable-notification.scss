@@ -207,7 +207,7 @@ $css--plex: true !default;
   display: none;
 }
 
-:host(#{$prefix}-callout-notification[inline][low-contrast])::before {
+:host(#{$prefix}-callout-notification[low-contrast])::before {
   @include actionable-notification-low-contrast-inline-before;
 }
 

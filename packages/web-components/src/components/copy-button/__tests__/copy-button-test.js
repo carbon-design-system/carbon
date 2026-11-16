@@ -1,11 +1,12 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import '@carbon/web-components/es/components/copy-button/index.js';
+import '@carbon/web-components/es/components/feature-flags/index.js';
 import { expect, fixture, html, waitUntil } from '@open-wc/testing';
 
 describe('CopyButton', () => {
@@ -46,6 +47,53 @@ describe('Button props', () => {
       ?.shadowRoot?.querySelector('button');
     expect(button).to.have.attribute('disabled');
     await expect(el).shadowDom.to.equalSnapshot();
+  });
+
+  it('should set kind on the underlying cds-copy element', async () => {
+    const el = await fixture(html`
+      <cds-copy-button kind="primary" icon-description="Copy to clipboard">
+      </cds-copy-button>
+    `);
+
+    const copy = el.shadowRoot?.querySelector('cds-copy');
+    expect(copy).to.have.attribute('kind', 'primary');
+
+    const button = copy?.shadowRoot?.querySelector('button');
+    expect(button).to.have.class('cds--btn--primary');
+    await expect(el).shadowDom.to.equalSnapshot();
+  });
+
+  it('should set size on the underlying cds-copy element', async () => {
+    const el = await fixture(html`
+      <cds-copy-button size="sm" icon-description="Copy to clipboard">
+      </cds-copy-button>
+    `);
+
+    const copy = el.shadowRoot?.querySelector('cds-copy');
+    expect(copy).to.have.attribute('size', 'sm');
+
+    const button = copy?.shadowRoot?.querySelector('button');
+    expect(button).to.have.class('cds--btn--sm');
+    await expect(el).shadowDom.to.equalSnapshot();
+  });
+
+  it('should not set kind by default', async () => {
+    const el = await fixture(html`
+      <cds-copy-button icon-description="Copy to clipboard"> </cds-copy-button>
+    `);
+
+    expect(el).to.not.have.attribute('kind');
+    const copy = el.shadowRoot?.querySelector('cds-copy');
+    expect(copy).to.have.attribute('kind', '');
+  });
+
+  it('should default size to lg', async () => {
+    const el = await fixture(html`
+      <cds-copy-button icon-description="Copy to clipboard"> </cds-copy-button>
+    `);
+
+    const copy = el.shadowRoot?.querySelector('cds-copy');
+    expect(copy).to.have.attribute('size', 'lg');
   });
 
   it('should call the click handler', async () => {
@@ -183,5 +231,90 @@ describe('Feedback', () => {
       }
     );
     await expect(el).shadowDom.to.equalSnapshot();
+  });
+});
+
+describe('autoAlign', () => {
+  it('should default the tooltip autoalign to false', async () => {
+    const el = await fixture(html`
+      <cds-copy-button icon-description="Copy to clipboard"></cds-copy-button>
+    `);
+    const copy = el.shadowRoot.querySelector('cds-copy');
+
+    await copy.updateComplete;
+
+    expect(copy.autoalign).to.be.false;
+  });
+
+  it('should default the tooltip autoalign to true with enable-v12-release', async () => {
+    const featureFlag = await fixture(html`
+      <feature-flags enable-v12-release="true">
+        <cds-copy-button icon-description="Copy to clipboard"></cds-copy-button>
+      </feature-flags>
+    `);
+    const el = featureFlag.querySelector('cds-copy-button');
+
+    await el.updateComplete;
+
+    const copy = el.shadowRoot.querySelector('cds-copy');
+
+    await copy.updateComplete;
+
+    expect(copy.autoalign).to.be.true;
+    expect(copy.shadowRoot.querySelector('cds-tooltip').autoalign).to.be.true;
+  });
+
+  it('should keep the tooltip autoalign disabled when set to false with enable-v12-release', async () => {
+    const featureFlag = await fixture(html`
+      <feature-flags enable-v12-release="true">
+        <cds-copy-button
+          .autoAlign=${false}
+          icon-description="Copy to clipboard"></cds-copy-button>
+      </feature-flags>
+    `);
+    const el = featureFlag.querySelector('cds-copy-button');
+
+    await el.updateComplete;
+
+    const copy = el.shadowRoot.querySelector('cds-copy');
+
+    await copy.updateComplete;
+
+    expect(copy.autoalign).to.be.false;
+    expect(copy.shadowRoot.querySelector('cds-tooltip').autoalign).to.be.false;
+  });
+
+  it('should keep the tooltip autoalign disabled when the attribute is "false" with enable-v12-release', async () => {
+    const featureFlag = await fixture(html`
+      <feature-flags enable-v12-release="true">
+        <cds-copy-button
+          autoalign="false"
+          icon-description="Copy to clipboard"></cds-copy-button>
+      </feature-flags>
+    `);
+    const el = featureFlag.querySelector('cds-copy-button');
+
+    await el.updateComplete;
+
+    const copy = el.shadowRoot.querySelector('cds-copy');
+
+    await copy.updateComplete;
+
+    expect(el.autoAlign).to.be.false;
+    expect(copy.autoalign).to.be.false;
+    expect(copy.shadowRoot.querySelector('cds-tooltip').autoalign).to.be.false;
+  });
+
+  it('should reflect autoAlign to the autoalign attribute', async () => {
+    const el = await fixture(html`
+      <cds-copy-button
+        .autoAlign=${true}
+        icon-description="Copy to clipboard"></cds-copy-button>
+    `);
+
+    await el.updateComplete;
+
+    expect(el).to.have.attribute('autoalign');
+    expect(el).to.not.have.attribute('auto-align');
   });
 });

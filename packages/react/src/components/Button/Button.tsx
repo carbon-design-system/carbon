@@ -150,7 +150,7 @@ const Button: ButtonComponent = React.forwardRef(
   ) => {
     const {
       as,
-      autoAlign = false,
+      autoAlign,
       children,
       hasIconOnly = false,
       tooltipHighContrast = true,

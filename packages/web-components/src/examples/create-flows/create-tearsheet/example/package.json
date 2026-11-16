@@ -1,0 +1,27 @@
+{
+  "name": "create-tearsheet",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Sample project for getting started with the CreateTearsheet pattern from Carbon for IBM Products Web Components.",
+  "license": "Apache-2",
+  "main": "index.html",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "clean": "rimraf node_modules dist .cache"
+  },
+  "dependencies": {
+    "@carbon/ibm-products-web-components": "latest",
+    "@carbon/styles": "latest",
+    "@carbon/web-components": "latest",
+    "lit": "^3.2.1",
+    "sass": "^1.64.1"
+  },
+  "devDependencies": {
+    "rimraf": "^3.0.2",
+    "vite": "^5.4.20",
+    "vite-plugin-lit-css": "^2.1.0",
+    "typescript": "^5.5.3"
+  }
+}

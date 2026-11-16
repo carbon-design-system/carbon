@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -70,15 +70,19 @@ export interface CopyButtonProps extends ButtonProps<'button'> {
 }
 export default function CopyButton({
   align = 'bottom',
-  autoAlign = false,
+  autoAlign,
   feedback = 'Copied!',
   feedbackTimeout = 2000,
   iconDescription = 'Copy to clipboard',
   className,
+  kind,
   onClick = noopFn,
   ...other
 }: CopyButtonProps) {
   const prefix = usePrefix();
+  // Prevent `ButtonBase`'s default `primary` kind from overriding the copy
+  // button's default styles.
+  const copyProps = { ...other, kind: kind ?? null };
   return (
     <LayoutConstraint size={{ default: 'md', max: 'lg' }}>
       <Copy
@@ -89,7 +93,7 @@ export default function CopyButton({
         autoAlign={autoAlign}
         className={classnames(className, `${prefix}--copy-btn`)}
         aria-label={iconDescription}
-        {...other}>
+        {...copyProps}>
         <CopyIcon className={`${prefix}--snippet__icon`} />
       </Copy>
     </LayoutConstraint>

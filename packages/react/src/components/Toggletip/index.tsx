@@ -129,7 +129,6 @@ export function Toggletip<E extends ElementType = 'span'>({
     buttonProps: {
       'aria-expanded': open,
       'aria-controls': id,
-      'aria-describedby': open ? id : undefined,
       onClick: actions.toggle,
     },
     contentProps: {

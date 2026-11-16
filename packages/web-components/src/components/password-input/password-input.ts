@@ -107,6 +107,17 @@ class CDSPasswordInput extends CDSTextInput {
   isFluid = false;
 
   /**
+   * Specify if the component should be read-only.
+   */
+  get readOnly(): boolean {
+    return this.readonly;
+  }
+
+  set readOnly(value: boolean) {
+    this.readonly = value;
+  }
+
+  /**
    * Specify the direction of the tooltip for icon-only buttons.
    * Can be either top, right, bottom, or left.
    */
@@ -155,6 +166,8 @@ class CDSPasswordInput extends CDSTextInput {
       class: `${prefix}--text-input__invalid-icon ${prefix}--text-input__invalid-icon--warning`,
     });
 
+    const isInteractive = !readonly && !disabled;
+
     const normalizedProps: {
       disabled: boolean;
       invalid: boolean;
@@ -164,8 +177,8 @@ class CDSPasswordInput extends CDSTextInput {
       icon: ReturnType<typeof iconLoader>;
     } = {
       disabled: !readonly && disabled,
-      invalid: !readonly && invalid,
-      warn: !readonly && !invalid && warn,
+      invalid: isInteractive && invalid,
+      warn: isInteractive && !invalid && warn,
       'slot-name': '',
       'slot-text': '',
       icon: null,
@@ -250,7 +263,7 @@ class CDSPasswordInput extends CDSTextInput {
     const helper = helperText
       ? html`<div
           class="${helperTextClasses}"
-          id="helper-text"
+          id="${this._helperTextId}"
           ?hidden="${normalizedProps.invalid || normalizedProps.warn}">
           <slot name="helper-text"> ${helperText} </slot>
         </div>`
@@ -260,12 +273,20 @@ class CDSPasswordInput extends CDSTextInput {
       normalizedProps.invalid || normalizedProps.warn
         ? html`<div
             class="${prefix}--form-requirement"
+            id="${this._errorTextId}"
             ?hidden="${!normalizedProps.invalid && !normalizedProps.warn}">
             <slot name="${normalizedProps['slot-name']}">
               ${normalizedProps['slot-text']}
             </slot>
           </div>`
         : null;
+
+    let describedBy: string | undefined;
+    if (normalizedProps.invalid || normalizedProps.warn) {
+      describedBy = this._errorTextId;
+    } else if (helperText && !isFluid) {
+      describedBy = this._helperTextId;
+    }
 
     let align = '';
 
@@ -296,14 +317,16 @@ class CDSPasswordInput extends CDSTextInput {
               ${labelWrapper}
             </div>`}
         <div class="${fieldOuterWrapperClasses}">
-          <div class="${fieldWrapperClasses}" ?data-invalid="${invalid}">
+          <div
+            class="${fieldWrapperClasses}"
+            ?data-invalid="${normalizedProps.invalid}">
             ${normalizedProps.icon}
             <input
               ?autofocus="${this.autofocus}"
               class="${inputClasses}"
-              ?data-invalid="${invalid}"
+              ?data-invalid="${normalizedProps.invalid}"
               ?disabled="${disabled}"
-              aria-describedby="helper-text"
+              aria-describedby="${ifNonEmpty(describedBy)}"
               id="input"
               name="${ifNonEmpty(this.name)}"
               pattern="${ifNonEmpty(this.pattern)}"

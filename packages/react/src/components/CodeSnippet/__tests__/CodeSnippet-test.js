@@ -209,6 +209,50 @@ describe('CodeSnippet', () => {
     expect(textBox.style.maxHeight).toBe('');
     expect(textBox.style.minHeight).toBe('');
   });
+
+  it('should position tabindex, role, and ARIA attributes on container for single snippet', () => {
+    const { container } = render(
+      <CodeSnippet type="single" aria-label="single-label">
+        {single}
+      </CodeSnippet>
+    );
+
+    const snippetContainer = container.querySelector('.cds--snippet-container');
+    const preElement = container.querySelector('pre');
+
+    expect(snippetContainer).toHaveAttribute('role', 'textbox');
+    expect(snippetContainer).toHaveAttribute('tabindex', '0');
+    expect(snippetContainer).toHaveAttribute('aria-label', 'single-label');
+    expect(snippetContainer).toHaveAttribute('aria-readonly', 'true');
+
+    expect(preElement).not.toHaveAttribute('role');
+    expect(preElement).not.toHaveAttribute('tabindex');
+    expect(preElement).not.toHaveAttribute('aria-label');
+    expect(preElement).not.toHaveAttribute('aria-readonly');
+    expect(preElement).not.toHaveAttribute('aria-multiline');
+  });
+
+  it('should position tabindex, role, and ARIA attributes on pre for multi snippet', () => {
+    const { container } = render(
+      <CodeSnippet type="multi" aria-label="multi-label">
+        {multiLong}
+      </CodeSnippet>
+    );
+
+    const snippetContainer = container.querySelector('.cds--snippet-container');
+    const preElement = container.querySelector('pre');
+
+    expect(snippetContainer).not.toHaveAttribute('role');
+    expect(snippetContainer).not.toHaveAttribute('tabindex');
+    expect(snippetContainer).not.toHaveAttribute('aria-label');
+    expect(snippetContainer).not.toHaveAttribute('aria-readonly');
+
+    expect(preElement).toHaveAttribute('role', 'textbox');
+    expect(preElement).toHaveAttribute('tabindex', '0');
+    expect(preElement).toHaveAttribute('aria-label', 'multi-label');
+    expect(preElement).toHaveAttribute('aria-readonly', 'true');
+    expect(preElement).toHaveAttribute('aria-multiline', 'true');
+  });
 });
 
 describe('CodeSnippet events', () => {
