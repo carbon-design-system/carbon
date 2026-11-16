@@ -103,7 +103,9 @@ test.describe('@avt FileUploader', () => {
       },
     });
 
-    const addFileButton = page.getByRole('button');
+    // The hidden <input type="file"> also has the button role, so match the
+    // visible <button> by its text
+    const addFileButton = page.locator('button', { hasText: 'Add file' });
 
     // Testing the button focus
     await expect(addFileButton).toBeVisible();
@@ -177,7 +179,11 @@ test.describe('@avt FileUploader', () => {
       },
     });
 
-    const addFileButton = page.getByRole('button');
+    // The hidden <input type="file"> also has the button role, so match the
+    // visible <button> by its text
+    const addFileButton = page.locator('button', {
+      hasText: 'Drag and drop a file here or click to upload',
+    });
 
     // Testing the button focus
     await expect(addFileButton).toBeVisible();
