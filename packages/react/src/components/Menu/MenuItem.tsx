@@ -31,6 +31,7 @@ import {
   FloatingFocusManager,
   flip,
 } from '@floating-ui/react';
+import { useSafeFloatingRefs } from '../../internal/useSafeFloatingRefs';
 import { CaretRight, CaretLeft, Checkmark } from '@carbon/icons-react';
 import { keys, match } from '../../internal/keyboard';
 import { useControllableState } from '../../internal/useControllableState';
@@ -176,6 +177,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
       ],
       strategy: 'fixed',
     });
+    const { setFloatingSafe, setReferenceSafe } = useSafeFloatingRefs(refs);
     const { getReferenceProps, getFloatingProps } = useInteractions([
       useHover(floatingContext, {
         delay: 100,
@@ -190,7 +192,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
     const context = useContext(MenuContext);
 
     const menuItem = useRef<HTMLLIElement>(null);
-    const ref = useMergedRefs([forwardRef, menuItem, refs.setReference]);
+    const ref = useMergedRefs([forwardRef, menuItem, setReferenceSafe]);
 
     const hasChildren = React.Children.toArray(children).length > 0;
 
@@ -362,7 +364,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
                   closeSubmenu();
                   menuItem.current?.focus();
                 }}
-                ref={refs.setFloating}
+                ref={setFloatingSafe}
                 {...getFloatingProps()}>
                 {children}
               </Menu>
