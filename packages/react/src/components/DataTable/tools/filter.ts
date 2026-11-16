@@ -5,10 +5,38 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// Cross-realm `Object.prototype.toString` functions have different identities.
+const defaultObjectToStringSource = Function.prototype.toString.call(
+  Object.prototype.toString
+);
+
+// Ignore inherited `Object.prototype.toString`, but keep built-in overrides.
+const usesDefaultObjectToString = (value: object) => {
+  let owner: object | null = value;
+
+  while (owner) {
+    const descriptor = Object.getOwnPropertyDescriptor(owner, 'toString');
+
+    if (descriptor) {
+      return (
+        owner !== value &&
+        Object.getPrototypeOf(owner) === null &&
+        typeof descriptor.value === 'function' &&
+        Function.prototype.toString.call(descriptor.value) ===
+          defaultObjectToStringSource
+      );
+    }
+
+    owner = Object.getPrototypeOf(owner);
+  }
+
+  return false;
+};
+
 /**
- * Converts a cell value to searchable text. Only primitive values with an
- * unambiguous text form are supported, so no user-defined or inherited
- * `toString` method is ever invoked. Returns `null` for everything else.
+ * Converts a cell value to searchable text. Objects using the default object
+ * string form are ignored, while objects with a meaningful string form are
+ * supported. Returns `null` when a value cannot be converted safely.
  */
 const getFilterableText = (value: unknown): string | null => {
   if (
@@ -19,7 +47,21 @@ const getFilterableText = (value: unknown): string | null => {
     return String(value);
   }
 
-  return null;
+  if (typeof value !== 'object' || value === null) return null;
+
+  try {
+    const toString: unknown = value.toString;
+
+    if (typeof toString !== 'function') return null;
+
+    if (usesDefaultObjectToString(value)) return null;
+
+    const text = Reflect.apply(toString, value, []);
+
+    return typeof text === 'string' ? text : null;
+  } catch {
+    return null;
+  }
 };
 
 /**

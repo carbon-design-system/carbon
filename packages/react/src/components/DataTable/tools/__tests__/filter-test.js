@@ -6,6 +6,7 @@
  */
 
 import React from 'react';
+import vm from 'node:vm';
 import { defaultFilterRows } from '../filter';
 
 describe('defaultFilterRows', () => {
@@ -76,14 +77,15 @@ describe('defaultFilterRows', () => {
     expect(result).toEqual([]);
   });
 
-  it('should not match the string form of objects and React elements', () => {
+  it('should not match the default string form of objects and React elements', () => {
     const result = defaultFilterRows({
       ...defaultOptions,
-      rowIds: ['1', '2'],
+      rowIds: ['1', '2', '3'],
       cellsById: {
         ...cellsById,
         '1-name': { value: { first: 'Alice' } },
         '2-name': { value: <a href="#bob">Bob</a> },
+        '3-name': { value: new Map() },
       },
       inputValue: 'object',
     });
@@ -105,7 +107,36 @@ describe('defaultFilterRows', () => {
     expect(result).toEqual([]);
   });
 
-  it('should not call the string conversion of objects', () => {
+  it('should not match the default string form of cross-realm objects', () => {
+    const value = vm.runInNewContext('({ first: "Alice" })');
+    const result = defaultFilterRows({
+      ...defaultOptions,
+      rowIds: ['1'],
+      cellsById: {
+        ...cellsById,
+        '1-name': { value },
+      },
+      inputValue: 'object',
+    });
+
+    expect(result).toEqual([]);
+  });
+
+  it('should ignore objects with a non-function `toString`', () => {
+    const result = defaultFilterRows({
+      ...defaultOptions,
+      rowIds: ['1'],
+      cellsById: {
+        ...cellsById,
+        '1-name': { value: { toString: 42 } },
+      },
+      inputValue: '42',
+    });
+
+    expect(result).toEqual([]);
+  });
+
+  it('should match objects with meaningful string forms', () => {
     const toString = jest.fn(() => 'Allison');
 
     const result = defaultFilterRows({
@@ -119,8 +150,42 @@ describe('defaultFilterRows', () => {
       inputValue: 'allison',
     });
 
+    expect(result).toEqual(['1', '2']);
+    expect(toString).toHaveBeenCalledTimes(1);
+  });
+
+  it('should match dates by their string form', () => {
+    const result = defaultFilterRows({
+      ...defaultOptions,
+      rowIds: ['1'],
+      cellsById: {
+        ...cellsById,
+        '1-name': { value: new Date('2000-06-01T00:00:00.000Z') },
+      },
+      inputValue: '2000',
+    });
+
+    expect(result).toEqual(['1']);
+  });
+
+  it('should ignore objects whose string conversion throws an error', () => {
+    const result = defaultFilterRows({
+      ...defaultOptions,
+      rowIds: ['1'],
+      cellsById: {
+        ...cellsById,
+        '1-name': {
+          value: {
+            toString: () => {
+              throw new Error('Cannot convert value');
+            },
+          },
+        },
+      },
+      inputValue: 'alice',
+    });
+
     expect(result).toEqual([]);
-    expect(toString).not.toHaveBeenCalled();
   });
 
   it('should match bigint values', () => {
