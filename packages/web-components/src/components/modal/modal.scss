@@ -11,6 +11,7 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/border-radius' as *;
+@use '@carbon/styles/scss/feature-flags' as flags;
 @use '@carbon/styles/scss/layer' as *;
 @use '@carbon/styles/scss/type' as *;
 @use '@carbon/styles/scss/utilities/convert' as *;
@@ -19,6 +20,7 @@
 @use '@carbon/styles/scss/components/modal' as *;
 @use '@carbon/styles/scss/components/button' as *;
 @use '@carbon/styles/scss/utilities/focus-outline' as *;
+@use '@carbon/styles/scss/utilities/convert';
 
 :host(#{$prefix}-modal[open]) {
   @extend .#{$prefix}--modal;
@@ -144,7 +146,7 @@
 // (container radius minus its 1px border).
 // first-of-type gets the block-start-end (es) corner rounded,
 // last-of-type gets the block-end-end (ee) corner rounded.
-@if enabled('enable-v12-release') {
+@if flags.enabled('enable-v12-release') {
   :host(#{$prefix}-modal-footer-button:first-of-type) {
     @include radius($es: calc(#{$border-radius-08} - 1px));
   }
@@ -252,13 +254,33 @@
   // Non-v12: same 48px as before (to-rem(48px) == $spacing-09)
   inset-inline-end: $spacing-09;
 
-  @if enabled('enable-v12-release') {
+  @if flags.enabled('enable-v12-release') {
     // v12: inset(16px) + md size(40px) + gap(8px) = 64px
     inset-block-start: custom-property.get-var(
       'modal-decorator-offset',
       to-rem(20px)
     );
     inset-inline-end: $spacing-05 + $spacing-08 + $spacing-03;
+  }
+}
+
+// The revert AI label is shifted up by half its height (`translateY(-50%)` in
+// the AI label styles), so `inset-block-start` is its center line. Same value
+// as `.cds--ai-label--revert` in the React modal styles.
+:host(#{$prefix}-modal-header[close-button])
+  ::slotted(#{$prefix}-ai-label[revert-active]) {
+  inset-block-start: 1.475rem;
+  inset-inline-end: convert.to-rem(56px);
+
+  // In v12 the center line is the center of the md (40px) close button:
+  // offset + half the close button size (16px + 20px)
+  @if flags.enabled('enable-v12-release') {
+    inset-block-start: calc(
+      #{custom-property.get-var('modal-decorator-offset', $spacing-05)} +
+        #{$spacing-08 *
+        0.5}
+    );
+    inset-inline-end: $spacing-10;
   }
 }
 
