@@ -259,6 +259,10 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # Build PR head, not merge commit. `chromatic-react` publishes same
+          # build. Merge queue still runs AVT against real merge result
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - name: Use Node.js version from .nvmrc
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
@@ -280,13 +284,10 @@ jobs:
           YARN_ENABLE_HARDENED_MODE: 0
         run: yarn install --immutable
       - name: Build project
-        env:
-          NODE_OPTIONS: --max-old-space-size=6144
         run: yarn lerna run build --scope='@carbon/react' --include-dependencies
+      # Output stats file for TurboSnap
       - name: Build storybook
-        env:
-          NODE_OPTIONS: --max-old-space-size=6144
-        run: yarn workspace @carbon/react storybook:build
+        run: yarn workspace @carbon/react storybook:build --stats-json
       - name: Upload storybook static files
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
@@ -302,30 +303,32 @@ jobs:
         shardIndex: [1, 2, 3, 4]
         shardTotal: [4]
     runs-on: ubuntu-24.04
+    # Use image with preinstalled libs and browser
+    container:
+      image: mcr.microsoft.com/playwright:v1.64.1-noble
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # Same commit as the storybook built in `avt-build`
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - name: Use Node.js version from .nvmrc
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: '.nvmrc'
-      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-        if: github.event_name != 'merge_group'
-        id: cache
-        with:
-          path: |
-            node_modules
-            */**/node_modules
-          key:
-            ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
-            'packages/**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-      - name: Install dependencies
-        env:
-          YARN_ENABLE_HARDENED_MODE: 0
-        run: yarn install --immutable
-      - name: Install browsers
-        run: yarn playwright install --with-deps
+      # AVT only needs these packages at runtime, so skip the full monorepo
+      # install. Versions come from package.json, which pins them exactly.
+      # --ignore-scripts skips the browser downloads that accessibility-checker's
+      # puppeteer and chromedriver dependencies would otherwise run; the
+      # container already has Chromium
+      - name: Install test dependencies
+        run: |
+          pkg() { node -p "require('./package.json').devDependencies['$1']"; }
+          npm install --prefix "$RUNNER_TEMP/avt" --no-save --no-package-lock \
+            --no-audit --no-fund --ignore-scripts \
+            "@playwright/test@$(pkg @playwright/test)" \
+            "accessibility-checker@$(pkg accessibility-checker)" \
+            serve@14.2.6
+          ln -s "$RUNNER_TEMP/avt/node_modules" node_modules
       - name: Download storybook artifacts
         uses: actions/download-artifact@v8
         with:
@@ -337,14 +340,18 @@ jobs:
           npx serve -l 3000 packages/react/storybook-static &
           pid=$!
           echo "pid=$pid" >> $GITHUB_OUTPUT
-      - uses: ./actions/wait-for-it
-        with:
-          URL: 'http://localhost:3000'
+      # Docker-based ./actions/wait-for-it can't reach localhost inside a
+      # job container, so poll from this shell instead
+      - name: Wait for storybook
         timeout-minutes: 3
+        run: |
+          until node -e "fetch('http://localhost:3000').then((r) => process.exit(r.ok ? 0 : 1), () => process.exit(1))"; do
+            sleep 2
+          done
       - name: Run AVT
         if: github.repository == 'carbon-design-system/carbon'
         run: |
-          yarn playwright test --project chromium --grep @avt --shard="${{ matrix.shardIndex }}/${{ matrix.shardTotal }}"
+          npx playwright test --project chromium --grep @avt --shard="${{ matrix.shardIndex }}/${{ matrix.shardTotal }}"
       - name: Stop storybook
         run: kill ${{ steps.storybook.outputs.pid }}
       - name: Upload blob report to GitHub Actions Artifacts
@@ -380,22 +387,6 @@ jobs:
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: '.nvmrc'
-      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-        if: github.event_name != 'merge_group'
-        id: cache
-        with:
-          path: |
-            node_modules
-            */**/node_modules
-          key:
-            ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
-            'packages/**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-      - name: Install dependencies
-        env:
-          YARN_ENABLE_HARDENED_MODE: 0
-        run: yarn install --immutable
 
       - name: Download avt blob reports from GitHub Actions Artifacts
         uses: actions/download-artifact@v8
@@ -404,10 +395,15 @@ jobs:
           pattern: playwright-avt-blob-report-*
           merge-multiple: true
 
+      # Merging only needs the Playwright CLI, not a full install. Use the same
+      # version that wrote the blob reports
       - name: Merge avt reports into HTML Report
-        run:
-          npx playwright merge-reports --reporter html
-          ./all-playwright-avt-blob-reports
+        env:
+          PLAYWRIGHT_HTML_OUTPUT_DIR: playwright-avt-report
+          PLAYWRIGHT_HTML_OPEN: never
+        run: |
+          version=$(node -p "require('./package.json').devDependencies['@playwright/test']")
+          npx --yes "playwright@$version" merge-reports --reporter html ./all-playwright-avt-blob-reports
 
       - name: Upload avt HTML report
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
@@ -420,6 +416,8 @@ jobs:
     if:
       ${{ github.repository == 'carbon-design-system/carbon' &&
       github.event.pull_request.draft == false }}
+    # Reuses the storybook built by `avt-build` instead of building it again
+    needs: avt-build
     runs-on: ubuntu-24.04
     outputs:
       buildUrl: ${{ steps.chromatic.outputs.buildUrl }}
@@ -433,31 +431,13 @@ jobs:
           # 👇 Tells the checkout which commit hash to reference
           # https://www.chromatic.com/docs/github-actions/#recommended-configuration-for-build-events
           ref: ${{ github.event.pull_request.head.sha }}
-      - name: Use Node.js version from .nvmrc
-        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
-        with:
-          node-version-file: '.nvmrc'
-      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-        if: github.event_name != 'merge_group'
-        id: cache
-        with:
-          path: |
-            node_modules
-            */**/node_modules
-          key:
-            ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
-            'packages/**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
       # 👇 Merge queue builds are skipped below, so skip the setup they'd need
-      - name: Install dependencies
+      - name: Download storybook artifacts
         if: github.event_name != 'merge_group'
-        env:
-          YARN_ENABLE_HARDENED_MODE: 0
-        run: yarn install --immutable
-      - name: Build project
-        if: github.event_name != 'merge_group'
-        run: yarn build
+        uses: actions/download-artifact@v8
+        with:
+          name: avt-storybook-static
+          path: packages/react/storybook-static
       - id: chromatic
         name: Run Chromatic
         uses: chromaui/action@2b75e3340bcec86b4ae38c6a10f14831114e8137 # v18.14.3
@@ -466,7 +446,8 @@ jobs:
           # https://www.chromatic.com/docs/github-actions/#run-chromatic-on-external-forks-of-open-source-projects
           projectToken: 6q6rgoheqk2
           workingDir: packages/react
-          buildScriptName: storybook:build
+          # Reuse by `avt-build` (with --stats-json for TurboSnap)
+          storybookBuildDir: storybook-static
           zip: true # Runs Chromatic with the option to compress the build output
           autoAcceptChanges: '{main,next}' # Option to accept all changes on main and next
           skip: '**/gh-readonly-queue/**'
