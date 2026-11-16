@@ -44,16 +44,52 @@ export const compare = (a: any, b: any, locale = 'en') => {
 const isNumericString = (value: string) =>
   value.trim() !== '' && Number.isFinite(Number(value));
 
+const INTEGER_PATTERN = /^[+-]?\d+$/;
+
+/**
+ * Compares two numeric strings by value. Integer strings are compared as
+ * `BigInt` so that values beyond `Number.MAX_SAFE_INTEGER` stay distinct.
+ */
+const compareNumericStrings = (a: string, b: string) => {
+  const trimmedA = a.trim();
+  const trimmedB = b.trim();
+
+  if (INTEGER_PATTERN.test(trimmedA) && INTEGER_PATTERN.test(trimmedB)) {
+    const bigA = BigInt(trimmedA);
+    const bigB = BigInt(trimmedB);
+    return bigA < bigB ? -1 : bigA > bigB ? 1 : 0;
+  }
+
+  return Math.sign(Number(a) - Number(b));
+};
+
+/**
+ * Ranks a string so that mixed columns sort as a consistent total order: blank
+ * strings first, then numeric strings, then everything else.
+ */
+const getStringRank = (value: string) => {
+  if (value.trim() === '') return 0;
+  return isNumericString(value) ? 1 : 2;
+};
+
 /**
  * Compares two strings by their numeric value if both represent a number.
- * Otherwise, compares them using `localeCompare`.
+ * Otherwise, compares them using `localeCompare`. A numeric string always sorts
+ * before a non-numeric one so that the ordering stays transitive.
  *
  * Note: `localeCompare` only sees digit sequences, so it can't order signs or
  * decimals, but it still orders strings that start with a number by that number.
  */
 const compareStrings = (a: string, b: string, locale = 'en') => {
-  if (isNumericString(a) && isNumericString(b)) {
-    return Math.sign(Number(a) - Number(b));
+  const rankA = getStringRank(a);
+  const rankB = getStringRank(b);
+
+  if (rankA !== rankB) {
+    return rankA < rankB ? -1 : 1;
+  }
+
+  if (rankA === 1) {
+    return compareNumericStrings(a, b);
   }
 
   const isNumeric = !isNaN(parseFloat(a)) && !isNaN(parseFloat(b));

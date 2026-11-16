@@ -233,6 +233,29 @@ describe('compare', () => {
     expect(compare('0x10', '9')).toEqual(1);
   });
 
+  it('should not lose precision for integer strings beyond the safe range', () => {
+    expect(compare('9007199254740993', '9007199254740992')).toEqual(1);
+    expect(compare('9007199254740992', '9007199254740993')).toEqual(-1);
+    expect(compare('9007199254740993', '9007199254740993')).toEqual(0);
+  });
+
+  it('should preserve transitive ordering for mixed numeric and non-numeric strings', () => {
+    const values = ['10z', '16', '1e2', '9', 'abc', '', '3.5'];
+
+    for (const a of values) {
+      for (const b of values) {
+        for (const c of values) {
+          if (compare(a, b) < 0 && compare(b, c) < 0) {
+            expect(compare(a, c)).toBeLessThan(0);
+          }
+        }
+      }
+    }
+
+    expect(compare('16', '10z')).toBeLessThan(0);
+    expect(compare('1e2', '10z')).toBeLessThan(0);
+  });
+
   it('should compare strings that start with a number by that number', () => {
     expect(compare('10 MB', '9 MB')).toEqual(1);
     expect(compare('9 MB', '10 MB')).toEqual(-1);

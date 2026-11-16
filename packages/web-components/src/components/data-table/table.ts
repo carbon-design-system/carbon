@@ -28,15 +28,35 @@ import CDSTableExpandedRow from './table-expanded-row';
 
 export { TABLE_SIZE };
 
+const INTEGER_PATTERN = /^[+-]?\d+$/;
+
 /**
  * @param value A cell value.
- * @returns `true` if the given value is a number or a string representing one.
+ * @returns `0` for blank text, `1` for a number or text representing one, and
+ *   `2` for anything else.
  */
-const isNumeric = (value: unknown) =>
-  typeof value === 'number' ||
-  (typeof value === 'string' &&
-    value.trim() !== '' &&
-    Number.isFinite(Number(value)));
+const getRank = (value: unknown) => {
+  if (typeof value === 'number') return Number.isFinite(value) ? 1 : 2;
+  if (typeof value !== 'string' || value.trim() === '') return 0;
+  return Number.isFinite(Number(value)) ? 1 : 2;
+};
+
+/**
+ * Compares two numeric values. Integer text is compared as `BigInt` so that
+ * values beyond `Number.MAX_SAFE_INTEGER` stay distinct.
+ */
+const compareNumeric = (lhs: number | string, rhs: number | string) => {
+  const left = String(lhs).trim();
+  const right = String(rhs).trim();
+
+  if (INTEGER_PATTERN.test(left) && INTEGER_PATTERN.test(right)) {
+    const bigLeft = BigInt(left);
+    const bigRight = BigInt(right);
+    return bigLeft < bigRight ? -1 : bigLeft > bigRight ? 1 : 0;
+  }
+
+  return Math.sign(Number(lhs) - Number(rhs));
+};
 
 /**
  * Data table.
@@ -155,8 +175,14 @@ class CDSTable extends HostListenerMixin(LitElement) {
 
   customSortRow(lhs, rhs, collator) {
     // Cell values are read from `textContent`, so numbers arrive as strings.
-    if (isNumeric(lhs) && isNumeric(rhs)) {
-      return Math.sign(Number(lhs) - Number(rhs));
+    // Numeric text sorts before other text so the ordering stays transitive.
+    const lhsRank = getRank(lhs);
+    const rhsRank = getRank(rhs);
+    if (lhsRank !== rhsRank) {
+      return lhsRank < rhsRank ? -1 : 1;
+    }
+    if (lhsRank === 1) {
+      return compareNumeric(lhs, rhs);
     }
     return collator.compare(lhs, rhs);
   }

@@ -171,6 +171,27 @@ describe('cds-table', () => {
     expect(el.customSortRow('0x10', '9', collator)).to.equal(1);
   });
 
+  it('should not lose precision for integer text beyond the safe range', () => {
+    const el = document.createElement('cds-table');
+    const collator = new Intl.Collator('en');
+
+    expect(
+      el.customSortRow('9007199254740993', '9007199254740992', collator)
+    ).to.equal(1);
+    expect(
+      el.customSortRow('9007199254740993', '9007199254740993', collator)
+    ).to.equal(0);
+  });
+
+  it('should keep mixed numeric and non-numeric text in a transitive order', () => {
+    const el = document.createElement('cds-table');
+    const collator = new Intl.Collator('en');
+
+    expect(el.customSortRow('10z', '16', collator)).to.equal(1);
+    expect(el.customSortRow('16', '1e2', collator)).to.equal(-1);
+    expect(el.customSortRow('1e2', '10z', collator)).to.equal(-1);
+  });
+
   it('should keep sorting non-numeric text with the collator', () => {
     const el = document.createElement('cds-table');
     const collator = new Intl.Collator('en');

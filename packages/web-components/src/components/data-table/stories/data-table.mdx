@@ -126,8 +126,22 @@ const isNumeric = (value) =>
   value.trim() !== '' && Number.isFinite(Number(value));
 
 const customSortRow = (lhs, rhs, collator) => {
-  if (isNumeric(lhs) && isNumeric(rhs)) {
+  const lhsNumeric = isNumeric(lhs);
+  const rhsNumeric = isNumeric(rhs);
+
+  if (lhsNumeric && rhsNumeric) {
+    // Compare as BigInt for integers so large values keep their precision.
+    const integer = /^[+-]?\d+$/;
+    if (integer.test(lhs.trim()) && integer.test(rhs.trim())) {
+      const a = BigInt(lhs.trim());
+      const b = BigInt(rhs.trim());
+      return a < b ? -1 : a > b ? 1 : 0;
+    }
     return Math.sign(Number(lhs) - Number(rhs));
+  }
+  // Keep numeric text before other text so the ordering stays transitive.
+  if (lhsNumeric !== rhsNumeric) {
+    return lhsNumeric ? -1 : 1;
   }
   return collator.compare(lhs, rhs);
 };
