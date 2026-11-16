@@ -55,18 +55,22 @@
   }
 
   .#{$prefix}--toggletip {
-    @include custom-property.declaration(
-      'popover-offset',
-      if(
-        enabled('enable-v12-release'),
-        convert.to-rem(4px),
+    @if enabled('enable-v12-release') {
+      @include custom-property.declaration(
+        'popover-offset',
+        convert.to-rem(4px)
+      );
+      @include custom-property.declaration(
+        'popover-border-radius',
+        $border-radius-04
+      );
+    } @else {
+      @include custom-property.declaration(
+        'popover-offset',
         convert.to-rem(13px)
-      )
-    );
-    @include custom-property.declaration(
-      'popover-border-radius',
-      if(enabled('enable-v12-release'), $border-radius-04, 2px)
-    );
+      );
+      @include custom-property.declaration('popover-border-radius', 2px);
+    }
   }
 
   .#{$prefix}--toggletip-content {
