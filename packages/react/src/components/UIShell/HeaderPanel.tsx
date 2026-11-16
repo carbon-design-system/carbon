@@ -102,7 +102,7 @@ const HeaderPanel = React.forwardRef<HTMLDivElement, HeaderPanelProps>(
     // null when the toggle is clicked. Remember what the mouse was pressed
     // on so `onBlur` can still tell the toggle is being clicked.
     const mouseDownTarget = useRef<Element>(null);
-    useWindowEvent('mousedown', (event: MouseEvent) => {
+    useWindowEvent('mousedown', (event) => {
       mouseDownTarget.current =
         event.target instanceof Element ? event.target : null;
     });
