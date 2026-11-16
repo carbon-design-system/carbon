@@ -16,15 +16,22 @@ const hasFilterableText = (value: unknown) => {
     return false;
   }
 
+  if (typeof value !== 'object') {
+    return true;
+  }
+
+  // Objects without a `toString` method (e.g., `Object.create(null)`) cannot be
+  // converted with `String()`.
   return (
-    typeof value !== 'object' || value.toString !== Object.prototype.toString
+    typeof value.toString === 'function' &&
+    value.toString !== Object.prototype.toString
   );
 };
 
 /**
  * Filters row IDs based on whether any of the cell values in the row include
- * the input value as a substring. Cell values without filterable text, such as
- * booleans, empty cells, and React elements, are ignored.
+ * the input value as a substring. Cell values without filterable text are
+ * ignored.
  */
 export const defaultFilterRows = ({
   rowIds,

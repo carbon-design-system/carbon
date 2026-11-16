@@ -91,6 +91,20 @@ describe('defaultFilterRows', () => {
     expect(result).toEqual([]);
   });
 
+  it('should not throw on objects without a prototype', () => {
+    const result = defaultFilterRows({
+      ...defaultOptions,
+      rowIds: ['1'],
+      cellsById: {
+        ...cellsById,
+        '1-name': { value: Object.create(null) },
+      },
+      inputValue: 'object',
+    });
+
+    expect(result).toEqual([]);
+  });
+
   it('should match objects that define their own string form', () => {
     const result = defaultFilterRows({
       ...defaultOptions,
