@@ -286,6 +286,8 @@ class CDSDropdown extends AutoAlignMixin(
               const menu = this.shadowRoot?.getElementById('menu-body');
               if (shouldKeepInputFocus && menuInputNode) {
                 menuInputNode.focus({ preventScroll: true });
+              } else if (initialItem) {
+                initialItem.focus();
               } else if (menu) {
                 menu.focus();
               }
@@ -305,13 +307,10 @@ class CDSDropdown extends AutoAlignMixin(
           break;
         case DROPDOWN_KEYBOARD_ACTION.NAVIGATING: {
           event.preventDefault();
-          const menu = this.shadowRoot?.getElementById('menu-body');
           const menuInputNode = this._menuInputNode;
           const shouldKeepInputFocus = this._shouldRetainMenuInputFocus(event);
           if (shouldKeepInputFocus && menuInputNode) {
             menuInputNode.focus({ preventScroll: true });
-          } else if (menu) {
-            menu.focus();
           }
           this._navigate(NAVIGATION_DIRECTION[key]);
           break;
@@ -784,6 +783,27 @@ class CDSDropdown extends AutoAlignMixin(
       const dropdownItem = listItem as CDSDropdownItem;
       dropdownItem.highlighted = dropdownItem === target;
       dropdownItem.removeAttribute('highlighted-next-sibling');
+      dropdownItem.setAttribute(
+        'tabindex',
+        dropdownItem === target ? '0' : '-1'
+      );
+    });
+
+    this._activeDescendant = target?.id;
+
+    const trigger = this.shadowRoot?.getElementById('trigger-button');
+    const input = this._menuInputNode;
+    const menu = this.shadowRoot?.getElementById('menu-body');
+    const focusTargets = [input, trigger, menu].filter(
+      Boolean
+    ) as (HTMLElement & {
+      ariaActiveDescendantElement?: Element | null;
+    })[];
+
+    focusTargets.forEach((node) => {
+      if ('ariaActiveDescendantElement' in node) {
+        node.ariaActiveDescendantElement = target ?? null;
+      }
     });
 
     if (target) {
@@ -792,16 +812,9 @@ class CDSDropdown extends AutoAlignMixin(
         nextSibling.setAttribute('highlighted-next-sibling', '');
       }
 
-      const itemId = target.id;
-      if (itemId) {
-        this._activeDescendant = itemId;
-      }
-
       if (scrollIntoView) {
         target.scrollIntoView({ block: 'nearest' });
       }
-    } else {
-      this._activeDescendant = undefined;
     }
   }
 
@@ -880,6 +893,10 @@ class CDSDropdown extends AutoAlignMixin(
 
     const nextItem = items[nextIndex] as CDSDropdownItem;
     this._setHighlightedItem(nextItem, { scrollIntoView: true });
+
+    if (!this._supportsMenuInputFiltering || !this._menuInputNode) {
+      nextItem.focus();
+    }
   }
 
   /**
@@ -1347,6 +1364,9 @@ class CDSDropdown extends AutoAlignMixin(
         part="menu-body"
         class="${prefix}--list-box__menu"
         role="listbox"
+        aria-activedescendant="${ifDefined(
+          open ? (activeDescendant ?? undefined) : undefined
+        )}"
         tabindex="-1"
         ?hidden=${!open}
         @mouseover=${handleMouseoverInner}

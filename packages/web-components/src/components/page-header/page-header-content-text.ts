@@ -12,14 +12,14 @@ import { property, state } from 'lit/decorators.js';
 import { unsafeStatic, html as staticHtml } from 'lit/static-html.js';
 import { prefix } from '../../globals/settings';
 import styles from './page-header.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Page header Content Text.
  * @element cds-page-header-content-text
  */
-@customElement(`${prefix}-page-header-content-text`)
 class CDSPageHeaderContentText extends LitElement {
+  static is = `${prefix}-page-header-content-text`;
+
   /**
    * Subtitle text of the page-header-content
    */

@@ -166,7 +166,7 @@ function ProgressBar({
       <div
         className={`${prefix}--progress-bar__track`}
         role="progressbar"
-        aria-busy={!isFinished}
+        aria-busy={!isFinished && !isError}
         aria-invalid={isError}
         aria-labelledby={labelId}
         aria-describedby={helperText ? helperTextId : undefined}

@@ -51,6 +51,18 @@ describe('cds-multi-select', function () {
     expect(el.hasAttribute('open')).to.be.false;
   });
 
+  it('should render label element with id dropdown-label when title-text is provided', async () => {
+    const el = await fixture(html`
+      <cds-multi-select title-text="Test title" label="test-label">
+        <cds-multi-select-item value="item-0">Item 0</cds-multi-select-item>
+      </cds-multi-select>
+    `);
+
+    const label = el.shadowRoot.querySelector('label[part="title-text"]');
+    expect(label).to.exist;
+    expect(label.id).to.equal('dropdown-label');
+  });
+
   it('should open the menu when a user clicks on the trigger', async () => {
     const el = await fixture(multiSelect);
 
@@ -2118,6 +2130,95 @@ describe('cds-multi-select', function () {
         // Multi-select should still remain closed
         expect(el.open).to.be.false;
       });
+    });
+  });
+
+  describe('Accessibility and Active Descendant', () => {
+    it('should render aria-multiselectable="true" on menu-body', async () => {
+      const el = await fixture(multiSelect);
+      const menuBody = el.shadowRoot.querySelector('#menu-body');
+      expect(menuBody.getAttribute('aria-multiselectable')).to.equal('true');
+    });
+
+    it('should set aria-activedescendant when navigating with keyboard', async () => {
+      const el = await fixture(multiSelect);
+      const trigger = el.shadowRoot.querySelector('.cds--list-box__field');
+      const menuBody = el.shadowRoot.querySelector('#menu-body');
+      trigger.click();
+      await el.updateComplete;
+
+      const items = el.querySelectorAll('cds-multi-select-item');
+      const arrowDown = new KeyboardEvent('keydown', {
+        key: 'ArrowDown',
+        bubbles: true,
+      });
+
+      trigger.dispatchEvent(arrowDown);
+      await el.updateComplete;
+
+      expect(items[0].hasAttribute('highlighted')).to.be.true;
+      expect(trigger.getAttribute('aria-activedescendant')).to.equal(
+        items[0].id
+      );
+      expect(menuBody.getAttribute('aria-activedescendant')).to.equal(
+        items[0].id
+      );
+    });
+
+    it('should dynamically update aria-selected on cds-multi-select-item', async () => {
+      const el = await fixture(multiSelect);
+      const trigger = el.shadowRoot.querySelector('.cds--list-box__field');
+      trigger.click();
+      await el.updateComplete;
+
+      const firstItem = el.querySelector(
+        'cds-multi-select-item[value="item-0"]'
+      );
+      expect(firstItem.getAttribute('aria-selected')).to.equal('false');
+
+      firstItem.click();
+      await el.updateComplete;
+      await firstItem.updateComplete;
+
+      expect(firstItem.getAttribute('aria-selected')).to.equal('true');
+
+      firstItem.click();
+      await el.updateComplete;
+      await firstItem.updateComplete;
+
+      expect(firstItem.getAttribute('aria-selected')).to.equal('false');
+    });
+
+    it('should manage roving tabindex on items and set focus when navigating', async () => {
+      const el = await fixture(multiSelect);
+      const trigger = el.shadowRoot.querySelector('.cds--list-box__field');
+      const items = el.querySelectorAll('cds-multi-select-item');
+
+      items.forEach((item) => {
+        expect(item.getAttribute('tabindex')).to.equal('-1');
+      });
+
+      trigger.click();
+      await el.updateComplete;
+
+      const arrowDown = new KeyboardEvent('keydown', {
+        key: 'ArrowDown',
+        bubbles: true,
+      });
+
+      trigger.dispatchEvent(arrowDown);
+      await el.updateComplete;
+
+      expect(items[0].getAttribute('tabindex')).to.equal('0');
+      expect(items[1].getAttribute('tabindex')).to.equal('-1');
+      expect(document.activeElement).to.equal(items[0]);
+
+      trigger.dispatchEvent(arrowDown);
+      await el.updateComplete;
+
+      expect(items[0].getAttribute('tabindex')).to.equal('-1');
+      expect(items[1].getAttribute('tabindex')).to.equal('0');
+      expect(document.activeElement).to.equal(items[1]);
     });
   });
 });

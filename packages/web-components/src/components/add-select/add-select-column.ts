@@ -10,7 +10,6 @@
 import { LitElement, html, nothing } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import '../search/index';
 import '../tag/index';
 import '../checkbox/index';
@@ -29,8 +28,9 @@ const blockClass = `${prefix}--add-select__next`;
  * @fires cds-add-select-column-search - Fired when column search changes; detail: { searchTerm }
  * @fires cds-add-select-column-select-all - Fired when "Select All" checkbox changes; detail: { checked }
  */
-@customElement(`${prefix}-add-select-column`)
 class CDSAddSelectColumn extends LitElement {
+  static is = `${prefix}-add-select-column`;
+
   /**
    * Column title shown in the header
    */

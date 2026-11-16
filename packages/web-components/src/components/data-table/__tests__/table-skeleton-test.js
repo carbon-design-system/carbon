@@ -56,6 +56,22 @@ describe('cds-table-skeleton', () => {
       );
     });
 
+    it('should default to the lg size', async () => {
+      const el = await fixture(html`<cds-table-skeleton></cds-table-skeleton>`);
+      const table = el.shadowRoot?.querySelector('table');
+      expect(el.getAttribute('size')).to.equal('lg');
+      expect(table?.classList.contains('cds--data-table--lg')).to.equal(true);
+    });
+
+    it('should respect the size prop', async () => {
+      const el = await fixture(
+        html`<cds-table-skeleton size="xs"></cds-table-skeleton>`
+      );
+      const table = el.shadowRoot?.querySelector('table');
+      expect(table?.classList.contains('cds--data-table--xs')).to.equal(true);
+      expect(table?.classList.contains('cds--data-table--lg')).to.equal(false);
+    });
+
     it('should respect show-header=false', async () => {
       const el = await fixture(html`<cds-table-skeleton></cds-table-skeleton>`);
       el.showHeader = false;
@@ -72,6 +88,18 @@ describe('cds-table-skeleton', () => {
 
       const toolbar = el.shadowRoot?.querySelector('.cds--table-toolbar');
       expect(toolbar).to.equal(null);
+    });
+
+    it('should label the toolbar region', async () => {
+      const el = await fixture(html`<cds-table-skeleton></cds-table-skeleton>`);
+      const toolbar = el.shadowRoot?.querySelector('.cds--table-toolbar');
+      expect(toolbar?.getAttribute('aria-label')).to.equal(
+        'data table toolbar'
+      );
+
+      el.toolbarLabel = 'Loading toolbar';
+      await el.updateComplete;
+      expect(toolbar?.getAttribute('aria-label')).to.equal('Loading toolbar');
     });
 
     it('should respect headers property', async () => {

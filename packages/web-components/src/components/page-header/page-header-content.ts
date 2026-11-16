@@ -15,15 +15,15 @@ import { unsafeStatic, html as staticHtml } from 'lit/static-html.js';
 import { prefix } from '../../globals/settings';
 import '../tooltip/index';
 import styles from './page-header.scss?lit';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { pageHeaderContext } from './context';
 
 /**
  * Page header content.
  * @element cds-page-header-content
  */
-@customElement(`${prefix}-page-header-content`)
 class CDSPageHeaderContent extends LitElement {
+  static is = `${prefix}-page-header-content`;
+
   /**
    * Set to `true` if there are contextual actions
    */

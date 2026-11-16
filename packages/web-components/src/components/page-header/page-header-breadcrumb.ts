@@ -14,14 +14,14 @@ import { property, state } from 'lit/decorators.js';
 import styles from './page-header.scss?lit';
 import { consume } from '@lit/context';
 import { pageHeaderContext } from './context';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Page header Breadcrumb Bar.
  * @element cds-page-header-breadcrumb
  */
-@customElement(`${prefix}-page-header-breadcrumb`)
 class CDSPageHeaderBreadcrumb extends LitElement {
+  static is = `${prefix}-page-header-breadcrumb`;
+
   /**
    * Specify if breadcrumb bar has bottom border.
    */
