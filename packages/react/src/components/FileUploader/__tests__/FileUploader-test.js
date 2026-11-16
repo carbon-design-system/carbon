@@ -141,6 +141,23 @@ describe('FileUploader', () => {
     expect(screen.queryByText('test.png')).not.toBeInTheDocument();
   });
 
+  it('should move focus back to the add file button after a file is removed', async () => {
+    const { container } = render(
+      <FileUploader {...requiredProps} filenameStatus="edit" />
+    );
+
+    const input = container.querySelector('input');
+    const file = new File(['test'], 'test.png', { type: 'image/png' });
+
+    await userEvent.upload(input, file);
+
+    await userEvent.click(
+      screen.getByRole('button', { name: 'test description - test.png' })
+    );
+
+    expect(screen.getByRole('button', { name: 'Add file' })).toHaveFocus();
+  });
+
   it.each([
     ['Enter', '{Enter}'],
     ['Space', ' '],
