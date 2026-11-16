@@ -80,10 +80,8 @@ export default function CopyButton({
   ...other
 }: CopyButtonProps) {
   const prefix = usePrefix();
-  // `ButtonBase` turns an unset `kind` into `primary`, and the
-  // `.cds--btn--primary` styles override the default copy button colors. `null`
-  // renders no kind class, so the default styles apply, matching
-  // `cds-copy-button` without a `kind`.
+  // Prevent `ButtonBase`'s default `primary` kind from overriding the copy
+  // button's default styles.
   const copyProps = { ...other, kind: kind || null };
   return (
     <LayoutConstraint size={{ default: 'md', max: 'lg' }}>
