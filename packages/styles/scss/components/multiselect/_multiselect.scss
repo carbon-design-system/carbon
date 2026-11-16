@@ -12,10 +12,33 @@
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../utilities/convert';
+@use '../../utilities/custom-property';
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/layout';
 @use '../../border-radius' as *;
 @use '../../feature-flags' as *;
+
+/// Size the selection count tag from the field size: 18px in extra small
+/// fields and 24px otherwise
+/// @access private
+/// @group multi-select
+@mixin selection-tag {
+  @include custom-property.declaration(
+    'layout-size-height-sm',
+    convert.to-rem(24px)
+  );
+  @include layout.use('size', $default: 'md', $min: 'xs', $max: 'md');
+
+  &,
+  .#{$prefix}--tag__close-icon {
+    // 2px at the 18px tag height, 4px at 24px
+    border-radius: clamp(
+      $border-radius-02,
+      layout.size('height') - convert.to-rem(20px),
+      $border-radius-04
+    );
+  }
+}
 
 /// Multi select styles
 /// @access public
@@ -278,5 +301,19 @@
   .#{$prefix}--multi-select.#{$prefix}--multi-select--readonly
     .#{$prefix}--list-box__menu-icon {
     cursor: default;
+  }
+
+  @if enabled('enable-v12-release') {
+    $multiselect: '.#{$prefix}--list-box.#{$prefix}--multi-select:not(.#{$prefix}--multi-select--inline, .#{$prefix}--list-box__wrapper--fluid *)';
+
+    @include list-box.trailing-controls($multiselect);
+
+    #{$multiselect} .#{$prefix}--list-box__field--wrapper {
+      block-size: 100%;
+    }
+
+    #{$multiselect} .#{$prefix}--tag {
+      @include selection-tag;
+    }
   }
 }

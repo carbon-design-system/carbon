@@ -18,6 +18,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/utilities/layout' as *;
 @use '@carbon/styles/scss/components/combo-box' as *;
 @use '@carbon/styles/scss/components/form';
+@use '@carbon/styles/scss/components/list-box/list-box';
 @use '@carbon/styles/scss/components/text-input/text-input';
 @use '../dropdown/dropdown';
 
@@ -227,18 +228,6 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-combo-box[size='sm']) {
-  .#{$prefix}--list-box__menu-icon {
-    inset-block: $spacing-02;
-  }
-}
-
-:host(#{$prefix}-combo-box[size='lg']) {
-  .#{$prefix}--list-box__menu-icon {
-    inset-block: $spacing-04;
-  }
-}
-
 :host(#{$prefix}-combo-box[ai-label]) {
   @extend .#{$prefix}--list-box__wrapper--slug;
 
@@ -273,28 +262,10 @@ $css--plex: true !default;
     padding: 0;
   }
 
-  .#{$prefix}--list-box__invalid-icon {
-    /* stylelint-disable-next-line declaration-no-important */
-    inset-inline-end: to-rem(83px) !important;
-  }
-
-  ::slotted(#{$prefix}-ai-label)::after,
-  ::slotted(#{$prefix}-slug)::after {
-    position: absolute;
-    display: block;
-    background-color: $border-subtle-01;
-    block-size: $spacing-05;
-    content: '';
-    inline-size: to-rem(1px);
-    inset-block-start: 0;
-    inset-inline-end: to-rem(-9px);
-  }
-
   ::slotted(#{$prefix}-ai-label),
   ::slotted(#{$prefix}-slug) {
     position: absolute;
     inset-block-start: 50%;
-    inset-inline-end: calc($spacing-08 + 9px);
   }
 
   ::slotted(#{$prefix}-ai-label:not([revert-active])),
@@ -303,77 +274,125 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-combo-box[ai-label][isClosable]) {
-  ::slotted(#{$prefix}-ai-label),
-  ::slotted(#{$prefix}-slug) {
-    inset-inline-end: calc($spacing-10 + 18px);
+@if flags.enabled('enable-v12-release') {
+  :host(#{$prefix}-combo-box:not([type='inline'])) {
+    @include list-box.trailing-controls(
+      '.#{$prefix}--list-box',
+      $with-status:
+        ':is(.#{$prefix}--dropdown--invalid, .#{$prefix}--dropdown--warn)',
+      $with-decorator: '.#{$prefix}--list-box__wrapper--decorator',
+      $decorator: '::slotted(#{$prefix}-ai-label), ::slotted(#{$prefix}-slug)'
+    );
+  }
+} @else {
+  :host(#{$prefix}-combo-box[size='sm']) {
+    .#{$prefix}--list-box__menu-icon {
+      inset-block: $spacing-02;
+    }
   }
 
-  .#{$prefix}--list-box__field .#{$prefix}--text-input {
-    padding-inline-end: to-rem(105px);
-  }
-}
-
-:host(#{$prefix}-combo-box[warn]),
-:host(#{$prefix}-combo-box[invalid]) {
-  ::slotted(#{$prefix}-ai-label),
-  ::slotted(#{$prefix}-slug) {
-    inset-inline-end: calc($spacing-08 + 9px);
+  :host(#{$prefix}-combo-box[size='lg']) {
+    .#{$prefix}--list-box__menu-icon {
+      inset-block: $spacing-04;
+    }
   }
 
-  ::slotted(#{$prefix}-ai-label)::before,
-  ::slotted(#{$prefix}-slug)::before {
-    position: absolute;
-    display: block;
-    background-color: $border-subtle-01;
-    block-size: $spacing-05;
-    content: '';
-    inline-size: to-rem(1px);
-    inset-block-start: 0;
-    inset-inline-start: to-rem(-9px);
-  }
-}
+  :host(#{$prefix}-combo-box[ai-label]) {
+    .#{$prefix}--list-box__invalid-icon {
+      /* stylelint-disable-next-line declaration-no-important */
+      inset-inline-end: to-rem(83px) !important;
+    }
 
-:host(#{$prefix}-combo-box[warn][isClosable]:not([ai-label])),
-:host(#{$prefix}-combo-box[invalid][isClosable]:not([ai-label])) {
-  .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__menu-icon)
-    .#{$prefix}--list-box__selection::before {
-    position: absolute;
-    background-color: $border-subtle-01;
-    block-size: to-rem(16px);
-    content: '';
-    inline-size: to-rem(1px);
-    margin-inline-end: to-rem(33px);
-  }
-}
+    ::slotted(#{$prefix}-ai-label)::after,
+    ::slotted(#{$prefix}-slug)::after {
+      position: absolute;
+      display: block;
+      background-color: $border-subtle-01;
+      block-size: $spacing-05;
+      content: '';
+      inline-size: to-rem(1px);
+      inset-block-start: 0;
+      inset-inline-end: to-rem(-9px);
+    }
 
-:host(#{$prefix}-combo-box[isClosable]) {
-  .#{$prefix}--list-box__invalid-icon {
-    /* stylelint-disable-next-line declaration-no-important */
-    inset-inline-end: calc($spacing-10 + 18px) !important;
+    ::slotted(#{$prefix}-ai-label),
+    ::slotted(#{$prefix}-slug) {
+      inset-inline-end: calc($spacing-08 + 9px);
+    }
   }
 
-  .#{$prefix}--list-box__field .#{$prefix}--text-input {
-    padding-inline-end: to-rem(80px);
-  }
-}
+  :host(#{$prefix}-combo-box[ai-label][isClosable]) {
+    ::slotted(#{$prefix}-ai-label),
+    ::slotted(#{$prefix}-slug) {
+      inset-inline-end: calc($spacing-10 + 18px);
+    }
 
-:host(#{$prefix}-combo-box[warn][isClosable]),
-:host(#{$prefix}-combo-box[invalid][isClosable]) {
-  .#{$prefix}--list-box__field .#{$prefix}--text-input {
-    padding-inline-end: to-rem(105px);
-  }
-}
-
-:host(#{$prefix}-combo-box[warn][ai-label][isClosable]),
-:host(#{$prefix}-combo-box[invalid][ai-label][isClosable]) {
-  .#{$prefix}--list-box__field .#{$prefix}--text-input {
-    padding-inline-end: to-rem(141px);
+    .#{$prefix}--list-box__field .#{$prefix}--text-input {
+      padding-inline-end: to-rem(105px);
+    }
   }
 
-  .#{$prefix}--list-box__invalid-icon {
-    /* stylelint-disable-next-line declaration-no-important */
-    inset-inline-end: to-rem(116px) !important;
+  :host(#{$prefix}-combo-box[warn]),
+  :host(#{$prefix}-combo-box[invalid]) {
+    ::slotted(#{$prefix}-ai-label),
+    ::slotted(#{$prefix}-slug) {
+      inset-inline-end: calc($spacing-08 + 9px);
+    }
+
+    ::slotted(#{$prefix}-ai-label)::before,
+    ::slotted(#{$prefix}-slug)::before {
+      position: absolute;
+      display: block;
+      background-color: $border-subtle-01;
+      block-size: $spacing-05;
+      content: '';
+      inline-size: to-rem(1px);
+      inset-block-start: 0;
+      inset-inline-start: to-rem(-9px);
+    }
+  }
+
+  :host(#{$prefix}-combo-box[warn][isClosable]:not([ai-label])),
+  :host(#{$prefix}-combo-box[invalid][isClosable]:not([ai-label])) {
+    .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__menu-icon)
+      .#{$prefix}--list-box__selection::before {
+      position: absolute;
+      background-color: $border-subtle-01;
+      block-size: to-rem(16px);
+      content: '';
+      inline-size: to-rem(1px);
+      margin-inline-end: to-rem(33px);
+    }
+  }
+
+  :host(#{$prefix}-combo-box[isClosable]) {
+    .#{$prefix}--list-box__invalid-icon {
+      /* stylelint-disable-next-line declaration-no-important */
+      inset-inline-end: calc($spacing-10 + 18px) !important;
+    }
+
+    .#{$prefix}--list-box__field .#{$prefix}--text-input {
+      padding-inline-end: to-rem(80px);
+    }
+  }
+
+  :host(#{$prefix}-combo-box[warn][isClosable]),
+  :host(#{$prefix}-combo-box[invalid][isClosable]) {
+    .#{$prefix}--list-box__field .#{$prefix}--text-input {
+      padding-inline-end: to-rem(105px);
+    }
+  }
+
+  :host(#{$prefix}-combo-box[warn][ai-label][isClosable]),
+  :host(#{$prefix}-combo-box[invalid][ai-label][isClosable]) {
+    .#{$prefix}--list-box__field .#{$prefix}--text-input {
+      padding-inline-end: to-rem(141px);
+    }
+
+    .#{$prefix}--list-box__invalid-icon {
+      /* stylelint-disable-next-line declaration-no-important */
+      inset-inline-end: to-rem(116px) !important;
+    }
   }
 }
 

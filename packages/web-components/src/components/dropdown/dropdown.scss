@@ -22,6 +22,17 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/border-radius' as *;
 @use '@carbon/styles/scss/feature-flags' as flags;
 
+$trailing-host: "#{$prefix}-dropdown:not([type='inline'])";
+
+// In v12 the trailing controls of `$trailing-host` are positioned at the end
+// of this file, so the host rules that offset them for v11 must skip it
+// without changing their specificity.
+$legacy-host: '#{$prefix}-dropdown';
+
+@if flags.enabled('enable-v12-release') {
+  $legacy-host: "#{$prefix}-dropdown:where([type='inline'])";
+}
+
 // https://github.com/carbon-design-system/carbon/issues/11408
 @include list-box;
 
@@ -216,7 +227,10 @@ $css--plex: true !default;
   .#{$prefix}--form__helper-text {
     grid-column: 2;
   }
+}
 
+:host(#{$legacy-host}[warn]),
+:host(#{$legacy-host}[invalid]) {
   .#{$prefix}--list-box__field {
     padding-inline-end: $spacing-10;
   }
@@ -268,8 +282,8 @@ $css--plex: true !default;
   text-decoration: none;
 }
 
-:host(#{$prefix}-dropdown[disabled][warn]),
-:host(#{$prefix}-dropdown[disabled][invalid]) {
+:host(#{$legacy-host}[disabled][warn]),
+:host(#{$legacy-host}[disabled][invalid]) {
   .#{$prefix}--list-box__field {
     padding-inline-end: $spacing-10;
   }
@@ -376,8 +390,8 @@ $divider-width: 1px;
   }
 }
 
-:host(#{$prefix}-dropdown[ai-label][warn]:not([disabled]):not([read-only])),
-:host(#{$prefix}-dropdown[ai-label][invalid]:not([disabled]):not([read-only])) {
+:host(#{$legacy-host}[ai-label][warn]:not([disabled]):not([read-only])),
+:host(#{$legacy-host}[ai-label][invalid]:not([disabled]):not([read-only])) {
   .#{$prefix}--list-box {
     .#{$prefix}--list-box__field {
       padding-inline-end: $spacing-12;
@@ -398,6 +412,18 @@ $divider-width: 1px;
   ::slotted(#{$prefix}-ai-label),
   ::slotted(#{$prefix}-slug) {
     inset-inline-end: $spacing-08;
+  }
+}
+
+@if flags.enabled('enable-v12-release') {
+  :host(#{$trailing-host}) {
+    @include trailing-controls(
+      '.#{$prefix}--list-box',
+      $with-status:
+        ':is(.#{$prefix}--dropdown--invalid, .#{$prefix}--dropdown--warn)',
+      $with-decorator: '.#{$prefix}--list-box__wrapper--decorator',
+      $decorator: '::slotted(#{$prefix}-ai-label), ::slotted(#{$prefix}-slug)'
+    );
   }
 }
 

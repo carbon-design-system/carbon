@@ -102,4 +102,10 @@
   .#{$prefix}--combo-box--readonly .#{$prefix}--list-box__selection svg {
     fill: $icon-disabled;
   }
+
+  @if enabled('enable-v12-release') {
+    @include list-box.trailing-controls(
+      '.#{$prefix}--list-box.#{$prefix}--combo-box:not(.#{$prefix}--dropdown, .#{$prefix}--multi-select, .#{$prefix}--list-box__wrapper--fluid *)'
+    );
+  }
 }
