@@ -265,7 +265,7 @@ const TextArea = frFn((props, forwardRef) => {
 
   const isControlled = value != null;
   const [uncontrolledTextCount, setUncontrolledTextCount] = useState(() =>
-    getTextCount(defaultValue || '', counterMode)
+    getTextCount(defaultValue ?? '', counterMode)
   );
   // Keep controlled counts derived so rapid input doesn't queue extra state updates.
   const textCount = isControlled

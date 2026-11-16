@@ -228,7 +228,7 @@ const TextInput = forwardRef<unknown, TextInputProps>(
 
     const isControlled = value != null;
     const [uncontrolledTextCount, setTextCount] = useState(
-      () => (defaultValue || '').toString().length
+      () => (defaultValue ?? '').toString().length
     );
     // Keep controlled counts derived so rapid input doesn't queue extra state updates.
     const textCount = value?.toString().length ?? uncontrolledTextCount;
