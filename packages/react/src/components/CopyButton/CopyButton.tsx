@@ -82,7 +82,7 @@ export default function CopyButton({
   const prefix = usePrefix();
   // Prevent `ButtonBase`'s default `primary` kind from overriding the copy
   // button's default styles.
-  const copyProps = { ...other, kind: kind || null };
+  const copyProps = { ...other, kind: kind ?? null };
   return (
     <LayoutConstraint size={{ default: 'md', max: 'lg' }}>
       <Copy
