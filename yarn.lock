@@ -2146,7 +2146,7 @@ __metadata:
     "@carbon/icons": "npm:^11.92.0"
     "@carbon/layout": "npm:^11.63.0"
     "@carbon/motion": "npm:^11.56.0"
-    "@carbon/themes": "npm:^11.85.0"
+    "@carbon/themes": "npm:^11.86.0-rc.0"
     "@carbon/type": "npm:^11.71.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     fs-extra: "npm:^11.0.0"
@@ -2438,7 +2438,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/react@npm:^1.120.0, @carbon/react@workspace:packages/react":
+"@carbon/react@npm:^1.121.0-rc.0, @carbon/react@workspace:packages/react":
   version: 0.0.0-use.local
   resolution: "@carbon/react@workspace:packages/react"
   dependencies:
@@ -2456,11 +2456,11 @@ __metadata:
     "@carbon/layout": "npm:^11.63.0"
     "@carbon/motion": "npm:^11.56.0"
     "@carbon/pictograms-react": "npm:^11.114.0"
-    "@carbon/styles": "npm:^1.119.0"
+    "@carbon/styles": "npm:^1.120.0-rc.0"
     "@carbon/test-utils": "npm:^10.44.0"
-    "@carbon/themes": "npm:^11.85.0"
-    "@carbon/utilities": "npm:^0.29.0"
-    "@carbon/utilities-react": "workspace:^0.32.0"
+    "@carbon/themes": "npm:^11.86.0-rc.0"
+    "@carbon/utilities": "npm:^0.30.0-rc.0"
+    "@carbon/utilities-react": "workspace:^0.33.0-rc.0"
     "@floating-ui/react": "npm:^0.27.4"
     "@ibm/telemetry-js": "npm:^1.5.0"
     "@rolldown/plugin-babel": "npm:^0.2.0"
@@ -2557,7 +2557,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/styles@npm:^1.119.0, @carbon/styles@workspace:packages/styles":
+"@carbon/styles@npm:^1.120.0-rc.0, @carbon/styles@workspace:packages/styles":
   version: 0.0.0-use.local
   resolution: "@carbon/styles@workspace:packages/styles"
   dependencies:
@@ -2567,7 +2567,7 @@ __metadata:
     "@carbon/layout": "npm:^11.63.0"
     "@carbon/motion": "npm:^11.56.0"
     "@carbon/test-utils": "npm:^10.44.0"
-    "@carbon/themes": "npm:^11.85.0"
+    "@carbon/themes": "npm:^11.86.0-rc.0"
     "@carbon/type": "npm:^11.71.0"
     "@ibm/plex": "npm:6.4.1"
     "@ibm/plex-mono": "npm:2.5.0"
@@ -2637,7 +2637,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/themes@npm:^11.85.0, @carbon/themes@workspace:packages/themes":
+"@carbon/themes@npm:^11.86.0-rc.0, @carbon/themes@workspace:packages/themes":
   version: 0.0.0-use.local
   resolution: "@carbon/themes@workspace:packages/themes"
   dependencies:
@@ -2728,11 +2728,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/utilities-react@workspace:^0.32.0, @carbon/utilities-react@workspace:packages/utilities-react":
+"@carbon/utilities-react@workspace:^0.33.0-rc.0, @carbon/utilities-react@workspace:packages/utilities-react":
   version: 0.0.0-use.local
   resolution: "@carbon/utilities-react@workspace:packages/utilities-react"
   dependencies:
-    "@carbon/utilities": "npm:^0.29.0"
+    "@carbon/utilities": "npm:^0.30.0-rc.0"
     "@ibm/telemetry-js": "npm:^1.6.1"
     rimraf: "npm:^6.0.1"
     tsdown: "npm:^0.23.0"
@@ -2764,7 +2764,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/utilities@npm:^0.29.0, @carbon/utilities@workspace:packages/utilities":
+"@carbon/utilities@npm:^0.30.0-rc.0, @carbon/utilities@workspace:packages/utilities":
   version: 0.0.0-use.local
   resolution: "@carbon/utilities@workspace:packages/utilities"
   dependencies:
@@ -2827,8 +2827,8 @@ __metadata:
     "@carbon/layout": "npm:^11.63.0"
     "@carbon/motion": "npm:^11.56.0"
     "@carbon/pictograms": "npm:^12.88.0"
-    "@carbon/styles": "npm:^1.119.0"
-    "@carbon/utilities": "npm:^0.29.0"
+    "@carbon/styles": "npm:^1.120.0-rc.0"
+    "@carbon/utilities": "npm:^0.30.0-rc.0"
     "@floating-ui/dom": "npm:^1.6.3"
     "@ibm/telemetry-js": "npm:^1.10.2"
     "@juggle/resize-observer": "npm:^3.4.0"
@@ -10474,8 +10474,8 @@ __metadata:
     "@babel/plugin-transform-react-constant-elements": "npm:^8.0.0"
     "@babel/preset-env": "npm:^8.0.0"
     "@babel/preset-react": "npm:^8.0.0"
-    "@carbon/react": "npm:^1.120.0"
-    "@carbon/styles": "npm:^1.119.0"
+    "@carbon/react": "npm:^1.121.0-rc.0"
+    "@carbon/styles": "npm:^1.120.0-rc.0"
     "@carbon/test-utils": "npm:^10.44.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     babel-plugin-dev-expression: "npm:^0.2.3"
@@ -10498,7 +10498,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "carbon-components@workspace:packages/carbon-components"
   dependencies:
-    "@carbon/styles": "npm:^1.119.0"
+    "@carbon/styles": "npm:^1.120.0-rc.0"
     "@carbon/test-utils": "npm:^10.44.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     chalk: "npm:6.0.1"
