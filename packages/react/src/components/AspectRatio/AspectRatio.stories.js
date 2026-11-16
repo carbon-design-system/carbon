@@ -11,6 +11,18 @@ import { Grid, Column } from '../Grid';
 import { AspectRatio } from './';
 import mdx from './AspectRatio.mdx';
 
+const ratioOptions = [
+  '16x9',
+  '9x16',
+  '2x1',
+  '1x2',
+  '4x3',
+  '3x4',
+  '3x2',
+  '2x3',
+  '1x1',
+];
+
 export default {
   title: 'Components/AspectRatio',
   component: AspectRatio,
@@ -30,21 +42,38 @@ export default {
   },
 };
 
-export const Default = (args) => {
+export const Default = ({
+  ratio,
+  ratioSm,
+  ratioMd,
+  ratioLg,
+  ratioXlg,
+  ratioMax,
+  ...args
+}) => {
+  const aspectRatioProps = {
+    ratio,
+    ratioSm,
+    ratioMd,
+    ratioLg,
+    ratioXlg,
+    ratioMax,
+  };
+
   return (
     <div className="aspect-ratio-story">
       <Grid {...args}>
         <Column sm={1} md={2} lg={4}>
-          <AspectRatio {...args}>Content</AspectRatio>
+          <AspectRatio {...aspectRatioProps}>Content</AspectRatio>
         </Column>
         <Column sm={1} md={2} lg={4}>
-          <AspectRatio {...args}>Content</AspectRatio>
+          <AspectRatio {...aspectRatioProps}>Content</AspectRatio>
         </Column>
         <Column sm={1} md={2} lg={4}>
-          <AspectRatio {...args}>Content</AspectRatio>
+          <AspectRatio {...aspectRatioProps}>Content</AspectRatio>
         </Column>
         <Column sm={1} md={2} lg={4}>
-          <AspectRatio {...args}>Content</AspectRatio>
+          <AspectRatio {...aspectRatioProps}>Content</AspectRatio>
         </Column>
       </Grid>
     </div>
@@ -65,7 +94,52 @@ Default.argTypes = {
     control: {
       type: 'select',
     },
-    options: ['16x9', '9x16', '2x1', '1x2', '4x3', '3x4', '1x1'],
+    options: ratioOptions,
+    table: {
+      category: 'AspectRatio',
+    },
+  },
+  ratioSm: {
+    control: {
+      type: 'select',
+    },
+    options: ratioOptions,
+    table: {
+      category: 'AspectRatio',
+    },
+  },
+  ratioMd: {
+    control: {
+      type: 'select',
+    },
+    options: ratioOptions,
+    table: {
+      category: 'AspectRatio',
+    },
+  },
+  ratioLg: {
+    control: {
+      type: 'select',
+    },
+    options: ratioOptions,
+    table: {
+      category: 'AspectRatio',
+    },
+  },
+  ratioXlg: {
+    control: {
+      type: 'select',
+    },
+    options: ratioOptions,
+    table: {
+      category: 'AspectRatio',
+    },
+  },
+  ratioMax: {
+    control: {
+      type: 'select',
+    },
+    options: ratioOptions,
     table: {
       category: 'AspectRatio',
     },

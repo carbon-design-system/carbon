@@ -20,6 +20,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 - [Component API](#component-api)
   - [AspectRatio as](#aspectratio-as)
   - [AspectRatio className](#aspectratio-classname)
+  - [Responsive ratios](#responsive-ratios)
 - [Feedback](#feedback)
 
 {/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
@@ -48,6 +49,11 @@ determined by the ratio that you specified.
 
 To see the full list of ratios supported by the `ratio` prop, check out the prop
 table in the [Component API](#component-api) section below.
+
+Aspect ratios can also change at Carbon grid breakpoints with the `ratioSm`,
+`ratioMd`, `ratioLg`, `ratioXlg`, and `ratioMax` props. When responsive ratio
+props are provided, each value applies from that breakpoint upward until another
+breakpoint ratio is set.
 
 ## Component API
 
@@ -83,6 +89,20 @@ function Article({ children, ...rest }) {
 
 The `className` prop passed into `AspectRatio` will be forwarded to the
 outermost node in the component.
+
+### Responsive ratios
+
+Use the responsive ratio props when the same container needs a different
+proportion across grid breakpoints:
+
+```jsx
+<AspectRatio ratioSm="1x1" ratioMd="4x3" ratioLg="16x9">
+  Your content
+</AspectRatio>
+```
+
+The `ratio` prop remains the default ratio. If `ratioSm` is provided, it is used
+as the small breakpoint ratio instead.
 
 ## Feedback
 

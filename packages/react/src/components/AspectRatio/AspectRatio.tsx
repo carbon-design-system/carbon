@@ -10,6 +10,20 @@ import PropTypes from 'prop-types';
 import React, { PropsWithChildren, HTMLElementType } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 
+const aspectRatios = [
+  '16x9',
+  '9x16',
+  '2x1',
+  '1x2',
+  '4x3',
+  '3x4',
+  '3x2',
+  '2x3',
+  '1x1',
+] as const;
+
+type AspectRatioRatio = (typeof aspectRatios)[number];
+
 export interface AspectRatioProps {
   /**
    * Provide a custom component or string to be rendered as
@@ -34,16 +48,32 @@ export interface AspectRatioProps {
    * container. This will  determine what aspect ratio your content
    * will be displayed in.
    */
-  ratio?:
-    | '1x1'
-    | '2x3'
-    | '3x2'
-    | '3x4'
-    | '4x3'
-    | '1x2'
-    | '2x1'
-    | '9x16'
-    | '16x9';
+  ratio?: AspectRatioRatio;
+
+  /**
+   * Specify the ratio to be used at the small breakpoint.
+   */
+  ratioSm?: AspectRatioRatio;
+
+  /**
+   * Specify the ratio to be used at the medium breakpoint.
+   */
+  ratioMd?: AspectRatioRatio;
+
+  /**
+   * Specify the ratio to be used at the large breakpoint.
+   */
+  ratioLg?: AspectRatioRatio;
+
+  /**
+   * Specify the ratio to be used at the x-large breakpoint.
+   */
+  ratioXlg?: AspectRatioRatio;
+
+  /**
+   * Specify the ratio to be used at the max breakpoint.
+   */
+  ratioMax?: AspectRatioRatio;
 }
 
 /**
@@ -57,13 +87,25 @@ const AspectRatio = ({
   className: containerClassName,
   children,
   ratio = '1x1',
+  ratioSm,
+  ratioMd,
+  ratioLg,
+  ratioXlg,
+  ratioMax,
   ...rest
 }: PropsWithChildren<AspectRatioProps>) => {
   const prefix = usePrefix();
+  const baseRatio = ratioSm ?? ratio;
   const className = cx(
     containerClassName,
     `${prefix}--aspect-ratio`,
-    `${prefix}--aspect-ratio--${ratio}`
+    `${prefix}--aspect-ratio--${baseRatio}`,
+    {
+      [`${prefix}--aspect-ratio--md--${ratioMd}`]: ratioMd,
+      [`${prefix}--aspect-ratio--lg--${ratioLg}`]: ratioLg,
+      [`${prefix}--aspect-ratio--xlg--${ratioXlg}`]: ratioXlg,
+      [`${prefix}--aspect-ratio--max--${ratioMax}`]: ratioMax,
+    }
   );
   return (
     <BaseComponent className={className} {...rest}>
@@ -98,17 +140,32 @@ AspectRatio.propTypes = {
    * Specify the ratio to be used by the aspect ratio container. This will
    * determine what aspect ratio your content will be displayed in.
    */
-  ratio: PropTypes.oneOf([
-    '16x9',
-    '9x16',
-    '2x1',
-    '1x2',
-    '4x3',
-    '3x4',
-    '3x2',
-    '2x3',
-    '1x1',
-  ]),
+  ratio: PropTypes.oneOf(aspectRatios),
+
+  /**
+   * Specify the ratio to be used at the small breakpoint.
+   */
+  ratioSm: PropTypes.oneOf(aspectRatios),
+
+  /**
+   * Specify the ratio to be used at the medium breakpoint.
+   */
+  ratioMd: PropTypes.oneOf(aspectRatios),
+
+  /**
+   * Specify the ratio to be used at the large breakpoint.
+   */
+  ratioLg: PropTypes.oneOf(aspectRatios),
+
+  /**
+   * Specify the ratio to be used at the x-large breakpoint.
+   */
+  ratioXlg: PropTypes.oneOf(aspectRatios),
+
+  /**
+   * Specify the ratio to be used at the max breakpoint.
+   */
+  ratioMax: PropTypes.oneOf(aspectRatios),
 };
 
 export default AspectRatio;
