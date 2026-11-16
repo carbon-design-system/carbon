@@ -90,7 +90,7 @@ export interface IconIndicatorProps {
   size?: 16 | 20;
 
   /**
-   * Specify the tab index of the tooltip trigger in compact mode.
+   * The tooltip trigger's tab order in compact mode.
    */
   tabIndex?: number;
 }
@@ -210,6 +210,10 @@ IconIndicator.propTypes = {
    * Specify the size of the Icon Indicator. Defaults to 16.
    */
   size: PropTypes.oneOf([16, 20]),
+
+  /**
+   * The tooltip trigger's tab order in compact mode.
+   */
   tabIndex: PropTypes.number,
 };
 

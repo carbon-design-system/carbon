@@ -118,7 +118,7 @@ export interface ShapeIndicatorProps {
   textSize?: 12 | 14;
 
   /**
-   * Specify the tab index of the tooltip trigger in compact mode.
+   * The tooltip trigger's tab order in compact mode.
    */
   tabIndex?: number;
 }
@@ -238,6 +238,10 @@ ShapeIndicator.propTypes = {
    * Specify the text size of the Shape Indicator. Defaults to 12.
    */
   textSize: PropTypes.oneOf([12, 14]),
+
+  /**
+   * The tooltip trigger's tab order in compact mode.
+   */
   tabIndex: PropTypes.number,
 };
 
