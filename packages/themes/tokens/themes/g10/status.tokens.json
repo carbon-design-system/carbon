@@ -14,7 +14,7 @@
   "status-orange-outline": {
     "$type": "color",
     "$value": "{orange.60}",
-    "$description": "Outline/border color for orange status indicators in light themes. Provides visual definition for outlined warning status variants."
+    "$description": "Outline/border color for orange status indicators. Darker than the fill in light themes so the indicator keeps enough contrast; matches the fill in dark themes."
   },
   "status-yellow": {
     "$type": "color",
@@ -24,7 +24,7 @@
   "status-yellow-outline": {
     "$type": "color",
     "$value": "{yellow.60}",
-    "$description": "Outline/border color for yellow status indicators in light themes. Provides visual definition for outlined caution status variants."
+    "$description": "Outline/border color for yellow status indicators. Darker than the fill in light themes so the indicator keeps enough contrast; matches the fill in dark themes."
   },
   "status-purple": {
     "$type": "color",
