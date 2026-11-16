@@ -1,31 +1,25 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 /**
- * Determines whether a cell value has text that a filter can match. Without this
- * check, empty cells and values without a meaningful string form (e.g., React
- * elements) would match on their `String()` output, such as `null`, `undefined`,
- * or `[object Object]`.
+ * Converts a cell value to searchable text. Only primitive values with an
+ * unambiguous text form are supported, so no user-defined or inherited
+ * `toString` method is ever invoked. Returns `null` for everything else.
  */
-const hasFilterableText = (value: unknown) => {
-  if (value === null || value === undefined || typeof value === 'boolean') {
-    return false;
+const getFilterableText = (value: unknown): string | null => {
+  if (
+    typeof value === 'string' ||
+    typeof value === 'number' ||
+    typeof value === 'bigint'
+  ) {
+    return String(value);
   }
 
-  if (typeof value !== 'object') {
-    return true;
-  }
-
-  // Objects without a `toString` method (e.g., `Object.create(null)`) cannot be
-  // converted with `String()`.
-  return (
-    typeof value.toString === 'function' &&
-    value.toString !== Object.prototype.toString
-  );
+  return null;
 };
 
 /**
@@ -58,11 +52,9 @@ export const defaultFilterRows = ({
   return rowIds.filter((rowId) =>
     headers.some(({ key }) => {
       const cellId = getCellId(rowId, key);
-      const value = cellsById[cellId]?.value;
+      const text = getFilterableText(cellsById[cellId]?.value);
 
-      if (!hasFilterableText(value)) return false;
-
-      return String(value).toLowerCase().includes(normalizedInput);
+      return text?.toLowerCase().includes(normalizedInput) ?? false;
     })
   );
 };

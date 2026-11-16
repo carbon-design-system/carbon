@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -105,19 +105,36 @@ describe('defaultFilterRows', () => {
     expect(result).toEqual([]);
   });
 
-  it('should match objects that define their own string form', () => {
+  it('should not call the string conversion of objects', () => {
+    const toString = jest.fn(() => 'Allison');
+
     const result = defaultFilterRows({
       ...defaultOptions,
       rowIds: ['1', '2'],
       cellsById: {
         ...cellsById,
-        '1-name': { value: ['Alice', 'Allison'] },
-        '2-name': { value: { toString: () => 'Allison' } },
+        '1-name': { value: { toString } },
+        '2-name': { value: ['Alice', 'Allison'] },
       },
       inputValue: 'allison',
     });
 
-    expect(result).toEqual(['1', '2']);
+    expect(result).toEqual([]);
+    expect(toString).not.toHaveBeenCalled();
+  });
+
+  it('should match bigint values', () => {
+    const result = defaultFilterRows({
+      ...defaultOptions,
+      rowIds: ['1'],
+      cellsById: {
+        ...cellsById,
+        '1-age': { value: BigInt(42) },
+      },
+      inputValue: '42',
+    });
+
+    expect(result).toEqual(['1']);
   });
 
   it('should match the number zero', () => {
