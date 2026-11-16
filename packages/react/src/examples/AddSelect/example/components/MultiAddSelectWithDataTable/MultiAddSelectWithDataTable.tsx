@@ -31,8 +31,9 @@ import {
   Tearsheet,
   AddSelectData,
   AddSelectItem,
-  NoDataEmptyState,
 } from '@carbon/react';
+import { EmptyState } from '../EmptyState/EmptyState';
+import noDataIllustration from '../../assets/no-data.svg';
 import './MultiAddSelectWithDataTable.scss';
 
 const blockClass = `multi-add-select-data-table-pattern`;
@@ -465,8 +466,8 @@ export const MultiAddSelectWithDataTable = forwardRef<
                       <div
                         style={{ marginBlockStart: '3rem', padding: '1rem' }}
                       >
-                        <NoDataEmptyState
-                          illustrationTheme="light"
+                        <EmptyState
+                          illustration={noDataIllustration}
                           size="sm"
                           title={noSelectionTitle}
                           subtitle={noSelectionDescription}

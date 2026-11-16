@@ -111,6 +111,33 @@ const config: StorybookConfig = {
       : viteConfig;
 
     return mergeConfig(baseViteConfig, {
+      resolve: {
+        // WHY: The migrated ibm-products examples (AddSelect, Tearsheet,
+        // PageHeader, Coachmark, ...) import their components from
+        // `@carbon/react`, exactly as consumers will once v12 is published.
+        // Those components are still commented out in `src/index.ts` (see the
+        // "uncomment in v12" TODOs), so the real `@carbon/react` entrypoint
+        // does not export them yet and the examples would fail to resolve.
+        //
+        // HOW: In this v12 Storybook only, the bare `@carbon/react` specifier
+        // is aliased to `carbon-react-v12.ts`, a shim that re-exports
+        // `src/index` plus the pending ibm-products exports. The public API of
+        // `@carbon/react` and the v11 Storybook are untouched, and the example
+        // source does not need to change. Only the bare specifier is aliased,
+        // so sub-paths like `@carbon/react/icons` still resolve normally.
+        //
+        // TODO (after the v12 migration): once every pending component is
+        // exported from `src/index.ts`, remove this alias, delete
+        // `carbon-react-v12.ts`, and drop the `resolve.alias` block. Until
+        // then, remove each export from the shim as it is enabled in
+        // `src/index.ts`.
+        alias: [
+          {
+            find: /^@carbon\/react$/,
+            replacement: path.join(configDir, 'carbon-react-v12.ts'),
+          },
+        ],
+      },
       css: {
         preprocessorOptions: {
           scss: {

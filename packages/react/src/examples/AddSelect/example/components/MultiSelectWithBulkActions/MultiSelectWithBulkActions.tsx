@@ -38,9 +38,10 @@ import {
   Tearsheet,
   AddSelectData,
   AddSelectItem,
-  NoDataEmptyState,
   StackProvider,
 } from '@carbon/react';
+import { EmptyState } from '../EmptyState/EmptyState';
+import noDataIllustration from '../../assets/no-data.svg';
 import { Edit, TrashCan } from '@carbon/icons-react';
 import './MultiSelectWithBulkActions.scss';
 
@@ -581,8 +582,8 @@ export const MultiSelectWithBulkActions = forwardRef<
                       <div
                         style={{ marginBlockStart: '3rem', padding: '1rem' }}
                       >
-                        <NoDataEmptyState
-                          illustrationTheme="light"
+                        <EmptyState
+                          illustration={noDataIllustration}
                           size="sm"
                           title={noSelectionTitle}
                           subtitle={noSelectionDescription}

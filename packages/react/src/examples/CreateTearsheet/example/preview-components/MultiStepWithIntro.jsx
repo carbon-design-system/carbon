@@ -21,10 +21,11 @@ import {
   NumberInput,
   AILabel,
   AILabelContent,
-  NoDataEmptyState,
 } from '@carbon/react';
 import { StepProvider, useStepContext } from '@carbon/utilities-react';
 import cx from 'classnames';
+import { EmptyState } from '../components/EmptyState';
+import noDataIllustration from '../assets/no-data.svg';
 import { CreateTearsheet } from '../components/CreateTearsheet';
 import { CreateTearsheetStep } from '../components/CreateTearsheetStep';
 
@@ -52,7 +53,7 @@ const IntroStep = ({ selectedCategory, setSelectedCategory }) => {
           id="tile-1"
           tabIndex={selectedCategory === 'standard' ? 0 : -1}
         >
-          <NoDataEmptyState />
+          <EmptyState illustration={noDataIllustration} size="sm" />
           <span className={`tearsheet-create-multi-step--custom-tile-label`}>
             Standard
           </span>
@@ -63,7 +64,7 @@ const IntroStep = ({ selectedCategory, setSelectedCategory }) => {
           id="tile-2"
           tabIndex={selectedCategory === 'premium' ? 0 : -1}
         >
-          <NoDataEmptyState size="lg" />
+          <EmptyState illustration={noDataIllustration} />
           <span className={`tearsheet-create-multi-step--custom-tile-label`}>
             Premium
           </span>
@@ -74,7 +75,7 @@ const IntroStep = ({ selectedCategory, setSelectedCategory }) => {
           id="tile-3"
           tabIndex={selectedCategory === 'plus' ? 0 : -1}
         >
-          <NoDataEmptyState size="lg" />
+          <EmptyState illustration={noDataIllustration} />
           <span className={`tearsheet-create-multi-step--custom-tile-label`}>
             Plus
           </span>

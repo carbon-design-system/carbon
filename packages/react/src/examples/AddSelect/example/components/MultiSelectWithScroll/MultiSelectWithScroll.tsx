@@ -23,8 +23,9 @@ import {
   Tearsheet,
   AddSelectData,
   AddSelectItem,
-  NoDataEmptyState,
 } from '@carbon/react';
+import { EmptyState } from '../EmptyState/EmptyState';
+import noDataIllustration from '../../assets/no-data.svg';
 import './MultiSelectWithScroll.scss';
 
 const blockClass = `multi-select-with-scroll-pattern`;
@@ -465,8 +466,8 @@ export const MultiSelectWithScroll = forwardRef<
                       <div
                         style={{ marginBlockStart: '3rem', padding: '1rem' }}
                       >
-                        <NoDataEmptyState
-                          illustrationTheme="light"
+                        <EmptyState
+                          illustration={noDataIllustration}
                           size="sm"
                           title={noSelectionTitle}
                           subtitle={noSelectionDescription}

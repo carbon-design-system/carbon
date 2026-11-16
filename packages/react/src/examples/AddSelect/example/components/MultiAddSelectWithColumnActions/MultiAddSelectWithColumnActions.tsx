@@ -27,8 +27,9 @@ import {
   Tearsheet,
   AddSelectData,
   AddSelectItem,
-  NoDataEmptyState,
 } from '@carbon/react';
+import { EmptyState } from '../EmptyState/EmptyState';
+import noDataIllustration from '../../assets/no-data.svg';
 import { ArrowsVertical, Filter } from '@carbon/react/icons';
 import './MultiAddSelectWithColumnActions.scss';
 
@@ -792,8 +793,8 @@ export const MultiAddSelectWithColumnActions = forwardRef<
                       <div
                         style={{ marginBlockStart: '3rem', padding: '1rem' }}
                       >
-                        <NoDataEmptyState
-                          illustrationTheme="light"
+                        <EmptyState
+                          illustration={noDataIllustration}
                           size="sm"
                           title={noSelectionTitle}
                           subtitle={noSelectionDescription}

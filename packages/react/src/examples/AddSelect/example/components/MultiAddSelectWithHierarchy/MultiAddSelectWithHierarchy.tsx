@@ -22,8 +22,9 @@ import {
   Tearsheet,
   AddSelectData,
   AddSelectItem,
-  NoDataEmptyState,
 } from '@carbon/react';
+import { EmptyState } from '../EmptyState/EmptyState';
+import noDataIllustration from '../../assets/no-data.svg';
 import './MultiAddSelectWithHierarchy.scss';
 
 const blockClass = `multi-add-select-hierarchy-pattern`;
@@ -789,8 +790,8 @@ export const MultiAddSelectWithHierarchy = forwardRef<
                       <div
                         style={{ marginBlockStart: '3rem', padding: '1rem' }}
                       >
-                        <NoDataEmptyState
-                          illustrationTheme="light"
+                        <EmptyState
+                          illustration={noDataIllustration}
                           size="sm"
                           title={noSelectionTitle}
                           subtitle={noSelectionDescription}

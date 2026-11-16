@@ -24,8 +24,9 @@ import {
   Tearsheet,
   AddSelectData,
   AddSelectItem,
-  NoDataEmptyState,
 } from '@carbon/react';
+import { EmptyState } from '../EmptyState/EmptyState';
+import noDataIllustration from '../../assets/no-data.svg';
 import './NonHierarchicalWithPeekInsideItem.scss';
 
 const blockClass = `non-hierarchical-peek-inside-pattern`;
@@ -531,8 +532,8 @@ export const NonHierarchicalWithPeekInsideItem = forwardRef<
                   selectedItemCount={selectedItemsForDisplay.length}
                   emptyState={
                     <div style={{ marginBlockStart: '3rem', padding: '1rem' }}>
-                      <NoDataEmptyState
-                        illustrationTheme="light"
+                      <EmptyState
+                        illustration={noDataIllustration}
                         size="sm"
                         title={noSelectionTitle}
                         subtitle={noSelectionDescription}
