@@ -701,7 +701,7 @@ class CDSOverflowMenu
     }
 
     const { left, right, top, bottom } = trigger.getBoundingClientRect();
-    menu.x = [left, right];
+    menu.x = menu._toInlineRange([left, right]);
     menu.y = [top, bottom];
   }
 
