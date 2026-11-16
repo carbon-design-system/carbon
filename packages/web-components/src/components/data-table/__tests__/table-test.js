@@ -125,7 +125,7 @@ describe('cds-table', () => {
     const headerCell = el.querySelector('cds-table-header-cell');
     const sortedListener = oneEvent(el, 'cds-table-sorted');
 
-    headerCell?.dispatchEvent(
+    headerCell.dispatchEvent(
       new CustomEvent('cds-table-header-cell-sort', {
         bubbles: true,
         composed: true,
@@ -141,7 +141,7 @@ describe('cds-table', () => {
     await el.updateComplete;
 
     const cellText = [...el.querySelectorAll('cds-table-cell')].map((cell) =>
-      cell.textContent?.trim()
+      cell.textContent.trim()
     );
     expect(cellText).to.deep.equal([
       '-10',
@@ -163,13 +163,21 @@ describe('cds-table', () => {
     expect(el.customSortRow('1.0', '1', collator)).to.equal(0);
   });
 
+  it('should compare exponent and hexadecimal text by their numeric value', () => {
+    const el = document.createElement('cds-table');
+    const collator = new Intl.Collator('en');
+
+    expect(el.customSortRow('1e3', '999', collator)).to.equal(1);
+    expect(el.customSortRow('0x10', '9', collator)).to.equal(1);
+  });
+
   it('should keep sorting non-numeric text with the collator', () => {
     const el = document.createElement('cds-table');
     const collator = new Intl.Collator('en');
 
-    expect(el.customSortRow('10 MB', '9 MB', collator)).to.be.lessThan(0);
-    expect(el.customSortRow('b', 'a', collator)).to.be.greaterThan(0);
-    expect(el.customSortRow('', '5', collator)).to.be.lessThan(0);
+    expect(el.customSortRow('10 MB', '9 MB', collator)).to.equal(-1);
+    expect(el.customSortRow('b', 'a', collator)).to.equal(1);
+    expect(el.customSortRow('', '5', collator)).to.equal(-1);
   });
 
   it('should filter rows when search input event is fired', async () => {

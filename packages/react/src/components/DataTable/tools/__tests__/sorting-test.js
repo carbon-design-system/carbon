@@ -228,6 +228,11 @@ describe('compare', () => {
     expect(compare(-5, '-10')).toEqual(1);
   });
 
+  it('should compare exponent and hexadecimal strings by their numeric value', () => {
+    expect(compare('1e3', '999')).toEqual(1);
+    expect(compare('0x10', '9')).toEqual(1);
+  });
+
   it('should compare strings that start with a number by that number', () => {
     expect(compare('10 MB', '9 MB')).toEqual(1);
     expect(compare('9 MB', '10 MB')).toEqual(-1);
