@@ -88,6 +88,11 @@ export interface IconIndicatorProps {
    * Specify the size of the Icon Indicator. Defaults to 16.
    */
   size?: 16 | 20;
+
+  /**
+   * The tooltip trigger's tab order in compact mode.
+   */
+  tabIndex?: number;
 }
 
 export const IconIndicator = React.forwardRef(
@@ -101,6 +106,7 @@ export const IconIndicator = React.forwardRef(
       kind,
       label,
       size = 16,
+      tabIndex,
     }: IconIndicatorProps,
     ref: React.Ref<HTMLDivElement>
   ) => {
@@ -127,7 +133,8 @@ export const IconIndicator = React.forwardRef(
         autoAlign={autoAlign}
         openOnHover
         definition={label}
-        triggerClassName={`${prefix}--icon-indicator__button`}>
+        triggerClassName={`${prefix}--icon-indicator__button`}
+        tabIndex={tabIndex}>
         {iconElement}
         <span className={`${prefix}--visually-hidden`}>
           {iconDescription ?? label}
@@ -203,6 +210,11 @@ IconIndicator.propTypes = {
    * Specify the size of the Icon Indicator. Defaults to 16.
    */
   size: PropTypes.oneOf([16, 20]),
+
+  /**
+   * The tooltip trigger's tab order in compact mode.
+   */
+  tabIndex: PropTypes.number,
 };
 
 export default IconIndicator;
