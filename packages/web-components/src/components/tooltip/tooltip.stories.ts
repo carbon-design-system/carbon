@@ -52,7 +52,7 @@ const controls = {
   closeOnActivation: {
     control: 'boolean',
     description:
-      'Controls whether the tooltip closes on a click or when Enter, Space, or Escape is pressed.',
+      'Controls whether the tooltip closes when the trigger is activated with click, Enter, or Space. Escape always dismisses the tooltip, regardless of this setting.',
   },
   defaultOpen: {
     control: 'boolean',
