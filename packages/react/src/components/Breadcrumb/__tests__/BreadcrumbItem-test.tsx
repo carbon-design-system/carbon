@@ -5,8 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it, jest } from '@jest/globals';
+import '@testing-library/jest-dom/jest-globals';
 import { render, screen } from '@testing-library/react';
-import React from 'react';
+import React, { type RefCallback } from 'react';
 import { BreadcrumbItem } from '../../Breadcrumb';
 import OverflowMenu from '../../OverflowMenu';
 import OverflowMenuItem from '../../OverflowMenuItem';
@@ -16,14 +18,13 @@ const prefix = 'cds';
 describe('BreadcrumbItem', () => {
   describe('Component API', () => {
     it('should accept a `ref` for the outermost node', () => {
-      const ref = jest.fn(() => React.createRef());
+      const ref = jest.fn<RefCallback<HTMLLIElement>>();
       const { container } = render(
         <BreadcrumbItem href="/test" ref={ref}>
           Test
         </BreadcrumbItem>
       );
-      expect(ref).toHaveBeenCalled();
-      expect(ref).toHaveBeenCalledWith(container.firstChild);
+      expect(ref.mock.calls).toContainEqual([container.firstChild]);
     });
   });
 

@@ -66,7 +66,7 @@ export interface FileUploaderItemProps extends HTMLAttributes<HTMLSpanElement> {
    * Specify the size of the FileUploaderButton, from a list of available
    * sizes.
    */
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'md' | 'lg';
 
   /**
    * Status of the file upload
@@ -98,9 +98,10 @@ function FileUploaderItem({
   const generatedId = useId();
   const { current: id } = useRef(uuid || generatedId);
   const classes = cx(`${prefix}--file__selected-file`, className, {
+    [`${prefix}--layout--size-${size}`]: size,
     [`${prefix}--file__selected-file--invalid`]: invalid,
-    [`${prefix}--file__selected-file--md`]: size === 'md',
-    [`${prefix}--file__selected-file--sm`]: size === 'sm',
+    [`${prefix}--file__selected-file--md`]: size === 'md', // TODO: V12 - Remove these legacy size classes.
+    [`${prefix}--file__selected-file--sm`]: size === 'sm', // TODO: V12 - Remove these legacy size classes.
     [`${prefix}--file__selected-file--disabled`]: disabled,
   });
   const isInvalid = invalid
@@ -240,7 +241,7 @@ FileUploaderItem.propTypes = {
    * Specify the size of the FileUploaderButton, from a list of available
    * sizes.
    */
-  size: PropTypes.oneOf(['sm', 'md', 'lg']),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
 
   /**
    * Status of the file upload

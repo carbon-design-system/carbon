@@ -588,6 +588,107 @@ describe('cds-overflow-menu', () => {
       expect(menuSurface?.style.top).to.equal('');
     });
 
+    ['ltr', 'rtl'].forEach((dir) => {
+      it(`should align the menu with the inline start edge of the trigger in ${dir.toUpperCase()}`, async () => {
+        const originalDir = document.dir;
+        document.dir = dir;
+
+        try {
+          const featureFlag = await fixture(html`
+            <feature-flags enable-v12-overflowmenu="true">
+              <div style="padding-inline-start: 300px">
+                <cds-overflow-menu label="Actions">
+                  <cds-menu>
+                    <cds-menu-item label="Stop app"></cds-menu-item>
+                  </cds-menu>
+                </cds-overflow-menu>
+              </div>
+            </feature-flags>
+          `);
+          const el = featureFlag.querySelector('cds-overflow-menu');
+
+          el.open = true;
+          await el.updateComplete;
+
+          const menu = el.querySelector('cds-menu');
+          await menu.updateComplete;
+
+          const triggerRect = el.shadowRoot
+            .querySelector('button')
+            .getBoundingClientRect();
+          const menuRect = menu.shadowRoot
+            .querySelector('.cds--menu')
+            .getBoundingClientRect();
+
+          if (dir === 'rtl') {
+            expect(menuRect.right).to.equal(triggerRect.right);
+          } else {
+            expect(menuRect.left).to.equal(triggerRect.left);
+          }
+          expect(menuRect.top).to.equal(triggerRect.bottom);
+        } finally {
+          document.dir = originalDir;
+        }
+      });
+    });
+
+    const renderNestedOverflowMenu = () =>
+      fixture(html`
+        <feature-flags enable-v12-overflowmenu="true">
+          <cds-overflow-menu label="Actions" size="md">
+            <cds-menu>
+              <cds-menu-item label="Level 1">
+                <cds-menu-item-group slot="submenu">
+                  <cds-menu-item label="Level 2"></cds-menu-item>
+                </cds-menu-item-group>
+              </cds-menu-item>
+            </cds-menu>
+          </cds-overflow-menu>
+        </feature-flags>
+      `);
+
+    it('should render nested submenus with the overflow menu size', async () => {
+      const featureFlag = await renderNestedOverflowMenu();
+      const el = featureFlag.querySelector('cds-overflow-menu');
+
+      el.open = true;
+      await el.updateComplete;
+
+      const menu = el.querySelector('cds-menu');
+      await menu.updateComplete;
+
+      const level1 = menu.querySelector('cds-menu-item[label="Level 1"]');
+      const level2 = menu.querySelector('cds-menu-item[label="Level 2"]');
+
+      level1._openSubmenu();
+      await level1.updateComplete;
+
+      const submenu = level1.shadowRoot.querySelector('cds-menu');
+      await submenu.updateComplete;
+
+      expect(submenu.size).to.equal('md');
+      expect(level2.getBoundingClientRect().height).to.equal(
+        level1.getBoundingClientRect().height
+      );
+    });
+
+    it('should update nested submenus when the overflow menu size changes', async () => {
+      const featureFlag = await renderNestedOverflowMenu();
+      const el = featureFlag.querySelector('cds-overflow-menu');
+      const menu = el.querySelector('cds-menu');
+      await menu.updateComplete;
+
+      el.size = 'xs';
+      await el.updateComplete;
+      await menu.updateComplete;
+
+      const level1 = menu.querySelector('cds-menu-item[label="Level 1"]');
+      await level1.updateComplete;
+
+      expect(menu.size).to.equal('xs');
+      expect(level1.shadowRoot.querySelector('cds-menu').size).to.equal('xs');
+    });
+
     it('should apply floating UI styles when dynamic floating styles are enabled', async () => {
       const featureFlag = await fixture(html`
         <feature-flags
