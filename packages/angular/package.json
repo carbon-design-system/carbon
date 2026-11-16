@@ -1,7 +1,7 @@
 {
   "name": "@carbon/angular",
   "description": "Angular components for the Carbon Design System",
-  "version": "1.0.0-alpha.0",
+  "version": "1.0.0-alpha.1",
   "type": "module",
   "license": "Apache-2.0",
   "repository": {
