@@ -296,6 +296,7 @@ class CDSTreeNode extends LitElement {
     super.connectedCallback();
     this.addEventListener('focusin', this._handleNodeFocus);
     this.addEventListener('focusout', this._handleNodeFocus);
+    // Reattach the resize observer after reconnection.
     this.requestUpdate();
 
     // Detect children on first render
