@@ -1073,7 +1073,9 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
               readOnly={readOnly}
               step={step}
               type={type}
-              value={type === 'number' ? value : inputValue}
+              value={
+                type === 'number' ? (controlledValue ?? value) : inputValue
+              }
             />
             {slug ? (
               normalizedDecorator
