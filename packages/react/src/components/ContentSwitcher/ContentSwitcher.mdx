@@ -9,6 +9,7 @@ import { ContentSwitcher } from '../ContentSwitcher';
 import Switch from '../Switch';
 import * as ContentSwitcherStories from './ContentSwitcher.stories.js';
 import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+import { TableOfContents, Workspace, ViewMode_2 } from '@carbon/icons-react';
 
 <Meta isTemplate />
 
@@ -25,6 +26,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 ## Table of Contents
 
 - [Overview](#overview)
+- [Icon And Text](#icon-and-text)
 - [Icon Only](#icon-only)
 - [Icon Only With Layer](#icon-only-with-layer)
 - [With Layer](#with-layer)
@@ -37,6 +39,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   - [Switch `className`](#switch-classname)
   - [Switch `disabled`](#switch-disabled)
   - [Switch `index`, `name` and `text`](#switch-index-name-and-text)
+  - [Switch `renderIcon`](#switch-rendericon)
 - [References](#references)
   - [Accessibility concerns](#accessibility-concerns)
 - [Feedback](#feedback)
@@ -59,6 +62,13 @@ Create Switch components for each section in the content switcher.
     },
   ]}
 />
+
+## Icon And Text
+
+To show an icon next to the text label, pass an icon component to the `Switch`
+`renderIcon` prop.
+
+<Canvas of={ContentSwitcherStories.IconAndText} />
 
 ## Icon Only
 
@@ -234,6 +244,29 @@ These are the values that will be returned in the `onChange` call.
   <Switch name="two" text="Second section" />
   <Switch name="three" text="Third section" />
 </ContentSwitcher>
+```
+
+### Switch `renderIcon`
+
+Pass an icon component to `renderIcon` to render it before the `text`. Use
+`IconSwitch` instead when no visible text is wanted.
+
+<Unstyled style={{ padding: '1rem', background: 'var(--cds-background)' }}>
+  <ContentSwitcher onChange={() => {}}>
+    <Switch name="one" text="Table of Contents" renderIcon={TableOfContents} />
+    <Switch name="two" text="Workspace Test" renderIcon={Workspace} />
+    <Switch name="three" text="View Mode" renderIcon={ViewMode_2} />
+  </ContentSwitcher>
+</Unstyled>
+
+```jsx
+import { TableOfContents, Workspace, ViewMode_2 } from '@carbon/icons-react';
+
+<ContentSwitcher onChange={() => {}}>
+  <Switch name="one" text="Table of Contents" renderIcon={TableOfContents} />
+  <Switch name="two" text="Workspace Test" renderIcon={Workspace} />
+  <Switch name="three" text="View Mode" renderIcon={ViewMode_2} />
+</ContentSwitcher>;
 ```
 
 ## References

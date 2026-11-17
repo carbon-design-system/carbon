@@ -244,6 +244,8 @@
   }
 
   .#{$prefix}--content-switcher__icon {
+    z-index: 1;
+    flex-shrink: 0;
     fill: $icon-secondary;
   }
 
@@ -329,6 +331,19 @@
     fill: $icon-inverse;
   }
 
+  .#{$prefix}--content-switcher-btn:disabled
+    .#{$prefix}--content-switcher__icon {
+    fill: $icon-disabled;
+  }
+
+  .#{$prefix}--content-switcher--low-contrast
+    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected:not(
+      :disabled
+    )
+    .#{$prefix}--content-switcher__icon {
+    fill: $icon-primary;
+  }
+
   // Windows HCM fix
   .#{$prefix}--content-switcher-btn:focus {
     @include high-contrast-mode('focus');
@@ -390,7 +405,9 @@
     padding-inline: convert.to-rem(14px) convert.to-rem(14px);
   }
 
-  .#{$prefix}--content-switcher--lg .#{$prefix}--content-switcher-btn svg {
+  .#{$prefix}--content-switcher--lg
+    .#{$prefix}--content-switcher-btn
+    svg:where(:not(.#{$prefix}--content-switcher__icon)) {
     block-size: 20px;
     inline-size: 20px;
   }

@@ -67,12 +67,17 @@ export interface SwitchProps
   onKeyDown?: (params: SwitchEventHandlersParams) => void;
 
   /**
+   * A component used to render an icon.
+   */
+  renderIcon?: React.ElementType;
+
+  /**
    * Whether your Switch is selected. Reserved for usage in ContentSwitcher
    */
   selected?: boolean;
 
   /**
-   * Provide the contents of your Switch
+   * Provide the contents of your Switch. Required when `renderIcon` is used.
    */
   text?: string;
 }
@@ -87,11 +92,20 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
       name,
       onClick = noopFn,
       onKeyDown = noopFn,
+      renderIcon: IconElement,
       selected = false,
       text,
       ...other
     } = props;
     const prefix = usePrefix();
+
+    if (IconElement && !text && !children) {
+      // eslint-disable-next-line no-console
+      console.error(
+        'Switch: renderIcon property specified without also providing a text property. ' +
+          'Use IconSwitch for an icon-only switch.'
+      );
+    }
 
     const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
@@ -125,6 +139,9 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
         aria-selected={selected}
         {...other}
         {...commonProps}>
+        {IconElement && (
+          <IconElement className={`${prefix}--content-switcher__icon`} />
+        )}
         <span className={`${prefix}--content-switcher__label`} title={text}>
           {text !== undefined ? text : children}
         </span>
@@ -175,12 +192,17 @@ Switch.propTypes = {
   onKeyDown: PropTypes.func,
 
   /**
+   * A component used to render an icon.
+   */
+  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+
+  /**
    * Whether your Switch is selected. Reserved for usage in ContentSwitcher
    */
   selected: PropTypes.bool,
 
   /**
-   * Provide the contents of your Switch
+   * Provide the contents of your Switch. Required when `renderIcon` is used.
    */
   text: PropTypes.string,
 };
