@@ -7,6 +7,8 @@
 
 import glob from 'fast-glob';
 import path from 'path';
+import { LABS_PACKAGES } from '../transforms/productsToCoreMapping';
+import { offerToInstallLabsPackages } from './install-labs-packages';
 import { run } from './jscodeshift';
 
 const TRANSFORM_DIR = path.join(__dirname, 'transforms');
@@ -897,6 +899,57 @@ export const upgrades = [
             transform,
             paths,
             verbose: options.verbose,
+          });
+        },
+      },
+      {
+        name: 'ibm-products-migrate-to-core',
+        description:
+          'Moves components migrated from @carbon/ibm-products to @carbon/react, @carbon/utilities and Carbon Labs. Runs the Tearsheet, Coachmark and PageHeader codemods first, then rewrites the imports.',
+        migrate: async (options) => {
+          const paths =
+            Array.isArray(options.paths) && options.paths.length > 0
+              ? options.paths
+              : await glob(['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'], {
+                  cwd: options.workspaceDir,
+                  ignore: [
+                    '**/es/**',
+                    '**/lib/**',
+                    '**/umd/**',
+                    '**/node_modules/**',
+                    '**/storybook-static/**',
+                    '**/dist/**',
+                    '**/build/**',
+                    '**/*.d.ts',
+                    '**/coverage/**',
+                  ],
+                });
+
+          // The existing transforms only recognise `@carbon/ibm-products`
+          // imports, so they have to run before the imports are rewritten.
+          // Each one stays a separate run to keep its own parser.
+          const steps = [
+            ['ibm-products-update-tearsheet.js'],
+            ['ibm-products-update-coachmark.js'],
+            ['ibm-products-update-page-header-composable.js', 'tsx'],
+            ['ibm-products-migrate-to-core.js', 'tsx'],
+          ];
+
+          for (const [file, parser] of steps) {
+            await runCodemod(options, {
+              dry: !options.write,
+              transform: path.join(TRANSFORM_DIR, file),
+              paths,
+              verbose: options.verbose,
+              ...(parser ? { parser } : {}),
+            });
+          }
+
+          await offerToInstallLabsPackages({
+            workspaceDir: options.workspaceDir,
+            files: paths,
+            labsPackages: LABS_PACKAGES,
+            write: options.write,
           });
         },
       },
