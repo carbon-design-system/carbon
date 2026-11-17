@@ -17,6 +17,7 @@ import {
   PLACEHOLDER_TEXT_MIN_CONTRAST,
   defaultSpecification,
   surfaceContexts,
+  tokenRules,
 } from '../../src/theme-generator/specification';
 import { validateTheme } from '../../src/theme-generator/validate-theme';
 import type { GeneratedOklchTheme } from '../../src/theme-generator/generate-theme';
@@ -198,18 +199,98 @@ describe('helper text keeps its surface-based contrast behaviour', () => {
     ).toEqual([0.5954, 0.6191, 0.5784]);
   });
 
-  it('keeps icon-helper and icon-placeholder aliased to text-helper', () => {
+  it('keeps icon-helper aliased to text-helper', () => {
     for (const mode of modes) {
       const theme = generateTheme(mode);
       for (const context of surfaceContexts) {
         expect(theme.helperIcons[context].color).toEqual(
           theme.helperText[context].color
         );
-        expect(theme.placeholderIcons[context].color).toEqual(
-          theme.helperText[context].color
+      }
+    }
+  });
+});
+
+describe('icon aliases follow the specification', () => {
+  // `tokenRules.<icon>.token` is the single source of truth for what an icon
+  // token aliases. The generator must resolve it rather than hardcode a target.
+  const aliasNames = {
+    helperText: 'text-helper',
+    placeholderText: 'text-placeholder',
+  } as const;
+
+  it('declares the Design-confirmed alias targets', () => {
+    expect(tokenRules.helperIcon.token).toBe('helperText');
+    expect(tokenRules.placeholderIcon.token).toBe('placeholderText');
+  });
+
+  describe.each(modes)('%s theme', (mode) => {
+    const theme = generateTheme(mode);
+
+    it.each([
+      ['helperIcons', tokenRules.helperIcon],
+      ['placeholderIcons', tokenRules.placeholderIcon],
+    ] as const)('%s matches its specification rule', (group, rule) => {
+      const target = theme[rule.token];
+      for (const context of surfaceContexts) {
+        const icon = theme[group][context];
+        expect(icon.source).toEqual({
+          type: 'alias',
+          token: aliasNames[rule.token],
+        });
+        expect(icon.status).toBe(rule.status);
+        expect(icon.color).toEqual(target[context].color);
+        expect(icon.contrast).toBe(target[context].contrast);
+      }
+    });
+
+    it('icon-placeholder meets 4.5:1 against every field in OKLCH and hex', () => {
+      for (const context of surfaceContexts) {
+        const icon = theme.placeholderIcons[context];
+        for (const fieldContext of surfaceContexts) {
+          expect(
+            getContrastRatio(icon.color, theme.fields[fieldContext].color)
+          ).toBeGreaterThanOrEqual(PLACEHOLDER_TEXT_MIN_CONTRAST);
+          expect(
+            getHexContrastRatio(
+              theme.placeholderText[context].fallback,
+              theme.fields[fieldContext].fallback
+            )
+          ).toBeGreaterThanOrEqual(PLACEHOLDER_TEXT_MIN_CONTRAST);
+        }
+      }
+    });
+  });
+
+  it('emits icon-placeholder-* with the text-placeholder values and alias metadata', () => {
+    const files = generateV12Tokens();
+    for (const mode of modes) {
+      const file = files[mode] as Record<
+        string,
+        {
+          $value: unknown;
+          $extensions: { 'com.ibm.carbon': { source: unknown } };
+        }
+      >;
+      for (const index of ['01', '02', '03']) {
+        expect(file[`icon-placeholder-${index}`].$value).toEqual(
+          file[`text-placeholder-${index}`].$value
+        );
+        expect(
+          file[`icon-placeholder-${index}`].$extensions['com.ibm.carbon'].source
+        ).toEqual({ type: 'alias', token: 'text-placeholder' });
+        expect(file[`icon-helper-${index}`].$value).toEqual(
+          file[`text-helper-${index}`].$value
         );
       }
     }
+  });
+
+  it('differs from text-helper in the light theme, where the two are solved against different backgrounds', () => {
+    const theme = generateTheme('light');
+    expect(theme.placeholderIcons.surface.color).not.toEqual(
+      theme.helperText.surface.color
+    );
   });
 });
 

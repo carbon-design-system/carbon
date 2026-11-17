@@ -64,12 +64,17 @@ function getFallbacks(mode) {
 
 function formatDeclarations(mode) {
   return getFallbacks(mode)
-    .map(([name, fallback]) => `    --cds-${name}: ${fallback};`)
+    .map(([name, fallback]) => `    --#{config.$prefix}-${name}: ${fallback};`)
     .join('\n');
 }
 
 /**
  * Generate CSS custom property fallbacks for browsers without OKLCH support.
+ *
+ * The output is a Sass module, so the custom property prefix is interpolated
+ * from `config.$prefix` (`@carbon/themes/scss/config`) at Sass compile time.
+ * This is the same variable `theme.theme()` uses, so the fallbacks always
+ * target the same custom properties as the OKLCH values.
  *
  * @returns {string}
  */
@@ -81,6 +86,8 @@ function generateColorFallbacks() {
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
+
+@use '../config';
 
 @supports not (color: oklch(0 0 0)) {
   :root,

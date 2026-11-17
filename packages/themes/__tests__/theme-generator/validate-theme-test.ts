@@ -105,6 +105,230 @@ describe('validateTheme — fallback and brand checks', () => {
   });
 });
 
+describe('validateTheme — text-on-color contrast on brand (OKLCH and hex)', () => {
+  // Each case overrides only text-on-color. The OKLCH colour and the hex
+  // fallback are independent inputs, so every pass/fail combination is
+  // reachable from a specification.
+  const white = { lightness: 1, chroma: 0, hue: 0, fallback: '#ffffff' };
+  // L=0.6 grey is about 1.3:1 on the brand blue; #cccccc is about 3.1:1.
+  const lowContrastOklch = { lightness: 0.6, chroma: 0, hue: 0 };
+  const lowContrastHex = '#cccccc';
+
+  const textOnColorIssues = (
+    overrides: Partial<typeof white>,
+    mode: 'light' | 'dark' = 'light'
+  ) =>
+    validateTheme(
+      generateTheme(mode, { textOnColor: { ...white, ...overrides } })
+    ).issues.filter((issue) => issue.token === 'text-on-color');
+
+  it.each(['light', 'dark'] as const)(
+    'passes when both OKLCH and hex meet 4.5:1 (%s)',
+    (mode) => {
+      expect(textOnColorIssues({}, mode)).toEqual([]);
+    }
+  );
+
+  it('reports only the OKLCH ratio when OKLCH fails and hex passes', () => {
+    const issues = textOnColorIssues({ ...lowContrastOklch });
+
+    expect(issues).toHaveLength(1);
+    expect(issues[0].message).toMatch(
+      /Expected at least 4\.5:1 contrast \(OKLCH\) against the brand color/
+    );
+  });
+
+  it('reports only the hex ratio when hex fails and OKLCH passes', () => {
+    const issues = textOnColorIssues({ fallback: lowContrastHex });
+
+    expect(issues).toHaveLength(1);
+    expect(issues[0].message).toMatch(
+      /Expected at least 4\.5:1 contrast \(hex fallback\) against the brand color/
+    );
+  });
+
+  it('reports both representations when both fail', () => {
+    const issues = textOnColorIssues({
+      ...lowContrastOklch,
+      fallback: lowContrastHex,
+    });
+
+    expect(issues.map((issue) => issue.message)).toEqual([
+      expect.stringMatching(/\(OKLCH\)/),
+      expect.stringMatching(/\(hex fallback\)/),
+    ]);
+  });
+
+  it('marks the theme invalid for any single failing representation', () => {
+    for (const overrides of [
+      { ...lowContrastOklch },
+      { fallback: lowContrastHex },
+    ]) {
+      expect(
+        validateTheme(
+          generateTheme('light', { textOnColor: { ...white, ...overrides } })
+        ).valid
+      ).toBe(false);
+    }
+  });
+});
+
+describe('validateTheme — OKLCH and hex are checked independently per token group', () => {
+  const issuesFor = (theme: GeneratedOklchTheme, token: string) =>
+    validateTheme(theme)
+      .issues.filter((issue) => issue.token === token)
+      .map((issue) => issue.message);
+
+  it.each([
+    ['helperText', 'text-helper'],
+    ['strongBorders', 'border-strong'],
+  ] as const)(
+    '%s: an OKLCH-only failure is reported once, as OKLCH',
+    (group, name) => {
+      const theme = generateTheme('light');
+      // Colour fails, hex fallback still valid.
+      const broken: GeneratedOklchTheme = {
+        ...theme,
+        [group]: {
+          ...theme[group],
+          surface: {
+            ...theme[group].surface,
+            color: { ...theme[group].surface.color, lightness: 0.95 },
+          },
+        },
+      };
+
+      const messages = issuesFor(broken, `${name}-surface`);
+
+      expect(messages).toHaveLength(1);
+      expect(messages[0]).not.toMatch(/Hex fallback/);
+    }
+  );
+
+  it.each([
+    ['helperText', 'text-helper'],
+    ['strongBorders', 'border-strong'],
+  ] as const)(
+    '%s: a hex-only failure is reported once, as hex',
+    (group, name) => {
+      const theme = generateTheme('light');
+      // Hex fails, OKLCH colour still valid.
+      const broken: GeneratedOklchTheme = {
+        ...theme,
+        [group]: {
+          ...theme[group],
+          surface: { ...theme[group].surface, fallback: '#f0f0f0' },
+        },
+      };
+
+      const messages = issuesFor(broken, `${name}-surface`);
+
+      expect(messages).toHaveLength(1);
+      expect(messages[0]).toMatch(/^Hex fallback expected/);
+    }
+  );
+
+  it('checks icon-helper like the text token it aliases, in both representations', () => {
+    const theme = generateTheme('dark');
+    const broken: GeneratedOklchTheme = {
+      ...theme,
+      helperIcons: {
+        ...theme.helperIcons,
+        surface: {
+          ...theme.helperIcons.surface,
+          color: { ...theme.helperIcons.surface.color, lightness: 0.2 },
+          fallback: '#333333',
+        },
+      },
+    };
+
+    const messages = issuesFor(broken, 'icon-helper-surface');
+
+    expect(messages).toHaveLength(2);
+    expect(messages.some((m) => /^Hex fallback/.test(m))).toBe(true);
+    expect(messages.some((m) => /contrast against surface/.test(m))).toBe(true);
+  });
+
+  it('catches icon-placeholder drifting back to the helper-text values', () => {
+    // The original defect: icon-placeholder aliased to text-helper, which is
+    // solved against surfaces and falls below 4.5:1 on fields in light mode.
+    const theme = generateTheme('light');
+    const drifted: GeneratedOklchTheme = {
+      ...theme,
+      placeholderIcons: theme.helperIcons,
+    };
+
+    const messages = validateTheme(drifted)
+      .issues.filter((issue) => issue.token.startsWith('icon-placeholder-'))
+      .map((issue) => issue.message);
+
+    expect(messages.some((m) => /\(OKLCH\) against field-0/.test(m))).toBe(
+      true
+    );
+    expect(
+      messages.some((m) => /\(hex fallback\) against field-0/.test(m))
+    ).toBe(true);
+  });
+
+  it('accepts the default icon-helper and icon-placeholder tokens', () => {
+    for (const mode of ['light', 'dark'] as const) {
+      const issues = validateTheme(generateTheme(mode)).issues;
+      expect(
+        issues.filter((issue) =>
+          /^icon-(placeholder|helper)-/.test(issue.token)
+        )
+      ).toEqual([]);
+    }
+  });
+});
+
+describe('validateTheme — contrast is recomputed, not read from metadata', () => {
+  it('reports an OKLCH failure even when token.contrast is stale', () => {
+    const theme = generateTheme('light');
+    const broken: GeneratedOklchTheme = {
+      ...theme,
+      helperText: {
+        ...theme.helperText,
+        surface: {
+          ...theme.helperText.surface,
+          // Colour is now too light, but the recorded metadata still says 4.5.
+          color: { ...theme.helperText.surface.color, lightness: 0.9 },
+          contrast: theme.helperText.surface.contrast,
+        },
+      },
+    };
+
+    const result = validateTheme(broken);
+
+    expect(result.valid).toBe(false);
+    expect(
+      result.issues.some(
+        (issue) =>
+          issue.token === 'text-helper-surface' &&
+          /Expected at least 4\.5:1 contrast against surface/.test(
+            issue.message
+          )
+      )
+    ).toBe(true);
+  });
+
+  it('does not depend on token.contrast being present', () => {
+    const theme = generateTheme('light');
+    const { contrast: _contrast, ...withoutContrast } =
+      theme.strongBorders['surface-dark'];
+
+    expect(
+      validateTheme({
+        ...theme,
+        strongBorders: {
+          ...theme.strongBorders,
+          'surface-dark': withoutContrast,
+        },
+      }).issues
+    ).toEqual([]);
+  });
+});
+
 describe('validateTheme — border-inverse, border-interactive and disabled', () => {
   it('reports a border-inverse below 4.5:1 on a surface', () => {
     const theme = generateTheme('light');

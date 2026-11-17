@@ -176,6 +176,23 @@ export function validateTheme(
     borderTarget,
     errors
   );
+  // Icon helper/placeholder tokens are aliases of the text tokens above, so
+  // they carry the same contrast contract. Validating them (rather than only
+  // the text tokens) catches an alias that drifts to the wrong target.
+  validateContrast(
+    theme,
+    'icon-helper',
+    theme.helperIcons,
+    helperTarget,
+    errors
+  );
+  validateFallbackContrast(
+    theme,
+    'icon-helper',
+    theme.helperIcons,
+    helperTarget,
+    errors
+  );
   validateSingleTokenContrast(
     theme,
     theme.borderInverse,
@@ -188,7 +205,18 @@ export function validateTheme(
     BORDER_INTERACTIVE_TARGET,
     errors
   );
-  validatePlaceholderText(theme, errors);
+  validatePlaceholderText(
+    theme,
+    'text-placeholder',
+    theme.placeholderText,
+    errors
+  );
+  validatePlaceholderText(
+    theme,
+    'icon-placeholder',
+    theme.placeholderIcons,
+    errors
+  );
   validateDisabledTokens(theme, errors);
   validateBrandFallback(theme, errors);
   validateTextOnColor(theme, errors);
@@ -399,13 +427,10 @@ function validateSingleTokenContrast(
   errors: ValidationIssue[]
 ) {
   for (const context of contexts) {
-    const surface = theme.surfaces[context];
-    const oklchRatio = getContrastRatio(token.color, surface.color);
-    const hexRatio = getHexContrastRatio(token.fallback, surface.fallback);
-    for (const [kind, ratio] of [
-      ['OKLCH', oklchRatio],
-      ['hex fallback', hexRatio],
-    ] as const) {
+    for (const [kind, ratio] of measureContrast(
+      token,
+      theme.surfaces[context]
+    )) {
       if (ratio + Number.EPSILON < target) {
         errors.push({
           token: `${token.name}-${context}`,
@@ -423,28 +448,27 @@ function validateSingleTokenContrast(
  * Placeholder text is rendered inside fields, so every emitted
  * `text-placeholder-*` value must reach `PLACEHOLDER_TEXT_MIN_CONTRAST` against
  * EVERY `field-*` background, in OKLCH math and in the emitted hex fallbacks.
+ * `icon-placeholder-*` aliases it and is held to the same minimum.
  * The minimum is a constant, not `theme.contrastTargets`, so a lowered
  * generation target cannot bypass it. Ratios are recomputed from the emitted
  * colours rather than read from `token.contrast`.
  */
 function validatePlaceholderText(
   theme: GeneratedOklchTheme,
+  groupName: string,
+  group: GeneratedOklchTheme['placeholderText'],
   errors: ValidationIssue[]
 ) {
   for (const context of contexts) {
-    const placeholder = theme.placeholderText[context];
+    const placeholder = group[context];
     contexts.forEach((fieldContext, fieldIndex) => {
-      const field = theme.fields[fieldContext];
-      for (const [kind, ratio] of [
-        ['OKLCH', getContrastRatio(placeholder.color, field.color)],
-        [
-          'hex fallback',
-          getHexContrastRatio(placeholder.fallback, field.fallback),
-        ],
-      ] as const) {
+      for (const [kind, ratio] of measureContrast(
+        placeholder,
+        theme.fields[fieldContext]
+      )) {
         if (ratio + Number.EPSILON < PLACEHOLDER_TEXT_MIN_CONTRAST) {
           errors.push({
-            token: `text-placeholder-${context}`,
+            token: `${groupName}-${context}`,
             severity: 'error',
             message:
               `Expected at least ${PLACEHOLDER_TEXT_MIN_CONTRAST}:1 contrast (${kind}) against ` +
@@ -473,26 +497,55 @@ function validateDisabledTokens(
   }
 }
 
-/** `text-on-color` is rendered on the brand color, so it must meet AA there. */
+/**
+ * Measures the contrast of `foreground` on `background` in both
+ * representations a consumer can render: the OKLCH colours and the 8-bit hex
+ * fallbacks. The two can legitimately differ (sRGB clamping, gamut mapping and
+ * 8-bit quantisation), so each is reported and checked on its own.
+ */
+function measureContrast(
+  foreground: GeneratedColorToken,
+  background: GeneratedColorToken
+) {
+  return [
+    ['OKLCH', getContrastRatio(foreground.color, background.color)],
+    [
+      'hex fallback',
+      getHexContrastRatio(foreground.fallback, background.fallback),
+    ],
+  ] as const;
+}
+
+/**
+ * `text-on-color` is rendered on the brand color, so it must meet AA there. The
+ * OKLCH values and the hex fallbacks are validated independently: passing in
+ * one representation says nothing about the other.
+ */
 function validateTextOnColor(
   theme: GeneratedOklchTheme,
   errors: ValidationIssue[]
 ) {
-  const ratio = getHexContrastRatio(
-    theme.textOnColor.fallback,
-    theme.brand.fallback
-  );
-  if (ratio + Number.EPSILON < TEXT_ON_COLOR_TARGET) {
-    errors.push({
-      token: theme.textOnColor.name,
-      severity: 'error',
-      message:
-        `Expected at least ${TEXT_ON_COLOR_TARGET}:1 contrast against the brand ` +
-        `color, received ${ratio.toFixed(4)}:1 in the ${theme.mode} theme`,
-    });
+  for (const [kind, ratio] of measureContrast(theme.textOnColor, theme.brand)) {
+    if (ratio + Number.EPSILON < TEXT_ON_COLOR_TARGET) {
+      errors.push({
+        token: theme.textOnColor.name,
+        severity: 'error',
+        message:
+          `Expected at least ${TEXT_ON_COLOR_TARGET}:1 contrast (${kind}) against the brand ` +
+          `color, received ${ratio.toFixed(4)}:1 in the ${theme.mode} theme`,
+      });
+    }
   }
 }
 
+/**
+ * Checks the OKLCH contrast of each token against its surface. The ratio is
+ * recomputed from the emitted colours rather than read from `token.contrast`,
+ * which is only metadata recorded at generation time and can go stale.
+ *
+ * OKLCH only, by design: every caller pairs it with `validateFallbackContrast`
+ * for the hex fallbacks, so each representation is checked exactly once.
+ */
 function validateContrast(
   theme: GeneratedOklchTheme,
   groupName: string,
@@ -501,7 +554,10 @@ function validateContrast(
   errors: ValidationIssue[]
 ) {
   for (const context of contexts) {
-    const contrast = group[context].contrast ?? 0;
+    const contrast = getContrastRatio(
+      group[context].color,
+      theme.surfaces[context].color
+    );
     if (contrast + Number.EPSILON < target) {
       errors.push({
         token: `${groupName}-${context}`,

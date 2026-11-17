@@ -245,6 +245,14 @@ export function generateTheme(
     hue
   );
 
+  // Tokens an `alias` rule in `tokenRules` may point at, keyed by the rule's
+  // `token` value. The specification decides which one each icon aliases; the
+  // generator only resolves it, so the two cannot drift apart.
+  const aliasTargets = {
+    helperText: { name: 'text-helper', tokens: helperText },
+    placeholderText: { name: 'text-placeholder', tokens: placeholderText },
+  };
+
   return {
     mode,
     contrastTargets: specification.contrastTargets,
@@ -410,15 +418,13 @@ export function generateTheme(
     placeholderText,
     helperIcons: createAliasTokens(
       'icon-helper',
-      tokenRules.helperIcon.status,
-      'text-helper',
-      helperText
+      tokenRules.helperIcon,
+      aliasTargets
     ),
     placeholderIcons: createAliasTokens(
       'icon-placeholder',
-      tokenRules.placeholderIcon.status,
-      'text-helper',
-      helperText
+      tokenRules.placeholderIcon,
+      aliasTargets
     ),
     strongBorders: mapSurfaceContexts(surfaces, (background, context) =>
       createContrastToken(
@@ -627,20 +633,28 @@ function createDisabledToken(
   return { ...token, alpha: disabled.alpha };
 }
 
-function createAliasTokens(
+/**
+ * Builds a contextual token that is an alias of another contextual token. The
+ * alias target comes from the token's `alias` rule in `tokenRules`, so the
+ * specification is the single source of truth for what aliases what.
+ */
+function createAliasTokens<Target extends string>(
   name: string,
-  status: RuleStatus,
-  alias: string,
-  sourceTokens: Record<SurfaceContext, GeneratedColorToken>
+  rule: { status: RuleStatus; token: Target },
+  targets: Record<
+    Target,
+    { name: string; tokens: Record<SurfaceContext, GeneratedColorToken> }
+  >
 ) {
+  const { name: aliasName, tokens: sourceTokens } = targets[rule.token];
   return Object.fromEntries(
     contexts.map((context) => [
       context,
       createToken({
         name,
-        status,
+        status: rule.status,
         context,
-        source: { type: 'alias', token: alias },
+        source: { type: 'alias', token: aliasName },
         color: sourceTokens[context].color,
         contrast: sourceTokens[context].contrast,
       }),

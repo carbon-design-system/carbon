@@ -1043,11 +1043,11 @@
     "$value": {
       "colorSpace": "oklch",
       "components": [
-        0.5465,
+        0.5046,
         0.004,
         262
       ],
-      "hex": "#6f7073"
+      "hex": "#636467"
     },
     "$description": "Contextual placeholder icon for surface context 1.",
     "$extensions": {
@@ -1055,7 +1055,7 @@
         "status": "confirmed",
         "source": {
           "type": "alias",
-          "token": "text-helper"
+          "token": "text-placeholder"
         }
       }
     }
@@ -1065,11 +1065,11 @@
     "$value": {
       "colorSpace": "oklch",
       "components": [
-        0.5671,
+        0.5046,
         0.004,
         262
       ],
-      "hex": "#757679"
+      "hex": "#636467"
     },
     "$description": "Contextual placeholder icon for surface context 2.",
     "$extensions": {
@@ -1077,7 +1077,7 @@
         "status": "confirmed",
         "source": {
           "type": "alias",
-          "token": "text-helper"
+          "token": "text-placeholder"
         }
       }
     }
@@ -1087,11 +1087,11 @@
     "$value": {
       "colorSpace": "oklch",
       "components": [
-        0.5256,
+        0.5046,
         0.004,
         262
       ],
-      "hex": "#696a6d"
+      "hex": "#636467"
     },
     "$description": "Contextual placeholder icon for surface context 3.",
     "$extensions": {
@@ -1099,7 +1099,7 @@
         "status": "confirmed",
         "source": {
           "type": "alias",
-          "token": "text-helper"
+          "token": "text-placeholder"
         }
       }
     }
