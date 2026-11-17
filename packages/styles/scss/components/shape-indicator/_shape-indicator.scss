@@ -12,6 +12,7 @@
 @use '../../colors' as *;
 @use '../../utilities/focus-outline';
 @use '../../utilities/button-reset';
+@use '../../utilities/custom-property';
 @use '../icon-indicator/tokens' as *;
 
 /// shape-indicator styles
@@ -23,7 +24,10 @@
 
     display: flex;
     align-items: center;
-    color: $text-secondary;
+    color: custom-property.get-var(
+      'shape-indicator-label-color',
+      $text-secondary
+    );
     gap: $spacing-03;
     line-height: unset;
   }
