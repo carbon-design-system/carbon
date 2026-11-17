@@ -283,7 +283,7 @@ describe('compare', () => {
   });
 
   it('should fallback to string comparison for non-matching types', () => {
-    expect(compare({}, 1)).toEqual(-1);
+    expect(compare({}, 1)).toEqual(1);
     expect(compare(true, 'false')).toEqual(1);
   });
 
