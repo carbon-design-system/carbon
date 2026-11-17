@@ -210,15 +210,15 @@ export interface TextAreaProps
   counterMode?: 'character' | 'word';
 }
 
-function getTextCount(
-  value: string | number,
+const getTextCount = (
+  value: NonNullable<TextAreaProps['value']>,
   counterMode: TextAreaProps['counterMode']
-): number {
+): number => {
   const strValue = value.toString();
   return counterMode === 'character'
     ? strValue.length
     : strValue.match(/\p{L}+/gu)?.length || 0;
-}
+};
 
 const frFn = forwardRef<HTMLTextAreaElement, TextAreaProps>;
 
@@ -272,11 +272,11 @@ const TextArea = frFn((props, forwardRef) => {
     ? getTextCount(value, counterMode)
     : uncontrolledTextCount;
 
-  function setTextCount(count: number) {
+  const setTextCount = (count: number) => {
     if (!isControlled) {
       setUncontrolledTextCount(count);
     }
-  }
+  };
 
   useEffect(() => {
     if (!isControlled) {

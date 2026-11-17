@@ -8,7 +8,7 @@
 import React from 'react';
 import TextInput from '../TextInput';
 import userEvent from '@testing-library/user-event';
-import { act, render, screen } from '@testing-library/react';
+import { act, render, screen, waitFor } from '@testing-library/react';
 import { AILabel } from '../../AILabel';
 import { FeatureFlags } from '../../FeatureFlags';
 
@@ -438,14 +438,15 @@ describe('TextInput', () => {
             input.dispatchEvent(new Event('input', { bubbles: true }));
             await Promise.resolve();
           }
-          await new Promise((resolve) => setTimeout(resolve, 50));
+          await waitFor(() => {
+            expect(input).toHaveValue('x'.repeat(150));
+            if (enableCounter) {
+              expect(screen.getByText('150/200')).toBeInTheDocument();
+            }
+          });
 
           expect(onError).not.toHaveBeenCalled();
           expect(onChange).toHaveBeenCalledTimes(150);
-          expect(input).toHaveValue('x'.repeat(150));
-          if (enableCounter) {
-            expect(screen.getByText('150/200')).toBeInTheDocument();
-          }
         } finally {
           unmount();
           window.removeEventListener('error', onError);

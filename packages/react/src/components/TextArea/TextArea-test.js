@@ -418,14 +418,15 @@ describe('TextArea', () => {
               textarea.dispatchEvent(new Event('input', { bubbles: true }));
               await Promise.resolve();
             }
-            await new Promise((resolve) => setTimeout(resolve, 50));
+            await waitFor(() => {
+              expect(textarea).toHaveValue(character.repeat(150));
+              if (enableCounter) {
+                expect(screen.getByText('150/200')).toBeInTheDocument();
+              }
+            });
 
             expect(onError).not.toHaveBeenCalled();
             expect(onChange).toHaveBeenCalledTimes(150);
-            expect(textarea).toHaveValue(character.repeat(150));
-            if (enableCounter) {
-              expect(screen.getByText('150/200')).toBeInTheDocument();
-            }
           } finally {
             unmount();
             window.removeEventListener('error', onError);
