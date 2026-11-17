@@ -25,7 +25,7 @@ const args = {
   invalidText:
     'Error message that is really long can wrap to more lines but should not be excessively long.',
   disabled: false,
-  labelText: 'Label',
+  label: 'Label',
   enableCounter: false,
   maxCount: 500,
   readonly: false,
@@ -57,7 +57,7 @@ const argTypes: ArgTypes = {
     description: 'Specify whether the `<input>` should be disabled.',
     table: { defaultValue: { summary: 'false' } },
   },
-  labelText: {
+  label: {
     control: { type: 'text' },
     description:
       'Provide the text that will be read by a screen reader when visiting this control.',
@@ -139,7 +139,7 @@ export const Default: Story = {
           [enableCounter]="enableCounter"
           [invalid]="invalid"
           [invalidText]="invalidText"
-          [label]="labelText"
+          [label]="label"
           [maxCount]="maxCount"
           [placeholder]="placeholder"
           [readonly]="readonly"
@@ -158,7 +158,7 @@ export const DefaultWithToggletip: Story = {
   argTypes,
   parameters: {
     controls: {
-      exclude: ['labelText', 'onClick', 'onInput'],
+      exclude: ['label', 'onClick', 'onInput'],
     },
   },
   render: (args) => ({
