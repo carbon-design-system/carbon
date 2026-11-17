@@ -1,13 +1,15 @@
 /**
- * Copyright IBM Corp. 2023
+ * Copyright IBM Corp. 2023, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import AspectRatio from '../AspectRatio';
+import { describe, expect, it } from '@jest/globals';
+import '@testing-library/jest-dom/jest-globals';
 import { render, screen } from '@testing-library/react';
+import React, { type ComponentProps } from 'react';
+import AspectRatio from '../AspectRatio';
 
 describe('AspectRatio', () => {
   describe('renders as expected - Component API', () => {
@@ -18,12 +20,14 @@ describe('AspectRatio', () => {
     });
 
     it('should respect as prop', () => {
+      const CustomButton = (props: ComponentProps<'button'>) => (
+        <button type="button" {...props} />
+      );
+
       render(
         <>
           <AspectRatio as="li">test</AspectRatio>
-          <AspectRatio
-            className="test"
-            as={(props) => <button type="button" {...props} />}>
+          <AspectRatio className="test" as={CustomButton}>
             test as component
           </AspectRatio>
         </>
@@ -46,7 +50,15 @@ describe('AspectRatio', () => {
     });
 
     it('should respect ratio prop', () => {
-      const ratios = ['16x9', '9x16', '2x1', '1x2', '4x3', '3x4', '1x1'];
+      const ratios = [
+        '16x9',
+        '9x16',
+        '2x1',
+        '1x2',
+        '4x3',
+        '3x4',
+        '1x1',
+      ] as const;
 
       ratios.forEach((ratio) => {
         render(

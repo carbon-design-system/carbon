@@ -170,6 +170,8 @@ exports[`Generated SCSS snapshots _notification-tokens.scss should match snapsho
 $notification-action-hover: (
   white-theme: #ffffff,
   g-10: #ffffff,
+  g-90: #474747,
+  g-100: #333333,
 ) !default;
 
 $notification-action-tertiary-inverse: (
@@ -287,6 +289,8 @@ $status-orange: (
 $status-orange-outline: (
   white-theme: #ba4e00,
   g-10: #ba4e00,
+  g-90: #ff832b,
+  g-100: #ff832b,
 ) !default;
 
 $status-purple: (
@@ -313,6 +317,8 @@ $status-yellow: (
 $status-yellow-outline: (
   white-theme: #8e6a00,
   g-10: #8e6a00,
+  g-90: #f1c21b,
+  g-100: #f1c21b,
 ) !default;
 "
 `;
