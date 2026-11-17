@@ -6,10 +6,9 @@
  */
 
 import React, { useState } from 'react';
-import { Button } from '@carbon/react';
+import { Button, AddSelectItem } from '@carbon/react';
 import { Table, DataBase } from '@carbon/react/icons';
 import { AddSingleItemFromHierarchy } from '../../components/AddSingleItemFromHierarchy/AddSingleItemFromHierarchy';
-import { AddSelectItem } from '@carbon/ibm-products';
 import './AddSingleItemFromHierarchy.scss';
 
 // Sample hierarchical data matching the image: Connection → Schema → Tables

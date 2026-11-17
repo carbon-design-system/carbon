@@ -23,15 +23,14 @@ import {
   IconButton,
   Popover,
   PopoverContent,
-} from '@carbon/react';
-import { ArrowsVertical, Filter } from '@carbon/react/icons';
-import {
-  preview__AddSelect as AddSelect,
-  preview__Tearsheet as Tearsheet,
+  AddSelect,
+  Tearsheet,
   AddSelectData,
   AddSelectItem,
-  NoDataEmptyState,
-} from '@carbon/ibm-products';
+} from '@carbon/react';
+import { EmptyState } from '../EmptyState/EmptyState';
+import noDataIllustration from '../../assets/no-data.svg';
+import { ArrowsVertical, Filter } from '@carbon/react/icons';
 import './MultiAddSelectWithColumnActions.scss';
 
 const blockClass = `multi-add-select-column-actions-pattern`;
@@ -794,8 +793,8 @@ export const MultiAddSelectWithColumnActions = forwardRef<
                       <div
                         style={{ marginBlockStart: '3rem', padding: '1rem' }}
                       >
-                        <NoDataEmptyState
-                          illustrationTheme="light"
+                        <EmptyState
+                          illustration={noDataIllustration}
                           size="sm"
                           title={noSelectionTitle}
                           subtitle={noSelectionDescription}

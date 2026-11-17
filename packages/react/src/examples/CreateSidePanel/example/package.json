@@ -1,10 +1,9 @@
 {
   "name": "create-side-panel-pattern-example",
-  "description": "An example showing use of the CreateSidePanel pattern from the @carbon/ibm-products library.",
+  "description": "An example showing use of the CreateSidePanel pattern from the @carbon/react library.",
   "keywords": [
     "carbon",
     "ibm",
-    "ibm-products",
     "pattern",
     "create-side-panel",
     "side-panel"
@@ -17,8 +16,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@carbon/ibm-products": "latest",
-    "@carbon/react": "latest",
+    "@carbon/react": "v12-alpha",
     "@carbon/styles": "latest",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",

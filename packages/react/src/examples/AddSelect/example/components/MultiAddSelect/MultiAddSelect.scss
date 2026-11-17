@@ -6,12 +6,12 @@
  */
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type' as *;
-// Prefix used by @carbon/ibm-products components (default: 'c4p').
-$c4p-prefix: 'c4p';
+// Carbon CSS prefix (default: 'cds').
+$prefix: 'cds';
 
 // Multi Add Select Pattern Component Styles
 .multi-add-select-pattern {
-  .#{$c4p-prefix}--add-select__next-column {
+  .#{$prefix}--add-select-column {
     padding-block-start: 0;
   }
   // No results state

@@ -1,8 +1,8 @@
 {
-  "name": "ibm-products-coachmark-overlay-elements-pattern-example",
+  "name": "coachmark-overlay-elements-pattern-example",
   "version": "0.1.0",
   "private": true,
-  "description": "Sample project for getting started with the CoachmarkOverlayElements pattern using Carbon for IBM Products",
+  "description": "Sample project for getting started with the CoachmarkOverlayElements pattern using Carbon React",
   "license": "Apache-2.0",
   "main": "index.html",
   "type": "module",
@@ -12,8 +12,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@carbon/ibm-products": "latest",
-    "@carbon/react": "latest",
+    "@carbon/react": "v12-alpha",
     "@carbon/utilities": "latest",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",

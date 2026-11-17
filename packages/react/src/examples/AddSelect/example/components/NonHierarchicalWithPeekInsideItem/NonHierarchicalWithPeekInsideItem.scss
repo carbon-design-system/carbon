@@ -7,16 +7,16 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/motion' as *;
-// Prefix used by @carbon/ibm-products components (default: 'c4p').
-$c4p-prefix: 'c4p';
+// Carbon CSS prefix (default: 'cds').
+$prefix: 'cds';
 
 .non-hierarchical-peek-inside-pattern {
-  .#{$c4p-prefix}--add-select__next-list-body--horizontal
-    .#{$c4p-prefix}--add-select__next-column {
+  .#{$prefix}--add-select-list-body--horizontal
+    .#{$prefix}--add-select-column {
     padding-block-start: 0;
   }
   // First column: 65% of available width; double-class specificity overrides
-  // the component's own min-inline-size: 300px in _add-select_next.scss.
+  // the component's own min-inline-size: 300px in _add-select.scss.
   &__items-column#{&}__items-column {
     flex: 1 1 65%;
     min-inline-size: 600px;

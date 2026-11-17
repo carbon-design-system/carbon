@@ -6,12 +6,11 @@
  */
 
 import React, { useState } from 'react';
-import { Button } from '@carbon/react';
+import { Button, AddSelectItem, UserAvatar } from '@carbon/react';
 import {
   NonHierarchicalWithPeekInsideItem as NonHierarchicalWithPeekInsideItemComponent,
   ModifierConfig,
 } from '../../components/NonHierarchicalWithPeekInsideItem/NonHierarchicalWithPeekInsideItem';
-import { AddSelectItem, UserAvatar } from '@carbon/ibm-products';
 import './NonHierarchicalWithPeekInsideItem.scss';
 
 // Sample data matching the image - access groups with members

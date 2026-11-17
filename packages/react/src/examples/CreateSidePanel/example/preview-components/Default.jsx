@@ -20,7 +20,7 @@ export const Default = ({
   secondaryButtonText = 'Cancel',
   subtitle = '',
   title = 'Create partitions',
-  selectorPageContent = '#ibm-products-page-content',
+  selectorPageContent = '#page-content',
   open,
   setOpen,
   ...rest

@@ -15,14 +15,15 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { ToastNotification } from '@carbon/react';
 import {
-  preview__AddSelect as AddSelect,
-  preview__Tearsheet as Tearsheet,
+  ToastNotification,
+  AddSelect,
+  Tearsheet,
   AddSelectData,
   AddSelectItem,
-  NoDataEmptyState,
-} from '@carbon/ibm-products';
+} from '@carbon/react';
+import { EmptyState } from '../EmptyState/EmptyState';
+import noDataIllustration from '../../assets/no-data.svg';
 import './MultiAddSelectWithHierarchyNoSelectAll.scss';
 
 const blockClass = `multi-add-select-hierarchy-no-select-all-pattern`;
@@ -628,8 +629,8 @@ export const MultiAddSelectWithHierarchyNoSelectAll = forwardRef<
                       <div
                         style={{ marginBlockStart: '3rem', padding: '1rem' }}
                       >
-                        <NoDataEmptyState
-                          illustrationTheme="light"
+                        <EmptyState
+                          illustration={noDataIllustration}
                           size="sm"
                           title={noSelectionTitle}
                           subtitle={noSelectionDescription}
