@@ -87,10 +87,32 @@ const HeaderPanel = React.forwardRef<HTMLDivElement, HeaderPanelProps>(
       Pick<ComponentProps<'header'>, 'onBlur' | 'onKeyDown'>
     > = {};
 
+    // Whether `element` is, or is inside, the header action that toggles this
+    // panel. Its own click handler toggles the panel, so closing it on blur as
+    // well would make it re-open.
+    const isPanelToggle = (element: Element | null) => {
+      if (!element || !href?.startsWith('#') || href.length === 1) {
+        return false;
+      }
+      const toggle = element.ownerDocument.getElementById(href.slice(1));
+      return !!toggle?.contains(element);
+    };
+
+    // Safari doesn't focus a button when it's clicked, so `relatedTarget` is
+    // null when the toggle is clicked. Remember what the mouse was pressed
+    // on so `onBlur` can still tell the toggle is being clicked.
+    const mouseDownTarget = useRef<Element>(null);
+    useWindowEvent('mousedown', (event) => {
+      mouseDownTarget.current =
+        event.target instanceof Element ? event.target : null;
+    });
+
     if (addFocusListeners) {
       eventHandlers.onBlur = (event) => {
+        const nextFocus = event.relatedTarget ?? mouseDownTarget.current;
         if (
           !event.currentTarget.contains(event.relatedTarget) &&
+          !isPanelToggle(nextFocus) &&
           !lastClickedElement?.classList?.contains(
             `${prefix}--switcher__item-link`
           )
@@ -115,6 +137,7 @@ const HeaderPanel = React.forwardRef<HTMLDivElement, HeaderPanelProps>(
 
     useWindowEvent('click', (event: MouseEvent) => {
       const { target } = event;
+      mouseDownTarget.current = null;
       if (!(target instanceof Element)) return;
       setLastClickedElement(target);
 

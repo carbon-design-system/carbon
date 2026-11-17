@@ -5,9 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it } from '@jest/globals';
+import '@testing-library/jest-dom/jest-globals';
+import { render } from '@testing-library/react';
 import React from 'react';
 import { BreadcrumbSkeleton } from '../';
-import { screen, render } from '@testing-library/react';
 
 const prefix = 'cds';
 
