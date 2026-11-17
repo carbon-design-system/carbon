@@ -1,0 +1,86 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as FluidTimePickerStories from './FluidTimePicker.stories';
+
+<Meta of={FluidTimePickerStories} />
+
+# FluidTimePicker
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/angular/src/stories/FluidTimePicker)
+&nbsp;|&nbsp;
+[Usage guidelines](https://carbondesignsystem.com/components/time-picker/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://carbondesignsystem.com/components/time-picker/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Skeleton](#skeleton)
+- [Component API](#component-api)
+- [Angular-specific notes](#angular-specific-notes)
+- [Feedback](#feedback)
+
+## Overview
+
+The `cds-ng-fluid-time-picker` component provides a fluid variant of the time
+picker input, allowing users to enter time values and select time zones.
+
+### Importing
+
+```ts
+import {
+  FluidTimePickerComponent,
+  FluidTimePickerSelectComponent,
+  FluidTimePickerSkeletonComponent,
+} from '@carbon/angular/fluid-time-picker';
+import { SelectItemComponent } from '@carbon/angular/select';
+
+@Component({
+  standalone: true,
+  imports: [
+    FluidTimePickerComponent,
+    FluidTimePickerSelectComponent,
+    SelectItemComponent,
+  ],
+  template: `
+    <cds-ng-fluid-time-picker labelText="Time" placeholder="hh:mm">
+      <cds-ng-fluid-time-picker-select defaultValue="am">
+        <cds-ng-select-item value="am" [selected]="true">AM</cds-ng-select-item>
+        <cds-ng-select-item value="pm">PM</cds-ng-select-item>
+      </cds-ng-fluid-time-picker-select>
+    </cds-ng-fluid-time-picker>
+  `,
+})
+export class MyComponent {}
+```
+
+<Canvas of={FluidTimePickerStories.Default} />
+
+## Skeleton
+
+<Canvas of={FluidTimePickerStories.Skeleton} />
+
+## Component API
+
+<ArgTypes of={FluidTimePickerStories.Default} />
+
+## Angular-specific notes
+
+### Forms integration (`ControlValueAccessor`)
+
+`FluidTimePickerComponent` implements `ControlValueAccessor`, supporting both
+template-driven and reactive Angular forms:
+
+```html
+<!-- Reactive forms -->
+<cds-ng-fluid-time-picker [formControl]="timeControl" labelText="Time">
+</cds-ng-fluid-time-picker>
+
+<!-- Template-driven forms -->
+<cds-ng-fluid-time-picker [(ngModel)]="time" labelText="Time">
+</cds-ng-fluid-time-picker>
+```
+
+## Feedback
+
+Help us improve this component by providing feedback, opening issues, or
+contributing on GitHub.

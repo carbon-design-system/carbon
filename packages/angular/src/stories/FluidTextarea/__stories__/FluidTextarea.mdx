@@ -1,0 +1,87 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as FluidTextareaStories from './FluidTextarea.stories';
+
+<Meta of={FluidTextareaStories} />
+
+# FluidTextarea
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/angular/src/stories/FluidTextarea)
+&nbsp;|&nbsp;
+[Usage guidelines](https://carbondesignsystem.com/components/textarea/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://carbondesignsystem.com/components/textarea/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Skeleton](#skeleton)
+- [With Layer](#with-layer)
+- [Default with Toggletip](#default-with-toggletip)
+- [Component API](#component-api)
+- [Angular-specific notes](#angular-specific-notes)
+- [Feedback](#feedback)
+
+## Overview
+
+The `cds-ng-fluid-textarea` component provides a fluid multiline text input
+variant spanning the full width of its container.
+
+### Importing
+
+```ts
+import {
+  FluidTextareaComponent,
+  FluidTextareaSkeletonComponent,
+} from '@carbon/angular/fluid-textarea';
+
+@Component({
+  standalone: true,
+  imports: [FluidTextareaComponent],
+  template: `
+    <cds-ng-fluid-textarea
+      label="Text Area label"
+      placeholder="Placeholder text">
+    </cds-ng-fluid-textarea>
+  `,
+})
+export class MyComponent {}
+```
+
+<Canvas of={FluidTextareaStories.Default} />
+
+## Skeleton
+
+<Canvas of={FluidTextareaStories.Skeleton} />
+
+## With Layer
+
+<Canvas of={FluidTextareaStories.WithLayer} />
+
+## Default with Toggletip
+
+<Canvas of={FluidTextareaStories.DefaultWithToggletip} />
+
+## Component API
+
+<ArgTypes of={FluidTextareaStories.Default} />
+
+## Angular-specific notes
+
+### Forms integration (`ControlValueAccessor`)
+
+`FluidTextareaComponent` implements `ControlValueAccessor`, supporting both
+template-driven and reactive Angular forms:
+
+```html
+<!-- Reactive forms -->
+<cds-ng-fluid-textarea [formControl]="bioControl" label="Bio">
+</cds-ng-fluid-textarea>
+
+<!-- Template-driven forms -->
+<cds-ng-fluid-textarea [(ngModel)]="bio" label="Bio"> </cds-ng-fluid-textarea>
+```
+
+## Feedback
+
+Help us improve this component by providing feedback, opening issues, or
+contributing on GitHub.

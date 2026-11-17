@@ -12,7 +12,6 @@ import styles from './menu-item.scss?lit';
 import { consume } from '@lit/context';
 import { MenuContext } from './menu-context';
 import Checkmark16 from '@carbon/icons/es/checkmark/16.js';
-import CaretLeft16 from '@carbon/icons/es/caret--left/16.js';
 import CaretRight16 from '@carbon/icons/es/caret--right/16.js';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
@@ -220,7 +219,6 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
       shortcut,
       submenuOpen,
       boundaries,
-      isRtl,
       kind,
       dangerDescription,
     } = this;
@@ -252,12 +250,11 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
       ${this.hasSubmenu
         ? html`
             <div class="${prefix}--menu-item__shortcut">
-              ${isRtl ? iconLoader(CaretLeft16) : iconLoader(CaretRight16)}
+              ${iconLoader(CaretRight16)}
             </div>
             <cds-menu
               className=${menuClassName}
-              size=${this.parentElement?.getAttribute('size') ??
-              MENU_SIZE.LARGE}
+              size=${this._parentMenu?.size ?? MENU_SIZE.LARGE}
               ?isChild="${this.hasSubmenu}"
               label="${label}"
               .open="${submenuOpen}"
@@ -326,10 +323,10 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
           const item = submenuSlot?.assignedElements?.()?.[0];
           if (item) {
             switch (item.tagName) {
-              case 'CDS-MENU-ITEM-RADIO-GROUP':
+              case `${prefix}-menu-item-radio-group`.toUpperCase():
                 this.submenuEntry = item.querySelector(`${prefix}-menu-item`);
                 break;
-              case 'CDS-MENU-ITEM-GROUP': {
+              case `${prefix}-menu-item-group`.toUpperCase(): {
                 const slotElements = item.shadowRoot
                   ?.querySelector('slot')
                   ?.assignedElements();
@@ -337,7 +334,7 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
                 this.submenuEntry = firstElement;
                 break;
               }
-              case 'CDS-MENU-ITEM':
+              case `${prefix}-menu-item`.toUpperCase():
                 this.submenuEntry = item;
                 break;
             }
@@ -364,7 +361,7 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
     if (this.hasSubmenu && ['ArrowRight', 'Enter', ' '].includes(e.key)) {
       this._openSubmenu();
       setTimeout(() => {
-        this.submenuEntry.focus();
+        this.submenuEntry?.focus();
       });
       e.stopPropagation();
     } else if (e.key === 'Enter' || e.key === ' ') {
