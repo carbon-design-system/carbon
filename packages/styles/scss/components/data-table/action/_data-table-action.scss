@@ -44,7 +44,7 @@
     z-index: 1;
     display: flex;
     background-color: $layer;
-    block-size: layout.size('height');
+    block-size: auto;
     inline-size: 100%;
     min-block-size: layout.size('height');
 
@@ -55,9 +55,12 @@
 
   .#{$prefix}--toolbar-content {
     display: flex;
-    justify-content: flex-end;
-    block-size: layout.size('height');
+    justify-content: safe flex-end;
+    block-size: auto;
     inline-size: 100%;
+    min-block-size: layout.size('height');
+    // Keep leading controls reachable when the toolbar overflows.
+    overflow-x: auto;
     transform: translate3d(0, 0, 0);
     transition:
       transform $duration-fast-02 motion(standard, productive),
