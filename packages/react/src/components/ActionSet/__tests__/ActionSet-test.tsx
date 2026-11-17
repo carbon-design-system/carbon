@@ -1,20 +1,30 @@
 /**
- * Copyright IBM Corp. 2021, 2024
+ * Copyright IBM Corp. 2021, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 // cspell:words Scooby
 
-import React from 'react';
+import React, { createRef } from 'react';
 import { render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import {
+  describe,
+  it,
+  expect,
+  jest,
+  beforeEach,
+  afterEach,
+} from '@jest/globals';
+import '@testing-library/jest-dom/jest-globals';
 
 import { ActionSet } from '..';
 import { validateActionSetProps } from '../ActionSet';
+import type { ButtonKind } from '../../Button/Button';
 
 const blockClass = 'cds--action-set';
-const componentName = ActionSet.displayName;
+const componentName = ActionSet.displayName ?? 'ActionSet';
 
 // Simple unique label generator for test isolation
 let _counter = 0;
@@ -28,16 +38,22 @@ const actionP = { label: labelP };
 const labelD = `Danger button ${uid()}`;
 const actionD = { label: labelD, dangerDescription };
 const labelS = `Secondary button ${uid()}`;
-const actionS = { label: labelS, kind: 'secondary' };
+const actionS = { label: labelS, kind: 'secondary' } as const;
 const labelS2 = `Another secondary button ${uid()}`;
-const actionS2 = { label: labelS2, kind: 'secondary' };
+const actionS2 = { label: labelS2, kind: 'secondary' } as const;
 const labelG = `Ghost button ${uid()}`;
-const actionG = { label: labelG, kind: 'ghost' };
+const actionG = { label: labelG, kind: 'ghost' } as const;
 const labelDG = `Danger Ghost button ${uid()}`;
-const actionDG = { label: labelDG, kind: 'danger--ghost', dangerDescription };
+const actionDG = {
+  label: labelDG,
+  kind: 'danger--ghost',
+  dangerDescription,
+} as const;
 
-const getByRoleAndLabel = (role, label) =>
-  screen.getByRole(role, { name: label });
+const getByRoleAndLabel = (
+  role: Parameters<typeof screen.getByRole>[0],
+  label: string
+) => screen.getByRole(role, { name: label });
 
 describe(componentName, () => {
   it('renders a component ActionSet', async () => {
@@ -143,40 +159,40 @@ describe(componentName, () => {
   });
 
   it('forwards a ref to an action button', async () => {
-    const ref = React.createRef();
+    const ref = createRef<HTMLButtonElement>();
     render(<ActionSet actions={[{ ...actionS, ref }, actionP]} />);
     expect(ref.current).toEqual(getByRoleAndLabel('button', labelS));
   });
 
   it('applies className to the containing node', async () => {
-    render(<ActionSet className={className} />);
+    render(<ActionSet actions={[]} className={className} />);
     expect(screen.getByRole('presentation')).toHaveClass(className);
   });
 
   it('adds additional properties to the containing node', async () => {
-    render(<ActionSet data-testid={dataTestId} />);
+    render(<ActionSet actions={[]} data-testid={dataTestId} />);
     screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an appropriate node', async () => {
-    const ref = React.createRef();
-    render(<ActionSet ref={ref} />);
+    const ref = createRef<HTMLDivElement>();
+    render(<ActionSet actions={[]} ref={ref} />);
     expect(ref.current).toEqual(screen.getByRole('presentation'));
   });
 });
 
 const prop = `prop-${uid()}`;
 
-const primary = { kind: 'primary' };
-const secondary = { kind: 'secondary' };
-const danger = { kind: 'danger' };
-const ghost = { kind: 'ghost' };
-const dangerPrimary = { kind: 'danger--primary' };
-const dangerGhost = { kind: 'danger--ghost' };
-const dangerTertiary = { kind: 'danger--tertiary' };
-const tertiary = { kind: 'tertiary' };
+const primary = { kind: 'primary' } as const;
+const secondary = { kind: 'secondary' } as const;
+const danger = { kind: 'danger' } as const;
+const ghost = { kind: 'ghost' } as const;
+const dangerPrimary = { kind: 'danger--primary' } as const;
+const dangerGhost = { kind: 'danger--ghost' } as const;
+const dangerTertiary = { kind: 'danger--tertiary' } as const;
+const tertiary = { kind: 'tertiary' } as const;
 
-const props = {
+const props: Record<string, Record<string, { kind: ButtonKind }[]>> = {
   0: { [prop]: [] },
   1: { [prop]: [primary] },
   2: { [prop]: [primary, secondary] },
@@ -197,7 +213,7 @@ const props = {
 };
 
 describe(`${componentName}.validateActions`, () => {
-  let mockWarn;
+  let mockWarn: jest.SpiedFunction<typeof console.warn>;
   beforeEach(() => {
     mockWarn = jest.spyOn(console, 'warn').mockImplementation(() => {});
   });
