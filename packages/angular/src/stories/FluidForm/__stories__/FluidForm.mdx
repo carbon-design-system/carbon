@@ -1,0 +1,85 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as FluidFormStories from './FluidForm.stories';
+
+<Meta of={FluidFormStories} />
+
+# Fluid form
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/angular/src/stories/FluidForm)
+&nbsp;|&nbsp;
+[Usage guidelines](https://carbondesignsystem.com/components/text-input/usage/#fluid-form)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/text-input/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Component API](#component-api)
+- [Angular-specific notes](#angular-specific-notes)
+- [Feedback](#feedback)
+
+## Overview
+
+The `cds-ng-fluid-form` component is a presentational container that applies
+fluid styling to the fluid form controls it contains. Each control is imported
+from its own entry point.
+
+### Importing
+
+```ts
+import { FluidFormComponent } from '@carbon/angular/fluid-form';
+import { FluidTextInputComponent } from '@carbon/angular/fluid-text-input';
+import { StackComponent } from '@carbon/angular/stack';
+
+@Component({
+  standalone: true,
+  imports: [FluidFormComponent, FluidTextInputComponent, StackComponent],
+  template: `
+    <cds-ng-fluid-form aria-label="new project setup">
+      <cds-ng-stack gap="5">
+        <cds-ng-fluid-text-input
+          id="project-name"
+          label="Project name"
+          placeholder="e.g. Carbon Design System"></cds-ng-fluid-text-input>
+      </cds-ng-stack>
+    </cds-ng-fluid-form>
+  `,
+})
+export class MyComponent {}
+```
+
+<Canvas of={FluidFormStories.Default} />
+
+## Component API
+
+<ArgTypes of={FluidFormStories.Default} />
+
+## Angular-specific notes
+
+### Composition
+
+The `Default` story composes controls from several entry points, including
+`@carbon/angular/fluid-text-input`, `@carbon/angular/fluid-select`,
+`@carbon/angular/fluid-dropdown`, `@carbon/angular/fluid-combo-box`,
+`@carbon/angular/fluid-multi-select`, `@carbon/angular/fluid-number-input`,
+`@carbon/angular/fluid-password-input`, `@carbon/angular/fluid-textarea`,
+`@carbon/angular/fluid-search`, `@carbon/angular/radio-button`,
+`@carbon/angular/checkbox`, `@carbon/angular/form-group` and
+`@carbon/angular/file-uploader`.
+
+### Fluid date picker
+
+`@carbon/angular` does not wrap `cds-fluid-date-picker` (it depends on
+flatpickr, see ADR 0021), so the date fields shown in the web components story
+are not part of this Angular story.
+
+### Forms integration (`ControlValueAccessor`)
+
+The fluid text input, textarea, number input, select and password input wrappers
+implement `ControlValueAccessor`, so they work with `ngModel` and reactive
+forms.
+
+## Feedback
+
+Help us improve this component by providing feedback, opening issues, or
+contributing on GitHub.
