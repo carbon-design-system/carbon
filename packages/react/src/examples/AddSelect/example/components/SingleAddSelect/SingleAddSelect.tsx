@@ -24,7 +24,6 @@ import {
 } from '@carbon/react';
 import './SingleAddSelect.scss';
 
-
 const blockClass = `single-add-select-pattern`;
 
 /**
