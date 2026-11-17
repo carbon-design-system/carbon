@@ -184,7 +184,7 @@ function ProgressBar({
             className={`${prefix}--visually-hidden`}
             aria-live="polite"
             id={helperId}>
-            {isFinished ? 'Done' : 'Loading'}
+            {isFinished ? 'Done' : isError ? 'Error' : 'Loading'}
           </div>
         </div>
       )}
