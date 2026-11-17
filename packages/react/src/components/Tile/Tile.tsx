@@ -387,7 +387,8 @@ ClickableTile.propTypes = {
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 };
 
-export interface SelectableTileProps extends HTMLAttributes<HTMLDivElement> {
+export interface SelectableTileProps
+  extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
   children?: ReactNode;
   className?: string;
   /**

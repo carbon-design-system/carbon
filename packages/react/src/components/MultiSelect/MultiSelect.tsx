@@ -909,6 +909,7 @@ export const MultiSelect = React.forwardRef(
                         title={useTitleInItem ? itemText : undefined}
                         indeterminate={isIndeterminate}
                         disabled={disabled}
+                        tabIndex={-1}
                       />
                     </div>
                   </ListBox.MenuItem>

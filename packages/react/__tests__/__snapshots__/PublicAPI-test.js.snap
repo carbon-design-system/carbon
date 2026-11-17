@@ -3474,6 +3474,25 @@ Map {
         ],
         "type": "oneOf",
       },
+      "tooltipAlignment": {
+        "args": [
+          [
+            "top",
+            "top-start",
+            "top-end",
+            "bottom",
+            "bottom-start",
+            "bottom-end",
+            "left",
+            "left-start",
+            "left-end",
+            "right",
+            "right-start",
+            "right-end",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "type": {
         "type": "string",
       },
@@ -3663,6 +3682,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "small",
             "md",
@@ -3733,6 +3753,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -3814,6 +3835,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -8761,6 +8783,25 @@ Map {
         ],
         "type": "oneOf",
       },
+      "tooltipAlignment": {
+        "args": [
+          [
+            "top",
+            "top-start",
+            "top-end",
+            "bottom",
+            "bottom-start",
+            "bottom-end",
+            "left",
+            "left-start",
+            "left-end",
+            "right",
+            "right-start",
+            "right-end",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "type": {
         "type": "string",
       },
@@ -13698,6 +13739,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "tabIndex": {
+        "type": "number",
+      },
     },
     "render": [Function],
   },
@@ -13963,6 +14007,9 @@ Map {
       },
       "shapeDescription": {
         "type": "string",
+      },
+      "tabIndex": {
+        "type": "number",
       },
       "textSize": {
         "args": [
@@ -15747,6 +15794,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "tabIndex": {
+        "type": "number",
+      },
     },
     "render": [Function],
   },
@@ -16012,6 +16062,9 @@ Map {
       },
       "shapeDescription": {
         "type": "string",
+      },
+      "tabIndex": {
+        "type": "number",
       },
       "textSize": {
         "args": [

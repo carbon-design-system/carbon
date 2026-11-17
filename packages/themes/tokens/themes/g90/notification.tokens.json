@@ -21,6 +21,11 @@
     "$value": "{gray.80}",
     "$description": "Background color for warning notifications. Use to alert users of potential issues, cautions, or actions that need attention but aren't critical."
   },
+  "notification-action-hover": {
+    "$type": "color",
+    "$value": "{gray.80Hover}",
+    "$description": "Background color for notification action buttons on hover. Use for interactive elements within low-contrast notifications."
+  },
   "notification-action-tertiary-inverse": {
     "$type": "color",
     "$value": "{blue.60}",
