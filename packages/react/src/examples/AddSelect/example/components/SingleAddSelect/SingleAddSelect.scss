@@ -1,0 +1,34 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type' as *;
+// Carbon CSS prefix (default: 'cds').
+$prefix: 'cds';
+
+// Single Add Select Pattern Component Styles
+.single-add-select-pattern {
+  &__no-results {
+    padding: $spacing-07;
+    text-align: center;
+
+    h4 {
+      font-weight: 600;
+      margin-block-end: $spacing-03;
+    }
+
+    p {
+      color: var(--cds-text-secondary);
+    }
+  }
+}
+
+.notification {
+  position: fixed;
+  z-index: 9999;
+  inset-block-start: $spacing-05;
+  inset-inline-end: $spacing-05;
+}

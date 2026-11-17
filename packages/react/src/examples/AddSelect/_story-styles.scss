@@ -40,26 +40,3 @@
     margin-block-start: $spacing-03;
   }
 }
-
-.single-add-select-pattern {
-  &__no-results {
-    padding: $spacing-07;
-    text-align: center;
-
-    h4 {
-      font-weight: 600;
-      margin-block-end: $spacing-03;
-    }
-
-    p {
-      color: var(--cds-text-secondary);
-    }
-  }
-}
-
-.notification {
-  position: fixed;
-  z-index: 9999;
-  inset-block-start: $spacing-05;
-  inset-inline-end: $spacing-05;
-}

@@ -22,6 +22,8 @@ import {
   AddSelectData,
   AddSelectItem,
 } from '@carbon/react';
+import './SingleAddSelect.scss';
+
 
 const blockClass = `single-add-select-pattern`;
 
