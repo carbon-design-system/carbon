@@ -5,7 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { act, createRef } from 'react';
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest,
+} from '@jest/globals';
+import '@testing-library/jest-dom/jest-globals';
+import React, { act, createRef, type ComponentProps } from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Crossroads } from '@carbon/icons-react';
@@ -16,9 +25,13 @@ import { CoachmarkBeacon } from '../CoachmarkBeacon';
 
 const prefix = 'cds';
 const blockClass = `${prefix}--coachmark`;
-const componentName = Coachmark.displayName;
+const componentName = Coachmark.displayName ?? 'Coachmark';
 
-const renderCoachmark = ({ open, ...rest } = {}) =>
+type CoachmarkTestProps = Partial<ComponentProps<typeof Coachmark>> & {
+  'data-testid'?: string;
+};
+
+const renderCoachmark = ({ open, ...rest }: CoachmarkTestProps = {}) =>
   render(
     <Coachmark open={open} {...rest}>
       <CoachmarkBeacon
@@ -42,7 +55,7 @@ const renderCoachmark = ({ open, ...rest } = {}) =>
     </Coachmark>
   );
 
-const renderCoachmarkFloating = ({ open, ...rest } = {}) =>
+const renderCoachmarkFloating = ({ open, ...rest }: CoachmarkTestProps = {}) =>
   render(
     <Coachmark open={open} {...rest}>
       <Button
@@ -113,7 +126,7 @@ describe(componentName, () => {
   });
 
   it('forwards a ref to an appropriate node', () => {
-    const ref = createRef();
+    const ref = createRef<HTMLDivElement>();
     renderCoachmark({ ref });
     expect(ref.current).toHaveClass(blockClass);
   });
@@ -156,9 +169,11 @@ describe(componentName, () => {
       open: true,
       position: { x: 151, y: 155 },
     });
-    const coachmarkWrapper = container.querySelector(`.${blockClass}`);
+    const coachmarkWrapper = container.querySelector<HTMLDivElement>(
+      `.${blockClass}`
+    );
     await waitFor(() => {
-      expect(coachmarkWrapper.style.transform).toBe('translate(151px, 155px)');
+      expect(coachmarkWrapper?.style.transform).toBe('translate(151px, 155px)');
     });
   });
 
@@ -338,7 +353,7 @@ describe(componentName, () => {
     });
 
     await waitFor(() => {
-      const currentTransform = popoverContent.parentElement.style.transform;
+      const currentTransform = popoverContent?.parentElement?.style.transform;
       expect(currentTransform).toContain('translate');
       expect(currentTransform).toContain('8px');
     });

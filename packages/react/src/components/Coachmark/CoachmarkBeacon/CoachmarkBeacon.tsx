@@ -30,6 +30,10 @@ export interface CoachmarkButtonProps extends ButtonProps<ElementType> {
 
 export interface CoachmarkBeaconProps {
   /**
+   * ID applied to the beacon container.
+   */
+  id?: string;
+  /**
    * button props
    */
   buttonProps?: CoachmarkButtonProps;

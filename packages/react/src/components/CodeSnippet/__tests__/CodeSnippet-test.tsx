@@ -5,13 +5,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { beforeEach, describe, expect, it, jest } from '@jest/globals';
+import '@testing-library/jest-dom/jest-globals';
 import React from 'react';
 import CodeSnippet from '../';
 import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import copy from 'copy-to-clipboard';
 
-const mockUseResizeObserver = jest.fn();
+const mockUseResizeObserver =
+  jest.fn<(args: { onResize: () => void }) => void>();
+const mockCopy = jest.mocked(copy);
 
 jest.mock('copy-to-clipboard', () => jest.fn());
 
@@ -83,7 +87,7 @@ const triggerResizeObserver = () => {
 };
 
 beforeEach(() => {
-  copy.mockClear();
+  mockCopy.mockClear();
   mockUseResizeObserver.mockClear();
 });
 
@@ -180,7 +184,8 @@ describe('CodeSnippet', () => {
 
   it('should use fallback container attributes when `type` is not recognized', () => {
     const { container } = render(
-      <CodeSnippet aria-label={null} type="other">
+      // @ts-expect-error: This test verifies fallback behavior for an unrecognized type.
+      <CodeSnippet aria-label="" type="other">
         {single}
       </CodeSnippet>
     );
@@ -277,7 +282,7 @@ describe('CodeSnippet events', () => {
 
     await userEvent.click(screen.getByRole('button'));
 
-    expect(copy).toHaveBeenCalledWith('copied value');
+    expect(mockCopy).toHaveBeenCalledWith('copied value');
   });
 
   it('should call the click handler with type inline', async () => {
@@ -320,9 +325,12 @@ describe('Show more button', () => {
 
     const textBox = screen.getByRole('textbox');
     const code = textBox.querySelector('code');
+    if (!code) {
+      throw new Error('Unable to find code element.');
+    }
     const getBoundingClientRectSpy = jest
       .spyOn(code, 'getBoundingClientRect')
-      .mockReturnValue({ height: 80 });
+      .mockReturnValue(new DOMRect(0, 0, 0, 80));
 
     triggerResizeObserver();
 
@@ -333,14 +341,14 @@ describe('Show more button', () => {
     ).toBeInTheDocument();
     expect(textBox).toHaveStyle({ maxHeight: '80px', minHeight: '64px' });
 
-    getBoundingClientRectSpy.mockReturnValue({ height: 50 });
+    getBoundingClientRectSpy.mockReturnValue(new DOMRect(0, 0, 0, 50));
     triggerResizeObserver();
 
     expect(
       screen.getByRole('button', { name: 'Show more' })
     ).toBeInTheDocument();
 
-    getBoundingClientRectSpy.mockReturnValue({ height: 32 });
+    getBoundingClientRectSpy.mockReturnValue(new DOMRect(0, 0, 0, 32));
     triggerResizeObserver();
 
     expect(
@@ -361,8 +369,13 @@ describe('Show more button', () => {
 
     const textBox = screen.getByRole('textbox');
     const code = textBox.querySelector('code');
+    if (!code) {
+      throw new Error('Unable to find code element.');
+    }
 
-    jest.spyOn(code, 'getBoundingClientRect').mockReturnValue({ height: 80 });
+    jest
+      .spyOn(code, 'getBoundingClientRect')
+      .mockReturnValue(new DOMRect(0, 0, 0, 80));
 
     triggerResizeObserver();
 
