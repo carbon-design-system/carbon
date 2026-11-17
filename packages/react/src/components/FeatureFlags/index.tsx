@@ -92,6 +92,14 @@ export interface FeatureFlagsProps {
   enableV12DynamicFloatingStyles?: boolean;
 
   /**
+   * Enable `TabPanel` to wrap its content in a `Layer` when the tabs are
+   * `contained` or vertical.
+   *
+   * Becomes the default behavior in v12.
+   */
+  enableV12TabsContainedLayer?: boolean;
+
+  /**
    * Enable `autoAlign` by default for components that support it, like
    * `Popover`, `Tooltip`, `Toggletip`, `Dropdown`, etc. An explicit
    * `autoAlign` prop always takes precedence.
@@ -137,6 +145,7 @@ const PROP_TO_FLAG: Record<string, string> = {
   enableFocusWrapWithoutSentinels: 'enable-focus-wrap-without-sentinels',
   enableDialogElement: 'enable-dialog-element',
   enableV12DynamicFloatingStyles: 'enable-v12-dynamic-floating-styles',
+  enableV12TabsContainedLayer: 'enable-v12-tabs-contained-layer',
   enableV12Autoalign: 'enable-v12-autoalign',
   enableEnhancedFileUploader: 'enable-enhanced-file-uploader',
   enablePresence: 'enable-presence',
@@ -159,6 +168,7 @@ export const FeatureFlags = ({
   enableFocusWrapWithoutSentinels,
   enableDialogElement,
   enableV12DynamicFloatingStyles,
+  enableV12TabsContainedLayer,
   enableV12Autoalign,
   enableEnhancedFileUploader,
   enablePresence,
@@ -179,6 +189,7 @@ export const FeatureFlags = ({
       enableFocusWrapWithoutSentinels,
       enableDialogElement,
       enableV12DynamicFloatingStyles,
+      enableV12TabsContainedLayer,
       enableV12Autoalign,
       enableEnhancedFileUploader,
       enablePresence,
@@ -209,6 +220,7 @@ export const FeatureFlags = ({
     enableFocusWrapWithoutSentinels,
     enableDialogElement,
     enableV12DynamicFloatingStyles,
+    enableV12TabsContainedLayer,
     enableV12Autoalign,
     enableEnhancedFileUploader,
     enablePresence,
@@ -243,6 +255,7 @@ FeatureFlags.propTypes = {
   enableFocusWrapWithoutSentinels: PropTypes.bool,
   enableDialogElement: PropTypes.bool,
   enableV12DynamicFloatingStyles: PropTypes.bool,
+  enableV12TabsContainedLayer: PropTypes.bool,
   enableV12Autoalign: PropTypes.bool,
   enableEnhancedFileUploader: PropTypes.bool,
   enablePresence: PropTypes.bool,
