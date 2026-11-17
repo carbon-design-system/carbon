@@ -1,10 +1,9 @@
 {
   "name": "create-tearsheet-narrow-pattern-example",
-  "description": "An example showing use of the CreateTearsheetNarrow pattern from the @carbon/ibm-products library.",
+  "description": "An example showing use of the CreateTearsheetNarrow pattern from the @carbon/react library.",
   "keywords": [
     "carbon",
     "ibm",
-    "ibm-products",
     "pattern",
     "create-tearsheet",
     "tearsheet"

@@ -1,8 +1,8 @@
 {
-  "name": "ibm-products-createfullpage-pattern-example",
+  "name": "create-full-page-pattern-example",
   "version": "0.1.0",
   "private": true,
-  "description": "Sample project for getting started with the createfullpage pattern using Carbon for IBM Products",
+  "description": "Sample project for getting started with the createfullpage pattern using Carbon React",
   "license": "Apache-2.0",
   "main": "index.html",
   "type": "module",
