@@ -1,12 +1,140 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import '@carbon/web-components/es/components/file-uploader/index.js';
+import '@carbon/web-components/es/components/layout/index.js';
+import { FILE_UPLOADER_ITEM_SIZE } from '@carbon/web-components/es/components/file-uploader/file-uploader-item.js';
 import { expect, fixture, html } from '@open-wc/testing';
+
+describe('file uploader layout size', () => {
+  it('should preserve the medium default size without a layout context', async () => {
+    const el = await fixture(html`
+      <div>
+        <cds-file-uploader-button>Upload</cds-file-uploader-button>
+        <cds-file-uploader-item state="edit">test.png</cds-file-uploader-item>
+      </div>
+    `);
+
+    const button = el.querySelector('cds-file-uploader-button');
+    const item = el.querySelector('cds-file-uploader-item');
+
+    expect(button.size).to.be.undefined;
+    expect(item.size).to.be.undefined;
+    expect(
+      getComputedStyle(button.shadowRoot.querySelector('button')).minBlockSize
+    ).to.equal('40px');
+    expect(getComputedStyle(item).minBlockSize).to.equal('40px');
+  });
+
+  it('should inherit the layout size and respond to context changes', async () => {
+    const layout = await fixture(html`
+      <cds-layout size="xs">
+        <cds-file-uploader>
+          <cds-file-uploader-button>Upload</cds-file-uploader-button>
+          <cds-file-uploader-item state="edit">test.png</cds-file-uploader-item>
+        </cds-file-uploader>
+      </cds-layout>
+    `);
+
+    const button = layout.querySelector('cds-file-uploader-button');
+    const item = layout.querySelector('cds-file-uploader-item');
+    await Promise.all([
+      layout.querySelector('cds-file-uploader').updateComplete,
+      button.updateComplete,
+      item.updateComplete,
+    ]);
+    const inputButton = button.shadowRoot.querySelector('button');
+
+    expect(getComputedStyle(inputButton).minBlockSize).to.equal('24px');
+    expect(getComputedStyle(item).minBlockSize).to.equal('24px');
+
+    layout.size = 'lg';
+    await layout.updateComplete;
+
+    expect(getComputedStyle(inputButton).minBlockSize).to.equal('48px');
+    expect(getComputedStyle(item).minBlockSize).to.equal('48px');
+  });
+
+  [
+    ['xs', FILE_UPLOADER_ITEM_SIZE.SMALL, 32],
+    ['lg', FILE_UPLOADER_ITEM_SIZE.EXTRA_SMALL, 24],
+  ].forEach(([contextSize, size, expectedHeight]) => {
+    it(`should honor explicit size ${size} within a ${contextSize} layout context`, async () => {
+      const layout = await fixture(html`
+        <cds-layout size=${contextSize}>
+          <cds-file-uploader>
+            <cds-file-uploader-button size=${size}
+              >Upload</cds-file-uploader-button
+            >
+            <cds-file-uploader-item size=${size} state="edit"
+              >test.png</cds-file-uploader-item
+            >
+          </cds-file-uploader>
+        </cds-layout>
+      `);
+
+      const button = layout.querySelector('cds-file-uploader-button');
+      const item = layout.querySelector('cds-file-uploader-item');
+      await Promise.all([
+        layout.querySelector('cds-file-uploader').updateComplete,
+        button.updateComplete,
+        item.updateComplete,
+      ]);
+
+      expect(item.size).to.equal(size);
+      expect(item).to.have.attribute('size', size);
+      expect(
+        button.shadowRoot.querySelector('button').getBoundingClientRect().height
+      ).to.equal(expectedHeight);
+      expect(item.getBoundingClientRect().height).to.equal(expectedHeight);
+    });
+  });
+
+  it('should cap file items at the largest supported size', async () => {
+    const layout = await fixture(html`
+      <cds-layout size="2xl">
+        <cds-file-uploader-item state="edit">test.png</cds-file-uploader-item>
+      </cds-layout>
+    `);
+
+    expect(
+      getComputedStyle(layout.querySelector('cds-file-uploader-item'))
+        .minBlockSize
+    ).to.equal('48px');
+  });
+
+  it('should size invalid file spacing from the layout context', async () => {
+    const layout = await fixture(html`
+      <cds-layout size="xs">
+        <cds-file-uploader-item
+          state="edit"
+          invalid
+          error-subject="Invalid file">
+          test.png
+        </cds-file-uploader-item>
+      </cds-layout>
+    `);
+    const item = layout.querySelector('cds-file-uploader-item');
+    const error = item.shadowRoot.querySelector('.cds--form-requirement');
+
+    expect(getComputedStyle(item).rowGap).to.equal('0px');
+    expect(getComputedStyle(item).paddingBlockStart).to.equal('0px');
+    expect(getComputedStyle(error).paddingBlockStart).to.equal('3px');
+    expect(getComputedStyle(error).paddingBlockEnd).to.equal('4px');
+
+    layout.size = 'sm';
+    await layout.updateComplete;
+
+    expect(getComputedStyle(item).rowGap).to.equal('4px');
+    expect(getComputedStyle(item).paddingBlockStart).to.equal('4px');
+    expect(getComputedStyle(error).paddingBlockStart).to.equal('7px');
+    expect(getComputedStyle(error).paddingBlockEnd).to.equal('0px');
+  });
+});
 
 describe('cds-file-uploader-button', () => {
   describe('accept parsing and normalization', () => {
