@@ -62,6 +62,10 @@
   }
 
   @if enabled('enable-v12-release') {
+    .#{$prefix}--time-picker__select {
+      margin-inline-start: convert.to-rem(1px);
+    }
+
     .#{$prefix}--time-picker__input-field--with-select {
       border-end-end-radius: 0;
       border-inline-end: none;
