@@ -510,10 +510,10 @@
       }
     }
 
-    // Today's date - blue dot indicator
+    // Today's date - link-primary text (consistent with v11) and blue dot indicator
     &.today:not(.selected) {
       position: relative;
-      color: $text-primary;
+      color: $link-primary;
       font-weight: 600;
 
       // Blue dot below the date number
