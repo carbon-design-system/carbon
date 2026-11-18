@@ -5,11 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, fireEvent, screen } from '@testing-library/react';
+import { render, fireEvent, screen, act } from '@testing-library/react';
 import { getByLabel, getByText } from '@carbon/test-utils/dom';
 import React from 'react';
 import { FileUploaderItem } from '../';
-import { FeatureFlags } from '../../FeatureFlags';
 import { keys } from '../../../internal/keyboard';
 
 const statuses = ['uploading', 'edit', 'complete'];
@@ -166,16 +165,17 @@ describe('FileUploaderItem', () => {
       ).not.toBeInTheDocument();
     });
 
-    it('should keep the tooltip behavior when `align` changes', () => {
+    it('should keep the tooltip behavior when `align` changes', async () => {
       mockTruncation(true);
       const { container, rerender } = render(
-        <FileUploaderItem name={name} align="top" />
+        <FileUploaderItem name={name} align="top" autoAlign={false} />
       );
       expect(container.querySelector('.cds--popover-container')).toHaveClass(
         'cds--popover--top'
       );
 
-      rerender(<FileUploaderItem name={name} align="left" />);
+      rerender(<FileUploaderItem name={name} align="left" autoAlign={false} />);
+      await act(async () => {});
 
       const popover = container.querySelector('.cds--popover-container');
       expect(popover).toHaveClass('cds--popover--left');
@@ -213,13 +213,13 @@ describe('FileUploaderItem', () => {
     });
 
     describe('autoAlign', () => {
-      it('should not enable auto-align by default', () => {
+      it('should enable auto-align by default', () => {
         mockTruncation(true);
         const { container } = render(<FileUploaderItem name={name} />);
 
-        expect(
-          container.querySelector('.cds--popover-container')
-        ).not.toHaveClass('cds--popover--auto-align');
+        expect(container.querySelector('.cds--popover-container')).toHaveClass(
+          'cds--popover--auto-align'
+        );
       });
 
       it('should enable auto-align on the tooltip with `autoAlign`', () => {
@@ -244,30 +244,16 @@ describe('FileUploaderItem', () => {
         expect(popover).toHaveClass('cds--popover--top');
       });
 
-      it('should default to the `enable-v12-autoalign` feature flag', () => {
+      it('should keep the requested alignment with `autoAlign={false}`', async () => {
         mockTruncation(true);
         const { container } = render(
-          <FeatureFlags enableV12Autoalign>
-            <FileUploaderItem name={name} />
-          </FeatureFlags>
+          <FileUploaderItem name={name} align="top" autoAlign={false} />
         );
+        await act(async () => {});
 
-        expect(container.querySelector('.cds--popover-container')).toHaveClass(
-          'cds--popover--auto-align'
-        );
-      });
-
-      it('should let `autoAlign={false}` override the feature flag', () => {
-        mockTruncation(true);
-        const { container } = render(
-          <FeatureFlags enableV12Autoalign>
-            <FileUploaderItem name={name} autoAlign={false} />
-          </FeatureFlags>
-        );
-
-        expect(
-          container.querySelector('.cds--popover-container')
-        ).not.toHaveClass('cds--popover--auto-align');
+        const popover = container.querySelector('.cds--popover-container');
+        expect(popover).toHaveClass('cds--popover--auto-align');
+        expect(popover).toHaveClass('cds--popover--top');
       });
 
       it('should not render a tooltip for a non-truncated name with `autoAlign`', () => {
