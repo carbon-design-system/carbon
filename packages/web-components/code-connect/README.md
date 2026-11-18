@@ -31,14 +31,6 @@ Carbon connects components with Figma's
 written against the
 [Template API](https://developers.figma.com/docs/code-connect/template-api/).
 
-Config files for each component live within the web-components package inside
-the code-connect folder, in a folder named after the component directory in
-`src/components`.
-
-```sh
-packages/web-components/code-connect/component-name/component-name.figma.ts
-```
-
 `packages/web-components/figma.config.json` controls which files are published.
 
 ### Template file structure
