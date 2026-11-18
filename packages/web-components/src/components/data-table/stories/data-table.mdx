@@ -115,33 +115,37 @@ behavior in JavaScript).
 
 The component uses a default `Intl.Collator` object created with the current set
 locale to sort the rows. The default sorting row function compares cells whose
-text represents a number (e.g., `-5` or `3.25`) by their numeric value, and uses
-this collator for all other cells. As such, the collator is needed in the custom
-sorting function.
+text represents a number (e.g., `-5` or `3.25`) by their numeric value, sorts
+blank cells first, and uses this collator for all other cells. As such, the
+collator is needed in the custom sorting function.
 
 For example, this `customSortRow` function would take on the following shape:
 
 ```js
-const isNumeric = (value) =>
-  value.trim() !== '' && Number.isFinite(Number(value));
+const INTEGER_PATTERN = /^[+-]?\d+$/;
+
+// Blank text first, then numeric text, then everything else.
+const getRank = (value) => {
+  if (value.trim() === '') return 0;
+  return Number.isFinite(Number(value)) ? 1 : 2;
+};
 
 const customSortRow = (lhs, rhs, collator) => {
-  const lhsNumeric = isNumeric(lhs);
-  const rhsNumeric = isNumeric(rhs);
+  const lhsRank = getRank(lhs);
+  const rhsRank = getRank(rhs);
 
-  if (lhsNumeric && rhsNumeric) {
+  // Ranking keeps the ordering transitive when types are mixed.
+  if (lhsRank !== rhsRank) {
+    return lhsRank < rhsRank ? -1 : 1;
+  }
+  if (lhsRank === 1) {
     // Compare as BigInt for integers so large values keep their precision.
-    const integer = /^[+-]?\d+$/;
-    if (integer.test(lhs.trim()) && integer.test(rhs.trim())) {
+    if (INTEGER_PATTERN.test(lhs.trim()) && INTEGER_PATTERN.test(rhs.trim())) {
       const a = BigInt(lhs.trim());
       const b = BigInt(rhs.trim());
       return a < b ? -1 : a > b ? 1 : 0;
     }
     return Math.sign(Number(lhs) - Number(rhs));
-  }
-  // Keep numeric text before other text so the ordering stays transitive.
-  if (lhsNumeric !== rhsNumeric) {
-    return lhsNumeric ? -1 : 1;
   }
   return collator.compare(lhs, rhs);
 };
