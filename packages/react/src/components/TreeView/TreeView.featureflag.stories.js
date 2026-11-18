@@ -7,7 +7,14 @@
 
 import React, { useState } from 'react';
 import { action } from 'storybook/actions';
-import { Document, Folder } from '@carbon/icons-react';
+import {
+  Document,
+  Folder,
+  Checkbox,
+  CheckboxCheckedFilled,
+  RadioButton,
+  RadioButtonChecked,
+} from '@carbon/icons-react';
 import { Button, VStack } from '../../';
 
 import { TreeView, TreeNode } from './';
@@ -273,6 +280,216 @@ export const Default = (args) => {
 };
 
 Default.parameters = {
+  controls: {
+    exclude: ['active', 'children', 'selected'],
+  },
+};
+
+const radioNodes = [
+  {
+    id: '1',
+    value: 'Artificial intelligence',
+    label: <span>Artificial intelligence</span>,
+  },
+  {
+    id: '2',
+    value: 'Blockchain',
+    label: 'Blockchain',
+  },
+  {
+    id: '3',
+    value: 'Business automation',
+    label: 'Business automation',
+    children: [
+      {
+        id: '3-1',
+        value: 'Business process automation',
+        label: 'Business process automation',
+      },
+      {
+        id: '3-2',
+        value: 'Business process mapping',
+        label: 'Business process mapping',
+      },
+    ],
+  },
+  {
+    id: '4',
+    value: 'Business operations',
+    label: 'Business operations',
+  },
+  {
+    id: '5',
+    value: 'Cloud computing',
+    label: 'Cloud computing',
+    isExpanded: true,
+    children: [
+      {
+        id: '5-1',
+        value: 'Containers',
+        label: 'Containers',
+      },
+      {
+        id: '5-2',
+        value: 'Databases',
+        label: 'Databases',
+      },
+      {
+        id: '5-3',
+        value: 'DevOps',
+        label: 'DevOps',
+        isExpanded: true,
+        children: [
+          {
+            id: '5-4',
+            value: 'Solutions',
+            label: 'Solutions',
+          },
+          {
+            id: '5-5',
+            value: 'Case studies',
+            label: 'Case studies',
+            isExpanded: true,
+            children: [
+              {
+                id: '5-6',
+                value: 'Resources',
+                label: 'Resources',
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: '6',
+    value: 'Data & Analytics',
+    label: 'Data & Analytics',
+    children: [
+      {
+        id: '6-1',
+        value: 'Big data',
+        label: 'Big data',
+      },
+      {
+        id: '6-2',
+        value: 'Business intelligence',
+        label: 'Business intelligence',
+      },
+    ],
+  },
+  {
+    id: '7',
+    value: 'Models',
+    label: 'Models',
+    isExpanded: true,
+    disabled: true,
+    children: [
+      {
+        id: '7-1',
+        value: 'Audit',
+        label: 'Audit',
+      },
+      {
+        id: '7-2',
+        value: 'Monthly data',
+        label: 'Monthly data',
+      },
+      {
+        id: '8',
+        value: 'Data warehouse',
+        label: 'Data warehouse',
+        isExpanded: true,
+        children: [
+          {
+            id: '8-1',
+            value: 'Report samples',
+            label: 'Report samples',
+          },
+          {
+            id: '8-2',
+            value: 'Sales performance',
+            label: 'Sales performance',
+          },
+        ],
+      },
+    ],
+  },
+];
+
+function renderRadioTree(nodes, selected = [], multiselect = false) {
+  if (!nodes) {
+    return;
+  }
+
+  const CheckedIcon = multiselect ? CheckboxCheckedFilled : RadioButtonChecked;
+  const UncheckedIcon = multiselect ? Checkbox : RadioButton;
+
+  return nodes.map(({ children, isExpanded, ...nodeProps }) => (
+    <TreeNode
+      key={nodeProps.id}
+      defaultIsExpanded={isExpanded}
+      renderIcon={() => {
+        return selected.includes(nodeProps.id) ? (
+          <CheckedIcon />
+        ) : (
+          <UncheckedIcon />
+        );
+      }}
+      {...nodeProps}>
+      {renderRadioTree(children, selected, multiselect)}
+    </TreeNode>
+  ));
+}
+
+export const WithCheckboxOrRadio = (args) => {
+  const [selected, setSelected] = useState([]);
+  const [active, setActive] = useState(null);
+  const { onActivate, onSelect, ...treeViewArgs } = args;
+
+  return (
+    <VStack gap={6}>
+      <VStack gap={2}>
+        <Button
+          kind="tertiary"
+          size="sm"
+          onClick={() => {
+            setSelected(['5-2']);
+          }}>
+          Select &quot;Databases&quot;
+        </Button>
+        <Button
+          kind="tertiary"
+          size="sm"
+          onClick={() => {
+            setActive('5-2');
+          }}>
+          Activate &quot;Databases&quot;
+        </Button>
+      </VStack>
+
+      <div>
+        <TreeView
+          {...treeViewArgs}
+          active={active}
+          onActivate={(nextActive) => {
+            setActive(nextActive);
+            onActivate(nextActive);
+          }}
+          selected={selected}
+          onSelect={(nextSelected) => {
+            setSelected(nextSelected);
+            onSelect(nextSelected);
+          }}>
+          {renderRadioTree(radioNodes, selected, treeViewArgs.multiselect)}
+        </TreeView>
+      </div>
+    </VStack>
+  );
+};
+
+WithCheckboxOrRadio.parameters = {
   controls: {
     exclude: ['active', 'children', 'selected'],
   },
