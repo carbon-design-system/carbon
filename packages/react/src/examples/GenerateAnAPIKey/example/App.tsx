@@ -13,20 +13,20 @@ import { Edit } from './preview-components/Edit';
 function App() {
   return (
     <div className="example-container">
-      <h1>Generate an API Key Examples</h1>
+      <h1 className="main-title">Generate an API Key Examples</h1>
 
       <section className="example-section">
-        <h2>Instant Generate</h2>
+        <h2 className="example-title">Instant Generate</h2>
         <InstantGenerate />
       </section>
 
       <section className="example-section">
-        <h2>Generate</h2>
+        <h2 className="example-title">Generate</h2>
         <Generate />
       </section>
 
       <section className="example-section">
-        <h2>Edit</h2>
+        <h2 className="example-title">Edit</h2>
         <Edit />
       </section>
     </div>
