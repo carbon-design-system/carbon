@@ -6,6 +6,8 @@
  */
 
 import React from 'react';
+import { describe, it, expect, jest } from '@jest/globals';
+import '@testing-library/jest-dom/jest-globals';
 import CheckboxGroup from '../CheckboxGroup';
 import Checkbox from '../Checkbox/Checkbox';
 import { render, screen } from '@testing-library/react';
@@ -13,12 +15,8 @@ import { AILabel } from '../AILabel';
 
 const prefix = 'cds';
 
-/**
- * @param element {Element}
- * @returns {Record<string, string>}
- */
-const getElementAttributes = ({ attributes }) =>
-  Array.from(attributes).reduce(
+const getElementAttributes = (element: HTMLElement) =>
+  Array.from(element.attributes).reduce<Record<string, string>>(
     (acc, { name, value }) => ({ ...acc, [name]: value }),
     {}
   );
@@ -151,7 +149,6 @@ describe('CheckboxGroup', () => {
       </CheckboxGroup>
     );
 
-    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const invalidIcon = container.querySelector(
       `svg.${prefix}--checkbox__invalid-icon`
     );
@@ -180,7 +177,6 @@ describe('CheckboxGroup', () => {
       </CheckboxGroup>
     );
 
-    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const invalidIcon = container.querySelector(
       `svg.${prefix}--checkbox__invalid-icon`
     );
@@ -277,7 +273,6 @@ describe('CheckboxGroup', () => {
       </CheckboxGroup>
     );
 
-    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const warnIcon = container.querySelector(
       `svg.${prefix}--checkbox__invalid-icon--warning`
     );
@@ -304,7 +299,6 @@ describe('CheckboxGroup', () => {
       </CheckboxGroup>
     );
 
-    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const warnIcon = container.querySelector(
       `svg.${prefix}--checkbox__invalid-icon--warning`
     );
@@ -331,7 +325,6 @@ describe('CheckboxGroup', () => {
       </CheckboxGroup>
     );
 
-    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const warnIcon = container.querySelector(
       `svg.${prefix}--checkbox__invalid-icon--warning`
     );

@@ -1,10 +1,12 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it, jest } from '@jest/globals';
+import '@testing-library/jest-dom/jest-globals';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import ChatButton from '../ChatButton';
@@ -40,7 +42,7 @@ describe('ChatButton', () => {
     ['ghost', 'cds--btn--ghost'],
     ['danger', 'cds--btn--danger'],
     ['tertiary', 'cds--btn--tertiary'],
-  ])(
+  ] as const)(
     'should set the expected classes for the ChatButton of kind: `%s`',
     (kind, className) => {
       render(
@@ -56,7 +58,7 @@ describe('ChatButton', () => {
     ['sm', 'cds--btn--sm'],
     ['md', 'cds--btn--md'],
     ['lg', 'cds--btn--lg'],
-  ])(
+  ] as const)(
     'should set the expected classes for the ChatButton of size: `%s`',
     (size, className) => {
       render(
@@ -77,6 +79,7 @@ describe('ChatButton', () => {
   it('should not allow sizes larger than lg on the <ChatButton>', () => {
     const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
 
+    // @ts-expect-error: Intentionally verify runtime handling of an invalid size.
     render(<ChatButton size="xl" />);
 
     try {

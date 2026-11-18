@@ -930,9 +930,17 @@ class CDSNumberInput extends CDSTextInput {
         : null}
     `;
 
+    let describedBy: string | undefined;
+    if (normalizedProps.invalid || normalizedProps.warn) {
+      describedBy = this._errorTextId;
+    } else if (this.helperText) {
+      describedBy = this._helperTextId;
+    }
+
     const input = html`
       <input
         autocomplete="${ifNonEmpty(this.autocomplete)}"
+        aria-describedby="${ifNonEmpty(describedBy)}"
         ?autofocus="${this.autofocus}"
         ?data-invalid="${normalizedProps.invalid}"
         ?disabled="${normalizedProps.disabled}"
@@ -979,6 +987,7 @@ class CDSNumberInput extends CDSTextInput {
       normalizedProps.invalid || normalizedProps.warn
         ? html`<div
             class="${prefix}--form-requirement"
+            id="${this._errorTextId}"
             ?hidden="${!normalizedProps.invalid && !normalizedProps.warn}">
             <slot name="${normalizedProps['slot-name']}">
               ${normalizedProps['slot-text']}
@@ -989,7 +998,7 @@ class CDSNumberInput extends CDSTextInput {
     const helper = this.helperText
       ? html`<div
           class="${helperTextClasses}"
-          id="helper-text"
+          id="${this._helperTextId}"
           ?hidden="${normalizedProps.invalid || normalizedProps.warn}">
           <slot name="helper-text"> ${this.helperText} </slot>
         </div>`

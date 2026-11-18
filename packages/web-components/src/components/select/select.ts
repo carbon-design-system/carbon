@@ -15,6 +15,7 @@ import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import FormMixin from '../../globals/mixins/form';
 import { filter } from '../../globals/internal/collection-helpers';
+import { uniqueId } from '../../globals/internal/unique-id';
 import { INPUT_SIZE } from '../text-input/text-input';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import styles from './select.scss?lit';
@@ -49,6 +50,16 @@ class CDSSelect extends FormMixin(LitElement) {
   private _placeholderItemValue = `__${prefix}-select-placeholder_${Math.random()
     .toString(36)
     .slice(2)}`;
+
+  /**
+   * The ID of the helper text, referenced by `aria-describedby`.
+   */
+  private _helperTextId = uniqueId('select-helper-text');
+
+  /**
+   * The ID of the invalid or warning message, referenced by `aria-describedby`.
+   */
+  private _errorTextId = uniqueId('select-error-text');
 
   /**
    * The select box.
@@ -461,7 +472,7 @@ class CDSSelect extends FormMixin(LitElement) {
 
     const supplementalText = helperText
       ? html`
-          <div id="helper-text" class="${helperTextClasses}">
+          <div id="${this._helperTextId}" class="${helperTextClasses}">
             <slot name="helper-text"> ${helperText} </slot>
           </div>
         `
@@ -469,16 +480,18 @@ class CDSSelect extends FormMixin(LitElement) {
 
     const errorText =
       normalizedProps.invalid || normalizedProps.warn
-        ? html` <div id="error-text" class="${prefix}--form-requirement">
+        ? html` <div
+            id="${this._errorTextId}"
+            class="${prefix}--form-requirement">
             ${normalizedProps.invalid ? invalidText : warnText}
           </div>`
         : null;
 
     let describedBy: string | undefined;
     if (normalizedProps.invalid || normalizedProps.warn) {
-      describedBy = 'error-text';
+      describedBy = this._errorTextId;
     } else if (helperText) {
-      describedBy = 'helper-text';
+      describedBy = this._helperTextId;
     }
 
     const input = html`

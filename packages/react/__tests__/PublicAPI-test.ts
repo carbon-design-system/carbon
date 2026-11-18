@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,7 +7,63 @@
  * @jest-environment node
  */
 
-const { isValidElementType } = require('react-is');
+import { beforeEach, expect, jest as mockJest, test } from '@jest/globals';
+import { isValidElementType } from 'react-is';
+
+const isValidFunctionElementType = (
+  value: unknown
+): value is (...args: never[]) => unknown =>
+  typeof value === 'function' && isValidElementType(value);
+
+const mapComponentToApi = (component: object): Record<string, unknown> => {
+  const api: Record<string, unknown> = {};
+
+  // Sort alphabetically
+  const componentEntries = Object.entries(component).sort(([a], [b]) =>
+    a < b ? -1 : a > b ? 1 : 0
+  );
+
+  componentEntries.forEach(([key, value]) => {
+    // There are a couple of properties on components that we don't believe
+    // are part of our API, such as `_` prefixed variables, or capture details
+    // that are internal to a library-specific piece of functionality. For
+    // example, React's context functionality.
+    if (key[0] === '_') {
+      return;
+    }
+
+    if (key === 'Consumer') {
+      api[key] = 'React.Consumer';
+      return;
+    }
+
+    if (key === 'Provider') {
+      api[key] = 'React.Provider';
+      return;
+    }
+
+    if (key === 'contextType') {
+      api[key] = {
+        $$typeof:
+          typeof value === 'object' && value !== null && '$$typeof' in value
+            ? value.$$typeof
+            : undefined,
+      };
+      return;
+    }
+
+    // Handle components defined as fields on a component, for example
+    // `ContainedList.ContainedListItem`.
+    if (key !== 'render' && isValidFunctionElementType(value)) {
+      api[key] = mapComponentToApi(value);
+      return;
+    }
+
+    api[key] = value;
+  });
+
+  return api;
+};
 
 /**
  * In our Public API test, we try to identify each component and its
@@ -39,8 +95,9 @@ const { isValidElementType } = require('react-is');
  */
 
 beforeEach(() => {
-  jest.mock('prop-types', () => {
-    const PropTypes = jest.requireActual('prop-types');
+  mockJest.mock('prop-types', () => {
+    const PropTypes: typeof import('prop-types') =
+      mockJest.requireActual('prop-types');
     const primitive = [
       'array',
       'bool',
@@ -53,7 +110,7 @@ beforeEach(() => {
       'element',
       'elementType',
       'any',
-    ];
+    ] as const;
 
     const complex = [
       'arrayOf',
@@ -63,7 +120,7 @@ beforeEach(() => {
       'oneOfType',
       'shape',
       'exact',
-    ];
+    ] as const;
 
     // We want to remap primitive prop types like PropTypes.string with a getter
     // function. This getter function should return the type of the prop type
@@ -94,25 +151,27 @@ beforeEach(() => {
     // prop-type. We'll also need to define the `isRequired` field similar to
     // how we used it in the primitive prop types
     for (const type of complex) {
-      PropTypes[type] = function (...args) {
-        const value = {
-          type,
-          args,
-        };
+      Object.assign(PropTypes, {
+        [type]: (...args: unknown[]) => {
+          const value = {
+            type,
+            args,
+          };
 
-        Object.defineProperty(value, 'isRequired', {
-          enumerable: false,
-          get() {
-            return {
-              type,
-              args,
-              isRequired: true,
-            };
-          },
-        });
+          Object.defineProperty(value, 'isRequired', {
+            enumerable: false,
+            get: () => {
+              return {
+                type,
+                args,
+                isRequired: true,
+              };
+            },
+          });
 
-        return value;
-      };
+          return value;
+        },
+      });
     }
 
     return PropTypes;
@@ -123,78 +182,18 @@ beforeEach(() => {
  * We construct our public API by iterating through our entrypoint and finding
  * the components that we export and their corresponding API.
  */
-test('Public API should only change with a semver change', () => {
-  jest.mock('../src/internal/deprecateFieldOnObject');
+test('Public API should only change with a semver change', async () => {
+  mockJest.mock('../src/internal/deprecateFieldOnObject');
 
-  const CarbonReact = require('../src');
-  const PublicAPI = new Map();
+  const carbonReact = await import('../src');
+  const publicApi = new Map<string, Record<string, unknown>>();
 
   // Sort alphabetically
-  const CarbonReactOrdered = Object.keys(CarbonReact)
-    .sort()
-    .reduce((obj, key) => {
-      obj[key] = CarbonReact[key];
-      return obj;
-    }, {});
-
-  Object.keys(CarbonReactOrdered).forEach((name) => {
-    const Component = CarbonReact[name];
-    PublicAPI.set(name, mapComponentToAPI(Component));
-  });
-
-  function mapComponentToAPI(Component) {
-    const api = {};
-
-    // Sort alphabetically
-    const ComponentOrdered = Object.keys(Component)
-      .sort()
-      .reduce((obj, key) => {
-        obj[key] = Component[key];
-        return obj;
-      }, {});
-
-    Object.keys(ComponentOrdered).forEach((key) => {
-      // There are a couple of properties on components that we don't believe
-      // are part of our API, such as `_` prefixed variables, or capture details
-      // that are internal to a library-specific piece of functionality. For
-      // example, React's context functionality.
-      if (key[0] === '_') {
-        return;
-      }
-
-      if (key === 'Consumer') {
-        api[key] = 'React.Consumer';
-        return;
-      }
-
-      if (key === 'Provider') {
-        api[key] = 'React.Provider';
-        return;
-      }
-
-      if (key === 'contextType') {
-        api[key] = {
-          $$typeof: Component[key]['$$typeof'],
-        };
-        return;
-      }
-
-      // Handle components defined as fields on a component, for example
-      // `ContainedList.ContainedListItem`.
-      if (
-        typeof Component[key] === 'function' &&
-        key !== 'render' &&
-        isValidElementType(Component[key])
-      ) {
-        api[key] = mapComponentToAPI(Component[key]);
-        return;
-      }
-
-      api[key] = Component[key];
-    });
-
-    return api;
+  for (const [name, Component] of Object.entries(carbonReact).sort(
+    ([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)
+  )) {
+    publicApi.set(name, mapComponentToApi(Component));
   }
 
-  expect(PublicAPI).toMatchSnapshot();
+  expect(publicApi).toMatchSnapshot();
 });

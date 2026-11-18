@@ -5,8 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React, { createRef, useState } from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
+import { describe, it, expect, jest } from '@jest/globals';
+import '@testing-library/jest-dom/jest-globals';
 import { AddSelect } from '../AddSelect';
 
 const prefix = 'cds';
@@ -22,12 +24,18 @@ const sampleItems = [
   { id: '3', title: 'Item 3', subtitle: 'Subtitle 3', value: 'item-3' },
 ];
 
-/** Controlled wrapper used in selection tests */
-const ControlledAddSelect = ({ onItemSelect, multi = false, ...bodyProps }) => {
-  const [selected, setSelected] = useState(new Set());
+/** Controlled wrapper used in selection tests. */
+const ControlledAddSelect = ({
+  onItemSelect,
+  multi = false,
+}: {
+  onItemSelect?: (itemId: string, selected: boolean, value: string) => void;
+  multi?: boolean;
+}) => {
+  const [selected, setSelected] = useState(new Set<string>());
 
-  const handleSelect = (itemId, isSelected, value) => {
-    const next = multi ? new Set(selected) : new Set();
+  const handleSelect = (itemId: string, isSelected: boolean, value: string) => {
+    const next = multi ? new Set(selected) : new Set<string>();
     if (isSelected) {
       next.add(itemId);
     } else {
@@ -39,7 +47,7 @@ const ControlledAddSelect = ({ onItemSelect, multi = false, ...bodyProps }) => {
 
   return (
     <AddSelect selectedItems={selected} onItemSelect={handleSelect}>
-      <AddSelect.Body hideSearch {...bodyProps}>
+      <AddSelect.Body hideSearch>
         <AddSelect.Column multi={multi} hideSearch>
           {sampleItems.map((item) => (
             <AddSelect.Row
@@ -72,7 +80,7 @@ describe('AddSelect (root)', () => {
   });
 
   it('forwards a ref to the root div', () => {
-    const ref = React.createRef();
+    const ref = createRef<HTMLDivElement>();
     render(<AddSelect ref={ref} />);
     expect(ref.current).toBeInstanceOf(HTMLDivElement);
   });
@@ -301,7 +309,7 @@ describe('AddSelect.Body', () => {
   });
 
   it('forwards a ref to the body div', () => {
-    const ref = React.createRef();
+    const ref = createRef<HTMLDivElement>();
     render(
       <AddSelect>
         <AddSelect.Body hideSearch ref={ref} />
@@ -341,12 +349,12 @@ describe('AddSelect.Body', () => {
 
   it('does nothing on ArrowDown keydown when the grid has no rows', () => {
     // Covers the items.length === 0 early-return in handleKeyDown
-    const { container } = render(
+    render(
       <AddSelect>
         <AddSelect.Body hideSearch />
       </AddSelect>
     );
-    const grid = container.querySelector('[role="grid"]');
+    const grid = screen.getByRole('grid');
     // Should not throw and should be a no-op
     expect(() => fireEvent.keyDown(grid, { key: 'ArrowDown' })).not.toThrow();
   });
@@ -539,16 +547,14 @@ describe('AddSelect.Row', () => {
   });
 
   it('renders the navigation indicator when hasChildren is true', () => {
-    const { container } = render(
+    render(
       <AddSelect>
         <AddSelect.Body hideSearch>
           <AddSelect.Row itemId="r1" title="Row 1" value="v1" hasChildren />
         </AddSelect.Body>
       </AddSelect>
     );
-    expect(
-      container.querySelector(`.${blockClass}-row__nav-indicator`)
-    ).toBeInTheDocument();
+    expect(screen.getByLabelText('Navigate into Row 1')).toBeInTheDocument();
   });
 
   it('renders the item panel view icon when hasItemPanel is true', () => {
@@ -652,15 +658,13 @@ describe('AddSelect.Row', () => {
         </AddSelect.Body>
       </AddSelect>
     );
-    fireEvent.click(
-      container.querySelector(`.${blockClass}-row__nav-indicator`)
-    );
+    fireEvent.click(screen.getByLabelText('Navigate into Row 1'));
     expect(onNavigate).toHaveBeenCalledWith('r1', 'Row 1', 'root');
   });
 
   it('calls onNavigate via the nav indicator keyboard Enter key', () => {
     const onNavigate = jest.fn();
-    const { container } = render(
+    render(
       <AddSelect>
         <AddSelect.Body hideSearch>
           <AddSelect.Column hideSearch onNavigate={onNavigate}>
@@ -675,16 +679,15 @@ describe('AddSelect.Row', () => {
         </AddSelect.Body>
       </AddSelect>
     );
-    const navIndicator = container.querySelector(
-      `.${blockClass}-row__nav-indicator`
-    );
-    fireEvent.keyDown(navIndicator, { key: 'Enter' });
+    fireEvent.keyDown(screen.getByLabelText('Navigate into Row 1'), {
+      key: 'Enter',
+    });
     expect(onNavigate).toHaveBeenCalledWith('r1', 'Row 1', 'root');
   });
 
   it('calls onNavigate via the nav indicator keyboard Space key', () => {
     const onNavigate = jest.fn();
-    const { container } = render(
+    render(
       <AddSelect>
         <AddSelect.Body hideSearch>
           <AddSelect.Column hideSearch onNavigate={onNavigate}>
@@ -699,29 +702,25 @@ describe('AddSelect.Row', () => {
         </AddSelect.Body>
       </AddSelect>
     );
-    const navIndicator = container.querySelector(
-      `.${blockClass}-row__nav-indicator`
-    );
-    fireEvent.keyDown(navIndicator, { key: ' ' });
+    fireEvent.keyDown(screen.getByLabelText('Navigate into Row 1'), {
+      key: ' ',
+    });
     expect(onNavigate).toHaveBeenCalledWith('r1', 'Row 1', 'root');
   });
 
   it('nav indicator defaults to aria-label "Navigate into <title>"', () => {
-    const { container } = render(
+    render(
       <AddSelect>
         <AddSelect.Body hideSearch>
           <AddSelect.Row itemId="r1" title="Row 1" value="v1" hasChildren />
         </AddSelect.Body>
       </AddSelect>
     );
-    const navIndicator = container.querySelector(
-      `.${blockClass}-row__nav-indicator`
-    );
-    expect(navIndicator).toHaveAttribute('aria-label', 'Navigate into Row 1');
+    expect(screen.getByLabelText('Navigate into Row 1')).toBeInTheDocument();
   });
 
   it('nav indicator uses navIndicatorLabel prop when provided', () => {
-    const { container } = render(
+    render(
       <AddSelect>
         <AddSelect.Body hideSearch>
           <AddSelect.Row
@@ -734,10 +733,7 @@ describe('AddSelect.Row', () => {
         </AddSelect.Body>
       </AddSelect>
     );
-    const navIndicator = container.querySelector(
-      `.${blockClass}-row__nav-indicator`
-    );
-    expect(navIndicator).toHaveAttribute('aria-label', 'Aller aux enfants');
+    expect(screen.getByLabelText('Aller aux enfants')).toBeInTheDocument();
   });
 
   it('renders rowContent slot instead of the default title/subtitle section', () => {
@@ -804,9 +800,11 @@ describe('AddSelect.Row', () => {
       </AddSelect>
     );
     // Carbon sets the indeterminate DOM property directly on the input element
-    const checkbox = container.querySelector('input[type="checkbox"]');
+    const checkbox = container.querySelector<HTMLInputElement>(
+      'input[type="checkbox"]'
+    );
     expect(checkbox).toBeInTheDocument();
-    expect(checkbox.indeterminate).toBe(true);
+    expect(checkbox?.indeterminate).toBe(true);
   });
 
   it('applies the item-panel-selected CSS modifier when itemPanelOpen is true', () => {
@@ -831,7 +829,7 @@ describe('AddSelect.Row', () => {
   });
 
   it('forwards a ref to the row div', () => {
-    const ref = React.createRef();
+    const ref = createRef<HTMLDivElement>();
     render(
       <AddSelect>
         <AddSelect.Body hideSearch>
@@ -1062,9 +1060,11 @@ describe('AddSelect.Column', () => {
       </AddSelect>
     );
     // Carbon sets the indeterminate DOM property directly on the input element
-    const checkbox = container.querySelector('input[type="checkbox"]');
+    const checkbox = container.querySelector<HTMLInputElement>(
+      'input[type="checkbox"]'
+    );
     expect(checkbox).toBeInTheDocument();
-    expect(checkbox.indeterminate).toBe(true);
+    expect(checkbox?.indeterminate).toBe(true);
   });
 
   it('hides the item count tag when itemCount is 0', () => {
@@ -1108,14 +1108,12 @@ describe('AddSelect.Column', () => {
         </AddSelect.Body>
       </AddSelect>
     );
-    fireEvent.click(
-      container.querySelector(`.${blockClass}-row__nav-indicator`)
-    );
+    fireEvent.click(screen.getByLabelText('Navigate into Child nav'));
     expect(onNavigate).toHaveBeenCalledWith('cn1', 'Child nav', '');
   });
 
   it('forwards a ref to the column div', () => {
-    const ref = React.createRef();
+    const ref = createRef<HTMLDivElement>();
     render(
       <AddSelect>
         <AddSelect.Body hideSearch>
@@ -1341,16 +1339,14 @@ describe('AddSelect.SelectionSummary', () => {
     expect(screen.getByText('No items selected')).toBeInTheDocument();
   });
 
-  it('renders emptyState when count is 0 even if children map is empty', () => {
-    // Empty array from .map() is truthy — count gate must still fire emptyState
+  it('renders emptyState when count is 0 with empty children', () => {
+    // An empty array is truthy, but a zero count should still render emptyState.
     render(
       <AddSelect>
         <AddSelect.SelectionSummary
           selectedItemCount={0}
           emptyState={<p>No items selected</p>}>
-          {[].map((item) => (
-            <p key={item.id}>{item.title}</p>
-          ))}
+          {[]}
         </AddSelect.SelectionSummary>
       </AddSelect>
     );
@@ -1414,7 +1410,7 @@ describe('AddSelect.SelectionSummary', () => {
   });
 
   it('forwards a ref to the selection summary div', () => {
-    const ref = React.createRef();
+    const ref = createRef<HTMLDivElement>();
     render(
       <AddSelect>
         <AddSelect.SelectionSummary selectedItemCount={0} ref={ref} />
@@ -1639,7 +1635,7 @@ describe('AddSelect.SelectionSummaryItem', () => {
   });
 
   it('forwards a ref to the item wrapper div', () => {
-    const ref = React.createRef();
+    const ref = createRef<HTMLDivElement>();
     render(
       <AddSelect>
         <AddSelect.SelectionSummaryItem item={item} ref={ref} />
@@ -1788,7 +1784,7 @@ describe('AddSelect.ItemPanel', () => {
   });
 
   it('forwards a ref to the panel div', () => {
-    const ref = React.createRef();
+    const ref = createRef<HTMLDivElement>();
     render(
       <AddSelect>
         <AddSelect.ItemPanel item={item} ref={ref} />
