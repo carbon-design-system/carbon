@@ -1,0 +1,124 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as FileUploaderStories from './FileUploader.stories';
+
+<Meta of={FileUploaderStories} />
+
+# File uploader
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/angular/src/stories/FileUploader)
+&nbsp;|&nbsp;
+[Usage guidelines](https://carbondesignsystem.com/components/file-uploader/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/file-uploader/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Drag and drop upload container](#drag-and-drop-upload-container)
+- [Drag and drop single file upload container](#drag-and-drop-single-file-upload-container)
+- [File uploader drop container](#file-uploader-drop-container)
+- [File uploader item](#file-uploader-item)
+- [Skeleton](#skeleton)
+- [Component API](#component-api)
+- [Angular-specific notes](#angular-specific-notes)
+- [Feedback](#feedback)
+
+## Overview
+
+The `cds-ng-file-uploader` component lets users select one or more files to
+upload. It is composed with either a `cds-ng-file-uploader-button` or a
+`cds-ng-file-uploader-drop-container`, and lists the selected files with
+`cds-ng-file-uploader-item`.
+
+### Importing
+
+```ts
+import {
+  FileUploaderComponent,
+  FileUploaderButtonComponent,
+  FileUploaderDropContainerComponent,
+  FileUploaderItemComponent,
+} from '@carbon/angular/file-uploader';
+
+@Component({
+  standalone: true,
+  imports: [FileUploaderComponent, FileUploaderButtonComponent],
+  template: `
+    <cds-ng-file-uploader
+      labelTitle="Upload files"
+      labelDescription="Max file size is 500kb. Only .jpg files are supported.">
+      <cds-ng-file-uploader-button
+        buttonKind="primary"
+        accept="image/jpeg"
+        (fileUploaderButtonChanged)="onChange($event)">
+        Add file
+      </cds-ng-file-uploader-button>
+    </cds-ng-file-uploader>
+  `,
+})
+export class MyComponent {
+  onChange(event: CustomEvent) {}
+}
+```
+
+<Canvas of={FileUploaderStories.Default} />
+
+## Drag and drop upload container
+
+Use `cds-ng-file-uploader-drop-container` to let users drop files onto the
+component or click it to open the file picker.
+
+<Canvas of={FileUploaderStories.DragAndDropUploadContainerExampleApplication} />
+
+## Drag and drop single file upload container
+
+Leave `multiple` unset to accept a single file.
+
+<Canvas
+  of={FileUploaderStories.DragAndDropUploadSingleContainerExampleApplication}
+/>
+
+## File uploader drop container
+
+<Canvas of={FileUploaderStories.FileUploaderDropContainer} />
+
+## File uploader item
+
+Use `cds-ng-file-uploader-item` to show a selected file. The `state` input
+controls whether the item shows an upload in progress, a completed upload, or an
+editable item with a delete button.
+
+<Canvas of={FileUploaderStories.FileUploaderItem} />
+
+## Skeleton
+
+Use `cds-ng-file-uploader-skeleton` to display a placeholder loading skeleton.
+
+<Canvas of={FileUploaderStories.Skeleton} />
+
+## Component API
+
+<ArgTypes of={FileUploaderStories.Default} />
+
+## Angular-specific notes
+
+### Events
+
+The wrappers expose the web component custom events as outputs:
+
+| Component                             | Output                             | Web component event                        |
+| ------------------------------------- | ---------------------------------- | ------------------------------------------ |
+| `cds-ng-file-uploader-button`         | `fileUploaderButtonChanged`        | `cds-file-uploader-button-changed`         |
+| `cds-ng-file-uploader-drop-container` | `fileUploaderDropContainerChanged` | `cds-file-uploader-drop-container-changed` |
+| `cds-ng-file-uploader-item`           | `fileUploaderItemBeingdeleted`     | `cds-file-uploader-item-beingdeleted`      |
+| `cds-ng-file-uploader-item`           | `fileUploaderItemDeleted`          | `cds-file-uploader-item-deleted`           |
+
+```html
+<cds-ng-file-uploader-button
+  (fileUploaderButtonChanged)="onChange($event)"></cds-ng-file-uploader-button>
+```
+
+## Feedback
+
+Help us improve this component by providing feedback, opening issues, or
+contributing on GitHub.
