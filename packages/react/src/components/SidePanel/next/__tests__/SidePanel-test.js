@@ -9,6 +9,21 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { SidePanel } from '../SidePanel';
 
+// jsdom does not implement window.matchMedia — mock it for usePrefersReducedMotion
+Object.defineProperty(window, 'matchMedia', {
+  writable: true,
+  value: jest.fn().mockImplementation((query) => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: jest.fn(),
+    removeListener: jest.fn(),
+    addEventListener: jest.fn(),
+    removeEventListener: jest.fn(),
+    dispatchEvent: jest.fn(),
+  })),
+});
+
 const prefix = 'cds';
 const blockClass = `${prefix}--side-panel__next`;
 
