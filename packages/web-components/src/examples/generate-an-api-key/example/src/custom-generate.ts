@@ -27,7 +27,7 @@ import { ref } from 'lit/directives/ref.js';
 import styles from './api-key-modal.scss?lit';
 import './api-key-downloader';
 
-const blockClass = `c4p--apikey-modal`;
+const blockClass = `cds--apikey-modal`;
 
 /**
  * CustomGenerate.

@@ -16,7 +16,7 @@ $css--plex: true !default;
 @use 'sass:map';
 @use '@carbon/styles';
 
-$prefix: 'c4p';
+$prefix: 'cds';
 $carbon-prefix: 'cds';
 
 $block-class: #{$prefix}--create-side-panel;

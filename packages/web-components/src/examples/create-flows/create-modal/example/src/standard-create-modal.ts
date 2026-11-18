@@ -18,7 +18,7 @@ import '@carbon/web-components/es/components/form-group/index';
 import '@carbon/web-components/es/components/stack/index';
 import styles from './create-modal.scss?lit';
 
-const blockClass = `c4p--create-modal`;
+const blockClass = `cds--create-modal`;
 
 /**
  * StandardCreateModal - A self-contained example of the CreateModal pattern.

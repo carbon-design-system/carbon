@@ -20,8 +20,8 @@
     "@carbon/icon-helpers": "latest",
     "@carbon/icons": "latest",
     "@carbon/pictograms": "latest",
-    "@carbon/styles": "latest",
-    "@carbon/web-components": "latest",
+    "@carbon/styles": "v12-alpha",
+    "@carbon/web-components": "v12-alpha",
     "@ibm/plex": "latest",
     "lit": "^3.1.4",
     "sass": "^1.93.2"

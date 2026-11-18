@@ -13,8 +13,8 @@
   },
   "dependencies": {
     "@carbon/icons": "^11.87.0",
-    "@carbon/styles": "1.114.0",
-    "@carbon/web-components": "^2.62.0",
+    "@carbon/styles": "v12-alpha",
+    "@carbon/web-components": "v12-alpha",
     "lit": "^3.2.1",
     "sass": "^1.93.2"
   },

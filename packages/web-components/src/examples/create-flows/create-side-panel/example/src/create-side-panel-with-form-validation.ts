@@ -8,7 +8,7 @@
 import { html, LitElement } from 'lit';
 import { state } from 'lit/decorators.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element';
-import '@carbon/ibm-products-web-components/es/components/side-panel/index.js';
+import '@carbon/web-components/es/components/side-panel/index.js';
 import '@carbon/web-components/es/components/text-input/index.js';
 import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/number-input/index.js';
@@ -17,7 +17,7 @@ import '@carbon/web-components/es/components/form/form-item.js';
 import '@carbon/web-components/es/components/form/form.js';
 import styles from './styles.scss?lit';
 
-const blockClass = 'c4p--create-side-panel';
+const blockClass = 'cds--create-side-panel';
 
 @customElement('create-side-panel-with-form-validation')
 export class CreateSidepanelWithFormValidation extends LitElement {
@@ -57,8 +57,8 @@ export class CreateSidepanelWithFormValidation extends LitElement {
       </style>
       <div>
         <cds-button @click=${this._openHandler}>Open SidePanel</cds-button>
-        <c4p-side-panel
-          @c4p-side-panel-closed=${this._openHandler}
+        <cds-side-panel
+          @cds-side-panel-closed=${this._openHandler}
           class="${blockClass}"
           ?animate-title=${false}
           ?open=${this.open}
@@ -166,7 +166,7 @@ export class CreateSidepanelWithFormValidation extends LitElement {
             @click=${this._openHandler}
             >Create</cds-button
           >
-        </c4p-side-panel>
+        </cds-side-panel>
       </div>
     `;
   }

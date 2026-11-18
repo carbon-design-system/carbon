@@ -13,8 +13,8 @@ import '@carbon/web-components/es/components/inline-loading/index.js';
 import '@carbon/web-components/es/components/modal/index.js';
 import '@carbon/web-components/es/components/page-header/index.js';
 import type { StepData } from './create-influencer';
-import type { ActionButton } from '@carbon/ibm-products-web-components/es/components/action-set/index.js';
-import '@carbon/ibm-products-web-components/es/components/action-set/index.js';
+import type { ActionButton } from '@carbon/web-components/es/components/action-set/index.js';
+import '@carbon/web-components/es/components/action-set/index.js';
 import styles from './create-full-page.scss?lit';
 
 const blockClass = 'create-full-page-pattern';
@@ -355,7 +355,7 @@ export class CreateFullPage extends LitElement {
                 </form>
               </div>
               <div class="${blockClass}__buttons">
-                <c4p-action-set size="xl">
+                <cds-action-set size="xl">
                   <cds-button
                     kind="ghost"
                     size="2xl"
@@ -395,7 +395,7 @@ export class CreateFullPage extends LitElement {
                             : this.nextButtonText}
                         </cds-button>
                       `}
-                </c4p-action-set>
+                </cds-action-set>
               </div>
             </div>
           </div>

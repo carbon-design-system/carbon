@@ -20,7 +20,7 @@ import '../../../../components/file-uploader/file-uploader-item';
 import { ref } from 'lit/directives/ref.js';
 import styles from './import-modal.scss?lit';
 
-const blockClass = `c4p--import-modal`;
+const blockClass = `cds--import-modal`;
 
 export type FileType = {
   fetchError?: undefined | boolean;

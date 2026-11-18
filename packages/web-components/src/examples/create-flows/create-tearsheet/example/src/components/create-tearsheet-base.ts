@@ -27,7 +27,7 @@ import '@carbon/web-components/es/components/notification/index.js';
 import '@carbon/web-components/es/components/inline-loading/index.js';
 import styles from '../create-tearsheet.scss?lit';
 
-export const blockClass = `c4p--create-tearsheet`;
+export const blockClass = `cds--create-tearsheet`;
 
 export type TearsheetStepKey =
   | 'intro'

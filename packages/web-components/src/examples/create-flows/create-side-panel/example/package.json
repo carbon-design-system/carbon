@@ -1,5 +1,5 @@
 {
-  "name": "ibm-products-web-components-create-side-panel-pattern-example",
+  "name": "web-components-create-side-panel-pattern-example",
   "version": "0.1.0",
   "private": true,
   "description": "Sample project for getting started with the Delete and remove pattern using Carbon web components",
@@ -11,10 +11,8 @@
     "dev": "vite"
   },
   "dependencies": {
-    "@carbon/ibm-products-styles": "^2.93.0",
-    "@carbon/ibm-products-web-components": "^0.46.0",
-    "@carbon/web-components": "^2.62.0",
-    "@carbon/styles": "latest",
+    "@carbon/web-components": "v12-alpha",
+    "@carbon/styles": "v12-alpha",
     "lit": "^3.1.4"
   },
   "devDependencies": {

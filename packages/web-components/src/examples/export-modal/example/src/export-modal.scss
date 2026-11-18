@@ -9,7 +9,7 @@
 @use '@carbon/styles/scss/type' as *;
 @use '@carbon/styles/scss/theme' as *;
 
-$prefix: 'c4p';
+$prefix: 'cds';
 $block-class: #{$prefix}--export-modal;
 
 .#{$block-class} {

@@ -2,7 +2,7 @@
   "name": "import-modal",
   "version": "0.1.0",
   "private": true,
-  "description": "Sample project for getting started with the Web Components from Carbon for IBM Products.",
+  "description": "Sample project for getting started with the Web Components from Carbon.",
   "license": "Apache-2",
   "main": "index.html",
   "type": "module",
@@ -13,9 +13,8 @@
   },
   "dependencies": {
     "@carbon/icons": "^11.87.0",
-    "@carbon/ibm-products-styles": "^2.93.0",
-    "@carbon/styles": "1.114.0",
-    "@carbon/web-components": "^2.62.0",
+    "@carbon/styles": "v12-alpha",
+    "@carbon/web-components": "v12-alpha",
     "lit": "^3.2.1",
     "sass": "^1.64.1"
   },

@@ -1,5 +1,5 @@
 {
-  "name": "ibm-products-web-components-delete-and-remove-pattern-example",
+  "name": "web-components-delete-and-remove-pattern-example",
   "version": "0.1.0",
   "private": true,
   "description": "Sample project for getting started with the Delete and remove pattern using Carbon web components",
@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@carbon/icons": "^11.87.0",
-    "@carbon/web-components": "^2.62.0",
+    "@carbon/web-components": "v12-alpha",
     "lit": "^3.1.4"
   },
   "devDependencies": {

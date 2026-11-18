@@ -20,7 +20,7 @@ import '../../../../components/loading/index';
 import { ref } from 'lit/directives/ref.js';
 import styles from './export-modal.scss?lit';
 
-const blockClass = `c4p--export-modal`;
+const blockClass = `cds--export-modal`;
 
 /**
  * ExportModalWithExtension.

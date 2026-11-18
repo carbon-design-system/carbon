@@ -14,7 +14,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/type';
 
-$prefix: 'c4p';
+$prefix: 'cds';
 $carbon-prefix: 'cds';
 
 $block-class: #{$prefix}--create-modal;

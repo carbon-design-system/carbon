@@ -34,7 +34,7 @@ and extended further.
 
 To build this pattern, we recommend including the following components:
 
-- [Coachmark](https://ibm-products-web-components.carbondesignsystem.com/?path=/docs/components-coachmark)
+- [Coachmark](https://web-components.carbondesignsystem.com/?path=/docs/components-coachmark)
 - [cds-button](https://web-components.carbondesignsystem.com/?path=/docs/components-button)
 - [cds-link](https://web-components.carbondesignsystem.com/?path=/docs/components-link--overview)
 - [Carousel utility](https://github.com/carbon-design-system/carbon/blob/main/packages/utilities/src/carousel/README.md)
@@ -44,7 +44,7 @@ To build this pattern, we recommend including the following components:
 #### Required Styles
 The tagline component requires both JavaScript and SCSS imports:
 ```scss
-@use '@carbon/ibm-products-web-components/scss/components/coachmark/coachmark-tagline/coachmark-tagline.scss';
+@use '@carbon/web-components/scss/components/coachmark/coachmark-tagline/coachmark-tagline.scss';
 ```
 
 #### Carousel Integration
@@ -71,8 +71,8 @@ Here's a quick example to get you started.
 
 ```javascript
 import { POPOVER_ALIGNMENT } from '@carbon/web-components/es/components/popover/defs.js';
-import '@carbon/ibm-products-web-components/es/components/coachmark/index.js';
-import '@carbon/ibm-products-web-components/es/components/coachmark/coachmark-tagline/index.js';
+import '@carbon/web-components/es/components/coachmark/index.js';
+import '@carbon/web-components/es/components/coachmark/coachmark-tagline/index.js';
 import '@carbon/web-components/es/components/button/button.js';
 import { InitCarousel, initCarousel } from '@carbon/utilities';
 import '@carbon/web-components/es/components/link/index.js';
@@ -82,24 +82,24 @@ import '@carbon/web-components/es/components/link/index.js';
 
 ```html
     <!-- Parent Coachmark -->
-        <c4p-coachmark
+        <cds-coachmark
           ?open=${this._parentOpen}
           align=${POPOVER_ALIGNMENT.TOP}
           .highContrast=${true}
           .caret=${false}
-          @c4p-coachmark-request-close=${this.handleParentClose}
+          @cds-coachmark-request-close=${this.handleParentClose}
         >
-          <c4p-coachmark-tagline
+          <cds-coachmark-tagline
             id="CoachmarkTagline"
             title="Why are there two types of severity scores?"
             close-icon-description="close"
             ?open=${this._parentOpen}
-            @c4p-coachmark-tagline-cta-click=${this.handleTaglineClick}
+            @cds-coachmark-tagline-cta-click=${this.handleTaglineClick}
             slot="trigger"
           >
-          </c4p-coachmark-tagline>
-          <c4p-coachmark-header closeIconDescription="Close"></c4p-coachmark-header>
-          <c4p-coachmark-body class="coachmark-stacked-home__body">
+          </cds-coachmark-tagline>
+          <cds-coachmark-header closeIconDescription="Close"></cds-coachmark-header>
+          <cds-coachmark-body class="coachmark-stacked-home__body">
             <div class="coachmark-stacked-home-element">
               ${iconLoader(Idea20, { class: 'coachmark-stacked-home__icon-idea' })}
             </div>
@@ -129,8 +129,8 @@ import '@carbon/web-components/es/components/link/index.js';
             >
               Close
             </cds-button>
-          </c4p-coachmark-body>
-        </c4p-coachmark>
+          </cds-coachmark-body>
+        </cds-coachmark>
       </div>
 
       <!-- Child Coachmarks with their trigger buttons -->
@@ -141,14 +141,14 @@ import '@carbon/web-components/es/components/link/index.js';
         if (!nestedItem) return '';
 
         return html`
-          <c4p-coachmark
+          <cds-coachmark
             id="child-${item.id}"
             class="stacked_element_content"
             ?open=${isOpen}
             align=${POPOVER_ALIGNMENT.TOP}
             .highContrast=${true}
             .caret=${false}
-            @c4p-coachmark-request-close=${(e: Event) => {
+            @cds-coachmark-request-close=${(e: Event) => {
               e.stopPropagation();
               this.handleChildClose(e);
             }}
@@ -163,8 +163,8 @@ import '@carbon/web-components/es/components/link/index.js';
               @click=${(e: Event) => this.handleChildButtonClick(item.id, e)}
             >
             </cds-button>
-            <c4p-coachmark-header closeIconDescription="Close"></c4p-coachmark-header>
-            <c4p-coachmark-body>
+            <cds-coachmark-header closeIconDescription="Close"></cds-coachmark-header>
+            <cds-coachmark-body>
               ${nestedItem.type === 'simple' ? html`
                 <div class="stacked-coachmark__content">
                   <h2 class="stacked-coachmark__title">${nestedItem.title}</h2>
@@ -228,6 +228,6 @@ import '@carbon/web-components/es/components/link/index.js';
                   </div>
                 </div>
               ` : ''}
-            </c4p-coachmark-body>
-          </c4p-coachmark>
+            </cds-coachmark-body>
+          </cds-coachmark>
 ```

@@ -6,7 +6,7 @@
 */
 
 @use '@carbon/utilities/scss/carousel/_index' as carousel;
-@use '@carbon/ibm-products-web-components/scss/components/coachmark/coachmark-tagline/coachmark-tagline.scss';
+@use '@carbon/web-components/scss/components/coachmark/coachmark-tagline/coachmark-tagline.scss';
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/motion' as *;
@@ -14,23 +14,23 @@
 @include carousel.wrapperStyles();
 
 /* stylelint-disable-next-line selector-type-no-unknown */
-c4p-coachmark::part(popover) {
+cds-coachmark::part(popover) {
   inset-block-end: 0;
   inset-inline-end: 160px;
 }
 
 /* stylelint-disable-next-line selector-type-no-unknown */
-c4p-coachmark::part(popover-container) {
+cds-coachmark::part(popover-container) {
   position: absolute;
 }
 
 /* stylelint-disable-next-line selector-type-no-unknown */
-c4p-coachmark::part(content) {
+cds-coachmark::part(content) {
   inset-block-start: 0px;
 }
 
 /* stylelint-disable-next-line selector-type-no-unknown */
-c4p-coachmark-body {
+cds-coachmark-body {
   display: flex;
   flex-direction: column;
   inline-size: 256px;

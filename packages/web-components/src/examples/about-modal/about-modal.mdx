@@ -55,7 +55,7 @@ import '@carbon/web-components/es/components/link/index.js';
 
 ```html
 <cds-modal aria-label="About this product" ?open="${this._open}">
-  <div class="c4p--about-modal__logo">
+  <div class="cds--about-modal__logo">
     <img src="${logo}" alt="Example product or service logo" />
   </div>
   <cds-modal-header>
@@ -63,8 +63,8 @@ import '@carbon/web-components/es/components/link/index.js';
     <cds-modal-heading>IBM Product name</cds-modal-heading>
   </cds-modal-header>
   <cds-modal-body>
-    <div class="c4p--about-modal__version">Version 0.0.0</div>
-    <p class="c4p--about-modal__copyright-text">
+    <div class="cds--about-modal__version">Version 0.0.0</div>
+    <p class="cds--about-modal__copyright-text">
       Copyright © IBM Corp. 2020, 2026
     </p>
   </cds-modal-body>
@@ -86,29 +86,29 @@ help content.
 
 ```html
 <cds-modal aria-label="About this product" ?open="${this._open}">
-  <div class="c4p--about-modal__logo">
+  <div class="cds--about-modal__logo">
     <img src="${logo}" alt="Example product or service logo" />
   </div>
   <cds-modal-header>
     <cds-modal-close-button close-button-label="Close"></cds-modal-close-button>
     <cds-modal-heading>
-      IBM <span class="c4p--about-modal__title-emphasis">Product name</span>
+      IBM <span class="cds--about-modal__title-emphasis">Product name</span>
     </cds-modal-heading>
   </cds-modal-header>
   <cds-modal-body>
-    <div class="c4p--about-modal__version">Version 0.0.0</div>
-    <div class="c4p--about-modal__links-container">
+    <div class="cds--about-modal__version">Version 0.0.0</div>
+    <div class="cds--about-modal__links-container">
       <cds-link href="#">Link action</cds-link>
       <cds-link href="#">Link action</cds-link>
     </div>
-    <p class="c4p--about-modal__content">${legalCopy}</p>
-    <p class="c4p--about-modal__copyright-text">
+    <p class="cds--about-modal__content">${legalCopy}</p>
+    <p class="cds--about-modal__copyright-text">
       Copyright © IBM Corp. 2020, 2026
     </p>
   </cds-modal-body>
   <cds-modal-footer>
-    <p class="c4p--about-modal__footer-label">Powered by</p>
-    <img src="${grafanaLogo}" alt="Grafana" class="c4p--about-modal__tech-logo" />
+    <p class="cds--about-modal__footer-label">Powered by</p>
+    <img src="${grafanaLogo}" alt="Grafana" class="cds--about-modal__tech-logo" />
   </cds-modal-footer>
 </cds-modal>
 ```

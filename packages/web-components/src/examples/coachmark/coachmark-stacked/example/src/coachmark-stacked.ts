@@ -12,8 +12,8 @@ import '@carbon/web-components/es/components/button/button.js';
 import { InitCarousel, initCarousel } from '@carbon/utilities';
 import '@carbon/web-components/es/components/link/index.js';
 import styles from './styles.scss?lit';
-import '@carbon/ibm-products-web-components/es/components/coachmark/index.js';
-import '@carbon/ibm-products-web-components/es/components/coachmark/coachmark-tagline/index.js'; 
+import '@carbon/web-components/es/components/coachmark/index.js';
+import '@carbon/web-components/es/components/coachmark/coachmark-tagline/index.js'; 
 import Idea20 from '@carbon/icons/es/idea/20.js';
 import { iconLoader } from "@carbon/web-components/es/globals/internal/icon-loader.js";
 
@@ -155,7 +155,7 @@ export class CoachmarkStackedExample extends LitElement {
         tagline.updateComplete.then(() => {
           // Wait for CSS transition to complete
           setTimeout(() => {
-            (tagline.shadowRoot?.querySelector('.c4p--coachmark-tagline__cta') as HTMLElement | null)?.focus();
+            (tagline.shadowRoot?.querySelector('.cds--coachmark-tagline__cta') as HTMLElement | null)?.focus();
           }, 100);
         });
       }
@@ -167,7 +167,7 @@ export class CoachmarkStackedExample extends LitElement {
     this._parentOpen = nextParentOpen;
 
     if (nextParentOpen) {
-      // c4p-coachmark's own focus logic runs at setTimeout(100ms) + rAF and
+      // cds-coachmark's own focus logic runs at setTimeout(100ms) + rAF and
       // focuses the close button. Fire after it to focus the first nav item.
       setTimeout(() => {
         requestAnimationFrame(() => {
@@ -258,7 +258,7 @@ export class CoachmarkStackedExample extends LitElement {
   firstUpdated(changedProperties: PropertyValues) {
     super.firstUpdated(changedProperties);
     this.captureParentHeight();
-    // c4p-coachmark's own focus logic runs at setTimeout(100ms) + rAF on open.
+    // cds-coachmark's own focus logic runs at setTimeout(100ms) + rAF on open.
     // Fire after it so the first nav item gets focus, not the close button.
     setTimeout(() => {
       requestAnimationFrame(() => {
@@ -268,7 +268,7 @@ export class CoachmarkStackedExample extends LitElement {
   }
 
   private captureParentHeight() {
-    const parentCoachmark = this.shadowRoot?.querySelector('.parent-coachmark c4p-coachmark') as any;
+    const parentCoachmark = this.shadowRoot?.querySelector('.parent-coachmark cds-coachmark') as any;
     if (parentCoachmark) {
       const popover = parentCoachmark.shadowRoot?.querySelector('cds-popover');
       const popoverContent = popover?.querySelector('cds-popover-content');
@@ -318,12 +318,12 @@ export class CoachmarkStackedExample extends LitElement {
   }
 
   private handleParentScaling() {
-    const parentCoachmark = this.shadowRoot?.querySelector('.parent-coachmark c4p-coachmark') as any;
+    const parentCoachmark = this.shadowRoot?.querySelector('.parent-coachmark cds-coachmark') as any;
     if (!parentCoachmark) return;
 
     const popover = parentCoachmark.shadowRoot?.querySelector('cds-popover');
     const popoverContent = popover?.querySelector('cds-popover-content');
-    const parentWrapper = this.shadowRoot?.querySelector('.parent-coachmark c4p-coachmark')?.shadowRoot?.querySelector('.c4p--coachmark--wrapper') as HTMLElement | null;
+    const parentWrapper = this.shadowRoot?.querySelector('.parent-coachmark cds-coachmark')?.shadowRoot?.querySelector('.cds--coachmark--wrapper') as HTMLElement | null;
 
     if (this._parentHeight === 0 && parentWrapper) {
       const height = parentWrapper.clientHeight;
@@ -354,7 +354,7 @@ export class CoachmarkStackedExample extends LitElement {
       }
       
       if (childContentPart && parentWrapper) {
-        const childWrapper = childCoachmark?.shadowRoot?.querySelector('.c4p--coachmark--wrapper') as HTMLElement;
+        const childWrapper = childCoachmark?.shadowRoot?.querySelector('.cds--coachmark--wrapper') as HTMLElement;
         const childHeight = childWrapper?.clientHeight || childContentPart.clientHeight;
         
         if (childHeight > 0) {
@@ -423,7 +423,7 @@ export class CoachmarkStackedExample extends LitElement {
       }, 100);
     }
 
-    // c4p-coachmark's own focus logic runs at setTimeout(100ms) + rAF.
+    // cds-coachmark's own focus logic runs at setTimeout(100ms) + rAF.
     // We must fire AFTER that — setTimeout(~150ms) + rAF guarantees we win.
     setTimeout(() => {
       requestAnimationFrame(() => {
@@ -437,24 +437,24 @@ export class CoachmarkStackedExample extends LitElement {
     return html`
       <!-- Parent Coachmark -->
       <div class="parent-coachmark">
-        <c4p-coachmark
+        <cds-coachmark
           ?open=${this._parentOpen}
           align=${POPOVER_ALIGNMENT.TOP}
           .highContrast=${true}
           .caret=${false}
-          @c4p-coachmark-request-close=${this.handleParentClose}
+          @cds-coachmark-request-close=${this.handleParentClose}
         >
-          <c4p-coachmark-tagline
+          <cds-coachmark-tagline
             id="CoachmarkTagline"
             title="Why are there two types of severity scores?"
             close-icon-description="close"
             ?open=${this._parentOpen}
-            @c4p-coachmark-tagline-cta-click=${this.handleTaglineClick}
+            @cds-coachmark-tagline-cta-click=${this.handleTaglineClick}
             slot="trigger"
           >
-          </c4p-coachmark-tagline>
-          <c4p-coachmark-header closeIconDescription="Close"></c4p-coachmark-header>
-          <c4p-coachmark-body class="coachmark-stacked-home__body">
+          </cds-coachmark-tagline>
+          <cds-coachmark-header closeIconDescription="Close"></cds-coachmark-header>
+          <cds-coachmark-body class="coachmark-stacked-home__body">
             <div class="coachmark-stacked-home-element">
               ${iconLoader(Idea20, { class: 'coachmark-stacked-home__icon-idea' })}
             </div>
@@ -484,8 +484,8 @@ export class CoachmarkStackedExample extends LitElement {
             >
               Close
             </cds-button>
-          </c4p-coachmark-body>
-        </c4p-coachmark>
+          </cds-coachmark-body>
+        </cds-coachmark>
       </div>
 
       <!-- Child Coachmarks with their trigger buttons -->
@@ -496,14 +496,14 @@ export class CoachmarkStackedExample extends LitElement {
         if (!nestedItem) return '';
 
         return html`
-          <c4p-coachmark
+          <cds-coachmark
             id="child-${item.id}"
             class="stacked_element_content ${this._getChildVisibilityClass(item.id)}"
             ?open=${isOpen}
             align=${POPOVER_ALIGNMENT.TOP}
             .highContrast=${true}
             .caret=${false}
-            @c4p-coachmark-request-close=${(e: Event) => {
+            @cds-coachmark-request-close=${(e: Event) => {
               e.stopPropagation();
               this.handleChildClose(e);
             }}
@@ -519,8 +519,8 @@ export class CoachmarkStackedExample extends LitElement {
               @click=${(e: Event) => this.handleChildButtonClick(item.id, e)}
             >
             </cds-button>
-            <c4p-coachmark-header closeIconDescription="Close"></c4p-coachmark-header>
-            <c4p-coachmark-body>
+            <cds-coachmark-header closeIconDescription="Close"></cds-coachmark-header>
+            <cds-coachmark-body>
               ${nestedItem.type === 'simple' ? html`
                 <div class="stacked-coachmark__content">
                   <h2 class="stacked-coachmark__title">${nestedItem.title}</h2>
@@ -584,8 +584,8 @@ export class CoachmarkStackedExample extends LitElement {
                   </div>
                 </div>
               ` : ''}
-            </c4p-coachmark-body>
-          </c4p-coachmark>
+            </cds-coachmark-body>
+          </cds-coachmark>
         `;
       })}
     `;

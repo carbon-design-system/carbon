@@ -11,7 +11,7 @@ import '@carbon/web-components/es/components/grid/index.js';
 import styles from '../create-tearsheet.scss?lit';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 
-const blockClass = 'c4p--create-tearsheet';
+const blockClass = 'cds--create-tearsheet';
 const stepBlockClass = `${blockClass}__step`;
 
 /**
