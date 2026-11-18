@@ -15,21 +15,11 @@ import '@carbon/web-components/es/components/ui-shell/index.js';
 
 // Register the recipe custom elements
 import './components/empty-state';
-import './components/no-data-empty-state';
-import './components/error-empty-state';
-import './components/not-found-empty-state';
-import './components/notifications-empty-state';
-import './components/unauthorized-empty-state';
-import './components/no-tags-empty-state';
+import './components/illustration-empty-states';
 
 // Register preview custom elements
 import './preview-components/empty-state-with-isometric-illustration';
 import './preview-components/empty-state-with-pictogram-illustration';
 import './preview-components/empty-state-unit';
 import './preview-components/empty-state-preview';
-import './preview-components/no-data-empty-state-preview';
-import './preview-components/error-empty-state-preview';
-import './preview-components/not-found-empty-state-preview';
-import './preview-components/notifications-empty-state-preview';
-import './preview-components/unauthorized-empty-state-preview';
-import './preview-components/no-tags-empty-state-preview';
+import './preview-components/empty-state-variants-preview';

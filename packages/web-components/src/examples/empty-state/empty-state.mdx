@@ -50,34 +50,20 @@ To build this pattern, you can use the `empty-state` recipe element from
 
 <Canvas of={stories.Default} />
 
-With a tooltip in the subtitle:
-
-<Canvas of={stories.WithTooltipInSubtitle} />
-
-With a custom illustration:
-
-<Canvas of={stories.WithCustomIllustration} />
-
 ## Actions and links
 
-Add a primary action, an icon button action, a secondary action, a link, or a
-combination.
+Use the Storybook controls on the default story to toggle variants:
+`WithTooltipInSubtitle`, `WithCustomIllustration`, `WithAction`,
+`WithActionIconButton`, `WithSecondaryAction`, `WithLink`, and
+`WithActionAndLink`.
 
-<Canvas of={stories.WithAction} />
-
-<Canvas of={stories.WithActionIconButton} />
-
-<Canvas of={stories.WithSecondaryAction} />
-
-<Canvas of={stories.WithLink} />
-
-<Canvas of={stories.WithActionAndLink} />
+<Controls of={stories.Default} />
 
 ## Preset illustrations
 
 Preset elements wrap `empty-state` with a matching illustration and default
 copy. Each supports `illustration-theme="light"` or `"dark"`, and has its own
-story set under **Examples/EmptyStates**:
+story in this file, with the same Storybook controls as the default story:
 
 - `no-data-empty-state`
 - `error-empty-state`
