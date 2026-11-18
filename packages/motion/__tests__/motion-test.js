@@ -326,6 +326,24 @@ describe('@carbon/motion', () => {
     ).rejects.toThrow(
       /Unable to find duration `slo-01` for the custom surface/
     );
+
+    await expect(
+      render(`
+        @use '../index.scss' as motion;
+
+        .surface {
+          @include motion.surface((
+            kind: reveal,
+            enter: (opacity: 1),
+            exit: (opacity: 0),
+            enter-easing: (name: entrance, mode: expressive),
+            exit-easing: (name: exit, mode: expressive),
+          ));
+        }
+      `)
+    ).rejects.toThrow(
+      /Unable to find duration `nothing` for the custom surface/
+    );
   });
 
   test('surface mixin rejects a malformed inline definition', async () => {

@@ -166,7 +166,7 @@ $-durations: (
   }
 
   @if $kind != 'reveal' {
-    @error 'Expected the #{$label} to declare `kind: reveal`, but found `#{if($kind, $kind, 'nothing')}`.';
+    @error 'Expected the #{$label} to declare `kind: reveal`, but found `#{$kind or 'nothing'}`.';
   }
 
   @each $key in (enter, exit) {
@@ -184,7 +184,7 @@ $-durations: (
   $duration: map.get($definition, duration);
 
   @if not map.has-key($-durations, $duration) {
-    @error 'Unable to find duration `#{if($duration, $duration, 'nothing')}` for the #{$label}. Expected one of: #{map.keys($-durations)}.';
+    @error 'Unable to find duration `#{$duration or 'nothing'}` for the #{$label}. Expected one of: #{map.keys($-durations)}.';
   }
 
   @each $key in (enter-easing, exit-easing) {

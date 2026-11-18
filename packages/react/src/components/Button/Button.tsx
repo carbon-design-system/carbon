@@ -40,6 +40,11 @@ export type ButtonTooltipPosition = (typeof ButtonTooltipPositions)[number];
 export interface ButtonBaseProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
+   * Badge count displayed on icon-only buttons.
+   */
+  badgeCount?: number;
+
+  /**
    * Specify the message read by screen readers for the danger button variants
    */
   dangerDescription?: string;
@@ -186,6 +191,7 @@ const Button: ButtonComponent = React.forwardRef(
         tooltipDropShadow,
         tooltipHighContrast,
         tooltipPosition,
+        badgeCount: _badgeCount,
         ...propsWithoutIconOnlyTooltipProps
       } = props;
       return <ButtonBase ref={ref} {...propsWithoutIconOnlyTooltipProps} />;
@@ -262,6 +268,11 @@ Button.propTypes = {
    * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign: PropTypes.bool,
+
+  /**
+   * Badge count displayed on icon-only buttons.
+   */
+  badgeCount: PropTypes.number,
 
   /**
    * Specify the content of your Button
