@@ -76,7 +76,7 @@ export const SidePanel = forwardRef<HTMLDivElement, SidePanelProps>(
       placement = 'right',
       preventCloseOnClickOutside = false,
       // Not implemented yet; destructured so it is not spread onto the DOM.
-       
+
       resizable,
       selectorPageContent,
       selectorPrimaryFocus,
