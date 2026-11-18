@@ -113,7 +113,6 @@ const comboBoxItems = [
 
 const sharedArgs = {
   size: 'md',
-  autoAlign: false,
   type: 'default',
   titleText: 'Multiselect title',
   disabled: false,

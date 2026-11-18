@@ -262,7 +262,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
       value,
       href,
       align = 'bottom',
-      autoAlign = false,
+      autoAlign,
       // These props are fallback props if the TreeContext is not available or only TreeNode is used as a standalone component
       active: propActive,
       depth: propDepth,

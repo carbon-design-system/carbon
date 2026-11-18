@@ -105,12 +105,14 @@ class CDSCard extends CDSLink {
     if (
       changed.has('clickable') ||
       changed.has('disabled') ||
-      changed.has('horizontal')
+      changed.has('horizontal') ||
+      changed.has('_hasAILabel')
     ) {
       this.cardContext = {
         clickable: this.clickable,
         disabled: this.disabled,
         horizontal: this.horizontal,
+        hasAILabel: this._hasAILabel,
       };
     }
   }
@@ -129,19 +131,6 @@ class CDSCard extends CDSLink {
       this.setAttribute('has-ai-label', '');
     } else {
       this.removeAttribute('has-ai-label');
-    }
-  }
-
-  private _handleDefaultSlotChange({ target }: Event) {
-    const slot = target as HTMLSlotElement;
-    const hasActions = slot
-      .assignedElements({ flatten: true })
-      .some((el) => el.matches(`${prefix}-card-actions`));
-
-    if (hasActions) {
-      this.setAttribute('has-actions', '');
-    } else {
-      this.removeAttribute('has-actions');
     }
   }
 
@@ -184,13 +173,13 @@ class CDSCard extends CDSLink {
     const { horizontal, mediaPosition } = this;
 
     if (!horizontal) {
-      return html`<slot @slotchange=${this._handleDefaultSlotChange}></slot>`;
+      return html`<slot></slot>`;
     }
 
     const mediaSlot = html`<slot name="media"></slot>`;
     const contentDiv = html`
       <div class="${prefix}--card__content">
-        <slot @slotchange=${this._handleDefaultSlotChange}></slot>
+        <slot></slot>
       </div>
     `;
 
@@ -217,9 +206,11 @@ class CDSCard extends CDSLink {
       <div class=${this._cardClasses}>
         ${this._renderContent()}
         ${clickable ? this._renderClickableFooter() : nothing}
-        <slot
-          name="decorator"
-          @slotchange=${this._handleDecoratorSlotChange}></slot>
+        <div class="${prefix}--card__decorator">
+          <slot
+            name="decorator"
+            @slotchange=${this._handleDecoratorSlotChange}></slot>
+        </div>
       </div>
     `;
   }

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { fixture, html, expect, oneEvent } from '@open-wc/testing';
+import { fixture, html, expect, oneEvent, waitUntil } from '@open-wc/testing';
 import '@carbon/web-components/es/components/interstitial-screen/index.js';
 
 const prefix = 'cds';
@@ -155,5 +155,141 @@ describe(`${prefix}-interstitial-screen`, () => {
     const content = bodyItem.querySelector('.step-content');
     expect(content).to.exist;
     expect(content.textContent.trim()).to.equal('Step one content');
+  });
+
+  // -------------------------------------------------------------------------
+  // asyncAction
+  // -------------------------------------------------------------------------
+
+  describe('asyncAction', () => {
+    /** Multi-step fixture used across asyncAction tests. */
+    async function multiStepFixture() {
+      return fixture(html`
+        <cds-interstitial-screen open>
+          <cds-interstitial-screen-header></cds-interstitial-screen-header>
+          <cds-interstitial-screen-body>
+            <cds-interstitial-screen-body-item step-title="Step One">
+              <p>Step 1</p>
+            </cds-interstitial-screen-body-item>
+            <cds-interstitial-screen-body-item step-title="Step Two">
+              <p>Step 2</p>
+            </cds-interstitial-screen-body-item>
+            <cds-interstitial-screen-body-item step-title="Step Three">
+              <p>Step 3</p>
+            </cds-interstitial-screen-body-item>
+          </cds-interstitial-screen-body>
+          <cds-interstitial-screen-footer></cds-interstitial-screen-footer>
+        </cds-interstitial-screen>
+      `);
+    }
+
+    it('should fire cds-on-action and proceed immediately when async-action is not set', async () => {
+      const el = await multiStepFixture();
+      await el.updateComplete;
+
+      const footer = el.querySelector('cds-interstitial-screen-footer');
+      await footer.updateComplete;
+
+      let actionFired = false;
+      el.addEventListener('cds-on-action', () => {
+        actionFired = true;
+      });
+
+      await footer.handleAction('next');
+
+      expect(actionFired).to.be.true;
+    });
+
+    it('should wait for proceed(true) before navigating when async-action is set', async () => {
+      const el = await multiStepFixture();
+      await el.updateComplete;
+
+      const footer = el.querySelector('cds-interstitial-screen-footer');
+      footer.asyncAction = true;
+      await footer.updateComplete;
+
+      let proceedFn;
+      el.addEventListener('cds-on-action', (e) => {
+        proceedFn = e.detail.proceed;
+      });
+
+      const actionPromise = footer.handleAction('next');
+
+      await waitUntil(
+        () => proceedFn !== undefined,
+        'proceed() was never provided'
+      );
+
+      // Still loading while awaiting proceed
+      expect(footer.loadingAction).to.equal('next');
+
+      proceedFn(true);
+      await actionPromise;
+
+      // Loading cleared after resolution
+      expect(footer.loadingAction).to.equal('');
+    });
+
+    it('should not navigate when proceed(false) is called', async () => {
+      const el = await multiStepFixture();
+      await el.updateComplete;
+
+      const footer = el.querySelector('cds-interstitial-screen-footer');
+      footer.asyncAction = true;
+      await footer.updateComplete;
+
+      const initialStep = el._contextProvider.value.state.currentStep;
+
+      let proceedFn;
+      el.addEventListener('cds-on-action', (e) => {
+        proceedFn = e.detail.proceed;
+      });
+
+      const actionPromise = footer.handleAction('next');
+      await waitUntil(() => proceedFn !== undefined);
+
+      proceedFn(false);
+      await actionPromise;
+
+      expect(el._contextProvider.value.state.currentStep).to.equal(initialStep);
+    });
+
+    it('should resolve proceed() with a Promise', async () => {
+      const el = await multiStepFixture();
+      await el.updateComplete;
+
+      const footer = el.querySelector('cds-interstitial-screen-footer');
+      footer.asyncAction = true;
+      await footer.updateComplete;
+
+      let proceedFn;
+      el.addEventListener('cds-on-action', (e) => {
+        proceedFn = e.detail.proceed;
+      });
+
+      const actionPromise = footer.handleAction('next');
+      await waitUntil(() => proceedFn !== undefined);
+
+      // Pass a Promise instead of a boolean
+      proceedFn(Promise.resolve(true));
+      await actionPromise;
+
+      expect(footer.loadingAction).to.equal('');
+    });
+
+    it('should not navigate when cds-on-action is cancelled via preventDefault', async () => {
+      const el = await multiStepFixture();
+      await el.updateComplete;
+
+      const footer = el.querySelector('cds-interstitial-screen-footer');
+      await footer.updateComplete;
+
+      const initialStep = el._contextProvider.value.state.currentStep;
+      el.addEventListener('cds-on-action', (e) => e.preventDefault());
+
+      await footer.handleAction('next');
+
+      expect(el._contextProvider.value.state.currentStep).to.equal(initialStep);
+    });
   });
 });

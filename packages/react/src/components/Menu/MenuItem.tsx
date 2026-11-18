@@ -131,6 +131,12 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
         if (open) {
           setSubmenuOpen(true);
         } else {
+          // Ignore close notifications when the submenu is already closed to
+          // avoid stealing focus during arrow key navigation.
+          if (!submenuOpen) {
+            return;
+          }
+
           const relatedTarget =
             event && 'relatedTarget' in event ? event.relatedTarget : null;
 

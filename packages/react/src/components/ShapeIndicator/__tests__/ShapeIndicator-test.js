@@ -49,6 +49,14 @@ describe('ShapeIndicator', () => {
     expect(trigger).toHaveAccessibleName('label');
   });
 
+  it('should support tabIndex on the tooltip trigger', () => {
+    render(
+      <ShapeIndicator kind="failed" label="Test Label" compact tabIndex={-1} />
+    );
+
+    expect(screen.getByRole('button')).toHaveAttribute('tabindex', '-1');
+  });
+
   it('should use custom shapeDescription in compact mode', () => {
     render(
       <ShapeIndicator

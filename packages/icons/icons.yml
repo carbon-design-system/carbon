@@ -217,7 +217,7 @@
     - wheelchair Accessible
     - convenience
     - accessible
-    - accessiblity color filled
+    - accessibility color filled
     - user accessibility
     - handicap
     - handicapped
@@ -1701,13 +1701,13 @@
     - rest
     - dark
     - new moon
-    - cresent
-    - cresent moon
-    - cresent moon light
-    - cresent moon outline
+    - crescent
+    - crescent moon
+    - crescent moon light
+    - crescent moon outline
     - light moon
-    - cresent light
-    - cresent outline
+    - crescent light
+    - crescent outline
   sizes:
     - 16
     - 32
@@ -1722,13 +1722,13 @@
     - rest
     - dark
     - new moon
-    - cresent
-    - cresent moon
-    - cresent moon dark
-    - cresent moon filled
+    - crescent
+    - crescent moon
+    - crescent moon dark
+    - crescent moon filled
     - dark moon
-    - cresent dark
-    - cresent filled
+    - crescent dark
+    - crescent filled
 - name: ASM
   friendly_name: Assembler file
   aliases:
@@ -1832,7 +1832,7 @@
 - name: assignment-action--usage
   friendly_name: Assignment action usage
   aliases:
-    - assigment
+    - assignment
     - assign
     - usage
     - diagram
@@ -2401,6 +2401,46 @@
     - technology
     - communication
     - wireless communication
+  sizes:
+    - 32
+- name: bobcoin
+  friendly_name: Bobcoin
+  aliases:
+    - bob
+    - ibm bob
+    - coin
+    - bobcoin
+    - circle
+    - hard hat
+    - ai
+    - ai-powered
+    - integration
+    - development
+    - environment
+    - ide
+    - modernization
+    - assistant
+  sizes:
+    - 32
+- name: bobcoin--consumption
+  friendly_name: Bobcoin consumption
+  aliases:
+    - bob
+    - ibm bob
+    - coin
+    - bobcoin
+    - consumption
+    - circle
+    - process
+    - hard hat
+    - ai
+    - ai-powered
+    - integration
+    - development
+    - environment
+    - ide
+    - modernization
+    - assistant
   sizes:
     - 32
 - name: bluetooth--off
@@ -3171,6 +3211,21 @@
     - cafe
   sizes:
     - 32
+- name: cafe--alt
+  friendly_name: Cafe alt
+  aliases:
+    - coffee
+    - caffine
+    - drink
+    - espresso
+    - brew
+    - mocha
+    - travel
+    - coffee shop
+    - cafe
+    - cup
+  sizes:
+    - 32
 - name: calculation
   friendly_name: Calculation
   aliases:
@@ -3402,7 +3457,7 @@
     - pickup
     - car
     - travel
-    - transporation
+    - transportation
     - vehicle
   sizes:
     - 32
@@ -3421,7 +3476,7 @@
     - car front
     - car grill
     - travel
-    - transporation
+    - transportation
     - vehicle
 - name: carbon
   friendly_name: Carbon
@@ -3675,7 +3730,7 @@
     - book
     - list
     - schedule
-    - catagorize
+    - categorize
     - catalog
     - file
   sizes:
@@ -5342,7 +5397,7 @@
   friendly_name: Classification
   aliases:
     - classification
-    - catagory
+    - category
     - classify
   sizes:
     - 32
@@ -5502,7 +5557,7 @@
   sizes:
     - 32
   aliases:
-    - donwload
+    - download
     - compute
     - data
     - hybrid
@@ -6605,7 +6660,7 @@
   aliases:
     - credentials
     - documents
-    - indentification
+    - identification
   sizes:
     - 32
 - name: critical
@@ -8205,7 +8260,7 @@
   friendly_name: Direction merge filled
   aliases:
     - direction
-    - directin merge
+    - direction merge
     - direction merge filled
   sizes:
     - 32
@@ -8437,8 +8492,8 @@
     - 32
   aliases:
     - distribute
-    - distrubute horizontal center
-    - distrubute horizontal
+    - distribute horizontal center
+    - distribute horizontal
 - name: distribute--horizontal-left
   friendly_name: Distribute horizontal left
   sizes:
@@ -9703,7 +9758,7 @@
   friendly_name: Expand categories
   aliases:
     - expand categories
-    - opertions
+    - operations
     - expand
     - categories
   sizes:
@@ -13050,6 +13105,42 @@
     - secure
   sizes:
     - 32
+- name: ibm--sovereign-core
+  friendly_name: IBM® Sovereign Core
+  aliases:
+    - IBM
+    - sovereign
+    - core
+    - Sovereign Core
+    - shield
+    - easy to deploy
+    - AI
+    - AI-ready
+    - cloud
+    - dedicated
+    - local
+    - hybrid
+    - provider
+    - deployment
+  sizes:
+    - 32
+- name: ibm-sterling--b2b-integration-saas
+  friendly_name: IBM Sterling B2B Integration SaaS™
+  aliases:
+    - IBM
+    - Sterling
+    - B2B
+    - Integration
+    - SaaS
+    - diamond
+    - circle
+    - connection
+    - supply
+    - chain
+    - order
+    - management
+  sizes:
+    - 32
 - name: ibm--streamsets
   friendly_name: IBM StreamSets
   aliases:
@@ -13272,6 +13363,16 @@
     - Integration
     - File
     - Transfer
+  sizes:
+    - 32
+- name: ibm--z17
+  friendly_name: IBM® z17
+  aliases:
+    - Z
+    - z17
+    - data storage
+    - hardware
+    - hybrid cloud
   sizes:
     - 32
 - name: ibm-cloud
@@ -13627,7 +13728,7 @@
   aliases:
     - hardware security module
     - cryptographic infrastructure
-    - cyrpto key
+    - crypto key
     - life cycle
     - security
     - crypto storage
@@ -14219,8 +14320,29 @@
     - control plane
   sizes:
     - 32
-- name: ibm-quantum--safe-advisor
-  friendly_name: IBM Quantum Safe™ Advisor
+- name: ibm--i--alt
+  friendly_name: IBM i alt
+  aliases:
+    - OS
+    - power systems
+    - operating system
+    - i
+    - IBM
+    - IBM i
+    - AS400
+    - circle
+  sizes:
+    - 32
+- name: ibm-partner-plus
+  friendly_name: IBM Partner Plus
+  aliases:
+    - ibm partner plus
+    - partner plus
+    - partnership
+  sizes:
+    - 32
+- name: ibm-quantum--safe-cryptography-manager
+  friendly_name: IBM Quantum Safe® Cryptography Manager
   aliases:
     - research
     - scan
@@ -14249,10 +14371,11 @@
     - prioritization
     - posture
     - shield
+    - manager
   sizes:
     - 32
 - name: ibm-quantum--safe-explorer
-  friendly_name: IBM Quantum Safe™ Explorer
+  friendly_name: IBM Quantum Safe® Explorer
   aliases:
     - research
     - scan
@@ -14274,18 +14397,11 @@
     - CBOM
     - shield
     - security
+    - explorer
   sizes:
     - 32
-- name: ibm-partner-plus
-  friendly_name: IBM Partner Plus
-  aliases:
-    - ibm partner plus
-    - partner plus
-    - partnership
-  sizes:
-    - 32
-- name: ibm-quantum--safe-remediator
-  friendly_name: IBM Quantum Safe™ Remediator
+- name: ibm-quantum--safe-proxy
+  friendly_name: IBM Quantum Safe® Proxy
   aliases:
     - research
     - scan
@@ -14308,7 +14424,7 @@
     - automation
     - scalable
     - compliance
-    - remediation
+    - proxy
     - shield
   sizes:
     - 32
@@ -17122,7 +17238,7 @@
     - location hierarchy
     - change
     - switch location
-    - cange location
+    - change location
     - change parent location
     - Maximo
   sizes:
@@ -18923,7 +19039,7 @@
   friendly_name: Moon
   aliases:
     - moon
-    - cresent
+    - crescent
     - phase
   sizes:
     - 32
@@ -20300,6 +20416,31 @@
   aliases:
     - paragraph
     - formatting
+  sizes:
+    - 32
+- name: parallelogram--outline
+  friendly_name: Parallelogram outline
+  aliases:
+    - parallelogram
+    - parallelogram outlined
+    - outlined parallelogram
+    - stroke
+    - border
+    - shape
+    - geometry
+    - vertical
+  sizes:
+    - 32
+- name: parallelogram--solid
+  friendly_name: Parallelogram solid
+  aliases:
+    - parallelogram
+    - parallelogram filed
+    - filled parallelogram
+    - solid
+    - shape
+    - geometry
+    - vertical
   sizes:
     - 32
 - name: parameter
@@ -21701,7 +21842,7 @@
 - name: progress-bar--round
   friendly_name: Progress bar round
   aliases:
-    - progreess bar round
+    - progress bar round
     - loading
   sizes:
     - 32
@@ -21838,6 +21979,37 @@
   aliases:
     - quadrant plot
     - data
+  sizes:
+    - 32
+- name: quantum--computer
+  friendly_name: Quantum computer
+  aliases:
+    - quantum computer
+    - quantum processor
+    - quantum processing unit
+    - quantum hardware
+    - IBM Quantum
+    - chandelier
+    - qbits
+    - quantum computing
+    - AI
+    - Q
+  sizes:
+    - 32
+- name: quantum--QPU
+  friendly_name: Quantum Processing Unit (QPU)
+  aliases:
+    - quantum computer
+    - quantum processor
+    - quantum processing unit
+    - quantum hardware
+    - IBM Quantum
+    - QPU
+    - chip
+    - qbits
+    - quantum computing
+    - AI
+    - Q
   sizes:
     - 32
 - name: query
@@ -22429,7 +22601,7 @@
   friendly_name: Restart
   aliases:
     - undo
-    - rever
+    - revert
     - refresh
   sizes:
     - 16
@@ -23876,6 +24048,15 @@
     - protection
   sizes:
     - 32
+- name: shield--infinity
+  friendly_name: Shield infinity
+  aliases:
+    - shield
+    - infinite
+    - infinity
+    - protection
+  sizes:
+    - 32
 - name: share-knowledge
   friendly_name: Share knowledge
   aliases:
@@ -25155,7 +25336,7 @@
     - shop
     - house
     - retail
-    - buisness
+    - business
     - online
     - ecommerce
     - market
@@ -25208,6 +25389,19 @@
     - strawberry
     - fruit
     - food
+  sizes:
+    - 32
+- name: streaming--embedded
+  friendly_name: Embedded streaming
+  aliases:
+    - embedded
+    - streaming
+    - topics
+    - manage topics
+    - events
+    - publish
+    - schemas
+    - configure schemas
   sizes:
     - 32
 - name: stress-breath-editor
@@ -25403,7 +25597,7 @@
     - minus
     - remove
     - deduct
-    - withold
+    - withhold
     - decrease
     - diminish
     - discount
@@ -25420,7 +25614,7 @@
     - minus
     - remove
     - deduct
-    - withold
+    - withhold
     - decrease
     - diminish
     - discount
@@ -25444,7 +25638,7 @@
     - large
     - minus
     - deduct
-    - withold
+    - withhold
     - decrease
     - diminish
     - discount
@@ -28493,7 +28687,7 @@
   friendly_name: Video player
   aliases:
     - rectangle
-    - triange
+    - triangle
     - video
     - player
   sizes:

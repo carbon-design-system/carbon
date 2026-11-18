@@ -186,6 +186,149 @@ describe('HeaderPanel', () => {
 
     expect(onHeaderPanelFocus).not.toHaveBeenCalled();
   });
+  it('should close when the toggle button is clicked while a `SwitcherItem` has focus', async () => {
+    const SwitcherPanel = () => {
+      const [expanded, setExpanded] = React.useState(false);
+      const toggle = () => setExpanded((value) => !value);
+
+      return (
+        <>
+          <HeaderGlobalAction
+            aria-label="Switcher"
+            aria-expanded={expanded}
+            isActive={expanded}
+            onClick={toggle}
+            id="switcher-button">
+            <span />
+          </HeaderGlobalAction>
+          <HeaderPanel
+            data-testid="panel"
+            expanded={expanded}
+            onHeaderPanelFocus={toggle}
+            href="#switcher-button">
+            <Switcher aria-label="Switcher Container" expanded={expanded}>
+              <SwitcherItem aria-label="Link 1" href="#">
+                Link 1
+              </SwitcherItem>
+            </Switcher>
+          </HeaderPanel>
+        </>
+      );
+    };
+
+    render(<SwitcherPanel />);
+
+    const button = screen.getByRole('button', { name: 'Switcher' });
+    const panel = screen.getByTestId('panel');
+
+    await userEvent.click(button);
+    expect(panel).toHaveClass('cds--header-panel--expanded');
+
+    screen.getByRole('link', { name: 'Link 1' }).focus();
+    await userEvent.click(button);
+
+    expect(panel).not.toHaveClass('cds--header-panel--expanded');
+    expect(button).toHaveAttribute('aria-expanded', 'false');
+  });
+
+  it('should still close when another active header action is clicked while a `SwitcherItem` has focus', async () => {
+    const SwitcherPanel = () => {
+      const [expanded, setExpanded] = React.useState(false);
+      const toggle = () => setExpanded((value) => !value);
+
+      return (
+        <>
+          <HeaderGlobalAction aria-label="Search" isActive onClick={() => {}}>
+            <span />
+          </HeaderGlobalAction>
+          <HeaderGlobalAction
+            aria-label="Switcher"
+            aria-expanded={expanded}
+            isActive={expanded}
+            onClick={toggle}
+            id="switcher-button">
+            <span />
+          </HeaderGlobalAction>
+          <HeaderPanel
+            data-testid="panel"
+            expanded={expanded}
+            onHeaderPanelFocus={toggle}
+            href="#switcher-button">
+            <Switcher aria-label="Switcher Container" expanded={expanded}>
+              <SwitcherItem aria-label="Link 1" href="#">
+                Link 1
+              </SwitcherItem>
+            </Switcher>
+          </HeaderPanel>
+        </>
+      );
+    };
+
+    render(<SwitcherPanel />);
+
+    const button = screen.getByRole('button', { name: 'Switcher' });
+    const panel = screen.getByTestId('panel');
+
+    await userEvent.click(button);
+    expect(panel).toHaveClass('cds--header-panel--expanded');
+
+    screen.getByRole('link', { name: 'Link 1' }).focus();
+    await userEvent.click(screen.getByRole('button', { name: 'Search' }));
+
+    expect(panel).not.toHaveClass('cds--header-panel--expanded');
+    expect(button).toHaveAttribute('aria-expanded', 'false');
+  });
+
+  it('should close when the toggle button is clicked without taking focus, as in Safari', async () => {
+    const SwitcherPanel = () => {
+      const [expanded, setExpanded] = React.useState(false);
+      const toggle = () => setExpanded((value) => !value);
+
+      return (
+        <>
+          <HeaderGlobalAction
+            aria-label="Switcher"
+            aria-expanded={expanded}
+            isActive={expanded}
+            onClick={toggle}
+            id="switcher-button">
+            <span data-testid="switcher-icon" />
+          </HeaderGlobalAction>
+          <HeaderPanel
+            data-testid="panel"
+            expanded={expanded}
+            onHeaderPanelFocus={toggle}
+            href="#switcher-button">
+            <Switcher aria-label="Switcher Container" expanded={expanded}>
+              <SwitcherItem aria-label="Link 1" href="#">
+                Link 1
+              </SwitcherItem>
+            </Switcher>
+          </HeaderPanel>
+        </>
+      );
+    };
+
+    render(<SwitcherPanel />);
+
+    const button = screen.getByRole('button', { name: 'Switcher' });
+    const panel = screen.getByTestId('panel');
+    const link = screen.getByRole('link', { name: 'Link 1' });
+
+    await userEvent.click(button);
+    expect(panel).toHaveClass('cds--header-panel--expanded');
+
+    // Safari: pressing the button blurs the link without focusing the button,
+    // so the blur has no `relatedTarget`. Press the icon inside the button,
+    // since that is usually what the mouse is over.
+    link.focus();
+    fireEvent.mouseDown(screen.getByTestId('switcher-icon'));
+    fireEvent.blur(link, { relatedTarget: null });
+    fireEvent.click(button);
+
+    expect(panel).not.toHaveClass('cds--header-panel--expanded');
+    expect(button).toHaveAttribute('aria-expanded', 'false');
+  });
 });
 
 describe('HeaderPanel Switcher focus boundary', () => {
@@ -269,6 +412,21 @@ describe('HeaderPanel Switcher focus boundary', () => {
     );
   });
 
+  it.each([
+    ['link', 'One'],
+    ['button', 'Switcher'],
+  ])(
+    'closes when clicking another header action from a %s',
+    async (role, name) => {
+      render(<Fixture />);
+      act(() => screen.getByRole(role, { name }).focus());
+      await userEvent.click(screen.getByRole('button', { name: 'Search' }));
+      expect(screen.getByLabelText('Panel')).not.toHaveClass(
+        'cds--header-panel--expanded'
+      );
+    }
+  );
+
   it('closes when an action loses focus without a related target', async () => {
     render(<Fixture />);
     screen.getByRole('link', { name: 'One' }).focus();
@@ -276,7 +434,7 @@ describe('HeaderPanel Switcher focus boundary', () => {
     expect(screen.getByLabelText('Panel')).toHaveClass(
       'cds--header-panel--expanded'
     );
-    fireEvent.blur(screen.getByRole('button', { name: 'Switcher' }), {
+    fireEvent.focusOut(screen.getByRole('button', { name: 'Switcher' }), {
       relatedTarget: null,
     });
     expect(screen.getByLabelText('Panel')).not.toHaveClass(
