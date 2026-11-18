@@ -742,6 +742,7 @@ collect:
         - row-count
         - show-header
         - show-toolbar
+        - toolbar-label
         - zebra
         # cds-table-toolbar-content
         - has-batch-actions
