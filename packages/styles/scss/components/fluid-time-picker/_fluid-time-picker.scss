@@ -22,6 +22,11 @@
 @mixin fluid-time-picker {
   .#{$prefix}--time-picker--fluid {
     background: $field;
+
+    @if enabled('enable-v12-release') {
+      overflow: hidden;
+      border-radius: $border-radius-04;
+    }
   }
 
   .#{$prefix}--time-picker--fluid .#{$prefix}--time-picker--fluid__wrapper {
@@ -92,11 +97,13 @@
     opacity: 0;
   }
 
-  .#{$prefix}--time-picker--fluid--disabled
-    .#{$prefix}--time-picker--fluid__wrapper
-    .#{$prefix}--select--disabled
-    .#{$prefix}--select-input__wrapper::before {
-    background: $border-disabled;
+  @if not enabled('enable-v12-release') {
+    .#{$prefix}--time-picker--fluid--disabled
+      .#{$prefix}--time-picker--fluid__wrapper
+      .#{$prefix}--select--disabled
+      .#{$prefix}--select-input__wrapper::before {
+      background: $border-disabled;
+    }
   }
 
   // Invalid + Warn states

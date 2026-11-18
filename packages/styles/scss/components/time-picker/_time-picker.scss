@@ -102,6 +102,13 @@
   .#{$prefix}--time-picker__input-field-error {
     inline-size: 6.175rem;
     padding-inline-end: $spacing-08;
+
+    @if enabled('enable-v12-release') {
+      // In v12 .cds--text-input gains a 1px border on both inline sides, consuming
+      // 2px of box-model space that didn't exist in v11. Reduce padding by the same
+      // amount so the text area stays identical.
+      padding-inline-end: calc(#{$spacing-08} - #{convert.to-rem(2px)});
+    }
   }
 
   // V11: Possibly deprecate

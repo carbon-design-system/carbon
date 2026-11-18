@@ -170,9 +170,11 @@ $css--plex: true !default;
   pointer-events: none;
 }
 
-:host(#{$prefix}-fluid-time-picker-select[disabled])
-  .#{$prefix}--select-input__wrapper::before {
-  background-color: $border-disabled;
+@if not flags.enabled('enable-v12-release') {
+  :host(#{$prefix}-fluid-time-picker-select[disabled])
+    .#{$prefix}--select-input__wrapper::before {
+    background-color: $border-disabled;
+  }
 }
 
 :host(#{$prefix}-fluid-time-picker-select[disabled]) .#{$prefix}--select-input {
