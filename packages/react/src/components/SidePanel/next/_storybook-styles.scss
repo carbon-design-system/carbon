@@ -1,0 +1,60 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type';
+
+// Center the launcher button in the viewport, below the fixed UI Shell header.
+.side-panel-stories__story-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  block-size: 100vh;
+  box-sizing: border-box;
+  padding-block-start: $spacing-09;
+
+  .cds--progress-bar {
+    margin-block-end: $spacing-03;
+  }
+
+  .cds--side-panel__next__body {
+    padding-block-start: 0 !important;
+  }
+}
+
+// Story body content: space the fields and lay out the input rows.
+.side-panel-stories__body-content {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-05;
+}
+
+.side-panel-stories__text-inputs {
+  display: flex;
+  gap: $spacing-05;
+}
+
+.side-panel-stories__body-subheading {
+  @include type.type-style('heading-02');
+}
+
+// Character counter sits at the end of the Notes label row.
+.side-panel-stories__text-area-container {
+  position: relative;
+}
+
+.side-panel-stories__allowed-characters {
+  @include type.type-style('label-01');
+
+  position: absolute;
+  color: $text-secondary;
+  inset-inline-end: 0;
+}
+
+.side-panel-stories__allowed-characters-invalid {
+  color: $support-error;
+}

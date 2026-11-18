@@ -1,0 +1,454 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:map';
+
+@use '../../config' as *;
+@use '../../theme' as *;
+@use '../../spacing' as *;
+@use '../../motion' as *;
+@use '../../type' as *;
+@use '../../utilities';
+@use './side-panel-variables' as *;
+
+/// Composable SidePanel (`next`) styles
+/// @access public
+/// @group side-panel
+@mixin side-panel-next {
+  $block-class: #{$prefix}--side-panel__next;
+
+  // ──────────────────────────────────────────────────────────────
+  // Panel
+  // ──────────────────────────────────────────────────────────────
+  .#{$block-class} {
+    position: fixed;
+    z-index: utilities.z('modal');
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+    background-color: $background;
+    block-size: calc(100% - #{$spacing-09});
+    color: $text-primary;
+    inset-block-start: $spacing-09;
+    max-inline-size: 100%;
+    min-inline-size: map.get($side-panel-sizes, xs);
+
+    @each $size, $size-value in $side-panel-sizes {
+      &.#{$block-class}--#{$size} {
+        inline-size: clamp(16rem, $size-value, 100%);
+      }
+    }
+
+    &.#{$block-class}--right {
+      border-inline-start: 1px solid $border-subtle-01;
+      inset-inline-end: 0;
+    }
+
+    &.#{$block-class}--left {
+      border-inline-end: 1px solid $border-subtle-01;
+      inset-inline-start: 0;
+    }
+
+    &.#{$block-class}--slideOver {
+      box-shadow: 0 $spacing-01 $spacing-02 $overlay;
+    }
+
+    // AI label / decorator theming
+    &.#{$block-class}--has-ai-label,
+    &.#{$block-class}--has-decorator {
+      border-color: transparent;
+      box-shadow:
+        inset 0 -80px 70px -65px $ai-inner-shadow,
+        0 4px 10px 2px $ai-drop-shadow;
+    }
+  }
+
+  // ──────────────────────────────────────────────────────────────
+  // Presence animations (enter/exit)
+  // ──────────────────────────────────────────────────────────────
+  .#{$block-class} {
+    &.#{$block-class}--right {
+      animation: #{$block-class}--presence-enter-right $duration-moderate-01
+        motion(entrance, productive);
+    }
+
+    &.#{$block-class}--left {
+      animation: #{$block-class}--presence-enter-left $duration-moderate-01
+        motion(entrance, productive);
+    }
+
+    &.#{$block-class}--right[data-side-panel-exiting] {
+      animation: #{$block-class}--presence-exit-right $duration-moderate-01
+        motion(exit, productive) forwards;
+    }
+
+    &.#{$block-class}--left[data-side-panel-exiting] {
+      animation: #{$block-class}--presence-exit-left $duration-moderate-01
+        motion(exit, productive) forwards;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      &,
+      &[data-side-panel-exiting] {
+        animation: none;
+      }
+    }
+  }
+
+  @keyframes #{$block-class}--presence-enter-right {
+    from {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+  }
+
+  @keyframes #{$block-class}--presence-enter-left {
+    from {
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+  }
+
+  @keyframes #{$block-class}--presence-exit-right {
+    to {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+  }
+
+  @keyframes #{$block-class}--presence-exit-left {
+    to {
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+  }
+
+  // ──────────────────────────────────────────────────────────────
+  // Overlay (`slideOver` with `includeOverlay`)
+  // ──────────────────────────────────────────────────────────────
+  .#{$block-class}__overlay {
+    position: fixed;
+    z-index: utilities.z('overlay');
+    animation: #{$block-class}--presence-overlay-enter $duration-moderate-01
+      motion(entrance, productive);
+    background-color: $overlay;
+    inset: 0;
+
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
+  }
+
+  .#{$block-class}__overlay--closing {
+    animation: #{$block-class}--presence-overlay-exit $duration-moderate-01
+      motion(exit, productive) forwards;
+
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
+  }
+
+  .#{$block-class}--has-ai-label + .#{$block-class}__overlay,
+  .#{$block-class}--has-decorator + .#{$block-class}__overlay {
+    background-color: $ai-overlay;
+  }
+
+  @keyframes #{$block-class}--presence-overlay-enter {
+    from {
+      opacity: 0;
+    }
+  }
+
+  @keyframes #{$block-class}--presence-overlay-exit {
+    to {
+      opacity: 0;
+    }
+  }
+
+  // ──────────────────────────────────────────────────────────────
+  // Header
+  // ──────────────────────────────────────────────────────────────
+  .#{$block-class}__header {
+    position: relative;
+    flex: none;
+    min-block-size: $spacing-08;
+  }
+
+  // Divider below the header, shown once the header is collapsed.
+  .#{$block-class}__header::after {
+    position: absolute;
+    background-color: $border-subtle-01;
+    block-size: 1px;
+    content: '';
+    inline-size: 100%;
+    inset-block-end: 0;
+    inset-inline-start: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity $duration-moderate-02 motion(entrance, expressive);
+  }
+
+  // Shown once the header is fully collapsed, or always when the collapse is
+  // disabled (`__header--static`). Not shown for a header without a title.
+  .#{$block-class}__header-collapsed:has(.#{$block-class}__header-title)::after,
+  .#{$block-class}__header--static:has(.#{$block-class}__header-title)::after {
+    opacity: 1;
+  }
+
+  // Divider above the nav bar, shown once the header is collapsed.
+  .#{$block-class}__navigation-bar {
+    position: relative;
+  }
+
+  .#{$block-class}__navigation-bar::before {
+    position: absolute;
+    background-color: $border-subtle-01;
+    block-size: 1px;
+    content: '';
+    inline-size: 100%;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity $duration-moderate-02 motion(entrance, expressive);
+  }
+
+  .#{$block-class}__header-collapsed .#{$block-class}__navigation-bar::before {
+    opacity: 1;
+  }
+
+  // ──────────────────────────────────────────────────────────────
+  // Header: decorator and close button
+  // ──────────────────────────────────────────────────────────────
+  .#{$block-class}__decorator-and-close {
+    position: absolute;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: $spacing-02;
+    inset-block-start: $spacing-05;
+    inset-inline-end: $spacing-05;
+  }
+
+  .#{$block-class}__decorator-and-close .#{$prefix}--ai-label__button--xs {
+    margin: $spacing-02;
+  }
+
+  // ──────────────────────────────────────────────────────────────
+  // Header content: layout, label, title and description
+  // ──────────────────────────────────────────────────────────────
+  .#{$block-class}__header-content {
+    --#{$block-class}--header-end-space: calc(#{$spacing-08} + #{$spacing-05});
+
+    padding: $spacing-05;
+    padding-block-end: $spacing-03;
+  }
+
+  // With a decorator, also reserve space for it.
+  .#{$block-class}--has-ai-label .#{$block-class}__header-content,
+  .#{$block-class}--has-decorator .#{$block-class}__header-content {
+    --#{$block-class}--header-end-space: calc(
+      #{$spacing-08} + #{$spacing-05} + #{$spacing-06} + #{$spacing-02}
+    );
+  }
+
+  .#{$block-class}__header-label,
+  .#{$block-class}__title-row,
+  .#{$block-class}__header-description {
+    margin-inline-end: var(--#{$block-class}--header-end-space);
+  }
+
+  // Slotted children sit `$spacing-05` below the title row and description.
+  .#{$block-class}__header-content
+    > :not(
+      .#{$block-class}__title-media,
+      .#{$block-class}__header-label,
+      .#{$block-class}__title-row,
+      .#{$block-class}__header-description
+    ) {
+    margin-block-start: $spacing-05;
+  }
+
+  .#{$block-class}__title-media {
+    margin-block-end: $spacing-03;
+  }
+
+  // The label and description collapse with the header (`__header-collapsed`).
+  .#{$block-class}__header-label,
+  .#{$block-class}__header-description {
+    overflow: hidden;
+    max-block-size: 50vh;
+    opacity: 1;
+    transition:
+      max-block-size $duration-moderate-02 motion(entrance, expressive),
+      margin $duration-moderate-02 motion(entrance, expressive),
+      opacity $duration-moderate-02 motion(entrance, expressive);
+  }
+
+  .#{$block-class}__header-label {
+    @include type-style('label-01');
+
+    color: $text-secondary;
+    margin-block-end: $spacing-02;
+  }
+
+  .#{$block-class}__header-description {
+    @include type-style('body-compact-01');
+
+    color: $text-secondary;
+    margin-block-end: $spacing-03;
+    margin-block-start: $spacing-02;
+  }
+
+  // keeps the row height when there is no title
+  .#{$block-class}__title-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    min-block-size: $spacing-07;
+  }
+
+  .#{$block-class}__header-title {
+    @include type-style('heading-03');
+
+    display: flex;
+    flex: 1 1 auto;
+    align-items: flex-start;
+    gap: $spacing-03;
+    min-inline-size: 0;
+    transition:
+      font-size $duration-moderate-02 motion(entrance, expressive),
+      font-weight $duration-moderate-02 motion(entrance, expressive),
+      line-height $duration-moderate-02 motion(entrance, expressive);
+  }
+
+  .#{$block-class}__title {
+    min-inline-size: 0;
+  }
+
+  // Match the title line height so the icon is centered on the first line.
+  .#{$block-class}__title-start,
+  .#{$block-class}__title-end {
+    display: flex;
+    flex: none;
+    align-items: center;
+    block-size: 1.75rem;
+    transition: block-size $duration-moderate-02 motion(entrance, expressive);
+  }
+
+  .#{$block-class}__title-start > svg,
+  .#{$block-class}__title-end > svg {
+    box-sizing: content-box;
+    padding: $spacing-01;
+    transition: padding $duration-moderate-02 motion(entrance, expressive);
+  }
+
+  // ──────────────────────────────────────────────────────────────
+  // Header collapsed state
+  // ──────────────────────────────────────────────────────────────
+  .#{$block-class}__header-collapsed .#{$block-class}__header-label,
+  .#{$block-class}__header-collapsed .#{$block-class}__header-description {
+    margin-block: 0;
+    max-block-size: 0;
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+  }
+
+  // The title goes from `heading-03` to `heading-compact-02` when the header
+  // collapses.
+  .#{$block-class}__header-collapsed .#{$block-class}__header-title {
+    @include type-style('heading-compact-02');
+  }
+
+  .#{$block-class}__header-collapsed .#{$block-class}__title-start,
+  .#{$block-class}__header-collapsed .#{$block-class}__title-end {
+    block-size: 1.375rem;
+  }
+
+  .#{$block-class}__header-collapsed .#{$block-class}__title-start > svg,
+  .#{$block-class}__header-collapsed .#{$block-class}__title-end > svg {
+    padding: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .#{$block-class}__header::after,
+    .#{$block-class}__navigation-bar::before,
+    .#{$block-class}__header-label,
+    .#{$block-class}__header-description,
+    .#{$block-class}__toolbar--collapsible,
+    .#{$block-class}__header-title,
+    .#{$block-class}__title-start,
+    .#{$block-class}__title-end,
+    .#{$block-class}__title-start > svg,
+    .#{$block-class}__title-end > svg {
+      transition: none;
+    }
+  }
+
+  // ──────────────────────────────────────────────────────────────
+  // Toolbar, body and footer
+  // ──────────────────────────────────────────────────────────────
+  // Align with the title's start padding (`__header-content`).
+  .#{$block-class}__toolbar {
+    display: flex;
+    align-items: center;
+    padding-inline-start: $spacing-05;
+  }
+
+  // Gap between toolbar actions:
+  // - button and button (with or without icon): `$spacing-05`
+  // - button and icon-only button: `$spacing-03`
+  // - icon-only button and icon-only button: `$spacing-02`
+  .#{$block-class}__toolbar > * + * {
+    margin-inline-start: $spacing-05;
+  }
+
+  .#{$block-class}__toolbar > .#{$prefix}--btn + .#{$prefix}--icon-tooltip,
+  .#{$block-class}__toolbar > .#{$prefix}--icon-tooltip + .#{$prefix}--btn {
+    margin-inline-start: $spacing-03;
+  }
+
+  .#{$block-class}__toolbar
+    > .#{$prefix}--icon-tooltip
+    + .#{$prefix}--icon-tooltip {
+    margin-inline-start: $spacing-02;
+  }
+
+  // With `stickyToolbar={false}`, the toolbar collapses with the header, like
+  // the label and description.
+  .#{$block-class}__toolbar--collapsible {
+    max-block-size: 50vh;
+    opacity: 1;
+    transition:
+      max-block-size $duration-moderate-02 motion(entrance, expressive),
+      opacity $duration-moderate-02 motion(entrance, expressive);
+  }
+
+  .#{$block-class}__header-collapsed .#{$block-class}__toolbar--collapsible {
+    overflow: hidden;
+    max-block-size: 0;
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+  }
+
+  .#{$block-class}__body {
+    flex: 1 1 auto;
+    padding: $spacing-05;
+    min-block-size: 0;
+    overflow-y: auto;
+  }
+
+  .#{$block-class}__flush {
+    padding: 0;
+  }
+
+  .#{$block-class}__footer {
+    flex: none;
+  }
+}

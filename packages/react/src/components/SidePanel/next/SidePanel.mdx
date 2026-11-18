@@ -1,0 +1,295 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as SidePanelStories from './SidePanel.stories';
+
+<Meta of={SidePanelStories} />
+
+# SidePanel
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/SidePanel/next)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/patterns/side-panel-pattern)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Usage](#usage)
+- [Anatomy](#anatomy)
+- [Examples](#examples)
+  - [Default](#default)
+  - [Without title](#without-title)
+  - [Static title](#static-title)
+  - [With icon and title media](#with-icon-and-title-media)
+  - [With toolbar](#with-toolbar)
+  - [With navigation bar](#with-navigation-bar)
+  - [Slide in](#slide-in)
+- [Header](#header)
+  - [Collapsing header](#collapsing-header)
+  - [Toolbar](#toolbar)
+  - [Navigation bar](#navigation-bar)
+- [Footer](#footer)
+- [Accessibility](#accessibility)
+- [Current status](#current-status)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
+## Overview
+
+A side panel keeps users in context of a page while they perform tasks such as
+navigating, editing, viewing details, or configuring something new. It can slide
+over the page content (`slideOver`, the default) or slide in and push the page
+content aside (`slideIn`).
+
+This implementation uses the compound component pattern. Import `SidePanel` —
+all subcomponents are available as static properties of it.
+
+Control the panel with the `open` prop. Provide `onRequestClose` to update your
+state when the user selects the close button, selects the overlay, or presses
+
+<kbd>Esc</kbd>.
+
+## Usage
+
+```jsx
+const [open, setOpen] = useState(false);
+const triggerRef = useRef(null);
+
+<Button ref={triggerRef} onClick={() => setOpen(true)}>
+  Open side panel
+</Button>
+
+<SidePanel
+  open={open}
+  launcherButtonRef={triggerRef}
+  onRequestClose={() => setOpen(false)}>
+  <SidePanel.Header>
+    <SidePanel.HeaderContent
+      label="Optional label"
+      title="Title"
+      description="Description"
+    />
+  </SidePanel.Header>
+  <SidePanel.Body>{/* Primary content */}</SidePanel.Body>
+  <SidePanel.Footer
+    actions={[
+      { kind: 'primary', label: 'Submit', onClick: handleSubmit },
+    ]}
+  />
+</SidePanel>;
+```
+
+## Anatomy
+
+```jsx
+<SidePanel {...props}>
+  <SidePanel.Header>
+    <SidePanel.HeaderContent />
+    <SidePanel.Toolbar />
+    <SidePanel.NavBar />
+  </SidePanel.Header>
+
+  <SidePanel.Body></SidePanel.Body>
+
+  <SidePanel.Footer></SidePanel.Footer>
+</SidePanel>
+```
+
+| Subcomponent              | Purpose                                                              |
+| ------------------------- | -------------------------------------------------------------------- |
+| `SidePanel.Header`        | Header container. Renders the decorator and close button.            |
+| `SidePanel.HeaderContent` | Label, title, description, and title media, icons, and custom items. |
+| `SidePanel.Toolbar`       | Optional row of actions below the title.                             |
+| `SidePanel.NavBar`        | Optional navigation area, such as `Tabs`, anchored to the header.    |
+| `SidePanel.Body`          | Scrollable content area.                                             |
+| `SidePanel.Footer`        | Action buttons, or custom footer content.                            |
+
+## Examples
+
+### Default
+
+<Canvas of={SidePanelStories.Default} />
+
+### Without title
+
+Render `SidePanel.Header` without `SidePanel.HeaderContent` to show only the
+close button. The header keeps its height and the divider is not shown. Provide
+an `aria-label` on `SidePanel` so the panel still has an accessible name.
+
+```jsx
+<SidePanel aria-label="Diagnostic logs" {...props}>
+  <SidePanel.Header />
+  <SidePanel.Body>{/* Content */}</SidePanel.Body>
+</SidePanel>
+```
+
+<Canvas of={SidePanelStories.WithoutTitle} />
+
+### Static title
+
+Set `disableHeaderCollapse` on `SidePanel.Header` to keep the title expanded
+while the body scrolls. The header divider is always shown in this case.
+
+```jsx
+<SidePanel.Header disableHeaderCollapse>
+  <SidePanel.HeaderContent title="Title" />
+</SidePanel.Header>
+```
+
+<Canvas of={SidePanelStories.StaticTitle} />
+
+### With icon and title media
+
+Use `titleStart` and `titleEnd` for an icon before or after the title text, and
+`titleMedia` for a pictogram or thumbnail above the label. Children of
+`SidePanel.HeaderContent` render below the description.
+
+<Canvas of={SidePanelStories.WithIconHeader} />
+
+### With toolbar
+
+<Canvas of={SidePanelStories.WithToolbar} />
+
+### With navigation bar
+
+<Canvas of={SidePanelStories.WithNavBar} />
+
+### Slide in
+
+Set `variant="slideIn"` and pass `selectorPageContent`, a CSS selector for the
+page content element. The panel pushes that element aside instead of overlapping
+it, and restores it when the panel closes.
+
+```jsx
+<SidePanel
+  variant="slideIn"
+  selectorPageContent="#page-content"
+  open={open}
+  onRequestClose={() => setOpen(false)}>
+  {/* ... */}
+</SidePanel>
+```
+
+<Canvas of={SidePanelStories.SlideInVariant} />
+
+## Header
+
+`SidePanel.Header` renders the `decorator` and close button. Use
+`closeIconDescription` to change the close button label (default `Close`), or
+`hideCloseButton` to remove it.
+
+> **Note:** A `slideIn` panel does not respond to <kbd>Esc</kbd>. If you hide
+> the close button, provide another way for keyboard users to close it.
+
+Pass an `AILabel` to the `decorator` prop of `SidePanel` to signal AI-generated
+content. It is rendered at size `xs` before the close button, and the panel gets
+the AI styling.
+
+### Collapsing header
+
+When the user scrolls the body down, the header collapses: the label and
+description fade out, and the title changes from `heading-03` to
+`heading-compact-02`. Scrolling back to the top expands it. The header only
+collapses when the body has content to scroll.
+
+- `disableHeaderCollapse` on `SidePanel.Header` turns this behavior off.
+- `onHeaderCollapse` on `SidePanel.Header` is called with `true` when the header
+  is fully collapsed and `false` when it expands.
+
+```jsx
+<SidePanel.Header onHeaderCollapse={(collapsed) => setIsCollapsed(collapsed)}>
+  <SidePanel.HeaderContent title="Title" description="Description" />
+</SidePanel.Header>
+```
+
+A divider fades in below the header once it is fully collapsed. It is not shown
+for a header without a title.
+
+### Toolbar
+
+`SidePanel.Toolbar` is a row of actions below the title. It stays visible when
+the header collapses. Set `stickyToolbar={false}` to collapse it with the
+header, like the label and description.
+
+### Navigation bar
+
+`SidePanel.NavBar` is anchored to the bottom of the header and suits `Tabs` or
+similar navigation. A divider fades in above it once the header is collapsed.
+
+```jsx
+<SidePanel.Header>
+  <SidePanel.HeaderContent title="Title" />
+  <SidePanel.NavBar>
+    <Tabs>
+      <TabList aria-label="Configuration tabs">
+        <Tab>General</Tab>
+        <Tab>Networking</Tab>
+      </TabList>
+    </Tabs>
+  </SidePanel.NavBar>
+</SidePanel.Header>
+```
+
+## Footer
+
+`SidePanel.Footer` supports two approaches.
+
+**Using the `actions` prop:** buttons are rendered in a `ButtonSet`. Each action
+accepts `Button` props plus a required `label`. Use `buttonSize` to change the
+size of all buttons (default `lg`).
+
+```jsx
+<SidePanel.Footer
+  actions={[
+    { kind: 'secondary', label: 'Cancel', onClick: handleCancel },
+    { kind: 'primary', label: 'Submit', onClick: handleSubmit },
+  ]}
+/>
+```
+
+**Using custom children:** children replace the automated layout and give full
+control of the footer.
+
+```jsx
+<SidePanel.Footer>
+  <Button kind="primary">Submit</Button>
+</SidePanel.Footer>
+```
+
+## Accessibility
+
+- **Roles.** `slideOver` renders as a `dialog`, with `aria-modal` when
+  `includeOverlay` is set. `slideIn` renders as an `aside` landmark.
+- **Accessible name.** Without an `aria-label`, the panel is labelled by the
+  title in `SidePanel.HeaderContent`. Provide `aria-label` or `aria-labelledby`
+  when the panel has no title.
+- **Focus.** When a `slideOver` panel opens, focus moves to the element matching
+  `selectorPrimaryFocus`, or else the first focusable element. A `slideIn` panel
+  does not take focus unless `selectorPrimaryFocus` is set. With
+  `includeOverlay`, focus is kept inside the panel.
+- **Return focus.** Pass the element that opened the panel as
+  `launcherButtonRef`. Focus returns to it when the panel closes.
+- **Trigger button.** Add `aria-haspopup="dialog"` to the control that opens a
+  `slideOver` panel.
+- **Reduced motion.** Enter, exit, and header collapse animations are disabled
+  when the user prefers reduced motion.
+
+## Current status
+
+These parts of the API are not implemented yet:
+
+- `SidePanel.HeaderActions` and `SidePanel.HeaderActionItem` render their
+  children, but actions do not fold into an overflow menu.
+- `SidePanel.Toolbar` does not handle overflow. When there are more actions than
+  fit in the available width, they are not folded into an overflow menu.
+- The `resizable` prop has no effect.
+- `titleMedia` is rendered above the label. Aligning it alongside the title is
+  not supported yet.
+
+## Component API
+
+<ArgTypes of={SidePanelStories.Default} />
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/SidePanel/next/SidePanel.mdx).
