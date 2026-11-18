@@ -13,12 +13,15 @@
 
 // Re-forward all generated token variables as public API
 $easings: tokens.$easings !default;
+$duration-fast-00: tokens.$duration-fast-00 !default;
 $duration-fast-01: tokens.$duration-fast-01 !default;
 $duration-fast-02: tokens.$duration-fast-02 !default;
 $duration-moderate-01: tokens.$duration-moderate-01 !default;
 $duration-moderate-02: tokens.$duration-moderate-02 !default;
+$duration-moderate-03: tokens.$duration-moderate-03 !default;
 $duration-slow-01: tokens.$duration-slow-01 !default;
 $duration-slow-02: tokens.$duration-slow-02 !default;
+$duration-slow-03: tokens.$duration-slow-03 !default;
 
 /// V10 backwards compatibility tokens
 /// @deprecated
@@ -97,12 +100,15 @@ $surfaces: generated.$surfaces;
 /// @access private
 /// @group @carbon/motion
 $-durations: (
+  'fast-00': $duration-fast-00,
   'fast-01': $duration-fast-01,
   'fast-02': $duration-fast-02,
   'moderate-01': $duration-moderate-01,
   'moderate-02': $duration-moderate-02,
+  'moderate-03': $duration-moderate-03,
   'slow-01': $duration-slow-01,
   'slow-02': $duration-slow-02,
+  'slow-03': $duration-slow-03,
 );
 
 /// Name a surface argument for error messages, so an incorrect inline

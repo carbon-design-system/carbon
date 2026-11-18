@@ -110,13 +110,13 @@ describe('@carbon/motion', () => {
       exitEasing: { name: 'standard', mode: 'expressive' },
     });
 
-    expect(CarbonMotion.resolveDuration(expand.duration)).toBe('240ms');
+    expect(CarbonMotion.resolveDuration(expand.duration)).toBe('220ms');
     expect(
       CarbonMotion.resolveEasing(
         expand.enterEasing.name,
         expand.enterEasing.mode
       )
-    ).toEqual([0.2, 0, 0.38, 0.9]);
+    ).toEqual([0.4, 0, 0.2, 1]);
   });
 
   // Resolve the reveal surface tokens without choosing an animation engine.
@@ -141,13 +141,13 @@ describe('@carbon/motion', () => {
       exitEasing: { name: 'exit', mode: 'expressive' },
     });
 
-    expect(CarbonMotion.resolveDuration(disclosure.duration)).toBe('150ms');
+    expect(CarbonMotion.resolveDuration(disclosure.duration)).toBe('160ms');
     expect(
       CarbonMotion.resolveEasing(
         disclosure.enterEasing.name,
         disclosure.enterEasing.mode
       )
-    ).toEqual([0, 0, 0.38, 0.9]);
+    ).toEqual([0, 0, 0.2, 1]);
   });
 
   // Explain which surface names are available when a name is not valid.
@@ -248,13 +248,13 @@ describe('@carbon/motion', () => {
     expect(css).toContain('[data-carbon-surface-state=enter]');
     expect(css).toContain('[data-carbon-surface-state=exit]');
     expect(css).toContain('@media (prefers-reduced-motion: no-preference)');
-    expect(css).toContain('transition-duration: 110ms');
+    expect(css).toContain('transition-duration: 120ms');
     expect(css).toContain('transition-property: opacity, transform');
     expect(css).toContain(
-      'transition-timing-function: cubic-bezier(0, 0, 0.3, 1)'
+      'transition-timing-function: cubic-bezier(0, 0, 0, 1)'
     );
     expect(css).toContain(
-      'transition-timing-function: cubic-bezier(0.4, 0.14, 1, 1)'
+      'transition-timing-function: cubic-bezier(0.8, 0, 1, 1)'
     );
     expect(css).toContain('@starting-style');
     expect(css).toContain('transform: scale(0.96)');
@@ -299,7 +299,7 @@ describe('@carbon/motion', () => {
     expect(css).toContain('transition-duration: 400ms');
     expect(css).toContain('transition-property: opacity, clip-path');
     expect(css).toContain(
-      'transition-timing-function: cubic-bezier(0, 0, 0.3, 1)'
+      'transition-timing-function: cubic-bezier(0, 0, 0, 1)'
     );
     expect(css).toContain('@starting-style');
   });
